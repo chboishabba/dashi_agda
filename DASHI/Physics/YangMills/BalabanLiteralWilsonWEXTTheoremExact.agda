@@ -266,3 +266,103 @@ literalPreferredWilsonWEXTTheorem
       supportDistanceIsEuclideanTime
   ; R576.PreferredWilsonWEXTSource.upperOrderClosed = upperOrderClosed
   }
+
+
+------------------------------------------------------------------------
+-- Preferred W3 constructor from LOCAL Wilson-cluster localization.
+------------------------------------------------------------------------
+
+literalPreferredWilsonWEXTFromPointwiseLocalization :
+  ∀ {Measure Observable Scale Volume Root}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (mixedLog :
+      R576.PreferredWilsonMixedLogPhysicalSource dataSet laws)
+    (shellData : Shell.TraversalShellData Scale Volume Root)
+    (scaleOfCutoff : Nat → Scale)
+    (volumeOfCutoff : Nat → Volume)
+    (physicalDistance : Observable → Observable → Nat)
+    (connectingRoot : Nat → Observable → Observable → Root)
+    (ConnectingClusterMeetsBothSupports :
+      Nat → Observable → Observable → Set)
+    (shellCharge :
+      Nat → Observable → Observable →
+      R576.Cluster mixedLog → ℚ)
+    (pointwiseWilsonClusterLocalization :
+      ∀ cutoff left right cluster →
+      ∣ R576.clusterWeight mixedLog cutoff left right cluster ∣
+      ≤ shellCharge cutoff left right cluster)
+    (localizedShellChargeSum :
+      ∀ cutoff left right →
+      TwoMark.sumℚ
+        (TwoMark.map
+          (shellCharge cutoff left right)
+          (R576.contributingClusters mixedLog cutoff left right))
+      ≤
+      Shell.rootedShell shellData
+        (scaleOfCutoff cutoff)
+        (volumeOfCutoff cutoff)
+        (connectingRoot cutoff left right)
+        (physicalDistance left right))
+    (timeTranslate : Observable → Nat → Observable)
+    (leftBounded :
+      ∀ observable →
+      Gram.BoundedObservable dataSet observable)
+    (translatedRightBounded :
+      ∀ observable time →
+      Gram.BoundedObservable dataSet (timeTranslate observable time))
+    (translatedProductBounded :
+      ∀ left right time →
+      Gram.BoundedObservable dataSet
+        (Gram.multiplyObservable (Gram.operations dataSet)
+          left (timeTranslate right time)))
+    (supportDistanceIsEuclideanTime :
+      ∀ left right time →
+      physicalDistance left (timeTranslate right time) ≡ time)
+    (upperOrderClosed :
+      ∀ sequence target upper →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
+      (∀ cutoff → sequence cutoff ≤ upper) →
+      target ≤ upper) →
+  R576.PreferredWilsonWEXTSource
+    {Measure = Measure}
+    {Observable = Observable}
+    {Scale = Scale}
+    {Volume = Volume}
+    {Root = Root}
+    dataSet laws
+literalPreferredWilsonWEXTFromPointwiseLocalization
+    mixedLog shellData scaleOfCutoff volumeOfCutoff physicalDistance
+    connectingRoot ConnectingClusterMeetsBothSupports
+    shellCharge pointwiseWilsonClusterLocalization localizedShellChargeSum
+    timeTranslate leftBounded translatedRightBounded
+    translatedProductBounded supportDistanceIsEuclideanTime
+    upperOrderClosed =
+  literalPreferredWilsonWEXTTheorem
+    mixedLog
+    shellData
+    scaleOfCutoff
+    volumeOfCutoff
+    physicalDistance
+    connectingRoot
+    ConnectingClusterMeetsBothSupports
+    (λ cutoff left right →
+      absoluteConnectingWeightSumBelowRootedShellFromPointwiseLocalization
+        (R576.contributingClusters mixedLog cutoff left right)
+        (R576.clusterWeight mixedLog cutoff left right)
+        (shellCharge cutoff left right)
+        shellData
+        (scaleOfCutoff cutoff)
+        (volumeOfCutoff cutoff)
+        (connectingRoot cutoff left right)
+        (physicalDistance left right)
+        (pointwiseWilsonClusterLocalization cutoff left right)
+        (localizedShellChargeSum cutoff left right))
+    timeTranslate
+    leftBounded
+    translatedRightBounded
+    translatedProductBounded
+    supportDistanceIsEuclideanTime
+    upperOrderClosed
