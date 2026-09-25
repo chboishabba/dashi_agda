@@ -13,8 +13,10 @@ from .timing import Profiler
 from .interfaces import (
     ModuleInterface,
     interface_api_base_hash,
+    interface_from_dict,
     interface_from_summary,
     interface_public_dependencies,
+    interface_to_dict,
     resolve_interface_exports,
 )
 
@@ -25,6 +27,7 @@ class ImportReceipt:
     module_name: str
     imports: Tuple[str, ...]
     interface: Optional[ModuleInterface] = None
+    interface_json: str = ""
     api_base_hash: str = ""
     public_imports: Tuple[str, ...] = ()
     files_parsed: int = 0
@@ -41,6 +44,7 @@ class DiagnosticReceipt:
     imports: Tuple[str, ...]
     public_imports: Tuple[str, ...]
     api_base_hash: str
+    interface_json: str
     diagnostics_json: str
     diagnostic_count: int
     files_parsed: int
@@ -94,6 +98,11 @@ def _scan_import(path_text: str) -> ImportReceipt:
         module_name=summary.module_name,
         imports=tuple(sorted(set(summary.imports.values()))),
         interface=interface,
+        interface_json=json.dumps(
+            interface_to_dict(interface),
+            sort_keys=True,
+            separators=(",", ":"),
+        ),
         api_base_hash=api_base_hash,
         public_imports=public_imports,
         files_parsed=(
@@ -105,6 +114,14 @@ def _scan_import(path_text: str) -> ImportReceipt:
             - before.stages_ns.get("parse.tree_sitter", 0)
         ),
     )
+
+
+def materialize_interface(receipt: ImportReceipt) -> Optional[ModuleInterface]:
+    if receipt.interface is not None:
+        return receipt.interface
+    if not receipt.interface_json:
+        return None
+    return interface_from_dict(json.loads(receipt.interface_json))
 
 
 def _diagnostic_payload(root: Path, diagnostic) -> dict:
@@ -129,6 +146,7 @@ def _diagnose_path_with(
     profiler: Profiler,
     root: Path,
     path_text: str,
+    imported_interfaces: Dict[str, ModuleInterface],
 ) -> DiagnosticReceipt:
     before = profiler.snapshot()
     path = Path(path_text).resolve()
@@ -142,6 +160,17 @@ def _diagnose_path_with(
     interface = interface_from_summary(root, summary)
     api_base_hash = interface_api_base_hash(interface)
     public_imports = interface_public_dependencies(interface)
+    resolved_local = resolve_interface_exports(
+        {
+            **imported_interfaces,
+            interface.module_name: interface,
+        }
+    ).get(interface.module_name, interface)
+    interface_json = json.dumps(
+        interface_to_dict(resolved_local),
+        sort_keys=True,
+        separators=(",", ":"),
+    )
     return DiagnosticReceipt(
         path=str(path),
         module_name=summary.module_name,
@@ -151,6 +180,7 @@ def _diagnose_path_with(
         imports=tuple(sorted(set(summary.imports.values()))),
         public_imports=public_imports,
         api_base_hash=api_base_hash,
+        interface_json=interface_json,
         diagnostics_json=json.dumps(
             [
                 _diagnostic_payload(root, item)
@@ -386,6 +416,7 @@ def _diagnose_batch(payload) -> DiagnosticBatchReceipt:
                 profiler,
                 root,
                 path,
+                interface_map,
             )
             for path in path_texts
         ),
@@ -433,24 +464,38 @@ def diagnose_paths(
             for batch in batches
         ]
 
-    raw_interfaces = {
-        item.module_name: item.interface
-        for item in (import_receipts or ())
-        if item.interface is not None
-    }
-    resolved_interfaces = resolve_interface_exports(raw_interfaces)
     closures = (
         dependency_closures(import_receipts)
         if import_receipts is not None
         else {}
     )
-
-    payloads = []
-    for index, batch in enumerate(batches):
-        needed = set()
+    needed_by_batch: List[Set[str]] = []
+    needed_union: Set[str] = set()
+    for batch in batches:
+        needed: Set[str] = set()
         if import_receipts is not None:
             for item in batch:
                 needed.update(closures[item.module_name])
+        needed_by_batch.append(needed)
+        needed_union.update(needed)
+
+    receipt_by_module = {
+        item.module_name: item
+        for item in (import_receipts or ())
+    }
+    raw_interfaces: Dict[str, ModuleInterface] = {}
+    for module in sorted(needed_union):
+        receipt = receipt_by_module.get(module)
+        if receipt is None:
+            continue
+        interface = materialize_interface(receipt)
+        if interface is not None:
+            raw_interfaces[module] = interface
+    resolved_interfaces = resolve_interface_exports(raw_interfaces)
+
+    payloads = []
+    for index, batch in enumerate(batches):
+        needed = needed_by_batch[index]
         interfaces = tuple(
             resolved_interfaces[module]
             for module in sorted(needed)
