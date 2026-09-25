@@ -164,6 +164,18 @@ record P3WildValuationRecognition : Set₁ where
 
 open P3WildValuationRecognition public
 
+expectedRadicalExponent :
+  SmallPrime -> Nat
+expectedRadicalExponent p2 =
+  Mathieu.localRadicalExponent Mathieu.p2
+expectedRadicalExponent p3 =
+  Mathieu.localRadicalExponent Mathieu.p3
+
+expectedCoreExponent :
+  SmallPrime -> Nat
+expectedCoreExponent p2 = 25
+expectedCoreExponent p3 = 13
+
 ------------------------------------------------------------------------
 -- 3b. Stronger local-group recognition obligation.
 --
@@ -196,11 +208,7 @@ record LocalGroupValuationRecognition (p : SmallPrime) : Set₁ where
       Nat
 
     radicalMatchesDworkIntercept :
-      radicalExponent
-      ≡
-      (case p of λ where
-        p2 -> Mathieu.localRadicalExponent Mathieu.p2
-        p3 -> Mathieu.localRadicalExponent Mathieu.p3)
+      radicalExponent ≡ expectedRadicalExponent p
 
     mathieuMatchesRequiredCorrection :
       mathieuExponent
@@ -212,10 +220,7 @@ record LocalGroupValuationRecognition (p : SmallPrime) : Set₁ where
 
     arithmeticContinuationStopsAtRadical :
       tameContinuationContribution localGroupWitness
-      ≡
-      (case p of λ where
-        p2 -> 25 + radicalExponent
-        p3 -> 13 + radicalExponent)
+      ≡ expectedCoreExponent p + radicalExponent
 
     monsterCompletionAddsMathieu :
       monsterExponent p
