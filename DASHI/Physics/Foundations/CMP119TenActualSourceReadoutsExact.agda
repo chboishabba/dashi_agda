@@ -2,7 +2,8 @@
 module DASHI.Physics.Foundations.CMP119TenActualSourceReadoutsExact where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; +_; -[1+_]; 0ℚ)\nopen import Agda.Builtin.Nat using (zero)
+open import Data.Rational.Base using (ℚ; +_; -[1+_]; 0ℚ)
+open import Agda.Builtin.Nat using (zero)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
