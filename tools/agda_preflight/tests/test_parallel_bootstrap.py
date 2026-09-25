@@ -213,3 +213,53 @@ def test_affinity_parallel_bootstrap_reports_parse_amplification(tmp_path):
     assert counts["cold_total_parse_amplification_milli"] == 2000
     assert counts["cold_unpredicted_parse_overhead"] == 0
     assert counts["cold_interface_parse_savings"] >= 0
+
+
+
+def test_new_subject_reuses_shared_interface_and_diagnostics(tmp_path):
+    write_module(
+        tmp_path,
+        "Shared.Foundation",
+        "foundation : Set\nfoundation = Set\n",
+    )
+    first = write_module(
+        tmp_path,
+        "SubjectA.Top",
+        "import Shared.Foundation\na : Set\na = Set\n",
+    )
+    second = write_module(
+        tmp_path,
+        "SubjectB.Top",
+        "import Shared.Foundation\nb : Set\nb = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=2,
+    ) as index:
+        index.diagnose(first)
+
+    profiler = Profiler()
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=2,
+    ) as index:
+        result = index.diagnose(second)
+
+    counts = profiler.snapshot().counts
+    assert set(result.modules) == {
+        "Shared.Foundation",
+        "SubjectB.Top",
+    }
+    assert counts["cold_interface_cache_hits"] == 1
+    assert counts["cold_interface_files_parsed"] == 1
+    assert counts["cold_diagnostic_cache_hits"] == 1
+    assert counts["cold_diagnostic_targets"] == 1
+    assert counts["cold_worker_files_parsed"] == 1
+    assert counts["cold_total_files_parsed"] == 2
+    assert counts["files_parsed"] == 2
