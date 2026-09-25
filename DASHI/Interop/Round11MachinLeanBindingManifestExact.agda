@@ -30,6 +30,14 @@ record SourceBlob : Set where
 
 open SourceBlob public
 
+agdaSourceRepository : String
+agdaSourceRepository =
+  "https://github.com/chboishabba/dashi_agda.git"
+
+agdaSourceCommit : String
+agdaSourceCommit =
+  "c72ea464663a02333319f2254967c94bd188f5f5"
+
 bishopSubmoduleRepository : String
 bishopSubmoduleRepository =
   "https://github.com/viktorcsimma/bishop.git"
@@ -162,6 +170,7 @@ theoremBindings =
 record ReciprocalManifestBoundary : Set where
   constructor reciprocal-manifest-boundary
   field
+    agdaSourceCommitPinned : Bool
     bishopSubmoduleCommitPinned : Bool
     sevenLoadBearingBlobIdsRecorded : Bool
     agdaAndLeanManifestBlobIdsMatch : Bool
@@ -187,6 +196,6 @@ canonicalReciprocalManifestBoundary :
   ReciprocalManifestBoundary
 canonicalReciprocalManifestBoundary =
   reciprocal-manifest-boundary
-    true true true true true true true
+    true true true true true true true true
     true true true true true true true
     false false false
