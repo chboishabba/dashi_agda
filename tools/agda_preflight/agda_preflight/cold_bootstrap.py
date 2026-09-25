@@ -206,21 +206,23 @@ def _diagnostic_payload(root: Path, diagnostic) -> dict:
     return payload
 
 
-def _diagnose_path(path_text: str) -> DiagnosticReceipt:
-    assert _WORKER_ROOT is not None
-    assert _WORKER_CHECKER is not None
-    assert _WORKER_PROFILER is not None
-    before = _WORKER_PROFILER.snapshot()
+def _diagnose_path_with(
+    checker: Checker,
+    profiler: Profiler,
+    root: Path,
+    path_text: str,
+) -> DiagnosticReceipt:
+    before = profiler.snapshot()
     path = Path(path_text).resolve()
-    summary = _WORKER_CHECKER.parse_summary(path)
-    diagnostics = _WORKER_CHECKER.structural_check(path)
-    after = _WORKER_PROFILER.snapshot()
+    summary = checker.parse_summary(path)
+    diagnostics = checker.structural_check(path)
+    after = profiler.snapshot()
     stat = path.stat()
     source_hash = hashlib.sha256(
         summary.source.encode("utf-8")
     ).hexdigest()
     api_base_hash, public_imports = _api_base(
-        _WORKER_ROOT,
+        root,
         summary,
     )
     return DiagnosticReceipt(
@@ -234,7 +236,7 @@ def _diagnose_path(path_text: str) -> DiagnosticReceipt:
         api_base_hash=api_base_hash,
         diagnostics_json=json.dumps(
             [
-                _diagnostic_payload(_WORKER_ROOT, item)
+                _diagnostic_payload(root, item)
                 for item in diagnostics
             ],
             sort_keys=True,
@@ -257,6 +259,18 @@ def _diagnose_path(path_text: str) -> DiagnosticReceipt:
             after.stages_ns.get("diagnostics.local", 0)
             - before.stages_ns.get("diagnostics.local", 0)
         ),
+    )
+
+
+def _diagnose_path(path_text: str) -> DiagnosticReceipt:
+    assert _WORKER_ROOT is not None
+    assert _WORKER_CHECKER is not None
+    assert _WORKER_PROFILER is not None
+    return _diagnose_path_with(
+        _WORKER_CHECKER,
+        _WORKER_PROFILER,
+        _WORKER_ROOT,
+        path_text,
     )
 
 
@@ -401,15 +415,38 @@ def dependency_affinity_batches(
     return tuple(result)
 
 
-def _diagnose_batch(
-    payload: Tuple[int, Tuple[str, ...], int],
-) -> DiagnosticBatchReceipt:
-    batch_index, path_texts, dependency_surface = payload
+def _diagnose_batch(payload) -> DiagnosticBatchReceipt:
+    (
+        batch_index,
+        root_text,
+        path_texts,
+        dependency_surface,
+        interfaces,
+    ) = payload
+    root = Path(root_text).resolve()
+    interface_map = {
+        interface.module_name: interface
+        for interface in interfaces
+    }
+    profiler = Profiler()
+    checker = Checker(
+        root,
+        profiler=profiler,
+        interfaces=interface_map,
+    )
     return DiagnosticBatchReceipt(
         batch_index=batch_index,
         target_count=len(path_texts),
         dependency_surface=dependency_surface,
-        receipts=tuple(_diagnose_path(path) for path in path_texts),
+        receipts=tuple(
+            _diagnose_path_with(
+                checker,
+                profiler,
+                root,
+                path,
+            )
+            for path in path_texts
+        ),
     )
 
 
@@ -447,21 +484,43 @@ def diagnose_paths(
             for batch in batches
         ]
 
-    payloads = tuple(
-        (
-            index,
-            tuple(item.path for item in batch),
-            closure_sizes[index],
-        )
-        for index, batch in enumerate(batches)
+    raw_interfaces = {
+        item.module_name: item.interface
+        for item in (import_receipts or ())
+        if item.interface is not None
+    }
+    resolved_interfaces = resolve_interface_exports(raw_interfaces)
+    closures = (
+        dependency_closures(import_receipts)
+        if import_receipts is not None
+        else {}
     )
 
-    # Submit exactly one dependency-affinity batch per logical worker. Each
-    # process keeps one Checker for the whole batch, so imported summaries are
-    # reused across all targets assigned to that worker.
+    payloads = []
+    for index, batch in enumerate(batches):
+        needed = set()
+        if import_receipts is not None:
+            for item in batch:
+                needed.update(closures[item.module_name])
+        interfaces = tuple(
+            resolved_interfaces[module]
+            for module in sorted(needed)
+            if module in resolved_interfaces
+        )
+        payloads.append(
+            (
+                index,
+                str(root),
+                tuple(item.path for item in batch),
+                closure_sizes[index],
+                interfaces,
+            )
+        )
+
+    # Submit exactly one affinity batch per logical worker. Each process gets
+    # immutable interfaces for its dependency cone, so only the modules being
+    # diagnosed need live tree-sitter ASTs.
     with ProcessPoolExecutor(
         max_workers=min(workers, len(payloads)),
-        initializer=_init_diagnostic_worker,
-        initargs=(str(root),),
     ) as executor:
         return tuple(executor.map(_diagnose_batch, payloads))
