@@ -11,7 +11,7 @@ from typing import Dict, Iterable, List, Optional, Set, Tuple
 from .checker import Checker, Diagnostic
 from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
-from .cold_bootstrap import discover_closure, diagnose_paths, worker_count
+from .cold_bootstrap import ImportReceipt, discover_closure, diagnose_paths, worker_count
 from .interfaces import interface_from_dict, interface_to_dict, interface_from_summary, resolve_interface_exports
 
 
@@ -221,6 +221,42 @@ class SourceIndex:
             (relative_path,),
         ).fetchall()
         return tuple(row["imported_module"] for row in rows)
+
+    def _cached_import_receipt(
+        self,
+        path: Path,
+    ) -> Optional[ImportReceipt]:
+        row = self._row(path)
+        if row is None:
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        try:
+            stat = self._stat(path)
+        except OSError:
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        if not self._fresh(row, stat):
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        payload = row["interface_json"]
+        if not payload:
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+        try:
+            interface = interface_from_dict(json.loads(payload))
+        except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+            self.profiler.count("cold_interface_cache_misses")
+            return None
+
+        self.profiler.count("cold_interface_cache_hits")
+        return ImportReceipt(
+            path=str(path.resolve()),
+            module_name=row["module_name"],
+            imports=self._imports_for_path(row["path"]),
+            interface=interface,
+            files_parsed=0,
+            parse_ns=0,
+        )
 
     def _stat(self, path: Path) -> Tuple[int, int]:
         self.profiler.count("files_stat")
@@ -740,6 +776,7 @@ class SourceIndex:
                 self.root,
                 target,
                 jobs=workers,
+                cached_lookup=self._cached_import_receipt,
             )
         paths = tuple(Path(item.path) for item in import_receipts)
         self.profiler.count("cold_workers", workers)
