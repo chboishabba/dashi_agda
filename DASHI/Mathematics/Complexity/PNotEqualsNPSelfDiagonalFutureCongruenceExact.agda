@@ -39,6 +39,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationalRefinement as Future
+import DASHI.Core.DynamicalQuotientSafety as Dynamic
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
@@ -1077,6 +1078,137 @@ canonicalRestrictionFutureRefinement root =
   Future.canonicalMaximalSafeRefinement
     (restrictionActionSystem root)
     restrictionObservation
+
+------------------------------------------------------------------------
+-- Concrete endpoint-only merge failure.
+--
+-- The two first-level descendants of XOR(x0,x1) have the same visible current
+-- observation (both are nonterminal), but restricting the remaining variable
+-- to false yields opposite terminal truth values.
+------------------------------------------------------------------------
+
+xorRoot : SAT.BooleanFormula (suc (suc zero))
+xorRoot =
+  SAT.disjunction
+    (SAT.conjunction
+      (SAT.negate
+        (SAT.variable Fin.zero))
+      (SAT.variable
+        (Fin.suc Fin.zero)))
+    (SAT.conjunction
+      (SAT.variable Fin.zero)
+      (SAT.negate
+        (SAT.variable
+          (Fin.suc Fin.zero))))
+
+xorFalseNode : Family.RestrictionNode xorRoot
+xorFalseNode =
+  Family.falseChild
+    Family.restrictionRoot
+
+xorTrueNode : Family.RestrictionNode xorRoot
+xorTrueNode =
+  Family.trueChild
+    Family.restrictionRoot
+
+xorFalseNodeNonTerminal : NonTerminal xorFalseNode
+xorFalseNodeNonTerminal =
+  zero , refl
+
+xorTrueNodeNonTerminal : NonTerminal xorTrueNode
+xorTrueNodeNonTerminal =
+  zero , refl
+
+xorVisibleEndpointsCurrentlyEqual :
+  restrictionObservation xorFalseNode
+  ≡ restrictionObservation xorTrueNode
+xorVisibleEndpointsCurrentlyEqual =
+  refl
+
+xorFalseAfterFalse :
+  Family.RestrictionNode xorRoot
+xorFalseAfterFalse =
+  restrictedNode
+    xorFalseNode
+    false
+    xorFalseNodeNonTerminal
+
+xorTrueAfterFalse :
+  Family.RestrictionNode xorRoot
+xorTrueAfterFalse =
+  restrictedNode
+    xorTrueNode
+    false
+    xorTrueNodeNonTerminal
+
+xorFalsePath :
+  Reachability.Executes
+    (restrictionActionSystem xorRoot)
+    (false ∷ [])
+    xorFalseNode
+    xorFalseAfterFalse
+xorFalsePath =
+  Reachability.executesCons
+    (canonicalAdmissibleRestriction
+      xorFalseNode
+      false
+      xorFalseNodeNonTerminal)
+    Reachability.executesNil
+
+xorTruePath :
+  Reachability.Executes
+    (restrictionActionSystem xorRoot)
+    (false ∷ [])
+    xorTrueNode
+    xorTrueAfterFalse
+xorTruePath =
+  Reachability.executesCons
+    (canonicalAdmissibleRestriction
+      xorTrueNode
+      false
+      xorTrueNodeNonTerminal)
+    Reachability.executesNil
+
+xorFutureTerminalObservationsDiffer :
+  restrictionObservation xorFalseAfterFalse
+  ≡ restrictionObservation xorTrueAfterFalse →
+  ⊥
+xorFutureTerminalObservationsDiffer ()
+
+xorCurrentObservationTerminalisationDefect :
+  Dynamic.TerminalisationDefect
+    (restrictionActionSystem xorRoot)
+    restrictionObservation
+xorCurrentObservationTerminalisationDefect = record
+  { Dynamic.actionTrace =
+      false ∷ []
+  ; Dynamic.left =
+      xorFalseNode
+  ; Dynamic.right =
+      xorTrueNode
+  ; Dynamic.leftAfter =
+      xorFalseAfterFalse
+  ; Dynamic.rightAfter =
+      xorTrueAfterFalse
+  ; Dynamic.sameCurrentObservation =
+      xorVisibleEndpointsCurrentlyEqual
+  ; Dynamic.leftExecution =
+      xorFalsePath
+  ; Dynamic.rightExecution =
+      xorTruePath
+  ; Dynamic.futureObservationsDiffer =
+      xorFutureTerminalObservationsDiffer
+  }
+
+currentObservationAloneIsNotDynamicallySafe :
+  Dynamic.DynamicConsumerSafety
+    (restrictionActionSystem xorRoot)
+    restrictionObservation →
+  ⊥
+currentObservationAloneIsNotDynamicallySafe safety =
+  Dynamic.terminalisationDefectContradictsSafety
+    safety
+    xorCurrentObservationTerminalisationDefect
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
