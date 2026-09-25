@@ -8,6 +8,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityBetaTraceBridgeExact as BetaTr
 import DASHI.Physics.Foundations.CMP119AntigravityBetaTraceQuantumClosureExact as BetaClosure
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteHaarStrictPositivityExact as Strict
 import DASHI.Physics.Foundations.CMP119AntigravitySU2TraceConventionExact as SU2
+import DASHI.Physics.Foundations.CMP119AntigravityCurvatureF2PositivityExact as CurvatureF2
 import DASHI.Physics.Foundations.CMP119GibbsDiagonalTraceCancellationExact as Cancel
 import DASHI.Physics.Foundations.CMP119GibbsFiniteMeasureNZDNDZReductionExact as Gibbs
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Integral
@@ -123,3 +124,85 @@ module _
     BetaClosure.betaTraceClosesNegativeActiveConnectedNumerator
       dataSet directions laws actionTraceZero
       (asBetaTraceQuantumClosureInput input)
+
+
+------------------------------------------------------------------------
+-- CURVATURE-SIX SPECIALIZATION
+--
+-- Pointwise F^2 nonnegativity is no longer a source premise.  The six-curvature
+-- compiler proves it.  Strict positivity requires only one positive curvature
+-- energy at the finite-Haar positive witness.
+------------------------------------------------------------------------
+
+module _
+    {Configuration MetricPerturbation : Set}
+    {measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ}
+    (dataSet :
+      Gibbs.GibbsMetricInsertionData
+        Configuration MetricPerturbation measure)
+    (directions : Cancel.FourDiagonalPerturbations MetricPerturbation)
+    (laws : Integral.RationalFiniteMeasureIntegrationLaws measure)
+    (actionTraceZero :
+      ∀ configuration →
+      Gibbs.actionVariation dataSet (Cancel.h00 directions) configuration
+      + Gibbs.actionVariation dataSet (Cancel.h11 directions) configuration
+      + Gibbs.actionVariation dataSet (Cancel.h22 directions) configuration
+      + Gibbs.actionVariation dataSet (Cancel.h33 directions) configuration
+      ≡ 0ℚ)
+  where
+
+  record SU2CurvatureFiniteTraceClosureInput : Set₁ where
+    field
+      traceAttachment :
+        Quantum.RenormalizedTraceAttachment
+          dataSet directions laws actionTraceZero
+
+      quadrature :
+        Strict.FiniteRationalHaarQuadrature measure
+
+      curvatureF2Family :
+        CurvatureF2.FiniteCurvatureF2Family Configuration
+
+      positiveCurvatureWitness :
+        CurvatureF2.SelectedCurvatureF2PositiveWitness
+          quadrature curvatureF2Family
+
+      quantumTraceIsSU2CurvatureF2 :
+        Quantum.quantumTraceNumerator
+          dataSet directions laws actionTraceZero
+          traceAttachment
+        ≡
+        SU2.su2TraceRationalCoefficient
+        * Strict.fieldStrengthSquareNumerator
+            quadrature
+            (CurvatureF2.fieldStrengthSquare curvatureF2Family)
+
+  open SU2CurvatureFiniteTraceClosureInput public
+
+  asSU2FiniteTraceClosureInput :
+    SU2CurvatureFiniteTraceClosureInput →
+    SU2FiniteTraceClosureInput
+      dataSet directions laws actionTraceZero
+  asSU2FiniteTraceClosureInput input = record
+    { SU2FiniteTraceClosureInput.traceAttachment =
+        traceAttachment input
+    ; SU2FiniteTraceClosureInput.quadrature =
+        quadrature input
+    ; SU2FiniteTraceClosureInput.normalizedFieldStrengthSquare =
+        CurvatureF2.fieldStrengthSquare (curvatureF2Family input)
+    ; SU2FiniteTraceClosureInput.fieldStrengthSquareWitness =
+        CurvatureF2.asPositiveFieldStrengthSquareWitness
+          (positiveCurvatureWitness input)
+    ; SU2FiniteTraceClosureInput.quantumTraceIsSU2BetaF2 =
+        quantumTraceIsSU2CurvatureF2 input
+    }
+
+  su2CurvatureTraceClosesNegativeActiveConnectedNumerator :
+    SU2CurvatureFiniteTraceClosureInput →
+    Quantum.activeConnectedNumerator
+      dataSet directions laws actionTraceZero
+    < 0ℚ
+  su2CurvatureTraceClosesNegativeActiveConnectedNumerator input =
+    su2FiniteTraceClosesNegativeActiveConnectedNumerator
+      dataSet directions laws actionTraceZero
+      (asSU2FiniteTraceClosureInput input)
