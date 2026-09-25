@@ -170,6 +170,7 @@ record BindingManifestBoundary : Set where
     leanCanonicalBindingInhabited : Bool
     leanBindingUniqueUpToBishopSetoid : Bool
     leanCanonicalRouteBHypothesisFree : Bool
+    leanGeneratedBindingTableKernelMatchSourceOwned : Bool
 
     generatedCrossProverReplayObserved : Bool
     leanKernelReceiptObserved : Bool
@@ -181,5 +182,5 @@ canonicalBindingManifestBoundary : BindingManifestBoundary
 canonicalBindingManifestBoundary =
   binding-manifest-boundary
     true true true true true
-    true true true
+    true true true true
     false false false
