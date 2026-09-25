@@ -14,6 +14,29 @@ from .apply_edits import apply_text_edits, EditApplicationError
 from .timing import Profiler
 
 
+def _run_find_cached_diagnostic(
+    root: Path,
+    index_path: Path,
+    target: Path,
+    diagnostic_id: str,
+    *,
+    jobs: int,
+):
+    profiler = Profiler()
+    with profiler.stage("request.total"):
+        with SourceIndex(
+            root,
+            index_path,
+            profiler=profiler,
+            jobs=jobs,
+        ) as index:
+            diagnostic = index.find_cached_diagnostic(
+                target,
+                diagnostic_id,
+            )
+    return diagnostic, profiler.snapshot()
+
+
 def _run_next_error(
     root: Path,
     index_path: Path,
@@ -486,19 +509,27 @@ def main(argv=None) -> int:
         return 0
 
     if args.command == "apply-fix":
-        result, before_profile, _ = _run_diagnose(
+        diagnostic, before_profile = _run_find_cached_diagnostic(
             args.root,
             args.index,
             args.target,
+            args.diagnostic_id,
             jobs=args.jobs,
         )
-        diagnostic = next(
-            (
-                item for item in result.diagnostics
-                if item.diagnostic_id == args.diagnostic_id
-            ),
-            None,
-        )
+        if diagnostic is None:
+            result, before_profile, _ = _run_diagnose(
+                args.root,
+                args.index,
+                args.target,
+                jobs=args.jobs,
+            )
+            diagnostic = next(
+                (
+                    item for item in result.diagnostics
+                    if item.diagnostic_id == args.diagnostic_id
+                ),
+                None,
+            )
         if diagnostic is None:
             parser.error(
                 "diagnostic ID is not present in the current source-index result"
@@ -527,12 +558,13 @@ def main(argv=None) -> int:
         after, after_profile, _ = _run_diagnose(
             args.root,
             args.index,
-            args.target,
+            diagnostic.path,
             jobs=args.jobs,
         )
         resolved = all(
             item.diagnostic_id != args.diagnostic_id
             for item in after.diagnostics
+            if item.path.resolve() == diagnostic.path.resolve()
         )
         payload = {
             "diagnostic_id": args.diagnostic_id,
