@@ -28,11 +28,13 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPLosslessResidualAutomatonNoGoExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_; _<_)
+open import Data.Product using (Σ; _,_)
 import Data.Nat.Properties as NatP
 open import Data.Vec.Base using (Vec)
 
