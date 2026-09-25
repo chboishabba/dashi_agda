@@ -21,6 +21,8 @@ import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact
+import DASHI.Core.ActionOrbitRecognitionFunctorExact
+import DASHI.Reasoning.Trialectic369CechGrothendieckComparisonExact
 import DASHI.Reasoning.Trialectic369RubikRefinementExact
 import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact
 import DASHI.Reasoning.Trialectic369DeclaredRowConsumerExact
