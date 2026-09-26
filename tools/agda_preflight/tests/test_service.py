@@ -305,6 +305,67 @@ connection.close()
     path.chmod(0o755)
 
 
+def _write_mutating_promoter(path: Path) -> None:
+    path.write_text(
+        textwrap.dedent(
+            """\
+            #!/usr/bin/env python3
+            import hashlib
+            import json
+            from pathlib import Path
+            import sqlite3
+            import sys
+
+            source = Path(sys.argv[1])
+            module = sys.argv[2]
+            catalog = Path(sys.argv[3])
+            receipt = Path(sys.argv[4])
+
+            checked_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+            connection = sqlite3.connect(catalog)
+            connection.execute(
+                "CREATE TABLE IF NOT EXISTS module_heads ("
+                "module_name TEXT PRIMARY KEY, "
+                "object_hash BLOB NOT NULL, "
+                "declaration_count INTEGER NOT NULL, "
+                "term_count INTEGER NOT NULL, "
+                "checked_source_sha256 TEXT, "
+                "updated_at TEXT NOT NULL)"
+            )
+            connection.execute(
+                "INSERT INTO module_heads("
+                "module_name, object_hash, declaration_count, term_count, "
+                "checked_source_sha256, updated_at"
+                ") VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    module,
+                    bytes.fromhex("abcd"),
+                    1,
+                    2,
+                    checked_hash,
+                    "2026-09-27T00:00:00Z",
+                ),
+            )
+            connection.commit()
+            connection.close()
+
+            source.write_text(
+                source.read_text(encoding="utf-8")
+                + "\nchangedAfterCheck : Set\nchangedAfterCheck = Set\n",
+                encoding="utf-8",
+            )
+            receipt.parent.mkdir(parents=True, exist_ok=True)
+            receipt.write_text(
+                json.dumps({"status": "promoter-finished"}),
+                encoding="utf-8",
+            )
+            """
+        ),
+        encoding="utf-8",
+    )
+    path.chmod(0o755)
+
+
 def test_service_promote_requires_fresh_catalog_postcondition(tmp_path):
     path = write_module(
         tmp_path,
@@ -335,6 +396,38 @@ def test_service_promote_requires_fresh_catalog_postcondition(tmp_path):
     assert result["semantic"]["checked_source_sha256"] == expected_hash
     assert result["promoter_receipt"]["status"] == "promoter-finished"
     assert result["receipt_id"] > 0
+
+
+def test_service_promote_rechecks_source_after_external_validation(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Service.Race",
+        "x : Set\nx = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    semantic = tmp_path / "semantic.sqlite"
+    promoter = tmp_path / "mutating-promoter"
+    _write_mutating_promoter(promoter)
+
+    command = (
+        f"{promoter} {{file}} {{module}} {{catalog}} {{receipt}}"
+    )
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=2,
+        semantic_catalog=semantic,
+        promoter_command=command,
+    ) as service:
+        result = service.promote(str(path))
+
+    assert result["promoter_returncode"] == 0
+    assert result["status"] == "unverified"
+    assert result["semantic_freshness"] == "stale"
+    assert (
+        result["requested_source_sha256"]
+        != result["source_sha256"]
+    )
 
 
 def test_service_promote_exit_zero_without_fresh_head_is_unverified(tmp_path):
@@ -404,6 +497,74 @@ def test_promotion_history_survives_service_restart(tmp_path):
     assert receipt["receipt_id"] == receipt_id
     assert receipt["status"] == "promoted"
     assert receipt["semantic_freshness"] == "fresh"
+
+
+def test_jsonl_service_promotion_and_history_roundtrip(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Service.ProtocolPromote",
+        "x : Set\nx = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    semantic = tmp_path / "semantic.sqlite"
+    promoter = tmp_path / "fake-promoter"
+    _write_fake_promoter(promoter, update_catalog=True)
+    command = (
+        f"{promoter} {{file}} {{module}} {{catalog}} {{receipt}}"
+    )
+
+    requests = io.StringIO(
+        "\n".join(
+            [
+                json.dumps(
+                    {
+                        "id": 1,
+                        "method": "promote",
+                        "params": {"target": str(path)},
+                    }
+                ),
+                json.dumps(
+                    {
+                        "id": 2,
+                        "method": "promotion_history",
+                        "params": {
+                            "module_name": "Service.ProtocolPromote",
+                        },
+                    }
+                ),
+                json.dumps(
+                    {
+                        "id": 3,
+                        "method": "shutdown",
+                        "params": {},
+                    }
+                ),
+            ]
+        )
+        + "\n"
+    )
+    output = io.StringIO()
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=2,
+        semantic_catalog=semantic,
+        promoter_command=command,
+    ) as service:
+        serve_streams(service, requests, output)
+
+    responses = [
+        json.loads(line)
+        for line in output.getvalue().splitlines()
+    ]
+    assert responses[0]["ok"] is True
+    assert responses[0]["result"]["status"] == "promoted"
+    assert responses[1]["ok"] is True
+    receipts = responses[1]["result"]["receipts"]
+    assert len(receipts) == 1
+    assert receipts[0]["status"] == "promoted"
+    assert responses[2]["result"]["status"] == "shutdown"
 
 
 def test_service_semantic_status_transitions_fresh_to_stale(tmp_path):
