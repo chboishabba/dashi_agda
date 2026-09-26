@@ -40,6 +40,7 @@ import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_; _<_ ; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Properties using (+-identityʳ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
@@ -749,7 +750,9 @@ twoTimes :
   ≡
   n + n
 twoTimes n =
-  refl
+  cong
+    (λ value → n + value)
+    (+-identityʳ n)
 
 operationalGraphCellCountIsTriple :
   ∀ {state : Q2.BoundedSelfReferenceState}
