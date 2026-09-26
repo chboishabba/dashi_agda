@@ -1,0 +1,477 @@
+module DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCodeClayClosureExact where
+
+------------------------------------------------------------------------
+-- Q1 -> CONCRETE FINITE-CODE LIAR -> CLAY CONTRADICTION
+--
+-- EXEC-REALIZE is paid by:
+--
+--   PNotEqualsNPFiniteSelfSpecializingCodeExact
+--   PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact.
+--
+-- This owner deliberately introduces NO new interpreter boundary.
+--
+-- It asks only for the remaining Q1 semantic fact on the already-built Q2
+-- step system:
+--
+-- for every quoted finite-code program which terminates with formula phi,
+-- the canonical Q2 terminal formula A has exactly the opposite-SAT relation
+-- required by the candidate:
+--
+--   D(phi)=false -> SAT(A)
+--   SAT(A)        -> D(phi)=false.
+--
+-- From that one premise we construct the repository's PartialSATDiagonalBody,
+-- use the concrete finite-code Q2 execution realization, and derive the existing
+-- exact-SAT contradiction.
+--
+-- Hence after this file the remaining Clay burden is visibly Q1:
+--
+--   construct the self-instantiation Q2 system + prove the opposite-SAT
+--   terminal semantics while satisfying the all-overhead strict descent at
+--   every live state.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Unit using (tt)
+open import Data.Empty using (⊥)
+open import Data.Maybe.Base using (just)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
+
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
+import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
+import DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact as Generated
+import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as ReachableGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as CandidateAdmission
+import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
+import DASHI.Mathematics.Complexity.PNotEqualsNPLocalArityTerminalAdmissionExact as LocalArity
+import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
+import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
+import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
+import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneToSelfDiagonalExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneTerminationNoGoExact as NoGo
+import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedStateToPartialKleeneTerminationExact as Closure
+
+------------------------------------------------------------------------
+-- Identity formula view: Q2 finite-code outputs ARE ordinary Cook formulas.
+------------------------------------------------------------------------
+
+q2CookOutputView :
+  (stepSystem : Q2.BoundedSelfReferenceStepSystem) →
+  (initial : Q2.BoundedSelfReferenceState) →
+  Bridge.PartialCookFormulaOutputView
+    (Exec.q2PartialSystem stepSystem initial)
+q2CookOutputView stepSystem initial =
+  record
+    { Bridge.asFormula =
+        λ formula → formula
+    }
+
+------------------------------------------------------------------------
+-- The sole remaining semantic premise.
+------------------------------------------------------------------------
+
+Q1OppositeSATTerminalSemantics :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost)
+    (stepSystem : Q2.BoundedSelfReferenceStepSystem)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Set₁
+Q1OppositeSATTerminalSemantics
+    candidate
+    stepSystem
+    initial =
+  (quoted : Code.Program Exec.Q2Primitive) →
+  (quotedOutput : Cook.BooleanFormula) →
+  Kleene.run1
+    (Exec.q2PartialSystem stepSystem initial)
+    quoted
+    tt
+  ≡
+  just quotedOutput →
+  (Direct.decide candidate quotedOutput ≡ false →
+    Cook.Satisfiable
+      (Exec.canonicalTerminalFormula
+        stepSystem
+        initial))
+  ×
+  (Cook.Satisfiable
+      (Exec.canonicalTerminalFormula
+        stepSystem
+        initial) →
+    Direct.decide candidate quotedOutput ≡ false)
+
+------------------------------------------------------------------------
+-- Q1 semantics constructs the exact PartialSATDiagonalBody.
+------------------------------------------------------------------------
+
+q1SemanticsBuildsPartialDiagonalBody :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost)
+    (stepSystem : Q2.BoundedSelfReferenceStepSystem)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    candidate
+    stepSystem
+    initial →
+  Bridge.PartialSATDiagonalBody
+    candidate
+    (Exec.q2PartialSystem stepSystem initial)
+    (q2CookOutputView stepSystem initial)
+    tt
+q1SemanticsBuildsPartialDiagonalBody
+    candidate
+    stepSystem
+    initial
+    q1Semantics =
+  record
+    { Bridge.bodyProgram =
+        Exec.q2BodyProgram
+    ; Bridge.bodyOnTerminatingQuoted =
+        bodyOnTerminatingQuoted
+    }
+  where
+    bodyOnTerminatingQuoted :
+      (quoted : Code.Program Exec.Q2Primitive) →
+      (quotedOutput : Cook.BooleanFormula) →
+      Kleene.run1
+        (Exec.q2PartialSystem stepSystem initial)
+        quoted
+        tt
+      ≡
+      just quotedOutput →
+      Σ Cook.BooleanFormula
+        (λ bodyOutput →
+          (Kleene.run2
+            (Exec.q2PartialSystem stepSystem initial)
+            Exec.q2BodyProgram
+            quoted
+            tt
+           ≡ just bodyOutput)
+          ×
+          Bridge.PartialSATBodyResult
+            candidate
+            (q2CookOutputView stepSystem initial)
+            quotedOutput
+            bodyOutput)
+    bodyOnTerminatingQuoted
+        quoted
+        quotedOutput
+        quotedTerminates =
+      Exec.canonicalTerminalFormula
+          stepSystem
+          initial
+      ,
+      refl
+      ,
+      record
+        { Bridge.satisfiableIfQuotedRejected =
+            proj₁
+              (q1Semantics
+                quoted
+                quotedOutput
+                quotedTerminates)
+        ; Bridge.quotedRejectedIfBodySatisfiable =
+            proj₂
+              (q1Semantics
+                quoted
+                quotedOutput
+                quotedTerminates)
+        }
+
+------------------------------------------------------------------------
+-- Final finite-code contradiction.
+------------------------------------------------------------------------
+
+q1FiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (stepSystem : Q2.BoundedSelfReferenceStepSystem)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    stepSystem
+    initial →
+  ⊥
+q1FiniteCodeContradictsSATInP
+    satP
+    stepSystem
+    initial
+    q1Semantics =
+  Closure.realizedBoundedDescentContradictsExactSAT
+    satP
+    (Exec.q2DiagonalCompiler
+      stepSystem
+      initial)
+    body
+    stepSystem
+    initial
+    (Exec.q2FiniteCodeExecutionRealization
+      stepSystem
+      initial)
+  where
+    body :
+      Bridge.PartialSATDiagonalBody
+        (NoGo.satPCandidate satP)
+        (Exec.q2PartialSystem stepSystem initial)
+        (q2CookOutputView stepSystem initial)
+        tt
+    body =
+      q1SemanticsBuildsPartialDiagonalBody
+        (NoGo.satPCandidate satP)
+        stepSystem
+        initial
+        q1Semantics
+
+
+------------------------------------------------------------------------
+-- Per-state Q1 recurrence version.
+--
+-- The caller no longer constructs Q2 separately.  One SAT-blind per-state Q1
+-- constructor is compiled into the total decreasing step system.
+------------------------------------------------------------------------
+
+q1RecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor : Recurrence.Q1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (Recurrence.q1ConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1RecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (Recurrence.q1ConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Preferred execution-accounted recurrence.
+------------------------------------------------------------------------
+
+q1ExecutedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor : Executed.ExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (Executed.executedConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1ExecutedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (Executed.executedConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Preferred generated-machine recurrence.
+--
+-- The machine no longer returns an arbitrary classifier-bearing quotient.
+-- It returns the transition-generated closed payload:
+--   rootState + step + congruence + representatives + structural chains.
+------------------------------------------------------------------------
+
+q1GeneratedExecutedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor : Generated.GeneratedExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (Generated.generatedConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1GeneratedExecutedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (Generated.generatedConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Preferred rewrite-generated recurrence.
+--
+-- Structural representative chains are no longer opaque constructor inputs:
+-- every representative carries a program in the restricted evaluator-verified
+-- rewrite language, compiled to the canonical chain owner.
+------------------------------------------------------------------------
+
+q1RewriteGeneratedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      RewriteGenerated.RewriteGeneratedExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (RewriteGenerated.rewriteGeneratedConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1RewriteGeneratedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (RewriteGenerated.rewriteGeneratedConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest preferred recurrence: reachable representatives + restricted
+-- rewrite programs.
+------------------------------------------------------------------------
+
+q1ReachableRewriteGeneratedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      ReachableGenerated.ReachableRewriteGeneratedExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (ReachableGenerated.reachableConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1ReachableRewriteGeneratedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (ReachableGenerated.reachableConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest authority-separated recurrence.
+--
+-- The machine emits only finite candidate data.  Semantic congruence and the
+-- all-overhead fit are attached afterward as admission theorems about the exact
+-- terminal candidate.
+------------------------------------------------------------------------
+
+q1AdmittedFiniteCandidateRecurrenceContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      CandidateAdmission.AdmittedFiniteCandidateStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (CandidateAdmission.admittedFiniteConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1AdmittedFiniteCandidateRecurrenceContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (CandidateAdmission.admittedFiniteConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest local-admission recurrence.
+--
+-- Global GeneratedSemanticCongruence is no longer supplied.  It is derived
+-- from arity tracking + structurally correct zero-variable terminal labels.
+------------------------------------------------------------------------
+
+q1ArityTerminalRecurrenceContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      ArityTerminal.ArityTerminalAdmittedStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (ArityTerminal.arityTerminalConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1ArityTerminalRecurrenceContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (ArityTerminal.arityTerminalConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest local-transition recurrence.
+--
+-- Global selected-state arity tracking is derived from root arity and the
+-- false/true one-step arity decrement laws.
+------------------------------------------------------------------------
+
+q1LocalArityTerminalRecurrenceContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      LocalArity.LocalArityTerminalAdmittedStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (LocalArity.localConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1LocalArityTerminalRecurrenceContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (LocalArity.localConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- CLAY-FACING FRONTIER
+--
+-- No interpreter/s-m-n/diagonal/termination/realization field remains in the
+-- final theorem above.
+--
+-- The live theorem search is now exactly:
+--
+--   under SAT in P, construct the special root-scoped Q2 system from the
+--   candidate's finite self-instantiation data such that
+--
+--     * every live Q1 authority step satisfies the all-overhead strict budget;
+--     * its canonical terminal formula satisfies
+--       Q1OppositeSATTerminalSemantics.
+--
+-- Supplying those facts to q1FiniteCodeContradictsSATInP produces bottom, and
+-- the existing Direct/Clay compiler turns the universal version into SAT notin P.
+------------------------------------------------------------------------

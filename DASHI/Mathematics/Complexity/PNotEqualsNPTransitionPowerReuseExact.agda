@@ -1,0 +1,307 @@
+module DASHI.Mathematics.Complexity.PNotEqualsNPTransitionPowerReuseExact where
+
+------------------------------------------------------------------------
+-- REUSABLE TRANSITION-POWER AUTHORITY
+--
+-- Clock tagging rules out universal sharing by exact concrete state equality.
+-- The next semantic candidate is operator-level reuse:
+--
+--   R_j(x,y)  iff  y = F^(2^j)(x).
+--
+-- There is one reusable relation/operator schema at each level j, with
+--
+--   F^(2^(j+1)) = F^(2^j) o F^(2^j).
+--
+-- This file proves that operator/schema reuse is real, but also that a naive
+-- concrete endpoint certificate still needs TWO level-j relation uses at every
+-- composition step.  Sharing the definition of R_j therefore does not by
+-- itself make endpoint verification sublinear in the trajectory length.
+--
+-- Repo-native mathematics; no external theorem is attributed this result.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
+
+------------------------------------------------------------------------
+-- The 2^j-step transition operator.
+--
+-- Level zero is one primitive F step.
+------------------------------------------------------------------------
+
+transitionPower :
+  ∀ {State : Set} →
+  (State → State) →
+  Nat →
+  State →
+  State
+transitionPower F zero state =
+  F state
+transitionPower F (suc level) state =
+  transitionPower F level
+    (transitionPower F level state)
+
+TransitionPowerRelation :
+  ∀ {State : Set} →
+  (State → State) →
+  Nat →
+  State →
+  State →
+  Set
+TransitionPowerRelation F level start finish =
+  transitionPower F level start ≡ finish
+
+------------------------------------------------------------------------
+-- Reusable operator theorem.
+------------------------------------------------------------------------
+
+transitionPowerSuccessor :
+  ∀ {State : Set}
+    (F : State → State)
+    (level : Nat)
+    (state : State) →
+  transitionPower F (suc level) state
+  ≡
+  transitionPower F level
+    (transitionPower F level state)
+transitionPowerSuccessor F level state =
+  refl
+
+transitionPowerRelationCompose :
+  ∀ {State : Set}
+    {F : State → State}
+    {level : Nat}
+    {start middle finish : State} →
+  TransitionPowerRelation F level start middle →
+  TransitionPowerRelation F level middle finish →
+  TransitionPowerRelation F (suc level) start finish
+transitionPowerRelationCompose first second =
+  trans
+    (congPower first)
+    second
+  where
+    congPower :
+      ∀ {State : Set}
+        {F : State → State}
+        {level : Nat}
+        {left right : State} →
+      left ≡ right →
+      transitionPower F level left
+      ≡ transitionPower F level right
+    congPower refl = refl
+
+canonicalTransitionPowerMiddle :
+  ∀ {State : Set}
+    (F : State → State)
+    (level : Nat)
+    (start : State) →
+  State
+canonicalTransitionPowerMiddle F level start =
+  transitionPower F level start
+
+transitionPowerRelationFirstHalf :
+  ∀ {State : Set}
+    (F : State → State)
+    (level : Nat)
+    (start : State) →
+  TransitionPowerRelation F level start
+    (canonicalTransitionPowerMiddle F level start)
+transitionPowerRelationFirstHalf F level start =
+  refl
+
+transitionPowerRelationSecondHalf :
+  ∀ {State : Set}
+    (F : State → State)
+    (level : Nat)
+    (start : State) →
+  TransitionPowerRelation F level
+    (canonicalTransitionPowerMiddle F level start)
+    (transitionPower F (suc level) start)
+transitionPowerRelationSecondHalf F level start =
+  refl
+
+------------------------------------------------------------------------
+-- Repeated squaring DOES give a small shared *definition DAG*.
+--
+-- Level j+1 stores one pointer/reference to the already-defined level-j
+-- authority and the equation "compose it with itself".  The subdefinition is
+-- stored once, not copied twice.
+------------------------------------------------------------------------
+
+data TransitionPowerDefinitionDAG : Nat → Set where
+  primitiveDefinition :
+    TransitionPowerDefinitionDAG zero
+
+  squareSharedDefinition :
+    ∀ {level} →
+    TransitionPowerDefinitionDAG level →
+    TransitionPowerDefinitionDAG (suc level)
+
+canonicalTransitionPowerDefinitionDAG :
+  (level : Nat) →
+  TransitionPowerDefinitionDAG level
+canonicalTransitionPowerDefinitionDAG zero =
+  primitiveDefinition
+canonicalTransitionPowerDefinitionDAG (suc level) =
+  squareSharedDefinition
+    (canonicalTransitionPowerDefinitionDAG level)
+
+definitionDAGNodes :
+  ∀ {level} →
+  TransitionPowerDefinitionDAG level →
+  Nat
+definitionDAGNodes primitiveDefinition =
+  suc zero
+definitionDAGNodes (squareSharedDefinition previous) =
+  suc (definitionDAGNodes previous)
+
+successorCount : Nat → Nat
+successorCount zero = suc zero
+successorCount (suc level) =
+  suc (successorCount level)
+
+canonicalDefinitionDAGNodeCount :
+  (level : Nat) →
+  definitionDAGNodes
+    (canonicalTransitionPowerDefinitionDAG level)
+  ≡ successorCount level
+canonicalDefinitionDAGNodeCount zero =
+  refl
+canonicalDefinitionDAGNodeCount (suc level)
+    rewrite canonicalDefinitionDAGNodeCount level =
+  refl
+
+------------------------------------------------------------------------
+-- Definition sharing versus endpoint-use sharing.
+--
+-- One definition of R_j can be reused at many argument pairs.  But the
+-- recursive endpoint proof generated by binary composition contains two
+-- concrete uses of R_j at each parent.
+------------------------------------------------------------------------
+
+data TransitionPowerUseTree : Nat → Set where
+  primitiveUse :
+    TransitionPowerUseTree zero
+
+  composeUses :
+    ∀ {level} →
+    TransitionPowerUseTree level →
+    TransitionPowerUseTree level →
+    TransitionPowerUseTree (suc level)
+
+canonicalTransitionPowerUseTree :
+  (level : Nat) →
+  TransitionPowerUseTree level
+canonicalTransitionPowerUseTree zero =
+  primitiveUse
+canonicalTransitionPowerUseTree (suc level) =
+  composeUses
+    (canonicalTransitionPowerUseTree level)
+    (canonicalTransitionPowerUseTree level)
+
+concreteRelationUses :
+  ∀ {level} →
+  TransitionPowerUseTree level →
+  Nat
+concreteRelationUses primitiveUse =
+  suc zero
+concreteRelationUses (composeUses left right) =
+  concreteRelationUses left
+  + concreteRelationUses right
+
+pow2 : Nat → Nat
+pow2 zero = suc zero
+pow2 (suc level) =
+  pow2 level + pow2 level
+
+canonicalTransitionPowerUseCount :
+  (level : Nat) →
+  concreteRelationUses (canonicalTransitionPowerUseTree level)
+  ≡ pow2 level
+canonicalTransitionPowerUseCount zero =
+  refl
+canonicalTransitionPowerUseCount (suc level)
+    rewrite canonicalTransitionPowerUseCount level =
+  refl
+
+------------------------------------------------------------------------
+-- One-time authority definition cost, direct per-use cost, and recursively
+-- expanded endpoint cost are separate quantities.  A genuine breakthrough
+-- would supply a sound direct level-j verifier whose directAuthorityUseCost
+-- grows much more slowly than the 2^j naive expansion.
+------------------------------------------------------------------------
+
+record TransitionPowerCostSchedule : Set where
+  field
+    -- Paid once to describe/construct the reusable level-j authority.
+    authorityDefinitionCost : Nat → Nat
+
+    -- Cost of applying an already-constructed level-j authority to ONE
+    -- concrete endpoint pair, if such a direct verifier exists.
+    directAuthorityUseCost : Nat → Nat
+
+    -- Cost of composing two lower-level endpoint certificates.
+    compositionOverhead : Nat → Nat
+
+open TransitionPowerCostSchedule public
+
+-- Cost of *using* a genuinely reusable level-j authority directly.
+directReusableEndpointVerificationCost :
+  TransitionPowerCostSchedule →
+  Nat →
+  Nat
+directReusableEndpointVerificationCost schedule level =
+  directAuthorityUseCost schedule level
+
+-- Cost of refusing the direct level-j authority and recursively expanding the
+-- endpoint claim into two level-(j-1) claims.
+naiveExpandedEndpointVerificationCost :
+  TransitionPowerCostSchedule →
+  Nat →
+  Nat
+naiveExpandedEndpointVerificationCost schedule zero =
+  directAuthorityUseCost schedule zero
+naiveExpandedEndpointVerificationCost schedule (suc level) =
+  naiveExpandedEndpointVerificationCost schedule level
+  +
+  naiveExpandedEndpointVerificationCost schedule level
+  +
+  compositionOverhead schedule level
+
+zeroOverheadUnitUseSchedule :
+  TransitionPowerCostSchedule
+zeroOverheadUnitUseSchedule = record
+  { authorityDefinitionCost = λ level → suc zero
+  ; directAuthorityUseCost = λ level → suc zero
+  ; compositionOverhead = λ level → zero
+  }
+
+directUnitAuthorityUseCostIsOne :
+  (level : Nat) →
+  directReusableEndpointVerificationCost
+    zeroOverheadUnitUseSchedule level
+  ≡ suc zero
+directUnitAuthorityUseCostIsOne level =
+  refl
+
+naiveExpandedUnitUseCostIsPow2 :
+  (level : Nat) →
+  naiveExpandedEndpointVerificationCost
+    zeroOverheadUnitUseSchedule level
+  ≡ pow2 level
+naiveExpandedUnitUseCostIsPow2 zero =
+  refl
+naiveExpandedUnitUseCostIsPow2 (suc level)
+    rewrite naiveExpandedUnitUseCostIsPow2 level =
+  refl
+
+------------------------------------------------------------------------
+-- Consequence:
+--
+-- Reusing the *definition* of F^(2^j) is not yet a succinct certificate for
+-- F^(2^j)(x)=y on concrete endpoints.  The arithmetic above makes the target
+-- explicit: construct a SOUND direct level-j authority whose per-use
+-- verification cost is sub-2^j.  Merely defining the operator recursively and
+-- then expanding each concrete use still pays exactly 2^j primitive uses.
+------------------------------------------------------------------------
