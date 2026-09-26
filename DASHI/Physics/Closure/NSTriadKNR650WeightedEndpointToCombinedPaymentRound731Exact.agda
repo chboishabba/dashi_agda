@@ -34,7 +34,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -47,6 +47,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Ener
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedEndpointCompilerExact as Endpoint
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699Exact as R699
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
@@ -150,15 +151,29 @@ module WeightedEndpointProducer
       initialNN =
         Upper.sumSelfEnergyNonnegative
           cutoff initialTime
-          (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
+          (Canonical.nonzeroCutoffModes cutoff)
+
+      shiftedExact :
+        weighted + terminalMass - initialMass
+        ≡
+        (comm - (terminalMass - initialMass))
+          + terminalMass - initialMass
+      shiftedExact =
+        cong
+          (λ w → w + terminalMass - initialMass)
+          exact
+
+      rhsNormal :
+        (comm - (terminalMass - initialMass))
+          + terminalMass - initialMass
+        ≡ comm
+      rhsNormal =
+        solve (comm ∷ terminalMass ∷ initialMass ∷ [])
 
       rearranged :
         comm ≡ weighted + terminalMass - initialMass
       rearranged =
-        subst
-          (λ w → comm ≡ w + terminalMass - initialMass)
-          exact
-          (solve (comm ∷ terminalMass ∷ initialMass ∷ []))
+        sym (trans shiftedExact rhsNormal)
 
       upper :
         weighted + terminalMass - initialMass
