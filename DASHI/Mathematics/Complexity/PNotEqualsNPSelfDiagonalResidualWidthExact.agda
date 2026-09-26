@@ -51,6 +51,8 @@ import DASHI.Core.FutureObservationalRefinement as FutureCore
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as Future
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
+import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExact as Operational
 
 ------------------------------------------------------------------------
 -- A reachable node known to live at one exact remaining arity.
@@ -648,6 +650,195 @@ layeredResidualWidthSumBelowCandidateStateCount :
 layeredResidualWidthSumBelowCandidateStateCount admission stack =
   FinP.injective⇒≤
     (stackCandidateClassifyInjective admission stack)
+
+------------------------------------------------------------------------
+-- Weld summed semantic width to the actual charged operational Q1 run.
+------------------------------------------------------------------------
+
+arityTerminalOperationalRun :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  ArityTerminal.ArityTerminalAdmittedConstructionRun state →
+  Operational.OperationalQ1ConstructionRun state
+arityTerminalOperationalRun run =
+  Candidate.admittedFiniteRunToOperationalRun
+    (ArityTerminal.arityTerminalRunToAdmittedFiniteRun run)
+
+arityTerminalRunStateCountExact :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : ArityTerminal.ArityTerminalAdmittedConstructionRun state) →
+  Candidate.stateCount
+      (Candidate.transitionCandidate
+        (Candidate.finiteCandidate
+          (ArityTerminal.construction run)))
+  ≡
+  Operational.q1WitnessStateCount
+    (Operational.q1Witness
+      (arityTerminalOperationalRun run))
+arityTerminalRunStateCountExact run =
+  refl
+
+layeredResidualWidthSumStrictlyBelowCurrentMeasure :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {next total : Nat}
+    (run : ArityTerminal.ArityTerminalAdmittedConstructionRun state) →
+  ResidualWidthStack
+    {root =
+      DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+        (Q2.currentFormula state)}
+    next
+    total →
+  total
+  <
+  Q2.recursiveMeasure state
+layeredResidualWidthSumStrictlyBelowCurrentMeasure
+    {state}
+    run
+    stack =
+  NatP.≤-<-trans
+    widthBelowCandidate
+    candidateBelowMeasure
+  where
+    candidate :
+      Candidate.TransitionTableCandidate
+        (DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+          (Q2.currentFormula state))
+    candidate =
+      Candidate.transitionCandidate
+        (Candidate.finiteCandidate
+          (ArityTerminal.construction run))
+
+    widthBelowCandidate :
+      total ≤ Candidate.stateCount candidate
+    widthBelowCandidate =
+      layeredResidualWidthSumBelowCandidateStateCount
+        (ArityTerminal.localAdmission run)
+        stack
+
+    candidateBelowMeasure :
+      Candidate.stateCount candidate
+      <
+      Q2.recursiveMeasure state
+    candidateBelowMeasure
+      rewrite arityTerminalRunStateCountExact run =
+      Operational.stateCountStrictlyBelowCurrentMeasure
+        (arityTerminalOperationalRun run)
+
+------------------------------------------------------------------------
+-- Three graph cells per semantic state: one node plus two Boolean transitions.
+------------------------------------------------------------------------
+
+triple : Nat → Nat
+triple n =
+  n + (n + n)
+
+tripleMonotone :
+  ∀ {left right : Nat} →
+  left ≤ right →
+  triple left ≤ triple right
+tripleMonotone leftBelowRight =
+  NatP.+-mono-≤
+    leftBelowRight
+    (NatP.+-mono-≤
+      leftBelowRight
+      leftBelowRight)
+
+twoTimes :
+  (n : Nat) →
+  (suc (suc zero)) * n
+  ≡
+  n + n
+twoTimes n =
+  refl
+
+operationalGraphCellCountIsTriple :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : Operational.OperationalQ1ConstructionRun state) →
+  Operational.q1WitnessGraphCellCount
+      (Operational.q1Witness run)
+  ≡
+  triple
+    (Operational.q1WitnessStateCount
+      (Operational.q1Witness run))
+operationalGraphCellCountIsTriple run
+    rewrite
+      Operational.q1WitnessGraphCellCountExact
+        (Operational.q1Witness run)
+      |
+      twoTimes
+        (Operational.q1WitnessStateCount
+          (Operational.q1Witness run)) =
+  refl
+
+tripleLayeredResidualWidthStrictlyBelowCurrentMeasure :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {next total : Nat}
+    (run : ArityTerminal.ArityTerminalAdmittedConstructionRun state) →
+  ResidualWidthStack
+    {root =
+      DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+        (Q2.currentFormula state)}
+    next
+    total →
+  triple total
+  <
+  Q2.recursiveMeasure state
+tripleLayeredResidualWidthStrictlyBelowCurrentMeasure
+    {state}
+    run
+    stack =
+  NatP.≤-<-trans
+    tripleWidthBelowGraph
+    (Operational.graphCellCountStrictlyBelowCurrentMeasure
+      operationalRun)
+  where
+    operationalRun :
+      Operational.OperationalQ1ConstructionRun state
+    operationalRun =
+      arityTerminalOperationalRun run
+
+    candidate :
+      Candidate.TransitionTableCandidate
+        (DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+          (Q2.currentFormula state))
+    candidate =
+      Candidate.transitionCandidate
+        (Candidate.finiteCandidate
+          (ArityTerminal.construction run))
+
+    widthBelowCandidate :
+      total ≤ Candidate.stateCount candidate
+    widthBelowCandidate =
+      layeredResidualWidthSumBelowCandidateStateCount
+        (ArityTerminal.localAdmission run)
+        stack
+
+    widthBelowOperationalStateCount :
+      total
+      ≤
+      Operational.q1WitnessStateCount
+        (Operational.q1Witness operationalRun)
+    widthBelowOperationalStateCount
+      rewrite
+        sym (arityTerminalRunStateCountExact run) =
+      widthBelowCandidate
+
+    tripleWidthBelowOperationalTriple :
+      triple total
+      ≤
+      triple
+        (Operational.q1WitnessStateCount
+          (Operational.q1Witness operationalRun))
+    tripleWidthBelowOperationalTriple =
+      tripleMonotone widthBelowOperationalStateCount
+
+    tripleWidthBelowGraph :
+      triple total
+      ≤
+      Operational.q1WitnessGraphCellCount
+        (Operational.q1Witness operationalRun)
+    tripleWidthBelowGraph
+      rewrite operationalGraphCellCountIsTriple operationalRun =
+      tripleWidthBelowOperationalTriple
 
 ------------------------------------------------------------------------
 -- Cross-layer reuse boundary.
