@@ -804,6 +804,49 @@ class SourceIndex:
             ),
         )
 
+    def source_identity(
+        self,
+        path: Path,
+    ) -> Optional[Tuple[str, str]]:
+        path = path if path.is_absolute() else self.root / path
+        path = path.resolve()
+        try:
+            relative = self._relative(path)
+        except ValueError:
+            return None
+        row = self.connection.execute(
+            "SELECT module_name, source_sha256 FROM modules WHERE path = ?",
+            (relative,),
+        ).fetchone()
+        if row is None:
+            return None
+        return row["module_name"], row["source_sha256"]
+
+    def closure_source_hashes(
+        self,
+        target: Path,
+    ) -> Optional[Tuple[Tuple[str, str], ...]]:
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(target)
+        if rows is None:
+            return None
+
+        with self.profiler.stage("semantic.source_freshness"):
+            identities = []
+            for row in rows:
+                path = self.root / row["path"]
+                try:
+                    stat = self._stat(path)
+                except OSError:
+                    return None
+                if not self._fresh(row, stat):
+                    return None
+                identities.append(
+                    (row["module_name"], row["source_sha256"])
+                )
+        return tuple(sorted(identities))
+
     def find_cached_diagnostic(
         self,
         target: Path,
