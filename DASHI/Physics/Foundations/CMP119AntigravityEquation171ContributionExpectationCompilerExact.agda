@@ -8,6 +8,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.Foundations.CMP119AntigravityEquation171ContributionStepApproximationExact as Step
 import DASHI.Physics.YangMills.BalabanCMP119Equation218FactorizedFunctionalDensityExact as Factor
+import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityApproximationExact as Approx
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedMarkedBudgetVanishesExact as Budget
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityConvergenceExact as Convergence
 import DASHI.Physics.YangMills.BalabanCMP119FiniteObservableExpectationConvergenceExact as Expect
@@ -62,7 +63,7 @@ approximation :
     {Scale = Scale} {Fine = Fine}
     {FunctionalValue = FunctionalValue}
     factorized embedding sequenceLimit step →
-  DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityApproximationExact.CMP119FactorizedDensityApproximation
+  Approx.CMP119FactorizedDensityApproximation
     SlowField Sequence Component StepIndex
 approximation {step = step} input =
   Step.asFactorizedDensityApproximation
