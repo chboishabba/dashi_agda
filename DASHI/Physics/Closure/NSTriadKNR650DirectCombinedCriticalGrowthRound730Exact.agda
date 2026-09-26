@@ -57,6 +57,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarri
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact as R659
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
+import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
 import DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact as R726
 
 F : C3.RealField _
@@ -176,7 +177,7 @@ module DirectCombinedGrowth
       + margin * Obs.integratedCriticalDissipation T cutoff terminal
     ≤
     Obs.criticalEnergyAt T cutoff initialTime
-      + (Fold.two + Fold.two + Fold.two + Fold.two + Fold.two + Fold.two)
+      + R700.twelve
           * Combined.cutoffIndependentBound P terminal
   directCombinedGrowthAndPaymentBuildBarrier cutoff terminal G P =
     let
@@ -194,7 +195,7 @@ module DirectCombinedGrowth
       combinedUpper :
         combined
         ≤
-        (Fold.two + Fold.two + Fold.two + Fold.two + Fold.two + Fold.two)
+        R700.twelve
           * bound
       combinedUpper =
         Combined.combinedSelfExternalPayment P cutoff terminal
@@ -202,14 +203,14 @@ module DirectCombinedGrowth
       composed :
         xT - x0 + margin * diss
         ≤
-        (Fold.two + Fold.two + Fold.two + Fold.two + Fold.two + Fold.two)
+        R700.twelve
           * bound
       composed = ℚP.≤-trans growthUpper combinedUpper
 
       shifted :
         (xT - x0 + margin * diss) + x0
         ≤
-        ((Fold.two + Fold.two + Fold.two + Fold.two + Fold.two + Fold.two)
+        (R700.twelve
           * bound) + x0
       shifted = ℚP.+-mono-≤ composed ℚP.≤-refl
     in
@@ -221,7 +222,7 @@ module DirectCombinedGrowth
         (λ lhs →
           lhs
           ≤
-          ((Fold.two + Fold.two + Fold.two + Fold.two + Fold.two + Fold.two)
+          (R700.twelve
             * bound) + x0)
         (solve (xT ∷ x0 ∷ margin ∷ diss ∷ []))
         shifted)
