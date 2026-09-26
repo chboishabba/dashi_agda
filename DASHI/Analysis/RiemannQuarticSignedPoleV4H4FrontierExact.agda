@@ -2178,3 +2178,97 @@ canonicalFarQuarticSignTransportedIntoAgdaKernelHere = false
 canonicalFarQuarticSignInterpretation : String
 canonicalFarQuarticSignInterpretation =
   "Lean source-proves that every actual canonical-far zeta zero above t=200 lies in the favorable outer region of the complete fourth-order pair polynomial, so the finite canonical-far quartic contribution is nonpositive and the exact finite far source is bounded above by its nonquartic remainder carrier. This is kept finite-windowed because the separated quartic/remainder pieces are not suitable global tsums. Lean also source-proves an atomic zero-mode fail-fast: the fixed half/two-thirds endpoint pair has signed projective physical-origin coordinate -10/117, so pole cancellation does not imply constant-density annihilation. The ambient multiplicity-one signed far-minus-mu estimate remains the genuine open theorem."
+
+
+------------------------------------------------------------------------
+-- STRONGER ATOMIC TARGET / POLE / ZERO-MODE RIGIDITY
+--
+-- The fixed-endpoint -10/117 diagnostic is a special case of an exact
+-- identity on the entire atomic J2-null four-window curve.
+--
+-- Define for one null-curve channel lambda:
+--
+--   P(lambda) = atomic high pole coordinate,
+--   O(lambda) = atomic projective physical-origin coordinate,
+--   S(lambda) = atomic quartic target strength = -J4.
+--
+-- Lean source-proves
+--
+--   S(lambda)
+--     = pi^4 * ( -(20/243)*P(lambda) - (1/4)*O(lambda) ).
+--
+-- Consequences:
+--
+-- * for ANY finite signed combination of J2-null channels,
+--
+--     sum c_i P_i = 0
+--     sum c_i O_i = 0
+--
+--   implies
+--
+--     sum c_i S_i = 0;
+--
+-- * after pole cancellation alone,
+--
+--     sum c_i O_i
+--       = -(4/pi^4) * sum c_i S_i.
+--
+-- Hence exact constant-density / zero-mode annihilation is incompatible with
+-- retaining a nonzero quartic target anywhere inside this atomic J2-null
+-- family, regardless of whether two, three, or more channels are used.
+--
+-- This rules out the natural "add one more lambda channel" redesign as a way
+-- to get exact zero-mode cancellation while preserving the current quartic
+-- target.  The surviving zero mode is structurally tied to target strength.
+------------------------------------------------------------------------
+
+data AtomicTargetPoleZeroModeRigidityCoordinate : Set where
+  targetInPoleOriginSpan :
+    AtomicTargetPoleZeroModeRigidityCoordinate
+  finiteCombinationPoleOriginCancelKillsTarget :
+    AtomicTargetPoleZeroModeRigidityCoordinate
+  poleCancelForcesOriginTargetRelation :
+    AtomicTargetPoleZeroModeRigidityCoordinate
+  exactZeroModeAnnihilationWithinCurrentFamily :
+    AtomicTargetPoleZeroModeRigidityCoordinate
+  ambientSignedFarMinusMuAfterRigidity :
+    AtomicTargetPoleZeroModeRigidityCoordinate
+
+atomicTargetPoleZeroModeRigidityStatus :
+  AtomicTargetPoleZeroModeRigidityCoordinate -> V4H4Status
+atomicTargetPoleZeroModeRigidityStatus targetInPoleOriginSpan =
+  leanSourceWrittenDonor
+atomicTargetPoleZeroModeRigidityStatus finiteCombinationPoleOriginCancelKillsTarget =
+  leanSourceWrittenDonor
+atomicTargetPoleZeroModeRigidityStatus poleCancelForcesOriginTargetRelation =
+  leanSourceWrittenDonor
+atomicTargetPoleZeroModeRigidityStatus exactZeroModeAnnihilationWithinCurrentFamily =
+  ruledOutByExactIdentity
+atomicTargetPoleZeroModeRigidityStatus ambientSignedFarMinusMuAfterRigidity =
+  openAnalyticObstruction
+
+atomicTargetPoleZeroModeRigidityIsPaid :
+  atomicTargetPoleZeroModeRigidityStatus targetInPoleOriginSpan
+    ≡ leanSourceWrittenDonor
+atomicTargetPoleZeroModeRigidityIsPaid = refl
+
+atomicExactZeroModeAnnihilationIsRuledOut :
+  atomicTargetPoleZeroModeRigidityStatus exactZeroModeAnnihilationWithinCurrentFamily
+    ≡ ruledOutByExactIdentity
+atomicExactZeroModeAnnihilationIsRuledOut = refl
+
+ambientSignedFarMinusMuStillOpenAfterAtomicRigidity :
+  atomicTargetPoleZeroModeRigidityStatus ambientSignedFarMinusMuAfterRigidity
+    ≡ openAnalyticObstruction
+ambientSignedFarMinusMuStillOpenAfterAtomicRigidity = refl
+
+atomicTargetPoleZeroModeRigidityLeanDonorHead : String
+atomicTargetPoleZeroModeRigidityLeanDonorHead =
+  "7ac0560a59aa9e595927d92473d4ddf2a12e1d25"
+
+atomicTargetPoleZeroModeRigidityTransportedIntoAgdaKernelHere : Bool
+atomicTargetPoleZeroModeRigidityTransportedIntoAgdaKernelHere = false
+
+atomicTargetPoleZeroModeRigidityInterpretation : String
+atomicTargetPoleZeroModeRigidityInterpretation =
+  "Lean source-proves the exact atomic J2-null identity S = pi^4*(-20/243*P - 1/4*O), where P is the pole coordinate, O the physical-origin zero-mode coordinate, and S the quartic target. Thus every finite signed combination that cancels both pole and zero mode necessarily cancels the target, while pole cancellation alone forces O_comb = -(4/pi^4) S_comb. Exact constant-density annihilation is therefore structurally incompatible with retaining the quartic target inside the current atomic four-window J2-null family. The ambient signed far-minus-mu theorem remains open."
