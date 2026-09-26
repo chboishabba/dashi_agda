@@ -120,6 +120,7 @@ def _critical_currency(
     forcing = forcing_raw / scale
 
     weighted_transfer = 0.0
+    critical_energy = 0.0
     dissipation = 0.0
     unweighted_transfer = 0.0
     for mode in nonzero_cutoff_modes(formal_cutoff):
@@ -128,13 +129,16 @@ def _critical_currency(
         pairing = float(np.real(np.vdot(u, f)))
         weight = float(2 ** _shell_index_mode(mode))
         k2 = float(mode[0] * mode[0] + mode[1] * mode[1] + mode[2] * mode[2])
+        mass = float(np.real(np.vdot(u, u)))
         unweighted_transfer += pairing
         weighted_transfer += weight * pairing
-        dissipation += weight * k2 * float(np.real(np.vdot(u, u)))
+        critical_energy += weight * mass
+        dissipation += weight * k2 * mass
 
     return {
         "unweighted_transfer": float(unweighted_transfer),
         "weighted_transfer_W": float(weighted_transfer),
+        "critical_energy_X": float(critical_energy),
         "production_rate_2W": float(2.0 * weighted_transfer),
         "critical_dissipation_rate": float(dissipation),
         "viscosity": float(nu),
@@ -216,6 +220,35 @@ def _packet_layer_cake_split(
             for row in rows
             if int(row["shell"]) < threshold
         )
+        collar_energy = 0.5 * sum(
+            float(row["mass"])
+            for row in rows
+            if int(row["shell"]) == threshold
+        )
+        k_level = max(0, threshold - 1)
+        low_ceiling_k2 = float(3 * (2 ** k_level) ** 2)
+        bad_collar_flux = sum(
+            float(row["pairing"])
+            for row in rows
+            if int(row["shell"]) == threshold
+            and float(
+                row["mode"][0] * row["mode"][0]
+                + row["mode"][1] * row["mode"][1]
+                + row["mode"][2] * row["mode"][2]
+            ) < low_ceiling_k2
+        )
+        good_collar_flux = collar_flux - bad_collar_flux
+        bad_collar_energy = 0.5 * sum(
+            float(row["mass"])
+            for row in rows
+            if int(row["shell"]) == threshold
+            and float(
+                row["mode"][0] * row["mode"][0]
+                + row["mode"][1] * row["mode"][1]
+                + row["mode"][2] * row["mode"][2]
+            ) < low_ceiling_k2
+        )
+        good_collar_energy = collar_energy - bad_collar_energy
         remote_energy = 0.5 * sum(
             float(row["mass"])
             for row in rows
@@ -226,6 +259,22 @@ def _packet_layer_cake_split(
             for row in rows
             if int(row["shell"]) < threshold
         )
+        collar_dissipation = sum(
+            float(row["viscous"])
+            for row in rows
+            if int(row["shell"]) == threshold
+        )
+        bad_collar_dissipation = sum(
+            float(row["viscous"])
+            for row in rows
+            if int(row["shell"]) == threshold
+            and float(
+                row["mode"][0] * row["mode"][0]
+                + row["mode"][1] * row["mode"][1]
+                + row["mode"][2] * row["mode"][2]
+            ) < low_ceiling_k2
+        )
+        good_collar_dissipation = collar_dissipation - bad_collar_dissipation
         remote_dissipation = sum(
             float(row["viscous"])
             for row in rows
@@ -235,6 +284,26 @@ def _packet_layer_cake_split(
             remote_energy * low_dissipation
             - remote_dissipation * low_energy
         )
+        collar_cross = (
+            collar_energy * low_dissipation
+            - collar_dissipation * low_energy
+        )
+        bad_collar_cross = (
+            bad_collar_energy * low_dissipation
+            - bad_collar_dissipation * low_energy
+        )
+        good_collar_cross = (
+            good_collar_energy * low_dissipation
+            - good_collar_dissipation * low_energy
+        )
+        collar_refinement_residual = (
+            collar_cross - bad_collar_cross - good_collar_cross
+        )
+        full_off_cross = (
+            (collar_energy + remote_energy) * low_dissipation
+            - (collar_dissipation + remote_dissipation) * low_energy
+        )
+        cross_split_residual = full_off_cross - collar_cross - spectral_cross
 
         collar_contribution = weight_increment * collar_flux
         remote_contribution = weight_increment * remote_flux
@@ -251,6 +320,11 @@ def _packet_layer_cake_split(
                 "weight_increment": weight_increment,
                 "low_flux": float(low_flux),
                 "collar_flux": float(collar_flux),
+                "bad_collar_flux": float(bad_collar_flux),
+                "good_collar_flux": float(good_collar_flux),
+                "collar_flux_refinement_residual": float(
+                    collar_flux - bad_collar_flux - good_collar_flux
+                ),
                 "remote_flux": float(remote_flux),
                 "upper_flux": float(upper_flux),
                 "upper_minus_collar_remote": float(
@@ -260,11 +334,29 @@ def _packet_layer_cake_split(
                     low_flux + collar_flux + remote_flux
                 ),
                 "low_energy_half_mass": float(low_energy),
+                "collar_energy_half_mass": float(collar_energy),
+                "bad_collar_energy_half_mass": float(bad_collar_energy),
+                "good_collar_energy_half_mass": float(good_collar_energy),
+                "low_ceiling_euclidean_k2": float(low_ceiling_k2),
                 "remote_energy_half_mass": float(remote_energy),
                 "low_viscous_dissipation": float(low_dissipation),
+                "collar_viscous_dissipation": float(collar_dissipation),
+                "bad_collar_viscous_dissipation": float(bad_collar_dissipation),
+                "good_collar_viscous_dissipation": float(good_collar_dissipation),
                 "remote_viscous_dissipation": float(remote_dissipation),
+                "collar_spectral_cross": float(collar_cross),
+                "bad_collar_spectral_cross": float(bad_collar_cross),
+                "good_collar_spectral_cross": float(good_collar_cross),
+                "collar_refinement_residual": float(collar_refinement_residual),
+                "good_collar_spectral_cross_nonpositive": good_collar_cross <= 1.0e-12,
                 "remote_spectral_cross": float(spectral_cross),
+                "full_low_complement_spectral_cross": float(full_off_cross),
+                "cross_split_residual": float(cross_split_residual),
                 "remote_spectral_cross_nonpositive": spectral_cross <= 1.0e-12,
+                "full_cross_below_collar_cross": full_off_cross <= collar_cross + 1.0e-12,
+                "full_cross_below_bad_collar_cross": (
+                    full_off_cross <= bad_collar_cross + 1.0e-12
+                ),
                 "collar_layer_cake_contribution": float(collar_contribution),
                 "remote_layer_cake_contribution": float(remote_contribution),
                 "upper_layer_cake_contribution": float(upper_contribution),
@@ -307,10 +399,37 @@ def _packet_layer_cake_split(
             (float(row["remote_spectral_cross"]) for row in interfaces),
             default=0.0,
         ),
+        "maximum_cross_split_residual": max(
+            (abs(float(row["cross_split_residual"])) for row in interfaces),
+            default=0.0,
+        ),
+        "maximum_collar_refinement_residual": max(
+            (abs(float(row["collar_refinement_residual"])) for row in interfaces),
+            default=0.0,
+        ),
+        "maximum_collar_flux_refinement_residual": max(
+            (abs(float(row["collar_flux_refinement_residual"])) for row in interfaces),
+            default=0.0,
+        ),
         "remote_spectral_cross_violation_count": sum(
             1
             for row in interfaces
             if not bool(row["remote_spectral_cross_nonpositive"])
+        ),
+        "full_cross_below_collar_violation_count": sum(
+            1
+            for row in interfaces
+            if not bool(row["full_cross_below_collar_cross"])
+        ),
+        "good_collar_spectral_cross_violation_count": sum(
+            1
+            for row in interfaces
+            if not bool(row["good_collar_spectral_cross_nonpositive"])
+        ),
+        "full_cross_below_bad_collar_violation_count": sum(
+            1
+            for row in interfaces
+            if not bool(row["full_cross_below_bad_collar_cross"])
         ),
         "authority": "finite-floating-packet-decomposition-diagnostic-only",
     }
@@ -375,6 +494,22 @@ def evaluate_state(
         "unweighted_conservation_residual": abs(float(currency["unweighted_transfer"])),
         "r406_evaluated_pair_count": int(r406["evaluated_pair_count"]),
         "r406_minimum_pair_rate": r406["minimum_pair_rate"],
+        "r687_rate_lifted_forcing_full": float(r406["global_rate_lifted_forcing_full"]),
+        "r685_coherent_commutator_work": float(r406["global_coherent_commutator_work"]),
+        "r685_coherent_tangent_work": float(r406["global_coherent_tangent_work"]),
+        "r665_weighted_rate_work": float(r406["global_weighted_rate_work"]),
+        "r665_weighted_rate_work_nonnegative": (
+            float(r406["global_weighted_rate_work"]) >= -1.0e-12
+        ),
+        "r688_rate_lifted_minus_8_tangent": float(
+            r406["global_rate_lifted_minus_8_tangent"]
+        ),
+        "r687_global_identity_residual": float(
+            r406["r687_global_rate_lift_residual"]
+        ),
+        "r688_global_identity_residual": float(
+            r406["r688_global_dynamic_cancellation_residual"]
+        ),
         "r406_authority": R406_AUTHORITY,
     }
 
@@ -415,7 +550,26 @@ def _trajectory_summary(rows: list[dict[str, Any]], delta: float) -> dict[str, A
     p_int = _trapz(times, [float(row["production_rate_2W"]) for row in ordered])
     d_int = _trapz(times, [float(row["critical_dissipation_rate"]) for row in ordered])
     r_int = _trapz(times, [float(row["r406_weighted_remainder"]) for row in ordered])
+    rate_lifted_int = _trapz(
+        times, [float(row["r687_rate_lifted_forcing_full"]) for row in ordered]
+    )
+    commutator_int = _trapz(
+        times, [float(row["r685_coherent_commutator_work"]) for row in ordered]
+    )
+    tangent_int = _trapz(
+        times, [float(row["r685_coherent_tangent_work"]) for row in ordered]
+    )
+    weighted_rate_int = _trapz(
+        times, [float(row["r665_weighted_rate_work"]) for row in ordered]
+    )
+    dynamic_cancel_int = rate_lifted_int - 8.0 * tangent_int
+    r687_integrated_residual = rate_lifted_int - 8.0 * commutator_int
+    r688_integrated_residual = dynamic_cancel_int - 8.0 * weighted_rate_int
     surplus_int = p_int - (2.0 * nu - delta) * d_int
+    x0 = float(ordered[0]["critical_energy_X"])
+    xT = float(ordered[-1]["critical_energy_X"])
+    endpoint_margin = xT - x0 + delta * d_int
+    endpoint_margin_residual = surplus_int - endpoint_margin
     gap_int = r_int - surplus_int
 
     if d_int > 1.0e-30:
@@ -434,7 +588,19 @@ def _trajectory_summary(rows: list[dict[str, Any]], delta: float) -> dict[str, A
         "integrated_production_trapezoid": p_int,
         "integrated_dissipation_trapezoid": d_int,
         "integrated_r406_trapezoid": r_int,
+        "integrated_r687_rate_lifted_forcing_full": float(rate_lifted_int),
+        "integrated_r685_coherent_commutator_work": float(commutator_int),
+        "integrated_r685_coherent_tangent_work": float(tangent_int),
+        "integrated_r665_weighted_rate_work": float(weighted_rate_int),
+        "integrated_r688_rate_lifted_minus_8_tangent": float(dynamic_cancel_int),
+        "integrated_r687_identity_residual": float(r687_integrated_residual),
+        "integrated_r688_identity_residual": float(r688_integrated_residual),
+        "integrated_r665_weighted_rate_work_nonnegative": weighted_rate_int >= -1.0e-12,
         "integrated_strict_surplus_trapezoid": float(surplus_int),
+        "initial_critical_energy": x0,
+        "terminal_critical_energy": xT,
+        "critical_energy_growth_plus_margin": float(endpoint_margin),
+        "sampled_energy_identity_residual": float(endpoint_margin_residual),
         "integrated_r406_minus_surplus_trapezoid": float(gap_int),
         "tested_delta_integrated_c2_diagnostic_holds": gap_int >= 0.0,
         "integrated_margin_capacity": (
@@ -510,6 +676,20 @@ def scan_manifest(
                 1
                 for run in runs_out
                 if run["trajectory"].get("positive_integrated_margin_available") is True
+            ),
+            "r665_pointwise_negative_state_count": sum(
+                1
+                for run in runs_out
+                for row in run["rows"]
+                if row.get("r665_weighted_rate_work_nonnegative") is False
+            ),
+            "r665_integrated_negative_run_count": sum(
+                1
+                for run in runs_out
+                if run["trajectory"].get("integrated") is True
+                and run["trajectory"].get(
+                    "integrated_r665_weighted_rate_work_nonnegative"
+                ) is False
             ),
             "integrated_diagnostic_failure_count": sum(
                 1

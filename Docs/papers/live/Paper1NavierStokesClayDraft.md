@@ -93,37 +93,89 @@ uniformly in the cutoff `N`.
 > R415/critical-barrier consumer chain. The theorem does not assert that the
 > R568 producer itself is proved.
 
-The current Clay-eligible max-cut is:
+The current R733--R736 preferred Clay-eligible max-cut is:
 
 ```text
-NEW / NONSTANDARD
-C1  R568 cutoff-uniform signed weighted payment                     OPEN
-C2  physical phase-sensitive critical-production estimate           OPEN
+NEW / NONSTANDARD -- EXACTLY TWO SHARED-WEIGHTED LEAVES
+W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
+W2  positive-margin augmented-critical weighted payment             OPEN
+
+EXACT ALTERNATE COORDINATES / PRODUCER FACTORIZATIONS
+A   R723 cutoff-uniform combined/global commutator payment           OPEN
+D   R730 direct critical-growth <= combined                         OPEN
+B   R726 combined -> literal R406 transport                         OPEN / OPTIONAL
+C   strict-margin physical critical production by R406             OPEN / OPTIONAL
 
 SAME-OBJECT / PHYSICAL
-C3  literal critical coordinates installed on R414                  COMPILER CLOSED
-    exact critical-energy identity                                  CLOSED GIVEN STANDARD CALCULUS
-C4  common-initial-datum same-object compiler                       CLOSED
-    live trajectory -> canonical R34 mode-list/modeListed attachment                               OPEN RECEIPT
-    cutoff-uniform initial critical ceiling                         OPEN
-C5  positive retained viscosity 0 < 2*nu-a                          OPEN
-    optional a<=nu sufficient compiler                              CLOSED / NOT MANDATORY
+C3  literal critical coordinates / critical-energy identity         COMPILER CLOSED
+C4  common-initial-datum cutoff ceiling                             STANDARD SOURCE BOUNDARY
+C5  positive retained viscosity                                    BUILT INTO W2 MARGIN
 
 STANDARD COMPLETION
-C6  scalar FTC + rational integration linearity/order receipts       OPEN
-C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    OPEN
+C6  scalar FTC + rational integration linearity/order receipts       STANDARD SOURCE BOUNDARY
+C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    STANDARD SOURCE BOUNDARY
 ```
 
-The genuinely new nonlinear theorem count is therefore two: C1 and C2.
+R733 identifies R691's coherent endpoint exactly with the canonical old
+mixed-helicity convolution mass
+[
+E_{M,N}(t)=Q_{+-,N}(t).
+]
+This is a same-object theorem, not an estimate.  It also makes the old R241
+shortcut visibly circular here: R241's schematic (Q_{+-}) payment assumes a
+uniform critical (H^{1/2}) barrier, while W1+W2 are precisely intended to
+construct that barrier.
+
+R734 rewrites R730's direct leaf exactly as
+[
+igl[X_N(T)-12Q_{+-,N}(T)igr]
+-igl[X_N(0)-12Q_{+-,N}(0)igr]
++delta_N D_N(T)
+le 12W_N(T),
+qquad delta_N>0.
+]
+The quintic commutator is absent from this preferred D-coordinate.  R684
+identifies the instantaneous (W_N) carrier with viscosity times one
+input-Laplacian coherent mixed work, without an absolute value or output-count
+factor.
+
+R735 then puts both remaining leaves on that same signed carrier:
+[
+oxed{mathrm{W1}:quad W_N(T)+Q_{+-,N}(T)le B(T)}
+]
+uniformly in the cutoff, and
+[
+oxed{mathrm{W2}:quad
+[X_N-12Q_{+-}]_T-[X_N-12Q_{+-}]_0+delta_ND_N(T)
+le12W_N(T).}
+]
+Since (Q_{+-,N}(0)ge0), W1+W2 give
+[
+X_N(T)+delta_ND_N(T)le X_N(0)+12B(T).
+]
+Thus the current preferred analytic theorem count is exactly two, and both
+theorems live on one quartic weighted/input-Laplacian plus coherent-endpoint
+carrier.
+
+The R723/R730 two-leaf cut remains exactly equivalent at the terminal level.
+R726 plus strict-margin R406 C2 remain a sufficient factorization of R730, but
+they are not mandatory independent terminal obligations.  Likewise, R731
+proves W1 is sufficient for the R723 combined payment without splitting the
+signed quantity (W_N+Q_{+-,N}(T)) into separately positive pieces.
+
+The older R568/R572 direct-companion route remains a valid adjacent sufficient
+producer lane, but it is **not definitionally the R723/R691 commutator
+currency**.  R687 only identifies the pair-rate-lifted R568 forcing full with
+the R691 commutator.  The unlifted-to-lifted payment remains open.  The positive
+36ED component-mass theorem is quartic whereas the R723 signed nonlinear work
+is quintic, so it cannot be substituted as a same-object payment.  R729 also
+rules out deriving the old R726 transport from positive physical rates and
+positive coherent self-work alone.
+
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
 `R406 = covariance` equality are **not** part of this terminal cut.  The latter
-is in fact the wrong same-object statement for the live nonseparable
-Cauchy/resolvent R406 carrier.
-
-This distinction is load-bearing. `C_direct` is not the missing object. R572 is
-not a new PDE estimate. R503 is not evidence that R568 has been paid, and an
-optional producer decomposition does not become a separate Clay obligation
-merely because it is mathematically interesting.
+is the wrong same-object statement for the live nonseparable Cauchy/resolvent
+R406 carrier.
 
 ## 2. Literal periodic finite-dimensional carrier
 

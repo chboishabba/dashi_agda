@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'agent/ns-canonical-leaves-20260922'
+      - 'agent/ns-r655-remote-collar-transport'
     paths:
       - 'scripts/ns_r650_quantitative_stress_scan.py'
       - 'scripts/check_ns_r650_quantitative_stress_scan.py'
@@ -17,6 +18,17 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650C1R406DiagonalCouplingRound652Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CoupledForcingSandwichRound653Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650EuclideanCollarRefinementRound656Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarLiveM2PaymentRound663Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
       - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   pull_request:
     paths:
@@ -32,6 +44,68 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650C1R406DiagonalCouplingRound652Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CoupledForcingSandwichRound653Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650EuclideanCollarRefinementRound656Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarLiveM2PaymentRound663Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedWorkRound664Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedKernelRound665Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarExternalResidualFullSquareRound668Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ExternalZeroBranchEliminationRound673Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ExternalFullSquareToCanonicalRowsRound674Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ExternalNetworkToHelicityRowsRound675Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarHelicityTangentCombinationRound676Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650HelicityTangentSelfCollapseRound677Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSingleSelfMismatchRound678Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CombinedRouteReturnsToRateKernelRound679Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateKernelPositiveRateNoGoRound680Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650LiveRateKernelCrossGradientRound682Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateKernelCrossGradientVectorRound683Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateKernelCommutatorEndpointRound685Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CommutatorSpacetimeEndpointRound686Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateLiftedDynamicCancellationRound688Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650RateLiftedInputLaplacianCancellationRound689Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650GlobalMixedEnergyBalanceRound691Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorIncidenceExpansionRound692Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorTriadRegroupingRound693Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorNestedTriadExpansionRound694Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650LiveGlobalCommutatorNestedTriadRound695Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650MaskedCompleteTriadOrbitResidueRound696Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650IntegratedTriadOrbitResidueRound697Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650TriadOrbitSpacetimePaymentRound698Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650IntegratedNestedFourHelicityOrbitRound701Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650NestedFourHelicityCoefficientRound702Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalVectorTransformRound703Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalCoefficientCancellationRound704Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalPairingNormalFormRound705Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650NestedOuterSlotCoefficientFactorRound706Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650UnitNestedOrbitSelfExternalSplitRound708Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SelfOrbitCommutatorCarrierRound713Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfCommutatorOrbitRound714Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfSpectatorFibreTransportRound715Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfCompleteOrbitCollapseRound716Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfOutputPairingCollapseRound717Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfOutputRealityRound718Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SelectedSelfFoldRealityRound719Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
       - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   workflow_dispatch:
 
@@ -63,3 +137,89 @@ jobs:
       - name: Run deterministic R650 diagnostics
         run: |
           python -m pytest -q             scripts/tests/test_ns_r650_quantitative_stress_scan.py             scripts/tests/test_ns_r406_physical_real_eval.py
+
+      - name: Install Agda semantic preflight
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Preflight R655-R688 analytic frontier
+        run: |
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650EuclideanCollarRefinementRound656Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarLiveM2PaymentRound663Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedWorkRound664Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedKernelRound665Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarExternalResidualFullSquareRound668Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalZeroBranchEliminationRound673Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalFullSquareToCanonicalRowsRound674Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalNetworkToHelicityRowsRound675Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarHelicityTangentCombinationRound676Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650HelicityTangentSelfCollapseRound677Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarSingleSelfMismatchRound678Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedRouteReturnsToRateKernelRound679Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateKernelPositiveRateNoGoRound680Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LiveRateKernelCrossGradientRound682Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateKernelCrossGradientVectorRound683Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateKernelCommutatorEndpointRound685Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650C2CommutatorSpacetimeEndpointRound686Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateLiftedDynamicCancellationRound688Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650RateLiftedInputLaplacianCancellationRound689Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalMixedEnergyBalanceRound691Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorIncidenceExpansionRound692Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorTriadRegroupingRound693Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorNestedTriadExpansionRound694Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LiveGlobalCommutatorNestedTriadRound695Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650MaskedCompleteTriadOrbitResidueRound696Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650IntegratedTriadOrbitResidueRound697Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650TriadOrbitSpacetimePaymentRound698Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650IntegratedNestedFourHelicityOrbitRound701Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650NestedFourHelicityCoefficientRound702Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalVectorTransformRound703Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalCoefficientCancellationRound704Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalPairingNormalFormRound705Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650NestedOuterSlotCoefficientFactorRound706Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650UnitNestedOrbitSelfExternalSplitRound708Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelfOrbitCommutatorCarrierRound713Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfCommutatorOrbitRound714Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfSpectatorFibreTransportRound715Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfCompleteOrbitCollapseRound716Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfOutputPairingCollapseRound717Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfOutputRealityRound718Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelectedSelfFoldRealityRound719Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelectedSelfMultiplierFoldRound720Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelectedSelfHelicitySplitRound721Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelfExternalRecombinationRound722Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedPaymentToWeightedWorkRound724Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedCommutatorHomogeneityFrontierRound725Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedToLiteralR406Round726Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CurrentAnalyticCutsetRound728Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedToR406PositiveRateNoGoRound729Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650DirectCombinedCriticalGrowthRound730Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650WeightedEndpointToCombinedPaymentRound731Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650TwoLeafDirectCombinedCutRound732Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650TerminalMixedMassQPlusMinusRound733Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CurrentSharedWeightedWallRound736Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact.agda
