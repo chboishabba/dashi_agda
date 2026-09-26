@@ -268,3 +268,9 @@ import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExact
 
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildDifferentNoGoExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicInvariantClassRankExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectedValuationPaymentExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicDworkReplacementCutsetExact
