@@ -36,17 +36,22 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact w
 
 open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Fin.Base using (Fin)
+import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; _<_ ; z≤n; s≤s)
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as Future
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
+import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 
 ------------------------------------------------------------------------
 -- A reachable node known to live at one exact remaining arity.
@@ -296,6 +301,354 @@ profileLayerBelowQ1StateCount
   exactResidualWidthBelowQ1StateCount
     quotient
     (exactAt profile remaining inRoot)
+
+------------------------------------------------------------------------
+-- Preferred finite-candidate path: arity tracking forbids cross-layer reuse.
+------------------------------------------------------------------------
+
+candidateWidthClassify :
+  ∀ {rootVariables remaining width : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (candidate : Candidate.TransitionTableCandidate root)
+    (witness : ResidualWidthWitness {root = root} remaining width) →
+  Fin width →
+  Fin (Candidate.stateCount candidate)
+candidateWidthClassify candidate witness index =
+  Candidate.candidateSelect
+    candidate
+    (Family.derivation
+      (node
+        (representative witness index)))
+
+candidateWidthClassifyInjective :
+  ∀ {rootVariables remaining width : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {candidate : Candidate.TransitionTableCandidate root}
+    (admission : ArityTerminal.ArityTrackedTerminalAdmission candidate)
+    (witness : ResidualWidthWitness {root = root} remaining width)
+    {left right : Fin width} →
+  candidateWidthClassify candidate witness left
+  ≡
+  candidateWidthClassify candidate witness right →
+  left ≡ right
+candidateWidthClassifyInjective
+    admission
+    witness
+    {left}
+    {right}
+    sameState =
+  residualEqualIndicesEqual witness residualEqual
+  where
+    leftNode :
+      LayerNode remaining
+    leftNode =
+      representative witness left
+
+    rightNode :
+      LayerNode remaining
+    rightNode =
+      representative witness right
+
+    futureEquivalent :
+      DASHI.Core.FutureObservationalRefinement.FutureEquivalent
+        (Future.restrictionActionSystem _)
+        Future.restrictionObservation
+        (node leftNode)
+        (node rightNode)
+    futureEquivalent =
+      ArityTerminal.sameGeneratedStateContainedInFutureEquivalent
+        admission
+        sameState
+
+    sameArity :
+      Family.currentVariables (node leftNode)
+      ≡
+      Family.currentVariables (node rightNode)
+    sameArity =
+      trans
+        (arityExact leftNode)
+        (sym (arityExact rightNode))
+
+    pointwise :
+      (assignment :
+        SAT.Assignment
+          (Family.currentVariables (node leftNode))) →
+      SAT.evaluate
+          (Family.currentFormula (node leftNode))
+          assignment
+      ≡
+      SAT.evaluate
+          (Family.currentFormula (node rightNode))
+          (Future.transportAssignment sameArity assignment)
+    pointwise =
+      Future.futureEquivalentImpliesPointwiseEvaluationEqual
+        sameArity
+        futureEquivalent
+
+    residualEqual :
+      LayerResidualEqual leftNode rightNode
+    residualEqual assignment
+        with arityExact leftNode
+           | arityExact rightNode
+    ... | refl | refl =
+      pointwise assignment
+
+residualWidthBelowArityAdmittedCandidateStateCount :
+  ∀ {rootVariables remaining width : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {candidate : Candidate.TransitionTableCandidate root} →
+  ArityTerminal.ArityTrackedTerminalAdmission candidate →
+  ResidualWidthWitness {root = root} remaining width →
+  width ≤ Candidate.stateCount candidate
+residualWidthBelowArityAdmittedCandidateStateCount admission witness =
+  FinP.injective⇒≤
+    (candidateWidthClassifyInjective admission witness)
+
+------------------------------------------------------------------------
+-- Recursive all-layer width stack.
+--
+-- ResidualWidthStack next total contains one width witness for every layer
+--
+--   next-1, next-2, ..., 0
+--
+-- and its type-level total is the literal sum of those widths.
+------------------------------------------------------------------------
+
+data ResidualWidthStack
+    {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables} :
+    Nat →
+    Nat →
+    Set₁ where
+
+  widthStackEmpty :
+    ResidualWidthStack {root = root} 0 0
+
+  widthStackPush :
+    ∀ {remaining width tailTotal : Nat} →
+    ResidualWidthWitness {root = root} remaining width →
+    ResidualWidthStack {root = root} remaining tailTotal →
+    ResidualWidthStack
+      {root = root}
+      (suc remaining)
+      (width + tailTotal)
+
+------------------------------------------------------------------------
+-- Enumerate every semantic class represented by a width stack.
+------------------------------------------------------------------------
+
+stackNode :
+  ∀ {rootVariables next total : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  ResidualWidthStack {root = root} next total →
+  Fin total →
+  Family.RestrictionNode root
+stackNode widthStackEmpty ()
+stackNode
+    (widthStackPush {width = width} {tailTotal = tailTotal}
+      headWitness tailStack)
+    index
+    with FinBase.splitAt width index
+... | inj₁ headIndex =
+  node (representative headWitness headIndex)
+... | inj₂ tailIndex =
+  stackNode tailStack tailIndex
+
+stackNodeArityBelowNext :
+  ∀ {rootVariables next total : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (stack : ResidualWidthStack {root = root} next total)
+    (index : Fin total) →
+  Family.currentVariables (stackNode stack index)
+  < next
+stackNodeArityBelowNext widthStackEmpty ()
+stackNodeArityBelowNext
+    (widthStackPush
+      {remaining = remaining}
+      {width = width}
+      headWitness
+      tailStack)
+    index
+    with FinBase.splitAt width index
+... | inj₁ headIndex =
+  substRight
+    (arityExact
+      (representative headWitness headIndex))
+    (NatP.n<1+n remaining)
+  where
+    substRight :
+      ∀ {left right bound : Nat} →
+      left ≡ right →
+      right < bound →
+      left < bound
+    substRight refl proof = proof
+... | inj₂ tailIndex =
+  NatP.<-trans
+    (stackNodeArityBelowNext tailStack tailIndex)
+    (NatP.n<1+n remaining)
+
+stackCandidateClassify :
+  ∀ {rootVariables next total : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  (candidate : Candidate.TransitionTableCandidate root) →
+  ResidualWidthStack {root = root} next total →
+  Fin total →
+  Fin (Candidate.stateCount candidate)
+stackCandidateClassify candidate stack index =
+  Candidate.candidateSelect
+    candidate
+    (Family.derivation
+      (stackNode stack index))
+
+------------------------------------------------------------------------
+-- The stack classifier is injective for any arity-tracked admission.
+------------------------------------------------------------------------
+
+stackCandidateClassifyInjective :
+  ∀ {rootVariables next total : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {candidate : Candidate.TransitionTableCandidate root}
+    (admission : ArityTerminal.ArityTrackedTerminalAdmission candidate)
+    (stack : ResidualWidthStack {root = root} next total)
+    {left right : Fin total} →
+  stackCandidateClassify candidate stack left
+  ≡
+  stackCandidateClassify candidate stack right →
+  left ≡ right
+stackCandidateClassifyInjective
+    admission
+    widthStackEmpty
+    {left = ()}
+stackCandidateClassifyInjective
+    {candidate = candidate}
+    admission
+    (widthStackPush
+      {remaining = remaining}
+      {width = width}
+      {tailTotal = tailTotal}
+      headWitness
+      tailStack)
+    {left}
+    {right}
+    sameState
+    with FinBase.splitAt width left
+       | FinBase.splitAt width right
+       | FinP.join-splitAt width tailTotal left
+       | FinP.join-splitAt width tailTotal right
+... | inj₁ leftHead | inj₁ rightHead | leftJoin | rightJoin =
+  trans
+    (sym leftJoin)
+    (trans
+      (congJoinHead
+        (candidateWidthClassifyInjective
+          admission
+          headWitness
+          sameState))
+      rightJoin)
+  where
+    congJoinHead :
+      leftHead ≡ rightHead →
+      FinBase.join width tailTotal (inj₁ leftHead)
+      ≡
+      FinBase.join width tailTotal (inj₁ rightHead)
+    congJoinHead refl = refl
+
+... | inj₂ leftTail | inj₂ rightTail | leftJoin | rightJoin =
+  trans
+    (sym leftJoin)
+    (trans
+      (congJoinTail
+        (stackCandidateClassifyInjective
+          admission
+          tailStack
+          sameState))
+      rightJoin)
+  where
+    congJoinTail :
+      leftTail ≡ rightTail →
+      FinBase.join width tailTotal (inj₂ leftTail)
+      ≡
+      FinBase.join width tailTotal (inj₂ rightTail)
+    congJoinTail refl = refl
+
+... | inj₁ leftHead | inj₂ rightTail | leftJoin | rightJoin =
+  ⊥-elim
+    (NatP.<⇒≱
+      (stackNodeArityBelowNext tailStack rightTail)
+      sameArityReverse)
+  where
+    sameArity :
+      Family.currentVariables
+        (node (representative headWitness leftHead))
+      ≡
+      Family.currentVariables
+        (stackNode tailStack rightTail)
+    sameArity =
+      ArityTerminal.sameSelectedStateImpliesSameArity
+        admission
+        (Family.derivation
+          (node (representative headWitness leftHead)))
+        (Family.derivation
+          (stackNode tailStack rightTail))
+        sameState
+
+    sameArityReverse :
+      remaining
+      ≤
+      Family.currentVariables
+        (stackNode tailStack rightTail)
+    sameArityReverse
+      rewrite arityExact
+        (representative headWitness leftHead)
+            | sameArity =
+      NatP.≤-refl
+
+... | inj₂ leftTail | inj₁ rightHead | leftJoin | rightJoin =
+  ⊥-elim
+    (NatP.<⇒≱
+      (stackNodeArityBelowNext tailStack leftTail)
+      sameArityReverse)
+  where
+    sameArity :
+      Family.currentVariables
+        (stackNode tailStack leftTail)
+      ≡
+      Family.currentVariables
+        (node (representative headWitness rightHead))
+    sameArity =
+      ArityTerminal.sameSelectedStateImpliesSameArity
+        admission
+        (Family.derivation
+          (stackNode tailStack leftTail))
+        (Family.derivation
+          (node (representative headWitness rightHead)))
+        sameState
+
+    sameArityReverse :
+      remaining
+      ≤
+      Family.currentVariables
+        (stackNode tailStack leftTail)
+    sameArityReverse
+      rewrite sameArity
+            | arityExact
+                (representative headWitness rightHead) =
+      NatP.≤-refl
+
+------------------------------------------------------------------------
+-- Literal summed-layer lower bound.
+------------------------------------------------------------------------
+
+layeredResidualWidthSumBelowCandidateStateCount :
+  ∀ {rootVariables next total : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {candidate : Candidate.TransitionTableCandidate root} →
+  ArityTerminal.ArityTrackedTerminalAdmission candidate →
+  ResidualWidthStack {root = root} next total →
+  total ≤ Candidate.stateCount candidate
+layeredResidualWidthSumBelowCandidateStateCount admission stack =
+  FinP.injective⇒≤
+    (stackCandidateClassifyInjective admission stack)
 
 ------------------------------------------------------------------------
 -- Cross-layer reuse boundary.
