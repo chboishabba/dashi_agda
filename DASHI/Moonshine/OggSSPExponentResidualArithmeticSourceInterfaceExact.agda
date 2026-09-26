@@ -160,6 +160,33 @@ recognitionCountClosesAgainstArithmeticResidual prime source recognized =
     (pi0CountPreserved recognized)
     (targetPi0MatchesExpectedResidual prime)
 
+
+------------------------------------------------------------------------
+-- 4b. Strong same-presentation recognition grade.
+--
+-- This is optional and strictly stronger than FullResidualRecognition.
+-- It requires literal two-sided recovery of both target objects and symmetry
+-- labels, not merely orbit/stabilizer recognition.
+------------------------------------------------------------------------
+
+record ResidualPresentationSameObject
+    (prime : ExceptionalResidualPrime)
+    (source : ArithmeticResidualSource prime) : Set₁ where
+  constructor residual-presentation-same-object
+  field
+    functor :
+      Recognition.ActionRecognitionFunctor
+        (action source)
+        (targetAction prime)
+
+    presentationIsomorphism :
+      Recognition.ActionGroupoidPresentationIsomorphism
+        functor
+        (orbits source)
+        (targetOrbits prime)
+
+open ResidualPresentationSameObject public
+
 ------------------------------------------------------------------------
 -- 5. The acquisition wall remains explicit.
 ------------------------------------------------------------------------
@@ -214,6 +241,7 @@ record ExponentResidualArithmeticSourceBoundary : Set where
     sourceRequiresIndependentPi0Receipt : Bool
     fullRecognitionUsesGenericActionFunctor : Bool
     fullRecognitionUsesOrbitStabilizerRecognition : Bool
+    samePresentationRequiresObjectAndSymmetryBijections : Bool
     p2ArithmeticSourceConstructed : Bool
     p3ArithmeticSourceConstructed : Bool
     countAloneConstructsSource : Bool
@@ -223,5 +251,5 @@ canonicalExponentResidualArithmeticSourceBoundary :
 canonicalExponentResidualArithmeticSourceBoundary =
   exponent-residual-arithmetic-source-boundary
     true true true true
-    true true true true
+    true true true true true
     false false false
