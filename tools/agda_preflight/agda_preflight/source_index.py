@@ -31,6 +31,7 @@ class DiagnoseResult:
     diagnostics: List[Diagnostic]
     modules: Tuple[str, ...]
     cache_hit: bool
+    source_hashes: Tuple[Tuple[str, str], ...] = ()
 
     def as_dict(self) -> dict:
         return {
@@ -797,6 +798,10 @@ class SourceIndex:
             ),
             modules=tuple(modules),
             cache_hit=True,
+            source_hashes=tuple(
+                (row["module_name"], row["source_sha256"])
+                for row in rows
+            ),
         )
 
     def find_cached_diagnostic(
@@ -1447,6 +1452,10 @@ class SourceIndex:
             ),
             modules=tuple(sorted(states)),
             cache_hit=False,
+            source_hashes=tuple(
+                (module, states[module].source_hash)
+                for module in sorted(states)
+            ),
         )
 
 
@@ -1511,4 +1520,8 @@ class SourceIndex:
             ),
             modules=tuple(state.module_name for state in states),
             cache_hit=False,
+            source_hashes=tuple(
+                (state.module_name, state.source_hash)
+                for state in states
+            ),
         )
