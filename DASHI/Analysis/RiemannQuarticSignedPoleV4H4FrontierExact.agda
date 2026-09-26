@@ -2272,3 +2272,81 @@ atomicTargetPoleZeroModeRigidityTransportedIntoAgdaKernelHere = false
 atomicTargetPoleZeroModeRigidityInterpretation : String
 atomicTargetPoleZeroModeRigidityInterpretation =
   "Lean source-proves the exact atomic J2-null identity S = pi^4*(-20/243*P - 1/4*O), where P is the pole coordinate, O the physical-origin zero-mode coordinate, and S the quartic target. Thus every finite signed combination that cancels both pole and zero mode necessarily cancels the target, while pole cancellation alone forces O_comb = -(4/pi^4) S_comb. Exact constant-density annihilation is therefore structurally incompatible with retaining the quartic target inside the current atomic four-window J2-null family. The ambient signed far-minus-mu theorem remains open."
+
+
+------------------------------------------------------------------------
+-- FINITE-HIGH ATOMIC ZERO-MODE SIGN
+--
+-- The atomic pole/zero-mode rigidity is not merely an asymptotic t->infinity
+-- statement.  At the exact J2-null endpoint centres and finite high ordinate,
+-- define the pole-cancelled projective-origin determinant using the exact
+-- finite-t atomic pole residuals.
+--
+-- Lean source-proves the exact formula
+--
+--   D_origin(t)
+--     = -(10/9477) *
+--       ( 27*cosh(8*pi/(3t))
+--         + 64*cosh(4*pi/t)
+--         - 10*cosh(8*pi/t) ).
+--
+-- For t>=200, the first two cosh factors are >=1 and the existing high-regime
+-- bound gives cosh(8*pi/t)<=2.  Therefore
+--
+--   D_origin(t) <= -710/9477 < 0.
+--
+-- So the nonzero zero-mode forced by the quartic target has the same negative
+-- sign throughout the actual high regime at the atomic endpoint centres; it
+-- is not an artifact of passing to the high-pole limit.
+--
+-- This sign is a robustness input for a later finite-R transport.  It does
+-- NOT by itself estimate Far - integral Psi*mu, because the scalar subtracts
+-- the mu integral and the discrete far zero source must remain coupled to it.
+------------------------------------------------------------------------
+
+data FiniteHighAtomicOriginCoordinate : Set where
+  finiteAtomicOriginExactFormula :
+    FiniteHighAtomicOriginCoordinate
+  finiteAtomicOriginUniformNegativeMargin :
+    FiniteHighAtomicOriginCoordinate
+  smoothSelectedOriginNegativeTransport :
+    FiniteHighAtomicOriginCoordinate
+  ambientSignedFarMinusMuAfterOriginSign :
+    FiniteHighAtomicOriginCoordinate
+
+finiteHighAtomicOriginStatus :
+  FiniteHighAtomicOriginCoordinate -> V4H4Status
+finiteHighAtomicOriginStatus finiteAtomicOriginExactFormula =
+  leanSourceWrittenDonor
+finiteHighAtomicOriginStatus finiteAtomicOriginUniformNegativeMargin =
+  leanSourceWrittenDonor
+finiteHighAtomicOriginStatus smoothSelectedOriginNegativeTransport =
+  openAssembly
+finiteHighAtomicOriginStatus ambientSignedFarMinusMuAfterOriginSign =
+  openAnalyticObstruction
+
+finiteAtomicOriginNegativeIsSourceWritten :
+  finiteHighAtomicOriginStatus finiteAtomicOriginUniformNegativeMargin
+    ≡ leanSourceWrittenDonor
+finiteAtomicOriginNegativeIsSourceWritten = refl
+
+smoothSelectedOriginTransportStillOpen :
+  finiteHighAtomicOriginStatus smoothSelectedOriginNegativeTransport
+    ≡ openAssembly
+smoothSelectedOriginTransportStillOpen = refl
+
+ambientSignedFarMinusMuStillOpenAfterFiniteOriginSign :
+  finiteHighAtomicOriginStatus ambientSignedFarMinusMuAfterOriginSign
+    ≡ openAnalyticObstruction
+ambientSignedFarMinusMuStillOpenAfterFiniteOriginSign = refl
+
+finiteHighAtomicOriginLeanDonorHead : String
+finiteHighAtomicOriginLeanDonorHead =
+  "3a828b800b1303cfe59fe9cf4ebaabcd4b0f33b3"
+
+finiteHighAtomicOriginTransportedIntoAgdaKernelHere : Bool
+finiteHighAtomicOriginTransportedIntoAgdaKernelHere = false
+
+finiteHighAtomicOriginInterpretation : String
+finiteHighAtomicOriginInterpretation =
+  "Lean source-proves an exact finite-high formula for the pole-cancelled atomic physical-origin determinant and bounds it by -710/9477 for every t>=200. Thus the negative zero-mode forced by the quartic target persists throughout the actual high regime at the atomic endpoint centres. A later finite-radius robustness transport may attach this sign to the selected smooth witness, but this does not separately pay the signed far-minus-mu theorem: because the final scalar is Far - integral Psi*mu, discrete and smooth density contributions must remain coupled."
