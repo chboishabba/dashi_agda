@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import hashlib
 import io
 import json
+import sqlite3
 from pathlib import Path
 
 from agda_preflight.service import DashiAgdaService, serve_streams
@@ -200,3 +202,117 @@ def test_jsonl_service_protocol_roundtrip(tmp_path):
     assert all(item["ok"] for item in responses)
     assert responses[1]["result"]["status"] == "clean"
     assert responses[2]["result"]["status"] == "shutdown"
+
+
+
+def _write_semantic_catalog(path, module_name, checked_hash):
+    connection = sqlite3.connect(path)
+    connection.execute(
+        """
+        CREATE TABLE module_heads (
+            module_name TEXT PRIMARY KEY,
+            object_hash BLOB NOT NULL,
+            declaration_count INTEGER NOT NULL,
+            term_count INTEGER NOT NULL,
+            checked_source_sha256 TEXT,
+            updated_at TEXT NOT NULL
+        )
+        """
+    )
+    connection.execute(
+        """
+        INSERT INTO module_heads(
+            module_name, object_hash, declaration_count, term_count,
+            checked_source_sha256, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            module_name,
+            bytes.fromhex("abcd"),
+            1,
+            2,
+            checked_hash,
+            "2026-09-26T00:00:00Z",
+        ),
+    )
+    connection.commit()
+    connection.close()
+
+
+def test_service_semantic_status_transitions_fresh_to_stale(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Service.Semantic",
+        "x : Set\nx = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    semantic = tmp_path / "agda2lean.sqlite"
+    checked_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+    _write_semantic_catalog(
+        semantic,
+        "Service.Semantic",
+        checked_hash,
+    )
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=2,
+        semantic_catalog=semantic,
+    ) as service:
+        # Populate the source index once.
+        service.diagnose(str(path))
+
+        fresh = service.semantic_status(str(path))
+        assert fresh["fresh"] == 1
+        assert fresh["stale"] == 0
+        assert fresh["snapshots"]["Service.Semantic"]["freshness"] == "fresh"
+
+        path.write_text(
+            "module Service.Semantic where\nx : Set\nx = (λ A → A) Set\n",
+            encoding="utf-8",
+        )
+
+        stale = service.semantic_status(str(path))
+        assert stale["fresh"] == 0
+        assert stale["stale"] == 1
+        assert stale["snapshots"]["Service.Semantic"]["freshness"] == "stale"
+
+
+def test_service_next_error_includes_module_semantic_freshness(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Service.SemanticError",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    semantic = tmp_path / "agda2lean.sqlite"
+    checked_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+    _write_semantic_catalog(
+        semantic,
+        "Service.SemanticError",
+        checked_hash,
+    )
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=2,
+        semantic_catalog=semantic,
+    ) as service:
+        result = service.next_error(
+            str(path),
+            require_fix=True,
+        )
+
+    assert result["status"] == "diagnostic"
+    snapshot = result["semantic"]["Service.SemanticError"]
+    assert snapshot["freshness"] == "fresh"
+    assert snapshot["checked_source_sha256"] == checked_hash
