@@ -675,6 +675,12 @@ def extended_diagnostics(checker, s, D):
 
         temporary.append(module)
         for dependency in sorted(set(summary.imports.values())):
+            dependency_interface = checker.interface_for_module(dependency)
+            if dependency_interface is not None:
+                visit_import_cone(dependency_interface)
+                if cycle_found:
+                    break
+                continue
             dependency_path = checker.module_path(dependency)
             if not dependency_path.exists():
                 continue
