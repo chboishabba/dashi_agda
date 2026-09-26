@@ -2243,7 +2243,7 @@ atomicTargetPoleZeroModeRigidityStatus finiteCombinationPoleOriginCancelKillsTar
 atomicTargetPoleZeroModeRigidityStatus poleCancelForcesOriginTargetRelation =
   leanSourceWrittenDonor
 atomicTargetPoleZeroModeRigidityStatus exactZeroModeAnnihilationWithinCurrentFamily =
-  ruledOutByExactIdentity
+  leanSourceWrittenDonor
 atomicTargetPoleZeroModeRigidityStatus ambientSignedFarMinusMuAfterRigidity =
   openAnalyticObstruction
 
@@ -2252,10 +2252,10 @@ atomicTargetPoleZeroModeRigidityIsPaid :
     ≡ leanSourceWrittenDonor
 atomicTargetPoleZeroModeRigidityIsPaid = refl
 
-atomicExactZeroModeAnnihilationIsRuledOut :
+atomicExactZeroModeAnnihilationNoGoIsSourceWritten :
   atomicTargetPoleZeroModeRigidityStatus exactZeroModeAnnihilationWithinCurrentFamily
-    ≡ ruledOutByExactIdentity
-atomicExactZeroModeAnnihilationIsRuledOut = refl
+    ≡ leanSourceWrittenDonor
+atomicExactZeroModeAnnihilationNoGoIsSourceWritten = refl
 
 ambientSignedFarMinusMuStillOpenAfterAtomicRigidity :
   atomicTargetPoleZeroModeRigidityStatus ambientSignedFarMinusMuAfterRigidity
