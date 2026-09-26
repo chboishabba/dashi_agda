@@ -23,6 +23,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversal
 -- not from Kleene specialization/diagonalization itself.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -200,7 +201,7 @@ anyResidualWidthOccursInEchoFixedPointImage
 -- reused as the actual SAT-diagonal primitive body.
 ------------------------------------------------------------------------
 
-trueNotFalse : Agda.Builtin.Bool.true ≡ Agda.Builtin.Bool.false → ⊥
+trueNotFalse : true ≡ false → ⊥
 trueNotFalse ()
 
 literalPassthroughAtKnownSatisfiableImpossible :
@@ -278,7 +279,7 @@ literalPassthroughAtKnownSatisfiableImpossible
         (Direct.candidate anchored)
         quotedFormula
       ≡
-      Agda.Builtin.Bool.false
+      false
     candidateRejectsQuoted =
       Diagonal.rejectsQuotedProgramIfBodySatisfiable
         body
@@ -300,9 +301,9 @@ literalPassthroughAtKnownSatisfiableImpossible
         quotedIsKnownSat
 
     contradiction :
-      Agda.Builtin.Bool.true
+      true
       ≡
-      Agda.Builtin.Bool.false
+      false
     contradiction =
       trans
         (sym
