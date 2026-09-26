@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 
 import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as Order
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
@@ -77,13 +77,11 @@ inverseThresholdAtLeastOneFromUnitCap
       ≤
       inverseThreshold * gammaSquare
     scaled =
-      subst
-        (λ upper → 1ℚ * gammaSquare ≤ upper)
+      subst₂
+        _≤_
+        (sym (ℚP.*-identityˡ gammaSquare))
         (sym inverseRepresentation)
-        (subst
-          (λ right → gammaSquare ≤ right)
-          (sym (ℚP.*-identityˡ 1ℚ))
-          squareBelowOne)
+        squareBelowOne
 
     instance gammaSquarePos : Positive gammaSquare
     gammaSquarePos = gammaSquarePositive
