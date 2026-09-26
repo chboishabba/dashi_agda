@@ -5,15 +5,17 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 -- ROUND650 / FINAL PERIODIC TWO-INEQUALITY MAX-CUT
 --
 -- After R639--R649, every representation/algebra step around the periodic
--- critical argument has a typed compiler.  After the R723-R728 recut, the
--- live branch is represented by exactly three proof-bearing analytic
--- coordinates:
+-- critical argument has a typed compiler.  R728 exposed a three-coordinate
+-- R406 factorization, but R730-R732 Pareto-compress B+C into one direct
+-- critical-growth-to-combined theorem.  The live terminal cut is therefore
+-- exactly two proof-bearing analytic leaves:
 --
---   C1  live cutoff-uniform R723 combined/global signed-commutator payment,
---       together with the explicit R726 transport onto literal R406;
+--   A   live cutoff-uniform R723 combined/global signed-commutator payment;
 --
---   C2  live physical R98 packet strict-surplus payment by literal R406,
---       with a positive retained margin delta.
+--   D   R730 direct strict critical-growth-to-combined payment.
+--
+-- The older B=R726 transport and C=strict-margin R406 production remain a
+-- sufficient factorization of D, not mandatory terminal leaves.
 --
 -- R645 compiles the positive C2 margin into retained viscosity, so C5 is not an
 -- independent theorem.  C4/C6/C7 remain standard source instantiations and are
@@ -105,6 +107,9 @@ import DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact as 
 import DASHI.Physics.Closure.NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exact as R727
 import DASHI.Physics.Closure.NSTriadKNR650CurrentAnalyticCutsetRound728Exact as R728
 import DASHI.Physics.Closure.NSTriadKNR650CombinedToR406PositiveRateNoGoRound729Exact as R729
+import DASHI.Physics.Closure.NSTriadKNR650DirectCombinedCriticalGrowthRound730Exact as R730
+import DASHI.Physics.Closure.NSTriadKNR650WeightedEndpointToCombinedPaymentRound731Exact as R731
+import DASHI.Physics.Closure.NSTriadKNR650TwoLeafDirectCombinedCutRound732Exact as R732
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -172,6 +177,41 @@ round650CurrentStrictMarginCriticalProductionClosed =
 round650CurrentThreeCoordinatesCompileToCriticalBarrier : Bool
 round650CurrentThreeCoordinatesCompileToCriticalBarrier =
   R728.round728ThreeCoordinatesCompileToCriticalBarrier
+
+round650R728ThreeCoordinateFactorizationStillParetoMinimal : Bool
+round650R728ThreeCoordinateFactorizationStillParetoMinimal = false
+
+round650CurrentParetoCutExactlyTwoLeaves : Bool
+round650CurrentParetoCutExactlyTwoLeaves =
+  R732.round732ExactlyTwoParetoAnalyticLeaves
+
+round650CurrentParetoCombinedGlobalPaymentClosed : Bool
+round650CurrentParetoCombinedGlobalPaymentClosed =
+  R732.round732CombinedGlobalPaymentClosed
+
+round650CurrentParetoDirectCriticalGrowthClosed : Bool
+round650CurrentParetoDirectCriticalGrowthClosed =
+  R732.round732DirectCriticalGrowthToCombinedClosed
+
+round650CurrentParetoTwoLeavesBuildCriticalBarrier : Bool
+round650CurrentParetoTwoLeavesBuildCriticalBarrier =
+  R732.round732TwoLeavesBuildCriticalBarrier
+
+round650R726MandatoryAfterDirectCombinedRecut : Bool
+round650R726MandatoryAfterDirectCombinedRecut =
+  R732.round732R726MandatoryIndependentLeaf
+
+round650StrictMarginC2MandatoryAfterDirectCombinedRecut : Bool
+round650StrictMarginC2MandatoryAfterDirectCombinedRecut =
+  R732.round732StrictMarginC2MandatoryIndependentLeaf
+
+round650R726PlusC2RemainSufficientFactorizationOfDirectLeaf : Bool
+round650R726PlusC2RemainSufficientFactorizationOfDirectLeaf =
+  R732.round732R726PlusC2RemainSufficientProducerFactorization
+
+round650WeightedTerminalProducerForCombinedPaymentAvailable : Bool
+round650WeightedTerminalProducerForCombinedPaymentAvailable =
+  R732.round732WeightedTerminalProducerForAAvailable
 
 round650PositiveRatesAloneCloseCombinedToR406 : Bool
 round650PositiveRatesAloneCloseCombinedToR406 =
