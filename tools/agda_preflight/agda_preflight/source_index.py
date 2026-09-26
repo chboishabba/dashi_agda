@@ -23,7 +23,7 @@ from .interfaces import (
 )
 
 
-SCHEMA_VERSION = "4"
+SCHEMA_VERSION = "5"
 
 
 @dataclass(frozen=True)
@@ -119,6 +119,76 @@ class SourceIndex:
             "database": str(self.path),
         }
 
+    def record_promotion(self, receipt: dict) -> int:
+        payload = json.dumps(
+            receipt,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        cursor = self.connection.execute(
+            """
+            INSERT INTO promotion_receipts(
+                created_ns,
+                module_name,
+                target_path,
+                source_sha256,
+                status,
+                promoter_returncode,
+                semantic_freshness,
+                receipt_json
+            )
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                time.time_ns(),
+                receipt["module_name"],
+                receipt["target_path"],
+                receipt["source_sha256"],
+                receipt["status"],
+                receipt.get("promoter_returncode"),
+                receipt.get("semantic_freshness", "unknown"),
+                payload,
+            ),
+        )
+        self.connection.commit()
+        return int(cursor.lastrowid)
+
+    def promotion_history(
+        self,
+        *,
+        module_name: Optional[str] = None,
+        limit: int = 20,
+    ) -> List[dict]:
+        if limit < 1:
+            raise ValueError("promotion history limit must be positive")
+        if module_name is None:
+            rows = self.connection.execute(
+                """
+                SELECT receipt_id, receipt_json
+                FROM promotion_receipts
+                ORDER BY receipt_id DESC
+                LIMIT ?
+                """,
+                (limit,),
+            ).fetchall()
+        else:
+            rows = self.connection.execute(
+                """
+                SELECT receipt_id, receipt_json
+                FROM promotion_receipts
+                WHERE module_name = ?
+                ORDER BY receipt_id DESC
+                LIMIT ?
+                """,
+                (module_name, limit),
+            ).fetchall()
+        result = []
+        for row in rows:
+            payload = json.loads(row["receipt_json"])
+            payload["receipt_id"] = int(row["receipt_id"])
+            result.append(payload)
+        return result
+
     def close(self) -> None:
         self.connection.close()
 
@@ -172,6 +242,21 @@ class SourceIndex:
 
             CREATE INDEX IF NOT EXISTS imports_by_module
                 ON imports(imported_module);
+
+            CREATE TABLE IF NOT EXISTS promotion_receipts (
+                receipt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_ns INTEGER NOT NULL,
+                module_name TEXT NOT NULL,
+                target_path TEXT NOT NULL,
+                source_sha256 TEXT NOT NULL,
+                status TEXT NOT NULL,
+                promoter_returncode INTEGER,
+                semantic_freshness TEXT NOT NULL,
+                receipt_json TEXT NOT NULL
+            );
+
+            CREATE INDEX IF NOT EXISTS promotion_receipts_by_module
+                ON promotion_receipts(module_name, receipt_id DESC);
             """
         )
         self.connection.execute(
@@ -246,6 +331,12 @@ class SourceIndex:
                     "ALTER TABLE modules ADD COLUMN "
                     "top_fixable_diagnostic_json TEXT NOT NULL DEFAULT ''"
                 )
+            version = "4"
+
+        if version == "4":
+            # promotion_receipts is created idempotently above; the version
+            # bump records that durable semantic-promotion receipts are now
+            # part of the source-index contract.
             self.connection.execute(
                 "UPDATE meta SET value = ? WHERE key = 'schema_version'",
                 (SCHEMA_VERSION,),
