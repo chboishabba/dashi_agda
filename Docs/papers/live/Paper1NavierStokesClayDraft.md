@@ -93,60 +93,84 @@ uniformly in the cutoff `N`.
 > R415/critical-barrier consumer chain. The theorem does not assert that the
 > R568 producer itself is proved.
 
-The current R730--R732 Clay-eligible Pareto max-cut is:
+The current R733--R736 preferred Clay-eligible max-cut is:
 
 ```text
-NEW / NONSTANDARD -- EXACTLY TWO PROOF-BEARING LEAVES
-A   R723 cutoff-uniform combined/global signed-commutator payment    OPEN
-D   direct positive-margin critical growth <= combined              OPEN
+NEW / NONSTANDARD -- EXACTLY TWO SHARED-WEIGHTED LEAVES
+W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
+W2  positive-margin augmented-critical weighted payment             OPEN
 
-SUFFICIENT FACTORIZATION OF D -- NOT MANDATORY TERMINAL LEAVES
-B   R726 combined/global commutator -> literal R406 transport        OPEN
-C   strict-margin physical critical-production estimate by R406     OPEN
+EXACT ALTERNATE COORDINATES / PRODUCER FACTORIZATIONS
+A   R723 cutoff-uniform combined/global commutator payment           OPEN
+D   R730 direct critical-growth <= combined                         OPEN
+B   R726 combined -> literal R406 transport                         OPEN / OPTIONAL
+C   strict-margin physical critical production by R406             OPEN / OPTIONAL
 
 SAME-OBJECT / PHYSICAL
 C3  literal critical coordinates / critical-energy identity         COMPILER CLOSED
 C4  common-initial-datum cutoff ceiling                             STANDARD SOURCE BOUNDARY
-C5  positive retained viscosity                                    BUILT INTO D'S POSITIVE MARGIN
+C5  positive retained viscosity                                    BUILT INTO W2 MARGIN
 
 STANDARD COMPLETION
 C6  scalar FTC + rational integration linearity/order receipts       STANDARD SOURCE BOUNDARY
 C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    STANDARD SOURCE BOUNDARY
 ```
 
-R730 observes that R659 turns strict-margin C2 into
+R733 identifies R691's coherent endpoint exactly with the canonical old
+mixed-helicity convolution mass
 [
-X_N(T)-X_N(0)+\delta_N D_N(T)\le R406_N(T),
+E_{M,N}(t)=Q_{+-,N}(t).
 ]
-so composing this with R726 gives the single direct theorem
-[
-X_N(T)-X_N(0)+\delta_N D_N(T)
-\le \mathrm{IntegratedCombined}_N(T),
-\qquad \delta_N>0.
-]
-Together with R723's cutoff-uniform combined payment this yields the critical
-barrier immediately.  Therefore B and C remain a sufficient producer
-factorization of D, but they are no longer independent terminal obligations.
+This is a same-object theorem, not an estimate.  It also makes the old R241
+shortcut visibly circular here: R241's schematic (Q_{+-}) payment assumes a
+uniform critical (H^{1/2}) barrier, while W1+W2 are precisely intended to
+construct that barrier.
 
-R731 also gives A an exact alternative producer route:
+R734 rewrites R730's direct leaf exactly as
 [
-\mathcal C_N(T)
-\le \mathrm{Weighted}_N(T)+E_{M,N}(T),
+igl[X_N(T)-12Q_{+-,N}(T)igr]
+-igl[X_N(0)-12Q_{+-,N}(0)igr]
++delta_N D_N(T)
+le 12W_N(T),
+qquad delta_N>0.
 ]
-so a cutoff-uniform global weighted-work payment plus a terminal coherent
-mixed-mass ceiling constructs the R723 combined payment.  This exposes the
-remaining endpoint difficulty honestly: the terminal mixed mass is a coherent
-fibre sum and is not automatically paid by the existing positive sum-of-cell
-mass theorem.
+The quintic commutator is absent from this preferred D-coordinate.  R684
+identifies the instantaneous (W_N) carrier with viscosity times one
+input-Laplacian coherent mixed work, without an absolute value or output-count
+factor.
+
+R735 then puts both remaining leaves on that same signed carrier:
+[
+oxed{mathrm{W1}:quad W_N(T)+Q_{+-,N}(T)le B(T)}
+]
+uniformly in the cutoff, and
+[
+oxed{mathrm{W2}:quad
+[X_N-12Q_{+-}]_T-[X_N-12Q_{+-}]_0+delta_ND_N(T)
+le12W_N(T).}
+]
+Since (Q_{+-,N}(0)ge0), W1+W2 give
+[
+X_N(T)+delta_ND_N(T)le X_N(0)+12B(T).
+]
+Thus the current preferred analytic theorem count is exactly two, and both
+theorems live on one quartic weighted/input-Laplacian plus coherent-endpoint
+carrier.
+
+The R723/R730 two-leaf cut remains exactly equivalent at the terminal level.
+R726 plus strict-margin R406 C2 remain a sufficient factorization of R730, but
+they are not mandatory independent terminal obligations.  Likewise, R731
+proves W1 is sufficient for the R723 combined payment without splitting the
+signed quantity (W_N+Q_{+-,N}(T)) into separately positive pieces.
 
 The older R568/R572 direct-companion route remains a valid adjacent sufficient
 producer lane, but it is **not definitionally the R723/R691 commutator
 currency**.  R687 only identifies the pair-rate-lifted R568 forcing full with
-the R691 commutator.  The unlifted-to-lifted payment remains open.  Likewise,
-the positive 36ED component-mass theorem is quartic whereas the R723 signed
-nonlinear work is quintic, so it cannot be substituted as a same-object
-payment.  R729 additionally rules out deriving the old R726 transport from
-positive physical rates and positive coherent self-work alone.
+the R691 commutator.  The unlifted-to-lifted payment remains open.  The positive
+36ED component-mass theorem is quartic whereas the R723 signed nonlinear work
+is quintic, so it cannot be substituted as a same-object payment.  R729 also
+rules out deriving the old R726 transport from positive physical rates and
+positive coherent self-work alone.
 
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
 `R406 = covariance` equality are **not** part of this terminal cut.  The latter
