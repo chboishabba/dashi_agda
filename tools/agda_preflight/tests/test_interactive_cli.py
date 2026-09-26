@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 from pathlib import Path
@@ -130,6 +131,86 @@ def test_diagnose_can_surface_last_known_semantic_catalog(tmp_path, capsys):
     assert snapshot["freshness"] == "unknown"
     assert payload["profile"]["counts"]["semantic_snapshot_hits"] == 1
 
+
+
+def test_semantic_catalog_classifies_fresh_and_stale_source_hashes(
+    tmp_path,
+    capsys,
+):
+    top = write_module(
+        tmp_path,
+        "Semantic.Checked",
+        "x : Set\nx = Set\n",
+    )
+    source_index = tmp_path / ".cache" / "source-index.sqlite3"
+    semantic = tmp_path / "agda2lean-v3.sqlite"
+    checked_hash = hashlib.sha256(top.read_bytes()).hexdigest()
+
+    connection = sqlite3.connect(semantic)
+    connection.execute(
+        """
+        CREATE TABLE module_heads (
+            module_name TEXT PRIMARY KEY,
+            object_hash BLOB NOT NULL,
+            declaration_count INTEGER NOT NULL,
+            term_count INTEGER NOT NULL,
+            checked_source_sha256 TEXT,
+            updated_at TEXT NOT NULL
+        )
+        """
+    )
+    connection.execute(
+        """
+        INSERT INTO module_heads(
+            module_name, object_hash, declaration_count, term_count,
+            checked_source_sha256, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            "Semantic.Checked",
+            bytes.fromhex("cafe"),
+            2,
+            4,
+            checked_hash,
+            "2026-09-26T00:00:00Z",
+        ),
+    )
+    connection.commit()
+    connection.close()
+
+    argv = [
+        "diagnose",
+        str(top),
+        "--root",
+        str(tmp_path),
+        "--index",
+        str(source_index),
+        "--semantic-catalog",
+        str(semantic),
+        "--json",
+    ]
+
+    assert main(argv) == 0
+    fresh = json.loads(capsys.readouterr().out)
+    snapshot = fresh["semantic"]["Semantic.Checked"]
+    assert snapshot["freshness"] == "fresh"
+    assert snapshot["checked_source_sha256"] == checked_hash
+    assert snapshot["current_source_sha256"] == checked_hash
+    assert fresh["profile"]["counts"]["semantic_snapshot_fresh"] == 1
+    assert fresh["profile"]["counts"].get("semantic_snapshot_stale", 0) == 0
+
+    top.write_text(
+        "module Semantic.Checked where\nx : Set\nx = (λ A → A) Set\n",
+        encoding="utf-8",
+    )
+
+    assert main(argv) == 0
+    stale = json.loads(capsys.readouterr().out)
+    snapshot = stale["semantic"]["Semantic.Checked"]
+    assert snapshot["freshness"] == "stale"
+    assert snapshot["checked_source_sha256"] == checked_hash
+    assert snapshot["current_source_sha256"] != checked_hash
+    assert stale["profile"]["counts"]["semantic_snapshot_stale"] == 1
 
 
 def test_apply_fix_requires_likely_opt_in_and_rechecks(tmp_path, capsys):
