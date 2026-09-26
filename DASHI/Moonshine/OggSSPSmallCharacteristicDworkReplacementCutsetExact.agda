@@ -38,7 +38,6 @@ import DASHI.Algebra.RamifiedLocalValuationSharpnessExact as Ramified
 import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as Legendre
 import DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact as Hensel
 import DASHI.Moonshine.DuncanSwisherDworkPublishedCoefficientFamilyExact as Coeff
-import DASHI.Moonshine.DuncanSwisherDworkPublishedFirstPoleSharpnessExact as Sharp
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectedValuationPaymentExact as Payment
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
