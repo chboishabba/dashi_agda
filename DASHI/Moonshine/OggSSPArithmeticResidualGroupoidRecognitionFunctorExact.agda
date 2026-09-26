@@ -21,12 +21,15 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym;
 
 import DASHI.Interop.SourceAttributionShapePolicyExact as AttributionPolicy
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Generic
+import DASHI.Core.ActionOrbitRecognitionFunctorExact as RecognitionCore
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Symmetry
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Fricke
 import DASHI.Moonshine.P11MarkedFrobeniusResidualReceiptExact as P11Residual
+import DASHI.Moonshine.OggSSPExponentResidualVsSupersingularOrbitSeparationExact as Separation
+import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 
 recognitionFunctorClaimOrigin : Source.ClaimOrigin
 recognitionFunctorClaimOrigin = Source.repositoryNewExtension
@@ -36,6 +39,18 @@ thisModuleAttributionShape :
 thisModuleAttributionShape =
   AttributionPolicy.requiredAttributionShape
     AttributionPolicy.internalDerivedTheorem
+
+
+genericRecognitionCoreBoundary :
+  RecognitionCore.ActionOrbitRecognitionBoundary
+genericRecognitionCoreBoundary =
+  RecognitionCore.canonicalActionOrbitRecognitionBoundary
+
+data ActionIntertwiningAloneCreatesFullRecognitionFunctor : Set where
+
+actionIntertwiningAloneDoesNotCreateFullRecognitionFunctor :
+  ActionIntertwiningAloneCreatesFullRecognitionFunctor → ⊥
+actionIntertwiningAloneDoesNotCreateFullRecognitionFunctor ()
 
 ------------------------------------------------------------------------
 -- 1. Generic action-groupoid recognition functor.
@@ -165,6 +180,28 @@ p3ArithmeticStabilizerRecognitionStillOpen :
   P3ArithmeticStabilizerProfileRecognized → ⊥
 p3ArithmeticStabilizerRecognitionStillOpen ()
 
+
+------------------------------------------------------------------------
+-- 3b. Supersingular Frobenius orbit spectrum is NOT the missing p=3
+-- exponent-residual source groupoid.
+--
+-- The existing arithmetic normal form at p=3 has one connected component;
+-- the monstrous-exponent residual has two.  A pi0-preserving recognition
+-- cannot identify these source notions.
+------------------------------------------------------------------------
+
+p3SupersingularFrobeniusPi0IsOne :
+  Separation.supersingularPi0Count Matrix.prime3 ≡ 1
+p3SupersingularFrobeniusPi0IsOne =
+  Separation.p3SupersingularPi0IsOne
+
+p3SupersingularFrobeniusCannotSupplyResidualPi0 :
+  Separation.supersingularPi0Count Matrix.prime3
+  ≡ Exponent369.p3ExceptionalResidual
+  → ⊥
+p3SupersingularFrobeniusCannotSupplyResidualPi0 =
+  Separation.p3SupersingularPi0IsNotExponentResidual
+
 ------------------------------------------------------------------------
 -- 4. p=2 target discriminator.
 --
@@ -286,6 +323,7 @@ frickeInvolutionDoesNotForceGaugeQuotient ()
 data SmallCharacteristicRecognitionResidual : Set where
   missingArithmeticSourceGroupoidP3 : SmallCharacteristicRecognitionResidual
   missingP3StabilizerProfileComparison : SmallCharacteristicRecognitionResidual
+  supersingularFrobeniusIsNotExponentResidualSource : SmallCharacteristicRecognitionResidual
   missingArithmeticSourceGroupoidP2 : SmallCharacteristicRecognitionResidual
   missingP2RetainedOrientationActionIntertwiner : SmallCharacteristicRecognitionResidual
   missingP2OrbitStabilizerPreservation : SmallCharacteristicRecognitionResidual
@@ -294,6 +332,7 @@ record SmallCharacteristicRecognitionFunctorBoundary : Set where
   constructor small-characteristic-recognition-functor-boundary
   field
     genericActionGroupoidFunctorContractOwned : Bool
+    strongerGenericRecognitionCoreReused : Bool
     actionIntertwiningRequired : Bool
     orbitPreservationRequired : Bool
     stabilizerPreservationAndReflectionRequired : Bool
@@ -302,6 +341,7 @@ record SmallCharacteristicRecognitionFunctorBoundary : Set where
 
     p3TargetPassesPi0Gate : Bool
     p3TargetStabilizerProfileExplicit : Bool
+    p3SupersingularFrobeniusSourceRuledOutByPi0 : Bool
     p3ArithmeticRecognitionConstructed : Bool
 
     p2FlipTargetPi0 : Nat
@@ -321,9 +361,9 @@ canonicalSmallCharacteristicRecognitionFunctorBoundary :
   SmallCharacteristicRecognitionFunctorBoundary
 canonicalSmallCharacteristicRecognitionFunctorBoundary =
   small-characteristic-recognition-functor-boundary
-    true true true true
+    true true true true true
     true true
-    true true false
+    true true true false
     5 true
     10 true false true
     true true false
