@@ -28,6 +28,8 @@ open import Data.Maybe.Base using (just)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Finite
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 
 ------------------------------------------------------------------------
@@ -102,7 +104,7 @@ echoFixedPointRestrictionRoot formula =
 
 echoFixedPointRestrictionRootRoundTrip :
   (formula : Cook.BooleanFormula) →
-  DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.indexedToCook
+  Bridge.indexedToCook
     (Family.cookIndexedRestrictionRoot formula)
   ≡
   formula
@@ -110,28 +112,72 @@ echoFixedPointRestrictionRootRoundTrip =
   Family.cookRestrictionRootRoundTrip
 
 ------------------------------------------------------------------------
--- Property firewall.
---
--- Any property claimed solely from "is output by a finite self-specializing
--- fixed-point program" must, for this generic calculus, tolerate every Cook
--- formula.  The fixed-point syntax itself cannot establish a small-width
--- theorem.
+-- Explicit image receipt for the one fixed-point program.
 ------------------------------------------------------------------------
 
-SelfSpecializingOutputProperty :
-  (Cook.BooleanFormula → Set) →
-  Set
-SelfSpecializingOutputProperty Property =
-  (formula : Cook.BooleanFormula) →
-  Property formula
+record EchoFixedPointImage
+    (formula : Cook.BooleanFormula) : Set where
+  constructor echo-fixed-point-image
+  field
+    dynamicInput :
+      Cook.BooleanFormula
 
-genericFixedPointImagePropertyIsUniversal :
-  (Property : Cook.BooleanFormula → Set) →
-  ((input : Cook.BooleanFormula) →
-    Property input) →
-  SelfSpecializingOutputProperty Property
-genericFixedPointImagePropertyIsUniversal Property property =
-  property
+    execution :
+      Finite.run1
+        echoFormulaSemantics
+        echoFixedPointProgram
+        dynamicInput
+      ≡
+      just formula
+
+open EchoFixedPointImage public
+
+everyFormulaIsInEchoFixedPointImage :
+  (formula : Cook.BooleanFormula) →
+  EchoFixedPointImage formula
+everyFormulaIsInEchoFixedPointImage formula =
+  echo-fixed-point-image
+    formula
+    refl
+
+------------------------------------------------------------------------
+-- Width transport is literal: self-specialization does not shrink the Shannon
+-- residual family because the fixed-point output is the payload formula itself.
+------------------------------------------------------------------------
+
+record EchoFixedPointResidualWidth
+    (remaining width : Agda.Builtin.Nat.Nat) : Set₁ where
+  constructor echo-fixed-point-residual-width
+  field
+    formula :
+      Cook.BooleanFormula
+
+    image :
+      EchoFixedPointImage formula
+
+    widthWitness :
+      Width.ResidualWidthWitness
+        {root = Family.cookIndexedRestrictionRoot formula}
+        remaining
+        width
+
+open EchoFixedPointResidualWidth public
+
+anyResidualWidthOccursInEchoFixedPointImage :
+  ∀ {remaining width}
+    (formula : Cook.BooleanFormula) →
+  Width.ResidualWidthWitness
+    {root = Family.cookIndexedRestrictionRoot formula}
+    remaining
+    width →
+  EchoFixedPointResidualWidth remaining width
+anyResidualWidthOccursInEchoFixedPointImage
+    formula
+    witness =
+  echo-fixed-point-residual-width
+    formula
+    (everyFormulaIsInEchoFixedPointImage formula)
+    witness
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
