@@ -39,10 +39,19 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * p=2 a specific enriched moduli problem is defined from orientation
 --     marking x loop-reversal-quotiented inertia, with exactly ten sectors.
 --
+-- ANALYTIC CORRECTION STATUS:
+--   * the exact 10/2 payments are canonical invariant-function ranks;
+--   * the exact identities 46=36+10 and 20=18+2 are formalized;
+--   * raw wild-different coefficients 14/7 are ruled out as the mechanism;
+--   * the published p>3 Dwork sharpness hypothesis 4<=p is formally blocked at
+--     p=2,3;
+--   * a route-neutral corrected valuation interface now states the exact
+--     analytic payment required.
+--
 -- REMAINING RESEARCH WALL:
---   * external arithmetic recognition that these classical/classically-grounded
---     carriers are the structures measured by the Duncan--Swisher exceptional
---     Monster residuals R3=2 and R2=10;
+--   * construct an actual corrected q-expansion/Hauptmodul valuation authority
+--     (directly, by an extended Dwork theorem, or by wild-stack cohomology)
+--     that maps the invariant-function basis sectors to valuation terms;
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -68,6 +77,11 @@ import DASHI.Moonshine.OggSSPP2OrientedUnorientedInertiaStackCandidateExact as P
 import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact as Classical369
 import DASHI.Moonshine.OggSSPP3DeligneRapoportStratumCodeExact as P3StratumCode
 import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact as P2Moduli
+import DASHI.Moonshine.OggSSPSmallCharacteristicInvariantClassRankExact as InvariantRank
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExact as WildCorrection
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildDifferentNoGoExact as WildDifferent
+import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectedValuationPaymentExact as CorrectedPayment
+import DASHI.Moonshine.OggSSPSmallCharacteristicDworkReplacementCutsetExact as DworkReplacement
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -222,6 +236,14 @@ record ArithmeticIndependent369Frontier : Set where
     p2NamedOrientedUnorientedInertiaModuliIdentificationPaid : Bool
     p2SpecificEnrichedModuliProblemDefined : Bool
 
+    p2InvariantFunctionRankTenPaid : Bool
+    p3InvariantFunctionRankTwoPaid : Bool
+    exactWildCorrectionCandidateIdentityPaid : Bool
+    rawWildDifferentMechanismRejected : Bool
+    smallPrimeDworkFailureLocated : Bool
+    routeNeutralCorrectedValuationInterfacePaid : Bool
+    analyticCorrectedValuationAuthorityPaid : Bool
+
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
     classicalBase369SemanticIdentificationPaid : Bool
@@ -242,6 +264,7 @@ canonicalArithmeticIndependent369Frontier =
     true true true true true true true true
     true true false true
     true true true false true
+    true true true true true true false
     false false false
     false false
     firstResidual
