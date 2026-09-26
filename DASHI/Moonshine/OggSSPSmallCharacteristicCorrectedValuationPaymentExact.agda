@@ -51,6 +51,7 @@ import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact as P2
 import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact as P2Ten
 import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Inertia
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3
+import DASHI.Moonshine.OggSSPSmallCharacteristicInvariantClassRankExact as Rank
 
 ------------------------------------------------------------------------
 -- 1. Generic finite local-contribution sum.
@@ -166,6 +167,20 @@ p2CandidateCorrectionPaysExactMonsterGap :
   + p2CandidateWildCorrection
 p2CandidateCorrectionPaysExactMonsterGap =
   Exponent.p2ExceptionalGap
+
+------------------------------------------------------------------------
+-- 3b. Candidate totals are invariant-function ranks.
+------------------------------------------------------------------------
+
+p2CandidateCorrectionIsInvariantFunctionRank :
+  p2CandidateWildCorrection
+  ≡ Rank.listRank Rank.p2OrientedInvariantBasis
+p2CandidateCorrectionIsInvariantFunctionRank = refl
+
+p3CandidateCorrectionIsInvariantFunctionRank :
+  p3CandidateWildCorrection
+  ≡ Rank.listRank Rank.p3InvariantStratumBasis
+p3CandidateCorrectionIsInvariantFunctionRank = refl
 
 ------------------------------------------------------------------------
 -- 4. Candidate payment package.
@@ -347,6 +362,8 @@ record CorrectedValuationPaymentBoundary : Set where
     p3UnitContributionSumIsTwo : Bool
     p2CandidatePaysExactArithmeticGap : Bool
     p3CandidatePaysExactArithmeticGap : Bool
+    p2CandidateIsInvariantFunctionRank : Bool
+    p3CandidateIsInvariantFunctionRank : Bool
     analyticLocalTermAuthorityConstructed : Bool
     correctedQExpansionTheoremConstructed : Bool
     genericRouteDoesNotRequireDworkExtension : Bool
@@ -359,5 +376,5 @@ canonicalCorrectedValuationPaymentBoundary :
   CorrectedValuationPaymentBoundary
 canonicalCorrectedValuationPaymentBoundary =
   corrected-valuation-payment-boundary
-    true true true true true true
+    true true true true true true true true
     false false true true false false false
