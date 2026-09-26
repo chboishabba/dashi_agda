@@ -26,29 +26,28 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact w
 --
 -- CROSS-LAYER BOUNDARY:
 --
--- The current Q1 interface does not forbid one finite state from being reused
--- at different remaining arities.  Therefore a sum of per-layer widths is NOT
--- derived unconditionally.
---
--- A separate AritySeparatedQ1 condition is introduced for exactly that stronger
--- accounting regime.
+-- The legacy Q1 quotient interface permits cross-layer state reuse, so only
+-- per-layer lower bounds are unconditional there.  The newer preferred finite
+-- candidate path carries explicit state arity and therefore forbids such reuse;
+-- on that path the literal sum of the per-layer widths is a valid lower bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Fin.Base using (Fin)
 import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_; _<_ ; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
+import DASHI.Core.FutureObservationalRefinement as FutureCore
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as Future
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
@@ -350,7 +349,7 @@ candidateWidthClassifyInjective
       representative witness right
 
     futureEquivalent :
-      DASHI.Core.FutureObservationalRefinement.FutureEquivalent
+      FutureCore.FutureEquivalent
         (Future.restrictionActionSystem _)
         Future.restrictionObservation
         (node leftNode)
@@ -688,9 +687,8 @@ open AritySeparatedQ1 public
 --
 -- at every Shannon layer r.
 --
--- Summing W_r across layers is a strictly stronger statement and requires
--- proof that the finite Q1 carrier does not reuse states across different
--- remaining arities.
+-- Summing W_r across layers is proved above for the preferred arity-admitted
+-- candidate path.  It is not automatic for the older legacy quotient surface.
 --
 -- The next falsification test is therefore about the SPECIAL self-instantiated
 -- roots: can generic high-width residual families be embedded into those roots
