@@ -22,6 +22,14 @@ record SourceBlob : Set where
 
 open SourceBlob public
 
+agdaSourceRepository : String
+agdaSourceRepository =
+  "https://github.com/chboishabba/dashi_agda.git"
+
+agdaSourceCommit : String
+agdaSourceCommit =
+  "c72ea464663a02333319f2254967c94bd188f5f5"
+
 bishopSubmoduleRepository : String
 bishopSubmoduleRepository =
   "https://github.com/viktorcsimma/bishop.git"
@@ -154,6 +162,7 @@ declarationBindings =
 record BindingManifestBoundary : Set where
   constructor binding-manifest-boundary
   field
+    agdaSourceCommitPinned : Bool
     bishopSubmoduleCommitPinned : Bool
     loadBearingAgdaBlobsPinned : Bool
     declarationBindingTableOwned : Bool
@@ -161,6 +170,7 @@ record BindingManifestBoundary : Set where
     leanCanonicalBindingInhabited : Bool
     leanBindingUniqueUpToBishopSetoid : Bool
     leanCanonicalRouteBHypothesisFree : Bool
+    leanGeneratedBindingTableKernelMatchSourceOwned : Bool
 
     generatedCrossProverReplayObserved : Bool
     leanKernelReceiptObserved : Bool
@@ -171,6 +181,6 @@ open BindingManifestBoundary public
 canonicalBindingManifestBoundary : BindingManifestBoundary
 canonicalBindingManifestBoundary =
   binding-manifest-boundary
+    true true true true true
     true true true true
-    true true true
     false false false
