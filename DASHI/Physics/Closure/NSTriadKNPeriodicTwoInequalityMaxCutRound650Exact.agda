@@ -111,6 +111,9 @@ import DASHI.Physics.Closure.NSTriadKNR650DirectCombinedCriticalGrowthRound730Ex
 import DASHI.Physics.Closure.NSTriadKNR650WeightedEndpointToCombinedPaymentRound731Exact as R731
 import DASHI.Physics.Closure.NSTriadKNR650TwoLeafDirectCombinedCutRound732Exact as R732
 import DASHI.Physics.Closure.NSTriadKNR650TerminalMixedMassQPlusMinusRound733Exact as R733
+import DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact as R734
+import DASHI.Physics.Closure.NSTriadKNR650SharedWeightedQuarticCutRound735Exact as R735
+import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -225,6 +228,42 @@ round650BarrierDependentQPlusMinusPaymentAdmissibleForA =
 round650TerminalQPlusMinusCeilingClosedNoncircularly : Bool
 round650TerminalQPlusMinusCeilingClosedNoncircularly =
   R733.round733TerminalQPlusMinusCeilingClosedNoncircularly
+
+round650PreferredWallExactlyTwoSharedWeightedLeaves : Bool
+round650PreferredWallExactlyTwoSharedWeightedLeaves =
+  R736.round736ExactlyTwoPreferredAnalyticLeaves
+
+round650PreferredLeavesUseSameWeightedCarrier : Bool
+round650PreferredLeavesUseSameWeightedCarrier =
+  R736.round736BothLeavesUseSameWeightedCarrier
+
+round650PreferredTargetsContainQuinticCommutator : Bool
+round650PreferredTargetsContainQuinticCommutator =
+  false
+
+round650PreferredWeightedCarrierIsInputLaplacianWork : Bool
+round650PreferredWeightedCarrierIsInputLaplacianWork =
+  R736.round736WeightedCarrierIsInputLaplacianWork
+
+round650PreferredEndpointIsCanonicalQPlusMinus : Bool
+round650PreferredEndpointIsCanonicalQPlusMinus =
+  R736.round736EndpointIsCanonicalQPlusMinus
+
+round650PreferredWeightedPlusEndpointLeafClosed : Bool
+round650PreferredWeightedPlusEndpointLeafClosed =
+  R736.round736WeightedPlusEndpointClosed
+
+round650PreferredAugmentedCriticalWeightedLeafClosed : Bool
+round650PreferredAugmentedCriticalWeightedLeafClosed =
+  R736.round736AugmentedCriticalWeightedClosed
+
+round650PreferredTwoLeavesBuildCriticalBarrier : Bool
+round650PreferredTwoLeavesBuildCriticalBarrier =
+  R736.round736TwoLeavesBuildCriticalBarrier
+
+round650BarrierDependentQPlusMinusShortcutAdmissible : Bool
+round650BarrierDependentQPlusMinusShortcutAdmissible =
+  R736.round736BarrierDependentQPlusMinusShortcutAdmissible
 
 round650PositiveRatesAloneCloseCombinedToR406 : Bool
 round650PositiveRatesAloneCloseCombinedToR406 =
