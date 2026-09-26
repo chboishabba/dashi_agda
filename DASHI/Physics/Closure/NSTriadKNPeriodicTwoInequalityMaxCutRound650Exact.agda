@@ -6,16 +6,17 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 --
 -- After R639--R649, every representation/algebra step around the periodic
 -- critical argument has a typed compiler.  R728 exposed a three-coordinate
--- R406 factorization, but R730-R732 Pareto-compress B+C into one direct
--- critical-growth-to-combined theorem.  The live terminal cut is therefore
--- exactly two proof-bearing analytic leaves:
+-- R406 factorization; R730-R732 compressed it to two terminal leaves; and
+-- R733-R736 move both leaves onto one shared signed weighted/input-Laplacian
+-- carrier.  The preferred live cut is therefore exactly two analytic leaves:
 --
---   A   live cutoff-uniform R723 combined/global signed-commutator payment;
+--   W1  cutoff-uniform weighted work + terminal canonical Q_+- payment;
 --
---   D   R730 direct strict critical-growth-to-combined payment.
+--   W2  positive-margin augmented-critical weighted payment.
 --
--- The older B=R726 transport and C=strict-margin R406 production remain a
--- sufficient factorization of D, not mandatory terminal leaves.
+-- R723/R730 are exact alternate terminal coordinates.  R726 transport plus
+-- strict-margin R406 production remain a sufficient factorization of R730,
+-- not mandatory terminal leaves.
 --
 -- R645 compiles the positive C2 margin into retained viscosity, so C5 is not an
 -- independent theorem.  C4/C6/C7 remain standard source instantiations and are
