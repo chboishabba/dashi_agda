@@ -284,7 +284,7 @@ record P3InertiaCentralizerValuationNoGoBoundary : Set where
   constructor p3-inertia-centralizer-valuation-no-go-boundary
   field
     orderTwelveAutomorphismGroupClassicallySourced : Bool
-    c3SemidirectC4PresentationClassicallySourced : Bool
+    c3SemidirectC4PresentationReconstructedFromClassicalGenerators : Bool
     sixConjugacyClassSkeletonReconstructed : Bool
     loopReversalFiveOrbitQuotientReconstructed : Bool
     centralizerOrdersTwelveTwelveSixSixFourExact : Bool
