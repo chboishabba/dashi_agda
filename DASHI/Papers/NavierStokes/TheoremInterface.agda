@@ -38,11 +38,13 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --
 -- Current periodic-B Clay max-cut:
 --
---   NEW / NONSTANDARD -- CURRENTLY THREE PROOF-BEARING COORDINATES
---     C1a R723 cutoff-uniform combined/global signed-commutator spacetime payment
---     C1b R726 combined/global commutator -> literal R406 transport
---     C2  physical R98 packet strict-surplus payment by literal R406,
---         with positive retained margin delta
+--   NEW / NONSTANDARD -- CURRENT PARETO CUT: TWO PROOF-BEARING LEAVES
+--     A   R723 cutoff-uniform combined/global signed-commutator spacetime payment
+--     D   R730 direct critical-growth-to-combined payment with positive margin
+--
+--   SUFFICIENT FACTORIZATION OF D (NOT MANDATORY TERMINAL LEAVES)
+--     B   R726 combined/global commutator -> literal R406 transport
+--     C   physical R98 packet strict-surplus payment by literal R406
 --
 --   COMPILED / SAME-OBJECT
 --     C3  canonical literal H^(1/2)/H^(3/2)-type R414 slice
@@ -72,7 +74,7 @@ historicalAlternativeRouteStatement =
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is now recut through R723-R727: C1a is the cutoff-uniform combined/global signed-commutator spacetime payment; C1b is the explicit transport from that combined payment to literal R406; C2 is the live physical R98 packet strict-surplus payment by literal R406 with a positive retained margin. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is now the R730-R732 two-leaf direct-combined cut: A is the cutoff-uniform R723 combined/global signed-commutator spacetime payment and D is the direct positive-margin critical-growth-to-combined payment. R726 transport plus strict-margin R406 production remain a sufficient factorization of D, not mandatory terminal leaves. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -1297,6 +1299,42 @@ periodicClayMaxCutCurrentStrictMarginCriticalProductionClosed =
 periodicClayMaxCutCurrentThreeCoordinatesCompileToCriticalBarrier : Bool
 periodicClayMaxCutCurrentThreeCoordinatesCompileToCriticalBarrier =
   R650.round650CurrentThreeCoordinatesCompileToCriticalBarrier
+
+periodicClayMaxCutR728ThreeCoordinateFactorizationStillParetoMinimal : Bool
+periodicClayMaxCutR728ThreeCoordinateFactorizationStillParetoMinimal =
+  R650.round650R728ThreeCoordinateFactorizationStillParetoMinimal
+
+periodicClayMaxCutCurrentParetoExactlyTwoLeaves : Bool
+periodicClayMaxCutCurrentParetoExactlyTwoLeaves =
+  R650.round650CurrentParetoCutExactlyTwoLeaves
+
+periodicClayMaxCutCurrentParetoCombinedPaymentClosed : Bool
+periodicClayMaxCutCurrentParetoCombinedPaymentClosed =
+  R650.round650CurrentParetoCombinedGlobalPaymentClosed
+
+periodicClayMaxCutCurrentParetoDirectCriticalGrowthClosed : Bool
+periodicClayMaxCutCurrentParetoDirectCriticalGrowthClosed =
+  R650.round650CurrentParetoDirectCriticalGrowthClosed
+
+periodicClayMaxCutCurrentParetoTwoLeavesBuildCriticalBarrier : Bool
+periodicClayMaxCutCurrentParetoTwoLeavesBuildCriticalBarrier =
+  R650.round650CurrentParetoTwoLeavesBuildCriticalBarrier
+
+periodicClayMaxCutR726MandatoryAfterDirectCombinedRecut : Bool
+periodicClayMaxCutR726MandatoryAfterDirectCombinedRecut =
+  R650.round650R726MandatoryAfterDirectCombinedRecut
+
+periodicClayMaxCutStrictMarginC2MandatoryAfterDirectCombinedRecut : Bool
+periodicClayMaxCutStrictMarginC2MandatoryAfterDirectCombinedRecut =
+  R650.round650StrictMarginC2MandatoryAfterDirectCombinedRecut
+
+periodicClayMaxCutR726PlusC2SufficientFactorizationOfDirectLeaf : Bool
+periodicClayMaxCutR726PlusC2SufficientFactorizationOfDirectLeaf =
+  R650.round650R726PlusC2RemainSufficientFactorizationOfDirectLeaf
+
+periodicClayMaxCutWeightedTerminalProducerForCombinedPaymentAvailable : Bool
+periodicClayMaxCutWeightedTerminalProducerForCombinedPaymentAvailable =
+  R650.round650WeightedTerminalProducerForCombinedPaymentAvailable
 
 periodicClayMaxCutPositiveRatesAloneCloseCombinedToR406 : Bool
 periodicClayMaxCutPositiveRatesAloneCloseCombinedToR406 =
