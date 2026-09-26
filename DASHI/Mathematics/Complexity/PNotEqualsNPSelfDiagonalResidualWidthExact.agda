@@ -40,6 +40,7 @@ open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -81,13 +82,13 @@ LayerResidualEqual left right =
   SAT.evaluate
       (Family.currentFormula (node left))
       (Future.transportAssignment
-        (arityExact left)
+        (sym (arityExact left))
         assignment)
   ≡
   SAT.evaluate
       (Family.currentFormula (node right))
       (Future.transportAssignment
-        (arityExact right)
+        (sym (arityExact right))
         assignment)
 
 ------------------------------------------------------------------------
@@ -158,14 +159,12 @@ widthWitnessClassifyInjective
     residualEqual
   where
     leftNode :
-      LayerNode _ =
-      representative witness left
+      LayerNode remaining
     leftNode =
       representative witness left
 
     rightNode :
-      LayerNode _ =
-      representative witness right
+      LayerNode remaining
     rightNode =
       representative witness right
 
@@ -174,22 +173,9 @@ widthWitnessClassifyInjective
       ≡
       Family.currentVariables (node rightNode)
     sameArity =
-      transitive
+      trans
         (arityExact leftNode)
-        (symmetric (arityExact rightNode))
-      where
-        symmetric :
-          ∀ {A : Set} {x y : A} →
-          x ≡ y →
-          y ≡ x
-        symmetric refl = refl
-
-        transitive :
-          ∀ {A : Set} {x y z : A} →
-          x ≡ y →
-          y ≡ z →
-          x ≡ z
-        transitive refl refl = refl
+        (sym (arityExact rightNode))
 
     pointwise :
       (assignment :
@@ -281,15 +267,17 @@ record ResidualWidthProfile
   constructor residual-width-profile
   field
     widthAt :
-      Nat →
+      (remaining : Nat) →
+      remaining ≤ rootVariables →
       Nat
 
     exactAt :
       (remaining : Nat) →
+      (inRoot : remaining ≤ rootVariables) →
       ExactResidualWidth
         {root = root}
         remaining
-        (widthAt remaining)
+        (widthAt remaining inRoot)
 
 open ResidualWidthProfile public
 
@@ -298,14 +286,16 @@ profileLayerBelowQ1StateCount :
     {root : SAT.BooleanFormula rootVariables}
     (profile : ResidualWidthProfile root)
     (quotient : Quotient.RestrictionSemanticQuotient root)
-    (remaining : Nat) →
-  widthAt profile remaining
+    (remaining : Nat)
+    (inRoot : remaining ≤ rootVariables) →
+  widthAt profile remaining inRoot
   ≤
   Quotient.stateCount quotient
-profileLayerBelowQ1StateCount profile quotient remaining =
+profileLayerBelowQ1StateCount
+    profile quotient remaining inRoot =
   exactResidualWidthBelowQ1StateCount
     quotient
-    (exactAt profile remaining)
+    (exactAt profile remaining inRoot)
 
 ------------------------------------------------------------------------
 -- Cross-layer reuse boundary.
@@ -335,29 +325,6 @@ open AritySeparatedQ1 public
 -- AritySeparatedQ1.  Any summed-layer width theorem must consume this extra
 -- separation theorem or an equivalent valid cross-layer normalization.
 ------------------------------------------------------------------------
-
-record LayeredResidualWidthFrontier : Set where
-  constructor layered-residual-width-frontier
-  field
-    perLayerWidthLowerBoundPaid : Set
-    summedWidthNeedsAritySeparation : Set
-    crossLayerReuseForbiddenByCurrentQ1 : Set
-
-canonicalLayeredResidualWidthFrontier :
-  LayeredResidualWidthFrontier
-canonicalLayeredResidualWidthFrontier =
-  layered-residual-width-frontier
-    (∀ {rootVariables remaining width : Nat}
-       {root : SAT.BooleanFormula rootVariables} →
-       (quotient : Quotient.RestrictionSemanticQuotient root) →
-       ResidualWidthWitness remaining width →
-       width ≤ Quotient.stateCount quotient)
-    (∀ {rootVariables : Nat}
-       {root : SAT.BooleanFormula rootVariables}
-       (quotient : Quotient.RestrictionSemanticQuotient root) →
-       AritySeparatedQ1 quotient →
-       Set)
-    Set
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
