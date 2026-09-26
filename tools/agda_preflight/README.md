@@ -329,6 +329,38 @@ Its `next_error` result includes semantic freshness for the diagnostic's
 module, and the JSONL `semantic_status` method reports fresh/stale/unknown
 counts for an indexed subject closure without invoking Agda.
 
+Semantic promotion is a separate, explicit operation. Configure a promoter
+command when starting the service; diagnose/next_error/apply_fix never invoke
+it:
+
+```bash
+dashi-agda-server \
+  --root . \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite \
+  --promoter-command '/path/to/agda2lean/scripts/a2l_project.py promote --source-root {root} --entry {module} --backend /path/to/agda2lean-agda --emitter /path/to/agda2lean --catalog {catalog} --cache-root /path/to/cache --jobs 4 --receipt {receipt}'
+```
+
+The service substitutes `{file}`, `{module}`, `{root}`, `{catalog}` and
+`{receipt}` without using a shell. A promotion request is fail-closed:
+
+```text
+current source SHA
+    -> explicit external promoter
+    -> re-index current source after promoter exits
+    -> reopen semantic catalog
+    -> checked_source_sha256 must equal post-run current source SHA
+    -> only then status = promoted
+```
+
+Exit code zero alone is not promotion evidence. If the command succeeds but the
+catalog head is absent or stale, the result is `unverified`. If the source
+changes while the external checker is running, the post-run SHA comparison
+detects the race and promotion remains unverified.
+
+Every attempt is persisted in source-index schema v5 with requested/current
+source hashes, promoter return code, semantic freshness, bounded stdout/stderr
+tails and the promoter's own JSON receipt.
+
 Pytest remains the regression/full-audit surface for the checker itself; it is
 not the normal agent runtime.
 
@@ -349,8 +381,11 @@ The service speaks newline-delimited JSON on stdin/stdout. Example requests:
 ```json
 {"id":1,"method":"next_error","params":{"target":"DASHI/Biology/Everything.agda","require_fix":true}}
 {"id":2,"method":"apply_fix","params":{"target":"DASHI/Biology/Everything.agda","diagnostic_id":"...","fix_index":0,"allow_likely":true}}
-{"id":3,"method":"cache_status","params":{}}
-{"id":4,"method":"shutdown","params":{}}
+{"id":3,"method":"promote","params":{"target":"DASHI/Biology/SomeFixedModule.agda"}}
+{"id":4,"method":"promotion_history","params":{"module_name":"DASHI.Biology.SomeFixedModule","limit":10}}
+{"id":5,"method":"semantic_status","params":{"target":"DASHI/Biology/Everything.agda"}}
+{"id":6,"method":"cache_status","params":{}}
+{"id":7,"method":"shutdown","params":{}}
 ```
 
 Supported methods are currently:
@@ -359,6 +394,9 @@ Supported methods are currently:
 diagnose
 next_error
 apply_fix
+semantic_status
+promote
+promotion_history
 cache_status
 ping
 shutdown
