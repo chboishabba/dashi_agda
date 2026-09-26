@@ -48,10 +48,20 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * a route-neutral corrected valuation interface now states the exact
 --     analytic payment required.
 --
+-- PRIME-SPECIFIC MECHANISM STATUS:
+--   * p=2 has a stronger arithmetic candidate:
+--       sum of v_2 centralizer orders over five unoriented inertia sectors
+--       = 3+3+2+1+1 = 10;
+--   * p=3 rejects the analogous law:
+--       sum of v_3 centralizer orders = 1+1+1+1+0 = 4 != 2;
+--   * p=3 therefore retains the Deligne--Rapoport two-orbit local-incidence
+--     rank as the preferred finite candidate.
+--
 -- REMAINING RESEARCH WALL:
 --   * construct an actual corrected q-expansion/Hauptmodul valuation authority
---     (directly, by an extended Dwork theorem, or by wild-stack cohomology)
---     that maps the invariant-function basis sectors to valuation terms;
+--     and prove the PRIME-SPECIFIC preferred local statistics are the local
+--     divisor/valuation terms;
+--   * determine the termwise distribution across J_{p+}, J_p, J_{p^2};
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -82,6 +92,11 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExa
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildDifferentNoGoExact as WildDifferent
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectedValuationPaymentExact as CorrectedPayment
 import DASHI.Moonshine.OggSSPSmallCharacteristicDworkReplacementCutsetExact as DworkReplacement
+import DASHI.Moonshine.OggSSPSmallCharacteristicHauptmodulDivisorCutsetExact as DivisorCutset
+import DASHI.Moonshine.OggSSPSmallCharacteristicHauptmodulTermBaselineExact as TermBaseline
+import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact as P2Centralizer
+import DASHI.Moonshine.OggSSPP3InertiaCentralizerValuationNoGoExact as P3Centralizer
+import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectionMechanismComparisonExact as Mechanism
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -243,6 +258,13 @@ record ArithmeticIndependent369Frontier : Set where
     smallPrimeDworkFailureLocated : Bool
     routeNeutralCorrectedValuationInterfacePaid : Bool
     analyticCorrectedValuationAuthorityPaid : Bool
+    minimalHauptmodulDivisorCutsetPaid : Bool
+    threeTermDuncanSwisherBaselinePaid : Bool
+    preferredTermwiseCorrectionDistributionPaid : Bool
+
+    p2CentralizerDepthTenCandidatePaid : Bool
+    p3CentralizerDepthUniformLawRejected : Bool
+    primeSpecificMechanismComparisonPaid : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -265,6 +287,8 @@ canonicalArithmeticIndependent369Frontier =
     true true false true
     true true true false true
     true true true true true true false
+    true true false
+    true true true
     false false false
     false false
     firstResidual
