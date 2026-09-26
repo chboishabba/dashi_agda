@@ -33,10 +33,10 @@ module DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRou
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -175,17 +175,24 @@ module AugmentedWeighted
               (λ delta → weighted ≡ comm - delta)
               endpoint
               balance
+
+          shifted :
+            weighted + (eT - e0)
+            ≡ (comm - (eT - e0)) + (eT - e0)
+          shifted =
+            cong (_+ (eT - e0)) first
+
+          rhsNormal :
+            (comm - (eT - e0)) + (eT - e0) ≡ comm
+          rhsNormal =
+            solve (comm ∷ eT ∷ e0 ∷ [])
         in
-        subst
-          (λ rhs → comm ≡ rhs)
-          (solve (weighted ∷ comm ∷ eT ∷ e0 ∷ []))
-          refl
+        sym (trans shifted rhsNormal)
     in
     trans
       combinedToComm
       (trans
-        (Relation.Binary.PropositionalEquality.cong
-          (R700.twelve *_) commMeaning)
+        (cong (R700.twelve *_) commMeaning)
         (solve
           ( R700.twelve
           ∷ weighted
@@ -216,7 +223,7 @@ module AugmentedWeighted
       (terminal : Time) : Set where
     field
       retainedMargin : ℚ
-      retainedMarginPositive : 0 < retainedMargin
+      retainedMarginPositive : 0ℚ < retainedMargin
       augmentedGrowthPaidByWeighted :
         augmentedCriticalGrowthWithMargin cutoff retainedMargin terminal
         ≤ R700.twelve * Balance.globalIntegratedWeighted cutoff terminal
