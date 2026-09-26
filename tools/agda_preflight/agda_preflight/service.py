@@ -365,11 +365,28 @@ class DashiAgdaService:
             module=module_name,
         )
 
+        # Source may have changed while the external checker was running.
+        # Re-index after promotion and prove freshness against the *current*
+        # worktree, not merely the source hash captured before invocation.
+        self.index.begin_request()
+        post_result = self.index.diagnose(target_path)
+        post_identity = self.index.source_identity(target_path)
+        if post_identity is None:
+            raise ValueError(
+                f"target disappeared from source index after promotion: {target_path}"
+            )
+        post_module_name, current_source_hash = post_identity
+        if post_module_name != module_name:
+            raise ValueError(
+                "target module identity changed during promotion: "
+                f"{module_name} -> {post_module_name}"
+            )
+
         # The external writer may have created or replaced the catalog. Reopen
         # it and prove promotion from the checked-source SHA postcondition.
         self._refresh_semantic_catalog()
         semantic = self._semantic_lookup(
-            dict(result.source_hashes)
+            dict(post_result.source_hashes)
         )
         target_semantic = semantic.get(module_name)
         freshness = (
@@ -390,7 +407,8 @@ class DashiAgdaService:
             "status": status,
             "module_name": module_name,
             "target_path": str(target_path),
-            "source_sha256": source_hash,
+            "requested_source_sha256": source_hash,
+            "source_sha256": current_source_hash,
             "promoter_returncode": command_result.returncode,
             "promoter_elapsed_ms": round(
                 command_result.elapsed_ms,
