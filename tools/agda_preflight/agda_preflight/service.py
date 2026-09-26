@@ -9,6 +9,7 @@ from typing import IO, Any, Dict, Optional, Tuple
 
 from .apply_edits import EditApplicationError, apply_text_edits
 from .source_index import SourceIndex
+from .semantic_catalog import SemanticCatalog
 from .timing import Profiler, TimingSnapshot
 
 
@@ -55,6 +56,7 @@ class DashiAgdaService:
         index_path: Path,
         *,
         jobs: int = 0,
+        semantic_catalog: Optional[Path] = None,
     ) -> None:
         self.root = root.resolve()
         self.profiler = Profiler()
@@ -65,8 +67,15 @@ class DashiAgdaService:
             jobs=jobs,
         )
         self.jobs = jobs
+        self.semantic = (
+            SemanticCatalog(semantic_catalog)
+            if semantic_catalog is not None
+            else None
+        )
 
     def close(self) -> None:
+        if self.semantic is not None:
+            self.semantic.close()
         self.index.close()
 
     def __enter__(self) -> "DashiAgdaService":
@@ -90,6 +99,39 @@ class DashiAgdaService:
             time.perf_counter_ns() - started_ns,
         )
 
+    def _semantic_lookup(
+        self,
+        module_hashes: Dict[str, str],
+    ) -> Dict[str, dict]:
+        if self.semantic is None or not module_hashes:
+            return {}
+        with self.profiler.stage("semantic.catalog_lookup"):
+            items = self.semantic.lookup(
+                module_hashes,
+                module_hashes,
+            )
+        return {
+            module: item.as_dict()
+            for module, item in sorted(items.items())
+        }
+
+    @staticmethod
+    def _semantic_counts(items: Dict[str, dict]) -> dict:
+        return {
+            "fresh": sum(
+                1 for item in items.values()
+                if item["freshness"] == "fresh"
+            ),
+            "stale": sum(
+                1 for item in items.values()
+                if item["freshness"] == "stale"
+            ),
+            "unknown": sum(
+                1 for item in items.values()
+                if item["freshness"] == "unknown"
+            ),
+        }
+
     def diagnose(
         self,
         target: str,
@@ -105,6 +147,9 @@ class DashiAgdaService:
                 for item in diagnostics
                 if item.severity == "error"
             ]
+        semantic = self._semantic_lookup(
+            dict(result.source_hashes)
+        )
         return {
             "modules": list(result.modules),
             "cache_hit": result.cache_hit,
@@ -112,6 +157,8 @@ class DashiAgdaService:
                 item.as_dict()
                 for item in diagnostics
             ],
+            "semantic": semantic,
+            "semantic_counts": self._semantic_counts(semantic),
             "profile": self._finish_request(before, started),
         }
 
@@ -126,6 +173,14 @@ class DashiAgdaService:
             Path(target),
             require_fix=require_fix,
         )
+        semantic = {}
+        if diagnostic is not None and self.semantic is not None:
+            identity = self.index.source_identity(diagnostic.path)
+            if identity is not None:
+                module_name, source_hash = identity
+                semantic = self._semantic_lookup(
+                    {module_name: source_hash}
+                )
         return {
             "status": (
                 "diagnostic"
@@ -137,6 +192,7 @@ class DashiAgdaService:
                 if diagnostic is not None
                 else None
             ),
+            "semantic": semantic,
             "profile": self._finish_request(before, started),
         }
 
@@ -218,6 +274,29 @@ class DashiAgdaService:
             "profile": self._finish_request(before, started),
         }
 
+    def semantic_status(self, target: str) -> dict:
+        before, started = self._start_request()
+        hashes = self.index.closure_source_hashes(Path(target))
+        if hashes is None:
+            result = self.index.diagnose(Path(target))
+            hashes = result.source_hashes
+        module_hashes = dict(hashes)
+        semantic = self._semantic_lookup(module_hashes)
+        counts = self._semantic_counts(semantic)
+        return {
+            "modules": len(module_hashes),
+            "catalog_hits": len(semantic),
+            "catalog_misses": max(
+                0,
+                len(module_hashes) - len(semantic),
+            ),
+            "fresh": counts["fresh"],
+            "stale": counts["stale"],
+            "unknown": counts["unknown"],
+            "snapshots": semantic,
+            "profile": self._finish_request(before, started),
+        }
+
     def cache_status(self) -> dict:
         before, started = self._start_request()
         result = self.index.cache_stats()
@@ -241,6 +320,8 @@ class DashiAgdaService:
             return self.apply_fix(**params)
         if method == "cache_status":
             return self.cache_status()
+        if method == "semantic_status":
+            return self.semantic_status(**params)
         if method == "ping":
             return {"status": "ok"}
         raise ValueError(f"unknown service method: {method}")
@@ -340,12 +421,18 @@ def main(argv=None) -> int:
         default=0,
         help="cold-bootstrap workers; 0 = auto",
     )
+    parser.add_argument(
+        "--semantic-catalog",
+        type=Path,
+        help="optional read-only agda2lean semantic catalog",
+    )
     args = parser.parse_args(argv)
 
     with DashiAgdaService(
         args.root,
         args.index,
         jobs=args.jobs,
+        semantic_catalog=args.semantic_catalog,
     ) as service:
         serve_streams(
             service,
