@@ -666,3 +666,5 @@ import DASHI.Physics.YangMills.BalabanWilsonBivariateMarkedJetExact
 import DASHI.Physics.YangMills.BalabanCanonicalDyadicTraversalShellExact
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonQuarterDyadicCompletionExact
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact
+
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR415CompletionExact
