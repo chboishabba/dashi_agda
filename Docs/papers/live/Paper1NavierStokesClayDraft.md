@@ -93,41 +93,60 @@ uniformly in the cutoff `N`.
 > R415/critical-barrier consumer chain. The theorem does not assert that the
 > R568 producer itself is proved.
 
-The current R723--R729 Clay-eligible max-cut is:
+The current R730--R732 Clay-eligible Pareto max-cut is:
 
 ```text
-NEW / NONSTANDARD -- CURRENTLY THREE PROOF-BEARING COORDINATES
-C1a R723 cutoff-uniform combined/global signed-commutator payment    OPEN
-C1b R726 combined/global commutator -> literal R406 transport        OPEN
-C2  strict-margin physical critical-production estimate by R406     OPEN
+NEW / NONSTANDARD -- EXACTLY TWO PROOF-BEARING LEAVES
+A   R723 cutoff-uniform combined/global signed-commutator payment    OPEN
+D   direct positive-margin critical growth <= combined              OPEN
+
+SUFFICIENT FACTORIZATION OF D -- NOT MANDATORY TERMINAL LEAVES
+B   R726 combined/global commutator -> literal R406 transport        OPEN
+C   strict-margin physical critical-production estimate by R406     OPEN
 
 SAME-OBJECT / PHYSICAL
-C3  literal critical coordinates installed on R414                  COMPILER CLOSED
-    exact critical-energy identity                                  CLOSED GIVEN STANDARD CALCULUS
-C4  common-initial-datum same-object / cutoff ceiling                STANDARD SOURCE BOUNDARY
-C5  positive retained viscosity                                     DERIVED FROM C2 MARGIN
+C3  literal critical coordinates / critical-energy identity         COMPILER CLOSED
+C4  common-initial-datum cutoff ceiling                             STANDARD SOURCE BOUNDARY
+C5  positive retained viscosity                                    BUILT INTO D'S POSITIVE MARGIN
 
 STANDARD COMPLETION
 C6  scalar FTC + rational integration linearity/order receipts       STANDARD SOURCE BOUNDARY
 C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    STANDARD SOURCE BOUNDARY
 ```
 
-R727 proves that C1a + C1b + C2, together with the standard initial-critical
-realization, compile to the existing R414 uniform critical barrier.  Thus the
-old self/external split does not reappear downstream.
+R730 observes that R659 turns strict-margin C2 into
+[
+X_N(T)-X_N(0)+\delta_N D_N(T)\le R406_N(T),
+]
+so composing this with R726 gives the single direct theorem
+[
+X_N(T)-X_N(0)+\delta_N D_N(T)
+\le \mathrm{IntegratedCombined}_N(T),
+\qquad \delta_N>0.
+]
+Together with R723's cutoff-uniform combined payment this yields the critical
+barrier immediately.  Therefore B and C remain a sufficient producer
+factorization of D, but they are no longer independent terminal obligations.
+
+R731 also gives A an exact alternative producer route:
+[
+\mathcal C_N(T)
+\le \mathrm{Weighted}_N(T)+E_{M,N}(T),
+]
+so a cutoff-uniform global weighted-work payment plus a terminal coherent
+mixed-mass ceiling constructs the R723 combined payment.  This exposes the
+remaining endpoint difficulty honestly: the terminal mixed mass is a coherent
+fibre sum and is not automatically paid by the existing positive sum-of-cell
+mass theorem.
 
 The older R568/R572 direct-companion route remains a valid adjacent sufficient
-producer lane, but it is **not definitionally the new R723/R691 commutator
-currency**.  R687 only identifies the *pair-rate-lifted* R568 forcing full with
+producer lane, but it is **not definitionally the R723/R691 commutator
+currency**.  R687 only identifies the pair-rate-lifted R568 forcing full with
 the R691 commutator.  The unlifted-to-lifted payment remains open.  Likewise,
-the positive 36ED component-mass theorem is on a quartic carrier whereas the
-R723 signed nonlinear work is quintic; R725 therefore forbids treating that
-positive mass theorem as a same-object payment.
-
-Accordingly, for the R723 branch the current new analytic theorem count is
-three proof-bearing coordinates, not two.  R729 further rules out deriving C1b
-from positivity of the physical rates (even together with positive coherent
-self-work) alone.  Additional signed/trajectory structure is required.
+the positive 36ED component-mass theorem is quartic whereas the R723 signed
+nonlinear work is quintic, so it cannot be substituted as a same-object
+payment.  R729 additionally rules out deriving the old R726 transport from
+positive physical rates and positive coherent self-work alone.
 
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
 `R406 = covariance` equality are **not** part of this terminal cut.  The latter
