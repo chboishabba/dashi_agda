@@ -8,6 +8,7 @@ import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119AntigravityUnitCouplingCapInverseThresholdExact as UnitCap
 import DASHI.Physics.Foundations.CMP119AntigravityUnitThresholdClosesSU2NoGoExact as SU2Threshold
+import DASHI.Physics.Foundations.CMP119AntigravityTraceCoefficientInverseCouplingFirewallExact as Coeff
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteBeta
@@ -39,7 +40,7 @@ historyUnitCapPaysNormalizedSU2Threshold :
       History.FiniteModeInverseSquareTerminalHistoryData
         trajectory Mode Atom betaData) →
   History.gamma history ≤ 1ℚ →
-  SU2Threshold.Coeff.selectedWeakCouplingNoGoThresholdRational
+  Coeff.selectedWeakCouplingNoGoThresholdRational
     ≤ History.inverseThreshold history
 historyUnitCapPaysNormalizedSU2Threshold history gammaBelowOne =
   SU2Threshold.unitInverseThresholdPaysNormalizedSU2Threshold
