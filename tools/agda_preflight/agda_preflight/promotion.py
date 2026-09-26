@@ -8,7 +8,7 @@ import shlex
 import subprocess
 import tempfile
 import time
-from typing import Dict, Optional, Sequence
+from typing import Dict, Optional, Sequence, Union
 
 
 @dataclass(frozen=True)
@@ -40,7 +40,7 @@ class CommandPromoter:
 
     def __init__(
         self,
-        command: Sequence[str] | str,
+        command: Union[Sequence[str], str],
         *,
         root: Path,
         catalog: Path,
