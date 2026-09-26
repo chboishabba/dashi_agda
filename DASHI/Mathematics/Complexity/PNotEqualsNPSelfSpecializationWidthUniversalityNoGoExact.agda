@@ -23,12 +23,13 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversal
 -- not from Kleene specialization/diagonalization itself.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe.Base using (just)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Finite
@@ -311,6 +312,261 @@ literalPassthroughAtKnownSatisfiableImpossible
         (trans
           (sym candidateDecisionTransport)
           candidateRejectsQuoted)
+
+------------------------------------------------------------------------
+-- SIMPLE GUARD WRAPPER AUDIT
+--
+-- The obvious next embedding attempt is to carry an arbitrary payload formula
+-- behind one Boolean guard while forcing the diagonal SAT polarity.
+--
+-- There are two non-absorbing guards:
+--
+--   true  AND payload = payload
+--   false OR  payload = payload
+--
+-- These preserve the payload function exactly, but satisfiability still depends
+-- on the payload.
+--
+-- The two absorbing guards:
+--
+--   false AND payload = false
+--   true  OR  payload = true
+--
+-- force a SAT/UNSAT answer independently of the payload, but erase the payload
+-- function completely.
+------------------------------------------------------------------------
+
+andGuard :
+  Bool →
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+andGuard guard payload =
+  Cook.conjunction
+    (Cook.constant guard)
+    payload
+
+orGuard :
+  Bool →
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+orGuard guard payload =
+  Cook.disjunction
+    (Cook.constant guard)
+    payload
+
+andTruePreservesPayloadEvaluation :
+  (payload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (andGuard true payload)
+      assignment
+  ≡
+  Cook.evaluate payload assignment
+andTruePreservesPayloadEvaluation payload assignment =
+  refl
+
+orFalsePreservesPayloadEvaluation :
+  (payload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (orGuard false payload)
+      assignment
+  ≡
+  Cook.evaluate payload assignment
+orFalsePreservesPayloadEvaluation payload assignment =
+  refl
+
+andFalseErasesPayloadEvaluation :
+  (payload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (andGuard false payload)
+      assignment
+  ≡ false
+andFalseErasesPayloadEvaluation payload assignment =
+  refl
+
+orTrueErasesPayloadEvaluation :
+  (payload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (orGuard true payload)
+      assignment
+  ≡ true
+orTrueErasesPayloadEvaluation payload assignment =
+  refl
+
+andTrueSatisfiabilityEquivalentPayload :
+  (payload : Cook.BooleanFormula) →
+  (Cook.Satisfiable (andGuard true payload) → Cook.Satisfiable payload)
+  ×
+  (Cook.Satisfiable payload → Cook.Satisfiable (andGuard true payload))
+andTrueSatisfiabilityEquivalentPayload payload =
+  forward , backward
+  where
+    forward :
+      Cook.Satisfiable (andGuard true payload) →
+      Cook.Satisfiable payload
+    forward witness =
+      Cook.satisfyingAssignment
+        (Cook.Satisfiable.assignment witness)
+        (trans
+          (sym
+            (andTruePreservesPayloadEvaluation
+              payload
+              (Cook.Satisfiable.assignment witness)))
+          (Cook.Satisfiable.evaluatesTrue witness))
+
+    backward :
+      Cook.Satisfiable payload →
+      Cook.Satisfiable (andGuard true payload)
+    backward witness =
+      Cook.satisfyingAssignment
+        (Cook.Satisfiable.assignment witness)
+        (trans
+          (andTruePreservesPayloadEvaluation
+            payload
+            (Cook.Satisfiable.assignment witness))
+          (Cook.Satisfiable.evaluatesTrue witness))
+
+orFalseSatisfiabilityEquivalentPayload :
+  (payload : Cook.BooleanFormula) →
+  (Cook.Satisfiable (orGuard false payload) → Cook.Satisfiable payload)
+  ×
+  (Cook.Satisfiable payload → Cook.Satisfiable (orGuard false payload))
+orFalseSatisfiabilityEquivalentPayload payload =
+  forward , backward
+  where
+    forward :
+      Cook.Satisfiable (orGuard false payload) →
+      Cook.Satisfiable payload
+    forward witness =
+      Cook.satisfyingAssignment
+        (Cook.Satisfiable.assignment witness)
+        (trans
+          (sym
+            (orFalsePreservesPayloadEvaluation
+              payload
+              (Cook.Satisfiable.assignment witness)))
+          (Cook.Satisfiable.evaluatesTrue witness))
+
+    backward :
+      Cook.Satisfiable payload →
+      Cook.Satisfiable (orGuard false payload)
+    backward witness =
+      Cook.satisfyingAssignment
+        (Cook.Satisfiable.assignment witness)
+        (trans
+          (orFalsePreservesPayloadEvaluation
+            payload
+            (Cook.Satisfiable.assignment witness))
+          (Cook.Satisfiable.evaluatesTrue witness))
+
+andFalseUnsatisfiable :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable (andGuard false payload) →
+  ⊥
+andFalseUnsatisfiable
+    payload
+    witness =
+  trueNotFalse
+    (trans
+      (sym
+        (Cook.Satisfiable.evaluatesTrue witness))
+      (andFalseErasesPayloadEvaluation
+        payload
+        (Cook.Satisfiable.assignment witness)))
+
+orTrueSatisfiable :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable (orGuard true payload)
+orTrueSatisfiable payload =
+  Cook.satisfyingAssignment
+    (λ index → false)
+    (orTrueErasesPayloadEvaluation
+      payload
+      (λ index → false))
+
+------------------------------------------------------------------------
+-- The canonical polarity-forcing wrapper.
+--
+-- reject=true  -> force satisfiable with true OR payload
+-- reject=false -> force unsatisfiable with false AND payload
+------------------------------------------------------------------------
+
+diagonalGuardWrapper :
+  Bool →
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+diagonalGuardWrapper true payload =
+  orGuard true payload
+diagonalGuardWrapper false payload =
+  andGuard false payload
+
+diagonalGuardWrapperRejectingIsSatisfiable :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable
+    (diagonalGuardWrapper true payload)
+diagonalGuardWrapperRejectingIsSatisfiable =
+  orTrueSatisfiable
+
+diagonalGuardWrapperAcceptingIsUnsatisfiable :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable
+    (diagonalGuardWrapper false payload) →
+  ⊥
+diagonalGuardWrapperAcceptingIsUnsatisfiable =
+  andFalseUnsatisfiable
+
+diagonalGuardWrapperEvaluationIgnoresPayload :
+  (reject : Bool) →
+  (payload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (diagonalGuardWrapper reject payload)
+      assignment
+  ≡ reject
+diagonalGuardWrapperEvaluationIgnoresPayload
+    true payload assignment =
+  orTrueErasesPayloadEvaluation
+    payload
+    assignment
+diagonalGuardWrapperEvaluationIgnoresPayload
+    false payload assignment =
+  andFalseErasesPayloadEvaluation
+    payload
+    assignment
+
+------------------------------------------------------------------------
+-- Concrete no-go for the simple guard embedding:
+--
+-- it can force the diagonal SAT polarity for every payload only by using the
+-- absorbing branches, and those make the resulting Boolean function constant.
+-- Hence no residual-function width of the payload survives this wrapper.
+------------------------------------------------------------------------
+
+simpleGuardPolarityForcingErasesPayload :
+  (reject : Bool) →
+  (leftPayload rightPayload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (diagonalGuardWrapper reject leftPayload)
+      assignment
+  ≡
+  Cook.evaluate
+      (diagonalGuardWrapper reject rightPayload)
+      assignment
+simpleGuardPolarityForcingErasesPayload
+    reject
+    leftPayload
+    rightPayload
+    assignment =
+  trans
+    (diagonalGuardWrapperEvaluationIgnoresPayload
+      reject leftPayload assignment)
+    (sym
+      (diagonalGuardWrapperEvaluationIgnoresPayload
+        reject rightPayload assignment))
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
