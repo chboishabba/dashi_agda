@@ -1361,7 +1361,8 @@ class SourceIndex:
         all_diagnostics: List[Diagnostic] = []
 
         with self.profiler.stage("db.batch_write"):
-            self.connection.execute("BEGIN")
+            if not getattr(self.connection, "in_transaction", False):
+                self.connection.execute("BEGIN")
             try:
                 for module in sorted(receipt_by_module):
                     import_receipt = receipt_by_module[module]
