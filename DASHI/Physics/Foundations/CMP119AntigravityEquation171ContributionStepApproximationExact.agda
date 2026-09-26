@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityEquation171ContributionStepApproximationExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; absℝ; _-ℝ_; _≤ℝ_)
@@ -271,5 +272,5 @@ asFactorizedDensityApproximation
 cmp119ContributionStepErrorCompilerLevel : ProofLevel
 cmp119ContributionStepErrorCompilerLevel = machineChecked
 
-exactBareDensityGate4EqualityRequired : Agda.Builtin.Bool.Bool
-exactBareDensityGate4EqualityRequired = Agda.Builtin.Bool.false
+exactBareDensityGate4EqualityRequired : Bool
+exactBareDensityGate4EqualityRequired = false
