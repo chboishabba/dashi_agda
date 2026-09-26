@@ -97,6 +97,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicHauptmodulTermBaselineExact as T
 import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact as P2Centralizer
 import DASHI.Moonshine.OggSSPP3InertiaCentralizerValuationNoGoExact as P3Centralizer
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectionMechanismComparisonExact as Mechanism
+import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as PreferredPayment
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -265,6 +266,7 @@ record ArithmeticIndependent369Frontier : Set where
     p2CentralizerDepthTenCandidatePaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
     primeSpecificMechanismComparisonPaid : Bool
+    primeSpecificPreferredPaymentOwned : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -288,7 +290,7 @@ canonicalArithmeticIndependent369Frontier =
     true true true false true
     true true true true true true false
     true true false
-    true true true
+    true true true true
     false false false
     false false
     firstResidual
