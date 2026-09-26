@@ -54,6 +54,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
 import DASHI.Physics.Closure.NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699Exact as R699
 import DASHI.Physics.Closure.NSTriadKNR650WeightedEndpointToCombinedPaymentRound731Exact as R731
@@ -161,39 +162,36 @@ module SharedWeightedCut
   weightedPlusTerminalBuildsCombinedPayment :
     CutoffUniformWeightedPlusTerminalPayment →
     Aug.Combined.CutoffUniformCombinedSelfExternalPayment
-  weightedPlusTerminalBuildsCombinedPayment P =
-    Producer.weightedAndTerminalBuildCombinedPayment
-      weightedPayment terminalPayment
-    where
-    weightedPayment : Upper.CutoffUniformGlobalWeightedPayment
-    weightedPayment = record
-      { Upper.cutoffIndependentBound =
-          cutoffIndependentBound P
-      ; Upper.globalWeightedPayment =
-          λ cutoff terminal →
-            ℚP.≤-trans
-              (ℚP.≤-reflexive
-                (solve
-                  ( Balance.globalIntegratedWeighted cutoff terminal
-                  ∷ Upper.globalSelfEnergy cutoff terminal
-                  ∷ [])))
-              (weightedPlusTerminalPayment P cutoff terminal)
-      }
+  weightedPlusTerminalBuildsCombinedPayment P = record
+    { Aug.Combined.cutoffIndependentBound =
+        cutoffIndependentBound P
+    ; Aug.Combined.combinedSelfExternalPayment =
+        λ cutoff terminal →
+          let
+            commUpper :
+              Balance.globalIntegratedCommutator cutoff terminal
+              ≤ cutoffIndependentBound P terminal
+            commUpper =
+              ℚP.≤-trans
+                (Producer.globalCommutatorBelowWeightedPlusTerminal
+                  cutoff terminal)
+                (weightedPlusTerminalPayment P cutoff terminal)
 
-    terminalPayment : Producer.CutoffUniformTerminalMixedMassCeiling
-    terminalPayment = record
-      { Producer.terminalMixedMassBound =
-          cutoffIndependentBound P
-      ; Producer.terminalMixedMassCeiling =
-          λ cutoff terminal →
-            ℚP.≤-trans
-              (ℚP.≤-reflexive
-                (solve
-                  ( Balance.globalIntegratedWeighted cutoff terminal
-                  ∷ Upper.globalSelfEnergy cutoff terminal
-                  ∷ [])))
-              (weightedPlusTerminalPayment P cutoff terminal)
-      }
+            scaled :
+              R700.twelve * Balance.globalIntegratedCommutator cutoff terminal
+              ≤ R700.twelve * cutoffIndependentBound P terminal
+            scaled =
+              let instance twelveNNI = nonNegative R731.twelveNN
+              in ℚP.*-monoˡ-≤-nonNeg R700.twelve commUpper
+          in
+          subst
+            (λ left →
+              left ≤ R700.twelve * cutoffIndependentBound P terminal)
+            (sym
+              (Aug.Combined.integratedCombinedIsTwelveR691Commutator
+                cutoff terminal))
+            scaled
+    }
 
   sharedWeightedInputsBuildBarrier :
     (cutoff : Nat) (terminal : Time) →
@@ -208,67 +206,13 @@ module SharedWeightedCut
       + R700.twelve
           * cutoffIndependentBound (weightedPlusTerminal _) terminal
   sharedWeightedInputsBuildBarrier cutoff terminal I =
-    let
-      P = weightedPlusTerminal I
-      A = augmentedCritical I
-      margin = Aug.retainedMargin A
-      xT = Obs.criticalEnergyAt T cutoff terminal
-      x0 = Obs.criticalEnergyAt T cutoff initialTime
-      diss = Obs.integratedCriticalDissipation T cutoff terminal
-      weighted = Balance.globalIntegratedWeighted cutoff terminal
-      eT = Upper.globalSelfEnergy cutoff terminal
-      e0 = Upper.globalSelfEnergy cutoff initialTime
-      bound = cutoffIndependentBound P terminal
-
-      aug :
-        (xT - R700.twelve * eT)
-          - (x0 - R700.twelve * e0)
-          + margin * diss
-        ≤ R700.twelve * weighted
-      aug = Aug.augmentedGrowthPaidByWeighted A
-
-      paid :
-        weighted + eT ≤ bound
-      paid = weightedPlusTerminalPayment P cutoff terminal
-
-      twelvePaid :
-        R700.twelve * (weighted + eT)
-        ≤ R700.twelve * bound
-      twelvePaid =
-        let instance twelveNNI = nonNegative R731.twelveNN
-        in ℚP.*-monoˡ-≤-nonNeg R700.twelve paid
-
-      initialNN : 0ℚ ≤ e0
-      initialNN =
-        Upper.sumSelfEnergyNonnegative
-          cutoff initialTime
-          (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
-
-      combine :
-        xT + margin * diss
-        ≤ x0 + R700.twelve * (weighted + eT)
-      combine =
-        let
-          shifted = ℚP.+-mono-≤ aug ℚP.≤-refl
-        in
-        subst
-          (λ lhs →
-            lhs ≤ x0 + R700.twelve * (weighted + eT))
-          (solve
-            (xT ∷ x0 ∷ eT ∷ e0 ∷ margin ∷ diss ∷ R700.twelve ∷ []))
-          (ℚP.≤-trans
-            shifted
-            (let instance twelveNNI = nonNegative R731.twelveNN
-             in ℚP.+-mono-≤
-               (ℚP.*-monoˡ-≤-nonNeg R700.twelve
-                 (Rational.subtractNonnegativeBelow eT e0 initialNN))
-               ℚP.≤-refl))
-
-      final =
-        ℚP.≤-trans combine
-          (ℚP.+-mono-≤ ℚP.≤-refl twelvePaid)
-    in
-    final
+    Direct.directCombinedGrowthAndPaymentBuildBarrier
+      cutoff
+      terminal
+      (Aug.augmentedBuildsDirect
+        cutoff terminal (augmentedCritical I))
+      (weightedPlusTerminalBuildsCombinedPayment
+        (weightedPlusTerminal I))
 
 ------------------------------------------------------------------------
 -- Status.
