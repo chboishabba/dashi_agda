@@ -38,7 +38,7 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --
 -- Current periodic-B Clay max-cut:
 --
---   NEW / NONSTANDARD -- CURRENT PARETO CUT: TWO PROOF-BEARING LEAVES
+--   NEW / NONSTANDARD -- CURRENT PREFERRED CUT: TWO SHARED-WEIGHTED LEAVES
 --     A   R723 cutoff-uniform combined/global signed-commutator spacetime payment
 --     D   R730 direct critical-growth-to-combined payment with positive margin
 --
@@ -1347,6 +1347,38 @@ periodicClayMaxCutBarrierDependentQPlusMinusPaymentAdmissibleForA =
 periodicClayMaxCutTerminalQPlusMinusCeilingClosedNoncircularly : Bool
 periodicClayMaxCutTerminalQPlusMinusCeilingClosedNoncircularly =
   R650.round650TerminalQPlusMinusCeilingClosedNoncircularly
+
+periodicClayMaxCutPreferredWallExactlyTwoSharedWeightedLeaves : Bool
+periodicClayMaxCutPreferredWallExactlyTwoSharedWeightedLeaves =
+  R650.round650PreferredWallExactlyTwoSharedWeightedLeaves
+
+periodicClayMaxCutPreferredLeavesUseSameWeightedCarrier : Bool
+periodicClayMaxCutPreferredLeavesUseSameWeightedCarrier =
+  R650.round650PreferredLeavesUseSameWeightedCarrier
+
+periodicClayMaxCutPreferredWeightedCarrierIsInputLaplacianWork : Bool
+periodicClayMaxCutPreferredWeightedCarrierIsInputLaplacianWork =
+  R650.round650PreferredWeightedCarrierIsInputLaplacianWork
+
+periodicClayMaxCutPreferredEndpointIsCanonicalQPlusMinus : Bool
+periodicClayMaxCutPreferredEndpointIsCanonicalQPlusMinus =
+  R650.round650PreferredEndpointIsCanonicalQPlusMinus
+
+periodicClayMaxCutPreferredWeightedPlusEndpointLeafClosed : Bool
+periodicClayMaxCutPreferredWeightedPlusEndpointLeafClosed =
+  R650.round650PreferredWeightedPlusEndpointLeafClosed
+
+periodicClayMaxCutPreferredAugmentedCriticalWeightedLeafClosed : Bool
+periodicClayMaxCutPreferredAugmentedCriticalWeightedLeafClosed =
+  R650.round650PreferredAugmentedCriticalWeightedLeafClosed
+
+periodicClayMaxCutPreferredTwoLeavesBuildCriticalBarrier : Bool
+periodicClayMaxCutPreferredTwoLeavesBuildCriticalBarrier =
+  R650.round650PreferredTwoLeavesBuildCriticalBarrier
+
+periodicClayMaxCutBarrierDependentQPlusMinusShortcutAdmissible : Bool
+periodicClayMaxCutBarrierDependentQPlusMinusShortcutAdmissible =
+  R650.round650BarrierDependentQPlusMinusShortcutAdmissible
 
 periodicClayMaxCutPositiveRatesAloneCloseCombinedToR406 : Bool
 periodicClayMaxCutPositiveRatesAloneCloseCombinedToR406 =
