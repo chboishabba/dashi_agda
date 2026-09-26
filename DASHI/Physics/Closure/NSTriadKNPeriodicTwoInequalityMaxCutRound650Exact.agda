@@ -110,6 +110,7 @@ import DASHI.Physics.Closure.NSTriadKNR650CombinedToR406PositiveRateNoGoRound729
 import DASHI.Physics.Closure.NSTriadKNR650DirectCombinedCriticalGrowthRound730Exact as R730
 import DASHI.Physics.Closure.NSTriadKNR650WeightedEndpointToCombinedPaymentRound731Exact as R731
 import DASHI.Physics.Closure.NSTriadKNR650TwoLeafDirectCombinedCutRound732Exact as R732
+import DASHI.Physics.Closure.NSTriadKNR650TerminalMixedMassQPlusMinusRound733Exact as R733
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -212,6 +213,18 @@ round650R726PlusC2RemainSufficientFactorizationOfDirectLeaf =
 round650WeightedTerminalProducerForCombinedPaymentAvailable : Bool
 round650WeightedTerminalProducerForCombinedPaymentAvailable =
   R732.round732WeightedTerminalProducerForAAvailable
+
+round650TerminalMixedMassIsCanonicalQPlusMinus : Bool
+round650TerminalMixedMassIsCanonicalQPlusMinus =
+  R733.round733R691EndpointIsCanonicalR227QPlusMinus
+
+round650BarrierDependentQPlusMinusPaymentAdmissibleForA : Bool
+round650BarrierDependentQPlusMinusPaymentAdmissibleForA =
+  R733.round733UsingCriticalBarrierToPayAEndpointIsNoncircular
+
+round650TerminalQPlusMinusCeilingClosedNoncircularly : Bool
+round650TerminalQPlusMinusCeilingClosedNoncircularly =
+  R733.round733TerminalQPlusMinusCeilingClosedNoncircularly
 
 round650PositiveRatesAloneCloseCombinedToR406 : Bool
 round650PositiveRatesAloneCloseCombinedToR406 =
