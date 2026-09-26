@@ -1026,3 +1026,57 @@ concreteHistoryInverseThresholdNumericallyFixed = false
 concreteHistoryInverseThresholdNumericallyFixedIsFalse :
   concreteHistoryInverseThresholdNumericallyFixed ≡ false
 concreteHistoryInverseThresholdNumericallyFixedIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- SEPTEMBER-26 REDUCED S2/S3/S4 FRONTIER
+------------------------------------------------------------------------
+
+s2SelectedF2AndStressSameConcreteLocalCEndpoint : Bool
+s2SelectedF2AndStressSameConcreteLocalCEndpoint = true
+
+s2SelectedF2LiteralCurvatureEqualityStillRequired : Bool
+s2SelectedF2LiteralCurvatureEqualityStillRequired = true
+
+s3OSWightmanAuthorityAlreadyOwned : Bool
+s3OSWightmanAuthorityAlreadyOwned = true
+
+s3SelectedF2OperatorContinuationStillRequired : Bool
+s3SelectedF2OperatorContinuationStillRequired = true
+
+s4InequalityAnalysisNowClosed : Bool
+s4InequalityAnalysisNowClosed = true
+
+s4HistoryGammaUnitCapSameObjectStillRequired : Bool
+s4HistoryGammaUnitCapSameObjectStillRequired = true
+
+s4PhysicalAnomalyHistoryNormalizationStillRequired : Bool
+s4PhysicalAnomalyHistoryNormalizationStillRequired = true
+
+s2SelectedF2AndStressSameConcreteLocalCEndpointIsTrue :
+  s2SelectedF2AndStressSameConcreteLocalCEndpoint ≡ true
+s2SelectedF2AndStressSameConcreteLocalCEndpointIsTrue = refl
+
+s2SelectedF2LiteralCurvatureEqualityStillRequiredIsTrue :
+  s2SelectedF2LiteralCurvatureEqualityStillRequired ≡ true
+s2SelectedF2LiteralCurvatureEqualityStillRequiredIsTrue = refl
+
+s3OSWightmanAuthorityAlreadyOwnedIsTrue :
+  s3OSWightmanAuthorityAlreadyOwned ≡ true
+s3OSWightmanAuthorityAlreadyOwnedIsTrue = refl
+
+s3SelectedF2OperatorContinuationStillRequiredIsTrue :
+  s3SelectedF2OperatorContinuationStillRequired ≡ true
+s3SelectedF2OperatorContinuationStillRequiredIsTrue = refl
+
+s4InequalityAnalysisNowClosedIsTrue :
+  s4InequalityAnalysisNowClosed ≡ true
+s4InequalityAnalysisNowClosedIsTrue = refl
+
+s4HistoryGammaUnitCapSameObjectStillRequiredIsTrue :
+  s4HistoryGammaUnitCapSameObjectStillRequired ≡ true
+s4HistoryGammaUnitCapSameObjectStillRequiredIsTrue = refl
+
+s4PhysicalAnomalyHistoryNormalizationStillRequiredIsTrue :
+  s4PhysicalAnomalyHistoryNormalizationStillRequired ≡ true
+s4PhysicalAnomalyHistoryNormalizationStillRequiredIsTrue = refl
