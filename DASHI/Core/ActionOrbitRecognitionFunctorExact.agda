@@ -240,6 +240,97 @@ record OrbitStabilizerRecognition
 
 open OrbitStabilizerRecognition public
 
+
+------------------------------------------------------------------------
+-- 5b. Strong presentation-isomorphism grade.
+--
+-- Orbit/stabilizer recognition does not by itself say that the underlying
+-- action presentations are literally the same finite groupoid presentation.
+-- For that stronger claim require two-sided maps on BOTH objects and symmetry
+-- labels.  This is intentionally stronger than categorical/Morita
+-- equivalence; it is a safe same-presentation gate.
+------------------------------------------------------------------------
+
+record StateMapEquivalence
+    {SourceState SourceSymmetry TargetState TargetSymmetry : Set}
+    {sourceAction :
+      Action.InvertibleSymmetryAction SourceState SourceSymmetry}
+    {targetAction :
+      Action.InvertibleSymmetryAction TargetState TargetSymmetry}
+    (functor : ActionRecognitionFunctor sourceAction targetAction) : Set₁ where
+  constructor state-map-equivalence
+  field
+    preimageState : TargetState -> SourceState
+
+    mapAfterPreimageState :
+      (target : TargetState) ->
+      mapState functor (preimageState target) ≡ target
+
+    preimageAfterMapState :
+      (source : SourceState) ->
+      preimageState (mapState functor source) ≡ source
+
+open StateMapEquivalence public
+
+record SymmetryMapEquivalence
+    {SourceState SourceSymmetry TargetState TargetSymmetry : Set}
+    {sourceAction :
+      Action.InvertibleSymmetryAction SourceState SourceSymmetry}
+    {targetAction :
+      Action.InvertibleSymmetryAction TargetState TargetSymmetry}
+    (functor : ActionRecognitionFunctor sourceAction targetAction) : Set₁ where
+  constructor symmetry-map-equivalence
+  field
+    preimageSymmetry : TargetSymmetry -> SourceSymmetry
+
+    mapAfterPreimageSymmetry :
+      (target : TargetSymmetry) ->
+      mapSymmetry functor (preimageSymmetry target) ≡ target
+
+    preimageAfterMapSymmetry :
+      (source : SourceSymmetry) ->
+      preimageSymmetry (mapSymmetry functor source) ≡ source
+
+open SymmetryMapEquivalence public
+
+record ActionGroupoidPresentationIsomorphism
+    {SourceState SourceSymmetry TargetState TargetSymmetry : Set}
+    {sourceAction :
+      Action.InvertibleSymmetryAction SourceState SourceSymmetry}
+    {targetAction :
+      Action.InvertibleSymmetryAction TargetState TargetSymmetry}
+    (functor : ActionRecognitionFunctor sourceAction targetAction)
+    (sourceOrbits : Orbit.OrbitPresentation sourceAction)
+    (targetOrbits : Orbit.OrbitPresentation targetAction) : Set₁ where
+  constructor action-groupoid-presentation-isomorphism
+  field
+    orbitStabilizerRecognition :
+      OrbitStabilizerRecognition functor sourceOrbits targetOrbits
+
+    stateMapEquivalence :
+      StateMapEquivalence functor
+
+    symmetryMapEquivalence :
+      SymmetryMapEquivalence functor
+
+open ActionGroupoidPresentationIsomorphism public
+
+data OrbitStabilizerRecognitionCreatesPresentationIsomorphism : Set where
+data Pi0BijectionCreatesStateBijection : Set where
+data MappedStabilizersCreateSymmetryBijection : Set where
+
+orbitStabilizerRecognitionDoesNotCreatePresentationIsomorphism :
+  OrbitStabilizerRecognitionCreatesPresentationIsomorphism -> ⊥
+orbitStabilizerRecognitionDoesNotCreatePresentationIsomorphism ()
+
+pi0BijectionDoesNotCreateStateBijection :
+  Pi0BijectionCreatesStateBijection -> ⊥
+pi0BijectionDoesNotCreateStateBijection ()
+
+mappedStabilizersDoNotCreateSymmetryBijection :
+  MappedStabilizersCreateSymmetryBijection -> ⊥
+mappedStabilizersDoNotCreateSymmetryBijection ()
+
 ------------------------------------------------------------------------
 -- 6. Recognition composition.
 --
@@ -519,10 +610,14 @@ record ActionOrbitRecognitionBoundary : Set where
     pi0SurjectivitySeparateObligation : Bool
     stabilizerPreservationSeparateObligation : Bool
     stabilizerReflectionSeparateObligation : Bool
+    presentationIsomorphismRequiresStateBijection : Bool
+    presentationIsomorphismRequiresSymmetryBijection : Bool
+    orbitRecognitionAloneCreatesPresentationIsomorphism : Bool
     cardinalityMatchSufficientForRecognition : Bool
 
 canonicalActionOrbitRecognitionBoundary :
   ActionOrbitRecognitionBoundary
 canonicalActionOrbitRecognitionBoundary =
   action-orbit-recognition-boundary
-    true true true true true true true false
+    true true true true true true true
+    true true false false
