@@ -303,18 +303,31 @@ dashi-agda diagnose DASHI/Biology/Everything.agda \
 ```
 
 This exposes existing semantic module object hashes, declaration counts and
-term counts without invoking Agda. The current `agda2lean` schema does not yet
-store the source SHA that produced each semantic object, so these hits are
-reported with:
+term counts without invoking Agda. `agda2lean` catalog schema v3 can also
+store the exact SHA256 of the Agda source accepted for each semantic module
+head. The source index compares that checked hash with its current source hash:
 
 ```text
-freshness = unknown
+fresh
+    checked_source_sha256 == current source_sha256
+
+stale
+    both hashes are known and differ
+
+unknown
+    legacy catalog row has no checked source hash
 ```
 
-A catalog hit must therefore be treated as a last-known semantic snapshot, not
-proof that the current source is type-valid. The cross-repo follow-up is to
-persist the checked source hash in `agda2lean` so freshness can be decided
-exactly.
+The long-lived service accepts the same catalog:
+
+```bash
+dashi-agda-server \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite
+```
+
+Its `next_error` result includes semantic freshness for the diagnostic's
+module, and the JSONL `semantic_status` method reports fresh/stale/unknown
+counts for an indexed subject closure without invoking Agda.
 
 Pytest remains the regression/full-audit surface for the checker itself; it is
 not the normal agent runtime.
