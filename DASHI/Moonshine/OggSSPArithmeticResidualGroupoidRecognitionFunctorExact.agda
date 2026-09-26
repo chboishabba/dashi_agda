@@ -30,6 +30,7 @@ import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as 
 import DASHI.Moonshine.P11MarkedFrobeniusResidualReceiptExact as P11Residual
 import DASHI.Moonshine.OggSSPExponentResidualVsSupersingularOrbitSeparationExact as Separation
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
+import DASHI.Moonshine.OggSSPExponentResidualArithmeticSourceInterfaceExact as SourceInterface
 
 recognitionFunctorClaimOrigin : Source.ClaimOrigin
 recognitionFunctorClaimOrigin = Source.repositoryNewExtension
@@ -316,6 +317,12 @@ frickeInvolutionDoesNotForceGaugeQuotient :
   FrickeInvolutionForcesGaugeQuotient → ⊥
 frickeInvolutionDoesNotForceGaugeQuotient ()
 
+
+arithmeticSourceInterfaceBoundary :
+  SourceInterface.ExponentResidualArithmeticSourceBoundary
+arithmeticSourceInterfaceBoundary =
+  SourceInterface.canonicalExponentResidualArithmeticSourceBoundary
+
 ------------------------------------------------------------------------
 -- 6. Recognition frontier.
 ------------------------------------------------------------------------
@@ -333,6 +340,7 @@ record SmallCharacteristicRecognitionFunctorBoundary : Set where
   field
     genericActionGroupoidFunctorContractOwned : Bool
     strongerGenericRecognitionCoreReused : Bool
+    arithmeticResidualSourceInterfaceTyped : Bool
     actionIntertwiningRequired : Bool
     orbitPreservationRequired : Bool
     stabilizerPreservationAndReflectionRequired : Bool
@@ -361,7 +369,7 @@ canonicalSmallCharacteristicRecognitionFunctorBoundary :
   SmallCharacteristicRecognitionFunctorBoundary
 canonicalSmallCharacteristicRecognitionFunctorBoundary =
   small-characteristic-recognition-functor-boundary
-    true true true true true
+    true true true true true true
     true true
     true true true false
     5 true
