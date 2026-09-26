@@ -2058,3 +2058,123 @@ ambientHeightDefectScaleTransportedIntoAgdaKernelHere = false
 ambientHeightDefectScaleInterpretation : String
 ambientHeightDefectScaleInterpretation =
   "Lean source-writes the selected ambient height defect through sixth order with a certified eighth-order absolute remainder. After physical rescaling, the leading target contribution is S*a^4/(24*(t/16)^6), the selected negative M6 gives a favorable positive sixth-order correction, and the remaining eighth debt is bounded at order |a|^8*(t/16)^(-10). Existing strength-floor and K0 bounds produce an explicit multiplicity-one ambient margin lower coordinate. The coupled signed canonical far-minus-mu statistic still needs an independent upper theorem against that margin."
+
+
+------------------------------------------------------------------------
+-- CANONICAL-FAR QUARTIC SIGN / ZERO-MODE FAIL-FAST
+--
+-- Lean now exposes one genuinely favorable geometric fact on the ACTUAL far
+-- carrier.
+--
+-- The canonical radius satisfies eta0 = 1/(pi+1) > 1/5.  If t>=200 and rho
+-- is canonical-far, then
+--
+--   |Im(rho)-t| > (t/16)/5 >= 5/2.
+--
+-- Every zeta zero also satisfies |heightOf rho| <= 1/2, so
+--
+--   6*heightOf(rho)^2 < (Im(rho)-t)^2.
+--
+-- Therefore every canonical-far zero lies in the favorable outer cone of the
+-- complete joint quartic polynomial, and Lean source-proves
+--
+--   literalCanonicalFarQuarticTerm(rho) <= 0.
+--
+-- Finite centered exhaustions satisfy the exact split
+--
+--   literalFarExactAt(n)
+--     = literalCanonicalFarQuarticAt(n)
+--       + literalCanonicalFarNonquarticAt(n),
+--
+-- with
+--
+--   literalCanonicalFarQuarticAt(n) <= 0,
+--
+-- hence
+--
+--   literalFarExactAt(n)
+--     <= literalCanonicalFarNonquarticAt(n).
+--
+-- IMPORTANT: this split is intentionally finite-windowed.  The isolated
+-- quartic polynomial grows like -q^4 while the exact full kernel decays and
+-- oscillates, so no separate global quartic/remainder tsum is asserted.
+--
+-- A second tempting mechanism was also checked: exact annihilation of a
+-- constant spectral density by zero total q-mass.  The fixed endpoint pair
+-- does NOT obtain this automatically.  On the atomic J2-null endpoints,
+--
+--   mu(1/2) = -1/78,
+--   mu(2/3) = 1/162,
+--
+-- and the atomic physical-origin projective coordinate is
+--
+--   A1-A2 = lambda - 1 - 2*mu.
+--
+-- Combining the endpoints with the same asymptotic pole-cancelling weights
+-- P2=1 and -P1=-9/8 gives
+--
+--   -10/117 != 0.
+--
+-- Thus "pole cancellation -> constant-density cancellation" is false for the
+-- selected fixed-endpoint pair.  Using exact zero-mode annihilation would
+-- require a redesigned witness family rather than another transport lemma.
+------------------------------------------------------------------------
+
+data CanonicalFarQuarticSignCoordinate : Set where
+  canonicalRadiusGreaterThanOneFifth :
+    CanonicalFarQuarticSignCoordinate
+  canonicalFarImpliesOuterCone :
+    CanonicalFarQuarticSignCoordinate
+  finiteFarQuarticNonpositive :
+    CanonicalFarQuarticSignCoordinate
+  finiteFarExactBoundedByNonquartic :
+    CanonicalFarQuarticSignCoordinate
+  atomicEndpointMuValues :
+    CanonicalFarQuarticSignCoordinate
+  atomicSignedOriginCoordinateNonzero :
+    CanonicalFarQuarticSignCoordinate
+  ambientSignedFarMinusMuEstimate :
+    CanonicalFarQuarticSignCoordinate
+
+canonicalFarQuarticSignStatus :
+  CanonicalFarQuarticSignCoordinate -> V4H4Status
+canonicalFarQuarticSignStatus canonicalRadiusGreaterThanOneFifth =
+  leanSourceWrittenDonor
+canonicalFarQuarticSignStatus canonicalFarImpliesOuterCone =
+  leanSourceWrittenDonor
+canonicalFarQuarticSignStatus finiteFarQuarticNonpositive =
+  leanSourceWrittenDonor
+canonicalFarQuarticSignStatus finiteFarExactBoundedByNonquartic =
+  leanSourceWrittenDonor
+canonicalFarQuarticSignStatus atomicEndpointMuValues =
+  leanSourceWrittenDonor
+canonicalFarQuarticSignStatus atomicSignedOriginCoordinateNonzero =
+  leanSourceWrittenDonor
+canonicalFarQuarticSignStatus ambientSignedFarMinusMuEstimate =
+  openAnalyticObstruction
+
+canonicalFarQuarticGeometryIsPaid :
+  canonicalFarQuarticSignStatus finiteFarQuarticNonpositive
+    ≡ leanSourceWrittenDonor
+canonicalFarQuarticGeometryIsPaid = refl
+
+fixedEndpointConstantDensityCancellationFails :
+  canonicalFarQuarticSignStatus atomicSignedOriginCoordinateNonzero
+    ≡ leanSourceWrittenDonor
+fixedEndpointConstantDensityCancellationFails = refl
+
+ambientSignedFarMinusMuRemainsOpenAfterFarSignAudit :
+  canonicalFarQuarticSignStatus ambientSignedFarMinusMuEstimate
+    ≡ openAnalyticObstruction
+ambientSignedFarMinusMuRemainsOpenAfterFarSignAudit = refl
+
+canonicalFarQuarticSignLeanDonorHead : String
+canonicalFarQuarticSignLeanDonorHead =
+  "6862ff2ab9d503788e394f3e2122248bd7b9ba0d"
+
+canonicalFarQuarticSignTransportedIntoAgdaKernelHere : Bool
+canonicalFarQuarticSignTransportedIntoAgdaKernelHere = false
+
+canonicalFarQuarticSignInterpretation : String
+canonicalFarQuarticSignInterpretation =
+  "Lean source-proves that every actual canonical-far zeta zero above t=200 lies in the favorable outer region of the complete fourth-order pair polynomial, so the finite canonical-far quartic contribution is nonpositive and the exact finite far source is bounded above by its nonquartic remainder carrier. This is kept finite-windowed because the separated quartic/remainder pieces are not suitable global tsums. Lean also source-proves an atomic zero-mode fail-fast: the fixed half/two-thirds endpoint pair has signed projective physical-origin coordinate -10/117, so pole cancellation does not imply constant-density annihilation. The ambient multiplicity-one signed far-minus-mu estimate remains the genuine open theorem."
