@@ -241,38 +241,37 @@ def _write_semantic_catalog(path, module_name, checked_hash):
 
 
 def _write_fake_promoter(path: Path, *, update_catalog: bool) -> None:
-    update = """
+    update = (
+        """
 connection = sqlite3.connect(catalog)
 connection.execute(
-    \"\"
-    CREATE TABLE IF NOT EXISTS module_heads (
-        module_name TEXT PRIMARY KEY,
-        object_hash BLOB NOT NULL,
-        declaration_count INTEGER NOT NULL,
-        term_count INTEGER NOT NULL,
-        checked_source_sha256 TEXT,
-        updated_at TEXT NOT NULL
-    )
-    \"\"
+    "CREATE TABLE IF NOT EXISTS module_heads ("
+    "module_name TEXT PRIMARY KEY, "
+    "object_hash BLOB NOT NULL, "
+    "declaration_count INTEGER NOT NULL, "
+    "term_count INTEGER NOT NULL, "
+    "checked_source_sha256 TEXT, "
+    "updated_at TEXT NOT NULL)"
 )
 connection.execute(
-    \"\"
-    INSERT INTO module_heads(
-        module_name, object_hash, declaration_count, term_count,
-        checked_source_sha256, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?)
-    ON CONFLICT(module_name) DO UPDATE SET
-        object_hash = excluded.object_hash,
-        declaration_count = excluded.declaration_count,
-        term_count = excluded.term_count,
-        checked_source_sha256 = excluded.checked_source_sha256,
-        updated_at = excluded.updated_at
-    \"\",
-    (module, bytes.fromhex(\"abcd\"), 1, 2, source_hash, \"2026-09-27T00:00:00Z\"),
+    "INSERT INTO module_heads("
+    "module_name, object_hash, declaration_count, term_count, "
+    "checked_source_sha256, updated_at"
+    ") VALUES (?, ?, ?, ?, ?, ?) "
+    "ON CONFLICT(module_name) DO UPDATE SET "
+    "object_hash = excluded.object_hash, "
+    "declaration_count = excluded.declaration_count, "
+    "term_count = excluded.term_count, "
+    "checked_source_sha256 = excluded.checked_source_sha256, "
+    "updated_at = excluded.updated_at",
+    (module, bytes.fromhex("abcd"), 1, 2, source_hash, "2026-09-27T00:00:00Z"),
 )
 connection.commit()
 connection.close()
-""" if update_catalog else ""
+"""
+        if update_catalog
+        else ""
+    )
 
     path.write_text(
         textwrap.dedent(
