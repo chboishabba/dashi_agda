@@ -24,6 +24,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversal
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe.Base using (just)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -146,7 +147,7 @@ everyFormulaIsInEchoFixedPointImage formula =
 ------------------------------------------------------------------------
 
 record EchoFixedPointResidualWidth
-    (remaining width : Agda.Builtin.Nat.Nat) : Set₁ where
+    (remaining width : Nat) : Set₁ where
   constructor echo-fixed-point-residual-width
   field
     formula :
