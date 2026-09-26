@@ -10,6 +10,7 @@ from typing import IO, Any, Dict, Optional, Tuple
 from .apply_edits import EditApplicationError, apply_text_edits
 from .source_index import SourceIndex
 from .semantic_catalog import SemanticCatalog
+from .promotion import CommandPromoter
 from .timing import Profiler, TimingSnapshot
 
 
@@ -57,6 +58,8 @@ class DashiAgdaService:
         *,
         jobs: int = 0,
         semantic_catalog: Optional[Path] = None,
+        promoter_command: Optional[str] = None,
+        promoter_timeout: float = 900.0,
     ) -> None:
         self.root = root.resolve()
         self.profiler = Profiler()
@@ -67,9 +70,26 @@ class DashiAgdaService:
             jobs=jobs,
         )
         self.jobs = jobs
-        self.semantic = (
-            SemanticCatalog(semantic_catalog)
+        self.semantic_path = (
+            semantic_catalog.resolve()
             if semantic_catalog is not None
+            else None
+        )
+        self.semantic = (
+            SemanticCatalog(self.semantic_path)
+            if self.semantic_path is not None
+            and self.semantic_path.exists()
+            else None
+        )
+        self.promoter = (
+            CommandPromoter(
+                promoter_command,
+                root=self.root,
+                catalog=self.semantic_path,
+                timeout=promoter_timeout,
+            )
+            if promoter_command is not None
+            and self.semantic_path is not None
             else None
         )
 
@@ -99,10 +119,25 @@ class DashiAgdaService:
             time.perf_counter_ns() - started_ns,
         )
 
+    def _ensure_semantic_catalog(self) -> None:
+        if (
+            self.semantic is None
+            and self.semantic_path is not None
+            and self.semantic_path.exists()
+        ):
+            self.semantic = SemanticCatalog(self.semantic_path)
+
+    def _refresh_semantic_catalog(self) -> None:
+        if self.semantic is not None:
+            self.semantic.close()
+            self.semantic = None
+        self._ensure_semantic_catalog()
+
     def _semantic_lookup(
         self,
         module_hashes: Dict[str, str],
     ) -> Dict[str, dict]:
+        self._ensure_semantic_catalog()
         if self.semantic is None or not module_hashes:
             return {}
         with self.profiler.stage("semantic.catalog_lookup"):
@@ -174,7 +209,7 @@ class DashiAgdaService:
             require_fix=require_fix,
         )
         semantic = {}
-        if diagnostic is not None and self.semantic is not None:
+        if diagnostic is not None and self.semantic_path is not None:
             identity = self.index.source_identity(diagnostic.path)
             if identity is not None:
                 module_name, source_hash = identity
@@ -297,6 +332,101 @@ class DashiAgdaService:
             "profile": self._finish_request(before, started),
         }
 
+    @staticmethod
+    def _output_tail(text: str, limit: int = 8192) -> str:
+        return text if len(text) <= limit else text[-limit:]
+
+    def promote(self, target: str) -> dict:
+        if self.promoter is None:
+            raise ValueError(
+                "semantic promotion is not configured; "
+                "start the service with --semantic-catalog and --promoter-command"
+            )
+        if self.semantic_path is None:
+            raise ValueError("semantic catalog path is not configured")
+
+        before, started = self._start_request()
+        target_path = Path(target)
+        if not target_path.is_absolute():
+            target_path = self.root / target_path
+        target_path = target_path.resolve()
+
+        # Refresh source identity before invoking any external checker.
+        result = self.index.diagnose(target_path)
+        identity = self.index.source_identity(target_path)
+        if identity is None:
+            raise ValueError(
+                f"target is not indexed as an Agda module: {target_path}"
+            )
+        module_name, source_hash = identity
+
+        command_result = self.promoter.run(
+            path=target_path,
+            module=module_name,
+        )
+
+        # The external writer may have created or replaced the catalog. Reopen
+        # it and prove promotion from the checked-source SHA postcondition.
+        self._refresh_semantic_catalog()
+        semantic = self._semantic_lookup(
+            dict(result.source_hashes)
+        )
+        target_semantic = semantic.get(module_name)
+        freshness = (
+            target_semantic["freshness"]
+            if target_semantic is not None
+            else "unknown"
+        )
+
+        if command_result.returncode != 0:
+            status = "failed"
+        elif freshness == "fresh":
+            status = "promoted"
+        else:
+            status = "unverified"
+
+        counts = self._semantic_counts(semantic)
+        receipt = {
+            "status": status,
+            "module_name": module_name,
+            "target_path": str(target_path),
+            "source_sha256": source_hash,
+            "promoter_returncode": command_result.returncode,
+            "promoter_elapsed_ms": round(
+                command_result.elapsed_ms,
+                3,
+            ),
+            "semantic_freshness": freshness,
+            "semantic_counts": counts,
+            "semantic": target_semantic,
+            "promoter_receipt": command_result.receipt,
+            "stdout_tail": self._output_tail(
+                command_result.stdout
+            ),
+            "stderr_tail": self._output_tail(
+                command_result.stderr
+            ),
+        }
+        receipt_id = self.index.record_promotion(receipt)
+        receipt["receipt_id"] = receipt_id
+        receipt["profile"] = self._finish_request(before, started)
+        return receipt
+
+    def promotion_history(
+        self,
+        module_name: Optional[str] = None,
+        limit: int = 20,
+    ) -> dict:
+        before, started = self._start_request()
+        receipts = self.index.promotion_history(
+            module_name=module_name,
+            limit=limit,
+        )
+        return {
+            "receipts": receipts,
+            "profile": self._finish_request(before, started),
+        }
+
     def cache_status(self) -> dict:
         before, started = self._start_request()
         result = self.index.cache_stats()
@@ -322,6 +452,10 @@ class DashiAgdaService:
             return self.cache_status()
         if method == "semantic_status":
             return self.semantic_status(**params)
+        if method == "promote":
+            return self.promote(**params)
+        if method == "promotion_history":
+            return self.promotion_history(**params)
         if method == "ping":
             return {"status": "ok"}
         raise ValueError(f"unknown service method: {method}")
@@ -426,6 +560,19 @@ def main(argv=None) -> int:
         type=Path,
         help="optional read-only agda2lean semantic catalog",
     )
+    parser.add_argument(
+        "--promoter-command",
+        help=(
+            "explicit semantic promotion command; supports {file}, {module}, "
+            "{root}, {catalog}, and {receipt} placeholders"
+        ),
+    )
+    parser.add_argument(
+        "--promoter-timeout",
+        type=float,
+        default=900.0,
+        help="promotion subprocess timeout in seconds (default: 900)",
+    )
     args = parser.parse_args(argv)
 
     with DashiAgdaService(
@@ -433,6 +580,8 @@ def main(argv=None) -> int:
         args.index,
         jobs=args.jobs,
         semantic_catalog=args.semantic_catalog,
+        promoter_command=args.promoter_command,
+        promoter_timeout=args.promoter_timeout,
     ) as service:
         serve_streams(
             service,
