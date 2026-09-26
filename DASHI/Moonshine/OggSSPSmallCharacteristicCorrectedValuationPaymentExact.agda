@@ -234,6 +234,14 @@ canonicalCandidateSmallPrimeCorrectionPayment =
 -- c_p(sigma) is an actual local term in a corrected modular-function valuation.
 ------------------------------------------------------------------------
 
+data SmallPrimeAnalyticRoute : Set where
+  directCorrectedHauptmodulValuation :
+    SmallPrimeAnalyticRoute
+  extendedDworkFirstPoleSharpness :
+    SmallPrimeAnalyticRoute
+  wildStackCohomologicalValuation :
+    SmallPrimeAnalyticRoute
+
 record SmallPrimeCorrectedValuationAuthority
     (candidate : CandidateSmallPrimeCorrectionPayment) : Set₁ where
   field
@@ -261,9 +269,31 @@ record SmallPrimeCorrectedValuationAuthority
       p3Contribution candidate sector
       ≡ valuationMultiplicity (p3AnalyticLocalTerm sector)
 
+    analyticRoute :
+      SmallPrimeAnalyticRoute
+
     correctedQExpansionValuationTheorem : Bool
     correctedQExpansionValuationTheoremIsTrue :
       correctedQExpansionValuationTheorem ≡ true
+
+    localTermsAssembleToHauptmodulDifferenceValuation : Bool
+    localTermsAssembleToHauptmodulDifferenceValuationIsTrue :
+      localTermsAssembleToHauptmodulDifferenceValuation ≡ true
+
+open SmallPrimeCorrectedValuationAuthority public
+
+------------------------------------------------------------------------
+-- Optional route-specific refinements.
+--
+-- These are NOT required by the generic corrected-valuation theorem.
+------------------------------------------------------------------------
+
+record ExtendedDworkSmallPrimeAuthority
+    (candidate : CandidateSmallPrimeCorrectionPayment)
+    (authority : SmallPrimeCorrectedValuationAuthority candidate) : Set where
+  field
+    routeIsDwork :
+      analyticRoute authority ≡ extendedDworkFirstPoleSharpness
 
     correctedDworkFirstPoleSharpnessAtP2 : Bool
     correctedDworkFirstPoleSharpnessAtP2IsTrue :
@@ -273,9 +303,16 @@ record SmallPrimeCorrectedValuationAuthority
     correctedDworkFirstPoleSharpnessAtP3IsTrue :
       correctedDworkFirstPoleSharpnessAtP3 ≡ true
 
-    localTermsAssembleToHauptmodulDifferenceValuation : Bool
-    localTermsAssembleToHauptmodulDifferenceValuationIsTrue :
-      localTermsAssembleToHauptmodulDifferenceValuation ≡ true
+record WildStackCohomologicalAuthority
+    (candidate : CandidateSmallPrimeCorrectionPayment)
+    (authority : SmallPrimeCorrectedValuationAuthority candidate) : Set where
+  field
+    routeIsWildStack :
+      analyticRoute authority ≡ wildStackCohomologicalValuation
+
+    stackLocalTermsDerivedFromCohomology : Bool
+    stackLocalTermsDerivedFromCohomologyIsTrue :
+      stackLocalTermsDerivedFromCohomology ≡ true
 
 ------------------------------------------------------------------------
 -- 6. No fake constructor from finite geometry alone.
@@ -312,6 +349,8 @@ record CorrectedValuationPaymentBoundary : Set where
     p3CandidatePaysExactArithmeticGap : Bool
     analyticLocalTermAuthorityConstructed : Bool
     correctedQExpansionTheoremConstructed : Bool
+    genericRouteDoesNotRequireDworkExtension : Bool
+    genericRouteDoesNotRequireWildStackCohomology : Bool
     correctedP2DworkSharpnessConstructed : Bool
     correctedP3DworkSharpnessConstructed : Bool
     finiteCountPromotedToAnalyticValuation : Bool
@@ -321,4 +360,4 @@ canonicalCorrectedValuationPaymentBoundary :
 canonicalCorrectedValuationPaymentBoundary =
   corrected-valuation-payment-boundary
     true true true true true true
-    false false false false false
+    false false true true false false false
