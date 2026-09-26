@@ -284,3 +284,5 @@ import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact
 import DASHI.Moonshine.OggSSPP3InertiaCentralizerValuationNoGoExact
 
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectionMechanismComparisonExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact
