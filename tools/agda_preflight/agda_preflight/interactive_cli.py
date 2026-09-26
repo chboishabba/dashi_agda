@@ -80,11 +80,38 @@ def _run_diagnose(
         if semantic_catalog is not None:
             with profiler.stage("semantic.catalog_lookup"):
                 with SemanticCatalog(semantic_catalog) as catalog:
-                    semantic = catalog.lookup(result.modules)
+                    semantic = catalog.lookup(
+                        result.modules,
+                        dict(result.source_hashes),
+                    )
             profiler.count("semantic_snapshot_hits", len(semantic))
             profiler.count(
                 "semantic_snapshot_misses",
                 max(0, len(result.modules) - len(semantic)),
+            )
+            profiler.count(
+                "semantic_snapshot_fresh",
+                sum(
+                    1
+                    for item in semantic.values()
+                    if item.freshness == "fresh"
+                ),
+            )
+            profiler.count(
+                "semantic_snapshot_stale",
+                sum(
+                    1
+                    for item in semantic.values()
+                    if item.freshness == "stale"
+                ),
+            )
+            profiler.count(
+                "semantic_snapshot_unknown",
+                sum(
+                    1
+                    for item in semantic.values()
+                    if item.freshness == "unknown"
+                ),
             )
     return result, profiler.snapshot(), semantic
 
@@ -198,8 +225,8 @@ def main(argv=None) -> int:
         "--semantic-catalog",
         type=Path,
         help=(
-            "optional read-only agda2lean SQLite catalog; semantic hits are "
-            "reported with freshness=unknown until checked source hashes are stored"
+            "optional read-only agda2lean SQLite catalog; newer catalogs "
+            "classify semantic heads as fresh/stale from checked source SHA256"
         ),
     )
     diagnose.add_argument(
@@ -382,10 +409,22 @@ def main(argv=None) -> int:
             if not diagnostics:
                 print("dashi-agda: no structural issues found")
             if args.semantic_catalog is not None:
+                fresh = sum(
+                    1 for item in semantic.values()
+                    if item.freshness == "fresh"
+                )
+                stale = sum(
+                    1 for item in semantic.values()
+                    if item.freshness == "stale"
+                )
+                unknown = sum(
+                    1 for item in semantic.values()
+                    if item.freshness == "unknown"
+                )
                 print(
                     "semantic snapshots: "
                     f"{len(semantic)}/{len(result.modules)} "
-                    "(freshness unknown)",
+                    f"(fresh={fresh}, stale={stale}, unknown={unknown})",
                     file=sys.stderr,
                 )
             if args.profile:
