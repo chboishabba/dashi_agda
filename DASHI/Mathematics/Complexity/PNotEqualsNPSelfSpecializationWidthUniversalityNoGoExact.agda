@@ -24,12 +24,18 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversal
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe.Base using (just)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Finite
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
+import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneToSelfDiagonalBridgeExact as Diagonal
+import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneSpecializationFixedPointExact as TotalKleene
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 
@@ -179,6 +185,131 @@ anyResidualWidthOccursInEchoFixedPointImage
     formula
     (everyFormulaIsInEchoFixedPointImage formula)
     witness
+
+------------------------------------------------------------------------
+-- Specific SAT-diagonal body: literal payload passthrough is blocked.
+--
+-- Suppose one quoted program evaluates to the known satisfiable anchor and the
+-- diagonal body returns literally that same formula.  The body obligation
+--
+--   body satisfiable -> candidate rejects quoted output
+--
+-- then contradicts the anchored candidate's acceptance of that formula.
+--
+-- Therefore the generic echo/passthrough universality above cannot simply be
+-- reused as the actual SAT-diagonal primitive body.
+------------------------------------------------------------------------
+
+trueNotFalse : Agda.Builtin.Bool.true ≡ Agda.Builtin.Bool.false → ⊥
+trueNotFalse ()
+
+literalPassthroughAtKnownSatisfiableImpossible :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost}
+    {system : TotalKleene.SpecializingProgramSystem}
+    {view : Diagonal.CookFormulaOutputView system}
+    {dynamicInput : TotalKleene.Input system}
+    (body :
+      Diagonal.SATDiagonalBody
+        (Direct.candidate anchored)
+        system
+        view
+        dynamicInput)
+    (quoted : TotalKleene.Program system) →
+  Diagonal.asFormula view
+      (TotalKleene.run1 system quoted dynamicInput)
+    ≡
+    Cook.excludedMiddleFormula →
+  Diagonal.asFormula view
+      (TotalKleene.run2
+        system
+        (Diagonal.bodyProgram body)
+        quoted
+        dynamicInput)
+    ≡
+    Diagonal.asFormula view
+      (TotalKleene.run1 system quoted dynamicInput) →
+  ⊥
+literalPassthroughAtKnownSatisfiableImpossible
+    {anchored = anchored}
+    {system = system}
+    {view = view}
+    {dynamicInput = dynamicInput}
+    body
+    quoted
+    quotedIsKnownSat
+    bodyIsQuoted =
+  trueNotFalse contradiction
+  where
+    quotedFormula :
+      Cook.BooleanFormula
+    quotedFormula =
+      Diagonal.asFormula view
+        (TotalKleene.run1 system quoted dynamicInput)
+
+    bodyFormula :
+      Cook.BooleanFormula
+    bodyFormula =
+      Diagonal.asFormula view
+        (TotalKleene.run2
+          system
+          (Diagonal.bodyProgram body)
+          quoted
+          dynamicInput)
+
+    quotedSatisfiable :
+      Cook.Satisfiable quotedFormula
+    quotedSatisfiable =
+      subst
+        Cook.Satisfiable
+        (sym quotedIsKnownSat)
+        Cook.excludedMiddleFormulaIsSatisfiable
+
+    bodySatisfiable :
+      Cook.Satisfiable bodyFormula
+    bodySatisfiable =
+      subst
+        Cook.Satisfiable
+        (sym bodyIsQuoted)
+        quotedSatisfiable
+
+    candidateRejectsQuoted :
+      Direct.decide
+        (Direct.candidate anchored)
+        quotedFormula
+      ≡
+      Agda.Builtin.Bool.false
+    candidateRejectsQuoted =
+      Diagonal.rejectsQuotedProgramIfBodySatisfiable
+        body
+        quoted
+        bodySatisfiable
+
+    candidateDecisionTransport :
+      Direct.decide
+        (Direct.candidate anchored)
+        quotedFormula
+      ≡
+      Direct.decide
+        (Direct.candidate anchored)
+        Cook.excludedMiddleFormula
+    candidateDecisionTransport =
+      cong
+        (Direct.decide
+          (Direct.candidate anchored))
+        quotedIsKnownSat
+
+    contradiction :
+      Agda.Builtin.Bool.true
+      ≡
+      Agda.Builtin.Bool.false
+    contradiction =
+      trans
+        (sym
+          (Direct.acceptsKnownSatisfiable anchored))
+        (trans
+          (sym candidateDecisionTransport)
+          candidateRejectsQuoted)
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
