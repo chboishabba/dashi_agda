@@ -77,7 +77,9 @@ import Bench.Leaf
     assert payload["warm"]["runs"] == 3
     assert payload["warm"]["all_zero_parse"] is True
     assert payload["warm"]["files_parsed"]["max"] == 0
-    assert payload["cold"]["counts"]["files_parsed"] == 2
+    assert payload["cold"]["counts"]["cold_interface_files_parsed"] == 2
+    assert payload["cold"]["counts"]["cold_worker_files_parsed"] == 2
+    assert payload["cold"]["counts"]["files_parsed"] == 4
 
 
 

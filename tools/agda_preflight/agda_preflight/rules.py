@@ -683,7 +683,12 @@ def extended_diagnostics(checker, s, D):
             return
 
         temporary.append(module)
-        for dependency in sorted(set(summary.imports.values())):
+        import_targets = (
+            summary.imports.values()
+            if isinstance(summary.imports, dict)
+            else [target for _, target in summary.imports]
+        )
+        for dependency in sorted(set(import_targets)):
             dependency_interface = checker.interface_for_module(dependency)
             if dependency_interface is not None:
                 visit_import_cone(dependency_interface)
