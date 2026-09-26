@@ -33,7 +33,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Fin.Base using (Fin)
 import Data.Fin.Base as FinBase
@@ -45,6 +45,7 @@ open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
 import DASHI.Core.FutureObservationalRefinement as FutureCore
@@ -683,7 +684,7 @@ layeredResidualWidthSumStrictlyBelowCurrentMeasure :
     (run : ArityTerminal.ArityTerminalAdmittedConstructionRun state) →
   ResidualWidthStack
     {root =
-      DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+      Bridge.cookToIndexed
         (Q2.currentFormula state)}
     next
     total →
@@ -700,7 +701,7 @@ layeredResidualWidthSumStrictlyBelowCurrentMeasure
   where
     candidate :
       Candidate.TransitionTableCandidate
-        (DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+        (Bridge.cookToIndexed
           (Q2.currentFormula state))
     candidate =
       Candidate.transitionCandidate
@@ -775,7 +776,7 @@ tripleLayeredResidualWidthStrictlyBelowCurrentMeasure :
     (run : ArityTerminal.ArityTerminalAdmittedConstructionRun state) →
   ResidualWidthStack
     {root =
-      DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+      Bridge.cookToIndexed
         (Q2.currentFormula state)}
     next
     total →
@@ -798,7 +799,7 @@ tripleLayeredResidualWidthStrictlyBelowCurrentMeasure
 
     candidate :
       Candidate.TransitionTableCandidate
-        (DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact.cookToIndexed
+        (Bridge.cookToIndexed
           (Q2.currentFormula state))
     candidate =
       Candidate.transitionCandidate
