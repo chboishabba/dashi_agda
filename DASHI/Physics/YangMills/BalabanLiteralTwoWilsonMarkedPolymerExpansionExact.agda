@@ -194,3 +194,102 @@ supportIndexedMarkedExpansionFromKP
           clusterFunctionalMissingRightIndependent family cutoff left right
       }
   }
+
+
+------------------------------------------------------------------------
+-- Differentiable two-Wilson KP family.
+--
+-- The pointwise KP theorem above supplies the source-dependent log-partition
+-- expansion.  The only additional calculus needed for W1 is a mixed derivative
+-- on the common source neighbourhood, its ordinary vanishing laws, and the
+-- identification of the physical normalized Wilson response with the mixed
+-- derivative of this very same marked log partition.
+------------------------------------------------------------------------
+
+record DifferentiableTwoWilsonKP
+    {Observable Source Polymer Cluster Volume : Set}
+    (family :
+      TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume)
+    : Set₂ where
+  field
+    derivativeCalculus :
+      Nat → Observable → Observable →
+      Diff.MixedSourceDerivativeCalculus Source
+
+    derivativeVanishing :
+      ∀ cutoff left right →
+      Diff.MixedSourceDerivativeVanishing
+        (derivativeCalculus cutoff left right)
+
+open DifferentiableTwoWilsonKP public
+
+supportIndexedExpansion :
+  ∀ {Observable Source Polymer Cluster Volume}
+    {family :
+      TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume} →
+  DifferentiableTwoWilsonKP family →
+  ∀ cutoff left right →
+  Diff.SupportIndexedMarkedClusterExpansion
+    Source Cluster
+    (derivativeCalculus _ cutoff left right)
+supportIndexedExpansion {family = family} differentiable =
+  supportIndexedMarkedExpansionFromKP
+    family
+    (derivativeCalculus differentiable)
+
+twoWilsonMixedDerivativeIsTwoSupportClusterSum :
+  ∀ {Observable Source Polymer Cluster Volume}
+    {family :
+      TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume}
+    (differentiable : DifferentiableTwoWilsonKP family)
+    cutoff left right →
+  Diff.mixedDerivative
+    (derivativeCalculus differentiable cutoff left right)
+    (markedLogPartition family cutoff left right)
+  ≡
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster →
+        Diff.mixedDerivative
+          (derivativeCalculus differentiable cutoff left right)
+          (markedClusterTerm family cutoff left right cluster))
+      (Diff.filterTwoSupport
+        (touchesLeft family cutoff left right)
+        (touchesRight family cutoff left right)
+        (commonClusters family cutoff left right)))
+twoWilsonMixedDerivativeIsTwoSupportClusterSum
+    {family = family} differentiable cutoff left right =
+  Diff.mixedDerivativeSupportIndexedExpansionIsConnectingSum
+    (derivativeVanishing differentiable cutoff left right)
+    (supportIndexedExpansion differentiable cutoff left right)
+
+------------------------------------------------------------------------
+-- W3 source-native charge attachment.
+--
+-- CMP116 supplies the differentiated spatial estimate; KP supplies the cluster
+-- carrier and exact log expansion.  This record joins them without identifying
+-- a Wilson cluster with a historical generic extensionActivity.
+------------------------------------------------------------------------
+
+record TwoWilsonCMP116ClusterCharge
+    {Observable Source Polymer Cluster Volume : Set}
+    {family :
+      TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume}
+    (differentiable : DifferentiableTwoWilsonKP family)
+    : Set₂ where
+  field
+    shellCharge :
+      Nat → Observable → Observable → Cluster → ℚ
+
+    pointwiseDifferentiatedClusterBelowCharge :
+      ∀ cutoff left right cluster →
+      ∣ Diff.mixedDerivative
+          (derivativeCalculus differentiable cutoff left right)
+          (markedClusterTerm family cutoff left right cluster) ∣
+      ≤ shellCharge cutoff left right cluster
+
+open TwoWilsonCMP116ClusterCharge public
