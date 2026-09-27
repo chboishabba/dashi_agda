@@ -29,3 +29,7 @@ import DASHI.Quantum.AnomalyFreedom
 import DASHI.Quantum.QuantumMereologyOperatorLocalityAuthorityExact
 import DASHI.Quantum.QuantumMereologyHamiltonianTransportAuthorityExact
 import DASHI.Quantum.QuantumMereologySchwingerObjectiveExact
+
+import DASHI.Quantum.QuantumMereologyCandidatePointerObservableExact
+import DASHI.Quantum.QuantumMereologySchwingerProducerExact
+import DASHI.Quantum.QuantumMereologyFiniteQuantumProducerAuthorityExact
