@@ -9,6 +9,8 @@ import DASHI.Core.ConsumerRelativeMereologyExact as Consumer
 import DASHI.Core.MereologyNonCollapseExact as NonCollapse
 import DASHI.Physics.Foundations.CMP119AntigravityTraceVsActiveStressFirewallExact as Firewall
 import DASHI.Physics.Foundations.CMP119GRAnchoredStressWeldCompilerExact as WeldCompiler
+import DASHI.Physics.Foundations.CMP119SingleActiveSectorSourceFactorisationExact as Single
+import DASHI.Physics.Foundations.GRQFTActiveGaugeSectorTotalizationExact as Active
 
 ------------------------------------------------------------------------
 -- GRQFT / ANTIGRAVITY MEREOLOGY BRIDGE
@@ -155,3 +157,27 @@ mereologyBridgeCreatesAntigravityEvidence = false
 mereologyBridgeCreatesAntigravityEvidenceIsFalse :
   mereologyBridgeCreatesAntigravityEvidence ≡ false
 mereologyBridgeCreatesAntigravityEvidenceIsFalse = refl
+
+------------------------------------------------------------------------
+-- DECLARED SELECTED-PART-AS-WHOLE BOUNDARY
+--
+-- A single active sector may be the physical total only when the application
+-- supplies SingleActiveGaugeSectorTotalization, whose theorem field states
+-- declaredTotalIsSelectedSector.  Selection alone does not manufacture the
+-- whole.
+------------------------------------------------------------------------
+
+activeSectorSelectionPrecedesTotalization :
+  Active.activeSectorSelectionPrecedesStressTotalization ≡ true
+activeSectorSelectionPrecedesTotalization =
+  Active.activeSectorSelectionPrecedesStressTotalizationIsTrue
+
+singleSectorCompilerDoesNotManufactureDeclaredTotal :
+  Single.singleSectorCompilerDoesNotManufactureDeclaredTotal ≡ false
+singleSectorCompilerDoesNotManufactureDeclaredTotal =
+  Single.singleSectorCompilerDoesNotManufactureDeclaredTotalIsFalse
+
+clayUniversalGroupQuantifierIsNotPhysicalFusion :
+  Active.clayUniversalGroupParameterMeansAllGroupsPhysicallyActive ≡ false
+clayUniversalGroupQuantifierIsNotPhysicalFusion =
+  Active.clayUniversalGroupParameterMeansAllGroupsPhysicallyActiveIsFalse
