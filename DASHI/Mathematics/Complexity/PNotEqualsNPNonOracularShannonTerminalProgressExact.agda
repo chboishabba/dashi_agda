@@ -208,6 +208,43 @@ alwaysNothingStopsAtShannonNonTerminal =
 -- The missing semantic entitlement is a bridge between them.
 ------------------------------------------------------------------------
 
+record ShannonProgressSeparation : Set₁ where
+  constructor shannon-progress-separation
+  field
+    state :
+      Q2.BoundedSelfReferenceState
+
+    shannonNonTerminal :
+      FutureSAT.NonTerminal
+        (stateRestrictionRoot state)
+
+    constructorStops :
+      alwaysNothingArityConstructor state
+      ≡
+      nothing
+
+open ShannonProgressSeparation public
+
+concreteShannonProgressSeparation :
+  ShannonProgressSeparation
+concreteShannonProgressSeparation =
+  shannon-progress-separation
+    oneVariableState
+    oneVariableStateIsShannonNonTerminal
+    alwaysNothingStopsAtShannonNonTerminal
+
+------------------------------------------------------------------------
+-- Compile the structurally disciplined constructor to the already-existing Q2
+-- step system.  No new execution semantics are introduced.
+------------------------------------------------------------------------
+
+nonOracularConstructorToQ2StepSystem :
+  NonOracularShannonTerminalConstructor →
+  Q2.BoundedSelfReferenceStepSystem
+nonOracularConstructorToQ2StepSystem system =
+  ArityTerminal.arityTerminalConstructorToQ2StepSystem
+    (constructor system)
+
 ------------------------------------------------------------------------
 -- Positive arity now places residual width on the live construction path.
 ------------------------------------------------------------------------
