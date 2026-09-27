@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.YangMillsProjectiveMereologyBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.List.Base using (List)
+open import Data.List.Base using (List)\nopen import Agda.Primitive using (Set₁)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
