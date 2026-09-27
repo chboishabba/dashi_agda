@@ -34,6 +34,8 @@ import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact as P2Centralizer
 import DASHI.Moonshine.OggSSPP3InertiaCentralizerValuationNoGoExact as P3Centralizer
 import DASHI.Moonshine.OggSSPSmallCharacteristicDworkExplicitRootDepthNoGoExact as DworkRoot
 import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as Preferred
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildGeneratorPartitionCandidateExact as GeneratorPartition
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -192,6 +194,62 @@ p3HasseWeightMatches :
 p3HasseWeightMatches = refl
 
 ------------------------------------------------------------------------
+-- 5b. Cross-module structural candidates are graded separately.
+------------------------------------------------------------------------
+
+data CrossModuleStructuralCandidate : Set where
+  wildGeneratorPartition :
+    CrossModuleStructuralCandidate
+
+  wildLayerTimesLocalSector :
+    CrossModuleStructuralCandidate
+
+structuralCandidatePair :
+  CrossModuleStructuralCandidate ->
+  PrimePair
+
+structuralCandidatePair wildGeneratorPartition =
+  prime-pair
+    (GeneratorPartition.p2Candidate
+      GeneratorPartition.canonicalGeneratorPartitionPair)
+    (GeneratorPartition.p3Candidate
+      GeneratorPartition.canonicalGeneratorPartitionPair)
+
+structuralCandidatePair wildLayerTimesLocalSector =
+  prime-pair
+    (LayerSector.wildLayerSectorProduct LayerSector.wildTwo)
+    (LayerSector.wildLayerSectorProduct LayerSector.wildThree)
+
+generatorPartitionPairIsTenTwo :
+  structuralCandidatePair wildGeneratorPartition
+  ≡ prime-pair 10 2
+generatorPartitionPairIsTenTwo = refl
+
+wildLayerSectorPairIsTenTwo :
+  structuralCandidatePair wildLayerTimesLocalSector
+  ≡ prime-pair 10 2
+wildLayerSectorPairIsTenTwo = refl
+
+generatorPartitionNeedsPrimeSelector :
+  Bool
+generatorPartitionNeedsPrimeSelector = true
+
+wildLayerSectorUsesSameRuleAtBothPrimes :
+  Bool
+wildLayerSectorUsesSameRuleAtBothPrimes = true
+
+data StructuralCandidateIsIndependentAnalyticValuation : Set where
+data TenTwoStructuralMatchClosesMonsterBridge : Set where
+
+structuralCandidateNotPromotedToIndependentAnalyticValuation :
+  StructuralCandidateIsIndependentAnalyticValuation -> ⊥
+structuralCandidateNotPromotedToIndependentAnalyticValuation ()
+
+tenTwoStructuralMatchDoesNotCloseBridge :
+  TenTwoStructuralMatchClosesMonsterBridge -> ⊥
+tenTwoStructuralMatchDoesNotCloseBridge ()
+
+------------------------------------------------------------------------
 -- 6. The current preferred 10/2 finite payment is NOT classified as an
 --    independently defined analytic statistic.
 ------------------------------------------------------------------------
@@ -239,6 +297,11 @@ record ExceptionalTermHypothesisSieveBoundary : Set where
     noKnownIndependentStatisticMatchesBoth : Bool
     p2HasMultipleIndependentTenMatches : Bool
     p3HasseWeightTwoMatch : Bool
+    generatorPartitionTenTwoMatchRecorded : Bool
+    generatorPartitionSelectorDebtRecorded : Bool
+    wildLayerSectorTenTwoMatchRecorded : Bool
+    wildLayerSectorSameRuleAcrossPrimes : Bool
+    structuralCandidatesPromotedToAnalyticValuations : Bool
     preferredFinitePaymentMatchesTenTwo : Bool
     preferredFinitePaymentAlreadyIndependentAnalyticObject : Bool
     attributionFirewallPreserved : Bool
@@ -248,4 +311,4 @@ canonicalExceptionalTermHypothesisSieveBoundary :
 canonicalExceptionalTermHypothesisSieveBoundary =
   exceptional-term-hypothesis-sieve-boundary
     true true true true true true
-    true true true true false true
+    true true true true true false true false true
