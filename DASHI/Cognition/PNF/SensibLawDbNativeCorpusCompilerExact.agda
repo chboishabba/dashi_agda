@@ -478,6 +478,46 @@ record AutoEventJoinProposalProjection : Set where
 open AutoEventJoinProposalProjection public
 
 
+record L2CandidateProductSummaryReuse : Set where
+  constructor l2-candidate-product-summary-reuse
+  field
+    candidateProductRef : String
+    detectorRef : String
+
+    exactSummaryComplete : Bool
+    exactSummaryCompleteIsTrue :
+      exactSummaryComplete ≡ true
+
+    bindsFreshOccurrence : Bool
+    bindsFreshOccurrenceIsTrue :
+      bindsFreshOccurrence ≡ true
+
+    reinterpretsProductFactors : Bool
+    reinterpretsProductFactorsIsFalse :
+      reinterpretsProductFactors ≡ false
+
+    createsEntityIdentity : Bool
+    createsEntityIdentityIsFalse :
+      createsEntityIdentity ≡ false
+
+    createsPropositionIdentity : Bool
+    createsPropositionIdentityIsFalse :
+      createsPropositionIdentity ≡ false
+
+    createsEventIdentity : Bool
+    createsEventIdentityIsFalse :
+      createsEventIdentity ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse :
+      createsClaimTruth ≡ false
+
+open L2CandidateProductSummaryReuse public
+
 record ExactCompilerProductReuse : Set where
   constructor exact-compiler-product-reuse
   field
@@ -633,6 +673,11 @@ data AutoObservationCreatesEventIdentity : Set where
 data AutoJoinProposalCreatesEventIdentity : Set where
 data AutoJoinProposalCreatesClaimTruth : Set where
 data TemporalDetectorBucketCreatesTemporalAssertion : Set where
+data L2SummaryReuseCreatesEntityIdentity : Set where
+data L2SummaryReuseCreatesPropositionIdentity : Set where
+data L2SummaryReuseCreatesEventIdentity : Set where
+data L2SummaryReuseCreatesSemanticAuthority : Set where
+data L2SummaryReuseCreatesClaimTruth : Set where
 data ExactReuseCreatesSemanticAdmission : Set where
 data ExactReuseCreatesSemanticAuthority : Set where
 data ExactReuseCreatesApplicability : Set where
@@ -772,6 +817,26 @@ autoJoinProposalDoesNotCreateClaimTruth ()
 temporalDetectorBucketDoesNotCreateTemporalAssertion :
   TemporalDetectorBucketCreatesTemporalAssertion → ⊥
 temporalDetectorBucketDoesNotCreateTemporalAssertion ()
+
+l2SummaryReuseDoesNotCreateEntityIdentity :
+  L2SummaryReuseCreatesEntityIdentity → ⊥
+l2SummaryReuseDoesNotCreateEntityIdentity ()
+
+l2SummaryReuseDoesNotCreatePropositionIdentity :
+  L2SummaryReuseCreatesPropositionIdentity → ⊥
+l2SummaryReuseDoesNotCreatePropositionIdentity ()
+
+l2SummaryReuseDoesNotCreateEventIdentity :
+  L2SummaryReuseCreatesEventIdentity → ⊥
+l2SummaryReuseDoesNotCreateEventIdentity ()
+
+l2SummaryReuseDoesNotCreateSemanticAuthority :
+  L2SummaryReuseCreatesSemanticAuthority → ⊥
+l2SummaryReuseDoesNotCreateSemanticAuthority ()
+
+l2SummaryReuseDoesNotCreateClaimTruth :
+  L2SummaryReuseCreatesClaimTruth → ⊥
+l2SummaryReuseDoesNotCreateClaimTruth ()
 
 exactReuseDoesNotCreateSemanticAdmission :
   ExactReuseCreatesSemanticAdmission → ⊥
