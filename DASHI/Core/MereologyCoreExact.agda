@@ -3,7 +3,6 @@ module DASHI.Core.MereologyCoreExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Primitive using (Set₁)
 
 ------------------------------------------------------------------------
 -- DOMAIN-NEUTRAL MEREOLOGY CORE
