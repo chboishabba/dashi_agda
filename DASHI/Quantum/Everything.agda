@@ -6,6 +6,8 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact
 import DASHI.Quantum.QuantumMereologyExact
 import DASHI.Quantum.QuantumMereologyClassicalBenchmarkExact
 import DASHI.Quantum.EntanglementGeometryMereologyBridgeExact
+import DASHI.Quantum.QuantumMereologySpacetimePromotionExact
+import DASHI.Quantum.QuantumMereologyUnifierBridgeExact
 
 import DASHI.Quantum.Stone
 import DASHI.Quantum.Stone_Gates
