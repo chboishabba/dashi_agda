@@ -13,13 +13,26 @@ module DASHI.Moonshine.OggSSPSmallCharacteristicDworkReplacementCutsetExact wher
 --
 -- before deriving the sharp first-pole depth.
 --
--- Therefore p=2 and p=3 fail EXACTLY at the sharpness application, not at the
--- existence of the published coefficient family.
+-- IMPORTANT CORRECTION
+-- --------------------
+-- The unavailable p>3 n=1 sharpness theorem is a real limitation of this
+-- particular Deligne--Dwork route, but it is NOT the cause of the 36/18
+-- Monster discrepancy.  Duncan--Swisher Propositions 4.1 and 4.2 compute the
+-- three Hauptmodul valuations at p=2,3 exactly by genus-zero/eta/Hauptmodul
+-- arguments that do not require Proposition 3.1 sharpness.
 --
--- Replacement lane
--- ----------------
--- A small-prime completion need not extend Dwork's n=1 theorem verbatim.
--- It must instead supply a SmallPrimeCorrectedValuationAuthority by one of:
+-- Thus:
+--
+--   unavailable p>3 sharpness at p=2,3
+--       !=
+--   failure of the published three-term valuation calculation.
+--
+-- Replacement / extension lane
+-- ----------------------------
+-- A small-prime Monster completion need not extend Dwork's n=1 theorem
+-- verbatim, and it must not overwrite the already exact three published terms.
+-- It must instead supply an independently defined exceptional analytic payment
+-- (or an equivalent corrected-valuation authority) by one of:
 --
 --   * direct corrected Hauptmodul/q-expansion valuation,
 --   * an actual extension of Dwork first-pole sharpness,
@@ -39,6 +52,7 @@ import DASHI.Moonshine.LegendreJExceptionalPolynomialFactorizationExact as Legen
 import DASHI.Moonshine.LegendreExceptionalPadicHenselConstructionExact as Hensel
 import DASHI.Moonshine.DuncanSwisherDworkPublishedCoefficientFamilyExact as Coeff
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectedValuationPaymentExact as Payment
+import DASHI.Moonshine.OggSSPSmallCharacteristicHauptmodulTermBaselineExact as Baseline
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -107,6 +121,26 @@ data PublishedPgt3SharpnessDirectlyClosesSmallPrime : Set where
 publishedPgt3SharpnessDoesNotDirectlyCloseSmallPrime :
   PublishedPgt3SharpnessDirectlyClosesSmallPrime -> ⊥
 publishedPgt3SharpnessDoesNotDirectlyCloseSmallPrime ()
+
+------------------------------------------------------------------------
+-- 2b. The published small-prime Hauptmodul valuations remain exact.
+------------------------------------------------------------------------
+
+p2PublishedThreeTermBaselineStillExact :
+  Baseline.baselineTotal Baseline.pTwo ≡ 36
+p2PublishedThreeTermBaselineStillExact =
+  Baseline.p2BaselineTotalIsThirtySix
+
+p3PublishedThreeTermBaselineStillExact :
+  Baseline.baselineTotal Baseline.pThree ≡ 18
+p3PublishedThreeTermBaselineStillExact =
+  Baseline.p3BaselineTotalIsEighteen
+
+data MissingDworkSharpnessExplainsMonsterGap : Set where
+
+missingDworkSharpnessDoesNotExplainMonsterGap :
+  MissingDworkSharpnessExplainsMonsterGap -> ⊥
+missingDworkSharpnessDoesNotExplainMonsterGap ()
 
 ------------------------------------------------------------------------
 -- 3. Route-neutral replacement authority.
@@ -210,7 +244,10 @@ record SmallCharacteristicDworkReplacementCutsetBoundary : Set where
     publishedSharpnessRequiresFourLePrime : Bool
     fourLeTwoImpossible : Bool
     fourLeThreeImpossible : Bool
-    exactSharpnessFailureLocated : Bool
+    pgt3SharpnessUnavailableAtP2P3 : Bool
+    publishedP2ThreeTermValuationStillExact : Bool
+    publishedP3ThreeTermValuationStillExact : Bool
+    missingSharpnessExplainsMonsterGap : Bool
     routeNeutralReplacementInterfaceOwned : Bool
     directHauptmodulRouteAllowed : Bool
     extendedDworkRouteAllowed : Bool
@@ -222,5 +259,5 @@ canonicalSmallCharacteristicDworkReplacementCutsetBoundary :
   SmallCharacteristicDworkReplacementCutsetBoundary
 canonicalSmallCharacteristicDworkReplacementCutsetBoundary =
   small-characteristic-dwork-replacement-cutset-boundary
-    true true true true true true true true true
+    true true true true true true true false true true true true
     false false
