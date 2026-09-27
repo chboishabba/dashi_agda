@@ -1,7 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Closure.SpacetimeMereologyBridgeExact where
 
-open import Agda.Primitive using (Set₁)\nopen import Agda.Builtin.Bool using (Bool; false)\nopen import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.TemporalSheafProofObligations as Sheaf
 
 ------------------------------------------------------------------------
