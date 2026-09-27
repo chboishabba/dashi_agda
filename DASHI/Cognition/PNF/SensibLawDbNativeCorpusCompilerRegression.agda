@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as Scale
+import DASHI.Cognition.PNF.EditTransportLeafLocalityExact as EditLocality
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as Fixture
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceRegression as PersistFixture
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as Persistence
@@ -337,3 +338,46 @@ fixtureExactReuseDoesNotCreateTruth :
     fixtureExactCompilerProductReuse
   ≡ false
 fixtureExactReuseDoesNotCreateTruth = refl
+
+
+fixtureParserProductIdentity : Scale.ParserProductIdentity
+fixtureParserProductIdentity =
+  Scale.parser-product-identity
+    "sha256:region-payload"
+    "spacy"
+    "3.8"
+    "en_core_web_sm"
+    "sha256:config"
+
+fixtureEditTransport : EditLocality.EditTransport
+fixtureEditTransport =
+  EditLocality.editTransport (λ coordinate → coordinate)
+
+fixtureCrossRevisionParserProductReuse :
+  Scale.CrossRevisionParserProductReuse
+fixtureCrossRevisionParserProductReuse =
+  Scale.cross-revision-parser-product-reuse
+    fixtureParserProductIdentity
+    "source-revision:before"
+    "region:before"
+    "source-revision:after"
+    "region:after"
+    fixtureEditTransport
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureCrossRevisionReuseDoesNotCreateOccurrenceIdentity :
+  Scale.CrossRevisionParserProductReuse.createsSourceOccurrenceIdentity
+    fixtureCrossRevisionParserProductReuse
+  ≡ false
+fixtureCrossRevisionReuseDoesNotCreateOccurrenceIdentity = refl
+
+fixtureCrossRevisionReuseDoesNotCreateSemanticIdentity :
+  Scale.CrossRevisionParserProductReuse.createsSemanticIdentity
+    fixtureCrossRevisionParserProductReuse
+  ≡ false
+fixtureCrossRevisionReuseDoesNotCreateSemanticIdentity = refl
