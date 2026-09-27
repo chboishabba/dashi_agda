@@ -26,8 +26,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversal
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
-open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (just)
 open import Data.Product using (_×_; _,_)
 
@@ -567,6 +567,221 @@ simpleGuardPolarityForcingErasesPayload
     (sym
       (diagonalGuardWrapperEvaluationIgnoresPayload
         reject rightPayload assignment))
+
+------------------------------------------------------------------------
+-- ASYMMETRIC WIDTH-PRESERVING REJECT GADGET
+--
+-- Unlike the dead simple polarity wrapper, we only require width preservation
+-- on the REJECT branch.  This is enough for a width transfer if we can keep one
+-- quoted program on a candidate-rejected anchor while varying the payload.
+--
+-- A fresh guard variable occupies Cook variable zero.  Every payload variable
+-- is shifted by one.
+------------------------------------------------------------------------
+
+shiftCookFormula :
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+shiftCookFormula (Cook.variable index) =
+  Cook.variable (suc index)
+shiftCookFormula (Cook.constant value) =
+  Cook.constant value
+shiftCookFormula (Cook.negate formula) =
+  Cook.negate
+    (shiftCookFormula formula)
+shiftCookFormula (Cook.conjunction left right) =
+  Cook.conjunction
+    (shiftCookFormula left)
+    (shiftCookFormula right)
+shiftCookFormula (Cook.disjunction left right) =
+  Cook.disjunction
+    (shiftCookFormula left)
+    (shiftCookFormula right)
+
+tailCookAssignment :
+  Cook.Assignment →
+  Cook.Assignment
+tailCookAssignment assignment index =
+  assignment (suc index)
+
+shiftCookEvaluation :
+  (payload : Cook.BooleanFormula) →
+  (assignment : Cook.Assignment) →
+  Cook.evaluate
+      (shiftCookFormula payload)
+      assignment
+  ≡
+  Cook.evaluate
+      payload
+      (tailCookAssignment assignment)
+shiftCookEvaluation (Cook.variable index) assignment =
+  refl
+shiftCookEvaluation (Cook.constant value) assignment =
+  refl
+shiftCookEvaluation (Cook.negate formula) assignment =
+  cong Cook.notBool
+    (shiftCookEvaluation formula assignment)
+shiftCookEvaluation (Cook.conjunction left right) assignment =
+  cong₂
+    Cook.andBool
+    (shiftCookEvaluation left assignment)
+    (shiftCookEvaluation right assignment)
+shiftCookEvaluation (Cook.disjunction left right) assignment =
+  cong₂
+    Cook.orBool
+    (shiftCookEvaluation left assignment)
+    (shiftCookEvaluation right assignment)
+
+extendCookAssignment :
+  Bool →
+  Cook.Assignment →
+  Cook.Assignment
+extendCookAssignment guard payloadAssignment zero =
+  guard
+extendCookAssignment guard payloadAssignment (suc index) =
+  payloadAssignment index
+
+rejectWidthGadget :
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+rejectWidthGadget payload =
+  Cook.disjunction
+    (Cook.variable zero)
+    (shiftCookFormula payload)
+
+acceptCollapseGadget :
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+acceptCollapseGadget payload =
+  Cook.constant false
+
+diagonalAsymmetricGadget :
+  Bool →
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+diagonalAsymmetricGadget true payload =
+  rejectWidthGadget payload
+diagonalAsymmetricGadget false payload =
+  acceptCollapseGadget payload
+
+------------------------------------------------------------------------
+-- Reject branch: SAT is forced, but guard=false recovers the payload exactly.
+------------------------------------------------------------------------
+
+rejectWidthGadgetSatisfiable :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable (rejectWidthGadget payload)
+rejectWidthGadgetSatisfiable payload =
+  Cook.satisfyingAssignment
+    (extendCookAssignment true
+      (λ index → false))
+    refl
+
+rejectWidthGadgetFalseGuardRecoversPayload :
+  (payload : Cook.BooleanFormula) →
+  (payloadAssignment : Cook.Assignment) →
+  Cook.evaluate
+      (rejectWidthGadget payload)
+      (extendCookAssignment false payloadAssignment)
+  ≡
+  Cook.evaluate payload payloadAssignment
+rejectWidthGadgetFalseGuardRecoversPayload
+    payload
+    payloadAssignment =
+  shiftCookEvaluation
+    payload
+    (extendCookAssignment false payloadAssignment)
+
+------------------------------------------------------------------------
+-- Hence distinct payload Boolean functions remain distinct inside the reject
+-- gadgets: any distinguishing payload assignment extends with guard=false.
+------------------------------------------------------------------------
+
+rejectGadgetEqualityImpliesPayloadEquality :
+  (left right : Cook.BooleanFormula) →
+  ((assignment : Cook.Assignment) →
+    Cook.evaluate
+      (rejectWidthGadget left)
+      assignment
+    ≡
+    Cook.evaluate
+      (rejectWidthGadget right)
+      assignment) →
+  (payloadAssignment : Cook.Assignment) →
+  Cook.evaluate left payloadAssignment
+  ≡
+  Cook.evaluate right payloadAssignment
+rejectGadgetEqualityImpliesPayloadEquality
+    left
+    right
+    gadgetEqual
+    payloadAssignment =
+  trans
+    (sym
+      (rejectWidthGadgetFalseGuardRecoversPayload
+        left payloadAssignment))
+    (trans
+      (gadgetEqual
+        (extendCookAssignment false payloadAssignment))
+      (rejectWidthGadgetFalseGuardRecoversPayload
+        right payloadAssignment))
+
+------------------------------------------------------------------------
+-- Accept branch: forced UNSAT.
+------------------------------------------------------------------------
+
+acceptCollapseGadgetUnsatisfiable :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable (acceptCollapseGadget payload) →
+  ⊥
+acceptCollapseGadgetUnsatisfiable
+    payload
+    witness =
+  trueNotFalse
+    (Cook.Satisfiable.evaluatesTrue witness)
+
+------------------------------------------------------------------------
+-- Exact diagonal polarity for the asymmetric gadget:
+--
+-- reject=true  => SAT
+-- reject=false => UNSAT
+--
+-- while reject=true still contains a literal Shannon child equal to the
+-- shifted payload function.
+------------------------------------------------------------------------
+
+asymmetricRejectBranchPreservesWidthAndForcesSAT :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable
+      (diagonalAsymmetricGadget true payload)
+  ×
+  ((payloadAssignment : Cook.Assignment) →
+    Cook.evaluate
+      (diagonalAsymmetricGadget true payload)
+      (extendCookAssignment false payloadAssignment)
+    ≡
+    Cook.evaluate payload payloadAssignment)
+asymmetricRejectBranchPreservesWidthAndForcesSAT payload =
+  rejectWidthGadgetSatisfiable payload
+  ,
+  rejectWidthGadgetFalseGuardRecoversPayload payload
+
+asymmetricAcceptBranchForcesUNSAT :
+  (payload : Cook.BooleanFormula) →
+  Cook.Satisfiable
+      (diagonalAsymmetricGadget false payload) →
+  ⊥
+asymmetricAcceptBranchForcesUNSAT =
+  acceptCollapseGadgetUnsatisfiable
+
+------------------------------------------------------------------------
+-- This defeats the strongest possible global width-destruction conjecture:
+-- diagonal SAT-polarity compatibility ALONE does not force width erasure.
+--
+-- On a rejected quote, an arbitrary payload can remain exactly recoverable in
+-- a future Shannon child while the body is satisfiable immediately via the
+-- guard=true branch.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
