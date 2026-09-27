@@ -52,10 +52,18 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _*_)
 
+import DASHI.Core.AttributedSourceCore
+
 import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Inertia
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3Local
 import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as Bridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExact as WildSource
+
+wildStackSourceAtlas :
+  DASHI.Core.AttributedSourceCore.AttributedSourceAtlas
+wildStackSourceAtlas =
+  WildSource.wildStackCorrectionSourceAtlas
 
 ------------------------------------------------------------------------
 -- 1. Wild layer counts from the sourced local root-stack presentations.
