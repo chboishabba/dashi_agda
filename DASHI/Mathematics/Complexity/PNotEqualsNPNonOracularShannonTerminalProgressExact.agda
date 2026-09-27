@@ -26,12 +26,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
+import Data.Nat.Properties as NatP
 open import Data.Product using (Σ; _,_)
 
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as FutureSAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
@@ -150,6 +153,60 @@ alwaysNothingCannotContinue :
   →
   ⊥
 alwaysNothingCannotContinue state remaining positive (run , ())
+
+------------------------------------------------------------------------
+-- Concrete separation witness:
+--
+-- the Shannon action system says this one-variable root is nonterminal, while
+-- the old Maybe-valued constructor surface still permits immediate stopping.
+------------------------------------------------------------------------
+
+oneVariableState :
+  Q2.BoundedSelfReferenceState
+oneVariableState =
+  Q2.bounded-self-reference-state
+    (Cook.variable zero)
+    zero
+    zero
+    (suc zero)
+    stateFits
+  where
+    stateFits :
+      Size.formulaNodeCount (Cook.variable zero)
+        + (zero + zero)
+      ≤
+      suc zero
+    stateFits =
+      NatP.≤-refl
+
+oneVariableStateHasPositiveBound :
+  stateVariableBound oneVariableState
+  ≡
+  suc zero
+oneVariableStateHasPositiveBound =
+  refl
+
+oneVariableStateIsShannonNonTerminal :
+  FutureSAT.NonTerminal
+    (stateRestrictionRoot oneVariableState)
+oneVariableStateIsShannonNonTerminal =
+  positiveStateIsShannonNonTerminal
+    oneVariableState
+    zero
+    oneVariableStateHasPositiveBound
+
+alwaysNothingStopsAtShannonNonTerminal :
+  alwaysNothingArityConstructor
+    oneVariableState
+  ≡
+  nothing
+alwaysNothingStopsAtShannonNonTerminal =
+  refl
+
+------------------------------------------------------------------------
+-- Thus Shannon nonterminality and Q2 progress are presently distinct notions.
+-- The missing semantic entitlement is a bridge between them.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- Positive arity now places residual width on the live construction path.
