@@ -36,6 +36,7 @@ open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Fin.Base using (Fin)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 import Data.Fin.Base as FinBase
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_; _<_ ; z≤n; s≤s)
@@ -55,6 +56,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissi
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExact as Operational
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 
 ------------------------------------------------------------------------
 -- A reachable node known to live at one exact remaining arity.
@@ -871,6 +873,137 @@ open AritySeparatedQ1 public
 -- Typed warning: the existing Q1 specification does not itself inhabit
 -- AritySeparatedQ1.  Any summed-layer width theorem must consume this extra
 -- separation theorem or an equivalent valid cross-layer normalization.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- PROGRESS/COVERAGE FIREWALL
+--
+-- The constructor surfaces are total Maybe-valued functions.  Quantification
+-- over every BoundedSelfReferenceState does NOT imply that a run exists at every
+-- positive-arity state.
+------------------------------------------------------------------------
+
+alwaysStopQ1Constructor :
+  Recurrence.Q1StateConstructor
+alwaysStopQ1Constructor state =
+  nothing
+
+alwaysStopQ1HasNoSuccessfulRun :
+  (state : Q2.BoundedSelfReferenceState) →
+  Σ (Recurrence.Q1StateWitness state)
+    (λ witness →
+      alwaysStopQ1Constructor state
+      ≡
+      just witness) →
+  ⊥
+alwaysStopQ1HasNoSuccessfulRun state (witness , ())
+
+alwaysStopQ1NextIsNothing :
+  (state : Q2.BoundedSelfReferenceState) →
+  Recurrence.q1Next
+    alwaysStopQ1Constructor
+    state
+  ≡
+  nothing
+alwaysStopQ1NextIsNothing state =
+  refl
+
+------------------------------------------------------------------------
+-- Hence a high-width root blocks a constructor only once a successful run is
+-- demanded at that root.
+------------------------------------------------------------------------
+
+SuccessfulArityTerminalRunAt :
+  Q2.BoundedSelfReferenceState →
+  Set₁
+SuccessfulArityTerminalRunAt state =
+  ArityTerminal.ArityTerminalAdmittedConstructionRun state
+
+successfulRunPaysTripleLayeredWidth :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {next total : Nat} →
+  SuccessfulArityTerminalRunAt state →
+  ResidualWidthStack
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    next
+    total →
+  triple total
+  <
+  Q2.recursiveMeasure state
+successfulRunPaysTripleLayeredWidth =
+  tripleLayeredResidualWidthStrictlyBelowCurrentMeasure
+
+------------------------------------------------------------------------
+-- Explicit progress hypothesis.
+--
+-- This is intentionally a property of an already-given constructor, not a new
+-- semantic authority.  It exposes the exact missing coverage theorem:
+--
+--   any state declared live/nonterminal must return a successful run.
+------------------------------------------------------------------------
+
+record ProgressPredicate : Set₁ where
+  constructor progress-predicate
+  field
+    IsLive :
+      Q2.BoundedSelfReferenceState →
+      Set
+
+open ProgressPredicate public
+
+ConstructorProgress :
+  ProgressPredicate →
+  ArityTerminal.ArityTerminalAdmittedStateConstructor →
+  Set₁
+ConstructorProgress progress constructor =
+  (state : Q2.BoundedSelfReferenceState) →
+  IsLive progress state →
+  Σ (ArityTerminal.ArityTerminalAdmittedConstructionRun state)
+    (λ run →
+      constructor state
+      ≡
+      just run)
+
+progressAndWidthForceBudget :
+  ∀ {next total : Nat}
+    (progress : ProgressPredicate)
+    (constructor :
+      ArityTerminal.ArityTerminalAdmittedStateConstructor)
+    (constructorProgress :
+      ConstructorProgress progress constructor)
+    (state : Q2.BoundedSelfReferenceState) →
+  IsLive progress state →
+  ResidualWidthStack
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    next
+    total →
+  triple total
+  <
+  Q2.recursiveMeasure state
+progressAndWidthForceBudget
+    progress
+    constructor
+    constructorProgress
+    state
+    live
+    stack
+    with constructorProgress state live
+... | run , constructorReturnsRun =
+  tripleLayeredResidualWidthStrictlyBelowCurrentMeasure
+    run
+    stack
+
+------------------------------------------------------------------------
+-- Consequence:
+--
+--   "the constructor is defined on all states"
+--
+-- is too weak.  The high-width attack needs a genuine progress theorem tying
+-- the chosen live-state predicate to successful construction.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
