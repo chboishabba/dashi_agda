@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 
@@ -163,8 +164,23 @@ criterionCollisionBlocksFactorization :
     (observeCriterion S)
     (consumer S) →
   ⊥
-criterionCollisionBlocksFactorization collision =
-  Descent.nonDescentWitnessBlocksFactorization
+criterionCollisionForcesSeparationInEveryRepair :
+  ∀ {W}
+    {P : PreferredTPSSelectionProblem W}
+    {S : CriterionConsumerSurface P}
+    {Refinement : Set}
+    {refine : Candidate P → Refinement} →
+  (collision : CriterionCollision S) →
+  Repair.RefinementRepairs
+    (observeCriterion S)
+    refine
+    (consumer S) →
+  refine (Descent.left (witness collision))
+    ≡
+    refine (Descent.right (witness collision)) →
+  ⊥
+criterionCollisionForcesSeparationInEveryRepair collision =
+  Repair.refinementRepairSeparatesWitness
     (witness collision)
 
 ------------------------------------------------------------------------
