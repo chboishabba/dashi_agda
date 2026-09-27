@@ -4,6 +4,7 @@ module DASHI.Quantum.Everything where
 
 import DASHI.Quantum.QuantumMereologySourceAtlasExact
 import DASHI.Quantum.QuantumMereologyExact
+import DASHI.Quantum.QuantumMereologySelectionExact
 import DASHI.Quantum.QuantumMereologyClassicalBenchmarkExact
 import DASHI.Quantum.EntanglementGeometryMereologyBridgeExact
 import DASHI.Quantum.QuantumMereologySpacetimePromotionExact
