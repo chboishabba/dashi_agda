@@ -1,3 +1,7 @@
+import DASHI.Core.MereologyCoreExact
+import DASHI.Core.MereologyNonCollapseExact
+import DASHI.Core.MultipartMereologyBridgeExact
+import DASHI.Core.ConsumerRelativeMereologyExact
 import DASHI.Core.FallacyObstructionEverything
 import DASHI.Core.TrajectoryResidueExact
 import DASHI.Core.ContrastiveHistoryResidualExact
