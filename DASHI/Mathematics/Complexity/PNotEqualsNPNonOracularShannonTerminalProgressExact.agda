@@ -28,7 +28,10 @@ open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (Σ; _,_)
 
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as FutureSAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
@@ -43,6 +46,59 @@ stateVariableBound :
 stateVariableBound state =
   Bridge.formulaVariableBound
     (Q2.currentFormula state)
+
+------------------------------------------------------------------------
+-- The Q2 state's indexed root is the literal Shannon root already used by the
+-- future-observation machinery.
+------------------------------------------------------------------------
+
+stateRestrictionRoot :
+  (state : Q2.BoundedSelfReferenceState) →
+  Family.RestrictionNode
+    (Bridge.cookToIndexed
+      (Q2.currentFormula state))
+stateRestrictionRoot state =
+  Family.rootNode
+    (Bridge.cookToIndexed
+      (Q2.currentFormula state))
+
+------------------------------------------------------------------------
+-- Positive variable bound is not an arbitrary live-state declaration.  It is
+-- exactly enough evidence for one Shannon action to be admissible at the root.
+------------------------------------------------------------------------
+
+positiveStateIsShannonNonTerminal :
+  (state : Q2.BoundedSelfReferenceState) →
+  (remaining : Nat) →
+  stateVariableBound state ≡ suc remaining →
+  FutureSAT.NonTerminal
+    (stateRestrictionRoot state)
+positiveStateIsShannonNonTerminal state remaining positive =
+  remaining , positive
+
+------------------------------------------------------------------------
+-- Conversely, zero variable bound already has the existing non-oracular
+-- terminal observation: literal evaluation under the unique empty assignment.
+------------------------------------------------------------------------
+
+zeroStateHasStructuralTerminalObservation :
+  (state : Q2.BoundedSelfReferenceState) →
+  stateVariableBound state ≡ zero →
+  Σ Bool
+    (λ value →
+      FutureSAT.restrictionObservation
+        (stateRestrictionRoot state)
+      ≡
+      FutureSAT.terminal value)
+zeroStateHasStructuralTerminalObservation state zeroBound
+    with stateVariableBound state | zeroBound
+... | zero | refl =
+  SAT.evaluate
+    (Bridge.cookToIndexed
+      (Q2.currentFormula state))
+    FutureSAT.emptyAssignment
+  ,
+  refl
 
 ------------------------------------------------------------------------
 -- Constructor with exact structural terminal policy.
