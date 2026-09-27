@@ -90,9 +90,9 @@ record FiniteQuantumProducerStatus : Set where
     exactHeadLeanKernelReceiptPresentIsFalse :
       exactHeadLeanKernelReceiptPresent ≡ false
 
-    HamiltonianExponentialGeneratorPaid : Bool
-    HamiltonianExponentialGeneratorPaidIsFalse :
-      HamiltonianExponentialGeneratorPaid ≡ false
+    HamiltonianExponentialGeneratorSourceWritten : Bool
+    HamiltonianExponentialGeneratorSourceWrittenIsTrue :
+      HamiltonianExponentialGeneratorSourceWritten ≡ true
 
     CPOEigenprojectorConstructionPaid : Bool
     CPOEigenprojectorConstructionPaidIsFalse :
@@ -114,8 +114,8 @@ canonicalFiniteQuantumProducerStatus = record
   ; derivativeBackedEntropyAccelerationWrittenIsTrue = refl
   ; exactHeadLeanKernelReceiptPresent = false
   ; exactHeadLeanKernelReceiptPresentIsFalse = refl
-  ; HamiltonianExponentialGeneratorPaid = false
-  ; HamiltonianExponentialGeneratorPaidIsFalse = refl
+  ; HamiltonianExponentialGeneratorSourceWritten = true
+  ; HamiltonianExponentialGeneratorSourceWrittenIsTrue = refl
   ; CPOEigenprojectorConstructionPaid = false
   ; CPOEigenprojectorConstructionPaidIsFalse = refl
   }
@@ -147,3 +147,11 @@ dashiFiniteQuantumProducerCrossProverReceipt =
     Sources.crossModuleInference
     "DASHI Agda"
     "Aggregates only explicit Lean theorem-source authorities for the finite quantum producer and keeps Hamiltonian exponential generation, CPO eigenprojectors, physical authority, and exact-head kernel certification separate."
+
+
+leanHamiltonianExponentialSourceReceipt : Sources.AttributionReceipt
+leanHamiltonianExponentialSourceReceipt =
+  Sources.attribution-receipt
+    Sources.importedFormalTheoremSource
+    "DASHI Lean: RequestProject.QuantumMereologyHamiltonianExponential"
+    "Source-written Hermitian-matrix to unitary exponential path using an explicitly pinned mathlib L2-operator C*-norm and exp_mem_unitary_of_mem_skewAdjoint. Source lineage only until exact-head Lean kernel evidence exists."
