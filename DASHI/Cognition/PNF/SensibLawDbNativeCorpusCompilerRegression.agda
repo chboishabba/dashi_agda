@@ -414,3 +414,31 @@ fixtureCandidateProductDoesNotCreateTruth :
     fixtureCandidateSemanticProduct
   ≡ false
 fixtureCandidateProductDoesNotCreateTruth = refl
+
+
+fixtureL2CandidateProductSummaryReuse :
+  Scale.L2CandidateProductSummaryReuse
+fixtureL2CandidateProductSummaryReuse =
+  Scale.l2-candidate-product-summary-reuse
+    "candidate-product:fixture"
+    "l2-detector:fixture:v1"
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureL2ReuseBindsFreshOccurrenceWithoutReinterpretation :
+  Scale.L2CandidateProductSummaryReuse.bindsFreshOccurrence
+    fixtureL2CandidateProductSummaryReuse
+  ≡ true
+fixtureL2ReuseBindsFreshOccurrenceWithoutReinterpretation = refl
+
+fixtureL2ReuseDoesNotReinterpretFactors :
+  Scale.L2CandidateProductSummaryReuse.reinterpretsProductFactors
+    fixtureL2CandidateProductSummaryReuse
+  ≡ false
+fixtureL2ReuseDoesNotReinterpretFactors = refl
