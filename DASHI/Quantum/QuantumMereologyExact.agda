@@ -3,7 +3,6 @@ module DASHI.Quantum.QuantumMereologyExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Primitive using (Set₁; Set₂)
 
 import DASHI.Core.MereologyCoreExact as Classical
 import DASHI.Core.ConsumerRelativeMereologyExact as Consumer
