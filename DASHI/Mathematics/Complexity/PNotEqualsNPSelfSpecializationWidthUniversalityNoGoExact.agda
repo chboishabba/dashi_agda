@@ -866,6 +866,82 @@ rejectPolarityDoesNotForceSemanticCollapse =
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
+-- LOCAL GADGET VS FULL DIAGONAL BODY
+--
+-- The asymmetric reject gadget is locally compatible with the diagonal
+-- polarity condition at any quote the candidate rejects.  But a FULL
+-- SATDiagonalBody must satisfy that condition for every quote, including the
+-- compiler-generated fixed-point quote.  Existing infrastructure already
+-- proves that a full body + diagonal compiler yields a concrete SAT decision
+-- failure.
+--
+-- So the positive gadget does not bypass the main theorem: its unresolved step
+-- is precisely compiling the quote-dependent candidate branch for ALL quotes.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Cleaner local compatibility package without dependent projection noise.
+------------------------------------------------------------------------
+
+LocalDiagonalPolarity :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  Direct.PolynomialSATDeciderCandidate cost →
+  Cook.BooleanFormula →
+  Cook.BooleanFormula →
+  Set
+LocalDiagonalPolarity candidate quoted body =
+  (Direct.decide candidate quoted ≡ false →
+    Cook.Satisfiable body)
+  ×
+  (Cook.Satisfiable body →
+    Direct.decide candidate quoted ≡ false)
+
+rejectWidthGadgetLocallyDiagonalCompatible :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost}
+    {quoted payload : Cook.BooleanFormula} →
+  Direct.decide
+      (Direct.candidate anchored)
+      quoted
+    ≡ false →
+  LocalDiagonalPolarity
+    (Direct.candidate anchored)
+    quoted
+    (rejectWidthGadget payload)
+rejectWidthGadgetLocallyDiagonalCompatible rejected =
+  (λ _ → rejectWidthGadgetSatisfiable _)
+  ,
+  (λ _ → rejected)
+
+------------------------------------------------------------------------
+-- Full-body promotion is exactly the already-live SAT failure seam.
+------------------------------------------------------------------------
+
+fullWidthCompatibleBodyStillYieldsDecisionFailure :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {system : TotalKleene.SpecializingProgramSystem}
+    {view : Diagonal.CookFormulaOutputView system}
+    {dynamicInput : TotalKleene.Input system} →
+  TotalKleene.DiagonalCompiler system →
+  Diagonal.SATDiagonalBody
+    candidate
+    system
+    view
+    dynamicInput →
+  Direct.SATDecisionFailure candidate
+fullWidthCompatibleBodyStillYieldsDecisionFailure =
+  Diagonal.kleeneBodyGivesSATDecisionFailure
+
+------------------------------------------------------------------------
+-- Therefore:
+--
+--   local rejected-branch width preservation   CONSTRUCTED;
+--   polarity-only width destruction            REFUTED;
+--   full all-quotes body realization           still the hard SAT-failure seam.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
 -- The universality fork is partly resolved:
