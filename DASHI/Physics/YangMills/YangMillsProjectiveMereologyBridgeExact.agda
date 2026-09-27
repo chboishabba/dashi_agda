@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.YangMillsProjectiveMereologyBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.List.Base using (List)\nopen import Agda.Primitive using (Set₁)
+open import Data.List.Base using (List)\nopen import Agda.Primitive using (Set₁; Set₂)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
@@ -57,7 +57,7 @@ record YMProjectiveMereologyReceipt
         Configuration Event
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division family)
-    : Set₁ where
+    : Set₂ where
   field
     reconstructedWhole :
       R476.SourceLimitRepresentation
