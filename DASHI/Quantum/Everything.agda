@@ -25,3 +25,6 @@ import DASHI.Quantum.DepthEmbeddingIsometry
 import DASHI.Quantum.TSVF
 import DASHI.Quantum.TSVFTests
 import DASHI.Quantum.AnomalyFreedom
+
+import DASHI.Quantum.QuantumMereologyOperatorLocalityAuthorityExact
+import DASHI.Quantum.QuantumMereologyHamiltonianTransportAuthorityExact
