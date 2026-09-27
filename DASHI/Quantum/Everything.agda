@@ -2,6 +2,11 @@ module DASHI.Quantum.Everything where
 
 -- Quantum domain rollup.
 
+import DASHI.Quantum.QuantumMereologySourceAtlasExact
+import DASHI.Quantum.QuantumMereologyExact
+import DASHI.Quantum.QuantumMereologyClassicalBenchmarkExact
+import DASHI.Quantum.EntanglementGeometryMereologyBridgeExact
+
 import DASHI.Quantum.Stone
 import DASHI.Quantum.Stone_Gates
 import DASHI.Quantum.StrongContinuity
