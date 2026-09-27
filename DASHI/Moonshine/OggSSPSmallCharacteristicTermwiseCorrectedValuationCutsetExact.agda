@@ -111,6 +111,66 @@ p3DistributionsDiffer :
 p3DistributionsDiffer ()
 
 ------------------------------------------------------------------------
+-- 2b. Complete correction records witnessing non-uniqueness.
+------------------------------------------------------------------------
+
+allFrickeTermwiseCorrection :
+  Baseline.SmallPrimeTermwiseCorrection
+allFrickeTermwiseCorrection =
+  record
+    { Baseline.p2CorrectionAt =
+        p2AllFrickeCorrection
+    ; Baseline.p3CorrectionAt =
+        p3AllFrickeCorrection
+    ; Baseline.p2CorrectionTotal =
+        refl
+    ; Baseline.p3CorrectionTotal =
+        refl
+    ; Baseline.p2CorrectedTermSumPaysMonsterExponent =
+        refl
+    ; Baseline.p3CorrectedTermSumPaysMonsterExponent =
+        refl
+    }
+
+allPrimeTermwiseCorrection :
+  Baseline.SmallPrimeTermwiseCorrection
+allPrimeTermwiseCorrection =
+  record
+    { Baseline.p2CorrectionAt =
+        p2AllPrimeCorrection
+    ; Baseline.p3CorrectionAt =
+        p3AllPrimeCorrection
+    ; Baseline.p2CorrectionTotal =
+        refl
+    ; Baseline.p3CorrectionTotal =
+        refl
+    ; Baseline.p2CorrectedTermSumPaysMonsterExponent =
+        refl
+    ; Baseline.p3CorrectedTermSumPaysMonsterExponent =
+        refl
+    }
+
+completeP2CorrectionsDiffer :
+  Baseline.p2CorrectionAt allFrickeTermwiseCorrection
+    Baseline.frickePrimeLevel
+  ≡
+  Baseline.p2CorrectionAt allPrimeTermwiseCorrection
+    Baseline.frickePrimeLevel
+  ->
+  ⊥
+completeP2CorrectionsDiffer ()
+
+completeP3CorrectionsDiffer :
+  Baseline.p3CorrectionAt allFrickeTermwiseCorrection
+    Baseline.frickePrimeLevel
+  ≡
+  Baseline.p3CorrectionAt allPrimeTermwiseCorrection
+    Baseline.frickePrimeLevel
+  ->
+  ⊥
+completeP3CorrectionsDiffer ()
+
+------------------------------------------------------------------------
 -- 3. Total-only information is therefore insufficient.
 ------------------------------------------------------------------------
 
@@ -223,6 +283,42 @@ licenseTermwiseCorrection authority =
     true refl
 
 ------------------------------------------------------------------------
+-- 5b. A termwise analytic authority automatically inhabits the existing
+--     preferred corrected-valuation interface.
+------------------------------------------------------------------------
+
+asPreferredCorrectedValuationAuthority :
+  SmallPrimeTermwiseAnalyticAuthority ->
+  Preferred.PreferredCorrectedValuationAuthority
+asPreferredCorrectedValuationAuthority authority =
+  record
+    { Preferred.AnalyticLocalTerm =
+        AnalyticLocalTerm authority
+    ; Preferred.p2AnalyticTerm =
+        p2LocalTerm authority
+    ; Preferred.p3AnalyticTerm =
+        p3LocalTerm authority
+    ; Preferred.analyticMultiplicity =
+        valuationMultiplicity authority
+    ; Preferred.p2WeightsAreActualLocalValuations =
+        p2LocalMultiplicityMatchesPreferredWeight authority
+    ; Preferred.p3WeightsAreActualLocalValuations =
+        p3LocalMultiplicityMatchesPreferredWeight authority
+    ; Preferred.localTermsAssembleIntoCorrectedHauptmodulValuation =
+        true
+    ; Preferred.localTermsAssembleIntoCorrectedHauptmodulValuationIsTrue =
+        refl
+    ; Preferred.correctedValuationPaysDuncanSwisherP2Gap =
+        true
+    ; Preferred.correctedValuationPaysDuncanSwisherP2GapIsTrue =
+        refl
+    ; Preferred.correctedValuationPaysDuncanSwisherP3Gap =
+        true
+    ; Preferred.correctedValuationPaysDuncanSwisherP3GapIsTrue =
+        refl
+    }
+
+------------------------------------------------------------------------
 -- 6. No fake constructor from existing finite data.
 ------------------------------------------------------------------------
 
@@ -259,6 +355,8 @@ record TermwiseCorrectedValuationCutsetBoundary : Set where
     totalGapDeterminesUniqueTermwiseSplit : Bool
     preferredFinitePaymentDeterminesTermwiseSplit : Bool
     analyticTermwiseAuthoritySpecified : Bool
+    completeDistinctCorrectionRecordsConstructed : Bool
+    adapterToPreferredCorrectedValuationOwned : Bool
     analyticLevelAssignmentRequired : Bool
     correctedHauptmodulDivisorOriginRequired : Bool
     termwiseAuthorityCurrentlyInhabited : Bool
@@ -268,4 +366,4 @@ canonicalTermwiseCorrectedValuationCutsetBoundary :
   TermwiseCorrectedValuationCutsetBoundary
 canonicalTermwiseCorrectedValuationCutsetBoundary =
   termwise-corrected-valuation-cutset-boundary
-    true true false false true true true false true
+    true true false false true true true true true false true
