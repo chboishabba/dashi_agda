@@ -5,6 +5,24 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+data AttributionRole : Set where
+  externalSourceClaim :
+    AttributionRole
+  localFormalReconstruction :
+    AttributionRole
+  crossModuleInference :
+    AttributionRole
+  newDASHITheorem :
+    AttributionRole
+
+record AttributionReceipt : Set where
+  constructor attribution-receipt
+  field
+    role : AttributionRole
+    owner claim : String
+
+open AttributionReceipt public
+
 record QuantumMereologySource : Set where
   constructor quantum-mereology-source
   field
@@ -20,7 +38,7 @@ carrollSingh2021 =
     "Physical Review A 103, 022213"
     "2021"
     "doi:10.1103/PhysRevA.103.022213"
-    "Given Hilbert space plus Hamiltonian, studies preferred tensor-product factorisations using quasiclassical robustness, entanglement-growth and localization criteria."
+    "Given Hilbert space plus Hamiltonian, studies preferred tensor-product factorisations using quasiclassical pointer robustness and an in-principle objective combining entanglement growth with internal spreading/localization around approximately classical trajectories."
 
 caoCarrollMichalakis2017 : QuantumMereologySource
 caoCarrollMichalakis2017 =
@@ -71,3 +89,39 @@ canonicalQuantumMereologyAttributionBoundary = record
   ; noCanonicalMeetClaimImportedAsKernelTheorem = false
   ; noCanonicalMeetClaimImportedAsKernelTheoremIsFalse = refl
   }
+
+
+carrollSinghObjectiveClaim : AttributionReceipt
+carrollSinghObjectiveClaim =
+  attribution-receipt
+    externalSourceClaim
+    "Sean M. Carroll; Ashmeet Singh, Phys. Rev. A 103, 022213 (2021)"
+    "The source proposes an in-principle preferred-factorisation search minimizing a combination of entanglement growth and internal spreading for quasiclassical subsystem behaviour."
+
+pasqualiniFortinNoCanonicalMeetClaim : AttributionReceipt
+pasqualiniFortinNoCanonicalMeetClaim =
+  attribution-receipt
+    externalSourceClaim
+    "Matías Pasqualini; Sebastian Fortin, Entropy 28(6), 627 (2026)"
+    "The source argues that the space of tensor-product structures lacks the canonical global meet/lattice structure of classical partition mereology."
+
+dashiSelectionReconstructionReceipt : AttributionReceipt
+dashiSelectionReconstructionReceipt =
+  attribution-receipt
+    localFormalReconstruction
+    "DASHI"
+    "Typed candidate/criterion/selection records reconstruct the source-described preferred-TPS search without importing existence, uniqueness, or physical correctness."
+
+dashiObserverCrossModuleReceipt : AttributionReceipt
+dashiObserverCrossModuleReceipt =
+  attribution-receipt
+    crossModuleInference
+    "DASHI"
+    "Existing consumer-descent/non-factorability theorems apply to criterion observations once a TPS candidate family and declared consumer are supplied."
+
+dashiFiniteNoMeetTheoremReceipt : AttributionReceipt
+dashiFiniteNoMeetTheoremReceipt =
+  attribution-receipt
+    newDASHITheorem
+    "DASHI"
+    "The finite two-tag TPSRefinementSpace regression has no CanonicalMeetAuthority; this local theorem is not the Pasqualini--Fortin physical TPS theorem."
