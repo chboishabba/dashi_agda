@@ -10,6 +10,7 @@ import DASHI.Quantum.QuantumMereologyClassicalBenchmarkExact
 import DASHI.Quantum.EntanglementGeometryMereologyBridgeExact
 import DASHI.Quantum.QuantumMereologySpacetimePromotionExact
 import DASHI.Quantum.QuantumMereologyFiniteNoMeetRegression
+import DASHI.Quantum.QuantumMereologyFiniteLinearTPSAuthorityExact
 import DASHI.Quantum.QuantumMereologyUnifierBridgeExact
 
 import DASHI.Quantum.Stone
