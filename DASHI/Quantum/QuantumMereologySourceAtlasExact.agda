@@ -8,6 +8,8 @@ open import Agda.Builtin.String using (String)
 data AttributionRole : Set where
   externalSourceClaim :
     AttributionRole
+  importedFormalTheoremSource :
+    AttributionRole
   localFormalReconstruction :
     AttributionRole
   crossModuleInference :
@@ -125,3 +127,11 @@ dashiFiniteNoMeetTheoremReceipt =
     newDASHITheorem
     "DASHI"
     "The finite two-tag TPSRefinementSpace regression has no CanonicalMeetAuthority; this local theorem is not the Pasqualini--Fortin physical TPS theorem."
+
+
+jmdWikidataMereologyFormalSource : AttributionReceipt
+jmdWikidataMereologyFormalSource =
+  attribution-receipt
+    importedFormalTheoremSource
+    "JMD (github.com/meta-introspector), RequestProject.Mereology"
+    "Retained Lean theorem source for executable Wikidata P361/P2670 mereology: certified part-of closure, proper-part order and well-foundedness, overlap laws, part completeness, and P279/P31 no-confusion. Source-manifest digest: b81a8632dce181845e4c9ca500fb4a9a74df77aeb86a99392361eda991347c35."
