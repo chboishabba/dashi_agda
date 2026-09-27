@@ -94,6 +94,14 @@ record FiniteQuantumProducerStatus : Set where
     HamiltonianExponentialGeneratorSourceWrittenIsTrue :
       HamiltonianExponentialGeneratorSourceWritten ≡ true
 
+    ExponentialDerivativeSpineSourceWritten : Bool
+    ExponentialDerivativeSpineSourceWrittenIsTrue :
+      ExponentialDerivativeSpineSourceWritten ≡ true
+
+    RealTimeDerivativeRestrictionSourceWritten : Bool
+    RealTimeDerivativeRestrictionSourceWrittenIsTrue :
+      RealTimeDerivativeRestrictionSourceWritten ≡ true
+
     CPOEigenprojectorConstructionPaid : Bool
     CPOEigenprojectorConstructionPaidIsFalse :
       CPOEigenprojectorConstructionPaid ≡ false
@@ -116,6 +124,10 @@ canonicalFiniteQuantumProducerStatus = record
   ; exactHeadLeanKernelReceiptPresentIsFalse = refl
   ; HamiltonianExponentialGeneratorSourceWritten = true
   ; HamiltonianExponentialGeneratorSourceWrittenIsTrue = refl
+  ; ExponentialDerivativeSpineSourceWritten = true
+  ; ExponentialDerivativeSpineSourceWrittenIsTrue = refl
+  ; RealTimeDerivativeRestrictionSourceWritten = true
+  ; RealTimeDerivativeRestrictionSourceWrittenIsTrue = refl
   ; CPOEigenprojectorConstructionPaid = false
   ; CPOEigenprojectorConstructionPaidIsFalse = refl
   }
@@ -155,3 +167,11 @@ leanHamiltonianExponentialSourceReceipt =
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyHamiltonianExponential"
     "Source-written Hermitian-matrix to unitary exponential path using an explicitly pinned mathlib L2-operator C*-norm and exp_mem_unitary_of_mem_skewAdjoint. Source lineage only until exact-head Lean kernel evidence exists."
+
+
+leanExponentialDerivativeSourceReceipt : Sources.AttributionReceipt
+leanExponentialDerivativeSourceReceipt =
+  Sources.attribution-receipt
+    Sources.importedFormalTheoremSource
+    "DASHI Lean: RequestProject.QuantumMereologyExponentialDerivative"
+    "Source-written first/second exponential derivative spine using mathlib hasDerivAt_exp_smul_const plus explicit complex-to-real Fréchet restriction. Source lineage only until exact-head Lean kernel evidence exists."
