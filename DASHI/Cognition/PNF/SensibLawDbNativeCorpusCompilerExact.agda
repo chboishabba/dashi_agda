@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact as Ingest
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as Persistence
+import DASHI.Cognition.PNF.EditTransportLeafLocalityExact as EditLocality
 import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as Canonical
 import DASHI.Interop.DistributedEpistemicPlaneSeparationExact as Planes
 import DASHI.Interop.DistributedEvidenceHistoryProjectionExact as History
@@ -58,6 +59,53 @@ record CompilationIdentity : Set where
     configDigestRef : String
 
 open CompilationIdentity public
+
+record ParserProductIdentity : Set where
+  constructor parser-product-identity
+  field
+    regionPayloadDigestRef : String
+    parserFamily : String
+    parserVersion : String
+    modelRef : String
+    configDigestRef : String
+
+open ParserProductIdentity public
+
+record CrossRevisionParserProductReuse : Set where
+  constructor cross-revision-parser-product-reuse
+  field
+    productIdentity : ParserProductIdentity
+    beforeSourceRevisionRef : String
+    beforeRegionRef : String
+    afterSourceRevisionRef : String
+    afterRegionRef : String
+    editTransport : EditLocality.EditTransport
+
+    exactRegionPayloadMatched : Bool
+    exactRegionPayloadMatchedIsTrue :
+      exactRegionPayloadMatched ≡ true
+
+    parserConfigurationMatched : Bool
+    parserConfigurationMatchedIsTrue :
+      parserConfigurationMatched ≡ true
+
+    createsSourceOccurrenceIdentity : Bool
+    createsSourceOccurrenceIdentityIsFalse :
+      createsSourceOccurrenceIdentity ≡ false
+
+    createsSemanticIdentity : Bool
+    createsSemanticIdentityIsFalse :
+      createsSemanticIdentity ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    claimTruthPromoted : Bool
+    claimTruthPromotedIsFalse :
+      claimTruthPromoted ≡ false
+
+open CrossRevisionParserProductReuse public
 
 record ParserRun : Set where
   constructor parser-run
@@ -528,6 +576,8 @@ data ParserCompletionCreatesAdmission : Set where
 data ParserResidualCreatesSourceAbsence : Set where
 data ParserResidualCreatesPropositionAbsence : Set where
 data ContentDigestCreatesSemanticIdentity : Set where
+data ParserProductIdentityCreatesOccurrenceIdentity : Set where
+data CrossRevisionParserReuseCreatesSemanticIdentity : Set where
 data ContentDigestDeterminesSourceRevisionIdentity : Set where
 data PersistedCandidateCreatesSemanticAdmission : Set where
 data PersistedCandidateCreatesClaimTruth : Set where
@@ -592,6 +642,14 @@ parserResidualDoesNotCreatePropositionAbsence ()
 contentDigestDoesNotCreateSemanticIdentity :
   ContentDigestCreatesSemanticIdentity → ⊥
 contentDigestDoesNotCreateSemanticIdentity ()
+
+parserProductIdentityDoesNotCreateOccurrenceIdentity :
+  ParserProductIdentityCreatesOccurrenceIdentity → ⊥
+parserProductIdentityDoesNotCreateOccurrenceIdentity ()
+
+crossRevisionParserReuseDoesNotCreateSemanticIdentity :
+  CrossRevisionParserReuseCreatesSemanticIdentity → ⊥
+crossRevisionParserReuseDoesNotCreateSemanticIdentity ()
 
 contentDigestDoesNotDetermineSourceRevisionIdentity :
   ContentDigestDeterminesSourceRevisionIdentity → ⊥
