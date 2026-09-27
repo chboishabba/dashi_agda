@@ -1,6 +1,7 @@
 module DASHI.Economics.AISafetyRegulatoryMoatGameExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.SourceAttributionPromotionBoundaryExact as Attribution
@@ -39,8 +40,6 @@ record ComplianceBurdenProfile : Set where
     academicRelativeBurden : Trit
     openWeightRelativeBurden : Trit
     individualRelativeBurden : Trit
-
-open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 open ComplianceBurdenProfile public
 
