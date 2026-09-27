@@ -572,3 +572,43 @@ dbNativeFixtureExactReuseRequiresCompleteProduct :
   DbNativeCorpusRegression.fixtureExactReuseRequiresCompleteProduct
   ≡ DbNativeCorpusRegression.fixtureExactReuseRequiresCompleteProduct
 dbNativeFixtureExactReuseRequiresCompleteProduct = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P L2 semantic-product reuse preserves occurrence/identity separation.
+------------------------------------------------------------------------
+
+dbNativeL2SummaryReuseDoesNotCreateEntityIdentity :
+  DbNativeCorpus.L2SummaryReuseCreatesEntityIdentity → ⊥
+dbNativeL2SummaryReuseDoesNotCreateEntityIdentity =
+  DbNativeCorpus.l2SummaryReuseDoesNotCreateEntityIdentity
+
+dbNativeL2SummaryReuseDoesNotCreatePropositionIdentity :
+  DbNativeCorpus.L2SummaryReuseCreatesPropositionIdentity → ⊥
+dbNativeL2SummaryReuseDoesNotCreatePropositionIdentity =
+  DbNativeCorpus.l2SummaryReuseDoesNotCreatePropositionIdentity
+
+dbNativeL2SummaryReuseDoesNotCreateEventIdentity :
+  DbNativeCorpus.L2SummaryReuseCreatesEventIdentity → ⊥
+dbNativeL2SummaryReuseDoesNotCreateEventIdentity =
+  DbNativeCorpus.l2SummaryReuseDoesNotCreateEventIdentity
+
+dbNativeL2SummaryReuseDoesNotCreateAuthority :
+  DbNativeCorpus.L2SummaryReuseCreatesSemanticAuthority → ⊥
+dbNativeL2SummaryReuseDoesNotCreateAuthority =
+  DbNativeCorpus.l2SummaryReuseDoesNotCreateSemanticAuthority
+
+dbNativeL2SummaryReuseDoesNotCreateTruth :
+  DbNativeCorpus.L2SummaryReuseCreatesClaimTruth → ⊥
+dbNativeL2SummaryReuseDoesNotCreateTruth =
+  DbNativeCorpus.l2SummaryReuseDoesNotCreateClaimTruth
+
+dbNativeFixtureL2ReuseBindsFreshOccurrence :
+  DbNativeCorpusRegression.fixtureL2ReuseBindsFreshOccurrenceWithoutReinterpretation
+  ≡ DbNativeCorpusRegression.fixtureL2ReuseBindsFreshOccurrenceWithoutReinterpretation
+dbNativeFixtureL2ReuseBindsFreshOccurrence = refl
+
+dbNativeFixtureL2ReuseAvoidsFactorReinterpretation :
+  DbNativeCorpusRegression.fixtureL2ReuseDoesNotReinterpretFactors
+  ≡ DbNativeCorpusRegression.fixtureL2ReuseDoesNotReinterpretFactors
+dbNativeFixtureL2ReuseAvoidsFactorReinterpretation = refl
