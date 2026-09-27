@@ -4,6 +4,7 @@ module DASHI.Quantum.QuantumMereologySelectionExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Quantum.QuantumMereologyExact as QM
@@ -55,8 +56,6 @@ Optimal P candidate =
   ((other : Candidate P) →
     Admissible P other →
     NoWorse P candidate other)
-  where
-    open import Data.Product using (_×_)
 
 record PreferredTPSSelectionReceipt
     {W : QM.BareQuantumWorld}
