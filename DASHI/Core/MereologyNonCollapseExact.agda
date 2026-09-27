@@ -24,13 +24,15 @@ data InstanceOf : Atom → Atom → Set where
 
 partOfDoesNotImplySubclass :
   ¬ ((x y : Atom) → PartOf x y → SubclassOf x y)
-partOfDoesNotImplySubclass collapse =
+partOfDoesNotImplySubclass collapse with
   collapse left right leftPartOfRight
+... | ()
 
 partOfDoesNotImplyInstance :
   ¬ ((x y : Atom) → PartOf x y → InstanceOf x y)
-partOfDoesNotImplyInstance collapse =
+partOfDoesNotImplyInstance collapse with
   collapse left right leftPartOfRight
+... | ()
 
 Overlap : Atom → Atom → Set
 Overlap _ _ = ⊤
