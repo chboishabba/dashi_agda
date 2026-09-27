@@ -381,3 +381,36 @@ fixtureCrossRevisionReuseDoesNotCreateSemanticIdentity :
     fixtureCrossRevisionParserProductReuse
   ≡ false
 fixtureCrossRevisionReuseDoesNotCreateSemanticIdentity = refl
+
+
+fixtureCandidateSemanticProduct : Scale.CandidateSemanticProduct
+fixtureCandidateSemanticProduct =
+  Scale.candidate-semantic-product
+    "candidate-semantic-product:fixture"
+    "parser-product:fixture"
+    "scale1:m12-candidate-pnf:v2-productized"
+    ("factor:actor" ∷ "factor:predicate" ∷ [])
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureCandidateProductDoesNotCreateOccurrenceIdentity :
+  Scale.CandidateSemanticProduct.createsSourceOccurrenceIdentity
+    fixtureCandidateSemanticProduct
+  ≡ false
+fixtureCandidateProductDoesNotCreateOccurrenceIdentity = refl
+
+fixtureCandidateProductDoesNotCreatePropositionIdentity :
+  Scale.CandidateSemanticProduct.createsPropositionIdentity
+    fixtureCandidateSemanticProduct
+  ≡ false
+fixtureCandidateProductDoesNotCreatePropositionIdentity = refl
+
+fixtureCandidateProductDoesNotCreateTruth :
+  Scale.CandidateSemanticProduct.createsClaimTruth
+    fixtureCandidateSemanticProduct
+  ≡ false
+fixtureCandidateProductDoesNotCreateTruth = refl
