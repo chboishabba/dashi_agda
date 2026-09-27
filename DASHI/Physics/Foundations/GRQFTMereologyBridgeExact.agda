@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.GRQFTMereologyBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_)\nopen import Data.Product using (_×_; _,_)
 
 import DASHI.Core.ConsumerRelativeMereologyExact as Consumer
 import DASHI.Core.MereologyNonCollapseExact as NonCollapse
@@ -104,7 +104,7 @@ activeProjectionIsTracePlusTwiceTimelikePart :
   activeProjection rho px py pz
   ≡
   traceProjection rho px py pz
-    + ((Data.Rational.Base.1ℚ + Data.Rational.Base.1ℚ) * rho)
+    + ((1ℚ + 1ℚ) * rho)
 activeProjectionIsTracePlusTwiceTimelikePart =
   Firewall.activeStressIsTracePlusTwiceEnergyDensity
 
