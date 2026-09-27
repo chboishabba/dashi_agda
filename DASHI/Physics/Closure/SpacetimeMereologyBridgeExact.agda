@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Closure.SpacetimeMereologyBridgeExact where
 
-open import Agda.Primitive using (Set₁)
+open import Agda.Primitive using (Set₁)\nopen import Agda.Builtin.Bool using (Bool; false)\nopen import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.TemporalSheafProofObligations as Sheaf
 
 ------------------------------------------------------------------------
@@ -35,12 +35,30 @@ fromSpacetimeSheafObligation spacetime = record
 
 record SpacetimeMereologyBoundary : Set where
   field
-    containmentDoesNotSupplyGluing : Set
-    spatialOverlapDoesNotSupplyCompatibility : Set
-    mereologicalCarrierDoesNotSupplyCauchyEvolution : Set
-    mereologicalCarrierDoesNotSupplyGR : Set
+    containmentSuppliesGluing : Bool
+    containmentSuppliesGluingIsFalse :
+      containmentSuppliesGluing ≡ false
 
-------------------------------------------------------------------------
--- The boundary is intentionally an obligation surface: a consumer that wants
--- any of the stronger readings must provide the corresponding witness.
-------------------------------------------------------------------------
+    spatialOverlapSuppliesCompatibility : Bool
+    spatialOverlapSuppliesCompatibilityIsFalse :
+      spatialOverlapSuppliesCompatibility ≡ false
+
+    mereologicalCarrierSuppliesCauchyEvolution : Bool
+    mereologicalCarrierSuppliesCauchyEvolutionIsFalse :
+      mereologicalCarrierSuppliesCauchyEvolution ≡ false
+
+    mereologicalCarrierSuppliesGR : Bool
+    mereologicalCarrierSuppliesGRIsFalse :
+      mereologicalCarrierSuppliesGR ≡ false
+
+canonicalSpacetimeMereologyBoundary : SpacetimeMereologyBoundary
+canonicalSpacetimeMereologyBoundary = record
+  { containmentSuppliesGluing = false
+  ; containmentSuppliesGluingIsFalse = refl
+  ; spatialOverlapSuppliesCompatibility = false
+  ; spatialOverlapSuppliesCompatibilityIsFalse = refl
+  ; mereologicalCarrierSuppliesCauchyEvolution = false
+  ; mereologicalCarrierSuppliesCauchyEvolutionIsFalse = refl
+  ; mereologicalCarrierSuppliesGR = false
+  ; mereologicalCarrierSuppliesGRIsFalse = refl
+  }
