@@ -5,6 +5,8 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.GlobalFundingLiquidityRealisationExact as Funding
+import DASHI.Economics.ChinaRetailGoldMarketTopology2026Exact as ChinaGold
+import DASHI.Governance.ComparativeCrisisClimateAtlas as CrisisAtlas
 
 ------------------------------------------------------------------------
 -- GEOPOLITICAL / ENERGY / AI / TREASURY TRANSMISSION GRAPH
@@ -112,3 +114,19 @@ record GoldTopologyBoundary : Set where
 canonicalGoldTopologyBoundary : GoldTopologyBoundary
 canonicalGoldTopologyBoundary =
   goldTopologyBoundary true true true false false
+
+------------------------------------------------------------------------
+-- Reuse existing source-bounded political/gold owners.
+------------------------------------------------------------------------
+
+chinaGoldBoundaryReused : ChinaGold.ChinaRetailGoldTopologyBoundary
+chinaGoldBoundaryReused = ChinaGold.canonicalChinaRetailGoldTopologyBoundary
+
+comparativeCrisisAtlasReused : CrisisAtlas.ComparativeCrisisClimateAtlasSurface
+comparativeCrisisAtlasReused = CrisisAtlas.canonicalComparativeCrisisClimateAtlasSurface
+
+data ComparativePoliticalContextImpliesEconomicCausationPermission : Set where
+
+comparativePoliticalContextDoesNotAutoCloseEconomicCausation :
+  ComparativePoliticalContextImpliesEconomicCausationPermission → ⊥
+comparativePoliticalContextDoesNotAutoCloseEconomicCausation ()
