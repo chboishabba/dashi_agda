@@ -2,7 +2,6 @@
 module DASHI.Core.ConsumerRelativeMereologyExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Primitive using (Set₁)
 
 ------------------------------------------------------------------------
 -- CONSUMER-RELATIVE MEREOLOGY
