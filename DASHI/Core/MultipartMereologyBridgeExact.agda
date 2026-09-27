@@ -1,7 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Core.MultipartMereologyBridgeExact where
 
-open import Agda.Primitive using (Set₁)
 import DASHI.Core.MultipartSameObjectReconstructionExact as Multipart
 
 ------------------------------------------------------------------------
