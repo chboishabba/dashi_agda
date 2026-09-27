@@ -409,25 +409,25 @@ andTrueSatisfiabilityEquivalentPayload payload =
       Cook.Satisfiable payload
     forward witness =
       Cook.satisfyingAssignment
-        (Cook.Satisfiable.assignment witness)
+        (Cook.assignment witness)
         (trans
           (sym
             (andTruePreservesPayloadEvaluation
               payload
-              (Cook.Satisfiable.assignment witness)))
-          (Cook.Satisfiable.evaluatesTrue witness))
+              (Cook.assignment witness)))
+          (Cook.evaluatesTrue witness))
 
     backward :
       Cook.Satisfiable payload →
       Cook.Satisfiable (andGuard true payload)
     backward witness =
       Cook.satisfyingAssignment
-        (Cook.Satisfiable.assignment witness)
+        (Cook.assignment witness)
         (trans
           (andTruePreservesPayloadEvaluation
             payload
-            (Cook.Satisfiable.assignment witness))
-          (Cook.Satisfiable.evaluatesTrue witness))
+            (Cook.assignment witness))
+          (Cook.evaluatesTrue witness))
 
 orFalseSatisfiabilityEquivalentPayload :
   (payload : Cook.BooleanFormula) →
@@ -442,25 +442,25 @@ orFalseSatisfiabilityEquivalentPayload payload =
       Cook.Satisfiable payload
     forward witness =
       Cook.satisfyingAssignment
-        (Cook.Satisfiable.assignment witness)
+        (Cook.assignment witness)
         (trans
           (sym
             (orFalsePreservesPayloadEvaluation
               payload
-              (Cook.Satisfiable.assignment witness)))
-          (Cook.Satisfiable.evaluatesTrue witness))
+              (Cook.assignment witness)))
+          (Cook.evaluatesTrue witness))
 
     backward :
       Cook.Satisfiable payload →
       Cook.Satisfiable (orGuard false payload)
     backward witness =
       Cook.satisfyingAssignment
-        (Cook.Satisfiable.assignment witness)
+        (Cook.assignment witness)
         (trans
           (orFalsePreservesPayloadEvaluation
             payload
-            (Cook.Satisfiable.assignment witness))
-          (Cook.Satisfiable.evaluatesTrue witness))
+            (Cook.assignment witness))
+          (Cook.evaluatesTrue witness))
 
 andFalseUnsatisfiable :
   (payload : Cook.BooleanFormula) →
@@ -472,10 +472,10 @@ andFalseUnsatisfiable
   trueNotFalse
     (trans
       (sym
-        (Cook.Satisfiable.evaluatesTrue witness))
+        (Cook.evaluatesTrue witness))
       (andFalseErasesPayloadEvaluation
         payload
-        (Cook.Satisfiable.assignment witness)))
+        (Cook.assignment witness)))
 
 orTrueSatisfiable :
   (payload : Cook.BooleanFormula) →
@@ -738,7 +738,7 @@ acceptCollapseGadgetUnsatisfiable
     payload
     witness =
   trueNotFalse
-    (Cook.Satisfiable.evaluatesTrue witness)
+    (Cook.evaluatesTrue witness)
 
 ------------------------------------------------------------------------
 -- Exact diagonal polarity for the asymmetric gadget:
