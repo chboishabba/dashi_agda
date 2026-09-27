@@ -22,10 +22,12 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPNonOracularShannonTerminalProgre
 -- structurally.  No SAT oracle is added here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 open import Data.Product using (Σ; _,_)
 
@@ -94,8 +96,7 @@ zeroStateHasStructuralTerminalObservation :
       ≡
       FutureSAT.terminal value)
 zeroStateHasStructuralTerminalObservation state zeroBound
-    with stateVariableBound state | zeroBound
-... | zero | refl =
+    rewrite zeroBound =
   SAT.evaluate
     (Bridge.cookToIndexed
       (Q2.currentFormula state))
