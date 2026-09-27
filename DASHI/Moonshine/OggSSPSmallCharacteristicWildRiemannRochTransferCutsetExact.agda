@@ -29,8 +29,41 @@ module DASHI.Moonshine.OggSSPSmallCharacteristicWildRiemannRochTransferCutsetExa
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+
+aovTameStacks : Source.AttributedSource
+aovTameStacks =
+  Source.mkNoDOISource
+    "Dan Abramovich, Martin Olsson, and Angelo Vistoli"
+    "Tame stacks in positive characteristic"
+    "Annales de l'Institut Fourier 58(4), 1057-1091"
+    "2008"
+    "https://arxiv.org/abs/math/0703310"
+    Source.academicArticleSource
+    "framework source defining tame algebraic stacks through exactness/linearly reductive stabilizers and emphasizing their better behavior than general positive-characteristic stacks; not a Monster-exponent or wild-layer multiplicity theorem"
+    Source.publicAttribution
+
+toenRiemannRoch : Source.AttributedSource
+toenRiemannRoch =
+  Source.mkNoDOISource
+    "Bertrand Toen"
+    "Riemann-Roch Theorems for Deligne-Mumford Stacks"
+    "K-Theory 18, 33-76"
+    "1999"
+    "https://arxiv.org/abs/math/9803076"
+    Source.academicArticleSource
+    "general Deligne-Mumford stack Riemann-Roch framework using representation-valued cohomology; not cited as proving the specific wild Artin-Schreier layer x sector valuation rule needed here"
+    Source.publicAttribution
+
+riemannRochFrameworkAtlas : Source.AttributedSourceAtlas
+riemannRochFrameworkAtlas =
+  Source.mkSourceAtlas
+    "tame/wild stack Riemann-Roch transfer framework"
+    "DASHI.Moonshine.OggSSPSmallCharacteristicWildRiemannRochTransferCutsetExact"
+    (aovTameStacks ∷ toenRiemannRoch ∷ [])
+    "framework provenance only; the small-prime Monster multiplicity theorem remains an open DASHI recognition problem"
 
 ------------------------------------------------------------------------
 -- 1. Distinguish tame and wild theorem classes.
