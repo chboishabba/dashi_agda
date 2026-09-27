@@ -64,13 +64,21 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * p=3 therefore retains the Deligne--Rapoport two-orbit local-incidence
 --     rank as the preferred finite candidate.
 --
+-- STRONGEST SURVIVING STRUCTURAL CANDIDATE:
+--   * p=2 has TWO sourced Artin--Schreier layers and FIVE canonical local
+--     unoriented inertia sectors;
+--   * p=3 has ONE sourced Artin--Schreier layer and TWO canonical local
+--     Deligne--Rapoport orbit sectors;
+--   * the SAME rule "wild layer count x local sector rank" gives 10 and 2.
+--
 -- REMAINING RESEARCH WALL:
---   * construct an independently defined exceptional analytic object E_p whose
---     valuation is 10 at p=2 and 2 at p=3 WITHOUT defining it from the Monster
---     target gap;
---   * prove that the SAME E_p refines both Duncan--Swisher descriptions;
---   * termwise redistribution across J_{p+}, J_p, J_{p^2} is an optional
---     stronger refinement, not a consequence of the total gap;
+--   * prove, by genuinely WILD local geometry/cohomology or direct corrected
+--     q-expansion analysis, that one wild layer contributes one valuation copy
+--     per canonical local sector;
+--   * use that theorem to construct the SAME independent exceptional object on
+--     both Duncan--Swisher descriptions;
+--   * tame/linearly-reductive orbifold RR is not accepted as a shortcut;
+--   * termwise redistribution across J_{p+}, J_p, J_{p^2} is optional;
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -112,6 +120,13 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicFourthTermExtensionExact as Four
 import DASHI.Moonshine.OggSSPSmallCharacteristicJointCorrectionCutsetExact as JointCutset
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildCanonicalCoefficientComparisonExact as WildCanonical
 import DASHI.Moonshine.OggSSPSmallCharacteristicIndependentStatisticComparisonExact as IndependentStats
+import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as BridgeFailure
+import DASHI.Moonshine.OggSSPSmallCharacteristicSpecialPointCollisionExact as SpecialCollision
+import DASHI.Moonshine.OggSSPSmallCharacteristicDworkExplicitRootDepthNoGoExact as DworkRootNoGo
+import DASHI.Moonshine.OggSSPSmallCharacteristicExceptionalTermHypothesisSieveExact as HypothesisSieve
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildGeneratorPartitionCandidateExact as GeneratorPartition
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildRiemannRochTransferCutsetExact as WildRR
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -285,6 +300,17 @@ record ArithmeticIndependent369Frontier : Set where
     jointExceptionalAuthorityPaid : Bool
     wildCanonicalStatisticComparisonPaid : Bool
     independentStatisticComparisonPaid : Bool
+    monsterBridgeFailureLocalized : Bool
+    specialPointCollisionPaid : Bool
+    explicitDworkRootDepthNoGoPaid : Bool
+    exceptionalTermHypothesisSievePaid : Bool
+    generatorPartitionCandidatePaid : Bool
+    generatorPartitionPrimeSelectorPaid : Bool
+    wildLayerSectorProductCandidatePaid : Bool
+    wildLayerSectorSameRuleAcrossPrimes : Bool
+    wildLayerSectorValuationAuthorityPaid : Bool
+    wildRiemannRochTransferCutsetPaid : Bool
+    tameRiemannRochShortcutRejected : Bool
 
     p2CentralizerDepthTenCandidatePaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
@@ -361,6 +387,17 @@ canonicalArithmeticIndependent369Frontier =
     ; jointExceptionalAuthorityPaid = false
     ; wildCanonicalStatisticComparisonPaid = true
     ; independentStatisticComparisonPaid = true
+    ; monsterBridgeFailureLocalized = true
+    ; specialPointCollisionPaid = true
+    ; explicitDworkRootDepthNoGoPaid = true
+    ; exceptionalTermHypothesisSievePaid = true
+    ; generatorPartitionCandidatePaid = true
+    ; generatorPartitionPrimeSelectorPaid = false
+    ; wildLayerSectorProductCandidatePaid = true
+    ; wildLayerSectorSameRuleAcrossPrimes = true
+    ; wildLayerSectorValuationAuthorityPaid = false
+    ; wildRiemannRochTransferCutsetPaid = true
+    ; tameRiemannRochShortcutRejected = true
 
     ; p2CentralizerDepthTenCandidatePaid = true
     ; p3CentralizerDepthUniformLawRejected = true
