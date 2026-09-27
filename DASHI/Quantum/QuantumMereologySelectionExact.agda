@@ -4,7 +4,7 @@ module DASHI.Quantum.QuantumMereologySelectionExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_)
+open import Data.Product using (_×_; proj₂)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as Repair
@@ -66,6 +66,77 @@ record PreferredTPSSelectionReceipt
     selectedOptimal : Optimal P selected
 
 open PreferredTPSSelectionReceipt public
+
+------------------------------------------------------------------------
+-- SOURCE-OBJECTIVE REALISATION
+--
+-- Carroll--Singh own the external proposal to minimize a combination of the
+-- two quasiclassical coordinates.  The application supplies the actual
+-- combined carrier/order and proves it agrees with the generic NoWorse
+-- relation.  DASHI then owns the transport theorem below.
+------------------------------------------------------------------------
+
+record CarrollSinghObjectiveRealization
+    {W : QM.BareQuantumWorld}
+    (P : PreferredTPSSelectionProblem W) : Set₁ where
+  field
+    CombinedObjective : Set
+
+    combine :
+      EntanglementGrowthScore P →
+      InternalSpreadingScore P →
+      CombinedObjective
+
+    ObjectiveNoWorse :
+      CombinedObjective → CombinedObjective → Set
+
+    noWorseToCombined :
+      ∀ left right →
+      NoWorse P left right →
+      ObjectiveNoWorse
+        (combine
+          (entanglementGrowth P left)
+          (internalSpreading P left))
+        (combine
+          (entanglementGrowth P right)
+          (internalSpreading P right))
+
+    combinedToNoWorse :
+      ∀ left right →
+      ObjectiveNoWorse
+        (combine
+          (entanglementGrowth P left)
+          (internalSpreading P left))
+        (combine
+          (entanglementGrowth P right)
+          (internalSpreading P right)) →
+      NoWorse P left right
+
+open CarrollSinghObjectiveRealization public
+
+selectionReceiptMinimizesRealizedCombinedObjective :
+  ∀ {W}
+    {P : PreferredTPSSelectionProblem W} →
+  (objective : CarrollSinghObjectiveRealization P) →
+  (receipt : PreferredTPSSelectionReceipt P) →
+  (other : Candidate P) →
+  Admissible P other →
+  ObjectiveNoWorse objective
+    (combine objective
+      (entanglementGrowth P (selected receipt))
+      (internalSpreading P (selected receipt)))
+    (combine objective
+      (entanglementGrowth P other)
+      (internalSpreading P other))
+selectionReceiptMinimizesRealizedCombinedObjective
+    objective receipt other otherAdmissible =
+  noWorseToCombined
+    objective
+    (selected receipt)
+    other
+    ((proj₂ (selectedOptimal receipt))
+      other
+      otherAdmissible)
 
 ------------------------------------------------------------------------
 -- Uniqueness is a separate authority.
