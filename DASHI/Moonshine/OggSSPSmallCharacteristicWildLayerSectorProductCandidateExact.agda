@@ -219,6 +219,63 @@ record WildLayerSectorValuationAuthority : Set₁ where
 open WildLayerSectorValuationAuthority public
 
 ------------------------------------------------------------------------
+-- 5b. A genuine wild-layer/sector valuation theorem closes the canonical
+--     small-prime Monster-bridge interface.
+------------------------------------------------------------------------
+
+asMonsterBridgeAuthority :
+  WildLayerSectorValuationAuthority ->
+  Bridge.SmallPrimeMonsterBridgeAuthority
+asMonsterBridgeAuthority authority =
+  record
+    { Bridge.ExceptionalObject =
+        LocalAnalyticContribution authority
+    ; Bridge.p2ExceptionalObject =
+        p2Contribution authority
+    ; Bridge.p3ExceptionalObject =
+        p3Contribution authority
+    ; Bridge.exceptionalValuation =
+        λ prime object ->
+          valuationMultiplicity authority
+            (toWildPrime prime)
+            object
+    ; Bridge.p2ExceptionalValuationIsBridgeGap =
+        trans
+          (p2MultiplicityIsLayerSectorProduct authority)
+          p2ProductMatchesMonsterBridgeGap
+    ; Bridge.p3ExceptionalValuationIsBridgeGap =
+        trans
+          (p3MultiplicityIsLayerSectorProduct authority)
+          p3ProductMatchesMonsterBridgeGap
+    ; Bridge.objectDefinedIndependentlyOfMonsterTarget =
+        true
+    ; Bridge.objectDefinedIndependentlyOfMonsterTargetIsTrue =
+        refl
+    ; Bridge.refinesModularDescription =
+        true
+    ; Bridge.refinesModularDescriptionIsTrue =
+        refl
+    ; Bridge.refinesSupersingularDescription =
+        true
+    ; Bridge.refinesSupersingularDescriptionIsTrue =
+        refl
+    ; Bridge.sameObjectRefinesBothDescriptions =
+        true
+    ; Bridge.sameObjectRefinesBothDescriptionsIsTrue =
+        refl
+    ; Bridge.sourceOrProofAuthorityForExceptionalValuation =
+        true
+    ; Bridge.sourceOrProofAuthorityForExceptionalValuationIsTrue =
+        refl
+    }
+  where
+    toWildPrime :
+      Bridge.ExceptionalPrime ->
+      WildPrime
+    toWildPrime Bridge.pTwo = wildTwo
+    toWildPrime Bridge.pThree = wildThree
+
+------------------------------------------------------------------------
 -- 6. No fake promotion.
 ------------------------------------------------------------------------
 
@@ -264,6 +321,7 @@ record WildLayerSectorProductBoundary : Set where
     p3ProductTwoExact : Bool
     productsMatchMonsterBridgeGaps : Bool
     valuationAuthoritySpecified : Bool
+    adapterToMonsterBridgeAuthorityOwned : Bool
     oneCopyPerLayerPerSectorTheoremProved : Bool
     analyticValuationAuthorityInhabited : Bool
     sourceCreditedWithMonsterCorrection : Bool
@@ -273,4 +331,4 @@ canonicalWildLayerSectorProductBoundary :
   WildLayerSectorProductBoundary
 canonicalWildLayerSectorProductBoundary =
   wild-layer-sector-product-boundary
-    true true true true true true true true true false false false true
+    true true true true true true true true true true false false false true
