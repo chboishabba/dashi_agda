@@ -235,6 +235,10 @@ criterionCollisionBlocksFactorization :
     (observeCriterion S)
     (consumer S) →
   ⊥
+criterionCollisionBlocksFactorization collision =
+  Descent.nonDescentWitnessBlocksFactorization
+    (witness collision)
+
 criterionCollisionForcesSeparationInEveryRepair :
   ∀ {W}
     {P : PreferredTPSSelectionProblem W}
