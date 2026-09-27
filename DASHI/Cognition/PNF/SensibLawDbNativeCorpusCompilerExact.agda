@@ -251,6 +251,40 @@ record SemanticAttemptCoverage
 open SemanticAttemptCoverage public
 
 
+record CandidateSemanticProduct : Set where
+  constructor candidate-semantic-product
+  field
+    productRef : String
+    parserProductRef : String
+    compilerRef : String
+    factorRefs : List String
+
+    exactReopenValidated : Bool
+    exactReopenValidatedIsTrue :
+      exactReopenValidated ≡ true
+
+    createsSourceOccurrenceIdentity : Bool
+    createsSourceOccurrenceIdentityIsFalse :
+      createsSourceOccurrenceIdentity ≡ false
+
+    createsPropositionIdentity : Bool
+    createsPropositionIdentityIsFalse :
+      createsPropositionIdentity ≡ false
+
+    createsSemanticAdmission : Bool
+    createsSemanticAdmissionIsFalse :
+      createsSemanticAdmission ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse :
+      createsClaimTruth ≡ false
+
+open CandidateSemanticProduct public
+
 record PersistedM12CandidateProduct
     (source : Ingest.GenericCompiledSource)
     (region : Ingest.GenericSourceRegion source) : Set where
@@ -579,6 +613,10 @@ data ContentDigestCreatesSemanticIdentity : Set where
 data ParserProductIdentityCreatesOccurrenceIdentity : Set where
 data CrossRevisionParserReuseCreatesSemanticIdentity : Set where
 data ContentDigestDeterminesSourceRevisionIdentity : Set where
+data CandidateProductCreatesSourceOccurrenceIdentity : Set where
+data CandidateProductCreatesPropositionIdentity : Set where
+data CandidateProductCreatesSemanticAdmission : Set where
+data CandidateProductCreatesClaimTruth : Set where
 data PersistedCandidateCreatesSemanticAdmission : Set where
 data PersistedCandidateCreatesClaimTruth : Set where
 data ReconciliationFingerprintCreatesEntityIdentity : Set where
@@ -654,6 +692,22 @@ crossRevisionParserReuseDoesNotCreateSemanticIdentity ()
 contentDigestDoesNotDetermineSourceRevisionIdentity :
   ContentDigestDeterminesSourceRevisionIdentity → ⊥
 contentDigestDoesNotDetermineSourceRevisionIdentity ()
+
+candidateProductDoesNotCreateSourceOccurrenceIdentity :
+  CandidateProductCreatesSourceOccurrenceIdentity → ⊥
+candidateProductDoesNotCreateSourceOccurrenceIdentity ()
+
+candidateProductDoesNotCreatePropositionIdentity :
+  CandidateProductCreatesPropositionIdentity → ⊥
+candidateProductDoesNotCreatePropositionIdentity ()
+
+candidateProductDoesNotCreateSemanticAdmission :
+  CandidateProductCreatesSemanticAdmission → ⊥
+candidateProductDoesNotCreateSemanticAdmission ()
+
+candidateProductDoesNotCreateClaimTruth :
+  CandidateProductCreatesClaimTruth → ⊥
+candidateProductDoesNotCreateClaimTruth ()
 
 persistedCandidateDoesNotCreateSemanticAdmission :
   PersistedCandidateCreatesSemanticAdmission → ⊥
