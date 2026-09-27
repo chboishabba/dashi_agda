@@ -784,6 +784,88 @@ asymmetricAcceptBranchForcesUNSAT =
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
+-- CONCRETE REFUTATION OF "POLARITY COMPATIBILITY FORCES WIDTH ERASURE"
+------------------------------------------------------------------------
+
+payloadVariable0 :
+  Cook.BooleanFormula
+payloadVariable0 =
+  Cook.variable zero
+
+payloadNotVariable0 :
+  Cook.BooleanFormula
+payloadNotVariable0 =
+  Cook.negate
+    (Cook.variable zero)
+
+payloadDistinguishingAssignment :
+  Cook.Assignment
+payloadDistinguishingAssignment zero =
+  false
+payloadDistinguishingAssignment (suc index) =
+  false
+
+rejectGadgetsRemainSemanticallyDistinct :
+  Cook.evaluate
+      (rejectWidthGadget payloadVariable0)
+      (extendCookAssignment
+        false
+        payloadDistinguishingAssignment)
+  ≡
+  Cook.evaluate
+      (rejectWidthGadget payloadNotVariable0)
+      (extendCookAssignment
+        false
+        payloadDistinguishingAssignment)
+  →
+  ⊥
+rejectGadgetsRemainSemanticallyDistinct ()
+
+record PolarityCompatiblePair : Set where
+  constructor polarity-compatible-pair
+  field
+    leftBody rightBody :
+      Cook.BooleanFormula
+
+    leftSatisfiable :
+      Cook.Satisfiable leftBody
+
+    rightSatisfiable :
+      Cook.Satisfiable rightBody
+
+    semanticallyDistinct :
+      ((assignment : Cook.Assignment) →
+        Cook.evaluate leftBody assignment
+        ≡
+        Cook.evaluate rightBody assignment)
+      →
+      ⊥
+
+open PolarityCompatiblePair public
+
+rejectPolarityDoesNotForceSemanticCollapse :
+  PolarityCompatiblePair
+rejectPolarityDoesNotForceSemanticCollapse =
+  polarity-compatible-pair
+    (rejectWidthGadget payloadVariable0)
+    (rejectWidthGadget payloadNotVariable0)
+    (rejectWidthGadgetSatisfiable payloadVariable0)
+    (rejectWidthGadgetSatisfiable payloadNotVariable0)
+    (λ equalEverywhere →
+      rejectGadgetsRemainSemanticallyDistinct
+        (equalEverywhere
+          (extendCookAssignment
+            false
+            payloadDistinguishingAssignment)))
+
+------------------------------------------------------------------------
+-- Therefore any width-destruction theorem must use MORE than the extensional
+-- diagonal polarity condition.  It must exploit the actual finite-code body,
+-- quotation dependence, construction budget, or another special law of the
+-- SAT-diagonal implementation.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
 -- The universality fork is partly resolved:
