@@ -303,20 +303,79 @@ record ArithmeticIndependent369Frontier : Set where
 canonicalArithmeticIndependent369Frontier :
   ArithmeticIndependent369Frontier
 canonicalArithmeticIndependent369Frontier =
-  arithmetic-independent369-frontier
-    true true true
-    true true true true true
-    true true
-    true true true true
-    true true true true true true true true
-    true true false true
-    true true true false true
-    true true true true true true false
-    true true false
-    true true true true
-    false false false
-    false false
-    firstResidual
+  record
+    { p3ResidualGroupoidExact = true
+    ; p3Independent369TargetExact = true
+    ; p3ResidualToIndependent369RecognitionPaid = true
+
+    ; p2TenStateCodecExact = true
+    ; p2FiveStateConsumerRelativePolicyExact = true
+    ; p2IndependentGaugeTargetExact = true
+    ; p2IndependentRetainedTargetExact = true
+    ; p2BothRepresentationRecognitionsPaid = true
+
+    ; recognitionCompositionPaid = true
+    ; provenanceRecognitionCompositionPaid = true
+
+    ; rawF4ThreeOrbitNegativeControlPaid = true
+    ; p2MarkedLevelCMSourceSocketPaid = true
+    ; wholeF9FullRecognitionRejected = true
+    ; p3ExtensionCoordinateStructuralCandidatePaid = true
+
+    ; p2InternalMarkedArithmeticSourcePaid = true
+    ; p3InternalMarkedFrobeniusSourcePaid = true
+    ; p2ForwardRecognitionInhabited = true
+    ; p3ForwardRecognitionInhabited = true
+    ; p2ArithmeticProvenanceFirstLegPaid = true
+    ; p3ArithmeticProvenanceFirstLegPaid = true
+    ; p2IndependentProvenanceRecognitionPaid = true
+    ; p3IndependentProvenanceRecognitionPaid = true
+
+    ; p3DeligneRapoportThreeStateRealizationPaid = true
+    ; p3ClassicalCarrierToIndependent369RecognitionPaid = true
+    ; p3F9CoordinateGeometricallyIdentified = false
+    ; p3F9StratumCodeInterpretationPaid = true
+
+    ; p2Gamma04TenPointInterpretationRejected = true
+    ; p2OrientedInertiaTenStateFactorizationPaid = true
+    ; p2ClassicalCarrierToIndependent369RecognitionPaid = true
+    ; p2NamedOrientedUnorientedInertiaModuliIdentificationPaid = false
+    ; p2SpecificEnrichedModuliProblemDefined = true
+
+    ; p2InvariantFunctionRankTenPaid = true
+    ; p3InvariantFunctionRankTwoPaid = true
+    ; exactWildCorrectionCandidateIdentityPaid = true
+    ; rawWildDifferentMechanismRejected = true
+    ; pgt3DworkSharpnessUnavailableAtP2P3 = true
+    ; missingDworkSharpnessExplainsMonsterGap = false
+    ; publishedSmallPrimeThreeTermValuationsRemainExact = true
+    ; routeNeutralCorrectedValuationInterfacePaid = true
+    ; analyticCorrectedValuationAuthorityPaid = false
+    ; minimalHauptmodulDivisorCutsetPaid = true
+    ; threeTermDuncanSwisherBaselinePaid = true
+    ; termwiseDistributionUnderdeterminationProved = true
+    ; termwiseAnalyticAuthorityPaid = false
+    ; fourthTermExtensionShapePaid = true
+    ; exceptionalFourthTermAnalyticAuthorityPaid = false
+    ; jointTwoDescriptionCorrectionCutsetPaid = true
+    ; jointExceptionalAuthorityPaid = false
+    ; wildCanonicalStatisticComparisonPaid = true
+    ; independentStatisticComparisonPaid = true
+
+    ; p2CentralizerDepthTenCandidatePaid = true
+    ; p3CentralizerDepthUniformLawRejected = true
+    ; primeSpecificMechanismComparisonPaid = true
+    ; primeSpecificPreferredPaymentOwned = true
+
+    ; p2ExternalMonsterResidualRecognitionPaid = false
+    ; p3ExternalMonsterResidualRecognitionPaid = false
+    ; classicalBase369SemanticIdentificationPaid = false
+
+    ; targetConstructionStillBlocksArithmeticRecognition = false
+    ; cardinalityMatchingCreatesArithmeticAuthority = false
+
+    ; nextResidual = firstResidual
+    }
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
