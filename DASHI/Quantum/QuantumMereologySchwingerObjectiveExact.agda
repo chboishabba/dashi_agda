@@ -3,6 +3,7 @@ module DASHI.Quantum.QuantumMereologySchwingerObjectiveExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (proj₂)
 
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySelectionExact as Selection
@@ -104,7 +105,7 @@ selectedMinimizesSchwingerScore :
 selectedMinimizesSchwingerScore D receipt other otherAdmissible =
   let optimal = Selection.selectedOptimal receipt
   in
-  Agda.Builtin.Sigma.snd optimal other otherAdmissible
+  proj₂ optimal other otherAdmissible
 
 ------------------------------------------------------------------------
 -- FORMULA / PRODUCER AUTHORITY
