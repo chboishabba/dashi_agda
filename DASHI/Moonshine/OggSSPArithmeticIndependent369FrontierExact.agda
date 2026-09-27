@@ -43,10 +43,17 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * the exact 10/2 payments are canonical invariant-function ranks;
 --   * the exact identities 46=36+10 and 20=18+2 are formalized;
 --   * raw wild-different coefficients 14/7 are ruled out as the mechanism;
---   * the published p>3 Dwork sharpness hypothesis 4<=p is formally blocked at
---     p=2,3;
+--   * the published p>3 Dwork n=1 sharpness hypothesis 4<=p is unavailable at
+--     p=2,3, BUT this is not the source of the 36/18 discrepancy: the three
+--     Hauptmodul valuations at p=2,3 are independently exact;
 --   * a route-neutral corrected valuation interface now states the exact
---     analytic payment required.
+--     analytic payment required;
+--   * termwise redistribution among the three published valuations is
+--     constructively underdetermined;
+--   * the preferred extension therefore leaves the three published terms
+--     unchanged and adds one exceptional analytic fourth term E_2=10, E_3=2;
+--   * a stronger joint cutset requires the SAME exceptional object to refine
+--     both Duncan--Swisher's modular-function and supersingular descriptions.
 --
 -- PRIME-SPECIFIC MECHANISM STATUS:
 --   * p=2 has a stronger arithmetic candidate:
@@ -58,10 +65,12 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --     rank as the preferred finite candidate.
 --
 -- REMAINING RESEARCH WALL:
---   * construct an actual corrected q-expansion/Hauptmodul valuation authority
---     and prove the PRIME-SPECIFIC preferred local statistics are the local
---     divisor/valuation terms;
---   * determine the termwise distribution across J_{p+}, J_p, J_{p^2};
+--   * construct an independently defined exceptional analytic object E_p whose
+--     valuation is 10 at p=2 and 2 at p=3 WITHOUT defining it from the Monster
+--     target gap;
+--   * prove that the SAME E_p refines both Duncan--Swisher descriptions;
+--   * termwise redistribution across J_{p+}, J_p, J_{p^2} is an optional
+--     stronger refinement, not a consequence of the total gap;
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -98,6 +107,11 @@ import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact as P2Centralizer
 import DASHI.Moonshine.OggSSPP3InertiaCentralizerValuationNoGoExact as P3Centralizer
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectionMechanismComparisonExact as Mechanism
 import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as PreferredPayment
+import DASHI.Moonshine.OggSSPSmallCharacteristicTermwiseCorrectedValuationCutsetExact as TermwiseCutset
+import DASHI.Moonshine.OggSSPSmallCharacteristicFourthTermExtensionExact as FourthTerm
+import DASHI.Moonshine.OggSSPSmallCharacteristicJointCorrectionCutsetExact as JointCutset
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildCanonicalCoefficientComparisonExact as WildCanonical
+import DASHI.Moonshine.OggSSPSmallCharacteristicIndependentStatisticComparisonExact as IndependentStats
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -256,12 +270,21 @@ record ArithmeticIndependent369Frontier : Set where
     p3InvariantFunctionRankTwoPaid : Bool
     exactWildCorrectionCandidateIdentityPaid : Bool
     rawWildDifferentMechanismRejected : Bool
-    smallPrimeDworkFailureLocated : Bool
+    pgt3DworkSharpnessUnavailableAtP2P3 : Bool
+    missingDworkSharpnessExplainsMonsterGap : Bool
+    publishedSmallPrimeThreeTermValuationsRemainExact : Bool
     routeNeutralCorrectedValuationInterfacePaid : Bool
     analyticCorrectedValuationAuthorityPaid : Bool
     minimalHauptmodulDivisorCutsetPaid : Bool
     threeTermDuncanSwisherBaselinePaid : Bool
-    preferredTermwiseCorrectionDistributionPaid : Bool
+    termwiseDistributionUnderdeterminationProved : Bool
+    termwiseAnalyticAuthorityPaid : Bool
+    fourthTermExtensionShapePaid : Bool
+    exceptionalFourthTermAnalyticAuthorityPaid : Bool
+    jointTwoDescriptionCorrectionCutsetPaid : Bool
+    jointExceptionalAuthorityPaid : Bool
+    wildCanonicalStatisticComparisonPaid : Bool
+    independentStatisticComparisonPaid : Bool
 
     p2CentralizerDepthTenCandidatePaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
