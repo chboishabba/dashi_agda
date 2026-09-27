@@ -3,7 +3,6 @@ module DASHI.Quantum.EntanglementGeometryMereologyBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Primitive using (Set₁)
 
 import DASHI.Quantum.QuantumMereologyExact as QM
 
