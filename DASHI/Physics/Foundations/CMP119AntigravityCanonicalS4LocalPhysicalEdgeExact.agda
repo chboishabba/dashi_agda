@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4LocalPhysicalEdgeEx
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ)
 
 import Real as Bishop
@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as Plaquette
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
+import DASHI.Physics.YangMills.BalabanYM4LiteralPlaquetteBetaEstimateExact as Literal
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as RowA
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -72,11 +73,11 @@ record CanonicalS4LocalPhysicalEdgeInputs
     p3RemainderIsLocalPhysicalRemainder :
       ∀ depth →
       Bishop._≃_
-        (P3.remainder (SU2.recursion bishopRunning) (Agda.Builtin.Nat.suc depth))
+        (P3.remainder (SU2.recursion bishopRunning) (suc depth))
         (Rich.add rich
           (Rich.regularRemainder rich depth)
           (UV.embed
-            (DASHI.Physics.YangMills.BalabanYM4LiteralPlaquetteBetaEstimateExact.literalBetaInt
+            (Literal.literalBetaInt
               (Constructor.asPhysicalRunningCouplingData coefficientWeld)
               depth)))
 
