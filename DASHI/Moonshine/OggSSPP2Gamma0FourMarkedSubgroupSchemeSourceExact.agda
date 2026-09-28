@@ -40,7 +40,6 @@ import DASHI.Moonshine.OggSSPP2F4DependentMarkedCoverExact as TargetMark
 import DASHI.Moonshine.OggSSPP2BalancedTernaryPuncturedPlaneExact as Plane
 import DASHI.Moonshine.OggSSPP2BadPrimeLevelStructureBoundaryExact as BadPrime
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
-import DASHI.Moonshine.OggSSPP2Gamma0FourCanonicalRawFlagExact as RawFlag
 
 ------------------------------------------------------------------------
 -- 1. Abstract finite-flat Gamma_0(4) arithmetic carrier.
