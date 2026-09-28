@@ -74,7 +74,7 @@ record CanonicalS4RichProjectionMaxCut
       ∀ depth →
       Bishop._≃_
         (P3.inverseCouplingSq (SU2.recursion bishopRunning) depth)
-        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+        (UV.embed (Plaquette.nextInverseCouplingSq dataSet depth))
 
     nextScaleIsUVPredecessor :
       ∀ depth →
