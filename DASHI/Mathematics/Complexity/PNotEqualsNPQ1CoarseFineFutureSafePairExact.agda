@@ -152,13 +152,15 @@ coarseUnsafeFineSafeForcesRepairSeparation :
     {repair :
       Width.LayerNode {root = root} remaining →
       RepairCode} →
-  CoarseUnsafeFineSafeWitness sharing repair →
-  repair (left _) ≡ repair (right _) →
+  (witness : CoarseUnsafeFineSafeWitness sharing repair) →
+  repair (left witness) ≡ repair (right witness) →
   ⊥
-coarseUnsafeFineSafeForcesRepairSeparation witness =
+coarseUnsafeFineSafeForcesRepairSeparation
+    {sharing = sharing}
+    witness =
   Repair.refinementRepairSeparatesWitness
     (Sharing.sameCoarseDifferentResidualIsSemanticNonDescent
-      _
+      sharing
       (left witness)
       (right witness)
       (sameCoarse witness)
@@ -187,9 +189,11 @@ coarseUnsafeFineSafeBlocksCoarseSemanticFactorization :
     (CoarseFine.coarse (Sharing.geometry sharing))
     Sharing.layerResidualSemantic →
   ⊥
-coarseUnsafeFineSafeBlocksCoarseSemanticFactorization witness =
+coarseUnsafeFineSafeBlocksCoarseSemanticFactorization
+    {sharing = sharing}
+    witness =
   Sharing.coarseCannotFactorFullResidualSemanticsAcrossCollision
-    _
+    sharing
     (left witness)
     (right witness)
     (sameCoarse witness)
