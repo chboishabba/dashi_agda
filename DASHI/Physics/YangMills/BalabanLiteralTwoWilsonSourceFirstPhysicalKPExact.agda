@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact a
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact as Affine
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalPolymerIdentificationExact as Identification
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -183,6 +184,56 @@ asLiteralPhysicalIdentification source = record
       λ order → order
   }
 
+sourceFirstKPCondition :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    (source :
+      SourceFirstLiteralTwoWilsonPhysicalKP
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible) →
+  KP.KoteckyPreissTwoWeightCondition
+    (sourceFirstKPData
+      (physicalTerminal source)
+      (affineMark source)
+      (anchor source)
+      (auxiliary source))
+sourceFirstKPCondition source =
+  Identification.literalPhysicalKPCondition
+    (asLiteralPhysicalIdentification source)
+
+sourceFirstPublishedKPConclusion :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    (source :
+      SourceFirstLiteralTwoWilsonPhysicalKP
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible) →
+  KP.KoteckyPreissTwoWeightConclusion
+    (sourceFirstKPData
+      (physicalTerminal source)
+      (affineMark source)
+      (anchor source)
+      (auxiliary source))
+sourceFirstPublishedKPConclusion source =
+  KP.conclusionFromCondition
+    (publishedKP source)
+    (sourceFirstKPCondition source)
+
+sourceFirstMarkedActivityBelowFPThreshold :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    (source :
+      SourceFirstLiteralTwoWilsonPhysicalKP
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible)
+    polymer →
+  KP.activityNorm
+    (sourceFirstKPData
+      (physicalTerminal source)
+      (affineMark source)
+      (anchor source)
+      (auxiliary source))
+    polymer
+  ≤ FP.rhoFPMax
+sourceFirstMarkedActivityBelowFPThreshold source =
+  Affine.literalMarkedActivityBelowFPThreshold (affineMark source)
 sourceFirstPhysicalKPCoreIsDefinitional : Bool
 sourceFirstPhysicalKPCoreIsDefinitional = true
 
