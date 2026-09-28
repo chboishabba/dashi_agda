@@ -31,6 +31,7 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Base369AppraisalFibreHeisenbergCarrierBidiExact as Carrier
 import DASHI.Moonshine.Base369HeisenbergTranslationGridObstructionExact as Translation
+import DASHI.Moonshine.Base369Ternary27FaceHypercubeCechGluingBidiExact as Cech
 import DASHI.Reasoning.ActualFaceHypercubeGluingFromSharedSliceExact as Shared
 import DASHI.Reasoning.Trialectic369CechCornerStarRecognitionExact as Corner
 
@@ -115,7 +116,7 @@ trialecticAppraisalActualStateRecognition =
 ------------------------------------------------------------------------
 
 trialecticAppraisalFacePromotion :
-  DASHI.Moonshine.Base369Ternary27FaceHypercubeCechGluingBidiExact.ActualFaceHypercubeGluingPromotion
+  Cech.ActualFaceHypercubeGluingPromotion
     H.Axis6
     Geometry.AppraisalFibrePoint
 trialecticAppraisalFacePromotion =
