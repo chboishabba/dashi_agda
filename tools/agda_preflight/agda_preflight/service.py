@@ -747,6 +747,18 @@ class DashiAgdaService:
     def cache_status(self) -> dict:
         before, started = self._start_request()
         result = self.index.cache_stats()
+        result["session"] = {
+            "trusted_targets": len(self._trusted_targets),
+            "candidate_rollups": len(self._candidate_rollups),
+            "candidate_modules": sum(
+                len(cache.candidates)
+                for cache in self._candidate_rollups.values()
+            ),
+            "candidate_heap_entries": sum(
+                len(cache.any_heap) + len(cache.fixable_heap)
+                for cache in self._candidate_rollups.values()
+            ),
+        }
         result["profile"] = self._finish_request(
             before,
             started,
