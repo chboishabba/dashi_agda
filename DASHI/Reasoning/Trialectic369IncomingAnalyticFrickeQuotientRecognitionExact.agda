@@ -82,9 +82,9 @@ incomingMode =
   Separation.incomingQuotientMode
 
 incomingAnalyticRepresentative :
-  AnalyticFrickeFiveModeRecognition ->
+  (recognition : AnalyticFrickeFiveModeRecognition) ->
   Triadic.NineSheet ->
-  _
+  AnalyticState recognition
 incomingAnalyticRepresentative recognition sheet =
   representative recognition (incomingMode sheet)
 
