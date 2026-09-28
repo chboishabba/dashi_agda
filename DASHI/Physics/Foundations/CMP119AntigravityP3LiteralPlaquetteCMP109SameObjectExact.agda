@@ -65,7 +65,7 @@ record P3RepresentsLiteralPlaquetteUVView
         (Bishop._+_
           (P3.betaLogBlocking recursion (suc depth))
           (P3.remainder recursion (suc depth)))
-        (UV.embed (Literal.literalBetaStep dataSet (suc depth)))
+        (UV.embed (Literal.literalBetaStep dataSet depth))
 
 open P3RepresentsLiteralPlaquetteUVView public
 
@@ -177,13 +177,13 @@ record P3RepresentsLiteralPlaquetteSplitUVView
       ∀ depth →
       Bishop._≃_
         (P3.betaLogBlocking recursion (suc depth))
-        (UV.embed (Literal.literalBetaZ dataSet (suc depth)))
+        (UV.embed (Literal.literalBetaZ dataSet depth))
 
     remainderSameLiteralInteraction :
       ∀ depth →
       Bishop._≃_
         (P3.remainder recursion (suc depth))
-        (UV.embed (Literal.literalBetaInt dataSet (suc depth)))
+        (UV.embed (Literal.literalBetaInt dataSet depth))
 
 open P3RepresentsLiteralPlaquetteSplitUVView public
 
@@ -212,8 +212,8 @@ splitViewAsTotalView {dataSet = dataSet} {recursion = recursion} splitView = rec
             (remainderSameLiteralInteraction splitView depth))
           (BishopP.≃-symm
             (Carrier.bishopEmbedAdd
-              (Literal.literalBetaZ dataSet (suc depth))
-              (Literal.literalBetaInt dataSet (suc depth))))
+              (Literal.literalBetaZ dataSet depth)
+              (Literal.literalBetaInt dataSet depth)))
   }
 
 p3LiteralPlaquetteSplitThenCMP109 :
