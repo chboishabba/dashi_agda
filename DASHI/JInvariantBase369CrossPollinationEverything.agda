@@ -415,3 +415,5 @@ import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact
 
 import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact
+
+import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact
