@@ -33,7 +33,7 @@ open import Data.Empty using (⊥)
 open import Data.Nat using (_∸_)
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
-import DASHI.Foundations.Base369Nat as BaseNat using (_%_)
+open import DASHI.Foundations.Base369Nat using (_%_)
 
 pow3 : Nat -> Nat
 pow3 n = Hyper.powNat 3 n
