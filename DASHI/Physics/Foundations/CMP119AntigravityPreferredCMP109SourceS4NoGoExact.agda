@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityPreferredCMP109SourceS4NoGoExa
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (1ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (1ℚ; _≤_)
 
 import Real as Bishop
 
@@ -137,7 +137,8 @@ sameHistoryInverseThresholdAtLeastOne :
   1ℚ ≤ CanonicalThreshold.canonicalInverseThreshold (rowA present)
 sameHistoryInverseThresholdAtLeastOne {present = present} package =
   Unit.inverseThresholdAtLeastOneFromUnitCap
-    (RowA.canonicalQuarticResponseGammaPositive (rowA present))
+    (ℚ.positive
+      (RowA.canonicalQuarticResponseGammaPositive (rowA present)))
     (RowA.canonicalQuarticResponseGammaAtMostOne (rowA present))
     (CanonicalThreshold.canonicalInverseThresholdRepresentation (rowA present))
 
