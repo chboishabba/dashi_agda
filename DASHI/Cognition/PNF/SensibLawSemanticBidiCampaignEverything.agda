@@ -659,3 +659,48 @@ dbNativeFixtureCommitBatchReopensExactly :
   CommitEconomyRegression.fixtureReceiptReopensExactly
   ≡ CommitEconomyRegression.fixtureReceiptReopensExactly
 dbNativeFixtureCommitBatchReopensExactly = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P bounded commit coalescing is physical only.
+------------------------------------------------------------------------
+
+dbNativeCommitCoalescingPreservesCandidateIdentity :
+  DbNativeCorpus.CommitCoalescingChangesCandidateIdentity → ⊥
+dbNativeCommitCoalescingPreservesCandidateIdentity =
+  DbNativeCorpus.commitCoalescingDoesNotChangeCandidateIdentity
+
+dbNativeCommitCoalescingRequiresDurableReopen :
+  DbNativeCorpus.CommitCoalescingSkipsDurableReopen → ⊥
+dbNativeCommitCoalescingRequiresDurableReopen =
+  DbNativeCorpus.commitCoalescingDoesNotSkipDurableReopen
+
+dbNativeCommitCoalescingDoesNotCreateAdmission :
+  DbNativeCorpus.CommitCoalescingCreatesSemanticAdmission → ⊥
+dbNativeCommitCoalescingDoesNotCreateAdmission =
+  DbNativeCorpus.commitCoalescingDoesNotCreateSemanticAdmission
+
+dbNativeCommitCoalescingDoesNotCreateAuthority :
+  DbNativeCorpus.CommitCoalescingCreatesSemanticAuthority → ⊥
+dbNativeCommitCoalescingDoesNotCreateAuthority =
+  DbNativeCorpus.commitCoalescingDoesNotCreateSemanticAuthority
+
+dbNativeCommitCoalescingDoesNotCreateApplicability :
+  DbNativeCorpus.CommitCoalescingCreatesApplicability → ⊥
+dbNativeCommitCoalescingDoesNotCreateApplicability =
+  DbNativeCorpus.commitCoalescingDoesNotCreateApplicability
+
+dbNativeCommitCoalescingDoesNotCreateTruth :
+  DbNativeCorpus.CommitCoalescingCreatesClaimTruth → ⊥
+dbNativeCommitCoalescingDoesNotCreateTruth =
+  DbNativeCorpus.commitCoalescingDoesNotCreateClaimTruth
+
+dbNativeFixtureBoundedCommitPreservesCandidateIdentity :
+  DbNativeCorpusRegression.fixtureBoundedCommitPreservesCandidateIdentity
+  ≡ DbNativeCorpusRegression.fixtureBoundedCommitPreservesCandidateIdentity
+dbNativeFixtureBoundedCommitPreservesCandidateIdentity = refl
+
+dbNativeFixtureBoundedCommitReopensDurably :
+  DbNativeCorpusRegression.fixtureBoundedCommitReopensAfterDurableCommit
+  ≡ DbNativeCorpusRegression.fixtureBoundedCommitReopensAfterDurableCommit
+dbNativeFixtureBoundedCommitReopensDurably = refl
