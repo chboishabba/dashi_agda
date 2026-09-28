@@ -186,23 +186,37 @@ jColumnNeutralPrimesExact :
   ≡ Lane.p3 ∷ Lane.p11 ∷ Lane.p19 ∷ Lane.p31 ∷ Lane.p59 ∷ []
 jColumnNeutralPrimesExact = refl
 
+neutralRoleValuationsEqual :
+  (left right : Quotient.ComplementMode5) ->
+  roleCodeValuation (jRoleCode left)
+  ≡ roleCodeValuation (jRoleCode right)
+neutralRoleValuationsEqual left right =
+  funext
+    (λ observed ->
+      trans
+        (jRoleValuationZeroAt left observed)
+        (sym (jRoleValuationZeroAt right observed)))
+
 jColumnFiveDistinctPointedStatesShareZeroValuation :
-  roleCodeValuation (jRoleCode Quotient.mode09)
-  ≡ roleCodeValuation (jRoleCode Quotient.mode18)
-  × roleCodeValuation (jRoleCode Quotient.mode18)
-  ≡ roleCodeValuation (jRoleCode Quotient.mode27)
-  × roleCodeValuation (jRoleCode Quotient.mode27)
-  ≡ roleCodeValuation (jRoleCode Quotient.mode36)
-  × roleCodeValuation (jRoleCode Quotient.mode36)
-  ≡ roleCodeValuation (jRoleCode Quotient.mode45)
+  (roleCodeValuation (jRoleCode Quotient.mode09)
+    ≡ roleCodeValuation (jRoleCode Quotient.mode18))
+  ×
+  (roleCodeValuation (jRoleCode Quotient.mode18)
+    ≡ roleCodeValuation (jRoleCode Quotient.mode27))
+  ×
+  (roleCodeValuation (jRoleCode Quotient.mode27)
+    ≡ roleCodeValuation (jRoleCode Quotient.mode36))
+  ×
+  (roleCodeValuation (jRoleCode Quotient.mode36)
+    ≡ roleCodeValuation (jRoleCode Quotient.mode45))
 jColumnFiveDistinctPointedStatesShareZeroValuation =
-  funext (jRoleValuationZeroAt Quotient.mode09)
+  neutralRoleValuationsEqual Quotient.mode09 Quotient.mode18
   ,
-  (funext (jRoleValuationZeroAt Quotient.mode18)
+  (neutralRoleValuationsEqual Quotient.mode18 Quotient.mode27
   ,
-  (funext (jRoleValuationZeroAt Quotient.mode27)
+  (neutralRoleValuationsEqual Quotient.mode27 Quotient.mode36
   ,
-   funext (jRoleValuationZeroAt Quotient.mode36)))
+   neutralRoleValuationsEqual Quotient.mode36 Quotient.mode45))
 
 data ZeroValuationRecoversRHMode : Set where
 
