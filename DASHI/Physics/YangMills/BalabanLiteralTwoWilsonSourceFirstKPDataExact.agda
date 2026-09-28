@@ -32,6 +32,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as 
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact as AffineMark
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact as Affine
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalPolymerIdentificationExact as Identification
 
@@ -41,11 +42,32 @@ record LiteralTerminalKPAnalyticData
     (physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link)
-    (affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer)
     (anchor : Polymer → Link)
     : Set₁ where
   field
+    --------------------------------------------------------------------
+    -- Literal Wilson marking data.  The base activity is NOT a free field:
+    -- the constructor below sets it to the terminal physical activityNorm.
+    --------------------------------------------------------------------
+    baseActivityNonnegative :
+      ∀ polymer →
+      ℚ.0ℚ ≤ Terminal.activityNorm physicalTerminal polymer
+
+    baseActivityBelowOneSixteenth :
+      ∀ polymer →
+      Terminal.activityNorm physicalTerminal polymer
+      ≤ DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact.rhoBase
+
+    leftWilsonValue rightWilsonValue : Polymer → ℚ
+    leftWilsonUnitBound :
+      ∀ polymer → ℚ.∣ leftWilsonValue polymer ∣ ≤ ℚ.1ℚ
+    rightWilsonUnitBound :
+      ∀ polymer → ℚ.∣ rightWilsonValue polymer ∣ ≤ ℚ.1ℚ
+
+    leftSource rightSource : ℚ
+    leftSourceInsideRadius : Affine.SourceInsideRadius leftSource
+    rightSourceInsideRadius : Affine.SourceInsideRadius rightSource
+
     --------------------------------------------------------------------
     -- The remaining genuine KP analytic structure.
     --------------------------------------------------------------------
@@ -65,7 +87,7 @@ record LiteralTerminalKPAnalyticData
               (Terminal.asTerminalKPSmallness physicalTerminal)
               (anchor neighbour))
             (dWeight neighbour)))
-        (AffineMark.literalMarkedActivityNorm affineMark neighbour)
+        (AffineMark.literalMarkedActivityNorm (literalAffineMark source) neighbour)
 
     incompatibleNeighbors : Polymer → List Polymer
 
@@ -99,7 +121,7 @@ record LiteralTerminalKPAnalyticData
       KP.PublishedKoteckyPreissTwoWeightTheorem
         (record
           { KP.KoteckyPreissTwoWeightData.activityNorm =
-              AffineMark.literalMarkedActivityNorm affineMark
+              AffineMark.literalMarkedActivityNorm (literalAffineMark source)
           ; KP.KoteckyPreissTwoWeightData.aWeight =
               λ polymer →
                 Clustering.terminalKPBound
@@ -142,26 +164,59 @@ record LiteralTerminalKPAnalyticData
 
 open LiteralTerminalKPAnalyticData public
 
+literalAffineMark :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    {physicalTerminal :
+      Terminal.PhysicalTerminalRootedSumIdentification
+        Scale ShellVolume Root Polymer Link}
+    {anchor : Polymer → Link} →
+  (source :
+    LiteralTerminalKPAnalyticData
+      Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+      PhysicalIncompatible physicalTerminal anchor) →
+  AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer
+literalAffineMark {physicalTerminal = physicalTerminal} source = record
+  { AffineMark.LiteralTwoWilsonAffinePolymerMark.baseActivity =
+      Terminal.activityNorm physicalTerminal
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.baseActivityNonnegative =
+      baseActivityNonnegative source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.baseActivityBelowOneSixteenth =
+      baseActivityBelowOneSixteenth source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.leftWilsonValue =
+      leftWilsonValue source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.rightWilsonValue =
+      rightWilsonValue source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.leftWilsonUnitBound =
+      leftWilsonUnitBound source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.rightWilsonUnitBound =
+      rightWilsonUnitBound source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.leftSource =
+      leftSource source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.rightSource =
+      rightSource source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.leftSourceInsideRadius =
+      leftSourceInsideRadius source
+  ; AffineMark.LiteralTwoWilsonAffinePolymerMark.rightSourceInsideRadius =
+      rightSourceInsideRadius source
+  }
+
 literalTerminalKPData :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link} →
   LiteralTerminalKPAnalyticData
     Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-    PhysicalIncompatible physicalTerminal affineMark anchor →
+    PhysicalIncompatible physicalTerminal anchor →
   KP.KoteckyPreissTwoWeightData Polymer ℚ Cluster FiniteVolume
 literalTerminalKPData
     {PhysicalIncompatible = PhysicalIncompatible}
     {physicalTerminal = physicalTerminal}
-    {affineMark = affineMark}
     {anchor = anchor}
     source = record
   { KP.KoteckyPreissTwoWeightData.activityNorm =
-      AffineMark.literalMarkedActivityNorm affineMark
+      AffineMark.literalMarkedActivityNorm (literalAffineMark source)
   ; KP.KoteckyPreissTwoWeightData.aWeight =
       λ polymer →
         Clustering.terminalKPBound
@@ -216,7 +271,7 @@ literalTerminalKPActivityNormIsMarkedNorm :
         PhysicalIncompatible physicalTerminal affineMark anchor)
     polymer →
   KP.activityNorm (literalTerminalKPData source) polymer
-  ≡ AffineMark.literalMarkedActivityNorm affineMark polymer
+  ≡ AffineMark.literalMarkedActivityNorm (literalAffineMark source) polymer
 literalTerminalKPActivityNormIsMarkedNorm source polymer = refl
 
 literalTerminalKPIncompatibilityIsPhysical :
@@ -308,7 +363,6 @@ sourceFirstPhysicalPolymerIdentification :
     PhysicalIncompatible
 sourceFirstPhysicalPolymerIdentification
     {physicalTerminal = physicalTerminal}
-    {affineMark = affineMark}
     {anchor = anchor}
     source = record
   { Identification.LiteralTwoWilsonPhysicalPolymerIdentification.physicalTerminal =
@@ -318,13 +372,13 @@ sourceFirstPhysicalPolymerIdentification
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.publishedKP =
       publishedKP source
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.affineMark =
-      affineMark
+      literalAffineMark source
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.anchor =
       anchor
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.literalMarkedActivity =
       λ polymer →
-        AffineMark.baseActivity affineMark polymer
-        * AffineMark.literalAffineMultiplier affineMark polymer
+        AffineMark.baseActivity (literalAffineMark source) polymer
+        * AffineMark.literalAffineMultiplier (literalAffineMark source) polymer
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.literalMarkedActivityIsAffinePhysicalActivity =
       λ polymer → refl
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.baseActivityIsTerminalActivityNorm =
