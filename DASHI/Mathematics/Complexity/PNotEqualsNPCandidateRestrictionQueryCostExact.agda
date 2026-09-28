@@ -36,7 +36,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
-import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityResidualWidthWitnessExact as EqualityWidth
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityDirectDPObstructionExact as Equality
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 
@@ -77,10 +76,11 @@ residualWidthBelowCandidateQueryCount :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidateDecider : Direct.PolynomialSATDeciderCandidate cost}
     {state : Q2.BoundedSelfReferenceState}
-    {remaining width : Nat} →
-  CandidateRestrictionQueryConstruction
-    candidateDecider
-    state →
+    {remaining width : Nat}
+    (construction :
+      CandidateRestrictionQueryConstruction
+        candidateDecider
+        state) →
   Width.ResidualWidthWitness
     {root =
       Bridge.cookToIndexed
@@ -89,11 +89,7 @@ residualWidthBelowCandidateQueryCount :
     width →
   width
   ≤
-  candidateQueryCount
-    (CandidateRestrictionQueryConstruction.run
-      {candidateDecider = candidateDecider}
-      {state = state}
-      _)
+  candidateQueryCount construction
 residualWidthBelowCandidateQueryCount construction witness =
   NatP.≤-trans
     (DirectDP.directDPResidualWidthBelowStateCount
@@ -139,16 +135,13 @@ blockEqualityNeedsExponentialCandidateQueries :
     {state : Q2.BoundedSelfReferenceState}
     {width : Nat} →
   Equality.BlockEqualityLiveRoot state width →
-  CandidateRestrictionQueryConstruction
-    candidateDecider
-    state →
+  (construction :
+    CandidateRestrictionQueryConstruction
+      candidateDecider
+      state) →
   Bits.bitCardinality width
   ≤
-  candidateQueryCount
-    (CandidateRestrictionQueryConstruction.run
-      {candidateDecider = candidateDecider}
-      {state = state}
-      _)
+  candidateQueryCount construction
 blockEqualityNeedsExponentialCandidateQueries
     realization
     construction =
