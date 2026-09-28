@@ -44,6 +44,7 @@ import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyRegression as CommitEco
 import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyExact as ReviewProjectionEconomy
 import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyRegression as ReviewProjectionEconomyRegression
 import DASHI.Cognition.PNF.SensibLawScale1ExactReplayEconomyReceipt as Scale1ReplayEconomy
+import DASHI.Cognition.PNF.RuntimeThroughputConstitution as Throughput
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -917,3 +918,18 @@ reviewProjectionDeltaFixtureActuallyUsesDelta :
     ReviewProjectionEconomyRegression.fixtureDeltaReviewProjection
   ≡ true
 reviewProjectionDeltaFixtureActuallyUsesDelta = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.W / SCALE-1.A performance receipts remain non-semantic.
+------------------------------------------------------------------------
+
+workerScalingReceiptCannotCreateSemanticAuthority :
+  Throughput.WorkerScalingReceiptCreatesSemanticAuthority → ⊥
+workerScalingReceiptCannotCreateSemanticAuthority =
+  Throughput.workerScalingReceiptDoesNotCreateSemanticAuthority
+
+archiveScalePerformanceCannotPromoteSemantics :
+  Throughput.PerformanceSemanticPromotionPermission → ⊥
+archiveScalePerformanceCannotPromoteSemantics =
+  Throughput.performanceReceiptCannotPromoteSemantics
