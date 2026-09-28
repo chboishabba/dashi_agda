@@ -28,6 +28,7 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact as Observer
 import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact as Bridge
 import DASHI.Reasoning.Trialectic369RubikRefinementExact as Rubik
+import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Reasoning.Trialectic369DeclaredRowConsumerExact as Declared
 
 ------------------------------------------------------------------------
@@ -50,7 +51,7 @@ declaredFabricConsumer slot row =
 declaredRubikConsumer :
   Declared.DeclaredObserverRowSlot ->
   Fabric.Ternary27Point ->
-  Rubik.Rank3ChildBlock
+  Hyper.AxisBlock 3
 declaredRubikConsumer slot row =
   Rubik.rowToRank3Block
     (Declared.selectedRow slot (Declared.embedDeclaredRow slot row))
