@@ -161,7 +161,8 @@ module DifferenceAligned
       R38.foldPower pairedTwoDifferenceCell items
       ≡
       Fold.two * O.criticalProductionOrbitAt cutoff time
-    pairedTwoDifferenceFoldIsDoubleR744Orbit =
+    pairedTwoDifferenceFoldIsDoubleR744Orbit
+      rewrite O.Live.Base.systemCutoffAgreement O.state cutoff time =
       trans
         (sym pairedOrbitFoldIsTwoDifferenceFold)
         (R748.foldPairedProductionOrbit system)
