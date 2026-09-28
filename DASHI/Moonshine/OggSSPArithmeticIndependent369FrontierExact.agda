@@ -180,6 +180,8 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExac
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as ArichetaBadLevel
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as ArichetaIgusa
 import DASHI.Moonshine.OggSSPSmallPrimePadicBoundStratumQuotientComparisonExact as PadicStrata
+import DASHI.Moonshine.OggSSPSmallPrimeMixedCharacteristicTwistedCentralizerCutsetExact as MixedPB
+import DASHI.Moonshine.OggSSP2B3BPadicAnnihilationSlopeComparisonExact as PadicSlope
 import DASHI.Moonshine.OggSSPSmallPrimeExternalBridgeDoubleMismatchExact as ExternalMismatch
 import DASHI.Moonshine.OggSSPSmallPrimePadicMoonshineOrderBoundComparisonExact as CMTPadicBound
 
@@ -275,6 +277,16 @@ padicStratumQuotientBoundary :
   PadicStrata.PadicBoundStratumQuotientComparisonBoundary
 padicStratumQuotientBoundary =
   PadicStrata.canonicalPadicBoundStratumQuotientComparisonBoundary
+
+padicAnnihilationSlopeBoundary :
+  PadicSlope.PadicAnnihilationSlopeComparisonBoundary
+padicAnnihilationSlopeBoundary =
+  PadicSlope.canonicalPadicAnnihilationSlopeComparisonBoundary
+
+mixedCharacteristicPBCutsetBoundary :
+  MixedPB.MixedCharacteristicTwistedCentralizerCutsetBoundary
+mixedCharacteristicPBCutsetBoundary =
+  MixedPB.canonicalMixedCharacteristicTwistedCentralizerCutsetBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -440,6 +452,14 @@ record ArithmeticIndependent369Frontier : Set where
     p3MonsterResidualMatchesOrbitQuotientRank : Bool
     arichetaCmtDoubleMismatchPaid : Bool
     pbBadLevelPadicCentralizerAuthorityPaid : Bool
+    cmtAppendixAnnihilationPatternsSourcedAsNumericalEvidence : Bool
+    cmtP3ObservedAnnihilationIncrementTwoPaid : Bool
+    cmtP3ObservedIncrementMatchesResidualTwo : Bool
+    cmtP2ObservedIncrementThreeDoesNotMatchResidualTen : Bool
+    ambientPadicMonsterVOAAtP2P3Sourced : Bool
+    pBTwistedGeneralizedMoonshineObjectSourced : Bool
+    mixedCharacteristicPBTwistedLocalizationCutsetPaid : Bool
+    mixedCharacteristicPBTwistedLocalizationAuthorityPaid : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -566,6 +586,14 @@ canonicalArithmeticIndependent369Frontier =
     ; p3MonsterResidualMatchesOrbitQuotientRank = true
     ; arichetaCmtDoubleMismatchPaid = true
     ; pbBadLevelPadicCentralizerAuthorityPaid = false
+    ; cmtAppendixAnnihilationPatternsSourcedAsNumericalEvidence = true
+    ; cmtP3ObservedAnnihilationIncrementTwoPaid = true
+    ; cmtP3ObservedIncrementMatchesResidualTwo = true
+    ; cmtP2ObservedIncrementThreeDoesNotMatchResidualTen = true
+    ; ambientPadicMonsterVOAAtP2P3Sourced = true
+    ; pBTwistedGeneralizedMoonshineObjectSourced = true
+    ; mixedCharacteristicPBTwistedLocalizationCutsetPaid = true
+    ; mixedCharacteristicPBTwistedLocalizationAuthorityPaid = false
 
     ; p2ExternalMonsterResidualRecognitionPaid = false
     ; p3ExternalMonsterResidualRecognitionPaid = false
