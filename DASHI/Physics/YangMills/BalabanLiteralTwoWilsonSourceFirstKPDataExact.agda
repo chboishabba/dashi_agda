@@ -2,10 +2,12 @@
 module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstKPDataExact where
 
 ------------------------------------------------------------------------
--- H1-A max-cut: construct the exact two-weight KP datum directly from the
--- literal affine-marked terminal polymer gas.
+-- H1-A MAX-CUT
 --
--- The identity-sensitive fields are DEFINITIONAL:
+-- Construct the exact two-weight KP datum directly from the literal
+-- affine-marked terminal polymer gas.
+--
+-- Identity-sensitive fields are DEFINITIONAL:
 --
 --   activityNorm            = literalMarkedActivityNorm
 --   Incompatible            = PhysicalIncompatible
@@ -13,24 +15,22 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstKPDataExact whe
 --   aWeight                 = terminalKPBound ∘ anchor
 --   LessEqual               = rational ≤
 --
--- Hence no independently selected surrogate needs a later same-object weld.
+-- Thus the corresponding same-object proofs below are refl.
 --
--- Important ABI correction: KP.incompatibleWeightedSumEnumerationMeaning is
--- merely Set-valued.  It is not itself a proof.  We therefore retain an actual
--- incompatible-neighbour enumeration and an equality proof
---
---   sum weightedTerm neighbours = physicalRootedWeightedSum(anchor polymer)
---
--- as source mathematics below.
+-- KP.incompatibleWeightedSumEnumerationMeaning is only Set-valued in the
+-- historical ABI.  It is not a proof.  This owner therefore carries an actual
+-- finite incompatible-neighbour enumeration and an inhabited equality theorem
+-- separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _≤_; ∣_∣; _*_)
 
 import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as Clustering
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact as AffineMark
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact as Affine
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
@@ -46,30 +46,29 @@ record LiteralTerminalKPAnalyticData
     : Set₁ where
   field
     --------------------------------------------------------------------
-    -- Literal Wilson marking data.  The base activity is NOT a free field:
-    -- the constructor below sets it to the terminal physical activityNorm.
+    -- Literal Wilson marking.  The base activity is fixed by construction
+    -- to Terminal.activityNorm physicalTerminal.
     --------------------------------------------------------------------
     baseActivityNonnegative :
       ∀ polymer →
-      ℚ.0ℚ ≤ Terminal.activityNorm physicalTerminal polymer
+      0ℚ ≤ Terminal.activityNorm physicalTerminal polymer
 
     baseActivityBelowOneSixteenth :
       ∀ polymer →
-      Terminal.activityNorm physicalTerminal polymer
-      ≤ DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact.rhoBase
+      Terminal.activityNorm physicalTerminal polymer ≤ FP.rhoBase
 
     leftWilsonValue rightWilsonValue : Polymer → ℚ
     leftWilsonUnitBound :
-      ∀ polymer → ℚ.∣ leftWilsonValue polymer ∣ ≤ ℚ.1ℚ
+      ∀ polymer → ∣ leftWilsonValue polymer ∣ ≤ 1ℚ
     rightWilsonUnitBound :
-      ∀ polymer → ℚ.∣ rightWilsonValue polymer ∣ ≤ ℚ.1ℚ
+      ∀ polymer → ∣ rightWilsonValue polymer ∣ ≤ 1ℚ
 
     leftSource rightSource : ℚ
     leftSourceInsideRadius : Affine.SourceInsideRadius leftSource
     rightSourceInsideRadius : Affine.SourceInsideRadius rightSource
 
     --------------------------------------------------------------------
-    -- The remaining genuine KP analytic structure.
+    -- Remaining analytic KP structure.
     --------------------------------------------------------------------
     dWeight : Polymer → ℚ
     add multiply : ℚ → ℚ → ℚ
@@ -87,14 +86,13 @@ record LiteralTerminalKPAnalyticData
               (Terminal.asTerminalKPSmallness physicalTerminal)
               (anchor neighbour))
             (dWeight neighbour)))
-        (AffineMark.literalMarkedActivityNorm (literalAffineMark source) neighbour)
+        (∣
+          (1ℚ
+            * Terminal.activityNorm physicalTerminal neighbour)
+          ∣)
 
     incompatibleNeighbors : Polymer → List Polymer
 
-    --------------------------------------------------------------------
-    -- Genuine rooted enumeration theorem.  Unlike the historical
-    -- Set-valued ABI label, this is an inhabited equality.
-    --------------------------------------------------------------------
     rootedIncompatibleEnumerationExact :
       ∀ polymer →
       TwoMark.sumℚ
@@ -117,51 +115,6 @@ record LiteralTerminalKPAnalyticData
     logarithm : ℚ → ℚ
     clusterExpansionSum : FiniteVolume → ℚ
 
-    publishedKP :
-      KP.PublishedKoteckyPreissTwoWeightTheorem
-        (record
-          { KP.KoteckyPreissTwoWeightData.activityNorm =
-              AffineMark.literalMarkedActivityNorm (literalAffineMark source)
-          ; KP.KoteckyPreissTwoWeightData.aWeight =
-              λ polymer →
-                Clustering.terminalKPBound
-                  (Terminal.asTerminalKPSmallness physicalTerminal)
-                  (anchor polymer)
-          ; KP.KoteckyPreissTwoWeightData.dWeight = dWeight
-          ; KP.KoteckyPreissTwoWeightData.Incompatible = PhysicalIncompatible
-          ; KP.KoteckyPreissTwoWeightData.add = add
-          ; KP.KoteckyPreissTwoWeightData.multiply = multiply
-          ; KP.KoteckyPreissTwoWeightData.exponential = exponential
-          ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedTerm =
-              incompatibleWeightedTerm
-          ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedTermMeaning =
-              incompatibleWeightedTermMeaning
-          ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedSum =
-              λ polymer →
-                Terminal.physicalRootedWeightedSum
-                  physicalTerminal
-                  (anchor polymer)
-          ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedSumEnumerationMeaning =
-              λ polymer →
-                TwoMark.sumℚ
-                  (TwoMark.map
-                    (incompatibleWeightedTerm polymer)
-                    (incompatibleNeighbors polymer))
-                ≡
-                Terminal.physicalRootedWeightedSum
-                  physicalTerminal
-                  (anchor polymer)
-          ; KP.KoteckyPreissTwoWeightData.LessEqual = _≤_
-          ; KP.KoteckyPreissTwoWeightData.partitionFunction = partitionFunction
-          ; KP.KoteckyPreissTwoWeightData.Nonzero = Nonzero
-          ; KP.KoteckyPreissTwoWeightData.clusterFunctional = clusterFunctional
-          ; KP.KoteckyPreissTwoWeightData.ClusterTouches = ClusterTouches
-          ; KP.KoteckyPreissTwoWeightData.clusterDWeight = clusterDWeight
-          ; KP.KoteckyPreissTwoWeightData.clusterWeightedSum = clusterWeightedSum
-          ; KP.KoteckyPreissTwoWeightData.logarithm = logarithm
-          ; KP.KoteckyPreissTwoWeightData.clusterExpansionSum = clusterExpansionSum
-          })
-
 open LiteralTerminalKPAnalyticData public
 
 literalAffineMark :
@@ -170,10 +123,9 @@ literalAffineMark :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
     {anchor : Polymer → Link} →
-  (source :
-    LiteralTerminalKPAnalyticData
-      Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-      PhysicalIncompatible physicalTerminal anchor) →
+  LiteralTerminalKPAnalyticData
+    Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+    PhysicalIncompatible physicalTerminal anchor →
   AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer
 literalAffineMark {physicalTerminal = physicalTerminal} source = record
   { AffineMark.LiteralTwoWilsonAffinePolymerMark.baseActivity =
@@ -200,7 +152,7 @@ literalAffineMark {physicalTerminal = physicalTerminal} source = record
       rightSourceInsideRadius source
   }
 
-literalTerminalKPData :
+literalMarkedActivity :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
@@ -209,12 +161,58 @@ literalTerminalKPData :
   LiteralTerminalKPAnalyticData
     Scale ShellVolume Root Polymer Link Cluster FiniteVolume
     PhysicalIncompatible physicalTerminal anchor →
+  Polymer → ℚ
+literalMarkedActivity source polymer =
+  AffineMark.baseActivity (literalAffineMark source) polymer
+  * AffineMark.literalAffineMultiplier (literalAffineMark source) polymer
+
+record LiteralTerminalKPAnalyticMeaning
+    {Scale ShellVolume Root Polymer Link Cluster FiniteVolume : Set}
+    {PhysicalIncompatible : Polymer → Polymer → Set}
+    {physicalTerminal :
+      Terminal.PhysicalTerminalRootedSumIdentification
+        Scale ShellVolume Root Polymer Link}
+    {anchor : Polymer → Link}
+    (source :
+      LiteralTerminalKPAnalyticData
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible physicalTerminal anchor)
+    : Set₁ where
+  field
+    incompatibleWeightedTermExact :
+      ∀ centre neighbour →
+      incompatibleWeightedTerm source centre neighbour
+      ≡
+      multiply source
+        (exponential source
+          (add source
+            (Clustering.terminalKPBound
+              (Terminal.asTerminalKPSmallness physicalTerminal)
+              (anchor neighbour))
+            (dWeight source neighbour)))
+        (AffineMark.literalMarkedActivityNorm
+          (literalAffineMark source)
+          neighbour)
+
+open LiteralTerminalKPAnalyticMeaning public
+
+literalTerminalKPData :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    {physicalTerminal :
+      Terminal.PhysicalTerminalRootedSumIdentification
+        Scale ShellVolume Root Polymer Link}
+    {anchor : Polymer → Link}
+    (source :
+      LiteralTerminalKPAnalyticData
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source) →
   KP.KoteckyPreissTwoWeightData Polymer ℚ Cluster FiniteVolume
 literalTerminalKPData
     {PhysicalIncompatible = PhysicalIncompatible}
     {physicalTerminal = physicalTerminal}
     {anchor = anchor}
-    source = record
+    source meaning = record
   { KP.KoteckyPreissTwoWeightData.activityNorm =
       AffineMark.literalMarkedActivityNorm (literalAffineMark source)
   ; KP.KoteckyPreissTwoWeightData.aWeight =
@@ -230,7 +228,7 @@ literalTerminalKPData
   ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedTerm =
       incompatibleWeightedTerm source
   ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedTermMeaning =
-      incompatibleWeightedTermMeaning source
+      incompatibleWeightedTermExact meaning
   ; KP.KoteckyPreissTwoWeightData.incompatibleWeightedSum =
       λ polymer →
         Terminal.physicalRootedWeightedSum
@@ -257,142 +255,176 @@ literalTerminalKPData
   ; KP.KoteckyPreissTwoWeightData.clusterExpansionSum = clusterExpansionSum source
   }
 
+record PublishedLiteralTerminalKP
+    {Scale ShellVolume Root Polymer Link Cluster FiniteVolume : Set}
+    {PhysicalIncompatible : Polymer → Polymer → Set}
+    {physicalTerminal :
+      Terminal.PhysicalTerminalRootedSumIdentification
+        Scale ShellVolume Root Polymer Link}
+    {anchor : Polymer → Link}
+    (source :
+      LiteralTerminalKPAnalyticData
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
+    : Set₁ where
+  field
+    published :
+      KP.PublishedKoteckyPreissTwoWeightTheorem
+        (literalTerminalKPData source meaning)
+
+open PublishedLiteralTerminalKP public
+
 literalTerminalKPActivityNormIsMarkedNorm :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link}
     (source :
       LiteralTerminalKPAnalyticData
         Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-        PhysicalIncompatible physicalTerminal affineMark anchor)
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
     polymer →
-  KP.activityNorm (literalTerminalKPData source) polymer
+  KP.activityNorm (literalTerminalKPData source meaning) polymer
   ≡ AffineMark.literalMarkedActivityNorm (literalAffineMark source) polymer
-literalTerminalKPActivityNormIsMarkedNorm source polymer = refl
+literalTerminalKPActivityNormIsMarkedNorm source meaning polymer = refl
 
 literalTerminalKPIncompatibilityIsPhysical :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link}
     (source :
       LiteralTerminalKPAnalyticData
         Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-        PhysicalIncompatible physicalTerminal affineMark anchor)
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
     left right →
-  KP.Incompatible (literalTerminalKPData source) left right
+  KP.Incompatible (literalTerminalKPData source meaning) left right
   ≡ PhysicalIncompatible left right
-literalTerminalKPIncompatibilityIsPhysical source left right = refl
+literalTerminalKPIncompatibilityIsPhysical source meaning left right = refl
 
 literalTerminalKPWeightedSumIsRootedSum :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link}
     (source :
       LiteralTerminalKPAnalyticData
         Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-        PhysicalIncompatible physicalTerminal affineMark anchor)
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
     polymer →
-  KP.incompatibleWeightedSum (literalTerminalKPData source) polymer
-  ≡
-  Terminal.physicalRootedWeightedSum physicalTerminal (anchor polymer)
-literalTerminalKPWeightedSumIsRootedSum source polymer = refl
+  KP.incompatibleWeightedSum (literalTerminalKPData source meaning) polymer
+  ≡ Terminal.physicalRootedWeightedSum physicalTerminal (anchor polymer)
+literalTerminalKPWeightedSumIsRootedSum source meaning polymer = refl
 
 literalTerminalKPAWeightIsTerminalBudget :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link}
     (source :
       LiteralTerminalKPAnalyticData
         Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-        PhysicalIncompatible physicalTerminal affineMark anchor)
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
     polymer →
-  KP.aWeight (literalTerminalKPData source) polymer
+  KP.aWeight (literalTerminalKPData source meaning) polymer
   ≡
   Clustering.terminalKPBound
     (Terminal.asTerminalKPSmallness physicalTerminal)
     (anchor polymer)
-literalTerminalKPAWeightIsTerminalBudget source polymer = refl
+literalTerminalKPAWeightIsTerminalBudget source meaning polymer = refl
 
 literalTerminalKPOrderIsRationalOrder :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link}
     (source :
       LiteralTerminalKPAnalyticData
         Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-        PhysicalIncompatible physicalTerminal affineMark anchor)
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
     {left right : ℚ} →
-  KP.LessEqual (literalTerminalKPData source) left right
+  KP.LessEqual (literalTerminalKPData source meaning) left right
   ≡ (left ≤ right)
-literalTerminalKPOrderIsRationalOrder source = refl
+literalTerminalKPOrderIsRationalOrder source meaning = refl
 
 sourceFirstPhysicalPolymerIdentification :
   ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
     {physicalTerminal :
       Terminal.PhysicalTerminalRootedSumIdentification
         Scale ShellVolume Root Polymer Link}
-    {affineMark :
-      AffineMark.LiteralTwoWilsonAffinePolymerMark Polymer}
     {anchor : Polymer → Link}
     (source :
       LiteralTerminalKPAnalyticData
         Scale ShellVolume Root Polymer Link Cluster FiniteVolume
-        PhysicalIncompatible physicalTerminal affineMark anchor) →
+        PhysicalIncompatible physicalTerminal anchor)
+    (meaning : LiteralTerminalKPAnalyticMeaning source)
+    (theorem : PublishedLiteralTerminalKP source meaning) →
   Identification.LiteralTwoWilsonPhysicalPolymerIdentification
     Scale ShellVolume Root Polymer Link Cluster FiniteVolume
     PhysicalIncompatible
 sourceFirstPhysicalPolymerIdentification
     {physicalTerminal = physicalTerminal}
     {anchor = anchor}
-    source = record
+    source meaning theorem = record
   { Identification.LiteralTwoWilsonPhysicalPolymerIdentification.physicalTerminal =
       physicalTerminal
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.kpData =
-      literalTerminalKPData source
+      literalTerminalKPData source meaning
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.publishedKP =
-      publishedKP source
+      published theorem
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.affineMark =
       literalAffineMark source
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.anchor =
       anchor
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.literalMarkedActivity =
-      λ polymer →
-        AffineMark.baseActivity (literalAffineMark source) polymer
-        * AffineMark.literalAffineMultiplier (literalAffineMark source) polymer
+      literalMarkedActivity source
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.literalMarkedActivityIsAffinePhysicalActivity =
       λ polymer → refl
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.baseActivityIsTerminalActivityNorm =
       λ polymer → refl
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.kpActivityNormIsLiteralMarkedActivityNorm =
-      literalTerminalKPActivityNormIsMarkedNorm source
+      literalTerminalKPActivityNormIsMarkedNorm source meaning
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.kpIncompatibilityIsPhysical =
       λ left right proof → proof
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.physicalIncompatibilityIsKP =
       λ left right proof → proof
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.incompatibleWeightedSumIsTerminalRootedSum =
-      literalTerminalKPWeightedSumIsRootedSum source
+      literalTerminalKPWeightedSumIsRootedSum source meaning
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.aWeightIsTerminalBudget =
-      literalTerminalKPAWeightIsTerminalBudget source
+      literalTerminalKPAWeightIsTerminalBudget source meaning
   ; Identification.LiteralTwoWilsonPhysicalPolymerIdentification.rationalOrderToKP =
       λ proof → proof
   }
+
+rootedEnumerationTheorem :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    {physicalTerminal :
+      Terminal.PhysicalTerminalRootedSumIdentification
+        Scale ShellVolume Root Polymer Link}
+    {anchor : Polymer → Link}
+    (source :
+      LiteralTerminalKPAnalyticData
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible physicalTerminal anchor)
+    polymer →
+  TwoMark.sumℚ
+    (TwoMark.map
+      (incompatibleWeightedTerm source polymer)
+      (incompatibleNeighbors source polymer))
+  ≡
+  Terminal.physicalRootedWeightedSum
+    physicalTerminal
+    (anchor polymer)
+rootedEnumerationTheorem source =
+  rootedIncompatibleEnumerationExact source
