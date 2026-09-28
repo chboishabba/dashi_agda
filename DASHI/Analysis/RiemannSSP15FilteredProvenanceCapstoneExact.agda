@@ -218,6 +218,7 @@ record RiemannSSP15FilteredProvenanceBoundary : Set where
     producerRoleCertificateTypeDefined : Bool
     sourceNativeProducerTheoremLocatedAndPinned : Bool
     sourceNativeFourCoordinateTermsLocated : Bool
+    sourceNativeProducerCertificateInhabitedOnDonorBranch : Bool
     donorImportedIntoCurrentLeanSourceGraph : Bool
     producerRoleCertificateInhabitedHere : Bool
     rhDepthFiveRolesPromotedToAnalyticProvenanceHere : Bool
@@ -227,4 +228,4 @@ canonicalRiemannSSP15FilteredProvenanceBoundary :
 canonicalRiemannSSP15FilteredProvenanceBoundary =
   riemann-ssp15-filtered-provenance-boundary
     true false true true true true true true
-    true true false false false
+    true true true false false false
