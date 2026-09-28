@@ -127,6 +127,16 @@ record BadLevelIgusaRootStackComparison
     comparisonUsesWildRamificationDataIsTrue :
       comparisonUsesWildRamificationData ≡ true
 
+    igusaPrimeLevelHasseRootDescriptionOwned :
+      Bool
+    igusaPrimeLevelHasseRootDescriptionOwnedIsTrue :
+      igusaPrimeLevelHasseRootDescriptionOwned ≡ true
+
+    igusaPrimeSquareIntegralModelOwned :
+      Bool
+    igusaPrimeSquareIntegralModelOwnedIsTrue :
+      igusaPrimeSquareIntegralModelOwned ≡ true
+
     comparisonWithRootStackConstructed :
       Bool
     comparisonWithRootStackConstructedIsTrue :
@@ -236,6 +246,7 @@ layerSectorBoundary =
 data IgusaTowerExistsThereforeCorrectionTenTwo : Set where
 data HasseRootDescriptionCreatesHauptmodulCorrection : Set where
 data RootStackComparisonAloneCreatesValuationAuthority : Set where
+data IgusaPrimeLevelHasseRootClosesPrimeSquareTerm : Set where
 data SectorProductDefinesIgusaCorrection : Set where
 
 igusaExistenceDoesNotCreateCorrection :
@@ -249,6 +260,10 @@ hasseRootDoesNotCreateHauptmodulCorrection ()
 rootStackComparisonDoesNotCreateValuationAuthority :
   RootStackComparisonAloneCreatesValuationAuthority -> ⊥
 rootStackComparisonDoesNotCreateValuationAuthority ()
+
+igusaPrimeLevelDoesNotClosePrimeSquareTerm :
+  IgusaPrimeLevelHasseRootClosesPrimeSquareTerm -> ⊥
+igusaPrimeLevelDoesNotClosePrimeSquareTerm ()
 
 sectorProductDoesNotDefineIgusaCorrection :
   SectorProductDefinesIgusaCorrection -> ⊥
@@ -282,6 +297,8 @@ record BadLevelIgusaCorrectionCutsetBoundary : Set where
     sourcedPaperMarksBadLevelAsFutureWork : Bool
     sourcedPaperSuggestsIgusaTower : Bool
     igusaPAsHasseRootModuliProblemSourced : Bool
+    igusaP2IntegralModelNeededSeparately : Bool
+    igusaP2IntegralModelAlreadySuppliedBySource : Bool
     igusaRootStackComparisonAlreadyInSource : Bool
     badLevelComparisonInterfaceSpecified : Bool
     correctedValuationAuthoritySpecified : Bool
@@ -293,4 +310,4 @@ canonicalBadLevelIgusaCorrectionCutsetBoundary :
   BadLevelIgusaCorrectionCutsetBoundary
 canonicalBadLevelIgusaCorrectionCutsetBoundary =
   bad-level-igusa-correction-cutset-boundary
-    true true true true true true false true true false false false
+    true true true true true true true false false true true false false false
