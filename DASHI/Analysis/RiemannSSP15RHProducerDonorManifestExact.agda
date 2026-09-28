@@ -15,7 +15,7 @@ open import Agda.Builtin.String using (String)
 
 donorCommit : String
 donorCommit =
-  "824f84cddf5cf424c643688c2d24e351795dac07"
+  "85f10467c453bea93bd8199ed80054b1fb41b46a"
 
 donorFile : String
 donorFile =
@@ -24,6 +24,22 @@ donorFile =
 donorBlob : String
 donorBlob =
   "138153858e329469048175fcdeeaf75c182078be"
+
+producerCertificateFile : String
+producerCertificateFile =
+  "Synthesis/RiemannQuarticProducerRoleCertificate.lean"
+
+producerCertificateBlob : String
+producerCertificateBlob =
+  "cb89ebc956cedd55179042cf63ff2eaf3d44f073"
+
+producerCertificateTheorem : String
+producerCertificateTheorem =
+  "Synthesis.RiemannQuarticProducerRoleCertificate.canonical_certificate_inhabited"
+
+sourceRoleKernelTheorem : String
+sourceRoleKernelTheorem =
+  "Synthesis.RiemannQuarticProducerRoleCertificate.primitive_kernel_via_source_roles"
 
 primitiveKernelTheorem : String
 primitiveKernelTheorem =
@@ -62,6 +78,8 @@ record RiemannSSP15RHProducerDonorBoundary : Set where
     sparseShiftTheoremLocated : Bool
     depthFiveBlockTheoremLocated : Bool
     sourceNativeCoordinateTermsLocated : Bool
+    sourceNativeProducerCertificateInhabitedOnDonorBranch : Bool
+    sourceRoleKernelTheoremLocated : Bool
     contentAddressedVerifierOwned : Bool
     exactHeadVerifierObserved : Bool
     donorImportedIntoCurrentLeanBranch : Bool
@@ -71,7 +89,7 @@ canonicalRiemannSSP15RHProducerDonorBoundary :
   RiemannSSP15RHProducerDonorBoundary
 canonicalRiemannSSP15RHProducerDonorBoundary =
   riemann-ssp15-rh-producer-donor-boundary
-    true true true true true true true false false false
+    true true true true true true true true true false false false
 
 
 donorCommitPinnedIsTrue :
