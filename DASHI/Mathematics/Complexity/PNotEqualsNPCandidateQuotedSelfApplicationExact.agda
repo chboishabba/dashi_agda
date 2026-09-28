@@ -29,8 +29,9 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Nat.Base using (_≤_)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (_≢_; trans)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -40,6 +41,9 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as 
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 
 ------------------------------------------------------------------------
 -- Quotation interface.
@@ -453,6 +457,148 @@ candidateQuotedStateRunsCandidateOnCurrentFormula
   candidateQuotedFixedPointRunsCandidateOnOwnQuotation
     code
     (structuralProgramFormulaQuotation codeQuotation)
+
+------------------------------------------------------------------------
+-- Faithful candidate-code quotation.
+--
+-- A bare quotation function may erase its input.  The faithful surface adds a
+-- left inverse, exactly as the concrete-tape static-program codecs elsewhere
+-- in the repository do.  This is representation adequacy only.
+------------------------------------------------------------------------
+
+record FaithfulCandidateCodeFormulaQuotation
+    {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate) : Set₁ where
+  field
+    quotation :
+      CandidateCodeFormulaQuotation code
+
+    decodeCandidateCode :
+      Cook.BooleanFormula →
+      Actual.CandidateCodeRealization.CandidateCode code
+
+    decodeQuoteCandidateCode :
+      (candidateCode :
+        Actual.CandidateCodeRealization.CandidateCode code) →
+      decodeCandidateCode
+        (quoteCandidateCode quotation candidateCode)
+      ≡
+      candidateCode
+
+open FaithfulCandidateCodeFormulaQuotation public
+
+faithfulCandidateQuotedSelfApplicationState :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate) →
+  FaithfulCandidateCodeFormulaQuotation code →
+  Q2.BoundedSelfReferenceState
+faithfulCandidateQuotedSelfApplicationState code faithful =
+  candidateQuotedSelfApplicationState
+    code
+    (quotation faithful)
+
+------------------------------------------------------------------------
+-- B on the exact A1 root.
+------------------------------------------------------------------------
+
+CandidateQuotedFirstStepProgress :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate) →
+  FaithfulCandidateCodeFormulaQuotation code →
+  DirectDP.DirectDPChargedStateConstructor →
+  Set
+CandidateQuotedFirstStepProgress
+    code
+    faithful
+    constructor =
+  constructor
+    (faithfulCandidateQuotedSelfApplicationState
+      code faithful)
+  ≢
+  nothing
+
+------------------------------------------------------------------------
+-- C attacks that same root directly.
+------------------------------------------------------------------------
+
+candidateQuotedHighWidthForcesStop :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (faithful : FaithfulCandidateCodeFormulaQuotation code)
+    (constructor : DirectDP.DirectDPChargedStateConstructor)
+    {remaining width : Nat} →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula
+          (faithfulCandidateQuotedSelfApplicationState
+            code faithful))}
+    remaining
+    width →
+  Q2.recursiveMeasure
+      (faithfulCandidateQuotedSelfApplicationState
+        code faithful)
+  ≤
+  Width.triple width →
+  constructor
+      (faithfulCandidateQuotedSelfApplicationState
+        code faithful)
+  ≡
+  nothing
+candidateQuotedHighWidthForcesStop
+    code
+    faithful
+    constructor
+    witness
+    measureBelowWidth =
+  DirectDP.directDPHighWidthForcesConstructorStop
+    witness
+    measureBelowWidth
+    constructor
+
+candidateQuotedWidthRefutesProgress :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (faithful : FaithfulCandidateCodeFormulaQuotation code)
+    (constructor : DirectDP.DirectDPChargedStateConstructor)
+    {remaining width : Nat} →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula
+          (faithfulCandidateQuotedSelfApplicationState
+            code faithful))}
+    remaining
+    width →
+  Q2.recursiveMeasure
+      (faithfulCandidateQuotedSelfApplicationState
+        code faithful)
+  ≤
+  Width.triple width →
+  CandidateQuotedFirstStepProgress
+    code
+    faithful
+    constructor →
+  ⊥
+candidateQuotedWidthRefutesProgress
+    code
+    faithful
+    constructor
+    witness
+    measureBelowWidth
+    progress =
+  progress
+    (candidateQuotedHighWidthForcesStop
+      code
+      faithful
+      constructor
+      witness
+      measureBelowWidth)
 
 ------------------------------------------------------------------------
 -- Strength firewall.
