@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstPhysicalKPExact where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_; _+_; _*_)
 
@@ -79,7 +80,8 @@ sourceFirstKPData :
     SourceFirstKPAuxiliary
       physicalTerminal affineMark anchor PhysicalIncompatible →
   KP.KoteckyPreissTwoWeightData Polymer ℚ Cluster FiniteVolume
-sourceFirstKPData physicalTerminal affineMark anchor auxiliary = record
+sourceFirstKPData {PhysicalIncompatible = PhysicalIncompatible}
+    physicalTerminal affineMark anchor auxiliary = record
   { KP.KoteckyPreissTwoWeightData.activityNorm =
       Affine.literalMarkedActivityNorm affineMark
   ; KP.KoteckyPreissTwoWeightData.aWeight =
@@ -88,7 +90,7 @@ sourceFirstKPData physicalTerminal affineMark anchor auxiliary = record
           (Terminal.asTerminalKPSmallness physicalTerminal)
           (anchor polymer)
   ; KP.KoteckyPreissTwoWeightData.dWeight = dWeight auxiliary
-  ; KP.KoteckyPreissTwoWeightData.Incompatible = _
+  ; KP.KoteckyPreissTwoWeightData.Incompatible = PhysicalIncompatible
   ; KP.KoteckyPreissTwoWeightData.add = _+_
   ; KP.KoteckyPreissTwoWeightData.multiply = _*_
   ; KP.KoteckyPreissTwoWeightData.exponential = exponential auxiliary
@@ -181,11 +183,11 @@ asLiteralPhysicalIdentification source = record
       λ order → order
   }
 
-sourceFirstPhysicalKPCoreIsDefinitional : Agda.Builtin.Bool.Bool
-sourceFirstPhysicalKPCoreIsDefinitional = Agda.Builtin.Bool.true
+sourceFirstPhysicalKPCoreIsDefinitional : Bool
+sourceFirstPhysicalKPCoreIsDefinitional = true
 
-independentKPDatumSelectionRequired : Agda.Builtin.Bool.Bool
-independentKPDatumSelectionRequired = Agda.Builtin.Bool.false
+independentKPDatumSelectionRequired : Bool
+independentKPDatumSelectionRequired = false
 
 sourceFirstPhysicalKPCompilerLevel : ProofLevel
 sourceFirstPhysicalKPCompilerLevel = machineChecked
