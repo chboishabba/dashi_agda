@@ -20,7 +20,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Unit using (⊤; tt)
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
@@ -254,6 +254,154 @@ truthTableRepairStepExact
                     (truthTableRepair parent)
                     (prefixedIndex action childIndex))
                 index))))
+
+------------------------------------------------------------------------
+-- The literal truth table is future-semantically sufficient.
+------------------------------------------------------------------------
+
+assignmentBits :
+  ∀ {remaining : Nat} →
+  SAT.Assignment remaining →
+  Vec.Vec Bool remaining
+assignmentBits assignment =
+  tabulateVec assignment
+
+lookupAssignmentBits :
+  ∀ {remaining : Nat}
+    (assignment : SAT.Assignment remaining)
+    (index : Fin.Fin remaining) →
+  bitsAssignment (assignmentBits assignment) index
+  ≡
+  assignment index
+lookupAssignmentBits assignment index =
+  lookupTabulateVec assignment index
+
+semanticOnAssignmentBits :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Width.LayerNode {root = root} remaining)
+    (assignment : SAT.Assignment remaining) →
+  Sharing.layerResidualSemantic
+      node
+      (bitsAssignment
+        (assignmentBits assignment))
+  ≡
+  Sharing.layerResidualSemantic
+      node
+      assignment
+semanticOnAssignmentBits
+    {remaining = remaining}
+    node
+    assignment
+    with Width.node node | Width.arityExact node
+... | Family.restriction-node .remaining current derivation | refl =
+  SAT.evaluateExtensional
+    current
+    (lookupAssignmentBits assignment)
+
+truthTableRepairEqualityImpliesResidualEquality :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Width.LayerNode {root = root} remaining} →
+  truthTableRepair left
+  ≡
+  truthTableRepair right →
+  Width.LayerResidualEqual left right
+truthTableRepairEqualityImpliesResidualEquality
+    {left = left}
+    {right = right}
+    sameTable
+    assignment =
+  trans
+    (sym
+      (semanticOnAssignmentBits
+        left
+        assignment))
+    (trans
+      sameAtIndex
+      (semanticOnAssignmentBits
+        right
+        assignment))
+  where
+    bits :
+      Vec.Vec Bool _
+    bits =
+      assignmentBits assignment
+
+    index :
+      Fin.Fin
+        (Bits.bitCardinality _)
+    index =
+      Bits.bitsToFin bits
+
+    tableLookupEqual :
+      Vec.lookup
+        (truthTableRepair left)
+        index
+      ≡
+      Vec.lookup
+        (truthTableRepair right)
+        index
+    tableLookupEqual =
+      cong
+        (λ table →
+          Vec.lookup table index)
+        sameTable
+
+    sameAtIndex :
+      Sharing.layerResidualSemantic
+          left
+          (bitsAssignment bits)
+      ≡
+      Sharing.layerResidualSemantic
+          right
+          (bitsAssignment bits)
+    sameAtIndex
+      rewrite
+        sym
+          (Bits.finToBitsAfterBitsToFin bits)
+      =
+      trans
+        (sym
+          (lookupTabulateVec
+            (λ i →
+              Sharing.layerResidualSemantic
+                left
+                (bitsAssignment
+                  (Bits.finToBits i)))
+            index))
+        (trans
+          tableLookupEqual
+          (lookupTabulateVec
+            (λ i →
+              Sharing.layerResidualSemantic
+                right
+                (bitsAssignment
+                  (Bits.finToBits i)))
+            index))
+
+truthTableRepairSeparatesWidthWitness :
+  ∀ {rootVariables remaining width : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (witness :
+      Width.ResidualWidthWitness
+        {root = root}
+        remaining
+        width)
+    {left right : Fin.Fin width} →
+  truthTableRepair
+      (Width.representative witness left)
+  ≡
+  truthTableRepair
+      (Width.representative witness right) →
+  left ≡ right
+truthTableRepairSeparatesWidthWitness
+    witness
+    sameTable =
+  Width.residualEqualIndicesEqual
+    witness
+    (truthTableRepairEqualityImpliesResidualEquality
+      sameTable)
 
 ------------------------------------------------------------------------
 -- Projection and exact factorization.
