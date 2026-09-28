@@ -11,7 +11,7 @@ import RealProperties as BishopP
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Carrier
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2Running
-import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinGaussianExact as CanonicalRich
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinUVEdgeExact as CanonicalRich
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
@@ -76,7 +76,7 @@ record P3RepresentsRichBrillouinLiteralPlaquetteSplit
       ∀ depth →
       Bishop._≃_
         (P3.betaLogBlocking recursion (suc depth))
-        (Rich.scalarIntegral rich (suc depth))
+        (Rich.scalarIntegral rich depth)
 
     gaussianProjection :
       Projection.RichBrillouinRationalGaussianProjection dataSet rich
@@ -85,7 +85,7 @@ record P3RepresentsRichBrillouinLiteralPlaquetteSplit
       ∀ depth →
       Bishop._≃_
         (P3.remainder recursion (suc depth))
-        (UV.embed (Literal.literalBetaInt dataSet (suc depth)))
+        (UV.embed (Literal.literalBetaInt dataSet depth))
 
 open P3RepresentsRichBrillouinLiteralPlaquetteSplit public
 
@@ -146,7 +146,7 @@ record CanonicalRunningRichLiteralPlaquetteSplit
     (running : SU2Running.CanonicalBishopSU2RunningInputs Nat) : Set₁ where
   field
     richNormalization :
-      CanonicalRich.CanonicalBishopRichBrillouinNormalization rich running
+      CanonicalRich.CanonicalBishopRichBrillouinUVEdgeNormalization rich running
 
     addIsBishopAdd :
       ∀ left right →
@@ -178,7 +178,7 @@ record CanonicalRunningRichLiteralPlaquetteSplit
       ∀ depth →
       Bishop._≃_
         (P3.remainder (SU2Running.recursion running) (suc depth))
-        (UV.embed (Literal.literalBetaInt dataSet (suc depth)))
+        (UV.embed (Literal.literalBetaInt dataSet depth))
 
 open CanonicalRunningRichLiteralPlaquetteSplit public
 
@@ -201,7 +201,7 @@ canonicalRunningAsRichBrillouinBridge inputs = record
       CanonicalRunningRichLiteralPlaquetteSplit.zeroTotalIncrementSame inputs
 
   ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.p3GaussianSameRichScalarIntegral =
-      CanonicalRich.p3GaussianSameRichScalarIntegral
+      CanonicalRich.p3SuccessorGaussianSameRichEdgeIntegral
         (richNormalization inputs)
 
   ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.gaussianProjection =
