@@ -33,6 +33,7 @@ module DASHI.Analysis.RiemannMonster196830TernaryShiftBridgeExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
+open import Data.Nat using (_∸_)
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.MonsterFilteredCarrierExact as Monster
