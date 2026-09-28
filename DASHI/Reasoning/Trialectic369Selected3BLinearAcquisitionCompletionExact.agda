@@ -50,10 +50,10 @@ import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as Line
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as FiniteCompiler
 
 ------------------------------------------------------------------------
--- 1. One exact completion object.
+-- 1. Scaffold first, then full completion.
 ------------------------------------------------------------------------
 
-record Selected3BLinearAcquisitionCompletion
+record Selected3BLinearAcquisitionScaffold
     {Monster K : Set} : Setω where
   field
     acquisition :
@@ -62,10 +62,33 @@ record Selected3BLinearAcquisitionCompletion
     sameElementComposition :
       Composition.ActualVOASelected3BComposition acquisition
 
+open Selected3BLinearAcquisitionScaffold public
+
+record Selected3BLinearAcquisitionCompletion
+    {Monster K : Set} : Setω where
+  field
+    scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}
+
     normalizerMonsterActionWeld :
-      Acquisition.Selected3BNormalizerMonsterActionWeld acquisition
+      Acquisition.Selected3BNormalizerMonsterActionWeld
+        (Selected3BLinearAcquisitionScaffold.acquisition scaffold)
 
 open Selected3BLinearAcquisitionCompletion public
+
+completionAcquisition :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Acquisition.ActualLinearMultiplicityAcquisition {Monster} {K}
+completionAcquisition completion =
+  Selected3BLinearAcquisitionScaffold.acquisition (scaffold completion)
+
+completionComposition :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Composition.ActualVOASelected3BComposition (completionAcquisition completion)
+completionComposition completion =
+  Selected3BLinearAcquisitionScaffold.sameElementComposition (scaffold completion)
 
 ------------------------------------------------------------------------
 -- 2. Canonical linear objects are projections/compiler output.
@@ -76,14 +99,14 @@ completedLinearZetaProducer :
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
   LinearZeta.LinearSingleActionProducer
 completedLinearZetaProducer completion =
-  Acquisition.linearZetaProducer (acquisition completion)
+  Acquisition.linearZetaProducer (completionAcquisition completion)
 
 completedMultiplicityHomSpace :
   ∀ {Monster K}
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
   Hom.ActualLinearMultiplicityHomSpace
 completedMultiplicityHomSpace completion =
-  Acquisition.multiplicityHomSpace (acquisition completion)
+  Acquisition.multiplicityHomSpace (completionAcquisition completion)
 
 completedCanonicalLinearRoute :
   ∀ {Monster K}
@@ -91,7 +114,7 @@ completedCanonicalLinearRoute :
   WrongType.CanonicalLinearMultiplicityRoute
 completedCanonicalLinearRoute completion =
   LinearBridge.canonicalLinearRouteFromAcquisition
-    (acquisition completion)
+    (completionAcquisition completion)
 
 ------------------------------------------------------------------------
 -- 3. Same selected action identities are retained explicitly.
@@ -100,14 +123,14 @@ completedCanonicalLinearRoute completion =
 completedComposition :
   ∀ {Monster K}
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Composition.ActualVOASelected3BComposition (acquisition completion)
+  Composition.ActualVOASelected3BComposition (completionAcquisition completion)
 completedComposition =
-  sameElementComposition
+  completionComposition
 
 completedNormalizerMonsterActionWeld :
   ∀ {Monster K}
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Acquisition.Selected3BNormalizerMonsterActionWeld (acquisition completion)
+  Acquisition.Selected3BNormalizerMonsterActionWeld (completionAcquisition completion)
 completedNormalizerMonsterActionWeld =
   normalizerMonsterActionWeld
 
@@ -118,12 +141,12 @@ selectedKernelWeldIsAcquisitionWeld :
     (KernelSame.selectedSource
       (KernelSame.attachment
         (Composition.kernelRecognizedSameElementAttachment
-          (sameElementComposition completion))))
+          (completionComposition completion))))
   ≡
-  Acquisition.literalSameObjectWeld (acquisition completion)
+  Acquisition.literalSameObjectWeld (completionAcquisition completion)
 selectedKernelWeldIsAcquisitionWeld completion =
   Composition.kernelSelectedWeldIsAcquisitionWeld
-    (sameElementComposition completion)
+    (completionComposition completion)
 
 compiledProducerIsAcquisitionProducer :
   ∀ {Monster K}
@@ -132,102 +155,134 @@ compiledProducerIsAcquisitionProducer :
     (Composition.recognizedActionSourceFromSameElement
       (Composition.selectedRecognizedFromKernel
         (Composition.kernelRecognizedSameElementAttachment
-          (sameElementComposition completion))))
+          (completionComposition completion))))
   ≡
   LinearZeta.singleActionProducer
-    (Acquisition.linearZetaProducer (acquisition completion))
+    (Acquisition.linearZetaProducer (completionAcquisition completion))
 compiledProducerIsAcquisitionProducer completion =
   Composition.compiledSingleActionProducerIsAcquisitionProducer
-    (sameElementComposition completion)
+    (completionComposition completion)
 
 ------------------------------------------------------------------------
--- 3b. The normalizer -> Monster map is compiler output from same-producer
---     equality.  Only the ACTION INTERTWINING remains scientific.
+-- 3b. The normalizer -> Monster map is compiler output from the scaffold.
+--     Only the ACTION INTERTWINING remains scientific.
 ------------------------------------------------------------------------
 
-compiledVOAProducer :
+scaffoldCompiledVOAProducer :
   ∀ {Monster K}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
   Single.ActualMonster3BSingleActionProducer
-compiledVOAProducer completion =
+scaffoldCompiledVOAProducer scaffold =
   Phase.singleActionProducerFromVOA
     (Composition.recognizedActionSourceFromSameElement
       (Composition.selectedRecognizedFromKernel
         (Composition.kernelRecognizedSameElementAttachment
-          (sameElementComposition completion))))
+          (sameElementComposition scaffold))))
 
-acquisitionProducer :
+scaffoldAcquisitionProducer :
   ∀ {Monster K}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
   Single.ActualMonster3BSingleActionProducer
-acquisitionProducer completion =
+scaffoldAcquisitionProducer scaffold =
   LinearZeta.singleActionProducer
-    (Acquisition.linearZetaProducer (acquisition completion))
+    (Acquisition.linearZetaProducer (acquisition scaffold))
 
-normalizerCarrierEqualityFromComposition :
+scaffoldProducerEquality :
   ∀ {Monster K}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Single.Normalizer (compiledVOAProducer completion)
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  scaffoldCompiledVOAProducer scaffold
   ≡
-  Single.Normalizer (acquisitionProducer completion)
-normalizerCarrierEqualityFromComposition completion =
-  cong Single.Normalizer (compiledProducerIsAcquisitionProducer completion)
+  scaffoldAcquisitionProducer scaffold
+scaffoldProducerEquality scaffold =
+  Composition.compiledSingleActionProducerIsAcquisitionProducer
+    (sameElementComposition scaffold)
 
-normalizerToMonsterFromComposition :
+normalizerCarrierEqualityFromScaffold :
   ∀ {Monster K}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Single.Normalizer (acquisitionProducer completion) →
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  Single.Normalizer (scaffoldCompiledVOAProducer scaffold)
+  ≡
+  Single.Normalizer (scaffoldAcquisitionProducer scaffold)
+normalizerCarrierEqualityFromScaffold scaffold =
+  cong Single.Normalizer (scaffoldProducerEquality scaffold)
+
+normalizerToMonsterFromScaffold :
+  ∀ {Monster K}
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  Single.Normalizer (scaffoldAcquisitionProducer scaffold) →
   Monster
-normalizerToMonsterFromComposition completion normalizer =
+normalizerToMonsterFromScaffold scaffold normalizer =
   subst
     (λ Carrier → Carrier)
-    (sym (normalizerCarrierEqualityFromComposition completion))
+    (sym (normalizerCarrierEqualityFromScaffold scaffold))
     normalizer
 
 record Selected3BNormalizerActionIntertwiningOnly
     {Monster K : Set}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) : Setω where
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) : Setω where
   field
     normalizerActionIntertwines :
-      (normalizer : Single.Normalizer (acquisitionProducer completion)) →
+      (normalizer :
+        Single.Normalizer (scaffoldAcquisitionProducer scaffold)) →
       (state :
         Linear.Vector
           (WeightTwo.constituentLinearCarrier
             (Acquisition.weightTwoLinearBridge
-              (acquisition completion)))) →
+              (acquisition scaffold)))) →
       subst
         (λ Carrier → Carrier)
         (Acquisition.selected3BStateCarrierEquality
-          (acquisition completion))
+          (acquisition scaffold))
         (WeightTwo.constituentAct
           (Acquisition.weightTwoLinearBridge
-            (acquisition completion))
-          (normalizerToMonsterFromComposition completion normalizer)
+            (acquisition scaffold))
+          (normalizerToMonsterFromScaffold scaffold normalizer)
           state)
       ≡
       Inertia.act
-        (Single.normalizerAction (acquisitionProducer completion))
+        (Single.normalizerAction
+          (scaffoldAcquisitionProducer scaffold))
         normalizer
         (subst
           (λ Carrier → Carrier)
           (Acquisition.selected3BStateCarrierEquality
-            (acquisition completion))
+            (acquisition scaffold))
           state)
 
 open Selected3BNormalizerActionIntertwiningOnly public
 
 compileNormalizerMonsterActionWeld :
   ∀ {Monster K}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Selected3BNormalizerActionIntertwiningOnly completion →
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  Selected3BNormalizerActionIntertwiningOnly scaffold →
   Acquisition.Selected3BNormalizerMonsterActionWeld
-    (acquisition completion)
-compileNormalizerMonsterActionWeld completion intertwining =
+    (acquisition scaffold)
+compileNormalizerMonsterActionWeld scaffold intertwining =
   record
     { normalizerToMonster =
-        normalizerToMonsterFromComposition completion
+        normalizerToMonsterFromScaffold scaffold
     ; normalizerActionIntertwines =
         normalizerActionIntertwines intertwining
+    }
+
+completeFromActionIntertwining :
+  ∀ {Monster K}
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  Selected3BNormalizerActionIntertwiningOnly scaffold →
+  Selected3BLinearAcquisitionCompletion {Monster} {K}
+completeFromActionIntertwining scaffold intertwining =
+  record
+    { scaffold = scaffold
+    ; normalizerMonsterActionWeld =
+        compileNormalizerMonsterActionWeld scaffold intertwining
     }
 
 ------------------------------------------------------------------------
@@ -256,7 +311,7 @@ sourceNativeInertiaSameAction :
   Set
 sourceNativeInertiaSameAction completion =
   Acquisition.actualMultiplicityActionIsSourceNativeInertiaAction
-    (acquisition completion)
+    (completionAcquisition completion)
 
 twelveSeventyEightLinearIntertwiner :
   ∀ {Monster K}
@@ -264,7 +319,7 @@ twelveSeventyEightLinearIntertwiner :
   Set
 twelveSeventyEightLinearIntertwiner completion =
   Acquisition.twelveSeventyEightLinearIntertwiner
-    (acquisition completion)
+    (completionAcquisition completion)
 
 ------------------------------------------------------------------------
 -- 5. Optional finite basis route remains a separate downstream receipt.
@@ -275,7 +330,7 @@ OptionalFiniteBasisRoute :
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
   Set₁
 OptionalFiniteBasisRoute completion =
-  LinearBridge.OptionalFiniteBasisRoute (acquisition completion)
+  LinearBridge.OptionalFiniteBasisRoute (completionAcquisition completion)
 
 finiteBasisCompilerBoundary :
   FiniteCompiler.Trialectic369LinearMultiplicityBasisSpecialisationBoundary
@@ -332,22 +387,24 @@ dimensionDoesNotCreateMonsterClass ()
 record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
   constructor trialectic-369-selected3b-linear-acquisition-completion-boundary
   field
-    oneCompletionOwnsAcquisition : Bool
-    sameElementCompositionRequired : Bool
-    normalizerMonsterActionWeldRequired : Bool
+    scaffoldOwnsAcquisition : Bool
+    scaffoldOwnsSameElementComposition : Bool
     normalizerToMonsterMapCompilerOutput : Bool
-    onlyActionIntertwiningRemainsAfterComposition : Bool
+    onlyActionIntertwiningRemainsAfterScaffold : Bool
+    completionCompilerOwned : Bool
     linearZetaProducerCompilerOutput : Bool
     multiplicityHomSpaceCompilerOutput : Bool
     canonicalLinearRouteCompilerOutput : Bool
-    sameSelectedActionIdentitiesRetained : Bool
     sourceNativeInertiaPayloadRetained : Bool
     twelveSeventyEightIntertwinerPayloadRetained : Bool
     optionalFiniteBasisStillSeparate : Bool
+    scaffoldInhabitedHere : Bool
+    actionIntertwiningInhabitedHere : Bool
     completionInhabitedHere : Bool
 
 canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary :
   Trialectic369Selected3BLinearAcquisitionCompletionBoundary
 canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary =
   trialectic-369-selected3b-linear-acquisition-completion-boundary
-    true true true true true true true true true true true true false
+    true true true true true true true true true true true
+    false false false
