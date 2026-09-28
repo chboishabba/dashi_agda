@@ -21,8 +21,10 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCMP116MarkedExpansionExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; absℝ; _*ℝ_; _≤ℝ_)
