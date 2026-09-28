@@ -32,7 +32,9 @@ record LiteralDirectSourceSameSystemNontriviality
     ContinuumFamily CurvaturePolynomial LocalOperator Position
       OPECoefficient StressTensor Hamiltonian : Set
 
-    localPackage :
+    localPackageFromLiteralC :
+      Five.CutoffUniformPhysicalMassGap Y →
+      Five.ContinuumLocalFieldOPEStressWard Y →
       ∀ G →
       let sameOS = H5.h3ForEveryLiteralGroup source G in
       Local.SameFamilyOPEStressWardGaussianKernel
@@ -43,13 +45,15 @@ record LiteralDirectSourceSameSystemNontriviality
         ℚ
         (H3.sourceOSSystem sameOS)
 
-    sameHBridge :
+    sameHBridgeFromLiteralBC :
+      (gap : Five.CutoffUniformPhysicalMassGap Y) →
+      (local : Five.ContinuumLocalFieldOPEStressWard Y) →
       ∀ G →
       R77.StandardGaussianMaxwellSameHGapBridge
-        (localPackage G)
+        (localPackageFromLiteralC gap local G)
 
     interactingWitnessIsLiteralClayNontriviality :
-      ∀ G →
+      ∀ gap local G →
       let sameOS = H5.h3ForEveryLiteralGroup source G in
       OS.InteractingContinuumWitness
         (Top.Observable C)
@@ -61,7 +65,7 @@ record LiteralDirectSourceSameSystemNontriviality
         (Top.schwinger Y G)
 
     interactingWitnessIsPreservedInLiteralLimit :
-      ∀ G →
+      ∀ gap local G →
       let sameOS = H5.h3ForEveryLiteralGroup source G in
       OS.InteractingContinuumWitness
         (Top.Observable C)
@@ -78,6 +82,8 @@ round77Witness :
     {source : H5.LiteralCompactSimpleDirectSourceContinuation Y}
     (nontrivial :
       LiteralDirectSourceSameSystemNontriviality Y source)
+    (gap : Five.CutoffUniformPhysicalMassGap Y)
+    (local : Five.ContinuumLocalFieldOPEStressWard Y)
     G →
   let sameOS = H5.h3ForEveryLiteralGroup source G in
   OS.InteractingContinuumWitness
@@ -85,33 +91,38 @@ round77Witness :
     (H3.Point sameOS)
     ℚ
     (H3.sourceOSSystem sameOS)
-round77Witness nontrivial G =
+round77Witness nontrivial gap local G =
   R77.round77InteractingWitnessFromLocalAndGap
-    (localPackage nontrivial G)
-    (sameHBridge nontrivial G)
+    (localPackageFromLiteralC nontrivial gap local G)
+    (sameHBridgeFromLiteralBC nontrivial gap local G)
 
 asInteractingContinuumNontriviality :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
     {source : H5.LiteralCompactSimpleDirectSourceContinuation Y} →
   LiteralDirectSourceSameSystemNontriviality Y source →
+  Five.CutoffUniformPhysicalMassGap Y →
+  Five.ContinuumLocalFieldOPEStressWard Y →
   Five.InteractingContinuumNontriviality Y
-asInteractingContinuumNontriviality nontrivial = record
+asInteractingContinuumNontriviality nontrivial gap local = record
   { Five.InteractingContinuumNontriviality.nontrivialQuantumYangMills =
       λ G →
         interactingWitnessIsLiteralClayNontriviality
-          nontrivial G (round77Witness nontrivial G)
+          nontrivial gap local G
+          (round77Witness nontrivial gap local G)
   ; Five.InteractingContinuumNontriviality.nontrivialityPreservedInLimit =
       λ G →
         interactingWitnessIsPreservedInLiteralLimit
-          nontrivial G (round77Witness nontrivial G)
+          nontrivial gap local G
+          (round77Witness nontrivial gap local G)
   }
 
 directH6GaussianWardGapCompilerLevel : ProofLevel
 directH6GaussianWardGapCompilerLevel =
   R77.round77NontrivialityDependencyCompilerLevel
 
--- H6 physical payment: the minimal local Ward kernel and standard Gaussian
--- same-H bridge on the exact H3 OS system, plus interpretation of the resulting
--- interacting witness in the literal Y endpoint predicates.
+-- H6 physical payment: a same-system semantic bridge saying the already
+-- constructed literal C theorem supplies the Gaussian Ward kernel on the exact
+-- H3 OS system and the already constructed B theorem supplies its SAME-H gap,
+-- plus interpretation of the resulting interacting witness in literal Y.
 directH6SameSystemPhysicalInstantiationLevel : ProofLevel
 directH6SameSystemPhysicalInstantiationLevel = conditional
