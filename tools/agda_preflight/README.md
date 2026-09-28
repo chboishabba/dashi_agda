@@ -453,7 +453,7 @@ The registered MCP tools are:
 ```text
 diagnose            read-only structural diagnostics for a target/rollup
 next_error          read-only highest-priority diagnostic
-affected            read-only reverse-import consumer frontier
+affected            read-only reverse-import consumer frontier; optionally scoped by within=Subject/Everything.agda
 cache_status        read-only persistent cache/index statistics
 semantic_status     read-only fresh/stale/unknown semantic snapshots
 apply_fix           source mutation through exact suggested edits
@@ -461,6 +461,22 @@ promote             explicit fail-closed external semantic promotion
 promotion_history   read-only persisted promotion receipts
 ping                liveness
 ```
+
+For MCP, `diagnose` defaults to at most 200 returned diagnostics and reports
+`diagnostics_total`, `diagnostics_returned`, and
+`diagnostics_truncated`. This prevents a large rollup from flooding agent
+context. Use `next_error` for the normal iterative repair loop.
+
+`affected` is explicit about completeness. Without `within`, it returns the
+frontier among modules already present in the persistent index and labels the
+scope `indexed-cache-only`. Passing, for example,
+
+```json
+{"target":"DASHI/Biology/Foo.agda","within":"DASHI/Biology/Everything.agda"}
+```
+
+first ensures that subject closure is indexed and returns only consumers inside
+it, labeled `subject-closure`.
 
 The mutation boundary is intentional:
 
@@ -482,6 +498,13 @@ The MCP process owns one long-lived `DashiAgdaService`, so SQLite/WAL state,
 OS page cache, persisted interfaces and diagnostic summaries are reused across
 tool calls. Each request still calls `SourceIndex.begin_request()`, ensuring
 external edits are observed rather than hidden by stale in-process parse state.
+
+MCP SDK v2 runs synchronous handlers on worker threads, while the analysis
+service owns a thread-affine SQLite connection. The adapter therefore registers
+all MCP tools as async wrappers that execute the synchronous service call
+directly on the server event-loop thread. Calls are intentionally serialized at
+that boundary; this preserves SQLite affinity and prevents concurrent source
+mutation races in `apply_fix` / `promote`.
 
 For a configured agda2lean semantic catalog/promoter, pass the same options as
 the JSONL service:
