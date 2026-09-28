@@ -22,13 +22,19 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateResponseFormulaCompiler
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
+
+falseNotTrue : false ≡ true → ⊥
+falseNotTrue ()
+
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
 
 ------------------------------------------------------------------------
 -- Literal compiler using the executable candidate code, not Direct.decide as
@@ -65,7 +71,6 @@ candidateRejectsSelectsSatisfiableResponse :
   ≡
   Cook.excludedMiddleFormula
 candidateRejectsSelectsSatisfiableResponse
-    {candidate = candidate}
     code
     input
     rejected
@@ -81,19 +86,9 @@ candidateRejectsSelectsSatisfiableResponse
 ... | false | exact =
   refl
 ... | true | exact =
-  impossible (sym exact)
-  where
-    impossible :
-      Direct.decide candidate input ≡ true →
-      candidateResponseFormula code input
-      ≡
-      Cook.excludedMiddleFormula
-    impossible decisionTrue
-      rewrite rejected in decisionTrue =
-      falseNotTrue decisionTrue
-      where
-        falseNotTrue : false ≡ true → _
-        falseNotTrue ()
+  ⊥-elim
+    (trueNotFalse
+      (trans exact rejected))
 
 candidateAcceptsSelectsUnsatisfiableResponse :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -105,7 +100,6 @@ candidateAcceptsSelectsUnsatisfiableResponse :
   ≡
   Direct.contradictionFormula
 candidateAcceptsSelectsUnsatisfiableResponse
-    {candidate = candidate}
     code
     input
     accepted
@@ -119,19 +113,9 @@ candidateAcceptsSelectsUnsatisfiableResponse
         code
         input
 ... | false | exact =
-  impossible (sym exact)
-  where
-    impossible :
-      Direct.decide candidate input ≡ false →
-      candidateResponseFormula code input
-      ≡
-      Direct.contradictionFormula
-    impossible decisionFalse
-      rewrite accepted in decisionFalse =
-      trueNotFalse decisionFalse
-      where
-        trueNotFalse : true ≡ false → _
-        trueNotFalse ()
+  ⊥-elim
+    (falseNotTrue
+      (trans exact accepted))
 ... | true | exact =
   refl
 
