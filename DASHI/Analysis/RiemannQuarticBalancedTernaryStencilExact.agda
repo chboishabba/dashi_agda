@@ -167,6 +167,53 @@ targetWord : String
 targetWord = "0++00000"
 
 ------------------------------------------------------------------------
+-- 4b. Exact sparse-support complexity.
+------------------------------------------------------------------------
+
+tritSupport : SignedTrit → Nat
+tritSupport minus = 1
+tritSupport zeroTrit = 0
+tritSupport plus = 1
+
+stencilSupport : Stencil8 → Nat
+stencilSupport stencil =
+  tritSupport (e7 stencil)
+  + tritSupport (e6 stencil)
+  + tritSupport (e5 stencil)
+  + tritSupport (e4 stencil)
+  + tritSupport (e3 stencil)
+  + tritSupport (e2 stencil)
+  + tritSupport (e1 stencil)
+  + tritSupport (e0 stencil)
+
+poleStencilSupportIsTwo :
+  stencilSupport poleStencil ≡ 2
+poleStencilSupportIsTwo = refl
+
+originStencilSupportIsOne :
+  stencilSupport originStencil ≡ 1
+originStencilSupportIsOne = refl
+
+jStencilSupportIsThree :
+  stencilSupport jStencil ≡ 3
+jStencilSupportIsThree = refl
+
+targetStencilSupportIsTwo :
+  stencilSupport targetStencil ≡ 2
+targetStencilSupportIsTwo = refl
+
+totalStencilSupport : Nat
+totalStencilSupport =
+  stencilSupport poleStencil
+  + stencilSupport originStencil
+  + stencilSupport jStencil
+  + stencilSupport targetStencil
+
+totalStencilSupportIsEight :
+  totalStencilSupport ≡ 8
+totalStencilSupportIsEight = refl
+
+------------------------------------------------------------------------
 -- 5. Exact 3-adic depth-five split.
 ------------------------------------------------------------------------
 
@@ -286,6 +333,38 @@ primitiveRowCertificateDoesNotDetermineDepthProfile :
 primitiveRowCertificateDoesNotDetermineDepthProfile ()
 
 ------------------------------------------------------------------------
+-- 5c. Quotient stencil after extracting the common 3^5 block.
+--
+--   O coefficient = 1
+--   J2 coefficient = 5 = 3^2 - 3 - 1 = (1--)_3
+--   S coefficient = 4 = 3 + 1 = (11)_3
+------------------------------------------------------------------------
+
+depthFiveOriginQuotient : Nat
+depthFiveOriginQuotient = quotient originDepthFive
+
+depthFiveJQuotient : Nat
+depthFiveJQuotient = quotient jDepthFive
+
+depthFiveTargetQuotient : Nat
+depthFiveTargetQuotient = quotient targetDepthFive
+
+depthFiveQuotientVectorIsOneFiveFour :
+  depthFiveOriginQuotient ≡ 1
+  × depthFiveJQuotient ≡ 5
+  × depthFiveTargetQuotient ≡ 4
+depthFiveQuotientVectorIsOneFiveFour =
+  refl , refl , refl
+
+depthFiveJQuotientBalanced :
+  pow3 2 ≡ depthFiveJQuotient + 3 + 1
+depthFiveJQuotientBalanced = refl
+
+depthFiveTargetQuotientBalanced :
+  depthFiveTargetQuotient ≡ 3 + 1
+depthFiveTargetQuotientBalanced = refl
+
+------------------------------------------------------------------------
 -- 6. Shift-polynomial normal form.
 --
 -- At X=3:
@@ -376,6 +455,8 @@ record RiemannQuarticBalancedTernaryStencilBoundary : Set where
   field
     primitiveCoefficientVectorOwned : Bool
     sparseSignedStencilOwned : Bool
+    totalSignedMonomialSupportIsEight : Bool
+    depthFiveQuotientStencilOneFiveFourOwned : Bool
     valuationProfileZeroFiveFiveFiveOwned : Bool
     exactUnitFactorCertificatesOwned : Bool
     poleCoefficientCertifiedModThreeUnit : Bool
@@ -392,6 +473,6 @@ canonicalRiemannQuarticBalancedTernaryStencilBoundary :
   RiemannQuarticBalancedTernaryStencilBoundary
 canonicalRiemannQuarticBalancedTernaryStencilBoundary =
   riemann-quartic-balanced-ternary-stencil-boundary
-    true true true true true true true true true
+    true true true true true true true true true true true
     true false
     false false
