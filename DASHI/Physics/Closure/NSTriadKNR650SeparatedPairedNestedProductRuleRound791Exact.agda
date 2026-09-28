@@ -321,7 +321,8 @@ round791IntroducesEstimateIsFalse :
 round791IntroducesEstimateIsFalse = refl
 
 round791W2ClosedIsFalse :
-  round791W2ClosedIsFalse = refl
+  round791W2Closed ≡ false
+round791W2ClosedIsFalse = refl
 
 round791ClayPromotionIsFalse :
   round791ClayPromotion ≡ false
