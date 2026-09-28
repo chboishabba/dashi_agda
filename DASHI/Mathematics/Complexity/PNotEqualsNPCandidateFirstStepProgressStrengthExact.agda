@@ -46,9 +46,10 @@ UniversalCandidateFirstStepProgress :
   DirectDP.DirectDPChargedStateConstructor →
   Set₁
 UniversalCandidateFirstStepProgress
+    {cost}
     initialFor
     constructor =
-  (candidate : Direct.PolynomialSATDeciderCandidate _) →
+  (candidate : Direct.PolynomialSATDeciderCandidate cost) →
   Boundary.CandidateFirstStepProgress
     initialFor
     constructor
