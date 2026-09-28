@@ -246,6 +246,7 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p2PuncturedKernel2BidiNormalFormOwned : Bool
     p2TrialecticSharedNineObserverReconciliationOwned : Bool
     p2TrialecticNineObserverArithmeticLossPaid : Bool
+    p2TrialecticNineCentreOnlyResidualCodecOwned : Bool
     p2DuplicatedCentreTenToNineBridgeOwned : Bool
     p2BadPrimeLevelStructureBoundaryOwned : Bool
     p2Gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
@@ -274,6 +275,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
     true true true true true true true
     true true true
     true true true
-    true true true true true true true true true true true true true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true true true true true true true
     false false false
     missingP2MarkedArithmeticSource
