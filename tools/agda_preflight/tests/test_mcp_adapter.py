@@ -142,6 +142,7 @@ top = Set
     assert result["modules"][0] == "Mcp.A"
     assert result["modules"][1:] == ["Mcp.B", "Mcp.Top"]
     assert result["count"] == 3
+    assert result["scope"] == "indexed-cache-only"
 
 
 def test_mcp_read_only_tools_do_not_modify_source(tmp_path):
