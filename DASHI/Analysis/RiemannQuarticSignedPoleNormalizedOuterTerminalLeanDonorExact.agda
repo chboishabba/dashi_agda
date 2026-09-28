@@ -231,8 +231,8 @@ record FourPrimitiveRouteBoundary : Set where
       fourthPrimitiveScaleCancellationExact ≡ true
     physicalBoundStillOpen :
       unconditionalPhysicalFourthPrimitiveBoundPaid ≡ false
-    ibpCompilerStillOpen :
-      fourfoldIntegrationByPartsCompilerPaid ≡ false
+    ibpCompilerPaid :
+      fourfoldIntegrationByPartsCompilerPaid ≡ true
     conditionalSnFirewall :
       rhConditionalSnMayPayClayDebt ≡ false
 
@@ -245,10 +245,10 @@ canonicalFourPrimitiveRouteBoundary : FourPrimitiveRouteBoundary
 canonicalFourPrimitiveRouteBoundary =
   four-primitive-route-boundary
     true true true
-    false false false
+    false true false
     refl refl refl refl
     "integral_[eta0,Q] ((Q-q)^3/6) * r^4*D(t-r*q,t+r*q) dq = integral_[r*eta0,r*Q] ((r*Q-s)^3/6) * D(t-s,t+s) ds"
-    "Prove an unconditional bound for the physical fourth discrepancy primitive, then weld a fourfold integration-by-parts compiler for the exact outer kernel."
+    "Fourfold AC integration-by-parts is source-written.  The remaining analytic donor is an unconditional bound for the same physical fourth primitive / quartic-cap N-mu pairing, plus the routine outer-staircase interval-integrability and boundary-decay welds."
 
 ------------------------------------------------------------------------
 -- FOUR-PRIMITIVE KERNEL / AC COMPILER UPDATE
@@ -331,6 +331,82 @@ canonicalFourPrimitiveKernelCompilerBoundary =
     refl refl refl refl
     "integral C'_W*A4 = [C'P1]-[C''P2]+[C'''P3]-[C''''P4] + integral C'''''_W*P4, with the primitive ladder interpreted a.e./AC"
     "Identify the physical fourth primitive with the literal N-mu pairing against the quartic cap weight (S-max(s0,abs(y-t)))_+^4/24, then prove an unconditional bound on that same cap pairing."
+
+------------------------------------------------------------------------
+-- QUARTIC CAP SAME-OBJECT IDENTIFICATION
+--
+-- New Lean source:
+--
+--   Synthesis/RiemannZetaMuExactAbelAC.lean
+--   Synthesis/RiemannQuarticSymmetricCapAC.lean
+--
+-- Commits:
+--
+--   e033f9f2a7be35cddd8cf68d20f877cb3858bfd7
+--     exact N-mu Abel identity extended to absolutely-continuous tests
+--
+--   3b6cf8b83f10ed5145f7a94efaf43ae1111505b9
+--     theorem-bearing AC quartic symmetric cap with odd cubic derivative
+--
+--   5c7c80971224c874e6589c7367b846452da70712
+--     identify the AC cap N-mu pair with the physical fourth primitive
+--
+-- The physical fourth primitive is therefore not merely "like" an S_4
+-- coordinate.  It is the literal same-object weighted pairing
+--
+--   zetaWindowMinusMuPair
+--     (t-S) (t+S)
+--     quarticSymmetricCapAC
+--
+-- where the cap derivative is
+--
+--   +(S-s)^3/6 on the left outer annulus,
+--   0           on the already-paid inner window,
+--   -(S-s)^3/6 on the right outer annulus.
+--
+-- Exact left/right Abel pairing collapses this to
+--
+--   integral_[s0,S] ((S-s)^3/6) D(t-s,t+s) ds.
+--
+-- No pointwise derivative is assigned at the inner kink.  The AC Abel
+-- compiler uses the actual a.e. derivative.
+------------------------------------------------------------------------
+
+record QuarticCapPairBoundary : Set where
+  constructor quartic-cap-pair-boundary
+  field
+    exactNMuAbelForACTestsSourceWritten : Bool
+    acQuarticCapSourceWritten : Bool
+    capOuterEndpointsZeroSourceWritten : Bool
+    capDerivativeOddSourceWritten : Bool
+    capPairEqualsPhysicalFourthPrimitiveSourceWritten : Bool
+
+    unconditionalCapPairBoundPaid : Bool
+    primeSideExplicitFormulaForThisCapPaid : Bool
+    rhConditionalSnUsed : Bool
+
+    capIdentificationPaid :
+      capPairEqualsPhysicalFourthPrimitiveSourceWritten ≡ true
+    capBoundStillOpen :
+      unconditionalCapPairBoundPaid ≡ false
+    primeSideShortcutNotClaimed :
+      primeSideExplicitFormulaForThisCapPaid ≡ false
+    noCircularSn :
+      rhConditionalSnUsed ≡ false
+
+    exactCapPairIdentity : String
+    remainingCapWall : String
+
+open QuarticCapPairBoundary public
+
+canonicalQuarticCapPairBoundary : QuarticCapPairBoundary
+canonicalQuarticCapPairBoundary =
+  quartic-cap-pair-boundary
+    true true true true true
+    false false false
+    refl refl refl refl
+    "physicalFourthPrimitive(S) = zetaWindowMinusMuPair(t-S,t+S,quarticSymmetricCapAC) = integral_[s0,S] ((S-s)^3/6)*D(t-s,t+s) ds"
+    "Prove an unconditional quantitative bound for this exact AC quartic-cap N-mu pairing, strong enough after the C^5 fourfold-IBP kernel weighting and explicit boundary terms to leave the terminal positive slack."
 
 finiteQRepresentationDebtIsPaid :
   NormalizedOuterTerminalBoundary.finiteQEstimateCompilesToHighContradictionSourceWritten
