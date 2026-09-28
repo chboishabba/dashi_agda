@@ -26,10 +26,12 @@ import DASHI.Interop.SourceAttributionShapePolicyExact as AttributionPolicy
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Action
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
-import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
+import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact as P2
+import DASHI.Moonshine.Base369P3ConstantTernaryActionGroupoidExact as P3
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2Bridge
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.BalancedTernaryHypercubeAntipodalOrbitCountExact as HyperOrbit
 
 ------------------------------------------------------------------------
@@ -63,8 +65,8 @@ p3ExpectedResidualIsTwo = refl
 ------------------------------------------------------------------------
 
 TargetState : ExceptionalResidualPrime → Set
-TargetState residualP2 = Small.P2ResidualObject
-TargetState residualP3 = Small.ConstantTernaryState
+TargetState residualP2 = P2.P2Base369State
+TargetState residualP3 = SSP.SSPTrit
 
 TargetSymmetry : ExceptionalResidualPrime → Set
 TargetSymmetry residualP2 = ⊤
@@ -75,18 +77,18 @@ targetAction :
   Action.InvertibleSymmetryAction
     (TargetState prime)
     (TargetSymmetry prime)
-targetAction residualP2 = Small.p2DiscreteAction
-targetAction residualP3 = Small.constantC2Action
+targetAction residualP2 = P2.p2RetainedAction
+targetAction residualP3 = P3.p3C2Action
 
 targetOrbits :
   (prime : ExceptionalResidualPrime) →
   Orbit.OrbitPresentation (targetAction prime)
-targetOrbits residualP2 = Small.p2DiscreteOrbitPresentation
-targetOrbits residualP3 = Small.constantTernaryOrbitPresentation
+targetOrbits residualP2 = P2.p2RetainedOrbitPresentation
+targetOrbits residualP3 = P3.p3OrbitPresentation
 
 targetPi0Count : ExceptionalResidualPrime → Nat
-targetPi0Count residualP2 = Small.p2RetainedOrientationPi0Count
-targetPi0Count residualP3 = Small.constantTernaryPi0Count
+targetPi0Count residualP2 = P2.p2RetainedPi0Count
+targetPi0Count residualP3 = 2
 
 targetPi0MatchesExpectedResidual :
   (prime : ExceptionalResidualPrime) →
@@ -113,7 +115,7 @@ p3TargetPi0IsOneTritAntipodalOrbitCount :
 p3TargetPi0IsOneTritAntipodalOrbitCount = refl
 
 p2FiveOrbitBaseIsTwoTritAntipodalOrbitCount :
-  Small.p2ResidualPi0Count
+  P2.p2GaugePi0Count
   ≡ HyperOrbit.antipodalOrbitCount 2
 p2FiveOrbitBaseIsTwoTritAntipodalOrbitCount = refl
 
