@@ -181,6 +181,10 @@ import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as Ar
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as ArichetaIgusa
 import DASHI.Moonshine.OggSSPSmallPrimePadicBoundStratumQuotientComparisonExact as PadicStrata
 import DASHI.Moonshine.OggSSPSmallPrimeMixedCharacteristicTwistedCentralizerCutsetExact as MixedPB
+import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVRBrauer
+import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
+import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
+import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as PBTate
 import DASHI.Moonshine.OggSSP2B3BPadicAnnihilationSlopeComparisonExact as PadicSlope
 import DASHI.Moonshine.OggSSPSmallPrimeExternalBridgeDoubleMismatchExact as ExternalMismatch
 import DASHI.Moonshine.OggSSPSmallPrimePadicMoonshineOrderBoundComparisonExact as CMTPadicBound
@@ -287,6 +291,26 @@ mixedCharacteristicPBCutsetBoundary :
   MixedPB.MixedCharacteristicTwistedCentralizerCutsetBoundary
 mixedCharacteristicPBCutsetBoundary =
   MixedPB.canonicalMixedCharacteristicTwistedCentralizerCutsetBoundary
+
+pbIntegralTateBoundary :
+  PBTate.PBIntegralTateBridgeBoundary
+pbIntegralTateBoundary =
+  PBTate.canonicalPBIntegralTateBridgeBoundary
+
+threeBTateValuationAuditBoundary :
+  ThreeBTateAudit.ThreeBIntegralTateTraceValuationAuditBoundary
+threeBTateValuationAuditBoundary =
+  ThreeBTateAudit.canonicalThreeBIntegralTateTraceValuationAuditBoundary
+
+twoBTateValuationAuditBoundary :
+  TwoBTateAudit.TwoBIntegralTateTraceValuationAuditBoundary
+twoBTateValuationAuditBoundary =
+  TwoBTateAudit.canonicalTwoBIntegralTateTraceValuationAuditBoundary
+
+dvrBrauerCutsetBoundary :
+  DVRBrauer.DVRLengthBrauerCutsetBoundary
+dvrBrauerCutsetBoundary =
+  DVRBrauer.canonicalDVRLengthBrauerCutsetBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -460,6 +484,13 @@ record ArithmeticIndependent369Frontier : Set where
     pBTwistedGeneralizedMoonshineObjectSourced : Bool
     mixedCharacteristicPBTwistedLocalizationCutsetPaid : Bool
     mixedCharacteristicPBTwistedLocalizationAuthorityPaid : Bool
+    pbIntegralModPTateCohomologyObjectSourced : Bool
+    pbTateBadLevelLocalizationPaid : Bool
+    threeBTateRawCoefficientShortcutRejected : Bool
+    twoBTateRawCoefficientShortcutRejected : Bool
+    uranoFiniteLengthDVRBrauerFrameworkSourced : Bool
+    uranoNormalizedCompositionLengthFormulaSourced : Bool
+    dvrLengthBadLevelLocalizationAuthorityPaid : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -594,6 +625,13 @@ canonicalArithmeticIndependent369Frontier =
     ; pBTwistedGeneralizedMoonshineObjectSourced = true
     ; mixedCharacteristicPBTwistedLocalizationCutsetPaid = true
     ; mixedCharacteristicPBTwistedLocalizationAuthorityPaid = false
+    ; pbIntegralModPTateCohomologyObjectSourced = true
+    ; pbTateBadLevelLocalizationPaid = false
+    ; threeBTateRawCoefficientShortcutRejected = true
+    ; twoBTateRawCoefficientShortcutRejected = true
+    ; uranoFiniteLengthDVRBrauerFrameworkSourced = true
+    ; uranoNormalizedCompositionLengthFormulaSourced = true
+    ; dvrLengthBadLevelLocalizationAuthorityPaid = false
 
     ; p2ExternalMonsterResidualRecognitionPaid = false
     ; p3ExternalMonsterResidualRecognitionPaid = false
