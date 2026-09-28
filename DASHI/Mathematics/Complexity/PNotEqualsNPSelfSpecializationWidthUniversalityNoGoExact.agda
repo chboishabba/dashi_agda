@@ -25,7 +25,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversal
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (just)
@@ -959,4 +959,216 @@ fullWidthCompatibleBodyStillYieldsDecisionFailure =
 --
 --   does the SPECIFIC SAT-diagonal body still admit a width-preserving payload
 --   embedding, or does its candidate/rejection semantics forbid one?
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- ALL-QUOTES ASYMMETRIC-GADGET PROMOTION FIREWALL
+--
+-- The local reject gadget preserves arbitrary payload semantics.  The obvious
+-- attempted promotion is therefore:
+--
+--   candidate rejects quoted output -> rejectWidthGadget payload
+--   candidate accepts quoted output -> constant false
+--
+-- for EVERY quoted program.
+--
+-- This section proves that implementing exactly that quote-dependent body is
+-- already enough to build SATDiagonalBody.  With a diagonal compiler, the
+-- existing Kleene bridge therefore produces a concrete SAT decision failure.
+--
+-- So "make the width-preserving gadget work for all quotes" is not a missing
+-- low-level compiler optimization.  It is itself lower-bound-strength.
+------------------------------------------------------------------------
+
+candidateDecisionGadget :
+  Bool →
+  Cook.BooleanFormula →
+  Cook.BooleanFormula
+candidateDecisionGadget false payload =
+  rejectWidthGadget payload
+candidateDecisionGadget true payload =
+  acceptCollapseGadget payload
+
+record AllQuotesAsymmetricGadgetBody
+    {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost)
+    (system : TotalKleene.SpecializingProgramSystem)
+    (view : Diagonal.CookFormulaOutputView system)
+    (dynamicInput : TotalKleene.Input system) : Set₁ where
+  constructor all-quotes-asymmetric-gadget-body
+  field
+    bodyProgram :
+      TotalKleene.Program system
+
+    payload :
+      TotalKleene.Program system →
+      Cook.BooleanFormula
+
+    bodyFormulaExact :
+      (quoted : TotalKleene.Program system) →
+      Diagonal.asFormula view
+        (TotalKleene.run2
+          system
+          bodyProgram
+          quoted
+          dynamicInput)
+      ≡
+      candidateDecisionGadget
+        (Direct.decide
+          candidate
+          (Diagonal.asFormula view
+            (TotalKleene.run1
+              system
+              quoted
+              dynamicInput)))
+        (payload quoted)
+
+open AllQuotesAsymmetricGadgetBody public
+
+------------------------------------------------------------------------
+-- Exact compilation to the already-decisive diagonal-body interface.
+------------------------------------------------------------------------
+
+allQuotesAsymmetricGadgetBuildsSATDiagonalBody :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {system : TotalKleene.SpecializingProgramSystem}
+    {view : Diagonal.CookFormulaOutputView system}
+    {dynamicInput : TotalKleene.Input system} →
+  AllQuotesAsymmetricGadgetBody
+    candidate
+    system
+    view
+    dynamicInput →
+  Diagonal.SATDiagonalBody
+    candidate
+    system
+    view
+    dynamicInput
+allQuotesAsymmetricGadgetBuildsSATDiagonalBody
+    {candidate = candidate}
+    {system = system}
+    {view = view}
+    {dynamicInput = dynamicInput}
+    realization =
+  record
+    { Diagonal.bodyProgram =
+        bodyProgram realization
+    ; Diagonal.satisfiableIfQuotedProgramRejected =
+        satisfiableIfRejected
+    ; Diagonal.rejectsQuotedProgramIfBodySatisfiable =
+        rejectsIfBodySatisfiable
+    }
+  where
+    quotedFormula :
+      TotalKleene.Program system →
+      Cook.BooleanFormula
+    quotedFormula quoted =
+      Diagonal.asFormula view
+        (TotalKleene.run1
+          system
+          quoted
+          dynamicInput)
+
+    bodyFormula :
+      TotalKleene.Program system →
+      Cook.BooleanFormula
+    bodyFormula quoted =
+      Diagonal.asFormula view
+        (TotalKleene.run2
+          system
+          (bodyProgram realization)
+          quoted
+          dynamicInput)
+
+    exactAt :
+      (quoted : TotalKleene.Program system) →
+      bodyFormula quoted
+      ≡
+      candidateDecisionGadget
+        (Direct.decide candidate
+          (quotedFormula quoted))
+        (payload realization quoted)
+    exactAt =
+      bodyFormulaExact realization
+
+    satisfiableIfRejected :
+      (quoted : TotalKleene.Program system) →
+      Direct.decide
+        candidate
+        (quotedFormula quoted)
+      ≡ false →
+      Cook.Satisfiable
+        (bodyFormula quoted)
+    satisfiableIfRejected quoted rejected
+        rewrite rejected =
+      subst
+        Cook.Satisfiable
+        (sym (exactAt quoted))
+        (rejectWidthGadgetSatisfiable
+          (payload realization quoted))
+
+    rejectsIfBodySatisfiable :
+      (quoted : TotalKleene.Program system) →
+      Cook.Satisfiable
+        (bodyFormula quoted) →
+      Direct.decide
+        candidate
+        (quotedFormula quoted)
+      ≡ false
+    rejectsIfBodySatisfiable quoted bodySat
+        with Direct.decide candidate (quotedFormula quoted)
+    ... | false =
+      refl
+    ... | true =
+      ⊥-elim
+        (acceptCollapseGadgetUnsatisfiable
+          (payload realization quoted)
+          (subst
+            Cook.Satisfiable
+            (exactAt quoted)
+            bodySat))
+
+------------------------------------------------------------------------
+-- Main firewall: all-quotes promotion already crosses the SAT lower-bound seam.
+------------------------------------------------------------------------
+
+allQuotesWidthPreservingGadgetStillYieldsDecisionFailure :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {system : TotalKleene.SpecializingProgramSystem}
+    {view : Diagonal.CookFormulaOutputView system}
+    {dynamicInput : TotalKleene.Input system} →
+  TotalKleene.DiagonalCompiler system →
+  AllQuotesAsymmetricGadgetBody
+    candidate
+    system
+    view
+    dynamicInput →
+  Direct.SATDecisionFailure candidate
+allQuotesWidthPreservingGadgetStillYieldsDecisionFailure
+    compiler
+    realization =
+  Diagonal.kleeneBodyGivesSATDecisionFailure
+    compiler
+    (allQuotesAsymmetricGadgetBuildsSATDiagonalBody
+      realization)
+
+------------------------------------------------------------------------
+-- Updated universality cut.
+--
+-- Paid:
+--   * generic self-specialization can emit arbitrary formulas;
+--   * rejected-quote SAT polarity can preserve arbitrary payload semantics;
+--   * indexed Shannon residual-width witnesses survive one fresh reject guard.
+--
+-- Killed:
+--   * the hope that SAT polarity alone forces small future width;
+--   * the hope that merely promoting the local gadget uniformly over all quotes
+--     is a cheap next implementation step.
+--
+-- The remaining positive route must exploit a stronger special law of the
+-- actual bounded body which both restricts residual width and is provable
+-- BEFORE a full all-quotes opposite-SAT body has been constructed.
 ------------------------------------------------------------------------
