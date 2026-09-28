@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedKPT5SameObjectExact 
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -117,11 +118,10 @@ asSignedCovarianceIdentification
       markedKPMixedDerivativeIsFiniteT5ConnectedCovariance sameObject
   ; Tail.TwoWilsonSignedCovarianceIdentification.connectingClusterMeetsBothWilsonSupports =
       λ cutoff left right →
-        ∀ cluster →
-        cluster Tail.∈ Tail.connectingClusters family cutoff left right →
+        ∀ cluster
+          (membership : cluster ∈ Tail.connectingClusters family cutoff left right) →
         Tail.contributingClusterConnectsBothSupports
-          payment cutoff left right cluster
-          _
+          payment cutoff left right cluster membership
   }
 
 markedKPT5MixedLogSameObjectCompilerLevel : ProofLevel
