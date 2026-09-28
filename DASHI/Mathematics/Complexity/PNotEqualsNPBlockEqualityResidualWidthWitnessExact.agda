@@ -38,6 +38,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPSemanticQuotientExponentialNoGoE
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
+import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 
 ------------------------------------------------------------------------
 -- Canonical left/right block embeddings.
@@ -579,9 +581,8 @@ equalityPrefixResidualEqualImpliesPrefixEqual
     left
     right
     residualEqual =
-  Equality.prefixAtIndexInjective
-    (Equality.indexedResidualFunctionInjective
-      pointwiseIndexed)
+  Bits.bitsToFinInjective
+    indicesEqual
   where
     leftIndex :
       Fin (Bits.bitCardinality _)
@@ -592,24 +593,6 @@ equalityPrefixResidualEqualImpliesPrefixEqual
       Fin (Bits.bitCardinality _)
     rightIndex =
       Bits.bitsToFin right
-
-    pointwiseVec :
-      (remaining : Vec Bool _) →
-      Equality.equalityResidual left remaining
-      ≡
-      Equality.equalityResidual right remaining
-    pointwiseVec remaining =
-      trans
-        (sym
-          (equalityResidualEvaluation
-            left
-            remaining))
-        (trans
-          (residualEqual
-            (vecAssignment remaining))
-          (equalityResidualEvaluation
-            right
-            remaining))
 
     pointwiseIndexed :
       (remaining : Vec Bool _) →
@@ -625,24 +608,23 @@ equalityPrefixResidualEqualImpliesPrefixEqual
         Bits.finToBitsAfterBitsToFin left
         |
         Bits.finToBitsAfterBitsToFin right =
-      pointwiseVec remaining
+      trans
+        (sym
+          (equalityResidualEvaluation
+            left
+            remaining))
+        (trans
+          (residualEqual
+            (vecAssignment remaining))
+          (equalityResidualEvaluation
+            right
+            remaining))
 
     indicesEqual :
       leftIndex ≡ rightIndex
     indicesEqual =
       Equality.indexedResidualFunctionInjective
         pointwiseIndexed
-
-    -- Re-open canonical bit vectors after index equality.
-    prefixEquality :
-      left ≡ right
-    prefixEquality =
-      trans
-        (sym
-          (Bits.finToBitsAfterBitsToFin left))
-        (trans
-          (cong Bits.finToBits indicesEqual)
-          (Bits.finToBitsAfterBitsToFin right))
 
 ------------------------------------------------------------------------
 -- Literal exponential width witness.
@@ -673,13 +655,13 @@ blockEqualityResidualWidthWitness width =
 blockEqualityNeedsTwoPowerNStates :
   ∀ {width : Nat}
     {candidate :
-      DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact.TransitionTableCandidate
+      Candidate.TransitionTableCandidate
         (blockEqualityFormula width)} →
-  DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact.ArityTrackedTerminalAdmission
+  ArityTerminal.ArityTrackedTerminalAdmission
     candidate →
   Bits.bitCardinality width
   ≤
-  DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact.stateCount
+  Candidate.stateCount
     candidate
 blockEqualityNeedsTwoPowerNStates admission =
   Width.residualWidthBelowArityAdmittedCandidateStateCount
