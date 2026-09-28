@@ -27,6 +27,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; ∣_∣; NonNegative; nonNegative)
@@ -45,7 +46,7 @@ onePlusSourceRadius : ℚ
 onePlusSourceRadius = 1ℚ + sourceRadius
 
 sourceRadiusNonnegative : 0ℚ ≤ sourceRadius
-sourceRadiusNonnegative = ℚP.≤ᵇ⇒≤ _
+sourceRadiusNonnegative = ℚP.≤ᵇ⇒≤ tt
 
 onePlusSourceRadiusNonnegative : 0ℚ ≤ onePlusSourceRadius
 onePlusSourceRadiusNonnegative =
@@ -53,7 +54,7 @@ onePlusSourceRadiusNonnegative =
 
 twoMarkRadiusFitsSixFifths :
   onePlusSourceRadius * onePlusSourceRadius ≤ FP.markedInflation
-twoMarkRadiusFitsSixFifths = ℚP.≤ᵇ⇒≤ _
+twoMarkRadiusFitsSixFifths = ℚP.≤ᵇ⇒≤ tt
 
 record SourceInsideRadius (source : ℚ) : Set where
   constructor source-inside-radius
