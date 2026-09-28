@@ -659,7 +659,10 @@ record ExceptionalTermHypothesisSieveBoundary : Set where
     generatorPartitionTenTwoMatchRecorded : Bool
     generatorPartitionSelectorDebtRecorded : Bool
     wildLayerSectorTenTwoMatchRecorded : Bool
-    wildLayerSectorSameRuleAcrossPrimes : Bool
+    wildLayerSectorSameNumericRuleAcrossPrimes : Bool
+    wildLayerSectorUsesMixedAmbientObjects : Bool
+    sameAmbientRigidifiedProductSixThreeRecorded : Bool
+    sameAmbientRigidifiedProductRejected : Bool
     structuralCandidatesPromotedToAnalyticValuations : Bool
     preferredFinitePaymentMatchesTenTwo : Bool
     preferredFinitePaymentAlreadyIndependentAnalyticObject : Bool
@@ -670,4 +673,6 @@ canonicalExceptionalTermHypothesisSieveBoundary :
 canonicalExceptionalTermHypothesisSieveBoundary =
   exceptional-term-hypothesis-sieve-boundary
     true true true true true true
-    true true true true true false true false true
+    true true true true true
+    true true true true true
+    false true false true
