@@ -40,6 +40,7 @@ import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact as 
 import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExact as GM
 import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as Bridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as Aricheta
 
 ------------------------------------------------------------------------
 -- 1. Unified same-object authority.
@@ -56,6 +57,9 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
     twistedTraceValuation :
       GM.SmallPrimeTwistedTraceValuationAuthority
         generalizedMoonshineBridge
+
+    badLevelArichetaExtension :
+      Aricheta.BadLevelArichetaCentralizerExtensionAuthority
 
     ExceptionalObject :
       Set
@@ -79,6 +83,10 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
     toTwistedTraceTerm :
       ExceptionalObject ->
       GM.BadLevelLocalTerm twistedTraceValuation
+
+    toArichetaBadLevelObject :
+      ExceptionalObject ->
+      Aricheta.BadLevelObject badLevelArichetaExtension
 
     p2ValuationAgreesWithTerminal :
       exceptionalValuation Local.monsterTwo p2ExceptionalObject
@@ -130,6 +138,11 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
       Bool
     sameObjectRefinesGeneralizedMoonshineTwistedDescriptionIsTrue :
       sameObjectRefinesGeneralizedMoonshineTwistedDescription ≡ true
+
+    sameObjectRefinesArichetaBadLevelCentralizerDescription :
+      Bool
+    sameObjectRefinesArichetaBadLevelCentralizerDescriptionIsTrue :
+      sameObjectRefinesArichetaBadLevelCentralizerDescription ≡ true
 
     sourceOrProofAuthorityForValuation :
       Bool
@@ -234,13 +247,23 @@ asMonsterBridgeAuthority A =
     toLocalPrime Bridge.pThree = Local.monsterThree
 
 ------------------------------------------------------------------------
--- 4. No shortcut to the unified authority.
+-- 4. Source-backed bad-level centralizer cut.
+------------------------------------------------------------------------
+
+arichetaBadLevelBoundary :
+  Aricheta.ArichetaBadLevelDiagonalBoundary
+arichetaBadLevelBoundary =
+  Aricheta.canonicalArichetaBadLevelDiagonalBoundary
+
+------------------------------------------------------------------------
+-- 5. No shortcut to the unified authority.
 ------------------------------------------------------------------------
 
 data SOTATerminalAloneCreatesMonsterLocalBridge : Set where
 data GeneralizedMoonshineAloneCreatesMonsterLocalBridge : Set where
 data LocalCentralizerDefectsCreateSameObjectRecognition : Set where
 data MatchingTenTwoCreatesUnifiedAuthority : Set where
+data OffDiagonalArichetaBridgeAutomaticallySolvesDiagonal : Set where
 
 sotaTerminalAloneDoesNotCreateMonsterLocalBridge :
   SOTATerminalAloneCreatesMonsterLocalBridge -> ⊥
@@ -258,8 +281,12 @@ matchingTenTwoDoesNotCreateUnifiedAuthority :
   MatchingTenTwoCreatesUnifiedAuthority -> ⊥
 matchingTenTwoDoesNotCreateUnifiedAuthority ()
 
+offDiagonalArichetaBridgeDoesNotSolveDiagonal :
+  OffDiagonalArichetaBridgeAutomaticallySolvesDiagonal -> ⊥
+offDiagonalArichetaBridgeDoesNotSolveDiagonal ()
+
 ------------------------------------------------------------------------
--- 5. Live theorem wall.
+-- 6. Live theorem wall.
 ------------------------------------------------------------------------
 
 data SOTAMonsterLocalBridgeAuthorityInhabited : Set where
@@ -277,8 +304,10 @@ record SOTAMonsterLocalBridgeBoundary : Set where
   field
     sotaBadLevelTerminalRequired : Bool
     generalizedMoonshineTwistedBridgeRequired : Bool
+    arichetaBadLevelCentralizerExtensionRequired : Bool
     independent2B3BLocalCentralizerTargetRequired : Bool
     sameExceptionalObjectRequired : Bool
+    sameObjectArichetaBadLevelRefinementRequired : Bool
     terminalValuationAgreementRequired : Bool
     twistedTraceValuationAgreementRequired : Bool
     localCentralizerDefectRecognitionRequired : Bool
@@ -291,4 +320,4 @@ canonicalSOTAMonsterLocalBridgeBoundary :
   SOTAMonsterLocalBridgeBoundary
 canonicalSOTAMonsterLocalBridgeBoundary =
   sota-monster-local-bridge-boundary
-    true true true true true true true true true false true
+    true true true true true true true true true true true false true
