@@ -272,10 +272,50 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
 canonicalSmallCharacteristicArithmeticSourceBoundary :
   SmallCharacteristicArithmeticSourceBoundary
 canonicalSmallCharacteristicArithmeticSourceBoundary =
-  small-characteristic-arithmetic-source-boundary
-    true true true true true true true
-    true true true
-    true true true
-    true true true true true true true true true true true true true true true true true true true true true true true true true true true true true
-    false false false
-    missingP2MarkedArithmeticSource
+  record
+    { p2UniqueCoarseJConsumed = true
+    ; p3UniqueCoarseJConsumed = true
+    ; p3FrobeniusOrderTwoReceiptConsumed = true
+    ; p2ExactLaneKeyOwned = true
+    ; p3ExactLaneKeyOwned = true
+    ; p3MarkedActionSocketOwned = true
+    ; p2MarkedActionSocketOwned = true
+    ; antipodalTargetHierarchyOwned = true
+    ; p3TargetIsRank1AntipodalPresentation = true
+    ; p2RetainedTargetIsBinaryOverRank2 = true
+    ; wholeF9FrobeniusCarrierRejected = true
+    ; p3MarkedQuotientOrSubcarrierRequired = true
+    ; rawF4FrobeniusCarrierHasThreeOrbitDiagnostic = true
+    ; rawF4InsufficientForTenComponentRetainedTarget = true
+    ; p2UniformF4OrbitLiftRuledOut = true
+    ; p2StratifiedMarkedRefinementRequired = true
+    ; p2OneOneEightTargetRechartOwned = true
+    ; p2F4StabilizerTypeMatchesAntipodalTargetType = true
+    ; p2DependentOneOneEightMarkingNormalFormOwned = true
+    ; p2BalancedTernaryPuncturedPlaneNormalFormOwned = true
+    ; p2PuncturedKernel2BidiNormalFormOwned = true
+    ; p2TrialecticSharedNineObserverReconciliationOwned = true
+    ; p2TrialecticNineObserverArithmeticLossPaid = true
+    ; p2TrialecticNineCentreOnlyResidualCodecOwned = true
+    ; p2DualDependentCodecBidiOwned = true
+    ; p2DuplicatedCentreTenToNineBridgeOwned = true
+    ; p2BadPrimeLevelStructureBoundaryOwned = true
+    ; p2Gamma0FourMarkedSubgroupSchemeSocketOwned = true
+    ; p2Gamma0FourRefinedCompactificationBoundaryOwned = true
+    ; p2Gamma0FourTwoIsogenyChainSocketOwned = true
+    ; p2UniqueRawSupersingularGamma0FourSubgroupSourceBacked = true
+    ; p2RawSubgroupChoiceOneVsResidualTenSeparated = true
+    ; p2UniqueGamma0MarkingBidiContractOwned = true
+    ; p2SubgroupIsogenyChainBidiContractOwned = true
+    ; p2Gamma0FourOrderTwoSubflagRequired = true
+    ; p2NaiveFullE4PointSetIdentificationRuledOut = true
+    ; p2FourStateTorsionSeedRuledOutAsCompleteSource = true
+    ; movingFrobeniusRejectsIdentityOnlyRetainedTarget = true
+    ; frobeniusCompatibleTenOrbitPositiveControlOwned = true
+    ; p2MarkedLevelCMCoverRequired = true
+    ; p2MarkedLevelCMSourceSocketOwned = true
+    ; receiptMetadataPromotedToAction = false
+    ; p2SourceInhabited = false
+    ; p3SourceInhabited = false
+    ; firstResidual = missingP2MarkedArithmeticSource
+    }
