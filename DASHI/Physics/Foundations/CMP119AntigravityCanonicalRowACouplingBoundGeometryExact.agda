@@ -45,8 +45,8 @@ record CanonicalRowACouplingBoundGeometry
     couplingPositive : ∀ scale →
       Positive (LiteralTerminal.literalCouplingAt dataSet scale)
 
-    couplingBelowCanonicalGamma : ∀ scale →
-      LiteralTerminal.literalCouplingAt dataSet scale
+    terminalCouplingBelowCanonicalGamma :
+      LiteralTerminal.literalCouplingAt dataSet terminalScale
       ≤ RowA.canonicalQuarticResponseGamma rowA
 
     inverseCouplingRepresentation : ∀ scale →
@@ -94,7 +94,7 @@ terminalInverseThresholdDerived :
 terminalInverseThresholdDerived geometry =
   Converse.smallCouplingImpliesInverseThreshold
     (orderDataAt geometry (terminalScale geometry))
-    (couplingBelowCanonicalGamma geometry (terminalScale geometry))
+    (terminalCouplingBelowCanonicalGamma geometry)
 
 asCanonicalRowATerminalGeometry :
   ∀ {dataSet coherence source rowA} →
