@@ -39,7 +39,6 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
-import DASHI.Physics.Closure/NSTriadKNR291ActualGramDerivativeCompilerRound417Exact
 import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Exact as R417
 import DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exact as R416
 import DASHI.Physics.Closure.NSTriadKNFixedOutputFluxFiniteDerivativeCompilerRound412Exact as R412
@@ -141,10 +140,6 @@ module DifferenceAligned
       ≡
       R38.foldPower pairedTwoDifferenceCell items
     pairedOrbitFoldIsTwoDifferenceFold =
-      let
-        reality = Packet.realityAt S time
-        divergenceFree = Packet.divergenceFreeAt S time
-      in
       go items
       where
       reality = Packet.realityAt S time
