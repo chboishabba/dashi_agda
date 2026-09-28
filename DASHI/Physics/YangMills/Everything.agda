@@ -707,3 +707,7 @@ import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exa
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact
 
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSRationalContinuumH2Exact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayResidualExact
