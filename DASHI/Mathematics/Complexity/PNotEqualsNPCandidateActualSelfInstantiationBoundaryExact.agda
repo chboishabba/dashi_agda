@@ -251,22 +251,26 @@ record CandidateGeneratedInitialFormula
     (realization :
       CandidateInitialRootRealization candidate constructor) : Set₁ where
   field
+    generateInitialFormula :
+      CandidateCodeRealization.CandidateCode
+        (CandidateInitialRootRealization.code realization) →
+      Cook.BooleanFormula
+
     generatedFormula :
       Cook.BooleanFormula
 
-    generatedFromCandidateCode :
-      Cook.BooleanFormula
+    generatedFormulaExact :
+      generatedFormula
+      ≡
+      generateInitialFormula
+        (CandidateCodeRealization.candidateCode
+          (CandidateInitialRootRealization.code realization))
 
     currentFormulaIsGenerated :
       Q2.currentFormula
         (CandidateInitialRootRealization.initial realization)
       ≡
       generatedFormula
-
-    generatedFormulaIsCandidateComputation :
-      generatedFormula
-      ≡
-      generatedFromCandidateCode
 
 open CandidateGeneratedInitialFormula public
 
