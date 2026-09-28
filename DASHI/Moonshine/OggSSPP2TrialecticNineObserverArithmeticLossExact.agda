@@ -26,6 +26,7 @@ module DASHI.Moonshine.OggSSPP2TrialecticNineObserverArithmeticLossExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import Base369 as Base
 import DASHI.Moonshine.OggSSPP2Gamma0FourUniqueSupersingularSubgroupSeparationExact as Unique
@@ -73,9 +74,18 @@ sourceFixedStatesDistinct :
   (bidi : Bidi.UniqueGamma0FourMarkingBidi source) ->
   sourceFixedZero bidi ≡ sourceFixedOne bidi ->
   ⊥
-sourceFixedStatesDistinct bidi same
-  with cong (Bidi.toTarget bidi) same
-... | ()
+sourceFixedStatesDistinct bidi same =
+  fixedTargetsDistinct
+    (trans
+      (sym (Bidi.targetRoundTrip bidi Target.fixedZeroRefinement))
+      (trans
+        (cong (Bidi.toTarget bidi) same)
+        (Bidi.targetRoundTrip bidi Target.fixedOneRefinement)))
+  where
+    fixedTargetsDistinct :
+      Target.fixedZeroRefinement ≡ Target.fixedOneRefinement ->
+      ⊥
+    fixedTargetsDistinct ()
 
 ------------------------------------------------------------------------
 -- 3. But the shared trialectic-nine observer identifies them.
@@ -106,23 +116,32 @@ fixedArithmeticStatesCollideInTrialecticNine bidi =
   trans
     (fixedZeroObservationIsCentre bidi)
     (sym (fixedOneObservationIsCentre bidi))
-  where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- 4. Hence the shared nine observer cannot be full arithmetic same-object.
 ------------------------------------------------------------------------
 
-data SharedNineObserverIsInjectiveArithmeticRecognition
+record SharedNineObserverIsInjectiveArithmeticRecognition
   {source : Unique.MarkingOverUniqueGamma0FourSubgroup}
   (bidi : Bidi.UniqueGamma0FourMarkingBidi source) : Set where
+  field
+    observerInjective :
+      {left right : Unique.MarkedState source} ->
+      arithmeticToPhaseNine bidi left
+      ≡ arithmeticToPhaseNine bidi right ->
+      left ≡ right
+
+open SharedNineObserverIsInjectiveArithmeticRecognition public
 
 sharedNineObserverCannotBeInjectiveArithmeticRecognition :
   {source : Unique.MarkingOverUniqueGamma0FourSubgroup} ->
   (bidi : Bidi.UniqueGamma0FourMarkingBidi source) ->
   SharedNineObserverIsInjectiveArithmeticRecognition bidi ->
   ⊥
-sharedNineObserverCannotBeInjectiveArithmeticRecognition bidi ()
+sharedNineObserverCannotBeInjectiveArithmeticRecognition bidi recognition =
+  sourceFixedStatesDistinct bidi
+    (observerInjective recognition
+      (fixedArithmeticStatesCollideInTrialecticNine bidi))
 
 ------------------------------------------------------------------------
 -- 5. Exact missing datum.
