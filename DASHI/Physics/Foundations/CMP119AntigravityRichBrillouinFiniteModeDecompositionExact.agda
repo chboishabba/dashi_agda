@@ -9,6 +9,9 @@ import RealProperties as BishopP
 
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Carrier
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as Running
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinUVEdgeExact as RichNorm
+import DASHI.Physics.Foundations.CMP119AntigravityFiniteEllBishopShellNormalizationExact as FiniteEll
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Local
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -95,6 +98,33 @@ richCoefficientSameFiniteModeBetaZ
             (Local.betaZExact gaussian)
             BishopP.≃-refl))))
 
+fromFiniteEllAndRegularMatching :
+  ∀ {Mode gaussian rich running step}
+    (normalization :
+      RichNorm.CanonicalBishopRichBrillouinUVEdgeNormalization rich running)
+    (ellNormalization :
+      FiniteEll.FiniteEllBishopShellNormalization gaussian running step)
+    (richAdd : ∀ left right →
+      Bishop._≃_
+        (Rich.add rich left right)
+        (Bishop._+_ left right))
+    (regularMatching :
+      Bishop._≃_
+        (Rich.regularRemainder rich step)
+        (UV.embed (Local.epsilon gaussian))) →
+  RichBrillouinFiniteModeDecomposition gaussian rich step
+fromFiniteEllAndRegularMatching normalization ellNormalization richAdd regularMatching = record
+  { RichBrillouinFiniteModeDecomposition.richAddIsBishopAdd = richAdd
+  ; RichBrillouinFiniteModeDecomposition.shellSameFiniteUniversalTerm =
+      BishopP.≃-trans
+        (RichNorm.richScalarIntegralAtEdgeUsesSuccessorCanonicalNode
+          normalization _)
+        (BishopP.≃-symm
+          (FiniteEll.embeddedFiniteUniversalTermIsCanonicalShellFormula
+            ellNormalization))
+  ; RichBrillouinFiniteModeDecomposition.regularMatchingSameFiniteEpsilon =
+      regularMatching
+  }
 richBrillouinFiniteModeDecompositionCompilerLevel : ProofLevel
 richBrillouinFiniteModeDecompositionCompilerLevel = machineChecked
 
