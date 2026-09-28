@@ -134,6 +134,10 @@ import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceAlignedW2Round749Exact
 import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceSupportRound750Exact as R750
 import DASHI.Physics.Closure.NSTriadKNR650IntegratedDyadicDifferenceW2Round751Exact as R751
 import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceAnalyticWallRound752Exact as R752
+import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceGapFactorRound753Exact as R753
+import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceOrientedGapRound754Exact as R754
+import DASHI.Physics.Closure.NSTriadKNR650FiveClassDyadicGapChannelRound755Exact as R755
+import DASHI.Physics.Closure.NSTriadKNR650FiveClassSignedResidualWallRound756Exact as R756
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -356,6 +360,34 @@ round650W2IntegratedTwoDifferenceCarrierCanonical =
 round650CurrentW2DyadicResidualClosed : Bool
 round650CurrentW2DyadicResidualClosed =
   R752.round752W2ResidualNonnegativeClosed
+
+round650FiveClassExactlyTwoAnalyticLeaves : Bool
+round650FiveClassExactlyTwoAnalyticLeaves =
+  R756.round756ExactlyTwoPreferredAnalyticLeaves
+
+round650W2DyadicGapFactorExact : Bool
+round650W2DyadicGapFactorExact =
+  R756.round756DyadicGapFactorExact
+
+round650W2UsesExistingTotalUniqueFiveClassClassifier : Bool
+round650W2UsesExistingTotalUniqueFiveClassClassifier =
+  R756.round756UsesExistingTotalUniqueFiveClassClassifier
+
+round650W2SeparatedClassGapAtLeastThree : Bool
+round650W2SeparatedClassGapAtLeastThree =
+  R756.round756SeparatedClassGapAtLeastThree
+
+round650W2PairPowerSignKnown : Bool
+round650W2PairPowerSignKnown =
+  R756.round756PairPowerSignKnown
+
+round650W2ClasswiseSignedResidualLowerBoundClosed : Bool
+round650W2ClasswiseSignedResidualLowerBoundClosed =
+  R756.round756ClasswiseSignedResidualLowerBoundClosed
+
+round650W2AggregateResidualNonnegativeClosed : Bool
+round650W2AggregateResidualNonnegativeClosed =
+  R756.round756AggregateResidualNonnegativeClosed
 
 round650PositiveRatesAloneCloseCombinedToR406 : Bool
 round650PositiveRatesAloneCloseCombinedToR406 =
