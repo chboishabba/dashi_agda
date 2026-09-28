@@ -33,6 +33,7 @@ open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
@@ -444,8 +445,7 @@ repairedConstructorToQ2StepSystem constructor =
 ------------------------------------------------------------------------
 
 repairedArityRecurrenceFiniteCodeContradictsSATInP :
-  ∀ {cost : PR.PolynomialCostModel
-      DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary.BooleanFormula}
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     (satP : PR.InP cost Clay.SATLanguage)
     (constructor : RepairedArityTerminalStateConstructor)
     (initial : Q2.BoundedSelfReferenceState) →
