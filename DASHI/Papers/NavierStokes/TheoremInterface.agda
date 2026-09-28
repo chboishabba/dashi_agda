@@ -74,7 +74,7 @@ historicalAlternativeRouteStatement =
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is now the R752 two-leaf cut. W1 remains the cutoff-uniform signed weighted-work plus terminal canonical Q_+- payment. W2 is equivalently nonnegativity of one integrated R751 signed residual on the complete physical triad carrier. R744-R749 put critical production and the R723 nested/combined term on the same cyclic outer carrier; the production term must be swap-paired before the exact three-leg energy cancellation, after which it is exactly two differences of the actual dyadic critical weights. R750 proves those production-difference channels vanish on same-shell nonzero triads. R751 integrates this local carrier and R747/R746 identify its nonnegativity exactly with R742's integrated packet-strict-surplus <= combined-residue statement. R737-R740 remain the derivative-route no-shortcut theorem: the R684 weighted/input-Laplacian term cancels from local W2. R734 and R723/R730 remain exact alternate terminal coordinates, while R726 transport plus strict-margin R406 production remain sufficient factorizations rather than mandatory terminal leaves. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is now the R756 five-class signed-residual two-leaf cut. W1 remains the cutoff-uniform signed weighted-work plus terminal canonical Q_+- payment. W2 is equivalently nonnegativity of one integrated R751 signed residual on the complete physical triad carrier. R744-R749 put critical production and the R723 nested/combined term on the same cyclic outer carrier; the production term must be swap-paired before the exact three-leg energy cancellation, after which it is exactly two differences of the actual dyadic critical weights. R750 proves those production-difference channels vanish on same-shell nonzero triads. R751 integrates this local carrier and R747/R746 identify its nonnegativity exactly with R742's integrated packet-strict-surplus <= combined-residue statement. R737-R740 remain the derivative-route no-shortcut theorem: the R684 weighted/input-Laplacian term cancels from local W2. R734 and R723/R730 remain exact alternate terminal coordinates, while R726 transport plus strict-margin R406 production remain sufficient factorizations rather than mandatory terminal leaves. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -1439,6 +1439,26 @@ periodicClayMaxCutW2SameShellNonzeroProductionCorrectionVanishes =
 periodicClayMaxCutCurrentW2DyadicResidualClosed : Bool
 periodicClayMaxCutCurrentW2DyadicResidualClosed =
   R650.round650CurrentW2DyadicResidualClosed
+
+periodicClayMaxCutFiveClassExactlyTwoAnalyticLeaves : Bool
+periodicClayMaxCutFiveClassExactlyTwoAnalyticLeaves =
+  R650.round650FiveClassExactlyTwoAnalyticLeaves
+
+periodicClayMaxCutW2DyadicGapFactorExact : Bool
+periodicClayMaxCutW2DyadicGapFactorExact =
+  R650.round650W2DyadicGapFactorExact
+
+periodicClayMaxCutW2UsesExistingFiveClassClassifier : Bool
+periodicClayMaxCutW2UsesExistingFiveClassClassifier =
+  R650.round650W2UsesExistingTotalUniqueFiveClassClassifier
+
+periodicClayMaxCutW2PairPowerSignKnown : Bool
+periodicClayMaxCutW2PairPowerSignKnown =
+  R650.round650W2PairPowerSignKnown
+
+periodicClayMaxCutFiveClassSignedResidualLowerBoundClosed : Bool
+periodicClayMaxCutFiveClassSignedResidualLowerBoundClosed =
+  R650.round650W2ClasswiseSignedResidualLowerBoundClosed
 
 periodicClayMaxCutPositiveRatesAloneCloseCombinedToR406 : Bool
 periodicClayMaxCutPositiveRatesAloneCloseCombinedToR406 =
