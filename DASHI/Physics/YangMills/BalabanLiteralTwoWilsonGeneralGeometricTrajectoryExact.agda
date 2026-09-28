@@ -25,8 +25,10 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonGeneralGeometricTrajectory
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; _<_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base as Nat using (_≤_; z≤n; s≤s)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; ≤ℝ-refl; ≤ℝ-trans; mulMonotoneNonnegative)
@@ -74,6 +76,61 @@ rationalPowerNonnegative ratio ratioNN depth =
     (λ power → 0ℚ ≤ power)
     (Native.dyadicPowerIsPower ratio depth)
     (Coarsen.powerNonnegative ratio ratioNN depth)
+
+
+rationalPowerAtMostOne :
+  ∀ ratio →
+  0ℚ ≤ ratio →
+  ratio ≤ 1ℚ →
+  ∀ depth →
+  Power.rationalPower ratio depth ≤ 1ℚ
+rationalPowerAtMostOne ratio ratioNN ratio≤1 zero =
+  ℚP.≤-refl
+rationalPowerAtMostOne ratio ratioNN ratio≤1 (suc depth) =
+  let
+    productBelowOne :
+      Power.rationalPower ratio depth * ratio ≤ 1ℚ * 1ℚ
+    productBelowOne =
+      ℚP.*-mono-≤
+        (rationalPowerNonnegative ratio ratioNN depth)
+        (rationalPowerAtMostOne ratio ratioNN ratio≤1 depth)
+        ratioNN
+        ratio≤1
+  in
+  subst
+    (λ upper →
+      Power.rationalPower ratio (suc depth) ≤ upper)
+    (ℚP.*-identityˡ 1ℚ)
+    productBelowOne
+
+rationalPowerAntitone :
+  ∀ ratio →
+  0ℚ ≤ ratio →
+  ratio ≤ 1ℚ →
+  ∀ {near far : Nat} →
+  near Nat.≤ far →
+  Power.rationalPower ratio far ≤ Power.rationalPower ratio near
+rationalPowerAntitone ratio ratioNN ratio≤1
+    {zero} {far} z≤n =
+  rationalPowerAtMostOne ratio ratioNN ratio≤1 far
+rationalPowerAntitone ratio ratioNN ratio≤1
+    {suc near} {suc far} (s≤s proof) =
+  ℚP.*-mono-≤
+    (rationalPowerNonnegative ratio ratioNN far)
+    (rationalPowerAntitone ratio ratioNN ratio≤1 proof)
+    ratioNN
+    ℚP.≤-refl
+
+rationalPowerDistanceAntitoneFromStrictUnit :
+  ∀ ratio →
+  0ℚ ≤ ratio →
+  ratio < 1ℚ →
+  R388.RationalPowerDistanceAntitone ratio
+rationalPowerDistanceAntitoneFromStrictUnit ratio ratioNN ratio<1 = record
+  { R388.RationalPowerDistanceAntitone.ratioNonnegative = ratioNN
+  ; R388.RationalPowerDistanceAntitone.powerAntitone =
+      rationalPowerAntitone ratio ratioNN (ℚP.<⇒≤ ratio<1)
+  }
 
 embeddedPowerNonnegative :
   (embedding : Ring.RationalRealRingEmbedding) →
@@ -309,7 +366,6 @@ record LiteralTwoWilsonGeneralGeometricFamily
     amplitudeNonnegative : 0ℚ ≤ amplitude
     ratioNonnegative : 0ℚ ≤ ratio
     ratioStrictlyBelowOne : ratio < 1ℚ
-    ratioAntitone : R388.RationalPowerDistanceAntitone ratio
 
     dataAt :
       Nat → Observable → Observable →
@@ -383,7 +439,10 @@ finiteCovarianceGeneralGeometricBound
         source
         (amplitudeNonnegative family)
         (ratioNonnegative family)
-        (ratioAntitone family)
+        (rationalPowerDistanceAntitoneFromStrictUnit
+          (ratio family)
+          (ratioNonnegative family)
+          (ratioStrictlyBelowOne family))
   in
   reflectLessEqual (orderReflection family)
     (subst
