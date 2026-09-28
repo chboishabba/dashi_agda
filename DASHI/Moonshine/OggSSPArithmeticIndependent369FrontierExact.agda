@@ -64,21 +64,35 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * p=3 therefore retains the Deligne--Rapoport two-orbit local-incidence
 --     rank as the preferred finite candidate.
 --
--- STRONGEST SURVIVING STRUCTURAL CANDIDATE:
---   * p=2 has TWO sourced Artin--Schreier layers and FIVE canonical local
---     unoriented inertia sectors;
---   * p=3 has ONE sourced Artin--Schreier layer and TWO canonical local
---     Deligne--Rapoport orbit sectors;
---   * the SAME rule "wild layer count x local sector rank" gives 10 and 2.
+-- STRUCTURAL-CANDIDATE CORRECTION:
+--   * the arithmetic rule 2*5=10 and 1*2=2 remains exact;
+--   * BUT the wild-layer counts live on X(1)^rig, while the five p=2 sectors
+--     came from full 2T inertia and the two p=3 sectors from X0(3) incidence;
+--   * on the SAME rigidified X(1) inertia ambient the product is instead
+--       p=2 : 2*3=6,
+--       p=3 : 1*3=3,
+--     so the naive same-ambient interpretation is formally rejected;
+--   * p=2 rigidification has an exact 5->3 sector collapse, and p=3 the three
+--     X0(3) strata all forget to one X(1) supersingular point.
 --
--- REMAINING RESEARCH WALL:
---   * prove, by genuinely WILD local geometry/cohomology or direct corrected
---     q-expansion analysis, that one wild layer contributes one valuation copy
---     per canonical local sector;
---   * use that theorem to construct the SAME independent exceptional object on
---     both Duncan--Swisher descriptions;
---   * tame/linearly-reductive orbifold RR is not accepted as a shortcut;
---   * termwise redistribution across J_{p+}, J_p, J_{p^2} is optional;
+-- BAD-LEVEL STATUS:
+--   * Katz--Mazur already supply Ig(p^n) and p-power-level integral/local
+--     geometry, including full supersingular ramification;
+--   * raw Igusa ramification statistics do not give 10/2;
+--   * Kobin--Zureick-Brown's sourced ethereal multiplicity theorem assumes
+--     p does not divide the auxiliary level and therefore does not cover the
+--     p and p^2 Duncan--Swisher terms;
+--   * the missing comparison is Igusa/bad-level -> wild-root/inertia-localized
+--     -> corrected scalar q-expansion/Hauptmodul valuation, with analytic
+--     Fricke compatibility.
+--
+-- TERMINAL RESEARCH WALL:
+--   * inhabit BadLevelInertiaLocalizedFourthTermAuthority;
+--   * p=2 must restore the full five-sector information through gerbe/inertia
+--     localization before scalar pushforward;
+--   * p=3 must retain node/branch-pair data after pullback to X0(3);
+--   * the SAME independently defined exceptional object must refine both
+--     Duncan--Swisher descriptions and have valuation 10/2;
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -128,6 +142,14 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicWildGeneratorPartitionCandidateE
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildRiemannRochTransferCutsetExact as WildRR
 import DASHI.Moonshine.OggSSPSmallCharacteristicEtherealMultiplicityTransferExact as Ethereal
+import DASHI.Moonshine.OggSSPSmallCharacteristicRigidifiedInertiaLayerProductNoGoExact as RigidifiedProduct
+import DASHI.Moonshine.OggSSPP2BinaryTetrahedralRigidificationQuotientExact as P2Rigidification
+import DASHI.Moonshine.OggSSPP3DeligneRapoportDegeneracyTransportCutsetExact as P3Degeneracy
+import DASHI.Moonshine.OggSSPSmallCharacteristicCrossAmbientTransportPaymentExact as CrossAmbient
+import DASHI.Moonshine.OggSSPP2ScalarDivisorInertiaLocalizationCutsetExact as P2Localization
+import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelIgusaCorrectionCutsetExact as BadLevelIgusa
+import DASHI.Moonshine.OggSSPSmallCharacteristicIgusaRamificationNoGoExact as IgusaNoGo
+import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelInertiaLocalizedFourthTermCutsetExact as Terminal
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -315,6 +337,20 @@ record ArithmeticIndependent369Frontier : Set where
     sourcedEtherealMultiplicityIsLayerSectorRule : Bool
     tameRiemannRochShortcutRejected : Bool
 
+    rigidifiedInertiaSameAmbientProductRejected : Bool
+    p2FiveToThreeRigidificationCollapsePaid : Bool
+    p3DegeneracyCollapseToBasePointPaid : Bool
+    crossAmbientTransportCutsetPaid : Bool
+    crossAmbientTransportAuthorityPaid : Bool
+    p2ScalarDivisorFiveSectorShortcutRejected : Bool
+    p2FiveSectorLocalizationAuthorityPaid : Bool
+    classicalIgusaPpowerGeometryPaid : Bool
+    rawIgusaRamificationCandidateRejected : Bool
+    badLevelIgusaRootComparisonPaid : Bool
+    badLevelAnalyticFrickeCompatibilityPaid : Bool
+    terminalFourthTermCutsetPaid : Bool
+    terminalFourthTermAuthorityPaid : Bool
+
     p2CentralizerDepthTenCandidatePaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
     primeSpecificMechanismComparisonPaid : Bool
@@ -403,6 +439,20 @@ canonicalArithmeticIndependent369Frontier =
     ; sourcedEtherealMultiplicityPrecedentPaid = true
     ; sourcedEtherealMultiplicityIsLayerSectorRule = false
     ; tameRiemannRochShortcutRejected = true
+
+    ; rigidifiedInertiaSameAmbientProductRejected = true
+    ; p2FiveToThreeRigidificationCollapsePaid = true
+    ; p3DegeneracyCollapseToBasePointPaid = true
+    ; crossAmbientTransportCutsetPaid = true
+    ; crossAmbientTransportAuthorityPaid = false
+    ; p2ScalarDivisorFiveSectorShortcutRejected = true
+    ; p2FiveSectorLocalizationAuthorityPaid = false
+    ; classicalIgusaPpowerGeometryPaid = true
+    ; rawIgusaRamificationCandidateRejected = true
+    ; badLevelIgusaRootComparisonPaid = false
+    ; badLevelAnalyticFrickeCompatibilityPaid = false
+    ; terminalFourthTermCutsetPaid = true
+    ; terminalFourthTermAuthorityPaid = false
 
     ; p2CentralizerDepthTenCandidatePaid = true
     ; p3CentralizerDepthUniformLawRejected = true
