@@ -548,7 +548,7 @@ outgoingActualLinearAcquisitionStillOpen :
 outgoingActualLinearAcquisitionStillOpen = refl
 
 ------------------------------------------------------------------------
--- 5i. One selected-3B completion owns the whole canonical linear route.
+-- 5i. One selected-3B scaffold leaves only one action equation.
 ------------------------------------------------------------------------
 
 outgoingSelected3BLinearCompletionBoundary :
@@ -556,23 +556,35 @@ outgoingSelected3BLinearCompletionBoundary :
 outgoingSelected3BLinearCompletionBoundary =
   LinearCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
 
-outgoingSelected3BCompletionOwnsAcquisition :
-  LinearCompletion.oneCompletionOwnsAcquisition
+outgoingSelected3BScaffoldOwnsAcquisition :
+  LinearCompletion.scaffoldOwnsAcquisition
     outgoingSelected3BLinearCompletionBoundary
   ≡ true
-outgoingSelected3BCompletionOwnsAcquisition = refl
+outgoingSelected3BScaffoldOwnsAcquisition = refl
 
-outgoingSelected3BCompletionRequiresSameElementComposition :
-  LinearCompletion.sameElementCompositionRequired
+outgoingSelected3BScaffoldOwnsSameElementComposition :
+  LinearCompletion.scaffoldOwnsSameElementComposition
     outgoingSelected3BLinearCompletionBoundary
   ≡ true
-outgoingSelected3BCompletionRequiresSameElementComposition = refl
+outgoingSelected3BScaffoldOwnsSameElementComposition = refl
 
-outgoingSelected3BCompletionRequiresNormalizerMonsterWeld :
-  LinearCompletion.normalizerMonsterActionWeldRequired
+outgoingNormalizerToMonsterMapIsCompilerOutput :
+  LinearCompletion.normalizerToMonsterMapCompilerOutput
     outgoingSelected3BLinearCompletionBoundary
   ≡ true
-outgoingSelected3BCompletionRequiresNormalizerMonsterWeld = refl
+outgoingNormalizerToMonsterMapIsCompilerOutput = refl
+
+outgoingOnlyActionIntertwiningRemainsAfterScaffold :
+  LinearCompletion.onlyActionIntertwiningRemainsAfterScaffold
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingOnlyActionIntertwiningRemainsAfterScaffold = refl
+
+outgoingSelected3BCompletionCompilerPaid :
+  LinearCompletion.completionCompilerOwned
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BCompletionCompilerPaid = refl
 
 outgoingSelected3BCompletionCompilesLinearZetaHomAndRoute :
   LinearCompletion.linearZetaProducerCompilerOutput
@@ -595,12 +607,25 @@ outgoingSelected3BCompletionKeepsFiniteBasisOptional :
   ≡ true
 outgoingSelected3BCompletionKeepsFiniteBasisOptional = refl
 
+outgoingSelected3BScaffoldStillOpen :
+  LinearCompletion.scaffoldInhabitedHere
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ false
+outgoingSelected3BScaffoldStillOpen = refl
+
+outgoingSelected3BActionIntertwiningStillOpen :
+  LinearCompletion.actionIntertwiningInhabitedHere
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ false
+outgoingSelected3BActionIntertwiningStillOpen = refl
+
 outgoingSelected3BLinearCompletionStillOpen :
   LinearCompletion.completionInhabitedHere
     outgoingSelected3BLinearCompletionBoundary
   ≡ false
 outgoingSelected3BLinearCompletionStillOpen = refl
 
+------------------------------------------------------------------------
 ------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
