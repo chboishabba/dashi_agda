@@ -26,6 +26,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
+import DASHI.Core.FibreRestrictionCore as Fibre
 import DASHI.Core.FibrePreservingDynamicsExact as Dynamics
 import DASHI.Core.ProvenanceBearingQuotient as Quotient
 import DASHI.Core.ProvenanceFibreDynamicsReceiptExact as ReceiptDynamics
@@ -54,7 +55,7 @@ open MarkedArithmeticResidualCover public
 
 coverCore :
   MarkedArithmeticResidualCover ->
-  DASHI.Core.FibreRestrictionCore.FibreRestrictionCore
+  Fibre.FibreRestrictionCore
 coverCore cover =
   Sectioned.sectionedProjectionCore (projection cover)
 
