@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalTwoWeightKoteckyPreissExact 
 import DASHI.Physics.YangMills.BalabanEnumeratedMarkedKoteckyPreissExact as Enumerated
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalPolymerIdentificationExact as Identified
 
 record LiteralTwoWilsonPhysicalKoteckyPreissFamily
     (Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume : Set)
@@ -150,3 +151,129 @@ literalPhysicalMarkedLogPartitionExpansionExact
   Marked.markedLogPartitionExpansionExact
     (asTwoWilsonSourceParameterizedKP family)
     cutoff left right sourceLeft sourceRight
+
+
+------------------------------------------------------------------------
+-- Preferred source-first family.
+--
+-- Each source point supplies the concrete physical-polymer same-object theorem,
+-- not a preassembled PhysicalTerminalTwoWeightKPPackage.  The latter is
+-- compiler output through Identified.asPhysicalTerminalTwoWeightKPPackage.
+------------------------------------------------------------------------
+
+record LiteralTwoWilsonIdentifiedKoteckyPreissFamily
+    (Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume : Set)
+    (PhysicalIncompatible : Polymer → Polymer → Set)
+    : Set₂ where
+  field
+    volumeOfCutoff : Nat → FiniteVolume
+
+    identifiedAt :
+      Nat → Observable → Observable → Source → Source →
+      Identified.LiteralTwoWilsonPhysicalPolymerIdentification
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible
+
+    enumeratedAt :
+      ∀ cutoff left right sourceLeft sourceRight →
+      Enumerated.EnumeratedKPClusterFamily
+        (Identified.kpData
+          (identifiedAt cutoff left right sourceLeft sourceRight))
+
+    commonClusters :
+      Nat → Observable → Observable → List Cluster
+
+    clusterEnumerationSameAcrossSources :
+      ∀ cutoff left right sourceLeft sourceRight →
+      Enumerated.clusters
+        (enumeratedAt cutoff left right sourceLeft sourceRight)
+        (volumeOfCutoff cutoff)
+      ≡ commonClusters cutoff left right
+
+    touchesLeft touchesRight :
+      Nat → Observable → Observable → Cluster → Bool
+
+    clusterFunctionalMissingLeftIndependent :
+      ∀ cutoff left right cluster →
+      touchesLeft cutoff left right cluster ≡ false →
+      ∀ sourceLeft₁ sourceLeft₂ sourceRight →
+      KP.clusterFunctional
+        (Identified.kpData
+          (identifiedAt cutoff left right sourceLeft₁ sourceRight))
+        cluster
+      ≡
+      KP.clusterFunctional
+        (Identified.kpData
+          (identifiedAt cutoff left right sourceLeft₂ sourceRight))
+        cluster
+
+    clusterFunctionalMissingRightIndependent :
+      ∀ cutoff left right cluster →
+      touchesRight cutoff left right cluster ≡ false →
+      ∀ sourceLeft sourceRight₁ sourceRight₂ →
+      KP.clusterFunctional
+        (Identified.kpData
+          (identifiedAt cutoff left right sourceLeft sourceRight₁))
+        cluster
+      ≡
+      KP.clusterFunctional
+        (Identified.kpData
+          (identifiedAt cutoff left right sourceLeft sourceRight₂))
+        cluster
+
+open LiteralTwoWilsonIdentifiedKoteckyPreissFamily public
+
+identifiedFamilyAsPhysicalFamily :
+  ∀ {Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible} →
+  LiteralTwoWilsonIdentifiedKoteckyPreissFamily
+    Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+    PhysicalIncompatible →
+  LiteralTwoWilsonPhysicalKoteckyPreissFamily
+    Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+identifiedFamilyAsPhysicalFamily family = record
+  { LiteralTwoWilsonPhysicalKoteckyPreissFamily.volumeOfCutoff =
+      volumeOfCutoff family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.physicalAt =
+      λ cutoff left right sourceLeft sourceRight →
+        Identified.asPhysicalTerminalTwoWeightKPPackage
+          (identifiedAt family cutoff left right sourceLeft sourceRight)
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.enumeratedAt =
+      enumeratedAt family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.commonClusters =
+      commonClusters family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.clusterEnumerationSameAcrossSources =
+      clusterEnumerationSameAcrossSources family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.touchesLeft =
+      touchesLeft family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.touchesRight =
+      touchesRight family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.clusterFunctionalMissingLeftIndependent =
+      clusterFunctionalMissingLeftIndependent family
+  ; LiteralTwoWilsonPhysicalKoteckyPreissFamily.clusterFunctionalMissingRightIndependent =
+      clusterFunctionalMissingRightIndependent family
+  }
+
+identifiedFamilyAsTwoWilsonSourceParameterizedKP :
+  ∀ {Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible} →
+  LiteralTwoWilsonIdentifiedKoteckyPreissFamily
+    Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+    PhysicalIncompatible →
+  Marked.TwoWilsonSourceParameterizedKP
+    Observable Source Polymer Cluster FiniteVolume
+identifiedFamilyAsTwoWilsonSourceParameterizedKP family =
+  asTwoWilsonSourceParameterizedKP
+    (identifiedFamilyAsPhysicalFamily family)
+
+identifiedFamilyKPCondition :
+  ∀ {Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    (family :
+      LiteralTwoWilsonIdentifiedKoteckyPreissFamily
+        Observable Source Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible)
+    cutoff left right sourceLeft sourceRight →
+  KP.KoteckyPreissTwoWeightCondition
+    (Identified.kpData
+      (identifiedAt family cutoff left right sourceLeft sourceRight))
+identifiedFamilyKPCondition family cutoff left right sourceLeft sourceRight =
+  Identified.literalPhysicalKPCondition
+    (identifiedAt family cutoff left right sourceLeft sourceRight)
