@@ -10,6 +10,7 @@ import RealProperties as BishopP
 import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConstructorExact as Constructor
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteModePlaquetteBetaSameObjectExact as FinitePlaquette
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
+import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinFiniteModeDecompositionExact as Decomposition
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as Plaquette
@@ -41,11 +42,10 @@ record RichBrillouinFiniteModeGaussianSameObject
       FinitePlaquette.FiniteModePlaquetteBetaSameObject
         finiteMode oneLoop remainder
 
-    richCoefficientSameFiniteModeGaussian :
+    decompositionAt :
       ∀ step →
-      Bishop._≃_
-        (Rich.coefficient rich step)
-        (UV.embed (Local.betaZ (FiniteMode.gaussianAt finiteMode step)))
+      Decomposition.RichBrillouinFiniteModeDecomposition
+        (FiniteMode.gaussianAt finiteMode step) rich step
 
 open RichBrillouinFiniteModeGaussianSameObject public
 
@@ -64,7 +64,8 @@ asRichBrillouinRationalGaussianProjection
   { Projection.RichBrillouinRationalGaussianProjection.coefficientSameLiteralGaussian =
       λ step →
         BishopP.≃-trans
-          (richCoefficientSameFiniteModeGaussian sameObject step)
+          (Decomposition.richCoefficientSameFiniteModeBetaZ
+            (decompositionAt sameObject step))
           (subst
             (λ selected →
               Bishop._≃_
@@ -80,4 +81,10 @@ richBrillouinFiniteModeProjectionCompilerLevel : ProofLevel
 richBrillouinFiniteModeProjectionCompilerLevel = machineChecked
 
 richCoefficientFiniteModeGaussianSameObjectLevel : ProofLevel
-richCoefficientFiniteModeGaussianSameObjectLevel = conditional
+richCoefficientFiniteModeGaussianSameObjectLevel = machineChecked
+
+richShellFiniteUniversalSameObjectLevel : ProofLevel
+richShellFiniteUniversalSameObjectLevel = conditional
+
+richRegularMatchingFiniteEpsilonSameObjectLevel : ProofLevel
+richRegularMatchingFiniteEpsilonSameObjectLevel = conditional
