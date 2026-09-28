@@ -115,7 +115,7 @@ dadhwalPankaj =
     "10.1515/jmc-2022-0009"
     "https://doi.org/10.1515/jmc-2022-0009"
     Source.academicArticleSource
-    "explicit finite-group source listing the seven conjugacy classes of the binary tetrahedral group; used only for the class/inversion quotient count, not for elliptic-curve identification"
+    "explicit finite-group source listing the seven conjugacy classes and full character table of the binary tetrahedral group; in particular a degree-2 character takes values 2,-2,0 and +/-1 on the four size-4 classes. Used for class/inversion and character-dependence audits, not for elliptic-curve or Monster identification"
     Source.publicAttribution
 
 
