@@ -30,6 +30,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2Bridge
+import DASHI.Foundations.BalancedTernaryHypercubeAntipodalOrbitCountExact as HyperOrbit
 
 ------------------------------------------------------------------------
 -- 1. Only the two exceptional residual lanes are in scope here.
@@ -92,6 +93,50 @@ targetPi0MatchesExpectedResidual :
   targetPi0Count prime ≡ expectedResidualCount prime
 targetPi0MatchesExpectedResidual residualP2 = refl
 targetPi0MatchesExpectedResidual residualP3 = refl
+
+------------------------------------------------------------------------
+-- 2b. Canonical target-count decomposition through the ternary antipodal
+--     hypercube family.
+--
+-- These are target-side identities only:
+--
+--   p3 : A1 = T/C2 has 2 components.
+--   p2 : B x A2 has 2 * 5 = 10 components, with B retained rather than
+--        quotiented.
+--
+-- They do NOT construct the missing arithmetic residual source.
+------------------------------------------------------------------------
+
+p3TargetPi0IsOneTritAntipodalOrbitCount :
+  targetPi0Count residualP3
+  ≡ HyperOrbit.antipodalOrbitCount 1
+p3TargetPi0IsOneTritAntipodalOrbitCount = refl
+
+p2FiveOrbitBaseIsTwoTritAntipodalOrbitCount :
+  Small.p2GaugePi0Count
+  ≡ HyperOrbit.antipodalOrbitCount 2
+p2FiveOrbitBaseIsTwoTritAntipodalOrbitCount = refl
+
+p2TargetPi0IsRetainedBinaryOverTwoTritOrbitCount :
+  targetPi0Count residualP2
+  ≡ 2 * HyperOrbit.antipodalOrbitCount 2
+p2TargetPi0IsRetainedBinaryOverTwoTritOrbitCount = refl
+
+p3HypercubeCountClosesResidual :
+  HyperOrbit.antipodalOrbitCount 1
+  ≡ expectedResidualCount residualP3
+p3HypercubeCountClosesResidual =
+  trans
+    (sym p3TargetPi0IsOneTritAntipodalOrbitCount)
+    (targetPi0MatchesExpectedResidual residualP3)
+
+p2HypercubeCountClosesResidual :
+  2 * HyperOrbit.antipodalOrbitCount 2
+  ≡ expectedResidualCount residualP2
+p2HypercubeCountClosesResidual =
+  trans
+    (sym p2TargetPi0IsRetainedBinaryOverTwoTritOrbitCount)
+    (targetPi0MatchesExpectedResidual residualP2)
 
 ------------------------------------------------------------------------
 -- 3. Missing arithmetic source groupoid interface.
@@ -216,11 +261,16 @@ attributionUsesProofLineage :
 attributionUsesProofLineage = refl
 
 data ResidualCountAloneConstructsArithmeticSourceGroupoid : Set where
+data HypercubeTargetCountConstructsArithmeticResidualSource : Set where
 data TargetGroupoidAloneConstructsArithmeticRecognition : Set where
 
 residualCountDoesNotConstructArithmeticSourceGroupoid :
   ResidualCountAloneConstructsArithmeticSourceGroupoid → ⊥
 residualCountDoesNotConstructArithmeticSourceGroupoid ()
+
+hypercubeTargetCountDoesNotConstructArithmeticResidualSource :
+  HypercubeTargetCountConstructsArithmeticResidualSource → ⊥
+hypercubeTargetCountDoesNotConstructArithmeticResidualSource ()
 
 targetGroupoidDoesNotConstructArithmeticRecognition :
   TargetGroupoidAloneConstructsArithmeticRecognition → ⊥
@@ -237,6 +287,8 @@ record ExponentResidualArithmeticSourceBoundary : Set where
     p3TargetActionGroupoidConcrete : Bool
     p2TargetPi0MatchesResidual : Bool
     p3TargetPi0MatchesResidual : Bool
+    p3TargetCountFactorsThroughA1 : Bool
+    p2TargetCountFactorsThroughRetainedBinaryTimesA2 : Bool
     sourceRequiresActionAndOrbitPresentation : Bool
     sourceRequiresIndependentPi0Receipt : Bool
     fullRecognitionUsesGenericActionFunctor : Bool
@@ -245,11 +297,13 @@ record ExponentResidualArithmeticSourceBoundary : Set where
     p2ArithmeticSourceConstructed : Bool
     p3ArithmeticSourceConstructed : Bool
     countAloneConstructsSource : Bool
+    hypercubeTargetCountConstructsSource : Bool
 
 canonicalExponentResidualArithmeticSourceBoundary :
   ExponentResidualArithmeticSourceBoundary
 canonicalExponentResidualArithmeticSourceBoundary =
   exponent-residual-arithmetic-source-boundary
     true true true true
+    true true
     true true true true true
-    false false false
+    false false false false
