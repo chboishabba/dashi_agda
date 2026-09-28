@@ -165,6 +165,7 @@ bad = record { witnes = Set }
 
     assert final["status"] == "clean"
     assert applied["profile"]["counts"]["trusted_session_api_stable_edits"] == 1
+    assert applied["profile"]["counts"]["session_candidate_id_hits"] == 1
     assert final["profile"]["counts"].get("files_stat", 0) == 0
     assert final["profile"]["counts"]["trusted_session_hits"] == 1
     assert final["profile"]["counts"]["session_candidate_rollup_hits"] == 1
@@ -243,6 +244,72 @@ import Service.MultiB
     assert second_diag["id"] != first_diag["id"]
     assert second_diag["path"] != first_diag["path"]
     counts = second["profile"]["counts"]
+    assert counts["session_candidate_rollup_hits"] == 1
+    assert counts["session_candidate_heap_peeks"] == 1
+    assert counts.get("files_stat", 0) == 0
+    assert counts.get("candidate_snapshot_modules", 0) == 0
+
+
+def test_service_refresh_updates_containing_rollup_heap_when_api_stable(tmp_path):
+    leaf = write_module(
+        tmp_path,
+        "Service.RefreshLeaf",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    top = write_module(
+        tmp_path,
+        "Service.RefreshTop",
+        """
+import Service.RefreshLeaf
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=2,
+    ) as service:
+        first = service.next_error(
+            str(top),
+            require_fix=True,
+        )
+        assert first["status"] == "diagnostic"
+
+        leaf.write_text(
+            """module Service.RefreshLeaf where
+
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witness = Set }
+""",
+            encoding="utf-8",
+        )
+
+        refreshed = service.refresh(str(leaf))
+        assert refreshed["api_stable"] is True
+        refresh_counts = refreshed["profile"]["counts"]
+        assert refresh_counts["trusted_session_api_stable_refreshes"] == 1
+        assert refresh_counts["session_candidate_modules_refreshed"] == 1
+
+        final = service.next_error(
+            str(top),
+            require_fix=True,
+        )
+
+    assert final["status"] == "clean"
+    counts = final["profile"]["counts"]
+    assert counts["trusted_session_hits"] == 1
     assert counts["session_candidate_rollup_hits"] == 1
     assert counts["session_candidate_heap_peeks"] == 1
     assert counts.get("files_stat", 0) == 0
