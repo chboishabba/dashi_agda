@@ -90,13 +90,17 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --     -> corrected scalar q-expansion/Hauptmodul valuation, with analytic
 --     Fricke compatibility.
 --
--- TERMINAL RESEARCH WALL:
---   * inhabit BadLevelInertiaLocalizedFourthTermAuthority;
---   * p=2 must restore the full five-sector information through gerbe/inertia
---     localization before scalar pushforward;
+-- SOTA TERMINAL RESEARCH WALL:
+--   * inhabit SOTATerminalFourthTermAuthority;
+--   * p=2 must restore full five-sector information AND retain tangent/character
+--     data: centralizer depth alone provably cannot determine the inertia-RR
+--     denominator;
 --   * p=3 must retain node/branch-pair data after pullback to X0(3);
+--   * both primes must retain source-native Hasse/osculation/Frobenius data from
+--     the same bad-level Igusa object; raw osculation is not itself the gap;
 --   * the SAME independently defined exceptional object must refine both
---     Duncan--Swisher descriptions and have valuation 10/2;
+--     Duncan--Swisher descriptions and have a sourced/proved q-expansion or
+--     divisor valuation of 10/2;
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -156,6 +160,10 @@ import DASHI.Moonshine.OggSSPP2ScalarDivisorInertiaLocalizationCutsetExact as P2
 import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelIgusaCorrectionCutsetExact as BadLevelIgusa
 import DASHI.Moonshine.OggSSPSmallCharacteristicIgusaRamificationNoGoExact as IgusaNoGo
 import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelInertiaLocalizedFourthTermCutsetExact as Terminal
+import DASHI.Moonshine.OggSSPP2CentralizerDepthVsInertiaRRNonfactorabilityExact as P2RRNonfactor
+import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAInertiaRRRefinementExact as SOTARR
+import DASHI.Moonshine.OggSSPSmallCharacteristicIgusaOsculationHasseCutsetExact as Osculation
+import DASHI.Moonshine.OggSSPSmallCharacteristicSOTATerminalFourthTermRefinementExact as SOTATerminal
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -358,11 +366,15 @@ record ArithmeticIndependent369Frontier : Set where
     badLevelAnalyticFrickeCompatibilityPaid : Bool
     terminalFourthTermCutsetPaid : Bool
     terminalFourthTermAuthorityPaid : Bool
-
-    p2CentralizerDepthTenCandidatePaid : Bool
     p2CentralizerDepthInsufficientForInertiaRR : Bool
     sotaCharacterAwareWildRRRefinementPaid : Bool
     sotaCharacterAwareWildValuationAuthorityPaid : Bool
+    igusaHasseOsculationCutsetPaid : Bool
+    rawOsculationShortcutRejected : Bool
+    sotaTerminalFourthTermCutsetPaid : Bool
+    sotaTerminalFourthTermAuthorityPaid : Bool
+
+    p2CentralizerDepthTenCandidatePaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
     primeSpecificMechanismComparisonPaid : Bool
     primeSpecificPreferredPaymentOwned : Bool
@@ -466,11 +478,15 @@ canonicalArithmeticIndependent369Frontier =
     ; badLevelAnalyticFrickeCompatibilityPaid = false
     ; terminalFourthTermCutsetPaid = true
     ; terminalFourthTermAuthorityPaid = false
-
-    ; p2CentralizerDepthTenCandidatePaid = true
     ; p2CentralizerDepthInsufficientForInertiaRR = true
     ; sotaCharacterAwareWildRRRefinementPaid = true
     ; sotaCharacterAwareWildValuationAuthorityPaid = false
+    ; igusaHasseOsculationCutsetPaid = true
+    ; rawOsculationShortcutRejected = true
+    ; sotaTerminalFourthTermCutsetPaid = true
+    ; sotaTerminalFourthTermAuthorityPaid = false
+
+    ; p2CentralizerDepthTenCandidatePaid = true
     ; p3CentralizerDepthUniformLawRejected = true
     ; primeSpecificMechanismComparisonPaid = true
     ; primeSpecificPreferredPaymentOwned = true
