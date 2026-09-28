@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4PhysicalMinCutExact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 
 import Real as Bishop
@@ -14,14 +14,12 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4LocalPhysicalEdgeEx
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConstructorExact as Constructor
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralEdgeIncrementMinCutExact as Edge
-import DASHI.Physics.Foundations.CMP119AntigravityP3UVAnchorFromSharedCouplingExact as UVAnchor
 import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalProducerMinCutExact as P3G
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
-import DASHI.Physics.YangMills.BalabanYM4LiteralPlaquetteBetaEstimateExact as Literal
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as RowA
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -138,11 +136,14 @@ directPositiveEdgeIncrementPaymentRequired = false
 allDepthStateHistoryPaymentRequired : Bool
 allDepthStateHistoryPaymentRequired = false
 
-initialSharedCouplingRepresentationPaymentRequired : Bool
-initialSharedCouplingRepresentationPaymentRequired = true
+separateInitialSharedCouplingPaymentAtS4Required : Bool
+separateInitialSharedCouplingPaymentAtS4Required = false
 
-localP3RemainderProducerPaymentRequired : Bool
-localP3RemainderProducerPaymentRequired = true
+separateLocalRemainderPaymentAtS4Required : Bool
+separateLocalRemainderPaymentAtS4Required = false
+
+p3GPhysicalProducerPaymentRequired : Bool
+p3GPhysicalProducerPaymentRequired = true
 
 directUVStateAnchorPaymentRequiredIsFalse :
   directUVStateAnchorPaymentRequired ≡ false
@@ -156,13 +157,17 @@ allDepthStateHistoryPaymentRequiredIsFalse :
   allDepthStateHistoryPaymentRequired ≡ false
 allDepthStateHistoryPaymentRequiredIsFalse = refl
 
-initialSharedCouplingRepresentationPaymentRequiredIsTrue :
-  initialSharedCouplingRepresentationPaymentRequired ≡ true
-initialSharedCouplingRepresentationPaymentRequiredIsTrue = refl
+separateInitialSharedCouplingPaymentAtS4RequiredIsFalse :
+  separateInitialSharedCouplingPaymentAtS4Required ≡ false
+separateInitialSharedCouplingPaymentAtS4RequiredIsFalse = refl
 
-localP3RemainderProducerPaymentRequiredIsTrue :
-  localP3RemainderProducerPaymentRequired ≡ true
-localP3RemainderProducerPaymentRequiredIsTrue = refl
+separateLocalRemainderPaymentAtS4RequiredIsFalse :
+  separateLocalRemainderPaymentAtS4Required ≡ false
+separateLocalRemainderPaymentAtS4RequiredIsFalse = refl
+
+p3GPhysicalProducerPaymentRequiredIsTrue :
+  p3GPhysicalProducerPaymentRequired ≡ true
+p3GPhysicalProducerPaymentRequiredIsTrue = refl
 
 canonicalS4PhysicalMinCutCompilerLevel : ProofLevel
 canonicalS4PhysicalMinCutCompilerLevel = machineChecked
