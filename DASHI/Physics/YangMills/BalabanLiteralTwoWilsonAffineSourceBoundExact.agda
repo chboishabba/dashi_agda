@@ -27,7 +27,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.List.Base using (List)
+open import Data.List.Base using (List; []; _∷_)
 open import Data.Product.Base using (proj₂)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
@@ -35,7 +35,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; ∣_∣; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Wilson
@@ -181,13 +181,32 @@ literalWilsonCylinderObservable {n} paths =
     (Cylinder.literalRationalSU2WilsonCylinderBounds {n})
     paths
 
+literalWilsonCylinderProductBoundIsOne :
+  ∀ {n : Nat}
+    (paths : List (Wilson.RationalWilsonPath n)) →
+  T5.productLoopBound
+    (Cylinder.literalRationalSU2WilsonCylinderBounds {n})
+    paths
+  ≡ 1ℚ
+literalWilsonCylinderProductBoundIsOne [] = refl
+literalWilsonCylinderProductBoundIsOne (path ∷ paths) =
+  trans
+    (cong (λ value → 1ℚ * value)
+      (literalWilsonCylinderProductBoundIsOne paths))
+    (ℚP.*-identityˡ 1ℚ)
+
 literalWilsonCylinderPointwiseUnitBounded :
   ∀ {n : Nat}
     (paths : List (Wilson.RationalWilsonPath n)) →
   Wilson.PointwiseUnitBounded (literalWilsonCylinderObservable paths)
-literalWilsonCylinderPointwiseUnitBounded {n} paths =
-  proj₂
-    (Cylinder.finiteLiteralWilsonCylinderBound {n} paths)
+literalWilsonCylinderPointwiseUnitBounded {n} paths configuration =
+  subst
+    (λ majorant →
+      ∣ literalWilsonCylinderObservable paths configuration ∣ ≤ majorant)
+    (literalWilsonCylinderProductBoundIsOne paths)
+    (proj₂
+      (Cylinder.finiteLiteralWilsonCylinderBound {n} paths)
+      configuration)
 
 literalTwoWilsonCylinderAffineFactorBelowSixFifths :
   ∀ {n : Nat}
