@@ -21,19 +21,27 @@ Lane D = forced periodic breakdown
 ```
 
 The active manuscript construction is **Lane B**. The current preferred
-Clay-facing analytic frontier is the post-derivative R743 two-leaf cut. Its
+Clay-facing analytic frontier is the R752 dyadic-difference two-leaf cut. Its
 nonstandard PDE inputs are:
 
 1. **W1**, a cutoff-uniform signed payment
    \[
    W_N(T)+Q_{+-,N}(T)\le B(T);
    \]
-2. **W2**, equivalently under the standard R648 packet-structure receipt,
+2. **W2**, nonnegativity of the integrated R751 dyadic-difference residual,
    \[
-   \int_0^T \mathrm{PacketStrictSurplus}_{N,\delta}(t)\,dt
-   \le
-   \int_0^T \mathrm{CombinedResidue}_N(t)\,dt,
-   \qquad \delta_N>0.
+   0\le \int_0^T G_{N,\delta}(t)\,dt,
+   \qquad \delta_N>0,
+   \]
+   where
+   \[
+   G_{N,\delta}(t)
+   =
+   \sum_\beta\!\left[
+     3R^{\rm nested}_N(\beta,t)
+     -P^{\rm dyad\text{-}diff}_N(\beta,t)
+   \right]
+   +3(2\nu-\delta_N)d_N(t).
    \]
 
 R733 identifies the coherent mixed endpoint with the canonical \(Q_{+-}\)
@@ -44,6 +52,15 @@ inequality. Thus the derivative calculation does **not** manufacture a new
 coercive term: it exposes W2 as one signed physical packet-versus-combined
 comparison. R741 gives a stronger pointwise producer form; R742 preserves the
 original integrated theorem without that strengthening.
+
+R744--R751 then put both nonlinear pieces on the same complete physical triad
+carrier.  The production term must first be paired with its swap mate before
+the exact three-leg energy cancellation applies.  After pairing, R748 reduces
+it to exactly two differences of the **actual dyadic critical weights**,
+not the historical radial \\(|k|\\) coefficients. R750 proves these production
+difference channels vanish identically on same-shell nonzero triads. R751
+integrates this literal local carrier, and R747/R746 prove its nonnegativity is
+exactly equivalent to R742's packet-versus-combined spacetime inequality.
 
 Once W1 and W2 are supplied, the existing exact compiler gives the uniform
 critical barrier and the standard periodic compactness/continuation layer can
@@ -65,14 +82,16 @@ unforced alternative.
 
 ## 1. Four-lane claim boundary and live Lane-B cutset
 
-The current preferred periodic-B interface is R743:
+The current preferred periodic-B interface is R752:
 
 ```text
 W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
 
-W2  integrated physical packet strict surplus
-      <= integrated R723 combined residue                           OPEN
-    with a strictly positive retained margin delta_N
+W2  integral R751 dyadic-difference residual >= 0                  OPEN
+    residual = 3*nested orbit
+               - swap-paired two-dyadic-difference production
+               + 3*(2nu-delta_N)*critical dissipation
+    with delta_N > 0
 ```
 
 The exact coordinate dictionary is now:
@@ -141,6 +160,48 @@ requiring that pointwise strengthening:
 
 Therefore the derivative attack has resolved the representation question but
 has **not** closed W2. It shows precisely what W2 is.
+
+R744--R751 sharpen that exact representation further. R744 places literal
+critical production on the same complete zero-masked physical triad
+enumeration used by the combined/nested orbit. R748 shows that local three-leg
+energy cancellation is lawful only after swap-pairing the oriented production
+cell. The paired production orbit then has the exact two-difference form
+
+\[
+P^{\rm dyad\text{-}diff}(\beta)
+=
+(\widetilde\lambda_k-\widetilde\lambda_q)\,
+P^{\rm pair}_k(\beta)
++
+(\widetilde\lambda_p-\widetilde\lambda_q)\,
+P^{\rm pair}_p(\beta),
+\]
+
+where \(\widetilde\lambda\) is the zero-safe **actual dyadic critical
+weight**. R749 therefore puts the W2 nonlinear gap on one local cell,
+
+\[
+G^{\rm nl}_N(\beta)
+=
+3R^{\rm nested}_N(\beta)
+-
+P^{\rm dyad\text{-}diff}_N(\beta).
+\]
+
+R750 proves the production correction vanishes whenever all three nonzero legs
+lie in one dyadic shell. R751 adds the retained viscous credit and integrates
+the same local carrier. R747/R746 identify
+
+\[
+\boxed{
+\mathrm{W2}
+\iff
+0\le \int_0^T G_{N,\delta}(t)\,dt .
+}
+\]
+
+This is the preferred W2 analytic surface. The R742 packet-versus-combined
+inequality remains an exact alternate coordinate, not a separate theorem.
 
 W1 remains
 
@@ -404,8 +465,8 @@ The current terminal compiler is:
 
 ```text
 W1: weighted + terminal Q_+- cutoff-uniform payment
-W2: integrated packet strict surplus <= integrated combined residue
-  -> R742 / R734 / R730 exact coordinate compilers
+W2: integrated R751 dyadic-difference residual >= 0
+  -> R747 / R746 / R742 / R734 / R730 exact coordinate compilers
   -> uniform critical barrier
   -> standard periodic compactness / continuation source boundary
 ```
@@ -432,7 +493,7 @@ CommutatorOnlySpacetimeBudget568
 
 R572 is still a valid compiler, but R568 is not the canonical current analytic
 leaf. The nested Schur/R577 branch is likewise retained as a fallback producer
-route rather than promoted over the R743 frontier.
+route rather than promoted over the R752 frontier.
 
 ## 9. MathematicalStatus, StatementStatus, and CertificationStatus
 
@@ -462,7 +523,8 @@ A configured workflow is not itself a kernel receipt.
 | R568 | commutator-only spacetime leaf | interface constructed; producer payment open | historical/alternate Lane-B producer lane | no producer receipt until an inhabitant is actually proved |
 | R572 | direct leaf-A compiler | constructed given listed receipts | alternate Lane-B compiler | source/workflow status does not constitute R568 proof |
 | R733-R736 | Q_+- endpoint weld and shared-weighted two-leaf recut | exact coordinate reductions; W1/W2 payments open | current Lane-B frontier precursor | source-written; head-specific kernel receipt not claimed here |
-| R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions closed; W1 and integrated packet/combined payment open | **current Lane-B analytic frontier** | source-written/static-audited in this tranche; no fresh kernel receipt claimed |
+| R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions closed; packet/combined payment open | current frontier precursor | source-written/static-audited; no fresh kernel receipt claimed |
+| R744-R752 | complete physical carrier, swap pairing, two actual dyadic differences, same-shell vanishing, integrated residual | exact carrier reductions closed; W1 and residual nonnegativity open | **current Lane-B analytic frontier** | source-written/static-audited; no fresh kernel receipt claimed |
 
 This table is intentionally conservative. Later validation work may upgrade a
 `CertificationStatus` without changing the underlying mathematical theorem.
@@ -544,24 +606,39 @@ W1
 
 W2
   prove, with delta_N > 0,
-  integrated physical packet strict surplus
-    <= integrated R723 combined residue
+  0 <= integral G_N,delta(t) dt
 
-  optional stronger producer:
-    pointwise packet strict surplus
-      <= pointwise combined residue
+  where the literal local nonlinear carrier is
+    G_nl(beta)
+      = 3 * NestedOrbit(beta)
+        - PairedDyadicTwoDifference(beta)
+
+  and
+    PairedDyadicTwoDifference(beta)
+      = (lambda~_k - lambda~_q) PairPower_k(beta)
+        + (lambda~_p - lambda~_q) PairPower_p(beta)
+
+  plus the retained viscous credit
+    3 * (2 nu - delta_N) * d_N(t)
 
 W1 + W2
-  -> R742/R734/R730 exact compilers
+  -> R747/R746/R742/R734/R730 exact compilers
   -> uniform critical barrier
   -> standard periodic compactness / continuation
 ```
 
-The R737--R740 derivative experiment is complete as a representation test:
-the R684 input-Laplacian \(W_N\) term cancels exactly from pointwise W2, so the
-next analytic work should target the packet-versus-combined signed comparison
-itself rather than search for a coercive term created merely by differentiating
-\(X_N-12Q_{+-}\).
+R750 gives one exact support simplification before estimation: on same-shell
+nonzero triads the two dyadic production differences vanish identically, so
+the local nonlinear cell reduces to (3R^{\rm nested}). This is **not** being
+promoted to an exhaustive shell partition; the repository's full absolute
+geometry partition remains separately open.
+
+The R737--R740 derivative experiment remains a completed no-shortcut result:
+the R684 input-Laplacian (W_N) term cancels exactly from local W2. Likewise,
+the finite critical-norm equivalence machinery does not justify replacing
+signed dyadic coefficient differences by physical mode-norm differences.
+The next analytic work must therefore act on the literal R751 signed residual
+or prove a lawful further cancellation on that same carrier.
 
 Alternate/historical producer work remains available but is not the primary
 queue:
