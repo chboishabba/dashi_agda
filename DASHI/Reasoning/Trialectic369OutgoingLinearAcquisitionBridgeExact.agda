@@ -33,6 +33,8 @@ open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as Acquisition
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
+import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
+import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as WrongType
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as FiniteCompiler
@@ -74,8 +76,14 @@ canonicalLinearRouteFromAcquisition acquisition =
           (acquiredHomSpace acquisition)
 
     ; sameObjectWithChosenZetaMultiplicity =
-        Hom.cocycleMultiplicityIsSameLinearCarrier
-          (acquiredHomSpace acquisition)
+        Cocycle.Multiplicity
+          (Hom.cocycleCompensatedAction
+            (acquiredHomSpace acquisition))
+        ≡
+        Linear.Vector
+          (WrongType.linearCarrier
+            (Hom.sameObjectLinearRepresentation
+              (acquiredHomSpace acquisition)))
 
     ; linearEvaluationIntertwiner =
         Hom.evaluationIsLinearIntertwiner
