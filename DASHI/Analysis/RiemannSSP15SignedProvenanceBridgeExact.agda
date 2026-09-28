@@ -171,6 +171,39 @@ jRoleValuationZeroAt mode observed =
     (roleCodeToPrime (jRoleCode mode))
     observed
 
+jColumnNeutralPrimes :
+  List Lane.MonsterPrimeLane
+jColumnNeutralPrimes =
+  roleCodeToPrime (Quotient.mode09 , Codec.jRole)
+  ∷ roleCodeToPrime (Quotient.mode18 , Codec.jRole)
+  ∷ roleCodeToPrime (Quotient.mode27 , Codec.jRole)
+  ∷ roleCodeToPrime (Quotient.mode36 , Codec.jRole)
+  ∷ roleCodeToPrime (Quotient.mode45 , Codec.jRole)
+  ∷ []
+
+jColumnNeutralPrimesExact :
+  jColumnNeutralPrimes
+  ≡ Lane.p3 ∷ Lane.p11 ∷ Lane.p19 ∷ Lane.p31 ∷ Lane.p59 ∷ []
+jColumnNeutralPrimesExact = refl
+
+jColumnFiveDistinctPointedStatesShareZeroValuation :
+  roleCodeValuation (jRoleCode Quotient.mode09)
+  ≡ roleCodeValuation (jRoleCode Quotient.mode18)
+  × roleCodeValuation (jRoleCode Quotient.mode18)
+  ≡ roleCodeValuation (jRoleCode Quotient.mode27)
+  × roleCodeValuation (jRoleCode Quotient.mode27)
+  ≡ roleCodeValuation (jRoleCode Quotient.mode36)
+  × roleCodeValuation (jRoleCode Quotient.mode36)
+  ≡ roleCodeValuation (jRoleCode Quotient.mode45)
+jColumnFiveDistinctPointedStatesShareZeroValuation =
+  funext (jRoleValuationZeroAt Quotient.mode09)
+  ,
+  (funext (jRoleValuationZeroAt Quotient.mode18)
+  ,
+  (funext (jRoleValuationZeroAt Quotient.mode27)
+  ,
+   funext (jRoleValuationZeroAt Quotient.mode36)))
+
 data ZeroValuationRecoversRHMode : Set where
 
 zeroValuationDoesNotRecoverRHMode :
