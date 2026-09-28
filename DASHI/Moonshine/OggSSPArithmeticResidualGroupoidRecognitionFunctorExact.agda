@@ -409,7 +409,7 @@ canonicalSmallCharacteristicRecognitionFunctorBoundary :
   SmallCharacteristicRecognitionFunctorBoundary
 canonicalSmallCharacteristicRecognitionFunctorBoundary =
   small-characteristic-recognition-functor-boundary
-    true true true false true true true
+    true true true false true true true true
     true true
     true true true false
     5 true
