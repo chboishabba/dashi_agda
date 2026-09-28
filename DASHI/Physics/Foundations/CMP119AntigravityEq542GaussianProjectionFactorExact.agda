@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityEq542GaussianProjectionFactorE
 
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import Real as Bishop
 import RealProperties as BishopP
@@ -57,9 +58,13 @@ asRichBrillouinRationalGaussianProjection factor = record
       λ depth →
         BishopP.≃-trans
           (richShellRepresentsSourceGaussian factor depth)
-          (BishopP.≃-symm
-            (UV.embedEquality
-              (rationalPlaquetteRepresentsSourceGaussian factor depth)))
+          (subst
+            (λ selected →
+              Bishop._≃_
+                (UV.embed selected)
+                (UV.embed (Literal.literalBetaZ dataSet (suc depth))))
+            (rationalPlaquetteRepresentsSourceGaussian factor depth)
+            BishopP.≃-refl)
   }
 
 eq542GaussianProjectionFactorCompilerLevel : ProofLevel
