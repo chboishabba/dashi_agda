@@ -115,6 +115,13 @@ import DASHI.Physics.Closure.NSTriadKNR650TerminalMixedMassQPlusMinusRound733Exa
 import DASHI.Physics.Closure.NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact as R734
 import DASHI.Physics.Closure.NSTriadKNR650SharedWeightedQuarticCutRound735Exact as R735
 import DASHI.Physics.Closure.NSTriadKNR650CurrentSharedWeightedWallRound736Exact as R736
+import DASHI.Physics.Closure.NSTriadKNR650AugmentedObservableDerivativeRound737Exact as R737
+import DASHI.Physics.Closure.NSTriadKNR650AugmentedDerivativeInputLaplacianRound738Exact as R738
+import DASHI.Physics.Closure.NSTriadKNR650AugmentedDerivativeCollectedRound739Exact as R739
+import DASHI.Physics.Closure.NSTriadKNR650PointwiseW2CancellationRound740Exact as R740
+import DASHI.Physics.Closure.NSTriadKNR650PointwiseW2PhysicalPacketCombinedRound741Exact as R741
+import DASHI.Physics.Closure.NSTriadKNR650IntegratedW2PhysicalPacketCombinedRound742Exact as R742
+import DASHI.Physics.Closure.NSTriadKNR650PostDerivativeAnalyticWallRound743Exact as R743
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -265,6 +272,42 @@ round650PreferredTwoLeavesBuildCriticalBarrier =
 round650BarrierDependentQPlusMinusShortcutAdmissible : Bool
 round650BarrierDependentQPlusMinusShortcutAdmissible =
   R736.round736BarrierDependentQPlusMinusShortcutAdmissible
+
+round650PostDerivativeExactlyTwoAnalyticLeaves : Bool
+round650PostDerivativeExactlyTwoAnalyticLeaves =
+  R743.round743ExactlyTwoPreferredAnalyticLeaves
+
+round650AugmentedDerivativeClosed : Bool
+round650AugmentedDerivativeClosed =
+  R743.round743LiteralAugmentedDerivativeClosed
+
+round650InputLaplacianSubstitutionClosed : Bool
+round650InputLaplacianSubstitutionClosed =
+  R743.round743GlobalWeightedInputLaplacianSubstitutionClosed
+
+round650InputLaplacianSurvivesW2Cancellation : Bool
+round650InputLaplacianSurvivesW2Cancellation =
+  R743.round743InputLaplacianSurvivesW2Cancellation
+
+round650PointwiseW2PacketCombinedNormalFormAvailable : Bool
+round650PointwiseW2PacketCombinedNormalFormAvailable =
+  R743.round743PointwiseW2PacketCombinedNormalFormAvailable
+
+round650IntegratedW2PacketCombinedNormalFormAvailable : Bool
+round650IntegratedW2PacketCombinedNormalFormAvailable =
+  R743.round743IntegratedW2PacketCombinedNormalFormAvailable
+
+round650PointwiseW2StrengtheningMandatory : Bool
+round650PointwiseW2StrengtheningMandatory =
+  R743.round743PointwiseStrengtheningMandatory
+
+round650CurrentW1Closed : Bool
+round650CurrentW1Closed =
+  R743.round743WeightedPlusTerminalPaymentClosed
+
+round650CurrentW2PacketCombinedClosed : Bool
+round650CurrentW2PacketCombinedClosed =
+  R743.round743IntegratedPacketCombinedPaymentClosed
 
 round650PositiveRatesAloneCloseCombinedToR406 : Bool
 round650PositiveRatesAloneCloseCombinedToR406 =
