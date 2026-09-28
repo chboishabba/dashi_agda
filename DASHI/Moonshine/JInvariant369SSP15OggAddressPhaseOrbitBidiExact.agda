@@ -32,6 +32,7 @@ import DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact as Address
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Chosen
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 
 ------------------------------------------------------------------------
 -- 1. Direct exact-address <-> phase-orbit maps.
@@ -182,7 +183,7 @@ phaseOrbitAddressValueIsPrimeValue state =
 ------------------------------------------------------------------------
 
 phasePreservingReduction :
-  DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact.Ternary27Point
+  Geometry.Ternary27Point
   ->
   PhaseOrbit15
 phasePreservingReduction =
@@ -191,7 +192,7 @@ phasePreservingReduction =
 canonicalPhaseOrbitLift :
   PhaseOrbit15
   ->
-  DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact.Ternary27Point
+  Geometry.Ternary27Point
 canonicalPhaseOrbitLift =
   Reduction.canonicalLiftPhaseOrbit15
 
