@@ -284,21 +284,20 @@ module SeparatedPhysicalDefect
                 + thirtySix * External)
             zeroSafeSamePhysicalCurrency)
           (trans
-            (cong
-              (λ multiplierRelation →
-                eighteen * multiplierRelation
-                  + thirtySix * PZero
-                  + thirtySix * External)
-              Mult.globalMultiplierWorkIsDoubleZeroSafe)
             (solve
               ( eighteen
               ∷ thirtySix
               ∷ R805.two
-              ∷ Mself
               ∷ Mult.Sep.globalZeroSafeSelfWork
               ∷ PZero
               ∷ External
-              ∷ []))))
+              ∷ []))
+            (cong
+              (λ multiplier →
+                eighteen * multiplier
+                  + thirtySix * PZero
+                  + thirtySix * External)
+              (sym Mult.globalMultiplierWorkIsDoubleZeroSafe))))
 
     separatedPhysicalDefectNormalForm :
       Dsep
