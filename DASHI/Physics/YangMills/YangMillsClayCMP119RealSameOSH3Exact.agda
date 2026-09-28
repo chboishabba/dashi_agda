@@ -16,11 +16,15 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact where
 -- mass-gap certificate on the same OS Hamiltonian.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact as H2
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as PinnedOSR
 import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact as H2OS
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
 import DASHI.Physics.YangMills.YMClayMixedScalarPhysicalSpectrumExact as Mixed
@@ -52,8 +56,8 @@ record CMP119RealSameOSH3
         quotient)
     (S :
       Top.LiteralYangMillsSemantics
-        (DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact.physicalLiteralCarriers
-          G X Agda.Builtin.Nat.Nat Configuration ℝ
+        (Physical.physicalLiteralCarriers
+          G X Nat Configuration ℝ
           (Configuration → ℝ) Position
           CurvaturePolynomial LocalOperator OPECoefficient StressTensor
           Hilbert Hamiltonian Vector))
@@ -88,7 +92,7 @@ record CMP119RealSameOSH3
 
     actualHamiltonian =
       OSR.reconstructedHamiltonian
-        (DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact.reconstruction
+        (PinnedOSR.reconstruction
           (H2.reconstruction h2) group)
 
   field
@@ -127,7 +131,7 @@ physicalSpectrumInterpretation
     h3 = record
   { Mixed.MixedScalarPhysicalSpectrumInterpretation.physicalHamiltonian =
       OSR.reconstructedHamiltonian
-        (DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact.reconstruction
+        (PinnedOSR.reconstruction
           (H2.reconstruction h2) group)
   ; Mixed.MixedScalarPhysicalSpectrumInterpretation.SpectrumAboveVacuumGap =
       SpectrumAboveVacuumGap h3
@@ -184,7 +188,7 @@ h3PhysicalHamiltonianIsExactH2Reconstruction :
   OS.hamiltonian
     (H2OS.asOSReconstructionAuthority
       (H2.reconstruction h2) group)
-h3PhysicalHamiltonianIsExactH2Reconstruction h3 = Agda.Builtin.Equality.refl
+h3PhysicalHamiltonianIsExactH2Reconstruction h3 = refl
 
 cmp119RealSameHCompilerLevel : ProofLevel
 cmp119RealSameHCompilerLevel = machineChecked
