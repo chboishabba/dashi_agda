@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as A
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
+import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
@@ -37,6 +38,89 @@ import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as 
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
+
+------------------------------------------------------------------------
+-- PRE-OS MOMENT SOURCE
+--
+-- The exponential-moment theorem only needs the literal finite CMP119
+-- expectation sequence and the cylinder observable algebra.  It does not need
+-- OS0--OS5.  This carrier breaks the historical circularity where R559 took a
+-- completed PinnedCMP119OSAxiomInputs merely to recover those two objects.
+------------------------------------------------------------------------
+
+record LiteralCMP119PreOSQuantitativeMomentSource
+    (Configuration : Set)
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    (limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit)
+    (quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit))
+    (division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient)
+    (family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration limitLaws quotient division)
+    (observableAlgebra :
+      OS2.CylinderOSAlgebra (Configuration → ℝ))
+    : Set₁ where
+  private
+    dataSet =
+      Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+        family observableAlgebra
+  field
+    moments :
+      T5.ExponentialMomentProducer
+        (Gram.operations dataSet)
+        (Gram.measureSequence dataSet)
+        (Gram.RenormalizedObservable dataSet)
+
+open LiteralCMP119PreOSQuantitativeMomentSource public
+
+preOSLiteralFiniteMomentBound :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra)
+    degree observable cutoff →
+  T5.LessEqual (moments source)
+    (Limit.finiteExpectation family cutoff
+      (T5.powerObservable (moments source) degree
+        (T5.absoluteObservable (moments source) observable)))
+    (T5.multiply (moments source)
+      (T5.factorial (moments source) degree)
+      (T5.divide (moments source)
+        (T5.exponentialMomentBound (moments source) observable)
+        (T5.lambda (moments source))))
+preOSLiteralFiniteMomentBound source degree observable cutoff =
+  T5.singleScaleInsertionMomentBound
+    (moments source)
+    degree observable tt cutoff
+
+preOSLiteralFiniteExponentialBound :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra)
+    observable cutoff →
+  T5.LessEqual (moments source)
+    (Limit.finiteExpectation family cutoff
+      (T5.exponentialObservable
+        (moments source)
+        (T5.lambda (moments source))
+        (T5.absoluteObservable (moments source) observable)))
+    (T5.exponentialMomentBound (moments source) observable)
+preOSLiteralFiniteExponentialBound source observable cutoff =
+  T5.exponentialMomentUniformBound
+    (moments source)
+    observable tt cutoff
 
 record LiteralCMP119QuantitativeMomentSource
     (G X Configuration Position CurvaturePolynomial LocalOperator
@@ -127,6 +211,9 @@ literalFiniteExponentialBound source observable cutoff =
   T5.exponentialMomentUniformBound
     (moments source)
     observable tt cutoff
+
+round559PreOSLiteralCMP119MomentTransportLevel : ProofLevel
+round559PreOSLiteralCMP119MomentTransportLevel = machineChecked
 
 round559LiteralCMP119MomentTransportLevel : ProofLevel
 round559LiteralCMP119MomentTransportLevel = machineChecked
