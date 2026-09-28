@@ -936,6 +936,42 @@ successfulRunPaysTripleLayeredWidth =
   tripleLayeredResidualWidthStrictlyBelowCurrentMeasure
 
 ------------------------------------------------------------------------
+-- Direct high-width obstruction.
+--
+-- A successful arity-tracked Q1 run forces
+--
+--   3 * summed semantic width < recursiveMeasure.
+--
+-- Hence any witnessed width meeting or exceeding that measure rules the run
+-- out immediately.  This is the exact quantitative falsification criterion for
+-- the remaining special-root experiment.
+------------------------------------------------------------------------
+
+tripleLayeredWidthAtLeastMeasureBlocksSuccessfulRun :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {next total : Nat} →
+  ResidualWidthStack
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    next
+    total →
+  Q2.recursiveMeasure state
+    ≤
+    triple total →
+  SuccessfulArityTerminalRunAt state →
+  ⊥
+tripleLayeredWidthAtLeastMeasureBlocksSuccessfulRun
+    stack
+    measureBelowWidth
+    run =
+  NatP.<⇒≱
+    (successfulRunPaysTripleLayeredWidth
+      run
+      stack)
+    measureBelowWidth
+
+------------------------------------------------------------------------
 -- Explicit progress hypothesis.
 --
 -- This is intentionally a property of an already-given constructor, not a new
