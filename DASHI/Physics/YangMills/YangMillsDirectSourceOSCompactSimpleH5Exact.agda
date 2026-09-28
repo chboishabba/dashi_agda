@@ -42,6 +42,45 @@ record LiteralGroupDirectSourcePackage
     h3SameOS :
       H3.LiteralSelectedSpectrumIsSameOSHamiltonian h1h3
 
+    --------------------------------------------------------------------
+    -- Finite literal YM semantics on the SAME Y finite family.
+    --------------------------------------------------------------------
+    finiteVolumeCutoffMeasure :
+      ∀ cutoff →
+      Top.IsFiniteVolumeCutoffMeasure S G cutoff
+        (Top.finiteMeasure Y G cutoff)
+
+    reflectionPositiveRegularization :
+      ∀ cutoff →
+      Top.IsReflectionPositiveRegularization S G cutoff
+        (Top.finiteMeasure Y G cutoff)
+
+    ultravioletYangMillsNormalization :
+      Top.HasUltravioletYangMillsNormalization S G
+        (Top.finiteMeasure Y G)
+
+    asymptoticallyFreeScaleTrajectory :
+      Top.HasAsymptoticallyFreeScaleTrajectory S G
+        (Top.finiteMeasure Y G)
+
+    gaugeSymmetryPreserved :
+      Top.GaugeSymmetryPreservedAlongConstruction S G
+
+    localityPreserved :
+      Top.LocalityPreservedAlongConstruction S G
+
+    euclideanCovariancePreserved :
+      Top.EuclideanCovariancePreservedAlongConstruction S G
+
+    reflectionPositivityPreserved :
+      Top.ReflectionPositivityPreservedAlongConstruction S G
+
+    positivityNormalizationPreserved :
+      Top.PositivityNormalizationPreservedAlongConstruction S G
+
+    volumeCutoffCompatibility :
+      Top.VolumeCutoffCompatibilityPreserved S G
+
 open LiteralGroupDirectSourcePackage public
 
 record LiteralCompactSimpleDirectSourceContinuation
@@ -113,6 +152,56 @@ constructionForEveryLiteralCompactSimpleGroup {Y = Y} source G =
     (LiteralGroupDirectSourcePackage Y)
     (classifiedLiteralRoundtrip source G)
     (classifiedConstruction source (literalToClassified source G))
+
+
+finiteRGForEveryLiteralGroup :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  LiteralCompactSimpleDirectSourceContinuation Y →
+  Five.LiteralWeakCouplingRGConstruction Y
+finiteRGForEveryLiteralGroup source = record
+  { Five.LiteralWeakCouplingRGConstruction.finiteVolumeCutoffMeasure =
+      λ G cutoff →
+        finiteVolumeCutoffMeasure
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+          cutoff
+  ; Five.LiteralWeakCouplingRGConstruction.reflectionPositiveRegularization =
+      λ G cutoff →
+        reflectionPositiveRegularization
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+          cutoff
+  ; Five.LiteralWeakCouplingRGConstruction.ultravioletYangMillsNormalization =
+      λ G →
+        ultravioletYangMillsNormalization
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.asymptoticallyFreeScaleTrajectory =
+      λ G →
+        asymptoticallyFreeScaleTrajectory
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.gaugeSymmetryPreserved =
+      λ G →
+        gaugeSymmetryPreserved
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.localityPreserved =
+      λ G →
+        localityPreserved
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.euclideanCovariancePreserved =
+      λ G →
+        euclideanCovariancePreserved
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.reflectionPositivityPreserved =
+      λ G →
+        reflectionPositivityPreserved
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.positivityNormalizationPreserved =
+      λ G →
+        positivityNormalizationPreserved
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; Five.LiteralWeakCouplingRGConstruction.volumeCutoffCompatibility =
+      λ G →
+        volumeCutoffCompatibility
+          (constructionForEveryLiteralCompactSimpleGroup source G)
+  }
 
 sameHGapForEveryLiteralGroup :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
