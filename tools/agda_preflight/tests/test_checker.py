@@ -1038,3 +1038,59 @@ mk =
         and d.line >= 12
         for d in diagnostics
     )
+
+
+
+def test_record_update_inherits_unspecified_fields(tmp_path):
+    path = write_module(
+        tmp_path,
+        "RecordUpdate",
+        """module RecordUpdate where
+
+record R : Set₁ where
+  field
+    first : Set
+    second : Set
+
+base : R
+base =
+  record
+    { first = Set
+    ; second = Set
+    }
+
+updated : R
+updated =
+  record base
+    { second = Set
+    }
+
+incomplete : R
+incomplete =
+  record
+    { second = Set
+    }
+""",
+    )
+
+    checker = Checker(tmp_path)
+    summary = checker.parse_summary(path)
+    updates = [
+        item for item in summary.ast.record_expressions
+        if item.owner_function == "updated"
+    ]
+    assert updates
+    assert updates[0].is_update is True
+
+    diagnostics = checker.check(path)
+    update_missing = [
+        item for item in diagnostics
+        if item.code == "TSAGDA062"
+        and item.line == updates[0].line
+    ]
+    assert update_missing == []
+    assert any(
+        item.code == "TSAGDA062"
+        and "first" in item.message
+        for item in diagnostics
+    )
