@@ -1,29 +1,32 @@
 module DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact where
 
 ------------------------------------------------------------------------
--- LITERAL RationalAlgebraicCycle -> legacy CycleClassMap bridge
+-- LITERAL RationalAlgebraicCycle MAP AND LEGACY UNIVERSE FIREWALL
 --
 -- The older projective-space / hyperplane reopening compilers consume
--- Hodge.CycleClassMap, whose Cycle carrier is abstract.
 --
--- The frozen Clay owner instead insists on the literal carrier
+--   Hodge.CycleClassMap
 --
---   RationalAlgebraicCycle variety codimension.
+-- whose field is fixed at:
 --
--- This module builds the literal cycle algebra structurally and shows that,
--- once the hodgeCycleClass map is supplied with its ordinary linearity laws,
--- it induces a legacy CycleClassMap whose Cycle carrier is definitionally the
--- frozen literal carrier.
+--   Cycle : Nat -> Set.
 --
--- No Hodge-conjecture theorem is imported by this bridge.
+-- The frozen Clay carrier is:
+--
+--   RationalAlgebraicCycle variety codimension : Set₁.
+--
+-- Therefore a literal carrier-preserving instance of the OLD CycleClassMap is
+-- not universe-correct.  This owner pays the literal cycle algebra and defines
+-- the universe-correct map that the legacy projective/hyperplane compilers must
+-- be ported to (or the old CycleClassMap must be universe-lifted).
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Unit using (⊤)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.Rational.Base using (ℚ; _*_)
 
@@ -94,24 +97,21 @@ scaleRationalAlgebraicCycle scalar cycle =
     }
 
 ------------------------------------------------------------------------
--- Missing ordinary class-linearity laws.
---
--- These are not algebraicity-of-all-Hodge-classes statements. They are the
--- homomorphism laws needed to expose the already-supplied hodgeCycleClass as a
--- legacy CycleClassMap on the SAME literal cycle carrier.
+-- Universe-correct literal cycle-class map.
 ------------------------------------------------------------------------
 
-record LiteralHodgeCycleClassLinearity
+record LiteralRationalCycleClassMap
     {variety : Hodge.SmoothProjectiveComplexVariety}
     {comparison : Hodge.SingularDeRhamComparison variety}
-    {hodge : Hodge.HodgeDecomposition variety comparison}
-    (background :
-      Clay.RationalAlgebraicCycleClassBackground hodge) : Setω where
+    (hodge : Hodge.HodgeDecomposition variety comparison) : Setω where
   field
+    cycleClassBackground :
+      Clay.RationalAlgebraicCycleClassBackground hodge
+
     zeroClass :
       (codimension : Nat) →
       Clay.hodgeCycleClass
-          background codimension
+          cycleClassBackground codimension
           zeroRationalAlgebraicCycle
       ≡
       Hodge.zero
@@ -122,15 +122,15 @@ record LiteralHodgeCycleClassLinearity
       (left right :
         Hodge.RationalAlgebraicCycle variety codimension) →
       Clay.hodgeCycleClass
-          background codimension
+          cycleClassBackground codimension
           (addRationalAlgebraicCycle left right)
       ≡
       Hodge.add
         (Hodge.HodgePiece hodge codimension codimension)
         (Clay.hodgeCycleClass
-          background codimension left)
+          cycleClassBackground codimension left)
         (Clay.hodgeCycleClass
-          background codimension right)
+          cycleClassBackground codimension right)
 
     homogeneousClass :
       (codimension : Nat) →
@@ -138,140 +138,132 @@ record LiteralHodgeCycleClassLinearity
       (cycle :
         Hodge.RationalAlgebraicCycle variety codimension) →
       Clay.hodgeCycleClass
-          background codimension
+          cycleClassBackground codimension
           (scaleRationalAlgebraicCycle scalar cycle)
       ≡
       Hodge.scale
         (Hodge.HodgePiece hodge codimension codimension)
         scalar
         (Clay.hodgeCycleClass
-          background codimension cycle)
+          cycleClassBackground codimension cycle)
 
-open LiteralHodgeCycleClassLinearity public
+open LiteralRationalCycleClassMap public
 
 ------------------------------------------------------------------------
--- Carrier-preserving legacy adapter.
+-- Literal map operations are now fixed and carrier-preserving.
 ------------------------------------------------------------------------
 
-literalCycleClassMap :
+literalZeroCycle :
   ∀ {variety comparison hodge}
-    (background :
-      Clay.RationalAlgebraicCycleClassBackground hodge) →
-  LiteralHodgeCycleClassLinearity background →
-  Hodge.CycleClassMap
-    variety
-    comparison
-    hodge
-literalCycleClassMap background linearity =
-  record
-    { Hodge.Cycle =
-        λ codimension →
-          Hodge.RationalAlgebraicCycle
-            _ codimension
-    ; Hodge.zeroCycle =
-        λ codimension →
-          zeroRationalAlgebraicCycle
-    ; Hodge.addCycle =
-        λ codimension →
-          addRationalAlgebraicCycle
-    ; Hodge.scaleCycle =
-        λ codimension →
-          scaleRationalAlgebraicCycle
-    ; Hodge.cycleClass =
-        Clay.hodgeCycleClass background
-    ; Hodge.cycleClassZero =
-        zeroClass linearity
-    ; Hodge.cycleClassAdditive =
-        additiveClass linearity
-    ; Hodge.cycleClassHomogeneous =
-        homogeneousClass linearity
-    ; Hodge.geometricCycleConstruction =
-        λ codimension → Set
-    }
-
-------------------------------------------------------------------------
--- Definitional carrier receipt.
-------------------------------------------------------------------------
-
-literalCycleClassMapCarrier :
-  ∀ {variety comparison hodge}
-    (background :
-      Clay.RationalAlgebraicCycleClassBackground hodge)
-    (linearity :
-      LiteralHodgeCycleClassLinearity background)
+    (map : LiteralRationalCycleClassMap hodge)
     (codimension : Nat) →
-  Hodge.Cycle
-      (literalCycleClassMap background linearity)
-      codimension
-  ≡
-  Hodge.RationalAlgebraicCycle
-      variety codimension
-literalCycleClassMapCarrier background linearity codimension =
-  refl
+  Hodge.RationalAlgebraicCycle variety codimension
+literalZeroCycle map codimension =
+  zeroRationalAlgebraicCycle
 
-literalCycleClassMapClassAgrees :
+literalAddCycle :
   ∀ {variety comparison hodge}
-    (background :
-      Clay.RationalAlgebraicCycleClassBackground hodge)
-    (linearity :
-      LiteralHodgeCycleClassLinearity background)
-    (codimension : Nat)
-    (cycle :
-      Hodge.RationalAlgebraicCycle variety codimension) →
-  Hodge.cycleClass
-      (literalCycleClassMap background linearity)
-      codimension
-      cycle
-  ≡
-  Clay.hodgeCycleClass background codimension cycle
-literalCycleClassMapClassAgrees
-    background linearity codimension cycle =
-  refl
+    (map : LiteralRationalCycleClassMap hodge)
+    (codimension : Nat) →
+  Hodge.RationalAlgebraicCycle variety codimension →
+  Hodge.RationalAlgebraicCycle variety codimension →
+  Hodge.RationalAlgebraicCycle variety codimension
+literalAddCycle map codimension =
+  addRationalAlgebraicCycle
+
+literalScaleCycle :
+  ∀ {variety comparison hodge}
+    (map : LiteralRationalCycleClassMap hodge)
+    (codimension : Nat) →
+  ℚ →
+  Hodge.RationalAlgebraicCycle variety codimension →
+  Hodge.RationalAlgebraicCycle variety codimension
+literalScaleCycle map codimension =
+  scaleRationalAlgebraicCycle
+
+literalHodgeCycleClass :
+  ∀ {variety comparison hodge}
+    (map : LiteralRationalCycleClassMap hodge)
+    (codimension : Nat) →
+  Hodge.RationalAlgebraicCycle variety codimension →
+  Hodge.Carrier
+    (Hodge.HodgePiece hodge codimension codimension)
+literalHodgeCycleClass map =
+  Clay.hodgeCycleClass
+    (cycleClassBackground map)
 
 ------------------------------------------------------------------------
--- Singular-cycle addition background for the new primitive residual split.
---
--- The literal cycle operation is now fixed. Only its singular class-linearity
--- law remains established-background input.
+-- Singular-cycle addition bridge used by primitive residual reconstruction.
 ------------------------------------------------------------------------
 
 record LiteralSingularCycleClassAdditivity
     {variety : Hodge.SmoothProjectiveComplexVariety}
     {comparison : Hodge.SingularDeRhamComparison variety}
     {hodge : Hodge.HodgeDecomposition variety comparison}
-    (background :
-      Clay.RationalAlgebraicCycleClassBackground hodge) : Setω where
+    (map : LiteralRationalCycleClassMap hodge) : Setω where
   field
     additiveSingularClass :
       (codimension : Nat) →
       (left right :
         Hodge.RationalAlgebraicCycle variety codimension) →
       Clay.singularCycleClass
-          background codimension
+          (cycleClassBackground map)
+          codimension
           (addRationalAlgebraicCycle left right)
       ≡
       Hodge.add
         (Hodge.singularCohomology comparison
           (codimension + codimension))
         (Clay.singularCycleClass
-          background codimension left)
+          (cycleClassBackground map)
+          codimension left)
         (Clay.singularCycleClass
-          background codimension right)
+          (cycleClassBackground map)
+          codimension right)
 
 open LiteralSingularCycleClassAdditivity public
 
 ------------------------------------------------------------------------
+-- Exact reuse boundary.
+------------------------------------------------------------------------
+
+record LegacyLiteralCycleMapReuseBoundary : Set where
+  constructor legacy-literal-cycle-map-reuse-boundary
+  field
+    literalCycleAlgebraPaid : ⊤
+    literalSetOneCarrierPaid : ⊤
+    legacyCycleCarrierLivesInSet : ⊤
+    directCarrierPreservingLegacyInstancePaid : Set
+
+canonicalLegacyLiteralCycleMapReuseBoundary :
+  LegacyLiteralCycleMapReuseBoundary
+canonicalLegacyLiteralCycleMapReuseBoundary =
+  legacy-literal-cycle-map-reuse-boundary
+    _
+    _
+    _
+    ⊥
+
+directLegacyCarrierReuseStillUnpaid :
+  directCarrierPreservingLegacyInstancePaid
+    canonicalLegacyLiteralCycleMapReuseBoundary →
+  ⊥
+directLegacyCarrierReuseStillUnpaid ()
+
+------------------------------------------------------------------------
 -- FRONTIER
 --
--- Paid:
---   literal zero/add/scale on RationalAlgebraicCycle;
---   exact legacy CycleClassMap carrier adapter;
---   exact agreement with the frozen hodgeCycleClass.
+-- The requested bridge exposed a precise API mismatch:
 --
--- Still required from established cycle-class theory:
---   ordinary zero/add/scale linearity of hodgeCycleClass;
---   singular additivity when using the primitive residual reconstruction.
+--   legacy CycleClassMap.Cycle : Nat -> Set
+--   literal RationalAlgebraicCycle : Set₁.
 --
--- Once those laws are instantiated, existing legacy projective/hyperplane
--- constructors operate on the SAME literal Clay cycle carrier.
+-- So the safe next implementation is one of:
+--
+--   1. port the projective/hyperplane reopening compiler to
+--      LiteralRationalCycleClassMap; or
+--
+--   2. universe-generalize the legacy CycleClassMap itself.
+--
+-- The literal cycle operations are now paid and can be reused by either route.
 ------------------------------------------------------------------------
