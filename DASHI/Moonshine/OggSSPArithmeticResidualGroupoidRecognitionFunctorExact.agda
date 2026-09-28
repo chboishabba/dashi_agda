@@ -25,7 +25,6 @@ import DASHI.Core.ActionOrbitRecognitionFunctorExact as RecognitionCore
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Symmetry
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
-import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact as P2
 import DASHI.Moonshine.Base369P3ConstantTernaryActionGroupoidExact as P3
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Fricke
