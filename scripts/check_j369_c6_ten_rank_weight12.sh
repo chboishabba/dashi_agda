@@ -279,3 +279,14 @@ grep -q 'completeThreeByThreeCountTableOwned' "${rh_ssp15_targets[5]}"
 grep -q 'splitColumnMatchesCanonicalCMCount' "${rh_ssp15_targets[5]}"
 grep -q 'inertColumnMatchesCanonicalCMCount' "${rh_ssp15_targets[5]}"
 grep -q 'ramifiedColumnMatchesCanonicalCMCount' "${rh_ssp15_targets[5]}"
+
+
+# Pinned cross-branch RH producer donor provenance.
+rh_ssp15_donor_target=DASHI/Analysis/RiemannSSP15RHProducerDonorManifestExact.agda
+test -f "$rh_ssp15_donor_target"
+scripts/run_agda29_parallel_check.sh "$rh_ssp15_donor_target"
+grep -q '824f84cddf5cf424c643688c2d24e351795dac07' "$rh_ssp15_donor_target"
+grep -q '138153858e329469048175fcdeeaf75c182078be' "$rh_ssp15_donor_target"
+grep -q 'quarticFourAtomic_primitive_integer_kernel' "$rh_ssp15_donor_target"
+grep -q 'quarticFourAtomic_depth_five_block_kernel' "$rh_ssp15_donor_target"
+grep -q 'exactHeadVerifierObservedIsFalse' "$rh_ssp15_donor_target"
