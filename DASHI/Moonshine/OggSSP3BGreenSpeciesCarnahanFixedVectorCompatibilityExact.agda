@@ -72,6 +72,51 @@ foldSourcePieces {A} source (piece ∷ rest) =
     (foldSourcePieces source rest)
 
 ------------------------------------------------------------------------
+-- 1b. Additive normalized length of a source-piece fold.
+------------------------------------------------------------------------
+
+sourcePieceLength :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (source : ThreeBSourcePiece A) ->
+  Piece source ->
+  Nat
+sourcePieceLength {A} source piece =
+  Green.normalizedDVRLength A (moduleClass source piece)
+
+sumSourcePieceLengths :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (source : ThreeBSourcePiece A) ->
+  List (Piece source) ->
+  Nat
+sumSourcePieceLengths source [] = 0
+sumSourcePieceLengths source (piece ∷ rest) =
+  sourcePieceLength source piece
+  + sumSourcePieceLengths source rest
+
+foldSourcePiecesLengthIsSum :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (source : ThreeBSourcePiece A) ->
+  (pieces : List (Piece source)) ->
+  Green.normalizedDVRLength A
+    (foldSourcePieces source pieces)
+  ≡
+  sumSourcePieceLengths source pieces
+foldSourcePiecesLengthIsSum {A} source [] =
+  trans
+    (sym
+      (Green.speciesValueIsNormalizedDVRLength A
+        (Green.zeroClass (Green.species A))))
+    (Green.speciesZero (Green.species A))
+foldSourcePiecesLengthIsSum {A} source (piece ∷ rest) =
+  trans
+    (Green.normalizedLengthDirectSum A
+      (moduleClass source piece)
+      (foldSourcePieces source rest))
+    (cong₂ _+_
+      refl
+      (foldSourcePiecesLengthIsSum source rest))
+
+------------------------------------------------------------------------
 -- 2. Every geometric p=3 sector class must reopen through H_3 pieces.
 ------------------------------------------------------------------------
 
@@ -109,6 +154,25 @@ record ThreeBGreenSpeciesCarnahanCompatibility
       refinementDoesNotIdentifyH3PiecesWithNodeBranchLabels ≡ true
 
 open ThreeBGreenSpeciesCarnahanCompatibility public
+
+sectorLengthIsSumOfCarnahanSourcePieceLengths :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (compatibility : ThreeBGreenSpeciesCarnahanCompatibility A) ->
+  (sector : Preferred.Sector Preferred.p3PreferredPresentation) ->
+  Green.normalizedDVRLength A
+    (Green.p3SectorClass A sector)
+  ≡
+  sumSourcePieceLengths
+    (sourcePieces compatibility)
+    (sectorSourcePieces compatibility sector)
+sectorLengthIsSumOfCarnahanSourcePieceLengths {A} compatibility sector =
+  trans
+    (cong
+      (Green.normalizedDVRLength A)
+      (sectorClassReopensFromSourcePieces compatibility sector))
+    (foldSourcePiecesLengthIsSum
+      (sourcePieces compatibility)
+      (sectorSourcePieces compatibility sector))
 
 ------------------------------------------------------------------------
 -- 3. Sourced provenance consequence.
