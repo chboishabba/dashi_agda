@@ -263,6 +263,69 @@ puncturedABEnumerationLengthIs80 =
     Punctured.puncturedKernel4EnumerationLengthIs80
 
 ------------------------------------------------------------------------
+-- 5b. Puncturing the local zero is NOT closed under overlap restriction.
+--
+-- A local section can be nonzero only off-diagonal while both self/overlap
+-- coordinates remain zero.  Therefore the punctured T4 local carrier is not a
+-- sub-presheaf of a simultaneously punctured T1-overlap cover under the
+-- existing restriction maps.
+------------------------------------------------------------------------
+
+sspSupport : SSP.SSPTrit -> Bool
+sspSupport trit =
+  Codec.support (SSP.toTrit trit)
+
+offDiagonalPuncturedAB : Descent.ABSection
+offDiagonalPuncturedAB =
+  Descent.ab-section
+    SSP.sspZero
+    SSP.sspPosOne
+    SSP.sspZero
+    SSP.sspZero
+
+offDiagonalPuncturedABHasSupport :
+  abSupport offDiagonalPuncturedAB ≡ true
+offDiagonalPuncturedABHasSupport = refl
+
+offDiagonalPuncturedABRestrictsZeroAtA :
+  sspSupport (Descent.aaAB offDiagonalPuncturedAB) ≡ false
+offDiagonalPuncturedABRestrictsZeroAtA = refl
+
+offDiagonalPuncturedABRestrictsZeroAtB :
+  sspSupport (Descent.bbAB offDiagonalPuncturedAB) ≡ false
+offDiagonalPuncturedABRestrictsZeroAtB = refl
+
+puncturedABDoesNotForcePuncturedA :
+  ((section : Descent.ABSection) ->
+    abSupport section ≡ true ->
+    sspSupport (Descent.aaAB section) ≡ true)
+  ->
+  ⊥
+puncturedABDoesNotForcePuncturedA restriction =
+  false≢true
+    (restriction
+      offDiagonalPuncturedAB
+      offDiagonalPuncturedABHasSupport)
+  where
+    false≢true : false ≡ true -> ⊥
+    false≢true ()
+
+puncturedABDoesNotForcePuncturedB :
+  ((section : Descent.ABSection) ->
+    abSupport section ≡ true ->
+    sspSupport (Descent.bbAB section) ≡ true)
+  ->
+  ⊥
+puncturedABDoesNotForcePuncturedB restriction =
+  false≢true
+    (restriction
+      offDiagonalPuncturedAB
+      offDiagonalPuncturedABHasSupport)
+  where
+    false≢true : false ≡ true -> ⊥
+    false≢true ()
+
+------------------------------------------------------------------------
 -- 6. Firewall.
 ------------------------------------------------------------------------
 
@@ -292,6 +355,8 @@ record Trialectic369DyadicSectionTriadicKernelBoundary : Set where
     supportPunctureTransportedToLocals : Bool
     concreteABLocalCount81 : Bool
     concretePuncturedABLocalCount80 : Bool
+    puncturedLocalClosedUnderPuncturedOverlapRestriction : Bool
+    explicitOffDiagonalCounterexampleOwned : Bool
     rhMechanismClaimed : Bool
     punctureForcedByDescentClaimed : Bool
 
@@ -300,4 +365,5 @@ canonicalTrialectic369DyadicSectionTriadicKernelBoundary :
 canonicalTrialectic369DyadicSectionTriadicKernelBoundary =
   trialectic-369-dyadic-section-triadic-kernel-boundary
     true true true true true true true
+    false true
     false false
