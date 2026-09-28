@@ -190,6 +190,7 @@ import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
 import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact as UranoCompat
 import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
 import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact as CarnahanCompat
+import DASHI.Moonshine.OggSSPPBSourceGeometricLocalizationAuthorityExact as SourceGeom
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3LocalWeight
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
@@ -377,11 +378,20 @@ carnahanThreeBGreenCompatibilityBoundary :
 carnahanThreeBGreenCompatibilityBoundary =
   CarnahanCompat.canonicalThreeBGreenSpeciesCarnahanCompatibilityBoundary
 
+
+sourceGeometricLocalizationBoundary :
+  SourceGeom.PBSourceGeometricLocalizationBoundary
+sourceGeometricLocalizationBoundary =
+  SourceGeom.canonicalPBSourceGeometricLocalizationBoundary
+
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
 ------------------------------------------------------------------------
 
 data ArithmeticIndependent369Residual : Set where
+  missingPBSourceGeometricLocalizationAuthority :
+    ArithmeticIndependent369Residual
+
   missingPBGreenRingSectorSpeciesLocalizationAuthority :
     ArithmeticIndependent369Residual
 
@@ -396,7 +406,7 @@ data ArithmeticIndependent369Residual : Set where
 
 firstResidual : ArithmeticIndependent369Residual
 firstResidual =
-  missingPBGreenRingSectorSpeciesLocalizationAuthority
+  missingPBSourceGeometricLocalizationAuthority
 
 data Independent369TargetsStillMissing : Set where
 data P3StructuralCandidateStillMissing : Set where
@@ -576,6 +586,8 @@ record ArithmeticIndependent369Frontier : Set where
     p2GreenSpeciesUranoParityCompatibilityPaid : Bool
     carnahan3BOrderNineRefinementSourced : Bool
     p3GreenSpeciesCarnahanH3CompatibilityPaid : Bool
+    jointSourceGeometricLocalizationCutsetPaid : Bool
+    jointSourceGeometricLocalizationAuthorityPaid : Bool
     carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
     uranoTheoryDeterminesSectorLengths : Bool
     greenRingFrameworkProvesLocalizedPBSpecies : Bool
@@ -737,6 +749,8 @@ canonicalArithmeticIndependent369Frontier =
     ; p2GreenSpeciesUranoParityCompatibilityPaid = false
     ; carnahan3BOrderNineRefinementSourced = true
     ; p3GreenSpeciesCarnahanH3CompatibilityPaid = false
+    ; jointSourceGeometricLocalizationCutsetPaid = true
+    ; jointSourceGeometricLocalizationAuthorityPaid = false
     ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
     ; uranoTheoryDeterminesSectorLengths = false
     ; greenRingFrameworkProvesLocalizedPBSpecies = false
