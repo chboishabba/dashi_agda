@@ -2,7 +2,7 @@ module DASHI.Cognition.PNF.RuntimeThroughputConstitution where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
@@ -133,7 +133,7 @@ record WorkerScalingReceipt (workload : String) : Set where
     parallelExtraWorkers : Nat
     parallelObservation : WorkerScalePoint workload
     parallelWorkerCountIsAtLeastTwo :
-      workerCount parallelObservation ≡ Nat.suc (Nat.suc parallelExtraWorkers)
+      workerCount parallelObservation ≡ suc (suc parallelExtraWorkers)
 
     remainingWorkerObservations : List (WorkerScalePoint workload)
 
