@@ -593,3 +593,5 @@ import DASHI.Physics.Closure.NSTriadKNR650HHOrbitProfileRound777Exact
 import DASHI.Physics.Closure.NSTriadKNR650HHNestedRowsRouteToLHRound778Exact
 import DASHI.Physics.Closure.NSTriadKNR650LHOrbitDominantPairRound779Exact
 import DASHI.Physics.Closure.NSTriadKNR650HLOrbitDominantPairRound780Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650OrbitTransitionCutsetRound781Exact
