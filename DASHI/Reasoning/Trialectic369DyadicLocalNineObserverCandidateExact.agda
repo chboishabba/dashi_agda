@@ -35,6 +35,7 @@ import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Reasoning.Trialectic369DyadicC3LocalComplementSymmetryExact as C3
+import DASHI.Reasoning.TrialecticObserverMatrix369Exact as Observer
 
 ------------------------------------------------------------------------
 -- 1. Existing exact SSPTrit <-> TriTruth coordinate chart.
@@ -178,7 +179,7 @@ observeCAPhaseQuotient9 =
     (f ∘ g) x = f (g x)
 
 abObserverAfterRotateIsBCObserver :
-  (matrix : C3.Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
   observeABPhaseQuotient9
     (Descent.restrictAB (C3.rotateABC matrix))
   ≡ observeBCPhaseQuotient9
@@ -186,7 +187,7 @@ abObserverAfterRotateIsBCObserver :
 abObserverAfterRotateIsBCObserver matrix = refl
 
 abObserverAfterRotateTwiceIsCAObserver :
-  (matrix : C3.Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
   observeABPhaseQuotient9
     (Descent.restrictAB (C3.rotateABCTwice matrix))
   ≡ observeCAPhaseQuotient9
