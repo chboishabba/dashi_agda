@@ -76,6 +76,51 @@ foldSourcePieces {A} source (piece ∷ rest) =
     (foldSourcePieces source rest)
 
 ------------------------------------------------------------------------
+-- 1b. Additive normalized length of a source-piece fold.
+------------------------------------------------------------------------
+
+sourcePieceLength :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (source : TwoBSourcePiece A) ->
+  Piece source ->
+  Nat
+sourcePieceLength {A} source piece =
+  Green.normalizedDVRLength A (moduleClass source piece)
+
+sumSourcePieceLengths :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (source : TwoBSourcePiece A) ->
+  List (Piece source) ->
+  Nat
+sumSourcePieceLengths source [] = 0
+sumSourcePieceLengths source (piece ∷ rest) =
+  sourcePieceLength source piece
+  + sumSourcePieceLengths source rest
+
+foldSourcePiecesLengthIsSum :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (source : TwoBSourcePiece A) ->
+  (pieces : List (Piece source)) ->
+  Green.normalizedDVRLength A
+    (foldSourcePieces source pieces)
+  ≡
+  sumSourcePieceLengths source pieces
+foldSourcePiecesLengthIsSum {A} source [] =
+  trans
+    (sym
+      (Green.speciesValueIsNormalizedDVRLength A
+        (Green.zeroClass (Green.species A))))
+    (Green.speciesZero (Green.species A))
+foldSourcePiecesLengthIsSum {A} source (piece ∷ rest) =
+  trans
+    (Green.normalizedLengthDirectSum A
+      (moduleClass source piece)
+      (foldSourcePieces source rest))
+    (cong₂ _+_
+      refl
+      (foldSourcePiecesLengthIsSum source rest))
+
+------------------------------------------------------------------------
 -- 2. Every p=2 geometric sector class must reopen through source pieces.
 ------------------------------------------------------------------------
 
@@ -113,6 +158,25 @@ record TwoBGreenSpeciesUranoParityCompatibility
       refinementDoesNotIdentifyModuleTagsWithInertiaLabels ≡ true
 
 open TwoBGreenSpeciesUranoParityCompatibility public
+
+sectorLengthIsSumOfUranoSourcePieceLengths :
+  {A : Green.PBGreenRingSectorSpeciesAuthority} ->
+  (compatibility : TwoBGreenSpeciesUranoParityCompatibility A) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  Green.normalizedDVRLength A
+    (Green.p2SectorClass A sector)
+  ≡
+  sumSourcePieceLengths
+    (sourcePieces compatibility)
+    (sectorSourcePieces compatibility sector)
+sectorLengthIsSumOfUranoSourcePieceLengths {A} compatibility sector =
+  trans
+    (cong
+      (Green.normalizedDVRLength A)
+      (sectorClassReopensFromSourcePieces compatibility sector))
+    (foldSourcePiecesLengthIsSum
+      (sourcePieces compatibility)
+      (sectorSourcePieces compatibility sector))
 
 ------------------------------------------------------------------------
 -- 3. Necessary consequence: every source piece is non-forbidden.
