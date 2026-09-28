@@ -192,6 +192,7 @@ import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact as Uran
 import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
 import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact as CarnahanCompat
 import DASHI.Moonshine.OggSSPPBSourceGeometricLocalizationAuthorityExact as SourceGeom
+import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact as TerminalPB
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3LocalWeight
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
@@ -402,6 +403,9 @@ sourceGeometricLocalizationBoundary =
 ------------------------------------------------------------------------
 
 data ArithmeticIndependent369Residual : Set where
+  missingPBTerminalPrimeLevelLocalizationTheorem :
+    ArithmeticIndependent369Residual
+
   missingPBSourceGeometricLocalizationAuthority :
     ArithmeticIndependent369Residual
 
@@ -419,7 +423,7 @@ data ArithmeticIndependent369Residual : Set where
 
 firstResidual : ArithmeticIndependent369Residual
 firstResidual =
-  missingPBSourceGeometricLocalizationAuthority
+  missingPBTerminalPrimeLevelLocalizationTheorem
 
 data Independent369TargetsStillMissing : Set where
 data P3StructuralCandidateStillMissing : Set where
@@ -602,6 +606,9 @@ record ArithmeticIndependent369Frontier : Set where
     p2GreenSpeciesUranoParityCompatibilityPaid : Bool
     carnahan3BOrderNineRefinementSourced : Bool
     p3GreenSpeciesCarnahanH3CompatibilityPaid : Bool
+    terminalPrimeLevelLocalizationCutsetPaid : Bool
+    terminalPrimeLevelLocalizationAuthorityPaid : Bool
+    sourceGeometricAuthorityDerivedFromTerminalTheorem : Bool
     jointSourceGeometricLocalizationCutsetPaid : Bool
     jointSourceGeometricLocalizationAuthorityPaid : Bool
     jointLocalizationDirectMonsterBridgeAdapterPaid : Bool
@@ -772,6 +779,9 @@ canonicalArithmeticIndependent369Frontier =
     ; p2GreenSpeciesUranoParityCompatibilityPaid = false
     ; carnahan3BOrderNineRefinementSourced = true
     ; p3GreenSpeciesCarnahanH3CompatibilityPaid = false
+    ; terminalPrimeLevelLocalizationCutsetPaid = true
+    ; terminalPrimeLevelLocalizationAuthorityPaid = false
+    ; sourceGeometricAuthorityDerivedFromTerminalTheorem = true
     ; jointSourceGeometricLocalizationCutsetPaid = true
     ; jointSourceGeometricLocalizationAuthorityPaid = false
     ; jointLocalizationDirectMonsterBridgeAdapterPaid = true
