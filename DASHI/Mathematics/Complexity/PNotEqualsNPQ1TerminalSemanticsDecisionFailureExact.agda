@@ -39,6 +39,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
@@ -404,6 +405,99 @@ decisionFailureGivesQ1TerminalPackage
   Initial.initialStateForFormula formula
   ,
   semantics
+
+------------------------------------------------------------------------
+-- Direct contradiction with an exact SAT-in-P witness.  The partial-Kleene
+-- compiler is not needed once terminal semantics has already been supplied.
+------------------------------------------------------------------------
+
+q1TerminalSemanticsContradictsSATInPDirectly :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (stepSystem : Q2.BoundedSelfReferenceStepSystem)
+    (initial : Q2.BoundedSelfReferenceState) →
+  ClayClosure.Q1OppositeSATTerminalSemantics
+    (Direct.inPToPolynomialSATDeciderCandidate satP)
+    stepSystem
+    initial →
+  ⊥
+q1TerminalSemanticsContradictsSATInPDirectly
+    satP
+    stepSystem
+    initial
+    semantics =
+  Direct.failureContradictsCorrectSATDecision
+    satP
+    (q1TerminalSemanticsGivesDecisionFailure
+      stepSystem
+      initial
+      semantics)
+
+------------------------------------------------------------------------
+-- Universal package equivalence.
+------------------------------------------------------------------------
+
+UniversalQ1TerminalPackage :
+  (cost : PR.PolynomialCostModel Cook.BooleanFormula) →
+  Set₁
+UniversalQ1TerminalPackage cost =
+  (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  CandidateQ1TerminalPackage candidate
+
+universalQ1TerminalPackageGivesUniversalDecisionFailure :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  UniversalQ1TerminalPackage cost →
+  Direct.UniversalPolynomialSATDecisionFailure cost
+universalQ1TerminalPackageGivesUniversalDecisionFailure
+    packages
+    candidate =
+  q1TerminalPackageGivesDecisionFailure
+    (packages candidate)
+
+universalDecisionFailureGivesUniversalQ1TerminalPackage :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  Direct.UniversalPolynomialSATDecisionFailure cost →
+  UniversalQ1TerminalPackage cost
+universalDecisionFailureGivesUniversalQ1TerminalPackage
+    failures
+    candidate =
+  decisionFailureGivesQ1TerminalPackage
+    (failures candidate)
+
+record UniversalQ1TerminalPackageEquivalence
+    (cost : PR.PolynomialCostModel Cook.BooleanFormula) : Set₁ where
+  constructor universal-q1-terminal-package-equivalence
+  field
+    terminalPackagesToFailures :
+      UniversalQ1TerminalPackage cost →
+      Direct.UniversalPolynomialSATDecisionFailure cost
+
+    failuresToTerminalPackages :
+      Direct.UniversalPolynomialSATDecisionFailure cost →
+      UniversalQ1TerminalPackage cost
+
+open UniversalQ1TerminalPackageEquivalence public
+
+canonicalUniversalQ1TerminalPackageEquivalence :
+  (cost : PR.PolynomialCostModel Cook.BooleanFormula) →
+  UniversalQ1TerminalPackageEquivalence cost
+canonicalUniversalQ1TerminalPackageEquivalence cost =
+  universal-q1-terminal-package-equivalence
+    universalQ1TerminalPackageGivesUniversalDecisionFailure
+    universalDecisionFailureGivesUniversalQ1TerminalPackage
+
+universalQ1TerminalPackageClosesPNotEqualsNP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  Clay.PNotEqualsNPEstablishedBackground cost →
+  UniversalQ1TerminalPackage cost →
+  Clay.PNotEqualsNP cost
+universalQ1TerminalPackageClosesPNotEqualsNP
+    background
+    packages =
+  Direct.universalDecisionFailureClosesPNotEqualsNP
+    background
+    (universalQ1TerminalPackageGivesUniversalDecisionFailure
+      packages)
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
