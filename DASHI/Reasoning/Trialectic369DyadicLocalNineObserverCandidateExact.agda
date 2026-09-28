@@ -31,6 +31,7 @@ import Base369 as Base
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
 import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact as Coarse
+import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 
@@ -128,7 +129,7 @@ observeABPhaseQuotient9 =
 
 observeABBalancedPair :
   Descent.ABSection ->
-  DASHI.Biology.BalancedTernaryHarmonicCarrierExact.BalancedPair
+  Harmonic.BalancedPair
 observeABBalancedPair section =
   Coarse.phaseQuotientToBalancedPair
     (observeABPhaseQuotient9 section)
