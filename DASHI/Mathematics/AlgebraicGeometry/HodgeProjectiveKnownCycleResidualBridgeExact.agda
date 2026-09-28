@@ -22,6 +22,7 @@ import DASHI.Mathematics.AlgebraicGeometry.HodgeAlgebraicCycleClayCoreExact as C
 import DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact as Literal
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLiteralHodgeReopeningCompilerExact as Projective
 import DASHI.Mathematics.AlgebraicGeometry.HodgePrimitiveAlgebraicResidualDecompositionExact as Residual
+import DASHI.Mathematics.AlgebraicGeometry.HodgePrimitiveZeroResidualExact as Zero
 
 ------------------------------------------------------------------------
 -- Exact singular receipt for a literal projective representative.
@@ -196,6 +197,47 @@ projectiveKnownCycle spanning exact =
   projectiveLiteralRepresentativeHasExactSingularClass
     spanning
     exact
+
+------------------------------------------------------------------------
+-- Projective known-cycle -> literal zero residual.
+------------------------------------------------------------------------
+
+projectiveKnownCycleGivesZeroResidualSplit :
+  ∀ {variety comparison hodge cycleMap codimension}
+    {isPrimitive :
+      Primitive.PrimitivePredicate hodge}
+    (spanning :
+      Projective.ProjectiveSpaceLiteralHyperplanePowerSpanning
+        {variety = variety}
+        {comparison = comparison}
+        {hodge = hodge}
+        cycleMap codimension)
+    (zeroBackground :
+      Zero.PrimitiveZeroResidualBackground
+        isPrimitive codimension)
+    (primitive :
+      Primitive.PrimitiveRationalHodgeClassExact
+        isPrimitive codimension) →
+  Residual.PrimitiveAlgebraicResidualSplit
+    {cycleBackground =
+      Literal.cycleClassBackground cycleMap}
+    (Zero.ZeroSingularPrimitiveResidualFamily isPrimitive)
+    primitive
+projectiveKnownCycleGivesZeroResidualSplit
+    spanning
+    zeroBackground
+    primitive =
+  Zero.knownCycleExactGivesZeroResidualSplit
+    zeroBackground
+    primitive
+    (Projective.projectiveSpaceLiteralCycleRepresentative
+      spanning
+      (Hodge.rationalHodgeClass
+        (Exact.hodgeComponent
+          (Primitive.exactClass primitive))))
+    (projectiveLiteralRepresentativeHasExactSingularClass
+      spanning
+      (Primitive.exactClass primitive))
 
 ------------------------------------------------------------------------
 -- FRONTIER
