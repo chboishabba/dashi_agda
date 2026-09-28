@@ -29,6 +29,7 @@ module DASHI.Moonshine.MonsterFiveArithmeticSourceRecognitionFrontierExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
@@ -38,6 +39,7 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.MonsterFivePrimaryRelationalModelBoundaryExact as Source
 import DASHI.Moonshine.MonsterFiveTrialecticLocalRecognitionExact as LocalRecognition
 import DASHI.Moonshine.MonsterFiveTrialecticC3PointedRecognitionExact as PointedRecognition
+import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
 
 ------------------------------------------------------------------------
 -- 1. Exact p=5 arithmetic/profile receipts already paid.
@@ -75,8 +77,6 @@ record P5ArithmeticRecognitionReceipts : Set where
     inversePhasePairs : Nat
     inversePhasePairsExact :
       inversePhasePairs ≡ Nested.phasePairCount Nested.odd5
-
-open import Agda.Builtin.Nat using (Nat)
 
 canonicalP5ArithmeticRecognitionReceipts :
   P5ArithmeticRecognitionReceipts
@@ -140,14 +140,14 @@ compiledSourceObserverIntertwiner lift state =
 compiledBCRecognition :
   (lift : P5MonsterTrialecticSourceLift) ->
   Source.ActualState (source lift) ->
-  DASHI.Reasoning.Trialectic369DescentNaturalityExact.BCSection
+  Descent.BCSection
 compiledBCRecognition lift =
   PointedRecognition.sourceToBC (localRecognition lift)
 
 compiledCARecognition :
   (lift : P5MonsterTrialecticSourceLift) ->
   Source.ActualState (source lift) ->
-  DASHI.Reasoning.Trialectic369DescentNaturalityExact.CASection
+  Descent.CASection
 compiledCARecognition lift =
   PointedRecognition.sourceToCA (localRecognition lift)
 
