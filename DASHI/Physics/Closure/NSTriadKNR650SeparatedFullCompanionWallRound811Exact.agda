@@ -66,6 +66,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNWeightedProjectedForcingOuterFoldRound438Exact as R438
@@ -139,7 +140,7 @@ module SeparatedFullCompanionWall
     module Id = B.PhysicalId.Id
 
     physicalSystem = B.Live.P.Base.Base.NestedAt.physicalSystem
-    system = Audit.finiteSystem physicalSystem
+    system = Field30.finiteSystem physicalSystem
 
     helicalScalars =
       Base.Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.S
