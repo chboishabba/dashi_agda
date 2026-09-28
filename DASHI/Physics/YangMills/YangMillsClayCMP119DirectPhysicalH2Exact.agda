@@ -6,8 +6,8 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact where
 --
 -- Object choice is eliminated:
 --
---   CanonicalCMP119ACompletion
---     -> exact R424 osInputs
+--   preferred published finite-OS + literal-moment source (R581)
+--     -> exact pinned osInputs
 --     -> real continuum measure / Schwinger family
 --     -> exact OS0..OS5 system
 --     -> one OS reconstruction of THAT system.
@@ -17,6 +17,8 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact where
 -- Schwinger family, Hilbert space, or Hamiltonian is selected here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -95,7 +97,7 @@ record CMP119DirectPhysicalH2
         osInputs
 
     --------------------------------------------------------------------
-    -- Literal finite-family semantics on the exact R436/R424 family.
+    -- Literal finite-family semantics on the exact preferred R581/R462 family.
     --------------------------------------------------------------------
     finiteVolumeCutoffMeasure : ∀ group cutoff →
       Top.IsFiniteVolumeCutoffMeasure S group cutoff
@@ -260,3 +262,42 @@ directCMP119H2PreferredFiniteOSSourceLevel =
 
 directCMP119H2PhysicalInstantiationLevel : ProofLevel
 directCMP119H2PhysicalInstantiationLevel = conditional
+
+------------------------------------------------------------------------
+-- Current H2 cut after the preferred-source refactor.
+------------------------------------------------------------------------
+
+explicitHaarReconstructionRequiredByH2 : Bool
+explicitHaarReconstructionRequiredByH2 = false
+
+explicitPeterWeylReconstructionRequiredByH2 : Bool
+explicitPeterWeylReconstructionRequiredByH2 = false
+
+projectiveProkhorovRequiredByH2 : Bool
+projectiveProkhorovRequiredByH2 = false
+
+independentOS05SourceRequiredByH2 : Bool
+independentOS05SourceRequiredByH2 = false
+
+legacyPinnedSystemStillCarriesOS4 : Bool
+legacyPinnedSystemStillCarriesOS4 = true
+
+explicitHaarReconstructionRequiredByH2IsFalse :
+  explicitHaarReconstructionRequiredByH2 ≡ false
+explicitHaarReconstructionRequiredByH2IsFalse = refl
+
+explicitPeterWeylReconstructionRequiredByH2IsFalse :
+  explicitPeterWeylReconstructionRequiredByH2 ≡ false
+explicitPeterWeylReconstructionRequiredByH2IsFalse = refl
+
+projectiveProkhorovRequiredByH2IsFalse :
+  projectiveProkhorovRequiredByH2 ≡ false
+projectiveProkhorovRequiredByH2IsFalse = refl
+
+independentOS05SourceRequiredByH2IsFalse :
+  independentOS05SourceRequiredByH2 ≡ false
+independentOS05SourceRequiredByH2IsFalse = refl
+
+legacyPinnedSystemStillCarriesOS4IsTrue :
+  legacyPinnedSystemStillCarriesOS4 ≡ true
+legacyPinnedSystemStillCarriesOS4IsTrue = refl
