@@ -35,9 +35,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --   P3.betaLogBlocking ~= rich.scalarIntegral
 -- from richNormalization.
 --
--- Therefore the only Gaussian cross-carrier source payment is
---   rich.scalarIntegral ~= embed(rational literal beta_Z),
--- carried by gaussianProjection.
+-- The universal P3 Gaussian is the rich scalarIntegral.  The full literal
+-- beta_Z is instead the rich one-loop coefficient = scalarIntegral + regularRemainder.
+-- The cross-carrier payment therefore concerns rich.coefficient, while the P3
+-- remainder explicitly absorbs rich.regularRemainder + literal betaInt.
 ------------------------------------------------------------------------
 
 record CanonicalS4RichProjectionMaxCut
