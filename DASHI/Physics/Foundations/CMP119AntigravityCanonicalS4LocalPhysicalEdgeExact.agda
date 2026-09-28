@@ -20,6 +20,7 @@ import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
+import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as Plaquette
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as RowA
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
@@ -82,7 +83,7 @@ record CanonicalS4LocalPhysicalEdgeInputs
       Bishop._≃_
         (P3.inverseCouplingSq (SU2.recursion bishopRunning) zero)
         (UV.embed
-          (DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact.nextInverseCouplingSq
+          (Plaquette.nextInverseCouplingSq
             (Constructor.asPhysicalRunningCouplingData coefficientWeld)
             zero))
 
