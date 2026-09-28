@@ -33,6 +33,8 @@ open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
@@ -43,6 +45,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetEx
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCodeClayClosureExact as ClayClosure
+import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneTerminationNoGoExact as NoGo
 
 ------------------------------------------------------------------------
 -- Repaired closed quotient from local arity/terminal admission.
@@ -433,6 +437,33 @@ repairedConstructorToQ2StepSystem constructor =
   Q2.bounded-self-reference-step-system
     (repairedNext constructor)
     (repairedNextStrictlyDecreases constructor)
+
+------------------------------------------------------------------------
+-- The repaired recurrence plugs directly into the existing finite-code Clay
+-- compiler.  No interpreter or fixed-point theorem is reopened.
+------------------------------------------------------------------------
+
+repairedArityRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel
+      DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor : RepairedArityTerminalStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  ClayClosure.Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (repairedConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+repairedArityRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    semantics =
+  ClayClosure.q1FiniteCodeContradictsSATInP
+    satP
+    (repairedConstructorToQ2StepSystem constructor)
+    initial
+    semantics
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
