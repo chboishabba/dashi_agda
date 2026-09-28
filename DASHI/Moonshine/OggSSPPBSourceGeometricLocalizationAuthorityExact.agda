@@ -36,6 +36,9 @@ import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2Geom
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3Geom
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as Bridge
+import DASHI.Moonshine.OggSSPSmallCharacteristicJointCorrectionCutsetExact as Joint
+import DASHI.Moonshine.OggSSPSmallCharacteristicFourthTermExtensionExact as Fourth
 
 ------------------------------------------------------------------------
 -- 1. One joint authority.
@@ -68,6 +71,26 @@ record PBSourceGeometricLocalizationAuthority : Set₁ where
       Bool
     localizationDefinedBeforeDuncanSwisherResidualIsReadIsTrue :
       localizationDefinedBeforeDuncanSwisherResidualIsRead ≡ true
+
+    localizationRefinesPublishedModularDescription :
+      Bool
+    localizationRefinesPublishedModularDescriptionIsTrue :
+      localizationRefinesPublishedModularDescription ≡ true
+
+    localizationRefinesPublishedSupersingularDescription :
+      Bool
+    localizationRefinesPublishedSupersingularDescriptionIsTrue :
+      localizationRefinesPublishedSupersingularDescription ≡ true
+
+    sameLocalizationRefinesBothPublishedDescriptions :
+      Bool
+    sameLocalizationRefinesBothPublishedDescriptionsIsTrue :
+      sameLocalizationRefinesBothPublishedDescriptions ≡ true
+
+    sourceOrProofAuthorityForExceptionalValuation :
+      Bool
+    sourceOrProofAuthorityForExceptionalValuationIsTrue :
+      sourceOrProofAuthorityForExceptionalValuation ≡ true
 
 open PBSourceGeometricLocalizationAuthority public
 
@@ -125,6 +148,67 @@ asGlobalDVRBrauerAuthority :
 asGlobalDVRBrauerAuthority A =
   Green.asGlobalLocalizedDVRBrauerAuthority
     (greenSpecies A)
+
+------------------------------------------------------------------------
+-- 3b. Direct adapter to the existing Monster bridge.
+--
+-- The exceptional object is the combined localized DVR module itself.  Its
+-- valuation is normalized composition length.  The 10/2 equations are derived
+-- from sectorwise lengths and additivity; they are not used to define the
+-- localization.
+------------------------------------------------------------------------
+
+asMonsterBridgeAuthority :
+  PBSourceGeometricLocalizationAuthority ->
+  Bridge.SmallPrimeMonsterBridgeAuthority
+asMonsterBridgeAuthority A =
+  record
+    { Bridge.ExceptionalObject =
+        Green.ModuleClass (Green.species (greenSpecies A))
+    ; Bridge.p2ExceptionalObject =
+        Green.p2CombinedLocalizedClass (greenSpecies A)
+    ; Bridge.p3ExceptionalObject =
+        Green.p3CombinedLocalizedClass (greenSpecies A)
+    ; Bridge.exceptionalValuation =
+        λ prime moduleClass ->
+          Green.normalizedDVRLength (greenSpecies A) moduleClass
+    ; Bridge.p2ExceptionalValuationIsBridgeGap =
+        Green.p2CombinedLengthIsTen (greenSpecies A)
+    ; Bridge.p3ExceptionalValuationIsBridgeGap =
+        Green.p3CombinedLengthIsTwo (greenSpecies A)
+    ; Bridge.objectDefinedIndependentlyOfMonsterTarget =
+        localizationDefinedBeforeMonsterOrderIsRead A
+    ; Bridge.objectDefinedIndependentlyOfMonsterTargetIsTrue =
+        localizationDefinedBeforeMonsterOrderIsReadIsTrue A
+    ; Bridge.refinesModularDescription =
+        localizationRefinesPublishedModularDescription A
+    ; Bridge.refinesModularDescriptionIsTrue =
+        localizationRefinesPublishedModularDescriptionIsTrue A
+    ; Bridge.refinesSupersingularDescription =
+        localizationRefinesPublishedSupersingularDescription A
+    ; Bridge.refinesSupersingularDescriptionIsTrue =
+        localizationRefinesPublishedSupersingularDescriptionIsTrue A
+    ; Bridge.sameObjectRefinesBothDescriptions =
+        sameLocalizationRefinesBothPublishedDescriptions A
+    ; Bridge.sameObjectRefinesBothDescriptionsIsTrue =
+        sameLocalizationRefinesBothPublishedDescriptionsIsTrue A
+    ; Bridge.sourceOrProofAuthorityForExceptionalValuation =
+        sourceOrProofAuthorityForExceptionalValuation A
+    ; Bridge.sourceOrProofAuthorityForExceptionalValuationIsTrue =
+        sourceOrProofAuthorityForExceptionalValuationIsTrue A
+    }
+
+asJointExceptionalAuthority :
+  PBSourceGeometricLocalizationAuthority ->
+  Joint.JointSmallPrimeExceptionalAuthority
+asJointExceptionalAuthority A =
+  Bridge.asJointAuthority (asMonsterBridgeAuthority A)
+
+asLicensedFourTermExtension :
+  PBSourceGeometricLocalizationAuthority ->
+  Fourth.AnalyticallyLicensedFourTermExtension
+asLicensedFourTermExtension A =
+  Joint.asFourTermExtension (asJointExceptionalAuthority A)
 
 ------------------------------------------------------------------------
 -- 4. Source compatibility is retained downstream.
@@ -200,6 +284,10 @@ record PBSourceGeometricLocalizationBoundary : Set where
     preferredDVRAdapterOwned : Bool
     preferredCorrectedValuationAdapterOwned : Bool
     globalDVRBrauerAdapterOwned : Bool
+    directMonsterBridgeAdapterOwned : Bool
+    jointExceptionalAdapterOwned : Bool
+    licensedFourTermAdapterOwned : Bool
+    sameObjectRefinementRequired : Bool
     jointAuthorityInhabited : Bool
     targetNumbersUsedToDefineAuthority : Bool
     attributionFirewallPreserved : Bool
@@ -208,4 +296,4 @@ canonicalPBSourceGeometricLocalizationBoundary :
   PBSourceGeometricLocalizationBoundary
 canonicalPBSourceGeometricLocalizationBoundary =
   pb-source-geometric-localization-boundary
-    true true true true true true true true true false false true
+    true true true true true true true true true true true true true false false true
