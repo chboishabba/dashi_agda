@@ -7,19 +7,19 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 -- After R639--R649, every representation/algebra step around the periodic
 -- critical argument has a typed compiler.  R728 exposed a three-coordinate
 -- R406 factorization; R730-R736 compressed it to two exact terminal
--- coordinates; and R737-R743 exhaust the literal augmented-derivative attack.
--- The preferred live analytic cut is therefore exactly two leaves:
+-- coordinates; R737-R743 exhausted the augmented-derivative attack; and
+-- R744-R752 put W2 on one literal dyadic-difference physical triad carrier.
+-- The preferred live analytic cut remains exactly two leaves:
 --
 --   W1  cutoff-uniform weighted work + terminal canonical Q_+- payment;
 --
---   W2  integrated physical packet strict surplus
---         <= integrated R723 combined residue,
---       with positive retained margin.
+--   W2  nonnegativity of the integrated R751 signed residual:
+--       3*nested orbit minus the swap-paired two-dyadic-difference production
+--       correction, plus 3*(2nu-delta)*critical dissipation.
 --
--- R734's augmented-weighted W2 is exactly equivalent to this integrated
--- packet/combined statement.  R741 supplies a stronger pointwise producer
--- option, but pointwise control is not mandatory.  R726 transport plus
--- strict-margin R406 production remain alternate sufficient factorizations.
+-- R747/R751 are exactly equivalent to R742's integrated packet<=combined
+-- statement.  R750 proves the production correction vanishes on same-shell
+-- nonzero triads.  No exhaustive new shell partition is claimed.
 --
 -- R645 compiles the positive C2 margin into retained viscosity, so C5 is not an
 -- independent theorem.  C4/C6/C7 remain standard source instantiations and are
@@ -125,6 +125,15 @@ import DASHI.Physics.Closure.NSTriadKNR650PointwiseW2CancellationRound740Exact a
 import DASHI.Physics.Closure.NSTriadKNR650PointwiseW2PhysicalPacketCombinedRound741Exact as R741
 import DASHI.Physics.Closure.NSTriadKNR650IntegratedW2PhysicalPacketCombinedRound742Exact as R742
 import DASHI.Physics.Closure.NSTriadKNR650PostDerivativeAnalyticWallRound743Exact as R743
+import DASHI.Physics.Closure.NSTriadKNR650CriticalProductionIncidenceCarrierRound744Exact as R744
+import DASHI.Physics.Closure.NSTriadKNR650OrbitAlignedW2ResidualRound745Exact as R745
+import DASHI.Physics.Closure.NSTriadKNR650IntegratedOrbitAlignedW2ResidualRound746Exact as R746
+import DASHI.Physics.Closure.NSTriadKNR650OrbitAlignedW2PaymentRound747Exact as R747
+import DASHI.Physics.Closure.NSTriadKNR650DyadicPairedProductionDifferenceRound748Exact as R748
+import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceAlignedW2Round749Exact as R749
+import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceSupportRound750Exact as R750
+import DASHI.Physics.Closure.NSTriadKNR650IntegratedDyadicDifferenceW2Round751Exact as R751
+import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceAnalyticWallRound752Exact as R752
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -311,6 +320,42 @@ round650CurrentW1Closed =
 round650CurrentW2PacketCombinedClosed : Bool
 round650CurrentW2PacketCombinedClosed =
   R743.round743IntegratedPacketCombinedPaymentClosed
+
+round650DyadicDifferenceExactlyTwoAnalyticLeaves : Bool
+round650DyadicDifferenceExactlyTwoAnalyticLeaves =
+  R752.round752ExactlyTwoPreferredAnalyticLeaves
+
+round650W2OneSignedResidualSurfaceAvailable : Bool
+round650W2OneSignedResidualSurfaceAvailable =
+  R752.round752W2IsOneSignedSpacetimeResidual
+
+round650W2CompletePhysicalCarrierClosed : Bool
+round650W2CompletePhysicalCarrierClosed =
+  R752.round752CriticalProductionUsesCompletePhysicalCarrier
+
+round650W2NonlinearTermsShareOneOuterCarrier : Bool
+round650W2NonlinearTermsShareOneOuterCarrier =
+  R752.round752W2NonlinearTermsShareOneOuterCarrier
+
+round650W2ProductionSwapPairingMandatory : Bool
+round650W2ProductionSwapPairingMandatory =
+  R752.round752ProductionMustBeSwapPairedBeforeThreeLegCancellation
+
+round650W2ProductionTwoDyadicDifferenceChannels : Bool
+round650W2ProductionTwoDyadicDifferenceChannels =
+  R752.round752ProductionHasTwoActualDyadicDifferenceChannels
+
+round650W2SameShellNonzeroProductionCorrectionVanishes : Bool
+round650W2SameShellNonzeroProductionCorrectionVanishes =
+  R752.round752SameShellNonzeroProductionCorrectionVanishes
+
+round650W2IntegratedTwoDifferenceCarrierCanonical : Bool
+round650W2IntegratedTwoDifferenceCarrierCanonical =
+  R752.round752IntegratedTwoDifferenceCarrierIsCanonicalW2Residual
+
+round650CurrentW2DyadicResidualClosed : Bool
+round650CurrentW2DyadicResidualClosed =
+  R752.round752W2ResidualNonnegativeClosed
 
 round650PositiveRatesAloneCloseCombinedToR406 : Bool
 round650PositiveRatesAloneCloseCombinedToR406 =
