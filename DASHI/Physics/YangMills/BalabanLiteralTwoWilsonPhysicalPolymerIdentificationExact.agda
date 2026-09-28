@@ -29,6 +29,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_; ∣_∣)
 
 import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
+import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as Clustering
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalTwoWeightKoteckyPreissExact as PhysicalKP
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact as AffineMark
@@ -103,13 +104,9 @@ record LiteralTwoWilsonPhysicalPolymerIdentification
       ∀ polymer →
       KP.aWeight kpData polymer
       ≡
-      KP.aWeight kpData polymer
-
-    aWeightIsHalfTerminalBudget :
-      ∀ polymer →
-      KP.aWeight kpData polymer
-      ≡
-      DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact.half
+      Clustering.terminalKPBound
+        (Terminal.asTerminalKPSmallness physicalTerminal)
+        (anchor polymer)
 
     rationalOrderToKP :
       ∀ {left right : ℚ} →
@@ -133,7 +130,7 @@ twoWeightMeaningFromLiteralPhysicalIdentification source = record
   ; KP.RootedTerminalToTwoWeightKPIdentification.incompatibleWeightedSumMeaning =
       incompatibleWeightedSumIsTerminalRootedSum source
   ; KP.RootedTerminalToTwoWeightKPIdentification.aBudgetMeaning =
-      aWeightIsHalfTerminalBudget source
+      aWeightIsTerminalBudget source
   ; KP.RootedTerminalToTwoWeightKPIdentification.orderMeaning =
       rationalOrderToKP source
   }
@@ -176,6 +173,6 @@ literalPhysicalMarkedActivityBelowFPThreshold :
     polymer →
   AffineMark.literalMarkedActivityNorm (affineMark source) polymer
   ≤
-  DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact.rhoFPMax
+  let open import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact in rhoFPMax
 literalPhysicalMarkedActivityBelowFPThreshold source =
   AffineMark.literalMarkedActivityBelowFPThreshold (affineMark source)
