@@ -77,6 +77,9 @@ import Bench.Leaf
     assert payload["warm"]["runs"] == 3
     assert payload["warm"]["all_zero_parse"] is True
     assert payload["warm"]["files_parsed"]["max"] == 0
+    assert payload["trusted_agent_next_error"]["runs"] == 3
+    assert payload["trusted_agent_next_error"]["all_zero_stat"] is True
+    assert payload["trusted_agent_next_error"]["all_heap_hits"] is True
     assert payload["cold"]["counts"]["cold_interface_files_parsed"] == 2
     assert payload["cold"]["counts"]["cold_worker_files_parsed"] == 2
     assert payload["cold"]["counts"]["files_parsed"] == 4
@@ -423,4 +426,10 @@ def test_benchmark_payload_reports_slo_pass(tmp_path, capsys):
     assert (
         payload["agent_next_error"]["request_total"]["p95_ms"]
         <= payload["slo"]["max_next_error_ms"]
+    )
+    assert payload["trusted_agent_next_error"]["all_zero_stat"] is True
+    assert payload["trusted_agent_next_error"]["all_heap_hits"] is True
+    assert (
+        payload["trusted_agent_next_error"]["request_total"]["p95_ms"]
+        <= payload["slo"]["max_trusted_next_error_ms"]
     )
