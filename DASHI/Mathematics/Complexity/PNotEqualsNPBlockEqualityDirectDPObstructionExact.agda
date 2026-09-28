@@ -18,7 +18,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityDirectDPObstruction
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Maybe.Base using (nothing; just)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -157,6 +158,62 @@ blockEqualityMeasureBlocksDirectDPRun
     (liveBlockEqualityResidualWidth realization)
     measureBelowExponentialGraph
     run
+
+------------------------------------------------------------------------
+-- Operational strengthening: on an exponentially-too-wide state, a total
+-- direct-DP constructor has only one possible answer: stop immediately.
+------------------------------------------------------------------------
+
+blockEqualityHighWidthForcesDirectDPStop :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {width : Nat}
+    (realization : BlockEqualityLiveRoot state width)
+    (measureBelowExponentialGraph :
+      Q2.recursiveMeasure state
+      ≤
+      Width.triple
+        (Bits.bitCardinality width))
+    (constructor : DirectDP.DirectDPChargedStateConstructor) →
+  constructor state
+  ≡
+  nothing
+blockEqualityHighWidthForcesDirectDPStop
+    realization
+    measureBelowExponentialGraph
+    constructor
+    with constructor state
+... | nothing =
+  Agda.Builtin.Equality.refl
+... | just run =
+  ⊥-elim
+    (blockEqualityMeasureBlocksDirectDPRun
+      realization
+      measureBelowExponentialGraph
+      run)
+
+blockEqualityHighWidthForcesQ2Stop :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {width : Nat}
+    (realization : BlockEqualityLiveRoot state width)
+    (measureBelowExponentialGraph :
+      Q2.recursiveMeasure state
+      ≤
+      Width.triple
+        (Bits.bitCardinality width))
+    (constructor : DirectDP.DirectDPChargedStateConstructor) →
+  DirectDP.directDPNext constructor state
+  ≡
+  nothing
+blockEqualityHighWidthForcesQ2Stop
+    realization
+    measureBelowExponentialGraph
+    constructor
+    rewrite
+      blockEqualityHighWidthForcesDirectDPStop
+        realization
+        measureBelowExponentialGraph
+        constructor =
+  Agda.Builtin.Equality.refl
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
