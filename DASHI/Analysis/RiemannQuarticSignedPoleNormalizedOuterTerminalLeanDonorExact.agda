@@ -175,6 +175,81 @@ canonicalNormalizedOuterTerminalBoundary =
     "Prove an eventual strict upper bound with positive slack for the finite-Q carrier uniformly on the selected high witness. Equivalently, prove the required signed correlation of C'_W with the outer symmetric Riemann-von-Mangoldt discrepancy, jointly with the horizontal zero correction."
     "The existing absolute logarithmic discrepancy estimate and q^-2 kernel decay are individually too coarse: at fixed normalized q the r^4 discrepancy factor exposes the exact four inverse powers that only signed cancellation can supply."
 
+------------------------------------------------------------------------
+-- FOUR-PRIMITIVE CANDIDATE ROUTE
+--
+-- Lean commit:
+--
+--   ee2290221d5fc0be389dfd4cedfbfb8b02755075
+--
+-- The normalized outer discrepancy is
+--
+--   A4(q) = r^4 D(t-r*q,t+r*q),   r=t/16.
+--
+-- Lean now defines the fourth Cesaro primitive
+--
+--   P4_q(Q)
+--     = integral_[eta0,Q] ((Q-q)^3/6) A4(q) dq
+--
+-- and the physical-halfwidth primitive
+--
+--   P4_s(Q)
+--     = integral_[r*eta0,r*Q]
+--         ((r*Q-s)^3/6) D(t-s,t+s) ds.
+--
+-- The affine change of variables proves exactly
+--
+--   P4_q(Q) = P4_s(Q).
+--
+-- Thus the apparent r^4 loss cancels exactly after four primitives.  This is
+-- a real candidate mechanism for the four inverse powers required by the
+-- quartic terminal scale.
+--
+-- No analytic bound on P4_s is claimed.
+--
+-- Attribution / circularity firewall:
+--
+-- Sharp pointwise bounds for the classical iterated argument functions S_n
+-- found in the modern literature are stated under RH.  Such theorems may be
+-- used only as diagnostics here; importing an RH-conditional S_n bound into
+-- an RH proof would be circular.  Any donor paying the primitive route must
+-- be unconditional (or independently proved without RH).
+------------------------------------------------------------------------
+
+record FourPrimitiveRouteBoundary : Set where
+  constructor four-primitive-route-boundary
+  field
+    fourthNormalizedPrimitiveDefined : Bool
+    fourthPhysicalPrimitiveDefined : Bool
+    fourthPrimitiveScaleCancellationExact : Bool
+
+    unconditionalPhysicalFourthPrimitiveBoundPaid : Bool
+    fourfoldIntegrationByPartsCompilerPaid : Bool
+    rhConditionalSnMayPayClayDebt : Bool
+
+    scaleCancellationPaid :
+      fourthPrimitiveScaleCancellationExact ≡ true
+    physicalBoundStillOpen :
+      unconditionalPhysicalFourthPrimitiveBoundPaid ≡ false
+    ibpCompilerStillOpen :
+      fourfoldIntegrationByPartsCompilerPaid ≡ false
+    conditionalSnFirewall :
+      rhConditionalSnMayPayClayDebt ≡ false
+
+    exactScaleIdentity : String
+    nextPrimitiveWall : String
+
+open FourPrimitiveRouteBoundary public
+
+canonicalFourPrimitiveRouteBoundary : FourPrimitiveRouteBoundary
+canonicalFourPrimitiveRouteBoundary =
+  four-primitive-route-boundary
+    true true true
+    false false false
+    refl refl refl refl
+    "integral_[eta0,Q] ((Q-q)^3/6) * r^4*D(t-r*q,t+r*q) dq = integral_[r*eta0,r*Q] ((r*Q-s)^3/6) * D(t-s,t+s) ds"
+    "Prove an unconditional bound for the physical fourth discrepancy primitive, then weld a fourfold integration-by-parts compiler for the exact outer kernel."
+
 finiteQRepresentationDebtIsPaid :
   NormalizedOuterTerminalBoundary.finiteQEstimateCompilesToHighContradictionSourceWritten
     canonicalNormalizedOuterTerminalBoundary ≡ true
