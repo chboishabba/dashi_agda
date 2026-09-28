@@ -34,7 +34,10 @@ import DASHI.Reasoning.Trialectic369DyadicKernel4DescentCountExact as Count
 import DASHI.Reasoning.Trialectic369DyadicLocalComplementFactorizationExact as Factor
 import DASHI.Reasoning.Trialectic369DyadicC3LocalComplementSymmetryExact as C3
 import DASHI.Reasoning.Trialectic369DyadicPointedRelativeLocalExact as Pointed
+import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact as Centered
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 
 ------------------------------------------------------------------------
 -- 1. Same-object local Kernel-4 charts.
@@ -200,6 +203,30 @@ nonzeroLocalCanRestrictToBasepointB =
   Pointed.offDiagonalABRestrictsToBasepointAtB
 
 ------------------------------------------------------------------------
+-- 5b. Participant-centered SSP-style factor inside the complement.
+------------------------------------------------------------------------
+
+participantCenteredSSPFactor :
+  Centered.CCenteredComplement ->
+  Reduction.PhaseOrbit15
+participantCenteredSSPFactor =
+  Centered.participantCenteredPhaseOrbit
+
+participantCenteredNineResidual :
+  Centered.CCenteredComplement ->
+  Triadic.NineSheet
+participantCenteredNineResidual =
+  Centered.participantCenteredResidual
+
+participantCenteredQuotientHasCanonicalSection :
+  (state : Reduction.PhaseOrbit15 × Triadic.NineSheet) ->
+  Centered.participantCenteredQuotient
+    (Centered.canonicalLiftParticipantCentered state)
+  ≡ state
+participantCenteredQuotientHasCanonicalSection =
+  Centered.participantCenteredQuotientLiftRoundTrip
+
+------------------------------------------------------------------------
 -- 6. Firewall.
 ------------------------------------------------------------------------
 
@@ -234,6 +261,8 @@ record Trialectic369PreRHTernaryLocalDescentCapstoneBoundary : Set where
     noPreferredDyadicChart : Bool
     pointedRestrictionRepairOwned : Bool
     naivePuncturedSubpresheafRejected : Bool
+    participantCenteredSSPFactorOwned : Bool
+    outgoingNineResidualRetained : Bool
     rhAnalyticTheoremImported : Bool
     topologicalCofiberClaimed : Bool
 
@@ -243,5 +272,5 @@ canonicalTrialectic369PreRHTernaryLocalDescentCapstoneBoundary =
   trialectic-369-pre-rh-ternary-local-descent-capstone-boundary
     true true true true true true true
     true true true
-    true true
+    true true true true
     false false
