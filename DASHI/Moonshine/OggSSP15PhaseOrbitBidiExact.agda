@@ -40,6 +40,7 @@ import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
 import DASHI.Biology.OggPrimeNonaryAddressExact as Address
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Chosen
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
+import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
 
 ------------------------------------------------------------------------
 -- 1. Presentation carrier.
@@ -204,6 +205,8 @@ record OggSSP15PhaseOrbitBidiBoundary : Set where
     composedOggToThreeByFiveForward : Bool
     composedThreeByFiveToOggBackward : Bool
     composedRoundTripsPaid : Bool
+    presentationFactorsThroughCanonicalOggRank : Bool
+    canonicalRelativeToRepositoryOrder : Bool
     threeTimesFiveIsFifteen : Bool
     chosenPresentationIsCanonicalAddress : Bool
     fiveOrbitIsArithmeticPrimeInvariant : Bool
@@ -213,5 +216,6 @@ canonicalOggSSP15PhaseOrbitBidiBoundary :
   OggSSP15PhaseOrbitBidiBoundary
 canonicalOggSSP15PhaseOrbitBidiBoundary =
   ogg-ssp15-phase-orbit-bidi-boundary
-    true true true true true true true true
+    true true true true true true true
+    true true true
     false false false
