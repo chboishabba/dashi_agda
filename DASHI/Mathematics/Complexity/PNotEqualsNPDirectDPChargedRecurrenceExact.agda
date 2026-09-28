@@ -328,6 +328,144 @@ tripleStateCountBelowEvaluationCellCount
       (DirectDP.admittedQuotient candidate admission))
 
 ------------------------------------------------------------------------
+-- One-layer semantic width already charges the graph.  An all-layer stack is
+-- stronger, but not required for the exponential equality falsification.
+------------------------------------------------------------------------
+
+directDPResidualWidthBelowStateCount :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {remaining width : Nat}
+    (run : DirectDPChargedConstructionRun state) →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    remaining
+    width →
+  width
+  ≤
+  Candidate.stateCount
+    (candidate run)
+directDPResidualWidthBelowStateCount run witness =
+  Width.residualWidthBelowArityAdmittedCandidateStateCount
+    (localAdmission run)
+    witness
+
+directDPTripleResidualWidthBelowEvaluation :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {remaining width : Nat}
+    (run : DirectDPChargedConstructionRun state) →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    remaining
+    width →
+  Width.triple width
+  ≤
+  DirectDP.arityTerminalEvaluationCellCount
+    (candidate run)
+    (localAdmission run)
+directDPTripleResidualWidthBelowEvaluation
+    run
+    witness =
+  NatP.≤-trans
+    (Width.tripleMonotone
+      (directDPResidualWidthBelowStateCount
+        run
+        witness))
+    (tripleStateCountBelowEvaluationCellCount
+      (candidate run)
+      (localAdmission run))
+
+directDPTripleResidualWidthStrictlyBelowCurrentMeasure :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {remaining width : Nat}
+    (run : DirectDPChargedConstructionRun state) →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    remaining
+    width →
+  Width.triple width
+  <
+  Q2.recursiveMeasure state
+directDPTripleResidualWidthStrictlyBelowCurrentMeasure
+    {state}
+    run
+    witness =
+  NatP.≤-<-trans
+    widthBelowWholeCharge
+    (machineEvaluationAndNextPayloadStrict run)
+  where
+    evaluation :
+      Nat
+    evaluation =
+      DirectDP.arityTerminalEvaluationCellCount
+        (candidate run)
+        (localAdmission run)
+
+    machine :
+      Nat
+    machine =
+      machineStepCount run
+
+    payload :
+      Nat
+    payload =
+      directDPAuthorityPayloadMeasure
+        state
+        (candidate run)
+        (localAdmission run)
+
+    widthBelowEvaluation :
+      Width.triple _
+      ≤
+      evaluation
+    widthBelowEvaluation =
+      directDPTripleResidualWidthBelowEvaluation
+        run
+        witness
+
+    widthBelowWholeCharge :
+      Width.triple _
+      ≤
+      (evaluation + machine) + payload
+    widthBelowWholeCharge =
+      NatP.≤-trans
+        widthBelowEvaluation
+        (NatP.≤-trans
+          (NatP.m≤m+n evaluation machine)
+          (NatP.m≤m+n
+            (evaluation + machine)
+            payload))
+
+directDPSingleLayerHighWidthBlocksRun :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {remaining width : Nat} →
+  Width.ResidualWidthWitness
+    {root =
+      Bridge.cookToIndexed
+        (Q2.currentFormula state)}
+    remaining
+    width →
+  Q2.recursiveMeasure state
+  ≤
+  Width.triple width →
+  DirectDPChargedConstructionRun state →
+  ⊥
+directDPSingleLayerHighWidthBlocksRun
+    witness
+    measureBelowWidth
+    run =
+  NatP.<⇒≱
+    (directDPTripleResidualWidthStrictlyBelowCurrentMeasure
+      run
+      witness)
+    measureBelowWidth
+
+------------------------------------------------------------------------
 -- Semantic width therefore charges directly into the represented evaluator.
 ------------------------------------------------------------------------
 
