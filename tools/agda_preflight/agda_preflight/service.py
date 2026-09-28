@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import argparse
+import heapq
 import json
 from pathlib import Path
 import sys
 import time
-from typing import IO, Any, Dict, Optional, Set, Tuple
+from typing import IO, Any, Dict, List, Optional, Set, Tuple
 
 from .apply_edits import EditApplicationError, apply_text_edits
 from .source_index import SourceIndex
@@ -48,6 +49,83 @@ def _snapshot_delta(
     }
 
 
+class _RollupCandidateCache:
+    """In-memory top-diagnostic heaps for one trusted rollup."""
+
+    def __init__(self, priority) -> None:
+        self.priority = priority
+        self.generations: Dict[str, int] = {}
+        self.candidates: Dict[
+            str,
+            Tuple[Optional[object], Optional[object]],
+        ] = {}
+        self.any_heap: List[tuple] = []
+        self.fixable_heap: List[tuple] = []
+
+    def _push(
+        self,
+        heap: List[tuple],
+        module: str,
+        generation: int,
+        diagnostic,
+    ) -> None:
+        if diagnostic is None:
+            return
+        heapq.heappush(
+            heap,
+            (
+                self.priority(diagnostic),
+                module,
+                generation,
+                diagnostic.diagnostic_id,
+            ),
+        )
+
+    def replace(
+        self,
+        module: str,
+        top,
+        fixable,
+    ) -> None:
+        generation = self.generations.get(module, 0) + 1
+        self.generations[module] = generation
+        self.candidates[module] = (top, fixable)
+        self._push(
+            self.any_heap,
+            module,
+            generation,
+            top,
+        )
+        self._push(
+            self.fixable_heap,
+            module,
+            generation,
+            fixable,
+        )
+
+    def _peek(self, *, require_fix: bool):
+        heap = self.fixable_heap if require_fix else self.any_heap
+        index = 1 if require_fix else 0
+        while heap:
+            _, module, generation, diagnostic_id = heap[0]
+            if self.generations.get(module) != generation:
+                heapq.heappop(heap)
+                continue
+            pair = self.candidates.get(module)
+            diagnostic = pair[index] if pair is not None else None
+            if (
+                diagnostic is None
+                or diagnostic.diagnostic_id != diagnostic_id
+            ):
+                heapq.heappop(heap)
+                continue
+            return diagnostic
+        return None
+
+    def peek(self, *, require_fix: bool):
+        return self._peek(require_fix=require_fix)
+
+
 class DashiAgdaService:
     """Long-lived incremental analysis service over one source-index DB."""
 
@@ -72,6 +150,10 @@ class DashiAgdaService:
         self.jobs = jobs
         self._trusted_targets: Set[Path] = set()
         self._trusted_closures: Dict[Path, Tuple[str, ...]] = {}
+        self._candidate_rollups: Dict[
+            Path,
+            _RollupCandidateCache,
+        ] = {}
         self.semantic_path = (
             semantic_catalog.resolve()
             if semantic_catalog is not None
@@ -125,12 +207,92 @@ class DashiAgdaService:
             dropped = len(self._trusted_targets)
             self._trusted_targets.clear()
             self._trusted_closures.clear()
+            self._candidate_rollups.clear()
         else:
             dropped = 1 if target in self._trusted_targets else 0
             self._trusted_targets.discard(target)
             self._trusted_closures.pop(target, None)
+            self._candidate_rollups.pop(target, None)
         if dropped:
             self.profiler.count("trusted_targets_dropped", dropped)
+
+    @staticmethod
+    def _diagnostic_priority(diagnostic):
+        return (
+            0 if diagnostic.severity == "error" else 1,
+            0 if diagnostic.evidence_sufficient else 1,
+            0 if any(fix.edits for fix in diagnostic.fixes) else 1,
+            str(diagnostic.path),
+            diagnostic.line,
+            diagnostic.column,
+            diagnostic.code,
+        )
+
+    def _build_candidate_rollup(
+        self,
+        target: Path,
+        *,
+        validate_freshness: bool,
+    ) -> Optional[_RollupCandidateCache]:
+        with self.profiler.stage("session.candidate_snapshot"):
+            snapshot = self.index.cached_candidate_snapshot(
+                target,
+                validate_freshness=validate_freshness,
+            )
+        if snapshot is None:
+            return None
+
+        cache = _RollupCandidateCache(
+            self._diagnostic_priority
+        )
+        with self.profiler.stage("session.candidate_heap_build"):
+            for module, top, fixable in snapshot:
+                cache.replace(module, top, fixable)
+        self._candidate_rollups[target] = cache
+        self.profiler.count(
+            "session_candidate_rollups_built"
+        )
+        self.profiler.count(
+            "session_candidate_modules",
+            len(snapshot),
+        )
+        return cache
+
+    def _candidate_rollup(
+        self,
+        target: Path,
+        *,
+        validate_freshness: bool,
+    ) -> Optional[_RollupCandidateCache]:
+        cached = self._candidate_rollups.get(target)
+        if cached is not None:
+            self.profiler.count(
+                "session_candidate_rollup_hits"
+            )
+            return cached
+        return self._build_candidate_rollup(
+            target,
+            validate_freshness=validate_freshness,
+        )
+
+    def _refresh_rollup_module_candidates(
+        self,
+        module: str,
+        path: Path,
+    ) -> None:
+        top, fixable = self.index.cached_module_candidates(path)
+        updated = 0
+        for target, cache in self._candidate_rollups.items():
+            modules = self._trusted_closures.get(target, ())
+            if module not in modules:
+                continue
+            cache.replace(module, top, fixable)
+            updated += 1
+        if updated:
+            self.profiler.count(
+                "session_candidate_modules_refreshed",
+                updated,
+            )
 
     def _start_request(self) -> Tuple[TimingSnapshot, int]:
         self.index.begin_request()
