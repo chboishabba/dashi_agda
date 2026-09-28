@@ -30,6 +30,8 @@ open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
@@ -51,7 +53,7 @@ separatedWeight F = record
 
   invariant :
     (beta : Physical.PhysicalTriadIncidence) →
-    weight (DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry.swapTriad beta)
+    weight (Symmetry.swapTriad beta)
     ≡ weight beta
   invariant beta
     rewrite R781.ccTouchedSwapInvariant beta =
@@ -67,13 +69,13 @@ fixedOutputSeparatedProductRuleIsCommutator :
   R224.foldVector
     (R294.weightedProductRuleCell
       (separatedWeight F) S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
   ≡
   R224.foldVector
     (R294.weightedCommutatorCell
       (separatedWeight F) S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
 fixedOutputSeparatedProductRuleIsCommutator
     {F = F} S velocity forcing cutoff output =
