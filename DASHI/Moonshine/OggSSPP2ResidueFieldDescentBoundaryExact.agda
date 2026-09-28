@@ -14,7 +14,9 @@ module DASHI.Moonshine.OggSSPP2ResidueFieldDescentBoundaryExact where
 --   and X0(4) authority metadata, while explicitly keeping the formal
 --   CM-orbit equivalence open.
 --
--- Neither object constructs an elliptic curve over F2, nor a base-change /
+-- The repository now DOES own an explicit finite F2 generalized-Weierstrass
+-- candidate y^2 + y = x^3 with exact F2 point classification.  What remains
+-- is the geometric supersingularity identification and then the base-change /
 -- descent equivalence from the source universal deformation over W(k)[[t]]
 -- to an F2-specialized Witt base.
 ------------------------------------------------------------------------
@@ -58,9 +60,6 @@ cmLabelDoesNotCreateFormalCMOrbitEquivalence :
 cmLabelDoesNotCreateFormalCMOrbitEquivalence ()
 
 data P2ResidueFieldDescentResidual : Set where
-  missingExplicitSupersingularCurveModelOverF2 :
-    P2ResidueFieldDescentResidual
-
   missingGeometricSupersingularityIdentification :
     P2ResidueFieldDescentResidual
 
