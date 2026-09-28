@@ -472,3 +472,112 @@ y = Set
     assert counts["cold_interface_files_parsed"] == 0
     assert counts["cold_worker_files_parsed"] == 2
     assert counts["cold_total_files_parsed"] == 2
+
+
+
+def test_cached_candidate_snapshot_lazily_upgrades_legacy_top_columns(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Candidate.Legacy",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=1,
+    ) as index:
+        index.diagnose(path)
+
+    connection = sqlite3.connect(database)
+    try:
+        connection.execute(
+            "UPDATE modules SET "
+            "top_diagnostic_json = '', "
+            "top_fixable_diagnostic_json = '' "
+            "WHERE module_name = ?",
+            ("Candidate.Legacy",),
+        )
+        connection.commit()
+    finally:
+        connection.close()
+
+    profiler = Profiler()
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=1,
+    ) as index:
+        snapshot = index.cached_candidate_snapshot(
+            path,
+            validate_freshness=False,
+        )
+
+    assert snapshot is not None
+    assert len(snapshot) == 1
+    _, top, fixable = snapshot[0]
+    assert top is not None
+    assert fixable is not None
+    assert profiler.snapshot().counts[
+        "candidate_snapshot_rows_upgraded"
+    ] == 1
+
+    connection = sqlite3.connect(database)
+    try:
+        row = connection.execute(
+            "SELECT top_diagnostic_json, top_fixable_diagnostic_json "
+            "FROM modules WHERE module_name = ?",
+            ("Candidate.Legacy",),
+        ).fetchone()
+    finally:
+        connection.close()
+    assert row[0]
+    assert row[1]
+
+
+def test_cached_candidate_snapshot_fails_closed_on_invalid_diagnostics(tmp_path):
+    path = write_module(tmp_path, "Candidate.Invalid")
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=1,
+    ) as index:
+        index.diagnose(path)
+
+    connection = sqlite3.connect(database)
+    try:
+        connection.execute(
+            "UPDATE modules SET "
+            "diagnostics_json = '', "
+            "top_diagnostic_json = '', "
+            "top_fixable_diagnostic_json = '' "
+            "WHERE module_name = ?",
+            ("Candidate.Invalid",),
+        )
+        connection.commit()
+    finally:
+        connection.close()
+
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=1,
+    ) as index:
+        assert index.cached_candidate_snapshot(
+            path,
+            validate_freshness=False,
+        ) is None
