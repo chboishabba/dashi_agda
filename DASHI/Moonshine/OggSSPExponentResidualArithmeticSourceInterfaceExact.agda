@@ -33,6 +33,7 @@ import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2Bridge
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.BalancedTernaryHypercubeAntipodalOrbitCountExact as HyperOrbit
+import DASHI.Moonshine.OggSSPMarkedArithmeticResidualCoverPatternExact as MarkedCover
 
 ------------------------------------------------------------------------
 -- 1. Only the two exceptional residual lanes are in scope here.
@@ -176,15 +177,19 @@ open ArithmeticResidualSource public
 -- pi0 is bijectively recognized, and stabilizers are preserved/reflected.
 ------------------------------------------------------------------------
 
+toMarkedCoverPrime :
+  ExceptionalResidualPrime →
+  MarkedCover.ExceptionalResidualPrime
+toMarkedCoverPrime residualP2 = MarkedCover.residualP2
+toMarkedCoverPrime residualP3 = MarkedCover.residualP3
+
 record MarkedCoverArithmeticResidualSourceCandidate
     (prime : ExceptionalResidualPrime) : Set₁ where
   constructor marked-cover-arithmetic-residual-source-candidate
   field
     markedCoverCandidate :
       MarkedCover.MarkedResidualSourceCandidate
-        (case prime of λ where
-          residualP2 → MarkedCover.residualP2
-          residualP3 → MarkedCover.residualP3)
+        (toMarkedCoverPrime prime)
 
     source :
       ArithmeticResidualSource prime
@@ -315,6 +320,8 @@ record ExponentResidualArithmeticSourceBoundary : Set where
     p2TargetCountFactorsThroughRetainedBinaryTimesA2 : Bool
     sourceRequiresActionAndOrbitPresentation : Bool
     sourceRequiresIndependentPi0Receipt : Bool
+    markedCoverAcquisitionPatternAvailable : Bool
+    p11MarkedCoverPrecedentRecorded : Bool
     fullRecognitionUsesGenericActionFunctor : Bool
     fullRecognitionUsesOrbitStabilizerRecognition : Bool
     samePresentationRequiresObjectAndSymmetryBijections : Bool
