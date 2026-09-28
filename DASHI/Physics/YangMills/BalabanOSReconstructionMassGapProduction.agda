@@ -75,6 +75,87 @@ record OSReconstructionStandardAuthority
 
 open OSReconstructionStandardAuthority public
 
+------------------------------------------------------------------------
+-- PRE-GAP RECONSTRUCTION AUTHORITY.
+--
+-- OS4 clustering is deliberately absent.  This is the reconstruction theorem
+-- used by H2 core construction; clustering is attached later on the same
+-- Schwinger family for H1/H3.
+------------------------------------------------------------------------
+
+record PreGapOSReconstructionData
+    (Observable Point Scalar Hilbert Vector Hamiltonian Algebra : Set)
+    (system :
+      OSGap.PreGapContinuumSchwingerSystem Observable Point Scalar) : Set₁ where
+  field
+    reconstructedHilbertSpaceCore : Hilbert
+    reconstructedVacuumCore : Vector
+    reconstructedHamiltonianCore : Hamiltonian
+    reconstructedObservableAlgebraCore : Algebra
+
+    SelfAdjointCore : Hamiltonian → Set
+    NonnegativeCore : Hamiltonian → Set
+    VacuumVectorCore : Hilbert → Vector → Set
+    PhysicalObservableAlgebraCore : Algebra → Set
+    VacuumForCore : Hamiltonian → Vector → Set
+
+    hilbertSpaceReconstructedCore : Set
+    vacuumVectorExistsCore :
+      VacuumVectorCore reconstructedHilbertSpaceCore reconstructedVacuumCore
+    hamiltonianSelfAdjointCore :
+      SelfAdjointCore reconstructedHamiltonianCore
+    hamiltonianNonnegativeCore :
+      NonnegativeCore reconstructedHamiltonianCore
+    observableAlgebraPhysicalCore :
+      PhysicalObservableAlgebraCore reconstructedObservableAlgebraCore
+    reconstructedVacuumIsVacuumCore :
+      VacuumForCore reconstructedHamiltonianCore reconstructedVacuumCore
+
+open PreGapOSReconstructionData public
+
+record PreGapOSReconstructionStandardAuthority
+    {Observable Point Scalar Hilbert Vector Hamiltonian Algebra : Set}
+    {system :
+      OSGap.PreGapContinuumSchwingerSystem Observable Point Scalar}
+    (dataSet :
+      PreGapOSReconstructionData
+        Observable Point Scalar Hilbert Vector Hamiltonian Algebra system) : Set₁ where
+  field
+    osCoreAxiomsReconstruct :
+      OSGap.OS0RegularityCore system →
+      OSGap.OS1EuclideanCovarianceCore system →
+      OSGap.OS2ReflectionPositivityCore system →
+      OSGap.OS3PermutationSymmetryCore system →
+      OSGap.OS5GrowthControlCore system →
+      Set
+
+    preGapReconstructionWitness :
+      osCoreAxiomsReconstruct
+        (OSGap.os0Core system)
+        (OSGap.os1Core system)
+        (OSGap.os2Core system)
+        (OSGap.os3Core system)
+        (OSGap.os5Core system)
+
+open PreGapOSReconstructionStandardAuthority public
+
+preGapOSAxiomsReconstructHilbertSpace :
+  ∀ {Observable Point Scalar Hilbert Vector Hamiltonian Algebra : Set}
+    {system :
+      OSGap.PreGapContinuumSchwingerSystem Observable Point Scalar} →
+  (dataSet :
+    PreGapOSReconstructionData
+      Observable Point Scalar Hilbert Vector Hamiltonian Algebra system) →
+  PreGapOSReconstructionStandardAuthority dataSet →
+  Set
+preGapOSAxiomsReconstructHilbertSpace dataSet authority =
+  osCoreAxiomsReconstruct authority
+    (OSGap.os0Core _)
+    (OSGap.os1Core _)
+    (OSGap.os2Core _)
+    (OSGap.os3Core _)
+    (OSGap.os5Core _)
+
 -- L1. The complete OS axiom package reconstructs the selected Hilbert-space
 -- realization.
 osAxiomsReconstructHilbertSpace :
@@ -467,6 +548,9 @@ continuumSpectrumSeparatedViaSurvivalBridge dataSet authority =
 
 ------------------------------------------------------------------------
 -- Proof-level ledger.
+
+preGapOSHilbertReconstructionAuthorityLevel : ProofLevel
+preGapOSHilbertReconstructionAuthorityLevel = standardImported
 
 osHilbertReconstructionAuthorityLevel : ProofLevel
 osHilbertReconstructionAuthorityLevel = standardImported
