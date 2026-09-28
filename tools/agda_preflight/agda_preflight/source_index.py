@@ -913,6 +913,43 @@ class SourceIndex:
             return None
         return row["module_name"], row["source_sha256"]
 
+    def source_state(
+        self,
+        path: Path,
+    ) -> Optional[Tuple[str, str, str]]:
+        """Return module name, source hash and API fingerprint from the index."""
+        path = path if path.is_absolute() else self.root / path
+        path = path.resolve()
+        try:
+            relative = self._relative(path)
+        except ValueError:
+            return None
+        row = self.connection.execute(
+            "SELECT module_name, source_sha256, api_fingerprint "
+            "FROM modules WHERE path = ?",
+            (relative,),
+        ).fetchone()
+        if row is None:
+            return None
+        return (
+            row["module_name"],
+            row["source_sha256"],
+            row["api_fingerprint"],
+        )
+
+    def cached_closure_modules(
+        self,
+        target: Path,
+    ) -> Optional[Tuple[str, ...]]:
+        """Return indexed closure membership without touching the filesystem."""
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(target, projection="candidates")
+        if rows is None:
+            return None
+        self.profiler.count("trusted_closure_modules", len(rows))
+        return tuple(row["module_name"] for row in rows)
+
     def closure_source_hashes(
         self,
         target: Path,
@@ -1048,6 +1085,7 @@ class SourceIndex:
         target: Path,
         *,
         require_fix: bool = False,
+        validate_freshness: bool = True,
     ) -> Optional[Diagnostic]:
         target = target if target.is_absolute() else self.root / target
         target = target.resolve()
@@ -1073,34 +1111,38 @@ class SourceIndex:
             else "top_diagnostic_json"
         )
         candidates: List[Diagnostic] = []
-        with self.profiler.stage("source.stat"):
-            for row in rows:
+        if not validate_freshness:
+            self.profiler.count("trusted_closure_stat_skips", len(rows))
+
+        for row in rows:
+            if validate_freshness:
                 path = self.root / row["path"]
-                try:
-                    stat = self._stat(path)
-                except OSError:
-                    result = self.diagnose(target)
-                    fallback = [
-                        item for item in result.diagnostics
-                        if (not require_fix or item.fixes)
-                    ]
-                    return (
-                        min(fallback, key=self._diagnostic_priority)
-                        if fallback
-                        else None
-                    )
-                if not self._fresh(row, stat):
-                    result = self.diagnose(target)
-                    fallback = [
-                        item for item in result.diagnostics
-                        if (not require_fix or item.fixes)
-                    ]
-                    return (
-                        min(fallback, key=self._diagnostic_priority)
-                        if fallback
-                        else None
-                    )
-                payload = row[payload_column]
+                with self.profiler.stage("source.stat"):
+                    try:
+                        stat = self._stat(path)
+                    except OSError:
+                        result = self.diagnose(target)
+                        fallback = [
+                            item for item in result.diagnostics
+                            if (not require_fix or item.fixes)
+                        ]
+                        return (
+                            min(fallback, key=self._diagnostic_priority)
+                            if fallback
+                            else None
+                        )
+                    if not self._fresh(row, stat):
+                        result = self.diagnose(target)
+                        fallback = [
+                            item for item in result.diagnostics
+                            if (not require_fix or item.fixes)
+                        ]
+                        return (
+                            min(fallback, key=self._diagnostic_priority)
+                            if fallback
+                            else None
+                        )
+            payload = row[payload_column]
                 if not payload:
                     if row["diagnostics_empty"]:
                         continue
