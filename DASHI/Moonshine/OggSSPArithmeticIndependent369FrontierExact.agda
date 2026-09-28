@@ -186,6 +186,8 @@ import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPay
 import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact as GreenSpecies
 import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2StackWeight
+import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
+import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact as UranoCompat
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3LocalWeight
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
@@ -350,6 +352,17 @@ p3LocalMultiplicityBoundary :
   P3LocalWeight.P3DeligneRapoportLocalMultiplicityBoundary
 p3LocalMultiplicityBoundary =
   P3LocalWeight.canonicalP3DeligneRapoportLocalMultiplicityBoundary
+
+
+urano2BParityBoundary :
+  Urano2B.TwoBUranoIntegralModuleParityBoundary
+urano2BParityBoundary =
+  Urano2B.canonicalTwoBUranoIntegralModuleParityBoundary
+
+urano2BGreenCompatibilityBoundary :
+  UranoCompat.TwoBGreenSpeciesUranoParityCompatibilityBoundary
+urano2BGreenCompatibilityBoundary =
+  UranoCompat.canonicalTwoBGreenSpeciesUranoParityCompatibilityBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -546,6 +559,8 @@ record ArithmeticIndependent369Frontier : Set where
     p2IsotropyDenominatorDepthEqualsUranoLengthPaid : Bool
     p3PreferredWeightsHaveSemistableMultiplicityInterpretation : Bool
     p3SemistableMultiplicityEqualsUranoLengthPaid : Bool
+    urano2BParityConstraintsSourced : Bool
+    p2GreenSpeciesUranoParityCompatibilityPaid : Bool
     carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
     uranoTheoryDeterminesSectorLengths : Bool
     greenRingFrameworkProvesLocalizedPBSpecies : Bool
@@ -703,6 +718,8 @@ canonicalArithmeticIndependent369Frontier =
     ; p2IsotropyDenominatorDepthEqualsUranoLengthPaid = false
     ; p3PreferredWeightsHaveSemistableMultiplicityInterpretation = true
     ; p3SemistableMultiplicityEqualsUranoLengthPaid = false
+    ; urano2BParityConstraintsSourced = true
+    ; p2GreenSpeciesUranoParityCompatibilityPaid = false
     ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
     ; uranoTheoryDeterminesSectorLengths = false
     ; greenRingFrameworkProvesLocalizedPBSpecies = false
