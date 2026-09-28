@@ -47,18 +47,30 @@ record LiteralGroupDirectSourceSameHGap
     : Set₂ where
   field
     --------------------------------------------------------------------
-    -- Selected finite family, on the literal endpoint carriers.
+    -- One selected convergence carrier receiving BOTH the literal finite
+    -- family and the literal continuum measure.  The endpoint intentionally
+    -- keeps FiniteMeasure and ContinuumMeasure as different types, so these
+    -- embeddings are explicit rather than pretending they are definitionally
+    -- the same carrier.
     --------------------------------------------------------------------
+    Measure : Set
+    finiteMeasureToSelected : Top.FiniteMeasure C → Measure
+    continuumMeasureToSelected : Top.ContinuumMeasure C → Measure
+
     dataSet :
       Gram.PhysicalMeasureConvergenceData
-        (Top.FiniteMeasure C)
+        Measure
         (Top.Observable C)
         ℚ
 
     literalFiniteFamily :
       ∀ cutoff →
       Gram.measureSequence dataSet cutoff
-      ≡ Top.finiteMeasure Y G cutoff
+      ≡ finiteMeasureToSelected (Top.finiteMeasure Y G cutoff)
+
+    literalContinuumMeasure :
+      Gram.continuumMeasure dataSet
+      ≡ continuumMeasureToSelected (Top.continuumMeasure Y G)
 
     extension :
       R278.ScalarCovarianceConvergenceExtension dataSet
