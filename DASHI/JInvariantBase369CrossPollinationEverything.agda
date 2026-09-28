@@ -460,3 +460,11 @@ import DASHI.Moonshine.OggSSPP2UranoInertiaSectorLocalizationObligationExact
 import DASHI.Moonshine.OggSSPP3H3NodeBranchLocalizationObligationExact
 
 import DASHI.Moonshine.OggSSPPBTerminalLocalizationFactorizationExact
+
+import DASHI.Moonshine.OggSSPP3H3NodeBranchLocalizationFactorizationExact
+
+import DASHI.Moonshine.OggSSP3BCarnahanTateSigmaSplitExact
+
+import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact
+
+import DASHI.Moonshine.OggSSPP3H3TateSigmaPartitionFactorizationExact
