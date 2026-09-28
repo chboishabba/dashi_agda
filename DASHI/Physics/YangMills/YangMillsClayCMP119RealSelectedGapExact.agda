@@ -111,6 +111,225 @@ record CMP119RealSelectedSpectrumApplication
 
 open CMP119RealSelectedSpectrumApplication public
 
+------------------------------------------------------------------------
+-- PRE-GAP REAL SELECTED H1 APPLICATION.
+--
+-- Same selected R281/H1 object, but indexed by the clustering-free CMP119 core.
+------------------------------------------------------------------------
+
+record CMP119CoreRealSelectedSpectrumApplication
+    (CompactSimpleGroup Spacetime Configuration Position
+     CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+     HilbertSpace Hamiltonian VacuumState
+     Scale Volume Root SourceDirection SpectralObservable Energy : Set)
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit)}
+    {division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient}
+    {S}
+    (a :
+      A.PinnedCMP119OSCoreInputs
+        CompactSimpleGroup Spacetime Configuration Position
+        CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+        HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit)
+    (group : CompactSimpleGroup)
+    (source :
+      CMP116.PublishedCMP116DifferentiatedLocalization
+        Scale Volume Root SourceDirection ℝ)
+    : Set₂ where
+  private
+    family = A.familyCore a group
+    algebra = A.observableAlgebraCore a
+    dataSet =
+      Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily family algebra
+    extension =
+      Cov.realCovarianceExtensionFromFamily family algebra covarianceLaws
+
+  field
+    testsCore :
+      R278.SelectedConnectedCovarianceTests dataSet
+
+    spectrumSourceCore :
+      R281.ContinuumCovarianceSpectrumData
+        {SpectralObservable = SpectralObservable}
+        {Energy = Energy}
+        dataSet extension testsCore
+
+    realH1Core :
+      RealH1.LiteralRealCMP116CoreClusteringInputs
+        CompactSimpleGroup Spacetime Configuration Position
+        CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+        HilbertSpace Hamiltonian VacuumState
+        Scale Volume Root SourceDirection
+        (R278.Index testsCore)
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        a covarianceLaws group source
+
+    selectedLeftIsH1LeftCore :
+      ∀ index →
+      R278.left testsCore index ≡ RealH1.leftCore realH1Core index
+
+    selectedRightIsH1RightCore :
+      ∀ index →
+      R278.right testsCore index ≡ RealH1.rightCore realH1Core index
+
+    physicalUpperBelowSpectrumEnvelopeCore :
+      ∀ observable time →
+      RealH1.physicalUpperCore realH1Core
+        (R281.indexFor spectrumSourceCore observable time)
+      ≤ℝ
+      R281.clusteringEnvelope spectrumSourceCore observable time
+
+    realOrderImpliesSpectrumOrderCore :
+      ∀ left right →
+      left ≤ℝ right →
+      R281.LessEqual spectrumSourceCore left right
+
+open CMP119CoreRealSelectedSpectrumApplication public
+
+selectedCoreContinuumCovarianceBelowSpectrumEnvelope :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S
+      a covarianceLaws group source}
+    (application :
+      CMP119CoreRealSelectedSpectrumApplication
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Scale Volume Root SourceDirection SpectralObservable Energy
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        a covarianceLaws group source)
+    observable time →
+  let
+    family = A.familyCore a group
+    algebra = A.observableAlgebraCore a
+    dataSet =
+      Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily family algebra
+    extension =
+      Cov.realCovarianceExtensionFromFamily family algebra covarianceLaws
+    tests = testsCore application
+    spectrum = spectrumSourceCore application
+    index = R281.indexFor spectrum observable time
+  in
+  R281.LessEqual spectrum
+    (R278.connectedCovarianceMagnitude extension
+      (Gram.continuumMeasure dataSet)
+      (R278.left tests index)
+      (R278.right tests index))
+    (R281.clusteringEnvelope spectrum observable time)
+selectedCoreContinuumCovarianceBelowSpectrumEnvelope
+    {a = a} {covarianceLaws = covarianceLaws} {group = group}
+    application observable time =
+  let
+    family = A.familyCore a group
+    algebra = A.observableAlgebraCore a
+    dataSet =
+      Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily family algebra
+    extension =
+      Cov.realCovarianceExtensionFromFamily family algebra covarianceLaws
+    tests' = testsCore application
+    spectrum = spectrumSourceCore application
+    index = R281.indexFor spectrum observable time
+    h1 = realH1Core application
+
+    h1Bound =
+      RealH1.continuumCorePhysicalCovarianceBelowUpper h1 index
+
+    selectedBound :
+      R278.connectedCovarianceMagnitude extension
+        (Gram.continuumMeasure dataSet)
+        (R278.left tests' index)
+        (R278.right tests' index)
+      ≤ℝ
+      RealH1.physicalUpperCore h1 index
+    selectedBound
+      rewrite selectedLeftIsH1LeftCore application index
+            | selectedRightIsH1RightCore application index =
+      h1Bound
+
+    calibrated =
+      physicalUpperBelowSpectrumEnvelopeCore application observable time
+  in
+  realOrderImpliesSpectrumOrderCore application
+    _
+    _
+    (≤ℝ-trans selectedBound calibrated)
+
+selectedCoreSubgapModeClusteringUpper :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S
+      a covarianceLaws group source}
+    (application :
+      CMP119CoreRealSelectedSpectrumApplication
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Scale Volume Root SourceDirection SpectralObservable Energy
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        a covarianceLaws group source) →
+  Gap.SubgapModeClusteringUpper
+    (R281.asReconstructedClusteringSpectrum
+      (spectrumSourceCore application))
+selectedCoreSubgapModeClusteringUpper application energy mode time =
+  selectedCoreContinuumCovarianceBelowSpectrumEnvelope application
+    (R281.modeObservable (spectrumSourceCore application) energy mode)
+    time
+
+positiveCoreTransferGapCore :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S
+      a covarianceLaws group source}
+    (application :
+      CMP119CoreRealSelectedSpectrumApplication
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Scale Volume Root SourceDirection SpectralObservable Energy
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        a covarianceLaws group source) →
+  Gap.PositiveEnergy
+    (R281.asReconstructedClusteringSpectrum
+      (spectrumSourceCore application))
+    (Gap.gapCandidate
+      (R281.asReconstructedClusteringSpectrum
+        (spectrumSourceCore application))) →
+  Gap.PositiveTransferGapCore
+    (R281.asReconstructedClusteringSpectrum
+      (spectrumSourceCore application))
+positiveCoreTransferGapCore application positive =
+  Gap.positiveTransferGapCoreFromModeTests
+    (R281.asReconstructedClusteringSpectrum
+      (spectrumSourceCore application))
+    (selectedCoreSubgapModeClusteringUpper application)
+    positive
+
 selectedContinuumCovarianceBelowSpectrumEnvelope :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
@@ -233,6 +452,9 @@ positiveTransferGapCore application positive =
       (spectrumSource application))
     (selectedSubgapModeClusteringUpper application)
     positive
+
+cmp119CoreRealSelectedGapCompilerLevel : ProofLevel
+cmp119CoreRealSelectedGapCompilerLevel = machineChecked
 
 cmp119RealSelectedGapCompilerLevel : ProofLevel
 cmp119RealSelectedGapCompilerLevel = machineChecked
