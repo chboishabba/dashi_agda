@@ -14,6 +14,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionEx
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.Foundations.CMP119AntigravityUnitCouplingCapInverseThresholdExact as Unit
 import DASHI.Physics.Foundations.CMP119AntigravityPhysicalSU2ThresholdBelowHistoryExact as Threshold
+import DASHI.Physics.Foundations.CMP119AntigravityBishopInversePiSquaredUnitBoundExact as Pi
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as RowA
@@ -111,7 +112,7 @@ sameRunningPiIsThresholdPi :
     (SU2Convention.canonicalBishopSU2RunningConvention
       (bishopRunning package))
   ≡
-  DASHI.Physics.Foundations.CMP119AntigravityBishopInversePiSquaredUnitBoundExact.inversePiSquared
+  Pi.inversePiSquared
 sameRunningPiIsThresholdPi package = refl
 
 postHocCapEqualityRequired : Bool
