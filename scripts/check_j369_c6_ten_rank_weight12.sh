@@ -145,3 +145,35 @@ grep -q 'p11PatternReceipt' "${isotropy_targets[2]}"
 
 grep -q 'MarkedCoverArithmeticResidualSourceCandidate' "${isotropy_targets[3]}"
 grep -q 'markedCoverAcquisitionPatternAvailable' "${isotropy_targets[3]}"
+
+
+# Raw finite-field candidate asymmetry: p2 requires enrichment, p3 admits quotient.
+acquisition_targets=(
+  DASHI/Moonshine/OggSSPP2F4FrobeniusCandidateNoGoExact.agda
+  DASHI/Moonshine/OggSSPP3F9FrobeniusCandidateNoGoExact.agda
+  DASHI/Moonshine/OggSSPSmallCharacteristicAcquisitionDirectionExact.agda
+  DASHI/Moonshine/OggSSPExponentResidualArithmeticSourceInterfaceExact.agda
+)
+
+for target in "${acquisition_targets[@]}"; do
+  test -f "$target"
+done
+
+scripts/run_agda29_parallel_check.sh "${acquisition_targets[@]}"
+
+grep -q 'f4Pi0Count' "${acquisition_targets[0]}"
+grep -q 'noUniformThreeOrbitLiftToTen' "${acquisition_targets[0]}"
+grep -q 'stratifiedMarkedRefinementRequiredIfRefiningF4Orbits' "${acquisition_targets[0]}"
+
+grep -q 'f9ExtensionCoordinateOrbitRecognition' "${acquisition_targets[1]}"
+grep -q 'f9ExtensionCoordinateNotPi0Embedding' "${acquisition_targets[1]}"
+grep -q 'noFullF9FrobeniusRecognitionToP3' "${acquisition_targets[1]}"
+
+grep -q 'p2AcquisitionDirection' "${acquisition_targets[2]}"
+grep -q 'p3AcquisitionDirection' "${acquisition_targets[2]}"
+grep -q 'p2NoUniformMarkedLift' "${acquisition_targets[2]}"
+grep -q 'p3ConcreteQuotientExists' "${acquisition_targets[2]}"
+
+grep -q 'preferredAcquisitionDirection' "${acquisition_targets[3]}"
+grep -q 'p2AcquisitionDirectionIsMarkedEnrichment' "${acquisition_targets[3]}"
+grep -q 'p3AcquisitionDirectionIsQuotient' "${acquisition_targets[3]}"
