@@ -484,3 +484,9 @@ import DASHI.Moonshine.OggSSP4A2BThreeLabelFiveSectorNoGoExact
 import DASHI.Moonshine.OggSSP4A2BTateRefinementFiveSectorNoGoExact
 
 import DASHI.Moonshine.OggSSP2BCarnahanTateSplitExact
+
+import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact
+
+import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact
+
+import DASHI.Moonshine.OggSSPPBScalarLocalizationReductionExact
