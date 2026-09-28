@@ -450,3 +450,11 @@ import DASHI.Moonshine.OggSSPP2InertiaConjugacyClassDefectExact
 import DASHI.Moonshine.OggSSPP2InertiaBrauerRegularityBoundaryExact
 
 import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact
+
+import DASHI.Moonshine.OggSSPPBTerminalLocalizationPrimewiseGapExact
+
+import DASHI.Moonshine.OggSSPP2UranoInertiaSectorLocalizationObligationExact
+
+import DASHI.Moonshine.OggSSPP3H3NodeBranchLocalizationObligationExact
+
+import DASHI.Moonshine.OggSSPPBTerminalLocalizationFactorizationExact
