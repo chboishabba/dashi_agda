@@ -95,7 +95,9 @@ record LiteralGroupDirectSourceSameHGap
         base tests spectrumSource
 
     --------------------------------------------------------------------
-    -- H2(ii): selected covariance limit/order closure.
+    -- Standard one-sided scalar order closure used by the gap compiler.
+    -- H2(ii) itself is the same-carrier Wilson expectation-convergence
+    -- attachment and is kept separate in the direct-source OS H2 owner.
     --------------------------------------------------------------------
     selectedLimitClosure :
       R342.SelectedLimitUpperClosure {dataSet = dataSet}
