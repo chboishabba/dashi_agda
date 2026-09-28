@@ -18,6 +18,7 @@ module DASHI.Analysis.RiemannPrimitiveKernelSmithFiltrationSeparationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Integer using (ℤ; +_)
 
 import DASHI.Analysis.RiemannPrimitiveKernelBalancedTernaryStencilExact as Stencil
 import DASHI.Analysis.RiemannPrimitiveKernelUnimodularBasisExact as Basis
@@ -63,7 +64,7 @@ explicitSmithNormalFormOwned =
   Smith.explicitSmithNormalForm
 
 rowMapSurjectiveWitness :
-  (value : Data.Integer.ℤ) ->
+  (value : ℤ) ->
   Smith.rowMap (Smith.rowPreimage value) ≡ value
 rowMapSurjectiveWitness =
   Smith.rowMapHasPreimage
