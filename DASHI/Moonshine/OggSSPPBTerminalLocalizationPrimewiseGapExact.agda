@@ -48,6 +48,9 @@ import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact as Sigma
 import DASHI.Moonshine.OggSSPP3H3TateSigmaPartitionFactorizationExact as P3Factor
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact as Terminal
+import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact as P3Scalar
+import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact as P2Scalar
+import DASHI.Moonshine.OggSSPPBScalarLocalizationReductionExact as Scalar
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -155,12 +158,18 @@ data TerminalAcquisitionDirection : Set where
   proveSharedPrimeLevelGreenLocalization :
     TerminalAcquisitionDirection
 
+  proveP3TateSourceLengthOne :
+    TerminalAcquisitionDirection
+
+  proveP2FiveSourceDepthSlots :
+    TerminalAcquisitionDirection
+
 -- p=3 has more source-native structure already paid, but the shared theorem
 -- still cannot be completed without the actual prime-level localization.
 highestAlphaFirstSubproblem :
   TerminalAcquisitionDirection
 highestAlphaFirstSubproblem =
-  proveP3H3ToNodeBranchRefinement
+  proveP3TateSourceLengthOne
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
@@ -296,3 +305,55 @@ fourATateNoGoBoundary :
   FourATateNoGo.FourA2BTateRefinementFiveSectorNoGoBoundary
 fourATateNoGoBoundary =
   FourATateNoGo.canonicalFourA2BTateRefinementFiveSectorNoGoBoundary
+
+
+------------------------------------------------------------------------
+-- 7. Consumer-relative scalar gap after quotient reductions.
+--
+-- The strong semantic localization theorem remains open.  For the scalar
+-- exceptional-length consumer, however, two obligations have been removed:
+--
+--   p=3 does not need Tate<->DR alignment;
+--   p=2 does not need semantic five-sector names before the length profile.
+------------------------------------------------------------------------
+
+p3ScalarBoundary :
+  P3Scalar.P3AlignmentIndependentLengthBoundary
+p3ScalarBoundary =
+  P3Scalar.canonicalP3AlignmentIndependentLengthBoundary
+
+p2ScalarBoundary :
+  P2Scalar.P2InertiaDepthQuotientBoundary
+p2ScalarBoundary =
+  P2Scalar.canonicalP2InertiaDepthQuotientBoundary
+
+scalarReductionBoundary :
+  Scalar.PBScalarLocalizationReductionBoundary
+scalarReductionBoundary =
+  Scalar.canonicalPBScalarLocalizationReductionBoundary
+
+record PBScalarConsumerGap : Set where
+  constructor pb-scalar-consumer-gap
+  field
+    p3SemanticAlignmentRequired : Bool
+    p3ActualTateSourceLengthOneRequired : Bool
+    p3ActualTateSourceLengthOneInhabited : Bool
+
+    p2FiveSemanticInertiaNamesRequired : Bool
+    p2FiveSourceSlotsRequired : Bool
+    p2SourceLengthProfileThreeThreeTwoOneOneRequired : Bool
+    p2SourceLengthProfileInhabited : Bool
+
+    fullSemanticLocalizationStillStronger : Bool
+    badLevelSameObjectHauptmodulLocalizationStillRequired : Bool
+    monsterTargetUsedToDefineReducedPayments : Bool
+    base369UsedToDefineReducedPayments : Bool
+    attributionFirewallPreserved : Bool
+
+canonicalPBScalarConsumerGap :
+  PBScalarConsumerGap
+canonicalPBScalarConsumerGap =
+  pb-scalar-consumer-gap
+    false true false
+    false true true false
+    true true false false true
