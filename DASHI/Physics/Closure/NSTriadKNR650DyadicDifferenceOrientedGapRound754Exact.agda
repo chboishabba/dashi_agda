@@ -39,7 +39,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -112,12 +112,17 @@ qHighFactoredCell {E} {I}
     kMinusQ =
       trans
         (solve (wk ∷ wq ∷ []))
-        (cong₂ _-_ refl qMinusK
-          |> λ _ → solve (wk ∷ wq ∷ fk ∷ []))
+        (cong -_ qMinusK)
+
+    pMinusQ : wp - wq ≡ - (wp * fp)
+    pMinusQ =
+      trans
+        (solve (wp ∷ wq ∷ []))
+        (cong -_ qMinusP)
 
   in
-  rewrite qMinusK | qMinusP =
-    solve (wk ∷ wp ∷ wq ∷ pk ∷ pp ∷ fk ∷ fp ∷ [])
+  rewrite kMinusQ | pMinusQ =
+    solve (wk ∷ wp ∷ pk ∷ pp ∷ fk ∷ fp ∷ [])
 
 qLowFactoredCell :
   ∀ {E : C3.IntegerEmbedding F}
