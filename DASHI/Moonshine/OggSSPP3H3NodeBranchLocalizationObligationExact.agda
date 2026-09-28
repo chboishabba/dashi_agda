@@ -62,6 +62,12 @@ record P3H3NodeBranchLocalizationTheorem : Set₁ where
       (piece : H3Piece) ->
       pieceEmbedsEquivariantlyIntoThreeBFixedVectors piece ≡ true
 
+    usesCarnahanLocalizedBaseExtension :
+      Bool
+
+    usesCarnahanLocalizedBaseExtensionIsTrue :
+      usesCarnahanLocalizedBaseExtension ≡ true
+
     localizedSector :
       H3Piece ->
       DR.P3LocalOrbit
@@ -190,6 +196,7 @@ record P3H3NodeBranchLocalizationBoundary : Set where
   field
     carnahanOrderNineDecompositionSourced : Bool
     carnahanFixedVectorEmbeddingSourced : Bool
+    carnahanBaseExtensionQualificationRequired : Bool
     deligneRapoportTwoSectorGeometrySourced : Bool
     semistableMultiplicityOneOneOwned : Bool
 
@@ -206,6 +213,6 @@ canonicalP3H3NodeBranchLocalizationBoundary :
   P3H3NodeBranchLocalizationBoundary
 canonicalP3H3NodeBranchLocalizationBoundary =
   p3-h3-node-branch-localization-boundary
-    true true true true
+    true true true true true
     true false true false
     false false true
