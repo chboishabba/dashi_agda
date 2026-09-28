@@ -25,6 +25,9 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
+import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
 
 ------------------------------------------------------------------------
 -- Executable finite-description surfaces.
@@ -219,6 +222,86 @@ executableDeciderCode :
   ExecutableDeciderCode decider
 executableDeciderCode =
   proj₂
+
+------------------------------------------------------------------------
+-- InP forgetful compiler.
+------------------------------------------------------------------------
+
+forgetExecutableInP :
+  ∀ {Word : Set}
+    {base : PR.PolynomialCostModel Word}
+    {closure : ExecutableCodeClosure Word}
+    {language : PR.Language Word} →
+  PR.InP
+    (executablePolynomialCostModel base closure)
+    language →
+  PR.InP base language
+forgetExecutableInP executableP = record
+  { PR.decide =
+      PR.decide executableP
+  ; PR.sound =
+      PR.sound executableP
+  ; PR.complete =
+      PR.complete executableP
+  ; PR.polynomialDecision =
+      forgetExecutableDecider
+        (PR.polynomialDecision executableP)
+  }
+
+------------------------------------------------------------------------
+-- SAT specialization: executable polynomial evidence projects directly to the
+-- same-object CandidateCodeRealization expected by the self-instantiation lane.
+------------------------------------------------------------------------
+
+candidateCodeRealizationFromExecutableWitness :
+  ∀ {base : PR.PolynomialCostModel Cook.BooleanFormula}
+    {closure : ExecutableCodeClosure Cook.BooleanFormula}
+    {decider : Cook.BooleanFormula → Bool}
+    (witness :
+      ExecutablePolynomialTimeDecider
+        base
+        decider) →
+  let refined =
+        executablePolynomialCostModel base closure
+      candidate =
+        Direct.polynomial-sat-decider-candidate
+          decider
+          witness
+  in
+  Actual.CandidateCodeRealization candidate
+candidateCodeRealizationFromExecutableWitness
+    witness =
+  record
+    { Actual.CandidateCode =
+        ExecutableDeciderCode.Code
+          (executableDeciderCode witness)
+    ; Actual.candidateCode =
+        ExecutableDeciderCode.code
+          (executableDeciderCode witness)
+    ; Actual.runCandidateCode =
+        ExecutableDeciderCode.run
+          (executableDeciderCode witness)
+    ; Actual.codeDecisionExact =
+        ExecutableDeciderCode.runExact
+          (executableDeciderCode witness)
+    ; Actual.codeSize =
+        ExecutableDeciderCode.codeSize
+          (executableDeciderCode witness)
+    }
+
+satInExecutablePProvidesCandidateCode :
+  ∀ {base : PR.PolynomialCostModel Cook.BooleanFormula}
+    {closure : ExecutableCodeClosure Cook.BooleanFormula}
+    {language : PR.Language Cook.BooleanFormula}
+    (satP :
+      PR.InP
+        (executablePolynomialCostModel base closure)
+        language) →
+  Actual.CandidateCodeRealization
+    (Direct.inPToPolynomialSATDeciderCandidate satP)
+satInExecutablePProvidesCandidateCode satP =
+  candidateCodeRealizationFromExecutableWitness
+    (PR.polynomialDecision satP)
 
 ------------------------------------------------------------------------
 -- Boundary statement.
