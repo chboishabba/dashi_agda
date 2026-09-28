@@ -28,6 +28,8 @@ import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact as Cyclo
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Fibre
 import DASHI.Moonshine.MonsterOggPrimaryDepthAndNestedEigenCarrierExact as Nested
 import DASHI.Moonshine.MonsterFivePrimaryRelationalModelBoundaryExact as FiveBoundary
+import DASHI.Reasoning.Trialectic369DyadicLocalNineObserverCandidateExact as TrialecticNine
+import DASHI.Moonshine.MonsterFiveTrialecticLocalRecognitionExact as FiveRecognition
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 nonarySquareRoundTripAtEight :
@@ -149,3 +151,47 @@ fiveLocalNineChannelObserverRemainsOpen :
     FiveBoundary.canonicalMonsterFivePrimaryPromotionBoundary
   ≡ false
 fiveLocalNineChannelObserverRemainsOpen = refl
+
+
+------------------------------------------------------------------------
+-- Trialectic local recognition update.
+--
+-- The finite candidate side is now paid without promoting it to the source
+-- Monster-5 carrier.
+------------------------------------------------------------------------
+
+trialecticFiveLocalNineObserverCandidateIsPaid :
+  TrialecticNine.localNineObserverConstructed
+    TrialecticNine.canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary
+  ≡ true
+trialecticFiveLocalNineObserverCandidateIsPaid = refl
+
+trialecticOrdinaryNineToModeNineRechartIsPaid :
+  TrialecticNine.phaseNineToModeNineCarrierRoundTripsPaid
+    TrialecticNine.canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary
+  ≡ true
+trialecticOrdinaryNineToModeNineRechartIsPaid = refl
+
+trialecticFiniteC2IntertwinerIsPaid :
+  FiveRecognition.finiteSignedC2IntertwinerPaid
+    FiveRecognition.canonicalMonsterFiveTrialecticRecognitionBoundary
+  ≡ true
+trialecticFiniteC2IntertwinerIsPaid = refl
+
+monsterFiveSourceRecognitionStillRequired :
+  FiveRecognition.sourceToLocalRecognitionRequired
+    FiveRecognition.canonicalMonsterFiveTrialecticRecognitionBoundary
+  ≡ true
+monsterFiveSourceRecognitionStillRequired = refl
+
+analyticFrickeRecognitionStillOpen :
+  FiveRecognition.analyticFrickeIdentifiedHere
+    FiveRecognition.canonicalMonsterFiveTrialecticRecognitionBoundary
+  ≡ false
+analyticFrickeRecognitionStillOpen = refl
+
+actualFiveLocalCarrierStillNotPromoted :
+  FiveBoundary.actualFiveLocalCarrierIdentified
+    FiveBoundary.canonicalMonsterFivePrimaryPromotionBoundary
+  ≡ false
+actualFiveLocalCarrierStillNotPromoted = refl
