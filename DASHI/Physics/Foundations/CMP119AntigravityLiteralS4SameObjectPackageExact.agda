@@ -115,9 +115,9 @@ sameLiteralHistoryInverseThresholdAtLeastOne :
   1ℚ ≤
   History.inverseThreshold
     (Terminal.asBetaSplitInverseSquareTerminalHistory terminal)
-sameLiteralHistoryInverseThresholdAtLeastOne package =
+sameLiteralHistoryInverseThresholdAtLeastOne {terminal = terminal} package =
   let
-    history = Terminal.asBetaSplitInverseSquareTerminalHistory _
+    history = Terminal.asBetaSplitInverseSquareTerminalHistory terminal
   in
   Unit.inverseThresholdAtLeastOneFromUnitCap
     (History.gammaPositive history)
