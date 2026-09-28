@@ -262,6 +262,62 @@ asLocalizedDVRPreferredPaymentAuthority A =
     }
 
 ------------------------------------------------------------------------
+-- 4b. Adapter to the existing preferred analytic-valuation authority.
+--
+-- The Green-ring authority is target-independent: its sector classes and
+-- lengths are constructed without Monster-order or Duncan--Swisher residual
+-- targets.  After that theorem is paid, the already-owned Preferred module
+-- supplies the independent arithmetic equalities showing that the sector
+-- totals are the 10/2 gaps.  Thus the downstream recognition is derived rather
+-- than used to define the local species.
+------------------------------------------------------------------------
+
+asPreferredCorrectedValuationAuthority :
+  PBGreenRingSectorSpeciesAuthority ->
+  Preferred.PreferredCorrectedValuationAuthority
+asPreferredCorrectedValuationAuthority A =
+  record
+    { Preferred.AnalyticLocalTerm =
+        ModuleClass (species A)
+    ; Preferred.p2AnalyticTerm =
+        p2SectorClass A
+    ; Preferred.p3AnalyticTerm =
+        p3SectorClass A
+    ; Preferred.analyticMultiplicity =
+        normalizedDVRLength A
+    ; Preferred.p2WeightsAreActualLocalValuations =
+        λ sector ->
+          sym (p2LengthMatchesIndependentGeometricWeight A sector)
+    ; Preferred.p3WeightsAreActualLocalValuations =
+        λ sector ->
+          sym (p3LengthMatchesIndependentGeometricWeight A sector)
+    ; Preferred.localTermsAssembleIntoCorrectedHauptmodulValuation =
+        resultingHauptmodulObservableIsBadLevelCorrectedObservable A
+    ; Preferred.localTermsAssembleIntoCorrectedHauptmodulValuationIsTrue =
+        resultingHauptmodulObservableIsBadLevelCorrectedObservableIsTrue A
+    ; Preferred.correctedValuationPaysDuncanSwisherP2Gap =
+        true
+    ; Preferred.correctedValuationPaysDuncanSwisherP2GapIsTrue =
+        refl
+    ; Preferred.correctedValuationPaysDuncanSwisherP3Gap =
+        true
+    ; Preferred.correctedValuationPaysDuncanSwisherP3GapIsTrue =
+        refl
+    }
+
+p2GapEquationAfterGreenSpecies :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  Preferred.total Preferred.p2PreferredPresentation ≡ 10
+p2GapEquationAfterGreenSpecies A =
+  Preferred.p2PreferredTotalIsTen
+
+p3GapEquationAfterGreenSpecies :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  Preferred.total Preferred.p3PreferredPresentation ≡ 2
+p3GapEquationAfterGreenSpecies A =
+  Preferred.p3PreferredTotalIsTwo
+
+------------------------------------------------------------------------
 -- 5. Source receipts and attribution firewalls.
 ------------------------------------------------------------------------
 
@@ -324,6 +380,7 @@ record PBGreenRingSectorSpeciesCutsetBoundary : Set where
     uranoFiniteLengthBrauerFrameworkSourced : Bool
     sectorSpeciesAuthoritySpecified : Bool
     adapterToPreferredDVRPaymentOwned : Bool
+    adapterToPreferredCorrectedValuationOwned : Bool
     sectorSpeciesAuthorityInhabited : Bool
     carnahanUranoCreditedWithDASHISectorWeights : Bool
     uranoCreditedWithIgusaSectorDecomposition : Bool
@@ -334,4 +391,4 @@ canonicalPBGreenRingSectorSpeciesCutsetBoundary :
   PBGreenRingSectorSpeciesCutsetBoundary
 canonicalPBGreenRingSectorSpeciesCutsetBoundary =
   pb-green-ring-sector-species-cutset-boundary
-    true true true true true true false false false false true
+    true true true true true true true false false false false true
