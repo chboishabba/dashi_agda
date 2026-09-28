@@ -513,6 +513,22 @@ asRound494WilsonTwoMarkWEXTSource
             payment cutoff left right)
   }
 
+
+sourceFirstWilsonTwoInsertionConnectedShell :
+  ∀ {Observable Source Polymer Cluster Volume Scale Root family}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable}
+    {payment :
+      TwoWilsonCMP116PhysicalShellPayment
+        {Scale = Scale} {Root = Root}
+        differentiable charge} →
+  TwoWilsonSignedCovarianceIdentification payment →
+  R491.WilsonTwoInsertionConnectedShell
+    Scale Volume Root Nat Observable
+sourceFirstWilsonTwoInsertionConnectedShell identification =
+  R494.asWilsonTwoInsertionConnectedShell
+    (asRound494WilsonTwoMarkWEXTSource identification)
+
 round494TwoMarkExpansionFromMarkedKPCompilerLevel : ProofLevel
 round494TwoMarkExpansionFromMarkedKPCompilerLevel = machineChecked
 
