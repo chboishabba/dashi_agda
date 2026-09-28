@@ -248,6 +248,8 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p2TrialecticNineObserverArithmeticLossPaid : Bool
     p2TrialecticNineCentreOnlyResidualCodecOwned : Bool
     p2DualDependentCodecBidiOwned : Bool
+    p2ArithmeticBidiDualCodecTransportOwned : Bool
+    p2UniversalSupersingularDeformationSourceSocketOwned : Bool
     p2DuplicatedCentreTenToNineBridgeOwned : Bool
     p2BadPrimeLevelStructureBoundaryOwned : Bool
     p2Gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
@@ -298,6 +300,8 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
     ; p2TrialecticNineObserverArithmeticLossPaid = true
     ; p2TrialecticNineCentreOnlyResidualCodecOwned = true
     ; p2DualDependentCodecBidiOwned = true
+    ; p2ArithmeticBidiDualCodecTransportOwned = true
+    ; p2UniversalSupersingularDeformationSourceSocketOwned = true
     ; p2DuplicatedCentreTenToNineBridgeOwned = true
     ; p2BadPrimeLevelStructureBoundaryOwned = true
     ; p2Gamma0FourMarkedSubgroupSchemeSocketOwned = true
