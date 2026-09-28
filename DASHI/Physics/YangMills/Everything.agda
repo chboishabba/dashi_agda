@@ -679,3 +679,5 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineFiniteExpectationJet
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedSecondJetExpansionExact
 
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCMP116MarkedExpansionExact
+
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCanonicalDomainApplicabilityExact
