@@ -25,6 +25,8 @@ import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact
 import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact as Terminal
 import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as Preferred
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2Geom
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3Geom
 
 ------------------------------------------------------------------------
 -- 1. Shared Green realization of the two already-localized source systems.
@@ -226,6 +228,84 @@ assembleTerminalTheorem p2 p3 G =
     ; Terminal.threeBRefinement =
         p3Compatibility G
     }
+
+------------------------------------------------------------------------
+-- 4b. The three payments make the source/geometric/Green triangles commute.
+------------------------------------------------------------------------
+
+p2GreenLengthEqualsCanonicalSourceLength :
+  {p2 : P2.P2UranoInertiaSectorLocalizationTheorem}
+  {p3 : P3.P3H3NodeBranchLocalizationTheorem} ->
+  (G : PBSharedGreenRealization p2 p3) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  Green.normalizedDVRLength
+    (green G)
+    (Green.p2SectorClass (green G) sector)
+  ≡
+  P2.normalizedDVRLength
+    p2
+    (P2.everySectorHasSourcePiece p2 sector)
+p2GreenLengthEqualsCanonicalSourceLength {p2} G sector =
+  trans
+    (Green.p2LengthMatchesStackIsotropyDenominatorDepth
+      (green G)
+      sector)
+    (sym
+      (P2.sectorRepresentativeLength
+        p2
+        sector))
+
+p3GreenLengthEqualsCanonicalSourceLength :
+  {p2 : P2.P2UranoInertiaSectorLocalizationTheorem}
+  {p3 : P3.P3H3NodeBranchLocalizationTheorem} ->
+  (G : PBSharedGreenRealization p2 p3) ->
+  (sector : Preferred.Sector Preferred.p3PreferredPresentation) ->
+  Green.normalizedDVRLength
+    (green G)
+    (Green.p3SectorClass (green G) sector)
+  ≡
+  P3.normalizedDVRLength
+    p3
+    (P3.everySectorHasSourcePiece p3 sector)
+p3GreenLengthEqualsCanonicalSourceLength {p3} G sector =
+  trans
+    (Green.p3LengthMatchesSemistableLocalMultiplicity
+      (green G)
+      sector)
+    (sym
+      (trans
+        (P3.localizedLengthMatchesSemistableMultiplicity
+          p3
+          (P3.everySectorHasSourcePiece p3 sector))
+        (cong
+          P3Geom.p3LocalGeometricMultiplicity
+          (P3.everySectorHasSourcePieceCorrect p3 sector))))
+
+p2GreenLengthEqualsIndependentGeometry :
+  {p2 : P2.P2UranoInertiaSectorLocalizationTheorem}
+  {p3 : P3.P3H3NodeBranchLocalizationTheorem} ->
+  (G : PBSharedGreenRealization p2 p3) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  Green.normalizedDVRLength
+    (green G)
+    (Green.p2SectorClass (green G) sector)
+  ≡
+  P2Geom.sectorIsotropyDenominatorTwoAdicDepth sector
+p2GreenLengthEqualsIndependentGeometry G =
+  Green.p2LengthMatchesStackIsotropyDenominatorDepth (green G)
+
+p3GreenLengthEqualsIndependentGeometry :
+  {p2 : P2.P2UranoInertiaSectorLocalizationTheorem}
+  {p3 : P3.P3H3NodeBranchLocalizationTheorem} ->
+  (G : PBSharedGreenRealization p2 p3) ->
+  (sector : Preferred.Sector Preferred.p3PreferredPresentation) ->
+  Green.normalizedDVRLength
+    (green G)
+    (Green.p3SectorClass (green G) sector)
+  ≡
+  P3Geom.p3LocalGeometricMultiplicity sector
+p3GreenLengthEqualsIndependentGeometry G =
+  Green.p3LengthMatchesSemistableLocalMultiplicity (green G)
 
 ------------------------------------------------------------------------
 -- 5. No hidden fourth payment.
