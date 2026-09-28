@@ -31,6 +31,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
@@ -212,6 +213,123 @@ twoWilsonMixedLogBelowConfiguredRootedTail :
 twoWilsonMixedLogBelowConfiguredRootedTail payment =
   TwoMark.connectedResponseHasConfiguredSeparationTail
     (asTwoMarkedConnectedClusterTail payment)
+
+
+------------------------------------------------------------------------
+-- Strong physical-shell form.
+--
+-- This is the preferred H1 quantitative payment.  It lands on the actual
+-- TraversalShellData used by R274/R491, rather than first weakening to the
+-- universal dyadic tail.
+------------------------------------------------------------------------
+
+record TwoWilsonCMP116PhysicalShellPayment
+    {Observable Source Polymer Cluster Volume Scale Root : Set}
+    {family :
+      Marked.TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume}
+    (differentiable : Marked.DifferentiableTwoWilsonKP family)
+    (charge : Marked.TwoWilsonCMP116ClusterCharge differentiable)
+    : Set₁ where
+  field
+    shellData : Shell.TraversalShellData Scale Volume Root
+
+    scaleOfCutoff : Nat → Scale
+    connectingRoot : Nat → Observable → Observable → Root
+    supportSeparation : Observable → Observable → Nat
+
+    clusterDiameter : Cluster → Nat
+
+    contributingClusterConnectsBothSupports :
+      ∀ cutoff left right cluster →
+      cluster ∈ connectingClusters family cutoff left right → Set
+
+    connectingClusterDiameterAtLeastSeparation :
+      ∀ cutoff left right cluster →
+      cluster ∈ connectingClusters family cutoff left right → Set
+
+    connectingClusterRootedShellInjection :
+      ∀ cutoff left right cluster →
+      cluster ∈ connectingClusters family cutoff left right → Set
+
+    chargeSumBelowPhysicalRootedShell :
+      ∀ cutoff left right →
+      TwoMark.sumℚ
+        (TwoMark.map
+          (Marked.shellCharge charge cutoff left right)
+          (connectingClusters family cutoff left right))
+      ≤
+      Shell.rootedShell shellData
+        (scaleOfCutoff cutoff)
+        (Marked.volumeOfCutoff family cutoff)
+        (connectingRoot cutoff left right)
+        (supportSeparation left right)
+
+open TwoWilsonCMP116PhysicalShellPayment public
+
+twoWilsonMixedLogBelowPhysicalRootedShell :
+  ∀ {Observable Source Polymer Cluster Volume Scale Root family}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable}
+    (payment :
+      TwoWilsonCMP116PhysicalShellPayment
+        {Scale = Scale} {Root = Root}
+        differentiable charge)
+    cutoff left right →
+  ∣
+    Diff.mixedDerivative
+      (Marked.derivativeCalculus differentiable cutoff left right)
+      (Marked.markedLogPartition family cutoff left right)
+  ∣
+  ≤
+  Shell.rootedShell (shellData payment)
+    (scaleOfCutoff payment cutoff)
+    (Marked.volumeOfCutoff family cutoff)
+    (connectingRoot payment cutoff left right)
+    (TwoWilsonCMP116PhysicalShellPayment.supportSeparation payment left right)
+twoWilsonMixedLogBelowPhysicalRootedShell
+    {family = family} {differentiable = differentiable} {charge = charge}
+    payment cutoff left right =
+  ℚP.≤-trans
+    (finiteAbsTriangle
+      (connectingClusters family cutoff left right)
+      (clusterDerivative differentiable cutoff left right))
+    (ℚP.≤-trans
+      (absoluteDerivativeSumBelowChargeSum charge cutoff left right)
+      (chargeSumBelowPhysicalRootedShell payment cutoff left right))
+
+asConfiguredTailPayment :
+  ∀ {Observable Source Polymer Cluster Volume Scale Root family}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable} →
+  TwoWilsonCMP116PhysicalShellPayment
+    {Scale = Scale} {Root = Root}
+    differentiable charge →
+  TwoWilsonCMP116ConnectingTailPayment differentiable charge
+asConfiguredTailPayment
+    {family = family} {differentiable = differentiable} {charge = charge}
+    payment = record
+  { TwoWilsonCMP116ConnectingTailPayment.supportSeparation =
+      TwoWilsonCMP116PhysicalShellPayment.supportSeparation payment
+  ; TwoWilsonCMP116ConnectingTailPayment.clusterDiameter =
+      TwoWilsonCMP116PhysicalShellPayment.clusterDiameter payment
+  ; TwoWilsonCMP116ConnectingTailPayment.contributingClusterConnectsBothSupports =
+      TwoWilsonCMP116PhysicalShellPayment.contributingClusterConnectsBothSupports payment
+  ; TwoWilsonCMP116ConnectingTailPayment.connectingClusterDiameterAtLeastSeparation =
+      TwoWilsonCMP116PhysicalShellPayment.connectingClusterDiameterAtLeastSeparation payment
+  ; TwoWilsonCMP116ConnectingTailPayment.connectingClusterRootedShellInjection =
+      TwoWilsonCMP116PhysicalShellPayment.connectingClusterRootedShellInjection payment
+  ; TwoWilsonCMP116ConnectingTailPayment.chargeSumBelowRootedTail =
+      λ cutoff left right →
+        ℚP.≤-trans
+          (chargeSumBelowPhysicalRootedShell payment cutoff left right)
+          (Shell.rootedShellBelowQuarterHalfPower
+            (shellData payment)
+            (scaleOfCutoff payment cutoff)
+            (Marked.volumeOfCutoff family cutoff)
+            (connectingRoot payment cutoff left right)
+            (TwoWilsonCMP116PhysicalShellPayment.supportSeparation payment left right))
+  }
 
 twoWilsonConnectingTailCompilerLevel : ProofLevel
 twoWilsonConnectingTailCompilerLevel = machineChecked
