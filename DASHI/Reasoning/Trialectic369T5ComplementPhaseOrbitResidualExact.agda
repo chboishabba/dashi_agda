@@ -215,6 +215,103 @@ k3FiveRoundTrip (k3-five-orbit k3 orbit)
   rewrite Triadic.liftSplitNine k3 = refl
 
 ------------------------------------------------------------------------
+-- 4b. Rearrange exactly as SSP15 phase-orbit x residual NineSheet.
+------------------------------------------------------------------------
+
+kernel1ToSSPPhase :
+  Kernel1 ->
+  SSP.SSPTrit
+kernel1ToSSPPhase (phase vcons vnil) =
+  Reduction.kernelToSSPTrit phase
+
+sspPhaseToKernel1 :
+  SSP.SSPTrit ->
+  Kernel1
+sspPhaseToKernel1 phase =
+  Reduction.sspToKernelTrit phase vcons vnil
+
+kernel1SSPRoundTrip :
+  (kernel : Kernel1) ->
+  sspPhaseToKernel1 (kernel1ToSSPPhase kernel)
+  ≡ kernel
+kernel1SSPRoundTrip (phase vcons vnil)
+  rewrite Reduction.kernelSSPRoundTrip phase = refl
+
+sspKernel1RoundTrip :
+  (phase : SSP.SSPTrit) ->
+  kernel1ToSSPPhase (sspPhaseToKernel1 phase)
+  ≡ phase
+sspKernel1RoundTrip phase =
+  Reduction.sspKernelRoundTrip phase
+
+PhaseOrbitWithNineResidual : Set
+PhaseOrbitWithNineResidual =
+  Reduction.PhaseOrbit15 × Triadic.NineSheet
+
+k1NineFiveToPhaseOrbitResidual :
+  K1NineFive ->
+  PhaseOrbitWithNineResidual
+k1NineFiveToPhaseOrbitResidual state =
+  (kernel1ToSSPPhase (residualK1 state) , orbitFive state)
+  , residualNineSheet state
+
+phaseOrbitResidualToK1NineFive :
+  PhaseOrbitWithNineResidual ->
+  K1NineFive
+phaseOrbitResidualToK1NineFive ((phase , orbit) , sheet) =
+  k1-nine-five
+    (sspPhaseToKernel1 phase)
+    sheet
+    orbit
+
+phaseOrbitResidualRoundTrip :
+  (state : PhaseOrbitWithNineResidual) ->
+  k1NineFiveToPhaseOrbitResidual
+    (phaseOrbitResidualToK1NineFive state)
+  ≡ state
+phaseOrbitResidualRoundTrip ((phase , orbit) , sheet)
+  rewrite sspKernel1RoundTrip phase = refl
+
+k1NineFivePhaseOrbitResidualRoundTrip :
+  (state : K1NineFive) ->
+  phaseOrbitResidualToK1NineFive
+    (k1NineFiveToPhaseOrbitResidual state)
+  ≡ state
+k1NineFivePhaseOrbitResidualRoundTrip
+  (k1-nine-five k1 sheet orbit)
+  rewrite kernel1SSPRoundTrip k1 = refl
+
+quotientKernel5ToPhaseOrbitResidual :
+  Kernel5 ->
+  PhaseOrbitWithNineResidual
+quotientKernel5ToPhaseOrbitResidual kernel =
+  k1NineFiveToPhaseOrbitResidual
+    (k3FiveToK1NineFive
+      (quotientKernel5 kernel))
+
+canonicalLiftPhaseOrbitResidual :
+  PhaseOrbitWithNineResidual ->
+  Kernel5
+canonicalLiftPhaseOrbitResidual state =
+  canonicalLiftK3FiveOrbit
+    (k1NineFiveToK3Five
+      (phaseOrbitResidualToK1NineFive state))
+
+quotientLiftPhaseOrbitResidualRoundTrip :
+  (state : PhaseOrbitWithNineResidual) ->
+  quotientKernel5ToPhaseOrbitResidual
+    (canonicalLiftPhaseOrbitResidual state)
+  ≡ state
+quotientLiftPhaseOrbitResidualRoundTrip state
+  rewrite quotientCanonicalLift
+            (k1NineFiveToK3Five
+              (phaseOrbitResidualToK1NineFive state))
+        | k3FiveRoundTrip
+            (k1NineFiveToK3Five
+              (phaseOrbitResidualToK1NineFive state))
+        | phaseOrbitResidualRoundTrip state = refl
+
+------------------------------------------------------------------------
 -- 5. Exact count ledger.
 ------------------------------------------------------------------------
 
@@ -278,6 +375,8 @@ record Trialectic369T5ComplementPhaseOrbitResidualBoundary : Set where
     kernel3SplitsAsKernel1TimesNineSheet : Bool
     quotientTargetCount135 : Bool
     sspStyleThreeTimesFiveFactorVisible : Bool
+    quotientRechartsAsPhaseOrbit15TimesNineSheet : Bool
+    quotientSectionBackToKernel5Paid : Bool
     extraNineStateResidualRetained : Bool
     complementCollapsedToSSP15Carrier : Bool
 
@@ -285,4 +384,4 @@ canonicalTrialectic369T5ComplementPhaseOrbitResidualBoundary :
   Trialectic369T5ComplementPhaseOrbitResidualBoundary
 canonicalTrialectic369T5ComplementPhaseOrbitResidualBoundary =
   trialectic-369-t5-complement-phase-orbit-residual-boundary
-    true true true true true true true true true false
+    true true true true true true true true true true true false
