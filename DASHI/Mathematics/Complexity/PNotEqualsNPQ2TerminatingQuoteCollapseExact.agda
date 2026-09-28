@@ -28,7 +28,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Maybe.Base using (just; nothing)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -288,7 +288,7 @@ terminalOppositeSATGivesQ1AllQuotes
             (sym decisionTransport)
             rejected
       in
-      Data.Product.proj₁ terminalSemantics
+      proj₁ terminalSemantics
         terminalRejected
 
     rejectedIfSatisfiable :
@@ -297,7 +297,7 @@ terminalOppositeSATGivesQ1AllQuotes
     rejectedIfSatisfiable satisfiable =
       trans
         decisionTransport
-        (Data.Product.proj₂ terminalSemantics
+        (proj₂ terminalSemantics
           satisfiable)
 
 ------------------------------------------------------------------------
