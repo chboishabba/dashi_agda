@@ -27,8 +27,8 @@ record RichBrillouinRationalGaussianProjection
     scalarIntegralSameLiteralGaussian :
       ∀ depth →
       Bishop._≃_
-        (Rich.scalarIntegral rich (suc depth))
-        (UV.embed (Literal.literalBetaZ dataSet (suc depth)))
+        (Rich.scalarIntegral rich depth)
+        (UV.embed (Literal.literalBetaZ dataSet depth))
 
 open RichBrillouinRationalGaussianProjection public
 
