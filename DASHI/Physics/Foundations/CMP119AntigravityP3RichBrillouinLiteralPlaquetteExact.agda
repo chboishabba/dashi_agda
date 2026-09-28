@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Carr
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2Running
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinGaussianExact as CanonicalRich
+import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
@@ -77,11 +78,8 @@ record P3RepresentsRichBrillouinLiteralPlaquetteSplit
         (P3.betaLogBlocking recursion (suc depth))
         (Rich.scalarIntegral rich (suc depth))
 
-    richScalarIntegralSameLiteralGaussian :
-      ∀ depth →
-      Bishop._≃_
-        (Rich.scalarIntegral rich (suc depth))
-        (UV.embed (Literal.literalBetaZ dataSet (suc depth)))
+    gaussianProjection :
+      Projection.RichBrillouinRationalGaussianProjection dataSet rich
 
     remainderSameLiteralInteraction :
       ∀ depth →
@@ -209,7 +207,8 @@ canonicalRunningAsRichBrillouinBridge inputs = record
         (richNormalization inputs)
 
   ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.richScalarIntegralSameLiteralGaussian =
-      CanonicalRunningRichLiteralPlaquetteSplit.richScalarIntegralSameLiteralGaussian inputs
+      Projection.scalarIntegralSameLiteralGaussian
+        (gaussianProjection inputs)
 
   ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.remainderSameLiteralInteraction =
       CanonicalRunningRichLiteralPlaquetteSplit.remainderSameLiteralInteraction inputs
