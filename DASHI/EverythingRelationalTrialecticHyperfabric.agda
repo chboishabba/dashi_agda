@@ -21,6 +21,7 @@ import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact
+import DASHI.Reasoning.ActualFaceHypercubeGluingFromSharedSliceExact
 import DASHI.Reasoning.Trialectic369CechCornerStarRecognitionExact
 import DASHI.Core.ActionOrbitRecognitionFunctorExact
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact
