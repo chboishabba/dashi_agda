@@ -51,6 +51,7 @@ import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact
 import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as FineFrickeNoGo
 import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
+import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
@@ -386,10 +387,61 @@ multiplicityInertiaStillNotCompiledFromRecognition :
 multiplicityInertiaStillNotCompiledFromRecognition = refl
 
 ------------------------------------------------------------------------
+-- 5f. Minimal outgoing dynamical leaf: multiplicity projection descent only.
+------------------------------------------------------------------------
+
+multiplicityProjectionDescentCompilerBoundary :
+  MultiplicityDescent.Trialectic369MultiplicityProjectionDescentCompilerBoundary
+multiplicityProjectionDescentCompilerBoundary =
+  MultiplicityDescent.canonicalTrialectic369MultiplicityProjectionDescentCompilerBoundary
+
+outgoingActualInertiaTransportToProductPaid :
+  MultiplicityDescent.actualInertiaTransportedToX6TimesFin90
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ true
+outgoingActualInertiaTransportToProductPaid = refl
+
+outgoingOnlyMultiplicityProjectionDescentRequired :
+  MultiplicityDescent.onlyMultiplicityProjectionDescentRequired
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ true
+outgoingOnlyMultiplicityProjectionDescentRequired = refl
+
+outgoingIndependentX6ActionNotRequired :
+  MultiplicityDescent.independentX6ActionNotRequired
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ true
+outgoingIndependentX6ActionNotRequired = refl
+
+outgoingMinimalTenByNineCompilerPaid :
+  MultiplicityDescent.canonicalTenByNineActionCompiled
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ true
+outgoingMinimalTenByNineCompilerPaid = refl
+
+outgoingMinimalNineVsEighteenForkPaid :
+  MultiplicityDescent.fineFrickeRejectsSelectedFineFibre
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ true
+  ×
+  MultiplicityDescent.frickeStableModeBlock18Compiled
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ true
+outgoingMinimalNineVsEighteenForkPaid =
+  refl , refl
+
+outgoingMultiplicityProjectionDescentStillOpen :
+  MultiplicityDescent.multiplicityProjectionDescentPaidHere
+    multiplicityProjectionDescentCompilerBoundary
+  ≡ false
+outgoingMultiplicityProjectionDescentStillOpen = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
 data IncomingAnalyticFrickeAuthority : Set where
+data OutgoingMultiplicityProjectionDescentRecognition : Set where
 data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
 data OutgoingInvariantFineFibreRecognition : Set where
 data OrderedRankIsIntrinsicModularInvariant : Set where
@@ -398,6 +450,10 @@ data ResidualMayBeDiscarded : Set where
 incomingAnalyticFrickeAuthorityStillOpenToken :
   IncomingAnalyticFrickeAuthority -> ⊥
 incomingAnalyticFrickeAuthorityStillOpenToken ()
+
+outgoingMultiplicityProjectionDescentStillOpenToken :
+  OutgoingMultiplicityProjectionDescentRecognition -> ⊥
+outgoingMultiplicityProjectionDescentStillOpenToken ()
 
 outgoingMultiplicityInertiaAttachmentStillOpenToken :
   OutgoingMultiplicityInertiaAttachmentRecognition -> ⊥
@@ -439,6 +495,10 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingActualFineFrickeElementRecognitionPaid : Bool
     shortest3BSourceCompilesActualActionRecognition : Bool
     separateTrialecticActualActionLeafNeeded : Bool
+    outgoingMultiplicityProjectionDescentCompilerPaid : Bool
+    outgoingMultiplicityProjectionDescentPaid : Bool
+    outgoingIndependentX6ActionRequired : Bool
+    outgoingFullMultiplicityInertiaAttachmentRequired : Bool
     outgoingMultiplicityInertiaAttachmentPaid : Bool
     outgoingActualMonsterActionRecognitionPaid : Bool
     orderedRankIntrinsicModularInvariant : Bool
