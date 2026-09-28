@@ -783,6 +783,11 @@ reviewProjectionReuseMustTrackConsumerScope :
 reviewProjectionReuseMustTrackConsumerScope =
   ReviewProjectionEconomy.reviewProjectionCacheMustTrackConsumerScope
 
+reviewProjectionReuseMustTrackOccurrenceAncestry :
+  ReviewProjectionEconomy.ReviewProjectionCacheKeyMayIgnoreOccurrenceAncestry → ⊥
+reviewProjectionReuseMustTrackOccurrenceAncestry =
+  ReviewProjectionEconomy.reviewProjectionCacheMustTrackOccurrenceAncestry
+
 reviewProjectionReplayDoesNotManufactureParserReceipt :
   ReviewProjectionEconomy.ReusedParserWallIsFreshParserMeasurement → ⊥
 reviewProjectionReplayDoesNotManufactureParserReceipt =
