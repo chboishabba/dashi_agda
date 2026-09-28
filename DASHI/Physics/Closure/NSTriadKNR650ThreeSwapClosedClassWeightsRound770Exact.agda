@@ -28,6 +28,7 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComLiteralBonyOutputFibrePartitionRound63Exact as Bony
 import DASHI.Physics.Closure.NSTriadKNPhysicalBonyTagSwapRound130Exact as R130
@@ -100,9 +101,6 @@ classCellWeightSwapInvariant F selected tau =
       (classScalar F selected)
       (R130.bonyTagSwapEquivariant tau))
     (classScalarSwapInvariant F selected tag)
-  where
-  open import Relation.Binary.PropositionalEquality using (cong; trans)
-
 classWeight :
   ∀ {r} (F : C3.RealField r) →
   SwapClosedClass →
@@ -124,13 +122,13 @@ fixedOutputClassProductRuleIsCommutator :
   R224.foldVector
     (R294.weightedProductRuleCell
       (classWeight F selected) S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
   ≡
   R224.foldVector
     (R294.weightedCommutatorCell
       (classWeight F selected) S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
 fixedOutputClassProductRuleIsCommutator
     selected S velocity forcing cutoff output =
