@@ -39,6 +39,7 @@ import DASHI.Analysis.RiemannSSP15PartitionSeparationExact as Partition
 import DASHI.Analysis.RiemannSSP15ChosenGridTransversalityExact as Transverse
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Nonary
 import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
+import DASHI.Analysis.RiemannSSP15RHProducerDonorManifestExact as Donor
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Branch
 
 ------------------------------------------------------------------------
@@ -215,6 +216,9 @@ record RiemannSSP15FilteredProvenanceBoundary : Set where
     partitionSeparationPaid : Bool
     chosenGridTransversalityPaid : Bool
     producerRoleCertificateTypeDefined : Bool
+    sourceNativeProducerTheoremLocatedAndPinned : Bool
+    sourceNativeFourCoordinateTermsLocated : Bool
+    donorImportedIntoCurrentLeanSourceGraph : Bool
     producerRoleCertificateInhabitedHere : Bool
     rhDepthFiveRolesPromotedToAnalyticProvenanceHere : Bool
 
@@ -222,4 +226,5 @@ canonicalRiemannSSP15FilteredProvenanceBoundary :
   RiemannSSP15FilteredProvenanceBoundary
 canonicalRiemannSSP15FilteredProvenanceBoundary =
   riemann-ssp15-filtered-provenance-boundary
-    true false true true true true true true false false
+    true false true true true true true true
+    true true false false false
