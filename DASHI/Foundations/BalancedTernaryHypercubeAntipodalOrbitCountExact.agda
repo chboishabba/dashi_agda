@@ -61,7 +61,7 @@ ternaryStateSplitExact zero = refl
 ternaryStateSplitExact (suc n)
   rewrite ternaryStateSplitExact n =
   solve 1
-    (lambda p ->
+    (λ p →
       (con 3 :* (con 1 :+ (con 2 :* p)))
       :=
       con 1 :+ (con 2 :* (con 1 :+ (con 3 :* p))))
@@ -76,14 +76,14 @@ doubleOrbitCountExact :
 doubleOrbitCountExact n =
   trans
     (solve 1
-      (lambda p ->
+      (λ p →
         con 2 :* (con 1 :+ p)
         :=
         (con 1 :+ (con 2 :* p)) :+ con 1)
       refl
       (antipodalPairCount n))
     (cong
-      (lambda count -> count + 1)
+      (λ count → count + 1)
       (sym (ternaryStateSplitExact n)))
 
 ------------------------------------------------------------------------
