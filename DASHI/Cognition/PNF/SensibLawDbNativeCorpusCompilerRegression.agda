@@ -482,3 +482,41 @@ fixtureBoundedCommitDoesNotCreateTruth :
     fixtureBoundedCandidateCommitBatch
   ≡ false
 fixtureBoundedCommitDoesNotCreateTruth = refl
+
+
+fixtureBoundedCandidateReopenBatch : Scale.BoundedCandidateReopenBatch
+fixtureBoundedCandidateReopenBatch =
+  Scale.bounded-candidate-reopen-batch
+    6678
+    53
+    106
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+
+fixtureBoundedReopenComparesAfterDurableCommit :
+  Scale.BoundedCandidateReopenBatch.everyCandidateComparedAfterDurableCommit
+    fixtureBoundedCandidateReopenBatch
+  ≡ true
+fixtureBoundedReopenComparesAfterDurableCommit = refl
+
+fixtureBoundedReopenPreservesCandidateIdentity :
+  Scale.BoundedCandidateReopenBatch.candidateIdentityPreserved
+    fixtureBoundedCandidateReopenBatch
+  ≡ true
+fixtureBoundedReopenPreservesCandidateIdentity = refl
+
+fixtureBoundedReopenPreservesExactEquality :
+  Scale.BoundedCandidateReopenBatch.exactEqualityPreserved
+    fixtureBoundedCandidateReopenBatch
+  ≡ true
+fixtureBoundedReopenPreservesExactEquality = refl
+
+fixtureBoundedReopenDoesNotCreateTruth :
+  Scale.BoundedCandidateReopenBatch.createsClaimTruth
+    fixtureBoundedCandidateReopenBatch
+  ≡ false
+fixtureBoundedReopenDoesNotCreateTruth = refl
