@@ -404,3 +404,11 @@ import DASHI.Moonshine.OggSSPSmallPrimePadicBoundStratumQuotientComparisonExact
 import DASHI.Moonshine.OggSSP2B3BPadicAnnihilationSlopeComparisonExact
 
 import DASHI.Moonshine.OggSSPSmallPrimeMixedCharacteristicTwistedCentralizerCutsetExact
+
+import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact
+
+import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact
+
+import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact
+
+import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact
