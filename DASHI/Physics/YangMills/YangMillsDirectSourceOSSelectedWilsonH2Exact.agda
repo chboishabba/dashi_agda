@@ -96,9 +96,9 @@ leftSelectedBounded :
     index →
   Gram.BoundedObservable (Direct.dataSet direct)
     (R278.left (Direct.tests direct) index)
-leftSelectedBounded application index =
+leftSelectedBounded {direct = direct} application index =
   subst
-    (Gram.BoundedObservable (Direct.dataSet _))
+    (Gram.BoundedObservable (Direct.dataSet direct))
     (sym (leftIsLiteralWilsonProduct application index))
     (wilsonProductBounded application (leftLoops application index))
 
@@ -110,9 +110,9 @@ rightSelectedBounded :
     index →
   Gram.BoundedObservable (Direct.dataSet direct)
     (R278.right (Direct.tests direct) index)
-rightSelectedBounded application index =
+rightSelectedBounded {direct = direct} application index =
   subst
-    (Gram.BoundedObservable (Direct.dataSet _))
+    (Gram.BoundedObservable (Direct.dataSet direct))
     (sym (rightIsLiteralWilsonProduct application index))
     (wilsonProductBounded application (rightLoops application index))
 
@@ -127,7 +127,7 @@ selectedProductBounded :
       (Gram.operations (Direct.dataSet direct))
       (R278.left (Direct.tests direct) index)
       (R278.right (Direct.tests direct) index))
-selectedProductBounded application index =
+selectedProductBounded {direct = direct} application index =
   let
     w = wilson application
     leftW = Thermo.productLoopObservable w (leftLoops application index)
@@ -144,7 +144,7 @@ selectedProductBounded application index =
           w (rightLoops application index))
 
     productBoundedWilson :
-      Gram.BoundedObservable (Direct.dataSet _)
+      Gram.BoundedObservable (Direct.dataSet direct)
         (Thermo.multiplyObservable w leftW rightW)
     productBoundedWilson =
       wilsonBoundImpliesSelectedBounded application
@@ -155,31 +155,31 @@ selectedProductBounded application index =
         productWilsonBound
 
     productBoundedSelected :
-      Gram.BoundedObservable (Direct.dataSet _)
+      Gram.BoundedObservable (Direct.dataSet direct)
         (Gram.multiplyObservable
-          (Gram.operations (Direct.dataSet _))
+          (Gram.operations (Direct.dataSet direct))
           leftW rightW)
     productBoundedSelected =
       subst
-        (Gram.BoundedObservable (Direct.dataSet _))
+        (Gram.BoundedObservable (Direct.dataSet direct))
         (wilsonMultiplyIsSelectedMultiply application leftW rightW)
         productBoundedWilson
 
     targetEquality :
       Gram.multiplyObservable
-        (Gram.operations (Direct.dataSet _))
-        (R278.left (Direct.tests _) index)
-        (R278.right (Direct.tests _) index)
+        (Gram.operations (Direct.dataSet direct))
+        (R278.left (Direct.tests direct) index)
+        (R278.right (Direct.tests direct) index)
       ≡
       Gram.multiplyObservable
-        (Gram.operations (Direct.dataSet _))
+        (Gram.operations (Direct.dataSet direct))
         leftW rightW
     targetEquality
       rewrite leftIsLiteralWilsonProduct application index
             | rightIsLiteralWilsonProduct application index = refl
   in
   subst
-    (Gram.BoundedObservable (Direct.dataSet _))
+    (Gram.BoundedObservable (Direct.dataSet direct))
     (sym targetEquality)
     productBoundedSelected
 
