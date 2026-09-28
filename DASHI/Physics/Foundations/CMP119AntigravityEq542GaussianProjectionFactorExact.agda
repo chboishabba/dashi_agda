@@ -20,7 +20,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- The cross-carrier equality
 --
---   rich scalarIntegral ~= embed(rational literal beta_Z)
+--   rich coefficient ~= embed(rational literal beta_Z)
 --
 -- should not be proved by comparing two independently-normalized formulas.
 -- Both sides are supposed to represent the SAME source-native Gaussian beta
