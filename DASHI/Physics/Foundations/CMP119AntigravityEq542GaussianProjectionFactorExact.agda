@@ -36,10 +36,10 @@ record Eq542GaussianProjectionFactor
   field
     sourceGaussianBeta : Nat → ℚ
 
-    richShellRepresentsSourceGaussian :
+    richCoefficientRepresentsSourceGaussian :
       ∀ depth →
       Bishop._≃_
-        (Rich.scalarIntegral rich depth)
+        (Rich.coefficient rich depth)
         (UV.embed (sourceGaussianBeta depth))
 
     rationalPlaquetteRepresentsSourceGaussian :
@@ -54,10 +54,10 @@ asRichBrillouinRationalGaussianProjection :
   Eq542GaussianProjectionFactor dataSet rich →
   Projection.RichBrillouinRationalGaussianProjection dataSet rich
 asRichBrillouinRationalGaussianProjection factor = record
-  { Projection.RichBrillouinRationalGaussianProjection.scalarIntegralSameLiteralGaussian =
+  { Projection.RichBrillouinRationalGaussianProjection.coefficientSameLiteralGaussian =
       λ depth →
         BishopP.≃-trans
-          (richShellRepresentsSourceGaussian factor depth)
+          (richCoefficientRepresentsSourceGaussian factor depth)
           (subst
             (λ selected →
               Bishop._≃_
@@ -70,8 +70,8 @@ asRichBrillouinRationalGaussianProjection factor = record
 eq542GaussianProjectionFactorCompilerLevel : ProofLevel
 eq542GaussianProjectionFactorCompilerLevel = machineChecked
 
-richShellToEq542SourceIdentificationLevel : ProofLevel
-richShellToEq542SourceIdentificationLevel = conditional
+richCoefficientToEq542SourceIdentificationLevel : ProofLevel
+richCoefficientToEq542SourceIdentificationLevel = conditional
 
 rationalPlaquetteToEq542SourceIdentificationLevel : ProofLevel
 rationalPlaquetteToEq542SourceIdentificationLevel = conditional
