@@ -48,6 +48,8 @@ import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Inertia
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3
+import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2Geom
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3Geom
 
 ------------------------------------------------------------------------
 -- 1. Source atlas.
@@ -221,6 +223,36 @@ record PBGreenRingSectorSpeciesAuthority : Set₁ where
       constructionUsesNoDuncanSwisherResidualTarget ≡ true
 
 open PBGreenRingSectorSpeciesAuthority public
+
+------------------------------------------------------------------------
+-- 3b. Geometric meaning of the required sector lengths.
+--
+-- These are consequences of the authority plus independently sourced/owned
+-- geometry.  They are NOT extra authority fields and therefore cannot be used
+-- to define the lengths from the Monster target.
+------------------------------------------------------------------------
+
+p2LengthMatchesStackIsotropyDenominatorDepth :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  normalizedDVRLength A (p2SectorClass A sector)
+  ≡
+  P2Geom.sectorIsotropyDenominatorTwoAdicDepth sector
+p2LengthMatchesStackIsotropyDenominatorDepth A sector =
+  trans
+    (p2LengthMatchesIndependentGeometricWeight A sector)
+    (P2Geom.preferredP2WeightIsIsotropyDenominatorDepth sector)
+
+p3LengthMatchesSemistableLocalMultiplicity :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  (sector : Preferred.Sector Preferred.p3PreferredPresentation) ->
+  normalizedDVRLength A (p3SectorClass A sector)
+  ≡
+  P3Geom.p3LocalGeometricMultiplicity sector
+p3LengthMatchesSemistableLocalMultiplicity A sector =
+  trans
+    (p3LengthMatchesIndependentGeometricWeight A sector)
+    (P3Geom.preferredP3WeightIsLocalGeometricMultiplicity sector)
 
 ------------------------------------------------------------------------
 -- 4. Adapter to the existing preferred DVR payment wall.
@@ -547,6 +579,8 @@ record PBGreenRingSectorSpeciesCutsetBoundary : Set where
     frameworkIsGeneralConjectureRatherThanFullTheorem : Bool
     selectedCaseProofDoesNotCoverRequiredPBLocalization : Bool
     uranoFiniteLengthBrauerFrameworkSourced : Bool
+    p2GeometricLengthTargetIsStackIsotropyDepth : Bool
+    p3GeometricLengthTargetIsSemistableMultiplicity : Bool
     sectorSpeciesAuthoritySpecified : Bool
     adapterToPreferredDVRPaymentOwned : Bool
     adapterToPreferredCorrectedValuationOwned : Bool
@@ -561,4 +595,4 @@ canonicalPBGreenRingSectorSpeciesCutsetBoundary :
   PBGreenRingSectorSpeciesCutsetBoundary
 canonicalPBGreenRingSectorSpeciesCutsetBoundary =
   pb-green-ring-sector-species-cutset-boundary
-    true true true true true true true true false false false false true
+    true true true true true true true true true true false false false false true
