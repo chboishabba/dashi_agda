@@ -38,6 +38,38 @@ import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact as R415
 import DASHI.Physics.YangMills.BalabanCMP99PathDerivativeSourceReplayRound413Exact as R413
 
+
+selectedTermFromR413 :
+  ∀ {Operator}
+    (replaySource : R413.CMP99PathDerivativeSourceReplay Operator ℝ)
+    (value : ℝ) →
+  (let replay = R413.asR410CanonicalPathReplay replaySource in
+   absℝ value
+   ≡
+   Marked.operatorNorm
+     (R408.telescopeAlgebra (R410.stageDifference replay))
+     (Marked.difference
+       (R408.telescopeAlgebra (R410.stageDifference replay))
+       (Marked.operatorProduct
+         (R408.telescopeAlgebra (R410.stageDifference replay))
+         (R407.stageOperator
+           (R407.before (R408.ordinaryPair (R410.stageDifference replay))))
+         R407.cmp109DerivativeStages)
+       (Marked.operatorProduct
+         (R408.telescopeAlgebra (R410.stageDifference replay))
+         (R407.stageOperator
+           (R407.after (R408.ordinaryPair (R410.stageDifference replay))))
+         R407.cmp109DerivativeStages))) →
+  R410.SelectedCMP116PathMarkedTerm Operator
+selectedTermFromR413 replaySource value scalarization = record
+  { R410.SelectedCMP116PathMarkedTerm.replay =
+      R413.asR410CanonicalPathReplay replaySource
+  ; R410.SelectedCMP116PathMarkedTerm.differentiatedTerm =
+      value
+  ; R410.SelectedCMP116PathMarkedTerm.differentiatedTermAbsoluteIsCanonicalProductDifferenceNorm =
+      scalarization
+  }
+
 record LiteralTwoWilsonCMP116MarkedExpansionSource
     (Domain Term Operator : Set) : Set₁ where
   field
@@ -116,20 +148,20 @@ record LiteralTwoWilsonCMP116MarkedExpansionSource
       Resum.sumℝ
         (λ term →
           R415.canonicalTermMajorant
-            (selectedTerm domain term))
+            (selectedTermFromR413
+              (sourceReplay domain term)
+              (differentiatedTerm domain term)
+              (differentiatedTermScalarization domain term)))
         (termsWithCommonY domain)
       ≤ℝ commonYShell domain
 
   selectedTerm :
     Domain → Term → R410.SelectedCMP116PathMarkedTerm Operator
-  selectedTerm domain term = record
-    { R410.SelectedCMP116PathMarkedTerm.replay =
-        R413.asR410CanonicalPathReplay (sourceReplay domain term)
-    ; R410.SelectedCMP116PathMarkedTerm.differentiatedTerm =
-        differentiatedTerm domain term
-    ; R410.SelectedCMP116PathMarkedTerm.differentiatedTermAbsoluteIsCanonicalProductDifferenceNorm =
-        differentiatedTermScalarization domain term
-    }
+  selectedTerm domain term =
+    selectedTermFromR413
+      (sourceReplay domain term)
+      (differentiatedTerm domain term)
+      (differentiatedTermScalarization domain term)
 
 open LiteralTwoWilsonCMP116MarkedExpansionSource public
 
