@@ -380,3 +380,5 @@ import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact
 import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExact
 
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExact
+
+import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact
