@@ -31,8 +31,8 @@ import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGa
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact as H3
 import DASHI.Physics.YangMills.YangMillsClayDirectPhysicalCExact as DirectC
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as CanonicalC
-import DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact as Local
-import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact as R77
+import DASHI.Physics.YangMills.YangMillsSameFamilyWardKernelSourceRound563Exact as R563
+import DASHI.Physics.YangMills.YangMillsMinimalWardGapNontrivialityRound549Exact as R549
 import DASHI.Physics.YangMills.YangMillsFreeGaussianMaxwellNoGapExact as Free
 import DASHI.Physics.YangMills.YangMillsMaxwellLinearDispersionNoGapExact as Disp
 import DASHI.Physics.YangMills.YangMillsGaussianWardTwoDerivativeMaxwellClassificationExact as Ward
@@ -130,24 +130,25 @@ record CMP119DirectSameSystemH6
       H3.physicalMassGapCertificate h3 positive
 
   field
-    localPackageFromC :
+    --------------------------------------------------------------------
+    -- H6 consumes only the same-system Ward kernel from C.
+    --
+    -- Full OPE/remainder/stress data remain required by the literal Clay local
+    -- QFT endpoint, but are not prerequisites of the Gaussian reductio.
+    --------------------------------------------------------------------
+    wardSourceFromC :
       CanonicalC.Goal1CanonicalCSource Y →
-      Local.SameFamilyOPEStressWardGaussianKernel
-        ContinuumFamily CurvaturePolynomial LocalOperator Position
-        OPECoefficient StressTensor Hamiltonian
-        (Configuration → ℝ) Position ℝ
-        system
+      R563.SameFamilyWardKernelSource system
 
     gapOrder : Free.GapOrder
 
     gaussianMaxwellPhysicalSector :
-      let localPackage =
-            localPackageFromC (DirectC.asGoal1CanonicalCSource cSource)
+      let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
       in
-      (gaussian : Local.Gaussian localPackage system) →
+      (gaussian : R563.Gaussian ward system) →
       Ward.GenericMaxwellQuadraticKernelClassification
-        (Local.coefficientAlgebra localPackage)
-        (Local.gaussianLocalTwoDerivativeWardKernel localPackage gaussian) →
+        (R563.coefficientAlgebra ward)
+        (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian) →
       Disp.GaplessGaugeInvariantPhysicalSector gapOrder
 
     PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
@@ -158,30 +159,26 @@ record CMP119DirectSameSystemH6
       PhysicalPositiveGap (OS.hamiltonian reconstruction)
 
     gapRestrictsToSamePhysicalSector :
-      let localPackage =
-            localPackageFromC (DirectC.asGoal1CanonicalCSource cSource)
+      let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
       in
-      (gaussian : Local.Gaussian localPackage system) →
+      (gaussian : R563.Gaussian ward system) →
       (classification :
         Ward.GenericMaxwellQuadraticKernelClassification
-          (Local.coefficientAlgebra localPackage)
-          (Local.gaussianLocalTwoDerivativeWardKernel
-            localPackage gaussian)) →
+          (R563.coefficientAlgebra ward)
+          (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian)) →
       PhysicalPositiveGap (OS.hamiltonian reconstruction) →
       Free.PositiveSpectralGap
         (Disp.gaugeInvariantPhysicalSectorGivesGaplessApproximation
           (gaussianMaxwellPhysicalSector gaussian classification))
 
     spectralGapContradictionIsAbsurd :
-      let localPackage =
-            localPackageFromC (DirectC.asGoal1CanonicalCSource cSource)
+      let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
       in
-      (gaussian : Local.Gaussian localPackage system) →
+      (gaussian : R563.Gaussian ward system) →
       (classification :
         Ward.GenericMaxwellQuadraticKernelClassification
-          (Local.coefficientAlgebra localPackage)
-          (Local.gaussianLocalTwoDerivativeWardKernel
-            localPackage gaussian)) →
+          (R563.coefficientAlgebra ward)
+          (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian)) →
       let sector = gaussianMaxwellPhysicalSector gaussian classification
           gapData = gapRestrictsToSamePhysicalSector
             gaussian classification
@@ -191,7 +188,7 @@ record CMP119DirectSameSystemH6
 
 open CMP119DirectSameSystemH6 public
 
-exactLocalPackage :
+exactWardSource :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
       EuclideanAction Permutation Epsilon Witness
@@ -206,13 +203,10 @@ exactLocalPackage :
     {sequenceLimit = sequenceLimit}
     limitLaws quotient division S Y h2 covarianceLaws group source
     application h3 positive cSource →
-  Local.SameFamilyOPEStressWardGaussianKernel
-    ContinuumFamily CurvaturePolynomial LocalOperator Position
-    OPECoefficient StressTensor Hamiltonian
-    (Configuration → ℝ) Position ℝ
+  R563.SameFamilyWardKernelSource
     (OSSystem.continuumOSSystem (H2.osInputs h2) group)
-exactLocalPackage {cSource = cSource} h6 =
-  localPackageFromC h6
+exactWardSource {cSource = cSource} h6 =
+  wardSourceFromC h6
     (DirectC.asGoal1CanonicalCSource cSource)
 
 h3GapCertificateUsesExactH2Hamiltonian :
@@ -238,7 +232,7 @@ h3GapCertificateUsesExactH2Hamiltonian :
       (H2.reconstruction h2) group)
 h3GapCertificateUsesExactH2Hamiltonian h6 = refl
 
-asRound77Bridge :
+asMinimalSameHGapBridge :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
       EuclideanAction Permutation Epsilon Witness
@@ -254,25 +248,26 @@ asRound77Bridge :
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S Y h2 covarianceLaws group source
         application h3 positive cSource) →
-  R77.StandardGaussianMaxwellSameHGapBridge
-    (exactLocalPackage h6)
-asRound77Bridge
+  R549.MinimalSameHGapBridge
+    (R563.asMinimalSameFamilyGaussianWardKernel
+      (exactWardSource h6))
+asMinimalSameHGapBridge
     {h2 = h2} {group = group} {h3 = h3} {positive = positive}
     h6 = record
-  { R77.StandardGaussianMaxwellSameHGapBridge.reconstruction =
+  { R549.MinimalSameHGapBridge.reconstruction =
       H2OS.asOSReconstructionAuthority (H2.reconstruction h2) group
-  ; R77.StandardGaussianMaxwellSameHGapBridge.gapOrder =
+  ; R549.MinimalSameHGapBridge.gapOrder =
       gapOrder h6
-  ; R77.StandardGaussianMaxwellSameHGapBridge.gaussianMaxwellPhysicalSector =
+  ; R549.MinimalSameHGapBridge.gaussianMaxwellPhysicalSector =
       gaussianMaxwellPhysicalSector h6
-  ; R77.StandardGaussianMaxwellSameHGapBridge.PhysicalPositiveGap =
+  ; R549.MinimalSameHGapBridge.PhysicalPositiveGap =
       PhysicalPositiveGap h6
-  ; R77.StandardGaussianMaxwellSameHGapBridge.physicalPositiveGap =
+  ; R549.MinimalSameHGapBridge.physicalPositiveGap =
       h3CertificateMeansPositiveGap h6
         (h3GapCertificateUsesExactH2Hamiltonian h6)
-  ; R77.StandardGaussianMaxwellSameHGapBridge.gapRestrictsToSamePhysicalSector =
+  ; R549.MinimalSameHGapBridge.gapRestrictsToSamePhysicalSector =
       gapRestrictsToSamePhysicalSector h6
-  ; R77.StandardGaussianMaxwellSameHGapBridge.spectralGapContradictionIsAbsurd =
+  ; R549.MinimalSameHGapBridge.spectralGapContradictionIsAbsurd =
       λ gaussian classification →
         spectralGapContradictionIsAbsurd h6 gaussian classification
   }
@@ -298,16 +293,17 @@ interactingWitness :
     (OSSystem.continuumOSSystem
       (H2.osInputs h2) group)
 interactingWitness h6 =
-  R77.round77InteractingWitnessFromLocalAndGap
-    (exactLocalPackage h6)
-    (asRound77Bridge h6)
+  R549.minimalInteractingWitness
+    (R563.asMinimalSameFamilyGaussianWardKernel
+      (exactWardSource h6))
+    (asMinimalSameHGapBridge h6)
 
 cmp119DirectH6CompilerLevel : ProofLevel
 cmp119DirectH6CompilerLevel = machineChecked
 
--- Open H6 physics: produce the local Gaussian Ward kernel from the exact
--- DirectPhysicalCSource and instantiate the standard Maxwell same-H restriction
--- on the exact H2/H3 reconstructed system.  Logical non-Gaussianity thereafter
--- is compiler-owned.
+-- Open H6 physics: extract the SAME-system two-derivative Gaussian Ward
+-- kernel from the exact DirectPhysicalCSource and instantiate the standard
+-- Maxwell same-H restriction on the exact H2/H3 reconstruction.  Full
+-- OPE/remainder/stress structure is not consumed by H6; it remains in C.
 cmp119DirectH6PhysicalInstantiationLevel : ProofLevel
 cmp119DirectH6PhysicalInstantiationLevel = conditional
