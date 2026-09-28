@@ -26,7 +26,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateQuotedSelfApplicationEx
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Maybe.Base using (Maybe; nothing; just)
+open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -35,6 +38,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Dire
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
+import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
 
 ------------------------------------------------------------------------
 -- Quotation interface.
@@ -254,6 +259,200 @@ canonicalCandidateQuotedSelfApplication
         candidateQuotedFixedPointRunsCandidateOnOwnQuotation
           code quotation
     }
+
+------------------------------------------------------------------------
+-- Structural quotation from candidate-code quotation.
+--
+-- CandidateCode remains abstract at this layer, so the only representation
+-- input required is a literal Cook-formula quotation of that exact code.
+-- Program constructor tags are then encoded structurally with ordinary Cook
+-- syntax.  No SAT meaning is assigned to the quotation.
+------------------------------------------------------------------------
+
+record CandidateCodeFormulaQuotation
+    {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate) : Set₁ where
+  field
+    quoteCandidateCode :
+      Actual.CandidateCodeRealization.CandidateCode code →
+      Cook.BooleanFormula
+
+open CandidateCodeFormulaQuotation public
+
+structuralProgramQuote :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {code : Actual.CandidateCodeRealization candidate} →
+  CandidateCodeFormulaQuotation code →
+  Code.Program (CandidateQuotedPrimitive code) →
+  Cook.BooleanFormula
+structuralProgramQuote
+    codeQuotation
+    (Code.primitive runCandidateOnQuote) =
+  Cook.conjunction
+    (quoteCandidateCode
+      codeQuotation
+      (Actual.CandidateCodeRealization.candidateCode code))
+    (Cook.constant true)
+structuralProgramQuote
+    codeQuotation
+    (Code.specialized program static) =
+  Cook.conjunction
+    (Cook.disjunction
+      (Cook.constant true)
+      (Cook.constant false))
+    (Cook.conjunction
+      (structuralProgramQuote codeQuotation program)
+      (structuralProgramQuote codeQuotation static))
+structuralProgramQuote
+    codeQuotation
+    (Code.diagonalized program) =
+  Cook.conjunction
+    (Cook.negate (Cook.constant false))
+    (structuralProgramQuote codeQuotation program)
+
+structuralProgramFormulaQuotation :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {code : Actual.CandidateCodeRealization candidate} →
+  CandidateCodeFormulaQuotation code →
+  ProgramFormulaQuotation
+    (CandidateQuotedPrimitive code)
+structuralProgramFormulaQuotation codeQuotation =
+  record
+    { quoteProgram =
+        structuralProgramQuote codeQuotation
+    }
+
+------------------------------------------------------------------------
+-- Literal Q2 state for the operational self-application root.
+--
+-- currentFormula is definitionally the quotation of the actual candidate-aware
+-- fixed program.  Persistent code size is the exact c_D size; rebinding is the
+-- literal finite Program syntax size.  The budget is chosen equal to the exact
+-- represented-state measure, so fit is reflexive rather than assumed.
+------------------------------------------------------------------------
+
+candidateQuotedSelfApplicationState :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (codeQuotation : CandidateCodeFormulaQuotation code) →
+  Q2.BoundedSelfReferenceState
+candidateQuotedSelfApplicationState code codeQuotation =
+  Q2.bounded-self-reference-state
+    root
+    codeSize
+    rebinding
+    (Size.formulaNodeCount root + (codeSize + rebinding))
+    NatP.≤-refl
+  where
+    quotation :
+      ProgramFormulaQuotation
+        (CandidateQuotedPrimitive code)
+    quotation =
+      structuralProgramFormulaQuotation codeQuotation
+
+    root :
+      Cook.BooleanFormula
+    root =
+      candidateQuotedFixedPointFormula
+        code
+        quotation
+
+    codeSize :
+      Nat
+    codeSize =
+      Actual.CandidateCodeRealization.codeSize
+        code
+        (Actual.CandidateCodeRealization.candidateCode code)
+
+    rebinding :
+      Nat
+    rebinding =
+      Code.programSize
+        (candidateQuotedFixedPointProgram code)
+
+candidateQuotedStateCurrentFormulaExact :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (codeQuotation : CandidateCodeFormulaQuotation code) →
+  Q2.currentFormula
+    (candidateQuotedSelfApplicationState code codeQuotation)
+  ≡
+  candidateQuotedFixedPointFormula
+    code
+    (structuralProgramFormulaQuotation codeQuotation)
+candidateQuotedStateCurrentFormulaExact code codeQuotation =
+  refl
+
+candidateQuotedStateProgramCodeSizeExact :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (codeQuotation : CandidateCodeFormulaQuotation code) →
+  Q2.programCodeSize
+    (candidateQuotedSelfApplicationState code codeQuotation)
+  ≡
+  Actual.CandidateCodeRealization.codeSize
+    code
+    (Actual.CandidateCodeRealization.candidateCode code)
+candidateQuotedStateProgramCodeSizeExact code codeQuotation =
+  refl
+
+candidateQuotedStateRebindingExact :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (codeQuotation : CandidateCodeFormulaQuotation code) →
+  Q2.rebindingOverhead
+    (candidateQuotedSelfApplicationState code codeQuotation)
+  ≡
+  Code.programSize
+    (candidateQuotedFixedPointProgram code)
+candidateQuotedStateRebindingExact code codeQuotation =
+  refl
+
+candidateQuotedStateBudgetExact :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (codeQuotation : CandidateCodeFormulaQuotation code) →
+  Q2.resourceBudget
+    (candidateQuotedSelfApplicationState code codeQuotation)
+  ≡
+  Q2.recursiveMeasure
+    (candidateQuotedSelfApplicationState code codeQuotation)
+candidateQuotedStateBudgetExact code codeQuotation =
+  refl
+
+candidateQuotedStateRunsCandidateOnCurrentFormula :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate)
+    (codeQuotation : CandidateCodeFormulaQuotation code) →
+  Code.run1
+      (candidateQuotedPrimitiveSemantics
+        code
+        (structuralProgramFormulaQuotation codeQuotation))
+      (candidateQuotedFixedPointProgram code)
+      tt
+  ≡
+  just
+    (Direct.decide
+      candidate
+      (Q2.currentFormula
+        (candidateQuotedSelfApplicationState
+          code
+          codeQuotation)))
+candidateQuotedStateRunsCandidateOnCurrentFormula
+    code
+    codeQuotation =
+  candidateQuotedFixedPointRunsCandidateOnOwnQuotation
+    code
+    (structuralProgramFormulaQuotation codeQuotation)
 
 ------------------------------------------------------------------------
 -- Strength firewall.
