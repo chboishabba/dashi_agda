@@ -219,6 +219,36 @@ countMismatchIsDiagnosticUntilRecognitionWired :
   RawF4CountMismatchAloneCreatesCategoricalNoGo -> ⊥
 countMismatchIsDiagnosticUntilRecognitionWired ()
 
+
+------------------------------------------------------------------------
+-- 4b. A ten-component recognition source cannot be a UNIFORM orbit lift of
+-- the three raw F4 Frobenius components.
+--
+-- If every raw F4 orbit carried the same k marked orbit classes, the total
+-- would be 3*k.  No Nat k satisfies 3*k = 10.  Therefore any marked source
+-- refining the raw F4 orbit presentation and closing exactly at ten components
+-- must be stratified/nonuniform (or alter the base orbit semantics).
+------------------------------------------------------------------------
+
+uniformMarkedOrbitCount : Nat -> Nat
+uniformMarkedOrbitCount k = 3 * k
+
+noUniformThreeOrbitLiftToTen :
+  (k : Nat) ->
+  uniformMarkedOrbitCount k ≡ 10 ->
+  ⊥
+noUniformThreeOrbitLiftToTen zero ()
+noUniformThreeOrbitLiftToTen (suc zero) ()
+noUniformThreeOrbitLiftToTen (suc (suc zero)) ()
+noUniformThreeOrbitLiftToTen (suc (suc (suc zero))) ()
+noUniformThreeOrbitLiftToTen (suc (suc (suc (suc k)))) ()
+
+data TenComponentMarkedSourceIsUniformF4OrbitLift : Set where
+
+tenComponentSourceMustNotBeUniformF4OrbitLift :
+  TenComponentMarkedSourceIsUniformF4OrbitLift -> ⊥
+tenComponentSourceMustNotBeUniformF4OrbitLift ()
+
 ------------------------------------------------------------------------
 -- 5. Receipt calibration remains metadata, not action authority.
 ------------------------------------------------------------------------
@@ -259,6 +289,8 @@ record P2F4FrobeniusCandidateBoundary : Set where
     receiptGaussianCMLevelFourCalibrationConsumed : Bool
     rawF4PointCarrierHasTenComponents : Bool
     rawF4ThreeVsTenCountMismatchRecorded : Bool
+    uniformThreeOrbitLiftRuledOut : Bool
+    stratifiedMarkedRefinementRequiredIfRefiningF4Orbits : Bool
     categoricalNoGoFromCountAloneClaimed : Bool
     richerMarkedLevelCMCoverRequired : Bool
     actualMarkedCMCarrierConstructedHere : Bool
@@ -268,7 +300,7 @@ canonicalP2F4FrobeniusCandidateBoundary :
 canonicalP2F4FrobeniusCandidateBoundary =
   p2-f4-frobenius-candidate-boundary
     true true true true true
-    false true false true false
+    false true true true false true false
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
