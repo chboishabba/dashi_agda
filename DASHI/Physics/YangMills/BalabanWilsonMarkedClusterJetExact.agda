@@ -22,7 +22,7 @@ module DASHI.Physics.YangMills.BalabanWilsonMarkedClusterJetExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -284,3 +284,61 @@ normalizedMixedLogIsTwoSupportClusterSum
             (clusters expansion)
             (clusterJet expansion)
             (supportLocality expansion)))))
+
+
+------------------------------------------------------------------------
+-- Direct covariance and absolute-sum consequences.
+------------------------------------------------------------------------
+
+normalizedConnectedCovarianceIsTwoSupportClusterSum :
+  ∀ {Observable Cluster}
+    {algebra : Cumulant.TwoSourceMomentAlgebra Observable ℚ}
+    (leftObservable rightObservable : Observable)
+    (expansion :
+      NormalizedWilsonMarkedLogJetExpansion
+        {Cluster = Cluster}
+        algebra leftObservable rightObservable) →
+  Cumulant.connectedCovariance algebra leftObservable rightObservable
+  ≡
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster → mixed (clusterJet expansion cluster))
+      (filterTwoSupport
+        (touchesLeft (supportLocality expansion))
+        (touchesRight (supportLocality expansion))
+        (clusters expansion)))
+normalizedConnectedCovarianceIsTwoSupportClusterSum
+    {algebra = algebra}
+    leftObservable rightObservable expansion =
+  trans
+    (sym
+      (normalizedMomentLogJetMixed
+        algebra leftObservable rightObservable))
+    (trans
+      (cong mixed (normalizedLogJetExpansion expansion))
+      (trans
+        (mixedOfMappedJetSum
+          (clusters expansion)
+          (clusterJet expansion))
+        (sumMixedFiltersToTwoSupport
+          (clusters expansion)
+          (clusterJet expansion)
+          (supportLocality expansion))))
+
+absoluteSumBelowSumAbsolute :
+  ∀ {A : Set}
+    (items : List A)
+    (term : A → ℚ) →
+  ∣ TwoMark.sumℚ (TwoMark.map term items) ∣
+  ≤
+  TwoMark.sumℚ
+    (TwoMark.map (λ item → ∣ term item ∣) items)
+absoluteSumBelowSumAbsolute [] term = ℚP.≤-refl
+absoluteSumBelowSumAbsolute (item ∷ items) term =
+  ℚP.≤-trans
+    (ℚP.∣p+q∣≤∣p∣+∣q∣
+      (term item)
+      (TwoMark.sumℚ (TwoMark.map term items)))
+    (ℚP.+-mono-≤
+      ℚP.≤-refl
+      (absoluteSumBelowSumAbsolute items term))
