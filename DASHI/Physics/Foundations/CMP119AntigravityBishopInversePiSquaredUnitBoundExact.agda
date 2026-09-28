@@ -120,8 +120,8 @@ inversePiSquaredAtMostOne =
       (oneReal Bishop.* oneReal)
     first =
       BishopP.*-mono-≤
-        inversePiNonnegative inversePiAtMostOne
-        inversePiNonnegative inversePiAtMostOne
+        inversePiNonnegative inversePiNonnegative
+        inversePiAtMostOne inversePiAtMostOne
   in
   BishopP.≤-respʳ-≃
     (BishopP.*-identityʳ oneReal)
