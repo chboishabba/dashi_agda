@@ -36,6 +36,10 @@ record BanerjeeGamma0FourAttachment
     OrderFourSubgroup : Set
     OrderTwoSubgroup : Set
 
+    selectedEllipticObject :
+      SameSource.Universal.EllipticFamilyState
+        (SameSource.datum authority)
+
     selectedOrderFourSubgroup :
       OrderFourSubgroup
 
@@ -99,8 +103,7 @@ finiteFlatDatum {authority} attachment =
     ; OrderTwoSubgroup =
         OrderTwoSubgroup attachment
     ; selectedEllipticObject =
-        SameSource.Universal.EllipticFamilyState
-          (SameSource.datum authority)
+        selectedEllipticObject attachment
     ; selectedOrderFourSubgroup =
         selectedOrderFourSubgroup attachment
     ; selectedOrderTwoSubgroup =
