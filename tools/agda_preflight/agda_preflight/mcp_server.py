@@ -12,7 +12,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
     """Register the stable DASHI Agda tool surface on an MCPServer-like object."""
 
     @server.tool()
-    def diagnose(
+    async def diagnose(
         target: str,
         errors_only: bool = False,
         limit: int = 200,
@@ -29,7 +29,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    def next_error(
+    async def next_error(
         target: str,
         require_fix: bool = False,
     ) -> dict:
@@ -44,7 +44,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    def apply_fix(
+    async def apply_fix(
         target: str,
         diagnostic_id: str,
         fix_index: int = 0,
@@ -63,7 +63,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    def affected(
+    async def affected(
         target: str,
         within: Optional[str] = None,
     ) -> dict:
@@ -79,12 +79,12 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    def cache_status() -> dict:
+    async def cache_status() -> dict:
         """Return persistent source-index/cache statistics. Read-only."""
         return tools.cache_status()
 
     @server.tool()
-    def semantic_status(target: str) -> dict:
+    async def semantic_status(target: str) -> dict:
         """Report fresh/stale/unknown last-known semantic snapshots.
 
         Read-only. Never invokes Agda.
@@ -92,7 +92,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         return tools.semantic_status(target)
 
     @server.tool()
-    def promote(target: str) -> dict:
+    async def promote(target: str) -> dict:
         """Explicitly run the configured fail-closed semantic promoter.
 
         This tool may invoke the configured external semantic checker. Success
@@ -102,7 +102,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         return tools.promote(target)
 
     @server.tool()
-    def promotion_history(
+    async def promotion_history(
         module_name: Optional[str] = None,
         limit: int = 20,
     ) -> dict:
@@ -113,7 +113,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    def ping() -> dict:
+    async def ping() -> dict:
         """Return a minimal liveness result."""
         return tools.ping()
 
