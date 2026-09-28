@@ -24,6 +24,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge as SSP
+import DASHI.Moonshine.OggSSPP2ExplicitF2CurveCandidateExact as ExplicitF2
 import DASHI.Physics.Closure.P2LaneInnerProductProof as P2Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
@@ -69,7 +70,7 @@ data P2ResidueFieldDescentResidual : Set where
 firstResidual :
   P2ResidueFieldDescentResidual
 firstResidual =
-  missingExplicitSupersingularCurveModelOverF2
+  missingGeometricSupersingularityIdentification
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin = Attribution.repositoryCrossModuleInference
@@ -80,13 +81,14 @@ record P2ResidueFieldDescentBoundary : Set where
     uniqueSupersingularJCountReceiptConsumed : Bool
     f4F2FrobeniusReceiptConsumed : Bool
     cmOrbitReceiptConsumed : Bool
+    explicitF2CurveCandidateOwned : Bool
     uniqueJCountConstructsF2Curve : Bool
     formalCMOrbitEquivalenceConstructed : Bool
     universalDeformationDescentToF2Constructed : Bool
-    firstResidualIsExplicitF2CurveModel : Bool
+    firstResidualIsGeometricSupersingularityIdentification : Bool
 
 canonicalP2ResidueFieldDescentBoundary :
   P2ResidueFieldDescentBoundary
 canonicalP2ResidueFieldDescentBoundary =
   p2-residue-field-descent-boundary
-    true true true false false false true
+    true true true true false false false true
