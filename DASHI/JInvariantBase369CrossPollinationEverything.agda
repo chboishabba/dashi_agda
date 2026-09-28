@@ -208,3 +208,5 @@ import DASHI.Moonshine.MonsterFiveArithmeticSourceRecognitionFrontierExact
 import DASHI.Moonshine.OggSSP369RootRefinementBidiExact
 
 import DASHI.Moonshine.OggSSP15PhaseOrbitC3EquivarianceExact
+
+import DASHI.Moonshine.OggSSP369CanonicalThreeSixNineLiftExact
