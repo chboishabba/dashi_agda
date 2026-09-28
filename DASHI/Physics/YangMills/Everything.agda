@@ -731,3 +731,15 @@ import DASHI.Physics.YangMills.YangMillsClayCMP119CompactSimplePhysicalH5Exact
 import DASHI.Physics.YangMills.YangMillsClayDirectPhysicalCExact
 
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectSameSystemH6Exact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionCoreExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionFromH5Exact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119LiteralH2EndpointExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119LiteralMassGapEndpointExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119LiteralH6EndpointExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalEndpointExact
