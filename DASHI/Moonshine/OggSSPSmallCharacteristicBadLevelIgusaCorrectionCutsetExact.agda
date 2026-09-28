@@ -11,9 +11,17 @@ module DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelIgusaCorrectionCutsetExa
 --
 --     Ig(p^n) -> X(1)
 --
--- as a natural ramified cover.  They also point out that Ig(p) is the moduli
--- problem of (p-1)-st roots of the Hasse invariant and explicitly say they do
--- not realize the connection to their wild root-stack description in detail.
+-- as the natural bad-level cover.  They explicitly leave its comparison with
+-- their wild root-stack presentation undeveloped.
+--
+-- Katz--Mazur already provide the classical Ig(p^n) moduli geometry: regular
+-- one-dimensional Igusa curves, finite-flat over the elliptic-moduli base,
+-- fully ramified over supersingular points, together with the Chapter-13
+-- analysis of p-power isogeny moduli, complete local rings, and intersections.
+--
+-- Therefore the open debt is NOT construction of Ig(p^2) itself.  It is the
+-- comparison/pushforward from this classical bad-level geometry to the wild
+-- root-stack model and then to the corrected scalar modular valuation.
 --
 -- DUNCAN--SWISHER INTERSECTION
 --
@@ -133,10 +141,10 @@ record BadLevelIgusaRootStackComparison
     igusaPrimeLevelHasseRootDescriptionOwnedIsTrue :
       igusaPrimeLevelHasseRootDescriptionOwned ≡ true
 
-    igusaPrimeSquareIntegralModelOwned :
+    classicalIgusaPrimePowerIntegralModelOwned :
       Bool
-    igusaPrimeSquareIntegralModelOwnedIsTrue :
-      igusaPrimeSquareIntegralModelOwned ≡ true
+    classicalIgusaPrimePowerIntegralModelOwnedIsTrue :
+      classicalIgusaPrimePowerIntegralModelOwned ≡ true
 
     comparisonWithRootStackConstructed :
       Bool
@@ -318,9 +326,9 @@ record BadLevelIgusaCorrectionCutsetBoundary : Set where
     sourcedPaperMarksBadLevelAsFutureWork : Bool
     sourcedPaperSuggestsIgusaTower : Bool
     igusaPAsHasseRootModuliProblemSourced : Bool
-    igusaP2IntegralModelNeededSeparately : Bool
-    igusaP2IntegralModelAlreadySuppliedBySource : Bool
-    igusaRootStackComparisonAlreadyInSource : Bool
+    classicalIgusaPpowerIntegralGeometrySourced : Bool
+    kzbIgusaRootStackComparisonAlreadyInSource : Bool
+    badLevelPushforwardToCorrectedValuationAlreadySourced : Bool
     badLevelComparisonInterfaceSpecified : Bool
     correctedValuationAuthoritySpecified : Bool
     analyticFrickeCompatibilityRequired : Bool
