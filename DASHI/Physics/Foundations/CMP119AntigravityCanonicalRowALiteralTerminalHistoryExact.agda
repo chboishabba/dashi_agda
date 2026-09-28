@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowALiteralTerminalHistoryExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; Positive; _*_; _≤_)
@@ -13,6 +14,8 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as RowA
 import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as Order
 import DASHI.Physics.YangMills.BalabanYM4NonnegativeBetaFinitePropagationExact as Finite
+import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
+import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as History
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -42,7 +45,7 @@ record CanonicalRowALiteralTerminalHistory
 
     terminalInverseThreshold :
       inverseThreshold ≤
-      DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact.inverseCoupling
+      Flow.inverseCoupling
         (CanonicalHistory.trajectory coherence)
         terminalScale
 
@@ -50,7 +53,7 @@ record CanonicalRowALiteralTerminalHistory
       Positive (Terminal.literalCouplingAt dataSet scale)
 
     inverseCouplingRepresentation : ∀ scale →
-      DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact.inverseCoupling
+      Flow.inverseCoupling
         (CanonicalHistory.trajectory coherence) scale
       * Order.square (Terminal.literalCouplingAt dataSet scale)
       ≡ 1ℚ
@@ -109,17 +112,17 @@ historyGammaIsCanonicalRowAGamma :
   ∀ {dataSet coherence source rowA}
     (history :
       CanonicalRowALiteralTerminalHistory dataSet coherence source rowA) →
-  DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact.gamma
+  History.gamma
     (Terminal.asBetaSplitInverseSquareTerminalHistory
       (asLiteralPlaquetteTerminalHistory history))
   ≡ RowA.canonicalQuarticResponseGamma rowA
 historyGammaIsCanonicalRowAGamma history = refl
 
-separateHistoryGammaRequired : Agda.Builtin.Bool.Bool
-separateHistoryGammaRequired = Agda.Builtin.Bool.false
+separateHistoryGammaRequired : Bool
+separateHistoryGammaRequired = false
 
-historyGammaToRowACapComparisonRequired : Agda.Builtin.Bool.Bool
-historyGammaToRowACapComparisonRequired = Agda.Builtin.Bool.false
+historyGammaToRowACapComparisonRequired : Bool
+historyGammaToRowACapComparisonRequired = false
 
 canonicalRowALiteralTerminalHistoryCompilerLevel : ProofLevel
 canonicalRowALiteralTerminalHistoryCompilerLevel = machineChecked
