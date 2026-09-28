@@ -50,6 +50,7 @@ import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact a
 import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact as OutCompiler
 import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as FineFrickeNoGo
 import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
+import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
@@ -358,6 +359,33 @@ outgoingActualFineFrickeElementStillOpen :
 outgoingActualFineFrickeElementStillOpen = refl
 
 ------------------------------------------------------------------------
+-- 5e. Reuse the existing shortest-3B frontier as the action-recognition source.
+------------------------------------------------------------------------
+
+shortest3BActionSourceBridgeBoundary :
+  ShortestBridge.Trialectic369Shortest3BActionSourceBridgeBoundary
+shortest3BActionSourceBridgeBoundary =
+  ShortestBridge.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+
+shortest3BSourceCompilesActualActionRecognition :
+  ShortestBridge.actualActionRecognitionCompiled
+    shortest3BActionSourceBridgeBoundary
+  ≡ true
+shortest3BSourceCompilesActualActionRecognition = refl
+
+separateTrialecticActualActionLeafNotNeeded :
+  ShortestBridge.separateTrialecticActualActionRecognitionLeafNeeded
+    shortest3BActionSourceBridgeBoundary
+  ≡ false
+separateTrialecticActualActionLeafNotNeeded = refl
+
+multiplicityInertiaStillNotCompiledFromRecognition :
+  ShortestBridge.multiplicityInertiaAttachmentCompiledFromRecognitionAlone
+    shortest3BActionSourceBridgeBoundary
+  ≡ false
+multiplicityInertiaStillNotCompiledFromRecognition = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
@@ -409,6 +437,9 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingFineFrickeSingleFibreNoGoPaid : Bool
     outgoingFrickeStableModeBlock18CompilerPaid : Bool
     outgoingActualFineFrickeElementRecognitionPaid : Bool
+    shortest3BSourceCompilesActualActionRecognition : Bool
+    separateTrialecticActualActionLeafNeeded : Bool
+    outgoingMultiplicityInertiaAttachmentPaid : Bool
     outgoingActualMonsterActionRecognitionPaid : Bool
     orderedRankIntrinsicModularInvariant : Bool
     residualDiscarded : Bool
