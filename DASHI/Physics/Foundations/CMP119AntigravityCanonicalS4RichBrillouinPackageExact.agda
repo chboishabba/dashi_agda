@@ -48,7 +48,7 @@ record CanonicalS4RichBrillouinInputs
       SU2.CanonicalBishopSU2RunningInputs Nat
 
     canonicalRichBrillouinLiteralBridge :
-      RichBridge.CanonicalRunningRichLiteralPlaquetteSplit
+      RichBridge.CanonicalRunningRichLiteralPlaquette
         dataSet rich bishopRunning
 
     literalPlaquetteRepresentsCMP109 :
@@ -76,9 +76,8 @@ asCanonicalS4SameObjectPackage package = record
       bishopRunning package
   ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
       P3Literal.p3LiteralPlaquetteThenCMP109
-        (P3Literal.splitViewAsTotalView
-          (RichBridge.canonicalRunningAsLiteralSplit
-            (canonicalRichBrillouinLiteralBridge package)))
+        (RichBridge.canonicalRunningAsLiteralTotal
+          (canonicalRichBrillouinLiteralBridge package))
         (literalPlaquetteRepresentsCMP109 package)
   ; S4.CanonicalS4SameObjectPackage.traceBoundary =
       traceBoundary package
@@ -89,6 +88,9 @@ normalizedLiteralLogCoordinateRequiredFromCanonicalCaller = false
 
 directP3LiteralGaussianWitnessRequiredFromCanonicalCaller : Bool
 directP3LiteralGaussianWitnessRequiredFromCanonicalCaller = false
+
+richRegularMatchingMustJoinP3Remainder : Bool
+richRegularMatchingMustJoinP3Remainder = true
 
 directP3CMP109WitnessRequiredFromCanonicalCaller : Bool
 directP3CMP109WitnessRequiredFromCanonicalCaller = false
