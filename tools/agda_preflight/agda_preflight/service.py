@@ -309,6 +309,15 @@ class DashiAgdaService:
             "profile": self._finish_request(before, started),
         }
 
+    def affected(self, target: str) -> dict:
+        before, started = self._start_request()
+        modules = self.index.affected_modules(Path(target))
+        return {
+            "modules": list(modules),
+            "count": len(modules),
+            "profile": self._finish_request(before, started),
+        }
+
     def semantic_status(self, target: str) -> dict:
         before, started = self._start_request()
         hashes = self.index.closure_source_hashes(Path(target))
@@ -468,6 +477,8 @@ class DashiAgdaService:
             return self.apply_fix(**params)
         if method == "cache_status":
             return self.cache_status()
+        if method == "affected":
+            return self.affected(**params)
         if method == "semantic_status":
             return self.semantic_status(**params)
         if method == "promote":
