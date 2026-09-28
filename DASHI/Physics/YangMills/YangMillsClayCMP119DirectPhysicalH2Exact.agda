@@ -118,7 +118,7 @@ record CMP119DirectPhysicalH2
       Top.ReflectionPositivityPreservedAlongConstruction S group
 
     positivityNormalizationPreserved : ∀ group →
-      Top.PositivityNormalizationPreserved S group
+      Top.PositivityNormalizationPreservedAlongConstruction S group
 
     volumeCutoffCompatibility : ∀ group →
       Top.VolumeCutoffCompatibilityPreserved S group
