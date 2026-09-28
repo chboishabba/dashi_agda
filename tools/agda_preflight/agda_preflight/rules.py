@@ -390,7 +390,7 @@ def extended_diagnostics(checker, s, D):
                 duplicate = next(a for resolved, _, a in normalized if resolved == name)
                 out.append(_diag(D, "TSAGDA061", f"field {name} is assigned more than once", s, duplicate.line))
         missing = [name for name in target_fields if name not in names]
-        if missing:
+        if missing and not record_expr.is_update:
             out.append(_diag(D, "TSAGDA062", f"record {target.name} is missing fields: {', '.join(missing)}", s, record_expr.line))
         for resolved, original, assignment in normalized:
             field = target_fields.get(resolved) if resolved is not None else None
