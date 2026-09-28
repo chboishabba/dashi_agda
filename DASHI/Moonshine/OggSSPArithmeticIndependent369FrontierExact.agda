@@ -127,6 +127,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicExceptionalTermHypothesisSieveEx
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildGeneratorPartitionCandidateExact as GeneratorPartition
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildRiemannRochTransferCutsetExact as WildRR
+import DASHI.Moonshine.OggSSPSmallCharacteristicEtherealMultiplicityTransferExact as Ethereal
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -310,6 +311,8 @@ record ArithmeticIndependent369Frontier : Set where
     wildLayerSectorSameRuleAcrossPrimes : Bool
     wildLayerSectorValuationAuthorityPaid : Bool
     wildRiemannRochTransferCutsetPaid : Bool
+    sourcedEtherealMultiplicityPrecedentPaid : Bool
+    sourcedEtherealMultiplicityIsLayerSectorRule : Bool
     tameRiemannRochShortcutRejected : Bool
 
     p2CentralizerDepthTenCandidatePaid : Bool
@@ -397,6 +400,8 @@ canonicalArithmeticIndependent369Frontier =
     ; wildLayerSectorSameRuleAcrossPrimes = true
     ; wildLayerSectorValuationAuthorityPaid = false
     ; wildRiemannRochTransferCutsetPaid = true
+    ; sourcedEtherealMultiplicityPrecedentPaid = true
+    ; sourcedEtherealMultiplicityIsLayerSectorRule = false
     ; tameRiemannRochShortcutRejected = true
 
     ; p2CentralizerDepthTenCandidatePaid = true
