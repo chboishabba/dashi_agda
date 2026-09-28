@@ -62,6 +62,8 @@ record RiemannSSP15RHProducerDonorBoundary : Set where
     sparseShiftTheoremLocated : Bool
     depthFiveBlockTheoremLocated : Bool
     sourceNativeCoordinateTermsLocated : Bool
+    contentAddressedVerifierOwned : Bool
+    exactHeadVerifierObserved : Bool
     donorImportedIntoCurrentLeanBranch : Bool
     sameGraphProducerCertificateInhabited : Bool
 
@@ -69,4 +71,29 @@ canonicalRiemannSSP15RHProducerDonorBoundary :
   RiemannSSP15RHProducerDonorBoundary
 canonicalRiemannSSP15RHProducerDonorBoundary =
   riemann-ssp15-rh-producer-donor-boundary
-    true true true true true true false false
+    true true true true true true true false false false
+
+
+donorCommitPinnedIsTrue :
+  RiemannSSP15RHProducerDonorBoundary.donorCommitPinned
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ true
+donorCommitPinnedIsTrue = refl
+
+contentAddressedVerifierOwnedIsTrue :
+  RiemannSSP15RHProducerDonorBoundary.contentAddressedVerifierOwned
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ true
+contentAddressedVerifierOwnedIsTrue = refl
+
+exactHeadVerifierObservedIsFalse :
+  RiemannSSP15RHProducerDonorBoundary.exactHeadVerifierObserved
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ false
+exactHeadVerifierObservedIsFalse = refl
+
+donorImportedIntoCurrentLeanBranchIsFalse :
+  RiemannSSP15RHProducerDonorBoundary.donorImportedIntoCurrentLeanBranch
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ false
+donorImportedIntoCurrentLeanBranchIsFalse = refl
