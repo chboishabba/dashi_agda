@@ -147,9 +147,9 @@ zeroTotalIncrementForced {recursion = recursion} local =
         normalized
   in
   BishopP.≃-trans
-    (Cancel.bishopAddLeftCancel withZero)
     (BishopP.≃-symm
-      (DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier.bishopEmbedZero))
+      (Cancel.bishopAddLeftCancel withZero))
+    BishopP.≃-refl
 asSourceRecurrenceSameObject :
   ∀ {dataSet trajectory recursion} →
   P3LiteralPlaquetteRecurrenceSameObject dataSet recursion →
