@@ -473,3 +473,13 @@ import DASHI.Moonshine.OggSSPP3H3TateSigmaPartitionFactorizationExact
 import DASHI.Moonshine.OggSSPP2UranoParityFiveSectorNoGoExact
 
 import DASHI.Moonshine.OggSSPP2UranoInertiaLocalizationFactorizationExact
+
+import DASHI.Moonshine.OggSSP4A2BIntegralRestrictionRefinementExact
+
+import DASHI.Moonshine.OggSSPP2UranoFourARestrictionPartitionFactorizationExact
+
+import DASHI.Moonshine.OggSSP4A2BThreeLabelFiveSectorNoGoExact
+
+import DASHI.Moonshine.OggSSP4A2BTateRefinementFiveSectorNoGoExact
+
+import DASHI.Moonshine.OggSSP2BCarnahanTateSplitExact
