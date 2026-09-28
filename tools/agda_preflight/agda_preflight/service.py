@@ -61,6 +61,7 @@ class _RollupCandidateCache:
         ] = {}
         self.any_heap: List[tuple] = []
         self.fixable_heap: List[tuple] = []
+        self.by_id: Dict[str, object] = {}
 
     def _push(
         self,
@@ -87,9 +88,18 @@ class _RollupCandidateCache:
         top,
         fixable,
     ) -> None:
+        previous = self.candidates.get(module)
+        if previous is not None:
+            for diagnostic in previous:
+                if diagnostic is not None:
+                    self.by_id.pop(diagnostic.diagnostic_id, None)
+
         generation = self.generations.get(module, 0) + 1
         self.generations[module] = generation
         self.candidates[module] = (top, fixable)
+        for diagnostic in (top, fixable):
+            if diagnostic is not None:
+                self.by_id[diagnostic.diagnostic_id] = diagnostic
         self._push(
             self.any_heap,
             module,
@@ -124,6 +134,9 @@ class _RollupCandidateCache:
 
     def peek(self, *, require_fix: bool):
         return self._peek(require_fix=require_fix)
+
+    def lookup(self, diagnostic_id: str):
+        return self.by_id.get(diagnostic_id)
 
 
 class DashiAgdaService:
@@ -274,6 +287,17 @@ class DashiAgdaService:
             target,
             validate_freshness=validate_freshness,
         )
+
+    def _cached_session_diagnostic(
+        self,
+        diagnostic_id: str,
+    ):
+        for cache in self._candidate_rollups.values():
+            diagnostic = cache.lookup(diagnostic_id)
+            if diagnostic is not None:
+                self.profiler.count("session_candidate_id_hits")
+                return diagnostic
+        return None
 
     def _refresh_rollup_module_candidates(
         self,
@@ -468,10 +492,14 @@ class DashiAgdaService:
         before, started = self._start_request()
         target_path = self._target_path(target)
 
-        diagnostic = self.index.find_cached_diagnostic(
-            target_path,
-            diagnostic_id,
+        diagnostic = self._cached_session_diagnostic(
+            diagnostic_id
         )
+        if diagnostic is None:
+            diagnostic = self.index.find_cached_diagnostic(
+                target_path,
+                diagnostic_id,
+            )
         if diagnostic is None:
             result = self.index.diagnose(target_path)
             diagnostic = next(
