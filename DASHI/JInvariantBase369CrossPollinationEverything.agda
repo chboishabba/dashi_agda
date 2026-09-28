@@ -200,3 +200,7 @@ import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact
 import DASHI.Reasoning.Trialectic369DyadicLocalNineObserverCandidateExact
 
 import DASHI.Moonshine.MonsterFiveTrialecticLocalRecognitionExact
+
+import DASHI.Moonshine.MonsterFiveTrialecticC3PointedRecognitionExact
+
+import DASHI.Moonshine.MonsterFiveArithmeticSourceRecognitionFrontierExact
