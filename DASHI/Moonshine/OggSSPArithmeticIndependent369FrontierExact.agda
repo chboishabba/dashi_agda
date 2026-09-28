@@ -331,6 +331,8 @@ record ArithmeticIndependent369Frontier : Set where
     generatorPartitionPrimeSelectorPaid : Bool
     wildLayerSectorProductCandidatePaid : Bool
     wildLayerSectorSameRuleAcrossPrimes : Bool
+    wildLayerSectorSameRuleIsNumericalOnly : Bool
+    wildLayerSectorSameAmbientGeometryPaid : Bool
     wildLayerSectorValuationAuthorityPaid : Bool
     wildRiemannRochTransferCutsetPaid : Bool
     sourcedEtherealMultiplicityPrecedentPaid : Bool
@@ -434,6 +436,8 @@ canonicalArithmeticIndependent369Frontier =
     ; generatorPartitionPrimeSelectorPaid = false
     ; wildLayerSectorProductCandidatePaid = true
     ; wildLayerSectorSameRuleAcrossPrimes = true
+    ; wildLayerSectorSameRuleIsNumericalOnly = true
+    ; wildLayerSectorSameAmbientGeometryPaid = false
     ; wildLayerSectorValuationAuthorityPaid = false
     ; wildRiemannRochTransferCutsetPaid = true
     ; sourcedEtherealMultiplicityPrecedentPaid = true
