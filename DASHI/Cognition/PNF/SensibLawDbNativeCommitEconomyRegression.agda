@@ -2,7 +2,7 @@
 module DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyRegression where
 
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using ([]; _∷_)
@@ -45,10 +45,10 @@ fixtureSemanticBatch :
     FixtureAuthority
     Economy.DurableExecutionReceipt
 fixtureSemanticBatch = record
-  { Batch.sequentialAuthority = λ _ → fixtureAuthority
-  ; Batch.batchedAuthority = λ _ → fixtureAuthority
-  ; Batch.batchExact = λ _ → refl
-  ; Batch.receipt = λ _ → fixtureReceipt
+  { sequentialAuthority = λ _ → fixtureAuthority
+  ; batchedAuthority = λ _ → fixtureAuthority
+  ; batchExact = λ _ → refl
+  ; receipt = λ _ → fixtureReceipt
   }
 
 fixtureExactDurableBatch :
