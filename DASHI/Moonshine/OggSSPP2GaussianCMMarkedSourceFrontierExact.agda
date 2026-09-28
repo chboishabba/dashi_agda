@@ -193,6 +193,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     duplicatedCentreCompletionBridgeOwned : Bool
     badPrimeLevelStructureBoundaryOwned : Bool
     gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
+    canonicalRawGamma0FourFlagOwned : Bool
     gamma0FourRefinedCompactificationBoundaryOwned : Bool
     gamma0FourTwoIsogenyChainSocketOwned : Bool
     uniqueRawSupersingularGamma0FourSubgroupSourceBacked : Bool
@@ -239,6 +240,7 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; duplicatedCentreCompletionBridgeOwned = true
     ; badPrimeLevelStructureBoundaryOwned = true
     ; gamma0FourMarkedSubgroupSchemeSocketOwned = true
+    ; canonicalRawGamma0FourFlagOwned = true
     ; gamma0FourRefinedCompactificationBoundaryOwned = true
     ; gamma0FourTwoIsogenyChainSocketOwned = true
     ; uniqueRawSupersingularGamma0FourSubgroupSourceBacked = true
