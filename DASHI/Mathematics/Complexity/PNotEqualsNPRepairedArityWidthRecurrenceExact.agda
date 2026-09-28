@@ -42,6 +42,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact a
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
 
 ------------------------------------------------------------------------
 -- Repaired closed quotient from local arity/terminal admission.
@@ -62,6 +63,35 @@ repairedClosed candidate admission =
       admission)
 
 ------------------------------------------------------------------------
+-- Machine execution returns repaired finite DATA.  The step count is therefore
+-- tied to an actual typed execution receipt, not supplied as a free Nat.
+------------------------------------------------------------------------
+
+data RepairedCandidateMachineState
+    {rootVariables : Nat}
+    (root : SAT.BooleanFormula rootVariables)
+    (Work : Set) : Set₁ where
+  working :
+    Work →
+    RepairedCandidateMachineState root Work
+
+  finished :
+    Repair.RepairedFiniteQ1Candidate root →
+    RepairedCandidateMachineState root Work
+
+repairedCandidateMachineStep :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {Work : Set} →
+  (Work → RepairedCandidateMachineState root Work) →
+  RepairedCandidateMachineState root Work →
+  RepairedCandidateMachineState root Work
+repairedCandidateMachineStep advance (working work) =
+  advance work
+repairedCandidateMachineStep advance (finished candidate) =
+  finished candidate
+
+------------------------------------------------------------------------
 -- One repaired successful construction run at a Q2 state.
 ------------------------------------------------------------------------
 
@@ -69,10 +99,33 @@ record RepairedArityTerminalConstructionRun
     (state : Q2.BoundedSelfReferenceState) : Set₁ where
   constructor repaired-arity-terminal-construction-run
   field
+    Work :
+      Set
+
+    advance :
+      Work →
+      RepairedCandidateMachineState
+        (Bridge.cookToIndexed
+          (Q2.currentFormula state))
+        Work
+
+    initialWork :
+      Work
+
     candidate :
       Repair.RepairedFiniteQ1Candidate
         (Bridge.cookToIndexed
           (Q2.currentFormula state))
+
+    machineStepCount :
+      Nat
+
+    machineExecution :
+      Executed.Iterates
+        (repairedCandidateMachineStep advance)
+        machineStepCount
+        (working initialWork)
+        (finished candidate)
 
     localAdmission :
       ArityTerminal.ArityTrackedTerminalAdmission
@@ -82,9 +135,6 @@ record RepairedArityTerminalConstructionRun
       Q1.ClosedQuotientAllOverheadFits
         (repairedClosed candidate localAdmission)
         (Recurrence.stateOverhead state)
-
-    machineStepCount :
-      Nat
 
     machineConstructionAndNextStrict :
       (Width.triple
