@@ -55,6 +55,8 @@ import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact a
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
+import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as LinearCoreCompat
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as CanonicalLinearCore
 import DASHI.Reasoning.Trialectic369OutgoingLinearMultiplicityWrongTypeCorrectionExact as LinearCorrection
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
@@ -687,6 +689,68 @@ outgoingSelected3BLinearCompletionStillOpen = refl
 
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
+-- 5j. Minimal canonical linear core supersedes the historical acquisition as target.
+------------------------------------------------------------------------
+
+outgoingCanonicalLinearCoreBoundary :
+  CanonicalLinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary
+outgoingCanonicalLinearCoreBoundary =
+  CanonicalLinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+
+outgoingHistoricalAcquisitionNotCanonicalTarget :
+  CanonicalLinearCore.historicalAcquisitionNotCanonicalTarget
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingHistoricalAcquisitionNotCanonicalTarget = refl
+
+outgoingMinimalCanonicalCoreCompilesNormalizerBidi :
+  CanonicalLinearCore.normalizerMonsterCarrierBidiCompilerOutput
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingMinimalCanonicalCoreCompilesNormalizerBidi = refl
+
+outgoingMinimalCanonicalCoreCompilesLinearRoute :
+  CanonicalLinearCore.canonicalLinearRouteCompilerOutput
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingMinimalCanonicalCoreCompilesLinearRoute = refl
+
+outgoingOnlyOneActionEquationRemainsAfterMinimalCore :
+  CanonicalLinearCore.onlyOneActionEquationRemainsAfterCore
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingOnlyOneActionEquationRemainsAfterMinimalCore = refl
+
+outgoingMinimalCanonicalCoreStillOpen :
+  CanonicalLinearCore.canonicalCoreInhabitedHere
+    outgoingCanonicalLinearCoreBoundary
+  ≡ false
+outgoingMinimalCanonicalCoreStillOpen = refl
+
+outgoingMinimalCoreActionEquationStillOpen :
+  CanonicalLinearCore.actionIntertwiningInhabitedHere
+    outgoingCanonicalLinearCoreBoundary
+  ≡ false
+outgoingMinimalCoreActionEquationStillOpen = refl
+
+linearCoreCompatibilityBoundary :
+  LinearCoreCompat.Trialectic369Selected3BLinearCoreCompatibilityBoundary
+linearCoreCompatibilityBoundary =
+  LinearCoreCompat.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+
+historicalCoreForgetsExactlyToCanonicalCore :
+  LinearCoreCompat.historicalCoreForgetsToCanonicalCore
+    linearCoreCompatibilityBoundary
+  ≡ true
+historicalCoreForgetsExactlyToCanonicalCore = refl
+
+historicalCoreAndCanonicalCoreCompileSameRoute :
+  LinearCoreCompat.historicalCoreSufficesForCanonicalRoute
+    linearCoreCompatibilityBoundary
+  ≡ true
+historicalCoreAndCanonicalCoreCompileSameRoute = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
@@ -694,6 +758,7 @@ data IncomingAnalyticFrickeAuthority : Set where
 data OptionalFiniteBasisMultiplicityProjectionDescentRecognition : Set where
 data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
 data OutgoingInvariantFineFibreRecognition : Set where
+data OutgoingMinimalSelected3BLinearCoreRecognition : Set where
 data OutgoingSelected3BLinearCoreMinCutRecognition : Set where
 data OutgoingSelected3BLinearCompletionRecognition : Set where
 data OutgoingActualLinearMultiplicityAcquisitionRecognition : Set where
@@ -718,6 +783,10 @@ outgoingMultiplicityInertiaAttachmentStillOpenToken ()
 outgoingInvariantFineFibreRecognitionStillOpenToken :
   OutgoingInvariantFineFibreRecognition -> ⊥
 outgoingInvariantFineFibreRecognitionStillOpenToken ()
+
+outgoingMinimalSelected3BLinearCoreStillOpenToken :
+  OutgoingMinimalSelected3BLinearCoreRecognition -> ⊥
+outgoingMinimalSelected3BLinearCoreStillOpenToken ()
 
 outgoingSelected3BLinearCoreMinCutStillOpenToken :
   OutgoingSelected3BLinearCoreMinCutRecognition -> ⊥
@@ -784,6 +853,8 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingPureFin90MonsterRouteRefuted : Bool
     outgoingCanonicalTargetIsLinearHomSpace : Bool
     outgoingCanonicalTargetIsOneLinearAcquisition : Bool
+    outgoingCanonicalTargetIsMinimalSelected3BLinearCore : Bool
+    outgoingHistoricalAcquisitionCompatibilityBridgePaid : Bool
     outgoingSelected3BLinearCompletionCompilerPaid : Bool
     outgoingSelected3BSourceNativeCoreCompilerPaid : Bool
     outgoingSelected3BNormalizerCarrierBidiCompilerPaid : Bool
@@ -809,5 +880,6 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     true true true true true false true
     true false true true false true false
     true false false false false true true
-    true true true true true true true true false true false false false
+    false true true
+    true true true true true false true false false false false false
     false false false
