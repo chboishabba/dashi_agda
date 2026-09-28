@@ -1,6 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityCanonicalLiteralPlaquetteHistoryExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
 
@@ -81,5 +83,5 @@ canonicalLiteralPlaquetteHistoryCompilerLevel = machineChecked
 --   UV chain coherence;
 --   per-step finite beta certificates;
 --   uniform Gaussian lower/upper bounds.
-parallelSourceTrajectoryRequired : Agda.Builtin.Bool.Bool
-parallelSourceTrajectoryRequired = Agda.Builtin.Bool.false
+parallelSourceTrajectoryRequired : Bool
+parallelSourceTrajectoryRequired = false
