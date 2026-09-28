@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as Order
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
+import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
 import DASHI.Physics.YangMills.BalabanYM4NonnegativeBetaFinitePropagationExact as Finite
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -58,7 +59,7 @@ compiledSplit :
   ∀ {dataSet trajectory}
     (literalHistory :
       LiteralHistory.LiteralPlaquetteCMP109FiniteHistory dataSet trajectory) →
-  _
+  Split.FiniteLatticeBetaSplit trajectory
 compiledSplit =
   LiteralHistory.literalPlaquetteGivesRepositoryBetaSplit
 
