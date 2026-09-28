@@ -12,6 +12,7 @@ import RealProperties as BishopP
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as Full
 import DASHI.Physics.Foundations.CMP119AntigravityP3SourceRecurrenceUniquenessExact as Recurrence
+import DASHI.Physics.Foundations.CMP119AntigravityBishopMatchedRecursionResidualExact as Cancel
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as Plaquette
@@ -58,13 +59,6 @@ record P3LiteralPlaquetteRecurrenceSameObject
         (P3.inverseCouplingSq recursion zero)
         (UV.embed (Plaquette.nextInverseCouplingSq dataSet zero))
 
-    zeroTotalIncrementSame :
-      Bishop._≃_
-        (Bishop._+_
-          (P3.betaLogBlocking recursion zero)
-          (P3.remainder recursion zero))
-        (UV.embed 0ℚ)
-
     successorTotalIncrementSameLiteral :
       ∀ depth →
       Bishop._≃_
@@ -75,6 +69,87 @@ record P3LiteralPlaquetteRecurrenceSameObject
 
 open P3LiteralPlaquetteRecurrenceSameObject public
 
+zeroTotalIncrementForced :
+  ∀ {dataSet recursion} →
+  P3LiteralPlaquetteRecurrenceSameObject dataSet recursion →
+  Bishop._≃_
+    (Bishop._+_
+      (P3.betaLogBlocking recursion zero)
+      (P3.remainder recursion zero))
+    (UV.embed 0ℚ)
+zeroTotalIncrementForced {recursion = recursion} local =
+  let
+    raw :
+      Bishop._≃_
+        (P3.inverseCouplingSq recursion (P3.nextScale recursion zero))
+        (P3.add recursion
+          (P3.inverseCouplingSq recursion zero)
+          (P3.add recursion
+            (P3.betaLogBlocking recursion zero)
+            (P3.remainder recursion zero)))
+    raw = equalityAsBishopSetoid (P3.recursionExact recursion zero)
+
+    shifted :
+      Bishop._≃_
+        (P3.inverseCouplingSq recursion zero)
+        (P3.add recursion
+          (P3.inverseCouplingSq recursion zero)
+          (P3.add recursion
+            (P3.betaLogBlocking recursion zero)
+            (P3.remainder recursion zero)))
+    shifted =
+      subst
+        (λ selected →
+          Bishop._≃_
+            (P3.inverseCouplingSq recursion selected)
+            (P3.add recursion
+              (P3.inverseCouplingSq recursion zero)
+              (P3.add recursion
+                (P3.betaLogBlocking recursion zero)
+                (P3.remainder recursion zero)))))
+        (nextScaleIsUVPredecessor local zero)
+        raw
+
+    normalized :
+      Bishop._≃_
+        (P3.inverseCouplingSq recursion zero)
+        (Bishop._+_
+          (P3.inverseCouplingSq recursion zero)
+          (Bishop._+_
+            (P3.betaLogBlocking recursion zero)
+            (P3.remainder recursion zero)))
+    normalized =
+      BishopP.≃-trans
+        shifted
+        (BishopP.≃-trans
+          (addIsBishopAdd local
+            (P3.inverseCouplingSq recursion zero)
+            (P3.add recursion
+              (P3.betaLogBlocking recursion zero)
+              (P3.remainder recursion zero)))
+          (BishopP.+-cong
+            BishopP.≃-refl
+            (addIsBishopAdd local
+              (P3.betaLogBlocking recursion zero)
+              (P3.remainder recursion zero))))
+
+    withZero :
+      Bishop._≃_
+        (Bishop._+_ (P3.inverseCouplingSq recursion zero) Bishop.0ℝ)
+        (Bishop._+_
+          (P3.inverseCouplingSq recursion zero)
+          (Bishop._+_
+            (P3.betaLogBlocking recursion zero)
+            (P3.remainder recursion zero)))
+    withZero =
+      BishopP.≃-trans
+        (BishopP.+-identityʳ (P3.inverseCouplingSq recursion zero))
+        normalized
+  in
+  BishopP.≃-trans
+    (Cancel.bishopAddLeftCancel withZero)
+    (BishopP.≃-symm
+      (DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier.bishopEmbedZero))
 asSourceRecurrenceSameObject :
   ∀ {dataSet trajectory recursion} →
   P3LiteralPlaquetteRecurrenceSameObject dataSet recursion →
@@ -94,7 +169,7 @@ asSourceRecurrenceSameObject
           (LiteralToSource.nextAtStepIsSourceCurrent literalWeld zero))
   ; Recurrence.P3SourceRecurrenceSameObject.totalIncrementSame =
       λ
-        { zero → zeroTotalIncrementSame local
+        { zero → zeroTotalIncrementForced local
         ; (suc depth) →
             BishopP.≃-trans
               (successorTotalIncrementSameLiteral local depth)
@@ -135,7 +210,7 @@ asFullLiteralPlaquetteUVView
     ; Full.P3RepresentsLiteralPlaquetteUVView.nextScaleIsUVPredecessor =
         nextScaleIsUVPredecessor local
     ; Full.P3RepresentsLiteralPlaquetteUVView.zeroTotalIncrementSame =
-        zeroTotalIncrementSame local
+        zeroTotalIncrementForced local
     ; Full.P3RepresentsLiteralPlaquetteUVView.successorTotalIncrementSameLiteral =
         successorTotalIncrementSameLiteral local
     }
