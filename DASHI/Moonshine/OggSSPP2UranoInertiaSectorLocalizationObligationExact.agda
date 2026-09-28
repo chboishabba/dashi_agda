@@ -56,6 +56,14 @@ record P2UranoInertiaSectorLocalizationTheorem : Set₁ where
       SourcePiece ->
       Urano.TwoBModuleTag
 
+    sourcePieceComesFromIntegralTwoBWeightSpace :
+      SourcePiece ->
+      Bool
+
+    sourcePieceComesFromIntegralTwoBWeightSpaceIsTrue :
+      (piece : SourcePiece) ->
+      sourcePieceComesFromIntegralTwoBWeightSpace piece ≡ true
+
     respectsUranoForbiddenPairs :
       (piece : SourcePiece) ->
       Urano.TwoBSourceForbidden
@@ -204,6 +212,7 @@ record P2UranoInertiaSectorLocalizationBoundary : Set where
   constructor p2-urano-inertia-sector-localization-boundary
   field
     uranoParityExclusionsSourced : Bool
+    actualIntegralTwoBPieceProvenanceRequired : Bool
     uranoGreenFunctionalSourced : Bool
     fiveInertiaSectorGeometryOwned : Bool
     isotropyDepthThreeThreeTwoOneOneOwned : Bool
@@ -221,6 +230,6 @@ canonicalP2UranoInertiaSectorLocalizationBoundary :
   P2UranoInertiaSectorLocalizationBoundary
 canonicalP2UranoInertiaSectorLocalizationBoundary =
   p2-urano-inertia-sector-localization-boundary
-    true true true true
+    true true true true true
     true false true false
     false false true
