@@ -29,7 +29,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
 open import Data.Fin.Base using (Fin)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -190,7 +190,7 @@ record OutgoingSheet9ActualActionRestriction
     selectedFinePreserved :
       (inertia : Actual.MultiplicityInertia inertiaAttachment) ->
       (sheet : Codec.Sheet9) ->
-      Data.Product.proj₁
+      proj₁
         (Ninety.tenByNineAct
           tenByNineAttachment
           inertia
