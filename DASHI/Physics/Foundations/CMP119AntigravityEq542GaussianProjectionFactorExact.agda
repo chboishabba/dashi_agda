@@ -39,12 +39,12 @@ record Eq542GaussianProjectionFactor
     richShellRepresentsSourceGaussian :
       ∀ depth →
       Bishop._≃_
-        (Rich.scalarIntegral rich (suc depth))
+        (Rich.scalarIntegral rich depth)
         (UV.embed (sourceGaussianBeta depth))
 
     rationalPlaquetteRepresentsSourceGaussian :
       ∀ depth →
-      Literal.literalBetaZ dataSet (suc depth)
+      Literal.literalBetaZ dataSet depth
       ≡ sourceGaussianBeta depth
 
 open Eq542GaussianProjectionFactor public
@@ -62,7 +62,7 @@ asRichBrillouinRationalGaussianProjection factor = record
             (λ selected →
               Bishop._≃_
                 (UV.embed selected)
-                (UV.embed (Literal.literalBetaZ dataSet (suc depth))))
+                (UV.embed (Literal.literalBetaZ dataSet depth)))
             (rationalPlaquetteRepresentsSourceGaussian factor depth)
             BishopP.≃-refl)
   }
