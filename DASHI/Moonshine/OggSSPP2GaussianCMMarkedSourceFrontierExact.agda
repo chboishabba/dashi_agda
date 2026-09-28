@@ -122,6 +122,12 @@ twoTorsionFourCannotEqualTen =
 ------------------------------------------------------------------------
 
 data P2GaussianCMSourceResidual : Set where
+  missingFiniteFlatCyclicOrderFourSubgroup :
+    P2GaussianCMSourceResidual
+
+  missingOrderTwoSubflag :
+    P2GaussianCMSourceResidual
+
   missingFormalCMOrbitEquivalence :
     P2GaussianCMSourceResidual
 
@@ -173,4 +179,4 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     true true true true false
     true true true true true true true true true true true true true
     false false false
-    missingFormalCMOrbitEquivalence
+    missingFiniteFlatCyclicOrderFourSubgroup
