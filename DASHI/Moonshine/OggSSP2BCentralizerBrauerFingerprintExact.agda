@@ -212,6 +212,22 @@ record P2CentralizerBrauerSource : Set₁ where
       (piece : SourcePiece) ->
       fingerprintRetainsCo1BrauerData piece ≡ true
 
+    fingerprintComesFromRelevantIntegralGreenRing :
+      SourcePiece ->
+      Bool
+
+    fingerprintComesFromRelevantIntegralGreenRingIsTrue :
+      (piece : SourcePiece) ->
+      fingerprintComesFromRelevantIntegralGreenRing piece ≡ true
+
+    fingerprintSupportsUranoGeneralizedBrauerCharacter :
+      SourcePiece ->
+      Bool
+
+    fingerprintSupportsUranoGeneralizedBrauerCharacterIsTrue :
+      (piece : SourcePiece) ->
+      fingerprintSupportsUranoGeneralizedBrauerCharacter piece ≡ true
+
     fingerprintComputedFromTwoRegularCentralizerAction :
       SourcePiece ->
       Bool
@@ -266,10 +282,10 @@ asSourceGreenClassRefinement source =
         respectsUranoForbiddenPairs source
 
     ; GreenRecognition.greenClassComesFromRelevantIntegralGreenRing =
-        fingerprintRetainsCo1BrauerData source
+        fingerprintComesFromRelevantIntegralGreenRing source
 
     ; GreenRecognition.greenClassComesFromRelevantIntegralGreenRingIsTrue =
-        fingerprintRetainsCo1BrauerDataIsTrue source
+        fingerprintComesFromRelevantIntegralGreenRingIsTrue source
 
     ; GreenRecognition.greenClassRetainsMonsterLocalCentralizerAction =
         fingerprintComputedFromTwoRegularCentralizerAction source
@@ -278,10 +294,10 @@ asSourceGreenClassRefinement source =
         fingerprintComputedFromTwoRegularCentralizerActionIsTrue source
 
     ; GreenRecognition.greenClassSupportsGeneralizedBrauerCharacter =
-        fingerprintComputedFromTwoRegularCentralizerAction source
+        fingerprintSupportsUranoGeneralizedBrauerCharacter source
 
     ; GreenRecognition.greenClassSupportsGeneralizedBrauerCharacterIsTrue =
-        fingerprintComputedFromTwoRegularCentralizerActionIsTrue source
+        fingerprintSupportsUranoGeneralizedBrauerCharacterIsTrue source
 
     ; GreenRecognition.refinementDefinedWithoutMonsterResidualTen =
         fingerprintDefinedWithoutMonsterResidualTen source
@@ -425,6 +441,8 @@ record P2CentralizerBrauerFingerprintBoundary : Set where
     co1TwoRegularProbeClassesSourced : Bool
     characteristicTwoCo1RepresentationDataExists : Bool
     carnahanTwoBBrauerCentralizerFormulaSourced : Bool
+    greenRingProvenanceSeparateFromCo1Retention : Bool
+    generalizedBrauerSupportSeparateFromCentralizerEvaluation : Bool
     sourceNativeFingerprintLanguageDefined : Bool
     adapterToGreenClassRefinementOwned : Bool
     fiveProbesAssertedToGiveFiveClasses : Bool
@@ -439,5 +457,5 @@ canonicalP2CentralizerBrauerFingerprintBoundary :
   P2CentralizerBrauerFingerprintBoundary
 canonicalP2CentralizerBrauerFingerprintBoundary =
   p2-centralizer-brauer-fingerprint-boundary
-    true true true true true true true
+    true true true true true true true true true
     false false false false false false true
