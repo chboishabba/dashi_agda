@@ -182,7 +182,9 @@ module GlobalProductRuleResidual
       ≡
       nine * pairedProductRuleBaseFold
         - Fold.two * pairedDyadicProductionFold
-    globalPairedResidualProductRuleNormalForm =
+    globalPairedResidualProductRuleNormalForm
+      rewrite Paired.Local.O.Live.Base.systemCutoffAgreement
+        Paired.Local.O.state cutoff time =
       trans
         foldPointwiseNormalForm
         (trans
