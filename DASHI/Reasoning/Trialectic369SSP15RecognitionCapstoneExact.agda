@@ -54,6 +54,7 @@ import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as Shortes
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
+import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
 import DASHI.Reasoning.Trialectic369OutgoingLinearMultiplicityWrongTypeCorrectionExact as LinearCorrection
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
@@ -547,6 +548,60 @@ outgoingActualLinearAcquisitionStillOpen :
 outgoingActualLinearAcquisitionStillOpen = refl
 
 ------------------------------------------------------------------------
+-- 5i. One selected-3B completion owns the whole canonical linear route.
+------------------------------------------------------------------------
+
+outgoingSelected3BLinearCompletionBoundary :
+  LinearCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary
+outgoingSelected3BLinearCompletionBoundary =
+  LinearCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+
+outgoingSelected3BCompletionOwnsAcquisition :
+  LinearCompletion.oneCompletionOwnsAcquisition
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BCompletionOwnsAcquisition = refl
+
+outgoingSelected3BCompletionRequiresSameElementComposition :
+  LinearCompletion.sameElementCompositionRequired
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BCompletionRequiresSameElementComposition = refl
+
+outgoingSelected3BCompletionRequiresNormalizerMonsterWeld :
+  LinearCompletion.normalizerMonsterActionWeldRequired
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BCompletionRequiresNormalizerMonsterWeld = refl
+
+outgoingSelected3BCompletionCompilesLinearZetaHomAndRoute :
+  LinearCompletion.linearZetaProducerCompilerOutput
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+  ×
+  LinearCompletion.multiplicityHomSpaceCompilerOutput
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+  ×
+  LinearCompletion.canonicalLinearRouteCompilerOutput
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BCompletionCompilesLinearZetaHomAndRoute =
+  refl , (refl , refl)
+
+outgoingSelected3BCompletionKeepsFiniteBasisOptional :
+  LinearCompletion.optionalFiniteBasisStillSeparate
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BCompletionKeepsFiniteBasisOptional = refl
+
+outgoingSelected3BLinearCompletionStillOpen :
+  LinearCompletion.completionInhabitedHere
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ false
+outgoingSelected3BLinearCompletionStillOpen = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
@@ -554,6 +609,7 @@ data IncomingAnalyticFrickeAuthority : Set where
 data OptionalFiniteBasisMultiplicityProjectionDescentRecognition : Set where
 data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
 data OutgoingInvariantFineFibreRecognition : Set where
+data OutgoingSelected3BLinearCompletionRecognition : Set where
 data OutgoingActualLinearMultiplicityAcquisitionRecognition : Set where
 data OutgoingActualLinearHomSpaceRecognition : Set where
 data OutgoingActualLinearEvaluationRecognition : Set where
@@ -576,6 +632,10 @@ outgoingMultiplicityInertiaAttachmentStillOpenToken ()
 outgoingInvariantFineFibreRecognitionStillOpenToken :
   OutgoingInvariantFineFibreRecognition -> ⊥
 outgoingInvariantFineFibreRecognitionStillOpenToken ()
+
+outgoingSelected3BLinearCompletionStillOpenToken :
+  OutgoingSelected3BLinearCompletionRecognition -> ⊥
+outgoingSelected3BLinearCompletionStillOpenToken ()
 
 outgoingActualLinearAcquisitionStillOpenToken :
   OutgoingActualLinearMultiplicityAcquisitionRecognition -> ⊥
@@ -634,6 +694,8 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingPureFin90MonsterRouteRefuted : Bool
     outgoingCanonicalTargetIsLinearHomSpace : Bool
     outgoingCanonicalTargetIsOneLinearAcquisition : Bool
+    outgoingSelected3BLinearCompletionCompilerPaid : Bool
+    outgoingSelected3BLinearCompletionPaid : Bool
     outgoingFiniteNineEighteenRoutesAreOptionalBasisTools : Bool
     outgoingBasisSpecialisationPaid : Bool
     outgoingActualLinearAcquisitionPaid : Bool
@@ -653,5 +715,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     true true true true true false true
     true false true true false true false
     true false false false false true true
-    true true false false false false false
+    true true true false false false false false false
     false false false
