@@ -331,6 +331,59 @@ completeFromActionIntertwining scaffold intertwining =
     }
 
 ------------------------------------------------------------------------
+-- 3c. Exact two-field recognition min-cut.
+------------------------------------------------------------------------
+
+record Selected3BLinearRecognitionMinCut
+    {Monster K : Set} : Setω where
+  field
+    scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}
+
+    actionIntertwining :
+      Selected3BNormalizerActionIntertwiningOnly scaffold
+
+open Selected3BLinearRecognitionMinCut public
+
+minCutToCompletion :
+  ∀ {Monster K} →
+  Selected3BLinearRecognitionMinCut {Monster} {K} →
+  Selected3BLinearAcquisitionCompletion {Monster} {K}
+minCutToCompletion cut =
+  completeFromActionIntertwining
+    (Selected3BLinearRecognitionMinCut.scaffold cut)
+    (actionIntertwining cut)
+
+completionToMinCut :
+  ∀ {Monster K} →
+  (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Selected3BLinearRecognitionMinCut {Monster} {K}
+completionToMinCut completion =
+  record
+    { scaffold = Selected3BLinearAcquisitionCompletion.scaffold completion
+    ; actionIntertwining =
+        record
+          { normalizerActionIntertwines =
+              Acquisition.normalizerActionIntertwines
+                (normalizerMonsterActionWeld completion)
+          }
+    }
+
+minCutCompletionRoundTrip :
+  ∀ {Monster K}
+    (cut : Selected3BLinearRecognitionMinCut {Monster} {K}) →
+  completionToMinCut (minCutToCompletion cut) ≡ cut
+minCutCompletionRoundTrip
+  record { scaffold = scaffold ; actionIntertwining = intertwining } = refl
+
+completionMinCutRoundTrip :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  minCutToCompletion (completionToMinCut completion) ≡ completion
+completionMinCutRoundTrip
+  record { scaffold = scaffold ; normalizerMonsterActionWeld = weld } = refl
+
+------------------------------------------------------------------------
 -- 4. All linear multiplicity payloads are already inside the completion.
 ------------------------------------------------------------------------
 
@@ -438,6 +491,8 @@ record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
     normalizerMonsterCarrierBidiCompilerOutput : Bool
     onlyActionIntertwiningRemainsAfterScaffold : Bool
     completionCompilerOwned : Bool
+    twoFieldRecognitionMinCutOwned : Bool
+    minCutCompletionBidiPaid : Bool
     linearZetaProducerCompilerOutput : Bool
     multiplicityHomSpaceCompilerOutput : Bool
     canonicalLinearRouteCompilerOutput : Bool
@@ -452,5 +507,5 @@ canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary :
   Trialectic369Selected3BLinearAcquisitionCompletionBoundary
 canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary =
   trialectic-369-selected3b-linear-acquisition-completion-boundary
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true true
     false false false
