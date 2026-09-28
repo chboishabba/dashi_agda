@@ -184,6 +184,7 @@ import DASHI.Moonshine.OggSSPSmallPrimeMixedCharacteristicTwistedCentralizerCuts
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVRBrauer
 import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPayment
 import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact as GreenSpecies
+import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
 import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as PBTate
@@ -324,6 +325,17 @@ greenRingSectorSpeciesBoundary :
   GreenSpecies.PBGreenRingSectorSpeciesCutsetBoundary
 greenRingSectorSpeciesBoundary =
   GreenSpecies.canonicalPBGreenRingSectorSpeciesCutsetBoundary
+
+
+pbLocalizationSourceCoverageBoundary :
+  Coverage.PBLocalizationSourceCoverage
+pbLocalizationSourceCoverageBoundary =
+  Coverage.canonicalPBLocalizationSourceCoverage
+
+pbLocalizationMissingProofSurface :
+  Coverage.PBLocalizationMissingProofSurface
+pbLocalizationMissingProofSurface =
+  Coverage.canonicalPBLocalizationMissingProofSurface
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -513,6 +525,10 @@ record ArithmeticIndependent369Frontier : Set where
     greenRingSectorSpeciesCutsetPaid : Bool
     greenRingSectorSpeciesAuthorityPaid : Bool
     greenRingToPreferredDVRPaymentAdapterPaid : Bool
+    pbLocalizationSourceCoverageAuditPaid : Bool
+    carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
+    uranoTheoryDeterminesSectorLengths : Bool
+    greenRingFrameworkProvesLocalizedPBSpecies : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -660,6 +676,10 @@ canonicalArithmeticIndependent369Frontier =
     ; greenRingSectorSpeciesCutsetPaid = true
     ; greenRingSectorSpeciesAuthorityPaid = false
     ; greenRingToPreferredDVRPaymentAdapterPaid = true
+    ; pbLocalizationSourceCoverageAuditPaid = true
+    ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
+    ; uranoTheoryDeterminesSectorLengths = false
+    ; greenRingFrameworkProvesLocalizedPBSpecies = false
 
     ; p2ExternalMonsterResidualRecognitionPaid = false
     ; p3ExternalMonsterResidualRecognitionPaid = false
