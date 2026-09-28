@@ -34,6 +34,7 @@ import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.BalancedTernaryHypercubeAntipodalOrbitCountExact as HyperOrbit
 import DASHI.Moonshine.OggSSPMarkedArithmeticResidualCoverPatternExact as MarkedCover
+import DASHI.Moonshine.OggSSPSmallCharacteristicAcquisitionDirectionExact as Acquisition
 
 ------------------------------------------------------------------------
 -- 1. Only the two exceptional residual lanes are in scope here.
@@ -169,6 +170,24 @@ record ArithmeticResidualSource
     actionGroupoidIsExternallySourcedClaim : Bool
 
 open ArithmeticResidualSource public
+
+preferredAcquisitionDirection :
+  ExceptionalResidualPrime ->
+  Acquisition.AcquisitionDirection
+preferredAcquisitionDirection residualP2 =
+  Acquisition.markedEnrichmentOrCover
+preferredAcquisitionDirection residualP3 =
+  Acquisition.quotientOrCompression
+
+p2AcquisitionDirectionIsMarkedEnrichment :
+  preferredAcquisitionDirection residualP2
+  ≡ Acquisition.markedEnrichmentOrCover
+p2AcquisitionDirectionIsMarkedEnrichment = refl
+
+p3AcquisitionDirectionIsQuotient :
+  preferredAcquisitionDirection residualP3
+  ≡ Acquisition.quotientOrCompression
+p3AcquisitionDirectionIsQuotient = refl
 
 ------------------------------------------------------------------------
 -- 4. Full recognition must use the stronger generic repository contract.
@@ -322,6 +341,9 @@ record ExponentResidualArithmeticSourceBoundary : Set where
     sourceRequiresIndependentPi0Receipt : Bool
     markedCoverAcquisitionPatternAvailable : Bool
     p11MarkedCoverPrecedentRecorded : Bool
+    p2SearchDirectionMarkedEnrichment : Bool
+    p3SearchDirectionQuotientCompression : Bool
+    acquisitionDirectionPromotedToArithmeticAuthority : Bool
     fullRecognitionUsesGenericActionFunctor : Bool
     fullRecognitionUsesOrbitStabilizerRecognition : Bool
     samePresentationRequiresObjectAndSymmetryBijections : Bool
@@ -337,5 +359,6 @@ canonicalExponentResidualArithmeticSourceBoundary =
     true true true true
     true true
     true true
-    true true true true true
+    true true false
+    true true true
     false false false false
