@@ -22,6 +22,7 @@ module DASHI.Reasoning.Trialectic369DyadicLocalComplementFactorizationExact wher
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Codec.TriadicPAdicCodec as Codec
@@ -162,7 +163,7 @@ kernel5ABComplementRoundTrip
 record Kernel4xKernel5 : Set where
   constructor kernel4xkernel5
   field
-    localKernel4 : Dyadic.KernelBridge.Kernel4
+    localKernel4 : Codec.Kernel 4
     complementKernel5 : Kernel5
 
 open Kernel4xKernel5 public
