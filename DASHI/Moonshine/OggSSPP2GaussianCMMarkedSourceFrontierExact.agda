@@ -24,8 +24,10 @@ module DASHI.Moonshine.OggSSPP2GaussianCMMarkedSourceFrontierExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 import DASHI.Physics.Closure.P2LaneInnerProductProof as Receipt
 import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4
 import DASHI.Moonshine.OggSSPP2F4AntipodalStratifiedRefinementExact as Stratified
@@ -73,7 +75,7 @@ receiptFormalEichlerShimuraStillMissing =
 ------------------------------------------------------------------------
 
 targetMarkingProjection :
-  DASHI.Core.DependentRecoverableProjectionExact.DependentExactRecoverableProjection
+  Recoverable.DependentExactRecoverableProjection
     Stratified.F4StratifiedTargetState
     F4.F4FrobeniusOrbit
 targetMarkingProjection =
