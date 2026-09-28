@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact as
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119QuantitativeMomentsRound559Exact as T5
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119OS05FromMomentsRound560Exact as OS05
 import DASHI.Physics.YangMills.YangMillsPreferredWilsonWEXTSourceRound576Exact as B1
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstJetLocalizationExact as B1Source
 import DASHI.Physics.YangMills.YangMillsPreferredSameHamiltonianTransferRound577Exact as B2
 import DASHI.Physics.YangMills.YangMillsActualGroupSourceFirstCompleteRound571Exact as G1
 import DASHI.Physics.YangMills.YangMillsSameFamilyWardKernelSourceRound563Exact as H6
@@ -119,6 +120,31 @@ t5OS05ClosureAuthorityLevel =
 ------------------------------------------------------------------------
 -- B1 exact source payments.
 ------------------------------------------------------------------------
+
+-- Refined source-first B1 cut beneath the coarse R576 W1/W3 labels.
+b1IndependentNormalizedJetFamilySelectionRequired : Bool
+b1IndependentNormalizedJetFamilySelectionRequired =
+  B1Source.independentNormalizedJetFamilySelectionRequired
+
+b1SourceFirstClusterBidegree11GermLevel : ProofLevel
+b1SourceFirstClusterBidegree11GermLevel =
+  B1Source.literalSourceFirstClusterBidegree11GermLevel
+
+b1NormalizedPhysicalLogJetIsKPClusterJetSumLevel : ProofLevel
+b1NormalizedPhysicalLogJetIsKPClusterJetSumLevel =
+  B1Source.literalNormalizedPhysicalLogJetIsKPClusterJetSumLevel
+
+b1PointwiseWilsonJetLocalizationLevel : ProofLevel
+b1PointwiseWilsonJetLocalizationLevel =
+  B1Source.literalPointwiseWilsonJetLocalizationLevel
+
+b1LocalizedWilsonShellChargeSumLevel : ProofLevel
+b1LocalizedWilsonShellChargeSumLevel =
+  B1Source.literalLocalizedWilsonShellChargeSumLevel
+
+b1SourceFirstJetLocalizationCompilerLevel : ProofLevel
+b1SourceFirstJetLocalizationCompilerLevel =
+  B1Source.sourceFirstLiteralWilsonJetLocalizationCompilerLevel
 
 b1WilsonMixedLogClusterExpansionLevel : ProofLevel
 b1WilsonMixedLogClusterExpansionLevel =
