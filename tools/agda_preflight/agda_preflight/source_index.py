@@ -1118,6 +1118,7 @@ class SourceIndex:
                 len(rows),
             )
 
+        upgraded = False
         for row in rows:
             if validate_freshness:
                 path = self.root / row["path"]
@@ -1129,12 +1130,57 @@ class SourceIndex:
                     if not self._fresh(row, stat):
                         return None
 
-            decoded = []
-            for column in (
-                "top_diagnostic_json",
-                "top_fixable_diagnostic_json",
+            if row["diagnostics_invalid"]:
+                return None
+
+            top_payload = row["top_diagnostic_json"]
+            fixable_payload = row["top_fixable_diagnostic_json"]
+            if (
+                not row["diagnostics_empty"]
+                and not top_payload
             ):
-                payload = row[column]
+                diagnostic_row = self.connection.execute(
+                    "SELECT diagnostics_json FROM modules "
+                    "WHERE path = ?",
+                    (row["path"],),
+                ).fetchone()
+                if diagnostic_row is None:
+                    return None
+                try:
+                    module_diagnostics = self._decode_diagnostics(
+                        diagnostic_row
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                    KeyError,
+                    json.JSONDecodeError,
+                ):
+                    return None
+                top_payload, fixable_payload = (
+                    self._top_diagnostic_payloads(module_diagnostics)
+                )
+                self.connection.execute(
+                    "UPDATE modules SET "
+                    "top_diagnostic_json = ?, "
+                    "top_fixable_diagnostic_json = ? "
+                    "WHERE path = ?",
+                    (
+                        top_payload,
+                        fixable_payload,
+                        row["path"],
+                    ),
+                )
+                upgraded = True
+                self.profiler.count(
+                    "candidate_snapshot_rows_upgraded"
+                )
+
+            decoded = []
+            for payload in (
+                top_payload,
+                fixable_payload,
+            ):
                 if not payload:
                     decoded.append(None)
                     continue
@@ -1150,7 +1196,7 @@ class SourceIndex:
                     KeyError,
                     json.JSONDecodeError,
                 ):
-                    decoded.append(None)
+                    return None
 
             snapshot.append(
                 (
@@ -1171,6 +1217,8 @@ class SourceIndex:
                 for _, top, fixable in snapshot
             ),
         )
+        if upgraded:
+            self.connection.commit()
         return tuple(snapshot)
 
     def cached_module_candidates(
