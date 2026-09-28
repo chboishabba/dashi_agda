@@ -15,6 +15,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowABetaDrivenStateEx
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
+import DASHI.Physics.Foundations.CMP119AntigravityP3RichBrillouinLiteralPlaquetteExact as P3Rich
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
@@ -85,11 +86,19 @@ record CanonicalS4RichProjectionMaxCut
           (P3.remainder (SU2.recursion bishopRunning) zero))
         (UV.embed 0ℚ)
 
-    remainderSameLiteralInteraction :
+    richAddIsBishopAdd :
+      ∀ left right →
+      Bishop._≃_
+        (Rich.add rich left right)
+        (Bishop._+_ left right)
+
+    p3RemainderSameRichRegularPlusLiteralInteraction :
       ∀ depth →
       Bishop._≃_
         (P3.remainder (SU2.recursion bishopRunning) (suc depth))
-        (UV.embed (Literal.literalBetaInt dataSet depth))
+        (Rich.add rich
+          (Rich.regularRemainder rich depth)
+          (UV.embed (Literal.literalBetaInt dataSet depth)))
 
     literalPlaquetteRepresentsCMP109 :
       LiteralToSource.LiteralPlaquetteCMP109UVSameObject dataSet trajectory
@@ -99,32 +108,31 @@ record CanonicalS4RichProjectionMaxCut
 
 open CanonicalS4RichProjectionMaxCut public
 
-asP3LiteralSplit :
+asCanonicalRichBridge :
   ∀ {trajectory split inputs rowA smallFieldCap largeFieldCap covarianceCap
       dataSet rich}
     (package : CanonicalS4RichProjectionMaxCut
       {trajectory = trajectory} {split = split}
       inputs rowA smallFieldCap largeFieldCap covarianceCap dataSet rich) →
-  P3Literal.P3RepresentsLiteralPlaquetteSplitUVView
-    dataSet (SU2.recursion (bishopRunning package))
-asP3LiteralSplit package = record
-  { P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.addIsBishopAdd =
+  P3Rich.CanonicalRunningRichLiteralPlaquette
+    dataSet rich (bishopRunning package)
+asCanonicalRichBridge package = record
+  { P3Rich.CanonicalRunningRichLiteralPlaquette.richNormalization =
+      richNormalization package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.addIsBishopAdd =
       addIsBishopAdd package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.inverseCouplingSameLiteral =
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.richAddIsBishopAdd =
+      richAddIsBishopAdd package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.inverseCouplingSameLiteral =
       inverseCouplingSameLiteral package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.nextScaleIsUVPredecessor =
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.nextScaleIsUVPredecessor =
       nextScaleIsUVPredecessor package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.zeroTotalIncrementSame =
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.zeroTotalIncrementSame =
       zeroTotalIncrementSame package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.betaLogBlockingSameLiteralGaussian =
-      λ depth →
-        BishopP.≃-trans
-          (CanonicalRich.p3SuccessorGaussianSameRichEdgeIntegral
-            (richNormalization package) depth)
-          (Projection.scalarIntegralSameLiteralGaussian
-            (gaussianProjection package) depth)
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.remainderSameLiteralInteraction =
-      remainderSameLiteralInteraction package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.gaussianProjection =
+      gaussianProjection package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.p3RemainderSameRichRegularPlusLiteralInteraction =
+      p3RemainderSameRichRegularPlusLiteralInteraction package
   }
 
 asP3LiteralTotal :
@@ -136,7 +144,7 @@ asP3LiteralTotal :
   P3Literal.P3RepresentsLiteralPlaquetteUVView
     dataSet (SU2.recursion (bishopRunning package))
 asP3LiteralTotal package =
-  P3Literal.splitViewAsTotalView (asP3LiteralSplit package)
+  P3Rich.canonicalRunningAsLiteralTotal (asCanonicalRichBridge package)
 
 asCanonicalS4SameObjectPackage :
   ∀ {trajectory split inputs rowA smallFieldCap largeFieldCap covarianceCap
@@ -148,16 +156,13 @@ asCanonicalS4SameObjectPackage :
     {trajectory = trajectory} {split = split}
     inputs rowA smallFieldCap largeFieldCap covarianceCap
 asCanonicalS4SameObjectPackage package = record
-  { S4.CanonicalS4SameObjectPackage.betaCoordinates =
-      betaCoordinates package
-  ; S4.CanonicalS4SameObjectPackage.bishopRunning =
-      bishopRunning package
+  { S4.CanonicalS4SameObjectPackage.betaCoordinates = betaCoordinates package
+  ; S4.CanonicalS4SameObjectPackage.bishopRunning = bishopRunning package
   ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
       P3Literal.p3LiteralPlaquetteThenCMP109
         (asP3LiteralTotal package)
         (literalPlaquetteRepresentsCMP109 package)
-  ; S4.CanonicalS4SameObjectPackage.traceBoundary =
-      traceBoundary package
+  ; S4.CanonicalS4SameObjectPackage.traceBoundary = traceBoundary package
   }
 normalizedLogCoordinateRequired : Bool
 normalizedLogCoordinateRequired = false
@@ -167,6 +172,9 @@ independentP3RichGaussianWitnessRequired = false
 
 independentP3LiteralGaussianWitnessRequired : Bool
 independentP3LiteralGaussianWitnessRequired = false
+
+p3RemainderIncludesRichRegularMatching : Bool
+p3RemainderIncludesRichRegularMatching = true
 
 richRationalGaussianProjectionRequired : Bool
 richRationalGaussianProjectionRequired = true
