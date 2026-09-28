@@ -54,6 +54,76 @@ record ContinuumSchwingerSystem
 
 open ContinuumSchwingerSystem public
 
+------------------------------------------------------------------------
+-- PRE-GAP OS CORE.
+--
+-- OS4 clustering is not required to construct the Euclidean Hilbert-space
+-- representation.  Keep it out of the reconstruction input so clustering can
+-- be attached later from the physical H1/B lane on the SAME Schwinger family.
+------------------------------------------------------------------------
+
+record PreGapContinuumSchwingerSystem
+    (Observable Point Scalar : Set) : Set₁ where
+  field
+    schwingerCore : Observable → Point → Point → Scalar
+
+    OS0RegularityCore : Set
+    OS1EuclideanCovarianceCore : Set
+    OS2ReflectionPositivityCore : Set
+    OS3PermutationSymmetryCore : Set
+    OS5GrowthControlCore : Set
+
+    os0Core : OS0RegularityCore
+    os1Core : OS1EuclideanCovarianceCore
+    os2Core : OS2ReflectionPositivityCore
+    os3Core : OS3PermutationSymmetryCore
+    os5Core : OS5GrowthControlCore
+
+open PreGapContinuumSchwingerSystem public
+
+record OS4Attachment
+    {Observable Point Scalar : Set}
+    (core : PreGapContinuumSchwingerSystem Observable Point Scalar) : Set₁ where
+  field
+    OS4ClusteringAttached : Set
+    os4Attached : OS4ClusteringAttached
+
+open OS4Attachment public
+
+corePlusOS4 :
+  ∀ {Observable Point Scalar}
+    (core : PreGapContinuumSchwingerSystem Observable Point Scalar) →
+  OS4Attachment core →
+  ContinuumSchwingerSystem Observable Point Scalar
+corePlusOS4 core clustering = record
+  { ContinuumSchwingerSystem.schwinger =
+      schwingerCore core
+  ; ContinuumSchwingerSystem.OS0Regularity =
+      OS0RegularityCore core
+  ; ContinuumSchwingerSystem.OS1EuclideanCovariance =
+      OS1EuclideanCovarianceCore core
+  ; ContinuumSchwingerSystem.OS2ReflectionPositivity =
+      OS2ReflectionPositivityCore core
+  ; ContinuumSchwingerSystem.OS3PermutationSymmetry =
+      OS3PermutationSymmetryCore core
+  ; ContinuumSchwingerSystem.OS4Clustering =
+      OS4ClusteringAttached clustering
+  ; ContinuumSchwingerSystem.OS5GrowthControl =
+      OS5GrowthControlCore core
+  ; ContinuumSchwingerSystem.os0 =
+      os0Core core
+  ; ContinuumSchwingerSystem.os1 =
+      os1Core core
+  ; ContinuumSchwingerSystem.os2 =
+      os2Core core
+  ; ContinuumSchwingerSystem.os3 =
+      os3Core core
+  ; ContinuumSchwingerSystem.os4 =
+      os4Attached clustering
+  ; ContinuumSchwingerSystem.os5 =
+      os5Core core
+  }
+
 record InteractingContinuumWitness
     (Observable Point Scalar : Set)
     (system : ContinuumSchwingerSystem Observable Point Scalar) : Set₁ where
@@ -78,6 +148,22 @@ record OSReconstructionAuthority
     wightmanTheory : WightmanTheory
 
 open OSReconstructionAuthority public
+
+record PreGapOSReconstructionAuthority
+    (Observable Point Scalar : Set)
+    (system : PreGapContinuumSchwingerSystem Observable Point Scalar) : Set₁ where
+  field
+    HilbertSpaceCore : Set
+    HamiltonianCore : Set
+    VacuumCore : Set
+    WightmanTheoryCore : Set
+
+    hilbertSpaceCore : HilbertSpaceCore
+    hamiltonianCore : HamiltonianCore
+    vacuumCore : VacuumCore
+    wightmanTheoryCore : WightmanTheoryCore
+
+open PreGapOSReconstructionAuthority public
 
 record UniformClusteringData
     (Observable Point Bound : Set) : Set₁ where
@@ -147,6 +233,9 @@ assembleNontrivialPhysicalMassGap interacting gapCertificate = record
   { interacting = interacting
   ; massGap = gapCertificate
   }
+
+preGapOSReconstructionLevel : ProofLevel
+preGapOSReconstructionLevel = standardImported
 
 osReconstructionLevel : ProofLevel
 osReconstructionLevel = standardImported
