@@ -10,6 +10,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionEx
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowABetaDrivenStateExact as RowAState
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityP3SourceRecurrenceUniquenessExact as Recurrence
+import DASHI.Physics.Foundations.CMP119AntigravityP3StateForcesSourceIncrementExact as State
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
 import DASHI.Physics.YangMills.BalabanYM4QuarticResponseCanonicalChoiceExact as RowA
@@ -63,7 +64,7 @@ asCanonicalS4SameObjectPackage package = record
   { S4.CanonicalS4SameObjectPackage.betaCoordinates = betaCoordinates package
   ; S4.CanonicalS4SameObjectPackage.bishopRunning = bishopRunning package
   ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
-      DASHI.Physics.Foundations.CMP119AntigravityP3StateForcesSourceIncrementExact.asP3RepresentsSourceUVView
+      State.asP3RepresentsSourceUVView
         (Recurrence.asP3StateRepresentsSourceUV
           (recurrenceSameObject package))
   ; S4.CanonicalS4SameObjectPackage.traceBoundary = traceBoundary package
