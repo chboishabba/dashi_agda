@@ -29,11 +29,13 @@ open import Agda.Builtin.Equality using (_≡_; _≢_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (nothing)
+open import Data.Nat.Base using (_≤_)
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
+import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityDirectDPObstructionExact as Equality
@@ -160,7 +162,7 @@ candidateBlockEqualityRefutesDemandedProgress :
       (initialFor candidate)
   ≤
   Width.triple
-    (DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact.bitCardinality
+    (Bits.bitCardinality
       width) →
   CandidateFirstStepProgress
     initialFor
