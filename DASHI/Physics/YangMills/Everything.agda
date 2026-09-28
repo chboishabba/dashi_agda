@@ -675,3 +675,5 @@ import DASHI.Physics.YangMills.BalabanLiteralWilsonPathSupportLocalityExact
 import DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedJetLocalizationSourceExact
 
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineFiniteExpectationJetExact
+
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedSecondJetExpansionExact
