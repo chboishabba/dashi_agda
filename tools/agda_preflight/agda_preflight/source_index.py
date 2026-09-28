@@ -1015,25 +1015,33 @@ class SourceIndex:
         start_module, _ = identity
         rows = self.connection.execute(
             """
-            WITH RECURSIVE affected(module_name, depth) AS (
-                SELECT ?, 0
-                UNION
-                SELECT m.module_name, affected.depth + 1
-                FROM affected
-                JOIN imports i
-                  ON i.imported_module = affected.module_name
-                JOIN modules m
-                  ON m.path = i.importer_path
-            )
-            SELECT module_name, MIN(depth) AS depth
-            FROM affected
-            GROUP BY module_name
-            ORDER BY depth, module_name
-            """,
-            (start_module,),
+            SELECT m.module_name AS importer, i.imported_module AS imported
+            FROM imports i
+            JOIN modules m ON m.path = i.importer_path
+            """
         ).fetchall()
-        self.profiler.count("affected_modules", len(rows))
-        return tuple(row["module_name"] for row in rows)
+        reverse: Dict[str, Set[str]] = {}
+        for row in rows:
+            reverse.setdefault(row["imported"], set()).add(row["importer"])
+
+        order: List[str] = []
+        seen = {start_module}
+        frontier = [start_module]
+        while frontier:
+            current = sorted(frontier)
+            order.extend(current)
+            following = []
+            for module in current:
+                for consumer in sorted(reverse.get(module, ())):
+                    if consumer in seen:
+                        continue
+                    seen.add(consumer)
+                    following.append(consumer)
+            frontier = following
+
+        self.profiler.count("affected_modules", len(order))
+        return tuple(order)
+
 
     def next_diagnostic(
         self,
