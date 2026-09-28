@@ -28,6 +28,7 @@ import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonWEXTCompletionRound574E
 import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
 import DASHI.Physics.YangMills.BalabanObservableIndexedT5SourceMeaningRound403Exact as R403
+import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterJetExact as Jet
 
 
 literalWilsonMixedLogTheorem :
@@ -910,3 +911,191 @@ literalWilsonCovarianceSourceFromObservableIndexedMarkedLocalization
     translatedProductBounded
     supportDistanceIsEuclideanTime
     upperOrderClosed
+
+
+------------------------------------------------------------------------
+-- Jet-native W1.  This is the preferred exact source interface when the
+-- analytic construction exposes Taylor coefficients rather than an abstract
+-- derivative operator on arbitrary cluster functions.
+------------------------------------------------------------------------
+
+literalWilsonMixedLogFromMarkedJetExpansion :
+  ∀ {Measure Observable SourceDirection Cluster}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (insertionMeaning :
+      ∀ cutoff →
+      Cumulant.LiteralTwoSourceInsertionMeaning
+        (sourceCalculus cutoff)
+        SourceDirection)
+    (markedJetExpansion :
+      ∀ cutoff left right →
+      Jet.WilsonMarkedLogJetExpansion Cluster)
+    (literalResponseIsJetMixed :
+      ∀ cutoff left right →
+      Cumulant.literalMixedSecondLogDerivative
+        (insertionMeaning cutoff)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
+      ≡
+      Jet.mixed
+        (Jet.literalLogPartitionJet
+          (markedJetExpansion cutoff left right))) →
+  R576.PreferredWilsonMixedLogPhysicalSource dataSet laws
+literalWilsonMixedLogFromMarkedJetExpansion
+    sourceCalculus insertionMeaning markedJetExpansion
+    literalResponseIsJetMixed =
+  literalWilsonMixedLogTheorem
+    sourceCalculus
+    insertionMeaning
+    (λ cutoff left right →
+      let expansion = markedJetExpansion cutoff left right
+          locality = Jet.supportLocality expansion
+      in
+      Jet.filterTwoSupport
+        (Jet.touchesLeft locality)
+        (Jet.touchesRight locality)
+        (Jet.clusters expansion))
+    (λ cutoff left right cluster →
+      Jet.mixed
+        (Jet.clusterJet
+          (markedJetExpansion cutoff left right)
+          cluster))
+    (λ cutoff left right →
+      trans
+        (literalResponseIsJetMixed cutoff left right)
+        (Jet.mixedLogJetIsTwoSupportClusterSum
+          (markedJetExpansion cutoff left right)))
+
+literalWilsonCovarianceSourceFromObservableIndexedMarkedJets :
+  ∀ {Measure Observable Cluster Scale Volume Root}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (markedJetExpansion :
+      ∀ cutoff left right →
+      Jet.WilsonMarkedLogJetExpansion Cluster)
+    (normalizedWilsonResponseIsJetMixed :
+      ∀ cutoff left right →
+      Cumulant.mixedSecondLogDerivative
+        (sourceCalculus cutoff)
+        left right
+      ≡
+      Jet.mixed
+        (Jet.literalLogPartitionJet
+          (markedJetExpansion cutoff left right)))
+    (shellData : Shell.TraversalShellData Scale Volume Root)
+    (scaleOfCutoff : Nat → Scale)
+    (volumeOfCutoff : Nat → Volume)
+    (physicalDistance : Observable → Observable → Nat)
+    (connectingRoot : Nat → Observable → Observable → Root)
+    (ConnectingClusterMeetsBothSupports :
+      Nat → Observable → Observable → Set)
+    (shellCharge :
+      Nat → Observable → Observable → Cluster → ℚ)
+    (pointwiseWilsonJetLocalization :
+      ∀ cutoff left right cluster →
+      ∣ Jet.mixed
+          (Jet.clusterJet
+            (markedJetExpansion cutoff left right)
+            cluster) ∣
+      ≤ shellCharge cutoff left right cluster)
+    (localizedShellChargeSum :
+      ∀ cutoff left right →
+      let expansion = markedJetExpansion cutoff left right
+          locality = Jet.supportLocality expansion
+      in
+      TwoMark.sumℚ
+        (TwoMark.map
+          (shellCharge cutoff left right)
+          (Jet.filterTwoSupport
+            (Jet.touchesLeft locality)
+            (Jet.touchesRight locality)
+            (Jet.clusters expansion)))
+      ≤
+      Shell.rootedShell shellData
+        (scaleOfCutoff cutoff)
+        (volumeOfCutoff cutoff)
+        (connectingRoot cutoff left right)
+        (physicalDistance left right))
+    (timeTranslate : Observable → Nat → Observable)
+    (leftBounded :
+      ∀ observable →
+      Gram.BoundedObservable dataSet observable)
+    (translatedRightBounded :
+      ∀ observable time →
+      Gram.BoundedObservable dataSet (timeTranslate observable time))
+    (translatedProductBounded :
+      ∀ left right time →
+      Gram.BoundedObservable dataSet
+        (Gram.multiplyObservable (Gram.operations dataSet)
+          left (timeTranslate right time)))
+    (supportDistanceIsEuclideanTime :
+      ∀ left right time →
+      physicalDistance left (timeTranslate right time) ≡ time)
+    (upperOrderClosed :
+      ∀ sequence target upper →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
+      (∀ cutoff → sequence cutoff ≤ upper) →
+      target ≤ upper) →
+  R556.IndexedSourceFirstWilsonCovarianceData
+    {Measure = Measure}
+    {Observable = Observable}
+    {Scale = Scale}
+    {Volume = Volume}
+    {Root = Root}
+    dataSet
+    (R575.rationalAbsoluteCovarianceExtension laws)
+literalWilsonCovarianceSourceFromObservableIndexedMarkedJets
+    sourceCalculus markedJetExpansion normalizedWilsonResponseIsJetMixed
+    shellData scaleOfCutoff volumeOfCutoff physicalDistance connectingRoot
+    ConnectingClusterMeetsBothSupports shellCharge
+    pointwiseWilsonJetLocalization localizedShellChargeSum
+    timeTranslate leftBounded translatedRightBounded translatedProductBounded
+    supportDistanceIsEuclideanTime upperOrderClosed =
+  let
+    insertionMeaning =
+      λ cutoff → R403.canonicalObservableIndexedMeaning (sourceCalculus cutoff)
+
+    mixedLog =
+      literalWilsonMixedLogFromMarkedJetExpansion
+        sourceCalculus
+        insertionMeaning
+        markedJetExpansion
+        normalizedWilsonResponseIsJetMixed
+
+    preferred =
+      literalPreferredWilsonWEXTFromPointwiseLocalization
+        mixedLog
+        shellData
+        scaleOfCutoff
+        volumeOfCutoff
+        physicalDistance
+        connectingRoot
+        ConnectingClusterMeetsBothSupports
+        shellCharge
+        pointwiseWilsonJetLocalization
+        localizedShellChargeSum
+        timeTranslate
+        leftBounded
+        translatedRightBounded
+        translatedProductBounded
+        supportDistanceIsEuclideanTime
+        upperOrderClosed
+  in
+  R574.asR556 (R576.asR574 preferred)
