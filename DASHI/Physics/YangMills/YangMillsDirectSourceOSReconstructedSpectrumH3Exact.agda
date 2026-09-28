@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -41,17 +42,17 @@ record LiteralSelectedSpectrumIsSameOSHamiltonian
 
     sourceOSSystem :
       OS.ContinuumSchwingerSystem
-        (Top.Observable C) Point Data.Rational.Base.ℚ
+        (Top.Observable C) Point ℚ
 
     reconstruction :
       OS.OSReconstructionAuthority
-        (Top.Observable C) Point Data.Rational.Base.ℚ
+        (Top.Observable C) Point ℚ
         sourceOSSystem
 
     indexedSpectrum :
       P3.OSIndexedContinuumCovarianceSpectrum
         {SpectralObservable = Top.Observable C}
-        {Energy = Data.Rational.Base.ℚ}
+        {Energy = ℚ}
         reconstruction
         (Direct.dataSet direct)
         (Direct.extension direct)
@@ -63,7 +64,7 @@ record LiteralSelectedSpectrumIsSameOSHamiltonian
 
     sourceSystemToLiteralSchwinger :
       OS.ContinuumSchwingerSystem
-        (Top.Observable C) Point Data.Rational.Base.ℚ →
+        (Top.Observable C) Point ℚ →
       Top.SchwingerFamily C
 
     sourceOSSystemIsLiteralSchwinger :
