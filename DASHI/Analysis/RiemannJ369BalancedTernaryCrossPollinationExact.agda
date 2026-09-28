@@ -42,6 +42,7 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact as Dyadic
+import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
 
 ------------------------------------------------------------------------
 -- 1. Typed carrier counts.
@@ -156,19 +157,19 @@ puncturedKernel4FiniteCountIs80 =
 ------------------------------------------------------------------------
 
 abLocalChartIsCanonicalKernel4 :
-  (section : DASHI.Reasoning.Trialectic369DescentNaturalityExact.ABSection) ->
+  (section : Descent.ABSection) ->
   Dyadic.kernel4ToAB (Dyadic.abToKernel4 section) ≡ section
 abLocalChartIsCanonicalKernel4 =
   Dyadic.abKernelRoundTrip
 
 bcLocalChartIsCanonicalKernel4 :
-  (section : DASHI.Reasoning.Trialectic369DescentNaturalityExact.BCSection) ->
+  (section : Descent.BCSection) ->
   Dyadic.kernel4ToBC (Dyadic.bcToKernel4 section) ≡ section
 bcLocalChartIsCanonicalKernel4 =
   Dyadic.bcKernelRoundTrip
 
 caLocalChartIsCanonicalKernel4 :
-  (section : DASHI.Reasoning.Trialectic369DescentNaturalityExact.CASection) ->
+  (section : Descent.CASection) ->
   Dyadic.kernel4ToCA (Dyadic.caToKernel4 section) ≡ section
 caLocalChartIsCanonicalKernel4 =
   Dyadic.caKernelRoundTrip
@@ -248,4 +249,4 @@ canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary =
     true true true true true true true
     true true true
     true true
-    true false false
+    false false
