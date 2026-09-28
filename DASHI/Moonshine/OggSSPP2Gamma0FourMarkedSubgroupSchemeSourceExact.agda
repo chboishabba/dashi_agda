@@ -40,6 +40,7 @@ import DASHI.Moonshine.OggSSPP2F4DependentMarkedCoverExact as TargetMark
 import DASHI.Moonshine.OggSSPP2BalancedTernaryPuncturedPlaneExact as Plane
 import DASHI.Moonshine.OggSSPP2BadPrimeLevelStructureBoundaryExact as BadPrime
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPP2Gamma0FourCanonicalRawFlagExact as RawFlag
 
 ------------------------------------------------------------------------
 -- 1. Abstract finite-flat Gamma_0(4) arithmetic carrier.
@@ -251,9 +252,7 @@ oneOneEightCountDoesNotCreateArithmeticRecognition ()
 ------------------------------------------------------------------------
 
 data Gamma0FourSourceResidual : Set where
-  missingFiniteFlatCyclicOrderFourSubgroup :
-    Gamma0FourSourceResidual
-  missingOrderTwoSubflag :
+  missingConcreteFiniteFlatCanonicalFlagRealization :
     Gamma0FourSourceResidual
   missingArithmeticFrobeniusTransport :
     Gamma0FourSourceResidual
@@ -270,6 +269,7 @@ record Gamma0FourMarkedSubgroupSchemeSourceBoundary : Set where
   field
     badPrimeModuliBoundaryConsumed : Bool
     gamma0TypedAsSubgroupSchemeDatum : Bool
+    canonicalRawKerFFlagOwned : Bool
     orderTwoSubflagRequired : Bool
     fullDrinfeldBasisRejectedAsAutomaticSubstitute : Bool
     gamma1PointRejectedAsAutomaticSubstitute : Bool
@@ -284,6 +284,6 @@ canonicalGamma0FourMarkedSubgroupSchemeSourceBoundary :
   Gamma0FourMarkedSubgroupSchemeSourceBoundary
 canonicalGamma0FourMarkedSubgroupSchemeSourceBoundary =
   gamma0-four-marked-subgroup-scheme-source-boundary
-    true true true true true true true
+    true true true true true true true true
     false false false
-    missingFiniteFlatCyclicOrderFourSubgroup
+    missingConcreteFiniteFlatCanonicalFlagRealization
