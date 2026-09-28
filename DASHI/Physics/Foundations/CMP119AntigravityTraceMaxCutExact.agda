@@ -1120,3 +1120,85 @@ s4NewScalarInequalityAnalysisRequired = false
 s4NewScalarInequalityAnalysisRequiredIsFalse :
   s4NewScalarInequalityAnalysisRequired ≡ false
 s4NewScalarInequalityAnalysisRequiredIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- SEPTEMBER-28 SAME-OBJECT ORIENTATION RECUT
+------------------------------------------------------------------------
+
+literalPlaquetteCMP109UVOrientationCompilerClosed : Bool
+literalPlaquetteCMP109UVOrientationCompilerClosed = true
+
+literalPlaquetteCMP109UVOrientationCompilerClosedIsTrue :
+  literalPlaquetteCMP109UVOrientationCompilerClosed ≡ true
+literalPlaquetteCMP109UVOrientationCompilerClosedIsTrue = refl
+
+naivePlaquetteAndCMP109SameSuccessorIdentificationAllowed : Bool
+naivePlaquetteAndCMP109SameSuccessorIdentificationAllowed = false
+
+naivePlaquetteAndCMP109SameSuccessorIdentificationAllowedIsFalse :
+  naivePlaquetteAndCMP109SameSuccessorIdentificationAllowed ≡ false
+naivePlaquetteAndCMP109SameSuccessorIdentificationAllowedIsFalse = refl
+
+literalPlaquetteBetaToRepositorySplitCompilerClosed : Bool
+literalPlaquetteBetaToRepositorySplitCompilerClosed = true
+
+literalPlaquetteBetaToRepositorySplitCompilerClosedIsTrue :
+  literalPlaquetteBetaToRepositorySplitCompilerClosed ≡ true
+literalPlaquetteBetaToRepositorySplitCompilerClosedIsTrue = refl
+
+literalPlaquetteSplitToTerminalHistoryCompilerClosed : Bool
+literalPlaquetteSplitToTerminalHistoryCompilerClosed = true
+
+literalPlaquetteSplitToTerminalHistoryCompilerClosedIsTrue :
+  literalPlaquetteSplitToTerminalHistoryCompilerClosed ≡ true
+literalPlaquetteSplitToTerminalHistoryCompilerClosedIsTrue = refl
+
+literalTerminalHistoryToCMP122DensityCompilerClosed : Bool
+literalTerminalHistoryToCMP122DensityCompilerClosed = true
+
+literalTerminalHistoryToCMP122DensityCompilerClosedIsTrue :
+  literalTerminalHistoryToCMP122DensityCompilerClosed ≡ true
+literalTerminalHistoryToCMP122DensityCompilerClosedIsTrue = refl
+
+parallelBetaSplitOrHistoryStillRequired : Bool
+parallelBetaSplitOrHistoryStillRequired = false
+
+parallelBetaSplitOrHistoryStillRequiredIsFalse :
+  parallelBetaSplitOrHistoryStillRequired ≡ false
+parallelBetaSplitOrHistoryStillRequiredIsFalse = refl
+
+postHocRepositoryCapEqualityStillRequiredOnPreferredS4Route : Bool
+postHocRepositoryCapEqualityStillRequiredOnPreferredS4Route = false
+
+postHocRepositoryCapEqualityStillRequiredOnPreferredS4RouteIsFalse :
+  postHocRepositoryCapEqualityStillRequiredOnPreferredS4Route ≡ false
+postHocRepositoryCapEqualityStillRequiredOnPreferredS4RouteIsFalse = refl
+
+postHocPiNormalizationEqualityStillRequiredOnPreferredS4Route : Bool
+postHocPiNormalizationEqualityStillRequiredOnPreferredS4Route = false
+
+postHocPiNormalizationEqualityStillRequiredOnPreferredS4RouteIsFalse :
+  postHocPiNormalizationEqualityStillRequiredOnPreferredS4Route ≡ false
+postHocPiNormalizationEqualityStillRequiredOnPreferredS4RouteIsFalse = refl
+
+p3BishopRunningRecursionRequiredForPreferredS4NoGo : Bool
+p3BishopRunningRecursionRequiredForPreferredS4NoGo = false
+
+p3BishopRunningRecursionRequiredForPreferredS4NoGoIsFalse :
+  p3BishopRunningRecursionRequiredForPreferredS4NoGo ≡ false
+p3BishopRunningRecursionRequiredForPreferredS4NoGoIsFalse = refl
+
+literalPlaquetteCMP109CoordinateWeldStillRequired : Bool
+literalPlaquetteCMP109CoordinateWeldStillRequired = true
+
+literalPlaquetteCMP109CoordinateWeldStillRequiredIsTrue :
+  literalPlaquetteCMP109CoordinateWeldStillRequired ≡ true
+literalPlaquetteCMP109CoordinateWeldStillRequiredIsTrue = refl
+
+literalCouplingInverseSquareAndTerminalDataStillRequired : Bool
+literalCouplingInverseSquareAndTerminalDataStillRequired = true
+
+literalCouplingInverseSquareAndTerminalDataStillRequiredIsTrue :
+  literalCouplingInverseSquareAndTerminalDataStillRequired ≡ true
+literalCouplingInverseSquareAndTerminalDataStillRequiredIsTrue = refl
