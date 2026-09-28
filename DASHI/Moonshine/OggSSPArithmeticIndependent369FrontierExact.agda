@@ -96,7 +96,11 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --       giving defects 46-36=10 and 20-18=2;
 --   * generalized moonshine supplies a sourced centralizer-action/modular-trace
 --     common-object precedent;
---   * inhabit SOTAMonsterLocalBridgeAuthority (strictly stronger than the older
+--   * Aricheta proves the supersingular-level <-> Monster-centralizer Fricke
+--     bridge only for p not dividing N and explicitly leaves p|N open;
+--   * our 2B/3B lanes are exactly the excluded diagonal N=p=2,3;
+--   * inhabit SOTAMonsterLocalBridgeAuthority, now requiring a bad-level
+--     Aricheta centralizer extension (strictly stronger than the older
 --     SOTATerminalFourthTermAuthority);
 --   * p=2 must restore full five-sector information AND retain tangent/character
 --     data: centralizer depth alone provably cannot determine the inertia-RR
@@ -173,6 +177,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicSOTATerminalFourthTermRefinement
 import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact as LocalCentralizer
 import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExact as GMBridge
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExact as SOTALocalBridge
+import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as ArichetaBadLevel
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -237,6 +242,15 @@ inhabitedBoundary :
   Inhabited.ArithmeticTo369InhabitedBoundary
 inhabitedBoundary =
   Inhabited.canonicalArithmeticTo369InhabitedBoundary
+
+------------------------------------------------------------------------
+-- 1b. Direct literature localization of the terminal centralizer wall.
+------------------------------------------------------------------------
+
+arichetaBadLevelBoundary :
+  ArichetaBadLevel.ArichetaBadLevelDiagonalBoundary
+arichetaBadLevelBoundary =
+  ArichetaBadLevel.canonicalArichetaBadLevelDiagonalBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
