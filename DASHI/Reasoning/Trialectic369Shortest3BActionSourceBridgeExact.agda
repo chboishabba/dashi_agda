@@ -34,20 +34,8 @@ import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as Ker
 import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selected
 
 ------------------------------------------------------------------------
--- 1. Reuse the exact selected phase source carried by the shortest frontier.
-------------------------------------------------------------------------
-
-selectedPhaseSource :
-  ∀ {Monster K : Set} ->
-  Shortest.Shortest3BFrontierSource Monster K ->
-  _
-selectedPhaseSource source =
-  Selected.phaseSource
-    (KernelWeld.selectedSource
-      (Shortest.attachment source))
-
-------------------------------------------------------------------------
--- 2. Compile the single action producer.
+-- 1. Compile the single action producer directly from the selected phase
+--    source already carried by the shortest frontier.
 ------------------------------------------------------------------------
 
 shortestToSingleActionProducer :
@@ -58,11 +46,15 @@ shortestToSingleActionProducer {Monster} source =
   record
     { State =
         Phase.VOACarrier
-          (Phase.bridge (selectedPhaseSource source))
+          (Phase.bridge (Selected.phaseSource
+            (KernelWeld.selectedSource
+              (Shortest.attachment source))))
     ; Normalizer = Monster
     ; normalizerAction =
         Phase.normalizerActionFromVOA
-          (selectedPhaseSource source)
+          (Selected.phaseSource
+            (KernelWeld.selectedSource
+              (Shortest.attachment source)))
     ; recognition =
         Shortest.recognition source
     }
