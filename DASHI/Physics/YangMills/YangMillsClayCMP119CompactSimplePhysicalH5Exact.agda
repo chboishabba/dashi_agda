@@ -180,6 +180,18 @@ record CMP119CompactSimplePhysicalH5
     literalToClassified :
       G → Compact.CompactSimpleLieGroup
 
+    quantitativePackageMeansLiteralCompactSimple :
+      ∀ group →
+      Compact.QuantitativeCompactLiePackage
+        ℚ LieElement GroupElement (literalToClassified group) →
+      Top.IsCompactSimple S group
+
+    classificationMeansParameterizationPreserved :
+      (∀ group →
+        Compact.QuantitativeCompactLiePackage
+          ℚ LieElement GroupElement (literalToClassified group)) →
+      Top.CompactSimpleParameterizationPreserved S
+
     continuePhysicalPackage :
       (group : G) →
       (quantitative :
@@ -198,6 +210,47 @@ record CMP119CompactSimplePhysicalH5
         quantitative
 
 open CMP119CompactSimplePhysicalH5 public
+
+
+literalCompactSimple :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness LieElement GroupElement
+      sequenceLimit limitLaws quotient division S h2 covarianceLaws}
+    (h5 :
+      CMP119CompactSimplePhysicalH5
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        LieElement GroupElement
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S h2 covarianceLaws)
+    group →
+  Top.IsCompactSimple S group
+literalCompactSimple h5 group =
+  quantitativePackageMeansLiteralCompactSimple h5 group
+    (Compact.compactSimpleHasQuantitativePackage
+      (authority h5) (literalToClassified h5 group))
+
+literalCompactSimpleParameterizationPreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness LieElement GroupElement
+      sequenceLimit limitLaws quotient division S h2 covarianceLaws}
+    (h5 :
+      CMP119CompactSimplePhysicalH5
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        LieElement GroupElement
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S h2 covarianceLaws) →
+  Top.CompactSimpleParameterizationPreserved S
+literalCompactSimpleParameterizationPreserved h5 =
+  classificationMeansParameterizationPreserved h5
+    (λ group →
+      Compact.compactSimpleHasQuantitativePackage
+        (authority h5) (literalToClassified h5 group))
 
 physicalPackageForLiteralGroup :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
