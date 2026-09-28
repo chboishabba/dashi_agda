@@ -29,6 +29,8 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact a
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalRadiusToCommonDomainRound114Exact as R114
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact as R338
 import DASHI.Physics.YangMills.BalabanCMP116SelectedJPairDomainWeldRound334Exact as R334
+import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as Source
+import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 
 canonicalTwoWilsonPairDomainWeld :
   ∀ {Measure Observable}
@@ -54,12 +56,12 @@ canonicalTwoWilsonPairAdmissible :
     {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
     (source : R338.CanonicalCommonDomainCMP116Source base demands)
     cutoff left right →
-  R334.Source.AdmissibleSourcePair
+  Source.AdmissibleSourcePair
     (R338.canonicalSourceBuildsGenericPublishedSource source)
     (R318.scaleOf base cutoff)
     (R318.volumeOf base cutoff)
-    (R334.Cumulant.sourceDirectionOf (R318.meaning base) left)
-    (R334.Cumulant.sourceDirectionOf (R318.meaning base) right)
+    (Cumulant.sourceDirectionOf (R318.meaning base) left)
+    (Cumulant.sourceDirectionOf (R318.meaning base) right)
 canonicalTwoWilsonPairAdmissible source =
   R334.selectedPairAdmissibleFromCommonDomain
     (canonicalTwoWilsonPairDomainWeld source)
