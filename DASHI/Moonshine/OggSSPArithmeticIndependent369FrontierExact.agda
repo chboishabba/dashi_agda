@@ -526,6 +526,7 @@ record ArithmeticIndependent369Frontier : Set where
     greenRingSectorSpeciesAuthorityPaid : Bool
     greenRingToPreferredDVRPaymentAdapterPaid : Bool
     greenRingToPreferredCorrectedValuationAdapterPaid : Bool
+    greenRingToGlobalDVRBrauerAuthorityAdapterPaid : Bool
     pbLocalizationSourceCoverageAuditPaid : Bool
     carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
     uranoTheoryDeterminesSectorLengths : Bool
@@ -678,6 +679,7 @@ canonicalArithmeticIndependent369Frontier =
     ; greenRingSectorSpeciesAuthorityPaid = false
     ; greenRingToPreferredDVRPaymentAdapterPaid = true
     ; greenRingToPreferredCorrectedValuationAdapterPaid = true
+    ; greenRingToGlobalDVRBrauerAuthorityAdapterPaid = true
     ; pbLocalizationSourceCoverageAuditPaid = true
     ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
     ; uranoTheoryDeterminesSectorLengths = false
