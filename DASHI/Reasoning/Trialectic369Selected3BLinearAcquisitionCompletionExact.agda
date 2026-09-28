@@ -36,6 +36,9 @@ open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as Acquisition
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as Composition
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selected
+import DASHI.Moonshine.Base369Monster3BVOAActionPhaseAdapterBidiExact as Phase
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 import DASHI.Wikimedia.IbrahimMonster3BLinearZetaSectorRestrictionExact as LinearZeta
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as WrongType
@@ -107,9 +110,9 @@ completedNormalizerMonsterActionWeld =
 selectedKernelWeldIsAcquisitionWeld :
   ∀ {Monster K}
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Composition.KernelSame.Selected.weld
-    (Composition.KernelSame.selectedSource
-      (Composition.KernelSame.attachment
+  Selected.weld
+    (KernelSame.selectedSource
+      (KernelSame.attachment
         (Composition.kernelRecognizedSameElementAttachment
           (sameElementComposition completion))))
   ≡
@@ -121,7 +124,7 @@ selectedKernelWeldIsAcquisitionWeld completion =
 compiledProducerIsAcquisitionProducer :
   ∀ {Monster K}
     (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Composition.Phase.singleActionProducerFromVOA
+  Phase.singleActionProducerFromVOA
     (Composition.recognizedActionSourceFromSameElement
       (Composition.selectedRecognizedFromKernel
         (Composition.kernelRecognizedSameElementAttachment
