@@ -39,6 +39,7 @@ open import Data.Nat.Base using (_≤_; _∸_)
 import Data.Nat.Properties as NatP
 open import Data.Rational.Base using (ℚ; 1ℚ; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Data.Product.Base using (proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
