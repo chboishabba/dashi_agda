@@ -145,6 +145,12 @@ module SeparatedFullCompanionWall
     helicalScalars =
       Base.Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.S
 
+    projectorLaws =
+      Base.Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.L
+
+    halfCalibration =
+      Base.Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.H
+
     transverse = B.Live.P.Base.Base.NestedAt.allModeTransverse
 
     W = R798.separatedWeight F
