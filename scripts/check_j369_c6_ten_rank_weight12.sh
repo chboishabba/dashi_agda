@@ -244,6 +244,7 @@ rh_ssp15_targets=(
   DASHI/Analysis/RiemannSSP15ChosenGridTransversalityExact.agda
   DASHI/Analysis/RiemannSSP15FilteredProvenanceCapstoneExact.agda
   DASHI/Analysis/RiemannSSP15RoleCMContingencyExact.agda
+  DASHI/Analysis/RiemannSSP15ProducerMarkedSignedFRACTRANExact.agda
 )
 
 for target in "${rh_ssp15_targets[@]}"; do
@@ -290,3 +291,10 @@ grep -q '138153858e329469048175fcdeeaf75c182078be' "$rh_ssp15_donor_target"
 grep -q 'quarticFourAtomic_primitive_integer_kernel' "$rh_ssp15_donor_target"
 grep -q 'quarticFourAtomic_depth_five_block_kernel' "$rh_ssp15_donor_target"
 grep -q 'exactHeadVerifierObservedIsFalse' "$rh_ssp15_donor_target"
+
+
+grep -q 'producerMarkedHyperformLane' "${rh_ssp15_targets[6]}"
+grep -q 'originRoleHyperformOrientationInverse' "${rh_ssp15_targets[6]}"
+grep -q 'jRoleProgramIsEmpty' "${rh_ssp15_targets[6]}"
+grep -q 'jAllExecutionEffectsCoincide' "${rh_ssp15_targets[6]}"
+grep -q 'producerMarkedSeedReopensRoleCode' "${rh_ssp15_targets[6]}"
