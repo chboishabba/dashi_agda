@@ -679,5 +679,5 @@ canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary =
   trialectic-369-selected3b-linear-acquisition-completion-boundary
     true true true true
     true true true true true true true true
-    true true true true true true
+    true true true true true true true true
     false false false false
