@@ -29,6 +29,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoun
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityResidualWidthWitnessExact as EqualityWidth
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 
 ------------------------------------------------------------------------
 -- Dependent root carrier.
@@ -107,7 +108,7 @@ liveBlockEqualityStateLowerBound :
     (run : DirectDP.DirectDPChargedConstructionRun state) →
   Bits.bitCardinality width
   ≤
-  DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact.stateCount
+  Candidate.stateCount
     (DirectDP.candidate run)
 liveBlockEqualityStateLowerBound realization run =
   DirectDP.directDPResidualWidthBelowStateCount
