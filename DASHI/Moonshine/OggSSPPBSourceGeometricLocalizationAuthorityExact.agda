@@ -36,6 +36,8 @@ import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2Geom
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3Geom
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Sector
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3Sector
 import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as Bridge
 import DASHI.Moonshine.OggSSPSmallCharacteristicJointCorrectionCutsetExact as Joint
 import DASHI.Moonshine.OggSSPSmallCharacteristicFourthTermExtensionExact as Fourth
@@ -123,6 +125,137 @@ p3LocalizedLengthIsSemistableMultiplicity :
 p3LocalizedLengthIsSemistableMultiplicity A =
   Green.p3LengthMatchesSemistableLocalMultiplicity
     (greenSpecies A)
+
+------------------------------------------------------------------------
+-- 2b. Exact source-piece partition equations forced by a joint localization.
+------------------------------------------------------------------------
+
+p2UranoPieceLengthSumIsGeometricDepth :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  TwoB.sumSourcePieceLengths
+    (TwoB.sourcePieces (twoBSourceCompatibility A))
+    (TwoB.sectorSourcePieces
+      (twoBSourceCompatibility A)
+      sector)
+  ≡
+  P2Geom.sectorIsotropyDenominatorTwoAdicDepth sector
+p2UranoPieceLengthSumIsGeometricDepth A sector =
+  trans
+    (sym
+      (TwoB.sectorLengthIsSumOfUranoSourcePieceLengths
+        (twoBSourceCompatibility A)
+        sector))
+    (p2LocalizedLengthIsStackIsotropyDepth A sector)
+
+p3CarnahanPieceLengthSumIsSemistableMultiplicity :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  (sector : Preferred.Sector Preferred.p3PreferredPresentation) ->
+  ThreeB.sumSourcePieceLengths
+    (ThreeB.sourcePieces (threeBSourceCompatibility A))
+    (ThreeB.sectorSourcePieces
+      (threeBSourceCompatibility A)
+      sector)
+  ≡
+  P3Geom.p3LocalGeometricMultiplicity sector
+p3CarnahanPieceLengthSumIsSemistableMultiplicity A sector =
+  trans
+    (sym
+      (ThreeB.sectorLengthIsSumOfCarnahanSourcePieceLengths
+        (threeBSourceCompatibility A)
+        sector))
+    (p3LocalizedLengthIsSemistableMultiplicity A sector)
+
+p2IdentitySectorSourceLengthIsThree :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  TwoB.sumSourcePieceLengths
+    (TwoB.sourcePieces (twoBSourceCompatibility A))
+    (TwoB.sectorSourcePieces
+      (twoBSourceCompatibility A)
+      P2Sector.identityInertiaOrbit)
+  ≡ 3
+p2IdentitySectorSourceLengthIsThree A =
+  p2UranoPieceLengthSumIsGeometricDepth
+    A
+    P2Sector.identityInertiaOrbit
+
+p2MinusOneSectorSourceLengthIsThree :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  TwoB.sumSourcePieceLengths
+    (TwoB.sourcePieces (twoBSourceCompatibility A))
+    (TwoB.sectorSourcePieces
+      (twoBSourceCompatibility A)
+      P2Sector.centralMinusOneInertiaOrbit)
+  ≡ 3
+p2MinusOneSectorSourceLengthIsThree A =
+  p2UranoPieceLengthSumIsGeometricDepth
+    A
+    P2Sector.centralMinusOneInertiaOrbit
+
+p2OrderFourSectorSourceLengthIsTwo :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  TwoB.sumSourcePieceLengths
+    (TwoB.sourcePieces (twoBSourceCompatibility A))
+    (TwoB.sectorSourcePieces
+      (twoBSourceCompatibility A)
+      P2Sector.orderFourInertiaOrbit)
+  ≡ 2
+p2OrderFourSectorSourceLengthIsTwo A =
+  p2UranoPieceLengthSumIsGeometricDepth
+    A
+    P2Sector.orderFourInertiaOrbit
+
+p2OrderThreeSectorSourceLengthIsOne :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  TwoB.sumSourcePieceLengths
+    (TwoB.sourcePieces (twoBSourceCompatibility A))
+    (TwoB.sectorSourcePieces
+      (twoBSourceCompatibility A)
+      P2Sector.orderThreePairInertiaOrbit)
+  ≡ 1
+p2OrderThreeSectorSourceLengthIsOne A =
+  p2UranoPieceLengthSumIsGeometricDepth
+    A
+    P2Sector.orderThreePairInertiaOrbit
+
+p2OrderSixSectorSourceLengthIsOne :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  TwoB.sumSourcePieceLengths
+    (TwoB.sourcePieces (twoBSourceCompatibility A))
+    (TwoB.sectorSourcePieces
+      (twoBSourceCompatibility A)
+      P2Sector.orderSixPairInertiaOrbit)
+  ≡ 1
+p2OrderSixSectorSourceLengthIsOne A =
+  p2UranoPieceLengthSumIsGeometricDepth
+    A
+    P2Sector.orderSixPairInertiaOrbit
+
+p3NodeSectorSourceLengthIsOne :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  ThreeB.sumSourcePieceLengths
+    (ThreeB.sourcePieces (threeBSourceCompatibility A))
+    (ThreeB.sectorSourcePieces
+      (threeBSourceCompatibility A)
+      P3Sector.nodeOrbit)
+  ≡ 1
+p3NodeSectorSourceLengthIsOne A =
+  p3CarnahanPieceLengthSumIsSemistableMultiplicity
+    A
+    P3Sector.nodeOrbit
+
+p3BranchSectorSourceLengthIsOne :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  ThreeB.sumSourcePieceLengths
+    (ThreeB.sourcePieces (threeBSourceCompatibility A))
+    (ThreeB.sectorSourcePieces
+      (threeBSourceCompatibility A)
+      P3Sector.branchOrbit)
+  ≡ 1
+p3BranchSectorSourceLengthIsOne A =
+  p3CarnahanPieceLengthSumIsSemistableMultiplicity
+    A
+    P3Sector.branchOrbit
 
 ------------------------------------------------------------------------
 -- 3. Downstream adapters.
@@ -281,6 +414,9 @@ record PBSourceGeometricLocalizationBoundary : Set where
     sameLocalizationAcrossRequirementsRequired : Bool
     p2GeometricLengthLawDerived : Bool
     p3GeometricLengthLawDerived : Bool
+    sourcePiecePartitionLengthEquationsDerived : Bool
+    explicitP2ThreeThreeTwoOneOneSourceSumsDerived : Bool
+    explicitP3OneOneSourceSumsDerived : Bool
     preferredDVRAdapterOwned : Bool
     preferredCorrectedValuationAdapterOwned : Bool
     globalDVRBrauerAdapterOwned : Bool
@@ -296,4 +432,4 @@ canonicalPBSourceGeometricLocalizationBoundary :
   PBSourceGeometricLocalizationBoundary
 canonicalPBSourceGeometricLocalizationBoundary =
   pb-source-geometric-localization-boundary
-    true true true true true true true true true true true true true false false true
+    true true true true true true true true true true true true true true true true false false true
