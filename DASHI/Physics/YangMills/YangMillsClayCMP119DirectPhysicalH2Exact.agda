@@ -24,6 +24,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMomentSourceRound581Exact as R581
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as OSR
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralAExact as LiteralA
@@ -64,7 +65,7 @@ record CMP119DirectPhysicalH2
     -- projective Prokhorov are stronger audit producers, not H2 prerequisites.
     --------------------------------------------------------------------
     finiteOSSource :
-      R462.PublishedFiniteOSSource
+      R581.PublishedFiniteOSMomentSource
         G X Configuration Position CurvaturePolynomial LocalOperator
         OPECoefficient StressTensor Hilbert Hamiltonian Vector
         EuclideanAction Permutation
@@ -78,7 +79,8 @@ record CMP119DirectPhysicalH2
       {sequenceLimit = sequenceLimit}
       limitLaws quotient division S
   osInputs =
-    R462.asPinnedOSAxiomInputs finiteOSSource
+    R462.asPinnedOSAxiomInputs
+      (R581.asPublishedFiniteOSSource finiteOSSource)
 
   field
     reconstruction :
@@ -254,7 +256,7 @@ directCMP119H2ObjectConstructionLevel = machineChecked
 -- audit/fallback producers and are no longer prerequisites of this H2 ABI.
 directCMP119H2PreferredFiniteOSSourceLevel : ProofLevel
 directCMP119H2PreferredFiniteOSSourceLevel =
-  R462.literalRound462PublishedFiniteOSApplicationLevel
+  R581.literalRound581PublishedFiniteOSMomentSourceLevel
 
 directCMP119H2PhysicalInstantiationLevel : ProofLevel
 directCMP119H2PhysicalInstantiationLevel = conditional
