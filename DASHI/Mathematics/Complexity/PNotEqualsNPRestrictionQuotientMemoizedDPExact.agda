@@ -22,7 +22,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPRestrictionQuotientMemoizedDPExa
 -- quotientTruthAtDepth value.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Fin.Base using (Fin)
@@ -31,6 +31,7 @@ open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
 import DASHI.Mathematics.Complexity.PNotEqualsNPRestrictionQuotientDynamicProgrammingExact as DP
 
@@ -117,10 +118,10 @@ advanceTable quotient previous =
       SAT.orBool
         (lookupTable previous
           (Quotient.step quotient state
-            Agda.Builtin.Bool.false))
+            false))
         (lookupTable previous
           (Quotient.step quotient state
-            Agda.Builtin.Bool.true)))
+            true)))
 
 ------------------------------------------------------------------------
 -- Materialized table at one depth.
@@ -173,11 +174,11 @@ memoLookupExact quotient labels (suc depth) state =
           (lookupTable
             (memoTableAtDepth quotient labels depth)
             (Quotient.step quotient current
-              Agda.Builtin.Bool.false))
+              false))
           (lookupTable
             (memoTableAtDepth quotient labels depth)
             (Quotient.step quotient current
-              Agda.Builtin.Bool.true)))
+              true)))
       state)
     (cong₂
       SAT.orBool
@@ -186,13 +187,13 @@ memoLookupExact quotient labels (suc depth) state =
         labels
         depth
         (Quotient.step quotient state
-          Agda.Builtin.Bool.false))
+          false))
       (memoLookupExact
         quotient
         labels
         depth
         (Quotient.step quotient state
-          Agda.Builtin.Bool.true)))
+          true)))
 
 ------------------------------------------------------------------------
 -- Typed construction trace with exact cell-update charge.
@@ -308,7 +309,7 @@ memoizedRootTruth
       rootVariables)
     (Quotient.classify
       quotient
-      DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact.restrictionRoot)
+      Family.restrictionRoot)
 
 memoizedRootTruthExact :
   ∀ {rootVariables : Nat}
@@ -324,7 +325,7 @@ memoizedRootTruthExact :
     rootVariables
     (Quotient.classify
       quotient
-      DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact.restrictionRoot)
+      Family.restrictionRoot)
 memoizedRootTruthExact
     {rootVariables}
     quotient
@@ -335,7 +336,7 @@ memoizedRootTruthExact
     rootVariables
     (Quotient.classify
       quotient
-      DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact.restrictionRoot)
+      Family.restrictionRoot)
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
