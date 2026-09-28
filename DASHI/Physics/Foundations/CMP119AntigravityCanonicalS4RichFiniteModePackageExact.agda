@@ -6,7 +6,6 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import Real as Bishop
-import RealProperties as BishopP
 
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinUVEdgeExact as RichNorm
@@ -15,6 +14,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageEx
 import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConstructorExact as Constructor
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteModePlaquetteBetaSameObjectExact as FinitePlaquette
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
+import DASHI.Physics.Foundations.CMP119AntigravityP3RichBrillouinLiteralPlaquetteExact as P3Rich
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinFiniteModeGaussianProjectionExact as RichFinite
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
@@ -30,17 +30,17 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- PREFERRED S4 PACKAGE THROUGH THE FINITE-MODE GAUSSIAN OWNER
+-- PREFERRED S4 PACKAGE THROUGH THE EXISTING BRILLOUIN SHELL
 --
--- A single RichBrillouinFiniteModeGaussianSameObject already contains the
--- componentwise finite-mode/plaqueette weld.  From it we derive:
+-- The repository already owns the universal analytic shell theorem.  The rich
+-- finite-mode same-object package identifies the FULL one-loop rich
+-- coefficient with finite-mode/plaqueette beta_Z.  P3 betaLogBlocking is only
+-- the shell.  Hence P3 remainder must carry:
 --
---   rich shell -> rational plaquette beta_Z,
---   source beta -> literal plaquette total coefficient,
---   literal plaquette -> CMP109 UV history.
+--   rich regular one-loop matching + literal finite-g betaInt.
 --
--- Thus neither gaussianProjection nor literalPlaquetteRepresentsCMP109 is an
--- independent caller input on this route.
+-- This package keeps that decomposition explicit and compiles the TOTAL
+-- increment to the existing CMP109 same-object history.
 ------------------------------------------------------------------------
 
 coefficientWeld :
@@ -92,6 +92,12 @@ record CanonicalS4RichFiniteModeInputs
         (P3.add (SU2.recursion bishopRunning) left right)
         (Bishop._+_ left right)
 
+    richAddIsBishopAdd :
+      ∀ left right →
+      Bishop._≃_
+        (Rich.add rich left right)
+        (Bishop._+_ left right)
+
     inverseCouplingSameLiteral :
       ∀ depth →
       Bishop._≃_
@@ -109,11 +115,13 @@ record CanonicalS4RichFiniteModeInputs
           (P3.remainder (SU2.recursion bishopRunning) zero))
         (UV.embed 0ℚ)
 
-    remainderSameLiteralInteraction :
+    p3RemainderSameRichRegularPlusLiteralInteraction :
       ∀ depth →
       Bishop._≃_
         (P3.remainder (SU2.recursion bishopRunning) (suc depth))
-        (UV.embed (Literal.literalBetaInt (dataSet sameObject) depth))
+        (Rich.add rich
+          (Rich.regularRemainder rich depth)
+          (UV.embed (Literal.literalBetaInt (dataSet sameObject) depth)))
 
     traceBoundary : SU2.CanonicalBishopSU2TraceBoundary
 
@@ -133,7 +141,7 @@ gaussianProjection :
 gaussianProjection {sameObject = sameObject} package =
   RichFinite.asRichBrillouinRationalGaussianProjection sameObject
 
-asP3LiteralSplit :
+asCanonicalRichBridge :
   ∀ {trajectory split Mode Atom finiteMode oneLoop remainder rich
       sameObject inputs rowA smallFieldCap largeFieldCap covarianceCap}
     (package : CanonicalS4RichFiniteModeInputs
@@ -142,27 +150,25 @@ asP3LiteralSplit :
       {finiteMode = finiteMode} {oneLoop = oneLoop}
       {remainder = remainder} {rich = rich}
       sameObject inputs rowA smallFieldCap largeFieldCap covarianceCap) →
-  P3Literal.P3RepresentsLiteralPlaquetteSplitUVView
-    (dataSet sameObject) (SU2.recursion (bishopRunning package))
-asP3LiteralSplit {sameObject = sameObject} package = record
-  { P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.addIsBishopAdd =
+  P3Rich.CanonicalRunningRichLiteralPlaquette
+    (dataSet sameObject) rich (bishopRunning package)
+asCanonicalRichBridge {sameObject = sameObject} package = record
+  { P3Rich.CanonicalRunningRichLiteralPlaquette.richNormalization =
+      richNormalization package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.addIsBishopAdd =
       addIsBishopAdd package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.inverseCouplingSameLiteral =
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.richAddIsBishopAdd =
+      richAddIsBishopAdd package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.inverseCouplingSameLiteral =
       inverseCouplingSameLiteral package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.nextScaleIsUVPredecessor =
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.nextScaleIsUVPredecessor =
       nextScaleIsUVPredecessor package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.zeroTotalIncrementSame =
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.zeroTotalIncrementSame =
       zeroTotalIncrementSame package
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.betaLogBlockingSameLiteralGaussian =
-      λ depth →
-        BishopP.≃-trans
-          (RichNorm.p3SuccessorGaussianSameRichEdgeIntegral
-            (richNormalization package) depth)
-          (Projection.scalarIntegralSameLiteralGaussian
-            (RichFinite.asRichBrillouinRationalGaussianProjection sameObject)
-            depth)
-  ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.remainderSameLiteralInteraction =
-      remainderSameLiteralInteraction package
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.gaussianProjection =
+      RichFinite.asRichBrillouinRationalGaussianProjection sameObject
+  ; P3Rich.CanonicalRunningRichLiteralPlaquette.p3RemainderSameRichRegularPlusLiteralInteraction =
+      p3RemainderSameRichRegularPlusLiteralInteraction package
   }
 
 asCanonicalS4SameObjectPackage :
@@ -182,7 +188,8 @@ asCanonicalS4SameObjectPackage {sameObject = sameObject} package = record
   ; S4.CanonicalS4SameObjectPackage.bishopRunning = bishopRunning package
   ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
       P3Literal.p3LiteralPlaquetteThenCMP109
-        (P3Literal.splitViewAsTotalView (asP3LiteralSplit package))
+        (P3Rich.canonicalRunningAsLiteralTotal
+          (asCanonicalRichBridge package))
         (Constructor.asLiteralPlaquetteCMP109UVSameObject
           (coefficientWeld sameObject))
   ; S4.CanonicalS4SameObjectPackage.traceBoundary = traceBoundary package
@@ -194,8 +201,17 @@ independentGaussianProjectionRequired = Agda.Builtin.Bool.false
 independentLiteralCMP109WeldRequired : Agda.Builtin.Bool.Bool
 independentLiteralCMP109WeldRequired = Agda.Builtin.Bool.false
 
+p3GaussianEqualsFullBetaZRequired : Agda.Builtin.Bool.Bool
+p3GaussianEqualsFullBetaZRequired = Agda.Builtin.Bool.false
+
+p3RemainderIncludesRegularMatching : Agda.Builtin.Bool.Bool
+p3RemainderIncludesRegularMatching = Agda.Builtin.Bool.true
+
 canonicalS4RichFiniteModeCompilerLevel : ProofLevel
 canonicalS4RichFiniteModeCompilerLevel = machineChecked
 
-richShellFiniteModeGaussianPhysicalIdentificationLevel : ProofLevel
-richShellFiniteModeGaussianPhysicalIdentificationLevel = conditional
+richCoefficientFiniteModeGaussianPhysicalIdentificationLevel : ProofLevel
+richCoefficientFiniteModeGaussianPhysicalIdentificationLevel = conditional
+
+p3RemainderRegularMatchingInteractionIdentificationLevel : ProofLevel
+p3RemainderRegularMatchingInteractionIdentificationLevel = conditional
