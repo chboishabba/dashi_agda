@@ -22,13 +22,19 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- identities plus the one terminal threshold.
 ------------------------------------------------------------------------
 
+literalCouplingAt :
+  ∀ {trajectory}
+    (dataSet : Plaquette.PhysicalRunningCouplingData Nat) →
+  Nat → ℚ
+literalCouplingAt dataSet scale =
+  Plaquette.coupling (Plaquette.remainder dataSet) scale
+
 record LiteralPlaquetteTerminalHistory
     (dataSet : Plaquette.PhysicalRunningCouplingData Nat)
     (trajectory : Flow.SourceNormalizedCouplingTrajectory)
     (literalHistory :
       LiteralHistory.LiteralPlaquetteCMP109FiniteHistory dataSet trajectory) : Set₁ where
   field
-    couplingAt : Nat → ℚ
     gamma inverseThreshold : ℚ
     terminalScale : Nat
 
@@ -42,12 +48,13 @@ record LiteralPlaquetteTerminalHistory
     terminalInverseThreshold :
       inverseThreshold ≤ Flow.inverseCoupling trajectory terminalScale
 
-    couplingPositive : ∀ scale → Positive (couplingAt scale)
+    couplingPositive : ∀ scale →
+      Positive (literalCouplingAt dataSet scale)
     gammaPositive : Positive gamma
 
     inverseCouplingRepresentation : ∀ scale →
       Flow.inverseCoupling trajectory scale
-        * Order.square (couplingAt scale)
+        * Order.square (literalCouplingAt dataSet scale)
       ≡ 1ℚ
 
     inverseThresholdRepresentation :
@@ -71,7 +78,7 @@ asBetaSplitInverseSquareTerminalHistory :
     (compiledSplit literalHistory)
 asBetaSplitInverseSquareTerminalHistory dataSet = record
   { History.BetaSplitInverseSquareTerminalHistoryData.couplingAt =
-      couplingAt dataSet
+      literalCouplingAt _
   ; History.BetaSplitInverseSquareTerminalHistoryData.gamma =
       gamma dataSet
   ; History.BetaSplitInverseSquareTerminalHistoryData.inverseThreshold =
