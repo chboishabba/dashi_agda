@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityFiniteEllBishopShellNormalizationExact where
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import Real as Bishop
 import RealProperties as BishopP
@@ -57,9 +58,13 @@ embeddedFiniteUniversalTermIsCanonicalShellFormula
     (Embed.embedMul Local.oneLoopSU2Factor (Local.ell gaussian))
     (BishopP.≃-trans
       (BishopP.*-cong
-        (UV.embedEqualityFromRational
-          Local.oneLoopSU2Factor
-          (SU2.su2InverseCouplingCoefficientExact))
+        (subst
+          (λ selected →
+            Bishop._≃_
+              (Embed.embed Local.oneLoopSU2Factor)
+              (Embed.embed selected))
+          (sym SU2.su2InverseCouplingCoefficientExact)
+          BishopP.≃-refl)
         (finiteEllIsNormalizedPhysicalLog normalization))
       (BishopP.≃-symm
         (BishopP.*-assoc
