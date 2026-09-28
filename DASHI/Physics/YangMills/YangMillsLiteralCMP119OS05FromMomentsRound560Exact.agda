@@ -26,6 +26,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as A
+import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OS05CanonicalLimitExact as OS05
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119QuantitativeMomentsRound559Exact as R559
@@ -74,6 +75,147 @@ record LiteralCMP119OS05ClosureAuthority
         (Limit.limitExpectation family)
 
 open LiteralCMP119OS05ClosureAuthority public
+
+------------------------------------------------------------------------
+-- PRE-OS CANONICAL OS0/OS5
+--
+-- These predicates are identical in mathematical content to the historical
+-- R560 ones, but they are indexed only by the finite family + cylinder algebra.
+-- Thus OS0/OS5 can be built before a PinnedCMP119OSAxiomInputs exists.
+------------------------------------------------------------------------
+
+PreOSFiniteMomentRegularity :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      R559.LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra) →
+  OS05.ExpectationFunctional Configuration → Set
+PreOSFiniteMomentRegularity {family = family} source expectation =
+  Σ Nat
+    (λ cutoff →
+      (∀ observable →
+        expectation observable
+        ≡ Limit.finiteExpectation family cutoff observable)
+      ×
+      (∀ degree observable →
+        T5.LessEqual (R559.moments source)
+          (expectation
+            (T5.powerObservable
+              (R559.moments source)
+              degree
+              (T5.absoluteObservable
+                (R559.moments source)
+                observable)))
+          (T5.multiply (R559.moments source)
+            (T5.factorial (R559.moments source) degree)
+            (T5.divide (R559.moments source)
+              (T5.exponentialMomentBound
+                (R559.moments source) observable)
+              (T5.lambda (R559.moments source))))))
+
+PreOSFiniteExponentialGrowth :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      R559.LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra) →
+  OS05.ExpectationFunctional Configuration → Set
+PreOSFiniteExponentialGrowth {family = family} source expectation =
+  Σ Nat
+    (λ cutoff →
+      (∀ observable →
+        expectation observable
+        ≡ Limit.finiteExpectation family cutoff observable)
+      ×
+      (∀ observable →
+        T5.LessEqual (R559.moments source)
+          (expectation
+            (T5.exponentialObservable
+              (R559.moments source)
+              (T5.lambda (R559.moments source))
+              (T5.absoluteObservable
+                (R559.moments source)
+                observable)))
+          (T5.exponentialMomentBound
+            (R559.moments source) observable)))
+
+preOSFiniteMomentRegularity :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      R559.LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra)
+    cutoff →
+  PreOSFiniteMomentRegularity source
+    (Limit.finiteExpectation family cutoff)
+preOSFiniteMomentRegularity source cutoff =
+  cutoff ,
+    ( (λ observable → refl)
+    , (λ degree observable →
+        R559.preOSLiteralFiniteMomentBound
+          source degree observable cutoff)
+    )
+
+preOSFiniteExponentialGrowth :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      R559.LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra)
+    cutoff →
+  PreOSFiniteExponentialGrowth source
+    (Limit.finiteExpectation family cutoff)
+preOSFiniteExponentialGrowth source cutoff =
+  cutoff ,
+    ( (λ observable → refl)
+    , (λ observable →
+        R559.preOSLiteralFiniteExponentialBound
+          source observable cutoff)
+    )
+
+asCanonicalPreOS05 :
+  ∀ {Configuration sequenceLimit limitLaws quotient division
+      family observableAlgebra}
+    (source :
+      R559.LiteralCMP119PreOSQuantitativeMomentSource
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family observableAlgebra)
+    (closure :
+      LiteralCMP119OS05ClosureAuthority
+        Configuration
+        family
+        (PreOSFiniteMomentRegularity source)
+        (PreOSFiniteExponentialGrowth source)) →
+  OS05.CanonicalCMP119OS05LimitData
+    Configuration family
+asCanonicalPreOS05 source closure = record
+  { OS05.CanonicalCMP119OS05LimitData.FiniteRegularity =
+      PreOSFiniteMomentRegularity source
+  ; OS05.CanonicalCMP119OS05LimitData.ContinuumRegularity =
+      ContinuumRegularity closure
+  ; OS05.CanonicalCMP119OS05LimitData.FiniteGrowthControl =
+      PreOSFiniteExponentialGrowth source
+  ; OS05.CanonicalCMP119OS05LimitData.ContinuumGrowthControl =
+      ContinuumGrowthControl closure
+  ; OS05.CanonicalCMP119OS05LimitData.finiteRegularity =
+      preOSFiniteMomentRegularity source
+  ; OS05.CanonicalCMP119OS05LimitData.finiteGrowthControl =
+      preOSFiniteExponentialGrowth source
+  ; OS05.CanonicalCMP119OS05LimitData.regularityClosedUnderCanonicalLimit =
+      regularityClosedUnderCanonicalLimit closure
+  ; OS05.CanonicalCMP119OS05LimitData.growthClosedUnderCanonicalLimit =
+      growthClosedUnderCanonicalLimit closure
+  }
 
 FiniteMomentRegularity :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -218,6 +360,9 @@ asCanonicalOS05 source closure = record
   ; OS05.CanonicalCMP119OS05LimitData.growthClosedUnderCanonicalLimit =
       growthClosedUnderCanonicalLimit closure
   }
+
+round560PreOS05FromLiteralMomentsLevel : ProofLevel
+round560PreOS05FromLiteralMomentsLevel = machineChecked
 
 round560FiniteOS05FromLiteralMomentsLevel : ProofLevel
 round560FiniteOS05FromLiteralMomentsLevel = machineChecked
