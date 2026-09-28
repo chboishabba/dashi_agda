@@ -74,13 +74,10 @@ inverseOne =
 inverseOneIsOne :
   inverseOne Bishop.≃ oneReal
 inverseOneIsOne =
-  BishopInverse.uniqueInverse
-    oneReal
-    oneNonzero
-    oneReal
-    (BishopP.≃-trans
-      (BishopP.*-identityʳ oneReal)
-      BishopP.≃-refl)
+  BishopP.≃-symm
+    (BishopInverse.⁻¹-unique
+      oneReal oneReal oneNonzero
+      (BishopP.*-identityʳ oneReal))
 
 inversePiPositive :
   Bishop._<_ Bishop.0ℝ inversePi
@@ -98,8 +95,8 @@ inversePiBelowOne =
       oneBelowMachinPi
       oneNonzero
       machinPiNonzero
-      onePositive
-      machinPiPositive)
+      (BishopP.0<x⇒posx onePositive)
+      (BishopP.0<x⇒posx machinPiPositive))
 
 inversePiNonnegative : Bishop.NonNegative inversePi
 inversePiNonnegative =
