@@ -129,6 +129,7 @@ class AstRecordExpression:
     line: int
     node: object
     owner_function: Optional[str]
+    context: str = "unknown"
     parent_field: Optional[str] = None
     parent_record_start: Optional[int] = None
     assignments: List[AstFieldAssignment] = field(default_factory=list)
@@ -803,6 +804,7 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
 
 def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpression:
     owner_function = None
+    context = "unknown"
     parent_field = None
     parent_record_start = None
 
@@ -824,6 +826,18 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
             signature = _function_signature(source_bytes, parent)
             if clause is not None:
                 owner_function = clause.name
+                if (
+                    clause.lhs_node is not None
+                    and clause.lhs_node.start_byte <= node.start_byte
+                    and node.end_byte <= clause.lhs_node.end_byte
+                ):
+                    context = "pattern"
+                elif (
+                    clause.rhs_node is not None
+                    and clause.rhs_node.start_byte <= node.start_byte
+                    and node.end_byte <= clause.rhs_node.end_byte
+                ):
+                    context = "expression"
             elif signature is not None:
                 owner_function = signature.names[0]
             break
@@ -833,6 +847,7 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
         line=line_of(node),
         node=node,
         owner_function=owner_function,
+        context=context,
         parent_field=parent_field,
         parent_record_start=parent_record_start,
     )
