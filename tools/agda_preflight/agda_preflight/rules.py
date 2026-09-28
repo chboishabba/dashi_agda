@@ -306,6 +306,7 @@ def extended_diagnostics(checker, s, D):
     record_expr_by_start = {
         expr.node.start_byte: expr
         for expr in s.ast.record_expressions
+        if expr.context != "pattern"
     }
     record_target_cache = {}
 
@@ -345,6 +346,8 @@ def extended_diagnostics(checker, s, D):
         return target
 
     for record_expr in s.ast.record_expressions:
+        if record_expr.context == "pattern":
+            continue
         target_ref = resolve_record_expression_target(record_expr)
         if target_ref is None:
             continue
@@ -1120,6 +1123,8 @@ def extended_diagnostics(checker, s, D):
         if record.constructor
     }
     for record_expr in s.ast.record_expressions:
+        if record_expr.context == "pattern":
+            continue
         owner = record_expr.owner_function
         if not owner:
             continue
@@ -1262,6 +1267,8 @@ def extended_diagnostics(checker, s, D):
     # TSAGDA071: known term supplied in a type/sort-valued record field.
     known_term_heads = set(clauses) | set(ctors)
     for record_expr in s.ast.record_expressions:
+        if record_expr.context == "pattern":
+            continue
         owner = record_expr.owner_function
         if not owner:
             continue
