@@ -43,6 +43,8 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact as Centered
+import DASHI.Reasoning.Trialectic369IncomingPairFaceDirectionQuotientExact as Incoming
+import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact as Outgoing
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
@@ -191,21 +193,59 @@ canonical369LaneRoundTrip =
   Lift.canonical369OggRoundTrip
 
 ------------------------------------------------------------------------
+-- 5b. Recognition payments obtained from existing Base369 geometry.
+------------------------------------------------------------------------
+
+incomingGeometricQuotientBoundary :
+  Incoming.Trialectic369IncomingPairFaceDirectionQuotientBoundary
+incomingGeometricQuotientBoundary =
+  Incoming.canonicalTrialectic369IncomingPairFaceDirectionQuotientBoundary
+
+incomingGeometricAuthorityPaid :
+  Incoming.geometricAuthorityForIncomingQuotientPaid
+    incomingGeometricQuotientBoundary
+  ≡ true
+incomingGeometricAuthorityPaid = refl
+
+incomingAnalyticFrickeAuthorityStillOpen :
+  Incoming.analyticFrickeIdentificationPaid
+    incomingGeometricQuotientBoundary
+  ≡ false
+incomingAnalyticFrickeAuthorityStillOpen = refl
+
+outgoingMultiplicityRecognitionBoundary :
+  Outgoing.Trialectic369OutgoingSheet9MultiplicityRecognitionBoundary
+outgoingMultiplicityRecognitionBoundary =
+  Outgoing.canonicalTrialectic369OutgoingSheet9MultiplicityRecognitionBoundary
+
+outgoingSecondarySheetCarrierRecognitionPaid :
+  Outgoing.codecSheet9SecondarySheet9BidiPaid
+    outgoingMultiplicityRecognitionBoundary
+  ≡ true
+outgoingSecondarySheetCarrierRecognitionPaid = refl
+
+outgoingActualMonsterActionRecognitionStillOpen :
+  Outgoing.actualActionRestrictionInhabitedHere
+    outgoingMultiplicityRecognitionBoundary
+  ≡ false
+outgoingActualMonsterActionRecognitionStillOpen = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
-data IncomingInversionAuthority : Set where
-data OutgoingSheet9ArithmeticRecognition : Set where
+data IncomingAnalyticFrickeAuthority : Set where
+data OutgoingSheet9ActualMonsterActionRecognition : Set where
 data OrderedRankIsIntrinsicModularInvariant : Set where
 data ResidualMayBeDiscarded : Set where
 
-incomingInversionAuthorityStillOpen :
-  IncomingInversionAuthority -> ⊥
-incomingInversionAuthorityStillOpen ()
+incomingAnalyticFrickeAuthorityStillOpenToken :
+  IncomingAnalyticFrickeAuthority -> ⊥
+incomingAnalyticFrickeAuthorityStillOpenToken ()
 
-outgoingSheet9ArithmeticRecognitionStillOpen :
-  OutgoingSheet9ArithmeticRecognition -> ⊥
-outgoingSheet9ArithmeticRecognitionStillOpen ()
+outgoingSheet9ActualMonsterActionRecognitionStillOpenToken :
+  OutgoingSheet9ActualMonsterActionRecognition -> ⊥
+outgoingSheet9ActualMonsterActionRecognitionStillOpenToken ()
 
 orderedRankNotPromotedToIntrinsicModularInvariant :
   OrderedRankIsIntrinsicModularInvariant -> ⊥
@@ -225,8 +265,10 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     oggRoot369BidiPaid : Bool
     oggCanonical369SliceBidiPaid : Bool
     outgoingResidualIsCanonicalSheet9 : Bool
-    incomingInversionAuthorityPaid : Bool
-    outgoingSheet9ArithmeticRecognitionPaid : Bool
+    incomingGeometricInversionAuthorityPaid : Bool
+    incomingAnalyticFrickeAuthorityPaid : Bool
+    outgoingSecondarySheetCarrierRecognitionPaid : Bool
+    outgoingActualMonsterActionRecognitionPaid : Bool
     orderedRankIntrinsicModularInvariant : Bool
     residualDiscarded : Bool
 
@@ -235,4 +277,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary :
 canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
   trialectic-369-ssp15-recognition-capstone-boundary
     true true true true true true true
-    false false false false
+    true false true false
+    false false
