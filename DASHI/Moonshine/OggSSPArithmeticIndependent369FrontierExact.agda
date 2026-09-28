@@ -185,6 +185,7 @@ import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVRBrauer
 import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPayment
 import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact as GreenSpecies
 import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
+import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2StackWeight
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
 import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as PBTate
@@ -336,6 +337,12 @@ pbLocalizationMissingProofSurface :
   Coverage.PBLocalizationMissingProofSurface
 pbLocalizationMissingProofSurface =
   Coverage.canonicalPBLocalizationMissingProofSurface
+
+
+p2InertiaStackDenominatorBoundary :
+  P2StackWeight.P2InertiaStackDenominatorValuationBoundary
+p2InertiaStackDenominatorBoundary =
+  P2StackWeight.canonicalP2InertiaStackDenominatorValuationBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -528,6 +535,8 @@ record ArithmeticIndependent369Frontier : Set where
     greenRingToPreferredCorrectedValuationAdapterPaid : Bool
     greenRingToGlobalDVRBrauerAuthorityAdapterPaid : Bool
     pbLocalizationSourceCoverageAuditPaid : Bool
+    p2PreferredWeightsHaveInertiaStackDenominatorInterpretation : Bool
+    p2IsotropyDenominatorDepthEqualsUranoLengthPaid : Bool
     carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
     uranoTheoryDeterminesSectorLengths : Bool
     greenRingFrameworkProvesLocalizedPBSpecies : Bool
@@ -681,6 +690,8 @@ canonicalArithmeticIndependent369Frontier =
     ; greenRingToPreferredCorrectedValuationAdapterPaid = true
     ; greenRingToGlobalDVRBrauerAuthorityAdapterPaid = true
     ; pbLocalizationSourceCoverageAuditPaid = true
+    ; p2PreferredWeightsHaveInertiaStackDenominatorInterpretation = true
+    ; p2IsotropyDenominatorDepthEqualsUranoLengthPaid = false
     ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
     ; uranoTheoryDeterminesSectorLengths = false
     ; greenRingFrameworkProvesLocalizedPBSpecies = false
