@@ -19,9 +19,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 --
 -- The step indexing is source-faithful:
 --
---   history step k consumes literal producer scale suc k,
+--   history step k consumes literal producer edge k,
 --
--- so the literal beta is beta_(k+1), exactly the coefficient appearing in
+-- so the literal edge beta is beta_(k+1), exactly the coefficient appearing in
 -- CMP109's source recurrence u_k = u_(k+1) + beta_(k+1).
 ------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ record LiteralPlaquetteCMP109FiniteHistory
 
     certificateAt :
       (step : Nat) →
-      Literal.LiteralFiniteBetaCertificate dataSet (suc step)
+      Literal.LiteralFiniteBetaCertificate dataSet step
 
     uniformGaussianLower uniformGaussianUpper : ℚ
 
@@ -48,7 +48,7 @@ record LiteralPlaquetteCMP109FiniteHistory
 
     gaussianUpper :
       ∀ step →
-      Literal.literalBetaZ dataSet (suc step)
+      Literal.literalBetaZ dataSet step
       ≤ uniformGaussianUpper
 
 open LiteralPlaquetteCMP109FiniteHistory public
@@ -68,7 +68,7 @@ betaIsTrajectory :
   Estimate.beta (estimateAt history step)
   ≡ Flow.beta trajectory (suc step)
 betaIsTrajectory history step =
-  Same.literalBetaIsSourceBeta
+  Same.literalBetaAtStepIsSourceSuccessorBeta
     (sameObject history) step
 
 asFiniteLatticeBetaHistoryEstimate :
