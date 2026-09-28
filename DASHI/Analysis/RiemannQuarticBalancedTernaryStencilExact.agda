@@ -27,6 +27,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.MonsterFilteredCarrierExact as MonsterBulk
 
@@ -350,11 +351,11 @@ depthFiveTargetQuotient : Nat
 depthFiveTargetQuotient = quotient targetDepthFive
 
 depthFiveQuotientVectorIsOneFiveFour :
-  depthFiveOriginQuotient ≡ 1
-  × depthFiveJQuotient ≡ 5
-  × depthFiveTargetQuotient ≡ 4
+  (depthFiveOriginQuotient ≡ 1)
+  × (depthFiveJQuotient ≡ 5)
+  × (depthFiveTargetQuotient ≡ 4)
 depthFiveQuotientVectorIsOneFiveFour =
-  refl , refl , refl
+  refl , (refl , refl)
 
 depthFiveJQuotientBalanced :
   pow3 2 ≡ depthFiveJQuotient + 3 + 1
