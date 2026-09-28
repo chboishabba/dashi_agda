@@ -186,6 +186,7 @@ import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPay
 import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact as GreenSpecies
 import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2StackWeight
+import DASHI.Moonshine.OggSSPP2InertiaConjugacyClassDefectExact as P2Defect
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
 import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact as UranoCompat
 import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
@@ -349,6 +350,12 @@ p2InertiaStackDenominatorBoundary :
   P2StackWeight.P2InertiaStackDenominatorValuationBoundary
 p2InertiaStackDenominatorBoundary =
   P2StackWeight.canonicalP2InertiaStackDenominatorValuationBoundary
+
+
+p2ClassDefectBoundary :
+  P2Defect.P2InertiaConjugacyClassDefectBoundary
+p2ClassDefectBoundary =
+  P2Defect.canonicalP2InertiaConjugacyClassDefectBoundary
 
 
 p2BrauerRegularityBoundary :
@@ -585,6 +592,8 @@ record ArithmeticIndependent369Frontier : Set where
     greenRingToGlobalDVRBrauerAuthorityAdapterPaid : Bool
     pbLocalizationSourceCoverageAuditPaid : Bool
     p2PreferredWeightsHaveInertiaStackDenominatorInterpretation : Bool
+    p2PreferredWeightsAreConjugacyClassTwoDefects : Bool
+    p2ClassDefectEqualsLocalizedUranoLengthPaid : Bool
     p2IsotropyDenominatorDepthEqualsUranoLengthPaid : Bool
     p2OrdinaryBrauerRepresentativeShortcutRejected : Bool
     p3PreferredWeightsHaveSemistableMultiplicityInterpretation : Bool
@@ -753,6 +762,8 @@ canonicalArithmeticIndependent369Frontier =
     ; greenRingToGlobalDVRBrauerAuthorityAdapterPaid = true
     ; pbLocalizationSourceCoverageAuditPaid = true
     ; p2PreferredWeightsHaveInertiaStackDenominatorInterpretation = true
+    ; p2PreferredWeightsAreConjugacyClassTwoDefects = true
+    ; p2ClassDefectEqualsLocalizedUranoLengthPaid = false
     ; p2IsotropyDenominatorDepthEqualsUranoLengthPaid = false
     ; p2OrdinaryBrauerRepresentativeShortcutRejected = true
     ; p3PreferredWeightsHaveSemistableMultiplicityInterpretation = true
