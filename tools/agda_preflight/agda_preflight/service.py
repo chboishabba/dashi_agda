@@ -318,6 +318,20 @@ class DashiAgdaService:
                 updated,
             )
 
+    def _drop_trust_containing(self, module: str) -> None:
+        targets = [
+            target
+            for target, modules in self._trusted_closures.items()
+            if module in modules
+        ]
+        for target in targets:
+            self._drop_trust(target)
+        if targets:
+            self.profiler.count(
+                "trusted_rollups_invalidated",
+                len(targets),
+            )
+
     def _start_request(self) -> Tuple[TimingSnapshot, int]:
         self.index.begin_request()
         return self.profiler.snapshot(), time.perf_counter_ns()
@@ -554,7 +568,19 @@ class DashiAgdaService:
             or after_state is None
             or before_state[2] != after_state[2]
         ):
-            self._drop_trust()
+            module = (
+                after_state[0]
+                if after_state is not None
+                else (
+                    before_state[0]
+                    if before_state is not None
+                    else None
+                )
+            )
+            if module is None:
+                self._drop_trust()
+            else:
+                self._drop_trust_containing(module)
         else:
             self.profiler.count("trusted_session_api_stable_edits")
             self._refresh_rollup_module_candidates(
@@ -622,17 +648,50 @@ class DashiAgdaService:
         }
 
     def refresh(self, target: str) -> dict:
-        """Explicitly observe out-of-band source edits and revalidate a target."""
+        """Observe an out-of-band edit and repair trusted rollup state."""
         before, started = self._start_request()
         target_path = self._target_path(target)
-        self._drop_trust(target_path)
+        before_state = self.index.source_state(target_path)
+
         result = self.index.diagnose(target_path)
+        after_state = self.index.source_state(target_path)
+
+        api_stable = (
+            before_state is not None
+            and after_state is not None
+            and before_state[2] == after_state[2]
+        )
+        if api_stable:
+            self.profiler.count("trusted_session_api_stable_refreshes")
+            self._refresh_rollup_module_candidates(
+                after_state[0],
+                target_path,
+            )
+        else:
+            module = (
+                after_state[0]
+                if after_state is not None
+                else (
+                    before_state[0]
+                    if before_state is not None
+                    else None
+                )
+            )
+            if module is None:
+                self._drop_trust()
+            else:
+                self._drop_trust_containing(module)
+
+        # Direct refresh establishes the target itself as trusted for the
+        # observed post-refresh source, even when containing rollups were
+        # invalidated by an API change.
         self._trust_target(target_path)
         return {
             "target": str(target_path),
             "modules": len(result.modules),
             "diagnostics": len(result.diagnostics),
             "cache_hit": result.cache_hit,
+            "api_stable": api_stable,
             "profile": self._finish_request(before, started),
         }
 
