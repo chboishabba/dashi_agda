@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteBishopLogNorma
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import Real as Bishop
@@ -158,6 +159,58 @@ p3GaussianUsesCanonicalBishopSU2
   BishopP.≃-trans
     (P3Literal.betaLogBlockingSameLiteralGaussian splitView depth)
     (embeddedGaussianIsCanonicalBishopSU2 normalization (suc depth))
+
+------------------------------------------------------------------------
+-- STRUCTURAL NO-GO: THE OLD RATIONAL LOG COORDINATE IS FREE
+--
+-- OneLoopVacuumPolarizationData does not attach logBlocking to a geometric
+-- blocking factor, a continuum logarithm, or pi.  For any rational-valued
+-- coordinate we can inhabit the record definitionally.  Therefore no theorem
+-- of the form
+--
+--   embed(logBlocking) ~= pi^{-2} * physicalLog
+--
+-- can be recovered from that record alone.  It must come from the richer T4
+-- literal integral / source normalization.
+------------------------------------------------------------------------
+
+freeRationalOneLoopVacuumPolarizationData :
+  ∀ {Scale}
+    (casimir : ℚ)
+    (chosenLog : Scale → ℚ) →
+  Plaquette.OneLoopVacuumPolarizationData Scale
+freeRationalOneLoopVacuumPolarizationData casimir chosenLog = record
+  { Plaquette.OneLoopVacuumPolarizationData.casimirAdjoint =
+      casimir
+  ; Plaquette.OneLoopVacuumPolarizationData.logBlocking =
+      chosenLog
+  ; Plaquette.OneLoopVacuumPolarizationData.gaugeModeContribution =
+      λ _ → 0ℚ
+  ; Plaquette.OneLoopVacuumPolarizationData.ghostContribution =
+      λ _ → 0ℚ
+  ; Plaquette.OneLoopVacuumPolarizationData.transverseContribution =
+      λ _ → 0ℚ
+  ; Plaquette.OneLoopVacuumPolarizationData.connectedCumulantCoefficient =
+      λ scale →
+        Beta.pureYMInverseCouplingCoefficient casimir * chosenLog scale
+  ; Plaquette.OneLoopVacuumPolarizationData.gaugeModeContributionExact =
+      λ _ → Agda.Builtin.Equality.refl
+  ; Plaquette.OneLoopVacuumPolarizationData.ghostContributionExact =
+      λ _ → Agda.Builtin.Equality.refl
+  ; Plaquette.OneLoopVacuumPolarizationData.gaugeGhostCancellationExact =
+      λ _ → Agda.Builtin.Equality.refl
+  ; Plaquette.OneLoopVacuumPolarizationData.adjointColorTraceEqualsCasimir =
+      Agda.Builtin.Equality.refl
+  ; Plaquette.OneLoopVacuumPolarizationData.latticeMomentumSecondDerivativeExact =
+      λ _ → Agda.Builtin.Equality.refl
+  ; Plaquette.OneLoopVacuumPolarizationData.dashenGrossLatticeContinuumCalibrationExact =
+      λ _ → Agda.Builtin.Equality.refl
+  }
+
+oldRationalOneLoopRecordFixesPhysicalPiNormalization :
+  Agda.Builtin.Bool.Bool
+oldRationalOneLoopRecordFixesPhysicalPiNormalization =
+  Agda.Builtin.Bool.false
 
 ------------------------------------------------------------------------
 -- FRONTIER RECUT
