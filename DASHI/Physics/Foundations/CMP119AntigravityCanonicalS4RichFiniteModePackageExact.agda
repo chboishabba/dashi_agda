@@ -130,8 +130,8 @@ gaussianProjection :
     sameObject inputs rowA smallFieldCap largeFieldCap covarianceCap →
   Projection.RichBrillouinRationalGaussianProjection
     (dataSet sameObject) rich
-gaussianProjection _ =
-  RichFinite.asRichBrillouinRationalGaussianProjection _
+gaussianProjection {sameObject = sameObject} package =
+  RichFinite.asRichBrillouinRationalGaussianProjection sameObject
 
 asP3LiteralSplit :
   ∀ {trajectory split Mode Atom finiteMode oneLoop remainder rich
