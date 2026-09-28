@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import Real as Bishop
+import RealProperties as BishopP
 
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinUVEdgeExact as RichNorm
@@ -158,7 +159,7 @@ asP3SourceState {sameObject = sameObject} package = record
   { State.P3StateRepresentsSourceUV.addIsBishopAdd = addIsBishopAdd package
   ; State.P3StateRepresentsSourceUV.inverseCouplingSame =
       λ depth →
-        Bishop.RealProperties.≃-trans
+        BishopP.≃-trans
           (inverseCouplingSameLiteral package depth)
           (State.equalityAsBishopSetoid
             (LiteralToSource.nextAtStepIsSourceCurrent
