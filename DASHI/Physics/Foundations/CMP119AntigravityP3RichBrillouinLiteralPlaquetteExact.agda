@@ -10,6 +10,8 @@ import RealProperties as BishopP
 
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Carrier
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2Running
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinGaussianExact as CanonicalRich
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
@@ -127,6 +129,105 @@ richBrillouinViewAsLiteralTotal :
 richBrillouinViewAsLiteralTotal bridge =
   P3Literal.splitViewAsTotalView
     (richBrillouinViewAsLiteralSplit bridge)
+
+
+------------------------------------------------------------------------
+-- CANONICAL-RUNNING CONSTRUCTOR
+--
+-- On the canonical Bishop route the P3 -> rich Gaussian edge is not an
+-- independent physical premise: it follows from the two explicit formulas.
+-- The remaining cross-carrier Gaussian payment is only
+--
+--   rich scalarIntegral ~= embed(rational literal beta_Z).
+------------------------------------------------------------------------
+
+record CanonicalRunningRichLiteralPlaquetteSplit
+    (dataSet : Plaquette.PhysicalRunningCouplingData Nat)
+    (rich : Rich.LiteralBrillouinIntegralPhysicalData Nat Bishop.ℝ)
+    (running : SU2Running.CanonicalBishopSU2RunningInputs Nat) : Set₁ where
+  field
+    richNormalization :
+      CanonicalRich.CanonicalBishopRichBrillouinNormalization rich running
+
+    addIsBishopAdd :
+      ∀ left right →
+      Bishop._≃_
+        (P3.add (SU2Running.recursion running) left right)
+        (Bishop._+_ left right)
+
+    inverseCouplingSameLiteral :
+      ∀ depth →
+      Bishop._≃_
+        (P3.inverseCouplingSq (SU2Running.recursion running) depth)
+        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+
+    nextScaleIsUVPredecessor :
+      ∀ depth →
+      P3.nextScale (SU2Running.recursion running) depth ≡ UV.uvNext depth
+
+    zeroTotalIncrementSame :
+      Bishop._≃_
+        (Bishop._+_
+          (P3.betaLogBlocking (SU2Running.recursion running) zero)
+          (P3.remainder (SU2Running.recursion running) zero))
+        (UV.embed 0ℚ)
+
+    richScalarIntegralSameLiteralGaussian :
+      ∀ depth →
+      Bishop._≃_
+        (Rich.scalarIntegral rich (suc depth))
+        (UV.embed (Literal.literalBetaZ dataSet (suc depth)))
+
+    remainderSameLiteralInteraction :
+      ∀ depth →
+      Bishop._≃_
+        (P3.remainder (SU2Running.recursion running) (suc depth))
+        (UV.embed (Literal.literalBetaInt dataSet (suc depth)))
+
+open CanonicalRunningRichLiteralPlaquetteSplit public
+
+canonicalRunningAsRichBrillouinBridge :
+  ∀ {dataSet rich running} →
+  CanonicalRunningRichLiteralPlaquetteSplit dataSet rich running →
+  P3RepresentsRichBrillouinLiteralPlaquetteSplit
+    dataSet rich (SU2Running.recursion running)
+canonicalRunningAsRichBrillouinBridge inputs = record
+  { P3RepresentsRichBrillouinLiteralPlaquetteSplit.addIsBishopAdd =
+      CanonicalRunningRichLiteralPlaquetteSplit.addIsBishopAdd inputs
+
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.inverseCouplingSameLiteral =
+      CanonicalRunningRichLiteralPlaquetteSplit.inverseCouplingSameLiteral inputs
+
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.nextScaleIsUVPredecessor =
+      CanonicalRunningRichLiteralPlaquetteSplit.nextScaleIsUVPredecessor inputs
+
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.zeroTotalIncrementSame =
+      CanonicalRunningRichLiteralPlaquetteSplit.zeroTotalIncrementSame inputs
+
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.p3GaussianSameRichScalarIntegral =
+      CanonicalRich.p3GaussianSameRichScalarIntegral
+        (richNormalization inputs)
+
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.richScalarIntegralSameLiteralGaussian =
+      CanonicalRunningRichLiteralPlaquetteSplit.richScalarIntegralSameLiteralGaussian inputs
+
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.remainderSameLiteralInteraction =
+      CanonicalRunningRichLiteralPlaquetteSplit.remainderSameLiteralInteraction inputs
+  }
+
+canonicalRunningAsLiteralSplit :
+  ∀ {dataSet rich running} →
+  CanonicalRunningRichLiteralPlaquetteSplit dataSet rich running →
+  P3Literal.P3RepresentsLiteralPlaquetteSplitUVView
+    dataSet (SU2Running.recursion running)
+canonicalRunningAsLiteralSplit inputs =
+  richBrillouinViewAsLiteralSplit
+    (canonicalRunningAsRichBrillouinBridge inputs)
+
+independentP3ToRichGaussianWitnessRequiredOnCanonicalRoute :
+  Agda.Builtin.Bool.Bool
+independentP3ToRichGaussianWitnessRequiredOnCanonicalRoute =
+  Agda.Builtin.Bool.false
 
 ------------------------------------------------------------------------
 -- FRONTIER RECUT
