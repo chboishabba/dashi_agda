@@ -23,8 +23,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
-import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CanonicalASourceRound436Exact as R436
-import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound424Exact as R424
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as OSR
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralAExact as LiteralA
@@ -57,11 +56,18 @@ record CMP119DirectPhysicalH2
           Hilbert Hamiltonian Vector))
     : Set₂ where
   field
-    completion :
-      R436.CanonicalCMP119ACompletion
+    --------------------------------------------------------------------
+    -- Preferred H2 finite/OS source.
+    --
+    -- Use the published finite Euclidean/bosonic/Wilson-RP source directly.
+    -- Explicit Haar change-of-variables, Peter-Weyl square reconstruction and
+    -- projective Prokhorov are stronger audit producers, not H2 prerequisites.
+    --------------------------------------------------------------------
+    finiteOSSource :
+      R462.PublishedFiniteOSSource
         G X Configuration Position CurvaturePolynomial LocalOperator
         OPECoefficient StressTensor Hilbert Hamiltonian Vector
-        EuclideanAction Permutation Epsilon Witness
+        EuclideanAction Permutation
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S
 
@@ -72,7 +78,7 @@ record CMP119DirectPhysicalH2
       {sequenceLimit = sequenceLimit}
       limitLaws quotient division S
   osInputs =
-    R424.osInputs (R436.asRound424Completion completion)
+    R462.asPinnedOSAxiomInputs finiteOSSource
 
   field
     reconstruction :
@@ -241,7 +247,11 @@ compiledContinuum source =
 directCMP119H2ObjectConstructionLevel : ProofLevel
 directCMP119H2ObjectConstructionLevel = machineChecked
 
--- Remaining physical payment is now solely the source content of R436/R424
--- plus literal interpretation of those exact finite/continuum/OS objects.
+-- Remaining physical payment is now the preferred published/source finite-OS
+-- object itself (R462: finite Euclidean/bosonic symmetry, Wilson RP, OS0/OS5
+-- finite estimates/closure, selected OS4) plus literal interpretation of the
+-- exact finite/continuum/OS objects it constructs.  R436/R424 remain stronger
+-- audit/fallback producers and are no longer prerequisites of this H2 ABI.
 directCMP119H2PhysicalInstantiationLevel : ProofLevel
-directCMP119H2PhysicalInstantiationLevel = conditional
+directCMP119H2PhysicalInstantiationLevel =
+  R462.literalRound462PublishedFiniteOSApplicationLevel
