@@ -37,6 +37,8 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
@@ -122,11 +124,11 @@ module ProductRulePairedResidual
     module Base = P.Base
 
     module OrbitPair = R763.PairedNestedOrbit
-      Base.Base.physicalSystem
-      Base.Base.Nested.S
-      Base.Base.Nested.L
-      Base.Base.Nested.H
-      Base.Base.allModeTransverse
+      Base.Base.NestedAt.physicalSystem
+      Paired.Local.O.Combined.Nested.S
+      Paired.Local.O.Combined.Nested.L
+      Paired.Local.O.Combined.Nested.H
+      Base.Base.NestedAt.allModeTransverse
 
     productRulePairedResidualCell :
       Physical.PhysicalTriadIncidence → ℚ
@@ -134,10 +136,10 @@ module ProductRulePairedResidual
       R744.three * OrbitPair.pairedMaskedBaseRow beta
         + R765.six
             * OrbitPair.N.maskedNestedOuterRow
-                (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.pEnergyLeg beta)
+                (Orbit.pEnergyLeg beta)
         + R765.six
             * OrbitPair.N.maskedNestedOuterRow
-                (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.qEnergyLeg beta)
+                (Orbit.qEnergyLeg beta)
         - Fold.two * Base.pairedTwoDifferenceCell beta
 
     pairedResidualCellIsProductRuleNormalForm :
@@ -149,7 +151,7 @@ module ProductRulePairedResidual
         nestedPair =
           Base.Base.nestedOrbitCell beta
             + Base.Base.nestedOrbitCell
-                (DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry.swapTriad beta)
+                (Symmetry.swapTriad beta)
         prod = Base.pairedTwoDifferenceCell beta
 
         orbitMeaning =
@@ -168,9 +170,9 @@ module ProductRulePairedResidual
             ∷ Fold.two
             ∷ OrbitPair.pairedMaskedBaseRow beta
             ∷ OrbitPair.N.maskedNestedOuterRow
-                (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.pEnergyLeg beta)
+                (Orbit.pEnergyLeg beta)
             ∷ OrbitPair.N.maskedNestedOuterRow
-                (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.qEnergyLeg beta)
+                (Orbit.qEnergyLeg beta)
             ∷ prod
             ∷ [])))
 
