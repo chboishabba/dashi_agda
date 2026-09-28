@@ -598,3 +598,5 @@ import DASHI.Physics.Closure.NSTriadKNR650OrbitTransitionCutsetRound781Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650FullySeparatedOrbitProfileSupportRound782Exact
 import DASHI.Physics.Closure.NSTriadKNR650FullySeparatedThreeProfileResidualRound783Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650ThreeProfileOrbitClosureWallRound784Exact
