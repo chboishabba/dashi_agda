@@ -36,9 +36,11 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact as Stencil
 import DASHI.Analysis.RiemannQuarticDepthFiveX6Rank4BridgeExact as Depth
 import DASHI.Analysis.RiemannQuarticTriadicCodecKernelBridgeExact as CodecBridge
+import DASHI.Analysis.RiemannQuarticPuncturedKernel4EnumerationExact as Punctured
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
+import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 
 ------------------------------------------------------------------------
 -- 1. Typed carrier counts.
@@ -141,6 +143,13 @@ fourTritCodecPunctureTargetIs80 :
 fourTritCodecPunctureTargetIs80 =
   CodecBridge.puncturedKernel4ArithmeticTargetIs80
 
+puncturedKernel4FiniteCountIs80 :
+  DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact.listLength
+    Punctured.puncturedKernel4Enumeration
+  ≡ 80
+puncturedKernel4FiniteCountIs80 =
+  Punctured.puncturedKernel4EnumerationLengthIs80
+
 ------------------------------------------------------------------------
 -- 5. The same 3^4 scale under two boundary operations.
 ------------------------------------------------------------------------
@@ -201,4 +210,4 @@ canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary :
 canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary =
   riemann-j369-balanced-ternary-cross-pollination-boundary
     true true true true true true true true
-    false false false
+    true false false
