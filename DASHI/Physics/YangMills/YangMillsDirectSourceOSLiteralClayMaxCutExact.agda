@@ -54,15 +54,6 @@ record DirectSourceOSLiteralClayInputs
       Five.LiteralClayStructuralBase Y
 
     --------------------------------------------------------------------
-    -- Finite literal YM construction, quantified over the SAME compact-simple
-    -- group carrier used by Y.  Current R472/A1/A2 source-first producers are
-    -- the preferred way to inhabit this theorem; historical BC1/BC2 are not
-    -- observed here.
-    --------------------------------------------------------------------
-    finiteRG :
-      Five.LiteralWeakCouplingRGConstruction Y
-
-    --------------------------------------------------------------------
     -- H2 + H3: one continuum family, one Schwinger family, one reconstructed H.
     --------------------------------------------------------------------
     continuumSameObject :
@@ -94,6 +85,15 @@ record DirectSourceOSLiteralClayInputs
         Y compactSimpleDirectSource
 
 open DirectSourceOSLiteralClayInputs public
+
+
+compiledFiniteRG :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  DirectSourceOSLiteralClayInputs Y →
+  Five.LiteralWeakCouplingRGConstruction Y
+compiledFiniteRG inputs =
+  H5.finiteRGForEveryLiteralGroup
+    (compactSimpleDirectSource inputs)
 
 compiledContinuum :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
@@ -138,7 +138,7 @@ literalClayEvidence {Y = Y} inputs =
   Five.literalClayEvidenceFromFiveTheorems
     Y
     (structural inputs)
-    (finiteRG inputs)
+    (compiledFiniteRG inputs)
     (compiledMassGap inputs)
     (compiledContinuum inputs)
     (compiledLocalQFT inputs)
@@ -152,7 +152,7 @@ literalClaySolution {Y = Y} inputs =
   Five.literalClaySolutionFromFiveTheorems
     Y
     (structural inputs)
-    (finiteRG inputs)
+    (compiledFiniteRG inputs)
     (compiledMassGap inputs)
     (compiledContinuum inputs)
     (compiledLocalQFT inputs)
