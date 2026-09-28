@@ -200,6 +200,14 @@ scaffoldProducerEquality scaffold =
   Composition.compiledSingleActionProducerIsAcquisitionProducer
     (sameElementComposition scaffold)
 
+compiledVOANormalizerIsMonster :
+  ∀ {Monster K}
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  Single.Normalizer (scaffoldCompiledVOAProducer scaffold)
+  ≡ Monster
+compiledVOANormalizerIsMonster scaffold = refl
+
 normalizerCarrierEqualityFromScaffold :
   ∀ {Monster K}
     (scaffold :
@@ -221,6 +229,43 @@ normalizerToMonsterFromScaffold scaffold normalizer =
     (λ Carrier → Carrier)
     (sym (normalizerCarrierEqualityFromScaffold scaffold))
     normalizer
+
+monsterToNormalizerFromScaffold :
+  ∀ {Monster K}
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  Monster →
+  Single.Normalizer (scaffoldAcquisitionProducer scaffold)
+monsterToNormalizerFromScaffold scaffold monster =
+  subst
+    (λ Carrier → Carrier)
+    (normalizerCarrierEqualityFromScaffold scaffold)
+    (subst
+      (λ Carrier → Carrier)
+      (sym (compiledVOANormalizerIsMonster scaffold))
+      monster)
+
+normalizerMonsterRoundTrip :
+  ∀ {Monster K}
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  (normalizer : Single.Normalizer (scaffoldAcquisitionProducer scaffold)) →
+  monsterToNormalizerFromScaffold scaffold
+    (normalizerToMonsterFromScaffold scaffold normalizer)
+  ≡ normalizer
+normalizerMonsterRoundTrip scaffold normalizer
+  rewrite scaffoldProducerEquality scaffold = refl
+
+monsterNormalizerRoundTrip :
+  ∀ {Monster K}
+    (scaffold :
+      Selected3BLinearAcquisitionScaffold {Monster} {K}) →
+  (monster : Monster) →
+  normalizerToMonsterFromScaffold scaffold
+    (monsterToNormalizerFromScaffold scaffold monster)
+  ≡ monster
+monsterNormalizerRoundTrip scaffold monster
+  rewrite scaffoldProducerEquality scaffold = refl
 
 record Selected3BNormalizerActionIntertwiningOnly
     {Monster K : Set}
@@ -390,6 +435,7 @@ record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
     scaffoldOwnsAcquisition : Bool
     scaffoldOwnsSameElementComposition : Bool
     normalizerToMonsterMapCompilerOutput : Bool
+    normalizerMonsterCarrierBidiCompilerOutput : Bool
     onlyActionIntertwiningRemainsAfterScaffold : Bool
     completionCompilerOwned : Bool
     linearZetaProducerCompilerOutput : Bool
@@ -406,5 +452,5 @@ canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary :
   Trialectic369Selected3BLinearAcquisitionCompletionBoundary
 canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary =
   trialectic-369-selected3b-linear-acquisition-completion-boundary
-    true true true true true true true true true true true
+    true true true true true true true true true true true true
     false false false
