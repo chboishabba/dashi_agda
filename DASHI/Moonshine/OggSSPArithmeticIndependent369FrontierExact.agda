@@ -182,6 +182,7 @@ import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as Ar
 import DASHI.Moonshine.OggSSPSmallPrimePadicBoundStratumQuotientComparisonExact as PadicStrata
 import DASHI.Moonshine.OggSSPSmallPrimeMixedCharacteristicTwistedCentralizerCutsetExact as MixedPB
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVRBrauer
+import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPayment
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
 import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as PBTate
@@ -311,6 +312,11 @@ dvrBrauerCutsetBoundary :
   DVRBrauer.DVRLengthBrauerCutsetBoundary
 dvrBrauerCutsetBoundary =
   DVRBrauer.canonicalDVRLengthBrauerCutsetBoundary
+
+dvrPreferredPaymentBoundary :
+  DVRPayment.PBLocalizedDVRPreferredPaymentCutsetBoundary
+dvrPreferredPaymentBoundary =
+  DVRPayment.canonicalPBLocalizedDVRPreferredPaymentCutsetBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -491,6 +497,8 @@ record ArithmeticIndependent369Frontier : Set where
     uranoFiniteLengthDVRBrauerFrameworkSourced : Bool
     uranoNormalizedCompositionLengthFormulaSourced : Bool
     dvrLengthBadLevelLocalizationAuthorityPaid : Bool
+    targetIndependentSectorwiseDVRPaymentCutsetPaid : Bool
+    targetIndependentSectorwiseDVRPaymentAuthorityPaid : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -632,6 +640,8 @@ canonicalArithmeticIndependent369Frontier =
     ; uranoFiniteLengthDVRBrauerFrameworkSourced = true
     ; uranoNormalizedCompositionLengthFormulaSourced = true
     ; dvrLengthBadLevelLocalizationAuthorityPaid = false
+    ; targetIndependentSectorwiseDVRPaymentCutsetPaid = true
+    ; targetIndependentSectorwiseDVRPaymentAuthorityPaid = false
 
     ; p2ExternalMonsterResidualRecognitionPaid = false
     ; p3ExternalMonsterResidualRecognitionPaid = false
