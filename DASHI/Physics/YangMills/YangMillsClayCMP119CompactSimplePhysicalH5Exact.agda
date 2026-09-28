@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact as H2
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
+import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedWilsonH2Exact as H2Wilson
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact as H3
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCovarianceExact as Cov
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
@@ -103,6 +104,22 @@ record CMP119GroupPhysicalPackage
         covarianceLaws
         group
         publishedCMP116
+
+    Loop : Set
+
+    selectedWilson :
+      H2Wilson.CMP119RealSelectedWilsonPresentation
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vector Loop
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        (H2.osInputs h2)
+        covarianceLaws
+        group
+        (RealGap.tests realSelected)
 
     positiveGapCandidate :
       Gap.PositiveEnergy
