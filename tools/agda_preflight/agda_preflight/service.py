@@ -309,12 +309,35 @@ class DashiAgdaService:
             "profile": self._finish_request(before, started),
         }
 
-    def affected(self, target: str) -> dict:
+    def affected(
+        self,
+        target: str,
+        *,
+        within: Optional[str] = None,
+    ) -> dict:
         before, started = self._start_request()
-        modules = self.index.affected_modules(Path(target))
+        scope_modules = None
+        if within is not None:
+            scoped = self.index.diagnose(Path(within))
+            scope_modules = set(scoped.modules)
+
+        modules = list(self.index.affected_modules(Path(target)))
+        if scope_modules is not None:
+            modules = [
+                module
+                for module in modules
+                if module in scope_modules
+            ]
+
         return {
-            "modules": list(modules),
+            "modules": modules,
             "count": len(modules),
+            "scope": (
+                "indexed-cache-only"
+                if within is None
+                else "subject-closure"
+            ),
+            "within": within,
             "profile": self._finish_request(before, started),
         }
 
