@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Fi
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact as Continuum
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H2Wilson
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3OS
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as Local
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as H6
 
@@ -84,6 +85,15 @@ record DirectSourceOSLiteralClayInputs
     selectedWilsonConvergence :
       ∀ G →
       H2Wilson.LiteralSelectedWilsonExpectationApplication
+        (H1H3.forGroup sameHamiltonianGap G)
+
+    --------------------------------------------------------------------
+    -- H3: the exact R281 selected spectrum belongs to the actual OS
+    -- reconstruction and that reconstruction is the literal Y Schwinger/H.
+    --------------------------------------------------------------------
+    sameOSReconstructedSpectrum :
+      ∀ G →
+      H3OS.LiteralSelectedSpectrumIsSameOSHamiltonian
         (H1H3.forGroup sameHamiltonianGap G)
 
     --------------------------------------------------------------------
