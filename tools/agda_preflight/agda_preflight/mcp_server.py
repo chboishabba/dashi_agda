@@ -15,15 +15,17 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
     def diagnose(
         target: str,
         errors_only: bool = False,
+        limit: int = 200,
     ) -> dict:
         """Diagnose a module/Everything rollup using the persistent source index.
 
-        Read-only. Never invokes Agda. Returns diagnostics, semantic freshness
-        when configured, cache-hit state, and per-request profiling metrics.
+        Read-only. Never invokes Agda. Diagnostic payloads are bounded by
+        default; use next_error for iterative repair of large rollups.
         """
         return tools.diagnose(
             target,
             errors_only=errors_only,
+            limit=limit,
         )
 
     @server.tool()
