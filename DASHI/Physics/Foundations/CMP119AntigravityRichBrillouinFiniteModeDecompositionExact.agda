@@ -113,12 +113,12 @@ fromFiniteEllAndRegularMatching :
         (Rich.regularRemainder rich step)
         (UV.embed (Local.epsilon gaussian))) →
   RichBrillouinFiniteModeDecomposition gaussian rich step
-fromFiniteEllAndRegularMatching normalization ellNormalization richAdd regularMatching = record
+fromFiniteEllAndRegularMatching {step = step} normalization ellNormalization richAdd regularMatching = record
   { RichBrillouinFiniteModeDecomposition.richAddIsBishopAdd = richAdd
   ; RichBrillouinFiniteModeDecomposition.shellSameFiniteUniversalTerm =
       BishopP.≃-trans
         (RichNorm.richScalarIntegralAtEdgeUsesSuccessorCanonicalNode
-          normalization _)
+          normalization step)
         (BishopP.≃-symm
           (FiniteEll.embeddedFiniteUniversalTermIsCanonicalShellFormula
             ellNormalization))
