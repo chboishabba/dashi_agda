@@ -31,6 +31,9 @@ open import Data.Empty using (⊥)
 import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4
 import DASHI.Moonshine.OggSSPP3F9FrobeniusCandidateNoGoExact as F9
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
+import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
+import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
+import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 
 data AcquisitionDirection : Set where
   quotientOrCompression : AcquisitionDirection
@@ -67,7 +70,7 @@ p2ResidualCountIsTen :
 p2ResidualCountIsTen = refl
 
 p3ConcreteQuotientExists :
-  (target : DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact.ConstantTernaryState) ->
+  (target : Small.ConstantTernaryState) ->
   Σ F9.F9Point
     (λ source ->
       F9.extensionCoordinate source ≡ target)
@@ -76,18 +79,18 @@ p3ConcreteQuotientExists target =
   F9.extensionCoordinateSurjectiveCorrect target
 
 p3QuotientIsEquivariant :
-  (g : DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact.C2)
+  (g : C2.C2)
   (x : F9.F9Point) ->
   F9.extensionCoordinate (F9.actF9 g x)
   ≡
-  DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact.actConstantC2
+  Small.actConstantC2
     g
     (F9.extensionCoordinate x)
 p3QuotientIsEquivariant =
   F9.extensionCoordinateEquivariant
 
 p3QuotientIsNotFullRecognition :
-  DASHI.Core.ActionOrbitRecognitionFunctorExact.Pi0Embedding
+  Recognition.Pi0Embedding
     F9.f9ExtensionCoordinateOrbitRecognition
   ->
   ⊥
