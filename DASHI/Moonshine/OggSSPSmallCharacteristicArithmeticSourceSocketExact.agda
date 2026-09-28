@@ -35,6 +35,9 @@ import DASHI.Physics.Closure.P2LaneInnerProductProof as P2Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.OggSSPP3F9FrobeniusCandidateNoGoExact as F9NoGo
 import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4NoGo
+import DASHI.Moonshine.OggSSPP2F4AntipodalStratifiedRefinementExact as P2Stratified
+import DASHI.Moonshine.OggSSPP2FrobeniusVsRetainedTargetNoGoExact as P2FrobNoGo
+import DASHI.Moonshine.Base369P2RetainedFrobeniusCoverExact as P2FrobCover
 import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
 
 ------------------------------------------------------------------------
@@ -234,6 +237,10 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     rawF4InsufficientForTenComponentRetainedTarget : Bool
     p2UniformF4OrbitLiftRuledOut : Bool
     p2StratifiedMarkedRefinementRequired : Bool
+    p2OneOneEightTargetRechartOwned : Bool
+    p2F4StabilizerTypeMatchesAntipodalTargetType : Bool
+    movingFrobeniusRejectsIdentityOnlyRetainedTarget : Bool
+    frobeniusCompatibleTenOrbitPositiveControlOwned : Bool
     p2MarkedLevelCMCoverRequired : Bool
     p2MarkedLevelCMSourceSocketOwned : Bool
     receiptMetadataPromotedToAction : Bool
@@ -248,6 +255,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
     true true true true true true true
     true true true
     true true true
-    true true true true true true
+    true true true true true true true true true true
     false false false
     missingP2MarkedArithmeticSource
