@@ -37,6 +37,7 @@ grep -q 'storageSyncLatencyDoesNotBecomeSemanticRecomputation'   DASHI/Cognition
 grep -q 'fixtureBatchedAuthorityMatchesSequential'   DASHI/Cognition/PNF/SensibLawDbNativeCommitEconomyRegression.agda
 grep -q 'reviewProjectionCacheMustTrackInputFingerprint'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
 grep -q 'reviewProjectionCacheMustTrackConsumerScope'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
+grep -q 'reviewProjectionCacheMustTrackOccurrenceAncestry'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
 grep -q 'reviewProjectionWallAloneCannotProveParserDominance'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
 grep -q 'fixtureReuseDoesNotRecomputeReviewCandidates'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyRegression.agda
 grep -q 'exactReplayCannotCertifyFreshParserDominance'   DASHI/Cognition/PNF/SensibLawScale1ExactReplayEconomyReceipt.agda
