@@ -16,10 +16,12 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitFibreRound38Exact where
 -- DASHI CONTRIBUTION
 --
 -- Advance the remaining F4 multiplicity seam as an orbit-fibre theorem.
--- The two energy-leg maps used by the exact three-leg cancellation are proved
--- involutive on lattice coordinates and proved to preserve the literal cutoff
--- incidence carrier.  Thus every listed physical incidence has listed
--- representatives for both companion energy legs.
+-- The two energy-leg maps used by the exact three-leg cancellation preserve
+-- the literal cutoff incidence carrier.  The p-energy map is involutive.  The
+-- q-energy map is NOT involutive: its literal coordinate action has order six,
+-- with the third iterate equal to Fourier conjugation.  Thus every listed
+-- physical incidence still has listed representatives for both companion
+-- energy legs, but q-reindexing must use its true finite-order inverse.
 --
 -- Separately, a proof-relevant finite pushforward theorem shows that summing
 -- over a list partition equals summing the fibre folds.  This formulation
@@ -52,14 +54,30 @@ pEnergyLegInvolutiveOnLattice tau =
     (Symmetry.negateModeInvolutive (Physical.q tau))
     refl
 
-qEnergyLegInvolutiveOnLattice :
+qEnergyLegThirdIsConjugateOnLattice :
   ∀ tau →
   Symmetry.SameLatticeTriad
-    (Orbit.qEnergyLeg (Orbit.qEnergyLeg tau)) tau
-qEnergyLegInvolutiveOnLattice tau =
+    (Orbit.qEnergyLeg
+      (Orbit.qEnergyLeg
+        (Orbit.qEnergyLeg tau)))
+    (Symmetry.conjugateTriad tau)
+qEnergyLegThirdIsConjugateOnLattice tau =
+  Symmetry.same-lattice-triad refl refl refl
+
+qEnergyLegOrderSixOnLattice :
+  ∀ tau →
+  Symmetry.SameLatticeTriad
+    (Orbit.qEnergyLeg
+      (Orbit.qEnergyLeg
+        (Orbit.qEnergyLeg
+          (Orbit.qEnergyLeg
+            (Orbit.qEnergyLeg
+              (Orbit.qEnergyLeg tau))))))
+    tau
+qEnergyLegOrderSixOnLattice tau =
   Symmetry.same-lattice-triad
-    refl
     (Symmetry.negateModeInvolutive (Physical.p tau))
+    (Symmetry.negateModeInvolutive (Physical.q tau))
     refl
 
 pEnergyLegPreservesCutoff :
