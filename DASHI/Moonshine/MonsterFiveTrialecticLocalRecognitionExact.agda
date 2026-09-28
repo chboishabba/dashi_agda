@@ -128,10 +128,9 @@ sourceIntertwinerFactorsThroughCandidate
   {source} recognition match state =
   trans
     (sourceObserverAfterDistinguishedTransport recognition state)
-    (cong (λ mode → mode)
-      (sym
-        (sourceModelTransportIsCandidateNegation match
-          (Source.observeStableMode source state))))
+    (sym
+      (sourceModelTransportIsCandidateNegation match
+        (Source.observeStableMode source state)))
   where
     open import Relation.Binary.PropositionalEquality using (sym)
 
