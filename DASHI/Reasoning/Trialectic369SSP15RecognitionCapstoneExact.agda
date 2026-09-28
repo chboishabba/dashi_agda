@@ -465,6 +465,24 @@ outgoingZeroReferenceFalsificationCompilerPaid :
   ≡ true
 outgoingZeroReferenceFalsificationCompilerPaid = refl
 
+outgoingSixX6GeneratorEquationsSuffice :
+  PositionDescent.sixUnitGeneratorEquationsSuffice
+    outgoingPositionIndependenceBoundary
+  ≡ true
+outgoingSixX6GeneratorEquationsSuffice = refl
+
+outgoingGeneratorCriterionIsEquivalentToDescent :
+  PositionDescent.descentImpliesAllGeneratorEquations
+    outgoingPositionIndependenceBoundary
+  ≡ true
+outgoingGeneratorCriterionIsEquivalentToDescent = refl
+
+outgoingTransitiveX6DonorReused :
+  PositionDescent.existingX6TranslationReachabilityReused
+    outgoingPositionIndependenceBoundary
+  ≡ true
+outgoingTransitiveX6DonorReused = refl
+
 outgoingActualPositionIndependenceStillOpen :
   PositionDescent.actualMonsterPositionIndependenceEstablishedHere
     outgoingPositionIndependenceBoundary
