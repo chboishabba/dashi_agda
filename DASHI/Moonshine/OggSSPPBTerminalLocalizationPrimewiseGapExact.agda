@@ -51,6 +51,7 @@ import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact as Ter
 import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact as P3Scalar
 import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact as P2Scalar
 import DASHI.Moonshine.OggSSPPBScalarLocalizationReductionExact as Scalar
+import DASHI.Moonshine.OggSSPP3TateSimpleFactorLengthOneExact as P3Paid
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -354,6 +355,12 @@ canonicalPBScalarConsumerGap :
   PBScalarConsumerGap
 canonicalPBScalarConsumerGap =
   pb-scalar-consumer-gap
-    false true false
+    false true true
     false true true false
     true true false false true
+
+
+p3PaidBoundary :
+  P3Paid.P3TateSimpleFactorLengthOneBoundary
+p3PaidBoundary =
+  P3Paid.canonicalP3TateSimpleFactorLengthOneBoundary
