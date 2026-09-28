@@ -57,8 +57,10 @@ bad = record { witnes = Set }
     assert counts.get("checker_instances", 0) == 0
     assert counts.get("files_stat", 0) == 0
     assert counts["trusted_session_hits"] == 1
-    assert counts["trusted_closure_stat_skips"] == 1
-    assert counts["next_error_candidates_decoded"] == 1
+    assert counts["session_candidate_rollup_hits"] == 1
+    assert counts["session_candidate_heap_peeks"] == 1
+    assert counts.get("candidate_snapshot_modules", 0) == 0
+    assert counts.get("next_error_candidates_decoded", 0) == 0
 
 
 def test_service_external_edit_requires_explicit_refresh(tmp_path):
@@ -165,9 +167,86 @@ bad = record { witnes = Set }
     assert applied["profile"]["counts"]["trusted_session_api_stable_edits"] == 1
     assert final["profile"]["counts"].get("files_stat", 0) == 0
     assert final["profile"]["counts"]["trusted_session_hits"] == 1
+    assert final["profile"]["counts"]["session_candidate_rollup_hits"] == 1
+    assert final["profile"]["counts"]["session_candidate_heap_peeks"] == 1
+    assert applied["profile"]["counts"]["session_candidate_modules_refreshed"] == 1
     source = path.read_text(encoding="utf-8")
     assert "witnes =" not in source
     assert "witness = Set" in source
+
+
+def test_service_heap_advances_to_next_module_after_api_stable_fix(tmp_path):
+    write_module(
+        tmp_path,
+        "Service.MultiA",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    write_module(
+        tmp_path,
+        "Service.MultiB",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    top = write_module(
+        tmp_path,
+        "Service.MultiTop",
+        """
+import Service.MultiA
+import Service.MultiB
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=2,
+    ) as service:
+        first = service.next_error(
+            str(top),
+            require_fix=True,
+        )
+        first_diag = first["diagnostic"]
+        assert first_diag is not None
+
+        applied = service.apply_fix(
+            str(top),
+            first_diag["id"],
+            allow_likely=True,
+        )
+        assert applied["resolved"] is True
+        assert applied["profile"]["counts"][
+            "session_candidate_modules_refreshed"
+        ] == 1
+
+        second = service.next_error(
+            str(top),
+            require_fix=True,
+        )
+
+    assert second["status"] == "diagnostic"
+    second_diag = second["diagnostic"]
+    assert second_diag is not None
+    assert second_diag["id"] != first_diag["id"]
+    assert second_diag["path"] != first_diag["path"]
+    counts = second["profile"]["counts"]
+    assert counts["session_candidate_rollup_hits"] == 1
+    assert counts["session_candidate_heap_peeks"] == 1
+    assert counts.get("files_stat", 0) == 0
+    assert counts.get("candidate_snapshot_modules", 0) == 0
 
 
 def test_jsonl_service_protocol_roundtrip(tmp_path):
