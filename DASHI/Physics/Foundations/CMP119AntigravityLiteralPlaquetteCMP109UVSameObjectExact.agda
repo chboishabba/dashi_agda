@@ -13,80 +13,78 @@ import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- LITERAL PLAQUETTE PRODUCER = CMP109 SOURCE HISTORY, WITH UV ORIENTATION
+-- EDGE-INDEXED LITERAL PLAQUETTE PRODUCER = NODE-INDEXED CMP109 HISTORY
 --
--- The literal producer's next inverse-coupling value must not be read as source
--- depth suc(scale).  On the source-faithful UV-directed reading,
+-- CMP109 Eq. (2.15):
 --
---   producer scale = suc k
+--   u_k = u_(k+1) + beta_(k+1)(g_k).
+--
+-- Therefore literal producer step k must be read as the EDGE k -> k+1:
+--
 --   producer current inverse coupling = u_(k+1)
 --   producer next inverse coupling    = u_k
 --   producer beta step                = beta_(k+1).
 --
--- Its plus-sign recurrence then becomes exactly
---
---   u_k = u_(k+1) + beta_(k+1).
+-- This is the source-faithful orientation and removes the earlier off-by-one
+-- reading in which producer scale suc k was attached to source step k+1.
 ------------------------------------------------------------------------
 
 record LiteralPlaquetteCMP109UVSameObject
     (dataSet : Plaquette.PhysicalRunningCouplingData Nat)
     (trajectory : Flow.SourceNormalizedCouplingTrajectory) : Set₁ where
   field
-    currentInverseCouplingSame :
-      ∀ depth →
-      Plaquette.inverseCouplingSq dataSet depth
-      ≡ Flow.inverseCoupling trajectory depth
+    currentAtStepIsSourceSuccessor :
+      ∀ step →
+      Plaquette.inverseCouplingSq dataSet step
+      ≡ Flow.inverseCoupling trajectory (suc step)
 
-    nextAtCoarseIsSourcePredecessor :
-      ∀ depth →
-      Plaquette.nextInverseCouplingSq dataSet (suc depth)
-      ≡ Flow.inverseCoupling trajectory depth
+    nextAtStepIsSourceCurrent :
+      ∀ step →
+      Plaquette.nextInverseCouplingSq dataSet step
+      ≡ Flow.inverseCoupling trajectory step
 
-    literalBetaIsSourceBeta :
-      ∀ depth →
-      Literal.literalBetaStep dataSet (suc depth)
-      ≡ Flow.beta trajectory (suc depth)
+    literalBetaAtStepIsSourceSuccessorBeta :
+      ∀ step →
+      Literal.literalBetaStep dataSet step
+      ≡ Flow.beta trajectory (suc step)
 
 open LiteralPlaquetteCMP109UVSameObject public
 
 literalProducerDerivesCMP109SourceRecurrence :
   ∀ {dataSet trajectory}
     (weld : LiteralPlaquetteCMP109UVSameObject dataSet trajectory)
-    depth →
-  Flow.inverseCoupling trajectory depth
+    step →
+  Flow.inverseCoupling trajectory step
   ≡
-  Flow.inverseCoupling trajectory (suc depth)
-    + Flow.beta trajectory (suc depth)
+  Flow.inverseCoupling trajectory (suc step)
+    + Flow.beta trajectory (suc step)
 literalProducerDerivesCMP109SourceRecurrence
-    {dataSet = dataSet} weld depth =
+    {dataSet = dataSet} weld step =
   trans
-    (sym (nextAtCoarseIsSourcePredecessor weld depth))
+    (sym (nextAtStepIsSourceCurrent weld step))
     (trans
-      (Literal.literalRunningCouplingStepIsBetaSplit
-        dataSet (suc depth))
+      (Literal.literalRunningCouplingStepIsBetaSplit dataSet step)
       (cong₂
         _+_
-        (currentInverseCouplingSame weld (suc depth))
-        (literalBetaIsSourceBeta weld depth)))
+        (currentAtStepIsSourceSuccessor weld step)
+        (literalBetaAtStepIsSourceSuccessorBeta weld step)))
 
-naiveSuccessorReadingRequired : Bool
-naiveSuccessorReadingRequired = false
+edgeIndexedProducerReadingRequired : Bool
+edgeIndexedProducerReadingRequired = true
 
-uvPredecessorReadingRequired : Bool
-uvPredecessorReadingRequired = true
+producerScaleSucShiftRequired : Bool
+producerScaleSucShiftRequired = false
 
-naiveSuccessorReadingRequiredIsFalse :
-  naiveSuccessorReadingRequired ≡ false
-naiveSuccessorReadingRequiredIsFalse = refl
+edgeIndexedProducerReadingRequiredIsTrue :
+  edgeIndexedProducerReadingRequired ≡ true
+edgeIndexedProducerReadingRequiredIsTrue = refl
 
-uvPredecessorReadingRequiredIsTrue :
-  uvPredecessorReadingRequired ≡ true
-uvPredecessorReadingRequiredIsTrue = refl
+producerScaleSucShiftRequiredIsFalse :
+  producerScaleSucShiftRequired ≡ false
+producerScaleSucShiftRequiredIsFalse = refl
 
 literalPlaquetteCMP109UVCompilerLevel : ProofLevel
 literalPlaquetteCMP109UVCompilerLevel = machineChecked
 
--- Remaining physical same-object payment: inhabit the three coordinate
--- identifications above for the actual literal plaquette producer/history.
 literalPlaquetteCMP109UVSameObjectLevel : ProofLevel
 literalPlaquetteCMP109UVSameObjectLevel = conditional
