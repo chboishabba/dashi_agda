@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNR650EnergyOrbitBonyProfileRound775Exact wh
 -- introduced.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false; _&&_)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -95,14 +95,18 @@ regimeEqualRefl Scale.highLow = refl
 regimeEqualRefl Scale.highHigh = refl
 regimeEqualRefl Scale.comparable = refl
 
+andBool : Bool → Bool → Bool
+andBool true right = right
+andBool false right = false
+
 profileEqual :
   EnergyOrbitBonyProfile → EnergyOrbitBonyProfile → Bool
 profileEqual left right =
-  regimeEqual (baseClass left) (baseClass right)
-  &&
-  regimeEqual (pClass left) (pClass right)
-  &&
-  regimeEqual (qClass left) (qClass right)
+  andBool
+    (regimeEqual (baseClass left) (baseClass right))
+    (andBool
+      (regimeEqual (pClass left) (pClass right))
+      (regimeEqual (qClass left) (qClass right)))
 
 profileEqualRefl :
   (profile : EnergyOrbitBonyProfile) →
