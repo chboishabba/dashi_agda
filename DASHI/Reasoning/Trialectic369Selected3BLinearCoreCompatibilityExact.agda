@@ -22,6 +22,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as Historical
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Canonical
+import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearBridge
 
 ------------------------------------------------------------------------
 -- 1. Exact forgetful compiler.
@@ -56,8 +57,8 @@ historicalCoreCompilesCanonicalRoute :
   ∀ {Monster K}
     (core :
       Historical.Selected3BLinearAcquisitionCore {Monster} {K}) →
-  Canonical.canonicalLinearRoute
-    (canonicalCoreFromHistoricalCore core)
+  LinearBridge.canonicalLinearRouteFromAcquisition
+    (Historical.acquisitionFromCore core)
   ≡
   Canonical.canonicalLinearRoute
     (canonicalCoreFromHistoricalCore core)
