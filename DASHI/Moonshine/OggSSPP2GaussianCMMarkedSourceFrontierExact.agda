@@ -40,6 +40,7 @@ import DASHI.Moonshine.OggSSPP2PuncturedKernel2BidiExact as Kernel2Bidi
 import DASHI.Moonshine.OggSSPP2TrialecticNineObserverReconciliationExact as TrialecticNine
 import DASHI.Moonshine.OggSSPP2TrialecticNineObserverArithmeticLossExact as TrialecticLoss
 import DASHI.Moonshine.OggSSPP2TrialecticNineCentreResidualBidiExact as CentreResidual
+import DASHI.Moonshine.OggSSPP2DualDependentCodecBidiExact as DualCodec
 import DASHI.Moonshine.OggSSPP2BalancedTernaryNeutralCompletionBridgeExact as CompletionBridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPP2BadPrimeLevelStructureBoundaryExact as BadPrime
@@ -180,6 +181,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     trialecticSharedNineObserverReconciliationOwned : Bool
     trialecticNineObserverArithmeticLossPaid : Bool
     trialecticNineCentreOnlyResidualCodecOwned : Bool
+    dualDependentCodecBidiOwned : Bool
     duplicatedCentreCompletionBridgeOwned : Bool
     badPrimeLevelStructureBoundaryOwned : Bool
     gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
@@ -205,6 +207,6 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary :
 canonicalP2GaussianCMMarkedSourceFrontierBoundary =
   p2-gaussian-cm-marked-source-frontier-boundary
     true true true true false
-    true true true true true true true true true true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true true true true
     false false false
     missingFormalKerFrobeniusSquaredFiniteFlatConstruction
