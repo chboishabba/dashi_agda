@@ -100,3 +100,9 @@ import DASHI.Reasoning.Trialectic369DyadicPointedRelativeLocalExact
 import DASHI.Reasoning.Trialectic369PreRHTernaryLocalDescentCapstoneExact
 
 import DASHI.Reasoning.Trialectic369DyadicLocalNineObserverCandidateExact
+
+import DASHI.Reasoning.Trialectic369T5ComplementPhaseOrbitResidualExact
+
+import DASHI.Reasoning.Trialectic369T5ComplementOggResidualBidiExact
+
+import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact
