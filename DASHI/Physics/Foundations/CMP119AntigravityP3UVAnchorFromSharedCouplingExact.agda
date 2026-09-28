@@ -15,7 +15,7 @@ import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact as Embed
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
-import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
+import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -43,9 +43,9 @@ embeddedCouplingPositive coupling positive =
   Embed.embedStrictOrder (ℚP.positive⁻¹ positive)
 
 embeddedSourceInverseCancelsCouplingSquare :
-  ∀ {trajectory Mode Atom betaData}
-    (history : History.FiniteModeInverseSquareTerminalHistoryData
-      trajectory Mode Atom betaData) →
+  ∀ {trajectory split}
+    (history : History.BetaSplitInverseSquareTerminalHistoryData
+      trajectory split) →
   Bishop._≃_
     (Bishop._*_
       (UV.embed (Flow.inverseCoupling trajectory zero))
@@ -77,10 +77,9 @@ embeddedSourceInverseCancelsCouplingSquare
 
 record P3InitialInverseSquareUsesHistoryCoupling
     {trajectory : Flow.SourceNormalizedCouplingTrajectory}
-    {Mode Atom : Set}
-    {betaData}
-    (history : History.FiniteModeInverseSquareTerminalHistoryData
-      trajectory Mode Atom betaData)
+    {split}
+    (history : History.BetaSplitInverseSquareTerminalHistoryData
+      trajectory split)
     (running : SU2.CanonicalBishopSU2RunningInputs Nat) : Set₁ where
   field
     p3InitialInverseCancelsSameCouplingSquare :
@@ -93,9 +92,9 @@ record P3InitialInverseSquareUsesHistoryCoupling
 open P3InitialInverseSquareUsesHistoryCoupling public
 
 p3InitialInverseCouplingSameSource :
-  ∀ {trajectory Mode Atom betaData history running} →
+  ∀ {trajectory split history running} →
   P3InitialInverseSquareUsesHistoryCoupling
-    {trajectory = trajectory} {Mode = Mode} {Atom = Atom} {betaData = betaData}
+    {trajectory = trajectory} {split = split}
     history running →
   Bishop._≃_
     (P3.inverseCouplingSq (SU2.recursion running) zero)
