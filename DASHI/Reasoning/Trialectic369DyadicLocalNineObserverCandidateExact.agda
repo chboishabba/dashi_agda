@@ -202,6 +202,110 @@ sharedNineCardinalityDoesNotCreateRecognition :
 sharedNineCardinalityDoesNotCreateRecognition ()
 
 ------------------------------------------------------------------------
+-- 6b. Canonical ordinary-nine carrier rechart.
+--
+-- The ordinary balanced-pair order is:
+--
+--   (--), (-0), (-+), (0-), (00), (0+), (+-), (+0), (++)
+--
+-- and the five-mode quotient has exactly:
+--
+--   identity,
+--   A2-/A2+,
+--   B1-/B1+,
+--   B2-/B2+,
+--   E-/E+.
+--
+-- This is a DASHI finite-carrier chart.  It does not claim source-derived
+-- D4/Monster semantics for the balanced-pair labels.
+------------------------------------------------------------------------
+
+phaseNineToModeNine :
+  Phase.PhaseQuotient9 ->
+  Five.ModePhaseQuotient9
+phaseNineToModeNine (Base.tri-low , Base.tri-low) =
+  Five.identityMode
+phaseNineToModeNine (Base.tri-low , Base.tri-mid) =
+  Five.A2negative
+phaseNineToModeNine (Base.tri-low , Base.tri-high) =
+  Five.A2positive
+phaseNineToModeNine (Base.tri-mid , Base.tri-low) =
+  Five.B1negative
+phaseNineToModeNine (Base.tri-mid , Base.tri-mid) =
+  Five.B1positive
+phaseNineToModeNine (Base.tri-mid , Base.tri-high) =
+  Five.B2negative
+phaseNineToModeNine (Base.tri-high , Base.tri-low) =
+  Five.B2positive
+phaseNineToModeNine (Base.tri-high , Base.tri-mid) =
+  Five.Enegative
+phaseNineToModeNine (Base.tri-high , Base.tri-high) =
+  Five.Epositive
+
+modeNineToPhaseNine :
+  Five.ModePhaseQuotient9 ->
+  Phase.PhaseQuotient9
+modeNineToPhaseNine Five.identityMode =
+  Base.tri-low , Base.tri-low
+modeNineToPhaseNine Five.A2negative =
+  Base.tri-low , Base.tri-mid
+modeNineToPhaseNine Five.A2positive =
+  Base.tri-low , Base.tri-high
+modeNineToPhaseNine Five.B1negative =
+  Base.tri-mid , Base.tri-low
+modeNineToPhaseNine Five.B1positive =
+  Base.tri-mid , Base.tri-mid
+modeNineToPhaseNine Five.B2negative =
+  Base.tri-mid , Base.tri-high
+modeNineToPhaseNine Five.B2positive =
+  Base.tri-high , Base.tri-low
+modeNineToPhaseNine Five.Enegative =
+  Base.tri-high , Base.tri-mid
+modeNineToPhaseNine Five.Epositive =
+  Base.tri-high , Base.tri-high
+
+modeAfterPhaseNine :
+  (phase : Phase.PhaseQuotient9) ->
+  modeNineToPhaseNine (phaseNineToModeNine phase) ≡ phase
+modeAfterPhaseNine (Base.tri-low , Base.tri-low) = refl
+modeAfterPhaseNine (Base.tri-low , Base.tri-mid) = refl
+modeAfterPhaseNine (Base.tri-low , Base.tri-high) = refl
+modeAfterPhaseNine (Base.tri-mid , Base.tri-low) = refl
+modeAfterPhaseNine (Base.tri-mid , Base.tri-mid) = refl
+modeAfterPhaseNine (Base.tri-mid , Base.tri-high) = refl
+modeAfterPhaseNine (Base.tri-high , Base.tri-low) = refl
+modeAfterPhaseNine (Base.tri-high , Base.tri-mid) = refl
+modeAfterPhaseNine (Base.tri-high , Base.tri-high) = refl
+
+phaseAfterModeNine :
+  (mode : Five.ModePhaseQuotient9) ->
+  phaseNineToModeNine (modeNineToPhaseNine mode) ≡ mode
+phaseAfterModeNine Five.identityMode = refl
+phaseAfterModeNine Five.A2negative = refl
+phaseAfterModeNine Five.A2positive = refl
+phaseAfterModeNine Five.B1negative = refl
+phaseAfterModeNine Five.B1positive = refl
+phaseAfterModeNine Five.B2negative = refl
+phaseAfterModeNine Five.B2positive = refl
+phaseAfterModeNine Five.Enegative = refl
+phaseAfterModeNine Five.Epositive = refl
+
+canonicalPhaseNineToModeNineRecognition :
+  PhaseNineToModeNineRecognition
+canonicalPhaseNineToModeNineRecognition =
+  phase-nine-to-mode-nine-recognition
+    phaseNineToModeNine
+    modeNineToPhaseNine
+    modeAfterPhaseNine
+    phaseAfterModeNine
+
+observeABCanonicalModeNine :
+  Descent.ABSection ->
+  Five.ModePhaseQuotient9
+observeABCanonicalModeNine =
+  observeABModeNine canonicalPhaseNineToModeNineRecognition
+
+------------------------------------------------------------------------
 -- 7. Monster-5 provenance firewall.
 ------------------------------------------------------------------------
 
@@ -224,6 +328,7 @@ record Trialectic369DyadicLocalNineObserverCandidateBoundary : Set where
     localNineObserverConstructed : Bool
     localObserverKnownLossy : Bool
     phaseNineToModeNineRecognitionConstructed : Bool
+    phaseNineToModeNineCarrierRoundTripsPaid : Bool
     actualMonsterFiveLocalCarrierIdentified : Bool
     actualMonsterTransportIntertwinerProved : Bool
 
@@ -231,4 +336,4 @@ canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary :
   Trialectic369DyadicLocalNineObserverCandidateBoundary
 canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary =
   trialectic-369-dyadic-local-nine-observer-candidate-boundary
-    true true true true false false false
+    true true true true true true false false
