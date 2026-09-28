@@ -139,21 +139,6 @@ module SeparatedBaseCommutator
       (maskedProductCell beta)
       (maskedProductCell (Symmetry.swapTriad beta))
 
-  maskedPairProductMeaning :
-    (beta : Physical.PhysicalTriadIncidence) →
-    maskedPairProductCell beta
-    ≡
-    (case R781.ccTouched beta of λ
-      { true → C3.complex3Zero F
-      ; false → Pair.Pair.pairedProductRuleCell beta
-      })
-  maskedPairProductMeaning beta
-    rewrite R781.ccTouchedSwapInvariant beta
-    with R781.ccTouched beta
-  ... | true =
-    Field.complex3AddZeroLeft (C3.complex3Zero F)
-  ... | false = refl
-
   mixedFold : Z3.FourierMode → C3.Complex3 F
   mixedFold output =
     R224.foldVector mixedCell (Output.physicalOutputFiber cutoff output)
@@ -315,22 +300,17 @@ module SeparatedBaseCommutator
           (R762.fourCopies (maskedPairProductCell beta))
       rowPointwise beta kEq
         rewrite kEq
+              | R781.ccTouchedSwapInvariant beta
         with R781.ccTouched beta
       ... | true =
-        trans refl
-          (sym
+        sym
+          (trans
+            (workFourCopies M (C3.complex3Zero F))
             (trans
-              (workFourCopies M (C3.complex3Zero F))
+              (cong (four *_) (R597.workZeroRight M))
               (solve (four ∷ []))))
       ... | false =
-        trans
-          (outerRowFactors beta)
-          (cong
-            (λ selected →
-              Work.coherentWork selected
-                (R762.fourCopies
-                  (Pair.Pair.pairedProductRuleCell beta)))
-            refl)
+        outerRowFactors beta
 
       foldRows :
         R38.foldPower rawMaskedPairedBaseRow items
