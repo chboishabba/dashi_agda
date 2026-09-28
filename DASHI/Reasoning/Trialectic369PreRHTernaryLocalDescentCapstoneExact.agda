@@ -156,6 +156,26 @@ abFactorizationRotatesToBC :
 abFactorizationRotatesToBC =
   C3.abFactorizationAfterRotateIsBC
 
+wholeFactorizationRotatesToBC :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  Factor.observerToABLocalComplement (C3.rotateABC matrix)
+  ≡
+  Factor.ab-local-complement-point
+    (C3.bcAsAB (Descent.restrictBC matrix))
+    (C3.bcComplementAsABComplement (C3.observerBCComplement matrix))
+wholeFactorizationRotatesToBC =
+  C3.abFactorizationAfterRotateIsBC
+
+wholeFactorizationRotatesTwiceToCA :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  Factor.observerToABLocalComplement (C3.rotateABCTwice matrix)
+  ≡
+  Factor.ab-local-complement-point
+    (C3.caAsAB (Descent.restrictCA matrix))
+    (C3.caComplementAsABComplement (C3.observerCAComplement matrix))
+wholeFactorizationRotatesTwiceToCA =
+  C3.abFactorizationAfterRotateTwiceIsCA
+
 ------------------------------------------------------------------------
 -- 5. Pointed relative repair of the puncture.
 ------------------------------------------------------------------------
@@ -210,6 +230,7 @@ record Trialectic369PreRHTernaryLocalDescentCapstoneBoundary : Set where
     localTimesComplementFactorization : Bool
     complementIsFiveTrit : Bool
     participantC3CyclesAllThreeCharts : Bool
+    participantC3ConjugatesWholeT4xT5Factorizations : Bool
     noPreferredDyadicChart : Bool
     pointedRestrictionRepairOwned : Bool
     naivePuncturedSubpresheafRejected : Bool
@@ -221,5 +242,6 @@ canonicalTrialectic369PreRHTernaryLocalDescentCapstoneBoundary :
 canonicalTrialectic369PreRHTernaryLocalDescentCapstoneBoundary =
   trialectic-369-pre-rh-ternary-local-descent-capstone-boundary
     true true true true true true true
-    true true true true
+    true true true
+    true true
     false false
