@@ -241,6 +241,11 @@ sameHGapForEveryLiteralGroup source = record
       λ G →
         h1h3
           (constructionForEveryLiteralCompactSimpleGroup source G)
+  ; H1H3.LiteralDirectSourceSameHMassGap.physicalHamiltonianIsLiteral =
+      λ G →
+        H3.selectedPhysicalHamiltonianIsLiteral
+          (h3SameOS
+            (constructionForEveryLiteralCompactSimpleGroup source G))
   }
 
 h2ForEveryLiteralGroup :
