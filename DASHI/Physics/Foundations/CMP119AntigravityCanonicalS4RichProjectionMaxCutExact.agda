@@ -12,6 +12,7 @@ import RealProperties as BishopP
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinGaussianExact as CanonicalRich
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowABetaDrivenStateExact as RowAState
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
@@ -137,6 +138,27 @@ asP3LiteralTotal :
 asP3LiteralTotal package =
   P3Literal.splitViewAsTotalView (asP3LiteralSplit package)
 
+asCanonicalS4SameObjectPackage :
+  ∀ {trajectory split inputs rowA smallFieldCap largeFieldCap covarianceCap
+      dataSet rich}
+    (package : CanonicalS4RichProjectionMaxCut
+      {trajectory = trajectory} {split = split}
+      inputs rowA smallFieldCap largeFieldCap covarianceCap dataSet rich) →
+  S4.CanonicalS4SameObjectPackage
+    {trajectory = trajectory} {split = split}
+    inputs rowA smallFieldCap largeFieldCap covarianceCap
+asCanonicalS4SameObjectPackage package = record
+  { S4.CanonicalS4SameObjectPackage.betaCoordinates =
+      betaCoordinates package
+  ; S4.CanonicalS4SameObjectPackage.bishopRunning =
+      bishopRunning package
+  ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
+      P3Literal.p3LiteralPlaquetteThenCMP109
+        (asP3LiteralTotal package)
+        (literalPlaquetteRepresentsCMP109 package)
+  ; S4.CanonicalS4SameObjectPackage.traceBoundary =
+      traceBoundary package
+  }
 normalizedLogCoordinateRequired : Bool
 normalizedLogCoordinateRequired = false
 
