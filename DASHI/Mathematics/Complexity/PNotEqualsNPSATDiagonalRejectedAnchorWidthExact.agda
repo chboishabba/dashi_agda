@@ -178,7 +178,7 @@ guardedPayloadWidth realization =
 --   (suc payload arity , indexed guard root).
 ------------------------------------------------------------------------
 
-IndexedRoot : Set₁
+IndexedRoot : Set
 IndexedRoot =
   Σ Nat (λ variables → SAT.BooleanFormula variables)
 
