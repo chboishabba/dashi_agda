@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPP2DualDependentCodecBidiExact
 import DASHI.Moonshine.OggSSPP2TrialecticNineCentreResidualBidiExact
 import DASHI.Moonshine.OggSSPP2TrialecticNineObserverArithmeticLossExact
 import DASHI.Moonshine.OggSSPP2TrialecticNineObserverReconciliationExact
