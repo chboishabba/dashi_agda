@@ -100,7 +100,7 @@ integerA1Depth :
   PrimeGenericPublishedDworkCoefficientSource ->
   Nat
 integerA1Depth C =
-  Vp.vp-true (prime C) ∣ integerA1 C ∣
+  Vp.vp-true (prime C) (∣ integerA1 C ∣)
 
 ------------------------------------------------------------------------
 -- 4. Boundary.
