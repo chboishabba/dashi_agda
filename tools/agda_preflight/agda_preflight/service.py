@@ -411,13 +411,29 @@ class DashiAgdaService:
         trusted = target_path in self._trusted_targets
         if trusted:
             self.profiler.count("trusted_session_hits")
-        diagnostic = self.index.next_diagnostic(
+
+        cache = self._candidate_rollup(
             target_path,
-            require_fix=require_fix,
             validate_freshness=not trusted,
         )
-        if not trusted:
+        if cache is None:
+            # Missing/stale candidate rows: rebuild the persistent target once,
+            # then establish both trust and the in-memory candidate snapshot.
+            self.index.diagnose(target_path)
             self._trust_target(target_path)
+            cache = self._build_candidate_rollup(
+                target_path,
+                validate_freshness=False,
+            )
+        elif not trusted:
+            self._trust_target(target_path)
+
+        diagnostic = (
+            cache.peek(require_fix=require_fix)
+            if cache is not None
+            else None
+        )
+        self.profiler.count("session_candidate_heap_peeks")
         semantic = {}
         if diagnostic is not None and self.semantic_path is not None:
             identity = self.index.source_identity(diagnostic.path)
@@ -513,6 +529,10 @@ class DashiAgdaService:
             self._drop_trust()
         else:
             self.profiler.count("trusted_session_api_stable_edits")
+            self._refresh_rollup_module_candidates(
+                after_state[0],
+                diagnostic.path,
+            )
 
         resolved = all(
             item.diagnostic_id != diagnostic_id
