@@ -39,6 +39,8 @@ import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as LongDocument
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceRegression as LongDocumentPersistenceRegression
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as DbNativeCorpus
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerRegression as DbNativeCorpusRegression
+import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyExact as CommitEconomy
+import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyRegression as CommitEconomyRegression
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -612,3 +614,48 @@ dbNativeFixtureL2ReuseAvoidsFactorReinterpretation :
   DbNativeCorpusRegression.fixtureL2ReuseDoesNotReinterpretFactors
   ≡ DbNativeCorpusRegression.fixtureL2ReuseDoesNotReinterpretFactors
 dbNativeFixtureL2ReuseAvoidsFactorReinterpretation = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P durable commit economy remains physical execution only.
+------------------------------------------------------------------------
+
+dbNativeLocalityDoesNotDetermineCommitBarrierCount :
+  CommitEconomy.VerifiedLocalityImpliesFewCommitBarriers → ⊥
+dbNativeLocalityDoesNotDetermineCommitBarrierCount =
+  CommitEconomy.verifiedLocalityDoesNotImplyFewCommitBarriers
+
+dbNativeFewCommitsDoNotProveSemanticIndependence :
+  CommitEconomy.FewCommitBarriersProveSemanticIndependence → ⊥
+dbNativeFewCommitsDoNotProveSemanticIndependence =
+  CommitEconomy.fewCommitBarriersDoNotProveSemanticIndependence
+
+dbNativeCommitCoalescingDoesNotCreateAdmission :
+  CommitEconomy.CommitCoalescingCreatesSemanticAdmission → ⊥
+dbNativeCommitCoalescingDoesNotCreateAdmission =
+  CommitEconomy.commitCoalescingDoesNotCreateSemanticAdmission
+
+dbNativeCommitCoalescingDoesNotCreateAuthority :
+  CommitEconomy.CommitCoalescingCreatesSemanticAuthority → ⊥
+dbNativeCommitCoalescingDoesNotCreateAuthority =
+  CommitEconomy.commitCoalescingDoesNotCreateSemanticAuthority
+
+dbNativeCommitCoalescingDoesNotCreateTruth :
+  CommitEconomy.CommitCoalescingCreatesClaimTruth → ⊥
+dbNativeCommitCoalescingDoesNotCreateTruth =
+  CommitEconomy.commitCoalescingDoesNotCreateClaimTruth
+
+dbNativeStorageSyncLatencyIsNotSemanticRecomputation :
+  CommitEconomy.StorageSyncLatencyIsSemanticRecomputation → ⊥
+dbNativeStorageSyncLatencyIsNotSemanticRecomputation =
+  CommitEconomy.storageSyncLatencyDoesNotBecomeSemanticRecomputation
+
+dbNativeFixtureCommitBatchPreservesAuthority :
+  CommitEconomyRegression.fixtureBatchedAuthorityMatchesSequential
+  ≡ CommitEconomyRegression.fixtureBatchedAuthorityMatchesSequential
+dbNativeFixtureCommitBatchPreservesAuthority = refl
+
+dbNativeFixtureCommitBatchReopensExactly :
+  CommitEconomyRegression.fixtureReceiptReopensExactly
+  ≡ CommitEconomyRegression.fixtureReceiptReopensExactly
+dbNativeFixtureCommitBatchReopensExactly = refl
