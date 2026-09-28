@@ -73,10 +73,20 @@ gaussianFloorNonnegative :
   0ℚ ≤ gaussianFloor window
 gaussianFloorNonnegative window =
   let
-    factorNN : 0ℚ ≤ SU2.gaussianSU2Coefficient
-    factorNN = ℚP.nonNegative⁻¹ SU2.gaussianSU2Coefficient
+    factor = SU2.gaussianSU2Coefficient
+    factorNN : 0ℚ ≤ factor
+    factorNN = ℚP.nonNegative⁻¹ factor
+
+    scaled :
+      factor * 0ℚ ≤ factor * logFloor window
+    scaled =
+      Norm.scaleNonnegative
+        factor factorNN (logFloorNonnegative window)
   in
-  Norm.mulNonnegative factorNN (logFloorNonnegative window)
+  subst
+    (λ lower → lower ≤ gaussianFloor window)
+    (ℚP.*-zeroʳ factor)
+    scaled
 
 stepGaussianCertificate :
   ∀ {trajectory weld}
