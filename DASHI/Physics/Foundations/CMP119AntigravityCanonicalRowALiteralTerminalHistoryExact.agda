@@ -3,8 +3,9 @@ module DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowALiteralTerminalHi
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; Positive; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteSourceTrajectoryExact as Source
@@ -16,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as Orde
 import DASHI.Physics.YangMills.BalabanYM4NonnegativeBetaFinitePropagationExact as Finite
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.Balaban1989BetaSplitInverseSquareTerminalHistoryExact as History
+import DASHI.Physics.YangMills.BalabanClayT4PositiveDenominatorQuotientEndpointsExact as Quot
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -26,6 +28,41 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- by the Row-A small-coupling theorem.
 ------------------------------------------------------------------------
 
+gammaSquare :
+  RowA.FiniteQuarticResponseConstants → ℚ
+gammaSquare rowA =
+  Order.square (RowA.canonicalQuarticResponseGamma rowA)
+
+gammaSquarePositive :
+  (rowA : RowA.FiniteQuarticResponseConstants) →
+  0ℚ < gammaSquare rowA
+gammaSquarePositive rowA =
+  let
+    gamma = RowA.canonicalQuarticResponseGamma rowA
+    instance gammaPos : Positive gamma
+    gammaPos = ℚ.positive (RowA.canonicalQuarticResponseGammaPositive rowA)
+  in
+  ℚP.positive⁻¹ (gamma * gamma)
+
+canonicalInverseThreshold :
+  RowA.FiniteQuarticResponseConstants → ℚ
+canonicalInverseThreshold rowA =
+  Quot.positiveReciprocal
+    (gammaSquare rowA)
+    (gammaSquarePositive rowA)
+
+canonicalInverseThresholdRepresentation :
+  (rowA : RowA.FiniteQuarticResponseConstants) →
+  canonicalInverseThreshold rowA * gammaSquare rowA ≡ 1ℚ
+canonicalInverseThresholdRepresentation rowA =
+  trans
+    (ℚP.*-comm
+      (canonicalInverseThreshold rowA)
+      (gammaSquare rowA))
+    (Quot.positiveReciprocalRightInverse
+      (gammaSquare rowA)
+      (gammaSquarePositive rowA))
+
 record CanonicalRowALiteralTerminalHistory
     (dataSet : Plaquette.PhysicalRunningCouplingData Nat)
     (coherence : Source.LiteralPlaquetteUVChainCoherence dataSet)
@@ -33,7 +70,6 @@ record CanonicalRowALiteralTerminalHistory
       CanonicalHistory.CanonicalLiteralPlaquetteHistory dataSet coherence)
     (rowA : RowA.FiniteQuarticResponseConstants) : Set₁ where
   field
-    inverseThreshold : ℚ
     terminalScale : Nat
 
     ActiveScale : Nat → Set
@@ -44,7 +80,7 @@ record CanonicalRowALiteralTerminalHistory
       Finite.advance scale (gapToTerminal scale active) ≡ terminalScale
 
     terminalInverseThreshold :
-      inverseThreshold ≤
+      canonicalInverseThreshold rowA ≤
       Flow.inverseCoupling
         (CanonicalHistory.trajectory coherence)
         terminalScale
@@ -56,11 +92,6 @@ record CanonicalRowALiteralTerminalHistory
       Flow.inverseCoupling
         (CanonicalHistory.trajectory coherence) scale
       * Order.square (Terminal.literalCouplingAt dataSet scale)
-      ≡ 1ℚ
-
-    inverseThresholdRepresentation :
-      inverseThreshold
-      * Order.square (RowA.canonicalQuarticResponseGamma rowA)
       ≡ 1ℚ
 
 open CanonicalRowALiteralTerminalHistory public
@@ -85,7 +116,7 @@ asLiteralPlaquetteTerminalHistory
   { Terminal.LiteralPlaquetteTerminalHistory.gamma =
       RowA.canonicalQuarticResponseGamma rowA
   ; Terminal.LiteralPlaquetteTerminalHistory.inverseThreshold =
-      inverseThreshold history
+      canonicalInverseThreshold rowA
   ; Terminal.LiteralPlaquetteTerminalHistory.terminalScale =
       terminalScale history
   ; Terminal.LiteralPlaquetteTerminalHistory.ActiveScale =
@@ -105,7 +136,7 @@ asLiteralPlaquetteTerminalHistory
   ; Terminal.LiteralPlaquetteTerminalHistory.inverseCouplingRepresentation =
       inverseCouplingRepresentation history
   ; Terminal.LiteralPlaquetteTerminalHistory.inverseThresholdRepresentation =
-      inverseThresholdRepresentation history
+      canonicalInverseThresholdRepresentation rowA
   }
 
 historyGammaIsCanonicalRowAGamma :
