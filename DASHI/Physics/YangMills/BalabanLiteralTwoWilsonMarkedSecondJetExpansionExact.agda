@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedSecondJetExpansionEx
 -- remain the genuine same-object/source payments.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List)
 open import Data.Rational.Base as ℚ using (ℚ)
 
