@@ -144,10 +144,10 @@ duncanSwisher =
 primeMoonshineHauptmodulSource : Source.AttributedSource
 primeMoonshineHauptmodulSource =
   Source.mkDOISource
-    "DaeYeol Jeon, Soon-Yi Kang, Chang Heon Kim, and others"
+    "Toshiki Matsusaka"
     "The Fourier coefficients of the McKay-Thompson series and the traces of CM values"
-    "Research in Number Theory"
-    "2018"
+    "Research in Number Theory 3, article 23"
+    "2017"
     "10.1007/s40993-017-0090-x"
     "https://doi.org/10.1007/s40993-017-0090-x"
     Source.academicArticleSource
