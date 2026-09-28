@@ -30,12 +30,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy as Scale
+import DASHI.Physics.Closure.NSTriadKNPhysicalBonySwapEquivarianceRound129Exact as R129
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
@@ -76,7 +78,7 @@ regimeComparable Scale.comparable = true
 
 regimeComparableSwapInvariant :
   (regime : Scale.ScaleRegime) →
-  regimeComparable (DASHI.Physics.Closure.NSTriadKNPhysicalBonySwapEquivarianceRound129Exact.swapRegime regime)
+  regimeComparable (R129.swapRegime regime)
   ≡ regimeComparable regime
 regimeComparableSwapInvariant Scale.lowHigh = refl
 regimeComparableSwapInvariant Scale.highLow = refl
@@ -194,6 +196,17 @@ module TwoFamilyResidual
     ... | true = refl
     ... | false = refl
 
+    pairedResidualCellSwapInvariant :
+      (beta : Physical.PhysicalTriadIncidence) →
+      P.swapPairedResidualCell (Symmetry.swapTriad beta)
+      ≡ P.swapPairedResidualCell beta
+    pairedResidualCellSwapInvariant beta
+      rewrite R38.swapTriadInvolutiveExact beta =
+      solve
+        ( P.Base.differenceAlignedCell beta
+        ∷ P.Base.differenceAlignedCell (Symmetry.swapTriad beta)
+        ∷ [])
+
     fullySeparatedCellSwapInvariant :
       (beta : Physical.PhysicalTriadIncidence) →
       fullySeparatedCell (Symmetry.swapTriad beta)
@@ -202,12 +215,17 @@ module TwoFamilyResidual
       rewrite ccTouchedSwapInvariant beta
       with ccTouched beta
     ... | true = refl
-    ... | false =
-      cong
-        (_+ P.Base.differenceAlignedCell
-          (Symmetry.swapTriad
-            (Symmetry.swapTriad beta)))
-        refl
+    ... | false = pairedResidualCellSwapInvariant beta
+
+    ccTouchedCellSwapInvariant :
+      (beta : Physical.PhysicalTriadIncidence) →
+      ccTouchedCell (Symmetry.swapTriad beta)
+      ≡ ccTouchedCell beta
+    ccTouchedCellSwapInvariant beta
+      rewrite ccTouchedSwapInvariant beta
+      with ccTouched beta
+    ... | true = pairedResidualCellSwapInvariant beta
+    ... | false = refl
 
     fullySeparatedFold : ℚ
     fullySeparatedFold =
@@ -241,7 +259,7 @@ module TwoFamilyResidual
                 (R38.foldPower fullySeparatedCell rest
                   + R38.foldPower ccTouchedCell rest))
               (residualCellSplits beta))
-            (Data.Rational.Tactic.RingSolver.solve
+            (solve
               ( fullySeparatedCell beta
               ∷ ccTouchedCell beta
               ∷ R38.foldPower fullySeparatedCell rest
