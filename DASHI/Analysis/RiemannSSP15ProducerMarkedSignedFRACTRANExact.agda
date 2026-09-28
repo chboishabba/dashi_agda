@@ -103,7 +103,73 @@ producerMarkedValuationOwnLane code =
     (Branch.pointedLane (producerMarkedSeed code))
 
 ------------------------------------------------------------------------
--- 3. Exact signed execution effect.
+-- 3. Producer-marked SSP hyperform lane.
+------------------------------------------------------------------------
+
+producerMarkedHyperformLane :
+  {certificate : Capstone.PrimitiveRowProducerRoleCertificate} ->
+  Capstone.ProducerMarkedSSP15Code certificate ->
+  Signed.SSPHyperformLane
+producerMarkedHyperformLane code =
+  let pointed = Branch.pointedLane (producerMarkedSeed code)
+      prime = Branch.lanePrimeToSignedPrime (Branch.selectedPrime pointed)
+      multiplicity = Branch.signedMultiplicity pointed
+  in
+  Signed.sspHyperformLane
+    prime
+    (Signed.sspComplexityRank prime)
+    refl
+    Signed.canonicalSSPAddress
+    (Signed.orientationOfMultiplicity multiplicity)
+
+producerMarkedLanePrimeExact :
+  {certificate : Capstone.PrimitiveRowProducerRoleCertificate} ->
+  (code : Capstone.ProducerMarkedSSP15Code certificate) ->
+  Signed.primeLane (producerMarkedHyperformLane code)
+  ≡
+  Branch.lanePrimeToSignedPrime
+    (Branch.selectedPrime (Branch.pointedLane (producerMarkedSeed code)))
+producerMarkedLanePrimeExact code = refl
+
+originRoleHyperformOrientationInverse :
+  (certificate : Capstone.PrimitiveRowProducerRoleCertificate) ->
+  (mode : Quotient.ComplementMode5) ->
+  Signed.orientation
+    (producerMarkedHyperformLane
+      (Capstone.canonicalProducerMarkedCode
+        certificate mode Codec.originRole))
+  ≡ Signed.inverseOrientation
+originRoleHyperformOrientationInverse certificate mode = refl
+
+jRoleHyperformOrientationMediated :
+  (certificate : Capstone.PrimitiveRowProducerRoleCertificate) ->
+  (mode : Quotient.ComplementMode5) ->
+  Signed.orientation
+    (producerMarkedHyperformLane
+      (Capstone.canonicalProducerMarkedCode
+        certificate mode Codec.jRole))
+  ≡ Signed.mediatedOrientation
+jRoleHyperformOrientationMediated certificate mode = refl
+
+sRoleHyperformOrientationForward :
+  (certificate : Capstone.PrimitiveRowProducerRoleCertificate) ->
+  (mode : Quotient.ComplementMode5) ->
+  Signed.orientation
+    (producerMarkedHyperformLane
+      (Capstone.canonicalProducerMarkedCode
+        certificate mode Codec.sRole))
+  ≡ Signed.forwardOrientation
+sRoleHyperformOrientationForward certificate mode = refl
+
+producerMarkedAddressIsCanonical369 :
+  {certificate : Capstone.PrimitiveRowProducerRoleCertificate} ->
+  (code : Capstone.ProducerMarkedSSP15Code certificate) ->
+  Signed.address (producerMarkedHyperformLane code)
+  ≡ Signed.canonicalSSPAddress
+producerMarkedAddressIsCanonical369 code = refl
+
+------------------------------------------------------------------------
+-- 4. Exact signed execution effect.
 ------------------------------------------------------------------------
 
 executeProducerMarked :
@@ -172,7 +238,7 @@ sRoleProgramHasNoInverseToken :
 sRoleProgramHasNoInverseToken certificate mode = refl
 
 ------------------------------------------------------------------------
--- 4. Neutral j role: executable arithmetic effect collapses, provenance does
+-- 5. Neutral j role: executable arithmetic effect collapses, provenance does
 -- not.
 ------------------------------------------------------------------------
 
@@ -234,7 +300,7 @@ emptyJProgramDoesNotRecoverSelectedPrime :
 emptyJProgramDoesNotRecoverSelectedPrime ()
 
 ------------------------------------------------------------------------
--- 5. Producer-marked role-code reopening remains exact above execution.
+-- 6. Producer-marked role-code reopening remains exact above execution.
 ------------------------------------------------------------------------
 
 producerMarkedSeedReopensRoleCode :
@@ -252,7 +318,7 @@ producerMarkedSeedReopensRoleCode certificate mode role =
   Provenance.roleCodePointedRoundTrip (mode , role)
 
 ------------------------------------------------------------------------
--- 6. Boundary.
+-- 7. Boundary.
 ------------------------------------------------------------------------
 
 data SignedFRACTRANExecutionCreatesAnalyticIdentity : Set where
@@ -265,6 +331,9 @@ record RiemannSSP15ProducerMarkedSignedFRACTRANBoundary : Set where
   constructor riemann-ssp15-producer-marked-signed-fractran-boundary
   field
     producerMarkedPointedSeedOwned : Bool
+    producerMarkedHyperformLaneOwned : Bool
+    signedOrientationMatchesRolePolarity : Bool
+    canonical369AddressRetained : Bool
     originCompilesToInversePrimeInstruction : Bool
     jCompilesToEmptyArithmeticProgram : Bool
     sCompilesToPositivePrimeInstruction : Bool
@@ -277,4 +346,4 @@ canonicalRiemannSSP15ProducerMarkedSignedFRACTRANBoundary :
   RiemannSSP15ProducerMarkedSignedFRACTRANBoundary
 canonicalRiemannSSP15ProducerMarkedSignedFRACTRANBoundary =
   riemann-ssp15-producer-marked-signed-fractran-boundary
-    true true true true true true true false
+    true true true true true true true true true true false
