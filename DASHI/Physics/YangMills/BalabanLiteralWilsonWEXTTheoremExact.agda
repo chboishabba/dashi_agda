@@ -1099,3 +1099,172 @@ literalWilsonCovarianceSourceFromObservableIndexedMarkedJets
         upperOrderClosed
   in
   R574.asR556 (R576.asR574 preferred)
+
+
+------------------------------------------------------------------------
+-- Preferred normalized-moment jet route.
+--
+-- The expansion target is fixed by the exact finite expectation algebra, so no
+-- separate mixed-response equality is a physical input.
+------------------------------------------------------------------------
+
+literalWilsonMixedLogFromNormalizedMarkedJetExpansion :
+  ∀ {Measure Observable Cluster}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (markedJetExpansion :
+      ∀ cutoff left right →
+      Jet.NormalizedWilsonMarkedLogJetExpansion
+        {Cluster = Cluster}
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff))
+        left right) →
+  R576.PreferredWilsonMixedLogPhysicalSource dataSet laws
+literalWilsonMixedLogFromNormalizedMarkedJetExpansion
+    sourceCalculus markedJetExpansion =
+  literalWilsonMixedLogTheorem
+    sourceCalculus
+    (λ cutoff → R403.canonicalObservableIndexedMeaning (sourceCalculus cutoff))
+    (λ cutoff left right →
+      let expansion = markedJetExpansion cutoff left right
+          locality = Jet.supportLocality expansion
+      in
+      Jet.filterTwoSupport
+        (Jet.touchesLeft locality)
+        (Jet.touchesRight locality)
+        (Jet.clusters expansion))
+    (λ cutoff left right cluster →
+      Jet.mixed
+        (Jet.clusterJet
+          (markedJetExpansion cutoff left right)
+          cluster))
+    (λ cutoff left right →
+      Jet.normalizedMixedLogIsTwoSupportClusterSum
+        (sourceCalculus cutoff)
+        left
+        right
+        (markedJetExpansion cutoff left right))
+
+literalWilsonCovarianceSourceFromNormalizedMarkedJets :
+  ∀ {Measure Observable Cluster Scale Volume Root}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (markedJetExpansion :
+      ∀ cutoff left right →
+      Jet.NormalizedWilsonMarkedLogJetExpansion
+        {Cluster = Cluster}
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff))
+        left right)
+    (shellData : Shell.TraversalShellData Scale Volume Root)
+    (scaleOfCutoff : Nat → Scale)
+    (volumeOfCutoff : Nat → Volume)
+    (physicalDistance : Observable → Observable → Nat)
+    (connectingRoot : Nat → Observable → Observable → Root)
+    (ConnectingClusterMeetsBothSupports :
+      Nat → Observable → Observable → Set)
+    (shellCharge :
+      Nat → Observable → Observable → Cluster → ℚ)
+    (pointwiseWilsonJetLocalization :
+      ∀ cutoff left right cluster →
+      ∣ Jet.mixed
+          (Jet.clusterJet
+            (markedJetExpansion cutoff left right)
+            cluster) ∣
+      ≤ shellCharge cutoff left right cluster)
+    (localizedShellChargeSum :
+      ∀ cutoff left right →
+      let expansion = markedJetExpansion cutoff left right
+          locality = Jet.supportLocality expansion
+      in
+      TwoMark.sumℚ
+        (TwoMark.map
+          (shellCharge cutoff left right)
+          (Jet.filterTwoSupport
+            (Jet.touchesLeft locality)
+            (Jet.touchesRight locality)
+            (Jet.clusters expansion)))
+      ≤
+      Shell.rootedShell shellData
+        (scaleOfCutoff cutoff)
+        (volumeOfCutoff cutoff)
+        (connectingRoot cutoff left right)
+        (physicalDistance left right))
+    (timeTranslate : Observable → Nat → Observable)
+    (leftBounded :
+      ∀ observable →
+      Gram.BoundedObservable dataSet observable)
+    (translatedRightBounded :
+      ∀ observable time →
+      Gram.BoundedObservable dataSet (timeTranslate observable time))
+    (translatedProductBounded :
+      ∀ left right time →
+      Gram.BoundedObservable dataSet
+        (Gram.multiplyObservable (Gram.operations dataSet)
+          left (timeTranslate right time)))
+    (supportDistanceIsEuclideanTime :
+      ∀ left right time →
+      physicalDistance left (timeTranslate right time) ≡ time)
+    (upperOrderClosed :
+      ∀ sequence target upper →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
+      (∀ cutoff → sequence cutoff ≤ upper) →
+      target ≤ upper) →
+  R556.IndexedSourceFirstWilsonCovarianceData
+    {Measure = Measure}
+    {Observable = Observable}
+    {Scale = Scale}
+    {Volume = Volume}
+    {Root = Root}
+    dataSet
+    (R575.rationalAbsoluteCovarianceExtension laws)
+literalWilsonCovarianceSourceFromNormalizedMarkedJets
+    sourceCalculus markedJetExpansion
+    shellData scaleOfCutoff volumeOfCutoff physicalDistance connectingRoot
+    ConnectingClusterMeetsBothSupports shellCharge
+    pointwiseWilsonJetLocalization localizedShellChargeSum
+    timeTranslate leftBounded translatedRightBounded translatedProductBounded
+    supportDistanceIsEuclideanTime upperOrderClosed =
+  let
+    mixedLog =
+      literalWilsonMixedLogFromNormalizedMarkedJetExpansion
+        sourceCalculus markedJetExpansion
+
+    preferred =
+      literalPreferredWilsonWEXTFromPointwiseLocalization
+        mixedLog
+        shellData
+        scaleOfCutoff
+        volumeOfCutoff
+        physicalDistance
+        connectingRoot
+        ConnectingClusterMeetsBothSupports
+        shellCharge
+        pointwiseWilsonJetLocalization
+        localizedShellChargeSum
+        timeTranslate
+        leftBounded
+        translatedRightBounded
+        translatedProductBounded
+        supportDistanceIsEuclideanTime
+        upperOrderClosed
+  in
+  R574.asR556 (R576.asR574 preferred)
