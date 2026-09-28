@@ -518,6 +518,43 @@ record L2CandidateProductSummaryReuse : Set where
 
 open L2CandidateProductSummaryReuse public
 
+record BoundedCandidateCommitBatch : Set where
+  constructor bounded-candidate-commit-batch
+  field
+    candidateCount : Nat
+    commitBatchSize : Nat
+    commitCount : Nat
+
+    everyCandidateValidatedBeforePersist : Bool
+    everyCandidateValidatedBeforePersistIsTrue :
+      everyCandidateValidatedBeforePersist ≡ true
+
+    everyCandidateReopenedAfterDurableCommit : Bool
+    everyCandidateReopenedAfterDurableCommitIsTrue :
+      everyCandidateReopenedAfterDurableCommit ≡ true
+
+    candidateIdentityPreserved : Bool
+    candidateIdentityPreservedIsTrue :
+      candidateIdentityPreserved ≡ true
+
+    createsSemanticAdmission : Bool
+    createsSemanticAdmissionIsFalse :
+      createsSemanticAdmission ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    createsApplicability : Bool
+    createsApplicabilityIsFalse :
+      createsApplicability ≡ false
+
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse :
+      createsClaimTruth ≡ false
+
+open BoundedCandidateCommitBatch public
+
 record ExactCompilerProductReuse : Set where
   constructor exact-compiler-product-reuse
   field
@@ -678,6 +715,12 @@ data L2SummaryReuseCreatesPropositionIdentity : Set where
 data L2SummaryReuseCreatesEventIdentity : Set where
 data L2SummaryReuseCreatesSemanticAuthority : Set where
 data L2SummaryReuseCreatesClaimTruth : Set where
+data CommitCoalescingChangesCandidateIdentity : Set where
+data CommitCoalescingSkipsDurableReopen : Set where
+data CommitCoalescingCreatesSemanticAdmission : Set where
+data CommitCoalescingCreatesSemanticAuthority : Set where
+data CommitCoalescingCreatesApplicability : Set where
+data CommitCoalescingCreatesClaimTruth : Set where
 data ExactReuseCreatesSemanticAdmission : Set where
 data ExactReuseCreatesSemanticAuthority : Set where
 data ExactReuseCreatesApplicability : Set where
@@ -837,6 +880,30 @@ l2SummaryReuseDoesNotCreateSemanticAuthority ()
 l2SummaryReuseDoesNotCreateClaimTruth :
   L2SummaryReuseCreatesClaimTruth → ⊥
 l2SummaryReuseDoesNotCreateClaimTruth ()
+
+commitCoalescingDoesNotChangeCandidateIdentity :
+  CommitCoalescingChangesCandidateIdentity → ⊥
+commitCoalescingDoesNotChangeCandidateIdentity ()
+
+commitCoalescingDoesNotSkipDurableReopen :
+  CommitCoalescingSkipsDurableReopen → ⊥
+commitCoalescingDoesNotSkipDurableReopen ()
+
+commitCoalescingDoesNotCreateSemanticAdmission :
+  CommitCoalescingCreatesSemanticAdmission → ⊥
+commitCoalescingDoesNotCreateSemanticAdmission ()
+
+commitCoalescingDoesNotCreateSemanticAuthority :
+  CommitCoalescingCreatesSemanticAuthority → ⊥
+commitCoalescingDoesNotCreateSemanticAuthority ()
+
+commitCoalescingDoesNotCreateApplicability :
+  CommitCoalescingCreatesApplicability → ⊥
+commitCoalescingDoesNotCreateApplicability ()
+
+commitCoalescingDoesNotCreateClaimTruth :
+  CommitCoalescingCreatesClaimTruth → ⊥
+commitCoalescingDoesNotCreateClaimTruth ()
 
 exactReuseDoesNotCreateSemanticAdmission :
   ExactReuseCreatesSemanticAdmission → ⊥
