@@ -21,6 +21,7 @@ import DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact a
 import DASHI.Mathematics.AlgebraicGeometry.HodgeAlgebraicCycleClayCoreExact as Clay
 import DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact as Literal
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLiteralHodgeReopeningCompilerExact as Projective
+import DASHI.Mathematics.AlgebraicGeometry.HodgePrimitiveLefschetzClayReductionExact as Primitive
 import DASHI.Mathematics.AlgebraicGeometry.HodgePrimitiveAlgebraicResidualDecompositionExact as Residual
 import DASHI.Mathematics.AlgebraicGeometry.HodgePrimitiveZeroResidualExact as Zero
 
