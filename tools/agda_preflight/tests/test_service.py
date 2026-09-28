@@ -644,3 +644,38 @@ bad = record { witnes = Set }
     snapshot = result["semantic"]["Service.SemanticError"]
     assert snapshot["freshness"] == "fresh"
     assert snapshot["checked_source_sha256"] == checked_hash
+
+
+
+def test_service_affected_frontier_uses_persistent_import_graph(tmp_path):
+    leaf = write_module(
+        tmp_path,
+        "Service.Frontier.Leaf",
+        "leaf : Set\nleaf = Set\n",
+    )
+    write_module(
+        tmp_path,
+        "Service.Frontier.Middle",
+        "import Service.Frontier.Leaf\nmiddle : Set\nmiddle = Set\n",
+    )
+    top = write_module(
+        tmp_path,
+        "Service.Frontier.Top",
+        "import Service.Frontier.Middle\ntop : Set\ntop = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=1,
+    ) as service:
+        service.diagnose(str(top))
+        result = service.affected(str(leaf))
+
+    assert result["modules"] == [
+        "Service.Frontier.Leaf",
+        "Service.Frontier.Middle",
+        "Service.Frontier.Top",
+    ]
+    assert result["count"] == 3
