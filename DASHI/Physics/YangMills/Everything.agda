@@ -697,3 +697,13 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstKPDataExact
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedGapExact
 
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayMaxCutExact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact
