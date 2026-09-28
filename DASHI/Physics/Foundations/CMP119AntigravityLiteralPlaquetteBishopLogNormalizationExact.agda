@@ -159,7 +159,7 @@ p3GaussianUsesCanonicalBishopSU2
     {dataSet = dataSet} splitView normalization depth =
   BishopP.≃-trans
     (P3Literal.betaLogBlockingSameLiteralGaussian splitView depth)
-    (embeddedGaussianIsCanonicalBishopSU2 normalization (suc depth))
+    (embeddedGaussianIsCanonicalBishopSU2 normalization depth)
 
 ------------------------------------------------------------------------
 -- STRUCTURAL NO-GO: THE OLD RATIONAL LOG COORDINATE IS FREE
