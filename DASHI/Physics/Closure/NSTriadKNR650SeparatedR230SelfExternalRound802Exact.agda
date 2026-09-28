@@ -37,6 +37,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -51,6 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact as R605
 import DASHI.Physics.Closure.NSTriadKNR650OrbitProfileTwoFamilyResidualRound781Exact as R781
+import DASHI.Physics.Closure.NSTriadKNR650SeparatedR230WeightRound798Exact as R798
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedBaseGlobalCommutatorRound800Exact as R800
 
 F : C3.RealField _
@@ -148,13 +150,15 @@ module SeparatedR230SelfExternal
   commutatorFoldSplits output =
     trans
       (sym
-        (R800.R799.R798.fixedOutputSeparatedProductRuleIsCommutator
+        (R798.fixedOutputSeparatedProductRuleIsCommutator
           S Id.velocity Id.forcing cutoff output))
       (maskedProductFoldSplits output)
 
+  outputSelfWork : Z3.FourierMode → ℚ
   outputSelfWork output =
     Work.coherentWork (Id.mixedFold output) (selfFold output)
 
+  outputExternalWork : Z3.FourierMode → ℚ
   outputExternalWork output =
     Work.coherentWork (Id.mixedFold output) (externalFold output)
 
@@ -198,12 +202,12 @@ module SeparatedR230SelfExternal
   globalSelfWork : ℚ
   globalSelfWork =
     sumSelfWork
-      (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.cutoffModes cutoff)
+      (Cube.cutoffModes cutoff)
 
   globalExternalWork : ℚ
   globalExternalWork =
     sumExternalWork
-      (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.cutoffModes cutoff)
+      (Cube.cutoffModes cutoff)
 
   sumWorkSplits :
     (outputs : List Z3.FourierMode) →
@@ -227,7 +231,7 @@ module SeparatedR230SelfExternal
     ≡ globalSelfWork + globalExternalWork
   globalWorkSplitsSelfExternal =
     sumWorkSplits
-      (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.cutoffModes cutoff)
+      (Cube.cutoffModes cutoff)
 
 round802SeparatedR230WorkSplitsSelfExternal : Bool
 round802SeparatedR230WorkSplitsSelfExternal = true
