@@ -25,6 +25,7 @@ module DASHI.Reasoning.ActualFaceHypercubeGluingFromSharedSliceExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Base369Ternary27FaceHypercubeCechGluingBidiExact as Cech
 
@@ -76,7 +77,7 @@ compileSharedSliceGluing recognition = record
 sharedSliceCompilesEveryFace :
   {Actor ActualState : Set} ->
   (recognition : SharedActualX6SliceRecognition Actor ActualState) ->
-  (face : DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact.Face6) ->
+  (face : Geometry.Face6) ->
   (state : H.X6) ->
   Cech.includeFace (compileSharedSliceGluing recognition) face state
   ≡ include recognition state
