@@ -691,3 +691,9 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalKoteckyPreissExact
 
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalPolymerIdentificationExact
+
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstKPDataExact
+
+import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedGapExact
+
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayMaxCutExact
