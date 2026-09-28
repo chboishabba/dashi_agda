@@ -157,10 +157,10 @@ asNormalizedWilsonMarkedLogJetExpansion :
       (Gram.measureSequence dataSet cutoff))
     left right
 asNormalizedWilsonMarkedLogJetExpansion
-    {family = family} source = record
+    {family = family} {cutoff = cutoff} {left = left} {right = right} source = record
   { Jet.NormalizedWilsonMarkedLogJetExpansion.clusters =
       PhysicalKP.LiteralTwoWilsonSourceFirstKoteckyPreissFamily.commonClusters
-        family _ _ _
+        family cutoff left right
   ; Jet.NormalizedWilsonMarkedLogJetExpansion.clusterJet =
       clusterJet source
   ; Jet.NormalizedWilsonMarkedLogJetExpansion.normalizedLogJetExpansion =
