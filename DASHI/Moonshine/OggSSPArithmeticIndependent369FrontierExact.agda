@@ -183,6 +183,7 @@ import DASHI.Moonshine.OggSSPSmallPrimePadicBoundStratumQuotientComparisonExact 
 import DASHI.Moonshine.OggSSPSmallPrimeMixedCharacteristicTwistedCentralizerCutsetExact as MixedPB
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVRBrauer
 import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPayment
+import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact as GreenSpecies
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
 import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as PBTate
@@ -318,11 +319,20 @@ dvrPreferredPaymentBoundary :
 dvrPreferredPaymentBoundary =
   DVRPayment.canonicalPBLocalizedDVRPreferredPaymentCutsetBoundary
 
+
+greenRingSectorSpeciesBoundary :
+  GreenSpecies.PBGreenRingSectorSpeciesCutsetBoundary
+greenRingSectorSpeciesBoundary =
+  GreenSpecies.canonicalPBGreenRingSectorSpeciesCutsetBoundary
+
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
 ------------------------------------------------------------------------
 
 data ArithmeticIndependent369Residual : Set where
+  missingPBGreenRingSectorSpeciesLocalizationAuthority :
+    ArithmeticIndependent369Residual
+
   missingP2ExternalMonsterResidualRecognition :
     ArithmeticIndependent369Residual
 
@@ -334,7 +344,7 @@ data ArithmeticIndependent369Residual : Set where
 
 firstResidual : ArithmeticIndependent369Residual
 firstResidual =
-  missingP2ExternalMonsterResidualRecognition
+  missingPBGreenRingSectorSpeciesLocalizationAuthority
 
 data Independent369TargetsStillMissing : Set where
 data P3StructuralCandidateStillMissing : Set where
@@ -499,6 +509,10 @@ record ArithmeticIndependent369Frontier : Set where
     dvrLengthBadLevelLocalizationAuthorityPaid : Bool
     targetIndependentSectorwiseDVRPaymentCutsetPaid : Bool
     targetIndependentSectorwiseDVRPaymentAuthorityPaid : Bool
+    integralGroupRingHauptmodulFrameworkSourced : Bool
+    greenRingSectorSpeciesCutsetPaid : Bool
+    greenRingSectorSpeciesAuthorityPaid : Bool
+    greenRingToPreferredDVRPaymentAdapterPaid : Bool
 
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
@@ -642,6 +656,10 @@ canonicalArithmeticIndependent369Frontier =
     ; dvrLengthBadLevelLocalizationAuthorityPaid = false
     ; targetIndependentSectorwiseDVRPaymentCutsetPaid = true
     ; targetIndependentSectorwiseDVRPaymentAuthorityPaid = false
+    ; integralGroupRingHauptmodulFrameworkSourced = true
+    ; greenRingSectorSpeciesCutsetPaid = true
+    ; greenRingSectorSpeciesAuthorityPaid = false
+    ; greenRingToPreferredDVRPaymentAdapterPaid = true
 
     ; p2ExternalMonsterResidualRecognitionPaid = false
     ; p3ExternalMonsterResidualRecognitionPaid = false
