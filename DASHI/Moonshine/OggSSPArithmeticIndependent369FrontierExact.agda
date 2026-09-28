@@ -179,6 +179,9 @@ import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExac
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExact as SOTALocalBridge
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as ArichetaBadLevel
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as ArichetaIgusa
+import DASHI.Moonshine.OggSSPSmallPrimePadicBoundStratumQuotientComparisonExact as PadicStrata
+import DASHI.Moonshine.OggSSPSmallPrimeExternalBridgeDoubleMismatchExact as ExternalMismatch
+import DASHI.Moonshine.OggSSPSmallPrimePadicMoonshineOrderBoundComparisonExact as CMTPadicBound
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -257,6 +260,21 @@ arichetaIgusaBadLevelBoundary :
   ArichetaIgusa.ArichetaIgusaBadLevelExtensionBoundary
 arichetaIgusaBadLevelBoundary =
   ArichetaIgusa.canonicalArichetaIgusaBadLevelExtensionBoundary
+
+cmtPadicOrderBoundBoundary :
+  CMTPadicBound.PadicMoonshineOrderBoundComparisonBoundary
+cmtPadicOrderBoundBoundary =
+  CMTPadicBound.canonicalPadicMoonshineOrderBoundComparisonBoundary
+
+externalBridgeDoubleMismatchBoundary :
+  ExternalMismatch.ExternalBridgeDoubleMismatchBoundary
+externalBridgeDoubleMismatchBoundary =
+  ExternalMismatch.canonicalExternalBridgeDoubleMismatchBoundary
+
+padicStratumQuotientBoundary :
+  PadicStrata.PadicBoundStratumQuotientComparisonBoundary
+padicStratumQuotientBoundary =
+  PadicStrata.canonicalPadicBoundStratumQuotientComparisonBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -415,6 +433,14 @@ record ArithmeticIndependent369Frontier : Set where
     primeSpecificMechanismComparisonPaid : Bool
     primeSpecificPreferredPaymentOwned : Bool
 
+    cmtPadicOrderBoundComparisonPaid : Bool
+    cmtP2BoundSaturatesMonsterNumerically : Bool
+    cmtP3BoundOvershootsMonsterByOne : Bool
+    cmtP3ExcessMatchesRawLocalStrata : Bool
+    p3MonsterResidualMatchesOrbitQuotientRank : Bool
+    arichetaCmtDoubleMismatchPaid : Bool
+    pbBadLevelPadicCentralizerAuthorityPaid : Bool
+
     p2ExternalMonsterResidualRecognitionPaid : Bool
     p3ExternalMonsterResidualRecognitionPaid : Bool
     classicalBase369SemanticIdentificationPaid : Bool
@@ -533,6 +559,13 @@ canonicalArithmeticIndependent369Frontier =
     ; p3CentralizerDepthUniformLawRejected = true
     ; primeSpecificMechanismComparisonPaid = true
     ; primeSpecificPreferredPaymentOwned = true
+    ; cmtPadicOrderBoundComparisonPaid = true
+    ; cmtP2BoundSaturatesMonsterNumerically = true
+    ; cmtP3BoundOvershootsMonsterByOne = true
+    ; cmtP3ExcessMatchesRawLocalStrata = true
+    ; p3MonsterResidualMatchesOrbitQuotientRank = true
+    ; arichetaCmtDoubleMismatchPaid = true
+    ; pbBadLevelPadicCentralizerAuthorityPaid = false
 
     ; p2ExternalMonsterResidualRecognitionPaid = false
     ; p3ExternalMonsterResidualRecognitionPaid = false
