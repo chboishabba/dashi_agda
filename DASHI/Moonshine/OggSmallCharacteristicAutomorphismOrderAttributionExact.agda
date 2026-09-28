@@ -63,7 +63,7 @@ p2OrderIsTwiceP3Order :
 p2OrderIsTwiceP3Order = refl
 
 claimOrigin : Source.ClaimOrigin
-claimOrigin = Source.externalArithmeticClaim
+claimOrigin = Source.externalOggSourceClaim
 
 data AutomorphismOrderRatioIsResidualOrientationFibre : Set where
 data AutomorphismOrderDeterminesExponentResidualGroupoid : Set where
