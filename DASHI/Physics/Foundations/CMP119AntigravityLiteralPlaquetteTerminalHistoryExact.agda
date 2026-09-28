@@ -23,8 +23,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 literalCouplingAt :
-  ∀ {trajectory}
-    (dataSet : Plaquette.PhysicalRunningCouplingData Nat) →
+  Plaquette.PhysicalRunningCouplingData Nat →
   Nat → ℚ
 literalCouplingAt dataSet scale =
   Plaquette.coupling (Plaquette.remainder dataSet) scale
@@ -76,33 +75,34 @@ asBetaSplitInverseSquareTerminalHistory :
   History.BetaSplitInverseSquareTerminalHistoryData
     trajectory
     (compiledSplit literalHistory)
-asBetaSplitInverseSquareTerminalHistory dataSet = record
+asBetaSplitInverseSquareTerminalHistory
+    {dataSet = plaquette} history = record
   { History.BetaSplitInverseSquareTerminalHistoryData.couplingAt =
-      literalCouplingAt _
+      literalCouplingAt plaquette
   ; History.BetaSplitInverseSquareTerminalHistoryData.gamma =
-      gamma dataSet
+      gamma history
   ; History.BetaSplitInverseSquareTerminalHistoryData.inverseThreshold =
-      inverseThreshold dataSet
+      inverseThreshold history
   ; History.BetaSplitInverseSquareTerminalHistoryData.terminalScale =
-      terminalScale dataSet
+      terminalScale history
   ; History.BetaSplitInverseSquareTerminalHistoryData.ActiveScale =
-      ActiveScale dataSet
+      ActiveScale history
   ; History.BetaSplitInverseSquareTerminalHistoryData.terminalActive =
-      terminalActive dataSet
+      terminalActive history
   ; History.BetaSplitInverseSquareTerminalHistoryData.gapToTerminal =
-      gapToTerminal dataSet
+      gapToTerminal history
   ; History.BetaSplitInverseSquareTerminalHistoryData.scaleReachesTerminal =
-      scaleReachesTerminal dataSet
+      scaleReachesTerminal history
   ; History.BetaSplitInverseSquareTerminalHistoryData.terminalInverseThreshold =
-      terminalInverseThreshold dataSet
+      terminalInverseThreshold history
   ; History.BetaSplitInverseSquareTerminalHistoryData.couplingPositive =
-      couplingPositive dataSet
+      couplingPositive history
   ; History.BetaSplitInverseSquareTerminalHistoryData.gammaPositive =
-      gammaPositive dataSet
+      gammaPositive history
   ; History.BetaSplitInverseSquareTerminalHistoryData.inverseCouplingRepresentation =
-      inverseCouplingRepresentation dataSet
+      inverseCouplingRepresentation history
   ; History.BetaSplitInverseSquareTerminalHistoryData.inverseThresholdRepresentation =
-      inverseThresholdRepresentation dataSet
+      inverseThresholdRepresentation history
   }
 
 literalPlaquetteTerminalHistoryCompilerLevel : ProofLevel
