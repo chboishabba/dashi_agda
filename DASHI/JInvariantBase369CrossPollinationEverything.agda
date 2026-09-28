@@ -196,3 +196,7 @@ module DASHI.JInvariantBase369CrossPollinationEverything where
 import DASHI.Moonshine.Base369P3ConstantTernaryActionGroupoidExact
 
 import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact
+
+import DASHI.Reasoning.Trialectic369DyadicLocalNineObserverCandidateExact
+
+import DASHI.Moonshine.MonsterFiveTrialecticLocalRecognitionExact
