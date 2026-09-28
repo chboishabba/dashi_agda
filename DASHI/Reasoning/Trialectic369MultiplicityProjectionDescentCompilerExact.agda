@@ -36,7 +36,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; cong; sym; trans)
 
 import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Foundations.Base369PointedAppraisalFibreExact as Pointed
