@@ -41,6 +41,8 @@ import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as DbNativeCorpu
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerRegression as DbNativeCorpusRegression
 import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyExact as CommitEconomy
 import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyRegression as CommitEconomyRegression
+import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyExact as ReviewProjectionEconomy
+import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyRegression as ReviewProjectionEconomyRegression
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -739,3 +741,59 @@ dbNativeFixtureBoundedReopenPreservesExactEquality :
   DbNativeCorpusRegression.fixtureBoundedReopenPreservesExactEquality
   ≡ DbNativeCorpusRegression.fixtureBoundedReopenPreservesExactEquality
 dbNativeFixtureBoundedReopenPreservesExactEquality = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P review consumer projection locality is physical only.
+------------------------------------------------------------------------
+
+reviewProjectionReuseDoesNotCreateDecision :
+  ReviewProjectionEconomy.ReviewProjectionReuseCreatesReviewDecision → ⊥
+reviewProjectionReuseDoesNotCreateDecision =
+  ReviewProjectionEconomy.reviewProjectionReuseDoesNotCreateReviewDecision
+
+reviewProjectionReuseDoesNotCreateAdmission :
+  ReviewProjectionEconomy.ReviewProjectionReuseCreatesSemanticAdmission → ⊥
+reviewProjectionReuseDoesNotCreateAdmission =
+  ReviewProjectionEconomy.reviewProjectionReuseDoesNotCreateSemanticAdmission
+
+reviewProjectionReuseDoesNotCreateAuthority :
+  ReviewProjectionEconomy.ReviewProjectionReuseCreatesSemanticAuthority → ⊥
+reviewProjectionReuseDoesNotCreateAuthority =
+  ReviewProjectionEconomy.reviewProjectionReuseDoesNotCreateSemanticAuthority
+
+reviewProjectionReuseDoesNotCreateEventAssembly :
+  ReviewProjectionEconomy.ReviewProjectionReuseCreatesEventAssembly → ⊥
+reviewProjectionReuseDoesNotCreateEventAssembly =
+  ReviewProjectionEconomy.reviewProjectionReuseDoesNotCreateEventAssembly
+
+reviewProjectionReuseDoesNotCreateTruth :
+  ReviewProjectionEconomy.ReviewProjectionReuseCreatesClaimTruth → ⊥
+reviewProjectionReuseDoesNotCreateTruth =
+  ReviewProjectionEconomy.reviewProjectionReuseDoesNotCreateClaimTruth
+
+reviewProjectionReuseMustTrackInputFingerprint :
+  ReviewProjectionEconomy.ReviewProjectionCacheKeyMayIgnoreInputFingerprint → ⊥
+reviewProjectionReuseMustTrackInputFingerprint =
+  ReviewProjectionEconomy.reviewProjectionCacheMustTrackInputFingerprint
+
+reviewProjectionReuseMustTrackConsumerScope :
+  ReviewProjectionEconomy.ReviewProjectionCacheKeyMayIgnoreConsumerScope → ⊥
+reviewProjectionReuseMustTrackConsumerScope =
+  ReviewProjectionEconomy.reviewProjectionCacheMustTrackConsumerScope
+
+reviewProjectionReplayDoesNotManufactureParserReceipt :
+  ReviewProjectionEconomy.ReusedParserWallIsFreshParserMeasurement → ⊥
+reviewProjectionReplayDoesNotManufactureParserReceipt =
+  ReviewProjectionEconomy.reusedParserWallDoesNotBecomeFreshParserMeasurement
+
+reviewProjectionWallAloneDoesNotProveParserDominance :
+  ReviewProjectionEconomy.ReviewProjectionElapsedAloneProvesParserDominance → ⊥
+reviewProjectionWallAloneDoesNotProveParserDominance =
+  ReviewProjectionEconomy.reviewProjectionWallAloneCannotProveParserDominance
+
+reviewProjectionFixtureReopensWithoutRecompute :
+  ReviewProjectionEconomy.ExactReviewProjectionReuse.recomputesReviewCandidates
+    ReviewProjectionEconomyRegression.fixtureExactReviewProjectionReuse
+  ≡ false
+reviewProjectionFixtureReopensWithoutRecompute = refl
