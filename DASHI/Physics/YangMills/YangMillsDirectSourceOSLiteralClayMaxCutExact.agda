@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact as Continuum
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H2Wilson
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as Local
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as H6
 
@@ -74,6 +75,16 @@ record DirectSourceOSLiteralClayInputs
     --------------------------------------------------------------------
     sameHamiltonianGap :
       H1H3.LiteralDirectSourceSameHMassGap Y
+
+    --------------------------------------------------------------------
+    -- H2(ii): the EXACT tests inside the H1/H3 package are literal bounded
+    -- Wilson-cylinder products.  All three selected expectation limits are
+    -- compiler output from this one presentation.
+    --------------------------------------------------------------------
+    selectedWilsonConvergence :
+      ∀ G →
+      H2Wilson.LiteralSelectedWilsonExpectationApplication
+        (H1H3.forGroup sameHamiltonianGap G)
 
     --------------------------------------------------------------------
     -- Minimal endpoint local-QFT supplement.  OPE/stress is not counted as an
