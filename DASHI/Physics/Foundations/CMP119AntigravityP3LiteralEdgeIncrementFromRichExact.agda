@@ -235,24 +235,9 @@ positiveEdgeIncrementRemainderEquivalence inputs depth = record
       literalTotalIncrementForcesLocalPhysicalRemainder inputs depth
   ; PositiveEdgeIncrementRemainderEquivalence.remainderImpliesTotal =
       λ remainderSame →
-        let
-          localInputs : CanonicalP3LiteralEdgeIncrementInputs _ _ _ 
-          localInputs = record
-            { CanonicalP3LiteralEdgeIncrementInputs.richNormalization =
-                richNormalization inputs
-            ; CanonicalP3LiteralEdgeIncrementInputs.richAddIsBishopAdd =
-                richAddIsBishopAdd inputs
-            ; CanonicalP3LiteralEdgeIncrementInputs.gaussianProjection =
-                gaussianProjection inputs
-            ; CanonicalP3LiteralEdgeIncrementInputs.p3RemainderIsLocalPhysicalRemainder =
-                λ
-                  { d →
-                      if d Agda.Builtin.Equality.≡ depth
-                      then remainderSame
-                      else p3RemainderIsLocalPhysicalRemainder inputs d
-                  }
-            }
-        in successorTotalIncrementSameLiteral localInputs depth
+        BishopP.≃-trans
+          (BishopP.+-cong BishopP.≃-refl remainderSame)
+          (targetTotalWithLocalPhysicalRemainder inputs depth)
   }
 
 positiveEdgeTotalIncrementAndLocalRemainderAreEquivalent :
