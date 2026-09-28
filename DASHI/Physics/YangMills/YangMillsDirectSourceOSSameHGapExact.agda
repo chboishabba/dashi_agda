@@ -115,25 +115,32 @@ record LiteralGroupDirectSourceSameHGap
     -- Endpoint interpretation only.  No estimate is hidden here.
     --------------------------------------------------------------------
     certificateMeansVacuumSector :
-      OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ →
+      (certificate : OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ) →
+      OSGap.hamiltonian certificate ≡ Top.hamiltonian Y G →
+      OSGap.gap certificate ≡ Top.massGap Y G →
       Top.IsVacuumSectorAndPositiveEnergyComplement S
         (Top.hilbertSpace Y G)
         (Top.hamiltonian Y G)
         (Top.vacuum Y G)
 
     certificateMeansStrictLiteralGap :
-      OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ →
+      (certificate : OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ) →
+      OSGap.hamiltonian certificate ≡ Top.hamiltonian Y G →
+      OSGap.gap certificate ≡ Top.massGap Y G →
       Top.IsStrictlyPositiveFiniteMassGap S
         (Top.hamiltonian Y G)
         (Top.massGap Y G)
 
     certificateMeansUniformPhysicalScale :
-      OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ →
+      (certificate : OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ) →
+      OSGap.gap certificate ≡ Top.massGap Y G →
       Top.PhysicalScaleLowerBoundUniform S G
         (Top.massGap Y G)
 
     certificateMeansNoSubgapPollution :
-      OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ →
+      (certificate : OSGap.PhysicalMassGapCertificate (Top.Hamiltonian C) ℚ) →
+      OSGap.hamiltonian certificate ≡ Top.hamiltonian Y G →
+      OSGap.gap certificate ≡ Top.massGap Y G →
       Top.NoSpectralPollutionBelowGap S G
         (Top.hamiltonian Y G)
         (Top.massGap Y G)
@@ -144,12 +151,14 @@ record LiteralGroupDirectSourceSameHGap
 open LiteralGroupDirectSourceSameHGap public
 
 transferGapCore :
-  ∀ {C S Y G} →
-  LiteralGroupDirectSourceSameHGap
-    {C = C} {S = S} Y G →
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
+    {G : Top.CompactSimpleGroup C}
+    (input :
+      LiteralGroupDirectSourceSameHGap
+        {C = C} {S = S} Y G) →
   Gap.PositiveTransferGapCore
     (R281.asReconstructedClusteringSpectrum
-      (spectrumSource _))
+      (spectrumSource input))
 transferGapCore input =
   H1Gap.literalPublishedSelectedBuildsPositiveTransferGap
     (literalCMP116 input)
@@ -167,6 +176,29 @@ physicalMassGapCertificate input =
   Spectrum.physicalMassGapCertificateFromTransferGapCore
     (physicalSpectrum input)
     (transferGapCore input)
+
+
+certificateHamiltonianIsLiteral :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
+    {G : Top.CompactSimpleGroup C}
+    (input :
+      LiteralGroupDirectSourceSameHGap
+        {C = C} {S = S} Y G) →
+  OSGap.hamiltonian (physicalMassGapCertificate input)
+  ≡ Top.hamiltonian Y G
+certificateHamiltonianIsLiteral input =
+  physicalHamiltonianIsLiteral input
+
+certificateGapIsLiteral :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
+    {G : Top.CompactSimpleGroup C}
+    (input :
+      LiteralGroupDirectSourceSameHGap
+        {C = C} {S = S} Y G) →
+  OSGap.gap (physicalMassGapCertificate input)
+  ≡ Top.massGap Y G
+certificateGapIsLiteral input =
+  selectedGapIsLiteral input
 
 record LiteralDirectSourceSameHMassGap
     {C : Top.LiteralYangMillsCarriers}
@@ -189,18 +221,25 @@ asCutoffUniformPhysicalMassGap direct = record
       λ G →
         certificateMeansVacuumSector (forGroup direct G)
           (physicalMassGapCertificate (forGroup direct G))
+          (certificateHamiltonianIsLiteral (forGroup direct G))
+          (certificateGapIsLiteral (forGroup direct G))
   ; Five.CutoffUniformPhysicalMassGap.strictlyPositiveFiniteMassGap =
       λ G →
         certificateMeansStrictLiteralGap (forGroup direct G)
           (physicalMassGapCertificate (forGroup direct G))
+          (certificateHamiltonianIsLiteral (forGroup direct G))
+          (certificateGapIsLiteral (forGroup direct G))
   ; Five.CutoffUniformPhysicalMassGap.physicalScaleLowerBoundUniform =
       λ G →
         certificateMeansUniformPhysicalScale (forGroup direct G)
           (physicalMassGapCertificate (forGroup direct G))
+          (certificateGapIsLiteral (forGroup direct G))
   ; Five.CutoffUniformPhysicalMassGap.noSpectralPollutionBelowGap =
       λ G →
         certificateMeansNoSubgapPollution (forGroup direct G)
           (physicalMassGapCertificate (forGroup direct G))
+          (certificateHamiltonianIsLiteral (forGroup direct G))
+          (certificateGapIsLiteral (forGroup direct G))
   ; Five.CutoffUniformPhysicalMassGap.gapAndClusteringDerived =
       λ G →
         clusteringAndGapAreDerived (forGroup direct G)
