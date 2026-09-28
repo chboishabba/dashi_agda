@@ -206,15 +206,12 @@ module PhysicalW2
             translated)
     in
     subst
-      (_≤ combined)
-      (literalStrictSurplusIsPhysicalPacket cutoff S margin time)
+      (packet ≤_)
+      (twelveGlobalCommutatorIsCombined cutoff time)
       (subst
-        (packet ≤_)
-        (twelveGlobalCommutatorIsCombined cutoff time)
-        (subst
-          (λ lhs → lhs ≤ R700.twelve * comm)
-          (literalStrictSurplusIsPhysicalPacket cutoff S margin time)
-          shifted))
+        (λ lhs → lhs ≤ R700.twelve * comm)
+        (literalStrictSurplusIsPhysicalPacket cutoff S margin time)
+        shifted)
 
   physicalPacketBelowCombinedImpliesStrictProduction :
     (cutoff : Nat) →
