@@ -38,10 +38,7 @@ p2ExternalOrderMatchesBinaryTetrahedralSkeleton =
 p3ExternalOrderMatchesRotationalTetrahedralSkeleton :
   OggAut.externalSupersingularAutomorphismOrder OggAut.p3
   ≡ Tetra.tetrahedralOrder
-p3ExternalOrderMatchesRotationalTetrahedralSkeleton =
-  trans
-    OggAut.p3ExternalAutomorphismOrderIs12
-    (sym refl)
+p3ExternalOrderMatchesRotationalTetrahedralSkeleton = refl
 
 binaryTetrahedralOrderIsTwiceRotationalTetrahedralOrder :
   McKay.e6DimensionSquareSum
