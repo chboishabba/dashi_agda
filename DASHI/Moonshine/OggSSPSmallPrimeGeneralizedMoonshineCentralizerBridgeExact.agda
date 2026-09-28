@@ -30,6 +30,7 @@ module DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExac
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact as Local
