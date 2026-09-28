@@ -19,7 +19,6 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
-open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -44,8 +43,7 @@ record CMP119GroupPhysicalPackage
     (G X Configuration Position CurvaturePolynomial LocalOperator
      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
      EuclideanAction Permutation Epsilon Witness
-     LieElement GroupElement
-     Scale Volume Root SourceDirection SpectralObservable : Set)
+     LieElement GroupElement : Set)
     {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
     (limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit)
     (quotient :
@@ -162,65 +160,27 @@ record CMP119CompactSimplePhysicalH5
       Compact.CompactSimpleQuantitativeAuthority
         ℚ LieElement GroupElement
 
-    classifiedToLiteral :
-      Compact.CompactSimpleLieGroup → G
-
     literalToClassified :
       G → Compact.CompactSimpleLieGroup
 
-    roundtrip :
-      ∀ group →
-      classifiedToLiteral (literalToClassified group) ≡ group
-
     continuePhysicalPackage :
-      (classifiedGroup : Compact.CompactSimpleLieGroup) →
+      (group : G) →
       (quantitative :
         Compact.QuantitativeCompactLiePackage
-          ℚ LieElement GroupElement classifiedGroup) →
+          ℚ LieElement GroupElement (literalToClassified group)) →
       CMP119GroupPhysicalPackage
         G X Configuration Position CurvaturePolynomial LocalOperator
         OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
         EuclideanAction Permutation Epsilon Witness
         LieElement GroupElement
-        ℚ ℚ ℚ ℚ ℚ
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S
         h2 covarianceLaws
-        (classifiedToLiteral classifiedGroup)
-        classifiedGroup quantitative
+        group
+        (literalToClassified group)
+        quantitative
 
 open CMP119CompactSimplePhysicalH5 public
-
-classifiedPhysicalPackage :
-  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
-      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-      EuclideanAction Permutation Epsilon Witness LieElement GroupElement
-      sequenceLimit limitLaws quotient division S h2 covarianceLaws}
-    (h5 :
-      CMP119CompactSimplePhysicalH5
-        G X Configuration Position CurvaturePolynomial LocalOperator
-        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-        EuclideanAction Permutation Epsilon Witness
-        LieElement GroupElement
-        {sequenceLimit = sequenceLimit}
-        limitLaws quotient division S h2 covarianceLaws)
-    classifiedGroup →
-  CMP119GroupPhysicalPackage
-    G X Configuration Position CurvaturePolynomial LocalOperator
-    OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-    EuclideanAction Permutation Epsilon Witness
-    LieElement GroupElement
-    ℚ ℚ ℚ ℚ ℚ
-    {sequenceLimit = sequenceLimit}
-    limitLaws quotient division S h2 covarianceLaws
-    (classifiedToLiteral h5 classifiedGroup)
-    classifiedGroup
-    (Compact.compactSimpleHasQuantitativePackage
-      (authority h5) classifiedGroup)
-classifiedPhysicalPackage h5 classifiedGroup =
-  continuePhysicalPackage h5 classifiedGroup
-    (Compact.compactSimpleHasQuantitativePackage
-      (authority h5) classifiedGroup)
 
 physicalPackageForLiteralGroup :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -241,7 +201,6 @@ physicalPackageForLiteralGroup :
     OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
     EuclideanAction Permutation Epsilon Witness
     LieElement GroupElement
-    ℚ ℚ ℚ ℚ ℚ
     {sequenceLimit = sequenceLimit}
     limitLaws quotient division S h2 covarianceLaws
     group
@@ -249,18 +208,9 @@ physicalPackageForLiteralGroup :
     (Compact.compactSimpleHasQuantitativePackage
       (authority h5) (literalToClassified h5 group))
 physicalPackageForLiteralGroup h5 group =
-  subst
-    (λ literalGroup →
-      CMP119GroupPhysicalPackage
-        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-        _ _ _ _ _
-        _ _ _ _ _ _
-        literalGroup
-        (literalToClassified h5 group)
-        (Compact.compactSimpleHasQuantitativePackage
-          (authority h5) (literalToClassified h5 group)))
-    (roundtrip h5 group)
-    (classifiedPhysicalPackage h5 (literalToClassified h5 group))
+  continuePhysicalPackage h5 group
+    (Compact.compactSimpleHasQuantitativePackage
+      (authority h5) (literalToClassified h5 group))
 
 cmp119H5ClassificationCompilerLevel : ProofLevel
 cmp119H5ClassificationCompilerLevel =
