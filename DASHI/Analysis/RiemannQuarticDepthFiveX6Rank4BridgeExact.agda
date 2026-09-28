@@ -87,6 +87,23 @@ x6ReadsAsSixShiftScale :
   ≡ Stencil.pow3 6
 x6ReadsAsSixShiftScale = refl
 
+rank4IsPolePuncturePlusOrigin :
+  rank4TernaryStateCount
+  ≡ Stencil.poleCoefficient + 1
+rank4IsPolePuncturePlusOrigin = refl
+
+depthFiveResidualIsX6PlusPolePuncturePlusOrigin :
+  depthFiveResidualCount
+  ≡ x6StateCount + Stencil.poleCoefficient + 1
+depthFiveResidualIsX6PlusPolePuncturePlusOrigin = refl
+
+bulkFactorsThroughX6PolePunctureOrigin :
+  Stencil.twoSpikeBulk
+  ≡
+  Stencil.pow3 5
+    * (x6StateCount + Stencil.poleCoefficient + 1)
+bulkFactorsThroughX6PolePunctureOrigin = refl
+
 ------------------------------------------------------------------------
 -- 3. Firewall.
 ------------------------------------------------------------------------
@@ -114,6 +131,8 @@ record RiemannQuarticDepthFiveX6Rank4BridgeBoundary : Set where
     rank4TernaryCountReused : Bool
     depthFiveResidualEquals729Plus81 : Bool
     bulkFactorsThroughTypedResidualCount : Bool
+    rank4CountIsPolePuncturePlusOrigin : Bool
+    depthFiveResidualEqualsX6PlusPolePuncturePlusOrigin : Bool
     concreteCoproductEquivalenceConstructed : Bool
     heisenbergRepresentationIdentityClaimed : Bool
     rhSemanticCarrierIdentityClaimed : Bool
@@ -123,4 +142,5 @@ canonicalRiemannQuarticDepthFiveX6Rank4BridgeBoundary :
 canonicalRiemannQuarticDepthFiveX6Rank4BridgeBoundary =
   riemann-quartic-depth-five-x6-rank4-bridge-boundary
     true true true true
+    true true
     false false false
