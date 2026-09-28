@@ -728,6 +728,8 @@ class Checker:
             return None
 
         for record_expr in summary.ast.record_expressions:
+            if record_expr.context == "pattern":
+                continue
             if not record_expr.owner_function:
                 continue
             signature = summary.ast.signatures.get(record_expr.owner_function)
