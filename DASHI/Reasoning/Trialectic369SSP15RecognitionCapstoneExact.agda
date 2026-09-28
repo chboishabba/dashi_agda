@@ -562,6 +562,30 @@ outgoingSelected3BScaffoldOwnsAcquisition :
   ≡ true
 outgoingSelected3BScaffoldOwnsAcquisition = refl
 
+outgoingSourceNativeCoreCompilerPaid :
+  LinearCompletion.acquisitionCoreCompilerOwned
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSourceNativeCoreCompilerPaid = refl
+
+outgoingCoreCompilesHistoricalAcquisition :
+  LinearCompletion.coreCompilesHistoricalAcquisition
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingCoreCompilesHistoricalAcquisition = refl
+
+outgoingCoreCompilesSameElementComposition :
+  LinearCompletion.coreCompilesSameElementComposition
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingCoreCompilesSameElementComposition = refl
+
+outgoingCoreCompilesScaffold :
+  LinearCompletion.coreCompilesScaffold
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingCoreCompilesScaffold = refl
+
 outgoingSelected3BScaffoldOwnsSameElementComposition :
   LinearCompletion.scaffoldOwnsSameElementComposition
     outgoingSelected3BLinearCompletionBoundary
@@ -604,6 +628,18 @@ outgoingSelected3BMinCutSufficesForCompletion :
   ≡ true
 outgoingSelected3BMinCutSufficesForCompletion = refl
 
+outgoingSourceNativeCoreMinCutPaid :
+  LinearCompletion.sourceNativeCoreMinCutOwned
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSourceNativeCoreMinCutPaid = refl
+
+outgoingSourceNativeCoreMinCutCompilesCanonicalLinearRoute :
+  LinearCompletion.sourceNativeCoreMinCutCompilesCanonicalLinearRoute
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSourceNativeCoreMinCutCompilesCanonicalLinearRoute = refl
+
 outgoingSelected3BCompletionCompilesLinearZetaHomAndRoute :
   LinearCompletion.linearZetaProducerCompilerOutput
     outgoingSelected3BLinearCompletionBoundary
@@ -624,6 +660,12 @@ outgoingSelected3BCompletionKeepsFiniteBasisOptional :
     outgoingSelected3BLinearCompletionBoundary
   ≡ true
 outgoingSelected3BCompletionKeepsFiniteBasisOptional = refl
+
+outgoingSelected3BAcquisitionCoreStillOpen :
+  LinearCompletion.acquisitionCoreInhabitedHere
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ false
+outgoingSelected3BAcquisitionCoreStillOpen = refl
 
 outgoingSelected3BScaffoldStillOpen :
   LinearCompletion.scaffoldInhabitedHere
@@ -652,6 +694,7 @@ data IncomingAnalyticFrickeAuthority : Set where
 data OptionalFiniteBasisMultiplicityProjectionDescentRecognition : Set where
 data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
 data OutgoingInvariantFineFibreRecognition : Set where
+data OutgoingSelected3BLinearCoreMinCutRecognition : Set where
 data OutgoingSelected3BLinearCompletionRecognition : Set where
 data OutgoingActualLinearMultiplicityAcquisitionRecognition : Set where
 data OutgoingActualLinearHomSpaceRecognition : Set where
@@ -675,6 +718,10 @@ outgoingMultiplicityInertiaAttachmentStillOpenToken ()
 outgoingInvariantFineFibreRecognitionStillOpenToken :
   OutgoingInvariantFineFibreRecognition -> ⊥
 outgoingInvariantFineFibreRecognitionStillOpenToken ()
+
+outgoingSelected3BLinearCoreMinCutStillOpenToken :
+  OutgoingSelected3BLinearCoreMinCutRecognition -> ⊥
+outgoingSelected3BLinearCoreMinCutStillOpenToken ()
 
 outgoingSelected3BLinearCompletionStillOpenToken :
   OutgoingSelected3BLinearCompletionRecognition -> ⊥
@@ -738,8 +785,10 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingCanonicalTargetIsLinearHomSpace : Bool
     outgoingCanonicalTargetIsOneLinearAcquisition : Bool
     outgoingSelected3BLinearCompletionCompilerPaid : Bool
+    outgoingSelected3BSourceNativeCoreCompilerPaid : Bool
     outgoingSelected3BNormalizerCarrierBidiCompilerPaid : Bool
     outgoingSelected3BTwoFieldMinCutCompilerPaid : Bool
+    outgoingSelected3BCoreMinCutCompilerPaid : Bool
     outgoingSelected3BLinearCompletionPaid : Bool
     outgoingFiniteNineEighteenRoutesAreOptionalBasisTools : Bool
     outgoingBasisSpecialisationPaid : Bool
@@ -760,5 +809,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     true true true true true false true
     true false true true false true false
     true false false false false true true
-    true true true true true true false true false false false
+    true true true true true true false true false false false false false
     false false false
