@@ -715,6 +715,24 @@ outgoingMinimalCanonicalCoreCompilesLinearRoute :
   ≡ true
 outgoingMinimalCanonicalCoreCompilesLinearRoute = refl
 
+outgoingCanonicalCoreRequiresHomSameObjectWeld :
+  CanonicalLinearCore.homSameObjectWeldRequired
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingCanonicalCoreRequiresHomSameObjectWeld = refl
+
+outgoingCanonicalCoreRequiresActualHZetaRecognition :
+  CanonicalLinearCore.actualHZetaRecognitionRequired
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingCanonicalCoreRequiresActualHZetaRecognition = refl
+
+outgoingCanonicalCoreRequiresHomChosenZetaEqualsActualWZeta :
+  CanonicalLinearCore.homChosenZetaEqualsActualWZetaRequired
+    outgoingCanonicalLinearCoreBoundary
+  ≡ true
+outgoingCanonicalCoreRequiresHomChosenZetaEqualsActualWZeta = refl
+
 outgoingOnlyOneActionEquationRemainsAfterMinimalCore :
   CanonicalLinearCore.onlyOneActionEquationRemainsAfterCore
     outgoingCanonicalLinearCoreBoundary
@@ -738,17 +756,23 @@ linearCoreCompatibilityBoundary :
 linearCoreCompatibilityBoundary =
   LinearCoreCompat.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
 
-historicalCoreForgetsExactlyToCanonicalCore :
-  LinearCoreCompat.historicalCoreForgetsToCanonicalCore
+historicalCoreAloneDoesNotSufficeForCanonicalCore :
+  LinearCoreCompat.historicalCoreAloneSufficesForCanonicalCore
     linearCoreCompatibilityBoundary
-  ≡ true
-historicalCoreForgetsExactlyToCanonicalCore = refl
+  ≡ false
+historicalCoreAloneDoesNotSufficeForCanonicalCore = refl
 
-historicalCoreAndCanonicalCoreCompileSameRoute :
-  LinearCoreCompat.historicalCoreSufficesForCanonicalRoute
+historicalCorePlusHomWeldCompilesCanonicalCore :
+  LinearCoreCompat.historicalCorePlusHomWeldCompilesCanonicalCore
     linearCoreCompatibilityBoundary
   ≡ true
-historicalCoreAndCanonicalCoreCompileSameRoute = refl
+historicalCorePlusHomWeldCompilesCanonicalCore = refl
+
+historicalCorePlusHomWeldCompilesSameLinearRoute :
+  LinearCoreCompat.historicalCorePlusHomWeldCompilesSameLinearRoute
+    linearCoreCompatibilityBoundary
+  ≡ true
+historicalCorePlusHomWeldCompilesSameLinearRoute = refl
 
 ------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
@@ -865,6 +889,8 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingBasisSpecialisationPaid : Bool
     outgoingActualLinearAcquisitionPaid : Bool
     outgoingActualLinearHomSpacePaid : Bool
+    outgoingActualHZetaRecognitionPaid : Bool
+    outgoingHomChosenZetaSameAsActualWZetaPaid : Bool
     outgoingActualLinearEvaluationPaid : Bool
     outgoingActualInverseCocycleActionPaid : Bool
 
@@ -881,5 +907,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     true false true true false true false
     true false false false false true true
     false true true
-    true true true true true false true false false false false false
+    true true true true true false true false false false false false false false
     false false false
