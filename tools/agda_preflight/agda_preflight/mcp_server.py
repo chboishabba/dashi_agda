@@ -16,7 +16,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         target: str,
         errors_only: bool = False,
         limit: int = 200,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Diagnose a module/Everything rollup using the persistent source index.
 
         Read-only. Never invokes Agda. Diagnostic payloads are bounded by
@@ -32,7 +32,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
     async def next_error(
         target: str,
         require_fix: bool = False,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Return the highest-priority current diagnostic for an agent.
 
         Read-only. Set require_fix=true to restrict results to diagnostics with
@@ -49,7 +49,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         diagnostic_id: str,
         fix_index: int = 0,
         allow_likely: bool = False,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Apply one exact suggested edit and immediately re-diagnose it.
 
         Mutates source files. Speculative fixes are rejected. Likely fixes
@@ -66,7 +66,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
     async def affected(
         target: str,
         within: Optional[str] = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Return the reverse-import frontier after changing a module.
 
         Read-only. Without within, the result is limited to modules already in
@@ -79,12 +79,23 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    async def cache_status() -> dict:
+    async def refresh(target: str) -> dict[str, Any]:
+        """Observe out-of-band edits and rebuild trusted session state.
+
+        Read-only with respect to source files. This explicitly invalidates the
+        in-process trusted closure for target, rechecks filesystem freshness,
+        refreshes persistent diagnostics as needed, then establishes a new
+        trusted session snapshot.
+        """
+        return tools.refresh(target)
+
+    @server.tool()
+    async def cache_status() -> dict[str, Any]:
         """Return persistent source-index/cache statistics. Read-only."""
         return tools.cache_status()
 
     @server.tool()
-    async def semantic_status(target: str) -> dict:
+    async def semantic_status(target: str) -> dict[str, Any]:
         """Report fresh/stale/unknown last-known semantic snapshots.
 
         Read-only. Never invokes Agda.
@@ -92,7 +103,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         return tools.semantic_status(target)
 
     @server.tool()
-    async def promote(target: str) -> dict:
+    async def promote(target: str) -> dict[str, Any]:
         """Explicitly run the configured fail-closed semantic promoter.
 
         This tool may invoke the configured external semantic checker. Success
@@ -105,7 +116,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
     async def promotion_history(
         module_name: Optional[str] = None,
         limit: int = 20,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Return persisted semantic-promotion receipts. Read-only."""
         return tools.promotion_history(
             module_name=module_name,
@@ -113,7 +124,7 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    async def ping() -> dict:
+    async def ping() -> dict[str, Any]:
         """Return a minimal liveness result."""
         return tools.ping()
 
@@ -132,7 +143,7 @@ def create_mcp_server(service: DashiAgdaService):
         "DASHI Agda",
         instructions=(
             "Fast incremental Agda source diagnostics and repair planning. "
-            "diagnose/next_error/affected/cache_status/semantic_status are "
+            "diagnose/next_error/affected/cache_status/semantic_status/refresh are "
             "read-only and do not invoke Agda. apply_fix edits source only "
             "when an exact suggested edit exists. promote is the explicit "
             "fail-closed semantic-validation boundary."
