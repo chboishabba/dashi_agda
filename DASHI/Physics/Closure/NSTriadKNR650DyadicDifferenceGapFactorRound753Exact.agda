@@ -28,7 +28,7 @@ open import Data.Rational.Base using (ℚ; 1ℚ; _-_; _*_)
 import Data.Rational.Properties as ℚP
 import Data.Nat.Properties as NatP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
