@@ -188,6 +188,8 @@ import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2StackWeight
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
 import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact as UranoCompat
+import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
+import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact as CarnahanCompat
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3LocalWeight
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
@@ -363,6 +365,17 @@ urano2BGreenCompatibilityBoundary :
   UranoCompat.TwoBGreenSpeciesUranoParityCompatibilityBoundary
 urano2BGreenCompatibilityBoundary =
   UranoCompat.canonicalTwoBGreenSpeciesUranoParityCompatibilityBoundary
+
+
+carnahanThreeBRefinementBoundary :
+  Carnahan3B.ThreeBCarnahanOrderNineRefinementBoundary
+carnahanThreeBRefinementBoundary =
+  Carnahan3B.canonicalThreeBCarnahanOrderNineRefinementBoundary
+
+carnahanThreeBGreenCompatibilityBoundary :
+  CarnahanCompat.ThreeBGreenSpeciesCarnahanCompatibilityBoundary
+carnahanThreeBGreenCompatibilityBoundary =
+  CarnahanCompat.canonicalThreeBGreenSpeciesCarnahanCompatibilityBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
@@ -561,6 +574,8 @@ record ArithmeticIndependent369Frontier : Set where
     p3SemistableMultiplicityEqualsUranoLengthPaid : Bool
     urano2BParityConstraintsSourced : Bool
     p2GreenSpeciesUranoParityCompatibilityPaid : Bool
+    carnahan3BOrderNineRefinementSourced : Bool
+    p3GreenSpeciesCarnahanH3CompatibilityPaid : Bool
     carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
     uranoTheoryDeterminesSectorLengths : Bool
     greenRingFrameworkProvesLocalizedPBSpecies : Bool
@@ -720,6 +735,8 @@ canonicalArithmeticIndependent369Frontier =
     ; p3SemistableMultiplicityEqualsUranoLengthPaid = false
     ; urano2BParityConstraintsSourced = true
     ; p2GreenSpeciesUranoParityCompatibilityPaid = false
+    ; carnahan3BOrderNineRefinementSourced = true
+    ; p3GreenSpeciesCarnahanH3CompatibilityPaid = false
     ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
     ; uranoTheoryDeterminesSectorLengths = false
     ; greenRingFrameworkProvesLocalizedPBSpecies = false
