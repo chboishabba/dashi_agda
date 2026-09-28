@@ -252,6 +252,9 @@ directCMP119H2ObjectConstructionLevel = machineChecked
 -- finite estimates/closure, selected OS4) plus literal interpretation of the
 -- exact finite/continuum/OS objects it constructs.  R436/R424 remain stronger
 -- audit/fallback producers and are no longer prerequisites of this H2 ABI.
-directCMP119H2PhysicalInstantiationLevel : ProofLevel
-directCMP119H2PhysicalInstantiationLevel =
+directCMP119H2PreferredFiniteOSSourceLevel : ProofLevel
+directCMP119H2PreferredFiniteOSSourceLevel =
   R462.literalRound462PublishedFiniteOSApplicationLevel
+
+directCMP119H2PhysicalInstantiationLevel : ProofLevel
+directCMP119H2PhysicalInstantiationLevel = conditional
