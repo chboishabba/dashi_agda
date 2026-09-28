@@ -45,6 +45,7 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact as Centered
 import DASHI.Reasoning.Trialectic369IncomingPairFaceDirectionQuotientExact as Incoming
 import DASHI.Reasoning.Trialectic369IncomingFaceFrickeQuotientSeparationExact as FrickeSeparation
+import DASHI.Reasoning.Trialectic369IncomingAnalyticFrickeQuotientRecognitionExact as AnalyticFricke
 import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact as Outgoing
 import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact as OutCompiler
 import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as FineFrickeNoGo
@@ -262,6 +263,29 @@ incomingAnalyticFrickeStillRequiresQuotientLevelAuthority :
   ≡ false
 incomingAnalyticFrickeStillRequiresQuotientLevelAuthority = refl
 
+incomingStabilizerPreservingRecognitionRejected :
+  FrickeSeparation.stabilizerPreservingFiveWayRecognitionRejected
+    incomingFrickeSeparationBoundary
+  ≡ true
+incomingStabilizerPreservingRecognitionRejected = refl
+
+incomingAnalyticFrickeContractBoundary :
+  AnalyticFricke.Trialectic369IncomingAnalyticFrickeQuotientRecognitionBoundary
+incomingAnalyticFrickeContractBoundary =
+  AnalyticFricke.canonicalTrialectic369IncomingAnalyticFrickeQuotientRecognitionBoundary
+
+incomingQuotientLevelAnalyticContractOwned :
+  AnalyticFricke.quotientLevelRecognitionContractOwned
+    incomingAnalyticFrickeContractBoundary
+  ≡ true
+incomingQuotientLevelAnalyticContractOwned = refl
+
+incomingAnalyticContractRequiresNoRawEquivariance :
+  AnalyticFricke.rawEquivariantBijectionRequired
+    incomingAnalyticFrickeContractBoundary
+  ≡ false
+incomingAnalyticContractRequiresNoRawEquivariance = refl
+
 ------------------------------------------------------------------------
 -- 5c. Outgoing action-recognition wall reduced by compiler.
 ------------------------------------------------------------------------
@@ -376,6 +400,8 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     incomingGeometricInversionAuthorityPaid : Bool
     incomingFiniteFrickeQuotientCoordinatePaid : Bool
     incomingRawFrickeActionEquivalenceRejected : Bool
+    incomingStabilizerPreservingRecognitionRejected : Bool
+    incomingQuotientLevelAnalyticContractOwned : Bool
     incomingAnalyticFrickeAuthorityPaid : Bool
     outgoingSecondarySheetCarrierRecognitionPaid : Bool
     outgoingActionRestrictionCompilerPaid : Bool
@@ -392,6 +418,6 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary :
 canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
   trialectic-369-ssp15-recognition-capstone-boundary
     true true true true true true true
-    true true true false true true false
+    true true true true true false true true false
     true true false false
     false false
