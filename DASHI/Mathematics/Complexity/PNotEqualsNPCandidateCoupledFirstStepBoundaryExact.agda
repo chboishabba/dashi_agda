@@ -25,7 +25,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateCoupledFirstStepBoundar
 -- state's recursive measure.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; _≢_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (nothing)
