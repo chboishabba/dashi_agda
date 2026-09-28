@@ -25,7 +25,7 @@ module DASHI.Moonshine.OggSSPP2BanerjeeGaussianCMOrientedInertiaSourceExact wher
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Moonshine.OggSSPP2BanerjeeF4UniversalDeformationSourceExact as Banerjee
 import DASHI.Moonshine.OggSSPP2BanerjeeF4SameSourceRealizationExact as BanerjeeSource
@@ -34,11 +34,23 @@ import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact as Ten
 import DASHI.Moonshine.OggSSPP2OrientedInertiaUniversalDeformationRealizationExact as Oriented
 import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as Inertia
 import DASHI.Moonshine.OggSSPP2Gamma0FourMarkedSubgroupSchemeSourceExact as Gamma
+import DASHI.Moonshine.OggSSPP2Gamma0FourUniqueSupersingularSubgroupSeparationExact as Unique
 import DASHI.Moonshine.OggSSPP2UniqueGamma0FourMarkingBidiExact as Bidi
 import DASHI.Moonshine.OggSSPP2SupersingularUniversalDeformationSourceExact as Universal
 import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4
 import DASHI.Moonshine.OggSSPP2F4AntipodalStratifiedRefinementExact as Target
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+
+_andBool_ : Bool -> Bool -> Bool
+true andBool right = right
+false andBool right = false
+
+andBoolTrue :
+  {left right : Bool} ->
+  left ≡ true ->
+  right ≡ true ->
+  (left andBool right) ≡ true
+andBoolTrue refl refl = refl
 
 State : Set
 State =
@@ -231,7 +243,7 @@ marking {authority} attachment =
     ; underlyingFamilyState =
         λ _ -> universalFamilyState authority
     ; specializesToRawSubgroup =
-        λ _ -> BanerjeeSource.Unique.kerFrobeniusSquared
+        λ _ -> Unique.kerFrobeniusSquared
     ; specializationIsUniqueKerFrobeniusSquared =
         λ _ -> refl
     ; gamma0FourLevelStructurePresent =
@@ -240,11 +252,14 @@ marking {authority} attachment =
         λ _ -> gammaZeroLevelFourSemanticsIsTrue attachment
     ; deformationProvenanceRetained =
         λ state ->
-          gaussianCMOrientationRealized attachment (Data.Product.proj₁ state)
+          gaussianCMOrientationRealized attachment (proj₁ state)
+          andBool
+          g24GaloisOrbitRealized attachment (proj₂ state)
     ; deformationProvenanceRetainedIsTrue =
         λ state ->
-          gaussianCMOrientationRealizedIsTrue attachment
-            (Data.Product.proj₁ state)
+          andBoolTrue
+            (gaussianCMOrientationRealizedIsTrue attachment (proj₁ state))
+            (g24GaloisOrbitRealizedIsTrue attachment (proj₂ state))
     }
 
 markingBidi :
