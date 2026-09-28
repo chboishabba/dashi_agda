@@ -61,12 +61,20 @@ def register_mcp_tools(server: Any, tools: DashiAgdaMcpTools) -> None:
         )
 
     @server.tool()
-    def affected(target: str) -> dict:
-        """Return the indexed reverse-import frontier after changing a module.
+    def affected(
+        target: str,
+        within: Optional[str] = None,
+    ) -> dict:
+        """Return the reverse-import frontier after changing a module.
 
-        Read-only. The changed module is first, followed by nearest consumers.
+        Read-only. Without within, the result is limited to modules already in
+        the persistent index. Pass a Subject/Everything.agda rollup as within
+        to ensure and constrain the frontier to that subject closure.
         """
-        return tools.affected(target)
+        return tools.affected(
+            target,
+            within=within,
+        )
 
     @server.tool()
     def cache_status() -> dict:
