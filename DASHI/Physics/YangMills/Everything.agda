@@ -668,3 +668,8 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonQuarterDyadicCompletionExa
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact
 
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR415CompletionExact
+
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact
+import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterJetExact
+import DASHI.Physics.YangMills.BalabanLiteralWilsonPathSupportLocalityExact
+import DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedJetLocalizationSourceExact
