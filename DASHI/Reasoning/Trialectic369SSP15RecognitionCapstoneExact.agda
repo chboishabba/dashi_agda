@@ -53,6 +53,7 @@ import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
+import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369OutgoingLinearMultiplicityWrongTypeCorrectionExact as LinearCorrection
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
@@ -513,6 +514,39 @@ outgoingBasisSpecialisationNotInhabitedHere :
 outgoingBasisSpecialisationNotInhabitedHere = refl
 
 ------------------------------------------------------------------------
+-- 5h. One canonical outgoing external target: ActualLinearMultiplicityAcquisition.
+------------------------------------------------------------------------
+
+outgoingLinearAcquisitionBoundary :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary
+outgoingLinearAcquisitionBoundary =
+  LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+
+outgoingOneAcquisitionOwnsLinearTarget :
+  LinearAcquisition.oneAcquisitionOwnsLinearZetaAndHomSpace
+    outgoingLinearAcquisitionBoundary
+  ≡ true
+outgoingOneAcquisitionOwnsLinearTarget = refl
+
+outgoingCanonicalLinearRouteCompilesFromAcquisition :
+  LinearAcquisition.canonicalLinearRouteCompiledFromAcquisition
+    outgoingLinearAcquisitionBoundary
+  ≡ true
+outgoingCanonicalLinearRouteCompilesFromAcquisition = refl
+
+outgoingAcquisitionKeepsFiniteRouteOptional :
+  LinearAcquisition.finiteNinetyPermutationRouteNotCanonical
+    outgoingLinearAcquisitionBoundary
+  ≡ true
+outgoingAcquisitionKeepsFiniteRouteOptional = refl
+
+outgoingActualLinearAcquisitionStillOpen :
+  LinearAcquisition.acquisitionInhabitedHere
+    outgoingLinearAcquisitionBoundary
+  ≡ false
+outgoingActualLinearAcquisitionStillOpen = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
@@ -520,6 +554,7 @@ data IncomingAnalyticFrickeAuthority : Set where
 data OptionalFiniteBasisMultiplicityProjectionDescentRecognition : Set where
 data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
 data OutgoingInvariantFineFibreRecognition : Set where
+data OutgoingActualLinearMultiplicityAcquisitionRecognition : Set where
 data OutgoingActualLinearHomSpaceRecognition : Set where
 data OutgoingActualLinearEvaluationRecognition : Set where
 data OutgoingActualInverseCocycleActionRecognition : Set where
@@ -541,6 +576,10 @@ outgoingMultiplicityInertiaAttachmentStillOpenToken ()
 outgoingInvariantFineFibreRecognitionStillOpenToken :
   OutgoingInvariantFineFibreRecognition -> ⊥
 outgoingInvariantFineFibreRecognitionStillOpenToken ()
+
+outgoingActualLinearAcquisitionStillOpenToken :
+  OutgoingActualLinearMultiplicityAcquisitionRecognition -> ⊥
+outgoingActualLinearAcquisitionStillOpenToken ()
 
 outgoingActualLinearHomSpaceStillOpenToken :
   OutgoingActualLinearHomSpaceRecognition -> ⊥
@@ -594,8 +633,10 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
 
     outgoingPureFin90MonsterRouteRefuted : Bool
     outgoingCanonicalTargetIsLinearHomSpace : Bool
+    outgoingCanonicalTargetIsOneLinearAcquisition : Bool
     outgoingFiniteNineEighteenRoutesAreOptionalBasisTools : Bool
     outgoingBasisSpecialisationPaid : Bool
+    outgoingActualLinearAcquisitionPaid : Bool
     outgoingActualLinearHomSpacePaid : Bool
     outgoingActualLinearEvaluationPaid : Bool
     outgoingActualInverseCocycleActionPaid : Bool
@@ -612,5 +653,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     true true true true true false true
     true false true true false true false
     true false false false false true true
-    true false false false false false false
-    false
+    true true false false false false false
+    false false false
