@@ -19,7 +19,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Data.Vec.Base using (Vec; []; _∷_)
+import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -41,10 +41,10 @@ decideBoolEqual true true = inj₁ refl
 
 decideTableEqual :
   ∀ {n : Nat} →
-  (left right : Vec Bool n) →
+  (left right : Vec.Vec Bool n) →
   (left ≡ right) ⊎ (left ≡ right → ⊥)
-decideTableEqual [] [] = inj₁ refl
-decideTableEqual (left ∷ lefts) (right ∷ rights)
+decideTableEqual Vec.[] Vec.[] = inj₁ refl
+decideTableEqual (left Vec.∷ lefts) (right Vec.∷ rights)
     with decideBoolEqual left right
 ... | inj₂ notSame = inj₂ (λ { refl → notSame refl })
 ... | inj₁ refl with decideTableEqual lefts rights
@@ -57,7 +57,7 @@ decideTableEqual (left ∷ lefts) (right ∷ rights)
 
 SemanticKey : Nat → Set
 SemanticKey remaining =
-  Vec Bool (Bits.bitCardinality remaining)
+  Vec.Vec Bool (Bits.bitCardinality remaining)
 
 semanticKey :
   ∀ {rootVariables remaining : Nat}
