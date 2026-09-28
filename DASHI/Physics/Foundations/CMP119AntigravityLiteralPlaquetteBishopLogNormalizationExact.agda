@@ -9,10 +9,12 @@ import RealProperties as BishopP
 
 import DASHI.Physics.Foundations.CMP119AntigravityBishopInversePiSquaredUnitBoundExact as Pi
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
+import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
 import DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact as Beta
 import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact as Embed
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as Plaquette
 import DASHI.Physics.YangMills.BalabanYM4SU2GaussianBetaLowerExact as SU2
+import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -123,6 +125,39 @@ embeddedGaussianIsCanonicalBishopSU2
           (bishopLogBlocking normalization scale)))
     (casimirIsSU2 normalization)
     (embeddedGaussianAtNativeCasimir normalization scale)
+
+------------------------------------------------------------------------
+-- P3 GAUSSIAN COORDINATE CONSEQUENCE
+--
+-- The preferred split P3/literal weld already identifies the P3 Gaussian
+-- increment with the embedded literal beta_Z.  Combining that machine-checked
+-- weld with the normalized-log theorem above removes a second same-object
+-- obligation: once normalizedLogCoordinate is paid, the P3 Gaussian term is
+-- automatically in the canonical Bishop SU(2) convention.
+------------------------------------------------------------------------
+
+p3GaussianUsesCanonicalBishopSU2 :
+  ∀ {Scale}
+    {dataSet : Plaquette.PhysicalRunningCouplingData Scale}
+    {recursion : P3.RunningCouplingRecursion Scale Bishop.ℝ}
+    (splitView :
+      P3Literal.P3RepresentsLiteralPlaquetteSplitUVView dataSet recursion)
+    (normalization :
+      LiteralPlaquetteBishopLogNormalization (Plaquette.oneLoop dataSet))
+    scale →
+  Bishop._≃_
+    (P3.betaLogBlocking recursion scale)
+    (Bishop._*_
+      (Bishop._*_
+        (Embed.embed
+          (Beta.pureYMInverseCouplingCoefficient SU2.su2Casimir))
+        Pi.inversePiSquared)
+      (bishopLogBlocking normalization scale))
+p3GaussianUsesCanonicalBishopSU2
+    {dataSet = dataSet} splitView normalization scale =
+  BishopP.≃-trans
+    (P3Literal.betaLogBlockingSameLiteralGaussian splitView scale)
+    (embeddedGaussianIsCanonicalBishopSU2 normalization scale)
 
 ------------------------------------------------------------------------
 -- FRONTIER RECUT
