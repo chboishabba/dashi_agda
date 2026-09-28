@@ -43,6 +43,7 @@ import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact a
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact as Dyadic
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
+import DASHI.Reasoning.Trialectic369DyadicKernel4DescentCountExact as DyadicCount
 
 ------------------------------------------------------------------------
 -- 1. Typed carrier counts.
@@ -185,6 +186,38 @@ puncturedABLocalChartCountIs80 =
   Dyadic.puncturedABEnumerationLengthIs80
 
 ------------------------------------------------------------------------
+-- 4c. Pre-RH descent explanation of the T9 carrier.
+------------------------------------------------------------------------
+
+threeKernel4LocalsGlueToT9Count :
+  DyadicCount.globalStateCount ≡ t9Count
+threeKernel4LocalsGlueToT9Count =
+  DyadicCount.descentGlobalCountMatchesExistingT9
+
+threeLocalChartsGiveTwelveRawTritSlots :
+  DyadicCount.rawLocalSlotCount ≡ 12
+threeLocalChartsGiveTwelveRawTritSlots =
+  DyadicCount.rawLocalSlotCountIsTwelve
+
+threeOverlapIdentificationsRemoveThreeSlots :
+  DyadicCount.identifiedOverlapSlotCount ≡ 3
+threeOverlapIdentificationsRemoveThreeSlots =
+  DyadicCount.identifiedOverlapSlotCountIsThree
+
+twelveMinusThreeCoordinateLedger :
+  DyadicCount.rawLocalSlotCount
+  ≡ DyadicCount.independentGlobalTritCount
+    + DyadicCount.identifiedOverlapSlotCount
+twelveMinusThreeCoordinateLedger =
+  DyadicCount.coordinateLedger
+
+rawThreeLocalCountFactorsThroughT9AndOverlapMultiplicity :
+  DyadicCount.rawLocalTupleCount
+  ≡ t9Count * DyadicCount.overlapConstraintMultiplicity
+rawThreeLocalCountFactorsThroughT9AndOverlapMultiplicity =
+  DyadicCount.rawTupleCountFactorsThroughGlobal
+
+------------------------------------------------------------------------
 -- 5. The same 3^4 scale under two boundary operations.
 ------------------------------------------------------------------------
 
@@ -237,6 +270,8 @@ record RiemannJ369BalancedTernaryCrossPollinationBoundary : Set where
     trialecticDyadicLocalIsCanonicalKernel4 : Bool
     localFullCount81Paid : Bool
     localPuncturedCount80Paid : Bool
+    threeKernel4LocalsGlueToT9 : Bool
+    twelveMinusThreeCoordinateLedgerPaid : Bool
     kernel4PunctureOperationAvailable : Bool
     concreteKernel4PunctureCardinality80Paid : Bool
     semanticIdentityClaimed : Bool
@@ -248,5 +283,6 @@ canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary =
   riemann-j369-balanced-ternary-cross-pollination-boundary
     true true true true true true true
     true true true
+    true true
     true true
     false false
