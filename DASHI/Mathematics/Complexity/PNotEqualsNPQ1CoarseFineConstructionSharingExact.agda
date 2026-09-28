@@ -20,10 +20,12 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1CoarseFineConstructionSharingE
 -- consumer-factorization and fibre-repair kernels.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≢_; cong)
+open import Data.Fin.Base using (Fin)
+open import Relation.Binary.PropositionalEquality using (_≢_; cong; sym)
 
 import DASHI.Core.CoarseFineRelativeFibreExact as CoarseFine
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
@@ -44,7 +46,7 @@ ResidualSemantic :
   Set
 ResidualSemantic remaining =
   SAT.Assignment remaining →
-  Agda.Builtin.Bool.Bool
+  Bool
 
 residualSemantic :
   ∀ {rootVariables remaining : Nat}
@@ -72,7 +74,7 @@ layerResidualSemantic node assignment =
   SAT.evaluate
     (Family.currentFormula (Width.node node))
     (Future.transportAssignment
-      (Relation.Binary.PropositionalEquality.sym
+      (sym
         (Width.arityExact node))
       assignment)
 
@@ -347,7 +349,7 @@ widthWitnessCoarseCollisionForcesRelativeFineSeparation :
         {root = root}
         remaining
         width)
-    {leftIndex rightIndex : Data.Fin.Base.Fin width} →
+    {leftIndex rightIndex : Fin width} →
   CoarseFine.coarse
       (geometry sharing)
       (Width.representative witness leftIndex)
