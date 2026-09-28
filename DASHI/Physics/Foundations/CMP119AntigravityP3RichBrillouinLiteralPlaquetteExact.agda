@@ -112,7 +112,8 @@ richBrillouinViewAsLiteralSplit bridge = record
       λ depth →
         BishopP.≃-trans
           (p3GaussianSameRichScalarIntegral bridge depth)
-          (richScalarIntegralSameLiteralGaussian bridge depth)
+          (Projection.scalarIntegralSameLiteralGaussian
+            (gaussianProjection bridge) depth)
 
   ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.remainderSameLiteralInteraction =
       remainderSameLiteralInteraction bridge
@@ -170,11 +171,8 @@ record CanonicalRunningRichLiteralPlaquetteSplit
           (P3.remainder (SU2Running.recursion running) zero))
         (UV.embed 0ℚ)
 
-    richScalarIntegralSameLiteralGaussian :
-      ∀ depth →
-      Bishop._≃_
-        (Rich.scalarIntegral rich (suc depth))
-        (UV.embed (Literal.literalBetaZ dataSet (suc depth)))
+    gaussianProjection :
+      Projection.RichBrillouinRationalGaussianProjection dataSet rich
 
     remainderSameLiteralInteraction :
       ∀ depth →
@@ -206,9 +204,8 @@ canonicalRunningAsRichBrillouinBridge inputs = record
       CanonicalRich.p3GaussianSameRichScalarIntegral
         (richNormalization inputs)
 
-  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.richScalarIntegralSameLiteralGaussian =
-      Projection.scalarIntegralSameLiteralGaussian
-        (gaussianProjection inputs)
+  ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.gaussianProjection =
+      CanonicalRunningRichLiteralPlaquetteSplit.gaussianProjection inputs
 
   ; P3RepresentsRichBrillouinLiteralPlaquetteSplit.remainderSameLiteralInteraction =
       CanonicalRunningRichLiteralPlaquetteSplit.remainderSameLiteralInteraction inputs
@@ -245,7 +242,7 @@ richToRationalGaussianSameObjectStillRequired =
 p3ToRichGaussianSameObjectStillRequired :
   Agda.Builtin.Bool.Bool
 p3ToRichGaussianSameObjectStillRequired =
-  Agda.Builtin.Bool.true
+  Agda.Builtin.Bool.false
 
 richBrillouinLiteralPlaquetteCompilerLevel : ProofLevel
 richBrillouinLiteralPlaquetteCompilerLevel = machineChecked
