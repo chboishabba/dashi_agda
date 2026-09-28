@@ -423,3 +423,5 @@ import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact
 import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact
 
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact
+
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact
