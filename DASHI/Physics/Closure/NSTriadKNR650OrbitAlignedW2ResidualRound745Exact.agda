@@ -188,6 +188,12 @@ module OrbitAligned
     productionOrbitCell =
       R744.productionOrbitCell system
 
+    cleanOrbitAlignedCell :
+      Physical.PhysicalTriadIncidence → ℚ
+    cleanOrbitAlignedCell beta =
+      R744.three * nestedOrbitCell beta
+        - Fold.two * productionOrbitCell beta
+
     orbitAlignedFold : ℚ
     orbitAlignedFold =
       R38.foldPower cleanOrbitAlignedCell
