@@ -20,14 +20,17 @@ class DashiAgdaMcpTools:
         self,
         target: str,
         errors_only: bool = False,
+        limit: int = 200,
     ) -> Dict[str, Any]:
-        """Return structural diagnostics for a module/rollup dependency closure.
+        """Return bounded structural diagnostics for a module/rollup closure.
 
-        This is read-only and never invokes Agda.
+        This is read-only and never invokes Agda. The MCP default is bounded to
+        avoid flooding an agent context; use next_error for iterative repair.
         """
         return self.service.diagnose(
             target,
             errors_only=errors_only,
+            limit=limit,
         )
 
     def next_error(
