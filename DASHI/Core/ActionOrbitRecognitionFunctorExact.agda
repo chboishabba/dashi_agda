@@ -164,6 +164,27 @@ record Pi0Surjection
 
 open Pi0Surjection public
 
+pi0PreimageOrbitInjective :
+  {SourceState SourceSymmetry TargetState TargetSymmetry : Set}
+  {sourceAction :
+    Action.InvertibleSymmetryAction SourceState SourceSymmetry}
+  {targetAction :
+    Action.InvertibleSymmetryAction TargetState TargetSymmetry}
+  {functor : ActionRecognitionFunctor sourceAction targetAction}
+  {sourceOrbits : Orbit.OrbitPresentation sourceAction}
+  {targetOrbits : Orbit.OrbitPresentation targetAction}
+  {recognition : OrbitRecognition functor sourceOrbits targetOrbits} ->
+  (surjection : Pi0Surjection recognition) ->
+  {left right : Orbit.Orbit targetOrbits} ->
+  preimageOrbit surjection left ≡ preimageOrbit surjection right ->
+  left ≡ right
+pi0PreimageOrbitInjective surjection {left} {right} same =
+  trans
+    (sym (hitsEveryTargetOrbit surjection left))
+    (trans
+      (cong (mapOrbit _) same)
+      (hitsEveryTargetOrbit surjection right))
+
 ------------------------------------------------------------------------
 -- 4. Stabilizer preservation/reflection.
 ------------------------------------------------------------------------
