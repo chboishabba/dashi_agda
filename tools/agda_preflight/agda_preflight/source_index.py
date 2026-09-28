@@ -814,7 +814,7 @@ class SourceIndex:
         if projection == "diagnostics":
             select = (
                 "m.path, m.module_name, m.mtime_ns, m.size, "
-                "m.diagnostics_json"
+                "m.source_sha256, m.diagnostics_json"
             )
         elif projection == "candidates":
             select = (
