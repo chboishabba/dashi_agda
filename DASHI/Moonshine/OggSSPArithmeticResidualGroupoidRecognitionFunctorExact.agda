@@ -115,6 +115,42 @@ record ActionGroupoidRecognitionFunctor
 open ActionGroupoidRecognitionFunctor public
 
 ------------------------------------------------------------------------
+-- 1b. Canonical full-recognition owner.
+--
+-- The local record above is retained only as a compatibility surface for older
+-- #1053 theorem names.  New full recognition claims MUST inhabit the generic
+-- repository owner below; this prevents Moonshine from maintaining a second
+-- notion of action/orbit/stabilizer recognition.
+------------------------------------------------------------------------
+
+CanonicalFullRecognition :
+  {SourceState SourceGroup TargetState TargetGroup : Set} ->
+  {sourceAction :
+    Symmetry.InvertibleSymmetryAction SourceState SourceGroup} ->
+  {targetAction :
+    Symmetry.InvertibleSymmetryAction TargetState TargetGroup} ->
+  (functor : RecognitionCore.ActionRecognitionFunctor
+    sourceAction targetAction) ->
+  (sourcePresentation : Generic.OrbitPresentation sourceAction) ->
+  (targetPresentation : Generic.OrbitPresentation targetAction) ->
+  Set₁
+CanonicalFullRecognition functor sourcePresentation targetPresentation =
+  RecognitionCore.OrbitStabilizerRecognition
+    functor sourcePresentation targetPresentation
+
+data LocalRecognitionRecordIsCanonicalFullRecognition : Set where
+
+localRecognitionRecordIsNotPromotedToCanonicalFullRecognition :
+  LocalRecognitionRecordIsCanonicalFullRecognition -> ⊥
+localRecognitionRecordIsNotPromotedToCanonicalFullRecognition ()
+
+data CanonicalRecognitionCanBeClaimedFromPi0GateAlone : Set where
+
+canonicalRecognitionCannotBeClaimedFromPi0GateAlone :
+  CanonicalRecognitionCanBeClaimedFromPi0GateAlone -> ⊥
+canonicalRecognitionCannotBeClaimedFromPi0GateAlone ()
+
+------------------------------------------------------------------------
 -- 2. Finite pi0 recognition gate.
 --
 -- Orbit/stabilizer preservation is structural.  For the finite residual
@@ -340,6 +376,8 @@ record SmallCharacteristicRecognitionFunctorBoundary : Set where
   field
     genericActionGroupoidFunctorContractOwned : Bool
     strongerGenericRecognitionCoreReused : Bool
+    canonicalFullRecognitionDelegatedToGenericCore : Bool
+    localRecognitionRecordTreatedAsCanonical : Bool
     arithmeticResidualSourceInterfaceTyped : Bool
     actionIntertwiningRequired : Bool
     orbitPreservationRequired : Bool
@@ -369,7 +407,7 @@ canonicalSmallCharacteristicRecognitionFunctorBoundary :
   SmallCharacteristicRecognitionFunctorBoundary
 canonicalSmallCharacteristicRecognitionFunctorBoundary =
   small-characteristic-recognition-functor-boundary
-    true true true true true true
+    true true true false true true true
     true true
     true true true false
     5 true
