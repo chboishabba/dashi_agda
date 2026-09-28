@@ -35,6 +35,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as Acquisition
+import DASHI.Geometry.HilbertLorentzForcing as Linear
+import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
+import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
 import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as Composition
 import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
 import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selected
@@ -135,6 +139,96 @@ compiledProducerIsAcquisitionProducer :
 compiledProducerIsAcquisitionProducer completion =
   Composition.compiledSingleActionProducerIsAcquisitionProducer
     (sameElementComposition completion)
+
+------------------------------------------------------------------------
+-- 3b. The normalizer -> Monster map is compiler output from same-producer
+--     equality.  Only the ACTION INTERTWINING remains scientific.
+------------------------------------------------------------------------
+
+compiledVOAProducer :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Single.ActualMonster3BSingleActionProducer
+compiledVOAProducer completion =
+  Phase.singleActionProducerFromVOA
+    (Composition.recognizedActionSourceFromSameElement
+      (Composition.selectedRecognizedFromKernel
+        (Composition.kernelRecognizedSameElementAttachment
+          (sameElementComposition completion))))
+
+acquisitionProducer :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Single.ActualMonster3BSingleActionProducer
+acquisitionProducer completion =
+  LinearZeta.singleActionProducer
+    (Acquisition.linearZetaProducer (acquisition completion))
+
+normalizerCarrierEqualityFromComposition :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Single.Normalizer (compiledVOAProducer completion)
+  ≡
+  Single.Normalizer (acquisitionProducer completion)
+normalizerCarrierEqualityFromComposition completion =
+  cong Single.Normalizer (compiledProducerIsAcquisitionProducer completion)
+
+normalizerToMonsterFromComposition :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Single.Normalizer (acquisitionProducer completion) →
+  Monster
+normalizerToMonsterFromComposition completion normalizer =
+  subst
+    (λ Carrier → Carrier)
+    (sym (normalizerCarrierEqualityFromComposition completion))
+    normalizer
+
+record Selected3BNormalizerActionIntertwiningOnly
+    {Monster K : Set}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) : Setω where
+  field
+    normalizerActionIntertwines :
+      (normalizer : Single.Normalizer (acquisitionProducer completion)) →
+      (state :
+        Linear.Vector
+          (WeightTwo.constituentLinearCarrier
+            (Acquisition.weightTwoLinearBridge
+              (acquisition completion)))) →
+      subst
+        (λ Carrier → Carrier)
+        (Acquisition.selected3BStateCarrierEquality
+          (acquisition completion))
+        (WeightTwo.constituentAct
+          (Acquisition.weightTwoLinearBridge
+            (acquisition completion))
+          (normalizerToMonsterFromComposition completion normalizer)
+          state)
+      ≡
+      Inertia.act
+        (Single.normalizerAction (acquisitionProducer completion))
+        normalizer
+        (subst
+          (λ Carrier → Carrier)
+          (Acquisition.selected3BStateCarrierEquality
+            (acquisition completion))
+          state)
+
+open Selected3BNormalizerActionIntertwiningOnly public
+
+compileNormalizerMonsterActionWeld :
+  ∀ {Monster K}
+    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
+  Selected3BNormalizerActionIntertwiningOnly completion →
+  Acquisition.Selected3BNormalizerMonsterActionWeld
+    (acquisition completion)
+compileNormalizerMonsterActionWeld completion intertwining =
+  record
+    { normalizerToMonster =
+        normalizerToMonsterFromComposition completion
+    ; normalizerActionIntertwines =
+        normalizerActionIntertwines intertwining
+    }
 
 ------------------------------------------------------------------------
 -- 4. All linear multiplicity payloads are already inside the completion.
@@ -241,6 +335,8 @@ record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
     oneCompletionOwnsAcquisition : Bool
     sameElementCompositionRequired : Bool
     normalizerMonsterActionWeldRequired : Bool
+    normalizerToMonsterMapCompilerOutput : Bool
+    onlyActionIntertwiningRemainsAfterComposition : Bool
     linearZetaProducerCompilerOutput : Bool
     multiplicityHomSpaceCompilerOutput : Bool
     canonicalLinearRouteCompilerOutput : Bool
@@ -254,4 +350,4 @@ canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary :
   Trialectic369Selected3BLinearAcquisitionCompletionBoundary
 canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary =
   trialectic-369-selected3b-linear-acquisition-completion-boundary
-    true true true true true true true true true true false
+    true true true true true true true true true true true true false
