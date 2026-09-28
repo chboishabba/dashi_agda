@@ -59,12 +59,12 @@ record MultiplicityPositionIndependence
 
 open MultiplicityPositionIndependence public
 
-canonicalMultiplictyAct :
+canonicalMultiplicityAct :
   (source : Action.ActualMonster3BActionRecognition) →
   Descent.ActualInertia source →
   Fin 90 →
   Fin 90
-canonicalMultiplictyAct source inertia multiplicity =
+canonicalMultiplicityAct source inertia multiplicity =
   multiplicityOutput source inertia zeroPosition multiplicity
 
 descentFromPositionIndependence :
@@ -73,7 +73,7 @@ descentFromPositionIndependence :
   Descent.MultiplicityProjectionDescent source
 descentFromPositionIndependence source witness =
   record
-    { multiplicityAct = canonicalMultiplictyAct source
+    { multiplicityAct = canonicalMultiplicityAct source
     ; multiplicityProjectionIntertwines =
         independentOfPosition witness
     }
@@ -99,7 +99,7 @@ multiplicityActIsUniquelyDetermined :
   (inertia : Descent.ActualInertia source) →
   (multiplicity : Fin 90) →
   Descent.multiplicityAct descent inertia multiplicity
-  ≡ canonicalMultiplictyAct source inertia multiplicity
+  ≡ canonicalMultiplicityAct source inertia multiplicity
 multiplicityActIsUniquelyDetermined source descent inertia multiplicity =
   sym (Descent.multiplicityProjectionIntertwines
     descent inertia zeroPosition multiplicity)
@@ -122,6 +122,54 @@ independenceReconstructedFromDescent :
 independenceReconstructedFromDescent source descent inertia position multiplicity =
   refl
 
+------------------------------------------------------------------------
+-- A single witnessed departure from zero-position output rejects descent.
+------------------------------------------------------------------------
+
+record ZeroPositionCrossDependence
+    (source : Action.ActualMonster3BActionRecognition) : Set where
+  field
+    inertia : Descent.ActualInertia source
+    position : H.X6
+    multiplicity : Fin 90
+    outputDiffersFromOrigin :
+      multiplicityOutput source inertia position multiplicity
+      ≢ multiplicityOutput source inertia zeroPosition multiplicity
+
+open ZeroPositionCrossDependence public
+
+zeroPositionCrossDependenceRejectsIndependence :
+  (source : Action.ActualMonster3BActionRecognition) →
+  ZeroPositionCrossDependence source →
+  MultiplicityPositionIndependence source →
+  ⊥
+zeroPositionCrossDependenceRejectsIndependence source witness independent =
+  outputDiffersFromOrigin witness
+    (independentOfPosition independent
+      (inertia witness) (position witness) (multiplicity witness))
+
+zeroPositionCrossDependenceRejectsDescent :
+  (source : Action.ActualMonster3BActionRecognition) →
+  ZeroPositionCrossDependence source →
+  Descent.MultiplicityProjectionDescent source →
+  ⊥
+zeroPositionCrossDependenceRejectsDescent source witness descent =
+  zeroPositionCrossDependenceRejectsIndependence
+    source witness (positionIndependenceFromDescent source descent)
+
+zeroPositionWitnessAsExistingCrossDependence :
+  (source : Action.ActualMonster3BActionRecognition) →
+  ZeroPositionCrossDependence source →
+  Descent.MultiplicityCrossDependenceWitness source
+zeroPositionWitnessAsExistingCrossDependence source witness =
+  record
+    { inertia = inertia witness
+    ; multiplicity = multiplicity witness
+    ; leftPosition = position witness
+    ; rightPosition = zeroPosition
+    ; outputsDiffer = outputDiffersFromOrigin witness
+    }
+
 record Trialectic369MultiplicityPositionIndependenceBoundary : Set where
   constructor trialectic-369-multiplicity-position-independence-boundary
   field
@@ -130,6 +178,7 @@ record Trialectic369MultiplicityPositionIndependenceBoundary : Set where
     positionIndependenceSufficesForDescent : Bool
     descentImpliesPositionIndependence : Bool
     multiplicityActionPointwiseUnique : Bool
+    oneZeroReferenceCounterexampleRejectsDescent : Bool
     actualMonsterPositionIndependenceEstablishedHere : Bool
     canonicalLinearRepresentationReplacedByFiniteAction : Bool
 
@@ -137,4 +186,4 @@ canonicalTrialectic369MultiplicityPositionIndependenceBoundary :
   Trialectic369MultiplicityPositionIndependenceBoundary
 canonicalTrialectic369MultiplicityPositionIndependenceBoundary =
   trialectic-369-multiplicity-position-independence-boundary
-    true true true true true false false
+    true true true true true true false false
