@@ -87,6 +87,251 @@ record PinnedCMP119OSAxiomInputs
 
 open PinnedCMP119OSAxiomInputs public
 
+------------------------------------------------------------------------
+-- PRE-GAP PINNED CMP119 OS CORE.
+--
+-- Same finite family, same cylinder encoding, same OS2 compiler, but no OS4.
+------------------------------------------------------------------------
+
+record PinnedCMP119OSCoreInputs
+    (CompactSimpleGroup Spacetime Configuration Position
+     CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+     HilbertSpace Hamiltonian VacuumState : Set)
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    (limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit)
+    (quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit))
+    (division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient)
+    (S :
+      Top.LiteralYangMillsSemantics
+        (Physical.physicalLiteralCarriers
+          CompactSimpleGroup Spacetime Nat Configuration ℝ
+          (Configuration → ℝ) Position
+          CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+          HilbertSpace Hamiltonian VacuumState)) : Set₂ where
+  field
+    familyCore : ∀ G →
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration limitLaws quotient division
+
+    cylinderEncodingCore :
+      Schwinger.CylinderSchwingerEncoding
+        (Configuration → ℝ) Position
+
+    observableAlgebraCore :
+      OS2.CylinderOSAlgebra (Configuration → ℝ)
+
+    finiteReflectionPositiveCore :
+      ∀ G cutoff
+        (testFamily :
+          Gram.PhysicalOSFiniteTestFamily (Configuration → ℝ) ℝ) →
+      0ℝ ≤ℝ
+        Gram.physicalReflectedGramQuadraticForm
+          (OS2.operations observableAlgebraCore)
+          (λ observable →
+            Limit.finiteExpectation (familyCore G) cutoff observable)
+          testFamily
+
+    OS0RegularityCore : CompactSimpleGroup → Set
+    OS1EuclideanCovarianceCore : CompactSimpleGroup → Set
+    OS3PermutationSymmetryCore : CompactSimpleGroup → Set
+    OS5GrowthControlCore : CompactSimpleGroup → Set
+
+    os0Core : ∀ G → OS0RegularityCore G
+    os1Core : ∀ G → OS1EuclideanCovarianceCore G
+    os3Core : ∀ G → OS3PermutationSymmetryCore G
+    os5Core : ∀ G → OS5GrowthControlCore G
+
+open PinnedCMP119OSCoreInputs public
+
+finiteOS2CoreInputs :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S}
+    (inputs :
+      PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    group →
+  FiniteOS2.FinitePhysicalMeasureContinuumOS2Inputs
+    Configuration limitLaws quotient division
+finiteOS2CoreInputs inputs group = record
+  { FiniteOS2.FinitePhysicalMeasureContinuumOS2Inputs.family =
+      familyCore inputs group
+  ; FiniteOS2.FinitePhysicalMeasureContinuumOS2Inputs.observableAlgebra =
+      observableAlgebraCore inputs
+  ; FiniteOS2.FinitePhysicalMeasureContinuumOS2Inputs.finiteReflectionPositive =
+      finiteReflectionPositiveCore inputs group
+  }
+
+continuumOS2Core :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S}
+    (inputs :
+      PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    group →
+  GramOS.GramReflectionPositive
+    (OS2.asOSGramLimitData
+      (FiniteOS2.asCylinderOSInputs
+        (finiteOS2CoreInputs inputs group)))
+    (Limit.limitExpectation (familyCore inputs group))
+continuumOS2Core inputs group =
+  FiniteOS2.continuumReflectionPositive
+    (finiteOS2CoreInputs inputs group)
+
+constructedMeasureCore :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S} →
+  PinnedCMP119OSCoreInputs
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S →
+  G → Physical.PhysicalContinuumYMMeasure (Configuration → ℝ) ℝ
+constructedMeasureCore inputs group =
+  Limit.continuumMeasure (familyCore inputs group)
+
+constructedSchwingerCore :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S} →
+  PinnedCMP119OSCoreInputs
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S →
+  G → Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ
+constructedSchwingerCore inputs group =
+  Schwinger.schwingerFromMeasure
+    (cylinderEncodingCore inputs)
+    (constructedMeasureCore inputs group)
+
+continuumOSCoreSystem :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S}
+    (inputs :
+      PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (group : G) →
+  OSGap.PreGapContinuumSchwingerSystem
+    (Configuration → ℝ) Position ℝ
+continuumOSCoreSystem inputs group = record
+  { OSGap.PreGapContinuumSchwingerSystem.schwingerCore =
+      Physical.schwinger (constructedSchwingerCore inputs group)
+  ; OSGap.PreGapContinuumSchwingerSystem.OS0RegularityCore =
+      OS0RegularityCore inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.OS1EuclideanCovarianceCore =
+      OS1EuclideanCovarianceCore inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.OS2ReflectionPositivityCore =
+      GramOS.GramReflectionPositive
+        (OS2.asOSGramLimitData
+          (FiniteOS2.asCylinderOSInputs
+            (finiteOS2CoreInputs inputs group)))
+        (Limit.limitExpectation (familyCore inputs group))
+  ; OSGap.PreGapContinuumSchwingerSystem.OS3PermutationSymmetryCore =
+      OS3PermutationSymmetryCore inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.OS5GrowthControlCore =
+      OS5GrowthControlCore inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.os0Core =
+      os0Core inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.os1Core =
+      os1Core inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.os2Core =
+      continuumOS2Core inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.os3Core =
+      os3Core inputs group
+  ; OSGap.PreGapContinuumSchwingerSystem.os5Core =
+      os5Core inputs group
+  }
+
+record CMP119OS4Attachment
+    {G X Configuration Position CurvaturePolynomial LocalOperator
+     OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState : Set}
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit)}
+    {division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient}
+    {S}
+    (core :
+      PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S) : Set₂ where
+  field
+    OS4ClusteringAttached : G → Set
+    os4Attached : ∀ group → OS4ClusteringAttached group
+
+open CMP119OS4Attachment public
+
+corePlusOS4Inputs :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S}
+    (core :
+      PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S) →
+  CMP119OS4Attachment core →
+  PinnedCMP119OSAxiomInputs
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S
+corePlusOS4Inputs core clustering = record
+  { PinnedCMP119OSAxiomInputs.family =
+      familyCore core
+  ; PinnedCMP119OSAxiomInputs.cylinderEncoding =
+      cylinderEncodingCore core
+  ; PinnedCMP119OSAxiomInputs.observableAlgebra =
+      observableAlgebraCore core
+  ; PinnedCMP119OSAxiomInputs.finiteReflectionPositive =
+      finiteReflectionPositiveCore core
+  ; PinnedCMP119OSAxiomInputs.OS0Regularity =
+      OS0RegularityCore core
+  ; PinnedCMP119OSAxiomInputs.OS1EuclideanCovariance =
+      OS1EuclideanCovarianceCore core
+  ; PinnedCMP119OSAxiomInputs.OS3PermutationSymmetry =
+      OS3PermutationSymmetryCore core
+  ; PinnedCMP119OSAxiomInputs.OS4Clustering =
+      OS4ClusteringAttached clustering
+  ; PinnedCMP119OSAxiomInputs.OS5GrowthControl =
+      OS5GrowthControlCore core
+  ; PinnedCMP119OSAxiomInputs.os0 =
+      os0Core core
+  ; PinnedCMP119OSAxiomInputs.os1 =
+      os1Core core
+  ; PinnedCMP119OSAxiomInputs.os3 =
+      os3Core core
+  ; PinnedCMP119OSAxiomInputs.os4 =
+      os4Attached clustering
+  ; PinnedCMP119OSAxiomInputs.os5 =
+      os5Core core
+  }
+
 finiteOS2Inputs :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
@@ -202,6 +447,12 @@ continuumOSSystem inputs group = record
   ; OSGap.ContinuumSchwingerSystem.os5 =
       os5 inputs group
   }
+
+pinnedCMP119PreGapOSCoreCompilerLevel : ProofLevel
+pinnedCMP119PreGapOSCoreCompilerLevel = machineChecked
+
+pinnedCMP119OS4AttachmentCompilerLevel : ProofLevel
+pinnedCMP119OS4AttachmentCompilerLevel = machineChecked
 
 pinnedCMP119OS2CompilerLevel : ProofLevel
 pinnedCMP119OS2CompilerLevel = machineChecked
