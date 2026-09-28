@@ -44,6 +44,7 @@ import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
 import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact as Dyadic
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
 import DASHI.Reasoning.Trialectic369DyadicKernel4DescentCountExact as DyadicCount
+import DASHI.Reasoning.Trialectic369DyadicLocalComplementFactorizationExact as LocalComplement
 
 ------------------------------------------------------------------------
 -- 1. Typed carrier counts.
@@ -218,6 +219,36 @@ rawThreeLocalCountFactorsThroughT9AndOverlapMultiplicity =
   DyadicCount.rawTupleCountFactorsThroughGlobal
 
 ------------------------------------------------------------------------
+-- 4d. Exact local/complement factorization of the original T9 carrier.
+------------------------------------------------------------------------
+
+globalT9IsLocalT4TimesComplementT5 :
+  LocalComplement.globalKernel9StateCount
+  ≡
+  LocalComplement.localKernel4StateCount
+    * LocalComplement.complementKernel5StateCount
+globalT9IsLocalT4TimesComplementT5 =
+  LocalComplement.globalFactorizationCount
+
+depthFiveFactorIsLiteralT5Complement :
+  LocalComplement.complementKernel5StateCount
+  ≡ Stencil.pow3 5
+depthFiveFactorIsLiteralT5Complement = refl
+
+bulkAsComplementTimesShiftedLocal :
+  Stencil.twoSpikeBulk
+  ≡
+  LocalComplement.complementKernel5StateCount
+    * ((Stencil.pow3 2 + 1)
+      * LocalComplement.localKernel4StateCount)
+bulkAsComplementTimesShiftedLocal = refl
+
+rhPoleMatchesPuncturedDyadicLocalCount :
+  Reindex.listLength Dyadic.puncturedABEnumeration
+  ≡ Stencil.poleCoefficient
+rhPoleMatchesPuncturedDyadicLocalCount = refl
+
+------------------------------------------------------------------------
 -- 5. The same 3^4 scale under two boundary operations.
 ------------------------------------------------------------------------
 
@@ -272,6 +303,9 @@ record RiemannJ369BalancedTernaryCrossPollinationBoundary : Set where
     localPuncturedCount80Paid : Bool
     threeKernel4LocalsGlueToT9 : Bool
     twelveMinusThreeCoordinateLedgerPaid : Bool
+    globalT9IsLocalT4TimesComplementT5 : Bool
+    depthFiveFactorIsLiteralT5Complement : Bool
+    rhPoleMatchesPuncturedDyadicLocal : Bool
     kernel4PunctureOperationAvailable : Bool
     concreteKernel4PunctureCardinality80Paid : Bool
     semanticIdentityClaimed : Bool
@@ -284,5 +318,6 @@ canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary =
     true true true true true true true
     true true true
     true true
+    true true true
     true true
     false false
