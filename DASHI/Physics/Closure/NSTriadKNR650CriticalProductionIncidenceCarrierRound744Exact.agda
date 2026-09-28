@@ -122,7 +122,7 @@ weightedOutputIsProductionCellFibre {E} {I} system output =
           * R38.foldPower
               (λ tau → R38.orderedPower E I tau (Audit.velocity system))
               items
-        ≡ R38.foldPower (maskedProductionCell system) items
+        ≡ R38.foldPower (productionCell system) items
       go [] allOutput = solve []
       go (tau ∷ rest) allOutput =
         let
@@ -458,7 +458,7 @@ foldProductionOrbit :
     (Physical.physicalTriadEnumeration (Audit.cutoff system))
   ≡
   three *
-    R38.foldPower (productionCell system)
+    R38.foldPower (maskedProductionCell system)
       (Physical.physicalTriadEnumeration (Audit.cutoff system))
 foldProductionOrbit system =
   let
@@ -497,11 +497,11 @@ foldProductionOrbit system =
         (xs : List Physical.PhysicalTriadIncidence) →
         R38.foldPower (productionOrbitCell system) xs
         ≡
-        R38.foldPower (productionCell system) xs
+        R38.foldPower (maskedProductionCell system) xs
           + R38.foldPower
-              (λ tau → productionCell system (Orbit.pEnergyLeg tau)) xs
+              (λ tau → maskedProductionCell system (Orbit.pEnergyLeg tau)) xs
           + R38.foldPower
-              (λ tau → productionCell system (Orbit.qEnergyLeg tau)) xs
+              (λ tau → maskedProductionCell system (Orbit.qEnergyLeg tau)) xs
       go [] = solve []
       go (tau ∷ rest) =
         trans
