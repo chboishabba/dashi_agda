@@ -32,6 +32,8 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact as Stencil
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
+import DASHI.Reasoning.TrialecticObserverMatrix369Exact as Observer
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact as Dyadic
 
 ------------------------------------------------------------------------
@@ -132,8 +134,8 @@ rawTupleCountFactorsThroughGlobal = refl
 ------------------------------------------------------------------------
 
 observerToCompatibleLocals :
-  Descent.Observer.ObserverMatrix3
-    DASHI.Foundations.SSPTritCarrier.SSPTrit
+  Observer.ObserverMatrix3
+    SSP.SSPTrit
   ->
   Descent.DyadicMatchingFamily
 observerToCompatibleLocals =
@@ -142,15 +144,15 @@ observerToCompatibleLocals =
 compatibleLocalsToObserver :
   Descent.DyadicMatchingFamily
   ->
-  Descent.Observer.ObserverMatrix3
-    DASHI.Foundations.SSPTritCarrier.SSPTrit
+  Observer.ObserverMatrix3
+    SSP.SSPTrit
 compatibleLocalsToObserver =
   Descent.glueDyadic
 
 observerDescentRoundTrip :
   (matrix :
-    Descent.Observer.ObserverMatrix3
-      DASHI.Foundations.SSPTritCarrier.SSPTrit) ->
+    Observer.ObserverMatrix3
+      SSP.SSPTrit) ->
   compatibleLocalsToObserver (observerToCompatibleLocals matrix)
   ≡ matrix
 observerDescentRoundTrip =
