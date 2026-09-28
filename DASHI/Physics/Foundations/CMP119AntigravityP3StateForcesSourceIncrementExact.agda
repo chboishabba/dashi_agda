@@ -133,15 +133,15 @@ p3StateForcesTotalIncrement :
       (P3.betaLogBlocking recursion depth)
       (P3.remainder recursion depth))
     (UV.uvIncrement trajectory depth)
-p3StateForcesTotalIncrement {trajectory} state depth =
+p3StateForcesTotalIncrement {trajectory} {recursion} state depth =
   let
     sameOuter :
       Bishop._≃_
         (Bishop._+_
           (UV.uvInverseCoupling trajectory depth)
           (Bishop._+_
-            (P3.betaLogBlocking _ depth)
-            (P3.remainder _ depth)))
+            (P3.betaLogBlocking recursion depth)
+            (P3.remainder recursion depth)))
         (Bishop._+_
           (UV.uvInverseCoupling trajectory depth)
           (UV.uvIncrement trajectory depth))
