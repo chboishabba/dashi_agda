@@ -556,6 +556,39 @@ record BoundedCandidateCommitBatch : Set where
 
 open BoundedCandidateCommitBatch public
 
+record BoundedCandidateReopenBatch : Set where
+  constructor bounded-candidate-reopen-batch
+  field
+    candidateCount : Nat
+    commitCount : Nat
+    reopenQueryCount : Nat
+
+    everyCandidateComparedAfterDurableCommit : Bool
+    everyCandidateComparedAfterDurableCommitIsTrue :
+      everyCandidateComparedAfterDurableCommit ≡ true
+
+    candidateIdentityPreserved : Bool
+    candidateIdentityPreservedIsTrue :
+      candidateIdentityPreserved ≡ true
+
+    exactEqualityPreserved : Bool
+    exactEqualityPreservedIsTrue :
+      exactEqualityPreserved ≡ true
+
+    createsSemanticAdmission : Bool
+    createsSemanticAdmissionIsFalse :
+      createsSemanticAdmission ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse :
+      createsClaimTruth ≡ false
+
+open BoundedCandidateReopenBatch public
+
 record ExactCompilerProductReuse : Set where
   constructor exact-compiler-product-reuse
   field
@@ -722,6 +755,11 @@ data CommitCoalescingCreatesSemanticAdmission : Set where
 data CommitCoalescingCreatesSemanticAuthority : Set where
 data CommitCoalescingCreatesApplicability : Set where
 data CommitCoalescingCreatesClaimTruth : Set where
+data BatchedReopenChangesCandidateIdentity : Set where
+data BatchedReopenSkipsExactEquality : Set where
+data BatchedReopenCreatesSemanticAdmission : Set where
+data BatchedReopenCreatesSemanticAuthority : Set where
+data BatchedReopenCreatesClaimTruth : Set where
 data ExactReuseCreatesSemanticAdmission : Set where
 data ExactReuseCreatesSemanticAuthority : Set where
 data ExactReuseCreatesApplicability : Set where
@@ -905,6 +943,26 @@ commitCoalescingDoesNotCreateApplicability ()
 commitCoalescingDoesNotCreateClaimTruth :
   CommitCoalescingCreatesClaimTruth → ⊥
 commitCoalescingDoesNotCreateClaimTruth ()
+
+batchedReopenDoesNotChangeCandidateIdentity :
+  BatchedReopenChangesCandidateIdentity → ⊥
+batchedReopenDoesNotChangeCandidateIdentity ()
+
+batchedReopenDoesNotSkipExactEquality :
+  BatchedReopenSkipsExactEquality → ⊥
+batchedReopenDoesNotSkipExactEquality ()
+
+batchedReopenDoesNotCreateSemanticAdmission :
+  BatchedReopenCreatesSemanticAdmission → ⊥
+batchedReopenDoesNotCreateSemanticAdmission ()
+
+batchedReopenDoesNotCreateSemanticAuthority :
+  BatchedReopenCreatesSemanticAuthority → ⊥
+batchedReopenDoesNotCreateSemanticAuthority ()
+
+batchedReopenDoesNotCreateClaimTruth :
+  BatchedReopenCreatesClaimTruth → ⊥
+batchedReopenDoesNotCreateClaimTruth ()
 
 exactReuseDoesNotCreateSemanticAdmission :
   ExactReuseCreatesSemanticAdmission → ⊥
