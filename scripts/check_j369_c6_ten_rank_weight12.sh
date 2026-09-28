@@ -177,3 +177,29 @@ grep -q 'p3ConcreteQuotientExists' "${acquisition_targets[2]}"
 grep -q 'preferredAcquisitionDirection' "${acquisition_targets[3]}"
 grep -q 'p2AcquisitionDirectionIsMarkedEnrichment' "${acquisition_targets[3]}"
 grep -q 'p3AcquisitionDirectionIsQuotient' "${acquisition_targets[3]}"
+
+
+# RH sparse balanced-ternary / 3-adic cross-pollination.
+rh_ternary_targets=(
+  DASHI/Analysis/RiemannOneTwoThreeCoefficientLanguageExact.agda
+  DASHI/Analysis/RiemannPrimitiveKernelBalancedTernaryStencilExact.agda
+  DASHI/Analysis/RiemannMonster196830TernaryShiftBridgeExact.agda
+)
+
+for target in "${rh_ternary_targets[@]}"; do
+  test -f "$target"
+done
+
+scripts/run_agda29_parallel_check.sh "${rh_ternary_targets[@]}"
+
+grep -q 'ratioCrossMultiplicationExact' "${rh_ternary_targets[0]}"
+grep -q 'twentyBalancedIsTwenty' "${rh_ternary_targets[0]}"
+
+grep -q 'poleCoefficientIs80' "${rh_ternary_targets[1]}"
+grep -q 'jCoefficientDepthFive' "${rh_ternary_targets[1]}"
+grep -q 'canonicalPrimitiveKernelThreeAdicProfile' "${rh_ternary_targets[1]}"
+grep -q 'evaluationAtThreeDoesNotIdentifyGoldenRatioDynamics' "${rh_ternary_targets[1]}"
+
+grep -q 'structuredBulkAtDepthFive' "${rh_ternary_targets[2]}"
+grep -q 'depthFiveResidualFactorsFourShift' "${rh_ternary_targets[2]}"
+grep -q 'sameFourShiftDoesNotImplySameObject' "${rh_ternary_targets[2]}"
