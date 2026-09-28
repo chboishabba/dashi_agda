@@ -91,7 +91,7 @@ copy record { clock = c } =
         for diagnostic in diagnostics
         for fix in diagnostic.fixes
         if any(
-            edit.start_line == 11 and edit.replacement == "m3Clock"
+            edit.replacement == "m3Clock"
             for edit in fix.edits
         )
     ]
