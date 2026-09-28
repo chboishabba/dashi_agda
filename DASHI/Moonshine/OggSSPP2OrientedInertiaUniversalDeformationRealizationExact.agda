@@ -35,6 +35,7 @@ import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as Inertia
 import DASHI.Moonshine.OggSSPP2Gamma0FourUniqueSupersingularSubgroupSeparationExact as Unique
 import DASHI.Moonshine.OggSSPP2UniqueGamma0FourMarkingBidiExact as Bidi
 import DASHI.Moonshine.OggSSPP2F4AntipodalStratifiedRefinementExact as Target
+import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4
 import DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact as Compression
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
@@ -217,7 +218,7 @@ marking realization =
 
 sourceCoarseOrbit :
   Oriented.P2OrientedInertiaState ->
-  _
+  F4.F4FrobeniusOrbit
 sourceCoarseOrbit state =
   Target.stratumOf (toTarget state)
 
