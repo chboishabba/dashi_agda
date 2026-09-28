@@ -176,6 +176,28 @@ open ArithmeticResidualSource public
 -- pi0 is bijectively recognized, and stabilizers are preserved/reflected.
 ------------------------------------------------------------------------
 
+record MarkedCoverArithmeticResidualSourceCandidate
+    (prime : ExceptionalResidualPrime) : Set₁ where
+  constructor marked-cover-arithmetic-residual-source-candidate
+  field
+    markedCoverCandidate :
+      MarkedCover.MarkedResidualSourceCandidate
+        (case prime of λ where
+          residualP2 → MarkedCover.residualP2
+          residualP3 → MarkedCover.residualP3)
+
+    source :
+      ArithmeticResidualSource prime
+
+    sourceStateIsMarkedCoverFine :
+      State source ≡ MarkedCover.Fine
+        (MarkedCover.cover
+          (markedCoverCandidate))
+
+    sourceConstructionUsesMarkedCoverPattern : Bool
+
+open MarkedCoverArithmeticResidualSourceCandidate public
+
 record FullResidualRecognition
     (prime : ExceptionalResidualPrime)
     (source : ArithmeticResidualSource prime) : Set₁ where
@@ -306,6 +328,7 @@ canonicalExponentResidualArithmeticSourceBoundary :
 canonicalExponentResidualArithmeticSourceBoundary =
   exponent-residual-arithmetic-source-boundary
     true true true true
+    true true
     true true
     true true true true true
     false false false false
