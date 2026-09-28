@@ -98,3 +98,5 @@ import DASHI.Reasoning.Trialectic369DyadicC3LocalComplementSymmetryExact
 import DASHI.Reasoning.Trialectic369DyadicPointedRelativeLocalExact
 
 import DASHI.Reasoning.Trialectic369PreRHTernaryLocalDescentCapstoneExact
+
+import DASHI.Reasoning.Trialectic369DyadicLocalNineObserverCandidateExact
