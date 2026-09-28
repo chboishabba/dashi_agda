@@ -27,7 +27,7 @@ record CanonicalLiteralPlaquetteHistory
   field
     certificateAt :
       (step : Nat) →
-      Literal.LiteralFiniteBetaCertificate dataSet (suc step)
+      Literal.LiteralFiniteBetaCertificate dataSet step
 
     uniformGaussianLower uniformGaussianUpper : ℚ
 
@@ -41,7 +41,7 @@ record CanonicalLiteralPlaquetteHistory
 
     gaussianUpper :
       ∀ step →
-      Literal.literalBetaZ dataSet (suc step)
+      Literal.literalBetaZ dataSet step
       ≤ uniformGaussianUpper
 
 open CanonicalLiteralPlaquetteHistory public
