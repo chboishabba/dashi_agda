@@ -306,6 +306,97 @@ observeABCanonicalModeNine =
   observeABModeNine canonicalPhaseNineToModeNineRecognition
 
 ------------------------------------------------------------------------
+-- 6c. Repo-native C2 sign transport and exact observer intertwining.
+--
+-- This is a finite signed-trit transport.  It is NOT promoted to the analytic
+-- Fricke involution or to a Monster normalizer action.
+------------------------------------------------------------------------
+
+negateSSP : SSP.SSPTrit -> SSP.SSPTrit
+negateSSP SSP.sspNegOne = SSP.sspPosOne
+negateSSP SSP.sspZero = SSP.sspZero
+negateSSP SSP.sspPosOne = SSP.sspNegOne
+
+negateSSPInvolutive :
+  (trit : SSP.SSPTrit) ->
+  negateSSP (negateSSP trit) ≡ trit
+negateSSPInvolutive SSP.sspNegOne = refl
+negateSSPInvolutive SSP.sspZero = refl
+negateSSPInvolutive SSP.sspPosOne = refl
+
+negateABLocal :
+  Descent.ABSection ->
+  Descent.ABSection
+negateABLocal
+  (Descent.ab-section aa ab ba bb) =
+  Descent.ab-section
+    (negateSSP aa)
+    (negateSSP ab)
+    (negateSSP ba)
+    (negateSSP bb)
+
+negateABLocalInvolutive :
+  (section : Descent.ABSection) ->
+  negateABLocal (negateABLocal section) ≡ section
+negateABLocalInvolutive
+  (Descent.ab-section aa ab ba bb)
+  rewrite negateSSPInvolutive aa
+        | negateSSPInvolutive ab
+        | negateSSPInvolutive ba
+        | negateSSPInvolutive bb = refl
+
+negateTri : Base.TriTruth -> Base.TriTruth
+negateTri Base.tri-low = Base.tri-high
+negateTri Base.tri-mid = Base.tri-mid
+negateTri Base.tri-high = Base.tri-low
+
+negatePhaseNine :
+  Phase.PhaseQuotient9 ->
+  Phase.PhaseQuotient9
+negatePhaseNine (left , right) =
+  negateTri left , negateTri right
+
+negateModeNine :
+  Five.ModePhaseQuotient9 ->
+  Five.ModePhaseQuotient9
+negateModeNine mode =
+  phaseNineToModeNine
+    (negatePhaseNine (modeNineToPhaseNine mode))
+
+negateModeNineInvolutive :
+  (mode : Five.ModePhaseQuotient9) ->
+  negateModeNine (negateModeNine mode) ≡ mode
+negateModeNineInvolutive Five.identityMode = refl
+negateModeNineInvolutive Five.A2negative = refl
+negateModeNineInvolutive Five.A2positive = refl
+negateModeNineInvolutive Five.B1negative = refl
+negateModeNineInvolutive Five.B1positive = refl
+negateModeNineInvolutive Five.B2negative = refl
+negateModeNineInvolutive Five.B2positive = refl
+negateModeNineInvolutive Five.Enegative = refl
+negateModeNineInvolutive Five.Epositive = refl
+
+phaseObserverIntertwinesNegation :
+  (section : Descent.ABSection) ->
+  observeABPhaseQuotient9 (negateABLocal section)
+  ≡ negatePhaseNine (observeABPhaseQuotient9 section)
+phaseObserverIntertwinesNegation
+  (Descent.ab-section aa ab ba bb) = refl
+
+modeObserverIntertwinesNegation :
+  (section : Descent.ABSection) ->
+  observeABCanonicalModeNine (negateABLocal section)
+  ≡ negateModeNine (observeABCanonicalModeNine section)
+modeObserverIntertwinesNegation
+  (Descent.ab-section aa ab ba bb) = refl
+
+data RepoNativeNegationEqualsAnalyticFricke : Set where
+
+repoNativeNegationNotPromotedToAnalyticFricke :
+  RepoNativeNegationEqualsAnalyticFricke -> ⊥
+repoNativeNegationNotPromotedToAnalyticFricke ()
+
+------------------------------------------------------------------------
 -- 7. Monster-5 provenance firewall.
 ------------------------------------------------------------------------
 
@@ -329,6 +420,9 @@ record Trialectic369DyadicLocalNineObserverCandidateBoundary : Set where
     localObserverKnownLossy : Bool
     phaseNineToModeNineRecognitionConstructed : Bool
     phaseNineToModeNineCarrierRoundTripsPaid : Bool
+    repoNativeC2TransportOwned : Bool
+    candidateObserverTransportIntertwinerPaid : Bool
+    repoNativeC2IdentifiedWithAnalyticFricke : Bool
     actualMonsterFiveLocalCarrierIdentified : Bool
     actualMonsterTransportIntertwinerProved : Bool
 
@@ -336,4 +430,6 @@ canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary :
   Trialectic369DyadicLocalNineObserverCandidateBoundary
 canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary =
   trialectic-369-dyadic-local-nine-observer-candidate-boundary
-    true true true true true true false false
+    true true true true true true
+    true true false
+    false false
