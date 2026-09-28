@@ -10,7 +10,7 @@ import Real as Bishop
 import RealProperties as BishopP
 
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2
-import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinGaussianExact as CanonicalRich
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinUVEdgeExact as CanonicalRich
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowABetaDrivenStateExact as RowAState
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
@@ -56,7 +56,7 @@ record CanonicalS4RichProjectionMaxCut
       SU2.CanonicalBishopSU2RunningInputs Nat
 
     richNormalization :
-      CanonicalRich.CanonicalBishopRichBrillouinNormalization
+      CanonicalRich.CanonicalBishopRichBrillouinUVEdgeNormalization
         rich bishopRunning
 
     gaussianProjection :
@@ -89,7 +89,7 @@ record CanonicalS4RichProjectionMaxCut
       ∀ depth →
       Bishop._≃_
         (P3.remainder (SU2.recursion bishopRunning) (suc depth))
-        (UV.embed (Literal.literalBetaInt dataSet (suc depth)))
+        (UV.embed (Literal.literalBetaInt dataSet depth))
 
     literalPlaquetteRepresentsCMP109 :
       LiteralToSource.LiteralPlaquetteCMP109UVSameObject dataSet trajectory
@@ -119,8 +119,8 @@ asP3LiteralSplit package = record
   ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.betaLogBlockingSameLiteralGaussian =
       λ depth →
         BishopP.≃-trans
-          (CanonicalRich.p3GaussianSameRichScalarIntegral
-            (richNormalization package) (suc depth))
+          (CanonicalRich.p3SuccessorGaussianSameRichEdgeIntegral
+            (richNormalization package) depth)
           (Projection.scalarIntegralSameLiteralGaussian
             (gaussianProjection package) depth)
   ; P3Literal.P3RepresentsLiteralPlaquetteSplitUVView.remainderSameLiteralInteraction =
