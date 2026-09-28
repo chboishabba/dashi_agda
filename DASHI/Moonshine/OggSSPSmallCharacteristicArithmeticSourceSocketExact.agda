@@ -244,6 +244,8 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p2DependentOneOneEightMarkingNormalFormOwned : Bool
     p2BalancedTernaryPuncturedPlaneNormalFormOwned : Bool
     p2DuplicatedCentreTenToNineBridgeOwned : Bool
+    p2BadPrimeLevelStructureBoundaryOwned : Bool
+    p2NaiveFullE4PointSetIdentificationRuledOut : Bool
     p2FourStateTorsionSeedRuledOutAsCompleteSource : Bool
     movingFrobeniusRejectsIdentityOnlyRetainedTarget : Bool
     frobeniusCompatibleTenOrbitPositiveControlOwned : Bool
@@ -261,6 +263,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
     true true true true true true true
     true true true
     true true true
-    true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true
     false false false
     missingP2MarkedArithmeticSource
