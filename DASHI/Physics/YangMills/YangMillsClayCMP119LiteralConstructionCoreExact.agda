@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119LiteralConstructionCoreExact w
 -- are precisely what C/H3/H6 subsequently identify/prove.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -161,7 +162,7 @@ literalFiniteMeasureIsExactCMP119 :
     (OSSystem.family (H2.osInputs h2) group)
     cutoff
 literalFiniteMeasureIsExactCMP119 fields group cutoff =
-  Agda.Builtin.Equality.refl
+  refl
 
 literalContinuumMeasureIsExactCMP119 :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -180,7 +181,7 @@ literalContinuumMeasureIsExactCMP119 :
   ≡
   OSSystem.constructedMeasure (H2.osInputs h2) group
 literalContinuumMeasureIsExactCMP119 fields group =
-  Agda.Builtin.Equality.refl
+  refl
 
 literalSchwingerIsExactCMP119 :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -199,7 +200,7 @@ literalSchwingerIsExactCMP119 :
   ≡
   OSSystem.constructedSchwinger (H2.osInputs h2) group
 literalSchwingerIsExactCMP119 fields group =
-  Agda.Builtin.Equality.refl
+  refl
 
 literalHamiltonianIsExactCMP119OS :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -218,7 +219,7 @@ literalHamiltonianIsExactCMP119OS :
   ≡
   OSR.reconstructedHamiltonian (H2.reconstruction h2) group
 literalHamiltonianIsExactCMP119OS fields group =
-  Agda.Builtin.Equality.refl
+  refl
 
 cmp119LiteralConstructionCoreLevel : ProofLevel
 cmp119LiteralConstructionCoreLevel = machineChecked
