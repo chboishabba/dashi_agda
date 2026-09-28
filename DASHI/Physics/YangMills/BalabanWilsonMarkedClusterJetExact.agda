@@ -36,6 +36,13 @@ record TwoSourceJet : Set where
 
 open TwoSourceJet public
 
+evaluateJet : TwoSourceJet → ℚ → ℚ → ℚ
+evaluateJet value sourceLeft sourceRight =
+  constant value
+  + left value * sourceLeft
+  + right value * sourceRight
+  + mixed value * (sourceLeft * sourceRight)
+
 zeroJet : TwoSourceJet
 zeroJet = jet 0ℚ 0ℚ 0ℚ 0ℚ
 
