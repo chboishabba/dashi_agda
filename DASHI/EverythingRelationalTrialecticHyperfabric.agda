@@ -84,3 +84,5 @@ import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Reasoning.TraumaAttractorBranchRegulationExact
 
 import DASHI.Reasoning.Trialectic369CechAugmentedCornerStarIndexExact
+
+import DASHI.Reasoning.Trialectic369CechModelSameObjectCapstoneExact
