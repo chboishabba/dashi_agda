@@ -17,6 +17,7 @@ dependencies = [
 [project.scripts]
 dashi-agda = "agda_preflight.interactive_cli:main"
 dashi-agda-server = "agda_preflight.service:main"
+dashi-agda-mcp = "agda_preflight.mcp_server:main"
 dashi-agda-preflight = "agda_preflight.cli:main"
 dashi-agda-evidence = "agda_preflight.evidence_cli:main"
 dashi-agda-triage = "agda_preflight.triage_cli:main"
@@ -33,6 +34,9 @@ testpaths = ["tests"]
 test = [
   "pytest>=8,<10",
   "pytest-xdist>=3,<4",
+]
+mcp = [
+  "mcp>=2,<3; python_version >= '3.10'",
 ]
 
 [project.entry-points.pytest11]
