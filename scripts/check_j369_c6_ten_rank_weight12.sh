@@ -86,3 +86,32 @@ grep -q 'wholeF9FrobeniusCarrierRejected' "${targets[12]}"
 grep -q 'P3ArithmeticTo369Recognition' "${targets[13]}"
 grep -q 'P2ArithmeticTo369Recognition' "${targets[13]}"
 grep -q 'reverseCompatibilityDoesNotBuildArithmeticTo369' "${targets[13]}"
+
+
+# Generic exceptional-residual target family + arithmetic acquisition wall.
+residual_targets=(
+  DASHI/Foundations/BalancedTernaryHypercubeAntipodalOrbitCountExact.agda
+  DASHI/Moonshine/OggSSPExponentResidualArithmeticSourceInterfaceExact.agda
+  DASHI/Moonshine/OggSSPExponentResidualVsSupersingularOrbitSeparationExact.agda
+)
+
+for target in "${residual_targets[@]}"; do
+  test -f "$target"
+done
+
+scripts/run_agda29_parallel_check.sh "${residual_targets[@]}"
+
+grep -q 'ternaryStateSplitExact' "${residual_targets[0]}"
+grep -q 'doubleOrbitCountExact' "${residual_targets[0]}"
+grep -q 'orbitCountOneIsTwo' "${residual_targets[0]}"
+grep -q 'orbitCountTwoIsFive' "${residual_targets[0]}"
+grep -q 'orbitCountThreeIsFourteen' "${residual_targets[0]}"
+grep -q 'p2RetainedBinarySheetCount' "${residual_targets[0]}"
+
+grep -q 'p3TargetPi0IsOneTritAntipodalOrbitCount' "${residual_targets[1]}"
+grep -q 'p2TargetPi0IsRetainedBinaryOverTwoTritOrbitCount' "${residual_targets[1]}"
+grep -q 'hypercubeTargetCountDoesNotConstructArithmeticResidualSource' "${residual_targets[1]}"
+grep -q 'ResidualPresentationSameObject' "${residual_targets[1]}"
+
+grep -q 'p3SupersingularPi0IsNotExponentResidual' "${residual_targets[2]}"
+grep -q 'p11EqualCountDoesNotCreateExponentOrbitSameObject' "${residual_targets[2]}"
