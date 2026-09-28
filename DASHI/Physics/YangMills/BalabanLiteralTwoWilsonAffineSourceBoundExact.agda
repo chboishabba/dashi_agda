@@ -27,8 +27,8 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.List.Base
-open import Data.Product.Base
+open import Data.List.Base using (List)
+open import Data.Product.Base using (proj₂)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
@@ -174,7 +174,7 @@ literalTwoWilsonAffineSourceBoundLevel = machineChecked
 
 literalWilsonCylinderObservable :
   ∀ {n : Nat} →
-  Data.List.Base.List (Wilson.RationalWilsonPath n) →
+  List (Wilson.RationalWilsonPath n) →
   Wilson.RationalWilsonObservable n
 literalWilsonCylinderObservable {n} paths =
   T5.productLoopObservable
@@ -183,16 +183,16 @@ literalWilsonCylinderObservable {n} paths =
 
 literalWilsonCylinderPointwiseUnitBounded :
   ∀ {n : Nat}
-    (paths : Data.List.Base.List (Wilson.RationalWilsonPath n)) →
+    (paths : List (Wilson.RationalWilsonPath n)) →
   Wilson.PointwiseUnitBounded (literalWilsonCylinderObservable paths)
 literalWilsonCylinderPointwiseUnitBounded {n} paths =
-  Data.Product.Base.proj₂
+  proj₂
     (Cylinder.finiteLiteralWilsonCylinderBound {n} paths)
 
 literalTwoWilsonCylinderAffineFactorBelowSixFifths :
   ∀ {n : Nat}
     (leftPaths rightPaths :
-      Data.List.Base.List (Wilson.RationalWilsonPath n))
+      List (Wilson.RationalWilsonPath n))
     leftSource rightSource →
   SourceInsideRadius leftSource →
   SourceInsideRadius rightSource →
