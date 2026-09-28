@@ -503,6 +503,50 @@ completionDoesNotAutomaticallyGiveCanonicalMinCut :
 completionDoesNotAutomaticallyGiveCanonicalMinCut ()
 
 ------------------------------------------------------------------------
+-- 3d. Canonical source-native min-cut.
+--
+-- The scaffold itself is compiler output from Selected3BLinearAcquisitionCore.
+-- Therefore the actual canonical outgoing cut is:
+--
+--   core + one transported constituent-action equation.
+------------------------------------------------------------------------
+
+record Selected3BLinearCoreMinCut
+    {Monster K : Set} : Setω where
+  field
+    core :
+      Selected3BLinearAcquisitionCore {Monster} {K}
+
+    actionIntertwining :
+      Selected3BNormalizerActionIntertwiningOnly
+        (scaffoldFromCore core)
+
+open Selected3BLinearCoreMinCut public
+
+coreMinCutToScaffold :
+  ∀ {Monster K}
+    (cut : Selected3BLinearCoreMinCut {Monster} {K}) →
+  Selected3BLinearAcquisitionScaffold {Monster} {K}
+coreMinCutToScaffold cut =
+  scaffoldFromCore (Selected3BLinearCoreMinCut.core cut)
+
+coreMinCutToCompletion :
+  ∀ {Monster K}
+    (cut : Selected3BLinearCoreMinCut {Monster} {K}) →
+  Selected3BLinearAcquisitionCompletion {Monster} {K}
+coreMinCutToCompletion cut =
+  completeFromActionIntertwining
+    (scaffoldFromCore (Selected3BLinearCoreMinCut.core cut))
+    (Selected3BLinearCoreMinCut.actionIntertwining cut)
+
+coreMinCutToCanonicalLinearRoute :
+  ∀ {Monster K}
+    (cut : Selected3BLinearCoreMinCut {Monster} {K}) →
+  WrongType.CanonicalLinearMultiplicityRoute
+coreMinCutToCanonicalLinearRoute cut =
+  completedCanonicalLinearRoute (coreMinCutToCompletion cut)
+
+------------------------------------------------------------------------
 -- 4. All linear multiplicity payloads are already inside the completion.
 ------------------------------------------------------------------------
 
@@ -604,6 +648,10 @@ dimensionDoesNotCreateMonsterClass ()
 record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
   constructor trialectic-369-selected3b-linear-acquisition-completion-boundary
   field
+    acquisitionCoreCompilerOwned : Bool
+    coreCompilesHistoricalAcquisition : Bool
+    coreCompilesSameElementComposition : Bool
+    coreCompilesScaffold : Bool
     scaffoldOwnsAcquisition : Bool
     scaffoldOwnsSameElementComposition : Bool
     normalizerToMonsterMapCompilerOutput : Bool
@@ -612,12 +660,15 @@ record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
     completionCompilerOwned : Bool
     twoFieldRecognitionMinCutOwned : Bool
     minCutSufficesForCompletion : Bool
+    sourceNativeCoreMinCutOwned : Bool
+    sourceNativeCoreMinCutCompilesCanonicalLinearRoute : Bool
     linearZetaProducerCompilerOutput : Bool
     multiplicityHomSpaceCompilerOutput : Bool
     canonicalLinearRouteCompilerOutput : Bool
     sourceNativeInertiaPayloadRetained : Bool
     twelveSeventyEightIntertwinerPayloadRetained : Bool
     optionalFiniteBasisStillSeparate : Bool
+    acquisitionCoreInhabitedHere : Bool
     scaffoldInhabitedHere : Bool
     actionIntertwiningInhabitedHere : Bool
     completionInhabitedHere : Bool
@@ -626,5 +677,7 @@ canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary :
   Trialectic369Selected3BLinearAcquisitionCompletionBoundary
 canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary =
   trialectic-369-selected3b-linear-acquisition-completion-boundary
-    true true true true true true true true true true true true true true
-    false false false
+    true true true true
+    true true true true true true true true
+    true true true true true true
+    false false false false
