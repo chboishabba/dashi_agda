@@ -431,3 +431,7 @@ import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact
 
 import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact
+
+import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact
+
+import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact
