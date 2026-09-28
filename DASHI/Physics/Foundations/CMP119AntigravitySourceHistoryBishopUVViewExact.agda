@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (0ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import Real as Bishop
@@ -32,6 +32,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- proves the recurrence under Bishop's native setoid equality.
 ------------------------------------------------------------------------
 
+embed : ℚ → Bishop.ℝ
 embed = Carrier.bishopRationalEmbed
 
 uvNext : Nat → Nat
@@ -68,7 +69,7 @@ uvRecurrenceSetoid trajectory (suc depth) =
 
     embeddedAdd :
       Bishop._≃_
-        (embed (current Data.Rational.Base.+ increment))
+        (embed (current + increment))
         (Bishop._+_ (embed current) (embed increment))
     embeddedAdd =
       Carrier.bishopEmbedAdd current increment
