@@ -171,8 +171,8 @@ asLiteralAInputs :
     {quotient = quotient}
     {division = division}
     {S = S}
-    (osInputs _)
-    (reconstruction _)
+    (osInputs source)
+    (reconstruction source)
 asLiteralAInputs source = record
   { LiteralA.PinnedCMP119LiteralAInputs.finiteVolumeCutoffMeasure =
       finiteVolumeCutoffMeasure source
