@@ -171,12 +171,12 @@ sourceExclusionsDoNotDetermineAllMultiplicities ()
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
-  Attribution.externalDuncanSwisherSourceClaim
+  Attribution.repositoryFormalReconstruction
 
--- The generic ClaimOrigin enum has no Urano-specific constructor.  The source
--- identity is carried by uranoThesis above; do NOT read claimOrigin as author
--- attribution for the thesis result.  Keep the boolean/source atlas as the
--- authoritative provenance surface.
+-- The source claims themselves are attributed by uranoThesis and
+-- uranoTwoBParitySourceAtlas.  claimOrigin describes only this module's typed
+-- reconstruction of those claims; it deliberately does not reuse another
+-- external author's ClaimOrigin constructor.
 
 record TwoBUranoIntegralModuleParityBoundary : Set where
   constructor two-b-urano-integral-module-parity-boundary
