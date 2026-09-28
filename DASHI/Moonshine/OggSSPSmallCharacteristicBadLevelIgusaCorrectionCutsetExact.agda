@@ -39,6 +39,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicJointCorrectionCutsetExact as Jo
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
 import DASHI.Moonshine.OggSSPSmallCharacteristicEtherealMultiplicityTransferExact as Ethereal
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Fricke
 
 ------------------------------------------------------------------------
 -- 1. Level profile.
@@ -186,6 +187,16 @@ record BadLevelIgusaCorrectionAuthority
     correctedQExpansionOwnedIsTrue :
       correctedQExpansionOwned ≡ true
 
+    analyticFrickeAtkinLehnerCompatibilityOwned :
+      Bool
+    analyticFrickeAtkinLehnerCompatibilityOwnedIsTrue :
+      analyticFrickeAtkinLehnerCompatibilityOwned ≡ true
+
+    sameObjectRefinesFrickeHauptmodulTerm :
+      Bool
+    sameObjectRefinesFrickeHauptmodulTermIsTrue :
+      sameObjectRefinesFrickeHauptmodulTerm ≡ true
+
     sameObjectRefinesSupersingularSide :
       Bool
     sameObjectRefinesSupersingularSideIsTrue :
@@ -228,6 +239,11 @@ record P3IgusaCorrectionAuthority : Set₁ where
 -- 6. Existing candidate surfaces remain inputs, not proofs.
 ------------------------------------------------------------------------
 
+frickeBoundary :
+  Fricke.FrickeBoundaryTransportFrontier
+frickeBoundary =
+  Fricke.canonicalFrickeBoundaryTransportFrontier
+
 candidatePayment :
   Payment.CandidateSmallPrimeCorrectionPayment
 candidatePayment =
@@ -246,6 +262,7 @@ layerSectorBoundary =
 data IgusaTowerExistsThereforeCorrectionTenTwo : Set where
 data HasseRootDescriptionCreatesHauptmodulCorrection : Set where
 data RootStackComparisonAloneCreatesValuationAuthority : Set where
+data FiniteFrickeTransportCreatesAnalyticFrickeCompatibility : Set where
 data IgusaPrimeLevelHasseRootClosesPrimeSquareTerm : Set where
 data SectorProductDefinesIgusaCorrection : Set where
 
@@ -260,6 +277,10 @@ hasseRootDoesNotCreateHauptmodulCorrection ()
 rootStackComparisonDoesNotCreateValuationAuthority :
   RootStackComparisonAloneCreatesValuationAuthority -> ⊥
 rootStackComparisonDoesNotCreateValuationAuthority ()
+
+finiteFrickeDoesNotCreateAnalyticFrickeCompatibility :
+  FiniteFrickeTransportCreatesAnalyticFrickeCompatibility -> ⊥
+finiteFrickeDoesNotCreateAnalyticFrickeCompatibility ()
 
 igusaPrimeLevelDoesNotClosePrimeSquareTerm :
   IgusaPrimeLevelHasseRootClosesPrimeSquareTerm -> ⊥
@@ -302,6 +323,8 @@ record BadLevelIgusaCorrectionCutsetBoundary : Set where
     igusaRootStackComparisonAlreadyInSource : Bool
     badLevelComparisonInterfaceSpecified : Bool
     correctedValuationAuthoritySpecified : Bool
+    analyticFrickeCompatibilityRequired : Bool
+    existingFiniteFrickeIntertwinerIsAnalytic : Bool
     p2AuthorityInhabited : Bool
     p3AuthorityInhabited : Bool
     finiteSectorCountPromotedToBadLevelValuation : Bool
@@ -310,4 +333,4 @@ canonicalBadLevelIgusaCorrectionCutsetBoundary :
   BadLevelIgusaCorrectionCutsetBoundary
 canonicalBadLevelIgusaCorrectionCutsetBoundary =
   bad-level-igusa-correction-cutset-boundary
-    true true true true true true true false false true true false false false
+    true true true true true true true false false true true true false false false false
