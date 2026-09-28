@@ -26,7 +26,7 @@ module DASHI.Physics.Closure.NSTriadKNR650OrbitAlignedW2PaymentRound747Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; NonNegative; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -203,14 +203,25 @@ module ResidualPayment
       0ℚ ≤ R744.three * (combined - packet)
     scaled =
       let
-        instance threeNN : NonNegative R744.three =
-          nonNegative threeNonnegative747
+        gap = combined - packet
+
+        doubled :
+          0ℚ + 0ℚ ≤ gap + gap
+        doubled =
+          ℚP.+-mono-≤ differenceNonnegative differenceNonnegative
+
+        tripled :
+          (0ℚ + 0ℚ) + 0ℚ ≤ (gap + gap) + gap
+        tripled =
+          ℚP.+-mono-≤ doubled differenceNonnegative
       in
       subst
-        (λ lhs → lhs ≤ R744.three * (combined - packet))
-        (solve [])
-        (ℚP.*-monoˡ-≤-nonNeg
-          R744.three differenceNonnegative)
+        (0ℚ ≤_)
+        (solve (gap ∷ R744.three ∷ []))
+        (subst
+          (_≤ (gap + gap) + gap)
+          (solve [])
+          tripled)
 
     paid :
       0ℚ ≤ residual
