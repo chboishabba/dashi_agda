@@ -161,11 +161,11 @@ physicalDecay :
   R451.CanonicalPhysicalDecayCalibration
     (R453.asCanonicalDomainSpecificRateSplit data (connected source))
 physicalDecay
-    {data = data} {ringEmbedding = ringEmbedding}
+    {base = base} {data = data} {ringEmbedding = ringEmbedding}
     {ratio = ratio}
     source antitone = record
   { R451.CanonicalPhysicalDecayCalibration.euclideanTime =
-      R318.physicalDistance _
+      R318.physicalDistance base
         (R444.leftObservable data)
         (R444.rightObservable data)
   ; R451.CanonicalPhysicalDecayCalibration.physicalEnvelope =
@@ -240,14 +240,14 @@ literalTwoWilsonEmbeddedGeneralGeometricDecay :
   embedQ ringEmbedding
     (amplitude * Power.rationalPower ratio time)
 literalTwoWilsonEmbeddedGeneralGeometricDecay
-    {data = data} {ringEmbedding = ringEmbedding}
+    {base = base} {data = data} {ringEmbedding = ringEmbedding}
     {amplitude = amplitude} {ratio = ratio}
     source amplitudeNN ratioNN antitone =
   let
     geometry =
       R453.asCanonicalDomainSpecificRateSplit data (connected source)
     time =
-      R318.physicalDistance _
+      R318.physicalDistance base
         (R444.leftObservable data)
         (R444.rightObservable data)
 
