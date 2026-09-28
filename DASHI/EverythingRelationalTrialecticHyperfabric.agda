@@ -82,3 +82,5 @@ import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact
 import DASHI.Cognition.PNF.DecisionActionFibreMultiplicityExact
 import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Reasoning.TraumaAttractorBranchRegulationExact
+
+import DASHI.Reasoning.Trialectic369CechAugmentedCornerStarIndexExact
