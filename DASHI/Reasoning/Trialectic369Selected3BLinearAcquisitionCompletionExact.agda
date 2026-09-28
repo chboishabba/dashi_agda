@@ -35,6 +35,11 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as Acquisition
+import DASHI.Moonshine.VertexOperatorAlgebraCore as Core
+import DASHI.Moonshine.VertexOperatorAlgebraLinearActionReceiptExact as LiteralVOA
+import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact as LiteralWeld
+import DASHI.Moonshine.MonsterGradedVOABridgeExact as Legacy
+import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary as GVOA
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
@@ -50,6 +55,130 @@ import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as Line
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as FiniteCompiler
 
 ------------------------------------------------------------------------
+-- 0. Source-native acquisition core.
+--
+-- The historical acquisition record contains two redundant choices:
+--   * a literal weld, although the selected same-element source already owns it;
+--   * a separate grade-two realization, although the weight-two bridge already
+--     owns the canonical realization on the exact same grade-2 representation.
+--
+-- This core keeps only the nonredundant same-source data.  From it we compile
+-- BOTH the old ActualLinearMultiplicityAcquisition and its same-element
+-- composition package.
+------------------------------------------------------------------------
+
+record Selected3BLinearAcquisitionCore
+    {Monster K : Set} : Setω where
+  field
+    kernelRecognizedSameElementAttachment :
+      KernelSame.Actual3BKernelRecognizedSameElementAttachment Monster K
+
+    literalVOALinearityReceipt :
+      LiteralVOA.VOAGroupActionLinearReceipt
+        (GVOA.group
+          (Legacy.voaAction
+            (LiteralWeld.gradedAuthority
+              (Selected.weld
+                (KernelSame.selectedSource
+                  (KernelSame.attachment
+                    kernelRecognizedSameElementAttachment))))))
+        (LiteralWeld.LiteralVOA
+          (Selected.weld
+            (KernelSame.selectedSource
+              (KernelSame.attachment
+                kernelRecognizedSameElementAttachment))))
+        (Core.monsterAction
+          (LiteralWeld.literalVOA
+            (Selected.weld
+              (KernelSame.selectedSource
+                (KernelSame.attachment
+                  kernelRecognizedSameElementAttachment)))))
+
+    weightTwoLinearBridge :
+      WeightTwo.WeightTwoLinearActionBridge
+        (LiteralWeld.gradedAuthority
+          (Selected.weld
+            (KernelSame.selectedSource
+              (KernelSame.attachment
+                kernelRecognizedSameElementAttachment))))
+
+    linearZetaProducer :
+      LinearZeta.LinearSingleActionProducer
+
+    compiledProducerIsLinearProducer :
+      Phase.singleActionProducerFromVOA
+        (Composition.recognizedActionSourceFromSameElement
+          (Composition.selectedRecognizedFromKernel
+            kernelRecognizedSameElementAttachment))
+      ≡ LinearZeta.singleActionProducer linearZetaProducer
+
+    multiplicityHomSpace :
+      Hom.ActualLinearMultiplicityHomSpace
+
+    weightTwoConstituentCarrierIsSelected3BAmbient :
+      Linear.Vector
+        (WeightTwo.constituentLinearCarrier weightTwoLinearBridge)
+      ≡ Linear.Vector
+          (LinearZeta.ambientLinearCarrier linearZetaProducer)
+
+    degree17496SameObject : Set
+    degree113724SameObject : Set
+    sourcePaidCharacterOnSameAction : Set
+    actualMultiplicityActionIsSourceNativeInertiaAction : Set
+    twelveSeventyEightLinearIntertwiner : Set
+
+open Selected3BLinearAcquisitionCore public
+
+coreSelectedWeld :
+  ∀ {Monster K}
+    (core : Selected3BLinearAcquisitionCore {Monster} {K}) →
+  LiteralWeld.MonsterGradedVOALiteralActionWeld Monster K
+coreSelectedWeld core =
+  Selected.weld
+    (KernelSame.selectedSource
+      (KernelSame.attachment
+        (kernelRecognizedSameElementAttachment core)))
+
+acquisitionFromCore :
+  ∀ {Monster K}
+    (core : Selected3BLinearAcquisitionCore {Monster} {K}) →
+  Acquisition.ActualLinearMultiplicityAcquisition {Monster} {K}
+acquisitionFromCore core =
+  record
+    { literalSameObjectWeld = coreSelectedWeld core
+    ; literalVOALinearityReceipt = literalVOALinearityReceipt core
+    ; gradeTwoLinearRealisation =
+        WeightTwo.fullWeightTwoLinearRealisation
+          (weightTwoLinearBridge core)
+    ; weightTwoLinearBridge = weightTwoLinearBridge core
+    ; gradeTwoRealisationIsWeightTwoRealisation = refl
+    ; linearZetaProducer = linearZetaProducer core
+    ; multiplicityHomSpace = multiplicityHomSpace core
+    ; weightTwoConstituentCarrierIsSelected3BAmbient =
+        weightTwoConstituentCarrierIsSelected3BAmbient core
+    ; degree17496SameObject = degree17496SameObject core
+    ; degree113724SameObject = degree113724SameObject core
+    ; sourcePaidCharacterOnSameAction = sourcePaidCharacterOnSameAction core
+    ; actualMultiplicityActionIsSourceNativeInertiaAction =
+        actualMultiplicityActionIsSourceNativeInertiaAction core
+    ; twelveSeventyEightLinearIntertwiner =
+        twelveSeventyEightLinearIntertwiner core
+    }
+
+compositionFromCore :
+  ∀ {Monster K}
+    (core : Selected3BLinearAcquisitionCore {Monster} {K}) →
+  Composition.ActualVOASelected3BComposition (acquisitionFromCore core)
+compositionFromCore core =
+  record
+    { kernelRecognizedSameElementAttachment =
+        kernelRecognizedSameElementAttachment core
+    ; kernelSelectedWeldIsAcquisitionWeld = refl
+    ; compiledSingleActionProducerIsAcquisitionProducer =
+        compiledProducerIsLinearProducer core
+    }
+
+------------------------------------------------------------------------
 -- 1. Scaffold first, then full completion.
 ------------------------------------------------------------------------
 
@@ -63,6 +192,16 @@ record Selected3BLinearAcquisitionScaffold
       Composition.ActualVOASelected3BComposition acquisition
 
 open Selected3BLinearAcquisitionScaffold public
+
+scaffoldFromCore :
+  ∀ {Monster K}
+    (core : Selected3BLinearAcquisitionCore {Monster} {K}) →
+  Selected3BLinearAcquisitionScaffold {Monster} {K}
+scaffoldFromCore core =
+  record
+    { acquisition = acquisitionFromCore core
+    ; sameElementComposition = compositionFromCore core
+    }
 
 record Selected3BLinearAcquisitionCompletion
     {Monster K : Set} : Setω where
