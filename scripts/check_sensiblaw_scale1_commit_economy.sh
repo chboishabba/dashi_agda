@@ -39,6 +39,10 @@ grep -q 'reviewProjectionCacheMustTrackInputFingerprint'   DASHI/Cognition/PNF/S
 grep -q 'reviewProjectionCacheMustTrackConsumerScope'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
 grep -q 'reviewProjectionCacheMustTrackOccurrenceAncestry'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
 grep -q 'reviewProjectionWallAloneCannotProveParserDominance'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
+grep -q 'reviewProjectionV2CacheMustTrackParserRun'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
+grep -q 'reviewProjectionV2CacheMustTrackReconciliationDetector'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
+grep -q 'reviewProjectionV2ExactReuseDoesNotRescanOccurrences'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyExact.agda
+grep -q 'fixtureV2ReusePerformsNoOccurrenceLookup'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyRegression.agda
 grep -q 'fixtureReuseDoesNotRecomputeReviewCandidates'   DASHI/Cognition/PNF/SensibLawReviewProjectionEconomyRegression.agda
 grep -q 'exactReplayCannotCertifyFreshParserDominance'   DASHI/Cognition/PNF/SensibLawScale1ExactReplayEconomyReceipt.agda
 grep -q 'exactReplayCandidatePathUsesNoCommitBarrier'   DASHI/Cognition/PNF/SensibLawScale1ExactReplayEconomyReceipt.agda
