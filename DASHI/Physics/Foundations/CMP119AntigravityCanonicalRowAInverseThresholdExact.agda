@@ -5,7 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 1ℚ; Positive; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (trans)
 
