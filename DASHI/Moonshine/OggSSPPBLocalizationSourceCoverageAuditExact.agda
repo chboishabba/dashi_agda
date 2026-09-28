@@ -42,6 +42,8 @@ import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact as Green
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoB
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeB
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
+import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
 
 ------------------------------------------------------------------------
 -- 1. Existing source-backed receipts.
@@ -71,6 +73,17 @@ threeBTateAuditBoundary :
   ThreeB.ThreeBIntegralTateTraceValuationAuditBoundary
 threeBTateAuditBoundary =
   ThreeB.canonicalThreeBIntegralTateTraceValuationAuditBoundary
+
+
+uranoTwoBParityBoundary :
+  Urano2B.TwoBUranoIntegralModuleParityBoundary
+uranoTwoBParityBoundary =
+  Urano2B.canonicalTwoBUranoIntegralModuleParityBoundary
+
+carnahanThreeBRefinementBoundary :
+  Carnahan3B.ThreeBCarnahanOrderNineRefinementBoundary
+carnahanThreeBRefinementBoundary =
+  Carnahan3B.canonicalThreeBCarnahanOrderNineRefinementBoundary
 
 ------------------------------------------------------------------------
 -- 2. Unsupported promotions are explicit empty types.
@@ -114,6 +127,9 @@ record PBLocalizationSourceCoverage : Set where
     carnahanTwoBTraceFormulaSourced : Bool
     carnahanThreeBTraceFormulaSourced : Bool
     carnahanThreeBPureOrderNineDecompositionSourced : Bool
+    carnahanThreeBFixedVectorEquivariantRefinementSourced : Bool
+    uranoTwoBParityExclusionsSourced : Bool
+    uranoTwoBGreenFunctionalT4ASourced : Bool
 
     uranoFiniteLengthDVRBrauerTheorySourced : Bool
     uranoCompositionFactorAdditivitySourced : Bool
@@ -135,7 +151,7 @@ canonicalPBLocalizationSourceCoverage :
   PBLocalizationSourceCoverage
 canonicalPBLocalizationSourceCoverage =
   pb-localization-source-coverage
-    true true true true true
+    true true true true true true true true
     true true true
     true true true
     false false false false false
@@ -149,6 +165,8 @@ record PBLocalizationMissingProofSurface : Set where
   constructor pb-localization-missing-proof-surface
   field
     needIntegralTateToIgusaSectorFunctor : Bool
+    needTwoBSourcePieceToInertiaSectorRefinement : Bool
+    needThreeBH3PieceToNodeBranchRefinement : Bool
     needSectorwiseFiniteLengthComputation : Bool
     needGreenSpeciesCompatibility : Bool
     needBadLevelHauptmodulAssembly : Bool
@@ -157,7 +175,7 @@ canonicalPBLocalizationMissingProofSurface :
   PBLocalizationMissingProofSurface
 canonicalPBLocalizationMissingProofSurface =
   pb-localization-missing-proof-surface
-    true true true true
+    true true true true true true
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
