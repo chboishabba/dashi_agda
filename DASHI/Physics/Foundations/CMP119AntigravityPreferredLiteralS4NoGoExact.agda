@@ -93,13 +93,13 @@ sameHistoryInverseThresholdAtLeastOne :
   ∀ {plaquette coherence source rowA terminal}
     (package :
       PreferredLiteralS4NoGo plaquette coherence source rowA terminal) →
-  1ℚ ≤ CanonicalTerminal.inverseThreshold terminal
+  1ℚ ≤ CanonicalTerminal.canonicalInverseThreshold rowA
 sameHistoryInverseThresholdAtLeastOne
     {rowA = rowA} {terminal = terminal} package =
   Unit.inverseThresholdAtLeastOneFromUnitCap
     (CanonicalTerminal.gammaPositive terminal)
     (canonicalGammaAtMostOne package)
-    (CanonicalTerminal.inverseThresholdRepresentation terminal)
+    (CanonicalTerminal.canonicalInverseThresholdRepresentation rowA)
 
 physicalSU2ThresholdBelowLiteralInverseThreshold :
   ∀ {plaquette coherence source rowA terminal}
@@ -107,7 +107,7 @@ physicalSU2ThresholdBelowLiteralInverseThreshold :
       PreferredLiteralS4NoGo plaquette coherence source rowA terminal) →
   Bishop._≤_
     Threshold.physicalSU2NoGoThreshold
-    (Embed.embed (CanonicalTerminal.inverseThreshold terminal))
+    (Embed.embed (CanonicalTerminal.canonicalInverseThreshold rowA))
 physicalSU2ThresholdBelowLiteralInverseThreshold package =
   Threshold.historyAtLeastOneDominatesPhysicalSU2Threshold
     (sameHistoryInverseThresholdAtLeastOne package)
