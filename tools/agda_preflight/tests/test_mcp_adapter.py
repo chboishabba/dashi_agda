@@ -215,7 +215,6 @@ bad₂ = record { typo₂ = Set }
     assert result["diagnostics_truncated"] is True
 
 
-
 def test_mcp_tool_handlers_publish_structured_dict_annotations(tmp_path):
     database = tmp_path / ".cache" / "source-index.sqlite3"
     with DashiAgdaService(tmp_path, database, jobs=1) as service:
@@ -365,3 +364,19 @@ top = Set
         assert final["status"] == "clean"
         assert final["profile"]["counts"].get("files_stat", 0) == 0
         assert final["profile"]["counts"]["trusted_session_hits"] == 1
+
+
+def test_mcp_smoke_client_returns_structured_ping(tmp_path):
+    import pytest
+    pytest.importorskip("mcp")
+    import asyncio
+    from agda_preflight.mcp_server import create_mcp_server
+    from agda_preflight.mcp_smoke import _run
+
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    with DashiAgdaService(tmp_path, database, jobs=1) as service:
+        server = create_mcp_server(service)
+        result = asyncio.run(_run(server))
+
+    assert result["tool_count"] == 10
+    assert result["ping_structured_content"] == {"status": "ok"}
