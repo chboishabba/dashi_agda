@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteBishopLogNormalizationExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import Real as Bishop
@@ -137,27 +138,26 @@ embeddedGaussianIsCanonicalBishopSU2
 ------------------------------------------------------------------------
 
 p3GaussianUsesCanonicalBishopSU2 :
-  ∀ {Scale}
-    {dataSet : Plaquette.PhysicalRunningCouplingData Scale}
-    {recursion : P3.RunningCouplingRecursion Scale Bishop.ℝ}
+  ∀ {dataSet : Plaquette.PhysicalRunningCouplingData Nat}
+    {recursion : P3.RunningCouplingRecursion Nat Bishop.ℝ}
     (splitView :
       P3Literal.P3RepresentsLiteralPlaquetteSplitUVView dataSet recursion)
     (normalization :
       LiteralPlaquetteBishopLogNormalization (Plaquette.oneLoop dataSet))
-    scale →
+    depth →
   Bishop._≃_
-    (P3.betaLogBlocking recursion scale)
+    (P3.betaLogBlocking recursion (suc depth))
     (Bishop._*_
       (Bishop._*_
         (Embed.embed
           (Beta.pureYMInverseCouplingCoefficient SU2.su2Casimir))
         Pi.inversePiSquared)
-      (bishopLogBlocking normalization scale))
+      (bishopLogBlocking normalization (suc depth)))
 p3GaussianUsesCanonicalBishopSU2
-    {dataSet = dataSet} splitView normalization scale =
+    {dataSet = dataSet} splitView normalization depth =
   BishopP.≃-trans
-    (P3Literal.betaLogBlockingSameLiteralGaussian splitView scale)
-    (embeddedGaussianIsCanonicalBishopSU2 normalization scale)
+    (P3Literal.betaLogBlockingSameLiteralGaussian splitView depth)
+    (embeddedGaussianIsCanonicalBishopSU2 normalization (suc depth))
 
 ------------------------------------------------------------------------
 -- FRONTIER RECUT
