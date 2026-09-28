@@ -76,6 +76,7 @@ class SourceIndex:
         self._checker: Optional[Checker] = None
         self._visiting: Set[Path] = set()
         self._states: Dict[Path, _ModuleState] = {}
+        self._reverse_import_cache: Optional[Dict[str, Set[str]]] = None
 
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.profiler.stage("db.open"):
@@ -799,6 +800,7 @@ class SourceIndex:
                 "INSERT INTO imports(importer_path, imported_module) VALUES(?, ?)",
                 [(relative, module) for module in sorted(set(imports))],
             )
+            self._reverse_import_cache = None
             if commit:
                 self.connection.commit()
 
@@ -1050,16 +1052,23 @@ class SourceIndex:
             return ()
 
         start_module, _ = identity
-        rows = self.connection.execute(
-            """
-            SELECT m.module_name AS importer, i.imported_module AS imported
-            FROM imports i
-            JOIN modules m ON m.path = i.importer_path
-            """
-        ).fetchall()
-        reverse: Dict[str, Set[str]] = {}
-        for row in rows:
-            reverse.setdefault(row["imported"], set()).add(row["importer"])
+        reverse = self._reverse_import_cache
+        if reverse is None:
+            with self.profiler.stage("affected.reverse_graph_load"):
+                rows = self.connection.execute(
+                    """
+                    SELECT m.module_name AS importer, i.imported_module AS imported
+                    FROM imports i
+                    JOIN modules m ON m.path = i.importer_path
+                    """
+                ).fetchall()
+                reverse = {}
+                for row in rows:
+                    reverse.setdefault(row["imported"], set()).add(row["importer"])
+            self._reverse_import_cache = reverse
+            self.profiler.count("affected_reverse_graph_cache_misses")
+        else:
+            self.profiler.count("affected_reverse_graph_cache_hits")
 
         order: List[str] = []
         seen = {start_module}
