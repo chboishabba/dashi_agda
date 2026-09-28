@@ -133,7 +133,7 @@ structural :
         limitLaws quotient division S h2 covarianceLaws h5 local) →
   Five.LiteralClayStructuralBase
     (Literal.literalConstruction local)
-structural source = record
+structural {h5 = h5} source = record
   { Five.LiteralClayStructuralBase.compactSimple =
       H5.literalCompactSimple h5
   ; Five.LiteralClayStructuralBase.fourDimensionalEuclidean =
