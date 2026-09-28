@@ -26,9 +26,10 @@ module DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact where
 -- DASHI CONTRIBUTION
 --
 -- Require ONE bad-level object to inhabit both extension problems.  This is
--- still weaker than the final 10/2 valuation theorem: after this comparison is
--- built, the same object must still acquire the corrected q-expansion/divisor
--- valuation and twisted/generalized-moonshine trace authority.
+-- strictly geometric/recognitional and deliberately does NOT contain the final
+-- 10/2 valuation authority: after this comparison is built, the same object
+-- must still acquire the corrected q-expansion/divisor valuation and
+-- twisted/generalized-moonshine trace authority.
 --
 -- ATTRIBUTION FIREWALL
 --
@@ -55,11 +56,11 @@ record ArichetaIgusaBadLevelExtensionAuthority : Set₁ where
     arichetaExtension :
       Aricheta.BadLevelArichetaCentralizerExtensionAuthority
 
-    p2Igusa :
-      Igusa.P2IgusaCorrectionAuthority
+    p2IgusaComparison :
+      Igusa.BadLevelIgusaRootStackComparison Igusa.pTwo
 
-    p3Igusa :
-      Igusa.P3IgusaCorrectionAuthority
+    p3IgusaComparison :
+      Igusa.BadLevelIgusaRootStackComparison Igusa.pThree
 
     BadLevelObject :
       Set
@@ -74,15 +75,29 @@ record ArichetaIgusaBadLevelExtensionAuthority : Set₁ where
       BadLevelObject ->
       Aricheta.BadLevelObject arichetaExtension
 
-    toP2IgusaObject :
+    toP2IgusaPrimeLevelObject :
       BadLevelObject ->
-      Igusa.ExceptionalBadLevelObject
-        (Igusa.authority p2Igusa)
+      Igusa.IgusaPrimeLevelObject p2IgusaComparison
 
-    toP3IgusaObject :
+    toP2IgusaPrimeSquareObject :
       BadLevelObject ->
-      Igusa.ExceptionalBadLevelObject
-        (Igusa.authority p3Igusa)
+      Igusa.IgusaPrimeSquareObject p2IgusaComparison
+
+    toP2WildLocalObject :
+      BadLevelObject ->
+      Igusa.WildLocalObject p2IgusaComparison
+
+    toP3IgusaPrimeLevelObject :
+      BadLevelObject ->
+      Igusa.IgusaPrimeLevelObject p3IgusaComparison
+
+    toP3IgusaPrimeSquareObject :
+      BadLevelObject ->
+      Igusa.IgusaPrimeSquareObject p3IgusaComparison
+
+    toP3WildLocalObject :
+      BadLevelObject ->
+      Igusa.WildLocalObject p3IgusaComparison
 
     p2SameObjectMapsToArichetaAndIgusa :
       Bool
@@ -131,17 +146,17 @@ asArichetaExtension :
 asArichetaExtension =
   arichetaExtension
 
-asP2IgusaAuthority :
+asP2IgusaComparison :
   ArichetaIgusaBadLevelExtensionAuthority ->
-  Igusa.P2IgusaCorrectionAuthority
-asP2IgusaAuthority =
-  p2Igusa
+  Igusa.BadLevelIgusaRootStackComparison Igusa.pTwo
+asP2IgusaComparison =
+  p2IgusaComparison
 
-asP3IgusaAuthority :
+asP3IgusaComparison :
   ArichetaIgusaBadLevelExtensionAuthority ->
-  Igusa.P3IgusaCorrectionAuthority
-asP3IgusaAuthority =
-  p3Igusa
+  Igusa.BadLevelIgusaRootStackComparison Igusa.pThree
+asP3IgusaComparison =
+  p3IgusaComparison
 
 ------------------------------------------------------------------------
 -- 3. Source-scope firewalls.
