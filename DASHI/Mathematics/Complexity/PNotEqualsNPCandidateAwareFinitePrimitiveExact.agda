@@ -32,6 +32,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
+import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
 
@@ -218,7 +219,7 @@ candidateAwarePartialSystem :
     (candidateCode : Actual.CandidateCodeRealization candidate)
     (stepSystem : Q2.BoundedSelfReferenceStepSystem)
     (initial : Q2.BoundedSelfReferenceState) →
-  _
+  Kleene.PartialSpecializingProgramSystem
 candidateAwarePartialSystem
     candidateCode
     stepSystem
@@ -235,7 +236,11 @@ candidateAwareDiagonalCompiler :
     (candidateCode : Actual.CandidateCodeRealization candidate)
     (stepSystem : Q2.BoundedSelfReferenceStepSystem)
     (initial : Q2.BoundedSelfReferenceState) →
-  _
+  Kleene.PartialDiagonalCompiler
+    (candidateAwarePartialSystem
+      candidateCode
+      stepSystem
+      initial)
 candidateAwareDiagonalCompiler
     candidateCode
     stepSystem
