@@ -113,7 +113,7 @@ p3TargetPi0IsOneTritAntipodalOrbitCount :
 p3TargetPi0IsOneTritAntipodalOrbitCount = refl
 
 p2FiveOrbitBaseIsTwoTritAntipodalOrbitCount :
-  Small.p2GaugePi0Count
+  Small.p2ResidualPi0Count
   ≡ HyperOrbit.antipodalOrbitCount 2
 p2FiveOrbitBaseIsTwoTritAntipodalOrbitCount = refl
 
