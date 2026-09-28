@@ -161,6 +161,7 @@ import DASHI.Analysis.RiemannG2NormalizedProjectiveOffAtomicMeasureLeanDonorExac
 import DASHI.Analysis.RiemannG2ProjectiveBaseProfileQuotientLeanDonorExact
 import DASHI.Analysis.RiemannQuarticSignedPoleBidiMarkedFourthExact
 import DASHI.Analysis.RiemannQuarticSignedPoleV4H4FrontierExact
+import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact
 
 
 
