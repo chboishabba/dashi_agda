@@ -22,6 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 import DASHI.Analysis.RiemannPrimitiveKernelBalancedTernaryStencilExact as Stencil
 import DASHI.Analysis.RiemannPrimitiveKernelUnimodularBasisExact as Basis
 import DASHI.Analysis.RiemannPrimitiveKernelFiltrationTransportExact as Filtration
+import DASHI.Analysis.RiemannPrimitiveKernelExplicitSmithReductionExact as Smith
 
 primitiveSmithStyleReceipt :
   Basis.SmithInvariantOneReceipt
@@ -55,6 +56,18 @@ genericKernelTransportAvailable :
 genericKernelTransportAvailable =
   Filtration.canonicalKernelCorrespondence
 
+explicitSmithNormalFormOwned :
+  Smith.smithReduce Smith.originalRow
+  ≡ Smith.row4 (+ 1) (+ 0) (+ 0) (+ 0)
+explicitSmithNormalFormOwned =
+  Smith.explicitSmithNormalForm
+
+rowMapSurjectiveWitness :
+  (value : Data.Integer.ℤ) ->
+  Smith.rowMap (Smith.rowPreimage value) ≡ value
+rowMapSurjectiveWitness =
+  Smith.rowMapHasPreimage
+
 record SmithFiltrationSeparationBoundary : Set where
   constructor smith-filtration-separation-boundary
   field
@@ -64,6 +77,8 @@ record SmithFiltrationSeparationBoundary : Set where
     transformedDepthProfileZeroOneFiveFiveOwned : Bool
     rawDepthTupleBasisInvariant : Bool
     genericKernelTransportOwned : Bool
+    explicitSmithOneZeroZeroZeroOwned : Bool
+    rowMapSurjectivityOwned : Bool
     concreteMod243KernelTransportOwnedInAgda : Bool
     concreteMod243KernelTransportOwnedInLean : Bool
     filteredKernelIsPreferredInvariantObject : Bool
@@ -72,4 +87,4 @@ canonicalSmithFiltrationSeparationBoundary :
   SmithFiltrationSeparationBoundary
 canonicalSmithFiltrationSeparationBoundary =
   smith-filtration-separation-boundary
-    true true true true false true false true true
+    true true true true false true true true false true true
