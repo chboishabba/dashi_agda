@@ -24,6 +24,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
@@ -315,7 +316,7 @@ record StrictResidualPrimitiveFamily
       residualFamily
         excludedCodimension
         excludedPrimitive →
-      Data.Empty.⊥
+      ⊥
 
 open StrictResidualPrimitiveFamily public
 
