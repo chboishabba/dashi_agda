@@ -88,3 +88,5 @@ import DASHI.Reasoning.Trialectic369CechAugmentedCornerStarIndexExact
 import DASHI.Reasoning.Trialectic369CechModelSameObjectCapstoneExact
 
 import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact
+
+import DASHI.Reasoning.Trialectic369DyadicKernel4DescentCountExact
