@@ -115,3 +115,33 @@ grep -q 'ResidualPresentationSameObject' "${residual_targets[1]}"
 
 grep -q 'p3SupersingularPi0IsNotExponentResidual' "${residual_targets[2]}"
 grep -q 'p11EqualCountDoesNotCreateExponentOrbitSameObject' "${residual_targets[2]}"
+
+
+# Small-characteristic isotropy-order attribution + marked-cover acquisition pattern.
+isotropy_targets=(
+  DASHI/Moonshine/OggSmallCharacteristicAutomorphismOrderAttributionExact.agda
+  DASHI/Moonshine/OggSmallCharacteristicIsotropyOrderCrossPollinationExact.agda
+  DASHI/Moonshine/OggSSPMarkedArithmeticResidualCoverPatternExact.agda
+  DASHI/Moonshine/OggSSPExponentResidualArithmeticSourceInterfaceExact.agda
+)
+
+for target in "${isotropy_targets[@]}"; do
+  test -f "$target"
+done
+
+scripts/run_agda29_parallel_check.sh "${isotropy_targets[@]}"
+
+grep -q 'p2ExternalAutomorphismOrderIs24' "${isotropy_targets[0]}"
+grep -q 'p3ExternalAutomorphismOrderIs12' "${isotropy_targets[0]}"
+grep -q 'p2OrderIsTwiceP3Order' "${isotropy_targets[0]}"
+
+grep -q 'p2ExternalOrderMatchesBinaryTetrahedralSkeleton' "${isotropy_targets[1]}"
+grep -q 'p3ExternalOrderMatchesRotationalTetrahedralSkeleton' "${isotropy_targets[1]}"
+grep -q 'factorTwoDoesNotIdentifyRetainedOrientationFibre' "${isotropy_targets[1]}"
+
+grep -q 'markedSymmetryChangesResidual' "${isotropy_targets[2]}"
+grep -q 'markedCoverProjectionIsNotInjective' "${isotropy_targets[2]}"
+grep -q 'p11PatternReceipt' "${isotropy_targets[2]}"
+
+grep -q 'MarkedCoverArithmeticResidualSourceCandidate' "${isotropy_targets[3]}"
+grep -q 'markedCoverAcquisitionPatternAvailable' "${isotropy_targets[3]}"
