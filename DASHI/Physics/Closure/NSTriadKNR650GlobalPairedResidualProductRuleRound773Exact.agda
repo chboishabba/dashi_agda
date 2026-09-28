@@ -36,6 +36,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
@@ -135,14 +136,10 @@ module GlobalProductRuleResidual
     pairedProductRuleBaseFold : ℚ
     pairedProductRuleBaseFold =
       R38.foldPower G.pairedBaseRow items
-      where
-      import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 
     pairedDyadicProductionFold : ℚ
     pairedDyadicProductionFold =
       R38.foldPower Base.pairedTwoDifferenceCell items
-      where
-      import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 
     foldPointwiseNormalForm :
       P.swapPairedResidualFold
@@ -150,12 +147,8 @@ module GlobalProductRuleResidual
       R744.three *
         R38.foldPower G.pairedOrbitCell items
         - Fold.two * pairedDyadicProductionFold
-      where
-      import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
     foldPointwiseNormalForm =
       go items
-      where
-      import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 
       go :
         (xs : List Physical.PhysicalTriadIncidence) →
