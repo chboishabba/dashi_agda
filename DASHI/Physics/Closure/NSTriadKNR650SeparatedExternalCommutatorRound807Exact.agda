@@ -31,7 +31,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -109,7 +109,7 @@ module SeparatedExternalCommutator
           Ext.weightedProductRule
           (λ beta → 
             let eq = weightedExternalProductIsMasked beta in
-            Relation.Binary.PropositionalEquality.sym eq)
+            sym eq)
           fibre
     in
     trans
