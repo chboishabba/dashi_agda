@@ -3,6 +3,7 @@ module DASHI.Analysis.RiemannQuarticSignedPoleV4H4FrontierExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact as TernaryStencil
 
 ------------------------------------------------------------------------
 -- RH CLAY-FACING V4 / H4 RECUT OWNER
@@ -2350,3 +2351,42 @@ finiteHighAtomicOriginTransportedIntoAgdaKernelHere = false
 finiteHighAtomicOriginInterpretation : String
 finiteHighAtomicOriginInterpretation =
   "Lean source-proves an exact finite-high formula for the pole-cancelled atomic physical-origin determinant and bounds it by -710/9477 for every t>=200. Thus the negative zero-mode forced by the quartic target persists throughout the actual high regime at the atomic endpoint centres. A later finite-radius robustness transport may attach this sign to the selected smooth witness, but this does not separately pay the signed far-minus-mu theorem: because the final scalar is Far - integral Psi*mu, discrete and smooth density contributions must remain coupled."
+
+
+------------------------------------------------------------------------
+-- BALANCED-TERNARY / 3-ADIC ATOMIC-KERNEL CROSS-POLLINATION
+--
+-- The analytic atomic identity remains a Lean source-written donor.  This
+-- section only records that its integer coefficient vector is now normalized
+-- independently by the arithmetic owner
+-- RiemannQuarticBalancedTernaryStencilExact.
+------------------------------------------------------------------------
+
+balancedTernaryAtomicKernelArithmeticBoundary :
+  TernaryStencil.RiemannQuarticBalancedTernaryStencilBoundary
+balancedTernaryAtomicKernelArithmeticBoundary =
+  TernaryStencil.canonicalRiemannQuarticBalancedTernaryStencilBoundary
+
+balancedTernaryKernelSparseStencilPaid :
+  TernaryStencil.sparseSignedStencilOwned
+    balancedTernaryAtomicKernelArithmeticBoundary
+  ≡ true
+balancedTernaryKernelSparseStencilPaid = refl
+
+balancedTernaryKernelDepthProfilePaid :
+  TernaryStencil.valuationProfileZeroFiveFiveFiveOwned
+    balancedTernaryAtomicKernelArithmeticBoundary
+  ≡ true
+balancedTernaryKernelDepthProfilePaid = refl
+
+balancedTernaryKernelTwoSpikeBulkPaid :
+  TernaryStencil.twoSpike196830IdentityReused
+    balancedTernaryAtomicKernelArithmeticBoundary
+  ≡ true
+balancedTernaryKernelTwoSpikeBulkPaid = refl
+
+balancedTernaryNormalizationDoesNotReproveAnalyticIdentity :
+  TernaryStencil.analyticRHIdentityReprovedHere
+    balancedTernaryAtomicKernelArithmeticBoundary
+  ≡ false
+balancedTernaryNormalizationDoesNotReproveAnalyticIdentity = refl
