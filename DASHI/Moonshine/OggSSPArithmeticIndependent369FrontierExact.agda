@@ -56,13 +56,17 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --     both Duncan--Swisher's modular-function and supersingular descriptions.
 --
 -- PRIME-SPECIFIC MECHANISM STATUS:
---   * p=2 has a stronger arithmetic candidate:
---       sum of v_2 centralizer orders over five unoriented inertia sectors
---       = 3+3+2+1+1 = 10;
---   * p=3 rejects the analogous law:
---       sum of v_3 centralizer orders = 1+1+1+1+0 = 4 != 2;
---   * p=3 therefore retains the Deligne--Rapoport two-orbit local-incidence
---     rank as the preferred finite candidate.
+--   * p=2 centralizer-depth sum remains an exact arithmetic PROXY:
+--       3+3+2+1+1 = 10;
+--   * SOTA inertia-RR auditing proves this proxy is analytically insufficient:
+--       equal centralizer depth can coexist with different degree-2 character
+--       traces and hence different det(1-g)-type tame denominators;
+--   * therefore any p=2 analytic authority must retain character/tangent data
+--       plus genuinely wild ramification/bad-level data;
+--   * p=3 rejects the analogous centralizer-depth law:
+--       1+1+1+1+0 = 4 != 2;
+--   * p=3 therefore retains branch/node data, but likewise requires a genuinely
+--       wild bad-level analytic valuation theorem.
 --
 -- STRUCTURAL-CANDIDATE CORRECTION:
 --   * the arithmetic rule 2*5=10 and 1*2=2 remains exact;
@@ -129,6 +133,8 @@ import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact as P2Centralizer
 import DASHI.Moonshine.OggSSPP3InertiaCentralizerValuationNoGoExact as P3Centralizer
 import DASHI.Moonshine.OggSSPSmallCharacteristicCorrectionMechanismComparisonExact as Mechanism
 import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as PreferredPayment
+import DASHI.Moonshine.OggSSPP2CentralizerDepthVsInertiaRRNonfactorabilityExact as P2RRNonfactor
+import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAInertiaRRRefinementExact as SOTARR
 import DASHI.Moonshine.OggSSPSmallCharacteristicTermwiseCorrectedValuationCutsetExact as TermwiseCutset
 import DASHI.Moonshine.OggSSPSmallCharacteristicFourthTermExtensionExact as FourthTerm
 import DASHI.Moonshine.OggSSPSmallCharacteristicJointCorrectionCutsetExact as JointCutset
@@ -354,6 +360,9 @@ record ArithmeticIndependent369Frontier : Set where
     terminalFourthTermAuthorityPaid : Bool
 
     p2CentralizerDepthTenCandidatePaid : Bool
+    p2CentralizerDepthInsufficientForInertiaRR : Bool
+    sotaCharacterAwareWildRRRefinementPaid : Bool
+    sotaCharacterAwareWildValuationAuthorityPaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
     primeSpecificMechanismComparisonPaid : Bool
     primeSpecificPreferredPaymentOwned : Bool
@@ -459,6 +468,9 @@ canonicalArithmeticIndependent369Frontier =
     ; terminalFourthTermAuthorityPaid = false
 
     ; p2CentralizerDepthTenCandidatePaid = true
+    ; p2CentralizerDepthInsufficientForInertiaRR = true
+    ; sotaCharacterAwareWildRRRefinementPaid = true
+    ; sotaCharacterAwareWildValuationAuthorityPaid = false
     ; p3CentralizerDepthUniformLawRejected = true
     ; primeSpecificMechanismComparisonPaid = true
     ; primeSpecificPreferredPaymentOwned = true
