@@ -135,11 +135,6 @@ record PointedMonsterFiveSource
     completionAtBasepoint :
       Source.completionWitness source sourceBasepoint ≡ true
 
-    distinguishedTransportPreservesBasepoint :
-      (transport : Source.ActualTransport source) ->
-      Source.applyActualTransport source transport sourceBasepoint
-      ≡ sourceBasepoint
-
 open PointedMonsterFiveSource public
 
 record PointedMonsterFiveTrialecticRecognition
@@ -148,6 +143,12 @@ record PointedMonsterFiveTrialecticRecognition
   (recognition : Recognition.MonsterFiveTrialecticRecognition source) : Set₁ where
   constructor pointed-monster-five-trialectic-recognition
   field
+    distinguishedTransportPreservesSourceBasepoint :
+      Source.applyActualTransport source
+        (Recognition.distinguishedTransport recognition)
+        (sourceBasepoint pointedSource)
+      ≡ sourceBasepoint pointedSource
+
     sourceBasepointMapsToLocalBasepoint :
       Recognition.sourceToLocal recognition
         (sourceBasepoint pointedSource)
