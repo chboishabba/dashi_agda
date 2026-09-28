@@ -10,6 +10,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteSourceTrajecto
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalSU2LiteralHistoryExact as SU2History
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalLiteralPlaquetteHistoryExact as CanonicalHistory
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowAInverseThresholdExact as Threshold
+import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowACouplingBoundGeometryExact as Geometry
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowALiteralTerminalHistoryExact as Terminal
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteBetaDrivenDensityExact as Density
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as Convention
@@ -40,7 +41,7 @@ record PreferredCanonicalSU2S4NoGo
     (source : SU2History.CanonicalSU2LiteralHistory plaquette coherence)
     (rowA : RowA.FiniteQuarticResponseConstants)
     (geometry :
-      Threshold.CanonicalRowATerminalGeometry
+      Geometry.CanonicalRowACouplingBoundGeometry
         plaquette coherence
         (SU2History.asCanonicalLiteralPlaquetteHistory source)
         rowA) : Set₂ where
@@ -52,7 +53,8 @@ record PreferredCanonicalSU2S4NoGo
         (CanonicalHistory.asLiteralPlaquetteCMP109FiniteHistory
           (SU2History.asCanonicalLiteralPlaquetteHistory source))
         (Terminal.asLiteralPlaquetteTerminalHistory
-          (Threshold.asCanonicalRowALiteralTerminalHistory geometry))
+          (Threshold.asCanonicalRowALiteralTerminalHistory
+            (Geometry.asCanonicalRowATerminalGeometry geometry)))
 
     traceBoundary :
       Convention.CanonicalBishopSU2TraceBoundary
@@ -68,7 +70,8 @@ asPreferredLiteralS4NoGo :
     coherence
     (SU2History.asCanonicalLiteralPlaquetteHistory source)
     rowA
-    (Threshold.asCanonicalRowALiteralTerminalHistory geometry)
+    (Threshold.asCanonicalRowALiteralTerminalHistory
+      (Geometry.asCanonicalRowATerminalGeometry geometry))
 asPreferredLiteralS4NoGo package = record
   { Preferred.PreferredLiteralS4NoGo.density =
       density package
@@ -88,6 +91,9 @@ freeInverseThresholdRequired = false
 freeInverseThresholdLawRequired : Bool
 freeInverseThresholdLawRequired = false
 
+freeTerminalInverseThresholdRequired : Bool
+freeTerminalInverseThresholdRequired = false
+
 freeUniformGaussianBoundsRequiredIsFalse :
   freeUniformGaussianBoundsRequired ≡ false
 freeUniformGaussianBoundsRequiredIsFalse = refl
@@ -104,6 +110,10 @@ freeInverseThresholdLawRequiredIsFalse :
   freeInverseThresholdLawRequired ≡ false
 freeInverseThresholdLawRequiredIsFalse = refl
 
+freeTerminalInverseThresholdRequiredIsFalse :
+  freeTerminalInverseThresholdRequired ≡ false
+freeTerminalInverseThresholdRequiredIsFalse = refl
+
 preferredCanonicalSU2S4CompilerLevel : ProofLevel
 preferredCanonicalSU2S4CompilerLevel = machineChecked
 
@@ -113,7 +123,8 @@ preferredCanonicalSU2S4CompilerLevel = machineChecked
 --   1. literal UV-chain coherence;
 --   2. one finite SU(2) log window;
 --   3. per-step absolute quartic interaction enclosure;
---   4. terminal-scale reachability + literal inverse-square coupling identity;
+--   4. Row-A coupling bound + literal inverse-square coupling identity
+--      + terminal-scale reachability;
 --   5. CMP122 density/Section-2 attachment;
 --   6. selected Lorentzian trace/F^2 boundary.
 ------------------------------------------------------------------------
