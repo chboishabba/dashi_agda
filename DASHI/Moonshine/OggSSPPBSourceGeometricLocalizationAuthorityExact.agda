@@ -34,6 +34,7 @@ import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as DVRPay
 import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as Preferred
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact as P2Geom
+import DASHI.Moonshine.OggSSPP2InertiaConjugacyClassDefectExact as P2Defect
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3Geom
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Sector
@@ -112,6 +113,19 @@ p2LocalizedLengthIsStackIsotropyDepth :
 p2LocalizedLengthIsStackIsotropyDepth A =
   Green.p2LengthMatchesStackIsotropyDenominatorDepth
     (greenSpecies A)
+
+p2LocalizedLengthIsConjugacyClassDefect :
+  (A : PBSourceGeometricLocalizationAuthority) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  Green.normalizedDVRLength
+    (greenSpecies A)
+    (Green.p2SectorClass (greenSpecies A) sector)
+  ≡
+  P2Defect.conjugacyClassTwoDefect sector
+p2LocalizedLengthIsConjugacyClassDefect A sector =
+  trans
+    (p2LocalizedLengthIsStackIsotropyDepth A sector)
+    refl
 
 p3LocalizedLengthIsSemistableMultiplicity :
   (A : PBSourceGeometricLocalizationAuthority) ->
