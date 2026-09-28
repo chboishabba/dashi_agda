@@ -289,96 +289,86 @@ connection.close()
         else ""
     )
 
-    path.write_text(
-        textwrap.dedent(
-            f"""\
-            #!/usr/bin/env python3
-            import hashlib
-            import json
-            from pathlib import Path
-            import sqlite3
-            import sys
+    code = f"""#!/usr/bin/env python3
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+import sys
 
-            source = Path(sys.argv[1])
-            module = sys.argv[2]
-            catalog = Path(sys.argv[3])
-            receipt = Path(sys.argv[4])
-            source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
-            {update}
-            receipt.parent.mkdir(parents=True, exist_ok=True)
-            receipt.write_text(
-                json.dumps({{
-                    "status": "promoter-finished",
-                    "module": module,
-                    "source_sha256": source_hash,
-                }}),
-                encoding="utf-8",
-            )
-            """
-        ),
-        encoding="utf-8",
-    )
+source = Path(sys.argv[1])
+module = sys.argv[2]
+catalog = Path(sys.argv[3])
+receipt = Path(sys.argv[4])
+source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+{update}
+receipt.parent.mkdir(parents=True, exist_ok=True)
+receipt.write_text(
+    json.dumps({{
+        "status": "promoter-finished",
+        "module": module,
+        "source_sha256": source_hash,
+    }}),
+    encoding="utf-8",
+)
+"""
+    path.write_text(code, encoding="utf-8")
     path.chmod(0o755)
 
 
 def _write_mutating_promoter(path: Path) -> None:
-    path.write_text(
-        textwrap.dedent(
-            """\
-            #!/usr/bin/env python3
-            import hashlib
-            import json
-            from pathlib import Path
-            import sqlite3
-            import sys
+    code = """#!/usr/bin/env python3
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+import sys
 
-            source = Path(sys.argv[1])
-            module = sys.argv[2]
-            catalog = Path(sys.argv[3])
-            receipt = Path(sys.argv[4])
+source = Path(sys.argv[1])
+module = sys.argv[2]
+catalog = Path(sys.argv[3])
+receipt = Path(sys.argv[4])
 
-            checked_hash = hashlib.sha256(source.read_bytes()).hexdigest()
-            connection = sqlite3.connect(catalog)
-            connection.execute(
-                "CREATE TABLE IF NOT EXISTS module_heads ("
-                "module_name TEXT PRIMARY KEY, "
-                "object_hash BLOB NOT NULL, "
-                "declaration_count INTEGER NOT NULL, "
-                "term_count INTEGER NOT NULL, "
-                "checked_source_sha256 TEXT, "
-                "updated_at TEXT NOT NULL)"
-            )
-            connection.execute(
-                "INSERT INTO module_heads("
-                "module_name, object_hash, declaration_count, term_count, "
-                "checked_source_sha256, updated_at"
-                ") VALUES (?, ?, ?, ?, ?, ?)",
-                (
-                    module,
-                    bytes.fromhex("abcd"),
-                    1,
-                    2,
-                    checked_hash,
-                    "2026-09-27T00:00:00Z",
-                ),
-            )
-            connection.commit()
-            connection.close()
+checked_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+connection = sqlite3.connect(catalog)
+connection.execute(
+    "CREATE TABLE IF NOT EXISTS module_heads ("
+    "module_name TEXT PRIMARY KEY, "
+    "object_hash BLOB NOT NULL, "
+    "declaration_count INTEGER NOT NULL, "
+    "term_count INTEGER NOT NULL, "
+    "checked_source_sha256 TEXT, "
+    "updated_at TEXT NOT NULL)"
+)
+connection.execute(
+    "INSERT INTO module_heads("
+    "module_name, object_hash, declaration_count, term_count, "
+    "checked_source_sha256, updated_at"
+    ") VALUES (?, ?, ?, ?, ?, ?)",
+    (
+        module,
+        bytes.fromhex("abcd"),
+        1,
+        2,
+        checked_hash,
+        "2026-09-27T00:00:00Z",
+    ),
+)
+connection.commit()
+connection.close()
 
-            source.write_text(
-                source.read_text(encoding="utf-8")
-                + "\nchangedAfterCheck : Set\nchangedAfterCheck = Set\n",
-                encoding="utf-8",
-            )
-            receipt.parent.mkdir(parents=True, exist_ok=True)
-            receipt.write_text(
-                json.dumps({"status": "promoter-finished"}),
-                encoding="utf-8",
-            )
-            """
-        ),
-        encoding="utf-8",
-    )
+source.write_text(
+    source.read_text(encoding="utf-8")
+    + "\\nchangedAfterCheck : Set\\nchangedAfterCheck = Set\\n",
+    encoding="utf-8",
+)
+receipt.parent.mkdir(parents=True, exist_ok=True)
+receipt.write_text(
+    json.dumps({"status": "promoter-finished"}),
+    encoding="utf-8",
+)
+"""
+    path.write_text(code, encoding="utf-8")
     path.chmod(0o755)
 
 
