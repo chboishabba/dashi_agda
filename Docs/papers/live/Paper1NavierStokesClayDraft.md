@@ -1,4 +1,4 @@
-# Paper 1 Draft: Periodic Navier–Stokes Signed-Commutator Reduction and Direct-Companion Frontier
+# Paper 1 Draft: Periodic Navier–Stokes Signed-Commutator Reduction and Shared Analytic Frontier
 
 Author: Johl Brown  
 Original Paper-1 draft date: `2026-06-09`  
@@ -10,43 +10,52 @@ Status: live analytic manuscript draft; conditional; non-promoting
 ## Abstract
 
 This manuscript records the current proof-critical **periodic** Navier–Stokes
-reduction in DASHI. The programme now freezes the Clay alternatives as four
-separate lanes:
+reduction in DASHI. The programme freezes the Clay alternatives as four separate
+lanes:
 
-```text
+\`\`\`text
 Lane A = unforced whole-space R^3 regularity
 Lane B = unforced periodic T^3 regularity
 Lane C = forced whole-space breakdown
 Lane D = forced periodic breakdown
-```
+\`\`\`
 
-The active manuscript construction is **Lane B**. The current canonical
-Clay-facing cut is no longer a list of intermediate producer lemmas.  It is the
-seven-coordinate max-cut recorded by
-`NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact`:
+The active manuscript construction is **Lane B**. The current preferred
+Clay-facing analytic frontier is the post-derivative R743 two-leaf cut. Its
+nonstandard PDE inputs are:
 
-1. the cutoff-uniform signed R568 payment;
-2. the physical phase-sensitive critical-production estimate;
-3. the literal physical critical-slice realization;
-4. the common-initial-datum realization and cutoff-uniform initial ceiling;
-5. strictly positive retained viscosity;
-6. ordinary scalar FTC/integration/order receipts; and
-7. the periodic Sobolev--Rellich--Simon--weak-* completion package.
+1. **W1**, a cutoff-uniform signed payment
+   \[
+   W_N(T)+Q_{+-,N}(T)\le B(T);
+   \]
+2. **W2**, equivalently under the standard R648 packet-structure receipt,
+   \[
+   \int_0^T \mathrm{PacketStrictSurplus}_{N,\delta}(t)\,dt
+   \le
+   \int_0^T \mathrm{CombinedResidue}_N(t)\,dt,
+   \qquad \delta_N>0.
+   \]
 
-Only the first two are classified as genuinely new nonlinear estimates.  The
-R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, radial/
-Pluecker, and self/external channel decompositions remain theorem-bearing proof
-strategies and provenance, but they are not independent Clay obligations.
+R733 identifies the coherent mixed endpoint with the canonical \(Q_{+-}\)
+observable. R737--R742 then differentiate the augmented observable
+\(\mathscr A_N=X_N-12Q_{+-}\), substitute the R684 input-Laplacian form, and
+show that the weighted/input-Laplacian term cancels exactly from the local W2
+inequality. Thus the derivative calculation does **not** manufacture a new
+coercive term: it exposes W2 as one signed physical packet-versus-combined
+comparison. R741 gives a stronger pointwise producer form; R742 preserves the
+original integrated theorem without that strengthening.
 
-The downstream weighted compiler is already source-written: a paid R568 budget,
-together with the standard temporal/order receipts, is consumed by R572 to
-build the pre-existing R503 direct-off-diagonal/R415 budget surface.  R639 now
-installs the literal finite critical observables on the R414 slice with viscous
-coefficient `2*nu` and derives the critical-energy inequality from the exact
-energy identity, while R640 binds its initial coordinate to the common R240
-initial datum modulo one live-trajectory-to-canonical-R34 coherence receipt and the actual uniform
-initial ceiling.  The present paper is consequently a conditional reduction
-manuscript, not an unconditional Clay/global-regularity claim.
+Once W1 and W2 are supplied, the existing exact compiler gives the uniform
+critical barrier and the standard periodic compactness/continuation layer can
+be invoked at its typed source boundary. The present paper is therefore a
+conditional reduction manuscript, not an unconditional Clay/global-regularity
+claim.
+
+The R568/R572/R503 direct-companion chain, the R726 literal-R406 transport,
+and the older centered/Taylor, second-moment, Gram/P3, Bony/Schur, radial,
+Pluecker, and self/external decompositions remain theorem-bearing alternate
+coordinates or producer strategies. They are not the current terminal analytic
+cut.
 
 Lane A remains an independent unforced whole-space obligation. Periodic B proof
 progress does not imply whole-space A proof progress, and A does not imply B,
@@ -54,128 +63,121 @@ unless an explicit transfer theorem is constructed. Lanes C/D are
 forced-breakdown BIDI verification/provenance lanes and do not settle either
 unforced alternative.
 
-The June `A1-A9` route and the later same-output Gram/P3 route are retained as
-historical/alternative strategies. They were serious theorem-bearing attempts,
-not strawmen. The P3 route is no longer the primary periodic producer because
-the exact amplitude telescope exposed a many-to-one observable map: distinct
-same-output incidences can carry equal velocity arguments and hence equal
-compressed slot kernels, so incidence geometry alone cannot force the uniform
-lower separation demanded by the generic P3 payment.
-
 ## 1. Four-lane claim boundary and live Lane-B cutset
 
-The principal live periodic analytic interface is
+The current preferred periodic-B interface is R743:
 
-```text
-DASHI/Physics/Closure/NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact.agda
-  CommutatorOnlySpacetimeBudget568
-```
-
-The historical identifier `LeafA` in owner names is not programme Lane A.
-Programme Lane B is the periodic route described in this paper.
-
-For a literal physical periodic NS Galerkin trajectory `T` and supported cutoff
-trajectory `R`, R568 asks for a cutoff-independent bound on four times the
-spacetime integral of the global signed forcing/commutator full square.
-Schematically,
-
-```math
-4\int_0^T \mathrm{globalForcingFull}(N,t)\,dt \le B(T)
-```
-
-uniformly in the cutoff `N`.
-
-> **Theorem 1.1 (periodic direct-companion reduction, conditional).** Assume the
-> standard temporal/order receipts isolated by the direct leaf-A compiler and
-> assume an inhabitant of `CommutatorOnlySpacetimeBudget568` on the literal
-> periodic Galerkin trajectory. Then the existing R572 compiler constructs the
-> pre-existing R503 `DirectOffDiagonalBudget`, which feeds the existing signed
-> R415/critical-barrier consumer chain. The theorem does not assert that the
-> R568 producer itself is proved.
-
-The current R733--R736 preferred Clay-eligible max-cut is:
-
-```text
-NEW / NONSTANDARD -- EXACTLY TWO SHARED-WEIGHTED LEAVES
+\`\`\`text
 W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
-W2  positive-margin augmented-critical weighted payment             OPEN
 
-EXACT ALTERNATE COORDINATES / PRODUCER FACTORIZATIONS
-A   R723 cutoff-uniform combined/global commutator payment           OPEN
-D   R730 direct critical-growth <= combined                         OPEN
-B   R726 combined -> literal R406 transport                         OPEN / OPTIONAL
-C   strict-margin physical critical production by R406             OPEN / OPTIONAL
+W2  integrated physical packet strict surplus
+      <= integrated R723 combined residue                           OPEN
+    with a strictly positive retained margin delta_N
+\`\`\`
 
-SAME-OBJECT / PHYSICAL
-C3  literal critical coordinates / critical-energy identity         COMPILER CLOSED
-C4  common-initial-datum cutoff ceiling                             STANDARD SOURCE BOUNDARY
-C5  positive retained viscosity                                    BUILT INTO W2 MARGIN
+The exact coordinate dictionary is now:
 
-STANDARD COMPLETION
-C6  scalar FTC + rational integration linearity/order receipts       STANDARD SOURCE BOUNDARY
-C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    STANDARD SOURCE BOUNDARY
-```
+\[
+E_{M,N}(t)=Q_{+-,N}(t),
+\]
 
-R733 identifies R691's coherent endpoint exactly with the canonical old
-mixed-helicity convolution mass
-[
-E_{M,N}(t)=Q_{+-,N}(t).
-]
-This is a same-object theorem, not an estimate.  It also makes the old R241
-shortcut visibly circular here: R241's schematic (Q_{+-}) payment assumes a
-uniform critical (H^{1/2}) barrier, while W1+W2 are precisely intended to
-construct that barrier.
+\[
+W_N(T)+Q_{+-,N}(T)
+=
+\mathcal C_N(T)+Q_{+-,N}(0),
+\]
 
-R734 rewrites R730's direct leaf exactly as
-[
-igl[X_N(T)-12Q_{+-,N}(T)igr]
--igl[X_N(0)-12Q_{+-,N}(0)igr]
-+delta_N D_N(T)
-le 12W_N(T),
-qquad delta_N>0.
-]
-The quintic commutator is absent from this preferred D-coordinate.  R684
-identifies the instantaneous (W_N) carrier with viscosity times one
-input-Laplacian coherent mixed work, without an absolute value or output-count
-factor.
+and
 
-R735 then puts both remaining leaves on that same signed carrier:
-[
-oxed{mathrm{W1}:quad W_N(T)+Q_{+-,N}(T)le B(T)}
-]
-uniformly in the cutoff, and
-[
-oxed{mathrm{W2}:quad
-[X_N-12Q_{+-}]_T-[X_N-12Q_{+-}]_0+delta_ND_N(T)
-le12W_N(T).}
-]
-Since (Q_{+-,N}(0)ge0), W1+W2 give
-[
-X_N(T)+delta_ND_N(T)le X_N(0)+12B(T).
-]
-Thus the current preferred analytic theorem count is exactly two, and both
-theorems live on one quartic weighted/input-Laplacian plus coherent-endpoint
-carrier.
+\[
+\mathscr A_N(t)=X_N(t)-12Q_{+-,N}(t).
+\]
 
-The R723/R730 two-leaf cut remains exactly equivalent at the terminal level.
-R726 plus strict-margin R406 C2 remain a sufficient factorization of R730, but
-they are not mandatory independent terminal obligations.  Likewise, R731
-proves W1 is sufficient for the R723 combined payment without splitting the
-signed quantity (W_N+Q_{+-,N}(T)) into separately positive pieces.
+R734 gives the equivalent augmented-weighted W2 form
 
-The older R568/R572 direct-companion route remains a valid adjacent sufficient
-producer lane, but it is **not definitionally the R723/R691 commutator
-currency**.  R687 only identifies the pair-rate-lifted R568 forcing full with
-the R691 commutator.  The unlifted-to-lifted payment remains open.  The positive
-36ED component-mass theorem is quartic whereas the R723 signed nonlinear work
-is quintic, so it cannot be substituted as a same-object payment.  R729 also
-rules out deriving the old R726 transport from positive physical rates and
-positive coherent self-work alone.
+\[
+[\mathscr A_N]_T-[\mathscr A_N]_0+\delta_ND_N(T)
+\le 12W_N(T).
+\]
+
+R737 differentiates this literal observable on the R408 trajectory. R738
+substitutes the exact R684 input-Laplacian normal form. R739 then collects the
+pointwise identity
+
+\[
+\dot{\mathscr A}_N
+=
+P_N-2\nu d_N-12C_N+12W_N.
+\]
+
+Consequently the \(12W_N\) term cancels exactly against the W2 right-hand side.
+R740 proves
+
+\[
+\dot{\mathscr A}_N+\delta_Nd_N\le 12W_N
+\iff
+P_N\le(2\nu-\delta_N)d_N+12C_N.
+\]
+
+Under the standard R648 reality/divergence-free/nonlinear-conservation packet
+structure, R741 identifies the latter with the stronger pointwise statement
+
+\[
+\mathrm{PacketStrictSurplus}_{N,\delta}(t)
+\le
+\mathrm{CombinedResidue}_N(t).
+\]
+
+R742 performs the same reduction at the original spacetime level, without
+requiring that pointwise strengthening:
+
+\[
+\boxed{
+\int_0^T\mathrm{PacketStrictSurplus}_{N,\delta}(t)\,dt
+\le
+\int_0^T\mathrm{CombinedResidue}_N(t)\,dt.
+}
+\]
+
+Therefore the derivative attack has resolved the representation question but
+has **not** closed W2. It shows precisely what W2 is.
+
+W1 remains
+
+\[
+\boxed{
+W_N(T)+Q_{+-,N}(T)\le B(T)
+}
+\]
+
+uniformly in cutoff. The old barrier-dependent estimate
+\(Q_{+-}\lesssim \|u\|_{H^{1/2}}^2\|u\|_{H^1}^2\) cannot be used to produce W1
+without circularity, because W1+W2 are being used to construct the uniform
+\(H^{1/2}\) barrier.
+
+The R723/R730 direct-combined cut is an exact alternate terminal presentation.
+R726 plus strict-margin literal-R406 production remain a sufficient
+factorization of R730, not mandatory independent leaves.
+
+### Historical/alternate direct-companion route
+
+The repository also retains
+
+\`\`\`text
+CommutatorOnlySpacetimeBudget568
+  -> R572
+  -> R503.DirectOffDiagonalBudget
+  -> R415 / critical-barrier consumer
+\`\`\`
+
+as a valid adjacent producer/compiler lane. It is not definitionally the
+R691/R723 currency: R687 only identifies the pair-rate-lifted R568 quantity
+with the R691 commutator, and the unlifted-to-lifted quantitative implication
+remains open. Accordingly this chain is no longer described as the principal
+live periodic analytic interface.
 
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
-`R406 = covariance` equality are **not** part of this terminal cut.  The latter
-is the wrong same-object statement for the live nonseparable Cauchy/resolvent
-R406 carrier.
+\`R406 = covariance\` equality are not part of the current terminal cut.
 
 ## 2. Literal periodic finite-dimensional carrier
 
@@ -396,23 +398,41 @@ C_direct constructed != C_direct uniformly paid.
 
 The construction/same-object weld is not the analytic R568 estimate.
 
-## 8. Terminal periodic compiler chain
+## 8. Current terminal compiler and alternate direct-companion chain
 
-Once the Lane-B live producer is paid, the downstream route is explicit:
+The current terminal compiler is:
 
-```text
+\`\`\`text
+W1: weighted + terminal Q_+- cutoff-uniform payment
+W2: integrated packet strict surplus <= integrated combined residue
+  -> R742 / R734 / R730 exact coordinate compilers
+  -> uniform critical barrier
+  -> standard periodic compactness / continuation source boundary
+\`\`\`
+
+R741 additionally exposes the stronger pointwise producer
+
+\[
+\mathrm{PacketStrictSurplus}_{N,\delta}(t)
+\le
+\mathrm{CombinedResidue}_N(t),
+\]
+
+but the pointwise form is not mandatory: R742 preserves exact equivalence with
+the original integrated W2 leaf.
+
+The older direct-companion chain is retained as an **alternate** route:
+
+\`\`\`text
 CommutatorOnlySpacetimeBudget568
   -> NSTriadKNDirectLeafACompilerRound572Exact
   -> R503.DirectOffDiagonalBudget
-  -> existing R415 / critical-barrier consumer
-```
+  -> R415 / critical-barrier consumer
+\`\`\`
 
-R572 is a compiler. Its source requires the R568 commutator budget and standard
-temporal/order receipts, then constructs the pre-existing R503 budget. It
-introduces no replacement R406 observable and no parallel leaf-A consumer.
-
-The nested Schur/R577 branch is retained as a fallback compiler route. It is not
-promoted over the direct route merely because it has a different interface.
+R572 is still a valid compiler, but R568 is not the canonical current analytic
+leaf. The nested Schur/R577 branch is likewise retained as a fallback producer
+route rather than promoted over the R743 frontier.
 
 ## 9. MathematicalStatus, StatementStatus, and CertificationStatus
 
@@ -438,9 +458,11 @@ A configured workflow is not itself a kernel receipt.
 | R207/R209/R211 + #890 | same-output debt/P3 infrastructure | exact debt/difference algebra; generic incidence-only separation route not primary | historical/alternative | source-written components; stronger physical collision/no-go remains separately fail-closed |
 | R214 | constant-band no-go | negative control proved | historical/current negative control | source-written; no extra promotion inferred |
 | R500 | integrated direct companion | same-object weld closed modulo explicit integration authority | current Lane-B spine | certification tracked independently |
-| R503 | direct companion -> R415 compiler | compiler constructed; direct budget itself still open | current Lane-B spine | certification tracked independently |
-| R568 | live commutator-only spacetime leaf | interface constructed; producer payment open | **live Lane-B analytic cutset** | no producer receipt until an inhabitant is actually proved |
-| R572 | direct leaf-A compiler | constructed given listed receipts | current Lane-B compiler | source/workflow status does not constitute R568 proof |
+| R503 | direct companion -> R415 compiler | compiler constructed; direct budget itself still open | alternate Lane-B producer/compiler spine | certification tracked independently |
+| R568 | commutator-only spacetime leaf | interface constructed; producer payment open | historical/alternate Lane-B producer lane | no producer receipt until an inhabitant is actually proved |
+| R572 | direct leaf-A compiler | constructed given listed receipts | alternate Lane-B compiler | source/workflow status does not constitute R568 proof |
+| R733-R736 | Q_+- endpoint weld and shared-weighted two-leaf recut | exact coordinate reductions; W1/W2 payments open | current Lane-B frontier precursor | source-written; head-specific kernel receipt not claimed here |
+| R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions closed; W1 and integrated packet/combined payment open | **current Lane-B analytic frontier** | source-written/static-audited in this tranche; no fresh kernel receipt claimed |
 
 This table is intentionally conservative. Later validation work may upgrade a
 `CertificationStatus` without changing the underlying mathematical theorem.
@@ -513,23 +535,52 @@ Citation does not import proof or certification.
 
 ## Current roadmap
 
-The active manuscript proof-search order is now:
+The active periodic-B proof-search order is now:
 
-```text
-Lane B P1: R571 literal centered/Taylor realization
-  -> Lane B P2: old paired second-moment + six-three transplant
-  -> Lane B P3: signed inner-fibre/full-square propagation to R568
-  -> R572 compiler
-  -> R503/R415 critical-barrier consumer
-```
+\`\`\`text
+W1
+  prove cutoff-uniform signed
+  W_N(T) + Q_+-,N(T) <= B(T)
+
+W2
+  prove, with delta_N > 0,
+  integrated physical packet strict surplus
+    <= integrated R723 combined residue
+
+  optional stronger producer:
+    pointwise packet strict surplus
+      <= pointwise combined residue
+
+W1 + W2
+  -> R742/R734/R730 exact compilers
+  -> uniform critical barrier
+  -> standard periodic compactness / continuation
+\`\`\`
+
+The R737--R740 derivative experiment is complete as a representation test:
+the R684 input-Laplacian \(W_N\) term cancels exactly from pointwise W2, so the
+next analytic work should target the packet-versus-combined signed comparison
+itself rather than search for a coercive term created merely by differentiating
+\(X_N-12Q_{+-}\).
+
+Alternate/historical producer work remains available but is not the primary
+queue:
+
+\`\`\`text
+R571 centered/Taylor
+  -> second-moment / six-three / nested signed machinery
+  -> R568
+  -> R572
+  -> R503/R415
+\`\`\`
 
 In parallel:
 
-```text
-Lane A: freeze independent whole-space terminal cut, then named-field search
+\`\`\`text
+Lane A: independent whole-space terminal cut and named-field search
 Lane C/D: released-proof BIDI verification/provenance, non-discovery
 certification: tracked orthogonally
-```
+\`\`\`
 
 Broad archaeology is no longer a proof step. Historical/certification audits
 should proceed from named unpaid fields, while failed and superseded routes stay
