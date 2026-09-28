@@ -64,7 +64,7 @@ record P3RepresentsRichBrillouinLiteralPlaquette
       ∀ depth →
       Bishop._≃_
         (P3.inverseCouplingSq recursion depth)
-        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+        (UV.embed (Plaquette.nextInverseCouplingSq dataSet depth))
 
     nextScaleIsUVPredecessor :
       ∀ depth →
@@ -198,7 +198,7 @@ record CanonicalRunningRichLiteralPlaquette
       ∀ depth →
       Bishop._≃_
         (P3.inverseCouplingSq (SU2Running.recursion running) depth)
-        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+        (UV.embed (Plaquette.nextInverseCouplingSq dataSet depth))
 
     nextScaleIsUVPredecessor :
       ∀ depth →
