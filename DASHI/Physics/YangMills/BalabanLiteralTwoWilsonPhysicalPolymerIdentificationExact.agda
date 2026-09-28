@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ConditionalClusteringCutsetExact as 
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalTwoWeightKoteckyPreissExact as PhysicalKP
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact as AffineMark
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
 
 record LiteralTwoWilsonPhysicalPolymerIdentification
     (Scale ShellVolume Root Polymer Link Cluster FiniteVolume : Set)
@@ -173,6 +174,6 @@ literalPhysicalMarkedActivityBelowFPThreshold :
     polymer →
   AffineMark.literalMarkedActivityNorm (affineMark source) polymer
   ≤
-  let open import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact in rhoFPMax
+  FP.rhoFPMax
 literalPhysicalMarkedActivityBelowFPThreshold source =
   AffineMark.literalMarkedActivityBelowFPThreshold (affineMark source)
