@@ -75,9 +75,8 @@ record CanonicalRowABetaDrivenCoordinates
 open CanonicalRowABetaDrivenCoordinates public
 
 preferredParameters :
-  ∀ {trajectory split inputs}
-    (rowA : RowA.FiniteQuarticResponseConstants)
-    (smallFieldCap largeFieldCap covarianceCap : ℚ) →
+  (rowA : RowA.FiniteQuarticResponseConstants) →
+  (smallFieldCap largeFieldCap covarianceCap : ℚ) →
   RG.YM4RGRegionParameters
 preferredParameters rowA smallFieldCap largeFieldCap covarianceCap =
   Region.canonicalRowARegionParameters
@@ -118,13 +117,10 @@ asBetaDrivenCanonicalCoordinates dataSet = record
   }
 
 preferredRepositoryCapIsCanonicalRowA :
-  ∀ {trajectory split inputs}
-    (rowA : RowA.FiniteQuarticResponseConstants)
-    (smallFieldCap largeFieldCap covarianceCap : ℚ) →
+  (rowA : RowA.FiniteQuarticResponseConstants) →
+  (smallFieldCap largeFieldCap covarianceCap : ℚ) →
   RG.couplingCap
-    (preferredParameters
-      {trajectory = trajectory} {split = split} {inputs = inputs}
-      rowA smallFieldCap largeFieldCap covarianceCap)
+    (preferredParameters rowA smallFieldCap largeFieldCap covarianceCap)
   ≡ RowA.canonicalQuarticResponseGamma rowA
 preferredRepositoryCapIsCanonicalRowA rowA smallFieldCap largeFieldCap covarianceCap =
   refl
