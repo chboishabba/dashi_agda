@@ -143,30 +143,33 @@ module SeparatedBalanceWall
       Fold.two * Qsep ≡ nine * Bsep
     separatedCancellationImpliesQuotientBalance cancelled =
       let
+        shifted :
+          nine * Bsep - Fold.two * Qsep ≡ 0ℚ
         shifted =
           trans
             (sym separatedNormalForm)
             cancelled
+
+        moved =
+          cong (_+ (Fold.two * Qsep)) shifted
+
+        leftNormal :
+          (nine * Bsep - Fold.two * Qsep)
+            + Fold.two * Qsep
+          ≡ nine * Bsep
+        leftNormal =
+          solve (Fold.two ∷ Qsep ∷ nine ∷ Bsep ∷ [])
+
+        rightNormal :
+          0ℚ + Fold.two * Qsep
+          ≡ Fold.two * Qsep
+        rightNormal =
+          solve (Fold.two ∷ Qsep ∷ [])
       in
-      trans
-        (sym
-          (solve
-            ( Fold.two
-            ∷ Qsep
-            ∷ nine
-            ∷ Bsep
-            ∷ [])))
+      sym
         (trans
-          (cong
-            (λ selected →
-              Fold.two * Qsep + selected)
-            shifted)
-          (solve
-            ( Fold.two
-            ∷ Qsep
-            ∷ nine
-            ∷ Bsep
-            ∷ [])))
+          (sym leftNormal)
+          (trans moved rightNormal))
 
 ------------------------------------------------------------------------
 -- Status.
