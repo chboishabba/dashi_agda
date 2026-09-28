@@ -27,6 +27,7 @@ module DASHI.Reasoning.Trialectic369IncomingFaceFrickeQuotientSeparationExact wh
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
 
@@ -201,6 +202,74 @@ rawEquivariantBijectionImpossible recognition =
           incomingCentreFixed)
 
 ------------------------------------------------------------------------
+-- 5b. Orbit counts agree but stabilizer profiles do not.
+--
+-- For a C2 involution, a fixed point has stabilizer size 2 and a non-fixed
+-- two-cycle has stabilizer size 1.  The incoming quotient therefore has
+--
+--   (2,1,1,1,1)
+--
+-- while every finite-Fricke mode comes from a free two-cycle:
+--
+--   (1,1,1,1,1).
+------------------------------------------------------------------------
+
+incomingOrbitStabilizerSize :
+  Incoming.FaceOrbit5 ->
+  Nat
+incomingOrbitStabilizerSize Incoming.centreOrbit = 2
+incomingOrbitStabilizerSize Incoming.horizontalOrbit = 1
+incomingOrbitStabilizerSize Incoming.verticalOrbit = 1
+incomingOrbitStabilizerSize Incoming.positiveDiagonalOrbit = 1
+incomingOrbitStabilizerSize Incoming.negativeDiagonalOrbit = 1
+
+finiteFrickeModeStabilizerSize :
+  Modes.ComplementMode5 ->
+  Nat
+finiteFrickeModeStabilizerSize Modes.mode09 = 1
+finiteFrickeModeStabilizerSize Modes.mode18 = 1
+finiteFrickeModeStabilizerSize Modes.mode27 = 1
+finiteFrickeModeStabilizerSize Modes.mode36 = 1
+finiteFrickeModeStabilizerSize Modes.mode45 = 1
+
+record StabilizerPreservingFiveWayRecognition : Set where
+  field
+    toMode :
+      Incoming.FaceOrbit5 ->
+      Modes.ComplementMode5
+
+    fromMode :
+      Modes.ComplementMode5 ->
+      Incoming.FaceOrbit5
+
+    fromAfterTo :
+      (orbit : Incoming.FaceOrbit5) ->
+      fromMode (toMode orbit) ≡ orbit
+
+    toAfterFrom :
+      (mode : Modes.ComplementMode5) ->
+      toMode (fromMode mode) ≡ mode
+
+    stabilizerSizePreserved :
+      (orbit : Incoming.FaceOrbit5) ->
+      incomingOrbitStabilizerSize orbit
+      ≡ finiteFrickeModeStabilizerSize (toMode orbit)
+
+open StabilizerPreservingFiveWayRecognition public
+
+stabilizerPreservingFiveWayRecognitionImpossible :
+  StabilizerPreservingFiveWayRecognition ->
+  ⊥
+stabilizerPreservingFiveWayRecognitionImpossible recognition
+  with toMode recognition Incoming.centreOrbit
+     | stabilizerSizePreserved recognition Incoming.centreOrbit
+... | Modes.mode09 | ()
+... | Modes.mode18 | ()
+... | Modes.mode27 | ()
+... | Modes.mode36 | ()
+... | Modes.mode45 | ()
+
+------------------------------------------------------------------------
 -- 6. Recognition consequence.
 ------------------------------------------------------------------------
 
@@ -224,6 +293,9 @@ record Trialectic369IncomingFaceFrickeQuotientSeparationBoundary : Set where
     incomingRawInversionHasFixedCentre : Bool
     finiteFrickeRawInvolutionFixedPointFree : Bool
     rawEquivariantBijectionRejected : Bool
+    incomingOrbitStabilizerProfileTwoOneOneOneOne : Bool
+    finiteFrickeStabilizerProfileAllOne : Bool
+    stabilizerPreservingFiveWayRecognitionRejected : Bool
     quotientCoordinateMatchPromotesRawActionIdentity : Bool
     analyticFrickeIdentificationPaid : Bool
 
@@ -231,4 +303,6 @@ canonicalTrialectic369IncomingFaceFrickeQuotientSeparationBoundary :
   Trialectic369IncomingFaceFrickeQuotientSeparationBoundary
 canonicalTrialectic369IncomingFaceFrickeQuotientSeparationBoundary =
   trialectic-369-incoming-face-fricke-quotient-separation-boundary
-    true true true true true true false false
+    true true true true true true
+    true true true
+    false false
