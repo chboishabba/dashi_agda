@@ -46,6 +46,8 @@ import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact as Paymen
 import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as Tate
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Inertia
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3
 
 ------------------------------------------------------------------------
 -- 1. Source atlas.
@@ -183,6 +185,16 @@ record PBGreenRingSectorSpeciesAuthority : Set₁ where
     normalizedLengthIsUranoCompositionLengthIsTrue :
       normalizedLengthIsUranoCompositionLength ≡ true
 
+    moduleClassesAreFiniteLengthDVRModules :
+      Bool
+    moduleClassesAreFiniteLengthDVRModulesIsTrue :
+      moduleClassesAreFiniteLengthDVRModules ≡ true
+
+    generalizedBrauerCharacterAgreesWithPBTrace :
+      Bool
+    generalizedBrauerCharacterAgreesWithPBTraceIsTrue :
+      generalizedBrauerCharacterAgreesWithPBTrace ≡ true
+
     sectorSpeciesFactorsThroughRelevantGreenRing :
       Bool
     sectorSpeciesFactorsThroughRelevantGreenRingIsTrue :
@@ -318,6 +330,159 @@ p3GapEquationAfterGreenSpecies A =
   Preferred.p3PreferredTotalIsTwo
 
 ------------------------------------------------------------------------
+-- 4c. Fold the sector pieces into the global localized DVR modules.
+------------------------------------------------------------------------
+
+normalizedLengthDirectSum :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  (left right : ModuleClass (species A)) ->
+  normalizedDVRLength A
+    (directSum (species A) left right)
+  ≡
+  normalizedDVRLength A left
+  + normalizedDVRLength A right
+normalizedLengthDirectSum A left right =
+  trans
+    (sym
+      (speciesValueIsNormalizedDVRLength A
+        (directSum (species A) left right)))
+    (trans
+      (speciesAdditive (species A) left right)
+      (cong₂ _+_
+        (speciesValueIsNormalizedDVRLength A left)
+        (speciesValueIsNormalizedDVRLength A right)))
+
+p2CombinedLocalizedClass :
+  PBGreenRingSectorSpeciesAuthority ->
+  ModuleClass ∘ species
+p2CombinedLocalizedClass A =
+  directSum (species A)
+    (p2SectorClass A P2Inertia.identityInertiaOrbit)
+    (directSum (species A)
+      (p2SectorClass A P2Inertia.centralMinusOneInertiaOrbit)
+      (directSum (species A)
+        (p2SectorClass A P2Inertia.orderFourInertiaOrbit)
+        (directSum (species A)
+          (p2SectorClass A P2Inertia.orderThreePairInertiaOrbit)
+          (p2SectorClass A P2Inertia.orderSixPairInertiaOrbit))))
+
+p3CombinedLocalizedClass :
+  PBGreenRingSectorSpeciesAuthority ->
+  ModuleClass ∘ species
+p3CombinedLocalizedClass A =
+  directSum (species A)
+    (p3SectorClass A P3.nodeOrbit)
+    (p3SectorClass A P3.branchOrbit)
+
+p2CombinedLengthIsTen :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  normalizedDVRLength A (p2CombinedLocalizedClass A) ≡ 10
+p2CombinedLengthIsTen A =
+  trans
+    (normalizedLengthDirectSum A
+      (p2SectorClass A P2Inertia.identityInertiaOrbit)
+      (directSum (species A)
+        (p2SectorClass A P2Inertia.centralMinusOneInertiaOrbit)
+        (directSum (species A)
+          (p2SectorClass A P2Inertia.orderFourInertiaOrbit)
+          (directSum (species A)
+            (p2SectorClass A P2Inertia.orderThreePairInertiaOrbit)
+            (p2SectorClass A P2Inertia.orderSixPairInertiaOrbit)))))
+    (trans
+      (cong₂ _+_
+        (p2LengthMatchesIndependentGeometricWeight A
+          P2Inertia.identityInertiaOrbit)
+        (trans
+          (normalizedLengthDirectSum A
+            (p2SectorClass A P2Inertia.centralMinusOneInertiaOrbit)
+            (directSum (species A)
+              (p2SectorClass A P2Inertia.orderFourInertiaOrbit)
+              (directSum (species A)
+                (p2SectorClass A P2Inertia.orderThreePairInertiaOrbit)
+                (p2SectorClass A P2Inertia.orderSixPairInertiaOrbit))))
+          (cong₂ _+_
+            (p2LengthMatchesIndependentGeometricWeight A
+              P2Inertia.centralMinusOneInertiaOrbit)
+            (trans
+              (normalizedLengthDirectSum A
+                (p2SectorClass A P2Inertia.orderFourInertiaOrbit)
+                (directSum (species A)
+                  (p2SectorClass A P2Inertia.orderThreePairInertiaOrbit)
+                  (p2SectorClass A P2Inertia.orderSixPairInertiaOrbit)))
+              (cong₂ _+_
+                (p2LengthMatchesIndependentGeometricWeight A
+                  P2Inertia.orderFourInertiaOrbit)
+                (trans
+                  (normalizedLengthDirectSum A
+                    (p2SectorClass A P2Inertia.orderThreePairInertiaOrbit)
+                    (p2SectorClass A P2Inertia.orderSixPairInertiaOrbit))
+                  (cong₂ _+_
+                    (p2LengthMatchesIndependentGeometricWeight A
+                      P2Inertia.orderThreePairInertiaOrbit)
+                    (p2LengthMatchesIndependentGeometricWeight A
+                      P2Inertia.orderSixPairInertiaOrbit))))))))
+      refl)
+
+p3CombinedLengthIsTwo :
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  normalizedDVRLength A (p3CombinedLocalizedClass A) ≡ 2
+p3CombinedLengthIsTwo A =
+  trans
+    (normalizedLengthDirectSum A
+      (p3SectorClass A P3.nodeOrbit)
+      (p3SectorClass A P3.branchOrbit))
+    (trans
+      (cong₂ _+_
+        (p3LengthMatchesIndependentGeometricWeight A P3.nodeOrbit)
+        (p3LengthMatchesIndependentGeometricWeight A P3.branchOrbit))
+      refl)
+
+asGlobalLocalizedDVRBrauerAuthority :
+  PBGreenRingSectorSpeciesAuthority ->
+  DVR.PBLocalizedDVRBrauerAuthority
+asGlobalLocalizedDVRBrauerAuthority A =
+  record
+    { DVR.LocalizedTateModule =
+        ModuleClass (species A)
+    ; DVR.p2LocalizedModule =
+        p2CombinedLocalizedClass A
+    ; DVR.p3LocalizedModule =
+        p3CombinedLocalizedClass A
+    ; DVR.isFiniteLengthOverRelevantDVR =
+        λ prime moduleClass -> moduleClassesAreFiniteLengthDVRModules A
+    ; DVR.p2FiniteLength =
+        moduleClassesAreFiniteLengthDVRModulesIsTrue A
+    ; DVR.p3FiniteLength =
+        moduleClassesAreFiniteLengthDVRModulesIsTrue A
+    ; DVR.comesFromCarnahanPBIntegralTateObject =
+        classesComeFromCarnahanIntegralPBTateObject A
+    ; DVR.comesFromCarnahanPBIntegralTateObjectIsTrue =
+        classesComeFromCarnahanIntegralPBTateObjectIsTrue A
+    ; DVR.localizedAtPrimeEqualsLevelIgusaObject =
+        classesComeFromPrimeEqualsLevelIgusaWildLocalization A
+    ; DVR.localizedAtPrimeEqualsLevelIgusaObjectIsTrue =
+        classesComeFromPrimeEqualsLevelIgusaWildLocalizationIsTrue A
+    ; DVR.preservesPBMonsterLocalCentralizerAction =
+        decompositionPreservesPBMonsterLocalCentralizerAction A
+    ; DVR.preservesPBMonsterLocalCentralizerActionIsTrue =
+        decompositionPreservesPBMonsterLocalCentralizerActionIsTrue A
+    ; DVR.generalizedBrauerCharacterAgreesWithPBTrace =
+        generalizedBrauerCharacterAgreesWithPBTrace A
+    ; DVR.generalizedBrauerCharacterAgreesWithPBTraceIsTrue =
+        generalizedBrauerCharacterAgreesWithPBTraceIsTrue A
+    ; DVR.lengthFunctional =
+        λ prime moduleClass -> normalizedDVRLength A moduleClass
+    ; DVR.p2LengthPaysResidual =
+        trans (p2CombinedLengthIsTen A) refl
+    ; DVR.p3LengthPaysResidual =
+        trans (p3CombinedLengthIsTwo A) refl
+    ; DVR.lengthFunctionalDerivedWithoutReadingTarget =
+        constructionUsesNoDuncanSwisherResidualTarget A
+    ; DVR.lengthFunctionalDerivedWithoutReadingTargetIsTrue =
+        constructionUsesNoDuncanSwisherResidualTargetIsTrue A
+    }
+
+------------------------------------------------------------------------
 -- 5. Source receipts and attribution firewalls.
 ------------------------------------------------------------------------
 
@@ -381,6 +546,7 @@ record PBGreenRingSectorSpeciesCutsetBoundary : Set where
     sectorSpeciesAuthoritySpecified : Bool
     adapterToPreferredDVRPaymentOwned : Bool
     adapterToPreferredCorrectedValuationOwned : Bool
+    adapterToGlobalDVRBrauerAuthorityOwned : Bool
     sectorSpeciesAuthorityInhabited : Bool
     carnahanUranoCreditedWithDASHISectorWeights : Bool
     uranoCreditedWithIgusaSectorDecomposition : Bool
@@ -391,4 +557,4 @@ canonicalPBGreenRingSectorSpeciesCutsetBoundary :
   PBGreenRingSectorSpeciesCutsetBoundary
 canonicalPBGreenRingSectorSpeciesCutsetBoundary =
   pb-green-ring-sector-species-cutset-boundary
-    true true true true true true true false false false false true
+    true true true true true true true true false false false false true
