@@ -35,6 +35,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -52,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exac
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNR650CriticalProductionIncidenceCarrierRound744Exact as R744
+import DASHI.Physics.Closure.NSTriadKNR650OrbitProfileTwoFamilyResidualRound781Exact as R781
 import DASHI.Physics.Closure.NSTriadKNR650CCTouchedQInvariantRound787Exact as R787
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedQCycleResidualNormalFormRound789Exact as R789
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedNestedQCycleFactorNineRound792Exact as R792
@@ -138,10 +140,8 @@ module SeparatedFactorTwentySeven
       X.maskedCycleNestedPair beta ≡ Cycle.cycleCell beta
     maskedNestedCycleSameObject beta
       rewrite R787.ccTouchedQInvariant beta
-            | R787.ccTouchedQInvariant
-                (DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction.qEnergyLeg beta)
-      with
-        Residual.Average.Three.Two.ccTouched beta
+            | R787.ccTouchedQInvariant (Orbit.qEnergyLeg beta)
+      with R781.ccTouched beta
     ... | true = refl
     ... | false = refl
 
