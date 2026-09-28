@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import sys
 import time
-from typing import IO, Any, Dict, Optional, Tuple
+from typing import IO, Any, Dict, Optional, Set, Tuple
 
 from .apply_edits import EditApplicationError, apply_text_edits
 from .source_index import SourceIndex
@@ -70,6 +70,8 @@ class DashiAgdaService:
             jobs=jobs,
         )
         self.jobs = jobs
+        self._trusted_targets: Set[Path] = set()
+        self._trusted_closures: Dict[Path, Tuple[str, ...]] = {}
         self.semantic_path = (
             semantic_catalog.resolve()
             if semantic_catalog is not None
@@ -103,6 +105,32 @@ class DashiAgdaService:
 
     def __exit__(self, exc_type, exc, tb) -> None:
         self.close()
+
+    def _target_path(self, target: str) -> Path:
+        path = Path(target)
+        if not path.is_absolute():
+            path = self.root / path
+        return path.resolve()
+
+    def _trust_target(self, target: Path) -> None:
+        modules = self.index.cached_closure_modules(target)
+        if modules is None:
+            return
+        self._trusted_targets.add(target)
+        self._trusted_closures[target] = modules
+        self.profiler.count("trusted_targets_added")
+
+    def _drop_trust(self, target: Optional[Path] = None) -> None:
+        if target is None:
+            dropped = len(self._trusted_targets)
+            self._trusted_targets.clear()
+            self._trusted_closures.clear()
+        else:
+            dropped = 1 if target in self._trusted_targets else 0
+            self._trusted_targets.discard(target)
+            self._trusted_closures.pop(target, None)
+        if dropped:
+            self.profiler.count("trusted_targets_dropped", dropped)
 
     def _start_request(self) -> Tuple[TimingSnapshot, int]:
         self.index.begin_request()
@@ -175,7 +203,9 @@ class DashiAgdaService:
         limit: Optional[int] = None,
     ) -> dict:
         before, started = self._start_request()
-        result = self.index.diagnose(Path(target))
+        target_path = self._target_path(target)
+        result = self.index.diagnose(target_path)
+        self._trust_target(target_path)
         diagnostics = result.diagnostics
         if errors_only:
             diagnostics = [
@@ -215,10 +245,17 @@ class DashiAgdaService:
         require_fix: bool = False,
     ) -> dict:
         before, started = self._start_request()
+        target_path = self._target_path(target)
+        trusted = target_path in self._trusted_targets
+        if trusted:
+            self.profiler.count("trusted_session_hits")
         diagnostic = self.index.next_diagnostic(
-            Path(target),
+            target_path,
             require_fix=require_fix,
+            validate_freshness=not trusted,
         )
+        if not trusted:
+            self._trust_target(target_path)
         semantic = {}
         if diagnostic is not None and self.semantic_path is not None:
             identity = self.index.source_identity(diagnostic.path)
@@ -251,7 +288,7 @@ class DashiAgdaService:
         allow_likely: bool = False,
     ) -> dict:
         before, started = self._start_request()
-        target_path = Path(target)
+        target_path = self._target_path(target)
 
         diagnostic = self.index.find_cached_diagnostic(
             target_path,
@@ -294,6 +331,8 @@ class DashiAgdaService:
                 "selected fix has no exact machine-applicable edits"
             )
 
+        before_state = self.index.source_state(diagnostic.path)
+
         try:
             changed = apply_text_edits(fix.edits)
         except EditApplicationError as error:
@@ -303,6 +342,16 @@ class DashiAgdaService:
         # state once more before verifying the changed module.
         self.index.begin_request()
         after = self.index.diagnose(diagnostic.path)
+        after_state = self.index.source_state(diagnostic.path)
+        if (
+            before_state is None
+            or after_state is None
+            or before_state[2] != after_state[2]
+        ):
+            self._drop_trust()
+        else:
+            self.profiler.count("trusted_session_api_stable_edits")
+
         resolved = all(
             item.diagnostic_id != diagnostic_id
             for item in after.diagnostics
@@ -329,10 +378,20 @@ class DashiAgdaService:
         before, started = self._start_request()
         scope_modules = None
         if within is not None:
-            scoped = self.index.diagnose(Path(within))
-            scope_modules = set(scoped.modules)
+            within_path = self._target_path(within)
+            if within_path in self._trusted_targets:
+                self.profiler.count("trusted_session_hits")
+                scope_modules = set(
+                    self._trusted_closures.get(within_path, ())
+                )
+            else:
+                scoped = self.index.diagnose(within_path)
+                scope_modules = set(scoped.modules)
+                self._trust_target(within_path)
 
-        modules = list(self.index.affected_modules(Path(target)))
+        modules = list(
+            self.index.affected_modules(self._target_path(target))
+        )
         if scope_modules is not None:
             modules = [
                 module
@@ -349,6 +408,21 @@ class DashiAgdaService:
                 else "subject-closure"
             ),
             "within": within,
+            "profile": self._finish_request(before, started),
+        }
+
+    def refresh(self, target: str) -> dict:
+        """Explicitly observe out-of-band source edits and revalidate a target."""
+        before, started = self._start_request()
+        target_path = self._target_path(target)
+        self._drop_trust(target_path)
+        result = self.index.diagnose(target_path)
+        self._trust_target(target_path)
+        return {
+            "target": str(target_path),
+            "modules": len(result.modules),
+            "diagnostics": len(result.diagnostics),
+            "cache_hit": result.cache_hit,
             "profile": self._finish_request(before, started),
         }
 
