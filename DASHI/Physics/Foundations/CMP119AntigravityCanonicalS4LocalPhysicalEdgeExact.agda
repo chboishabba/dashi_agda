@@ -17,6 +17,9 @@ import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteRecurrenceSa
 import DASHI.Physics.Foundations.CMP119AntigravityP3SourceRecurrenceUniquenessExact as Recurrence
 import DASHI.Physics.Foundations.CMP119AntigravityP3StateForcesSourceIncrementExact as State
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
+import DASHI.Physics.Foundations.CMP119AntigravityP3UVAnchorFromSharedCouplingExact as UVAnchor
+import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
+import RealProperties as BishopP
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Rich
@@ -91,17 +94,36 @@ record CanonicalS4LocalPhysicalEdgeInputs
       ∀ depth →
       P3.nextScale (SU2.recursion bishopRunning) depth ≡ UV.uvNext depth
 
-    sameUVAnchorAsLiteralNext :
-      Bishop._≃_
-        (P3.inverseCouplingSq (SU2.recursion bishopRunning) zero)
-        (UV.embed
-          (Plaquette.nextInverseCouplingSq
-            (Constructor.asPhysicalRunningCouplingData coefficientWeld)
-            zero))
+    p3InitialInverseSquareUsesHistoryCoupling :
+      UVAnchor.P3InitialInverseSquareUsesHistoryCoupling
+        (BetaFlow.betaHistory inputs)
+        bishopRunning
 
     traceBoundary : SU2.CanonicalBishopSU2TraceBoundary
 
 open CanonicalS4LocalPhysicalEdgeInputs public
+
+derivedUVAnchorAsLiteralNext :
+  ∀ {trajectory split inputs rowA smallFieldCap largeFieldCap covarianceCap}
+    (package : CanonicalS4LocalPhysicalEdgeInputs
+      {trajectory = trajectory} {split = split}
+      inputs rowA smallFieldCap largeFieldCap covarianceCap) →
+  Bishop._≃_
+    (P3.inverseCouplingSq (SU2.recursion (bishopRunning package)) zero)
+    (UV.embed
+      (Plaquette.nextInverseCouplingSq
+        (Constructor.asPhysicalRunningCouplingData (coefficientWeld package))
+        zero))
+derivedUVAnchorAsLiteralNext {trajectory = trajectory} package =
+  BishopP.≃-trans
+    (UVAnchor.p3InitialInverseCouplingSameSource
+      (p3InitialInverseSquareUsesHistoryCoupling package))
+    (BishopP.≃-symm
+      (Local.equalityAsBishopSetoid
+        (LiteralToSource.nextAtStepIsSourceCurrent
+          (Constructor.asLiteralPlaquetteCMP109UVSameObject
+            (coefficientWeld package))
+          zero)))
 
 asLocalP3LiteralRecurrence :
   ∀ {trajectory split inputs rowA smallFieldCap largeFieldCap covarianceCap}
@@ -117,7 +139,7 @@ asLocalP3LiteralRecurrence package = record
   ; Local.P3LiteralPlaquetteRecurrenceSameObject.nextScaleIsUVPredecessor =
       p3NextScaleIsUVPredecessor package
   ; Local.P3LiteralPlaquetteRecurrenceSameObject.sameUVAnchorAsLiteralNext =
-      sameUVAnchorAsLiteralNext package
+      derivedUVAnchorAsLiteralNext package
   ; Local.P3LiteralPlaquetteRecurrenceSameObject.successorTotalIncrementSameLiteral =
       λ depth →
         Edge.remainderImpliesTotalIncrement
@@ -164,8 +186,11 @@ directPositiveEdgeTotalIncrementWitnessRequired = false
 allDepthP3StateWitnessRequired : Bool
 allDepthP3StateWitnessRequired = false
 
-sameUVAnchorStillRequired : Bool
-sameUVAnchorStillRequired = true
+directUVAnchorStillRequired : Bool
+directUVAnchorStillRequired = false
+
+sharedInitialCouplingInverseSquareRepresentationStillRequired : Bool
+sharedInitialCouplingInverseSquareRepresentationStillRequired = true
 
 localP3RemainderPhysicalIdentificationStillRequired : Bool
 localP3RemainderPhysicalIdentificationStillRequired = true
