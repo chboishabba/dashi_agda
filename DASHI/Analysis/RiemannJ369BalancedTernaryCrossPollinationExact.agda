@@ -41,6 +41,7 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
+import DASHI.Reasoning.Trialectic369DyadicSectionTriadicKernelExact as Dyadic
 
 ------------------------------------------------------------------------
 -- 1. Typed carrier counts.
@@ -151,6 +152,38 @@ puncturedKernel4FiniteCountIs80 =
   Punctured.puncturedKernel4EnumerationLengthIs80
 
 ------------------------------------------------------------------------
+-- 4b. The original trialectic dyadic locals are the same four-trit carrier.
+------------------------------------------------------------------------
+
+abLocalChartIsCanonicalKernel4 :
+  (section : DASHI.Reasoning.Trialectic369DescentNaturalityExact.ABSection) ->
+  Dyadic.kernel4ToAB (Dyadic.abToKernel4 section) ≡ section
+abLocalChartIsCanonicalKernel4 =
+  Dyadic.abKernelRoundTrip
+
+bcLocalChartIsCanonicalKernel4 :
+  (section : DASHI.Reasoning.Trialectic369DescentNaturalityExact.BCSection) ->
+  Dyadic.kernel4ToBC (Dyadic.bcToKernel4 section) ≡ section
+bcLocalChartIsCanonicalKernel4 =
+  Dyadic.bcKernelRoundTrip
+
+caLocalChartIsCanonicalKernel4 :
+  (section : DASHI.Reasoning.Trialectic369DescentNaturalityExact.CASection) ->
+  Dyadic.kernel4ToCA (Dyadic.caToKernel4 section) ≡ section
+caLocalChartIsCanonicalKernel4 =
+  Dyadic.caKernelRoundTrip
+
+abLocalChartCountIs81 :
+  Reindex.listLength Dyadic.abEnumeration ≡ 81
+abLocalChartCountIs81 =
+  Dyadic.abEnumerationLengthIs81
+
+puncturedABLocalChartCountIs80 :
+  Reindex.listLength Dyadic.puncturedABEnumeration ≡ 80
+puncturedABLocalChartCountIs80 =
+  Dyadic.puncturedABEnumerationLengthIs80
+
+------------------------------------------------------------------------
 -- 5. The same 3^4 scale under two boundary operations.
 ------------------------------------------------------------------------
 
@@ -200,6 +233,9 @@ record RiemannJ369BalancedTernaryCrossPollinationBoundary : Set where
     depthFiveX6PlusT4SplitTyped : Bool
     sharedFullVsPuncturedFourShiftTyped : Bool
     x6CanonicalCodecKernel6ChartPaid : Bool
+    trialecticDyadicLocalIsCanonicalKernel4 : Bool
+    localFullCount81Paid : Bool
+    localPuncturedCount80Paid : Bool
     kernel4PunctureOperationAvailable : Bool
     concreteKernel4PunctureCardinality80Paid : Bool
     semanticIdentityClaimed : Bool
@@ -209,5 +245,7 @@ canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary :
   RiemannJ369BalancedTernaryCrossPollinationBoundary
 canonicalRiemannJ369BalancedTernaryCrossPollinationBoundary =
   riemann-j369-balanced-ternary-cross-pollination-boundary
-    true true true true true true true true
+    true true true true true true true
+    true true true
+    true true
     true false false
