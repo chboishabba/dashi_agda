@@ -33,6 +33,7 @@ module DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact w
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
