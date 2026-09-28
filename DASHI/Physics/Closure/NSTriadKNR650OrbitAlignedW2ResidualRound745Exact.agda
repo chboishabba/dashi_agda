@@ -188,35 +188,6 @@ module OrbitAligned
     productionOrbitCell =
       R744.productionOrbitCell system
 
-    orbitAlignedCell :
-      Physical.PhysicalTriadIncidence → ℚ
-    orbitAlignedCell beta =
-      R700.twelve / R700.twelve *
-        (R744.three * nestedOrbitCell beta)
-      - Fold.two * productionOrbitCell beta
-
-    -- The harmless 12/12 wrapper above is deliberately NOT consumed as a
-    -- division theorem elsewhere; it keeps the cell scalar visibly rational.
-    -- The actual proof below normalizes it algebraically.
-
-    cleanOrbitAlignedCell :
-      Physical.PhysicalTriadIncidence → ℚ
-    cleanOrbitAlignedCell beta =
-      R744.three * nestedOrbitCell beta
-        - Fold.two * productionOrbitCell beta
-
-    cellClean :
-      (beta : Physical.PhysicalTriadIncidence) →
-      orbitAlignedCell beta ≡ cleanOrbitAlignedCell beta
-    cellClean beta =
-      solve
-        ( nestedOrbitCell beta
-        ∷ productionOrbitCell beta
-        ∷ R700.twelve
-        ∷ R744.three
-        ∷ Fold.two
-        ∷ [])
-
     orbitAlignedFold : ℚ
     orbitAlignedFold =
       R38.foldPower cleanOrbitAlignedCell
@@ -307,6 +278,7 @@ module OrbitAligned
             * W2.K.dissipationAt cutoff time
 
     residualIsThreeCombinedMinusPacket :
+      (S : Packet.LivePhysicalPacketStructure D C cutoff) →
       (margin : ℚ) →
       orbitAlignedResidual margin
       ≡
@@ -314,7 +286,7 @@ module OrbitAligned
         ( Combined.combinedResidueAt cutoff time
         - Packet.physicalPacketStrictSurplusRate
             D cutoff margin time )
-    residualIsThreeCombinedMinusPacket margin =
+    residualIsThreeCombinedMinusPacket S margin =
       let
         production = W2.K.productionAt cutoff time
         diss = W2.K.dissipationAt cutoff time
@@ -328,17 +300,7 @@ module OrbitAligned
         packetMeaning =
           sym
             (W2.literalStrictSurplusIsPhysicalPacket
-              cutoff
-              (record
-                { Packet.realityAt = λ t →
-                    R405.LiteralCutoffSupport.realityAt R cutoff t
-                ; Packet.divergenceFreeAt = λ t →
-                    R405.LiteralCutoffSupport.divergenceFreeAt R cutoff t
-                ; Packet.canonicalNonlinearConservationAt = λ t →
-                    R405.LiteralCutoffSupport.canonicalNonlinearConservationAt
-                      R cutoff t
-                })
-              margin time)
+              cutoff S margin time)
       in
       trans
         (cong
