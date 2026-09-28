@@ -25,7 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 -- decomposition of the total coefficient into Gaussian and interaction parts.
 -- S4's rich Brillouin bypass needs the stronger Gaussian same-object theorem
 --
---   rich scalarIntegral ~= embed(rational beta_Z).
+--   rich coefficient ~= embed(rational beta_Z).
 --
 -- This module makes the non-implication explicit in the API so future callers
 -- cannot discharge the Gaussian seam with the total source recurrence alone.
