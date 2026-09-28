@@ -2,6 +2,8 @@
 module DASHI.Physics.Foundations.CMP119AntigravityLiteralEvaluatorRegularReceiptSameObjectExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (_+_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinBoxReceiptFamilyExact as Boxes
 import DASHI.Physics.YangMills.BalabanClayT4ConfiguredBrillouinIntegralCertificateExact as Integral
@@ -9,6 +11,7 @@ import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanClayT4LiteralMomentumDiagramBoxDataExact as Momentum
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Literal
 import DASHI.Physics.YangMills.BalabanLiteralOneLoopFourOrbitSameObjectExact as SameObject
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact as OrbitSum
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -58,16 +61,16 @@ literalEvaluatorRegularLowerFourOrbitExact :
   Integral.boxLowerSum
     (Boxes.regularBoxReceipts (literalEvaluatorPartition evaluator))
   ≡
-    DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.oneOuterOrbitSum
+    OrbitSum.oneOuterOrbitSum
       (SameObject.literalLowerContribution evaluator)
-    + DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.twoOuterOrbitSum
+    + OrbitSum.twoOuterOrbitSum
       (SameObject.literalLowerContribution evaluator)
-    + DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.threeOuterOrbitSum
+    + OrbitSum.threeOuterOrbitSum
       (SameObject.literalLowerContribution evaluator)
-    + DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.fourOuterOrbitSum
+    + OrbitSum.fourOuterOrbitSum
       (SameObject.literalLowerContribution evaluator)
 literalEvaluatorRegularLowerFourOrbitExact evaluator =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (literalEvaluatorRegularLowerReceiptSumExact evaluator)
     (SameObject.literalLowerSumIsFourJointOrbits evaluator)
 
@@ -77,16 +80,16 @@ literalEvaluatorRegularUpperFourOrbitExact :
   Integral.boxUpperSum
     (Boxes.regularBoxReceipts (literalEvaluatorPartition evaluator))
   ≡
-    DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.oneOuterOrbitSum
+    OrbitSum.oneOuterOrbitSum
       (SameObject.literalUpperContribution evaluator)
-    + DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.twoOuterOrbitSum
+    + OrbitSum.twoOuterOrbitSum
       (SameObject.literalUpperContribution evaluator)
-    + DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.threeOuterOrbitSum
+    + OrbitSum.threeOuterOrbitSum
       (SameObject.literalUpperContribution evaluator)
-    + DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitSummedIntervalExact.fourOuterOrbitSum
+    + OrbitSum.fourOuterOrbitSum
       (SameObject.literalUpperContribution evaluator)
 literalEvaluatorRegularUpperFourOrbitExact evaluator =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (literalEvaluatorRegularUpperReceiptSumExact evaluator)
     (SameObject.literalUpperSumIsFourJointOrbits evaluator)
 
