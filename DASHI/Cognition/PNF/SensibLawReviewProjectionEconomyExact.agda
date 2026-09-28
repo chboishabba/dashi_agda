@@ -132,6 +132,7 @@ data ReviewProjectionReuseCreatesEventAssembly : Set where
 data ReviewProjectionReuseCreatesClaimTruth : Set where
 data ReviewProjectionCacheKeyMayIgnoreInputFingerprint : Set where
 data ReviewProjectionCacheKeyMayIgnoreConsumerScope : Set where
+data ReviewProjectionCacheKeyMayIgnoreOccurrenceAncestry : Set where
 data ReviewProjectionElapsedAloneProvesParserDominance : Set where
 
 reusedParserWallDoesNotBecomeFreshParserMeasurement :
@@ -166,6 +167,10 @@ reviewProjectionCacheMustTrackConsumerScope :
   ReviewProjectionCacheKeyMayIgnoreConsumerScope → ⊥
 reviewProjectionCacheMustTrackConsumerScope ()
 
+reviewProjectionCacheMustTrackOccurrenceAncestry :
+  ReviewProjectionCacheKeyMayIgnoreOccurrenceAncestry → ⊥
+reviewProjectionCacheMustTrackOccurrenceAncestry ()
+
 reviewProjectionWallAloneCannotProveParserDominance :
   ReviewProjectionElapsedAloneProvesParserDominance → ⊥
 reviewProjectionWallAloneCannotProveParserDominance ()
@@ -193,6 +198,10 @@ record ReviewProjectionEconomyBoundary : Set where
     consumerScopeIsPartOfReuseIdentityIsTrue :
       consumerScopeIsPartOfReuseIdentity ≡ true
 
+    occurrenceAncestryIsPartOfReuseIdentity : Bool
+    occurrenceAncestryIsPartOfReuseIdentityIsTrue :
+      occurrenceAncestryIsPartOfReuseIdentity ≡ true
+
     projectionReusePaysReviewDecision : Bool
     projectionReusePaysReviewDecisionIsFalse :
       projectionReusePaysReviewDecision ≡ false
@@ -214,6 +223,7 @@ open ReviewProjectionEconomyBoundary public
 canonicalReviewProjectionEconomyBoundary : ReviewProjectionEconomyBoundary
 canonicalReviewProjectionEconomyBoundary =
   review-projection-economy-boundary
+    true refl
     true refl
     true refl
     true refl
