@@ -225,6 +225,9 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p3ExactLaneKeyOwned : Bool
     p3MarkedActionSocketOwned : Bool
     p2MarkedActionSocketOwned : Bool
+    antipodalTargetHierarchyOwned : Bool
+    p3TargetIsRank1AntipodalPresentation : Bool
+    p2RetainedTargetIsBinaryOverRank2 : Bool
     wholeF9FrobeniusCarrierRejected : Bool
     p3MarkedQuotientOrSubcarrierRequired : Bool
     rawF4FrobeniusCarrierHasThreeOrbitDiagnostic : Bool
@@ -241,7 +244,8 @@ canonicalSmallCharacteristicArithmeticSourceBoundary :
 canonicalSmallCharacteristicArithmeticSourceBoundary =
   small-characteristic-arithmetic-source-boundary
     true true true true true true true
-    true true
+    true true true
+    true true true
     true true true true
     false false false
     missingP2MarkedArithmeticSource
