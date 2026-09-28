@@ -205,8 +205,38 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
 canonicalP2GaussianCMMarkedSourceFrontierBoundary :
   P2GaussianCMMarkedSourceFrontierBoundary
 canonicalP2GaussianCMMarkedSourceFrontierBoundary =
-  p2-gaussian-cm-marked-source-frontier-boundary
-    true true true true false
-    true true true true true true true true true true true true true true true true true true true true true true true true true
-    false false false
-    missingFormalKerFrobeniusSquaredFiniteFlatConstruction
+  record
+    { f4F2ReceiptConsumed = true
+    ; frobeniusC2ReceiptConsumed = true
+    ; gaussianCMLevelFourReceiptConsumed = true
+    ; cmOrbitAuthorityBacked = true
+    ; formalCMOrbitEquivalenceConstructed = false
+    ; rawF4ThreeOrbitPresentationOwned = true
+    ; uniformThreeOrbitLiftRuledOut = true
+    ; oneOneEightDependentTargetNormalFormOwned = true
+    ; balancedTernaryPuncturedPlaneNormalFormOwned = true
+    ; puncturedKernel2BidiNormalFormOwned = true
+    ; trialecticSharedNineObserverReconciliationOwned = true
+    ; trialecticNineObserverArithmeticLossPaid = true
+    ; trialecticNineCentreOnlyResidualCodecOwned = true
+    ; dualDependentCodecBidiOwned = true
+    ; duplicatedCentreCompletionBridgeOwned = true
+    ; badPrimeLevelStructureBoundaryOwned = true
+    ; gamma0FourMarkedSubgroupSchemeSocketOwned = true
+    ; gamma0FourRefinedCompactificationBoundaryOwned = true
+    ; gamma0FourTwoIsogenyChainSocketOwned = true
+    ; uniqueRawSupersingularGamma0FourSubgroupSourceBacked = true
+    ; rawSubgroupChoiceCountOneVsResidualTenSeparated = true
+    ; uniqueGamma0MarkingBidiContractOwned = true
+    ; subgroupIsogenyChainBidiContractOwned = true
+    ; gamma0FourOrderTwoSubflagRequired = true
+    ; naiveFullE4PointSetIdentificationRuledOut = true
+    ; stabilizerTypeCompatibilityOwned = true
+    ; movingFrobeniusDiscreteTargetNoGoOwned = true
+    ; movingC2TenOrbitPositiveControlOwned = true
+    ; fourStateTwoTorsionSeedRuledOutAsCompleteSource = true
+    ; arithmeticOneOneEightMarkingConstructed = false
+    ; arithmeticActionRecognitionConstructed = false
+    ; receiptAuthorityPromotedToArithmeticTheorem = false
+    ; firstResidual = missingFormalKerFrobeniusSquaredFiniteFlatConstruction
+    }
