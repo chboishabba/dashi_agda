@@ -55,10 +55,13 @@ bad = record { witnes = Set }
     assert second["status"] == "diagnostic"
     assert counts.get("files_parsed", 0) == 0
     assert counts.get("checker_instances", 0) == 0
+    assert counts.get("files_stat", 0) == 0
+    assert counts["trusted_session_hits"] == 1
+    assert counts["trusted_closure_stat_skips"] == 1
     assert counts["next_error_candidates_decoded"] == 1
 
 
-def test_service_observes_edit_between_requests(tmp_path):
+def test_service_external_edit_requires_explicit_refresh(tmp_path):
     path = write_module(
         tmp_path,
         "Service.Edit",
@@ -100,13 +103,23 @@ extra = Set
             encoding="utf-8",
         )
 
+        trusted = service.next_error(
+            str(path),
+            require_fix=True,
+        )
+        assert trusted["status"] == "diagnostic"
+        assert trusted["profile"]["counts"].get("files_stat", 0) == 0
+
+        refreshed = service.refresh(str(path))
+        assert refreshed["profile"]["counts"]["files_parsed"] == 1
+
         second = service.next_error(
             str(path),
             require_fix=True,
         )
 
     assert second["status"] == "clean"
-    assert second["profile"]["counts"]["files_parsed"] == 1
+    assert second["profile"]["counts"].get("files_stat", 0) == 0
 
 
 def test_service_next_error_apply_fix_loop(tmp_path):
@@ -149,6 +162,9 @@ bad = record { witnes = Set }
         )
 
     assert final["status"] == "clean"
+    assert applied["profile"]["counts"]["trusted_session_api_stable_edits"] == 1
+    assert final["profile"]["counts"].get("files_stat", 0) == 0
+    assert final["profile"]["counts"]["trusted_session_hits"] == 1
     source = path.read_text(encoding="utf-8")
     assert "witnes =" not in source
     assert "witness = Set" in source
@@ -707,6 +723,7 @@ def test_service_affected_can_be_scoped_to_subject_rollup(tmp_path):
     ) as service:
         # Index the external consumer too, so an unscoped query can see it.
         service.diagnose(str(outside))
+        service.diagnose(str(subject))
         scoped = service.affected(
             str(leaf),
             within=str(subject),
@@ -714,6 +731,8 @@ def test_service_affected_can_be_scoped_to_subject_rollup(tmp_path):
         unscoped = service.affected(str(leaf))
 
     assert scoped["scope"] == "subject-closure"
+    assert scoped["profile"]["counts"].get("files_stat", 0) == 0
+    assert scoped["profile"]["counts"]["trusted_session_hits"] == 1
     assert scoped["modules"] == [
         "Scoped.Leaf",
         "Scoped.SubjectEverything",
