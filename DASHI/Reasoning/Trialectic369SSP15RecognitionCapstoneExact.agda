@@ -52,6 +52,7 @@ import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as Fine
 import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
+import DASHI.Reasoning.Trialectic369MultiplicityProjectionPositionIndependenceExact as PositionDescent
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
@@ -435,6 +436,40 @@ outgoingMinimalNineVsEighteenForkPaid :
   ≡ true
 outgoingMinimalNineVsEighteenForkPaid =
   refl , refl
+
+------------------------------------------------------------------------
+-- 5f-b. Eliminate the optional Fin90 action choice: a fixed X6 reference
+--       suffices. This is still conditional, not Monster source evidence.
+------------------------------------------------------------------------
+
+outgoingPositionIndependenceBoundary :
+  PositionDescent.Trialectic369MultiplicityPositionIndependenceBoundary
+outgoingPositionIndependenceBoundary =
+  PositionDescent.canonicalTrialectic369MultiplicityPositionIndependenceBoundary
+
+outgoingPositionIndependenceCanonicalDescentCompilerPaid :
+  PositionDescent.positionIndependenceSufficesForDescent
+    outgoingPositionIndependenceBoundary
+  ≡ true
+outgoingPositionIndependenceCanonicalDescentCompilerPaid = refl
+
+outgoingFiniteMultiplicityActionNoLongerIndependentChoice :
+  PositionDescent.multiplicityActionPointwiseUnique
+    outgoingPositionIndependenceBoundary
+  ≡ true
+outgoingFiniteMultiplicityActionNoLongerIndependentChoice = refl
+
+outgoingZeroReferenceFalsificationCompilerPaid :
+  PositionDescent.oneZeroReferenceCounterexampleRejectsDescent
+    outgoingPositionIndependenceBoundary
+  ≡ true
+outgoingZeroReferenceFalsificationCompilerPaid = refl
+
+outgoingActualPositionIndependenceStillOpen :
+  PositionDescent.actualMonsterPositionIndependenceEstablishedHere
+    outgoingPositionIndependenceBoundary
+  ≡ false
+outgoingActualPositionIndependenceStillOpen = refl
 
 outgoingMultiplicityProjectionDescentStillOpen :
   MultiplicityDescent.multiplicityProjectionDescentPaidHere
