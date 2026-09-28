@@ -19,8 +19,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFixedWidthCandidateQuotedRootExa
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Unit using (tt)
+open import Data.Maybe.Base using (just; nothing)
 open import Data.Empty using (⊥)
-open import Data.Maybe.Base using (nothing)
 open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (_≢_)
 
@@ -28,6 +29,7 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
+import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateCodeFormulaQuotationExact as CodeQuote
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateQuotedSelfApplicationExact as SelfQuote
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
@@ -150,15 +152,15 @@ fixedWidthCandidateQuotedRunsCandidateOnCurrentFormula :
     (codec :
       CodeQuote.FixedWidthCandidateCodeCodec
         (Actual.CandidateCodeRealization.CandidateCode code)) →
-  SelfQuote.Code.run1
+  Code.run1
       (SelfQuote.candidateQuotedPrimitiveSemantics
         code
         (SelfQuote.structuralProgramFormulaQuotation
           (fixedWidthCandidateCodeQuotation code codec)))
       (SelfQuote.candidateQuotedFixedPointProgram code)
-      Agda.Builtin.Unit.tt
+      tt
   ≡
-  Data.Maybe.Base.just
+  just
     (Direct.decide
       candidate
       (Q2.currentFormula
