@@ -91,7 +91,13 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --     Fricke compatibility.
 --
 -- SOTA TERMINAL RESEARCH WALL:
---   * inhabit SOTATerminalFourthTermAuthority;
+--   * the Monster target is now independent and LOCAL:
+--       v2(|C_M(2B)|)=46, v3(|C_M(3B)|)=20,
+--       giving defects 46-36=10 and 20-18=2;
+--   * generalized moonshine supplies a sourced centralizer-action/modular-trace
+--     common-object precedent;
+--   * inhabit SOTAMonsterLocalBridgeAuthority (strictly stronger than the older
+--     SOTATerminalFourthTermAuthority);
 --   * p=2 must restore full five-sector information AND retain tangent/character
 --     data: centralizer depth alone provably cannot determine the inertia-RR
 --     denominator;
@@ -164,6 +170,9 @@ import DASHI.Moonshine.OggSSPP2CentralizerDepthVsInertiaRRNonfactorabilityExact 
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAInertiaRRRefinementExact as SOTARR
 import DASHI.Moonshine.OggSSPSmallCharacteristicIgusaOsculationHasseCutsetExact as Osculation
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTATerminalFourthTermRefinementExact as SOTATerminal
+import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact as LocalCentralizer
+import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExact as GMBridge
+import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExact as SOTALocalBridge
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -373,6 +382,13 @@ record ArithmeticIndependent369Frontier : Set where
     rawOsculationShortcutRejected : Bool
     sotaTerminalFourthTermCutsetPaid : Bool
     sotaTerminalFourthTermAuthorityPaid : Bool
+    monster2BLocalCentralizerTargetSourced : Bool
+    monster3BLocalCentralizerTargetSourced : Bool
+    localCentralizerDefectsTenTwoPaid : Bool
+    generalizedMoonshineCentralizerModularBridgeSourced : Bool
+    generalizedMoonshineBadLevelValuationAuthorityPaid : Bool
+    sotaMonsterLocalBridgeCutsetPaid : Bool
+    sotaMonsterLocalBridgeAuthorityPaid : Bool
 
     p2CentralizerDepthTenCandidatePaid : Bool
     p3CentralizerDepthUniformLawRejected : Bool
@@ -485,6 +501,13 @@ canonicalArithmeticIndependent369Frontier =
     ; rawOsculationShortcutRejected = true
     ; sotaTerminalFourthTermCutsetPaid = true
     ; sotaTerminalFourthTermAuthorityPaid = false
+    ; monster2BLocalCentralizerTargetSourced = true
+    ; monster3BLocalCentralizerTargetSourced = true
+    ; localCentralizerDefectsTenTwoPaid = true
+    ; generalizedMoonshineCentralizerModularBridgeSourced = true
+    ; generalizedMoonshineBadLevelValuationAuthorityPaid = false
+    ; sotaMonsterLocalBridgeCutsetPaid = true
+    ; sotaMonsterLocalBridgeAuthorityPaid = false
 
     ; p2CentralizerDepthTenCandidatePaid = true
     ; p3CentralizerDepthUniformLawRejected = true
