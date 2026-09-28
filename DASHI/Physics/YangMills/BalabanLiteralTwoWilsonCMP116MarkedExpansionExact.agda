@@ -37,6 +37,9 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exa
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact as R415
 import DASHI.Physics.YangMills.BalabanCMP99PathDerivativeSourceReplayRound413Exact as R413
+import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
+import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 
 
 selectedTermFromR413 :
@@ -235,3 +238,74 @@ literalTwoWilsonR413ToR415CompilerLevel = machineChecked
 -- and supply R413 path replays, scalarization, fixed-Y source summability and
 -- two-mark support/rate data.  All noncommutative four-stage inequalities and
 -- W1/W3 finite resummation are compiler output above.
+
+
+------------------------------------------------------------------------
+-- Magnitude-only finite covariance endpoint.
+--
+-- The mass-gap route consumes an upper bound on the magnitude of the selected
+-- finite covariance.  Therefore a signed equality between the CMP116 boundary
+-- and the Wilson response is unnecessary.  It is sufficient to identify their
+-- absolute values after the existing ordered ℚ -> ℝ embedding.
+------------------------------------------------------------------------
+
+record LiteralWilsonMixedResponseMagnitudeIdentification
+    {Measure Observable Domain Term Operator : Set}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    (extension :
+      R278.ScalarCovarianceConvergenceExtension dataSet)
+    (embedding : Embed.OrderedRationalRealEmbedding)
+    (source :
+      LiteralTwoWilsonCMP116MarkedExpansionSource
+        Domain Term Operator)
+    : Set₁ where
+  field
+    cutoff : Nat
+    left right : Observable
+
+    selectedBoundaryMagnitudeIsFiniteCovarianceMagnitude :
+      absℝ (selectedBoundaryIntegrand source)
+      ≡
+      Embed.embed embedding
+        (R278.connectedCovarianceMagnitude extension
+          (Gram.measureSequence dataSet cutoff)
+          left right)
+
+open LiteralWilsonMixedResponseMagnitudeIdentification public
+
+embeddedFiniteWilsonCovarianceBelowSourceDecay :
+  ∀ {Measure Observable Domain Term Operator}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {extension :
+      R278.ScalarCovarianceConvergenceExtension dataSet}
+    {embedding : Embed.OrderedRationalRealEmbedding}
+    {source :
+      LiteralTwoWilsonCMP116MarkedExpansionSource
+        Domain Term Operator} →
+  (identification :
+    LiteralWilsonMixedResponseMagnitudeIdentification
+      extension embedding source) →
+  Embed.embed embedding
+    (R278.connectedCovarianceMagnitude extension
+      (Gram.measureSequence dataSet (cutoff identification))
+      (left identification)
+      (right identification))
+  ≤ℝ
+  sourceAmplitude source
+    *ℝ R414.weight (decay source)
+      (R411.selectedConnectingDistance (geometry source))
+embeddedFiniteWilsonCovarianceBelowSourceDecay
+    {source = source} identification =
+  subst
+    (λ lower →
+      lower ≤ℝ
+      sourceAmplitude source
+        *ℝ R414.weight (decay source)
+          (R411.selectedConnectingDistance (geometry source)))
+    (selectedBoundaryMagnitudeIsFiniteCovarianceMagnitude identification)
+    (literalMarkedBoundaryBelowSourceDecay source)
+
+literalMagnitudeOnlyWEXTEndpointLevel : ProofLevel
+literalMagnitudeOnlyWEXTEndpointLevel = machineChecked
