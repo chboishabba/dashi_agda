@@ -711,3 +711,23 @@ import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSRationalContinuumH2Exact
 
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSLiteralClayResidualExact
+
+import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectoryToPublishedLiteralR467Exact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact
+
+import DASHI.Physics.YangMills.YMClayMixedScalarPhysicalSpectrumExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedWilsonH2Exact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119CompactSimplePhysicalH5Exact
+
+import DASHI.Physics.YangMills.YangMillsClayDirectPhysicalCExact
+
+import DASHI.Physics.YangMills.YangMillsClayCMP119DirectSameSystemH6Exact
