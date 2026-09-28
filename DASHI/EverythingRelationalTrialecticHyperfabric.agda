@@ -130,3 +130,5 @@ import DASHI.Reasoning.Trialectic369OutgoingLinearMultiplicityWrongTypeCorrectio
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact
 
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact
+
+import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact
