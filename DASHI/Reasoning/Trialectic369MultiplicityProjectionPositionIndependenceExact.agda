@@ -32,6 +32,7 @@ open import DASHI.Algebra.Trit using (zer)
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Action
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as Descent
+import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaOrbitTransitivityExact as Reach
 
 zeroPosition : H.X6
 zeroPosition = H.x6 zer zer zer zer zer zer
@@ -126,6 +127,86 @@ independenceReconstructedFromDescent source descent inertia position multiplicit
 -- A single witnessed departure from zero-position output rejects descent.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- Six generator equations suffice by the existing transitive X6 orbit.
+------------------------------------------------------------------------
+
+record MultiplicityGeneratorInvariant
+    (source : Action.ActualMonster3BActionRecognition) : Set₁ where
+  field
+    unitTranslationPreservesMultiplicityOutput :
+      (inertia : Descent.ActualInertia source) →
+      (axis : H.Axis6) →
+      (position : H.X6) →
+      (multiplicity : Fin 90) →
+      multiplicityOutput source inertia (H.translate axis position) multiplicity
+      ≡ multiplicityOutput source inertia position multiplicity
+
+open MultiplicityGeneratorInvariant public
+
+generatorInvarianceAlongReachability :
+  (source : Action.ActualMonster3BActionRecognition) →
+  (witness : MultiplicityGeneratorInvariant source) →
+  (inertia : Descent.ActualInertia source) →
+  (multiplicity : Fin 90) →
+  ∀ {x y} →
+  Reach.TranslationReachable x y →
+  multiplicityOutput source inertia x multiplicity
+  ≡ multiplicityOutput source inertia y multiplicity
+generatorInvarianceAlongReachability source witness inertia multiplicity
+  Reach.reachableRefl = refl
+generatorInvarianceAlongReachability source witness inertia multiplicity
+  (Reach.reachableStep {x = x} axis rest) =
+  trans
+    (sym
+      (unitTranslationPreservesMultiplicityOutput
+        witness inertia axis x multiplicity))
+    (generatorInvarianceAlongReachability
+      source witness inertia multiplicity rest)
+
+positionIndependenceFromGenerators :
+  (source : Action.ActualMonster3BActionRecognition) →
+  MultiplicityGeneratorInvariant source →
+  MultiplicityPositionIndependence source
+positionIndependenceFromGenerators source witness =
+  record
+    { independentOfPosition = λ inertia position multiplicity →
+        generatorInvarianceAlongReachability
+          source witness inertia multiplicity
+          (Reach.toZero position)
+    }
+
+generatorInvarianceFromPositionIndependence :
+  (source : Action.ActualMonster3BActionRecognition) →
+  MultiplicityPositionIndependence source →
+  MultiplicityGeneratorInvariant source
+generatorInvarianceFromPositionIndependence source witness =
+  record
+    { unitTranslationPreservesMultiplicityOutput =
+        λ inertia axis position multiplicity →
+          trans
+            (independentOfPosition witness
+              inertia (H.translate axis position) multiplicity)
+            (sym (independentOfPosition witness
+              inertia position multiplicity))
+    }
+
+descentFromGeneratorInvariance :
+  (source : Action.ActualMonster3BActionRecognition) →
+  MultiplicityGeneratorInvariant source →
+  Descent.MultiplicityProjectionDescent source
+descentFromGeneratorInvariance source witness =
+  descentFromPositionIndependence source
+    (positionIndependenceFromGenerators source witness)
+
+generatorInvarianceFromDescent :
+  (source : Action.ActualMonster3BActionRecognition) →
+  Descent.MultiplicityProjectionDescent source →
+  MultiplicityGeneratorInvariant source
+generatorInvarianceFromDescent source descent =
+  generatorInvarianceFromPositionIndependence source
+    (positionIndependenceFromDescent source descent)
+
 record ZeroPositionCrossDependence
     (source : Action.ActualMonster3BActionRecognition) : Set where
   field
@@ -179,6 +260,9 @@ record Trialectic369MultiplicityPositionIndependenceBoundary : Set where
     descentImpliesPositionIndependence : Bool
     multiplicityActionPointwiseUnique : Bool
     oneZeroReferenceCounterexampleRejectsDescent : Bool
+    sixUnitGeneratorEquationsSuffice : Bool
+    descentImpliesAllGeneratorEquations : Bool
+    existingX6TranslationReachabilityReused : Bool
     actualMonsterPositionIndependenceEstablishedHere : Bool
     canonicalLinearRepresentationReplacedByFiniteAction : Bool
 
@@ -186,4 +270,4 @@ canonicalTrialectic369MultiplicityPositionIndependenceBoundary :
   Trialectic369MultiplicityPositionIndependenceBoundary
 canonicalTrialectic369MultiplicityPositionIndependenceBoundary =
   trialectic-369-multiplicity-position-independence-boundary
-    true true true true true true false false
+    true true true true true true true true true false false
