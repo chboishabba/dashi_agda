@@ -1143,71 +1143,71 @@ class SourceIndex:
                             else None
                         )
             payload = row[payload_column]
-                if not payload:
-                    if row["diagnostics_empty"]:
-                        continue
-                    if row["diagnostics_invalid"]:
-                        result = self.diagnose(target)
-                        fallback = [
-                            item for item in result.diagnostics
-                            if (not require_fix or item.fixes)
-                        ]
-                        return (
-                            min(
-                                fallback,
-                                key=self._diagnostic_priority,
-                            )
-                            if fallback
-                            else None
+            if not payload:
+                if row["diagnostics_empty"]:
+                    continue
+                if row["diagnostics_invalid"]:
+                    result = self.diagnose(target)
+                    fallback = [
+                        item for item in result.diagnostics
+                        if (not require_fix or item.fixes)
+                    ]
+                    return (
+                        min(
+                            fallback,
+                            key=self._diagnostic_priority,
                         )
-                    diagnostic_row = self.connection.execute(
-                        "SELECT diagnostics_json FROM modules "
-                        "WHERE path = ?",
-                        (row["path"],),
-                    ).fetchone()
-                    if diagnostic_row is None:
-                        continue
-                    try:
-                        module_diagnostics = self._decode_diagnostics(
-                            diagnostic_row
-                        )
-                    except (
-                        TypeError,
-                        ValueError,
-                        KeyError,
-                        json.JSONDecodeError,
-                    ):
-                        module_diagnostics = []
-                    top_payload, top_fixable_payload = (
-                        self._top_diagnostic_payloads(module_diagnostics)
+                        if fallback
+                        else None
                     )
-                    self.connection.execute(
-                        "UPDATE modules SET "
-                        "top_diagnostic_json = ?, "
-                        "top_fixable_diagnostic_json = ? "
-                        "WHERE path = ?",
-                        (
-                            top_payload,
-                            top_fixable_payload,
-                            row["path"],
-                        ),
-                    )
-                    self.profiler.count(
-                        "next_error_candidate_rows_upgraded"
-                    )
-                    payload = (
-                        top_fixable_payload
-                        if require_fix
-                        else top_payload
-                    )
-                if not payload:
+                diagnostic_row = self.connection.execute(
+                    "SELECT diagnostics_json FROM modules "
+                    "WHERE path = ?",
+                    (row["path"],),
+                ).fetchone()
+                if diagnostic_row is None:
                     continue
                 try:
-                    candidates.append(
-                        self._diagnostic_from_dict(json.loads(payload))
+                    module_diagnostics = self._decode_diagnostics(
+                        diagnostic_row
                     )
-                except (TypeError, ValueError, KeyError, json.JSONDecodeError):
-                    continue
+                except (
+                    TypeError,
+                    ValueError,
+                    KeyError,
+                    json.JSONDecodeError,
+                ):
+                    module_diagnostics = []
+                top_payload, top_fixable_payload = (
+                    self._top_diagnostic_payloads(module_diagnostics)
+                )
+                self.connection.execute(
+                    "UPDATE modules SET "
+                    "top_diagnostic_json = ?, "
+                    "top_fixable_diagnostic_json = ? "
+                    "WHERE path = ?",
+                    (
+                        top_payload,
+                        top_fixable_payload,
+                        row["path"],
+                    ),
+                )
+                self.profiler.count(
+                    "next_error_candidate_rows_upgraded"
+                )
+                payload = (
+                    top_fixable_payload
+                    if require_fix
+                    else top_payload
+                )
+            if not payload:
+                continue
+            try:
+                candidates.append(
+                    self._diagnostic_from_dict(json.loads(payload))
+                )
+            except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+                continue
 
         self.profiler.count("next_error_modules_scanned", len(rows))
         self.profiler.count(
