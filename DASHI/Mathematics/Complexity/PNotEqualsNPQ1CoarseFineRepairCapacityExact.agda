@@ -278,10 +278,13 @@ encodedRelativeFine :
     sharing →
   Width.LayerNode {root = root} remaining →
   Cardinality.BitWords bits
-encodedRelativeFine realization node =
+encodedRelativeFine
+    {sharing = sharing}
+    realization
+    node =
   encodeRelativeFine realization
     (CoarseFine.relativeFine
-      (Sharing.geometry _)
+      (Sharing.geometry sharing)
       node)
 
 encodedRelativeFineIsDynamicallySufficient :
