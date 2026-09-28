@@ -37,6 +37,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
+import DASHI.Moonshine.OggSSPP2UranoParityFiveSectorNoGoExact as P2NoGo
+import DASHI.Moonshine.OggSSPP2UranoInertiaLocalizationFactorizationExact as P2Factor
 import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
 import DASHI.Moonshine.OggSSP3BCarnahanTateSigmaSplitExact as Tate3B
 import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact as SigmaDR
@@ -229,3 +231,42 @@ p3PartitionFactorBoundary :
   P3Factor.P3H3TateSigmaPartitionFactorizationBoundary
 p3PartitionFactorBoundary =
   P3Factor.canonicalP3H3TateSigmaPartitionFactorizationBoundary
+
+
+------------------------------------------------------------------------
+-- 6. Refined p=2 gap after the four-vs-five parity/tag no-go.
+------------------------------------------------------------------------
+
+record P2RefinedTerminalSourceGap : Set where
+  constructor p2-refined-terminal-source-gap
+  field
+    uranoParityExclusionsSourced : Bool
+    uranoT4AGreenFunctionalSourced : Bool
+    coarseNonForbiddenParityTagCarrierHasFourLabels : Bool
+    exactFiveSectorRechartFromCoarseParityTagsBlocked : Bool
+
+    finerSourceNativeInvariantRequired : Bool
+    sourcePieceToFiveSectorPartitionPaid : Bool
+    localizedLengthEqualsClassDefectDepthPaid : Bool
+
+    monsterResidualUsedToInventMissingInvariant : Bool
+    base369UsedToInventMissingInvariant : Bool
+    attributionFirewallPreserved : Bool
+
+canonicalP2RefinedTerminalSourceGap :
+  P2RefinedTerminalSourceGap
+canonicalP2RefinedTerminalSourceGap =
+  p2-refined-terminal-source-gap
+    true true true true
+    true false false
+    false false true
+
+p2ParityNoGoBoundary :
+  P2NoGo.P2UranoParityFiveSectorNoGoBoundary
+p2ParityNoGoBoundary =
+  P2NoGo.canonicalP2UranoParityFiveSectorNoGoBoundary
+
+p2FactorBoundary :
+  P2Factor.P2UranoInertiaLocalizationFactorizationBoundary
+p2FactorBoundary =
+  P2Factor.canonicalP2UranoInertiaLocalizationFactorizationBoundary
