@@ -232,6 +232,8 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p3MarkedQuotientOrSubcarrierRequired : Bool
     rawF4FrobeniusCarrierHasThreeOrbitDiagnostic : Bool
     rawF4InsufficientForTenComponentRetainedTarget : Bool
+    p2UniformF4OrbitLiftRuledOut : Bool
+    p2StratifiedMarkedRefinementRequired : Bool
     p2MarkedLevelCMCoverRequired : Bool
     p2MarkedLevelCMSourceSocketOwned : Bool
     receiptMetadataPromotedToAction : Bool
@@ -246,6 +248,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
     true true true true true true true
     true true true
     true true true
-    true true true true
+    true true true true true true
     false false false
     missingP2MarkedArithmeticSource
