@@ -157,6 +157,11 @@ import DASHI.Physics.Closure.NSTriadKNR650ThreeClassAnalyticWallRound768Exact as
 import DASHI.Physics.Closure.NSTriadKNR650SwapPairedResidualProductRuleRound769Exact as R769
 import DASHI.Physics.Closure.NSTriadKNR650ThreeSwapClosedClassWeightsRound770Exact as R770
 import DASHI.Physics.Closure.NSTriadKNR650ThreeClassProductRuleRouteBoundaryRound771Exact as R771
+import DASHI.Physics.Closure.NSTriadKNR650GlobalPairedNestedProductRuleRound772Exact as R772
+import DASHI.Physics.Closure.NSTriadKNR650GlobalPairedResidualProductRuleRound773Exact as R773
+import DASHI.Physics.Closure.NSTriadKNR650GlobalProductRuleLoopBoundaryRound774Exact as R774
+import DASHI.Physics.Closure.NSTriadKNR650EnergyOrbitBonyProfileRound775Exact as R775
+import DASHI.Physics.Closure.NSTriadKNR650OrbitProfileAnalyticWallRound776Exact as R776
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -371,6 +376,26 @@ round650W2ThreeClassPaymentClosed =
 round650W2ClasswiseProductRuleRouteIsUnpaidLoop : Bool
 round650W2ClasswiseProductRuleRouteIsUnpaidLoop =
   R771.round771ReturningThroughR294WithoutNewStructureIsRepresentationLoop
+
+round650W2GlobalCyclicRowsRemainIndependent : Bool
+round650W2GlobalCyclicRowsRemainIndependent =
+  R776.round776GlobalCyclicRowsAreIndependentAnalyticLeaves
+
+round650W2GlobalProductRuleCollapseCreatesNewSign : Bool
+round650W2GlobalProductRuleCollapseCreatesNewSign =
+  R776.round776GlobalCyclicReindexingCreatesNewSign
+
+round650W2EnergyOrbitBonyProfileAvailable : Bool
+round650W2EnergyOrbitBonyProfileAvailable =
+  R776.round776EnergyOrbitBonyProfileAvailable
+
+round650W2CoarseFourClassCyclicTransitionAssumed : Bool
+round650W2CoarseFourClassCyclicTransitionAssumed =
+  R776.round776CoarseFourClassCyclicTransitionAssumed
+
+round650W2NextSearchMustPreserveClassLocalInformation : Bool
+round650W2NextSearchMustPreserveClassLocalInformation =
+  R776.round776NextSearchMustPreserveClassLocalInformation
 
 round650W2OneSignedResidualSurfaceAvailable : Bool
 round650W2OneSignedResidualSurfaceAvailable =
