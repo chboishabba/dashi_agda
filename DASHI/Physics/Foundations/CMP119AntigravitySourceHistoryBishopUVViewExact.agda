@@ -84,7 +84,8 @@ uvRecurrenceSetoid trajectory (suc depth) =
 
 ------------------------------------------------------------------------
 -- P3 recursion represents this exact source history iff these three same-object
--- identifications hold.  This is the minimal carrier bridge; no sign or scale
+-- identifications hold, including the recursion algebra itself.  This is the
+-- minimal carrier bridge; no sign or scale
 -- orientation is left implicit.
 ------------------------------------------------------------------------
 
@@ -92,6 +93,12 @@ record P3RepresentsSourceUVView
     (trajectory : Flow.SourceNormalizedCouplingTrajectory)
     (recursion : P3.RunningCouplingRecursion Nat Bishop.ℝ) : Set₁ where
   field
+    addIsBishopAdd :
+      ∀ left right →
+      Bishop._≃_
+        (P3.add recursion left right)
+        (Bishop._+_ left right)
+
     inverseCouplingSame :
       ∀ depth →
       Bishop._≃_
