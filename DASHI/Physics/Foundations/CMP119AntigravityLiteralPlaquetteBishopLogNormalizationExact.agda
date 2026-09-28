@@ -4,6 +4,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteBishopLogNorma
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import Real as Bishop
@@ -198,7 +199,7 @@ freeRationalOneLoopVacuumPolarizationData casimir chosenLog = record
   ; Plaquette.OneLoopVacuumPolarizationData.ghostContributionExact =
       λ _ → Agda.Builtin.Equality.refl
   ; Plaquette.OneLoopVacuumPolarizationData.gaugeGhostCancellationExact =
-      λ _ → Agda.Builtin.Equality.refl
+      λ _ → ℚRing.solve []
   ; Plaquette.OneLoopVacuumPolarizationData.adjointColorTraceEqualsCasimir =
       Agda.Builtin.Equality.refl
   ; Plaquette.OneLoopVacuumPolarizationData.latticeMomentumSecondDerivativeExact =
