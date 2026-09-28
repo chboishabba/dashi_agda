@@ -35,6 +35,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelIgusaCorrectionCutsetExact as Igusa
 import DASHI.Moonshine.OggSSPP2ScalarDivisorInertiaLocalizationCutsetExact as P2Local
+import DASHI.Moonshine.OggSSPP2BinaryTetrahedralRigidificationQuotientExact as P2Transport
 import DASHI.Moonshine.OggSSPP3DeligneRapoportDegeneracyTransportCutsetExact as P3Local
 import DASHI.Moonshine.OggSSPSmallCharacteristicCrossAmbientTransportPaymentExact as Transport
 import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as Bridge
@@ -56,6 +57,9 @@ record BadLevelInertiaLocalizedFourthTermAuthority : Set₁ where
 
     p2InertiaLocalization :
       P2Local.P2FiveSectorAnalyticLocalizationAuthority
+
+    p2FullInertiaTransport :
+      P2Transport.FullInertiaLiftTransportAuthority
 
     p3BranchTransport :
       P3Local.P3BadLevelBranchTransportAuthority
@@ -105,6 +109,11 @@ record BadLevelInertiaLocalizedFourthTermAuthority : Set₁ where
       Bool
     p2ExceptionalObjectUsesFiveSectorLocalizationIsTrue :
       p2ExceptionalObjectUsesFiveSectorLocalization ≡ true
+
+    scalarPushforwardOrQExpansionValuationOwned :
+      Bool
+    scalarPushforwardOrQExpansionValuationOwnedIsTrue :
+      scalarPushforwardOrQExpansionValuationOwned ≡ true
 
     p3ExceptionalObjectUsesBranchSensitiveTransport :
       Bool
@@ -227,6 +236,7 @@ data CrossAmbientTransportAloneCreatesTerminalAuthority : Set where
 data TenTwoCountCreatesTerminalAuthority : Set where
 data RawIgusaRamificationCreatesTerminalAuthority : Set where
 data TameRiemannRochCreatesTerminalAuthority : Set where
+data PrimeToPEtherealTheoremCreatesTerminalAuthority : Set where
 
 badLevelIgusaAloneDoesNotCreateTerminalAuthority :
   BadLevelIgusaDataAloneCreatesTerminalAuthority -> ⊥
@@ -256,6 +266,10 @@ tameRiemannRochDoesNotCreateTerminalAuthority :
   TameRiemannRochCreatesTerminalAuthority -> ⊥
 tameRiemannRochDoesNotCreateTerminalAuthority ()
 
+primeToPEtherealTheoremDoesNotCreateTerminalAuthority :
+  PrimeToPEtherealTheoremCreatesTerminalAuthority -> ⊥
+primeToPEtherealTheoremDoesNotCreateTerminalAuthority ()
+
 ------------------------------------------------------------------------
 -- 5. Live theorem wall.
 ------------------------------------------------------------------------
@@ -276,9 +290,13 @@ record BadLevelInertiaLocalizedFourthTermBoundary : Set where
     p2BadLevelIgusaRequired : Bool
     p3BadLevelIgusaRequired : Bool
     p2FiveSectorInertiaLocalizationRequired : Bool
+    p2CentralGerbeLiftRequired : Bool
     p3BranchSensitiveTransportRequired : Bool
     crossAmbientTransportRequired : Bool
     commonExceptionalObjectRequired : Bool
+    scalarPushforwardOrQExpansionRequired : Bool
+    badLevelPrimeToPAndP2CoverageRequired : Bool
+    primeToPEtherealTheoremSufficient : Bool
     adapterToMonsterBridgeOwned : Bool
     adapterToJointAuthorityOwned : Bool
     adapterToLicensedFourTermExtensionOwned : Bool
@@ -291,5 +309,5 @@ canonicalBadLevelInertiaLocalizedFourthTermBoundary :
   BadLevelInertiaLocalizedFourthTermBoundary
 canonicalBadLevelInertiaLocalizedFourthTermBoundary =
   bad-level-inertia-localized-fourth-term-boundary
-    true true true true true true true true true
+    true true true true true true true true true false true true true
     false false false false
