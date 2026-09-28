@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopRichBrillouinGa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (_*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import Real as Bishop
@@ -159,13 +160,13 @@ richScalarIntegralUsesCanonicalBishopSU2 :
   Bishop._≃_
     (Rich.scalarIntegral rich scale)
     (Bishop._*_
-      (Embed.embed
-        (Beta.pureYMInverseCouplingCoefficient SU2.su2Casimir))
       (Bishop._*_
-        Pi.inversePiSquared
-        (SU2Running.logBlocking running scale)))
+        (Embed.embed
+          (Beta.pureYMInverseCouplingCoefficient SU2.su2Casimir))
+        Pi.inversePiSquared)
+      (SU2Running.logBlocking running scale))
 richScalarIntegralUsesCanonicalBishopSU2
-    {rich = rich} normalization scale =
+    {rich = rich} {running = running} normalization scale =
   BishopP.≃-trans
     (equalityAsBishopSetoid
       (Rich.infraredShellIntegralLogLExact rich scale))
@@ -177,9 +178,16 @@ richScalarIntegralUsesCanonicalBishopSU2
         (Rich.multiply rich
           (Rich.inversePiSquared rich scale)
           (Rich.logBlocking rich scale)))
-      (BishopP.*-cong
-        (richColorFactorIsCanonicalCoefficient normalization scale)
-        (richPiLogFactorIsCanonical normalization scale)))
+      (BishopP.≃-trans
+        (BishopP.*-cong
+          (richColorFactorIsCanonicalCoefficient normalization scale)
+          (richPiLogFactorIsCanonical normalization scale))
+        (BishopP.≃-symm
+          (BishopP.*-assoc
+            (Embed.embed
+              (Beta.pureYMInverseCouplingCoefficient SU2.su2Casimir))
+            Pi.inversePiSquared
+            (SU2Running.logBlocking running scale)))))
 
 p3GaussianSameRichScalarIntegral :
   ∀ {rich running}
