@@ -180,8 +180,8 @@ module SeparatedFullCompanionWall
       in
       trans
         (sym (R230.foldAdd weighted weighted fibre))
-        (R438.fixedOutputDoubleWeightedR294FoldIsQuadraticCompanion
-          W system transverse output)
+        (R438.foldDoubleWeightedIsExhaustiveCompanion
+          W system transverse fibre)
 
     outputCompanionWork : Z3.FourierMode → ℚ
     outputCompanionWork output
