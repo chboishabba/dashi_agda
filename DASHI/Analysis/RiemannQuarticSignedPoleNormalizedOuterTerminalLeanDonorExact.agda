@@ -408,6 +408,97 @@ canonicalQuarticCapPairBoundary =
     "physicalFourthPrimitive(S) = zetaWindowMinusMuPair(t-S,t+S,quarticSymmetricCapAC) = integral_[s0,S] ((S-s)^3/6)*D(t-s,t+s) ds"
     "Prove an unconditional quantitative bound for this exact AC quartic-cap N-mu pairing, strong enough after the C^5 fourfold-IBP kernel weighting and explicit boundary terms to leave the terminal positive slack."
 
+------------------------------------------------------------------------
+-- FOUR-PRIMITIVE KERNEL LANE CLOSED TO ONE PRIMITIVE NORM
+--
+-- Latest Lean commits:
+--
+--   9a1fe1a64fd4927b22f76929ad84af0822a1dea4
+--     isolate |P4| times finite C^5 L1 mass
+--
+--   3e082ffaafc6aa3c78a91363b9cb776209485761
+--     discharge the finite C^5 L1 envelope by the global L1 norm
+--
+--   5284d3734c9a6ebc8e0dd6bf888eadef2b9365e9
+--     close the fourfold kernel lane:
+--
+--       |OuterAbel_n|
+--         <= K_boundary / Q_n^2
+--            + B_P * ||C_W^(5)||_1.
+--
+-- The boundary constant is produced by Schwartz rapid decay under the weak
+-- polynomial primitive envelope.  The fifth-derivative norm is produced
+-- internally from global integrability.
+--
+-- Therefore the kernel/Fourier side contributes no remaining analytic
+-- assumption beyond a uniform bound B_P for the anchored fourth primitive.
+--
+-- IMPORTANT same-object seam:
+--
+-- The repository separately owns
+--
+--   physicalFourthPrimitive
+--     = quartic-cap N-mu pairing
+--
+-- and
+--
+--   normalized Cesaro fourth primitive
+--     = physicalFourthPrimitive.
+--
+-- The fourfold IBP compiler, however, currently consumes
+--
+--   anchoredPrimitive4 A4 eta0.
+--
+-- The generic equality
+--
+--   anchoredPrimitive4 A4 eta0 Q
+--     =
+--   integral_[eta0,Q] ((Q-q)^3/6) A4(q) dq
+--
+-- has not yet been recorded as a theorem.  Until that weld is paid, a bound
+-- on the physical cap primitive must not be silently reused as B_P.
+------------------------------------------------------------------------
+
+record FourPrimitiveKernelClosureBoundary : Set where
+  constructor four-primitive-kernel-closure-boundary
+  field
+    outerDiscrepancyFiniteIntervalIntegrabilityPaid : Bool
+    quarticCapSameObjectIdentificationPaid : Bool
+    upperIBPBoundaryDecayPaid : Bool
+    fifthDerivativeGlobalL1Paid : Bool
+    fifthInteriorPrimitiveTimesL1Paid : Bool
+    outerAbelInvSqPlusPrimitiveNormPaid : Bool
+
+    anchoredFourthEqualsCesaroFourthPaid : Bool
+    anchoredFourthBoundPaid : Bool
+    unconditionalPhysicalCapBoundPaid : Bool
+
+    kernelLaneClosed :
+      outerAbelInvSqPlusPrimitiveNormPaid ≡ true
+    anchoredCesaroWeldStillOpen :
+      anchoredFourthEqualsCesaroFourthPaid ≡ false
+    anchoredBoundStillOpen :
+      anchoredFourthBoundPaid ≡ false
+    physicalCapBoundStillOpen :
+      unconditionalPhysicalCapBoundPaid ≡ false
+
+    exactKernelEstimate : String
+    exactRemainingSameObjectSeam : String
+    nextAnalyticWall : String
+
+open FourPrimitiveKernelClosureBoundary public
+
+canonicalFourPrimitiveKernelClosureBoundary :
+  FourPrimitiveKernelClosureBoundary
+canonicalFourPrimitiveKernelClosureBoundary =
+  four-primitive-kernel-closure-boundary
+    true true true true true true
+    false false false
+    refl refl refl refl
+    "|normalizedOuterPairedAbelAt n| <= K_boundary / Q_n^2 + B_P * fifthDerivativeGlobalL1Mass"
+    "anchoredPrimitive4 A4 eta0 Q = integral_[eta0,Q] ((Q-q)^3/6) * A4(q) dq"
+    "After the anchored/Cesaro weld, prove one unconditional quantitative bound on the literal quartic-cap N-mu pairing; kernel decay and C^5 L1 are already paid."
+
 finiteQRepresentationDebtIsPaid :
   NormalizedOuterTerminalBoundary.finiteQEstimateCompilesToHighContradictionSourceWritten
     canonicalNormalizedOuterTerminalBoundary ≡ true
