@@ -248,6 +248,8 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p2Gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
     p2Gamma0FourRefinedCompactificationBoundaryOwned : Bool
     p2Gamma0FourTwoIsogenyChainSocketOwned : Bool
+    p2UniqueRawSupersingularGamma0FourSubgroupSourceBacked : Bool
+    p2RawSubgroupChoiceOneVsResidualTenSeparated : Bool
     p2Gamma0FourOrderTwoSubflagRequired : Bool
     p2NaiveFullE4PointSetIdentificationRuledOut : Bool
     p2FourStateTorsionSeedRuledOutAsCompleteSource : Bool
@@ -267,6 +269,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
     true true true true true true true
     true true true
     true true true
-    true true true true true true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true
     false false false
     missingP2MarkedArithmeticSource
