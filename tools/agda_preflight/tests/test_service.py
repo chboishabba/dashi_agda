@@ -679,3 +679,44 @@ def test_service_affected_frontier_uses_persistent_import_graph(tmp_path):
         "Service.Frontier.Top",
     ]
     assert result["count"] == 3
+
+
+
+def test_service_affected_can_be_scoped_to_subject_rollup(tmp_path):
+    leaf = write_module(
+        tmp_path,
+        "Scoped.Leaf",
+        "leaf : Set\nleaf = Set\n",
+    )
+    subject = write_module(
+        tmp_path,
+        "Scoped.SubjectEverything",
+        "import Scoped.Leaf\nsubject : Set\nsubject = Set\n",
+    )
+    outside = write_module(
+        tmp_path,
+        "Scoped.Outside",
+        "import Scoped.Leaf\noutside : Set\noutside = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=1,
+    ) as service:
+        # Index the external consumer too, so an unscoped query can see it.
+        service.diagnose(str(outside))
+        scoped = service.affected(
+            str(leaf),
+            within=str(subject),
+        )
+        unscoped = service.affected(str(leaf))
+
+    assert scoped["scope"] == "subject-closure"
+    assert scoped["modules"] == [
+        "Scoped.Leaf",
+        "Scoped.SubjectEverything",
+    ]
+    assert "Scoped.Outside" in unscoped["modules"]
+    assert unscoped["scope"] == "indexed-cache-only"
