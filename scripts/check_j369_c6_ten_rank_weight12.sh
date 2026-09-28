@@ -208,6 +208,7 @@ grep -q 'sameFourShiftDoesNotImplySameObject' "${rh_ternary_targets[2]}"
 # Primitive-row Smith invariant versus coordinate 3-adic filtration.
 rh_smith_targets=(
   DASHI/Analysis/RiemannPrimitiveKernelUnimodularBasisExact.agda
+  DASHI/Analysis/RiemannPrimitiveKernelExplicitSmithReductionExact.agda
   DASHI/Analysis/RiemannPrimitiveKernelFiltrationTransportExact.agda
   DASHI/Analysis/RiemannPrimitiveKernelSmithFiltrationSeparationExact.agda
 )
@@ -223,9 +224,13 @@ grep -q 'transformedLeadingPairExact' "${rh_smith_targets[0]}"
 grep -q 'primitiveBezoutCertificate' "${rh_smith_targets[0]}"
 grep -q 'depthProfileChangesUnderUnimodularBasis' "${rh_smith_targets[0]}"
 
-grep -q 'canonicalKernelCorrespondence' "${rh_smith_targets[1]}"
-grep -q 'coordinateAxesDoNotBecomeIntrinsicKernel' "${rh_smith_targets[1]}"
+grep -q 'explicitSmithNormalForm' "${rh_smith_targets[1]}"
+grep -q 'rowMapHasPreimage' "${rh_smith_targets[1]}"
 
-grep -q 'primitiveSmithStyleReceipt' "${rh_smith_targets[2]}"
-grep -q 'rawDepthProfileChangesUnderBasis' "${rh_smith_targets[2]}"
-grep -q 'filteredKernelIsPreferredInvariantObject' "${rh_smith_targets[2]}"
+grep -q 'canonicalKernelCorrespondence' "${rh_smith_targets[2]}"
+grep -q 'coordinateAxesDoNotBecomeIntrinsicKernel' "${rh_smith_targets[2]}"
+
+grep -q 'primitiveSmithStyleReceipt' "${rh_smith_targets[3]}"
+grep -q 'explicitSmithNormalFormOwned' "${rh_smith_targets[3]}"
+grep -q 'rowMapSurjectiveWitness' "${rh_smith_targets[3]}"
+grep -q 'filteredKernelIsPreferredInvariantObject' "${rh_smith_targets[3]}"
