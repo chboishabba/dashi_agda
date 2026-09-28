@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityS4PhysicalThresholdEndToEndExa
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (1ℚ; _≤_)
 
 import Real as Bishop
 
@@ -36,15 +37,14 @@ betaSplitHistoryInverseThresholdAtLeastOne :
         inputs parameters)
     (rowA : Quartic.FiniteQuarticResponseConstants)
     (capWeld : RowA.RowACapIsRepositoryCap rowA parameters) →
-  Unit.ℚ.1ℚ
-  Unit.ℚ.≤
+  1ℚ ≤
   History.inverseThreshold (BetaFlow.betaHistory inputs)
 betaSplitHistoryInverseThresholdAtLeastOne
     coordinates rowA capWeld =
   Unit.inverseThresholdAtLeastOneFromUnitCap
-    (History.gammaPositive (BetaFlow.betaHistory _))
+    (History.gammaPositive (BetaFlow.betaHistory inputs))
     (RowA.sameBetaHistoryRowACapAtMostOne coordinates rowA capWeld)
-    (History.inverseThresholdRepresentation (BetaFlow.betaHistory _))
+    (History.inverseThresholdRepresentation (BetaFlow.betaHistory inputs))
 
 physicalSU2ThresholdBelowSameBetaHistory :
   ∀ {trajectory split inputs parameters}
