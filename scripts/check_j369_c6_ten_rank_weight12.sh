@@ -234,3 +234,41 @@ grep -q 'primitiveSmithStyleReceipt' "${rh_smith_targets[3]}"
 grep -q 'explicitSmithNormalFormOwned' "${rh_smith_targets[3]}"
 grep -q 'rowMapSurjectiveWitness' "${rh_smith_targets[3]}"
 grep -q 'filteredKernelIsPreferredInvariantObject' "${rh_smith_targets[3]}"
+
+
+# RH filtered provenance through the existing 15SSP finite machinery.
+rh_ssp15_targets=(
+  DASHI/Analysis/RiemannSSP15DepthFiveRoleCodecExact.agda
+  DASHI/Analysis/RiemannSSP15SignedProvenanceBridgeExact.agda
+  DASHI/Analysis/RiemannSSP15PartitionSeparationExact.agda
+  DASHI/Analysis/RiemannSSP15ChosenGridTransversalityExact.agda
+  DASHI/Analysis/RiemannSSP15FilteredProvenanceCapstoneExact.agda
+)
+
+for target in "${rh_ssp15_targets[@]}"; do
+  test -f "$target"
+done
+
+scripts/run_agda29_parallel_check.sh "${rh_ssp15_targets[@]}"
+
+grep -q 'decodeAfterEncode' "${rh_ssp15_targets[0]}"
+grep -q 'fiveModesTimesThreeRolesIsFifteen' "${rh_ssp15_targets[0]}"
+grep -q 'roleToPhaseIntertwinesReversal' "${rh_ssp15_targets[0]}"
+
+grep -q 'roleCodePointedRoundTrip' "${rh_ssp15_targets[1]}"
+grep -q 'jRoleValuationZeroAt' "${rh_ssp15_targets[1]}"
+grep -q 'jColumnNeutralPrimesExact' "${rh_ssp15_targets[1]}"
+grep -q 'jColumnFiveDistinctPointedStatesShareZeroValuation' "${rh_ssp15_targets[1]}"
+grep -q 'attachedRoleReopensCode' "${rh_ssp15_targets[1]}"
+
+grep -q 'cmAndHeckeAlreadyProvedDistinct' "${rh_ssp15_targets[2]}"
+grep -q 'equalFifteenTotalsDoNotCreateSamePartition' "${rh_ssp15_targets[2]}"
+
+grep -q 'originRoleColumnNotSingleCMClass' "${rh_ssp15_targets[3]}"
+grep -q 'jRoleColumnNotSingleCMClass' "${rh_ssp15_targets[3]}"
+grep -q 'sRoleColumnNotSingleCMClass' "${rh_ssp15_targets[3]}"
+grep -q 'chosenInternalModeNotPrimeNativeComplementMode' "${rh_ssp15_targets[3]}"
+
+grep -q 'PrimitiveRowProducerRoleCertificate' "${rh_ssp15_targets[4]}"
+grep -q 'producerMarkedRoundTripAtRoleCode' "${rh_ssp15_targets[4]}"
+grep -q 'producerRoleCertificateInhabitedHere' "${rh_ssp15_targets[4]}"
