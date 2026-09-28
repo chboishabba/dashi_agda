@@ -33,7 +33,7 @@ module DASHI.Physics.Closure.NSTriadKNR650CommutatorSwapPairProductRuleRound761E
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -183,15 +183,8 @@ commutatorSwapPairIsProductRuleSwapPair
       (cong₂ C3.complex3Add
         refl
         (cong₂ C3.complex3Add
-          (symmetry firstSwap)
-          secondSwap)))
-  where
-  symmetry :
-    ∀ {r} {F : C3.RealField r}
-      {left right : C3.Complex3 F} →
-    left ≡ C3.complex3Negate right →
-    C3.complex3Negate right ≡ left
-  symmetry refl = refl
+          (sym firstSwap)
+          (sym secondSwap))))
 
 ------------------------------------------------------------------------
 -- Status.
