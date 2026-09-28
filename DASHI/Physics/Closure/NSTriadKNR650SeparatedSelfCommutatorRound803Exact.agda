@@ -40,6 +40,9 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
+import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
@@ -56,7 +59,7 @@ module SeparatedSelfCommutator
     (L : Helical.PeriodicHelicalProjectorLaws R802.F
       (Field30.physicalEmbedding physicalSystem)
       (Field30.physicalInverseSquare physicalSystem) S)
-    (H : DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact.HelicalHalfCalibration S)
+    (H : R142.HelicalHalfCalibration S)
     (velocityTransverse :
       (mode : Z3.FourierMode) →
       Helical.Transverse
@@ -116,7 +119,7 @@ module SeparatedSelfCommutator
     rewrite R781.ccTouchedSwapInvariant beta
     with R781.ccTouched beta
   ... | true =
-    sym (R230.complex3NegateZero {F = R802.F})
+    sym (R225.complex3NegateZero {F = R802.F})
   ... | false =
     Self.selfSecondAfterSwapIsNegativeOpposite beta
 
@@ -164,7 +167,7 @@ module SeparatedSelfCommutator
   maskedSelfCommutatorMeaning beta
     with R781.ccTouched beta
   ... | true =
-    sym (R230.complex3SubtractSelf (C3.complex3Zero R802.F))
+    sym (R106.complex3SubtractSelf (C3.complex3Zero R802.F))
   ... | false = refl
 
   fixedOutputMaskedSelfProductIsCommutator :
