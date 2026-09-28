@@ -26,6 +26,7 @@ open import Data.Rational.Base using (ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
@@ -44,7 +45,7 @@ orderedPairPowerSwapInvariant :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E} →
   (tau : Physical.PhysicalTriadIncidence) →
-  (velocity : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode → C3.Complex3 F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
   R38.orderedPairPower E I (Symmetry.swapTriad tau) velocity
   ≡ R38.orderedPairPower E I tau velocity
 orderedPairPowerSwapInvariant {E} {I} tau velocity =
