@@ -878,3 +878,42 @@ reviewProjectionV2FixtureDoesNoOccurrenceLookup :
     ReviewProjectionEconomyRegression.fixtureExactReviewProjectionReuseV2
   ≡ 0
 reviewProjectionV2FixtureDoesNoOccurrenceLookup = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.I review projection uses reconciliation delta fibres.
+------------------------------------------------------------------------
+
+reviewProjectionDeltaFallbackDoesNotProveIncrementalEconomy :
+  ReviewProjectionEconomy.BroadSourceScopedReviewFallbackProvesIncrementalEconomy → ⊥
+reviewProjectionDeltaFallbackDoesNotProveIncrementalEconomy =
+  ReviewProjectionEconomy.broadReviewFallbackDoesNotProveIncrementalEconomy
+
+reviewProjectionDeltaDoesNotCreateReviewDecision :
+  ReviewProjectionEconomy.ReviewDeltaReceiptCreatesReviewDecision → ⊥
+reviewProjectionDeltaDoesNotCreateReviewDecision =
+  ReviewProjectionEconomy.reviewDeltaReceiptDoesNotCreateReviewDecision
+
+reviewProjectionDeltaDoesNotCreateAuthority :
+  ReviewProjectionEconomy.ReviewDeltaReceiptCreatesSemanticAuthority → ⊥
+reviewProjectionDeltaDoesNotCreateAuthority =
+  ReviewProjectionEconomy.reviewDeltaReceiptDoesNotCreateSemanticAuthority
+
+reviewProjectionDeltaDoesNotCreateTruth :
+  ReviewProjectionEconomy.ReviewDeltaReceiptCreatesClaimTruth → ⊥
+reviewProjectionDeltaDoesNotCreateTruth =
+  ReviewProjectionEconomy.reviewDeltaReceiptDoesNotCreateClaimTruth
+
+reviewProjectionDeltaFixtureUsesExactChangedFibres :
+  ReviewProjectionEconomy.ReviewProjectionDeltaFibreReceipt.targetFibreCount
+    ReviewProjectionEconomyRegression.fixtureDeltaReviewProjection
+  ≡
+  ReviewProjectionEconomy.ReviewProjectionDeltaFibreReceipt.deltaFibreCount
+    ReviewProjectionEconomyRegression.fixtureDeltaReviewProjection
+reviewProjectionDeltaFixtureUsesExactChangedFibres = refl
+
+reviewProjectionDeltaFixtureActuallyUsesDelta :
+  ReviewProjectionEconomy.ReviewProjectionDeltaFibreReceipt.deltaInputUsed
+    ReviewProjectionEconomyRegression.fixtureDeltaReviewProjection
+  ≡ true
+reviewProjectionDeltaFixtureActuallyUsesDelta = refl
