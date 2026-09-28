@@ -33,6 +33,7 @@ open import Data.Empty using (⊥)
 open import Data.Nat using (_∸_)
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Foundations.Base369Nat as BaseNat using (_%_)
 
 pow3 : Nat -> Nat
 pow3 n = Hyper.powNat 3 n
@@ -153,6 +154,71 @@ canonicalPrimitiveKernelDepthFiveShape =
     sCoefficientDepthFive
 
 ------------------------------------------------------------------------
+-- Exact 3-adic depth witnesses.
+--
+-- A witness is a factorization c = 3^d * u together with a nonzero ternary
+-- residue of u.  This is enough to certify the exact displayed 3-adic depth
+-- without importing a separate valuation library.
+------------------------------------------------------------------------
+
+data NonzeroTernaryResidue : Set where
+  residueOne residueTwo : NonzeroTernaryResidue
+
+residueValue : NonzeroTernaryResidue -> Nat
+residueValue residueOne = 1
+residueValue residueTwo = 2
+
+record ExactThreeAdicDepthWitness (coefficient : Nat) : Set where
+  constructor exact-three-adic-depth-witness
+  field
+    depth : Nat
+    unit : Nat
+    factorization :
+      coefficient ≡ pow3 depth * unit
+    unitResidue : NonzeroTernaryResidue
+    residueExact :
+      unit % 3 ≡ residueValue unitResidue
+
+open ExactThreeAdicDepthWitness public
+
+poleDepthZero :
+  ExactThreeAdicDepthWitness poleCoefficient
+poleDepthZero =
+  exact-three-adic-depth-witness
+    0 80 refl residueTwo refl
+
+originDepthFive :
+  ExactThreeAdicDepthWitness originCoefficient
+originDepthFive =
+  exact-three-adic-depth-witness
+    5 1 refl residueOne refl
+
+jDepthFive :
+  ExactThreeAdicDepthWitness jCoefficient
+jDepthFive =
+  exact-three-adic-depth-witness
+    5 5 refl residueTwo refl
+
+sDepthFive :
+  ExactThreeAdicDepthWitness sCoefficient
+sDepthFive =
+  exact-three-adic-depth-witness
+    5 4 refl residueOne refl
+
+record PrimitiveKernelThreeAdicProfile : Set where
+  constructor primitive-kernel-three-adic-profile
+  field
+    poleDepth : Nat
+    originDepth : Nat
+    jDepth : Nat
+    sDepth : Nat
+
+canonicalPrimitiveKernelThreeAdicProfile :
+  PrimitiveKernelThreeAdicProfile
+canonicalPrimitiveKernelThreeAdicProfile =
+  primitive-kernel-three-adic-profile 0 5 5 5
+
+------------------------------------------------------------------------
 -- Shift-polynomial reading at X=3.
 ------------------------------------------------------------------------
 
@@ -197,6 +263,7 @@ record RiemannPrimitiveKernelBalancedTernaryBoundary : Set where
     decimalCoefficientVectorRecovered : Bool
     sparseSignedTernaryStencilOwned : Bool
     commonDepthFiveFactorOwned : Bool
+    exactThreeAdicProfileZeroFiveFiveFiveOwned : Bool
     puncturedFourShiftOwned : Bool
     goldenPolynomialOnlyEvaluatedAtThree : Bool
     rhClosedHere : Bool
@@ -206,4 +273,4 @@ canonicalRiemannPrimitiveKernelBalancedTernaryBoundary :
   RiemannPrimitiveKernelBalancedTernaryBoundary
 canonicalRiemannPrimitiveKernelBalancedTernaryBoundary =
   riemann-primitive-kernel-balanced-ternary-boundary
-    true true true true true false false
+    true true true true true true false false
