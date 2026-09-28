@@ -153,10 +153,6 @@ j369FourShiftResidualIs810 :
   j369FourShiftResidual ≡ 810
 j369FourShiftResidualIs810 = refl
 
-rhPuncturedFourShift : Nat
-rhPuncturedFourShift =
-  Stencil.pow3 4 ∸ 1
-
 -- Avoid depending on Nat subtraction for the structural theorem; the
 -- subtraction-free owner is the canonical receipt:
 rhPuncturedFourShiftByReceipt :
