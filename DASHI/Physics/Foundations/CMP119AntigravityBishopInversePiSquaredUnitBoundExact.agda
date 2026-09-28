@@ -34,7 +34,7 @@ oneU = + 1 / 1
 threeU = + 3 / 1
 
 oneReal threeReal : Bishop.ℝ
-oneReal = Bishop._⋆ oneU
+oneReal = Bishop.1ℝ
 threeReal = Bishop._⋆ threeU
 
 oneBelowThree : Bishop._<_ oneReal threeReal
