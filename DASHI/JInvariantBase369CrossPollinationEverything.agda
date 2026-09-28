@@ -469,3 +469,7 @@ import DASHI.Moonshine.OggSSP3BCarnahanTateSigmaSplitExact
 import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact
 
 import DASHI.Moonshine.OggSSPP3H3TateSigmaPartitionFactorizationExact
+
+import DASHI.Moonshine.OggSSPP2UranoParityFiveSectorNoGoExact
+
+import DASHI.Moonshine.OggSSPP2UranoInertiaLocalizationFactorizationExact
