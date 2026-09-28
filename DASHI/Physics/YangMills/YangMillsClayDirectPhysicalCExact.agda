@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.YangMillsClayDirectPhysicalCExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -32,6 +32,9 @@ import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact as B
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact as Curvature
 import DASHI.Physics.YangMills.YangMillsPhysicalOPERemainderSharedTailRound442Exact as R442
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
+import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SameCompletedCompositeStressRound427Exact as R427
 
 record DirectPhysicalCSource
     {C₀ : Top.LiteralYangMillsCarriers}
@@ -121,11 +124,11 @@ record DirectPhysicalCSource
       R442.physicalRemainderMagnitude remainderSource
         (remainderIndex group left right position) depth
       ≤
-      DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact.coefficient
+      Local.coefficient
         (R442.physicalRemainderMajorant remainderSource
           (remainderIndex group left right position))
       *
-      DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower depth →
+      Geo.halfPower depth →
       Top.IsPhysicalOPERemainder S group left right position depth
         (Top.opeRemainder Y group left right position depth)
 
@@ -175,7 +178,7 @@ record DirectPhysicalCSource
     completedStressAndSourcesMeanStressTensorAndOPE :
       (∀ group →
         Marked.continuumComposite
-          (DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SameCompletedCompositeStressRound427Exact.stressField
+          (R427.stressField
             (completion group))
         ≡ Top.stressTensor Y group) →
       (∀ group left right output position →
@@ -242,7 +245,7 @@ asGoal1CanonicalCSource source = record
   ; C.Goal1CanonicalCSource.stressTensorAndOPE =
       completedStressAndSourcesMeanStressTensorAndOPE source
         (λ group →
-          DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SameCompletedCompositeStressRound427Exact.stressFieldIsLiteralClayStress
+          R427.stressFieldIsLiteralClayStress
             (completion source group))
         (allCoefficientMatching source)
         (allPhysicalRemainders source)
