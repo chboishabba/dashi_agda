@@ -34,6 +34,7 @@ import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact as Coarse
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
+import DASHI.Reasoning.Trialectic369DyadicC3LocalComplementSymmetryExact as C3
 
 ------------------------------------------------------------------------
 -- 1. Existing exact SSPTrit <-> TriTruth coordinate chart.
@@ -133,6 +134,64 @@ observeABBalancedPair :
 observeABBalancedPair section =
   Coarse.phaseQuotientToBalancedPair
     (observeABPhaseQuotient9 section)
+
+------------------------------------------------------------------------
+-- 4b. Participant-C3 covariance of the chosen two-trit observer face.
+------------------------------------------------------------------------
+
+observeBCSelfFace :
+  Descent.BCSection ->
+  ABSelfFace2
+observeBCSelfFace section =
+  Descent.bbBC section , Descent.ccBC section
+
+observeCASelfFace :
+  Descent.CASection ->
+  ABSelfFace2
+observeCASelfFace section =
+  Descent.ccCA section , Descent.aaCA section
+
+observeBCPhaseQuotient9 :
+  Descent.BCSection ->
+  Phase.PhaseQuotient9
+observeBCPhaseQuotient9 =
+  selfFaceToPhaseQuotient9 ∘ observeBCSelfFace
+  where
+    _∘_ :
+      {A B C : Set} ->
+      (B -> C) ->
+      (A -> B) ->
+      A -> C
+    (f ∘ g) x = f (g x)
+
+observeCAPhaseQuotient9 :
+  Descent.CASection ->
+  Phase.PhaseQuotient9
+observeCAPhaseQuotient9 =
+  selfFaceToPhaseQuotient9 ∘ observeCASelfFace
+  where
+    _∘_ :
+      {A B C : Set} ->
+      (B -> C) ->
+      (A -> B) ->
+      A -> C
+    (f ∘ g) x = f (g x)
+
+abObserverAfterRotateIsBCObserver :
+  (matrix : C3.Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  observeABPhaseQuotient9
+    (Descent.restrictAB (C3.rotateABC matrix))
+  ≡ observeBCPhaseQuotient9
+      (Descent.restrictBC matrix)
+abObserverAfterRotateIsBCObserver matrix = refl
+
+abObserverAfterRotateTwiceIsCAObserver :
+  (matrix : C3.Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  observeABPhaseQuotient9
+    (Descent.restrictAB (C3.rotateABCTwice matrix))
+  ≡ observeCAPhaseQuotient9
+      (Descent.restrictCA matrix)
+abObserverAfterRotateTwiceIsCAObserver matrix = refl
 
 ------------------------------------------------------------------------
 -- 5. The local observer is intentionally lossy: off-diagonal coordinates are
@@ -418,6 +477,7 @@ record Trialectic369DyadicLocalNineObserverCandidateBoundary : Set where
     twoTritFaceExactlyPhaseQuotient9 : Bool
     localNineObserverConstructed : Bool
     localObserverKnownLossy : Bool
+    participantC3ObserverCovariancePaid : Bool
     phaseNineToModeNineRecognitionConstructed : Bool
     phaseNineToModeNineCarrierRoundTripsPaid : Bool
     repoNativeC2TransportOwned : Bool
@@ -430,6 +490,6 @@ canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary :
   Trialectic369DyadicLocalNineObserverCandidateBoundary
 canonicalTrialectic369DyadicLocalNineObserverCandidateBoundary =
   trialectic-369-dyadic-local-nine-observer-candidate-boundary
-    true true true true true true
+    true true true true true true true
     true true false
     false false
