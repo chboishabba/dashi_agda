@@ -37,7 +37,6 @@ import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact 
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as Local
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as H6
-import DASHI.Physics.YangMills.YangMillsClayGoal1ReducedTerminalCompilerRound469Exact as Terminal
 
 record DirectSourceOSLiteralClayInputs
     {C : Top.LiteralYangMillsCarriers}
@@ -123,51 +122,33 @@ compiledNontriviality inputs =
   H6.asInteractingContinuumNontriviality
     (nontrivialSameSystem inputs)
 
-asReducedTerminalInputs :
-  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
-  DirectSourceOSLiteralClayInputs Y →
-  Terminal.ReducedGoal1TerminalInputs Y
-asReducedTerminalInputs inputs = record
-  { Terminal.ReducedGoal1TerminalInputs.structural =
-      structural inputs
-  ; Terminal.ReducedGoal1TerminalInputs.weakCouplingRG =
-      finiteRG inputs
-  ; Terminal.ReducedGoal1TerminalInputs.continuum =
-      compiledContinuum inputs
-  ; Terminal.ReducedGoal1TerminalInputs.massGapAttachment =
-      record
-        { DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact.Goal1MassGapSemanticAttachment.vacuumSectorAndPositiveEnergyComplement =
-            Five.vacuumSectorAndPositiveEnergyComplement (compiledMassGap inputs)
-        ; DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact.Goal1MassGapSemanticAttachment.strictlyPositiveFiniteMassGap =
-            Five.strictlyPositiveFiniteMassGap (compiledMassGap inputs)
-        ; DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact.Goal1MassGapSemanticAttachment.physicalScaleLowerBoundUniform =
-            Five.physicalScaleLowerBoundUniform (compiledMassGap inputs)
-        ; DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact.Goal1MassGapSemanticAttachment.noSpectralPollutionBelowGap =
-            Five.noSpectralPollutionBelowGap (compiledMassGap inputs)
-        ; DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact.Goal1MassGapSemanticAttachment.gapAndClusteringDerived =
-            Five.gapAndClusteringDerived (compiledMassGap inputs)
-        }
-  ; Terminal.ReducedGoal1TerminalInputs.localSource =
-      localSameFamily inputs
-  ; Terminal.ReducedGoal1TerminalInputs.nontrivialityAttachment =
-      nontrivialSameSystem inputs
-  }
-
 literalClayEvidence :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
   DirectSourceOSLiteralClayInputs Y →
   Top.LiteralClayEvidence Y
-literalClayEvidence inputs =
-  Terminal.literalClayEvidence
-    (asReducedTerminalInputs inputs)
+literalClayEvidence {Y = Y} inputs =
+  Five.literalClayEvidenceFromFiveTheorems
+    Y
+    (structural inputs)
+    (finiteRG inputs)
+    (compiledMassGap inputs)
+    (compiledContinuum inputs)
+    (compiledLocalQFT inputs)
+    (compiledNontriviality inputs)
 
 literalClaySolution :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
   DirectSourceOSLiteralClayInputs Y →
   Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
-literalClaySolution inputs =
-  Terminal.literalClaySolution
-    (asReducedTerminalInputs inputs)
+literalClaySolution {Y = Y} inputs =
+  Five.literalClaySolutionFromFiveTheorems
+    Y
+    (structural inputs)
+    (finiteRG inputs)
+    (compiledMassGap inputs)
+    (compiledContinuum inputs)
+    (compiledLocalQFT inputs)
+    (compiledNontriviality inputs)
 
 directSourceOSLiteralClayCompilerLevel : ProofLevel
 directSourceOSLiteralClayCompilerLevel = machineChecked
