@@ -110,3 +110,7 @@ import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact
 
 import DASHI.Reasoning.Trialectic369SSP15RecognitionCapstoneExact
+
+import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact
+
+import DASHI.Reasoning.Trialectic369IncomingFaceFrickeQuotientSeparationExact
