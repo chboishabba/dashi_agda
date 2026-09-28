@@ -56,6 +56,9 @@ import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfMultiplierFoldRound720Exac
 import DASHI.Physics.Closure.NSTriadKNR650OrbitProfileTwoFamilyResidualRound781Exact as R781
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedSelfZeroSafeSplitRound804Exact as R804
 
+two : ℚ
+two = 2
+
 module SeparatedSelfMultiplier
     (physicalSystem :
       Field30.PhysicalFiniteComplex3GalerkinSystem R804.R803.R802.F)
@@ -188,22 +191,22 @@ module SeparatedSelfMultiplier
 
   globalMultiplierWorkIsDoubleZeroSafe :
     globalMultiplierWork
-    ≡ R720.R613.two * Sep.globalZeroSafeSelfWork
+    ≡ two * Sep.globalZeroSafeSelfWork
   globalMultiplierWorkIsDoubleZeroSafe =
     go (Cube.cutoffModes cutoff)
     where
     go :
       (outputs : List Z3.FourierMode) →
       sumMultiplierWork outputs
-      ≡ R720.R613.two * Sep.sumZeroSafeWork outputs
-    go [] = solve (R720.R613.two ∷ [])
+      ≡ two * Sep.sumZeroSafeWork outputs
+    go [] = solve (two ∷ [])
     go (output ∷ rest) =
       trans
         (cong₂ _+_
           (selectedMultiplierWorkIsDoubleZeroSafe output)
           (go rest))
         (solve
-          ( R720.R613.two
+          ( two
           ∷ Sep.selectedZeroSafeWork output
           ∷ Sep.sumZeroSafeWork rest
           ∷ []))
