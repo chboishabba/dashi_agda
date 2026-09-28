@@ -145,13 +145,13 @@ fullNodeProjection :
 fullNodeProjection root =
   record
     { Coarse =
-        Coarse (Shannon.fullNodeRepairGenerator root)
+        Shannon.Coarse (Shannon.fullNodeRepairGenerator root)
     ; Repair =
-        Repair (Shannon.fullNodeRepairGenerator root)
+        Shannon.Repair (Shannon.fullNodeRepairGenerator root)
     ; coarse =
-        coarse (Shannon.fullNodeRepairGenerator root)
+        Shannon.coarse (Shannon.fullNodeRepairGenerator root)
     ; repair =
-        repair (Shannon.fullNodeRepairGenerator root)
+        Shannon.repair (Shannon.fullNodeRepairGenerator root)
     }
 
 fullNodeProjectionFactors :
