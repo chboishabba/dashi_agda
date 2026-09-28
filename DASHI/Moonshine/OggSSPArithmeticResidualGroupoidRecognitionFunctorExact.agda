@@ -26,6 +26,8 @@ import DASHI.Core.ResidualSymmetryCollisionFibreExact as Symmetry
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
+import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact as P2
+import DASHI.Moonshine.Base369P3ConstantTernaryActionGroupoidExact as P3
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Fricke
 import DASHI.Moonshine.P11MarkedFrobeniusResidualReceiptExact as P11Residual
 import DASHI.Moonshine.OggSSPExponentResidualVsSupersingularOrbitSeparationExact as Separation
@@ -200,15 +202,15 @@ pi0CompatibilityDoesNotBuildRecognitionFunctor ()
 p3Pi0RecognitionGate :
   Pi0RecognitionGate
     Exponent369.p3ExceptionalResidual
-    Small.constantTernaryPi0Count
+    2
 p3Pi0RecognitionGate = pi0-recognition-gate refl
 
 p3TargetZeroStabilizerSize :
-  Small.constantStabilizerSize Small.zeroConstantOrbit ≡ 2
+  P3.stabilizerClass P3.zeroOrbit ≡ P3.fullC2Stabilizer
 p3TargetZeroStabilizerSize = refl
 
 p3TargetNonzeroStabilizerSize :
-  Small.constantStabilizerSize Small.nonzeroConstantOrbit ≡ 1
+  P3.stabilizerClass P3.nonzeroOrbit ≡ P3.trivialStabilizer
 p3TargetNonzeroStabilizerSize = refl
 
 data P3ArithmeticStabilizerProfileRecognized : Set where
@@ -253,14 +255,14 @@ data P2FlipQuotientPassesPi0RecognitionGate : Set where
 p2FlipQuotientFailsPi0RecognitionGate :
   Pi0RecognitionGate
     Exponent369.p2ExceptionalResidual
-    Small.p2ResidualPi0Count
+    P2.p2GaugePi0Count
   → ⊥
 p2FlipQuotientFailsPi0RecognitionGate ()
 
 p2RetainedOrientationPassesPi0RecognitionGate :
   Pi0RecognitionGate
     Exponent369.p2ExceptionalResidual
-    Small.p2RetainedOrientationPi0Count
+    P2.p2RetainedPi0Count
 p2RetainedOrientationPassesPi0RecognitionGate =
   pi0-recognition-gate refl
 
@@ -280,9 +282,9 @@ data P2TargetSemantics : Set where
   orientationRetainedAsGluingData : P2TargetSemantics
 
 p2TargetPi0Count : P2TargetSemantics → Nat
-p2TargetPi0Count binaryFlipAsGauge = Small.p2ResidualPi0Count
+p2TargetPi0Count binaryFlipAsGauge = P2.p2GaugePi0Count
 p2TargetPi0Count orientationRetainedAsGluingData =
-  Small.p2RetainedOrientationPi0Count
+  P2.p2RetainedPi0Count
 
 data P2TargetPassesArithmeticPi0 : P2TargetSemantics → Set where
   retainedOrientationPasses :
