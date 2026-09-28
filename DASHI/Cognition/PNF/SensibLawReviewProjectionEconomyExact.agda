@@ -232,3 +232,126 @@ canonicalReviewProjectionEconomyBoundary =
     false refl
     false refl
     true refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P v2: the review cache may replace a direct occurrence hash with
+-- the exact identity of a completed upstream reconciliation product.
+--
+-- Occurrence ancestry is not forgotten: it is paid by the upstream L2 stage
+-- receipt.  Review projection therefore need not rescan the same occurrence
+-- rows merely to rediscover that the upstream product is unchanged.
+------------------------------------------------------------------------
+
+record ReviewProjectionUpstreamIdentity : Set where
+  constructor review-projection-upstream-identity
+  field
+    sourceRevisionRefV2 : String
+    parserRunRefV2 : String
+    reconciliationDetectorRefV2 : String
+    reviewAlgorithmRefV2 : String
+    consumerScopeRefV2 : String
+
+    upstreamReconciliationComplete : Bool
+    upstreamReconciliationCompleteIsTrue :
+      upstreamReconciliationComplete ≡ true
+
+    upstreamCandidateOnly : Bool
+    upstreamCandidateOnlyIsTrue :
+      upstreamCandidateOnly ≡ true
+
+    upstreamCreatesSemanticAuthority : Bool
+    upstreamCreatesSemanticAuthorityIsFalse :
+      upstreamCreatesSemanticAuthority ≡ false
+
+    upstreamCreatesEntityIdentity : Bool
+    upstreamCreatesEntityIdentityIsFalse :
+      upstreamCreatesEntityIdentity ≡ false
+
+    upstreamCreatesPropositionIdentity : Bool
+    upstreamCreatesPropositionIdentityIsFalse :
+      upstreamCreatesPropositionIdentity ≡ false
+
+    upstreamCreatesEventIdentity : Bool
+    upstreamCreatesEventIdentityIsFalse :
+      upstreamCreatesEventIdentity ≡ false
+
+    upstreamCreatesClaimTruth : Bool
+    upstreamCreatesClaimTruthIsFalse :
+      upstreamCreatesClaimTruth ≡ false
+
+open ReviewProjectionUpstreamIdentity public
+
+record ExactReviewProjectionReuseV2 : Set where
+  constructor exact-review-projection-reuse-v2
+  field
+    upstreamIdentity : ReviewProjectionUpstreamIdentity
+    reviewItemRefsV2 : List String
+
+    persistedProjectionCompleteV2 : Bool
+    persistedProjectionCompleteV2IsTrue :
+      persistedProjectionCompleteV2 ≡ true
+
+    persistedItemsReopenedV2 : Bool
+    persistedItemsReopenedV2IsTrue :
+      persistedItemsReopenedV2 ≡ true
+
+    pressureRowsScannedOnReuse : Nat
+    pressureRowsScannedOnReuseZero :
+      pressureRowsScannedOnReuse ≡ 0
+
+    contestationRowsScannedOnReuse : Nat
+    contestationRowsScannedOnReuseZero :
+      contestationRowsScannedOnReuse ≡ 0
+
+    occurrenceRowsScannedOnReuse : Nat
+    occurrenceRowsScannedOnReuseZero :
+      occurrenceRowsScannedOnReuse ≡ 0
+
+    occurrenceLookupCountOnReuse : Nat
+    occurrenceLookupCountOnReuseZero :
+      occurrenceLookupCountOnReuse ≡ 0
+
+    createsReviewDecisionV2 : Bool
+    createsReviewDecisionV2IsFalse :
+      createsReviewDecisionV2 ≡ false
+
+    createsSemanticAdmissionV2 : Bool
+    createsSemanticAdmissionV2IsFalse :
+      createsSemanticAdmissionV2 ≡ false
+
+    createsSemanticAuthorityV2 : Bool
+    createsSemanticAuthorityV2IsFalse :
+      createsSemanticAuthorityV2 ≡ false
+
+    createsClaimTruthV2 : Bool
+    createsClaimTruthV2IsFalse :
+      createsClaimTruthV2 ≡ false
+
+open ExactReviewProjectionReuseV2 public
+
+data ReviewProjectionV2CacheMayIgnoreParserRun : Set where
+data ReviewProjectionV2CacheMayIgnoreReconciliationDetector : Set where
+data ReviewProjectionV2CacheMayIgnoreUpstreamCompletion : Set where
+data ReviewProjectionV2CacheMayIgnoreConsumerScope : Set where
+data ReviewProjectionV2ReuseMayRescanOccurrences : Set where
+
+reviewProjectionV2CacheMustTrackParserRun :
+  ReviewProjectionV2CacheMayIgnoreParserRun → ⊥
+reviewProjectionV2CacheMustTrackParserRun ()
+
+reviewProjectionV2CacheMustTrackReconciliationDetector :
+  ReviewProjectionV2CacheMayIgnoreReconciliationDetector → ⊥
+reviewProjectionV2CacheMustTrackReconciliationDetector ()
+
+reviewProjectionV2CacheRequiresCompletedUpstreamProduct :
+  ReviewProjectionV2CacheMayIgnoreUpstreamCompletion → ⊥
+reviewProjectionV2CacheRequiresCompletedUpstreamProduct ()
+
+reviewProjectionV2CacheMustTrackConsumerScope :
+  ReviewProjectionV2CacheMayIgnoreConsumerScope → ⊥
+reviewProjectionV2CacheMustTrackConsumerScope ()
+
+reviewProjectionV2ExactReuseDoesNotRescanOccurrences :
+  ReviewProjectionV2ReuseMayRescanOccurrences → ⊥
+reviewProjectionV2ExactReuseDoesNotRescanOccurrences ()
