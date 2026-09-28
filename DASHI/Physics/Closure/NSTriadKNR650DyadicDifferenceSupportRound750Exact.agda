@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNR650DyadicPairedProductionDifferenceRound748Exact as R748
+import DASHI.Physics.Closure.NSTriadKNR650CriticalProductionIncidenceCarrierRound744Exact as R744
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -118,8 +119,8 @@ pairedProductionTwoDifferenceZeroOnSameNonzeroShell
 differenceAlignedCellReducesToNestedWhenProductionZero :
   (nested production : ℚ) →
   production ≡ 0ℚ →
-  R748.R744.three * nested - production
-  ≡ R748.R744.three * nested
+  R744.three * nested - production
+  ≡ R744.three * nested
 differenceAlignedCellReducesToNestedWhenProductionZero
     nested production productionZero
   rewrite productionZero = solve []
