@@ -1080,3 +1080,43 @@ s4HistoryGammaUnitCapSameObjectStillRequiredIsTrue = refl
 s4PhysicalAnomalyHistoryNormalizationStillRequiredIsTrue :
   s4PhysicalAnomalyHistoryNormalizationStillRequired ≡ true
 s4PhysicalAnomalyHistoryNormalizationStillRequiredIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- SEPTEMBER-28 S4 COLLAPSE
+------------------------------------------------------------------------
+
+s4PhysicalThresholdNumericsClosed : Bool
+s4PhysicalThresholdNumericsClosed = true
+
+s4PhysicalThresholdNumericsClosedIsTrue :
+  s4PhysicalThresholdNumericsClosed ≡ true
+s4PhysicalThresholdNumericsClosedIsTrue = refl
+
+s4RowACapToHistoryUnitBoundCompilerClosed : Bool
+s4RowACapToHistoryUnitBoundCompilerClosed = true
+
+s4RowACapToHistoryUnitBoundCompilerClosedIsTrue :
+  s4RowACapToHistoryUnitBoundCompilerClosed ≡ true
+s4RowACapToHistoryUnitBoundCompilerClosedIsTrue = refl
+
+s4RepositoryCapIsCanonicalRowACapStillRequired : Bool
+s4RepositoryCapIsCanonicalRowACapStillRequired = true
+
+s4RepositoryCapIsCanonicalRowACapStillRequiredIsTrue :
+  s4RepositoryCapIsCanonicalRowACapStillRequired ≡ true
+s4RepositoryCapIsCanonicalRowACapStillRequiredIsTrue = refl
+
+s4SelectedAnomalyUsesMachinPiNormalizationStillRequired : Bool
+s4SelectedAnomalyUsesMachinPiNormalizationStillRequired = true
+
+s4SelectedAnomalyUsesMachinPiNormalizationStillRequiredIsTrue :
+  s4SelectedAnomalyUsesMachinPiNormalizationStillRequired ≡ true
+s4SelectedAnomalyUsesMachinPiNormalizationStillRequiredIsTrue = refl
+
+s4NewScalarInequalityAnalysisRequired : Bool
+s4NewScalarInequalityAnalysisRequired = false
+
+s4NewScalarInequalityAnalysisRequiredIsFalse :
+  s4NewScalarInequalityAnalysisRequired ≡ false
+s4NewScalarInequalityAnalysisRequiredIsFalse = refl
