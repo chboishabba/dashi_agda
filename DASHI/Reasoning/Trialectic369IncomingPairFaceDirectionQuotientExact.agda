@@ -26,7 +26,7 @@ module DASHI.Reasoning.Trialectic369IncomingPairFaceDirectionQuotientExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -145,7 +145,7 @@ faceSheetOrbit :
 faceSheetOrbit Face.faceCentre = centreOrbit
 faceSheetOrbit (Face.facePuncture puncture) =
   faceDirectionOrbit
-    (Data.Product.proj₁
+    (proj₁
       (Face.punctureToDirectionOrientation puncture))
 
 nineSheetFaceOrbit :
