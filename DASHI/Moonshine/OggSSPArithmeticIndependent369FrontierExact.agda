@@ -193,6 +193,10 @@ import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Ca
 import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact as CarnahanCompat
 import DASHI.Moonshine.OggSSPPBSourceGeometricLocalizationAuthorityExact as SourceGeom
 import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact as TerminalPB
+import DASHI.Moonshine.OggSSPPBTerminalLocalizationFactorizationExact as TerminalFactor
+import DASHI.Moonshine.OggSSPP3H3NodeBranchLocalizationObligationExact as P3Terminal
+import DASHI.Moonshine.OggSSPP2UranoInertiaSectorLocalizationObligationExact as P2Terminal
+import DASHI.Moonshine.OggSSPPBTerminalLocalizationPrimewiseGapExact as TerminalGap
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact as P3LocalWeight
 import DASHI.Moonshine.OggSSP2BIntegralTateTraceValuationAuditExact as TwoBTateAudit
 import DASHI.Moonshine.OggSSP3B6BIntegralTateTraceValuationAuditExact as ThreeBTateAudit
@@ -608,6 +612,11 @@ record ArithmeticIndependent369Frontier : Set where
     p3GreenSpeciesCarnahanH3CompatibilityPaid : Bool
     terminalPrimeLevelLocalizationCutsetPaid : Bool
     terminalPrimeLevelLocalizationAuthorityPaid : Bool
+    primewiseTerminalGapAnalysisPaid : Bool
+    p2TerminalLocalizationObligationCutsetPaid : Bool
+    p3TerminalLocalizationObligationCutsetPaid : Bool
+    sharedGreenRealizationCutsetPaid : Bool
+    threePaymentTerminalFactorizationPaid : Bool
     sourceGeometricAuthorityDerivedFromTerminalTheorem : Bool
     jointSourceGeometricLocalizationCutsetPaid : Bool
     jointSourceGeometricLocalizationAuthorityPaid : Bool
@@ -781,6 +790,11 @@ canonicalArithmeticIndependent369Frontier =
     ; p3GreenSpeciesCarnahanH3CompatibilityPaid = false
     ; terminalPrimeLevelLocalizationCutsetPaid = true
     ; terminalPrimeLevelLocalizationAuthorityPaid = false
+    ; primewiseTerminalGapAnalysisPaid = true
+    ; p2TerminalLocalizationObligationCutsetPaid = true
+    ; p3TerminalLocalizationObligationCutsetPaid = true
+    ; sharedGreenRealizationCutsetPaid = true
+    ; threePaymentTerminalFactorizationPaid = true
     ; sourceGeometricAuthorityDerivedFromTerminalTheorem = true
     ; jointSourceGeometricLocalizationCutsetPaid = true
     ; jointSourceGeometricLocalizationAuthorityPaid = false
