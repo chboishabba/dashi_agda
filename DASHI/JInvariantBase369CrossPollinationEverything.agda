@@ -1,3 +1,5 @@
+import DASHI.Moonshine.OggSSPP2SupersingularUniversalDeformationSourceExact
+import DASHI.Moonshine.OggSSPP2ArithmeticBidiDualCodecTransportExact
 import DASHI.Moonshine.OggSSPP2DualDependentCodecBidiExact
 import DASHI.Moonshine.OggSSPP2TrialecticNineCentreResidualBidiExact
 import DASHI.Moonshine.OggSSPP2TrialecticNineObserverArithmeticLossExact
