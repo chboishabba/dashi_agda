@@ -27,6 +27,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_⊔_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Data.Product using (Σ; _,_)
 import Data.Fin.Properties as FinP
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -409,6 +410,37 @@ cookIndexedRejectGuardCommutes payload =
       (canonicalCookRejectRootDecodes payload)
       (sym
         (indexedRejectGuardDecodesToCookRejectGadget payload)))
+
+------------------------------------------------------------------------
+-- Dependent root-view equality.  This is the clean same-object statement:
+-- arity and indexed syntax move together.
+------------------------------------------------------------------------
+
+indexedViewEquality :
+  ∀ {leftArity rightArity : Nat}
+    {left : SAT.BooleanFormula leftArity}
+    {right : SAT.BooleanFormula rightArity} →
+  (arityExact : leftArity ≡ rightArity) →
+  subst SAT.BooleanFormula arityExact left ≡ right →
+  (leftArity , left)
+  ≡
+  (rightArity , right)
+indexedViewEquality refl refl =
+  refl
+
+cookFormulaIndexedViewRejectGuardExact :
+  (payload : Cook.BooleanFormula) →
+  Bridge.cookFormulaIndexedView
+      (Universal.rejectWidthGadget payload)
+  ≡
+  ( suc (Bridge.formulaVariableBound payload)
+  , Guard.rejectGuardRoot
+      (Bridge.cookToIndexed payload)
+  )
+cookFormulaIndexedViewRejectGuardExact payload =
+  indexedViewEquality
+    (rejectWidthGadgetVariableBoundExact payload)
+    (cookIndexedRejectGuardCommutes payload)
 
 ------------------------------------------------------------------------
 -- Packaged representation theorem: the raw canonical root has the exact
