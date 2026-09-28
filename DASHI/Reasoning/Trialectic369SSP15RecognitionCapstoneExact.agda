@@ -45,6 +45,7 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact as Centered
 import DASHI.Reasoning.Trialectic369IncomingPairFaceDirectionQuotientExact as Incoming
 import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact as Outgoing
+import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact as OutCompiler
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
@@ -231,11 +232,45 @@ outgoingActualMonsterActionRecognitionStillOpen :
 outgoingActualMonsterActionRecognitionStillOpen = refl
 
 ------------------------------------------------------------------------
+-- 5c. Outgoing action-recognition wall reduced by compiler.
+------------------------------------------------------------------------
+
+outgoingActionRestrictionCompilerBoundary :
+  OutCompiler.Trialectic369OutgoingSheet9ActionRestrictionCompilerBoundary
+outgoingActionRestrictionCompilerBoundary =
+  OutCompiler.canonicalTrialectic369OutgoingSheet9ActionRestrictionCompilerBoundary
+
+outgoingSheetActionIsCompilerOutputGivenInvariantFine :
+  OutCompiler.sheetActionGeneratedByProjection
+    outgoingActionRestrictionCompilerBoundary
+  ≡ true
+outgoingSheetActionIsCompilerOutputGivenInvariantFine = refl
+
+outgoingRestrictionIsCompilerOutputGivenInvariantFine :
+  OutCompiler.oldRestrictionRecordGenerated
+    outgoingActionRestrictionCompilerBoundary
+  ≡ true
+outgoingRestrictionIsCompilerOutputGivenInvariantFine = refl
+
+outgoingStrongFibreIntertwiningIsCompilerOutput :
+  OutCompiler.strongSelectedFibreIntertwiningGenerated
+    outgoingActionRestrictionCompilerBoundary
+  ≡ true
+outgoingStrongFibreIntertwiningIsCompilerOutput = refl
+
+outgoingInvariantFineFibreRecognitionStillOpen :
+  OutCompiler.invariantFineFibreRecognizedHere
+    outgoingActionRestrictionCompilerBoundary
+  ≡ false
+outgoingInvariantFineFibreRecognitionStillOpen = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
 data IncomingAnalyticFrickeAuthority : Set where
-data OutgoingSheet9ActualMonsterActionRecognition : Set where
+data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
+data OutgoingInvariantFineFibreRecognition : Set where
 data OrderedRankIsIntrinsicModularInvariant : Set where
 data ResidualMayBeDiscarded : Set where
 
@@ -243,9 +278,13 @@ incomingAnalyticFrickeAuthorityStillOpenToken :
   IncomingAnalyticFrickeAuthority -> ⊥
 incomingAnalyticFrickeAuthorityStillOpenToken ()
 
-outgoingSheet9ActualMonsterActionRecognitionStillOpenToken :
-  OutgoingSheet9ActualMonsterActionRecognition -> ⊥
-outgoingSheet9ActualMonsterActionRecognitionStillOpenToken ()
+outgoingMultiplicityInertiaAttachmentStillOpenToken :
+  OutgoingMultiplicityInertiaAttachmentRecognition -> ⊥
+outgoingMultiplicityInertiaAttachmentStillOpenToken ()
+
+outgoingInvariantFineFibreRecognitionStillOpenToken :
+  OutgoingInvariantFineFibreRecognition -> ⊥
+outgoingInvariantFineFibreRecognitionStillOpenToken ()
 
 orderedRankNotPromotedToIntrinsicModularInvariant :
   OrderedRankIsIntrinsicModularInvariant -> ⊥
@@ -268,6 +307,8 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     incomingGeometricInversionAuthorityPaid : Bool
     incomingAnalyticFrickeAuthorityPaid : Bool
     outgoingSecondarySheetCarrierRecognitionPaid : Bool
+    outgoingActionRestrictionCompilerPaid : Bool
+    outgoingInvariantFineFibreRecognitionPaid : Bool
     outgoingActualMonsterActionRecognitionPaid : Bool
     orderedRankIntrinsicModularInvariant : Bool
     residualDiscarded : Bool
@@ -277,5 +318,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary :
 canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
   trialectic-369-ssp15-recognition-capstone-boundary
     true true true true true true true
-    true false true false
+    true false true true false false
     false false
