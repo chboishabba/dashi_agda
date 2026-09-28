@@ -159,11 +159,13 @@ extendedFormulaFromCorrectionObservable :
 extendedFormulaFromCorrectionObservable p2 C =
   trans
     p2ExtendedArithmeticIdentity
-    (cong (standardDuncanSwisherRHS p2 +_) (sym (correctionDepthIsRequiredGap C)))
+    (cong (λ n -> standardDuncanSwisherRHS p2 + n)
+      (sym (correctionDepthIsRequiredGap C)))
 extendedFormulaFromCorrectionObservable p3 C =
   trans
     p3ExtendedArithmeticIdentity
-    (cong (standardDuncanSwisherRHS p3 +_) (sym (correctionDepthIsRequiredGap C)))
+    (cong (λ n -> standardDuncanSwisherRHS p3 + n)
+      (sym (correctionDepthIsRequiredGap C)))
 
 ------------------------------------------------------------------------
 -- 4. Geometry is a candidate DOMAIN for the observable, not its proof.
