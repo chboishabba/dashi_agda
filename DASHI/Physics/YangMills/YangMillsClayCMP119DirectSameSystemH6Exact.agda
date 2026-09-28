@@ -25,6 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact as H2
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact as H2OS
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact as H3
@@ -118,7 +119,7 @@ record CMP119DirectSameSystemH6
     : Set₂ where
   private
     system =
-      DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact.continuumOSSystem
+      OSSystem.continuumOSSystem
         (H2.osInputs h2) group
 
     reconstruction =
@@ -130,24 +131,23 @@ record CMP119DirectSameSystemH6
 
   field
     localPackageFromC :
+      CanonicalC.Goal1CanonicalCSource Y →
       Local.SameFamilyOPEStressWardGaussianKernel
         ContinuumFamily CurvaturePolynomial LocalOperator Position
         OPECoefficient StressTensor Hamiltonian
         (Configuration → ℝ) Position ℝ
         system
 
-    localPackageUsesExactC :
-      Local.localPackage localPackageFromC
-      ≡
-      Local.localPackage localPackageFromC
-
     gapOrder : Free.GapOrder
 
     gaussianMaxwellPhysicalSector :
-      (gaussian : Local.Gaussian localPackageFromC system) →
+      let localPackage =
+            localPackageFromC (DirectC.asGoal1CanonicalCSource cSource)
+      in
+      (gaussian : Local.Gaussian localPackage system) →
       Ward.GenericMaxwellQuadraticKernelClassification
-        (Local.coefficientAlgebra localPackageFromC)
-        (Local.gaussianLocalTwoDerivativeWardKernel localPackageFromC gaussian) →
+        (Local.coefficientAlgebra localPackage)
+        (Local.gaussianLocalTwoDerivativeWardKernel localPackage gaussian) →
       Disp.GaplessGaugeInvariantPhysicalSector gapOrder
 
     PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
@@ -158,24 +158,30 @@ record CMP119DirectSameSystemH6
       PhysicalPositiveGap (OS.hamiltonian reconstruction)
 
     gapRestrictsToSamePhysicalSector :
-      (gaussian : Local.Gaussian localPackageFromC system) →
+      let localPackage =
+            localPackageFromC (DirectC.asGoal1CanonicalCSource cSource)
+      in
+      (gaussian : Local.Gaussian localPackage system) →
       (classification :
         Ward.GenericMaxwellQuadraticKernelClassification
-          (Local.coefficientAlgebra localPackageFromC)
+          (Local.coefficientAlgebra localPackage)
           (Local.gaussianLocalTwoDerivativeWardKernel
-            localPackageFromC gaussian)) →
+            localPackage gaussian)) →
       PhysicalPositiveGap (OS.hamiltonian reconstruction) →
       Free.PositiveSpectralGap
         (Disp.gaugeInvariantPhysicalSectorGivesGaplessApproximation
           (gaussianMaxwellPhysicalSector gaussian classification))
 
     spectralGapContradictionIsAbsurd :
-      (gaussian : Local.Gaussian localPackageFromC system) →
+      let localPackage =
+            localPackageFromC (DirectC.asGoal1CanonicalCSource cSource)
+      in
+      (gaussian : Local.Gaussian localPackage system) →
       (classification :
         Ward.GenericMaxwellQuadraticKernelClassification
-          (Local.coefficientAlgebra localPackageFromC)
+          (Local.coefficientAlgebra localPackage)
           (Local.gaussianLocalTwoDerivativeWardKernel
-            localPackageFromC gaussian)) →
+            localPackage gaussian)) →
       let sector = gaussianMaxwellPhysicalSector gaussian classification
           gapData = gapRestrictsToSamePhysicalSector
             gaussian classification
@@ -184,6 +190,30 @@ record CMP119DirectSameSystemH6
       Free.SpectralContradiction gapData → ⊥
 
 open CMP119DirectSameSystemH6 public
+
+exactLocalPackage :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable ContinuumFamily
+      sequenceLimit limitLaws quotient division S Y h2 covarianceLaws group
+      source application h3 positive cSource} →
+  CMP119DirectSameSystemH6
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+    EuclideanAction Permutation Epsilon Witness
+    Scale Volume Root SourceDirection SpectralObservable ContinuumFamily
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S Y h2 covarianceLaws group source
+    application h3 positive cSource →
+  Local.SameFamilyOPEStressWardGaussianKernel
+    ContinuumFamily CurvaturePolynomial LocalOperator Position
+    OPECoefficient StressTensor Hamiltonian
+    (Configuration → ℝ) Position ℝ
+    (OSSystem.continuumOSSystem (H2.osInputs h2) group)
+exactLocalPackage {cSource = cSource} h6 =
+  localPackageFromC h6
+    (DirectC.asGoal1CanonicalCSource cSource)
 
 h3GapCertificateUsesExactH2Hamiltonian :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -225,7 +255,7 @@ asRound77Bridge :
         limitLaws quotient division S Y h2 covarianceLaws group source
         application h3 positive cSource) →
   R77.StandardGaussianMaxwellSameHGapBridge
-    (localPackageFromC h6)
+    (exactLocalPackage h6)
 asRound77Bridge
     {h2 = h2} {group = group} {h3 = h3} {positive = positive}
     h6 = record
@@ -265,11 +295,11 @@ interactingWitness :
         application h3 positive cSource) →
   OS.InteractingContinuumWitness
     (Configuration → ℝ) Position ℝ
-    (DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact.continuumOSSystem
+    (OSSystem.continuumOSSystem
       (H2.osInputs h2) group)
 interactingWitness h6 =
   R77.round77InteractingWitnessFromLocalAndGap
-    (localPackageFromC h6)
+    (exactLocalPackage h6)
     (asRound77Bridge h6)
 
 cmp119DirectH6CompilerLevel : ProofLevel
