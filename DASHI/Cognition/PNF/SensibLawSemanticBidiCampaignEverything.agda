@@ -43,6 +43,7 @@ import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyExact as CommitEconomy
 import DASHI.Cognition.PNF.SensibLawDbNativeCommitEconomyRegression as CommitEconomyRegression
 import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyExact as ReviewProjectionEconomy
 import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyRegression as ReviewProjectionEconomyRegression
+import DASHI.Cognition.PNF.SensibLawScale1ExactReplayEconomyReceipt as Scale1ReplayEconomy
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -797,3 +798,36 @@ reviewProjectionFixtureReopensWithoutRecompute :
     ReviewProjectionEconomyRegression.fixtureExactReviewProjectionReuse
   ≡ false
 reviewProjectionFixtureReopensWithoutRecompute = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P literal exact-replay receipt remains empirical and non-semantic.
+------------------------------------------------------------------------
+
+scale1ExactReplayHasNoFreshParserMeasurement :
+  Scale1ReplayEconomy.parserMeasuredThisRun
+    Scale1ReplayEconomy.gwbExactReplay20260928
+  ≡ false
+scale1ExactReplayHasNoFreshParserMeasurement = refl
+
+scale1ExactReplayDoesNotCertifyParserDominance :
+  Scale1ReplayEconomy.ExactReplayCertifiesFreshParserDominance → ⊥
+scale1ExactReplayDoesNotCertifyParserDominance =
+  Scale1ReplayEconomy.exactReplayCannotCertifyFreshParserDominance
+
+scale1ExactReplayDoesNotPromoteTruth :
+  Scale1ReplayEconomy.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+scale1ExactReplayDoesNotPromoteTruth =
+  Scale1ReplayEconomy.replayEconomyReceiptDoesNotPromoteSemanticTruth
+
+scale1ExactReplayCandidateCommitsAreZero :
+  Scale1ReplayEconomy.candidateCommitCount
+    Scale1ReplayEconomy.gwbExactReplay20260928
+  ≡ 0
+scale1ExactReplayCandidateCommitsAreZero = refl
+
+scale1ExactReplayCandidateReopensAreZero :
+  Scale1ReplayEconomy.candidatePostcommitReopenQueries
+    Scale1ReplayEconomy.gwbExactReplay20260928
+  ≡ 0
+scale1ExactReplayCandidateReopensAreZero = refl
