@@ -382,3 +382,5 @@ import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExac
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExact
 
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact
+
+import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact
