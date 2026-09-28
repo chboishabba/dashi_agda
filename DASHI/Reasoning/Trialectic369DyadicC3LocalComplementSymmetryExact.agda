@@ -127,9 +127,9 @@ record BCComplement5 : Set where
   field
     ba : SSP.SSPTrit
     ca : SSP.SSPTrit
-    aa : SSP.SSPTrit
     ab : SSP.SSPTrit
     ac : SSP.SSPTrit
+    aa : SSP.SSPTrit
 
 open BCComplement5 public
 
@@ -140,18 +140,18 @@ observerBCComplement matrix =
   bc-complement5
     (Observer.bA matrix)
     (Observer.cA matrix)
-    (Observer.aA matrix)
     (Observer.aB matrix)
     (Observer.aC matrix)
+    (Observer.aA matrix)
 
 record CAComplement5 : Set where
   constructor ca-complement5
   field
     cb : SSP.SSPTrit
     ab : SSP.SSPTrit
-    bb : SSP.SSPTrit
     bc : SSP.SSPTrit
     ba : SSP.SSPTrit
+    bb : SSP.SSPTrit
 
 open CAComplement5 public
 
@@ -162,9 +162,9 @@ observerCAComplement matrix =
   ca-complement5
     (Observer.cB matrix)
     (Observer.aB matrix)
-    (Observer.bB matrix)
     (Observer.bC matrix)
     (Observer.bA matrix)
+    (Observer.bB matrix)
 
 record BCLocalComplementPoint : Set where
   constructor bc-local-complement-point
@@ -188,7 +188,7 @@ bcLocalComplementToObserver :
 bcLocalComplementToObserver
   (bc-local-complement-point
     (Descent.bc-section bb bc cb cc)
-    (bc-complement5 ba ca aa ab ac)) =
+    (bc-complement5 ba ca ab ac aa)) =
   Observer.observerMatrix3
     aa ab ac
     ba bb bc
@@ -211,7 +211,7 @@ bcLocalComplementObserverRoundTrip :
 bcLocalComplementObserverRoundTrip
   (bc-local-complement-point
     (Descent.bc-section bb bc cb cc)
-    (bc-complement5 ba ca aa ab ac)) = refl
+    (bc-complement5 ba ca ab ac aa)) = refl
 
 record CALocalComplementPoint : Set where
   constructor ca-local-complement-point
@@ -235,7 +235,7 @@ caLocalComplementToObserver :
 caLocalComplementToObserver
   (ca-local-complement-point
     (Descent.ca-section cc ca ac aa)
-    (ca-complement5 cb ab bb bc ba)) =
+    (ca-complement5 cb ab bc ba bb)) =
   Observer.observerMatrix3
     aa ab ac
     ba bb bc
@@ -258,7 +258,7 @@ caLocalComplementObserverRoundTrip :
 caLocalComplementObserverRoundTrip
   (ca-local-complement-point
     (Descent.ca-section cc ca ac aa)
-    (ca-complement5 cb ab bb bc ba)) = refl
+    (ca-complement5 cb ab bc ba bb)) = refl
 
 ------------------------------------------------------------------------
 -- 4. C3 identifies the complements as well.
@@ -269,16 +269,16 @@ caLocalComplementObserverRoundTrip
 bcComplementAsABComplement :
   BCComplement5 -> Factor.ABComplement5
 bcComplementAsABComplement
-  (bc-complement5 ba ca aa ab ac) =
+  (bc-complement5 ba ca ab ac aa) =
   Factor.ab-complement5
-    ba ca aa ab ac
+    ba ca ab ac aa
 
 caComplementAsABComplement :
   CAComplement5 -> Factor.ABComplement5
 caComplementAsABComplement
-  (ca-complement5 cb ab bb bc ba) =
+  (ca-complement5 cb ab bc ba bb) =
   Factor.ab-complement5
-    cb ab bb bc ba
+    cb ab bc ba bb
 
 abComplementAfterRotateIsBCComplement :
   (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
