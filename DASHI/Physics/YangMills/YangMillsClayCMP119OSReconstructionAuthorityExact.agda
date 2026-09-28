@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact
 ------------------------------------------------------------------------
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as Pinned
@@ -37,15 +38,15 @@ asOSReconstructionAuthority :
         osInputs)
     (group : G) →
   OS.OSReconstructionAuthority
-    (Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ)
+    (Configuration → ℝ)
     Position
-    DASHI.Foundations.RealAnalysisAxioms.ℝ
+    ℝ
     (OSSystem.continuumOSSystem osInputs group)
 asOSReconstructionAuthority pinned group = record
-  { OS.OSReconstructionAuthority.HilbertSpace = _
-  ; OS.OSReconstructionAuthority.Hamiltonian = _
-  ; OS.OSReconstructionAuthority.Vacuum = _
-  ; OS.OSReconstructionAuthority.WightmanTheory = _
+  { OS.OSReconstructionAuthority.HilbertSpace = Hilbert
+  ; OS.OSReconstructionAuthority.Hamiltonian = Hamiltonian
+  ; OS.OSReconstructionAuthority.Vacuum = Vector
+  ; OS.OSReconstructionAuthority.WightmanTheory = Algebra
   ; OS.OSReconstructionAuthority.hilbertSpace =
       OSR.reconstructedHilbertSpace (Pinned.reconstruction pinned group)
   ; OS.OSReconstructionAuthority.hamiltonian =
