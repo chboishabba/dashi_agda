@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; ≤ℝ-trans)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -169,21 +169,12 @@ selectedContinuumCovarianceBelowSpectrumEnvelope
       h1Bound
 
     calibrated =
-      RealH1.RealUpperClosedLimit.upperClosed
-        (RealH1.orderLimit h1)
-        (λ _ → RealH1.physicalUpper h1 index)
-        (RealH1.physicalUpper h1 index)
-        (R281.clusteringEnvelope spectrum observable time)
-        (RealLimit.constantConverges
-          (RealH1.orderLimit h1)
-          (RealH1.physicalUpper h1 index))
-        (λ _ → physicalUpperBelowSpectrumEnvelope application observable time)
+      physicalUpperBelowSpectrumEnvelope application observable time
   in
   realOrderImpliesSpectrumOrder application
     _
     _
-    (DASHI.Foundations.RealAnalysisAxioms.≤ℝ-trans
-      selectedBound calibrated)
+    (≤ℝ-trans selectedBound calibrated)
 
 selectedSubgapModeClusteringUpper :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
