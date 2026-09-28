@@ -99,8 +99,8 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * Aricheta proves the supersingular-level <-> Monster-centralizer Fricke
 --     bridge only for p not dividing N and explicitly leaves p|N open;
 --   * our 2B/3B lanes are exactly the excluded diagonal N=p=2,3;
---   * inhabit SOTAMonsterLocalBridgeAuthority, now requiring a bad-level
---     Aricheta centralizer extension (strictly stronger than the older
+--   * inhabit SOTAMonsterLocalBridgeAuthority, now requiring ONE same-object
+--     Aricheta x Igusa bad-level extension (strictly stronger than the older
 --     SOTATerminalFourthTermAuthority);
 --   * p=2 must restore full five-sector information AND retain tangent/character
 --     data: centralizer depth alone provably cannot determine the inertia-RR
@@ -178,6 +178,7 @@ import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact as 
 import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExact as GMBridge
 import DASHI.Moonshine.OggSSPSmallCharacteristicSOTAMonsterLocalBridgeCutsetExact as SOTALocalBridge
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as ArichetaBadLevel
+import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as ArichetaIgusa
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -251,6 +252,11 @@ arichetaBadLevelBoundary :
   ArichetaBadLevel.ArichetaBadLevelDiagonalBoundary
 arichetaBadLevelBoundary =
   ArichetaBadLevel.canonicalArichetaBadLevelDiagonalBoundary
+
+arichetaIgusaBadLevelBoundary :
+  ArichetaIgusa.ArichetaIgusaBadLevelExtensionBoundary
+arichetaIgusaBadLevelBoundary =
+  ArichetaIgusa.canonicalArichetaIgusaBadLevelExtensionBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
