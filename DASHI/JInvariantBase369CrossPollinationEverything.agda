@@ -490,3 +490,9 @@ import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact
 import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact
 
 import DASHI.Moonshine.OggSSPPBScalarLocalizationReductionExact
+
+import DASHI.Moonshine.OggSSPP3TateSimpleFactorLengthOneExact
+
+import DASHI.Moonshine.OggSSPP2FourARestrictionScalarDepthNoGoExact
+
+import DASHI.Moonshine.OggSSPPBScalarLocalizationP2OnlyFrontierExact
