@@ -103,15 +103,16 @@ module GlobalSeparatedBaseCommutator
   globalSeparatedCommutatorWork =
     sumOutputCommutatorWork (Cube.cutoffModes cutoff)
 
+  outputBaseTarget : Z3.FourierMode → ℚ
+  outputBaseTarget output with Output.modeEqual output Z3.zeroMode
+  ... | true = 0ℚ
+  ... | false = Id.rawSeparatedBaseFold output
+
   actualRowAtOutput :
     (output : Z3.FourierMode) →
     R38.foldPower Sep.maskedPairedBaseRow
       (Output.physicalOutputFiber cutoff output)
-    ≡
-    (case Output.modeEqual output Z3.zeroMode of λ
-      { true → 0ℚ
-      ; false → Id.rawSeparatedBaseFold output
-      })
+    ≡ outputBaseTarget output
   actualRowAtOutput output
     with Output.modeEqual output Z3.zeroMode in outputZero
   ... | true =
