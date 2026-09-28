@@ -38,7 +38,8 @@ module DASHI.Physics.Closure.NSTriadKNR650SeparatedQuotientR230BalanceRound801Ex
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _/_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -58,14 +59,16 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exac
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedQuotientBalanceWallRound797Exact as R797
+import DASHI.Physics.Closure.NSTriadKNR650SeparatedPairedBaseCommutatorRound799Exact as R799
 import DASHI.Physics.Closure.NSTriadKNR650SeparatedBaseGlobalCommutatorRound800Exact as R800
 
 F : C3.RealField _
 F = Rational.rationalRealField
 
-thirtySix seventyTwo : ℚ
+thirtySix seventyTwo oneHalf : ℚ
 thirtySix = 36
 seventyTwo = 72
+oneHalf = + 1 / 2
 
 module SeparatedR230Balance
     (Time : Set)
@@ -132,9 +135,9 @@ module SeparatedR230Balance
     module PhysicalId =
       R800.GlobalSeparatedBaseCommutator
         Live.P.Base.Base.NestedAt.physicalSystem
-        P.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.S
-        P.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.L
-        P.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.H
+        Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.S
+        Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.L
+        Wall.Prev.Prev.Residual.Average.Three.Two.Paired.Local.O.Combined.Nested.H
         Live.P.Base.Base.NestedAt.allModeTransverse
 
     Dsep : ℚ
@@ -154,7 +157,7 @@ module SeparatedR230Balance
     baseFoldSameObject = refl
 
     baseFoldIsEightR230Work :
-      Bsep ≡ R800.R799.eight * Csep
+      Bsep ≡ R799.eight * Csep
     baseFoldIsEightR230Work =
       trans
         baseFoldSameObject
@@ -171,7 +174,7 @@ module SeparatedR230Balance
             baseFoldIsEightR230Work)
           (solve
             ( W.nine
-            ∷ R800.R799.eight
+            ∷ R799.eight
             ∷ seventyTwo
             ∷ Csep
             ∷ Fold.two
@@ -208,31 +211,42 @@ module SeparatedR230Balance
       Qsep ≡ thirtySix * Csep
     separatedCancellationImpliesR230Balance cancelled =
       let
-        equation :
-          Fold.two * (thirtySix * Csep - Qsep) ≡ 0ℚ
-        equation =
-          trans
-            (sym separatedR230FactorTwoNormalForm)
-            cancelled
+        oldBalance :
+          Fold.two * Qsep ≡ W.nine * Bsep
+        oldBalance =
+          W.separatedCancellationImpliesQuotientBalance cancelled
 
-        normalized :
-          thirtySix * Csep - Qsep ≡ 0ℚ
-        normalized =
+        expanded :
+          Fold.two * Qsep
+          ≡ W.nine * (R799.eight * Csep)
+        expanded =
+          trans
+            oldBalance
+            (cong (W.nine *_) baseFoldIsEightR230Work)
+
+        scaled =
+          cong (oneHalf *_) expanded
+
+        leftMeaning :
+          oneHalf * (Fold.two * Qsep) ≡ Qsep
+        leftMeaning =
+          solve (Fold.two ∷ oneHalf ∷ Qsep ∷ [])
+
+        rightMeaning :
+          oneHalf * (W.nine * (R799.eight * Csep))
+          ≡ thirtySix * Csep
+        rightMeaning =
           solve
-            ( Fold.two
+            ( oneHalf
+            ∷ W.nine
+            ∷ R799.eight
             ∷ thirtySix
             ∷ Csep
-            ∷ Qsep
-            ∷ equation
             ∷ [])
-
-        moved =
-          cong (_+ Qsep) normalized
       in
-      sym
-        (trans
-          (sym (solve (thirtySix ∷ Csep ∷ Qsep ∷ [])))
-          (trans moved (solve (Qsep ∷ []))))
+      trans
+        (sym leftMeaning)
+        (trans scaled rightMeaning)
 
 ------------------------------------------------------------------------
 -- Status.
