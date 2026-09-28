@@ -72,7 +72,7 @@ embeddedSourceInverseCancelsCouplingSquare
     (subst
       (λ selected →
         Bishop._≃_ (UV.embed selected) Bishop.1ℝ)
-      sourceLaw
+      (sym sourceLaw)
       Embed.embedOne)
 
 record P3InitialInverseSquareUsesHistoryCoupling
