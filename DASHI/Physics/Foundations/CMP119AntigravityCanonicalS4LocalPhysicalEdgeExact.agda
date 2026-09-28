@@ -12,7 +12,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionEx
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowABetaDrivenStateExact as RowAState
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConstructorExact as Constructor
-import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralEdgeIncrementFromRichExact as Edge
+import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralEdgeIncrementMinCutExact as Edge
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteRecurrenceSameObjectExact as Local
 import DASHI.Physics.Foundations.CMP119AntigravityP3SourceRecurrenceUniquenessExact as Recurrence
 import DASHI.Physics.Foundations.CMP119AntigravityP3StateForcesSourceIncrementExact as State
@@ -63,11 +63,22 @@ record CanonicalS4LocalPhysicalEdgeInputs
 
     rich : Rich.LiteralBrillouinIntegralPhysicalData Nat Bishop.ℝ
 
-    edgePhysics :
-      Edge.CanonicalP3LiteralEdgeIncrementInputs
+    edgeGeometry :
+      Edge.CanonicalP3LiteralEdgeGeometry
         (Constructor.asPhysicalRunningCouplingData coefficientWeld)
         rich
         bishopRunning
+
+    p3RemainderIsLocalPhysicalRemainder :
+      ∀ depth →
+      Bishop._≃_
+        (P3.remainder (SU2.recursion bishopRunning) (Agda.Builtin.Nat.suc depth))
+        (Rich.add rich
+          (Rich.regularRemainder rich depth)
+          (UV.embed
+            (DASHI.Physics.YangMills.BalabanYM4LiteralPlaquetteBetaEstimateExact.literalBetaInt
+              (Constructor.asPhysicalRunningCouplingData coefficientWeld)
+              depth)))
 
     p3AddIsBishopAdd :
       ∀ left right →
@@ -107,7 +118,11 @@ asLocalP3LiteralRecurrence package = record
   ; Local.P3LiteralPlaquetteRecurrenceSameObject.sameUVAnchorAsLiteralNext =
       sameUVAnchorAsLiteralNext package
   ; Local.P3LiteralPlaquetteRecurrenceSameObject.successorTotalIncrementSameLiteral =
-      Edge.successorTotalIncrementSameLiteral (edgePhysics package)
+      λ depth →
+        Edge.remainderImpliesTotalIncrement
+          (edgeGeometry package)
+          depth
+          (p3RemainderIsLocalPhysicalRemainder package depth)
   }
 
 sourceRecurrenceSameObject :
