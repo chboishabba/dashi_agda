@@ -25,7 +25,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateFirstStepProgressStreng
 -- candidate/self-code realization, not merely CandidateInitialRootBuilder.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (nothing)
 
