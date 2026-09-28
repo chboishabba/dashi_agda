@@ -353,8 +353,8 @@ normalizedLengthDirectSum A left right =
         (speciesValueIsNormalizedDVRLength A right)))
 
 p2CombinedLocalizedClass :
-  PBGreenRingSectorSpeciesAuthority ->
-  ModuleClass ∘ species
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  ModuleClass (species A)
 p2CombinedLocalizedClass A =
   directSum (species A)
     (p2SectorClass A P2Inertia.identityInertiaOrbit)
@@ -367,8 +367,8 @@ p2CombinedLocalizedClass A =
           (p2SectorClass A P2Inertia.orderSixPairInertiaOrbit))))
 
 p3CombinedLocalizedClass :
-  PBGreenRingSectorSpeciesAuthority ->
-  ModuleClass ∘ species
+  (A : PBGreenRingSectorSpeciesAuthority) ->
+  ModuleClass (species A)
 p3CombinedLocalizedClass A =
   directSum (species A)
     (p3SectorClass A P3.nodeOrbit)
