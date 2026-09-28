@@ -81,3 +81,22 @@ asCanonicalPhysicalDecay
         (Embed.orderPreserving embedding
           (R450.selectedHalfDecayBelowEuclideanTime physical))
   }
+
+
+asCanonicalPhysicalDecayFromObservableDistance :
+  ∀ {Measure Observable dataSet extension base data embedding geometry}
+    (source :
+      ResidualDyadicSourceCalibration
+        {Measure = Measure}
+        {Observable = Observable}
+        {dataSet = dataSet}
+        {extension = extension}
+        {base = base}
+        {data = data}
+        embedding geometry) →
+  R450.CanonicalObservableToGraphSeparation data →
+  R451.CanonicalPhysicalDecayCalibration geometry
+asCanonicalPhysicalDecayFromObservableDistance source separation =
+  asCanonicalPhysicalDecay
+    source
+    (R450.physicalSeparationFromObservableDistance separation)
