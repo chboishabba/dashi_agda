@@ -377,6 +377,7 @@ globalPositiveProgressBlockedByHighWidthFormula :
     Width.triple total →
   ⊥
 globalPositiveProgressBlockedByHighWidthFormula
+    {total = total}
     {remaining = remaining}
     system
     formula
@@ -388,7 +389,7 @@ globalPositiveProgressBlockedByHighWidthFormula
     measureBelowWidth
   where
     forcedWidthBelowMeasure :
-      Width.triple _
+      Width.triple total
       <
       Q2.recursiveMeasure
         (arbitraryFormulaState formula)
