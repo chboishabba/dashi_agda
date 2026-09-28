@@ -15,9 +15,11 @@ import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConst
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteModePlaquetteBetaSameObjectExact as FinitePlaquette
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralPlaquetteCMP109SameObjectExact as P3Literal
 import DASHI.Physics.Foundations.CMP119AntigravityP3RichBrillouinLiteralPlaquetteExact as P3Rich
+import DASHI.Physics.Foundations.CMP119AntigravityP3StateForcesSourceIncrementExact as State
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinFiniteModeGaussianProjectionExact as RichFinite
 import DASHI.Physics.Foundations.CMP119AntigravityRichBrillouinRationalGaussianProjectionExact as Projection
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
+import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.BalabanYM4BetaSplitPositivityExact as Split
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as FiniteMode
@@ -141,7 +143,7 @@ gaussianProjection :
 gaussianProjection {sameObject = sameObject} package =
   RichFinite.asRichBrillouinRationalGaussianProjection sameObject
 
-asCanonicalRichBridge :
+asP3SourceState :
   ∀ {trajectory split Mode Atom finiteMode oneLoop remainder rich
       sameObject inputs rowA smallFieldCap largeFieldCap covarianceCap}
     (package : CanonicalS4RichFiniteModeInputs
@@ -150,27 +152,22 @@ asCanonicalRichBridge :
       {finiteMode = finiteMode} {oneLoop = oneLoop}
       {remainder = remainder} {rich = rich}
       sameObject inputs rowA smallFieldCap largeFieldCap covarianceCap) →
-  P3Rich.CanonicalRunningRichLiteralPlaquette
-    (dataSet sameObject) rich (bishopRunning package)
-asCanonicalRichBridge {sameObject = sameObject} package = record
-  { P3Rich.CanonicalRunningRichLiteralPlaquette.richNormalization =
-      richNormalization package
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.addIsBishopAdd =
-      addIsBishopAdd package
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.richAddIsBishopAdd =
-      richAddIsBishopAdd package
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.inverseCouplingSameLiteral =
-      inverseCouplingSameLiteral package
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.nextScaleIsUVPredecessor =
+  State.P3StateRepresentsSourceUV trajectory
+    (SU2.recursion (bishopRunning package))
+asP3SourceState {sameObject = sameObject} package = record
+  { State.P3StateRepresentsSourceUV.addIsBishopAdd = addIsBishopAdd package
+  ; State.P3StateRepresentsSourceUV.inverseCouplingSame =
+      λ depth →
+        Bishop.RealProperties.≃-trans
+          (inverseCouplingSameLiteral package depth)
+          (State.equalityAsBishopSetoid
+            (LiteralToSource.nextAtStepIsSourceCurrent
+              (Constructor.asLiteralPlaquetteCMP109UVSameObject
+                (coefficientWeld sameObject))
+              depth))
+  ; State.P3StateRepresentsSourceUV.nextScaleIsUVPredecessor =
       nextScaleIsUVPredecessor package
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.zeroTotalIncrementSame =
-      zeroTotalIncrementSame package
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.gaussianProjection =
-      RichFinite.asRichBrillouinRationalGaussianProjection sameObject
-  ; P3Rich.CanonicalRunningRichLiteralPlaquette.p3RemainderSameRichRegularPlusLiteralInteraction =
-      p3RemainderSameRichRegularPlusLiteralInteraction package
   }
-
 asCanonicalS4SameObjectPackage :
   ∀ {trajectory split Mode Atom finiteMode oneLoop remainder rich
       sameObject inputs rowA smallFieldCap largeFieldCap covarianceCap}
@@ -187,11 +184,7 @@ asCanonicalS4SameObjectPackage {sameObject = sameObject} package = record
   { S4.CanonicalS4SameObjectPackage.betaCoordinates = betaCoordinates package
   ; S4.CanonicalS4SameObjectPackage.bishopRunning = bishopRunning package
   ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
-      P3Literal.p3LiteralPlaquetteThenCMP109
-        (P3Rich.canonicalRunningAsLiteralTotal
-          (asCanonicalRichBridge package))
-        (Constructor.asLiteralPlaquetteCMP109UVSameObject
-          (coefficientWeld sameObject))
+      State.asP3RepresentsSourceUVView (asP3SourceState package)
   ; S4.CanonicalS4SameObjectPackage.traceBoundary = traceBoundary package
   }
 
@@ -200,6 +193,12 @@ independentGaussianProjectionRequired = Agda.Builtin.Bool.false
 
 independentLiteralCMP109WeldRequired : Agda.Builtin.Bool.Bool
 independentLiteralCMP109WeldRequired = Agda.Builtin.Bool.false
+
+independentP3RemainderWitnessRequired : Agda.Builtin.Bool.Bool
+independentP3RemainderWitnessRequired = Agda.Builtin.Bool.false
+
+richGaussianSplitRequiredForS4History : Agda.Builtin.Bool.Bool
+richGaussianSplitRequiredForS4History = Agda.Builtin.Bool.false
 
 p3GaussianEqualsFullBetaZRequired : Agda.Builtin.Bool.Bool
 p3GaussianEqualsFullBetaZRequired = Agda.Builtin.Bool.false
