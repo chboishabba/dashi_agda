@@ -27,6 +27,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
