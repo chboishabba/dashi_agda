@@ -172,7 +172,7 @@ module QShift
           (orderedPairPowerSwapInvariant velocity beta)
     in
     trans
-      (cong (λ selected → Z + selected + Z2) pAfterQPower)
+      (sym (cong (λ selected → Z + selected + Z2) pAfterQPower))
       raw
 
   YEliminated : Y ≡ - (X + Z)
