@@ -33,8 +33,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s; ∣_-_∣)
 import Data.Nat.Properties as Nat
+open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -51,7 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNR650HHOrbitProfileRound777Exact as R777
 
 distanceOneLeftUpper :
   ∀ {left right : Nat} →
-  Data.Nat.Base.∣ left - right ∣ ≤ 1 →
+  ∣ left - right ∣ ≤ 1 →
   left ≤ suc right
 distanceOneLeftUpper {zero} {right} proof = z≤n
 distanceOneLeftUpper {suc left} {zero} proof = proof
@@ -60,7 +61,7 @@ distanceOneLeftUpper {suc left} {suc right} proof =
 
 distanceOneRightUpper :
   ∀ {left right : Nat} →
-  Data.Nat.Base.∣ left - right ∣ ≤ 1 →
+  ∣ left - right ∣ ≤ 1 →
   right ≤ suc left
 distanceOneRightUpper {left} {zero} proof = z≤n
 distanceOneRightUpper {zero} {suc right} proof = proof
@@ -69,7 +70,7 @@ distanceOneRightUpper {suc left} {suc right} proof =
 
 gapThreeFalseFromDistanceOneLeft :
   ∀ {left right : Nat} →
-  Data.Nat.Base.∣ left - right ∣ ≤ 1 →
+  ∣ left - right ∣ ≤ 1 →
   Near.natLess (left + 3) right ≡ false
 gapThreeFalseFromDistanceOneLeft {left} {right} close
   with Near.natLess (left + 3) right in gap
@@ -82,7 +83,7 @@ gapThreeFalseFromDistanceOneLeft {left} {right} close
 
 gapThreeFalseFromDistanceOneRight :
   ∀ {left right : Nat} →
-  Data.Nat.Base.∣ left - right ∣ ≤ 1 →
+  ∣ left - right ∣ ≤ 1 →
   Near.natLess (right + 3) left ≡ false
 gapThreeFalseFromDistanceOneRight {left} {right} close
   with Near.natLess (right + 3) left in gap
@@ -144,7 +145,7 @@ lhPInteriorIsHighHigh {beta} certificate interior
     (Scale.highHighCondition notKBelowQ notQBelowK pBelowK pBelowQ′)
   where
   close :
-    Data.Nat.Base.∣
+    ∣
       Shell.shellIndex (Physical.k beta)
       - Shell.shellIndex (Physical.q beta) ∣ ≤ 1
   close = R25.lowHighOutputTracksHighOne certificate
@@ -268,10 +269,10 @@ lhPBoundaryIsComparable {beta} certificate boundary
 ... | Scale.lowHighCondition pBelowQ =
   R129.scaleConditionForcesComputedRegime
     (Scale.comparableCondition notKBelowQ notQBelowK
-      (Data.Sum.Base.inj₁ pNotBelowK))
+      (inj₁ pNotBelowK))
   where
   close :
-    Data.Nat.Base.∣
+    ∣
       Shell.shellIndex (Physical.k beta)
       - Shell.shellIndex (Physical.q beta) ∣ ≤ 1
   close = R25.lowHighOutputTracksHighOne certificate
@@ -328,7 +329,7 @@ lhQBoundaryIsComparable {beta} certificate boundary
 ... | Scale.lowHighCondition pBelowQ =
   R129.scaleConditionForcesComputedRegime
     (Scale.comparableCondition notKBelowP boundary′
-      (Data.Sum.Base.inj₂ qNotBelowP))
+      (inj₂ qNotBelowP))
   where
   pGapLe :
     Shell.shellIndex (Physical.p beta) + Shell.Csep
