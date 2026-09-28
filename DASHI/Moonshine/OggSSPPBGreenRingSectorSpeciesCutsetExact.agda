@@ -473,9 +473,13 @@ asGlobalLocalizedDVRBrauerAuthority A =
     ; DVR.lengthFunctional =
         λ prime moduleClass -> normalizedDVRLength A moduleClass
     ; DVR.p2LengthPaysResidual =
-        trans (p2CombinedLengthIsTen A) refl
+        trans
+          (p2CombinedLengthIsTen A)
+          (sym DVR.p2TargetIsTen)
     ; DVR.p3LengthPaysResidual =
-        trans (p3CombinedLengthIsTwo A) refl
+        trans
+          (p3CombinedLengthIsTwo A)
+          (sym DVR.p3TargetIsTwo)
     ; DVR.lengthFunctionalDerivedWithoutReadingTarget =
         constructionUsesNoDuncanSwisherResidualTarget A
     ; DVR.lengthFunctionalDerivedWithoutReadingTargetIsTrue =
