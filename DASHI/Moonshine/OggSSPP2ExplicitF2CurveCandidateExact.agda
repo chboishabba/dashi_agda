@@ -30,7 +30,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
@@ -145,8 +145,8 @@ affineCoordinates point01 = zero₂ , one₂
 affineCoordinatesSatisfy :
   (point : AffineF2Point) ->
   satisfiesCurve
-    (Data.Product.proj₁ (affineCoordinates point))
-    (Data.Product.proj₂ (affineCoordinates point))
+    (proj₁ (affineCoordinates point))
+    (proj₂ (affineCoordinates point))
   ≡ true
 affineCoordinatesSatisfy point00 = refl
 affineCoordinatesSatisfy point01 = refl
