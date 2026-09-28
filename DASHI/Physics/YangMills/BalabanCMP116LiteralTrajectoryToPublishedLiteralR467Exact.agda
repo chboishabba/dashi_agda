@@ -18,6 +18,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalRadiusToCommonDomainRound114Exact as R114
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Exact as R342
+import DASHI.Physics.YangMills.BalabanCMP116SharedMarkedDirectCalibrationRound344Exact as R344
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact as R467
 
 asPublishedLiteralSelectedLocalization :
@@ -49,6 +50,24 @@ asPublishedLiteralSelectedLocalization
   ; R467.PublishedLiteralSelectedLocalization.sourceEnvelopeBelowPhysicalClusteringEnvelope =
       R342.sourceEnvelopeBelowSpectrumEnvelope source
   }
+
+
+sharedMarkedDirectAsPublishedLiteralSelectedLocalization :
+  ∀ {Measure TestObservable SpectralObservable Energy}
+    {dataSet extension base demands tests spectrumSource} →
+  R344.SharedMarkedDirectCMP116Source
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {SpectralObservable = SpectralObservable}
+    {Energy = Energy}
+    {dataSet = dataSet}
+    {extension = extension}
+    base demands tests spectrumSource →
+  R467.PublishedLiteralSelectedLocalization
+    base tests spectrumSource
+sharedMarkedDirectAsPublishedLiteralSelectedLocalization source =
+  asPublishedLiteralSelectedLocalization
+    (R344.asLiteralTrajectoryCMP116Source source)
 
 r342ToR467CompilerLevel : ProofLevel
 r342ToR467CompilerLevel = machineChecked
