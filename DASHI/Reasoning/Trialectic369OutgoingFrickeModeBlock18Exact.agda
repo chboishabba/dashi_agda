@@ -32,6 +32,7 @@ import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Nonary
 import DASHI.Foundations.Base369PointedAppraisalFibreExact as Pointed
 import DASHI.Moonshine.Base369Monster3BMultiplicityCompletedTenTritSquareCompilerExact as Compiler
+import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Actual
 import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact as Outgoing
 import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as NoGo
 
@@ -107,7 +108,7 @@ fineFrickeAtModePhase Nonary.mode45 Nonary.counterPhase = refl
 compiledFrickeBlockAct :
   ∀ {source}
     {inertiaAttachment :
-      DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact.ActualMultiplicityInertiaAttachment source} ->
+      Actual.ActualMultiplicityInertiaAttachment source} ->
   NoGo.FineFrickeInertiaElement inertiaAttachment ->
   Nonary.ComplementMode5 ->
   ModeBlock18 ->
@@ -125,7 +126,7 @@ compiledFrickeBlockAct
 compiledFrickeBlockIntertwines :
   ∀ {source}
     {inertiaAttachment :
-      DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact.ActualMultiplicityInertiaAttachment source}
+      Actual.ActualMultiplicityInertiaAttachment source}
     (element : NoGo.FineFrickeInertiaElement inertiaAttachment)
     (mode : Nonary.ComplementMode5)
     (state : ModeBlock18) ->
