@@ -23,8 +23,9 @@ module DASHI.Physics.YangMills.BalabanWilsonSourceFirstWEXTMaxCutExact where
 --   S2  instantiate common-domain mixed differentiation on that same family;
 --   S3  identify the CMP116 pointwise differentiated cluster charge;
 --   S4  prove the SUM of those charges is below the physical rooted shell;
---   S5  identify that signed mixed derivative with the actual finite Wilson
---       connected covariance on the same state.
+--   S5  identify the KP marked mixed log with the literal normalized finite-T5
+--       mixed log on the same generating functional.  Connected covariance is
+--       then generic source calculus.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -36,6 +37,7 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstKPDataExact as 
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonPhysicalKoteckyPreissExact as KPFamily
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCMP116ConnectingTailExact as Tail
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedKPT5SameObjectExact as KPT5
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as R491
 
@@ -81,9 +83,17 @@ summedCMP116ChargeBelowPhysicalRootedShellLevel : ProofLevel
 summedCMP116ChargeBelowPhysicalRootedShellLevel =
   Tail.twoWilsonChargeSumBelowRootedTailLevel
 
-signedMixedDerivativeIsFiniteWilsonCovarianceLevel : ProofLevel
-signedMixedDerivativeIsFiniteWilsonCovarianceLevel =
-  Tail.twoWilsonSignedCovarianceSameObjectLevel
+literalMarkedKPGeneratingFunctionalSameObjectLevel : ProofLevel
+literalMarkedKPGeneratingFunctionalSameObjectLevel =
+  KPT5.literalMarkedKPGeneratingFunctionalSameObjectLevel
+
+finiteT5CovarianceAlgebraCompilerLevel : ProofLevel
+finiteT5CovarianceAlgebraCompilerLevel =
+  KPT5.finiteT5ConnectedCovarianceAlgebraLevel
+
+signedMixedDerivativeIsFiniteWilsonCovarianceCompilerLevel : ProofLevel
+signedMixedDerivativeIsFiniteWilsonCovarianceCompilerLevel =
+  KPT5.markedKPT5MixedLogSameObjectCompilerLevel
 
 ------------------------------------------------------------------------
 -- Pruned old payments.
