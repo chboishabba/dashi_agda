@@ -165,8 +165,88 @@ c4DepthSpectrumSourceAtlas =
 ------------------------------------------------------------------------
 -- 3. Structural low-rank / non-double-trivial selection.
 --
--- Rather than encode a boolean target test, witnesses certify the source-side
--- structural property constructor-by-constructor.
+-- The test is executable on ALL nine source-native labels.  It uses only the
+-- sourced rank/restriction table and does not mention Monster residuals,
+-- inertia sectors, Base369, or the five-slot target.
+------------------------------------------------------------------------
+
+rankBelowFour :
+  C4IntegralIndecomposable ->
+  Bool
+rankBelowFour moduleA = true
+rankBelowFour moduleB = true
+rankBelowFour moduleC = true
+rankBelowFour moduleD = false
+rankBelowFour moduleE = true
+rankBelowFour moduleCA = true
+rankBelowFour moduleCB = true
+rankBelowFour moduleCE = false
+rankBelowFour moduleCAB = false
+
+restrictionIsDoubleTrivial :
+  C4IntegralIndecomposable ->
+  Bool
+restrictionIsDoubleTrivial moduleA = false
+restrictionIsDoubleTrivial moduleB = false
+restrictionIsDoubleTrivial moduleC = false
+restrictionIsDoubleTrivial moduleD = false
+restrictionIsDoubleTrivial moduleE = true
+restrictionIsDoubleTrivial moduleCA = false
+restrictionIsDoubleTrivial moduleCB = false
+restrictionIsDoubleTrivial moduleCE = false
+restrictionIsDoubleTrivial moduleCAB = false
+
+structurallySelected :
+  C4IntegralIndecomposable ->
+  Bool
+structurallySelected moduleA = true
+structurallySelected moduleB = true
+structurallySelected moduleC = true
+structurallySelected moduleD = false
+structurallySelected moduleE = false
+structurallySelected moduleCA = true
+structurallySelected moduleCB = true
+structurallySelected moduleCE = false
+structurallySelected moduleCAB = false
+
+selectedAByStructuralTest :
+  structurallySelected moduleA ≡ true
+selectedAByStructuralTest = refl
+
+selectedBByStructuralTest :
+  structurallySelected moduleB ≡ true
+selectedBByStructuralTest = refl
+
+selectedCByStructuralTest :
+  structurallySelected moduleC ≡ true
+selectedCByStructuralTest = refl
+
+selectedCAByStructuralTest :
+  structurallySelected moduleCA ≡ true
+selectedCAByStructuralTest = refl
+
+selectedCBByStructuralTest :
+  structurallySelected moduleCB ≡ true
+selectedCBByStructuralTest = refl
+
+rejectDByStructuralTest :
+  structurallySelected moduleD ≡ false
+rejectDByStructuralTest = refl
+
+rejectEByStructuralTest :
+  structurallySelected moduleE ≡ false
+rejectEByStructuralTest = refl
+
+rejectCEByStructuralTest :
+  structurallySelected moduleCE ≡ false
+rejectCEByStructuralTest = refl
+
+rejectCABByStructuralTest :
+  structurallySelected moduleCAB ≡ false
+rejectCABByStructuralTest = refl
+
+------------------------------------------------------------------------
+-- Witness family for exactly the labels accepted by the structural test.
 ------------------------------------------------------------------------
 
 data LowRankNonDoubleTrivial :
@@ -421,6 +501,14 @@ record P2C4RankToLocalizedLengthAuthority : Set₁ where
       (candidate : P2C4DepthCandidate) ->
       candidateLabelActuallyOccursInTwoBSource candidate ≡ true
 
+    sourcePieceComesFromIntegralTwoBTateObject :
+      SourcePiece ->
+      Bool
+
+    sourcePieceComesFromIntegralTwoBTateObjectIsTrue :
+      (piece : SourcePiece) ->
+      sourcePieceComesFromIntegralTwoBTateObject piece ≡ true
+
     normalizedLocalizedDVRLength :
       SourcePiece ->
       Nat
@@ -464,10 +552,10 @@ asP2SourceDepthSlotLengthAuthority A =
         refl
 
     ; Scalar.sourcePieceComesFromIntegralTwoBTateObject =
-        λ piece -> true
+        sourcePieceComesFromIntegralTwoBTateObject A
 
     ; Scalar.sourcePieceComesFromIntegralTwoBTateObjectIsTrue =
-        λ piece -> refl
+        sourcePieceComesFromIntegralTwoBTateObjectIsTrue A
 
     ; Scalar.normalizedDVRLength =
         normalizedLocalizedDVRLength A
@@ -512,6 +600,8 @@ record P2C4LowRankDepthSpectrumBoundary : Set where
     carnahanUranoC4RankTableSourced : Bool
     carnahanUranoSquareRestrictionTableSourced : Bool
     structuralLowRankNonDoubleTrivialSelectionOwned : Bool
+    structuralTestExecutableOnAllNineLabels : Bool
+    structuralTestRejectsD_E_CE_CAB : Bool
     selectedFamilyHasExactlyFiveLabels : Bool
     selectedRanksAreOneOneTwoThreeThree : Bool
     exactRechartToScalarSlotsProved : Bool
@@ -534,6 +624,6 @@ canonicalP2C4LowRankDepthSpectrumBoundary :
   P2C4LowRankDepthSpectrumBoundary
 canonicalP2C4LowRankDepthSpectrumBoundary =
   p2-c4-low-rank-depth-spectrum-boundary
-    true true true true true true true true
+    true true true true true true true true true true
     false false false false false false false
     true false true
