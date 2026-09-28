@@ -36,6 +36,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicDworkExplicitRootDepthNoGoExact 
 import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact as Preferred
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildGeneratorPartitionCandidateExact as GeneratorPartition
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
+import DASHI.Moonshine.OggSSPSmallCharacteristicEtherealMultiplicityTransferExact as Ethereal
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -301,6 +302,8 @@ record ExceptionalTermHypothesisSieveBoundary : Set where
     generatorPartitionSelectorDebtRecorded : Bool
     wildLayerSectorTenTwoMatchRecorded : Bool
     wildLayerSectorSameRuleAcrossPrimes : Bool
+    sourcedWildGeometryHasAdditiveModularMultiplicityPrecedent : Bool
+    sourcedPrecedentIsLayerTimesSectorTheorem : Bool
     structuralCandidatesPromotedToAnalyticValuations : Bool
     preferredFinitePaymentMatchesTenTwo : Bool
     preferredFinitePaymentAlreadyIndependentAnalyticObject : Bool
@@ -323,6 +326,8 @@ canonicalExceptionalTermHypothesisSieveBoundary =
     ; generatorPartitionSelectorDebtRecorded = true
     ; wildLayerSectorTenTwoMatchRecorded = true
     ; wildLayerSectorSameRuleAcrossPrimes = true
+    ; sourcedWildGeometryHasAdditiveModularMultiplicityPrecedent = true
+    ; sourcedPrecedentIsLayerTimesSectorTheorem = false
     ; structuralCandidatesPromotedToAnalyticValuations = false
     ; preferredFinitePaymentMatchesTenTwo = true
     ; preferredFinitePaymentAlreadyIndependentAnalyticObject = false
