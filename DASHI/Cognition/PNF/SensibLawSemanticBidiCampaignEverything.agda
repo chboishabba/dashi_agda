@@ -704,3 +704,38 @@ dbNativeFixtureBoundedCommitReopensDurably :
   DbNativeCorpusRegression.fixtureBoundedCommitReopensAfterDurableCommit
   ≡ DbNativeCorpusRegression.fixtureBoundedCommitReopensAfterDurableCommit
 dbNativeFixtureBoundedCommitReopensDurably = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P bounded reopen batching changes physical query geometry only.
+------------------------------------------------------------------------
+
+dbNativeBatchedReopenDoesNotChangeCandidateIdentity :
+  DbNativeCorpus.BatchedReopenChangesCandidateIdentity → ⊥
+dbNativeBatchedReopenDoesNotChangeCandidateIdentity =
+  DbNativeCorpus.batchedReopenDoesNotChangeCandidateIdentity
+
+dbNativeBatchedReopenDoesNotSkipExactEquality :
+  DbNativeCorpus.BatchedReopenSkipsExactEquality → ⊥
+dbNativeBatchedReopenDoesNotSkipExactEquality =
+  DbNativeCorpus.batchedReopenDoesNotSkipExactEquality
+
+dbNativeBatchedReopenDoesNotCreateAdmission :
+  DbNativeCorpus.BatchedReopenCreatesSemanticAdmission → ⊥
+dbNativeBatchedReopenDoesNotCreateAdmission =
+  DbNativeCorpus.batchedReopenDoesNotCreateSemanticAdmission
+
+dbNativeBatchedReopenDoesNotCreateAuthority :
+  DbNativeCorpus.BatchedReopenCreatesSemanticAuthority → ⊥
+dbNativeBatchedReopenDoesNotCreateAuthority =
+  DbNativeCorpus.batchedReopenDoesNotCreateSemanticAuthority
+
+dbNativeBatchedReopenDoesNotCreateTruth :
+  DbNativeCorpus.BatchedReopenCreatesClaimTruth → ⊥
+dbNativeBatchedReopenDoesNotCreateTruth =
+  DbNativeCorpus.batchedReopenDoesNotCreateClaimTruth
+
+dbNativeFixtureBoundedReopenPreservesExactEquality :
+  DbNativeCorpusRegression.fixtureBoundedReopenPreservesExactEquality
+  ≡ DbNativeCorpusRegression.fixtureBoundedReopenPreservesExactEquality
+dbNativeFixtureBoundedReopenPreservesExactEquality = refl
