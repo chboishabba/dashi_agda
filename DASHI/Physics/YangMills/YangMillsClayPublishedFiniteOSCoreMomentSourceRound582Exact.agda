@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSCoreMomentSourceRou
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
@@ -33,6 +34,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as Pinned
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119FiniteEuclideanSourceExact as Euclidean
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119BosonicOS3SourceExact as Bosonic
 import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R461
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMomentSourceRound581Exact as R581
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119QuantitativeMomentsRound559Exact as R559
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119OS05FromMomentsRound560Exact as R560
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OS05CanonicalLimitExact as OS05
@@ -190,14 +192,14 @@ asPinnedOSCoreInputs source = record
         Limit.limitExpectation (family source group)
           (Euclidean.actObservable
             (euclidean source group) action observable)
-        Agda.Builtin.Equality.≡
+        ≡
         Limit.limitExpectation (family source group) observable
   ; Pinned.PinnedCMP119OSCoreInputs.OS3PermutationSymmetryCore =
       λ group → ∀ permutation observable →
         Limit.limitExpectation (family source group)
           (Bosonic.permuteObservable
             (bosonic source group) permutation observable)
-        Agda.Builtin.Equality.≡
+        ≡
         Limit.limitExpectation (family source group) observable
   ; Pinned.PinnedCMP119OSCoreInputs.OS5GrowthControlCore =
       λ group →
@@ -226,6 +228,75 @@ asPinnedOSCoreInputs source = record
           (R560.asCanonicalPreOS05
             (moments source group)
             (os05Closure source group))
+  }
+
+record CoreOS4Attachment
+    {G X Configuration Position CurvaturePolynomial LocalOperator
+     OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+     EuclideanAction Permutation : Set}
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit)}
+    {division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient}
+    {S}
+    (source :
+      PublishedFiniteOSCoreMomentSource
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        EuclideanAction Permutation
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    : Set₁ where
+  field
+    OS4Clustering : G → Set
+    os4 : ∀ group → OS4Clustering group
+
+open CoreOS4Attachment public
+
+corePlusOS4ToR581 :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      EuclideanAction Permutation sequenceLimit limitLaws quotient division S}
+    (source :
+      PublishedFiniteOSCoreMomentSource
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        EuclideanAction Permutation
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S) →
+  CoreOS4Attachment source →
+  R581.PublishedFiniteOSMomentSource
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+    EuclideanAction Permutation
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S
+corePlusOS4ToR581 source clustering = record
+  { R581.PublishedFiniteOSMomentSource.family =
+      family source
+  ; R581.PublishedFiniteOSMomentSource.cylinderEncoding =
+      cylinderEncoding source
+  ; R581.PublishedFiniteOSMomentSource.observableAlgebra =
+      observableAlgebra source
+  ; R581.PublishedFiniteOSMomentSource.euclidean =
+      euclidean source
+  ; R581.PublishedFiniteOSMomentSource.bosonic =
+      bosonic source
+  ; R581.PublishedFiniteOSMomentSource.wilsonRP =
+      wilsonRP source
+  ; R581.PublishedFiniteOSMomentSource.moments =
+      moments source
+  ; R581.PublishedFiniteOSMomentSource.os05Closure =
+      os05Closure source
+  ; R581.PublishedFiniteOSMomentSource.OS4Clustering =
+      OS4Clustering clustering
+  ; R581.PublishedFiniteOSMomentSource.os4 =
+      os4 clustering
   }
 
 round582PreGapOSCoreCompilerLevel : ProofLevel
