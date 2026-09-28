@@ -38,6 +38,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
 import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
+import DASHI.Moonshine.OggSSP3BCarnahanTateSigmaSplitExact as Tate3B
+import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact as SigmaDR
+import DASHI.Moonshine.OggSSPP3H3TateSigmaPartitionFactorizationExact as P3Factor
 import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact as DVR
 import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact as Terminal
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
@@ -181,3 +184,48 @@ canonicalPBTerminalLocalizationPrimewiseGapBoundary =
     true false false
     true false false
     true true false true
+
+
+------------------------------------------------------------------------
+-- 5. Refined p=3 gap after the Carnahan Tate-sigma cross-pollination.
+------------------------------------------------------------------------
+
+record P3RefinedTerminalSourceGap : Set where
+  constructor p3-refined-terminal-source-gap
+  field
+    carnahanH3DecompositionSourced : Bool
+    carnahanFixedVectorEmbeddingSourced : Bool
+    carnahanTateH0H1SplitSourced : Bool
+    carnahanSigmaPlusMinusActionSourced : Bool
+
+    h3PiecesGradedByTateDegree : Bool
+    sigmaDRRecognitionUpToSwapPaid : Bool
+    sigmaDRAlignmentSelectedByPrimeLevelGeometry : Bool
+    localizedDVRLengthEqualsSemistableMultiplicity : Bool
+
+    monsterResidualUsedToPayAnyMissingBit : Bool
+    base369UsedToPayAnyMissingBit : Bool
+    attributionFirewallPreserved : Bool
+
+canonicalP3RefinedTerminalSourceGap :
+  P3RefinedTerminalSourceGap
+canonicalP3RefinedTerminalSourceGap =
+  p3-refined-terminal-source-gap
+    true true true true
+    false true false false
+    false false true
+
+tateSigmaBoundary :
+  Tate3B.ThreeBTateSigmaSplitBoundary
+tateSigmaBoundary =
+  Tate3B.canonicalThreeBTateSigmaSplitBoundary
+
+sigmaDRBoundary :
+  SigmaDR.ThreeBTateSigmaDRRecognitionBoundary
+sigmaDRBoundary =
+  SigmaDR.canonicalThreeBTateSigmaDRRecognitionBoundary
+
+p3PartitionFactorBoundary :
+  P3Factor.P3H3TateSigmaPartitionFactorizationBoundary
+p3PartitionFactorBoundary =
+  P3Factor.canonicalP3H3TateSigmaPartitionFactorizationBoundary
