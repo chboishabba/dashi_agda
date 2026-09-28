@@ -37,6 +37,7 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 import DASHI.Foundations.Base369Ternary27CornerEightExact as Corners
 import DASHI.Foundations.Base369Ternary27BoundaryNerveExact as Nerve
 import DASHI.Moonshine.Base369Ternary27FaceHypercubeCechGluingBidiExact as Cech
+import DASHI.Reasoning.ActualFaceHypercubeGluingFromSharedSliceExact as Shared
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact as Descent
 
 ------------------------------------------------------------------------
@@ -202,6 +203,54 @@ record CornerStarActualStateRecognition (Actor ActualState : Set) : Set₁ where
 
 open CornerStarActualStateRecognition public
 
+------------------------------------------------------------------------
+-- 6b. Reduced promotion obligation via the generic shared-slice compiler.
+--
+-- Once one literal X6 slice is recognized in ActualState, the generic compiler
+-- generates the full six-face actual promotion.  The trialectic-specific work
+-- is therefore reduced to supplying that shared slice plus the already-fixed
+-- AB/BC/CA corner-star chart assignment.
+------------------------------------------------------------------------
+
+record CornerStarSharedSliceRecognition
+    (Actor ActualState : Set) : Set₁ where
+  constructor corner-star-shared-slice-recognition
+  field
+    sharedSlice :
+      Shared.SharedActualX6SliceRecognition Actor ActualState
+
+    selectedABFaceIsXNegative :
+      localChartFace localAB ≡ Geometry.xNegativeFace
+
+    selectedBCFaceIsYNegative :
+      localChartFace localBC ≡ Geometry.yNegativeFace
+
+    selectedCAFaceIsZNegative :
+      localChartFace localCA ≡ Geometry.zNegativeFace
+
+open CornerStarSharedSliceRecognition public
+
+compileCornerStarActualStateRecognition :
+  {Actor ActualState : Set} ->
+  CornerStarSharedSliceRecognition Actor ActualState ->
+  CornerStarActualStateRecognition Actor ActualState
+compileCornerStarActualStateRecognition recognition = record
+  { actualPromotion =
+      Shared.compileSharedSliceGluing (sharedSlice recognition)
+  ; selectedABFaceIsXNegative =
+      CornerStarSharedSliceRecognition.selectedABFaceIsXNegative recognition
+  ; selectedBCFaceIsYNegative =
+      CornerStarSharedSliceRecognition.selectedBCFaceIsYNegative recognition
+  ; selectedCAFaceIsZNegative =
+      CornerStarSharedSliceRecognition.selectedCAFaceIsZNegative recognition
+  }
+
+data TrialecticSharedActualX6SliceConstructed : Set where
+
+trialecticSharedActualX6SliceStillOpen :
+  TrialecticSharedActualX6SliceConstructed -> ⊥
+trialecticSharedActualX6SliceStillOpen ()
+
 record Trialectic369CechCornerStarRecognitionBoundary : Set where
   constructor trialectic-369-cech-corner-star-recognition-boundary
   field
@@ -212,6 +261,8 @@ record Trialectic369CechCornerStarRecognitionBoundary : Set where
     incidenceComparisonPaid : Bool
     fullNerveEquivalencePaid : Bool
     actualSameObjectPromotionPaid : Bool
+    genericSharedSliceCompilerAvailable : Bool
+    remainingObligationReducedToOneActualX6Slice : Bool
     remainingPromotionHasTypedContract : Bool
 
 canonicalTrialectic369CechCornerStarRecognitionBoundary :
@@ -219,4 +270,4 @@ canonicalTrialectic369CechCornerStarRecognitionBoundary :
 canonicalTrialectic369CechCornerStarRecognitionBoundary =
   trialectic-369-cech-corner-star-recognition-boundary
     true true true true true
-    false false true
+    false true true true
