@@ -75,22 +75,6 @@ record LiteralTerminalKPAnalyticData
     exponential : ℚ → ℚ
 
     incompatibleWeightedTerm : Polymer → Polymer → ℚ
-    incompatibleWeightedTermMeaning :
-      ∀ centre neighbour →
-      incompatibleWeightedTerm centre neighbour
-      ≡
-      multiply
-        (exponential
-          (add
-            (Clustering.terminalKPBound
-              (Terminal.asTerminalKPSmallness physicalTerminal)
-              (anchor neighbour))
-            (dWeight neighbour)))
-        (∣
-          (1ℚ
-            * Terminal.activityNorm physicalTerminal neighbour)
-          ∣)
-
     incompatibleNeighbors : Polymer → List Polymer
 
     rootedIncompatibleEnumerationExact :
