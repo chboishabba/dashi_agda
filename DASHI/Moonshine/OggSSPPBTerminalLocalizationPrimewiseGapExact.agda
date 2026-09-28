@@ -39,6 +39,9 @@ import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact as Coverage
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano2B
 import DASHI.Moonshine.OggSSPP2UranoParityFiveSectorNoGoExact as P2NoGo
 import DASHI.Moonshine.OggSSPP2UranoInertiaLocalizationFactorizationExact as P2Factor
+import DASHI.Moonshine.OggSSP4A2BIntegralRestrictionRefinementExact as FourARestrict
+import DASHI.Moonshine.OggSSP4A2BThreeLabelFiveSectorNoGoExact as FourANoGo
+import DASHI.Moonshine.OggSSP4A2BTateRefinementFiveSectorNoGoExact as FourATateNoGo
 import DASHI.Moonshine.OggSSP3BCarnahanOrderNineFixedVectorRefinementExact as Carnahan3B
 import DASHI.Moonshine.OggSSP3BCarnahanTateSigmaSplitExact as Tate3B
 import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact as SigmaDR
@@ -245,7 +248,13 @@ record P2RefinedTerminalSourceGap : Set where
     coarseNonForbiddenParityTagCarrierHasFourLabels : Bool
     exactFiveSectorRechartFromCoarseParityTagsBlocked : Bool
 
+    restrictedFourARefinementLaneSourced : Bool
+    restrictedFourAThreeLabelRechartBlocked : Bool
+    restrictedFourALabelParityFourPatternRechartBlocked : Bool
+    restrictedFourAPlusTateFourPatternRechartBlocked : Bool
+
     finerSourceNativeInvariantRequired : Bool
+    likelyCentralizerGreenSpeciesRefinementRequired : Bool
     sourcePieceToFiveSectorPartitionPaid : Bool
     localizedLengthEqualsClassDefectDepthPaid : Bool
 
@@ -258,7 +267,8 @@ canonicalP2RefinedTerminalSourceGap :
 canonicalP2RefinedTerminalSourceGap =
   p2-refined-terminal-source-gap
     true true true true
-    true false false
+    true true true true
+    true true false false
     false false true
 
 p2ParityNoGoBoundary :
@@ -270,3 +280,19 @@ p2FactorBoundary :
   P2Factor.P2UranoInertiaLocalizationFactorizationBoundary
 p2FactorBoundary =
   P2Factor.canonicalP2UranoInertiaLocalizationFactorizationBoundary
+
+
+fourARestrictionBoundary :
+  FourARestrict.FourA2BRestrictionRefinementBoundary
+fourARestrictionBoundary =
+  FourARestrict.canonicalFourA2BRestrictionRefinementBoundary
+
+fourAThreeLabelNoGoBoundary :
+  FourANoGo.FourA2BThreeLabelFiveSectorNoGoBoundary
+fourAThreeLabelNoGoBoundary =
+  FourANoGo.canonicalFourA2BThreeLabelFiveSectorNoGoBoundary
+
+fourATateNoGoBoundary :
+  FourATateNoGo.FourA2BTateRefinementFiveSectorNoGoBoundary
+fourATateNoGoBoundary =
+  FourATateNoGo.canonicalFourA2BTateRefinementFiveSectorNoGoBoundary
