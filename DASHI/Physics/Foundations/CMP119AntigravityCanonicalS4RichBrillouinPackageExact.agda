@@ -47,10 +47,9 @@ record CanonicalS4RichBrillouinInputs
     bishopRunning :
       SU2.CanonicalBishopSU2RunningInputs Nat
 
-    p3RichBrillouinLiteralBridge :
-      RichBridge.P3RepresentsRichBrillouinLiteralPlaquetteSplit
-        dataSet rich
-        (SU2.recursion bishopRunning)
+    canonicalRichBrillouinLiteralBridge :
+      RichBridge.CanonicalRunningRichLiteralPlaquetteSplit
+        dataSet rich bishopRunning
 
     literalPlaquetteRepresentsCMP109 :
       LiteralToSource.LiteralPlaquetteCMP109UVSameObject
@@ -77,8 +76,9 @@ asCanonicalS4SameObjectPackage package = record
       bishopRunning package
   ; S4.CanonicalS4SameObjectPackage.bishopRunningRepresentsCMP109History =
       P3Literal.p3LiteralPlaquetteThenCMP109
-        (RichBridge.richBrillouinViewAsLiteralTotal
-          (p3RichBrillouinLiteralBridge package))
+        (P3Literal.splitViewAsTotalView
+          (RichBridge.canonicalRunningAsLiteralSplit
+            (canonicalRichBrillouinLiteralBridge package)))
         (literalPlaquetteRepresentsCMP109 package)
   ; S4.CanonicalS4SameObjectPackage.traceBoundary =
       traceBoundary package
@@ -93,8 +93,11 @@ directP3LiteralGaussianWitnessRequiredFromCanonicalCaller = false
 directP3CMP109WitnessRequiredFromCanonicalCaller : Bool
 directP3CMP109WitnessRequiredFromCanonicalCaller = false
 
-richGaussianSameObjectWitnessRequiredFromCanonicalCaller : Bool
-richGaussianSameObjectWitnessRequiredFromCanonicalCaller = true
+independentP3ToRichGaussianWitnessRequiredFromCanonicalCaller : Bool
+independentP3ToRichGaussianWitnessRequiredFromCanonicalCaller = false
+
+richToRationalGaussianSameObjectRequiredFromCanonicalCaller : Bool
+richToRationalGaussianSameObjectRequiredFromCanonicalCaller = true
 
 normalizedLiteralLogCoordinateRequiredFromCanonicalCallerIsFalse :
   normalizedLiteralLogCoordinateRequiredFromCanonicalCaller ≡ false
@@ -107,6 +110,10 @@ directP3LiteralGaussianWitnessRequiredFromCanonicalCallerIsFalse = refl
 directP3CMP109WitnessRequiredFromCanonicalCallerIsFalse :
   directP3CMP109WitnessRequiredFromCanonicalCaller ≡ false
 directP3CMP109WitnessRequiredFromCanonicalCallerIsFalse = refl
+
+independentP3ToRichGaussianWitnessRequiredFromCanonicalCallerIsFalse :
+  independentP3ToRichGaussianWitnessRequiredFromCanonicalCaller ≡ false
+independentP3ToRichGaussianWitnessRequiredFromCanonicalCallerIsFalse = refl
 
 canonicalS4RichBrillouinPackageCompilerLevel : ProofLevel
 canonicalS4RichBrillouinPackageCompilerLevel = machineChecked
