@@ -1,3 +1,4 @@
+import DASHI.Analysis.RiemannSSP15RoleCMContingencyExact
 import DASHI.Analysis.RiemannSSP15FilteredProvenanceCapstoneExact
 import DASHI.Analysis.RiemannSSP15ChosenGridTransversalityExact
 import DASHI.Analysis.RiemannSSP15PartitionSeparationExact
