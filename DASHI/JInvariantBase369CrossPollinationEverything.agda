@@ -429,3 +429,5 @@ import DASHI.Moonshine.OggSSPP2InertiaStackDenominatorValuationExact
 import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalMultiplicityExact
 
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact
+
+import DASHI.Moonshine.OggSSP2BGreenSpeciesUranoParityCompatibilityExact
