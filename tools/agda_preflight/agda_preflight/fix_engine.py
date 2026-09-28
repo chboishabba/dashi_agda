@@ -11,6 +11,8 @@ from .fixes import SuggestedFix, TextEdit
 def _field_name_edit(summary, original, line, replacement):
     short = original.rsplit(".", 1)[-1]
     for record_expr in summary.ast.record_expressions:
+        if record_expr.context != "expression":
+            continue
         for assignment in record_expr.assignments:
             if assignment.line != line:
                 continue
