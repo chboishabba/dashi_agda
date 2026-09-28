@@ -123,3 +123,42 @@ fixtureV2ReuseDoesNotCreateTruth :
     fixtureExactReviewProjectionReuseV2
   ≡ false
 fixtureV2ReuseDoesNotCreateTruth = refl
+
+
+fixtureDeltaReviewProjection : Economy.ReviewProjectionDeltaFibreReceipt
+fixtureDeltaReviewProjection =
+  Economy.review-projection-delta-fibre-receipt
+    "source-revision:edited"
+    "parser-run:edited"
+    "scale1:persistent-pnf-fingerprint:v1"
+    3
+    3
+    refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+
+fixtureDeltaReviewUsesExactChangedFibreSet :
+  Economy.ReviewProjectionDeltaFibreReceipt.targetFibreCount
+    fixtureDeltaReviewProjection
+  ≡
+  Economy.ReviewProjectionDeltaFibreReceipt.deltaFibreCount
+    fixtureDeltaReviewProjection
+fixtureDeltaReviewUsesExactChangedFibreSet = refl
+
+fixtureDeltaReviewActuallyUsesDeltaInput :
+  Economy.ReviewProjectionDeltaFibreReceipt.deltaInputUsed
+    fixtureDeltaReviewProjection
+  ≡ true
+fixtureDeltaReviewActuallyUsesDeltaInput = refl
+
+fixtureDeltaReviewDoesNotCreateAuthority :
+  Economy.ReviewProjectionDeltaFibreReceipt.createsSemanticAuthorityDelta
+    fixtureDeltaReviewProjection
+  ≡ false
+fixtureDeltaReviewDoesNotCreateAuthority = refl
