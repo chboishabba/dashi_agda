@@ -278,3 +278,90 @@ bad = record { witness = Set }
         final = tools.next_error(str(path), require_fix=True)
         assert final["status"] == "clean"
         assert final["profile"]["counts"].get("files_stat", 0) == 0
+
+
+
+def test_mcp_rollup_repair_loop_stays_hot_after_api_stable_fix(tmp_path):
+    leaf = write_module(
+        tmp_path,
+        "Loop.Leaf",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    top = write_module(
+        tmp_path,
+        "Loop.Everything",
+        """
+import Loop.Leaf
+
+top : Set
+top = Set
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=1,
+    ) as service:
+        tools = DashiAgdaMcpTools(service)
+
+        first = tools.next_error(
+            str(top),
+            require_fix=True,
+        )
+        assert first["status"] == "diagnostic"
+        diagnostic = first["diagnostic"]
+        assert diagnostic is not None
+        assert diagnostic["path"].endswith("Loop/Leaf.agda")
+
+        applied = tools.apply_fix(
+            str(leaf),
+            diagnostic["id"],
+            allow_likely=True,
+        )
+        assert applied["resolved"] is True
+        assert (
+            applied["profile"]["counts"][
+                "trusted_session_api_stable_edits"
+            ]
+            == 1
+        )
+
+        affected_first = tools.affected(
+            str(leaf),
+            within=str(top),
+        )
+        assert affected_first["modules"] == [
+            "Loop.Leaf",
+            "Loop.Everything",
+        ]
+        assert affected_first["profile"]["counts"].get("files_stat", 0) == 0
+
+        # A second affected query reuses the in-memory reverse graph.
+        affected_second = tools.affected(
+            str(leaf),
+            within=str(top),
+        )
+        assert (
+            affected_second["profile"]["counts"][
+                "affected_reverse_graph_cache_hits"
+            ]
+            == 1
+        )
+        assert affected_second["profile"]["counts"].get("files_stat", 0) == 0
+
+        final = tools.next_error(
+            str(top),
+            require_fix=True,
+        )
+        assert final["status"] == "clean"
+        assert final["profile"]["counts"].get("files_stat", 0) == 0
+        assert final["profile"]["counts"]["trusted_session_hits"] == 1
