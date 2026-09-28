@@ -41,10 +41,10 @@ record RichBrillouinFiniteModeGaussianSameObject
       FinitePlaquette.FiniteModePlaquetteBetaSameObject
         finiteMode oneLoop remainder
 
-    richShellSameFiniteModeGaussian :
+    richCoefficientSameFiniteModeGaussian :
       ∀ step →
       Bishop._≃_
-        (Rich.scalarIntegral rich step)
+        (Rich.coefficient rich step)
         (UV.embed (Local.betaZ (FiniteMode.gaussianAt finiteMode step)))
 
 open RichBrillouinFiniteModeGaussianSameObject public
@@ -61,10 +61,10 @@ asRichBrillouinRationalGaussianProjection :
     rich
 asRichBrillouinRationalGaussianProjection
     {finiteMode = finiteMode} sameObject = record
-  { Projection.RichBrillouinRationalGaussianProjection.scalarIntegralSameLiteralGaussian =
+  { Projection.RichBrillouinRationalGaussianProjection.coefficientSameLiteralGaussian =
       λ step →
         BishopP.≃-trans
-          (richShellSameFiniteModeGaussian sameObject step)
+          (richCoefficientSameFiniteModeGaussian sameObject step)
           (subst
             (λ selected →
               Bishop._≃_
@@ -79,5 +79,5 @@ asRichBrillouinRationalGaussianProjection
 richBrillouinFiniteModeProjectionCompilerLevel : ProofLevel
 richBrillouinFiniteModeProjectionCompilerLevel = machineChecked
 
-richShellFiniteModeGaussianSameObjectLevel : ProofLevel
-richShellFiniteModeGaussianSameObjectLevel = conditional
+richCoefficientFiniteModeGaussianSameObjectLevel : ProofLevel
+richCoefficientFiniteModeGaussianSameObjectLevel = conditional
