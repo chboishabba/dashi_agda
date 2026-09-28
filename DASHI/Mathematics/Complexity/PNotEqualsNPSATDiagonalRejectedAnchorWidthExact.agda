@@ -42,6 +42,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExa
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPRejectGuardResidualWidthEmbeddingExact as Guard
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
+import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 
 ------------------------------------------------------------------------
 -- One actual quoted-program body output carrying a width-preserving rejected
@@ -198,8 +200,8 @@ actualBodyOutputWidth realization =
     (λ root →
       Width.ResidualWidthWitness
         {root = root}
-        _
-        _)
+        remaining
+        width)
     (sym
       (bodyIndexedRootExact realization))
     (guardedPayloadWidth realization)
@@ -237,6 +239,44 @@ rejectedAnchorWidthBelowActualBodyQ1StateCount
     quotient =
   Width.residualWidthBelowQ1StateCount
     quotient
+    (actualBodyOutputWidth realization)
+
+------------------------------------------------------------------------
+-- Preferred arity-tracked finite-candidate consequence.
+--
+-- This is the path on which cross-layer state reuse is explicitly forbidden.
+------------------------------------------------------------------------
+
+rejectedAnchorWidthBelowArityAdmittedCandidateStateCount :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidateDecider : Direct.PolynomialSATDeciderCandidate cost}
+    {system : Kleene.SpecializingProgramSystem}
+    {view : Diagonal.CookFormulaOutputView system}
+    {dynamicInput : Kleene.Input system}
+    {body :
+      Diagonal.SATDiagonalBody
+        candidateDecider
+        system
+        view
+        dynamicInput}
+    {remaining width : Nat}
+    (realization :
+      RejectedAnchorWidthRealization body remaining width)
+    {candidate :
+      Candidate.TransitionTableCandidate
+        (Family.cookIndexedRestrictionRoot
+          (Diagonal.asFormula view
+            (Kleene.run2 system
+              (Diagonal.bodyProgram body)
+              (quoted realization)
+              dynamicInput)))} →
+  ArityTerminal.ArityTrackedTerminalAdmission candidate →
+  width ≤ Candidate.stateCount candidate
+rejectedAnchorWidthBelowArityAdmittedCandidateStateCount
+    realization
+    admission =
+  Width.residualWidthBelowArityAdmittedCandidateStateCount
+    admission
     (actualBodyOutputWidth realization)
 
 ------------------------------------------------------------------------
