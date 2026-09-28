@@ -21,6 +21,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateDecisionVsQ1Constructio
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; zero; _+_)
+open import Data.Nat.Base using (_<_)
 open import Data.Empty using (⊥)
 import Data.Fin.Base as Fin
 open import Data.Maybe.Base using (just; nothing)
