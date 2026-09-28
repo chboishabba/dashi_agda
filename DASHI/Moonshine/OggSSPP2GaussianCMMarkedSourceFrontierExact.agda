@@ -35,6 +35,8 @@ import DASHI.Moonshine.OggSSPP2F4DependentMarkedCoverExact as DependentMark
 import DASHI.Moonshine.OggSSPP2FrobeniusVsRetainedTargetNoGoExact as FrobeniusNoGo
 import DASHI.Moonshine.Base369P2RetainedFrobeniusCoverExact as FrobeniusCover
 import DASHI.Moonshine.OggSSPP2GaussianCMTorsionCandidateNoGoExact as TorsionNoGo
+import DASHI.Moonshine.OggSSPP2BalancedTernaryPuncturedPlaneExact as BalancedPlane
+import DASHI.Moonshine.OggSSPP2BalancedTernaryNeutralCompletionBridgeExact as CompletionBridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -147,6 +149,8 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     rawF4ThreeOrbitPresentationOwned : Bool
     uniformThreeOrbitLiftRuledOut : Bool
     oneOneEightDependentTargetNormalFormOwned : Bool
+    balancedTernaryPuncturedPlaneNormalFormOwned : Bool
+    duplicatedCentreCompletionBridgeOwned : Bool
     stabilizerTypeCompatibilityOwned : Bool
     movingFrobeniusDiscreteTargetNoGoOwned : Bool
     movingC2TenOrbitPositiveControlOwned : Bool
@@ -161,6 +165,6 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary :
 canonicalP2GaussianCMMarkedSourceFrontierBoundary =
   p2-gaussian-cm-marked-source-frontier-boundary
     true true true true false
-    true true true true true true true
+    true true true true true true true true true
     false false false
     missingFormalCMOrbitEquivalence
