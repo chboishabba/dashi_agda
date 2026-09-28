@@ -33,9 +33,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
-import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact as Continuum
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H2Wilson
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSRationalContinuumH2Exact as H2Continuum
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3OS
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact as H5
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as Local
@@ -47,12 +47,6 @@ record DirectSourceOSLiteralClayInputs
     (Y : Top.LiteralYangMillsConstruction C S)
     : Set₂ where
   field
-    --------------------------------------------------------------------
-    -- H2 + H3: one continuum family, one Schwinger family, one reconstructed H.
-    --------------------------------------------------------------------
-    continuumSameObject :
-      Continuum.LiteralContinuumSameObjectBridge Y
-
     --------------------------------------------------------------------
     -- H1 + H2(ii) + H3 + H5 on one all-group source theorem.
     --
@@ -103,8 +97,8 @@ compiledContinuum :
   DirectSourceOSLiteralClayInputs Y →
   Five.UnifiedContinuumYMConstruction Y
 compiledContinuum inputs =
-  Continuum.unifiedContinuumYMFromSameObjectBridge
-    (continuumSameObject inputs)
+  H2Continuum.asUnifiedContinuumYM
+    (H5.continuum (compactSimpleDirectSource inputs))
 
 compiledMassGap :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
