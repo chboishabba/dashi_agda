@@ -37,6 +37,7 @@ open import Data.Product using (Σ; _,_; proj₁; proj₂)
 
 import DASHI.Analysis.RiemannSSP15DepthFiveRoleCodecExact as Codec
 import DASHI.Biology.SSP15PrimeValuedStateExact as PrimeValued
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Branch
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -148,20 +149,20 @@ roleCodeValuationOwnLane code =
 ------------------------------------------------------------------------
 
 jRoleCode :
-  DASHI.Biology.NonaryCompletionPhaseQuotientExact.ComplementMode5 ->
+  Quotient.ComplementMode5 ->
   Codec.RHSSP15RoleCode
 jRoleCode mode =
   mode , Codec.jRole
 
 jRolePointedIsNeutral :
-  (mode : DASHI.Biology.NonaryCompletionPhaseQuotientExact.ComplementMode5) ->
+  (mode : Quotient.ComplementMode5) ->
   Branch.signedMultiplicity
     (roleCodeToPointedSigned (jRoleCode mode))
   ≡ Signed.zeroMultiplicity
 jRolePointedIsNeutral mode = refl
 
 jRoleValuationZeroAt :
-  (mode : DASHI.Biology.NonaryCompletionPhaseQuotientExact.ComplementMode5) ->
+  (mode : Quotient.ComplementMode5) ->
   (observed : Signed.SSPPrime) ->
   roleCodeValuation (jRoleCode mode) observed
   ≡ Signed.zeroMultiplicity
