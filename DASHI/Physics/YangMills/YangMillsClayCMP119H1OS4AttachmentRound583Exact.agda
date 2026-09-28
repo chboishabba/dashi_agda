@@ -20,6 +20,11 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact as H2Core
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
+import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
+import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
+import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCovarianceExact as Cov
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
@@ -27,6 +32,62 @@ import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as 
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
+
+ExactSelectedCoreClustering :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S}
+    {h2 :
+      H2Core.CMP119DirectPhysicalH2Core
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S}
+    {covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit}
+    {group : G}
+    {source :
+      CMP116.PublishedCMP116DifferentiatedLocalization
+        Scale Volume Root SourceDirection ℝ} →
+  RealGap.CMP119CoreRealSelectedSpectrumApplication
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vector
+    Scale Volume Root SourceDirection SpectralObservable Energy
+    {sequenceLimit = sequenceLimit}
+    {limitLaws = limitLaws}
+    {quotient = quotient}
+    {division = division}
+    {S = S}
+    (H2Core.coreInputs h2)
+    covarianceLaws
+    group
+    source →
+  Set
+ExactSelectedCoreClustering
+    {h2 = h2} {covarianceLaws = covarianceLaws} {group = group}
+    application =
+  let
+    core = H2Core.coreInputs h2
+    family = OSSystem.familyCore core group
+    algebra = OSSystem.observableAlgebraCore core
+    dataSet =
+      Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily family algebra
+    extension =
+      Cov.realCovarianceExtensionFromFamily family algebra covarianceLaws
+    tests = RealGap.testsCore application
+    spectrum = RealGap.spectrumSourceCore application
+  in
+  ∀ observable time →
+    let index = R281.indexFor spectrum observable time
+    in
+    R281.LessEqual spectrum
+      (R278.connectedCovarianceMagnitude extension
+        (Gram.continuumMeasure dataSet)
+        (R278.left tests index)
+        (R278.right tests index))
+      (R281.clusteringEnvelope spectrum observable time)
 
 record CMP119CoreH1OS4Meaning
     (G X Configuration Position CurvaturePolynomial LocalOperator
@@ -82,13 +143,7 @@ record CMP119CoreH1OS4Meaning
     -- Physical meaning theorem: the exact H1 selected continuum clustering
     -- bound, on this exact core carrier, is sufficient for OS4.
     selectedH1ClusteringMeansOS4 :
-      (∀ observable time →
-        let
-          spectrum = RealGap.spectrumSourceCore application
-        in
-        RealGap.selectedCoreContinuumCovarianceBelowSpectrumEnvelope
-          application observable time)
-      →
+      ExactSelectedCoreClustering application →
       OS4Clustering
 
 open CMP119CoreH1OS4Meaning public
@@ -108,13 +163,13 @@ asCoreOS4Attachment :
     {sequenceLimit = sequenceLimit}
     limitLaws quotient division S
     h2 covarianceLaws group source application →
-  OSSystem.OS4Attachment
+  OSGap.OS4Attachment
     (OSSystem.continuumOSCoreSystem
       (H2Core.coreInputs h2) group)
 asCoreOS4Attachment meaning = record
-  { OSSystem.OS4Attachment.OS4ClusteringAttached =
+  { OSGap.OS4Attachment.OS4ClusteringAttached =
       OS4Clustering meaning
-  ; OSSystem.OS4Attachment.os4Attached =
+  ; OSGap.OS4Attachment.os4Attached =
       selectedH1ClusteringMeansOS4 meaning
         (RealGap.selectedCoreContinuumCovarianceBelowSpectrumEnvelope
           _)
