@@ -61,26 +61,28 @@ rewriteProgramEquivalentToTerminalConstant
   ,
   (λ satisfiable → satisfiable)
 rewriteProgramEquivalentToTerminalConstant
-    (Rewrite.step rewrite rest) =
+    (Rewrite.step {before = before} {after = after} rewrite rest) =
   forward
   ,
   backward
   where
     first :
-      Strict.CookSatisfiabilityEquivalent _ _
+      Strict.CookSatisfiabilityEquivalent
+        before
+        after
     first =
       Rewrite.rewriteSatisfiabilityEquivalent rewrite
 
     tail :
       Strict.CookSatisfiabilityEquivalent
-        _
+        after
         (Cook.constant
           (Rewrite.rewriteProgramTruth rest))
     tail =
       rewriteProgramEquivalentToTerminalConstant rest
 
     forward :
-      Cook.Satisfiable _ →
+      Cook.Satisfiable before →
       Cook.Satisfiable
         (Cook.constant
           (Rewrite.rewriteProgramTruth rest))
@@ -92,7 +94,7 @@ rewriteProgramEquivalentToTerminalConstant
       Cook.Satisfiable
         (Cook.constant
           (Rewrite.rewriteProgramTruth rest)) →
-      Cook.Satisfiable _
+      Cook.Satisfiable before
     backward satisfiable =
       proj₂ first
         (proj₂ tail satisfiable)
