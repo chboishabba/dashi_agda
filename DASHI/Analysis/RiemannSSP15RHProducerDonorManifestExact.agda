@@ -69,6 +69,25 @@ targetCoordinateTerm : String
 targetCoordinateTerm =
   "quarticFourAtomicTargetStrengthAt"
 
+sameGraphWeldPR : String
+sameGraphWeldPR = "dashi_lean4 PR #33"
+
+sameGraphWeldBranch : String
+sameGraphWeldBranch =
+  "agent/rh-ssp15-same-graph-weld-20260928"
+
+sameGraphWeldHead : String
+sameGraphWeldHead =
+  "3fb8061d2ce31a19f64b56ff6d3e0a087e019e9e"
+
+sameGraphWeldTheorem : String
+sameGraphWeldTheorem =
+  "Integration.RiemannSSP15RHProducerSameGraphWeld.imported_certificate_inhabited"
+
+sameGraphSignedFRACTRANTheorem : String
+sameGraphSignedFRACTRANTheorem =
+  "Integration.RiemannSSP15RHProducerSameGraphWeld.source_role_to_signed_execution_commutes"
+
 record RiemannSSP15RHProducerDonorBoundary : Set where
   constructor riemann-ssp15-rh-producer-donor-boundary
   field
@@ -83,13 +102,17 @@ record RiemannSSP15RHProducerDonorBoundary : Set where
     contentAddressedVerifierOwned : Bool
     exactHeadVerifierObserved : Bool
     donorImportedIntoCurrentLeanBranch : Bool
+    sameGraphWeldSourceWritten : Bool
+    sameGraphSignedFRACTRANWeldSourceWritten : Bool
+    sameGraphExactHeadKernelObserved : Bool
     sameGraphProducerCertificateInhabited : Bool
 
 canonicalRiemannSSP15RHProducerDonorBoundary :
   RiemannSSP15RHProducerDonorBoundary
 canonicalRiemannSSP15RHProducerDonorBoundary =
   riemann-ssp15-rh-producer-donor-boundary
-    true true true true true true true true true false false false
+    true true true true true true true true true false false
+    true true false false
 
 
 donorCommitPinnedIsTrue :
@@ -115,3 +138,22 @@ donorImportedIntoCurrentLeanBranchIsFalse :
     canonicalRiemannSSP15RHProducerDonorBoundary
   ≡ false
 donorImportedIntoCurrentLeanBranchIsFalse = refl
+
+
+sameGraphWeldSourceWrittenIsTrue :
+  RiemannSSP15RHProducerDonorBoundary.sameGraphWeldSourceWritten
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ true
+sameGraphWeldSourceWrittenIsTrue = refl
+
+sameGraphSignedFRACTRANWeldSourceWrittenIsTrue :
+  RiemannSSP15RHProducerDonorBoundary.sameGraphSignedFRACTRANWeldSourceWritten
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ true
+sameGraphSignedFRACTRANWeldSourceWrittenIsTrue = refl
+
+sameGraphExactHeadKernelObservedIsFalse :
+  RiemannSSP15RHProducerDonorBoundary.sameGraphExactHeadKernelObserved
+    canonicalRiemannSSP15RHProducerDonorBoundary
+  ≡ false
+sameGraphExactHeadKernelObservedIsFalse = refl
