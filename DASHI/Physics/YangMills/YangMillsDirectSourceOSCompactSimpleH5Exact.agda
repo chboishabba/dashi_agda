@@ -108,6 +108,15 @@ record LiteralCompactSimpleDirectSourceContinuation
       ∀ G →
       classifiedToLiteral (literalToClassified G) ≡ G
 
+    compactSimple :
+      ∀ G → Top.IsCompactSimple S G
+
+    fourDimensionalEuclidean :
+      Top.IsFourDimensionalEuclidean S (Top.spacetime Y)
+
+    compactSimpleParameterization :
+      Top.CompactSimpleParameterizationPreserved S
+
     continueLiteralDirectSource :
       (G : Compact.CompactSimpleLieGroup) →
       Compact.QuantitativeCompactLiePackage
@@ -116,6 +125,20 @@ record LiteralCompactSimpleDirectSourceContinuation
         Y (classifiedToLiteral G)
 
 open LiteralCompactSimpleDirectSourceContinuation public
+
+
+structuralBaseFromCompactSimpleContinuation :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  LiteralCompactSimpleDirectSourceContinuation Y →
+  Five.LiteralClayStructuralBase Y
+structuralBaseFromCompactSimpleContinuation source = record
+  { Five.LiteralClayStructuralBase.compactSimple =
+      compactSimple source
+  ; Five.LiteralClayStructuralBase.fourDimensionalEuclidean =
+      fourDimensionalEuclidean source
+  ; Five.LiteralClayStructuralBase.compactSimpleParameterization =
+      compactSimpleParameterization source
+  }
 
 asParametricContinuation :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
