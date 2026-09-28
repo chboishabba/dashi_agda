@@ -22,7 +22,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
@@ -240,9 +240,6 @@ repairStepCollisionImpossible
             remaining
             (action collision)
             (rightParent collision)))))
-  where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
-
 ------------------------------------------------------------------------
 -- FRONTIER
 --
