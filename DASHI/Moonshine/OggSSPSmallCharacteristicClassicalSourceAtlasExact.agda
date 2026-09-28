@@ -105,6 +105,18 @@ gorenLove =
     "classical quaternion-order authority for oriented imaginary quadratic orders: every imaginary quadratic discriminant has exactly two oriented orders up to oriented isomorphism, exchanged by the nontrivial Galois action; also relates oriented quadratic-order embeddings to primitive Gross-lattice elements"
     Source.publicAttribution
 
+banerjee : Source.AttributedSource
+banerjee =
+  Source.mkNoDOISource
+    "Romie Banerjee"
+    "A modular description of ER(2)"
+    "New York Journal of Mathematics 20, 743-758"
+    "2014"
+    "https://arxiv.org/abs/1212.2069"
+    Source.academicArticleSource
+    "source for the characteristic-2 supersingular curve C : y^2+y=x^3 over F4, Aut_F4(C)=G24, the etale G24 semidirect Gal(F4/F2)-torsor on the supersingular deformation chart, and the Serre-Tate presentation Def(C,F4)=Spf W(F4)[[a1]] with universal lift y^2+a1xy+y=x^3; does not state DASHI's five inversion-orbit quotient or ten-sector rechart"
+    Source.publicAttribution
+
 dadhwalPankaj : Source.AttributedSource
 dadhwalPankaj =
   Source.mkDOISource
@@ -174,7 +186,7 @@ smallCharacteristicClassicalAtlas =
   Source.mkSourceAtlas
     "small-characteristic supersingular/CM/level-structure classical atlas"
     "DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact"
-    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ gorenLove ∷ dadhwalPankaj ∷ stacksInertia ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
+    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ gorenLove ∷ banerjee ∷ dadhwalPankaj ∷ stacksInertia ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
     "classical authority is partitioned into coarse supersingular classification, CM reduction/optimal-embedding marking, and bad-characteristic level-moduli theory; exact DASHI finite state counts and 369 recognitions remain repository reconstructions unless independently identified"
 
 ------------------------------------------------------------------------
@@ -241,6 +253,21 @@ p2TwoOrientedQuadraticOrdersGrade :
   ClassicalSupportGrade
 p2TwoOrientedQuadraticOrdersGrade =
   directClassicalTheorem
+
+banerjeeF4UniversalDeformationTorsorGrade :
+  ClassicalSupportGrade
+banerjeeF4UniversalDeformationTorsorGrade =
+  directClassicalTheorem
+
+banerjeeWittF4PowerSeriesUniversalLiftGrade :
+  ClassicalSupportGrade
+banerjeeWittF4PowerSeriesUniversalLiftGrade =
+  directClassicalTheorem
+
+banerjeeGaloisTimesInversionOrbitTenSectorGrade :
+  ClassicalSupportGrade
+banerjeeGaloisTimesInversionOrbitTenSectorGrade =
+  repositoryCrossModuleInference
 
 binaryTetrahedralSevenConjugacyClassesGrade :
   ClassicalSupportGrade
@@ -381,6 +408,9 @@ record SmallCharacteristicClassicalSourcingBoundary : Set where
     p3DeligneRapoportLocalNodeClassicallySourced : Bool
     p2UniqueDrinfeldOrderFourSubgroupClassicallySourced : Bool
     p2TwoOrientedQuadraticOrdersClassicallySourced : Bool
+    banerjeeF4UniversalDeformationTorsorClassicallySourced : Bool
+    banerjeeWittF4UniversalLiftClassicallySourced : Bool
+    banerjeeGalTimesFiveSectorIsRepositoryConstruction : Bool
     binaryTetrahedralSevenClassesClassicallySourced : Bool
     binaryTetrahedralFiveInversionOrbitsReconstructed : Bool
     inertiaConjugacyClassFrameworkClassicallySourced : Bool
@@ -400,7 +430,7 @@ canonicalSmallCharacteristicClassicalSourcingBoundary :
   SmallCharacteristicClassicalSourcingBoundary
 canonicalSmallCharacteristicClassicalSourcingBoundary =
   small-characteristic-classical-sourcing-boundary
-    true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true
     false false false false
     false false
     true
