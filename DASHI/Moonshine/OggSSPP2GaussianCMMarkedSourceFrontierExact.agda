@@ -137,22 +137,16 @@ data P2GaussianCMSourceResidual : Set where
   missingFormalKerFrobeniusSquaredFiniteFlatConstruction :
     P2GaussianCMSourceResidual
 
-  missingArithmeticMarkingOverUniqueRawSubgroup :
+  missingFormalWittPowerSeriesUniversalDeformation :
     P2GaussianCMSourceResidual
 
-  missingUniqueGamma0MarkingBidi :
+  missingGamma0FourMarkedDeformationStates :
+    P2GaussianCMSourceResidual
+
+  missingUniversalDeformationTenStateBidi :
     P2GaussianCMSourceResidual
 
   missingSubgroupIsogenyChainBidi :
-    P2GaussianCMSourceResidual
-
-  missingOrderTwoSubflag :
-    P2GaussianCMSourceResidual
-
-  missingFormalCMOrbitEquivalence :
-    P2GaussianCMSourceResidual
-
-  missingArithmeticOneOneEightMarking :
     P2GaussianCMSourceResidual
 
   missingFrobeniusCompatibleRecognition :
@@ -186,6 +180,8 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     dualDependentCodecBidiOwned : Bool
     arithmeticBidiDualCodecTransportOwned : Bool
     universalSupersingularDeformationSourceSocketOwned : Bool
+    singleArithmeticBidiDischargesBothFiniteCodecRecognitions : Bool
+    separateArithmeticOneOneEightProofRequiredAfterBidi : Bool
     duplicatedCentreCompletionBridgeOwned : Bool
     badPrimeLevelStructureBoundaryOwned : Bool
     gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
@@ -226,6 +222,8 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; dualDependentCodecBidiOwned = true
     ; arithmeticBidiDualCodecTransportOwned = true
     ; universalSupersingularDeformationSourceSocketOwned = true
+    ; singleArithmeticBidiDischargesBothFiniteCodecRecognitions = true
+    ; separateArithmeticOneOneEightProofRequiredAfterBidi = false
     ; duplicatedCentreCompletionBridgeOwned = true
     ; badPrimeLevelStructureBoundaryOwned = true
     ; gamma0FourMarkedSubgroupSchemeSocketOwned = true
