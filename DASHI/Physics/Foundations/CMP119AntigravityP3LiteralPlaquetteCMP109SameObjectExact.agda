@@ -46,7 +46,7 @@ record P3RepresentsLiteralPlaquetteUVView
       ∀ depth →
       Bishop._≃_
         (P3.inverseCouplingSq recursion depth)
-        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+        (UV.embed (Plaquette.nextInverseCouplingSq dataSet depth))
 
     nextScaleIsUVPredecessor :
       ∀ depth →
@@ -87,7 +87,7 @@ p3LiteralPlaquetteThenCMP109
             Bishop._≃_
               (P3.inverseCouplingSq recursion depth)
               (UV.embed selected))
-          (LiteralToSource.currentInverseCouplingSame literalWeld depth)
+          (LiteralToSource.nextAtStepIsSourceCurrent literalWeld depth)
           (inverseCouplingSameLiteral p3 depth)
 
   ; UV.P3RepresentsSourceUVView.nextScaleIsUVPredecessor =
@@ -160,7 +160,7 @@ record P3RepresentsLiteralPlaquetteSplitUVView
       ∀ depth →
       Bishop._≃_
         (P3.inverseCouplingSq recursion depth)
-        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+        (UV.embed (Plaquette.nextInverseCouplingSq dataSet depth))
 
     nextScaleIsUVPredecessor :
       ∀ depth →
