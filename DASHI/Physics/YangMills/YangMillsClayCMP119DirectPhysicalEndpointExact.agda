@@ -91,14 +91,8 @@ record CMP119DirectPhysicalEndpoint
     Y = Literal.literalConstruction local
 
   field
-    compactSimple :
-      ∀ group → Top.IsCompactSimple S group
-
     fourDimensionalEuclidean :
       Top.IsFourDimensionalEuclidean S (Top.spacetime Y)
-
-    compactSimpleParameterization :
-      Top.CompactSimpleParameterizationPreserved S
 
     cSource :
       DirectC.DirectPhysicalCSource Y
@@ -141,11 +135,11 @@ structural :
     (Literal.literalConstruction local)
 structural source = record
   { Five.LiteralClayStructuralBase.compactSimple =
-      compactSimple source
+      H5.literalCompactSimple h5
   ; Five.LiteralClayStructuralBase.fourDimensionalEuclidean =
       fourDimensionalEuclidean source
   ; Five.LiteralClayStructuralBase.compactSimpleParameterization =
-      compactSimpleParameterization source
+      H5.literalCompactSimpleParameterizationPreserved h5
   }
 
 localQFT :
