@@ -39,6 +39,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; cong; sym; trans)
 
 import DASHI.Codec.TriadicPAdicCodec as Codec
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Nonary
 import DASHI.Foundations.Base369PointedAppraisalFibreExact as Pointed
 import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -48,6 +49,7 @@ import DASHI.Moonshine.Monster3BActualZetaPromotionPipelineExact as Pipeline
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Action
 import DASHI.Moonshine.Base369Monster3BMultiplicityCompletedTenTritSquareCompilerExact as Mixed
 import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact as Outgoing
+import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as FineFricke
 
 ------------------------------------------------------------------------
 -- 1. Transport actual inertia to the exact X6 x Fin90 chart.
@@ -240,6 +242,149 @@ compiledActionStaysInSelectedFibre
         | Outgoing.secondaryCodecRoundTrip secondary = refl
 
 ------------------------------------------------------------------------
+-- 4b. Conditional Fricke-like fine motion on the weaker path.
+------------------------------------------------------------------------
+
+record FineFrickeElement
+    (source : Action.ActualMonster3BActionRecognition)
+    (descent : MultiplicityProjectionDescent source)
+    : Set₁ where
+  field
+    frickeInertia : ActualInertia source
+
+    fineProjectionIsFiniteFricke :
+      (fine : Pointed.Fine10) ->
+      (sheet : Codec.Sheet9) ->
+      proj₁
+        (compiledTenByNineAct
+          source descent frickeInertia
+          (Outgoing.embedSecondaryAt fine sheet))
+      ≡ FineFricke.fine10FiniteFricke fine
+
+open FineFrickeElement public
+
+fineFrickeRejectsSelectedFineInvariant :
+  (source : Action.ActualMonster3BActionRecognition) ->
+  (descent : MultiplicityProjectionDescent source) ->
+  FineFrickeElement source descent ->
+  SelectedFineFibreInvariant source descent ->
+  ⊥
+fineFrickeRejectsSelectedFineInvariant
+  source descent element invariant =
+  FineFricke.fine10FiniteFrickeNoFixedPoint
+    (selectedFine invariant)
+    fixed
+  where
+    zeroSheet : Codec.Sheet9
+    zeroSheet =
+      FineFricke.zeroOutgoingSheet
+
+    fixed :
+      FineFricke.fine10FiniteFricke
+        (selectedFine invariant)
+      ≡ selectedFine invariant
+    fixed =
+      trans
+        (sym
+          (fineProjectionIsFiniteFricke
+            element
+            (selectedFine invariant)
+            zeroSheet))
+        (selectedFinePreserved
+          invariant
+          (frickeInertia element)
+          zeroSheet)
+
+ModeBlock18 : Set
+ModeBlock18 =
+  Nonary.BinaryPhase × Codec.Sheet9
+
+modeBlock18Count : Nat
+modeBlock18Count = 2 * 9
+
+modeBlock18CountIsEighteen :
+  modeBlock18Count ≡ 18
+modeBlock18CountIsEighteen = refl
+
+fineAtModePhase :
+  Nonary.ComplementMode5 ->
+  Nonary.BinaryPhase ->
+  Pointed.Fine10
+fineAtModePhase mode phase =
+  FineFricke.decimalToFine10
+    (Nonary.decodeModePhase (mode , phase))
+
+embedModeBlock18 :
+  Nonary.ComplementMode5 ->
+  ModeBlock18 ->
+  TenByNineSurface
+embedModeBlock18 mode (phase , sheet) =
+  Outgoing.embedSecondaryAt
+    (fineAtModePhase mode phase)
+    sheet
+
+fineFrickeAtModePhase :
+  (mode : Nonary.ComplementMode5) ->
+  (phase : Nonary.BinaryPhase) ->
+  FineFricke.fine10FiniteFricke
+    (fineAtModePhase mode phase)
+  ≡ fineAtModePhase mode (Nonary.flipBinaryPhase phase)
+fineFrickeAtModePhase Nonary.mode09 Nonary.directPhase = refl
+fineFrickeAtModePhase Nonary.mode09 Nonary.counterPhase = refl
+fineFrickeAtModePhase Nonary.mode18 Nonary.directPhase = refl
+fineFrickeAtModePhase Nonary.mode18 Nonary.counterPhase = refl
+fineFrickeAtModePhase Nonary.mode27 Nonary.directPhase = refl
+fineFrickeAtModePhase Nonary.mode27 Nonary.counterPhase = refl
+fineFrickeAtModePhase Nonary.mode36 Nonary.directPhase = refl
+fineFrickeAtModePhase Nonary.mode36 Nonary.counterPhase = refl
+fineFrickeAtModePhase Nonary.mode45 Nonary.directPhase = refl
+fineFrickeAtModePhase Nonary.mode45 Nonary.counterPhase = refl
+
+compiledFrickeModeBlock18Act :
+  (source : Action.ActualMonster3BActionRecognition) ->
+  (descent : MultiplicityProjectionDescent source) ->
+  FineFrickeElement source descent ->
+  Nonary.ComplementMode5 ->
+  ModeBlock18 ->
+  ModeBlock18
+compiledFrickeModeBlock18Act
+  source descent element mode (phase , sheet) =
+  Nonary.flipBinaryPhase phase ,
+  Outgoing.projectSecondary
+    (compiledTenByNineAct
+      source descent
+      (frickeInertia element)
+      (embedModeBlock18 mode (phase , sheet)))
+
+compiledFrickeModeBlock18Intertwines :
+  (source : Action.ActualMonster3BActionRecognition) ->
+  (descent : MultiplicityProjectionDescent source) ->
+  (element : FineFrickeElement source descent) ->
+  (mode : Nonary.ComplementMode5) ->
+  (state : ModeBlock18) ->
+  compiledTenByNineAct
+    source descent
+    (frickeInertia element)
+    (embedModeBlock18 mode state)
+  ≡
+  embedModeBlock18 mode
+    (compiledFrickeModeBlock18Act
+      source descent element mode state)
+compiledFrickeModeBlock18Intertwines
+  source descent element mode (phase , sheet)
+  with compiledTenByNineAct
+        source descent
+        (frickeInertia element)
+        (embedModeBlock18 mode (phase , sheet))
+... | fine , secondary
+  rewrite fineProjectionIsFiniteFricke
+            element
+            (fineAtModePhase mode phase)
+            sheet
+        | fineFrickeAtModePhase mode phase
+        | Outgoing.secondaryCodecRoundTrip secondary = refl
+
+------------------------------------------------------------------------
 -- 5. Exact obstruction to multiplicity descent: dependence on X6.
 ------------------------------------------------------------------------
 
@@ -297,6 +442,8 @@ record Trialectic369MultiplicityProjectionDescentCompilerBoundary : Set where
     independentX6ActionNotRequired : Bool
     canonicalTenByNineActionCompiled : Bool
     selectedFineSheetActionCompiled : Bool
+    fineFrickeRejectsSelectedFineFibre : Bool
+    frickeStableModeBlock18Compiled : Bool
     x6CrossDependenceRejectsMultiplicityDescent : Bool
     multiplicityProjectionDescentPaidHere : Bool
     selectedFineFibrePaidHere : Bool
@@ -305,4 +452,6 @@ canonicalTrialectic369MultiplicityProjectionDescentCompilerBoundary :
   Trialectic369MultiplicityProjectionDescentCompilerBoundary
 canonicalTrialectic369MultiplicityProjectionDescentCompilerBoundary =
   trialectic-369-multiplicity-projection-descent-compiler-boundary
-    true true true true true true false false
+    true true true true true
+    true true true
+    false false
