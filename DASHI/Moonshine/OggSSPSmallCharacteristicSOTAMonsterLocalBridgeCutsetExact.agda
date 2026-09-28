@@ -41,6 +41,7 @@ import DASHI.Moonshine.OggSSPSmallPrimeGeneralizedMoonshineCentralizerBridgeExac
 import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalizationExact as Bridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as Aricheta
+import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as ArichetaIgusa
 
 ------------------------------------------------------------------------
 -- 1. Unified same-object authority.
@@ -58,8 +59,8 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
       GM.SmallPrimeTwistedTraceValuationAuthority
         generalizedMoonshineBridge
 
-    badLevelArichetaExtension :
-      Aricheta.BadLevelArichetaCentralizerExtensionAuthority
+    badLevelArichetaIgusaExtension :
+      ArichetaIgusa.ArichetaIgusaBadLevelExtensionAuthority
 
     ExceptionalObject :
       Set
@@ -84,9 +85,9 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
       ExceptionalObject ->
       GM.BadLevelLocalTerm twistedTraceValuation
 
-    toArichetaBadLevelObject :
+    toArichetaIgusaBadLevelObject :
       ExceptionalObject ->
-      Aricheta.BadLevelObject badLevelArichetaExtension
+      ArichetaIgusa.BadLevelObject badLevelArichetaIgusaExtension
 
     p2ValuationAgreesWithTerminal :
       exceptionalValuation Local.monsterTwo p2ExceptionalObject
@@ -139,10 +140,10 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
     sameObjectRefinesGeneralizedMoonshineTwistedDescriptionIsTrue :
       sameObjectRefinesGeneralizedMoonshineTwistedDescription ≡ true
 
-    sameObjectRefinesArichetaBadLevelCentralizerDescription :
+    sameObjectRefinesArichetaIgusaBadLevelDescription :
       Bool
-    sameObjectRefinesArichetaBadLevelCentralizerDescriptionIsTrue :
-      sameObjectRefinesArichetaBadLevelCentralizerDescription ≡ true
+    sameObjectRefinesArichetaIgusaBadLevelDescriptionIsTrue :
+      sameObjectRefinesArichetaIgusaBadLevelDescription ≡ true
 
     sourceOrProofAuthorityForValuation :
       Bool
@@ -255,6 +256,11 @@ arichetaBadLevelBoundary :
 arichetaBadLevelBoundary =
   Aricheta.canonicalArichetaBadLevelDiagonalBoundary
 
+arichetaIgusaBadLevelBoundary :
+  ArichetaIgusa.ArichetaIgusaBadLevelExtensionBoundary
+arichetaIgusaBadLevelBoundary =
+  ArichetaIgusa.canonicalArichetaIgusaBadLevelExtensionBoundary
+
 ------------------------------------------------------------------------
 -- 5. No shortcut to the unified authority.
 ------------------------------------------------------------------------
@@ -305,9 +311,11 @@ record SOTAMonsterLocalBridgeBoundary : Set where
     sotaBadLevelTerminalRequired : Bool
     generalizedMoonshineTwistedBridgeRequired : Bool
     arichetaBadLevelCentralizerExtensionRequired : Bool
+    arichetaIgusaSameObjectIntersectionRequired : Bool
     independent2B3BLocalCentralizerTargetRequired : Bool
     sameExceptionalObjectRequired : Bool
     sameObjectArichetaBadLevelRefinementRequired : Bool
+    sameObjectArichetaIgusaRefinementRequired : Bool
     terminalValuationAgreementRequired : Bool
     twistedTraceValuationAgreementRequired : Bool
     localCentralizerDefectRecognitionRequired : Bool
@@ -320,4 +328,4 @@ canonicalSOTAMonsterLocalBridgeBoundary :
   SOTAMonsterLocalBridgeBoundary
 canonicalSOTAMonsterLocalBridgeBoundary =
   sota-monster-local-bridge-boundary
-    true true true true true true true true true true true false true
+    true true true true true true true true true true true true true false true
