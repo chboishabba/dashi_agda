@@ -384,8 +384,9 @@ The service speaks newline-delimited JSON on stdin/stdout. Example requests:
 {"id":3,"method":"promote","params":{"target":"DASHI/Biology/SomeFixedModule.agda"}}
 {"id":4,"method":"promotion_history","params":{"module_name":"DASHI.Biology.SomeFixedModule","limit":10}}
 {"id":5,"method":"semantic_status","params":{"target":"DASHI/Biology/Everything.agda"}}
-{"id":6,"method":"cache_status","params":{}}
-{"id":7,"method":"shutdown","params":{}}
+{"id":6,"method":"affected","params":{"target":"DASHI/Biology/SomeFixedModule.agda"}}
+{"id":7,"method":"cache_status","params":{}}
+{"id":8,"method":"shutdown","params":{}}
 ```
 
 Supported methods are currently:
@@ -395,6 +396,7 @@ diagnose
 next_error
 apply_fix
 semantic_status
+affected
 promote
 promotion_history
 cache_status
@@ -408,11 +410,92 @@ every operation so edits made by an external agent are observed immediately.
 SQLite state, WAL/page cache, interfaces, diagnostics and analyzer identities
 remain persistent.
 
-This JSONL service is the transport-independent core for a future MCP adapter.
-An MCP wrapper should map tools directly onto these methods rather than
-reimplementing repository traversal, cache invalidation, diagnostics or fix
-application.
+The JSONL service is the transport-independent core. The optional MCP adapter
+maps directly onto the same service methods; it does not reimplement repository
+traversal, cache invalidation, diagnostics or fix application.
 
+### MCP agent interface
+
+Install the optional MCP SDK extra on Python 3.10+:
+
+```bash
+pip install -e 'tools/agda_preflight[mcp]'
+```
+
+Then a local MCP host can launch the persistent stdio server directly:
+
+```bash
+dashi-agda-mcp \
+  --root /path/to/dashi_agda \
+  --index /path/to/dashi_agda/.cache/agda_preflight/source-index.sqlite3 \
+  --jobs 8
+```
+
+A typical stdio MCP host configuration is:
+
+```json
+{
+  "mcpServers": {
+    "dashi-agda": {
+      "command": "/path/to/dashi_agda/.venv/bin/dashi-agda-mcp",
+      "args": [
+        "--root", "/path/to/dashi_agda",
+        "--index", "/path/to/dashi_agda/.cache/agda_preflight/source-index.sqlite3",
+        "--jobs", "8"
+      ]
+    }
+  }
+}
+```
+
+The registered MCP tools are:
+
+```text
+diagnose            read-only structural diagnostics for a target/rollup
+next_error          read-only highest-priority diagnostic
+affected            read-only reverse-import consumer frontier
+cache_status        read-only persistent cache/index statistics
+semantic_status     read-only fresh/stale/unknown semantic snapshots
+apply_fix           source mutation through exact suggested edits
+promote             explicit fail-closed external semantic promotion
+promotion_history   read-only persisted promotion receipts
+ping                liveness
+```
+
+The mutation boundary is intentional:
+
+```text
+diagnose / next_error / affected / cache_status / semantic_status
+    never invoke Agda and never edit source
+
+apply_fix
+    may edit source, but only through an exact stored fix span
+    speculative fixes are rejected
+    likely fixes require allow_likely=true
+
+promote
+    is the explicit external semantic-check boundary
+    and succeeds only when the post-run semantic catalog proves freshness
+```
+
+The MCP process owns one long-lived `DashiAgdaService`, so SQLite/WAL state,
+OS page cache, persisted interfaces and diagnostic summaries are reused across
+tool calls. Each request still calls `SourceIndex.begin_request()`, ensuring
+external edits are observed rather than hidden by stale in-process parse state.
+
+For a configured agda2lean semantic catalog/promoter, pass the same options as
+the JSONL service:
+
+```bash
+dashi-agda-mcp \
+  --root /path/to/dashi_agda \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite \
+  --promoter-command '/path/to/promoter ... {file} ... {receipt}'
+```
+
+The MCP adapter uses the official SDK-v2 `MCPServer` API. The MCP dependency is
+kept optional so the core analyzer and its Python 3.9 floor do not depend on the
+SDK runtime.
 
 ## Current implementation status
 
