@@ -20,12 +20,13 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 import Data.Vec.Base as Vec
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as Truth
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1GradedShannonRepairGeneratorExact as Shannon
 
 ------------------------------------------------------------------------
 -- Decidable equality of finite Bool tables, with no function extensionality.
@@ -74,6 +75,40 @@ keyEqualityPreservesFutureSemantics :
   Width.LayerResidualEqual left right
 keyEqualityPreservesFutureSemantics =
   Truth.truthTableRepairEqualityImpliesResidualEquality
+
+------------------------------------------------------------------------
+-- Canonical semantic keys are congruent under both Shannon transitions.
+------------------------------------------------------------------------
+
+semanticKeyShannonStepExact :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (action : Bool)
+    (parent : Width.LayerNode {root = root} (suc remaining)) →
+  semanticKey (Shannon.layerChild action parent)
+  ≡
+  Truth.restrictTruthTable action (semanticKey parent)
+semanticKeyShannonStepExact =
+  Truth.truthTableRepairStepExact
+
+equalKeysGiveEqualChildKeys :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (action : Bool)
+    (left right : Width.LayerNode {root = root} (suc remaining)) →
+  semanticKey left ≡ semanticKey right →
+  semanticKey (Shannon.layerChild action left)
+  ≡
+  semanticKey (Shannon.layerChild action right)
+equalKeysGiveEqualChildKeys action left right parentEqual =
+  trans
+    (semanticKeyShannonStepExact action left)
+    (trans
+      (cong
+        (Truth.restrictTruthTable action)
+        parentEqual)
+      (sym
+        (semanticKeyShannonStepExact action right)))
 
 ------------------------------------------------------------------------
 -- Real insertion / deduplication, not a supplied equivalence oracle.
