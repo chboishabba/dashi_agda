@@ -36,7 +36,8 @@ module DASHI.Moonshine.OggSSPSmallCharacteristicIgusaRamificationNoGoExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (Nat; _*_; _^_; _-_)
+open import Agda.Builtin.Nat using (Nat; _*_)
+open import Data.Nat using (_^_; _-_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelIgusaCorrectionCutsetExact as IgusaCutset
