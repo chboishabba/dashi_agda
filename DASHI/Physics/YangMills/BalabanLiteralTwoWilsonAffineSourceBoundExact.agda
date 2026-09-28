@@ -27,6 +27,8 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base
+open import Data.Product.Base
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
@@ -38,6 +40,8 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Wilson
 import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
+import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonCylinderBoundDataExact as Cylinder
+import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 
 sourceRadius : ℚ
 sourceRadius = + 9 / 100
@@ -166,3 +170,49 @@ literalTwoWilsonAffineFactorBelowSixFifths
 
 literalTwoWilsonAffineSourceBoundLevel : ProofLevel
 literalTwoWilsonAffineSourceBoundLevel = machineChecked
+
+
+literalWilsonCylinderObservable :
+  ∀ {n : Nat} →
+  Data.List.Base.List (Wilson.RationalWilsonPath n) →
+  Wilson.RationalWilsonObservable n
+literalWilsonCylinderObservable {n} paths =
+  T5.productLoopObservable
+    (Cylinder.literalRationalSU2WilsonCylinderBounds {n})
+    paths
+
+literalWilsonCylinderPointwiseUnitBounded :
+  ∀ {n : Nat}
+    (paths : Data.List.Base.List (Wilson.RationalWilsonPath n)) →
+  Wilson.PointwiseUnitBounded (literalWilsonCylinderObservable paths)
+literalWilsonCylinderPointwiseUnitBounded {n} paths =
+  Data.Product.Base.proj₂
+    (Cylinder.finiteLiteralWilsonCylinderBound {n} paths)
+
+literalTwoWilsonCylinderAffineFactorBelowSixFifths :
+  ∀ {n : Nat}
+    (leftPaths rightPaths :
+      Data.List.Base.List (Wilson.RationalWilsonPath n))
+    leftSource rightSource →
+  SourceInsideRadius leftSource →
+  SourceInsideRadius rightSource →
+  ∀ configuration →
+  ∣ twoWilsonAffineFactor
+      leftSource rightSource
+      (literalWilsonCylinderObservable leftPaths configuration)
+      (literalWilsonCylinderObservable rightPaths configuration) ∣
+    ≤ FP.markedInflation
+literalTwoWilsonCylinderAffineFactorBelowSixFifths
+    leftPaths rightPaths leftSource rightSource
+    leftAdmissible rightAdmissible configuration =
+  twoWilsonAffineFactorBelowSixFifths
+    leftSource rightSource
+    (literalWilsonCylinderObservable leftPaths configuration)
+    (literalWilsonCylinderObservable rightPaths configuration)
+    leftAdmissible
+    rightAdmissible
+    (literalWilsonCylinderPointwiseUnitBounded leftPaths configuration)
+    (literalWilsonCylinderPointwiseUnitBounded rightPaths configuration)
+
+literalTwoWilsonCylinderAffineSourceBoundLevel : ProofLevel
+literalTwoWilsonCylinderAffineSourceBoundLevel = machineChecked
