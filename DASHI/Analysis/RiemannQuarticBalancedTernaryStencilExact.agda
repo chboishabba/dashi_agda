@@ -198,6 +198,30 @@ poleCoefficientModThreeUnitReceipt :
 poleCoefficientModThreeUnitReceipt = refl
 
 ------------------------------------------------------------------------
+-- 5b. Primitive-row / Smith-style certificate.
+--
+-- A direct Bezout witness from the first two coefficients already proves
+-- primitiveness:
+--
+--   27*243 = 82*80 + 1.
+--
+-- Thus every common divisor of the coefficient row divides 1.  This scalar
+-- primitive invariant is deliberately kept separate from the sharper 3-adic
+-- depth profile.
+------------------------------------------------------------------------
+
+primitiveBezoutCertificate :
+  27 * originCoefficient
+  ≡ 82 * poleCoefficient + 1
+primitiveBezoutCertificate = refl
+
+data PrimitiveRowCertificateDeterminesDepthProfile : Set where
+
+primitiveRowCertificateDoesNotDetermineDepthProfile :
+  PrimitiveRowCertificateDeterminesDepthProfile → ⊥
+primitiveRowCertificateDoesNotDetermineDepthProfile ()
+
+------------------------------------------------------------------------
 -- 6. Shift-polynomial normal form.
 --
 -- At X=3:
@@ -294,6 +318,8 @@ record RiemannQuarticBalancedTernaryStencilBoundary : Set where
     shiftPolynomialNormalFormOwned : Bool
     twoSpike196830IdentityReused : Bool
     sharedFourShiftBlockOwned : Bool
+    primitiveBezoutCertificateOwned : Bool
+    primitiveInvariantDeterminesDepthProfile : Bool
     analyticRHIdentityReprovedHere : Bool
     semanticCarrierIdentityClaimed : Bool
 
@@ -302,4 +328,5 @@ canonicalRiemannQuarticBalancedTernaryStencilBoundary :
 canonicalRiemannQuarticBalancedTernaryStencilBoundary =
   riemann-quartic-balanced-ternary-stencil-boundary
     true true true true true true true true
+    true false
     false false
