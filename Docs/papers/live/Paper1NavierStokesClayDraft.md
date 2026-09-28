@@ -13,12 +13,12 @@ This manuscript records the current proof-critical **periodic** Navier–Stokes
 reduction in DASHI. The programme freezes the Clay alternatives as four separate
 lanes:
 
-\`\`\`text
+```text
 Lane A = unforced whole-space R^3 regularity
 Lane B = unforced periodic T^3 regularity
 Lane C = forced whole-space breakdown
 Lane D = forced periodic breakdown
-\`\`\`
+```
 
 The active manuscript construction is **Lane B**. The current preferred
 Clay-facing analytic frontier is the post-derivative R743 two-leaf cut. Its
@@ -67,13 +67,13 @@ unforced alternative.
 
 The current preferred periodic-B interface is R743:
 
-\`\`\`text
+```text
 W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
 
 W2  integrated physical packet strict surplus
       <= integrated R723 combined residue                           OPEN
     with a strictly positive retained margin delta_N
-\`\`\`
+```
 
 The exact coordinate dictionary is now:
 
@@ -163,12 +163,12 @@ factorization of R730, not mandatory independent leaves.
 
 The repository also retains
 
-\`\`\`text
+```text
 CommutatorOnlySpacetimeBudget568
   -> R572
   -> R503.DirectOffDiagonalBudget
   -> R415 / critical-barrier consumer
-\`\`\`
+```
 
 as a valid adjacent producer/compiler lane. It is not definitionally the
 R691/R723 currency: R687 only identifies the pair-rate-lifted R568 quantity
@@ -177,7 +177,7 @@ remains open. Accordingly this chain is no longer described as the principal
 live periodic analytic interface.
 
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
-\`R406 = covariance\` equality are not part of the current terminal cut.
+`R406 = covariance` equality are not part of the current terminal cut.
 
 ## 2. Literal periodic finite-dimensional carrier
 
@@ -402,13 +402,13 @@ The construction/same-object weld is not the analytic R568 estimate.
 
 The current terminal compiler is:
 
-\`\`\`text
+```text
 W1: weighted + terminal Q_+- cutoff-uniform payment
 W2: integrated packet strict surplus <= integrated combined residue
   -> R742 / R734 / R730 exact coordinate compilers
   -> uniform critical barrier
   -> standard periodic compactness / continuation source boundary
-\`\`\`
+```
 
 R741 additionally exposes the stronger pointwise producer
 
@@ -423,12 +423,12 @@ the original integrated W2 leaf.
 
 The older direct-companion chain is retained as an **alternate** route:
 
-\`\`\`text
+```text
 CommutatorOnlySpacetimeBudget568
   -> NSTriadKNDirectLeafACompilerRound572Exact
   -> R503.DirectOffDiagonalBudget
   -> R415 / critical-barrier consumer
-\`\`\`
+```
 
 R572 is still a valid compiler, but R568 is not the canonical current analytic
 leaf. The nested Schur/R577 branch is likewise retained as a fallback producer
@@ -537,7 +537,7 @@ Citation does not import proof or certification.
 
 The active periodic-B proof-search order is now:
 
-\`\`\`text
+```text
 W1
   prove cutoff-uniform signed
   W_N(T) + Q_+-,N(T) <= B(T)
@@ -555,7 +555,7 @@ W1 + W2
   -> R742/R734/R730 exact compilers
   -> uniform critical barrier
   -> standard periodic compactness / continuation
-\`\`\`
+```
 
 The R737--R740 derivative experiment is complete as a representation test:
 the R684 input-Laplacian \(W_N\) term cancels exactly from pointwise W2, so the
@@ -566,21 +566,21 @@ itself rather than search for a coercive term created merely by differentiating
 Alternate/historical producer work remains available but is not the primary
 queue:
 
-\`\`\`text
+```text
 R571 centered/Taylor
   -> second-moment / six-three / nested signed machinery
   -> R568
   -> R572
   -> R503/R415
-\`\`\`
+```
 
 In parallel:
 
-\`\`\`text
+```text
 Lane A: independent whole-space terminal cut and named-field search
 Lane C/D: released-proof BIDI verification/provenance, non-discovery
 certification: tracked orthogonally
-\`\`\`
+```
 
 Broad archaeology is no longer a proof step. Historical/certification audits
 should proceed from named unpaid fields, while failed and superseded routes stay
