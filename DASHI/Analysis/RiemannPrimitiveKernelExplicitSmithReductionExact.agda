@@ -211,6 +211,31 @@ explicitSmithNormalForm :
   ≡ row4 (+ 1) (+ 0) (+ 0) (+ 0)
 explicitSmithNormalForm = refl
 
+rowMap : Row4 -> ℤ
+rowMap (row4 x y z w) =
+  (+ 80) * x + (+ 243) * y + (+ 1215) * z + (+ 972) * w
+
+rowPreimage : ℤ -> Row4
+rowPreimage value =
+  row4
+    ((- (+ 82)) * value)
+    ((+ 27) * value)
+    (+ 0)
+    (+ 0)
+
+rowMapHasPreimage :
+  (value : ℤ) ->
+  rowMap (rowPreimage value) ≡ value
+rowMapHasPreimage value =
+  RingZ.solve 1
+    (λ value ->
+      ( ((Κ (+ 80) ⊗ ((⊝ (Κ (+ 82))) ⊗ value))
+          ⊕ (Κ (+ 243) ⊗ (Κ (+ 27) ⊗ value))
+          ⊕ (Κ (+ 1215) ⊗ Κ (+ 0))
+          ⊕ (Κ (+ 972) ⊗ Κ (+ 0)))
+      , value ))
+    refl value
+
 record ExplicitSmithReductionBoundary : Set where
   constructor explicit-smith-reduction-boundary
   field
@@ -219,6 +244,7 @@ record ExplicitSmithReductionBoundary : Set where
     everyStepHasExplicitInverse : Bool
     fullReductionRoundTripOwned : Bool
     explicitOneZeroZeroZeroNormalFormOwned : Bool
+    rowMapSurjectivityWitnessOwned : Bool
     nontrivialBareIntegerInvariantFactorRemains : Bool
     filteredThreeAdicStructureStillAdditional : Bool
 
@@ -226,4 +252,4 @@ canonicalExplicitSmithReductionBoundary :
   ExplicitSmithReductionBoundary
 canonicalExplicitSmithReductionBoundary =
   explicit-smith-reduction-boundary
-    true true true true true false true
+    true true true true true true false true
