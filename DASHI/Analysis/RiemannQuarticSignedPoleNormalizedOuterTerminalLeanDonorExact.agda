@@ -459,6 +459,22 @@ canonicalQuarticCapPairBoundary =
 -- on the physical cap primitive must not be silently reused as B_P.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- ANCHORED / CESARO / PHYSICAL SAME-OBJECT WELD
+--
+-- Lean commits:
+--
+--   d38fd7382202cfd665486e20d22744dc4e5a9b46
+--     anchoredPrimitive4 = cubic Cesaro convolution by AC integration by parts
+--
+--   dc2d2df02b8eb71473e4eb78c6a96280dca84aac
+--     specialize to A4 and weld normalized/physical fourth primitives directly
+--     into the fourfold IBP norm bound.
+--
+-- Therefore there is no longer a representation gap between the primitive
+-- consumed by IBP and the literal physical quartic-cap N-mu carrier.
+------------------------------------------------------------------------
+
 record FourPrimitiveKernelClosureBoundary : Set where
   constructor four-primitive-kernel-closure-boundary
   field
@@ -470,20 +486,20 @@ record FourPrimitiveKernelClosureBoundary : Set where
     outerAbelInvSqPlusPrimitiveNormPaid : Bool
 
     anchoredFourthEqualsCesaroFourthPaid : Bool
-    anchoredFourthBoundPaid : Bool
+    physicalFourthFeedsAnchoredBoundSourceWritten : Bool
     unconditionalPhysicalCapBoundPaid : Bool
 
     kernelLaneClosed :
       outerAbelInvSqPlusPrimitiveNormPaid ≡ true
-    anchoredCesaroWeldStillOpen :
-      anchoredFourthEqualsCesaroFourthPaid ≡ false
-    anchoredBoundStillOpen :
-      anchoredFourthBoundPaid ≡ false
+    anchoredCesaroWeldPaid :
+      anchoredFourthEqualsCesaroFourthPaid ≡ true
+    physicalToAnchoredWeldPaid :
+      physicalFourthFeedsAnchoredBoundSourceWritten ≡ true
     physicalCapBoundStillOpen :
       unconditionalPhysicalCapBoundPaid ≡ false
 
     exactKernelEstimate : String
-    exactRemainingSameObjectSeam : String
+    exactSameObjectWeld : String
     nextAnalyticWall : String
 
 open FourPrimitiveKernelClosureBoundary public
@@ -493,11 +509,11 @@ canonicalFourPrimitiveKernelClosureBoundary :
 canonicalFourPrimitiveKernelClosureBoundary =
   four-primitive-kernel-closure-boundary
     true true true true true true
-    false false false
+    true true false
     refl refl refl refl
     "|normalizedOuterPairedAbelAt n| <= K_boundary / Q_n^2 + B_P * fifthDerivativeGlobalL1Mass"
-    "anchoredPrimitive4 A4 eta0 Q = integral_[eta0,Q] ((Q-q)^3/6) * A4(q) dq"
-    "After the anchored/Cesaro weld, prove one unconditional quantitative bound on the literal quartic-cap N-mu pairing; kernel decay and C^5 L1 are already paid."
+    "anchoredPrimitive4 A4 eta0 Q = normalizedFourthPrimitive(Q) = physicalFourthPrimitive(Q), and any physical uniform bound feeds the anchored IBP bound"
+    "Prove an unconditional quantitative bound or sufficiently controlled growth estimate for the literal quartic-cap N-mu pairing; kernel decay, C^5 L1, and all same-object welds are paid."
 
 finiteQRepresentationDebtIsPaid :
   NormalizedOuterTerminalBoundary.finiteQEstimateCompilesToHighContradictionSourceWritten
