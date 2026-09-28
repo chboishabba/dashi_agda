@@ -354,34 +354,14 @@ minCutToCompletion cut =
     (Selected3BLinearRecognitionMinCut.scaffold cut)
     (actionIntertwining cut)
 
-completionToMinCut :
-  ∀ {Monster K} →
-  (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  Selected3BLinearRecognitionMinCut {Monster} {K}
-completionToMinCut completion =
-  record
-    { scaffold = Selected3BLinearAcquisitionCompletion.scaffold completion
-    ; actionIntertwining =
-        record
-          { normalizerActionIntertwines =
-              Acquisition.normalizerActionIntertwines
-                (normalizerMonsterActionWeld completion)
-          }
-    }
+-- An arbitrary pre-existing full weld need not use the canonical transported
+-- normalizer->Monster map compiled by this module.  Therefore the converse is
+-- deliberately NOT asserted without an explicit equality of those functions.
+data ArbitraryCompletionUsesCanonicalNormalizerMap : Set where
 
-minCutCompletionRoundTrip :
-  ∀ {Monster K}
-    (cut : Selected3BLinearRecognitionMinCut {Monster} {K}) →
-  completionToMinCut (minCutToCompletion cut) ≡ cut
-minCutCompletionRoundTrip
-  record { scaffold = scaffold ; actionIntertwining = intertwining } = refl
-
-completionMinCutRoundTrip :
-  ∀ {Monster K}
-    (completion : Selected3BLinearAcquisitionCompletion {Monster} {K}) →
-  minCutToCompletion (completionToMinCut completion) ≡ completion
-completionMinCutRoundTrip
-  record { scaffold = scaffold ; normalizerMonsterActionWeld = weld } = refl
+completionDoesNotAutomaticallyGiveCanonicalMinCut :
+  ArbitraryCompletionUsesCanonicalNormalizerMap → ⊥
+completionDoesNotAutomaticallyGiveCanonicalMinCut ()
 
 ------------------------------------------------------------------------
 -- 4. All linear multiplicity payloads are already inside the completion.
@@ -492,7 +472,7 @@ record Trialectic369Selected3BLinearAcquisitionCompletionBoundary : Set where
     onlyActionIntertwiningRemainsAfterScaffold : Bool
     completionCompilerOwned : Bool
     twoFieldRecognitionMinCutOwned : Bool
-    minCutCompletionBidiPaid : Bool
+    minCutSufficesForCompletion : Bool
     linearZetaProducerCompilerOutput : Bool
     multiplicityHomSpaceCompilerOutput : Bool
     canonicalLinearRouteCompilerOutput : Bool
