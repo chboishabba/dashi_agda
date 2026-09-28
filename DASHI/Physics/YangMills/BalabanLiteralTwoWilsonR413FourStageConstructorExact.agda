@@ -151,67 +151,67 @@ asRawFourStage :
   Raw.LiteralTwoWilsonRawFourStageSource
     {Measure = Measure} {Observable = Observable}
     {dataSet = dataSet} {extension = extension} base
-asRawFourStage source = record
+asRawFourStage input = record
   { Raw.LiteralTwoWilsonRawFourStageSource.leftObservable =
-      leftObservable source
+      leftObservable input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rightObservable =
-      rightObservable source
+      rightObservable input
   ; Raw.LiteralTwoWilsonRawFourStageSource.leftJ =
-      leftJ source
+      leftJ input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rightJ =
-      rightJ source
+      rightJ input
   ; Raw.LiteralTwoWilsonRawFourStageSource.leftJIsObservableIndexed =
-      leftJIsObservableIndexed source
+      leftJIsObservableIndexed input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rightJIsObservableIndexed =
-      rightJIsObservableIndexed source
+      rightJIsObservableIndexed input
   ; Raw.LiteralTwoWilsonRawFourStageSource.leftMark =
-      leftMark source
+      leftMark input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rightMark =
-      rightMark source
+      rightMark input
   ; Raw.LiteralTwoWilsonRawFourStageSource.RawTerm =
-      RawTerm source
+      RawTerm input
   ; Raw.LiteralTwoWilsonRawFourStageSource.Domain =
-      Domain source
+      Domain input
   ; Raw.LiteralTwoWilsonRawFourStageSource.Operator =
-      Operator source
+      Operator input
   ; Raw.LiteralTwoWilsonRawFourStageSource.CarriesLink =
-      CarriesLink source
+      CarriesLink input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rawFibre =
-      rawFibre source
+      rawFibre input
   ; Raw.LiteralTwoWilsonRawFourStageSource.localizedDomains =
-      localizedDomains source
+      localizedDomains input
   ; Raw.LiteralTwoWilsonRawFourStageSource.DecouplingBoundaryAssignment =
-      DecouplingBoundaryAssignment source
+      DecouplingBoundaryAssignment input
   ; Raw.LiteralTwoWilsonRawFourStageSource.selectedDecouplingBoundary =
-      selectedDecouplingBoundary source
+      selectedDecouplingBoundary input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rawDifferentiatedTerm =
-      rawDifferentiatedTerm source
+      rawDifferentiatedTerm input
   ; Raw.LiteralTwoWilsonRawFourStageSource.operatorAlgebra =
-      operatorAlgebra source
+      operatorAlgebra input
   ; Raw.LiteralTwoWilsonRawFourStageSource.operatorOrderToReal =
-      operatorOrderToReal source
+      operatorOrderToReal input
   ; Raw.LiteralTwoWilsonRawFourStageSource.rawCanonicalPathReplay =
       λ domain raw →
-        R413.asR410CanonicalPathReplay (sourceReplay source domain raw)
+        R413.asR410CanonicalPathReplay (sourceReplay input domain raw)
   ; Raw.LiteralTwoWilsonRawFourStageSource.replayAlgebraIsOperatorAlgebra =
       λ domain raw →
-        sourceReplayAlgebraIsOperatorAlgebra source domain raw
+        sourceReplayAlgebraIsOperatorAlgebra input domain raw
   ; Raw.LiteralTwoWilsonRawFourStageSource.rawDifferentiatedTermAbsoluteIsCanonicalProductDifferenceNorm =
-      rawDifferentiatedTermAbsoluteIsCanonicalProductDifferenceNorm source
+      rawDifferentiatedTermAbsoluteIsCanonicalProductDifferenceNorm input
   ; Raw.LiteralTwoWilsonRawFourStageSource.commonYShell =
-      commonYShell source
+      commonYShell input
   ; Raw.LiteralTwoWilsonRawFourStageSource.differentiatedMajorantsBelowCommonYShell =
-      differentiatedMajorantsBelowCommonYShell source
+      differentiatedMajorantsBelowCommonYShell input
   ; Raw.LiteralTwoWilsonRawFourStageSource.selectedConnectingShell =
-      selectedConnectingShell source
+      selectedConnectingShell input
   ; Raw.LiteralTwoWilsonRawFourStageSource.commonYShellsBelowSelectedConnectingShell =
-      commonYShellsBelowSelectedConnectingShell source
+      commonYShellsBelowSelectedConnectingShell input
   ; Raw.LiteralTwoWilsonRawFourStageSource.source =
-      source source
+      source input
   ; Raw.LiteralTwoWilsonRawFourStageSource.sourceDomainsAreLiteralDomains =
-      sourceDomainsAreLiteralDomains source
+      sourceDomainsAreLiteralDomains input
   ; Raw.LiteralTwoWilsonRawFourStageSource.sourceFixedYShellIsLiteralCommonYShell =
-      sourceFixedYShellIsLiteralCommonYShell source
+      sourceFixedYShellIsLiteralCommonYShell input
   }
 
 asCanonicalTwiceMarkedFourStage :
@@ -220,5 +220,5 @@ asCanonicalTwiceMarkedFourStage :
     {Measure = Measure} {Observable = Observable}
     {dataSet = dataSet} {extension = extension} base →
   R444.CanonicalTwiceMarkedFourStageData base
-asCanonicalTwiceMarkedFourStage source =
-  Raw.asCanonicalTwiceMarkedFourStage (asRawFourStage source)
+asCanonicalTwiceMarkedFourStage input =
+  Raw.asCanonicalTwiceMarkedFourStage (asRawFourStage input)
