@@ -45,6 +45,8 @@ import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyExact as ReviewProjec
 import DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyRegression as ReviewProjectionEconomyRegression
 import DASHI.Cognition.PNF.SensibLawScale1ExactReplayEconomyReceipt as Scale1ReplayEconomy
 import DASHI.Cognition.PNF.RuntimeThroughputConstitution as Throughput
+import DASHI.Cognition.PNF.SensibLawProductionScaleAcceptanceExact as ProductionScale
+import DASHI.Cognition.PNF.SensibLawProductionScaleAcceptanceRegression as ProductionScaleRegression
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -933,3 +935,46 @@ archiveScalePerformanceCannotPromoteSemantics :
   Throughput.PerformanceSemanticPromotionPermission → ⊥
 archiveScalePerformanceCannotPromoteSemantics =
   Throughput.performanceReceiptCannotPromoteSemantics
+
+
+------------------------------------------------------------------------
+-- SCALE-1 production-scale closure requires non-vacuous empirical evidence.
+------------------------------------------------------------------------
+
+baselineOnlyDoesNotProveWorkerScaling :
+  ProductionScale.BaselinePointAloneProvesParallelScaling → ⊥
+baselineOnlyDoesNotProveWorkerScaling =
+  ProductionScale.baselinePointAloneDoesNotProveParallelScaling
+
+selfFittedEnvelopeDoesNotProveArchiveEconomy :
+  ProductionScale.SelfFittedEnvelopeAloneProvesArchiveEconomy → ⊥
+selfFittedEnvelopeDoesNotProveArchiveEconomy =
+  ProductionScale.selfFittedEnvelopeAloneDoesNotProveArchiveEconomy
+
+productionScaleClosureDoesNotCreateAuthority :
+  ProductionScale.PerformanceClosureCreatesSemanticAuthority → ⊥
+productionScaleClosureDoesNotCreateAuthority =
+  ProductionScale.performanceClosureDoesNotCreateSemanticAuthority
+
+productionScaleClosureDoesNotPromoteTruth :
+  ProductionScale.PerformanceClosurePromotesClaimTruth → ⊥
+productionScaleClosureDoesNotPromoteTruth =
+  ProductionScale.performanceClosureDoesNotPromoteClaimTruth
+
+productionScaleFixtureUsesParallelEvidence :
+  ProductionScale.parallelObservationUsesMoreThanOneWorker
+    ProductionScaleRegression.fixtureWorkers
+  ≡ true
+productionScaleFixtureUsesParallelEvidence = refl
+
+productionScaleFixtureUsesDeclaredArchiveBudget :
+  ProductionScale.declaredWorkPerCarrierBudgetMet
+    ProductionScaleRegression.fixtureArchive
+  ≡ true
+productionScaleFixtureUsesDeclaredArchiveBudget = refl
+
+productionScaleFixtureUsesArchiveSpan :
+  ProductionScale.declaredMinimumSpanRatioMet
+    ProductionScaleRegression.fixtureArchive
+  ≡ true
+productionScaleFixtureUsesArchiveSpan = refl
