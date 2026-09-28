@@ -1000,6 +1000,41 @@ class SourceIndex:
         self.profiler.count("diagnostic_candidate_lookup_misses")
         return None
 
+    def affected_modules(self, target: Path) -> Tuple[str, ...]:
+        """Return the indexed reverse-import frontier, nearest consumers first."""
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+
+        identity = self.source_identity(target)
+        if identity is None:
+            self.diagnose(target)
+            identity = self.source_identity(target)
+        if identity is None:
+            return ()
+
+        start_module, _ = identity
+        rows = self.connection.execute(
+            """
+            WITH RECURSIVE affected(module_name, depth) AS (
+                SELECT ?, 0
+                UNION
+                SELECT m.module_name, affected.depth + 1
+                FROM affected
+                JOIN imports i
+                  ON i.imported_module = affected.module_name
+                JOIN modules m
+                  ON m.path = i.importer_path
+            )
+            SELECT module_name, MIN(depth) AS depth
+            FROM affected
+            GROUP BY module_name
+            ORDER BY depth, module_name
+            """,
+            (start_module,),
+        ).fetchall()
+        self.profiler.count("affected_modules", len(rows))
+        return tuple(row["module_name"] for row in rows)
+
     def next_diagnostic(
         self,
         target: Path,
