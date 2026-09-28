@@ -172,6 +172,7 @@ class DashiAgdaService:
         target: str,
         *,
         errors_only: bool = False,
+        limit: Optional[int] = None,
     ) -> dict:
         before, started = self._start_request()
         result = self.index.diagnose(Path(target))
@@ -182,6 +183,13 @@ class DashiAgdaService:
                 for item in diagnostics
                 if item.severity == "error"
             ]
+
+        diagnostics_total = len(diagnostics)
+        if limit is not None:
+            if limit < 0:
+                raise ValueError("diagnostic limit must be non-negative")
+            diagnostics = diagnostics[:limit]
+
         semantic = self._semantic_lookup(
             dict(result.source_hashes)
         )
@@ -192,6 +200,9 @@ class DashiAgdaService:
                 item.as_dict()
                 for item in diagnostics
             ],
+            "diagnostics_total": diagnostics_total,
+            "diagnostics_returned": len(diagnostics),
+            "diagnostics_truncated": len(diagnostics) < diagnostics_total,
             "semantic": semantic,
             "semantic_counts": self._semantic_counts(semantic),
             "profile": self._finish_request(before, started),
