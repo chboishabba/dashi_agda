@@ -30,40 +30,29 @@ import DASHI.Reasoning.TrialecticObserverMatrix369Exact as Observer
 import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact as Bridge
 
 ------------------------------------------------------------------------
--- 1. Factorized trialectic carrier.
+-- 1. Reuse the canonical interaction x Heisenberg carrier exactly.
 ------------------------------------------------------------------------
 
-record TrialecticInteractionHeisenbergPoint : Set where
-  constructor trialectic-interaction-heisenberg-point
-  field
-    interactionRow : Fabric.Ternary27Point
-    appraisalRowsX6 : H.X6
-
-open TrialecticInteractionHeisenbergPoint public
+TrialecticInteractionHeisenbergPoint : Set
+TrialecticInteractionHeisenbergPoint =
+  Carrier.InteractionHeisenbergPoint
 
 observerToInteractionHeisenberg :
   Observer.ObserverMatrix3 SSP.SSPTrit ->
   TrialecticInteractionHeisenbergPoint
 observerToInteractionHeisenberg matrix =
-  trialectic-interaction-heisenberg-point
-    (Bridge.observerRowA matrix)
-    (Carrier.appraisalFibreToX6
-      (Fabric.appraisalFibrePoint
-        (Bridge.observerRowB matrix)
-        (Bridge.observerRowC matrix)))
+  Carrier.fabricToInteractionHeisenberg
+    (Bridge.observerToFabric matrix)
 
 interactionHeisenbergToObserver :
   TrialecticInteractionHeisenbergPoint ->
   Observer.ObserverMatrix3 SSP.SSPTrit
-interactionHeisenbergToObserver
-  (trialectic-interaction-heisenberg-point interaction fibre) =
+interactionHeisenbergToObserver state =
   Bridge.fabricToObserver
-    (Fabric.rebuildOverInteraction
-      interaction
-      (Carrier.x6ToAppraisalFibre fibre))
+    (Carrier.interactionHeisenbergToFabric state)
 
 ------------------------------------------------------------------------
--- 2. Exact two-sided recovery.
+-- 2. Exact two-sided recovery by composition of existing roundtrips.
 ------------------------------------------------------------------------
 
 observerInteractionHeisenbergRoundTrip :
@@ -71,30 +60,20 @@ observerInteractionHeisenbergRoundTrip :
   interactionHeisenbergToObserver
     (observerToInteractionHeisenberg matrix)
   ≡ matrix
-observerInteractionHeisenbergRoundTrip matrix =
-  trans
-    (cong
-      Bridge.fabricToObserver
-      (cong
-        (Fabric.rebuildOverInteraction (Bridge.observerRowA matrix))
-        (Carrier.appraisalFibreRoundTrip
-          (Fabric.appraisalFibrePoint
-            (Bridge.observerRowB matrix)
-            (Bridge.observerRowC matrix)))))
-    (Bridge.observerFabricRoundTrip matrix)
+observerInteractionHeisenbergRoundTrip matrix
+  rewrite Carrier.fabricHeisenbergRoundTrip
+            (Bridge.observerToFabric matrix) =
+  Bridge.observerFabricRoundTrip matrix
 
 interactionHeisenbergObserverRoundTrip :
   (state : TrialecticInteractionHeisenbergPoint) ->
   observerToInteractionHeisenberg
     (interactionHeisenbergToObserver state)
   ≡ state
-interactionHeisenbergObserverRoundTrip
-    (trialectic-interaction-heisenberg-point interaction fibre)
+interactionHeisenbergObserverRoundTrip state
   rewrite Bridge.fabricObserverRoundTrip
-            (Fabric.rebuildOverInteraction
-              interaction
-              (Carrier.x6ToAppraisalFibre fibre))
-        | Carrier.x6RoundTrip fibre = refl
+            (Carrier.interactionHeisenbergToFabric state) =
+  Carrier.heisenbergFabricRoundTrip state
 
 ------------------------------------------------------------------------
 -- 3. Commutation with the existing hyperfabric factorisation.
@@ -106,20 +85,20 @@ observerToFabricFactorizationCommutes :
     (Bridge.observerToFabric matrix)
   ≡
   Carrier.interactionHeisenbergPoint
-    (interactionRow (observerToInteractionHeisenberg matrix))
-    (appraisalRowsX6 (observerToInteractionHeisenberg matrix))
+    (Carrier.interactionBase (observerToInteractionHeisenberg matrix))
+    (Carrier.heisenbergFibre (observerToInteractionHeisenberg matrix))
 observerToFabricFactorizationCommutes matrix = refl
 
 interactionRowIsObserverRowA :
   (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
-  interactionRow (observerToInteractionHeisenberg matrix)
+  Carrier.interactionBase (observerToInteractionHeisenberg matrix)
   ≡ Bridge.observerRowA matrix
 interactionRowIsObserverRowA matrix = refl
 
 appraisalRowsDecodeToObserverRowsBC :
   (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
   Carrier.x6ToAppraisalFibre
-    (appraisalRowsX6 (observerToInteractionHeisenberg matrix))
+    (Carrier.heisenbergFibre (observerToInteractionHeisenberg matrix))
   ≡
   Fabric.appraisalFibrePoint
     (Bridge.observerRowB matrix)
