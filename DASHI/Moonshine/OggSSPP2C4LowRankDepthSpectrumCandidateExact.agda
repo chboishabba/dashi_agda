@@ -27,17 +27,27 @@ module DASHI.Moonshine.OggSSPP2C4LowRankDepthSpectrumCandidateExact where
 --   C^E    -> Z + I + Z[H]
 --   C^{AB} -> Z + I + Z[H].
 --
--- DASHI SELECTION
+-- SOURCE-COMPATIBLE / DASHI SELECTION
 --
--- Define a source-native finite family by the structural predicate
+-- Carnahan--Urano Lemma 6.4 further says that for order-4 Monster elements
+-- whose square lies in 2B, only
 --
---   rank < 4
---   AND
---   restriction is not the doubled-trivial 2 Z case.
+--   A, B, C, D, E, C^A, C^B
 --
--- This selects exactly
+-- can occur; C^E and C^{AB} are excluded by the square-subgroup restriction.
+--
+-- DASHI then removes the two coarse square-restriction shapes:
+--
+--   D -> 2 Z[H]   (doubled regular/projective),
+--   E -> 2 Z      (doubled trivial).
+--
+-- The surviving source-compatible non-coarse family is exactly
 --
 --   A, B, C, C^A, C^B,
+--
+-- whose source ranks are 1,1,2,3,3.  The older finite characterization
+-- "rank < 4 and not double-trivial" is retained below as an equivalent check,
+-- not as the conceptual selection rule.
 --
 -- whose ranks are
 --
@@ -163,7 +173,86 @@ c4DepthSpectrumSourceAtlas =
     "Carnahan--Urano own the integral C4 module table; DASHI owns the structural five-module selection and all p=2 scalar-depth cross-welding."
 
 ------------------------------------------------------------------------
--- 3. Structural low-rank / non-double-trivial selection.
+-- 3. Source-compatible order-4 -> 2B family and coarse-shape removal.
+------------------------------------------------------------------------
+
+monsterOrderFourSquareTwoBCompatible :
+  C4IntegralIndecomposable ->
+  Bool
+monsterOrderFourSquareTwoBCompatible moduleA = true
+monsterOrderFourSquareTwoBCompatible moduleB = true
+monsterOrderFourSquareTwoBCompatible moduleC = true
+monsterOrderFourSquareTwoBCompatible moduleD = true
+monsterOrderFourSquareTwoBCompatible moduleE = true
+monsterOrderFourSquareTwoBCompatible moduleCA = true
+monsterOrderFourSquareTwoBCompatible moduleCB = true
+monsterOrderFourSquareTwoBCompatible moduleCE = false
+monsterOrderFourSquareTwoBCompatible moduleCAB = false
+
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial :
+  C4IntegralIndecomposable ->
+  Bool
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleA = false
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleB = false
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleC = false
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleD = true
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleE = true
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleCA = false
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleCB = false
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleCE = false
+squareRestrictionIsCoarseProjectiveOrDoubleTrivial moduleCAB = false
+
+sourceCompatibleNonCoarse :
+  C4IntegralIndecomposable ->
+  Bool
+sourceCompatibleNonCoarse moduleA = true
+sourceCompatibleNonCoarse moduleB = true
+sourceCompatibleNonCoarse moduleC = true
+sourceCompatibleNonCoarse moduleD = false
+sourceCompatibleNonCoarse moduleE = false
+sourceCompatibleNonCoarse moduleCA = true
+sourceCompatibleNonCoarse moduleCB = true
+sourceCompatibleNonCoarse moduleCE = false
+sourceCompatibleNonCoarse moduleCAB = false
+
+sourceCompatibleSelectionA :
+  sourceCompatibleNonCoarse moduleA ≡ true
+sourceCompatibleSelectionA = refl
+
+sourceCompatibleSelectionB :
+  sourceCompatibleNonCoarse moduleB ≡ true
+sourceCompatibleSelectionB = refl
+
+sourceCompatibleSelectionC :
+  sourceCompatibleNonCoarse moduleC ≡ true
+sourceCompatibleSelectionC = refl
+
+sourceCompatibleSelectionCA :
+  sourceCompatibleNonCoarse moduleCA ≡ true
+sourceCompatibleSelectionCA = refl
+
+sourceCompatibleSelectionCB :
+  sourceCompatibleNonCoarse moduleCB ≡ true
+sourceCompatibleSelectionCB = refl
+
+sourceCompatibleRejectD :
+  sourceCompatibleNonCoarse moduleD ≡ false
+sourceCompatibleRejectD = refl
+
+sourceCompatibleRejectE :
+  sourceCompatibleNonCoarse moduleE ≡ false
+sourceCompatibleRejectE = refl
+
+sourceCompatibleRejectCE :
+  sourceCompatibleNonCoarse moduleCE ≡ false
+sourceCompatibleRejectCE = refl
+
+sourceCompatibleRejectCAB :
+  sourceCompatibleNonCoarse moduleCAB ≡ false
+sourceCompatibleRejectCAB = refl
+
+------------------------------------------------------------------------
+-- 4. Equivalent finite low-rank / non-double-trivial characterization.
 --
 -- The test is executable on ALL nine source-native labels.  It uses only the
 -- sourced rank/restriction table and does not mention Monster residuals,
@@ -245,6 +334,20 @@ rejectCABByStructuralTest :
   structurallySelected moduleCAB ≡ false
 rejectCABByStructuralTest = refl
 
+
+structuralTestsAgree :
+  (module : C4IntegralIndecomposable) ->
+  sourceCompatibleNonCoarse module ≡ structurallySelected module
+structuralTestsAgree moduleA = refl
+structuralTestsAgree moduleB = refl
+structuralTestsAgree moduleC = refl
+structuralTestsAgree moduleD = refl
+structuralTestsAgree moduleE = refl
+structuralTestsAgree moduleCA = refl
+structuralTestsAgree moduleCB = refl
+structuralTestsAgree moduleCE = refl
+structuralTestsAgree moduleCAB = refl
+
 ------------------------------------------------------------------------
 -- Witness family for exactly the labels accepted by the structural test.
 ------------------------------------------------------------------------
@@ -325,7 +428,7 @@ candidateCBRankIsThree :
 candidateCBRankIsThree = refl
 
 ------------------------------------------------------------------------
--- 4. Exact rechart to the five scalar slots.
+-- 5. Exact rechart to the five scalar slots.
 --
 -- This is a finite rank-spectrum recognition, NOT a localized-length theorem.
 ------------------------------------------------------------------------
@@ -389,7 +492,7 @@ scalarSlotDepthMatchesCandidateRank Scalar.lowSlotA = refl
 scalarSlotDepthMatchesCandidateRank Scalar.lowSlotB = refl
 
 ------------------------------------------------------------------------
--- 5. Rank-spectrum total.
+-- 6. Rank-spectrum total.
 ------------------------------------------------------------------------
 
 candidateRankTotal : Nat
@@ -405,7 +508,7 @@ candidateRankTotalIsTen :
 candidateRankTotalIsTen = refl
 
 ------------------------------------------------------------------------
--- 6. Actual 4A occurrence is DIFFERENT.
+-- 7. Actual 4A occurrence is DIFFERENT.
 --
 -- Source Theorem 6.5 uses only A, D, C^A in the actual 4A Moonshine
 -- decomposition.  We encode only this exclusion boundary here.
@@ -448,7 +551,7 @@ candidateCBNotPromotedToActualFourA :
 candidateCBNotPromotedToActualFourA ()
 
 ------------------------------------------------------------------------
--- 7. Rank is not yet localized DVR composition length.
+-- 8. Rank is not yet localized DVR composition length.
 ------------------------------------------------------------------------
 
 data RankEqualsLocalizedDVRLength : Set where
@@ -473,7 +576,7 @@ carnahanUranoNotCreditedWithFiveModuleSelection :
 carnahanUranoNotCreditedWithFiveModuleSelection ()
 
 ------------------------------------------------------------------------
--- 8. Sharpened remaining recognition theorem.
+-- 9. Sharpened remaining recognition theorem.
 --
 -- The source-native spectrum supplies a concrete five-slot candidate family.
 -- A future theorem must still show:
@@ -587,7 +690,7 @@ p2C4RankToLocalizedLengthStillOpen :
 p2C4RankToLocalizedLengthStillOpen ()
 
 ------------------------------------------------------------------------
--- 9. Boundary.
+-- 10. Boundary.
 ------------------------------------------------------------------------
 
 claimOrigin : Attribution.ClaimOrigin
@@ -599,7 +702,12 @@ record P2C4LowRankDepthSpectrumBoundary : Set where
   field
     carnahanUranoC4RankTableSourced : Bool
     carnahanUranoSquareRestrictionTableSourced : Bool
+    sourceOrderFourSquareTwoBCompatibilitySourced : Bool
+    sourceExcludesCE_CAB : Bool
+    dDoubleRegularAndEDoubleTrivialShapesSourced : Bool
+    sourceCompatibleNonCoarseSelectionOwned : Bool
     structuralLowRankNonDoubleTrivialSelectionOwned : Bool
+    structuralTestsEquivalentProved : Bool
     structuralTestExecutableOnAllNineLabels : Bool
     structuralTestRejectsD_E_CE_CAB : Bool
     selectedFamilyHasExactlyFiveLabels : Bool
@@ -624,6 +732,6 @@ canonicalP2C4LowRankDepthSpectrumBoundary :
   P2C4LowRankDepthSpectrumBoundary
 canonicalP2C4LowRankDepthSpectrumBoundary =
   p2-c4-low-rank-depth-spectrum-boundary
-    true true true true true true true true true true
+    true true true true true true true true true true true true true true
     false false false false false false false
     true false true
