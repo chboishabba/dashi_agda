@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityRunningCouplingOrientationFire
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -36,35 +37,67 @@ record NaiveSameSuccessorIdentification : Set where
 
 open NaiveSameSuccessorIdentification public
 
-naiveSameSuccessorForcesBetaZero :
+strictPositiveBetaBlocksNaiveSameSuccessor :
   (dataSet : NaiveSameSuccessorIdentification) →
-  beta dataSet ≡ 0ℚ
-naiveSameSuccessorForcesBetaZero dataSet =
+  0ℚ < beta dataSet →
+  ⊥
+strictPositiveBetaBlocksNaiveSameSuccessor dataSet betaPositive =
   let
     c = current dataSet
     n = next dataSet
     b = beta dataSet
 
-    combined :
-      c ≡ (c + b) + b
-    combined =
-      trans
-        (cmp109SourceOrientation dataSet)
-        (subst
-          (λ selected → c ≡ selected + b)
-          (sym (literalPlaquetteOrientation dataSet))
-          refl)
-  in
-  ℚRing.solve c b combined
+    zeroPlusCurrentIsCurrent : 0ℚ + c ≡ c
+    zeroPlusCurrentIsCurrent = ℚRing.solve-∀ c
 
-strictPositiveBetaBlocksNaiveSameSuccessor :
-  (dataSet : NaiveSameSuccessorIdentification) →
-  0ℚ < beta dataSet →
-  ℚ.⊥
-strictPositiveBetaBlocksNaiveSameSuccessor dataSet betaPositive =
-  ℚP.<-irrefl
-    (naiveSameSuccessorForcesBetaZero dataSet)
-    betaPositive
+    betaPlusCurrentIsCurrentPlusBeta : b + c ≡ c + b
+    betaPlusCurrentIsCurrentPlusBeta = ℚRing.solve-∀ c b
+
+    currentBelowCurrentPlusBeta : c < c + b
+    currentBelowCurrentPlusBeta =
+      subst
+        (λ left → left < c + b)
+        zeroPlusCurrentIsCurrent
+        (subst
+          (λ right → 0ℚ + c < right)
+          betaPlusCurrentIsCurrentPlusBeta
+          (ℚP.+-monoʳ-< c betaPositive))
+
+    currentBelowNext : c < n
+    currentBelowNext =
+      subst
+        (c <_)
+        (sym (literalPlaquetteOrientation dataSet))
+        currentBelowCurrentPlusBeta
+
+    zeroPlusNextIsNext : 0ℚ + n ≡ n
+    zeroPlusNextIsNext = ℚRing.solve-∀ n
+
+    betaPlusNextIsNextPlusBeta : b + n ≡ n + b
+    betaPlusNextIsNextPlusBeta = ℚRing.solve-∀ n b
+
+    nextBelowNextPlusBeta : n < n + b
+    nextBelowNextPlusBeta =
+      subst
+        (λ left → left < n + b)
+        zeroPlusNextIsNext
+        (subst
+          (λ right → 0ℚ + n < right)
+          betaPlusNextIsNextPlusBeta
+          (ℚP.+-monoʳ-< n betaPositive))
+
+    nextBelowCurrent : n < c
+    nextBelowCurrent =
+      subst
+        (n <_)
+        (sym (cmp109SourceOrientation dataSet))
+        nextBelowNextPlusBeta
+
+    currentBelowCurrent : c < c
+    currentBelowCurrent =
+      ℚP.<-trans currentBelowNext nextBelowCurrent
+  in
+  (ℚP.<-irrefl refl) currentBelowCurrent
 
 naiveSameSuccessorIdentificationAllowed : Bool
 naiveSameSuccessorIdentificationAllowed = false
