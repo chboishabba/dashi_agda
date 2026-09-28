@@ -122,6 +122,43 @@ fromDyadicSourceDecay {data = data}
   }
 
 
+
+fromDyadicObservableDistance :
+  ∀ {Measure Observable dataSet extension base data embedding}
+    (mixedLog :
+      R445.R429LiteralMixedLogResponse
+        (R444.asR429 data)
+        embedding)
+    (connected :
+      R453.ConnectedCorePathGeometry data)
+    (sourceDyadic :
+      Dyadic.ResidualDyadicSourceCalibration
+        {Measure = Measure}
+        {Observable = Observable}
+        {dataSet = dataSet}
+        {extension = extension}
+        {base = base}
+        {data = data}
+        embedding
+        (R453.asCanonicalDomainSpecificRateSplit data connected))
+    (separation :
+      R450.CanonicalObservableToGraphSeparation data) →
+  LiteralTwoWilsonMarkedExpansionTheorem
+    {Measure = Measure}
+    {Observable = Observable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    data embedding
+fromDyadicObservableDistance {data = data}
+    mixedLog connected sourceDyadic separation = record
+  { mixedLogResponse = mixedLog
+  ; connectedCore = connected
+  ; residualDecay =
+      Dyadic.asCanonicalPhysicalDecayFromObservableDistance
+        sourceDyadic separation
+  }
+
 fromRawFourStageDyadic :
   ∀ {Measure Observable dataSet extension base embedding}
     (raw :
