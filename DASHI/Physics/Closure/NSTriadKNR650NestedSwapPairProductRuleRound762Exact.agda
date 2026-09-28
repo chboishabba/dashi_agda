@@ -28,6 +28,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -37,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNR650GlobalCommutatorNestedTriadExpansionRound694Exact as R694
 import DASHI.Physics.Closure.NSTriadKNR650CommutatorSwapPairProductRuleRound761Exact as R761
 
@@ -93,7 +95,7 @@ module NestedSwapPair
       (Field30.physicalInverseSquare physicalSystem) S)
     (H : R142.HelicalHalfCalibration S)
     (velocityTransverse :
-      (mode : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode) →
+      (mode : Z3.FourierMode) →
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
@@ -107,9 +109,9 @@ module NestedSwapPair
     Physical.PhysicalTriadIncidence → C3.Complex3 F
   pairedProductRuleCell beta =
     C3.complex3Add
-      (DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact.productRuleForcingCell
+      (R230.productRuleForcingCell
         S N.Base.velocity N.Base.forcing beta)
-      (DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact.productRuleForcingCell
+      (R230.productRuleForcingCell
         S N.Base.velocity N.Base.forcing (Symmetry.swapTriad beta))
 
   nestedSwapPairIsFourProductRuleCopies :
