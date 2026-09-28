@@ -685,3 +685,5 @@ import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCanonicalDomainApplicabili
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonGeneralGeometricTrajectoryExact
 
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR413FourStageConstructorExact
+
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact
