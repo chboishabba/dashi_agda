@@ -4,7 +4,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteSourceTrajecto
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (0ℚ; _+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as Same
@@ -43,7 +43,7 @@ record LiteralPlaquetteUVChainCoherence
 open LiteralPlaquetteUVChainCoherence public
 
 sourceBeta :
-  Plaquette.PhysicalRunningCouplingData Nat → Nat → ℚ.ℚ
+  Plaquette.PhysicalRunningCouplingData Nat → Nat → ℚ
 sourceBeta dataSet zero = 0ℚ
 sourceBeta dataSet (suc depth) =
   Literal.literalBetaStep dataSet (suc depth)
