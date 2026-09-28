@@ -151,8 +151,8 @@ vecAssignment :
   ∀ {width : Nat} →
   Vec Bool width →
   SAT.Assignment width
-vecAssignment bits =
-  Circuit.lookupVec _ bits
+vecAssignment bits index =
+  Circuit.lookupVec index bits
 
 prefixAssignment :
   ∀ {prefix remaining : Nat} →
