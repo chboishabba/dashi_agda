@@ -42,6 +42,8 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicMonsterBridgeFailureLocalization
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaBadLevelDiagonalCutsetExact as Aricheta
 import DASHI.Moonshine.OggSSPSmallPrimeArichetaIgusaBadLevelExtensionExact as ArichetaIgusa
+import DASHI.Moonshine.OggSSPSmallCharacteristicBadLevelIgusaCorrectionCutsetExact as Igusa
+import DASHI.Moonshine.OggSSPSmallCharacteristicIgusaOsculationHasseCutsetExact as Osculation
 
 ------------------------------------------------------------------------
 -- 1. Unified same-object authority.
@@ -88,6 +90,20 @@ record SOTAMonsterLocalBridgeAuthority : Set₁ where
     toArichetaIgusaBadLevelObject :
       ExceptionalObject ->
       ArichetaIgusa.BadLevelObject badLevelArichetaIgusaExtension
+
+    p2ArichetaIgusaComparisonIsTerminalComparison :
+      ArichetaIgusa.p2IgusaComparison badLevelArichetaIgusaExtension
+      ≡
+      Igusa.comparison
+        (Osculation.igusaAuthority
+          (SOTATerminal.p2HasseOsculation sotaTerminal))
+
+    p3ArichetaIgusaComparisonIsTerminalComparison :
+      ArichetaIgusa.p3IgusaComparison badLevelArichetaIgusaExtension
+      ≡
+      Igusa.comparison
+        (Osculation.igusaAuthority
+          (SOTATerminal.p3HasseOsculation sotaTerminal))
 
     p2ValuationAgreesWithTerminal :
       exceptionalValuation Local.monsterTwo p2ExceptionalObject
@@ -316,6 +332,7 @@ record SOTAMonsterLocalBridgeBoundary : Set where
     sameExceptionalObjectRequired : Bool
     sameObjectArichetaBadLevelRefinementRequired : Bool
     sameObjectArichetaIgusaRefinementRequired : Bool
+    typedIgusaComparisonEqualityRequired : Bool
     terminalValuationAgreementRequired : Bool
     twistedTraceValuationAgreementRequired : Bool
     localCentralizerDefectRecognitionRequired : Bool
@@ -328,4 +345,4 @@ canonicalSOTAMonsterLocalBridgeBoundary :
   SOTAMonsterLocalBridgeBoundary
 canonicalSOTAMonsterLocalBridgeBoundary =
   sota-monster-local-bridge-boundary
-    true true true true true true true true true true true true true false true
+    true true true true true true true true true true true true true true false true
