@@ -83,6 +83,10 @@ class DashiAgdaMcpTools:
             within=within,
         )
 
+    def refresh(self, target: str) -> Dict[str, Any]:
+        """Explicitly revalidate a target after out-of-band source edits."""
+        return self.service.refresh(target)
+
     def cache_status(self) -> Dict[str, Any]:
         """Return persistent source-index/cache statistics."""
         return self.service.cache_status()
