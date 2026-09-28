@@ -49,6 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
@@ -219,7 +220,7 @@ module PointwiseGlobal
       I = End.I
       nu = End.nu
       velocity = End.velocityAt cutoff time
-      items = DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber cutoff output
+      items = Output.physicalOutputFiber cutoff output
       value = D1a.mixedProductCell End.S velocity
       mixed = R224.foldVector value items
     in
