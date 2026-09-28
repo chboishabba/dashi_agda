@@ -587,6 +587,8 @@ class DashiAgdaService:
             return self.cache_status()
         if method == "affected":
             return self.affected(**params)
+        if method == "refresh":
+            return self.refresh(**params)
         if method == "semantic_status":
             return self.semantic_status(**params)
         if method == "promote":
