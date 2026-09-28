@@ -448,3 +448,5 @@ import DASHI.Moonshine.JInvariant369SSP15OggAddressRoot369BidiExact
 import DASHI.Moonshine.OggSSPP2InertiaConjugacyClassDefectExact
 
 import DASHI.Moonshine.OggSSPP2InertiaBrauerRegularityBoundaryExact
+
+import DASHI.Moonshine.OggSSPPBTerminalPrimeLevelLocalizationTheoremExact
