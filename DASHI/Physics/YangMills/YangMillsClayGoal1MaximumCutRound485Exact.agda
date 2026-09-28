@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMaxCutRound505Exact
 
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as BWEXT
+import DASHI.Physics.YangMills.BalabanWilsonSourceFirstWEXTMaxCutExact as SourceFirstWEXT
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
 import DASHI.Physics.YangMills.YangMillsClayMassGapSemanticMaxCutRound503Exact as BSemCut
 
@@ -173,6 +174,40 @@ bWilsonTwoMarkExpansionLevel =
 bWilsonConnectingWeightTailLevel : ProofLevel
 bWilsonConnectingWeightTailLevel =
   BWEXT.literalRound494WilsonConnectingWeightTailLevel
+
+
+-- Source-first refinement beneath the coarse R494 W1/W3 leaves.
+bSourceFirstKPDatumConstructionLevel : ProofLevel
+bSourceFirstKPDatumConstructionLevel =
+  SourceFirstWEXT.sourceFirstKPDatumConstructionLevel
+
+bSourceFirstMarkedExpansionCompilerLevel : ProofLevel
+bSourceFirstMarkedExpansionCompilerLevel =
+  SourceFirstWEXT.markedLogPartitionExpansionCompilerLevel
+
+bSourceFirstTwoSupportFilterCompilerLevel : ProofLevel
+bSourceFirstTwoSupportFilterCompilerLevel =
+  SourceFirstWEXT.twoSupportFilterCompilerLevel
+
+bLiteralTerminalKPFamilyInstantiationLevel : ProofLevel
+bLiteralTerminalKPFamilyInstantiationLevel =
+  SourceFirstWEXT.literalTerminalKPFamilyInstantiationLevel
+
+bCommonDomainTwoWilsonDifferentiationLevel : ProofLevel
+bCommonDomainTwoWilsonDifferentiationLevel =
+  SourceFirstWEXT.commonDomainTwoWilsonDifferentiationLevel
+
+bPointwiseCMP116ClusterChargeLevel : ProofLevel
+bPointwiseCMP116ClusterChargeLevel =
+  SourceFirstWEXT.pointwiseCMP116ClusterChargeLevel
+
+bSummedCMP116ChargeBelowPhysicalRootedShellLevel : ProofLevel
+bSummedCMP116ChargeBelowPhysicalRootedShellLevel =
+  SourceFirstWEXT.summedCMP116ChargeBelowPhysicalRootedShellLevel
+
+bSignedMixedDerivativeIsFiniteWilsonCovarianceLevel : ProofLevel
+bSignedMixedDerivativeIsFiniteWilsonCovarianceLevel =
+  SourceFirstWEXT.signedMixedDerivativeIsFiniteWilsonCovarianceLevel
 
 bWilsonWEXTAssemblyCompilerLevel : ProofLevel
 bWilsonWEXTAssemblyCompilerLevel =
