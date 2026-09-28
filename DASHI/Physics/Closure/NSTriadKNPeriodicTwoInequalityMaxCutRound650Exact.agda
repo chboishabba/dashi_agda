@@ -6,17 +6,20 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 --
 -- After R639--R649, every representation/algebra step around the periodic
 -- critical argument has a typed compiler.  R728 exposed a three-coordinate
--- R406 factorization; R730-R732 compressed it to two terminal leaves; and
--- R733-R736 move both leaves onto one shared signed weighted/input-Laplacian
--- carrier.  The preferred live cut is therefore exactly two analytic leaves:
+-- R406 factorization; R730-R736 compressed it to two exact terminal
+-- coordinates; and R737-R743 exhaust the literal augmented-derivative attack.
+-- The preferred live analytic cut is therefore exactly two leaves:
 --
 --   W1  cutoff-uniform weighted work + terminal canonical Q_+- payment;
 --
---   W2  positive-margin augmented-critical weighted payment.
+--   W2  integrated physical packet strict surplus
+--         <= integrated R723 combined residue,
+--       with positive retained margin.
 --
--- R723/R730 are exact alternate terminal coordinates.  R726 transport plus
--- strict-margin R406 production remain a sufficient factorization of R730,
--- not mandatory terminal leaves.
+-- R734's augmented-weighted W2 is exactly equivalent to this integrated
+-- packet/combined statement.  R741 supplies a stronger pointwise producer
+-- option, but pointwise control is not mandatory.  R726 transport plus
+-- strict-margin R406 production remain alternate sufficient factorizations.
 --
 -- R645 compiles the positive C2 margin into retained viscosity, so C5 is not an
 -- independent theorem.  C4/C6/C7 remain standard source instantiations and are
