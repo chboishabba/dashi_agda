@@ -45,7 +45,7 @@ module DASHI.Moonshine.OggSSP2B3BPadicAnnihilationSlopeComparisonExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Moonshine.OggSSPSmallPrimeMonsterLocalCentralizerValuationExact as Local
