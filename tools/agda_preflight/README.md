@@ -140,6 +140,15 @@ dashi-agda apply-fix DASHI/Biology/Everything.agda <diagnostic-id> \
 
 `machine_safe` edits may be applied directly. `likely` edits require the
 explicit `--allow-likely` gate. `speculative` fixes are never machine-applied.
+Record-field edits additionally require value-expression provenance: assignments
+that occur in a record pattern on a function LHS can be diagnosed as pattern
+syntax but are never validated against the result record or exposed as machine
+edits.
+
+`apply_fix` reporting `resolved=true` means that the original structural
+diagnostic ID disappeared after the edit. It is not a semantic proof. Likely
+repairs remain provisional until an explicit promotion/Agda boundary validates
+them.
 After an edit, `apply-fix` immediately re-runs structural diagnosis through
 the persistent index and reports whether the original diagnostic ID vanished.
 It does not invoke Agda.
@@ -404,9 +413,15 @@ ping
 shutdown
 ```
 
-The process is persistent, but parsed source state is deliberately not:
-`SourceIndex.begin_request()` clears request-local module/checker caches before
-every operation so edits made by an external agent are observed immediately.
+The process is persistent, while parsed module/checker state remains
+request-local: `SourceIndex.begin_request()` still clears live AST/checker
+objects before every operation. After one rollup has been filesystem-validated
+in a long-lived service session, however, compact closure/candidate state is
+marked trusted and repeated `next_error` / scoped `affected` calls skip the
+full closure stat sweep. Source edits performed through `apply_fix` are known
+to the service; API-stable edits preserve that trust, while API-changing edits
+drop it. Use the explicit `refresh(target)` tool after out-of-band editor/git
+changes to observe and revalidate the worktree.
 SQLite state, WAL/page cache, interfaces, diagnostics and analyzer identities
 remain persistent.
 
@@ -495,9 +510,12 @@ promote
 ```
 
 The MCP process owns one long-lived `DashiAgdaService`, so SQLite/WAL state,
-OS page cache, persisted interfaces and diagnostic summaries are reused across
-tool calls. Each request still calls `SourceIndex.begin_request()`, ensuring
-external edits are observed rather than hidden by stale in-process parse state.
+OS page cache, persisted interfaces, diagnostic summaries, trusted closure
+membership and the reverse-import graph are reused across tool calls. Each
+request still calls `SourceIndex.begin_request()` so live AST/checker objects
+never leak between requests. Once a rollup is trusted, external filesystem edits
+are intentionally not discovered by repeatedly statting thousands of files;
+call `refresh(target)` when edits may have occurred outside the MCP service.
 
 MCP SDK v2 runs synchronous handlers on worker threads, while the analysis
 service owns a thread-affine SQLite connection. The adapter therefore registers
