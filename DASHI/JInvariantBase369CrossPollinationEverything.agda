@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPP2ExplicitF2CurveCandidateExact
 import DASHI.Moonshine.OggSSPP2SupersingularityCriterionBoundaryExact
 import DASHI.Moonshine.OggSSPP2ResidueFieldDescentBoundaryExact
 import DASHI.Moonshine.OggSSPP2UniversalDeformationImplementationFrontierExact
