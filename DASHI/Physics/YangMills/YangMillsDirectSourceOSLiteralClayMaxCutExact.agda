@@ -127,6 +127,8 @@ compiledNontriviality :
 compiledNontriviality inputs =
   H6.asInteractingContinuumNontriviality
     (nontrivialSameSystem inputs)
+    (compiledMassGap inputs)
+    (compiledLocalQFT inputs)
 
 literalClayEvidence :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
