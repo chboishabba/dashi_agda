@@ -24,7 +24,7 @@ open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
 import Data.Fin.Base as FinBase
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
@@ -118,9 +118,15 @@ candidateStateRepresentativeImpossible
       <
       Size.formulaNodeCount
           (Bridge.indexedToCook root)
-    contradiction
-      rewrite sym sameCount =
-      Candidate.strictlySmallerThanRoot representative
+    contradiction =
+      subst
+        (λ count →
+          count
+          <
+          Size.formulaNodeCount
+            (Bridge.indexedToCook root))
+        sameCount
+        (Candidate.strictlySmallerThanRoot representative)
 
 finiteQ1CandidateImpossible :
   ∀ {rootVariables : Nat}
