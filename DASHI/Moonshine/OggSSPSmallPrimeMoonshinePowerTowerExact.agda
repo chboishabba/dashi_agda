@@ -36,6 +36,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Moonshine.OggSSPSmallPrimeBaselineMoonshineTowerExact as BaselineTower
+import DASHI.Moonshine.OggSSPSmallCharacteristicHauptmodulTermBaselineExact as Baseline
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -98,32 +99,32 @@ cubeRelationOrderCheck = refl
 
 p2PrimeClassIs2B :
   BaselineTower.baselineClass
-    BaselineTower.Baseline.pTwo
-    BaselineTower.Baseline.primeLevel
+    Baseline.pTwo
+    Baseline.primeLevel
   ≡
   BaselineTower.class2B
 p2PrimeClassIs2B = refl
 
 p2PrimeSquareClassIs4C :
   BaselineTower.baselineClass
-    BaselineTower.Baseline.pTwo
-    BaselineTower.Baseline.primeSquareLevel
+    Baseline.pTwo
+    Baseline.primeSquareLevel
   ≡
   BaselineTower.class4C
 p2PrimeSquareClassIs4C = refl
 
 p3PrimeClassIs3B :
   BaselineTower.baselineClass
-    BaselineTower.Baseline.pThree
-    BaselineTower.Baseline.primeLevel
+    Baseline.pThree
+    Baseline.primeLevel
   ≡
   BaselineTower.class3B
 p3PrimeClassIs3B = refl
 
 p3PrimeSquareClassIs9B :
   BaselineTower.baselineClass
-    BaselineTower.Baseline.pThree
-    BaselineTower.Baseline.primeSquareLevel
+    Baseline.pThree
+    Baseline.primeSquareLevel
   ≡
   BaselineTower.class9B
 p3PrimeSquareClassIs9B = refl
