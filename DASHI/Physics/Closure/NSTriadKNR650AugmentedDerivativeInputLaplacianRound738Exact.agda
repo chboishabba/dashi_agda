@@ -50,6 +50,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exac
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as R30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
@@ -217,9 +219,10 @@ module PointwiseGlobal
   localInputLaplacianWork cutoff time output =
     let
       physicalSystem = End.physicalSystemAt cutoff time
-      I = End.I
-      nu = End.nu
-      velocity = End.velocityAt cutoff time
+      system = R30.finiteSystem physicalSystem
+      I = R30.physicalInverseSquare physicalSystem
+      nu = R30.viscosity physicalSystem
+      velocity = Audit.velocityAt system
       items = Output.physicalOutputFiber cutoff output
       value = D1a.mixedProductCell End.S velocity
       mixed = R224.foldVector value items
@@ -231,7 +234,8 @@ module PointwiseGlobal
     (cutoff : Nat) (time : Time) (output : Z3.FourierMode) →
     W.weightedWorkAt cutoff output time
     ≡ localInputLaplacianWork cutoff time output
-  localWeightedIsInputLaplacian cutoff time output =
+  localWeightedIsInputLaplacian cutoff time output
+    rewrite End.Live.Base.systemCutoffAgreement End.state cutoff time =
     R684.fixedOutputPhysicalRateKernelIsInputLaplacianWork
       (End.physicalSystemAt cutoff time)
       End.S output
