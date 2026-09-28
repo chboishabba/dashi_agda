@@ -22,6 +22,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.CompactSimpleQuantitativeCoverage as Compact
 import DASHI.Physics.YangMills.YangMillsCompactSimpleParametricPromotionReductionExact as Groups
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H2
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3
