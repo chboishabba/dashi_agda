@@ -12,6 +12,7 @@ from .source_index import SourceIndex
 from .semantic_catalog import SemanticCatalog
 from .apply_edits import apply_text_edits, EditApplicationError
 from .timing import Profiler
+from .service import DashiAgdaService
 
 
 def _run_find_cached_diagnostic(
@@ -297,6 +298,15 @@ def main(argv=None) -> int:
         default=2000.0,
         help="maximum allowed warm next-error p95 latency (default: 2000 ms)",
     )
+    benchmark.add_argument(
+        "--max-trusted-next-error-ms",
+        type=float,
+        default=50.0,
+        help=(
+            "maximum allowed trusted-session next-error p95 latency "
+            "(default: 50 ms)"
+        ),
+    )
 
     next_error = subparsers.add_parser(
         "next-error",
@@ -467,6 +477,20 @@ def main(argv=None) -> int:
             )
             next_error_snapshots.append(snapshot)
 
+        trusted_next_error_profiles = []
+        with DashiAgdaService(
+            root,
+            args.index,
+            jobs=args.jobs,
+        ) as service:
+            # Establish trust/candidate heaps once. This first request is
+            # reported separately and excluded from steady-state latency.
+            trusted_prime = service.next_error(str(target))
+            for _ in range(args.runs):
+                trusted_next_error_profiles.append(
+                    service.next_error(str(target))["profile"]
+                )
+
         cold_payload = cold_snapshot.as_dict()
         warm_ms = [
             snapshot.as_dict()["stages_ms"].get("request.total", 0.0)
@@ -489,6 +513,24 @@ def main(argv=None) -> int:
             for snapshot in next_error_snapshots
         ]
         next_error_summary = _timing_summary(next_error_ms)
+        trusted_next_error_ms = [
+            profile.get("request_total_ms", 0.0)
+            for profile in trusted_next_error_profiles
+        ]
+        trusted_next_error_summary = _timing_summary(
+            trusted_next_error_ms
+        )
+        trusted_next_error_zero_stat = all(
+            profile.get("counts", {}).get("files_stat", 0) == 0
+            for profile in trusted_next_error_profiles
+        )
+        trusted_next_error_heap_hits = all(
+            profile.get("counts", {}).get(
+                "session_candidate_rollup_hits",
+                0,
+            ) == 1
+            for profile in trusted_next_error_profiles
+        )
         cold_ms = cold_payload["stages_ms"].get("request.total", 0.0)
         all_zero_parse = all(value == 0 for value in warm_parse_counts)
         next_error_zero_parse = all(
@@ -500,8 +542,12 @@ def main(argv=None) -> int:
             and warm_summary["p95_ms"] <= args.max_warm_ms
             and next_error_summary["p95_ms"]
                 <= args.max_next_error_ms
+            and trusted_next_error_summary["p95_ms"]
+                <= args.max_trusted_next_error_ms
             and all_zero_parse
             and next_error_zero_parse
+            and trusted_next_error_zero_stat
+            and trusted_next_error_heap_hits
         )
         payload = {
             "target": str(target),
@@ -524,10 +570,21 @@ def main(argv=None) -> int:
                 },
                 "all_zero_parse": next_error_zero_parse,
             },
+            "trusted_agent_next_error": {
+                "prime_request_total_ms": trusted_prime["profile"].get(
+                    "request_total_ms",
+                    0.0,
+                ),
+                "runs": args.runs,
+                "request_total": trusted_next_error_summary,
+                "all_zero_stat": trusted_next_error_zero_stat,
+                "all_heap_hits": trusted_next_error_heap_hits,
+            },
             "slo": {
                 "max_cold_ms": args.max_cold_ms,
                 "max_warm_ms": args.max_warm_ms,
                 "max_next_error_ms": args.max_next_error_ms,
+                "max_trusted_next_error_ms": args.max_trusted_next_error_ms,
                 "passed": slo_passed,
             },
         }
@@ -559,6 +616,16 @@ def main(argv=None) -> int:
                 f"p50={next_error['p50_ms']:.3f} ms "
                 f"p95={next_error['p95_ms']:.3f} ms "
                 f"max={next_error['max_ms']:.3f} ms"
+            )
+            trusted_next_error = payload[
+                "trusted_agent_next_error"
+            ]["request_total"]
+            print(
+                "trusted next-error: "
+                f"min={trusted_next_error['min_ms']:.3f} ms "
+                f"p50={trusted_next_error['p50_ms']:.3f} ms "
+                f"p95={trusted_next_error['p95_ms']:.3f} ms "
+                f"max={trusted_next_error['max_ms']:.3f} ms"
             )
 
         print(
