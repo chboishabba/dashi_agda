@@ -82,13 +82,13 @@ asParametricContinuation :
   (source : LiteralCompactSimpleDirectSourceContinuation Y) →
   Groups.CompactSimpleParametricYMContinuation
     ℚ (LieElement source) (GroupElement source)
-asParametricContinuation source = record
+asParametricContinuation {Y = Y} source = record
   { Groups.CompactSimpleParametricYMContinuation.authority =
       authority source
   ; Groups.CompactSimpleParametricYMContinuation.PhysicalConstruction =
       λ G →
         LiteralGroupDirectSourcePackage
-          _ (classifiedToLiteral source G)
+          Y (classifiedToLiteral source G)
   ; Groups.CompactSimpleParametricYMContinuation.continueFromQuantitativePackage =
       continueLiteralDirectSource source
   }
@@ -108,9 +108,9 @@ constructionForEveryLiteralCompactSimpleGroup :
     (source : LiteralCompactSimpleDirectSourceContinuation Y)
     G →
   LiteralGroupDirectSourcePackage Y G
-constructionForEveryLiteralCompactSimpleGroup source G =
+constructionForEveryLiteralCompactSimpleGroup {Y = Y} source G =
   subst
-    (LiteralGroupDirectSourcePackage _)
+    (LiteralGroupDirectSourcePackage Y)
     (classifiedLiteralRoundtrip source G)
     (classifiedConstruction source (literalToClassified source G))
 
