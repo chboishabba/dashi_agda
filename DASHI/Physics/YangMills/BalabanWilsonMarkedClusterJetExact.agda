@@ -24,9 +24,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
+import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 
 record TwoSourceJet : Set where
   constructor jet
@@ -191,3 +192,95 @@ mixedLogJetIsTwoSupportClusterSum expansion =
         (clusters expansion)
         (clusterJet expansion)
         (supportLocality expansion)))
+
+
+------------------------------------------------------------------------
+-- Fix the target log jet directly from normalized finite moments.
+--
+-- At a normalized base point Z(0,0)=1,
+--
+--   log Z = s <L> + t <R>
+--           + s t ( <LR> - <L><R> ) + higher terms.
+--
+-- The mass-gap route consumes only this bidegree-(1,1) jet.  By fixing that
+-- target here, the source theorem no longer has to separately prove an equality
+-- between an abstract "marked mixed derivative" and the normalized Wilson
+-- response.  It only has to prove that the actual marked polymer jets sum to
+-- this concrete normalized-moment jet.
+------------------------------------------------------------------------
+
+normalizedMomentLogJet :
+  ∀ {Observable}
+    (algebra : Cumulant.TwoSourceMomentAlgebra Observable ℚ) →
+  Observable → Observable → TwoSourceJet
+normalizedMomentLogJet algebra leftObservable rightObservable =
+  jet
+    0ℚ
+    (Cumulant.expectation algebra leftObservable)
+    (Cumulant.expectation algebra rightObservable)
+    (Cumulant.connectedCovariance algebra leftObservable rightObservable)
+
+normalizedMomentLogJetMixed :
+  ∀ {Observable}
+    (algebra : Cumulant.TwoSourceMomentAlgebra Observable ℚ)
+    leftObservable rightObservable →
+  mixed (normalizedMomentLogJet algebra leftObservable rightObservable)
+  ≡
+  Cumulant.connectedCovariance algebra leftObservable rightObservable
+normalizedMomentLogJetMixed algebra leftObservable rightObservable = refl
+
+record NormalizedWilsonMarkedLogJetExpansion
+    {Observable Cluster : Set}
+    (algebra : Cumulant.TwoSourceMomentAlgebra Observable ℚ)
+    (leftObservable rightObservable : Observable)
+    : Set₁ where
+  field
+    clusters : List Cluster
+    clusterJet : Cluster → TwoSourceJet
+
+    normalizedLogJetExpansion :
+      normalizedMomentLogJet algebra leftObservable rightObservable
+      ≡ sumJets (mapJets clusterJet clusters)
+
+    supportLocality : JetSupportLocality clusterJet
+
+open NormalizedWilsonMarkedLogJetExpansion public
+
+normalizedMixedLogIsTwoSupportClusterSum :
+  ∀ {Observable Cluster}
+    {algebra : Cumulant.TwoSourceMomentAlgebra Observable ℚ}
+    (calculus : Cumulant.NormalizedLogSourceCalculus algebra)
+    (leftObservable rightObservable : Observable)
+    (expansion :
+      NormalizedWilsonMarkedLogJetExpansion
+        {Cluster = Cluster}
+        algebra leftObservable rightObservable) →
+  Cumulant.mixedSecondLogDerivative calculus leftObservable rightObservable
+  ≡
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster → mixed (clusterJet expansion cluster))
+      (filterTwoSupport
+        (touchesLeft (supportLocality expansion))
+        (touchesRight (supportLocality expansion))
+        (clusters expansion)))
+normalizedMixedLogIsTwoSupportClusterSum
+    {algebra = algebra}
+    calculus leftObservable rightObservable expansion =
+  trans
+    (Cumulant.mixedSecondLogDerivativeIsConnectedCovariance
+      calculus leftObservable rightObservable)
+    (trans
+      (sym
+        (normalizedMomentLogJetMixed
+          algebra leftObservable rightObservable))
+      (trans
+        (cong mixed (normalizedLogJetExpansion expansion))
+        (trans
+          (mixedOfMappedJetSum
+            (clusters expansion)
+            (clusterJet expansion))
+          (sumMixedFiltersToTwoSupport
+            (clusters expansion)
+            (clusterJet expansion)
+            (supportLocality expansion)))))
