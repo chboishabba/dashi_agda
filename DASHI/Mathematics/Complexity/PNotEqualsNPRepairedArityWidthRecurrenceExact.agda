@@ -37,6 +37,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCandidateRepresentativeRepairExact as Repair
+import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
@@ -53,8 +54,7 @@ repairedClosed :
     (admission :
       ArityTerminal.ArityTrackedTerminalAdmission
         (Repair.transitionCandidate candidate)) →
-  DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact.ClosedStrictRepresentativeQuotient
-    root
+  Closed.ClosedStrictRepresentativeQuotient root
 repairedClosed candidate admission =
   Repair.repairedToClosedStrictRepresentativeQuotient
     candidate
