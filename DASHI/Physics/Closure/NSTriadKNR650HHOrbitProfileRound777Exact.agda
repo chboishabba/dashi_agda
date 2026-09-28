@@ -32,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralDyadicShellConstants as Shell
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNPhysicalScaleTrichotomy as Scale
+import DASHI.Physics.Closure.NSPeriodicNearTriadClassification as Near
 import DASHI.Physics.Closure.NSTriadKNLuoPhysicalFiveClassSupportRound25Exact as R25
 import DASHI.Physics.Closure.NSTriadKNPhysicalBonySwapEquivarianceRound129Exact as R129
 import DASHI.Physics.Closure.NSTriadKNR650EnergyOrbitBonyProfileRound775Exact as R775
@@ -73,7 +74,7 @@ hhPEnergyLegIsLowHigh {beta} certificate
     (Scale.lowHighCondition transformed)
   where
   transformed :
-    DASHI.Physics.Closure.NSPeriodicNearTriadClassification.natLess
+    Near.natLess
       (Scale.shellLevel R25.literalShellPolicy
         (Physical.p (Orbit.pEnergyLeg beta))
         + Scale.overlapRadius R25.literalShellPolicy)
@@ -98,7 +99,7 @@ hhQEnergyLegIsLowHigh {beta} certificate
     (Scale.lowHighCondition transformed)
   where
   transformed :
-    DASHI.Physics.Closure.NSPeriodicNearTriadClassification.natLess
+    Near.natLess
       (Scale.shellLevel R25.literalShellPolicy
         (Physical.p (Orbit.qEnergyLeg beta))
         + Scale.overlapRadius R25.literalShellPolicy)
