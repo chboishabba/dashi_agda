@@ -1,0 +1,238 @@
+module DASHI.Reasoning.Trialectic369SSP15RecognitionCapstoneExact where
+
+------------------------------------------------------------------------
+-- TRIALECTIC -> SSP15 / OGG / 369 RECOGNITION CAPSTONE
+--
+-- DASHI CONTRIBUTION
+--
+-- Consolidate the exact carrier/action chain now paid on master:
+--
+--   original trialectic AB complement T5
+--      |
+--      | quotient incoming-to-C T2 by simultaneous inversion
+--      v
+--   PhaseOrbit15 x canonical Codec.Sheet9
+--      |
+--      | canonical-order-derived Ogg presentation
+--      v
+--   Ogg/SSP15 lane x Codec.Sheet9
+--      |
+--      | exact root-lane rechart
+--      v
+--   root-369 lane x Codec.Sheet9
+--
+-- and separately:
+--
+--   Ogg/SSP15 lane <-> canonical fixed [3,6,9] depth-3 lane slice.
+--
+-- What remains open is recognition, not carrier arithmetic:
+--
+--   * independent arithmetic/physical authority for quotienting the incoming
+--     observer pair by simultaneous inversion;
+--   * independent recognition of the retained outgoing Sheet9 residual;
+--   * any claim that the order-derived 3x5 coordinates are intrinsic modular
+--     invariants rather than a canonical presentation relative to Ogg order.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+
+import DASHI.Codec.TriadicPAdicCodec as Codec
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
+import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact as Centered
+import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
+import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
+import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
+import DASHI.Moonshine.OggSSP369RootRefinementBidiExact as Root
+import DASHI.Moonshine.OggSSP369CanonicalThreeSixNineLiftExact as Lift
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
+
+------------------------------------------------------------------------
+-- 1. Participant-centered quotient target using canonical Sheet9.
+------------------------------------------------------------------------
+
+RecognizedLocalQuotient : Set
+RecognizedLocalQuotient =
+  Reduction.PhaseOrbit15 × Codec.Sheet9
+
+participantCenteredRecognition :
+  Centered.CCenteredComplement ->
+  RecognizedLocalQuotient
+participantCenteredRecognition =
+  Sheet.participantCenteredCodecQuotient
+
+canonicalParticipantCenteredLift :
+  RecognizedLocalQuotient ->
+  Centered.CCenteredComplement
+canonicalParticipantCenteredLift =
+  Sheet.canonicalLiftParticipantCenteredCodec
+
+participantCenteredRecognitionSection :
+  (state : RecognizedLocalQuotient) ->
+  participantCenteredRecognition
+    (canonicalParticipantCenteredLift state)
+  ≡ state
+participantCenteredRecognitionSection =
+  Sheet.participantCenteredCodecSectionRoundTrip
+
+------------------------------------------------------------------------
+-- 2. Rechart the 15-state factor as Ogg/SSP15 lane.
+------------------------------------------------------------------------
+
+OggLocalRecognition : Set
+OggLocalRecognition =
+  Ogg.OggSSP15Lane × Codec.Sheet9
+
+recognizedToOgg :
+  RecognizedLocalQuotient ->
+  OggLocalRecognition
+recognizedToOgg (phaseOrbit , residual) =
+  Ogg.phaseOrbit15ToOgg phaseOrbit , residual
+
+oggToRecognized :
+  OggLocalRecognition ->
+  RecognizedLocalQuotient
+oggToRecognized (prime , residual) =
+  Ogg.oggToPhaseOrbit15 prime , residual
+
+recognizedOggRoundTrip :
+  (state : RecognizedLocalQuotient) ->
+  oggToRecognized (recognizedToOgg state)
+  ≡ state
+recognizedOggRoundTrip (phaseOrbit , residual)
+  rewrite Ogg.phaseOrbitAfterOgg phaseOrbit = refl
+
+oggRecognizedRoundTrip :
+  (state : OggLocalRecognition) ->
+  recognizedToOgg (oggToRecognized state)
+  ≡ state
+oggRecognizedRoundTrip (prime , residual)
+  rewrite Ogg.oggAfterPhaseOrbit prime = refl
+
+------------------------------------------------------------------------
+-- 3. The Ogg presentation is canonical relative to the ordered Ogg carrier.
+------------------------------------------------------------------------
+
+oggPresentationFactorsThroughCanonicalRank :
+  (prime : Ogg.OggSSP15Lane) ->
+  Ogg.oggToPhaseOrbit15 prime
+  ≡
+  Ogg.oggToPhaseOrbitViaCanonicalRank prime
+oggPresentationFactorsThroughCanonicalRank =
+  Ogg.existingPresentationFactorsThroughCanonicalRank
+
+rankArithmetic :
+  (rank : Rank.Rank15) ->
+  Rank.rankNat rank
+  ≡ 3 * Rank.block5Nat rank + Rank.phaseResidueNat rank
+rankArithmetic =
+  Rank.rankThreeByFiveArithmetic
+
+------------------------------------------------------------------------
+-- 4. Rechart the lane factor as root-369 while retaining Sheet9.
+------------------------------------------------------------------------
+
+Root369LocalRecognition : Set
+Root369LocalRecognition =
+  Root.Root369Refinement × Codec.Sheet9
+
+oggToRoot369Recognition :
+  OggLocalRecognition ->
+  Root369LocalRecognition
+oggToRoot369Recognition (prime , residual) =
+  Root.oggToRoot369 prime , residual
+
+root369ToOggRecognition :
+  Root369LocalRecognition ->
+  OggLocalRecognition
+root369ToOggRecognition (root , residual) =
+  Root.root369ToOgg root , residual
+
+oggRoot369RecognitionRoundTrip :
+  (state : OggLocalRecognition) ->
+  root369ToOggRecognition
+    (oggToRoot369Recognition state)
+  ≡ state
+oggRoot369RecognitionRoundTrip (prime , residual)
+  rewrite Root.root369OggRoundTrip prime = refl
+
+root369OggRecognitionRoundTrip :
+  (state : Root369LocalRecognition) ->
+  oggToRoot369Recognition
+    (root369ToOggRecognition state)
+  ≡ state
+root369OggRecognitionRoundTrip (root , residual)
+  rewrite Root.oggRoot369RoundTrip root = refl
+
+------------------------------------------------------------------------
+-- 5. Canonical [3,6,9] lane slice.
+------------------------------------------------------------------------
+
+oggToCanonical369 :
+  Ogg.OggSSP15Lane ->
+  Lift.CanonicalThreeSixNineLane
+oggToCanonical369 =
+  Lift.oggToCanonical369
+
+canonical369ToOgg :
+  Lift.CanonicalThreeSixNineLane ->
+  Ogg.OggSSP15Lane
+canonical369ToOgg =
+  Lift.canonical369ToOgg
+
+canonical369LaneRoundTrip :
+  (prime : Ogg.OggSSP15Lane) ->
+  canonical369ToOgg (oggToCanonical369 prime)
+  ≡ prime
+canonical369LaneRoundTrip =
+  Lift.canonical369OggRoundTrip
+
+------------------------------------------------------------------------
+-- 6. Machine-readable remaining recognition wall.
+------------------------------------------------------------------------
+
+data IncomingInversionAuthority : Set where
+data OutgoingSheet9ArithmeticRecognition : Set where
+data OrderedRankIsIntrinsicModularInvariant : Set where
+data ResidualMayBeDiscarded : Set where
+
+incomingInversionAuthorityStillOpen :
+  IncomingInversionAuthority -> ⊥
+incomingInversionAuthorityStillOpen ()
+
+outgoingSheet9ArithmeticRecognitionStillOpen :
+  OutgoingSheet9ArithmeticRecognition -> ⊥
+outgoingSheet9ArithmeticRecognitionStillOpen ()
+
+orderedRankNotPromotedToIntrinsicModularInvariant :
+  OrderedRankIsIntrinsicModularInvariant -> ⊥
+orderedRankNotPromotedToIntrinsicModularInvariant ()
+
+sheet9ResidualNotDiscarded :
+  ResidualMayBeDiscarded -> ⊥
+sheet9ResidualNotDiscarded ()
+
+record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
+  constructor trialectic-369-ssp15-recognition-capstone-boundary
+  field
+    participantCenteredT5QuotientPaid : Bool
+    quotientTargetPhaseOrbit15TimesCanonicalSheet9 : Bool
+    phaseOrbitOggBidiPaid : Bool
+    presentationFactorsThroughCanonicalOggRank : Bool
+    oggRoot369BidiPaid : Bool
+    oggCanonical369SliceBidiPaid : Bool
+    outgoingResidualIsCanonicalSheet9 : Bool
+    incomingInversionAuthorityPaid : Bool
+    outgoingSheet9ArithmeticRecognitionPaid : Bool
+    orderedRankIntrinsicModularInvariant : Bool
+    residualDiscarded : Bool
+
+canonicalTrialectic369SSP15RecognitionCapstoneBoundary :
+  Trialectic369SSP15RecognitionCapstoneBoundary
+canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
+  trialectic-369-ssp15-recognition-capstone-boundary
+    true true true true true true true
+    false false false false
