@@ -30,10 +30,10 @@ module DASHI.Physics.Closure.NSTriadKNR650PointwiseW2PhysicalPacketCombinedRound
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNLivePhysicalPacketStrictSurplusRound648Exact as R648
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
 import DASHI.Physics.Closure.NSTriadKNR650PointwiseW2CancellationRound740Exact as R740
@@ -128,7 +129,7 @@ module PhysicalW2
     K.P.globalCommutatorAt cutoff time
     ≡
     Combined.Nested.Orbit.sumCommutatorAt cutoff
-      (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
+      (Canonical.nonzeroCutoffModes cutoff)
       time
   globalCommutatorIsR723LiveSum cutoff time = refl
 
@@ -138,7 +139,7 @@ module PhysicalW2
     ≡ Combined.combinedResidueAt cutoff time
   twelveGlobalCommutatorIsCombined cutoff time =
     trans
-      (Relation.Binary.PropositionalEquality.cong
+      (cong
         (R700.twelve *_)
         (globalCommutatorIsR723LiveSum cutoff time))
       (sym (Combined.At.combinedIsTwelveLiveGlobalCommutator cutoff time))
@@ -189,17 +190,20 @@ module PhysicalW2
         ≤ R700.twelve * comm
       shifted =
         let
-          common = coeff * diss
-          hPlus = ℚP.+-mono-≤ h ℚP.≤-refl
+          minusCommon = 0ℚ - coeff * diss
+          translated :
+            prod + minusCommon
+            ≤
+            (coeff * diss + R700.twelve * comm) + minusCommon
+          translated = ℚP.+-mono-≤ h ℚP.≤-refl
         in
         subst
           (λ lhs → lhs ≤ R700.twelve * comm)
-          (solve (prod ∷ diss ∷ coeff ∷ comm ∷ R700.twelve ∷ []))
-          (ℚP.+-cancelʳ-≤ common
-            (subst
-              (λ rhs → prod + common ≤ rhs)
-              (solve (prod ∷ common ∷ comm ∷ R700.twelve ∷ []))
-              hPlus))
+          (solve (prod ∷ diss ∷ coeff ∷ []))
+          (subst
+            (λ rhs → prod + minusCommon ≤ rhs)
+            (solve (diss ∷ coeff ∷ comm ∷ R700.twelve ∷ []))
+            translated)
     in
     subst
       (_≤ combined)
@@ -239,8 +243,11 @@ module PhysicalW2
             (sym (twelveGlobalCommutatorIsCombined cutoff time))
             h)
 
-      addBack =
-        ℚP.+-mono-≤ strictSurplus ℚP.≤-refl
+      addBack :
+        (prod - coeff * diss) + coeff * diss
+        ≤
+        R700.twelve * comm + coeff * diss
+      addBack = ℚP.+-mono-≤ strictSurplus ℚP.≤-refl
     in
     subst
       (λ lhs → lhs ≤ coeff * diss + R700.twelve * comm)
@@ -248,7 +255,7 @@ module PhysicalW2
       (subst
         (λ rhs →
           (prod - coeff * diss) + coeff * diss ≤ rhs)
-        (solve (prod ∷ diss ∷ coeff ∷ comm ∷ R700.twelve ∷ []))
+        (solve (diss ∷ coeff ∷ comm ∷ R700.twelve ∷ []))
         addBack)
 
   pointwiseW2ImpliesPhysicalPacketBelowCombined :
