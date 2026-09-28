@@ -29,7 +29,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
@@ -640,7 +640,7 @@ directDPHighWidthForcesConstructorStop
 ... | nothing =
   refl
 ... | just run =
-  Data.Empty.⊥-elim
+  ⊥-elim
     (directDPSingleLayerHighWidthBlocksRun
       witness
       measureBelowWidth
