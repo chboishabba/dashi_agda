@@ -30,6 +30,8 @@ import DASHI.Moonshine.MonsterOggPrimaryDepthAndNestedEigenCarrierExact as Neste
 import DASHI.Moonshine.MonsterFivePrimaryRelationalModelBoundaryExact as FiveBoundary
 import DASHI.Reasoning.Trialectic369DyadicLocalNineObserverCandidateExact as TrialecticNine
 import DASHI.Moonshine.MonsterFiveTrialecticLocalRecognitionExact as FiveRecognition
+import DASHI.Moonshine.MonsterFiveTrialecticC3PointedRecognitionExact as FivePointed
+import DASHI.Moonshine.MonsterFiveArithmeticSourceRecognitionFrontierExact as FiveSourceFrontier
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 nonarySquareRoundTripAtEight :
@@ -195,3 +197,68 @@ actualFiveLocalCarrierStillNotPromoted :
     FiveBoundary.canonicalMonsterFivePrimaryPromotionBoundary
   ≡ false
 actualFiveLocalCarrierStillNotPromoted = refl
+
+
+------------------------------------------------------------------------
+-- p=5 source-recognition frontier update.
+------------------------------------------------------------------------
+
+p5ArithmeticFrickeRecognitionReceiptIsPaid :
+  FiveSourceFrontier.p5RepresentationFrickeClosurePaid
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ true
+p5ArithmeticFrickeRecognitionReceiptIsPaid = refl
+
+p5PrimaryDepthNineRecognitionReceiptIsPaid :
+  FiveSourceFrontier.p5PrimaryDepthNinePaid
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ true
+p5PrimaryDepthNineRecognitionReceiptIsPaid = refl
+
+p5InversePairCountRecognitionReceiptIsPaid :
+  FiveSourceFrontier.p5InversePhasePairCountTwoPaid
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ true
+p5InversePairCountRecognitionReceiptIsPaid = refl
+
+trialecticFiveRecognitionIsC3ChartIndependent :
+  FiveSourceFrontier.participantC3ChartIndependencePaid
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ true
+trialecticFiveRecognitionIsC3ChartIndependent = refl
+
+trialecticFivePointedUpgradeContractIsPaid :
+  FiveSourceFrontier.pointedLocalRepairPaid
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ true
+trialecticFivePointedUpgradeContractIsPaid = refl
+
+p5SourceNativeActualStateStillOpen :
+  FiveSourceFrontier.sourceNativeActualStateConstructed
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ false
+p5SourceNativeActualStateStillOpen = refl
+
+p5SourceNativeActualTransportStillOpen :
+  FiveSourceFrontier.sourceNativeActualTransportConstructed
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ false
+p5SourceNativeActualTransportStillOpen = refl
+
+p5SourceRecognitionStillOpen :
+  FiveSourceFrontier.sourceToTrialecticRecognitionConstructed
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ false
+p5SourceRecognitionStillOpen = refl
+
+p5PointedSourceRecognitionStillOpen :
+  FiveSourceFrontier.pointedSourceRecognitionConstructed
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ false
+p5PointedSourceRecognitionStillOpen = refl
+
+p5RecognitionFirstResidualIsActualState :
+  FiveSourceFrontier.firstResidual
+    FiveSourceFrontier.canonicalMonsterFiveArithmeticSourceRecognitionFrontierBoundary
+  ≡ FiveSourceFrontier.missingSourceNativeActualState
+p5RecognitionFirstResidualIsActualState = refl
