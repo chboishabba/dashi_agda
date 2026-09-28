@@ -39,7 +39,7 @@ import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3OS
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact as H5
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as Local
-import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as H6
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameSystemH6Exact as H6
 
 record DirectSourceOSLiteralClayInputs
     {C : Top.LiteralYangMillsCarriers}
@@ -90,7 +90,8 @@ record DirectSourceOSLiteralClayInputs
     -- H6: same continuum family + same reconstructed Hamiltonian.
     --------------------------------------------------------------------
     nontrivialSameSystem :
-      H6.Goal1NontrivialitySemanticAttachment Y
+      H6.LiteralDirectSourceSameSystemNontriviality
+        Y compactSimpleDirectSource
 
 open DirectSourceOSLiteralClayInputs public
 
