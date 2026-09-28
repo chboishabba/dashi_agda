@@ -33,7 +33,6 @@ import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Physics.Closure.P2LaneInnerProductProof as Receipt
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Target
-import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact as P2
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -251,149 +250,6 @@ tenComponentSourceMustNotBeUniformF4OrbitLift :
 tenComponentSourceMustNotBeUniformF4OrbitLift ()
 
 ------------------------------------------------------------------------
--- 4c. Lift the mismatch to the generic recognition interface.
---
--- A full recognition into the retained p2 target supplies a pi0 surjection
--- from the three raw F4 source orbits onto the ten target components.  Four
--- explicit target states already contradict that possibility.
-------------------------------------------------------------------------
-
-data FourRetainedTargetWitness : Set where
-  target0 target1 target2 target3 : FourRetainedTargetWitness
-
-retainedTargetWitness :
-  FourRetainedTargetWitness ->
-  P2.P2Base369State
-retainedTargetWitness target0 = P2.negativePolarity , P2.zeroOrbit
-retainedTargetWitness target1 = P2.positivePolarity , P2.zeroOrbit
-retainedTargetWitness target2 = P2.negativePolarity , P2.firstAxisOrbit
-retainedTargetWitness target3 = P2.positivePolarity , P2.firstAxisOrbit
-
-target0NotTarget1 :
-  retainedTargetWitness target0 ≡ retainedTargetWitness target1 -> ⊥
-target0NotTarget1 ()
-
-target0NotTarget2 :
-  retainedTargetWitness target0 ≡ retainedTargetWitness target2 -> ⊥
-target0NotTarget2 ()
-
-target0NotTarget3 :
-  retainedTargetWitness target0 ≡ retainedTargetWitness target3 -> ⊥
-target0NotTarget3 ()
-
-noPi0SurjectionFromRawF4ToRetainedP2 :
-  (mapOrbit : F4FrobeniusOrbit -> P2.P2Base369State) ->
-  ((target : P2.P2Base369State) ->
-    Σ F4FrobeniusOrbit (λ source -> mapOrbit source ≡ target)) ->
-  ⊥
-noPi0SurjectionFromRawF4ToRetainedP2 mapOrbit surjective
-  with surjective (retainedTargetWitness target0)
-     | surjective (retainedTargetWitness target1)
-     | surjective (retainedTargetWitness target2)
-     | surjective (retainedTargetWitness target3)
-... | source0 , hit0 | source1 , hit1 | source2 , hit2 | source3 , hit3
-  with source0 | source1 | source2 | source3
-... | zeroFixedOrbit | zeroFixedOrbit | _ | _ =
-  target0NotTarget1 (trans (sym hit0) hit1)
-... | zeroFixedOrbit | oneFixedOrbit | zeroFixedOrbit | _ =
-  target0NotTarget2 (trans (sym hit0) hit2)
-... | zeroFixedOrbit | oneFixedOrbit | conjugatePairOrbit | zeroFixedOrbit =
-  target0NotTarget3 (trans (sym hit0) hit3)
-... | zeroFixedOrbit | oneFixedOrbit | conjugatePairOrbit | oneFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit1) hit3))
-... | zeroFixedOrbit | oneFixedOrbit | conjugatePairOrbit | conjugatePairOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit2) hit3))
-... | oneFixedOrbit | zeroFixedOrbit | oneFixedOrbit | _ =
-  target0NotTarget2 (trans (sym hit0) hit2)
-... | oneFixedOrbit | zeroFixedOrbit | conjugatePairOrbit | oneFixedOrbit =
-  target0NotTarget3 (trans (sym hit0) hit3)
-... | oneFixedOrbit | zeroFixedOrbit | conjugatePairOrbit | zeroFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans hit1 hit3))
-... | oneFixedOrbit | zeroFixedOrbit | conjugatePairOrbit | conjugatePairOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit2) hit3))
-... | oneFixedOrbit | conjugatePairOrbit | oneFixedOrbit | _ =
-  target0NotTarget2 (trans (sym hit0) hit2)
-... | oneFixedOrbit | conjugatePairOrbit | zeroFixedOrbit | oneFixedOrbit =
-  target0NotTarget3 (trans (sym hit0) hit3)
-... | oneFixedOrbit | conjugatePairOrbit | zeroFixedOrbit | conjugatePairOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit1) hit3))
-... | oneFixedOrbit | conjugatePairOrbit | zeroFixedOrbit | zeroFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit2) hit3))
-... | conjugatePairOrbit | zeroFixedOrbit | conjugatePairOrbit | _ =
-  target0NotTarget2 (trans (sym hit0) hit2)
-... | conjugatePairOrbit | zeroFixedOrbit | oneFixedOrbit | conjugatePairOrbit =
-  target0NotTarget3 (trans (sym hit0) hit3)
-... | conjugatePairOrbit | zeroFixedOrbit | oneFixedOrbit | zeroFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans hit1 hit3))
-... | conjugatePairOrbit | zeroFixedOrbit | oneFixedOrbit | oneFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit2) hit3))
-... | conjugatePairOrbit | oneFixedOrbit | conjugatePairOrbit | _ =
-  target0NotTarget2 (trans (sym hit0) hit2)
-... | conjugatePairOrbit | oneFixedOrbit | zeroFixedOrbit | conjugatePairOrbit =
-  target0NotTarget3 (trans (sym hit0) hit3)
-... | conjugatePairOrbit | oneFixedOrbit | zeroFixedOrbit | oneFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit1) hit3))
-... | conjugatePairOrbit | oneFixedOrbit | zeroFixedOrbit | zeroFixedOrbit =
-  target0NotTarget3
-    (trans (sym hit0)
-      (trans (sym hit2) hit3))
-
-noFullRawF4RecognitionToRetainedP2 :
-  (functor :
-    Recognition.ActionRecognitionFunctor
-      f4FrobeniusAction
-      P2.p2RetainedAction) ->
-  Recognition.OrbitStabilizerRecognition
-    functor
-    f4FrobeniusOrbitPresentation
-    P2.p2RetainedOrbitPresentation ->
-  ⊥
-noFullRawF4RecognitionToRetainedP2 functor full =
-  noPi0SurjectionFromRawF4ToRetainedP2
-    (Recognition.mapOrbit orbitRecognition)
-    sourceForTarget
-  where
-    orbitRecognition :
-      Recognition.OrbitRecognition
-        functor
-        f4FrobeniusOrbitPresentation
-        P2.p2RetainedOrbitPresentation
-    orbitRecognition =
-      Recognition.orbitRecognition full
-
-    sourceForTarget :
-      (target : P2.P2Base369State) ->
-      Σ F4FrobeniusOrbit
-        (λ source ->
-          Recognition.mapOrbit orbitRecognition source ≡ target)
-    sourceForTarget target =
-      Recognition.preimageOrbit
-        (Recognition.pi0Surjection full)
-        target
-      ,
-      Recognition.hitsEveryTargetOrbit
-        (Recognition.pi0Surjection full)
-        target
-
-------------------------------------------------------------------------
 -- 5. Receipt calibration remains metadata, not action authority.
 ------------------------------------------------------------------------
 
@@ -435,7 +291,6 @@ record P2F4FrobeniusCandidateBoundary : Set where
     rawF4ThreeVsTenCountMismatchRecorded : Bool
     uniformThreeOrbitLiftRuledOut : Bool
     stratifiedMarkedRefinementRequiredIfRefiningF4Orbits : Bool
-    fullRecognitionNoGoProvedAtRecognitionInterface : Bool
     categoricalNoGoFromCountAloneClaimed : Bool
     richerMarkedLevelCMCoverRequired : Bool
     actualMarkedCMCarrierConstructedHere : Bool
@@ -445,7 +300,7 @@ canonicalP2F4FrobeniusCandidateBoundary :
 canonicalP2F4FrobeniusCandidateBoundary =
   p2-f4-frobenius-candidate-boundary
     true true true true true
-    false true true true true false true false
+    false true true true false true false
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
