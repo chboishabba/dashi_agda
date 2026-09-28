@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.SensibLawReviewProjectionEconomyRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using ([]; _∷_)
 

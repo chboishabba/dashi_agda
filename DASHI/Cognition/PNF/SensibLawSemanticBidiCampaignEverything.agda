@@ -678,14 +678,14 @@ dbNativeCommitCoalescingRequiresDurableReopen :
 dbNativeCommitCoalescingRequiresDurableReopen =
   DbNativeCorpus.commitCoalescingDoesNotSkipDurableReopen
 
-dbNativeCommitCoalescingDoesNotCreateAdmission :
+dbNativeBoundedCommitCoalescingDoesNotCreateAdmission :
   DbNativeCorpus.CommitCoalescingCreatesSemanticAdmission → ⊥
-dbNativeCommitCoalescingDoesNotCreateAdmission =
+dbNativeBoundedCommitCoalescingDoesNotCreateAdmission =
   DbNativeCorpus.commitCoalescingDoesNotCreateSemanticAdmission
 
-dbNativeCommitCoalescingDoesNotCreateAuthority :
+dbNativeBoundedCommitCoalescingDoesNotCreateAuthority :
   DbNativeCorpus.CommitCoalescingCreatesSemanticAuthority → ⊥
-dbNativeCommitCoalescingDoesNotCreateAuthority =
+dbNativeBoundedCommitCoalescingDoesNotCreateAuthority =
   DbNativeCorpus.commitCoalescingDoesNotCreateSemanticAuthority
 
 dbNativeCommitCoalescingDoesNotCreateApplicability :
@@ -693,9 +693,9 @@ dbNativeCommitCoalescingDoesNotCreateApplicability :
 dbNativeCommitCoalescingDoesNotCreateApplicability =
   DbNativeCorpus.commitCoalescingDoesNotCreateApplicability
 
-dbNativeCommitCoalescingDoesNotCreateTruth :
+dbNativeBoundedCommitCoalescingDoesNotCreateTruth :
   DbNativeCorpus.CommitCoalescingCreatesClaimTruth → ⊥
-dbNativeCommitCoalescingDoesNotCreateTruth =
+dbNativeBoundedCommitCoalescingDoesNotCreateTruth =
   DbNativeCorpus.commitCoalescingDoesNotCreateClaimTruth
 
 dbNativeFixtureBoundedCommitPreservesCandidateIdentity :
