@@ -610,6 +610,72 @@ directDPHighWidthBlocksRun
     measureBelowWidth
 
 ------------------------------------------------------------------------
+-- Operational form: any witnessed width that already exhausts the current
+-- measure forces a total constructor to stop.  This is not equality-specific.
+------------------------------------------------------------------------
+
+directDPHighWidthForcesConstructorStop :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {remaining width : Nat}
+    (witness :
+      Width.ResidualWidthWitness
+        {root =
+          Bridge.cookToIndexed
+            (Q2.currentFormula state)}
+        remaining
+        width)
+    (measureBelowWidth :
+      Q2.recursiveMeasure state
+      ≤
+      Width.triple width)
+    (constructor : DirectDPChargedStateConstructor) →
+  constructor state
+  ≡
+  nothing
+directDPHighWidthForcesConstructorStop
+    witness
+    measureBelowWidth
+    constructor
+    with constructor state
+... | nothing =
+  refl
+... | just run =
+  Data.Empty.⊥-elim
+    (directDPSingleLayerHighWidthBlocksRun
+      witness
+      measureBelowWidth
+      run)
+
+directDPHighWidthForcesQ2Stop :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    {remaining width : Nat}
+    (witness :
+      Width.ResidualWidthWitness
+        {root =
+          Bridge.cookToIndexed
+            (Q2.currentFormula state)}
+        remaining
+        width)
+    (measureBelowWidth :
+      Q2.recursiveMeasure state
+      ≤
+      Width.triple width)
+    (constructor : DirectDPChargedStateConstructor) →
+  directDPNext constructor state
+  ≡
+  nothing
+directDPHighWidthForcesQ2Stop
+    witness
+    measureBelowWidth
+    constructor
+    rewrite
+      directDPHighWidthForcesConstructorStop
+        witness
+        measureBelowWidth
+        constructor =
+  refl
+
+------------------------------------------------------------------------
 -- Total direct-DP constructor and Q2 step system.
 ------------------------------------------------------------------------
 
