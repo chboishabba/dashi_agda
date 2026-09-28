@@ -18,6 +18,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact as H5
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSRationalContinuumH2Exact as H2Continuum
 import DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact as Local
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound77FiveAnalyticCutsetExact as R77
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
@@ -41,9 +42,9 @@ record LiteralDirectSourceSameSystemNontriviality
         ContinuumFamily CurvaturePolynomial LocalOperator Position
         OPECoefficient StressTensor Hamiltonian
         (Top.Observable C)
-        (H3.Point sameOS)
+        (Top.Position C)
         ℚ
-        (H3.sourceOSSystem sameOS)
+        (H2Continuum.generatedSystem (H5.continuum source) G)
 
     sameHBridgeFromLiteralBC :
       (gap : Five.CutoffUniformPhysicalMassGap Y) →
@@ -57,9 +58,9 @@ record LiteralDirectSourceSameSystemNontriviality
       let sameOS = H5.h3ForEveryLiteralGroup source G in
       OS.InteractingContinuumWitness
         (Top.Observable C)
-        (H3.Point sameOS)
+        (Top.Position C)
         ℚ
-        (H3.sourceOSSystem sameOS) →
+        (H2Continuum.generatedSystem (H5.continuum source) G) →
       Top.IsNontrivialQuantumYangMills S G
         (Top.continuumMeasure Y G)
         (Top.schwinger Y G)
@@ -69,9 +70,9 @@ record LiteralDirectSourceSameSystemNontriviality
       let sameOS = H5.h3ForEveryLiteralGroup source G in
       OS.InteractingContinuumWitness
         (Top.Observable C)
-        (H3.Point sameOS)
+        (Top.Position C)
         ℚ
-        (H3.sourceOSSystem sameOS) →
+        (H2Continuum.generatedSystem (H5.continuum source) G) →
       Top.NontrivialityPreservedInLimit S G
         (Top.continuumMeasure Y G)
 
@@ -88,9 +89,9 @@ round77Witness :
   let sameOS = H5.h3ForEveryLiteralGroup source G in
   OS.InteractingContinuumWitness
     (Top.Observable C)
-    (H3.Point sameOS)
+    (Top.Position C)
     ℚ
-    (H3.sourceOSSystem sameOS)
+    (H2Continuum.generatedSystem (H5.continuum source) G)
 round77Witness nontrivial gap local G =
   R77.round77InteractingWitnessFromLocalAndGap
     (localPackageFromLiteralC nontrivial gap local G)
