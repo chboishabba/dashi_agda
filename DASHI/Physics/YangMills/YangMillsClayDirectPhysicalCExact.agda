@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.YangMillsClayDirectPhysicalCExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_)
 open import Data.Rational.Base using (ℚ; _*_)
@@ -32,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanMarkedSourceCompositeStressFieldExact as B
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact as Curvature
 import DASHI.Physics.YangMills.YangMillsPhysicalOPERemainderSharedTailRound442Exact as R442
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
+import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as CoefficientWeld
 import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SameCompletedCompositeStressRound427Exact as R427
@@ -135,38 +137,52 @@ record DirectPhysicalCSource
     --------------------------------------------------------------------
     -- C3: exact one-step coefficient recurrence.
     --------------------------------------------------------------------
-    Coefficient : Set
+    Coefficient RGCoordinate : Set
 
     coefficientRecurrence :
       ∀ group left right output position →
       OPE.CoefficientRGRecurrence Coefficient
 
-    coefficientProjection :
-      Coefficient → Top.OPECoefficient C₀
+    coefficientWeld :
+      ∀ group left right output position →
+      CoefficientWeld.OPECoefficientRGCoordinateWeld
+        Coefficient RGCoordinate (Top.OPECoefficient C₀)
+        (coefficientRecurrence group left right output position)
 
     coefficientDepth :
       Top.Position C₀ → Nat
 
-    literalCoefficientIsProjectedPhysical :
+    literalCoefficientIsWeldCoordinate :
       ∀ group left right output position →
       Top.opeCoefficient Y group left right output position
       ≡
-      coefficientProjection
-        (OPE.physicalCoefficient
-          (coefficientRecurrence group left right output position)
-          (coefficientDepth position))
+      CoefficientWeld.literalOPECoefficientAt
+        (coefficientWeld group left right output position)
+        (coefficientDepth position)
 
     coefficientMatchingMeansPhysical :
       ∀ group left right output position →
-      OPE.AllDepthCoefficientMatching
-        (coefficientRecurrence group left right output position) →
+      Top.opeCoefficient Y group left right output position
+      ≡
+      OPE.project
+        (CoefficientWeld.projection
+          (coefficientWeld group left right output position))
+        (OPE.asymptoticFreedomCoefficient
+          (coefficientRecurrence group left right output position)
+          (coefficientDepth position)) →
       Top.IsPhysicalOPECoefficient S group left right output position
         (Top.opeCoefficient Y group left right output position)
 
     coefficientMatchingMeansShortDistanceAF :
       (∀ group left right output position →
-        OPE.AllDepthCoefficientMatching
-          (coefficientRecurrence group left right output position)) →
+        Top.opeCoefficient Y group left right output position
+        ≡
+        OPE.project
+          (CoefficientWeld.projection
+            (coefficientWeld group left right output position))
+          (OPE.asymptoticFreedomCoefficient
+            (coefficientRecurrence group left right output position)
+            (coefficientDepth position))) →
       ∀ group →
       Top.HasShortDistanceAsymptoticFreedom S group
         (Top.schwinger Y group)
@@ -182,8 +198,14 @@ record DirectPhysicalCSource
             (completion group))
         ≡ Top.stressTensor Y group) →
       (∀ group left right output position →
-        OPE.AllDepthCoefficientMatching
-          (coefficientRecurrence group left right output position)) →
+        Top.opeCoefficient Y group left right output position
+        ≡
+        OPE.project
+          (CoefficientWeld.projection
+            (coefficientWeld group left right output position))
+          (OPE.asymptoticFreedomCoefficient
+            (coefficientRecurrence group left right output position)
+            (coefficientDepth position))) →
       (∀ group left right position depth →
         Top.IsPhysicalOPERemainder S group left right position depth
           (Top.opeRemainder Y group left right position depth)) →
@@ -194,15 +216,24 @@ record DirectPhysicalCSource
 
 open DirectPhysicalCSource public
 
-allCoefficientMatching :
+literalCoefficientMatchesAF :
   ∀ {C₀ S} {Y : Top.LiteralYangMillsConstruction C₀ S}
     (source : DirectPhysicalCSource Y) →
   ∀ group left right output position →
-  OPE.AllDepthCoefficientMatching
-    (coefficientRecurrence source group left right output position)
-allCoefficientMatching source group left right output position =
-  OPE.allDepthCoefficientMatching
-    (coefficientRecurrence source group left right output position)
+  Top.opeCoefficient Y group left right output position
+  ≡
+  OPE.project
+    (CoefficientWeld.projection
+      (coefficientWeld source group left right output position))
+    (OPE.asymptoticFreedomCoefficient
+      (coefficientRecurrence source group left right output position)
+      (coefficientDepth source position))
+literalCoefficientMatchesAF source group left right output position =
+  trans
+    (literalCoefficientIsWeldCoordinate source group left right output position)
+    (CoefficientWeld.literalOPECoefficientMatchesProjectedAFAtEveryDepth
+      (coefficientWeld source group left right output position)
+      (coefficientDepth source position))
 
 allPhysicalRemainders :
   ∀ {C₀ S} {Y : Top.LiteralYangMillsConstruction C₀ S}
@@ -241,18 +272,18 @@ asGoal1CanonicalCSource source = record
       curvatureOperatorsLocal source
   ; C.Goal1CanonicalCSource.shortDistanceAsymptoticFreedom =
       coefficientMatchingMeansShortDistanceAF source
-        (allCoefficientMatching source)
+        (literalCoefficientMatchesAF source)
   ; C.Goal1CanonicalCSource.stressTensorAndOPE =
       completedStressAndSourcesMeanStressTensorAndOPE source
         (λ group →
           R427.stressFieldIsLiteralClayStress
             (completion source group))
-        (allCoefficientMatching source)
+        (literalCoefficientMatchesAF source)
         (allPhysicalRemainders source)
   ; C.Goal1CanonicalCSource.physicalOPECoefficient =
       λ group left right output position →
         coefficientMatchingMeansPhysical source group left right output position
-          (allCoefficientMatching source group left right output position)
+          (literalCoefficientMatchesAF source group left right output position)
   ; C.Goal1CanonicalCSource.physicalOPERemainder =
       allPhysicalRemainders source
   }
