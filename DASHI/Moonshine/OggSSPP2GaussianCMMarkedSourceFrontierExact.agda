@@ -46,6 +46,7 @@ import DASHI.Moonshine.OggSSPP2SupersingularUniversalDeformationSourceExact as U
 import DASHI.Moonshine.OggSSPP2UniversalDeformationImplementationFrontierExact as UniversalImpl
 import DASHI.Moonshine.OggSSPP2ResidueFieldDescentBoundaryExact as ResidueDescent
 import DASHI.Moonshine.OggSSPP2SupersingularityCriterionBoundaryExact as SupersingularCriterion
+import DASHI.Moonshine.OggSSPP2ExplicitF2CurveCandidateExact as ExplicitF2
 import DASHI.Moonshine.OggSSPP2BalancedTernaryNeutralCompletionBridgeExact as CompletionBridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPP2BadPrimeLevelStructureBoundaryExact as BadPrime
@@ -186,6 +187,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     universalDeformationImplementationFrontierOwned : Bool
     residueFieldDescentBoundaryOwned : Bool
     supersingularityCriterionBoundaryOwned : Bool
+    explicitF2CurveCandidateOwned : Bool
     singleArithmeticBidiDischargesBothFiniteCodecRecognitions : Bool
     separateArithmeticOneOneEightProofRequiredAfterBidi : Bool
     duplicatedCentreCompletionBridgeOwned : Bool
@@ -231,6 +233,7 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; universalDeformationImplementationFrontierOwned = true
     ; residueFieldDescentBoundaryOwned = true
     ; supersingularityCriterionBoundaryOwned = true
+    ; explicitF2CurveCandidateOwned = true
     ; singleArithmeticBidiDischargesBothFiniteCodecRecognitions = true
     ; separateArithmeticOneOneEightProofRequiredAfterBidi = false
     ; duplicatedCentreCompletionBridgeOwned = true
