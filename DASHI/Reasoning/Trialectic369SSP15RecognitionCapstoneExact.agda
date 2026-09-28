@@ -574,6 +574,12 @@ outgoingNormalizerToMonsterMapIsCompilerOutput :
   ≡ true
 outgoingNormalizerToMonsterMapIsCompilerOutput = refl
 
+outgoingNormalizerMonsterCarrierBidiIsCompilerOutput :
+  LinearCompletion.normalizerMonsterCarrierBidiCompilerOutput
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingNormalizerMonsterCarrierBidiIsCompilerOutput = refl
+
 outgoingOnlyActionIntertwiningRemainsAfterScaffold :
   LinearCompletion.onlyActionIntertwiningRemainsAfterScaffold
     outgoingSelected3BLinearCompletionBoundary
@@ -585,6 +591,18 @@ outgoingSelected3BCompletionCompilerPaid :
     outgoingSelected3BLinearCompletionBoundary
   ≡ true
 outgoingSelected3BCompletionCompilerPaid = refl
+
+outgoingSelected3BTwoFieldMinCutOwned :
+  LinearCompletion.twoFieldRecognitionMinCutOwned
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BTwoFieldMinCutOwned = refl
+
+outgoingSelected3BMinCutSufficesForCompletion :
+  LinearCompletion.minCutSufficesForCompletion
+    outgoingSelected3BLinearCompletionBoundary
+  ≡ true
+outgoingSelected3BMinCutSufficesForCompletion = refl
 
 outgoingSelected3BCompletionCompilesLinearZetaHomAndRoute :
   LinearCompletion.linearZetaProducerCompilerOutput
@@ -720,6 +738,8 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingCanonicalTargetIsLinearHomSpace : Bool
     outgoingCanonicalTargetIsOneLinearAcquisition : Bool
     outgoingSelected3BLinearCompletionCompilerPaid : Bool
+    outgoingSelected3BNormalizerCarrierBidiCompilerPaid : Bool
+    outgoingSelected3BTwoFieldMinCutCompilerPaid : Bool
     outgoingSelected3BLinearCompletionPaid : Bool
     outgoingFiniteNineEighteenRoutesAreOptionalBasisTools : Bool
     outgoingBasisSpecialisationPaid : Bool
@@ -740,5 +760,5 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     true true true true true false true
     true false true true false true false
     true false false false false true true
-    true true false true false false false false false
+    true true true true false true false false false false false
     false false false
