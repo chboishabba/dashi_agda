@@ -52,6 +52,8 @@ import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as Fine
 import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
+import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
+import DASHI.Reasoning.Trialectic369OutgoingLinearMultiplicityWrongTypeCorrectionExact as LinearCorrection
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
@@ -437,13 +439,90 @@ outgoingMultiplicityProjectionDescentStillOpen :
 outgoingMultiplicityProjectionDescentStillOpen = refl
 
 ------------------------------------------------------------------------
+-- 5g. WrongType correction: canonical Monster target is LINEAR, finite-basis
+--     routes are optional specialisations only.
+------------------------------------------------------------------------
+
+outgoingLinearWrongTypeBoundary :
+  LinearCorrection.Trialectic369OutgoingLinearMultiplicityWrongTypeBoundary
+outgoingLinearWrongTypeBoundary =
+  LinearCorrection.canonicalTrialectic369OutgoingLinearMultiplicityWrongTypeBoundary
+
+outgoingPureFin90MonsterRouteRefuted :
+  LinearCorrection.pureFin90PermutationMonsterRouteRefuted
+    outgoingLinearWrongTypeBoundary
+  ≡ true
+outgoingPureFin90MonsterRouteRefuted = refl
+
+outgoingCanonicalTargetIsLinearHomSpace :
+  LinearCorrection.canonicalTargetIsHomSpace
+    outgoingLinearWrongTypeBoundary
+  ≡ true
+outgoingCanonicalTargetIsLinearHomSpace = refl
+
+outgoingSheet9DoesNotCreateLinearNineRepresentation :
+  LinearCorrection.sheet9CreatesLinearNineRepresentation
+    outgoingLinearWrongTypeBoundary
+  ≡ false
+outgoingSheet9DoesNotCreateLinearNineRepresentation = refl
+
+outgoingBasisSpecialisationStillCouldEnableFiniteRoute :
+  LinearCorrection.basisPreservationReceiptStillCouldEnableFiniteRoute
+    outgoingLinearWrongTypeBoundary
+  ≡ true
+outgoingBasisSpecialisationStillCouldEnableFiniteRoute = refl
+
+outgoingActualLinearHomSpaceStillOpen :
+  LinearCorrection.actualLinearMultiplicityHomSpacePaid
+    outgoingLinearWrongTypeBoundary
+  ≡ false
+outgoingActualLinearHomSpaceStillOpen = refl
+
+outgoingActualLinearEvaluationStillOpen :
+  LinearCorrection.actualLinearEvaluationIntertwinerPaid
+    outgoingLinearWrongTypeBoundary
+  ≡ false
+outgoingActualLinearEvaluationStillOpen = refl
+
+outgoingActualInverseCocycleActionStillOpen :
+  LinearCorrection.actualInverseCocycleMultiplicityActionPaid
+    outgoingLinearWrongTypeBoundary
+  ≡ false
+outgoingActualInverseCocycleActionStillOpen = refl
+
+outgoingBasisSpecialisationCompilerBoundary :
+  BasisSpecialisation.Trialectic369LinearMultiplicityBasisSpecialisationBoundary
+outgoingBasisSpecialisationCompilerBoundary =
+  BasisSpecialisation.canonicalTrialectic369LinearMultiplicityBasisSpecialisationBoundary
+
+outgoingFiniteResidualCompilersAvailableAfterBasisReceipt :
+  BasisSpecialisation.selectedNineSheetCompilerAvailable
+    outgoingBasisSpecialisationCompilerBoundary
+  ≡ true
+  ×
+  BasisSpecialisation.frickeStableEighteenBlockCompilerAvailable
+    outgoingBasisSpecialisationCompilerBoundary
+  ≡ true
+outgoingFiniteResidualCompilersAvailableAfterBasisReceipt =
+  refl , refl
+
+outgoingBasisSpecialisationNotInhabitedHere :
+  BasisSpecialisation.basisSpecialisationInhabitedHere
+    outgoingBasisSpecialisationCompilerBoundary
+  ≡ false
+outgoingBasisSpecialisationNotInhabitedHere = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
 data IncomingAnalyticFrickeAuthority : Set where
-data OutgoingMultiplicityProjectionDescentRecognition : Set where
+data OptionalFiniteBasisMultiplicityProjectionDescentRecognition : Set where
 data OutgoingMultiplicityInertiaAttachmentRecognition : Set where
 data OutgoingInvariantFineFibreRecognition : Set where
+data OutgoingActualLinearHomSpaceRecognition : Set where
+data OutgoingActualLinearEvaluationRecognition : Set where
+data OutgoingActualInverseCocycleActionRecognition : Set where
 data OrderedRankIsIntrinsicModularInvariant : Set where
 data ResidualMayBeDiscarded : Set where
 
@@ -451,9 +530,9 @@ incomingAnalyticFrickeAuthorityStillOpenToken :
   IncomingAnalyticFrickeAuthority -> ⊥
 incomingAnalyticFrickeAuthorityStillOpenToken ()
 
-outgoingMultiplicityProjectionDescentStillOpenToken :
-  OutgoingMultiplicityProjectionDescentRecognition -> ⊥
-outgoingMultiplicityProjectionDescentStillOpenToken ()
+optionalFiniteBasisMultiplicityProjectionDescentStillOpenToken :
+  OptionalFiniteBasisMultiplicityProjectionDescentRecognition -> ⊥
+optionalFiniteBasisMultiplicityProjectionDescentStillOpenToken ()
 
 outgoingMultiplicityInertiaAttachmentStillOpenToken :
   OutgoingMultiplicityInertiaAttachmentRecognition -> ⊥
@@ -462,6 +541,18 @@ outgoingMultiplicityInertiaAttachmentStillOpenToken ()
 outgoingInvariantFineFibreRecognitionStillOpenToken :
   OutgoingInvariantFineFibreRecognition -> ⊥
 outgoingInvariantFineFibreRecognitionStillOpenToken ()
+
+outgoingActualLinearHomSpaceStillOpenToken :
+  OutgoingActualLinearHomSpaceRecognition -> ⊥
+outgoingActualLinearHomSpaceStillOpenToken ()
+
+outgoingActualLinearEvaluationStillOpenToken :
+  OutgoingActualLinearEvaluationRecognition -> ⊥
+outgoingActualLinearEvaluationStillOpenToken ()
+
+outgoingActualInverseCocycleActionStillOpenToken :
+  OutgoingActualInverseCocycleActionRecognition -> ⊥
+outgoingActualInverseCocycleActionStillOpenToken ()
 
 orderedRankNotPromotedToIntrinsicModularInvariant :
   OrderedRankIsIntrinsicModularInvariant -> ⊥
@@ -500,6 +591,15 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingIndependentX6ActionRequired : Bool
     outgoingFullMultiplicityInertiaAttachmentRequired : Bool
     outgoingMultiplicityInertiaAttachmentPaid : Bool
+
+    outgoingPureFin90MonsterRouteRefuted : Bool
+    outgoingCanonicalTargetIsLinearHomSpace : Bool
+    outgoingFiniteNineEighteenRoutesAreOptionalBasisTools : Bool
+    outgoingBasisSpecialisationPaid : Bool
+    outgoingActualLinearHomSpacePaid : Bool
+    outgoingActualLinearEvaluationPaid : Bool
+    outgoingActualInverseCocycleActionPaid : Bool
+
     outgoingActualMonsterActionRecognitionPaid : Bool
     orderedRankIntrinsicModularInvariant : Bool
     residualDiscarded : Bool
@@ -509,6 +609,8 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary :
 canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
   trialectic-369-ssp15-recognition-capstone-boundary
     true true true true true true true
-    true true true true true false
-    true true false true true false
-    true false true false false false false false false false
+    true true true true true false true
+    true false true true false true false
+    true false false false false true true
+    true false false false false false false
+    false
