@@ -29,6 +29,8 @@ import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
 import DASHI.Physics.YangMills.YMClayMixedScalarPhysicalSpectrumExact as Mixed
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact as P3
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanOSReconstructionMassGapProduction as OSR
@@ -96,6 +98,22 @@ record CMP119RealSameOSH3
           (H2.reconstruction h2) group)
 
   field
+    indexedSpectrum :
+      P3.OSIndexedContinuumCovarianceSpectrum
+        {SpectralObservable = SpectralObservable}
+        {Energy = ℚ}
+        (H2OS.asOSReconstructionAuthority
+          (H2.reconstruction h2) group)
+        (Carrier.cmp119PhysicalMeasureConvergenceData
+          (H2.osInputs h2) group)
+        (Cov.realCovarianceExtension
+          (H2.osInputs h2) covarianceLaws group)
+        (RealGap.tests application)
+
+    indexedSourceIsSelectedSource :
+      P3.source indexedSpectrum
+      ≡ RealGap.spectrumSource application
+
     SpectrumAboveVacuumGap :
       Hamiltonian → ℚ → Set
 
@@ -106,6 +124,34 @@ record CMP119RealSameOSH3
         (Gap.gapCandidate spectrum)
 
 open CMP119RealSameOSH3 public
+
+selectedSpectrumIsExactH2OSSpectrum :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable
+      sequenceLimit limitLaws quotient division S
+      h2 covarianceLaws group source application}
+    (h3 :
+      CMP119RealSameOSH3
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        Scale Volume Root SourceDirection SpectralObservable
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S
+        h2 covarianceLaws group source application) →
+  P3.SpectrumOfReconstructedHamiltonian
+    (indexedSpectrum h3)
+    (OS.hamiltonian
+      (H2OS.asOSReconstructionAuthority
+        (H2.reconstruction h2) group))
+    (R281.asReconstructedClusteringSpectrum
+      (RealGap.spectrumSource application))
+selectedSpectrumIsExactH2OSSpectrum h3
+  rewrite indexedSourceIsSelectedSource h3 =
+  P3.spectrumOfReconstructedHamiltonian
+    (indexedSpectrum h3)
 
 physicalSpectrumInterpretation :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
