@@ -45,6 +45,7 @@ def test_mcp_registration_exposes_stable_tool_surface(tmp_path):
         "apply_fix",
         "affected",
         "cache_status",
+        "refresh",
         "semantic_status",
         "promote",
         "promotion_history",
@@ -172,6 +173,7 @@ x = Set
         tools.diagnose(str(path))
         tools.next_error(str(path))
         tools.affected(str(path))
+        tools.refresh(str(path))
         tools.cache_status()
         tools.semantic_status(str(path))
 
@@ -211,3 +213,68 @@ bad₂ = record { typo₂ = Set }
     assert result["diagnostics_total"] >= 2
     assert result["diagnostics_returned"] == 1
     assert result["diagnostics_truncated"] is True
+
+
+
+def test_mcp_tool_handlers_publish_structured_dict_annotations(tmp_path):
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    with DashiAgdaService(tmp_path, database, jobs=1) as service:
+        fake = FakeMcpServer()
+        register_mcp_tools(
+            fake,
+            DashiAgdaMcpTools(service),
+        )
+
+    for function in fake.tools.values():
+        annotation = inspect.signature(function).return_annotation
+        assert annotation != dict
+        assert "dict[str, Any]" in str(annotation)
+
+
+def test_mcp_refresh_observes_out_of_band_edit(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Mcp.Refresh",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=1,
+    ) as service:
+        tools = DashiAgdaMcpTools(service)
+        first = tools.next_error(str(path), require_fix=True)
+        assert first["status"] == "diagnostic"
+
+        path.write_text(
+            """module Mcp.Refresh where
+
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witness = Set }
+""",
+            encoding="utf-8",
+        )
+
+        trusted = tools.next_error(str(path), require_fix=True)
+        assert trusted["status"] == "diagnostic"
+        assert trusted["profile"]["counts"].get("files_stat", 0) == 0
+
+        refreshed = tools.refresh(str(path))
+        assert refreshed["profile"]["counts"]["files_parsed"] == 1
+
+        final = tools.next_error(str(path), require_fix=True)
+        assert final["status"] == "clean"
+        assert final["profile"]["counts"].get("files_stat", 0) == 0
