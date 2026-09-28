@@ -355,3 +355,80 @@ reviewProjectionV2CacheMustTrackConsumerScope ()
 reviewProjectionV2ExactReuseDoesNotRescanOccurrences :
   ReviewProjectionV2ReuseMayRescanOccurrences → ⊥
 reviewProjectionV2ExactReuseDoesNotRescanOccurrences ()
+
+
+------------------------------------------------------------------------
+-- SCALE-1.I incremental review locality.
+--
+-- A complete reconciliation run may publish the exact review fibres whose
+-- pressure/contestation state changed.  A review projection that consumes that
+-- receipt can certify incremental economy.  The legacy source-scoped fallback
+-- remains semantically valid, but it is not evidence of delta-local work.
+------------------------------------------------------------------------
+
+record ReviewProjectionDeltaFibreReceipt : Set where
+  constructor review-projection-delta-fibre-receipt
+  field
+    sourceRevisionRefDelta : String
+    parserRunRefDelta : String
+    reconciliationDetectorRefDelta : String
+
+    deltaFibreCount : Nat
+    targetFibreCount : Nat
+    targetFibreCountMatchesDelta :
+      targetFibreCount ≡ deltaFibreCount
+
+    deltaReceiptComplete : Bool
+    deltaReceiptCompleteIsTrue :
+      deltaReceiptComplete ≡ true
+
+    deltaInputUsed : Bool
+    deltaInputUsedIsTrue :
+      deltaInputUsed ≡ true
+
+    pressureScanBoundedToDelta : Bool
+    pressureScanBoundedToDeltaIsTrue :
+      pressureScanBoundedToDelta ≡ true
+
+    contestationScanBoundedToDelta : Bool
+    contestationScanBoundedToDeltaIsTrue :
+      contestationScanBoundedToDelta ≡ true
+
+    occurrenceLookupBounded : Bool
+    occurrenceLookupBoundedIsTrue :
+      occurrenceLookupBounded ≡ true
+
+    candidateOnlyDelta : Bool
+    candidateOnlyDeltaIsTrue :
+      candidateOnlyDelta ≡ true
+
+    createsSemanticAuthorityDelta : Bool
+    createsSemanticAuthorityDeltaIsFalse :
+      createsSemanticAuthorityDelta ≡ false
+
+    createsClaimTruthDelta : Bool
+    createsClaimTruthDeltaIsFalse :
+      createsClaimTruthDelta ≡ false
+
+open ReviewProjectionDeltaFibreReceipt public
+
+data BroadSourceScopedReviewFallbackProvesIncrementalEconomy : Set where
+data ReviewDeltaReceiptCreatesReviewDecision : Set where
+data ReviewDeltaReceiptCreatesSemanticAuthority : Set where
+data ReviewDeltaReceiptCreatesClaimTruth : Set where
+
+broadReviewFallbackDoesNotProveIncrementalEconomy :
+  BroadSourceScopedReviewFallbackProvesIncrementalEconomy → ⊥
+broadReviewFallbackDoesNotProveIncrementalEconomy ()
+
+reviewDeltaReceiptDoesNotCreateReviewDecision :
+  ReviewDeltaReceiptCreatesReviewDecision → ⊥
+reviewDeltaReceiptDoesNotCreateReviewDecision ()
+
+reviewDeltaReceiptDoesNotCreateSemanticAuthority :
+  ReviewDeltaReceiptCreatesSemanticAuthority → ⊥
+reviewDeltaReceiptDoesNotCreateSemanticAuthority ()
+
+reviewDeltaReceiptDoesNotCreateClaimTruth :
+  ReviewDeltaReceiptCreatesClaimTruth → ⊥
+reviewDeltaReceiptDoesNotCreateClaimTruth ()
