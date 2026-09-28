@@ -38,6 +38,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
@@ -51,6 +52,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
+import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
+import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact as R546
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
@@ -173,7 +176,7 @@ module SeparatedBaseCommutator
 
   rawSeparatedBaseFold : Z3.FourierMode → ℚ
   rawSeparatedBaseFold output =
-    Sep.G.P.N.Nested.Base.R38.foldPower
+    R38.foldPower
       rawMaskedPairedBaseRow
       (Output.physicalOutputFiber cutoff output)
 
@@ -200,42 +203,32 @@ module SeparatedBaseCommutator
       (R224.foldVector mixedCell (Pair.N.Nested.Base.fibre (Physical.k beta)))
       (R762.fourCopies (Pair.Pair.pairedProductRuleCell beta))
   outerRowFactors beta =
-    go (Pair.N.Nested.Base.fibre (Physical.k beta))
+    factor (Pair.N.Nested.Base.fibre (Physical.k beta))
     where
     right = R762.fourCopies (Pair.Pair.pairedProductRuleCell beta)
 
-    go :
-      (items : List Physical.PhysicalTriadIncidence) →
-      R762.Pair.NestedSwapPair.pairedProductRuleOuterRow
-        physicalSystem S L H velocityTransverse beta
-      ≡ Work.coherentWork (R224.foldVector mixedCell items) right
-    go items =
+    factor :
+      (xs : List Physical.PhysicalTriadIncidence) →
+      R546.spectatorRow Pair.pairedProductRuleNestedPair beta xs
+      ≡ Work.coherentWork (R224.foldVector mixedCell xs) right
+    factor [] =
+      sym (R597.workZeroLeft right)
+    factor (alpha ∷ rest) =
       trans
-        refl
-        (factor items)
-      where
-      factor :
-        (xs : List Physical.PhysicalTriadIncidence) →
-        R546.spectatorRow Pair.pairedProductRuleNestedPair beta xs
-        ≡ Work.coherentWork (R224.foldVector mixedCell xs) right
-      factor [] =
-        sym (R597.workZeroLeft right)
-      factor (alpha ∷ rest) =
-        trans
-          (cong
-            (Work.coherentWork (mixedCell alpha) right +_)
-            (factor rest))
-          (sym
-            (R597.workAddLeft
-              (mixedCell alpha)
-              (R224.foldVector mixedCell rest)
-              right))
+        (cong
+          (Work.coherentWork (mixedCell alpha) right +_)
+          (factor rest))
+        (sym
+          (R597.workAddLeft
+            (mixedCell alpha)
+            (R224.foldVector mixedCell rest)
+            right))
 
   foldWorkRight :
     (left : C3.Complex3 F) →
     (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
     (items : List Physical.PhysicalTriadIncidence) →
-    Sep.G.R38.foldPower
+    R38.foldPower
       (λ beta → Work.coherentWork left (value beta)) items
     ≡ Work.coherentWork left (R224.foldVector value items)
   foldWorkRight left value [] =
@@ -340,9 +333,9 @@ module SeparatedBaseCommutator
             refl)
 
       foldRows :
-        Sep.G.R38.foldPower rawMaskedPairedBaseRow items
+        R38.foldPower rawMaskedPairedBaseRow items
         ≡
-        Sep.G.R38.foldPower
+        R38.foldPower
           (λ beta →
             Work.coherentWork M
               (R762.fourCopies (maskedPairProductCell beta)))
@@ -354,11 +347,11 @@ module SeparatedBaseCommutator
         go :
           (xs : List Physical.PhysicalTriadIncidence) →
           ((beta : Physical.PhysicalTriadIncidence) →
-            beta DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.∈ xs →
+            beta Cube.∈ xs →
             Physical.k beta ≡ output) →
-          Sep.G.R38.foldPower rawMaskedPairedBaseRow xs
+          R38.foldPower rawMaskedPairedBaseRow xs
           ≡
-          Sep.G.R38.foldPower
+          R38.foldPower
             (λ beta →
               Work.coherentWork M
                 (R762.fourCopies (maskedPairProductCell beta)))
@@ -368,34 +361,34 @@ module SeparatedBaseCommutator
           cong₂ _+_
             (rowPointwise beta
               (allOutput beta
-                (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.here refl)))
+                (Cube.here refl)))
             (go rest
               (λ chosen member →
                 allOutput chosen
-                  (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.there
+                  (Cube.there
                     member)))
 
       factorFour :
-        Sep.G.R38.foldPower
+        R38.foldPower
           (λ beta →
             Work.coherentWork M
               (R762.fourCopies (maskedPairProductCell beta)))
           items
         ≡
         four *
-          Sep.G.R38.foldPower
+          R38.foldPower
             (λ beta → Work.coherentWork M (maskedPairProductCell beta))
             items
       factorFour =
         go items
         where
         go : (xs : List Physical.PhysicalTriadIncidence) →
-          Sep.G.R38.foldPower
+          R38.foldPower
             (λ beta →
               Work.coherentWork M
                 (R762.fourCopies (maskedPairProductCell beta))) xs
           ≡ four *
-            Sep.G.R38.foldPower
+            R38.foldPower
               (λ beta → Work.coherentWork M (maskedPairProductCell beta)) xs
         go [] = solve (four ∷ [])
         go (beta ∷ rest) =
@@ -407,7 +400,7 @@ module SeparatedBaseCommutator
             (trans
               (cong
                 (_+ four *
-                  Sep.G.R38.foldPower
+                  R38.foldPower
                     (λ chosen →
                       Work.coherentWork M (maskedPairProductCell chosen))
                     rest)
@@ -415,14 +408,14 @@ module SeparatedBaseCommutator
               (solve
                 ( four
                 ∷ Work.coherentWork M (maskedPairProductCell beta)
-                ∷ Sep.G.R38.foldPower
+                ∷ R38.foldPower
                     (λ chosen →
                       Work.coherentWork M (maskedPairProductCell chosen))
                     rest
                 ∷ [])))
 
       pairWork :
-        Sep.G.R38.foldPower
+        R38.foldPower
           (λ beta → Work.coherentWork M (maskedPairProductCell beta)) items
         ≡
         Work.coherentWork M
