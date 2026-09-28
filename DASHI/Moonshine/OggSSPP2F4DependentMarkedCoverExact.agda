@@ -125,6 +125,23 @@ decodeEncodeMarked :
 decodeEncodeMarked =
   Dependent.decodeEncodeExact p2F4DependentMarkedProjection
 
+encodeDecodeMarked :
+  (code : Dependent.DependentCode p2F4DependentMarkedProjection) ->
+  encodeMarked (decodeMarked code) ≡ code
+encodeDecodeMarked (F4.zeroFixedOrbit , tt) = refl
+encodeDecodeMarked (F4.oneFixedOrbit , tt) = refl
+encodeDecodeMarked
+  (F4.conjugatePairOrbit , (side , orbit)) = refl
+
+markedCodeBidi :
+  ( (state : Stratified.F4StratifiedTargetState) ->
+      decodeMarked (encodeMarked state) ≡ state )
+  ×
+  ( (code : Dependent.DependentCode p2F4DependentMarkedProjection) ->
+      encodeMarked (decodeMarked code) ≡ code )
+markedCodeBidi =
+  decodeEncodeMarked , encodeDecodeMarked
+
 markedCodeSeparating :
   Dependent.DependentCodeSeparating p2F4DependentMarkedProjection
 markedCodeSeparating =
@@ -214,6 +231,7 @@ record P2F4DependentMarkedCoverBoundary : Set where
     dependentResidualCoreReused : Bool
     exactOneOneEightMarkFamilyConstructed : Bool
     exactReopenConstructed : Bool
+    exactEncodeDecodeConstructed : Bool
     dependentCodeSeparatingProved : Bool
     uniformMarkingRejected : Bool
     targetNormalFormHasTenComponents : Bool
@@ -224,4 +242,4 @@ canonicalP2F4DependentMarkedCoverBoundary :
   P2F4DependentMarkedCoverBoundary
 canonicalP2F4DependentMarkedCoverBoundary =
   p2-f4-dependent-marked-cover-boundary
-    true true true true true true false false
+    true true true true true true true false false
