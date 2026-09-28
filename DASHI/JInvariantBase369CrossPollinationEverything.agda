@@ -417,3 +417,5 @@ import DASHI.Moonshine.OggSSPSmallPrimeDVRLengthBrauerCutsetExact
 import DASHI.Moonshine.OggSSPPBLocalizedDVRPreferredPaymentCutsetExact
 
 import DASHI.Moonshine.OggSSPPBGreenRingSectorSpeciesCutsetExact
+
+import DASHI.Moonshine.OggSSPPBLocalizationSourceCoverageAuditExact
