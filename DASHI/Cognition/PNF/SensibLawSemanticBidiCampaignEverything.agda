@@ -836,3 +836,45 @@ scale1ExactReplayCandidateReopensAreZero :
     Scale1ReplayEconomy.gwbExactReplay20260928
   ≡ 0
 scale1ExactReplayCandidateReopensAreZero = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P v2 review reuse delegates occurrence ancestry to exact L2.
+------------------------------------------------------------------------
+
+reviewProjectionV2MustTrackParserRun :
+  ReviewProjectionEconomy.ReviewProjectionV2CacheMayIgnoreParserRun → ⊥
+reviewProjectionV2MustTrackParserRun =
+  ReviewProjectionEconomy.reviewProjectionV2CacheMustTrackParserRun
+
+reviewProjectionV2MustTrackReconciliationDetector :
+  ReviewProjectionEconomy.ReviewProjectionV2CacheMayIgnoreReconciliationDetector → ⊥
+reviewProjectionV2MustTrackReconciliationDetector =
+  ReviewProjectionEconomy.reviewProjectionV2CacheMustTrackReconciliationDetector
+
+reviewProjectionV2RequiresCompletedUpstream :
+  ReviewProjectionEconomy.ReviewProjectionV2CacheMayIgnoreUpstreamCompletion → ⊥
+reviewProjectionV2RequiresCompletedUpstream =
+  ReviewProjectionEconomy.reviewProjectionV2CacheRequiresCompletedUpstreamProduct
+
+reviewProjectionV2MustTrackConsumerScope :
+  ReviewProjectionEconomy.ReviewProjectionV2CacheMayIgnoreConsumerScope → ⊥
+reviewProjectionV2MustTrackConsumerScope =
+  ReviewProjectionEconomy.reviewProjectionV2CacheMustTrackConsumerScope
+
+reviewProjectionV2ReuseDoesNotRescanOccurrences :
+  ReviewProjectionEconomy.ReviewProjectionV2ReuseMayRescanOccurrences → ⊥
+reviewProjectionV2ReuseDoesNotRescanOccurrences =
+  ReviewProjectionEconomy.reviewProjectionV2ExactReuseDoesNotRescanOccurrences
+
+reviewProjectionV2FixtureScansNoOccurrences :
+  ReviewProjectionEconomy.ExactReviewProjectionReuseV2.occurrenceRowsScannedOnReuse
+    ReviewProjectionEconomyRegression.fixtureExactReviewProjectionReuseV2
+  ≡ 0
+reviewProjectionV2FixtureScansNoOccurrences = refl
+
+reviewProjectionV2FixtureDoesNoOccurrenceLookup :
+  ReviewProjectionEconomy.ExactReviewProjectionReuseV2.occurrenceLookupCountOnReuse
+    ReviewProjectionEconomyRegression.fixtureExactReviewProjectionReuseV2
+  ≡ 0
+reviewProjectionV2FixtureDoesNoOccurrenceLookup = refl
