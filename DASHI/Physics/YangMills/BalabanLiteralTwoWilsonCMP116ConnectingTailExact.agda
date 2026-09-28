@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact a
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as R491
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as R494
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 finiteAbsTriangle :
@@ -421,6 +422,105 @@ asWilsonTwoInsertionConnectedShell
   ; R491.WilsonTwoInsertionConnectedShell.connectingClusterMeetsBothWilsonSupports =
       connectingClusterMeetsBothWilsonSupports identification
   }
+
+
+record TwoWilsonSignedCovarianceIdentification
+    {Observable Source Polymer Cluster Volume Scale Root : Set}
+    {family :
+      Marked.TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable}
+    (payment :
+      TwoWilsonCMP116PhysicalShellPayment
+        {Scale = Scale} {Root = Root}
+        differentiable charge)
+    : Set₁ where
+  field
+    connectedCovariance :
+      Nat → Observable → Observable → ℚ
+
+    mixedDerivativeIsConnectedCovariance :
+      ∀ cutoff left right →
+      Diff.mixedDerivative
+        (Marked.derivativeCalculus differentiable cutoff left right)
+        (Marked.markedLogPartition family cutoff left right)
+      ≡ connectedCovariance cutoff left right
+
+    connectingClusterMeetsBothWilsonSupports :
+      ∀ cutoff left right → Set
+
+open TwoWilsonSignedCovarianceIdentification public
+
+asRound494WilsonTwoMarkWEXTSource :
+  ∀ {Observable Source Polymer Cluster Volume Scale Root family}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable}
+    {payment :
+      TwoWilsonCMP116PhysicalShellPayment
+        {Scale = Scale} {Root = Root}
+        differentiable charge} →
+  TwoWilsonSignedCovarianceIdentification payment →
+  R494.WilsonTwoMarkWEXTSource
+    Scale Volume Root Nat Observable Cluster
+asRound494WilsonTwoMarkWEXTSource
+    {family = family}
+    {differentiable = differentiable}
+    {charge = charge}
+    {payment = payment}
+    identification = record
+  { R494.WilsonTwoMarkWEXTSource.shellData =
+      shellData payment
+  ; R494.WilsonTwoMarkWEXTSource.stateAtScale =
+      λ cutoff → cutoff
+  ; R494.WilsonTwoMarkWEXTSource.scaleOf =
+      scaleOfCutoff payment
+  ; R494.WilsonTwoMarkWEXTSource.volumeOf =
+      Marked.volumeOfCutoff family
+  ; R494.WilsonTwoMarkWEXTSource.physicalDistance =
+      TwoWilsonCMP116PhysicalShellPayment.supportSeparation payment
+  ; R494.WilsonTwoMarkWEXTSource.connectingRoot =
+      connectingRoot payment
+  ; R494.WilsonTwoMarkWEXTSource.contributingClusters =
+      connectingClusters family
+  ; R494.WilsonTwoMarkWEXTSource.clusterWeight =
+      clusterDerivative differentiable
+  ; R494.WilsonTwoMarkWEXTSource.connectedCovariance =
+      TwoWilsonSignedCovarianceIdentification.connectedCovariance identification
+  ; R494.WilsonTwoMarkWEXTSource.connectedCovarianceExpansionExact =
+      λ cutoff left right →
+        subst
+          (λ selected →
+            selected
+            ≡
+            TwoMark.sumℚ
+              (TwoMark.map
+                (clusterDerivative differentiable cutoff left right)
+                (connectingClusters family cutoff left right)))
+          (mixedDerivativeIsConnectedCovariance
+            identification cutoff left right)
+          (Marked.twoWilsonMixedDerivativeIsTwoSupportClusterSum
+            differentiable cutoff left right)
+  ; R494.WilsonTwoMarkWEXTSource.ConnectingClusterMeetsBothSupports =
+      TwoWilsonSignedCovarianceIdentification.connectingClusterMeetsBothWilsonSupports
+        identification
+  ; R494.WilsonTwoMarkWEXTSource.absoluteConnectingWeightSumBelowRootedShell =
+      λ cutoff left right →
+        ℚP.≤-trans
+          (absoluteDerivativeSumBelowChargeSum
+            charge cutoff left right)
+          (chargeSumBelowPhysicalRootedShell
+            payment cutoff left right)
+  }
+
+round494TwoMarkExpansionFromMarkedKPCompilerLevel : ProofLevel
+round494TwoMarkExpansionFromMarkedKPCompilerLevel = machineChecked
+
+round494ConnectingTailFromCMP116ChargeCompilerLevel : ProofLevel
+round494ConnectingTailFromCMP116ChargeCompilerLevel = machineChecked
+
+twoWilsonSignedCovarianceSameObjectLevel : ProofLevel
+twoWilsonSignedCovarianceSameObjectLevel = conditional
 
 twoWilsonPhysicalCovarianceSameObjectLevel : ProofLevel
 twoWilsonPhysicalCovarianceSameObjectLevel = conditional
