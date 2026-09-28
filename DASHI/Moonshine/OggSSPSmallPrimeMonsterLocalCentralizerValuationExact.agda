@@ -61,7 +61,7 @@ monster2BCentralizerSource =
     "CTblLib / ATLAS"
     ""
     "https://www.math.rwth-aachen.de/homes/Thomas.Breuer/ctbllib/ctbltoc/data/2%5E1%2B24.Co1.html"
-    Source.referenceDatabaseSource
+    Source.institutionalSource
     "standard Monster 2B-centralizer source: group shape 2^(1+24).Co1 and exact order with 2-primary factor 2^46"
     Source.publicAttribution
 
@@ -73,7 +73,7 @@ co1Source =
     "ATLAS"
     ""
     "https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/Co1/"
-    Source.referenceDatabaseSource
+    Source.institutionalSource
     "exact order |Co1| = 2^21 * 3^9 * 5^4 * 7^2 * 11 * 13 * 23"
     Source.publicAttribution
 
@@ -85,7 +85,7 @@ monster3BCentralizerSource =
     "ATLAS / CCN local data"
     ""
     "https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/M/"
-    Source.referenceDatabaseSource
+    Source.institutionalSource
     "standard 3B centralizer shape 3^(1+12).2Suz; the extra outer .2 belongs to the 3B normalizer rather than changing the 3-primary valuation"
     Source.publicAttribution
 
@@ -97,7 +97,7 @@ suzukiSource =
     "ATLAS"
     ""
     "https://brauer.maths.qmul.ac.uk/Atlas/v3/spor/Suz/"
-    Source.referenceDatabaseSource
+    Source.institutionalSource
     "exact order |Suz| = 2^13 * 3^7 * 5^2 * 7 * 11 * 13"
     Source.publicAttribution
 
