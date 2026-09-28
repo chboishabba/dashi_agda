@@ -162,7 +162,7 @@ offDiagonalABRelativePuncture :
 offDiagonalABRelativePuncture =
   relative-puncture
     Dyadic.offDiagonalPuncturedAB
-    (λ equality -> notEqual equality)
+    (λ equality → notEqual equality)
   where
     notEqual :
       Dyadic.offDiagonalPuncturedAB ≡ Dyadic.zeroAB ->
