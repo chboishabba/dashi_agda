@@ -166,8 +166,104 @@ observerCAComplement matrix =
     (Observer.bC matrix)
     (Observer.bA matrix)
 
+record BCLocalComplementPoint : Set where
+  constructor bc-local-complement-point
+  field
+    localBC : Descent.BCSection
+    complementBC : BCComplement5
+
+open BCLocalComplementPoint public
+
+observerToBCLocalComplement :
+  Observer.ObserverMatrix3 SSP.SSPTrit ->
+  BCLocalComplementPoint
+observerToBCLocalComplement matrix =
+  bc-local-complement-point
+    (Descent.restrictBC matrix)
+    (observerBCComplement matrix)
+
+bcLocalComplementToObserver :
+  BCLocalComplementPoint ->
+  Observer.ObserverMatrix3 SSP.SSPTrit
+bcLocalComplementToObserver
+  (bc-local-complement-point
+    (Descent.bc-section bb bc cb cc)
+    (bc-complement5 ba ca aa ab ac)) =
+  Observer.observerMatrix3
+    aa ab ac
+    ba bb bc
+    ca cb cc
+
+observerBCLocalComplementRoundTrip :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  bcLocalComplementToObserver
+    (observerToBCLocalComplement matrix)
+  ≡ matrix
+observerBCLocalComplementRoundTrip
+  (Observer.observerMatrix3
+    aa ab ac ba bb bc ca cb cc) = refl
+
+bcLocalComplementObserverRoundTrip :
+  (state : BCLocalComplementPoint) ->
+  observerToBCLocalComplement
+    (bcLocalComplementToObserver state)
+  ≡ state
+bcLocalComplementObserverRoundTrip
+  (bc-local-complement-point
+    (Descent.bc-section bb bc cb cc)
+    (bc-complement5 ba ca aa ab ac)) = refl
+
+record CALocalComplementPoint : Set where
+  constructor ca-local-complement-point
+  field
+    localCA : Descent.CASection
+    complementCA : CAComplement5
+
+open CALocalComplementPoint public
+
+observerToCALocalComplement :
+  Observer.ObserverMatrix3 SSP.SSPTrit ->
+  CALocalComplementPoint
+observerToCALocalComplement matrix =
+  ca-local-complement-point
+    (Descent.restrictCA matrix)
+    (observerCAComplement matrix)
+
+caLocalComplementToObserver :
+  CALocalComplementPoint ->
+  Observer.ObserverMatrix3 SSP.SSPTrit
+caLocalComplementToObserver
+  (ca-local-complement-point
+    (Descent.ca-section cc ca ac aa)
+    (ca-complement5 cb ab bb bc ba)) =
+  Observer.observerMatrix3
+    aa ab ac
+    ba bb bc
+    ca cb cc
+
+observerCALocalComplementRoundTrip :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  caLocalComplementToObserver
+    (observerToCALocalComplement matrix)
+  ≡ matrix
+observerCALocalComplementRoundTrip
+  (Observer.observerMatrix3
+    aa ab ac ba bb bc ca cb cc) = refl
+
+caLocalComplementObserverRoundTrip :
+  (state : CALocalComplementPoint) ->
+  observerToCALocalComplement
+    (caLocalComplementToObserver state)
+  ≡ state
+caLocalComplementObserverRoundTrip
+  (ca-local-complement-point
+    (Descent.ca-section cc ca ac aa)
+    (ca-complement5 cb ab bb bc ba)) = refl
+
 ------------------------------------------------------------------------
 -- 4. C3 identifies the complements as well.
+------------------------------------------------------------------------
+
 ------------------------------------------------------------------------
 
 bcComplementAsABComplement :
@@ -195,6 +291,24 @@ abComplementAfterRotateTwiceIsCAComplement :
   Factor.observerABComplement (rotateABCTwice matrix)
   ≡ caComplementAsABComplement (observerCAComplement matrix)
 abComplementAfterRotateTwiceIsCAComplement matrix = refl
+
+abFactorizationAfterRotateIsBC :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  Factor.observerToABLocalComplement (rotateABC matrix)
+  ≡
+  Factor.ab-local-complement-point
+    (bcAsAB (Descent.restrictBC matrix))
+    (bcComplementAsABComplement (observerBCComplement matrix))
+abFactorizationAfterRotateIsBC matrix = refl
+
+abFactorizationAfterRotateTwiceIsCA :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  Factor.observerToABLocalComplement (rotateABCTwice matrix)
+  ≡
+  Factor.ab-local-complement-point
+    (caAsAB (Descent.restrictCA matrix))
+    (caComplementAsABComplement (observerCAComplement matrix))
+abFactorizationAfterRotateTwiceIsCA matrix = refl
 
 ------------------------------------------------------------------------
 -- 5. Firewall.
