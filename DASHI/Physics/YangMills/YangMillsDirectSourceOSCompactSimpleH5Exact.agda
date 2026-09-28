@@ -25,12 +25,14 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H2
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSRationalContinuumH2Exact as H2Continuum
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3
 
 record LiteralGroupDirectSourcePackage
     {C : Top.LiteralYangMillsCarriers}
     {S : Top.LiteralYangMillsSemantics C}
     (Y : Top.LiteralYangMillsConstruction C S)
+    (continuum : H2Continuum.RationalLiteralContinuumSameObjectBridge Y)
     (G : Top.CompactSimpleGroup C)
     : Set₂ where
   field
@@ -41,7 +43,7 @@ record LiteralGroupDirectSourcePackage
       H2.LiteralSelectedWilsonExpectationApplication h1h3
 
     h3SameOS :
-      H3.LiteralSelectedSpectrumIsSameOSHamiltonian h1h3
+      H3.LiteralSelectedSpectrumIsSameOSHamiltonian continuum h1h3
 
     --------------------------------------------------------------------
     -- Finite literal YM semantics on the SAME Y finite family.
@@ -108,6 +110,9 @@ record LiteralCompactSimpleDirectSourceContinuation
       ∀ G →
       classifiedToLiteral (literalToClassified G) ≡ G
 
+    continuum :
+      H2Continuum.RationalLiteralContinuumSameObjectBridge Y
+
     compactSimple :
       ∀ G → Top.IsCompactSimple S G
 
@@ -122,7 +127,7 @@ record LiteralCompactSimpleDirectSourceContinuation
       Compact.QuantitativeCompactLiePackage
         ℚ LieElement GroupElement G →
       LiteralGroupDirectSourcePackage
-        Y (classifiedToLiteral G)
+        Y continuum (classifiedToLiteral G)
 
 open LiteralCompactSimpleDirectSourceContinuation public
 
@@ -151,7 +156,7 @@ asParametricContinuation {Y = Y} source = record
   ; Groups.CompactSimpleParametricYMContinuation.PhysicalConstruction =
       λ G →
         LiteralGroupDirectSourcePackage
-          Y (classifiedToLiteral source G)
+          Y (continuum source) (classifiedToLiteral source G)
   ; Groups.CompactSimpleParametricYMContinuation.continueFromQuantitativePackage =
       continueLiteralDirectSource source
   }
@@ -161,7 +166,7 @@ classifiedConstruction :
     (source : LiteralCompactSimpleDirectSourceContinuation Y)
     G →
   LiteralGroupDirectSourcePackage
-    Y (classifiedToLiteral source G)
+    Y (continuum source) (classifiedToLiteral source G)
 classifiedConstruction source G =
   Groups.allCompactSimpleConstruction
     (asParametricContinuation source) G
@@ -170,10 +175,10 @@ constructionForEveryLiteralCompactSimpleGroup :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
     (source : LiteralCompactSimpleDirectSourceContinuation Y)
     G →
-  LiteralGroupDirectSourcePackage Y G
+  LiteralGroupDirectSourcePackage Y (continuum source) G
 constructionForEveryLiteralCompactSimpleGroup {Y = Y} source G =
   subst
-    (LiteralGroupDirectSourcePackage Y)
+    (LiteralGroupDirectSourcePackage Y (continuum source))
     (classifiedLiteralRoundtrip source G)
     (classifiedConstruction source (literalToClassified source G))
 
@@ -253,6 +258,7 @@ h3ForEveryLiteralGroup :
     (source : LiteralCompactSimpleDirectSourceContinuation Y)
     G →
   H3.LiteralSelectedSpectrumIsSameOSHamiltonian
+    (continuum source)
     (H1H3.forGroup (sameHGapForEveryLiteralGroup source) G)
 h3ForEveryLiteralGroup source G =
   h3SameOS
