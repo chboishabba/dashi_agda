@@ -38,6 +38,8 @@ import DASHI.Analysis.RiemannSSP15SignedProvenanceBridgeExact as Signed
 import DASHI.Analysis.RiemannSSP15PartitionSeparationExact as Partition
 import DASHI.Analysis.RiemannSSP15ChosenGridTransversalityExact as Transverse
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Nonary
+import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
+import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Branch
 
 ------------------------------------------------------------------------
 -- 1. Producer-side role authority socket.
@@ -150,14 +152,14 @@ eraseProducerMark code =
 compileProducerMarkedToInternalLane :
   {certificate : PrimitiveRowProducerRoleCertificate} ->
   ProducerMarkedSSP15Code certificate ->
-  DASHI.Biology.SSP15ComplementPhaseProjectorExact.SSP15InternalLane
+  Internal.SSP15InternalLane
 compileProducerMarkedToInternalLane code =
   Codec.encodeRoleCode (eraseProducerMark code)
 
 compileProducerMarkedToPointedSigned :
   {certificate : PrimitiveRowProducerRoleCertificate} ->
   ProducerMarkedSSP15Code certificate ->
-  DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact.PointedSignedSSPLane
+  Branch.PointedSignedSSPLane
 compileProducerMarkedToPointedSigned code =
   Signed.roleCodeToPointedSigned (eraseProducerMark code)
 
