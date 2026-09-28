@@ -32,8 +32,11 @@ canonicalCoreFromHistoricalCore :
   ∀ {Monster K}
     (core :
       Historical.Selected3BLinearAcquisitionCore {Monster} {K}) →
+  Canonical.CanonicalLinearHomSameObjectWeld
+    (Historical.linearZetaProducer core)
+    (Historical.multiplicityHomSpace core) →
   Canonical.CanonicalSelected3BLinearCore {Monster} {K}
-canonicalCoreFromHistoricalCore core =
+canonicalCoreFromHistoricalCore core homWeld =
   record
     { kernelRecognizedSameElementAttachment =
         Historical.kernelRecognizedSameElementAttachment core
@@ -45,6 +48,7 @@ canonicalCoreFromHistoricalCore core =
         Historical.compiledProducerIsLinearProducer core
     ; multiplicityHomSpace =
         Historical.multiplicityHomSpace core
+    ; homSameObjectWeld = homWeld
     ; constituentCarrierIsSelectedAmbient =
         Historical.weightTwoConstituentCarrierIsSelected3BAmbient core
     ; sourceNativeInertiaSameAction =
@@ -53,16 +57,26 @@ canonicalCoreFromHistoricalCore core =
         Historical.twelveSeventyEightLinearIntertwiner core
     }
 
-historicalCoreCompilesCanonicalRoute :
+historicalCorePlusHomWeldCompilesCanonicalRoute :
   ∀ {Monster K}
     (core :
-      Historical.Selected3BLinearAcquisitionCore {Monster} {K}) →
+      Historical.Selected3BLinearAcquisitionCore {Monster} {K})
+    (homWeld :
+      Canonical.CanonicalLinearHomSameObjectWeld
+        (Historical.linearZetaProducer core)
+        (Historical.multiplicityHomSpace core)) →
   LinearBridge.canonicalLinearRouteFromAcquisition
     (Historical.acquisitionFromCore core)
   ≡
   Canonical.canonicalLinearRoute
-    (canonicalCoreFromHistoricalCore core)
-historicalCoreCompilesCanonicalRoute core = refl
+    (canonicalCoreFromHistoricalCore core homWeld)
+historicalCorePlusHomWeldCompilesCanonicalRoute core homWeld = refl
+
+data HistoricalCoreAloneCreatesHomSameObjectWeld : Set where
+
+historicalCoreAloneDoesNotCreateHomSameObjectWeld :
+  HistoricalCoreAloneCreatesHomSameObjectWeld → ⊥
+historicalCoreAloneDoesNotCreateHomSameObjectWeld ()
 
 ------------------------------------------------------------------------
 -- 2. Reverse promotion is intentionally not part of the canonical lane.
@@ -81,8 +95,9 @@ minimalCoreDoesNotAutomaticallyReconstructHistoricalCompatibility ()
 record Trialectic369Selected3BLinearCoreCompatibilityBoundary : Set where
   constructor trialectic-369-selected3b-linear-core-compatibility-boundary
   field
-    historicalCoreForgetsToCanonicalCore : Bool
-    historicalCoreSufficesForCanonicalRoute : Bool
+    historicalCoreAloneSufficesForCanonicalCore : Bool
+    historicalCorePlusHomWeldCompilesCanonicalCore : Bool
+    historicalCorePlusHomWeldCompilesSameLinearRoute : Bool
     canonicalCoreRequiresHistoricalReversePromotion : Bool
     historicalExtraFieldsRemainAvailableForProvenance : Bool
 
@@ -90,4 +105,4 @@ canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary :
   Trialectic369Selected3BLinearCoreCompatibilityBoundary
 canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary =
   trialectic-369-selected3b-linear-core-compatibility-boundary
-    true true false true
+    false true true false true
