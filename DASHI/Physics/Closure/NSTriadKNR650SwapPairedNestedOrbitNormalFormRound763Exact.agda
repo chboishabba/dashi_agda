@@ -123,23 +123,18 @@ module PairedNestedOrbit
     R546.spectatorRow pairedProductRuleNestedPair beta items
   spectatorRowsSwapPair beta [] = solve []
   spectatorRowsSwapPair beta (alpha ∷ rest) =
+    let
+      a = N.Nested.nestedPair alpha beta
+      b = N.Nested.nestedPair alpha (Symmetry.swapTriad beta)
+      r = R546.spectatorRow N.Nested.nestedPair beta rest
+      s = R546.spectatorRow
+            N.Nested.nestedPair (Symmetry.swapTriad beta) rest
+      headPair = nestedPairSwapSumIsPairedProductRule alpha beta
+      tailPair = spectatorRowsSwapPair beta rest
+    in
     trans
-      (cong₂ _+_
-        (cong₂ _+_
-          refl
-          (spectatorRowsSwapPair beta rest))
-        refl)
-      (trans
-        (solve
-          ( N.Nested.nestedPair alpha beta
-          ∷ N.Nested.nestedPair alpha (Symmetry.swapTriad beta)
-          ∷ R546.spectatorRow N.Nested.nestedPair beta rest
-          ∷ R546.spectatorRow
-              N.Nested.nestedPair (Symmetry.swapTriad beta) rest
-          ∷ []))
-        (cong
-          (_+ R546.spectatorRow pairedProductRuleNestedPair beta rest)
-          (nestedPairSwapSumIsPairedProductRule alpha beta)))
+      (solve (a ∷ b ∷ r ∷ s ∷ []))
+      (cong₂ _+_ headPair tailPair)
 
   nestedOuterRowSwapPair :
     (beta : Physical.PhysicalTriadIncidence) →
@@ -210,7 +205,6 @@ module PairedNestedOrbit
           ∷ baseSwap
           ∷ p
           ∷ q
-          ∷ pairedMaskedBaseRow beta
           ∷ two
           ∷ []))
         (cong
