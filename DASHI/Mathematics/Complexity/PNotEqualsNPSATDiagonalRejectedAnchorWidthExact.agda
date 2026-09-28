@@ -115,13 +115,14 @@ rejectedAnchorBodyOutputSatisfiable :
         system
         view
         dynamicInput}
-    {remaining width : Nat} →
-  RejectedAnchorWidthRealization body remaining width →
+    {remaining width : Nat}
+    (realization :
+      RejectedAnchorWidthRealization body remaining width) →
   Cook.Satisfiable
     (Diagonal.asFormula view
       (Kleene.run2 system
         (Diagonal.bodyProgram body)
-        (quoted _)
+        (quoted realization)
         dynamicInput))
 rejectedAnchorBodyOutputSatisfiable
     {body = body}
