@@ -48,12 +48,6 @@ record DirectSourceOSLiteralClayInputs
     : Set₂ where
   field
     --------------------------------------------------------------------
-    -- Structural/all-group endpoint data.
-    --------------------------------------------------------------------
-    structural :
-      Five.LiteralClayStructuralBase Y
-
-    --------------------------------------------------------------------
     -- H2 + H3: one continuum family, one Schwinger family, one reconstructed H.
     --------------------------------------------------------------------
     continuumSameObject :
@@ -86,6 +80,15 @@ record DirectSourceOSLiteralClayInputs
 
 open DirectSourceOSLiteralClayInputs public
 
+
+
+compiledStructural :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  DirectSourceOSLiteralClayInputs Y →
+  Five.LiteralClayStructuralBase Y
+compiledStructural inputs =
+  H5.structuralBaseFromCompactSimpleContinuation
+    (compactSimpleDirectSource inputs)
 
 compiledFiniteRG :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
@@ -137,7 +140,7 @@ literalClayEvidence :
 literalClayEvidence {Y = Y} inputs =
   Five.literalClayEvidenceFromFiveTheorems
     Y
-    (structural inputs)
+    (compiledStructural inputs)
     (compiledFiniteRG inputs)
     (compiledMassGap inputs)
     (compiledContinuum inputs)
@@ -151,7 +154,7 @@ literalClaySolution :
 literalClaySolution {Y = Y} inputs =
   Five.literalClaySolutionFromFiveTheorems
     Y
-    (structural inputs)
+    (compiledStructural inputs)
     (compiledFiniteRG inputs)
     (compiledMassGap inputs)
     (compiledContinuum inputs)
