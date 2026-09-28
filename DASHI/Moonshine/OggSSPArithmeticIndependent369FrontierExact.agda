@@ -351,6 +351,12 @@ p2InertiaStackDenominatorBoundary =
   P2StackWeight.canonicalP2InertiaStackDenominatorValuationBoundary
 
 
+p2BrauerRegularityBoundary :
+  P2BrauerReg.P2InertiaBrauerRegularityBoundary
+p2BrauerRegularityBoundary =
+  P2BrauerReg.canonicalP2InertiaBrauerRegularityBoundary
+
+
 p3LocalMultiplicityBoundary :
   P3LocalWeight.P3DeligneRapoportLocalMultiplicityBoundary
 p3LocalMultiplicityBoundary =
@@ -580,6 +586,7 @@ record ArithmeticIndependent369Frontier : Set where
     pbLocalizationSourceCoverageAuditPaid : Bool
     p2PreferredWeightsHaveInertiaStackDenominatorInterpretation : Bool
     p2IsotropyDenominatorDepthEqualsUranoLengthPaid : Bool
+    p2OrdinaryBrauerRepresentativeShortcutRejected : Bool
     p3PreferredWeightsHaveSemistableMultiplicityInterpretation : Bool
     p3SemistableMultiplicityEqualsUranoLengthPaid : Bool
     urano2BParityConstraintsSourced : Bool
@@ -747,6 +754,7 @@ canonicalArithmeticIndependent369Frontier =
     ; pbLocalizationSourceCoverageAuditPaid = true
     ; p2PreferredWeightsHaveInertiaStackDenominatorInterpretation = true
     ; p2IsotropyDenominatorDepthEqualsUranoLengthPaid = false
+    ; p2OrdinaryBrauerRepresentativeShortcutRejected = true
     ; p3PreferredWeightsHaveSemistableMultiplicityInterpretation = true
     ; p3SemistableMultiplicityEqualsUranoLengthPaid = false
     ; urano2BParityConstraintsSourced = true
