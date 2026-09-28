@@ -1089,6 +1089,133 @@ class SourceIndex:
         return tuple(order)
 
 
+    def cached_candidate_snapshot(
+        self,
+        target: Path,
+        *,
+        validate_freshness: bool = True,
+    ) -> Optional[Tuple[Tuple[str, Optional[Diagnostic], Optional[Diagnostic]], ...]]:
+        """Return one compact diagnostic candidate pair per closure module.
+
+        This is intended for long-lived services: decode the persistent
+        top-diagnostic payloads once, then keep the resulting objects in an
+        in-memory rollup priority structure. It deliberately avoids decoding
+        full diagnostics_json payloads.
+        """
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(
+            target,
+            projection="candidates",
+        )
+        if rows is None:
+            return None
+
+        snapshot = []
+        if not validate_freshness:
+            self.profiler.count(
+                "trusted_closure_stat_skips",
+                len(rows),
+            )
+
+        for row in rows:
+            if validate_freshness:
+                path = self.root / row["path"]
+                with self.profiler.stage("source.stat"):
+                    try:
+                        stat = self._stat(path)
+                    except OSError:
+                        return None
+                    if not self._fresh(row, stat):
+                        return None
+
+            decoded = []
+            for column in (
+                "top_diagnostic_json",
+                "top_fixable_diagnostic_json",
+            ):
+                payload = row[column]
+                if not payload:
+                    decoded.append(None)
+                    continue
+                try:
+                    decoded.append(
+                        self._diagnostic_from_dict(
+                            json.loads(payload)
+                        )
+                    )
+                except (
+                    TypeError,
+                    ValueError,
+                    KeyError,
+                    json.JSONDecodeError,
+                ):
+                    decoded.append(None)
+
+            snapshot.append(
+                (
+                    row["module_name"],
+                    decoded[0],
+                    decoded[1],
+                )
+            )
+
+        self.profiler.count(
+            "candidate_snapshot_modules",
+            len(snapshot),
+        )
+        self.profiler.count(
+            "candidate_snapshot_payloads_decoded",
+            sum(
+                int(top is not None) + int(fixable is not None)
+                for _, top, fixable in snapshot
+            ),
+        )
+        return tuple(snapshot)
+
+    def cached_module_candidates(
+        self,
+        path: Path,
+    ) -> Tuple[Optional[Diagnostic], Optional[Diagnostic]]:
+        """Return persisted top candidates for one indexed module."""
+        path = path if path.is_absolute() else self.root / path
+        path = path.resolve()
+        try:
+            relative = self._relative(path)
+        except ValueError:
+            return None, None
+        row = self.connection.execute(
+            "SELECT top_diagnostic_json, top_fixable_diagnostic_json "
+            "FROM modules WHERE path = ?",
+            (relative,),
+        ).fetchone()
+        if row is None:
+            return None, None
+
+        result = []
+        for column in (
+            "top_diagnostic_json",
+            "top_fixable_diagnostic_json",
+        ):
+            payload = row[column]
+            if not payload:
+                result.append(None)
+                continue
+            try:
+                result.append(
+                    self._diagnostic_from_dict(
+                        json.loads(payload)
+                    )
+                )
+            except (
+                TypeError,
+                ValueError,
+                KeyError,
+                json.JSONDecodeError,
+            ):
+                result.append(None)
+        return result[0], result[1]
+
     def next_diagnostic(
         self,
         target: Path,
