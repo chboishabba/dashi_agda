@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as Marked
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
+import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as R491
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 finiteAbsTriangle :
@@ -330,6 +331,99 @@ asConfiguredTailPayment
             (connectingRoot payment cutoff left right)
             (TwoWilsonCMP116PhysicalShellPayment.supportSeparation payment left right))
   }
+
+
+------------------------------------------------------------------------
+-- Final Wilson covariance same-object adapter.
+--
+-- At this point all cluster/KP/CMP116 summation is already on one carrier.
+-- The only remaining response-level identification is that the magnitude of
+-- this literal mixed log-partition derivative is the finite Wilson connected
+-- covariance magnitude consumed by R491.
+------------------------------------------------------------------------
+
+record TwoWilsonPhysicalCovarianceIdentification
+    {Observable Source Polymer Cluster Volume Scale Root : Set}
+    {family :
+      Marked.TwoWilsonSourceParameterizedKP
+        Observable Source Polymer Cluster Volume}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable}
+    (payment :
+      TwoWilsonCMP116PhysicalShellPayment
+        {Scale = Scale} {Root = Root}
+        differentiable charge)
+    : Set₁ where
+  field
+    connectedCovarianceMagnitude :
+      Nat → Observable → Observable → ℚ
+
+    mixedDerivativeMagnitudeIsConnectedCovariance :
+      ∀ cutoff left right →
+      ∣
+        Diff.mixedDerivative
+          (Marked.derivativeCalculus differentiable cutoff left right)
+          (Marked.markedLogPartition family cutoff left right)
+      ∣
+      ≡ connectedCovarianceMagnitude cutoff left right
+
+    connectingClusterMeetsBothWilsonSupports :
+      ∀ cutoff left right → Set
+
+open TwoWilsonPhysicalCovarianceIdentification public
+
+asWilsonTwoInsertionConnectedShell :
+  ∀ {Observable Source Polymer Cluster Volume Scale Root family}
+    {differentiable : Marked.DifferentiableTwoWilsonKP family}
+    {charge : Marked.TwoWilsonCMP116ClusterCharge differentiable}
+    {payment :
+      TwoWilsonCMP116PhysicalShellPayment
+        {Scale = Scale} {Root = Root}
+        differentiable charge} →
+  TwoWilsonPhysicalCovarianceIdentification payment →
+  R491.WilsonTwoInsertionConnectedShell
+    Scale Volume Root Nat Observable
+asWilsonTwoInsertionConnectedShell
+    {family = family}
+    {differentiable = differentiable}
+    {payment = payment}
+    identification = record
+  { R491.WilsonTwoInsertionConnectedShell.shellData =
+      shellData payment
+  ; R491.WilsonTwoInsertionConnectedShell.stateAtScale =
+      λ cutoff → cutoff
+  ; R491.WilsonTwoInsertionConnectedShell.scaleOf =
+      scaleOfCutoff payment
+  ; R491.WilsonTwoInsertionConnectedShell.volumeOf =
+      Marked.volumeOfCutoff family
+  ; R491.WilsonTwoInsertionConnectedShell.physicalDistance =
+      TwoWilsonCMP116PhysicalShellPayment.supportSeparation payment
+  ; R491.WilsonTwoInsertionConnectedShell.connectingRoot =
+      connectingRoot payment
+  ; R491.WilsonTwoInsertionConnectedShell.connectedCovarianceMagnitude =
+      connectedCovarianceMagnitude identification
+  ; R491.WilsonTwoInsertionConnectedShell.wilsonConnectedCovarianceBelowConnectingShell =
+      λ cutoff left right →
+        subst
+          (λ lower →
+            lower
+            ≤
+            Shell.rootedShell (shellData payment)
+              (scaleOfCutoff payment cutoff)
+              (Marked.volumeOfCutoff family cutoff)
+              (connectingRoot payment cutoff left right)
+              (TwoWilsonCMP116PhysicalShellPayment.supportSeparation
+                payment left right))
+          (mixedDerivativeMagnitudeIsConnectedCovariance
+            identification cutoff left right)
+          (twoWilsonMixedLogBelowPhysicalRootedShell
+            payment cutoff left right)
+  ; R491.WilsonTwoInsertionConnectedShell.connectingClusterMeetsBothWilsonSupports =
+      connectingClusterMeetsBothWilsonSupports identification
+  }
+
+twoWilsonPhysicalCovarianceSameObjectLevel : ProofLevel
+twoWilsonPhysicalCovarianceSameObjectLevel = conditional
 
 twoWilsonConnectingTailCompilerLevel : ProofLevel
 twoWilsonConnectingTailCompilerLevel = machineChecked
