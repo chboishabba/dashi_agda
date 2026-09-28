@@ -198,6 +198,70 @@ poleCoefficientModThreeUnitReceipt :
 poleCoefficientModThreeUnitReceipt = refl
 
 ------------------------------------------------------------------------
+-- 5a. Exact 3-adic depth certificates without a separate valuation function.
+--
+-- An exact depth-d certificate stores n = 3^d * u together with a concrete
+-- remainder witness u = 3*q + r where r is 1 or 2.  Thus u is a 3-adic unit.
+------------------------------------------------------------------------
+
+data NonzeroModThreeRemainder : Set where
+  remainderOne : NonzeroModThreeRemainder
+  remainderTwo : NonzeroModThreeRemainder
+
+remainderValue : NonzeroModThreeRemainder → Nat
+remainderValue remainderOne = 1
+remainderValue remainderTwo = 2
+
+record ExactThreeAdicDepthCertificate (value depth : Nat) : Set where
+  constructor exact-three-adic-depth-certificate
+  field
+    unit : Nat
+    quotientByThree : Nat
+    remainder : NonzeroModThreeRemainder
+    factorExact :
+      value ≡ pow3 depth * unit
+    unitRemainderExact :
+      unit ≡ 3 * quotientByThree + remainderValue remainder
+
+open ExactThreeAdicDepthCertificate public
+
+poleExactDepthZero :
+  ExactThreeAdicDepthCertificate poleCoefficient 0
+poleExactDepthZero =
+  exact-three-adic-depth-certificate
+    80 26 remainderTwo refl refl
+
+originExactDepthFive :
+  ExactThreeAdicDepthCertificate originCoefficient 5
+originExactDepthFive =
+  exact-three-adic-depth-certificate
+    1 0 remainderOne refl refl
+
+jExactDepthFive :
+  ExactThreeAdicDepthCertificate jCoefficient 5
+jExactDepthFive =
+  exact-three-adic-depth-certificate
+    5 1 remainderTwo refl refl
+
+targetExactDepthFive :
+  ExactThreeAdicDepthCertificate targetCoefficient 5
+targetExactDepthFive =
+  exact-three-adic-depth-certificate
+    4 1 remainderOne refl refl
+
+record RHKernelThreeAdicProfile : Set where
+  constructor rh-kernel-three-adic-profile
+  field
+    poleDepth : Nat
+    originDepth : Nat
+    jDepth : Nat
+    targetDepth : Nat
+
+canonicalThreeAdicProfile : RHKernelThreeAdicProfile
+canonicalThreeAdicProfile =
+  rh-kernel-three-adic-profile 0 5 5 5
+
+------------------------------------------------------------------------
 -- 5b. Primitive-row / Smith-style certificate.
 --
 -- A direct Bezout witness from the first two coefficients already proves
@@ -313,6 +377,7 @@ record RiemannQuarticBalancedTernaryStencilBoundary : Set where
     primitiveCoefficientVectorOwned : Bool
     sparseSignedStencilOwned : Bool
     valuationProfileZeroFiveFiveFiveOwned : Bool
+    exactUnitFactorCertificatesOwned : Bool
     poleCoefficientCertifiedModThreeUnit : Bool
     commonDepthFiveBlockOwned : Bool
     shiftPolynomialNormalFormOwned : Bool
@@ -327,6 +392,6 @@ canonicalRiemannQuarticBalancedTernaryStencilBoundary :
   RiemannQuarticBalancedTernaryStencilBoundary
 canonicalRiemannQuarticBalancedTernaryStencilBoundary =
   riemann-quartic-balanced-ternary-stencil-boundary
-    true true true true true true true true
+    true true true true true true true true true
     true false
     false false
