@@ -28,6 +28,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
+open import Data.List.Base using (map)
+open import Function.Base using (_∘_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
 import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
@@ -214,7 +216,7 @@ zeroCAHasNoSupport = refl
 
 abEnumeration : List Descent.ABSection
 abEnumeration =
-  Data.List.Base.map kernel4ToAB Punctured.kernel4Enumeration
+  map kernel4ToAB Punctured.kernel4Enumeration
 
 kernel4ToABInjective :
   {left right : KernelBridge.Kernel4} ->
@@ -242,7 +244,7 @@ abEnumerationLengthIs81 =
 
 puncturedABEnumeration : List Descent.ABSection
 puncturedABEnumeration =
-  Data.List.Base.map kernel4ToAB
+  map kernel4ToAB
     Punctured.puncturedKernel4Enumeration
 
 puncturedABEnumerationUnique : Unique puncturedABEnumeration
