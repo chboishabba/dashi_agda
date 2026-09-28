@@ -47,6 +47,8 @@ import DASHI.Reasoning.Trialectic369IncomingPairFaceDirectionQuotientExact as In
 import DASHI.Reasoning.Trialectic369IncomingFaceFrickeQuotientSeparationExact as FrickeSeparation
 import DASHI.Reasoning.Trialectic369OutgoingSheet9MultiplicityRecognitionExact as Outgoing
 import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact as OutCompiler
+import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact as FineFrickeNoGo
+import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact as Sheet
 import DASHI.Moonshine.OggSSP15PhaseOrbitBidiExact as Ogg
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
@@ -294,6 +296,44 @@ outgoingInvariantFineFibreRecognitionStillOpen :
 outgoingInvariantFineFibreRecognitionStillOpen = refl
 
 ------------------------------------------------------------------------
+-- 5d. Conditional outgoing recognition fork.
+------------------------------------------------------------------------
+
+outgoingFineFrickeNoGoBoundary :
+  FineFrickeNoGo.Trialectic369OutgoingFineFrickeInvariantNoGoBoundary
+outgoingFineFrickeNoGoBoundary =
+  FineFrickeNoGo.canonicalTrialectic369OutgoingFineFrickeInvariantNoGoBoundary
+
+outgoingFineFrickeRejectsSingleFineFibre :
+  FineFrickeNoGo.fineFrickeElementRejectsSelectedFineInvariant
+    outgoingFineFrickeNoGoBoundary
+  ≡ true
+outgoingFineFrickeRejectsSingleFineFibre = refl
+
+outgoingFrickeMode18Boundary :
+  Mode18.Trialectic369OutgoingFrickeModeBlock18Boundary
+outgoingFrickeMode18Boundary =
+  Mode18.canonicalTrialectic369OutgoingFrickeModeBlock18Boundary
+
+outgoingFrickeStableModeBlock18Paid :
+  Mode18.binaryPhaseTimesSheet9BlockOwned
+    outgoingFrickeMode18Boundary
+  ≡ true
+outgoingFrickeStableModeBlock18Paid = refl
+
+outgoingFrickeModeBlockCompilerPaid :
+  Mode18.frickeLikeElementBlockActionCompilerOwned
+    outgoingFrickeMode18Boundary
+  ≡ true
+outgoingFrickeModeBlockCompilerPaid = refl
+
+outgoingActualFineFrickeElementStillOpen :
+  Mode18.actualMonsterFrickeElementRecognizedHere
+    outgoingFrickeMode18Boundary
+  ≡ false
+outgoingActualFineFrickeElementStillOpen = refl
+
+------------------------------------------------------------------------
 -- 6. Machine-readable remaining recognition wall.
 ------------------------------------------------------------------------
 
@@ -340,6 +380,9 @@ record Trialectic369SSP15RecognitionCapstoneBoundary : Set where
     outgoingSecondarySheetCarrierRecognitionPaid : Bool
     outgoingActionRestrictionCompilerPaid : Bool
     outgoingInvariantFineFibreRecognitionPaid : Bool
+    outgoingFineFrickeSingleFibreNoGoPaid : Bool
+    outgoingFrickeStableModeBlock18CompilerPaid : Bool
+    outgoingActualFineFrickeElementRecognitionPaid : Bool
     outgoingActualMonsterActionRecognitionPaid : Bool
     orderedRankIntrinsicModularInvariant : Bool
     residualDiscarded : Bool
@@ -349,5 +392,6 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary :
 canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
   trialectic-369-ssp15-recognition-capstone-boundary
     true true true true true true true
-    true true true false true true false false
+    true true true false true true false
+    true true false false
     false false
