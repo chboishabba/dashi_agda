@@ -7,6 +7,9 @@ open import Data.Rational.Base using (0ℚ)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import Real as Bishop
+import RealProperties as BishopP
+
+import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Carrier
 
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as LiteralToSource
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
@@ -126,3 +129,109 @@ p3LiteralPlaquetteCMP109CompilerLevel = machineChecked
 
 p3LiteralPlaquetteSameObjectLevel : ProofLevel
 p3LiteralPlaquetteSameObjectLevel = conditional
+
+
+------------------------------------------------------------------------
+-- SPLIT-LEVEL P3 -> LITERAL PLAQUETTE COMPILER
+--
+-- The P3 producer naturally exposes the perturbative beta contribution and
+-- the controlled remainder separately.  The literal plaquette producer does
+-- too:
+--
+--   beta_Z   = vacuum-polarization plaquette coefficient
+--   beta_int = localized interaction remainder.
+--
+-- Identifying those two coordinates separately is stronger than identifying
+-- only their sum, and it is exactly the provenance needed by the running-
+-- coupling convention constructor.
+------------------------------------------------------------------------
+
+record P3RepresentsLiteralPlaquetteSplitUVView
+    (dataSet : Plaquette.PhysicalRunningCouplingData Nat)
+    (recursion : P3.RunningCouplingRecursion Nat Bishop.ℝ) : Set₁ where
+  field
+    addIsBishopAdd :
+      ∀ left right →
+      Bishop._≃_
+        (P3.add recursion left right)
+        (Bishop._+_ left right)
+
+    inverseCouplingSameLiteral :
+      ∀ depth →
+      Bishop._≃_
+        (P3.inverseCouplingSq recursion depth)
+        (UV.embed (Plaquette.inverseCouplingSq dataSet depth))
+
+    nextScaleIsUVPredecessor :
+      ∀ depth →
+      P3.nextScale recursion depth ≡ UV.uvNext depth
+
+    zeroTotalIncrementSame :
+      Bishop._≃_
+        (Bishop._+_
+          (P3.betaLogBlocking recursion zero)
+          (P3.remainder recursion zero))
+        (UV.embed 0ℚ)
+
+    betaLogBlockingSameLiteralGaussian :
+      ∀ depth →
+      Bishop._≃_
+        (P3.betaLogBlocking recursion (suc depth))
+        (UV.embed (Literal.literalBetaZ dataSet (suc depth)))
+
+    remainderSameLiteralInteraction :
+      ∀ depth →
+      Bishop._≃_
+        (P3.remainder recursion (suc depth))
+        (UV.embed (Literal.literalBetaInt dataSet (suc depth)))
+
+open P3RepresentsLiteralPlaquetteSplitUVView public
+
+splitViewAsTotalView :
+  ∀ {dataSet recursion} →
+  P3RepresentsLiteralPlaquetteSplitUVView dataSet recursion →
+  P3RepresentsLiteralPlaquetteUVView dataSet recursion
+splitViewAsTotalView {dataSet = dataSet} {recursion = recursion} splitView = record
+  { P3RepresentsLiteralPlaquetteUVView.addIsBishopAdd =
+      P3RepresentsLiteralPlaquetteSplitUVView.addIsBishopAdd splitView
+
+  ; P3RepresentsLiteralPlaquetteUVView.inverseCouplingSameLiteral =
+      P3RepresentsLiteralPlaquetteSplitUVView.inverseCouplingSameLiteral splitView
+
+  ; P3RepresentsLiteralPlaquetteUVView.nextScaleIsUVPredecessor =
+      P3RepresentsLiteralPlaquetteSplitUVView.nextScaleIsUVPredecessor splitView
+
+  ; P3RepresentsLiteralPlaquetteUVView.zeroTotalIncrementSame =
+      P3RepresentsLiteralPlaquetteSplitUVView.zeroTotalIncrementSame splitView
+
+  ; P3RepresentsLiteralPlaquetteUVView.successorTotalIncrementSameLiteral =
+      λ depth →
+        BishopP.≃-trans
+          (BishopP.+-cong
+            (betaLogBlockingSameLiteralGaussian splitView depth)
+            (remainderSameLiteralInteraction splitView depth))
+          (BishopP.≃-symm
+            (Carrier.bishopEmbedAdd
+              (Literal.literalBetaZ dataSet (suc depth))
+              (Literal.literalBetaInt dataSet (suc depth))))
+  }
+
+p3LiteralPlaquetteSplitThenCMP109 :
+  ∀ {dataSet trajectory recursion} →
+  P3RepresentsLiteralPlaquetteSplitUVView dataSet recursion →
+  LiteralToSource.LiteralPlaquetteCMP109UVSameObject dataSet trajectory →
+  UV.P3RepresentsSourceUVView trajectory recursion
+p3LiteralPlaquetteSplitThenCMP109 splitView literalWeld =
+  p3LiteralPlaquetteThenCMP109
+    (splitViewAsTotalView splitView)
+    literalWeld
+
+totalIncrementOnlyIdentificationRequiredOnPreferredRoute :
+  Agda.Builtin.Bool.Bool
+totalIncrementOnlyIdentificationRequiredOnPreferredRoute =
+  Agda.Builtin.Bool.false
+
+gaussianAndInteractionCoordinatesArePreferred :
+  Agda.Builtin.Bool.Bool
+gaussianAndInteractionCoordinatesArePreferred =
+  Agda.Builtin.Bool.true
