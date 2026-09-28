@@ -31,6 +31,8 @@ import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact as Stencil
 
+open Codec using ([]ᵥ; _∷ᵥ_; support)
+
 ------------------------------------------------------------------------
 -- 1. Exact X6 <-> codec Kernel 6 chart.
 ------------------------------------------------------------------------
@@ -40,23 +42,23 @@ Kernel6 = Codec.Kernel 6
 
 x6ToKernel6 : H.X6 → Kernel6
 x6ToKernel6 (H.x6 a0 a1 a2 a3 a4 a5) =
-  a0 Codec.∷ᵥ
-  a1 Codec.∷ᵥ
-  a2 Codec.∷ᵥ
-  a3 Codec.∷ᵥ
-  a4 Codec.∷ᵥ
-  a5 Codec.∷ᵥ
-  Codec.[]ᵥ
+  a0 ∷ᵥ
+  a1 ∷ᵥ
+  a2 ∷ᵥ
+  a3 ∷ᵥ
+  a4 ∷ᵥ
+  a5 ∷ᵥ
+  []ᵥ
 
 kernel6ToX6 : Kernel6 → H.X6
 kernel6ToX6
-  (a0 Codec.∷ᵥ
-   a1 Codec.∷ᵥ
-   a2 Codec.∷ᵥ
-   a3 Codec.∷ᵥ
-   a4 Codec.∷ᵥ
-   a5 Codec.∷ᵥ
-   Codec.[]ᵥ) =
+  (a0 ∷ᵥ
+   a1 ∷ᵥ
+   a2 ∷ᵥ
+   a3 ∷ᵥ
+   a4 ∷ᵥ
+   a5 ∷ᵥ
+   []ᵥ) =
   H.x6 a0 a1 a2 a3 a4 a5
 
 x6Kernel6RoundTrip :
@@ -68,13 +70,13 @@ kernel6X6RoundTrip :
   (kernel : Kernel6) →
   x6ToKernel6 (kernel6ToX6 kernel) ≡ kernel
 kernel6X6RoundTrip
-  (a0 Codec.∷ᵥ
-   a1 Codec.∷ᵥ
-   a2 Codec.∷ᵥ
-   a3 Codec.∷ᵥ
-   a4 Codec.∷ᵥ
-   a5 Codec.∷ᵥ
-   Codec.[]ᵥ) = refl
+  (a0 ∷ᵥ
+   a1 ∷ᵥ
+   a2 ∷ᵥ
+   a3 ∷ᵥ
+   a4 ∷ᵥ
+   a5 ∷ᵥ
+   []ᵥ) = refl
 
 ------------------------------------------------------------------------
 -- 2. Canonical codec Kernel 4 and its origin.
@@ -85,15 +87,17 @@ Kernel4 = Codec.Kernel 4
 
 zeroKernel4 : Kernel4
 zeroKernel4 =
-  zer Codec.∷ᵥ
-  zer Codec.∷ᵥ
-  zer Codec.∷ᵥ
-  zer Codec.∷ᵥ
-  Codec.[]ᵥ
+  zer ∷ᵥ
+  zer ∷ᵥ
+  zer ∷ᵥ
+  zer ∷ᵥ
+  []ᵥ
 
 ------------------------------------------------------------------------
 -- 3. Support-based puncture.
 ------------------------------------------------------------------------
+
+infixr 4 _orBool_
 
 _orBool_ : Bool → Bool → Bool
 false orBool b = b
@@ -101,15 +105,15 @@ true orBool b = true
 
 kernel4Support : Kernel4 → Bool
 kernel4Support
-  (a Codec.∷ᵥ
-   b Codec.∷ᵥ
-   c Codec.∷ᵥ
-   d Codec.∷ᵥ
-   Codec.[]ᵥ) =
-  Codec.support a
-  orBool Codec.support b
-  orBool Codec.support c
-  orBool Codec.support d
+  (a ∷ᵥ
+   b ∷ᵥ
+   c ∷ᵥ
+   d ∷ᵥ
+   []ᵥ) =
+  support a
+  orBool support b
+  orBool support c
+  orBool support d
 
 zeroKernel4HasNoSupport :
   kernel4Support zeroKernel4 ≡ false
