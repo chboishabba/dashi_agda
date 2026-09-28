@@ -439,3 +439,5 @@ import DASHI.Moonshine.OggSSP3BGreenSpeciesCarnahanFixedVectorCompatibilityExact
 import DASHI.Moonshine.OggSSPPBSourceGeometricLocalizationAuthorityExact
 
 import DASHI.Moonshine.JInvariant369SSP15OggAddressPhaseOrbitBidiExact
+
+import DASHI.Moonshine.JInvariant369SSP15OggAddressRoot369BidiExact
