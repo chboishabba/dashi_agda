@@ -43,6 +43,8 @@ import DASHI.Moonshine.OggSSPP2Gamma0FourMarkedSubgroupSchemeSourceExact as Gamm
 import DASHI.Moonshine.OggSSPP2Gamma0FourRefinedModuliBoundaryExact as RefinedGamma0
 import DASHI.Moonshine.OggSSPP2Gamma0FourTwoIsogenyChainSourceExact as Gamma0Chain
 import DASHI.Moonshine.OggSSPP2Gamma0FourUniqueSupersingularSubgroupSeparationExact as UniqueGamma0
+import DASHI.Moonshine.OggSSPP2UniqueGamma0FourMarkingBidiExact as MarkingBidi
+import DASHI.Moonshine.OggSSPP2Gamma0FourSubgroupIsogenyChainBidiExact as ChainBidi
 
 ------------------------------------------------------------------------
 -- 1. Receipt calibration remains explicit.
@@ -131,6 +133,12 @@ data P2GaussianCMSourceResidual : Set where
   missingArithmeticMarkingOverUniqueRawSubgroup :
     P2GaussianCMSourceResidual
 
+  missingUniqueGamma0MarkingBidi :
+    P2GaussianCMSourceResidual
+
+  missingSubgroupIsogenyChainBidi :
+    P2GaussianCMSourceResidual
+
   missingOrderTwoSubflag :
     P2GaussianCMSourceResidual
 
@@ -171,6 +179,8 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     gamma0FourTwoIsogenyChainSocketOwned : Bool
     uniqueRawSupersingularGamma0FourSubgroupSourceBacked : Bool
     rawSubgroupChoiceCountOneVsResidualTenSeparated : Bool
+    uniqueGamma0MarkingBidiContractOwned : Bool
+    subgroupIsogenyChainBidiContractOwned : Bool
     gamma0FourOrderTwoSubflagRequired : Bool
     naiveFullE4PointSetIdentificationRuledOut : Bool
     stabilizerTypeCompatibilityOwned : Bool
@@ -187,6 +197,6 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary :
 canonicalP2GaussianCMMarkedSourceFrontierBoundary =
   p2-gaussian-cm-marked-source-frontier-boundary
     true true true true false
-    true true true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true
     false false false
     missingFormalKerFrobeniusSquaredFiniteFlatConstruction
