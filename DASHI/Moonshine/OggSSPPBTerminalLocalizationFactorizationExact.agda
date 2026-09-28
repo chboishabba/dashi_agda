@@ -15,7 +15,7 @@ module DASHI.Moonshine.OggSSPPBTerminalLocalizationFactorizationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Data.List using (List)
+open import Data.List using (List; []; _∷_)
 
 import DASHI.Moonshine.OggSSPP2UranoInertiaSectorLocalizationObligationExact as P2
 import DASHI.Moonshine.OggSSPP3H3NodeBranchLocalizationObligationExact as P3
@@ -58,15 +58,7 @@ record PBSharedGreenRealization
       ≡
       P3.normalizedDVRLength p3 piece
 
-    p2SectorPieces :
-      Preferred.Sector Preferred.p2PreferredPresentation ->
-      List (P2.SourcePiece p2)
-
-    p3SectorPieces :
-      Preferred.Sector Preferred.p3PreferredPresentation ->
-      List (P3.H3Piece p3)
-
-    p2SectorClassReopens :
+    p2SectorClassReopensCanonicalLocalizedWitness :
       (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
       Green.p2SectorClass green sector
       ≡
@@ -79,9 +71,9 @@ record PBSharedGreenRealization
           ; TwoB.respectsUranoForbiddenPairs =
               P2.respectsUranoForbiddenPairs p2
           })
-        (p2SectorPieces sector)
+        (P2.everySectorHasSourcePiece p2 sector ∷ [])
 
-    p3SectorClassReopens :
+    p3SectorClassReopensCanonicalLocalizedWitness :
       (sector : Preferred.Sector Preferred.p3PreferredPresentation) ->
       Green.p3SectorClass green sector
       ≡
@@ -98,7 +90,7 @@ record PBSharedGreenRealization
           ; ThreeB.embedsEquivariantlyIntoThreeBFixedVectorsIsTrue =
               P3.pieceEmbedsEquivariantlyIntoThreeBFixedVectorsIsTrue p3
           })
-        (p3SectorPieces sector)
+        (P3.everySectorHasSourcePiece p3 sector ∷ [])
 
     twoBGradedFunctionalAgreesWithUranoT4A :
       Bool
@@ -145,9 +137,10 @@ p2Compatibility {p2} G =
     { TwoB.sourcePieces =
         p2SourcePieces G
     ; TwoB.sectorSourcePieces =
-        p2SectorPieces G
+        λ sector ->
+          P2.everySectorHasSourcePiece p2 sector ∷ []
     ; TwoB.sectorClassReopensFromSourcePieces =
-        p2SectorClassReopens G
+        p2SectorClassReopensCanonicalLocalizedWitness G
     ; TwoB.sourcePiecesComeFromTwoBWeightSpaces =
         true
     ; TwoB.sourcePiecesComeFromTwoBWeightSpacesIsTrue =
@@ -197,9 +190,10 @@ p3Compatibility {p3} G =
     { ThreeB.sourcePieces =
         p3SourcePieces G
     ; ThreeB.sectorSourcePieces =
-        p3SectorPieces G
+        λ sector ->
+          P3.everySectorHasSourcePiece p3 sector ∷ []
     ; ThreeB.sectorClassReopensFromSourcePieces =
-        p3SectorClassReopens G
+        p3SectorClassReopensCanonicalLocalizedWitness G
     ; ThreeB.refinementUsesCarnahanBaseExtendedSetting =
         P3.usesCarnahanLocalizedBaseExtension p3
     ; ThreeB.refinementUsesCarnahanBaseExtendedSettingIsTrue =
