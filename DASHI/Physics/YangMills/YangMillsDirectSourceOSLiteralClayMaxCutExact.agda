@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact 
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSameHGapExact as H1H3
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSSelectedWilsonH2Exact as H2Wilson
 import DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exact as H3OS
+import DASHI.Physics.YangMills.YangMillsDirectSourceOSCompactSimpleH5Exact as H5
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as Local
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as H6
 
@@ -68,33 +69,15 @@ record DirectSourceOSLiteralClayInputs
       Continuum.LiteralContinuumSameObjectBridge Y
 
     --------------------------------------------------------------------
-    -- H1 -> H3 endpoint interpretation.
+    -- H1 + H2(ii) + H3 + H5 on one all-group source theorem.
     --
-    -- R467 + the direct R387 gap compiler supply the mathematical gap.
-    -- This attachment says that that SAME gap is the literal Y Hamiltonian /
-    -- vacuum / mass-gap object.  It contains no new clustering estimate.
+    -- For each quantitative compact-simple package this continuation returns
+    -- the ACTUAL literal R467 application, selected Wilson convergence
+    -- presentation, and same-OS spectrum package.  Classification/package
+    -- lookup then covers every literal endpoint G.
     --------------------------------------------------------------------
-    sameHamiltonianGap :
-      H1H3.LiteralDirectSourceSameHMassGap Y
-
-    --------------------------------------------------------------------
-    -- H2(ii): the EXACT tests inside the H1/H3 package are literal bounded
-    -- Wilson-cylinder products.  All three selected expectation limits are
-    -- compiler output from this one presentation.
-    --------------------------------------------------------------------
-    selectedWilsonConvergence :
-      ∀ G →
-      H2Wilson.LiteralSelectedWilsonExpectationApplication
-        (H1H3.forGroup sameHamiltonianGap G)
-
-    --------------------------------------------------------------------
-    -- H3: the exact R281 selected spectrum belongs to the actual OS
-    -- reconstruction and that reconstruction is the literal Y Schwinger/H.
-    --------------------------------------------------------------------
-    sameOSReconstructedSpectrum :
-      ∀ G →
-      H3OS.LiteralSelectedSpectrumIsSameOSHamiltonian
-        (H1H3.forGroup sameHamiltonianGap G)
+    compactSimpleDirectSource :
+      H5.LiteralCompactSimpleDirectSourceContinuation Y
 
     --------------------------------------------------------------------
     -- Minimal endpoint local-QFT supplement.  OPE/stress is not counted as an
@@ -125,7 +108,8 @@ compiledMassGap :
   Five.CutoffUniformPhysicalMassGap Y
 compiledMassGap inputs =
   H1H3.asCutoffUniformPhysicalMassGap
-    (sameHamiltonianGap inputs)
+    (H5.sameHGapForEveryLiteralGroup
+      (compactSimpleDirectSource inputs))
 
 compiledLocalQFT :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
