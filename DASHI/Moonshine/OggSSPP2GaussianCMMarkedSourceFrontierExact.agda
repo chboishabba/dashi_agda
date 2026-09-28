@@ -42,6 +42,7 @@ import DASHI.Moonshine.OggSSPP2BadPrimeLevelStructureBoundaryExact as BadPrime
 import DASHI.Moonshine.OggSSPP2Gamma0FourMarkedSubgroupSchemeSourceExact as Gamma0Four
 import DASHI.Moonshine.OggSSPP2Gamma0FourRefinedModuliBoundaryExact as RefinedGamma0
 import DASHI.Moonshine.OggSSPP2Gamma0FourTwoIsogenyChainSourceExact as Gamma0Chain
+import DASHI.Moonshine.OggSSPP2Gamma0FourUniqueSupersingularSubgroupSeparationExact as UniqueGamma0
 
 ------------------------------------------------------------------------
 -- 1. Receipt calibration remains explicit.
@@ -124,7 +125,10 @@ twoTorsionFourCannotEqualTen =
 ------------------------------------------------------------------------
 
 data P2GaussianCMSourceResidual : Set where
-  missingFiniteFlatCyclicOrderFourSubgroup :
+  missingFormalKerFrobeniusSquaredFiniteFlatConstruction :
+    P2GaussianCMSourceResidual
+
+  missingArithmeticMarkingOverUniqueRawSubgroup :
     P2GaussianCMSourceResidual
 
   missingOrderTwoSubflag :
@@ -165,6 +169,8 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
     gamma0FourRefinedCompactificationBoundaryOwned : Bool
     gamma0FourTwoIsogenyChainSocketOwned : Bool
+    uniqueRawSupersingularGamma0FourSubgroupSourceBacked : Bool
+    rawSubgroupChoiceCountOneVsResidualTenSeparated : Bool
     gamma0FourOrderTwoSubflagRequired : Bool
     naiveFullE4PointSetIdentificationRuledOut : Bool
     stabilizerTypeCompatibilityOwned : Bool
@@ -181,6 +187,6 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary :
 canonicalP2GaussianCMMarkedSourceFrontierBoundary =
   p2-gaussian-cm-marked-source-frontier-boundary
     true true true true false
-    true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true
     false false false
-    missingFiniteFlatCyclicOrderFourSubgroup
+    missingFormalKerFrobeniusSquaredFiniteFlatConstruction
