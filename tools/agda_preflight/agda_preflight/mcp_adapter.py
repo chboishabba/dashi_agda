@@ -64,13 +64,21 @@ class DashiAgdaMcpTools:
             allow_likely=allow_likely,
         )
 
-    def affected(self, target: str) -> Dict[str, Any]:
-        """Return the indexed reverse-import consumer frontier for a module.
+    def affected(
+        self,
+        target: str,
+        within: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Return the reverse-import consumer frontier for a module.
 
-        The changed module is first, followed by nearest indexed consumers.
-        This is read-only.
+        Without within, the result is explicitly scoped to modules already in
+        the persistent index. Pass a Subject/Everything.agda rollup as within
+        to ensure and constrain the frontier to that subject closure.
         """
-        return self.service.affected(target)
+        return self.service.affected(
+            target,
+            within=within,
+        )
 
     def cache_status(self) -> Dict[str, Any]:
         """Return persistent source-index/cache statistics."""
