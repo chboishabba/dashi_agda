@@ -344,6 +344,11 @@ top = Set
         ]
         assert affected_first["profile"]["counts"].get("files_stat", 0) == 0
 
+        status = tools.cache_status()
+        assert status["session"]["trusted_targets"] == 1
+        assert status["session"]["candidate_rollups"] == 1
+        assert status["session"]["candidate_modules"] == 2
+
         # A second affected query reuses the in-memory reverse graph.
         affected_second = tools.affected(
             str(leaf),
@@ -364,6 +369,18 @@ top = Set
         assert final["status"] == "clean"
         assert final["profile"]["counts"].get("files_stat", 0) == 0
         assert final["profile"]["counts"]["trusted_session_hits"] == 1
+        assert (
+            final["profile"]["counts"]["session_candidate_rollup_hits"]
+            == 1
+        )
+        assert (
+            final["profile"]["counts"]["session_candidate_heap_peeks"]
+            == 1
+        )
+        assert final["profile"]["counts"].get(
+            "candidate_snapshot_modules",
+            0,
+        ) == 0
 
 
 def test_mcp_smoke_client_returns_structured_ping(tmp_path):
