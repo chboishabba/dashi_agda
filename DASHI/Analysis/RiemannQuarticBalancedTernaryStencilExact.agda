@@ -197,12 +197,6 @@ poleCoefficientModThreeUnitReceipt :
   poleCoefficient ≡ 3 * 26 + 2
 poleCoefficientModThreeUnitReceipt = refl
 
-data PoleCoefficientHasDepthFiveFactor : Set where
-
-poleCoefficientDoesNotCarryDeclaredDepthFiveFactor :
-  PoleCoefficientHasDepthFiveFactor → ⊥
-poleCoefficientDoesNotCarryDeclaredDepthFiveFactor ()
-
 ------------------------------------------------------------------------
 -- 6. Shift-polynomial normal form.
 --
