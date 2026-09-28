@@ -245,11 +245,11 @@ compileCornerStarActualStateRecognition recognition = record
       CornerStarSharedSliceRecognition.selectedCAFaceIsZNegative recognition
   }
 
-data TrialecticSharedActualX6SliceConstructed : Set where
+data TrialecticSharedActualX6SliceConstructedHere : Set where
 
-trialecticSharedActualX6SliceStillOpen :
-  TrialecticSharedActualX6SliceConstructed -> ⊥
-trialecticSharedActualX6SliceStillOpen ()
+trialecticSharedActualX6SliceNotConstructedHere :
+  TrialecticSharedActualX6SliceConstructedHere -> ⊥
+trialecticSharedActualX6SliceNotConstructedHere ()
 
 record Trialectic369CechCornerStarRecognitionBoundary : Set where
   constructor trialectic-369-cech-corner-star-recognition-boundary
@@ -260,7 +260,7 @@ record Trialectic369CechCornerStarRecognitionBoundary : Set where
     cornerIncidentEdgeTripleMatchedExactly : Bool
     incidenceComparisonPaid : Bool
     fullNerveEquivalencePaid : Bool
-    actualSameObjectPromotionPaid : Bool
+    actualSameObjectPromotionConstructedHere : Bool
     genericSharedSliceCompilerAvailable : Bool
     remainingObligationReducedToOneActualX6Slice : Bool
     remainingPromotionHasTypedContract : Bool
