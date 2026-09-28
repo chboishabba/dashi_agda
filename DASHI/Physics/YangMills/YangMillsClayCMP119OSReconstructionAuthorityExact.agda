@@ -22,6 +22,45 @@ import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimi
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
+asPreGapOSReconstructionAuthority :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      sequenceLimit limitLaws quotient division S coreInputs}
+    (pinned :
+      Pinned.PinnedCMP119PreGapOSReconstruction
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        coreInputs)
+    (group : G) →
+  OS.PreGapOSReconstructionAuthority
+    (Configuration → ℝ)
+    Position
+    ℝ
+    (OSSystem.continuumOSCoreSystem coreInputs group)
+asPreGapOSReconstructionAuthority pinned group = record
+  { OS.PreGapOSReconstructionAuthority.HilbertSpaceCore = Hilbert
+  ; OS.PreGapOSReconstructionAuthority.HamiltonianCore = Hamiltonian
+  ; OS.PreGapOSReconstructionAuthority.VacuumCore = Vector
+  ; OS.PreGapOSReconstructionAuthority.WightmanTheoryCore = Algebra
+  ; OS.PreGapOSReconstructionAuthority.hilbertSpaceCore =
+      OSR.reconstructedHilbertSpaceCore
+        (Pinned.reconstructionCore pinned group)
+  ; OS.PreGapOSReconstructionAuthority.hamiltonianCore =
+      OSR.reconstructedHamiltonianCore
+        (Pinned.reconstructionCore pinned group)
+  ; OS.PreGapOSReconstructionAuthority.vacuumCore =
+      OSR.reconstructedVacuumCore
+        (Pinned.reconstructionCore pinned group)
+  ; OS.PreGapOSReconstructionAuthority.wightmanTheoryCore =
+      OSR.reconstructedObservableAlgebraCore
+        (Pinned.reconstructionCore pinned group)
+  }
+
 asOSReconstructionAuthority :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
@@ -56,6 +95,9 @@ asOSReconstructionAuthority pinned group = record
   ; OS.OSReconstructionAuthority.wightmanTheory =
       OSR.reconstructedObservableAlgebra (Pinned.reconstruction pinned group)
   }
+
+cmp119LightweightPreGapOSAuthorityCompilerLevel : ProofLevel
+cmp119LightweightPreGapOSAuthorityCompilerLevel = machineChecked
 
 cmp119LightweightOSAuthorityCompilerLevel : ProofLevel
 cmp119LightweightOSAuthorityCompilerLevel = machineChecked
