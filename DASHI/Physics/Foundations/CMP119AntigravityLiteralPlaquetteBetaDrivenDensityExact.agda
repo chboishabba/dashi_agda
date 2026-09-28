@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteBetaDrivenDensityExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109FiniteHistoryExact as LiteralHistory
@@ -48,11 +49,11 @@ asBetaDrivenCompleteDensityInputs :
   Beta.BetaDrivenCompleteDensityInputs
     {trajectory = trajectory}
     {split = Terminal.compiledSplit literalHistory}
-asBetaDrivenCompleteDensityInputs source = record
+asBetaDrivenCompleteDensityInputs {terminal = terminal} source = record
   { Beta.BetaDrivenCompleteDensityInputs.Density =
       Density source
   ; Beta.BetaDrivenCompleteDensityInputs.betaHistory =
-      Terminal.asBetaSplitInverseSquareTerminalHistory _
+      Terminal.asBetaSplitInverseSquareTerminalHistory terminal
   ; Beta.BetaDrivenCompleteDensityInputs.densityAt =
       densityAt source
   ; Beta.BetaDrivenCompleteDensityInputs.InSection2DensityClass =
@@ -66,5 +67,5 @@ asBetaDrivenCompleteDensityInputs source = record
 literalPlaquetteBetaDrivenDensityCompilerLevel : ProofLevel
 literalPlaquetteBetaDrivenDensityCompilerLevel = machineChecked
 
-parallelBetaHistoryArgumentRequired : Agda.Builtin.Bool.Bool
-parallelBetaHistoryArgumentRequired = Agda.Builtin.Bool.false
+parallelBetaHistoryArgumentRequired : Bool
+parallelBetaHistoryArgumentRequired = false
