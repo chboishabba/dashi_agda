@@ -15,6 +15,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SameObjectPackageEx
 import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConstructorExact as Constructor
 import DASHI.Physics.Foundations.CMP119AntigravityP3LiteralEdgeIncrementMinCutExact as Edge
 import DASHI.Physics.Foundations.CMP119AntigravityP3UVAnchorFromSharedCouplingExact as UVAnchor
+import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalProducerMinCutExact as P3G
 import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaFlow
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
@@ -74,23 +75,13 @@ record CanonicalS4PhysicalMinCut
       ∀ depth →
       P3.nextScale (SU2.recursion bishopRunning) depth ≡ UV.uvNext depth
 
-    -- PHYSICAL PAYMENT A
-    p3InitialInverseSquareUsesSameHistoryCoupling :
-      UVAnchor.P3InitialInverseSquareUsesHistoryCoupling
+    p3GPhysicalProducer :
+      P3G.P3GPhysicalProducerMinCut
         (BetaFlow.betaHistory inputs)
+        (Constructor.asPhysicalRunningCouplingData coefficientWeld)
+        rich
         bishopRunning
-
-    -- PHYSICAL PAYMENT B
-    p3RemainderIsLocalPhysicalRemainder :
-      ∀ depth →
-      Bishop._≃_
-        (P3.remainder (SU2.recursion bishopRunning) (suc depth))
-        (Rich.add rich
-          (Rich.regularRemainder rich depth)
-          (UV.embed
-            (Literal.literalBetaInt
-              (Constructor.asPhysicalRunningCouplingData coefficientWeld)
-              depth)))
+        edgeGeometry
 
     traceBoundary : SU2.CanonicalBishopSU2TraceBoundary
 
@@ -116,13 +107,13 @@ asLocalS4Inputs package = record
   ; LocalS4.CanonicalS4LocalPhysicalEdgeInputs.edgeGeometry =
       edgeGeometry package
   ; LocalS4.CanonicalS4LocalPhysicalEdgeInputs.p3RemainderIsLocalPhysicalRemainder =
-      p3RemainderIsLocalPhysicalRemainder package
+      P3G.positiveEdgeRemainderIsPhysical (p3GPhysicalProducer package)
   ; LocalS4.CanonicalS4LocalPhysicalEdgeInputs.p3AddIsBishopAdd =
       p3AddIsBishopAdd package
   ; LocalS4.CanonicalS4LocalPhysicalEdgeInputs.p3NextScaleIsUVPredecessor =
       p3NextScaleIsUVPredecessor package
   ; LocalS4.CanonicalS4LocalPhysicalEdgeInputs.p3InitialInverseSquareUsesHistoryCoupling =
-      p3InitialInverseSquareUsesSameHistoryCoupling package
+      P3G.initialInverseSquareUsesSameCoupling (p3GPhysicalProducer package)
   ; LocalS4.CanonicalS4LocalPhysicalEdgeInputs.traceBoundary =
       traceBoundary package
   }
