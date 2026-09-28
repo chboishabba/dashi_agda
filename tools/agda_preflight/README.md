@@ -158,7 +158,8 @@ The benchmark command is also an executable performance gate. Defaults are:
 ```text
 cold bootstrap     <= 60,000 ms
 warm diagnose p95   <= 10,000 ms
-warm next-error p95 <=  2,000 ms
+warm isolated next-error p95 <= 2,000 ms
+trusted-session next-error p95 <= 50 ms
 every warm/agent run parses zero files
 ```
 
@@ -417,11 +418,20 @@ The process is persistent, while parsed module/checker state remains
 request-local: `SourceIndex.begin_request()` still clears live AST/checker
 objects before every operation. After one rollup has been filesystem-validated
 in a long-lived service session, however, compact closure/candidate state is
-marked trusted and repeated `next_error` / scoped `affected` calls skip the
-full closure stat sweep. Source edits performed through `apply_fix` are known
-to the service; API-stable edits preserve that trust, while API-changing edits
-drop it. Use the explicit `refresh(target)` tool after out-of-band editor/git
-changes to observe and revalidate the worktree.
+marked trusted. The service builds two in-memory priority heaps per trusted
+rollup (all candidates and fixable candidates), so repeated `next_error` calls
+are heap peeks rather than recursive closure SQL + JSON decoding. Diagnostic IDs
+are also indexed in memory for the normal `next_error -> apply_fix` loop.
+
+API-stable edits update only the changed module's heap generation; API-changing
+edits invalidate trusted rollups containing that module. Explicit
+`refresh(target)` uses the same API-stability rule for out-of-band editor/git
+changes. Scoped `affected` calls continue to reuse the trusted closure and
+reverse-import graph.
+
+Heap invalidation is lazy, with bounded compaction after repeated replacements,
+so long repair sessions remain proportional to live module candidates rather
+than the number of historical fixes.
 SQLite state, WAL/page cache, interfaces, diagnostics and analyzer identities
 remain persistent.
 
@@ -469,7 +479,7 @@ The registered MCP tools are:
 diagnose            read-only structural diagnostics for a target/rollup
 next_error          read-only highest-priority diagnostic
 affected            read-only reverse-import consumer frontier; optionally scoped by within=Subject/Everything.agda
-cache_status        read-only persistent cache/index statistics
+cache_status        read-only persistent cache/index + trusted-session heap statistics
 semantic_status     read-only fresh/stale/unknown semantic snapshots
 apply_fix           source mutation through exact suggested edits
 promote             explicit fail-closed external semantic promotion
