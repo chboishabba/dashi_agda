@@ -79,8 +79,6 @@ record CMP119LiteralConstructionFields
 
     stressTensor : G → StressTensor
 
-    vacuum : G → Vector
-
     massGap : G → ℚ
 
 open CMP119LiteralConstructionFields public
@@ -138,7 +136,9 @@ literalConstruction {h2 = h2} fields = record
         OSR.reconstructedHamiltonian
           (H2.reconstruction h2) group
   ; Top.LiteralYangMillsConstruction.vacuum =
-      vacuum fields
+      λ group →
+        OSR.reconstructedVacuum
+          (H2.reconstruction h2) group
   ; Top.LiteralYangMillsConstruction.massGap =
       massGap fields
   }
@@ -220,6 +220,25 @@ literalHamiltonianIsExactCMP119OS :
   OSR.reconstructedHamiltonian (H2.reconstruction h2) group
 literalHamiltonianIsExactCMP119OS fields group =
   refl
+
+
+literalVacuumIsExactCMP119OS :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      sequenceLimit limitLaws quotient division S h2}
+    (fields :
+      CMP119LiteralConstructionFields
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S h2)
+    group →
+  Top.vacuum (literalConstruction fields) group
+  ≡
+  OSR.reconstructedVacuum (H2.reconstruction h2) group
+literalVacuumIsExactCMP119OS fields group = refl
 
 cmp119LiteralConstructionCoreLevel : ProofLevel
 cmp119LiteralConstructionCoreLevel = machineChecked
