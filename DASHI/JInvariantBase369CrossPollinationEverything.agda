@@ -216,3 +216,9 @@ import DASHI.Reasoning.Trialectic369OutgoingSheet9ActionRestrictionCompilerExact
 import DASHI.Reasoning.Trialectic369IncomingFaceFrickeQuotientSeparationExact
 
 import DASHI.Reasoning.Trialectic369SSP15RecognitionCapstoneExact
+
+import DASHI.Reasoning.Trialectic369IncomingAnalyticFrickeQuotientRecognitionExact
+
+import DASHI.Reasoning.Trialectic369OutgoingFineFrickeInvariantNoGoExact
+
+import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact
