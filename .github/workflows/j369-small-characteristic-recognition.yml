@@ -77,6 +77,9 @@ on:
       - 'DASHI/Moonshine/Base369P2FiveOrbitOrientationGroupoidsExact.agda'
       - 'DASHI/Core/ActionOrbitRecognitionFunctorExact.agda'
       - 'DASHI/Core/ProvenancePreservingRecognitionFunctorExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3AlignmentIndependentLengthQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2InertiaDepthQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSPPBScalarLocalizationReductionExact.agda'
       - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
       - '.github/workflows/j369-small-characteristic-recognition.yml'
   pull_request:
@@ -155,6 +158,9 @@ on:
       - 'DASHI/Moonshine/Base369P2FiveOrbitOrientationGroupoidsExact.agda'
       - 'DASHI/Core/ActionOrbitRecognitionFunctorExact.agda'
       - 'DASHI/Core/ProvenancePreservingRecognitionFunctorExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3AlignmentIndependentLengthQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2InertiaDepthQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSPPBScalarLocalizationReductionExact.agda'
       - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
       - '.github/workflows/j369-small-characteristic-recognition.yml'
 
