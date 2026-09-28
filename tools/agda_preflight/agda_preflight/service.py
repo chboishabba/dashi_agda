@@ -62,6 +62,40 @@ class _RollupCandidateCache:
         self.any_heap: List[tuple] = []
         self.fixable_heap: List[tuple] = []
         self.by_id: Dict[str, object] = {}
+        self.compactions = 0
+
+    def _live_heap_entries(self) -> int:
+        return sum(
+            int(top is not None) + int(fixable is not None)
+            for top, fixable in self.candidates.values()
+        )
+
+    def _compact_if_needed(self) -> None:
+        live = self._live_heap_entries()
+        total = len(self.any_heap) + len(self.fixable_heap)
+        threshold = max(64, max(1, live) * 4)
+        if total <= threshold:
+            return
+
+        self.any_heap = []
+        self.fixable_heap = []
+        for module, (top, fixable) in self.candidates.items():
+            generation = self.generations[module]
+            self._push(
+                self.any_heap,
+                module,
+                generation,
+                top,
+            )
+            self._push(
+                self.fixable_heap,
+                module,
+                generation,
+                fixable,
+            )
+        heapq.heapify(self.any_heap)
+        heapq.heapify(self.fixable_heap)
+        self.compactions += 1
 
     def _push(
         self,
@@ -112,6 +146,7 @@ class _RollupCandidateCache:
             generation,
             fixable,
         )
+        self._compact_if_needed()
 
     def _peek(self, *, require_fix: bool):
         heap = self.fixable_heap if require_fix else self.any_heap
@@ -843,6 +878,14 @@ class DashiAgdaService:
             ),
             "candidate_heap_entries": sum(
                 len(cache.any_heap) + len(cache.fixable_heap)
+                for cache in self._candidate_rollups.values()
+            ),
+            "candidate_live_entries": sum(
+                cache._live_heap_entries()
+                for cache in self._candidate_rollups.values()
+            ),
+            "candidate_heap_compactions": sum(
+                cache.compactions
                 for cache in self._candidate_rollups.values()
             ),
         }
