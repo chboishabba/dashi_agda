@@ -30,6 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -43,6 +44,7 @@ import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfCommutatorOrbitRound714Exact as R714
 import DASHI.Physics.Closure.NSTriadKNR650OrbitProfileTwoFamilyResidualRound781Exact as R781
@@ -101,7 +103,7 @@ module SeparatedSelfZeroSafe
     sym (Field.complex3AddZeroLeft (C3.complex3Zero R803.R802.F))
   ... | false | true =
     sym
-      (Field.complex3AddZeroRight
+      (Field.complex3AddZeroLeft
         (Sep.Self.selfCommutatorCell beta))
   ... | false | false =
     sym
@@ -139,7 +141,7 @@ module SeparatedSelfZeroSafe
             (pZeroSelfDefect beta))
         maskedSelfSplitsZeroSafePlusPZero
         items)
-      (DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact.foldAdd
+      (R230.foldAdd
         maskedZeroSafeSelf pZeroSelfDefect items)
 
   outputZeroSafeWork : Z3.FourierMode → ℚ
@@ -217,7 +219,7 @@ module SeparatedSelfZeroSafe
         (cong₂ _+_
           (selectedSelfWorkSplits output)
           (go rest))
-        (Data.Rational.Tactic.RingSolver.solve
+        (solve
           ( selectedZeroSafeWork output
           ∷ selectedPZeroDefectWork output
           ∷ sumZeroSafeWork rest
