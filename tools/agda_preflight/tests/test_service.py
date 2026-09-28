@@ -7,7 +7,8 @@ import sqlite3
 import textwrap
 from pathlib import Path
 
-from agda_preflight.service import DashiAgdaService, serve_streams
+from agda_preflight.service import DashiAgdaService, serve_streams, _RollupCandidateCache
+from agda_preflight.checker import Diagnostic
 
 
 def write_module(root: Path, module: str, body: str = "") -> Path:
@@ -314,6 +315,37 @@ bad = record { witness = Set }
     assert counts["session_candidate_heap_peeks"] == 1
     assert counts.get("files_stat", 0) == 0
     assert counts.get("candidate_snapshot_modules", 0) == 0
+
+
+def test_rollup_candidate_heap_compacts_after_many_replacements(tmp_path):
+    cache = _RollupCandidateCache(
+        lambda diagnostic: (
+            diagnostic.line,
+            diagnostic.column,
+            diagnostic.code,
+        )
+    )
+
+    for line in range(1, 200):
+        diagnostic = Diagnostic(
+            code="TSAGDA060",
+            message=f"candidate {line}",
+            path=tmp_path / "Candidate.agda",
+            line=line,
+        )
+        cache.replace(
+            "Candidate",
+            diagnostic,
+            diagnostic,
+        )
+
+    assert cache.compactions >= 1
+    assert cache.peek(require_fix=False) is not None
+    assert cache.peek(require_fix=True) is not None
+    live = cache._live_heap_entries()
+    total = len(cache.any_heap) + len(cache.fixable_heap)
+    assert live == 2
+    assert total <= max(64, live * 4)
 
 
 def test_jsonl_service_protocol_roundtrip(tmp_path):
