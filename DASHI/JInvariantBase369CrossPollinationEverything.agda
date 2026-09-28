@@ -234,3 +234,7 @@ import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompile
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact
 
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact
+
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact
+
+import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact
