@@ -7,6 +7,7 @@ import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as Order
+import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as FiniteLower
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
@@ -36,37 +37,11 @@ squareMonotonePositive :
   left ≤ right →
   Order.square left ≤ Order.square right
 squareMonotonePositive left right leftPositive rightPositive leftBelow =
-  let
-    leftNN : 0ℚ ≤ left
-    leftNN = Order.positiveImpliesNonnegative left leftPositive
-
-    rightNN : 0ℚ ≤ right
-    rightNN = Order.positiveImpliesNonnegative right rightPositive
-
-    first : left * left ≤ left * right
-    first =
-      let
-        instance leftNonnegative : NonNegative left
-        leftNonnegative = ℚ.nonNegative leftNN
-      in
-      ℚP.*-monoˡ-≤-nonNeg left leftBelow
-
-    secondRaw : right * left ≤ right * right
-    secondRaw =
-      let
-        instance rightNonnegative : NonNegative right
-        rightNonnegative = ℚ.nonNegative rightNN
-      in
-      ℚP.*-monoˡ-≤-nonNeg right leftBelow
-
-    second : left * right ≤ right * right
-    second =
-      subst
-        (λ lower → lower ≤ right * right)
-        (ℚP.*-comm right left)
-        secondRaw
-  in
-  ℚP.≤-trans first second
+  FiniteLower.squareMonotone
+    left right
+    (Order.positiveImpliesNonnegative left leftPositive)
+    (Order.positiveImpliesNonnegative right rightPositive)
+    leftBelow
 
 productOfSquaresPositive :
   ∀ dataSet →
