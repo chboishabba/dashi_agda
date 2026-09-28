@@ -130,6 +130,7 @@ class AstRecordExpression:
     node: object
     owner_function: Optional[str]
     context: str = "unknown"
+    is_update: bool = False
     parent_field: Optional[str] = None
     parent_record_start: Optional[int] = None
     assignments: List[AstFieldAssignment] = field(default_factory=list)
@@ -845,11 +846,36 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
             break
         parent = parent.parent
 
+    tokens = significant_tokens(source_bytes, node)
+    record_index = next(
+        (index for index, token in enumerate(tokens) if token.text == "record"),
+        None,
+    )
+    brace_index = (
+        next(
+            (
+                index
+                for index, token in enumerate(tokens)
+                if token.text == "{"
+                and (record_index is None or index > record_index)
+            ),
+            None,
+        )
+        if record_index is not None
+        else None
+    )
+    is_update = (
+        record_index is not None
+        and brace_index is not None
+        and brace_index > record_index + 1
+    )
+
     expr = AstRecordExpression(
         line=line_of(node),
         node=node,
         owner_function=owner_function,
         context=context,
+        is_update=is_update,
         parent_field=parent_field,
         parent_record_start=parent_record_start,
     )
