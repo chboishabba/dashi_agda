@@ -243,6 +243,7 @@ rh_ssp15_targets=(
   DASHI/Analysis/RiemannSSP15PartitionSeparationExact.agda
   DASHI/Analysis/RiemannSSP15ChosenGridTransversalityExact.agda
   DASHI/Analysis/RiemannSSP15FilteredProvenanceCapstoneExact.agda
+  DASHI/Analysis/RiemannSSP15RoleCMContingencyExact.agda
 )
 
 for target in "${rh_ssp15_targets[@]}"; do
@@ -272,3 +273,9 @@ grep -q 'chosenInternalModeNotPrimeNativeComplementMode' "${rh_ssp15_targets[3]}
 grep -q 'PrimitiveRowProducerRoleCertificate' "${rh_ssp15_targets[4]}"
 grep -q 'producerMarkedRoundTripAtRoleCode' "${rh_ssp15_targets[4]}"
 grep -q 'producerRoleCertificateInhabitedHere' "${rh_ssp15_targets[4]}"
+
+
+grep -q 'completeThreeByThreeCountTableOwned' "${rh_ssp15_targets[5]}"
+grep -q 'splitColumnMatchesCanonicalCMCount' "${rh_ssp15_targets[5]}"
+grep -q 'inertColumnMatchesCanonicalCMCount' "${rh_ssp15_targets[5]}"
+grep -q 'ramifiedColumnMatchesCanonicalCMCount' "${rh_ssp15_targets[5]}"
