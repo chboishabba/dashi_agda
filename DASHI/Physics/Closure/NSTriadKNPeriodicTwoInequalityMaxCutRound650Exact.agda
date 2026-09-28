@@ -8,18 +8,22 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 -- critical argument has a typed compiler.  R728 exposed a three-coordinate
 -- R406 factorization; R730-R736 compressed it to two exact terminal
 -- coordinates; R737-R743 exhausted the augmented-derivative attack; and
--- R744-R752 put W2 on one literal dyadic-difference physical triad carrier.
--- The preferred live analytic cut remains exactly two leaves:
+-- R744-R756 put W2 on one literal dyadic-difference physical triad carrier
+-- and expose the total R25 four-class geometry. R757-R768 then quotient the
+-- physical p/q swap exactly: the production correction is swap invariant,
+-- LH and HL collapse on the division-free paired carrier, and W2 becomes
+-- exactly one integrated THREE-channel signed payment:
 --
 --   W1  cutoff-uniform weighted work + terminal canonical Q_+- payment;
 --
---   W2  nonnegativity of the integrated R751 signed residual:
---       3*nested orbit minus the swap-paired two-dyadic-difference production
---       correction, plus 3*(2nu-delta)*critical dissipation.
+--   W2  0 <= integral [
+--          2*LH_pair + CC_pair + HH_pair
+--          + 6*(2nu-delta)*critical dissipation
+--        ] dt,  delta > 0.
 --
--- R747/R751 are exactly equivalent to R742's integrated packet<=combined
--- statement.  R750 proves the production correction vanishes on same-shell
--- nonzero triads.  No exhaustive new shell partition is claimed.
+-- R769/R770 expose a classwise product-rule/commutator representation, while
+-- R771 records that returning through R294/R121 without new signed PDE
+-- structure is a representation loop, not an analytic payment.
 --
 -- R645 compiles the positive C2 margin into retained viscosity, so C5 is not an
 -- independent theorem.  C4/C6/C7 remain standard source instantiations and are
@@ -138,6 +142,21 @@ import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceGapFactorRound753Exact
 import DASHI.Physics.Closure.NSTriadKNR650DyadicDifferenceOrientedGapRound754Exact as R754
 import DASHI.Physics.Closure.NSTriadKNR650FiveClassDyadicGapChannelRound755Exact as R755
 import DASHI.Physics.Closure.NSTriadKNR650FiveClassSignedResidualWallRound756Exact as R756
+import DASHI.Physics.Closure.NSTriadKNR650FiveClassResidualPartitionRound757Exact as R757
+import DASHI.Physics.Closure.NSTriadKNR650DyadicProductionSwapInvariantRound758Exact as R758
+import DASHI.Physics.Closure.NSTriadKNR650ResidualSwapDefectRound759Exact as R759
+import DASHI.Physics.Closure.NSTriadKNR650SwapPairedResidualCarrierRound760Exact as R760
+import DASHI.Physics.Closure.NSTriadKNR650CommutatorSwapPairProductRuleRound761Exact as R761
+import DASHI.Physics.Closure.NSTriadKNR650NestedSwapPairProductRuleRound762Exact as R762
+import DASHI.Physics.Closure.NSTriadKNR650SwapPairedNestedOrbitNormalFormRound763Exact as R763
+import DASHI.Physics.Closure.NSTriadKNR650SwapInvariantFourClassScalarRound764Exact as R764
+import DASHI.Physics.Closure.NSTriadKNR650SwapPairedThreeClassW2Round765Exact as R765
+import DASHI.Physics.Closure.NSTriadKNR650IntegratedThreeClassW2Round766Exact as R766
+import DASHI.Physics.Closure.NSTriadKNR650ThreeClassW2PaymentRound767Exact as R767
+import DASHI.Physics.Closure.NSTriadKNR650ThreeClassAnalyticWallRound768Exact as R768
+import DASHI.Physics.Closure.NSTriadKNR650SwapPairedResidualProductRuleRound769Exact as R769
+import DASHI.Physics.Closure.NSTriadKNR650ThreeSwapClosedClassWeightsRound770Exact as R770
+import DASHI.Physics.Closure.NSTriadKNR650ThreeClassProductRuleRouteBoundaryRound771Exact as R771
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -328,6 +347,30 @@ round650CurrentW2PacketCombinedClosed =
 round650DyadicDifferenceExactlyTwoAnalyticLeaves : Bool
 round650DyadicDifferenceExactlyTwoAnalyticLeaves =
   R752.round752ExactlyTwoPreferredAnalyticLeaves
+
+round650W2ExactlyEquivalentToThreeClassPayment : Bool
+round650W2ExactlyEquivalentToThreeClassPayment =
+  R768.round768W2ExactlyEquivalentToThreeClassPayment
+
+round650W2PreferredTriadicChannelCountIsThree : Bool
+round650W2PreferredTriadicChannelCountIsThree =
+  R768.round768PreferredW2TriadicChannelCountIsThree
+
+round650W2IndependentLHHLLeaves : Bool
+round650W2IndependentLHHLLeaves =
+  R768.round768IndependentLHHLLeaves
+
+round650W2ThreeClassSignsClosed : Bool
+round650W2ThreeClassSignsClosed =
+  R768.round768ThreeClassSignsClosed
+
+round650W2ThreeClassPaymentClosed : Bool
+round650W2ThreeClassPaymentClosed =
+  R768.round768W2Closed
+
+round650W2ClasswiseProductRuleRouteIsUnpaidLoop : Bool
+round650W2ClasswiseProductRuleRouteIsUnpaidLoop =
+  R771.round771ReturningThroughR294WithoutNewStructureIsRepresentationLoop
 
 round650W2OneSignedResidualSurfaceAvailable : Bool
 round650W2OneSignedResidualSurfaceAvailable =
