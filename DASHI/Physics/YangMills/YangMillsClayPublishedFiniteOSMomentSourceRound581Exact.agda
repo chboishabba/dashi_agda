@@ -23,6 +23,7 @@ module DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMomentSourceRound58
 -- and R462 is compiler output.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -155,8 +156,8 @@ asPublishedFiniteOSSource source = record
 round581FiniteOSMomentCompilerLevel : ProofLevel
 round581FiniteOSMomentCompilerLevel = machineChecked
 
-round581OS05IndependentSourceRequired : Agda.Builtin.Bool.Bool
-round581OS05IndependentSourceRequired = Agda.Builtin.Bool.false
+round581OS05IndependentSourceRequired : Bool
+round581OS05IndependentSourceRequired = false
 
 -- Physical leaves remaining in the preferred finite-OS source:
 -- * published finite Euclidean/bosonic/Wilson-RP applicability;
