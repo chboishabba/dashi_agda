@@ -37,6 +37,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicPreferredCorrectionPaymentExact 
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildGeneratorPartitionCandidateExact as GeneratorPartition
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildLayerSectorProductCandidateExact as LayerSector
 import DASHI.Moonshine.OggSSPSmallCharacteristicEtherealMultiplicityTransferExact as Ethereal
+import DASHI.Moonshine.OggSSPSmallCharacteristicRigidifiedInertiaLayerProductNoGoExact as SameAmbient
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -231,6 +232,23 @@ wildLayerSectorPairIsTenTwo :
   ≡ prime-pair 10 2
 wildLayerSectorPairIsTenTwo = refl
 
+sameAmbientRigidifiedLayerInertiaPair : PrimePair
+sameAmbientRigidifiedLayerInertiaPair =
+  prime-pair
+    SameAmbient.p2RigidifiedLayerInertiaProduct
+    SameAmbient.p3RigidifiedLayerInertiaProduct
+
+sameAmbientRigidifiedLayerInertiaPairIsSixThree :
+  sameAmbientRigidifiedLayerInertiaPair
+  ≡ prime-pair 6 3
+sameAmbientRigidifiedLayerInertiaPairIsSixThree = refl
+
+data SameAmbientRigidifiedLayerInertiaMatchesMonsterGap : Set where
+
+sameAmbientRigidifiedLayerInertiaDoesNotMatchMonsterGap :
+  SameAmbientRigidifiedLayerInertiaMatchesMonsterGap -> ⊥
+sameAmbientRigidifiedLayerInertiaDoesNotMatchMonsterGap ()
+
 generatorPartitionNeedsPrimeSelector :
   Bool
 generatorPartitionNeedsPrimeSelector = true
@@ -302,6 +320,9 @@ record ExceptionalTermHypothesisSieveBoundary : Set where
     generatorPartitionSelectorDebtRecorded : Bool
     wildLayerSectorTenTwoMatchRecorded : Bool
     wildLayerSectorSameRuleAcrossPrimes : Bool
+    wildLayerSectorUsesMixedAmbientObjects : Bool
+    sameAmbientRigidifiedProductSixThreeRecorded : Bool
+    sameAmbientRigidifiedProductRejected : Bool
     sourcedWildGeometryHasAdditiveModularMultiplicityPrecedent : Bool
     sourcedPrecedentIsLayerTimesSectorTheorem : Bool
     structuralCandidatesPromotedToAnalyticValuations : Bool
@@ -326,6 +347,9 @@ canonicalExceptionalTermHypothesisSieveBoundary =
     ; generatorPartitionSelectorDebtRecorded = true
     ; wildLayerSectorTenTwoMatchRecorded = true
     ; wildLayerSectorSameRuleAcrossPrimes = true
+    ; wildLayerSectorUsesMixedAmbientObjects = true
+    ; sameAmbientRigidifiedProductSixThreeRecorded = true
+    ; sameAmbientRigidifiedProductRejected = true
     ; sourcedWildGeometryHasAdditiveModularMultiplicityPrecedent = true
     ; sourcedPrecedentIsLayerTimesSectorTheorem = false
     ; structuralCandidatesPromotedToAnalyticValuations = false
