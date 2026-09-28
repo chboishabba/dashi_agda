@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerRegression where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as Scale
 import DASHI.Cognition.PNF.EditTransportLeafLocalityExact as EditLocality
@@ -442,3 +443,42 @@ fixtureL2ReuseDoesNotReinterpretFactors :
     fixtureL2CandidateProductSummaryReuse
   ≡ false
 fixtureL2ReuseDoesNotReinterpretFactors = refl
+
+
+fixtureBoundedCandidateCommitBatch : Scale.BoundedCandidateCommitBatch
+fixtureBoundedCandidateCommitBatch =
+  Scale.bounded-candidate-commit-batch
+    6678
+    128
+    53
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureBoundedCommitReopensAfterDurableCommit :
+  Scale.BoundedCandidateCommitBatch.everyCandidateReopenedAfterDurableCommit
+    fixtureBoundedCandidateCommitBatch
+  ≡ true
+fixtureBoundedCommitReopensAfterDurableCommit = refl
+
+fixtureBoundedCommitPreservesCandidateIdentity :
+  Scale.BoundedCandidateCommitBatch.candidateIdentityPreserved
+    fixtureBoundedCandidateCommitBatch
+  ≡ true
+fixtureBoundedCommitPreservesCandidateIdentity = refl
+
+fixtureBoundedCommitDoesNotCreateAdmission :
+  Scale.BoundedCandidateCommitBatch.createsSemanticAdmission
+    fixtureBoundedCandidateCommitBatch
+  ≡ false
+fixtureBoundedCommitDoesNotCreateAdmission = refl
+
+fixtureBoundedCommitDoesNotCreateTruth :
+  Scale.BoundedCandidateCommitBatch.createsClaimTruth
+    fixtureBoundedCandidateCommitBatch
+  ≡ false
+fixtureBoundedCommitDoesNotCreateTruth = refl
