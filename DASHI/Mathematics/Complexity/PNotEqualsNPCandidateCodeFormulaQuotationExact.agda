@@ -19,7 +19,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateCodeFormulaQuotationExa
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -185,8 +185,7 @@ quoteCandidateCodeNodeCount :
   Quote.formulaNodeCount
     (quoteCandidateCode codec code)
   ≡
-  Agda.Builtin.Nat.suc
-    (Quote.four * width codec)
+  suc (Quote.four * width codec)
 quoteCandidateCodeNodeCount codec code =
   Quote.embedBitsNodeCount
     (encode codec code)
