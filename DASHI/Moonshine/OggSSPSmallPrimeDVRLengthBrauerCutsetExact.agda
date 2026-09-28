@@ -73,6 +73,10 @@ record DVRGeneralizedBrauerReceipt : Set where
   field
     arbitraryFiniteLengthDVRModulesSupported : Bool
     generalizedBrauerCharacterDefined : Bool
+    characterNormalizedByDVRValuationOfP : Bool
+    characterDefinedFromCompositionFactors : Bool
+    generalizedBrauerCharacterAdditive : Bool
+    generalizedBrauerCharacterStableUnderFiniteDVRBaseChange : Bool
     tateSuperBrauerCharacterIsTraceCombination : Bool
     mixedCharacteristicLengthAndTraceCanCoexist : Bool
 
@@ -80,7 +84,7 @@ canonicalDVRGeneralizedBrauerReceipt :
   DVRGeneralizedBrauerReceipt
 canonicalDVRGeneralizedBrauerReceipt =
   dvr-generalized-brauer-receipt
-    true true true true
+    true true true true true true true true
 
 ------------------------------------------------------------------------
 -- 3. Prime-specific residual target remains independent.
@@ -202,6 +206,32 @@ dvrFrameworkAloneDoesNotInhabitTerminalAuthority :
 dvrFrameworkAloneDoesNotInhabitTerminalAuthority ()
 
 ------------------------------------------------------------------------
+-- 5b. Length/Brauer character is NOT coefficient p-adic depth.
+--
+-- The coefficient audits upstream show that applying v_p to the displayed
+-- Tate-character coefficients misses the residual.  Urano's generalized
+-- Brauer character is instead built from composition factors and normalized
+-- by the DVR valuation v(p).  A future localization theorem must therefore
+-- transport this finite-length object before extracting the payment.
+------------------------------------------------------------------------
+
+data RawCoefficientPadicDepthEqualsDVRLengthPayment : Set where
+data GeneralizedBrauerCoefficientIsItsOwnPadicValuation : Set where
+data BadLevelLocalizationMayIgnoreCompositionLength : Set where
+
+rawCoefficientDepthDoesNotEqualDVRLengthPayment :
+  RawCoefficientPadicDepthEqualsDVRLengthPayment -> ⊥
+rawCoefficientDepthDoesNotEqualDVRLengthPayment ()
+
+generalizedBrauerCoefficientNotIdentifiedWithItsPadicValuation :
+  GeneralizedBrauerCoefficientIsItsOwnPadicValuation -> ⊥
+generalizedBrauerCoefficientNotIdentifiedWithItsPadicValuation ()
+
+badLevelLocalizationMustRespectLengthStructure :
+  BadLevelLocalizationMayIgnoreCompositionLength -> ⊥
+badLevelLocalizationMustRespectLengthStructure ()
+
+------------------------------------------------------------------------
 -- 6. Existing integral pB source receipt.
 ------------------------------------------------------------------------
 
@@ -218,6 +248,9 @@ record DVRLengthBrauerCutsetBoundary : Set where
   constructor dvr-length-brauer-cutset-boundary
   field
     uranoFiniteLengthDVRBrauerFrameworkSourced : Bool
+    uranoNormalizedCompositionFactorFormulaSourced : Bool
+    uranoAdditivitySourced : Bool
+    uranoFiniteBaseChangeInvarianceSourced : Bool
     uranoTateTraceCombinationTheoremSourced : Bool
     carnahanPBIntegralTateObjectSourced : Bool
     finiteLengthLocalizationAuthoritySpecified : Bool
@@ -230,4 +263,4 @@ canonicalDVRLengthBrauerCutsetBoundary :
   DVRLengthBrauerCutsetBoundary
 canonicalDVRLengthBrauerCutsetBoundary =
   dvr-length-brauer-cutset-boundary
-    true true true true false false false true
+    true true true true true true true false false false true
