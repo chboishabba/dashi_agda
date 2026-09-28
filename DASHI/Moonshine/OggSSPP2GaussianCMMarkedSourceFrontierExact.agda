@@ -39,6 +39,7 @@ import DASHI.Moonshine.OggSSPP2BalancedTernaryPuncturedPlaneExact as BalancedPla
 import DASHI.Moonshine.OggSSPP2BalancedTernaryNeutralCompletionBridgeExact as CompletionBridge
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPP2BadPrimeLevelStructureBoundaryExact as BadPrime
+import DASHI.Moonshine.OggSSPP2Gamma0FourMarkedSubgroupSchemeSourceExact as Gamma0Four
 
 ------------------------------------------------------------------------
 -- 1. Receipt calibration remains explicit.
@@ -153,6 +154,8 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     balancedTernaryPuncturedPlaneNormalFormOwned : Bool
     duplicatedCentreCompletionBridgeOwned : Bool
     badPrimeLevelStructureBoundaryOwned : Bool
+    gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
+    gamma0FourOrderTwoSubflagRequired : Bool
     naiveFullE4PointSetIdentificationRuledOut : Bool
     stabilizerTypeCompatibilityOwned : Bool
     movingFrobeniusDiscreteTargetNoGoOwned : Bool
@@ -168,6 +171,6 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary :
 canonicalP2GaussianCMMarkedSourceFrontierBoundary =
   p2-gaussian-cm-marked-source-frontier-boundary
     true true true true false
-    true true true true true true true true true true true
+    true true true true true true true true true true true true true
     false false false
     missingFormalCMOrbitEquivalence
