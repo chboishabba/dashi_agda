@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import inspect
 
 from agda_preflight.mcp_adapter import DashiAgdaMcpTools
 from agda_preflight.mcp_server import register_mcp_tools
@@ -49,6 +50,10 @@ def test_mcp_registration_exposes_stable_tool_surface(tmp_path):
         "promotion_history",
         "ping",
     }
+    assert all(
+        inspect.iscoroutinefunction(function)
+        for function in fake.tools.values()
+    )
 
 
 def test_mcp_next_error_apply_fix_loop(tmp_path):
@@ -171,3 +176,38 @@ x = Set
         tools.semantic_status(str(path))
 
     assert path.read_bytes() == original
+
+
+
+def test_mcp_diagnose_is_bounded_by_default(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Mcp.Bounded",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad₁ : R
+bad₁ = record { typo₁ = Set }
+
+bad₂ : R
+bad₂ = record { typo₂ = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with DashiAgdaService(
+        tmp_path,
+        database,
+        jobs=1,
+    ) as service:
+        tools = DashiAgdaMcpTools(service)
+        result = tools.diagnose(
+            str(path),
+            limit=1,
+        )
+
+    assert result["diagnostics_total"] >= 2
+    assert result["diagnostics_returned"] == 1
+    assert result["diagnostics_truncated"] is True
