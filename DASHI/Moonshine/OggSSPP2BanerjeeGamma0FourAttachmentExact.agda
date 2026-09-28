@@ -64,6 +64,14 @@ record BanerjeeGamma0FourAttachment
     gammaZeroLevelFourSemanticsIsTrue :
       gammaZeroLevelFourSemantics ≡ true
 
+    sectorRealizedInBanerjeeTorsor :
+      Banerjee.GaloisInertiaState ->
+      Bool
+
+    sectorRealizedInBanerjeeTorsorIsTrue :
+      (state : Banerjee.GaloisInertiaState) ->
+      sectorRealizedInBanerjeeTorsor state ≡ true
+
     rawFrobenius :
       Banerjee.GaloisInertiaState ->
       Banerjee.GaloisInertiaState
@@ -175,6 +183,33 @@ rawFrobeniusSource :
 rawFrobeniusSource attachment =
   Two.toRawFrobeniusSource (twoInvolutionSource attachment)
 
+sectorRealization :
+  {authority : SameSource.BanerjeeF4SourceAuthority} ->
+  (attachment : BanerjeeGamma0FourAttachment authority) ->
+  SameSource.GaloisInertiaSectorRealization authority
+sectorRealization attachment =
+  record
+    { underlyingFamilyState =
+        λ _ -> selectedEllipticObject attachment
+    ; gamma0FourLevelStructurePresent =
+        λ _ -> gammaZeroLevelFourSemantics attachment
+    ; gamma0FourLevelStructurePresentIsTrue =
+        λ _ -> gammaZeroLevelFourSemanticsIsTrue attachment
+    ; deformationProvenanceRetained =
+        sectorRealizedInBanerjeeTorsor attachment
+    ; deformationProvenanceRetainedIsTrue =
+        sectorRealizedInBanerjeeTorsorIsTrue attachment
+    }
+
+tenStateRecognition :
+  {authority : SameSource.BanerjeeF4SourceAuthority} ->
+  (attachment : BanerjeeGamma0FourAttachment authority) ->
+  SameSource.Universal.UniversalDeformationTenStateRecognition
+    (SameSource.datum authority)
+    (SameSource.marking (sectorRealization attachment))
+tenStateRecognition attachment =
+  SameSource.tenStateRecognition (sectorRealization attachment)
+
 naturalGaloisCannotBeRawFrobenius :
   GaloisNoGo.GloballyInvariantCoarseOrbit ->
   ⊥
@@ -212,10 +247,12 @@ record BanerjeeGamma0FourAttachmentBoundary : Set where
     rawFrobeniusRequiredSeparately : Bool
     rawGaloisCommutationRequired : Bool
     twoInvolutionSourceConstructedAutomatically : Bool
+    sectorRealizationConstructedFromAttachment : Bool
+    tenStateRecognitionConstructedFromAttachment : Bool
     attachmentInhabitedHere : Bool
 
 canonicalBanerjeeGamma0FourAttachmentBoundary :
   BanerjeeGamma0FourAttachmentBoundary
 canonicalBanerjeeGamma0FourAttachmentBoundary =
   banerjee-gamma0-four-attachment-boundary
-    true true true true true true true false
+    true true true true true true true true true false
