@@ -108,3 +108,5 @@ import DASHI.Reasoning.Trialectic369T5ComplementOggResidualBidiExact
 import DASHI.Reasoning.Trialectic369ParticipantCenteredSSPFactorExact
 
 import DASHI.Reasoning.Trialectic369OutgoingResidualSheet9BidiExact
+
+import DASHI.Reasoning.Trialectic369SSP15RecognitionCapstoneExact
