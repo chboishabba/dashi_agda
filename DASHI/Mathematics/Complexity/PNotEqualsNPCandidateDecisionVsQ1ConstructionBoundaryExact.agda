@@ -26,6 +26,7 @@ open import Data.Empty using (⊥)
 import Data.Fin.Base as Fin
 open import Data.Maybe.Base using (just; nothing)
 open import Data.Product using (Σ; _,_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -223,6 +224,61 @@ oneStateTransitionTable root =
     (suc zero)
     Fin.zero
     (λ state bit → Fin.zero)
+
+------------------------------------------------------------------------
+-- One-state raw data cannot pass arity admission on a nonterminal root.
+------------------------------------------------------------------------
+
+successorNotEqualSelf :
+  (remaining : Nat) →
+  suc remaining ≡ remaining →
+  ⊥
+successorNotEqualSelf zero ()
+successorNotEqualSelf (suc remaining) equality =
+  successorNotEqualSelf remaining
+    (sucInjective equality)
+  where
+    sucInjective :
+      ∀ {left right : Nat} →
+      suc left ≡ suc right →
+      left ≡ right
+    sucInjective refl =
+      refl
+
+oneStateTransitionTableNotArityAdmissible :
+  ∀ {remaining : Nat}
+    (root : SAT.BooleanFormula (suc remaining)) →
+  ArityTerminal.ArityTrackedTerminalAdmission
+    (oneStateTransitionTable root) →
+  ⊥
+oneStateTransitionTableNotArityAdmissible
+    {remaining}
+    root
+    admission =
+  successorNotEqualSelf
+    remaining
+    (trans
+      (sym rootArityExact)
+      childArityExact)
+  where
+    rootArityExact :
+      ArityTerminal.stateArity admission Fin.zero
+      ≡
+      suc remaining
+    rootArityExact =
+      ArityTerminal.selectedStateArityExact
+        admission
+        Family.restrictionRoot
+
+    childArityExact :
+      ArityTerminal.stateArity admission Fin.zero
+      ≡
+      remaining
+    childArityExact =
+      ArityTerminal.selectedStateArityExact
+        admission
+        (Family.restrictionFalse
+          Family.restrictionRoot)
 
 ------------------------------------------------------------------------
 -- The current constructor interface admits an always-stop implementation.
