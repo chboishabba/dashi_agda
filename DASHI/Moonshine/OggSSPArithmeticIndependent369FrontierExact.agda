@@ -588,6 +588,10 @@ record ArithmeticIndependent369Frontier : Set where
     p3GreenSpeciesCarnahanH3CompatibilityPaid : Bool
     jointSourceGeometricLocalizationCutsetPaid : Bool
     jointSourceGeometricLocalizationAuthorityPaid : Bool
+    jointLocalizationDirectMonsterBridgeAdapterPaid : Bool
+    jointLocalizationDirectJointExceptionalAdapterPaid : Bool
+    jointLocalizationDirectLicensedFourthTermAdapterPaid : Bool
+    oldTerminalIgusaAuthorityRequiredOnJointRoute : Bool
     carnahanTraceFormulaToIgusaSectorLocalizationSourced : Bool
     uranoTheoryDeterminesSectorLengths : Bool
     greenRingFrameworkProvesLocalizedPBSpecies : Bool
@@ -751,6 +755,10 @@ canonicalArithmeticIndependent369Frontier =
     ; p3GreenSpeciesCarnahanH3CompatibilityPaid = false
     ; jointSourceGeometricLocalizationCutsetPaid = true
     ; jointSourceGeometricLocalizationAuthorityPaid = false
+    ; jointLocalizationDirectMonsterBridgeAdapterPaid = true
+    ; jointLocalizationDirectJointExceptionalAdapterPaid = true
+    ; jointLocalizationDirectLicensedFourthTermAdapterPaid = true
+    ; oldTerminalIgusaAuthorityRequiredOnJointRoute = false
     ; carnahanTraceFormulaToIgusaSectorLocalizationSourced = false
     ; uranoTheoryDeterminesSectorLengths = false
     ; greenRingFrameworkProvesLocalizedPBSpecies = false
