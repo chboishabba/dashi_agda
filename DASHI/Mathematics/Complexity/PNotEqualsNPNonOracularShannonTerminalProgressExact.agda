@@ -313,3 +313,104 @@ positiveArityRunExists =
 -- a weaker independently justified live-state criterion, remains the next
 -- semantic question.
 ------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- ARBITRARY-FORMULA STATE EMBEDDING
+--
+-- BoundedSelfReferenceState presently imposes no provenance predicate on the
+-- current Cook formula.  Therefore every ordinary formula can be embedded as a
+-- Q2 state with zero persistent program/rebinding overhead and a budget exactly
+-- equal to its represented recursive measure.
+------------------------------------------------------------------------
+
+arbitraryFormulaState :
+  Cook.BooleanFormula →
+  Q2.BoundedSelfReferenceState
+arbitraryFormulaState formula =
+  Q2.bounded-self-reference-state
+    formula
+    zero
+    zero
+    (Size.formulaNodeCount formula + (zero + zero))
+    NatP.≤-refl
+
+arbitraryFormulaStateFormulaExact :
+  (formula : Cook.BooleanFormula) →
+  Q2.currentFormula
+    (arbitraryFormulaState formula)
+  ≡ formula
+arbitraryFormulaStateFormulaExact formula =
+  refl
+
+arbitraryFormulaStateMeasureExact :
+  (formula : Cook.BooleanFormula) →
+  Q2.recursiveMeasure
+    (arbitraryFormulaState formula)
+  ≡
+  Size.formulaNodeCount formula + (zero + zero)
+arbitraryFormulaStateMeasureExact formula =
+  refl
+
+------------------------------------------------------------------------
+-- Generic high-width obstruction to GLOBAL positive-arity progress.
+--
+-- If one arbitrary formula already has a witnessed layered width whose three
+-- transition-graph cells per state meet or exceed the Q2 recursive measure,
+-- then no NonOracularShannonTerminalConstructor can satisfy its present
+-- all-positive-arity continuation policy.
+------------------------------------------------------------------------
+
+globalPositiveProgressBlockedByHighWidthFormula :
+  ∀ {next total remaining : Nat}
+    (system : NonOracularShannonTerminalConstructor)
+    (formula : Cook.BooleanFormula) →
+  Bridge.formulaVariableBound formula
+    ≡ suc remaining →
+  Width.ResidualWidthStack
+    {root = Bridge.cookToIndexed formula}
+    next
+    total →
+  Q2.recursiveMeasure
+      (arbitraryFormulaState formula)
+    ≤
+    Width.triple total →
+  ⊥
+globalPositiveProgressBlockedByHighWidthFormula
+    {remaining = remaining}
+    system
+    formula
+    positive
+    stack
+    measureBelowWidth =
+  NatP.<⇒≱
+    forcedWidthBelowMeasure
+    measureBelowWidth
+  where
+    forcedWidthBelowMeasure :
+      Width.triple _
+      <
+      Q2.recursiveMeasure
+        (arbitraryFormulaState formula)
+    forcedWidthBelowMeasure =
+      positiveArityProgressForcesTripleWidth
+        system
+        (arbitraryFormulaState formula)
+        remaining
+        positive
+        stack
+
+------------------------------------------------------------------------
+-- FRONTIER CORRECTION
+--
+-- Consequently the current global terminal policy is too strong unless the
+-- live Q2 carrier is first narrowed by a proved self-instantiation provenance
+-- law (or unless one proves the required width budget for every arbitrary
+-- positive-arity Cook formula, which is exactly what the generic width donors
+-- are designed to falsify).
+--
+-- The next positive theorem must therefore be scoped to an independently
+-- characterized image/reachable subset of the ACTUAL bounded diagonal body.
+-- Merely saying "positive Shannon arity means continue" over the present Q2
+-- carrier silently quantifies over all Cook formulas.
+------------------------------------------------------------------------
