@@ -76,10 +76,14 @@ record P2UranoFourARefinedPartitionAuthority : Set₁ where
       FourA.FourAIndecomposableLabel refinement ->
       Sector.BinaryTetrahedralInversionOrbit
 
-    localizedSectorFactorsThroughFourALabel :
+    localizedSector :
       FourA.TwoBSourcePiece refinement ->
       Sector.BinaryTetrahedralInversionOrbit
-    localizedSectorFactorsThroughFourALabel piece =
+
+    localizedSectorFactorsThroughFourALabel :
+      (piece : FourA.TwoBSourcePiece refinement) ->
+      localizedSector piece
+      ≡
       sectorOfFourALabel
         (FourA.fourALabelOfSourcePiece refinement piece)
 
@@ -89,7 +93,7 @@ record P2UranoFourARefinedPartitionAuthority : Set₁ where
 
     everySectorHasSourcePieceCorrect :
       (sector : Sector.BinaryTetrahedralInversionOrbit) ->
-      localizedSectorFactorsThroughFourALabel
+      localizedSector
         (everySectorHasSourcePiece sector)
       ≡ sector
 
@@ -138,7 +142,7 @@ asP2UranoInertiaPartition authority =
         respectsUranoForbiddenPairs authority
 
     ; Partition.localizedSector =
-        localizedSectorFactorsThroughFourALabel authority
+        localizedSector authority
 
     ; Partition.everySectorHasSourcePiece =
         everySectorHasSourcePiece authority
