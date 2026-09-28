@@ -250,6 +250,88 @@ canonicalFourPrimitiveRouteBoundary =
     "integral_[eta0,Q] ((Q-q)^3/6) * r^4*D(t-r*q,t+r*q) dq = integral_[r*eta0,r*Q] ((r*Q-s)^3/6) * D(t-s,t+s) ds"
     "Prove an unconditional bound for the physical fourth discrepancy primitive, then weld a fourfold integration-by-parts compiler for the exact outer kernel."
 
+------------------------------------------------------------------------
+-- FOUR-PRIMITIVE KERNEL / AC COMPILER UPDATE
+--
+-- The Lean branch has advanced the candidate route substantially:
+--
+-- * compact cosine derivatives through C^5 are source-written;
+-- * C^5 is globally L1 by the same twofold oscillatory-decay architecture
+--   used for the Fourier-mass weld;
+-- * arbitrary finite-order smoothness is transported from ContDiffBump
+--   through the actual selected signed projective profile;
+-- * the fourfold IBP compiler has both a smooth and an absolutely-continuous
+--   formulation;
+-- * a canonical anchored P1/P2/P3/P4 ladder is constructed from interval
+--   integrals;
+-- * derivative identities for that ladder are only a.e., via Lebesgue
+--   differentiation, so the zero staircase is never falsely differentiated
+--   pointwise;
+-- * the compiler is specialized to the literal outer symmetric discrepancy,
+--   conditional only on its routine finite-window interval-integrability.
+--
+-- Main Lean commits:
+--
+--   9d9e223d17c196db868b57ce6e1e04d7f3b95655
+--   5a44456fbc288090cd7e2be4424054979be8dccb
+--   f264fb4f09b415d70c6e3a8c9004efcb581215d5
+--   6dd771a1fc25797de6bf0c1e6c1f8688c905951c
+--   b84b3550c6fbd8f63f3ea4ffbe744d0e0bc15fe2
+--   f4268a8333abf8de1effe798bef94a7c9a6b1087
+------------------------------------------------------------------------
+
+record FourPrimitiveKernelCompilerBoundary : Set where
+  constructor four-primitive-kernel-compiler-boundary
+  field
+    fifthCosineDerivativeSourceWritten : Bool
+    fifthCosineDerivativeL1SourceWritten : Bool
+    arbitraryOrderWitnessSmoothnessSourceWritten : Bool
+    genericFourfoldIBPSourceWritten : Bool
+    absolutelyContinuousFourfoldIBPSourceWritten : Bool
+    anchoredPrimitiveLadderSourceWritten : Bool
+    anchoredPrimitiveAEDerivativesSourceWritten : Bool
+    outerDiscrepancyIBPSpecializationSourceWritten : Bool
+
+    staircasePointwiseDifferentiabilityAssumed : Bool
+
+    outerDiscrepancyFiniteIntervalIntegrabilityWeldPaid : Bool
+    quarticCapFubiniIdentificationPaid : Bool
+    unconditionalQuarticCapEstimatePaid : Bool
+    boundaryDecayCompilerPaid : Bool
+
+    kernelCompilerPaid :
+      absolutelyContinuousFourfoldIBPSourceWritten ≡ true
+    anchoredLadderPaid :
+      anchoredPrimitiveLadderSourceWritten ≡ true
+    staircaseFirewall :
+      staircasePointwiseDifferentiabilityAssumed ≡ false
+
+    finiteIntegrabilityAdapterStillOpen :
+      outerDiscrepancyFiniteIntervalIntegrabilityWeldPaid ≡ false
+    capIdentificationStillOpen :
+      quarticCapFubiniIdentificationPaid ≡ false
+    capEstimateStillOpen :
+      unconditionalQuarticCapEstimatePaid ≡ false
+    boundaryDecayStillOpen :
+      boundaryDecayCompilerPaid ≡ false
+
+    currentKernelIdentity : String
+    nextCapIdentity : String
+
+open FourPrimitiveKernelCompilerBoundary public
+
+canonicalFourPrimitiveKernelCompilerBoundary :
+  FourPrimitiveKernelCompilerBoundary
+canonicalFourPrimitiveKernelCompilerBoundary =
+  four-primitive-kernel-compiler-boundary
+    true true true true true true true true
+    false
+    false false false false
+    refl refl refl
+    refl refl refl refl
+    "integral C'_W*A4 = [C'P1]-[C''P2]+[C'''P3]-[C''''P4] + integral C'''''_W*P4, with the primitive ladder interpreted a.e./AC"
+    "Identify the physical fourth primitive with the literal N-mu pairing against the quartic cap weight (S-max(s0,abs(y-t)))_+^4/24, then prove an unconditional bound on that same cap pairing."
+
 finiteQRepresentationDebtIsPaid :
   NormalizedOuterTerminalBoundary.finiteQEstimateCompilesToHighContradictionSourceWritten
     canonicalNormalizedOuterTerminalBoundary ≡ true
