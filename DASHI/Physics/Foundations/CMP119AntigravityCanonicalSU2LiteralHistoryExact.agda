@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityCanonicalSU2LiteralHistoryExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using
@@ -12,6 +13,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteSourceTrajecto
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalLiteralPlaquetteHistoryExact as Canonical
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as Plaquette
 import DASHI.Physics.YangMills.BalabanYM4LiteralPlaquetteBetaEstimateExact as Literal
+import DASHI.Physics.YangMills.BalabanYM4FiniteLatticeBetaEstimateExact as Estimate
 import DASHI.Physics.YangMills.BalabanYM4SU2GaussianBetaLowerExact as SU2
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -156,14 +158,14 @@ record LiteralQuarticStep
     signedQuarticRemainder :
       ∣ Literal.literalBetaInt dataSet (suc step) ∣
       ≤ interactionConstant
-        * DASHI.Physics.YangMills.BalabanYM4FiniteLatticeBetaEstimateExact.fourthPower
+        * Estimate.fourthPower
             coupling
 
     quarticFitsHalfGaussianFloor :
       interactionConstant
-        * DASHI.Physics.YangMills.BalabanYM4FiniteLatticeBetaEstimateExact.fourthPower
+        * Estimate.fourthPower
             coupling
-      ≤ DASHI.Physics.YangMills.BalabanYM4FiniteLatticeBetaEstimateExact.half
+      ≤ Estimate.half
         * gaussianFloor window
 
 open LiteralQuarticStep public
@@ -229,11 +231,11 @@ asCanonicalLiteralPlaquetteHistory source = record
       literalBetaZBelowGaussianCeiling (logWindow source)
   }
 
-uniformGaussianHistoryFieldsIndependent : Agda.Builtin.Bool.Bool
-uniformGaussianHistoryFieldsIndependent = Agda.Builtin.Bool.false
+uniformGaussianHistoryFieldsIndependent : Bool
+uniformGaussianHistoryFieldsIndependent = false
 
 uniformGaussianHistoryFieldsIndependentIsFalse :
-  uniformGaussianHistoryFieldsIndependent ≡ Agda.Builtin.Bool.false
+  uniformGaussianHistoryFieldsIndependent ≡ false
 uniformGaussianHistoryFieldsIndependentIsFalse = refl
 
 canonicalSU2LiteralHistoryCompilerLevel : ProofLevel
