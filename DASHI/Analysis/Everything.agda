@@ -164,6 +164,7 @@ import DASHI.Analysis.RiemannQuarticSignedPoleV4H4FrontierExact
 import DASHI.Analysis.RiemannQuarticBalancedTernaryStencilExact
 import DASHI.Analysis.RiemannQuarticDepthFiveX6Rank4BridgeExact
 import DASHI.Analysis.RiemannQuarticTriadicCodecKernelBridgeExact
+import DASHI.Analysis.RiemannJ369BalancedTernaryCrossPollinationExact
 
 
 
