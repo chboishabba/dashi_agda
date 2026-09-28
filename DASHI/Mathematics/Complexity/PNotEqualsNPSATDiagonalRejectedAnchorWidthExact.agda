@@ -31,16 +31,21 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Product using (Σ; _,_)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneToSelfDiagonalBridgeExact as Diagonal
 import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneSpecializationFixedPointExact as Kleene
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfSpecializationWidthUniversalityNoGoExact as Universal
 import DASHI.Mathematics.Complexity.PNotEqualsNPRejectGuardResidualWidthEmbeddingExact as Guard
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedRejectGuardCommutationExact as Commute
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
@@ -86,16 +91,14 @@ record RejectedAnchorWidthRealization
         remaining
         width
 
-    bodyIndexedRootExact :
-      Family.cookIndexedRestrictionRoot
-        (Diagonal.asFormula view
-          (Kleene.run2 system
-            (Diagonal.bodyProgram body)
-            quoted
-            dynamicInput))
+    bodyOutputIsRejectWidthGadget :
+      Diagonal.asFormula view
+        (Kleene.run2 system
+          (Diagonal.bodyProgram body)
+          quoted
+          dynamicInput)
       ≡
-      Guard.rejectGuardRoot
-        (Family.cookIndexedRestrictionRoot payload)
+      Universal.rejectWidthGadget payload
 
 open RejectedAnchorWidthRealization public
 
@@ -165,9 +168,69 @@ guardedPayloadWidth realization =
     (payloadWidth realization)
 
 ------------------------------------------------------------------------
--- Then use ONLY the explicit same-object root equality to move the witness onto
--- the actual body output.  This is the exact attachment seam the universality
--- test leaves open.
+-- The representation seam is now derived, not postulated.
+--
+-- A Cook-level identity of the actual body output with the canonical reject
+-- gadget induces equality of the complete dependent indexed views:
+--
+--   (canonical arity , canonical indexed body)
+--     =
+--   (suc payload arity , indexed guard root).
+------------------------------------------------------------------------
+
+IndexedRoot : Set₁
+IndexedRoot =
+  Σ Nat (λ variables → SAT.BooleanFormula variables)
+
+RootResidualWidth :
+  Nat →
+  Nat →
+  IndexedRoot →
+  Set₁
+RootResidualWidth remaining width (variables , root) =
+  Width.ResidualWidthWitness
+    {root = root}
+    remaining
+    width
+
+bodyIndexedViewExact :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {system : Kleene.SpecializingProgramSystem}
+    {view : Diagonal.CookFormulaOutputView system}
+    {dynamicInput : Kleene.Input system}
+    {body :
+      Diagonal.SATDiagonalBody
+        candidate
+        system
+        view
+        dynamicInput}
+    {remaining width : Nat}
+    (realization :
+      RejectedAnchorWidthRealization body remaining width) →
+  Bridge.cookFormulaIndexedView
+      (Diagonal.asFormula view
+        (Kleene.run2 system
+          (Diagonal.bodyProgram body)
+          (quoted realization)
+          dynamicInput))
+  ≡
+  ( suc (Bridge.formulaVariableBound
+      (payload realization))
+  , Guard.rejectGuardRoot
+      (Bridge.cookToIndexed
+        (payload realization))
+  )
+bodyIndexedViewExact realization =
+  trans
+    (cong
+      Bridge.cookFormulaIndexedView
+      (bodyOutputIsRejectWidthGadget realization))
+    (Commute.cookFormulaIndexedViewRejectGuardExact
+      (payload realization))
+
+------------------------------------------------------------------------
+-- Move the guarded width witness back across that dependent view equality.
 ------------------------------------------------------------------------
 
 actualBodyOutputWidth :
@@ -195,15 +258,14 @@ actualBodyOutputWidth :
             dynamicInput))}
     remaining
     width
-actualBodyOutputWidth realization =
+actualBodyOutputWidth
+    {remaining = remaining}
+    {width = width}
+    realization =
   subst
-    (λ root →
-      Width.ResidualWidthWitness
-        {root = root}
-        remaining
-        width)
+    (RootResidualWidth remaining width)
     (sym
-      (bodyIndexedRootExact realization))
+      (bodyIndexedViewExact realization))
     (guardedPayloadWidth realization)
 
 ------------------------------------------------------------------------
@@ -289,7 +351,7 @@ rejectedAnchorWidthBelowArityAdmittedCandidateStateCount
 --   small residual width.
 --
 -- To rule out width-preserving self-instantiation one must prove that the
--- ACTUAL all-quotes body cannot satisfy bodyIndexedRootExact for a high-width
+-- ACTUAL all-quotes body cannot satisfy bodyOutputIsRejectWidthGadget for a high-width
 -- payload family under the charged resource/termination constraints.
 --
 -- Conversely, any construction of this equality for a high-width payload
