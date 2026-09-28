@@ -52,6 +52,8 @@ import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact as P3Scal
 import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact as P2Scalar
 import DASHI.Moonshine.OggSSPPBScalarLocalizationReductionExact as Scalar
 import DASHI.Moonshine.OggSSPP3TateSimpleFactorLengthOneExact as P3Paid
+import DASHI.Moonshine.OggSSPP2FourARestrictionScalarDepthNoGoExact as P2DepthNoGo
+import DASHI.Moonshine.OggSSPPBScalarLocalizationP2OnlyFrontierExact as P2Only
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -170,7 +172,7 @@ data TerminalAcquisitionDirection : Set where
 highestAlphaFirstSubproblem :
   TerminalAcquisitionDirection
 highestAlphaFirstSubproblem =
-  proveP3TateSourceLengthOne
+  proveP2FiveSourceDepthSlots
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
@@ -364,3 +366,14 @@ p3PaidBoundary :
   P3Paid.P3TateSimpleFactorLengthOneBoundary
 p3PaidBoundary =
   P3Paid.canonicalP3TateSimpleFactorLengthOneBoundary
+
+
+p2DepthNoGoBoundary :
+  P2DepthNoGo.P2FourARestrictionScalarDepthNoGoBoundary
+p2DepthNoGoBoundary =
+  P2DepthNoGo.canonicalP2FourARestrictionScalarDepthNoGoBoundary
+
+p2OnlyScalarFrontierBoundary :
+  P2Only.PBScalarLocalizationP2OnlyFrontierBoundary
+p2OnlyScalarFrontierBoundary =
+  P2Only.canonicalPBScalarLocalizationP2OnlyFrontierBoundary
