@@ -4,7 +4,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteSourceTrajecto
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Foundations.CMP119AntigravityLiteralPlaquetteCMP109UVSameObjectExact as Same
@@ -14,39 +14,46 @@ import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 ------------------------------------------------------------------------
--- CONSTRUCT CMP109 TRAJECTORY FROM THE LITERAL PLAQUETTE PRODUCER
+-- CONSTRUCT THE NODE-INDEXED CMP109 TRAJECTORY FROM EDGE-INDEXED PLAQUETTE DATA
 --
--- Define, rather than post-hoc identify,
+-- Define
 --
---   u_k       := plaquette.inverseCouplingSq k
+--   u_0       := producer.nextInverseCouplingSq 0
+--   u_(k+1)   := producer.inverseCouplingSq k
 --   beta_0    := 0
---   beta_(k+1):= literalBetaStep plaquette (k+1).
+--   beta_(k+1):= producer.literalBetaStep k.
 --
--- The only non-definitional source coherence is then
+-- The only inter-edge coherence needed is
 --
---   plaquette.nextInverseCouplingSq (k+1)
---     = plaquette.inverseCouplingSq k.
+--   producer.nextInverseCouplingSq (k+1)
+--     = producer.inverseCouplingSq k.
 --
--- This is precisely the UV-predecessor interpretation forced by the orientation
--- firewall.  Once supplied, the CMP109 source recurrence follows from the
--- literal plaquette recurrence.
+-- Then every source recurrence u_k = u_(k+1) + beta_(k+1) is exactly one
+-- literal plaquette update, including k=0.
 ------------------------------------------------------------------------
 
 record LiteralPlaquetteUVChainCoherence
     (dataSet : Plaquette.PhysicalRunningCouplingData Nat) : Set₁ where
   field
-    nextAtSuccessorIsPreviousCurrent :
-      ∀ depth →
-      Plaquette.nextInverseCouplingSq dataSet (suc depth)
-      ≡ Plaquette.inverseCouplingSq dataSet depth
+    nextSuccessorIsPreviousCurrent :
+      ∀ step →
+      Plaquette.nextInverseCouplingSq dataSet (suc step)
+      ≡ Plaquette.inverseCouplingSq dataSet step
 
 open LiteralPlaquetteUVChainCoherence public
+
+sourceInverseCoupling :
+  Plaquette.PhysicalRunningCouplingData Nat → Nat → ℚ
+sourceInverseCoupling dataSet zero =
+  Plaquette.nextInverseCouplingSq dataSet zero
+sourceInverseCoupling dataSet (suc step) =
+  Plaquette.inverseCouplingSq dataSet step
 
 sourceBeta :
   Plaquette.PhysicalRunningCouplingData Nat → Nat → ℚ
 sourceBeta dataSet zero = 0ℚ
-sourceBeta dataSet (suc depth) =
-  Literal.literalBetaStep dataSet (suc depth)
+sourceBeta dataSet (suc step) =
+  Literal.literalBetaStep dataSet step
 
 canonicalSourceTrajectory :
   (dataSet : Plaquette.PhysicalRunningCouplingData Nat) →
@@ -54,30 +61,48 @@ canonicalSourceTrajectory :
   Flow.SourceNormalizedCouplingTrajectory
 canonicalSourceTrajectory dataSet coherence = record
   { Flow.SourceNormalizedCouplingTrajectory.inverseCoupling =
-      Plaquette.inverseCouplingSq dataSet
+      sourceInverseCoupling dataSet
   ; Flow.SourceNormalizedCouplingTrajectory.beta =
       sourceBeta dataSet
   ; Flow.SourceNormalizedCouplingTrajectory.sourceRecurrence =
-      λ depth →
-        trans
-          (sym (nextAtSuccessorIsPreviousCurrent coherence depth))
-          (Literal.literalRunningCouplingStepIsBetaSplit
-            dataSet (suc depth))
+      sourceRecurrence
   }
+  where
+  sourceRecurrence :
+    ∀ step →
+    sourceInverseCoupling dataSet step
+    ≡
+    sourceInverseCoupling dataSet (suc step)
+      + sourceBeta dataSet (suc step)
+  sourceRecurrence zero =
+    Literal.literalRunningCouplingStepIsBetaSplit dataSet zero
+  sourceRecurrence (suc step) =
+    trans
+      (sym (nextSuccessorIsPreviousCurrent coherence step))
+      (Literal.literalRunningCouplingStepIsBetaSplit dataSet (suc step))
 
-canonicalTrajectoryInverseCouplingIsLiteral :
-  ∀ dataSet coherence depth →
-  Flow.inverseCoupling
-    (canonicalSourceTrajectory dataSet coherence) depth
-  ≡ Plaquette.inverseCouplingSq dataSet depth
-canonicalTrajectoryInverseCouplingIsLiteral dataSet coherence depth = refl
+canonicalTrajectoryCurrentIsSourceSuccessor :
+  ∀ dataSet coherence step →
+  Plaquette.inverseCouplingSq dataSet step
+  ≡ Flow.inverseCoupling
+      (canonicalSourceTrajectory dataSet coherence) (suc step)
+canonicalTrajectoryCurrentIsSourceSuccessor dataSet coherence step = refl
+
+canonicalTrajectoryNextIsSourceCurrent :
+  ∀ dataSet coherence step →
+  Plaquette.nextInverseCouplingSq dataSet step
+  ≡ Flow.inverseCoupling
+      (canonicalSourceTrajectory dataSet coherence) step
+canonicalTrajectoryNextIsSourceCurrent dataSet coherence zero = refl
+canonicalTrajectoryNextIsSourceCurrent dataSet coherence (suc step) =
+  nextSuccessorIsPreviousCurrent coherence step
 
 canonicalTrajectoryBetaIsLiteral :
-  ∀ dataSet coherence depth →
-  Flow.beta
-    (canonicalSourceTrajectory dataSet coherence) (suc depth)
-  ≡ Literal.literalBetaStep dataSet (suc depth)
-canonicalTrajectoryBetaIsLiteral dataSet coherence depth = refl
+  ∀ dataSet coherence step →
+  Literal.literalBetaStep dataSet step
+  ≡ Flow.beta
+      (canonicalSourceTrajectory dataSet coherence) (suc step)
+canonicalTrajectoryBetaIsLiteral dataSet coherence step = refl
 
 canonicalTrajectoryAsUVSameObject :
   ∀ dataSet coherence →
@@ -85,12 +110,12 @@ canonicalTrajectoryAsUVSameObject :
     dataSet
     (canonicalSourceTrajectory dataSet coherence)
 canonicalTrajectoryAsUVSameObject dataSet coherence = record
-  { Same.LiteralPlaquetteCMP109UVSameObject.currentInverseCouplingSame =
-      λ _ → refl
-  ; Same.LiteralPlaquetteCMP109UVSameObject.nextAtCoarseIsSourcePredecessor =
-      nextAtSuccessorIsPreviousCurrent coherence
-  ; Same.LiteralPlaquetteCMP109UVSameObject.literalBetaIsSourceBeta =
-      λ _ → refl
+  { Same.LiteralPlaquetteCMP109UVSameObject.currentAtStepIsSourceSuccessor =
+      canonicalTrajectoryCurrentIsSourceSuccessor dataSet coherence
+  ; Same.LiteralPlaquetteCMP109UVSameObject.nextAtStepIsSourceCurrent =
+      canonicalTrajectoryNextIsSourceCurrent dataSet coherence
+  ; Same.LiteralPlaquetteCMP109UVSameObject.literalBetaAtStepIsSourceSuccessorBeta =
+      canonicalTrajectoryBetaIsLiteral dataSet coherence
   }
 
 postHocInverseCouplingEqualityRequired : Bool
