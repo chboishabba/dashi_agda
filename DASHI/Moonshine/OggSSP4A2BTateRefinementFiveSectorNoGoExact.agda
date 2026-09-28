@@ -331,11 +331,7 @@ tateSplitDoesNotCreateFifthSourceClass ()
 
 acyclicDEvenOddNotSeparatedByTateSupport :
   AcyclicDParityPiecesBecomeDifferentTateClasses -> ⊥
-acyclicDEvenOddNotSeparatedByTateClasses ()
-  where
-    acyclicDEvenOddNotSeparatedByTateClasses :
-      AcyclicDParityPiecesBecomeDifferentTateClasses -> ⊥
-    acyclicDEvenOddNotSeparatedByTateClasses ()
+acyclicDEvenOddNotSeparatedByTateSupport ()
 
 totalTateDimensionDoesNotCreateInertiaSector :
   TotalTateDimensionCreatesInertiaSector -> ⊥
