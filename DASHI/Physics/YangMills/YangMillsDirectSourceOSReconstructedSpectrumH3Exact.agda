@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.YangMillsDirectSourceOSReconstructedSpectrumH3Exa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -112,7 +113,7 @@ selectedPhysicalHamiltonianIsLiteral :
   Spectrum.physicalHamiltonian (Direct.physicalSpectrum direct)
   ≡ Top.hamiltonian Y G
 selectedPhysicalHamiltonianIsLiteral {G = G} {continuum = continuum} sameOS =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (selectedPhysicalHamiltonianIsH2ReconstructedHamiltonian sameOS)
     (H2.reconstructedHamiltonianMeansLiteral continuum G)
 
