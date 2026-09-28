@@ -47,6 +47,29 @@ import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectio
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
 
 ------------------------------------------------------------------------
+-- 0. Representation-level same-object weld for the Hom-space.
+------------------------------------------------------------------------
+
+record CanonicalLinearHomSameObjectWeld
+    (producer : LinearZeta.LinearSingleActionProducer)
+    (homSpace : Hom.ActualLinearMultiplicityHomSpace) : Set₁ where
+  field
+    actualHZetaLinearCarrier : Linear.HilbertLift
+
+    homHeisenbergCarrierIsActualHZeta :
+      Hom.HeisenbergCarrier homSpace
+      ≡ Linear.Vector actualHZetaLinearCarrier
+
+    homChosenZetaCarrierIsActualWZeta :
+      Hom.ChosenZetaCarrier homSpace
+      ≡ Linear.Vector (LinearZeta.zetaLinearCarrier producer)
+
+    actualHZetaRecognition : Set
+    actualHZetaActionIntertwiner : Set
+
+open CanonicalLinearHomSameObjectWeld public
+
+------------------------------------------------------------------------
 -- 1. Minimal canonical linear core.
 ------------------------------------------------------------------------
 
@@ -76,6 +99,11 @@ record CanonicalSelected3BLinearCore
 
     multiplicityHomSpace :
       Hom.ActualLinearMultiplicityHomSpace
+
+    homSameObjectWeld :
+      CanonicalLinearHomSameObjectWeld
+        linearZetaProducer
+        multiplicityHomSpace
 
     constituentCarrierIsSelectedAmbient :
       Linear.Vector
@@ -307,6 +335,9 @@ record Trialectic369CanonicalSelected3BLinearCoreBoundary : Set where
     weightTwoLinearBridgeRequired : Bool
     linearZetaProducerRequired : Bool
     actualHomSpaceRequired : Bool
+    homSameObjectWeldRequired : Bool
+    actualHZetaRecognitionRequired : Bool
+    homChosenZetaEqualsActualWZetaRequired : Bool
     constituentStateEqualityRequired : Bool
     normalizerMonsterCarrierBidiCompilerOutput : Bool
     canonicalLinearRouteCompilerOutput : Bool
@@ -320,5 +351,6 @@ canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary :
   Trialectic369CanonicalSelected3BLinearCoreBoundary
 canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary =
   trialectic-369-canonical-selected3b-linear-core-boundary
-    true true true true true true true true true true
+    true true true true true true true true true
+    true true true true
     false false false
