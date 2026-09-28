@@ -43,6 +43,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPTransitionGeneratedRestrictionQu
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPRestrictionQuotientDynamicProgrammingExact as DP
+import DASHI.Mathematics.Complexity.PNotEqualsNPRestrictionQuotientMemoizedDPExact as Memo
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPStrictSemanticRepresentativeQuotientExact as Strict
 
@@ -143,16 +144,11 @@ arityTerminalRootTruth :
       ArityTerminal.ArityTrackedTerminalAdmission candidate) →
   Bool
 arityTerminalRootTruth
-    {rootVariables}
     candidate
     admission =
-  DP.quotientTruthAtDepth
+  Memo.memoizedRootTruth
     (admittedQuotient candidate admission)
     (arityTerminalLabels candidate admission)
-    rootVariables
-    (Quotient.classify
-      (admittedQuotient candidate admission)
-      Family.restrictionRoot)
 
 arityTerminalRootTruthExact :
   ∀ {rootVariables : Nat}
@@ -164,10 +160,14 @@ arityTerminalRootTruthExact :
   ≡
   Finite.decideFiniteSATBool root
 arityTerminalRootTruthExact candidate admission =
-  DP.quotientTruthComputesRootDecision
-    (admittedQuotient candidate admission)
-    Closed.finiteSATOracle
-    (arityTerminalLabels candidate admission)
+  trans
+    (Memo.memoizedRootTruthExact
+      (admittedQuotient candidate admission)
+      (arityTerminalLabels candidate admission))
+    (DP.quotientTruthComputesRootDecision
+      (admittedQuotient candidate admission)
+      Closed.finiteSATOracle
+      (arityTerminalLabels candidate admission))
 
 ------------------------------------------------------------------------
 -- One-node exact semantic authority.
