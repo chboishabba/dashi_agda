@@ -11,6 +11,7 @@ import Real as Bishop
 import DASHI.Physics.Foundations.CMP119AntigravityBishopInversePiSquaredUnitBoundExact as Pi
 import DASHI.Physics.YangMills.BalabanClayP3PhysicalOneStepTransferExact as P3
 import DASHI.Physics.YangMills.BalabanClayT4RunningCouplingConventionBridgeExact as Running
+import DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact as Beta
 import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact as Embed
 import DASHI.Physics.YangMills.BalabanYM4SU2GaussianBetaLowerExact as SU2
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -41,7 +42,7 @@ record CanonicalBishopSU2RunningInputs (Scale : Set) : Set₁ where
       ≡ Bishop._*_
           (Bishop._*_
             (Embed.embed
-              (DASHI.Physics.YangMills.BalabanClayT4BetaNormalizationConventionExact.pureYMInverseCouplingCoefficient
+              (Beta.pureYMInverseCouplingCoefficient
                 SU2.su2Casimir))
             Pi.inversePiSquared)
           (logBlocking scale)
