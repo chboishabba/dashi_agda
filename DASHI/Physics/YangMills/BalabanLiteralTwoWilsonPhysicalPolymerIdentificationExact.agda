@@ -177,3 +177,15 @@ literalPhysicalMarkedActivityBelowFPThreshold :
   FP.rhoFPMax
 literalPhysicalMarkedActivityBelowFPThreshold source =
   AffineMark.literalMarkedActivityBelowFPThreshold (affineMark source)
+
+literalPhysicalKPActivityBelowFPThreshold :
+  ∀ {Scale ShellVolume Root Polymer Link Cluster FiniteVolume PhysicalIncompatible}
+    (source :
+      LiteralTwoWilsonPhysicalPolymerIdentification
+        Scale ShellVolume Root Polymer Link Cluster FiniteVolume
+        PhysicalIncompatible)
+    polymer →
+  KP.activityNorm (kpData source) polymer ≤ FP.rhoFPMax
+literalPhysicalKPActivityBelowFPThreshold source polymer
+  rewrite kpActivityNormIsLiteralMarkedActivityNorm source polymer =
+  literalPhysicalMarkedActivityBelowFPThreshold source polymer
