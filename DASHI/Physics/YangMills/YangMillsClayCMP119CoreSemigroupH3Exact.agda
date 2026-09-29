@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact where
 -- physical subgap and yields the SAME-core-H spectral certificate.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -25,6 +26,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physi
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as Pinned
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
+import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact as H2OS
+import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
+import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact as R302
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCovarianceExact as Cov
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
@@ -90,6 +94,20 @@ record CMP119CoreSemigroupH3
         (H2.reconstructionCore h2) group
 
   field
+    -- The transfer coordinate is indexed by the SAME H2-core OS
+    -- reconstruction.  Its semigroup interpretation is physical data,
+    -- not a chosen second Hamiltonian.
+    indexedTransfer :
+      R331.PreGapOSIndexedTransferCoordinate
+        (H2OS.asPreGapOSReconstructionAuthority
+          (H2.reconstructionCore h2) group) ℚ
+
+    -- The exact R281 candidate is the energy corresponding to the selected
+    -- physical transfer decay ratio.  This is not implied by their types.
+    selectedGapIsTransferCandidate :
+      Gap.gapCandidate spectrum ≡
+      R302.candidateEnergy (R331.coordinateCore indexedTransfer)
+
     -- Selected positive-time Wilson vectors are in the physical Hilbert
     -- space produced by H2 core (not in an auxiliary transfer space).
     wilsonVector : SpectralObservable → Vector
