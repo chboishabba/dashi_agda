@@ -10,3 +10,6 @@ import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExac
 
 import DASHI.Physics.Propulsion.RocketdyneBerylliumQualificationEvidenceExact
 import DASHI.Physics.Propulsion.Rocketdyne1974MeasuredResultsExact
+import DASHI.Physics.Propulsion.Rocketdyne1974ThermomechanicalReconstructionExact
+import DASHI.Physics.Propulsion.Rocketdyne1974SourceDataAuditExact
+import DASHI.Physics.Propulsion.Rocketdyne1974DimensionedPhysicsKernelExact
