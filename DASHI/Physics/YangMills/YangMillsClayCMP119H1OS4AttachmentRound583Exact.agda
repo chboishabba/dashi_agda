@@ -200,7 +200,7 @@ record CMP119CoreH1OS4Meaning
                 (H2Core.coreInputs h2) group)
               (embedWilson left)
               (translateFull (embedWilson right) time)
-              time)) →
+              time) 0ℝ) →
       WilsonProductsFormAlgebra →
       WilsonProductsDenseInPhysicalSector →
       UniformCorrelationContinuity →
@@ -210,7 +210,7 @@ record CMP119CoreH1OS4Meaning
           connectedSchwinger
             (OSSystem.constructedSchwingerCore
               (H2Core.coreInputs h2) group)
-            left (translateFull right time) time)
+            left (translateFull right time) time) 0ℝ
 
 open CMP119CoreH1OS4Meaning public
 
@@ -238,7 +238,7 @@ FullCoreOS4 {sequenceLimit = sequenceLimit} meaning family =
   RealLimit.Converges sequenceLimit
     (λ time →
       connectedSchwinger meaning family
-        left (translateFull meaning right time) time)
+        left (translateFull meaning right time) time) 0ℝ
 
 selectedH1ClusteringMeansFullOS4 :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
