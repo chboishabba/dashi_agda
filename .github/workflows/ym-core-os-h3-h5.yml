@@ -11,6 +11,10 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119CoreSemigroupH3Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119CorePhysicalH5Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayDirectPhysicalCExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119DirectSameSystemH6Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSameFamilyWardKernelSourceRound563Exact.agda'
+      - 'DASHI/Physics/YangMills/CompactSimpleQuantitativeCoverage.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119RealSelectedWilsonH2Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanOSReconstructionMassGapProduction.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119OSReconstructionExact.agda'
@@ -20,6 +24,10 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119CoreSemigroupH3Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119CorePhysicalH5Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayDirectPhysicalCExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119DirectSameSystemH6Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSameFamilyWardKernelSourceRound563Exact.agda'
+      - 'DASHI/Physics/YangMills/CompactSimpleQuantitativeCoverage.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCMP119RealSelectedWilsonH2Exact.agda'
       - 'DASHI/Physics/YangMills/BalabanOSReconstructionMassGapProduction.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119OSReconstructionExact.agda'
@@ -58,6 +66,10 @@ jobs:
               DASHI/Physics/YangMills/YangMillsClayCMP119CoreSemigroupH3Exact.agda
             agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
               DASHI/Physics/YangMills/YangMillsClayCMP119CorePhysicalH5Exact.agda
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/YangMillsClayDirectPhysicalCExact.agda
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/YangMillsClayCMP119DirectSameSystemH6Exact.agda
           ' 2>&1 | tee ym-core-os-kernel.log
       - name: Upload exact-head Agda log
         if: always()
