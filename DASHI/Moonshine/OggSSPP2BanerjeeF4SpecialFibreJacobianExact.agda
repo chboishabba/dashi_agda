@@ -33,23 +33,23 @@ import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribut
 ------------------------------------------------------------------------
 
 data F4Coordinate : Set where
-  zero fourOne alpha alphaPlusOne : F4Coordinate
+  f4Zero fourOne alpha alphaPlusOne : F4Coordinate
 
 squareF4 : F4Coordinate -> F4Coordinate
-squareF4 zero = zero
+squareF4 f4Zero = f4Zero
 squareF4 fourOne = fourOne
 squareF4 alpha = alphaPlusOne
 squareF4 alphaPlusOne = alpha
 
 cubeF4 : F4Coordinate -> F4Coordinate
-cubeF4 zero = zero
+cubeF4 f4Zero = f4Zero
 cubeF4 fourOne = fourOne
 cubeF4 alpha = fourOne
 cubeF4 alphaPlusOne = fourOne
 
 artinSchreierF4 : F4Coordinate -> F4Coordinate
-artinSchreierF4 zero = zero
-artinSchreierF4 fourOne = zero
+artinSchreierF4 f4Zero = f4Zero
+artinSchreierF4 fourOne = f4Zero
 artinSchreierF4 alpha = fourOne
 artinSchreierF4 alphaPlusOne = fourOne
 
@@ -64,8 +64,8 @@ OnBanerjeeSpecialFibre x y =
 ------------------------------------------------------------------------
 
 data AffineSolution : F4Coordinate -> F4Coordinate -> Set where
-  atZeroZero : AffineSolution zero zero
-  atZeroOne : AffineSolution zero fourOne
+  atZeroZero : AffineSolution f4Zero f4Zero
+  atZeroOne : AffineSolution f4Zero fourOne
   atOneAlpha : AffineSolution fourOne alpha
   atOneAlphaPlusOne : AffineSolution fourOne alphaPlusOne
   atAlphaAlpha : AffineSolution alpha alpha
@@ -89,19 +89,19 @@ everyF4AffinePointIsListed :
   (x y : F4Coordinate) ->
   OnBanerjeeSpecialFibre x y ->
   AffineSolution x y
-everyF4AffinePointIsListed zero zero _ = atZeroZero
-everyF4AffinePointIsListed zero fourOne _ = atZeroOne
-everyF4AffinePointIsListed zero alpha ()
-everyF4AffinePointIsListed zero alphaPlusOne ()
-everyF4AffinePointIsListed fourOne zero ()
+everyF4AffinePointIsListed f4Zero f4Zero _ = atZeroZero
+everyF4AffinePointIsListed f4Zero fourOne _ = atZeroOne
+everyF4AffinePointIsListed f4Zero alpha ()
+everyF4AffinePointIsListed f4Zero alphaPlusOne ()
+everyF4AffinePointIsListed fourOne f4Zero ()
 everyF4AffinePointIsListed fourOne fourOne ()
 everyF4AffinePointIsListed fourOne alpha _ = atOneAlpha
 everyF4AffinePointIsListed fourOne alphaPlusOne _ = atOneAlphaPlusOne
-everyF4AffinePointIsListed alpha zero ()
+everyF4AffinePointIsListed alpha f4Zero ()
 everyF4AffinePointIsListed alpha fourOne ()
 everyF4AffinePointIsListed alpha alpha _ = atAlphaAlpha
 everyF4AffinePointIsListed alpha alphaPlusOne _ = atAlphaAlphaPlusOne
-everyF4AffinePointIsListed alphaPlusOne zero ()
+everyF4AffinePointIsListed alphaPlusOne f4Zero ()
 everyF4AffinePointIsListed alphaPlusOne fourOne ()
 everyF4AffinePointIsListed alphaPlusOne alpha _ = atAlphaPlusOneAlpha
 everyF4AffinePointIsListed alphaPlusOne alphaPlusOne _ =
@@ -129,7 +129,7 @@ data AffineJacobianYVanishes : Set where
   affineJacobianYVanishes :
     (x y : F4Coordinate) ->
     OnBanerjeeSpecialFibre x y ->
-    affinePartialY x y ≡ zero ->
+    affinePartialY x y ≡ f4Zero ->
     AffineJacobianYVanishes
 
 noAffineF4JacobianSingularity :
