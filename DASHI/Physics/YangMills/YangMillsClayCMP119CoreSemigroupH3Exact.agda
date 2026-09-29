@@ -113,21 +113,36 @@ record CMP119CoreSemigroupH3
       Gap.gapCandidate spectrum ≡
       R302.candidateEnergy (R331.coordinateCore indexedTransfer)
 
-    -- Selected positive-time Wilson vectors are in the physical Hilbert
-    -- space produced by H2 core (not in an auxiliary transfer space).
+    -- The selected Wilson vectors are centered: the vacuum contribution
+    -- has been subtracted in the ACTUAL H2-core physical Hilbert space.
     wilsonVector : SpectralObservable → Vector
+    VacuumOrthogonal : Vector → Set
+    selectedWilsonVectorCentered :
+      ∀ observable → VacuumOrthogonal (wilsonVector observable)
 
-    -- This operation must really be the H2-core transfer semigroup matrix
-    -- element, e.g. <psi,e^{-t H_core} psi> with vacuum subtraction.
-    ConnectedSemigroupMatrixElement :
-      Hamiltonian → Vector → Nat → ℝ
+    -- Physical scalar product and time-evolution semigroup.  The operator is
+    -- required to be the actual exp(-t H_core), not an auxiliary transfer.
+    innerProduct : Vector → Vector → ℝ
+    expNegativeTimeHamiltonian :
+      Hamiltonian → Nat → Vector → Vector
 
+    IsOSTransferSemigroupOf :
+      Hamiltonian →
+      (Hamiltonian → Nat → Vector → Vector) →
+      Set
+
+    expIsExactH2OSTransferSemigroup :
+      IsOSTransferSemigroupOf hCore expNegativeTimeHamiltonian
+
+    -- Exact real CMP119 connected covariance = the centered positive-time
+    -- Wilson matrix coefficient of the same reconstructed H.
     exactSelectedCovarianceIsCoreSemigroup :
       ∀ observable time →
       Gap.connectedCorrelation spectrum observable time
       ≡
-      ConnectedSemigroupMatrixElement
-        hCore (wilsonVector observable) time
+      innerProduct (wilsonVector observable)
+        (expNegativeTimeHamiltonian
+          hCore time (wilsonVector observable))
 
     PhysicalPositiveSubgapMode : ℚ → Set
 
@@ -380,10 +395,12 @@ coreH3AsLegacy h2 clustering {group = group} {application = application} physica
         (∀ observable time →
           Gap.connectedCorrelation spectrum observable time
           ≡
-          ConnectedSemigroupMatrixElement physical
-            (Pinned.reconstructedHamiltonianCore
-              (H2.reconstructionCore h2) group)
-            (wilsonVector physical observable) time)
+          innerProduct physical
+            (wilsonVector physical observable)
+            (expNegativeTimeHamiltonian physical
+              (Pinned.reconstructedHamiltonianCore
+                (H2.reconstructionCore h2) group)
+              time (wilsonVector physical observable)))
   ; LegacyH3.CMP119RealSameOSH3.exactSelectedR281SpectrumIsH2Reconstructed =
       refl , exactSelectedCovarianceIsCoreSemigroup physical
   ; LegacyH3.CMP119RealSameOSH3.SpectrumAboveVacuumGap =
@@ -402,7 +419,8 @@ coreH3ToLegacyAfterOS4CompilerLevel = machineChecked
 cmp119CoreH3SpectralExclusionCompilerLevel : ProofLevel
 cmp119CoreH3SpectralExclusionCompilerLevel = machineChecked
 
--- Unproved physics: selected Wilson/semigroup identity, positivity and
--- nonzero overlap/cyclicity, physical-sector spectrum completeness.
+-- Unproved physics: centered vectors; actual OS transfer-semigroup
+-- realization; exact Wilson matrix-element identity; nonzero selected
+-- overlap/cyclicity; physical-sector spectrum completeness.
 cmp119CoreH3SemigroupAndCyclicityLevel : ProofLevel
 cmp119CoreH3SemigroupAndCyclicityLevel = conditional
