@@ -97,9 +97,9 @@ rootedWorkGateSuccessExcludesExhaustion :
   budget ≤ Work.rootedDeclaredOperationalWork path →
   ⊥
 rootedWorkGateSuccessExcludesExhaustion
-    path budget successful exhausted =
+    path budget {result} successful exhausted =
   NatP.<⇒≱
-    (proj₂ _)
+    (proj₂ result)
     exhausted
 
 ------------------------------------------------------------------------
