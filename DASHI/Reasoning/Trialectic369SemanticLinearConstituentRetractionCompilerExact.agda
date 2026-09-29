@@ -37,7 +37,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 open import Data.Sum using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; cong; sym; trans)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
