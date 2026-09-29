@@ -2,11 +2,15 @@ module DASHI.Law.SensibLawWrongTypeCareTransactionPowerGridExact where
 
 -- DASHI-original relational INDEX over candidate wrongful conduct.
 -- Attribution:
---   The Care/Transaction/Power 3 x 3 diagram is visible in the
---   uvsmpub / Rob McNamara "A System of Wrong" screenshot supplied
---   2026-09-29; its directional semantics and cell offence placements
---   are NOT verified as Forrest Landry's or McNamara's assertions.
---   The interpretation, predicates, and proofs below are DASHI work.
+--   Rob McNamara's user-provided Episode 4 transcript (A System of
+--   Wrong: The Grid) explicitly defines the FIRST axis as the frame
+--   violated and the SECOND as the logic imposed. It assigns examples
+--   to all nine cells and claims universality. Transcript provenance is
+--   user-supplied; no official episode transcript URL or timestamp is known.
+--   Attribution to Forrest Landry is McNamara's statement, not independently
+--   verified authorship of this nine-cell classification.
+--   Formal representations, implementations and proofs are DASHI work.
+--   Neither universality nor criminality is established by this transcript.
 --   Queensland Criminal Code Act 1899, ss 245-246, 354A, 391,
 --   408C, 409, 415: primary-law locator identifiers for candidate
 --   offence families only. The scheme never proves their elements.
@@ -30,8 +34,8 @@ data Mode : Set where
 record Cell : Set where
   constructor cell
   field
-    actorMode : Mode
-    contextMode : Mode
+    violatedFrame : Mode
+    imposedLogic : Mode
 
 -- Not a closed or exhaustive classification of criminal law.
 data Pattern : Set where
@@ -65,8 +69,10 @@ record GridCandidate : Set where
 -- Attributions describe distinct origins, without implying equality.
 videoDiagram : SourceLocator
 videoDiagram = sourceLocator "Rob McNamara / uvsmpub"
-  "A System of Wrong (screenshot)" "user-supplied screenshot"
-  "Care / Transaction / Power headings" "2026-09-29 supplied"
+  "A System of Wrong, Episode 4: The Grid (user-provided transcript)"
+  "user-supplied transcript; no canonical episode URL supplied"
+  "nine cell enumerations, after 'Three frames applied to three frames'"
+  "2026-09-30 transcript supplied"
 
 queenslandCode : String → SourceLocator
 queenslandCode section = sourceLocator "Queensland Parliament"
@@ -96,7 +102,7 @@ exampleCandidate₁ = gridCandidate exampleId fraud
 
 exampleCandidate₂ : GridCandidate
 exampleCandidate₂ = gridCandidate exampleId fraud
-  (cell power transaction) "example:context-2"
+  (cell transaction power) "example:context-2"
   "example:evidence-pending" (queenslandCode "s 408C")
   "DASHI hypothetical classification; not a legal finding"
 
@@ -106,7 +112,7 @@ exampleManyCells = exampleCandidate₁ ∷ exampleCandidate₂ ∷ []
 firstCellFits : Fits exampleId (cell transaction transaction) exampleManyCells
 firstCellFits = inj₁ (refl , refl)
 
-secondCellFits : Fits exampleId (cell power transaction) exampleManyCells
+secondCellFits : Fits exampleId (cell transaction power) exampleManyCells
 secondCellFits = inj₂ (inj₁ (refl , refl))
 
 -- Defining an independent contextual test is deliberate: pattern labelling
@@ -134,11 +140,11 @@ crimeCandidate identifier family coordinate section =
 illustrativeCrimes : List GridCandidate
 illustrativeCrimes =
   crimeCandidate "wrong:QLD:assault" assault
-    (cell power care) "ss 245-246" ∷
+    (cell care power) "ss 245-246" ∷
   crimeCandidate "wrong:QLD:sexual-assault" sexualAssault
-    (cell power power) "s 352" ∷
+    (cell care power) "s 352" ∷
   crimeCandidate "wrong:QLD:murder" murder
-    (cell power power) "s 302" ∷
+    (cell care power) "s 302" ∷
   crimeCandidate "wrong:QLD:manslaughter" manslaughter
     (cell care power) "s 303" ∷
   crimeCandidate "wrong:QLD:stealing" theft
@@ -146,16 +152,69 @@ illustrativeCrimes =
   crimeCandidate "wrong:QLD:fraud" fraud
     (cell transaction transaction) "s 408C" ∷
   crimeCandidate "wrong:QLD:robbery" robbery
-    (cell power transaction) "s 409" ∷
+    (cell transaction power) "s 409" ∷
   crimeCandidate "wrong:QLD:extortion" extortion
-    (cell power transaction) "s 415" ∷
+    (cell transaction power) "s 415" ∷
   crimeCandidate "wrong:QLD:kidnapping-ransom" kidnapping
-    (cell power power) "s 354A" ∷
+    (cell care power) "s 354A" ∷
   crimeCandidate "wrong:QLD:burglary" burglary
-    (cell power transaction) "s 419" ∷
+    (cell transaction power) "s 419" ∷
   crimeCandidate "wrong:QLD:computer-misuse" cyberMisuse
     (cell transaction power) "s 408E" ∷
   []
 
 -- A simple uninhabited evidence-free promotion remains impossible:
 -- no ViolationReceipt or authority data is constructed anywhere here.
+
+------------------------------------------------------------------------
+-- EPISODE 4 SOURCE-CLAIMS (NOT AN OFFENCE ELEMENTS OR LIABILITY TABLE).
+-- The transcript is attributed to McNamara, who attributes his overall
+-- framework to Landry. Authorship of each cell is not independently
+-- verified against Landry's writing. Claims of exhaustive coverage,
+-- historical universality, and relative severity remain unproved.
+------------------------------------------------------------------------
+
+record EpisodeCellClaim : Set where
+  constructor episode-cell-claim
+  field
+    gridCell : Cell
+    sourceLabel : String
+    examplesAsSpoken : String
+    transcriptProvenance : SourceLocator
+    researchStatus : String
+
+spoken : Mode → Mode → String → String → EpisodeCellClaim
+spoken target imposed label examples =
+  episode-cell-claim (cell target imposed) label examples videoDiagram
+    "attributed speech; no independent legal verification"
+
+episodeCells : List EpisodeCellClaim
+episodeCells =
+  spoken care care "care betrayed from within"
+    "caregiver neglect; parent abandonment; self-serving institutions" ∷
+  spoken care transaction "priced person"
+    "trafficking; commodified intimacy; dating-app engagement metrics" ∷
+  spoken care power "body safety life seized by force"
+    "murder; assault; rape; enslavement" ∷
+  spoken transaction care "rigged gift"
+    "charity that obligates; aid with hidden strings" ∷
+  spoken transaction transaction "corrupted ledger"
+    "theft; fraud; forgery; embezzlement" ∷
+  spoken transaction power "manufactured sale"
+    "robbery; extortion; ransomware; protection racket; payday lender; nonnegotiable terms" ∷
+  spoken power care "authority dissolved by sentiment"
+    "judge rules for a friend; commander spares the guilty" ∷
+  spoken power transaction "sold decision"
+    "bribery; corruption; regulatory capture" ∷
+  spoken power power "betrayal from within"
+    "treason; sedition; insider subversion" ∷
+  []
+
+-- Each cell has a transcript-level witness (not a legal validity proof).
+firstEpisodeCell : EpisodeCellClaim
+firstEpisodeCell = spoken care care "care betrayed from within"
+  "caregiver neglect; parent abandonment; self-serving institutions"
+
+-- Source-attributed thesis, left as an empirical/legal research target:
+-- "every serious wrong ... sits in one of these cells"; "no cell is empty".
+-- These are NOT Agda postulates and are NOT exported as theorems.
