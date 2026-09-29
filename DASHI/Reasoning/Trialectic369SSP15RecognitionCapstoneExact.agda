@@ -58,6 +58,8 @@ import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact a
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionPositionIndependenceExact as PositionDescent
 import DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact as SourceAndMonomial
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeMaxCut
+import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as ConstituentRetraction
+import DASHI.Reasoning.Trialectic369OrbifoldCoordinateRetractionWrongTypeExact as OrbifoldRetraction
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
@@ -1046,6 +1048,53 @@ selected3BFullGradeActionAgreementStillOpen :
     selected3BFullGradeActionMaxCutBoundary
   ≡ false
 selected3BFullGradeActionAgreementStillOpen = refl
+
+
+selected3BConstituentRetractionBoundary :
+  ConstituentRetraction.Trialectic369Selected3BConstituentRetractionBoundary
+selected3BConstituentRetractionBoundary =
+  ConstituentRetraction.canonicalTrialectic369Selected3BConstituentRetractionBoundary
+
+selected3BRetractionWouldPayFaithfulness :
+  ConstituentRetraction.retractionImpliesFaithfulInclusion
+    selected3BConstituentRetractionBoundary
+  ≡ true
+selected3BRetractionWouldPayFaithfulness = refl
+
+selected3BRetractionPlusFullGradeWouldCloseCompletion :
+  ConstituentRetraction.retractionPlusFullGradeAgreementClosesCompletion
+    selected3BConstituentRetractionBoundary
+  ≡ true
+selected3BRetractionPlusFullGradeWouldCloseCompletion = refl
+
+selected3BActualLinearRetractionStillOpen :
+  ConstituentRetraction.actualConstituentRetractionInhabitedHere
+    selected3BConstituentRetractionBoundary
+  ≡ false
+selected3BActualLinearRetractionStillOpen = refl
+
+orbifoldCoordinateRetractionBoundary :
+  OrbifoldRetraction.OrbifoldCoordinateRetractionBoundary
+orbifoldCoordinateRetractionBoundary =
+  OrbifoldRetraction.canonicalOrbifoldCoordinateRetractionBoundary
+
+orbifoldCoordinateInclusionFaithfulPaid :
+  OrbifoldRetraction.coordinateInclusionInjectivePaid
+    orbifoldCoordinateRetractionBoundary
+  ≡ true
+orbifoldCoordinateInclusionFaithfulPaid = refl
+
+orbifoldCoordinateRetractionDoesNotPayLinearRetraction :
+  OrbifoldRetraction.linearHilbertRetractionConstructed
+    orbifoldCoordinateRetractionBoundary
+  ≡ false
+orbifoldCoordinateRetractionDoesNotPayLinearRetraction = refl
+
+orbifoldCoordinateFaithfulnessDoesNotPayCanonicalLinearFaithfulness :
+  OrbifoldRetraction.canonicalSelected3BFaithfulnessPaidByThisModule
+    orbifoldCoordinateRetractionBoundary
+  ≡ false
+orbifoldCoordinateFaithfulnessDoesNotPayCanonicalLinearFaithfulness = refl
 
 selected3BActualMonomialBasisStillUnpaid :
   SourceAndMonomial.actualMonomialBasisPaidHere
