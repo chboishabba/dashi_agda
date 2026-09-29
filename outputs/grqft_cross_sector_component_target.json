@@ -1,0 +1,39 @@
+{
+  "axes": [
+    "t",
+    "x",
+    "y",
+    "z"
+  ],
+  "carrier": "normalized rational 4x4 stress components",
+  "comparison_executed": false,
+  "gr_target": [
+    [
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      -1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      -1
+    ]
+  ],
+  "physical_si_calibration_claimed": false,
+  "required_next_input": "ten independent CMP119/YM rational stress readouts in symmetric slots 00,01,02,03,11,12,13,22,23,33",
+  "status": "qft_component_data_missing"
+}
