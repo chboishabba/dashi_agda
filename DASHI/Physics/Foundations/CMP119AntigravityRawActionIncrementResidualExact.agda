@@ -2,10 +2,10 @@
 module DASHI.Physics.Foundations.CMP119AntigravityRawActionIncrementResidualExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
@@ -130,3 +130,32 @@ module _
         (cong
           (λ x → x - (nodeResidual k - nodeResidual (suc k)))
           (sym (projectedEdgeSplitsWilsonAndResidual k))))
+
+------------------------------------------------------------------------
+-- Finite RG telescope: net beta pays only the endpoint NON-WILSON drift.
+-- This can be much tighter than summing the absolute value of every edge
+-- correction, provided actual endpoint residual estimates can be proved.
+------------------------------------------------------------------------
+
+  selectedSourceBetaTelescopeByProjectedEndpoints :
+    (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+    (nodeMeaning : ∀ k →
+      Raw.wilsonCoefficient source k
+      ≡ Flow.inverseCoupling trajectory k) →
+    ∀ depth →
+    Flow.betaPartial (Flow.beta trajectory) depth
+    ≡ (nodeProjector zero - nodeProjector depth)
+      - (nodeResidual zero - nodeResidual depth)
+  selectedSourceBetaTelescopeByProjectedEndpoints
+      trajectory nodeMeaning depth =
+    trans
+      (sym (Flow.inverseCouplingDifferenceIsBetaPartial trajectory depth))
+      (trans
+        (cong₂ _-_
+          (sym (nodeMeaning zero))
+          (sym (nodeMeaning depth)))
+        (ℚRing.solve-∀
+          (nodeProjector zero)
+          (nodeProjector depth)
+          (Raw.wilsonCoefficient source zero)
+          (Raw.wilsonCoefficient source depth)))
