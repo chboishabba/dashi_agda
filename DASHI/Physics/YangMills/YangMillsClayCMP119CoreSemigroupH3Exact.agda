@@ -338,18 +338,18 @@ coreH3AsLegacy :
       (H2.coreInputs h2)
       (H2.asPinnedOS4Attachment clustering)
       application)
-coreH3AsLegacy h2 clustering {application = application} physical = record
+coreH3AsLegacy h2 clustering {group = group} {application = application} physical = record
   { LegacyH3.CMP119RealSameOSH3.SpectrumOfH2ReconstructedHamiltonian =
       λ h spectrum →
         (h ≡ Pinned.reconstructedHamiltonianCore
-          (H2.reconstructionCore h2) _)
+          (H2.reconstructionCore h2) group)
         ×
         (∀ observable time →
           Gap.connectedCorrelation spectrum observable time
           ≡
           ConnectedSemigroupMatrixElement physical
             (Pinned.reconstructedHamiltonianCore
-              (H2.reconstructionCore h2) _)
+              (H2.reconstructionCore h2) group)
             (wilsonVector physical observable) time)
   ; LegacyH3.CMP119RealSameOSH3.exactSelectedR281SpectrumIsH2Reconstructed =
       refl , exactSelectedCovarianceIsCoreSemigroup physical
