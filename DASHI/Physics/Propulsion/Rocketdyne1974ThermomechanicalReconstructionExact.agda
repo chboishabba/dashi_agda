@@ -27,7 +27,7 @@ data Dimension : Set where
     mass massDensity energyPerMass dimensionless : Dimension
 
 data Quantity (d : Dimension) : Set where
-  variable : String → Quantity d
+  unknown : String → Quantity d
   measured : Nat → Nat → String → Quantity d
 
 -- A numerator and a positive, successor-form denominator keep zero-scale
