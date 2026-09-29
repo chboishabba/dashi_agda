@@ -160,6 +160,36 @@ infinityPartialZIsUnit :
 infinityPartialZIsUnit normalizedInfinity = refl
 
 ------------------------------------------------------------------------
+-- 4b. Discriminant residue check.
+--
+-- For the Weierstrass coefficients a1=a, a3=1, a2=a4=a6=0,
+-- the classical discriminant is Delta = a^3 - 27.
+-- Modulo 2 this becomes a^3+1. At Banerjee's supersingular special
+-- point a=0, the residue of Delta is 1. This is a finite residue-field
+-- computation. A full theorem that Delta is a unit in W(F4)[[a1]] still
+-- requires the actual local-ring construction.
+------------------------------------------------------------------------
+
+addOneF4 : F4Coordinate -> F4Coordinate
+addOneF4 f4Zero = fourOne
+addOneF4 fourOne = f4Zero
+addOneF4 alpha = alphaPlusOne
+addOneF4 alphaPlusOne = alpha
+
+discriminantResidue :
+  F4Coordinate -> F4Coordinate
+discriminantResidue a =
+  addOneF4 (cubeF4 a)
+
+banerjeeSpecialDiscriminantResidueIsOne :
+  discriminantResidue f4Zero ≡ fourOne
+banerjeeSpecialDiscriminantResidueIsOne = refl
+
+discriminantResidueDoesNotVanishAtSpecialPoint :
+  discriminantResidue f4Zero ≡ f4Zero -> ⊥
+discriminantResidueDoesNotVanishAtSpecialPoint ()
+
+------------------------------------------------------------------------
 -- 5. Exact level attribution boundary: Banerjee's level 3 != level 4.
 ------------------------------------------------------------------------
 
@@ -208,6 +238,7 @@ record BanerjeeF4SpecialFibreJacobianBoundary : Set where
     finiteF4AffineClassificationExhaustive : Bool
     affineJacobianYNonzero : Bool
     projectiveInfinityChartJacobianNonzero : Bool
+    specialPointDiscriminantResidueNonzero : Bool
     banerjeeLevelThreeDistinguishedFromGammaZeroFour : Bool
     wittSchemeConstructedHere : Bool
     rankFourFiniteFlatFlagConstructedHere : Bool
@@ -217,4 +248,4 @@ canonicalBanerjeeF4SpecialFibreJacobianBoundary :
   BanerjeeF4SpecialFibreJacobianBoundary
 canonicalBanerjeeF4SpecialFibreJacobianBoundary =
   banerjee-f4-special-fibre-jacobian-boundary
-    true true true true true true false false false
+    true true true true true true true false false false
