@@ -31,6 +31,7 @@ module DASHI.Moonshine.OggSSPP2CenteredTernaryGroupExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.TritTriTruthBridge as Bridge
@@ -146,6 +147,40 @@ centerTripleZero :
 centerTripleZero Trit.neg = refl
 centerTripleZero Trit.zer = refl
 centerTripleZero Trit.pos = refl
+
+centerInvAdd :
+  (a b : Trit.Trit) →
+  Trit.inv (centerAdd a b)
+  ≡ centerAdd (Trit.inv a) (Trit.inv b)
+centerInvAdd Trit.neg Trit.neg = refl
+centerInvAdd Trit.neg Trit.zer = refl
+centerInvAdd Trit.neg Trit.pos = refl
+centerInvAdd Trit.zer Trit.neg = refl
+centerInvAdd Trit.zer Trit.zer = refl
+centerInvAdd Trit.zer Trit.pos = refl
+centerInvAdd Trit.pos Trit.neg = refl
+centerInvAdd Trit.pos Trit.zer = refl
+centerInvAdd Trit.pos Trit.pos = refl
+
+-- Abelian medial law, used by the shear matrix (a,b) |-> (a+b,b).
+centerAdd-medial :
+  (a b c d : Trit.Trit) →
+  centerAdd (centerAdd a b) (centerAdd c d)
+  ≡ centerAdd (centerAdd a c) (centerAdd b d)
+centerAdd-medial a b c d =
+  trans
+    (sym (centerAdd-assoc a b (centerAdd c d)))
+    (trans
+      (cong (λ x → centerAdd a x)
+        (centerAdd-assoc b c d))
+      (trans
+        (cong
+          (λ x → centerAdd a (centerAdd x d))
+          (centerAdd-comm b c))
+        (trans
+          (cong (λ x → centerAdd a x)
+            (sym (centerAdd-assoc c b d)))
+          (centerAdd-assoc a c (centerAdd b d)))))
 
 ------------------------------------------------------------------------
 -- Exact transport back to the original triXor convention.
