@@ -116,3 +116,57 @@ round453R448GeometryCompilerLevel = machineChecked
 -- a repository polymer is not required on this route.
 literalRound453CMP116ConnectedCorePathLevel : ProofLevel
 literalRound453CMP116ConnectedCorePathLevel = conditional
+
+
+------------------------------------------------------------------------
+-- Compatibility constructor from the explicit legacy/global tree metric.
+--
+-- This is NOT the preferred domain-specific CMP116 d_k(Y) route.  It says only:
+-- if the source itself proves d_k(Y) = the canonical support-tree edge count,
+-- then the already-owned canonical YM tree path witnesses R453 directly.
+------------------------------------------------------------------------
+
+connectedCorePathFromLegacyGlobalTreeMetric :
+  ∀ {Measure TestObservable dataSet extension base}
+    {data :
+      R444.CanonicalTwiceMarkedFourStageData
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} base} →
+  R444.LegacyGlobalTreeMetricAttachment data →
+  ConnectedCorePathGeometry data
+connectedCorePathFromLegacyGlobalTreeMetric {data = data} legacy = record
+  { connectedCorePath =
+      λ domain →
+        Graph.ymTreePath
+          (R444.leftMark data)
+          (R444.rightMark data)
+  ; connectedCorePathStartsAtLeft =
+      λ domain →
+        Graph.ImportedTreePathRealisationAxiomStart
+          (R444.leftMark data)
+          (R444.rightMark data)
+  ; connectedCorePathEndsAtRight =
+      λ domain →
+        Graph.ImportedTreePathRealisationAxiomFinish
+          (R444.leftMark data)
+          (R444.rightMark data)
+  ; connectedCorePathValid =
+      λ domain →
+        Graph.ImportedTreePathRealisationAxiomValid
+          (R444.leftMark data)
+          (R444.rightMark data)
+  ; connectedCorePathLengthBelowSourceDistance =
+      λ domain →
+        substNatUpper
+          (R444.sourceTreeDistanceIsGlobalSupportTree legacy domain)
+          (Graph.ImportedTreePathBoundedByEdgeCountAxiom
+            (R444.leftMark data)
+            (R444.rightMark data))
+  }
+  where
+  substNatUpper :
+    ∀ {left right right' : Nat} →
+    right ≡ right' →
+    left Nat.≤ right' →
+    left Nat.≤ right
+  substNatUpper refl proof = proof

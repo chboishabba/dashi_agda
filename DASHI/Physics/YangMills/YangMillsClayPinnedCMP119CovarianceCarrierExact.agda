@@ -32,34 +32,29 @@ import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as
 ExpectationMeasure : Set → Set
 ExpectationMeasure Observable = Observable → ℝ
 
-cmp119PhysicalMeasureConvergenceData :
-  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
-      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
-      sequenceLimit limitLaws quotient division S}
-    (inputs :
-      A.PinnedCMP119OSAxiomInputs
-        G X Configuration Position CurvaturePolynomial LocalOperator
-        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
-        {sequenceLimit = sequenceLimit}
-        limitLaws quotient division S)
-    (group : G) →
+cmp119PhysicalMeasureConvergenceDataFromFamily :
+  ∀ {Configuration sequenceLimit limitLaws quotient division}
+    (family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration limitLaws quotient division)
+    (observableAlgebra :
+      OS2.CylinderOSAlgebra (Configuration → ℝ)) →
   Gram.PhysicalMeasureConvergenceData
     (ExpectationMeasure (Configuration → ℝ))
     (Configuration → ℝ)
     ℝ
-cmp119PhysicalMeasureConvergenceData
-    {sequenceLimit = sequenceLimit}
+cmp119PhysicalMeasureConvergenceDataFromFamily
     {limitLaws = limitLaws}
-    inputs group = record
+    family observableAlgebra = record
   { Gram.PhysicalMeasureConvergenceData.operations = record
       { Gram.PhysicalOSOperations.zero = 0ℝ
       ; Gram.PhysicalOSOperations.add = _+ℝ_
       ; Gram.PhysicalOSOperations.multiply = _*ℝ_
       ; Gram.PhysicalOSOperations.conjugate = λ value → value
       ; Gram.PhysicalOSOperations.reflectObservable =
-          OS2.reflectObservable (A.observableAlgebra inputs)
+          OS2.reflectObservable observableAlgebra
       ; Gram.PhysicalOSOperations.multiplyObservable =
-          OS2.multiplyObservable (A.observableAlgebra inputs)
+          OS2.multiplyObservable observableAlgebra
       ; Gram.PhysicalOSOperations.expectation =
           λ measure observable → measure observable
       }
@@ -67,9 +62,9 @@ cmp119PhysicalMeasureConvergenceData
       RealLimit.canonicalGramScalarConvergence limitLaws
   ; Gram.PhysicalMeasureConvergenceData.measureSequence =
       λ cutoff observable →
-        Limit.finiteExpectation (A.family inputs group) cutoff observable
+        Limit.finiteExpectation family cutoff observable
   ; Gram.PhysicalMeasureConvergenceData.continuumMeasure =
-      Limit.limitExpectation (A.family inputs group)
+      Limit.limitExpectation family
   ; Gram.PhysicalMeasureConvergenceData.LocalGaugeInvariant =
       λ observable → ⊤
   ; Gram.PhysicalMeasureConvergenceData.RenormalizedObservable =
@@ -95,6 +90,27 @@ cmp119PhysicalMeasureConvergenceData
   ; Gram.PhysicalMeasureConvergenceData.weakConvergencePlusUniformIntegrability =
       λ sequence uniformlyIntegrable → ⊤
   }
+
+cmp119PhysicalMeasureConvergenceData :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S}
+    (inputs :
+      A.PinnedCMP119OSAxiomInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (group : G) →
+  Gram.PhysicalMeasureConvergenceData
+    (ExpectationMeasure (Configuration → ℝ))
+    (Configuration → ℝ)
+    ℝ
+cmp119PhysicalMeasureConvergenceData
+    inputs group =
+  cmp119PhysicalMeasureConvergenceDataFromFamily
+    (A.family inputs group)
+    (A.observableAlgebra inputs)
 
 cmp119FiniteExpectationMeasureIsLiteralFiniteExpectation :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -136,6 +152,9 @@ cmp119ContinuumExpectationMeasureIsLiteralALimit :
   _≡_
   Limit.limitExpectation (A.family inputs group) observable
 cmp119ContinuumExpectationMeasureIsLiteralALimit inputs group observable = refl
+
+preOSCMP119CovarianceCarrierCompilerLevel : ProofLevel
+preOSCMP119CovarianceCarrierCompilerLevel = machineChecked
 
 pinnedCMP119CovarianceCarrierCompilerLevel : ProofLevel
 pinnedCMP119CovarianceCarrierCompilerLevel = machineChecked

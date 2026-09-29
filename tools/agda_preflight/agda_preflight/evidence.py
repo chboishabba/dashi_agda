@@ -43,6 +43,7 @@ def _policy(
 
 # Diagnostics that are sound from concrete syntax alone.
 _TREE_ONLY = {
+    "TSAGDA000",  # tree ERROR/missing node
     "TSAGDA004",  # module/path mismatch
     "TSAGDA005",  # duplicate declaration
     "TSAGDA006",  # duplicate field
@@ -66,28 +67,28 @@ _TREE_ONLY = {
 # Agda elaboration. Their hard-error form is permitted only when the emitting
 # rule has the corresponding rigid evidence.
 _INDEX_SAFE = {
-    "TSAGDA001", 
+    "TSAGDA001", "TSAGDA002", "TSAGDA003",
     "TSAGDA008", "TSAGDA009",
     "TSAGDA020", 
-    "TSAGDA029", "TSAGDA030",
-    
-    
-    
-    
-    "TSAGDA060", "TSAGDA062", 
-    
-    
-    
-    "TSAGDA083", 
-    "TSAGDA088", "TSAGDA089",
-    "TSAGDA100", "TSAGDA101", "TSAGDA102", 
+    "TSAGDA028", "TSAGDA029", "TSAGDA030",
+    "TSAGDA042", "TSAGDA043", "TSAGDA044", 
+    "TSAGDA046", "TSAGDA047", "TSAGDA048", "TSAGDA049",
+    "TSAGDA050", "TSAGDA051", "TSAGDA052", "TSAGDA053", "TSAGDA054",
+    "TSAGDA056",
+    "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064", "TSAGDA065",
+    "TSAGDA066", "TSAGDA067", "TSAGDA068",
+    "TSAGDA070", "TSAGDA071", "TSAGDA073", "TSAGDA074",
+    "TSAGDA077", "TSAGDA078", "TSAGDA079",
+    "TSAGDA080", "TSAGDA081", "TSAGDA082", "TSAGDA083", "TSAGDA085",
+    "TSAGDA086", "TSAGDA087", "TSAGDA088", "TSAGDA089",
+    "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103", "TSAGDA104",
     "TSAGDA105",
-    "TSAGDA115",
-    
-    
+    "TSAGDA111", "TSAGDA112", "TSAGDA115",
+    "TSAGDA120", "TSAGDA121", "TSAGDA122", "TSAGDA123",
+    "TSAGDA130", "TSAGDA131",
     "TSAGDA140", "TSAGDA141", "TSAGDA142", "TSAGDA143",
     "TSAGDA160", "TSAGDA166",
-    
+    "TSAGDA171",
     "TSAGDA180", "TSAGDA181", "TSAGDA182", "TSAGDA183", "TSAGDA184",
     "TSAGDA185", "TSAGDA186",
     "TSAGDA200", "TSAGDA202", "TSAGDA203", "TSAGDA205", "TSAGDA206",
@@ -99,8 +100,6 @@ _INDEX_SAFE = {
 # Agda-resolved scope/elaboration: opens/renamings, overloading, mixfix, implicit
 # insertion, or local dependent scope can change the interpretation.
 _SCOPE_REQUIRED = {
-    "TSAGDA080",  # constructor-name validity in patterns is scope-resolved
-    "TSAGDA000",  # successful Agda scope proves tree-sitter ERROR nodes are grammar artifacts
     "TSAGDA021",  # qualified export availability is a scope-resolution fact
     "TSAGDA022",  # unknown/malformed alias use
     "TSAGDA023",  # using(...) export availability is a scope-resolution fact
@@ -108,7 +107,6 @@ _SCOPE_REQUIRED = {
     "TSAGDA024",  # hiding entry validity through re-export chains
     "TSAGDA026",  # rename/open collision
     "TSAGDA027",  # ambiguous unqualified name from opens
-    "TSAGDA028",  # conflicting import aliases are resolved/rejected by Agda scope
     "TSAGDA055",  # ambiguous opened projection
     "TSAGDA084",  # inaccessible pattern scope
     "TSAGDA113",  # visibly unbound RHS identifier
@@ -118,51 +116,7 @@ _SCOPE_REQUIRED = {
 
 # Kept for future diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
-    "TSAGDA042",  # named implicits require the complete elaborated telescope
-    "TSAGDA043",  # binder visibility requires the complete elaborated telescope
-    "TSAGDA111",  # compatibility view of visibility mismatch
-    "TSAGDA112",  # compatibility alias of named implicit mismatch
-    "TSAGDA002",  # projection receiver metavariables may be inferable
-    "TSAGDA003",  # adapter kind/codomain compatibility requires elaboration
-    "TSAGDA044",  # lambda/target binder count can change after unfolding
-    "TSAGDA050",  # projection receiver compatibility depends on elaborated type
-    "TSAGDA051",  # declaration names may denote values/types through dependent typing
-    "TSAGDA054",  # receiver record identity may require definitional equality
-    "TSAGDA056",  # dependent projection parameter saturation is a typing judgment
-    "TSAGDA063",  # record-expression target identity may unfold through aliases
-    "TSAGDA065",  # compatibility alias of typing-sensitive adapter mismatch
-    "TSAGDA066",  # field result heads may be definitionally equal after unfolding
-    "TSAGDA067",  # source projection/target field compatibility is a typing judgment
-    "TSAGDA068",  # constructor/expected record compatibility needs elaboration
-    "TSAGDA070",  # term/type role is determined by typing, not token class
-    "TSAGDA071",  # term/type role is determined by typing, not token class
-    "TSAGDA073",  # argument datatype compatibility may unfold through aliases
-    "TSAGDA074",  # literal compatibility is an expected-type judgment
-    "TSAGDA077",  # type-constructor application arity is elaboration-sensitive
-    "TSAGDA078",  # sorts can appear as values at higher universe levels
-    "TSAGDA081",  # pattern constructor/domain compatibility needs elaboration
-    "TSAGDA085",  # absurd-pattern validity is decided by coverage/typing
-    "TSAGDA086",  # absurd-lambda validity is decided by coverage/typing
-    "TSAGDA087",  # coverage completeness is an Agda coverage-checker judgment
-    "TSAGDA103",  # cong function/result compatibility needs typing
-    "TSAGDA130",  # positivity is an Agda positivity-checker judgment
-    "TSAGDA131",  # positivity is an Agda positivity-checker judgment
-    "TSAGDA171",  # compatibility alias of TSAGDA002
-    "TSAGDA046",  # constructor application arity is settled by elaboration
-    "TSAGDA047",  # record constructor parameters/fields require elaborated arity
-    "TSAGDA048",  # parameterized module application arity is elaboration-sensitive
-    "TSAGDA064",  # field lambda arity may depend on target-type unfolding
-    "TSAGDA082",  # constructor-pattern arity is a typing/elaboration judgment
     "TSAGDA040",  # over-application can depend on result-type unfolding
-    "TSAGDA049",  # projection saturation/pointfree use is a typing judgment
-    "TSAGDA052",  # a bare projection is a valid function value in pointfree contexts
-    "TSAGDA053",  # projection result aliases may unfold to additional functions
-    "TSAGDA079",  # zero shallow arity does not prove a term is non-functional after unfolding
-    "TSAGDA104",  # target/result aliases may unfold to equality propositions
-    "TSAGDA120",  # terms may themselves inhabit Set and validly appear as types
-    "TSAGDA121",  # constructor result aliases require definitional equality
-    "TSAGDA122",  # constructor target may reduce to the datatype under construction
-    "TSAGDA123",  # type-valued projections/terms require typing, not name-class heuristics
     "TSAGDA041",  # under-application / saturation is a typing judgment
     "TSAGDA045",  # clause/signature arity can depend on pointfree eta/type unfolding
     "TSAGDA072",  # constructor/result-head comparison can require synonym unfolding
@@ -174,11 +128,11 @@ _TYPECHECK_REQUIRED: Set[str] = {
 
 
 DIAGNOSTIC_ALIASES = {
-    "TSAGDA002": (),
-    "TSAGDA003": ("TSAGDA067"),
+    "TSAGDA002": ("TSAGDA171",),
+    "TSAGDA003": ("TSAGDA065", "TSAGDA067"),
     "TSAGDA012": ("TSAGDA175",),
     "TSAGDA045": ("TSAGDA110",),
-    "TSAGDA042": (),
+    "TSAGDA042": ("TSAGDA112",),
 }
 
 _ALIAS_TO_CANONICAL = {
@@ -191,10 +145,8 @@ _ALIAS_TO_CANONICAL = {
 # retained as separate compatibility/reporting codes. Canonicalize them only
 # for triage; do not synthesize extra emitted diagnostics.
 _ALIAS_TO_CANONICAL.update({
-    "TSAGDA052": "TSAGDA049",
     "TSAGDA075": "TSAGDA072",
     "TSAGDA114": "TSAGDA072",
-    "TSAGDA123": "TSAGDA120",
 })
 
 
