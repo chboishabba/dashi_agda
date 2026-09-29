@@ -111,6 +111,76 @@ compileActionIntertwiningFromInclusion core comparison =
         (actionsAgreeAfterFullGradeTwoInclusion comparison normalizer state))
     }
 
+------------------------------------------------------------------------
+-- Converse: a canonical action intertwiner necessarily passes the
+-- same full-grade-two inclusion comparison.
+------------------------------------------------------------------------
+
+includedActionEqualityFromIntertwining :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  (normalizer : Single.Normalizer (Core.linearProducer core)) →
+  (state :
+    Linear.Vector
+      (WeightTwo.constituentLinearCarrier
+        (Core.weightTwoLinearBridge core))) →
+  WeightTwo.constituentAct (Core.weightTwoLinearBridge core)
+    (Core.normalizerToMonster core normalizer) state
+  ≡ selectedActionBackOnConstituent core normalizer state
+includedActionEqualityFromIntertwining core action normalizer state =
+  trans
+    (sym
+      (transportBackAfterForward
+        (Core.constituentCarrierIsSelectedState core)
+        (WeightTwo.constituentAct (Core.weightTwoLinearBridge core)
+          (Core.normalizerToMonster core normalizer) state)))
+    (cong
+      (transportBack (Core.constituentCarrierIsSelectedState core))
+      (Core.intertwines action normalizer state))
+
+comparisonFromActionIntertwining :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (injective :
+    ∀ {left right :
+      Linear.Vector
+        (WeightTwo.constituentLinearCarrier
+          (Core.weightTwoLinearBridge core))} →
+    WeightTwo.constituentInclusion (Core.weightTwoLinearBridge core) left
+    ≡
+    WeightTwo.constituentInclusion (Core.weightTwoLinearBridge core) right
+    →
+    left ≡ right) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  FaithfulConstituentActionComparison core
+comparisonFromActionIntertwining core injective action =
+  record
+    { inclusionInjective = injective
+    ; actionsAgreeAfterFullGradeTwoInclusion = λ normalizer state →
+        cong
+          (WeightTwo.constituentInclusion (Core.weightTwoLinearBridge core))
+          (includedActionEqualityFromIntertwining
+            core action normalizer state)
+    }
+
+actionComparisonAfterCompile :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (comparison : FaithfulConstituentActionComparison core) →
+  (normalizer : Single.Normalizer (Core.linearProducer core)) →
+  (state :
+    Linear.Vector
+      (WeightTwo.constituentLinearCarrier
+        (Core.weightTwoLinearBridge core))) →
+  WeightTwo.constituentAct (Core.weightTwoLinearBridge core)
+    (Core.normalizerToMonster core normalizer) state
+  ≡ selectedActionBackOnConstituent core normalizer state
+actionComparisonAfterCompile core comparison normalizer state =
+  includedActionEqualityFromIntertwining
+    core (compileActionIntertwiningFromInclusion core comparison)
+    normalizer state
+
 record IncludedActionCounterexample
     {Monster K : Set}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K})
@@ -153,8 +223,9 @@ record Boundary : Set where
     fullGradeTwoComparisonCriterionOwned : Bool
     injectivityOfConstituentInclusionRequired : Bool
     selectedActionCompilerOwned : Bool
+    criterionNecessaryUnderFaithfulInclusion : Bool
     sourceComparisonWitnessSupplied : Bool
     canonicalCoreInhabitedHere : Bool
 
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true false false
+canonicalBoundary = boundary true true true true false false
