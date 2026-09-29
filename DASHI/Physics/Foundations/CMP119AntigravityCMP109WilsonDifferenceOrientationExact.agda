@@ -8,9 +8,9 @@ module DASHI.Physics.Foundations.CMP119AntigravityCMP109WilsonDifferenceOrientat
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; _-_)
+open import Data.Rational.Base using (ℚ; _-_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 
@@ -54,3 +54,29 @@ sourceBetaIsWilsonCoefficientDifference trajectory wilsonCoefficient
 -- The Wilson coefficient of the complete source action is a NODE
 -- coordinate. A selected T4 one-step action is a separate EDGE object;
 -- Eq. (2.23) alone does not make them definitionally equal.
+
+------------------------------------------------------------------------
+-- If the literal Wilson action uses coefficient c_k = -u_k (rather than
+-- +u_k), the beta is c_(k+1) - c_k.  The two orientation conventions are
+-- distinguished by explicit node maps, never exchanged silently.
+------------------------------------------------------------------------
+
+sourceBetaIsNegativeWilsonCoefficientDifference :
+  (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+  (wilsonCoefficient : Nat → ℚ)
+  (wilsonIsNegativeInverse : ∀ k →
+    wilsonCoefficient k ≡ - Flow.inverseCoupling trajectory k) →
+  ∀ k →
+  Flow.beta trajectory (suc k)
+  ≡ wilsonCoefficient (suc k) - wilsonCoefficient k
+sourceBetaIsNegativeWilsonCoefficientDifference
+    trajectory wilsonCoefficient wilsonIsNegativeInverse k =
+  trans
+    (sourceBetaIsBackwardDifference trajectory k)
+    (trans
+      (ℚRing.solve-∀
+        (Flow.inverseCoupling trajectory k)
+        (Flow.inverseCoupling trajectory (suc k)))
+      (cong₂ _-_
+        (sym (wilsonIsNegativeInverse (suc k)))
+        (sym (wilsonIsNegativeInverse k))))
