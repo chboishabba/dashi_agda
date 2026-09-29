@@ -65,6 +65,36 @@ scalarActionRecharts :
 scalarActionRecharts route monomial g index
   rewrite Mixed.tenByNineAfterFin90 index = refl
 
+------------------------------------------------------------------------
+-- The full LINEAR action is recovered on every chosen basis vector using
+-- BOTH the transported index and the transported scalar.
+------------------------------------------------------------------------
+
+linearActionOnTenByNineBasis :
+  (route : WrongType.CanonicalLinearMultiplicityRoute) →
+  (monomial : Monomial.MonomialMultiplicityBasisSpecialisation route) →
+  (g : Monomial.RouteGroup route) →
+  (state : TenByNine) →
+  Linear.act
+    (WrongType.linearAction
+      (WrongType.linearRepresentation route))
+    g
+    (Monomial.basisVector monomial
+      (Mixed.tenByNineToFin90 state))
+  ≡
+  Linear._·_
+    (WrongType.linearCarrier
+      (WrongType.linearRepresentation route))
+    (scalarOnTenByNine route monomial g state)
+    (Monomial.basisVector monomial
+      (Mixed.tenByNineToFin90
+        (indexActionOnTenByNine route monomial g state)))
+linearActionOnTenByNineBasis route monomial g state
+  rewrite Mixed.tenByNineAfterFin90
+    (Monomial.indexAct monomial g (Mixed.tenByNineToFin90 state)) =
+  Monomial.actionOnBasisIsMonomial
+    monomial g (Mixed.tenByNineToFin90 state)
+
 inverseIndexActionOnTenByNine :
   (route : WrongType.CanonicalLinearMultiplicityRoute) →
   Monomial.FullMonomialBasisReceipt route →
@@ -111,9 +141,10 @@ record Boundary : Set where
   field
     indexMotionTransportedWithoutLoss : Bool
     scalarCoefficientTransportedWithoutLoss : Bool
+    fullLinearBasisActionReconstructedWithScalar : Bool
     inverseIndexTransported : Bool
     fullLinearActionReplacedByIndexAction : Bool
     actualMonomialBasisInhabitedHere : Bool
 
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true false false
+canonicalBoundary = boundary true true true true false false
