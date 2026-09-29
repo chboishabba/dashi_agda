@@ -306,6 +306,74 @@ record LiteralRealCMP116ClusteringInputs
 
 open LiteralRealCMP116ClusteringInputs public
 
+------------------------------------------------------------------------
+-- Transport the SAME pre-gap H1 source through a later OS4 attachment.
+-- The normalized family, cylinder algebra, and real covariance data do not
+-- change, so this is a definitional compiler, not a second physical source.
+------------------------------------------------------------------------
+
+coreH1AsLegacy :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Scale Volume Root SourceDirection Index
+      sequenceLimit limitLaws quotient division S}
+    (core :
+      A.PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (clustering : A.CMP119OS4Attachment core)
+    {covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit}
+    {group : G}
+    {source :
+      CMP116.PublishedCMP116DifferentiatedLocalization
+        Scale Volume Root SourceDirection ℝ} →
+  LiteralRealCMP116CoreClusteringInputs
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+    Scale Volume Root SourceDirection Index
+    {sequenceLimit = sequenceLimit}
+    {limitLaws = limitLaws} {quotient = quotient} {division = division}
+    {S = S}
+    core covarianceLaws group source →
+  LiteralRealCMP116ClusteringInputs
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+    Scale Volume Root SourceDirection Index
+    {sequenceLimit = sequenceLimit}
+    {limitLaws = limitLaws} {quotient = quotient} {division = division}
+    {S = S}
+    (A.corePlusOS4Inputs core clustering)
+    covarianceLaws group source
+coreH1AsLegacy core clustering source = record
+  { LiteralRealCMP116ClusteringInputs.left =
+      leftCore source
+  ; LiteralRealCMP116ClusteringInputs.right =
+      rightCore source
+  ; LiteralRealCMP116ClusteringInputs.sourceLeft =
+      sourceLeftCore source
+  ; LiteralRealCMP116ClusteringInputs.sourceRight =
+      sourceRightCore source
+  ; LiteralRealCMP116ClusteringInputs.scaleAt =
+      scaleAtCore source
+  ; LiteralRealCMP116ClusteringInputs.volumeAt =
+      volumeAtCore source
+  ; LiteralRealCMP116ClusteringInputs.selectedPairAdmissible =
+      selectedPairAdmissibleCore source
+  ; LiteralRealCMP116ClusteringInputs.sourceMagnitudeIsFinitePhysicalCovariance =
+      sourceMagnitudeIsFinitePhysicalCovarianceCore source
+  ; LiteralRealCMP116ClusteringInputs.physicalUpper =
+      physicalUpperCore source
+  ; LiteralRealCMP116ClusteringInputs.sourceEnvelopeBelowPhysicalUpper =
+      sourceEnvelopeBelowPhysicalUpperCore source
+  ; LiteralRealCMP116ClusteringInputs.orderLimit =
+      orderLimitCore source
+  }
+
+coreH1ToLegacyAfterOS4CompilerLevel : ProofLevel
+coreH1ToLegacyAfterOS4CompilerLevel = machineChecked
+
 finitePhysicalCovarianceBelowUpper :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
