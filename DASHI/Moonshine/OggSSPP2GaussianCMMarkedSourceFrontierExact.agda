@@ -1,3 +1,5 @@
+import DASHI.Moonshine.OggSSPP2F4CurveQ9GroupActionBidiExact as F4ChordQ9
+import DASHI.Moonshine.OggSSPP2F4CurveExactChordGroup as F4Chord
 import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as CurveS3
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as F4Zeta
 import DASHI.Moonshine.OggSSPP2BanerjeeGaloisOrbitNoGoExact as BanerjeeGalNoGo
@@ -199,6 +201,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     canonicalRawGamma0FourFlagOwned : Bool
     f4ZetaCurveNinePointAndThreeRootChartOwned : Bool
     f4CurveShearReflectionSetActionOwned : Bool
+    actualF4ChordQ9GroupActionBidiSourceWritten : Bool
     banerjeeGaloisOrbitFiveNotTenOwned : Bool
     gamma0FourRefinedCompactificationBoundaryOwned : Bool
     gamma0FourTwoIsogenyChainSocketOwned : Bool
@@ -249,6 +252,7 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; canonicalRawGamma0FourFlagOwned = true
     ; f4ZetaCurveNinePointAndThreeRootChartOwned = true
     ; f4CurveShearReflectionSetActionOwned = true
+    ; actualF4ChordQ9GroupActionBidiSourceWritten = true
     ; banerjeeGaloisOrbitFiveNotTenOwned = true
     ; gamma0FourRefinedCompactificationBoundaryOwned = true
     ; gamma0FourTwoIsogenyChainSocketOwned = true
