@@ -13,8 +13,10 @@ module DASHI.Physics.Foundations.CMP119AntigravityCanonicalFiniteHistoryActionEx
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _-_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _-_; _≤_)
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as Finite
+import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Local
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 import DASHI.Physics.YangMills.BalabanYM4RationalInverseSquareOrderExact as Order
@@ -94,3 +96,49 @@ module _
   sameSourceCorrectedBeta =
     Sector.sourceBetaIsProjectedEdgeMinusFourSectorDrift
       trajectory physicalHistorySectors
+
+  -- Actual selected finite-mode quartic absorption, expressed directly
+  -- against the *corrected source action difference*.  No independent
+  -- positive-beta field or fictitious remainder cancellation is introduced.
+  finiteModeHalfGaussianFloor :
+    ∀ k →
+    Local.half * Local.computedGaussianLower
+      (Finite.gaussianAt betaData k)
+    ≤ Flow.beta trajectory (suc k)
+  finiteModeHalfGaussianFloor k =
+    let
+      gaussian = Finite.gaussianAt betaData k
+      interaction = Finite.interactionAt betaData k
+      floorBelowSplit :
+        Local.half * Local.computedGaussianLower gaussian
+        ≤ Local.betaZ gaussian + Local.betaInt interaction
+      floorBelowSplit =
+        Local.betaSplitLowerAfterQuarticAbsorption
+          gaussian interaction
+          (Finite.gamma betaData k)
+          (Finite.interactionCouplingNonnegative betaData k)
+          (Finite.gammaNonnegative betaData k)
+          (Finite.interactionCouplingBelowGamma betaData k)
+          (Finite.interactionCoefficientTotalNonnegative betaData k)
+          (Finite.quarticAbsorption betaData k)
+    in
+    subst
+      (λ value →
+        Local.half * Local.computedGaussianLower gaussian ≤ value)
+      (sym (Finite.sourceBetaSplitExact betaData k))
+      floorBelowSplit
+
+  correctedPhysicalActionHasGaussianHalfFloor :
+    ∀ k →
+    Local.half * Local.computedGaussianLower
+      (Finite.gaussianAt betaData k)
+    ≤ Edge.projectedSourceEdge physicalHistoryAction k
+      - (Sector.sectorProjection trajectory physicalHistorySectors k
+       - Sector.sectorProjection trajectory physicalHistorySectors (suc k))
+  correctedPhysicalActionHasGaussianHalfFloor k =
+    subst
+      (λ value →
+        Local.half * Local.computedGaussianLower
+          (Finite.gaussianAt betaData k) ≤ value)
+      (sameSourceCorrectedBeta k)
+      (finiteModeHalfGaussianFloor k)
