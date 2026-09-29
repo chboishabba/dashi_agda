@@ -53,6 +53,7 @@ import DASHI.Reasoning.Trialectic369OutgoingFrickeModeBlock18Exact as Mode18
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionPositionIndependenceExact as PositionDescent
+import DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact as SourceAndMonomial
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
@@ -962,3 +963,42 @@ canonicalTrialectic369SSP15RecognitionCapstoneBoundary =
     false true true
     true true true true true false true false false false false false false false
     false false false
+
+------------------------------------------------------------------------
+-- Same-core source-action comparison and OPTIONAL scalar-aware monomial lane.
+------------------------------------------------------------------------
+
+selected3BSourceAndMonomialBoundary :
+  SourceAndMonomial.Boundary
+selected3BSourceAndMonomialBoundary =
+  SourceAndMonomial.canonicalBoundary
+
+selected3BActionFromFaithfulInclusionCompilerOwned :
+  SourceAndMonomial.canonicalLinearCompletionCompilerOwned
+    selected3BSourceAndMonomialBoundary
+  ≡ true
+selected3BActionFromFaithfulInclusionCompilerOwned = refl
+
+selected3BOptionalScalarMonomialRouteOwned :
+  SourceAndMonomial.optionalMonomialActionTracksScalars
+    selected3BSourceAndMonomialBoundary
+  ≡ true
+selected3BOptionalScalarMonomialRouteOwned = refl
+
+selected3BPurePermutationRequiresTrivialScalars :
+  SourceAndMonomial.purePermutationRequiresScalarTriviality
+    selected3BSourceAndMonomialBoundary
+  ≡ true
+selected3BPurePermutationRequiresTrivialScalars = refl
+
+selected3BActualSourceActionStillUnpaid :
+  SourceAndMonomial.actualSourceActionPaidHere
+    selected3BSourceAndMonomialBoundary
+  ≡ false
+selected3BActualSourceActionStillUnpaid = refl
+
+selected3BActualMonomialBasisStillUnpaid :
+  SourceAndMonomial.actualMonomialBasisPaidHere
+    selected3BSourceAndMonomialBoundary
+  ≡ false
+selected3BActualMonomialBasisStillUnpaid = refl
