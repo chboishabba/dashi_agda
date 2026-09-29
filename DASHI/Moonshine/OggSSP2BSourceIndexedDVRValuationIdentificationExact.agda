@@ -329,6 +329,42 @@ analyticLengthAtSlot A slot =
     (lengthIsIndependentIsotropyDepth A slot)
 
 ------------------------------------------------------------------------
+-- 4a. Adapter into the PRE-EXISTING preferred-sector valuation interface.
+-- The sector site and geometry are consumed from their canonical owners;
+-- no Monster exponent or requested total occurs in the construction.
+------------------------------------------------------------------------
+
+sourceLengthAtPreferredSector :
+  (A : TwoBSourceIndexedValuationAuthority) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  normalizedDVRCompositionLength A
+    (localizeActualSourcePiece A
+      (sourceAtSlot A (sectorSlot sector)))
+  ≡ Preferred.weight Preferred.p2PreferredPresentation sector
+sourceLengthAtPreferredSector A sector =
+  trans
+    (lengthIsIndependentIsotropyDepth A (sectorSlot sector))
+    (trans
+      (cong Geometry.sectorIsotropyDenominatorTwoAdicDepth
+        (sectorSlotRoundTrip sector))
+      (sym
+        (Geometry.preferredP2WeightIsIsotropyDenominatorDepth
+          sector)))
+
+analyticLengthAtPreferredSector :
+  (A : TwoBSourceIndexedValuationAuthority) ->
+  (sector : Preferred.Sector Preferred.p2PreferredPresentation) ->
+  analyticMultiplicity A
+    (analyticTermFromLocalizedSource A
+      (localizeActualSourcePiece A
+        (sourceAtSlot A (sectorSlot sector))))
+  ≡ Preferred.weight Preferred.p2PreferredPresentation sector
+analyticLengthAtPreferredSector A sector =
+  trans
+    (sameLocalizedPiecePaysAnalyticMultiplicity A (sectorSlot sector))
+    (sourceLengthAtPreferredSector A sector)
+
+------------------------------------------------------------------------
 -- 4b. Same-object provenance prevents accidental reuse across sectors.
 ------------------------------------------------------------------------
 
