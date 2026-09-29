@@ -19,7 +19,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Rational.Base using (ℚ)
 open import Data.Product using (_×_; _,_)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact as H2
@@ -151,15 +151,47 @@ record CMP119CoreSemigroupH3
     -- The selected Wilson vectors are centered: the vacuum contribution
     -- has been subtracted in the ACTUAL H2-core physical Hilbert space.
     wilsonVector : SpectralObservable → Vector
-    VacuumOrthogonal : Vector → Set
-    selectedWilsonVectorCentered :
-      ∀ observable → VacuumOrthogonal (wilsonVector observable)
 
     -- Physical scalar product and time-evolution semigroup.  The operator is
     -- required to be the actual exp(-t H_core), not an auxiliary transfer.
     innerProduct : Vector → Vector → ℝ
+
+    -- This is a concrete inner-product equation with the very SAME core
+    -- reconstructed vacuum, not a caller-selected "orthogonal : Set".
+    selectedWilsonVectorCentered :
+      ∀ observable →
+      innerProduct
+        (Pinned.reconstructedVacuumCore
+          (H2.reconstructionCore h2) group)
+        (wilsonVector observable)
+      ≡ 0ℝ
+
     expNegativeTimeHamiltonian :
       Hamiltonian → Nat → Vector → Vector
+
+    semigroupAtZero :
+      ∀ vector →
+      expNegativeTimeHamiltonian hCore 0 vector ≡ vector
+
+    semigroupComposition :
+      ∀ first second vector →
+      expNegativeTimeHamiltonian hCore (first + second) vector
+      ≡ expNegativeTimeHamiltonian hCore first
+          (expNegativeTimeHamiltonian hCore second vector)
+
+    semigroupFixesActualVacuum :
+      ∀ time →
+      expNegativeTimeHamiltonian hCore time
+        (Pinned.reconstructedVacuumCore
+          (H2.reconstructionCore h2) group)
+      ≡
+      Pinned.reconstructedVacuumCore (H2.reconstructionCore h2) group
+
+    positiveSemigroupQuadraticForm :
+      ∀ time vector →
+      0ℝ ≤ℝ
+        innerProduct vector
+          (expNegativeTimeHamiltonian hCore time vector)
 
     IsOSTransferSemigroupOf :
       Hamiltonian →
