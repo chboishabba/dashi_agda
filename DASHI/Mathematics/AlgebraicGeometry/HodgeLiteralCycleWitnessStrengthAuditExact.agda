@@ -23,13 +23,12 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 1ℚ)
-open import Data.Product using (_,_)
+open import Data.Product using (Σ; _,_)
 open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
 import DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact as Literal
 import DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact as Exact
-open import Data.Product using (Σ)
 
 ------------------------------------------------------------------------
 -- Real witness-carrying refinement of the existing literal cycle carrier.
