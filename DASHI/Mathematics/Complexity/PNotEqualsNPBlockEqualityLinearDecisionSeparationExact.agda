@@ -17,15 +17,18 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityLinearDecisionSepar
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSemanticQuotientExponentialNoGoExact as Equality
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityResidualWidthWitnessExact as Block
+import DASHI.Mathematics.Complexity.PNotEqualsNPIndexedFormulaVariableReorderingExact as Rename
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1InstrumentedFormulaEvaluationExact as Eval
+open import Data.Fin.Base using (Fin)
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
 
@@ -109,6 +112,74 @@ linearDecisionAgreesWithBlockEqualityFormula left right =
   trans
     (equalityDecisionValueExact left right)
     (sym (Block.blockEqualityEvaluation left right))
+
+------------------------------------------------------------------------
+-- The SAME block-equality formula itself is linear in the bit width.
+-- Renaming its variables never changes the syntax-node count.
+------------------------------------------------------------------------
+
+nodeVisitsInvariantUnderRenaming :
+  ∀ {source target : Nat}
+    (rename : Fin source → Fin target)
+    (formula : SAT.BooleanFormula source) →
+  Eval.formulaNodeVisits (Rename.renameFormula rename formula)
+  ≡
+  Eval.formulaNodeVisits formula
+nodeVisitsInvariantUnderRenaming rename (SAT.variable index) =
+  refl
+nodeVisitsInvariantUnderRenaming rename (SAT.constant value) =
+  refl
+nodeVisitsInvariantUnderRenaming rename (SAT.negate formula) =
+  cong suc (nodeVisitsInvariantUnderRenaming rename formula)
+nodeVisitsInvariantUnderRenaming rename (SAT.conjunction left right) =
+  cong suc
+    (cong₂ _+_
+      (nodeVisitsInvariantUnderRenaming rename left)
+      (nodeVisitsInvariantUnderRenaming rename right))
+nodeVisitsInvariantUnderRenaming rename (SAT.disjunction left right) =
+  cong suc
+    (cong₂ _+_
+      (nodeVisitsInvariantUnderRenaming rename left)
+      (nodeVisitsInvariantUnderRenaming rename right))
+
+bitEqualityFormulaNodeVisits :
+  ∀ {variables : Nat}
+    (left right : Fin variables) →
+  Eval.formulaNodeVisits (Block.bitEqualityFormula left right)
+    ≡ 9
+bitEqualityFormulaNodeVisits left right =
+  refl
+
+tenNodesPerEqualityPair : Nat → Nat
+tenNodesPerEqualityPair zero = 1
+tenNodesPerEqualityPair (suc width) =
+  10 + tenNodesPerEqualityPair width
+
+blockEqualityFormulaLinearSyntax :
+  (width : Nat) →
+  Eval.formulaNodeVisits (Block.blockEqualityFormula width)
+  ≡
+  tenNodesPerEqualityPair width
+blockEqualityFormulaLinearSyntax zero =
+  refl
+blockEqualityFormulaLinearSyntax (suc width)
+    rewrite
+      bitEqualityFormulaNodeVisits
+        (Block.leftBlock Fin.zero)
+        (Block.rightBlock Fin.zero)
+      |
+      nodeVisitsInvariantUnderRenaming
+        Block.tailEmbedding
+        (Block.blockEqualityFormula width)
+      |
+      blockEqualityFormulaLinearSyntax width =
+  refl
+
+------------------------------------------------------------------------
+-- Consequently, ordered exponential width persists for a SAME-FORMULA
+-- family with a linear-size Boolean syntax tree and a linear-time direct
+-- comparator. This does not establish an algorithm-independent SAT bound.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- A single certified donor simultaneously exhibits:
