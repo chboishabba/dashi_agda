@@ -40,6 +40,8 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExa
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildDifferentNoGoExact as Different
 import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact as P2Depth
 import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact as P3Length
+import DASHI.Moonshine.OggSSP3BTateSigmaDeligneRapoportRecognitionExact as SigmaDR
+import DASHI.Moonshine.OggSSP3BCarnahanTateSigmaSplitExact as Tate
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -149,8 +151,8 @@ p2SourceSlotTotalNotLevelOneAxisCount :
 p2SourceSlotTotalNotLevelOneAxisCount ()
 
 p3GeometricLengthIsOne :
-  (alignment : P3Length.SigmaDR.SigmaDRAlignment) ->
-  (degree : P3Length.Tate.ThreeBTateDegree) ->
+  (alignment : SigmaDR.SigmaDRAlignment) ->
+  (degree : Tate.ThreeBTateDegree) ->
   P3Length.alignedGeometricLength alignment degree ≡ 1
 p3GeometricLengthIsOne = P3Length.alignedGeometricLengthIsOne
 
