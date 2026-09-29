@@ -188,3 +188,48 @@ module _
         (cong
           (λ x → - x + (nodeResidual k - nodeResidual (suc k)))
           (sym (projectedEdgeSplitsWilsonAndResidual k))))
+
+------------------------------------------------------------------------
+-- Two honest sufficient conditions for replacing the actual source beta by
+-- a projected action EDGE. Neither needs the old identity
+--    T4.effectiveAction(k) = CMP119.effectiveAction(k+1).
+-- Instead they ask only that the non-Wilson relevant remainder does not
+-- change across this RG step.
+------------------------------------------------------------------------
+
+  selectedPositiveWilsonBetaIsProjectedSourceEdge :
+    (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+    (nodeMeaning : ∀ k →
+      Raw.wilsonCoefficient source k
+      ≡ Flow.inverseCoupling trajectory k)
+    (residualStationary : ∀ k →
+      nodeResidual k ≡ nodeResidual (suc k)) →
+    ∀ k →
+    Flow.beta trajectory (suc k) ≡ projectedSourceEdge k
+  selectedPositiveWilsonBetaIsProjectedSourceEdge
+      trajectory nodeMeaning residualStationary k =
+    trans
+      (UV.sourceBetaIsWilsonCoefficientDifference
+        trajectory (Raw.wilsonCoefficient source) nodeMeaning k)
+      (sym (projectedEdgeAfterResidualCancellation residualStationary k))
+
+  selectedNegativeWilsonBetaIsNegativeProjectedSourceEdge :
+    (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+    (nodeMeaning : ∀ k →
+      Raw.wilsonCoefficient source k
+      ≡ - Flow.inverseCoupling trajectory k)
+    (residualStationary : ∀ k →
+      nodeResidual k ≡ nodeResidual (suc k)) →
+    ∀ k →
+    Flow.beta trajectory (suc k) ≡ - projectedSourceEdge k
+  selectedNegativeWilsonBetaIsNegativeProjectedSourceEdge
+      trajectory nodeMeaning residualStationary k =
+    trans
+      (UV.sourceBetaIsNegativeWilsonCoefficientDifference
+        trajectory (Raw.wilsonCoefficient source) nodeMeaning k)
+      (trans
+        (ℚRing.solve-∀
+          (Raw.wilsonCoefficient source k)
+          (Raw.wilsonCoefficient source (suc k)))
+        (cong -_ (sym
+          (projectedEdgeAfterResidualCancellation residualStationary k))))
