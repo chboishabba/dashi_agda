@@ -16,6 +16,9 @@ module DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact where
 --
 -- The actual F4 curve owner separately proves generator-level
 -- F(P)=P, F(Q)=-Q and the chord P+Q=shear(Q) in its own Mathlib carrier.
+-- The Lean actual curve owner now source-writes the full F4-rational
+-- elliptic 3-torsion theorem (tangent doubling gives 2P=-P for every point),
+-- but this has not received an exact-head kernel verification.
 -- The missing E(F4)[3] basis equivalence/actual Weil pairing and the
 -- absent analytic map to the RH signed cap are not inferred here.
 --
