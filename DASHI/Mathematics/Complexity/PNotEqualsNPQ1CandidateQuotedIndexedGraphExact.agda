@@ -16,7 +16,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (Maybe; nothing)
 open import Data.Nat.Base using (_<_)
-open import Data.Product using (Σ)
+open import Data.Product using (Σ; _×_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -39,6 +39,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1NumericIndexedGraphExact as Nu
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact as Budget
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateExact as Work
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableEdgeTableExact as Rows
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CompletedRootedSourceGateExact as Completed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateFailureExact as WorkFailure
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedDirectDPChargeBridgeExact as TraceCharge
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
@@ -195,6 +196,35 @@ module CandidateReference
     ⊥
   candidateRootedExhaustionBlocksPaidRun =
     TraceCharge.exhaustedRootedWorkBlocksPaidDirectDPRun
+
+  -- One exact candidate-derived full-depth source construction.
+  -- The gate returns the ACTUAL zero-arity canonical keys with identity
+  -- evidence, or nothing when the combined declared work fails strict fit.
+  completedCandidateRootedGate :
+    Maybe
+      (Σ
+        (Data.List.Base.List (Merge.SemanticKey zero))
+        (λ terminalKeys →
+          (terminalKeys
+            ≡ Root.rootedMergedSemanticKeys
+              (Completed.completeRootDescent exactIndexedRoot))
+          Data.Product.×
+          (Completed.completedRootedSourceWork exactIndexedRoot
+            < Q2.recursiveMeasure candidateState)))
+  completedCandidateRootedGate =
+    Completed.completedRootedSourceGate
+      exactIndexedRoot
+      (Q2.recursiveMeasure candidateState)
+
+  candidateCompleteExhaustionForcesFailure :
+    Q2.recursiveMeasure candidateState
+      ≤ Completed.completedRootedSourceWork exactIndexedRoot →
+    completedCandidateRootedGate ≡ nothing
+  candidateCompleteExhaustionForcesFailure exhausted =
+    Completed.completedRootedSourceFailsOnExhaustion
+      exactIndexedRoot
+      (Q2.recursiveMeasure candidateState)
+      exhausted
 
   sameQuotedCookFormula :
     exactCookFormula
