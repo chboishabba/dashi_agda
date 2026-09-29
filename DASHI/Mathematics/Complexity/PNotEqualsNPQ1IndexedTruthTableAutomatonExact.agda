@@ -62,6 +62,13 @@ decodeEncodeState :
 decodeEncodeState =
   Bits.finToBitsAfterBitsToFin
 
+encodeDecodeState :
+  ∀ {remaining : Nat}
+    (state : IndexedState remaining) →
+  encodeState (decodeState state) ≡ state
+encodeDecodeState =
+  Bits.bitsToFinAfterFinToBits
+
 ------------------------------------------------------------------------
 -- Actual deterministic total transitions for both Shannon actions.
 ------------------------------------------------------------------------
@@ -145,6 +152,15 @@ sameIndexedStateImpliesResidualEquality
       (trans
         (cong decodeState sameIndex)
         (indexRestrictionNodeExact right)))
+
+residualEqualityGivesEqualIndices :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Width.LayerNode {root = root} remaining} →
+  Width.LayerResidualEqual left right →
+  indexRestrictionNode left ≡ indexRestrictionNode right
+residualEqualityGivesEqualIndices =
+  cong encodeState ∘ Merge.residualEqualityGivesKeyEquality
 
 ------------------------------------------------------------------------
 -- TERMINAL LABELS
