@@ -103,23 +103,6 @@ record CMP119CoreGroupPhysicalPackage
         {S = S}
         (H2Core.coreInputs h2) covarianceLaws group publishedCMP116
 
-    Loop : Set
-
-    selectedWilsonCore :
-      Wilson.CMP119CoreSelectedWilsonPresentation
-        G X Configuration Position CurvaturePolynomial LocalOperator
-        OPECoefficient StressTensor Hilbert Hamiltonian Vector Loop
-        (H2Core.coreInputs h2) covarianceLaws group
-        (RealGap.testsCore realSelectedCore)
-
-    positiveGapCandidate :
-      Gap.PositiveEnergy
-        (R281.asReconstructedClusteringSpectrum
-          (RealGap.spectrumSourceCore realSelectedCore))
-        (Gap.gapCandidate
-          (R281.asReconstructedClusteringSpectrum
-            (RealGap.spectrumSourceCore realSelectedCore)))
-
     h1OS4Meaning :
       R583.CMP119CoreH1OS4Meaning
         G X Configuration Position CurvaturePolynomial LocalOperator
@@ -130,6 +113,35 @@ record CMP119CoreGroupPhysicalPackage
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S
         h2 covarianceLaws group publishedCMP116 realSelectedCore
+
+
+  -- H5 and R583 must use the same literal loop carrier, not two
+  -- independently selected types with a later coercion.
+  Loop : Set
+  Loop = R583.Loop h1OS4Meaning
+
+  field
+    selectedWilsonCore :
+      Wilson.CMP119CoreSelectedWilsonPresentation
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vector Loop
+        (H2Core.coreInputs h2) covarianceLaws group
+        (RealGap.testsCore realSelectedCore)
+
+    -- The full determining span and the R281-selected Wilson products
+    -- share the exact physical loop-observable generator.
+    sameLiteralWilsonCylinder :
+      R583.literalWilson h1OS4Meaning
+      ≡ Wilson.wilsonCore selectedWilsonCore
+
+    positiveGapCandidate :
+      Gap.PositiveEnergy
+        (R281.asReconstructedClusteringSpectrum
+          (RealGap.spectrumSourceCore realSelectedCore))
+        (Gap.gapCandidate
+          (R281.asReconstructedClusteringSpectrum
+            (RealGap.spectrumSourceCore realSelectedCore)))
+
 
     -- Full accepted-OS interpretation of this exact Schwinger family is a
     -- separate physical/semantic payment, not supplied by a bare OS4 record.
