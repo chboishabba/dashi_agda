@@ -13,7 +13,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _<ℝ_)
 open import Data.Product using (Σ; _×_; _,_)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -218,6 +218,18 @@ record CMP119CoreH1OS4Meaning
 
     translateWilson : WilsonProduct → Nat → WilsonProduct
     translateFull : FullTest → Nat → FullTest
+    inverseTranslateFull : FullTest → Nat → FullTest
+
+    -- At minimum, the proposed time translation must be a genuine
+    -- injective action.  A degenerate operation sending everything to zero
+    -- is therefore not an acceptable OS4 translation.
+    translateAtZero : ∀ test →
+      translateFull test 0 ≡ test
+    translateComposition : ∀ test first second →
+      translateFull (translateFull test first) second
+      ≡ translateFull test (first + second)
+    inverseTranslationLaw : ∀ test time →
+      inverseTranslateFull (translateFull test time) time ≡ test
 
     translateEmbedding :
       ∀ test time →
