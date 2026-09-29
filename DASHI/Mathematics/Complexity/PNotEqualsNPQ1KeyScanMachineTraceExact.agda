@@ -25,6 +25,8 @@ open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact as Merge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableKeySearchExact as Search
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1InstrumentedKeySearchExact as Instrumented
+open import Data.Product using (proj₂)
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
 
 ------------------------------------------------------------------------
@@ -118,6 +120,26 @@ scanMachineTrace query (head ∷ tail) position
 ... | inj₂ different =
   Executed.iteratesStep
     (scanMachineTrace query tail (suc position))
+
+------------------------------------------------------------------------
+-- This execution has exactly the count RETURNED by the instrumented scanner,
+-- rather than a merely similar externally chosen natural number.
+------------------------------------------------------------------------
+
+scanMachineTraceMatchesInstrumentedCount :
+  ∀ {remaining : Nat}
+    (query : Merge.SemanticKey remaining)
+    (keys : List (Merge.SemanticKey remaining))
+    (position : Nat) →
+  Executed.Iterates
+    (scanMachineStep query)
+    (proj₂ (Instrumented.scanKeyWithCharge query keys))
+    (scanStart keys position)
+    (scanMachineFinal query keys position)
+scanMachineTraceMatchesInstrumentedCount
+    query keys position
+    rewrite Instrumented.scanKeyCountExact query keys =
+  scanMachineTrace query keys position
 
 ------------------------------------------------------------------------
 -- Count and behavior are tied to the SAME finite-vector comparison source.
