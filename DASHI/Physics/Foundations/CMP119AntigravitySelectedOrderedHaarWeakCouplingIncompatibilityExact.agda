@@ -20,7 +20,7 @@ module DASHI.Physics.Foundations.CMP119AntigravitySelectedOrderedHaarWeakCouplin
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _<_; _+_; -_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary using (¬_)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -30,6 +30,7 @@ import DASHI.Physics.Foundations.CMP119AntigravitySelectedWilsonGibbsMinimalAnch
 import DASHI.Physics.Foundations.CMP119AntigravityActiveScaleInverseCouplingNoGoExact as Active
 import DASHI.Physics.Foundations.CMP119AntigravityLorentzianF2ContinuationExact as Lorentz
 import DASHI.Physics.Foundations.CMP119AntigravityWeakCouplingTraceEnergyNoGoExact as YM
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedActiveStressCorrectionThresholdExact as Correction
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
@@ -108,3 +109,44 @@ module _
             wilsonInsertion ordered background))
         (Active.activeCMP119ScaleTraceAnomalyNoGo
           continuation threshold scale active)
+
+    -- Stronger, quantified form: if the selected ordered-Haar source
+    -- genuinely has a second stress contribution X in its *same tensor*,
+    -- the already-derived Haar sign forces it below -A_YM, including T00.
+    -- No added assumption that X is negative.
+    orderedHaarRequiresDominatingExtraStress :
+      ∀ {Mode Atom betaData}
+      {history : History.FiniteModeInverseSquareTerminalHistoryData
+        trajectory Mode Atom betaData}
+      (continuation : Lorentz.LorentzianF2ContinuationReceipt)
+      (threshold : Active.ActiveScaleTraceThresholdCertificate history)
+      (scale : Nat) (active : History.ActiveScale history scale)
+      (ordered :
+        Haar.SelectedMetricFamilyOrderedHaarClosureInput
+          domain realization representation selected measureWeld
+          wilsonInsertion)
+      (background : Chain.Background activity)
+      (extraContribution : ℚ)
+      (sameSelectedStress :
+        Minimal.selectedDiagonalActiveSum
+          domain realization representation selected
+          measureWeld wilsonInsertion background
+        ≡
+        YM.activeStress (Active.activeScaleNoGoData
+          continuation threshold scale active)
+        + extraContribution) →
+      extraContribution <
+        - YM.activeStress (Active.activeScaleNoGoData
+          continuation threshold scale active)
+    orderedHaarRequiresDominatingExtraStress
+      continuation threshold scale active ordered background extraContribution
+      sameSelectedStress =
+      Correction.selectedNegativeStressRequiresBeyondYMCorrection
+        (Active.activeScaleNoGoData continuation threshold scale active)
+        (Minimal.selectedDiagonalActiveSum
+          domain realization representation selected
+          measureWeld wilsonInsertion background)
+        extraContribution sameSelectedStress
+        (Haar.selectedMetricFamilyOrderedHaarDiagonalActiveSumNegative
+          domain realization representation selected measureWeld
+          wilsonInsertion ordered background)
