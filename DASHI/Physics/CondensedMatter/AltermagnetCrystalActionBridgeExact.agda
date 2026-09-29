@@ -24,6 +24,7 @@ module DASHI.Physics.CondensedMatter.AltermagnetCrystalActionBridgeExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact as Native
 import DASHI.Physics.CondensedMatter.AltermagnetCoQuarterTaSeTwo as AM
@@ -84,7 +85,7 @@ composeAction : (g h : Bool) (x : CrystalSpinState) →
 composeAction false false x = refl
 composeAction false true x = refl
 composeAction true false x = refl
-composeAction true true x = exchangeInvolution x
+composeAction true true x = sym (exchangeInvolution x)
 
 nativeCrystalSpinAction : Native.GroupAction
 nativeCrystalSpinAction = record
