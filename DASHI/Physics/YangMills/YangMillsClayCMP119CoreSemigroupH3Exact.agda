@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Rational.Base using (ℚ)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRoun
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCovarianceExact as Cov
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
+import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
@@ -112,6 +113,40 @@ record CMP119CoreSemigroupH3
     selectedGapIsTransferCandidate :
       Gap.gapCandidate spectrum ≡
       R302.candidateEnergy (R331.coordinateCore indexedTransfer)
+
+    -- The R281 connectedCorrelation is the MAGNITUDE of its selected
+    -- left/right covariance.  An OS positive spectral measure describes a
+    -- SAME-WILSON autocorrelation, not an arbitrary signed cross-covariance.
+    -- These equalities bind the selected R281 tests to that physical pairing.
+    physicalWilsonObservable :
+      SpectralObservable → Configuration → ℝ
+
+    translatePhysicalWilson :
+      (Configuration → ℝ) → Nat → Configuration → ℝ
+
+    physicalTranslationAtZero :
+      ∀ wilson → translatePhysicalWilson wilson 0 ≡ wilson
+
+    physicalTranslationComposition :
+      ∀ wilson first second →
+      translatePhysicalWilson
+        (translatePhysicalWilson wilson first) second
+      ≡ translatePhysicalWilson wilson (first + second)
+
+    selectedR281LeftIsSameWilson :
+      ∀ observable time →
+      R278.left (RealGap.testsCore application)
+        (R281.indexFor (RealGap.spectrumSourceCore application)
+          observable time)
+      ≡ physicalWilsonObservable observable
+
+    selectedR281RightIsTimeTranslatedWilson :
+      ∀ observable time →
+      R278.right (RealGap.testsCore application)
+        (R281.indexFor (RealGap.spectrumSourceCore application)
+          observable time)
+      ≡ translatePhysicalWilson
+          (physicalWilsonObservable observable) time
 
     -- The selected Wilson vectors are centered: the vacuum contribution
     -- has been subtracted in the ACTUAL H2-core physical Hilbert space.
