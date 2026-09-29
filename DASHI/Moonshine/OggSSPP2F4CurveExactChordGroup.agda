@@ -1146,6 +1146,184 @@ verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaZetaSquared
 verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZeta hx hy = refl
 verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZetaSquared hx ()
 
+------------------------------------------------------------------------
+-- Frobenius and rho preserve this same independently computed chord law.
+-- These are actual homomorphism equations on the finite geometric group,
+-- not merely equivariant statements about a nine-label set.
+------------------------------------------------------------------------
+
+frobeniusPreservesChordAddition :
+  (p q : RationalF4Point) →
+  Action.frobenius (p ⊞ q) ≡
+  Action.frobenius p ⊞ Action.frobenius q
+frobeniusPreservesChordAddition Curve.infinity Curve.infinity = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) Curve.infinity = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p00) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p01) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p1Zeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p1ZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaZetaSquared) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
+frobeniusPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+
+rhoPreservesChordAddition :
+  (p q : RationalF4Point) →
+  Action.rho (p ⊞ q) ≡
+  Action.rho p ⊞ Action.rho q
+rhoPreservesChordAddition Curve.infinity Curve.infinity = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition Curve.infinity (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p00) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p01) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1Zeta) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.p1ZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZeta) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZeta) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) Curve.infinity = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p00) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p01) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p1Zeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.p1ZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaZetaSquared) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
+rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin = Attribution.repositoryNewExtension
 
@@ -1158,7 +1336,8 @@ record Boundary : Set where
     everyRationalPointThreeTorsion : Bool
     exactPQGroupBidi : Bool
     frobeniusReflectionAndRhoShear : Bool
+    bothActionsPreserveIndependentChordAddition : Bool
     actualMathlibEllipticGroupComparison : Bool
     gamma0FourMarkedScheme : Bool
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true true true true false false
+canonicalBoundary = boundary true true true true true true true false false
