@@ -361,3 +361,18 @@ label population and no model checkpoint have been supplied or evaluated
 in this interaction. Real-world inference and the source-vs-differentiable
 parity receipt still must be executed. Kernel status of new formal modules
 must also be checked against exact PR heads.
+
+### Required external-source manifest
+
+`scripts/tessera_differentiable_attribution.py` now refuses to run without
+`--input-manifest` with **all** of:
+`s2_band_order` (exact canonical ten-band list), `s1_band_order`
+(`["VV","VH"]`), `s2_raw_units`, `s1_raw_units`, `year`,
+`cell_id`, `upstream_preprocessing_revision`,
+`s2_cloud_qa_provenance`, `s1_acquisition_provenance`,
+`day_of_year_provenance`, and SHA-256 of the exact `raw_pixel.npz`.
+Its metadata checks and float equality against the original student
+`infer.encode_pixels` are independent validation barriers. The manifest
+is supplied source testimony, not a proof that ESA raw imagery was
+calibrated correctly. The parity check proves only numerical agreement
+with upstream inference for that particular supplied source array.
