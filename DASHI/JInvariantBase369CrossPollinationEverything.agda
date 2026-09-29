@@ -505,3 +505,5 @@ import DASHI.Moonshine.OggSSPP2FourARestrictedFingerprintOccurrenceNoGoExact
 import DASHI.Moonshine.OggSSPP2BanerjeeF4SpecialFibreJacobianExact
 
 import DASHI.Moonshine.OggSSPSmallCharacteristicTetrationCorrectionSeparationExact
+
+import DASHI.Moonshine.OggSSPP2F4CurveSheet9FrobeniusBidiExact
