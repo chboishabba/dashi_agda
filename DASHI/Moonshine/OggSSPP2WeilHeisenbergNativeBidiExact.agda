@@ -26,6 +26,8 @@ open import Data.Product using (_,_)
 
 import DASHI.Moonshine.OggSSPEllipticNineWeilHeisenbergFiniteActionExact as W
 import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact as A
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
+import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 
 tritToF3 : Trit → W.F3
 tritToF3 neg = W.m
@@ -857,3 +859,111 @@ nativeCenterToWeil :
 nativeCenterToWeil neg = refl
 nativeCenterToWeil zer = refl
 nativeCenterToWeil pos = refl
+
+------------------------------------------------------------------------
+-- Action-level transport: the quadratic correction is NOT a new action.
+-- It is the exact native-cocycle representative of W.shearLift.
+------------------------------------------------------------------------
+
+nativeShearOne : A.RankOneHeisenberg → A.RankOneHeisenberg
+nativeShearOne (A.heisenbergOne x y z) =
+  A.heisenbergOne
+    (G._+3_ x y) y
+    (G._+3_ z (H._*3_ neg (H._*3_ y y)))
+
+nativeShearToWeil :
+  (g : A.RankOneHeisenberg) →
+  nativeToWeil (nativeShearOne g)
+  ≡ W.shearLift (nativeToWeil g)
+nativeShearToWeil (A.heisenbergOne neg neg neg) = refl
+nativeShearToWeil (A.heisenbergOne neg neg zer) = refl
+nativeShearToWeil (A.heisenbergOne neg neg pos) = refl
+nativeShearToWeil (A.heisenbergOne neg zer neg) = refl
+nativeShearToWeil (A.heisenbergOne neg zer zer) = refl
+nativeShearToWeil (A.heisenbergOne neg zer pos) = refl
+nativeShearToWeil (A.heisenbergOne neg pos neg) = refl
+nativeShearToWeil (A.heisenbergOne neg pos zer) = refl
+nativeShearToWeil (A.heisenbergOne neg pos pos) = refl
+nativeShearToWeil (A.heisenbergOne zer neg neg) = refl
+nativeShearToWeil (A.heisenbergOne zer neg zer) = refl
+nativeShearToWeil (A.heisenbergOne zer neg pos) = refl
+nativeShearToWeil (A.heisenbergOne zer zer neg) = refl
+nativeShearToWeil (A.heisenbergOne zer zer zer) = refl
+nativeShearToWeil (A.heisenbergOne zer zer pos) = refl
+nativeShearToWeil (A.heisenbergOne zer pos neg) = refl
+nativeShearToWeil (A.heisenbergOne zer pos zer) = refl
+nativeShearToWeil (A.heisenbergOne zer pos pos) = refl
+nativeShearToWeil (A.heisenbergOne pos neg neg) = refl
+nativeShearToWeil (A.heisenbergOne pos neg zer) = refl
+nativeShearToWeil (A.heisenbergOne pos neg pos) = refl
+nativeShearToWeil (A.heisenbergOne pos zer neg) = refl
+nativeShearToWeil (A.heisenbergOne pos zer zer) = refl
+nativeShearToWeil (A.heisenbergOne pos zer pos) = refl
+nativeShearToWeil (A.heisenbergOne pos pos neg) = refl
+nativeShearToWeil (A.heisenbergOne pos pos zer) = refl
+nativeShearToWeil (A.heisenbergOne pos pos pos) = refl
+
+nativeReflectionToWeil :
+  (g : A.RankOneHeisenberg) →
+  nativeToWeil (A.reflectionOne g)
+  ≡ W.reflectionLift (nativeToWeil g)
+nativeReflectionToWeil (A.heisenbergOne neg neg neg) = refl
+nativeReflectionToWeil (A.heisenbergOne neg neg zer) = refl
+nativeReflectionToWeil (A.heisenbergOne neg neg pos) = refl
+nativeReflectionToWeil (A.heisenbergOne neg zer neg) = refl
+nativeReflectionToWeil (A.heisenbergOne neg zer zer) = refl
+nativeReflectionToWeil (A.heisenbergOne neg zer pos) = refl
+nativeReflectionToWeil (A.heisenbergOne neg pos neg) = refl
+nativeReflectionToWeil (A.heisenbergOne neg pos zer) = refl
+nativeReflectionToWeil (A.heisenbergOne neg pos pos) = refl
+nativeReflectionToWeil (A.heisenbergOne zer neg neg) = refl
+nativeReflectionToWeil (A.heisenbergOne zer neg zer) = refl
+nativeReflectionToWeil (A.heisenbergOne zer neg pos) = refl
+nativeReflectionToWeil (A.heisenbergOne zer zer neg) = refl
+nativeReflectionToWeil (A.heisenbergOne zer zer zer) = refl
+nativeReflectionToWeil (A.heisenbergOne zer zer pos) = refl
+nativeReflectionToWeil (A.heisenbergOne zer pos neg) = refl
+nativeReflectionToWeil (A.heisenbergOne zer pos zer) = refl
+nativeReflectionToWeil (A.heisenbergOne zer pos pos) = refl
+nativeReflectionToWeil (A.heisenbergOne pos neg neg) = refl
+nativeReflectionToWeil (A.heisenbergOne pos neg zer) = refl
+nativeReflectionToWeil (A.heisenbergOne pos neg pos) = refl
+nativeReflectionToWeil (A.heisenbergOne pos zer neg) = refl
+nativeReflectionToWeil (A.heisenbergOne pos zer zer) = refl
+nativeReflectionToWeil (A.heisenbergOne pos zer pos) = refl
+nativeReflectionToWeil (A.heisenbergOne pos pos neg) = refl
+nativeReflectionToWeil (A.heisenbergOne pos pos zer) = refl
+nativeReflectionToWeil (A.heisenbergOne pos pos pos) = refl
+
+-- The exact dihedral relation, now in the existing rank-one subgroup.
+nativeDihedralRelation :
+  (g : A.RankOneHeisenberg) →
+  A.reflectionOne (nativeShearOne (A.reflectionOne g))
+    ≡ nativeShearOne (nativeShearOne g)
+nativeDihedralRelation (A.heisenbergOne neg neg neg) = refl
+nativeDihedralRelation (A.heisenbergOne neg neg zer) = refl
+nativeDihedralRelation (A.heisenbergOne neg neg pos) = refl
+nativeDihedralRelation (A.heisenbergOne neg zer neg) = refl
+nativeDihedralRelation (A.heisenbergOne neg zer zer) = refl
+nativeDihedralRelation (A.heisenbergOne neg zer pos) = refl
+nativeDihedralRelation (A.heisenbergOne neg pos neg) = refl
+nativeDihedralRelation (A.heisenbergOne neg pos zer) = refl
+nativeDihedralRelation (A.heisenbergOne neg pos pos) = refl
+nativeDihedralRelation (A.heisenbergOne zer neg neg) = refl
+nativeDihedralRelation (A.heisenbergOne zer neg zer) = refl
+nativeDihedralRelation (A.heisenbergOne zer neg pos) = refl
+nativeDihedralRelation (A.heisenbergOne zer zer neg) = refl
+nativeDihedralRelation (A.heisenbergOne zer zer zer) = refl
+nativeDihedralRelation (A.heisenbergOne zer zer pos) = refl
+nativeDihedralRelation (A.heisenbergOne zer pos neg) = refl
+nativeDihedralRelation (A.heisenbergOne zer pos zer) = refl
+nativeDihedralRelation (A.heisenbergOne zer pos pos) = refl
+nativeDihedralRelation (A.heisenbergOne pos neg neg) = refl
+nativeDihedralRelation (A.heisenbergOne pos neg zer) = refl
+nativeDihedralRelation (A.heisenbergOne pos neg pos) = refl
+nativeDihedralRelation (A.heisenbergOne pos zer neg) = refl
+nativeDihedralRelation (A.heisenbergOne pos zer zer) = refl
+nativeDihedralRelation (A.heisenbergOne pos zer pos) = refl
+nativeDihedralRelation (A.heisenbergOne pos pos neg) = refl
+nativeDihedralRelation (A.heisenbergOne pos pos zer) = refl
+nativeDihedralRelation (A.heisenbergOne pos pos pos) = refl
