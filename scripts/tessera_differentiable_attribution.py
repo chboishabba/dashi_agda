@@ -188,6 +188,9 @@ def main():
     p.add_argument("--output",required=True)
     p.add_argument("--prefix",type=int,choices=VALID_PREFIXES,default=128)
     p.add_argument("--device",default="cpu")
+    p.add_argument("--probe",help="independently fitted physical_probe_dK.npz")
+    p.add_argument("--probe-validation",help="heldout validation.json from matching probe fitting")
+    p.add_argument("--integrated-steps",type=int,default=0)
     a=p.parse_args()
     sys.path.insert(0,str(Path(a.upstream_student).resolve()))
     import model as student
@@ -203,19 +206,48 @@ def main():
         arrays["s2_bands"],arrays["s2_doys"],arrays["s2_masks"],
         arrays["s1_asc_bands"],arrays["s1_asc_doys"],
         arrays["s1_desc_bands"],arrays["s1_desc_doys"],infer,student,a.device)
-    emb,out,grad=jacobians(model,inputs,raws,prefix=a.prefix)
+    head = None
+    probe_receipt = None
+    if a.probe:
+        if not a.probe_validation:
+            raise ValueError("physical probe requires holdout validation receipt")
+        probe_receipt=json.loads(Path(a.probe_validation).read_text())
+        if str(a.prefix) not in probe_receipt.get("heads",{}):
+            raise ValueError("missing heldout prefix metrics")
+        with np.load(a.probe,allow_pickle=False) as pz:
+            mean,scale,W,b=(pz[k].copy() for k in ("mean","scale","weight","bias"))
+        if mean.shape!=(a.prefix,) or scale.shape!=(a.prefix,) or W.ndim!=2 or W.shape[1]!=a.prefix or b.shape!=(W.shape[0],):
+            raise ValueError("physical probe shape mismatch")
+        if np.any(scale<=0) or not all(np.isfinite(z).all() for z in (mean,scale,W,b)):
+            raise ValueError("invalid probe coefficients")
+        class StandardizedProbe(torch.nn.Module):
+            def __init__(self):
+                super().__init__()
+                for name,arr in (("mean",mean),("scale",scale),("W",W),("b",b)):
+                    self.register_buffer(name,torch.tensor(arr,dtype=torch.float32,device=a.device))
+            def forward(self,x):
+                return torch.nn.functional.linear((x-self.mean)/self.scale,self.W,self.b)
+        head=StandardizedProbe()
+    emb,out,grad=jacobians(model,inputs,raws,prefix=a.prefix,decoder=head)
     # No fitted physical decoder here: gradients relate embedding coords to
     # selected sensor channels, not vegetation density or other labels.
     np.savez_compressed(a.output,embedding=emb,prefix=out,
                         grad_s2=grad[0],
                         **{f"grad_s1_{i}":g for i,g in enumerate(grad[1:])})
     digest=hashlib.sha256(Path(a.checkpoint).read_bytes()).hexdigest()
+    if probe_receipt is not None and probe_receipt.get("tessera_checkpoint_sha256") != digest:
+        raise ValueError("probe was fit using a different encoder checkpoint hash")
+    ig = integrated_gradients(model, inputs, raws, prefix=a.prefix,
+         decoder=head, steps=a.integrated_steps) if a.integrated_steps else None
     receipt={"checkpoint_sha256":digest,"upstream_student":str(a.upstream_student),
              "input_sha256":hashlib.sha256(Path(a.input_npz).read_bytes()).hexdigest(),
              "prefix":a.prefix,"indices":indices,
              "gradient_shape":[list(g.shape) for g in grad],
-             "claim":"Local sensor gradients of student embedding coordinates, not causal physical effects.",
-             "physical_decoder":"NONE; requires independent field-labelled training and validation",
+             "claim":"Local gradients of fitted predictions (if probe supplied) or embedding coordinates; neither is a causal environmental effect.",
+             "physical_decoder":("independently fitted Ridge probe; still observational"
+                 if head is not None else "NONE; output gradients are learned features"),
+             "probe_validation":probe_receipt,
+             "integrated_gradients":ig,
              "preprocessing":"upstream v2 student means/std, frozen discrete acquisition selection"}
     Path(str(a.output)+".json").write_text(json.dumps(receipt,indent=2)+"\n")
 
