@@ -1,0 +1,44 @@
+name: Woogaroo Earth-Embedding Python Verification
+on:
+  push:
+    branches:
+      - research/earth-embeddings-woogaroo-20260929
+    paths:
+      - 'scripts/*earth_embedding*.py'
+      - 'scripts/tessera_differentiable_attribution.py'
+      - 'scripts/train_tessera_physical_probes.py'
+      - 'scripts/alphaearth_cog_quantization.py'
+      - 'scripts/cross_model_alignment.py'
+      - 'scripts/sample_woogaroo_embeddings.py'
+      - 'tests/test_*embedding*.py'
+      - 'tests/test_alphaearth_cog_quantization.py'
+      - 'tests/test_cross_model_alignment.py'
+      - '.github/workflows/earth-embedding-python.yml'
+  pull_request:
+    paths:
+      - 'scripts/*earth_embedding*.py'
+      - 'scripts/tessera_differentiable_attribution.py'
+      - 'scripts/train_tessera_physical_probes.py'
+      - 'scripts/alphaearth_cog_quantization.py'
+      - 'scripts/cross_model_alignment.py'
+      - 'scripts/sample_woogaroo_embeddings.py'
+      - 'tests/test_*embedding*.py'
+      - 'tests/test_alphaearth_cog_quantization.py'
+      - 'tests/test_cross_model_alignment.py'
+      - '.github/workflows/earth-embedding-python.yml'
+jobs:
+  synthetic-and-gradient-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install numerical dependencies
+        run: |
+          python -m pip install numpy scipy scikit-learn pyproj torch --extra-index-url https://download.pytorch.org/whl/cpu
+      - name: Execute Earth embedding regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_*embedding*.py' -v
+          python -m unittest discover -s tests -p 'test_alphaearth_cog_quantization.py' -v
+          python -m unittest discover -s tests -p 'test_cross_model_alignment.py' -v
