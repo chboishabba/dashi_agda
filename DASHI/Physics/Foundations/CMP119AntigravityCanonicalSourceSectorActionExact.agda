@@ -47,6 +47,9 @@ record CMP119NormalizedSectorSource
     (Density Background Fluctuation : Set) : Set₁ where
   field
     terminalScale : Nat
+    -- This is g_k, NOT inverse coupling u_k. Source-specific inverse-
+    -- square representation is a separate physical proof.
+    couplingAt : Nat → ℚ
     densityAt : Nat → Density
     backgroundAt : Nat → Background
     fluctuationAt : Nat → Fluctuation
@@ -84,7 +87,7 @@ module _
     ; Raw.CMP119SourceNativeRawState.fluctuationFields =
         fluctuationAt sectors
     ; Raw.CMP119SourceNativeRawState.runningCoupling =
-        Flow.inverseCoupling trajectory
+        couplingAt sectors
     ; Raw.CMP119SourceNativeRawState.wilsonActionTerm =
         λ _ → T4.plaquetteBasisAction
     ; Raw.CMP119SourceNativeRawState.regularSmallFieldTerm =
