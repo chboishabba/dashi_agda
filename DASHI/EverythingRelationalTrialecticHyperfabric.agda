@@ -144,3 +144,5 @@ import DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact
 import DASHI.Reasoning.Trialectic369MonomialMultiplicityBasisSpecialisationExact
 
 import DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact
+
+import DASHI.Reasoning.Trialectic369MonomialTenByNineTransportExact
