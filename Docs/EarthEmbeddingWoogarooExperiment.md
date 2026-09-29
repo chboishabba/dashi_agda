@@ -201,3 +201,58 @@ embedding channels no guaranteed physical meaning; Rahman's per-variable
 interpretations apply to his sampled study, not to an unqualified A17
 vegetation axis in every landscape. Source: 
 https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL
+
+## Fourth tranche — learned-coordinate interpretability
+
+**Agda:** `DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda`.
+**Lean:** `EarthEmbeddingInterpretability.lean`.
+These own learned encoder checkpoints/preprocessing, independent physical
+targets, local decoder and encoder derivative surfaces, composed candidate
+sensor attribution, tangent-restricted attribution, strict held-out provenance
+and invertible-coordinate non-identifiability. They do **not** label any
+individual band `A00`…`A63` or TESSERA 0…127 as a fixed physical quantity.
+
+The exact algebraic reparameterisation result says
+`decode (undo (change (encode x))) = decode (encode x)` whenever
+`undo ∘ change` is identity. Consequently the same overall
+predictions can arise from multiple learned coordinate systems. This
+non-identifiability does not exclude empirically stable directions under
+a specified basis or locally valid concepts.
+
+The Lean owner additionally declares genuine `HasFDerivAt` premises for
+both differentiable maps and uses the Fréchet chain rule to compose them.
+The Agda owner intentionally represents their derivatives as **candidates**:
+it does not assert a chain rule in an arbitrary scalar set; a constructive
+real derivative development remains necessary to promote those candidates
+to mathematically validated derivatives.
+
+For differentiable TESSERA checkpoints, estimate (a) decoder Jacobian,
+(b) encoder Jacobian, and (c) their composition on genuine Sentinel-1/Sentinel-2
+time-series and QA masks. Tangent restriction uses a locally fitted tangent
+map rather than arbitrary off-manifold edits. Validate with independent
+labels, observed time spans and spatial holdouts. Integrating gradients over
+a baseline path requires an additional baseline, quadrature tolerance and
+perturbation-validity receipt; such a numerical producer has **not** run.
+
+The released Cambridge v2 student checkpoints are downloadable, and the
+medium checkpoint is approximately 84 MB. The teacher checkpoint is a
+separate 1024-dimensional representation, **not** a student 128-dimensional
+Matryoshka vector: see the upstream README:
+https://github.com/ucam-eo/tessera/blob/master/tessera_infer_v2/README.md
+
+No public AlphaEarth encoder weights have been verified by this work. Black-box
+probing of its published embeddings is available; white-box encoder backprop
+is proposed only for checkpoints actually obtained and whose processing
+pipeline is matched.
+
+Reference:
+- https://arxiv.org/abs/2602.10354 (Rahman, empirical physical probing)
+- https://arxiv.org/abs/2604.18715 (Rahman et al., local geometry)
+- https://arxiv.org/abs/2607.03949 (Feng et al., v2 Matryoshka)
+- https://github.com/ucam-eo/tessera (original software/model provenance)
+
+**Validation wall:** New modules are committed and included in targeted
+Agda/Lean workflows, but neither local kernel check nor model-dependent
+gradient experiment is claimed completed. The empirical pipeline needs
+verified model checkpoints, Sentinel temporal inputs, Queensland field
+labels, and end-to-end source/process version receipts.
