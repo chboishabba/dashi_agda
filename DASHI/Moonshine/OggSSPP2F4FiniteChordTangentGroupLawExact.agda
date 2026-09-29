@@ -432,7 +432,7 @@ chordSumAssociative p q r =
             (cong
               (Plane.centerPlus (Eigen.curveToEigenPlane p))
               (sym (chordSumEigenHom q r)))
-            (sym (chordSumEigenHom p (chordSum q r))))))
+            (sym (chordSumEigenHom p (chordSum q r)))))))
 
 chordSumCommutative :
   (p q : Curve.RationalF4Point) →
