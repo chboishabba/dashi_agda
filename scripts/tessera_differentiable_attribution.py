@@ -228,6 +228,22 @@ def main():
             def forward(self,x):
                 return torch.nn.functional.linear((x-self.mean)/self.scale,self.W,self.b)
         head=StandardizedProbe()
+    # Source-exact output parity: differentiation is only trustworthy if
+    # this prepared tensor reproduces the unchanged upstream no-grad encoder.
+    with torch.no_grad():
+        upstream=infer.encode_pixels(
+            model,arrays["s2_bands"],arrays["s2_doys"],
+            s1_asc_bands=arrays["s1_asc_bands"],
+            s1_asc_doys=arrays["s1_asc_doys"],
+            s1_desc_bands=arrays["s1_desc_bands"],
+            s1_desc_doys=arrays["s1_desc_doys"],
+            s2_masks=arrays["s2_masks"],
+            device=torch.device(a.device),batch_pixels=1)
+        ours=model.encode(*inputs).detach().cpu().numpy()
+    parity_error=float(np.max(np.abs(upstream-ours)))
+    if not np.isfinite(parity_error) or parity_error>1e-4:
+        raise RuntimeError(
+          f"preprocessing parity failed: max upstream difference {parity_error}")
     emb,out,grad=jacobians(model,inputs,raws,prefix=a.prefix,decoder=head)
     # No fitted physical decoder here: gradients relate embedding coords to
     # selected sensor channels, not vegetation density or other labels.
@@ -248,7 +264,9 @@ def main():
                  if head is not None else "NONE; output gradients are learned features"),
              "probe_validation":probe_receipt,
              "integrated_gradients":ig,
-             "preprocessing":"upstream v2 student means/std, frozen discrete acquisition selection"}
+             "preprocessing":"upstream v2 student means/std, frozen discrete acquisition selection",
+             "upstream_inference_max_abs_difference":parity_error,
+             "upstream_parity_tolerance":1e-4}
     Path(str(a.output)+".json").write_text(json.dumps(receipt,indent=2)+"\n")
 
 
