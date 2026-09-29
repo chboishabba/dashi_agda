@@ -106,3 +106,37 @@ situatedFactorsPermission =
 -- rather than reimplemented as ersatz Indigenous, feminist or analytic law.
 -- Custodial duty, Two-Eyed Seeing, Kimmerer acknowledgement and
 -- Lacan/Irigaray grammar remain separate authority/interpretation surfaces.
+
+------------------------------------------------------------------------
+-- ADMISSIBILITY IS QUERY-INDEXED, NOT A PROPERTY OF A GRID CELL.
+-- A consumer may use the full situated representation if its externally
+-- supplied authority/consent obligations are separately discharged.
+------------------------------------------------------------------------
+
+record AdmissibilityGate : Set₁ where
+  field
+    State : Set
+    Observer : Set
+    query : State → CustodialDecision
+    observer : State → Observer
+    permissionAdequate : INF.FactorsThrough observer query
+    custodianAuthorityReceipt : Set
+    authorityEvidence : custodianAuthorityReceipt
+    sourceRevisionReceipt : Set
+    sourceEvidence : sourceRevisionReceipt
+
+-- If an alleged admissible grid-only model claims to answer this permission
+-- query, its adequacy field contradicts the established collision.
+record ImpossibleGridPermissionGate : Set₁ where
+  field
+    gridAdequacy : INF.FactorsThrough gridProjection permissionDecision
+    authorityReceipt : Set
+    authorityEvidence : authorityReceipt
+
+gridPermissionGateImpossible : ImpossibleGridPermissionGate → ⊥
+gridPermissionGateImpossible gate =
+  gridCannotDeterminePermission
+    (ImpossibleGridPermissionGate.gridAdequacy gate)
+
+-- No such obstruction applies merely from the situated projection: it
+-- factors for this query. Actual authority still needs independent evidence.
