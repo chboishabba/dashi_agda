@@ -638,3 +638,5 @@ import DASHI.Physics.Closure.NSTriadKNR650SeparatedQNestedHomogeneityBoundaryRou
 import DASHI.Physics.Closure.NSTriadKNR650SignedOrbitPacketWeldRound815Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650IntegratedSignedOrbitPaymentRound816Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650SignedOrbitAugmentedEndpointRound817Exact
