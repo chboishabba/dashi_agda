@@ -79,6 +79,47 @@ historicalCoreAloneDoesNotCreateHomSameObjectWeld :
 historicalCoreAloneDoesNotCreateHomSameObjectWeld ()
 
 ------------------------------------------------------------------------
+-- 1b. Historical action equation forgets to the canonical action equation.
+------------------------------------------------------------------------
+
+historicalActionToCanonical :
+  ∀ {Monster K}
+    (core :
+      Historical.Selected3BLinearAcquisitionCore {Monster} {K})
+    (homWeld :
+      Canonical.CanonicalLinearHomSameObjectWeld
+        (Historical.linearZetaProducer core)
+        (Historical.multiplicityHomSpace core)) →
+  Historical.Selected3BNormalizerActionIntertwiningOnly
+    (Historical.scaffoldFromCore core) →
+  Canonical.CanonicalSelected3BActionIntertwining
+    (canonicalCoreFromHistoricalCore core homWeld)
+historicalActionToCanonical core homWeld action =
+  record
+    { intertwines =
+        Historical.normalizerActionIntertwines action
+    }
+
+historicalCoreMinCutToCanonicalCompletion :
+  ∀ {Monster K}
+    (core :
+      Historical.Selected3BLinearAcquisitionCore {Monster} {K})
+    (homWeld :
+      Canonical.CanonicalLinearHomSameObjectWeld
+        (Historical.linearZetaProducer core)
+        (Historical.multiplicityHomSpace core))
+    (action :
+      Historical.Selected3BNormalizerActionIntertwiningOnly
+        (Historical.scaffoldFromCore core)) →
+  Canonical.CanonicalSelected3BLinearCompletion {Monster} {K}
+historicalCoreMinCutToCanonicalCompletion core homWeld action =
+  record
+    { core = canonicalCoreFromHistoricalCore core homWeld
+    ; actionIntertwining =
+        historicalActionToCanonical core homWeld action
+    }
+
+------------------------------------------------------------------------
 -- 2. Reverse promotion is intentionally not part of the canonical lane.
 ------------------------------------------------------------------------
 
@@ -98,6 +139,8 @@ record Trialectic369Selected3BLinearCoreCompatibilityBoundary : Set where
     historicalCoreAloneSufficesForCanonicalCore : Bool
     historicalCorePlusHomWeldCompilesCanonicalCore : Bool
     historicalCorePlusHomWeldCompilesSameLinearRoute : Bool
+    historicalActionEquationCompilesCanonicalAction : Bool
+    historicalCoreMinCutCompilesCanonicalCompletion : Bool
     canonicalCoreRequiresHistoricalReversePromotion : Bool
     historicalExtraFieldsRemainAvailableForProvenance : Bool
 
@@ -105,4 +148,4 @@ canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary :
   Trialectic369Selected3BLinearCoreCompatibilityBoundary
 canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary =
   trialectic-369-selected3b-linear-core-compatibility-boundary
-    false true true false true
+    false true true true true false true
