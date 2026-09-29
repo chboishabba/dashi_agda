@@ -58,10 +58,10 @@ signedInteraction :
     (Literal.literalBetaInt
       (Constructor.asPhysicalRunningCouplingData weld) k)
     (quarticBudget source k)
-signedInteraction source k =
+signedInteraction {weld = weld} source k =
   Absolute.operatorNormDominatesCoordinate
     (Literal.literalBetaInt
-      (Constructor.asPhysicalRunningCouplingData _) k)
+      (Constructor.asPhysicalRunningCouplingData weld) k)
     (quarticBudget source k)
     (Literal.signedQuarticRemainder (certificate source k))
 
