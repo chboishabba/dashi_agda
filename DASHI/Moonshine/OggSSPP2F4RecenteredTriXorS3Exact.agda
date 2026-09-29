@@ -21,6 +21,7 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import Base369 as Base
 import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact as Legacy
+import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 
 advance : Base.TriTruth → Base.TriTruth
 advance Base.tri-low = Base.tri-mid
@@ -117,7 +118,7 @@ centerAssociative Base.tri-high Base.tri-high Base.tri-mid = refl
 centerAssociative Base.tri-high Base.tri-high Base.tri-high = refl
 
 CenteredNine : Set
-CenteredNine = Legacy.Phase.PhaseQuotient9
+CenteredNine = Phase.PhaseQuotient9
 
 centerZero : CenteredNine
 centerZero = Base.tri-mid , Base.tri-mid
@@ -128,10 +129,10 @@ centerPlus (a , b) (c , d) = centerAdd a c , centerAdd b d
 centerMinus : CenteredNine → CenteredNine
 centerMinus (a , b) = centerNeg a , centerNeg b
 
-toOriginal : CenteredNine → Legacy.Phase.PhaseQuotient9
+toOriginal : CenteredNine → Phase.PhaseQuotient9
 toOriginal (a , b) = retreat a , retreat b
 
-fromOriginal : Legacy.Phase.PhaseQuotient9 → CenteredNine
+fromOriginal : Phase.PhaseQuotient9 → CenteredNine
 fromOriginal (a , b) = advance a , advance b
 
 originalCenteredRoundTrip :
@@ -147,7 +148,7 @@ originalCenteredRoundTrip (Base.tri-high , Base.tri-mid) = refl
 originalCenteredRoundTrip (Base.tri-high , Base.tri-high) = refl
 
 centeredOriginalRoundTrip :
-  (p : Legacy.Phase.PhaseQuotient9) → toOriginal (fromOriginal p) ≡ p
+  (p : Phase.PhaseQuotient9) → toOriginal (fromOriginal p) ≡ p
 centeredOriginalRoundTrip (Base.tri-low , Base.tri-low) = refl
 centeredOriginalRoundTrip (Base.tri-low , Base.tri-mid) = refl
 centeredOriginalRoundTrip (Base.tri-low , Base.tri-high) = refl
