@@ -171,7 +171,7 @@ physicalCoreSameSource {trajectory = trajectory} geometry = record
   { predecessorScale = λ depth → refl
   ; initialState = BishopP.≃-refl
   ; increments = λ { zero →
-      BishopP.≃-symm (Core.zeroTotalIncrementIsZero geometry)
+      Core.zeroTotalIncrementIsZero geometry
     ; (suc depth) →
       Core.positiveEdgeTotalIncrementSameSource geometry depth
     }
