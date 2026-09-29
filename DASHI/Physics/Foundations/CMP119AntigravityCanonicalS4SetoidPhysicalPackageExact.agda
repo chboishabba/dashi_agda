@@ -10,6 +10,8 @@ import Real as Bishop
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionExact as SU2
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalRowABetaDrivenStateExact as RowAState
 import DASHI.Physics.Foundations.CMP119AntigravityP3GSetoidPhysicalCoreExact as Core
+import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalSignedQuarticReceiptExact as Signed
+import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalReceiptMajorantExact as ReceiptMajorant
 import DASHI.Physics.Foundations.CMP119AntigravityP3GSetoidRunningRecursionExact as Setoid
 import DASHI.Physics.Foundations.CMP119AntigravityPhysicalSU2ThresholdBelowHistoryExact as Threshold
 import DASHI.Physics.Foundations.CMP119AntigravityUnitCouplingCapInverseThresholdExact as Unit
@@ -122,3 +124,21 @@ record CanonicalS4SetoidControlledRemainder
   field
     sourceBound :
       Setoid.PhysicalRemainderMajorant (running package) majorant
+
+-- Concrete quantitative S4 remainder producer from the SAME literal source.
+-- The physical source must supply certified signed quartic and order receipts;
+-- the majorant and its two-sided Bishop estimates are then computed, not
+-- separately postulated.
+controlledRemainderFromPhysicalReceipts :
+  ∀ {trajectory split inputs rowA smallFieldCap largeFieldCap covarianceCap}
+    (package :
+      CanonicalS4SetoidPhysicalPackage
+        {trajectory = trajectory} {split = split}
+        inputs rowA smallFieldCap largeFieldCap covarianceCap)
+    (source : Signed.PhysicalSignedQuarticSource (geometry package)) →
+  CanonicalS4SetoidControlledRemainder package
+    (ReceiptMajorant.physicalReceiptMajorant source)
+controlledRemainderFromPhysicalReceipts package source = record
+  { CanonicalS4SetoidControlledRemainder.sourceBound =
+      ReceiptMajorant.asPhysicalRemainderMajorant source
+  }
