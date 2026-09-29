@@ -15,7 +15,8 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _<ℝ_)
-open import Data.Product using (Σ; _×_)
+open import Data.Product using (Σ; _×_; _,_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -23,6 +24,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physi
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact as H2Core
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
+import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as Wilson
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -92,6 +94,24 @@ ExactSelectedCoreClustering
         (R278.right tests index))
       (R281.clusteringEnvelope spectrum observable time)
 
+------------------------------------------------------------------------
+-- The generating class is the FINITE REAL LINEAR SPAN OF LITERAL WILSON
+-- LOOP PRODUCTS.  In particular, a source cannot set WilsonProduct to all
+-- cylinder functions and claim density by the identity embedding.
+------------------------------------------------------------------------
+
+literalFiniteWilsonSpan :
+  ∀ {Loop Configuration} →
+  Wilson.WilsonCylinderBoundData Loop (Configuration → ℝ) ℝ →
+  List (ℝ × List Loop) →
+  Configuration → ℝ
+literalFiniteWilsonSpan source [] configuration = 0ℝ
+literalFiniteWilsonSpan source ((coefficient , loops) ∷ rest) configuration =
+  coefficient *ℝ
+    Wilson.productLoopObservable source loops configuration
+  +ℝ
+  literalFiniteWilsonSpan source rest configuration
+
 record CMP119CoreH1OS4Meaning
     (G X Configuration Position CurvaturePolynomial LocalOperator
      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
@@ -146,8 +166,17 @@ record CMP119CoreH1OS4Meaning
   FullTest = Configuration → ℝ
 
   field
-    WilsonProduct : Set
-    embedWilson : WilsonProduct → FullTest
+    Loop : Set
+    literalWilson :
+      Wilson.WilsonCylinderBoundData Loop FullTest ℝ
+
+  WilsonProduct : Set
+  WilsonProduct = List (ℝ × List Loop)
+
+  embedWilson : WilsonProduct → FullTest
+  embedWilson = literalFiniteWilsonSpan literalWilson
+
+  field
     multiplyWilson : WilsonProduct → WilsonProduct → WilsonProduct
     zeroWilson oneWilson : WilsonProduct
     addWilson : WilsonProduct → WilsonProduct → WilsonProduct
@@ -172,6 +201,20 @@ record CMP119CoreH1OS4Meaning
       OS2.multiplyObservable
         (OSSystem.observableAlgebraCore (H2Core.coreInputs h2))
         (embedWilson left) (embedWilson right)
+
+    -- The exact R281 left and right tests must each be represented by
+    -- finite literal Wilson combinations; this is not automatic from names.
+    selectedLeftIsLiteralWilsonSpan :
+      ∀ index →
+      Σ WilsonProduct (λ combination →
+        R278.left (RealGap.testsCore application) index
+        ≡ embedWilson combination)
+
+    selectedRightIsLiteralWilsonSpan :
+      ∀ index →
+      Σ WilsonProduct (λ combination →
+        R278.right (RealGap.testsCore application) index
+        ≡ embedWilson combination)
 
     translateWilson : WilsonProduct → Nat → WilsonProduct
     translateFull : FullTest → Nat → FullTest
