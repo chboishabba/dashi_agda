@@ -184,3 +184,5 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateFailureExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedDirectDPChargeBridgeExact
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableEdgeTableExact
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1KeyScanMachineTraceExact
