@@ -165,11 +165,11 @@ blockEqualityFormulaLinearSyntax zero =
 blockEqualityFormulaLinearSyntax (suc width)
     rewrite
       bitEqualityFormulaNodeVisits
-        (Block.leftBlock Fin.zero)
-        (Block.rightBlock Fin.zero)
+        (Block.leftBlock {left = suc width} {right = suc width} Fin.zero)
+        (Block.rightBlock {left = suc width} {right = suc width} Fin.zero)
       |
       nodeVisitsInvariantUnderRenaming
-        Block.tailEmbedding
+        (Block.tailEmbedding {width = width})
         (Block.blockEqualityFormula width)
       |
       blockEqualityFormulaLinearSyntax width =
