@@ -199,9 +199,11 @@ record PhysicalRemainderMajorant
   field
     majorantNonnegative : ∀ depth →
       Bishop._≤_ Bishop.0ℝ (majorant depth)
-    controlled : ∀ depth →
+    controlledUpper : ∀ depth →
+      Bishop._≤_ (remainder running depth) (majorant depth)
+    controlledLower : ∀ depth →
       Bishop._≤_
-        (Bishop.abs (remainder running depth))
-        (majorant depth)
+        (Bishop.-_ (majorant depth))
+        (remainder running depth)
 
 open PhysicalRemainderMajorant public
