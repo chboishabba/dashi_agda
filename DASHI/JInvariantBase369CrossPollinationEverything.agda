@@ -507,3 +507,8 @@ import DASHI.Moonshine.OggSSPP2BanerjeeF4SpecialFibreJacobianExact
 import DASHI.Moonshine.OggSSPSmallCharacteristicTetrationCorrectionSeparationExact
 
 import DASHI.Moonshine.OggSSPP2F4CurveSheet9FrobeniusBidiExact
+
+import DASHI.Moonshine.OggSSPP2F4CurveTangentFlexExact
+import DASHI.Moonshine.OggSSPP2F4CurveFrobeniusNegationOrbitExact
+import DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredSheet9Exact
+import DASHI.Moonshine.OggSSPP2F4CurveKleinResidualSourceNoGoExact
