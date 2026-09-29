@@ -17,6 +17,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Maybe using (just)
 open import Data.List.Base using (_++_; map; length)
 open import Data.Product using (_×_; _,_)
 import Data.Fin.Base as Fin
@@ -214,7 +215,7 @@ emittedFalseTargetExact :
   Packed.packedStep false
     (source (emitTransition remaining index))
   ≡
-  Agda.Builtin.Maybe.just
+  just
     (falseTarget (emitTransition remaining index))
 emittedFalseTargetExact remaining index =
   refl
@@ -227,7 +228,7 @@ emittedTrueTargetExact :
   Packed.packedStep true
     (source (emitTransition remaining index))
   ≡
-  Agda.Builtin.Maybe.just
+  just
     (trueTarget (emitTransition remaining index))
 emittedTrueTargetExact remaining index =
   refl
