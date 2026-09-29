@@ -26,6 +26,7 @@ open import Data.Unit.Base using (⊤; tt)
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as Source
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalSourceSectorActionExact as Canonical
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedSourceEq223SectorProjectionExact as Projected
 
 arbitraryWilsonSource :
   (coupling coefficient : Nat → ℚ)
@@ -85,3 +86,43 @@ freeRunningCouplingIsInput :
   ≡ coupling k
 freeRunningCouplingIsInput coupling coefficient wilson regular r b vacuum k =
   refl
+
+------------------------------------------------------------------------
+-- EVEN AFTER EXACT RATIONAL ACTION INTERPRETATION AND UNIT WILSON BASIS,
+-- Eq.(2.23) still leaves c_k free. The missing product normalization is a
+-- genuinely separate physics statement, not concealed inside the algebra
+-- interpretation. This deliberately passes the existing selected Eq.223
+-- source projector contract without making any claim of physical selection.
+------------------------------------------------------------------------
+
+sourceWithUnitWilson :
+  (coupling coefficient : Nat → ℚ)
+  (regular r b vacuum : Nat → T4.LocalizedAction) →
+  Source.CMP119Section2SourceNativeState
+    Nat Nat Nat
+    T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
+    T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
+sourceWithUnitWilson coupling coefficient regular r b vacuum =
+  arbitraryWilsonSource coupling coefficient
+    (λ _ → T4.plaquetteBasisAction)
+    regular r b vacuum
+
+unitWilsonSourceHasActualProjectorAlgebra :
+  ∀ coupling coefficient regular r b vacuum →
+  Projected.SelectedEq223RationalActionInterpretation
+    (sourceWithUnitWilson coupling coefficient regular r b vacuum)
+unitWilsonSourceHasActualProjectorAlgebra
+    coupling coefficient regular r b vacuum = record
+  { Projected.SelectedEq223RationalActionInterpretation.sourceAssemblyPreservesLocalizedAction =
+      λ _ _ _ _ _ _ → refl
+  ; Projected.SelectedEq223RationalActionInterpretation.sourceWilsonBasisUnit =
+      λ _ → T4.plaquetteCoefficientOfPlaquetteBasis
+  }
+
+unitWilsonSourceCoefficientStillFree :
+  ∀ coupling coefficient regular r b vacuum k →
+  Source.wilsonCoefficient
+    (sourceWithUnitWilson coupling coefficient regular r b vacuum) k
+  ≡ coefficient k
+unitWilsonSourceCoefficientStillFree
+    coupling coefficient regular r b vacuum k = refl
