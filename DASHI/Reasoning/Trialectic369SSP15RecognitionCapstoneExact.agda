@@ -57,6 +57,7 @@ import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as Shortes
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionDescentCompilerExact as MultiplicityDescent
 import DASHI.Reasoning.Trialectic369MultiplicityProjectionPositionIndependenceExact as PositionDescent
 import DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact as SourceAndMonomial
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeMaxCut
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
@@ -999,6 +1000,52 @@ selected3BActualSourceActionStillUnpaid :
     selected3BSourceAndMonomialBoundary
   ≡ false
 selected3BActualSourceActionStillUnpaid = refl
+
+
+------------------------------------------------------------------------
+-- Full-grade max-cut of the remaining mandatory selected-3B action.
+------------------------------------------------------------------------
+
+selected3BFullGradeActionMaxCutBoundary :
+  FullGradeMaxCut.Trialectic369Selected3BFullGradeActionMaxCutBoundary
+selected3BFullGradeActionMaxCutBoundary =
+  FullGradeMaxCut.canonicalTrialectic369Selected3BFullGradeActionMaxCutBoundary
+
+selected3BConstituentAlreadyIntertwinesFullGrade :
+  FullGradeMaxCut.constituentMonsterActionAlreadyIntertwinesFullGradeTwo
+    selected3BFullGradeActionMaxCutBoundary
+  ≡ true
+selected3BConstituentAlreadyIntertwinesFullGrade = refl
+
+selected3BOldFaithfulComparisonNowCompilerOutput :
+  FullGradeMaxCut.oldFaithfulComparisonCompilerOutput
+    selected3BFullGradeActionMaxCutBoundary
+  ≡ true
+selected3BOldFaithfulComparisonNowCompilerOutput = refl
+
+selected3BCanonicalActionCompilerFromFullGradePaid :
+  FullGradeMaxCut.canonicalActionIntertwiningCompilerOutput
+    selected3BFullGradeActionMaxCutBoundary
+  ≡ true
+selected3BCanonicalActionCompilerFromFullGradePaid = refl
+
+selected3BCanonicalCompletionCompilerFromFullGradePaid :
+  FullGradeMaxCut.canonicalCompletionCompilerOutput
+    selected3BFullGradeActionMaxCutBoundary
+  ≡ true
+selected3BCanonicalCompletionCompilerFromFullGradePaid = refl
+
+selected3BFaithfulConstituentInclusionStillOpen :
+  FullGradeMaxCut.inclusionFaithfulnessInhabitedHere
+    selected3BFullGradeActionMaxCutBoundary
+  ≡ false
+selected3BFaithfulConstituentInclusionStillOpen = refl
+
+selected3BFullGradeActionAgreementStillOpen :
+  FullGradeMaxCut.selectedFullGradeAgreementInhabitedHere
+    selected3BFullGradeActionMaxCutBoundary
+  ≡ false
+selected3BFullGradeActionAgreementStillOpen = refl
 
 selected3BActualMonomialBasisStillUnpaid :
   SourceAndMonomial.actualMonomialBasisPaidHere
