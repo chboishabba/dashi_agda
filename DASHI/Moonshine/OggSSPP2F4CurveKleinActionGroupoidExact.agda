@@ -285,6 +285,93 @@ orbitStabilizerCountFour Klein.zeroXPair = refl
 orbitStabilizerCountFour Klein.unitXPair = refl
 orbitStabilizerCountFour Klein.primitiveXFour = refl
 
+------------------------------------------------------------------------
+-- Action-derived stabilizer classifier (not merely chosen multiplicities).
+------------------------------------------------------------------------
+
+not₂ : Bool → Bool
+not₂ false = true
+not₂ true = false
+
+and₂ : Bool → Bool → Bool
+and₂ false b = false
+and₂ true b = b
+
+same₂ : Bool → Bool → Bool
+same₂ false false = true
+same₂ true true = true
+same₂ _ _ = false
+
+stabilizerTruth : Klein.CurveKleinOrbit → KleinGroup → Bool
+stabilizerTruth Klein.infinitySingleton g = true
+stabilizerTruth Klein.zeroXPair (frob , negation) = not₂ negation
+stabilizerTruth Klein.unitXPair (frob , negation) = same₂ frob negation
+stabilizerTruth Klein.primitiveXFour (frob , negation) =
+  and₂ (not₂ frob) (not₂ negation)
+
+stabilizerTruthSound :
+  (orbit : Klein.CurveKleinOrbit) (g : KleinGroup) →
+  stabilizerTruth orbit g ≡ true →
+  actKlein g (Klein.kleinRepresentative orbit)
+    ≡ Klein.kleinRepresentative orbit
+stabilizerTruthSound Klein.infinitySingleton (false , false) h = refl
+stabilizerTruthSound Klein.infinitySingleton (false , true) h = refl
+stabilizerTruthSound Klein.infinitySingleton (true , false) h = refl
+stabilizerTruthSound Klein.infinitySingleton (true , true) h = refl
+stabilizerTruthSound Klein.zeroXPair (false , false) h = refl
+stabilizerTruthSound Klein.zeroXPair (false , true) ()
+stabilizerTruthSound Klein.zeroXPair (true , false) h = refl
+stabilizerTruthSound Klein.zeroXPair (true , true) ()
+stabilizerTruthSound Klein.unitXPair (false , false) h = refl
+stabilizerTruthSound Klein.unitXPair (false , true) ()
+stabilizerTruthSound Klein.unitXPair (true , false) ()
+stabilizerTruthSound Klein.unitXPair (true , true) h = refl
+stabilizerTruthSound Klein.primitiveXFour (false , false) h = refl
+stabilizerTruthSound Klein.primitiveXFour (false , true) ()
+stabilizerTruthSound Klein.primitiveXFour (true , false) ()
+stabilizerTruthSound Klein.primitiveXFour (true , true) ()
+
+stabilizerTruthComplete :
+  (orbit : Klein.CurveKleinOrbit) (g : KleinGroup) →
+  actKlein g (Klein.kleinRepresentative orbit)
+    ≡ Klein.kleinRepresentative orbit →
+  stabilizerTruth orbit g ≡ true
+stabilizerTruthComplete Klein.infinitySingleton (false , false) h = refl
+stabilizerTruthComplete Klein.infinitySingleton (false , true) h = refl
+stabilizerTruthComplete Klein.infinitySingleton (true , false) h = refl
+stabilizerTruthComplete Klein.infinitySingleton (true , true) h = refl
+stabilizerTruthComplete Klein.zeroXPair (false , false) h = refl
+stabilizerTruthComplete Klein.zeroXPair (false , true) ()
+stabilizerTruthComplete Klein.zeroXPair (true , false) h = refl
+stabilizerTruthComplete Klein.zeroXPair (true , true) ()
+stabilizerTruthComplete Klein.unitXPair (false , false) h = refl
+stabilizerTruthComplete Klein.unitXPair (false , true) ()
+stabilizerTruthComplete Klein.unitXPair (true , false) ()
+stabilizerTruthComplete Klein.unitXPair (true , true) h = refl
+stabilizerTruthComplete Klein.primitiveXFour (false , false) h = refl
+stabilizerTruthComplete Klein.primitiveXFour (false , true) ()
+stabilizerTruthComplete Klein.primitiveXFour (true , false) ()
+stabilizerTruthComplete Klein.primitiveXFour (true , true) ()
+
+boolCount : Bool → Nat
+boolCount false = 0
+boolCount true = 1
+
+computedStabilizerCount : Klein.CurveKleinOrbit → Nat
+computedStabilizerCount orbit =
+  boolCount (stabilizerTruth orbit (false , false))
+  + boolCount (stabilizerTruth orbit (false , true))
+  + boolCount (stabilizerTruth orbit (true , false))
+  + boolCount (stabilizerTruth orbit (true , true))
+
+stabilizerCountIsExpected :
+  (orbit : Klein.CurveKleinOrbit) →
+  computedStabilizerCount orbit ≡ expectedStabilizerSize orbit
+stabilizerCountIsExpected Klein.infinitySingleton = refl
+stabilizerCountIsExpected Klein.zeroXPair = refl
+stabilizerCountIsExpected Klein.unitXPair = refl
+stabilizerCountIsExpected Klein.primitiveXFour = refl
+
 record F4CurveKleinActionGroupoidBoundary : Set where
   constructor f4-curve-klein-action-groupoid-boundary
   field
@@ -295,6 +382,7 @@ record F4CurveKleinActionGroupoidBoundary : Set where
     actualOrbitTransportersInhabited : Bool
     orbitCountsOneTwoTwoFour : Bool
     orbitStabilizerCardinalityAuditOwned : Bool
+    stabilizerPredicateExactSoundComplete : Bool
     stabilizerCosetResidualPresentationBuilt : Bool
     actualMonsterP2ArithmeticRecognitionBuilt : Bool
 
@@ -302,4 +390,4 @@ canonicalF4CurveKleinActionGroupoidBoundary :
   F4CurveKleinActionGroupoidBoundary
 canonicalF4CurveKleinActionGroupoidBoundary =
   f4-curve-klein-action-groupoid-boundary
-    true true true true true true true false false
+    true true true true true true true true false false
