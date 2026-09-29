@@ -9,6 +9,8 @@ import DASHI.Physics.Foundations.CMP119AntigravityCanonicalBishopSU2ConventionEx
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4FromLiteralEvaluatorSetoidExact as LiteralS4
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalS4SetoidPhysicalPackageExact as S4
 import DASHI.Physics.Foundations.CMP119AntigravityP3GFromLiteralEvaluatorFiniteModeExact as FromEvaluator
+import DASHI.Physics.Foundations.CMP119AntigravityP3GSetoidPhysicalCoreExact as Core
+import DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact as UV
 import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalSignedQuarticReceiptExact as Signed
 import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalReceiptMajorantExact as Majorant
 import DASHI.Physics.Foundations.CMP119AntigravityP3GSelectedActionFiniteModeEdgeExact as ActionEdge
@@ -109,11 +111,11 @@ selectedActionOwnsP3GEdge :
       finiteMode oneLoop remainder rich running)
     k →
   Bishop._≃_
-    (DASHI.Physics.Foundations.CMP119AntigravityP3GSetoidPhysicalCoreExact.physicalTotalIncrement
+    (Core.physicalTotalIncrement
       (FromEvaluator.asP3GSetoidPhysicalGeometry
         (LiteralS4.evaluatorSameObject (literalSource source)))
       (suc k))
-    (DASHI.Physics.Foundations.CMP119AntigravitySourceHistoryBishopUVViewExact.embed
+    (UV.embed
       (Plaquette.plaquetteCoefficientProjector
         (Plaquette.effectiveAction (selectedEffectiveAction source) k)))
 selectedActionOwnsP3GEdge source =
