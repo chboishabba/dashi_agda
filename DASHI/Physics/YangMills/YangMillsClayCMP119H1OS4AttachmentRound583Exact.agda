@@ -14,7 +14,8 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _-ℝ_; absℝ; _<ℝ_)
+open import Data.Product using (Σ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -182,15 +183,40 @@ record CMP119CoreH1OS4Meaning
     -- Decay means actual convergence to zero in the existing real
     -- sequence-limit structure.  There is no custom/vacuous decay predicate.
 
-    WilsonProductsFormAlgebra : Set
-    wilsonProductsFormAlgebra : WilsonProductsFormAlgebra
+    -- Density is uniform approximation on the actual cylinder functions,
+    -- quantified over every physical configuration and positive tolerance.
+    -- There is no caller-chosen "Dense : Set" proposition here.
+    wilsonProductsUniformlyDense :
+      ∀ (test : FullTest) epsilon →
+      0ℝ <ℝ epsilon →
+      Σ WilsonProduct (λ wilson →
+        ∀ configuration →
+          absℝ (test configuration -ℝ
+            embedWilson wilson configuration) <ℝ epsilon)
 
-    WilsonProductsDenseInPhysicalSector : Set
-    wilsonProductsDenseInPhysicalSector :
-      WilsonProductsDenseInPhysicalSector
-
-    UniformCorrelationContinuity : Set
-    uniformCorrelationContinuity : UniformCorrelationContinuity
+    -- The same-family connected covariance must be uniformly continuous
+    -- under two simultaneous uniform cylinder approximations, with a
+    -- modulus independent of the Euclidean translation parameter.
+    uniformlyContinuousConnectedCovariance :
+      ∀ epsilon →
+      0ℝ <ℝ epsilon →
+      Σ ℝ (λ delta →
+        (0ℝ <ℝ delta) →
+        ∀ left left' right right' time →
+        (∀ configuration →
+          absℝ (left configuration -ℝ left' configuration) <ℝ delta) →
+        (∀ configuration →
+          absℝ (right configuration -ℝ right' configuration) <ℝ delta) →
+        absℝ
+          (connectedSchwinger
+            (OSSystem.constructedSchwingerCore
+              (H2Core.coreInputs h2) group)
+            left (translateFull right time) time -ℝ
+           connectedSchwinger
+            (OSSystem.constructedSchwingerCore
+              (H2Core.coreInputs h2) group)
+            left' (translateFull right' time) time)
+        <ℝ epsilon)
 
     -- Genuine source/weld theorem, not a compiler-created equality:
     -- the exact R281 selected Wilson estimate applies to EVERY member of the
@@ -221,9 +247,31 @@ record CMP119CoreH1OS4Meaning
               (embedWilson left)
               (translateFull (embedWilson right) time)
               time) 0ℝ) →
-      WilsonProductsFormAlgebra →
-      WilsonProductsDenseInPhysicalSector →
-      UniformCorrelationContinuity →
+      (∀ (test : FullTest) epsilon →
+        0ℝ <ℝ epsilon →
+        Σ WilsonProduct (λ wilson →
+          ∀ configuration →
+            absℝ (test configuration -ℝ
+              embedWilson wilson configuration) <ℝ epsilon)) →
+      (∀ epsilon →
+        0ℝ <ℝ epsilon →
+        Σ ℝ (λ delta →
+          (0ℝ <ℝ delta) →
+          ∀ left left' right right' time →
+          (∀ configuration →
+            absℝ (left configuration -ℝ left' configuration) <ℝ delta) →
+          (∀ configuration →
+            absℝ (right configuration -ℝ right' configuration) <ℝ delta) →
+          absℝ
+            (connectedSchwinger
+              (OSSystem.constructedSchwingerCore
+                (H2Core.coreInputs h2) group)
+              left (translateFull right time) time -ℝ
+             connectedSchwinger
+              (OSSystem.constructedSchwingerCore
+                (H2Core.coreInputs h2) group)
+              left' (translateFull right' time) time)
+          <ℝ epsilon)) →
       ∀ left right →
       RealLimit.Converges sequenceLimit
         (λ time →
@@ -283,9 +331,8 @@ selectedH1ClusteringMeansFullOS4 :
 selectedH1ClusteringMeansFullOS4 meaning selected =
   denseWilsonClusteringExtendsToFullTestClass meaning
     (selectedEstimateCoversWilsonProducts meaning selected)
-    (wilsonProductsFormAlgebra meaning)
-    (wilsonProductsDenseInPhysicalSector meaning)
-    (uniformCorrelationContinuity meaning)
+    (wilsonProductsUniformlyDense meaning)
+    (uniformlyContinuousConnectedCovariance meaning)
 
 asCoreOS4Attachment :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
