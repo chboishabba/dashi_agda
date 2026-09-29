@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityP3GNativeSetoidSelectedActionExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Relation.Binary.PropositionalEquality using (cong)
 import Real as Bishop
