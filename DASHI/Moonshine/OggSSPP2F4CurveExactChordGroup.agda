@@ -1325,6 +1325,96 @@ rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.af
 rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaSquaredZeta) = refl
 rhoPreservesChordAddition (Curve.affine Curve.pZetaSquaredZetaSquared) (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
 
+-- In the secant case the group result is provably AFFINE, so the
+-- independent coordinate check above cannot succeed via the dummy origin.
+isAffine : RationalF4Point → Bool
+isAffine Curve.infinity = false
+isAffine (Curve.affine p) = true
+
+distinctXSumIsAffine :
+  (p q : AffineF4Point) →
+  sameF4 (proj₁ (Curve.affineCoordinates p))
+         (proj₁ (Curve.affineCoordinates q)) ≡ false →
+  isAffine (Curve.affine p ⊞ Curve.affine q) ≡ true
+distinctXSumIsAffine Curve.p00 Curve.p00 ()
+distinctXSumIsAffine Curve.p00 Curve.p01 ()
+distinctXSumIsAffine Curve.p00 Curve.p1Zeta proof = refl
+distinctXSumIsAffine Curve.p00 Curve.p1ZetaSquared proof = refl
+distinctXSumIsAffine Curve.p00 Curve.pZetaZeta proof = refl
+distinctXSumIsAffine Curve.p00 Curve.pZetaZetaSquared proof = refl
+distinctXSumIsAffine Curve.p00 Curve.pZetaSquaredZeta proof = refl
+distinctXSumIsAffine Curve.p00 Curve.pZetaSquaredZetaSquared proof = refl
+distinctXSumIsAffine Curve.p01 Curve.p00 ()
+distinctXSumIsAffine Curve.p01 Curve.p01 ()
+distinctXSumIsAffine Curve.p01 Curve.p1Zeta proof = refl
+distinctXSumIsAffine Curve.p01 Curve.p1ZetaSquared proof = refl
+distinctXSumIsAffine Curve.p01 Curve.pZetaZeta proof = refl
+distinctXSumIsAffine Curve.p01 Curve.pZetaZetaSquared proof = refl
+distinctXSumIsAffine Curve.p01 Curve.pZetaSquaredZeta proof = refl
+distinctXSumIsAffine Curve.p01 Curve.pZetaSquaredZetaSquared proof = refl
+distinctXSumIsAffine Curve.p1Zeta Curve.p00 proof = refl
+distinctXSumIsAffine Curve.p1Zeta Curve.p01 proof = refl
+distinctXSumIsAffine Curve.p1Zeta Curve.p1Zeta ()
+distinctXSumIsAffine Curve.p1Zeta Curve.p1ZetaSquared ()
+distinctXSumIsAffine Curve.p1Zeta Curve.pZetaZeta proof = refl
+distinctXSumIsAffine Curve.p1Zeta Curve.pZetaZetaSquared proof = refl
+distinctXSumIsAffine Curve.p1Zeta Curve.pZetaSquaredZeta proof = refl
+distinctXSumIsAffine Curve.p1Zeta Curve.pZetaSquaredZetaSquared proof = refl
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.p00 proof = refl
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.p01 proof = refl
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.p1Zeta ()
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.p1ZetaSquared ()
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.pZetaZeta proof = refl
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.pZetaZetaSquared proof = refl
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.pZetaSquaredZeta proof = refl
+distinctXSumIsAffine Curve.p1ZetaSquared Curve.pZetaSquaredZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaZeta Curve.p00 proof = refl
+distinctXSumIsAffine Curve.pZetaZeta Curve.p01 proof = refl
+distinctXSumIsAffine Curve.pZetaZeta Curve.p1Zeta proof = refl
+distinctXSumIsAffine Curve.pZetaZeta Curve.p1ZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaZeta Curve.pZetaZeta ()
+distinctXSumIsAffine Curve.pZetaZeta Curve.pZetaZetaSquared ()
+distinctXSumIsAffine Curve.pZetaZeta Curve.pZetaSquaredZeta proof = refl
+distinctXSumIsAffine Curve.pZetaZeta Curve.pZetaSquaredZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.p00 proof = refl
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.p01 proof = refl
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.p1Zeta proof = refl
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.p1ZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.pZetaZeta ()
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.pZetaZetaSquared ()
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.pZetaSquaredZeta proof = refl
+distinctXSumIsAffine Curve.pZetaZetaSquared Curve.pZetaSquaredZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.p00 proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.p01 proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.p1Zeta proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.p1ZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.pZetaZeta proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.pZetaZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.pZetaSquaredZeta ()
+distinctXSumIsAffine Curve.pZetaSquaredZeta Curve.pZetaSquaredZetaSquared ()
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.p00 proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.p01 proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.p1Zeta proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.p1ZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.pZetaZeta proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.pZetaZetaSquared proof = refl
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZeta ()
+distinctXSumIsAffine Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZetaSquared ()
+
+curveInverseIsYPlusOne :
+  (p : AffineF4Point) →
+  coordinatesOrDummy (curveInverse (Curve.affine p))
+  ≡ (proj₁ (Curve.affineCoordinates p) ,
+     proj₂ (Curve.affineCoordinates p) +₄ one₄)
+curveInverseIsYPlusOne Curve.p00 = refl
+curveInverseIsYPlusOne Curve.p01 = refl
+curveInverseIsYPlusOne Curve.p1Zeta = refl
+curveInverseIsYPlusOne Curve.p1ZetaSquared = refl
+curveInverseIsYPlusOne Curve.pZetaZeta = refl
+curveInverseIsYPlusOne Curve.pZetaZetaSquared = refl
+curveInverseIsYPlusOne Curve.pZetaSquaredZeta = refl
+curveInverseIsYPlusOne Curve.pZetaSquaredZetaSquared = refl
+
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin = Attribution.repositoryNewExtension
 
