@@ -32,7 +32,7 @@ record GeneratedSelectedFiniteModePhysicalWeld
   (selected :
     Generated.SelectedEvaluatorGeneratedRichSource
       {expressions = expressions} {ward = ward} {scalarData = scalarData}
-      evaluatorAt) : Set₁ where
+      evaluatorAt) : Set₂ where
   field
     finiteModePlaquette :
       PlaquetteSame.FiniteModePlaquetteBetaSameObject
