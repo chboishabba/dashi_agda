@@ -1,3 +1,4 @@
+import DASHI.Physics.Foundations.GRQFTMereologyBridgeExact
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact
