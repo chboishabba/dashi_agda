@@ -12,6 +12,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 -- for the same Schwinger family.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -138,21 +139,134 @@ record CMP119CoreH1OS4Meaning
         source)
     : Set₂ where
   field
-    -- OS4 must be a property OF the exact core Schwinger family, not an
-    -- arbitrary proposition that could be satisfied by another system.
-    OS4Clustering :
-      Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
-      Set
+    -- The admitted full gauge-invariant Schwinger test class is explicit.
+    -- Do not confuse one selected Wilson pair with this entire class.
+    FullTest : Set
+    WilsonProduct : Set
+    embedWilson : WilsonProduct → FullTest
+    multiplyWilson : WilsonProduct → WilsonProduct → WilsonProduct
+    translateWilson : WilsonProduct → Nat → WilsonProduct
+    translateFull : FullTest → Nat → FullTest
 
-    -- This is the still-physical determining-class/continuity theorem:
-    -- selected Wilson clustering implies OS4 for this exact family.
-    selectedH1ClusteringMeansOS4 :
+    translateEmbedding :
+      ∀ test time →
+      embedWilson (translateWilson test time)
+      ≡ translateFull (embedWilson test) time
+
+    -- True connected correlations of the SAME reconstructed Schwinger family
+    -- on the full physical test class (including vacuum subtraction).
+    connectedSchwinger :
+      Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
+      FullTest → FullTest → Nat → ℝ
+
+    -- Decay-to-zero is a convergence predicate, NOT the selected dyadic
+    -- estimate; extending the dyadic estimate is a physical theorem.
+    ConvergesToZero : (Nat → ℝ) → Set
+
+    WilsonProductsFormAlgebra : Set
+    wilsonProductsFormAlgebra : WilsonProductsFormAlgebra
+
+    WilsonProductsDenseInPhysicalSector : Set
+    wilsonProductsDenseInPhysicalSector :
+      WilsonProductsDenseInPhysicalSector
+
+    UniformCorrelationContinuity : Set
+    uniformCorrelationContinuity : UniformCorrelationContinuity
+
+    -- Genuine source/weld theorem, not a compiler-created equality:
+    -- the exact R281 selected Wilson estimate applies to EVERY member of the
+    -- chosen Wilson-product determining class under time translation.
+    selectedEstimateCoversWilsonProducts :
       ExactSelectedCoreClustering application →
-      OS4Clustering
-        (OSSystem.constructedSchwingerCore
-          (H2Core.coreInputs h2) group)
+      ∀ left right →
+      ConvergesToZero
+        (λ time →
+          connectedSchwinger
+            (OSSystem.constructedSchwingerCore
+              (H2Core.coreInputs h2) group)
+            (embedWilson left)
+            (translateFull (embedWilson right) time)
+            time)
+
+    -- Analytic closure theorem: density plus uniform continuity extends
+    -- selected Wilson-product clustering to ALL admitted Schwinger tests.
+    -- Its proof is the remaining OS4 physical analysis, not an automatic
+    -- consequence of R281's selected covariance inequality.
+    denseWilsonClusteringExtendsToFullTestClass :
+      (∀ left right →
+        ConvergesToZero
+          (λ time →
+            connectedSchwinger
+              (OSSystem.constructedSchwingerCore
+                (H2Core.coreInputs h2) group)
+              (embedWilson left)
+              (translateFull (embedWilson right) time)
+              time)) →
+      WilsonProductsFormAlgebra →
+      WilsonProductsDenseInPhysicalSector →
+      UniformCorrelationContinuity →
+      ∀ left right →
+      ConvergesToZero
+        (λ time →
+          connectedSchwinger
+            (OSSystem.constructedSchwingerCore
+              (H2Core.coreInputs h2) group)
+            left (translateFull right time) time)
 
 open CMP119CoreH1OS4Meaning public
+
+-- Fix OS4 to full physical Schwinger-test clustering: a quantified
+-- convergence statement, not an arbitrary Set selected by the producer.
+FullCoreOS4 :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S
+      h2 covarianceLaws group source application} →
+  CMP119CoreH1OS4Meaning
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+    EuclideanAction Permutation Epsilon Witness
+    Scale Volume Root SourceDirection SpectralObservable Energy
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S
+    h2 covarianceLaws group source application →
+  Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
+  Set
+FullCoreOS4 meaning family =
+  ∀ left right →
+  ConvergesToZero meaning
+    (λ time →
+      connectedSchwinger meaning family
+        left (translateFull meaning right time) time)
+
+selectedH1ClusteringMeansFullOS4 :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S
+      h2 covarianceLaws group source application}
+    (meaning :
+      CMP119CoreH1OS4Meaning
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        Scale Volume Root SourceDirection SpectralObservable Energy
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S
+        h2 covarianceLaws group source application) →
+  ExactSelectedCoreClustering application →
+  FullCoreOS4 meaning
+    (OSSystem.constructedSchwingerCore
+      (H2Core.coreInputs h2) group)
+selectedH1ClusteringMeansFullOS4 meaning selected =
+  denseWilsonClusteringExtendsToFullTestClass meaning
+    (selectedEstimateCoversWilsonProducts meaning selected)
+    (wilsonProductsFormAlgebra meaning)
+    (wilsonProductsDenseInPhysicalSector meaning)
+    (uniformCorrelationContinuity meaning)
 
 asCoreOS4Attachment :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -174,11 +288,11 @@ asCoreOS4Attachment :
       (H2Core.coreInputs h2) group)
 asCoreOS4Attachment meaning = record
   { OSGap.OS4Attachment.OS4ClusteringAttached =
-      OS4Clustering meaning
+      FullCoreOS4 meaning
         (OSSystem.constructedSchwingerCore
           (H2Core.coreInputs h2) group)
   ; OSGap.OS4Attachment.os4Attached =
-      selectedH1ClusteringMeansOS4 meaning
+      selectedH1ClusteringMeansFullOS4 meaning
         (RealGap.selectedCoreContinuumCovarianceBelowSpectrumEnvelope
           _)
   }
