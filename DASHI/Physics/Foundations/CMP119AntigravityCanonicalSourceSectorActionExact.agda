@@ -21,6 +21,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _-_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
@@ -147,9 +148,12 @@ module _
     Flow.beta trajectory (suc k)
     ≡ Edge.projectedSourceEdge canonicalRawState k
       - (sectorProjection k - sectorProjection (suc k))
-  sourceBetaIsProjectedEdgeMinusFourSectorDrift k
-    rewrite nonWilsonProjectorIsSectorSum k
-          | nonWilsonProjectorIsSectorSum (suc k) =
-    Edge.selectedSourceBetaIsCorrectedProjectedEdge
-      canonicalRawState trajectory
-      wilsonCoefficientIsCMP109Inverse k
+  sourceBetaIsProjectedEdgeMinusFourSectorDrift k =
+    trans
+      (Edge.selectedSourceBetaIsCorrectedProjectedEdge
+        canonicalRawState trajectory
+        wilsonCoefficientIsCMP109Inverse k)
+      (cong
+        (λ drift →
+          Edge.projectedSourceEdge canonicalRawState k - drift)
+        (nonWilsonDriftIsFourSectorDifference k))
