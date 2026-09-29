@@ -86,6 +86,107 @@ record CMP119RealSelectedWilsonPresentation
 
 open CMP119RealSelectedWilsonPresentation public
 
+------------------------------------------------------------------------
+-- Pre-gap Wilson test presentation, on the SAME finite expectation family.
+------------------------------------------------------------------------
+
+record CMP119CoreSelectedWilsonPresentation
+    (G X Configuration Position CurvaturePolynomial LocalOperator
+     OPECoefficient StressTensor Hilbert Hamiltonian Vacuum Loop : Set)
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit)}
+    {division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient}
+    {S}
+    (core :
+      A.PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit)
+    (group : G)
+    (tests :
+      R278.SelectedConnectedCovarianceTests
+        (Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+          (A.familyCore core group)
+          (A.observableAlgebraCore core))) : Set₂ where
+  field
+    wilsonCore :
+      Wilson.WilsonCylinderBoundData
+        Loop (Configuration → ℝ) ℝ
+
+    leftLoopsCore rightLoopsCore :
+      R278.Index tests → List Loop
+
+    selectedLeftIsWilsonProductCore :
+      ∀ index →
+      R278.left tests index
+      ≡ Wilson.productLoopObservable wilsonCore (leftLoopsCore index)
+
+    selectedRightIsWilsonProductCore :
+      ∀ index →
+      R278.right tests index
+      ≡ Wilson.productLoopObservable wilsonCore (rightLoopsCore index)
+
+    wilsonMultiplyIsCMP119MultiplyCore :
+      ∀ left right →
+      Wilson.multiplyObservable wilsonCore left right
+      ≡ Gram.multiplyObservable
+          (Gram.operations
+            (Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+              (A.familyCore core group)
+              (A.observableAlgebraCore core))) left right
+
+open CMP119CoreSelectedWilsonPresentation public
+
+coreWilsonAsLegacy :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum Loop
+      sequenceLimit limitLaws quotient division S}
+    (core :
+      A.PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (clustering : A.CMP119OS4Attachment core)
+    (group : G)
+    (tests :
+      R278.SelectedConnectedCovarianceTests
+        (Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+          (A.familyCore core group)
+          (A.observableAlgebraCore core))) →
+  CMP119CoreSelectedWilsonPresentation
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum Loop
+    core group tests →
+  CMP119RealSelectedWilsonPresentation
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum Loop
+    (A.corePlusOS4Inputs core clustering)
+    covarianceLaws group tests
+coreWilsonAsLegacy core clustering covarianceLaws group tests source = record
+  { CMP119RealSelectedWilsonPresentation.wilson =
+      wilsonCore source
+  ; CMP119RealSelectedWilsonPresentation.leftLoops =
+      leftLoopsCore source
+  ; CMP119RealSelectedWilsonPresentation.rightLoops =
+      rightLoopsCore source
+  ; CMP119RealSelectedWilsonPresentation.selectedLeftIsWilsonProduct =
+      selectedLeftIsWilsonProductCore source
+  ; CMP119RealSelectedWilsonPresentation.selectedRightIsWilsonProduct =
+      selectedRightIsWilsonProductCore source
+  ; CMP119RealSelectedWilsonPresentation.wilsonMultiplyIsCMP119Multiply =
+      wilsonMultiplyIsCMP119MultiplyCore source
+  }
+
+
 record CMP119RealSelectedExpectationLimits
     (G X Configuration Position CurvaturePolynomial LocalOperator
      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum Loop : Set)
@@ -197,6 +298,9 @@ selectedExpectationLimits
             (R278.left tests index) (R278.right tests index))
           tt
     }
+
+cmp119CoreSelectedWilsonCompilerLevel : ProofLevel
+cmp119CoreSelectedWilsonCompilerLevel = machineChecked
 
 cmp119RealSelectedWilsonH2CompilerLevel : ProofLevel
 cmp119RealSelectedWilsonH2CompilerLevel = machineChecked
