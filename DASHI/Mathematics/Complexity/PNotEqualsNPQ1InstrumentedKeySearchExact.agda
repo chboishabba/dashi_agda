@@ -24,7 +24,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Data.List.Base using (length)
 import Data.Fin.Base as Fin
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact as Merge
@@ -72,10 +72,10 @@ scanKeyResultExact key (head ∷ tail)
 ... | inj₂ different
     with scanKeyWithCharge key tail
        | scanKeyResultExact key tail
-...   | nothing , count | tailExact =
-  cong (λ value → value) tailExact
-...   | just index , count | tailExact =
-  cong (λ value → value) tailExact
+...   | nothing , count | tailExact
+      rewrite sym tailExact = refl
+...   | just index , count | tailExact
+      rewrite sym tailExact = refl
 
 ------------------------------------------------------------------------
 -- The scan count agrees with the prior explicit comparison-count recursion.
