@@ -192,6 +192,17 @@ record TwoBSourceIndexedValuationAuthority : Set₁ where
 
     localizeActualSourcePiece : SourcePiece -> LocalizedPiece
 
+    -- A single localized object cannot be silently used as two different
+    -- inertia-sector witnesses.  This is a typed provenance condition rather
+    -- than a separate Boolean claim that the five slots are distinct.
+    localizedInertiaSector :
+      LocalizedPiece -> Inertia.BinaryTetrahedralInversionOrbit
+    localizedSectorIsRequestedSector :
+      (slot : TwoBSourceSlot) ->
+      localizedInertiaSector
+        (localizeActualSourcePiece (sourceAtSlot slot))
+      ≡ slotSector slot
+
     localizedAtPrimeTwoEqualsLevelBadGeometry :
       (slot : TwoBSourceSlot) -> Bool
     localizedAtPrimeTwoEqualsLevelBadGeometryIsTrue :
@@ -299,6 +310,37 @@ analyticLengthAtSlot A slot =
   trans
     (sameLocalizedPiecePaysAnalyticMultiplicity A slot)
     (lengthIsIndependentIsotropyDepth A slot)
+
+------------------------------------------------------------------------
+-- 4b. Same-object provenance prevents accidental reuse across sectors.
+------------------------------------------------------------------------
+
+differentSectorsRequireDifferentLocalizedObjects :
+  (A : TwoBSourceIndexedValuationAuthority) ->
+  (left right : TwoBSourceSlot) ->
+  localizeActualSourcePiece A (sourceAtSlot A left)
+    ≡ localizeActualSourcePiece A (sourceAtSlot A right) ->
+  slotSector left ≡ slotSector right
+differentSectorsRequireDifferentLocalizedObjects A left right same =
+  trans
+    (sym (localizedSectorIsRequestedSector A left))
+    (trans
+      (cong (localizedInertiaSector A) same)
+      (localizedSectorIsRequestedSector A right))
+
+slotsCannotCollapseUnderLocalization :
+  (A : TwoBSourceIndexedValuationAuthority) ->
+  (left right : TwoBSourceSlot) ->
+  localizeActualSourcePiece A (sourceAtSlot A left)
+    ≡ localizeActualSourcePiece A (sourceAtSlot A right) ->
+  left ≡ right
+slotsCannotCollapseUnderLocalization A left right same =
+  trans
+    (sym (slotSectorRoundTrip left))
+    (trans
+      (cong sectorSlot
+        (differentSectorsRequireDifferentLocalizedObjects A left right same))
+      (slotSectorRoundTrip right))
 
 ------------------------------------------------------------------------
 -- 5. Existing source authority stays attributed by its own owner.
