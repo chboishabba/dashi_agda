@@ -6,6 +6,8 @@ model. They do NOT claim a pretrained TESSERA checkpoint or Woogaroo data ran.
 import sys
 from pathlib import Path
 import unittest
+import json
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 import numpy as np
 import torch
@@ -81,6 +83,28 @@ class TestDifferentiableAdapter(unittest.TestCase):
         args[2]=np.array([[1,2,1]])
         with self.assertRaises(ValueError):
             adapter.prepare_torch(*args,MockInfer,fake_student())
+    def test_requires_exact_sensor_provenance(self):
+        receipt={
+          "s2_band_order":list(adapter.S2_BANDS),
+          "s1_band_order":list(adapter.S1_BANDS),
+          "s2_raw_units":"upstream_preprocessing_raw",
+          "s1_raw_units":"upstream_preprocessing_raw",
+          "year":2024,"cell_id":"test-cell",
+          "upstream_preprocessing_revision":"test-commit",
+          "s2_cloud_qa_provenance":"mock-cloud-mask",
+          "s1_acquisition_provenance":"mock-SAR-source",
+          "day_of_year_provenance":"mock-acquisition-day",
+          "input_sha256":"a"*64}
+        with TemporaryDirectory() as tmp:
+            p=Path(tmp)/"manifest.json"
+            p.write_text(json.dumps(receipt))
+            self.assertEqual(adapter.validated_manifest(p,"a"*64)["year"],2024)
+            with self.assertRaisesRegex(ValueError,"hash"):
+                adapter.validated_manifest(p,"b"*64)
+            receipt["s2_band_order"]=sorted(receipt["s2_band_order"])
+            p.write_text(json.dumps(receipt))
+            with self.assertRaisesRegex(ValueError,"band order"):
+                adapter.validated_manifest(p,"a"*64)
     def test_supervised_holdout_and_prefix(self):
         rng=np.random.default_rng(7)
         n=60
