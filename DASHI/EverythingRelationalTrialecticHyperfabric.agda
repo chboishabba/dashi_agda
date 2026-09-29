@@ -156,3 +156,5 @@ import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact
 import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact
 
 import DASHI.Reasoning.Trialectic369OrbifoldCoordinateRetractionWrongTypeExact
+
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact
