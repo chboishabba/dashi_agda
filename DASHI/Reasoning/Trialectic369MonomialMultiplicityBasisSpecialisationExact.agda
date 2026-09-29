@@ -134,6 +134,36 @@ purePermutationFromTrivialScalars route receipt trivial =
           (scalarActsTrivially trivial g i)
     }
 
+------------------------------------------------------------------------
+-- Typed source-character obstruction: a genuinely NON-permutation source
+-- forces some monomial scalar action to be nontrivial on the chosen basis.
+--
+-- The Suzuki owner supplies the attribution/character calculation; an actual
+-- same-linear-route no-go must still inhabit this typed receipt. We do not
+-- turn a Bool or cyclotomic String into that proof.
+------------------------------------------------------------------------
+
+record SourceExcludesPureBasisPermutation
+    (route : WrongType.CanonicalLinearMultiplicityRoute) : Set₁ where
+  field
+    rejectsPure :
+      WrongType.PermutationBasisSpecialisation
+        (WrongType.linearRepresentation route) →
+      ⊥
+
+open SourceExcludesPureBasisPermutation public
+
+sourceNonPermutationForcesNontrivialMonomialScalars :
+  (route : WrongType.CanonicalLinearMultiplicityRoute) →
+  (monomial : MonomialMultiplicityBasisSpecialisation route) →
+  SourceExcludesPureBasisPermutation route →
+  ScalarTrivialOnBasis route monomial →
+  ⊥
+sourceNonPermutationForcesNontrivialMonomialScalars
+  route monomial excluded trivial =
+  rejectsPure excluded
+    (purePermutationFromTrivialScalars route monomial trivial)
+
 -- Conversely every genuine pure permutation specialization is a monomial
 -- specialization if a chosen scalar acts as identity on the basis.
 record UnitScalarOnBasis
@@ -203,8 +233,9 @@ record Boundary : Set where
     monomialActionTracksScalars : Bool
     inverseIndexRequirementExplicit : Bool
     scalarTrivialityRequiredForPurePermutation : Bool
+    sourceNoGoForcesNontrivialScalarAction : Bool
     pureRouteIsNotAutomatic : Bool
     sourceMonomialReceiptInhabited : Bool
 
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true true true false
+canonicalBoundary = boundary true true true true true true false
