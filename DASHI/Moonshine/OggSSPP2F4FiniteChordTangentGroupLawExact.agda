@@ -15,6 +15,8 @@ module DASHI.Moonshine.OggSSPP2F4FiniteChordTangentGroupLawExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Empty using (⊥)
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
 import DASHI.Moonshine.OggSSPP2F4EllipticS3NineSheetBidiExact as Eigen
 import DASHI.Moonshine.OggSSPP2F4RecenteredTriXorS3Exact as Plane
@@ -34,6 +36,8 @@ sameF4 Curve.one₄ Curve.one₄ = true
 sameF4 Curve.zeta₄ Curve.zeta₄ = true
 sameF4 Curve.zetaSquared₄ Curve.zetaSquared₄ = true
 sameF4 _ _ = false
+
+infixr 5 _and_
 
 _and_ : Bool → Bool → Bool
 true and b = b
@@ -391,6 +395,125 @@ PPlusQIsZetaZeta :
 PPlusQIsZetaZeta = refl
 
 ------------------------------------------------------------------------
+-- The geometrically obtained addition is a genuine abelian exponent-3 law.
+-- Proof is transported along the fully checked 81-cell eigenchart table.
+------------------------------------------------------------------------
+
+curveEigenInjective :
+  (p q : Curve.RationalF4Point) →
+  Eigen.curveToEigenPlane p ≡ Eigen.curveToEigenPlane q →
+  p ≡ q
+curveEigenInjective p q chartEquality =
+  trans
+    (sym (Eigen.curveEigenRoundTrip p))
+    (trans
+      (cong Eigen.eigenPlaneToCurve chartEquality)
+      (Eigen.curveEigenRoundTrip q))
+
+chordSumAssociative :
+  (p q r : Curve.RationalF4Point) →
+  chordSum (chordSum p q) r ≡ chordSum p (chordSum q r)
+chordSumAssociative p q r =
+  curveEigenInjective
+    (chordSum (chordSum p q) r)
+    (chordSum p (chordSum q r))
+    (trans
+      (chordSumEigenHom (chordSum p q) r)
+      (trans
+        (cong
+          (λ value → Plane.centerPlus value (Eigen.curveToEigenPlane r))
+          (chordSumEigenHom p q))
+        (trans
+          (Plane.centerPlusAssociative
+            (Eigen.curveToEigenPlane p)
+            (Eigen.curveToEigenPlane q)
+            (Eigen.curveToEigenPlane r))
+          (trans
+            (cong
+              (Plane.centerPlus (Eigen.curveToEigenPlane p))
+              (sym (chordSumEigenHom q r)))
+            (sym (chordSumEigenHom p (chordSum q r))))))
+
+chordSumCommutative :
+  (p q : Curve.RationalF4Point) →
+  chordSum p q ≡ chordSum q p
+chordSumCommutative p q =
+  curveEigenInjective (chordSum p q) (chordSum q p)
+    (trans
+      (chordSumEigenHom p q)
+      (trans
+        (Plane.centerPlusCommutative
+          (Eigen.curveToEigenPlane p)
+          (Eigen.curveToEigenPlane q))
+        (sym (chordSumEigenHom q p))))
+
+chordSumZeroLeft :
+  (p : Curve.RationalF4Point) →
+  chordSum Curve.infinity p ≡ p
+chordSumZeroLeft p = refl
+
+chordSumInverseRight :
+  (p : Curve.RationalF4Point) →
+  chordSum p (Eigen.negCurve p) ≡ Curve.infinity
+chordSumInverseRight (Curve.infinity) = refl
+chordSumInverseRight (Curve.affine Curve.p00) = refl
+chordSumInverseRight (Curve.affine Curve.p01) = refl
+chordSumInverseRight (Curve.affine Curve.p1Zeta) = refl
+chordSumInverseRight (Curve.affine Curve.p1ZetaSquared) = refl
+chordSumInverseRight (Curve.affine Curve.pZetaZeta) = refl
+chordSumInverseRight (Curve.affine Curve.pZetaZetaSquared) = refl
+chordSumInverseRight (Curve.affine Curve.pZetaSquaredZeta) = refl
+chordSumInverseRight (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+
+------------------------------------------------------------------------
+-- P and Q are a concrete basis for the geometrically computed group:
+-- every rational point is an additive combination of them.
+------------------------------------------------------------------------
+
+scalarP : Base.TriTruth → Curve.RationalF4Point
+scalarP Base.tri-mid = Curve.infinity
+scalarP Base.tri-high = P
+scalarP Base.tri-low = Eigen.negCurve P
+
+scalarQ : Base.TriTruth → Curve.RationalF4Point
+scalarQ Base.tri-mid = Curve.infinity
+scalarQ Base.tri-high = Q
+scalarQ Base.tri-low = Eigen.negCurve Q
+
+pointFromBasis :
+  Base.TriTruth → Base.TriTruth → Curve.RationalF4Point
+pointFromBasis a b = chordSum (scalarP a) (scalarQ b)
+
+basisCoordinatesAreExact :
+  (a b : Base.TriTruth) →
+  Eigen.curveToEigenPlane (pointFromBasis a b) ≡ (a , b)
+basisCoordinatesAreExact Base.tri-low Base.tri-low = refl
+basisCoordinatesAreExact Base.tri-low Base.tri-mid = refl
+basisCoordinatesAreExact Base.tri-low Base.tri-high = refl
+basisCoordinatesAreExact Base.tri-mid Base.tri-low = refl
+basisCoordinatesAreExact Base.tri-mid Base.tri-mid = refl
+basisCoordinatesAreExact Base.tri-mid Base.tri-high = refl
+basisCoordinatesAreExact Base.tri-high Base.tri-low = refl
+basisCoordinatesAreExact Base.tri-high Base.tri-mid = refl
+basisCoordinatesAreExact Base.tri-high Base.tri-high = refl
+
+everyFiniteCurvePointGenerated :
+  (p : Curve.RationalF4Point) →
+  pointFromBasis
+    (proj₁ (Eigen.curveToEigenPlane p))
+    (proj₂ (Eigen.curveToEigenPlane p))
+    ≡ p
+everyFiniteCurvePointGenerated (Curve.infinity) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.p00) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.p01) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.p1Zeta) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.p1ZetaSquared) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.pZetaZeta) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.pZetaZetaSquared) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.pZetaSquaredZeta) = refl
+everyFiniteCurvePointGenerated (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+
+------------------------------------------------------------------------
 -- Arithmetic automorphisms genuinely respect this finite geometric law.
 ------------------------------------------------------------------------
 
@@ -545,6 +668,8 @@ record FiniteChordTangentGroupBoundary : Set where
     all64AffineChordComparisonsExact : Bool
     all81AdditionEigenchartComparisonsExact : Bool
     fullNinePointExponentThree : Bool
+    actualFiniteChordAbelianGroupLaws : Bool
+    pAndQGenerateAllNine : Bool
     selectedGeneratorsPAndQExplicit : Bool
     pPlusQZetaZetaPaid : Bool
     frobeniusAdditiveOnFiniteGeometricLaw : Bool
@@ -555,4 +680,4 @@ record FiniteChordTangentGroupBoundary : Set where
 canonicalFiniteChordTangentGroupBoundary : FiniteChordTangentGroupBoundary
 canonicalFiniteChordTangentGroupBoundary =
   finite-chord-tangent-group-boundary
-    true true true true true true true true false false
+    true true true true true true true true true true false false
