@@ -22,9 +22,12 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (1ℚ)
+open import Data.Rational.Base using (ℚ; 1ℚ)
+open import Data.Product using (_,_)
+open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
+import DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact as Literal
 
 ------------------------------------------------------------------------
 -- Real witness-carrying refinement of the existing literal cycle carrier.
@@ -43,6 +46,58 @@ record WitnessedRationalAlgebraicCycle
       Hodge.algebraicSubvarietyWitness cycle generator
 
 open WitnessedRationalAlgebraicCycle public
+
+------------------------------------------------------------------------
+-- Actual cycle constructors preserve both witness obligations by computation.
+------------------------------------------------------------------------
+
+witnessedZeroCycle :
+  ∀ {variety : Hodge.SmoothProjectiveComplexVariety}
+    {codimension : Nat} →
+  WitnessedRationalAlgebraicCycle
+    (Literal.zeroRationalAlgebraicCycle
+      {variety = variety} {codimension = codimension})
+witnessedZeroCycle =
+  record
+    { finiteSupportCertificate = tt
+    ; generatorAlgebraicCertificate = λ ()
+    }
+
+witnessedAddCycle :
+  ∀ {variety : Hodge.SmoothProjectiveComplexVariety}
+    {codimension : Nat}
+    {left right : Hodge.RationalAlgebraicCycle variety codimension} →
+  WitnessedRationalAlgebraicCycle left →
+  WitnessedRationalAlgebraicCycle right →
+  WitnessedRationalAlgebraicCycle
+    (Literal.addRationalAlgebraicCycle left right)
+witnessedAddCycle leftWitness rightWitness =
+  record
+    { finiteSupportCertificate =
+        finiteSupportCertificate leftWitness ,
+        finiteSupportCertificate rightWitness
+    ; generatorAlgebraicCertificate = λ where
+        (inj₁ generator) →
+          generatorAlgebraicCertificate leftWitness generator
+        (inj₂ generator) →
+          generatorAlgebraicCertificate rightWitness generator
+    }
+
+witnessedScaleCycle :
+  ∀ {variety : Hodge.SmoothProjectiveComplexVariety}
+    {codimension : Nat}
+    {cycle : Hodge.RationalAlgebraicCycle variety codimension} →
+  (scalar : ℚ) →
+  WitnessedRationalAlgebraicCycle cycle →
+  WitnessedRationalAlgebraicCycle
+    (Literal.scaleRationalAlgebraicCycle scalar cycle)
+witnessedScaleCycle scalar witnessed =
+  record
+    { finiteSupportCertificate =
+        finiteSupportCertificate witnessed
+    ; generatorAlgebraicCertificate =
+        generatorAlgebraicCertificate witnessed
+    }
 
 ------------------------------------------------------------------------
 -- Counterexample: nonempty rational generator with no valid witnesses.
