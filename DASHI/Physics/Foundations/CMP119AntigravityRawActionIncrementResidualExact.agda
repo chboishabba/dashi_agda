@@ -159,3 +159,32 @@ module _
           (nodeProjector depth)
           (Raw.wilsonCoefficient source zero)
           (Raw.wilsonCoefficient source depth)))
+
+------------------------------------------------------------------------
+-- Opposite Wilson sign convention: c_k = -u_k. The projected action
+-- difference changes sign, but the same non-Wilson edge drift survives.
+------------------------------------------------------------------------
+
+  selectedNegativeWilsonBetaIsCorrectedProjectedEdge :
+    (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+    (nodeMeaning : ∀ k →
+      Raw.wilsonCoefficient source k
+      ≡ - Flow.inverseCoupling trajectory k) →
+    ∀ k →
+    Flow.beta trajectory (suc k)
+    ≡ - projectedSourceEdge k
+      + (nodeResidual k - nodeResidual (suc k))
+  selectedNegativeWilsonBetaIsCorrectedProjectedEdge
+      trajectory nodeMeaning k =
+    trans
+      (UV.sourceBetaIsNegativeWilsonCoefficientDifference
+        trajectory (Raw.wilsonCoefficient source) nodeMeaning k)
+      (trans
+        (ℚRing.solve-∀
+          (Raw.wilsonCoefficient source k)
+          (Raw.wilsonCoefficient source (suc k))
+          (nodeResidual k)
+          (nodeResidual (suc k)))
+        (cong
+          (λ x → - x + (nodeResidual k - nodeResidual (suc k)))
+          (sym (projectedEdgeSplitsWilsonAndResidual k))))
