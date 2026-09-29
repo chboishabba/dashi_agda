@@ -550,7 +550,7 @@ continuumSpectrumSeparatedViaSurvivalBridge dataSet authority =
 -- Proof-level ledger.
 
 preGapOSHilbertReconstructionAuthorityLevel : ProofLevel
-preGapOSHilbertReconstructionAuthorityLevel = standardImported
+preGapOSHilbertReconstructionAuthorityLevel = conditional
 
 osHilbertReconstructionAuthorityLevel : ProofLevel
 osHilbertReconstructionAuthorityLevel = standardImported
