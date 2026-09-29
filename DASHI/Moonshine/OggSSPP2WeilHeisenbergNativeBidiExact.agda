@@ -1018,4 +1018,4 @@ weilH3Associative a b c =
             (trans
               (cong nativeToWeil
                 (sym (weilToNativeProduct a (W.hprod b c))))
-              (weilToNative_roundtrip (W.hprod a (W.hprod b c)))))))
+              (weilToNative_roundtrip (W.hprod a (W.hprod b c))))))))
