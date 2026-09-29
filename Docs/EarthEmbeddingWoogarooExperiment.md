@@ -96,3 +96,108 @@ in the current environment.
 - Liu et al. (Aug 2026): https://doi.org/10.1029/2026GL122814.
   531 CAMELS validation basins and 3434 global basins; transfer remains
   hydrologic-task and population dependent.
+
+## Third tranche: executable, source-oriented pipeline
+
+The geometry owners were extended to `EarthEmbeddingAdvanced.lean` and
+`DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda`. The latter reuses
+`DASHI.Core.AttributedSourceCore` and distinguishes original-author claims
+from independently written DASHI mathematics. Study figures cannot satisfy
+formal theorem obligations by citation.
+
+**Live source extraction (requires caller-controlled credentials and labels)**
+
+`scripts/sample_woogaroo_embeddings.py` accepts an independent sampling
+CSV with columns `lon,lat,year,label,label_source,baseline_*` and writes a
+matched `.npz` containing AlphaEarth 64D and GeoTessera 128D samples, UTM
+coordinates, cell/year keys and labels. It uses the documented Earth Engine
+`GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL` collection and
+`GeoTesseraZarr.sample_points` interface. No hidden fallback is permitted
+for absent pixels, years, or public Cambridge coverage. An extracted sample
+is *not* a Woogaroo-catchment mask: supply and verify the exact geometry.
+The sample's land/edge/water-status, temporal precision and pixel-centre
+co-registration still require documented site-level checks.
+
+```sh
+# External dependencies: earthengine-api, geotessera, pyproj, numpy.
+# Authenticate the EE project outside this script.
+python scripts/sample_woogaroo_embeddings.py observations.csv matched.npz \
+  --ee-project YOUR_PROJECT --crs EPSG:32756 --tessera-version verified-v1.1
+```
+
+The default GeoTessera cloud interface may serve v1.1; its current
+documentation says v2 distribution is limited. Calling a model `v2`
+does not make v2 data available. Verify dataset identity/version at the
+provider store before drawing conclusions.
+
+**Same-fold four-arm evaluation**
+
+`scripts/earth_embeddings_experiment.py` loads a strict versioned manifest
+and numeric arrays and fits comparable Ridge heads to baseline-only,
+baseline+AlphaEarth, baseline+TESSERA, and baseline+both. Standardisation,
+PCA/effective-rank diagnostics and model fitting use training samples only.
+Heldout cells and years are disjoint. Optionally exclude a projected-CRS
+spatial buffer, and record unused boundary years/cells. This is a regression
+prototype; classification and time-dependent hydrological process heads are
+not implied by it.
+
+```sh
+python scripts/earth_embeddings_experiment.py matched.npz manifest.json \
+    results.json --test-year 2024 --test-cell CELL_ID --buffer-metres 300
+```
+
+The manifest requires `alpha_source,alpha_version,tessera_source,
+tessera_version,baseline_source,label_provenance,target,target_unit,crs,
+pixel_size_metres,acquisition_qa,data_license,observation_window`.
+That is a provenance minimum, not proof of independence or field calibration.
+The script writes an SHA-256 of the input data and scores MAE/RMSE/R2.
+The heldout-year/cell selection is a deliberate strict intersection;
+intermediate samples are unused, not quietly assigned a fold.
+
+**Geometry and source-specific quantisation**
+
+`scripts/alphaearth_cog_quantization.py` implements Google's signed-int8
+COG non-linear dequantisation `sign(x)*(x/127.5)^2`, vector sum followed
+by norm-rescaling, an explicit rejection of cancellation, and a conditional
+stability bound. Do not average the raw int8 band values; do not confuse
+Google EE float embeddings with raw COG int8 storage.
+
+`scripts/earth_embeddings_experiment.py` computes covariance
+participation ratio `trace(C)^2/trace(C^2)` and local-PCA tangent rotation
+probes. These are empirical *estimators*, not proof of a smooth manifold.
+`scripts/cross_model_alignment.py` trains PCA projection and Procrustes
+rotation on train-only matched 64D/128D vectors, and reports heldout
+residual versus a deterministic shuffled control. There is no automatic
+inference that co-location means identical environmental information.
+
+**Local synthetic receipts**
+
+The source-equivalent scripts and their synthetic test suite were run
+locally in the tool container on 2026-09-29. Fifteen tests passed, covering
+fold leakage, spatial buffers, 4-head outputs, covariance rank-one behavior,
+local tangent estimates, signed-int8 nonlinearity, cancelling aggregates,
+cross-model train-only alignment and metadata assembly. The four-head CLI
+was additionally executed against generated synthetic arrays. Neither
+synthetic result establishes an environmental effect or a Woogaroo result.
+
+**Open physical obligations / no invented science**
+- Collect licensed, independent, georeferenced Woogaroo habitat,
+  sediment/runoff and canopy observations, with reliable calibration.
+- Resolve exact approved 9281 clearing geometry with its source revision,
+  and match spatial evidence through LES canopy/LiDAR owners.
+- Validate provider-specific coverage, temporal windows, landmask,
+  licensing, COG/EE interoperability and georegistration.
+- Measure real-world uncertainty and external geographic/temporal transfer.
+- Execute and kernel-check the Agda/Lean owners: local execution here had
+  Python but no installed Lean or Agda compilers.
+- To obtain a genuinely globally smooth manifold theorem would require
+  explicit smoothness hypotheses and an actual validated atlas; a
+  sample-based PCA estimate is insufficient.
+- To validate a specific local field effect or legal finding requires
+  observations and independent review; these have not been supplied.
+
+**Primary source correction**: Google documentation gives individual
+embedding channels no guaranteed physical meaning; Rahman's per-variable
+interpretations apply to his sampled study, not to an unqualified A17
+vegetation axis in every landscape. Source: 
+https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_SATELLITE_EMBEDDING_V1_ANNUAL
