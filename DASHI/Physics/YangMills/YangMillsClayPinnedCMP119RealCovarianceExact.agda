@@ -17,6 +17,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as A
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
+import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
@@ -50,23 +52,20 @@ record CanonicalRealCovarianceLimitLaws
 
 open CanonicalRealCovarianceLimitLaws public
 
-realCovarianceExtension :
-  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
-      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
-      sequenceLimit limitLaws quotient division S}
-    (inputs :
-      A.PinnedCMP119OSAxiomInputs
-        G X Configuration Position CurvaturePolynomial LocalOperator
-        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
-        {sequenceLimit = sequenceLimit}
-        limitLaws quotient division S)
-    (covarianceLaws : CanonicalRealCovarianceLimitLaws sequenceLimit)
-    (group : G) →
+realCovarianceExtensionFromFamily :
+  ∀ {Configuration sequenceLimit limitLaws quotient division}
+    (family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration limitLaws quotient division)
+    (observableAlgebra :
+      OS2.CylinderOSAlgebra (Configuration → ℝ))
+    (covarianceLaws : CanonicalRealCovarianceLimitLaws sequenceLimit) →
   R278.ScalarCovarianceConvergenceExtension
-    (Carrier.cmp119PhysicalMeasureConvergenceData inputs group)
-realCovarianceExtension
+    (Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+      family observableAlgebra)
+realCovarianceExtensionFromFamily
     {sequenceLimit = sequenceLimit}
-    inputs covarianceLaws group = record
+    family observableAlgebra covarianceLaws = record
   { R278.ScalarCovarianceConvergenceExtension.negate =
       λ value → 0ℝ -ℝ value
   ; R278.ScalarCovarianceConvergenceExtension.magnitude =
@@ -111,6 +110,87 @@ realCovarianceExtension
     Seq.limit sequenceLimit (λ n → op (sequence n))
       ≡ op target
   transportUnary law converges rewrite converges = law
+
+selectedTestsFromFamily :
+  ∀ {Configuration sequenceLimit limitLaws quotient division}
+    (family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration limitLaws quotient division)
+    (observableAlgebra :
+      OS2.CylinderOSAlgebra (Configuration → ℝ))
+    (Index : Set)
+    (left right : Index → Configuration → ℝ) →
+  R278.SelectedConnectedCovarianceTests
+    (Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+      family observableAlgebra)
+selectedTestsFromFamily family observableAlgebra Index left right = record
+  { R278.SelectedConnectedCovarianceTests.Index = Index
+  ; R278.SelectedConnectedCovarianceTests.left = left
+  ; R278.SelectedConnectedCovarianceTests.right = right
+  ; R278.SelectedConnectedCovarianceTests.leftBounded =
+      λ index → tt
+  ; R278.SelectedConnectedCovarianceTests.rightBounded =
+      λ index → tt
+  ; R278.SelectedConnectedCovarianceTests.productBounded =
+      λ index → tt
+  }
+
+selectedRealConnectedCovarianceConvergesFromFamily :
+  ∀ {Configuration sequenceLimit limitLaws quotient division}
+    (family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration limitLaws quotient division)
+    (observableAlgebra :
+      OS2.CylinderOSAlgebra (Configuration → ℝ))
+    (covarianceLaws : CanonicalRealCovarianceLimitLaws sequenceLimit)
+    (Index : Set)
+    (left right : Index → Configuration → ℝ)
+    (index : Index) →
+  let dataSet =
+        Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+          family observableAlgebra
+  in
+  Gram.Converges
+    (Gram.scalarConvergence dataSet)
+    (λ cutoff →
+      R278.connectedCovarianceMagnitude
+        (realCovarianceExtensionFromFamily
+          family observableAlgebra covarianceLaws)
+        (Gram.measureSequence dataSet cutoff)
+        (left index) (right index))
+    (R278.connectedCovarianceMagnitude
+      (realCovarianceExtensionFromFamily
+        family observableAlgebra covarianceLaws)
+      (Gram.continuumMeasure dataSet)
+      (left index) (right index))
+selectedRealConnectedCovarianceConvergesFromFamily
+    family observableAlgebra covarianceLaws Index left right index =
+  R278.selectedConnectedCovarianceMagnitudeConverges
+    (realCovarianceExtensionFromFamily
+      family observableAlgebra covarianceLaws)
+    (selectedTestsFromFamily family observableAlgebra Index left right)
+    index
+
+realCovarianceExtension :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      sequenceLimit limitLaws quotient division S}
+    (inputs :
+      A.PinnedCMP119OSAxiomInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (covarianceLaws : CanonicalRealCovarianceLimitLaws sequenceLimit)
+    (group : G) →
+  R278.ScalarCovarianceConvergenceExtension
+    (Carrier.cmp119PhysicalMeasureConvergenceData inputs group)
+realCovarianceExtension
+    inputs covarianceLaws group =
+  realCovarianceExtensionFromFamily
+    (A.family inputs group)
+    (A.observableAlgebra inputs)
+    covarianceLaws
 
 selectedTests :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -175,6 +255,9 @@ selectedRealConnectedCovarianceConverges
     (realCovarianceExtension inputs covarianceLaws group)
     (selectedTests inputs group Index left right)
     index
+
+preOSCMP119RealCovarianceLimitCompilerLevel : ProofLevel
+preOSCMP119RealCovarianceLimitCompilerLevel = machineChecked
 
 pinnedCMP119RealCovarianceLimitCompilerLevel : ProofLevel
 pinnedCMP119RealCovarianceLimitCompilerLevel = machineChecked

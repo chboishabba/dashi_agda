@@ -69,3 +69,56 @@ round450PhysicalDecayTransportLevel = R390.round390DistanceLowerCompilerLevel
 -- B6 is now only the physical support-separation statement above.
 literalRound450EuclideanSupportSeparationLevel : ProofLevel
 literalRound450EuclideanSupportSeparationLevel = conditional
+
+
+------------------------------------------------------------------------
+-- Preferred literal-R318 constructor.
+--
+-- Do not choose a second Euclidean-time coordinate here.  Use the physical
+-- support distance already carried by the selected T5/R318 family.  The
+-- translated-pair theorem can later identify that distance with the requested
+-- Euclidean time.
+------------------------------------------------------------------------
+
+record CanonicalObservableToGraphSeparation
+    {Measure TestObservable : Set}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    (data :
+      R444.CanonicalTwiceMarkedFourStageData
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} base)
+    : Set where
+  field
+    physicalDistanceBelowSelectedGraphDistance :
+      R318.physicalDistance base
+        (R444.leftObservable data)
+        (R444.rightObservable data)
+      Nat.≤
+      Graph.ymGraphDist
+        (R444.leftMark data)
+        (R444.rightMark data)
+
+open CanonicalObservableToGraphSeparation public
+
+physicalSeparationFromObservableDistance :
+  ∀ {Measure TestObservable dataSet extension base}
+    {data :
+      R444.CanonicalTwiceMarkedFourStageData
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} base} →
+  CanonicalObservableToGraphSeparation data →
+  CanonicalPhysicalSeparation data
+physicalSeparationFromObservableDistance
+    {base = base} {data = data} geometry = record
+  { euclideanTime =
+      R318.physicalDistance base
+        (R444.leftObservable data)
+        (R444.rightObservable data)
+  ; timeBelowSelectedGraphDistance =
+      physicalDistanceBelowSelectedGraphDistance geometry
+  }
+
+literalR318PhysicalDistanceToGraphDistanceLevel : ProofLevel
+literalR318PhysicalDistanceToGraphDistanceLevel = conditional

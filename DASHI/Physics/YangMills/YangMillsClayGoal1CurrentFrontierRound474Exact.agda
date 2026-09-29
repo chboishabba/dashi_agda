@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact as B
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonSourceFirstPhysicalKPExact as H1KP
 import DASHI.Physics.YangMills.BalabanCMP116SourceNativeToDirectUpperRound465Exact as BRate
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceGapRound455Exact as BGap
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
@@ -71,6 +72,13 @@ a45MomentToOS05Level =
 -- B / direct selected CMP116 -> same-H mass gap.
 ------------------------------------------------------------------------
 
+bSourceFirstPhysicalKPCompilerLevel : ProofLevel
+bSourceFirstPhysicalKPCompilerLevel =
+  H1KP.sourceFirstPhysicalKPCompilerLevel
+
+bSourceFirstWeightedNeighbourEnumerationLevel : ProofLevel
+bSourceFirstWeightedNeighbourEnumerationLevel =
+  H1KP.sourceFirstWeightedNeighbourEnumerationLevel
 bLiteralPublishedSelectedLocalizationLevel : ProofLevel
 bLiteralPublishedSelectedLocalizationLevel =
   B.literalRound467PublishedLiteralSelectedLocalizationLevel
@@ -147,6 +155,17 @@ explicitPeterWeylRPMandatory = false
 projectiveProkhorovMandatory : Bool
 projectiveProkhorovMandatory = false
 
+independentKPDatumSelectionMandatory : Bool
+independentKPDatumSelectionMandatory = false
+
+postHocPhysicalKPActivityEqualityMandatory : Bool
+postHocPhysicalKPActivityEqualityMandatory = false
+
+postHocPhysicalKPIncompatibilityEqualityMandatory : Bool
+postHocPhysicalKPIncompatibilityEqualityMandatory = false
+
+postHocPhysicalKPRootedSumEqualityMandatory : Bool
+postHocPhysicalKPRootedSumEqualityMandatory = false
 postHocCMP116MagnitudeEqualityMandatory : Bool
 postHocCMP116MagnitudeEqualityMandatory = false
 
