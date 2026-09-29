@@ -1,0 +1,68 @@
+name: YM core OS / R583 / H3 / H5 kernel
+
+# Hosted runner only: untrusted pull requests never execute on self-hosted
+# infrastructure.  The active head branch also receives push-triggered checks
+# rather than relying on the unrelated dispatch-only global Agda workflow.
+on:
+  push:
+    branches:
+      - agent/ym-clay-max-cut-reconciled-r507
+    paths:
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119CoreSemigroupH3Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119CorePhysicalH5Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119RealSelectedWilsonH2Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanOSReconstructionMassGapProduction.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119OSReconstructionExact.agda'
+      - '.github/workflows/ym-core-os-h3-h5.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119CoreSemigroupH3Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119CorePhysicalH5Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCMP119RealSelectedWilsonH2Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanOSReconstructionMassGapProduction.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119OSReconstructionExact.agda'
+      - '.github/workflows/ym-core-os-h3-h5.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ym-core-os-kernel-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check-pre-gap-and-os4:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Kernel typecheck real source OS4 / H3 / H5
+        shell: bash
+        run: |
+          set -euo pipefail
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            export AGDA_JOBS=2
+            agda --version
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/YangMillsClayCMP119CoreSemigroupH3Exact.agda
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library \
+              DASHI/Physics/YangMills/YangMillsClayCMP119CorePhysicalH5Exact.agda
+          ' 2>&1 | tee ym-core-os-kernel.log
+      - name: Upload exact-head Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ym-core-os-kernel-log
+          path: ym-core-os-kernel.log
+          if-no-files-found: warn
