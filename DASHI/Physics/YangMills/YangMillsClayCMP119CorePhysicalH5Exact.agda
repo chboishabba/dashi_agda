@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119CorePhysicalH5Exact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Sigma using (Σ)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -215,6 +216,15 @@ record CMP119CompactSimplePhysicalH5Core
     literalGroupHasValidSimpleIndex :
       ∀ group →
       Compact.ValidCompactSimpleIndex (literalToClassified group)
+
+    -- The image of the literal group carrier actually covers ALL
+    -- classified compact simple groups, not just a convenient finite
+    -- subfamily.  The witness must retain the SAME group when H1/H2/H3
+    -- are instantiated downstream.
+    everyValidClassifiedGroupHasLiteralRepresentative :
+      ∀ classified →
+      Compact.ValidCompactSimpleIndex classified →
+      Σ G (λ group → literalToClassified group ≡ classified)
 
     quantitativePackageMeansLiteralCompactSimple :
       ∀ group →
