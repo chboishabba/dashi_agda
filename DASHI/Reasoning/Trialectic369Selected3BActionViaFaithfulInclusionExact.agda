@@ -13,6 +13,7 @@ module DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact wh
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using
@@ -63,7 +64,7 @@ selectedActionBackOnConstituent core normalizer state =
 record FaithfulConstituentActionComparison
     {Monster K : Set}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K})
-    : Set₁ where
+    : Setω where
   field
     inclusionInjective :
       ∀ {left right :
@@ -113,7 +114,7 @@ compileActionIntertwiningFromInclusion core comparison =
 record IncludedActionCounterexample
     {Monster K : Set}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K})
-    : Set₁ where
+    : Setω where
   field
     normalizer : Single.Normalizer (Core.linearProducer core)
     state :
