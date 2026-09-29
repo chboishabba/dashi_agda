@@ -27,6 +27,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physi
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2Exact as H2
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact as H2OS
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as Pinned
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGap
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact as H3
 import DASHI.Physics.YangMills.YangMillsClayDirectPhysicalCExact as DirectC
@@ -174,6 +175,16 @@ record CMP119DirectSameSystemH6
       Top.schwinger Y group
       ≡ OSSystem.constructedSchwinger
           (H2.osInputs h2) group
+
+    literalHilbertIsExactH2Hilbert :
+      Top.hilbertSpace Y group
+      ≡ Pinned.reconstructedHilbert
+          (H2.reconstruction h2) group
+
+    literalVacuumIsExactH2Vacuum :
+      Top.vacuum Y group
+      ≡ Pinned.reconstructedVacuum
+          (H2.reconstruction h2) group
 
     literalHamiltonianIsExactH2Hamiltonian :
       Top.hamiltonian Y group
