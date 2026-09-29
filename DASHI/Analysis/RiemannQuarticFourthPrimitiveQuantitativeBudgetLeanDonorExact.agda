@@ -79,6 +79,31 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- DIRECT POSITIVE-DEFINITE TRACE TRANSPORT: SAME-OBJECT NO-GO
+--
+-- Lean owner:
+--   Synthesis/RiemannQuarticSignedCosinePSDNoGo.lean
+--
+-- For the selected negative-origin witness:
+--   C_W(0) = 0, yet integral_R C_W(q) dq < 0.
+--
+-- The 2-point PSD condition would require, for all a,b,q,
+--   0 <= (a*a+b*b)*C_W(0) + 2*a*b*C_W(q).
+-- Choosing (a,b)=(1,1) and (1,-1), with C_W(0)=0, forces
+--   C_W(q)=0 at every q,
+-- contradicting the negative total mass.
+--
+-- Thus C_W is NOT itself a PSD translation-invariant Toeplitz kernel.
+-- The conjectured Heisenberg/Weil trace donor cannot simply identify the
+-- selected cosine with a positive-definite kernel. Any future spectral
+-- mechanism must act on a completed/signed expression and preserve the
+-- horizontal contribution and actual zero-distribution correlation.
+--
+-- This does not rule out such a completed positivity mechanism and does
+-- not prove the RH signed fifth-cap estimate.
+------------------------------------------------------------------------
+
 record QuantitativeFourthPrimitiveBoundary : Set where
   constructor quantitative-fourth-primitive-boundary
   field
