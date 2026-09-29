@@ -61,6 +61,42 @@ enumeratedChildCount (parent ∷ rest)
   refl
 
 ------------------------------------------------------------------------
+-- Complete literal one-step coverage, independently of semantic merging.
+------------------------------------------------------------------------
+
+data Listed {A : Set} (item : A) : List A → Set where
+  first : ∀ {rest} → Listed item (item ∷ rest)
+  later : ∀ {head rest} →
+    Listed item rest →
+    Listed item (head ∷ rest)
+
+falseChildEnumerated :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (parent : Width.LayerNode {root = root} (suc remaining))
+    (parents : List (Width.LayerNode {root = root} (suc remaining))) →
+  Listed parent parents →
+  Listed (Shannon.falseLayerChild parent)
+    (enumerateShannonChildren parents)
+falseChildEnumerated parent (parent ∷ rest) first =
+  first
+falseChildEnumerated parent (head ∷ rest) (later member) =
+  later (later (falseChildEnumerated parent rest member))
+
+trueChildEnumerated :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (parent : Width.LayerNode {root = root} (suc remaining))
+    (parents : List (Width.LayerNode {root = root} (suc remaining))) →
+  Listed parent parents →
+  Listed (Shannon.trueLayerChild parent)
+    (enumerateShannonChildren parents)
+trueChildEnumerated parent (parent ∷ rest) first =
+  later first
+trueChildEnumerated parent (head ∷ rest) (later member) =
+  later (later (trueChildEnumerated parent rest member))
+
+------------------------------------------------------------------------
 -- The actual merged child layer and explicit semantic-key work.
 ------------------------------------------------------------------------
 
