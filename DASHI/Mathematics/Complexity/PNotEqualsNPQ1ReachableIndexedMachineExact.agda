@@ -23,7 +23,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact as Merge
@@ -63,6 +63,36 @@ childIndexSemanticReceipt action previous index rep target found =
       (cong
         (Truth.restrictTruthTable action)
         (Rep.keyMatchesIndex rep)))
+
+------------------------------------------------------------------------
+-- Any two representatives of the SAME numerical ID have the same future.
+------------------------------------------------------------------------
+
+representativesGiveSameChildKey :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (action : Bool)
+    (previous : Root.DescentPath root (suc remaining))
+    (index : Reachable.ReachableNumericState previous)
+    (left right : Rep.NumericRepresentative previous index) →
+  Merge.semanticKey
+    (Shannon.layerChild action (Rep.node left))
+  ≡
+  Merge.semanticKey
+    (Shannon.layerChild action (Rep.node right))
+representativesGiveSameChildKey action previous index left right =
+  Merge.equalKeysGiveEqualChildKeys
+    action
+    (Rep.node left)
+    (Rep.node right)
+    (trans
+      (Rep.keyMatchesIndex left)
+      (sym (Rep.keyMatchesIndex right)))
+
+------------------------------------------------------------------------
+-- The CHILD KEY is therefore a function of the canonical numeric ID alone.
+-- A representative is just an executable route to its existing rooted node.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- Output type carries the exact transition semantics on its finite index.
