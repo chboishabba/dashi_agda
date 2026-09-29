@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
-"""Finite, exact query-relative coordinate-width search for WrongType hypervoxels.
+"""Backward-compatible three-mode WrongType adapter to generic observer search.
 
-DASHI-original algorithm. A frame coordinate has three values C/T/P.
-McNamara's Episode 4 assigns first two roles: violated frame, imposed logic.
-Additional coordinate names here are analyst-defined and not video quotations.
+McNamara ep. 4 describes Care/Transaction/Power on two source-defined
+axes. All coordinate-width and factorisation algorithms are owned by
+scripts/indexed_relational_observer_search.py. Extra ternary axes are
+DASHI extensions, not directly attributable to McNamara.
 
-For an explicitly finite situated domain S, a query Q factors through a
-projection pi_I iff equal projected tuples NEVER produce unequal Q answers.
-This algorithm enumerates subsets in increasing cardinality and provides
-collision witnesses for rejected subsets. It does not decide legal wrongness.
+A finite table gives domain-relative certificates, not universal legal
+or analytical conclusions.
 """
 from __future__ import annotations
-from itertools import combinations, product
 from dataclasses import dataclass
-from typing import Any, Callable, Hashable, Iterable, Sequence
+from itertools import product
+from typing import Callable, Hashable, Iterable, Sequence
+
+from scripts.indexed_relational_observer_search import (
+    first_collision, minimum_coordinate_width, coordinate_observers
+)
 
 MODES = ("C", "T", "P")
 
@@ -46,16 +49,20 @@ def collision_for_axes(
     answers: Sequence[Hashable],
     axes: tuple[int, ...],
 ) -> Collision | None:
-    observed: dict[tuple[str, ...], tuple[tuple[str, ...], Hashable]] = {}
-    for s, answer in zip(states, answers, strict=True):
-        key = tuple(s[j] for j in axes)
-        if key in observed:
-            prior_state, prior_answer = observed[key]
-            if prior_answer != answer:
-                return Collision(axes, prior_state, s, prior_answer, answer)
-        else:
-            observed[key] = (s, answer)
-    return None
+    if len(states) != len(answers):
+        raise ValueError("Answer table must match finite domain")
+    answer_lookup = dict(zip(states, answers, strict=True))
+    if len(answer_lookup) != len(states):
+        raise ValueError("Finite states must be unique")
+    names = tuple(f"axis:{i}" for i in axes)
+    witness = first_collision(
+        states, answer_lookup.__getitem__, coordinate_observers(len(states[0])),
+        names,
+    )
+    if witness is None:
+        return None
+    return Collision(axes, witness.left_state, witness.right_state,
+                     witness.left_answer, witness.right_answer)
 
 
 def minimum_width(
@@ -66,32 +73,35 @@ def minimum_width(
         raise ValueError("Nonempty finite domain required")
     n = len(states[0])
     if any(len(s) != n or any(x not in MODES for x in s) for s in states):
-        raise ValueError("Every state must be a ternary tuple of uniform length")
-    if len(set(states)) != len(states):
-        raise ValueError("Duplicate states are not allowed")
-    answers = [query(s) for s in states]
-    failing: list[Collision] = []
-    for k in range(n + 1):
-        sufficient: list[tuple[int, ...]] = []
-        for axes in combinations(range(n), k):
-            collision = collision_for_axes(states, answers, axes)
-            if collision is None:
-                sufficient.append(axes)
-            else:
-                failing.append(collision)
-        if sufficient:
-            return WidthResult(k, tuple(sufficient), tuple(failing), len(states))
-    raise AssertionError("The identity projection is sufficient on a finite domain")
+        raise ValueError("Expected fixed-length three-mode tuples")
+    result = minimum_coordinate_width(states, query)
+    if result is None:
+        raise AssertionError("Full coordinate projection should be sufficient")
+    failing = tuple(
+        Collision(
+            tuple(int(name.removeprefix("axis:")) for name in witness.observer_names),
+            witness.left_state, witness.right_state,
+            witness.left_answer, witness.right_answer,
+        )
+        for witness in result.rejected
+    )
+    return WidthResult(
+        result.width,
+        tuple(tuple(int(name.removeprefix("axis:")) for name in choice)
+              for choice in result.sufficient_observers),
+        failing,
+        result.finite_domain_size,
+    )
 
 
 def main() -> None:
     from argparse import ArgumentParser
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("--axes", type=int, default=4)
-    parser.add_argument("--query", choices=["identity", "grid", "last", "parity"], default="identity")
+    parser.add_argument("--query", choices=("identity", "grid", "last", "parity"), default="identity")
     args = parser.parse_args()
-    if args.axes < 2 or args.axes > 9:
-        parser.error("--axes must be between 2 and 9 for exhaustive evaluation")
+    if not 2 <= args.axes <= 9:
+        parser.error("--axes must be between 2 and 9")
     states = list(cube(args.axes))
     if args.query == "identity":
         query = lambda s: s
