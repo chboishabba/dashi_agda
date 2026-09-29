@@ -38,7 +38,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -223,10 +223,7 @@ module CanonicalCompleteSignedTarget
   completeTargetIntegralIsCanonicalOrbitIntegral cutoff S terminal =
     Energy.integrationCongruent integrationLinearity
       (λ time →
-        trans
-          (refl {x = completeTargetRate cutoff S time})
-          (Relation.Binary.PropositionalEquality.sym
-            (At.canonicalOrbitRateIsCompleteTarget cutoff time S)))
+        sym (At.canonicalOrbitRateIsCompleteTarget cutoff time S))
       terminal
 
   completeTargetNonnegativeBuildsR742 :
