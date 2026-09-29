@@ -18,10 +18,14 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
+open import Data.Product using (_×_; _,_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact as H2
+import DASHI.Physics.YangMills.YangMillsClayCMP119RealSameOSH3Exact as LegacyH3
+import DASHI.Physics.YangMills.BalabanOSMassGapClosure as CoreOS
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact as Pinned
@@ -275,6 +279,92 @@ physicalCoreMassGapCertificate
     ; OS.PhysicalMassGapCertificate.spectrumAboveVacuumGap =
         physicalCoreSpectrumGap physical positive
     }
+
+------------------------------------------------------------------------
+-- Compatibility theorem: after OS4 is attached, the old H3 record consumes
+-- precisely this semigroup/overlap/completeness source.  Its spectrum predicate
+-- is NOT trivial: it states equality to the core Hamiltonian AND equality of
+-- every selected R281 correlation with the core-H semigroup matrix element.
+------------------------------------------------------------------------
+
+coreH3AsLegacy :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable
+      sequenceLimit limitLaws quotient division S}
+    (h2 :
+      H2.CMP119DirectPhysicalH2Core
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (clustering : H2.CMP119DirectPhysicalH2OS4Attachment h2)
+    {covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit}
+    {group : G}
+    {source :
+      CMP116.PublishedCMP116DifferentiatedLocalization
+        Scale Volume Root SourceDirection ℝ}
+    {application :
+      RealGap.CMP119CoreRealSelectedSpectrumApplication
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vector
+        Scale Volume Root SourceDirection SpectralObservable ℚ
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = S}
+        (H2.coreInputs h2) covarianceLaws group source} →
+  CMP119CoreSemigroupH3
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+    EuclideanAction Permutation Epsilon Witness
+    Scale Volume Root SourceDirection SpectralObservable
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S
+    h2 covarianceLaws group source application →
+  LegacyH3.CMP119RealSameOSH3
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+    EuclideanAction Permutation Epsilon Witness
+    Scale Volume Root SourceDirection SpectralObservable
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division S
+    (H2.asLegacyH2 h2 clustering)
+    covarianceLaws group source
+    (RealGap.coreSelectedAsLegacy
+      (H2.coreInputs h2)
+      (H2.asPinnedOS4Attachment clustering)
+      application)
+coreH3AsLegacy h2 clustering {application = application} physical = record
+  { LegacyH3.CMP119RealSameOSH3.SpectrumOfH2ReconstructedHamiltonian =
+      λ h spectrum →
+        (h ≡ Pinned.reconstructedHamiltonianCore
+          (H2.reconstructionCore h2) _)
+        ×
+        (∀ observable time →
+          Gap.connectedCorrelation spectrum observable time
+          ≡
+          ConnectedSemigroupMatrixElement physical
+            (Pinned.reconstructedHamiltonianCore
+              (H2.reconstructionCore h2) _)
+            (wilsonVector physical observable) time)
+  ; LegacyH3.CMP119RealSameOSH3.exactSelectedR281SpectrumIsH2Reconstructed =
+      refl , exactSelectedCovarianceIsCoreSemigroup physical
+  ; LegacyH3.CMP119RealSameOSH3.SpectrumAboveVacuumGap =
+      SpectrumAboveVacuumGap physical
+  ; LegacyH3.CMP119RealSameOSH3.noPositiveSubgapMeansActualSpectrumSeparated =
+      λ noSubgap →
+        physicalSpectrumCompleteness physical
+          (λ energy positive below mode →
+            noSubgap energy positive below
+              (everyPhysicalSubgapDetected physical energy mode))
+  }
+
+coreH3ToLegacyAfterOS4CompilerLevel : ProofLevel
+coreH3ToLegacyAfterOS4CompilerLevel = machineChecked
 
 cmp119CoreH3SpectralExclusionCompilerLevel : ProofLevel
 cmp119CoreH3SpectralExclusionCompilerLevel = machineChecked
