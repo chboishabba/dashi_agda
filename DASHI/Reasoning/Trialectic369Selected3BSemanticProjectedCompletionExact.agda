@@ -33,6 +33,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369SemanticLinearConstituentRetractionCompilerExact as SemanticRetraction
+import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as Retraction
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 
 ------------------------------------------------------------------------
@@ -63,7 +64,7 @@ compiledRetraction :
   ∀ {Monster K}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
   SemanticProjectedSelected3BCompletionInput core →
-  DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact.ConstituentRetraction core
+  Retraction.ConstituentRetraction core
 compiledRetraction core input =
   SemanticRetraction.constituentRetractionFromSemanticWeld
     core
