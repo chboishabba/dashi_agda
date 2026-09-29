@@ -51,6 +51,7 @@ record QuantitativeFourthPrimitiveBoundary : Set where
     absoluteScaleAuditCommit : String
     signedBudgetCommit : String
     weightedKernelProducerCommit : String
+    targetHeightOverheadCommit : String
 
     exactTerminalProductBudgetSourceWritten : Bool
     admissibleCoefficientThresholdSourceWritten : Bool
@@ -61,6 +62,7 @@ record QuantitativeFourthPrimitiveBoundary : Set where
     weightedKernelGlobalMassProducerSourceWritten : Bool
     signedFiniteAbelBudgetIffSourceWritten : Bool
     nonpositiveBudgetBlocksAbsoluteSourceWritten : Bool
+    targetHeightOverheadExactSourceWritten : Bool
     unconditionalQuantitativePhysicalCapBoundPaid : Bool
     primitiveBoundFitsTerminalBudgetPaid : Bool
     signedFifthKernelPairingEstimatePaid : Bool
@@ -77,6 +79,8 @@ record QuantitativeFourthPrimitiveBoundary : Set where
       weightedKernelGlobalMassProducerSourceWritten ≡ true
     signedBudgetIffSourceWrittenIsTrue :
       signedFiniteAbelBudgetIffSourceWritten ≡ true
+    overheadIdentitySourceWrittenIsTrue :
+      targetHeightOverheadExactSourceWritten ≡ true
     productBudgetIsExplicit :
       exactTerminalProductBudgetSourceWritten ≡ true
     coefficientThresholdIsExplicit :
@@ -100,10 +104,11 @@ canonicalQuantitativeFourthPrimitiveBoundary =
     "cc364b53d9533243e86da170a0f25c2805d4d1b2"
     "48886e27436a74ae2cfdb881738b80debc463bbe"
     "823ed3556e1abbe2f12c1d6d514d696306ccce27"
+    "f6eefd3d5ac04a0237ec0e5d300932c64fe5ca47"
 
     true true true true true
 
-    true true true false false false false false false
+    true true true true false false false false false false
 
 
 
@@ -112,4 +117,4 @@ canonicalQuantitativeFourthPrimitiveBoundary =
     "|P4(Q)| <= B(t)*(1+Q^5), with B(t)*integral_[eta0,infinity] (1+q^5)*|C5(q)| dq strictly inside the SAME terminal budget"
     "Decide the exact budget sign for the selected witness and prove a lower bound on the literal signed outer Abel integral exceeding minus that budget, or prove a physical quartic-cap upper bound whose product with the paid weighted kernel norm fits the positive absolute budget."
 
-    refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl
