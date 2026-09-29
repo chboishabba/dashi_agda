@@ -229,6 +229,62 @@ exactWardSource {cSource = cSource} h6 =
   wardSourceFromC h6
     (DirectC.asGoal1CanonicalCSource cSource)
 
+------------------------------------------------------------------------
+-- Once the physically identified local Ward kernel is supplied, the
+-- Maxwell coefficient classifier is constructive.  No second physical
+-- classification witness is required by the H6 consumer.
+------------------------------------------------------------------------
+
+exactMaxwellClassificationFromC :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable ContinuumFamily
+      sequenceLimit limitLaws quotient division S Y h2 covarianceLaws group
+      source application h3 positive cSource}
+    (h6 :
+      CMP119DirectSameSystemH6
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        Scale Volume Root SourceDirection SpectralObservable ContinuumFamily
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S Y h2 covarianceLaws group source
+        application h3 positive cSource) →
+  (gaussian :
+    R563.Gaussian (exactWardSource h6)
+      (OSSystem.continuumOSSystem (H2.osInputs h2) group)) →
+  Ward.GenericMaxwellQuadraticKernelClassification
+    (R563.coefficientAlgebra (exactWardSource h6))
+    (R563.gaussianLocalTwoDerivativeWardKernel
+      (exactWardSource h6) gaussian)
+exactMaxwellClassificationFromC h6 gaussian =
+  R563.sameFamilyWardMaxwellClassification (exactWardSource h6) gaussian
+
+actualSameSystemMaxwellSectorFromGaussian :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable ContinuumFamily
+      sequenceLimit limitLaws quotient division S Y h2 covarianceLaws group
+      source application h3 positive cSource}
+    (h6 :
+      CMP119DirectSameSystemH6
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        Scale Volume Root SourceDirection SpectralObservable ContinuumFamily
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S Y h2 covarianceLaws group source
+        application h3 positive cSource) →
+  (gaussian :
+    R563.Gaussian (exactWardSource h6)
+      (OSSystem.continuumOSSystem (H2.osInputs h2) group)) →
+  Disp.GaplessGaugeInvariantPhysicalSector (gapOrder h6)
+actualSameSystemMaxwellSectorFromGaussian h6 gaussian =
+  gaussianMaxwellPhysicalSector h6 gaussian
+    (exactMaxwellClassificationFromC h6 gaussian)
+
 h3GapCertificateUsesExactH2Hamiltonian :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
