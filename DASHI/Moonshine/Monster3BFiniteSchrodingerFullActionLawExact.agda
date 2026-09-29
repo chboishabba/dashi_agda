@@ -123,6 +123,30 @@ actionIsWeylNormalForm =
   Weyl.heisenbergActionFactorsThroughWeyl
 
 ------------------------------------------------------------------------
+-- 2b. Pointwise equality transports through a Weyl normal form.
+------------------------------------------------------------------------
+
+normalFormCongPointwise :
+  (c : Trit) →
+  (a b : G.X6) →
+  (left right : Schrodinger.SchrodingerFunction) →
+  ((x : G.X6) → left x ≡ right x) →
+  (x : G.X6) →
+  weylNormalForm c a b left x
+  ≡
+  weylNormalForm c a b right x
+normalFormCongPointwise c a b left right equal x =
+  let y = Action.translateByVector a x in
+  cong
+    (λ value →
+      C3.multiply
+        (Schrodinger.phase c)
+        (C3.multiply
+          (Schrodinger.phase (H.dot6 b y))
+          value))
+    (equal y)
+
+------------------------------------------------------------------------
 -- 3. Composition of normal forms.
 ------------------------------------------------------------------------
 
@@ -250,16 +274,26 @@ actionCompositionPointwise
       (sym
         (normalFormComposition
           c C a b A B f x))
-      (cong
-        (λ z →
-          C3.multiply
-            (Schrodinger.phase c)
-            z)
+      (trans
+        (normalFormCongPointwise
+          c a b
+          (weylNormalForm C A B f)
+          (Action.heisenbergAction
+            (H.heisenberg6 (H.symplectic12 A B) C)
+            f)
+          (λ point →
+            sym
+              (actionIsWeylNormalForm
+                (H.heisenberg6 (H.symplectic12 A B) C)
+                f point))
+          x)
         (sym
           (actionIsWeylNormalForm
-            (H.heisenberg6 (H.symplectic12 A B) C)
-            f
-            (Action.translateByVector a x)))))
+            (H.heisenberg6 (H.symplectic12 a b) c)
+            (Action.heisenbergAction
+              (H.heisenberg6 (H.symplectic12 A B) C)
+              f)
+            x))))
 
 ------------------------------------------------------------------------
 -- 5. Package the previously open action-law receipt.
