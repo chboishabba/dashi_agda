@@ -650,3 +650,6 @@ import DASHI.Physics.Closure.NSTriadKNR650PhysicalViscositySharedBarrierRound819
 import DASHI.Physics.Closure.NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650CCTouchedSignedRowsRound822Exact
+import DASHI.Physics.Closure.NSTriadKNR650SignedComparableReserveRound823Exact
