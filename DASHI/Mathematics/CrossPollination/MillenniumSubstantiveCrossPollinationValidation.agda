@@ -156,3 +156,16 @@ import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact
 import DASHI.Mathematics.Automorphic.EllipticModularityReceiptExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPLocalArityTerminalAdmissionExact
+------------------------------------------------------------------------
+-- Exact candidate-root indexed Shannon reference graph tranche.
+-- Kept distinct from the still-open admitted/charged Q1 constructor.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1EnumeratedMergedLayerExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedTruthTableAutomatonExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1PackedIndexedReferenceMachineExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExplicitIndexedGraphExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CandidateQuotedIndexedGraphExact
