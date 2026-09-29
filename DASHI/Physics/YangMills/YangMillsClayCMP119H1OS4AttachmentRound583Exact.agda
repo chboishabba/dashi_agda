@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _-ℝ_; absℝ; _<ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _<ℝ_)
 open import Data.Product using (Σ; _×_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayCMP119DirectPhysicalH2CoreExact as H2Core
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
+import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -148,6 +149,30 @@ record CMP119CoreH1OS4Meaning
     WilsonProduct : Set
     embedWilson : WilsonProduct → FullTest
     multiplyWilson : WilsonProduct → WilsonProduct → WilsonProduct
+    zeroWilson oneWilson : WilsonProduct
+    addWilson : WilsonProduct → WilsonProduct → WilsonProduct
+    scaleWilson : ℝ → WilsonProduct → WilsonProduct
+
+    -- Algebra structure is the actual CMP119 cylinder algebra, not merely
+    -- a caller-supplied closure label.  We require the same multiplication
+    -- used for finite OS2 and the continuum covariance products.
+    embedsZero : ∀ configuration →
+      embedWilson zeroWilson configuration ≡ 0ℝ
+    embedsOne : ∀ configuration →
+      embedWilson oneWilson configuration ≡ 1ℝ
+    embedsSum : ∀ left right configuration →
+      embedWilson (addWilson left right) configuration ≡
+        embedWilson left configuration +ℝ
+        embedWilson right configuration
+    embedsScalar : ∀ scalar test configuration →
+      embedWilson (scaleWilson scalar test) configuration ≡
+        scalar *ℝ embedWilson test configuration
+    embedsCylinderProduct : ∀ left right →
+      embedWilson (multiplyWilson left right) ≡
+      OS2.multiplyObservable
+        (OSSystem.observableAlgebraCore (H2Core.coreInputs h2))
+        (embedWilson left) (embedWilson right)
+
     translateWilson : WilsonProduct → Nat → WilsonProduct
     translateFull : FullTest → Nat → FullTest
 
