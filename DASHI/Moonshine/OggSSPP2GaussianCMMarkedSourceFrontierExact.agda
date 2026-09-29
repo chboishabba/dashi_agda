@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as F4Zeta
 import DASHI.Moonshine.OggSSPP2BanerjeeGaloisOrbitNoGoExact as BanerjeeGalNoGo
 module DASHI.Moonshine.OggSSPP2GaussianCMMarkedSourceFrontierExact where
 
@@ -195,6 +196,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     badPrimeLevelStructureBoundaryOwned : Bool
     gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
     canonicalRawGamma0FourFlagOwned : Bool
+    f4ZetaCurveNinePointAndThreeRootChartOwned : Bool
     banerjeeGaloisOrbitFiveNotTenOwned : Bool
     gamma0FourRefinedCompactificationBoundaryOwned : Bool
     gamma0FourTwoIsogenyChainSocketOwned : Bool
@@ -243,6 +245,7 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; badPrimeLevelStructureBoundaryOwned = true
     ; gamma0FourMarkedSubgroupSchemeSocketOwned = true
     ; canonicalRawGamma0FourFlagOwned = true
+    ; f4ZetaCurveNinePointAndThreeRootChartOwned = true
     ; banerjeeGaloisOrbitFiveNotTenOwned = true
     ; gamma0FourRefinedCompactificationBoundaryOwned = true
     ; gamma0FourTwoIsogenyChainSocketOwned = true
