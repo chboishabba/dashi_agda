@@ -139,6 +139,8 @@ differentP3DoesNotEqualCorrection =
 -- We deliberately provide NO inhabitant of this stronger contract.
 ------------------------------------------------------------------------
 
+data ExternalTetrationalMonsterValuationIdentification : Set where
+
 record TetrationToMonsterValuationMechanism : Set₁ where
   field
     towerHeightAt : Wild.SmallCharacteristicPrime -> Nat
@@ -161,9 +163,8 @@ record TetrationToMonsterValuationMechanism : Set₁ where
       (p : Wild.SmallCharacteristicPrime) ->
       contributionAt p ≡ Wild.wildGeometricSectorCount p
 
-    sourceAuthorityForValuationContribution : Set
     identifiedWithClassicalMonsterValuation :
-      sourceAuthorityForValuationContribution
+      ExternalTetrationalMonsterValuationIdentification
 
 ------------------------------------------------------------------------
 -- 6. Machine-checkable provenance and claim boundary.
