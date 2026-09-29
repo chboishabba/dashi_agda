@@ -49,6 +49,8 @@ record QuantitativeFourthPrimitiveBoundary : Set where
     absoluteBudgetCommit : String
     weightedKernelCompilerCommit : String
     absoluteScaleAuditCommit : String
+    signedBudgetCommit : String
+    weightedKernelProducerCommit : String
 
     exactTerminalProductBudgetSourceWritten : Bool
     admissibleCoefficientThresholdSourceWritten : Bool
@@ -57,6 +59,8 @@ record QuantitativeFourthPrimitiveBoundary : Set where
     absoluteCesaroScaleComparisonSourceWritten : Bool
 
     weightedKernelGlobalMassProducerSourceWritten : Bool
+    signedFiniteAbelBudgetIffSourceWritten : Bool
+    nonpositiveBudgetBlocksAbsoluteSourceWritten : Bool
     unconditionalQuantitativePhysicalCapBoundPaid : Bool
     primitiveBoundFitsTerminalBudgetPaid : Bool
     signedFifthKernelPairingEstimatePaid : Bool
@@ -69,6 +73,10 @@ record QuantitativeFourthPrimitiveBoundary : Set where
     polynomialCriterion : String
     unresolvedAnalyticTheorem : String
 
+    weightedKernelGlobalMassSourceWrittenIsTrue :
+      weightedKernelGlobalMassProducerSourceWritten ≡ true
+    signedBudgetIffSourceWrittenIsTrue :
+      signedFiniteAbelBudgetIffSourceWritten ≡ true
     productBudgetIsExplicit :
       exactTerminalProductBudgetSourceWritten ≡ true
     coefficientThresholdIsExplicit :
@@ -90,14 +98,18 @@ canonicalQuantitativeFourthPrimitiveBoundary =
     "6fbeb8df7a35408817323ffa8127ff0b75b4e5ab"
     "7405a1152a3a9f5ee44f40032fd40396038f1649"
     "cc364b53d9533243e86da170a0f25c2805d4d1b2"
+    "48886e27436a74ae2cfdb881738b80debc463bbe"
+    "823ed3556e1abbe2f12c1d6d514d696306ccce27"
 
     true true true true true
 
-    false false false false false false false
+    true true true false false false false false false
+
+
 
     "If |D(t-rq,t+rq)| <= E throughout [eta0,Q], then |P4(Q)| <= r^4*E*(Q-eta0)^4/24. This is an upper bound, not a lower bound on P4 or a proof that signed cancellation is impossible."
     "B*K5 < 2*(r^6*terminalMargin-r^6*horizontal+r^6*localCorrection)"
     "|P4(Q)| <= B(t)*(1+Q^5), with B(t)*integral_[eta0,infinity] (1+q^5)*|C5(q)| dq strictly inside the SAME terminal budget"
-    "Prove an unconditional selected-height quantitative physical quartic-cap N-mu bound satisfying the strict budget, or prove a one-sided bound on the signed fifth-kernel cap pairing jointly with horizontal/local terms."
+    "Decide the exact budget sign for the selected witness and prove a lower bound on the literal signed outer Abel integral exceeding minus that budget, or prove a physical quartic-cap upper bound whose product with the paid weighted kernel norm fits the positive absolute budget."
 
-    refl refl refl refl refl
+    refl refl refl refl refl refl refl
