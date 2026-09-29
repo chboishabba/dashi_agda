@@ -512,3 +512,4 @@ import DASHI.Moonshine.OggSSPP2F4CurveTangentFlexExact
 import DASHI.Moonshine.OggSSPP2F4CurveFrobeniusNegationOrbitExact
 import DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredSheet9Exact
 import DASHI.Moonshine.OggSSPP2F4CurveKleinResidualSourceNoGoExact
+import DASHI.Moonshine.OggSSPP2F4CurveKleinActionGroupoidExact
