@@ -199,6 +199,71 @@ record CMP119CoreRealSelectedSpectrumApplication
 
 open CMP119CoreRealSelectedSpectrumApplication public
 
+------------------------------------------------------------------------
+-- The core R281 source is transported unchanged through OS4 attachment.
+-- Its selected tests, spectral lower/rate data and real H1 producer are not
+-- chosen afresh on the legacy full system.
+------------------------------------------------------------------------
+
+coreSelectedAsLegacy :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Scale Volume Root SourceDirection SpectralObservable Energy
+      sequenceLimit limitLaws quotient division S}
+    (core :
+      A.PinnedCMP119OSCoreInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    (clustering : A.CMP119OS4Attachment core)
+    {covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit}
+    {group : G}
+    {source :
+      CMP116.PublishedCMP116DifferentiatedLocalization
+        Scale Volume Root SourceDirection ℝ} →
+  CMP119CoreRealSelectedSpectrumApplication
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+    Scale Volume Root SourceDirection SpectralObservable Energy
+    {sequenceLimit = sequenceLimit}
+    {limitLaws = limitLaws}
+    {quotient = quotient}
+    {division = division}
+    {S = S}
+    core covarianceLaws group source →
+  CMP119RealSelectedSpectrumApplication
+    G X Configuration Position CurvaturePolynomial LocalOperator
+    OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+    Scale Volume Root SourceDirection SpectralObservable Energy
+    {sequenceLimit = sequenceLimit}
+    {limitLaws = limitLaws}
+    {quotient = quotient}
+    {division = division}
+    {S = S}
+    (A.corePlusOS4Inputs core clustering)
+    covarianceLaws group source
+coreSelectedAsLegacy core clustering application = record
+  { CMP119RealSelectedSpectrumApplication.tests =
+      testsCore application
+  ; CMP119RealSelectedSpectrumApplication.spectrumSource =
+      spectrumSourceCore application
+  ; CMP119RealSelectedSpectrumApplication.realH1 =
+      RealH1.coreH1AsLegacy
+        core clustering (realH1Core application)
+  ; CMP119RealSelectedSpectrumApplication.selectedLeftIsH1Left =
+      selectedLeftIsH1LeftCore application
+  ; CMP119RealSelectedSpectrumApplication.selectedRightIsH1Right =
+      selectedRightIsH1RightCore application
+  ; CMP119RealSelectedSpectrumApplication.physicalUpperBelowSpectrumEnvelope =
+      physicalUpperBelowSpectrumEnvelopeCore application
+  ; CMP119RealSelectedSpectrumApplication.realOrderImpliesSpectrumOrder =
+      realOrderImpliesSpectrumOrderCore application
+  }
+
+coreR281ToLegacyAfterOS4CompilerLevel : ProofLevel
+coreR281ToLegacyAfterOS4CompilerLevel = machineChecked
+
 selectedCoreContinuumCovarianceBelowSpectrumEnvelope :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
