@@ -101,8 +101,8 @@ fixedMomentumDegeneracy :
   E k NativeSpin.up ≡ E k NativeSpin.down
 fixedMomentumDegeneracy E law k fixed =
   trans
-    (sym (law k NativeSpin.down))
-    (cong (λ q → E q NativeSpin.up) fixed)
+    (sym (law k NativeSpin.up))
+    (cong (λ q → E q NativeSpin.down) fixed)
 
 kzZeroFixed : (d : InPlane) (h : Channel) →
   mirrorK (point zeroPlane d h) ≡ point zeroPlane d h
