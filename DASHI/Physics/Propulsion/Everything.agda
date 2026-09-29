@@ -9,3 +9,4 @@ import DASHI.Physics.Propulsion.ReliabilityCapacityResourceDemandBidiExact
 import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExact
 
 import DASHI.Physics.Propulsion.RocketdyneBerylliumQualificationEvidenceExact
+import DASHI.Physics.Propulsion.Rocketdyne1974MeasuredResultsExact
