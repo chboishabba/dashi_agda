@@ -51,6 +51,7 @@ import DASHI.Moonshine.JInvariant369Zeta6561MonsterCrosswalkExact
 import DASHI.Moonshine.JInvariant369TenRankSeventeenHyperformalismExact
 
 import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact
+import DASHI.Moonshine.OggSSPP2WeilHeisenbergNativeBidiExact
 
 module DASHI.Moonshine.Everything where
 
