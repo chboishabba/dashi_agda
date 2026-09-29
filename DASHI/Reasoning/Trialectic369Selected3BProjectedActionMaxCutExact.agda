@@ -176,6 +176,41 @@ canonicalCompletionFromProjectedAction core retraction projected =
     }
 
 ------------------------------------------------------------------------
+-- 3b. Compatibility: existing canonical action + retraction gives the
+--     projected-action receipt automatically.
+------------------------------------------------------------------------
+
+projectedActionFromCanonicalIntertwining :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (retraction : Retraction.ConstituentRetraction core) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  SelectedActionIsProjectedFullGrade core retraction
+projectedActionFromCanonicalIntertwining core retraction action =
+  record
+    { selectedEqualsProjectedFullGrade = λ normalizer state →
+        trans
+          (sym
+            (Comparison.includedActionEqualityFromIntertwining
+              core action normalizer state))
+          (sym
+            (projectedFullGradeRecoversConstituent
+              core retraction normalizer state))
+    }
+
+projectedCompletionFromCanonicalIntertwining :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (retraction : Retraction.ConstituentRetraction core) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  Core.CanonicalSelected3BLinearCompletion {Monster} {K}
+projectedCompletionFromCanonicalIntertwining core retraction action =
+  canonicalCompletionFromProjectedAction
+    core retraction
+    (projectedActionFromCanonicalIntertwining
+      core retraction action)
+
+------------------------------------------------------------------------
 -- 4. One source counterexample rejects the projected route.
 ------------------------------------------------------------------------
 
@@ -247,6 +282,7 @@ record Trialectic369Selected3BProjectedActionMaxCutBoundary : Set where
     fullGradeProjectionRecoversConstituentAction : Bool
     separateInclusionInjectivityNotRequiredOnProjectedRoute : Bool
     oneProjectedActionEquationSuffices : Bool
+    canonicalActionImpliesProjectedReceiptGivenRetraction : Bool
     canonicalActionCompilerOwned : Bool
     canonicalCompletionCompilerOwned : Bool
     actualLinearRetractionInhabitedHere : Bool
@@ -257,5 +293,5 @@ canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary :
   Trialectic369Selected3BProjectedActionMaxCutBoundary
 canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary =
   trialectic-369-selected3b-projected-action-maxcut-boundary
-    true true true true true
+    true true true true true true
     false false false
