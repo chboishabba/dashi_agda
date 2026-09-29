@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Propulsion.RocketdyneBerylliumQualificationEvidenceExact as Rocket
+import DASHI.Physics.Propulsion.Rocketdyne1974MeasuredResultsExact as Data
 import DASHI.Culture.AmyEskridgeHAL5AntigravitySourceEntitlementExact as Amy
 import DASHI.Culture.MissingDeceasedCombinedRocketScramjetVehicleBidiExact as Vehicle
 
@@ -124,3 +125,13 @@ record InvestigativeNonPromotion : Set where
 canonicalNonPromotion : InvestigativeNonPromotion
 canonicalNonPromotion =
   non-promotion false false false false false false true
+
+-- Material/valve outcomes remain source-specific; neither is a gravity test.
+archivalNozzleDamage : Data.ComponentOutcome
+archivalNozzleDamage = Data.nozzleHighTemperatureDamage
+
+archivalValveFailure : Data.ComponentOutcome
+archivalValveFailure = Data.moogContamination
+
+archivalSteadyPerformance : Data.DecimalResult
+archivalSteadyPerformance = Data.unsaturatedIsp
