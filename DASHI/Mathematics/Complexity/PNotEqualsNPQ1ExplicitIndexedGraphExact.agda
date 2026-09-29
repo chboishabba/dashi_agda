@@ -63,6 +63,55 @@ allFinCovers {suc n} (Fin.suc index) =
       (allFinCovers index))
 
 ------------------------------------------------------------------------
+-- Generic membership transport through the literal flattening algorithm.
+------------------------------------------------------------------------
+
+listedInAppendLeft :
+  ∀ {A : Set} {item : A}
+    {left right : List A} →
+  Listed item left →
+  Listed item (left ++ right)
+listedInAppendLeft first =
+  first
+listedInAppendLeft (later inTail) =
+  later (listedInAppendLeft inTail)
+
+listedInAppendRight :
+  ∀ {A : Set}
+    {item : A}
+    (left : List A)
+    {right : List A} →
+  Listed item right →
+  Listed item (left ++ right)
+listedInAppendRight [] inRight =
+  inRight
+listedInAppendRight (_ ∷ tail) inRight =
+  later (listedInAppendRight tail inRight)
+
+concatMap :
+  ∀ {A B : Set} →
+  (A → List B) →
+  List A →
+  List B
+concatMap f [] = []
+concatMap f (item ∷ rest) =
+  f item ++ concatMap f rest
+
+concatMapCovers :
+  ∀ {A B : Set}
+    (f : A → List B)
+    {index : A} {item : B}
+    {items : List A} →
+  Listed index items →
+  Listed item (f index) →
+  Listed item (concatMap f items)
+concatMapCovers f {items = _ ∷ _} first member =
+  listedInAppendLeft member
+concatMapCovers f {items = head ∷ tail} (later present) member =
+  listedInAppendRight (f head)
+    (concatMapCovers f present member)
+
+------------------------------------------------------------------------
 -- Explicit finite key-index enumeration.
 ------------------------------------------------------------------------
 
@@ -201,6 +250,48 @@ buildReferenceGraph bound =
     (allPackedStates bound)
     (allEmittedTransitions bound)
     (allEmittedTerminals bound)
+
+------------------------------------------------------------------------
+-- COVERAGE: no state, transition or terminal is omitted by graph generation.
+------------------------------------------------------------------------
+
+allPackedStatesCover :
+  ∀ {bound : Nat}
+    (remaining : Fin.Fin (suc bound))
+    (index : Indexed.IndexedState (Fin.toℕ remaining)) →
+  Listed
+    (Packed.packed remaining index)
+    (allPackedStates bound)
+allPackedStatesCover remaining index =
+  concatMapCovers statesAtArity
+    (allFinCovers remaining)
+    (mapPreservesListed
+      (Packed.packed remaining)
+      (allIndexedStatesCover index))
+
+allEmittedTransitionsCover :
+  ∀ {bound : Nat}
+    (remaining : Fin.Fin bound)
+    (index : Indexed.IndexedState (suc (Fin.toℕ remaining))) →
+  Listed
+    (emitTransition remaining index)
+    (allEmittedTransitions bound)
+allEmittedTransitionsCover remaining index =
+  concatMapCovers transitionsAtArity
+    (allFinCovers remaining)
+    (mapPreservesListed
+      (emitTransition remaining)
+      (allIndexedStatesCover index))
+
+allEmittedTerminalsCover :
+  ∀ {bound : Nat}
+    (index : Indexed.IndexedState zero) →
+  Listed
+    (emitTerminal index)
+    (allEmittedTerminals bound)
+allEmittedTerminalsCover index =
+  mapPreservesListed emitTerminal
+    (allIndexedStatesCover index)
 
 ------------------------------------------------------------------------
 -- Admission at a source state is operationally exact: the explicit targets
