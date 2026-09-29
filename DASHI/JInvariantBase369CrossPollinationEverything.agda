@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as CurveS3
 import DASHI.Moonshine.OggSSPWildDifferentArithmeticObstructionExact
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact
 import DASHI.Moonshine.OggSSPP2BanerjeeGaloisOrbitNoGoExact
