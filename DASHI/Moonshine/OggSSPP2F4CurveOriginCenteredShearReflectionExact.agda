@@ -21,6 +21,7 @@ module DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredShearReflectionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
@@ -120,16 +121,14 @@ centeredIdentityFixedByFrobenius =
 record Boundary : Set where
   constructor boundary
   field
-    pointedCurveSheetBidiReused : Agda.Builtin.Bool.Bool
-    actualCurveShearTransported : Agda.Builtin.Bool.Bool
-    actualFrobeniusTransported : Agda.Builtin.Bool.Bool
-    sheetShearOrderThree : Agda.Builtin.Bool.Bool
-    sheetFrobeniusOrderTwo : Agda.Builtin.Bool.Bool
-    sheetS3ConjugationRelation : Agda.Builtin.Bool.Bool
-    groupLawIntertwiningProved : Agda.Builtin.Bool.Bool
-    monsterValuationRecognitionProved : Agda.Builtin.Bool.Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
+    pointedCurveSheetBidiReused : Bool
+    actualCurveShearTransported : Bool
+    actualFrobeniusTransported : Bool
+    sheetShearOrderThree : Bool
+    sheetFrobeniusOrderTwo : Bool
+    sheetS3ConjugationRelation : Bool
+    groupLawIntertwiningProved : Bool
+    monsterValuationRecognitionProved : Bool
 
 canonicalBoundary : Boundary
 canonicalBoundary =
