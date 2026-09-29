@@ -33,6 +33,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExa
 -- restricted and its primitive semantics are separately audited.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
@@ -60,9 +61,10 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as
 ------------------------------------------------------------------------
 
 data Iterates
-    {MachineState : Set}
+    {ℓ : Level}
+    {MachineState : Set ℓ}
     (step : MachineState → MachineState) :
-    Nat → MachineState → MachineState → Set where
+    Nat → MachineState → MachineState → Set ℓ where
 
   iteratesZero :
     ∀ {state} →
