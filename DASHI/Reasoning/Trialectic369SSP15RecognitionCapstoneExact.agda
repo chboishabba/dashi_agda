@@ -1147,70 +1147,94 @@ semanticLinearRetractionCompilerBoundary :
 semanticLinearRetractionCompilerBoundary =
   SemanticRetraction.canonicalTrialectic369SemanticLinearRetractionCompilerBoundary
 
-semanticWeightTwoPointedSplitAlreadyOwned :
-  SemanticRetraction.semanticWeightTwoAlreadyPointed196883PlusOne
+semantic196883IsFiniteCoordinateCarrier :
+  SemanticRetraction.semanticCarrierIsFiniteCoordinateCarrier
     semanticLinearRetractionCompilerBoundary
   ≡ true
-semanticWeightTwoPointedSplitAlreadyOwned = refl
+semantic196883IsFiniteCoordinateCarrier = refl
 
-semanticLinearWeldCompilesActualRetraction :
-  SemanticRetraction.constituentRetractionCompilerOwned
+semanticLinearCarrierEqualityRejected :
+  SemanticRetraction.semanticLinearCarrierEqualityRejected
     semanticLinearRetractionCompilerBoundary
   ≡ true
-semanticLinearWeldCompilesActualRetraction = refl
+semanticLinearCarrierEqualityRejected = refl
 
-semanticLinearWeldStillOpen :
-  SemanticRetraction.semanticLinearWeldInhabitedHere
+semanticLinearBasisFrameIsCorrectBridgeType :
+  SemanticRetraction.basisFrameIsCorrectBridgeType
+    semanticLinearRetractionCompilerBoundary
+  ≡ true
+semanticLinearBasisFrameIsCorrectBridgeType = refl
+
+semanticBasisFrameDoesNotCompileRetraction :
+  SemanticRetraction.basisFrameAloneCompilesRetraction
     semanticLinearRetractionCompilerBoundary
   ≡ false
-semanticLinearWeldStillOpen = refl
+semanticBasisFrameDoesNotCompileRetraction = refl
 
-semanticLinearInclusionSquareStillOpen :
-  SemanticRetraction.inclusionSquareInhabitedHere
+semanticLinearBasisFrameStillOpen :
+  SemanticRetraction.actualSemanticLinearBasisFrameInhabitedHere
     semanticLinearRetractionCompilerBoundary
   ≡ false
-semanticLinearInclusionSquareStillOpen = refl
+semanticLinearBasisFrameStillOpen = refl
+
+actualLinearRetractionStillOpenAfterSemanticCorrection :
+  SemanticRetraction.actualLinearRetractionInhabitedHere
+    semanticLinearRetractionCompilerBoundary
+  ≡ false
+actualLinearRetractionStillOpenAfterSemanticCorrection = refl
 
 selected3BSemanticProjectedCompletionBoundary :
   SemanticProjected.Trialectic369Selected3BSemanticProjectedCompletionBoundary
 selected3BSemanticProjectedCompletionBoundary =
   SemanticProjected.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary
 
-selected3BRetractionNoLongerIndependentLeaf :
-  SemanticProjected.retractionNoLongerIndependentSourceLeaf
+selected3BSemanticBasisIsOptionalNotCarrierEquality :
+  SemanticProjected.semanticBasisFrameIsOptionalNotCarrierEquality
     selected3BSemanticProjectedCompletionBoundary
   ≡ true
-selected3BRetractionNoLongerIndependentLeaf = refl
+selected3BSemanticBasisIsOptionalNotCarrierEquality = refl
 
-selected3BInjectivityNoLongerIndependentLeaf :
-  SemanticProjected.inclusionInjectivityNoLongerIndependentSourceLeaf
+selected3BSemanticBasisDoesNotPayRetraction :
+  SemanticProjected.semanticBasisFrameDoesNotCompileRetraction
     selected3BSemanticProjectedCompletionBoundary
   ≡ true
-selected3BInjectivityNoLongerIndependentLeaf = refl
+selected3BSemanticBasisDoesNotPayRetraction = refl
 
-selected3BOnlySemanticWeldAndProjectedActionRemain :
-  SemanticProjected.onlySemanticLinearWeldAndProjectedActionRemain
+selected3BActualLinearRetractionIsSourceLeaf :
+  SemanticProjected.actualLinearRetractionIsSourceLeaf
     selected3BSemanticProjectedCompletionBoundary
   ≡ true
-selected3BOnlySemanticWeldAndProjectedActionRemain = refl
+selected3BActualLinearRetractionIsSourceLeaf = refl
 
-selected3BSemanticProjectedCanonicalCompletionCompilerPaid :
+selected3BProjectedActionIsSourceLeaf :
+  SemanticProjected.projectedActionEquationIsSourceLeaf
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BProjectedActionIsSourceLeaf = refl
+
+selected3BOnlyRetractionAndProjectedActionRemain :
+  SemanticProjected.onlyLinearRetractionAndProjectedActionRemain
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BOnlyRetractionAndProjectedActionRemain = refl
+
+selected3BCorrectedCanonicalCompletionCompilerPaid :
   SemanticProjected.canonicalCompletionCompilerOwned
     selected3BSemanticProjectedCompletionBoundary
   ≡ true
-selected3BSemanticProjectedCanonicalCompletionCompilerPaid = refl
+selected3BCorrectedCanonicalCompletionCompilerPaid = refl
 
-selected3BSemanticWeldStillOpen :
-  SemanticProjected.semanticLinearWeldInhabitedHere
+selected3BCorrectedActualRetractionStillOpen :
+  SemanticProjected.actualLinearRetractionInhabitedHere
     selected3BSemanticProjectedCompletionBoundary
   ≡ false
-selected3BSemanticWeldStillOpen = refl
+selected3BCorrectedActualRetractionStillOpen = refl
 
-selected3BSemanticProjectedActionStillOpen :
+selected3BCorrectedProjectedActionStillOpen :
   SemanticProjected.projectedActionInputInhabitedHere
     selected3BSemanticProjectedCompletionBoundary
   ≡ false
-selected3BSemanticProjectedActionStillOpen = refl
+selected3BCorrectedProjectedActionStillOpen = refl
 
 selected3BActualMonomialBasisStillUnpaid :
   SourceAndMonomial.actualMonomialBasisPaidHere
