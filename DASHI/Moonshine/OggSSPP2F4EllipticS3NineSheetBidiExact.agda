@@ -42,7 +42,7 @@ rhoAffineIsActualZetaTimesX :
   (p : Curve.AffineF4Point) →
   Curve.affineCoordinates (rhoAffine p)
     ≡
-  (Curve.zeta₄ Curve.*₄ proj₁ (Curve.affineCoordinates p) ,
+  (Curve._*₄_ Curve.zeta₄ (proj₁ (Curve.affineCoordinates p)) ,
    proj₂ (Curve.affineCoordinates p))
 rhoAffineIsActualZetaTimesX Curve.p00 = refl
 rhoAffineIsActualZetaTimesX Curve.p01 = refl
@@ -89,7 +89,7 @@ negAffineCoordinates :
   Curve.affineCoordinates (negAffine p)
     ≡
   (proj₁ (Curve.affineCoordinates p) ,
-   proj₂ (Curve.affineCoordinates p) Curve.+₄ Curve.one₄)
+   Curve._+₄_ (proj₂ (Curve.affineCoordinates p)) Curve.one₄)
 negAffineCoordinates Curve.p00 = refl
 negAffineCoordinates Curve.p01 = refl
 negAffineCoordinates Curve.p1Zeta = refl
