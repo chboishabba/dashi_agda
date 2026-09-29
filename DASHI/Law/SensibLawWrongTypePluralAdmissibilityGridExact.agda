@@ -30,7 +30,7 @@ module DASHI.Law.SensibLawWrongTypePluralAdmissibilityGridExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₂)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong)
 
@@ -99,7 +99,7 @@ situatedFactorsPermission :
   INF.FactorsThrough situatedProjection permissionDecision
 situatedFactorsPermission =
   INF.factorsThrough
-    (λ pair → Data.Product.proj₂ pair)
+    proj₂
     (λ _ → refl)
 
 -- The existing source-owning modules stay distinct; they are imported
