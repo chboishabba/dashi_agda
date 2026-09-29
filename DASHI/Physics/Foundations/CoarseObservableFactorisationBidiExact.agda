@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CoarseObservableFactorisationBidiExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
