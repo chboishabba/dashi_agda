@@ -28,7 +28,7 @@ open import DASHI.Core.Prelude
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; sym; trans)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.GradedRepresentation as GR
@@ -36,6 +36,10 @@ import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary as GVOA
 import DASHI.Moonshine.GradedRepresentationLinearRealisationExact as LinearRep
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
+import DASHI.Moonshine.MonsterGradedVOABridgeExact as MonsterVOA
+import DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact as LiteralWeld
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selected
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact as Comparison
 
@@ -85,11 +89,11 @@ fullGradeTwoActionAt core monster state =
     (GR.action
       (GR.grade
         (GVOA.gradedRepresentation
-          (DASHI.Moonshine.MonsterGradedVOABridgeExact.voaAction
-            (DASHI.Moonshine.MonsterGradedVOALiteralActionSameObjectBidiExact.gradedAuthority
-              (DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact.weld
-                (DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact.selectedSource
-                  (DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact.attachment
+          (MonsterVOA.voaAction
+            (LiteralWeld.gradedAuthority
+              (Selected.weld
+                (KernelSame.selectedSource
+                  (KernelSame.attachment
                     (Core.kernelRecognizedSameElementAttachment core)))))))
         2)
       monster)
