@@ -80,9 +80,13 @@ record FullMonomialBasisReceipt
     indexActAfterInverse :
       (g : RouteGroup route) (index : Fin 90) →
       indexAct monomial g (inverseIndexAct g index) ≡ index
+    scalarZero :
+      Linear.Scalar
+        (WrongType.linearCarrier
+          (WrongType.linearRepresentation route))
     nonzeroScalarCoefficient :
       (g : RouteGroup route) (index : Fin 90) →
-      Set
+      scalarAct monomial g index ≢ scalarZero
 
 open FullMonomialBasisReceipt public
 
