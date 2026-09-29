@@ -24,6 +24,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
@@ -67,9 +68,9 @@ rhoAffineCoordinates :
   (p : AffineF4Point) →
   Curve.affineCoordinates (rhoAffine p)
   ≡
-  (Curve.zeta₄ Curve.*₄
-    (Data.Product.proj₁ (Curve.affineCoordinates p))) ,
-  (Data.Product.proj₂ (Curve.affineCoordinates p))
+  ((Curve.zeta₄ Curve.*₄
+    (proj₁ (Curve.affineCoordinates p))) ,
+  (proj₂ (Curve.affineCoordinates p)))
 rhoAffineCoordinates Curve.p00 = refl
 rhoAffineCoordinates Curve.p01 = refl
 rhoAffineCoordinates Curve.p1Zeta = refl
