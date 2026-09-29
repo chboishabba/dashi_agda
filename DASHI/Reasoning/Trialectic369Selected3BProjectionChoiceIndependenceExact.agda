@@ -26,6 +26,7 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as Retraction
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
 import DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact as Comparison
 
 ------------------------------------------------------------------------
@@ -42,13 +43,13 @@ projectedActionIndependentOfRetraction :
       (WeightTwo.constituentLinearCarrier
         (Core.weightTwoLinearBridge core))) →
   Retraction.projectToConstituent first
-    (Projected.FullGrade.fullGradeTwoActionAt
+    (FullGrade.fullGradeTwoActionAt
       core
       (Core.normalizerToMonster core normalizer)
       state)
   ≡
   Retraction.projectToConstituent second
-    (Projected.FullGrade.fullGradeTwoActionAt
+    (FullGrade.fullGradeTwoActionAt
       core
       (Core.normalizerToMonster core normalizer)
       state)
