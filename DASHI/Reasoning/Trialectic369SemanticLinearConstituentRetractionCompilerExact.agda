@@ -1,267 +1,125 @@
 module DASHI.Reasoning.Trialectic369SemanticLinearConstituentRetractionCompilerExact where
 
 ------------------------------------------------------------------------
--- SEMANTIC 196883 <-> LINEAR 196883 WELD COMPILES THE RETRACTION
+-- SEMANTIC 196883 COORDINATES -> LINEAR CONSTITUENT BASIS FRAME
 --
--- DASHI CONTRIBUTION
+-- WRONGTYPE CORRECTION
 --
--- Existing owners already provide:
+-- SemanticMonsterConstituent196883 is a finite 196883-coordinate / basis-label
+-- carrier.  Linear.Vector constituentLinearCarrier is the FULL carrier of a
+-- 196883-dimensional vector space.  These are not the same type of object:
+-- dimension 196883 does not mean the vector carrier has 196883 elements.
 --
---   SemanticWeightTwo196884
---     = SemanticMonsterConstituent196883 ⊎ {conformal unit},
+-- Therefore the correct bridge is a basis/frame interface:
 --
--- together with an exact carrier iso
+--   semantic coordinate -> linear constituent vector
 --
---   SemanticWeightTwo196884 <-> abstract grade-two representation carrier.
+-- together with independence/completeness receipts supplied at the linear
+-- representation level.
 --
--- The linear weight-two bridge separately provides:
---
---   constituentLinearCarrier
---   constituentInclusion : V_196883 -> V_2.
---
--- Therefore the missing retraction can be compiled from a much smaller
--- same-object weld:
---
---   linear constituent <-> semantic constituent
---
--- plus one square identifying linear inclusion with semantic inj₁ under the
--- existing full grade-two carrier charts.
---
--- The conformal semantic point is sent to linear zero.  This yields a total
--- projection V_2 -> V_196883 whose left-inverse law on the included constituent
--- is compiler output.
+-- Such a basis frame may help CONSTRUCT a projection/retraction, but it does
+-- not itself manufacture the direct-summand projection.  The actual
+-- ConstituentRetraction remains a separate linear source payment.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
-open import Data.Sum using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
-import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
 import DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact as Nested
-import DASHI.Moonshine.GradedRepresentationLinearRealisationExact as LinearRep
-import DASHI.Moonshine.MonsterWeightTwoSemanticActionRealisationExact as Semantic
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as Retraction
 
 ------------------------------------------------------------------------
--- 1. Same-object weld of the two 196883 carriers.
+-- 1. Correct semantic-coordinate / linear-basis interface.
 ------------------------------------------------------------------------
 
-record SemanticLinearConstituentWeld
+record SemanticLinearConstituentBasisFrame
     {Monster K : Set}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K})
     : Setω where
   field
-    linearToSemantic :
-      Linear.Vector
-        (WeightTwo.constituentLinearCarrier
-          (Core.weightTwoLinearBridge core))
-      →
-      Nested.SemanticMonsterConstituent196883
-
-    semanticToLinear :
-      Nested.SemanticMonsterConstituent196883
-      →
+    basisVector :
+      Nested.SemanticMonsterConstituent196883 →
       Linear.Vector
         (WeightTwo.constituentLinearCarrier
           (Core.weightTwoLinearBridge core))
 
-    semanticAfterLinear :
-      (state :
-        Linear.Vector
-          (WeightTwo.constituentLinearCarrier
-            (Core.weightTwoLinearBridge core))) →
-      semanticToLinear (linearToSemantic state)
-      ≡ state
+    basisInjective :
+      ∀ {left right : Nested.SemanticMonsterConstituent196883} →
+      basisVector left ≡ basisVector right →
+      left ≡ right
 
-    linearAfterSemantic :
-      (state : Nested.SemanticMonsterConstituent196883) →
-      linearToSemantic (semanticToLinear state)
-      ≡ state
+    -- Deliberately proof-bearing but abstract: the minimal HilbertLift API does
+    -- not carry finite sums / coefficients / basis expansion primitives.
+    basisLinearlyIndependent : Set
+    basisSpansConstituent : Set
 
-    -- The decisive same-object square.  Convert the linear inclusion to the
-    -- abstract grade-two representation carrier, then back through the
-    -- semantic weight-two carrier iso: this must be exactly inj₁ of the
-    -- corresponding semantic constituent state.
-    inclusionMatchesSemanticInjection :
-      (state :
-        Linear.Vector
-          (WeightTwo.constituentLinearCarrier
-            (Core.weightTwoLinearBridge core))) →
-      Stable.from
-        (Semantic.weightTwoCarrierIso
-          (WeightTwo.semanticActionBridge
-            (Core.weightTwoLinearBridge core)))
-        (LinearRep.toRepresentationCarrier
-          (WeightTwo.fullWeightTwoLinearRealisation
-            (Core.weightTwoLinearBridge core))
-          (WeightTwo.constituentInclusion
-            (Core.weightTwoLinearBridge core)
-            state))
-      ≡ inj₁ (linearToSemantic state)
-
-open SemanticLinearConstituentWeld public
+open SemanticLinearConstituentBasisFrame public
 
 ------------------------------------------------------------------------
--- 2. Semantic projection: constituent branch survives, conformal branch -> 0.
+-- 2. A basis frame is NOT a carrier equivalence.
 ------------------------------------------------------------------------
 
-projectSemanticWeightTwo :
-  ∀ {Monster K}
-    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
-  SemanticLinearConstituentWeld core →
-  Nested.SemanticWeightTwo196884 →
-  Linear.Vector
-    (WeightTwo.constituentLinearCarrier
-      (Core.weightTwoLinearBridge core))
-projectSemanticWeightTwo core weld (inj₁ constituent) =
-  semanticToLinear weld constituent
-projectSemanticWeightTwo core weld (inj₂ Nested.unit-at) =
-  Linear.zero
-    (WeightTwo.constituentLinearCarrier
-      (Core.weightTwoLinearBridge core))
+data SemanticCoordinateCarrierEqualsLinearVectorCarrier : Set where
+data Dimension196883MeansExactly196883Vectors : Set where
+data BasisFrameCreatesDirectSummandProjection : Set where
+data CoordinateRetractionCreatesLinearRetraction : Set where
+
+semanticCoordinatesDoNotEqualAllVectors :
+  SemanticCoordinateCarrierEqualsLinearVectorCarrier → ⊥
+semanticCoordinatesDoNotEqualAllVectors ()
+
+dimensionDoesNotFixVectorCarrierCardinality :
+  Dimension196883MeansExactly196883Vectors → ⊥
+dimensionDoesNotFixVectorCarrierCardinality ()
+
+basisFrameDoesNotCreateProjection :
+  BasisFrameCreatesDirectSummandProjection → ⊥
+basisFrameDoesNotCreateProjection ()
+
+coordinateRetractionDoesNotCreateLinearRetraction :
+  CoordinateRetractionCreatesLinearRetraction → ⊥
+coordinateRetractionDoesNotCreateLinearRetraction ()
 
 ------------------------------------------------------------------------
--- 3. Transport the projection to the actual full linear grade-two carrier.
+-- 3. Correct downstream target remains the genuine linear retraction.
 ------------------------------------------------------------------------
 
-projectLinearWeightTwoToConstituent :
-  ∀ {Monster K}
-    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
-  SemanticLinearConstituentWeld core →
-  Linear.Vector
-    (LinearRep.linearCarrier
-      (WeightTwo.fullWeightTwoLinearRealisation
-        (Core.weightTwoLinearBridge core)))
-  →
-  Linear.Vector
-    (WeightTwo.constituentLinearCarrier
-      (Core.weightTwoLinearBridge core))
-projectLinearWeightTwoToConstituent core weld state =
-  projectSemanticWeightTwo core weld
-    (Stable.from
-      (Semantic.weightTwoCarrierIso
-        (WeightTwo.semanticActionBridge
-          (Core.weightTwoLinearBridge core)))
-      (LinearRep.toRepresentationCarrier
-        (WeightTwo.fullWeightTwoLinearRealisation
-          (Core.weightTwoLinearBridge core))
-        state))
-
-------------------------------------------------------------------------
--- 4. Left inverse is automatic from the weld square.
-------------------------------------------------------------------------
-
-projectionAfterInclusion :
-  ∀ {Monster K}
-    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
-  (weld : SemanticLinearConstituentWeld core) →
-  (state :
-    Linear.Vector
-      (WeightTwo.constituentLinearCarrier
-        (Core.weightTwoLinearBridge core))) →
-  projectLinearWeightTwoToConstituent core weld
-    (WeightTwo.constituentInclusion
-      (Core.weightTwoLinearBridge core)
-      state)
-  ≡ state
-projectionAfterInclusion core weld state
-  rewrite inclusionMatchesSemanticInjection weld state =
-  semanticAfterLinear weld state
-
-------------------------------------------------------------------------
--- 5. Compile the canonical constituent retraction.
-------------------------------------------------------------------------
-
-constituentRetractionFromSemanticWeld :
-  ∀ {Monster K}
-    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
-  SemanticLinearConstituentWeld core →
-  Retraction.ConstituentRetraction core
-constituentRetractionFromSemanticWeld core weld =
-  record
-    { projectToConstituent =
-        projectLinearWeightTwoToConstituent core weld
-    ; leftInverse =
-        projectionAfterInclusion core weld
-    }
-
-------------------------------------------------------------------------
--- 6. Falsification surface.
-------------------------------------------------------------------------
-
-record InclusionSemanticSquareCounterexample
+record BasisFramePlusLinearRetraction
     {Monster K : Set}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K})
-    (weld : SemanticLinearConstituentWeld core)
     : Setω where
   field
-    state :
-      Linear.Vector
-        (WeightTwo.constituentLinearCarrier
-          (Core.weightTwoLinearBridge core))
+    basisFrame : SemanticLinearConstituentBasisFrame core
+    linearRetraction : Retraction.ConstituentRetraction core
 
-    mismatch :
-      Stable.from
-        (Semantic.weightTwoCarrierIso
-          (WeightTwo.semanticActionBridge
-            (Core.weightTwoLinearBridge core)))
-        (LinearRep.toRepresentationCarrier
-          (WeightTwo.fullWeightTwoLinearRealisation
-            (Core.weightTwoLinearBridge core))
-          (WeightTwo.constituentInclusion
-            (Core.weightTwoLinearBridge core)
-            state))
-      ≢ inj₁ (linearToSemantic weld state)
-
-open InclusionSemanticSquareCounterexample public
+open BasisFramePlusLinearRetraction public
 
 ------------------------------------------------------------------------
--- 7. Firewalls.
-------------------------------------------------------------------------
-
-data EqualCardinalityCreatesSemanticLinearWeld : Set where
-data SemanticPointedSplitCreatesLinearWeld : Set where
-data CoordinateIsoCreatesHilbertSameObjectWeld : Set where
-
-cardinalityDoesNotCreateSemanticLinearWeld :
-  EqualCardinalityCreatesSemanticLinearWeld → ⊥
-cardinalityDoesNotCreateSemanticLinearWeld ()
-
-semanticSplitDoesNotCreateLinearWeld :
-  SemanticPointedSplitCreatesLinearWeld → ⊥
-semanticSplitDoesNotCreateLinearWeld ()
-
-coordinateIsoDoesNotCreateHilbertWeld :
-  CoordinateIsoCreatesHilbertSameObjectWeld → ⊥
-coordinateIsoDoesNotCreateHilbertWeld ()
-
-------------------------------------------------------------------------
--- 8. Machine-readable frontier.
+-- 4. Machine-readable corrected frontier.
 ------------------------------------------------------------------------
 
 record Trialectic369SemanticLinearRetractionCompilerBoundary : Set where
   constructor trialectic-369-semantic-linear-retraction-compiler-boundary
   field
-    semanticWeightTwoAlreadyPointed196883PlusOne : Bool
-    fullGradeTwoSemanticCarrierIsoAlreadyOwned : Bool
-    semanticLinearConstituentWeldIsOnlyNewSameObjectInput : Bool
-    inclusionSemanticSquareSeparated : Bool
-    conformalBranchProjectsToLinearZero : Bool
-    leftInverseCompilerOwned : Bool
-    constituentRetractionCompilerOwned : Bool
-    semanticLinearWeldInhabitedHere : Bool
-    inclusionSquareInhabitedHere : Bool
-    actualRetractionInhabitedHere : Bool
+    semanticCarrierIsFiniteCoordinateCarrier : Bool
+    linearConstituentIsVectorCarrier : Bool
+    semanticLinearCarrierEqualityRejected : Bool
+    basisFrameIsCorrectBridgeType : Bool
+    basisIndependenceAndSpanningRequired : Bool
+    basisFrameAloneCompilesRetraction : Bool
+    actualSemanticLinearBasisFrameInhabitedHere : Bool
+    actualLinearRetractionInhabitedHere : Bool
+    coordinateRetractionPaysLinearRetraction : Bool
 
 canonicalTrialectic369SemanticLinearRetractionCompilerBoundary :
   Trialectic369SemanticLinearRetractionCompilerBoundary
 canonicalTrialectic369SemanticLinearRetractionCompilerBoundary =
   trialectic-369-semantic-linear-retraction-compiler-boundary
-    true true true true true true true
-    false false false
+    true true true true true
+    false false false false
