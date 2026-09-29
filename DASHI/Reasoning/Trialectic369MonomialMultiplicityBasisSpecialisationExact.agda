@@ -40,7 +40,9 @@ record MonomialMultiplicityBasisSpecialisation
           (WrongType.linearRepresentation route))
 
     basisComplete : Set
+    basisCompleteProof : basisComplete
     basisIndependent : Set
+    basisIndependentProof : basisIndependent
 
     indexAct : RouteGroup route → Fin 90 → Fin 90
     scalarAct :
@@ -166,6 +168,19 @@ sourceNonPermutationForcesNontrivialMonomialScalars
 
 -- Conversely every genuine pure permutation specialization is a monomial
 -- specialization if a chosen scalar acts as identity on the basis.
+record CertifiedPureBasis
+    (route : WrongType.CanonicalLinearMultiplicityRoute)
+    (pure :
+      WrongType.PermutationBasisSpecialisation
+        (WrongType.linearRepresentation route)) : Set₁ where
+  field
+    complete :
+      WrongType.basisIsComplete pure
+    independent :
+      WrongType.basisIsIndependent pure
+
+open CertifiedPureBasis public
+
 record UnitScalarOnBasis
     (route : WrongType.CanonicalLinearMultiplicityRoute)
     (pure :
@@ -191,13 +206,16 @@ monomialFromPurePermutation :
   (pure :
     WrongType.PermutationBasisSpecialisation
       (WrongType.linearRepresentation route)) →
+  CertifiedPureBasis route pure →
   UnitScalarOnBasis route pure →
   MonomialMultiplicityBasisSpecialisation route
-monomialFromPurePermutation route pure unit =
+monomialFromPurePermutation route pure certified unit =
   record
     { basisVector = WrongType.basisVector pure
     ; basisComplete = WrongType.basisIsComplete pure
+    ; basisCompleteProof = complete certified
     ; basisIndependent = WrongType.basisIsIndependent pure
+    ; basisIndependentProof = independent certified
     ; indexAct = WrongType.basisPermutation pure
     ; scalarAct = λ g i → unitScalar unit
     ; actionOnBasisIsMonomial = λ g i →
@@ -232,10 +250,11 @@ record Boundary : Set where
     canonicalTargetRemainsLinearHomSpace : Bool
     monomialActionTracksScalars : Bool
     inverseIndexRequirementExplicit : Bool
+    basisCompletenessAndIndependenceInhabited : Bool
     scalarTrivialityRequiredForPurePermutation : Bool
     sourceNoGoForcesNontrivialScalarAction : Bool
     pureRouteIsNotAutomatic : Bool
     sourceMonomialReceiptInhabited : Bool
 
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true true true true false
+canonicalBoundary = boundary true true true true true true true false
