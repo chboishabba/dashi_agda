@@ -26,6 +26,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSyste
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as Wilson
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
+import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
@@ -259,20 +260,35 @@ record CMP119CoreH1OS4Meaning
     R278.connectedCovarianceMagnitude extension
       (Gram.continuumMeasure dataSet) left right
 
+  -- The pre-Hilbert OS quadratic form is defined on the EXACT CMP119
+  -- continuum expectation and its physical cylinder reflection/multiplication.
+  -- This is the Gram-SQUARED distance; its null quotient/completion is the
+  -- actual OS Hilbert topology only on the admissible positive-time class.
+  osGramSquaredDistance : FullTest → FullTest → ℝ
+  osGramSquaredDistance left right =
+    let
+      core = H2Core.coreInputs h2
+      diff = λ configuration →
+        left configuration -ℝ right configuration
+      algebra = OSSystem.observableAlgebraCore core
+    in
+    Limit.limitExpectation (OSSystem.familyCore core group)
+      (OS2.multiplyObservable algebra
+        (OS2.reflectObservable algebra diff) diff)
+
   field
     -- Decay means actual convergence to zero in the existing real
     -- sequence-limit structure.  There is no custom/vacuous decay predicate.
 
-    -- Density is uniform approximation on the actual cylinder functions,
-    -- quantified over every physical configuration and positive tolerance.
-    -- There is no caller-chosen "Dense : Set" proposition here.
+    -- The OS Gram-squared norm replaces impossible/overstrong global
+    -- sup-norm density on an unbounded continuum test space.  An actual
+    -- physical positive-time class/completion is still required upstream.
     wilsonProductsUniformlyDense :
       ∀ (test : FullTest) epsilon →
       0ℝ <ℝ epsilon →
       Σ WilsonProduct (λ wilson →
-        ∀ configuration →
-          absℝ (test configuration -ℝ
-            embedWilson wilson configuration) <ℝ epsilon)
+        absℝ (osGramSquaredDistance test
+          (embedWilson wilson)) <ℝ epsilon)
 
     -- The same-family connected covariance must be uniformly continuous
     -- under two simultaneous uniform cylinder approximations, with a
@@ -283,10 +299,8 @@ record CMP119CoreH1OS4Meaning
       Σ ℝ (λ delta →
         (0ℝ <ℝ delta) ×
         (∀ left left' right right' time →
-        (∀ configuration →
-          absℝ (left configuration -ℝ left' configuration) <ℝ delta) →
-        (∀ configuration →
-          absℝ (right configuration -ℝ right' configuration) <ℝ delta) →
+        absℝ (osGramSquaredDistance left left') <ℝ delta →
+        absℝ (osGramSquaredDistance right right') <ℝ delta →
         absℝ
           (connectedSchwinger
             (OSSystem.constructedSchwingerCore
@@ -330,18 +344,15 @@ record CMP119CoreH1OS4Meaning
       (∀ (test : FullTest) epsilon →
         0ℝ <ℝ epsilon →
         Σ WilsonProduct (λ wilson →
-          ∀ configuration →
-            absℝ (test configuration -ℝ
-              embedWilson wilson configuration) <ℝ epsilon)) →
+          absℝ (osGramSquaredDistance test
+            (embedWilson wilson)) <ℝ epsilon)) →
       (∀ epsilon →
         0ℝ <ℝ epsilon →
         Σ ℝ (λ delta →
           (0ℝ <ℝ delta) ×
           (∀ left left' right right' time →
-          (∀ configuration →
-            absℝ (left configuration -ℝ left' configuration) <ℝ delta) →
-          (∀ configuration →
-            absℝ (right configuration -ℝ right' configuration) <ℝ delta) →
+          absℝ (osGramSquaredDistance left left') <ℝ delta →
+          absℝ (osGramSquaredDistance right right') <ℝ delta →
           absℝ
             (connectedSchwinger
               (OSSystem.constructedSchwingerCore
