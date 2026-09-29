@@ -19,6 +19,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
@@ -89,6 +90,77 @@ kleinOrbitNegationInvariant (Curve.affine Curve.pZetaZetaSquared) = refl
 kleinOrbitNegationInvariant (Curve.affine Curve.pZetaSquaredZeta) = refl
 kleinOrbitNegationInvariant (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
 
+------------------------------------------------------------------------
+-- 3. Actual transitivity witnesses, not merely invariant orbit labels.
+--
+-- Two independent Boolean choices denote whether to apply Frobenius and
+-- whether to apply elliptic-coordinate negation.  Every curve point is an
+-- explicit translate of the chosen representative of its labelled orbit.
+------------------------------------------------------------------------
+
+applyFrobenius : Bool → Curve.RationalF4Point → Curve.RationalF4Point
+applyFrobenius false p = p
+applyFrobenius true p = Curve.frobeniusRational p
+
+applyNegation : Bool → Curve.RationalF4Point → Curve.RationalF4Point
+applyNegation false p = p
+applyNegation true p = negateRational p
+
+kleinAct : Bool → Bool → Curve.RationalF4Point → Curve.RationalF4Point
+kleinAct frob negate p = applyNegation negate (applyFrobenius frob p)
+
+kleinRepresentative : CurveKleinOrbit → Curve.RationalF4Point
+kleinRepresentative infinitySingleton = Curve.infinity
+kleinRepresentative zeroXPair = Curve.affine Curve.p00
+kleinRepresentative unitXPair = Curve.affine Curve.p1Zeta
+kleinRepresentative primitiveXFour = Curve.affine Curve.pZetaZeta
+
+kleinRepresentativeHasItsLabel :
+  (orbit : CurveKleinOrbit) →
+  kleinOrbit (kleinRepresentative orbit) ≡ orbit
+kleinRepresentativeHasItsLabel infinitySingleton = refl
+kleinRepresentativeHasItsLabel zeroXPair = refl
+kleinRepresentativeHasItsLabel unitXPair = refl
+kleinRepresentativeHasItsLabel primitiveXFour = refl
+
+kleinReachFlags : Curve.RationalF4Point → Bool × Bool
+kleinReachFlags Curve.infinity = false , false
+kleinReachFlags (Curve.affine Curve.p00) = false , false
+kleinReachFlags (Curve.affine Curve.p01) = false , true
+kleinReachFlags (Curve.affine Curve.p1Zeta) = false , false
+kleinReachFlags (Curve.affine Curve.p1ZetaSquared) = true , false
+kleinReachFlags (Curve.affine Curve.pZetaZeta) = false , false
+kleinReachFlags (Curve.affine Curve.pZetaZetaSquared) = false , true
+kleinReachFlags (Curve.affine Curve.pZetaSquaredZeta) = true , true
+kleinReachFlags (Curve.affine Curve.pZetaSquaredZetaSquared) = true , false
+
+kleinReachEveryPoint :
+  (p : Curve.RationalF4Point) →
+  kleinAct
+    (proj₁ (kleinReachFlags p))
+    (proj₂ (kleinReachFlags p))
+    (kleinRepresentative (kleinOrbit p))
+  ≡ p
+kleinReachEveryPoint Curve.infinity = refl
+kleinReachEveryPoint (Curve.affine Curve.p00) = refl
+kleinReachEveryPoint (Curve.affine Curve.p01) = refl
+kleinReachEveryPoint (Curve.affine Curve.p1Zeta) = refl
+kleinReachEveryPoint (Curve.affine Curve.p1ZetaSquared) = refl
+kleinReachEveryPoint (Curve.affine Curve.pZetaZeta) = refl
+kleinReachEveryPoint (Curve.affine Curve.pZetaZetaSquared) = refl
+kleinReachEveryPoint (Curve.affine Curve.pZetaSquaredZeta) = refl
+kleinReachEveryPoint (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+
+kleinActPreservesOrbit :
+  (frob negate : Bool) (p : Curve.RationalF4Point) →
+  kleinOrbit (kleinAct frob negate p) ≡ kleinOrbit p
+kleinActPreservesOrbit false false p = refl
+kleinActPreservesOrbit false true p = kleinOrbitNegationInvariant p
+kleinActPreservesOrbit true false p = kleinOrbitFrobeniusInvariant p
+kleinActPreservesOrbit true true p
+  rewrite kleinOrbitNegationInvariant (Curve.frobeniusRational p)
+        | kleinOrbitFrobeniusInvariant p = refl
+
 kleinOrbitCount : Nat
 kleinOrbitCount = 4
 
@@ -148,6 +220,7 @@ record F4CurveKleinOrbitBoundary : Set where
   field
     actualNegationAndFrobeniusCommute : Bool
     jointOrbitProfileOneTwoTwoFour : Bool
+    representativeReachabilityProved : Bool
     jointOrbitCountFour : Bool
     sheetNegationTransportedByBidiCodec : Bool
     jointOrbitCountIdentifiedWithMonsterTen : Bool
@@ -156,4 +229,4 @@ record F4CurveKleinOrbitBoundary : Set where
 canonicalF4CurveKleinOrbitBoundary : F4CurveKleinOrbitBoundary
 canonicalF4CurveKleinOrbitBoundary =
   f4-curve-klein-orbit-boundary
-    true true true true false false
+    true true true true true false false
