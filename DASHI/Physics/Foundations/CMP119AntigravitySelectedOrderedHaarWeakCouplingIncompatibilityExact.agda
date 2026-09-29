@@ -19,6 +19,7 @@ module DASHI.Physics.Foundations.CMP119AntigravitySelectedOrderedHaarWeakCouplin
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary using (¬_)
@@ -89,7 +90,7 @@ module _
         Haar.SelectedMetricFamilyOrderedHaarClosureInput
           domain realization representation selected measureWeld
           wilsonInsertion)
-      (background : Domain.Background domain)
+      (background : Chain.Background activity)
       (sameSelectedStress :
         Minimal.selectedDiagonalActiveSum
           domain realization representation selected
@@ -97,13 +98,13 @@ module _
         ≡
         YM.activeStress (Active.activeScaleNoGoData
           continuation threshold scale active)) →
-      ¬ (Minimal.selectedDiagonalActiveSum
-          domain realization representation selected
-          measureWeld wilsonInsertion background < 0ℚ)
+      ⊥
     orderedHaarAndWeakYMExcludeOneAnother
       continuation threshold scale active ordered background sameSelectedStress =
-      λ negative →
-        ℚP.<⇒≱
-          (subst (_< 0ℚ) sameSelectedStress negative)
-          (Active.activeCMP119ScaleTraceAnomalyNoGo
-            continuation threshold scale active)
+      ℚP.<⇒≱
+        (subst (_< 0ℚ) sameSelectedStress
+          (Haar.selectedMetricFamilyOrderedHaarDiagonalActiveSumNegative
+            domain realization representation selected measureWeld
+            wilsonInsertion ordered background))
+        (Active.activeCMP119ScaleTraceAnomalyNoGo
+          continuation threshold scale active)
