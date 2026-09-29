@@ -1,6 +1,16 @@
 name: Millennium substantive cross-pollination
 
 on:
+  push:
+    branches:
+      - 'agent/pnp-direct-sat-lower-bound-20260924'
+      - 'agent/pnp-rsa-shor-crosspollination-v1'
+    paths:
+      - 'DASHI/Mathematics/Complexity/**'
+      - 'DASHI/Mathematics/AlgebraicGeometry/**'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumSubstantiveCrossPollinationValidation.agda'
+      - 'DASHI/EverythingMillenniumSubstantiveCrossPollination.agda'
+      - '.github/workflows/millennium-substantive-crosspollination.yml'
   pull_request:
     branches:
       - 'agent/hurwitz-hopf-noether-millennium-crosspollination'
