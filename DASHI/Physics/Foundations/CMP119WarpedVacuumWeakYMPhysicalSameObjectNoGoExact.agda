@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact where
 
 ------------------------------------------------------------------------
