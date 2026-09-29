@@ -22,6 +22,7 @@ module DASHI.Moonshine.OggSSPP2WeilHeisenbergNativeBidiExact where
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Product using (_,_)
 
 import DASHI.Moonshine.OggSSPEllipticNineWeilHeisenbergFiniteActionExact as W
@@ -967,3 +968,54 @@ nativeDihedralRelation (A.heisenbergOne pos zer pos) = refl
 nativeDihedralRelation (A.heisenbergOne pos pos neg) = refl
 nativeDihedralRelation (A.heisenbergOne pos pos zer) = refl
 nativeDihedralRelation (A.heisenbergOne pos pos pos) = refl
+
+------------------------------------------------------------------------
+-- Transport an ACTUAL associative group law from H6 to Weil.H3.
+-- This is an associativity theorem about W.hprod itself, not a receipt.
+------------------------------------------------------------------------
+
+weilComposeViaNative :
+  (a b : W.H3) →
+  W.hprod a b
+  ≡ nativeToWeil (A.composeOne (weilToNative a) (weilToNative b))
+weilComposeViaNative a b =
+  trans
+    (cong (λ u → W.hprod u b) (sym (weilToNative_roundtrip a)))
+    (trans
+      (cong (λ v → W.hprod (nativeToWeil (weilToNative a)) v)
+        (sym (weilToNative_roundtrip b)))
+      (sym (nativeToWeil_compose (weilToNative a) (weilToNative b))))
+
+weilToNativeProduct :
+  (a b : W.H3) →
+  weilToNative (W.hprod a b)
+    ≡ A.composeOne (weilToNative a) (weilToNative b)
+weilToNativeProduct a b =
+  trans
+    (cong weilToNative (weilComposeViaNative a b))
+    (nativeToWeil_roundtrip (A.composeOne (weilToNative a) (weilToNative b)))
+
+weilH3Associative :
+  (a b c : W.H3) →
+  W.hprod (W.hprod a b) c ≡ W.hprod a (W.hprod b c)
+weilH3Associative a b c =
+  trans
+    (sym (weilToNative_roundtrip (W.hprod (W.hprod a b) c)))
+    (trans
+      (cong nativeToWeil (weilToNativeProduct (W.hprod a b) c))
+      (trans
+        (cong nativeToWeil
+          (cong (λ u → A.composeOne u (weilToNative c))
+            (weilToNativeProduct a b)))
+        (trans
+          (cong nativeToWeil
+            (A.composeOneAssociative
+              (weilToNative a) (weilToNative b) (weilToNative c)))
+          (trans
+            (cong nativeToWeil
+              (sym (cong (λ u → A.composeOne (weilToNative a) u)
+                (weilToNativeProduct b c))))
+            (trans
+              (cong nativeToWeil
+                (sym (weilToNativeProduct a (W.hprod b c))))
+              (weilToNative_roundtrip (W.hprod a (W.hprod b c)))))))
