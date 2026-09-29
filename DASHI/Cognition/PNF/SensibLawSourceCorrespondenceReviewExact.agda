@@ -7,6 +7,7 @@ open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 open import DASHI.Cognition.PNF.SensibLawReviewWorkstationExact
   using (ReviewItemKind; sourceCorrespondence; ReviewStatus;
+         pending; accepted; abstained;
          ReviewAction; accept; reject; abstain; qualify; supersede;
          requestEvidence; openSource; nextStatus)
 
@@ -91,16 +92,10 @@ open CorrespondenceReview public
 acceptedRelationReviewIsWorkflowOnly :
   nextStatus pending accept ≡ accepted
 acceptedRelationReviewIsWorkflowOnly = refl
-  where
-    open import DASHI.Cognition.PNF.SensibLawReviewWorkstationExact
-      using (pending; accepted)
 
 abstentionPreservesUnknownWorld :
   nextStatus pending abstain ≡ abstained
 abstentionPreservesUnknownWorld = refl
-  where
-    open import DASHI.Cognition.PNF.SensibLawReviewWorkstationExact
-      using (pending; abstained)
 
 openSourceDoesNotChangeRelationStatus :
   ∀ {status} → nextStatus status openSource ≡ status
