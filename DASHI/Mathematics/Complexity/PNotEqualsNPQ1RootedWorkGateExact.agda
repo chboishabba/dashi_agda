@@ -19,6 +19,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.List.Base using (length)
@@ -34,6 +35,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact 
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact as Root
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as Truth
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableKeySearchExact as Search
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1InstrumentedKeySearchExact as Instrumented
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1InstrumentedFormulaEvaluationExact as Eval
 
 ------------------------------------------------------------------------
@@ -49,9 +51,34 @@ transitionLookupCharge :
 transitionLookupCharge {remaining} action source targetKeys =
   Bits.bitCardinality remaining
   +
+  Instrumented.scanKeyBitEnvelope
+    (Truth.restrictTruthTable action source)
+    targetKeys
+
+------------------------------------------------------------------------
+-- The gate now charges THE SAME recursion used by the instrumented scanner.
+-- The old independent declaration is recovered as a proved equation.
+------------------------------------------------------------------------
+
+transitionLookupChargeMatchesDeclared :
+  ∀ {remaining : Nat}
+    (action : Bool)
+    (source : Merge.SemanticKey (suc remaining))
+    (targetKeys : List (Merge.SemanticKey remaining)) →
+  transitionLookupCharge action source targetKeys
+  ≡
+  Bits.bitCardinality remaining
+    +
   Search.findKeyFullWidthCharge
     (Truth.restrictTruthTable action source)
     targetKeys
+transitionLookupChargeMatchesDeclared
+    {remaining = remaining} action source targetKeys =
+  cong
+    (λ count → Bits.bitCardinality remaining + count)
+    (Instrumented.scanKeyBitEnvelopeMatchesDeclared
+      (Truth.restrictTruthTable action source)
+      targetKeys)
 
 sourceTransitionCharge :
   ∀ {remaining : Nat} →
