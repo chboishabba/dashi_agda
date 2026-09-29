@@ -37,6 +37,7 @@ record Cell : Set where
 data Pattern : Set where
   neglect professionalNegligence fiduciaryAbuse : Pattern
   theft fraud extortion robbery assault kidnapping : Pattern
+  murder manslaughter sexualAssault burglary : Pattern
   bribery publicPowerMisuse cyberMisuse environmentalHarm : Pattern
 
 -- All records explicitly retain the same existing WrongType identity.
@@ -117,3 +118,44 @@ record LegalAssessmentBoundary : Set₁ where
     satisfiedElementEvidence : Set
     defenceAndExceptionReview : Set
     -- No function from GridCandidate alone to any liability receipt.
+
+------------------------------------------------------------------------
+-- OFFENCE FAMILIES: candidate relational indexing, not legal conclusions.
+-- The source establishes the named offence family/locator, not our cell.
+-- Empty event/evidence references must be filled before case evaluation.
+------------------------------------------------------------------------
+
+crimeCandidate : String → Pattern → Cell → String → GridCandidate
+crimeCandidate identifier family coordinate section =
+  gridCandidate (Ontology.stableId identifier) family coordinate
+    "illustrative:context-not-established" "evidence:not-provided"
+    (queenslandCode section) "DASHI illustrative cell; not attributed to statute or video"
+
+illustrativeCrimes : List GridCandidate
+illustrativeCrimes =
+  crimeCandidate "wrong:QLD:assault" assault
+    (cell power care) "ss 245-246" ∷
+  crimeCandidate "wrong:QLD:sexual-assault" sexualAssault
+    (cell power power) "s 352" ∷
+  crimeCandidate "wrong:QLD:murder" murder
+    (cell power power) "s 302" ∷
+  crimeCandidate "wrong:QLD:manslaughter" manslaughter
+    (cell care power) "s 303" ∷
+  crimeCandidate "wrong:QLD:stealing" theft
+    (cell transaction transaction) "s 391" ∷
+  crimeCandidate "wrong:QLD:fraud" fraud
+    (cell transaction transaction) "s 408C" ∷
+  crimeCandidate "wrong:QLD:robbery" robbery
+    (cell power transaction) "s 409" ∷
+  crimeCandidate "wrong:QLD:extortion" extortion
+    (cell power transaction) "s 415" ∷
+  crimeCandidate "wrong:QLD:kidnapping-ransom" kidnapping
+    (cell power power) "s 354A" ∷
+  crimeCandidate "wrong:QLD:burglary" burglary
+    (cell power transaction) "s 419" ∷
+  crimeCandidate "wrong:QLD:computer-misuse" cyberMisuse
+    (cell transaction power) "s 408E" ∷
+  []
+
+-- A simple uninhabited evidence-free promotion remains impossible:
+-- no ViolationReceipt or authority data is constructed anywhere here.
