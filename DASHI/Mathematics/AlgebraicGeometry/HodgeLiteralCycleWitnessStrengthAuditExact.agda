@@ -146,9 +146,9 @@ syntacticallyWitnessedCycleHasCertificates =
 syntacticUniversalHodgeCycleProducer :
   ∀ {variety comparison hodge codimension} →
   (alpha :
-    DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact.RationalHodgeClassExact
+    Exact.RationalHodgeClassExact
       hodge codimension) →
-  Data.Product.Σ
+  Σ
     (Hodge.RationalAlgebraicCycle variety codimension)
     (λ cycle → WitnessedRationalAlgebraicCycle cycle)
 syntacticUniversalHodgeCycleProducer alpha =
