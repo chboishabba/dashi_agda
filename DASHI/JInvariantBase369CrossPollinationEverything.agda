@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredShearReflectionExact
 import DASHI.Moonshine.OggSSPP2F4CurveQ9GroupActionBidiExact as F4ChordQ9
 import DASHI.Moonshine.OggSSPP2F4CurveExactChordGroup as F4Chord
 import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as CurveS3
