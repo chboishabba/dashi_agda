@@ -2,27 +2,20 @@
 module DASHI.Physics.Closure.NSTriadKNR650IntegratedSignedOrbitPaymentRound816Exact where
 
 ------------------------------------------------------------------------
--- ROUND781 / EXACT TWO-FAMILY SPLIT OF THE SWAP-PAIRED W2 RESIDUAL
+-- ROUND816 / CORRECTED SIGNED ORBIT RATE -> ORIGINAL INTEGRATED W2
 --
--- R777-R780 classify every separated-base energy orbit.  The invariant that
--- survives swap pairing and retains cyclic information is:
+-- R815 proves the live identity with factor six:
 --
---   ccTouched(beta)
---     iff at least one coordinate of Pi(beta) is comparable.
+--  separated + touched + 6*(2nu-margin)*diss
+--    = 6*(combined - physicalPacketStrictSurplus).
 --
--- Define the complementary family as fullySeparated.
+-- Integrate on the SAME trajectory with R648/R723/R742's integration
+-- authority.  The only new hypothesis is NONNEGATIVITY of the complete
+-- integrated signed orbit expression.  Cancel the strictly positive six and
+-- build the EXISTING R742 payment, then the original R734 W2 compiler.
 --
--- The predicate is exactly swap-invariant because R775 transports profiles by
---
---   (c0,cp,cq) -> (swapClass c0,cq,cp),
---
--- and swapClass fixes comparable.
---
--- The R760 paired residual is then split pointwise and globally as
---
---   PairD = FullySeparatedD + CCTouchedD.
---
--- No sign or estimate is asserted for either family.
+-- A positive margin does not imply margin <= 2nu.  No pointwise payment,
+-- monotonicity of integration, uniform margin, W1 or Clay claim is inserted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -249,11 +242,24 @@ module IntegratedSignedOrbitCompiler
 
         packetUpper : packet ≤ combined
         packetUpper =
-          ℚP.+-cancelˡ-≤ (0ℚ - packet)
-            (subst
-              (λ left → left ≤ combined - packet)
-              (solve (packet ∷ []))
-              gapNonnegative)
+          let
+            shifted :
+              0ℚ + packet ≤ (combined - packet) + packet
+            shifted =
+              ℚP.+-mono-≤ gapNonnegative ℚP.≤-refl
+
+            normalRight :
+              0ℚ + packet ≤ combined
+            normalRight =
+              subst
+                (λ right → 0ℚ + packet ≤ right)
+                (solve (combined ∷ packet ∷ []))
+                shifted
+          in
+          subst
+            (_≤ combined)
+            (solve (packet ∷ []))
+            normalRight
       in packetUpper
 
   record LiveIntegratedSignedOrbitPayment
