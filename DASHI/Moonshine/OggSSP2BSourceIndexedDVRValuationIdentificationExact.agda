@@ -167,8 +167,25 @@ parityTagDoesNotDetermineLength readLength zeroLaw geometricLaw =
 -- Hauptmodul/q-expansion comparison for the SAME localized object.
 ------------------------------------------------------------------------
 
+-- These constructor-free tokens are unpaid EXTERNAL SAME-OBJECT THEOREMS.
+-- They are not declarations that the mathematical objects do not exist.
+-- A genuine source derivation must introduce verified inhabitants; Boolean
+-- flags or a chosen Nat weight vector are deliberately insufficient.
+data ActualTwoBGradedSourceEmbeddingReceipt : Set where
+data ActualIgusaLocalizationOfThatTwoBSourceReceipt : Set where
+data ActualCorrectedHauptmodulComparisonReceipt : Set where
+
 record TwoBSourceIndexedValuationAuthority : Set₁ where
   field
+    actualSourceEmbeddingReceipt :
+      ActualTwoBGradedSourceEmbeddingReceipt
+
+    actualIgusaLocalizationReceipt :
+      ActualIgusaLocalizationOfThatTwoBSourceReceipt
+
+    actualAnalyticComparisonReceipt :
+      ActualCorrectedHauptmodulComparisonReceipt
+
     SourcePiece : Set
     LocalizedPiece : Set
     AnalyticTerm : Set
