@@ -48,18 +48,6 @@ ResidualSemantic remaining =
   SAT.Assignment remaining →
   Bool
 
-residualSemantic :
-  ∀ {rootVariables remaining : Nat}
-    {root : SAT.BooleanFormula rootVariables} →
-  Width.LayerNode {root = root} remaining →
-  ResidualSemantic remaining
-residualSemantic node assignment =
-  SAT.evaluate
-    (Family.currentFormula (Width.node node))
-    (Future.transportAssignment
-      (Agda.Builtin.Equality.primTrustMe)
-      assignment)
-
 ------------------------------------------------------------------------
 -- Avoid proof-irrelevance assumptions by defining the exact semantic consumer
 -- with the same transport used by LayerResidualEqual.
