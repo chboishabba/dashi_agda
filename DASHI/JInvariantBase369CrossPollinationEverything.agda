@@ -534,3 +534,5 @@ import DASHI.Moonshine.OggSSPP2F4FiniteChordTangentGroupLawExact
 import DASHI.Moonshine.OggSSPP2F4ArithmeticS3OrbitPartitionExact
 
 import DASHI.Moonshine.OggSSPP2F4EllipticVOAS3ActionRecognitionCutsetExact
+
+import DASHI.Moonshine.OggSSP2BSourceIndexedDVRValuationIdentificationExact
