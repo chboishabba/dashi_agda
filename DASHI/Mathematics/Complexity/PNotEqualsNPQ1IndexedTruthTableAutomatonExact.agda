@@ -27,6 +27,9 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoun
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as Truth
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact as Merge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1GradedShannonRepairGeneratorExact as Shannon
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as Future
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CoarseFineConstructionSharingExact as Sharing
 
 ------------------------------------------------------------------------
 -- Finite state IDs, indexed by remaining input arity.
@@ -176,6 +179,31 @@ terminalLabel state =
   Vec.lookup
     (decodeState state)
     Fin.zero
+
+------------------------------------------------------------------------
+-- Terminal semantic admission: at zero arity the sole truth-table row is
+-- exactly the evaluation on the empty assignment.
+------------------------------------------------------------------------
+
+indexedTerminalLabelCorrect :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (terminal : Width.LayerNode {root = root} zero) →
+  terminalLabel (indexRestrictionNode terminal)
+  ≡
+  SAT.evaluate
+    (Family.currentFormula (Width.node terminal))
+    Future.emptyAssignment
+indexedTerminalLabelCorrect terminal
+    with Width.node terminal | Width.arityExact terminal
+... | Family.restriction-node .zero current derivation | refl =
+  trans
+    (cong
+      (λ key → Vec.lookup key Fin.zero)
+      (indexRestrictionNodeExact terminal))
+    (trans
+      (Truth.lookupTabulateVec _ Fin.zero)
+      (SAT.evaluateExtensional current (λ ())))
 
 ------------------------------------------------------------------------
 -- The field "terminalLabel" above is data, not an oracle. The missing Q1
