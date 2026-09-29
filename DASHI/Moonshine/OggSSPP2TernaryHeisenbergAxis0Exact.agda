@@ -29,10 +29,12 @@ module DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact where
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
+import DASHI.Moonshine.Monster3BFiniteHeisenbergAssociativityExact as Assoc
 
 record RankOneHeisenberg : Set where
   constructor heisenbergOne
@@ -76,6 +78,35 @@ embedComposeOne (heisenbergOne x zer z) (heisenbergOne pos y' z') = refl
 embedComposeOne (heisenbergOne x pos z) (heisenbergOne neg y' z') = refl
 embedComposeOne (heisenbergOne x pos z) (heisenbergOne zer y' z') = refl
 embedComposeOne (heisenbergOne x pos z) (heisenbergOne pos y' z') = refl
+
+------------------------------------------------------------------------
+-- Faithfulness and associativity are transported FROM THE EXISTING H6
+-- group law, rather than separately postulated for a 27-element model.
+------------------------------------------------------------------------
+
+embedAxis0_injective :
+  (a b : RankOneHeisenberg) →
+  embedAxis0 a ≡ embedAxis0 b → a ≡ b
+embedAxis0_injective
+  (heisenbergOne x y z) (heisenbergOne .x .y .z) refl = refl
+
+composeOneAssociative :
+  (g h k : RankOneHeisenberg) →
+  composeOne (composeOne g h) k ≡ composeOne g (composeOne h k)
+composeOneAssociative g h k =
+  embedAxis0_injective
+    (composeOne (composeOne g h) k)
+    (composeOne g (composeOne h k))
+    (trans (embedComposeOne (composeOne g h) k)
+      (trans
+        (cong (λ v → H.compose v (embedAxis0 k))
+          (embedComposeOne g h))
+        (trans
+          (Assoc.composeAssociative (embedAxis0 g) (embedAxis0 h) (embedAxis0 k))
+          (trans
+            (cong (λ v → H.compose (embedAxis0 g) v)
+              (sym (embedComposeOne h k)))
+            (sym (embedComposeOne g (composeOne h k))))))
 
 centerOne : Trit → RankOneHeisenberg
 centerOne z = heisenbergOne zer zer z
