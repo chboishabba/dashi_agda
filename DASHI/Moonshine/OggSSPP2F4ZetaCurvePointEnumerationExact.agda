@@ -374,6 +374,88 @@ phaseZetaSquaredSolvesTraceOne :
   yTrace (ternaryPhaseToF4Label Phase.zetaSquaredPoint) ≡ one₄
 phaseZetaSquaredSolvesTraceOne = refl
 
+------------------------------------------------------------------------
+-- The remembered [zero, zeta, zeta^2] is the exact THREE-ROOT chart of
+-- t*(t^2+t+1) over F4. This is a char-two arithmetic interpretation of
+-- the old ternary phase LABELS, not the characteristic-zero Eisenstein
+-- scalar carrier.
+------------------------------------------------------------------------
+
+ternaryRootPolynomial : F4 → F4
+ternaryRootPolynomial t =
+  t *₄ ((square₄ t +₄ t) +₄ one₄)
+
+rootPolynomialAtZero :
+  ternaryRootPolynomial zero₄ ≡ zero₄
+rootPolynomialAtZero = refl
+
+rootPolynomialAtZeta :
+  ternaryRootPolynomial zeta₄ ≡ zero₄
+rootPolynomialAtZeta = refl
+
+rootPolynomialAtZetaSquared :
+  ternaryRootPolynomial zetaSquared₄ ≡ zero₄
+rootPolynomialAtZetaSquared = refl
+
+rootPolynomialAtOne :
+  ternaryRootPolynomial one₄ ≡ one₄
+rootPolynomialAtOne = refl
+
+phaseLabelsAreRoots :
+  (p : Phase.TernaryPoint) →
+  ternaryRootPolynomial (ternaryPhaseToF4Label p) ≡ zero₄
+phaseLabelsAreRoots Phase.zeroPoint = refl
+phaseLabelsAreRoots Phase.zetaPoint = refl
+phaseLabelsAreRoots Phase.zetaSquaredPoint = refl
+
+classifyTernaryRoot :
+  (t : F4) →
+  ternaryRootPolynomial t ≡ zero₄ →
+  Phase.TernaryPoint
+classifyTernaryRoot zero₄ proof = Phase.zeroPoint
+classifyTernaryRoot one₄ ()
+classifyTernaryRoot zeta₄ proof = Phase.zetaPoint
+classifyTernaryRoot zetaSquared₄ proof = Phase.zetaSquaredPoint
+
+ternaryRootClassifyRoundTrip :
+  (p : Phase.TernaryPoint) →
+  classifyTernaryRoot
+    (ternaryPhaseToF4Label p)
+    (phaseLabelsAreRoots p)
+  ≡ p
+ternaryRootClassifyRoundTrip Phase.zeroPoint = refl
+ternaryRootClassifyRoundTrip Phase.zetaPoint = refl
+ternaryRootClassifyRoundTrip Phase.zetaSquaredPoint = refl
+
+ternaryRootDecodeRoundTrip :
+  (t : F4) →
+  (h : ternaryRootPolynomial t ≡ zero₄) →
+  ternaryPhaseToF4Label (classifyTernaryRoot t h) ≡ t
+ternaryRootDecodeRoundTrip zero₄ h = refl
+ternaryRootDecodeRoundTrip one₄ ()
+ternaryRootDecodeRoundTrip zeta₄ h = refl
+ternaryRootDecodeRoundTrip zetaSquared₄ h = refl
+
+phaseFrobenius : Phase.TernaryPoint → Phase.TernaryPoint
+phaseFrobenius Phase.zeroPoint = Phase.zeroPoint
+phaseFrobenius Phase.zetaPoint = Phase.zetaSquaredPoint
+phaseFrobenius Phase.zetaSquaredPoint = Phase.zetaPoint
+
+phaseFrobeniusIntertwines :
+  (p : Phase.TernaryPoint) →
+  ternaryPhaseToF4Label (phaseFrobenius p)
+  ≡ frobeniusSquare (ternaryPhaseToF4Label p)
+phaseFrobeniusIntertwines Phase.zeroPoint = refl
+phaseFrobeniusIntertwines Phase.zetaPoint = refl
+phaseFrobeniusIntertwines Phase.zetaSquaredPoint = refl
+
+phaseFrobeniusInvolutive :
+  (p : Phase.TernaryPoint) →
+  phaseFrobenius (phaseFrobenius p) ≡ p
+phaseFrobeniusInvolutive Phase.zeroPoint = refl
+phaseFrobeniusInvolutive Phase.zetaPoint = refl
+phaseFrobeniusInvolutive Phase.zetaSquaredPoint = refl
+
 data CyclotomicCharacteristicZeroEqualsF4Field : Set where
 
 noCyclotomicF4FieldIdentification :
@@ -393,10 +475,12 @@ record F4ZetaCurvePointBoundary : Set where
     nineRationalPointsIncludingInfinity : Bool
     coordinatewiseFrobeniusInvolutionPaid : Bool
     frobeniusThreeFixedThreePairsPaid : Bool
+    ternaryThreeRootPolynomialBidiPaid : Bool
+    ternaryRootFrobeniusIntertwinerPaid : Bool
     characteristicZeroCyclotomicFieldIdentifiedWithF4 : Bool
     gamma0FourFiniteFlatMarkedSchemeConstructed : Bool
 
 canonicalBoundary : F4ZetaCurvePointBoundary
 canonicalBoundary =
   f4-zeta-curve-point-boundary
-    true true true true true true true false false
+    true true true true true true true true true false false
