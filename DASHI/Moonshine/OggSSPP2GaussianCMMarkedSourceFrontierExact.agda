@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as CurveS3
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as F4Zeta
 import DASHI.Moonshine.OggSSPP2BanerjeeGaloisOrbitNoGoExact as BanerjeeGalNoGo
 module DASHI.Moonshine.OggSSPP2GaussianCMMarkedSourceFrontierExact where
@@ -197,6 +198,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     gamma0FourMarkedSubgroupSchemeSocketOwned : Bool
     canonicalRawGamma0FourFlagOwned : Bool
     f4ZetaCurveNinePointAndThreeRootChartOwned : Bool
+    f4CurveShearReflectionSetActionOwned : Bool
     banerjeeGaloisOrbitFiveNotTenOwned : Bool
     gamma0FourRefinedCompactificationBoundaryOwned : Bool
     gamma0FourTwoIsogenyChainSocketOwned : Bool
@@ -246,6 +248,7 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; gamma0FourMarkedSubgroupSchemeSocketOwned = true
     ; canonicalRawGamma0FourFlagOwned = true
     ; f4ZetaCurveNinePointAndThreeRootChartOwned = true
+    ; f4CurveShearReflectionSetActionOwned = true
     ; banerjeeGaloisOrbitFiveNotTenOwned = true
     ; gamma0FourRefinedCompactificationBoundaryOwned = true
     ; gamma0FourTwoIsogenyChainSocketOwned = true
