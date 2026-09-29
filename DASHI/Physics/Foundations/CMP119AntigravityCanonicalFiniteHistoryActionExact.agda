@@ -13,7 +13,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityCanonicalFiniteHistoryActionEx
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; 1ℚ; _*_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _-_)
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaToSourceTrajectoryExact as Finite
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
