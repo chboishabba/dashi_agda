@@ -28,6 +28,8 @@ open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
 import DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact as Literal
+import DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact as Exact
+open import Data.Product using (Σ)
 
 ------------------------------------------------------------------------
 -- Real witness-carrying refinement of the existing literal cycle carrier.
@@ -130,6 +132,29 @@ syntacticallyWitnessedCycleHasCertificates =
     { finiteSupportCertificate = tt
     ; generatorAlgebraicCertificate = λ _ → tt
     }
+
+------------------------------------------------------------------------
+-- Universal SYNTAX production is trivial: ignore the rational Hodge class,
+-- return the same one-generator cycle with unit-typed certificates.
+-- It carries NO equality between its cycle class and the input alpha.
+--
+-- Thus a theorem of type
+--   RationalHodgeClassExact -> Σ Cycle WitnessedCycle
+-- is not a Hodge-algebraicity theorem without same-object singular-class
+-- correctness and genuine geometry of the chosen generator.
+------------------------------------------------------------------------
+
+syntacticUniversalHodgeCycleProducer :
+  ∀ {variety comparison hodge codimension} →
+  (alpha :
+    DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact.RationalHodgeClassExact
+      hodge codimension) →
+  Data.Product.Σ
+    (Hodge.RationalAlgebraicCycle variety codimension)
+    (λ cycle → WitnessedRationalAlgebraicCycle cycle)
+syntacticUniversalHodgeCycleProducer alpha =
+  syntacticallyWitnessedCycle ,
+  syntacticallyWitnessedCycleHasCertificates
 
 ------------------------------------------------------------------------
 -- Counterexample: nonempty rational generator with no valid witnesses.
