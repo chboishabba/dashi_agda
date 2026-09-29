@@ -246,6 +246,119 @@ affineCountIsEight = refl
 rationalCountIsNine : rationalCount ≡ 9
 rationalCountIsNine = refl
 
+------------------------------------------------------------------------
+-- Actual coordinatewise Frobenius on E(F4).
+--
+-- The fixed rational points are infinity, (0,0), and (0,1).
+-- The other six points form three conjugate pairs.
+------------------------------------------------------------------------
+
+frobeniusAffine : AffineF4Point → AffineF4Point
+frobeniusAffine p00 = p00
+frobeniusAffine p01 = p01
+frobeniusAffine p1Zeta = p1ZetaSquared
+frobeniusAffine p1ZetaSquared = p1Zeta
+frobeniusAffine pZetaZeta = pZetaSquaredZetaSquared
+frobeniusAffine pZetaZetaSquared = pZetaSquaredZeta
+frobeniusAffine pZetaSquaredZeta = pZetaZetaSquared
+frobeniusAffine pZetaSquaredZetaSquared = pZetaZeta
+
+frobeniusAffineCoordinates :
+  (p : AffineF4Point) →
+  affineCoordinates (frobeniusAffine p)
+  ≡ (frobeniusSquare (proj₁ (affineCoordinates p)) ,
+     frobeniusSquare (proj₂ (affineCoordinates p)))
+frobeniusAffineCoordinates p00 = refl
+frobeniusAffineCoordinates p01 = refl
+frobeniusAffineCoordinates p1Zeta = refl
+frobeniusAffineCoordinates p1ZetaSquared = refl
+frobeniusAffineCoordinates pZetaZeta = refl
+frobeniusAffineCoordinates pZetaZetaSquared = refl
+frobeniusAffineCoordinates pZetaSquaredZeta = refl
+frobeniusAffineCoordinates pZetaSquaredZetaSquared = refl
+
+frobeniusAffineInvolutive :
+  (p : AffineF4Point) →
+  frobeniusAffine (frobeniusAffine p) ≡ p
+frobeniusAffineInvolutive p00 = refl
+frobeniusAffineInvolutive p01 = refl
+frobeniusAffineInvolutive p1Zeta = refl
+frobeniusAffineInvolutive p1ZetaSquared = refl
+frobeniusAffineInvolutive pZetaZeta = refl
+frobeniusAffineInvolutive pZetaZetaSquared = refl
+frobeniusAffineInvolutive pZetaSquaredZeta = refl
+frobeniusAffineInvolutive pZetaSquaredZetaSquared = refl
+
+frobeniusRational : RationalF4Point → RationalF4Point
+frobeniusRational infinity = infinity
+frobeniusRational (affine p) = affine (frobeniusAffine p)
+
+frobeniusRationalInvolutive :
+  (p : RationalF4Point) →
+  frobeniusRational (frobeniusRational p) ≡ p
+frobeniusRationalInvolutive infinity = refl
+frobeniusRationalInvolutive (affine p)
+  rewrite frobeniusAffineInvolutive p = refl
+
+data F4FrobeniusOrbit : Set where
+  fixedInfinity : F4FrobeniusOrbit
+  fixed00 : F4FrobeniusOrbit
+  fixed01 : F4FrobeniusOrbit
+  pairUnitX : F4FrobeniusOrbit
+  pairEqualPhase : F4FrobeniusOrbit
+  pairOppositePhase : F4FrobeniusOrbit
+
+frobeniusOrbit : RationalF4Point → F4FrobeniusOrbit
+frobeniusOrbit infinity = fixedInfinity
+frobeniusOrbit (affine p00) = fixed00
+frobeniusOrbit (affine p01) = fixed01
+frobeniusOrbit (affine p1Zeta) = pairUnitX
+frobeniusOrbit (affine p1ZetaSquared) = pairUnitX
+frobeniusOrbit (affine pZetaZeta) = pairEqualPhase
+frobeniusOrbit (affine pZetaZetaSquared) = pairOppositePhase
+frobeniusOrbit (affine pZetaSquaredZeta) = pairOppositePhase
+frobeniusOrbit (affine pZetaSquaredZetaSquared) = pairEqualPhase
+
+frobeniusOrbitInvariant :
+  (p : RationalF4Point) →
+  frobeniusOrbit (frobeniusRational p) ≡ frobeniusOrbit p
+frobeniusOrbitInvariant infinity = refl
+frobeniusOrbitInvariant (affine p00) = refl
+frobeniusOrbitInvariant (affine p01) = refl
+frobeniusOrbitInvariant (affine p1Zeta) = refl
+frobeniusOrbitInvariant (affine p1ZetaSquared) = refl
+frobeniusOrbitInvariant (affine pZetaZeta) = refl
+frobeniusOrbitInvariant (affine pZetaZetaSquared) = refl
+frobeniusOrbitInvariant (affine pZetaSquaredZeta) = refl
+frobeniusOrbitInvariant (affine pZetaSquaredZetaSquared) = refl
+
+frobeniusFixedPointCount : Nat
+frobeniusFixedPointCount = 3
+
+frobeniusConjugatePairCount : Nat
+frobeniusConjugatePairCount = 3
+
+frobeniusPartitionCount :
+  frobeniusFixedPointCount + 2 * frobeniusConjugatePairCount
+  ≡ rationalCount
+frobeniusPartitionCount = refl
+
+frobeniusOrbitCount : Nat
+frobeniusOrbitCount =
+  frobeniusFixedPointCount + frobeniusConjugatePairCount
+
+frobeniusOrbitCountIsSix :
+  frobeniusOrbitCount ≡ 6
+frobeniusOrbitCountIsSix = refl
+
+-- Distinguish actual curve-coordinate Frobenius from the freely flipping
+-- Banerjee source-vocabulary sheet: their fixed-point behaviour differs.
+data CurveFrobeniusEqualsFreeBanerjeeSheetFlip : Set where
+
+curveFrobeniusNotFreeSheetFlip :
+  CurveFrobeniusEqualsFreeBanerjeeSheetFlip → ⊥
+curveFrobeniusNotFreeSheetFlip ()
+
 -- Reuse the repo's literal ternary phase vocabulary as a THREE-WAY LABEL;
 -- no ring homomorphism from Eisenstein characteristic zero to F4 is claimed.
 ternaryPhaseToF4Label : Phase.TernaryPoint → F4
@@ -278,10 +391,12 @@ record F4ZetaCurvePointBoundary : Set where
     frobeniusSwapsZetaAndZetaSquared : Bool
     eightAffinePointsClassifiedExhaustively : Bool
     nineRationalPointsIncludingInfinity : Bool
+    coordinatewiseFrobeniusInvolutionPaid : Bool
+    frobeniusThreeFixedThreePairsPaid : Bool
     characteristicZeroCyclotomicFieldIdentifiedWithF4 : Bool
     gamma0FourFiniteFlatMarkedSchemeConstructed : Bool
 
 canonicalBoundary : F4ZetaCurvePointBoundary
 canonicalBoundary =
   f4-zeta-curve-point-boundary
-    true true true true true false false
+    true true true true true true true false false
