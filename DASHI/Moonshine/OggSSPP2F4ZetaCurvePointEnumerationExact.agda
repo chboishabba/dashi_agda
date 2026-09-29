@@ -42,6 +42,9 @@ data F4 : Set where
   zetaSquared₄ : F4
 
 -- Additive characteristic-two structure, with zeta^2 = zeta+1.
+infixl 6 _+₄_
+infixl 7 _*₄_
+
 _+₄_ : F4 → F4 → F4
 zero₄ +₄ b = b
 one₄ +₄ zero₄ = one₄
@@ -456,6 +459,29 @@ phaseFrobeniusInvolutive Phase.zeroPoint = refl
 phaseFrobeniusInvolutive Phase.zetaPoint = refl
 phaseFrobeniusInvolutive Phase.zetaSquaredPoint = refl
 
+------------------------------------------------------------------------
+-- Homogeneous point test: [zeta : zeta^2 : 0] is NOT at infinity.
+-- Over F4, the special-fibre cubic is Y^2 Z + Y Z^2 + X^3 = 0.
+-- Only X=0 can occur with Z=0.  [0:1:0] is the valid infinity.
+------------------------------------------------------------------------
+
+specialHomogeneousCubic : F4 → F4 → F4 → F4
+specialHomogeneousCubic x y z =
+  ((square₄ y *₄ z) +₄ (y *₄ square₄ z)) +₄ cube₄ x
+
+actualInfinitySatisfies :
+  specialHomogeneousCubic zero₄ one₄ zero₄ ≡ zero₄
+actualInfinitySatisfies = refl
+
+zetaTripleAtInfinityEvaluatesToOne :
+  specialHomogeneousCubic zeta₄ zetaSquared₄ zero₄ ≡ one₄
+zetaTripleAtInfinityEvaluatesToOne = refl
+
+zetaTripleIsNotProjectiveCurvePoint :
+  specialHomogeneousCubic zeta₄ zetaSquared₄ zero₄ ≡ zero₄ →
+  ⊥
+zetaTripleIsNotProjectiveCurvePoint ()
+
 data CyclotomicCharacteristicZeroEqualsF4Field : Set where
 
 noCyclotomicF4FieldIdentification :
@@ -477,10 +503,11 @@ record F4ZetaCurvePointBoundary : Set where
     frobeniusThreeFixedThreePairsPaid : Bool
     ternaryThreeRootPolynomialBidiPaid : Bool
     ternaryRootFrobeniusIntertwinerPaid : Bool
+    zetaProjectiveInfinityNoGoPaid : Bool
     characteristicZeroCyclotomicFieldIdentifiedWithF4 : Bool
     gamma0FourFiniteFlatMarkedSchemeConstructed : Bool
 
 canonicalBoundary : F4ZetaCurvePointBoundary
 canonicalBoundary =
   f4-zeta-curve-point-boundary
-    true true true true true true true true true false false
+    true true true true true true true true true true false false
