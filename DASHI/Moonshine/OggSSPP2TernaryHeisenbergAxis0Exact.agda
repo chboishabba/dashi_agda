@@ -7,6 +7,18 @@ module DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact where
 -- This is NOT an asserted equivalence with elliptic E(F4)[3].  The actual
 -- elliptic P,Q basis and the Weil-pairing transport remain source obligations.
 --
+-- Lean comparison: Integration/OggSSPP2TernaryHeisenbergAction.lean
+-- uses EXISTING Base369Heisenberg.H 1, not a parallel finite group.
+-- Its shear is (x,y,z) -> (x+y,y,z+2*y*y); its Frobenius-type reflection
+-- is (x,y,z)->(x,-y,-z). The quadratic correction is required by this
+-- unsymmetrized Schrodinger cocycle. In the alternating gauge
+-- z_alt=z+dot(y,x), shear fixes the centre while reflection negates it.
+--
+-- The actual F4 curve owner separately proves generator-level
+-- F(P)=P, F(Q)=-Q and the chord P+Q=shear(Q) in its own Mathlib carrier.
+-- The missing E(F4)[3] basis equivalence/actual Weil pairing and the
+-- absent analytic map to the RH signed cap are not inferred here.
+--
 -- The full group law is already proved in the Monster3B owners. Here we
 -- preserve that exact unsymmetrized cocycle y*x' rather than introducing
 -- a second unrelated 27-state law.
