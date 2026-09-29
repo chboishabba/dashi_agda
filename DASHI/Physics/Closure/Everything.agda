@@ -651,3 +651,15 @@ import DASHI.Physics.Closure.NSTriadKNR650PhysicalViscositySharedBarrierRound819
 import DASHI.Physics.Closure.NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact
+
+import DASHI.Physics.Closure.DrellYanRatioAbsoluteDefectLocalizationExact
+
+import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixExact
+
+import DASHI.Physics.Closure.DrellYanRatioAbsoluteDefectLocalizationValidation
+import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixValidation
+
+import DASHI.Physics.Closure.DrellYanRatioCancellationBoundaryExact
+import DASHI.Physics.Closure.ColliderLowChiSquareProvenanceLadderExact
+
+import DASHI.Physics.Closure.W4ProjectionOperatorAblationRequestExact
