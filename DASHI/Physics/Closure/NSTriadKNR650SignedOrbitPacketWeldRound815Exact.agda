@@ -2,27 +2,20 @@
 module DASHI.Physics.Closure.NSTriadKNR650SignedOrbitPacketWeldRound815Exact where
 
 ------------------------------------------------------------------------
--- ROUND781 / EXACT TWO-FAMILY SPLIT OF THE SWAP-PAIRED W2 RESIDUAL
+-- ROUND815 / ACTUAL PAIRED ORBIT RATE -> PHYSICAL PACKET STRICT SURPLUS
 --
--- R777-R780 classify every separated-base energy orbit.  The invariant that
--- survives swap pairing and retains cyclic information is:
+-- R745: orbitAlignedResidual = 3 (combined - packetStrictSurplus).
+-- R749: differenceAlignedFold = orbitAlignedFold.
+-- R760: swap-paired fold = 2 differenceAlignedFold.
+-- R781: swap-paired fold = fullySeparatedFold + ccTouchedFold.
 --
---   ccTouched(beta)
---     iff at least one coordinate of Pi(beta) is comparable.
+-- Therefore, on one live physical packet at the same cutoff and time:
 --
--- Define the complementary family as fullySeparated.
+--   separated + touched + 6*(2nu-margin)*dissipation
+--     = 6*(combined - packetStrictSurplus).
 --
--- The predicate is exactly swap-invariant because R775 transports profiles by
---
---   (c0,cp,cq) -> (swapClass c0,cq,cp),
---
--- and swapClass fixes comparable.
---
--- The R760 paired residual is then split pointwise and globally as
---
---   PairD = FullySeparatedD + CCTouchedD.
---
--- No sign or estimate is asserted for either family.
+-- The integration theorem preserves this equality, the positive factor six,
+-- the viscous term, and the required W2 sign. It supplies no estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
