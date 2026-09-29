@@ -19,6 +19,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 import Base369 as Base
 import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact as Legacy
 import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
@@ -128,6 +129,51 @@ centerPlus (a , b) (c , d) = centerAdd a c , centerAdd b d
 
 centerMinus : CenteredNine → CenteredNine
 centerMinus (a , b) = centerNeg a , centerNeg b
+
+centerPlusAssociative :
+  (p q r : CenteredNine) →
+  centerPlus (centerPlus p q) r ≡ centerPlus p (centerPlus q r)
+centerPlusAssociative (a , b) (c , d) (e , f)
+  rewrite sym (centerAssociative a c e)
+        | sym (centerAssociative b d f) = refl
+
+centerPlusCommutative :
+  (p q : CenteredNine) →
+  centerPlus p q ≡ centerPlus q p
+centerPlusCommutative (a , b) (c , d)
+  rewrite centerCommutative a c
+        | centerCommutative b d = refl
+
+centerPlusZeroRight :
+  (p : CenteredNine) →
+  centerPlus p centerZero ≡ p
+centerPlusZeroRight (a , b)
+  rewrite centerUnitRight a | centerUnitRight b = refl
+
+centerPlusZeroLeft :
+  (p : CenteredNine) →
+  centerPlus centerZero p ≡ p
+centerPlusZeroLeft (a , b)
+  rewrite centerUnitLeft a | centerUnitLeft b = refl
+
+centerPlusInverseRight :
+  (p : CenteredNine) →
+  centerPlus p (centerMinus p) ≡ centerZero
+centerPlusInverseRight (a , b)
+  rewrite centerInverseRight a | centerInverseRight b = refl
+
+centerPlusTripleZero :
+  (p : CenteredNine) →
+  centerPlus (centerPlus p p) p ≡ centerZero
+centerPlusTripleZero (Base.tri-low , Base.tri-low) = refl
+centerPlusTripleZero (Base.tri-low , Base.tri-mid) = refl
+centerPlusTripleZero (Base.tri-low , Base.tri-high) = refl
+centerPlusTripleZero (Base.tri-mid , Base.tri-low) = refl
+centerPlusTripleZero (Base.tri-mid , Base.tri-mid) = refl
+centerPlusTripleZero (Base.tri-mid , Base.tri-high) = refl
+centerPlusTripleZero (Base.tri-high , Base.tri-low) = refl
+centerPlusTripleZero (Base.tri-high , Base.tri-mid) = refl
+centerPlusTripleZero (Base.tri-high , Base.tri-high) = refl
 
 toOriginal : CenteredNine → Phase.PhaseQuotient9
 toOriginal (a , b) = retreat a , retreat b
