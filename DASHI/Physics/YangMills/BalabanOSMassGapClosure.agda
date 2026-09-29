@@ -235,7 +235,7 @@ assembleNontrivialPhysicalMassGap interacting gapCertificate = record
   }
 
 preGapOSReconstructionLevel : ProofLevel
-preGapOSReconstructionLevel = standardImported
+preGapOSReconstructionLevel = conditional
 
 osReconstructionLevel : ProofLevel
 osReconstructionLevel = standardImported
