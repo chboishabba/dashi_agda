@@ -20,7 +20,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (sym)
+import DASHI.Algebra.Trit as Trit
+open Codec using ([]ᵥ; _∷ᵥ_)
 
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
 import DASHI.Moonshine.OggSSPP2F4CurveTangentFlexExact as Flex
@@ -192,21 +193,29 @@ sheetNegation sheet =
 sheetNegationInvolutive :
   (s : Codec.Sheet9) →
   sheetNegation (sheetNegation s) ≡ s
-sheetNegationInvolutive s
-  rewrite Sheet.curveAfterSheet
-    (negateRational (Sheet.sheet9ToCurve s))
-        | negateRationalInvolutive (Sheet.sheet9ToCurve s)
-        | Sheet.sheetAfterCurve s = refl
+sheetNegationInvolutive (Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) = refl
+sheetNegationInvolutive (Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
 
 sheetNegationFrobeniusCommute :
   (s : Codec.Sheet9) →
   Sheet.sheetFrobenius (sheetNegation s)
     ≡ sheetNegation (Sheet.sheetFrobenius s)
-sheetNegationFrobeniusCommute s
-  rewrite sym (Sheet.curveFrobeniusToSheetReflection
-            (negateRational (Sheet.sheet9ToCurve s)))
-        | Sheet.sheetReflectionToCurveFrobenius s
-        | frobeniusNegationCommute (Sheet.sheet9ToCurve s) = refl
+sheetNegationFrobeniusCommute (Trit.neg ∷ᵥ Trit.neg ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.neg ∷ᵥ Trit.zer ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.neg ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.zer ∷ᵥ Trit.neg ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.zer ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.pos ∷ᵥ Trit.neg ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.pos ∷ᵥ Trit.zer ∷ᵥ []ᵥ) = refl
+sheetNegationFrobeniusCommute (Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
 
 -- A four-component groupoid cannot itself be the ten-component
 -- arithmetic source of the exceptional Monster exponent residual.
