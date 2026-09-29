@@ -16,6 +16,7 @@ module DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact whe
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 
@@ -42,7 +43,7 @@ canonicalCompletionFromFaithfulGradeTwoComparison core receipt =
 record SameCoreMonomialSpecialisation
     {Monster K : Set}
     (core : Core.CanonicalSelected3BLinearCore {Monster} {K})
-    : Set₁ where
+    : Setω where
   field
     receipt :
       Monomial.FullMonomialBasisReceipt
