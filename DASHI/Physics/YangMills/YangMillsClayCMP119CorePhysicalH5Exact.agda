@@ -209,6 +209,13 @@ record CMP119CompactSimplePhysicalH5Core
     literalToClassified :
       G → Compact.CompactSimpleLieGroup
 
+    -- The canonical family index must describe a genuinely simple
+    -- compact group, not a degenerate classical rank accepted only by
+    -- the unrestricted historical numerical package.
+    literalGroupHasValidSimpleIndex :
+      ∀ group →
+      Compact.ValidCompactSimpleIndex (literalToClassified group)
+
     quantitativePackageMeansLiteralCompactSimple :
       ∀ group →
       Compact.QuantitativeCompactLiePackage
