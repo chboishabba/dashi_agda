@@ -66,6 +66,16 @@ allFinCovers {suc n} (Fin.suc index) =
 -- Generic membership transport through the literal flattening algorithm.
 ------------------------------------------------------------------------
 
+concatMap :
+  ∀ {A B : Set} →
+  (A → List B) →
+  List A →
+  List B
+concatMap f [] = []
+concatMap f (item ∷ rest) =
+  f item ++ concatMap f rest
+
+
 listedInAppendLeft :
   ∀ {A : Set} {item : A}
     {left right : List A} →
@@ -87,15 +97,6 @@ listedInAppendRight [] inRight =
   inRight
 listedInAppendRight (_ ∷ tail) inRight =
   later (listedInAppendRight tail inRight)
-
-concatMap :
-  ∀ {A B : Set} →
-  (A → List B) →
-  List A →
-  List B
-concatMap f [] = []
-concatMap f (item ∷ rest) =
-  f item ++ concatMap f rest
 
 concatMapCovers :
   ∀ {A B : Set}
