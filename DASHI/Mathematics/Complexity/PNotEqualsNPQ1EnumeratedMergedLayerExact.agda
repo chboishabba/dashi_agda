@@ -15,6 +15,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1EnumeratedMergedLayerExact whe
 -- DP strict budget is met.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -64,7 +65,7 @@ enumeratedChildCount (parent ∷ rest)
 -- Complete literal one-step coverage, independently of semantic merging.
 ------------------------------------------------------------------------
 
-data Listed {A : Set} (item : A) : List A → Set where
+data Listed {ℓ : Level} {A : Set ℓ} (item : A) : List A → Set ℓ where
   first : ∀ {rest} → Listed item (item ∷ rest)
   later : ∀ {head rest} →
     Listed item rest →
