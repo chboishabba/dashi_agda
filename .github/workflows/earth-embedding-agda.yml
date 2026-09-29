@@ -24,3 +24,4 @@ jobs:
           agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingWoogarooExact.agda
           agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingGeometryExact.agda
           agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda
