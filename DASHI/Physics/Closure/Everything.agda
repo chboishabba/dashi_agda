@@ -640,3 +640,6 @@ import DASHI.Physics.Closure.NSTriadKNR650SignedOrbitPacketWeldRound815Exact
 import DASHI.Physics.Closure.NSTriadKNR650IntegratedSignedOrbitPaymentRound816Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650SignedOrbitAugmentedEndpointRound817Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650PhysicalViscosityMarginRound818Exact
+import DASHI.Physics.Closure.NSTriadKNR650PhysicalViscositySharedBarrierRound819Exact
