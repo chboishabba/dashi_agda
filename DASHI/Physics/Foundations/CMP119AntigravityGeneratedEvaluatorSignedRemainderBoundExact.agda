@@ -22,6 +22,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityGeneratedRichFiniteModeP3GExac
 import DASHI.Physics.Foundations.CMP119AntigravityP3GNativeSetoidLiteralEvaluatorExact as Native
 import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalSignedQuarticReceiptExact as Signed
 import DASHI.Physics.Foundations.CMP119AntigravityP3GPhysicalReceiptMajorantExact as Majorant
+import DASHI.Physics.Foundations.CMP119AntigravityP3GSetoidRunningRecursionExact as Running
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteModePlaquetteBetaSameObjectExact as Same
 import DASHI.Physics.Foundations.CMP119AntigravityCMP109TrajectoryPlaquetteConstructorExact as Constructor
 import DASHI.Physics.Foundations.CMP119AntigravityP3GSetoidPhysicalCoreExact as Core
@@ -76,8 +77,8 @@ module _
     (certificate : ∀ k →
       Literal.LiteralFiniteBetaCertificate
         (Constructor.asPhysicalRunningCouplingData sourceWeld) k) →
-    Majorant.Running.PhysicalRemainderMajorant
-      (Majorant.Running.fromPhysicalCore physicalGeometry)
+    Running.PhysicalRemainderMajorant
+      (Running.fromPhysicalCore physicalGeometry)
       (selectedPhysicalRemainderMajorant certificate)
   selectedPhysicalRemainderControlled certificate =
     Majorant.asPhysicalRemainderMajorant
