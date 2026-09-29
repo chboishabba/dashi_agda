@@ -15,7 +15,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _-ℝ_; absℝ; _<ℝ_)
-open import Data.Product using (Σ)
+open import Data.Product using (Σ; _×_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -201,8 +201,8 @@ record CMP119CoreH1OS4Meaning
       ∀ epsilon →
       0ℝ <ℝ epsilon →
       Σ ℝ (λ delta →
-        (0ℝ <ℝ delta) →
-        ∀ left left' right right' time →
+        (0ℝ <ℝ delta) ×
+        (∀ left left' right right' time →
         (∀ configuration →
           absℝ (left configuration -ℝ left' configuration) <ℝ delta) →
         (∀ configuration →
@@ -216,7 +216,7 @@ record CMP119CoreH1OS4Meaning
             (OSSystem.constructedSchwingerCore
               (H2Core.coreInputs h2) group)
             left' (translateFull right' time) time)
-        <ℝ epsilon)
+        <ℝ epsilon))
 
     -- Genuine source/weld theorem, not a compiler-created equality:
     -- the exact R281 selected Wilson estimate applies to EVERY member of the
@@ -256,8 +256,8 @@ record CMP119CoreH1OS4Meaning
       (∀ epsilon →
         0ℝ <ℝ epsilon →
         Σ ℝ (λ delta →
-          (0ℝ <ℝ delta) →
-          ∀ left left' right right' time →
+          (0ℝ <ℝ delta) ×
+          (∀ left left' right right' time →
           (∀ configuration →
             absℝ (left configuration -ℝ left' configuration) <ℝ delta) →
           (∀ configuration →
@@ -271,7 +271,7 @@ record CMP119CoreH1OS4Meaning
               (OSSystem.constructedSchwingerCore
                 (H2Core.coreInputs h2) group)
               left' (translateFull right' time) time)
-          <ℝ epsilon)) →
+          <ℝ epsilon))) →
       ∀ left right →
       RealLimit.Converges sequenceLimit
         (λ time →
