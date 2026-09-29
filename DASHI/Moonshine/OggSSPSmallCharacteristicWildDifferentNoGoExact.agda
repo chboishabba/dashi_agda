@@ -97,8 +97,23 @@ p3WildDifferentIsNotMonsterResidual :
   p3WildDifferentCoefficient ≡ p3MonsterResidual -> ⊥
 p3WildDifferentIsNotMonsterResidual ()
 
--- The gaps are taken from the attributed Duncan--Swisher continuation owner,
--- not from the geometry count itself.
+-- Attribution-preserving payment: the *arithmetic* gaps come from the
+-- Duncan--Swisher continuation owner (which does not claim a p=2/3 theorem).
+-- The geometric sectors are independently constructed in Wild.  These
+-- equalities compare two sources; they do not identify their meanings.
+p2ArithmeticGapIsSectorCount :
+  Exponent.monsterOrderExponent Lane.p2
+  ≡ Exponent.duncanSwisherExceptionalRHS Lane.p2 + p2MonsterResidual
+p2ArithmeticGapIsSectorCount = Exponent.p2ExceptionalGap
+
+p3ArithmeticGapIsSectorCount :
+  Exponent.monsterOrderExponent Lane.p3
+  ≡ Exponent.duncanSwisherExceptionalRHS Lane.p3 + p3MonsterResidual
+p3ArithmeticGapIsSectorCount = Exponent.p3ExceptionalGap
+
+-- The exact source-native filtration produces different coefficients;
+-- neither identity can be promoted into the valuation contribution.
+
 data RawWildDifferentExplainsP2Gap : Set where
 data RawWildDifferentExplainsP3Gap : Set where
 
