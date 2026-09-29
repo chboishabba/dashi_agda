@@ -1,3 +1,6 @@
+import DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredShearReflectionExact as CenteredS3
+import DASHI.Moonshine.OggSSPP2F4CurveEigenbasisSheet9Exact as EigenSheet
+import DASHI.Moonshine.OggSSPP2CenteredTernaryGroupExact as CenteredC3
 import DASHI.Moonshine.OggSSPP2F4CurveQ9GroupActionBidiExact as F4ChordQ9
 import DASHI.Moonshine.OggSSPP2F4CurveExactChordGroup as F4Chord
 import DASHI.Moonshine.OggSSPP2F4CurveShearReflectionExact as CurveS3
@@ -201,6 +204,7 @@ record P2GaussianCMMarkedSourceFrontierBoundary : Set where
     canonicalRawGamma0FourFlagOwned : Bool
     f4ZetaCurveNinePointAndThreeRootChartOwned : Bool
     f4CurveShearReflectionSetActionOwned : Bool
+    centeredC3SquareAndEigenbasisActionsOwned : Bool
     actualF4ChordQ9GroupActionBidiSourceWritten : Bool
     banerjeeGaloisOrbitFiveNotTenOwned : Bool
     gamma0FourRefinedCompactificationBoundaryOwned : Bool
@@ -252,6 +256,7 @@ canonicalP2GaussianCMMarkedSourceFrontierBoundary =
     ; canonicalRawGamma0FourFlagOwned = true
     ; f4ZetaCurveNinePointAndThreeRootChartOwned = true
     ; f4CurveShearReflectionSetActionOwned = true
+    ; centeredC3SquareAndEigenbasisActionsOwned = true
     ; actualF4ChordQ9GroupActionBidiSourceWritten = true
     ; banerjeeGaloisOrbitFiveNotTenOwned = true
     ; gamma0FourRefinedCompactificationBoundaryOwned = true
