@@ -76,14 +76,10 @@ spin-splitting-B = refl
 -- Equal representation of opposite spins in the two-sector carrier.
 -- This is a finite counting witness, not a calculated magnetic moment.
 up-count : Nat
-up-count = 1 + 1
-  where
-  open import Agda.Builtin.Nat using (_+_)
+up-count = suc (suc zero)
 
 down-count : Nat
-down-count = 1 + 1
-  where
-  open import Agda.Builtin.Nat using (_+_)
+down-count = suc (suc zero)
 
 compensated-count : up-count ≡ down-count
 compensated-count = refl
