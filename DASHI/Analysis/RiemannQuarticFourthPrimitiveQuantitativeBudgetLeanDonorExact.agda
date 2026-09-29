@@ -41,6 +41,43 @@ open import Agda.Builtin.String using (String)
 -- Attribution: new Lean code is source-landed only; this module records
 -- interfaces, not an independent Agda proof of real analysis or RH.
 ------------------------------------------------------------------------
+-- RH SIGNED-CAP LIMIT CORRECTION / CLASSICAL REMAINDER BRIDGE
+--
+-- Lean owners:
+--   Synthesis/RiemannQuarticFourthPrimitiveQuantitativeBudget.lean
+--   Synthesis/RiemannQuarticFourthPrimitiveClassicalRemainder.lean
+--
+-- A single finite-Q signed-cap success does NOT imply the limiting canonical
+-- high cut.  The earlier compiler conclusion was too strong.  The corrected
+-- theorem requires an EVENTUAL signed bound with fixed positive slack and
+-- the proven exhaustion limit:
+--
+--   3390073  repair finite-vs-global conclusion
+--   0775f89  eventual signed-cap -> limiting high cut
+--
+-- Exact unconditional classical-remainder identity for nonnegative endpoints:
+--
+--   S0(T) = Ncount 0 T - integral_0^T mu,
+--   D(A,B) = S0(B) - S0(A)  (0 <= A <= B).
+--
+-- Hence the physical fourth cap, only when S <= t, is a weighted integral of
+-- S0(t+s)-S0(t-s).  The finite-Q exhaustion also includes S > t:
+--
+--   D(t-s,t+s)
+--     = D(t-s,0) + S0(t+s)  (t < s).
+--
+-- No reflection of negative-ordinate counts into positive S_n is assumed.
+-- The *actual* signed C5 cap interior is now source-expressed as an iterated
+-- integral against this full two-sided RvM remainder.
+--
+--   2c57316  positive-ordinate remainder bridge
+--   a0b53c9  exact crossing-zero decomposition
+--   704fab1  induced signed fifth-cap integral.
+--
+-- These are source-written bridge identities, not a theorem estimating S_n.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 record QuantitativeFourthPrimitiveBoundary : Set where
   constructor quantitative-fourth-primitive-boundary
