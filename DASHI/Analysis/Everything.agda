@@ -170,6 +170,7 @@ import DASHI.Analysis.RiemannQuarticDepthFiveX6Rank4BridgeExact
 import DASHI.Analysis.RiemannQuarticTriadicCodecKernelBridgeExact
 import DASHI.Analysis.RiemannQuarticPuncturedKernel4EnumerationExact
 import DASHI.Analysis.RiemannJ369BalancedTernaryCrossPollinationExact
+import DASHI.Analysis.RiemannQuarticSignedPoleVerticalRvMHorizontalRecutExact
 
 
 
