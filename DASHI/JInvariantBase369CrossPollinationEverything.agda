@@ -526,3 +526,5 @@ import DASHI.Moonshine.OggSSPP2F4RecenteredTriXorS3Exact
 import DASHI.Moonshine.OggSSPP2F4EllipticS3NineSheetBidiExact
 
 import DASHI.Moonshine.OggSSPP2F4FiniteChordTangentGroupLawExact
+
+import DASHI.Moonshine.OggSSPP2F4ArithmeticS3OrbitPartitionExact
