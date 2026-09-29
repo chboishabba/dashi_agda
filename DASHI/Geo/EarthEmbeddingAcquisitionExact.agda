@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.String using (String)
 open import Data.Vec.Base using (Vec)
 open import Data.Fin.Base using (Fin)
-open import Data.Vec.Base as Vec using (lookup)
+import Data.Vec.Base as Vec
 import DASHI.Geo.EarthEmbeddingInterpretabilityExact as Interpretation
 
 -- Frozen input selection follows actual TESSERA student/infer.py binning.
