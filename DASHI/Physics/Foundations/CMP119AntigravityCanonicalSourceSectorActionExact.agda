@@ -157,3 +157,56 @@ module _
         (λ drift →
           Edge.projectedSourceEdge canonicalRawState k - drift)
         (nonWilsonDriftIsFourSectorDifference k))
+
+  -- Expanded termwise drift, with no assumption that an E, R, boundary or
+  -- vacuum projector is zero or stationary.
+  eDelta rDelta bDelta vacuumDelta : Nat → ℚ
+  eDelta k =
+    T4.plaquetteCoefficientProjector (eAt sectors k)
+    - T4.plaquetteCoefficientProjector (eAt sectors (suc k))
+  rDelta k =
+    T4.plaquetteCoefficientProjector (rAt sectors k)
+    - T4.plaquetteCoefficientProjector (rAt sectors (suc k))
+  bDelta k =
+    T4.plaquetteCoefficientProjector (bAt sectors k)
+    - T4.plaquetteCoefficientProjector (bAt sectors (suc k))
+  vacuumDelta k =
+    T4.plaquetteCoefficientProjector (vacuumAt sectors k)
+    - T4.plaquetteCoefficientProjector (vacuumAt sectors (suc k))
+
+  totalSectorDrift : Nat → ℚ
+  totalSectorDrift k =
+    eDelta k + (rDelta k + (bDelta k + vacuumDelta k))
+
+  nonWilsonDriftIsTermwise :
+    ∀ k →
+    Edge.nodeResidual canonicalRawState k
+      - Edge.nodeResidual canonicalRawState (suc k)
+    ≡ totalSectorDrift k
+  nonWilsonDriftIsTermwise k =
+    trans
+      (nonWilsonDriftIsFourSectorDifference k)
+      (ℚRing.solve-∀
+        (T4.plaquetteCoefficientProjector (eAt sectors k))
+        (T4.plaquetteCoefficientProjector (rAt sectors k))
+        (T4.plaquetteCoefficientProjector (bAt sectors k))
+        (T4.plaquetteCoefficientProjector (vacuumAt sectors k))
+        (T4.plaquetteCoefficientProjector (eAt sectors (suc k)))
+        (T4.plaquetteCoefficientProjector (rAt sectors (suc k)))
+        (T4.plaquetteCoefficientProjector (bAt sectors (suc k)))
+        (T4.plaquetteCoefficientProjector (vacuumAt sectors (suc k))))
+
+  sourceBetaIsProjectedEdgeMinusTermwiseDrift :
+    ∀ k →
+    Flow.beta trajectory (suc k)
+    ≡ Edge.projectedSourceEdge canonicalRawState k
+      - totalSectorDrift k
+  sourceBetaIsProjectedEdgeMinusTermwiseDrift k =
+    trans
+      (Edge.selectedSourceBetaIsCorrectedProjectedEdge
+        canonicalRawState trajectory
+        wilsonCoefficientIsCMP109Inverse k)
+      (cong
+        (λ drift →
+          Edge.projectedSourceEdge canonicalRawState k - drift)
+        (nonWilsonDriftIsTermwise k))
