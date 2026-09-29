@@ -24,6 +24,8 @@ import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CM
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalSourceSectorActionExact as Canonical
 import DASHI.Physics.Foundations.CMP119AntigravityRawActionIncrementResidualExact as CanonicalSourceEdge
+import DASHI.Physics.Foundations.CMP119AntigravityCMP109WilsonDifferenceOrientationExact as Orientation
+import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 
 module _
   {Density Background Fluctuation : Set}
@@ -159,3 +161,34 @@ module _
               - CMP119.wilsonCoefficient source (suc k))
               + drift)
           (nonWilsonSourceDriftIsActualSectorDrift meaning k)))
+
+  -- The CMP119 Sect.2 comment identifies the published action convention
+  -- with the negative inverse-square coefficient, but a concrete selected
+  -- normalization witness is STILL required for an instantiated theorem.
+  -- This is the one source-facing sign/normalization leaf, not an assumed
+  -- identity between a projected action and an RG beta.
+  selectedSourceNegativeWilsonBeta :
+    (meaning : SelectedEq223RationalActionInterpretation)
+    (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+    (wilsonIsNegativeInverse : ∀ k →
+      CMP119.wilsonCoefficient source k
+      ≡ - Flow.inverseCoupling trajectory k) →
+    ∀ k →
+    Flow.beta trajectory (suc k)
+    ≡ - selectedProjectedEdge k
+      + (sectorProjection k - sectorProjection (suc k))
+  selectedSourceNegativeWilsonBeta meaning trajectory nodeMeaning k =
+    trans
+      (Orientation.sourceBetaIsNegativeWilsonCoefficientDifference
+        trajectory (CMP119.wilsonCoefficient source)
+        nodeMeaning k)
+      (trans
+        (ℚRing.solve-∀
+          (CMP119.wilsonCoefficient source k)
+          (CMP119.wilsonCoefficient source (suc k))
+          (sectorProjection k)
+          (sectorProjection (suc k)))
+        (cong
+          (λ x → - x +
+            (sectorProjection k - sectorProjection (suc k)))
+          (sym (projectedEdgeIsWilsonPlusFourSectorDrift meaning k))))
