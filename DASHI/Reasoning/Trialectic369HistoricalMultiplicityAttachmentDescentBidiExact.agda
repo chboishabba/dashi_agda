@@ -102,7 +102,7 @@ historicalSourceHasPositionIndependence attachment i x m =
         attachment i Position.zeroPosition m))
 
 record HistoricalInertiaCoverage
-    ∀ {source}
+    {source : Action.ActualMonster3BActionRecognition}
     (attachment : Historical.ActualMultiplicityInertiaAttachment source)
     : Set₁ where
   field
