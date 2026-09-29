@@ -167,7 +167,8 @@ associative : (p q r : RationalF4Point) →
   (p ⊞ q) ⊞ r ≡ p ⊞ (q ⊞ r)
 associative Curve.infinity q r = refl
 associative (Curve.affine a) Curve.infinity r = refl
-associative (Curve.affine a) (Curve.affine b) Curve.infinity = refl
+associative (Curve.affine a) (Curve.affine b) Curve.infinity =
+  identityRight ((Curve.affine a) ⊞ (Curve.affine b))
 associative (Curve.affine Curve.p00) (Curve.affine Curve.p00) (Curve.affine Curve.p00) = refl
 associative (Curve.affine Curve.p00) (Curve.affine Curve.p00) (Curve.affine Curve.p01) = refl
 associative (Curve.affine Curve.p00) (Curve.affine Curve.p00) (Curve.affine Curve.p1Zeta) = refl
