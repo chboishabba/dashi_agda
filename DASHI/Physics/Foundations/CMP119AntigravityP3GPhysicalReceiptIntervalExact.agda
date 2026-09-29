@@ -90,13 +90,13 @@ positiveEdgeLowerBound :
   Bishop._≤_
     (positiveEdgePhysicalLower receipt k)
     (Core.physicalRemainder geometry (suc k))
-positiveEdgeLowerBound {rich = rich} {geometry = geometry} receipt k =
+positiveEdgeLowerBound {weld = weld} {rich = rich} {geometry = geometry} receipt k =
   BishopP.≤-respʳ-≃
     (BishopP.≃-symm
       (Core.richAddIsBishopAdd geometry
         (Rich.regularRemainder rich k)
         (UV.embed (Literal.literalBetaInt
-          (Constructor.asPhysicalRunningCouplingData _ ) k))))
+          (Constructor.asPhysicalRunningCouplingData weld) k))))
     (BishopP.+-mono-≤
       (richLessEqualIsBishopOrder receipt _ _
         (Rich.regularRemainderBetweenReceiptSums rich k))
@@ -111,12 +111,12 @@ positiveEdgeUpperBound :
   Bishop._≤_
     (Core.physicalRemainder geometry (suc k))
     (positiveEdgePhysicalUpper receipt k)
-positiveEdgeUpperBound {rich = rich} {geometry = geometry} receipt k =
+positiveEdgeUpperBound {weld = weld} {rich = rich} {geometry = geometry} receipt k =
   BishopP.≤-respˡ-≃
     (Core.richAddIsBishopAdd geometry
       (Rich.regularRemainder rich k)
       (UV.embed (Literal.literalBetaInt
-        (Constructor.asPhysicalRunningCouplingData _) k)))
+        (Constructor.asPhysicalRunningCouplingData weld) k)))
     (BishopP.+-mono-≤
       (richLessEqualIsBishopOrder receipt _ _
         (Rich.regularRemainderBelowReceiptSum rich k))
