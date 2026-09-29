@@ -19,10 +19,12 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
 import DASHI.Moonshine.OggSSPP2F4CurveTangentFlexExact as Flex
 import DASHI.Moonshine.OggSSPP2F4CurveSheet9FrobeniusBidiExact as Sheet
+import DASHI.Codec.TriadicPAdicCodec as Codec
 
 negateRational : Curve.RationalF4Point → Curve.RationalF4Point
 negateRational Curve.infinity = Curve.infinity
@@ -110,13 +112,13 @@ orbitSizesRecoverNine = refl
 
 -- The selected Sheet9 chart transports both actual curve involutions;
 -- inverse and forward roundtrips follow from the existing bidi chart.
-sheetNegation : Sheet.Codec.Sheet9 → Sheet.Codec.Sheet9
+sheetNegation : Codec.Sheet9 → Codec.Sheet9
 sheetNegation sheet =
   Sheet.curveToSheet9
     (negateRational (Sheet.sheet9ToCurve sheet))
 
 sheetNegationInvolutive :
-  (s : Sheet.Codec.Sheet9) →
+  (s : Codec.Sheet9) →
   sheetNegation (sheetNegation s) ≡ s
 sheetNegationInvolutive s
   rewrite Sheet.curveAfterSheet
@@ -125,14 +127,13 @@ sheetNegationInvolutive s
         | Sheet.sheetAfterCurve s = refl
 
 sheetNegationFrobeniusCommute :
-  (s : Sheet.Codec.Sheet9) →
+  (s : Codec.Sheet9) →
   Sheet.sheetFrobenius (sheetNegation s)
     ≡ sheetNegation (Sheet.sheetFrobenius s)
 sheetNegationFrobeniusCommute s
   rewrite sym (Sheet.curveFrobeniusToSheetReflection
             (negateRational (Sheet.sheet9ToCurve s)))
-        | sym (Sheet.curveFrobeniusToSheetReflection
-            (Sheet.sheet9ToCurve s))
+        | Sheet.sheetReflectionToCurveFrobenius s
         | frobeniusNegationCommute (Sheet.sheet9ToCurve s) = refl
 
 -- A four-component groupoid cannot itself be the ten-component
