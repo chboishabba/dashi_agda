@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravitySelectedActionFiniteModePhysicalWeldExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (_+_)
 import Data.Rational.Tactic.RingSolver as ℚRing
