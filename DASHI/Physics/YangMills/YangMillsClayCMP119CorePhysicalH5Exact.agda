@@ -161,6 +161,14 @@ record CMP119CoreGroupPhysicalPackage
         limitLaws quotient division S
         h2 covarianceLaws group publishedCMP116 realSelectedCore
 
+    -- The pre-gap H3 autocorrelation and R583 OS4 must use identical
+    -- Euclidean-time translates of the very SAME cylinder Wilson function.
+    -- This remains a physical identification rather than an extra selector.
+    coreOS4TimeTranslationIsH3TimeTranslation :
+      ∀ wilson time →
+      R583.translateFull h1OS4Meaning wilson time
+      ≡ H3Core.translatePhysicalWilson coreSameOSH3 wilson time
+
 open CMP119CoreGroupPhysicalPackage public
 
 record CMP119CompactSimplePhysicalH5Core
