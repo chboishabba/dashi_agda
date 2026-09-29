@@ -228,6 +228,36 @@ basisFrobeniusConjugatesShear
   (Trit.pos ∷ᵥ Trit.pos ∷ᵥ []ᵥ) = refl
 
 ------------------------------------------------------------------------
+-- The two matrices are actual endomorphisms of the CENTERED C3^2 law.
+------------------------------------------------------------------------
+
+basisFrobeniusPreservesAddition :
+  (s t : Codec.Sheet9) →
+  basisFrobenius (Group.centerSheetAdd s t)
+  ≡ Group.centerSheetAdd (basisFrobenius s) (basisFrobenius t)
+basisFrobeniusPreservesAddition
+  (a ∷ᵥ b ∷ᵥ []ᵥ)
+  (c ∷ᵥ d ∷ᵥ []ᵥ)
+  rewrite Group.centerInvAdd b d = refl
+
+basisShearPreservesAddition :
+  (s t : Codec.Sheet9) →
+  basisShear (Group.centerSheetAdd s t)
+  ≡ Group.centerSheetAdd (basisShear s) (basisShear t)
+basisShearPreservesAddition
+  (a ∷ᵥ b ∷ᵥ []ᵥ)
+  (c ∷ᵥ d ∷ᵥ []ᵥ)
+  rewrite sym (Group.centerAdd-medial a b c d) = refl
+
+basisFrobeniusPreservesZero :
+  basisFrobenius Group.centerSheetZero ≡ Group.centerSheetZero
+basisFrobeniusPreservesZero = refl
+
+basisShearPreservesZero :
+  basisShear Group.centerSheetZero ≡ Group.centerSheetZero
+basisShearPreservesZero = refl
+
+------------------------------------------------------------------------
 -- The OLD pointed Frobenius chart is not this additive eigenbasis chart.
 ------------------------------------------------------------------------
 
@@ -258,9 +288,10 @@ record Boundary : Set where
     frobeniusDiagonalReflection : Bool
     zetaShearMatrixShape : Bool
     s3PresentationPaidOnActualCurveSet : Bool
+    centeredGroupEndomorphismMatricesPaid : Bool
     oldPointedChartDistinguishedFromEigenbasis : Bool
     ellipticAdditionIntertwinerPaid : Bool
 
 canonicalBoundary : Boundary
 canonicalBoundary =
-  boundary true true true true true true true false
+  boundary true true true true true true true true false
