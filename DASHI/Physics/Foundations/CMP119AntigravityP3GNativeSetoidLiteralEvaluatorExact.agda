@@ -125,6 +125,8 @@ fromLegacyEvaluator :
         {expressions = expressions} {ward = ward} {scalarData = scalarData}
         finiteMode oneLoop remainder rich running) →
   NativeSetoidLiteralEvaluatorSource
+    {trajectory = trajectory} {Mode = Mode} {Atom = Atom}
+    {expressions = expressions} {ward = ward} {scalarData = scalarData}
     finiteMode oneLoop remainder rich
 fromLegacyEvaluator legacy = record
   { NativeSetoidLiteralEvaluatorSource.finiteModePlaquette =
