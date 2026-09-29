@@ -16,7 +16,7 @@ module DASHI.Physics.CondensedMatter.AltermagnetNodalSymmetryExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Empty using (⊥)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.CondensedMatter.AltermagnetCoQuarterTaSeTwo as AM
 
