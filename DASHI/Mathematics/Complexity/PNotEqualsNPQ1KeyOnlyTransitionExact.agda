@@ -115,9 +115,11 @@ keyOnlyStepComplete :
           (Reachable.decodeReachableState previous source)))
     (λ success →
       keyOnlyStep action previous source ≡ just success)
-keyOnlyStepComplete action previous source =
-  Search.findKeyCertifiedComplete
-    (childKeyOccurs action previous source)
+keyOnlyStepComplete action previous source
+    with Search.findKeyCertifiedComplete
+      (childKeyOccurs action previous source)
+... | target , (found , exact) =
+  (target , found) , exact
 
 ------------------------------------------------------------------------
 -- The genuinely operational transition charge is now only:
