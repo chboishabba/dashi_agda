@@ -43,13 +43,17 @@ enumerateShannonChildren (parent ∷ rest) =
   ∷ Shannon.trueLayerChild parent
   ∷ enumerateShannonChildren rest
 
+twice : Nat → Nat
+twice zero = zero
+twice (suc count) = suc (suc (twice count))
+
 enumeratedChildCount :
   ∀ {rootVariables remaining : Nat}
     {root : SAT.BooleanFormula rootVariables}
     (parents : List (Width.LayerNode {root = root} (suc remaining))) →
   length (enumerateShannonChildren parents)
   ≡
-  suc (suc zero) * length parents
+  twice (length parents)
 enumeratedChildCount [] =
   refl
 enumeratedChildCount (parent ∷ rest)
@@ -75,7 +79,7 @@ oneLayerEnumerationWork :
   List (Width.LayerNode {root = root} (suc remaining)) →
   Nat
 oneLayerEnumerationWork parents =
-  suc (suc zero) * length parents
+  twice (length parents)
 
 oneLayerKeyWork :
   ∀ {rootVariables remaining : Nat}
