@@ -59,6 +59,7 @@ import DASHI.Reasoning.Trialectic369MultiplicityProjectionPositionIndependenceEx
 import DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact as SourceAndMonomial
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeMaxCut
 import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as ConstituentRetraction
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as ProjectedMaxCut
 import DASHI.Reasoning.Trialectic369OrbifoldCoordinateRetractionWrongTypeExact as OrbifoldRetraction
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
@@ -1095,6 +1096,48 @@ orbifoldCoordinateFaithfulnessDoesNotPayCanonicalLinearFaithfulness :
     orbifoldCoordinateRetractionBoundary
   ≡ false
 orbifoldCoordinateFaithfulnessDoesNotPayCanonicalLinearFaithfulness = refl
+
+
+selected3BProjectedActionMaxCutBoundary :
+  ProjectedMaxCut.Trialectic369Selected3BProjectedActionMaxCutBoundary
+selected3BProjectedActionMaxCutBoundary =
+  ProjectedMaxCut.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+
+selected3BProjectedFullGradeRecoversConstituentAction :
+  ProjectedMaxCut.fullGradeProjectionRecoversConstituentAction
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BProjectedFullGradeRecoversConstituentAction = refl
+
+selected3BProjectedRouteNeedsNoSeparateInjectivity :
+  ProjectedMaxCut.separateInclusionInjectivityNotRequiredOnProjectedRoute
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BProjectedRouteNeedsNoSeparateInjectivity = refl
+
+selected3BOneProjectedActionEquationSuffices :
+  ProjectedMaxCut.oneProjectedActionEquationSuffices
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BOneProjectedActionEquationSuffices = refl
+
+selected3BProjectedRouteCompilesCanonicalCompletion :
+  ProjectedMaxCut.canonicalCompletionCompilerOwned
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BProjectedRouteCompilesCanonicalCompletion = refl
+
+selected3BProjectedRouteActualRetractionStillOpen :
+  ProjectedMaxCut.actualLinearRetractionInhabitedHere
+    selected3BProjectedActionMaxCutBoundary
+  ≡ false
+selected3BProjectedRouteActualRetractionStillOpen = refl
+
+selected3BProjectedActionEquationStillOpen :
+  ProjectedMaxCut.actualProjectedActionEquationInhabitedHere
+    selected3BProjectedActionMaxCutBoundary
+  ≡ false
+selected3BProjectedActionEquationStillOpen = refl
 
 selected3BActualMonomialBasisStillUnpaid :
   SourceAndMonomial.actualMonomialBasisPaidHere
