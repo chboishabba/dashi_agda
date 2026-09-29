@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMSCoarseObservableContactBidiExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
