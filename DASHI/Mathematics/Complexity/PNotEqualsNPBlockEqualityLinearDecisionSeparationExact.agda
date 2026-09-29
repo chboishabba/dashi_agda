@@ -15,12 +15,14 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityLinearDecisionSepar
 -- arbitrary deterministic decision time, even for the SAME family.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Base using (_≤_)
+open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -201,6 +203,45 @@ sameFormulaWideYetLinear :
     (Bits.bitCardinality width)
 sameFormulaWideYetLinear =
   Block.blockEqualityResidualWidthWitness
+
+------------------------------------------------------------------------
+-- Direct formal counterinstance to the naive universal transfer
+--
+--     "2^n ordered residuals force at least 2^n decision comparisons".
+--
+-- At n=2: the WIDTH theorem supplies four residual classes, while the
+-- actual evaluator uses precisely two comparisons on EVERY input.
+------------------------------------------------------------------------
+
+twoBitInput : Vec Bool (suc (suc zero))
+twoBitInput = false ∷ false ∷ []
+
+fourNotBelowTwo :
+  Bits.bitCardinality (suc (suc zero))
+  ≤
+  suc (suc zero)
+  →
+  ⊥
+fourNotBelowTwo ()
+
+noOrderedWidthToDecisionCountTransfer :
+  ((width : Nat)
+   (left right : Vec Bool width) →
+   Bits.bitCardinality width
+   ≤
+   proj₂ (equalityDecisionWithCount left right))
+  →
+  ⊥
+noOrderedWidthToDecisionCountTransfer claimed =
+  fourNotBelowTwo
+    (subst
+      (λ count →
+        Bits.bitCardinality (suc (suc zero)) ≤ count)
+      (equalityDecisionCountExact twoBitInput twoBitInput)
+      (claimed
+        (suc (suc zero))
+        twoBitInput
+        twoBitInput))
 
 ------------------------------------------------------------------------
 -- This owner intentionally avoids a claim of SAT polynomial-time
