@@ -149,3 +149,53 @@ python -m scripts.wrongtype_relational_depth --axes 4 --query identity
 
 A proper source-level Agda/Lean type check and the original
 `WrongType`/SensibLaw legal-rule consumer weld remain separate gates.
+
+## Reuse of existing p-adic, wave and continuous/symbolic lanes
+
+The prior ternary-only `scripts/wrongtype_relational_depth.py` is now a
+backward-compatible **client** of the generic
+`scripts/indexed_relational_observer_search.py`. The latter takes a finite
+set of states from any hashable carrier, named observer functions (not
+necessarily coordinate projections), and an outcome query. It returns
+all minimum-width sufficient observation sets and explicit collision
+witnesses for rejected subsets, or `None` when even the combined
+observer family fails the consumer. The universe of validity is ONLY
+the supplied finite state set.
+
+Existing source-level geometry is reused in
+`DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda`:
+
+* `SSP369Ultrametric.Address k` is the same `Vec Digit369 k`
+  representation as the generic `Address Digit369 k`.
+* `PadicCylinderLODReasoningField.prefixTwoToOne` is used directly.
+  Two depth-two addresses in the same depth-one prefix cylinder have
+  different second digits: a precise `NonFactorabilityWitness`.
+* `Base369WaveContinuousSymbolicCodingExact.encode` retains both a
+  symbolic trit *and the exact carrier state*; its existing
+  `decodeAfterEncode` is a full-state factorisation witness.
+  Quantisation **alone** has no such guarantee.
+* `ShiftWaveRefinementSeam.projectFineAgreement-witness` proves the
+  fine wave observation recovers the specified coarse observation.
+  Its separate `WaveProjectionLossAdapterExact` explicitly says
+  no static wave-projection collision has yet been established:
+  **we do not fabricate one**.
+* `BalancedTernaryContinuousEnvelope.Stream = Nat → Trit` provides
+  an infinite address carrier. There is an explicit collision:
+  two streams agree through the first two digits and disagree at
+  the third, so the two-digit prefix cannot recover the three-digit
+  prefix. This is an exact statement on symbolic streams, **not**
+  an analytic completion theorem, Euclidean continuum construction,
+  or physical wave dynamics.
+* Continuous or real-valued fields and p-adic analytic completions
+  require additional supplied metric/measure/topological semantics
+  before higher-level claims can be made. The finite observation
+  search can evaluate sampled field values, not certify all states
+  of an infinite continuum.
+
+A separate regression file
+`scripts/test_indexed_relational_observer_search.py` covers
+heterogeneous carriers, ternary cube projections, p-adic prefix
+observers, symbolic wave-quantisation collisions **on a specified
+finite sample**, and failure of an inadequate observer family.
+Source-written scripts are not run receipts.
+
