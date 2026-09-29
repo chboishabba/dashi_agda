@@ -31,6 +31,8 @@ import Data.Fin.Base as Fin
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedTruthTableAutomatonExact as Indexed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1PackedIndexedReferenceMachineExact as Packed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact as Root
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableNumericQuotientExact as Reachable
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact as Merge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExplicitIndexedGraphExact as Graph
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1NumericIndexedGraphExact as Numeric
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact as Budget
@@ -60,6 +62,24 @@ module CandidateReference
     SAT.BooleanFormula exactIndexedArity
   exactIndexedRoot =
     Bridge.cookToIndexed exactCookFormula
+
+  -- Genuine canonical index into the one-element root-reachable layer;
+  -- unlike the all-functions index this is root-specific by construction.
+  reachableInitialIndex :
+    Reachable.ReachableNumericState
+      (Root.atRoot {root = exactIndexedRoot})
+  reachableInitialIndex =
+    Reachable.rootNumericState exactIndexedRoot
+
+  reachableInitialSemanticsExact :
+    Reachable.decodeReachableState
+      Root.atRoot
+      reachableInitialIndex
+    ≡
+    Merge.semanticKey
+      (Root.rootLayerNode exactIndexedRoot)
+  reachableInitialSemanticsExact =
+    Reachable.rootNumericStateExact exactIndexedRoot
 
   referenceGraph :
     Graph.ReferenceGraph exactIndexedArity
