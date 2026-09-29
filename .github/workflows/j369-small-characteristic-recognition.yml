@@ -85,6 +85,7 @@ on:
       - 'DASHI/Moonshine/OggSSPP2FourARestrictedFingerprintOccurrenceNoGoExact.agda'
       - 'DASHI/Moonshine/OggSSPPBScalarLocalizationP2OnlyFrontierExact.agda'
       - 'DASHI/Moonshine/OggSSPPBTerminalLocalizationPrimewiseGapExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2BanerjeeF4SpecialFibreJacobianExact.agda'
       - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
       - '.github/workflows/j369-small-characteristic-recognition.yml'
   pull_request:
@@ -171,6 +172,7 @@ on:
       - 'DASHI/Moonshine/OggSSPP2FourARestrictedFingerprintOccurrenceNoGoExact.agda'
       - 'DASHI/Moonshine/OggSSPPBScalarLocalizationP2OnlyFrontierExact.agda'
       - 'DASHI/Moonshine/OggSSPPBTerminalLocalizationPrimewiseGapExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2BanerjeeF4SpecialFibreJacobianExact.agda'
       - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
       - '.github/workflows/j369-small-characteristic-recognition.yml'
 
