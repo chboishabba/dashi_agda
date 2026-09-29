@@ -196,6 +196,64 @@ canonicalMergedLayer nodes =
   canonicalKeyList (keyForLayer nodes)
 
 ------------------------------------------------------------------------
+-- Every input key retains a representative after deduplication.
+------------------------------------------------------------------------
+
+data ListedKey {remaining : Nat}
+    (key : SemanticKey remaining) :
+    List (SemanticKey remaining) → Set where
+  firstKey :
+    ∀ {rest} →
+    ListedKey key (key ∷ rest)
+  laterKey :
+    ∀ {head rest} →
+    ListedKey key rest →
+    ListedKey key (head ∷ rest)
+
+insertAddsKey :
+  ∀ {remaining : Nat}
+    (key : SemanticKey remaining)
+    (keys : List (SemanticKey remaining)) →
+  ListedKey key (insertSemanticKey key keys)
+insertAddsKey key [] =
+  firstKey
+insertAddsKey key (head ∷ rest)
+    with decideTableEqual key head
+... | inj₁ refl =
+  firstKey
+... | inj₂ different =
+  laterKey (insertAddsKey key rest)
+
+insertPreservesKey :
+  ∀ {remaining : Nat}
+    (key other : SemanticKey remaining)
+    (keys : List (SemanticKey remaining)) →
+  ListedKey other keys →
+  ListedKey other (insertSemanticKey key keys)
+insertPreservesKey key other (head ∷ rest) member
+    with decideTableEqual key head
+... | inj₁ same = member
+... | inj₂ different with member
+...   | firstKey = firstKey
+...   | laterKey inRest =
+  laterKey (insertPreservesKey key other rest inRest)
+
+canonicalKeysCoverInput :
+  ∀ {remaining : Nat}
+    (keys : List (SemanticKey remaining))
+    (key : SemanticKey remaining) →
+  ListedKey key keys →
+  ListedKey key (canonicalKeyList keys)
+canonicalKeysCoverInput (head ∷ rest) key firstKey =
+  insertAddsKey head (canonicalKeyList rest)
+canonicalKeysCoverInput (head ∷ rest) key (laterKey member) =
+  insertPreservesKey
+    head
+    key
+    (canonicalKeyList rest)
+    (canonicalKeysCoverInput rest key member)
+
+------------------------------------------------------------------------
 -- Explicit comparison work. These are TABLE comparisons, each requiring
 -- inspection of up to 2^remaining bits. Count both the number of calls and
 -- a conservative full-width charge for each call.
