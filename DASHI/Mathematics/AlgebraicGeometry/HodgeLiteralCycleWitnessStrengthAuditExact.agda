@@ -100,6 +100,38 @@ witnessedScaleCycle scalar witnessed =
     }
 
 ------------------------------------------------------------------------
+-- Conversely, an INHABITED Set-valued witness does not establish geometric
+-- meaning either: it can be selected as the one-element type by construction.
+-- This audit prevents treating proof-relevant "witnessed" syntax as a Chow
+-- variety or an actual algebraic subvariety without a geometry-backed map.
+------------------------------------------------------------------------
+
+syntacticallyWitnessedCycle :
+  ∀ {variety : Hodge.SmoothProjectiveComplexVariety}
+    {codimension : Nat} →
+  Hodge.RationalAlgebraicCycle variety codimension
+syntacticallyWitnessedCycle =
+  record
+    { Hodge.CycleGenerator = ⊤
+    ; Hodge.coefficient = λ _ → 1ℚ
+    ; Hodge.finiteSupport = ⊤
+    ; Hodge.algebraicSubvarietyWitness = λ _ → ⊤
+    }
+
+syntacticallyWitnessedCycleHasCertificates :
+  ∀ {variety : Hodge.SmoothProjectiveComplexVariety}
+    {codimension : Nat} →
+  WitnessedRationalAlgebraicCycle
+    (syntacticallyWitnessedCycle
+      {variety = variety}
+      {codimension = codimension})
+syntacticallyWitnessedCycleHasCertificates =
+  record
+    { finiteSupportCertificate = tt
+    ; generatorAlgebraicCertificate = λ _ → tt
+    }
+
+------------------------------------------------------------------------
 -- Counterexample: nonempty rational generator with no valid witnesses.
 ------------------------------------------------------------------------
 
@@ -154,4 +186,6 @@ phantomCycleCannotBeWitnessed witnessed =
 --
 -- A witnessed carrier here is still not sufficient by itself, because the
 -- geometric interpretation of each Set-valued witness must also be anchored.
+-- syntacticallyWitnessedCycleHasCertificates demonstrates that limitation
+-- with a concrete inhabited but unconstrained witness presentation.
 ------------------------------------------------------------------------
