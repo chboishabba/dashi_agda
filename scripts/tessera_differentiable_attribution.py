@@ -50,6 +50,26 @@ def checked_inputs(s2, doy, mask, s1a, d1a, s1d, d1d):
             raise ValueError(f"{name} nonfinite or invalid DOY")
 
 
+def validated_manifest(path, input_sha256):
+    receipt=json.loads(Path(path).read_text(encoding="utf-8"))
+    required=("s2_band_order","s1_band_order","s2_raw_units","s1_raw_units",
+              "year","cell_id","upstream_preprocessing_revision",
+              "s2_cloud_qa_provenance","s1_acquisition_provenance",
+              "day_of_year_provenance","input_sha256")
+    missing=[k for k in required if k not in receipt or not receipt[k]]
+    if missing:
+        raise ValueError(f"sensor provenance is missing: {missing}")
+    if tuple(receipt["s2_band_order"])!=S2_BANDS:
+        raise ValueError("noncanonical Sentinel-2 band order")
+    if tuple(receipt["s1_band_order"])!=S1_BANDS:
+        raise ValueError("noncanonical VV/VH orbit channel order")
+    if receipt["input_sha256"]!=input_sha256:
+        raise ValueError("sensor-input hash does not match manifest")
+    if not isinstance(receipt["year"],int) or not 2017<=receipt["year"]<=2026:
+        raise ValueError("invalid annual observation year")
+    return receipt
+
+
 def selection(valid, infer):
     idx=np.flatnonzero(np.asarray(valid,dtype=bool))
     if not len(idx): return np.empty(0,dtype=np.int64)
@@ -185,6 +205,8 @@ def main():
     p.add_argument("--upstream-student",required=True,help="path to upstream tessera_infer_v2/student")
     p.add_argument("--checkpoint",required=True,help="trusted upstream student .pt")
     p.add_argument("--input-npz",required=True,help="raw inputs and fixed QA arrays")
+    p.add_argument("--input-manifest",required=True,
+                   help="verified band ordering, sensor units, cloud and acquisition provenance")
     p.add_argument("--output",required=True)
     p.add_argument("--prefix",type=int,choices=VALID_PREFIXES,default=128)
     p.add_argument("--device",default="cpu")
@@ -200,6 +222,8 @@ def main():
         arrays={name:data[name] if name in data else None for name in
                 ("s2_bands","s2_doys","s2_masks","s1_asc_bands","s1_asc_doys",
                  "s1_desc_bands","s1_desc_doys")}
+    source_sha=hashlib.sha256(Path(a.input_npz).read_bytes()).hexdigest()
+    manifest=validated_manifest(a.input_manifest,source_sha)
     if any(arrays[name] is None for name in ("s2_bands","s2_doys","s2_masks")):
         raise ValueError("missing required S2 arrays or cloud mask")
     inputs,raws,indices=prepare_torch(
@@ -256,7 +280,8 @@ def main():
     ig = integrated_gradients(model, inputs, raws, prefix=a.prefix,
          decoder=head, steps=a.integrated_steps) if a.integrated_steps else None
     receipt={"checkpoint_sha256":digest,"upstream_student":str(a.upstream_student),
-             "input_sha256":hashlib.sha256(Path(a.input_npz).read_bytes()).hexdigest(),
+             "input_sha256":source_sha,
+             "sensor_provenance":manifest,
              "prefix":a.prefix,"indices":indices,
              "gradient_shape":[list(g.shape) for g in grad],
              "claim":"Local gradients of fitted predictions (if probe supplied) or embedding coordinates; neither is a causal environmental effect.",
