@@ -220,7 +220,12 @@ record CMP119DirectSameSystemH6
         (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian) →
       Disp.GaplessGaugeInvariantPhysicalSector gapOrder
 
-    gapRestrictsToSamePhysicalSector :
+    -- The one genuine spectral-sector payment left by H3:
+    -- exclusion applies to EVERY nonvacuum state in the exact
+    -- gauge-invariant Maxwell sector, in the selected R281 strict order.
+    -- This is a testable physical spectral inclusion, not an arbitrary
+    -- `PositiveSpectralGap` record or contradiction-type selector.
+    h3GapExcludesEveryPhysicalMaxwellState :
       let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
       in
       (gaussian : R563.Gaussian ward system) →
@@ -229,24 +234,63 @@ record CMP119DirectSameSystemH6
           (R563.coefficientAlgebra ward)
           (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian)) →
       PhysicalPositiveGap (OS.hamiltonian reconstruction) →
-      Free.PositiveSpectralGap
-        (Disp.gaugeInvariantPhysicalSectorGivesGaplessApproximation
-          (gaussianMaxwellPhysicalSector gaussian classification))
-
-    spectralGapContradictionIsAbsurd :
-      let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
-      in
-      (gaussian : R563.Gaussian ward system) →
-      (classification :
-        Ward.GenericMaxwellQuadraticKernelClassification
-          (R563.coefficientAlgebra ward)
-          (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian)) →
       let sector = gaussianMaxwellPhysicalSector gaussian classification
-          gapData = gapRestrictsToSamePhysicalSector
-            gaussian classification
-            (h3CertificateMeansPositiveGap refl)
       in
-      Free.SpectralContradiction gapData → ⊥
+      (state : Disp.State sector) →
+      Disp.NonVacuum sector state →
+      Free.StrictLess gapOrder
+        (Disp.energy sector state)
+        (OS.gap gapCertificate) →
+      ⊥
+
+  -- The generic free/Maxwell bridge is now CONSTRUCTED.  The "not below"
+  -- predicate is genuine negation of the exact R281 subgap comparison.
+  gapRestrictsToSamePhysicalSector :
+    let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
+    in
+    (gaussian : R563.Gaussian ward system) →
+    (classification :
+      Ward.GenericMaxwellQuadraticKernelClassification
+        (R563.coefficientAlgebra ward)
+        (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian)) →
+    PhysicalPositiveGap (OS.hamiltonian reconstruction) →
+    Free.PositiveSpectralGap
+      (Disp.gaugeInvariantPhysicalSectorGivesGaplessApproximation
+        (gaussianMaxwellPhysicalSector gaussian classification))
+  gapRestrictsToSamePhysicalSector gaussian classification positive =
+    let sector = gaussianMaxwellPhysicalSector gaussian classification
+    in record
+      { Free.PositiveSpectralGap.SpectralContradiction = ⊥
+      ; Free.PositiveSpectralGap.gap = OS.gap gapCertificate
+      ; Free.PositiveSpectralGap.gapPositive =
+          physicalGapStrictlyAboveSelectedVacuum
+      ; Free.PositiveSpectralGap.NotBelow =
+          λ energy threshold →
+            Free.StrictLess gapOrder energy threshold → ⊥
+      ; Free.PositiveSpectralGap.nonVacuumNotBelowGap =
+          λ state nonvacuum below →
+            h3GapExcludesEveryPhysicalMaxwellState
+              gaussian classification positive state nonvacuum below
+      ; Free.PositiveSpectralGap.belowContradictsNotBelow =
+          λ energy threshold below notBelow → notBelow below
+      }
+
+  spectralGapContradictionIsAbsurd :
+    let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
+    in
+    (gaussian : R563.Gaussian ward system) →
+    (classification :
+      Ward.GenericMaxwellQuadraticKernelClassification
+        (R563.coefficientAlgebra ward)
+        (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian)) →
+    let sector = gaussianMaxwellPhysicalSector gaussian classification
+        gapData = gapRestrictsToSamePhysicalSector
+          gaussian classification
+          (h3CertificateMeansPositiveGap refl)
+    in
+    Free.SpectralContradiction gapData → ⊥
+  spectralGapContradictionIsAbsurd gaussian classification contradiction =
+    contradiction
 
 open CMP119DirectSameSystemH6 public
 
