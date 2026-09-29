@@ -1,0 +1,68 @@
+name: NS R815-R821 signed physical barrier kernel check
+
+on:
+  push:
+    branches:
+      - 'agent/ns-r655-remote-collar-transport'
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNR650SignedOrbitPacketWeldRound815Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650IntegratedSignedOrbitPaymentRound816Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SignedOrbitAugmentedEndpointRound817Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650PhysicalViscosityMarginRound818Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650PhysicalViscositySharedBarrierRound819Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda'
+      - '.github/workflows/ns-r815-r821-signed-physical-barrier.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSTriadKNR650SignedOrbitPacketWeldRound815Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650IntegratedSignedOrbitPaymentRound816Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SignedOrbitAugmentedEndpointRound817Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650PhysicalViscosityMarginRound818Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650PhysicalViscositySharedBarrierRound819Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda'
+      - '.github/workflows/ns-r815-r821-signed-physical-barrier.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-signed-physical-barrier:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Check out exact head
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Kernel-check R815-R821 transitive Agda owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-ns-r815-r821.log"
+          export AGDA_JOBS=1
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/Closure/NSTriadKNR650SignedOrbitPacketWeldRound815Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650IntegratedSignedOrbitPaymentRound816Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650SignedOrbitAugmentedEndpointRound817Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650PhysicalViscosityMarginRound818Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650PhysicalViscositySharedBarrierRound819Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda
+      - name: Upload kernel log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ns-r815-r821-agda-kernel-log
+          path: agda-ns-r815-r821.log
+          if-no-files-found: warn

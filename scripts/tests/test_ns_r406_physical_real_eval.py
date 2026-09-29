@@ -228,3 +228,140 @@ def test_c2_low_remote_spectral_cross_is_nonpositive_on_literal_split() -> None:
     assert int(split["interface_count"]) > 0
     assert int(split["remote_spectral_cross_violation_count"]) == 0
     assert float(split["maximum_remote_spectral_cross"]) <= 1.0e-10
+
+
+def test_c2_full_off_packet_cross_reduces_to_collar() -> None:
+    raw = _reality_closed_random_state(12, seed=67)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    assert int(split["interface_count"]) > 0
+    assert float(split["maximum_cross_split_residual"]) <= 1.0e-10
+    assert int(split["remote_spectral_cross_violation_count"]) == 0
+    assert int(split["full_cross_below_collar_violation_count"]) == 0
+
+    for row in split["interfaces"]:
+        scale = max(
+            1.0,
+            abs(float(row["full_low_complement_spectral_cross"])),
+            abs(float(row["collar_spectral_cross"])),
+            abs(float(row["remote_spectral_cross"])),
+        )
+        assert abs(float(row["cross_split_residual"])) <= 1.0e-12 * scale
+        assert (
+            float(row["full_low_complement_spectral_cross"])
+            <= float(row["collar_spectral_cross"]) + 1.0e-12 * scale
+        )
+
+
+def test_c2_euclidean_collar_refinement_reduces_cross_to_bad_cap() -> None:
+    raw = _reality_closed_random_state(12, seed=71)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    assert int(split["interface_count"]) > 0
+    assert float(split["maximum_collar_refinement_residual"]) <= 1.0e-10
+    assert int(split["good_collar_spectral_cross_violation_count"]) == 0
+    assert int(split["full_cross_below_bad_collar_violation_count"]) == 0
+
+    for row in split["interfaces"]:
+        scale = max(
+            1.0,
+            abs(float(row["collar_spectral_cross"])),
+            abs(float(row["bad_collar_spectral_cross"])),
+            abs(float(row["good_collar_spectral_cross"])),
+        )
+        assert abs(float(row["collar_refinement_residual"])) <= 1.0e-12 * scale
+        assert float(row["good_collar_spectral_cross"]) <= 1.0e-12 * scale
+        assert (
+            float(row["full_low_complement_spectral_cross"])
+            <= float(row["bad_collar_spectral_cross"]) + 1.0e-12 * scale
+        )
+
+
+def test_c2_collar_flux_refinement_is_exact() -> None:
+    raw = _reality_closed_random_state(12, seed=73)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    assert int(split["interface_count"]) > 0
+    assert float(split["maximum_collar_flux_refinement_residual"]) <= 1.0e-10
+    for row in split["interfaces"]:
+        scale = max(
+            1.0,
+            abs(float(row["collar_flux"])),
+            abs(float(row["bad_collar_flux"])),
+            abs(float(row["good_collar_flux"])),
+        )
+        assert (
+            abs(float(row["collar_flux_refinement_residual"]))
+            <= 1.0e-12 * scale
+        )
+
+
+def test_c2_critical_energy_has_expected_quadratic_scaling() -> None:
+    raw = _reality_closed_random_state(12, seed=79)
+    nu = 0.01
+    cutoff = 2
+
+    base = _critical_currency(raw, nu=nu, formal_cutoff=cutoff)
+    doubled = _critical_currency(2.0 * raw, nu=nu, formal_cutoff=cutoff)
+
+    x0 = float(base["critical_energy_X"])
+    x1 = float(doubled["critical_energy_X"])
+    assert x0 > 0.0
+    assert np.isclose(x1, 4.0 * x0, rtol=2.0e-12, atol=1.0e-12)
+
+
+def test_r685_r687_rate_lift_and_dynamic_cancellation_mirrors() -> None:
+    raw = _reality_closed_random_state(6, seed=83)
+    row = evaluate_r406(
+        raw,
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+        include_output_rows=True,
+    )
+
+    global_scale = max(
+        1.0,
+        abs(float(row["global_rate_lifted_forcing_full"])),
+        abs(8.0 * float(row["global_coherent_commutator_work"])),
+    )
+    assert abs(float(row["r687_global_rate_lift_residual"])) <= 1.0e-12 * global_scale
+    assert abs(float(row["r688_global_dynamic_cancellation_residual"])) <= 1.0e-12 * global_scale
+
+    assert row["output_rows"] is not None
+    for output_row in row["output_rows"]:
+        scale = max(
+            1.0,
+            abs(float(output_row["rate_lifted_forcing_full"])),
+            abs(8.0 * float(output_row["coherent_commutator_work"])),
+            abs(float(output_row["weighted_rate_work"])),
+        )
+        assert abs(float(output_row["r687_rate_lift_residual"])) <= 1.0e-12 * scale
+        assert abs(float(output_row["r685_rate_kernel_residual"])) <= 1.0e-12 * scale
+        assert abs(float(output_row["r688_dynamic_cancellation_residual"])) <= 1.0e-12 * scale
+
+
+def test_r687_rate_lift_is_quintic_but_r665_kernel_is_quartic() -> None:
+    raw = _reality_closed_random_state(6, seed=89)
+    kwargs = dict(
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+    )
+    base = evaluate_r406(raw, **kwargs)
+    doubled = evaluate_r406(2.0 * raw, **kwargs)
+
+    lifted0 = float(base["global_rate_lifted_forcing_full"])
+    lifted1 = float(doubled["global_rate_lifted_forcing_full"])
+    comm0 = float(base["global_coherent_commutator_work"])
+    comm1 = float(doubled["global_coherent_commutator_work"])
+    kernel0 = float(base["global_weighted_rate_work"])
+    kernel1 = float(doubled["global_weighted_rate_work"])
+
+    assert abs(lifted0) > 1.0e-18
+    assert abs(comm0) > 1.0e-18
+    assert abs(kernel0) > 1.0e-18
+
+    assert np.isclose(lifted1, 32.0 * lifted0, rtol=5.0e-10, atol=1.0e-14)
+    assert np.isclose(comm1, 32.0 * comm0, rtol=5.0e-10, atol=1.0e-14)
+    assert np.isclose(kernel1, 16.0 * kernel0, rtol=5.0e-10, atol=1.0e-14)
