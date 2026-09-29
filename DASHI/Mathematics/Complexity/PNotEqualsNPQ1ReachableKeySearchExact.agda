@@ -51,8 +51,7 @@ findKeyIndex query (head ∷ tail)
 ...   | just index = just (Fin.suc index)
 
 ------------------------------------------------------------------------
--- The small arithmetic wrapper above is definitionally zero + length.
--- Use the exact canonical finite index carrier in the public bridge.
+-- Public specialization to the exact canonical finite index carrier.
 ------------------------------------------------------------------------
 
 findKeyIndexExact :
@@ -71,7 +70,7 @@ findKeyIndexComplete :
     (Fin.Fin (Data.List.Base.length keys))
     (λ index →
       findKeyIndexExact query keys ≡ just index)
-findKeyIndexComplete {query = query} {keys = .(query ∷ _)}
+findKeyIndexComplete {query = query}
     Merge.firstKey
     with Merge.decideTableEqual query query
 ... | inj₁ same = Fin.zero , refl
@@ -86,27 +85,31 @@ findKeyIndexComplete {query = query} {keys = head ∷ tail}
       rewrite exact =
         Fin.suc index , refl
 
-findKeyIndexSound :
-  ∀ {remaining : Nat}
-    (query : Merge.SemanticKey remaining)
-    (keys : List (Merge.SemanticKey remaining))
-    (index : Fin.Fin (Data.List.Base.length keys)) →
-  findKeyIndexExact query keys ≡ just index →
-  Reachable.lookupKey keys index ≡ query
-findKeyIndexSound query [] () result
-findKeyIndexSound query (head ∷ tail) index result
+------------------------------------------------------------------------
+-- The certified scanner carries the equality of the returned key.
+-- The witness is COMPUTED from each concrete equality comparison, not
+-- admitted by a postulated lookup or semantic oracle.
+------------------------------------------------------------------------
+
+findKeyCertified :
+  ∀ {remaining : Nat} →
+  (query : Merge.SemanticKey remaining) →
+  (keys : List (Merge.SemanticKey remaining)) →
+  Maybe
+    (Σ
+      (Fin.Fin (Data.List.Base.length keys))
+      (λ index →
+        Reachable.lookupKey keys index ≡ query))
+findKeyCertified query [] = nothing
+findKeyCertified query (head ∷ tail)
     with Merge.decideTableEqual query head
-... | inj₁ same
-    with index | result
-...   | Fin.zero | refl = sym same
+... | inj₁ same =
+  just (Fin.zero , sym same)
 ... | inj₂ different
-    with findKeyIndexExact query tail
-...   | nothing with result
-...     | ()
-...   | just earlier
-    with index | result
-...     | Fin.suc target | refl =
-      findKeyIndexSound query tail earlier refl
+    with findKeyCertified query tail
+...   | nothing = nothing
+...   | just (index , exact) =
+  just (Fin.suc index , exact)
 
 ------------------------------------------------------------------------
 -- Literal scan work, excluding the Boolean-table comparison width.
