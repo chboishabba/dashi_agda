@@ -20,6 +20,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.SensibLawOntologyTopology as Ontology
 
@@ -76,8 +77,6 @@ queenslandCode section = sourceLocator "Queensland Parliament"
 -- same WrongType occurrence; no exclusivity or cell completeness axiom.
 Fits : Ontology.StableId → Cell → List GridCandidate → Set
 Fits wrong coordinate [] = ⊥
-  where
-    data ⊥ : Set where
 Fits wrong coordinate (candidate ∷ rest) =
   ((GridCandidate.wrongTypeId candidate ≡ wrong)
    × (GridCandidate.relation candidate ≡ coordinate))
