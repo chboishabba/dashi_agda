@@ -21,8 +21,22 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.OggSSPP2F4CurveFrobeniusNegationOrbitExact as Klein
+import DASHI.Moonshine.OggSSPP2F4CurveKleinActionGroupoidExact as Groupoid
+import DASHI.Core.OrbitStabilizerResidualPresentationExact as Generic
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent
 import DASHI.Moonshine.OggSSPArithmeticResidualGroupoidRecognitionFunctorExact as Recognition
+
+arithmeticCurveKleinGroupoid :
+  Generic.OrbitPresentation Groupoid.arithmeticKleinAction
+arithmeticCurveKleinGroupoid =
+  Groupoid.arithmeticKleinOrbitPresentation
+
+curveKleinActionStabilizersExact :
+  (orbit : Klein.CurveKleinOrbit) →
+  Groupoid.computedStabilizerCount orbit
+    ≡ Groupoid.expectedStabilizerSize orbit
+curveKleinActionStabilizersExact =
+  Groupoid.stabilizerCountIsExpected
 
 curveKleinOrbitCountIsFour : Klein.kleinOrbitCount ≡ 4
 curveKleinOrbitCountIsFour = refl
@@ -45,6 +59,7 @@ record F4CurveKleinResidualSourceNoGoBoundary : Set where
   constructor f4-curve-klein-residual-source-no-go-boundary
   field
     geometricCurveKleinOrbitsActual : Bool
+    genericActionOrbitPresentationInhabited : Bool
     fourOrbitsProvedByRepresentativesAndTransporters : Bool
     exceptionalP2ResidualTenIndependent : Bool
     fourOrbitSourcePassesTenOrbitRecognitionGate : Bool
@@ -54,4 +69,4 @@ canonicalF4CurveKleinResidualSourceNoGoBoundary :
   F4CurveKleinResidualSourceNoGoBoundary
 canonicalF4CurveKleinResidualSourceNoGoBoundary =
   f4-curve-klein-residual-source-no-go-boundary
-    true true true false false
+    true true true true false false
