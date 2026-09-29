@@ -112,6 +112,37 @@ findKeyCertified query (head ∷ tail)
   just (Fin.suc index , exact)
 
 ------------------------------------------------------------------------
+-- Certified scanning is complete whenever the key appears in the input.
+------------------------------------------------------------------------
+
+findKeyCertifiedComplete :
+  ∀ {remaining : Nat}
+    {query : Merge.SemanticKey remaining}
+    {keys : List (Merge.SemanticKey remaining)} →
+  Merge.ListedKey query keys →
+  Σ
+    (Fin.Fin (Data.List.Base.length keys))
+    (λ index →
+      Σ
+        (Reachable.lookupKey keys index ≡ query)
+        (λ exact →
+          findKeyCertified query keys ≡ just (index , exact)))
+findKeyCertifiedComplete {query = query}
+    Merge.firstKey
+    with Merge.decideTableEqual query query
+... | inj₁ same = Fin.zero , (sym same , refl)
+... | inj₂ different = ⊥-elim (different refl)
+findKeyCertifiedComplete {query = query} {keys = head ∷ rest}
+    (Merge.laterKey member)
+    with Merge.decideTableEqual query head
+... | inj₁ same = Fin.zero , (sym same , refl)
+... | inj₂ different
+    with findKeyCertifiedComplete member
+...   | index , (exact , found)
+      rewrite found =
+        Fin.suc index , (exact , refl)
+
+------------------------------------------------------------------------
 -- Literal scan work, excluding the Boolean-table comparison width.
 ------------------------------------------------------------------------
 
