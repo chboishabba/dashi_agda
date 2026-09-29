@@ -297,6 +297,40 @@ physicalCoreMassGapCertificate
     }
 
 ------------------------------------------------------------------------
+-- The certified gap is exactly the selected R331 transfer-semigroup energy,
+-- not an independently chosen positive rational bound.
+------------------------------------------------------------------------
+
+coreCertificateGapIsSelectedTransferEnergy :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable
+      sequenceLimit limitLaws quotient division S
+      h2 covarianceLaws group source application}
+    (physical :
+      CMP119CoreSemigroupH3
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        Scale Volume Root SourceDirection SpectralObservable
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S
+        h2 covarianceLaws group source application)
+    (positive :
+      Gap.PositiveEnergy
+        (R281.asReconstructedClusteringSpectrum
+          (RealGap.spectrumSourceCore application))
+        (Gap.gapCandidate
+          (R281.asReconstructedClusteringSpectrum
+            (RealGap.spectrumSourceCore application)))) →
+  OS.gap (physicalCoreMassGapCertificate physical positive)
+  ≡
+  R302.candidateEnergy (R331.coordinateCore (indexedTransfer physical))
+coreCertificateGapIsSelectedTransferEnergy physical positive =
+  selectedGapIsTransferCandidate physical
+
+------------------------------------------------------------------------
 -- R331/R311 transport is the exact same core Hamiltonian, by construction.
 -- The candidate-energy calibration is the named physical equality already
 -- stored in CMP119CoreSemigroupH3.
