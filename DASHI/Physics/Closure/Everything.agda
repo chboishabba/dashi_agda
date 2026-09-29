@@ -1,3 +1,4 @@
+import DASHI.Physics.Closure.SpacetimeMereologyBridgeExact
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface
 import DASHI.Physics.Closure.NSFinalStateReceipt
 import DASHI.Physics.Closure.NSFastestClayPathReceipt
