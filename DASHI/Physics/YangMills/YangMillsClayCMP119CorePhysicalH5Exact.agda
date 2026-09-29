@@ -107,7 +107,7 @@ record CMP119CoreGroupPhysicalPackage
       Wilson.CMP119CoreSelectedWilsonPresentation
         G X Configuration Position CurvaturePolynomial LocalOperator
         OPECoefficient StressTensor Hilbert Hamiltonian Vector Loop
-        (H2Core.coreInputs h2) group
+        (H2Core.coreInputs h2) covarianceLaws group
         (RealGap.testsCore realSelectedCore)
 
     positiveGapCandidate :
