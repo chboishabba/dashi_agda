@@ -19,7 +19,7 @@ data EvidenceStatus : Set where
   simulatorQualification companionReportDescription : EvidenceStatus
 
 data PhysicalUnit : Set where
-  Fahrenheit psia seconds count lbf dimensionless
+  Fahrenheit psia psig seconds count lbf dimensionless
   lbfSecond perMission inCubed : PhysicalUnit
 
 record IndexedScalar : Set where
@@ -94,9 +94,9 @@ vibrationSimulatedMissions = indexed "R-9557-1" "printed p.6" R.vibrationSimulat
 
 vibrationProofPressure : IndexedScalar
 vibrationProofPressure = indexed "R-9557-1" "printed p.6" R.vibrationSimulator
-  "post-vibration structural proof pressure" 500 1 psia
+  "post-vibration structural proof pressure" 500 1 psig
   companionReportDescription "reported source unit 500 psig (GAUGE)"
-  "unit encoded generically as pressure; do NOT substitute as absolute psia"
+  "do NOT substitute as absolute psia"
 
 -- Fix pressure-unit semantics via an explicit separate typed axis.
 data PressureReference : Set where
