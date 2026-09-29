@@ -17,7 +17,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityPublishedEq223PhysicalBetaFrom
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Data.Rational.Base using (ℚ; _+_; -_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; -_)
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
 import DASHI.Physics.YangMills.Balaban1989FiniteModeInverseSquareTerminalHistoryExact as History
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
