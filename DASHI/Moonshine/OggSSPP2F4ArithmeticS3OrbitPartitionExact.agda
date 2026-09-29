@@ -158,6 +158,23 @@ sourceClassNegationSwapsTwoFixedNoncentralClasses :
     ≡ minusPSingleton
 sourceClassNegationSwapsTwoFixedNoncentralClasses = refl
 
+------------------------------------------------------------------------
+-- A substantive incompatibility: the actual S3 orbit quotient is not
+-- the same quotient as elliptic inversion.  Inversion swaps (0,0)
+-- and (0,1), while S3 fixes them individually.  This does not depend
+-- on an intentionally empty "claim" type.
+------------------------------------------------------------------------
+
+s3ClassificationDoesNotDescendThroughInversion :
+  ((p : Curve.RationalF4Point) →
+   sourceClass (Eigen.negCurve p) ≡ sourceClass p) →
+  ⊥
+s3ClassificationDoesNotDescendThroughInversion alleged =
+  incompatible (alleged (Curve.affine Curve.p00))
+  where
+    incompatible : minusPSingleton ≡ pSingleton → ⊥
+    incompatible ()
+
 record ArithmeticS3OrbitBoundary : Set where
   constructor arithmetic-s3-orbit-boundary
   field
@@ -168,9 +185,10 @@ record ArithmeticS3OrbitBoundary : Set where
     fourSourceOrbitClasses : Bool
     orbitClassesTransportAlongEigenChart : Bool
     inversionNotConflatedWithFrobenius : Bool
+    substantiveInversionQuotientNoGo : Bool
     monsterActionRecognition : Bool
 
 canonicalArithmeticS3OrbitBoundary : ArithmeticS3OrbitBoundary
 canonicalArithmeticS3OrbitBoundary =
   arithmetic-s3-orbit-boundary
-    true true true true true true true false
+    true true true true true true true true false
