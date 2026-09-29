@@ -38,6 +38,8 @@ import DASHI.Topology.TetrationalGateField as GateField
 import DASHI.Moonshine.Monster369NDimParetoTetrationBridgeExact as MonsterTower
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExact as Wild
 import DASHI.Moonshine.OggSSPSmallCharacteristicWildDifferentNoGoExact as Different
+import DASHI.Moonshine.OggSSPP2InertiaDepthQuotientExact as P2Depth
+import DASHI.Moonshine.OggSSPP3AlignmentIndependentLengthQuotientExact as P3Length
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -131,7 +133,35 @@ differentP3DoesNotEqualCorrection =
   Different.p3WildDifferentIsNotMonsterResidual
 
 ------------------------------------------------------------------------
--- 5. Promotion obligation for a future TETRATION -> VALUATION mechanism.
+-- 5. The ACTIVE scalar localization frontier is not tetration.
+--
+-- p=2 has five independent source slots with candidate DVR lengths
+-- 3,3,2,1,1. Their scalar total is ten; this is not nine tower axes.
+-- p=3 has a two-degree Tate partition with geometric unit lengths.
+-- Their source identification is not paid merely by choosing a tower height.
+------------------------------------------------------------------------
+
+p2SlotTotalIsTen : P2Depth.scalarSlotTotal ≡ 10
+p2SlotTotalIsTen = P2Depth.scalarSlotTotalIsTen
+
+p2SourceSlotTotalNotLevelOneAxisCount :
+  P2Depth.scalarSlotTotal ≡ Self.selfIndexedSiteCount 1 -> ⊥
+p2SourceSlotTotalNotLevelOneAxisCount ()
+
+p3GeometricLengthIsOne :
+  (alignment : P3Length.SigmaDR.SigmaDRAlignment) ->
+  (degree : P3Length.Tate.ThreeBTateDegree) ->
+  P3Length.alignedGeometricLength alignment degree ≡ 1
+p3GeometricLengthIsOne = P3Length.alignedGeometricLengthIsOne
+
+p2DepthBoundary : P2Depth.P2InertiaDepthQuotientBoundary
+p2DepthBoundary = P2Depth.canonicalP2InertiaDepthQuotientBoundary
+
+p3LengthBoundary : P3Length.P3AlignmentIndependentLengthBoundary
+p3LengthBoundary = P3Length.canonicalP3AlignmentIndependentLengthBoundary
+
+------------------------------------------------------------------------
+-- 6. Promotion obligation for a future TETRATION -> VALUATION mechanism.
 --
 -- This contract cannot be inhabited merely from the two numerical equalities:
 -- it requires an actual source-indexed tower observable, a correction
@@ -187,6 +217,9 @@ record SmallCharacteristicTetrationCorrectionBoundary : Set where
     firstLevelProfilesEqualP2Residual : Bool
     firstLevelProfilesEqualP3Residual : Bool
     rawDifferentEqualsResidual : Bool
+    p2FiveSlotTotalTenReused : Bool
+    p3GeometricUnitLengthReused : Bool
+    tetrationSuppliesIntegralSourceDVRLength : Bool
     sourceSpecificTetrationValuationMechanismPaid : Bool
     sourcesCreditedWithDASHITetrationCorrection : Bool
 
@@ -194,4 +227,4 @@ canonicalSmallCharacteristicTetrationCorrectionBoundary :
   SmallCharacteristicTetrationCorrectionBoundary
 canonicalSmallCharacteristicTetrationCorrectionBoundary =
   small-characteristic-tetration-correction-boundary
-    true true true false false false false false false false
+    true true true false false false false false true true false false false
