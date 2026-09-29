@@ -290,15 +290,15 @@ record CMP119CoreH1OS4Meaning
         absℝ (osGramSquaredDistance test
           (embedWilson wilson)) <ℝ epsilon)
 
-    -- The same-family connected covariance must be uniformly continuous
-    -- under two simultaneous uniform cylinder approximations, with a
-    -- modulus independent of the Euclidean translation parameter.
+    -- Pair-local continuity is sufficient and is mathematically weaker
+    -- than global equicontinuity of a bilinear form on an unbounded test
+    -- space.  The modulus may depend on (left,right), but not on time.
     uniformlyContinuousConnectedCovariance :
-      ∀ epsilon →
+      ∀ (left right : FullTest) epsilon →
       0ℝ <ℝ epsilon →
       Σ ℝ (λ delta →
         (0ℝ <ℝ delta) ×
-        (∀ left left' right right' time →
+        (∀ left' right' time →
         absℝ (osGramSquaredDistance left left') <ℝ delta →
         absℝ (osGramSquaredDistance right right') <ℝ delta →
         absℝ
@@ -346,11 +346,11 @@ record CMP119CoreH1OS4Meaning
         Σ WilsonProduct (λ wilson →
           absℝ (osGramSquaredDistance test
             (embedWilson wilson)) <ℝ epsilon)) →
-      (∀ epsilon →
+      (∀ (left right : FullTest) epsilon →
         0ℝ <ℝ epsilon →
         Σ ℝ (λ delta →
           (0ℝ <ℝ delta) ×
-          (∀ left left' right right' time →
+          (∀ left' right' time →
           absℝ (osGramSquaredDistance left left') <ℝ delta →
           absℝ (osGramSquaredDistance right right') <ℝ delta →
           absℝ
