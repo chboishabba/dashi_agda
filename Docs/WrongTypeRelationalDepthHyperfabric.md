@@ -1,4 +1,39 @@
-# WrongType relational depth: grid → hypervoxel → query-specific k
+# WrongType relational depth: generic ontology hyperfabric → query-specific k
+
+## Core ownership correction (2026-09-30)
+
+The reusable owner is now **DASHI.Core.IndexedRelationalHyperfabricSpineExact**
+(`DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda`); its Lean
+counterpart is `AgdaMirror/Core/IndexedRelationalHyperfabric.lean`.
+**WrongType** and the Care/Transaction/Power grid are clients, not owners.
+The legal adapter is
+`DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda`
+(and `AgdaMirror/Law/WrongTypeGenericHyperfabricAdapter.lean`).
+
+An ontology carrier `B` is an arbitrary typed set; a depth-`k`
+address is `Vec B k` / `Fin k → B`. The dependent `Fibre`
+retains context, evidence, identity and source authority. The existing
+`IntersectionalNonFactorability`, `QueryIndexedProjectionAdequacyExact`,
+`QueryIndexedProjectionSpineAdapterExact`, and
+`AdmissibleTransitionHyperfabricExact` remain canonical mathematical
+owners. The generic module provides an adapter to that machinery, not
+replacement concepts.
+
+If `B` has `b` distinct elements, the Cartesian address count is
+`b^k`. In particular, if `B` is a *tagged disjoint union* of `n`
+ternary vocabularies, its size is `3n` and its address count
+`(3n)^k`; if `B` is a single ternary vocabulary, it is `3^k`.
+No inference from this count alone determines interaction order,
+source authority, braid topology, actual legal wrongs or relational
+adequacy. For the independent function-space hierarchy, refer to
+`RecursiveFibreTower` and `SelfIndexingHyperfabricTetrationExact`.
+
+The prior WrongType-specific XYZA examples remain useful finite
+regression fixtures, but they are not the ontology's primitive.
+The next required runtime milestone is to bind populated persisted
+WrongTypes and real situated queries to this generic typed adapter.
+
+
 
 **Status:** Implemented as source-written Agda/Lean modules and a finite executable search.
 Do **not** report kernel verification until exact-head checks exist.
