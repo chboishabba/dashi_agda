@@ -56,6 +56,26 @@ asMinimalSameFamilyGaussianWardKernel source = record
       gaussianLocalTwoDerivativeWardKernel source
   }
 
+------------------------------------------------------------------------
+-- No extra "Maxwell classification" hypothesis is needed once the actual
+-- same-family Gaussian local two-derivative Ward kernel is supplied:
+-- the two Ward momenta and normalized kinetic coefficient already carry
+-- exactly the data consumed by the constructive Round77 classifier.
+------------------------------------------------------------------------
+
+sameFamilyWardMaxwellClassification :
+  ∀ {Observable Point Scalar}
+    {system : OS.ContinuumSchwingerSystem Observable Point Scalar}
+    (source : SameFamilyWardKernelSource system)
+    (gaussian : Gaussian source system) →
+  Ward.GenericMaxwellQuadraticKernelClassification
+    (coefficientAlgebra source)
+    (gaussianLocalTwoDerivativeWardKernel source gaussian)
+sameFamilyWardMaxwellClassification source gaussian =
+  Ward.classifyGenericLocalWardKernelAsMaxwell
+    (coefficientAlgebra source)
+    (gaussianLocalTwoDerivativeWardKernel source gaussian)
+
 round563MinimalWardAdapterLevel : ProofLevel
 round563MinimalWardAdapterLevel = machineChecked
 
