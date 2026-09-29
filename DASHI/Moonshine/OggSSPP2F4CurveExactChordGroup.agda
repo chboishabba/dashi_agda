@@ -929,6 +929,223 @@ basisInversion c2 c0 = refl
 basisInversion c2 c1 = refl
 basisInversion c2 c2 = refl
 
+------------------------------------------------------------------------
+-- INDEPENDENT FINITE COORDINATE VALIDATION OF THE CHORD TABLE
+--
+-- This avoids defining the point law by transporting the ternary basis.
+-- Every distinct-x table entry is checked against the exact secant
+-- formula over F4; every same-x inverse/vertical case is checked against
+-- tangent doubling or the point at infinity.
+------------------------------------------------------------------------
+
+open Curve using (F4; zero₄; one₄; zeta₄; zetaSquared₄;
+                  _+₄_; _*₄_; square₄)
+
+sameF4 : F4 → F4 → Bool
+sameF4 zero₄ zero₄ = true
+sameF4 zero₄ one₄ = false
+sameF4 zero₄ zeta₄ = false
+sameF4 zero₄ zetaSquared₄ = false
+sameF4 one₄ zero₄ = false
+sameF4 one₄ one₄ = true
+sameF4 one₄ zeta₄ = false
+sameF4 one₄ zetaSquared₄ = false
+sameF4 zeta₄ zero₄ = false
+sameF4 zeta₄ one₄ = false
+sameF4 zeta₄ zeta₄ = true
+sameF4 zeta₄ zetaSquared₄ = false
+sameF4 zetaSquared₄ zero₄ = false
+sameF4 zetaSquared₄ one₄ = false
+sameF4 zetaSquared₄ zeta₄ = false
+sameF4 zetaSquared₄ zetaSquared₄ = true
+
+-- Every nonzero F4 element has inverse equal to its square.
+inverse₄ : F4 → F4
+inverse₄ = square₄
+
+inverse₄Correct :
+  (a : F4) →
+  sameF4 a zero₄ ≡ false →
+  a *₄ inverse₄ a ≡ one₄
+inverse₄Correct zero₄ ()
+inverse₄Correct one₄ proof = refl
+inverse₄Correct zeta₄ proof = refl
+inverse₄Correct zetaSquared₄ proof = refl
+
+-- The following coordinate pair is meaningful only for distinct x.
+-- The proof of secantMatchesTable below supplies that precondition.
+chordCoordinates : AffineF4Point → AffineF4Point → F4 × F4
+chordCoordinates p q =
+  let xp = proj₁ (Curve.affineCoordinates p)
+      yp = proj₂ (Curve.affineCoordinates p)
+      xq = proj₁ (Curve.affineCoordinates q)
+      yq = proj₂ (Curve.affineCoordinates q)
+      lambda = (yp +₄ yq) *₄ inverse₄ (xp +₄ xq)
+      xr = (square₄ lambda +₄ xp) +₄ xq
+      yr = ((lambda *₄ (xp +₄ xr)) +₄ yp) +₄ one₄
+  in xr , yr
+
+-- This helper does NOT identify infinity with an affine point; in the
+-- distinct-x proof below the group sum is definitionally affine.
+coordinatesOrDummy : RationalF4Point → F4 × F4
+coordinatesOrDummy Curve.infinity = zero₄ , zero₄
+coordinatesOrDummy (Curve.affine p) = Curve.affineCoordinates p
+
+secantMatchesTable :
+  (p q : AffineF4Point) →
+  sameF4 (proj₁ (Curve.affineCoordinates p))
+         (proj₁ (Curve.affineCoordinates q)) ≡ false →
+  coordinatesOrDummy (Curve.affine p ⊞ Curve.affine q)
+    ≡ chordCoordinates p q
+secantMatchesTable Curve.p00 Curve.p00 ()
+secantMatchesTable Curve.p00 Curve.p01 ()
+secantMatchesTable Curve.p00 Curve.p1Zeta proof = refl
+secantMatchesTable Curve.p00 Curve.p1ZetaSquared proof = refl
+secantMatchesTable Curve.p00 Curve.pZetaZeta proof = refl
+secantMatchesTable Curve.p00 Curve.pZetaZetaSquared proof = refl
+secantMatchesTable Curve.p00 Curve.pZetaSquaredZeta proof = refl
+secantMatchesTable Curve.p00 Curve.pZetaSquaredZetaSquared proof = refl
+secantMatchesTable Curve.p01 Curve.p00 ()
+secantMatchesTable Curve.p01 Curve.p01 ()
+secantMatchesTable Curve.p01 Curve.p1Zeta proof = refl
+secantMatchesTable Curve.p01 Curve.p1ZetaSquared proof = refl
+secantMatchesTable Curve.p01 Curve.pZetaZeta proof = refl
+secantMatchesTable Curve.p01 Curve.pZetaZetaSquared proof = refl
+secantMatchesTable Curve.p01 Curve.pZetaSquaredZeta proof = refl
+secantMatchesTable Curve.p01 Curve.pZetaSquaredZetaSquared proof = refl
+secantMatchesTable Curve.p1Zeta Curve.p00 proof = refl
+secantMatchesTable Curve.p1Zeta Curve.p01 proof = refl
+secantMatchesTable Curve.p1Zeta Curve.p1Zeta ()
+secantMatchesTable Curve.p1Zeta Curve.p1ZetaSquared ()
+secantMatchesTable Curve.p1Zeta Curve.pZetaZeta proof = refl
+secantMatchesTable Curve.p1Zeta Curve.pZetaZetaSquared proof = refl
+secantMatchesTable Curve.p1Zeta Curve.pZetaSquaredZeta proof = refl
+secantMatchesTable Curve.p1Zeta Curve.pZetaSquaredZetaSquared proof = refl
+secantMatchesTable Curve.p1ZetaSquared Curve.p00 proof = refl
+secantMatchesTable Curve.p1ZetaSquared Curve.p01 proof = refl
+secantMatchesTable Curve.p1ZetaSquared Curve.p1Zeta ()
+secantMatchesTable Curve.p1ZetaSquared Curve.p1ZetaSquared ()
+secantMatchesTable Curve.p1ZetaSquared Curve.pZetaZeta proof = refl
+secantMatchesTable Curve.p1ZetaSquared Curve.pZetaZetaSquared proof = refl
+secantMatchesTable Curve.p1ZetaSquared Curve.pZetaSquaredZeta proof = refl
+secantMatchesTable Curve.p1ZetaSquared Curve.pZetaSquaredZetaSquared proof = refl
+secantMatchesTable Curve.pZetaZeta Curve.p00 proof = refl
+secantMatchesTable Curve.pZetaZeta Curve.p01 proof = refl
+secantMatchesTable Curve.pZetaZeta Curve.p1Zeta proof = refl
+secantMatchesTable Curve.pZetaZeta Curve.p1ZetaSquared proof = refl
+secantMatchesTable Curve.pZetaZeta Curve.pZetaZeta ()
+secantMatchesTable Curve.pZetaZeta Curve.pZetaZetaSquared ()
+secantMatchesTable Curve.pZetaZeta Curve.pZetaSquaredZeta proof = refl
+secantMatchesTable Curve.pZetaZeta Curve.pZetaSquaredZetaSquared proof = refl
+secantMatchesTable Curve.pZetaZetaSquared Curve.p00 proof = refl
+secantMatchesTable Curve.pZetaZetaSquared Curve.p01 proof = refl
+secantMatchesTable Curve.pZetaZetaSquared Curve.p1Zeta proof = refl
+secantMatchesTable Curve.pZetaZetaSquared Curve.p1ZetaSquared proof = refl
+secantMatchesTable Curve.pZetaZetaSquared Curve.pZetaZeta ()
+secantMatchesTable Curve.pZetaZetaSquared Curve.pZetaZetaSquared ()
+secantMatchesTable Curve.pZetaZetaSquared Curve.pZetaSquaredZeta proof = refl
+secantMatchesTable Curve.pZetaZetaSquared Curve.pZetaSquaredZetaSquared proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.p00 proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.p01 proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.p1Zeta proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.p1ZetaSquared proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.pZetaZeta proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.pZetaZetaSquared proof = refl
+secantMatchesTable Curve.pZetaSquaredZeta Curve.pZetaSquaredZeta ()
+secantMatchesTable Curve.pZetaSquaredZeta Curve.pZetaSquaredZetaSquared ()
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.p00 proof = refl
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.p01 proof = refl
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.p1Zeta proof = refl
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.p1ZetaSquared proof = refl
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.pZetaZeta proof = refl
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.pZetaZetaSquared proof = refl
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZeta ()
+secantMatchesTable Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZetaSquared ()
+
+tangentDoubleEqualsCoordinateInverse :
+  (p : AffineF4Point) →
+  Curve.affine p ⊞ Curve.affine p ≡ curveInverse (Curve.affine p)
+tangentDoubleEqualsCoordinateInverse Curve.p00 = refl
+tangentDoubleEqualsCoordinateInverse Curve.p01 = refl
+tangentDoubleEqualsCoordinateInverse Curve.p1Zeta = refl
+tangentDoubleEqualsCoordinateInverse Curve.p1ZetaSquared = refl
+tangentDoubleEqualsCoordinateInverse Curve.pZetaZeta = refl
+tangentDoubleEqualsCoordinateInverse Curve.pZetaZetaSquared = refl
+tangentDoubleEqualsCoordinateInverse Curve.pZetaSquaredZeta = refl
+tangentDoubleEqualsCoordinateInverse Curve.pZetaSquaredZetaSquared = refl
+
+verticalPairReturnsInfinity :
+  (p q : AffineF4Point) →
+  sameF4 (proj₁ (Curve.affineCoordinates p))
+         (proj₁ (Curve.affineCoordinates q)) ≡ true →
+  sameF4 (proj₂ (Curve.affineCoordinates p))
+         (proj₂ (Curve.affineCoordinates q)) ≡ false →
+  Curve.affine p ⊞ Curve.affine q ≡ Curve.infinity
+verticalPairReturnsInfinity Curve.p00 Curve.p00 hx ()
+verticalPairReturnsInfinity Curve.p00 Curve.p01 hx hy = refl
+verticalPairReturnsInfinity Curve.p00 Curve.p1Zeta () hy
+verticalPairReturnsInfinity Curve.p00 Curve.p1ZetaSquared () hy
+verticalPairReturnsInfinity Curve.p00 Curve.pZetaZeta () hy
+verticalPairReturnsInfinity Curve.p00 Curve.pZetaZetaSquared () hy
+verticalPairReturnsInfinity Curve.p00 Curve.pZetaSquaredZeta () hy
+verticalPairReturnsInfinity Curve.p00 Curve.pZetaSquaredZetaSquared () hy
+verticalPairReturnsInfinity Curve.p01 Curve.p00 hx hy = refl
+verticalPairReturnsInfinity Curve.p01 Curve.p01 hx ()
+verticalPairReturnsInfinity Curve.p01 Curve.p1Zeta () hy
+verticalPairReturnsInfinity Curve.p01 Curve.p1ZetaSquared () hy
+verticalPairReturnsInfinity Curve.p01 Curve.pZetaZeta () hy
+verticalPairReturnsInfinity Curve.p01 Curve.pZetaZetaSquared () hy
+verticalPairReturnsInfinity Curve.p01 Curve.pZetaSquaredZeta () hy
+verticalPairReturnsInfinity Curve.p01 Curve.pZetaSquaredZetaSquared () hy
+verticalPairReturnsInfinity Curve.p1Zeta Curve.p00 () hy
+verticalPairReturnsInfinity Curve.p1Zeta Curve.p01 () hy
+verticalPairReturnsInfinity Curve.p1Zeta Curve.p1Zeta hx ()
+verticalPairReturnsInfinity Curve.p1Zeta Curve.p1ZetaSquared hx hy = refl
+verticalPairReturnsInfinity Curve.p1Zeta Curve.pZetaZeta () hy
+verticalPairReturnsInfinity Curve.p1Zeta Curve.pZetaZetaSquared () hy
+verticalPairReturnsInfinity Curve.p1Zeta Curve.pZetaSquaredZeta () hy
+verticalPairReturnsInfinity Curve.p1Zeta Curve.pZetaSquaredZetaSquared () hy
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.p00 () hy
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.p01 () hy
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.p1Zeta hx hy = refl
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.p1ZetaSquared hx ()
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.pZetaZeta () hy
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.pZetaZetaSquared () hy
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.pZetaSquaredZeta () hy
+verticalPairReturnsInfinity Curve.p1ZetaSquared Curve.pZetaSquaredZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.p00 () hy
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.p01 () hy
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.p1Zeta () hy
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.p1ZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.pZetaZeta hx ()
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.pZetaZetaSquared hx hy = refl
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.pZetaSquaredZeta () hy
+verticalPairReturnsInfinity Curve.pZetaZeta Curve.pZetaSquaredZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.p00 () hy
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.p01 () hy
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.p1Zeta () hy
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.p1ZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.pZetaZeta hx hy = refl
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.pZetaZetaSquared hx ()
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.pZetaSquaredZeta () hy
+verticalPairReturnsInfinity Curve.pZetaZetaSquared Curve.pZetaSquaredZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.p00 () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.p01 () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.p1Zeta () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.p1ZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.pZetaZeta () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.pZetaZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.pZetaSquaredZeta hx ()
+verticalPairReturnsInfinity Curve.pZetaSquaredZeta Curve.pZetaSquaredZetaSquared hx hy = refl
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.p00 () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.p01 () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.p1Zeta () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.p1ZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaZeta () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaZetaSquared () hy
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZeta hx hy = refl
+verticalPairReturnsInfinity Curve.pZetaSquaredZetaSquared Curve.pZetaSquaredZetaSquared hx ()
+
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin = Attribution.repositoryNewExtension
 
@@ -936,6 +1153,7 @@ record Boundary : Set where
   constructor boundary
   field
     finiteChordAdditionTable : Bool
+    independentF4SecantTangencyAndVerticalCertificates : Bool
     associativeCommutativeInverseIdentity : Bool
     everyRationalPointThreeTorsion : Bool
     exactPQGroupBidi : Bool
@@ -943,4 +1161,4 @@ record Boundary : Set where
     actualMathlibEllipticGroupComparison : Bool
     gamma0FourMarkedScheme : Bool
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true true true false false
+canonicalBoundary = boundary true true true true true true false false
