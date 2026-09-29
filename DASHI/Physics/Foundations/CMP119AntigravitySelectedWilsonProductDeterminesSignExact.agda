@@ -42,7 +42,7 @@ positiveSquare g positive =
     squareGreaterThanZero =
       subst
         (_< g * g)
-        (ℚP.*-zeroʳ g)
+        (ℚP.*-zeroˡ g)
         (ℚP.*-monoˡ-<-pos g (ℚP.positive⁻¹ g))
   in
   ℚ.positive squareGreaterThanZero
