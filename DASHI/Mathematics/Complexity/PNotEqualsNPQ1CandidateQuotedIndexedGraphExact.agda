@@ -14,7 +14,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1CandidateQuotedIndexedGraphExa
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Maybe.Base using (Maybe)
+open import Data.Maybe.Base using (Maybe; nothing)
 open import Data.Nat.Base using (_<_)
 open import Data.Product using (Σ)
 
@@ -38,6 +38,11 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExplicitIndexedGraphExact as G
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1NumericIndexedGraphExact as Numeric
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact as Budget
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateExact as Work
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateFailureExact as WorkFailure
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedDirectDPChargeBridgeExact as TraceCharge
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
+import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_)
 
 module CandidateReference
   {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -145,6 +150,34 @@ module CandidateReference
   candidateRootedWorkGate path =
     Work.budgetedRootedKeys path
       (Q2.recursiveMeasure candidateState)
+
+  -- Same candidate-derived Q2 root: an exhausted declared-work budget
+  -- makes this particular exhaustive constructor return nothing.
+  candidateRootedWorkExhaustionForcesFailure :
+    ∀ {remaining : Nat}
+      (path : Root.DescentPath exactIndexedRoot remaining) →
+    Q2.recursiveMeasure candidateState
+      ≤ Work.rootedDeclaredOperationalWork path →
+    candidateRootedWorkGate path ≡ Data.Maybe.Base.nothing
+  candidateRootedWorkExhaustionForcesFailure path exhausted =
+    WorkFailure.rootedWorkGateFailsIfWorkExhaustsBudget
+      path
+      (Q2.recursiveMeasure candidateState)
+      exhausted
+
+  -- Separately, any ACTUAL DirectDP charged run claimed to execute this
+  -- rooted algorithm must carry a machine-trace refinement certificate.
+  -- If its declared work exhausts this SAME measure, the run is impossible.
+  candidateRootedExhaustionBlocksPaidRun :
+    ∀ {remaining : Nat}
+      (path : Root.DescentPath exactIndexedRoot remaining)
+      (run : DirectDP.DirectDPChargedConstructionRun candidateState) →
+    TraceCharge.MachineTracePaysRootedWork path run →
+    Q2.recursiveMeasure candidateState
+      ≤ Work.rootedDeclaredOperationalWork path →
+    ⊥
+  candidateRootedExhaustionBlocksPaidRun =
+    TraceCharge.exhaustedRootedWorkBlocksPaidDirectDPRun
 
   sameQuotedCookFormula :
     exactCookFormula
