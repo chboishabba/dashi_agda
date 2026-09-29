@@ -162,3 +162,5 @@ import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact
 import DASHI.Reasoning.Trialectic369SemanticLinearConstituentRetractionCompilerExact
 
 import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact
+
+import DASHI.Reasoning.Trialectic369Selected3BProjectionChoiceIndependenceExact
