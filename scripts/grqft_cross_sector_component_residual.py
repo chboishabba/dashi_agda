@@ -31,6 +31,8 @@ GR = [
 
 
 def parse_fraction(value: Any) -> Fraction:
+    if isinstance(value, Fraction):
+        return value
     if isinstance(value, int):
         return Fraction(value)
     if isinstance(value, str):
@@ -97,11 +99,24 @@ def main() -> None:
             "status": "qft_component_data_missing",
             "comparison_executed": False,
             "required_next_input":
-                "ten independent CMP119/YM rational stress readouts in symmetric slots 00,01,02,03,11,12,13,22,23,33",
+                "ten post-sum CMP119/YM finite localized D1 rational readouts in symmetric slots 00,01,02,03,11,12,13,22,23,33",
         })
     else:
         raw = json.loads(args.qft_json.read_text())
-        if "qft_symmetric_components" in raw:
+        finite_d1_readouts: dict[str, Fraction] | None = None
+        if "qft_finite_d1_readouts" in raw:
+            value = raw["qft_finite_d1_readouts"]
+            if not isinstance(value, dict):
+                raise ValueError("qft_finite_d1_readouts must be an object")
+            missing = [k for k in SYMMETRIC_KEYS if k not in value]
+            if missing:
+                raise ValueError(f"missing finite D1 readout slots: {missing}")
+            finite_d1_readouts = {
+                key: parse_fraction(value[key]) for key in SYMMETRIC_KEYS
+            }
+            qft = expand_symmetric_components(finite_d1_readouts)
+            input_form = "ten post-sum finite localized D1 rational readouts"
+        elif "qft_symmetric_components" in raw:
             qft = expand_symmetric_components(raw["qft_symmetric_components"])
             input_form = "ten symmetric components"
         else:
@@ -121,6 +136,10 @@ def main() -> None:
             "l1_residual": encoded(sum(flat, Fraction(0))),
             "max_abs_residual": encoded(max(flat, default=Fraction(0))),
         })
+        if finite_d1_readouts is not None:
+            payload["finite_d1_readouts"] = {
+                key: encoded(finite_d1_readouts[key]) for key in SYMMETRIC_KEYS
+            }
 
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     if args.output:
