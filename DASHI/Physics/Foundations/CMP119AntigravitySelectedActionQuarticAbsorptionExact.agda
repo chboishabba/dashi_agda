@@ -31,17 +31,34 @@ selectedActionGaussianHalfFloor :
       (Plaquette.effectiveAction selected k)
 selectedActionGaussianHalfFloor {trajectory = trajectory}
     {finiteMode = finiteMode} source k =
+  let
+    gaussian = Finite.gaussianAt finiteMode k
+    interaction = Finite.interactionAt finiteMode k
+    floorBelowSplit :
+      Local.half * Local.computedGaussianLower gaussian
+      ≤ Local.betaZ gaussian + Local.betaInt interaction
+    floorBelowSplit =
+      Local.betaSplitLowerAfterQuarticAbsorption
+        gaussian interaction
+        (Finite.gamma finiteMode k)
+        (Finite.interactionCouplingNonnegative finiteMode k)
+        (Finite.gammaNonnegative finiteMode k)
+        (Finite.interactionCouplingBelowGamma finiteMode k)
+        (Finite.interactionCoefficientTotalNonnegative finiteMode k)
+        (Finite.quarticAbsorption finiteMode k)
+
+    floorBelowSource :
+      Local.half * Local.computedGaussianLower gaussian
+      ≤ Flow.beta trajectory (suc k)
+    floorBelowSource =
+      subst
+        (λ value →
+          Local.half * Local.computedGaussianLower gaussian ≤ value)
+        (sym (Finite.sourceBetaSplitExact finiteMode k))
+        floorBelowSplit
+  in
   subst
-    (λ upper →
-      Local.half * Local.computedGaussianLower
-        (Finite.gaussianAt finiteMode k) ≤ upper)
+    (λ value →
+      Local.half * Local.computedGaussianLower gaussian ≤ value)
     (Weld.sourceBetaIsSelectedActionCoefficient source k)
-    (Finite.betaSplitLowerAfterQuarticAbsorption
-      (Finite.gaussianAt finiteMode k)
-      (Finite.interactionAt finiteMode k)
-      (Finite.gamma finiteMode k)
-      (Finite.interactionCouplingNonnegative finiteMode k)
-      (Finite.gammaNonnegative finiteMode k)
-      (Finite.interactionCouplingBelowGamma finiteMode k)
-      (Finite.interactionCoefficientTotalNonnegative finiteMode k)
-      (Finite.quarticAbsorption finiteMode k))
+    floorBelowSource
