@@ -318,6 +318,30 @@ module SignedComparableReserve
       (integratedReservePaysCompleteSignedRate
         cutoff S terminal reserveBound)
 
+  -- Shared physical nu and ONE R735 W1 source. The integrated reserve
+  -- estimate is required at every cutoff/terminal, with no presumption of
+  -- pointwise CC positivity or arbitrarily adjustable margins.
+  allCutoffsSignedReserveBarrier :
+    0ℚ < nu →
+    (structures : (cutoff : Nat) →
+      Packet.LivePhysicalPacketStructure D C cutoff) →
+    (W1 : Shared.CutoffUniformWeightedPlusTerminalPayment) →
+    ((cutoff : Nat) (terminal : Time) →
+      integratedDemand cutoff (structures cutoff) terminal
+        ≤ integratedReserve cutoff (structures cutoff) terminal) →
+    (cutoff : Nat) (terminal : Time) →
+    Shared.Obs.criticalEnergyAt Shared.T cutoff terminal
+      + nu * Shared.Obs.integratedCriticalDissipation
+          Shared.T cutoff terminal
+    ≤
+    Shared.Obs.criticalEnergyAt Shared.T cutoff initialTime
+      + R700.twelve * Shared.cutoffIndependentBound W1 terminal
+  allCutoffsSignedReserveBarrier
+      positive structures W1 reserves cutoff terminal =
+    reservePlusW1BuildBarrier
+      positive cutoff terminal (structures cutoff) W1
+      (reserves cutoff terminal)
+
 round823SameOriginalCCSignedRows : Bool
 round823SameOriginalCCSignedRows = true
 
