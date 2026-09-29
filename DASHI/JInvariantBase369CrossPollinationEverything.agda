@@ -516,3 +516,7 @@ import DASHI.Moonshine.OggSSPP2F4CurveFrobeniusNegationOrbitExact
 import DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredSheet9Exact
 import DASHI.Moonshine.OggSSPP2F4CurveKleinResidualSourceNoGoExact
 import DASHI.Moonshine.OggSSPP2F4CurveKleinActionGroupoidExact
+
+import DASHI.Moonshine.OggSSPEllipticNineWeilHeisenbergFiniteActionExact
+
+import DASHI.Moonshine.OggSSPPhaseQuotient9F3VectorGroupBridgeExact
