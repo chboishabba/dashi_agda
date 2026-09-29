@@ -106,7 +106,7 @@ composeOneAssociative g h k =
           (trans
             (cong (λ v → H.compose (embedAxis0 g) v)
               (sym (embedComposeOne h k)))
-            (sym (embedComposeOne g (composeOne h k))))))
+            (sym (embedComposeOne g (composeOne h k)))))))
 
 centerOne : Trit → RankOneHeisenberg
 centerOne z = heisenbergOne zer zer z
