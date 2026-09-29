@@ -36,7 +36,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
@@ -119,78 +119,47 @@ ccTouchedSelectsComparableRepresentative :
   (beta : Physical.PhysicalTriadIncidence) →
   R781.ccTouched beta ≡ true →
   CCTouchedRepresentative beta
-ccTouchedSelectsComparableRepresentative beta touched =
-  let
-    profile = R775.orbitProfile beta
-    base = R775.baseClass profile
-    p = R775.pClass profile
-    q = R775.qClass profile
-
-    outer :
-      R781.regimeComparable base ≡ true
-      ⊎
-      R781.orBool
-        (R781.regimeComparable p)
-        (R781.regimeComparable q) ≡ true
-    outer =
-      orBoolTrue
-        (R781.regimeComparable base)
-        (R781.orBool
-          (R781.regimeComparable p)
-          (R781.regimeComparable q))
-        touched
-  in
-  caseOuter beta profile outer
-  where
-  caseOuter :
-    (selected : Physical.PhysicalTriadIncidence) →
-    (profile : R775.EnergyOrbitBonyProfile) →
-    ( R781.regimeComparable (R775.baseClass profile) ≡ true
-      ⊎
-      R781.orBool
-        (R781.regimeComparable (R775.pClass profile))
-        (R781.regimeComparable (R775.qClass profile)) ≡ true ) →
-    CCTouchedRepresentative selected
-  caseOuter selected profile (inj₁ baseTrue) =
-    baseRepresentative
-      (literalComparableCertificate selected
-        (trans
-          (sym (R775.orbitProfileBase selected))
-          (regimeComparableTrue (R775.baseClass profile) baseTrue)))
-    where
-    open import Relation.Binary.PropositionalEquality using (sym)
-
-  caseOuter selected profile (inj₂ tailTrue) =
-    caseTail selected profile
-      (orBoolTrue
-        (R781.regimeComparable (R775.pClass profile))
-        (R781.regimeComparable (R775.qClass profile))
-        tailTrue)
-    where
-    caseTail :
-      (selected : Physical.PhysicalTriadIncidence) →
-      (profile : R775.EnergyOrbitBonyProfile) →
-      ( R781.regimeComparable (R775.pClass profile) ≡ true
-        ⊎
-        R781.regimeComparable (R775.qClass profile) ≡ true ) →
-      CCTouchedRepresentative selected
-    caseTail selected profile (inj₁ pTrue) =
-      pRepresentative
-        (literalComparableCertificate (Orbit.pEnergyLeg selected)
-          (trans
-            (sym (R775.orbitProfileP selected))
-            (regimeComparableTrue (R775.pClass profile) pTrue)))
-      where
-      open import Relation.Binary.PropositionalEquality using (sym)
-
-    caseTail selected profile (inj₂ qTrue) =
-      qRepresentative
-        (literalComparableCertificate (Orbit.qEnergyLeg selected)
-          (trans
-            (sym (R775.orbitProfileQ selected))
-            (regimeComparableTrue (R775.qClass profile) qTrue)))
-      where
-      open import Relation.Binary.PropositionalEquality using (sym)
+ccTouchedSelectsComparableRepresentative beta touched
+  with orBoolTrue
+    (R781.regimeComparable
+      (R775.baseClass (R775.orbitProfile beta)))
+    (R781.orBool
+      (R781.regimeComparable
+        (R775.pClass (R775.orbitProfile beta)))
+      (R781.regimeComparable
+        (R775.qClass (R775.orbitProfile beta))))
+    touched
+... | inj₁ baseTrue =
+  baseRepresentative
+    (literalComparableCertificate beta
+      (trans
+        (sym (R775.orbitProfileBase beta))
+        (regimeComparableTrue
+          (R775.baseClass (R775.orbitProfile beta))
+          baseTrue)))
+... | inj₂ tailTrue
+  with orBoolTrue
+    (R781.regimeComparable
+      (R775.pClass (R775.orbitProfile beta)))
+    (R781.regimeComparable
+      (R775.qClass (R775.orbitProfile beta)))
+    tailTrue
+... | inj₁ pTrue =
+  pRepresentative
+    (literalComparableCertificate (Orbit.pEnergyLeg beta)
+      (trans
+        (sym (R775.orbitProfileP beta))
+        (regimeComparableTrue
+          (R775.pClass (R775.orbitProfile beta))
+          pTrue)))
+... | inj₂ qTrue =
+  qRepresentative
+    (literalComparableCertificate (Orbit.qEnergyLeg beta)
+      (trans
+        (sym (R775.orbitProfileQ beta))
+        (regimeComparableTrue
+          (R775.qClass (R775.orbitProfile beta))
+          qTrue)))
 
 round818CCTouchedSelectsLiteralR25CCRepresentative : Bool
 round818CCTouchedSelectsLiteralR25CCRepresentative = true
