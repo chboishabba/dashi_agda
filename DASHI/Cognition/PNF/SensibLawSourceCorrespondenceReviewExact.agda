@@ -23,6 +23,19 @@ data RelationAxis : Set where
 data WitnessClass : Set where
   sharedEntityCandidate sharedEventCandidate nativeSourceJoin : WitnessClass
 
+-- This is a *well-typed witness class*, not an assertion that a
+-- candidate relation holds. PNF and provenance operators must independently
+-- validate that the particular witness belongs to the selected source pair.
+data SupportsAxis : RelationAxis → WitnessClass → Set where
+  entityCanNominateSubject :
+    SupportsAxis sameSubject sharedEntityCandidate
+  eventCanNominateEvent :
+    SupportsAxis sameEvent sharedEventCandidate
+  nativeJoinCanNominateQuotation :
+    SupportsAxis quotation nativeSourceJoin
+  nativeJoinCanNominateDependency :
+    SupportsAxis sourceDependency nativeSourceJoin
+
 data ObserverAvailability : Set where
   available notObserved unavailable excludedByScope redacted :
     ObserverAvailability
@@ -44,6 +57,7 @@ record CorrespondenceCandidate : Set where
     consumerScopeRef : String
     axis : RelationAxis
     witnessClass : WitnessClass
+    witnessSupportsAxis : SupportsAxis axis witnessClass
     observerAvailability : ObserverAvailability
     genealogy : GenealogyKnowledge
     candidateOnly : Bool
