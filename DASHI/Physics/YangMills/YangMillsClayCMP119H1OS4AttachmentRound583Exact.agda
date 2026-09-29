@@ -138,13 +138,19 @@ record CMP119CoreH1OS4Meaning
         source)
     : Set₂ where
   field
-    OS4Clustering : Set
+    -- OS4 must be a property OF the exact core Schwinger family, not an
+    -- arbitrary proposition that could be satisfied by another system.
+    OS4Clustering :
+      Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
+      Set
 
-    -- Physical meaning theorem: the exact H1 selected continuum clustering
-    -- bound, on this exact core carrier, is sufficient for OS4.
+    -- This is the still-physical determining-class/continuity theorem:
+    -- selected Wilson clustering implies OS4 for this exact family.
     selectedH1ClusteringMeansOS4 :
       ExactSelectedCoreClustering application →
       OS4Clustering
+        (OSSystem.constructedSchwingerCore
+          (H2Core.coreInputs h2) group)
 
 open CMP119CoreH1OS4Meaning public
 
@@ -169,6 +175,8 @@ asCoreOS4Attachment :
 asCoreOS4Attachment meaning = record
   { OSGap.OS4Attachment.OS4ClusteringAttached =
       OS4Clustering meaning
+        (OSSystem.constructedSchwingerCore
+          (H2Core.coreInputs h2) group)
   ; OSGap.OS4Attachment.os4Attached =
       selectedH1ClusteringMeansOS4 meaning
         (RealGap.selectedCoreContinuumCovarianceBelowSpectrumEnvelope
