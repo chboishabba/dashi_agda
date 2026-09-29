@@ -131,6 +131,26 @@ record CMP119DirectSameSystemH6
 
   field
     --------------------------------------------------------------------
+    -- Exact C/H6 physical provenance: Y is not an independent continuum
+    -- measure, Schwinger hierarchy or Hamiltonian.  These are actual
+    -- equalities on the CMP119 H2 family and the reconstructed H3 sector.
+    -- A different local-field theory cannot supply the Gaussian reductio.
+    --------------------------------------------------------------------
+    literalMeasureIsReconstructedCMP119Measure :
+      Top.continuumMeasure Y group
+      ≡ OSSystem.constructedMeasure
+          (H2.osInputs h2) group
+
+    literalSchwingerIsReconstructedCMP119Schwinger :
+      Top.schwinger Y group
+      ≡ OSSystem.constructedSchwinger
+          (H2.osInputs h2) group
+
+    literalHamiltonianIsExactH2Hamiltonian :
+      Top.hamiltonian Y group
+      ≡ OS.hamiltonian reconstruction
+
+    --------------------------------------------------------------------
     -- H6 consumes only the same-system Ward kernel from C.
     --
     -- Full OPE/remainder/stress data remain required by the literal Clay local
