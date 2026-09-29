@@ -27,6 +27,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact a
 import DASHI.Mathematics.Complexity.PNotEqualsNPExactResidualSummaryBitLowerBoundExact as Bits
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1TruthTableRepairGeneratorExact as Truth
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1GradedShannonRepairGeneratorExact as Shannon
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CoarseFineConstructionSharingExact as Sharing
 
 ------------------------------------------------------------------------
 -- Decidable equality of finite Bool tables, with no function extensionality.
@@ -75,6 +76,49 @@ keyEqualityPreservesFutureSemantics :
   Width.LayerResidualEqual left right
 keyEqualityPreservesFutureSemantics =
   Truth.truthTableRepairEqualityImpliesResidualEquality
+
+------------------------------------------------------------------------
+-- COMPLETENESS: fixed-layer residual equality also implies equal keys.
+--
+-- Each finite key is literally the vector of all evaluations of the residual
+-- function, so extensional semantic equality forces structural Vec equality.
+-- No propositional function extensionality is used.
+------------------------------------------------------------------------
+
+residualEqualityGivesKeyEquality :
+  ∀ {rootVariables remaining : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Width.LayerNode {root = root} remaining} →
+  Width.LayerResidualEqual left right →
+  semanticKey left ≡ semanticKey right
+residualEqualityGivesKeyEquality
+    {left = left}
+    {right = right}
+    sameResidual =
+  Truth.vecExtensionality
+    (semanticKey left)
+    (semanticKey right)
+    (λ index →
+      trans
+        (Truth.lookupTabulateVec
+          (λ i →
+            Sharing.layerResidualSemantic
+              left
+              (Truth.bitsAssignment
+                (Bits.finToBits i)))
+          index)
+        (trans
+          (sameResidual
+            (Truth.bitsAssignment
+              (Bits.finToBits index)))
+          (sym
+            (Truth.lookupTabulateVec
+              (λ i →
+                Sharing.layerResidualSemantic
+                  right
+                  (Truth.bitsAssignment
+                    (Bits.finToBits i)))
+              index))))
 
 ------------------------------------------------------------------------
 -- Canonical semantic keys are congruent under both Shannon transitions.
