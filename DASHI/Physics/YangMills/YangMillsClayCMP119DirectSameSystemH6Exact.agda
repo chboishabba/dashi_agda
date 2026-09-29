@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119DirectSameSystemH6Exact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -129,6 +129,22 @@ record CMP119DirectSameSystemH6
     gapCertificate =
       H3.physicalMassGapCertificate h3 positive
 
+  -- Maxwell dispersion and the R281 exclusion must refer to one energy
+  -- carrier and one spectral strict order.  Selecting a new GapOrder
+  -- independently here would invalidate the same-H contradiction.
+  gapOrder : Free.GapOrder
+  gapOrder = record
+    { Free.GapOrder.Energy = ℚ
+    ; Free.GapOrder.zero =
+        Gap.zeroEnergy
+          (R281.asReconstructedClusteringSpectrum
+            (RealGap.spectrumSource application))
+    ; Free.GapOrder.StrictLess =
+        Gap.StrictlyBelow
+          (R281.asReconstructedClusteringSpectrum
+            (RealGap.spectrumSource application))
+    }
+
   -- The gap predicate is fixed by the SAME H3 selected physical
   -- spectral-separation theorem.  It is not an independently selectable Set.
   PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
@@ -173,7 +189,16 @@ record CMP119DirectSameSystemH6
       CanonicalC.Goal1CanonicalCSource Y →
       R563.SameFamilyWardKernelSource system
 
-    gapOrder : Free.GapOrder
+    -- The selected energy order has physical zero and positive gap.
+    -- R281's abstract positivity predicate cannot silently be read as
+    -- strict order above the selected zero-energy coordinate.
+    selectedZeroEnergyIsRationalZero :
+      Free.zero gapOrder ≡ 0ℚ
+
+    physicalGapStrictlyAboveSelectedVacuum :
+      Free.StrictLess gapOrder
+        (Free.zero gapOrder)
+        (OS.gap gapCertificate)
 
     gaussianMaxwellPhysicalSector :
       let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
