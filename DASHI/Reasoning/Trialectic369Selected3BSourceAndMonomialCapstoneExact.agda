@@ -26,6 +26,7 @@ import DASHI.Reasoning.Trialectic369MonomialMultiplicityBasisSpecialisationExact
 import DASHI.Reasoning.Trialectic369MonomialTenByNineTransportExact as TenByNine
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as WrongType
 import DASHI.Geometry.HilbertLorentzForcing as Linear
+import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 
 -- The actual source-action comparison pays the canonical mandatory route.
 canonicalCompletionFromFaithfulGradeTwoComparison :
@@ -39,6 +40,29 @@ canonicalCompletionFromFaithfulGradeTwoComparison core receipt =
     ; actionIntertwining =
         Comparison.compileActionIntertwiningFromInclusion core receipt
     }
+
+-- Conversely any mandatory intertwiner, together with the same faithful
+-- inclusion, produces the comparison receipt. Thus the criteria are equivalent
+-- on the given source object, not merely numerically compatible.
+comparisonFromMandatoryAction :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (injective :
+    ∀ {left right :
+      Linear.Vector
+        (DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact.constituentLinearCarrier
+          (Core.weightTwoLinearBridge core))} →
+    DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact.constituentInclusion
+      (Core.weightTwoLinearBridge core) left
+    ≡
+    DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact.constituentInclusion
+      (Core.weightTwoLinearBridge core) right
+    →
+    left ≡ right) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  Comparison.FaithfulConstituentActionComparison core
+comparisonFromMandatoryAction =
+  Comparison.comparisonFromActionIntertwining
 
 -- On the SAME core, an optional monomial witness reuses the canonical
 -- linear route; it never alters or reconstructs that route.
@@ -124,6 +148,7 @@ record Boundary : Set where
   field
     canonicalLinearCompletionCompilerOwned : Bool
     fullGradeTwoInjectivityAndComparisonStillRequired : Bool
+    faithfulInclusionCriterionBidi : Bool
     optionalMonomialActionTracksScalars : Bool
     optionalMonomialRouteSharesCanonicalLinearCore : Bool
     monomialTenByNineRetainsScalars : Bool
@@ -134,4 +159,4 @@ record Boundary : Set where
 
 canonicalBoundary : Boundary
 canonicalBoundary =
-  boundary true true true true true true true false false
+  boundary true true true true true true true true false false
