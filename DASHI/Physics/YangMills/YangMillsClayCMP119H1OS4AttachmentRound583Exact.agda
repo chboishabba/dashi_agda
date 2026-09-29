@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -159,9 +159,8 @@ record CMP119CoreH1OS4Meaning
       Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
       FullTest → FullTest → Nat → ℝ
 
-    -- Decay-to-zero is a convergence predicate, NOT the selected dyadic
-    -- estimate; extending the dyadic estimate is a physical theorem.
-    ConvergesToZero : (Nat → ℝ) → Set
+    -- Decay means actual convergence to zero in the existing real
+    -- sequence-limit structure.  There is no custom/vacuous decay predicate.
 
     WilsonProductsFormAlgebra : Set
     wilsonProductsFormAlgebra : WilsonProductsFormAlgebra
@@ -179,14 +178,14 @@ record CMP119CoreH1OS4Meaning
     selectedEstimateCoversWilsonProducts :
       ExactSelectedCoreClustering application →
       ∀ left right →
-      ConvergesToZero
+      RealLimit.Converges sequenceLimit
         (λ time →
           connectedSchwinger
             (OSSystem.constructedSchwingerCore
               (H2Core.coreInputs h2) group)
             (embedWilson left)
             (translateFull (embedWilson right) time)
-            time)
+            time) 0ℝ
 
     -- Analytic closure theorem: density plus uniform continuity extends
     -- selected Wilson-product clustering to ALL admitted Schwinger tests.
@@ -194,7 +193,7 @@ record CMP119CoreH1OS4Meaning
     -- consequence of R281's selected covariance inequality.
     denseWilsonClusteringExtendsToFullTestClass :
       (∀ left right →
-        ConvergesToZero
+        RealLimit.Converges sequenceLimit
           (λ time →
             connectedSchwinger
               (OSSystem.constructedSchwingerCore
@@ -206,7 +205,7 @@ record CMP119CoreH1OS4Meaning
       WilsonProductsDenseInPhysicalSector →
       UniformCorrelationContinuity →
       ∀ left right →
-      ConvergesToZero
+      RealLimit.Converges sequenceLimit
         (λ time →
           connectedSchwinger
             (OSSystem.constructedSchwingerCore
@@ -234,9 +233,9 @@ FullCoreOS4 :
     h2 covarianceLaws group source application →
   Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
   Set
-FullCoreOS4 meaning family =
+FullCoreOS4 {sequenceLimit = sequenceLimit} meaning family =
   ∀ left right →
-  ConvergesToZero meaning
+  RealLimit.Converges sequenceLimit
     (λ time →
       connectedSchwinger meaning family
         left (translateFull meaning right time) time)
