@@ -28,6 +28,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedE
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import Data.Fin.Base as Fin
+import Data.List.Base
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedTruthTableAutomatonExact as Indexed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1PackedIndexedReferenceMachineExact as Packed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact as Root
@@ -36,6 +37,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact 
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExplicitIndexedGraphExact as Graph
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1NumericIndexedGraphExact as Numeric
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact as Budget
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateExact as Work
 
 module CandidateReference
   {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -124,6 +126,24 @@ module CandidateReference
   budgetCheckedReference =
     Budget.budgetedReferenceGraph
       exactIndexedArity
+      (Q2.recursiveMeasure candidateState)
+
+  -- The rooted semantic quotient receives the very SAME Q2 candidate
+  -- formula and strict numerical measure as the earlier reference graph.
+  -- Every descent path is generated from this fixed root; the budgeted
+  -- constructor can still legitimately return nothing.
+  candidateRootedWorkGate :
+    ∀ {remaining : Nat} →
+    (path : Root.DescentPath exactIndexedRoot remaining) →
+    Maybe
+      (Σ
+        (Data.List.Base.List (Merge.SemanticKey remaining))
+        (λ keys →
+          Work.rootedDeclaredOperationalWork path
+          <
+          Q2.recursiveMeasure candidateState))
+  candidateRootedWorkGate path =
+    Work.budgetedRootedKeys path
       (Q2.recursiveMeasure candidateState)
 
   sameQuotedCookFormula :
