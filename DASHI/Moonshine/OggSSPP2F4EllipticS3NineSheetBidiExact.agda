@@ -23,6 +23,8 @@ import DASHI.Moonshine.OggSSPP2F4RecenteredTriXorS3Exact as Plane
 import DASHI.Moonshine.OggSSPP2F4CurveOriginCenteredSheet9Exact as OldChart
 import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Algebra.Trit as Trit
+import DASHI.Algebra.TritTriTruthBridge as TritBridge
+open Codec using ([]ᵥ; _∷ᵥ_)
 
 ------------------------------------------------------------------------
 -- Independently arithmetic rho(x,y) = (zeta*x,y), infinity fixed.
@@ -232,6 +234,51 @@ arithmeticInverseIntertwines (Curve.affine Curve.pZetaSquaredZeta) = refl
 arithmeticInverseIntertwines (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
 
 ------------------------------------------------------------------------
+-- Why the earlier POINTED Frobenius chart was insufficient for the shear.
+-- This is a two-sided recoding, not a change to the arithmetic points.
+------------------------------------------------------------------------
+
+legacyCenteredToPlane : Codec.Sheet9 → Plane.CenteredNine
+legacyCenteredToPlane (a ∷ᵥ b ∷ᵥ []ᵥ) =
+  TritBridge.toTriTruth a , TritBridge.toTriTruth b
+
+oldCenteredCurveToPlane :
+  Curve.RationalF4Point → Plane.CenteredNine
+oldCenteredCurveToPlane p =
+  legacyCenteredToPlane (OldChart.centeredCurveToSheet p)
+
+oldChartShearFailsOnSelectedPoint :
+  oldCenteredCurveToPlane
+    (rhoCurve (Curve.affine Curve.pZetaZeta))
+    ≡
+  Plane.shearPlane
+    (oldCenteredCurveToPlane (Curve.affine Curve.pZetaZeta))
+  → ⊥
+oldChartShearFailsOnSelectedPoint ()
+
+oldCenteredSheetToEigen : Codec.Sheet9 → Plane.CenteredNine
+oldCenteredSheetToEigen sheet =
+  curveToEigenPlane (OldChart.centeredSheetToCurve sheet)
+
+eigenToOldCenteredSheet : Plane.CenteredNine → Codec.Sheet9
+eigenToOldCenteredSheet pair =
+  OldChart.centeredCurveToSheet (eigenPlaneToCurve pair)
+
+oldEigenRoundTrip :
+  (sheet : Codec.Sheet9) →
+  eigenToOldCenteredSheet (oldCenteredSheetToEigen sheet) ≡ sheet
+oldEigenRoundTrip sheet
+  rewrite curveEigenRoundTrip (OldChart.centeredSheetToCurve sheet)
+        | OldChart.centeredAfterSheet sheet = refl
+
+eigenOldRoundTrip :
+  (pair : Plane.CenteredNine) →
+  oldCenteredSheetToEigen (eigenToOldCenteredSheet pair) ≡ pair
+eigenOldRoundTrip pair
+  rewrite OldChart.centeredAfterCurve (eigenPlaneToCurve pair)
+        | eigenCurveRoundTrip pair = refl
+
+------------------------------------------------------------------------
 -- Target formal additive group operation is transported, not claimed to
 -- be the independently selected arithmetic elliptic group addition.
 ------------------------------------------------------------------------
@@ -267,10 +314,12 @@ record EllipticS3NineSheetBoundary : Set where
     frobeniusReflectionIntertwining : Bool
     shearIntertwining : Bool
     inversionIntertwining : Bool
+    oldFrobeniusChartDoesNotIntertwineShear : Bool
+    oldAndNewPointedChartsBidi : Bool
     arithmeticEllipticAdditionPreservation : Bool
     gammaZeroFourLevelRecognition : Bool
 
 canonicalEllipticS3NineSheetBoundary : EllipticS3NineSheetBoundary
 canonicalEllipticS3NineSheetBoundary =
   elliptic-s3-nine-sheet-boundary
-    true true true true true true true true true false false
+    true true true true true true true true true true true false false
