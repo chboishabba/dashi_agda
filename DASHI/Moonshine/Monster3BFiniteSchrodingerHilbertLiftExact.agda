@@ -25,10 +25,12 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerHilbertLiftExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
 open import DASHI.Algebra.Trit using (neg; zer; pos)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact as Schrodinger
 import DASHI.Moonshine.Monster3BFiniteSchrodingerHeisenbergActionExact as Action
@@ -53,8 +55,7 @@ sumCube {suc n} f =
       (sumCube (λ tail → f (Delta.cubeS pos tail))))
 
 sumX6 :
-  (H0 : DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact.X6 →
-        C3.Cyclotomic3) →
+  (H0 : G.X6 → C3.Cyclotomic3) →
   C3.Cyclotomic3
 sumX6 f =
   sumCube (λ cube → f (Delta.toX6 cube))
@@ -117,8 +118,8 @@ deltaBasisBoundary =
   Delta.canonicalTernaryFiniteFunctionDeltaBasisBoundary
 
 all729DeltaLinesSpan :
-  Delta.all729DeltasSpanEverySchrodingerFunction
-    ≡ true
+  Delta.all729DeltasSpanEverySchrodingerFunction deltaBasisBoundary
+  ≡ true
 all729DeltaLinesSpan = refl
 
 ------------------------------------------------------------------------
