@@ -11,7 +11,7 @@ module DASHI.Core.IndexedRelationalHyperfabricSpineExact where
 -- Cartesian growth differs from self-indexing function-space towers.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
