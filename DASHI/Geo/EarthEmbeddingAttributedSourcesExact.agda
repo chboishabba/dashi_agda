@@ -97,10 +97,44 @@ geoTesseraSoftware = Attribution.mkNoDOISource
   "Source of current access API and available v1.1/v2 provisioning, not a claim of coverage."
   Attribution.publicAttribution
 
+woogarooCouncil : Attribution.AttributedSource
+woogarooCouncil = Attribution.mkNoDOISource
+  "Ipswich City Council"
+  "Brisbane River Catchment — Woogaroo Creek"
+  "Ipswich City Council catchment overview"
+  "2026 (accessed)"
+  "https://www.ipswich.qld.gov.au/About-Council/Initiatives/Environment/Waterways/Catchments-and-Plans/Brisbane-River-Catchment"
+  Attribution.governmentSource
+  "Documents 69 square kilometre Woogaroo/Mountain/Opossum catchment, not hydrodynamic proof."
+  Attribution.publicAttribution
+
+springfieldEmergencyPlan : Attribution.AttributedSource
+springfieldEmergencyPlan = Attribution.mkNoDOISource
+  "Queensland Government"
+  "Springfield Lakes Main Lakes Emergency Action Plan"
+  "Queensland dam safety/public emergency action plan, catchment description"
+  "2024"
+  "https://www.rdmw.qld.gov.au/__data/assets/pdf_file/0007/1619773/springfield-high-eap.pdf"
+  Attribution.governmentSource
+  "Source for Main Lakes discharge into Opossum Creek then Woogaroo Creek and Brisbane River."
+  Attribution.publicAttribution
+
+springfieldNatureCare : Attribution.AttributedSource
+springfieldNatureCare = Attribution.mkNoDOISource
+  "Springfield Lakes Nature Care"
+  "The natural landscapes of the Greater Springfield area"
+  "Community catchment description"
+  "2017-2026"
+  "https://www.springfieldlakesnaturecare.org.au/?page_id=9"
+  Attribution.communitySource
+  "Description of Mountain joining Opossum before Woogaroo; triangulate with mapped waterway assets."
+  Attribution.publicAttribution
+
 earthEmbeddingSourceAtlas : Attribution.AttributedSourceAtlas
 earthEmbeddingSourceAtlas = Attribution.mkSourceAtlas
   "AlphaEarth-TESSERA physical geometry and Woogaroo source atlas"
   "DASHI.Geo.EarthEmbeddingAttributedSourcesExact"
   (alphaEarthPaper ∷ alphaEarthDocumentation ∷ tesseraOriginal ∷ tesseraV2 ∷
-   rahmanPhysical ∷ rahmanGeometry ∷ ouZheng ∷ geoTesseraSoftware ∷ [])
+   rahmanPhysical ∷ rahmanGeometry ∷ ouZheng ∷ geoTesseraSoftware ∷
+   woogarooCouncil ∷ springfieldEmergencyPlan ∷ springfieldNatureCare ∷ [])
   "Sources retain original author claims; DASHI geometry and evidence contracts remain separately authored."
