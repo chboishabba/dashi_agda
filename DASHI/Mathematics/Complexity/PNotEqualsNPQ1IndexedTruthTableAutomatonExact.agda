@@ -159,8 +159,8 @@ residualEqualityGivesEqualIndices :
     {left right : Width.LayerNode {root = root} remaining} →
   Width.LayerResidualEqual left right →
   indexRestrictionNode left ≡ indexRestrictionNode right
-residualEqualityGivesEqualIndices =
-  cong encodeState ∘ Merge.residualEqualityGivesKeyEquality
+residualEqualityGivesEqualIndices proof =
+  cong encodeState (Merge.residualEqualityGivesKeyEquality proof)
 
 ------------------------------------------------------------------------
 -- TERMINAL LABELS
