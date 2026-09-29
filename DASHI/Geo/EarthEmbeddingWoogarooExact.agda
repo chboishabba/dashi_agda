@@ -86,21 +86,21 @@ prefixSize d64 = 64
 prefixSize d128 = 128
 
 data Waterway : Set where
-  springfieldLakes opossumCreek mountainCreek woogarooCreek
+  springfieldMainLakes opossumCreek mountainCreek woogarooCreek
     brisbaneRiver : Waterway
 
 data HydrologicConnection : Waterway → Waterway → Set where
-  lakesToOpossum : HydrologicConnection springfieldLakes opossumCreek
+  lakesToOpossum : HydrologicConnection springfieldMainLakes opossumCreek
   opossumToWoogaroo : HydrologicConnection opossumCreek woogarooCreek
-  mountainToWoogaroo : HydrologicConnection mountainCreek woogarooCreek
+  mountainToOpossum : HydrologicConnection mountainCreek opossumCreek
   woogarooToBrisbane : HydrologicConnection woogarooCreek brisbaneRiver
 
 data Downstream : Waterway → Waterway → Set where
   direct : ∀ {a b} → HydrologicConnection a b → Downstream a b
   trans : ∀ {a b c} → Downstream a b → Downstream b c → Downstream a c
 
-springfieldToBrisbane : Downstream springfieldLakes brisbaneRiver
-springfieldToBrisbane =
+mainLakesToBrisbane : Downstream springfieldMainLakes brisbaneRiver
+mainLakesToBrisbane =
   trans (direct lakesToOpossum)
     (trans (direct opossumToWoogaroo) (direct woogarooToBrisbane))
 
@@ -132,3 +132,9 @@ record CandidatePrediction : Set where
 sameWindowReflexive : ∀ {m} (v : Embedding m) →
   Embedding.year v ≡ Embedding.year v
 sameWindowReflexive v = refl
+
+-- Mountain Creek joins Opossum Creek before their water joins Woogaroo.
+mountainToBrisbane : Downstream mountainCreek brisbaneRiver
+mountainToBrisbane =
+  trans (direct mountainToOpossum)
+    (trans (direct opossumToWoogaroo) (direct woogarooToBrisbane))
