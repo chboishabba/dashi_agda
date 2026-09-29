@@ -129,6 +129,19 @@ record CMP119DirectSameSystemH6
     gapCertificate =
       H3.physicalMassGapCertificate h3 positive
 
+  -- The gap predicate is fixed by the SAME H3 selected physical
+  -- spectral-separation theorem.  It is not an independently selectable Set.
+  PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
+  PhysicalPositiveGap h =
+    H3.SpectrumAboveVacuumGap h3 h (OS.gap gapCertificate)
+
+  h3CertificateMeansPositiveGap :
+    OS.hamiltonian gapCertificate
+    ≡ OS.hamiltonian reconstruction →
+    PhysicalPositiveGap (OS.hamiltonian reconstruction)
+  h3CertificateMeansPositiveGap refl =
+    OS.spectrumAboveVacuumGap gapCertificate
+
   field
     --------------------------------------------------------------------
     -- Exact C/H6 physical provenance: Y is not an independent continuum
@@ -170,13 +183,6 @@ record CMP119DirectSameSystemH6
         (R563.coefficientAlgebra ward)
         (R563.gaussianLocalTwoDerivativeWardKernel ward gaussian) →
       Disp.GaplessGaugeInvariantPhysicalSector gapOrder
-
-    PhysicalPositiveGap : OS.Hamiltonian reconstruction → Set
-
-    h3CertificateMeansPositiveGap :
-      OS.hamiltonian gapCertificate
-      ≡ OS.hamiltonian reconstruction →
-      PhysicalPositiveGap (OS.hamiltonian reconstruction)
 
     gapRestrictsToSamePhysicalSector :
       let ward = wardSourceFromC (DirectC.asGoal1CanonicalCSource cSource)
