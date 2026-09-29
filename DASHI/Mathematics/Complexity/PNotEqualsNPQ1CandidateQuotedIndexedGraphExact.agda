@@ -13,7 +13,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1CandidateQuotedIndexedGraphExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (Maybe; nothing)
 open import Data.Nat.Base using (_<_)
 open import Data.Product using (Σ)
@@ -38,6 +38,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExplicitIndexedGraphExact as G
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1NumericIndexedGraphExact as Numeric
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact as Budget
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateExact as Work
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableEdgeTableExact as Rows
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedWorkGateFailureExact as WorkFailure
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedDirectDPChargeBridgeExact as TraceCharge
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact as DirectDP
@@ -132,6 +133,22 @@ module CandidateReference
     Budget.budgetedReferenceGraph
       exactIndexedArity
       (Q2.recursiveMeasure candidateState)
+
+  -- All concrete Shannon transition and terminal rows are produced from
+  -- this exact candidate-quoted root. Their semantic equations are fields
+  -- of the emitted data, not assumptions about an unrelated graph.
+  candidateEdgeRows :
+    ∀ {remaining : Nat} →
+    (previous : Root.DescentPath exactIndexedRoot (Agda.Builtin.Nat.suc remaining)) →
+    Data.List.Base.List (Rows.ReachableEdgeRow previous)
+  candidateEdgeRows =
+    Rows.allReachableEdgeRows
+
+  candidateTerminalRows :
+    (terminalPath : Root.DescentPath exactIndexedRoot Agda.Builtin.Nat.zero) →
+    Data.List.Base.List (Rows.ReachableTerminalRow terminalPath)
+  candidateTerminalRows =
+    Rows.allReachableTerminalRows
 
   -- The rooted semantic quotient receives the very SAME Q2 candidate
   -- formula and strict numerical measure as the earlier reference graph.
