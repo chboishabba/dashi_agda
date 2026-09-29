@@ -1,6 +1,7 @@
 module DASHI.Physics.Foundations.FiniteWarpedSourceProducerBidiExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
