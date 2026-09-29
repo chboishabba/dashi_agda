@@ -191,6 +191,77 @@ jointOrbitCount = 4
 jointOrbitPartition : 1 + 1 + 1 + 6 ≡ Curve.rationalCount
 jointOrbitPartition = refl
 
+------------------------------------------------------------------------
+-- The C3 and S3 orbit labels are backed by LITERAL REACHABILITY terms,
+-- not merely invariant quotient maps.
+------------------------------------------------------------------------
+
+data RhoStep : Set where
+  stepZero : RhoStep
+  stepOne : RhoStep
+  stepTwo : RhoStep
+
+rhoStep : RhoStep → RationalF4Point → RationalF4Point
+rhoStep stepZero p = p
+rhoStep stepOne p = rho p
+rhoStep stepTwo p = rhoTwice p
+
+applyFrobenius : Bool → RationalF4Point → RationalF4Point
+applyFrobenius false p = p
+applyFrobenius true p = frobenius p
+
+jointAct : Bool → RhoStep → RationalF4Point → RationalF4Point
+jointAct f k p = rhoStep k (applyFrobenius f p)
+
+jointRepresentative : ShearReflectionOrbit → RationalF4Point
+jointRepresentative infinityFixed = Curve.infinity
+jointRepresentative zeroZeroFixed = Curve.affine Curve.p00
+jointRepresentative zeroOneFixed = Curve.affine Curve.p01
+jointRepresentative sixNonzeroX = Curve.affine Curve.p1Zeta
+
+jointRepresentativeHasLabel :
+  (orbit : ShearReflectionOrbit) →
+  jointOrbit (jointRepresentative orbit) ≡ orbit
+jointRepresentativeHasLabel infinityFixed = refl
+jointRepresentativeHasLabel zeroZeroFixed = refl
+jointRepresentativeHasLabel zeroOneFixed = refl
+jointRepresentativeHasLabel sixNonzeroX = refl
+
+jointReachFlags : RationalF4Point → Bool × RhoStep
+jointReachFlags Curve.infinity = false , stepZero
+jointReachFlags (Curve.affine Curve.p00) = false , stepZero
+jointReachFlags (Curve.affine Curve.p01) = false , stepZero
+jointReachFlags (Curve.affine Curve.p1Zeta) = false , stepZero
+jointReachFlags (Curve.affine Curve.p1ZetaSquared) = true , stepZero
+jointReachFlags (Curve.affine Curve.pZetaZeta) = false , stepOne
+jointReachFlags (Curve.affine Curve.pZetaZetaSquared) = true , stepOne
+jointReachFlags (Curve.affine Curve.pZetaSquaredZeta) = false , stepTwo
+jointReachFlags (Curve.affine Curve.pZetaSquaredZetaSquared) = true , stepTwo
+
+jointReachEveryPoint :
+  (p : RationalF4Point) →
+  jointAct
+    (proj₁ (jointReachFlags p))
+    (proj₂ (jointReachFlags p))
+    (jointRepresentative (jointOrbit p))
+  ≡ p
+jointReachEveryPoint Curve.infinity = refl
+jointReachEveryPoint (Curve.affine Curve.p00) = refl
+jointReachEveryPoint (Curve.affine Curve.p01) = refl
+jointReachEveryPoint (Curve.affine Curve.p1Zeta) = refl
+jointReachEveryPoint (Curve.affine Curve.p1ZetaSquared) = refl
+jointReachEveryPoint (Curve.affine Curve.pZetaZeta) = refl
+jointReachEveryPoint (Curve.affine Curve.pZetaZetaSquared) = refl
+jointReachEveryPoint (Curve.affine Curve.pZetaSquaredZeta) = refl
+jointReachEveryPoint (Curve.affine Curve.pZetaSquaredZetaSquared) = refl
+
+-- A logically meaningful no-free-action obstruction: one witness exists.
+-- Unlike an empty "NoGo" datatype, this accepts the actual free-action
+-- proposition as input and derives contradiction using the fixed infinity.
+rhoCannotActFreely :
+  ((p : RationalF4Point) → rho p ≡ p → ⊥) → ⊥
+rhoCannotActFreely h = h Curve.infinity refl
+
 -- The three fixed elements are literal witnesses, not a numerical claim.
 rhoFixesInfinity : rho Curve.infinity ≡ Curve.infinity
 rhoFixesInfinity = refl
@@ -214,6 +285,7 @@ record Boundary : Set where
     frobeniusConjugatesShearToInverse : Bool
     shearThreeFixedTwoTripleProfile : Bool
     jointThreeSingletonOneSixOrbitProfile : Bool
+    jointOrbitsHaveExplicitReachabilityWitnesses : Bool
     ellipticAdditionPreservationProved : Bool
     literalVOAActionIdentified : Bool
     gamma0FourLevelStructureProved : Bool
