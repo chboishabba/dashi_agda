@@ -16,7 +16,8 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119CorePhysicalH5Exact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Sigma using (Σ)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -282,6 +283,45 @@ corePhysicalPackageForGroup h5 group =
   continueCorePhysicalPackage h5 group
     (Compact.compactSimpleHasQuantitativePackage
       (authority h5) (literalToClassified h5 group))
+
+------------------------------------------------------------------------
+-- The classification-complete physical constructor is exposed on the
+-- classified group argument.  It witnesses an actual literal CMP119
+-- representative and that representative's quantitative H1/H2/H3 package.
+-- No SU(2)-only or sparse group carrier can inhabit this theorem.
+------------------------------------------------------------------------
+
+classifiedCompactSimplePhysicalPackage :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness LieElement GroupElement
+      sequenceLimit limitLaws quotient division S h2 covarianceLaws}
+    (h5 :
+      CMP119CompactSimplePhysicalH5Core
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        LieElement GroupElement
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S h2 covarianceLaws)
+    (classified : Compact.CompactSimpleLieGroup) →
+  Compact.ValidCompactSimpleIndex classified →
+  Σ G (λ group →
+    (literalToClassified h5 group ≡ classified) ×
+    CMP119CoreGroupPhysicalPackage
+      G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      LieElement GroupElement
+      {sequenceLimit = sequenceLimit}
+      limitLaws quotient division S h2 covarianceLaws
+      group (literalToClassified h5 group)
+      (Compact.compactSimpleHasQuantitativePackage
+        (authority h5) (literalToClassified h5 group)))
+classifiedCompactSimplePhysicalPackage h5 classified valid
+  with everyValidClassifiedGroupHasLiteralRepresentative h5 classified valid
+... | group , sameClassified =
+  group , (sameClassified , corePhysicalPackageForGroup h5 group)
 
 ------------------------------------------------------------------------
 -- All-group gap normalization is not another physical assumption: each
