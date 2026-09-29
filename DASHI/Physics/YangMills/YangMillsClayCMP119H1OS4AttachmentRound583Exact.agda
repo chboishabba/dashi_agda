@@ -138,10 +138,12 @@ record CMP119CoreH1OS4Meaning
         group
         source)
     : Set₂ where
+  -- Use the actual CMP119 continuum cylinder observable carrier.  It is
+  -- deliberately not an arbitrary caller-selected Set (which could be empty).
+  FullTest : Set
+  FullTest = Configuration → ℝ
+
   field
-    -- The admitted full gauge-invariant Schwinger test class is explicit.
-    -- Do not confuse one selected Wilson pair with this entire class.
-    FullTest : Set
     WilsonProduct : Set
     embedWilson : WilsonProduct → FullTest
     multiplyWilson : WilsonProduct → WilsonProduct → WilsonProduct
@@ -153,12 +155,30 @@ record CMP119CoreH1OS4Meaning
       embedWilson (translateWilson test time)
       ≡ translateFull (embedWilson test) time
 
-    -- True connected correlations of the SAME reconstructed Schwinger family
-    -- on the full physical test class (including vacuum subtraction).
-    connectedSchwinger :
-      Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
-      FullTest → FullTest → Nat → ℝ
+  -- Connected correlation magnitude is a DEFINITION on the exact H2
+  -- normalized continuum expectation, not a freely chosen function.  The
+  -- Schwinger-family argument is a presentation of the same CMP119 measure;
+  -- the two observable arguments determine the actual connected covariance.
+  connectedSchwinger :
+    Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ →
+    FullTest → FullTest → Nat → ℝ
+  connectedSchwinger _ left right time =
+    let
+      core = H2Core.coreInputs h2
+      dataSet =
+        Carrier.cmp119PhysicalMeasureConvergenceDataFromFamily
+          (OSSystem.familyCore core group)
+          (OSSystem.observableAlgebraCore core)
+      extension =
+        Cov.realCovarianceExtensionFromFamily
+          (OSSystem.familyCore core group)
+          (OSSystem.observableAlgebraCore core)
+          covarianceLaws
+    in
+    R278.connectedCovarianceMagnitude extension
+      (Gram.continuumMeasure dataSet) left right
 
+  field
     -- Decay means actual convergence to zero in the existing real
     -- sequence-limit structure.  There is no custom/vacuous decay predicate.
 
