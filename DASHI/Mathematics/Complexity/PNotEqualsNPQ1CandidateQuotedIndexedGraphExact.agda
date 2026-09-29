@@ -32,6 +32,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedTruthTableAutomatonExac
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1PackedIndexedReferenceMachineExact as Packed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact as Root
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExplicitIndexedGraphExact as Graph
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1NumericIndexedGraphExact as Numeric
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1IndexedGraphCellBudgetExact as Budget
 
 module CandidateReference
@@ -69,6 +70,18 @@ module CandidateReference
     Packed.PackedIndexedState exactIndexedArity
   referenceInitialState =
     Packed.rootPackedState exactIndexedRoot
+
+  numericInitialState :
+    Numeric.NumericState exactIndexedArity
+  numericInitialState =
+    Numeric.numericEncode referenceInitialState
+
+  numericInitialStateDecodesExact :
+    Numeric.numericDecode numericInitialState
+    ≡
+    referenceInitialState
+  numericInitialStateDecodesExact =
+    Numeric.numericDecodeEncode referenceInitialState
 
   referenceInitialStateEnumerated :
     Graph.Listed
