@@ -23,6 +23,8 @@ open import Data.Empty using (⊥)
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as Historical
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Canonical
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearBridge
+import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as Retraction
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 
 ------------------------------------------------------------------------
 -- 1. Exact forgetful compiler.
@@ -120,6 +122,55 @@ historicalCoreMinCutToCanonicalCompletion core homWeld action =
     }
 
 ------------------------------------------------------------------------
+-- 1c. Historical action + canonical retraction compiles the projected route.
+------------------------------------------------------------------------
+
+historicalActionToProjectedReceipt :
+  ∀ {Monster K}
+    (core :
+      Historical.Selected3BLinearAcquisitionCore {Monster} {K})
+    (homWeld :
+      Canonical.CanonicalLinearHomSameObjectWeld
+        (Historical.linearZetaProducer core)
+        (Historical.multiplicityHomSpace core))
+    (retraction :
+      Retraction.ConstituentRetraction
+        (canonicalCoreFromHistoricalCore core homWeld)) →
+  Historical.Selected3BNormalizerActionIntertwiningOnly
+    (Historical.scaffoldFromCore core) →
+  Projected.SelectedActionIsProjectedFullGrade
+    (canonicalCoreFromHistoricalCore core homWeld)
+    retraction
+historicalActionToProjectedReceipt core homWeld retraction action =
+  Projected.projectedActionFromCanonicalIntertwining
+    (canonicalCoreFromHistoricalCore core homWeld)
+    retraction
+    (historicalActionToCanonical core homWeld action)
+
+historicalActionAndRetractionToCanonicalCompletion :
+  ∀ {Monster K}
+    (core :
+      Historical.Selected3BLinearAcquisitionCore {Monster} {K})
+    (homWeld :
+      Canonical.CanonicalLinearHomSameObjectWeld
+        (Historical.linearZetaProducer core)
+        (Historical.multiplicityHomSpace core))
+    (retraction :
+      Retraction.ConstituentRetraction
+        (canonicalCoreFromHistoricalCore core homWeld))
+    (action :
+      Historical.Selected3BNormalizerActionIntertwiningOnly
+        (Historical.scaffoldFromCore core)) →
+  Canonical.CanonicalSelected3BLinearCompletion {Monster} {K}
+historicalActionAndRetractionToCanonicalCompletion
+  core homWeld retraction action =
+  Projected.canonicalCompletionFromProjectedAction
+    (canonicalCoreFromHistoricalCore core homWeld)
+    retraction
+    (historicalActionToProjectedReceipt
+      core homWeld retraction action)
+
+------------------------------------------------------------------------
 -- 2. Reverse promotion is intentionally not part of the canonical lane.
 ------------------------------------------------------------------------
 
@@ -141,6 +192,8 @@ record Trialectic369Selected3BLinearCoreCompatibilityBoundary : Set where
     historicalCorePlusHomWeldCompilesSameLinearRoute : Bool
     historicalActionEquationCompilesCanonicalAction : Bool
     historicalCoreMinCutCompilesCanonicalCompletion : Bool
+    historicalActionPlusRetractionCompilesProjectedReceipt : Bool
+    historicalActionPlusRetractionCompilesCanonicalCompletion : Bool
     canonicalCoreRequiresHistoricalReversePromotion : Bool
     historicalExtraFieldsRemainAvailableForProvenance : Bool
 
@@ -148,4 +201,4 @@ canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary :
   Trialectic369Selected3BLinearCoreCompatibilityBoundary
 canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary =
   trialectic-369-selected3b-linear-core-compatibility-boundary
-    false true true true true false true
+    false true true true true true true false true
