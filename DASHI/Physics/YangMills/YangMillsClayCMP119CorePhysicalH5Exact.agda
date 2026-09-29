@@ -30,6 +30,8 @@ import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGa
 import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedWilsonH2Exact as Wilson
 import DASHI.Physics.YangMills.YangMillsClayCMP119H1OS4AttachmentRound583Exact as R583
 import DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact as H3Core
+import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
+import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact as R302
 import DASHI.Physics.YangMills.YangMillsClayCMP119CompactSimplePhysicalH5Exact as LegacyH5
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCovarianceExact as Cov
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
@@ -243,6 +245,39 @@ corePhysicalPackageForGroup h5 group =
   continueCorePhysicalPackage h5 group
     (Compact.compactSimpleHasQuantitativePackage
       (authority h5) (literalToClassified h5 group))
+
+------------------------------------------------------------------------
+-- All-group gap normalization is not another physical assumption: each
+-- group uses its OWN exact H2-core H3 transfer coordinate and the candidate
+-- equality already stored by that core H3 source.
+------------------------------------------------------------------------
+
+coreGroupGapIsSameHTransferEnergy :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness LieElement GroupElement
+      sequenceLimit limitLaws quotient division S h2 covarianceLaws}
+    (h5 :
+      CMP119CompactSimplePhysicalH5Core
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        LieElement GroupElement
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S h2 covarianceLaws)
+    group →
+  let package = corePhysicalPackageForGroup h5 group
+  in
+  Gap.gapCandidate
+    (R281.asReconstructedClusteringSpectrum
+      (RealGap.spectrumSourceCore (realSelectedCore package)))
+  ≡
+  R302.candidateEnergy
+    (R331.coordinateCore
+      (H3Core.indexedTransfer (coreSameOSH3 package)))
+coreGroupGapIsSameHTransferEnergy h5 group =
+  H3Core.selectedGapIsTransferCandidate
+    (coreSameOSH3 (corePhysicalPackageForGroup h5 group))
 
 coreH5OS4Attachment :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
