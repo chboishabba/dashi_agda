@@ -18,11 +18,12 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalSourceSectorActionExact as Canonical
+import DASHI.Physics.Foundations.CMP119AntigravityRawActionIncrementResidualExact as CanonicalSourceEdge
 
 module _
   {Density Background Fluctuation : Set}
@@ -117,3 +118,44 @@ module _
     rewrite nonWilsonNodeIsActualFourSectors meaning k
           | nonWilsonNodeIsActualFourSectors meaning (suc k) =
     Agda.Builtin.Equality.refl
+
+  -- This projects the genuine source-native pair of consecutive actions.
+  -- There is deliberately no action equality with an independently chosen
+  -- T4 one-step action and no assumption that the E/R/B/V drift cancels.
+  selectedProjectedEdge : Nat → ℚ
+  selectedProjectedEdge k =
+    T4.plaquetteCoefficientProjector
+      (CanonicalSourceEdge.actionDifference
+        (CMP119.effectiveAction source k)
+        (CMP119.effectiveAction source (suc k)))
+
+  selectedProjectedEdgeIsNodeDifference :
+    ∀ k →
+    selectedProjectedEdge k
+      ≡ projectedNode k - projectedNode (suc k)
+  selectedProjectedEdgeIsNodeDifference k =
+    CanonicalSourceEdge.projectorDifference
+      (CMP119.effectiveAction source k)
+      (CMP119.effectiveAction source (suc k))
+
+  projectedEdgeIsWilsonPlusFourSectorDrift :
+    (meaning : SelectedEq223RationalActionInterpretation) →
+    ∀ k →
+    selectedProjectedEdge k
+    ≡ (CMP119.wilsonCoefficient source k
+       - CMP119.wilsonCoefficient source (suc k))
+      + (sectorProjection k - sectorProjection (suc k))
+  projectedEdgeIsWilsonPlusFourSectorDrift meaning k =
+    trans
+      (selectedProjectedEdgeIsNodeDifference k)
+      (trans
+        (ℚRing.solve-∀
+          (projectedNode k) (projectedNode (suc k))
+          (CMP119.wilsonCoefficient source k)
+          (CMP119.wilsonCoefficient source (suc k)))
+        (cong
+          (λ drift →
+            (CMP119.wilsonCoefficient source k
+              - CMP119.wilsonCoefficient source (suc k))
+              + drift)
+          (nonWilsonSourceDriftIsActualSectorDrift meaning k)))
