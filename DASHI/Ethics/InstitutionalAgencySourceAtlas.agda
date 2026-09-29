@@ -27,7 +27,7 @@ landryInterview = Attribution.mkNoDOISource
   "Jim Rutt Show interview transcript"
   "2021"
   "https://jimrutt.substack.com/p/ep109-forrest-landry-on-immanent-079"
-  Attribution.namedSourceKind
+  (Attribution.namedSourceKind "interview transcript")
   "Secondary interview carrier for Landry's stated three modalities, axioms and choice triplet; philosophical claims are attributed, not established"
   Attribution.publicAttribution
 
@@ -55,10 +55,3 @@ sourceCountIsThree : Attribution.sourceCount
   (Attribution.sources gridAtlas) ≡ 3
 sourceCountIsThree = refl
 
-receiptDoesNotPromote :
-  Attribution.AttributedSourceAtlas →
-  Set
-receiptDoesNotPromote atlas =
-  Attribution.GenericReceipt.promotesClaim
-    (Attribution.attributedSourceAtlasReceipt atlas "source-written only")
-  ≡ false
