@@ -23,7 +23,9 @@ open import Data.Empty using (⊥)
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact as Comparison
 import DASHI.Reasoning.Trialectic369MonomialMultiplicityBasisSpecialisationExact as Monomial
+import DASHI.Reasoning.Trialectic369MonomialTenByNineTransportExact as TenByNine
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as WrongType
+import DASHI.Geometry.HilbertLorentzForcing as Linear
 
 -- The actual source-action comparison pays the canonical mandatory route.
 canonicalCompletionFromFaithfulGradeTwoComparison :
@@ -60,6 +62,35 @@ compiledMonomialAction :
 compiledMonomialAction core specialisation =
   Monomial.monomial (receipt specialisation)
 
+-- Transport the OPTIONAL monomial action through the existing 10x9 codec.
+-- Both the index and the scalar are retained on the SAME route.
+compiledTenByNineIndexAction :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  SameCoreMonomialSpecialisation core →
+  Monomial.RouteGroup (Core.canonicalLinearRoute core) →
+  TenByNine.TenByNine →
+  TenByNine.TenByNine
+compiledTenByNineIndexAction core specialisation =
+  TenByNine.indexActionOnTenByNine
+    (Core.canonicalLinearRoute core)
+    (compiledMonomialAction core specialisation)
+
+compiledTenByNineScalarAction :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  SameCoreMonomialSpecialisation core →
+  Monomial.RouteGroup (Core.canonicalLinearRoute core) →
+  TenByNine.TenByNine →
+  Linear.Scalar
+    (WrongType.linearCarrier
+      (WrongType.linearRepresentation
+        (Core.canonicalLinearRoute core)))
+compiledTenByNineScalarAction core specialisation =
+  TenByNine.scalarOnTenByNine
+    (Core.canonicalLinearRoute core)
+    (compiledMonomialAction core specialisation)
+
 -- Scalar-triviality is an ADDITIONAL receipt; only then can one reach
 -- the older Fin90 basis-permutation compiler.
 optionalPurePermutationFromMonomial :
@@ -95,6 +126,7 @@ record Boundary : Set where
     fullGradeTwoInjectivityAndComparisonStillRequired : Bool
     optionalMonomialActionTracksScalars : Bool
     optionalMonomialRouteSharesCanonicalLinearCore : Bool
+    monomialTenByNineRetainsScalars : Bool
     purePermutationRequiresScalarTriviality : Bool
     purePermutationNotInferredFromCharacter : Bool
     actualSourceActionPaidHere : Bool
@@ -102,4 +134,4 @@ record Boundary : Set where
 
 canonicalBoundary : Boundary
 canonicalBoundary =
-  boundary true true true true true true false false
+  boundary true true true true true true true false false
