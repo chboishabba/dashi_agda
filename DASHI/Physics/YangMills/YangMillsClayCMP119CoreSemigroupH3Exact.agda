@@ -15,7 +15,7 @@ module DASHI.Physics.YangMills.YangMillsClayCMP119CoreSemigroupH3Exact where
 -- physical subgap and yields the SAME-core-H spectral certificate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import Data.Product using (_×_; _,_)
@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.YangMillsClayCMP119RealSelectedGapExact as RealGa
 import DASHI.Physics.YangMills.YangMillsClayCMP119OSReconstructionAuthorityExact as H2OS
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
 import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact as R302
+import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as R311
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCovarianceExact as Cov
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
@@ -279,6 +280,38 @@ physicalCoreMassGapCertificate
     ; OS.PhysicalMassGapCertificate.spectrumAboveVacuumGap =
         physicalCoreSpectrumGap physical positive
     }
+
+------------------------------------------------------------------------
+-- R331/R311 transport is the exact same core Hamiltonian, by construction.
+-- The candidate-energy calibration is the named physical equality already
+-- stored in CMP119CoreSemigroupH3.
+------------------------------------------------------------------------
+
+coreTransferHamiltonianIsH2Reconstruction :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+      EuclideanAction Permutation Epsilon Witness
+      Scale Volume Root SourceDirection SpectralObservable
+      sequenceLimit limitLaws quotient division S
+      h2 covarianceLaws group source application}
+    (physical :
+      CMP119CoreSemigroupH3
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
+        EuclideanAction Permutation Epsilon Witness
+        Scale Volume Root SourceDirection SpectralObservable
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S
+        h2 covarianceLaws group source application) →
+  R311.reconstructedHamiltonian
+    (R331.preGapAsSameHamiltonianTransferCoordinate
+      (H2OS.asPreGapOSReconstructionAuthority
+        (H2.reconstructionCore h2) group)
+      (indexedTransfer physical))
+  ≡
+  Pinned.reconstructedHamiltonianCore
+    (H2.reconstructionCore h2) group
+coreTransferHamiltonianIsH2Reconstruction physical = refl
 
 ------------------------------------------------------------------------
 -- Compatibility theorem: after OS4 is attached, the old H3 record consumes
