@@ -15,12 +15,12 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityLinearDecisionSepar
 -- arbitrary deterministic decision time, even for the SAME family.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -108,19 +108,7 @@ linearDecisionAgreesWithBlockEqualityFormula :
 linearDecisionAgreesWithBlockEqualityFormula left right =
   trans
     (equalityDecisionValueExact left right)
-    (symBlockEvaluation left right)
-  where
-    symBlockEvaluation :
-      ∀ {n : Nat}
-        (xs ys : Vec Bool n) →
-      Equality.vecEq xs ys
-      ≡
-      SAT.evaluate
-        (Block.blockEqualityFormula n)
-        (Block.blockAssignment xs ys)
-    symBlockEvaluation xs ys
-      with Block.blockEqualityEvaluation xs ys
-    ... | refl = refl
+    (sym (Block.blockEqualityEvaluation left right))
 
 ------------------------------------------------------------------------
 -- A single certified donor simultaneously exhibits:
