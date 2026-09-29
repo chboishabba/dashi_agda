@@ -156,6 +156,7 @@ coreWilsonAsLegacy :
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S)
     (clustering : A.CMP119OS4Attachment core)
+    (covarianceLaws : Cov.CanonicalRealCovarianceLimitLaws sequenceLimit)
     (group : G)
     (tests :
       R278.SelectedConnectedCovarianceTests
