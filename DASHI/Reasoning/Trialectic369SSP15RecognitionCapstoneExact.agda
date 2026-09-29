@@ -1,5 +1,8 @@
 module DASHI.Reasoning.Trialectic369SSP15RecognitionCapstoneExact where
 
+import DASHI.Reasoning.Trialectic369HistoricalMultiplicityAttachmentDescentBidiExact as HistoricalReuse
+import DASHI.Reasoning.Trialectic369MultiplicityNormalizerTranslationDescentExact as TranslationReuse
+
 ------------------------------------------------------------------------
 -- TRIALECTIC -> SSP15 / OGG / 369 RECOGNITION CAPSTONE
 --
@@ -1002,3 +1005,50 @@ selected3BActualMonomialBasisStillUnpaid :
     selected3BSourceAndMonomialBoundary
   ≡ false
 selected3BActualMonomialBasisStillUnpaid = refl
+
+------------------------------------------------------------------------
+-- Existing 3B sources: historical finite-basis attachment and normalizer
+-- translation-equivariance are two conditional producers of the OPTIONAL
+-- finite 90-coordinate descent; neither supersedes the mandatory linear
+-- S_zeta = Hom_E(H_zeta,W_zeta) same-action source.
+------------------------------------------------------------------------
+
+historicalSourceMultiplicityReuseBoundary :
+  HistoricalReuse.HistoricalAttachmentReuseBoundary
+historicalSourceMultiplicityReuseBoundary =
+  HistoricalReuse.canonicalHistoricalAttachmentReuseBoundary
+
+historicalSameActionAttachmentRecoversTransport :
+  HistoricalReuse.transportedProductActionRecovered
+    historicalSourceMultiplicityReuseBoundary
+  ≡ true
+historicalSameActionAttachmentRecoversTransport = refl
+
+historicalAttachmentOnlyCoversRepresentedInertia :
+  HistoricalReuse.historicalInertiaAutomaticallyCoversActualInertia
+    historicalSourceMultiplicityReuseBoundary
+  ≡ false
+historicalAttachmentOnlyCoversRepresentedInertia = refl
+
+historicalCoverageConditionallyCompilesFullDescent :
+  HistoricalReuse.fullDescentCompiledFromExplicitCoverage
+    historicalSourceMultiplicityReuseBoundary
+  ≡ true
+historicalCoverageConditionallyCompilesFullDescent = refl
+
+translationNormalizerReuseBoundary :
+  TranslationReuse.TranslationDescentBoundary
+translationNormalizerReuseBoundary =
+  TranslationReuse.canonicalTranslationDescentBoundary
+
+normalizerOutputMovementCompatibleWithProjectionDescent :
+  TranslationReuse.normalizerMayMoveOutputPosition
+    translationNormalizerReuseBoundary
+  ≡ true
+normalizerOutputMovementCompatibleWithProjectionDescent = refl
+
+actualNormalizerEquivarianceNotConstructedFromCounts :
+  TranslationReuse.actualMonsterTranslationEquivarianceInhabitedHere
+    translationNormalizerReuseBoundary
+  ≡ false
+actualNormalizerEquivarianceNotConstructedFromCounts = refl
