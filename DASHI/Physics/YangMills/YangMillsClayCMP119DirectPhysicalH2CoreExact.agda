@@ -294,9 +294,14 @@ os4RequiredToConstructH2CoreIsFalse :
   os4RequiredToConstructH2Core ≡ false
 os4RequiredToConstructH2CoreIsFalse = refl
 
-cmp119H2CorePhysicalInstantiationLevel : ProofLevel
-cmp119H2CorePhysicalInstantiationLevel =
+cmp119H2CoreFiniteSourceLevel : ProofLevel
+cmp119H2CoreFiniteSourceLevel =
   R582.literalRound582PublishedFiniteOSCoreMomentSourceLevel
+
+-- Includes the genuine pre-gap reconstruction and literal finite/continuum
+-- semantic witnesses; the finite-source level alone does not discharge H2.
+cmp119H2CorePhysicalInstantiationLevel : ProofLevel
+cmp119H2CorePhysicalInstantiationLevel = conditional
 
 cmp119H2OS4AttachmentLevel : ProofLevel
 cmp119H2OS4AttachmentLevel = conditional
