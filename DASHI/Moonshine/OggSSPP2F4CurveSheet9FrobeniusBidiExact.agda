@@ -21,10 +21,12 @@ module DASHI.Moonshine.OggSSPP2F4CurveSheet9FrobeniusBidiExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Moonshine.OggSSPP2F4ZetaCurvePointEnumerationExact as Curve
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
 
 open Codec using ([]ᵥ; _∷ᵥ_)
 
@@ -145,6 +147,66 @@ sheetFrobeniusDiffersFromWholeInversion :
   → ⊥
 sheetFrobeniusDiffersFromWholeInversion ()
 
+------------------------------------------------------------------------
+-- Product-level rechart into the existing fifteen-phase residual socket.
+-- Identity is retained on the PhaseOrbit15 coordinate.  No action of the
+-- Monster on curve points is inferred from this product construction.
+------------------------------------------------------------------------
+
+PhaseOrbitWithCurve9 : Set
+PhaseOrbitWithCurve9 =
+  Reduction.PhaseOrbit15 × Curve.RationalF4Point
+
+PhaseOrbitWithSheet9 : Set
+PhaseOrbitWithSheet9 =
+  Reduction.PhaseOrbit15 × Codec.Sheet9
+
+curveProductToSheetProduct :
+  PhaseOrbitWithCurve9 → PhaseOrbitWithSheet9
+curveProductToSheetProduct (phase , point) =
+  phase , curveToSheet9 point
+
+sheetProductToCurveProduct :
+  PhaseOrbitWithSheet9 → PhaseOrbitWithCurve9
+sheetProductToCurveProduct (phase , sheet) =
+  phase , sheet9ToCurve sheet
+
+curveProductRoundTrip :
+  (state : PhaseOrbitWithCurve9) →
+  sheetProductToCurveProduct (curveProductToSheetProduct state)
+  ≡ state
+curveProductRoundTrip (phase , point)
+  rewrite curveAfterSheet point = refl
+
+sheetProductRoundTrip :
+  (state : PhaseOrbitWithSheet9) →
+  curveProductToSheetProduct (sheetProductToCurveProduct state)
+  ≡ state
+sheetProductRoundTrip (phase , sheet)
+  rewrite sheetAfterCurve sheet = refl
+
+curveProductFrobenius : PhaseOrbitWithCurve9 → PhaseOrbitWithCurve9
+curveProductFrobenius (phase , point) =
+  phase , Curve.frobeniusRational point
+
+sheetProductReflection : PhaseOrbitWithSheet9 → PhaseOrbitWithSheet9
+sheetProductReflection (phase , sheet) =
+  phase , sheetFrobenius sheet
+
+curveProductFrobeniusIntertwines :
+  (state : PhaseOrbitWithCurve9) →
+  curveProductToSheetProduct (curveProductFrobenius state)
+  ≡ sheetProductReflection (curveProductToSheetProduct state)
+curveProductFrobeniusIntertwines (phase , point)
+  rewrite curveFrobeniusToSheetReflection point = refl
+
+sheetProductReflectionIntertwines :
+  (state : PhaseOrbitWithSheet9) →
+  sheetProductToCurveProduct (sheetProductReflection state)
+  ≡ curveProductFrobenius (sheetProductToCurveProduct state)
+sheetProductReflectionIntertwines (phase , sheet)
+  rewrite sheetReflectionToCurveFrobenius sheet = refl
+
 record F4CurveSheet9FrobeniusBoundary : Set where
   constructor f4-curve-sheet9-frobenius-boundary
   field
@@ -153,6 +215,8 @@ record F4CurveSheet9FrobeniusBoundary : Set where
     actualFrobeniusIntertwinesSheetReflection : Bool
     inverseIntertwiningOwned : Bool
     threeFixedPointAxisOwned : Bool
+    phaseOrbit15ProductBidiOwned : Bool
+    productFrobeniusIntertwiningOwned : Bool
     arithmeticFrobeniusNotWholeSheetInversion : Bool
     ellipticGroupLawIntertwiningClaimed : Bool
     sourceNativeInertiaActionIdentified : Bool
@@ -162,4 +226,4 @@ canonicalF4CurveSheet9FrobeniusBoundary :
   F4CurveSheet9FrobeniusBoundary
 canonicalF4CurveSheet9FrobeniusBoundary =
   f4-curve-sheet9-frobenius-boundary
-    true true true true true true false false false
+    true true true true true true true true false false false
