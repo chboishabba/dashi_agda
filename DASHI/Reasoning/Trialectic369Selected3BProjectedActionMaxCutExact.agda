@@ -31,11 +31,12 @@ open import DASHI.Core.Prelude
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; cong; sym; trans)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
+import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact as Comparison
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
@@ -144,16 +145,16 @@ canonicalActionIntertwiningFromProjectedAction :
 canonicalActionIntertwiningFromProjectedAction core retraction projected =
   record
     { intertwines = λ normalizer state →
-        FullGrade.transportForwardComparison
+        Comparison.transportForwardComparison
           (Core.constituentCarrierIsSelectedState core)
           (WeightTwo.constituentAct
             (Core.weightTwoLinearBridge core)
             (Core.normalizerToMonster core normalizer)
             state)
-          (DASHI.Moonshine.Monster3BCentralCharacterInertiaExact.act
+          (Inertia.act
             (Single.normalizerAction (Core.linearProducer core))
             normalizer
-            (FullGrade.transportForward
+            (Comparison.transportForward
               (Core.constituentCarrierIsSelectedState core)
               state))
           (constituentActionEqualsSelected
