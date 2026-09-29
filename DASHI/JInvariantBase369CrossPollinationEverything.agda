@@ -520,3 +520,9 @@ import DASHI.Moonshine.OggSSPP2F4CurveKleinActionGroupoidExact
 import DASHI.Moonshine.OggSSPEllipticNineWeilHeisenbergFiniteActionExact
 
 import DASHI.Moonshine.OggSSPPhaseQuotient9F3VectorGroupBridgeExact
+
+import DASHI.Moonshine.OggSSPP2F4RecenteredTriXorS3Exact
+
+import DASHI.Moonshine.OggSSPP2F4EllipticS3NineSheetBidiExact
+
+import DASHI.Moonshine.OggSSPP2F4FiniteChordTangentGroupLawExact
