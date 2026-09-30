@@ -29,6 +29,7 @@ jobs:
           python-version: "3.12"
       - run: |
           python3 -m unittest discover -s scripts -p "test_grqft_selected_finite_stress_exact_audit.py" -v
+          python3 -m unittest discover -s scripts -p "test_grqft_su2_literal_wilson_exact.py" -v
           python3 -m unittest discover -s scripts -p "test_grqft_selected_wilson_normalization_audit.py" -v
   source-kernel:
     runs-on: ubuntu-latest
