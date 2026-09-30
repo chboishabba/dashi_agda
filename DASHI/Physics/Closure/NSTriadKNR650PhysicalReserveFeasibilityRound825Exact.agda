@@ -197,7 +197,8 @@ module PhysicalReserveFeasibility
             (cong₂ _+_ inner neg)
             (solve (v ∷ h ∷ l ∷ [])))))
 
-  -- Necessary/sufficient analytic shape. Only R823 can pay the terminal;
+  -- One direction of the exact feasible-payment equivalence. R823 already
+  -- owns the terminal compiler;
   -- this theorem does not produce either side of the required inequality.
   gradedReservePaysComplete :
     (cutoff : Nat) →
@@ -228,6 +229,54 @@ module PhysicalReserveFeasibility
     subst (0ℚ ≤_)
       (sym (integratedCompleteGraded cutoff S terminal))
       normalized
+
+  -- Converse: the graded inequality is not a gratuitously stronger
+  -- sufficient condition. It is equivalent to the very same R823 payment.
+  completePaymentRequiresGradedReserve :
+    (cutoff : Nat) →
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    (terminal : Time) →
+    0ℚ ≤ Live.integratedCompleteRate cutoff S terminal →
+    lowIntegral cutoff S terminal
+      ≤ quadraticIntegral cutoff S terminal
+          + highIntegral cutoff S terminal
+  completePaymentRequiresGradedReserve cutoff S terminal payment =
+    let
+      v = quadraticIntegral cutoff S terminal
+      h = highIntegral cutoff S terminal
+      l = lowIntegral cutoff S terminal
+
+      gradedNonnegative : 0ℚ ≤ v + h - l
+      gradedNonnegative =
+        subst (0ℚ ≤_)
+          (integratedCompleteGraded cutoff S terminal)
+          payment
+
+      shifted =
+        ℚP.+-mono-≤ gradedNonnegative ℚP.≤-refl
+    in
+    subst
+      (λ right → l ≤ right)
+      (solve (v ∷ h ∷ l ∷ []))
+      (subst
+        (λ left → left ≤ (v + h - l) + l)
+        (solve (l ∷ []))
+        shifted)
+
+  -- A concrete strict graded counterexample *on the live physical packet*
+  -- would rule out the claimed nonnegative complete integrated rate. This is
+  -- a falsification implication, not a produced counterexample.
+  physicalGradedFailureRefutesCompletePayment :
+    (cutoff : Nat) →
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    (terminal : Time) →
+    quadraticIntegral cutoff S terminal
+      + highIntegral cutoff S terminal
+      < lowIntegral cutoff S terminal →
+    ¬ (0ℚ ≤ Live.integratedCompleteRate cutoff S terminal)
+  physicalGradedFailureRefutesCompletePayment cutoff S terminal strict payment =
+    ℚP.<⇒≱ strict
+      (completePaymentRequiresGradedReserve cutoff S terminal payment)
 
   -- Rational integration here is an input of the SAME actual R408
   -- integration authority.  Once the caller supplies an evaluated physical
