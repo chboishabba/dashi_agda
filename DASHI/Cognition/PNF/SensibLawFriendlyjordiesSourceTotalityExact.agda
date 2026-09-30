@@ -54,6 +54,8 @@ data SourceDisposition : Set where
     Trace.SemanticTracePath → WorldDemand → SourceDisposition
   unresolvedAcquisition :
     AcquisitionDemand → SourceDisposition
+  explicitlyAbsentByComparisonKind :
+    String → SourceDisposition
 
 ------------------------------------------------------------------------
 -- Small constructor for the checked-in SensibLaw fixture statements.
@@ -242,36 +244,70 @@ woolworthsWorldDemand =
     "the fixture establishes framing; underlying price magnitude and scope need external evidence"
 
 ------------------------------------------------------------------------
--- ETS/Garnaut: the pinned static authority fixture does not contain the Garnaut
--- text used by the Agda candidate root.  The archive-refresh producer can emit
--- that text only when the source thread contains the corresponding theme.
+-- ETS/Garnaut authority wrapper recovered from the archived thread and pinned
+-- in SensibLaw main at Existing.sensibLawRevision.
 ------------------------------------------------------------------------
 
-garnautRefreshDemand : AcquisitionDemand
-garnautRefreshDemand =
-  acquisition-demand
-    "ets_delay_authority"
+garnautSourceTrace : Trace.SemanticTracePath
+garnautSourceTrace =
+  mkTrace
+    "statement:friendlyjordies:garnaut-wrapper"
+    "demo/narrative/friendlyjordies_authority_wrappers.json"
+    "jordies_authority_case:u3"
+    "FriendlyJordies argued that Ross Garnaut reported that an imperfect ETS was better than delay."
+    "pnf:friendlyjordies:garnaut-wrapper"
+    "observation:friendlyjordies:garnaut-wrapper"
+    "event:public-discourse:garnaut-ets-authority"
+    "claim:friendlyjordies:garnaut-wrapper"
+    "cmp:garnaut:authority-wrapper"
+
+garnautCounterTrace : Trace.SemanticTracePath
+garnautCounterTrace =
+  mkTrace
+    "statement:counter:garnaut-wrapper"
+    "demo/narrative/friendlyjordies_authority_wrappers.json"
+    "counter_authority_analysis:u3"
+    "The analysis reported that Ross Garnaut reported that an imperfect ETS was better than delay."
+    "pnf:counter:garnaut-wrapper"
+    "observation:counter:garnaut-wrapper"
+    "event:public-discourse:garnaut-ets-authority"
+    "claim:counter-analysis:garnaut-wrapper"
+    "cmp:garnaut:authority-wrapper"
+
+garnautWorldDemand : WorldDemand
+garnautWorldDemand =
+  world-demand
     "prop:garnaut-imperfect-ets-delay"
-    "archive-backed friendlyjordies_authority_wrappers refresh containing the Garnaut nested-attribution unit"
-    "SensibLaw/src/reporting/narrative_fixture_refresh.py::_build_authority_wrappers_payload"
-    "pinned static authority fixture currently contains Lepore/Court examples, so a Garnaut M12 trace would be orphaned"
-    false refl
+    Horizon.externalWorldHorizon
+    "demand:garnaut:primary-source-context"
+    "the recovered archive pays the nested attribution; Garnaut's original statement/context still requires an external primary or scholarly source"
 
 ------------------------------------------------------------------------
--- Fallacies/framing: this family is generated conditionally by the archive
--- refresh producer but has no checked-in typed root/claim/comparison item at
--- the pinned fixture revision.
+-- Fallacies/framing recovered as a source-local counter-analysis claim.
+-- The comparison is intentionally right-only: absence of a left-side claim is
+-- represented explicitly and is not an orphan.
 ------------------------------------------------------------------------
 
-fallaciesRefreshDemand : AcquisitionDemand
-fallaciesRefreshDemand =
-  acquisition-demand
-    "fallacies"
+fallaciesCounterTrace : Trace.SemanticTracePath
+fallaciesCounterTrace =
+  mkTrace
+    "statement:counter:fallacies"
+    "demo/narrative/friendlyjordies_thread_extract.json"
+    "thread_balanced_analysis:u6"
+    "The analysis argued that Jordies' case against the Greens contains several logical fallacies."
+    "pnf:counter:fallacies"
+    "observation:counter:fallacies"
+    "event:public-discourse:fallacies-framing"
+    "claim:counter-analysis:fallacies"
+    "cmp:fallacies:right-only"
+
+fallaciesWorldDemand : WorldDemand
+fallaciesWorldDemand =
+  world-demand
     "prop:friendlyjordies:fallacies-framing"
-    "archive-backed thread extract with fallacies theme plus typed root/claim/comparison item"
-    "SensibLaw/src/reporting/narrative_fixture_refresh.py::_build_thread_extract_payload"
-    "the generator may emit a fallacies line, but the pinned static fixture and Agda comparison surface do not yet bind it"
-    false refl
+    Horizon.externalWorldHorizon
+    "demand:fallacies:argument-reconstruction"
+    "the archive pays that the counter-analysis made the classification; evaluating the classification requires the underlying argument and explicit fallacy criteria"
 
 ------------------------------------------------------------------------
 -- Comparison coverage.  SourceDisposition has no orphan constructor.
@@ -330,31 +366,25 @@ garnautCoverage =
   comparison-coverage
     "cmp:garnaut:authority-wrapper"
     Weld.etsDelayAuthority
-    (unresolvedAcquisition garnautRefreshDemand)
-    (unresolvedAcquisition garnautRefreshDemand)
+    (tracedWithWorldDemand garnautSourceTrace garnautWorldDemand)
+    (tracedWithWorldDemand garnautCounterTrace garnautWorldDemand)
     false refl
 
-record FamilyResidualCoverage : Set where
-  constructor family-residual-coverage
-  field
-    family : Weld.FriendlyjordiesArgumentFamily
-    disposition : SourceDisposition
-    noComparisonItemSilentlyInvented : Bool
-    noComparisonItemSilentlyInventedIsTrue :
-      noComparisonItemSilentlyInvented ≡ true
-
-fallaciesCoverage : FamilyResidualCoverage
+fallaciesCoverage : ComparisonCoverage
 fallaciesCoverage =
-  family-residual-coverage
+  comparison-coverage
+    "cmp:fallacies:right-only"
     Weld.fallaciesAndFraming
-    (unresolvedAcquisition fallaciesRefreshDemand)
-    true refl
+    (explicitlyAbsentByComparisonKind
+      "right-only proposition: no FriendlyJordies-source fallacies claim is asserted by the checked-in fixture")
+    (tracedWithWorldDemand fallaciesCounterTrace fallaciesWorldDemand)
+    false refl
 
 record SourceTotalComparison : Set where
   constructor source-total-comparison
   field
     comparisonCoverages : List ComparisonCoverage
-    residualFamilyCoverages : List FamilyResidualCoverage
+    residualFamilyCoverages : List String
     everyComparisonHasDisposition : Bool
     everyComparisonHasDispositionIsTrue :
       everyComparisonHasDisposition ≡ true
@@ -377,8 +407,9 @@ canonicalFriendlyjordiesSourceTotality =
     ∷ governmentCoverage
     ∷ woolworthsCoverage
     ∷ garnautCoverage
+    ∷ fallaciesCoverage
     ∷ [])
-    (fallaciesCoverage ∷ [])
+    []
     true refl
     true refl
     false refl
@@ -433,6 +464,7 @@ data FriendlyjordiesComparisonKey : Set where
   governmentCapacityKey : FriendlyjordiesComparisonKey
   woolworthsQualificationKey : FriendlyjordiesComparisonKey
   garnautAuthorityKey : FriendlyjordiesComparisonKey
+  fallaciesRightOnlyKey : FriendlyjordiesComparisonKey
 
 coverageForComparison : FriendlyjordiesComparisonKey → ComparisonCoverage
 coverageForComparison cprsSharedKey = cprsCoverage
@@ -440,6 +472,7 @@ coverageForComparison instabilityCompetingKey = instabilityCoverage
 coverageForComparison governmentCapacityKey = governmentCoverage
 coverageForComparison woolworthsQualificationKey = woolworthsCoverage
 coverageForComparison garnautAuthorityKey = garnautCoverage
+coverageForComparison fallaciesRightOnlyKey = fallaciesCoverage
 
 comparisonDispositionLeft :
   (key : FriendlyjordiesComparisonKey) →
@@ -462,6 +495,7 @@ comparisonCannotBeOrphan instabilityCompetingKey = refl
 comparisonCannotBeOrphan governmentCapacityKey = refl
 comparisonCannotBeOrphan woolworthsQualificationKey = refl
 comparisonCannotBeOrphan garnautAuthorityKey = refl
+comparisonCannotBeOrphan fallaciesRightOnlyKey = refl
 
 familyDisposition :
   Weld.FriendlyjordiesArgumentFamily →
@@ -473,87 +507,40 @@ familyDisposition Weld.woolworthsPriceEffects =
 familyDisposition Weld.governmentCapacity =
   tracedWithWorldDemand governmentSourceTrace governmentWorldDemand
 familyDisposition Weld.etsDelayAuthority =
-  unresolvedAcquisition garnautRefreshDemand
+  tracedWithWorldDemand garnautSourceTrace garnautWorldDemand
 familyDisposition Weld.fallaciesAndFraming =
-  unresolvedAcquisition fallaciesRefreshDemand
+  tracedWithWorldDemand fallaciesCounterTrace fallaciesWorldDemand
 
 ------------------------------------------------------------------------
--- Producer-backed acquisition contracts.
---
--- These contracts prove only that the named runtime producer owns a route to
--- generate the missing candidate source unit when its archive precondition is
--- met.  They do not assert that the archive currently contains the theme, that
--- a generated file is pinned, or that its embedded proposition is true.
+-- Archive-recovery receipt.  These source units are now pinned in SensibLaw
+-- main; pinning pays only the source-local transcript claim.
 ------------------------------------------------------------------------
 
-record ProducerAcquisitionContract : Set where
-  constructor producer-acquisition-contract
+record RecoveredFixtureBoundary : Set where
+  constructor recovered-fixture-boundary
   field
-    family : Weld.FriendlyjordiesArgumentFamily
-    producerRef : String
-    outputFixtureRef : String
-    archivePreconditionRef : String
-    emittedStatementRef : String
-    emittedLiteralCandidate : String
-    requiresFreshSourceRevision : Bool
-    requiresFreshSourceRevisionIsTrue :
-      requiresFreshSourceRevision ≡ true
-    generatedCandidateIsPinnedEvidence : Bool
-    generatedCandidateIsPinnedEvidenceIsFalse :
-      generatedCandidateIsPinnedEvidence ≡ false
-    producerCreatesClaimTruth : Bool
-    producerCreatesClaimTruthIsFalse :
-      producerCreatesClaimTruth ≡ false
+    sensibLawRevisionRef : String
+    garnautUnitPinned : Bool
+    garnautUnitPinnedIsTrue : garnautUnitPinned ≡ true
+    fallaciesUnitPinned : Bool
+    fallaciesUnitPinnedIsTrue : fallaciesUnitPinned ≡ true
+    nestedAttributionPreserved : Bool
+    nestedAttributionPreservedIsTrue :
+      nestedAttributionPreserved ≡ true
+    rightOnlyFallaciesPreserved : Bool
+    rightOnlyFallaciesPreservedIsTrue :
+      rightOnlyFallaciesPreserved ≡ true
+    pinningCreatesWorldTruth : Bool
+    pinningCreatesWorldTruthIsFalse :
+      pinningCreatesWorldTruth ≡ false
 
-open ProducerAcquisitionContract public
-
-garnautProducerContract : ProducerAcquisitionContract
-garnautProducerContract =
-  producer-acquisition-contract
-    Weld.etsDelayAuthority
-    "SensibLaw/src/reporting/narrative_fixture_refresh.py::_build_authority_wrappers_payload"
-    ".cache_local/narrative/friendlyjordies_authority_wrappers.archive.json"
-    "theme_snippets contains imperfect_ets"
-    "jordies_authority_case:u1"
-    "FriendlyJordies argued that Ross Garnaut reported that an imperfect ETS was better than delay."
+canonicalRecoveredFixtureBoundary : RecoveredFixtureBoundary
+canonicalRecoveredFixtureBoundary =
+  recovered-fixture-boundary
+    Existing.sensibLawRevision
     true refl
-    false refl
-    false refl
-
-fallaciesProducerContract : ProducerAcquisitionContract
-fallaciesProducerContract =
-  producer-acquisition-contract
-    Weld.fallaciesAndFraming
-    "SensibLaw/src/reporting/narrative_fixture_refresh.py::_build_thread_extract_payload"
-    ".cache_local/narrative/friendlyjordies_thread_extract.archive.json"
-    "selected archive thread contains a fallacies/framing cue"
-    "generated fallacies-family source unit"
-    "fallacies/framing candidate extracted from the selected archive thread"
     true refl
-    false refl
-    false refl
-
-record ResidualAcquisitionClosure : Set where
-  constructor residual-acquisition-closure
-  field
-    garnautDemand : AcquisitionDemand
-    garnautProducer : ProducerAcquisitionContract
-    fallaciesDemand : AcquisitionDemand
-    fallaciesProducer : ProducerAcquisitionContract
-    allResidualsHaveProducerRoute : Bool
-    allResidualsHaveProducerRouteIsTrue :
-      allResidualsHaveProducerRoute ≡ true
-    producerRouteCountsAsWorldEvidence : Bool
-    producerRouteCountsAsWorldEvidenceIsFalse :
-      producerRouteCountsAsWorldEvidence ≡ false
-
-canonicalResidualAcquisitionClosure : ResidualAcquisitionClosure
-canonicalResidualAcquisitionClosure =
-  residual-acquisition-closure
-    garnautRefreshDemand
-    garnautProducerContract
-    fallaciesRefreshDemand
-    fallaciesProducerContract
+    true refl
     true refl
     false refl
 
@@ -597,6 +584,25 @@ woolworthsCounterForward = Trace.canonicalForwardTrace woolworthsCounterTrace
 woolworthsCounterReverse : Trace.ReverseTraceReceipt woolworthsCounterTrace
 woolworthsCounterReverse = Trace.canonicalReverseTrace woolworthsCounterTrace
 
+
+garnautSourceForward : Trace.ForwardTraceReceipt garnautSourceTrace
+garnautSourceForward = Trace.canonicalForwardTrace garnautSourceTrace
+
+garnautSourceReverse : Trace.ReverseTraceReceipt garnautSourceTrace
+garnautSourceReverse = Trace.canonicalReverseTrace garnautSourceTrace
+
+garnautCounterForward : Trace.ForwardTraceReceipt garnautCounterTrace
+garnautCounterForward = Trace.canonicalForwardTrace garnautCounterTrace
+
+garnautCounterReverse : Trace.ReverseTraceReceipt garnautCounterTrace
+garnautCounterReverse = Trace.canonicalReverseTrace garnautCounterTrace
+
+fallaciesCounterForward : Trace.ForwardTraceReceipt fallaciesCounterTrace
+fallaciesCounterForward = Trace.canonicalForwardTrace fallaciesCounterTrace
+
+fallaciesCounterReverse : Trace.ReverseTraceReceipt fallaciesCounterTrace
+fallaciesCounterReverse = Trace.canonicalReverseTrace fallaciesCounterTrace
+
 record ConstructiveSourceTotalityBoundary : Set where
   constructor constructive-source-totality-boundary
   field
@@ -609,12 +615,12 @@ record ConstructiveSourceTotalityBoundary : Set where
     allPaidSidesBidirectionallyTraceable : Bool
     allPaidSidesBidirectionallyTraceableIsTrue :
       allPaidSidesBidirectionallyTraceable ≡ true
-    residualFamiliesHaveProducerContracts : Bool
-    residualFamiliesHaveProducerContractsIsTrue :
-      residualFamiliesHaveProducerContracts ≡ true
-    producerContractPromotesTruth : Bool
-    producerContractPromotesTruthIsFalse :
-      producerContractPromotesTruth ≡ false
+    recoveredFixtureFamiliesPinned : Bool
+    recoveredFixtureFamiliesPinnedIsTrue :
+      recoveredFixtureFamiliesPinned ≡ true
+    fixturePinningPromotesTruth : Bool
+    fixturePinningPromotesTruthIsFalse :
+      fixturePinningPromotesTruth ≡ false
 
 canonicalConstructiveSourceTotalityBoundary :
   ConstructiveSourceTotalityBoundary
