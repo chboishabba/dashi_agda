@@ -93,5 +93,33 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
             module.audit(f)
 
 
+    def test_same_frame_geometry_residual_detects_wrong_source(self):
+        f = fixture()
+        f["geometry_diagnostic"] = {
+            "metric_frame": f["provenance"]["metric_frame"],
+            "geometry_revision": "finite-test-only",
+            "source_to_geometry_normalization": "1",
+            "einstein_tensor": {slot: ("1" if slot == "00" else "0")
+                                for slot in module.SLOTS}
+        }
+        self.assertTrue(module.audit(f)["geometry_diagnostic"]["all_ten_residuals_zero"])
+        f["geometry_diagnostic"]["einstein_tensor"]["11"] = "1"
+        observed = module.audit(f)["geometry_diagnostic"]
+        self.assertFalse(observed["all_ten_residuals_zero"])
+        self.assertEqual(observed["ten_slot_residual"]["11"], "1")
+        self.assertFalse(observed["physical_same_object_identification_proved"])
+
+    def test_different_geometry_frame_is_rejected(self):
+        f = fixture()
+        f["geometry_diagnostic"] = {
+            "metric_frame": "other-signature",
+            "geometry_revision": "toy-test",
+            "source_to_geometry_normalization": "1",
+            "einstein_tensor": {slot: "0" for slot in module.SLOTS}
+        }
+        with self.assertRaisesRegex(ValueError, "different metric frame"):
+            module.audit(f)
+
+
 if __name__ == "__main__":
     unittest.main()
