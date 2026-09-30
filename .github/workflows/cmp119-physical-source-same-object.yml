@@ -8,6 +8,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144CompleteActionPartitionResponseExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -44,7 +45,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144CompleteActionPartitionResponseExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
