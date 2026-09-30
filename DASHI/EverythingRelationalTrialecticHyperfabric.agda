@@ -88,3 +88,6 @@ import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact
 import DASHI.Cognition.PNF.DecisionActionFibreMultiplicityExact
 import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Reasoning.TraumaAttractorBranchRegulationExact
+
+-- Literal CP¹ atlas transport is tested against actual chart-consumer descent.
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAtlasConsumerDescentNoGoExact
