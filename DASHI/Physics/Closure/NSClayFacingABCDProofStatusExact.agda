@@ -305,3 +305,54 @@ bStatusNowAnalyticResearch = true
 bStatusNowAnalyticResearchIsTrue :
   bStatusNowAnalyticResearch ≡ true
 bStatusNowAnalyticResearchIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- R826 / EXACT SPARSE REAL-FOURIER SIGN DIAGNOSTIC (NOT CLAY PROMOTION)
+--
+-- scripts/check_ns_r823_exact_sparse_reserve_witness.py supplies an
+-- independently computed algebraic-radical, divergence-free snapshot on
+-- the radius-one Fourier cube:
+--
+--   R692 commutator work    = -142 - 59*sqrt(2)/2
+--   R744 critical production = 0
+--   R744 critical dissipation = 108
+--   nu = delta = 1
+--   R815 instantaneous rate = -9576 - 2124*sqrt(2) < 0.
+--
+-- The companion Lean ExactSparseReserveWitness file proves the REAL
+-- arithmetic sign, not the finite-Fourier evaluation or R408 realization.
+-- The current Agda physical helical carrier is over Q, whereas the genuine
+-- normalized helical projector at (1,1,0) uses sqrt(2); consequently this
+-- diagnostic CANNOT be silently promoted into an Agda live packet.
+--
+-- Outstanding for an unconditional counterexample to the auxiliary B
+-- payment: an algebraic/real-field same-object Fourier lift, an actual
+-- R408 finite-ODE local solution through the initial datum, and a
+-- continuity/short-time integration theorem.
+--
+-- A valid counterexample would refute only this selected B-RESERVE
+-- auxiliary inequality; it would NOT refute NS regularity or Clay A/B/C/D.
+-- C/D source-attribution and the independent A route remain unchanged.
+------------------------------------------------------------------------
+
+bExactRealFourierSparseNegativeRateCandidate : Bool
+bExactRealFourierSparseNegativeRateCandidate = true
+
+bExactRealFourierSparseRateMatchesAgdaRationalHelicalPacket : Bool
+bExactRealFourierSparseRateMatchesAgdaRationalHelicalPacket = false
+
+bExactRealFourierSparseIntegratedR408CounterexampleCertified : Bool
+bExactRealFourierSparseIntegratedR408CounterexampleCertified = false
+
+bR823UniversalReserveInequalityProved : Bool
+bR823UniversalReserveInequalityProved =
+  Reserve823.round823IntegratedSignedEstimateClosed
+
+bExactRealFourierSparseNegativeRateCandidateIsTrue :
+  bExactRealFourierSparseNegativeRateCandidate ≡ true
+bExactRealFourierSparseNegativeRateCandidateIsTrue = refl
+
+bExactRealFourierSparseIntegratedR408CounterexampleCertifiedIsFalse :
+  bExactRealFourierSparseIntegratedR408CounterexampleCertified ≡ false
+bExactRealFourierSparseIntegratedR408CounterexampleCertifiedIsFalse = refl
