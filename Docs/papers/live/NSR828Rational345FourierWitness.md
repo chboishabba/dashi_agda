@@ -104,10 +104,10 @@ take the 728-mode conservative bounds
 
 These yield an explicit polynomial-ODE derivative bound
 \(K=5032512\) and a Lipschitz constant for the displayed *complete
-signed rate* \(L=391309593927587785562112\). Set
+signed rate* \(L=391309593930357307785216\). Set
 
 \[
-T=\frac{226189}{3938540454311425323789510770688}>0.
+T=\frac{226189}{3938540454339300631433585885184}>0.
 \]
 
 An exact integer/rational bootstrap then gives \(\|u(t)\|_\infty<12\)
