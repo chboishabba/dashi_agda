@@ -12,6 +12,7 @@ import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact as IRGCSources
 import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact as IranGenealogy
 import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as IRGCPacket
+import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDena
 
 ------------------------------------------------------------------------
 -- ORIGINAL-THREAD SOURCE-ACQUISITION PARETO
@@ -73,8 +74,8 @@ irisDenaRecordCell : Pareto.RequirementCandidate OriginalThreadRequirement
 irisDenaRecordCell = Pareto.requirement-candidate
   irisDenaOperationalRecord
   true true true true
-  4 7
-  "Acquire an authoritative operational/legal record capable of testing crew-role, command and participation claims beyond public government statements and news reporting."
+  5 7
+  "Command-level primary statements now narrow the fibre: three Australians were aboard, they were not ordered to bunks, and Australian authorities state they did not perform offensive action. Remaining payment is the withheld same-object duty/watch/protocol record needed for independent operational reconstruction."
 
 chinaLeadershipJoinCell : Pareto.RequirementCandidate OriginalThreadRequirement
 chinaLeadershipJoinCell = Pareto.requirement-candidate
@@ -140,6 +141,10 @@ iranGenealogySnowball =
 
 currentIRGCPacket : IRGCPacket.IRGCDualChronologyPacket
 currentIRGCPacket = IRGCPacket.canonicalIRGCDualChronologyPacket
+
+
+irisDenaCurrentResidual : IRISDena.OperationalResidual
+irisDenaCurrentResidual = IRISDena.exactDutyResidual
 
 record CurrentOriginalThreadParetoRoute : Set where
   constructor current-original-thread-pareto-route
