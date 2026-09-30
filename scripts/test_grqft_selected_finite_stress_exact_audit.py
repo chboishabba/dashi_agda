@@ -129,5 +129,44 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
             module.audit(f)
 
 
+    def test_weak_coupling_reference_quantifies_missing_source(self):
+        f = fixture(insertion00="-1")
+        f["weak_coupling_reference"] = {
+            "selected_source_identifier": f["provenance"]["source_identifier"],
+            "metric_frame": f["provenance"]["metric_frame"],
+            "cutoff": f["provenance"]["cutoff"],
+            "reference_revision": "test-only",
+            "normalization_origin": "fixed-toy-scale",
+            "factor_fitted_to_this_source": False,
+            "kappa": "1", "margin": "0",
+            "electric_square": "1", "magnetic_square": "0",
+            "connected_to_physical_active_factor": "1"
+        }
+        d = module.audit(f)["weak_coupling_diagnostic"]
+        self.assertEqual(d["weak_coupling_baseline"], "4")
+        self.assertEqual(d["candidate_active"], "-1")
+        self.assertEqual(d["required_additional_active_source"], "-5")
+        self.assertTrue(
+            d["negative_candidate_requires_extra_more_negative_than_baseline"])
+        self.assertFalse(d["weak_coupling_ym_only_compatible"])
+        self.assertFalse(d["physical_same_tensor_identification_proved"])
+
+    def test_weak_coupling_reference_requires_nonnegative_EB_squares(self):
+        f = fixture()
+        f["weak_coupling_reference"] = {
+            "selected_source_identifier": f["provenance"]["source_identifier"],
+            "metric_frame": f["provenance"]["metric_frame"],
+            "cutoff": f["provenance"]["cutoff"],
+            "reference_revision": "test-only",
+            "normalization_origin": "fixed-toy-scale",
+            "factor_fitted_to_this_source": False,
+            "kappa": "1", "margin": "0",
+            "electric_square": "-1", "magnetic_square": "0",
+            "connected_to_physical_active_factor": "1"
+        }
+        with self.assertRaisesRegex(ValueError, "nonnegative coefficient"):
+            module.audit(f)
+
+
 if __name__ == "__main__":
     unittest.main()
