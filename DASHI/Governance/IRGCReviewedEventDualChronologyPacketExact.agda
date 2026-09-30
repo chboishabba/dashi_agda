@@ -7,6 +7,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact as Sources
 import DASHI.Governance.IRGCOpenLetter2026StrategicCommunicationExact as Letter
 import DASHI.Governance.IRGCOpenLetter2026SharedInterestGraphExact as Graph
@@ -186,7 +187,7 @@ sourcePublicationDoesNotBackdateWorldEvent ()
 record IRGCDualChronologyPacket : Set where
   constructor irgc-dual-chronology-packet
   field
-    sourceAtlas : DASHI.Core.AttributedSourceCore.AttributedSourceAtlas
+    sourceAtlas : Source.AttributedSourceAtlas
     sourceArgumentTopology : Graph.SourceArgumentTopology
     openingAgencyCitation : Letter.CrossTraditionCitation
     closingEschatologyCitation : Letter.CrossTraditionCitation
