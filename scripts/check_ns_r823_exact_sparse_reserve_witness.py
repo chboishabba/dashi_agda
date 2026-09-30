@@ -89,8 +89,8 @@ def exact_snapshot():
             comm_work += sum(conjugate(mixed[j])*comm[j] for j in range(3))
             product_work += sum(conjugate(mixed[j])*product_rule[j] for j in range(3))
 
-    comm_work = simplify(expand(comm_work).as_real_imag()[0])
-    product_work = simplify(expand(product_work).as_real_imag()[0])
+    # Work.coherentWork = 2 * R179.realHermitianCross in the Agda owner.\n    comm_work = 2 * simplify(expand(comm_work).as_real_imag()[0])
+    product_work = 2 * simplify(expand(product_work).as_real_imag()[0])
     production = simplify(2 * sum(
         dyadic_weight(k) *
         sum(conjugate(u[k][j])*force(k)[j] for j in range(3)).as_real_imag()[0]
@@ -103,11 +103,11 @@ def exact_snapshot():
     ))
     combined = 12 * comm_work
     signed_rate = simplify(6 * (combined - production + dissipation))
-    assert simplify(comm_work - (-142 - Rational(59, 2)*sqrt(2))) == 0
+    assert simplify(comm_work - (-284 - 59*sqrt(2))) == 0
     assert simplify(product_work - comm_work) == 0
     assert production == 0
     assert dissipation == 108
-    assert signed_rate == -9576 - 2124*sqrt(2)
+    assert signed_rate == -19800 - 4248*sqrt(2)
     assert signed_rate < 0
     return {
         "schema": "ns_r823_exact_sparse_snapshot.v1",
