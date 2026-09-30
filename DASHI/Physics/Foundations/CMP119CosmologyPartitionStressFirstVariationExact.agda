@@ -26,13 +26,16 @@ module DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonDiagonalMetricVariationExact as Diag
+import DASHI.Physics.Foundations.CMP119GibbsFiniteMeasureNZDNDZReductionExact as Gibbs
+import DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureNZDNDZExact as NZ
+import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Integral
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 record CompleteFiniteMetricVariation (Configuration : Set) : Set₁ where
@@ -162,3 +165,50 @@ weightedLogDerivativeWeylTrace d x =
 -- Separate from Gibbs C_h = (D_h N)Z - N (D_h Z), which yields
 -- D_h(N/Z)=C_h/Z² and is NOT automatically the gravitational one-point
 -- source. A stress two-point response needs a second actual derivative.
+
+------------------------------------------------------------------------
+-- REUSE THE REAL EXISTING GIBBS DENOMINATOR, NOT ANOTHER DERIVATIVE ABI.
+-- For a metric-independent product-Haar reference the first partition
+-- response is exactly the existing NZ/DZ Gibbs metric derivative, with
+-- the selected COMPLETE action derivative in place of a free callback.
+------------------------------------------------------------------------
+
+selectedCompleteActionAsGibbsData :
+  ∀ {Configuration}
+    {measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ} →
+  CompleteFiniteMetricVariation Configuration →
+  Gibbs.GibbsMetricInsertionData
+    Configuration K.SymmetricTensorComponent4 measure
+selectedCompleteActionAsGibbsData d = record
+  { Gibbs.GibbsMetricInsertionData.insertionObservable = λ _ → 1ℚ
+  ; Gibbs.GibbsMetricInsertionData.actionVariation =
+      completeActionDerivative d
+  ; Gibbs.GibbsMetricInsertionData.insertionVariation =
+      λ _ _ → 0ℚ
+  }
+
+fixedHaarPartitionDerivativeIsExistingGibbsDZ :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : CompleteFiniteMetricVariation Configuration)
+    (laws : Integral.RationalFiniteMeasureIntegrationLaws measure) →
+  (∀ h x → referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  ∀ h →
+  partitionDerivative measure d h
+  ≡
+  NZ.denominatorDerivative
+    (Gibbs.asPhysicalMetricStressData
+      (selectedCompleteActionAsGibbsData {measure = measure} d))
+    h
+fixedHaarPartitionDerivativeIsExistingGibbsDZ
+    measure d laws referenceFixed h =
+  Integral.haarIntegralCongruent laws _ _
+    (λ x →
+      trans
+        (cong
+          (λ s → Physical.density measure x
+            * (s - completeActionDerivative d h x))
+          (referenceFixed h x))
+        (Ring.solve-∀
+          (Physical.density measure x)
+          (completeActionDerivative d h x)))
