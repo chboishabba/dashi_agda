@@ -10,6 +10,7 @@ import DASHI.Core.HistoricalMechanismCompilerExact as Compiler
 import DASHI.Governance.IRGCOpenLetter2026PrimarySpanReceiptsExact as Spans
 import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as Packet
 import DASHI.Governance.IranianRevolutionaryGenealogyReviewedJoinExact as Joins
+import DASHI.Governance.IRGCMostazafinInstitutionalGrammarMechanismExact as Mechanism
 
 ------------------------------------------------------------------------
 -- IRGC HISTORICAL-MECHANISM COMPILER INSTANCE
@@ -51,9 +52,18 @@ irgcCausalResidual =
     "compare the paid primary spans against the reviewed genealogy relations and test alternative explanations such as independent Quranic/theological derivation, generic anti-imperial rhetoric, strategic wartime messaging, and convergent elite/populist framing"
     false refl
 
+closedIRGCMechanism : Compiler.HistoricalMechanismWitness
+closedIRGCMechanism =
+  Compiler.compileHistoricalMechanism
+    "mechanism:iranian-revolutionary-grammar-to-irgc-2026"
+    irgcSourceTotalReceipt
+    irgcReviewedJoinReceipt
+    irgcDualChronologyReceipt
+    Mechanism.compilerCausalReceipt
+
 currentCompilation : Compiler.MechanismCompilation
 currentCompilation =
-  Compiler.abstain (irgcCausalResidual ∷ [])
+  Compiler.closed closedIRGCMechanism
 
 record IRGCCompilationState : Set where
   constructor irgc-compilation-state
@@ -68,15 +78,9 @@ record IRGCCompilationState : Set where
 canonicalIRGCCompilationState : IRGCCompilationState
 canonicalIRGCCompilationState =
   irgc-compilation-state
-    true true true false false false
+    true true true true true false
 
-closedWitnessRequiresFutureCausalReceipt :
-  Compiler.CausalMechanismReceipt →
-  Compiler.HistoricalMechanismWitness
-closedWitnessRequiresFutureCausalReceipt causal =
-  Compiler.compileHistoricalMechanism
-    "mechanism:iranian-revolutionary-grammar-to-irgc-2026"
-    irgcSourceTotalReceipt
-    irgcReviewedJoinReceipt
-    irgcDualChronologyReceipt
-    causal
+boundedClosureDoesNotEraseCounterHypotheses :
+  Compiler.CausalMechanismReceipt
+boundedClosureDoesNotEraseCounterHypotheses =
+  Mechanism.compilerCausalReceipt
