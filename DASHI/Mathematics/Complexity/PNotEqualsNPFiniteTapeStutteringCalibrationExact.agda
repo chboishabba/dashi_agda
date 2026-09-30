@@ -27,6 +27,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -149,6 +150,80 @@ tapeStepWork :
 tapeStepWork program cfg with counter cfg
 ... | halted = zero
 ... | active position = suc (fetchComparisons program position)
+
+------------------------------------------------------------------------
+-- UNIVERSAL INTERPRETER COST: the program is DATA.
+--
+-- One interpreted active step pays one execution unit plus the sequential
+-- code scan. Hence no program can hide an uncharged arbitrary semantic call.
+------------------------------------------------------------------------
+
+perStepInterpreterBudget :
+  List TapeInstruction → Nat
+perStepInterpreterBudget program =
+  suc (suc (listLength program))
+
+tapeStepWorkWithinProgramBudget :
+  (program : List TapeInstruction) →
+  (cfg : TapeConfiguration) →
+  tapeStepWork program cfg ≤ perStepInterpreterBudget program
+tapeStepWorkWithinProgramBudget program cfg with counter cfg
+... | halted = z≤n
+... | active position =
+  s≤s (fetchComparisonsWithinCodeLength program position)
+
+------------------------------------------------------------------------
+-- Total work of at most 'steps' universal-interpreter transitions.
+-- If execution halts early, the remaining requested steps cost zero.
+------------------------------------------------------------------------
+
+runInterpreterWork :
+  List TapeInstruction →
+  Nat →
+  TapeConfiguration →
+  Nat
+runInterpreterWork program zero cfg = zero
+runInterpreterWork program (suc steps) cfg with tapeStep program cfg
+... | nothing =
+  tapeStepWork program cfg
+... | just next =
+  tapeStepWork program cfg
+  + runInterpreterWork program steps next
+
+linearInterpreterBudget :
+  List TapeInstruction → Nat → Nat
+linearInterpreterBudget program zero = zero
+linearInterpreterBudget program (suc steps) =
+  perStepInterpreterBudget program
+  + linearInterpreterBudget program steps
+
+runInterpreterWorkLinearBound :
+  (program : List TapeInstruction) →
+  (steps : Nat) →
+  (cfg : TapeConfiguration) →
+  runInterpreterWork program steps cfg
+  ≤ linearInterpreterBudget program steps
+runInterpreterWorkLinearBound program zero cfg =
+  z≤n
+runInterpreterWorkLinearBound program (suc steps) cfg
+    with tapeStep program cfg
+... | nothing =
+  NatP.≤-trans
+    (tapeStepWorkWithinProgramBudget program cfg)
+    (NatP.m≤m+n
+      (perStepInterpreterBudget program)
+      (linearInterpreterBudget program steps))
+... | just next =
+  NatP.+-mono-≤
+    (tapeStepWorkWithinProgramBudget program cfg)
+    (runInterpreterWorkLinearBound program steps next)
+
+------------------------------------------------------------------------
+-- A fixed finite program therefore has LINEAR universal-interpreter
+-- overhead in the requested transition count. Any proposed lower-bound
+-- invariant that explodes merely under this representation change is not
+-- invariant under harmless finite-program interpretation.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- Concrete machine instance: accepted only AFTER the finite STOP
