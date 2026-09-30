@@ -129,6 +129,7 @@ import DASHI.Core.MeasurementBoundaryNonfactorabilityExact
 import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact
 import DASHI.Core.PoliticalContestabilityExact
 import DASHI.Core.GovernanceTrajectoryRealisationExact
+import DASHI.Core.FriendlyjordiesGovernanceQuestionExact
 import DASHI.Core.CategoryAuthorityAuditExact
 import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
