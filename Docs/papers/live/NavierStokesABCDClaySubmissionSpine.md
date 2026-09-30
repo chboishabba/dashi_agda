@@ -317,3 +317,41 @@ Under this standard, C/D are finite referee-audit/manuscript tasks. A/B still
 contain explicit theorem-production obligations. Stale Boolean ledgers or the
 amount of formal infrastructure remaining below the paper layer do not alter
 that mathematical classification.
+
+## 8. 2026-09-30 R828: direct rational finite-Fourier feasibility result (newer than historical B1–B7)
+
+This section supersedes the *research priority* in section 5, but does not
+delete the earlier sufficient B1–B7 route. The latest periodic development
+R745–R823 produces the canonical signed reserve payment at delta=nu:
+
+  integral [ 18*Nsep - 2*Qsep + D_CC + 6*nu*d_N ] dt >= 0.
+
+The new [R828 3-4-5 mathematical witness](NSR828Rational345FourierWitness.md)
+does **not** assume this estimate: it evaluates its complete R815-style
+physical Fourier scalar at an explicit smooth real divergence-free mean-zero
+initial state in the radius-four cube, with the normalization
+
+  commutator coherent work = -557627/125,
+  critical production = 0, critical dissipation = 15834,
+  complete signed initial rate = -28273644/125 < 0.
+
+An independent conservative rational Lipschitz/ODE enclosure yields a
+positive real-time interval with negative integrated scalar for the ordinary
+finite Fourier polynomial dynamics. This is a mathematical falsification
+candidate for the *auxiliary universal B reserve inequality*; it is never
+a counterexample to Navier–Stokes itself.
+
+The actual Agda R408 specialization is Q-valued and requires global
+helical projector laws, whereas the real physical Fourier flow is
+real-valued. Even though the selected 3-4-5 active helical snapshot is
+rational, this does not fill the global Q-projector or genuine continuous
+time dynamics interface. The exact R408/R692 scalar identification is
+still a kernel/source-verification seam. Do not claim unconditional
+certification of a false payment before discharging it.
+
+If the literal source scalar weld succeeds, retire universal B-RESERVE as
+a potential route: retain the exact R822/R823 identities as identities,
+and pursue a **different** analytic inequality or the older independent
+B1–B7 signed route, plus W1/continuation. Avoid adding new compilers
+assuming the disproven hypothesis. The A resolvent work is logically
+independent; C/D remain externally attributed forced-case source audits.
