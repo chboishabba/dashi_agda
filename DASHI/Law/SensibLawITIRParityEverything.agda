@@ -13,6 +13,7 @@ import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact as Late
 import DASHI.Interop.ITIRHealthRecordSensibLawAdapterExact as GenericHealthParity
 import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorParity
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -65,3 +66,20 @@ selectedFriendlyjordiesNarrativeGovernanceBoundary :
   FriendlyjordiesNarrative.FriendlyjordiesNarrativeGovernanceBoundary
 selectedFriendlyjordiesNarrativeGovernanceBoundary =
   FriendlyjordiesNarrative.canonicalFriendlyjordiesNarrativeGovernanceBoundary
+
+selectedFriendlyjordiesCompetingNarrativeBoundary :
+  FriendlyjordiesCompeting.FriendlyjordiesSensibLawBoundary
+selectedFriendlyjordiesCompetingNarrativeBoundary =
+  FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
+
+selectedFriendlyjordiesCPRSForwardTrace :
+  FriendlyjordiesCompeting.Trace.ForwardTraceReceipt
+    FriendlyjordiesCompeting.cprsTrace
+selectedFriendlyjordiesCPRSForwardTrace =
+  FriendlyjordiesCompeting.cprsForwardReceipt
+
+selectedFriendlyjordiesCPRSReverseTrace :
+  FriendlyjordiesCompeting.Trace.ReverseTraceReceipt
+    FriendlyjordiesCompeting.cprsTrace
+selectedFriendlyjordiesCPRSReverseTrace =
+  FriendlyjordiesCompeting.cprsReverseReceipt
