@@ -10,10 +10,12 @@ module DASHI.Physics.Foundations.CMP119LiteralWilsonProjectorSignAuditExact wher
 -- DOI: 10.1007/BF01217741, Sect. 2, Eq. (2.23).
 --
 -- The canonical T4 plaquette basis has PROJECTOR VALUE +1.
--- The selected Wilson action written +u * (1 - half trace U_p) therefore
--- has projector +u, whereas -u * the same plaquette basis has projector -u.
--- This is a direct computation in the existing literal LocalizedAction
--- carrier, not a new source-normalization *assumption*.
+-- The symbolic T4 localized Wilson term +u * plaquetteBasisAction has
+-- projector +u, whereas -u * that same basis has projector -u.
+-- This is a direct computation in the existing two-coordinate LocalizedAction
+-- carrier, NOT an evaluation of SU(2) field matrices or Tr(U_p). The
+-- physical Wilson plaquette trace-to-basis equality remains a separate debt.
+-- No source-normalization identity is asserted as a new axiom.
 --
 -- Do not identify the positive-action coefficient with the negative
 -- effective-density exponent coefficient until the actual source definition
