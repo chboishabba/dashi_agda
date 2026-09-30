@@ -22,7 +22,9 @@ module DASHI.Physics.Foundations.CMP119AntigravityTOVPressureMomentObservableBid
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _<_; -_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVSystemExact as TOV
 import DASHI.Physics.Foundations.CMP119AntigravityTOVSourceToRadialObservableBidiExact as Radial
@@ -85,3 +87,31 @@ sourcePressureMomentRecovered s =
 -- Source-level readout is exact and reversible algebraically. A physical
 -- metric solution and the correct renormalized stress insertion must still
 -- establish that the observed scaled acceleration is THIS readout.
+
+------------------------------------------------------------------------
+-- The sign also transports IN BOTH DIRECTIONS, with no separately
+-- asserted Antigravity boolean or negative active stress certificate.
+------------------------------------------------------------------------
+
+negativeEinsteinNumeratorGivesOutwardScaledResponse :
+  ∀ mass pressureMoment →
+  mass + pressureMoment < 0ℚ →
+  0ℚ < scaledGeodesicFromMassPressureMoment mass pressureMoment
+negativeEinsteinNumeratorGivesOutwardScaledResponse
+    mass pressureMoment negative =
+  ℚP.neg-antimono-< negative
+
+outwardScaledResponseForcesNegativeEinsteinNumerator :
+  ∀ mass pressureMoment →
+  0ℚ < scaledGeodesicFromMassPressureMoment mass pressureMoment →
+  mass + pressureMoment < 0ℚ
+outwardScaledResponseForcesNegativeEinsteinNumerator
+    mass pressureMoment outward =
+  subst₂ _<_
+    (Ring.solve-∀ mass pressureMoment)
+    (Ring.solve-∀ mass pressureMoment)
+    (ℚP.neg-antimono-< outward)
+
+-- An initially-resting outward trajectory is controlled by the *source
+-- mass-pressure moment* sign. The weak-field pressure-weighted active mass
+-- and the Lorentzian trace are DIFFERENT observables.
