@@ -51,9 +51,9 @@ iranGenealogyJoinCell = Pareto.requirement-candidate
 irgcCausalCell : Pareto.RequirementCandidate OriginalThreadRequirement
 irgcCausalCell = Pareto.requirement-candidate
   irgcCausalMechanismReceipt
-  true true true true
+  true true true false
   4 10
-  "Mechanism receipt connecting historical revolutionary grammar to the 2026 letter. Currently inert until exact primary spans and reviewed genealogy joins are paid."
+  "PAID by IRGCMostazafinInstitutionalGrammarMechanismExact for a bounded institutional-grammar continuity claim. Direct textual borrowing, ontology identity and total explanation remain explicitly false."
 
 fjordiesGarnautCell : Pareto.RequirementCandidate OriginalThreadRequirement
 fjordiesGarnautCell = Pareto.requirement-candidate
@@ -115,9 +115,9 @@ fjordiesGarnautOnFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio fjordiesGarnautCell ≡ true
 fjordiesGarnautOnFrontier = refl
 
-irgcCausalNowEligible :
-  Pareto.eligible? irgcCausalCell ≡ true
-irgcCausalNowEligible = refl
+irgcCausalPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio irgcCausalCell ≡ false
+irgcCausalPaidDropsFromFrontier = refl
 
 broadExpansionOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio broadExpansionCell ≡ false
@@ -157,10 +157,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Causal-mechanism receipt relating reviewed Iranian revolutionary grammar to the paid 2026 IRGC letter spans, with explicit counter-hypotheses."
-    "2. In parallel, pay the low-cost Friendlyjordies Garnaut fixture refresh on PR #1078."
-    "3. Bind the Friendlyjordies fallacies/framing generator output only if an archive-backed source unit is present."
-    "IRGC primary spans and the selected Iran genealogy joins are already paid and have dropped from the live frontier."
+    "1. Pay the low-cost Friendlyjordies Garnaut fixture refresh on PR #1078."
+    "2. Bind Friendlyjordies fallacies/framing only if an archive-backed source unit is present."
+    "3. Then pursue the highest remaining independent geopolitical evidence leaf: IRIS Dena operational/command record or China cross-source geo-economic join, depending source availability."
+    "The selected IRGC spans, Iran genealogy joins and bounded institutional-grammar mechanism are paid and have dropped from the live frontier."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
