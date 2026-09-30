@@ -89,7 +89,8 @@ def exact_snapshot():
             comm_work += sum(conjugate(mixed[j])*comm[j] for j in range(3))
             product_work += sum(conjugate(mixed[j])*product_rule[j] for j in range(3))
 
-    # Work.coherentWork = 2 * R179.realHermitianCross in the Agda owner.\n    comm_work = 2 * simplify(expand(comm_work).as_real_imag()[0])
+    # Work.coherentWork = 2 * R179.realHermitianCross in the Agda owner.
+    comm_work = 2 * simplify(expand(comm_work).as_real_imag()[0])
     product_work = 2 * simplify(expand(product_work).as_real_imag()[0])
     production = simplify(2 * sum(
         dyadic_weight(k) *
