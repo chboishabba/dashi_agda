@@ -91,3 +91,4 @@ import DASHI.Reasoning.TraumaAttractorBranchRegulationExact
 
 -- Literal CP¹ atlas transport is tested against actual chart-consumer descent.
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAtlasConsumerDescentNoGoExact
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineQuadraticHomogeneousTransportExact
