@@ -178,6 +178,46 @@ def audit(source: dict) -> dict:
             "warning": "A zero numerical tensor residual cannot establish source identity, real analytic continuation, or a continuum Einstein solution."
         }
 
+    weak = source.get("weak_coupling_reference")
+    if weak is not None:
+        if not isinstance(weak, dict):
+            raise ValueError("weak_coupling_reference must be an object")
+        if validate_text(weak, "selected_source_identifier") != provenance["source_identifier"]:
+            raise ValueError("Weak-coupling source does not match selected source identifier")
+        if validate_text(weak, "metric_frame") != provenance["metric_frame"]:
+            raise ValueError("Weak-coupling comparison has different metric frame")
+        if validate_text(weak, "cutoff") != provenance["cutoff"]:
+            raise ValueError("Weak-coupling comparison has different cutoff")
+        validate_text(weak, "reference_revision")
+        validate_text(weak, "normalization_origin")
+        if weak.get("factor_fitted_to_this_source") is not False:
+            raise ValueError("Weak-coupling conversion cannot be fitted to selected source")
+        kappa, margin, e2, b2 = (
+            q(weak[key]) for key in
+            ("kappa", "margin", "electric_square", "magnetic_square"))
+        if min(kappa, margin, e2, b2) < 0:
+            raise ValueError("Weak-coupling baseline violates nonnegative coefficient assumptions")
+        scale = q(weak["connected_to_physical_active_factor"])
+        if scale <= 0:
+            raise ValueError("Expected a positive fixed active-stress normalization")
+        baseline = (4 * kappa + margin) * e2 + margin * b2
+        # The physical interpretation of the calculated active contraction
+        # remains conditional on Lorentzian continuation and same-source weld.
+        candidate = scale * active / (Z * Z)
+        additional = candidate - baseline
+        result["weak_coupling_diagnostic"] = {
+            "status": "exact_rational_conditional_comparison_only",
+            "physical_same_tensor_identification_proved": False,
+            "weak_coupling_baseline": fmt(baseline),
+            "candidate_active": fmt(candidate),
+            "required_additional_active_source": fmt(additional),
+            "negative_candidate_requires_extra_more_negative_than_baseline":
+                candidate < 0 and additional < -baseline,
+            "weak_coupling_ym_only_compatible": candidate == baseline,
+            "normalization_origin": weak["normalization_origin"],
+            "warning": "An inferred residual is NOT a derived additional physical sector. A selected source-to-E/B same-object proof and independent extra-sector derivation are required."
+        }
+
     return result
 
 
