@@ -1,10 +1,16 @@
 module DASHI.Core.ContextIndexedPNFComparisonTransportExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; _∷_)
 open import Data.Empty using (⊥)
+
+transEq : ∀ {X : Set} {x y z : X} → x ≡ y → y ≡ z → x ≡ z
+transEq refl refl = refl
+
+symEq : ∀ {X : Set} {x y : X} → x ≡ y → y ≡ x
+symEq refl = refl
 
 import DASHI.Core.ConsumerIndexedResidualRefinementExact as Refinement
 import DASHI.Core.IndexedInterpretationMorphismExact as Indexed
@@ -23,7 +29,6 @@ record ConsumerFrame : Set where
     queryReference : String
     interpretationReference : String
     provenanceReference : String
-open ConsumerFrame public
 
 -- Query-local licence: operation and consumer observations agree under a
 -- mapping. The licence is not global semantic equivalence.
@@ -51,7 +56,7 @@ composeLicence :
 composeLicence f g =
   licensed
     (λ x → forward g (forward f x))
-    (λ x → trans (preserve g (forward f x)) (preserve f x))
+    (λ x → transEq (preserve g (forward f x)) (preserve f x))
 
 -- A licence preserves consumer equality, not necessarily source identity.
 transportedConsumerEquality :
@@ -61,11 +66,8 @@ transportedConsumerEquality :
   ∀ x y → a x ≡ a y →
   b (forward f x) ≡ b (forward f y)
 transportedConsumerEquality f x y same =
-  trans (preserve f x)
-    (trans same (symmetry (preserve f y)))
-  where
-    symmetry : ∀ {X : Set} {u v : X} → u ≡ v → v ≡ u
-    symmetry refl = refl
+  transEq (preserve f x)
+    (trans same (symEq (preserve f y)))
 
 -- Typed obligation state is an independent coordinate from support polarity.
 data ObligationState : Set where
@@ -100,7 +102,6 @@ record IndexedCandidate : Set where
     originalSourcePreserved : Bool
     candidateOnly : Bool
     semanticAuthorityCreated : Bool
-open IndexedCandidate public
 
 record ComparisonReceipt : Set where
   constructor comparison-receipt
@@ -114,7 +115,6 @@ record ComparisonReceipt : Set where
     requiresReview : Bool
     promotedClaimTruth : Bool
     createsEditAuthority : Bool
-open ComparisonReceipt public
 
 -- Evidence accumulation is append-only; admission and interpretation
 -- revision are separate operations owned by downstream authorities.
@@ -133,7 +133,6 @@ addSupport s e = ledger
   (counterReferences e)
   (missingReferences e)
   (provenanceReferences e)
-  where open import Agda.Builtin.List using (_∷_)
 
 addCounter : String → EvidenceLedger → EvidenceLedger
 addCounter s e = ledger
@@ -141,7 +140,6 @@ addCounter s e = ledger
   (s ∷ counterReferences e)
   (missingReferences e)
   (provenanceReferences e)
-  where open import Agda.Builtin.List using (_∷_)
 
 counterUnchangedBySupport :
   ∀ s e → counterReferences (addSupport s e) ≡ counterReferences e
@@ -170,11 +168,8 @@ repairPreservesConsumerEquality :
   ∀ s t → consumer s ≡ consumer t →
   consumer (repair r s) ≡ consumer (repair r t)
 repairPreservesConsumerEquality r s t same =
-  trans (consumerPreservation r s)
-    (trans same (symmetry (consumerPreservation r t)))
-  where
-    symmetry : ∀ {X : Set} {u v : X} → u ≡ v → v ≡ u
-    symmetry refl = refl
+  transEq (consumerPreservation r s)
+    (trans same (symEq (consumerPreservation r t)))
 
 -- Existing proofs remain the authority for interpretation-index collision
 -- and consumer-sufficient residual refinement.
