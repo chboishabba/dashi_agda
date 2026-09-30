@@ -2,29 +2,15 @@
 module DASHI.Physics.Closure.NSTriadKNR650PhysicalReserveFeasibilityRound825Exact where
 
 ------------------------------------------------------------------------
--- R823 / EXACT SIGNED CC+VISCOSITY RESERVE AGAINST CUBIC/QUINTIC DEMAND
+-- R825 / COMPLETE PHYSICAL INTEGRATED FEASIBILITY AND FALSIFIER
 --
--- R821's complete payment at the single physical margin delta = nu is
---
---    18 N_sep - 2 Q_sep + D_CC + 6 nu d.
---
--- R822 re-presents D_CC as the sum of ORIGINAL signed R760 cells decorated
--- with actual R818/R204 comparable-localization certificates. No cell is
--- re-evaluated at its p/q representative.
---
--- Define, on that exact same physical cutoff/time packet:
---
---     Reserve  = signedCCRows + 6 nu d
---     Demand   = 2 (Q_sep - 9 N_sep).
---
--- Then R821's exact rate = Reserve - Demand.
--- Through its actual integration authority:
---
---   integratedPayment = integratedReserve - integratedDemand.
---
--- Thus a *single integrated reserve >= demand* estimate pays R821; no
--- cellwise positivity, CC Gram sign, or isolated cancellation is assumed.
--- The estimate is an analytic LEAF, not a proved result of this file.
+-- Carries the exact R824 original-incidence CC split and R823 rate through
+-- R823's SAME rational integration authority:
+--   signed integral = quadratic + high - low.
+-- At a concrete live packet and terminal, rational <= decision yields either
+-- an actual payment certificate or its negation. This alone does NOT construct
+-- a concrete bad datum or discharge the universal B-RESERVE inequality.
+-- No new abstract payment token or new B barrier compiler is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -67,8 +53,6 @@ import DASHI.Physics.Closure.NSTriadKNR650CriticalProductionIncidenceCarrierRoun
 import DASHI.Physics.Closure.NSTriadKNR650OrbitProfileTwoFamilyResidualRound781Exact as R781
 
 import DASHI.Physics.Closure.NSTriadKNR650PhysicalCCGradedReserveRound824Exact as R824
-import Data.Empty using (⊥)
-import Data.Unit using (⊤)
 
 module PhysicalReserveFeasibility
     (Time : Set)
