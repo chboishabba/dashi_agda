@@ -67,7 +67,7 @@ transportedConsumerEquality :
   b (forward f x) ≡ b (forward f y)
 transportedConsumerEquality f x y same =
   transEq (preserve f x)
-    (trans same (symEq (preserve f y)))
+    (transEq same (symEq (preserve f y)))
 
 -- Typed obligation state is an independent coordinate from support polarity.
 data ObligationState : Set where
@@ -169,7 +169,7 @@ repairPreservesConsumerEquality :
   consumer (repair r s) ≡ consumer (repair r t)
 repairPreservesConsumerEquality r s t same =
   transEq (consumerPreservation r s)
-    (trans same (symEq (consumerPreservation r t)))
+    (transEq same (symEq (consumerPreservation r t)))
 
 -- Existing proofs remain the authority for interpretation-index collision
 -- and consumer-sufficient residual refinement.
