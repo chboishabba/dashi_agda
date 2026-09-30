@@ -5,6 +5,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.NarrativeClaimProvenanceExact as Narrative
 import DASHI.Cognition.PNF.SensibLawClaimLatticeNarrativeStatusLiveBidiExact as StatusBridge
+import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 
 ------------------------------------------------------------------------
 -- SENSIBLAW / ITIR NARRATIVE COMPARISON TRANSPORT
@@ -180,10 +181,10 @@ compileModalityStillLeavesTruthUnresolved :
   let receipt =
         StatusBridge.compileNarrativeModality
           (propositionId p)
-          ("event:" ++ propositionId p)
+          "event:narrative-transport"
           (modality p)
   in
-  DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact.truthStatus
+  Status.truthStatus
     (StatusBridge.NarrativeModalityStatusReceipt.proposition receipt)
-  ≡ DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact.truthUnresolved
+  ≡ Status.truthUnresolved
 compileModalityStillLeavesTruthUnresolved p = refl
