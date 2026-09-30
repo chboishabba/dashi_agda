@@ -44,14 +44,14 @@ irgcSpanCell = Pareto.requirement-candidate
 iranGenealogyJoinCell : Pareto.RequirementCandidate OriginalThreadRequirement
 iranGenealogyJoinCell = Pareto.requirement-candidate
   iranGenealogyReviewedJoin
-  true true true true
+  true true true false
   3 9
-  "Review exact passages for Shariati/Marxian/Fanonian/Third-Worldist and Iranian-left/Khomeini continuity edges, then construct explicit join bases rather than source-list adjacency."
+  "PAID for the selected high-leverage edges by IranianRevolutionaryGenealogyReviewedJoinExact: Marxian field to Shariati, Shariati to revolutionary generation, and Iranian-left neocolonial framing to Khomeini's West discourse."
 
 irgcCausalCell : Pareto.RequirementCandidate OriginalThreadRequirement
 irgcCausalCell = Pareto.requirement-candidate
   irgcCausalMechanismReceipt
-  true true true false
+  true true true true
   4 10
   "Mechanism receipt connecting historical revolutionary grammar to the 2026 letter. Currently inert until exact primary spans and reviewed genealogy joins are paid."
 
@@ -107,17 +107,17 @@ irgcSpanPaidDropsFromFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio irgcSpanCell ≡ false
 irgcSpanPaidDropsFromFrontier = refl
 
-iranGenealogyJoinOnFrontier :
-  Pareto.onParetoFrontier? originalThreadPortfolio iranGenealogyJoinCell ≡ true
-iranGenealogyJoinOnFrontier = refl
+iranGenealogyJoinPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranGenealogyJoinCell ≡ false
+iranGenealogyJoinPaidDropsFromFrontier = refl
 
 fjordiesGarnautOnFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio fjordiesGarnautCell ≡ true
 fjordiesGarnautOnFrontier = refl
 
-irgcCausalCurrentlyInert :
-  Pareto.eligible? irgcCausalCell ≡ false
-irgcCausalCurrentlyInert = refl
+irgcCausalNowEligible :
+  Pareto.eligible? irgcCausalCell ≡ true
+irgcCausalNowEligible = refl
 
 broadExpansionOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio broadExpansionCell ≡ false
@@ -157,10 +157,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Exact-passage reviewed joins for the highest-leverage Iran genealogy edges."
+    "1. Causal-mechanism receipt relating reviewed Iranian revolutionary grammar to the paid 2026 IRGC letter spans, with explicit counter-hypotheses."
     "2. In parallel, pay the low-cost Friendlyjordies Garnaut fixture refresh on PR #1078."
     "3. Bind the Friendlyjordies fallacies/framing generator output only if an archive-backed source unit is present."
-    "Only after the Iran reviewed joins: causal mechanism receipt relating historical grammar to the 2026 letter."
+    "IRGC primary spans and the selected Iran genealogy joins are already paid and have dropped from the live frontier."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
