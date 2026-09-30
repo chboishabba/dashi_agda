@@ -342,6 +342,12 @@ bExactRealFourierSparseNegativeRateCandidate = true
 bExactRealFourierSparseRateMatchesAgdaRationalHelicalPacket : Bool
 bExactRealFourierSparseRateMatchesAgdaRationalHelicalPacket = false
 
+-- scripts/check_ns_r823_short_time_finite_ode.py independently evolves
+-- the sparse field with the literal finite NS quadratic vector field and
+-- integrates R815's rate numerically (not interval-certified).
+bExactRealFourierSparseShortTimeNumericFailureObserved : Bool
+bExactRealFourierSparseShortTimeNumericFailureObserved = true
+
 bExactRealFourierSparseIntegratedR408CounterexampleCertified : Bool
 bExactRealFourierSparseIntegratedR408CounterexampleCertified = false
 
