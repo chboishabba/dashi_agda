@@ -259,11 +259,6 @@ module PhysicalReserveFeasibility
   physicalReserveFalsifier cutoff S terminal bad =
     ℚP.<⇒≱ bad
 
-  -- The two analytic B inputs are deliberately kept INDEPENDENT.
-  -- R823 already compiles their conjunction into the R821/R735 barrier.
-  reserveAndW1PhysicalBarrier =
-    Live.allCutoffsSignedReserveBarrier
-
 round825OriginalCCAndSeparatedCompleteGrading : Bool
 round825OriginalCCAndSeparatedCompleteGrading = true
 
