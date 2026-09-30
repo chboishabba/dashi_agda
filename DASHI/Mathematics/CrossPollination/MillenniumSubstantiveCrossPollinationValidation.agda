@@ -192,3 +192,5 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CompletedRootedSourceGateExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExhaustiveEnumerationCostObstructionExact
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPBlockEqualityLinearDecisionSeparationExact
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateConfigurationFutureTransportNoGoExact
