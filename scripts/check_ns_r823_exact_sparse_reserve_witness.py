@@ -148,6 +148,13 @@ def exact_snapshot():
         "amplitude_at_one_half_negative": bool(amplitude_rate.subs(amplitude, Rational(1, 2)) < 0),
         "amplitude_at_one_quarter_positive": bool(amplitude_rate.subs(amplitude, Rational(1, 4)) > 0),
         "amplitude_sign_reversal_positive": bool(amplitude_rate.subs(amplitude, -1) > 0),
+        # Literal Fourier helicity at (1,1,0) uses sqrt(2).  The Agda
+        # R815/R821 packet is parameterized over a rational RealField and
+        # assumes HelicalModeScalars / PeriodicHelicalProjectorLaws.
+        # This independent Q(sqrt(2)) calculation is not automatically an
+        # inhabitant of that rational scalar interface.
+        "exact_helicity_scalar_extension": "Q(sqrt(2))",
+        "rational_helical_carrier_reified": False,
         "kernel_certified": False,
         "r408_live_trajectory_reification": False,
         "integrated_falsification_certified": False,
