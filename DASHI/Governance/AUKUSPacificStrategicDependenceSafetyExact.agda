@@ -5,6 +5,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Physics.Foundations.CabarlahGoniometerAcquisitionExact as Cabarlah
+import DASHI.Law.AustraliaMilitaryMarathonSecuritySourceReceiptsExact as Military
 
 ------------------------------------------------------------------------
 -- AUKUS / PACIFIC STRATEGIC DEPENDENCE / SUBMARINE SAFETY
@@ -29,7 +30,18 @@ ehimeNTSB = Source.mkNoDOISource
   "2001 / report 2005"
   "https://www.ntsb.gov/investigations/Pages/DCA01MM022.aspx"
   Source.governmentSource
-  "official accident source: USS Greeneville emergency surfacing struck and sank Ehime Maru off Oahu; probable cause involved inadequate team interaction/communication, contact analysis and procedural adherence"
+  "official accident source: USS Greeneville emergency surfacing struck and sank Ehime Maru off Oahu; bounded historical safety precedent only"
+  Source.publicAttribution
+
+irisDenaReuters2026 : Source.AttributedSource
+irisDenaReuters2026 = Source.mkNoDOISource
+  "Reuters"
+  "Three Australians were aboard US submarine that sank Iranian ship, PM Albanese says"
+  "Reuters"
+  "2026-03-06"
+  "https://www.reuters.com/world/asia-pacific/three-australians-were-aboard-us-submarine-that-sunk-iranian-ship-pm-albanese-2026-03-06/"
+  Source.newsSource
+  "secondary report confirming three Australian defence personnel aboard the U.S. submarine that sank IRIS Dena off Sri Lanka; Albanese stated they did not participate in the attack"
   Source.publicAttribution
 
 data StrategicDependenceAxis : Set where
@@ -40,6 +52,7 @@ data StrategicDependenceAxis : Set where
   pacificRegionalLegitimacy : StrategicDependenceAxis
   sensingInfrastructure : StrategicDependenceAxis
   historicalSubmarineSafety : StrategicDependenceAxis
+  alliedCombatPresence : StrategicDependenceAxis
 
 record StrategicDependenceObservation : Set where
   constructor strategic-dependence-observation
@@ -63,9 +76,25 @@ officialAUKUSCommitment = strategic-dependence-observation
 historicalSubmarineSafetyCase : StrategicDependenceObservation
 historicalSubmarineSafetyCase = strategic-dependence-observation
   historicalSubmarineSafety
-  "The Greeneville/Ehime Maru accident demonstrates that nuclear-submarine operations can carry severe navigation/procedural safety consequences."
+  "The Greeneville/Ehime Maru accident is retained as a historical navigation/procedure safety case only."
   ehimeNTSB
   false false false
+
+irisDenaPresenceCase : StrategicDependenceObservation
+irisDenaPresenceCase = strategic-dependence-observation
+  alliedCombatPresence
+  "Three Australian personnel were aboard a U.S. submarine during the strike that sank IRIS Dena off Sri Lanka; the Australian government states they did not participate in offensive action."
+  irisDenaReuters2026
+  false false false
+
+iranWarshipCorrectionRetained : Military.ContemporarySourceReceipt
+iranWarshipCorrectionRetained = Military.warshipCorrectionReceipt
+
+australianPresenceReceiptRetained : Military.ContemporarySourceReceipt
+australianPresenceReceiptRetained = Military.threeAustraliansReceipt
+
+nonParticipationReceiptRetained : Military.ContemporarySourceReceipt
+nonParticipationReceiptRetained = Military.nonParticipationGovernmentReceipt
 
 cabarlahBoundary : Cabarlah.CabarlahGoniometerBoundary
 cabarlahBoundary = Cabarlah.canonicalCabarlahGoniometerBoundary
@@ -74,6 +103,9 @@ data HistoricalAccidentPredictsAUKUSAccident : Set where
 data HistoricalDirectionFindingProvesCurrentAUKUSSurveillance : Set where
 data SensingCapabilityCreatesTargetingAuthority : Set where
 data AllianceAccessEqualsCommandTransfer : Set where
+data PresenceAboardCombatPlatformProvesParticipation : Set where
+data GovernmentNonParticipationStatementEqualsIndependentActionReconstruction : Set where
+data AlliedCombatPresenceAutomaticallyProvesLossOfSovereignty : Set where
 
 historicalAccidentDoesNotPredictAUKUSAccident :
   HistoricalAccidentPredictsAUKUSAccident → ⊥
@@ -90,3 +122,15 @@ sensingCapabilityDoesNotCreateTargetingAuthority ()
 allianceAccessDoesNotDefinitionallyEqualCommandTransfer :
   AllianceAccessEqualsCommandTransfer → ⊥
 allianceAccessDoesNotDefinitionallyEqualCommandTransfer ()
+
+presenceAboardCombatPlatformDoesNotProveParticipation :
+  PresenceAboardCombatPlatformProvesParticipation → ⊥
+presenceAboardCombatPlatformDoesNotProveParticipation ()
+
+governmentStatementDoesNotEqualIndependentActionReconstruction :
+  GovernmentNonParticipationStatementEqualsIndependentActionReconstruction → ⊥
+governmentStatementDoesNotEqualIndependentActionReconstruction ()
+
+combatPresenceDoesNotByItselfProveSovereigntyLoss :
+  AlliedCombatPresenceAutomaticallyProvesLossOfSovereignty → ⊥
+combatPresenceDoesNotByItselfProveSovereigntyLoss ()
