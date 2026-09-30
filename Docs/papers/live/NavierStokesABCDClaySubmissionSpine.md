@@ -185,33 +185,93 @@ Once those equalities are explicit, the low-frequency singularity is cancelled
 by the already-proved saturation estimate and the high-frequency branch is
 handled by the existing curvature/inverse-power envelope.
 
-## 5. Alternative B — remaining theorem-production seam
+## 5. Alternative B — primary live signed-reserve route and legacy route
 
-The current B route is the literal physical infinity-shell route:
+The **primary R823--R825 path** is no longer the legacy B1--B7
+physical-shell compiler. The preferred current physical finite-Galerkin
+payment is at the **single shared** R408 viscosity
+`delta = nu > 0`, for each selected cutoff and terminal.
 
-\`\`\`text
-B1  R236-filtered physical DFL
-    -> literal InfinityShellSupport receipt
+```text
+R408/R648 live finite trajectory
+       |
+R745 -> R760 -> R781
+       |                        R822
+       |               original CC rows + comparable certificates
+       |                        |
+R813 fully-separated     original signed CC scalar
+  four-helicity work             |
+       +---------- R823 ---------+
+                    |
+    V_N(T) = integral (D_CC + 6 nu d_N)
+    A_N(T) = 2 integral (Q_sep - 9 N_sep)
+                    |
+    OPEN B-RESERVE: A_N(T) <= V_N(T)  for all admissible
+                    |
+      R821 / R735 critical energy barrier
+                    ^
+                    |
+    OPEN B-W1: W_N(T) + Q_+-,N(T) <= B(T) (cutoff independent)
+                    |
+    OPEN uniform-in-N continuation AND universal initial-data bridge
+                    |
+      NSConcreteLiteralClayABCDRunTargetExact.LiteralB K
+                    |
+      NSConcreteLiteralClayABCDRunTargetExact.runTargetFromB
+```
 
-B2  literal DFL x DHH shell-pair signed estimate
+**New physical feasibility cut:**
 
-B3  literal DHH intra-shell signed l2 aggregation
+- `NSTriadKNR650PhysicalCCGradedReserveRound824Exact.agda`
+  uses R760 on each **R822 original incidence**. It proves the CC
+  signed row is exactly a nested forcing contribution minus a
+  dyadic production contribution. Comparable representatives remain
+  attached as geometry certificates, not as substitute source scalars.
+- `NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda`
+  proves that the *complete integrated R823 rate*, on the same live
+  physical system and integration authority, equals the integral of
+  the quadratic viscous, full nested high, and full dyadic low pieces.
+  Its decision function returns either an actual reserve-payment
+  certificate or a negated payment certificate **once concrete
+  rational physical integrals are supplied**. It supplies neither an
+  evaluated witness nor a signed inequality by itself.
+- A physical counterexample to the universal auxiliary reserve
+  estimate would reject this B auxiliary route only; it would **not**
+  refute Fefferman B or the Navier--Stokes equation.
+- R214 excludes using shell-width localization **alone** to pay the
+  between-partner Gram debt. Do not infer a CC bound merely from
+  R822's comparable representative.
 
-B4  critical-touching signed operator estimate with theta < 1
+**No duplicate B compiler is required:** R823 already contains
+`allCutoffsSignedReserveBarrier`; R821 and R735 own the conditional
+barrier. The remaining mathematical inputs are actual B-RESERVE,
+independent B-W1, and a continuation/universal-data theorem matching
+the canonical `LiteralB K` predicate. A barrier for a selected
+trajectory is not the all-data theorem.
 
-B7  literal R406 remainder
-    = 4 * sum of the live fixed-output covariances
-\`\`\`
+**Legacy B1--B7 remains an alternative sufficient route.** B1/B7 are
+physical extraction/identification seams; B2/B3/B4 are analytic
+estimates. They are not extra assumptions automatically imposed on
+the R823 route. The ownership remains
+`NSClayFacingBResearchCutExact.agda`.
 
-Classification:
+**Other Clay alternatives are independent:**
 
-- **B1/B7:** exact same-object/extraction identities;
-- **B2/B3/B4:** genuine analytic estimates.
-
-A publishable B proof must state and prove these five claims directly in
-conventional mathematics, then show how they imply the periodic continuation
-criterion. Agda remains the preferred discovery/checking environment because
-its physical carrier and signed block machinery are already exact.
+- A: `NSClayFacingATwoPhysicalSeamCompilerExact.agda` still
+  requires its actual Euclidean resolvent-kernel and state-majorant
+  identifications plus whole-space continuation; R823 does not
+  discharge these.
+- C/D: `NSClayFacingCDSourceAuditExact.agda` and
+  `NSClayFacingABCDProofStatusExact.agda` track external source
+  alignment and optional local reconstruction, separate from an
+  independently checked conventional proof and CMI adjudication.
+  No periodic B barrier is used to prove forced breakdown.
+- All four terminal theorem *types*, including the pressure
+  periodicity clause in D, are owned by
+  `NSClayLiteralABCDExact.agda`; the canonical run target is
+  `NSConcreteLiteralClayABCDRunTargetExact.agda`. The latter
+  consumes a genuine literal A/B/C/D proof term, never a Boolean
+  receipt, selected-trajectory estimate, or GitHub status.
 
 ## 6. Submission policy
 
