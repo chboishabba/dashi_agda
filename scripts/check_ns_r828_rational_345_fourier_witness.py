@@ -112,8 +112,9 @@ def snapshot():
     comm_bound=n*2*cross*hf*hu
     commL=n*2*cross*(hfL*hu+hf*huL)
     WL=2*n*3*(mixedL*comm_bound+mixed*commL)
-    prodL=2*n*3*(F+M*FL)
-    dissL=n*3*lap*2*M
+    # The critical dyadic weight is <= 8 on this radius-four cube.
+    prodL=8*2*n*3*(F+M*FL)
+    dissL=8*n*3*lap*2*M
     rateL=6*(12*WL+prodL+dissL)
     initial_integer_margin=226189
     T=min(Fraction(M-U0,2*ode),Fraction(initial_integer_margin,2*rateL*ode))
