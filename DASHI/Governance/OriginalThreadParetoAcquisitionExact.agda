@@ -58,16 +58,16 @@ irgcCausalCell = Pareto.requirement-candidate
 fjordiesGarnautCell : Pareto.RequirementCandidate OriginalThreadRequirement
 fjordiesGarnautCell = Pareto.requirement-candidate
   friendlyjordiesGarnautFixtureRefresh
-  true true true true
+  true true true false
   1 5
-  "Refresh/archive-bind the Garnaut authority wrapper on the dedicated SensibLaw branch; current pinned static fixture does not pay the Garnaut text."
+  "PAID by SensibLaw archive recovery: authority-wrapper fixture now pins the Garnaut nested-attribution unit; Agda PR #1078 carries bidirectional M12 traces and retains external-world verification debt."
 
 fjordiesFallaciesCell : Pareto.RequirementCandidate OriginalThreadRequirement
 fjordiesFallaciesCell = Pareto.requirement-candidate
   friendlyjordiesFallaciesTypedBinding
-  true true true true
+  true true true false
   2 4
-  "Bind generator-supported fallacies/framing output into a checked-in proposition root, claim leaf and comparison item with source trace."
+  "PAID by recovered archive unit plus right-only proposition/claim/comparison binding on Agda PR #1078; absence of a Friendlyjordies-source fallacies claim is explicit rather than orphaned."
 
 irisDenaRecordCell : Pareto.RequirementCandidate OriginalThreadRequirement
 irisDenaRecordCell = Pareto.requirement-candidate
@@ -111,9 +111,9 @@ iranGenealogyJoinPaidDropsFromFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio iranGenealogyJoinCell ≡ false
 iranGenealogyJoinPaidDropsFromFrontier = refl
 
-fjordiesGarnautOnFrontier :
-  Pareto.onParetoFrontier? originalThreadPortfolio fjordiesGarnautCell ≡ true
-fjordiesGarnautOnFrontier = refl
+fjordiesGarnautPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio fjordiesGarnautCell ≡ false
+fjordiesGarnautPaidDropsFromFrontier = refl
 
 irgcCausalPaidDropsFromFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio irgcCausalCell ≡ false
@@ -157,10 +157,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Pay the low-cost Friendlyjordies Garnaut fixture refresh on PR #1078."
-    "2. Bind Friendlyjordies fallacies/framing only if an archive-backed source unit is present."
-    "3. Then pursue the highest remaining independent geopolitical evidence leaf: IRIS Dena operational/command record or China cross-source geo-economic join, depending source availability."
-    "The selected IRGC spans, Iran genealogy joins and bounded institutional-grammar mechanism are paid and have dropped from the live frontier."
+    "1. Pursue the highest remaining independent geopolitical evidence leaf: IRIS Dena operational/command record."
+    "2. In parallel, complete the China official-self-position versus independent geo-economic indicator join."
+    "3. Recompute the frontier only after those same-object/source-role checks."
+    "IRGC spans, Iran genealogy joins, bounded IRGC mechanism, Garnaut archive binding and fallacies source binding are paid and off the live frontier."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
