@@ -76,15 +76,15 @@ mkTrace statementRef documentRef exactSpanRef literalText candidateRef
       candidateRef
       observationRef
       (Trace.parser-run-identity
-        ("parser-run:" ++ statementRef)
+        "parser-run:friendlyjordies:source-totality"
         "sensiblaw-narrative-fixture")
-      ("review:parse:" ++ statementRef)
-      ("admission:candidate:" ++ statementRef)
+      "review:parse:friendlyjordies:source-totality"
+      "admission:candidate:friendlyjordies:source-totality"
       true refl false refl false refl false refl)
     (Trace.observation-event-link
       observationRef
       eventRef
-      ("assembly:" ++ eventRef)
+      "assembly:friendlyjordies:source-totality"
       true refl false refl)
     (claimRef ∷ [])
     (downstreamRef ∷ [])
