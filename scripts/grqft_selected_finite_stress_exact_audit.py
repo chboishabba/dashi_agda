@@ -178,8 +178,53 @@ def audit(source: dict) -> dict:
             "warning": "A zero numerical tensor residual cannot establish source identity, real analytic continuation, or a continuum Einstein solution."
         }
 
+    # A Euclidean C00 is NOT a Lorentzian energy density. This input is
+    # a separately computed continuation candidate with selected-source
+    # identity; its declared provenance is checked, never treated as proof.
+    lorentzian = source.get("lorentzian_timelike")
+    continued_active = None
+    if lorentzian is not None:
+        if not isinstance(lorentzian, dict):
+            raise ValueError("lorentzian_timelike must be an object")
+        if validate_text(lorentzian, "selected_source_identifier") != provenance["source_identifier"]:
+            raise ValueError("Lorentzian timelike input uses a different source")
+        if validate_text(lorentzian, "cutoff") != provenance["cutoff"]:
+            raise ValueError("Lorentzian timelike input uses a different cutoff")
+        if validate_text(lorentzian, "metric_frame") != provenance["metric_frame"]:
+            raise ValueError("Lorentzian timelike input uses a different metric frame")
+        validate_text(lorentzian, "continuation_revision")
+        validate_text(lorentzian, "continuation_method")
+        validate_text(lorentzian, "counterterm_revision")
+        if lorentzian.get("value_fitted_to_target_gravity") is not False:
+            raise ValueError("Lorentzian timelike input cannot be fitted to gravity")
+        rho_l = q(lorentzian["timelike_numerator"])
+        continued_active = rho_l + spatial
+        correction = rho_l - time_value
+        if continued_active != active + correction:
+            raise ArithmeticError("continued active-stress identity failed")
+        continued_trace = -rho_l + spatial
+        if continued_active != continued_trace + 2 * rho_l:
+            raise ArithmeticError("continued trace/active identity failed")
+        result["lorentzian_timelike_diagnostic"] = {
+            "status": "external_continuation_candidate_not_verified",
+            "selected_source_identifier": lorentzian["selected_source_identifier"],
+            "continued_rho_numerator": fmt(rho_l),
+            "euclidean_time_numerator": fmt(time_value),
+            "timelike_continuation_correction": fmt(correction),
+            "continued_lorentzian_trace": fmt(continued_trace),
+            "continued_active_numerator": fmt(continued_active),
+            "euclidean_sum_plus_correction": fmt(active + correction),
+            "continued_active_negative": continued_active < 0,
+            "source_selected_continuation_proved": False,
+            "counterterms_and_conservation_proved": False,
+            "continuation_revision": lorentzian["continuation_revision"],
+            "counterterm_revision": lorentzian["counterterm_revision"]
+        }
+
     weak = source.get("weak_coupling_reference")
     if weak is not None:
+        if continued_active is None:
+            raise ValueError("Weak YM Lorentzian active comparison requires separate continued timelike input")
         if not isinstance(weak, dict):
             raise ValueError("weak_coupling_reference must be an object")
         if validate_text(weak, "selected_source_identifier") != provenance["source_identifier"]:
@@ -203,7 +248,7 @@ def audit(source: dict) -> dict:
         baseline = (4 * kappa + margin) * e2 + margin * b2
         # The physical interpretation of the calculated active contraction
         # remains conditional on Lorentzian continuation and same-source weld.
-        candidate = scale * active / (Z * Z)
+        candidate = scale * continued_active / (Z * Z)
         additional = candidate - baseline
         result["weak_coupling_diagnostic"] = {
             "status": "exact_rational_conditional_comparison_only",
