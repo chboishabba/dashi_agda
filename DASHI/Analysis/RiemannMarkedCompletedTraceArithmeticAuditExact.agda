@@ -24,6 +24,11 @@ open import Agda.Builtin.String using (String)
 -- primeProjectiveDefect of both unmarked selected physical detectors also
 -- vanishes. At A=0 the selected signed pole combination cancels as well:
 --   clusterUnmarked = offOrdUnmarked + gammaUnmarked.
+-- Further exact support necessity:
+--   primeProjectiveDefect(g,t,r) != 0
+--      implies exists u, g(u) != 0 and |u| >= log 2.
+-- Any genuinely prime-active replacement must change the source support;
+-- changing only the Heisenberg trace or adding a cosh marker does not do it.
 -- This is an exact completed literal detector formula, not the unproved
 -- equality of the unmarked RvM fourth-cap terminal with this detector. This is not a claim about unrelated long-support tests.
 --
@@ -59,6 +64,7 @@ record CompletedTraceCrossPollinationBoundary : Set where
     selectedMarkedPrimeVanishingSourceWritten : Bool
     unmarkedSelectedPhysicalPrimeVanishingSourceWritten : Bool
     unmarkedCompletedGammaOnlySourceWritten : Bool
+    nonzeroPrimeRequiresFirstPrimeSupportSourceWritten : Bool
     selectedMarkedCompletedSourceIdentitySourceWritten : Bool
     selectedMarkedPoleBiasSourceWritten : Bool
     nonzeroOffDiagonalRequiresDiagonalCostSourceWritten : Bool
@@ -80,6 +86,8 @@ record CompletedTraceCrossPollinationBoundary : Set where
       unmarkedSelectedPhysicalPrimeVanishingSourceWritten ≡ true
     gammaOnlyUnmarked :
       unmarkedCompletedGammaOnlySourceWritten ≡ true
+    firstPrimeSupportNecessary :
+      nonzeroPrimeRequiresFirstPrimeSupportSourceWritten ≡ true
     completedMarkedFormulaVisible :
       selectedMarkedCompletedSourceIdentitySourceWritten ≡ true
     noUnjustifiedAnalyticTransport :
@@ -92,10 +100,10 @@ canonicalCompletedTraceCrossPollinationBoundary :
   CompletedTraceCrossPollinationBoundary
 canonicalCompletedTraceCrossPollinationBoundary =
   completed-trace-cross-pollination-boundary
-    true true true true true true true
+    true true true true true true true true
     false false false false false
     "Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleBidiMarkedFourth.lean"
     "clusterMarked = offOrdMarked + (primeMarked=0) + gammaMarked + poleMarked"
     "An explicit-formula identity identifying the selected UNMARKED signed fifth-cap terminal with an independently sourced completed arithmetic trace, preserving zero multiplicities, poles, Gamma and horizontal/local corrections"
     "Prove the selected unmarked completed trace identity and a noncircular strict lower bound, or obtain the selected signed RvM correlation estimate directly"
-    refl refl refl refl refl refl
+    refl refl refl refl refl refl refl
