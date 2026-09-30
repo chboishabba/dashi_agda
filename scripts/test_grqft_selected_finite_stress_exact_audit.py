@@ -129,6 +129,34 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
             module.audit(f)
 
 
+    def selected_lorentzian(self, f, rho):
+        f["lorentzian_timelike"] = {
+            "selected_source_identifier": f["provenance"]["source_identifier"],
+            "cutoff": f["provenance"]["cutoff"],
+            "metric_frame": f["provenance"]["metric_frame"],
+            "continuation_revision": "explicit-toy-not-a-proof",
+            "continuation_method": "toy-input-no-Wick-theorem",
+            "counterterm_revision": "none-toy",
+            "value_fitted_to_target_gravity": False,
+            "timelike_numerator": rho
+        }
+
+    def test_lorentzian_timelike_correction_is_not_euclidean_label(self):
+        f = fixture(insertion00="-1")
+        self.selected_lorentzian(f, "0")
+        d = module.audit(f)["lorentzian_timelike_diagnostic"]
+        self.assertEqual(d["euclidean_time_numerator"], "-4")
+        self.assertEqual(d["timelike_continuation_correction"], "4")
+        self.assertEqual(d["continued_active_numerator"], "0")
+        self.assertFalse(d["source_selected_continuation_proved"])
+
+    def test_weak_YM_comparison_cannot_use_euclidean_time_implicitly(self):
+        f = fixture(insertion00="-1")
+        self.selected_lorentzian(f, "-4")
+        f["weak_coupling_reference"] = {"reference_revision": "toy"}
+        with self.assertRaisesRegex(ValueError, "requires separate continued timelike"):
+            module.audit(f)
+
     def test_weak_coupling_reference_quantifies_missing_source(self):
         f = fixture(insertion00="-1")
         f["weak_coupling_reference"] = {
@@ -153,6 +181,7 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
 
     def test_weak_coupling_reference_requires_nonnegative_EB_squares(self):
         f = fixture()
+        self.selected_lorentzian(f, "4")
         f["weak_coupling_reference"] = {
             "selected_source_identifier": f["provenance"]["source_identifier"],
             "metric_frame": f["provenance"]["metric_frame"],
