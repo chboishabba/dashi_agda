@@ -538,3 +538,5 @@ import DASHI.Moonshine.OggSSPP2F4EllipticVOAS3ActionRecognitionCutsetExact
 import DASHI.Moonshine.OggSSP2BSourceIndexedDVRValuationIdentificationExact
 
 import DASHI.Moonshine.OggSSP2BCarnahanHalfTranslationParityExtractionExact
+
+import DASHI.Moonshine.OggSSPP2InertiaMassVersusDefectSumNoGoExact
