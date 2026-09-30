@@ -45,6 +45,7 @@ jobs:
             set -euo pipefail
             for path in \
               DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda \
+              DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda \
               DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda
