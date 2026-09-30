@@ -496,6 +496,21 @@ counterGarnautClaim =
     "speaker:counter-analysis"
     "counter_authority_analysis:u1"
 
+
+fallaciesFramingRoot : Contest.PropositionRoot
+fallaciesFramingRoot =
+  candidateRoot
+    "prop:fallacies-framing"
+    "the counter-analysis characterises the FriendlyJordies case against the Greens as containing logical fallacies"
+
+counterFallaciesClaim : Contest.ClaimLeaf fallaciesFramingRoot
+counterFallaciesClaim =
+  candidateLeaf
+    fallaciesFramingRoot
+    "claim:counter-analysis:fallacies"
+    "speaker:counter-analysis"
+    "thread_balanced_analysis:u6"
+
 ------------------------------------------------------------------------
 -- Comparison items: shared proposition != merged claim; competing explanations
 -- and reasoning-flow differences remain separate typed items.
@@ -594,6 +609,21 @@ garnautAuthorityComparison =
     false refl
     false refl
 
+
+fallaciesComparison : NarrativeComparisonItem
+fallaciesComparison =
+  narrative-comparison-item
+    "cmp:fallacies:right-only"
+    rightOnlyProposition
+    "missing:left:fallacies-framing"
+    (Contest.propositionRef fallaciesFramingRoot)
+    "relation:fallacies:right-only-source-local-analysis"
+    ("thread_balanced_analysis:u6" ∷ [])
+    "review:cmp:fallacies"
+    true refl
+    false refl
+    false refl
+
 friendlyjordiesSourceLane : NarrativeLane
 friendlyjordiesSourceLane =
   narrative-lane
@@ -640,12 +670,14 @@ friendlyjordiesCounterLane =
     ∷ Contest.propositionRef minorityCapacityRoot
     ∷ Contest.propositionRef woolworthsImpactRoot
     ∷ Contest.propositionRef garnautAuthorityRoot
+    ∷ Contest.propositionRef fallaciesFramingRoot
     ∷ [])
     ( Contest.claimRef counterCprsClaim
     ∷ Contest.claimRef counterInstabilityClaim
     ∷ Contest.claimRef counterMinorityClaim
     ∷ Contest.claimRef counterWoolworthsClaim
     ∷ Contest.claimRef counterGarnautClaim
+    ∷ Contest.claimRef counterFallaciesClaim
     ∷ [])
     ( argumentFamilyRef cprsBlocking
     ∷ argumentFamilyRef woolworthsPriceEffects
@@ -668,6 +700,7 @@ friendlyjordiesCompetingNarratives =
     ∷ governmentCapacityComparison
     ∷ woolworthsComparison
     ∷ garnautAuthorityComparison
+    ∷ fallaciesComparison
     ∷ [])
     ( Contest.propositionRef cprsBlockingRoot
     ∷ Contest.propositionRef woolworthsImpactRoot
@@ -677,6 +710,7 @@ friendlyjordiesCompetingNarratives =
     ∷ Contest.propositionRef coalitionInstabilityRoot
     ∷ Contest.propositionRef majorityCapacityRoot
     ∷ Contest.propositionRef minorityCapacityRoot
+    ∷ Contest.propositionRef fallaciesFramingRoot
     ∷ [])
     ( "SensibLaw narrative fixture receipts"
     ∷ "ITIR narrative comparison planning receipt"
