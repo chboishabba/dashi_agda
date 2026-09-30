@@ -44,6 +44,9 @@ import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact as ACut
 import DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact as APhysical
 import DASHI.Physics.Closure.NSClayFacingBResearchCutExact as BCut
 import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact as CDAudit
+import DASHI.Physics.Closure.NSTriadKNR650SignedComparableReserveRound823Exact as Reserve823
+import DASHI.Physics.Closure.NSTriadKNR650PhysicalCCGradedReserveRound824Exact as CC824
+import DASHI.Physics.Closure.NSTriadKNR650PhysicalReserveFeasibilityRound825Exact as Feas825
 
 data ProofLane : Set where
   laneA laneB laneC laneD : ProofLane
@@ -93,7 +96,7 @@ statusB = lane-status
   internalResearchOpen
   agdaReconstructionPartial
   true
-  proveInternalSameObjectLeaf
+  proveInternalAnalyticLeaf
   false
 
 statusC : LaneStatus
@@ -265,3 +268,40 @@ bRemainInAgdaIsTrue = refl
 
 bMigrationToLeanRequiredIsFalse : bMigrationToLeanRequired ≡ false
 bMigrationToLeanRequiredIsFalse = refl
+
+------------------------------------------------------------------------
+-- Current preferred periodic-B proof-search owner (R823--R825).
+-- The legacy B1--B7 alternative remains separate and open.
+-- CC comparable localization is a certificate, not a signed estimate.
+------------------------------------------------------------------------
+
+bNewPhysicalCCSignedGradingClosed : Bool
+bNewPhysicalCCSignedGradingClosed =
+  CC824.round824CCTouchedOriginalRowsDecomposed
+
+bCompleteIntegratedFeasibilityRepresentationClosed : Bool
+bCompleteIntegratedFeasibilityRepresentationClosed =
+  Feas825.round825IntegratedPhysicalFeasibilityShape
+
+bNewPreferredSignedReserveProved : Bool
+bNewPreferredSignedReserveProved =
+  Reserve823.round823IntegratedSignedEstimateClosed
+
+bNewPreferredW1Proved : Bool
+bNewPreferredW1Proved =
+  Reserve823.round823W1Closed
+
+bPhysicalCounterexampleToUniversalReserveBuilt : Bool
+bPhysicalCounterexampleToUniversalReserveBuilt =
+  Feas825.round825StrictPhysicalCounterexampleConstructed
+
+bLiteralContinuationFromR823BarrierClosed : Bool
+bLiteralContinuationFromR823BarrierClosed =
+  Feas825.round825ContinuumContinuationProved
+
+bStatusNowAnalyticResearch : Bool
+bStatusNowAnalyticResearch = true
+
+bStatusNowAnalyticResearchIsTrue :
+  bStatusNowAnalyticResearch ≡ true
+bStatusNowAnalyticResearchIsTrue = refl
