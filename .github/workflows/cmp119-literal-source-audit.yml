@@ -4,9 +4,11 @@ on:
   pull_request:
     paths:
       - "DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda"
+      - "DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda"
       - "DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda"
       - "DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda"
       - "scripts/grqft_selected_finite_stress_exact_audit.py"
+      - "scripts/grqft_su2_literal_wilson_exact.py"
       - "scripts/grqft_selected_wilson_normalization_audit.py"
       - "scripts/test_grqft_selected_wilson_normalization_audit.py"
       - "scripts/test_grqft_selected_finite_stress_exact_audit.py"
