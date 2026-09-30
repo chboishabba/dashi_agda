@@ -170,8 +170,3 @@ module _
       (Canonical.bAt sectors k)
       (Canonical.vacuumAt sectors k)
 
-  canonicalNodeWilsonCoefficientIsPositiveInverse :
-    ∀ k →
-    Canonical.wilsonCoefficientIsCMP109Inverse trajectory sectors k
-      ≡ Canonical.wilsonCoefficientIsCMP109Inverse trajectory sectors k
-  canonicalNodeWilsonCoefficientIsPositiveInverse k = refl
