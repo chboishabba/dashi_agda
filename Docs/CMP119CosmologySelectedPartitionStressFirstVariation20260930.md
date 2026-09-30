@@ -52,3 +52,16 @@ Regression suite: scripts/test_grqft_su2_six_plane_partition_metric_source.py ex
 5. **Source-driven geometry**. Solve Friedmann constraint + acceleration + continuity for that source and fixed initial data, then derive H(z), w(z) and actual independent observables. Do not use the old DiscreteWarpedEinsteinMatterModel as evidence of quantum source identity: it encodes its vacuum-like source.
 
 **Status:** code committed on Agda PR #1050; neither an exact-head Agda kernel receipt nor a successful exact-head Python workflow run has been returned. Test files are source-written, not certified passing. This is progress in physically relevant first-variation evaluation, NOT a proof of cosmic acceleration, quantum gravity, or the Clay YM existence/mass-gap result.
+
+
+## 2026-09-30 continuation: assembled R144 D1 replaces free sector callbacks
+
+New owner `CMP119CosmologyR144CompleteActionPartitionResponseExact.agda` reuses the existing R142/R144 fact that the selected generated-action first variation is the whole finite localized D1 sum. Its `completeLocalizedActionDerivative` is therefore computed from the exact finite action and selected tangent, then packaged into the existing Gibbs denominator derivative. `completeActionPartitionDerivativeIsLiteralHaarD1` identifies the resulting DZ with the literal finite-measure integral of `-rho * D1(S_complete)`. The same D1 scalar is also welded back to the selected canonical CMP119 stress insertion through the pre-existing R144-to-R119/R118 bridge.
+
+This is stronger than separately postulating metric derivatives for E, R, B and vacuum when only their **assembled source derivative** is required. It does not decompose that D1 back into independently source-certified sector derivatives, and it does not prove the finite action is the published CMP119 complete action at every cutoff.
+
+New owner `CMP119CosmologyPhysicalFinitePartitionAuthorityExact.agda` isolates another previously hidden gap in the pinned finite-measure carrier: `partitionFunction` and `divide` are arbitrary fields. The authority package requires (Z=int rho), (Z>0), and the actual rational quotient law before a normalized DZ/Z response may be treated as such. It deliberately does not call that ratio a proved derivative of log Z without a metric-family differentiability theorem.
+
+New owner `CMP119CosmologySelectedDensityR144PartitionWeldExact.agda` composes R124 with the assembled R144 response. At a selected RG scale, the Balaban source density mapped by R124 is proved equal to the literal physical finite measure used by the cosmology DZ calculation, so the calculation can no longer silently switch measures between source provenance and stress evaluation.
+
+The remaining physical frontier is now: instantiate the R124 density-to-physical-measure weld and R132/R144 generated action with the actual selected CMP119 source, prove finite product-Haar normalization/differentiability and uniform bounds, then pass the one-point response through renormalization and Lorentzian continuation before solving FLRW.
