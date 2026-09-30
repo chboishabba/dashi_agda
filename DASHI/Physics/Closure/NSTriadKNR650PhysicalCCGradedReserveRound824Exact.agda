@@ -2,29 +2,16 @@
 module DASHI.Physics.Closure.NSTriadKNR650PhysicalCCGradedReserveRound824Exact where
 
 ------------------------------------------------------------------------
--- R823 / EXACT SIGNED CC+VISCOSITY RESERVE AGAINST CUBIC/QUINTIC DEMAND
+-- R824 / LITERAL CC ORIGINAL-INCIDENCE DEGREE COMPONENTS
 --
--- R821's complete payment at the single physical margin delta = nu is
---
---    18 N_sep - 2 Q_sep + D_CC + 6 nu d.
---
--- R822 re-presents D_CC as the sum of ORIGINAL signed R760 cells decorated
--- with actual R818/R204 comparable-localization certificates. No cell is
--- re-evaluated at its p/q representative.
---
--- Define, on that exact same physical cutoff/time packet:
---
---     Reserve  = signedCCRows + 6 nu d
---     Demand   = 2 (Q_sep - 9 N_sep).
---
--- Then R821's exact rate = Reserve - Demand.
--- Through its actual integration authority:
---
---   integratedPayment = integratedReserve - integratedDemand.
---
--- Thus a *single integrated reserve >= demand* estimate pays R821; no
--- cellwise positivity, CC Gram sign, or isolated cancellation is assumed.
--- The estimate is an analytic LEAF, not a proved result of this file.
+-- R760 has the exact signed row identity
+--     cell(beta) = 3 * [nested(beta)+nested(swap beta)]
+--                  - 2 * pairedDyadicProduction(beta).
+-- R822 keeps ORIGINAL beta, and attaches a separate comparable witness.
+-- This file folds the two components over those original R822 rows, then
+-- recombines them with R813 into the entire R823 signed rate.
+-- It proves exact physical equalities, NOT velocity-amplitude scaling laws,
+-- a sign, Gram debt payment, or a nonzero witness.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
