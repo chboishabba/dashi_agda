@@ -27,10 +27,12 @@ module DASHI.Physics.Foundations.CMP119CosmologyR144CompleteActionPartitionRespo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; -_)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
+import Data.Rational.Tactic.RingSolver as Ring
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; cong₂; sym; trans)
 
 import DASHI.Physics.Foundations.CMP119GibbsFiniteMeasureNZDNDZReductionExact as Gibbs
+import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Integral
 import DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureNZDNDZExact as NZ
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
@@ -171,3 +173,106 @@ module _
   -- arbitrary DZ callback once the R144 action and tangent attachment exist.
   -- The remaining source seam is that the finite physical measure itself must
   -- be the selected CMP119 Gibbs measure for this complete action.
+
+
+  ------------------------------------------------------------------------
+  -- FOUR-DIAGONAL / WEYL RESPONSE OF THE SOURCE-NATIVE R144 ACTION.
+  ------------------------------------------------------------------------
+
+  completeActionDiagonalDerivativeSum :
+    MetricTangent → MetricTangent → MetricTangent → MetricTangent →
+    Configuration → ℚ
+  completeActionDiagonalDerivativeSum h00 h11 h22 h33 configuration =
+    (completeLocalizedActionDerivative h00 configuration
+      + completeLocalizedActionDerivative h11 configuration)
+    +
+    (completeLocalizedActionDerivative h22 configuration
+      + completeLocalizedActionDerivative h33 configuration)
+
+  fourDiagonalCompleteActionPartitionDerivativeSum :
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ) →
+    MetricTangent → MetricTangent → MetricTangent → MetricTangent → ℚ
+  fourDiagonalCompleteActionPartitionDerivativeSum
+      measure h00 h11 h22 h33 =
+    (completeActionPartitionDerivative measure h00
+      + completeActionPartitionDerivative measure h11)
+    +
+    (completeActionPartitionDerivative measure h22
+      + completeActionPartitionDerivative measure h33)
+
+  fourDiagonalCompleteActionPartitionResponseIsLiteralHaarD1 :
+    ∀ (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+      (integrationLaws :
+        Integral.RationalFiniteMeasureIntegrationLaws measure)
+      h00 h11 h22 h33 →
+    fourDiagonalCompleteActionPartitionDerivativeSum
+      measure h00 h11 h22 h33
+    ≡
+    Physical.haarIntegral measure
+      (λ configuration →
+        - (Physical.density measure configuration
+            * completeActionDiagonalDerivativeSum
+                h00 h11 h22 h33 configuration))
+  fourDiagonalCompleteActionPartitionResponseIsLiteralHaarD1
+      measure integrationLaws h00 h11 h22 h33 =
+    let
+      f00 = λ configuration →
+        - (Physical.density measure configuration
+            * completeLocalizedActionDerivative h00 configuration)
+      f11 = λ configuration →
+        - (Physical.density measure configuration
+            * completeLocalizedActionDerivative h11 configuration)
+      f22 = λ configuration →
+        - (Physical.density measure configuration
+            * completeLocalizedActionDerivative h22 configuration)
+      f33 = λ configuration →
+        - (Physical.density measure configuration
+            * completeLocalizedActionDerivative h33 configuration)
+    in
+    trans
+      (cong₂ _+_
+        (cong₂ _+_
+          (completeActionPartitionDerivativeIsLiteralHaarD1 measure h00)
+          (completeActionPartitionDerivativeIsLiteralHaarD1 measure h11))
+        (cong₂ _+_
+          (completeActionPartitionDerivativeIsLiteralHaarD1 measure h22)
+          (completeActionPartitionDerivativeIsLiteralHaarD1 measure h33)))
+      (trans
+        (sym
+          (Integral.haarIntegralFourAdd
+            integrationLaws f00 f11 f22 f33))
+        (Integral.haarIntegralCongruent integrationLaws _ _
+          (λ configuration →
+            Ring.solve-∀
+              (Physical.density measure configuration)
+              (completeLocalizedActionDerivative h00 configuration)
+              (completeLocalizedActionDerivative h11 configuration)
+              (completeLocalizedActionDerivative h22 configuration)
+              (completeLocalizedActionDerivative h33 configuration))))
+
+  completeActionWeylSilentForcesZeroPartitionResponse :
+    ∀ (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+      (integrationLaws :
+        Integral.RationalFiniteMeasureIntegrationLaws measure)
+      h00 h11 h22 h33 →
+    (∀ configuration →
+      completeActionDiagonalDerivativeSum
+        h00 h11 h22 h33 configuration ≡ 0ℚ) →
+    fourDiagonalCompleteActionPartitionDerivativeSum
+      measure h00 h11 h22 h33
+    ≡ 0ℚ
+  completeActionWeylSilentForcesZeroPartitionResponse
+      measure integrationLaws h00 h11 h22 h33 silent =
+    trans
+      (fourDiagonalCompleteActionPartitionResponseIsLiteralHaarD1
+        measure integrationLaws h00 h11 h22 h33)
+      (trans
+        (Integral.haarIntegralCongruent integrationLaws _ _
+          (λ configuration →
+            trans
+              (cong
+                (λ value →
+                  - (Physical.density measure configuration * value))
+                (silent configuration))
+              (Ring.solve-∀ (Physical.density measure configuration))))
+        (Integral.haarIntegralZero integrationLaws))
