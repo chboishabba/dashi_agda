@@ -6,7 +6,7 @@ sparse initial state in check_ns_r823_exact_sparse_reserve_witness.py.
 Evolves the fully retained 26-mode radius-one cube with
     du_k/dt = projectedNonlinearity_k - |k|^2 u_k,
 and integrates the correctly normalized instantaneous R815 rate:
-    6 * (12 * coherentCommutatorWork - criticalProduction
+    6 * (24 * realHermitianCommutatorCross - criticalProduction
          + criticalDissipation)
 at nu=delta=1. R230 identifies product-rule work with the commutator
 on the complete fixed-output fibre.
@@ -45,7 +45,7 @@ def rate(u):
         np.vdot(u[k], u[k]).real
         for k in MODES_LIST
     )
-    return 6 * (12 * mixed_work - production + dissipation)
+    # R692 Work.coherentWork is 2*realHermitianCross; R723 adds 12.\n    return 6 * (24 * mixed_work - production + dissipation)
 
 
 def solve(horizon=0.002):
@@ -85,7 +85,7 @@ def solve(horizon=0.002):
             "transverse_error":float(transverse_err)
         })
     assert abs(samples[0]["signed_rate"] -
-               (-9576-2124*2**0.5)) < 1e-7
+               (-19800-4248*2**0.5)) < 1e-7
     assert all(s["signed_rate"] < 0 for s in samples)
     assert samples[-1]["integrated_rate"] < 0
     assert max(s["reality_error"] for s in samples) < 1e-7
