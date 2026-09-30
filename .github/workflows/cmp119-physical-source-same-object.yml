@@ -6,6 +6,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda'
       - 'DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda'
       - 'DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -32,7 +34,7 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore cache
         uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Typecheck actual new source owners
+      - name: Typecheck physical-source and partition-stress owners
         shell: bash
         run: |
           nix develop --accept-flake-config --command bash -lc '
@@ -40,7 +42,9 @@ jobs:
             for source in \
               DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
-              DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda
+              DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
