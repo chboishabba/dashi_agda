@@ -85,6 +85,12 @@ module _
   positiveTemporalWickActive =
     selectedEuclideanDiagonalSum
 
+  negativeTemporalWickEnergy : ℚ
+  negativeTemporalWickEnergy = - selectedGibbsC00
+
+  positiveTemporalWickEnergy : ℚ
+  positiveTemporalWickEnergy = selectedGibbsC00
+
   positiveTemporalWickTrace : ℚ
   positiveTemporalWickTrace =
     - selectedGibbsC00 + selectedGibbsC11
@@ -109,6 +115,29 @@ module _
     Ring.solve-∀
       selectedGibbsC00 selectedGibbsC11
       selectedGibbsC22 selectedGibbsC33
+
+  negativeWickActiveIsTracePlusTimelikeEnergy :
+    negativeTemporalWickActive
+    ≡ negativeTemporalWickTrace
+      + ((1ℚ + 1ℚ) * negativeTemporalWickEnergy)
+  negativeWickActiveIsTracePlusTimelikeEnergy =
+    Ring.solve-∀
+      selectedGibbsC00 selectedGibbsC11
+      selectedGibbsC22 selectedGibbsC33
+
+  positiveWickActiveIsTracePlusTimelikeEnergy :
+    positiveTemporalWickActive
+    ≡ positiveTemporalWickTrace
+      + ((1ℚ + 1ℚ) * positiveTemporalWickEnergy)
+  positiveWickActiveIsTracePlusTimelikeEnergy =
+    Ring.solve-∀
+      selectedGibbsC00 selectedGibbsC11
+      selectedGibbsC22 selectedGibbsC33
+
+  -- If the selected Lorentzian convention is established, these two
+  -- identities reconstruct the full trace + 2*T00 source from the SAME
+  -- four finite-metric derivative numerators. At no point is the T00
+  -- sign chosen to make the active sum negative.
 
 -- Pure algebraic counterfixture illustrating why negative Euclidean sum
 -- is not enough under a negative temporal Wick continuation. No claim
