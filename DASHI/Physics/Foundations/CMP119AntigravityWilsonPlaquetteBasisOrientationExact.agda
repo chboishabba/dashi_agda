@@ -51,3 +51,53 @@ sameWilsonActionOppositeBasis :
   ∀ u → positiveWilsonAction u ≡ negativeWilsonAction (- u)
 sameWilsonActionOppositeBasis u =
   cong₂ T4.localizedAction (Ring.solve-∀ u) (Ring.solve-∀ u)
+
+------------------------------------------------------------------------
+-- STANDARD BARE WILSON NORMALIZATION VS REPOSITORY UNIT-COEFFICIENT
+-- CONVENTION. For SU(N), with W = sum_p [1 - Re Tr U_p / N],
+-- the standard continuum-matched bare coefficient is 2N / g_0^2.
+-- For SU(2), this is FOUR times inverse-square coupling, not ONE.
+-- Moving the factor four into the basis gives a coefficient of +/-u.
+-- Do not identify these two conventions without this conversion.
+--
+-- Primary: Wilson, Phys. Rev. D 10 (1974), DOI above.
+-- Lattice normalizations: check trace and generator conventions on the
+-- selected CMP119 *renormalized* action, not only on a bare Wilson lattice.
+------------------------------------------------------------------------
+
+four : ℚ
+four = (1ℚ + 1ℚ) + (1ℚ + 1ℚ)
+  where
+    open import Data.Rational.Base using (_+_)
+
+standardSU2WilsonAction : ℚ → T4.LocalizedAction
+standardSU2WilsonAction u =
+  T4.scaleLocalizedAction (four * u) positiveWilsonBasis
+
+negativeStandardSU2WilsonAction : ℚ → T4.LocalizedAction
+negativeStandardSU2WilsonAction c =
+  T4.scaleLocalizedAction c negativeWilsonBasis
+
+standardSU2WilsonSameNegativeOrientation :
+  ∀ u →
+  standardSU2WilsonAction u
+  ≡ negativeStandardSU2WilsonAction (- (four * u))
+standardSU2WilsonSameNegativeOrientation u =
+  cong₂ T4.localizedAction (Ring.solve-∀ u) (Ring.solve-∀ u)
+
+factorFourAbsorbedNegativeBasis : T4.LocalizedAction
+factorFourAbsorbedNegativeBasis =
+  T4.scaleLocalizedAction four negativeWilsonBasis
+
+standardSU2WilsonSameRenormalizedUnitCoefficient :
+  ∀ u →
+  standardSU2WilsonAction u
+  ≡ T4.scaleLocalizedAction (- u) factorFourAbsorbedNegativeBasis
+standardSU2WilsonSameRenormalizedUnitCoefficient u =
+  cong₂ T4.localizedAction (Ring.solve-∀ u) (Ring.solve-∀ u)
+
+fourNormalizedBasisHasPlaquetteCoefficientMinusFour :
+  T4.plaquetteCoefficientProjector factorFourAbsorbedNegativeBasis
+  ≡ - four
+fourNormalizedBasisHasPlaquetteCoefficientMinusFour =
+  Ring.solve []
