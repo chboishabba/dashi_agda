@@ -43,3 +43,4 @@ import DASHI.Economics.ChinaUSAITrainingServingComputeSeparation2026Exact
 import DASHI.Economics.AICurrentRegimeCalibration2026Exact
 import DASHI.Economics.AICurrentRegimeSourceAttributionCrossPollinationExact
 import DASHI.Economics.AICurrentRegimePromotionSchedulerExact
+\nimport DASHI.Economics.AIChinaTSMCGeoEconomicCalibration2026Exact\n
