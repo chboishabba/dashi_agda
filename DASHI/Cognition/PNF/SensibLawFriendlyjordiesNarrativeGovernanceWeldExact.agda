@@ -280,6 +280,43 @@ projectedEvidencePreservesCounter :
   ≡ counterRefs e
 projectedEvidencePreservesCounter e = refl
 
+comparisonToGovernanceEvidence :
+  NarrativeComparisonItem →
+  String →
+  String →
+  List String →
+  List String →
+  List String →
+  NarrativeEvidenceMode →
+  NarrativeGovernanceEvidence
+comparisonToGovernanceEvidence item sourceRevision statementRef support counter missing mode =
+  narrative-governance-evidence
+    (NarrativeComparisonItem.comparisonRef item)
+    (NarrativeComparisonItem.leftPropositionRef item)
+    statementRef
+    sourceRevision
+    (NarrativeComparisonItem.sourceRefs item)
+    support
+    counter
+    missing
+    mode
+    (NarrativeComparisonItem.contestationRef item)
+    (NarrativeComparisonItem.reviewRef item)
+    true refl
+    false refl
+    false refl
+
+comparisonProjectionCannotRank :
+  (item : NarrativeComparisonItem) →
+  (sourceRevision statementRef : String) →
+  (support counter missing : List String) →
+  (mode : NarrativeEvidenceMode) →
+  createsGapOrdering
+    (comparisonToGovernanceEvidence
+      item sourceRevision statementRef support counter missing mode)
+    ≡ false
+comparisonProjectionCannotRank item sourceRevision statementRef support counter missing mode = refl
+
 ------------------------------------------------------------------------
 -- Friendlyjordies / SensibLaw named public proving-case atlas.
 --
@@ -330,8 +367,8 @@ candidateLeaf root claimRef speakerRef statementRef =
     []
     []
     Contest.unreviewed
-    ("review:" ++ claimRef)
-    ("trace:" ++ claimRef)
+    claimRef
+    claimRef
     true refl
     false refl
     false refl
