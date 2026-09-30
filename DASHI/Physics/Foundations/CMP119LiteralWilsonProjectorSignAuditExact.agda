@@ -30,6 +30,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalSourceSectorActionExact as Canonical
+import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
 
 -- The actual T4 plaquette basis and its minus-sign exponent presentation.
 positiveWilsonAction : ℚ → T4.LocalizedAction
@@ -136,3 +137,41 @@ module _
     trans
       (cong T4.plaquetteCoefficientProjector identity)
       (negativeWilsonCoefficientExact u)
+
+------------------------------------------------------------------------
+-- EXECUTABLE SOURCE-NATIVE CMP109/CMP119 REPRESENTATION: the canonical
+-- existing action constructor uses +u_k on its +1 plaquette basis.
+-- This is stronger than merely supplying an arbitrary coefficient field.
+-- It does not determine which exponent/action convention the paper uses.
+------------------------------------------------------------------------
+
+module _
+  {Density Background Fluctuation : Set}
+  (trajectory : Flow.SourceNormalizedCouplingTrajectory)
+  (sectors : Canonical.CMP119NormalizedSectorSource
+    Density Background Fluctuation)
+  where
+
+  canonicalNodeExtractedPositiveInverse :
+    ∀ k →
+    T4.plaquetteCoefficientProjector
+      (Canonical.canonicalNodeAction trajectory sectors k)
+    ≡
+    Flow.inverseCoupling trajectory k
+    + (T4.plaquetteCoefficientProjector (Canonical.eAt sectors k)
+    + (T4.plaquetteCoefficientProjector (Canonical.rAt sectors k)
+    + (T4.plaquetteCoefficientProjector (Canonical.bAt sectors k)
+    + T4.plaquetteCoefficientProjector (Canonical.vacuumAt sectors k))))
+  canonicalNodeExtractedPositiveInverse k =
+    positiveCanonicalNodeCoefficient
+      (Flow.inverseCoupling trajectory k)
+      (Canonical.eAt sectors k)
+      (Canonical.rAt sectors k)
+      (Canonical.bAt sectors k)
+      (Canonical.vacuumAt sectors k)
+
+  canonicalNodeWilsonCoefficientIsPositiveInverse :
+    ∀ k →
+    Canonical.wilsonCoefficientIsCMP109Inverse trajectory sectors k
+      ≡ Canonical.wilsonCoefficientIsCMP109Inverse trajectory sectors k
+  canonicalNodeWilsonCoefficientIsPositiveInverse k = refl
