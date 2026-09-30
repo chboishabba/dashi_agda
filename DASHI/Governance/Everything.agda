@@ -239,3 +239,20 @@ import DASHI.Governance.ResourcePressureTelemetryPermissionExact
 import DASHI.Governance.ExecutionGovernanceClosureAssayExact
 import DASHI.Governance.ConstitutionalAxisResidualCapabilityExact
 import DASHI.Governance.MHSButterBenchPhysicalAgentCrossPollinationExact
+
+------------------------------------------------------------------------
+-- Iran / Palestine / revolutionary-intellectual genealogy and authority lane.
+-- Source provenance, religion/ideology/state identity, historical influence,
+-- comparative grammar and political authority remain separately typed.
+import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact
+import DASHI.Governance.IRGCOpenLetter2026StrategicCommunicationExact
+import DASHI.Governance.IRGCOpenLetter2026PeopleStateNonFactorabilityExact
+import DASHI.Governance.IRGCOpenLetter2026SharedInterestGraphExact
+import DASHI.Governance.ReligiousPoliticalIdentityNoncollapseExact
+import DASHI.Governance.RodneyUnderdevelopmentAttributedSourceExact
+import DASHI.Governance.IranMarxianIslamicTranslationExact
+import DASHI.Governance.PoliticalGenealogySnowballParetoExact
+import DASHI.Governance.IRGCThirdWorldistAuthorityCrossPollinationExact
+import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact
+import DASHI.Governance.IranianDialecticalTransportPhilosophyCrossPollinationExact
+import DASHI.Governance.IranianRevolutionaryFieldTransportCapstoneExact
