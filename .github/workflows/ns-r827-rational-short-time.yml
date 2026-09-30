@@ -1,0 +1,35 @@
+name: NS R827 rational short-time diagnostic
+on:
+  push:
+    branches:
+      - 'agent/ns-r655-remote-collar-transport'
+    paths:
+      - 'scripts/check_ns_r823_exact_sparse_reserve_witness.py'
+      - 'scripts/check_ns_r827_rational_short_time_bound.py'
+      - '.github/workflows/ns-r827-rational-short-time.yml'
+  pull_request:
+    paths:
+      - 'scripts/check_ns_r823_exact_sparse_reserve_witness.py'
+      - 'scripts/check_ns_r827_rational_short_time_bound.py'
+      - '.github/workflows/ns-r827-rational-short-time.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rational-enclosure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check exact rational short-time arithmetic
+        run: python scripts/check_ns_r827_rational_short_time_bound.py
+      - name: Check independently evaluated Fourier seed
+        run: |
+          python -m pip install sympy
+          python scripts/check_ns_r823_exact_sparse_reserve_witness.py
