@@ -653,3 +653,5 @@ import DASHI.Physics.Closure.NSTriadKNR650CompleteSignedFourHelicityBarrierRound
 
 import DASHI.Physics.Closure.NSTriadKNR650CCTouchedSignedRowsRound822Exact
 import DASHI.Physics.Closure.NSTriadKNR650SignedComparableReserveRound823Exact
+import DASHI.Physics.Closure.NSTriadKNR650PhysicalCCGradedReserveRound824Exact
+import DASHI.Physics.Closure.NSTriadKNR650PhysicalReserveFeasibilityRound825Exact
