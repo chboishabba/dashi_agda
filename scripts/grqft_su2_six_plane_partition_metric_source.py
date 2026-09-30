@@ -51,7 +51,7 @@ def mul(a,b):
 
 def exp_negative_small(x,n):
     """For 0 <= x <= 1, odd Taylor truncation is lower, even is upper."""
-    if x<0 or x>1 or n<1: raise ValueError("Taylor range/precision invalid")
+    if x<0 or x>1 or n<2: raise ValueError("Taylor range/precision invalid")
     t=F(1)
     partial=t
     lower=None
@@ -103,6 +103,7 @@ def one_point(source,n=12):
         raise ValueError("nonempty finite quadrature required")
     ids=set()
     totalweight=F()
+    reference_variation_totals={a:F() for a in AXES}
     Z=I(F())
     DZ={axis:I(F()) for axis in AXES}
     rows=[]
@@ -144,6 +145,8 @@ def one_point(source,n=12):
         refs=c.get("reference_log_derivative")
         if not isinstance(refs,dict) or set(refs)!=set(AXES):
             raise ValueError("reference measure score needed at all four axes")
+        for a in AXES:
+            reference_variation_totals[a]+=weight*f(refs[a])
         ds={a:dw[a]+sector_ds[a] for a in AXES}
         scores={a:f(refs[a])-ds[a] for a in AXES}
         action=wilson_action+sector_base
@@ -163,6 +166,8 @@ def one_point(source,n=12):
                      "weighted_action_trace":str(sum(ds.values(),F()))})
     if totalweight!=1:
         raise ValueError("discrete reference weights must sum exactly to one")
+    if any(v!=0 for v in reference_variation_totals.values()):
+        raise ValueError("metric-dependent probability reference violates D_h integral 1 = 0")
     if Z[0]<=0:
         raise ArithmeticError("partition positivity enclosure failed")
     logderiv={a:div_pos(DZ[a],Z) for a in AXES}
