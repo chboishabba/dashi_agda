@@ -245,6 +245,35 @@ module PhysicalReserveFeasibility
       (sym (integratedCompleteGraded cutoff S terminal))
       normalized
 
+  -- Rational integration here is an input of the SAME actual R408
+  -- integration authority.  Once the caller supplies an evaluated physical
+  -- packet and terminal, the result is a decidable certificate, not a
+  -- synthetic boolean or a replacement integral.
+  data PhysicalReserveVerdict
+      (cutoff : Nat)
+      (S : Packet.LivePhysicalPacketStructure D C cutoff)
+      (terminal : Time) : Set where
+    paid :
+      Live.integratedDemand cutoff S terminal
+        ≤ Live.integratedReserve cutoff S terminal →
+      PhysicalReserveVerdict cutoff S terminal
+    refuted :
+      ¬ (Live.integratedDemand cutoff S terminal
+        ≤ Live.integratedReserve cutoff S terminal) →
+      PhysicalReserveVerdict cutoff S terminal
+
+  decideActualReserve :
+    (cutoff : Nat) →
+    (S : Packet.LivePhysicalPacketStructure D C cutoff) →
+    (terminal : Time) →
+    PhysicalReserveVerdict cutoff S terminal
+  decideActualReserve cutoff S terminal
+    with ℚP._≤?_
+      (Live.integratedDemand cutoff S terminal)
+      (Live.integratedReserve cutoff S terminal)
+  ... | yes payment = paid payment
+  ... | no counterexample = refuted counterexample
+
   -- A concrete *physical* finite-Galerkin witness satisfying this strict
   -- reverse inequality would refute the universal R823 reserve claim.
   -- No such witness is assumed or asserted to exist.
