@@ -6,6 +6,7 @@ on:
       - "DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda"
       - "DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda"
       - "DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyWeakYMAccelerationObstructionExact.agda"
       - "DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda"
       - "DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda"
       - "scripts/grqft_selected_finite_stress_exact_audit.py"
@@ -55,6 +56,7 @@ jobs:
               DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda \
               DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyWeakYMAccelerationObstructionExact.agda \
               DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda \
               DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda
