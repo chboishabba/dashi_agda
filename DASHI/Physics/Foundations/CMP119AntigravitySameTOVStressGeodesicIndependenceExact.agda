@@ -22,7 +22,6 @@ module DASHI.Physics.Foundations.CMP119AntigravitySameTOVStressGeodesicIndepende
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _/_)
 import Data.Integer.Base as Int
-import Data.List.Base
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVSystemExact as TOV
@@ -58,12 +57,7 @@ sameTensorTraceIsActiveMinusTwoRho s =
 sameTensorActiveIsExistingTOVActive :
   ∀ s →
   oneSourceLorentzianActive s ≡ TOV.activeStress s
-sameTensorActiveIsExistingTOVActive s =
-  solve
-    (TOV.rho s Data.List.Base.∷
-      TOV.radialPressure s Data.List.Base.∷
-      TOV.tangentialPressure s Data.List.Base.∷
-      Data.List.Base.[])
+sameTensorActiveIsExistingTOVActive s = refl
 
 -- Two static-patch local fixtures have identical m/r and positive rho.
 -- Only the radial/tangential pressure allocations differ.
