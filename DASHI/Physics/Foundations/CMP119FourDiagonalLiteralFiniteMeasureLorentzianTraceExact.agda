@@ -7,6 +7,9 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 import DASHI.Physics.Foundations.CMP119AntigravityTimelikeEnergySharpActiveStressCriterionExact as Sharp
+import DASHI.Physics.Foundations.CMP119AntigravityWeakCouplingTraceEnergyNoGoExact as WeakYM
+import Data.Rational.Properties as ℚP
+open import Relation.Nullary using (¬_)
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
 import DASHI.Physics.Foundations.CMP119FourDiagonalLiteralFiniteMeasureActiveStressExact as FourFinite
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -196,3 +199,21 @@ module _
       (sym activeStressIsTracePlusTwiceC00)
       (Sharp.energyControlImpliesActiveNegative
         finiteMeasureLorentzianTrace c00 timelikeControl)
+
+  -- If the *same* finite-measure active numerator can also be identified
+  -- with the standard weak-coupling Lorentzian E/B stress expression,
+  -- source-derived positivity prohibits the timelike inequality needed
+  -- for localized positive-G repulsion. The identification is explicitly
+  -- required, not inferred from matching a trace-anomaly coefficient.
+  selectedFiniteMeasureWeakYMExcludesTimelikeRepulsion :
+    (weak : WeakYM.WeakCouplingYMTraceEnergyData) →
+    finiteMeasureActiveStress ≡ WeakYM.activeStress weak →
+    ¬ ((1ℚ + 1ℚ) * c00 < - finiteMeasureLorentzianTrace)
+  selectedFiniteMeasureWeakYMExcludesTimelikeRepulsion weak sameActive =
+    λ timelikeControl →
+      ℚP.<⇒≱
+        (subst
+          (λ selectedValue → selectedValue < 0ℚ)
+          sameActive
+          (selectedMeasureC00ControlClosesNegativeActive timelikeControl))
+        (WeakYM.activeStressNonnegative weak)
