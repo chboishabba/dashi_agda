@@ -11,6 +11,7 @@ import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact as Sources
 import DASHI.Governance.IRGCOpenLetter2026StrategicCommunicationExact as Letter
 import DASHI.Governance.IRGCOpenLetter2026SharedInterestGraphExact as Graph
+import DASHI.Governance.IRGCOpenLetter2026PrimarySpanReceiptsExact as PrimarySpans
 import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact as Genealogy
 import DASHI.Cognition.PNF.SensibLawChronologyContestationSpineExact as Chronology
 
@@ -30,7 +31,9 @@ import DASHI.Cognition.PNF.SensibLawChronologyContestationSpineExact as Chronolo
 --   exact source-span review and historical-mechanism closure.
 --
 -- The existing source atlas and argument graph pay carrier/source-local
--- structure.  They do not yet pay exact PDF spans for every argument node.
+-- structure.  A Tasnim full-text primary HTML carrier now pays exact section/
+-- paragraph locators for the selected source-local argument moves.  This is
+-- not asserted byte-identical to the linked PDF and does not pay claim truth.
 ------------------------------------------------------------------------
 
 data PacketLayer : Set where
@@ -193,6 +196,7 @@ record IRGCDualChronologyPacket : Set where
     closingEschatologyCitation : Letter.CrossTraditionCitation
     eventTimeEntries : List SourceLocalEvent
     knowledgeTimeAssertions : List Chronology.TemporalAssertion
+    primarySpanReceipts : List PrimarySpans.PrimarySpanReceipt
     exactSpanDemands : List ExactSpanDemand
     sourceRolesPaid : Bool
     sourceRolesPaidIsTrue : sourceRolesPaid ≡ true
@@ -203,8 +207,8 @@ record IRGCDualChronologyPacket : Set where
     dualChronologyRepresentedIsTrue :
       dualChronologyRepresented ≡ true
     exactPrimarySpansPaid : Bool
-    exactPrimarySpansPaidIsFalse :
-      exactPrimarySpansPaid ≡ false
+    exactPrimarySpansPaidIsTrue :
+      exactPrimarySpansPaid ≡ true
     reviewedEventJoinPaid : Bool
     reviewedEventJoinPaidIsFalse :
       reviewedEventJoinPaid ≡ false
@@ -226,14 +230,12 @@ canonicalIRGCDualChronologyPacket =
     Letter.quranClosure
     (letterPublicationEvent ∷ reutersObservationEvent ∷ [])
     (matinAsgariKnowledgeTime ∷ boroujerdiKnowledgeTime ∷ [])
-    ( peopleStateSpanDemand
-    ∷ commonOppressorSpanDemand
-    ∷ agencySpanDemand
-    ∷ [])
+    PrimarySpans.canonicalPrimarySpanReceipts
+    []
     true refl
     true refl
     true refl
-    false refl
+    true refl
     false refl
     false refl
     false refl
@@ -256,6 +258,7 @@ data SourceArgumentGraphCreatesWorldTruth : Set where
 data DualChronologyCreatesHistoricalMechanism : Set where
 data SourceRoleCreatesReviewedEventJoin : Set where
 data SecondaryReportReplacesPrimarySpan : Set where
+data PrimaryHTMLSpanEqualsPDFByteIdentity : Set where
 data HistoricalGenealogyAutomaticallyExplainsIRGCLetter : Set where
 
 sourceGraphDoesNotCreateWorldTruth :
@@ -277,3 +280,8 @@ secondaryReportDoesNotReplacePrimarySpan ()
 genealogyDoesNotAutomaticallyExplainLetter :
   HistoricalGenealogyAutomaticallyExplainsIRGCLetter → ⊥
 genealogyDoesNotAutomaticallyExplainLetter ()
+
+
+primaryHTMLSpanDoesNotCreatePDFByteIdentity :
+  PrimaryHTMLSpanEqualsPDFByteIdentity → ⊥
+primaryHTMLSpanDoesNotCreatePDFByteIdentity ()
