@@ -300,6 +300,263 @@ argumentFamilyRef governmentCapacity = "government_capacity"
 argumentFamilyRef etsDelayAuthority = "ets_delay_authority"
 argumentFamilyRef fallaciesAndFraming = "fallacies"
 
+------------------------------------------------------------------------
+-- Typed fixture proposition roots and source-local claim leaves.
+--
+-- These mirror the checked-in SensibLaw narrative fixtures.  They represent
+-- what each lane asserts/reports, not the truth of the embedded propositions.
+------------------------------------------------------------------------
+
+candidateRoot : String → String → Contest.PropositionRoot
+candidateRoot ref label =
+  Contest.proposition-root
+    ref label
+    true refl
+    false refl
+    false refl
+    false refl
+
+candidateLeaf :
+  (root : Contest.PropositionRoot) →
+  String → String → String →
+  Contest.ClaimLeaf root
+candidateLeaf root claimRef speakerRef statementRef =
+  Contest.claim-leaf
+    claimRef
+    Contest.affirmation
+    speakerRef
+    (statementRef ∷ [])
+    []
+    []
+    []
+    Contest.unreviewed
+    ("review:" ++ claimRef)
+    ("trace:" ++ claimRef)
+    true refl
+    false refl
+    false refl
+    false refl
+
+cprsBlockingRoot : Contest.PropositionRoot
+cprsBlockingRoot =
+  candidateRoot
+    "prop:cprs-blocking"
+    "the Greens blocked the CPRS"
+
+sourceCprsClaim : Contest.ClaimLeaf cprsBlockingRoot
+sourceCprsClaim =
+  candidateLeaf
+    cprsBlockingRoot
+    "claim:friendlyjordies:cprs-blocking"
+    "speaker:friendlyjordies"
+    "jordies_thread_position:u1"
+
+counterCprsClaim : Contest.ClaimLeaf cprsBlockingRoot
+counterCprsClaim =
+  candidateLeaf
+    cprsBlockingRoot
+    "claim:counter-analysis:cprs-blocking"
+    "speaker:counter-analysis"
+    "thread_balanced_analysis:u1"
+
+greensInstabilityRoot : Contest.PropositionRoot
+greensInstabilityRoot =
+  candidateRoot
+    "prop:greens-cprs-instability"
+    "blocking the CPRS contributed to climate-policy instability"
+
+coalitionInstabilityRoot : Contest.PropositionRoot
+coalitionInstabilityRoot =
+  candidateRoot
+    "prop:coalition-instability"
+    "Coalition opposition contributed to climate-policy instability"
+
+sourceInstabilityClaim : Contest.ClaimLeaf greensInstabilityRoot
+sourceInstabilityClaim =
+  candidateLeaf
+    greensInstabilityRoot
+    "claim:friendlyjordies:instability"
+    "speaker:friendlyjordies"
+    "jordies_case:u2"
+
+counterInstabilityClaim : Contest.ClaimLeaf coalitionInstabilityRoot
+counterInstabilityClaim =
+  candidateLeaf
+    coalitionInstabilityRoot
+    "claim:counter-analysis:instability"
+    "speaker:counter-analysis"
+    "counter_analysis:u2"
+
+majorityCapacityRoot : Contest.PropositionRoot
+majorityCapacityRoot =
+  candidateRoot
+    "prop:majority-government-capacity"
+    "majority government supports long-term climate policy"
+
+minorityCapacityRoot : Contest.PropositionRoot
+minorityCapacityRoot =
+  candidateRoot
+    "prop:minority-government-capacity"
+    "minority government passed carbon-pricing legislation"
+
+sourceMajorityClaim : Contest.ClaimLeaf majorityCapacityRoot
+sourceMajorityClaim =
+  candidateLeaf
+    majorityCapacityRoot
+    "claim:friendlyjordies:majority-capacity"
+    "speaker:friendlyjordies"
+    "jordies_thread_position:u4"
+
+counterMinorityClaim : Contest.ClaimLeaf minorityCapacityRoot
+counterMinorityClaim =
+  candidateLeaf
+    minorityCapacityRoot
+    "claim:counter-analysis:minority-capacity"
+    "speaker:counter-analysis"
+    "thread_balanced_analysis:u4"
+
+woolworthsImpactRoot : Contest.PropositionRoot
+woolworthsImpactRoot =
+  candidateRoot
+    "prop:woolworths-direct-impact"
+    "Woolworths evidence concerns direct grocery or cost pass-through effects"
+
+sourceWoolworthsClaim : Contest.ClaimLeaf woolworthsImpactRoot
+sourceWoolworthsClaim =
+  candidateLeaf
+    woolworthsImpactRoot
+    "claim:friendlyjordies:woolworths"
+    "speaker:friendlyjordies"
+    "jordies_thread_position:u5"
+
+counterWoolworthsClaim : Contest.ClaimLeaf woolworthsImpactRoot
+counterWoolworthsClaim =
+  candidateLeaf
+    woolworthsImpactRoot
+    "claim:counter-analysis:woolworths"
+    "speaker:counter-analysis"
+    "thread_balanced_analysis:u5"
+
+garnautAuthorityRoot : Contest.PropositionRoot
+garnautAuthorityRoot =
+  candidateRoot
+    "prop:garnaut-imperfect-ets-delay"
+    "an attributed Garnaut position compares an imperfect ETS with delay"
+
+sourceGarnautClaim : Contest.ClaimLeaf garnautAuthorityRoot
+sourceGarnautClaim =
+  candidateLeaf
+    garnautAuthorityRoot
+    "claim:friendlyjordies:garnaut-wrapper"
+    "speaker:friendlyjordies"
+    "jordies_authority_case:u1"
+
+counterGarnautClaim : Contest.ClaimLeaf garnautAuthorityRoot
+counterGarnautClaim =
+  candidateLeaf
+    garnautAuthorityRoot
+    "claim:counter-analysis:garnaut-wrapper"
+    "speaker:counter-analysis"
+    "counter_authority_analysis:u1"
+
+------------------------------------------------------------------------
+-- Comparison items: shared proposition != merged claim; competing explanations
+-- and reasoning-flow differences remain separate typed items.
+------------------------------------------------------------------------
+
+sharedCprsComparison : NarrativeComparisonItem
+sharedCprsComparison =
+  narrative-comparison-item
+    "cmp:cprs:shared"
+    sharedProposition
+    (Contest.propositionRef cprsBlockingRoot)
+    (Contest.propositionRef cprsBlockingRoot)
+    "relation:shared-root-distinct-claims"
+    ("jordies_thread_position:u1" ∷ "thread_balanced_analysis:u1" ∷ [])
+    "review:cmp:cprs:shared"
+    true refl
+    false refl
+    false refl
+
+instabilityAccountComparison : NarrativeComparisonItem
+instabilityAccountComparison =
+  narrative-comparison-item
+    "cmp:instability:competing-account"
+    conflictingAccounts
+    (Contest.propositionRef greensInstabilityRoot)
+    (Contest.propositionRef coalitionInstabilityRoot)
+    "relation:instability:same-incident-different-account"
+    ("jordies_case:u2" ∷ "counter_analysis:u2" ∷ [])
+    "review:cmp:instability"
+    true refl
+    false refl
+    false refl
+
+instabilityContestation :
+  Contest.ContestationRelation sourceInstabilityClaim counterInstabilityClaim
+instabilityContestation =
+  Contest.contestation-relation
+    "relation:instability:same-incident-different-account"
+    Contest.sameIncidentDifferentAccount
+    ("jordies_case:u2" ∷ "counter_analysis:u2" ∷ [])
+    []
+    "review:cmp:instability"
+    "source-local narrative comparison"
+    true refl
+    false refl
+    false refl
+    false refl
+
+instabilityClaimPairContestation :
+  ClaimPairContestation sourceInstabilityClaim counterInstabilityClaim
+instabilityClaimPairContestation =
+  claim-pair-contestation
+    instabilityContestation
+    instabilityAccountComparison
+    refl
+
+governmentCapacityComparison : NarrativeComparisonItem
+governmentCapacityComparison =
+  narrative-comparison-item
+    "cmp:government-capacity:reasoning-flow"
+    reasoningFlowDifference
+    (Contest.propositionRef majorityCapacityRoot)
+    (Contest.propositionRef minorityCapacityRoot)
+    "relation:government-capacity:distinct-reasoning-paths"
+    ("jordies_thread_position:u4" ∷ "thread_balanced_analysis:u4" ∷ [])
+    "review:cmp:government-capacity"
+    true refl
+    false refl
+    false refl
+
+woolworthsComparison : NarrativeComparisonItem
+woolworthsComparison =
+  narrative-comparison-item
+    "cmp:woolworths:qualification"
+    reasoningFlowDifference
+    (Contest.propositionRef woolworthsImpactRoot)
+    (Contest.propositionRef woolworthsImpactRoot)
+    "relation:woolworths:shared-topic-distinct-framing"
+    ("jordies_thread_position:u5" ∷ "thread_balanced_analysis:u5" ∷ [])
+    "review:cmp:woolworths"
+    true refl
+    false refl
+    false refl
+
+garnautAuthorityComparison : NarrativeComparisonItem
+garnautAuthorityComparison =
+  narrative-comparison-item
+    "cmp:garnaut:authority-wrapper"
+    sharedProposition
+    (Contest.propositionRef garnautAuthorityRoot)
+    (Contest.propositionRef garnautAuthorityRoot)
+    "relation:garnaut:shared-attributed-proposition"
+    ("jordies_authority_case:u1" ∷ "counter_authority_analysis:u1" ∷ [])
+    "review:cmp:garnaut"
+    true refl
+    false refl
+    false refl
+
 friendlyjordiesSourceLane : NarrativeLane
 friendlyjordiesSourceLane =
   narrative-lane
@@ -309,8 +566,18 @@ friendlyjordiesSourceLane =
     ∷ "SensibLaw/demo/narrative/friendlyjordies_chat_arguments.json"
     ∷ "SensibLaw/demo/narrative/friendlyjordies_authority_wrappers.json"
     ∷ [])
-    []
-    []
+    ( Contest.propositionRef cprsBlockingRoot
+    ∷ Contest.propositionRef greensInstabilityRoot
+    ∷ Contest.propositionRef majorityCapacityRoot
+    ∷ Contest.propositionRef woolworthsImpactRoot
+    ∷ Contest.propositionRef garnautAuthorityRoot
+    ∷ [])
+    ( Contest.claimRef sourceCprsClaim
+    ∷ Contest.claimRef sourceInstabilityClaim
+    ∷ Contest.claimRef sourceMajorityClaim
+    ∷ Contest.claimRef sourceWoolworthsClaim
+    ∷ Contest.claimRef sourceGarnautClaim
+    ∷ [])
     ( argumentFamilyRef cprsBlocking
     ∷ argumentFamilyRef woolworthsPriceEffects
     ∷ argumentFamilyRef governmentCapacity
@@ -331,8 +598,18 @@ friendlyjordiesCounterLane =
     ∷ "SensibLaw/demo/narrative/friendlyjordies_chat_arguments.json"
     ∷ "ITIR-suite/docs/planning/friendlyjordies_narrative_validation_and_competing_narratives_20260309.md"
     ∷ [])
-    []
-    []
+    ( Contest.propositionRef cprsBlockingRoot
+    ∷ Contest.propositionRef coalitionInstabilityRoot
+    ∷ Contest.propositionRef minorityCapacityRoot
+    ∷ Contest.propositionRef woolworthsImpactRoot
+    ∷ Contest.propositionRef garnautAuthorityRoot
+    ∷ [])
+    ( Contest.claimRef counterCprsClaim
+    ∷ Contest.claimRef counterInstabilityClaim
+    ∷ Contest.claimRef counterMinorityClaim
+    ∷ Contest.claimRef counterWoolworthsClaim
+    ∷ Contest.claimRef counterGarnautClaim
+    ∷ [])
     ( argumentFamilyRef cprsBlocking
     ∷ argumentFamilyRef woolworthsPriceEffects
     ∷ argumentFamilyRef governmentCapacity
@@ -349,9 +626,21 @@ friendlyjordiesCompetingNarratives =
   competing-narratives
     friendlyjordiesSourceLane
     friendlyjordiesCounterLane
-    []
-    []
-    ("external corroboration pending per proposition" ∷ [])
+    ( sharedCprsComparison
+    ∷ instabilityAccountComparison
+    ∷ governmentCapacityComparison
+    ∷ woolworthsComparison
+    ∷ garnautAuthorityComparison
+    ∷ [])
+    ( Contest.propositionRef cprsBlockingRoot
+    ∷ Contest.propositionRef woolworthsImpactRoot
+    ∷ Contest.propositionRef garnautAuthorityRoot
+    ∷ [])
+    ( Contest.propositionRef greensInstabilityRoot
+    ∷ Contest.propositionRef coalitionInstabilityRoot
+    ∷ Contest.propositionRef majorityCapacityRoot
+    ∷ Contest.propositionRef minorityCapacityRoot
+    ∷ [])
     ( "SensibLaw narrative fixture receipts"
     ∷ "ITIR narrative comparison planning receipt"
     ∷ [])
