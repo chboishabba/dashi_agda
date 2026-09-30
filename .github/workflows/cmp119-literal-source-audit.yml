@@ -5,6 +5,7 @@ on:
     paths:
       - "DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda"
       - "DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda"
       - "DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda"
       - "DASHI/Physics/Foundations/CMP119CosmologyWeakYMAccelerationObstructionExact.agda"
       - "DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda"
@@ -55,6 +56,7 @@ jobs:
             for path in \
               DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda \
               DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda \
+              DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyWeakYMAccelerationObstructionExact.agda \
               DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
