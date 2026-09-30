@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 from functools import lru_cache
 from itertools import product
-from sympy import I, Matrix, Rational, S, conjugate, expand, simplify, sqrt
+from sympy import I, Matrix, Rational, S, Symbol, conjugate, expand, simplify, sqrt
 
 MODES = tuple(k for k in product(range(-1, 2), repeat=3) if k != (0, 0, 0))
 ZERO = Matrix([0, 0, 0])
@@ -110,6 +110,23 @@ def exact_snapshot():
     assert dissipation == 108
     assert signed_rate == -19800 - 4248*sqrt(2)
     assert signed_rate < 0
+
+    # An exact amplitude-scaling audit of this *particular* Fourier
+    # polynomial.  The state-dependent nonlinear forcing is quadratic in u;
+    # its outer helical slot is cubic, while the mixed test cell is quadratic.
+    # The mode weights, cube, viscosity and projector geometry are fixed.
+    # This is not a certificate of a live R408 solution curve.
+    amplitude = Symbol("a", real=True)
+    amplitude_rate = simplify(
+        6 * (12 * comm_work * amplitude**5
+             - production * amplitude**3
+             + dissipation * amplitude**2)
+    )
+    assert simplify(amplitude_rate.subs(amplitude, 1) - signed_rate) == 0
+    assert amplitude_rate.subs(amplitude, 0) == 0
+    assert amplitude_rate.subs(amplitude, -1) > 0
+    assert amplitude_rate.subs(amplitude, Rational(1, 2)) < 0
+    assert amplitude_rate.subs(amplitude, Rational(1, 4)) > 0
     return {
         "schema": "ns_r823_exact_sparse_snapshot.v1",
         "nonzero_initial_modes": {str(k): list(map(str, v)) for k,v in SEEDS.items()},
@@ -127,6 +144,10 @@ def exact_snapshot():
         "r723_combined_twelve_commutator": str(combined),
         "r815_complete_instantaneous_rate": str(signed_rate),
         "strict_negative_instantaneous_rate": bool(signed_rate < 0),
+        "amplitude_rate_polynomial": str(amplitude_rate),
+        "amplitude_at_one_half_negative": bool(amplitude_rate.subs(amplitude, Rational(1, 2)) < 0),
+        "amplitude_at_one_quarter_positive": bool(amplitude_rate.subs(amplitude, Rational(1, 4)) > 0),
+        "amplitude_sign_reversal_positive": bool(amplitude_rate.subs(amplitude, -1) > 0),
         "kernel_certified": False,
         "r408_live_trajectory_reification": False,
         "integrated_falsification_certified": False,
