@@ -60,7 +60,7 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
     def test_negative_trace_is_diagnostic_not_a_physical_claim(self):
         out = module.audit(fixture(insertion00="-1"))
         self.assertEqual(out["four_diagonal_sum"], "-4")
-        self.assertFalse(out["weak_coupling_nonnegative_active_compatible"])
+        self.assertFalse(out["candidate_sign_compatible_with_weak_coupling_nonnegative_active_if_physically_identified"])
         self.assertFalse(out["renormalized_continuum_stress_proved"])
 
     def test_trace_silent_insertion_has_zero_diagonal_sum(self):
@@ -98,6 +98,10 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
         f["geometry_diagnostic"] = {
             "metric_frame": f["provenance"]["metric_frame"],
             "geometry_revision": "finite-test-only",
+            "selected_source_identifier": f["provenance"]["source_identifier"],
+            "cutoff": f["provenance"]["cutoff"],
+            "normalization_origin": "independent-toy-value",
+            "factor_fitted_to_this_geometry": False,
             "source_to_geometry_normalization": "1",
             "einstein_tensor": {slot: ("1" if slot == "00" else "0")
                                 for slot in module.SLOTS}
@@ -114,6 +118,10 @@ class SelectedFiniteStressAuditTest(unittest.TestCase):
         f["geometry_diagnostic"] = {
             "metric_frame": "other-signature",
             "geometry_revision": "toy-test",
+            "selected_source_identifier": f["provenance"]["source_identifier"],
+            "cutoff": f["provenance"]["cutoff"],
+            "normalization_origin": "independent-toy-value",
+            "factor_fitted_to_this_geometry": False,
             "source_to_geometry_normalization": "1",
             "einstein_tensor": {slot: "0" for slot in module.SLOTS}
         }
