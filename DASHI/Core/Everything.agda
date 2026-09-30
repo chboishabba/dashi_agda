@@ -186,3 +186,4 @@ module DASHI.Core.Everything where
 -- Theory underdetermination, epistemic suspension, and discriminating experiments.
 
 -- Law-like invariance under declared counterfactual/control families.
+import DASHI.Core.HistoricalMechanismCompilerExact
