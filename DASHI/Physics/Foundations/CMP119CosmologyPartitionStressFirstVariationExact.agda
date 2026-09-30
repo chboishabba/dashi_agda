@@ -134,21 +134,30 @@ weightedLogDerivativeWeylTrace :
     + weightedLogDerivative d K.component22 x
     + weightedLogDerivative d K.component33 x
   ≡ fourDiagonalReferenceMinusSector d x
-weightedLogDerivativeWeylTrace d x
-  rewrite Wilson.diagonalActionVariationTraceZero (wilson d) x =
-  Ring.solve-∀
-    (referenceMeasureLogVariation d K.component00 x)
-    (referenceMeasureLogVariation d K.component11 x)
-    (referenceMeasureLogVariation d K.component22 x)
-    (referenceMeasureLogVariation d K.component33 x)
-    (nonWilsonDerivative d K.component00 x)
-    (nonWilsonDerivative d K.component11 x)
-    (nonWilsonDerivative d K.component22 x)
-    (nonWilsonDerivative d K.component33 x)
-    (Wilson.actionVariationAt (wilson d) K.component00 x)
-    (Wilson.actionVariationAt (wilson d) K.component11 x)
-    (Wilson.actionVariationAt (wilson d) K.component22 x)
-    (Wilson.actionVariationAt (wilson d) K.component33 x)
+weightedLogDerivativeWeylTrace d x =
+  let
+    w00 = Wilson.actionVariationAt (wilson d) K.component00 x
+    w11 = Wilson.actionVariationAt (wilson d) K.component11 x
+    w22 = Wilson.actionVariationAt (wilson d) K.component22 x
+    w33 = Wilson.actionVariationAt (wilson d) K.component33 x
+    wilsonTrace = w00 + w11 + w22 + w33
+    residual = fourDiagonalReferenceMinusSector d x
+  in
+  trans
+    (Ring.solve-∀
+      (referenceMeasureLogVariation d K.component00 x)
+      (referenceMeasureLogVariation d K.component11 x)
+      (referenceMeasureLogVariation d K.component22 x)
+      (referenceMeasureLogVariation d K.component33 x)
+      (nonWilsonDerivative d K.component00 x)
+      (nonWilsonDerivative d K.component11 x)
+      (nonWilsonDerivative d K.component22 x)
+      (nonWilsonDerivative d K.component33 x)
+      w00 w11 w22 w33)
+    (trans
+      (cong (residual -_)
+        (Wilson.diagonalActionVariationTraceZero (wilson d) x))
+      (Ring.solve-∀ residual))
 
 -- Separate from Gibbs C_h = (D_h N)Z - N (D_h Z), which yields
 -- D_h(N/Z)=C_h/Z² and is NOT automatically the gravitational one-point
