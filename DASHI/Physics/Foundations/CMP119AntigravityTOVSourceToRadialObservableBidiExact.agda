@@ -10,9 +10,10 @@ module DASHI.Physics.Foundations.CMP119AntigravityTOVSourceToRadialObservableBid
 -- ds² = -exp(2Phi(r))dt² + (1-2m(r)/r)^-1 dr² + r²dOmega²
 --
 -- obeys Phi' = (m + r³ p_r) / [r(r-2m)].
--- For a radially initially-resting geodesic, the coordinate acceleration
--- follows as - (m+r³p_r)/r² at that instant. (It is not the static observer's
--- proper acceleration; a physical clock/probe calibration is separate.)
+-- For a radially initially-resting geodesic, the proper-time second
+-- derivative of the areal radius follows as - (m+r³p_r)/r² at that instant. (It is not the static observer's
+-- proper acceleration, nor d²r/dt² with Killing coordinate time;
+-- a physical clock/probe calibration is separate.)
 --
 -- The *numerator* m+r³p_r, NOT rho+p_r+2p_t, determines this local
 -- initially-resting geodesic orientation for the TOV metric. This is a
@@ -65,7 +66,7 @@ outerInitiallyRestingAccelerationIsMinusOneSixteenth :
     ≡ - (Int.+ 1 / 16)
 outerInitiallyRestingAccelerationIsMinusOneSixteenth = solve []
 
--- At a zero-pressure surface, the coordinate acceleration in the same
+-- At a zero-pressure surface, the proper-time areal-radius acceleration in the same
 -- normalized Schwarzschild gauge is the standard vacuum Schwarzschild
 -- acceleration: -(M/R²). This is a mathematical identity on the model.
 outerInitiallyRestingIsSchwarzschild :
