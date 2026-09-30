@@ -28,7 +28,9 @@ module DASHI.Physics.Foundations.CMP119AntigravitySelectedGibbsWickTimeCorrectio
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _<_; -_)
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
 import Data.Rational.Tactic.RingSolver as Ring
 
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
@@ -138,6 +140,44 @@ module _
   -- identities reconstruct the full trace + 2*T00 source from the SAME
   -- four finite-metric derivative numerators. At no point is the T00
   -- sign chosen to make the active sum negative.
+
+  -- SHARP SIGN TEST for the actual four selected connected numerators:
+  -- under rho=-c00 Wick identification, outward local Ricci contribution
+  -- requires Euclidean sum < 2*c00, not simply Euclidean sum < 0.
+  negativeWickActiveImpliesTimelikeThreshold :
+    negativeTemporalWickActive < 0ℚ →
+    selectedEuclideanDiagonalSum
+      < (1ℚ + 1ℚ) * selectedGibbsC00
+  negativeWickActiveImpliesTimelikeThreshold negative =
+    let
+      changed :
+        selectedEuclideanDiagonalSum
+          - ((1ℚ + 1ℚ) * selectedGibbsC00) < 0ℚ
+      changed =
+        subst (_< 0ℚ)
+          (negativeWickActiveDiffersFromEuclideanSum)
+          negative
+    in
+    subst₂ _<_
+      (Ring.solve-∀
+        selectedEuclideanDiagonalSum selectedGibbsC00)
+      (Ring.solve-∀ selectedGibbsC00)
+      (ℚP.+-monoʳ-<
+        ((1ℚ + 1ℚ) * selectedGibbsC00) changed)
+
+  timelikeThresholdImpliesNegativeWickActive :
+    selectedEuclideanDiagonalSum
+      < (1ℚ + 1ℚ) * selectedGibbsC00 →
+    negativeTemporalWickActive < 0ℚ
+  timelikeThresholdImpliesNegativeWickActive threshold =
+    subst (_< 0ℚ)
+      (sym negativeWickActiveDiffersFromEuclideanSum)
+      (subst₂ _<_
+        (Ring.solve-∀
+          selectedEuclideanDiagonalSum selectedGibbsC00)
+        (Ring.solve-∀ selectedGibbsC00)
+        (ℚP.+-monoʳ-<
+          (- ((1ℚ + 1ℚ) * selectedGibbsC00)) threshold))
 
 -- Pure algebraic counterfixture illustrating why negative Euclidean sum
 -- is not enough under a negative temporal Wick continuation. No claim
