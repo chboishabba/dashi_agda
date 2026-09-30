@@ -26,6 +26,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Moonshine.OggSSPSmallPrimePBIntegralTateCohomologyBridgeExact as Carnahan
+import DASHI.Moonshine.OggSSP2BCarnahanTateSplitExact as Canonical
 import DASHI.Moonshine.OggSSP2BUranoIntegralModuleParityExact as Urano
 import DASHI.Moonshine.OggSSP2BSourceIndexedDVRValuationIdentificationExact as TwoB
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
@@ -108,6 +109,40 @@ weightOneBelongsToH0 = refl
 weightTwoBelongsToH1 :
   tateBranch 2 ≡ Carnahan.tateH1
 weightTwoBelongsToH1 = refl
+
+------------------------------------------------------------------------
+-- 2b. Explicit two-sided rechart to the repo's canonical 2B Tate owner.
+--     No new Tate-parity semantics are invented in this module.
+------------------------------------------------------------------------
+
+toCanonicalTateDegree :
+  Carnahan.TateParity -> Canonical.TwoBTateDegree
+toCanonicalTateDegree Carnahan.tateH0 = Canonical.tateH0
+toCanonicalTateDegree Carnahan.tateH1 = Canonical.tateH1
+
+fromCanonicalTateDegree :
+  Canonical.TwoBTateDegree -> Carnahan.TateParity
+fromCanonicalTateDegree Canonical.tateH0 = Carnahan.tateH0
+fromCanonicalTateDegree Canonical.tateH1 = Carnahan.tateH1
+
+canonicalTateRoundTrip :
+  (d : Canonical.TwoBTateDegree) ->
+  toCanonicalTateDegree (fromCanonicalTateDegree d) ≡ d
+canonicalTateRoundTrip Canonical.tateH0 = refl
+canonicalTateRoundTrip Canonical.tateH1 = refl
+
+bridgeTateRoundTrip :
+  (d : Carnahan.TateParity) ->
+  fromCanonicalTateDegree (toCanonicalTateDegree d) ≡ d
+bridgeTateRoundTrip Carnahan.tateH0 = refl
+bridgeTateRoundTrip Carnahan.tateH1 = refl
+
+weightBranchIsCanonicalTateDegree :
+  (n : Nat) ->
+  toCanonicalTateDegree (tateBranch n)
+  ≡ toCanonicalTateDegree (branchOfWeightParity (weightParity n))
+weightBranchIsCanonicalTateDegree n =
+  cong toCanonicalTateDegree (tateBranchIsOppositeWeightParity n)
 
 ------------------------------------------------------------------------
 -- 3. Constructive lossless filtering of an arbitrary coefficient family.
