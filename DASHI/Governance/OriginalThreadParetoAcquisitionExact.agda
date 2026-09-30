@@ -79,9 +79,9 @@ irisDenaRecordCell = Pareto.requirement-candidate
 chinaLeadershipJoinCell : Pareto.RequirementCandidate OriginalThreadRequirement
 chinaLeadershipJoinCell = Pareto.requirement-candidate
   chinaEconomicLeadershipCrossSourceJoin
-  true true true true
+  true true true false
   3 5
-  "Join PRC official self-position to independent comparable economic indicators without scalarising manufacturing, trade, finance, currency and domestic-demand dimensions into a winner score."
+  "PAID by ChinaEconomicLeadershipCrossSourceJoinExact: official self-position and independent geo-economic coordinates are joined per axis while overall leadership/winner remains unclosed."
 
 broadExpansionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 broadExpansionCell = Pareto.requirement-candidate
@@ -157,10 +157,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Pursue the highest remaining independent geopolitical evidence leaf: IRIS Dena operational/command record."
-    "2. In parallel, complete the China official-self-position versus independent geo-economic indicator join."
-    "3. Recompute the frontier only after those same-object/source-role checks."
-    "IRGC spans, Iran genealogy joins, bounded IRGC mechanism, Garnaut archive binding and fallacies source binding are paid and off the live frontier."
+    "1. Pursue the surviving IRIS Dena exact-duty/embedding record residual: operational action log, watch/duty record, protocol text, or another independently reviewable same-object record."
+    "2. Retain the new command-level primary statements as fibre-narrowing evidence, not as an operational reconstruction."
+    "3. Recompute only when a stronger same-object source is acquired or the residual is shown publicly unavailable."
+    "IRGC mechanism, Friendlyjordies archive debts, and China cross-source economic join are paid and off the live frontier."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
