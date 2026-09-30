@@ -58,7 +58,9 @@ def audit(source: dict) -> dict:
     configs = source.get("configurations")
     if not isinstance(configs, list) or not configs:
         raise ValueError("Need a nonempty explicit finite configuration family")
-    if len(configs) != len(set(c.get("id") for c in configs)):
+    if any(not isinstance(item, dict) for item in configs):
+        raise ValueError("Every configuration must be an object")
+    if len(configs) != len(set(validate_text(item, "id") for item in configs)):
         raise ValueError("Configuration IDs are not unique")
 
     A = Fraction(0)
@@ -138,7 +140,7 @@ def audit(source: dict) -> dict:
         "spatial_component_sum": fmt(spatial),
         "lorentzian_trace_candidate": fmt(lorentzian_trace),
         "lorentzian_active_candidate": fmt(active),
-        "weak_coupling_nonnegative_active_compatible":
+        "candidate_sign_compatible_with_weak_coupling_nonnegative_active_if_physically_identified":
             active >= 0,
         "per_configuration": rows,
         "warning": "The Lorentzian components are candidates only; no Euclidean-to-Lorentzian same-source theorem, SI calibration, or continuum tensor has been provided."
@@ -151,7 +153,14 @@ def audit(source: dict) -> dict:
         if validate_text(geometry, "metric_frame") != provenance["metric_frame"]:
             raise ValueError("Geometry comparison uses a different metric frame")
         validate_text(geometry, "geometry_revision")
+        if validate_text(geometry, "selected_source_identifier") != provenance["source_identifier"]:
+            raise ValueError("Geometry diagnostic is not indexed by same selected source")
+        if validate_text(geometry, "cutoff") != provenance["cutoff"]:
+            raise ValueError("Geometry diagnostic has different cutoff")
+        validate_text(geometry, "normalization_origin")
         validate_text(geometry, "source_to_geometry_normalization")
+        if geometry.get("factor_fitted_to_this_geometry") is not False:
+            raise ValueError("Geometry conversion factor must be independently fixed")
         predicted = geometry.get("einstein_tensor")
         if not isinstance(predicted, dict) or set(predicted) != set(SLOTS):
             raise ValueError("Geometry must supply all ten exact Einstein tensor components")
@@ -163,6 +172,7 @@ def audit(source: dict) -> dict:
             "physical_same_object_identification_proved": False,
             "source_normalization_factor": fmt(factor),
             "geometry_revision": geometry["geometry_revision"],
+            "normalization_origin": geometry["normalization_origin"],
             "ten_slot_residual": {slot: fmt(residual[slot]) for slot in SLOTS},
             "all_ten_residuals_zero": all(value == 0 for value in residual.values()),
             "warning": "A zero numerical tensor residual cannot establish source identity, real analytic continuation, or a continuum Einstein solution."
