@@ -314,11 +314,11 @@ bStatusNowAnalyticResearchIsTrue = refl
 -- independently computed algebraic-radical, divergence-free snapshot on
 -- the radius-one Fourier cube:
 --
---   R692 commutator work    = -142 - 59*sqrt(2)/2
+--   R692 commutator work    = -284 - 59*sqrt(2)
 --   R744 critical production = 0
 --   R744 critical dissipation = 108
 --   nu = delta = 1
---   R815 instantaneous rate = -9576 - 2124*sqrt(2) < 0.
+--   R815 instantaneous rate = -19800 - 4248*sqrt(2) < 0.
 --
 -- The companion Lean ExactSparseReserveWitness file proves the REAL
 -- arithmetic sign, not the finite-Fourier evaluation or R408 realization.
@@ -342,7 +342,7 @@ bExactRealFourierSparseNegativeRateCandidate = true
 bExactRealFourierSparseRateMatchesAgdaRationalHelicalPacket : Bool
 bExactRealFourierSparseRateMatchesAgdaRationalHelicalPacket = false
 
--- scripts/check_ns_r823_short_time_finite_ode.py independently evolves
+-- R692 Work.coherentWork contributes a factor two over the raw real cross.\n-- scripts/check_ns_r823_short_time_finite_ode.py independently evolves
 -- the sparse field with the literal finite NS quadratic vector field and
 -- integrates R815's rate numerically (not interval-certified).
 bExactRealFourierSparseShortTimeNumericFailureObserved : Bool
