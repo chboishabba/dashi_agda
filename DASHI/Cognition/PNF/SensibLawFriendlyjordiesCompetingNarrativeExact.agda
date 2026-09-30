@@ -34,7 +34,7 @@ import DASHI.Reasoning.SensibLawCorpusWorldPNFBridgeExact as Horizon
 ------------------------------------------------------------------------
 
 sensibLawRevision : String
-sensibLawRevision = "SensibLaw/main d25cddf73540bdbb313777bbf566280f4e34313b"
+sensibLawRevision = "SensibLaw/main f9c4670ef04b40e8153caa7dd00fa1eba7013ef4"
 
 itirSuiteRevision : String
 itirSuiteRevision = "ITIR-suite/main 6e3114ddb50b59c4b64c1671ccb8264532d04289"
