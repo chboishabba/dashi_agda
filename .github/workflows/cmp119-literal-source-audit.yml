@@ -7,6 +7,8 @@ on:
       - "DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda"
       - "DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda"
       - "scripts/grqft_selected_finite_stress_exact_audit.py"
+      - "scripts/grqft_selected_wilson_normalization_audit.py"
+      - "scripts/test_grqft_selected_wilson_normalization_audit.py"
       - "scripts/test_grqft_selected_finite_stress_exact_audit.py"
       - ".github/workflows/cmp119-literal-source-audit.yml"
   workflow_dispatch:
@@ -22,7 +24,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python3 -m unittest discover -s scripts -p "test_grqft_selected_finite_stress_exact_audit.py" -v
+      - run: |
+          python3 -m unittest discover -s scripts -p "test_grqft_selected_finite_stress_exact_audit.py" -v
+          python3 -m unittest discover -s scripts -p "test_grqft_selected_wilson_normalization_audit.py" -v
   source-kernel:
     runs-on: ubuntu-latest
     timeout-minutes: 90
