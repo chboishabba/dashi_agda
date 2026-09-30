@@ -23,9 +23,10 @@ module DASHI.Physics.Foundations.CMP119LiteralWilsonProjectorSignAuditExact wher
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
+import Data.Rational.Tactic.RingSolver as ℚRing
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
 import DASHI.Physics.Foundations.CMP119AntigravityCanonicalSourceSectorActionExact as Canonical
@@ -47,7 +48,7 @@ positiveWilsonCoefficientExact u =
     (T4.plaquetteCoefficientHomogeneous u T4.plaquetteBasisAction)
     (trans
       (cong (u *_) T4.plaquetteCoefficientOfPlaquetteBasis)
-      refl)
+      (ℚRing.solve-∀ u))
 
 negativeWilsonCoefficientExact : ∀ u →
   T4.plaquetteCoefficientProjector (negativeWilsonExponent u)
@@ -57,7 +58,7 @@ negativeWilsonCoefficientExact u =
     (T4.plaquetteCoefficientHomogeneous (- u) T4.plaquetteBasisAction)
     (trans
       (cong ((- u) *_) T4.plaquetteCoefficientOfPlaquetteBasis)
-      refl)
+      (ℚRing.solve-∀ u))
 
 -- The source's complete effective action is not assumed to be *only* the
 -- Wilson term. The four E/R/B/vacuum sectors remain separately projected.
@@ -73,7 +74,11 @@ positiveCanonicalNodeCoefficient :
         (T4.plaquetteCoefficientProjector b +
           T4.plaquetteCoefficientProjector vacuum)))
 positiveCanonicalNodeCoefficient u e r b vacuum =
-  refl
+  ℚRing.solve-∀ u
+    (T4.plaquetteCoefficientProjector e)
+    (T4.plaquetteCoefficientProjector r)
+    (T4.plaquetteCoefficientProjector b)
+    (T4.plaquetteCoefficientProjector vacuum)
 
 negativeCanonicalNodeCoefficient :
   ∀ u e r b vacuum →
@@ -87,7 +92,11 @@ negativeCanonicalNodeCoefficient :
         (T4.plaquetteCoefficientProjector b +
           T4.plaquetteCoefficientProjector vacuum)))
 negativeCanonicalNodeCoefficient u e r b vacuum =
-  refl
+  ℚRing.solve-∀ u
+    (T4.plaquetteCoefficientProjector e)
+    (T4.plaquetteCoefficientProjector r)
+    (T4.plaquetteCoefficientProjector b)
+    (T4.plaquetteCoefficientProjector vacuum)
 
 -- A literal CMP119 native action has *a source-provided* coefficient c_k.
 -- Without an established source-basis convention, even the same-action
