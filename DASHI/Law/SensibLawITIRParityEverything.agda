@@ -72,14 +72,3 @@ selectedFriendlyjordiesCompetingNarrativeBoundary :
 selectedFriendlyjordiesCompetingNarrativeBoundary =
   FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
 
-selectedFriendlyjordiesCPRSForwardTrace :
-  FriendlyjordiesCompeting.Trace.ForwardTraceReceipt
-    FriendlyjordiesCompeting.cprsTrace
-selectedFriendlyjordiesCPRSForwardTrace =
-  FriendlyjordiesCompeting.cprsForwardReceipt
-
-selectedFriendlyjordiesCPRSReverseTrace :
-  FriendlyjordiesCompeting.Trace.ReverseTraceReceipt
-    FriendlyjordiesCompeting.cprsTrace
-selectedFriendlyjordiesCPRSReverseTrace =
-  FriendlyjordiesCompeting.cprsReverseReceipt
