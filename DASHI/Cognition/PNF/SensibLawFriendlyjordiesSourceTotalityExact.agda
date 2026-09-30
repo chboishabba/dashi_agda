@@ -420,3 +420,208 @@ generatedFixtureDoesNotEqualPinnedFixture ()
 traceDoesNotReplaceExternalWorldEvidence :
   TraceMayReplaceExternalWorldEvidence → ⊥
 traceDoesNotReplaceExternalWorldEvidence ()
+
+
+------------------------------------------------------------------------
+-- Strong totality: enumerate the comparison surface and family surface.
+-- Totality is now a function, not merely a Boolean receipt.
+------------------------------------------------------------------------
+
+data FriendlyjordiesComparisonKey : Set where
+  cprsSharedKey : FriendlyjordiesComparisonKey
+  instabilityCompetingKey : FriendlyjordiesComparisonKey
+  governmentCapacityKey : FriendlyjordiesComparisonKey
+  woolworthsQualificationKey : FriendlyjordiesComparisonKey
+  garnautAuthorityKey : FriendlyjordiesComparisonKey
+
+coverageForComparison : FriendlyjordiesComparisonKey → ComparisonCoverage
+coverageForComparison cprsSharedKey = cprsCoverage
+coverageForComparison instabilityCompetingKey = instabilityCoverage
+coverageForComparison governmentCapacityKey = governmentCoverage
+coverageForComparison woolworthsQualificationKey = woolworthsCoverage
+coverageForComparison garnautAuthorityKey = garnautCoverage
+
+comparisonDispositionLeft :
+  (key : FriendlyjordiesComparisonKey) →
+  SourceDisposition
+comparisonDispositionLeft key =
+  ComparisonCoverage.left (coverageForComparison key)
+
+comparisonDispositionRight :
+  (key : FriendlyjordiesComparisonKey) →
+  SourceDisposition
+comparisonDispositionRight key =
+  ComparisonCoverage.right (coverageForComparison key)
+
+comparisonCannotBeOrphan :
+  (key : FriendlyjordiesComparisonKey) →
+  ComparisonCoverage.silentlyAdmitsOrphan
+    (coverageForComparison key) ≡ false
+comparisonCannotBeOrphan cprsSharedKey = refl
+comparisonCannotBeOrphan instabilityCompetingKey = refl
+comparisonCannotBeOrphan governmentCapacityKey = refl
+comparisonCannotBeOrphan woolworthsQualificationKey = refl
+comparisonCannotBeOrphan garnautAuthorityKey = refl
+
+familyDisposition :
+  Weld.FriendlyjordiesArgumentFamily →
+  SourceDisposition
+familyDisposition Weld.cprsBlocking =
+  tracedWithWorldDemand cprsSourceTrace cprsWorldDemand
+familyDisposition Weld.woolworthsPriceEffects =
+  tracedWithWorldDemand woolworthsSourceTrace woolworthsWorldDemand
+familyDisposition Weld.governmentCapacity =
+  tracedWithWorldDemand governmentSourceTrace governmentWorldDemand
+familyDisposition Weld.etsDelayAuthority =
+  unresolvedAcquisition garnautRefreshDemand
+familyDisposition Weld.fallaciesAndFraming =
+  unresolvedAcquisition fallaciesRefreshDemand
+
+------------------------------------------------------------------------
+-- Producer-backed acquisition contracts.
+--
+-- These contracts prove only that the named runtime producer owns a route to
+-- generate the missing candidate source unit when its archive precondition is
+-- met.  They do not assert that the archive currently contains the theme, that
+-- a generated file is pinned, or that its embedded proposition is true.
+------------------------------------------------------------------------
+
+record ProducerAcquisitionContract : Set where
+  constructor producer-acquisition-contract
+  field
+    family : Weld.FriendlyjordiesArgumentFamily
+    producerRef : String
+    outputFixtureRef : String
+    archivePreconditionRef : String
+    emittedStatementRef : String
+    emittedLiteralCandidate : String
+    requiresFreshSourceRevision : Bool
+    requiresFreshSourceRevisionIsTrue :
+      requiresFreshSourceRevision ≡ true
+    generatedCandidateIsPinnedEvidence : Bool
+    generatedCandidateIsPinnedEvidenceIsFalse :
+      generatedCandidateIsPinnedEvidence ≡ false
+    producerCreatesClaimTruth : Bool
+    producerCreatesClaimTruthIsFalse :
+      producerCreatesClaimTruth ≡ false
+
+open ProducerAcquisitionContract public
+
+garnautProducerContract : ProducerAcquisitionContract
+garnautProducerContract =
+  producer-acquisition-contract
+    Weld.etsDelayAuthority
+    "SensibLaw/src/reporting/narrative_fixture_refresh.py::_build_authority_wrappers_payload"
+    ".cache_local/narrative/friendlyjordies_authority_wrappers.archive.json"
+    "theme_snippets contains imperfect_ets"
+    "jordies_authority_case:u1"
+    "FriendlyJordies argued that Ross Garnaut reported that an imperfect ETS was better than delay."
+    true refl
+    false refl
+    false refl
+
+fallaciesProducerContract : ProducerAcquisitionContract
+fallaciesProducerContract =
+  producer-acquisition-contract
+    Weld.fallaciesAndFraming
+    "SensibLaw/src/reporting/narrative_fixture_refresh.py::_build_thread_extract_payload"
+    ".cache_local/narrative/friendlyjordies_thread_extract.archive.json"
+    "selected archive thread contains a fallacies/framing cue"
+    "generated fallacies-family source unit"
+    "fallacies/framing candidate extracted from the selected archive thread"
+    true refl
+    false refl
+    false refl
+
+record ResidualAcquisitionClosure : Set where
+  constructor residual-acquisition-closure
+  field
+    garnautDemand : AcquisitionDemand
+    garnautProducer : ProducerAcquisitionContract
+    fallaciesDemand : AcquisitionDemand
+    fallaciesProducer : ProducerAcquisitionContract
+    allResidualsHaveProducerRoute : Bool
+    allResidualsHaveProducerRouteIsTrue :
+      allResidualsHaveProducerRoute ≡ true
+    producerRouteCountsAsWorldEvidence : Bool
+    producerRouteCountsAsWorldEvidenceIsFalse :
+      producerRouteCountsAsWorldEvidence ≡ false
+
+canonicalResidualAcquisitionClosure : ResidualAcquisitionClosure
+canonicalResidualAcquisitionClosure =
+  residual-acquisition-closure
+    garnautRefreshDemand
+    garnautProducerContract
+    fallaciesRefreshDemand
+    fallaciesProducerContract
+    true refl
+    false refl
+
+------------------------------------------------------------------------
+-- Complete forward/reverse receipts for every currently traced side.
+------------------------------------------------------------------------
+
+cprsSourceForward : Trace.ForwardTraceReceipt cprsSourceTrace
+cprsSourceForward = Trace.canonicalForwardTrace cprsSourceTrace
+
+cprsSourceReverse : Trace.ReverseTraceReceipt cprsSourceTrace
+cprsSourceReverse = Trace.canonicalReverseTrace cprsSourceTrace
+
+cprsCounterForward : Trace.ForwardTraceReceipt cprsCounterTrace
+cprsCounterForward = Trace.canonicalForwardTrace cprsCounterTrace
+
+cprsCounterReverse : Trace.ReverseTraceReceipt cprsCounterTrace
+cprsCounterReverse = Trace.canonicalReverseTrace cprsCounterTrace
+
+instabilitySourceForward : Trace.ForwardTraceReceipt instabilitySourceTrace
+instabilitySourceForward = Trace.canonicalForwardTrace instabilitySourceTrace
+
+instabilitySourceReverse : Trace.ReverseTraceReceipt instabilitySourceTrace
+instabilitySourceReverse = Trace.canonicalReverseTrace instabilitySourceTrace
+
+instabilityCounterForward : Trace.ForwardTraceReceipt instabilityCounterTrace
+instabilityCounterForward = Trace.canonicalForwardTrace instabilityCounterTrace
+
+instabilityCounterReverse : Trace.ReverseTraceReceipt instabilityCounterTrace
+instabilityCounterReverse = Trace.canonicalReverseTrace instabilityCounterTrace
+
+governmentCounterForward : Trace.ForwardTraceReceipt governmentCounterTrace
+governmentCounterForward = Trace.canonicalForwardTrace governmentCounterTrace
+
+governmentCounterReverse : Trace.ReverseTraceReceipt governmentCounterTrace
+governmentCounterReverse = Trace.canonicalReverseTrace governmentCounterTrace
+
+woolworthsCounterForward : Trace.ForwardTraceReceipt woolworthsCounterTrace
+woolworthsCounterForward = Trace.canonicalForwardTrace woolworthsCounterTrace
+
+woolworthsCounterReverse : Trace.ReverseTraceReceipt woolworthsCounterTrace
+woolworthsCounterReverse = Trace.canonicalReverseTrace woolworthsCounterTrace
+
+record ConstructiveSourceTotalityBoundary : Set where
+  constructor constructive-source-totality-boundary
+  field
+    comparisonTotalityConstructive : Bool
+    comparisonTotalityConstructiveIsTrue :
+      comparisonTotalityConstructive ≡ true
+    familyTotalityConstructive : Bool
+    familyTotalityConstructiveIsTrue :
+      familyTotalityConstructive ≡ true
+    allPaidSidesBidirectionallyTraceable : Bool
+    allPaidSidesBidirectionallyTraceableIsTrue :
+      allPaidSidesBidirectionallyTraceable ≡ true
+    residualFamiliesHaveProducerContracts : Bool
+    residualFamiliesHaveProducerContractsIsTrue :
+      residualFamiliesHaveProducerContracts ≡ true
+    producerContractPromotesTruth : Bool
+    producerContractPromotesTruthIsFalse :
+      producerContractPromotesTruth ≡ false
+
+canonicalConstructiveSourceTotalityBoundary :
+  ConstructiveSourceTotalityBoundary
+canonicalConstructiveSourceTotalityBoundary =
+  constructive-source-totality-boundary
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
