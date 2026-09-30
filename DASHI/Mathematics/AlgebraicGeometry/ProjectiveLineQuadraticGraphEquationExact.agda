@@ -21,7 +21,7 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineQuadraticGraphEquationE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as CP
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHomogeneousPairExact as P1
@@ -75,6 +75,177 @@ squareMapSatisfiesGraphEquation {field} laws source =
   Overlap.multiplyCommutative laws
     (CP.multiply field (P1.first source) (P1.first source))
     (CP.multiply field (P1.second source) (P1.second source))
+
+------------------------------------------------------------------------
+-- Actual monomial scaling: changing the homogeneous source by s, and the
+-- target by t, multiplies EACH graph monomial by t*(s*s).
+------------------------------------------------------------------------
+
+commuteInnerMonomial :
+  ∀ {field : CP.ComplexFieldPresentation}
+    (laws : Overlap.ProjectiveOverlapFieldLaws field)
+    (t s² y x : CP.Complex field) →
+  CP.multiply field
+    (CP.multiply field t y)
+    (CP.multiply field s² x)
+  ≡
+  CP.multiply field
+    (CP.multiply field t s²)
+    (CP.multiply field y x)
+commuteInnerMonomial {field} laws t s² y x =
+  trans
+    (sym (CP.multiplyAssociative (Overlap.base laws)
+      t y (CP.multiply field s² x)))
+    (trans
+      (cong (CP.multiply field t)
+        (trans
+          (CP.multiplyAssociative (Overlap.base laws) y s² x)
+          (trans
+            (cong (λ a → CP.multiply field a x)
+              (Overlap.multiplyCommutative laws y s²))
+            (sym
+              (CP.multiplyAssociative (Overlap.base laws)
+                s² y x)))))
+      (CP.multiplyAssociative (Overlap.base laws)
+        t s² (CP.multiply field y x)))
+
+graphLeftScales :
+  ∀ {field : CP.ComplexFieldPresentation}
+    (laws : Overlap.ProjectiveOverlapFieldLaws field)
+    {source source' target target' : P1.HomogeneousPair field}
+    (sourceRescale :
+      CP.ProjectiveRescaling
+        (P1.pairToHomogeneousLine source)
+        (P1.pairToHomogeneousLine source'))
+    (targetRescale :
+      CP.ProjectiveRescaling
+        (P1.pairToHomogeneousLine target)
+        (P1.pairToHomogeneousLine target')) →
+  graphLeft source' target'
+  ≡
+  CP.multiply field
+    (CP.multiply field
+      (CP.scalar targetRescale)
+      (CP.multiply field
+        (CP.scalar sourceRescale)
+        (CP.scalar sourceRescale)))
+    (graphLeft source target)
+graphLeftScales {field} laws
+    {source} {source'} {target} {target'}
+    sourceRescale targetRescale =
+  trans
+    (cong₂ (CP.multiply field)
+      (Square.rescalingFirst targetRescale)
+      (cong₂ (CP.multiply field)
+        (Square.rescalingSecond sourceRescale)
+        (Square.rescalingSecond sourceRescale)))
+    (trans
+      (cong
+        (λ value →
+          CP.multiply field
+            (CP.multiply field
+              (CP.scalar targetRescale)
+              (P1.first target))
+            value)
+        (Square.squareScaling laws
+          (CP.scalar sourceRescale)
+          (P1.second source)))
+      (commuteInnerMonomial laws
+        (CP.scalar targetRescale)
+        (CP.multiply field
+          (CP.scalar sourceRescale)
+          (CP.scalar sourceRescale))
+        (P1.first target)
+        (CP.multiply field
+          (P1.second source)
+          (P1.second source))))
+
+graphRightScales :
+  ∀ {field : CP.ComplexFieldPresentation}
+    (laws : Overlap.ProjectiveOverlapFieldLaws field)
+    {source source' target target' : P1.HomogeneousPair field}
+    (sourceRescale :
+      CP.ProjectiveRescaling
+        (P1.pairToHomogeneousLine source)
+        (P1.pairToHomogeneousLine source'))
+    (targetRescale :
+      CP.ProjectiveRescaling
+        (P1.pairToHomogeneousLine target)
+        (P1.pairToHomogeneousLine target')) →
+  graphRight source' target'
+  ≡
+  CP.multiply field
+    (CP.multiply field
+      (CP.scalar targetRescale)
+      (CP.multiply field
+        (CP.scalar sourceRescale)
+        (CP.scalar sourceRescale)))
+    (graphRight source target)
+graphRightScales {field} laws
+    {source} {source'} {target} {target'}
+    sourceRescale targetRescale =
+  trans
+    (cong₂ (CP.multiply field)
+      (Square.rescalingSecond targetRescale)
+      (cong₂ (CP.multiply field)
+        (Square.rescalingFirst sourceRescale)
+        (Square.rescalingFirst sourceRescale)))
+    (trans
+      (cong
+        (λ value →
+          CP.multiply field
+            (CP.multiply field
+              (CP.scalar targetRescale)
+              (P1.second target))
+            value)
+        (Square.squareScaling laws
+          (CP.scalar sourceRescale)
+          (P1.first source)))
+      (commuteInnerMonomial laws
+        (CP.scalar targetRescale)
+        (CP.multiply field
+          (CP.scalar sourceRescale)
+          (CP.scalar sourceRescale))
+        (P1.second target)
+        (CP.multiply field
+          (P1.first source)
+          (P1.first source))))
+
+------------------------------------------------------------------------
+-- Genuine projective-representation invariance. This is the sheaf/gluing
+-- prerequisite for the bidegree-(2,1) graph equation to define a locus on
+-- P1×P1 instead of depending on the chosen affine/homogeneous charts.
+------------------------------------------------------------------------
+
+graphEquationRespectsProjectiveRescalings :
+  ∀ {field : CP.ComplexFieldPresentation}
+    (laws : Overlap.ProjectiveOverlapFieldLaws field)
+    {source source' target target' : P1.HomogeneousPair field}
+    (sourceRescale :
+      CP.ProjectiveRescaling
+        (P1.pairToHomogeneousLine source)
+        (P1.pairToHomogeneousLine source'))
+    (targetRescale :
+      CP.ProjectiveRescaling
+        (P1.pairToHomogeneousLine target)
+        (P1.pairToHomogeneousLine target')) →
+  QuadraticGraphEquation source target →
+  QuadraticGraphEquation source' target'
+graphEquationRespectsProjectiveRescalings
+    {field} laws {source} {source'} {target} {target'}
+    sourceRescale targetRescale equation =
+  trans
+    (graphLeftScales laws sourceRescale targetRescale)
+    (trans
+      (cong
+        (CP.multiply field
+          (CP.multiply field
+            (CP.scalar targetRescale)
+            (CP.multiply field
+              (CP.scalar sourceRescale)
+              (CP.scalar sourceRescale))))
+        equation)
+      (sym (graphRightScales laws sourceRescale targetRescale)))
 
 ------------------------------------------------------------------------
 -- Formula-level bidegree data, separately from geometric Chow ownership.
