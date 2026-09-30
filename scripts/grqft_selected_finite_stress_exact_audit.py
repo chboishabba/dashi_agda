@@ -116,7 +116,7 @@ def audit(source: dict) -> dict:
     if active != lorentzian_trace + 2 * time_value:
         raise ArithmeticError("Lorentzian active/trace identity failed")
 
-    return {
+    result = {
         "status": "finite_rational_numerical_reproduction_only",
         "physical_source_identification_proved": False,
         "metric_variation_of_selected_action_proved": False,
@@ -143,6 +143,32 @@ def audit(source: dict) -> dict:
         "per_configuration": rows,
         "warning": "The Lorentzian components are candidates only; no Euclidean-to-Lorentzian same-source theorem, SI calibration, or continuum tensor has been provided."
     }
+
+    geometry = source.get("geometry_diagnostic")
+    if geometry is not None:
+        if not isinstance(geometry, dict):
+            raise ValueError("geometry_diagnostic must be an object")
+        if validate_text(geometry, "metric_frame") != provenance["metric_frame"]:
+            raise ValueError("Geometry comparison uses a different metric frame")
+        validate_text(geometry, "geometry_revision")
+        validate_text(geometry, "source_to_geometry_normalization")
+        predicted = geometry.get("einstein_tensor")
+        if not isinstance(predicted, dict) or set(predicted) != set(SLOTS):
+            raise ValueError("Geometry must supply all ten exact Einstein tensor components")
+        factor = q(geometry["source_to_geometry_normalization"])
+        residual = {slot: q(predicted[slot]) -
+                    factor * C[slot] / (Z * Z) for slot in SLOTS}
+        result["geometry_diagnostic"] = {
+            "status": "same_frame_exact_rational_residual_only",
+            "physical_same_object_identification_proved": False,
+            "source_normalization_factor": fmt(factor),
+            "geometry_revision": geometry["geometry_revision"],
+            "ten_slot_residual": {slot: fmt(residual[slot]) for slot in SLOTS},
+            "all_ten_residuals_zero": all(value == 0 for value in residual.values()),
+            "warning": "A zero numerical tensor residual cannot establish source identity, real analytic continuation, or a continuum Einstein solution."
+        }
+
+    return result
 
 
 def main() -> int:
