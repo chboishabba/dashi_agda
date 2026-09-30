@@ -37,9 +37,9 @@ data OriginalThreadRequirement : Set where
 irgcSpanCell : Pareto.RequirementCandidate OriginalThreadRequirement
 irgcSpanCell = Pareto.requirement-candidate
   irgcExactPrimarySpans
-  true true true true
+  true true true false
   1 9
-  "Acquire exact page/span locators in the primary IRGC PDF for the people/state distinction, common-oppressor frame, agency appeal and neighbouring argument transitions. One source pass unlocks reviewed statement roots and makes later causal joins auditable."
+  "PAID for the selected argument moves by IRGCOpenLetter2026PrimarySpanReceiptsExact using the Tasnim full-text primary HTML carrier. PDF byte identity remains separately unpaid but is not required by the current mechanism consumer."
 
 iranGenealogyJoinCell : Pareto.RequirementCandidate OriginalThreadRequirement
 iranGenealogyJoinCell = Pareto.requirement-candidate
@@ -103,9 +103,9 @@ originalThreadPortfolio =
   ∷ broadExpansionCell
   ∷ []
 
-irgcSpanOnFrontier :
-  Pareto.onParetoFrontier? originalThreadPortfolio irgcSpanCell ≡ true
-irgcSpanOnFrontier = refl
+irgcSpanPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio irgcSpanCell ≡ false
+irgcSpanPaidDropsFromFrontier = refl
 
 iranGenealogyJoinOnFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio iranGenealogyJoinCell ≡ true
@@ -157,10 +157,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Exact-span pass over the primary IRGC letter."
-    "2. Exact-passage reviewed joins for the highest-leverage Iran genealogy edges."
-    "3. In parallel, pay the low-cost Friendlyjordies Garnaut fixture refresh on PR #1078."
-    "Only after 1+2: causal mechanism receipt relating historical grammar to the 2026 letter."
+    "1. Exact-passage reviewed joins for the highest-leverage Iran genealogy edges."
+    "2. In parallel, pay the low-cost Friendlyjordies Garnaut fixture refresh on PR #1078."
+    "3. Bind the Friendlyjordies fallacies/framing generator output only if an archive-backed source unit is present."
+    "Only after the Iran reviewed joins: causal mechanism receipt relating historical grammar to the 2026 letter."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
