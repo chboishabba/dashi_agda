@@ -65,7 +65,7 @@ squareScaling {field} laws s z =
         (trans
           (cong
             (CP.multiply field s)
-            (CP.multiplyAssociative (Overlap.base laws) s z z))
+            (sym (CP.multiplyAssociative (Overlap.base laws) s z z)))
           (CP.multiplyAssociative (Overlap.base laws)
             s s (CP.multiply field z z)))))
 
