@@ -6,6 +6,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
+import DASHI.Physics.Foundations.CMP119AntigravityTimelikeEnergySharpActiveStressCriterionExact as Sharp
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
 import DASHI.Physics.Foundations.CMP119FourDiagonalLiteralFiniteMeasureActiveStressExact as FourFinite
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -164,3 +165,34 @@ module _
       (λ value → value < 0ℚ)
       (sym activeStressIsTracePlusTwiceC00)
       (tracePlusTwiceC00Negative input)
+
+------------------------------------------------------------------------
+-- SAME SELECTED MEASURE: SHARP LOCAL TIMELIKE CRITERION
+--
+-- This extends the existing literal finite-source owner, rather than
+-- substituting a fresh rho/trace/tensor data record.  It works on the
+-- exact c00 and trace computed by the present-cut finite-measure D1 chain.
+-- The criterion is both necessary and sufficient: negative trace alone is
+-- not sufficient without the selected time-axis insertion.
+------------------------------------------------------------------------
+
+  selectedMeasureNegativeActiveForcesC00Control :
+    finiteMeasureActiveStress < 0ℚ →
+    (1ℚ + 1ℚ) * c00 < - finiteMeasureLorentzianTrace
+  selectedMeasureNegativeActiveForcesC00Control activeNegative =
+    Sharp.activeNegativeImpliesEnergyControl
+      finiteMeasureLorentzianTrace c00
+      (subst
+        (λ selectedValue → selectedValue < 0ℚ)
+        activeStressIsTracePlusTwiceC00
+        activeNegative)
+
+  selectedMeasureC00ControlClosesNegativeActive :
+    (1ℚ + 1ℚ) * c00 < - finiteMeasureLorentzianTrace →
+    finiteMeasureActiveStress < 0ℚ
+  selectedMeasureC00ControlClosesNegativeActive timelikeControl =
+    subst
+      (λ selectedValue → selectedValue < 0ℚ)
+      (sym activeStressIsTracePlusTwiceC00)
+      (Sharp.energyControlImpliesActiveNegative
+        finiteMeasureLorentzianTrace c00 timelikeControl)
