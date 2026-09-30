@@ -14,6 +14,7 @@ import DASHI.Interop.ITIRHealthRecordSensibLawAdapterExact as GenericHealthParit
 import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorParity
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -72,3 +73,9 @@ selectedFriendlyjordiesCompetingNarrativeBoundary :
 selectedFriendlyjordiesCompetingNarrativeBoundary =
   FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
 
+
+
+selectedFriendlyjordiesSourceTotality :
+  FriendlyjordiesSourceTotality.SourceTotalComparison
+selectedFriendlyjordiesSourceTotality =
+  FriendlyjordiesSourceTotality.canonicalFriendlyjordiesSourceTotality
