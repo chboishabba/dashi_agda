@@ -26,6 +26,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR144CompleteActionPartitionRespo
 --   * covariant conservation or an accelerating FLRW solution.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _*_; -_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
@@ -40,6 +41,9 @@ import DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Ex
 import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact as R144
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentAttachmentExact as R144Attach
+import DASHI.Physics.YangMills.BalabanR144ToCMP119StressInsertionExact as R144Stress
+import DASHI.Physics.YangMills.BalabanNormalizedStressInsertionRound116Exact as R116
+import DASHI.Physics.YangMills.BalabanCanonicalMetricToCMP119StressRound118Exact as R118
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact as R119
@@ -52,7 +56,7 @@ module _
     {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
     {History Cell : Set}
-    {cutoff : Agda.Builtin.Nat.Nat}
+    {cutoff : Nat}
     {present : Present.PresentCutPhysicalSourceInputs History Cell cutoff}
     {actionWeld : R132.UnifiedGeneratedActionDensity
       {trajectory = trajectory} {split = split} {inputs = inputs} present}
@@ -92,7 +96,7 @@ module _
   MetricTangent = Finite.Tangent finiteAction
 
   completeLocalizedActionDerivative :
-    MetricTangent -> Configuration -> ℚ
+    MetricTangent → Configuration → ℚ
   completeLocalizedActionDerivative tangent configuration =
     R144Attach.finiteD1ToCanonicalMetricRational attachment
       (D1.finiteLocalizedFirstVariation
@@ -141,6 +145,27 @@ module _
   completeActionPartitionDerivativeIsLiteralHaarD1 measure tangent =
     Gibbs.denominatorDerivativeIsLiteralHaarMetricVariation
       (completeActionGibbsData measure) tangent
+
+  completeActionDerivativeIsSelectedCMP119StressInsertion :
+    ∀ configuration tangent →
+    let
+      oldWeld =
+        R144Attach.asOldR144ToSelectedCMP119StressInsertion attachment
+      metricBackground =
+        R144Stress.toMetricBackground oldWeld configuration
+      perturbation =
+        R144Stress.toMetricPerturbation oldWeld tangent
+      insertion =
+        R116.cmp119StressInsertionNumerator
+          (R118.normalizedInsertion
+            (R119.asRound118CanonicalMetricWeld selected)
+            metricBackground perturbation)
+    in
+    completeLocalizedActionDerivative tangent configuration ≡ insertion
+  completeActionDerivativeIsSelectedCMP119StressInsertion configuration tangent =
+    R144Stress.r144LocalizedD1IsSelectedCMP119Insertion
+      (R144Attach.asOldR144ToSelectedCMP119StressInsertion attachment)
+      configuration tangent
 
   -- The one-point Euclidean source numerator is therefore no longer an
   -- arbitrary DZ callback once the R144 action and tangent attachment exist.
