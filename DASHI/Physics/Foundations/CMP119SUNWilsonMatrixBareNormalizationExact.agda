@@ -85,12 +85,16 @@ module _
   bareMatrixMatchesT4PlaquetteProjection inverseBareSquare U =
     Ring.solve-∀ inverseBareSquare (actualPlaquetteCost U)
 
-  negativeBasisSameLiteralMatrixEvaluation :
+  negativePlaquetteCost : MatrixGaugeField → ℚ
+  negativePlaquetteCost U = - actualPlaquetteCost U
+
+  negativeBareWilsonCoefficient : ℚ → ℚ
+  negativeBareWilsonCoefficient u = - (four * u)
+
+  negativeOrientedActionIsSameMatrixAction :
     ∀ inverseBareSquare U →
     standardBareSU2Action inverseBareSquare U
-    ≡
-    T4.plaquetteCoefficientProjector
-      (Orientation.standardSU2WilsonAction inverseBareSquare)
-    * actualPlaquetteCost U
-  negativeBasisSameLiteralMatrixEvaluation =
-    bareMatrixMatchesT4PlaquetteProjection
+    ≡ negativeBareWilsonCoefficient inverseBareSquare
+      * negativePlaquetteCost U
+  negativeOrientedActionIsSameMatrixAction inverseBareSquare U =
+    Ring.solve-∀ inverseBareSquare (actualPlaquetteCost U)
