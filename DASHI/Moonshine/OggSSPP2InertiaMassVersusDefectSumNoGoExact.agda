@@ -30,6 +30,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as Inertia
 import DASHI.Moonshine.OggSSPP2InertiaCentralizerValuationExact as Centralizer
 import DASHI.Moonshine.OggSSPP2InertiaConjugacyClassDefectExact as Defect
+import DASHI.Moonshine.OggSSP2BSourceIndexedDVRValuationIdentificationExact as TwoB
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
 ------------------------------------------------------------------------
@@ -131,6 +132,28 @@ fullInertiaMassValuation = 0
 fullMassValuationIsNotFiveDefectSum :
   fullInertiaMassValuation ≡ fiveDefectSum -> ⊥
 fullMassValuationIsNotFiveDefectSum ()
+
+------------------------------------------------------------------------
+-- 3b. Connect to the pre-existing 2B source slots, WITHOUT asserting
+--     that any actual localized integral module has this composition length.
+------------------------------------------------------------------------
+
+fiveSourceSlotGeometricDepthSum : Nat
+fiveSourceSlotGeometricDepthSum =
+  TwoB.independentGeometricDepth TwoB.identitySlot
+  + TwoB.independentGeometricDepth TwoB.minusOneSlot
+  + TwoB.independentGeometricDepth TwoB.orderFourSlot
+  + TwoB.independentGeometricDepth TwoB.orderThreeSlot
+  + TwoB.independentGeometricDepth TwoB.orderSixSlot
+
+sourceSlotGeometryAgreesWithClassDefectSum :
+  fiveSourceSlotGeometricDepthSum ≡ fiveDefectSum
+sourceSlotGeometryAgreesWithClassDefectSum = refl
+
+sourceSlotGeometryIsNotSampledMassValuation :
+  fiveSourceSlotGeometricDepthSum
+    ≡ sampledWeightTwoAdicValuation -> ⊥
+sourceSlotGeometryIsNotSampledMassValuation ()
 
 ------------------------------------------------------------------------
 -- 4. No semantic promotion from inverse-centralizer weights.
