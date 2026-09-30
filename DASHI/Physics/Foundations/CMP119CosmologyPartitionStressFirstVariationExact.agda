@@ -99,14 +99,16 @@ partitionDerivative :
 partitionDerivative measure d h =
   Physical.haarIntegral measure (densityFirstVariation measure d h)
 
--- D log Z = DZ/Z once the selected Z is positive.
--- No division or Lorentzian sign is selected in the primary numerator.
-partitionLogDerivative :
+-- The pinned physical measure exposes an UNCONSTRAINED divide and partition
+-- function. Until Z = integral rho, Z>0 and divide = rational / are proved,
+-- this is only the formal normalized response, NOT D(log Z).
+-- The safe physical computation at this stage is partitionDerivative above.
+formalNormalizedPartitionResponse :
   ∀ {Configuration}
     (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ) →
   CompleteFiniteMetricVariation Configuration →
   K.SymmetricTensorComponent4 → ℚ
-partitionLogDerivative measure d h =
+formalNormalizedPartitionResponse measure d h =
   Physical.divide measure
     (partitionDerivative measure d h)
     (Physical.partitionFunction measure)
