@@ -153,14 +153,44 @@ h0AndH1AreNotFiveIndependentSourcePieces :
 h0AndH1AreNotFiveIndependentSourcePieces =
   Carnahan.TateParity -> TwoB.TwoBSourceSlot
 
--- Explicit COLLISION for every proposed five-slot classifier through only
--- the two trace-parity tags: identity and order-four are distinct slots.
--- A real five-sector source theorem must supply finer graded source data.
-data TwoTateParityTagsDetermineFiveInertiaSectors : Set where
+-- Constructive pigeonhole obstruction: three specific sector slots cannot
+-- be injected into the two parity branches, hence neither can all five.
+-- Unlike a constructor-free declaration, this theorem accepts ANY proposed
+-- classifier and derives an actual collision.
 
-fiveSectorsCannotBeReadFromHalfSumHalfDifferenceAlone :
-  TwoTateParityTagsDetermineFiveInertiaSectors -> ⊥
-fiveSectorsCannotBeReadFromHalfSumHalfDifferenceAlone ()
+identityNotMinus :
+  TwoB.identitySlot ≡ TwoB.minusOneSlot -> ⊥
+identityNotMinus ()
+
+identityNotFour :
+  TwoB.identitySlot ≡ TwoB.orderFourSlot -> ⊥
+identityNotFour ()
+
+minusNotFour :
+  TwoB.minusOneSlot ≡ TwoB.orderFourSlot -> ⊥
+minusNotFour ()
+
+noInjectionOfFiveSlotsIntoTateParity :
+  (classify : TwoB.TwoBSourceSlot -> Carnahan.TateParity) ->
+  ((left right : TwoB.TwoBSourceSlot) ->
+    classify left ≡ classify right -> left ≡ right) ->
+  ⊥
+noInjectionOfFiveSlotsIntoTateParity classify inject
+  with classify TwoB.identitySlot
+     | classify TwoB.minusOneSlot
+     | classify TwoB.orderFourSlot
+... | Carnahan.tateH0 | Carnahan.tateH0 | c =
+  identityNotMinus (inject TwoB.identitySlot TwoB.minusOneSlot refl)
+... | Carnahan.tateH0 | Carnahan.tateH1 | Carnahan.tateH0 =
+  identityNotFour (inject TwoB.identitySlot TwoB.orderFourSlot refl)
+... | Carnahan.tateH0 | Carnahan.tateH1 | Carnahan.tateH1 =
+  minusNotFour (inject TwoB.minusOneSlot TwoB.orderFourSlot refl)
+... | Carnahan.tateH1 | Carnahan.tateH1 | c =
+  identityNotMinus (inject TwoB.identitySlot TwoB.minusOneSlot refl)
+... | Carnahan.tateH1 | Carnahan.tateH0 | Carnahan.tateH1 =
+  identityNotFour (inject TwoB.identitySlot TwoB.orderFourSlot refl)
+... | Carnahan.tateH1 | Carnahan.tateH0 | Carnahan.tateH0 =
+  minusNotFour (inject TwoB.minusOneSlot TwoB.orderFourSlot refl)
 
 ------------------------------------------------------------------------
 -- 4. Source attribution / nonpromotion.
