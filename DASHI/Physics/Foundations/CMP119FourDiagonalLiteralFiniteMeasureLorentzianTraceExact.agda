@@ -4,10 +4,12 @@ module DASHI.Physics.Foundations.CMP119FourDiagonalLiteralFiniteMeasureLorentzia
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
+open import Data.Rational.Base using (_-_)
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 import DASHI.Physics.Foundations.CMP119AntigravityTimelikeEnergySharpActiveStressCriterionExact as Sharp
 import DASHI.Physics.Foundations.CMP119AntigravityWeakCouplingTraceEnergyNoGoExact as WeakYM
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedActiveStressCorrectionThresholdExact as Correction
 import Data.Rational.Properties as ℚP
 open import Relation.Nullary using (¬_)
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
@@ -217,3 +219,58 @@ module _
           sameActive
           (selectedMeasureC00ControlClosesNegativeActive timelikeControl))
         (WeakYM.activeStressNonnegative weak)
+
+------------------------------------------------------------------------
+-- EUCLIDEAN-TO-LORENTZIAN TIMELIKE CONTINUATION FIREWALL
+--
+-- The four finite connected numerators above originate from Euclidean
+-- metric tangents. Algebraically calling c00 a Lorentzian energy density
+-- does not itself implement Wick/OS continuation or renormalization.
+-- Take the actual continued timelike numerator rho_L explicitly, leaving
+-- the three spatial numerators tied to the SAME finite source.
+--
+-- Exact identity:
+--     A_L = A_E + (rho_L - c00_E).
+-- Negative Lorentzian active stress may therefore require a nontrivial
+-- continuation correction even when a Euclidean four-diagonal sum has
+-- a known sign. This is an independently testable source obligation.
+------------------------------------------------------------------------
+
+  lorentzianActiveWithContinuedTime : ℚ → ℚ
+  lorentzianActiveWithContinuedTime rhoL =
+    rhoL + c11 + c22 + c33
+
+  lorentzianTraceWithContinuedTime : ℚ → ℚ
+  lorentzianTraceWithContinuedTime rhoL =
+    - rhoL + c11 + c22 + c33
+
+  timelikeContinuationCorrection : ℚ → ℚ
+  timelikeContinuationCorrection rhoL = rhoL - c00
+
+  continuedActiveIsEuclideanSumPlusTimelikeCorrection :
+    ∀ rhoL →
+    lorentzianActiveWithContinuedTime rhoL
+    ≡ finiteMeasureActiveStress + timelikeContinuationCorrection rhoL
+  continuedActiveIsEuclideanSumPlusTimelikeCorrection rhoL =
+    ℚRing.solve-∀ c00 c11 c22 c33 rhoL
+
+  continuedActiveIsTracePlusTwiceEnergy :
+    ∀ rhoL →
+    lorentzianActiveWithContinuedTime rhoL
+    ≡ lorentzianTraceWithContinuedTime rhoL
+      + ((1ℚ + 1ℚ) * rhoL)
+  continuedActiveIsTracePlusTwiceEnergy rhoL =
+    ℚRing.solve-∀ c11 c22 c33 rhoL
+
+  continuedNegativeRequiresTimelikeCorrectionBelowEuclideanSum :
+    ∀ rhoL →
+    lorentzianActiveWithContinuedTime rhoL < 0ℚ →
+    timelikeContinuationCorrection rhoL < - finiteMeasureActiveStress
+  continuedNegativeRequiresTimelikeCorrectionBelowEuclideanSum rhoL negative =
+    Correction.negativeTotalRequiresSupercriticalCorrection
+      finiteMeasureActiveStress
+      (timelikeContinuationCorrection rhoL)
+      (subst
+        (λ value → value < 0ℚ)
+        (continuedActiveIsEuclideanSumPlusTimelikeCorrection rhoL)
+        negative)
