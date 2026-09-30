@@ -28,6 +28,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPActualMachineStutteringTransport
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -72,8 +73,33 @@ stutteringMachine machine = record
   ; Machine.dAccepting =
       λ where
         (ready c) → Machine.dAccepting machine c
-        (pending c) → Machine.dAccepting machine c
+        (pending c) → ⊥
   }
+
+------------------------------------------------------------------------
+-- No pending phase can invent an accepting event. Only ready states have
+-- observable acceptance, matching the untransformed configuration.
+------------------------------------------------------------------------
+
+readyAcceptanceExact :
+  (machine : Machine.DeterministicMachine)
+  (c : Machine.dConfiguration machine) →
+  Machine.dAccepting (stutteringMachine machine) (ready c)
+  ≡ Machine.dAccepting machine c
+readyAcceptanceExact machine c = refl
+
+pendingCannotAccept :
+  (machine : Machine.DeterministicMachine)
+  (c : Machine.dConfiguration machine) →
+  Machine.dAccepting (stutteringMachine machine) (pending c)
+  → ⊥
+pendingCannotAccept machine c ()
+
+------------------------------------------------------------------------
+-- Transition-level observations differ during the pending phase. This
+-- construction preserves accepting events after each complete two-step
+-- segment; it does NOT claim literal equality of uncompressed traces.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- Exact step accounting for arbitrary original traces.
