@@ -242,6 +242,16 @@ R813 fully-separated     original signed CC scalar
   between-partner Gram debt. Do not infer a CC bound merely from
   R822's comparable representative.
 
+**Important carrier-to-Clay gap:** R823–R825 are parameterised by a
+rational finite Fourier/Galerkin system, abstract time, and an explicitly
+supplied rational-valued integration authority. Even a proved reserve bound
+on these carriers would require its actual continuous-time realization,
+cutoff-uniform real/complex extension, the full arbitrary smooth periodic
+initial-data quantifiers, and a continuation passage before it can inhabit
+`NSConcreteLiteralClayABCDRunTargetExact.LiteralB K`. Neither the rational
+decision procedure nor a finite selected-cutoff barrier supplies these
+by itself.
+
 **No duplicate B compiler is required:** R823 already contains
 `allCutoffsSignedReserveBarrier`; R821 and R735 own the conditional
 barrier. The remaining mathematical inputs are actual B-RESERVE,
