@@ -12,6 +12,7 @@ import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact as HousingParity
 import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact as LaterMedicalParity
 import DASHI.Interop.ITIRHealthRecordSensibLawAdapterExact as GenericHealthParity
 import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorParity
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -59,3 +60,8 @@ selectedHealthEvidenceProcessorParity :
   ProcessorParity.HealthEvidenceProcessorParityBoundary
 selectedHealthEvidenceProcessorParity =
   ProcessorParity.canonicalHealthEvidenceProcessorParityBoundary
+
+selectedFriendlyjordiesNarrativeGovernanceBoundary :
+  FriendlyjordiesNarrative.FriendlyjordiesNarrativeGovernanceBoundary
+selectedFriendlyjordiesNarrativeGovernanceBoundary =
+  FriendlyjordiesNarrative.canonicalFriendlyjordiesNarrativeGovernanceBoundary
