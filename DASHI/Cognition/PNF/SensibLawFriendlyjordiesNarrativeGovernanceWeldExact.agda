@@ -59,45 +59,11 @@ record NarrativeLane : Set where
 open NarrativeLane public
 
 ------------------------------------------------------------------------
--- Source-bound claim occurrence.
-------------------------------------------------------------------------
-
-record SourceBoundClaimOccurrence
-    (root : Contest.PropositionRoot)
-    (leaf : Contest.ClaimLeaf root) : Set where
-  constructor source-bound-claim-occurrence
-  field
-    trace : Trace.SemanticTracePath
-    propositionRefMatches :
-      Contest.PropositionRoot.propositionRef root
-      ≡ Trace.SemanticTracePath.claimRefs trace
-        |> firstOr (Contest.PropositionRoot.propositionRef root)
-    claimRefPresentAsCoordinate : String
-    attributionStatus : Status.PropositionStatusProduct
-    occurrenceStatus : Status.EventStatusProduct
-    reviewRef : String
-    candidateOnly : Bool
-    candidateOnlyIsTrue : candidateOnly ≡ true
-    createsTruth : Bool
-    createsTruthIsFalse : createsTruth ≡ false
-
--- A tiny total helper lets the record state an explicit first-claim coordinate
--- without pretending list membership has been proved by a raw String receipt.
-firstOr : ∀ {A : Set} → A → List A → A
-firstOr fallback [] = fallback
-firstOr fallback (x ∷ xs) = x
-
-infixl 1 _|>_
-_|>_ : ∀ {A B : Set} → A → (A → B) → B
-x |> f = f x
-
-open SourceBoundClaimOccurrence public
-
-------------------------------------------------------------------------
--- Better proof-relevant source binding.
+-- Proof-relevant source binding.
 --
--- Rather than relying on String membership, this owner provides a canonical
--- constructor for traces whose first claim coordinate is the proposition root.
+-- The existing trace carries a list of claim references.  This owner does not
+-- turn String membership into a proof.  A downstream producer must supply the
+-- exact proposition/leaf coordinates it has independently checked.
 ------------------------------------------------------------------------
 
 record RootedTraceClaim
@@ -106,14 +72,14 @@ record RootedTraceClaim
   constructor rooted-trace-claim
   field
     trace : Trace.SemanticTracePath
-    leadingClaimRef :
-      firstOr
-        (Contest.PropositionRoot.propositionRef root)
-        (Trace.SemanticTracePath.claimRefs trace)
+    propositionRefCoordinate : String
+    propositionRefMatches :
+      propositionRefCoordinate
       ≡ Contest.PropositionRoot.propositionRef root
     leafClaimRef : String
     leafClaimRefMatches :
       leafClaimRef ≡ Contest.ClaimLeaf.claimRef leaf
+    traceClaimReferenceReceipt : String
     sourceRevisionRef : String
     sourceRevisionMatches :
       sourceRevisionRef
@@ -124,6 +90,10 @@ record RootedTraceClaim
       exactSpanRef
       ≡ Trace.PersistentStatementIdentity.exactSpanRef
           (Trace.SemanticTracePath.statement trace)
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse : createsClaimTruth ≡ false
 
 open RootedTraceClaim public
 
