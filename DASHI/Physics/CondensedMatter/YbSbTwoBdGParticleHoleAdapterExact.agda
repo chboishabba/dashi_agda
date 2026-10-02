@@ -15,6 +15,9 @@ module DASHI.Physics.CondensedMatter.YbSbTwoBdGParticleHoleAdapterExact where
 -- no concrete source numerical matrix is identified here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Empty using (⊥)
+
 import DASHI.Physics.CondensedMatter.BdGNambuParticleHoleExact as Nambu
 import DASHI.Physics.CondensedMatter.YbSbTwoBdGSymmetryBoundaryExact as Boundary
 
@@ -63,7 +66,7 @@ algebraicModelSelectedINTNotDIII :
     (Boundary.selectedINTBdGFacts
       (toSelectedINTBdGSourcePackage M))
   →
-  Data.Empty.⊥
+  ⊥
 algebraicModelSelectedINTNotDIII M =
   Boundary.selectedINTBdGNotDIII
     (toSelectedINTBdGSourcePackage M)
