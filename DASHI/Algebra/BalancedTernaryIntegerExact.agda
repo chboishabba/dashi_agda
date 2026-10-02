@@ -1,7 +1,8 @@
 module DASHI.Algebra.BalancedTernaryIntegerExact where
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _∸_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Integer using (ℤ; +_) renaming (_-_ to _-ℤ_)
 open import Data.Vec using (Vec; []; _∷_)
 
@@ -65,25 +66,26 @@ eval-involution (t ∷ ts)
         | eval-involution ts = refl
 
 toInteger : SignedWeight → ℤ
-toInteger w = (+ positiveWeight w) -ℤ (+ negativeWeight w)
+toInteger w =
+  (+ (positiveWeight w)) -ℤ (+ (negativeWeight w))
 
 pow3 : Nat → Nat
 pow3 zero = 1
 pow3 (suc n) = 3 * pow3 n
 
-halfSpan : Nat → Nat
-halfSpan n = (pow3 n ∸ 1) ∸ ((pow3 n ∸ 1) ∸ ((pow3 n ∸ 1) ∸ (pow3 n ∸ 1)))
-
 ------------------------------------------------------------------------
 -- Concrete source calibration rows.
 
-oneTritNegative : toInteger (eval (Trit.neg ∷ [])) ≡ (+ 0) -ℤ (+ 1)
+oneTritNegative :
+  toInteger (eval (Trit.neg ∷ [])) ≡ (+ 0) -ℤ (+ 1)
 oneTritNegative = refl
 
-oneTritZero : toInteger (eval (Trit.zer ∷ [])) ≡ (+ 0) -ℤ (+ 0)
+oneTritZero :
+  toInteger (eval (Trit.zer ∷ [])) ≡ (+ 0) -ℤ (+ 0)
 oneTritZero = refl
 
-oneTritPositive : toInteger (eval (Trit.pos ∷ [])) ≡ (+ 1) -ℤ (+ 0)
+oneTritPositive :
+  toInteger (eval (Trit.pos ∷ [])) ≡ (+ 1) -ℤ (+ 0)
 oneTritPositive = refl
 
 threeTritExtremalPositiveWeight :
