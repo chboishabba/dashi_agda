@@ -453,3 +453,42 @@ official-coordinate source audit.
 This is the current hard stop condition: do not create new compiler layers
 unless one of the named leaves proves that a genuinely new mathematical
 quantity is required.
+
+
+## 10. Round71/74 cross-pollination into R830
+
+The R830 real-ODE leaf is smaller than the first R828 handoff suggested.
+
+Existing theorem-bearing owners already provide:
+
+- `NSTriadKNFixedCanonicalRealityVectorFieldRound71Exact`: one autonomous
+  fixed-cutoff Galerkin vector field with reality built into the phase space;
+- `NSTriadKNFixedCanonicalTransverseInvariantRound71Exact`: the transverse
+  subspace is invariant;
+- `NSTriadKNFixedCanonicalVectorFieldDegreeTwoRound71Exact`: the literal
+  Round71 RHS is represented by an exact expression of algebraic degree at most
+  two and that expression evaluates to the literal RHS;
+- `NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact`: the corrected
+  finite slot chart is executable and the earlier quantitative local-Lipschitz
+  estimate already applies through it.
+
+The standard complete-real side is now isolated in the Lean modules
+`Rational345LocalODE`, `Rational345QuadraticODE`, and
+`Rational345ShortTime`: a linear-plus-bounded-bilinear real field is (C^1),
+has a local integral curve, and the exact R828 constants satisfy the entire
+short-time sign budget.
+
+Accordingly `NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda`
+reduces R830 to only two NS-specific bridges:
+
+1. physical Round71 RHS = corrected finite-real quadratic/chart field;
+2. the selected R828 displacement and rate-Lipschitz bounds apply to that
+   solution, with the selected scalar identified with the R829/R815 scalar.
+
+Reality, transversality invariance, polynomial degree, generic Picard theory,
+and the huge rational (KLT) arithmetic are not separate open leaves.
+
+The post-reserve B continuation cut is also non-circular: the standard
+localized Luo continuation compiler is already constructed, while the
+cutoff-uniform/continuum inputs needed to turn the eventual B1--B7 estimate into
+the all-data global theorem remain the explicit B-continuation leaf.
