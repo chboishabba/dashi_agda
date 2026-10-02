@@ -31,6 +31,8 @@ module DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Data.Empty using (⊥-elim)
+open import Relation.Binary.Definitions using (Tri; tri<; tri≈; tri>)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; -_; _<_)
 import Data.Rational.Properties as ℚP
@@ -154,6 +156,56 @@ vacuumPositiveRhoImpliesTraceNegative vacuum rhoPositive =
             + (rho (stress vacuum) + rho (stress vacuum))) < right)
         (Ring.solve [])
         negativeFour))
+
+vacuumTraceNegativeImpliesActiveNegative :
+  ∀ vacuum →
+  trace (stress vacuum) < 0ℚ →
+  activeStress (stress vacuum) < 0ℚ
+vacuumTraceNegativeImpliesActiveNegative vacuum traceNegative
+    with ℚP.<-cmp (activeStress (stress vacuum)) 0ℚ
+... | tri< activeNegative _ _ = activeNegative
+... | tri≈ _ activeZero _ =
+  let
+    traceZero :
+      trace (stress vacuum) ≡ 0ℚ
+    traceZero =
+      subst
+        (λ active →
+          trace (stress vacuum) ≡ active + active)
+        activeZero
+        (vacuumTraceIsTwiceActive vacuum)
+
+    impossible :
+      0ℚ < 0ℚ
+    impossible =
+      subst
+        (λ left → left < 0ℚ)
+        traceZero
+        traceNegative
+  in
+  ⊥-elim (ℚP.<-irrefl refl impossible)
+... | tri> _ _ zeroBelowActive =
+  let
+    twiceActivePositive :
+      0ℚ
+      < activeStress (stress vacuum) + activeStress (stress vacuum)
+    twiceActivePositive =
+      ℚP.+-mono-< zeroBelowActive zeroBelowActive
+
+    tracePositive :
+      0ℚ < trace (stress vacuum)
+    tracePositive =
+      subst
+        (λ right → 0ℚ < right)
+        (sym (vacuumTraceIsTwiceActive vacuum))
+        twiceActivePositive
+
+    impossible :
+      trace (stress vacuum) < trace (stress vacuum)
+    impossible =
+      ℚP.<-trans traceNegative tracePositive
+  in
+  ⊥-elim (ℚP.<-irrefl refl impossible)
 
 ------------------------------------------------------------------------
 -- FRONTIER FLAGS
