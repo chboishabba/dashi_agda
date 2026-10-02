@@ -49,7 +49,7 @@ pbsLaCabana = Source.mkNoDOISource
   "PBS"
   ""
   "https://www.pbs.org/wgbh/americanexperience/features/castro-che-guevara-1928-1967/"
-  Source.referenceWorkSource
+  (Source.namedSourceKind "reference work")
   "secondary biographical source documenting Guevara's La Cabana prison responsibility; numerical and due-process claims require source-sensitive treatment"
   Source.publicAttribution
 
