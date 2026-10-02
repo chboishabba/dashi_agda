@@ -15,6 +15,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantContinuationCompilerExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPoincareVacuumStressMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumExpectationBoostCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyContinuumStressPoincareMaxCutExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -58,7 +59,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantVacuumExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantContinuationCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPoincareVacuumStressMaxCutExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyVacuumExpectationBoostCompilerExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumExpectationBoostCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyContinuumStressPoincareMaxCutExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
