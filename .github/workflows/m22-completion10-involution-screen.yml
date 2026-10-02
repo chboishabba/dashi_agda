@@ -8,6 +8,8 @@ on:
     paths:
       - 'scripts/m22_completion10_involution_screen.g'
       - 'scripts/check_m22_completion10_involution_screen.sh'
+      - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
+      - 'scripts/m24_276_to_m22_f2_composition_screen.g'
       - '.github/workflows/m22-completion10-involution-screen.yml'
   pull_request:
     paths:
@@ -42,10 +44,18 @@ jobs:
           set -euo pipefail
           bash scripts/check_m22_completion10_involution_screen.sh
 
-      - name: Upload M22 Completion10 receipt
+      - name: Screen M24 276-point module restricted to M22
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_m24_276_to_m22_f2_composition_screen.sh
+
+      - name: Upload M22 Completion10 receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: m22-completion10-involution-screen
-          path: build/m22_completion10_involution_screen.json
+          name: m22-completion10-screens
+          path: |
+            build/m22_completion10_involution_screen.json
+            build/m24_276_to_m22_f2_composition_screen.json
           if-no-files-found: warn
