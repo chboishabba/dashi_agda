@@ -65,6 +65,7 @@ record ThreeTapTerminalCompletionReceipt : Set where
     transformedLocalBudgetCommit : String
     terminalizedCommit : String
     signedFifthBridgeCommit : String
+    nearLineCoordinateCommit : String
     workflowCommit : String
 
 open ThreeTapTerminalCompletionReceipt public
@@ -88,7 +89,8 @@ currentThreeTapTerminalCompletionReceipt =
     "a027fa0f0a6c40f242e1a927416bc65ec4d66236"
     "423150cc363d74aa695af18b11958f3f7b6a5741"
     "29169957eadb1c6d77f027c3f03926c6a29b0152"
-    "fcf58344f83a03cb812b32effe5a2ff913de84bf"
+    "6edfed016c24ce1296e00950d052b0a09e9036ec"
+    "2da302997e977e2346ffb5b37ee5c50ae6890b1a"
 
 record ThreeTapTerminalCompletionBoundary : Set where
   constructor three-tap-terminal-completion-boundary
@@ -108,6 +110,7 @@ record ThreeTapTerminalCompletionBoundary : Set where
     transformedProjectiveAbsMomentObjectsSourceWritten : Bool
     transformedProjectiveM6M8TransportPaid : Bool
     signedFifthRouteTargetsCanonicalMarginSourceWritten : Bool
+    transformedNearLineJ2J4CoordinatesSourceWritten : Bool
 
     fixedPhysicalShiftBecomesHeightGrowingNormalizedShiftSourceWritten : Bool
     normalizedLogTwoShiftOutsideCanonicalSupportAtHighTSourceWritten : Bool
@@ -138,6 +141,8 @@ record ThreeTapTerminalCompletionBoundary : Set where
       transformedProjectiveAbsMomentObjectsSourceWritten ≡ true
     signedFifthCommonConsumerPaid :
       signedFifthRouteTargetsCanonicalMarginSourceWritten ≡ true
+    nearLineCoordinatesPaid :
+      transformedNearLineJ2J4CoordinatesSourceWritten ≡ true
     supportFirewallPaid :
       normalizedLogTwoShiftOutsideCanonicalSupportAtHighTSourceWritten ≡ true
 
@@ -175,12 +180,12 @@ canonicalThreeTapTerminalCompletionBoundary =
     true true
     true true true
     true true true
-    true true true false true
+    true true true false true true
     true true
     false false false false false
     false false false
 
-    refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl
     refl refl refl
 
