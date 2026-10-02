@@ -1,0 +1,37 @@
+name: YbSb2 TRSB INT Agda
+
+on:
+  push:
+    paths:
+      - 'DASHI/Physics/CondensedMatter/SuperconductingTimeReversalGaugeObstructionExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
+      - '.github/workflows/yb-sb2-trsb-int-agda.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/CondensedMatter/SuperconductingTimeReversalGaugeObstructionExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
+      - '.github/workflows/yb-sb2-trsb-int-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Check reusable TR/gauge theorem
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/SuperconductingTimeReversalGaugeObstructionExact.agda
+      - name: Check selected YbSb2 INT theorem
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda
+      - name: Check muSR evidence owner
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda
+      - name: Check physical bridge
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda
