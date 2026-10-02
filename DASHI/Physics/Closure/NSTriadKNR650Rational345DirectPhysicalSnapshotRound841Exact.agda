@@ -17,6 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345DirectPhysicalSnapshotRound
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
