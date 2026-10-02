@@ -3,6 +3,8 @@ name: CMP119 physical source same-object checks
 on:
   pull_request:
     paths:
+      - "DASHI/Physics/Foundations/CMP119CosmologyFiniteWeylConventionFirewallExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyVacuumDominatedWeylSignExact.agda"
       - 'DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda'
       - 'DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda'
       - 'DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda'
@@ -96,6 +98,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda \
+          DASHI/Physics/Foundations/CMP119CosmologyFiniteWeylConventionFirewallExact.agda \
+          DASHI/Physics/Foundations/CMP119CosmologyVacuumDominatedWeylSignExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda \
