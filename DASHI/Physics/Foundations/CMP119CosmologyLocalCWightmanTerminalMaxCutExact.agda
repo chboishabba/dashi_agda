@@ -28,7 +28,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _<_; -_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Foundations.CMP119CosmologyLocalCWightmanStressHingeExact as Hinge
 import DASHI.Physics.Foundations.CMP119CosmologySelectedBoostTensorActionExact as Tensor
@@ -220,6 +220,56 @@ module _
       recovery selected directions
       (asTerminalStressCovarianceMaxCut producers)
       positiveRho
+
+  localCWightmanVacuum :
+    (producers : LocalCWightmanTerminalProducers) →
+    Vacuum.VacuumLikeLorentzianStress
+  localCWightmanVacuum producers = record
+    { Vacuum.VacuumLikeLorentzianStress.stress =
+        lorentzianIsotropicStress producers
+    ; Vacuum.VacuumLikeLorentzianStress.pressureIsMinusRho =
+        localCWightmanTerminalForcesVacuumEquationOfState producers
+    }
+
+  literalEuclideanTraceNegativeGivesLorentzianTraceNegative :
+    (producers : LocalCWightmanTerminalProducers) →
+    literalEuclideanTrace < 0ℚ →
+    Vacuum.trace (lorentzianIsotropicStress producers) < 0ℚ
+  literalEuclideanTraceNegativeGivesLorentzianTraceNegative
+      producers literalNegative =
+    subst
+      (λ value → value < 0ℚ)
+      (sym (sameObjectTraceContinuation producers))
+      literalNegative
+
+  localCWightmanLiteralTraceNegativeGivesNegativeActive :
+    (producers : LocalCWightmanTerminalProducers) →
+    literalEuclideanTrace < 0ℚ →
+    Vacuum.activeStress (lorentzianIsotropicStress producers) < 0ℚ
+  localCWightmanLiteralTraceNegativeGivesNegativeActive
+      producers literalNegative =
+    Vacuum.vacuumTraceNegativeImpliesActiveNegative
+      (localCWightmanVacuum producers)
+      (literalEuclideanTraceNegativeGivesLorentzianTraceNegative
+        producers literalNegative)
+
+  localCWightmanLiteralTraceNegativeGivesPositiveMatterAcceleration :
+    (positiveGravityFactor : ℚ) →
+    (producers : LocalCWightmanTerminalProducers) →
+    0ℚ < positiveGravityFactor →
+    literalEuclideanTrace < 0ℚ →
+    0ℚ <
+      Vacuum.matterAccelerationContribution
+        positiveGravityFactor
+        (lorentzianIsotropicStress producers)
+  localCWightmanLiteralTraceNegativeGivesPositiveMatterAcceleration
+      positiveGravityFactor producers factorPositive literalNegative =
+    Vacuum.negativeActiveStressGivesPositiveMatterAcceleration
+      positiveGravityFactor
+      (lorentzianIsotropicStress producers)
+      factorPositive
+      (localCWightmanLiteralTraceNegativeGivesNegativeActive
+        producers literalNegative)
 
   selectedOperatorIsPinnedLocalCContinuationImage : Bool
   selectedOperatorIsPinnedLocalCContinuationImage = true
