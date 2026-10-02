@@ -7,6 +7,16 @@ required = {
         'eval-involution',
         'threeTritExtremalPositiveWeight',
     ],
+    'DASHI/Algebra/BalancedTernaryA003462BridgeExact.agda': [
+        'threePositiveTritEvaluationMatchesA003462Magnitude',
+    ],
+    'DASHI/Algebra/BalancedTernaryFiniteCarrierExact.agda': [
+        'finTritRoundTrip',
+        'tritFinRoundTrip',
+        'fromToFin3',
+        'toFromFin3',
+        'canonicalFin3VectorEnumerationLength',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': [
         'bf16ScaledExactFormat',
         'TaperedWidthAllocation',
@@ -14,6 +24,12 @@ required = {
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': [
         'canonicalTriadicCylinderSystem',
         'projectCompatible',
+    ],
+    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': [
+        'ordinaryExactTriadic',
+        'ordinaryRational',
+        'applySignFlip',
+        'flipExactTriadicDenominatorInvariant',
     ],
     'DASHI/ComputerScience/TekumRegimeExponentExact.agda': [
         'decodeEncodeRegime',
@@ -33,9 +49,12 @@ required = {
         'kernelTwoStepProjectionComposes',
     ],
     'DASHI/ComputerScience/TekumPadicOrientationBoundaryExact.agda': [
-        'tekumSampleKeepsHighTrit',
-        'padicSampleDepthOne',
         'tekumAndPadicDepthOneDiffer',
+    ],
+    'DASHI/ComputerScience/TekumPadicDualChartExact.agda': [
+        'dualChartInvolutive',
+        'tekumPrecisionConjugatesToDual',
+        'dualTwoStepComposition',
     ],
     'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': [
         'regimeStorageRoundTrip',
@@ -51,18 +70,11 @@ required = {
         'positionedCodeSeparatesTekumDigit',
         'negativeUnitAtOneCompilesToThreeInversePrimes',
     ],
-    'DASHI/ComputerScience/TekumFieldRoleSSPAtlasExact.agda': [
-        'canonicalRadixThreeAtlas',
-        'separatedRoleAtlas',
-    ],
-    'DASHI/ComputerScience/TekumPrecisionCompositionExact.agda': [
-        'truncateTwoTwiceEqualsFour',
-    ],
     'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': [
         'canonicalTekumVerifiedAssemblyBoundary',
-        'executablePadicCylinderSystemPresent',
-        'tekumTruncationEqualsPadicCylinderWithoutReversal',
-        'concreteTernaryStoredProgramExecutionPresent',
+        'canonicalRationalOrdinaryDecoderPresent',
+        'finiteTritPowerThreeCardinalityPaid',
+        'reversalDualChartPresent',
     ],
 }
 
@@ -78,4 +90,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: floating, p-adic cylinder/orientation, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: rational semantics, finite 3^n carrier, dual p-adic chart, ternary-machine, ABI and SSP/FRACTRAN welds present.')
