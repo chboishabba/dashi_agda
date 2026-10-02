@@ -13,6 +13,8 @@ import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact as IRGCSources
 import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact as IranGenealogy
 import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as IRGCPacket
 import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDena
+import DASHI.Governance.ExternalThreatRepressionMechanismTransferExact as ThreatTransfer
+import DASHI.Governance.MostazafinWorkerCategoryOverlapReviewedJoinExact as MostazafinOverlap
 
 ------------------------------------------------------------------------
 -- ORIGINAL-THREAD SOURCE-ACQUISITION PARETO
@@ -33,6 +35,11 @@ data OriginalThreadRequirement : Set where
   friendlyjordiesFallaciesTypedBinding : OriginalThreadRequirement
   irisDenaOperationalRecord : OriginalThreadRequirement
   chinaEconomicLeadershipCrossSourceJoin : OriginalThreadRequirement
+  mostazafinWorkerCategoryOverlap : OriginalThreadRequirement
+  iranThreatRepressionCaseMechanism : OriginalThreadRequirement
+  cubaSanctionsDomesticInstitutionMechanism : OriginalThreadRequirement
+  iranCubaSiegeCrossCaseJoin : OriginalThreadRequirement
+  cheClassificationRule : OriginalThreadRequirement
   broadCountryExpansion : OriginalThreadRequirement
 
 irgcSpanCell : Pareto.RequirementCandidate OriginalThreadRequirement
@@ -84,6 +91,42 @@ chinaLeadershipJoinCell = Pareto.requirement-candidate
   3 5
   "PAID by ChinaEconomicLeadershipCrossSourceJoinExact: official self-position and independent geo-economic coordinates are joined per axis while overall leadership/winner remains unclosed."
 
+
+mostazafinOverlapCell : Pareto.RequirementCandidate OriginalThreadRequirement
+mostazafinOverlapCell = Pareto.requirement-candidate
+  mostazafinWorkerCategoryOverlap
+  true true true false
+  2 8
+  "PAID by MostazafinWorkerCategoryOverlapReviewedJoinExact: historical Khomeinist discourse explicitly includes workers within the broader mostazafin category, while 2026 labour monitoring pays current worker protest presence. Universal protester identity remains false."
+
+iranThreatRepressionCell : Pareto.RequirementCandidate OriginalThreadRequirement
+iranThreatRepressionCell = Pareto.requirement-candidate
+  iranThreatRepressionCaseMechanism
+  true true true true
+  4 9
+  "General external-threat/repression mechanisms are source-paid, and 2026 Iran has direct mobilisation-shift evidence; remaining payment is Iran-specific causal identification of a particular repression increment with counter-hypotheses controlled."
+
+cubaPressureInstitutionCell : Pareto.RequirementCandidate OriginalThreadRequirement
+cubaPressureInstitutionCell = Pareto.requirement-candidate
+  cubaSanctionsDomesticInstitutionMechanism
+  true true true true
+  3 7
+  "Acquire/compile a bounded Cuba mechanism separating measurable embargo costs, domestic institutional costs, infrastructure fragility and political blame externalisation; do not promote sanctions into sole-cause or repression-necessity claims."
+
+iranCubaCrossCaseCell : Pareto.RequirementCandidate OriginalThreadRequirement
+iranCubaCrossCaseCell = Pareto.requirement-candidate
+  iranCubaSiegeCrossCaseJoin
+  true true true false
+  5 8
+  "Required for a comparative siege-pressure theorem, but inert until case-level Iran and Cuba mechanisms are separately paid."
+
+cheClassificationCell : Pareto.RequirementCandidate OriginalThreadRequirement
+cheClassificationCell = Pareto.requirement-candidate
+  cheClassificationRule
+  false true true false
+  2 2
+  "Concrete Che/Cuba institutional coordinates are already paid. A political label is not required by the current consumer and therefore does not enter the live evidence frontier."
+
 broadExpansionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 broadExpansionCell = Pareto.requirement-candidate
   broadCountryExpansion
@@ -101,6 +144,11 @@ originalThreadPortfolio =
   ∷ fjordiesFallaciesCell
   ∷ irisDenaRecordCell
   ∷ chinaLeadershipJoinCell
+  ∷ mostazafinOverlapCell
+  ∷ iranThreatRepressionCell
+  ∷ cubaPressureInstitutionCell
+  ∷ iranCubaCrossCaseCell
+  ∷ cheClassificationCell
   ∷ broadExpansionCell
   ∷ []
 
@@ -119,6 +167,31 @@ fjordiesGarnautPaidDropsFromFrontier = refl
 irgcCausalPaidDropsFromFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio irgcCausalCell ≡ false
 irgcCausalPaidDropsFromFrontier = refl
+
+
+mostazafinOverlapPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio mostazafinOverlapCell ≡ false
+mostazafinOverlapPaidDropsFromFrontier = refl
+
+iranThreatRepressionOnFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranThreatRepressionCell ≡ true
+iranThreatRepressionOnFrontier = refl
+
+cubaPressureInstitutionOnFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio cubaPressureInstitutionCell ≡ true
+cubaPressureInstitutionOnFrontier = refl
+
+iranCubaCrossCaseCurrentlyInert :
+  Pareto.eligible? iranCubaCrossCaseCell ≡ false
+iranCubaCrossCaseCurrentlyInert = refl
+
+irisDenaCurrentlyDominated :
+  Pareto.onParetoFrontier? originalThreadPortfolio irisDenaRecordCell ≡ false
+irisDenaCurrentlyDominated = refl
+
+cheClassificationOffFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio cheClassificationCell ≡ false
+cheClassificationOffFrontier = refl
 
 broadExpansionOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio broadExpansionCell ≡ false
@@ -143,6 +216,17 @@ currentIRGCPacket : IRGCPacket.IRGCDualChronologyPacket
 currentIRGCPacket = IRGCPacket.canonicalIRGCDualChronologyPacket
 
 
+
+currentMostazafinCategoryOverlap :
+  MostazafinOverlap.CategoryOverlapReceipt
+currentMostazafinCategoryOverlap =
+  MostazafinOverlap.workerMostazafinCategoryOverlap
+
+currentIranThreatTransferResidual :
+  ThreatTransfer.TransferResidual
+currentIranThreatTransferResidual =
+  ThreatTransfer.iranCaseSpecificResidual
+
 irisDenaCurrentResidual : IRISDena.OperationalResidual
 irisDenaCurrentResidual = IRISDena.exactDutyResidual
 
@@ -162,10 +246,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Pursue the surviving IRIS Dena exact-duty/embedding record residual: operational action log, watch/duty record, protocol text, or another independently reviewable same-object record."
-    "2. Retain the new command-level primary statements as fibre-narrowing evidence, not as an operational reconstruction."
-    "3. Recompute only when a stronger same-object source is acquired or the residual is shown publicly unavailable."
-    "IRGC mechanism, Friendlyjordies archive debts, and China cross-source economic join are paid and off the live frontier."
+    "1. Iran-specific external-threat/repression identification: general causal mechanism is paid, but case transfer remains open."
+    "2. Cuba sanctions x domestic-institutions mechanism: cheaper parallel frontier cell; separate external coercion costs from domestic institutional and infrastructure effects."
+    "3. After both case mechanisms, activate the Iran/Cuba cross-case siege comparison with no same-mechanism presumption."
+    "IRIS Dena exact-duty reconstruction remains required but is currently Pareto-dominated by higher-gain political-history residuals; Che classification is not required by the current consumer."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
