@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from fractions import Fraction
 from pathlib import Path
 
 A = -1.0
@@ -92,22 +93,24 @@ def classify_initial_x(x0: float) -> tuple[str, tuple[float, float]]:
     return classify_endpoint(*endpoint), endpoint
 
 
-def boundary_bracket(lo: float, hi: float, iterations: int = 16) -> tuple[float, float]:
-    lo_class, _ = classify_initial_x(lo)
-    hi_class, _ = classify_initial_x(hi)
+def boundary_bracket(
+    lo: Fraction, hi: Fraction, iterations: int = 16
+) -> tuple[Fraction, Fraction]:
+    lo_class, _ = classify_initial_x(float(lo))
+    hi_class, _ = classify_initial_x(float(hi))
     if lo_class != "lower" or hi_class != "upper":
         raise RuntimeError(
             f"bad initial bracket: lo={lo_class}, hi={hi_class}; expected lower/upper"
         )
     for _ in range(iterations):
-        mid = 0.5 * (lo + hi)
-        mid_class, _ = classify_initial_x(mid)
+        mid = (lo + hi) / 2
+        mid_class, _ = classify_initial_x(float(mid))
         if mid_class == "lower":
             lo = mid
         elif mid_class == "upper":
             hi = mid
         else:
-            raise RuntimeError(f"unresolved endpoint at x0={mid:.17g}")
+            raise RuntimeError(f"unresolved endpoint at x0={float(mid):.17g}")
     return lo, hi
 
 
@@ -119,7 +122,10 @@ def main() -> int:
     lower_class, lower_endpoint = classify_initial_x(LOWER_WITNESS_X)
     upper_class, upper_endpoint = classify_initial_x(UPPER_WITNESS_X)
     reduced = reduced_prediction(MU0)
-    bracket_lo, bracket_hi = boundary_bracket(4.4e-11, 4.5e-11)
+    bracket_lo, bracket_hi = boundary_bracket(
+        Fraction(44, 10**12),
+        Fraction(45, 10**12),
+    )
 
     if lower_class != "lower":
         raise SystemExit(f"selected narrow-funnel witness no longer reaches lower attractor: {lower_class}")
@@ -160,9 +166,31 @@ def main() -> int:
                 "endpoint": list(upper_endpoint),
                 "classification": upper_class,
             },
-            "stable_manifold_cross_section_bracket": [bracket_lo, bracket_hi],
+            "stable_manifold_cross_section_bracket": [float(bracket_lo), float(bracket_hi)],
+            "stable_manifold_cross_section_exact": {
+                "lower": {
+                    "numerator": bracket_lo.numerator,
+                    "denominator": bracket_lo.denominator,
+                },
+                "upper": {
+                    "numerator": bracket_hi.numerator,
+                    "denominator": bracket_hi.denominator,
+                },
+                "common_denominator": bracket_lo.denominator,
+                "adjacent_grid_points": (
+                    bracket_lo.denominator == bracket_hi.denominator
+                    and bracket_hi.numerator == bracket_lo.numerator + 1
+                ),
+            },
         },
         "observed_selected_mismatch": lower_class != reduced,
+        "resolution_receipt": {
+            "selected_bracket_width_exact": {
+                "numerator": (bracket_hi - bracket_lo).numerator,
+                "denominator": (bracket_hi - bracket_lo).denominator,
+            },
+            "agda_owner": "DASHI.Physics.Dynamics.YanchukSelectedCrossSectionBracketExact",
+        },
         "claims": {
             "analytic_basin_theorem_proved": False,
             "global_width_law_proved": False,
