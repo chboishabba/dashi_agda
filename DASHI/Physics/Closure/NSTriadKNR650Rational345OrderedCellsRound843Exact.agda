@@ -22,7 +22,6 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
-import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleExact as Scale
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ActiveHelicalScalarsRound835Exact as Active
 import DASHI.Physics.Closure.NSTriadKNR650Rational345EnergyRowsRound829Exact as Energy
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact as Direct
@@ -30,29 +29,6 @@ import DASHI.Physics.Closure.NSTriadKNR650Rational345UnitGeometryRound842Exact a
 
 F : C3.RealField _
 F = Rational.rationalRealField
-
-------------------------------------------------------------------------
--- Unit-normalized integer-coordinate reductions.
-------------------------------------------------------------------------
-
-embedPos3 :
-  ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E} →
-  (G : Geometry.Unit345Geometry E I) →
-  C3.embedInteger E (+ 3) ≡ 3
-embedPos3 {E = E} G
-  rewrite Scale.positiveNatEmbeddingScale E 3
-        | C3.embedInteger E (+ 1)
-        | Geometry.unitEmbedding G .DASHI.Physics.Closure.NSTriadKNComConcreteActiveOddPQTriadRound62Exact.UnitPreservingIntegerEmbedding.embedPositiveOne =
-  solve []
-
-embedPos4 :
-  ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E} →
-  (G : Geometry.Unit345Geometry E I) →
-  C3.embedInteger E (+ 4) ≡ 4
-embedPos4 {E = E} G
-  rewrite Scale.positiveNatEmbeddingScale E 4
-        | Geometry.Unit345Geometry.unitEmbedding G
-  = solve []
 
 ------------------------------------------------------------------------
 -- Explicit resonant incidences.  The resonance fields are definitional.
