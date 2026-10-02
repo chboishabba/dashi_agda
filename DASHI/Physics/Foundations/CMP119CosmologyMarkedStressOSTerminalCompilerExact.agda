@@ -21,6 +21,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSTerminalCompilerEx
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
+open import Data.Product using (Σ; _,_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
