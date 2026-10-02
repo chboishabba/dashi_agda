@@ -7,6 +7,8 @@ on:
       - 'DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
       - '.github/workflows/yb-sb2-trsb-int-agda.yml'
   pull_request:
     paths:
@@ -35,3 +37,5 @@ jobs:
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda
       - name: Check physical bridge
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda
+      - name: Check single-band exclusion funnel
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda
