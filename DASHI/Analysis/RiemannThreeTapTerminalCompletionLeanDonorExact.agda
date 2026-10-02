@@ -85,7 +85,7 @@ currentThreeTapTerminalCompletionReceipt =
     "bdd6faebaa8d5a45e5e39e8c69694cb7978b2c2d"
     "a2a5a0cac5f88f8320247c6cb11c2e0c33b46a4d"
     "55fc6436fd750820a2e12c16f3247be627760657"
-    "4e9abc06b987e0e1299de10d952cbb126141d520"
+    "a027fa0f0a6c40f242e1a927416bc65ec4d66236"
     "423150cc363d74aa695af18b11958f3f7b6a5741"
     "29169957eadb1c6d77f027c3f03926c6a29b0152"
     "fcf58344f83a03cb812b32effe5a2ff913de84bf"
@@ -105,7 +105,8 @@ record ThreeTapTerminalCompletionBoundary : Set where
     symmetricShiftMomentsThroughEightSourceWritten : Bool
     transformedSelectedZeroTargetWeldedSourceWritten : Bool
     transformedAdaptiveSupportRadiusSourceWritten : Bool
-    transformedRawM6M8SourceWritten : Bool
+    transformedProjectiveAbsMomentObjectsSourceWritten : Bool
+    transformedProjectiveM6M8TransportPaid : Bool
     signedFifthRouteTargetsCanonicalMarginSourceWritten : Bool
 
     fixedPhysicalShiftBecomesHeightGrowingNormalizedShiftSourceWritten : Bool
@@ -133,8 +134,8 @@ record ThreeTapTerminalCompletionBoundary : Set where
       transformedSelectedZeroTargetWeldedSourceWritten ≡ true
     adaptiveSupportPaid :
       transformedAdaptiveSupportRadiusSourceWritten ≡ true
-    rawM6M8Paid :
-      transformedRawM6M8SourceWritten ≡ true
+    projectiveMomentObjectsPaid :
+      transformedProjectiveAbsMomentObjectsSourceWritten ≡ true
     signedFifthCommonConsumerPaid :
       signedFifthRouteTargetsCanonicalMarginSourceWritten ≡ true
     supportFirewallPaid :
@@ -142,6 +143,8 @@ record ThreeTapTerminalCompletionBoundary : Set where
 
     oldBudgetReuseRejected :
       originalLocalM6M8BudgetReusableWithoutNewProof ≡ false
+    projectiveM6M8TransportStillOpen :
+      transformedProjectiveM6M8TransportPaid ≡ false
     transformedAbsoluteBudgetStillOpen :
       transformedAbsoluteM6M8EnvelopePaid ≡ false
     strictTerminalSignStillOpen :
@@ -172,17 +175,17 @@ canonicalThreeTapTerminalCompletionBoundary =
     true true
     true true true
     true true true
-    true true true true
+    true true true true false
     true true
     false false false false false
     false false false
 
-    refl refl refl refl refl refl refl refl refl
-    refl refl refl refl refl
+    refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl
     refl refl refl
 
-    "The exact transformed selected-zero target, adaptive normalized support radius, and raw M6/M8 objects are now source-written. Construct the transformed ABSOLUTE sixth/eighth-and-higher remainder envelope / localSlack on that same shifted profile, then prove or refute strict terminal positivity at resonance and in the first nonzero a->0 order."
-    "The physical shift log 2 is not O(1) in the normalized quartic variable: it is B(t)=(t/16)log2 and already exceeds pi+1 for t>=200.  Reusing the original support/M6/M8 constants would be a same-object error."
+    "The exact transformed selected-zero target and actual transformed endpoint projective-profile / absolute-moment objects are source-written. Projective M6/M8 transport is NOT paid because projectivization changes the on-line column and need not commute with translation. Prove the transformed projective M6/M8 bounds and recut local/far compiler at the adaptive radius, then prove or refute strict terminal positivity at resonance and in the first nonzero a->0 order."
+    "The physical shift log 2 is not O(1) in the normalized quartic variable: it is B(t)=(t/16)log2 and already exceeds pi+1 for t>=200. Reusing the original support/M6/M8 constants would be a same-object error. Also, projectiveProfile(T_eps g) must not be identified with T_eps(projectiveProfile g) without a theorem; Lean now records that commutation only as an unpaid proposition."
     "If one-scale three-tap fails, reuse the same normalized-shift and moment-transport interfaces for the log2/log3 two-scale operator; do not create a parallel budget formalism."
     "Keep the signed fifth-cap/RvM correlation route independent.  It targets the same canonical high cut and remains a separate analytic producer."
 
