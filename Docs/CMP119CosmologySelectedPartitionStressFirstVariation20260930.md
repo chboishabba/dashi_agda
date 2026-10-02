@@ -65,3 +65,47 @@ New owner `CMP119CosmologyPhysicalFinitePartitionAuthorityExact.agda` isolates a
 New owner `CMP119CosmologySelectedDensityR144PartitionWeldExact.agda` composes R124 with the assembled R144 response. At a selected RG scale, the Balaban source density mapped by R124 is proved equal to the literal physical finite measure used by the cosmology DZ calculation, so the calculation can no longer silently switch measures between source provenance and stress evaluation.
 
 The remaining physical frontier is now: instantiate the R124 density-to-physical-measure weld and R132/R144 generated action with the actual selected CMP119 source, prove finite product-Haar normalization/differentiability and uniform bounds, then pass the one-point response through renormalization and Lorentzian continuation before solving FLRW.
+
+
+## 2026-10-02 max-cut: same-source vacuum branch and continuum four-direction stress
+
+The existing `CMP119FourDiagonalLiteralFiniteMeasureLorentzianTraceExact.agda` now contains an explicit **same-source continued vacuum branch** rather than a prose shortcut. A `ContinuedVacuumTensorStructure rhoL` requires the three continued spatial components already carried by the selected finite source to satisfy
+
+    c11 = c22 = c33 = -rhoL.
+
+Only under those exact source equalities does the module prove
+
+    Theta_L = -4 rhoL,
+    A_L     = -2 rhoL,
+    2 A_L   = Theta_L,
+
+and, from `rhoL > 0`, both negative trace and negative active stress. The module also defines the positive-G FLRW matter acceleration contribution
+
+    -K A_L
+
+for a strictly positive rational prefactor K and proves the same-source vacuum corollary that positive vacuum energy gives a positive matter-driven acceleration contribution. This is a sign theorem only: it does not supply the physical value of K, Lambda, curvature, initial data, continuation, or a solved Friedmann spacetime.
+
+The general-state firewall is unchanged and remains decisive:
+
+    A_L = Theta_L + 2 rhoL.
+
+Negative trace alone is not promoted outside the vacuum branch.
+
+New `CMP119CosmologyContinuumWeylStressPairingExact.agda` reuses the already-existing R136 continuum generated-action recovery rather than creating another continuum-limit record. R136 proves for every admitted canonical metric perturbation that the recovered continuum first variation equals the literal continuum stress pairing. The new owner takes four admitted directions h00,h11,h22,h33, applies the existing R119/R118 rational readout map, and proves
+
+    sum_mu continuumFirstVariation[h_mumu]
+      =
+    sum_mu <T_cont, h_mumu>
+
+after the exact same convention map. Thus the four-direction Euclidean continuum Weyl response is now an exact consumer of the **same literal continuum stress tensor** carried by the selected Yang-Mills construction, provided the R136 recovery and four metric admissions are physically instantiated.
+
+This materially narrows the continuum bridge. What remains is no longer an abstract theorem that finite stress *could* survive a limit. The repository already has that compiler. The hard source obligations are now:
+
+1. instantiate the selected CMP119/R132/R144 finite action and R124 measure physically across the cutoff family;
+2. prove the concrete metric directions are the canonical 00/11/22/33 directions and satisfy the R134 admissibility hypotheses uniformly;
+3. instantiate the R136/R129/R130 recovery on that exact selected family, including the finite-to-continuum stress/current convergence it still requires;
+4. fix the renormalization/Wald ambiguity and prove the Euclidean continuum response is the renormalized local stress trace rather than only a continuum pairing;
+5. prove OS/Wick continuation to the same Lorentzian state;
+6. then either prove the exact vacuum tensor equalities above, or compute the independent same-state timelike energy and test Theta+2 rho < 0.
+
+No step above licenses moving a vacuum constant between the matter stress and Lambda. A gravitational cosmological-constant renormalization condition must be fixed independently before an accelerating matter-source claim.
