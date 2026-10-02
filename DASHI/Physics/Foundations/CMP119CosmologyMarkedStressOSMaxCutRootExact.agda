@@ -161,8 +161,15 @@ module _
       (reconstructedTerminalConsequences root)
       positiveRho
 
-  remainingNovelMarkedAnalyticCoreCount : Nat
-  remainingNovelMarkedAnalyticCoreCount = 3
+  -- After the E1/E2/E4 Pareto reductions:
+  -- * E1 needs derivative equivariance, not a fresh covariance estimate;
+  -- * E2 needs a reflected-cylinder embedding, not a fresh positivity estimate;
+  -- * E4 needs stress-source selection + OS4 semantics, not a fresh decay estimate.
+  remainingOpaqueMarkedAnalyticEstimateCount : Nat
+  remainingOpaqueMarkedAnalyticEstimateCount = 0
+
+  remainingSameObjectSemanticResidualCount : Nat
+  remainingSameObjectSemanticResidualCount = 5
 
   remainingSemanticTopologyBridgeCount : Nat
   remainingSemanticTopologyBridgeCount = 2
