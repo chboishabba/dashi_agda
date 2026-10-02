@@ -8,7 +8,6 @@ on:
       - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
-      - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
       - '.github/workflows/yb-sb2-trsb-int-agda.yml'
   pull_request:
     paths:
@@ -16,6 +15,7 @@ on:
       - 'DASHI/Physics/CondensedMatter/YbSbTwoINTNonunitarySelectedExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
       - '.github/workflows/yb-sb2-trsb-int-agda.yml'
   workflow_dispatch:
 
