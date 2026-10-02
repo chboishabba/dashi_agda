@@ -65,7 +65,7 @@ walshInterviewThirtyThousand =
 mthfrPerspective2026 : Source.AttributedSource
 mthfrPerspective2026 =
   Source.mkDOISource
-    "5,10-Methylenetetrahydrofolate reductase review authors"
+    "Linnea K M Blomgren; Shuning Guo; D Sean Froese; Thomas J McCorvie; Wyatt W Yue"
     "5,10-Methylenetetrahydrofolate Reductase—the Key Allosteric Regulator in One-Carbon Metabolism"
     "Biochemistry"
     "2026"
