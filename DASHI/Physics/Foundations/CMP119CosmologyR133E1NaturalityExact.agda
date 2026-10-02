@@ -159,7 +159,7 @@ asDifferentiatedEuclideanCovariance :
     (EuclideanAction naturality)
     (Source.Background (Carrier.source (Present.bc1Carrier present)))
     (Source.Tangent (Carrier.source (Present.bc1Carrier present)))
-    DASHI.Foundations.RealAnalysisAxioms.ℝ
+    ℝ
 asDifferentiatedEuclideanCovariance
     {present = present} naturality = record
   { E1.DifferentiatedEuclideanCovariance.actBase =
