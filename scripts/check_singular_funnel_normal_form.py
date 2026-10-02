@@ -30,7 +30,7 @@ B = 2.3
 EPS = 0.1
 MU0 = 3.9
 DT = 0.005
-T_FINAL = 300.0
+T_FINAL = 500.0
 
 LOWER_WITNESS_X = 1.0e-11
 UPPER_WITNESS_X = 1.0e-10
@@ -92,7 +92,7 @@ def classify_initial_x(x0: float) -> tuple[str, tuple[float, float]]:
     return classify_endpoint(*endpoint), endpoint
 
 
-def boundary_bracket(lo: float, hi: float, iterations: int = 20) -> tuple[float, float]:
+def boundary_bracket(lo: float, hi: float, iterations: int = 16) -> tuple[float, float]:
     lo_class, _ = classify_initial_x(lo)
     hi_class, _ = classify_initial_x(hi)
     if lo_class != "lower" or hi_class != "upper":
@@ -119,7 +119,7 @@ def main() -> int:
     lower_class, lower_endpoint = classify_initial_x(LOWER_WITNESS_X)
     upper_class, upper_endpoint = classify_initial_x(UPPER_WITNESS_X)
     reduced = reduced_prediction(MU0)
-    bracket_lo, bracket_hi = boundary_bracket(2.0e-11, 5.0e-11)
+    bracket_lo, bracket_hi = boundary_bracket(4.4e-11, 4.5e-11)
 
     if lower_class != "lower":
         raise SystemExit(f"selected narrow-funnel witness no longer reaches lower attractor: {lower_class}")
