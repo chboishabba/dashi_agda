@@ -7,12 +7,16 @@ on:
       - 'scripts/check_ns_r823_exact_sparse_reserve_witness.py'
       - 'scripts/check_ns_r827_rational_short_time_bound.py'
       - 'scripts/check_ns_r828_rational_345_fourier_witness.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
       - '.github/workflows/ns-r827-rational-short-time.yml'
   pull_request:
     paths:
       - 'scripts/check_ns_r823_exact_sparse_reserve_witness.py'
       - 'scripts/check_ns_r827_rational_short_time_bound.py'
       - 'scripts/check_ns_r828_rational_345_fourier_witness.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
       - '.github/workflows/ns-r827-rational-short-time.yml'
   workflow_dispatch:
 
@@ -38,3 +42,28 @@ jobs:
 
       - name: Check exact rational Pythagorean R828 seed and short-time enclosure
         run: python scripts/check_ns_r828_rational_345_fourier_witness.py
+
+  agda-r829-r830:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Kernel-check R829-R830 exact arithmetic owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-ns-r829-r830.log"
+          export AGDA_JOBS=1
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda
