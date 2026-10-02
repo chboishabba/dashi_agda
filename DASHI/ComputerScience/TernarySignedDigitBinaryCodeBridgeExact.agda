@@ -1,8 +1,8 @@
 module DASHI.ComputerScience.TernarySignedDigitBinaryCodeBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Maybe using (just)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Maybe using (just; nothing)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Codec.VerifiedFiniteTritCoder as Code
@@ -16,7 +16,7 @@ binaryCodeRoundTrip :
 binaryCodeRoundTrip = Code.decode-encode
 
 reservedBinaryPairRejected :
-  Code.decodeWord Code.word11 ≡ Data.Maybe.nothing
+  Code.decodeWord Code.word11 ≡ nothing
 reservedBinaryPairRejected = Code.reserved-word-rejected
 
 record BinaryCodedSignedDigitBoundary : Set where
