@@ -87,8 +87,11 @@ record YanchukStableManifoldValidationBoundary : Set where
     exactCrossSectionBracketOwnedIsTrue :
       exactCrossSectionBracketOwned ≡ true
     sourceStableDirectionNumericallyReproduced : Bool
-    sourceStableDirectionNumericallyReproducedIsFalse :
-      sourceStableDirectionNumericallyReproduced ≡ false
+    sourceStableDirectionNumericallyReproducedIsTrue :
+      sourceStableDirectionNumericallyReproduced ≡ true
+    stableManifoldCrossingNumericallyReproduced : Bool
+    stableManifoldCrossingNumericallyReproducedIsTrue :
+      stableManifoldCrossingNumericallyReproduced ≡ true
     intervalStableManifoldTubeCertified : Bool
     intervalStableManifoldTubeCertifiedIsFalse :
       intervalStableManifoldTubeCertified ≡ false
@@ -100,6 +103,8 @@ canonicalYanchukStableManifoldValidationBoundary :
   YanchukStableManifoldValidationBoundary
 canonicalYanchukStableManifoldValidationBoundary =
   yanchukStableManifoldValidationBoundary
+    true refl
+    true refl
     true refl
     true refl
     false refl
