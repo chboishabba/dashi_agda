@@ -11,12 +11,18 @@ required = {
         'bf16ScaledExactFormat',
         'TaperedWidthAllocation',
     ],
+    'DASHI/Codec/TriadicPAdicCylinderExact.agda': [
+        'canonicalTriadicCylinderSystem',
+        'projectCompatible',
+    ],
     'DASHI/ComputerScience/TekumRegimeExponentExact.agda': [
         'decodeEncodeRegime',
         'outerPositiveBiasIs244',
     ],
     'DASHI/ComputerScience/TekumFloatingPointStructuralBridgeExact.agda': [
-        'tekumScaledExactFormat',
+        'tekumOrientationRoleMatchesBF16SignRole',
+        'tekumScaleRoleMatchesBF16ExponentRole',
+        'tekumRefinementRoleMatchesBF16FractionRole',
         'centralRegimeAtWidth8',
         'outerRegimeAtWidth8',
     ],
@@ -25,6 +31,11 @@ required = {
         'toFromKernel',
         'truncateCommutesWithCarrierWeld',
         'kernelTwoStepProjectionComposes',
+    ],
+    'DASHI/ComputerScience/TekumPadicOrientationBoundaryExact.agda': [
+        'tekumSampleKeepsHighTrit',
+        'padicSampleDepthOne',
+        'tekumAndPadicDepthOneDiffer',
     ],
     'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': [
         'regimeStorageRoundTrip',
@@ -49,7 +60,8 @@ required = {
     ],
     'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': [
         'canonicalTekumVerifiedAssemblyBoundary',
-        'tekumPrecisionProjectionCommutesWithKernelProjection',
+        'executablePadicCylinderSystemPresent',
+        'tekumTruncationEqualsPadicCylinderWithoutReversal',
         'concreteTernaryStoredProgramExecutionPresent',
     ],
 }
@@ -66,4 +78,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: canonical floating, p-adic, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: floating, p-adic cylinder/orientation, ternary-machine, ABI and SSP/FRACTRAN welds present.')
