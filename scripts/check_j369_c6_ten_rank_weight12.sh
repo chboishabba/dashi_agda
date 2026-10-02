@@ -20,6 +20,7 @@ targets=(
   DASHI/Moonshine/TwoSevenNineNumberRoleHubExact.agda
   DASHI/Moonshine/OggSSP2BM24P276Completion10FrontierExact.agda
   DASHI/Moonshine/OggSSP2BM24DuadPair24AuthorityExact.agda
+  DASHI/Moonshine/OggSSP2BPureKleinFourM24S3LocalRouteExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -106,6 +107,9 @@ grep -q 'downstreamCompletion10To279' "${targets[16]}"
 grep -q 'carrierSameObjectPaidIsTrue' "${targets[17]}"
 grep -q 'tateSameObjectPaidIsFalse' "${targets[17]}"
 grep -q 'm24DuadAuthorityDoesNotCreateTwoBTateIdentification' "${targets[17]}"
+grep -q 'sourcedThreeTimesCompletionTenIsThirty' "${targets[18]}"
+grep -q 'nonaryPointedLocalCompositeIs279' "${targets[18]}"
+grep -q 'localProductDoesNotAutomaticallySelectQ10' "${targets[18]}"
 
 
 # Generic exceptional-residual target family + arithmetic acquisition wall.
