@@ -14,6 +14,7 @@ import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact as IranGe
 import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as IRGCPacket
 import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDena
 import DASHI.Governance.ExternalThreatRepressionMechanismTransferExact as ThreatTransfer
+import DASHI.Governance.CubaSanctionsDomesticInstitutionMechanismExact as CubaMechanism
 import DASHI.Governance.MostazafinWorkerCategoryOverlapReviewedJoinExact as MostazafinOverlap
 
 ------------------------------------------------------------------------
@@ -36,6 +37,7 @@ data OriginalThreadRequirement : Set where
   irisDenaOperationalRecord : OriginalThreadRequirement
   chinaEconomicLeadershipCrossSourceJoin : OriginalThreadRequirement
   mostazafinWorkerCategoryOverlap : OriginalThreadRequirement
+  iranThreatMobilisationShiftMechanism : OriginalThreadRequirement
   iranThreatRepressionCaseMechanism : OriginalThreadRequirement
   cubaSanctionsDomesticInstitutionMechanism : OriginalThreadRequirement
   iranCubaSiegeCrossCaseJoin : OriginalThreadRequirement
@@ -99,6 +101,14 @@ mostazafinOverlapCell = Pareto.requirement-candidate
   2 8
   "PAID by MostazafinWorkerCategoryOverlapReviewedJoinExact: historical Khomeinist discourse explicitly includes workers within the broader mostazafin category, while 2026 labour monitoring pays current worker protest presence. Universal protester identity remains false."
 
+
+iranThreatMobilisationCell : Pareto.RequirementCandidate OriginalThreadRequirement
+iranThreatMobilisationCell = Pareto.requirement-candidate
+  iranThreatMobilisationShiftMechanism
+  true true true false
+  2 7
+  "PAID by ExternalThreatRepressionMechanismTransferExact using the 2026 NBER working paper: strike exposure is associated with a sharp shift from anti-government to pro-government/anti-US-Israel mobilisation. This does not pay a repression-causation theorem."
+
 iranThreatRepressionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 iranThreatRepressionCell = Pareto.requirement-candidate
   iranThreatRepressionCaseMechanism
@@ -109,9 +119,9 @@ iranThreatRepressionCell = Pareto.requirement-candidate
 cubaPressureInstitutionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 cubaPressureInstitutionCell = Pareto.requirement-candidate
   cubaSanctionsDomesticInstitutionMechanism
-  true true true true
+  true true true false
   3 7
-  "Acquire/compile a bounded Cuba mechanism separating measurable embargo costs, domestic institutional costs, infrastructure fragility and political blame externalisation; do not promote sanctions into sole-cause or repression-necessity claims."
+  "PAID by CubaSanctionsDomesticInstitutionMechanismExact: measurable embargo costs and larger long-run domestic institutional costs are both retained; sole-cause and repression-necessity promotions remain false."
 
 iranCubaCrossCaseCell : Pareto.RequirementCandidate OriginalThreadRequirement
 iranCubaCrossCaseCell = Pareto.requirement-candidate
@@ -145,6 +155,7 @@ originalThreadPortfolio =
   ∷ irisDenaRecordCell
   ∷ chinaLeadershipJoinCell
   ∷ mostazafinOverlapCell
+  ∷ iranThreatMobilisationCell
   ∷ iranThreatRepressionCell
   ∷ cubaPressureInstitutionCell
   ∷ iranCubaCrossCaseCell
@@ -172,6 +183,15 @@ irgcCausalPaidDropsFromFrontier = refl
 mostazafinOverlapPaidDropsFromFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio mostazafinOverlapCell ≡ false
 mostazafinOverlapPaidDropsFromFrontier = refl
+
+
+iranThreatMobilisationPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranThreatMobilisationCell ≡ false
+iranThreatMobilisationPaidDropsFromFrontier = refl
+
+cubaPressureInstitutionPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio cubaPressureInstitutionCell ≡ false
+cubaPressureInstitutionPaidDropsFromFrontier = refl
 
 iranThreatRepressionOnFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio iranThreatRepressionCell ≡ true
@@ -222,6 +242,12 @@ currentMostazafinCategoryOverlap :
 currentMostazafinCategoryOverlap =
   MostazafinOverlap.workerMostazafinCategoryOverlap
 
+
+currentCubaMechanism :
+  CubaMechanism.CubaPressureMechanism
+currentCubaMechanism =
+  CubaMechanism.canonicalCubaPressureMechanism
+
 currentIranThreatTransferResidual :
   ThreatTransfer.TransferResidual
 currentIranThreatTransferResidual =
@@ -246,10 +272,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Iran-specific external-threat/repression identification: general causal mechanism is paid, but case transfer remains open."
-    "2. Cuba sanctions x domestic-institutions mechanism: cheaper parallel frontier cell; separate external coercion costs from domestic institutional and infrastructure effects."
-    "3. After both case mechanisms, activate the Iran/Cuba cross-case siege comparison with no same-mechanism presumption."
-    "IRIS Dena exact-duty reconstruction remains required but is currently Pareto-dominated by higher-gain political-history residuals; Che classification is not required by the current consumer."
+    "1. Iran-specific external-threat/repression identification remains the sole live political-history frontier: general causal evidence and Iran mobilisation-shift evidence are paid, but the case-specific repression increment is not."
+    "2. Retain pre-existing repression, domestic security interests, protest intensity, economic crisis, state-capacity changes and foreign-agent framing as counter-hypotheses."
+    "3. Only after that case-specific receipt should the Iran/Cuba cross-case siege mechanism activate; the Cuba economic/institutional mechanism is already paid."
+    "IRIS Dena exact-duty reconstruction remains required but Pareto-dominated; Che classification remains outside the current evidence consumer."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
