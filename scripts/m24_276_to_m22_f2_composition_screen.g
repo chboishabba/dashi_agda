@@ -69,6 +69,33 @@ dimsH := List(factorsH, f -> f.dimension);
 tenCountH2 := Number(dimsH2,d -> d=10);
 tenCountH := Number(dimsH,d -> d=10);
 
+# If 10-dimensional M22 factors occur, identify them against the actual
+# AtlasRep f2r10 representations.  Transport each AtlasRep matrix action back
+# along an explicit group isomorphism H -> G10 so the MeatAxe modules use the
+# same abstract H generators before applying MTX.IsomorphismModules.
+tenFactorsH := Filtered(factorsH,f -> f.dimension=10);
+m22TenInfos := Filtered(AllAtlasGeneratingSetInfos("M22"), info ->
+  IsBound(info.repname) and PositionSublist(info.repname,"f2r10") <> fail);
+identifiedTenFactors := [];
+
+for factor in tenFactorsH do
+  labels := [];
+  for tenInfo in m22TenInfos do
+    G10 := AtlasGroup(tenInfo);
+    if G10<>fail and Size(G10)=expectedM22Order then
+      iso := IsomorphismGroups(H,G10);
+      if iso<>fail then
+        transportedMats := List(GeneratorsOfGroup(H), h -> Image(iso,h));
+        transportedModule := GModuleByMats(transportedMats,F);
+        if MTX.IsomorphismModules(factor,transportedModule)<>fail then
+          Add(labels,tenInfo.repname);
+        fi;
+      fi;
+    fi;
+  od;
+  Add(identifiedTenFactors,labels);
+od;
+
 orbitsH2 := Orbits(H2,[1..expectedDegree]);
 orbitsH := Orbits(H,[1..expectedDegree]);
 
@@ -78,6 +105,26 @@ PrintNatList := function(out,xs)
   for i in [1..Length(xs)] do
     if i>1 then AppendTo(out,","); fi;
     AppendTo(out,String(xs[i]));
+  od;
+  AppendTo(out,"]");
+end;
+
+PrintStringList := function(out,xs)
+  local i;
+  AppendTo(out,"[");
+  for i in [1..Length(xs)] do
+    if i>1 then AppendTo(out,","); fi;
+    AppendTo(out,"\"",xs[i],"\"");
+  od;
+  AppendTo(out,"]");
+end;
+
+PrintNestedStringLists := function(out,xss)
+  local i;
+  AppendTo(out,"[");
+  for i in [1..Length(xss)] do
+    if i>1 then AppendTo(out,","); fi;
+    PrintStringList(out,xss[i]);
   od;
   AppendTo(out,"]");
 end;
@@ -105,7 +152,10 @@ AppendTo(output,",\n");
 AppendTo(output,"  \"m22d2_dimension_sum\": ",String(Sum(dimsH2)),",\n");
 AppendTo(output,"  \"m22_dimension_sum\": ",String(Sum(dimsH)),",\n");
 AppendTo(output,"  \"m22d2_ten_factor_count\": ",String(tenCountH2),",\n");
-AppendTo(output,"  \"m22_ten_factor_count\": ",String(tenCountH),"\n");
+AppendTo(output,"  \"m22_ten_factor_count\": ",String(tenCountH),",\n");
+AppendTo(output,"  \"m22_ten_factor_atlasrep_matches\": ");
+PrintNestedStringLists(output,identifiedTenFactors);
+AppendTo(output,"\n");
 AppendTo(output,"}\n");
 CloseStream(output);
 
