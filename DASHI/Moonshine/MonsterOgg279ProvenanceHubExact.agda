@@ -36,6 +36,7 @@ import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Signed
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
 import DASHI.Moonshine.SSP15AffineC3TranslationExact as Affine
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
+import DASHI.Physics.Closure.SSP15CMFieldSplittingCorrectionReceipt as CM
 
 ------------------------------------------------------------------------
 -- 1. The literal scalar and its exact arithmetic decompositions.
@@ -52,6 +53,14 @@ monsterLane31Value = Lane.monsterPrimeLaneToNat Lane.p31
 
 monsterLane31Is31 : monsterLane31Value ≡ 31
 monsterLane31Is31 = refl
+
+p31OggEuclideanAddress :
+  9 * 3 + 4 ≡ monsterLane31Value
+p31OggEuclideanAddress = refl
+
+nonaryOfP31OggAddressIs279 :
+  9 * (9 * 3 + 4) ≡ single279
+nonaryOfP31OggAddressIs279 = refl
 
 nonaryTimesMonster31Is279 :
   nonaryScale * monsterLane31Value ≡ single279
