@@ -28,7 +28,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyBoostInvariantVacuumExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _/_; -_)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -51,9 +51,10 @@ selectedBoostIsLorentz :
 selectedBoostIsLorentz =
   Ring.solve []
 
-selectedBoostIsNontrivial :
-  boostGammaV ≡ 0ℚ → Agda.Builtin.Unit.⊥
-selectedBoostIsNontrivial ()
+selectedBoostCoefficientInvertible :
+  boostCrossInverse * boostCrossCoefficient ≡ 1ℚ
+selectedBoostCoefficientInvertible =
+  Ring.solve []
 
 boosted01 :
   Vacuum.IsotropicLorentzianStress → ℚ
@@ -82,13 +83,19 @@ boostInvarianceForcesRhoPlusPressureZero invariant =
     x = Vacuum.rho (stress invariant)
       + Vacuum.pressure (stress invariant)
 
+    negScaledZero :
+      - (boostCrossCoefficient * x) ≡ 0ℚ
+    negScaledZero =
+      selectedBoostOffDiagonalInvariant invariant
+
     scaledZero :
       boostCrossCoefficient * x ≡ 0ℚ
     scaledZero =
-      subst
-        (λ value → - value ≡ 0ℚ)
-        refl
-        (selectedBoostOffDiagonalInvariant invariant)
+      trans
+        (Ring.solve-∀ boostCrossCoefficient x)
+        (trans
+          (cong -_ negScaledZero)
+          (Ring.solve []))
 
     inverseScaled :
       boostCrossInverse * (boostCrossCoefficient * x)
@@ -108,17 +115,18 @@ boostInvarianceForcesVacuumEquationOfState :
   ≡ - Vacuum.rho (stress invariant)
 boostInvarianceForcesVacuumEquationOfState invariant =
   let
+    rho = Vacuum.rho (stress invariant)
+    p = Vacuum.pressure (stress invariant)
+
+    zeroSum : rho + p ≡ 0ℚ
     zeroSum =
       boostInvarianceForcesRhoPlusPressureZero invariant
   in
-  subst
-    (λ value →
-      Vacuum.pressure (stress invariant) ≡ value)
-    (sym
-      (Ring.solve-∀
-        (Vacuum.rho (stress invariant))
-        (Vacuum.pressure (stress invariant))))
-    zeroSum
+  trans
+    (Ring.solve-∀ rho p)
+    (trans
+      (cong (λ sum → sum - rho) zeroSum)
+      (Ring.solve-∀ rho))
 
 asVacuumLikeLorentzianStress :
   SelectedBoostInvariantIsotropicStress →
