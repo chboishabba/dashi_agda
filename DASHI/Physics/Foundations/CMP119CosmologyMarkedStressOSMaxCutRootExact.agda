@@ -13,6 +13,8 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact wh
 --       ==> boost covariance + vacuum invariance + trace continuation
 --       ==> p = -rho
 --       ==> rho > 0 -> rho + 3p < 0.
+--       ==> literal R136 trace < 0 -> active stress < 0
+--       ==> positive-G matter acceleration contribution > 0.
 --
 -- The root does not accept any independently chosen Lorentzian stress,
 -- reconstructed vacuum, or Euclidean trace scalar.
@@ -219,3 +221,15 @@ module _
 
   noIndependentTraceChoice : Bool
   noIndependentTraceChoice = true
+
+  accelerationAlgebraClosedDownstream : Bool
+  accelerationAlgebraClosedDownstream = true
+
+  negativeLiteralTraceIsSufficientOnVacuumBranch : Bool
+  negativeLiteralTraceIsSufficientOnVacuumBranch = true
+
+  negativeLiteralTraceStillRequiresSourceProof : Bool
+  negativeLiteralTraceStillRequiresSourceProof = true
+
+  markedOSReconstructionStillRequiresSameObjectSemanticResiduals : Bool
+  markedOSReconstructionStillRequiresSameObjectSemanticResiduals = true
