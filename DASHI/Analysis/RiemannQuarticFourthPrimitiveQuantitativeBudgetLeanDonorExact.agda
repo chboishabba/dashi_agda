@@ -104,6 +104,49 @@ open import Agda.Builtin.String using (String)
 -- not prove the RH signed fifth-cap estimate.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- SAME-WITNESS EXPLICIT-FORMULA / OPERATOR AUDIT (2026-09-30)
+--
+-- Lean source:
+--   Synthesis/RiemannMarkedArithmeticCompletedOperatorAudit.lean
+--
+-- On the selected compact physical detector at t >= 200, the literal
+-- Zeta23 primeProjectiveDefect is identically ZERO, before and after the
+-- cosh mark. Indeed any pointwise multiplier h(u) retains this blindness,
+-- because it cannot enlarge support beyond log(2).
+--
+-- Source-written Lean owners:
+--   quarticFourPhysicalDetector_pointwiseMultiplier_prime_eq_zero
+--   selectedPointwiseMultipliers_prime_eq_zero
+--   selectedPointwiseMultipliers_no_positive_prime
+--
+-- Thus positive auxiliary prime-angular jets are not a prime-sign donor
+-- for the SAME four-window detector. At A=0, both actual marked prime
+-- combination and pole combination are zero and the source arithmetic
+-- response is precisely its Gamma combination.
+--
+-- A different, genuinely prime-sensitive detector must be nonzero at
+-- some |u| >= log(2), which changes its support and requires re-establishing
+-- the actual high-witness estimates. Pointwise weighting alone cannot.
+--
+-- The selected normalized cosine C_W(0)=0 but is nonzero when the source
+-- origin is negative. A PSD 2x2 completion with C_W(q) in its
+-- off-diagonal therefore requires two STRICTLY POSITIVE independently
+-- sourced diagonal terms a,d and a*d >= C_W(q)^2 for EVERY q.
+--
+-- Source-written Lean owners:
+--   selectedCosineCompletion_requires_positive_diagonals
+--   selectedCosineCompletion_iff_diagonalPayment
+--
+-- The prior Agda RiemannWeilPairKernelFrobeniusExact already exposes
+-- mixed-channel interference and explicitly does NOT prove positive
+-- diagonal excess or the required analytic Phi-kernel identification.
+-- Its finite-source identities cannot be promoted as this diagonal donor.
+--
+-- No same-witness operator trace formula, terminal strict estimate,
+-- or new RH proof is claimed in this receipt.
+------------------------------------------------------------------------
+
 record QuantitativeFourthPrimitiveBoundary : Set where
   constructor quantitative-fourth-primitive-boundary
   field
