@@ -35,6 +35,7 @@ module DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
@@ -49,6 +50,10 @@ import DASHI.Physics.Closure.NSTriadKNR650PhysicalCCGradedReserveRound824Exact a
 import DASHI.Physics.Closure.NSTriadKNR650PhysicalReserveFeasibilityRound825Exact as Feas825
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotNormalizationRound829Exact as R829
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ShortTimeRound830Exact as R830
+import DASHI.Physics.Closure.NSTriadKNR650Rational345DecisionMaxCutRound832Exact as R832
+import DASHI.Physics.Closure.NSClayFacingAMaxCut20261002Exact as AMax
+import DASHI.Physics.Closure.NSClayFacingBPostReserveMaxCut20261002Exact as BMax
+import DASHI.Physics.Closure.NSClayFacingCDMaxCut20261002Exact as CDMax
 
 data ProofLane : Set where
   laneA laneB laneC laneD : ProofLane
@@ -419,3 +424,55 @@ bR830ExactShortTimeArithmeticClosedIsTrue = refl
 bR830RealFiniteODEContinuityClosedIsFalse :
   bR830RealFiniteODEContinuityClosed ≡ false
 bR830RealFiniteODEContinuityClosedIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- 2026-10-02 MAX-CUT SUMMARY
+------------------------------------------------------------------------
+
+aMaxCutLeafCount : Nat
+aMaxCutLeafCount = AMax.aLeafCount
+
+bDecisionLeafCount : Nat
+bDecisionLeafCount = R832.decisionLeafCount
+
+bPostReserveLeafCount : Nat
+bPostReserveLeafCount = BMax.bPostReserveLeafCount
+
+bDecisionGlobalRationalHelicalLawRequired : Bool
+bDecisionGlobalRationalHelicalLawRequired =
+  R832.globalRationalHelicalProjectorLawRequiredForDecision
+
+bDecisionAdditionalReserveEstimateRequiredAfterPhysicalLeaves : Bool
+bDecisionAdditionalReserveEstimateRequiredAfterPhysicalLeaves =
+  R832.additionalReserveEstimateRequiredAfterTwoLeaves
+
+cMaxCutOfficialAuditClosed : Bool
+cMaxCutOfficialAuditClosed = CDMax.cOfficialCoordinateAuditClosed
+
+dMaxCutOfficialAuditClosed : Bool
+dMaxCutOfficialAuditClosed = CDMax.dOfficialCoordinateAuditClosed
+
+cdOptionalDASHIReconstructionGatesOfficialAudit : Bool
+cdOptionalDASHIReconstructionGatesOfficialAudit =
+  CDMax.independentDASHIReconstructionRequiredForCoordinateAudit
+
+bDecisionGlobalRationalHelicalLawRequiredIsFalse :
+  bDecisionGlobalRationalHelicalLawRequired ≡ false
+bDecisionGlobalRationalHelicalLawRequiredIsFalse = refl
+
+bDecisionAdditionalReserveEstimateRequiredAfterPhysicalLeavesIsFalse :
+  bDecisionAdditionalReserveEstimateRequiredAfterPhysicalLeaves ≡ false
+bDecisionAdditionalReserveEstimateRequiredAfterPhysicalLeavesIsFalse = refl
+
+cMaxCutOfficialAuditClosedIsTrue :
+  cMaxCutOfficialAuditClosed ≡ true
+cMaxCutOfficialAuditClosedIsTrue = refl
+
+dMaxCutOfficialAuditClosedIsTrue :
+  dMaxCutOfficialAuditClosed ≡ true
+dMaxCutOfficialAuditClosedIsTrue = refl
+
+cdOptionalDASHIReconstructionGatesOfficialAuditIsFalse :
+  cdOptionalDASHIReconstructionGatesOfficialAudit ≡ false
+cdOptionalDASHIReconstructionGatesOfficialAuditIsFalse = refl
