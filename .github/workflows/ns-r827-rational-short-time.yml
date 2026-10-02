@@ -14,6 +14,12 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345RepositoryVectorBoundaryRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingAMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPostReserveMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDMaxCut20261002Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingABCDProofStatusExact.agda'
       - '.github/workflows/ns-r827-rational-short-time.yml'
   pull_request:
     paths:
@@ -79,7 +85,13 @@ jobs:
           scripts/run_agda29_parallel_check.sh \
             DASHI/Physics/Closure/NSTriadKNR650Rational345VectorWorkRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345EnergyRowsRound829Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345RepositoryVectorBoundaryRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda \
-            DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda
+            DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda \
+            DASHI/Physics/Closure/NSClayFacingAMaxCut20261002Exact.agda \
+            DASHI/Physics/Closure/NSClayFacingBPostReserveMaxCut20261002Exact.agda \
+            DASHI/Physics/Closure/NSClayFacingCDMaxCut20261002Exact.agda \
+            DASHI/Physics/Closure/NSClayFacingABCDProofStatusExact.agda
