@@ -23,6 +23,13 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
 
     has_j2x5 = involution["matching_J2x5_row_count"] > 0
+    pair_swap_verified_count = sum(
+        1
+        for rep in involution["representations"]
+        for row in rep["involution_classes"]
+        if row.get("pair_swap_basis_verified", False)
+    )
+    has_pair_swap_basis = pair_swap_verified_count > 0
     has_m22_ten = composition["m22_ten_factor_count"] > 0
     has_m22d2_ten = composition["m22d2_ten_factor_count"] > 0
 
@@ -55,6 +62,12 @@ m22J2x5MatchCount = %(j2x5_count)d
 
 m22HasJ2x5Match : Bool
 m22HasJ2x5Match = %(has_j2x5)s
+
+m22FivePairBasisWitnessCount : Nat
+m22FivePairBasisWitnessCount = %(pair_swap_count)d
+
+m22HasExplicitFivePairBasis : Bool
+m22HasExplicitFivePairBasis = %(has_pair_swap)s
 
 m24PermutationDegree : Nat
 m24PermutationDegree = %(perm_degree)d
@@ -107,6 +120,8 @@ runtimeM22FactorAndInvolutionEvidenceJointlySufficient =
         "involution_rows": involution["involution_row_count"],
         "j2x5_count": involution["matching_J2x5_row_count"],
         "has_j2x5": b(has_j2x5),
+        "pair_swap_count": pair_swap_verified_count,
+        "has_pair_swap": b(has_pair_swap_basis),
         "perm_degree": composition["permutation_degree"],
         "m22d2_order": composition["m22d2_order"],
         "m22_order": composition["m22_order"],
@@ -116,7 +131,7 @@ runtimeM22FactorAndInvolutionEvidenceJointlySufficient =
         "m22_ten": composition["m22_ten_factor_count"],
         "has_m22d2_ten": b(has_m22d2_ten),
         "has_m22_ten": b(has_m22_ten),
-        "joint_finite": b(has_j2x5 and has_m22_ten),
+        "joint_finite": b(has_pair_swap_basis and has_m22_ten),
     }
 
     out.write_text(module)
