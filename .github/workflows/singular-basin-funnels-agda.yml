@@ -30,6 +30,7 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSelectedCrossSectionBracketExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/ScaledBracketResolutionBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinValidatedNumericsArtifactExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda
       - name: Reproduce selected normal-form funnel cross-section
