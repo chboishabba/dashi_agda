@@ -183,3 +183,76 @@ estimate failing.
 Machine evidence is an aid to verification, not self-certifying
 mathematical authority. No Clay completion or exact-head Agda kernel
 receipt is asserted.
+
+
+## 6. R829/R830 follow-through
+
+The next tranche removes two further bookkeeping ambiguities without claiming
+the remaining physical identification.
+
+### R829 finite component certificate
+
+`scripts/check_ns_r829_rational_345_component_certificate.py` expands the
+snapshot into its exact nonzero rows.  The fixed-output coherent-work
+contributions, in lexicographic output order, are
+
+[
+-48,quad
+rac{322917}{250},quad
+-48,quad
+-rac{428272}{125},quad
+-rac{428272}{125},quad
+-48,quad
+rac{322917}{250},quad
+-48.
+]
+
+They sum exactly to
+
+[
+-rac{557627}{125}.
+]
+
+The six nonzero initial velocity modes contribute critical production
+
+[
+-128,-672,800,800,-672,-128,
+]
+
+which sums to zero, and critical dissipation
+
+[
+6425,468,1024,1024,468,6425,
+]
+
+which sums to (15834).
+
+`NSTriadKNR650Rational345ComponentScalarRound829Exact.agda` kernel-checks
+those finite scalar aggregations, and
+`NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda` derives
+
+[
+6left(12C_{m comm}-P_{m crit}+dight)
+=-rac{28273644}{125}<0.
+]
+
+This closes the factor/sign/multiplicity arithmetic.  It does **not** yet prove
+that each emitted vector row is definitionally the value of the live
+R230/R692/R744 repository expression.
+
+### R830 exact short-time arithmetic
+
+`NSTriadKNR650Rational345ShortTimeRound830Exact.agda` records the exact
+positive horizon and strict-negative integrated upper bound.  It deliberately
+leaves real finite-dimensional ODE existence/continuity as an analytic
+interface rather than manufacturing a rational-valued continuous trajectory.
+
+Consequently the R823 decision route now has exactly two substantive leaves:
+
+1. reify the finite component table against the actual R30/R230/R692/R744
+   definitions on the selected radius-four state;
+2. instantiate a genuine real-time finite Galerkin ODE and transport the same
+   selected signed scalar over the certified interval.
+
+Once both are discharged, the universal R823 reserve conjecture is refuted.
+No conclusion about Navier--Stokes regularity itself follows.
