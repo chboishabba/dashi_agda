@@ -57,9 +57,16 @@ releaseElevatedState =
     referenceFlux reelFingerprintPresent
     "Candidate B: same coarse phenotype present with reference HNMT/DAO lanes but elevated histamine production/release."
 
+lowerFluxNotReferenceFlux : lowerFlux ≡ referenceFlux → ⊥
+lowerFluxNotReferenceFlux ()
+
 statesDistinctByHNMT :
   hnmtFlux clearanceLimitedState ≡ hnmtFlux releaseElevatedState → ⊥
-statesDistinctByHNMT ()
+statesDistinctByHNMT = lowerFluxNotReferenceFlux
+
+statesDistinct :
+  clearanceLimitedState ≡ releaseElevatedState → ⊥
+statesDistinct ()
 
 record PhenotypeObservationMap : Set where
   constructor phenotypeObservationMap
@@ -78,10 +85,16 @@ coarsePhenotypeCollision :
     releaseElevatedState
 coarsePhenotypeCollision = refl
 
-data PhenotypeMapInjective : Set where
+InjectivePhenotypeMap : Set
+InjectivePhenotypeMap =
+  { x y : CandidateBiochemicalState } →
+  PhenotypeObservationMap.observe canonicalPhenotypeObservationMap x
+    ≡ PhenotypeObservationMap.observe canonicalPhenotypeObservationMap y →
+  x ≡ y
 
-phenotypeOnlyMapNotInjective : PhenotypeMapInjective → ⊥
-phenotypeOnlyMapNotInjective ()
+phenotypeOnlyMapNotInjective : InjectivePhenotypeMap → ⊥
+phenotypeOnlyMapNotInjective injective =
+  statesDistinct (injective coarsePhenotypeCollision)
 
 ------------------------------------------------------------------------
 -- Candidate separating measurements.
