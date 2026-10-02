@@ -262,6 +262,108 @@ module _
   continuedActiveIsTracePlusTwiceEnergy rhoL =
     ℚRing.solve-∀ c11 c22 c33 rhoL
 
+  ------------------------------------------------------------------------
+  -- VACUUM / LORENTZ-INVARIANT BRANCH ON THIS SAME CONTINUED SOURCE
+  --
+  -- We do NOT assume that homogeneity/isotropy implies vacuum form.
+  -- Instead the branch is opened only by the exact same-source equalities
+  --
+  --   c11 = c22 = c33 = -rhoL.
+  --
+  -- In the orthonormal (-,+,+,+) convention this is precisely
+  -- T^mu_nu = diag(-rhoL,-rhoL,-rhoL,-rhoL), i.e. p=-rho.
+  ------------------------------------------------------------------------
+
+  record ContinuedVacuumTensorStructure (rhoL : ℚ) : Set where
+    field
+      pressureXIsNegativeEnergy : c11 ≡ - rhoL
+      pressureYIsNegativeEnergy : c22 ≡ - rhoL
+      pressureZIsNegativeEnergy : c33 ≡ - rhoL
+
+  open ContinuedVacuumTensorStructure public
+
+  vacuumTraceEqualsNegativeFourEnergy :
+    ∀ rhoL →
+    ContinuedVacuumTensorStructure rhoL →
+    lorentzianTraceWithContinuedTime rhoL
+    ≡ - ((1ℚ + 1ℚ + 1ℚ + 1ℚ) * rhoL)
+  vacuumTraceEqualsNegativeFourEnergy rhoL vacuum
+    rewrite pressureXIsNegativeEnergy vacuum
+          | pressureYIsNegativeEnergy vacuum
+          | pressureZIsNegativeEnergy vacuum =
+    ℚRing.solve-∀ rhoL
+
+  vacuumActiveEqualsNegativeTwoEnergy :
+    ∀ rhoL →
+    ContinuedVacuumTensorStructure rhoL →
+    lorentzianActiveWithContinuedTime rhoL
+    ≡ - ((1ℚ + 1ℚ) * rhoL)
+  vacuumActiveEqualsNegativeTwoEnergy rhoL vacuum
+    rewrite pressureXIsNegativeEnergy vacuum
+          | pressureYIsNegativeEnergy vacuum
+          | pressureZIsNegativeEnergy vacuum =
+    ℚRing.solve-∀ rhoL
+
+  vacuumTwiceActiveEqualsTrace :
+    ∀ rhoL →
+    ContinuedVacuumTensorStructure rhoL →
+    (1ℚ + 1ℚ) * lorentzianActiveWithContinuedTime rhoL
+    ≡ lorentzianTraceWithContinuedTime rhoL
+  vacuumTwiceActiveEqualsTrace rhoL vacuum
+    rewrite pressureXIsNegativeEnergy vacuum
+          | pressureYIsNegativeEnergy vacuum
+          | pressureZIsNegativeEnergy vacuum =
+    ℚRing.solve-∀ rhoL
+
+  positiveVacuumEnergyGivesNegativeActiveStress :
+    ∀ rhoL →
+    ContinuedVacuumTensorStructure rhoL →
+    0ℚ < rhoL →
+    lorentzianActiveWithContinuedTime rhoL < 0ℚ
+  positiveVacuumEnergyGivesNegativeActiveStress rhoL vacuum rhoPositive =
+    let
+      twiceRhoPositive :
+        0ℚ < rhoL + rhoL
+      twiceRhoPositive =
+        ℚP.+-mono-< rhoPositive rhoPositive
+
+      negativeTwiceRho :
+        - (rhoL + rhoL) < 0ℚ
+      negativeTwiceRho =
+        subst
+          (λ zero → - (rhoL + rhoL) < zero)
+          (ℚRing.solve [])
+          (ℚP.neg-antimono-< twiceRhoPositive)
+    in
+    subst
+      (λ value → value < 0ℚ)
+      (sym (vacuumActiveEqualsNegativeTwoEnergy rhoL vacuum))
+      (subst
+        (λ value → - value < 0ℚ)
+        (ℚRing.solve-∀ rhoL)
+        negativeTwiceRho)
+
+  positiveVacuumEnergyGivesNegativeTrace :
+    ∀ rhoL →
+    ContinuedVacuumTensorStructure rhoL →
+    0ℚ < rhoL →
+    lorentzianTraceWithContinuedTime rhoL < 0ℚ
+  positiveVacuumEnergyGivesNegativeTrace rhoL vacuum rhoPositive =
+    let
+      activeNegative =
+        positiveVacuumEnergyGivesNegativeActiveStress rhoL vacuum rhoPositive
+      doubledNegative :
+        (1ℚ + 1ℚ) * lorentzianActiveWithContinuedTime rhoL < 0ℚ
+      doubledNegative =
+        ℚP.*-monoˡ-<-pos
+          (1ℚ + 1ℚ)
+          activeNegative
+    in
+    subst
+      (λ value → value < 0ℚ)
+      (vacuumTwiceActiveEqualsTrace rhoL vacuum)
+      doubledNegative
+
   continuedNegativeRequiresTimelikeCorrectionBelowEuclideanSum :
     ∀ rhoL →
     lorentzianActiveWithContinuedTime rhoL < 0ℚ →
