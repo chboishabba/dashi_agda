@@ -1,4 +1,4 @@
-# Paper 1 Draft: Periodic Navier–Stokes Signed-Commutator Reduction and Direct-Companion Frontier
+# Paper 1 Draft: Periodic Navier–Stokes Signed-Commutator Reduction and Shared Analytic Frontier
 
 Author: Johl Brown  
 Original Paper-1 draft date: `2026-06-09`  
@@ -10,8 +10,8 @@ Status: live analytic manuscript draft; conditional; non-promoting
 ## Abstract
 
 This manuscript records the current proof-critical **periodic** Navier–Stokes
-reduction in DASHI. The programme now freezes the Clay alternatives as four
-separate lanes:
+reduction in DASHI. The programme freezes the Clay alternatives as four separate
+lanes:
 
 ```text
 Lane A = unforced whole-space R^3 regularity
@@ -20,33 +20,59 @@ Lane C = forced whole-space breakdown
 Lane D = forced periodic breakdown
 ```
 
-The active manuscript construction is **Lane B**. The current canonical
-Clay-facing cut is no longer a list of intermediate producer lemmas.  It is the
-seven-coordinate max-cut recorded by
-`NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact`:
+The active manuscript construction is **Lane B**. The current preferred
+Clay-facing analytic frontier is the R752 dyadic-difference two-leaf cut. Its
+nonstandard PDE inputs are:
 
-1. the cutoff-uniform signed R568 payment;
-2. the physical phase-sensitive critical-production estimate;
-3. the literal physical critical-slice realization;
-4. the common-initial-datum realization and cutoff-uniform initial ceiling;
-5. strictly positive retained viscosity;
-6. ordinary scalar FTC/integration/order receipts; and
-7. the periodic Sobolev--Rellich--Simon--weak-* completion package.
+1. **W1**, a cutoff-uniform signed payment
+   \[
+   W_N(T)+Q_{+-,N}(T)\le B(T);
+   \]
+2. **W2**, nonnegativity of the integrated R751 dyadic-difference residual,
+   \[
+   0\le \int_0^T G_{N,\delta}(t)\,dt,
+   \qquad \delta_N>0,
+   \]
+   where
+   \[
+   G_{N,\delta}(t)
+   =
+   \sum_\beta\!\left[
+     3R^{\rm nested}_N(\beta,t)
+     -P^{\rm dyad\text{-}diff}_N(\beta,t)
+   \right]
+   +3(2\nu-\delta_N)d_N(t).
+   \]
 
-Only the first two are classified as genuinely new nonlinear estimates.  The
-R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, radial/
-Pluecker, and self/external channel decompositions remain theorem-bearing proof
-strategies and provenance, but they are not independent Clay obligations.
+R733 identifies the coherent mixed endpoint with the canonical \(Q_{+-}\)
+observable. R737--R742 then differentiate the augmented observable
+\(\mathscr A_N=X_N-12Q_{+-}\), substitute the R684 input-Laplacian form, and
+show that the weighted/input-Laplacian term cancels exactly from the local W2
+inequality. Thus the derivative calculation does **not** manufacture a new
+coercive term: it exposes W2 as one signed physical packet-versus-combined
+comparison. R741 gives a stronger pointwise producer form; R742 preserves the
+original integrated theorem without that strengthening.
 
-The downstream weighted compiler is already source-written: a paid R568 budget,
-together with the standard temporal/order receipts, is consumed by R572 to
-build the pre-existing R503 direct-off-diagonal/R415 budget surface.  R639 now
-installs the literal finite critical observables on the R414 slice with viscous
-coefficient `2*nu` and derives the critical-energy inequality from the exact
-energy identity, while R640 binds its initial coordinate to the common R240
-initial datum modulo one live-trajectory-to-canonical-R34 coherence receipt and the actual uniform
-initial ceiling.  The present paper is consequently a conditional reduction
-manuscript, not an unconditional Clay/global-regularity claim.
+R744--R751 then put both nonlinear pieces on the same complete physical triad
+carrier.  The production term must first be paired with its swap mate before
+the exact three-leg energy cancellation applies.  After pairing, R748 reduces
+it to exactly two differences of the **actual dyadic critical weights**,
+not the historical radial \\(|k|\\) coefficients. R750 proves these production
+difference channels vanish identically on same-shell nonzero triads. R751
+integrates this literal local carrier, and R747/R746 prove its nonnegativity is
+exactly equivalent to R742's packet-versus-combined spacetime inequality.
+
+Once W1 and W2 are supplied, the existing exact compiler gives the uniform
+critical barrier and the standard periodic compactness/continuation layer can
+be invoked at its typed source boundary. The present paper is therefore a
+conditional reduction manuscript, not an unconditional Clay/global-regularity
+claim.
+
+The R568/R572/R503 direct-companion chain, the R726 literal-R406 transport,
+and the older centered/Taylor, second-moment, Gram/P3, Bony/Schur, radial,
+Pluecker, and self/external decompositions remain theorem-bearing alternate
+coordinates or producer strategies. They are not the current terminal analytic
+cut.
 
 Lane A remains an independent unforced whole-space obligation. Periodic B proof
 progress does not imply whole-space A proof progress, and A does not imply B,
@@ -54,76 +80,165 @@ unless an explicit transfer theorem is constructed. Lanes C/D are
 forced-breakdown BIDI verification/provenance lanes and do not settle either
 unforced alternative.
 
-The June `A1-A9` route and the later same-output Gram/P3 route are retained as
-historical/alternative strategies. They were serious theorem-bearing attempts,
-not strawmen. The P3 route is no longer the primary periodic producer because
-the exact amplitude telescope exposed a many-to-one observable map: distinct
-same-output incidences can carry equal velocity arguments and hence equal
-compressed slot kernels, so incidence geometry alone cannot force the uniform
-lower separation demanded by the generic P3 payment.
-
 ## 1. Four-lane claim boundary and live Lane-B cutset
 
-The principal live periodic analytic interface is
+The current preferred periodic-B interface is R752:
 
 ```text
-DASHI/Physics/Closure/NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact.agda
-  CommutatorOnlySpacetimeBudget568
+W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
+
+W2  integral R751 dyadic-difference residual >= 0                  OPEN
+    residual = 3*nested orbit
+               - swap-paired two-dyadic-difference production
+               + 3*(2nu-delta_N)*critical dissipation
+    with delta_N > 0
 ```
 
-The historical identifier `LeafA` in owner names is not programme Lane A.
-Programme Lane B is the periodic route described in this paper.
+The exact coordinate dictionary is now:
 
-For a literal physical periodic NS Galerkin trajectory `T` and supported cutoff
-trajectory `R`, R568 asks for a cutoff-independent bound on four times the
-spacetime integral of the global signed forcing/commutator full square.
-Schematically,
+\[
+E_{M,N}(t)=Q_{+-,N}(t),
+\]
 
-```math
-4\int_0^T \mathrm{globalForcingFull}(N,t)\,dt \le B(T)
-```
+\[
+W_N(T)+Q_{+-,N}(T)
+=
+\mathcal C_N(T)+Q_{+-,N}(0),
+\]
 
-uniformly in the cutoff `N`.
+and
 
-> **Theorem 1.1 (periodic direct-companion reduction, conditional).** Assume the
-> standard temporal/order receipts isolated by the direct leaf-A compiler and
-> assume an inhabitant of `CommutatorOnlySpacetimeBudget568` on the literal
-> periodic Galerkin trajectory. Then the existing R572 compiler constructs the
-> pre-existing R503 `DirectOffDiagonalBudget`, which feeds the existing signed
-> R415/critical-barrier consumer chain. The theorem does not assert that the
-> R568 producer itself is proved.
+\[
+\mathscr A_N(t)=X_N(t)-12Q_{+-,N}(t).
+\]
 
-The current Clay-eligible max-cut is:
+R734 gives the equivalent augmented-weighted W2 form
+
+\[
+[\mathscr A_N]_T-[\mathscr A_N]_0+\delta_ND_N(T)
+\le 12W_N(T).
+\]
+
+R737 differentiates this literal observable on the R408 trajectory. R738
+substitutes the exact R684 input-Laplacian normal form. R739 then collects the
+pointwise identity
+
+\[
+\dot{\mathscr A}_N
+=
+P_N-2\nu d_N-12C_N+12W_N.
+\]
+
+Consequently the \(12W_N\) term cancels exactly against the W2 right-hand side.
+R740 proves
+
+\[
+\dot{\mathscr A}_N+\delta_Nd_N\le 12W_N
+\iff
+P_N\le(2\nu-\delta_N)d_N+12C_N.
+\]
+
+Under the standard R648 reality/divergence-free/nonlinear-conservation packet
+structure, R741 identifies the latter with the stronger pointwise statement
+
+\[
+\mathrm{PacketStrictSurplus}_{N,\delta}(t)
+\le
+\mathrm{CombinedResidue}_N(t).
+\]
+
+R742 performs the same reduction at the original spacetime level, without
+requiring that pointwise strengthening:
+
+\[
+\boxed{
+\int_0^T\mathrm{PacketStrictSurplus}_{N,\delta}(t)\,dt
+\le
+\int_0^T\mathrm{CombinedResidue}_N(t)\,dt.
+}
+\]
+
+Therefore the derivative attack has resolved the representation question but
+has **not** closed W2. It shows precisely what W2 is.
+
+R744--R751 sharpen that exact representation further. R744 places literal
+critical production on the same complete zero-masked physical triad
+enumeration used by the combined/nested orbit. R748 shows that local three-leg
+energy cancellation is lawful only after swap-pairing the oriented production
+cell. The paired production orbit then has the exact two-difference form
+
+\[
+P^{\rm dyad\text{-}diff}(\beta)
+=
+(\widetilde\lambda_k-\widetilde\lambda_q)\,
+P^{\rm pair}_k(\beta)
++
+(\widetilde\lambda_p-\widetilde\lambda_q)\,
+P^{\rm pair}_p(\beta),
+\]
+
+where \(\widetilde\lambda\) is the zero-safe **actual dyadic critical
+weight**. R749 therefore puts the W2 nonlinear gap on one local cell,
+
+\[
+G^{\rm nl}_N(\beta)
+=
+3R^{\rm nested}_N(\beta)
+-
+P^{\rm dyad\text{-}diff}_N(\beta).
+\]
+
+R750 proves the production correction vanishes whenever all three nonzero legs
+lie in one dyadic shell. R751 adds the retained viscous credit and integrates
+the same local carrier. R747/R746 identify
+
+\[
+\boxed{
+\mathrm{W2}
+\iff
+0\le \int_0^T G_{N,\delta}(t)\,dt .
+}
+\]
+
+This is the preferred W2 analytic surface. The R742 packet-versus-combined
+inequality remains an exact alternate coordinate, not a separate theorem.
+
+W1 remains
+
+\[
+\boxed{
+W_N(T)+Q_{+-,N}(T)\le B(T)
+}
+\]
+
+uniformly in cutoff. The old barrier-dependent estimate
+\(Q_{+-}\lesssim \|u\|_{H^{1/2}}^2\|u\|_{H^1}^2\) cannot be used to produce W1
+without circularity, because W1+W2 are being used to construct the uniform
+\(H^{1/2}\) barrier.
+
+The R723/R730 direct-combined cut is an exact alternate terminal presentation.
+R726 plus strict-margin literal-R406 production remain a sufficient
+factorization of R730, not mandatory independent leaves.
+
+### Historical/alternate direct-companion route
+
+The repository also retains
 
 ```text
-NEW / NONSTANDARD
-C1  R568 cutoff-uniform signed weighted payment                     OPEN
-C2  physical phase-sensitive critical-production estimate           OPEN
-
-SAME-OBJECT / PHYSICAL
-C3  literal critical coordinates installed on R414                  COMPILER CLOSED
-    exact critical-energy identity                                  CLOSED GIVEN STANDARD CALCULUS
-C4  common-initial-datum same-object compiler                       CLOSED
-    live trajectory -> canonical R34 mode-list/modeListed attachment                               OPEN RECEIPT
-    cutoff-uniform initial critical ceiling                         OPEN
-C5  positive retained viscosity 0 < 2*nu-a                          OPEN
-    optional a<=nu sufficient compiler                              CLOSED / NOT MANDATORY
-
-STANDARD COMPLETION
-C6  scalar FTC + rational integration linearity/order receipts       OPEN
-C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    OPEN
+CommutatorOnlySpacetimeBudget568
+  -> R572
+  -> R503.DirectOffDiagonalBudget
+  -> R415 / critical-barrier consumer
 ```
 
-The genuinely new nonlinear theorem count is therefore two: C1 and C2.
+as a valid adjacent producer/compiler lane. It is not definitionally the
+R691/R723 currency: R687 only identifies the pair-rate-lifted R568 quantity
+with the R691 commutator, and the unlifted-to-lifted quantitative implication
+remains open. Accordingly this chain is no longer described as the principal
+live periodic analytic interface.
+
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
-`R406 = covariance` equality are **not** part of this terminal cut.  The latter
-is in fact the wrong same-object statement for the live nonseparable
-Cauchy/resolvent R406 carrier.
-
-This distinction is load-bearing. `C_direct` is not the missing object. R572 is
-not a new PDE estimate. R503 is not evidence that R568 has been paid, and an
-optional producer decomposition does not become a separate Clay obligation
-merely because it is mathematically interesting.
+`R406 = covariance` equality are not part of the current terminal cut.
 
 ## 2. Literal periodic finite-dimensional carrier
 
@@ -344,23 +459,41 @@ C_direct constructed != C_direct uniformly paid.
 
 The construction/same-object weld is not the analytic R568 estimate.
 
-## 8. Terminal periodic compiler chain
+## 8. Current terminal compiler and alternate direct-companion chain
 
-Once the Lane-B live producer is paid, the downstream route is explicit:
+The current terminal compiler is:
+
+```text
+W1: weighted + terminal Q_+- cutoff-uniform payment
+W2: integrated R751 dyadic-difference residual >= 0
+  -> R747 / R746 / R742 / R734 / R730 exact coordinate compilers
+  -> uniform critical barrier
+  -> standard periodic compactness / continuation source boundary
+```
+
+R741 additionally exposes the stronger pointwise producer
+
+\[
+\mathrm{PacketStrictSurplus}_{N,\delta}(t)
+\le
+\mathrm{CombinedResidue}_N(t),
+\]
+
+but the pointwise form is not mandatory: R742 preserves exact equivalence with
+the original integrated W2 leaf.
+
+The older direct-companion chain is retained as an **alternate** route:
 
 ```text
 CommutatorOnlySpacetimeBudget568
   -> NSTriadKNDirectLeafACompilerRound572Exact
   -> R503.DirectOffDiagonalBudget
-  -> existing R415 / critical-barrier consumer
+  -> R415 / critical-barrier consumer
 ```
 
-R572 is a compiler. Its source requires the R568 commutator budget and standard
-temporal/order receipts, then constructs the pre-existing R503 budget. It
-introduces no replacement R406 observable and no parallel leaf-A consumer.
-
-The nested Schur/R577 branch is retained as a fallback compiler route. It is not
-promoted over the direct route merely because it has a different interface.
+R572 is still a valid compiler, but R568 is not the canonical current analytic
+leaf. The nested Schur/R577 branch is likewise retained as a fallback producer
+route rather than promoted over the R752 frontier.
 
 ## 9. MathematicalStatus, StatementStatus, and CertificationStatus
 
@@ -386,9 +519,12 @@ A configured workflow is not itself a kernel receipt.
 | R207/R209/R211 + #890 | same-output debt/P3 infrastructure | exact debt/difference algebra; generic incidence-only separation route not primary | historical/alternative | source-written components; stronger physical collision/no-go remains separately fail-closed |
 | R214 | constant-band no-go | negative control proved | historical/current negative control | source-written; no extra promotion inferred |
 | R500 | integrated direct companion | same-object weld closed modulo explicit integration authority | current Lane-B spine | certification tracked independently |
-| R503 | direct companion -> R415 compiler | compiler constructed; direct budget itself still open | current Lane-B spine | certification tracked independently |
-| R568 | live commutator-only spacetime leaf | interface constructed; producer payment open | **live Lane-B analytic cutset** | no producer receipt until an inhabitant is actually proved |
-| R572 | direct leaf-A compiler | constructed given listed receipts | current Lane-B compiler | source/workflow status does not constitute R568 proof |
+| R503 | direct companion -> R415 compiler | compiler constructed; direct budget itself still open | alternate Lane-B producer/compiler spine | certification tracked independently |
+| R568 | commutator-only spacetime leaf | interface constructed; producer payment open | historical/alternate Lane-B producer lane | no producer receipt until an inhabitant is actually proved |
+| R572 | direct leaf-A compiler | constructed given listed receipts | alternate Lane-B compiler | source/workflow status does not constitute R568 proof |
+| R733-R736 | Q_+- endpoint weld and shared-weighted two-leaf recut | exact coordinate reductions; W1/W2 payments open | current Lane-B frontier precursor | source-written; head-specific kernel receipt not claimed here |
+| R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions closed; packet/combined payment open | current frontier precursor | source-written/static-audited; no fresh kernel receipt claimed |
+| R744-R752 | complete physical carrier, swap pairing, two actual dyadic differences, same-shell vanishing, integrated residual | exact carrier reductions closed; W1 and residual nonnegativity open | **current Lane-B analytic frontier** | source-written/static-audited; no fresh kernel receipt claimed |
 
 This table is intentionally conservative. Later validation work may upgrade a
 `CertificationStatus` without changing the underlying mathematical theorem.
@@ -461,20 +597,64 @@ Citation does not import proof or certification.
 
 ## Current roadmap
 
-The active manuscript proof-search order is now:
+The active periodic-B proof-search order is now:
 
 ```text
-Lane B P1: R571 literal centered/Taylor realization
-  -> Lane B P2: old paired second-moment + six-three transplant
-  -> Lane B P3: signed inner-fibre/full-square propagation to R568
-  -> R572 compiler
-  -> R503/R415 critical-barrier consumer
+W1
+  prove cutoff-uniform signed
+  W_N(T) + Q_+-,N(T) <= B(T)
+
+W2
+  prove, with delta_N > 0,
+  0 <= integral G_N,delta(t) dt
+
+  where the literal local nonlinear carrier is
+    G_nl(beta)
+      = 3 * NestedOrbit(beta)
+        - PairedDyadicTwoDifference(beta)
+
+  and
+    PairedDyadicTwoDifference(beta)
+      = (lambda~_k - lambda~_q) PairPower_k(beta)
+        + (lambda~_p - lambda~_q) PairPower_p(beta)
+
+  plus the retained viscous credit
+    3 * (2 nu - delta_N) * d_N(t)
+
+W1 + W2
+  -> R747/R746/R742/R734/R730 exact compilers
+  -> uniform critical barrier
+  -> standard periodic compactness / continuation
+```
+
+R750 gives one exact support simplification before estimation: on same-shell
+nonzero triads the two dyadic production differences vanish identically, so
+the local nonlinear cell reduces to (3R^{\rm nested}). This is **not** being
+promoted to an exhaustive shell partition; the repository's full absolute
+geometry partition remains separately open.
+
+The R737--R740 derivative experiment remains a completed no-shortcut result:
+the R684 input-Laplacian (W_N) term cancels exactly from local W2. Likewise,
+the finite critical-norm equivalence machinery does not justify replacing
+signed dyadic coefficient differences by physical mode-norm differences.
+The next analytic work must therefore act on the literal R751 signed residual
+or prove a lawful further cancellation on that same carrier.
+
+Alternate/historical producer work remains available but is not the primary
+queue:
+
+```text
+R571 centered/Taylor
+  -> second-moment / six-three / nested signed machinery
+  -> R568
+  -> R572
+  -> R503/R415
 ```
 
 In parallel:
 
 ```text
-Lane A: freeze independent whole-space terminal cut, then named-field search
+Lane A: independent whole-space terminal cut and named-field search
 Lane C/D: released-proof BIDI verification/provenance, non-discovery
 certification: tracked orthogonally
 ```
