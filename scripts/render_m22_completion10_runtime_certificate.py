@@ -31,6 +31,13 @@ def main() -> None:
     )
     has_pair_swap_basis = pair_swap_verified_count > 0
     has_m22_ten = composition["m22_ten_factor_count"] > 0
+    identified_ten_factor_count = sum(
+        1 for labels in composition.get("m22_ten_factor_atlasrep_matches", [])
+        if labels
+    )
+    all_ten_factors_identified = (
+        identified_ten_factor_count == composition["m22_ten_factor_count"]
+    )
     has_m22d2_ten = composition["m22d2_ten_factor_count"] > 0
 
     module = """module DASHI.Moonshine.Generated.M22Completion10RuntimeCertificate where
@@ -90,6 +97,12 @@ m22d2TenFactorCount = %(m22d2_ten)d
 m22TenFactorCount : Nat
 m22TenFactorCount = %(m22_ten)d
 
+m22AtlasRepIdentifiedTenFactorCount : Nat
+m22AtlasRepIdentifiedTenFactorCount = %(identified_ten)d
+
+allObservedM22TenFactorsIdentified : Bool
+allObservedM22TenFactorsIdentified = %(all_identified)s
+
 m22d2HasTenFactor : Bool
 m22d2HasTenFactor = %(has_m22d2_ten)s
 
@@ -129,9 +142,13 @@ runtimeM22FactorAndInvolutionEvidenceJointlySufficient =
         "m22_sum": composition["m22_dimension_sum"],
         "m22d2_ten": composition["m22d2_ten_factor_count"],
         "m22_ten": composition["m22_ten_factor_count"],
+        "identified_ten": identified_ten_factor_count,
+        "all_identified": b(all_ten_factors_identified),
         "has_m22d2_ten": b(has_m22d2_ten),
         "has_m22_ten": b(has_m22_ten),
-        "joint_finite": b(has_pair_swap_basis and has_m22_ten),
+        "joint_finite": b(
+            has_pair_swap_basis and has_m22_ten and all_ten_factors_identified
+        ),
     }
 
     out.write_text(module)
