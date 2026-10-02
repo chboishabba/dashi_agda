@@ -24,12 +24,13 @@ over a selectable fixed-width balanced arithmetic backend and proves `anc_n(-t)=
 
 `RadixScaledExactFormat` factors only that reusable structure. BF16 becomes the fixed-width radix-2 instance and Tekum becomes the radix-3 instance.
 
-`TekumFloatingPointStructuralBridgeExact` makes the tapered distinction explicit. For an (n)-trit Tekum, the three-trit regime is fixed while the remaining (n-3) payload is divided between exponent and fraction according to the regime. At width eight the central regime gives all five payload trits to the fraction, whereas the outer (r=+7) regime gives all five to the exponent.
+`TekumFloatingPointStructuralBridgeExact` proves the three coordinate-role identifications definitionally:
 
-Thus the shared structure is exact, while the allocation policy differs:
+    Tekum sign       = BF16 orientation role
+    Tekum regime/exp = BF16 scale-transport role
+    Tekum fraction   = BF16 local-refinement role
 
-    BF16  : fixed exponent width + fixed fraction width
-    Tekum : regime-dependent exponent width + complementary fraction width
+The width policy then separates the formats. BF16 has a fixed 8/7 exponent/fraction allocation. Tekum fixes only the three-trit regime and divides the remaining payload between exponent and fraction according to the regime. At width eight, the central regime gives all five payload trits to the fraction, whereas the outer (r=+7) regime gives all five to the exponent.
 
 ## Existing triadic / p-adic spine
 
@@ -37,13 +38,28 @@ Thus the shared structure is exact, while the allocation policy differs:
 
     Data.Vec Trit n  <->  TriadicPAdicCodec.Kernel n
 
-rather than creating another ternary word type.
+and proves that the Tekum two-trit structural projection commutes with the same drop-low operation on that finite kernel carrier.
 
-The two-trit Tekum precision projection commutes definitionally with the corresponding projection on the canonical triadic kernel. Nested projection is also paid:
+`TriadicPAdicCylinderExact` now also instantiates the repository's existing `TriadicPAdicCodec.CylinderSystem` contract. Its residuals are low-to-high trit streams, its depth-(k) cylinders retain the first (k) low-order trits, and its refinement compatibility theorem is source-written.
 
-    project2 (project2 x) = project4 x
+This exposes an important orientation boundary rather than hiding it:
 
-This gives the representation-level naturality behind staged Tekum precision reduction. The bridge explicitly does **not** claim that a Tekum real is therefore a literal p-adic valuation; p-adic interpretation remains a separate semantic layer.
+    Tekum precision truncation : drops low-order anchor trits
+    canonical 3-adic cylinder : retains low-order prefix
+
+`TekumPadicOrientationBoundaryExact` contains an explicit three-trit counterexample showing that these maps are not literally identical. Therefore a reversal/dual coordinate chart is required before p-adic cylinder naturality can be transported to Tekum precision semantics.
+
+So the exact result is:
+
+    shared finite trit carrier + related projection architecture
+
+not:
+
+    Tekum truncation = p-adic cylinder refinement
+
+and not:
+
+    Tekum real = literal p-adic valuation.
 
 ## Existing ternary computer spine
 
@@ -55,7 +71,7 @@ For every regime, the ternary-storage machine state equals the native-memory mac
 
     output = [14]
 
-This is a representation theorem, not a claim that the radix-neutral machine has a physical ternary ALU.
+This proves executable representation transport through the existing ternary computer substrate. It does not claim that the radix-neutral abstract machine already supplies the physical constant-depth signed-digit ALU studied by Schlögl and Fey.
 
 ## SSP / FRACTRAN attachment
 
@@ -86,7 +102,7 @@ The repository keeps three engineering coordinates distinct:
 
 `TekumNegationExact` pays the anchor-invariance part of Hunhold Proposition 3. `TekumUniquenessExact` and `TekumMonotonicityExact` expose exact contracts for Propositions 2 and 4. `TekumTruncationRoundingExact` owns structural anchor truncation and `TekumPrecisionCompositionExact` proves multi-stage truncation composition.
 
-The remaining mathematical frontier is still the concrete fixed-width balanced integer inverse/arithmetic backend and the ordered exact-rational instantiations needed for injectivity, monotonicity and nearest-value rounding.
+The remaining mathematical frontier is the concrete fixed-width balanced integer inverse/arithmetic backend, the ordered exact-rational instantiations needed for injectivity and monotonicity, the nearest-value theorem for truncation, and the reversal/dual chart needed to relate Tekum high-significance precision truncation to low-significance p-adic cylinder refinement.
 
 ## Sources
 
