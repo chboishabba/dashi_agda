@@ -22,7 +22,7 @@ iranicaKhomeiniFoundation = Source.mkNoDOISource
   "Encyclopaedia Iranica"
   "2021"
   "https://www.iranicaonline.org/articles/khomeini-i-life/"
-  Source.referenceWorkSource
+  (Source.namedSourceKind "reference work")
   "historical source: Khomeini ordered confiscated Pahlavi-associated assets into the Foundation for the Downtrodden, initially framed as serving the poor"
   Source.publicAttribution
 
@@ -33,7 +33,7 @@ iranicaBasij = Source.mkNoDOISource
   "Encyclopaedia Iranica"
   "2008"
   "https://www.iranicaonline.org/articles/islam-in-iran-xiii-islamic-political-movements-in-20th-century-iran/"
-  Source.referenceWorkSource
+  (Source.namedSourceKind "reference work")
   "historical source naming the Basij-e Mostazafin as an organization affiliated with the Revolutionary Guards"
   Source.publicAttribution
 
@@ -44,7 +44,7 @@ hrwLabour2022 = Source.mkNoDOISource
   "Human Rights Watch"
   "2022-04-29"
   "https://www.hrw.org/news/2022/04/29/iran-labor-protests-surge"
-  Source.ngoReportSource
+  (Source.namedSourceKind "human-rights NGO report")
   "documents increased labor protests amid deteriorating economic conditions and repression/prosecution of labor activists"
   Source.publicAttribution
 
@@ -55,7 +55,7 @@ hrwIran2026 = Source.mkNoDOISource
   "Human Rights Watch"
   "2026"
   "https://www.hrw.org/world-report/2026/country-chapters/iran"
-  Source.ngoReportSource
+  (Source.namedSourceKind "human-rights NGO report")
   "documents lethal crackdown, mass arrests, executions and repression of dissent; this source does not itself classify all victims as mostazafin"
   Source.publicAttribution
 
