@@ -3,12 +3,55 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 required = {
-    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': ['eval-involution', 'threeTritExtremalPositiveWeight'],
-    'DASHI/ComputerScience/TekumRegimeExponentExact.agda': ['decodeEncodeRegime', 'outerPositiveBiasIs244'],
-    'DASHI/ComputerScience/TekumSSPFRACTRANBridgeExact.agda': ['positionedReopenExact', 'positionedCodeSeparatesTekumDigit', 'negativeUnitAtOneCompilesToThreeInversePrimes'],
-    'DASHI/ComputerScience/TekumFieldRoleSSPAtlasExact.agda': ['canonicalRadixThreeAtlas', 'separatedRoleAtlas'],
-    'DASHI/ComputerScience/TekumPrecisionCompositionExact.agda': ['truncateTwoTwiceEqualsFour'],
-    'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': ['canonicalTekumVerifiedAssemblyBoundary'],
+    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': [
+        'eval-involution',
+        'threeTritExtremalPositiveWeight',
+    ],
+    'DASHI/Foundations/RadixScaledExactFormat.agda': [
+        'bf16ScaledExactFormat',
+        'TaperedWidthAllocation',
+    ],
+    'DASHI/ComputerScience/TekumRegimeExponentExact.agda': [
+        'decodeEncodeRegime',
+        'outerPositiveBiasIs244',
+    ],
+    'DASHI/ComputerScience/TekumFloatingPointStructuralBridgeExact.agda': [
+        'tekumScaledExactFormat',
+        'centralRegimeAtWidth8',
+        'outerRegimeAtWidth8',
+    ],
+    'DASHI/ComputerScience/TekumTriadicPAdicKernelBridgeExact.agda': [
+        'fromToKernel',
+        'toFromKernel',
+        'truncateCommutesWithCarrierWeld',
+        'kernelTwoStepProjectionComposes',
+    ],
+    'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': [
+        'regimeStorageRoundTrip',
+        'ternaryExecutionMatchesNative',
+        'positiveOuterRegimeEchoesFourteen',
+    ],
+    'DASHI/ComputerScience/TekumTriadicABIBackendBoundaryExact.agda': [
+        'Pack5Obligation',
+        'canonicalTekumBackendBoundary',
+    ],
+    'DASHI/ComputerScience/TekumSSPFRACTRANBridgeExact.agda': [
+        'positionedReopenExact',
+        'positionedCodeSeparatesTekumDigit',
+        'negativeUnitAtOneCompilesToThreeInversePrimes',
+    ],
+    'DASHI/ComputerScience/TekumFieldRoleSSPAtlasExact.agda': [
+        'canonicalRadixThreeAtlas',
+        'separatedRoleAtlas',
+    ],
+    'DASHI/ComputerScience/TekumPrecisionCompositionExact.agda': [
+        'truncateTwoTwiceEqualsFour',
+    ],
+    'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': [
+        'canonicalTekumVerifiedAssemblyBoundary',
+        'tekumPrecisionProjectionCommutesWithKernelProjection',
+        'concreteTernaryStoredProgramExecutionPresent',
+    ],
 }
 
 for rel, needles in required.items():
@@ -23,4 +66,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: required owners and theorem names present.')
+print('Tekum static regression: canonical floating, p-adic, ternary-machine, ABI and SSP/FRACTRAN welds present.')
