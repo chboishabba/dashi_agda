@@ -104,16 +104,6 @@ module ReserveDecision
       (Live.integratedReservePaysCompleteSignedRate
         cutoff S terminal reserve)
 
-  reserveFailureFromSelectedNegativeIntegral :
-    (cutoff : Nat) →
-    (S : Live.Packet.LivePhysicalPacketStructure D C cutoff) →
-    (terminal : Time) →
-    Live.integratedCompleteRate cutoff S terminal < 0ℚ →
-    Live.integratedReserve cutoff S terminal
-      < Live.integratedDemand cutoff S terminal
-  reserveFailureFromSelectedNegativeIntegral cutoff S terminal negative =
-    ℚP.≰⇒>
-      (negativeCompleteRateRefutesReserve cutoff S terminal negative)
 
 round831NegativeSelectedIntegralRefutesReserve : Bool
 round831NegativeSelectedIntegralRefutesReserve = true
