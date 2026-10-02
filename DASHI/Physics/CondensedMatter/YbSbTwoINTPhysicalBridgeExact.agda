@@ -9,8 +9,9 @@ module DASHI.Physics.CondensedMatter.YbSbTwoINTPhysicalBridgeExact where
 -- missing same-object identification explicit.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
+import DASHI.Physics.CondensedMatter.SuperconductingTimeReversalGaugeObstructionExact as TR
 import DASHI.Physics.CondensedMatter.YbSbTwoINTNonunitarySelectedExact as INT
 import DASHI.Physics.CondensedMatter.YbSbTwoMuSRTRSBEvidenceExact as MuSR
 
@@ -42,7 +43,7 @@ record PhysicalINTIdentification
 -- the reusable INT lane.
 identifiedSelectedCandidateBreaksTRUpToGauge :
   PhysicalINTIdentification paperEvidenceSelectedINTCandidate →
-  INT.TR.TRGaugeEquivalent INT.intTRSystem INT.selectedINT →
-  _
+  TR.TRGaugeEquivalent INT.intTRSystem INT.selectedINT →
+  ⊥
 identifiedSelectedCandidateBreaksTRUpToGauge id =
   INT.selectedINTBreaksTRUpToGauge
