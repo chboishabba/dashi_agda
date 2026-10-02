@@ -24,7 +24,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyVacuumDominatedWeylSignExact whe
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; positive)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; Positive; _+_; _*_; _≤_; _<_; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -169,6 +169,138 @@ vacuumDominatedSourceForcesPositiveMatterEffectiveActionWeyl
     (vacuumDominatedSourceForcesNegativeFiniteWeylResponse
       measure d laws partition scaleLaw constant referenceFixed
       coefficientPositive erbNonnegative)
+
+
+vacuumNumeratorNegative :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (partition : Partition.PhysicalFinitePartitionAuthority measure)
+    (scaleLaw : Vacuum.RationalHaarScaleLaw measure)
+    (constant : Vacuum.VacuumTraceConstant d) →
+  Vacuum.coefficient constant < 0ℚ →
+  Sector.vacuumNumerator measure d < 0ℚ
+vacuumNumeratorNegative measure d partition scaleLaw constant coefficientNegative =
+  let
+    zPositive :
+      0ℚ < Physical.haarIntegral measure (Physical.density measure)
+    zPositive =
+      subst
+        (λ value → 0ℚ < value)
+        (Partition.partitionIsDensityIntegral partition)
+        (Partition.partitionPositive partition)
+
+    instance
+      zPositiveI : Positive
+        (Physical.haarIntegral measure (Physical.density measure))
+      zPositiveI = positive zPositive
+
+    scaledNegative :
+      Vacuum.coefficient constant
+        * Physical.haarIntegral measure (Physical.density measure)
+      <
+      0ℚ * Physical.haarIntegral measure (Physical.density measure)
+    scaledNegative =
+      ℚP.*-monoʳ-<-pos
+        (Physical.haarIntegral measure (Physical.density measure))
+        coefficientNegative
+
+    productNegative :
+      Vacuum.coefficient constant
+        * Physical.haarIntegral measure (Physical.density measure)
+      < 0ℚ
+    productNegative =
+      subst
+        (λ right →
+          Vacuum.coefficient constant
+            * Physical.haarIntegral measure (Physical.density measure)
+          < right)
+        (Ring.solve-∀
+          (Physical.haarIntegral measure (Physical.density measure)))
+        scaledNegative
+  in
+  subst
+    (λ value → value < 0ℚ)
+    (sym (Vacuum.vacuumNumeratorFactors measure d scaleLaw constant))
+    productNegative
+
+erbNonpositiveAndVacuumNegativeGiveNegativeFourSectorBalance :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration) →
+  erbNumerator measure d ≤ 0ℚ →
+  Sector.vacuumNumerator measure d < 0ℚ →
+  ((Sector.regularNumerator measure d
+      + Sector.rOperationNumerator measure d)
+      + (Sector.boundaryNumerator measure d
+        + Sector.vacuumNumerator measure d))
+  < 0ℚ
+erbNonpositiveAndVacuumNegativeGiveNegativeFourSectorBalance
+    measure d erbNonpositive vacuumNegative =
+  subst
+    (λ value → value < 0ℚ)
+    (Ring.solve-∀
+      (Sector.regularNumerator measure d)
+      (Sector.rOperationNumerator measure d)
+      (Sector.boundaryNumerator measure d)
+      (Sector.vacuumNumerator measure d))
+    (ℚP.+-mono-≤-<
+      erbNonpositive
+      vacuumNegative)
+
+negativeVacuumAndNonpositiveERBForcePositivePartitionWeyl :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (partition : Partition.PhysicalFinitePartitionAuthority measure)
+    (scaleLaw : Vacuum.RationalHaarScaleLaw measure)
+    (constant : Vacuum.VacuumTraceConstant d)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  Vacuum.coefficient constant < 0ℚ →
+  erbNumerator measure d ≤ 0ℚ →
+  0ℚ < Weyl.fourDiagonalPartitionDerivativeSum measure d
+negativeVacuumAndNonpositiveERBForcePositivePartitionWeyl
+    measure d laws partition scaleLaw constant referenceFixed
+    coefficientNegative erbNonpositive =
+  Sign.negativeWeightedNonWilsonNumeratorForcesPositiveWeylResponse
+    measure d laws referenceFixed
+    (subst
+      (λ value → value < 0ℚ)
+      (sym
+        (Sector.weightedNonWilsonNumeratorSplitsFourWays
+          measure d (Sign.base laws)))
+      (erbNonpositiveAndVacuumNegativeGiveNegativeFourSectorBalance
+        measure d erbNonpositive
+        (vacuumNumeratorNegative
+          measure d partition scaleLaw constant coefficientNegative)))
+
+negativeVacuumAndNonpositiveERBForceNegativeMatterEffectiveActionWeyl :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (partition : Partition.PhysicalFinitePartitionAuthority measure)
+    (scaleLaw : Vacuum.RationalHaarScaleLaw measure)
+    (constant : Vacuum.VacuumTraceConstant d)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  Vacuum.coefficient constant < 0ℚ →
+  erbNumerator measure d ≤ 0ℚ →
+  Convention.matterEffectiveActionWeylResponse
+    measure partition d < 0ℚ
+negativeVacuumAndNonpositiveERBForceNegativeMatterEffectiveActionWeyl
+    measure d laws partition scaleLaw constant referenceFixed
+    coefficientNegative erbNonpositive =
+  Convention.partitionWeylPositiveImpliesEffectiveActionWeylNegative
+    measure partition d
+    (negativeVacuumAndNonpositiveERBForcePositivePartitionWeyl
+      measure d laws partition scaleLaw constant referenceFixed
+      coefficientNegative erbNonpositive)
+
+negativeVacuumCoefficientAndNonpositiveERBIsAccelerationSignCandidate : Bool
+negativeVacuumCoefficientAndNonpositiveERBIsAccelerationSignCandidate = true
 
 vacuumCoefficientSignIsStillPhysicalInput : Bool
 vacuumCoefficientSignIsStillPhysicalInput = true
