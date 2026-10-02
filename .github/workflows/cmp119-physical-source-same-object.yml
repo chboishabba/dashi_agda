@@ -25,6 +25,10 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanStressHingeExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanTerminalMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSWightmanReconstructionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -78,7 +82,11 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTraceContinuationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanStressHingeExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanTerminalMaxCutExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanTerminalMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSWightmanReconstructionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
