@@ -197,7 +197,7 @@ data MixedInactiveReason
     {r : Level} {F : C3.RealField r}
     (velocity : Z3.FourierMode → C3.Complex3 F)
     (tau : Physical.PhysicalTriadIncidence) : Set r where
-  pVelocityZero :
+  mixedPVelocityZero :
     velocity (Physical.p tau) ≡ C3.complex3Zero F →
     MixedInactiveReason velocity tau
   qVelocityZero :
@@ -208,7 +208,7 @@ data CommutatorInactiveReason
     {r : Level} {F : C3.RealField r}
     (velocity forcing : Z3.FourierMode → C3.Complex3 F)
     (tau : Physical.PhysicalTriadIncidence) : Set r where
-  pForcingZero :
+  commPForcingZero :
     forcing (Physical.p tau) ≡ C3.complex3Zero F →
     CommutatorInactiveReason velocity forcing tau
   qVelocityZero :
@@ -237,9 +237,9 @@ pruneMixedFixedOutput S velocity select inactive =
     select tau ≡ false →
     R224.mixedPlusMinus S velocity tau ≡ C3.complex3Zero _
   zero tau rejected with inactive tau rejected
-  ... | pVelocityZero proof =
+  ... |... | mixedPVelocityZero proof =
     mixedPlusMinusZeroFromPVelocityZero S velocity tau proof
-  ... | qVelocityZero proof =
+  ... |... | mixedQVelocityZero proof =
     mixedPlusMinusZeroFromQVelocityZero S velocity tau proof
 
 pruneCommutatorFixedOutput :
@@ -269,10 +269,10 @@ pruneCommutatorFixedOutput S velocity forcing select inactive =
     R230.forcingCommutatorCell S velocity forcing tau
     ≡ C3.complex3Zero _
   zero tau rejected with inactive tau rejected
-  ... | pForcingZero proof =
+  ... |... | commPForcingZero proof =
     R437.forcingCommutatorZeroFromForcingZero
       S velocity forcing tau proof
-  ... | qVelocityZero proof =
+  ... |... | commQVelocityZero proof =
     forcingCommutatorZeroFromQVelocityZero
       S velocity forcing tau proof
 
