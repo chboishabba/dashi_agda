@@ -2,16 +2,12 @@ module DASHI.ComputerScience.TekumFieldRoleSSPAtlasExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.ComputerScience.TekumSSPFRACTRANBridgeExact as Bridge
-
-------------------------------------------------------------------------
--- A concrete way to attach *field semantics* to SSP15 without asserting that
--- the fields are intrinsically Monster/Ogg objects.  Lane assignment is an
--- explicit atlas parameter and therefore inspectable/replacable.
 
 data TekumFieldRole : Set where
   regimeRole : TekumFieldRole
