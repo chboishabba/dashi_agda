@@ -1,10 +1,31 @@
 # Tekum balanced-ternary formalisation
 
-This tranche formalises Laslo Hunhold's Tekum representation together with the binary-coded ternary signed-digit FPGA result boundary of Thomas Schlögl and Dietmar Fey, while reusing the repository's pre-existing floating-point, triadic/p-adic, ternary-machine, binary/ternary storage and ABI owners.
+This tranche formalises Laslo Hunhold's Tekum representation together with the binary-coded ternary signed-digit FPGA result boundary of Thomas Schlögl and Dietmar Fey, while reusing the repository's existing balanced-ternary, floating-point, triadic/p-adic, ternary-machine, binary/ternary storage and ABI owners.
 
-## Native Tekum spine
+## Native carrier and integer frontier
 
-The implementation reuses `DASHI.Algebra.Trit`; it does not introduce a Tekum-specific trit. `BalancedTernaryIntegerExact` supplies the positional radix-three ledger and proves digitwise involution swaps positive and negative weight.
+The implementation reuses `DASHI.Algebra.Trit`; it does not introduce a Tekum-specific trit.
+
+`BalancedTernaryIntegerExact` supplies the least-significant-trit-first positional radix-three signed-weight evaluator and proves digitwise involution swaps positive and negative weight.
+
+`BalancedTernaryA003462BridgeExact` now reuses the repository's older A003462 owner for the canonical maximum-magnitude sequence
+
+    1, 4, 13, ...
+
+rather than creating a second bound sequence. The three-positive-trit evaluator is welded directly to the existing magnitude 13 receipt.
+
+`BalancedTernaryFiniteCarrierExact` pays the finite carrier side exactly:
+
+    Trit ≃ Fin 3
+    Trit^n ≃ (Fin 3)^n
+
+and reuses the repository's complete duplicate-free finite-product enumerator together with its exact cardinality theorem
+
+    #(Fin 3)^n = 3^n.
+
+This is important but deliberately does not pretend that cardinality alone proves injectivity of the positional integer evaluator. The remaining integer theorem is specifically that the signed radix-three positional map is the bijection onto the centered interval of the same cardinality.
+
+## Tekum anchor and regime
 
 `TekumAnchorArithmeticExact` states Hunhold's source definition
 
@@ -14,6 +35,24 @@ over a selectable fixed-width balanced arithmetic backend and proves `anc_n(-t)=
 
 `TekumRegimeExponentExact` encodes the fifteen anchored regime states (r=-7,ldots,7), the source exponent-count rule (c=max(0,|r|-2)), and the bias magnitudes (0,1,2,4,10,28,82,244). `TekumSpecialValuesExact` classifies the all-negative, all-zero and all-positive words as NaR, zero and infinity.
 
+## Exact ordinary semantics
+
+`TekumFiniteSemanticsExact` retains the source-level ordinary/special distinction.
+
+`TekumExactTriadicSemanticsExact` now gives the radix-three analogue of the repository's existing `BinaryFloatingPoint.ExactDyadic`. An ordinary Tekum value
+
+    s (1 + F / 3^p) 3^e
+
+is represented exactly as
+
+    s (3^p + F) 3^(e-p)
+
+using the existing `BinaryFloatingPoint.SignedScale` owner.
+
+The same file now promotes that symbolic object to the repository's canonical `Data.Rational.Base.ℚ` with `normalize`. Thus ordinary finite Tekum semantics no longer require machine Float or an ambient real completion.
+
+NaR and infinity remain outside `ℚ`; they are not silently coerced into finite rationals.
+
 ## Existing floating-point spine
 
 `BinaryFloatingPoint` already separates radix from scale policy and assigns structural roles to sign, exponent and fraction:
@@ -22,87 +61,81 @@ over a selectable fixed-width balanced arithmetic backend and proves `anc_n(-t)=
     exponent -> scale transport
     fraction -> local refinement
 
-`RadixScaledExactFormat` factors only that reusable structure. BF16 becomes the fixed-width radix-2 instance and Tekum becomes the radix-3 instance.
+`RadixScaledExactFormat` factors only that reusable structure. BF16 is the fixed-width radix-2 instance and Tekum is the radix-3 tapered instance.
 
-`TekumFloatingPointStructuralBridgeExact` proves the three coordinate-role identifications definitionally:
-
-    Tekum sign       = BF16 orientation role
-    Tekum regime/exp = BF16 scale-transport role
-    Tekum fraction   = BF16 local-refinement role
-
-The width policy then separates the formats. BF16 has a fixed 8/7 exponent/fraction allocation. Tekum fixes only the three-trit regime and divides the remaining payload between exponent and fraction according to the regime. At width eight, the central regime gives all five payload trits to the fraction, whereas the outer (r=+7) regime gives all five to the exponent.
+`TekumFloatingPointStructuralBridgeExact` proves the coordinate-role identifications definitionally. At width eight the central regime gives all five payload trits to the fraction, while the outer (r=+7) regime gives all five to the exponent.
 
 ## Existing triadic / p-adic spine
 
-`TekumTriadicPAdicKernelBridgeExact` proves an exact bidirectional carrier weld
+`TekumTriadicPAdicKernelBridgeExact` proves
 
     Data.Vec Trit n  <->  TriadicPAdicCodec.Kernel n
 
-and proves that the Tekum two-trit structural projection commutes with the same drop-low operation on that finite kernel carrier.
+with both roundtrips.
 
-`TriadicPAdicCylinderExact` now also instantiates the repository's existing `TriadicPAdicCodec.CylinderSystem` contract. Its residuals are low-to-high trit streams, its depth-(k) cylinders retain the first (k) low-order trits, and its refinement compatibility theorem is source-written.
+`TriadicPAdicCylinderExact` instantiates the repository's existing `CylinderSystem`: low-to-high residual streams project to low-order prefixes and refinement forgets the newest high-order digit.
 
-This exposes an important orientation boundary rather than hiding it:
+This reveals the exact orientation mismatch:
 
     Tekum precision truncation : drops low-order anchor trits
-    canonical 3-adic cylinder : retains low-order prefix
+    canonical 3-adic cylinder : retains low-order prefix.
 
-`TekumPadicOrientationBoundaryExact` contains an explicit three-trit counterexample showing that these maps are not literally identical. Therefore a reversal/dual coordinate chart is required before p-adic cylinder naturality can be transported to Tekum precision semantics.
+`TekumPadicOrientationBoundaryExact` proves with a concrete counterexample that the two maps are not literally identical.
 
-So the exact result is:
+`TekumPadicDualChartExact` now supplies the exact involutive reversal chart
 
-    shared finite trit carrier + related projection architecture
+    D = reverse
 
-not:
+and defines the conjugate precision operation
 
-    Tekum truncation = p-adic cylinder refinement
+    D ∘ truncate₂ ∘ D.
 
-and not:
+Agda proves
 
-    Tekum real = literal p-adic valuation.
+    D (truncate₂ x) = dualPrecision₂ (D x)
+
+and the two-step precision composition theorem survives this conjugation. This pays the finite orientation conversion. It still does not promote a Tekum real to a p-adic valuation, and the final theorem identifying the conjugated operation with the executable cylinder refinement remains a distinct bridge target.
 
 ## Existing ternary computer spine
 
-`TekumTernaryStoredProgramExecutionExact` gives a concrete machine integration rather than only a hardware-interface record.
+`TekumTernaryStoredProgramExecutionExact` maps all fifteen regime codes through `FixedNineBitFramed27WordStorageExact`, reconstructs the same `TinyRadixNeutralRegisterMachine` memory, and therefore proves the same final machine state after execution.
 
-Each of the fifteen Tekum regimes is assigned a bounded index (0,ldots,14), passed through the existing `FixedNineBitFramed27WordStorageExact` ternary-27 storage fibre, and decoded back exactly. The decoded memory initializes the existing `TinyRadixNeutralRegisterMachineExact`.
+The outer positive regime concretely echoes
 
-For every regime, the ternary-storage machine state equals the native-memory machine state before execution, hence their final states are equal. The concrete outer positive regime executes the echo program and produces:
+    [14].
 
-    output = [14]
-
-This proves executable representation transport through the existing ternary computer substrate. It does not claim that the radix-neutral abstract machine already supplies the physical constant-depth signed-digit ALU studied by Schlögl and Fey.
+This is executable representation transport through the existing ternary computer substrate, not a physical ternary-ALU timing claim.
 
 ## SSP / FRACTRAN attachment
 
-The bridge is constructive and orthogonal to the native numeric semantics.
+The SSP/FRACTRAN lane remains constructive and orthogonal to native numeric semantics:
 
-1. `Trit <-> SSPTrit` reuses the existing exact bidirectional codec.
-2. A positioned Tekum digit projects to the existing signed SSP/FRACTRAN orientation.
-3. Its ternary position is retained as a dependent residual.
-4. Coarse orientation plus residual reopens the exact positioned Tekum digit.
-5. Position (k) determines the radix weight (3^k).
-6. The executable compiler maps (+1) to (3^k) prime-introduction instructions, (-1) to (3^k) inverse-prime instructions and (0) to no arithmetic instruction.
+1. exact `Trit <-> SSPTrit`;
+2. positioned digit -> signed orientation;
+3. dependent residual retains position;
+4. exact reopening;
+5. position (k) supplies radix weight (3^k);
+6. executable repeated prime/inverse-prime presentation.
 
-`TekumFieldRoleSSPAtlasExact` supplies both a single radix-three lane and an explicit separated regime/exponent/fraction atlas. Lane selection is representation metadata, not an assertion that Tekum numerical values are Monster/Ogg prime products.
+Lane selection remains explicit representation metadata rather than a claim of numerical identity with Monster/Ogg prime products.
 
-## Existing ABI and FPGA boundaries
+## ABI and FPGA boundaries
 
-`TekumTriadicABIBackendBoundaryExact` reuses both the existing triadic three-trit byte reference and `TriadicPAdicCodec.Pack5Contract`. The two-bit-per-trit codec remains exact, while Rust u8, SWAR runtime and FPGA netlist claims stay unpaid unless separately implemented.
+`TekumTriadicABIBackendBoundaryExact` reuses the existing three-trit byte reference and `TriadicPAdicCodec.Pack5Contract`.
 
-`SchloeglFeyFPGASourceBoundaryExact` therefore remains an attributed empirical receipt for the reported UltraScale LUT and carry-chain results rather than a gate-level proof.
+`SchloeglFeyFPGASourceBoundaryExact` remains an attributed empirical receipt. Rust u8 bindings, SWAR runtime kernels and a gate-level FPGA netlist are separate implementation obligations.
 
-The repository keeps three engineering coordinates distinct:
+## Remaining mathematical frontier
 
-    storage density
-    transition/locality dilation
-    adder critical-path / physical timing
+The large representation architecture is now mostly paid. The remaining hard mathematical chain is narrower:
 
-## Formal-property targets
-
-`TekumNegationExact` pays the anchor-invariance part of Hunhold Proposition 3. `TekumUniquenessExact` and `TekumMonotonicityExact` expose exact contracts for Propositions 2 and 4. `TekumTruncationRoundingExact` owns structural anchor truncation and `TekumPrecisionCompositionExact` proves multi-stage truncation composition.
-
-The remaining mathematical frontier is the concrete fixed-width balanced integer inverse/arithmetic backend, the ordered exact-rational instantiations needed for injectivity and monotonicity, the nearest-value theorem for truncation, and the reversal/dual chart needed to relate Tekum high-significance precision truncation to low-significance p-adic cylinder refinement.
+1. prove the positional balanced-ternary evaluator is injective / reconstructive onto the centered A003462 interval;
+2. instantiate the full fixed-width wrapping arithmetic and inverse required by the source `int_n`;
+3. use the now-concrete `ℚ) decoder to prove Hunhold Proposition 2 injectivity;
+4. prove Proposition 4 ordered-code monotonicity on the same rational carrier;
+5. prove Proposition 5 nearest-value truncation, not merely structural composition;
+6. identify the reversal-conjugated finite projection with the executable p-adic cylinder refinement if that naturality transport is desired;
+7. reconstruct a specific Schlögl-Fey digit network before claiming a kernel-checked width-independent circuit-depth bound.
 
 ## Sources
 
