@@ -30,6 +30,8 @@ open import Data.Empty using (⊥)
 
 import DASHI.Physics.CondensedMatter.YbSbTwoBdGSymmetryBoundaryExact as BdG
 import DASHI.Physics.QFT.BraidingMorphismReceipt as Braid
+import DASHI.Physics.CondensedMatter.MajoranaBraidYangBaxterExact as MajoranaBraid
+import DASHI.Physics.CondensedMatter.MajoranaParityQubitExact as ParityQubit
 import DASHI.Physics.QFT.AnyonicSectorPhysicsReceipt as Anyon
 import DASHI.Programmes.QuantumExecutablePromotionReceiptExact as QExec
 
@@ -166,3 +168,80 @@ open YbSbTwoMajoranaQuantumComputerBridge public
 -- No canonical inhabitant is provided: the paper's modeled surface branch
 -- does not by itself discharge isolation, parity-qubit encoding, non-Abelian
 -- braiding, protected logical action, or experimental readout.
+
+
+------------------------------------------------------------------------
+-- New exact Majorana braid producer.
+------------------------------------------------------------------------
+
+majoranaYangBaxterExact :
+  (x : MajoranaBraid.SignedMajorana) →
+  MajoranaBraid.sigma1
+    (MajoranaBraid.sigma2
+      (MajoranaBraid.sigma1 x))
+  ≡
+  MajoranaBraid.sigma2
+    (MajoranaBraid.sigma1
+      (MajoranaBraid.sigma2 x))
+majoranaYangBaxterExact =
+  MajoranaBraid.yangBaxterB3
+
+majoranaBraidImageIsNoncommutative :
+  ((x : MajoranaBraid.SignedMajorana) →
+    MajoranaBraid.sigma1 (MajoranaBraid.sigma2 x)
+    ≡
+    MajoranaBraid.sigma2 (MajoranaBraid.sigma1 x))
+  →
+  ⊥
+majoranaBraidImageIsNoncommutative =
+  MajoranaBraid.sigma1Sigma2Noncommuting
+
+-- This closes the mathematical YB/non-Abelian braid-representation blocker.
+-- It does NOT close the physical-realization blocker for YbSb2.
+
+record ExactMajoranaBraidMathematics : Set where
+  field
+    yangBaxter :
+      (x : MajoranaBraid.SignedMajorana) →
+      MajoranaBraid.sigma1
+        (MajoranaBraid.sigma2
+          (MajoranaBraid.sigma1 x))
+      ≡
+      MajoranaBraid.sigma2
+        (MajoranaBraid.sigma1
+          (MajoranaBraid.sigma2 x))
+
+    noncommuting :
+      ((x : MajoranaBraid.SignedMajorana) →
+        MajoranaBraid.sigma1 (MajoranaBraid.sigma2 x)
+        ≡
+        MajoranaBraid.sigma2 (MajoranaBraid.sigma1 x))
+      →
+      ⊥
+
+canonicalExactMajoranaBraidMathematics :
+  ExactMajoranaBraidMathematics
+canonicalExactMajoranaBraidMathematics =
+  record
+    { yangBaxter = MajoranaBraid.yangBaxterB3
+    ; noncommuting = MajoranaBraid.sigma1Sigma2Noncommuting
+    }
+
+record FourMajoranaParityQubitMathematics : Set where
+  field
+    logicalCarrier : Set
+    encode :
+      logicalCarrier →
+      ParityQubit.EvenParityState
+    decode :
+      ParityQubit.EvenParityState →
+      logicalCarrier
+
+canonicalFourMajoranaParityQubitMathematics :
+  FourMajoranaParityQubitMathematics
+canonicalFourMajoranaParityQubitMathematics =
+  record
+    { logicalCarrier = ParityQubit.LogicalQubit
+    ; encode = ParityQubit.encodeLogical
+    ; decode = ParityQubit.decodeLogical
+    }
