@@ -19,11 +19,11 @@ module DASHI.Physics.Foundations.CMP119CosmologySelectedStressTensorCovarianceCo
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; -_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact as Vacuum
-import DASHI.Physics.Foundations.CMP119CosmologySelectedBoostTensorActionExact as Tensor
+import DASHI.Physics.Foundations.CMP119CosmologySelectedBoostTensorActionExact as Tensor\nimport DASHI.Physics.Foundations.CMP119CosmologyBoostInvariantVacuumExact as Boost
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumExpectationBoostCompilerExact as Expectation
 
 record SelectedStressTensorBoostCovariance
@@ -65,7 +65,7 @@ boostedT01ExpectationIsClosedFormula :
   vacuumExpectation dataSet
     (boostConjugate dataSet (selectedT01 dataSet))
   ≡
-  DASHI.Physics.Foundations.CMP119CosmologyBoostInvariantVacuumExact.boosted01
+  Boost.boosted01
     (lorentzianIsotropicStress dataSet)
 boostedT01ExpectationIsClosedFormula dataSet =
   trans
