@@ -19,7 +19,9 @@ module DASHI.Physics.CondensedMatter.FlatBandTwistronicsFe5GeTe2CrossPollination
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Moonshine.TwistronicsRegistrationControlFutureSplitExact as Control
 import DASHI.Physics.CondensedMatter.FlatBandObservableFibreExact as Flat
@@ -91,7 +93,7 @@ canonicalGrapheneFe5GeTe2CrossPollinationBoundary =
 ------------------------------------------------------------------------
 
 existingMagicAngleSourceAtlas :
-  _
+  Attribution.AttributedSourceAtlas
 existingMagicAngleSourceAtlas =
   Twist.twistronicsSourceAtlas
 
@@ -106,7 +108,7 @@ existingFe5GeTe2Replay =
   Fe.canonicalFe5GeTe2SourceReplay
 
 existingThreeFoldSurface :
-  Fold.ThreeFoldPresentation (Data.Fin.Base.Fin 3) Fold.OneFoldedPoint
+  Fold.ThreeFoldPresentation (Fin 3) Fold.OneFoldedPoint
 existingThreeFoldSurface =
   Fold.canonicalThreeFoldPresentation
 
