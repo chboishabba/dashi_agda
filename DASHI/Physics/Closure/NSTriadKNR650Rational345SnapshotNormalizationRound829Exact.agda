@@ -30,14 +30,16 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
+import DASHI.Physics.Closure.NSTriadKNR650Rational345ComponentScalarRound829Exact as Table
+
 coherentWork345 : ℚ
-coherentWork345 = - ((+ 557627) / 125)
+coherentWork345 = Table.totalWork
 
 criticalProduction345 : ℚ
-criticalProduction345 = 0ℚ
+criticalProduction345 = Table.totalProduction
 
 criticalDissipation345 : ℚ
-criticalDissipation345 = 15834
+criticalDissipation345 = Table.totalDissipation
 
 canonicalSignedRate :
   ℚ → ℚ → ℚ → ℚ
@@ -51,7 +53,11 @@ canonical345RateExact :
   canonicalSignedRate
     coherentWork345 criticalProduction345 criticalDissipation345
   ≡ expectedRate345
-canonical345RateExact = solve []
+canonical345RateExact
+  rewrite Table.totalWorkExact
+        | Table.totalProductionExact
+        | Table.totalDissipationExact =
+  solve []
 
 expectedRate345Negative : expectedRate345 < 0ℚ
 expectedRate345Negative =
