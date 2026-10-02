@@ -19,6 +19,7 @@ targets=(
   DASHI/Moonshine/OggP31CompletionTenTwoSevenNineCrossPollinationExact.agda
   DASHI/Moonshine/TwoSevenNineNumberRoleHubExact.agda
   DASHI/Moonshine/OggSSP2BM24P276Completion10FrontierExact.agda
+  DASHI/Moonshine/OggSSP2BM24DuadPair24AuthorityExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -102,6 +103,9 @@ grep -q 'atlasCharacterDegreesCloseDegree' "${targets[16]}"
 grep -q 'shared276Scalar' "${targets[16]}"
 grep -q 'atlasP276DoesNotBecomeTate276ByDimension' "${targets[16]}"
 grep -q 'downstreamCompletion10To279' "${targets[16]}"
+grep -q 'carrierSameObjectPaidIsTrue' "${targets[17]}"
+grep -q 'tateSameObjectPaidIsFalse' "${targets[17]}"
+grep -q 'm24DuadAuthorityDoesNotCreateTwoBTateIdentification' "${targets[17]}"
 
 
 # Generic exceptional-residual target family + arithmetic acquisition wall.
