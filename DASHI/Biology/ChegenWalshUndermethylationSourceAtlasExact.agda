@@ -89,6 +89,31 @@ samMethyltransferases2021 =
     Source.publicAttribution
 
 
+
+walshSymptomsTraits2015 : Source.AttributedSource
+walshSymptomsTraits2015 =
+  Source.mkNoDOISource
+    "William J. Walsh"
+    "Symptoms & Traits: Undermethylated Depression"
+    "Walsh Research Institute presentation material"
+    "2015"
+    "https://www.walshinstitute.org/uploads/1/7/9/9/17997321/acn_depression_pp_drwalsh__11_15.pdf"
+    Source.institutionalSource
+    "Walsh-authored presentation source for the reported undermethylated-depression trait list, including strong will, OCD tendencies, high accomplishment, inner tension, competitive/perfectionistic traits, addictive tendency and seasonal allergies. This is not independent replication."
+    Source.publicAttribution
+
+walshMethylationBrainDisorders : Source.AttributedSource
+walshMethylationBrainDisorders =
+  Source.mkNoDOISource
+    "William J. Walsh"
+    "Methylation and Brain Disorders"
+    "Walsh Research Institute presentation material"
+    "publication year not established by atlas"
+    "https://www.walshinstitute.org/uploads/1/7/9/9/17997321/methylation_epigenetics_and_mental_health_by_william_walsh_phd.pdf"
+    Source.institutionalSource
+    "Walsh-authored presentation source reporting that methylation status was determined for approximately 30,000 patients over 30 years and advocating clinical interpretation of methylation status. It is retained as a source claim, not an independently validated cohort-design receipt."
+    Source.publicAttribution
+
 yoshikawaNakamuraYanai2019 : Source.AttributedSource
 yoshikawaNakamuraYanai2019 =
   Source.mkDOISource
@@ -150,6 +175,8 @@ canonicalChegenWalshUndermethylationSourceAtlas =
     ( chegenReel19
     ∷ walshInstituteMentalHealth
     ∷ walshInterviewThirtyThousand
+    ∷ walshSymptomsTraits2015
+    ∷ walshMethylationBrainDisorders
     ∷ mthfrPerspective2026
     ∷ samMethyltransferases2021
     ∷ yoshikawaNakamuraYanai2019
