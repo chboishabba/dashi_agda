@@ -25,7 +25,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DecisionMaxCutRound832Exact as Decision
 import DASHI.Physics.Closure.NSClayFacingBResearchCutExact as B
-import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as Cut
+import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
+import DASHI.Physics.Closure.NSTriadKNLuoOfficialContinuationClosureExact as Luo
 
 data BPostReserveLeaf : Set where
   b1PhysicalDFLExtraction : BPostReserveLeaf
@@ -46,8 +47,9 @@ bPostReserveLeafClosed b4StrictCriticalSignedOperator =
   B.bCriticalStrictSignedOperatorClosed
 bPostReserveLeafClosed b7LiteralR406SameObject =
   B.bLiteralR406SameObjectClosed
-bPostReserveLeafClosed bContinuation =
-  Cut.bLiteralClayTheoremClosed
+-- This is deliberately a distinct mathematical leaf rather than an alias for
+-- the final B theorem (which would make the max-cut circular).
+bPostReserveLeafClosed bContinuation = false
 
 bPostReserveLeafCount : Nat
 bPostReserveLeafCount = suc (suc (suc (suc (suc (suc zero)))))
@@ -70,6 +72,14 @@ b4CompilerAlreadyClosed = B.bB4SignedOperatorCompilerClosed
 b7CompilerAlreadyClosed : Bool
 b7CompilerAlreadyClosed = B.bB7R406DecompositionCompilerClosed
 
+standardLocalizedContinuationCompilerConstructed : Bool
+standardLocalizedContinuationCompilerConstructed =
+  Luo.officialLuoContinuationClosureConstructed
+
+continuumCompletionInputsInhabited : Bool
+continuumCompletionInputsInhabited =
+  Continuum.periodicContinuumBKMCompletionInputsInhabited
+
 genericAnalysisReimplementationRequired : Bool
 genericAnalysisReimplementationRequired =
   B.bGenericAnalysisReimplementationRequired
@@ -88,3 +98,12 @@ genericAnalysisReimplementationRequiredIsFalse = refl
 
 clayPromotion : Bool
 clayPromotion = false
+
+
+standardLocalizedContinuationCompilerConstructedIsTrue :
+  standardLocalizedContinuationCompilerConstructed ≡ true
+standardLocalizedContinuationCompilerConstructedIsTrue = refl
+
+continuumCompletionInputsInhabitedIsFalse :
+  continuumCompletionInputsInhabited ≡ false
+continuumCompletionInputsInhabitedIsFalse = refl
