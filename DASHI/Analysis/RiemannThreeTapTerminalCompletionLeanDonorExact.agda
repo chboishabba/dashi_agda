@@ -73,6 +73,10 @@ record ThreeTapTerminalCompletionReceipt : Set where
     j2PhaseCommit : String
     j2NormalizedCommit : String
     adaptiveJetCommit : String
+    adaptiveLocalDebtCommit : String
+    adaptiveOffOrdWeldCommit : String
+    adaptiveTerminalCommit : String
+    adaptiveGlobalCommit : String
     workflowCommit : String
 
 open ThreeTapTerminalCompletionReceipt public
@@ -104,7 +108,11 @@ currentThreeTapTerminalCompletionReceipt =
     "1e860f3f4588fea7d740e6569c95f475345dc46a"
     "65ade7a857a2523a8cd4bd73a55ae7178f7ebe03"
     "adf01fa75f7997caa745b0567d084792abe94f9b"
-    "5150b8c0b08751d951b8b7513046d4b33ae124af"
+    "9c6ffd83f988b18056c5c030b019f85066ebe1e8"
+    "440aab000cfe718b1014fe36c59a3a37ef0e362f"
+    "a31c6567f496dcebec3a451dca9c31529a3f97af"
+    "1254da6de2c7f4563fc9ea1b09c0f79f0c52530c"
+    "cdc3de715dadf2697071a0f77d519ada777c7a22"
 
 record ThreeTapTerminalCompletionBoundary : Set where
   constructor three-tap-terminal-completion-boundary
@@ -130,6 +138,10 @@ record ThreeTapTerminalCompletionBoundary : Set where
     transformedJ2PhaseNormalFormSourceWritten : Bool
     transformedJ2ExceptionalStrengthClassificationSourceWritten : Bool
     transformedAdaptiveDegreeSixJetSourceWritten : Bool
+    transformedFiniteAdaptiveLocalDebtSourceWritten : Bool
+    transformedOffOrdCarrierWeldSourceWritten : Bool
+    transformedCutoffFreeLocalSlackSourceWritten : Bool
+    transformedCutoffFreeTerminalScalarSourceWritten : Bool
     transformedJ2PolynomialSourceWritten : Bool
     signedFifthRouteTargetsCanonicalMarginSourceWritten : Bool
     transformedNearLineJ2J4CoordinatesSourceWritten : Bool
@@ -175,6 +187,14 @@ record ThreeTapTerminalCompletionBoundary : Set where
       transformedJ2ExceptionalStrengthClassificationSourceWritten ≡ true
     adaptiveDegreeSixJetPaid :
       transformedAdaptiveDegreeSixJetSourceWritten ≡ true
+    finiteAdaptiveLocalDebtPaid :
+      transformedFiniteAdaptiveLocalDebtSourceWritten ≡ true
+    offOrdCarrierWeldPaid :
+      transformedOffOrdCarrierWeldSourceWritten ≡ true
+    cutoffFreeLocalSlackPaid :
+      transformedCutoffFreeLocalSlackSourceWritten ≡ true
+    cutoffFreeTerminalScalarPaid :
+      transformedCutoffFreeTerminalScalarSourceWritten ≡ true
     j2PolynomialPaid :
       transformedJ2PolynomialSourceWritten ≡ true
     signedFifthCommonConsumerPaid :
@@ -218,16 +238,16 @@ canonicalThreeTapTerminalCompletionBoundary =
     true true
     true true true
     true true true
-    true true true false true true true true true true true true true true
+    true true true false true true true true true true true true true true true true true true
     true true
     false true false false false
     false false false
 
-    refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl
     refl refl refl
 
-    "The exact transformed selected-zero target, physical/normalized projective rescale, actual transformed endpoint projective-profile objects, support-envelope M6/M8 bounds, exact physical/normalized M6/M8 rescaling, adaptive alpha/q local domain, complete mixed eighth-order remainder, normalized J2 phase normal form, unique exceptional-strength classification, and the exact transformed degree-six jet with its live M2 term are source-written. Exact projective-shift commutation remains intentionally unproved and unnecessary. The transformed signed J2 coordinate is now an exact epsilon-polynomial with zero baseline and its sign problem has been reduced to normalized radius one. Remaining: weld the adaptive transformed degree-six kernel/debt to the actual off-ordinate explicit-formula source, finish the finite local/far/exhaustion budget with the live M2 branch, determine the sign of the explicit normalized J2 phase coefficients, then prove or refute strict completed terminal positivity at resonance."
+    "The exact transformed selected-zero target, physical/normalized projective rescale, actual transformed endpoint projective-profile objects, support-envelope M6/M8 bounds, exact physical/normalized M6/M8 rescaling, adaptive alpha/q local domain, complete mixed eighth-order remainder, normalized J2 phase normal form, unique exceptional-strength classification, and the exact transformed degree-six jet with its live M2 term are source-written. Exact projective-shift commutation remains intentionally unproved and unnecessary. The transformed signed J2 coordinate is now an exact epsilon-polynomial with zero baseline and its sign problem has been reduced to normalized radius one. The transformed off-ordinate carrier is now welded to the reflection-paired Zeta23 projective channel, the finite adaptive local debt is source-written, and a canonical capture index removes the artificial cutoff from the transformed local slack and terminal scalar. Remaining mathematics is no longer carrier architecture: determine/sign the live M2/M4/M6 adaptive jet (equivalently the explicit normalized J2 phase polynomial at leading order), evaluate the completed resonance scalar, and prove or refute the first nonzero near-line terminal coefficient."
     "The physical shift log 2 is not O(1) in the normalized quartic variable: it is B(t)=(t/16)log2 and already exceeds pi+1 for t>=200. Reusing the original support/M6/M8 constants would be a same-object error. Also, projectiveProfile(T_eps g) must not be identified with T_eps(projectiveProfile g) without a theorem; Lean now records that commutation only as an unpaid proposition."
     "If one-scale three-tap fails, reuse the same normalized-shift and moment-transport interfaces for the log2/log3 two-scale operator; do not create a parallel budget formalism."
     "Keep the signed fifth-cap/RvM correlation route independent.  It targets the same canonical high cut and remains a separate analytic producer."
