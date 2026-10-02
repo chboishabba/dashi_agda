@@ -19,6 +19,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeIntrinsicOperational
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -133,18 +135,18 @@ intrinsicExecutionSound {result = result} refl =
 ------------------------------------------------------------------------
 
 positiveMarginToOne :
-  ∀ {State Symbol : Set} {k : Agda.Builtin.Nat.Nat}
-    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
-  Margin.HeadMargin (Agda.Builtin.Nat.suc k) cells →
-  Margin.HeadMargin (Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero) cells
-positiveMarginToOne {k = Agda.Builtin.Nat.zero} margin = margin
-positiveMarginToOne {k = Agda.Builtin.Nat.suc k} margin =
+  ∀ {State Symbol : Set} {k : Nat}
+    {cells : List (Local.TapeCell State Symbol)} →
+  Margin.HeadMargin (suc k) cells →
+  Margin.HeadMargin (suc zero) cells
+positiveMarginToOne {k = zero} margin = margin
+positiveMarginToOne {k = suc k} margin =
   positiveMarginToOne (Margin.weakenMargin margin)
 
 record IntrinsicExecutedStepWithMargin
     (machine : Local.ConcreteTapeMachine)
     (before : Local.TapeRow machine)
-    (k : Agda.Builtin.Nat.Nat) : Set₁ where
+    (k : Nat) : Set₁ where
   constructor intrinsic-executed-step-with-margin
   field
     after : Local.TapeRow machine
@@ -157,7 +159,7 @@ open IntrinsicExecutedStepWithMargin public
 executeUniqueMarginRowWithDecay :
   ∀ {machine row k} →
   (unique : WF.ExactlyOneHead (Local.cells row)) →
-  (margin : Margin.HeadMargin (Agda.Builtin.Nat.suc k) (Local.cells row)) →
+  (margin : Margin.HeadMargin (suc k) (Local.cells row)) →
   Maybe (IntrinsicExecutedStepWithMargin machine row k)
 executeUniqueMarginRowWithDecay {machine} {row} {k} unique margin
     with Margin.interiorFromUniqueMargin unique (positiveMarginToOne margin)
