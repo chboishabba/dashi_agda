@@ -189,3 +189,25 @@ The remaining sign bridge is thus not merely "prove Q_E < 0". It is:
 
 This firewall does not change the terminal theorem:
 if the literal R136 continuum trace itself is negative on the reconstructed vacuum branch, the existing compiler still gives negative active stress and positive matter-driven FLRW acceleration for positive gravitational prefactor.
+
+
+### Sign-orientation consequence
+
+The convention firewall now proves strict sign transport through the positive partition function:
+
+    W_Z < 0  =>  W_logZ < 0  =>  W_Gamma > 0,
+    W_Z > 0  =>  W_logZ > 0  =>  W_Gamma < 0,
+
+where (W_Gamma=-W_logZ) for (Gamma=-log Z).
+
+Consequently the vacuum-dominated finite balance theorem has a second, physically important corollary:
+
+    c_V > 0
+    and
+    N_E+N_R+N_B >= 0
+      =>
+    W_Z < 0
+      =>
+    W_Gamma > 0.
+
+So this particular source-sign pattern does NOT automatically support the negative stress trace required by the compiled vacuum acceleration branch if R136 uses the standard matter-effective-action orientation. The finite-to-R136 convention weld is now a mandatory same-object theorem rather than a bookkeeping choice.
