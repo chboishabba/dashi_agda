@@ -41,6 +41,13 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1FiniteEuclideanAttachmentExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1LocalizedD1CovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1R143LocalizedCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223SourceMetricVariationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyConventionAwareSectorSignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1WholeLatticeLocalizedMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136FiniteWeylConventionWeldExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223R136SignMaxCutExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -110,7 +117,14 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyE1FiniteEuclideanAttachmentExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1LocalizedD1CovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1R143LocalizedCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223SourceMetricVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyConventionAwareSectorSignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1WholeLatticeLocalizedMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136FiniteWeylConventionWeldExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223R136SignMaxCutExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
