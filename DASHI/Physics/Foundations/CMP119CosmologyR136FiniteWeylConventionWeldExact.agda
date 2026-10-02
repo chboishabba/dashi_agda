@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CMP119CosmologyR136FiniteWeylConventionWeldExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 
