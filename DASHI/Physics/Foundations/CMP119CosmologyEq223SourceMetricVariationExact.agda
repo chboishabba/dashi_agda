@@ -4,11 +4,12 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _+_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
 import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact as Sector
+import DASHI.Physics.Foundations.CMP119CosmologyVacuumSectorFactorizationExact as VacuumFactor
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
 
@@ -189,3 +190,50 @@ anonymousERBVCallbacksEliminated = true
 
 vacuumConfigurationIndependenceStructural : Bool
 vacuumConfigurationIndependenceStructural = true
+
+
+eq223VacuumTraceCoefficient :
+  ∀ {Density Background Fluctuation
+      Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm Vacuum
+      Configuration scale source}
+    (realization :
+      Eq223SourceMetricVariationRealization
+        {Density} {Background} {Fluctuation}
+        {Action} {WilsonTerm} {SmallFieldTerm}
+        {RTerm} {BoundaryTerm} {Vacuum}
+        source Configuration scale) →
+  ℚ
+eq223VacuumTraceCoefficient {source = source} {scale = scale} realization =
+  (vacuumMetricVariation realization
+      (Raw.vacuumEnergy source scale) K.component00
+    +
+    vacuumMetricVariation realization
+      (Raw.vacuumEnergy source scale) K.component11)
+  +
+  (vacuumMetricVariation realization
+      (Raw.vacuumEnergy source scale) K.component22
+    +
+    vacuumMetricVariation realization
+      (Raw.vacuumEnergy source scale) K.component33)
+
+eq223VacuumTraceConstant :
+  ∀ {Density Background Fluctuation
+      Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm Vacuum
+      Configuration scale source}
+    (realization :
+      Eq223SourceMetricVariationRealization
+        {Density} {Background} {Fluctuation}
+        {Action} {WilsonTerm} {SmallFieldTerm}
+        {RTerm} {BoundaryTerm} {Vacuum}
+        source Configuration scale) →
+  VacuumFactor.VacuumTraceConstant
+    (sourceCompleteFiniteMetricVariation realization)
+eq223VacuumTraceConstant realization = record
+  { VacuumFactor.VacuumTraceConstant.coefficient =
+      eq223VacuumTraceCoefficient realization
+  ; VacuumFactor.VacuumTraceConstant.vacuumTraceConstant =
+      λ configuration → refl
+  }
+
+vacuumSignCoefficientNowLiteralEq223Derivative : Bool
+vacuumSignCoefficientNowLiteralEq223Derivative = true
