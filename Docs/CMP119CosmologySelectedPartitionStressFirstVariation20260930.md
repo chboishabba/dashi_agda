@@ -240,3 +240,40 @@ This materially narrows the previous finite->R136 convention firewall:
 - any overall (2/sqrt{|g|}), covariant-vs-contravariant metric normalization, and Euclidean-to-Lorentzian convention must still be fixed in the representation/continuation weld.
 
 Consequently a source-side sector balance yielding (DZ<0) yields (D Gamma>0) at finite cutoff. It cannot support the terminal negative-R136-trace acceleration branch unless the remaining completion/metric convention theorem introduces a justified orientation change. Such a change may not be chosen ad hoc.
+
+
+### Correct-sign sector branch for Gamma = -log Z
+
+The mirror finite sign theorem is now also explicit.
+
+If the source establishes
+
+    c_V < 0
+    and
+    N_E + N_R + N_B <= 0,
+
+then, using Z>0,
+
+    N_V < 0,
+    N_nonWilson < 0,
+    sum_mu D_mu Z > 0,
+    D_Gamma < 0.
+
+This is the finite sign pattern compatible with the existing marked-OS vacuum acceleration compiler, provided the remaining finite-expectation-to-R136 completion theorem preserves the same stress/readout orientation.
+
+Conversely the previously considered branch
+
+    c_V > 0,
+    N_E + N_R + N_B >= 0
+
+gives D_Gamma > 0 and therefore has the opposite effective-action Weyl sign.
+
+Thus the source-sign problem is now genuinely sectorwise and convention-correct:
+
+    accelerating-sign candidate:
+      c_V < 0 plus sufficiently nonpositive E/R/B balance;
+
+    wrong-sign branch:
+      c_V > 0 plus nonnegative E/R/B balance.
+
+Neither sector inequality is currently source-proved by the raw CMP119 carrier.
