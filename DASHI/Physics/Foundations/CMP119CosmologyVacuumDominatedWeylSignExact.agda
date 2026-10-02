@@ -24,7 +24,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyVacuumDominatedWeylSignExact whe
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -65,6 +65,9 @@ vacuumNumeratorPositive measure d partition scaleLaw constant coefficientPositiv
         (λ value → 0ℚ < value)
         (Partition.partitionIsDensityIntegral partition)
         (Partition.partitionPositive partition)
+
+    instance
+      coefficientPositiveI = positive coefficientPositive
 
     scaledPositive :
       Vacuum.coefficient constant * 0ℚ
@@ -108,35 +111,16 @@ erbNonnegativeAndVacuumPositiveGivePositiveFourSectorBalance :
         + Sector.vacuumNumerator measure d))
 erbNonnegativeAndVacuumPositiveGivePositiveFourSectorBalance
     measure d erbNonnegative vacuumPositive =
-  let
-    vacuumBelowTotal :
-      Sector.vacuumNumerator measure d
-      ≤
-      ((Sector.regularNumerator measure d
-        + Sector.rOperationNumerator measure d)
-        + (Sector.boundaryNumerator measure d
-          + Sector.vacuumNumerator measure d))
-    vacuumBelowTotal =
-      subst
-        (λ left →
-          left
-          ≤
-          ((Sector.regularNumerator measure d
-            + Sector.rOperationNumerator measure d)
-            + (Sector.boundaryNumerator measure d
-              + Sector.vacuumNumerator measure d)))
-        (Ring.solve-∀ (Sector.vacuumNumerator measure d))
-        (subst
-          (λ right →
-            0ℚ + Sector.vacuumNumerator measure d ≤ right)
-          (Ring.solve-∀
-            (Sector.regularNumerator measure d)
-            (Sector.rOperationNumerator measure d)
-            (Sector.boundaryNumerator measure d)
-            (Sector.vacuumNumerator measure d))
-          (ℚP.+-mono-≤ erbNonnegative ℚP.≤-refl))
-  in
-  ℚP.<-≤-trans vacuumPositive vacuumBelowTotal
+  subst
+    (λ value → 0ℚ < value)
+    (Ring.solve-∀
+      (Sector.regularNumerator measure d)
+      (Sector.rOperationNumerator measure d)
+      (Sector.boundaryNumerator measure d)
+      (Sector.vacuumNumerator measure d))
+    (ℚP.+-mono-≤-<
+      erbNonnegative
+      vacuumPositive)
 
 vacuumDominatedSourceForcesNegativeFiniteWeylResponse :
   ∀ {Configuration}
