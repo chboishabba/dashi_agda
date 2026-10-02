@@ -47,6 +47,8 @@ import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact as CDAudit
 import DASHI.Physics.Closure.NSTriadKNR650SignedComparableReserveRound823Exact as Reserve823
 import DASHI.Physics.Closure.NSTriadKNR650PhysicalCCGradedReserveRound824Exact as CC824
 import DASHI.Physics.Closure.NSTriadKNR650PhysicalReserveFeasibilityRound825Exact as Feas825
+import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotNormalizationRound829Exact as R829
+import DASHI.Physics.Closure.NSTriadKNR650Rational345ShortTimeRound830Exact as R830
 
 data ProofLane : Set where
   laneA laneB laneC laneD : ProofLane
@@ -362,3 +364,58 @@ bExactRealFourierSparseNegativeRateCandidateIsTrue = refl
 bExactRealFourierSparseIntegratedR408CounterexampleCertifiedIsFalse :
   bExactRealFourierSparseIntegratedR408CounterexampleCertified ≡ false
 bExactRealFourierSparseIntegratedR408CounterexampleCertifiedIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- R828--R830 / RATIONAL 3-4-5 DECISION ROUTE
+--
+-- R828 removes the sqrt(2) obstruction from every active initial helical
+-- calculation by moving the sparse witness to a 3-4-5 Fourier triad.
+-- R829 closes the exact R815 scalar normalization once the concrete
+-- R230/R692/R744 values are identified. R830 closes the rational horizon
+-- and negative integral-upper-bound arithmetic. The two remaining physical
+-- leaves are deliberately NOT represented as closed:
+--
+--   (1) repository-native evaluation of the selected 3-4-5 snapshot against
+--       the actual R230/R692/R744 owners;
+--   (2) real finite-dimensional ODE existence/continuity plus transport of
+--       that same selected scalar over the certified short interval.
+--
+-- A successful pair of proofs refutes only universal R823 B-RESERVE.
+------------------------------------------------------------------------
+
+bR829CanonicalNormalizationArithmeticClosed : Bool
+bR829CanonicalNormalizationArithmeticClosed =
+  R829.round829R815NormalizationArithmeticClosed
+
+bR829ConcreteSameObjectSnapshotEvaluationClosed : Bool
+bR829ConcreteSameObjectSnapshotEvaluationClosed =
+  R829.round829R230R692R744ConcreteSameObjectEvaluationClosed
+
+bR830ExactShortTimeArithmeticClosed : Bool
+bR830ExactShortTimeArithmeticClosed =
+  R830.round830ExactHorizonArithmeticClosed
+
+bR830RealFiniteODEContinuityClosed : Bool
+bR830RealFiniteODEContinuityClosed =
+  R830.round830RealFiniteODEExistenceContinuityFormalized
+
+bR828RouteRefutesUniversalR823ReserveInKernel : Bool
+bR828RouteRefutesUniversalR823ReserveInKernel =
+  R830.round830UniversalR823ReserveRefutedInKernel
+
+bR829CanonicalNormalizationArithmeticClosedIsTrue :
+  bR829CanonicalNormalizationArithmeticClosed ≡ true
+bR829CanonicalNormalizationArithmeticClosedIsTrue = refl
+
+bR829ConcreteSameObjectSnapshotEvaluationClosedIsFalse :
+  bR829ConcreteSameObjectSnapshotEvaluationClosed ≡ false
+bR829ConcreteSameObjectSnapshotEvaluationClosedIsFalse = refl
+
+bR830ExactShortTimeArithmeticClosedIsTrue :
+  bR830ExactShortTimeArithmeticClosed ≡ true
+bR830ExactShortTimeArithmeticClosedIsTrue = refl
+
+bR830RealFiniteODEContinuityClosedIsFalse :
+  bR830RealFiniteODEContinuityClosed ≡ false
+bR830RealFiniteODEContinuityClosedIsFalse = refl
