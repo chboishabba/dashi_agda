@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_; -_)
 import Data.Integer.Properties as ℤP
 open import Data.Rational.Base using (ℚ; normalize)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Foundations.BinaryFloatingPoint as Binary
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
@@ -77,7 +78,7 @@ applySign Anchor.positiveSign z = z
 applySignFlip :
   (s : Anchor.TekumSign) (z : ℤ) →
   applySign (Anchor.flipSign s) z ≡ ℤ.- (applySign s z)
-applySignFlip Anchor.negativeSign z = ℤP.neg-involutive z
+applySignFlip Anchor.negativeSign z = sym (ℤP.neg-involutive z)
 applySignFlip Anchor.zeroSign z = refl
 applySignFlip Anchor.positiveSign z = refl
 
