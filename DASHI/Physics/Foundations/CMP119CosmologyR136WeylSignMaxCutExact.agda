@@ -113,6 +113,35 @@ positiveWeightedNonWilsonNumeratorForcesNegativeWeylResponse
         measure d laws referenceFixed))
     (ℚP.neg-mono-< numeratorPositive)
 
+
+negativeWeightedNonWilsonNumeratorForcesPositiveWeylResponse :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : RationalWeylSignIntegrationLaws measure)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  weightedNonWilsonWeylNumerator measure d < 0ℚ →
+  0ℚ < Weyl.fourDiagonalPartitionDerivativeSum measure d
+negativeWeightedNonWilsonNumeratorForcesPositiveWeylResponse
+    measure d laws referenceFixed numeratorNegative =
+  let
+    negPositive :
+      - 0ℚ < - weightedNonWilsonWeylNumerator measure d
+    negPositive =
+      ℚP.neg-antimono-< numeratorNegative
+  in
+  subst
+    (λ value → 0ℚ < value)
+    (sym
+      (fixedHaarResponseIsNegativeWeightedNonWilsonNumerator
+        measure d laws referenceFixed))
+    (subst
+      (λ left →
+        left < - weightedNonWilsonWeylNumerator measure d)
+      (Ring.solve [])
+      negPositive)
+
 classicalWilsonSectorAlreadyCancelledFromSignNumerator : Bool
 classicalWilsonSectorAlreadyCancelledFromSignNumerator = true
 
