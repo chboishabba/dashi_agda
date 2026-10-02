@@ -152,6 +152,77 @@ module _
       (asTerminalStressCovarianceMaxCut producers)
       positiveRho
 
+  pinnedLocalCVacuum :
+    (producers : PinnedLocalCTerminalProducers) →
+    Vacuum.VacuumLikeLorentzianStress
+  pinnedLocalCVacuum producers = record
+    { Vacuum.VacuumLikeLorentzianStress.stress =
+        BoostLocalC.lorentzianIsotropicStress
+          (boostCovariance producers)
+    ; Vacuum.VacuumLikeLorentzianStress.pressureIsMinusRho =
+        pinnedLocalCTerminalForcesVacuumEquationOfState producers
+    }
+
+  pinnedLocalCLiteralContinuumTraceNegativeGivesNegativeActive :
+    (producers : PinnedLocalCTerminalProducers) →
+    Continuum.literalStressFourDiagonalPairing
+      recovery selected directions < 0ℚ →
+    Vacuum.activeStress
+      (BoostLocalC.lorentzianIsotropicStress
+        (boostCovariance producers))
+    < 0ℚ
+  pinnedLocalCLiteralContinuumTraceNegativeGivesNegativeActive
+      producers literalTraceNegative =
+    let
+      terminal =
+        asTerminalStressCovarianceMaxCut producers
+
+      sameTrace :
+        Vacuum.trace
+          (BoostLocalC.lorentzianIsotropicStress
+            (boostCovariance producers))
+        ≡
+        Continuum.literalStressFourDiagonalPairing
+          recovery selected directions
+      sameTrace =
+        Terminal.sameObjectEuclideanLorentzianTrace terminal
+
+      lorentzianTraceNegative :
+        Vacuum.trace
+          (BoostLocalC.lorentzianIsotropicStress
+            (boostCovariance producers))
+        < 0ℚ
+      lorentzianTraceNegative =
+        subst
+          (λ value → value < 0ℚ)
+          (sym sameTrace)
+          literalTraceNegative
+    in
+    Vacuum.vacuumTraceNegativeImpliesActiveNegative
+      (pinnedLocalCVacuum producers)
+      lorentzianTraceNegative
+
+  pinnedLocalCLiteralContinuumTraceNegativeGivesPositiveMatterAcceleration :
+    (positiveGravityFactor : ℚ) →
+    (producers : PinnedLocalCTerminalProducers) →
+    0ℚ < positiveGravityFactor →
+    Continuum.literalStressFourDiagonalPairing
+      recovery selected directions < 0ℚ →
+    0ℚ <
+      Vacuum.matterAccelerationContribution
+        positiveGravityFactor
+        (BoostLocalC.lorentzianIsotropicStress
+          (boostCovariance producers))
+  pinnedLocalCLiteralContinuumTraceNegativeGivesPositiveMatterAcceleration
+      positiveGravityFactor producers factorPositive literalTraceNegative =
+    Vacuum.negativeActiveStressGivesPositiveMatterAcceleration
+      positiveGravityFactor
+      (BoostLocalC.lorentzianIsotropicStress
+        (boostCovariance producers))
+      factorPositive
+      (pinnedLocalCLiteralContinuumTraceNegativeGivesNegativeActive
+        producers literalTraceNegative)
+
   allDownstreamAntigravityAlgebraCompiled : Bool
   allDownstreamAntigravityAlgebraCompiled = true
 
