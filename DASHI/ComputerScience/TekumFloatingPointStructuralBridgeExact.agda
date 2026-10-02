@@ -16,6 +16,21 @@ tekumScaledExactFormat =
     Binary.scaleTransportRole
     Binary.localRefinementRole
 
+tekumOrientationRoleMatchesBF16SignRole :
+  Generic.orientationRole tekumScaledExactFormat
+  ≡ Binary.bf16SignRole
+tekumOrientationRoleMatchesBF16SignRole = refl
+
+tekumScaleRoleMatchesBF16ExponentRole :
+  Generic.scaleRole tekumScaledExactFormat
+  ≡ Binary.bf16ExponentRole
+tekumScaleRoleMatchesBF16ExponentRole = refl
+
+tekumRefinementRoleMatchesBF16FractionRole :
+  Generic.refinementRole tekumScaledExactFormat
+  ≡ Binary.bf16FractionRole
+tekumRefinementRoleMatchesBF16FractionRole = refl
+
 -- A Tekum width n devotes three trits to regime.  The remaining n-3 payload
 -- is allocated between explicit exponent and fraction by the regime.
 record TekumPayloadAllocation (n : Nat) : Set where
@@ -30,6 +45,7 @@ record TekumPayloadAllocation (n : Nat) : Set where
       exponentWidth ≡ Regime.exponentCount regime
     payloadConserved :
       exponentWidth + fractionWidth ≡ payloadWidth
+open TekumPayloadAllocation public
 
 record FloatTekumStructuralComparison : Set where
   constructor floatTekumStructuralComparison
@@ -73,9 +89,14 @@ outerRegimeAtWidth8 =
     refl
 
 centralRegimeGivesAllFivePayloadTritsToFraction :
-  TekumPayloadAllocation.fractionWidth centralRegimeAtWidth8 ≡ 5
+  fractionWidth centralRegimeAtWidth8 ≡ 5
 centralRegimeGivesAllFivePayloadTritsToFraction = refl
 
 outerRegimeGivesAllFivePayloadTritsToExponent :
-  TekumPayloadAllocation.exponentWidth outerRegimeAtWidth8 ≡ 5
+  exponentWidth outerRegimeAtWidth8 ≡ 5
 outerRegimeGivesAllFivePayloadTritsToExponent = refl
+
+centralAndOuterHaveSamePayloadWidth :
+  payloadWidth centralRegimeAtWidth8
+  ≡ payloadWidth outerRegimeAtWidth8
+centralAndOuterHaveSamePayloadWidth = refl
