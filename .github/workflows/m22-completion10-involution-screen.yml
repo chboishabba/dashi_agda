@@ -10,6 +10,8 @@ on:
       - 'scripts/check_m22_completion10_involution_screen.sh'
       - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
       - 'scripts/render_m22_completion10_runtime_certificate.py'
+      - 'scripts/check_twob_pure_klein_m24_s3_local_group.sh'
+      - 'scripts/twob_pure_klein_m24_s3_local_group.g'
       - 'scripts/m24_276_to_m22_f2_composition_screen.g'
       - '.github/workflows/m22-completion10-involution-screen.yml'
   pull_request:
@@ -51,6 +53,12 @@ jobs:
           set -euo pipefail
           bash scripts/check_m24_276_to_m22_f2_composition_screen.sh
 
+      - name: Run sourced 2B-pure M24 x S3 local quotient
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_twob_pure_klein_m24_s3_local_group.sh
+
       - name: Render typed Agda runtime certificate
         shell: bash
         run: |
@@ -87,5 +95,6 @@ jobs:
           path: |
             build/m22_completion10_involution_screen.json
             build/m24_276_to_m22_f2_composition_screen.json
+            build/twob_pure_klein_m24_s3_local_group.json
             build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
           if-no-files-found: warn
