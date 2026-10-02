@@ -75,19 +75,19 @@ module Evaluate
   fibre₆ :
     Sparse.filterSelected Snapshot.mixedCellActive
       (Output.physicalOutputFiber 4 Active.k₆)
-    ≡ Cells.t₆a ∷ Cells.t₆b ∷ []
+    ≡ Cells.t₆b ∷ Cells.t₆a ∷ []
   fibre₆ = refl
 
   fibre₇ :
     Sparse.filterSelected Snapshot.mixedCellActive
       (Output.physicalOutputFiber 4 Active.k₇)
-    ≡ Cells.t₇a ∷ Cells.t₇b ∷ []
+    ≡ Cells.t₇b ∷ Cells.t₇a ∷ []
   fibre₇ = refl
 
   fibre₈ :
     Sparse.filterSelected Snapshot.mixedCellActive
       (Output.physicalOutputFiber 4 Active.k₈)
-    ≡ Cells.t₈a ∷ Cells.t₈b ∷ []
+    ≡ Cells.t₈b ∷ Cells.t₈a ∷ []
   fibre₈ = refl
 
   forcing₁ :
