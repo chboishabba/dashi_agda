@@ -20,7 +20,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE4ClusteringExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _*_; _≤_)
 
 import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274Exact as R274
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
