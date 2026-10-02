@@ -13,7 +13,7 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345CriticalFoldsRound847Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
@@ -21,6 +21,7 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSnapshotRound836Exact as Snapshot
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ActiveHelicalScalarsRound835Exact as Active
@@ -104,7 +105,7 @@ module Evaluate
     cong
       (λ tail →
         (Fold.dyadicCriticalWeight mode * C3.normSquared I mode)
-          * DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier.complex3NormSquared
+          * L2.complex3NormSquared
               (Audit.velocity system mode)
         + tail)
       (dissipationFoldPrune rest)
@@ -119,7 +120,7 @@ module Evaluate
     where
     headZero :
       (Fold.dyadicCriticalWeight mode * C3.normSquared I mode)
-        * DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier.complex3NormSquared
+        * L2.complex3NormSquared
             (Audit.velocity system mode)
       ≡ 0ℚ
     headZero rewrite velocityZero mode active = refl
