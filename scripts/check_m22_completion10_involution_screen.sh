@@ -42,6 +42,11 @@ for rep in data["representations"]:
         assert row["matches_J2x5"] == (
             row["rank_g_minus_i"] == 5 and row["fixed_dimension"] == 5
         )
+        if row["matches_J2x5"]:
+            assert row["pair_swap_basis_rank"] == 10
+            assert row["pair_swap_basis_verified"] is True
+        else:
+            assert row["pair_swap_basis_verified"] is False
         rows.append((rep["repname"], row))
 
 matches = [(name, row) for name, row in rows if row["matches_J2x5"]]
@@ -55,6 +60,7 @@ for name, row in rows:
         "rank(g-I)=", row["rank_g_minus_i"],
         "fixdim=", row["fixed_dimension"],
         "J2^5=", row["matches_J2x5"],
+        "five-pair-basis=", row["pair_swap_basis_verified"],
     )
 print("J2^5 matches:", len(matches))
 PY
