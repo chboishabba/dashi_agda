@@ -69,6 +69,8 @@ record Fe5GeTe2SourceReplay : Set where
     chargeOrderReported : Bool
     bandFoldingWindowBelowFermiMeV : Nat
     logarithmicTemperatureDependenceOfSpectralWeightReported : Bool
+    flatBandNestingVectorReported : Bool
+    lindhardResponseCalculationSupportsNestingInterpretation : Bool
     phenomenologicalKondoLikeCoherentFermiLiquidSuggested : Bool
     interactionDrivenFlatBandInterpretationAttributed : Bool
     secondarySummaryReportsCoherenceToApproxKelvin : Nat
@@ -91,6 +93,8 @@ canonicalFe5GeTe2SourceReplay =
     "sqrt(3) x sqrt(3) R30-degree charge order"
     true
     30
+    true
+    true
     true
     true
     true
