@@ -12,10 +12,13 @@ import DASHI.Physics.Dynamics.SingularBasinReductionExact as SBR
 -- Physical Review Letters 137, 147202 (2026),
 -- DOI 10.1103/jtkh-9lz5.
 --
--- This module records the selected equations and the exact formal obligations
+-- The authors' public reproduction repository is:
+--   hassanalkhayuon/Singular_Funnels
+--
+-- This module records selected equations and the exact formal obligations
 -- needed to promote a concrete analytic/numerical model into the generic basin
--- obstruction layer.  It does NOT manufacture the paper's analytical basin
--- theorem from source metadata.
+-- obstruction layer. It does NOT manufacture the paper's analytical basin
+-- theorem from citation metadata.
 ------------------------------------------------------------------------
 
 record ScalarOps : Set₁ where
@@ -38,6 +41,12 @@ record PitchforkParameters (O : ScalarOps) : Set where
 
 open PitchforkParameters public
 
+-- Public source implementation Normal_forms/Normal_form_figure.m:
+--
+--   dx/dt  = x * (mu - x^2)
+--   dmu/dt = epsilon * (-mu + a + b*x)
+--
+-- Written with only binary subtraction/addition below.
 pitchforkFast :
   (O : ScalarOps) →
   Scalar O →
@@ -55,18 +64,15 @@ pitchforkSlow :
   Scalar O
 pitchforkSlow O P x mu =
   let open ScalarOps O
-  in epsilon P * (((a P * x) - b P) - mu)
+  in epsilon P * (((zero - mu) + a P) + (b P * x))
 
 ------------------------------------------------------------------------
 -- Adaptive active-rotator source surface.
 --
--- The paper studies:
+-- Public source implementation one_osc_singular_basin.ode:
 --
 --   dphi/dt = omega + mu - sin(phi)
 --   dmu/dt  = epsilon * (-mu + eta * (1 - sin(phi + alpha)))
---
--- Negation is represented as zero - x so no independent unary operator is
--- required by the carrier.
 ------------------------------------------------------------------------
 
 record TrigScalarOps : Set₁ where
@@ -114,7 +120,7 @@ activeRotatorSlow O P phi mu =
 --
 -- A concrete discretisation or exact analytic development can instantiate this
 -- only after supplying its own full/reduced basins and a literal mismatch
--- witness.  Once supplied, the generic theorem immediately yields failure of
+-- witness. Once supplied, the generic theorem immediately yields failure of
 -- basin preservation.
 ------------------------------------------------------------------------
 
@@ -146,6 +152,7 @@ record SingularBasinSourceReceipt : Set where
     journal : String
     doi : String
     publicationDate : String
+    publicCodeRepository : String
     sourceStudiesPitchfork : Bool
     sourceStudiesAdaptiveRotator : Bool
     sourceStudiesAdaptiveRotatorNetwork : Bool
@@ -161,6 +168,7 @@ canonicalYanchukReceipt =
     "Physical Review Letters 137, 147202"
     "10.1103/jtkh-9lz5"
     "2026-09-28"
+    "https://github.com/hassanalkhayuon/Singular_Funnels"
     true
     true
     true
