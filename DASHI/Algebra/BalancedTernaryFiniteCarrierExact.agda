@@ -1,14 +1,18 @@
 module DASHI.Algebra.BalancedTernaryFiniteCarrierExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin; zero; suc)
+open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Vec using (Vec; []; _∷_)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Mathematics.NumberTheory.FiniteProductCardinalityExact as Cardinality
+import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
+import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 
 ------------------------------------------------------------------------
 -- Exact finite-carrier normal form:
@@ -64,15 +68,22 @@ toFromFin3 (i ∷ is)
         | toFromFin3 is = refl
 
 canonicalFin3VectorEnumeration :
-  (n : Nat) → _
+  (n : Nat) → List (Vec (Fin 3) n)
 canonicalFin3VectorEnumeration n =
   Product.uniqueFinVectorPower 3 n
 
 canonicalFin3VectorEnumerationComplete :
   ∀ {n} (v : Vec (Fin 3) n) →
-  v Data.List.Membership.Propositional.∈ canonicalFin3VectorEnumeration n
+  v ∈ canonicalFin3VectorEnumeration n
 canonicalFin3VectorEnumerationComplete =
   Product.uniqueFinVectorPowerComplete
+
+canonicalFin3VectorEnumerationLength :
+  (n : Nat) →
+  Reindex.listLength (canonicalFin3VectorEnumeration n)
+  ≡ Hecke.powNat 3 n
+canonicalFin3VectorEnumerationLength =
+  Cardinality.uniqueFinVectorPowerLength 3
 
 record BalancedTernaryFiniteCarrierBoundary : Set where
   constructor balancedTernaryFiniteCarrierBoundary
@@ -80,7 +91,7 @@ record BalancedTernaryFiniteCarrierBoundary : Set where
     tritFin3BijectionPaid : Bool
     vectorBijectionPaid : Bool
     canonicalUniqueEnumerationReused : Bool
-    exactPowerThreeCardinalityOwnerReused : Bool
+    exactPowerThreeCardinalityPaid : Bool
     positionalIntegerInjectivityPaidByCardinalityAlone : Bool
 
 canonicalBalancedTernaryFiniteCarrierBoundary :
