@@ -15,6 +15,7 @@ import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as IRGCPacket
 import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDena
 import DASHI.Governance.ExternalThreatRepressionMechanismTransferExact as ThreatTransfer
 import DASHI.Governance.CubaSanctionsDomesticInstitutionMechanismExact as CubaMechanism
+import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as IranThreatNarrowing
 import DASHI.Governance.MostazafinWorkerCategoryOverlapReviewedJoinExact as MostazafinOverlap
 
 ------------------------------------------------------------------------
@@ -113,8 +114,8 @@ iranThreatRepressionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 iranThreatRepressionCell = Pareto.requirement-candidate
   iranThreatRepressionCaseMechanism
   true true true true
-  4 9
-  "General external-threat/repression mechanisms are source-paid, and 2026 Iran has direct mobilisation-shift evidence; remaining payment is Iran-specific causal identification of a particular repression increment with counter-hypotheses controlled."
+  3 9
+  "General mechanism, Iran mobilisation shift and current intensified-control surfaces are paid. Remaining payment is now the same-episode marginal repression increment attributable to external threat, net of pre-existing coercive institutions and other counter-hypotheses."
 
 cubaPressureInstitutionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 cubaPressureInstitutionCell = Pareto.requirement-candidate
@@ -248,6 +249,12 @@ currentCubaMechanism :
 currentCubaMechanism =
   CubaMechanism.canonicalCubaPressureMechanism
 
+
+currentIranThreatSameEpisodeResidual :
+  IranThreatNarrowing.SameEpisodeResidual
+currentIranThreatSameEpisodeResidual =
+  IranThreatNarrowing.sameEpisodeResidual
+
 currentIranThreatTransferResidual :
   ThreatTransfer.TransferResidual
 currentIranThreatTransferResidual =
@@ -272,9 +279,9 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Iran-specific external-threat/repression identification remains the sole live political-history frontier: general causal evidence and Iran mobilisation-shift evidence are paid, but the case-specific repression increment is not."
-    "2. Retain pre-existing repression, domestic security interests, protest intensity, economic crisis, state-capacity changes and foreign-agent framing as counter-hypotheses."
-    "3. Only after that case-specific receipt should the Iran/Cuba cross-case siege mechanism activate; the Cuba economic/institutional mechanism is already paid."
+    "1. Iran-specific external-threat/repression identification remains the sole live political-history frontier: acquire a same-episode policy/order/timing record or comparable design that identifies the marginal repression increment."
+    "2. Retain pre-existing repression, regime-security interests, protest intensity, economic crisis, state-capacity changes and foreign-agent framing as explicit counter-hypotheses."
+    "3. Only after that receipt should the Iran/Cuba cross-case siege mechanism activate; the Cuba economic/institutional mechanism and general threat/repression prior are already paid."
     "IRIS Dena exact-duty reconstruction remains required but Pareto-dominated; Che classification remains outside the current evidence consumer."
     true false false
 
