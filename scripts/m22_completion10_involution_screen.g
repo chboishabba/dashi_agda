@@ -85,6 +85,40 @@ for info in candidates do
     fixedDim := expectedDimension-rankDiff;
     squareZero := (g-identity)*(g-identity)=Zero(g);
     matches := rankDiff=5 and fixedDim=5 and squareZero;
+
+    # For a matching row, construct five literal swapped pairs.
+    # N=g-I has rank five and N^2=0.  Choose a basis u_i of im(N),
+    # solve v_i*N=u_i, and use the pair (v_i, v_i+u_i).
+    # Then g swaps the two vectors in each pair.  A rank-10 check on all
+    # ten vectors certifies they form a basis of the whole module.
+    pairSwapBasisVerified := false;
+    pairSwapBasisRank := 0;
+    if matches then
+      imageBasis := BaseMat(g-identity);
+      if Length(imageBasis)<>5 then
+        Error("rank-five image does not return five basis vectors");
+      fi;
+      pairBasis := [];
+      pairChecks := [];
+      for u in imageBasis do
+        v := SolutionMat(g-identity,u);
+        if v=fail then
+          Error("could not solve v*(g-I)=u");
+        fi;
+        a := v;
+        b := v+u;
+        Add(pairBasis,a);
+        Add(pairBasis,b);
+        Add(pairChecks,(a*g=b) and (b*g=a));
+      od;
+      pairSwapBasisRank := RankMat(pairBasis);
+      pairSwapBasisVerified :=
+        pairSwapBasisRank=10 and ForAll(pairChecks,x->x);
+      if not pairSwapBasisVerified then
+        Error("J2^5 fingerprint did not produce five literal swapped pairs");
+      fi;
+    fi;
+
     totalRows := totalRows+1;
     if matches then matchingRows := matchingRows+1; fi;
 
@@ -96,7 +130,9 @@ for info in candidates do
       ",\"rank_g_minus_i\":",String(rankDiff),
       ",\"fixed_dimension\":",String(fixedDim),
       ",\"square_zero\":",JsonBool(squareZero),
-      ",\"matches_J2x5\":",JsonBool(matches),"}");
+      ",\"matches_J2x5\":",JsonBool(matches),
+      ",\"pair_swap_basis_rank\":",String(pairSwapBasisRank),
+      ",\"pair_swap_basis_verified\":",JsonBool(pairSwapBasisVerified),"}");
   od;
   AppendTo(output,"]}");
 od;
