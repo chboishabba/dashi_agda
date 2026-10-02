@@ -34,7 +34,7 @@ gaoEtAl2026 =
     "10.1126/sciadv.aeg5930"
     "https://doi.org/10.1126/sciadv.aeg5930"
     Attribution.academicArticleSource
-    "primary source for high-resolution ARPES evidence of an interaction-driven flat band at the Fermi level, sqrt(3) x sqrt(3) R30-degree charge order, band folding within 30 meV below EF, Brillouin-zone-wide flat-band presence, and logarithmic temperature dependence of spectral weight; the source suggests a phenomenological Kondo-like coherent Fermi liquid and does not provide a DASHI-derived microscopic Hamiltonian"
+    "primary source for high-resolution ARPES evidence of an interaction-driven flat band at the Fermi level, sqrt(3) x sqrt(3) R30-degree charge order, band folding within 30 meV below EF, Brillouin-zone-wide flat-band presence, logarithmic temperature dependence of spectral weight, a flat-band nesting vector, and supporting static Lindhard-response calculations; the source suggests a phenomenological Kondo-like coherent Fermi liquid and does not provide a DASHI-derived microscopic Hamiltonian"
     Attribution.publicAttribution
 
 scienceDaily20261001 : Attribution.AttributedSource
