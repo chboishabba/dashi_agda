@@ -118,3 +118,37 @@ constructively.
 7. Add a narrow RG bridge stating that a basin-label schedule equality would
    contradict a supplied `BasinReductionFailure`; do not modify the existing
    positive RG invariance theorem.
+
+
+## Resolution-sensitive and validated-numerics extension
+
+The selected cross-section is now represented at three distinct authority levels.
+
+1. `BasinResolutionRobustnessExact.agda` defines proof-bearing robustness at a declared resolution and proves that an opposite-basin neighbour refutes it.
+2. `YanchukSelectedCrossSectionBracketExact.agda` owns the exact 16-step bisection grid:
+   ```text
+   lower = 2933441 / 65536000000000000
+   upper = 2933442 / 65536000000000000
+   width = 1 / 65536000000000000
+   ```
+   The two bounds are adjacent grid points by definitional successor equality.
+3. `SingularBasinValidatedNumericsArtifactExact.agda` supplies the promotion contract modelled on the Maass validated-numerics lane. Frozen bytes/digests and a passing checker are insufficient by themselves; `checkerSound` must map checker success to an exact opposite-endpoint basin certificate.
+
+The current RK4 diagnostic is pinned to the exact Agda-owned bracket and will fail if the selected 16-step bisection drifts. It is still explicitly below the validated-numerics authority level.
+
+The remaining strongest weld is therefore concrete and narrow:
+
+```text
+interval ODE enclosure
+  + frozen source/input/output provenance
+  + checker
+  + checkerSound
+        ↓
+OppositeEndpointPredicateReceipt
+        ↓
+BasinBoundaryResolutionWitness
+        ↓
+¬ RobustAt oneGridUnit
+```
+
+No analytic global funnel-width law follows from the selected bracket alone.
