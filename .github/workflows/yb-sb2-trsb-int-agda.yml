@@ -11,6 +11,9 @@ on:
       - 'DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda'
+      - 'DASHI/Physics/CondensedMatter/BdGNambuParticleHoleExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGParticleHoleAdapterExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMajoranaQuantumComputerBridgeExact.agda'
       - '.github/workflows/yb-sb2-trsb-int-agda.yml'
   pull_request:
     paths:
@@ -22,6 +25,9 @@ on:
       - 'DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda'
+      - 'DASHI/Physics/CondensedMatter/BdGNambuParticleHoleExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGParticleHoleAdapterExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoMajoranaQuantumComputerBridgeExact.agda'
       - '.github/workflows/yb-sb2-trsb-int-agda.yml'
   workflow_dispatch:
 
@@ -51,3 +57,9 @@ jobs:
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda
       - name: Check Dirac mass sign
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda
+      - name: Check reusable Nambu PHS theorem
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/BdGNambuParticleHoleExact.agda
+      - name: Check YbSb2 BdG PHS adapter
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoBdGParticleHoleAdapterExact.agda
+      - name: Check Majorana quantum-computer bridge
+        run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoMajoranaQuantumComputerBridgeExact.agda
