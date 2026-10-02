@@ -175,12 +175,12 @@ canonicalThreeTapTerminalCompletionBoundary =
     true true
     true true true
     true true true
-    true true true true false
+    true true true false true
     true true
     false false false false false
     false false false
 
-    refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl
     refl refl refl
 
