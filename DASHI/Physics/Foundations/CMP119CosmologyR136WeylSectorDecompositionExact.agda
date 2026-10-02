@@ -201,3 +201,28 @@ positiveFourSectorBalanceForcesNegativeWeylResponse
 
 strictSignNowSectorwise : Bool
 strictSignNowSectorwise = true
+
+
+negativeFourSectorBalanceForcesPositiveWeylResponse :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  ((regularNumerator measure d + rOperationNumerator measure d)
+    + (boundaryNumerator measure d + vacuumNumerator measure d))
+  < 0ℚ →
+  0ℚ < Weyl.fourDiagonalPartitionDerivativeSum measure d
+negativeFourSectorBalanceForcesPositiveWeylResponse
+    measure d laws referenceFixed balanceNegative =
+  Sign.negativeWeightedNonWilsonNumeratorForcesPositiveWeylResponse
+    measure d laws referenceFixed
+    (subst
+      (λ value → value < 0ℚ)
+      (weightedNonWilsonNumeratorSplitsFourWays
+        measure d (Sign.base laws))
+      balanceNegative)
+
+strictSectorBalanceControlsBothPartitionSignDirections : Bool
+strictSectorBalanceControlsBothPartitionSignDirections = true
