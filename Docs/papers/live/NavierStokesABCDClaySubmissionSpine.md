@@ -355,3 +355,101 @@ and pursue a **different** analytic inequality or the older independent
 B1–B7 signed route, plus W1/continuation. Avoid adding new compilers
 assuming the disproven hypothesis. The A resolvent work is logically
 independent; C/D remain externally attributed forced-case source audits.
+
+
+## 9. 2026-10-02 max-cut after R829--R832
+
+The R828 decision route is now separated into theorem-bearing closed
+infrastructure and exactly two physical leaves.
+
+Closed/source-written surfaces:
+
+1. R829B evaluates the eight exact mixed/commutator vectors through the literal
+   R692 coherent-work consumer.
+2. R829C evaluates the six production/dissipation rows from exact
+   velocity/forcing vectors.
+3. R829A aggregates those rows and R829 normalizes the canonical
+   (6(12C-P+d)) scalar.
+4. R830 kernel-targets the exact rational horizon/negative upper-bound
+   arithmetic.
+5. R831 proves the logical implication
+   [
+   	ext{selected integrated complete rate}<0
+   Longrightarrow
+   
+eg(	ext{R823 demand}le	ext{R823 reserve}).
+   ]
+6. R832 records that no further reserve estimate is required after the two
+   remaining physical leaves.
+
+The exact remaining B-decision cut is
+
+[
+oxed{
+	ext{D1 repository operator evaluation}
++
+	ext{D2 real finite-Galerkin transport}.
+}
+]
+
+D1 is now the finite record
+`Repository345VectorEvaluation`: prove the actual repository
+`fixedOutputMixedProduct`, `fixedOutputCommutator`,
+`Audit.velocityAt`, and `Audit.projectedNonlinearity` values equal the
+already kernel-targeted vectors on the radius-four state.  The global
+`PeriodicHelicalProjectorLaws ℚ` record is explicitly not part of this
+instantaneous theorem.
+
+For D2, Round71 already constructs the fixed-cutoff autonomous
+reality-preserving Galerkin vector field.  The Lean companion now factors the
+standard analytic part as:
+
+[
+	ext{linear + bounded bilinear diagonal}
+Longrightarrow C^1
+Longrightarrow 	ext{local real integral curve},
+]
+
+followed by the already-source-written displacement/Lipschitz-to-negative-
+integral theorem.  Hence the remaining Navier--Stokes-specific real-ODE work is
+to identify the Round71 coordinate field with that quadratic template and
+verify that the explicit R828 bootstrap constants apply to the selected
+solution.
+
+### Post-decision periodic B
+
+If D1+D2 produce the selected negative integral, freeze universal R823
+B-RESERVE as a false auxiliary conjecture.  The surviving positive B cut is
+exactly
+
+[
+oxed{mathrm{B1+B2+B3+B4+B7+Bcont}}.
+]
+
+The existing B1/B2/B3/B4/B7 shell/payment/decomposition compilers are already
+closed and are not counted as separate leaves.
+
+### Whole-space A
+
+`NSClayFacingAMaxCut20261002Exact.agda` records exactly three remaining jobs:
+
+[
+oxed{mathrm{A1 kernel+A2 majorant+A3 continuation}}.
+]
+
+The canonical near-origin pair resolvents are already constructed directly by
+`NSWholeSpaceCanonicalPairSaturationOriginExact.agda`; an abstract physical
+kernel is not required for that local theorem.  Generic Young/Cauchy and
+inverse-sixth tail integration are likewise outside the research cut.
+
+### C/D
+
+`NSClayFacingCDMaxCut20261002Exact.agda` makes source-coordinate audit
+completion independent of optional DASHI Fourier/369/R406 reconstruction.
+C/D manuscript reconstruction and independent referee checking remain
+publication/audit work; optional internal representation welds do not gate the
+official-coordinate source audit.
+
+This is the current hard stop condition: do not create new compiler layers
+unless one of the named leaves proves that a genuinely new mathematical
+quantity is required.
