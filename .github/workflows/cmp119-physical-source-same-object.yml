@@ -36,6 +36,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyR133E1NaturalityExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1FiniteEuclideanAttachmentExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -100,7 +102,9 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR133E1NaturalityExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1FiniteEuclideanAttachmentExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
