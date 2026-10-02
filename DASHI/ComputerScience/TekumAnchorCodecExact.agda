@@ -1,8 +1,8 @@
 module DASHI.ComputerScience.TekumAnchorCodecExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Vec using (Vec; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; _+_)
+open import Data.Vec using (Vec)
 
 import DASHI.Algebra.Trit as Trit
 
