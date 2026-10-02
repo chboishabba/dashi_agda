@@ -21,7 +21,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact as Vacuum
@@ -130,7 +130,7 @@ module _
     ≡ literalEuclideanTrace
   isotropicTraceIsLiteralEuclideanTrace continuation =
     trans
-      (Relation.Binary.PropositionalEquality.sym
+      (sym
         (localCTraceIsIsotropicLorentzianTrace continuation))
       (sameLocalCStressEuclideanToLorentzian continuation)
 
