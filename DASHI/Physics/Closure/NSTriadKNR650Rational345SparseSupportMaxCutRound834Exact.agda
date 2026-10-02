@@ -237,9 +237,9 @@ pruneMixedFixedOutput S velocity select inactive =
     select tau ≡ false →
     R224.mixedPlusMinus S velocity tau ≡ C3.complex3Zero _
   zero tau rejected with inactive tau rejected
-  ... |... | mixedPVelocityZero proof =
+  ... | mixedPVelocityZero proof =
     mixedPlusMinusZeroFromPVelocityZero S velocity tau proof
-  ... |... | mixedQVelocityZero proof =
+  ... | mixedQVelocityZero proof =
     mixedPlusMinusZeroFromQVelocityZero S velocity tau proof
 
 pruneCommutatorFixedOutput :
@@ -269,10 +269,10 @@ pruneCommutatorFixedOutput S velocity forcing select inactive =
     R230.forcingCommutatorCell S velocity forcing tau
     ≡ C3.complex3Zero _
   zero tau rejected with inactive tau rejected
-  ... |... | commPForcingZero proof =
+  ... | commPForcingZero proof =
     R437.forcingCommutatorZeroFromForcingZero
       S velocity forcing tau proof
-  ... |... | commQVelocityZero proof =
+  ... | commQVelocityZero proof =
     forcingCommutatorZeroFromQVelocityZero
       S velocity forcing tau proof
 
