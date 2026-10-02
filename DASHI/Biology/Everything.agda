@@ -253,3 +253,11 @@ import DASHI.Biology.WorldRegularityHyperformalismCrossPollinationExact
 
 -- Evolutionary adaptation as world coupling without propositional theory.
 import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact
+
+------------------------------------------------------------------------
+-- Chegen / Walsh undermethylation reel: attributed source separation,
+-- one-carbon/SAM/histamine network, assertion cone, and BIDI inverse residual.
+import DASHI.Biology.ChegenWalshUndermethylationSourceAtlasExact
+import DASHI.Biology.OneCarbonHistamineMethylationNetworkExact
+import DASHI.Biology.ChegenWalshUndermethylationAssertionConeExact
+import DASHI.Biology.ChegenWalshUndermethylationBidiResidualExact
