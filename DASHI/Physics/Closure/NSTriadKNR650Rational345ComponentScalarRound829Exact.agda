@@ -18,9 +18,6 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; _+_; _*_; _/_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
-q : ℤ → ℕ → ℚ
-q numerator denominator = numerator / denominator
-
 -- Fixed outputs, ordered lexicographically:
 -- (-3,-4,0), (-3,0,0), (-3,4,0), (0,-4,0),
 -- (0,4,0), (3,-4,0), (3,0,0), (3,4,0).
