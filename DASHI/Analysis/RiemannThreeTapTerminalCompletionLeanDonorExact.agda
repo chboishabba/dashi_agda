@@ -61,6 +61,10 @@ record ThreeTapTerminalCompletionReceipt : Set where
     targetPolynomialCommit : String
     momentTransportCommit : String
     normalizedWeldCommit : String
+    supportAndTargetWeldCommit : String
+    transformedLocalBudgetCommit : String
+    terminalizedCommit : String
+    signedFifthBridgeCommit : String
     workflowCommit : String
 
 open ThreeTapTerminalCompletionReceipt public
@@ -80,7 +84,11 @@ currentThreeTapTerminalCompletionReceipt =
     "9d6a021a67781d5bf0b7c4a0f24617c0f6f82637"
     "bdd6faebaa8d5a45e5e39e8c69694cb7978b2c2d"
     "a2a5a0cac5f88f8320247c6cb11c2e0c33b46a4d"
-    "c19cf4388bbcdc79a3c01623dea89374789acb1e"
+    "55fc6436fd750820a2e12c16f3247be627760657"
+    "4e9abc06b987e0e1299de10d952cbb126141d520"
+    "423150cc363d74aa695af18b11958f3f7b6a5741"
+    "29169957eadb1c6d77f027c3f03926c6a29b0152"
+    "fcf58344f83a03cb812b32effe5a2ff913de84bf"
 
 record ThreeTapTerminalCompletionBoundary : Set where
   constructor three-tap-terminal-completion-boundary
@@ -95,6 +103,10 @@ record ThreeTapTerminalCompletionBoundary : Set where
     transformedHeightDefectQuadraticSourceWritten : Bool
     normalizedPhysicalShiftWeldSourceWritten : Bool
     symmetricShiftMomentsThroughEightSourceWritten : Bool
+    transformedSelectedZeroTargetWeldedSourceWritten : Bool
+    transformedAdaptiveSupportRadiusSourceWritten : Bool
+    transformedRawM6M8SourceWritten : Bool
+    signedFifthRouteTargetsCanonicalMarginSourceWritten : Bool
 
     fixedPhysicalShiftBecomesHeightGrowingNormalizedShiftSourceWritten : Bool
     normalizedLogTwoShiftOutsideCanonicalSupportAtHighTSourceWritten : Bool
@@ -117,6 +129,14 @@ record ThreeTapTerminalCompletionBoundary : Set where
       normalizedPhysicalShiftWeldSourceWritten ≡ true
     momentTransportPaid :
       symmetricShiftMomentsThroughEightSourceWritten ≡ true
+    selectedTargetWeldPaid :
+      transformedSelectedZeroTargetWeldedSourceWritten ≡ true
+    adaptiveSupportPaid :
+      transformedAdaptiveSupportRadiusSourceWritten ≡ true
+    rawM6M8Paid :
+      transformedRawM6M8SourceWritten ≡ true
+    signedFifthCommonConsumerPaid :
+      signedFifthRouteTargetsCanonicalMarginSourceWritten ≡ true
     supportFirewallPaid :
       normalizedLogTwoShiftOutsideCanonicalSupportAtHighTSourceWritten ≡ true
 
@@ -152,15 +172,16 @@ canonicalThreeTapTerminalCompletionBoundary =
     true true
     true true true
     true true true
+    true true true true
     true true
     false false false false false
     false false false
 
-    refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl
     refl refl refl
 
-    "Construct a transformed absolute sixth/eighth-and-higher local envelope on the normalized shifted profile, substitute it and the exact quadratic target into the completed terminal scalar, then prove or refute strict positivity at resonance and in the first nonzero a->0 order."
+    "The exact transformed selected-zero target, adaptive normalized support radius, and raw M6/M8 objects are now source-written. Construct the transformed ABSOLUTE sixth/eighth-and-higher remainder envelope / localSlack on that same shifted profile, then prove or refute strict terminal positivity at resonance and in the first nonzero a->0 order."
     "The physical shift log 2 is not O(1) in the normalized quartic variable: it is B(t)=(t/16)log2 and already exceeds pi+1 for t>=200.  Reusing the original support/M6/M8 constants would be a same-object error."
     "If one-scale three-tap fails, reuse the same normalized-shift and moment-transport interfaces for the log2/log3 two-scale operator; do not create a parallel budget formalism."
     "Keep the signed fifth-cap/RvM correlation route independent.  It targets the same canonical high cut and remains a separate analytic producer."
