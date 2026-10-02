@@ -72,6 +72,20 @@ data FiniteToContinuumWeylOrientation : Set where
   continuumReadsMatterEffectiveActionResponse :
     FiniteToContinuumWeylOrientation
 
+orientedFiniteWeylResponse :
+  ∀ {Configuration} →
+  FiniteToContinuumWeylOrientation →
+  (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ) →
+  Partition.PhysicalFinitePartitionAuthority measure →
+  Source.CompleteFiniteMetricVariation Configuration →
+  ℚ
+orientedFiniteWeylResponse
+    continuumReadsLogPartitionResponse measure authority d =
+  logPartitionWeylResponse measure authority d
+orientedFiniteWeylResponse
+    continuumReadsMatterEffectiveActionResponse measure authority d =
+  matterEffectiveActionWeylResponse measure authority d
+
 record FiniteWeylToContinuumTraceConvention
     {Configuration : Set}
     (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
@@ -83,14 +97,8 @@ record FiniteWeylToContinuumTraceConvention
     orientation : FiniteToContinuumWeylOrientation
 
     selectedOrientationIsCorrect :
-      let finiteResponse =
-            case orientation of λ where
-              continuumReadsLogPartitionResponse →
-                logPartitionWeylResponse measure authority d
-              continuumReadsMatterEffectiveActionResponse →
-                matterEffectiveActionWeylResponse measure authority d
-      in
-      continuumTrace ≡ finiteResponse
+      continuumTrace
+      ≡ orientedFiniteWeylResponse orientation measure authority d
 
 open FiniteWeylToContinuumTraceConvention public
 
