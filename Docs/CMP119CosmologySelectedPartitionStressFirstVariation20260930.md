@@ -211,3 +211,32 @@ Consequently the vacuum-dominated finite balance theorem has a second, physicall
     W_Gamma > 0.
 
 So this particular source-sign pattern does NOT automatically support the negative stress trace required by the compiled vacuum acceleration branch if R136 uses the standard matter-effective-action orientation. The finite-to-R136 convention weld is now a mandatory same-object theorem rather than a bookkeeping choice.
+
+
+## 2026-10-02 R144 effective-action expectation max-cut
+
+New `CMP119CosmologyR144EffectiveActionStressExpectationExact.agda` closes the finite one-point sign/orientation question on the same selected R144/R119 stress coordinate.
+
+Using the existing fixed-Haar theorem
+
+    DZ[h] = - integral rho * D_h S_complete
+
+and the existing pointwise weld
+
+    D_h S_complete(U) = selected CMP119 stress insertion(U),
+
+the new owner proves, with Z>0 and explicit Haar-negation law,
+
+    D_h Gamma
+      = - DZ[h] / Z
+      = ( integral rho * D_h S_complete ) / Z.
+
+Therefore the finite one-point stress expectation is the **matter effective-action response** (D Gamma), not (D log Z). The pointwise integrand is the same selected CMP119 stress insertion already completed by the R114/R123/R136 stress lane.
+
+This materially narrows the previous finite->R136 convention firewall:
+
+- the operator/sign orientation at finite cutoff is fixed: the stress insertion is (+D_h S_complete), and its normalized expectation is (D_h Gamma);
+- the remaining same-object theorem is expectation/completion continuity: prove that these finite normalized expectations of the selected stress insertion converge/complete to the vacuum expectation/readout of the R136 literal continuum stress on the same four metric directions;
+- any overall (2/sqrt{|g|}), covariant-vs-contravariant metric normalization, and Euclidean-to-Lorentzian convention must still be fixed in the representation/continuation weld.
+
+Consequently a source-side sector balance yielding (DZ<0) yields (D Gamma>0) at finite cutoff. It cannot support the terminal negative-R136-trace acceleration branch unless the remaining completion/metric convention theorem introduces a justified orientation change. Such a change may not be chosen ad hoc.
