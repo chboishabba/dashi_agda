@@ -22,11 +22,13 @@ module DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact 
 --   * or an FLRW solution.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
+import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
@@ -42,8 +44,8 @@ import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact as R1
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 
 record FourAdmittedMetricDirections
-    {Scale Volume Activity : Set}
-    {activity : Activity}
+    {Scale Volume : Set}
+    {activity : Chain.SubstitutedActivitySecondVariation}
     (domain : Domain.CanonicalMetricSourceDomain Scale Volume activity)
     : Set₁ where
   field
@@ -61,7 +63,7 @@ module _
     {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
     {History Cell : Set}
-    {cutoff : Agda.Builtin.Nat.Nat}
+    {cutoff : Nat}
     {present : Present.PresentCutPhysicalSourceInputs History Cell cutoff}
     {actionWeld : R132.UnifiedGeneratedActionDensity
       {trajectory = trajectory} {split = split} {inputs = inputs} present}
