@@ -1,7 +1,7 @@
 module DASHI.ComputerScience.TernarySignedDigitAdderSemanticsExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Vec using (Vec)
 
@@ -14,6 +14,7 @@ import DASHI.Algebra.Trit as Trit
 
 record SignedDigitAdder (n : Nat) : Set₁ where
   field
+    IntMeaning : Set
     Output : Set
     add : Vec Trit.Trit n → Vec Trit.Trit n → Output
     interpretedInput : Vec Trit.Trit n → IntMeaning
@@ -23,9 +24,6 @@ record SignedDigitAdder (n : Nat) : Set₁ where
       (x y : Vec Trit.Trit n) →
       interpretedOutput (add x y)
       ≡ _+I_ (interpretedInput x) (interpretedInput y)
-
-  -- Abstract carrier chosen by a concrete arithmetic backend.
-  IntMeaning : Set
 
 record AdderCostModel (n : Nat) : Set₁ where
   field
