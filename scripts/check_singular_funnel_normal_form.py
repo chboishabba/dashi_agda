@@ -134,6 +134,14 @@ def main() -> int:
     if reduced != "upper":
         raise SystemExit(f"quasistatic selected branch unexpectedly predicts {reduced}")
 
+    expected_lower = Fraction(2933441, 65536000000000000)
+    expected_upper = Fraction(2933442, 65536000000000000)
+    if bracket_lo != expected_lower or bracket_hi != expected_upper:
+        raise SystemExit(
+            "exact bisection bracket drifted from the Agda-owned selected receipt: "
+            f"{bracket_lo} .. {bracket_hi}"
+        )
+
     _, mu_saddle, x_upper, mu_upper = positive_branch_equilibria()
     payload = {
         "diagnostic": "yanchuk_normal_form_selected_funnel_cross_section",
