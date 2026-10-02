@@ -15,7 +15,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyE1LocalizedD1CovarianceExact whe
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_)
 
