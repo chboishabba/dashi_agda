@@ -29,6 +29,10 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -86,7 +90,11 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSWightmanReconstructionExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
