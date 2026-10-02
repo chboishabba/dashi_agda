@@ -1,9 +1,9 @@
 module DASHI.ComputerScience.TekumAssemblyRoundtripRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Maybe using (just)
 
 import DASHI.Algebra.Trit as Trit
-import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumSSPFRACTRANBridgeExact as Bridge
@@ -11,7 +11,7 @@ import DASHI.ComputerScience.TekumFieldRoleSSPAtlasExact as Atlas
 
 regimePlusSevenRoundTrips :
   Regime.decodeRegime (Regime.regimeTrits Regime.rp7)
-  ≡ Data.Maybe.just Regime.rp7
+  ≡ just Regime.rp7
 regimePlusSevenRoundTrips = refl
 
 tekumPositiveSSPRoundTrip :
