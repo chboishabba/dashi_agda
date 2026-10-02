@@ -16,6 +16,7 @@ on:
       - 'DASHI/Moonshine/JInvariant369SSP15PrimeInternalFibreExact.agda'
       - 'DASHI/Moonshine/TwoSevenNineNumberRoleHubExact.agda'
       - 'DASHI/Moonshine/OggSSP2BM24P276Completion10FrontierExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BM24DuadPair24AuthorityExact.agda'
       - 'DASHI/Moonshine/OggP31CompletionTenTwoSevenNineCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalJointReflectionMinimalExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartActionSeparationExact.agda'
