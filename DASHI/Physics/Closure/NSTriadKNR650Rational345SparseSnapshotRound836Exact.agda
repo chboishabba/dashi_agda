@@ -20,6 +20,9 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSnapshotRound836Exact
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base using (ℚ; _/_; -_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -215,7 +218,7 @@ commutatorInactiveReason tau rejected
 pruneMixed345 :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
-    (items : Agda.Builtin.List.List Physical.PhysicalTriadIncidence) →
+    (items : List Physical.PhysicalTriadIncidence) →
   R224.foldVector
     (R224.mixedPlusMinus Active.selected345HelicalScalars velocity345)
     items
@@ -231,7 +234,7 @@ pruneMixed345 =
 pruneCommutator345 :
   ∀ {E : C3.IntegerEmbedding F}
     {I : C3.ModeInverseSquare F E}
-    (items : Agda.Builtin.List.List Physical.PhysicalTriadIncidence) →
+    (items : List Physical.PhysicalTriadIncidence) →
   R224.foldVector
     (R230.forcingCommutatorCell
       Active.selected345HelicalScalars velocity345 forcing345)
