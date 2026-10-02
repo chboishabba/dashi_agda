@@ -27,6 +27,8 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSHypothesisMaxCutEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSWightmanReconstructionExact as MarkedOS
