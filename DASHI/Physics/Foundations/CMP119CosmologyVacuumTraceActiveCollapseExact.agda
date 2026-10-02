@@ -207,6 +207,57 @@ vacuumTraceNegativeImpliesActiveNegative vacuum traceNegative
   in
   ⊥-elim (ℚP.<-irrefl refl impossible)
 
+matterAccelerationContribution :
+  ℚ → IsotropicLorentzianStress → ℚ
+matterAccelerationContribution positiveGravityFactor stress =
+  - (positiveGravityFactor * activeStress stress)
+
+negativeActiveStressGivesPositiveMatterAcceleration :
+  ∀ positiveGravityFactor stress →
+  0ℚ < positiveGravityFactor →
+  activeStress stress < 0ℚ →
+  0ℚ < matterAccelerationContribution positiveGravityFactor stress
+negativeActiveStressGivesPositiveMatterAcceleration
+    positiveGravityFactor stress factorPositive activeNegative =
+  let
+    scaledNegative :
+      positiveGravityFactor * activeStress stress
+      < positiveGravityFactor * 0ℚ
+    scaledNegative =
+      ℚP.*-monoˡ-<-pos positiveGravityFactor activeNegative
+
+    scaledBelowZero :
+      positiveGravityFactor * activeStress stress < 0ℚ
+    scaledBelowZero =
+      subst
+        (λ upper → positiveGravityFactor * activeStress stress < upper)
+        (Ring.solve-∀ positiveGravityFactor)
+        scaledNegative
+
+    negatedPositive :
+      0ℚ < - (positiveGravityFactor * activeStress stress)
+    negatedPositive =
+      subst
+        (λ lower →
+          lower < - (positiveGravityFactor * activeStress stress))
+        (Ring.solve [])
+        (ℚP.neg-antimono-< scaledBelowZero)
+  in
+  negatedPositive
+
+vacuumTraceNegativeGivesPositiveMatterAcceleration :
+  ∀ positiveGravityFactor vacuum →
+  0ℚ < positiveGravityFactor →
+  trace (stress vacuum) < 0ℚ →
+  0ℚ <
+    matterAccelerationContribution
+      positiveGravityFactor (stress vacuum)
+vacuumTraceNegativeGivesPositiveMatterAcceleration
+    positiveGravityFactor vacuum factorPositive traceNegative =
+  negativeActiveStressGivesPositiveMatterAcceleration
+    positiveGravityFactor (stress vacuum) factorPositive
+    (vacuumTraceNegativeImpliesActiveNegative vacuum traceNegative)
+
 ------------------------------------------------------------------------
 -- FRONTIER FLAGS
 ------------------------------------------------------------------------
