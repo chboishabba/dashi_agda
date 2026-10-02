@@ -3,7 +3,9 @@ module DASHI.Algebra.BalancedTernaryA003462BridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Vec using ([]; _∷_)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.Wikimedia.IbrahimA003462BalancedTernaryResidualCodecSnowballExact as A003462
 
@@ -27,11 +29,7 @@ threeTritMagnitude = A003462.threeTritMax
 
 threePositiveTritEvaluationMatchesA003462Magnitude :
   BT.positiveWeight
-    (BT.eval
-      (DASHI.Algebra.Trit.pos
-        Data.Vec.∷ DASHI.Algebra.Trit.pos
-        Data.Vec.∷ DASHI.Algebra.Trit.pos
-        Data.Vec.∷ Data.Vec.[]))
+    (BT.eval (Trit.pos ∷ Trit.pos ∷ Trit.pos ∷ []))
   ≡ maxMagnitude 3
 threePositiveTritEvaluationMatchesA003462Magnitude = refl
 
