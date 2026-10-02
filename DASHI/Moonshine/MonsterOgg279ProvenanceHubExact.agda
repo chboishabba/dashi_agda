@@ -26,6 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Product using (_,_)
 
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Nonary
@@ -34,7 +35,6 @@ import DASHI.Foundations.PrincipiaVol1DashiBridge as PM
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Signed
 import DASHI.Moonshine.OggSSP15CanonicalRankThreeByFiveExact as Rank
 import DASHI.Moonshine.SSP15AffineC3TranslationExact as Affine
-import DASHI.Moonshine.SSP15CMModSevenExact as CM7
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 ------------------------------------------------------------------------
@@ -103,8 +103,6 @@ p31SignedFRACTRANPresentationIsMode36Neutral :
   ≡ (Nonary.mode36 , Harmonic.zeroTrit)
 p31SignedFRACTRANPresentationIsMode36Neutral = refl
 
-p31CMCharacterAgreement =
-  CM7.sspCMClassAgreesWithModSevenCharacter Lane.p31
 
 ------------------------------------------------------------------------
 -- 3. Independent Principia role of the same printed scalar.
