@@ -50,7 +50,7 @@ data SomeImprovement : List ConsumerRepairResult → Set where
     SomeImprovement xs →
     SomeImprovement (x ∷ xs)
 
-record ReviewableRepairVector : Set where
+record ReviewableRepairVector : Set₁ where
   constructor reviewable-repair-vector
   field
     repairVectorRef : String
@@ -69,4 +69,6 @@ regressionCannotEnterNoRegression :
   outcome x ≡ regressed →
   NoRegression (x ∷ xs) →
   ⊥
-regressionCannotEnterNoRegression refl ()
+regressionCannotEnterNoRegression refl (keepImproved () rest)
+regressionCannotEnterNoRegression refl (keepPreserved () rest)
+regressionCannotEnterNoRegression refl (keepUnchecked () rest)

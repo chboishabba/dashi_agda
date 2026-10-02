@@ -44,15 +44,15 @@ open LicensedTransport public
 
 identityLicence :
   ∀ {A Outcome : Set} (observe : A → Outcome) →
-  LicensedTransport A A observe observe
+  LicensedTransport A A Outcome observe observe
 identityLicence observe = licensed (λ x → x) (λ x → refl)
 
 composeLicence :
   ∀ {A B C Outcome : Set}
   {a : A → Outcome} {b : B → Outcome} {c : C → Outcome} →
-  LicensedTransport A B a b →
-  LicensedTransport B C b c →
-  LicensedTransport A C a c
+  LicensedTransport A B Outcome a b →
+  LicensedTransport B C Outcome b c →
+  LicensedTransport A C Outcome a c
 composeLicence f g =
   licensed
     (λ x → forward g (forward f x))
@@ -62,7 +62,7 @@ composeLicence f g =
 transportedConsumerEquality :
   ∀ {A B Outcome : Set}
   {a : A → Outcome} {b : B → Outcome} →
-  (f : LicensedTransport A B a b) →
+  (f : LicensedTransport A B Outcome a b) →
   ∀ x y → a x ≡ a y →
   b (forward f x) ≡ b (forward f y)
 transportedConsumerEquality f x y same =
