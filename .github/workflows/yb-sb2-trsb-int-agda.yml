@@ -19,9 +19,9 @@ on:
       - 'DASHI/Physics/CondensedMatter/YbSbTwoMuSRTRSBEvidenceExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda'
       - 'DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda'
-      - 'DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda'      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda'      - 'DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda'
-
-
+      - 'DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoBdGSymmetryBoundaryExact.agda'
+      - 'DASHI/Physics/CondensedMatter/YbSbTwoDiracMassSignExact.agda'
       - '.github/workflows/yb-sb2-trsb-int-agda.yml'
   workflow_dispatch:
 
@@ -45,7 +45,6 @@ jobs:
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoINTPhysicalBridgeExact.agda
       - name: Check single-band exclusion funnel
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/YbSbTwoSingleBandConstraintFunnelExact.agda
-
       - name: Check INT exchange parity
         run: agda -i . -l standard-library DASHI/Physics/CondensedMatter/InternallyAntisymmetricTripletExchangeExact.agda
       - name: Check BdG symmetry boundary
