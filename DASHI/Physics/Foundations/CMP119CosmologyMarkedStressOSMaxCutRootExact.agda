@@ -161,6 +161,46 @@ module _
       (reconstructedTerminalConsequences root)
       positiveRho
 
+  literalContinuumTrace : ℚ
+  literalContinuumTrace =
+    Continuum.literalStressFourDiagonalPairing
+      recovery selected directions
+
+  rootLiteralContinuumTraceNegativeGivesNegativeActive :
+    (root : MarkedStressOSMaxCutRoot) →
+    literalContinuumTrace < 0ℚ →
+    Vacuum.activeStress
+      (Terminal.lorentzianIsotropicStress
+        (reconstructedTerminalConsequences root))
+    < 0ℚ
+  rootLiteralContinuumTraceNegativeGivesNegativeActive
+      root literalNegative =
+    Terminal.localCWightmanLiteralTraceNegativeGivesNegativeActive
+      recovery selected directions localC
+      (reconstructedHinge root)
+      (reconstructedTerminalConsequences root)
+      literalNegative
+
+  rootLiteralContinuumTraceNegativeGivesPositiveMatterAcceleration :
+    (positiveGravityFactor : ℚ) →
+    (root : MarkedStressOSMaxCutRoot) →
+    0ℚ < positiveGravityFactor →
+    literalContinuumTrace < 0ℚ →
+    0ℚ <
+      Vacuum.matterAccelerationContribution
+        positiveGravityFactor
+        (Terminal.lorentzianIsotropicStress
+          (reconstructedTerminalConsequences root))
+  rootLiteralContinuumTraceNegativeGivesPositiveMatterAcceleration
+      positiveGravityFactor root factorPositive literalNegative =
+    Terminal.localCWightmanLiteralTraceNegativeGivesPositiveMatterAcceleration
+      recovery selected directions localC
+      (reconstructedHinge root)
+      positiveGravityFactor
+      (reconstructedTerminalConsequences root)
+      factorPositive
+      literalNegative
+
   -- After the E1/E2/E4 Pareto reductions:
   -- * E1 needs derivative equivariance, not a fresh covariance estimate;
   -- * E2 needs a reflected-cylinder embedding, not a fresh positivity estimate;
