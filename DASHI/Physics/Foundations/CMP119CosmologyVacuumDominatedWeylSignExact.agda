@@ -35,6 +35,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSignMaxCutExact as Sign
 import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact as Sector
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumSectorFactorizationExact as Vacuum
 import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
+import DASHI.Physics.Foundations.CMP119CosmologyFiniteWeylConventionFirewallExact as Convention
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 erbNumerator :
@@ -145,6 +146,30 @@ vacuumDominatedSourceForcesNegativeFiniteWeylResponse
       (vacuumNumeratorPositive
         measure d partition scaleLaw constant coefficientPositive))
 
+vacuumDominatedSourceForcesPositiveMatterEffectiveActionWeyl :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (partition : Partition.PhysicalFinitePartitionAuthority measure)
+    (scaleLaw : Vacuum.RationalHaarScaleLaw measure)
+    (constant : Vacuum.VacuumTraceConstant d)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  0ℚ < Vacuum.coefficient constant →
+  0ℚ ≤ erbNumerator measure d →
+  0ℚ <
+    Convention.matterEffectiveActionWeylResponse
+      measure partition d
+vacuumDominatedSourceForcesPositiveMatterEffectiveActionWeyl
+    measure d laws partition scaleLaw constant referenceFixed
+    coefficientPositive erbNonnegative =
+  Convention.partitionWeylNegativeImpliesEffectiveActionWeylPositive
+    measure partition d
+    (vacuumDominatedSourceForcesNegativeFiniteWeylResponse
+      measure d laws partition scaleLaw constant referenceFixed
+      coefficientPositive erbNonnegative)
+
 vacuumCoefficientSignIsStillPhysicalInput : Bool
 vacuumCoefficientSignIsStillPhysicalInput = true
 
@@ -153,3 +178,6 @@ erbBalanceSignIsStillPhysicalInput = true
 
 negativeFiniteWeylResponseNowFollowsFromTwoSourceSignObligations : Bool
 negativeFiniteWeylResponseNowFollowsFromTwoSourceSignObligations = true
+
+underGammaMinusLogZTheSameBalanceGivesPositiveEffectiveActionWeyl : Bool
+underGammaMinusLogZTheSameBalanceGivesPositiveEffectiveActionWeyl = true
