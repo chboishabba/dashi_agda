@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_; -_)
+import Data.Integer.Properties as ℤP
 open import Data.Rational.Base using (ℚ; normalize)
 
 import DASHI.Foundations.BinaryFloatingPoint as Binary
@@ -73,6 +74,20 @@ applySign Anchor.negativeSign z = - z
 applySign Anchor.zeroSign z = + 0
 applySign Anchor.positiveSign z = z
 
+applySignFlip :
+  (s : Anchor.TekumSign) (z : ℤ) →
+  applySign (Anchor.flipSign s) z ≡ ℤ.- (applySign s z)
+applySignFlip Anchor.negativeSign z = ℤP.neg-involutive z
+applySignFlip Anchor.zeroSign z = refl
+applySignFlip Anchor.positiveSign z = refl
+
+flipExactTriadicSign : ExactTriadic → ExactTriadic
+flipExactTriadicSign x =
+  exactTriadic
+    (Anchor.flipSign (triadicSign x))
+    (significand x)
+    (scale x)
+
 exactTriadicNumerator : ExactTriadic → ℤ
 exactTriadicNumerator x =
   applySign
@@ -84,6 +99,12 @@ exactTriadicNumerator x =
 exactTriadicDenominator : ExactTriadic → Nat
 exactTriadicDenominator x =
   pow3 (Binary.negativePart (scale x))
+
+flipExactTriadicDenominatorInvariant :
+  (x : ExactTriadic) →
+  exactTriadicDenominator (flipExactTriadicSign x)
+  ≡ exactTriadicDenominator x
+flipExactTriadicDenominatorInvariant x = refl
 
 exactTriadicRational : ExactTriadic → ℚ
 exactTriadicRational x =
