@@ -29,7 +29,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _<_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionWeylTraceExact as Weyl
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
@@ -108,8 +108,9 @@ positiveWeightedNonWilsonNumeratorForcesNegativeWeylResponse
     measure d laws referenceFixed numeratorPositive =
   subst
     (λ value → value < 0ℚ)
-    (fixedHaarResponseIsNegativeWeightedNonWilsonNumerator
-      measure d laws referenceFixed)
+    (sym
+      (fixedHaarResponseIsNegativeWeightedNonWilsonNumerator
+        measure d laws referenceFixed))
     (ℚP.neg-mono-< numeratorPositive)
 
 classicalWilsonSectorAlreadyCancelledFromSignNumerator : Bool
