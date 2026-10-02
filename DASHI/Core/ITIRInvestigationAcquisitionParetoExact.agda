@@ -13,8 +13,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _∸_)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact as Acquisition
 import DASHI.Core.AffectedDependencyClosureExact as Dependency
@@ -55,22 +56,36 @@ open InvestigationCandidate public
 
 investigationProblem : Pareto.ConsumerMDLProblem
 investigationProblem =
-  Pareto.consumerMDLProblem InvestigationCandidate
-    (λ x → candidateRef x)
+  Pareto.consumerMDLProblem
+    InvestigationCandidate
+    (λ _ → ⊤)
+    (λ _ → ⊤)
+    lawfulResourceCost
+    (λ _ _ → ⊤)
+    candidateRef
+    "ITIR-INV-1 lawful acquisition/reviewer resource-cost convention"
+    "consumer-indexed proof-directed investigation acquisition"
 
 investigationCosts : Pareto.CostHyperfabric investigationProblem
 investigationCosts =
-  Pareto.costHyperfabric InvestigationPriorityAxis cost
+  Pareto.costHyperfabric InvestigationPriorityAxis cost axisRef
   where
   -- First four are maximisation objectives encoded as loss against a
-  -- common declared ceiling.  The concrete runtime is responsible for
-  -- preserving the declared axis semantics and must not scalarise them.
+  -- common declared ceiling.  Runtime axis estimates carry their own
+  -- receipts; this encoding is for the existing lower-is-better Pareto owner.
   cost : InvestigationPriorityAxis → InvestigationCandidate → Nat
   cost informationLoss x = 1000 ∸ informationGain x
   cost dependencyClosureLoss x = 1000 ∸ dependencyClosureImpact x
   cost residualCoverageLoss x = 1000 ∸ residualCoverage x
   cost provenanceNoveltyLoss x = 1000 ∸ provenanceNovelty x
   cost acquisitionCost x = lawfulResourceCost x
+
+  axisRef : InvestigationPriorityAxis → String
+  axisRef informationLoss = "expected discrimination/information-gain loss"
+  axisRef dependencyClosureLoss = "dependency-closure impact loss"
+  axisRef residualCoverageLoss = "unpaid residual coverage loss"
+  axisRef provenanceNoveltyLoss = "provenance novelty / independence-gain loss"
+  axisRef acquisitionCost = "lawful acquisition/reviewer/resource cost"
 
 InvestigationParetoAdmissible : InvestigationCandidate → Set₁
 InvestigationParetoAdmissible =
