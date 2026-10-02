@@ -16,6 +16,12 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345RepositoryVectorBoundaryRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ForcingRowsRound844Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345OrderedCellEvaluationRound843Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345OrderedCellsRound843Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345GeometryCalibrationRound842Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ProjectedNonlinearitySparseMaxCutRound840Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingAMaxCut20261002Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPostReserveMaxCut20261002Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingCDMaxCut20261002Exact.agda'
@@ -94,6 +100,12 @@ jobs:
             DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650ProjectedNonlinearitySparseMaxCutRound840Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345GeometryCalibrationRound842Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345OrderedCellsRound843Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345OrderedCellEvaluationRound843Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345ForcingRowsRound844Exact.agda \
             DASHI/Physics/Closure/NSClayFacingAMaxCut20261002Exact.agda \
             DASHI/Physics/Closure/NSClayFacingBPostReserveMaxCut20261002Exact.agda \
             DASHI/Physics/Closure/NSClayFacingCDMaxCut20261002Exact.agda \
