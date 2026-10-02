@@ -17,8 +17,8 @@ open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Integer.Base using (+_; -[1+_])
-open import Data.Rational.Base using (ℚ)
+open import Data.Integer.Base using (ℤ; +_; -[1+_])
+open import Data.Rational.Base using (ℚ; _/_; -_)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -34,10 +34,10 @@ import DASHI.Physics.Closure.NSTriadKNR650Rational345EnergyRowsRound829Exact as 
 F : C3.RealField _
 F = Rational.rationalRealField
 
-minus3 : Data.Integer.Base.ℤ
+minus3 : ℤ
 minus3 = -[1+ 2 ]
 
-minus4 : Data.Integer.Base.ℤ
+minus4 : ℤ
 minus4 = -[1+ 3 ]
 
 k₁ k₂ k₃ k₄ k₅ k₆ k₇ k₈ : Z3.FourierMode
@@ -186,7 +186,7 @@ module Consequences
   work₁Exact =
     trans (cong₂ Work.coherentWork (mixed₁ E) (comm₁ E)) Vector.w₁Exact
 
-  work₂Exact : workAt k₂ ≡ (+ 322917) Data.Rational.Base./ 250
+  work₂Exact : workAt k₂ ≡ (+ 322917) / 250
   work₂Exact =
     trans (cong₂ Work.coherentWork (mixed₂ E) (comm₂ E)) Vector.w₂Exact
 
@@ -194,11 +194,11 @@ module Consequences
   work₃Exact =
     trans (cong₂ Work.coherentWork (mixed₃ E) (comm₃ E)) Vector.w₃Exact
 
-  work₄Exact : workAt k₄ ≡ - ((+ 428272) Data.Rational.Base./ 125)
+  work₄Exact : workAt k₄ ≡ - ((+ 428272) / 125)
   work₄Exact =
     trans (cong₂ Work.coherentWork (mixed₄ E) (comm₄ E)) Vector.w₄Exact
 
-  work₅Exact : workAt k₅ ≡ - ((+ 428272) Data.Rational.Base./ 125)
+  work₅Exact : workAt k₅ ≡ - ((+ 428272) / 125)
   work₅Exact =
     trans (cong₂ Work.coherentWork (mixed₅ E) (comm₅ E)) Vector.w₅Exact
 
@@ -206,7 +206,7 @@ module Consequences
   work₆Exact =
     trans (cong₂ Work.coherentWork (mixed₆ E) (comm₆ E)) Vector.w₆Exact
 
-  work₇Exact : workAt k₇ ≡ (+ 322917) Data.Rational.Base./ 250
+  work₇Exact : workAt k₇ ≡ (+ 322917) / 250
   work₇Exact =
     trans (cong₂ Work.coherentWork (mixed₇ E) (comm₇ E)) Vector.w₇Exact
 
