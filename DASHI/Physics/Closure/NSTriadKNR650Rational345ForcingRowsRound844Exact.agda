@@ -23,6 +23,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNComConcreteActiveOddPQTriadRound62Exact as Unit
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSupportMaxCutRound834Exact as Sparse
+import DASHI.Physics.Closure.NSTriadKNR650Rational345ActiveHelicalScalarsRound835Exact as Active
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSnapshotRound836Exact as Snapshot
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ProjectedNonlinearityPruneRound840Exact as R840
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact as Direct
@@ -43,138 +44,138 @@ module Evaluate
 
   fibre₁ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₁)
+      (Output.physicalOutputFiber 4 Active.k₁)
     ≡ Cells.t₁a ∷ Cells.t₁b ∷ []
   fibre₁ = refl
 
   fibre₂ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₂)
+      (Output.physicalOutputFiber 4 Active.k₂)
     ≡ Cells.t₂a ∷ Cells.t₂b ∷ []
   fibre₂ = refl
 
   fibre₃ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₃)
+      (Output.physicalOutputFiber 4 Active.k₃)
     ≡ Cells.t₃a ∷ Cells.t₃b ∷ []
   fibre₃ = refl
 
   fibre₄ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₄)
+      (Output.physicalOutputFiber 4 Active.k₄)
     ≡ Cells.t₄a ∷ Cells.t₄b ∷ []
   fibre₄ = refl
 
   fibre₅ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₅)
+      (Output.physicalOutputFiber 4 Active.k₅)
     ≡ Cells.t₅a ∷ Cells.t₅b ∷ []
   fibre₅ = refl
 
   fibre₆ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₆)
+      (Output.physicalOutputFiber 4 Active.k₆)
     ≡ Cells.t₆a ∷ Cells.t₆b ∷ []
   fibre₆ = refl
 
   fibre₇ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₇)
+      (Output.physicalOutputFiber 4 Active.k₇)
     ≡ Cells.t₇a ∷ Cells.t₇b ∷ []
   fibre₇ = refl
 
   fibre₈ :
     Sparse.filterSelected Snapshot.mixedCellActive
-      (Output.physicalOutputFiber 4 Cells.Active.k₈)
+      (Output.physicalOutputFiber 4 Active.k₈)
     ≡ Cells.t₈a ∷ Cells.t₈b ∷ []
   fibre₈ = refl
 
   forcing₁ :
-    Audit.projectedNonlinearity system Cells.Active.k₁
-    ≡ Snapshot.forcing345 Cells.Active.k₁
+    Audit.projectedNonlinearity system Active.k₁
+    ≡ Snapshot.forcing345 Active.k₁
   forcing₁ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₁) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₁) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₁
-      ≡ Snapshot.forcing345 Cells.Active.k₁
+      P.activeR30Fold Active.k₁
+      ≡ Snapshot.forcing345 Active.k₁
     tail rewrite fibre₁ | C.cell₁aExact | C.cell₁bExact = refl
 
   forcing₂ :
-    Audit.projectedNonlinearity system Cells.Active.k₂
-    ≡ Snapshot.forcing345 Cells.Active.k₂
+    Audit.projectedNonlinearity system Active.k₂
+    ≡ Snapshot.forcing345 Active.k₂
   forcing₂ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₂) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₂) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₂
-      ≡ Snapshot.forcing345 Cells.Active.k₂
+      P.activeR30Fold Active.k₂
+      ≡ Snapshot.forcing345 Active.k₂
     tail rewrite fibre₂ | C.cell₂aExact | C.cell₂bExact = refl
 
   forcing₃ :
-    Audit.projectedNonlinearity system Cells.Active.k₃
-    ≡ Snapshot.forcing345 Cells.Active.k₃
+    Audit.projectedNonlinearity system Active.k₃
+    ≡ Snapshot.forcing345 Active.k₃
   forcing₃ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₃) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₃) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₃
-      ≡ Snapshot.forcing345 Cells.Active.k₃
+      P.activeR30Fold Active.k₃
+      ≡ Snapshot.forcing345 Active.k₃
     tail rewrite fibre₃ | C.cell₃aExact | C.cell₃bExact = refl
 
   forcing₄ :
-    Audit.projectedNonlinearity system Cells.Active.k₄
-    ≡ Snapshot.forcing345 Cells.Active.k₄
+    Audit.projectedNonlinearity system Active.k₄
+    ≡ Snapshot.forcing345 Active.k₄
   forcing₄ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₄) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₄) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₄
-      ≡ Snapshot.forcing345 Cells.Active.k₄
+      P.activeR30Fold Active.k₄
+      ≡ Snapshot.forcing345 Active.k₄
     tail rewrite fibre₄ | C.cell₄aExact | C.cell₄bExact = refl
 
   forcing₅ :
-    Audit.projectedNonlinearity system Cells.Active.k₅
-    ≡ Snapshot.forcing345 Cells.Active.k₅
+    Audit.projectedNonlinearity system Active.k₅
+    ≡ Snapshot.forcing345 Active.k₅
   forcing₅ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₅) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₅) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₅
-      ≡ Snapshot.forcing345 Cells.Active.k₅
+      P.activeR30Fold Active.k₅
+      ≡ Snapshot.forcing345 Active.k₅
     tail rewrite fibre₅ | C.cell₅aExact | C.cell₅bExact = refl
 
   forcing₆ :
-    Audit.projectedNonlinearity system Cells.Active.k₆
-    ≡ Snapshot.forcing345 Cells.Active.k₆
+    Audit.projectedNonlinearity system Active.k₆
+    ≡ Snapshot.forcing345 Active.k₆
   forcing₆ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₆) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₆) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₆
-      ≡ Snapshot.forcing345 Cells.Active.k₆
+      P.activeR30Fold Active.k₆
+      ≡ Snapshot.forcing345 Active.k₆
     tail rewrite fibre₆ | C.cell₆aExact | C.cell₆bExact = refl
 
   forcing₇ :
-    Audit.projectedNonlinearity system Cells.Active.k₇
-    ≡ Snapshot.forcing345 Cells.Active.k₇
+    Audit.projectedNonlinearity system Active.k₇
+    ≡ Snapshot.forcing345 Active.k₇
   forcing₇ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₇) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₇) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₇
-      ≡ Snapshot.forcing345 Cells.Active.k₇
+      P.activeR30Fold Active.k₇
+      ≡ Snapshot.forcing345 Active.k₇
     tail rewrite fibre₇ | C.cell₇aExact | C.cell₇bExact = refl
 
   forcing₈ :
-    Audit.projectedNonlinearity system Cells.Active.k₈
-    ≡ Snapshot.forcing345 Cells.Active.k₈
+    Audit.projectedNonlinearity system Active.k₈
+    ≡ Snapshot.forcing345 Active.k₈
   forcing₈ =
-    trans (P.projectedNonlinearityIsActiveR30Fold Cells.Active.k₈) tail
+    trans (P.projectedNonlinearityIsActiveR30Fold Active.k₈) tail
     where
     tail :
-      P.activeR30Fold Cells.Active.k₈
-      ≡ Snapshot.forcing345 Cells.Active.k₈
+      P.activeR30Fold Active.k₈
+      ≡ Snapshot.forcing345 Active.k₈
     tail rewrite fibre₈ | C.cell₈aExact | C.cell₈bExact = refl
 
 round844EightActiveR30ForcingRowsKernelTargeted : Bool
