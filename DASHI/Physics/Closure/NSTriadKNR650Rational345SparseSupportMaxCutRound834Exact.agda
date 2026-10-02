@@ -200,7 +200,7 @@ data MixedInactiveReason
   mixedPVelocityZero :
     velocity (Physical.p tau) ≡ C3.complex3Zero F →
     MixedInactiveReason velocity tau
-  qVelocityZero :
+  mixedQVelocityZero :
     velocity (Physical.q tau) ≡ C3.complex3Zero F →
     MixedInactiveReason velocity tau
 
@@ -211,7 +211,7 @@ data CommutatorInactiveReason
   commPForcingZero :
     forcing (Physical.p tau) ≡ C3.complex3Zero F →
     CommutatorInactiveReason velocity forcing tau
-  qVelocityZero :
+  commQVelocityZero :
     velocity (Physical.q tau) ≡ C3.complex3Zero F →
     CommutatorInactiveReason velocity forcing tau
 
