@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Dynamics/SingularBasin*.agda'
+      - 'DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda'
       - 'DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda'
       - 'scripts/check_singular_funnel_normal_form.py'
       - 'Docs/SingularBasinFunnels.md'
@@ -25,6 +26,9 @@ jobs:
         run: |
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinReductionExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinFiniteWitnessExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinCompressionBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda
       - name: Reproduce selected normal-form funnel cross-section
         run: python3 scripts/check_singular_funnel_normal_form.py
