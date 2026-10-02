@@ -33,6 +33,10 @@ import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExac
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as E
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100EntropyBudgetExact as R
 import DASHI.Physics.YangMills.BalabanCMP119ReflectionMaxCut20261002Exact as RP
+import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
+import DASHI.Physics.YangMills.BalabanYM4ROperationEntropyShellExact as Shell
+import DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact as LF
+import DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact as RSource
 
 ------------------------------------------------------------------------
 -- Eq. (2.23) survives any selected action evaluator on the SAME source action.
@@ -73,8 +77,8 @@ regularELocalizedCompositeSum :
     volume background →
   E.regularE form background
   ≡
-  DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact.sumFunctions
-      (DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact.mapList
+  Finite.sumFunctions
+      (Finite.mapList
         (E.localizedRegularActivity form volume)
         (E.components form volume))
       background
@@ -90,12 +94,12 @@ rOperationRootedShellBelowDyadic :
     (dataSet : R.Equation1100RootedEntropyData
       Scale Volume Root Polymer Boundary)
     scale volume root depth →
-  DASHI.Physics.YangMills.BalabanYM4ROperationEntropyShellExact.rootedRActivityShell
+  Shell.rootedRActivityShell
       (R.cmp122Equation1100RootedShell dataSet)
       scale volume root depth
   ≤
-  DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact.scaledShellMajorant
-      (DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact.p0Suppression
+  LF.scaledShellMajorant
+      (RSource.p0Suppression
         (R.source dataSet) scale)
       depth
 rOperationRootedShellBelowDyadic =
