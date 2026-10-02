@@ -133,6 +133,52 @@ rulingBasisBidegrees =
   Product.basis11RightDegree
 
 ------------------------------------------------------------------------
+-- Literal factor-swap on the EXISTING P¹×P¹ Künneth basis.
+------------------------------------------------------------------------
+
+swapProductBasis :
+  Product.ProductBasis →
+  Product.ProductBasis
+swapProductBasis basis =
+  Product.tensorBasis
+    (Product.rightFactor basis)
+    (Product.leftFactor basis)
+
+swapBasis00 :
+  swapProductBasis Product.basis00 ≡ Product.basis00
+swapBasis00 = refl
+
+swapBasis11Left :
+  swapProductBasis Product.basis11Left ≡ Product.basis11Right
+swapBasis11Left = refl
+
+swapBasis11Right :
+  swapProductBasis Product.basis11Right ≡ Product.basis11Left
+swapBasis11Right = refl
+
+swapBasis22 :
+  swapProductBasis Product.basis22 ≡ Product.basis22
+swapBasis22 = refl
+
+swapPreservesProductBidegree :
+  (basis : Product.ProductBasis) →
+  Product.productBidegree (swapProductBasis basis)
+  ≡
+  Product.productBidegree basis
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1Unit Product.p1Unit) =
+  refl
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1Unit Product.p1PointClass) =
+  refl
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1PointClass Product.p1Unit) =
+  refl
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1PointClass Product.p1PointClass) =
+  refl
+
+------------------------------------------------------------------------
 -- Full rational factor-swap eigenspace decomposition.
 --
 -- Every class a h₁ + b h₂ splits into a swap-invariant diagonal part and a
