@@ -8,6 +8,8 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
 import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact as Sector
+import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Integral
+import Data.Rational.Properties as ℚP
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 record RationalHaarScaleLaw
@@ -39,30 +41,27 @@ vacuumNumeratorFactors :
   ∀ {Configuration}
     (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
     (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : Integral.RationalFiniteMeasureIntegrationLaws measure)
     (scaleLaw : RationalHaarScaleLaw measure)
     (constant : VacuumTraceConstant d) →
   Sector.vacuumNumerator measure d
   ≡
   coefficient constant
     * Physical.haarIntegral measure (Physical.density measure)
-vacuumNumeratorFactors measure d scaleLaw constant =
+vacuumNumeratorFactors measure d laws scaleLaw constant =
   trans
-    (cong
-      (Physical.haarIntegral measure)
-      (funext λ x →
-        cong
-          (λ value → Physical.density measure x * value)
-          (vacuumTraceConstant constant x)))
-    (trans
-      (cong
-        (Physical.haarIntegral measure)
-        (funext λ x →
-          Data.Rational.Properties.*-comm
+    (Integral.haarIntegralCongruent laws _ _
+      (λ x →
+        trans
+          (cong
+            (λ value → Physical.density measure x * value)
+            (vacuumTraceConstant constant x))
+          (ℚP.*-comm
             (Physical.density measure x)
-            (coefficient constant)))
-      (haarIntegralScale scaleLaw
-        (coefficient constant)
-        (Physical.density measure))))
+            (coefficient constant))))
+    (haarIntegralScale scaleLaw
+      (coefficient constant)
+      (Physical.density measure))
 
 vacuumSectorSignNowReducesToConstantCoefficient : Bool
 vacuumSectorSignNowReducesToConstantCoefficient = true
