@@ -26,6 +26,7 @@ import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Moonshine.TwistronicsRegistrationControlFutureSplitExact as Control
 import DASHI.Physics.CondensedMatter.FlatBandObservableFibreExact as Flat
 import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FlatBandChargeOrderSourceReplayExact as Fe
+import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FigureReplayExact as Figure
 import DASHI.Physics.CondensedMatter.ThreeFoldBandFoldingExact as Fold
 
 data FlatBandRoute : Set where
@@ -72,6 +73,7 @@ record GrapheneFe5GeTe2CrossPollinationBoundary : Set where
     caoCorrelatedPhaseSourcesRetained : Bool
     huInSituRegistrationControlSourceRetained : Bool
     gaoFe5GeTe2PrimarySourceRetained : Bool
+    jiangMagicAngleChargeOrderPrecedentRetained : Bool
     sharedObservableFibreTheoremShapeUsed : Bool
     sharedConsumerRefinementTheoremShapeUsed : Bool
     twistAngleIdentifiedWithFeInteractionStrength : Bool
@@ -85,6 +87,7 @@ canonicalGrapheneFe5GeTe2CrossPollinationBoundary :
 canonicalGrapheneFe5GeTe2CrossPollinationBoundary =
   graphene-fe5gete2-cross-pollination-boundary
     true true true true
+    true
     true true
     false false false false false
 
@@ -106,6 +109,11 @@ existingFe5GeTe2Replay :
   Fe.Fe5GeTe2SourceReplay
 existingFe5GeTe2Replay =
   Fe.canonicalFe5GeTe2SourceReplay
+
+existingFe5GeTe2FigureReplay :
+  Figure.Fe5GeTe2FigureReplay
+existingFe5GeTe2FigureReplay =
+  Figure.canonicalFe5GeTe2FigureReplay
 
 existingThreeFoldSurface :
   Fold.ThreeFoldPresentation (Fin 3) Fold.OneFoldedPoint
