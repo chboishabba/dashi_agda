@@ -121,6 +121,95 @@ intrinsicExecutionSound {result = result} refl =
 -- reconstruction owners.
 ------------------------------------------------------------------------
 
+
+------------------------------------------------------------------------
+-- Margin-preserving operational package.
+--
+-- A positive margin can always be weakened to the one-cell margin needed by
+-- the intrinsic parser.  The resulting literal step is actually a
+-- WellFormedMachineStep because the recovered interior decomposition carries
+-- plain-prefix/plain-suffix proofs.  The existing radius-one theorem then
+-- decreases margin by exactly one.
+------------------------------------------------------------------------
+
+positiveMarginToOne :
+  ∀ {State Symbol : Set} {k : Agda.Builtin.Nat.Nat}
+    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
+  Margin.HeadMargin (Agda.Builtin.Nat.suc k) cells →
+  Margin.HeadMargin (Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero) cells
+positiveMarginToOne {k = Agda.Builtin.Nat.zero} margin = margin
+positiveMarginToOne {k = Agda.Builtin.Nat.suc k} margin =
+  positiveMarginToOne (Margin.weakenMargin margin)
+
+record IntrinsicExecutedStepWithMargin
+    (machine : Local.ConcreteTapeMachine)
+    (before : Local.TapeRow machine)
+    (k : Agda.Builtin.Nat.Nat) : Set₁ where
+  constructor intrinsic-executed-step-with-margin
+  field
+    after : Local.TapeRow machine
+    wellFormed : WF.WellFormedMachineStep machine before after
+    afterUnique : WF.ExactlyOneHead (Local.cells after)
+    afterMargin : Margin.HeadMargin k (Local.cells after)
+
+open IntrinsicExecutedStepWithMargin public
+
+executeUniqueMarginRowWithDecay :
+  ∀ {machine row k} →
+  (unique : WF.ExactlyOneHead (Local.cells row)) →
+  (margin : Margin.HeadMargin (Agda.Builtin.Nat.suc k) (Local.cells row)) →
+  Maybe (IntrinsicExecutedStepWithMargin machine row k)
+executeUniqueMarginRowWithDecay {machine} {row} {k} unique margin
+    with Margin.interiorFromUniqueMargin unique (positiveMarginToOne margin)
+... | interior
+    with Character.rowShape interior
+...   | refl
+      with Interpreter.fetchConcreteRule
+        machine
+        (Character.headState interior)
+        (Character.readSymbol interior)
+...     | nothing = nothing
+...     | just matched =
+  just
+    (intrinsic-executed-step-with-margin
+      afterRow
+      wellFormedStep
+      (WF.afterExactlyOneHead wellFormedStep)
+      (Margin.wellFormedStepMargin wellFormedStep margin))
+  where
+    step =
+      Window.listedMatchingRuleIsMachineStep
+        machine
+        (Character.prefix interior)
+        (Character.leftSymbol interior)
+        (Character.headState interior)
+        (Character.readSymbol interior)
+        (Character.rightSymbol interior)
+        (Character.suffix interior)
+        (Interpreter.rule matched)
+        (Interpreter.occurs matched)
+        (Interpreter.sourceExact matched)
+        (Interpreter.readExact matched)
+
+    afterRow =
+      Window.afterRowForRule
+        machine
+        (Character.prefix interior)
+        (Character.leftSymbol interior)
+        (Character.rightSymbol interior)
+        (Character.suffix interior)
+        (Interpreter.rule matched)
+
+    wellFormedStep : WF.WellFormedMachineStep machine _ afterRow
+    wellFormedStep = record
+      { WF.step = step
+      ; WF.wellFormedOccurrence = record
+          { WF.occurrence = Local.occurrence step
+          ; WF.prefixPlain = Character.prefixPlain interior
+          ; WF.suffixPlain = Character.suffixPlain interior
+          }
+      }
+
 ------------------------------------------------------------------------
 -- MAX-CUT STATUS
 --
@@ -130,7 +219,10 @@ intrinsicExecutionSound {result = result} refl =
 -- * literal sequential lookup on ConcreteTapeMachine.rules;
 -- * successful intrinsic execution yields an actual MachineStep from the
 --   original TapeRow;
--- * soundness theorem for the intrinsic executable step.
+-- * soundness theorem for the intrinsic executable step;
+-- * positive-margin execution upgrades to a WellFormedMachineStep;
+-- * exactly-one-head and head-margin invariants are carried to the output,
+--   with the radius-one step consuming at most one margin cell.
 --
 -- IMPORTANT EXISTING CLOSURE:
 -- * guarded Cook--Levin rows already carry decreasing HeadMargin and are
