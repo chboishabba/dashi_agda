@@ -21,6 +21,7 @@ module DASHI.Physics.CondensedMatter.MajoranaFockActionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 data Phase : Set where
   plusOne minusOne plusI minusI : Phase
@@ -141,6 +142,17 @@ numberProjector :
   ⊎
   number x ≡ nonzero x
 numberProjector (basis p empty) =
-  Data.Sum.inj₁ refl
+  inj₁ refl
 numberProjector (basis p occupied) =
-  Data.Sum.inj₂ refl
+  inj₂ refl
+
+liftNumber : FockVector → FockVector
+liftNumber zeroVector = zeroVector
+liftNumber (nonzero x) = number x
+
+numberIdempotent :
+  (v : FockVector) →
+  liftNumber (liftNumber v) ≡ liftNumber v
+numberIdempotent zeroVector = refl
+numberIdempotent (nonzero (basis p empty)) = refl
+numberIdempotent (nonzero (basis p occupied)) = refl
