@@ -27,7 +27,7 @@ module DASHI.Mathematics.AlgebraicGeometry.HodgeP1ProductPrimitiveRulingRegressi
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
-open import Data.Rational using (ℚ; _+_; _*_; -_)
+open import Data.Rational using (ℚ; _+_; _*_; -_; _-_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineProductHodgeExact as Product
@@ -131,6 +131,80 @@ rulingBasisBidegrees :
 rulingBasisBidegrees =
   Product.basis11LeftDegree ,
   Product.basis11RightDegree
+
+------------------------------------------------------------------------
+-- Full rational factor-swap eigenspace decomposition.
+--
+-- Every class a h₁ + b h₂ splits into a swap-invariant diagonal part and a
+-- swap-anti-invariant primitive part. This is the exact finite regression
+-- analogue of "known algebraic contribution + primitive residual".
+------------------------------------------------------------------------
+
+scale : ℚ → RulingClass → RulingClass
+scale scalar (ruling-class a b) =
+  ruling-class (scalar * a) (scalar * b)
+
+diagonalCoefficient : RulingClass → ℚ
+diagonalCoefficient (ruling-class a b) =
+  (a + b) / 2
+
+primitiveCoefficient : RulingClass → ℚ
+primitiveCoefficient (ruling-class a b) =
+  (a - b) / 2
+
+diagonalPart : RulingClass → RulingClass
+diagonalPart cls =
+  scale (diagonalCoefficient cls) diagonalPolarization
+
+primitivePart : RulingClass → RulingClass
+primitivePart cls =
+  scale (primitiveCoefficient cls) primitiveDifference
+
+rulingClassExtensionality :
+  ∀ {left right : RulingClass} →
+  h₁Coefficient left ≡ h₁Coefficient right →
+  h₂Coefficient left ≡ h₂Coefficient right →
+  left ≡ right
+rulingClassExtensionality
+    {ruling-class _ _} {ruling-class _ _} refl refl =
+  refl
+
+diagonalPlusPrimitiveReconstructs :
+  (cls : RulingClass) →
+  add (diagonalPart cls) (primitivePart cls) ≡ cls
+diagonalPlusPrimitiveReconstructs (ruling-class a b) =
+  rulingClassExtensionality
+    ℚRing.solve
+    ℚRing.solve
+
+diagonalPartSwapInvariant :
+  (cls : RulingClass) →
+  swapRulings (diagonalPart cls) ≡ diagonalPart cls
+diagonalPartSwapInvariant (ruling-class a b) =
+  rulingClassExtensionality refl refl
+
+primitivePartSwapAntiInvariant :
+  (cls : RulingClass) →
+  swapRulings (primitivePart cls) ≡ neg (primitivePart cls)
+primitivePartSwapAntiInvariant (ruling-class a b) =
+  rulingClassExtensionality refl refl
+
+primitivePartOrthogonalToPolarization :
+  (cls : RulingClass) →
+  intersection (primitivePart cls) diagonalPolarization ≡ 0
+primitivePartOrthogonalToPolarization (ruling-class a b) =
+  ℚRing.solve
+
+------------------------------------------------------------------------
+-- The regression therefore has an exact two-channel complete response:
+--
+--   arbitrary ruling class
+--      = invariant algebraic channel + primitive anti-invariant channel.
+--
+-- Both channels are already algebraic here. The Clay problem begins only
+-- when this pattern is transported to a variety with genuinely unknown
+-- primitive rational Hodge classes.
+------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 -- MAX-CUT STATUS
