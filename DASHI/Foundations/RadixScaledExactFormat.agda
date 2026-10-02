@@ -2,7 +2,7 @@ module DASHI.Foundations.RadixScaledExactFormat where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 
 import DASHI.Foundations.BinaryFloatingPoint as Binary
 
