@@ -21,7 +21,7 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345PhysicalSystemRound839Exact
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Sum.Base using (inj₁; inj₂)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityVectorFieldRound71Exa
 import DASHI.Physics.Closure.NSTriadKNFixedCanonicalRealityLookupExactRound71Exact as Lookup
 import DASHI.Physics.Closure.NSTriadKNLiteralNonzeroCutoffSupportRound404Exact as R404
 import DASHI.Physics.Closure.NSTriadKNR650Rational345CanonicalStateRound838Exact as State838
+import DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSnapshotRound836Exact as Snapshot
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -75,7 +76,7 @@ positiveRealityAtRepresentative representative member =
   let
     entry =
       Fixed.canonical-mode-value representative
-        (State838.Snapshot.velocity345 representative)
+        (Snapshot.velocity345 representative)
     entryMember =
       State838.snapshotEntryMember member
     negative =
