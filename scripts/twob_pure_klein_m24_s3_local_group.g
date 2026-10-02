@@ -74,9 +74,43 @@ if Size(imageOn24Blocks)<>expectedS3Order then
   Error("3-block action is not S3 order");
 fi;
 
-kernelIntersection := Intersection(Kernel(homOn3Blocks),Kernel(homOn24Blocks));
+kernelM24Projection := Kernel(homOn3Blocks);
+kernelS3Projection := Kernel(homOn24Blocks);
+
+if Size(kernelM24Projection)<>expectedS3Order then
+  Error("kernel of the M24 projection is not the expected S3 factor");
+fi;
+if Size(kernelS3Projection)<>expectedM24Order then
+  Error("kernel of the S3 projection is not the expected M24 factor");
+fi;
+
+kernelIntersection := Intersection(kernelM24Projection,kernelS3Projection);
 if Size(kernelIntersection)<>1 then
   Error("M24 and S3 quotient actions do not jointly separate act2");
+fi;
+
+pureC3Candidates := Filtered(Elements(kernelM24Projection),x -> Order(x)=3);
+if Length(pureC3Candidates)=0 then
+  Error("S3 factor has no order-three element");
+fi;
+pureC3 := pureC3Candidates[1];
+pureC3OnThreeBlocks := Image(homOn24Blocks,pureC3);
+pureC3OnTwentyFourBlocks := Image(homOn3Blocks,pureC3);
+
+if Order(pureC3OnThreeBlocks)<>3 then
+  Error("pure C3 does not survive as order three on the S3 three-block action");
+fi;
+if pureC3OnTwentyFourBlocks<>One(imageOn3Blocks) then
+  Error("pure C3 should act trivially on the M24 24-block quotient");
+fi;
+
+threeBlockPoints := MovedPoints(imageOn24Blocks);
+if Length(threeBlockPoints)<>3 then
+  Error("S3 factor does not act on exactly three points");
+fi;
+pureC3Orbit := Orbit(Group(pureC3OnThreeBlocks),threeBlockPoints[1]);
+if Length(pureC3Orbit)<>3 then
+  Error("pure C3 does not cycle all three S3 blocks");
 fi;
 
 m24Iso := IsomorphismGroups(imageOn3Blocks,MathieuGroup(24));
@@ -113,6 +147,11 @@ AppendTo(out,"  \"m24_factor_order\": ",String(Size(imageOn3Blocks)),",\n");
 AppendTo(out,"  \"s3_block_orbit_degree\": ",String(Length(orbitOf24Block)),",\n");
 AppendTo(out,"  \"s3_factor_order\": ",String(Size(imageOn24Blocks)),",\n");
 AppendTo(out,"  \"joint_kernel_order\": ",String(Size(kernelIntersection)),",\n");
+AppendTo(out,"  \"s3_factor_kernel_order\": ",String(Size(kernelM24Projection)),",\n");
+AppendTo(out,"  \"m24_factor_kernel_order\": ",String(Size(kernelS3Projection)),",\n");
+AppendTo(out,"  \"pure_c3_order\": ",String(Order(pureC3)),",\n");
+AppendTo(out,"  \"pure_c3_three_block_orbit_size\": ",String(Length(pureC3Orbit)),",\n");
+AppendTo(out,"  \"pure_c3_trivial_on_m24_factor\": true,\n");
 AppendTo(out,"  \"m24_factor_isomorphic\": true,\n");
 AppendTo(out,"  \"s3_factor_isomorphic\": true,\n");
 AppendTo(out,"  \"actual_2b_tate_action_identified\": false,\n");
