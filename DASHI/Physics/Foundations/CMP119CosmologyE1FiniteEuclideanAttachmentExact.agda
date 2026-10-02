@@ -19,6 +19,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyE1FiniteEuclideanAttachmentExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyR133E1NaturalityExact as E1R133
@@ -35,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact a
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact as R133
+import DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact as BC2
 
 record FiniteEuclideanBC1Attachment
     {trajectory split}
@@ -107,13 +109,13 @@ record FiniteEuclideanBC1Attachment
 
     bc2FirstVariationCovariant :
       ∀ action background tangent →
-      DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact.firstVariation
+      BC2.firstVariation
         (Present.bc2 present)
         (Carrier.effectivePotential (Present.bc1Carrier present))
         (Euclidean.actConfiguration euclidean action background)
         (actGlobalTangent action tangent)
       ≡
-      DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact.firstVariation
+      BC2.firstVariation
         (Present.bc2 present)
         (Carrier.effectivePotential (Present.bc1Carrier present))
         background tangent
