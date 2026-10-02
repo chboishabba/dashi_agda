@@ -1,11 +1,11 @@
 module DASHI.ComputerScience.TekumTruncationRoundingExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (suc)
 open import Data.Vec using (Vec; _∷_)
 
 import DASHI.Algebra.Trit as Trit
-import DASHI.ComputerScience.TekumFormalPropertiesExact as Formal
+open import DASHI.ComputerScience.TekumFormalPropertiesExact public
+  using (TekumTruncationRoundingWitness)
 
 ------------------------------------------------------------------------
 -- Structural part of Proposition 5.
@@ -16,5 +16,3 @@ import DASHI.ComputerScience.TekumFormalPropertiesExact as Formal
 truncateTwo :
   ∀ {n} → Vec Trit.Trit (suc (suc n)) → Vec Trit.Trit n
 truncateTwo (a0 ∷ a1 ∷ rest) = rest
-
-TekumTruncationRoundingWitness = Formal.TekumTruncationRoundingWitness
