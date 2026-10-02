@@ -32,6 +32,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRou
 import DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact as BC2
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound133Exact as R133
+import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact as E1
 
 record R133EuclideanActionNaturality
     {trajectory split}
@@ -82,6 +83,14 @@ record R133EuclideanActionNaturality
       ≡
       actStressTangent action
         (R133.globalTangentToStressTangent firstWeld tangent)
+
+    effectivePotentialCovariant :
+      ∀ action background →
+      Carrier.effectivePotential (Present.bc1Carrier present)
+        (actGlobalBackground action background)
+      ≡
+      Carrier.effectivePotential (Present.bc1Carrier present)
+        background
 
     bc2FirstVariationCovariant :
       ∀ action background tangent →
@@ -136,3 +145,37 @@ e1NoLongerNeedsIndependentStressCovarianceLaw = true
 
 e1ResidualIsBC2CovariancePlusTransportEquivariance : Bool
 e1ResidualIsBC2CovariancePlusTransportEquivariance = true
+
+
+asDifferentiatedEuclideanCovariance :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld firstWeld}
+    (naturality :
+      R133EuclideanActionNaturality
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {History = History} {Cell = Cell} {cutoff = cutoff}
+        {present = present} {actionWeld = actionWeld}
+        firstWeld) →
+  E1.DifferentiatedEuclideanCovariance
+    (EuclideanAction naturality)
+    (Source.Background (Carrier.source (Present.bc1Carrier present)))
+    (Source.Tangent (Carrier.source (Present.bc1Carrier present)))
+    DASHI.Foundations.RealAnalysisAxioms.ℝ
+asDifferentiatedEuclideanCovariance
+    {present = present} naturality = record
+  { E1.DifferentiatedEuclideanCovariance.actBase =
+      actGlobalBackground naturality
+  ; E1.DifferentiatedEuclideanCovariance.actStress =
+      actGlobalTangent naturality
+  ; E1.DifferentiatedEuclideanCovariance.baseExpectation =
+      Carrier.effectivePotential (Present.bc1Carrier present)
+  ; E1.DifferentiatedEuclideanCovariance.markedDerivative =
+      BC2.firstVariation (Present.bc2 present)
+        (Carrier.effectivePotential (Present.bc1Carrier present))
+  ; E1.DifferentiatedEuclideanCovariance.baseCovariant =
+      effectivePotentialCovariant naturality
+  ; E1.DifferentiatedEuclideanCovariance.derivativeEquivariant =
+      bc2FirstVariationCovariant naturality
+  }
+
+r133InstantiatesGenericMarkedE1Carrier : Bool
+r133InstantiatesGenericMarkedE1Carrier = true
