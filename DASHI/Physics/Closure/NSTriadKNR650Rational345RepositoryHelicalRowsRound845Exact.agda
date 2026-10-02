@@ -218,25 +218,25 @@ module Evaluate
   commFibre₅ :
     Sparse.filterSelected Snapshot.commutatorCellActive
       (Output.physicalOutputFiber 4 Active.k₅)
-    ≡ Cells.t₅a ∷ g₅m ∷ Cells.t₅b ∷ []
+    ≡ g₅m ∷ Cells.t₅a ∷ Cells.t₅b ∷ []
   commFibre₅ = refl
 
   commFibre₆ :
     Sparse.filterSelected Snapshot.commutatorCellActive
       (Output.physicalOutputFiber 4 Active.k₆)
-    ≡ Cells.t₆a ∷ Cells.t₆b ∷ []
+    ≡ Cells.t₆b ∷ Cells.t₆a ∷ []
   commFibre₆ = refl
 
   commFibre₇ :
     Sparse.filterSelected Snapshot.commutatorCellActive
       (Output.physicalOutputFiber 4 Active.k₇)
-    ≡ Cells.t₇a ∷ g₇m ∷ Cells.t₇b ∷ []
+    ≡ g₇m ∷ Cells.t₇b ∷ Cells.t₇a ∷ []
   commFibre₇ = refl
 
   commFibre₈ :
     Sparse.filterSelected Snapshot.commutatorCellActive
       (Output.physicalOutputFiber 4 Active.k₈)
-    ≡ Cells.t₈a ∷ Cells.t₈b ∷ []
+    ≡ Cells.t₈b ∷ Cells.t₈a ∷ []
   commFibre₈ = refl
 
   comm₁ :
