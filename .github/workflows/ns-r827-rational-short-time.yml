@@ -8,6 +8,9 @@ on:
       - 'scripts/check_ns_r827_rational_short_time_bound.py'
       - 'scripts/check_ns_r828_rational_345_fourier_witness.py'
       - 'scripts/check_ns_r829_rational_345_component_certificate.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345VectorWorkRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345EnergyRowsRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
@@ -18,6 +21,9 @@ on:
       - 'scripts/check_ns_r827_rational_short_time_bound.py'
       - 'scripts/check_ns_r828_rational_345_fourier_witness.py'
       - 'scripts/check_ns_r829_rational_345_component_certificate.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345VectorWorkRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345EnergyRowsRound829Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
@@ -71,6 +77,9 @@ jobs:
           export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-ns-r829-r830.log"
           export AGDA_JOBS=1
           scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345VectorWorkRound829Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345EnergyRowsRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda \
-            DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda
+            DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda
