@@ -23,6 +23,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FlatBandChargeOrderSourceReplayExact as Source
 import DASHI.Physics.CondensedMatter.HexagonalSqrt3R30ReciprocalFoldingExact as Hex
@@ -54,33 +55,43 @@ sourceBandFoldingWindowIsThirty = refl
 record Sqrt3R30GeometryPacket : Set where
   constructor sqrt3-r30-geometry-packet
   field
-    realSpaceDeterminantThree : Hex.det2 Hex.superA1 Hex.superA2 ≡ Hex.threeℤ
-    sqrt3MetricScale :
-      Hex.hexNormSq Hex.superA1
-      ≡ Hex.threeℤ Hex.*ℤ Hex.hexNormSq Hex.primitiveA1
-    r30MetricSquare :
-      (+ 4) Hex.*ℤ
-        (Hex.hexDot Hex.primitiveA1 Hex.superA1
-         Hex.*ℤ
-         Hex.hexDot Hex.primitiveA1 Hex.superA1)
-      ≡
-      Hex.threeℤ Hex.*ℤ
-        (Hex.hexNormSq Hex.primitiveA1
-         Hex.*ℤ
-         Hex.hexNormSq Hex.superA1)
-    reciprocalMTransposeNTimes :
+    realSpaceDeterminantThree :
+      Hex.det2 Hex.superA1 Hex.superA2 ≡ Hex.threeℤ
+    primitiveNormSqTwo :
+      Hex.hexNormSq Hex.primitiveA1 ≡ Hex.twoℤ
+    superA1NormSqSix :
+      Hex.hexNormSq Hex.superA1 ≡ Hex.sixℤ
+    superA2NormSqSix :
+      Hex.hexNormSq Hex.superA2 ≡ Hex.sixℤ
+    superMutualDotThree :
+      Hex.hexDot Hex.superA1 Hex.superA2 ≡ Hex.threeℤ
+    primitiveToSuperDotThree :
+      Hex.hexDot Hex.primitiveA1 Hex.superA1 ≡ Hex.threeℤ
+    positiveOrientation :
+      Hex.det2 Hex.primitiveA1 Hex.superA1 ≡ Hex.oneℤ
+    reciprocal11Three :
       Hex.dotCoordinates Hex.superA1 Hex.reciprocalNumeratorB1 ≡ Hex.threeℤ
-    reciprocalCrossTermZero :
+    reciprocal12Zero :
       Hex.dotCoordinates Hex.superA1 Hex.reciprocalNumeratorB2 ≡ Hex.zeroℤ
+    reciprocal21Zero :
+      Hex.dotCoordinates Hex.superA2 Hex.reciprocalNumeratorB1 ≡ Hex.zeroℤ
+    reciprocal22Three :
+      Hex.dotCoordinates Hex.superA2 Hex.reciprocalNumeratorB2 ≡ Hex.threeℤ
 
 canonicalSqrt3R30GeometryPacket : Sqrt3R30GeometryPacket
 canonicalSqrt3R30GeometryPacket =
   sqrt3-r30-geometry-packet
     Hex.supercellDeterminantIsThree
-    Hex.supercellSqrt3ScaleCertificate
-    Hex.r30MetricSquareCertificate
+    Hex.primitiveA1NormSqIsTwo
+    Hex.superA1NormSqIsSix
+    Hex.superA2NormSqIsSix
+    Hex.superDotIsThree
+    Hex.primitiveA1DotSuperA1IsThree
+    Hex.primitiveToSuperA1PositiveOrientation
     Hex.mtN11IsThree
     Hex.mtN12IsZero
+    Hex.mtN21IsZero
+    Hex.mtN22IsThree
 
 ------------------------------------------------------------------------
 -- 3. Three-class folding is now sourced from the literal supercell quotient,
@@ -182,7 +193,7 @@ canonicalGenericToLiteralFoldingUpgrade =
 
 earlierGenericThreeFoldPresentation :
   Fold.ThreeFoldPresentation
-    (Data.Fin.Base.Fin 3)
+    (Fin 3)
     Fold.OneFoldedPoint
 earlierGenericThreeFoldPresentation =
   Fold.canonicalThreeFoldPresentation
