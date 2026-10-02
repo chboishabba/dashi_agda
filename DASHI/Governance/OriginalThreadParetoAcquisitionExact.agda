@@ -10,6 +10,8 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact as IRGCSources
+import DASHI.Governance.PetroleumFinancialRoutingNoncollapseExact as PetroRouting
+import DASHI.Governance.IranContraCovertFlowHistoricalMechanismExact as IranContraHist
 import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact as IranGenealogy
 import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as IRGCPacket
 import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDena
@@ -48,6 +50,9 @@ data OriginalThreadRequirement : Set where
   cubaSanctionsDomesticInstitutionMechanism : OriginalThreadRequirement
   iranCubaSiegeCrossCaseJoin : OriginalThreadRequirement
   cheClassificationRule : OriginalThreadRequirement
+  iranContraHistoricalRoutingPrior : OriginalThreadRequirement
+  currentIranPetroleumRoutingComparator : OriginalThreadRequirement
+  gwbBushOilIranContraReviewedJoin : OriginalThreadRequirement
   broadCountryExpansion : OriginalThreadRequirement
 
 irgcSpanCell : Pareto.RequirementCandidate OriginalThreadRequirement
@@ -158,6 +163,28 @@ cheClassificationCell = Pareto.requirement-candidate
   2 2
   "Concrete Che/Cuba institutional coordinates are already paid. A political label is not required by the current consumer and therefore does not enter the live evidence frontier."
 
+
+iranContraHistoricalCell : Pareto.RequirementCandidate OriginalThreadRequirement
+iranContraHistoricalCell = Pareto.requirement-candidate
+  iranContraHistoricalRoutingPrior
+  true true true false
+  1 6
+  "PAID by IranContraCovertFlowHistoricalMechanismExact using National Archives / Independent Counsel lineage: public-policy/operational divergence, logistics intermediaries and flow-of-funds structure are historical positive witnesses only."
+
+currentIranPetroRoutingCell : Pareto.RequirementCandidate OriginalThreadRequirement
+currentIranPetroRoutingCell = Pareto.requirement-candidate
+  currentIranPetroleumRoutingComparator
+  true true true false
+  2 5
+  "PAID by PetroleumFinancialRoutingNoncollapseExact and IranContraCurrentIranRoutingComparisonExact: current Iran oil/sanctions routing can be topology-compared to historical Iran-Contra without actor, legality, intent or lineage collapse."
+
+gwbBushJoinCell : Pareto.RequirementCandidate OriginalThreadRequirement
+gwbBushJoinCell = Pareto.requirement-candidate
+  gwbBushOilIranContraReviewedJoin
+  false true true false
+  3 2
+  "Not required by the current consumer. GWB retained-book allegations remain candidate-world claims; verified Bush oil biography and archival Iran-Contra record-series existence do not close the alleged connection."
+
 broadExpansionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 broadExpansionCell = Pareto.requirement-candidate
   broadCountryExpansion
@@ -183,6 +210,9 @@ originalThreadPortfolio =
   ∷ cubaPressureInstitutionCell
   ∷ iranCubaCrossCaseCell
   ∷ cheClassificationCell
+  ∷ iranContraHistoricalCell
+  ∷ currentIranPetroRoutingCell
+  ∷ gwbBushJoinCell
   ∷ broadExpansionCell
   ∷ []
 
@@ -245,6 +275,19 @@ cheClassificationOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio cheClassificationCell ≡ false
 cheClassificationOffFrontier = refl
 
+
+iranContraHistoricalPaidOffFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranContraHistoricalCell ≡ false
+iranContraHistoricalPaidOffFrontier = refl
+
+currentIranPetroRoutingPaidOffFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio currentIranPetroRoutingCell ≡ false
+currentIranPetroRoutingPaidOffFrontier = refl
+
+gwbBushJoinNotRequired :
+  Pareto.eligible? gwbBushJoinCell ≡ false
+gwbBushJoinNotRequired = refl
+
 broadExpansionOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio broadExpansionCell ≡ false
 broadExpansionOffFrontier = refl
@@ -263,6 +306,17 @@ iranGenealogySnowball :
   Snowball.SourceRoleSnowballReceipt IranGenealogy.boroujerdiModernizingIslam
 iranGenealogySnowball =
   Snowball.canonicalSourceRoleSnowballReceipt IranGenealogy.boroujerdiModernizingIslam
+
+
+historicalIranContraPrior :
+  IranContraHist.HistoricalRoutingTopology
+historicalIranContraPrior =
+  IranContraHist.iranContraTopology
+
+currentIranPetroleumRouting :
+  PetroRouting.RoutingMechanismReceipt
+currentIranPetroleumRouting =
+  PetroRouting.currentIranBarterReceipt
 
 currentIRGCPacket : IRGCPacket.IRGCDualChronologyPacket
 currentIRGCPacket = IRGCPacket.canonicalIRGCDualChronologyPacket
