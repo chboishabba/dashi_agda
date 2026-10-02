@@ -3,6 +3,8 @@ module DASHI.ComputerScience.TekumBalancedTernaryVerifiedAssembly where
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Algebra.BalancedTernaryIntegerExact
+import DASHI.Algebra.BalancedTernaryA003462BridgeExact
+import DASHI.Algebra.BalancedTernaryFiniteCarrierExact
 import DASHI.Foundations.RadixScaledExactFormat
 import DASHI.Foundations.BinaryFloatingPoint
 import DASHI.Codec.TriadicPAdicCodec
@@ -15,6 +17,7 @@ import DASHI.ComputerScience.TekumAnchorCodecExact
 import DASHI.ComputerScience.TekumRegimeExponentExact
 import DASHI.ComputerScience.TekumSpecialValuesExact
 import DASHI.ComputerScience.TekumFiniteSemanticsExact
+import DASHI.ComputerScience.TekumExactTriadicSemanticsExact
 import DASHI.ComputerScience.TekumFormalPropertiesExact
 import DASHI.ComputerScience.TekumNegationExact
 import DASHI.ComputerScience.TekumUniquenessExact
@@ -24,6 +27,7 @@ import DASHI.ComputerScience.TekumPrecisionCompositionExact
 import DASHI.ComputerScience.TekumFloatingPointStructuralBridgeExact
 import DASHI.ComputerScience.TekumTriadicPAdicKernelBridgeExact
 import DASHI.ComputerScience.TekumPadicOrientationBoundaryExact
+import DASHI.ComputerScience.TekumPadicDualChartExact
 import DASHI.ComputerScience.TekumTernaryStoredProgramExecutionExact
 import DASHI.ComputerScience.TernarySignedDigitAdderSemanticsExact
 import DASHI.ComputerScience.TernarySignedDigitBinaryCodeBridgeExact
@@ -39,13 +43,23 @@ record TekumVerifiedAssemblyBoundary : Set where
   field
     canonicalRepoTritReused : Bool
     positionalBalancedIntegerLayerPresent : Bool
+    existingA003462MagnitudeOwnerReused : Bool
+    finiteTritFin3BijectionPaid : Bool
+    finiteTritPowerThreeCardinalityPaid : Bool
+    positionalIntegerInjectivityPaid : Bool
+
     sourceAnchorDefinitionPresent : Bool
     anchorNegationInvarianceCompilerPresent : Bool
     fifteenStateRegimeCodecPresent : Bool
     sourceExponentCountAndBiasTablePresent : Bool
     specialNaRZeroInfinityClassifierPresent : Bool
     dependentAnchorFieldCarrierPresent : Bool
+
     exactSymbolicFiniteSemanticsPresent : Bool
+    exactTriadicSignedScaleSemanticsPresent : Bool
+    canonicalRationalOrdinaryDecoderPresent : Bool
+    machineFloatUsedAsSemanticAuthority : Bool
+
     injectivityMonotonicityRoundingInterfacesPresent : Bool
     structuralPrecisionCompositionPresent : Bool
 
@@ -59,7 +73,9 @@ record TekumVerifiedAssemblyBoundary : Set where
     executablePadicCylinderSystemPresent : Bool
     padicCylinderKeepsLowOrderPrefix : Bool
     tekumTruncationEqualsPadicCylinderWithoutReversal : Bool
-    reversalOrDualChartRequired : Bool
+    reversalDualChartPresent : Bool
+    dualChartInvolutive : Bool
+    dualPrecisionCompositionPaid : Bool
     tekumPromotedToLiteralPAdicValuation : Bool
 
     existingTernary27StorageReused : Bool
@@ -84,9 +100,12 @@ record TekumVerifiedAssemblyBoundary : Set where
 canonicalTekumVerifiedAssemblyBoundary : TekumVerifiedAssemblyBoundary
 canonicalTekumVerifiedAssemblyBoundary =
   tekumVerifiedAssemblyBoundary
-    true true true true true true true true true true true
+    true true true true true false
+    true true true true true true
+    true true true false
+    true true
     true true true true
-    true true true true false true false
+    true true true true false true true true false
     true true true true
     true true true true
     true true true true false
