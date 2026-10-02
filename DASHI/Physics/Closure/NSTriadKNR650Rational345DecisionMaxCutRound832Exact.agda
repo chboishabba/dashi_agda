@@ -29,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotNormalizationRound8
 import DASHI.Physics.Closure.NSTriadKNR650Rational345RepositoryVectorBoundaryRound829Exact as Boundary
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ShortTimeRound830Exact as Short
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ReserveDecisionRound831Exact as Decision
+import DASHI.Physics.Closure.NSTriadKNR650Rational345RealODEMaxCutRound833Exact as RealODE
 
 data Rational345DecisionLeaf : Set where
   concreteRepositoryVectorEvaluation : Rational345DecisionLeaf
@@ -72,6 +73,21 @@ negativeIntegralRefutesR823ReserveClosed =
 globalRationalHelicalProjectorLawRequiredForDecision : Bool
 globalRationalHelicalProjectorLawRequiredForDecision =
   Boundary.round829DGlobalHelicalProjectorLawsRequired
+
+realODEInternalNSBridgeLeafCount : Nat
+realODEInternalNSBridgeLeafCount = RealODE.realODELeafCount
+
+round71RealityFieldAlreadyConstructed : Bool
+round71RealityFieldAlreadyConstructed =
+  RealODE.fixedAutonomousRealityFieldConstructed
+
+round71TransverseInvariantAlreadyClosed : Bool
+round71TransverseInvariantAlreadyClosed =
+  RealODE.transverseSubspaceInvariant
+
+round74FiniteChartLipschitzAlreadyClosed : Bool
+round74FiniteChartLipschitzAlreadyClosed =
+  RealODE.finiteChartLipschitzMajorantConstructed
 
 additionalReserveEstimateRequiredAfterTwoLeaves : Bool
 additionalReserveEstimateRequiredAfterTwoLeaves = false
