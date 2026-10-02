@@ -35,7 +35,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; -_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 record IsotropicLorentzianStress : Set where
   constructor isotropicStress
@@ -91,17 +91,9 @@ vacuumTraceIsTwiceActive :
   ∀ vacuum →
   trace (stress vacuum)
   ≡ activeStress (stress vacuum) + activeStress (stress vacuum)
-vacuumTraceIsTwiceActive vacuum =
-  trans
-    (vacuumTrace vacuum)
-    (trans
-      (Ring.solve-∀ (rho (stress vacuum)))
-      (sym
-        (trans
-          (cong₂ _+_
-            (vacuumActiveStress vacuum)
-            (vacuumActiveStress vacuum))
-          (Ring.solve-∀ (rho (stress vacuum))))))
+vacuumTraceIsTwiceActive vacuum
+  rewrite pressureIsMinusRho vacuum =
+  Ring.solve-∀ (rho (stress vacuum))
 
 vacuumPositiveRhoImpliesActiveNegative :
   ∀ vacuum →
