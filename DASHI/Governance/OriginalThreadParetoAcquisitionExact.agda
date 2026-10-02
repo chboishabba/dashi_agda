@@ -13,6 +13,7 @@ import DASHI.Governance.IRGCOpenLetter2026SourceAtlasExact as IRGCSources
 import DASHI.Governance.IranianRevolutionaryIntellectualGenealogyExact as IranGenealogy
 import DASHI.Governance.IRGCReviewedEventDualChronologyPacketExact as IRGCPacket
 import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDena
+import DASHI.Governance.IRISDenaPublicRecordCeilingAndFOIExact as IRISFOI
 import DASHI.Governance.ExternalThreatRepressionMechanismTransferExact as ThreatTransfer
 import DASHI.Governance.CubaSanctionsDomesticInstitutionMechanismExact as CubaMechanism
 import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as IranThreatNarrowing
@@ -37,6 +38,7 @@ data OriginalThreadRequirement : Set where
   irgcCausalMechanismReceipt : OriginalThreadRequirement
   friendlyjordiesGarnautFixtureRefresh : OriginalThreadRequirement
   friendlyjordiesFallaciesTypedBinding : OriginalThreadRequirement
+  irisDenaProofHansardVerification : OriginalThreadRequirement
   irisDenaOperationalRecord : OriginalThreadRequirement
   chinaEconomicLeadershipCrossSourceJoin : OriginalThreadRequirement
   mostazafinWorkerCategoryOverlap : OriginalThreadRequirement
@@ -83,12 +85,20 @@ fjordiesFallaciesCell = Pareto.requirement-candidate
   2 4
   "PAID by recovered archive unit plus right-only proposition/claim/comparison binding on Agda PR #1078; absence of a Friendlyjordies-source fallacies claim is explicit rather than orphaned."
 
+
+irisDenaHansardCell : Pareto.RequirementCandidate OriginalThreadRequirement
+irisDenaHansardCell = Pareto.requirement-candidate
+  irisDenaProofHansardVerification
+  true true true true
+  1 4
+  "Acquire the 3 June 2026 proof Committee Hansard pp. 49-52 and verify whether Defence leadership actually stated defensive/platform-maintenance duties. Current content is secondary-attributed through a partisan hearing summary."
+
 irisDenaRecordCell : Pareto.RequirementCandidate OriginalThreadRequirement
 irisDenaRecordCell = Pareto.requirement-candidate
   irisDenaOperationalRecord
   true true true true
   5 7
-  "Command-level primary statements now narrow the fibre: three Australians were aboard, they were not ordered to bunks, and Australian authorities state they did not perform offensive action. Remaining payment is the withheld same-object duty/watch/protocol record needed for independent operational reconstruction."
+  "Public-record ceiling is paid: presence, government non-offensive position and secondary-attributed duty classes are known. Remaining high-value payment is exact watch/duty assignment, embedding protocol text, action log or equivalent same-object operational record."
 
 chinaLeadershipJoinCell : Pareto.RequirementCandidate OriginalThreadRequirement
 chinaLeadershipJoinCell = Pareto.requirement-candidate
@@ -163,6 +173,7 @@ originalThreadPortfolio =
   ∷ irgcCausalCell
   ∷ fjordiesGarnautCell
   ∷ fjordiesFallaciesCell
+  ∷ irisDenaHansardCell
   ∷ irisDenaRecordCell
   ∷ chinaLeadershipJoinCell
   ∷ mostazafinOverlapCell
@@ -220,6 +231,11 @@ cubaPressureInstitutionPaidOffFrontier = refl
 iranCubaCrossCasePaidOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio iranCubaCrossCaseCell ≡ false
 iranCubaCrossCasePaidOffFrontier = refl
+
+
+irisDenaHansardOnFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio irisDenaHansardCell ≡ true
+irisDenaHansardOnFrontier = refl
 
 irisDenaReturnsToFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio irisDenaRecordCell ≡ true
@@ -286,6 +302,17 @@ currentIranThreatTransferResidual :
 currentIranThreatTransferResidual =
   ThreatTransfer.iranCaseSpecificResidual
 
+
+currentIRISPublicRecordCeiling :
+  IRISFOI.PublicRecordCeiling
+currentIRISPublicRecordCeiling =
+  IRISFOI.canonicalPublicRecordCeiling
+
+currentIRISFOITargets :
+  List IRISFOI.FOIAcquisitionDemand
+currentIRISFOITargets =
+  IRISFOI.canonicalFOITargets
+
 irisDenaCurrentResidual : IRISDena.OperationalResidual
 irisDenaCurrentResidual = IRISDena.exactDutyResidual
 
@@ -305,10 +332,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Return to the IRIS Dena exact-duty/embedding residual: obtain an operational action log, watch/duty record, protocol text, or another independently reviewable same-object record."
-    "2. Retain the Iran marginal repression-increment question as required but currently dominated: qualitative wartime routing and the Iran/Cuba comparison are paid, while effect-size identification remains open."
-    "3. Recompute only when a stronger same-object IRIS source appears or the Iran marginal-effect evidence becomes cheaper/higher-gain."
-    "Che classification remains outside the current evidence consumer; broad country expansion remains deferred."
+    "1. Acquire the 3 June 2026 proof Committee Hansard pp. 49-52 to verify the secondary-attributed defensive/platform-maintenance duty classes."
+    "2. In parallel retain the higher-cost exact-duty residual: watchbill, embedding protocol, action log, debrief or equivalent same-object record."
+    "3. Keep the Iran marginal repression-increment residual required but dominated until same-episode causal evidence improves."
+    "Che classification remains outside the current consumer; broad country expansion remains deferred."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
