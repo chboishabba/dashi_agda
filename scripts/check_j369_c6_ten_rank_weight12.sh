@@ -16,6 +16,8 @@ targets=(
   DASHI/Moonshine/OggSSPP3F9FrobeniusCandidateNoGoExact.agda
   DASHI/Moonshine/OggSSPSmallCharacteristicArithmeticSourceSocketExact.agda
   DASHI/Moonshine/OggSSPArithmeticTo369RecognitionExact.agda
+  DASHI/Moonshine/OggP31CompletionTenTwoSevenNineCrossPollinationExact.agda
+  DASHI/Moonshine/TwoSevenNineNumberRoleHubExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -86,6 +88,15 @@ grep -q 'wholeF9FrobeniusCarrierRejected' "${targets[12]}"
 grep -q 'P3ArithmeticTo369Recognition' "${targets[13]}"
 grep -q 'P2ArithmeticTo369Recognition' "${targets[13]}"
 grep -q 'reverseCompatibilityDoesNotBuildArithmeticTo369' "${targets[13]}"
+
+grep -q 'completionTenTo279TypedComposite' "${targets[14]}"
+grep -q 'pointedThirtyIsP31' "${targets[14]}"
+grep -q 'nonaryPointedP31Is279' "${targets[14]}"
+grep -q 'p31IsCanonicalRankTen' "${targets[14]}"
+grep -q 'twoDistinct276RolesNotIdentifiedHere' "${targets[14]}"
+grep -q 'moonshineObserver279Is279' "${targets[15]}"
+grep -q 'principiaCardinalKeyword279Is279' "${targets[15]}"
+grep -q 'sameScalarDoesNotIdentifyRoles' "${targets[15]}"
 
 
 # Generic exceptional-residual target family + arithmetic acquisition wall.
