@@ -3,6 +3,7 @@ module DASHI.Physics.Dynamics.SingularBasinCompressionBridgeExact where
 
 open import DASHI.Core.Prelude
 import DASHI.Cognition.CompressionAttractor as CA
+import DASHI.Physics.Closure.Basin as ClosureBasin
 import DASHI.Physics.Dynamics.SingularBasinReductionExact as SBR
 
 ------------------------------------------------------------------------
@@ -10,9 +11,9 @@ import DASHI.Physics.Dynamics.SingularBasinReductionExact as SBR
 -- machinery.
 --
 -- CompressionAttractor already separates microstate, compressed code, basin,
--- centre, and settling.  A singular-basin style collision is exactly the case
+-- centre, and settling. A singular-basin style collision is exactly the case
 -- where two microstates share one compressed code while selected basin
--- membership differs.  The generic projection theorem then says that basin
+-- membership differs. The generic projection theorem then says that basin
 -- membership cannot be reconstructed as a predicate of compressed code alone.
 ------------------------------------------------------------------------
 
@@ -62,11 +63,74 @@ compression-basin-collision-refutes-factorisation collision =
     (asProjectionPredicateCollision collision)
 
 ------------------------------------------------------------------------
+-- CompressionAttractor -> Closure.Basin weld.
+--
+-- CompressionAttractor supplies an exact settling index but intentionally does
+-- not require one-step forward invariance of its Basin field. Closure.Basin
+-- does require that invariant. Supplying exactly that one missing premise is
+-- sufficient to obtain the repository's standard eventual-stability basin.
+------------------------------------------------------------------------
+
+eventually-from-iterate :
+  ∀ {State : Set}
+    (n : Nat)
+    (step : State → State)
+    (StableShell : State → Set)
+    (state : State) →
+  StableShell (CA.iterate n step state) →
+  ClosureBasin.Eventually step StableShell state
+eventually-from-iterate zero step StableShell state stable =
+  ClosureBasin.now stable
+eventually-from-iterate (suc n) step StableShell state stable =
+  ClosureBasin.later
+    (eventually-from-iterate
+      n
+      step
+      StableShell
+      (step state)
+      stable)
+
+record CompressionBasinForwardInvariant
+  {State Code : Set}
+  (A : CA.CompressionAttractor State Code)
+  (selectedCode : Code) : Set where
+  field
+    basinStep :
+      ∀ state →
+      CA.Basin A selectedCode state →
+      CA.Basin A selectedCode (CA.step A state)
+
+open CompressionBasinForwardInvariant public
+
+compressionAsClosureBasin :
+  ∀ {State Code : Set}
+    (A : CA.CompressionAttractor State Code)
+    (selectedCode : Code) →
+  CompressionBasinForwardInvariant A selectedCode →
+  ClosureBasin.Basin State
+compressionAsClosureBasin A selectedCode forwardInvariant =
+  record
+    { step = CA.step A
+    ; StableShell = λ state → CA.compress A state ≡ selectedCode
+    ; InBasin = CA.Basin A selectedCode
+    ; basin-eventually-stable =
+        λ state inBasin →
+          eventually-from-iterate
+            (CA.settlingTime A selectedCode state)
+            (CA.step A)
+            (λ settled → CA.compress A settled ≡ selectedCode)
+            state
+            (CA.basin-settles A inBasin)
+    ; basin-step =
+        basinStep forwardInvariant
+    }
+
+------------------------------------------------------------------------
 -- Boundary theorem:
 --
 -- A strict compression witness by itself does NOT imply basin information
--- loss.  The additional inside/outside basin distinction is the exact missing
--- premise.  This keeps the existing block-strict-compression result from being
+-- loss. The additional inside/outside basin distinction is the exact missing
+-- premise. This keeps the existing block-strict-compression result from being
 -- over-promoted.
 ------------------------------------------------------------------------
 
