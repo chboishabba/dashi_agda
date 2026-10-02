@@ -30,7 +30,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyPoincareVacuumStressMaxCutExact 
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_; _<_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.YMSprint128SymmetryAndGroupClosure as Sprint128
