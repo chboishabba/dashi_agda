@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNComConcreteActiveOddPQTriadRound62Exact as Unit
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact as Direct
 import DASHI.Physics.Closure.NSTriadKNR650Rational345GeometryCalibrationRound842Exact as Geometry
+import DASHI.Physics.Closure.NSTriadKNR650Rational345UnitGeometryRound842Exact as UnitGeometry
 import DASHI.Physics.Closure.NSTriadKNR650Rational345OrderedCellsRound843Exact as Cells
 
 F : C3.RealField _
@@ -96,7 +97,7 @@ module Evaluate
   cell₈bExact
     rewrite G.embedPlus3 | G.embedPlus4 | C3.embedZero E | G.inv₈ = refl
 
-  evaluation : Cells.Evaluate.OrderedCellEvaluation E I (Geometry.unit-345-geometry unit)
+  evaluation : Cells.Evaluate.OrderedCellEvaluation E I (UnitGeometry.unit-345-geometry unit)
   evaluation = record
     { Cells.Evaluate.cell₁a = cell₁aExact
     ; Cells.Evaluate.cell₁b = cell₁bExact
