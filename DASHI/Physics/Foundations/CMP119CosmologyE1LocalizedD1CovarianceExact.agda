@@ -15,7 +15,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyE1LocalizedD1CovarianceExact whe
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_)
 
@@ -60,7 +60,33 @@ record LocalizedD1EuclideanCovariance
       Finite.Component dataSet →
       Finite.Component dataSet
 
-    -- Pure finite permutation/reindexing statement.
+    localActivityCovariant :
+      ∀ action component configuration →
+      Finite.localActivity dataSet
+        (actComponent action component)
+        (actConfiguration action configuration)
+      ≡
+      Finite.localActivity dataSet component configuration
+
+    -- Pure finite permutation/reindexing statement for the action itself.
+    potentialComponentReindexInvariant :
+      ∀ action configuration →
+      Finite.sumℝ
+        (Finite.mapList
+          (λ component →
+            Finite.localActivity dataSet component
+              (actConfiguration action configuration))
+          (Finite.components dataSet))
+      ≡
+      Finite.sumℝ
+        (Finite.mapList
+          (λ component →
+            Finite.localActivity dataSet
+              (actComponent action component)
+              (actConfiguration action configuration))
+          (Finite.components dataSet))
+
+    -- Pure finite permutation/reindexing statement for D1.
     componentReindexInvariant :
       ∀ action configuration tangent →
       Finite.sumℝ
@@ -133,3 +159,56 @@ globalE1NowReducesToLocalD1AndFiniteReindexing = true
 
 noIndependentGlobalBC2CovarianceEstimateNeeded : Bool
 noIndependentGlobalBC2CovarianceEstimateNeeded = true
+
+
+localizedPotentialCovariant :
+  ∀ {dataSet calculus EuclideanAction}
+    (covariance :
+      LocalizedD1EuclideanCovariance
+        dataSet calculus EuclideanAction)
+    action configuration →
+  Finite.localizedPotential dataSet
+    (actConfiguration covariance action configuration)
+  ≡
+  Finite.localizedPotential dataSet configuration
+localizedPotentialCovariant
+    {dataSet = dataSet}
+    covariance action configuration =
+  trans
+    (potentialComponentReindexInvariant
+      covariance action configuration)
+    (sumMappedCong
+      (λ component →
+        Finite.localActivity dataSet
+          (actComponent covariance action component)
+          (actConfiguration covariance action configuration))
+      (λ component →
+        Finite.localActivity dataSet component configuration)
+      (Finite.components dataSet)
+      (λ component →
+        localActivityCovariant covariance
+          action component configuration))
+
+cmp109EffectivePotentialCovariant :
+  ∀ {dataSet calculus EuclideanAction}
+    (covariance :
+      LocalizedD1EuclideanCovariance
+        dataSet calculus EuclideanAction)
+    action configuration →
+  Finite.cmp109EffectivePotential dataSet
+    (actConfiguration covariance action configuration)
+  ≡
+  Finite.cmp109EffectivePotential dataSet configuration
+cmp109EffectivePotentialCovariant
+    {dataSet = dataSet}
+    covariance action configuration =
+  trans
+    (Finite.cmp109PotentialIsLocalizedSum dataSet
+      (actConfiguration covariance action configuration))
+    (trans
+      (localizedPotentialCovariant covariance action configuration)
+      (sym
+        (Finite.cmp109PotentialIsLocalizedSum dataSet configuration)))
+
+globalPotentialCovarianceNoLongerPrimitive : Bool
+globalPotentialCovarianceNoLongerPrimitive = true
