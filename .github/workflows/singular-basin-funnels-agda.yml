@@ -7,6 +7,7 @@ on:
       - 'DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda'
       - 'DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda'
       - 'scripts/check_singular_funnel_normal_form.py'
+      - 'scripts/check_singular_funnel_stable_manifold_crossing.py'
       - 'Docs/SingularBasinFunnels.md'
       - '.github/workflows/singular-basin-funnels-agda.yml'
   workflow_dispatch:
@@ -31,7 +32,12 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSelectedCrossSectionBracketExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/ScaledBracketResolutionBridgeExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinValidatedNumericsArtifactExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/BasinSeparatingStableManifoldExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/StableManifoldCrossingValidatedArtifactExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda
       - name: Reproduce selected normal-form funnel cross-section
         run: python3 scripts/check_singular_funnel_normal_form.py
+      - name: Reproduce stable-manifold crossing independently
+        run: python3 scripts/check_singular_funnel_stable_manifold_crossing.py
