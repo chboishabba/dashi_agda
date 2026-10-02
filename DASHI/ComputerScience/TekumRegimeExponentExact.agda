@@ -3,16 +3,11 @@ module DASHI.ComputerScience.TekumRegimeExponentExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _∸_)
+open import Data.Maybe using (Maybe; just; nothing)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
 import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
-
-------------------------------------------------------------------------
--- Exact finite regime table from Hunhold Definition 8.
---
--- The allowed anchored three-trit prefixes are precisely the balanced-ternary
--- representations of -7..7, rather than all 27 possible three-trit words.
 
 data RegimeCode : Set where
   rm7 rm6 rm5 rm4 rm3 rm2 rm1 r0 rp1 rp2 rp3 rp4 rp5 rp6 rp7 : RegimeCode
