@@ -33,6 +33,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR133E1NaturalityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda'
       - '.github/workflows/cmp119-physical-source-same-object.yml'
   workflow_dispatch:
 
@@ -94,7 +97,10 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR133E1NaturalityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
             done
