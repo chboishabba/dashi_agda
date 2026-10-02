@@ -1,0 +1,51 @@
+name: M22 Completion10 involution screen
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/j369-ogg-address-ssp15-no-go-20260925
+    paths:
+      - 'scripts/m22_completion10_involution_screen.g'
+      - 'scripts/check_m22_completion10_involution_screen.sh'
+      - '.github/workflows/m22-completion10-involution-screen.yml'
+  pull_request:
+    paths:
+      - 'scripts/m22_completion10_involution_screen.g'
+      - 'scripts/check_m22_completion10_involution_screen.sh'
+      - '.github/workflows/m22-completion10-involution-screen.yml'
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  screen:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install GAP AtlasRep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-atlasrep gap-ctbllib python3
+
+      - name: Screen actual M22 10d GF2 involutions
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_m22_completion10_involution_screen.sh
+
+      - name: Upload M22 Completion10 receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m22-completion10-involution-screen
+          path: build/m22_completion10_involution_screen.json
+          if-no-files-found: warn
