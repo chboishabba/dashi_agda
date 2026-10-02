@@ -32,6 +32,10 @@ assert sum(data["m22d2_orbit_sizes"]) == 276
 assert sum(data["m22_orbit_sizes"]) == 276
 assert data["m22d2_ten_factor_count"] == data["m22d2_factor_dimensions"].count(10)
 assert data["m22_ten_factor_count"] == data["m22_factor_dimensions"].count(10)
+assert len(data["m22_ten_factor_atlasrep_matches"]) == data["m22_ten_factor_count"]
+for labels in data["m22_ten_factor_atlasrep_matches"]:
+    assert labels, "every observed 10d M22 factor must identify with an AtlasRep f2r10 module"
+    assert all("f2r10" in label for label in labels)
 
 print("M22:2 orbit sizes:", data["m22d2_orbit_sizes"])
 print("M22 orbit sizes:", data["m22_orbit_sizes"])
@@ -39,4 +43,5 @@ print("M22:2 F2 factor dimensions:", data["m22d2_factor_dimensions"])
 print("M22 F2 factor dimensions:", data["m22_factor_dimensions"])
 print("M22:2 10d factor count:", data["m22d2_ten_factor_count"])
 print("M22 10d factor count:", data["m22_ten_factor_count"])
+print("M22 10d AtlasRep matches:", data["m22_ten_factor_atlasrep_matches"])
 PY
