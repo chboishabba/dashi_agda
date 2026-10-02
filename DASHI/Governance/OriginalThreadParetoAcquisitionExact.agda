@@ -16,6 +16,8 @@ import DASHI.Governance.IRISDenaAustralianCommandStatementReceiptExact as IRISDe
 import DASHI.Governance.ExternalThreatRepressionMechanismTransferExact as ThreatTransfer
 import DASHI.Governance.CubaSanctionsDomesticInstitutionMechanismExact as CubaMechanism
 import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as IranThreatNarrowing
+import DASHI.Governance.IranCubaSiegeComparativeMechanismExact as IranCuba
+import DASHI.Governance.IranWartimeConditionsRepressionRoutingExact as IranRouting
 import DASHI.Governance.MostazafinWorkerCategoryOverlapReviewedJoinExact as MostazafinOverlap
 
 ------------------------------------------------------------------------
@@ -39,7 +41,8 @@ data OriginalThreadRequirement : Set where
   chinaEconomicLeadershipCrossSourceJoin : OriginalThreadRequirement
   mostazafinWorkerCategoryOverlap : OriginalThreadRequirement
   iranThreatMobilisationShiftMechanism : OriginalThreadRequirement
-  iranThreatRepressionCaseMechanism : OriginalThreadRequirement
+  iranWartimeRepressionRoutingMechanism : OriginalThreadRequirement
+  iranThreatRepressionMarginalIncrement : OriginalThreadRequirement
   cubaSanctionsDomesticInstitutionMechanism : OriginalThreadRequirement
   iranCubaSiegeCrossCaseJoin : OriginalThreadRequirement
   cheClassificationRule : OriginalThreadRequirement
@@ -110,12 +113,19 @@ iranThreatMobilisationCell = Pareto.requirement-candidate
   2 7
   "PAID by ExternalThreatRepressionMechanismTransferExact using the 2026 NBER working paper: strike exposure is associated with a sharp shift from anti-government to pro-government/anti-US-Israel mobilisation. This does not pay a repression-causation theorem."
 
+iranWartimeRoutingCell : Pareto.RequirementCandidate OriginalThreadRequirement
+iranWartimeRoutingCell = Pareto.requirement-candidate
+  iranWartimeRepressionRoutingMechanism
+  true true true false
+  2 8
+  "PAID by IranWartimeConditionsRepressionRoutingExact: Amnesty explicitly attributes intensified repression to authorities' use of wartime conditions as cover. This is qualitative routing, not an experimental effect size or necessity theorem."
+
 iranThreatRepressionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 iranThreatRepressionCell = Pareto.requirement-candidate
-  iranThreatRepressionCaseMechanism
+  iranThreatRepressionMarginalIncrement
   true true true true
-  3 9
-  "General mechanism, Iran mobilisation shift and current intensified-control surfaces are paid. Remaining payment is now the same-episode marginal repression increment attributable to external threat, net of pre-existing coercive institutions and other counter-hypotheses."
+  5 5
+  "Still open: quantify or otherwise identify the marginal repression increment attributable to external threat using a same-episode order/timing record, exposure design, or equivalent Iran-specific evidence. Qualitative routing is already paid."
 
 cubaPressureInstitutionCell : Pareto.RequirementCandidate OriginalThreadRequirement
 cubaPressureInstitutionCell = Pareto.requirement-candidate
@@ -129,7 +139,7 @@ iranCubaCrossCaseCell = Pareto.requirement-candidate
   iranCubaSiegeCrossCaseJoin
   true true true false
   5 8
-  "Required for a comparative siege-pressure theorem, but inert until case-level Iran and Cuba mechanisms are separately paid."
+  "PAID by IranCubaSiegeComparativeMechanismExact at axis level: both cases retain external-pressure x domestic-institution interactions without equating threat magnitude, repression pathway, historical mechanism or effect size."
 
 cheClassificationCell : Pareto.RequirementCandidate OriginalThreadRequirement
 cheClassificationCell = Pareto.requirement-candidate
@@ -157,6 +167,7 @@ originalThreadPortfolio =
   ∷ chinaLeadershipJoinCell
   ∷ mostazafinOverlapCell
   ∷ iranThreatMobilisationCell
+  ∷ iranWartimeRoutingCell
   ∷ iranThreatRepressionCell
   ∷ cubaPressureInstitutionCell
   ∷ iranCubaCrossCaseCell
@@ -194,21 +205,25 @@ cubaPressureInstitutionPaidDropsFromFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio cubaPressureInstitutionCell ≡ false
 cubaPressureInstitutionPaidDropsFromFrontier = refl
 
-iranThreatRepressionOnFrontier :
-  Pareto.onParetoFrontier? originalThreadPortfolio iranThreatRepressionCell ≡ true
-iranThreatRepressionOnFrontier = refl
+iranWartimeRoutingPaidDropsFromFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranWartimeRoutingCell ≡ false
+iranWartimeRoutingPaidDropsFromFrontier = refl
 
-cubaPressureInstitutionOnFrontier :
-  Pareto.onParetoFrontier? originalThreadPortfolio cubaPressureInstitutionCell ≡ true
-cubaPressureInstitutionOnFrontier = refl
+iranThreatMarginalIncrementCurrentlyDominated :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranThreatRepressionCell ≡ false
+iranThreatMarginalIncrementCurrentlyDominated = refl
 
-iranCubaCrossCaseCurrentlyInert :
-  Pareto.eligible? iranCubaCrossCaseCell ≡ false
-iranCubaCrossCaseCurrentlyInert = refl
+cubaPressureInstitutionPaidOffFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio cubaPressureInstitutionCell ≡ false
+cubaPressureInstitutionPaidOffFrontier = refl
 
-irisDenaCurrentlyDominated :
-  Pareto.onParetoFrontier? originalThreadPortfolio irisDenaRecordCell ≡ false
-irisDenaCurrentlyDominated = refl
+iranCubaCrossCasePaidOffFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio iranCubaCrossCaseCell ≡ false
+iranCubaCrossCasePaidOffFrontier = refl
+
+irisDenaReturnsToFrontier :
+  Pareto.onParetoFrontier? originalThreadPortfolio irisDenaRecordCell ≡ true
+irisDenaReturnsToFrontier = refl
 
 cheClassificationOffFrontier :
   Pareto.onParetoFrontier? originalThreadPortfolio cheClassificationCell ≡ false
@@ -250,6 +265,17 @@ currentCubaMechanism =
   CubaMechanism.canonicalCubaPressureMechanism
 
 
+
+currentIranWartimeRouting :
+  IranRouting.WartimeRoutingReceipt
+currentIranWartimeRouting =
+  IranRouting.canonicalWartimeRouting
+
+currentIranCubaComparison :
+  IranCuba.SiegeComparativeMechanism
+currentIranCubaComparison =
+  IranCuba.canonicalComparison
+
 currentIranThreatSameEpisodeResidual :
   IranThreatNarrowing.SameEpisodeResidual
 currentIranThreatSameEpisodeResidual =
@@ -279,10 +305,10 @@ open CurrentOriginalThreadParetoRoute public
 currentRoute : CurrentOriginalThreadParetoRoute
 currentRoute =
   current-original-thread-pareto-route
-    "1. Iran-specific external-threat/repression identification remains the sole live political-history frontier: acquire a same-episode policy/order/timing record or comparable design that identifies the marginal repression increment."
-    "2. Retain pre-existing repression, regime-security interests, protest intensity, economic crisis, state-capacity changes and foreign-agent framing as explicit counter-hypotheses."
-    "3. Only after that receipt should the Iran/Cuba cross-case siege mechanism activate; the Cuba economic/institutional mechanism and general threat/repression prior are already paid."
-    "IRIS Dena exact-duty reconstruction remains required but Pareto-dominated; Che classification remains outside the current evidence consumer."
+    "1. Return to the IRIS Dena exact-duty/embedding residual: obtain an operational action log, watch/duty record, protocol text, or another independently reviewable same-object record."
+    "2. Retain the Iran marginal repression-increment question as required but currently dominated: qualitative wartime routing and the Iran/Cuba comparison are paid, while effect-size identification remains open."
+    "3. Recompute only when a stronger same-object IRIS source appears or the Iran marginal-effect evidence becomes cheaper/higher-gain."
+    "Che classification remains outside the current evidence consumer; broad country expansion remains deferred."
     true false false
 
 data ParetoPriorityMeansSourceAuthority : Set where
