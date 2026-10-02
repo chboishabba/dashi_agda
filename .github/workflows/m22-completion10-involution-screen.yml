@@ -9,6 +9,7 @@ on:
       - 'scripts/m22_completion10_involution_screen.g'
       - 'scripts/check_m22_completion10_involution_screen.sh'
       - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
+      - 'scripts/render_m22_completion10_runtime_certificate.py'
       - 'scripts/m24_276_to_m22_f2_composition_screen.g'
       - '.github/workflows/m22-completion10-involution-screen.yml'
   pull_request:
@@ -50,6 +51,34 @@ jobs:
           set -euo pipefail
           bash scripts/check_m24_276_to_m22_f2_composition_screen.sh
 
+      - name: Render typed Agda runtime certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/render_m22_completion10_runtime_certificate.py \
+            build/m22_completion10_involution_screen.json \
+            build/m24_276_to_m22_f2_composition_screen.json \
+            build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Typecheck generated M22 runtime certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p DASHI/Moonshine/Generated
+          cp build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda \
+            DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+          export AGDA_FLAKE='github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin'
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+          rm DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+
       - name: Upload M22 Completion10 receipts
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,4 +87,5 @@ jobs:
           path: |
             build/m22_completion10_involution_screen.json
             build/m24_276_to_m22_f2_composition_screen.json
+            build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
           if-no-files-found: warn
