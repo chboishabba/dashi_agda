@@ -20,6 +20,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR133E1NaturalityExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
@@ -37,7 +38,7 @@ record R133EuclideanActionNaturality
     {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
     {History Cell : Set}
-    {cutoff : Agda.Builtin.Nat.Nat}
+    {cutoff : Nat}
     {present : Present.PresentCutPhysicalSourceInputs History Cell cutoff}
     {actionWeld : R132.UnifiedGeneratedActionDensity
       {trajectory = trajectory} {split = split} {inputs = inputs} present}
