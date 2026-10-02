@@ -22,7 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_)
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
@@ -175,3 +175,29 @@ strictSignTargetIsPositiveFourSectorBalance = true
 
 wilsonSectorAbsentFromBalance : Bool
 wilsonSectorAbsentFromBalance = true
+
+
+positiveFourSectorBalanceForcesNegativeWeylResponse :
+  ∀ {Configuration}
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (d : Source.CompleteFiniteMetricVariation Configuration)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
+  0ℚ <
+    ((regularNumerator measure d + rOperationNumerator measure d)
+      + (boundaryNumerator measure d + vacuumNumerator measure d)) →
+  Weyl.fourDiagonalPartitionDerivativeSum measure d < 0ℚ
+positiveFourSectorBalanceForcesNegativeWeylResponse
+    measure d laws referenceFixed balancePositive =
+  Sign.positiveWeightedNonWilsonNumeratorForcesNegativeWeylResponse
+    measure d laws referenceFixed
+    (subst
+      (λ value → 0ℚ < value)
+      (sym
+        (weightedNonWilsonNumeratorSplitsFourWays
+          measure d (Sign.base laws)))
+      balancePositive)
+
+strictSignNowSectorwise : Bool
+strictSignNowSectorwise = true
