@@ -88,6 +88,59 @@ samMethyltransferases2021 =
     "Peer-reviewed source for SAM-dependent methyltransferases including COMT, HNMT and DNMT, supporting shared methyl-donor dependence without collapsing their substrates, tissues or physiological roles."
     Source.publicAttribution
 
+
+yoshikawaNakamuraYanai2019 : Source.AttributedSource
+yoshikawaNakamuraYanai2019 =
+  Source.mkDOISource
+    "Takeo Yoshikawa; Tadaho Nakamura; Kazuhiko Yanai"
+    "Histamine N-Methyltransferase in the Brain"
+    "International Journal of Molecular Sciences"
+    "2019"
+    "10.3390/ijms20030737"
+    "https://pubmed.ncbi.nlm.nih.gov/30744146/"
+    Source.academicArticleSource
+    "Peer-reviewed review for HNMT as a histamine-metabolising enzyme in brain and for the importance of HNMT to central histamine concentration; not evidence for a Walsh phenotype classifier."
+    Source.publicAttribution
+
+szukiewicz2024 : Source.AttributedSource
+szukiewicz2024 =
+  Source.mkDOISource
+    "Dariusz Szukiewicz"
+    "Histaminergic System Activity in the Central Nervous System: The Role in Neurodevelopmental and Neurodegenerative Disorders"
+    "International Journal of Molecular Sciences"
+    "2024"
+    "10.3390/ijms25189859"
+    "https://pubmed.ncbi.nlm.nih.gov/39337347/"
+    Source.academicArticleSource
+    "Peer-reviewed review for the two major histamine-metabolism routes, HNMT methylation and DAO oxidation, with compartment/context distinctions retained."
+    Source.publicAttribution
+
+goncalvesEtAl2022 : Source.AttributedSource
+goncalvesEtAl2022 =
+  Source.mkDOISource
+    "Sandra Goncalves; Joana Nunes-Costa; Susana M Cardoso; Nuno Empadinhas; Joerg D Marugg"
+    "Enzyme Promiscuity in Serotonin Biosynthesis, From Bacteria to Plants and Humans"
+    "Frontiers in Microbiology"
+    "2022"
+    "10.3389/fmicb.2022.873555"
+    "https://pubmed.ncbi.nlm.nih.gov/35495641/"
+    Source.academicArticleSource
+    "Peer-reviewed source for human/animal serotonin biosynthesis from tryptophan through 5-HTP to serotonin; this biosynthetic path is distinct from SAM-dependent methyltransferase clearance."
+    Source.publicAttribution
+
+daubnerLeWang2011 : Source.AttributedSource
+daubnerLeWang2011 =
+  Source.mkDOISource
+    "S. Colette Daubner; Tiffany Le; Shanzhi Wang"
+    "Tyrosine Hydroxylase and Regulation of Dopamine Synthesis"
+    "Archives of Biochemistry and Biophysics"
+    "2011"
+    "10.1016/j.abb.2010.12.017"
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3065393/"
+    Source.academicArticleSource
+    "Peer-reviewed review for catecholamine biosynthesis: tyrosine to L-DOPA by tyrosine hydroxylase and L-DOPA to dopamine by aromatic amino acid decarboxylase."
+    Source.publicAttribution
+
 canonicalChegenWalshUndermethylationSourceAtlas :
   Source.AttributedSourceAtlas
 canonicalChegenWalshUndermethylationSourceAtlas =
@@ -99,6 +152,10 @@ canonicalChegenWalshUndermethylationSourceAtlas =
     ∷ walshInterviewThirtyThousand
     ∷ mthfrPerspective2026
     ∷ samMethyltransferases2021
+    ∷ yoshikawaNakamuraYanai2019
+    ∷ szukiewicz2024
+    ∷ goncalvesEtAl2022
+    ∷ daubnerLeWang2011
     ∷ [])
     "Separates the reel creator's claims, Walsh/Walsh-Institute claims, and peer-reviewed biochemical claims. No source attribution imports agreement, proof, endorsement, population transport, diagnosis, or treatment authority."
 
