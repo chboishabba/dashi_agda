@@ -67,6 +67,42 @@ pitchforkSlow O P x mu =
   in epsilon P * (((zero - mu) + a P) + (b P * x))
 
 ------------------------------------------------------------------------
+-- Exact symbolic Jacobian owner for the normal form.
+--
+-- The authors' Normal_form_figure.m uses:
+--
+--   J11 = mu - 3*x^2
+--   J12 = x
+--   J21 = epsilon*b
+--   J22 = -epsilon
+------------------------------------------------------------------------
+
+record ScalarMatrix2 (O : ScalarOps) : Set where
+  constructor scalarMatrix2
+  field
+    entry11 entry12 entry21 entry22 : Scalar O
+
+open ScalarMatrix2 public
+
+pitchforkJacobian :
+  (O : ScalarOps) →
+  PitchforkParameters O →
+  Scalar O →
+  Scalar O →
+  ScalarMatrix2 O
+pitchforkJacobian O P x mu =
+  let
+    open ScalarOps O
+    x2 = x * x
+    threeX2 = (x2 + x2) + x2
+  in
+  scalarMatrix2
+    (mu - threeX2)
+    x
+    (epsilon P * b P)
+    (zero - epsilon P)
+
+------------------------------------------------------------------------
 -- Adaptive active-rotator source surface.
 --
 -- Public source implementation one_osc_singular_basin.ode:
