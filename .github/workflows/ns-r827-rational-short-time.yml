@@ -7,6 +7,8 @@ on:
       - 'scripts/check_ns_r823_exact_sparse_reserve_witness.py'
       - 'scripts/check_ns_r827_rational_short_time_bound.py'
       - 'scripts/check_ns_r828_rational_345_fourier_witness.py'
+      - 'scripts/check_ns_r829_rational_345_component_certificate.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
       - '.github/workflows/ns-r827-rational-short-time.yml'
@@ -15,6 +17,8 @@ on:
       - 'scripts/check_ns_r823_exact_sparse_reserve_witness.py'
       - 'scripts/check_ns_r827_rational_short_time_bound.py'
       - 'scripts/check_ns_r828_rational_345_fourier_witness.py'
+      - 'scripts/check_ns_r829_rational_345_component_certificate.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda'
       - '.github/workflows/ns-r827-rational-short-time.yml'
@@ -42,6 +46,8 @@ jobs:
 
       - name: Check exact rational Pythagorean R828 seed and short-time enclosure
         run: python scripts/check_ns_r828_rational_345_fourier_witness.py
+      - name: Check exact R829 component certificate
+        run: python scripts/check_ns_r829_rational_345_component_certificate.py
 
   agda-r829-r830:
     runs-on: ubuntu-24.04
@@ -65,5 +71,6 @@ jobs:
           export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-ns-r829-r830.log"
           export AGDA_JOBS=1
           scripts/run_agda29_parallel_check.sh \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345ComponentScalarRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda
