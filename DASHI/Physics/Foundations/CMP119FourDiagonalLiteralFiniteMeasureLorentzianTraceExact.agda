@@ -364,6 +364,71 @@ module _
       (vacuumTwiceActiveEqualsTrace rhoL vacuum)
       doubledNegative
 
+  ------------------------------------------------------------------------
+  -- FINITE SAME-SOURCE FLRW MATTER-ACCELERATION SIGN
+  --
+  -- The physical Friedmann prefactor 4 pi G/(3 c^2) is represented here by
+  -- one strictly positive rational factor K. No numerical G,c, Lambda,
+  -- curvature, initial condition, or continuum Friedmann solution is inserted.
+  ------------------------------------------------------------------------
+
+  matterAccelerationContribution :
+    ℚ → ℚ → ℚ
+  matterAccelerationContribution positiveGravityFactor rhoL =
+    - (positiveGravityFactor * lorentzianActiveWithContinuedTime rhoL)
+
+  negativeActiveStressGivesPositiveMatterAcceleration :
+    ∀ positiveGravityFactor rhoL →
+    0ℚ < positiveGravityFactor →
+    lorentzianActiveWithContinuedTime rhoL < 0ℚ →
+    0ℚ < matterAccelerationContribution positiveGravityFactor rhoL
+  negativeActiveStressGivesPositiveMatterAcceleration
+      positiveGravityFactor rhoL factorPositive activeNegative =
+    let
+      scaledNegative :
+        positiveGravityFactor * lorentzianActiveWithContinuedTime rhoL
+        < positiveGravityFactor * 0ℚ
+      scaledNegative =
+        ℚP.*-monoˡ-<-pos positiveGravityFactor activeNegative
+
+      scaledBelowZero :
+        positiveGravityFactor * lorentzianActiveWithContinuedTime rhoL < 0ℚ
+      scaledBelowZero =
+        subst
+          (λ upper →
+            positiveGravityFactor * lorentzianActiveWithContinuedTime rhoL
+            < upper)
+          (ℚRing.solve-∀ positiveGravityFactor)
+          scaledNegative
+
+      negatedPositive :
+        0ℚ
+        < - (positiveGravityFactor
+            * lorentzianActiveWithContinuedTime rhoL)
+      negatedPositive =
+        subst
+          (λ lower →
+            lower
+            < - (positiveGravityFactor
+                * lorentzianActiveWithContinuedTime rhoL))
+          (ℚRing.solve [])
+          (ℚP.neg-antimono-< scaledBelowZero)
+    in
+    negatedPositive
+
+  positiveVacuumEnergyGivesPositiveMatterAcceleration :
+    ∀ positiveGravityFactor rhoL →
+    0ℚ < positiveGravityFactor →
+    ContinuedVacuumTensorStructure rhoL →
+    0ℚ < rhoL →
+    0ℚ < matterAccelerationContribution positiveGravityFactor rhoL
+  positiveVacuumEnergyGivesPositiveMatterAcceleration
+      positiveGravityFactor rhoL factorPositive vacuum rhoPositive =
+    negativeActiveStressGivesPositiveMatterAcceleration
+      positiveGravityFactor rhoL factorPositive
+      (positiveVacuumEnergyGivesNegativeActiveStress
+        rhoL vacuum rhoPositive)
+
   continuedNegativeRequiresTimelikeCorrectionBelowEuclideanSum :
     ∀ rhoL →
     lorentzianActiveWithContinuedTime rhoL < 0ℚ →
