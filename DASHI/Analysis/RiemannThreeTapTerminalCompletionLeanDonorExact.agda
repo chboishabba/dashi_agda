@@ -94,7 +94,7 @@ currentThreeTapTerminalCompletionReceipt =
     "29169957eadb1c6d77f027c3f03926c6a29b0152"
     "6edfed016c24ce1296e00950d052b0a09e9036ec"
     "5138969d1f7385ce3c1ea4fbdb51957c81655b6d"
-    "32811172e662590605ed0f4b58b752c0ae0e702a"
+    "93d7b8e50c18e13976c0739c840e31d923ea8b64"
     "8fb6c46dfb650a5765aa83632aeea96c8459d413"
     "685165be8977a4451c616af1465adcf4f6556502"
 
@@ -117,6 +117,7 @@ record ThreeTapTerminalCompletionBoundary : Set where
     transformedProjectiveM6M8TransportPaid : Bool
     transformedNormalizedProjectiveRescaleSourceWritten : Bool
     transformedAdaptiveEighthRemainderSourceWritten : Bool
+    transformedPhysicalM6M8RescaleSourceWritten : Bool
     transformedJ2PolynomialSourceWritten : Bool
     signedFifthRouteTargetsCanonicalMarginSourceWritten : Bool
     transformedNearLineJ2J4CoordinatesSourceWritten : Bool
@@ -152,6 +153,8 @@ record ThreeTapTerminalCompletionBoundary : Set where
       transformedNormalizedProjectiveRescaleSourceWritten ≡ true
     adaptiveEighthRemainderPaid :
       transformedAdaptiveEighthRemainderSourceWritten ≡ true
+    physicalM6M8RescalePaid :
+      transformedPhysicalM6M8RescaleSourceWritten ≡ true
     j2PolynomialPaid :
       transformedJ2PolynomialSourceWritten ≡ true
     signedFifthCommonConsumerPaid :
@@ -195,16 +198,16 @@ canonicalThreeTapTerminalCompletionBoundary =
     true true
     true true true
     true true true
-    true true true false true true true true true
+    true true true false true true true true true true
     true true
     false true false false false
     false false false
 
-    refl refl refl refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl
     refl refl refl
 
-    "The exact transformed selected-zero target, physical/normalized projective rescale, actual transformed endpoint projective-profile objects, support-envelope M6/M8 bounds, and adaptive eighth-order cosine remainder are source-written. Exact projective-shift commutation remains intentionally unproved and unnecessary. The transformed signed J2 coordinate is now an exact epsilon-polynomial with zero baseline. Remaining: recut the complete local/far terminal compiler around the adaptive normalized radius, determine the sign/vanishing of the explicit J2 polynomial (and J4 if it vanishes), then prove or refute strict completed terminal positivity at resonance."
+    "The exact transformed selected-zero target, physical/normalized projective rescale, actual transformed endpoint projective-profile objects, support-envelope M6/M8 bounds, exact physical/normalized M6/M8 rescaling, adaptive alpha/q local domain, and adaptive eighth-order cosine remainder are source-written. Exact projective-shift commutation remains intentionally unproved and unnecessary. The transformed signed J2 coordinate is now an exact epsilon-polynomial with zero baseline. Remaining: recut the complete local/far terminal compiler around the adaptive normalized radius, determine the sign/vanishing of the explicit J2 polynomial (and J4 if it vanishes), then prove or refute strict completed terminal positivity at resonance."
     "The physical shift log 2 is not O(1) in the normalized quartic variable: it is B(t)=(t/16)log2 and already exceeds pi+1 for t>=200. Reusing the original support/M6/M8 constants would be a same-object error. Also, projectiveProfile(T_eps g) must not be identified with T_eps(projectiveProfile g) without a theorem; Lean now records that commutation only as an unpaid proposition."
     "If one-scale three-tap fails, reuse the same normalized-shift and moment-transport interfaces for the log2/log3 two-scale operator; do not create a parallel budget formalism."
     "Keep the signed fifth-cap/RvM correlation route independent.  It targets the same canonical high cut and remains a separate analytic producer."
