@@ -19,6 +19,7 @@ data ReviewItemKind : Set where
   authorityFollow researchAcquisition legalTreatment scopeHandoff :
     ReviewItemKind
   sourceCorrespondence : ReviewItemKind
+  ontologyDiagnostic : ReviewItemKind
 
 data ReviewStatus : Set where
   pending accepted rejected abstained qualified superseded needsEvidence :

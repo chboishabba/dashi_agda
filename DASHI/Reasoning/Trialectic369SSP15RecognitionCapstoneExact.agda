@@ -59,7 +59,10 @@ import DASHI.Reasoning.Trialectic369MultiplicityProjectionPositionIndependenceEx
 import DASHI.Reasoning.Trialectic369Selected3BSourceAndMonomialCapstoneExact as SourceAndMonomial
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeMaxCut
 import DASHI.Reasoning.Trialectic369Selected3BConstituentRetractionExact as ConstituentRetraction
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as ProjectedMaxCut
 import DASHI.Reasoning.Trialectic369OrbifoldCoordinateRetractionWrongTypeExact as OrbifoldRetraction
+import DASHI.Reasoning.Trialectic369SemanticLinearConstituentRetractionCompilerExact as SemanticRetraction
+import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as SemanticProjected
 import DASHI.Reasoning.Trialectic369LinearMultiplicityBasisSpecialisationCompilerExact as BasisSpecialisation
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as LinearCompletion
@@ -1095,6 +1098,143 @@ orbifoldCoordinateFaithfulnessDoesNotPayCanonicalLinearFaithfulness :
     orbifoldCoordinateRetractionBoundary
   ≡ false
 orbifoldCoordinateFaithfulnessDoesNotPayCanonicalLinearFaithfulness = refl
+
+
+selected3BProjectedActionMaxCutBoundary :
+  ProjectedMaxCut.Trialectic369Selected3BProjectedActionMaxCutBoundary
+selected3BProjectedActionMaxCutBoundary =
+  ProjectedMaxCut.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+
+selected3BProjectedFullGradeRecoversConstituentAction :
+  ProjectedMaxCut.fullGradeProjectionRecoversConstituentAction
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BProjectedFullGradeRecoversConstituentAction = refl
+
+selected3BProjectedRouteNeedsNoSeparateInjectivity :
+  ProjectedMaxCut.separateInclusionInjectivityNotRequiredOnProjectedRoute
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BProjectedRouteNeedsNoSeparateInjectivity = refl
+
+selected3BOneProjectedActionEquationSuffices :
+  ProjectedMaxCut.oneProjectedActionEquationSuffices
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BOneProjectedActionEquationSuffices = refl
+
+selected3BProjectedRouteCompilesCanonicalCompletion :
+  ProjectedMaxCut.canonicalCompletionCompilerOwned
+    selected3BProjectedActionMaxCutBoundary
+  ≡ true
+selected3BProjectedRouteCompilesCanonicalCompletion = refl
+
+selected3BProjectedRouteActualRetractionStillOpen :
+  ProjectedMaxCut.actualLinearRetractionInhabitedHere
+    selected3BProjectedActionMaxCutBoundary
+  ≡ false
+selected3BProjectedRouteActualRetractionStillOpen = refl
+
+selected3BProjectedActionEquationStillOpen :
+  ProjectedMaxCut.actualProjectedActionEquationInhabitedHere
+    selected3BProjectedActionMaxCutBoundary
+  ≡ false
+selected3BProjectedActionEquationStillOpen = refl
+
+
+semanticLinearRetractionCompilerBoundary :
+  SemanticRetraction.Trialectic369SemanticLinearRetractionCompilerBoundary
+semanticLinearRetractionCompilerBoundary =
+  SemanticRetraction.canonicalTrialectic369SemanticLinearRetractionCompilerBoundary
+
+semantic196883IsFiniteCoordinateCarrier :
+  SemanticRetraction.semanticCarrierIsFiniteCoordinateCarrier
+    semanticLinearRetractionCompilerBoundary
+  ≡ true
+semantic196883IsFiniteCoordinateCarrier = refl
+
+semanticLinearCarrierEqualityRejected :
+  SemanticRetraction.semanticLinearCarrierEqualityRejected
+    semanticLinearRetractionCompilerBoundary
+  ≡ true
+semanticLinearCarrierEqualityRejected = refl
+
+semanticLinearBasisFrameIsCorrectBridgeType :
+  SemanticRetraction.basisFrameIsCorrectBridgeType
+    semanticLinearRetractionCompilerBoundary
+  ≡ true
+semanticLinearBasisFrameIsCorrectBridgeType = refl
+
+semanticBasisFrameDoesNotCompileRetraction :
+  SemanticRetraction.basisFrameAloneCompilesRetraction
+    semanticLinearRetractionCompilerBoundary
+  ≡ false
+semanticBasisFrameDoesNotCompileRetraction = refl
+
+semanticLinearBasisFrameStillOpen :
+  SemanticRetraction.actualSemanticLinearBasisFrameInhabitedHere
+    semanticLinearRetractionCompilerBoundary
+  ≡ false
+semanticLinearBasisFrameStillOpen = refl
+
+actualLinearRetractionStillOpenAfterSemanticCorrection :
+  SemanticRetraction.actualLinearRetractionInhabitedHere
+    semanticLinearRetractionCompilerBoundary
+  ≡ false
+actualLinearRetractionStillOpenAfterSemanticCorrection = refl
+
+selected3BSemanticProjectedCompletionBoundary :
+  SemanticProjected.Trialectic369Selected3BSemanticProjectedCompletionBoundary
+selected3BSemanticProjectedCompletionBoundary =
+  SemanticProjected.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary
+
+selected3BSemanticBasisIsOptionalNotCarrierEquality :
+  SemanticProjected.semanticBasisFrameIsOptionalNotCarrierEquality
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BSemanticBasisIsOptionalNotCarrierEquality = refl
+
+selected3BSemanticBasisDoesNotPayRetraction :
+  SemanticProjected.semanticBasisFrameDoesNotCompileRetraction
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BSemanticBasisDoesNotPayRetraction = refl
+
+selected3BActualLinearRetractionIsSourceLeaf :
+  SemanticProjected.actualLinearRetractionIsSourceLeaf
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BActualLinearRetractionIsSourceLeaf = refl
+
+selected3BProjectedActionIsSourceLeaf :
+  SemanticProjected.projectedActionEquationIsSourceLeaf
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BProjectedActionIsSourceLeaf = refl
+
+selected3BOnlyRetractionAndProjectedActionRemain :
+  SemanticProjected.onlyLinearRetractionAndProjectedActionRemain
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BOnlyRetractionAndProjectedActionRemain = refl
+
+selected3BCorrectedCanonicalCompletionCompilerPaid :
+  SemanticProjected.canonicalCompletionCompilerOwned
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ true
+selected3BCorrectedCanonicalCompletionCompilerPaid = refl
+
+selected3BCorrectedActualRetractionStillOpen :
+  SemanticProjected.actualLinearRetractionInhabitedHere
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ false
+selected3BCorrectedActualRetractionStillOpen = refl
+
+selected3BCorrectedProjectedActionStillOpen :
+  SemanticProjected.projectedActionInputInhabitedHere
+    selected3BSemanticProjectedCompletionBoundary
+  ≡ false
+selected3BCorrectedProjectedActionStillOpen = refl
 
 selected3BActualMonomialBasisStillUnpaid :
   SourceAndMonomial.actualMonomialBasisPaidHere

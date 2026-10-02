@@ -133,6 +133,8 @@ import DASHI.Core.HistoryQualifiedSelectionTopologyExact
 import DASHI.Core.MeasurementBoundaryNonfactorabilityExact
 import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact
 import DASHI.Core.PoliticalContestabilityExact
+import DASHI.Core.GovernanceTrajectoryRealisationExact
+import DASHI.Core.FriendlyjordiesGovernanceQuestionExact
 import DASHI.Core.CategoryAuthorityAuditExact
 import DASHI.Core.MultiaxialResidualBundleExact
 import DASHI.Core.RecognitionConstitutionNonfactorabilityExact
@@ -191,3 +193,4 @@ module DASHI.Core.Everything where
 -- Theory underdetermination, epistemic suspension, and discriminating experiments.
 
 -- Law-like invariance under declared counterfactual/control families.
+import DASHI.Core.HistoricalMechanismCompilerExact

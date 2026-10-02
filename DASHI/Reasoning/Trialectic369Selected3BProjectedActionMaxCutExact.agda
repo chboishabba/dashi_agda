@@ -31,11 +31,12 @@ open import DASHI.Core.Prelude
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; cong; sym; trans)
 
 import DASHI.Geometry.HilbertLorentzForcing as Linear
 import DASHI.Moonshine.MonsterWeightTwoLinearActionBridgeExact as WeightTwo
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
+import DASHI.Moonshine.Monster3BCentralCharacterInertiaExact as Inertia
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as Core
 import DASHI.Reasoning.Trialectic369Selected3BActionViaFaithfulInclusionExact as Comparison
 import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGrade
@@ -144,16 +145,16 @@ canonicalActionIntertwiningFromProjectedAction :
 canonicalActionIntertwiningFromProjectedAction core retraction projected =
   record
     { intertwines = λ normalizer state →
-        FullGrade.transportForwardComparison
+        Comparison.transportForwardComparison
           (Core.constituentCarrierIsSelectedState core)
           (WeightTwo.constituentAct
             (Core.weightTwoLinearBridge core)
             (Core.normalizerToMonster core normalizer)
             state)
-          (DASHI.Moonshine.Monster3BCentralCharacterInertiaExact.act
+          (Inertia.act
             (Single.normalizerAction (Core.linearProducer core))
             normalizer
-            (FullGrade.transportForward
+            (Comparison.transportForward
               (Core.constituentCarrierIsSelectedState core)
               state))
           (constituentActionEqualsSelected
@@ -173,6 +174,41 @@ canonicalCompletionFromProjectedAction core retraction projected =
         canonicalActionIntertwiningFromProjectedAction
           core retraction projected
     }
+
+------------------------------------------------------------------------
+-- 3b. Compatibility: existing canonical action + retraction gives the
+--     projected-action receipt automatically.
+------------------------------------------------------------------------
+
+projectedActionFromCanonicalIntertwining :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (retraction : Retraction.ConstituentRetraction core) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  SelectedActionIsProjectedFullGrade core retraction
+projectedActionFromCanonicalIntertwining core retraction action =
+  record
+    { selectedEqualsProjectedFullGrade = λ normalizer state →
+        trans
+          (sym
+            (Comparison.includedActionEqualityFromIntertwining
+              core action normalizer state))
+          (sym
+            (projectedFullGradeRecoversConstituent
+              core retraction normalizer state))
+    }
+
+projectedCompletionFromCanonicalIntertwining :
+  ∀ {Monster K}
+    (core : Core.CanonicalSelected3BLinearCore {Monster} {K}) →
+  (retraction : Retraction.ConstituentRetraction core) →
+  Core.CanonicalSelected3BActionIntertwining core →
+  Core.CanonicalSelected3BLinearCompletion {Monster} {K}
+projectedCompletionFromCanonicalIntertwining core retraction action =
+  canonicalCompletionFromProjectedAction
+    core retraction
+    (projectedActionFromCanonicalIntertwining
+      core retraction action)
 
 ------------------------------------------------------------------------
 -- 4. One source counterexample rejects the projected route.
@@ -246,6 +282,7 @@ record Trialectic369Selected3BProjectedActionMaxCutBoundary : Set where
     fullGradeProjectionRecoversConstituentAction : Bool
     separateInclusionInjectivityNotRequiredOnProjectedRoute : Bool
     oneProjectedActionEquationSuffices : Bool
+    canonicalActionImpliesProjectedReceiptGivenRetraction : Bool
     canonicalActionCompilerOwned : Bool
     canonicalCompletionCompilerOwned : Bool
     actualLinearRetractionInhabitedHere : Bool
@@ -256,5 +293,5 @@ canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary :
   Trialectic369Selected3BProjectedActionMaxCutBoundary
 canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary =
   trialectic-369-selected3b-projected-action-maxcut-boundary
-    true true true true true
+    true true true true true true
     false false false

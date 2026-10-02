@@ -12,6 +12,9 @@ import DASHI.Interop.ITIRHousingEpisodeSensibLawAdapterExact as HousingParity
 import DASHI.Interop.ITIRLaterMedicalParticularHarmSensibLawAdapterExact as LaterMedicalParity
 import DASHI.Interop.ITIRHealthRecordSensibLawAdapterExact as GenericHealthParity
 import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorParity
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -59,3 +62,31 @@ selectedHealthEvidenceProcessorParity :
   ProcessorParity.HealthEvidenceProcessorParityBoundary
 selectedHealthEvidenceProcessorParity =
   ProcessorParity.canonicalHealthEvidenceProcessorParityBoundary
+
+selectedFriendlyjordiesNarrativeGovernanceBoundary :
+  FriendlyjordiesNarrative.FriendlyjordiesNarrativeGovernanceBoundary
+selectedFriendlyjordiesNarrativeGovernanceBoundary =
+  FriendlyjordiesNarrative.canonicalFriendlyjordiesNarrativeGovernanceBoundary
+
+selectedFriendlyjordiesCompetingNarrativeBoundary :
+  FriendlyjordiesCompeting.FriendlyjordiesSensibLawBoundary
+selectedFriendlyjordiesCompetingNarrativeBoundary =
+  FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
+
+
+
+selectedFriendlyjordiesSourceTotality :
+  FriendlyjordiesSourceTotality.SourceTotalComparison
+selectedFriendlyjordiesSourceTotality =
+  FriendlyjordiesSourceTotality.canonicalFriendlyjordiesSourceTotality
+
+
+selectedFriendlyjordiesConstructiveSourceTotalityBoundary :
+  FriendlyjordiesSourceTotality.ConstructiveSourceTotalityBoundary
+selectedFriendlyjordiesConstructiveSourceTotalityBoundary =
+  FriendlyjordiesSourceTotality.canonicalConstructiveSourceTotalityBoundary
+
+selectedFriendlyjordiesResidualAcquisitionClosure :
+  FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
+selectedFriendlyjordiesResidualAcquisitionClosure =
+  FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
