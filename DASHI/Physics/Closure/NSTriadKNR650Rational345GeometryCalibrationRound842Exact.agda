@@ -18,7 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345GeometryCalibrationRound842
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (+_)
+open import Data.Integer.Base using (+_; -[1+_])
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -72,6 +72,39 @@ module Geometry
     {E : C3.IntegerEmbedding F}
     (unit : Unit.UnitPreservingIntegerEmbedding F E)
     (I : C3.ModeInverseSquare F E) where
+
+  embedPlus3 : C3.embedInteger E (+ 3) ≡ 3
+  embedPlus3 =
+    trans
+      (Scale.positiveNatEmbeddingScale E 3)
+      (trans
+        (cong (Scale.natAsRational 3 *_) (UnitWeld.embeddingUnitIsOne unit))
+        (solve []))
+
+  embedPlus4 : C3.embedInteger E (+ 4) ≡ 4
+  embedPlus4 =
+    trans
+      (Scale.positiveNatEmbeddingScale E 4)
+      (trans
+        (cong (Scale.natAsRational 4 *_) (UnitWeld.embeddingUnitIsOne unit))
+        (solve []))
+
+  embedMinus3 : C3.embedInteger E (-[1+ 2 ]) ≡ - 3
+  embedMinus3 =
+    trans
+      (Scale.negativeMagnitudeEmbeddingScale E 2)
+      (cong -_ (trans
+        (cong (Scale.natAsRational 3 *_) (UnitWeld.embeddingUnitIsOne unit))
+        (solve [])))
+
+  embedMinus4 : C3.embedInteger E (-[1+ 3 ]) ≡ - 4
+  embedMinus4 =
+    trans
+      (Scale.negativeMagnitudeEmbeddingScale E 3)
+      (cong -_ (trans
+        (cong (Scale.natAsRational 4 *_) (UnitWeld.embeddingUnitIsOne unit))
+        (solve [])))
+
 
   norm₁ : C3.normSquared I Active.k₁ ≡ 25
   norm₁ = trans (UnitWeld.liveSquaredDisplacementIsLattice unit I Active.k₁) lattice₁
