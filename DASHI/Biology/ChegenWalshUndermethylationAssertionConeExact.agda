@@ -9,6 +9,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Biology.ChegenWalshUndermethylationSourceAtlasExact as Sources
 import DASHI.Biology.OneCarbonHistamineMethylationNetworkExact as Network
+import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as GenericCone
+import DASHI.Biology.CausalIdentificationFamiliesExact as Identification
 
 ------------------------------------------------------------------------
 -- REEL 19 ASSERTION CONE
@@ -217,3 +219,64 @@ canonicalAttributionPreservationBoundary =
     true refl
     true refl
     false refl
+
+------------------------------------------------------------------------
+-- Projection into the repo-generic implication-cone / causal-ID machinery.
+--
+-- The domain owner retains sourceReportedOnly/openEmpiricalQuestion because
+-- those carry useful provenance states not present in the three-valued generic
+-- cone.  Promotion-relevant readings project into the canonical cone rather
+-- than creating a second implication semantics.
+------------------------------------------------------------------------
+
+toGenericConeStatus : ClaimStatus → GenericCone.ConeEdgeStatus
+toGenericConeStatus sourceReportedOnly = GenericCone.qualifiedEdge
+toGenericConeStatus externallySupportedBounded = GenericCone.supportedEdge
+toGenericConeStatus qualified = GenericCone.qualifiedEdge
+toGenericConeStatus blocked = GenericCone.blockedEdge
+toGenericConeStatus openEmpiricalQuestion = GenericCone.qualifiedEdge
+
+data ReelImplicationClass : Set where
+  measuredOrReportedResultClass : ReelImplicationClass
+  associationClass : ReelImplicationClass
+  causalEffectClass : ReelImplicationClass
+  mechanismClass : ReelImplicationClass
+  practiceRecommendationClass : ReelImplicationClass
+
+toGenericImplicationKind : ReelImplicationClass → GenericCone.ImplicationKind
+toGenericImplicationKind measuredOrReportedResultClass =
+  GenericCone.restatesMeasuredResult
+toGenericImplicationKind associationClass =
+  GenericCone.associatesTreatmentAndOutcome
+toGenericImplicationKind causalEffectClass =
+  GenericCone.attributesCausalEffect
+toGenericImplicationKind mechanismClass =
+  GenericCone.identifiesMechanism
+toGenericImplicationKind practiceRecommendationClass =
+  GenericCone.recommendsPractice
+
+canonicalIdentificationFamiliesRequired :
+  List Identification.CausalIdentificationFamily
+canonicalIdentificationFamiliesRequired =
+  Identification.adjustedObservationalComparison
+  ∷ Identification.mechanisticMediation
+  ∷ []
+
+record ExistingMachineryCrossPollination : Set where
+  constructor existingMachineryCrossPollination
+  field
+    genericConeOwner : String
+    causalIdentificationOwner : String
+    sourceAtlasOwner : String
+    networkOwner : String
+    reading : String
+
+canonicalExistingMachineryCrossPollination :
+  ExistingMachineryCrossPollination
+canonicalExistingMachineryCrossPollination =
+  existingMachineryCrossPollination
+    "DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact"
+    "DASHI.Biology.CausalIdentificationFamiliesExact"
+    "DASHI.Biology.ChegenWalshUndermethylationSourceAtlasExact"
+    "DASHI.Biology.OneCarbonHistamineMethylationNetworkExact"
+    "Reel-specific source states project into the existing generic implication cone; any promotion from association to causal mechanism requires obligation-relative causal-identification receipts rather than a domain-local shortcut."
