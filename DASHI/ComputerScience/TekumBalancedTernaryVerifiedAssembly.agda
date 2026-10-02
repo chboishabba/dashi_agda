@@ -6,6 +6,7 @@ import DASHI.Algebra.BalancedTernaryIntegerExact
 import DASHI.Foundations.RadixScaledExactFormat
 import DASHI.Foundations.BinaryFloatingPoint
 import DASHI.Codec.TriadicPAdicCodec
+import DASHI.Codec.TriadicPAdicCylinderExact
 import DASHI.ComputerScience.TekumSourceAttributionExact
 import DASHI.ComputerScience.TekumWheelStateParityExact
 import DASHI.ComputerScience.TekumWidthAdmissibilityExact
@@ -22,6 +23,7 @@ import DASHI.ComputerScience.TekumTruncationRoundingExact
 import DASHI.ComputerScience.TekumPrecisionCompositionExact
 import DASHI.ComputerScience.TekumFloatingPointStructuralBridgeExact
 import DASHI.ComputerScience.TekumTriadicPAdicKernelBridgeExact
+import DASHI.ComputerScience.TekumPadicOrientationBoundaryExact
 import DASHI.ComputerScience.TekumTernaryStoredProgramExecutionExact
 import DASHI.ComputerScience.TernarySignedDigitAdderSemanticsExact
 import DASHI.ComputerScience.TernarySignedDigitBinaryCodeBridgeExact
@@ -53,8 +55,11 @@ record TekumVerifiedAssemblyBoundary : Set where
     tekumTaperedAllocationIsRegimeDependent : Bool
 
     triadicPAdicKernelCarrierBijectionPresent : Bool
-    tekumPrecisionProjectionCommutesWithKernelProjection : Bool
-    nestedKernelProjectionCompositionPresent : Bool
+    tekumKernelProjectionCompositionPresent : Bool
+    executablePadicCylinderSystemPresent : Bool
+    padicCylinderKeepsLowOrderPrefix : Bool
+    tekumTruncationEqualsPadicCylinderWithoutReversal : Bool
+    reversalOrDualChartRequired : Bool
     tekumPromotedToLiteralPAdicValuation : Bool
 
     existingTernary27StorageReused : Bool
@@ -81,7 +86,7 @@ canonicalTekumVerifiedAssemblyBoundary =
   tekumVerifiedAssemblyBoundary
     true true true true true true true true true true true
     true true true true
-    true true true false
+    true true true true false true false
     true true true true
     true true true true
     true true true true false
