@@ -109,3 +109,42 @@ This materially narrows the continuum bridge. What remains is no longer an abstr
 6. then either prove the exact vacuum tensor equalities above, or compute the independent same-state timelike energy and test Theta+2 rho < 0.
 
 No step above licenses moving a vacuum constant between the matter stress and Lambda. A gravitational cosmological-constant renormalization condition must be fixed independently before an accelerating matter-source claim.
+
+
+## 2026-10-02 terminal Local-C acceleration max-cut
+
+The vacuum branch has now been pushed all the way to the pinned Local-C continuum stress.
+
+`CMP119CosmologyVacuumTraceActiveCollapseExact.agda` now proves the converse needed by the source computation:
+
+    vacuum trace < 0  =>  vacuum active stress < 0.
+
+Combined with a strictly positive Friedmann matter prefactor K, it also proves
+
+    vacuum trace < 0  =>  -K * active stress > 0.
+
+This is the direct matter-acceleration sign, not a solved Friedmann trajectory.
+
+`CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda` now applies that theorem to the actual pinned Local-C stress. Once its two existing terminal producer records are supplied (boost covariance of the same Local-C stress on the reconstructed vacuum, and same-object Euclidean-to-Lorentzian trace continuation), the theorem
+
+    literal R136/Local-C continuum four-direction trace < 0
+      =>
+    same Local-C Lorentzian active stress < 0
+      =>
+    positive matter-driven FLRW acceleration contribution
+
+is machine-source-written with no extra downstream rho>0 assumption and no free trace scalar.
+
+This is stronger than the earlier positive-rho corollary because the quantity naturally produced by the selected R144/R136 source path is the continuum trace response itself.
+
+The upstream vacuum proof is now sharply reduced. Sprint128/Sprint130 receipt-level Poincare covariance and vacuum identity are NOT treated as operator covariance. The actual remaining physical laws are properties of the pinned Local-C stress and pinned OS vacuum:
+
+1. the selected Local-C stress expectation transforms under the chosen nontrivial boost as the exact rank-two tensor action;
+2. the reconstructed vacuum leaves that stress expectation invariant (with the rest-frame T01 normalization tied to the same isotropic stress);
+3. the Lorentzian trace readout of that same Local-C stress equals the literal R136 Euclidean four-direction continuum pairing.
+
+The first two are packaged by `CMP119CosmologyPinnedLocalCBoostCovarianceExact.agda`; the third by `CMP119CosmologyPinnedLocalCTraceContinuationExact.agda`.
+
+A malformed literal newline in `CMP119CosmologySelectedStressTensorCovarianceCompilerExact.agda` was also repaired, because it sat directly on the terminal vacuum-covariance dependency path.
+
+No repository receipt currently derives those operator/continuation laws from the generic Sprint128/Sprint130 booleans. That distinction remains deliberate.
