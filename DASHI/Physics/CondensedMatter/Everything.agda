@@ -7,3 +7,4 @@ import DASHI.Physics.CondensedMatter.FlatBandTwistronicsFe5GeTe2CrossPollination
 import DASHI.Physics.CondensedMatter.HexagonalSqrt3R30ReciprocalFoldingExact
 import DASHI.Physics.CondensedMatter.GaoFe5GeTe2Sqrt3R30SameObjectWeldExact
 import DASHI.Physics.CondensedMatter.ARPESBandFoldingWitnessGateExact
+import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FigureReplayExact
