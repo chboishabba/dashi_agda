@@ -540,3 +540,5 @@ import DASHI.Moonshine.OggSSP2BSourceIndexedDVRValuationIdentificationExact
 import DASHI.Moonshine.OggSSP2BCarnahanHalfTranslationParityExtractionExact
 
 import DASHI.Moonshine.OggSSPP2InertiaMassVersusDefectSumNoGoExact
+
+import DASHI.Moonshine.MonsterOgg279ProvenanceHubExact
