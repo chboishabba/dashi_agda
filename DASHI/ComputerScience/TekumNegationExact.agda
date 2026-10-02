@@ -2,10 +2,9 @@ module DASHI.ComputerScience.TekumNegationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.ComputerScience.TekumAnchorArithmeticExact as Arithmetic
+open import DASHI.ComputerScience.TekumAnchorArithmeticExact public
+  using (anchorNegationInvariant)
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
-
-anchorNegationInvariant = Arithmetic.anchorNegationInvariant
 
 anchoredNegationInvolutive :
   ∀ {n} (x : Anchor.AnchoredTekum n) →
