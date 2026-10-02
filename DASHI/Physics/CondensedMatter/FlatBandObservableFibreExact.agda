@@ -17,6 +17,7 @@ module DASHI.Physics.CondensedMatter.FlatBandObservableFibreExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 Injective : {A B : Set} -> (A -> B) -> Set
 Injective f = ∀ {x y} -> f x ≡ f y -> x ≡ y
