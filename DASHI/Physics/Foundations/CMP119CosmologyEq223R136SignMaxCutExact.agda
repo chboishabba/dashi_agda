@@ -8,6 +8,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
 import DASHI.Physics.Foundations.CMP119CosmologyR136FiniteWeylConventionWeldExact as R136Convention
 import DASHI.Physics.Foundations.CMP119CosmologyConventionAwareSectorSignExact as Oriented
+import DASHI.Physics.Foundations.CMP119CosmologyFiniteWeylConventionFirewallExact as Convention
 import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSignMaxCutExact as Sign
 import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
@@ -86,7 +87,7 @@ module _
         recovery selected directions measure partition d) →
     Oriented.NegativeOrientedTraceSign
       measure d
-      (DASHI.Physics.Foundations.CMP119CosmologyFiniteWeylConventionFirewallExact.orientation
+      (Convention.orientation
         (R136Convention.convention weld)) →
     R136Convention.r136FourDiagonalResponse
       recovery selected directions
