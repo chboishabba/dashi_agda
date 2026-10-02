@@ -148,3 +148,44 @@ The first two are packaged by `CMP119CosmologyPinnedLocalCBoostCovarianceExact.a
 A malformed literal newline in `CMP119CosmologySelectedStressTensorCovarianceCompilerExact.agda` was also repaired, because it sat directly on the terminal vacuum-covariance dependency path.
 
 No repository receipt currently derives those operator/continuation laws from the generic Sprint128/Sprint130 booleans. That distinction remains deliberate.
+
+
+## 2026-10-02 sign max-cut and finite/continuum convention firewall
+
+The finite Weyl sign lane now splits the non-Wilson numerator exactly into regular, R-operation, boundary and vacuum sectors. The vacuum sector further factorizes, when its diagonal Weyl variation is configuration-independent, as
+
+    N_V = c_V * Z,
+
+with the same finite density integral Z.
+
+New `CMP119CosmologyVacuumDominatedWeylSignExact.agda` proves the exact finite implication
+
+    c_V > 0
+    and
+    N_E + N_R + N_B >= 0
+    and
+    Z > 0
+      =>
+    N_nonWilson > 0
+      =>
+    sum_mu D_mu Z < 0.
+
+The two source signs are deliberately NOT asserted by the compiler. The raw CMP119 source carrier names the vacuum coordinate but does not prove the sign of its metric/Weyl coefficient.
+
+A crucial convention firewall is now explicit in
+`CMP119CosmologyFiniteWeylConventionFirewallExact.agda`:
+
+    W_Z     = sum_mu D_mu Z,
+    W_logZ  = W_Z / Z,
+    W_Gamma = - W_logZ          for Gamma = -log Z.
+
+Therefore a sign theorem for W_Z cannot be transported into the R136/Lorentzian stress trace until the finite-to-continuum stress convention is fixed. In particular, a negative W_Z does not by itself mean a negative effective-action stress response: the Gamma variation has the opposite orientation after division by positive Z.
+
+The remaining sign bridge is thus not merely "prove Q_E < 0". It is:
+
+1. identify which finite normalized response is represented by the selected R136 stress pairing under the repository's metric-variation convention;
+2. prove the same-object finite response converges/completes to that R136 pairing;
+3. only then transport the sectorwise finite sign to the literal continuum trace consumed by the marked-OS acceleration root.
+
+This firewall does not change the terminal theorem:
+if the literal R136 continuum trace itself is negative on the reconstructed vacuum branch, the existing compiler still gives negative active stress and positive matter-driven FLRW acceleration for positive gravitational prefactor.
