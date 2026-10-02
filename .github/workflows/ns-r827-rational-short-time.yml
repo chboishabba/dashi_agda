@@ -20,6 +20,7 @@ on:
       - 'DASHI/Physics/Closure/NSClayFacingBPostReserveMaxCut20261002Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingCDMaxCut20261002Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingABCDProofStatusExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda'
       - '.github/workflows/ns-r827-rational-short-time.yml'
   pull_request:
     paths:
@@ -90,6 +91,7 @@ jobs:
             DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotNormalizationRound829Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345ShortTimeRound830Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345ReserveDecisionRound831Exact.agda \
+            DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda \
             DASHI/Physics/Closure/NSTriadKNR650Rational345DecisionMaxCutRound832Exact.agda \
             DASHI/Physics/Closure/NSClayFacingAMaxCut20261002Exact.agda \
             DASHI/Physics/Closure/NSClayFacingBPostReserveMaxCut20261002Exact.agda \
