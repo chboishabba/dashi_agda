@@ -17,6 +17,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsReceiptResolutionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003EExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003ETest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003FExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003FTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
       - '.github/workflows/cmp119-cosmology-reconstruction-maxcut.yml'
   workflow_dispatch:
@@ -64,6 +66,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsReceiptResolutionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003EExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003ETest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003FExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003FTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
