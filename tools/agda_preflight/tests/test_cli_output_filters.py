@@ -70,3 +70,24 @@ def test_quiet_success_is_silent(tmp_path, capsys):
 
     assert status == 0
     assert output == ""
+
+
+def test_quiet_snapshot_write_is_silent(tmp_path, capsys):
+    path = write_module(tmp_path, "Clean", "module Clean where\n")
+    snapshot = tmp_path / "api.json"
+
+    status = main(
+        [
+            str(path),
+            "--root",
+            str(tmp_path),
+            "--quiet",
+            "--write-api-snapshot",
+            str(snapshot),
+        ]
+    )
+    output = capsys.readouterr().out
+
+    assert status == 0
+    assert snapshot.exists()
+    assert output == ""
