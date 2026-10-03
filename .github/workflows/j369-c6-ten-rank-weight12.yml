@@ -19,6 +19,7 @@ on:
       - 'DASHI/Moonshine/OggSSP2BM24DuadPair24AuthorityExact.agda'
       - 'DASHI/Moonshine/OggSSP2BPureKleinFourM24S3LocalRouteExact.agda'
       - 'DASHI/Moonshine/OggP31CompletionTenTwoSevenNineCrossPollinationExact.agda'
+      - 'DASHI/Moonshine/JMDFrobeniusThreeTateTraceCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalJointReflectionMinimalExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartActionSeparationExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartMobiusMatrixBridgeExact.agda'
@@ -31,6 +32,7 @@ on:
     paths:
       - 'DASHI/Moonshine/JInvariant369C6TenRankWeightTwelveCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda'
+      - 'DASHI/Moonshine/JMDFrobeniusThreeTateTraceCrossPollinationExact.agda'
       - 'scripts/check_j369_c6_ten_rank_weight12.sh'
       - '.github/workflows/j369-c6-ten-rank-weight12.yml'
 
@@ -70,3 +72,5 @@ jobs:
           export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
           export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
           bash scripts/check_j369_c6_ten_rank_weight12.sh
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/JMDFrobeniusThreeTateTraceCrossPollinationExact.agda
