@@ -17,6 +17,18 @@ required = {
         'toFromFin3',
         'canonicalFin3VectorEnumerationLength',
     ],
+    'DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda': [
+        'digitInteger',
+        'evalIntegerCons',
+        'balancedRemainderDistinct',
+        'toIntegerInjective',
+        'oneTritNegativeInteger',
+        'oneTritZeroInteger',
+        'oneTritPositiveInteger',
+        'twoTritNegativePositiveInteger',
+        'twoTritZeroPositiveInteger',
+        'twoTritPositivePositiveInteger',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': [
         'bf16ScaledExactFormat',
         'TaperedWidthAllocation',
@@ -90,4 +102,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: rational semantics, finite 3^n carrier, dual p-adic chart, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: positional injectivity, rational semantics, finite 3^n carrier, dual p-adic chart, ternary-machine, ABI and SSP/FRACTRAN welds present.')
