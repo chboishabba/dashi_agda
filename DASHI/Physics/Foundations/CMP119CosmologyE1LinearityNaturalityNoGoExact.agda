@@ -53,7 +53,7 @@ counterCalculus : D1.FirstVariationLinearity Configuration Tangent
 counterCalculus = record
   { D1.FirstVariationLinearity.firstVariation = counterFirstVariation
   ; D1.FirstVariationLinearity.firstVariationCong =
-      λ f g pointwise tt tangent → firstVariationCong tangent
+      λ f g pointwise tt tangent → firstVariationCong tangent pointwise
   ; D1.FirstVariationLinearity.zeroFirstVariation =
       λ tt tangent → zeroD1 tangent
   ; D1.FirstVariationLinearity.addFirstVariation =
