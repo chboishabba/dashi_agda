@@ -116,7 +116,9 @@ fractionLST :
 fractionLST parsed = reverse (fractionMSB parsed)
 
 ------------------------------------------------------------------------
--- Parse the ordinary source anchor.
+-- Parse the ordinary source anchor.  Factoring through parseAnchorMSB makes
+-- anchor invariance reusable by the source-negation theorem rather than
+-- re-proving the dependent split after negation.
 ------------------------------------------------------------------------
 
 ParsedOrdinaryAnchor : Nat → Set
@@ -125,15 +127,20 @@ ParsedOrdinaryAnchor extra =
   Σ (Vec Trit.Trit (5 + extra)) λ payload →
   ParsedPayload extra r payload
 
+parseAnchorMSB :
+  ∀ {extra} →
+  Vec Trit.Trit (8 + extra) →
+  Maybe (ParsedOrdinaryAnchor extra)
+parseAnchorMSB (r2 ∷ r1 ∷ r0 ∷ payload)
+  with Regime.decodeRegime (Anchor.regime3 r2 r1 r0)
+... | nothing = nothing
+... | just r = just (r , payload , parsePayload r payload)
+
 parseOrdinaryAnchor :
   ∀ {extra} →
   Vec Trit.Trit (8 + extra) →
   Maybe (ParsedOrdinaryAnchor extra)
-parseOrdinaryAnchor word with anchorMSB word
-... | r2 ∷ r1 ∷ r0 ∷ payload
-  with Regime.decodeRegime (Anchor.regime3 r2 r1 r0)
-...   | nothing = nothing
-...   | just r = just (r , payload , parsePayload r payload)
+parseOrdinaryAnchor word = parseAnchorMSB (anchorMSB word)
 
 ------------------------------------------------------------------------
 -- Definition 8 equations (9), (14), and (15), on exact integer carriers.
