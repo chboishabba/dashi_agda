@@ -15,13 +15,14 @@ import DASHI.ComputerScience.TekumParserSuccessfulRejoinExact as Parser
 import DASHI.ComputerScience.TekumSignedMagnitudeInjectiveExact as Signed
 import DASHI.ComputerScience.TekumSourceAnchorInjectiveExact as SourceAnchor
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
+import DASHI.ComputerScience.TekumWidthAdmissibilityExact as Width
 
 ------------------------------------------------------------------------
 -- HUNHOLD PROPOSITION 2: ORDINARY SOURCE-WORD INJECTIVITY
 --
--- The theorem is stated on successful ordinary parser witnesses and explicit
--- nonzero external-sign witnesses.  The special zero/NaR/infinity encodings
--- remain owned by the separate source special-value classifier.
+-- The source Definition 8 domain is even-width. Carry that witness all the way
+-- to the corrected alternating-midpoint anchor inverse; the analytic/parser
+-- uniqueness chain itself remains unchanged.
 ------------------------------------------------------------------------
 
 ordinarySignedMagnitudeEquality :
@@ -80,6 +81,7 @@ ordinaryEqualDeterminesMagnitude left right p q leftSign rightSign valueEq =
 
 ordinaryRationalInjectiveOnParsedWords :
   ∀ {extra r s payload₁ payload₂}
+  (even : Width.EvenWidth (8 + extra)) →
   (left right : Vec Trit.Trit (8 + extra))
   (p : Source.ParsedPayload extra r payload₁)
   (q : Source.ParsedPayload extra s payload₂) →
@@ -91,8 +93,8 @@ ordinaryRationalInjectiveOnParsedWords :
     ≡ Source.ordinaryRationalFromParsed right q →
   left ≡ right
 ordinaryRationalInjectiveOnParsedWords
-    left right p q leftParse rightParse leftSign rightSign valueEq =
-  SourceAnchor.sameSignAnchorDeterminesSourceWord signEq anchorEq
+    even left right p q leftParse rightParse leftSign rightSign valueEq =
+  SourceAnchor.sameSignAnchorDeterminesSourceWord even signEq anchorEq
   where
   signEq : Source.signOfWord left ≡ Source.signOfWord right
   signEq =
@@ -108,10 +110,9 @@ ordinaryRationalInjectiveOnParsedWords
     Parser.successfulParseDeterminesConcreteAnchor
       left right leftParse rightParse rejoinEq
 
--- Named paper-facing endpoint.  All arguments are literal source/parser
--- objects; there is no cardinality argument and no second rational semantics.
 hunholdProposition2Injective :
   ∀ {extra r s payload₁ payload₂}
+  (even : Width.EvenWidth (8 + extra)) →
   (left right : Vec Trit.Trit (8 + extra))
   (p : Source.ParsedPayload extra r payload₁)
   (q : Source.ParsedPayload extra s payload₂) →
