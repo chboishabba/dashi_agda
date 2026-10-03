@@ -64,7 +64,10 @@ jobs:
               DASHI/ComputerScience/TekumBalancedSuccessorExact.agda
               DASHI/ComputerScience/TekumSuccessorCarrySplitExact.agda
               DASHI/ComputerScience/TekumRegimeSuccessorExact.agda
+              DASHI/ComputerScience/TekumFractionSuccessorExact.agda
               DASHI/ComputerScience/TekumMonotoneMagnitudeExact.agda
+              DASHI/ComputerScience/TekumPositiveSourceSuccessorAnchorExact.agda
+              DASHI/ComputerScience/TekumSourceOrderExact.agda
               DASHI/ComputerScience/TekumMonotonicityExact.agda
               DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
               DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda
