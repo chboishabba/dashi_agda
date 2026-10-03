@@ -6,6 +6,7 @@ on:
       - 'agent/pnp-direct-sat-lower-bound-20260924'
     paths:
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeTimeBudgetPaddingExact.agda'
@@ -27,10 +28,11 @@ jobs:
         with:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
-      - name: Typecheck reverse-run owner
+      - name: Typecheck reverse-run and language owners
         run: |
           set -euxo pipefail
-          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda | tee p-standard-reverse-run.log
+          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda
+          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda | tee p-standard-reverse-run.log
       - name: Upload log
         if: always()
         uses: actions/upload-artifact@v4
