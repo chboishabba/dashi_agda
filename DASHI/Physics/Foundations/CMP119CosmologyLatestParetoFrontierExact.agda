@@ -5,49 +5,33 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER AFTER THE 2026-10-03 UNIVERSE-EXPANSION MAX-CUT.
+-- LIVE PARETO FRONTIER / 2026-10-03.
 --
--- The one-point gravitational stress owner is R144's effective-action response
--- D_Gamma = - D Z / Z, not +D log Z.  Balaban's blocked log-weight convention
--- remains source-relevant, but is not the gravitational one-point orientation.
---
--- Marked E1 is now charged at the consumer boundary as ONE same-object theorem:
--- the actual R144 ten finite-D1 readouts transform as a signed symmetric
--- rank-two tensor under the repository's concrete B_4 hypercubic generators,
--- using the SAME whole-lattice CMP119 configuration action as OS1.
---
--- Local component reindexing/activity covariance and first-variation naturality
--- remain the preferred producer strategy for that theorem; they are no longer
--- double-counted as independent terminal residuals.
+-- One-point gravity uses Gamma = -log Z, hence D_Gamma = -DZ/Z.
+-- Marked E1 is one signed-B4 covariance theorem on the actual R144 ten-slot
+-- readout.  Marked E2/E4 are one selected finite-stress-insertion presentation.
 ------------------------------------------------------------------------
 
--- Novel/source-facing DASHI reconstruction work.
 data NovelReconstructionResidual : Set where
-  e1-r144-signed-b4-readout-covariance-and-whole-lattice-attachment : NovelReconstructionResidual
-  e2e4-shared-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
+  e1-r144-signed-b4-readout-covariance-and-whole-lattice-attachment :
+    NovelReconstructionResidual
+  e2e4-r109-stress-insertion-to-selected-real-cylinder-presentation :
+    NovelReconstructionResidual
 
--- Imported marked-OS interpretation/authority boundaries.
 data StandardOSBoundary : Set where
   os-external-selected-e0-e3-e4-interpretation : StandardOSBoundary
   os-standard-marked-reconstruction-authority : StandardOSBoundary
 
--- Standard scalar-analysis authority.  Embedding-specific rational negativity
--- reflection is compiler output from rational trichotomy + this authority.
 data StandardAnalysisBoundary : Set where
   real-strict-order-asymmetry : StandardAnalysisBoundary
 
--- Preferred GRAVITATIONAL sign route.  R144 owns Gamma = -log Z, so negative
--- R136 stress trace requires a negative Eq.(2.23) non-Wilson sector balance.
+-- Preferred effective-action sign route.
 data PreferredSignResidual : Set where
   r136-same-object-effective-action-weld : PreferredSignResidual
-  eq223-negative-four-sector-balance : PreferredSignResidual
+  eq223-three-cauchy-calibrations-and-vacuum-scalar-margin :
+    PreferredSignResidual
 
--- A source estimate that would discharge the preferred balance directly.
-data NegativeBalanceResidual : Set where
-  eq223-erb-upper-majorants-beat-negative-vacuum : NegativeBalanceResidual
-
--- Alternate anomaly route.  The order-reflection item is no longer a
--- model-specific leaf; it is derived from StandardAnalysisBoundary above.
+-- Alternate trace-anomaly route.
 data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
 
@@ -60,33 +44,22 @@ standardOSBoundaryCount = 2
 standardAnalysisBoundaryCount : Nat
 standardAnalysisBoundaryCount = 1
 
-reconstructionInterfaceCount : Nat
-reconstructionInterfaceCount = 4
-
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
-
-negativeBalanceResidualCount : Nat
-negativeBalanceResidualCount = 1
 
 alternateAnomalyResidualCount : Nat
 alternateAnomalyResidualCount = 1
 
--- B0/B3 and E4 selected semantics are internally constructed; only external
--- interpretation lives at the standard OS boundary.
+------------------------------------------------------------------------
+-- Reconstruction reductions.
+------------------------------------------------------------------------
+
 b0InternalBridgeStillArbitrary : Bool
 b0InternalBridgeStillArbitrary = false
 
 b3InternalBridgeStillArbitrary : Bool
 b3InternalBridgeStillArbitrary = false
 
-e4IndependentStressObservableSelectionStillExists : Bool
-e4IndependentStressObservableSelectionStillExists = false
-
-round281E4DecayWitnessCompilerOwnedFromSharedE2Observable : Bool
-round281E4DecayWitnessCompilerOwnedFromSharedE2Observable = true
-
--- E1 reductions.
 e1GlobalPotentialCovarianceStillPrimitive : Bool
 e1GlobalPotentialCovarianceStillPrimitive = false
 
@@ -108,17 +81,6 @@ e1ActualB4GeneratorSignedActionConstructed = true
 e1R133TransportEquivarianceStillShortestRoutePremise : Bool
 e1R133TransportEquivarianceStillShortestRoutePremise = false
 
-e1R143R144DirectSameD1CompilerOwnsSelectedStressProvenance : Bool
-e1R143R144DirectSameD1CompilerOwnsSelectedStressProvenance = true
-
--- The full-reflection consumer is now the signed readout family, not an
--- impossible negative value inside the bare ten-slot tangent-label carrier.
-e1PlainTenSlotPermutationHandlesReflections : Bool
-e1PlainTenSlotPermutationHandlesReflections = false
-
-e1SignedReflectionReadoutRequired : Bool
-e1SignedReflectionReadoutRequired = true
-
 e1TerminalPhysicalLeafIsOneR144SignedB4ReadoutTheorem : Bool
 e1TerminalPhysicalLeafIsOneR144SignedB4ReadoutTheorem = true
 
@@ -128,18 +90,10 @@ e1LocalComponentCovarianceIsProducerStrategy = true
 e1FirstVariationNaturalityIsProducerStrategy : Bool
 e1FirstVariationNaturalityIsProducerStrategy = true
 
--- R244's generic Component carrier remains opaque.  The source locations we
--- have verified support the localized decomposition and whole-lattice
--- covariance, but not yet a separately located theorem that our chosen opaque
--- Component carrier transforms term-by-term.  Do not promote that stronger
--- statement without a source attachment.
 e1GenericR244ComponentCarrierIsOpaque : Bool
 e1GenericR244ComponentCarrierIsOpaque = true
 
-e1PerComponentSourceCovarianceLocatedInPrimarySource : Bool
-e1PerComponentSourceCovarianceLocatedInPrimarySource = false
-
--- E2/E4 reductions.
+-- E2/E4 no longer require an encoding of every stress value.
 e2NeedsNewGramPositivityEstimate : Bool
 e2NeedsNewGramPositivityEstimate = false
 
@@ -149,17 +103,25 @@ e4NeedsNewClusteringEstimate = false
 e2AndE4UseSamePinnedStressObservable : Bool
 e2AndE4UseSamePinnedStressObservable = true
 
-e2AndE4StillNeedTwoIndependentStressEncodingMaps : Bool
-e2AndE4StillNeedTwoIndependentStressEncodingMaps = false
+allStressCylinderEncodingStillParetoPremise : Bool
+allStressCylinderEncodingStillParetoPremise = false
 
-sharedE2E4CylinderEncodingStillPhysical : Bool
-sharedE2E4CylinderEncodingStillPhysical = true
+selectedStressOnlyCylinderDataSufficeForE2E4 : Bool
+selectedStressOnlyCylinderDataSufficeForE2E4 = true
 
--- Wightman/terminal reconstruction has one stress object.
+r109FiniteStressInsertionPresentationIsSharedE2E4Leaf : Bool
+r109FiniteStressInsertionPresentationIsSharedE2E4Leaf = true
+
+round109CompletionToConcreteLocalCStressAlreadyCompilerOwned : Bool
+round109CompletionToConcreteLocalCStressAlreadyCompilerOwned = true
+
 independentTerminalWightmanHingeChoiceStillExists : Bool
 independentTerminalWightmanHingeChoiceStillExists = false
 
--- Gravitational finite convention/sign route.
+------------------------------------------------------------------------
+-- Sign reductions.
+------------------------------------------------------------------------
+
 finiteOnePointStressOrientationIsEffectiveActionDGamma : Bool
 finiteOnePointStressOrientationIsEffectiveActionDGamma = true
 
@@ -169,33 +131,46 @@ finiteOnePointStressOrientationIsPlusDLogZ = false
 balabanBlockedLogWeightStillUsesPlusDLogZ : Bool
 balabanBlockedLogWeightStillUsesPlusDLogZ = true
 
-preferredSchedulerStillBranchesOnGammaMinusLogZ : Bool
-preferredSchedulerStillBranchesOnGammaMinusLogZ = false
-
-eq223SectorCallbacksStillArbitrary : Bool
-eq223SectorCallbacksStillArbitrary = false
-
-vacuumCoefficientStillFreeScalar : Bool
-vacuumCoefficientStillFreeScalar = false
-
 preferredNegativeR136NeedsNegativeEq223Balance : Bool
 preferredNegativeR136NeedsNegativeEq223Balance = true
 
 positiveEq223BalanceWouldGiveOppositeDGammaSign : Bool
 positiveEq223BalanceWouldGiveOppositeDGammaSign = true
 
-oldPositiveVacuumDominanceRouteIsPreferredForOnePointGravity : Bool
-oldPositiveVacuumDominanceRouteIsPreferredForOnePointGravity = false
+-- Eq.(2.23) route is now source-level: three uniform diagonal Cauchy constants
+-- and one scalar vacuum-margin inequality
+--   4 (M_E + M_R + M_B) < -c_V.
+-- Positive Haar integration, four-diagonal summation and the common density
+-- factor are compiler-owned.
+eq223FiniteMeasureNormalizationStillInSignLeaf : Bool
+eq223FiniteMeasureNormalizationStillInSignLeaf = false
 
-preferredEq223NegativeR136NowCompilesToMatterAcceleration : Bool
-preferredEq223NegativeR136NowCompilesToMatterAcceleration = true
+eq223FourDiagonalArithmeticStillInSignLeaf : Bool
+eq223FourDiagonalArithmeticStillInSignLeaf = false
 
--- The exact sign calculation now accepts three literal E/R/B upper majorants
--- and one strict vacuum-margin comparison.  No E/R/B sign assumption is used.
-eq223PreferredSignReducedToUpperMajorantsVersusVacuumMargin : Bool
-eq223PreferredSignReducedToUpperMajorantsVersusVacuumMargin = true
+eq223IntegratedERBMajorantsStillIndependent : Bool
+eq223IntegratedERBMajorantsStillIndependent = false
 
--- Alternate anomaly route.
+eq223ThreeUniformDiagonalCauchyCalibrationsRemain : Bool
+eq223ThreeUniformDiagonalCauchyCalibrationsRemain = true
+
+eq223ScalarVacuumMarginRemains : Bool
+eq223ScalarVacuumMarginRemains = true
+
+eq223PreferredScalarMarginHasShapeFourERBBelowMinusCV : Bool
+eq223PreferredScalarMarginHasShapeFourERBBelowMinusCV = true
+
+-- Primary-source asymptotics already give E/R/B analytic envelopes, with R
+-- parametrically g^{kappa0}-small and B exponentially localized.  What is not
+-- source-written yet is their calibration to the selected metric chart and a
+-- sign/magnitude theorem for the selected vacuum Weyl coefficient c_V.
+eq223SourceAnalyticERBEnvelopesLocated : Bool
+eq223SourceAnalyticERBEnvelopesLocated = true
+
+eq223VacuumWeylCoefficientSignMagnitudeStillPhysical : Bool
+eq223VacuumWeylCoefficientSignMagnitudeStillPhysical = true
+
+-- Alternate anomaly route bypasses Eq.(2.23) sector arithmetic altogether.
 traceAnomalyAlternateRouteSourceWritten : Bool
 traceAnomalyAlternateRouteSourceWritten = true
 
@@ -205,25 +180,16 @@ traceAnomalyAlternateRouteNeedsEq223SectorSign = false
 traceAnomalyAlternateRouteStillNeedsSameObjectWeld : Bool
 traceAnomalyAlternateRouteStillNeedsSameObjectWeld = true
 
-traceAnomalyEmbeddingSpecificOrderReflectionStillPhysical : Bool
-traceAnomalyEmbeddingSpecificOrderReflectionStillPhysical = false
-
 traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder : Bool
 traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder = true
 
 traceAnomalyRationalSignNowCompilesToMatterAcceleration : Bool
 traceAnomalyRationalSignNowCompilesToMatterAcceleration = true
 
--- The finite D_Gamma/R109 absolute-anchor machinery is aligned with the
--- one-point gravitational convention and remains a valid competing producer B
--- route.  It is not yet closed because the absolute tail anchor is still open.
-finiteGammaAbsoluteExpectationRouteIsConventionCorrect : Bool
-finiteGammaAbsoluteExpectationRouteIsConventionCorrect = true
+------------------------------------------------------------------------
+-- Downstream status.
+------------------------------------------------------------------------
 
-finiteGammaAbsoluteExpectationRouteAlreadyClosed : Bool
-finiteGammaAbsoluteExpectationRouteAlreadyClosed = false
-
--- Downstream cosmology status.
 terminalVacuumCosmologyAlgebraStillFrontier : Bool
 terminalVacuumCosmologyAlgebraStillFrontier = false
 
