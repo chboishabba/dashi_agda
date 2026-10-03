@@ -19,6 +19,10 @@ required = {
         'bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality',
         'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands',
     ],
+    'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': [
+        'exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit',
+        'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger',
+    ],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': [
         'EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd',
         'pow3Mod4OneImpliesEvenWidth', 'wheelQuarterIntegralityIffEvenWidth',
@@ -40,4 +44,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: general wheel parity, lossless parser recovery, adjacent exponent bands, signed triadic scale, significand/fraction bands, source negation and p-adic naturality present.')
+print('Tekum static regression: parsed exact-triadic weld, general wheel parity, lossless parser recovery, exponent/significand bands, source negation and p-adic naturality present.')
