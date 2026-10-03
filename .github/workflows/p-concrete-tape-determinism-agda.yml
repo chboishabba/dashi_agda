@@ -16,6 +16,8 @@ on:
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda'
       - 'DASHI/Mathematics/Complexity/StandardFiniteTapePresentationExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalProjectionExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
       - '.github/workflows/p-concrete-tape-determinism-agda.yml'
   pull_request:
     paths:
@@ -30,6 +32,8 @@ on:
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda'
       - 'DASHI/Mathematics/Complexity/StandardFiniteTapePresentationExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalProjectionExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
       - '.github/workflows/p-concrete-tape-determinism-agda.yml'
   workflow_dispatch:
 
@@ -57,3 +61,5 @@ jobs:
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/StandardFiniteTapePresentationExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalProjectionExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda
