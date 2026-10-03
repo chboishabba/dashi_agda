@@ -163,6 +163,12 @@ data ActualTateTenSubquotientPaid : Set where
 data ActualTateCompletionActionPaid : Set where
 data ActualQ10ModeToOrderStratumRecognitionPaid : Set where
 
+-- Compatibility surface retained for existing downstream code.  After the
+-- M22:2 runtime result this means "the larger Completion10 action is paid on
+-- the actual Tate subquotient", not merely "a finite candidate exists".
+LargerCompletionActionPaid : Set
+LargerCompletionActionPaid = ActualTateCompletionActionPaid
+
 formalIntegralTateCarrierWeldStillOpen :
   FormalIntegralTateCarrierWeldPaid → ⊥
 formalIntegralTateCarrierWeldStillOpen ()
@@ -172,6 +178,9 @@ actualTenSubquotientStillOpen ()
 
 actualTateCompletionActionStillOpen : ActualTateCompletionActionPaid → ⊥
 actualTateCompletionActionStillOpen ()
+
+largerCompletionActionStillOpen : LargerCompletionActionPaid → ⊥
+largerCompletionActionStillOpen = actualTateCompletionActionStillOpen
 
 actualModeDefectRecognitionStillOpen :
   ActualQ10ModeToOrderStratumRecognitionPaid → ⊥
@@ -222,7 +231,7 @@ record SameObjectMaxCutStatus : Set where
 
     formalIntegralTateCarrierWeldPaid : Bool
     actualTateTenSubquotientPaid : Bool
-    actualTateCompletionActionPaid : Bool
+    largerCompletionActionPaid : Bool
     actualQ10ModeToDefectStratumRecognitionPaid : Bool
 
     p31SameObjectPromotionPaid : Bool
