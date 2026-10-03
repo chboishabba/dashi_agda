@@ -1,0 +1,8 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyEq223DirectTailThresholdToR136Test where
+
+import DASHI.Physics.Foundations.CMP119CosmologyEq223DirectTailThresholdToR136Exact as New
+
+noFiniteFamilyConsumerRegression = New.directPreferredConsumerNeedsFiniteFamilyOrObservable
+oneB1ReceiptRegression = New.directPreferredConsumerUsesOneB1TailReceipt
+oneEq223ThresholdRegression = New.directPreferredConsumerUsesOneEq223VacuumThreshold
