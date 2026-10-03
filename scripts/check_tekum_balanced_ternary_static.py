@@ -18,6 +18,8 @@ required = {
     'DASHI/ComputerScience/TekumExponentBandExact.agda': [
         'bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality',
         'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands',
+        'advanceExponent', 'scaleBelowSuccessor', 'bandUpperSuccStrict',
+        'bandUpperAdvanceStrict', 'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint',
     ],
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': [
         'exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit',
@@ -52,4 +54,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: ordinary same-object factorization, exact source rational coordinates, parsed triadic weld, general wheel parity, parser recovery, exponent/significand bands, source negation and p-adic naturality present.')
+print('Tekum static regression: arbitrary exponent-band separation, ordinary same-object factorization, exact source rational coordinates, general wheel parity, parser recovery, source negation and p-adic naturality present.')
