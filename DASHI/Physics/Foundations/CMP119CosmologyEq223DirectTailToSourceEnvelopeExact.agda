@@ -19,7 +19,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223DirectTailToSourceEnvelopeE
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _+_)
 
@@ -92,8 +92,7 @@ module _
     sourceUpper envelope
     ≡ E.combinedUpper envelope
         + Eq223.eq223VacuumTraceCoefficient realization
-  sourceEnvelopeUpperIsCombinedERBPlusVacuum envelope =
-    Agda.Builtin.Equality.refl
+  sourceEnvelopeUpperIsCombinedERBPlusVacuum envelope = refl
 
 eq223FiniteUpperCompilesIntoR136SourceEnvelope : Bool
 eq223FiniteUpperCompilesIntoR136SourceEnvelope = true
