@@ -6,69 +6,93 @@ open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
 -- LIVE UNIVERSE-EXPANSION MAX-CUT (2026-10-03)
+--
+-- Preferred source convention: Balaban generated blocked action is +D log Z.
+-- The older Gamma=-log Z/R109 absolute-expectation lane is retained only as an
+-- alternate consistency route; it is not charged to the preferred scheduler.
 ------------------------------------------------------------------------
 
--- A: marked OS reconstruction.
-data MarkedOSResidual : Set where
-  b0NuclearTopologyInterpretation
-  e1LiteralLocalEuclideanGeometry
-  e2SharedStressCylinderReflectionAdmissibility
-  b3LocalityPermutationInterpretation
-  e4SharedStressObservableClusteringSemantics
-    : MarkedOSResidual
+-- A: common marked-OS reconstruction frontier.
+data ReconstructionResidual : Set where
+  e1SignedAxisAction
+  e1LocalComponentCovariance
+  e1DerivativeNaturality
+  e1R133TransportEquivariance
+  e2PinnedStressCylinderEncodingAndAdmissibility
+  osExternalSelectedE0E3E4Interpretation
+  osStandardMarkedReconstructionAuthority
+    : ReconstructionResidual
 
-markedOSResidualCount : Nat
-markedOSResidualCount = 5
+reconstructionResidualCount : Nat
+reconstructionResidualCount = 7
 
 e1GlobalPotentialAndBC2CovarianceCompilerOwned : Bool
 e1GlobalPotentialAndBC2CovarianceCompilerOwned = true
 
-e2E4IndependentStressSelectionsEliminated : Bool
-e2E4IndependentStressSelectionsEliminated = true
+e2E4UseSamePinnedStressObservable : Bool
+e2E4UseSamePinnedStressObservable = true
 
--- B: needed by the finite-sector route.  Round130/R136 already compile the
--- completed four-direction R109 functional directly to the literal R136
--- response, leaving only the finite ABSOLUTE expectation anchor.
-data ExpectationCompletionResidual : Set where
+e4Round281DecayWitnessCompilerOwned : Bool
+e4Round281DecayWitnessCompilerOwned = true
+
+b0InternalBridgeStillPhysicalResidual : Bool
+b0InternalBridgeStillPhysicalResidual = false
+
+b3InternalBridgeStillPhysicalResidual : Bool
+b3InternalBridgeStillPhysicalResidual = false
+
+-- C_preferred: direct Balaban +D log(weight) source sign.
+data PreferredSignResidual : Set where
+  r136SameObjectLogWeightWeld
+  eq223PositiveFourSectorBalance
+    : PreferredSignResidual
+
+preferredSignResidualCount : Nat
+preferredSignResidualCount = 2
+
+preferredEq223RouteCompilesToMatterAcceleration : Bool
+preferredEq223RouteCompilesToMatterAcceleration = true
+
+-- A source-literal sufficient condition for the positive Eq223 balance.
+data PreferredVacuumDominanceResidual : Set where
+  literalEq223VacuumWeylCoefficientPositive
+  literalEq223ERBWeightedNumeratorNonnegative
+    : PreferredVacuumDominanceResidual
+
+preferredVacuumDominanceResidualCount : Nat
+preferredVacuumDominanceResidualCount = 2
+
+vacuumDominanceCompilesToMatterAcceleration : Bool
+vacuumDominanceCompilesToMatterAcceleration = true
+
+-- C_alt: same-object real trace anomaly -> rational R136 sign.
+data AlternateAnomalyResidual : Set where
+  r136EmbeddedRealIsSelectedAnomalyTrace
+  rationalOrderReflectionAtZero
+    : AlternateAnomalyResidual
+
+alternateAnomalyResidualCount : Nat
+alternateAnomalyResidualCount = 2
+
+traceAnomalyRouteCompilesToMatterAcceleration : Bool
+traceAnomalyRouteCompilesToMatterAcceleration = true
+
+-- The pinned Local-C anomaly sub-route exposes an even more source-facing sign
+-- leaf: selected finite F2 numerator = literal physical weighted F2 numerator.
+pinnedLocalCAnomalySignNeedsPhysicalF2SameObjectWeld : Bool
+pinnedLocalCAnomalySignNeedsPhysicalF2SameObjectWeld = true
+
+-- Secondary consistency route: finite D_Gamma expectations completed through
+-- R109.  Useful for cross-checking conventions, not preferred source scheduling.
+data SecondaryGammaCompletionResidual : Set where
   finiteGammaExpectationIsR109AbsoluteResponse
-    : ExpectationCompletionResidual
+    : SecondaryGammaCompletionResidual
 
-expectationCompletionResidualCount : Nat
-expectationCompletionResidualCount = 1
+secondaryGammaCompletionResidualCount : Nat
+secondaryGammaCompletionResidualCount = 1
 
-completedExpectationToR136IdentityCompilerOwned : Bool
-completedExpectationToR136IdentityCompilerOwned = true
-
--- C has TWO alternative producer routes.
-data TraceSignRoute : Set where
-  finiteSectorMarginRoute
-  realTraceAnomalyRoute
-    : TraceSignRoute
-
--- C_sector: normalized non-Wilson Gamma response must beat the explicit R109
--- remaining tail at some anchored finite scale.
-data FiniteSectorSignResidual : Set where
-  sourceNormalizedNonWilsonMarginBeatsR109Tail
-    : FiniteSectorSignResidual
-
--- C_anomaly: the strict-sign algebra is already compiled on the pinned Local-C
--- stress object.  The sign-specific same-object leaf is now only the selected
--- Local-C F2 numerator = literal physical weighted-F2 numerator.  Cosmology
--- additionally needs the real Local-C trace readout = embedded rational R136
--- trace convention.
-data RealAnomalySignResidual : Set where
-  selectedLocalCF2IsPhysicalWeightedF2
-  realTraceReadoutIsEmbeddedR136Trace
-    : RealAnomalySignResidual
-
-anomalyRouteUsesOwnAbsoluteFiniteObservableConvergence : Bool
-anomalyRouteUsesOwnAbsoluteFiniteObservableConvergence = true
-
-anomalyRouteDoesNotRequireProducerB : Bool
-anomalyRouteDoesNotRequireProducerB = true
-
-anomalySignPinnedToLocalCStressObject : Bool
-anomalySignPinnedToLocalCStressObject = true
+secondaryGammaRouteIsPreferred : Bool
+secondaryGammaRouteIsPreferred = false
 
 -- D: downstream sign algebra is compiled.
 accelerationSignAlgebraAlreadyCompiled : Bool
@@ -77,11 +101,8 @@ accelerationSignAlgebraAlreadyCompiled = true
 negativeR136TraceSufficesOnVacuumBranch : Bool
 negativeR136TraceSufficesOnVacuumBranch = true
 
-finiteSectorMarginRouteCompilesToMatterAcceleration : Bool
-finiteSectorMarginRouteCompilesToMatterAcceleration = true
-
-pinnedLocalCAnomalyRouteCompilesToMatterAcceleration : Bool
-pinnedLocalCAnomalyRouteCompilesToMatterAcceleration = true
+terminalVacuumCosmologyAlgebraStillFrontier : Bool
+terminalVacuumCosmologyAlgebraStillFrontier = false
 
 -- Full cosmology remains downstream.
 fullFriedmannTrajectoryAlreadySolved : Bool
@@ -91,28 +112,24 @@ cosmologicalConstantRenormalizationStillMustBeFixedIndependently : Bool
 cosmologicalConstantRenormalizationStillMustBeFixedIndependently = true
 
 -- Firewalls.
-sectorMarginAndTraceAnomalyAreAlternativeSignRoutes : Bool
-sectorMarginAndTraceAnomalyAreAlternativeSignRoutes = true
-
 localizationDoesNotCountAsReflectionPositivity : Bool
 localizationDoesNotCountAsReflectionPositivity = true
 
 negativeTraceAloneOutsideVacuumBranchDoesNotCountAsAcceleration : Bool
 negativeTraceAloneOutsideVacuumBranchDoesNotCountAsAcceleration = true
 
-finiteDZSignDoesNotCountAsEffectiveActionStressSign : Bool
-finiteDZSignDoesNotCountAsEffectiveActionStressSign = true
+preferredBalabanRouteDoesNotUseGammaMinusLogZ : Bool
+preferredBalabanRouteDoesNotUseGammaMinusLogZ = true
 
--- Shortest routes:
+preferredAndAnomalySignRoutesAreAlternatives : Bool
+preferredAndAnomalySignRoutesAreAlternatives = true
+
+-- Shortest live route:
 --
---   common: A = five marked-OS residuals
+--   A: 7 common reconstruction/source-semantics residuals
+--   C: choose one sign producer
+--      preferred: R136 log-weight weld + positive literal Eq223 balance
+--      alternate: same-object trace-anomaly weld + rational order reflection
+--   D: already compiled negative trace -> positive matter acceleration.
 --
---   sector route:
---     B = one absolute finite-expectation anchor
---     C_sector = normalized sector margin beats R109 tail
---     -> D
---
---   anomaly route:
---     C_anomaly = physical-F2 same-object weld + real/R136 readout weld
---     (its own finite-observable vanishing-error transport bypasses B)
---     -> D
+-- A full Friedmann solution remains downstream after A+C+D.
