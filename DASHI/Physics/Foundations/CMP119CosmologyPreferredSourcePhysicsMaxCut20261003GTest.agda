@@ -38,6 +38,10 @@ b2FiniteNegativityAlreadyCompilerOwned :
   Subject.b2CanonicalSourceCanAlreadyCompileStrictFiniteTraceNegativity ≡ true
 b2FiniteNegativityAlreadyCompilerOwned = refl
 
+b2FiniteNegativityDoesNotPayTailMargin :
+  Subject.b2FiniteNegativityAlonePaysR109TailMargin ≡ false
+b2FiniteNegativityDoesNotPayTailMargin = refl
+
 b2RemainingStrengthIsTailMargin :
   Subject.b2RemainingPreferredSignStrengthIsQuantitativeTailMargin ≡ true
 b2RemainingStrengthIsTailMargin = refl
