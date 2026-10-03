@@ -35,83 +35,44 @@ def main(argv=None) -> int:
     )
     parser.add_argument("file", type=Path)
     parser.add_argument(
-        "--root",
-        type=Path,
-        default=Path.cwd(),
+        "--root", type=Path, default=Path.cwd(),
         help="repository root (default: current directory)",
     )
-    parser.add_argument(
-        "--closure",
-        action="store_true",
-        help="also check reverse-import consumers of FILE",
-    )
-    parser.add_argument(
-        "--plan",
-        action="store_true",
-        help="print affected modules in frontier order and exit",
-    )
+    parser.add_argument("--closure", action="store_true", help="also check reverse-import consumers of FILE")
+    parser.add_argument("--plan", action="store_true", help="print affected modules in frontier order and exit")
     parser.add_argument("--json", action="store_true", help="emit lossless JSON diagnostics")
     parser.add_argument(
-        "--errors-only",
-        action="store_true",
+        "--errors-only", action="store_true",
         help="show only error diagnostics; exit status still reflects the full check",
     )
     parser.add_argument(
-        "--quiet",
-        action="store_true",
+        "--quiet", action="store_true",
         help="hide warnings and success chatter; errors are still printed",
     )
     presentation = parser.add_mutually_exclusive_group()
-    presentation.add_argument(
-        "--compact",
-        action="store_true",
-        help="one logical diagnostic per line plus root-cause summary",
-    )
-    presentation.add_argument(
-        "--verbose",
-        action="store_true",
-        help="show every raw diagnostic with full evidence metadata",
-    )
-    presentation.add_argument(
-        "--by-location",
-        action="store_true",
-        help="show merged logical diagnostics in source order",
-    )
-    presentation.add_argument(
-        "--by-cause",
-        action="store_true",
-        help="group human output by root cause (the default)",
-    )
+    presentation.add_argument("--compact", action="store_true", help="one logical diagnostic per line plus root-cause summary")
+    presentation.add_argument("--verbose", action="store_true", help="show every raw diagnostic with full evidence metadata")
+    presentation.add_argument("--by-location", action="store_true", help="show merged logical diagnostics in source order")
+    presentation.add_argument("--by-cause", action="store_true", help="group human output by root cause (the default)")
     parser.add_argument(
-        "--absolute-paths",
-        action="store_true",
+        "--absolute-paths", action="store_true",
         help="show absolute paths in human output instead of repository-relative paths",
     )
     parser.add_argument(
         "--only-kind",
         choices=(
-            "receiver",
-            "arity",
-            "placeholder",
-            "type-value",
-            "parser",
-            "shadowing",
-            "rewrite",
-            "deprecated-api",
-            "agda-error",
-            "agda-warning",
-            "diagnostic",
+            "receiver", "arity", "placeholder", "type-value", "parser",
+            "shadowing", "rewrite", "deprecated-api", "agda-error",
+            "agda-warning", "diagnostic",
         ),
         help="restrict human output to one actionability class; does not change exit status",
     )
     parser.add_argument(
-        "--write-triage-summary",
-        type=Path,
+        "--write-triage-summary", type=Path,
         help="write a stable root-cause/fingerprint snapshot for a later delta",
     )
     parser.add_argument(
-        "--compare-triage-summary",
-        type=Path,
+        "--compare-triage-summary", type=Path,
         help="append a root-cause delta against a prior triage snapshot",
     )
     parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
@@ -140,45 +101,28 @@ def main(argv=None) -> int:
         ),
     )
     scope_group.add_argument(
-        "--agda-scope-check",
-        action="store_true",
+        "--agda-scope-check", action="store_true",
         help="run Agda --only-scope-checking to suppress false scope diagnostics",
     )
     scope_group.add_argument(
-        "--agda-typecheck-oracle",
-        action="store_true",
+        "--agda-typecheck-oracle", action="store_true",
         help="run full Agda checking to suppress false scope/type diagnostics",
     )
     scope_group.add_argument(
-        "--agda-auto-refine",
-        nargs="?",
-        const="scope",
-        choices=("scope", "typecheck"),
+        "--agda-auto-refine", nargs="?", const="scope", choices=("scope", "typecheck"),
         help=(
             "refine only modules that actually need stronger evidence; "
             "optional value 'typecheck' also escalates typechecker-level findings"
         ),
     )
-    parser.add_argument(
-        "--agda-bin",
-        default="agda",
-        help="Agda executable for --agda-scope-check (default: agda)",
-    )
-    parser.add_argument(
-        "--agda-extra-args",
-        default="",
-        help="extra arguments passed to Agda scope/typecheck refinement subprocesses",
-    )
+    parser.add_argument("--agda-bin", default="agda", help="Agda executable for --agda-scope-check (default: agda)")
+    parser.add_argument("--agda-extra-args", default="", help="extra arguments passed to Agda scope/typecheck refinement subprocesses")
     args = parser.parse_args(argv)
 
     if args.agda_scope_runner and not args.agda_auto_refine:
         parser.error("--agda-scope-runner requires --agda-auto-refine")
-
     if args.agda_typecheck_runner and args.agda_auto_refine != "typecheck":
-        parser.error(
-            "--agda-typecheck-runner requires --agda-auto-refine=typecheck"
-        )
-
+        parser.error("--agda-typecheck-runner requires --agda-auto-refine=typecheck")
     if args.json and args.compare_triage_summary:
         parser.error("--compare-triage-summary is a human-output option and cannot be combined with --json")
 
@@ -187,17 +131,9 @@ def main(argv=None) -> int:
     if args.agda_scope_command:
         scope_backend = ExternalScopeBackend(args.agda_scope_command, cwd=args.root)
     elif args.agda_scope_check:
-        scope_backend = AgdaScopeCheckBackend(
-            args.agda_bin,
-            cwd=args.root,
-            extra_args=agda_extra_args,
-        )
+        scope_backend = AgdaScopeCheckBackend(args.agda_bin, cwd=args.root, extra_args=agda_extra_args)
     elif args.agda_typecheck_oracle:
-        scope_backend = AgdaTypecheckBackend(
-            args.agda_bin,
-            cwd=args.root,
-            extra_args=agda_extra_args,
-        )
+        scope_backend = AgdaTypecheckBackend(args.agda_bin, cwd=args.root, extra_args=agda_extra_args)
     elif args.agda_auto_refine:
         scope_backend = AgdaAutoRefineBackend(
             args.agda_bin,
@@ -250,19 +186,13 @@ def main(argv=None) -> int:
             print(module)
         return 0
 
-    diagnostics = (
-        checker.check_closure(args.file) if args.closure else checker.check(args.file)
-    )
+    diagnostics = checker.check_closure(args.file) if args.closure else checker.check(args.file)
     if args.api_baseline:
         baseline = json.loads(args.api_baseline.read_text(encoding="utf-8"))
         diagnostics.extend(api_drift(checker, baseline, Diagnostic))
 
     errors_only = args.errors_only or args.quiet
-    displayed = (
-        [diag for diag in diagnostics if diag.severity == "error"]
-        if errors_only
-        else diagnostics
-    )
+    displayed = [d for d in diagnostics if d.severity == "error"] if errors_only else diagnostics
     report = build_triage(
         displayed,
         args.root,
@@ -282,20 +212,20 @@ def main(argv=None) -> int:
         previous = json.loads(args.compare_triage_summary.read_text(encoding="utf-8"))
         delta_text = render_delta(previous, report)
 
-    if not (args.quiet and not displayed):
+    suppress_diagnostics = args.quiet and not displayed
+    if not suppress_diagnostics:
         if args.json:
-            # JSON remains deliberately lossless: no sibling merging or display
-            # clustering. This keeps MCP/automation consumers stable.
             print(json.dumps([d.as_dict() for d in displayed], indent=2))
         elif displayed:
-            if args.verbose:
+            if args.only_kind and not report.selected_diagnostics:
+                print(f"agda-preflight: no {args.only_kind} diagnostics")
+            elif args.verbose:
                 print(render_verbose(report))
             elif args.compact:
                 print(render_compact(report))
             elif args.by_location:
                 print(render_location(report))
             else:
-                # --by-cause is an explicit spelling of the default.
                 print(render_grouped(report))
             if delta_text:
                 print()
@@ -307,6 +237,10 @@ def main(argv=None) -> int:
                 print("agda-preflight: no high-confidence issues found")
             if delta_text:
                 print(delta_text)
+    elif delta_text:
+        # `--quiet` suppresses ordinary success chatter, not an explicitly
+        # requested comparison result.
+        print(delta_text)
 
     return 1 if any(d.severity == "error" for d in diagnostics) else 0
 
