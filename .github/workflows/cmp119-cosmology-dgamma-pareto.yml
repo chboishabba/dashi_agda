@@ -1,0 +1,55 @@
+name: CMP119 cosmology D_Gamma Pareto
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223NegativeSectorDominanceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ERBUpperMajorantExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionR136MaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionToExpansionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyStandardRealOrderReflectionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - '.github/workflows/cmp119-cosmology-dgamma-pareto.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-dgamma-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck corrected cosmology Pareto owners
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223NegativeSectorDominanceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223ERBUpperMajorantExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionR136MaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionToExpansionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyStandardRealOrderReflectionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderBridgeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '
