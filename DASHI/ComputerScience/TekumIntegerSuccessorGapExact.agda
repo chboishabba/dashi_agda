@@ -2,7 +2,8 @@ module DASHI.ComputerScience.TekumIntegerSuccessorGapExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _<_; +<+; -<+; -<-)
+import Data.Integer.Base as ℤ
+open ℤ using (ℤ; +_; -[1+_]; +<+; -<+; -<-)
 open import Data.Nat.Base using (_<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Product using (Σ; _,_)
@@ -13,10 +14,6 @@ import DASHI.ComputerScience.TekumExponentBandExact as Band
 
 ------------------------------------------------------------------------
 -- INTEGER STRICT ORDER AS A POSITIVE NUMBER OF SOURCE SUCCESSOR STEPS
---
--- The band owner is phrased in repeated Scale.integerSucc steps.  This file
--- proves that ordinary integer strict order has exactly that shape, without
--- enumerating the bounded Tekum exponent table.
 ------------------------------------------------------------------------
 
 natStrictGap :
