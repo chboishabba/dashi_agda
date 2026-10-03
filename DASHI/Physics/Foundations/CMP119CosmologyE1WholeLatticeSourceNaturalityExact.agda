@@ -1,18 +1,11 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyE1WholeLatticeSourceNaturalityExact where
 
-------------------------------------------------------------------------
--- PREFERRED WHOLE-LATTICE E1 ROOT.
---
--- One source-local derivative-naturality package + equality of its background
--- action with the existing CMP119 OS1 whole-lattice action compiles to the
--- previous R143/R133 whole-lattice max-cut.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.Foundations.CMP119CosmologyE1DerivativeNaturalityExact as Natural
 import DASHI.Physics.Foundations.CMP119CosmologyE1SourceDerivativeNaturalityExact as SourceE1
 import DASHI.Physics.Foundations.CMP119CosmologyE1ComponentPermutationExact as PermE1
 import DASHI.Physics.Foundations.CMP119CosmologyE1R143LocalizedCompilerExact as R143E1
@@ -68,7 +61,7 @@ record WholeLatticeSourceNaturalityE1
 
     sourceBackgroundActionIsWholeLattice :
       ∀ action background →
-      DASHI.Physics.Foundations.CMP119CosmologyE1DerivativeNaturalityExact.actConfiguration
+      Natural.actConfiguration
         (SourceE1.derivativeNaturality sourceNaturality)
         action background
       ≡ Euclidean.actConfiguration euclidean action background
@@ -93,7 +86,7 @@ record WholeLatticeSourceNaturalityE1
     tangentTransportEquivariant :
       ∀ action tangent →
       R133.globalTangentToStressTangent firstWeld
-        (DASHI.Physics.Foundations.CMP119CosmologyE1DerivativeNaturalityExact.actTangent
+        (Natural.actTangent
           (SourceE1.derivativeNaturality sourceNaturality)
           action tangent)
       ≡ actStressTangent action
