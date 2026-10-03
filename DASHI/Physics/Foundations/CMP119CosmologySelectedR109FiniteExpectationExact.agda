@@ -45,7 +45,7 @@ module _
     {G X Configuration Position CurvaturePolynomial LocalOperator
      OPECoefficient Hilbert Vector Hamiltonian Algebra
      Scale Volume Root ContinuumFamily Core
-     sequenceLimit limitLaws quotient division
+     sequenceLimit limitLaws quotient division osS
      osInputs reconstruction}
     (localC :
       LocalC.PinnedCMP119ConcreteLocalCInputs
@@ -57,7 +57,7 @@ module _
         {limitLaws = limitLaws}
         {quotient = quotient}
         {division = division}
-        {S = S}
+        {S = osS}
         osInputs reconstruction group)
     (presentation :
       Presentation.FunctionalR109StressCylinderPresentation
@@ -71,7 +71,7 @@ module _
         {ContinuumFamily = ContinuumFamily} {Core = Core}
         {sequenceLimit = sequenceLimit} {limitLaws = limitLaws}
         {quotient = quotient} {division = division}
-        {osS = S} {osInputs = osInputs} {reconstruction = reconstruction}
+        {osS = osS} {osInputs = osInputs} {reconstruction = reconstruction}
         localC)
     (embedding : Embed.OrderedRationalRealEmbedding)
   where
