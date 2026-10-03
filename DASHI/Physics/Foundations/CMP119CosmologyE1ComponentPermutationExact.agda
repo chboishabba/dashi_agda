@@ -3,13 +3,6 @@ module DASHI.Physics.Foundations.CMP119CosmologyE1ComponentPermutationExact wher
 
 ------------------------------------------------------------------------
 -- E1 FINITE REINDEXING IS PURE COMPONENT-PERMUTATION ALGEBRA.
---
--- The previous localized E1 owner correctly separated local covariance from
--- finite reindexing, but still accepted the two reindexing equalities as
--- fields.  For a literal lattice Euclidean transformation the finite CMP116
--- component family is permuted.  Once that permutation is supplied, both the
--- zeroth-order localized-potential reindexing and the marked D1 reindexing are
--- compiler-owned.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -19,7 +12,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import Data.List.Relation.Binary.Permutation.Propositional as Perm
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _+ℝ_; +-assoc; +-comm)
+  (ℝ; _+ℝ_; +-assoc; +-comm)
 
 import DASHI.Physics.Foundations.CMP119CosmologyE1LocalizedD1CovarianceExact as LocalE1
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
@@ -50,6 +43,20 @@ sumPermutationInvariant (Perm.trans first second) =
   trans
     (sumPermutationInvariant first)
     (sumPermutationInvariant second)
+
+mapPermutation :
+  ∀ {A B : Set}
+    (f : A → B)
+    {left right : List A} →
+  left Perm.↭ right →
+  Finite.mapList f left Perm.↭ Finite.mapList f right
+mapPermutation f Perm.refl = Perm.refl
+mapPermutation f (Perm.prep x permutation) =
+  Perm.prep (f x) (mapPermutation f permutation)
+mapPermutation f (Perm.swap x y permutation) =
+  Perm.swap (f x) (f y) (mapPermutation f permutation)
+mapPermutation f (Perm.trans first second) =
+  Perm.trans (mapPermutation f first) (mapPermutation f second)
 
 mapComposition :
   ∀ {A B C : Set}
@@ -136,15 +143,12 @@ potentialReindexFromPermutation
       λ component →
         Finite.localActivity dataSet component
           (actConfiguration data action configuration)
-    mapped =
-      Finite.mapList
-        (actComponent data action)
-        (Finite.components dataSet)
     permutation = componentPermutation data action
   in
   trans
-    (sym (sumPermutationInvariant
-      (Perm.map weight permutation)))
+    (sym
+      (sumPermutationInvariant
+        (mapPermutation weight permutation)))
     (cong Finite.sumℝ
       (mapComposition weight
         (actComponent data action)
@@ -187,8 +191,9 @@ markedD1ReindexFromPermutation
     permutation = componentPermutation data action
   in
   trans
-    (sym (sumPermutationInvariant
-      (Perm.map weight permutation)))
+    (sym
+      (sumPermutationInvariant
+        (mapPermutation weight permutation)))
     (cong Finite.sumℝ
       (mapComposition weight
         (actComponent data action)
