@@ -11,6 +11,10 @@ required = {
     'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': ['negateWordIsInvertWord', 'tekumBalancedArithmetic', 'concreteAnchor', 'concreteAnchorNegationInvariant'],
     'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': ['integerToIntCodeRoundTrip', 'fractionIntCodeInteger', 'exponentIntCodeInteger', 'parseTekumWord'],
     'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': ['rejoinPayloadCorrect', 'rejoinParsedAnchorPayloadCorrect', 'rejoinPayloadDeterminesSourcePayload', 'sourceParserImageIsLossless'],
+    'DASHI/ComputerScience/TekumParserSuccessfulRejoinExact.agda': [
+        'decodeRegimeSound', 'parseAnchorMSBSuccessfulRejoin',
+        'parseOrdinaryAnchorSuccessfulRejoin',
+    ],
     'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
     'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
     'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': ['canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective'],
@@ -23,17 +27,28 @@ required = {
         'equalMagnitudeSameRegimeForceSignificand', 'equalMagnitudeSameRegimeForceFraction',
         'equalExponentSameRegimeForceExponentMSB', 'equalMagnitudeSameRegimeForceFractionMSB',
     ],
-    # Prop. 2 is not closed merely because the numerical fields are recoverable:
-    # the actual parser payload and then the original signed source word must be
-    # recovered on the same objects.
     'DASHI/ComputerScience/TekumParsedPayloadInjectiveExact.agda': [
         'sameRegimeFieldsDeterminePayload', 'equalMagnitudeDeterminesRegimeAndPayload',
         'equalMagnitudeDeterminesRejoinedAnchor',
     ],
+    'DASHI/ComputerScience/TekumSignedMagnitudeInjectiveExact.agda': [
+        'OrdinarySign', 'negativePositiveDistinct', 'positiveNegativeDistinct',
+        'signedPositiveInjective',
+    ],
+    'DASHI/ComputerScience/TekumSignedAbsoluteWordInjectiveExact.agda': [
+        'signAbsoluteIntegerInjective', 'sameSignAbsoluteValueDeterminesSourceWord',
+    ],
+    'DASHI/ComputerScience/TekumPositiveAnchorInjectiveExact.agda': [
+        'positiveMagnitudeBound', 'positiveModulusCentered',
+        'positiveConcreteAnchorRank', 'positiveAnchorInjective',
+    ],
+    'DASHI/ComputerScience/TekumSourceAnchorInjectiveExact.agda': [
+        'negateWordInvolutive', 'negativeNegatesPositive',
+        'sameSignAnchorDeterminesSourceWord',
+    ],
     'DASHI/ComputerScience/TekumSourceWordInjectiveExact.agda': [
-        'sameSignAnchorDeterminesSourceWord', 'ordinaryEqualDeterminesSign',
-        'ordinaryEqualDeterminesMagnitude', 'ordinaryRationalInjectiveOnParsedWords',
-        'hunholdProposition2Injective',
+        'ordinaryEqualDeterminesSign', 'ordinaryEqualDeterminesMagnitude',
+        'ordinaryRationalInjectiveOnParsedWords', 'hunholdProposition2Injective',
     ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
@@ -60,4 +75,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: Prop. 2 end-to-end owner chain is present: exact signed factorization, arbitrary-gap exponent uniqueness, regime/exponent/fraction recovery, parser payload reconstruction, signed source-word recovery and final ordinary injectivity; wheel parity, source negation and p-adic naturality also present.')
+print('Tekum static regression: Prop. 2 end-to-end owner chain is present: exact signed factorization, arbitrary-gap exponent uniqueness, regime/exponent/fraction recovery, dependent parser payload reconstruction, successful-parser anchor reconstruction, signed concrete-anchor inversion and final ordinary source-word injectivity; wheel parity, source negation and p-adic naturality also present.')
