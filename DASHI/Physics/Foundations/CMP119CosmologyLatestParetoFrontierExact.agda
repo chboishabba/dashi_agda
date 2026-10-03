@@ -6,6 +6,11 @@ open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
 -- LIVE PARETO FRONTIER AFTER THE 2026-10-03 UNIVERSE-EXPANSION MAX-CUT.
+--
+-- Sign correction: the one-point gravitational stress owner is R144's
+-- effective-action response D_Gamma = - D Z / Z, not +D log Z.  Balaban's
+-- blocked log-weight convention remains source-relevant, but it is not the
+-- preferred gravitational one-point orientation.
 ------------------------------------------------------------------------
 
 -- Novel/source-facing DASHI reconstruction work.
@@ -22,16 +27,17 @@ data StandardOSBoundary : Set where
   os-external-selected-e0-e3-e4-interpretation : StandardOSBoundary
   os-standard-marked-reconstruction-authority : StandardOSBoundary
 
--- Preferred source-facing sign route: Balaban generated blocked action is
--- +D log(weight) oriented.
+-- Preferred GRAVITATIONAL sign route.  R144 owns Gamma = -log Z, so negative
+-- R136 stress trace requires a negative Eq.(2.23) non-Wilson sector balance.
 data PreferredSignResidual : Set where
-  r136-same-object-log-weight-weld : PreferredSignResidual
-  eq223-positive-four-sector-balance : PreferredSignResidual
+  r136-same-object-effective-action-weld : PreferredSignResidual
+  eq223-negative-four-sector-balance : PreferredSignResidual
 
--- Source-literal sufficient condition for the preferred positive balance.
-data VacuumDominanceResidual : Set where
-  eq223-vacuum-weyl-coefficient-positive : VacuumDominanceResidual
-  eq223-erb-weighted-numerator-nonnegative : VacuumDominanceResidual
+-- One sufficient way to prove that negative balance.  The old
+-- c_V>0 / ERB>=0 route proves the opposite D_Gamma sign and is therefore not
+-- the preferred gravitational scheduler.
+data NegativeBalanceResidual : Set where
+  eq223-negative-balance-source-estimate : NegativeBalanceResidual
 
 -- Alternate trace-anomaly route.
 data AlternateAnomalyResidual : Set where
@@ -50,8 +56,8 @@ reconstructionInterfaceCount = 7
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
 
-vacuumDominanceSufficientResidualCount : Nat
-vacuumDominanceSufficientResidualCount = 2
+negativeBalanceResidualCount : Nat
+negativeBalanceResidualCount = 1
 
 alternateAnomalyResidualCount : Nat
 alternateAnomalyResidualCount = 2
@@ -106,9 +112,15 @@ e2AndE4UseSamePinnedStressObservable = true
 independentTerminalWightmanHingeChoiceStillExists : Bool
 independentTerminalWightmanHingeChoiceStillExists = false
 
--- Preferred source convention/sign route.
-preferredBalabanFiniteOrientationIsLogWeight : Bool
-preferredBalabanFiniteOrientationIsLogWeight = true
+-- Gravitational finite convention/sign route.
+finiteOnePointStressOrientationIsEffectiveActionDGamma : Bool
+finiteOnePointStressOrientationIsEffectiveActionDGamma = true
+
+finiteOnePointStressOrientationIsPlusDLogZ : Bool
+finiteOnePointStressOrientationIsPlusDLogZ = false
+
+balabanBlockedLogWeightStillUsesPlusDLogZ : Bool
+balabanBlockedLogWeightStillUsesPlusDLogZ = true
 
 preferredSchedulerStillBranchesOnGammaMinusLogZ : Bool
 preferredSchedulerStillBranchesOnGammaMinusLogZ = false
@@ -119,8 +131,14 @@ eq223SectorCallbacksStillArbitrary = false
 vacuumCoefficientStillFreeScalar : Bool
 vacuumCoefficientStillFreeScalar = false
 
-preferredNegativeR136NeedsPositiveEq223Balance : Bool
-preferredNegativeR136NeedsPositiveEq223Balance = true
+preferredNegativeR136NeedsNegativeEq223Balance : Bool
+preferredNegativeR136NeedsNegativeEq223Balance = true
+
+positiveEq223BalanceWouldGiveOppositeDGammaSign : Bool
+positiveEq223BalanceWouldGiveOppositeDGammaSign = true
+
+oldPositiveVacuumDominanceRouteIsPreferredForOnePointGravity : Bool
+oldPositiveVacuumDominanceRouteIsPreferredForOnePointGravity = false
 
 preferredEq223NegativeR136NowCompilesToMatterAcceleration : Bool
 preferredEq223NegativeR136NowCompilesToMatterAcceleration = true
@@ -141,10 +159,14 @@ traceAnomalyEmbeddedRealNegativityAutomaticallyGivesRationalNegativity = false
 traceAnomalyRationalSignNowCompilesToMatterAcceleration : Bool
 traceAnomalyRationalSignNowCompilesToMatterAcceleration = true
 
--- Older finite D_Gamma/R109 absolute-anchor machinery is retained only as an
--- alternate convention/consistency route.
-finiteGammaAbsoluteExpectationRouteIsPreferred : Bool
-finiteGammaAbsoluteExpectationRouteIsPreferred = false
+-- The finite D_Gamma/R109 absolute-anchor machinery is now aligned with the
+-- one-point gravitational convention and remains a valid competing producer B
+-- route.  It is not yet closed because the absolute tail anchor is still open.
+finiteGammaAbsoluteExpectationRouteIsConventionCorrect : Bool
+finiteGammaAbsoluteExpectationRouteIsConventionCorrect = true
+
+finiteGammaAbsoluteExpectationRouteAlreadyClosed : Bool
+finiteGammaAbsoluteExpectationRouteAlreadyClosed = false
 
 -- Downstream cosmology status.
 terminalVacuumCosmologyAlgebraStillFrontier : Bool
