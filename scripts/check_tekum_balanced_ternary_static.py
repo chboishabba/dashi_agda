@@ -27,6 +27,10 @@ required = {
         'parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates',
         'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates',
     ],
+    'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': [
+        'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization',
+        'parsedOrdinaryRawFactorization', 'parsedOrdinaryCanonicalFactorization',
+    ],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': [
         'EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd',
         'pow3Mod4OneImpliesEvenWidth', 'wheelQuarterIntegralityIffEvenWidth',
@@ -48,4 +52,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: exact source rational coordinates, parsed triadic weld, general wheel parity, parser recovery, exponent/significand bands, source negation and p-adic naturality present.')
+print('Tekum static regression: ordinary same-object factorization, exact source rational coordinates, parsed triadic weld, general wheel parity, parser recovery, exponent/significand bands, source negation and p-adic naturality present.')
