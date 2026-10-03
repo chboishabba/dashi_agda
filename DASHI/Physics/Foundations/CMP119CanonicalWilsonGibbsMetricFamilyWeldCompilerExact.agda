@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119CanonicalWilsonGibbsMetricFamilyWeldCompi
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as Basis
@@ -143,7 +143,7 @@ module _
       ; Family.SelectedMetricInsertionFamilyWilsonGibbsWeld.connectedNumeratorIsSelectedInsertionAt =
           selectedConnectedNumeratorIsCanonicalWilsonGibbs input
       ; Family.SelectedMetricInsertionFamilyWilsonGibbsWeld.selectedInsertionAtIsWilsonGibbs =
-          λ component → Agda.Builtin.Equality.refl
+          λ component → refl
       }
 
 metricFamilyWeldIsCompilerOutputFromCanonicalSourceAnchor : Bool
