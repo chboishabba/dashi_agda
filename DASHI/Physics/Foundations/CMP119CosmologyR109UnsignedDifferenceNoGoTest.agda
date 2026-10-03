@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyR109UnsignedDifferenceNoGoTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyR109UnsignedDifferenceNoGoExact as New
+
+round109DifferenceIsNonnegativeRegression =
+  New.round109DifferenceCoordinateIsNonnegative
+
+signedDifferenceNotRecoverableRegression =
+  New.nonnegativeDifferenceDoesNotDetermineSignedIncrement
+
+oneEndpointSignedTelescopeRouteNotDirectRegression =
+  New.oneEndpointSignedTelescopeIsNotDirectRound109Consumer
