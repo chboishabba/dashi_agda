@@ -9,6 +9,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologySelectedR109FiniteExpectationFromSelectedPresentationTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsReceiptResolutionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsReceiptResolutionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003EExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003ETest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
@@ -50,6 +52,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologySelectedR109FiniteExpectationFromSelectedPresentationTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsReceiptResolutionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsReceiptResolutionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003EExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyParetoMaxCut20261003ETest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
