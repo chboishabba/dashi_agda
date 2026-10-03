@@ -26,6 +26,12 @@ import DASHI.ComputerScience.TekumFiniteSemanticsExact
 import DASHI.ComputerScience.TekumExactTriadicSemanticsExact
 import DASHI.ComputerScience.TekumSourceWordDecodeExact
 import DASHI.ComputerScience.TekumSourceWordRoundTripExact
+import DASHI.ComputerScience.TekumParsedExactTriadicWeldExact
+import DASHI.ComputerScience.TekumFractionRangeExact
+import DASHI.ComputerScience.TekumFractionRationalRangeExact
+import DASHI.ComputerScience.TekumSignificandRangeExact
+import DASHI.ComputerScience.TekumTriadicScaleExact
+import DASHI.ComputerScience.TekumExponentBandExact
 import DASHI.ComputerScience.TekumSourceNegationExact
 import DASHI.ComputerScience.TekumFormalPropertiesExact
 import DASHI.ComputerScience.TekumNegationExact
@@ -69,11 +75,18 @@ record TekumVerifiedAssemblyBoundary : Set where
     dependentAnchorFieldCarrierPresent : Bool
     sourceWordParserPresent : Bool
     parsedPayloadRejoinPaid : Bool
+    rejoinImageDeterminesSourcePayload : Bool
 
     exactSymbolicFiniteSemanticsPresent : Bool
     exactTriadicSignedScaleSemanticsPresent : Bool
     canonicalRationalOrdinaryDecoderPresent : Bool
+    parsedExactTriadicCoordinatesWelded : Bool
+    rationalFractionHalfBoundPaid : Bool
+    exactSignificandBandPaid : Bool
+    adjacentExponentBandSeparationPaid : Bool
     machineFloatUsedAsSemanticAuthority : Bool
+
+    generalWheelParityModuloFourPaid : Bool
 
     sourceProp2InjectivityPaid : Bool
     sourceProp3NegationPaid : Bool
@@ -122,8 +135,9 @@ canonicalTekumVerifiedAssemblyBoundary : TekumVerifiedAssemblyBoundary
 canonicalTekumVerifiedAssemblyBoundary =
   tekumVerifiedAssemblyBoundary
     true true true true true true true true true
-    true true true true true true true true
-    true true true false
+    true true true true true true true true true
+    true true true true true true true false
+    true
     false true false false false true
     true true true true
     true true true true false true true true true false
