@@ -3,106 +3,39 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 required = {
-    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': [
-        'eval-involution',
-        'threeTritExtremalPositiveWeight',
-    ],
-    'DASHI/Algebra/BalancedTernaryA003462BridgeExact.agda': [
-        'threePositiveTritEvaluationMatchesA003462Magnitude',
-    ],
-    'DASHI/Algebra/BalancedTernaryFiniteCarrierExact.agda': [
-        'finTritRoundTrip',
-        'tritFinRoundTrip',
-        'fromToFin3',
-        'toFromFin3',
-        'canonicalFin3VectorEnumerationLength',
-    ],
+    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': ['eval-involution', 'threeTritExtremalPositiveWeight'],
+    'DASHI/Algebra/BalancedTernaryA003462BridgeExact.agda': ['threePositiveTritEvaluationMatchesA003462Magnitude'],
+    'DASHI/Algebra/BalancedTernaryFiniteCarrierExact.agda': ['finTritRoundTrip', 'tritFinRoundTrip', 'fromToFin3', 'toFromFin3', 'canonicalFin3VectorEnumerationLength'],
     'DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda': [
-        'digitInteger',
-        'evalIntegerCons',
-        'balancedRemainderDistinct',
-        'toIntegerInjective',
-        'oneTritNegativeInteger',
-        'oneTritZeroInteger',
-        'oneTritPositiveInteger',
-        'twoTritNegativePositiveInteger',
-        'twoTritZeroPositiveInteger',
-        'twoTritPositivePositiveInteger',
+        'digitInteger', 'evalIntegerCons', 'balancedRemainderDistinct', 'toIntegerInjective',
+        'oneTritNegativeInteger', 'oneTritZeroInteger', 'oneTritPositiveInteger',
+        'twoTritNegativePositiveInteger', 'twoTritZeroPositiveInteger', 'twoTritPositivePositiveInteger',
     ],
     'DASHI/Algebra/BalancedTernaryRankReconstructionExact.agda': [
-        'rankWord',
-        'unrankWord',
-        'unrankRankWord',
-        'rankUnrankWord',
-        'rankToNatCode',
-        'natCodeStrictBound',
-        'pow3RightMatchesPow3',
+        'rankWord', 'unrankWord', 'unrankRankWord', 'rankUnrankWord',
+        'rankToNatCode', 'natCodeStrictBound', 'pow3RightMatchesPow3',
     ],
-    'DASHI/Foundations/RadixScaledExactFormat.agda': [
-        'bf16ScaledExactFormat',
-        'TaperedWidthAllocation',
+    'DASHI/Algebra/BalancedTernaryCenteredReconstructionExact.agda': [
+        'twiceCenterPlusOne', 'CenteredInteger', 'centeredValue',
+        'encodeCentered', 'decodeCentered', 'decodeEncodeCentered', 'encodeDecodeCentered',
+        'centeredValueWithinRange', 'centeredValueEncode', 'balancedTernaryCenteredBijection',
     ],
-    'DASHI/Codec/TriadicPAdicCylinderExact.agda': [
-        'canonicalTriadicCylinderSystem',
-        'projectCompatible',
-    ],
-    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': [
-        'ordinaryExactTriadic',
-        'ordinaryRational',
-        'applySignFlip',
-        'flipExactTriadicDenominatorInvariant',
-    ],
-    'DASHI/ComputerScience/TekumRegimeExponentExact.agda': [
-        'decodeEncodeRegime',
-        'outerPositiveBiasIs244',
-    ],
+    'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
+    'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
+    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
+    'DASHI/ComputerScience/TekumRegimeExponentExact.agda': ['decodeEncodeRegime', 'outerPositiveBiasIs244'],
     'DASHI/ComputerScience/TekumFloatingPointStructuralBridgeExact.agda': [
-        'tekumOrientationRoleMatchesBF16SignRole',
-        'tekumScaleRoleMatchesBF16ExponentRole',
-        'tekumRefinementRoleMatchesBF16FractionRole',
-        'centralRegimeAtWidth8',
-        'outerRegimeAtWidth8',
+        'tekumOrientationRoleMatchesBF16SignRole', 'tekumScaleRoleMatchesBF16ExponentRole',
+        'tekumRefinementRoleMatchesBF16FractionRole', 'centralRegimeAtWidth8', 'outerRegimeAtWidth8',
     ],
-    'DASHI/ComputerScience/TekumTriadicPAdicKernelBridgeExact.agda': [
-        'fromToKernel',
-        'toFromKernel',
-        'truncateCommutesWithCarrierWeld',
-        'kernelTwoStepProjectionComposes',
-    ],
-    'DASHI/ComputerScience/TekumPadicOrientationBoundaryExact.agda': [
-        'tekumAndPadicDepthOneDiffer',
-    ],
-    'DASHI/ComputerScience/TekumPadicDualChartExact.agda': [
-        'dualChartInvolutive',
-        'tekumPrecisionConjugatesToDual',
-        'dualTwoStepComposition',
-    ],
-    'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': [
-        'dualDropOneIsInit',
-        'toKernelInitNaturality',
-        'dualPrecisionTwoIsCylinderRefinementTwo',
-        'finiteNaturalityOnly',
-    ],
-    'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': [
-        'regimeStorageRoundTrip',
-        'ternaryExecutionMatchesNative',
-        'positiveOuterRegimeEchoesFourteen',
-    ],
-    'DASHI/ComputerScience/TekumTriadicABIBackendBoundaryExact.agda': [
-        'Pack5Obligation',
-        'canonicalTekumBackendBoundary',
-    ],
-    'DASHI/ComputerScience/TekumSSPFRACTRANBridgeExact.agda': [
-        'positionedReopenExact',
-        'positionedCodeSeparatesTekumDigit',
-        'negativeUnitAtOneCompilesToThreeInversePrimes',
-    ],
-    'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': [
-        'canonicalTekumVerifiedAssemblyBoundary',
-        'canonicalRationalOrdinaryDecoderPresent',
-        'finiteTritPowerThreeCardinalityPaid',
-        'reversalDualChartPresent',
-    ],
+    'DASHI/ComputerScience/TekumTriadicPAdicKernelBridgeExact.agda': ['fromToKernel', 'toFromKernel', 'truncateCommutesWithCarrierWeld', 'kernelTwoStepProjectionComposes'],
+    'DASHI/ComputerScience/TekumPadicOrientationBoundaryExact.agda': ['tekumAndPadicDepthOneDiffer'],
+    'DASHI/ComputerScience/TekumPadicDualChartExact.agda': ['dualChartInvolutive', 'tekumPrecisionConjugatesToDual', 'dualTwoStepComposition'],
+    'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualDropOneIsInit', 'toKernelInitNaturality', 'dualPrecisionTwoIsCylinderRefinementTwo', 'finiteNaturalityOnly'],
+    'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': ['regimeStorageRoundTrip', 'ternaryExecutionMatchesNative', 'positiveOuterRegimeEchoesFourteen'],
+    'DASHI/ComputerScience/TekumTriadicABIBackendBoundaryExact.agda': ['Pack5Obligation', 'canonicalTekumBackendBoundary'],
+    'DASHI/ComputerScience/TekumSSPFRACTRANBridgeExact.agda': ['positionedReopenExact', 'positionedCodeSeparatesTekumDigit', 'negativeUnitAtOneCompilesToThreeInversePrimes'],
+    'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': ['canonicalTekumVerifiedAssemblyBoundary', 'canonicalRationalOrdinaryDecoderPresent', 'finiteTritPowerThreeCardinalityPaid', 'reversalDualChartPresent'],
 }
 
 for rel, needles in required.items():
@@ -117,4 +50,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: positional injectivity + rank reconstruction, rational semantics, dual p-adic cylinder naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: positional injectivity + centered reconstruction, rational semantics, dual p-adic cylinder naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
