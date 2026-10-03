@@ -29,7 +29,7 @@ a1SourceTarget =
 
 a2SourceTarget : String
 a2SourceTarget =
-  "Identify the selected source-native CMP119 local insertion token with its exact Configuration-to-real cylinder observable."
+  "Identify the selected source-native CMP119/R109 insertion token with its exact Configuration-to-real cylinder observable and prove that same selected image is positive-time and gauge-invariant on the published Wilson OS surface."
 
 b1SourceTarget : String
 b1SourceTarget =
@@ -37,7 +37,7 @@ b1SourceTarget =
 
 b2SourceTarget : String
 b2SourceTarget =
-  "Construct the physical metric family for the literal Eq.(2.23) E/R/B/vacuum terms and prove the combined-plus-vacuum-plus-R109-tail envelope is strictly negative."
+  "Construct the physical Eq.(2.23) metric family and prove the literal preferred threshold c_V < -(M_ERB + Tail_109(k)); the strict combined envelope is derived from that threshold."
 
 cSourceTarget : String
 cSourceTarget =
