@@ -5,6 +5,7 @@ targets=(
   DASHI/Moonshine/Monster196883BabyBranchPrimeSupportExact.agda
   DASHI/Moonshine/MonsterBinaryTernaryInformationDepthExact.agda
   DASHI/Moonshine/JMDGF4096MonsterTwoLocalProvenanceExact.agda
+  DASHI/Moonshine/JMDMonsterRepresentationCrossPollinationMaxCutExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -34,5 +35,11 @@ grep -q 'monsterTwoLocal4096Role' "${targets[2]}"
 grep -q 'sameScalar4096' "${targets[2]}"
 grep -q 'sameScalarDoesNotIdentify4096Roles' "${targets[2]}"
 grep -q 'gf4096DoesNotConstructMonsterTwoLocalModule' "${targets[2]}"
+
+# Cross-pollination capstone: same ambient 196883, distinct sourced decompositions.
+grep -q 'sameAmbientTwoBranchings' "${targets[3]}"
+grep -q 'babyAndTwoLocalBranchingsRechart196883' "${targets[3]}"
+grep -q 'jmdCrossPollinationDoesNotConstructTwoBTateQ10' "${targets[3]}"
+grep -q 'primeSupportAnd4096DoNotBecomeSameRepresentationMeaning' "${targets[3]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
