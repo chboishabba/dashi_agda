@@ -11,6 +11,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsTypedReceiptsEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _<_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
@@ -20,7 +21,6 @@ import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedReadoutCovarianceExact as Readout
 import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
 import DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorExact as Direct
-import DASHI.Physics.Foundations.CMP119CosmologyR144R109ExpectationCompletionMaxCutExact as Tail
 import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Hyper
