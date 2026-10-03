@@ -18,6 +18,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR109UnsignedDifferenceNoGoExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
 
@@ -41,7 +42,7 @@ round109StressDifferenceNonnegative dataSet start count =
     (R109.stressDifferenceIsOrdinarySourceResponse dataSet start count)
   where
   substRight : ∀ {left right : ℚ} → 0ℚ ≤ right → left ≡ right → 0ℚ ≤ left
-  substRight proof Agda.Builtin.Equality.refl = proof
+  substRight proof refl = proof
 
 round109DifferenceCoordinateIsNonnegative : Bool
 round109DifferenceCoordinateIsNonnegative = true
