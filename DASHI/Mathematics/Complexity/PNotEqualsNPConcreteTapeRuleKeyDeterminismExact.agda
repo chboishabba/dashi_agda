@@ -7,9 +7,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleKeyDeterminismEx
 -- select any listed rule.  The exact compatibility condition is therefore:
 -- two listed rules with the same (sourceState, readSymbol) key are equal.
 --
--- This owner does not change ConcreteTapeMachine and does not add another
--- transition function.  It proves completeness of the existing sequential
--- scan and uniqueness of its selected rule under that explicit predicate.
+-- The repository already names exactly this condition `RuleDispatchUnique`
+-- in PNotEqualsNPConcreteTapeDeterminismNoGoExact.  This owner reuses that
+-- single predicate and proves completeness/uniqueness for the actual
+-- sequential interpreter.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -20,23 +21,15 @@ open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeDeterminismNoGoExact as Determinism
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact as Interpreter
 
 ------------------------------------------------------------------------
--- Deterministic rule-table key predicate.
+-- Reuse the existing exact determinism notion; do not fork terminology.
 ------------------------------------------------------------------------
 
 RuleKeyDeterministic : Local.ConcreteTapeMachine → Set
-RuleKeyDeterministic machine =
-  ∀ {first second :
-      Local.TapeRule
-        (Local.State machine)
-        (Local.Symbol machine)} →
-  Local.RuleOccurs first (Local.rules machine) →
-  Local.RuleOccurs second (Local.rules machine) →
-  Local.sourceState first ≡ Local.sourceState second →
-  Local.readSymbol first ≡ Local.readSymbol second →
-  first ≡ second
+RuleKeyDeterministic = Determinism.RuleDispatchUnique
 
 ------------------------------------------------------------------------
 -- Any listed rule whose key matches (q,a) guarantees that the sequential
@@ -192,10 +185,10 @@ fetchConcreteRuleNothingNoMatchingRule
 -- MAX-CUT STATUS
 --
 -- PAID:
--- * explicit deterministic-key predicate on the literal existing rule list;
+-- * reuses the existing `RuleDispatchUnique` predicate;
 -- * sequential first-match lookup is complete for every listed matching key;
--- * under key determinism, the returned rule equals any relationally chosen
---   listed rule with that key;
+-- * under dispatch uniqueness, the returned rule equals any relationally
+--   chosen listed rule with that key;
 -- * `nothing` proves there is no listed rule with the queried key.
 --
 -- NEXT:
