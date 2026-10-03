@@ -4,43 +4,29 @@ module DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsReceiptResoluti
 ------------------------------------------------------------------------
 -- FIVE SOURCE-PHYSICS RECEIPTS: FAIL-CLOSED RESOLUTION.
 --
--- The Pareto/max-cut programme has reduced the cosmology lane to five genuine
--- source-physics receipts.  This owner records the result of attempting to
--- construct all five from the current SAFE repository theory.
+-- The generic proposition sockets have been removed from this owner.  The exact
+-- mathematical interfaces now live in
+-- `CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact`.
 --
--- The answer is deliberately not encoded as five postulates:
+-- A1  selected R144 signed-B4 readout covariance
+-- A2  selected R109 insertion -> real cylinder semantics
+-- B1  absolute same-sequence R136/R109 direct-tail attachment
+-- B2  source-native Eq.(2.23) metric-family strict negative envelope
+-- C   embed(Q_R136) <= selected renormalized anomaly trace
 --
---   A1  selected R144 signed-B4 readout covariance
---   A2  selected R109 insertion -> real cylinder semantics
---   B1  absolute same-sequence R136/R109 direct-tail attachment
---   B2  source-native Eq.(2.23) metric-family strict negative envelope
---   C   embed(Q_R136) <= selected renormalized anomaly trace
---
--- A2, B1 and B2 have constructive underdetermination/no-go owners already in
--- this branch.  A1 has an explicit countermodel showing additive D1 linearity
--- does not imply symmetry covariance, while the existing whole-lattice source
--- theorem owns expectation invariance rather than differentiated naturality.
--- C has the standard trace-anomaly theorem and pinned Local-C same-stress
--- plumbing, but the source citation does not compare the R136 scalar readout
--- with the selected renormalized trace numerator.  Exact equality would be a
--- sufficient producer for C, but is Pareto-overstrong: one-sided dominance is
--- the actual terminal obligation.
---
--- Therefore the mathematically honest "complete all five" operation is to
--- expose the exact evidence sockets and forbid a compiler-only promotion.  A
--- future primary-source theorem, source calculation, or independently checked
--- physical identification can inhabit a socket; this file adds no such fact.
+-- This module records why the current safe theory does not manufacture any of
+-- those five evidence values.  No postulate promotion is permitted.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact as Typed
 import DASHI.Physics.Foundations.CMP119CosmologyE1LinearityDoesNotForceB4CovarianceExact as A1NoGo
 import DASHI.Physics.Foundations.CMP119CosmologyR109PairObservableUnderdeterminationExact as A2NoGo
 import DASHI.Physics.Foundations.CMP119CosmologyR109AbsoluteExpectationAnchorNoGoExact as B1NoGo
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ERBMetricVariationUnderdeterminationExact as B2ERBNoGo
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumMetricSignUnderdeterminationExact as B2VacuumNoGo
-import DASHI.Physics.Foundations.CMP119AntigravityRealTraceAnomalySameObjectExact as CBoundary
 import DASHI.Physics.Foundations.CMP119CosmologyR136TraceAnomalyOrderDominanceExact as CDominance
 
 ------------------------------------------------------------------------
@@ -55,36 +41,10 @@ data SourcePhysicsReceipt : Set where
   c-r136-below-selected-anomaly-trace : SourcePhysicsReceipt
 
 terminalSourcePhysicsReceiptCount : Nat
-terminalSourcePhysicsReceiptCount = 5
+terminalSourcePhysicsReceiptCount = Typed.typedSourcePhysicsReceiptCount
 
-------------------------------------------------------------------------
--- Exact evidence sockets.
---
--- These are intentionally propositions-as-data interfaces, not axioms.  They
--- name the source theorem/identification that must be supplied.  The existing
--- specialized records remain the canonical downstream consumers.
-------------------------------------------------------------------------
-
-record A1SourceDifferentiatedChangeOfVariablesReceipt : Set₁ where
-  field
-    sourceDifferentiatedChangeOfVariablesLaw : Set
-
-record A2SelectedInsertionSemanticsReceipt : Set₁ where
-  field
-    selectedInsertionObservableMeaningLaw : Set
-
-record B1AbsoluteSameSequenceTailReceipt : Set₁ where
-  field
-    absoluteSameSequenceCompletionTailLaw : Set
-
-record B2SourceMetricFamilyNegativeEnvelopeReceipt : Set₁ where
-  field
-    sourceMetricFamilyCalibrationLaw : Set
-    sourceNegativeEnvelopeLaw : Set
-
-record CR136SelectedAnomalyUpperComparisonReceipt : Set₁ where
-  field
-    r136BelowSelectedAnomalyTraceLaw : Set
+genericSetValuedSocketsEliminated : Bool
+genericSetValuedSocketsEliminated = true
 
 ------------------------------------------------------------------------
 -- Audit facts: why no compiler can manufacture the five receipts.
@@ -138,7 +98,7 @@ cTraceAnomalyCitationAloneInsufficient = true
 ------------------------------------------------------------------------
 
 allFivePaidByCurrentSafeTheory : Bool
-allFivePaidByCurrentSafeTheory = false
+allFivePaidByCurrentSafeTheory = Typed.currentSafeTheoryPaysAllFiveTypedReceipts
 
 addingPostulatesWouldNotCountAsSourcePhysicsCompletion : Bool
 addingPostulatesWouldNotCountAsSourcePhysicsCompletion = true
