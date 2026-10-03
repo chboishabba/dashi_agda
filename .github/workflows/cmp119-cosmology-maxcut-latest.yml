@@ -1,0 +1,71 @@
+name: CMP119 cosmology latest max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1ComponentPermutationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SourceLocalizedGeometryExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1DerivativeNaturalityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SourceDerivativeNaturalityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1WholeLatticeSourceNaturalityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SignedSymmetricTangentExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SignedReadoutCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressSelectedSemanticsExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2PinnedOSAlgebraExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4Round281Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSSingleAuthorityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyBalabanLogWeightOrientationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyBalabanEq223R136SignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyBalabanVacuumDominatedR136Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - '.github/workflows/cmp119-cosmology-maxcut-latest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-latest-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck latest cosmology max-cut owners
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CMP119CosmologyE1ComponentPermutationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SourceLocalizedGeometryExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1DerivativeNaturalityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SourceDerivativeNaturalityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1WholeLatticeSourceNaturalityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SignedSymmetricTangentExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SignedReadoutCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressSelectedSemanticsExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2PinnedOSAlgebraExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4Round281Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSSingleAuthorityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyBalabanLogWeightOrientationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyBalabanEq223R136SignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyBalabanVacuumDominatedR136Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '
