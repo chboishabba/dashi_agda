@@ -1,6 +1,7 @@
 module DASHI.ComputerScience.TekumParsedExponentInjectiveExact where
 
 open import Agda.Builtin.Equality using (_≡_; sym)
+open import Agda.Builtin.Nat using (suc)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Integer.Base as ℤ using (ℤ; _<_)
 import Data.Integer.Properties as ℤP
@@ -36,7 +37,7 @@ leftExponentStrictContradiction p q e<e' magnitudeEq
   where
   qBandAtGap :
     Band.InBand
-      (Band.advanceExponent (Agda.Builtin.Nat.suc k)
+      (Band.advanceExponent (suc k)
         (Factor.sourceExponentInteger p))
       (Parsed.parsedMagnitude q)
   qBandAtGap =
