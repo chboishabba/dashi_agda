@@ -1,15 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyR136CompletedFourDiagonalExpectationExact where
 
-------------------------------------------------------------------------
--- R109 COMPLETED FUNCTIONAL -> R136 FOUR-DIRECTION RESPONSE.
---
--- Round130 already proves, perturbation by perturbation, that the completed
--- selected stress functional equals the canonical continuum stress pairing.
--- R136 reuses that exact Round130 metric-pairing weld.  Therefore the sum over
--- the four admitted cosmology directions is not a new completion leaf.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _+_)
@@ -18,6 +9,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_; cong; cong₂; s
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
@@ -67,7 +59,7 @@ module _
   metricWeld = R136.metricPairing recovery
 
   completedReadout :
-    R134.Domain.MetricPerturbation
+    Domain.MetricPerturbation
       (R134.presentCutCanonicalMetricDomain metricInputs) → ℚ
   completedReadout h =
     Continuum.rationalReadout recovery selected directions
@@ -78,7 +70,7 @@ module _
 
   completedReadoutIsContinuumReadout :
     ∀ h →
-    R134.Domain.AdmissibleMetricPerturbation
+    Domain.AdmissibleMetricPerturbation
       (R134.presentCutCanonicalMetricDomain metricInputs) h →
     completedReadout h
     ≡ Continuum.continuumReadout recovery selected directions h
