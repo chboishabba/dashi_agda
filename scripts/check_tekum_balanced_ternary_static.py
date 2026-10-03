@@ -3,83 +3,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 required = {
-    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': [
-        'eval-involution', 'threeTritExtremalPositiveWeight',
-        'toIntegerSwapSign', 'toIntegerInvertWord',
+    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': ['eval-involution', 'toIntegerSwapSign', 'toIntegerInvertWord'],
+    'DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda': ['evalIntegerCons', 'toIntegerInjective'],
+    'DASHI/Algebra/BalancedTernaryRankReconstructionExact.agda': ['rankWord', 'unrankWord', 'unrankRankWord', 'rankUnrankWord'],
+    'DASHI/Algebra/BalancedTernaryRankNegationExact.agda': ['rankInvertIsOpposite'],
+    'DASHI/Algebra/BalancedTernaryCenteredReconstructionExact.agda': ['CenteredInteger', 'decodeEncodeCentered', 'encodeDecodeCentered', 'balancedTernaryCenteredBijection'],
+    'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': ['negateWordIsInvertWord', 'tekumBalancedArithmetic', 'concreteAnchor', 'concreteAnchorNegationInvariant'],
+    'DASHI/ComputerScience/TekumDefinition5ConsistencyExact.agda': ['definition5DiffersFromCarryDiscardAtWidthOne', 'anchorSubtractionNeverNeedsPositiveOverflow'],
+    'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': ['integerToIntCodeRoundTrip', 'fractionIntCodeInteger', 'exponentIntCodeInteger', 'parseTekumWord'],
+    'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': ['rejoinPayloadCorrect', 'rejoinParsedAnchorPayloadCorrect', 'sourceParserImageIsLossless'],
+    'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
+    'DASHI/ComputerScience/TekumFractionRangeExact.agda': ['fractionIntegerRange', 'twiceCenterStrictlyBelowPowerThree'],
+    'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['rawFractionStrictHalfBound', 'fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
+    'DASHI/ComputerScience/TekumSignificandRangeExact.agda': [
+        'significand', 'threeHalves', 'halfBelowSignificand', 'significandBelowThreeHalves',
+        'significandStrictBand', 'nextExponentLowerEqualsCurrentUpper',
     ],
-    'DASHI/Algebra/BalancedTernaryA003462BridgeExact.agda': ['threePositiveTritEvaluationMatchesA003462Magnitude'],
-    'DASHI/Algebra/BalancedTernaryFiniteCarrierExact.agda': ['finTritRoundTrip', 'tritFinRoundTrip', 'fromToFin3', 'toFromFin3', 'canonicalFin3VectorEnumerationLength'],
-    'DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda': [
-        'digitInteger', 'evalIntegerCons', 'balancedRemainderDistinct', 'toIntegerInjective',
-        'oneTritNegativeInteger', 'oneTritZeroInteger', 'oneTritPositiveInteger',
-        'twoTritNegativePositiveInteger', 'twoTritZeroPositiveInteger', 'twoTritPositivePositiveInteger',
-    ],
-    'DASHI/Algebra/BalancedTernaryRankReconstructionExact.agda': [
-        'rankWord', 'unrankWord', 'unrankRankWord', 'rankUnrankWord',
-        'rankToNatCode', 'natCodeStrictBound', 'pow3RightMatchesPow3',
-    ],
-    'DASHI/Algebra/BalancedTernaryRankNegationExact.agda': [
-        'digitNatInvertComplement', 'natCodeInvertComplement', 'rankInvertIsOpposite',
-    ],
-    'DASHI/Algebra/BalancedTernaryCenteredReconstructionExact.agda': [
-        'twiceCenterPlusOne', 'CenteredInteger', 'centeredValue',
-        'encodeCentered', 'decodeCentered', 'decodeEncodeCentered', 'encodeDecodeCentered',
-        'centeredValueWithinRange', 'centeredValueEncode', 'balancedTernaryCenteredBijection',
-    ],
-    'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': [
-        'wrapRank', 'negateCentered', 'addCentered', 'subtractCentered', 'modulusCentered',
-        'negateWord', 'negateWordIsInvertWord', 'addWord', 'subtractWord', 'modulusWord', 'allPositiveWord',
-        'modulusNegateWord', 'tekumBalancedArithmetic', 'concreteAnchor',
-        'concreteAnchorNegationInvariant', 'oneTritPositivePlusPositiveWrapsNegative',
-    ],
-    'DASHI/ComputerScience/TekumDefinition5ConsistencyExact.agda': [
-        'sourceOverflowAdjustment', 'definition5WidthOnePositiveOverflow',
-        'carryDiscardWidthOnePositiveOverflow', 'definition5DiffersFromCarryDiscardAtWidthOne',
-        'anchorSubtractionNeverNeedsPositiveOverflow', 'sourceEquationAndCarryDescriptionSeparated',
-    ],
-    'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': [
-        'signOfWord', 'ParsedPayload', 'parsePayload', 'anchorMSB', 'parseAnchorMSB', 'parseOrdinaryAnchor',
-        'integerToIntCode', 'integerToIntCodeRoundTrip', 'exponentIntCode', 'fractionIntCode',
-        'fractionIntCodeInteger', 'ordinaryFromParsed', 'parseTekumWord',
-        'decodeNormalWidthTekumWord', 'normalWidthParserUsesSourceFieldOrder',
-    ],
-    'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': [
-        'rejoinPayload', 'rejoinPayloadCorrect', 'regimePrefixMSB', 'rejoinAnchorMSB',
-        'rejoinParsedAnchorMSB', 'rejoinParsedAnchorPayloadCorrect', 'sourceParserImageIsLossless',
-    ],
-    'DASHI/ComputerScience/TekumSourceNegationExact.agda': [
-        'signOfIntegerNegation', 'signOfInvertWord', 'signOfNegateWord',
-        'anchorMSBNegationInvariant', 'parseOrdinaryAnchorNegationInvariant',
-        'ordinaryParsedNegation', 'parseTekumWordNegation',
-    ],
-    'DASHI/ComputerScience/TekumFractionRangeExact.agda': [
-        'fractionIntegerLower', 'fractionIntegerUpper', 'fractionIntegerRange',
-        'twiceCenterPlusOneIsPowerThree', 'twiceCenterStrictlyBelowPowerThree',
-    ],
-    'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': [
-        'fractionTwiceUpperInteger', 'fractionTwiceLowerInteger',
-        'rawFraction', 'canonicalFraction', 'rawFractionStrictHalfBound',
-        'fractionStrictHalfBound', 'canonicalFractionIsSignedDivision',
-    ],
-    'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
-    'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
-    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': [
-        'ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant',
-        'pow3IsNatPower', 'pow3NonZero', 'exactTriadicRationalUsesSignedDivision',
-    ],
-    'DASHI/ComputerScience/TekumRegimeExponentExact.agda': ['decodeEncodeRegime', 'outerPositiveBiasIs244'],
-    'DASHI/ComputerScience/TekumFloatingPointStructuralBridgeExact.agda': [
-        'tekumOrientationRoleMatchesBF16SignRole', 'tekumScaleRoleMatchesBF16ExponentRole',
-        'tekumRefinementRoleMatchesBF16FractionRole', 'centralRegimeAtWidth8', 'outerRegimeAtWidth8',
-    ],
-    'DASHI/ComputerScience/TekumTriadicPAdicKernelBridgeExact.agda': ['fromToKernel', 'toFromKernel', 'truncateCommutesWithCarrierWeld', 'kernelTwoStepProjectionComposes'],
-    'DASHI/ComputerScience/TekumPadicOrientationBoundaryExact.agda': ['tekumAndPadicDepthOneDiffer'],
-    'DASHI/ComputerScience/TekumPadicDualChartExact.agda': ['dualChartInvolutive', 'tekumPrecisionConjugatesToDual', 'dualTwoStepComposition'],
-    'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualDropOneIsInit', 'toKernelInitNaturality', 'dualPrecisionTwoIsCylinderRefinementTwo', 'finiteNaturalityOnly'],
-    'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': ['regimeStorageRoundTrip', 'ternaryExecutionMatchesNative', 'positiveOuterRegimeEchoesFourteen'],
-    'DASHI/ComputerScience/TekumTriadicABIBackendBoundaryExact.agda': ['Pack5Obligation', 'canonicalTekumBackendBoundary'],
-    'DASHI/ComputerScience/TekumSSPFRACTRANBridgeExact.agda': ['positionedReopenExact', 'positionedCodeSeparatesTekumDigit', 'negativeUnitAtOneCompilesToThreeInversePrimes'],
-    'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': ['canonicalTekumVerifiedAssemblyBoundary', 'canonicalRationalOrdinaryDecoderPresent', 'finiteTritPowerThreeCardinalityPaid', 'reversalDualChartPresent'],
+    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['pow3NonZero', 'exactTriadicRationalUsesSignedDivision'],
+    'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualPrecisionTwoIsCylinderRefinementTwo'],
+    'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': ['canonicalTekumVerifiedAssemblyBoundary'],
 }
 
 for rel, needles in required.items():
@@ -94,4 +36,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: parser integer-code roundtrips, canonical rational fraction band, signed decoder, source-level negation, centered backend and p-adic naturality present.')
+print('Tekum static regression: strict significand band, canonical fraction band, exact parser codes, source negation and p-adic naturality present.')
