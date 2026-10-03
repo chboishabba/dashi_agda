@@ -24,8 +24,6 @@ class DiagnosticPolicy:
     description: str = ""
 
 
-# Default policy is intentionally conservative: an unclassified diagnostic may
-# be emitted from the DASHI structural index, but not from raw syntax alone.
 _DEFAULT_POLICY = DiagnosticPolicy(
     EvidenceLevel.DASHI_INDEX,
     True,
@@ -41,99 +39,63 @@ def _policy(
     return DiagnosticPolicy(minimum, hard, description)
 
 
-# Diagnostics that are sound from concrete syntax alone.
 _TREE_ONLY = {
-    "TSAGDA000",  # tree ERROR/missing node
-    "TSAGDA004",  # module/path mismatch
-    "TSAGDA005",  # duplicate declaration
-    "TSAGDA006",  # duplicate field
-    "TSAGDA007",  # duplicate constructor
-    "TSAGDA010",  # duplicate identical clause
-    "TSAGDA011",  # dangling structural block
-    "TSAGDA012",  # interaction hole
-    "TSAGDA013",  # raw underscore in exported signature
-    "TSAGDA061",  # duplicate record assignment
-    "TSAGDA090",  # qualified field in record construction
-    "TSAGDA150",  # fixity references unknown local declaration
-    "TSAGDA151",  # conflicting fixity
-    "TSAGDA152",  # local mixfix hole count
-    "TSAGDA153",  # syntax declaration references unknown local symbol
+    "TSAGDA000", "TSAGDA004", "TSAGDA005", "TSAGDA006", "TSAGDA007",
+    "TSAGDA010", "TSAGDA011", "TSAGDA012", "TSAGDA013", "TSAGDA061",
+    "TSAGDA090", "TSAGDA150", "TSAGDA151", "TSAGDA152", "TSAGDA153",
     "TSAGDA161", "TSAGDA162", "TSAGDA163", "TSAGDA164", "TSAGDA165",
     "TSAGDA170", "TSAGDA172", "TSAGDA173", "TSAGDA174", "TSAGDA175",
     "TSAGDA201", "TSAGDA204",
 }
 
 
-# These rules need DASHI's cross-node/module structural index but do not require
-# Agda elaboration. Their hard-error form is permitted only when the emitting
-# rule has the corresponding rigid evidence.
 _INDEX_SAFE = {
     "TSAGDA001", "TSAGDA002", "TSAGDA003",
     "TSAGDA008", "TSAGDA009",
-    "TSAGDA020", 
-    "TSAGDA028", "TSAGDA029", "TSAGDA030",
-    "TSAGDA042", "TSAGDA043", "TSAGDA044", 
-    "TSAGDA046", "TSAGDA047", "TSAGDA048", "TSAGDA049",
-    "TSAGDA050", "TSAGDA051", "TSAGDA052", "TSAGDA053", "TSAGDA054",
-    "TSAGDA056",
-    "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064", "TSAGDA065",
-    "TSAGDA066", "TSAGDA067", "TSAGDA068",
-    "TSAGDA070", "TSAGDA071", "TSAGDA073", "TSAGDA074",
-    "TSAGDA077", "TSAGDA078", "TSAGDA079",
-    "TSAGDA080", "TSAGDA081", "TSAGDA082", "TSAGDA083", "TSAGDA085",
-    "TSAGDA086", "TSAGDA087", "TSAGDA088", "TSAGDA089",
-    "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103", "TSAGDA104",
-    "TSAGDA105",
-    "TSAGDA111", "TSAGDA112", "TSAGDA115",
+    "TSAGDA020", "TSAGDA028", "TSAGDA029", "TSAGDA030",
+    "TSAGDA042", "TSAGDA043", "TSAGDA044", "TSAGDA046", "TSAGDA047",
+    "TSAGDA048", "TSAGDA050", "TSAGDA051", "TSAGDA053", "TSAGDA054",
+    "TSAGDA056", "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064",
+    "TSAGDA065", "TSAGDA066", "TSAGDA067", "TSAGDA068",
+    "TSAGDA070", "TSAGDA071", "TSAGDA073", "TSAGDA074", "TSAGDA077",
+    "TSAGDA078", "TSAGDA079", "TSAGDA080", "TSAGDA081", "TSAGDA082",
+    "TSAGDA083", "TSAGDA085", "TSAGDA086", "TSAGDA087", "TSAGDA088",
+    "TSAGDA089", "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103",
+    "TSAGDA105", "TSAGDA111", "TSAGDA112", "TSAGDA115",
     "TSAGDA120", "TSAGDA121", "TSAGDA122", "TSAGDA123",
-    "TSAGDA130", "TSAGDA131",
-    "TSAGDA140", "TSAGDA141", "TSAGDA142", "TSAGDA143",
-    "TSAGDA160", "TSAGDA166",
-    "TSAGDA171",
+    "TSAGDA130", "TSAGDA131", "TSAGDA140", "TSAGDA141", "TSAGDA142",
+    "TSAGDA143", "TSAGDA160", "TSAGDA166", "TSAGDA171",
     "TSAGDA180", "TSAGDA181", "TSAGDA182", "TSAGDA183", "TSAGDA184",
-    "TSAGDA185", "TSAGDA186",
-    "TSAGDA200", "TSAGDA202", "TSAGDA203", "TSAGDA205", "TSAGDA206",
-    "TSAGDA207", "TSAGDA208",
+    "TSAGDA185", "TSAGDA186", "TSAGDA200", "TSAGDA202", "TSAGDA203",
+    "TSAGDA205", "TSAGDA206", "TSAGDA207", "TSAGDA208",
+    # Tree/index can predict constructor shadowing from an explicit imported
+    # constructor table. Agda may later emit the same public code with stronger
+    # agda-scope evidence.
+    "TSAGDA300",
 }
 
 
-# These are useful structural suspicions, but a *hard* conclusion depends on
-# Agda-resolved scope/elaboration: opens/renamings, overloading, mixfix, implicit
-# insertion, or local dependent scope can change the interpretation.
 _SCOPE_REQUIRED = {
-    "TSAGDA021",  # qualified export availability is a scope-resolution fact
-    "TSAGDA022",  # unknown/malformed alias use
-    "TSAGDA023",  # using(...) export availability is a scope-resolution fact
-    "TSAGDA025",  # renaming source availability is a scope-resolution fact
-    "TSAGDA024",  # hiding entry validity through re-export chains
-    "TSAGDA026",  # rename/open collision
-    "TSAGDA027",  # ambiguous unqualified name from opens
-    "TSAGDA055",  # ambiguous opened projection
-    "TSAGDA084",  # inaccessible pattern scope
-    "TSAGDA113",  # visibly unbound RHS identifier
-    "TSAGDA154",  # ambiguous opened operator
+    "TSAGDA021", "TSAGDA022", "TSAGDA023", "TSAGDA024", "TSAGDA025",
+    "TSAGDA026", "TSAGDA027", "TSAGDA055", "TSAGDA084", "TSAGDA113",
+    "TSAGDA154",
+    # Whether a qualified projection has a receiver can depend on the precise
+    # application tree produced for qualified/mixfix syntax. Keep structural
+    # sightings useful, but require Agda-resolved scope before making them hard.
+    "TSAGDA049", "TSAGDA052",
 }
 
 
-# Kept for diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
-    "TSAGDA040",  # over-application can depend on result-type unfolding
-    "TSAGDA041",  # under-application / saturation is a typing judgment
-    "TSAGDA045",  # clause/signature arity can depend on pointfree eta/type unfolding
-    "TSAGDA072",  # constructor/result-head comparison can require synonym unfolding
-    "TSAGDA075",  # conservative: shared by rigid and synonym-sensitive ctor checks
-    "TSAGDA076",  # partial application vs type use needs elaborated typing
-    "TSAGDA110",  # compatibility alias of TSAGDA045
-    "TSAGDA114",  # clause constructor/result-head comparison needs unfolding
+    "TSAGDA040", "TSAGDA041", "TSAGDA045", "TSAGDA072", "TSAGDA075",
+    "TSAGDA076", "TSAGDA110", "TSAGDA114",
+    # A proof-shaped RHS can legitimately inhabit a result whose equality
+    # nature is hidden behind an alias/projection. That is a typing judgment.
+    "TSAGDA104",
 }
 
 
-# Diagnostics in the 3xx range below are not structural guesses at all: they
-# are lossless projections of messages emitted by an Agda process/runner.
-# Keep explicit policies so policy_for remains total and accidental new codes
-# still fail closed until classified.
 _AGDA_NATIVE = {
-    "TSAGDA300",  # PatternShadowsConstructor
     "TSAGDA301",  # RewritesNothing
     "TSAGDA302",  # UserWarning/deprecation
     "TSAGDA390",  # ParseError
@@ -155,10 +117,6 @@ _ALIAS_TO_CANONICAL = {
     for canonical, aliases in DIAGNOSTIC_ALIASES.items()
     for alias in aliases
 }
-
-# Some independently emitted diagnostics describe the same root cause but are
-# retained as separate compatibility/reporting codes. Canonicalize them only
-# for triage; do not synthesize extra emitted diagnostics.
 _ALIAS_TO_CANONICAL.update({
     "TSAGDA075": "TSAGDA072",
     "TSAGDA114": "TSAGDA072",
@@ -203,12 +161,7 @@ for code in _AGDA_NATIVE:
 
 
 def policy_for(code: str) -> DiagnosticPolicy:
-    """Return the explicit evidence contract for CODE.
-
-    New diagnostics must be classified deliberately. Falling back silently is
-    exactly how an unsafe structural heuristic can accidentally become a hard
-    error, so an unclassified code is a programming error.
-    """
+    """Return the explicit evidence contract for CODE."""
     try:
         return DIAGNOSTIC_POLICIES[code]
     except KeyError as exc:
