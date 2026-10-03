@@ -19,7 +19,6 @@ _REWRITE_CALL = re.compile(r"\brewrite\b[^\n]*\(\s*([A-Za-z_][A-Za-z0-9_']*)\b([
 _NAMED_IMPLICIT = re.compile(r"^\{\s*([A-Za-z_][A-Za-z0-9_']*)\s*=")
 _KNOWN_TERM_IN_TYPE = re.compile(r"known term\s+([^\s]+)\s+in type")
 _WORD = r"[A-Za-z_][A-Za-z0-9_']*"
-_SET_TOKEN = re.compile(r"(?<![A-Za-z0-9_'₀-₉])Set(?![A-Za-z0-9_'₀-₉])")
 
 
 def _line_text(source: str, line: int) -> str:
@@ -105,7 +104,7 @@ def _term_is_equality_operand(summary, diagnostic) -> bool:
 
 
 def _lean_reverse_rewrite_diagnostics(summary) -> list[Diagnostic]:
-    """Catch Lean-style `rewrite <-` before Agda's parser does."""
+    """Catch Lean-style `rewrite <-` as a concrete syntax failure."""
 
     out = []
     for line, text in enumerate(summary.source.splitlines(), 1):
@@ -114,7 +113,7 @@ def _lean_reverse_rewrite_diagnostics(summary) -> list[Diagnostic]:
             continue
         out.append(
             Diagnostic(
-                "TSAGDA091",
+                "TSAGDA000",
                 "Lean-style reverse rewrite `<-` is not Agda rewrite syntax",
                 summary.path,
                 line,
@@ -132,7 +131,7 @@ def _lean_reverse_rewrite_diagnostics(summary) -> list[Diagnostic]:
 
 
 def _fragile_rewrite_diagnostics(summary) -> list[Diagnostic]:
-    """Warn when rewrite matching is driven by a known non-constructor call."""
+    """Predict RewritesNothing risk when matching a known non-constructor call."""
 
     local_terms = set(summary.ast.signatures) | set(summary.ast.clauses)
     constructors = {
@@ -160,8 +159,8 @@ def _fragile_rewrite_diagnostics(summary) -> list[Diagnostic]:
             expression = f"{head}{match.group(2)}".strip()
             out.append(
                 Diagnostic(
-                    "TSAGDA303",
-                    f"rewrite matcher depends on non-constructor term `{expression}`",
+                    "TSAGDA301",
+                    f"rewrite matcher may not fire on non-constructor term `{expression}`",
                     summary.path,
                     line,
                     match.start(1) + 1,
@@ -177,55 +176,8 @@ def _fragile_rewrite_diagnostics(summary) -> list[Diagnostic]:
     return out
 
 
-def _record_header_text(summary, record) -> str:
-    lines = summary.source.splitlines()
-    start = max(0, record.line - 1)
-    chunk = []
-    for text in lines[start : min(len(lines), start + 8)]:
-        chunk.append(text)
-        if "where" in text:
-            break
-    return "\n".join(chunk)
-
-
-def _record_universe_diagnostics(summary) -> list[Diagnostic]:
-    """Catch the rigid lower bound `field : Set` => record cannot live in Set."""
-
-    out = []
-    for record in summary.ast.records.values():
-        header = _record_header_text(summary, record)
-        if not re.search(r":\s*Set\s+where\b", header):
-            continue
-        field = next(
-            (field for field in record.field_occurrences if _SET_TOKEN.search(field.type_text)),
-            None,
-        )
-        if field is None:
-            continue
-        out.append(
-            Diagnostic(
-                "TSAGDA304",
-                (
-                    f"record {record.name} is declared in Set but field {field.name} "
-                    "has a Set-valued type, requiring at least Set₁"
-                ),
-                summary.path,
-                record.line,
-                1,
-                f"Declare `{record.name}` in `Set₁` (or a higher universe if other fields require it).",
-                severity="error",
-                confidence="high",
-                evidence="dashi-index",
-                minimum_evidence="dashi-index",
-                evidence_sufficient=True,
-                root_cause=f"record universe lower bound for {record.name}",
-            )
-        )
-    return out
-
-
 def _wrong_hiding_diagnostics(summary) -> list[Diagnostic]:
-    """Warn when a named implicit appears before required explicit LHS binders."""
+    """Catch named implicits placed before required explicit LHS binders."""
 
     out = []
     for name, clauses in summary.ast.clauses.items():
@@ -258,7 +210,7 @@ def _wrong_hiding_diagnostics(summary) -> list[Diagnostic]:
                     continue
                 out.append(
                     Diagnostic(
-                        "TSAGDA305",
+                        "TSAGDA043",
                         (
                             f"named implicit {{{binder_name} = …}} appears before "
                             f"{required_explicit} preceding explicit binder(s) are matched"
@@ -269,6 +221,10 @@ def _wrong_hiding_diagnostics(summary) -> list[Diagnostic]:
                         "Move the named implicit to the LHS position dictated by the signature telescope.",
                         severity="warning",
                         confidence="high",
+                        evidence="dashi-index",
+                        minimum_evidence="dashi-index",
+                        evidence_sufficient=True,
+                        root_cause=f"wrong hiding position for {binder_name}",
                     )
                 )
     return out
@@ -363,7 +319,7 @@ def install_checker_boundary_rules(Checker) -> None:
 
     def syntax_with_known_gaps(self, summary):
         diagnostics = original_syntax(self, summary)
-        diagnostics = [
+        return [
             diagnostic
             for diagnostic in diagnostics
             if not (
@@ -371,8 +327,6 @@ def install_checker_boundary_rules(Checker) -> None:
                 and _is_constructor_field_transition_gap(summary.source, diagnostic.line)
             )
         ]
-        diagnostics.extend(_lean_reverse_rewrite_diagnostics(summary))
-        return diagnostics
 
     def structural_with_boundary_rules(self, path: Path):
         diagnostics = list(original_structural(self, path))
@@ -386,8 +340,8 @@ def install_checker_boundary_rules(Checker) -> None:
         ]
 
         additions = []
+        additions.extend(_lean_reverse_rewrite_diagnostics(summary))
         additions.extend(_fragile_rewrite_diagnostics(summary))
-        additions.extend(_record_universe_diagnostics(summary))
         additions.extend(_wrong_hiding_diagnostics(summary))
         additions.extend(_shadow_diagnostics(self, summary))
 
