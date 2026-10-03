@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119CosmologyE1SignedReadoutCovarianceExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; -ℝ_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
@@ -44,7 +44,7 @@ reflection01CovarianceHasRequiredMinusSign :
   ∀ (readout : K.SymmetricTensorComponent4 → ℝ) →
   transformedComponentReadout Signed.timeReflection readout K.component01
   ≡ -ℝ (readout K.component01)
-reflection01CovarianceHasRequiredMinusSign readout = Agda.Builtin.Equality.refl
+reflection01CovarianceHasRequiredMinusSign readout = refl
 
 signedReadoutAvoidsFakeNegativeTangentLabel : Bool
 signedReadoutAvoidsFakeNegativeTangentLabel = true
