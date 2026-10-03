@@ -9,6 +9,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
       - '.github/workflows/cmp119-cosmology-math-maxcut-20261003.yml'
   workflow_dispatch:
@@ -48,6 +50,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
