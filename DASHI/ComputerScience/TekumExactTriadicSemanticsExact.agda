@@ -3,10 +3,12 @@ module DASHI.ComputerScience.TekumExactTriadicSemanticsExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Nat.Base using (NonZero; _^_)
+import Data.Nat.Properties as NatP
 open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_; -_)
 import Data.Integer.Properties as ℤP
-open import Data.Rational.Base using (ℚ; normalize)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Data.Rational.Base using (ℚ; _/_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Foundations.BinaryFloatingPoint as Binary
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
@@ -29,6 +31,15 @@ import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
 pow3 : Nat → Nat
 pow3 zero = 1
 pow3 (suc n) = 3 * pow3 n
+
+pow3IsNatPower : (n : Nat) → pow3 n ≡ 3 ^ n
+pow3IsNatPower zero = refl
+pow3IsNatPower (suc n)
+  rewrite pow3IsNatPower n = refl
+
+pow3NonZero : (n : Nat) → NonZero (pow3 n)
+pow3NonZero n =
+  subst NonZero (sym (pow3IsNatPower n)) (NatP.m^n≢0 3 n)
 
 record ExactSignedNumerator : Set where
   constructor exactSignedNumerator
@@ -109,9 +120,22 @@ flipExactTriadicDenominatorInvariant x = refl
 
 exactTriadicRational : ExactTriadic → ℚ
 exactTriadicRational x =
-  normalize
-    (exactTriadicNumerator x)
-    (exactTriadicDenominator x)
+  let
+    instance
+      denominatorNonZero : NonZero (exactTriadicDenominator x)
+      denominatorNonZero = pow3NonZero (Binary.negativePart (scale x))
+  in
+  exactTriadicNumerator x / exactTriadicDenominator x
+
+exactTriadicRationalUsesSignedDivision :
+  (x : ExactTriadic) →
+  exactTriadicRational x
+  ≡ let
+      instance
+        denominatorNonZero : NonZero (exactTriadicDenominator x)
+        denominatorNonZero = pow3NonZero (Binary.negativePart (scale x))
+    in exactTriadicNumerator x / exactTriadicDenominator x
+exactTriadicRationalUsesSignedDivision x = refl
 
 ordinaryRational : Sem.OrdinaryTekum → ℚ
 ordinaryRational x = exactTriadicRational (ordinaryExactTriadic x)
