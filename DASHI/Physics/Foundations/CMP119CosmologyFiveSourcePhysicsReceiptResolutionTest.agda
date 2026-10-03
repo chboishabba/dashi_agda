@@ -5,7 +5,6 @@ import DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsReceiptResoluti
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 fiveTerminalReceiptsRemain :
   Subject.terminalSourcePhysicsReceiptCount ≡ 5
@@ -31,9 +30,13 @@ b2NeedsMetricFamilyCalibration :
   Subject.b2RequiresSourceMetricFamilyCalibration ≡ true
 b2NeedsMetricFamilyCalibration = refl
 
-cNeedsR136RenormalizedTraceIdentity :
-  Subject.cRequiresR136RenormalizedTraceReadoutIdentity ≡ true
-cNeedsR136RenormalizedTraceIdentity = refl
+cNeedsParetoMinimalUpperComparison :
+  Subject.cRequiresR136BelowSelectedAnomalyTrace ≡ true
+cNeedsParetoMinimalUpperComparison = refl
+
+cExactEqualityIsNotTerminalRequirement :
+  Subject.cExactReadoutEqualityIsParetoOverstrong ≡ true
+cExactEqualityIsNotTerminalRequirement = refl
 
 currentTheoryCannotDeriveA2FromBarePair :
   Subject.a2BarePairUnderdetermined ≡ true
