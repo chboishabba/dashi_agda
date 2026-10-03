@@ -38,6 +38,21 @@ rejoinPayloadCorrect :
   rejoinPayload parsed ≡ payload
 rejoinPayloadCorrect parsed = sym (Source.payloadJoin parsed)
 
+-- Rejoin is not merely a convenient reconstruction expression: equality of
+-- two rejoined parser images determines equality of their original source
+-- payloads.  Prop. 2 can therefore finish with a payload equality rather than
+-- appealing to cardinality or to an unchecked parser metadata record.
+rejoinPayloadDeterminesSourcePayload :
+  ∀ {extra r leftPayload rightPayload}
+  (left : Source.ParsedPayload extra r leftPayload)
+  (right : Source.ParsedPayload extra r rightPayload) →
+  rejoinPayload left ≡ rejoinPayload right →
+  leftPayload ≡ rightPayload
+rejoinPayloadDeterminesSourcePayload left right sameRejoin =
+  trans
+    (sym (rejoinPayloadCorrect left))
+    (trans sameRejoin (rejoinPayloadCorrect right))
+
 ------------------------------------------------------------------------
 -- Exact three-trit source regime prefix, in most-significant-first order.
 ------------------------------------------------------------------------
@@ -106,10 +121,11 @@ record SourceParserRoundTripBoundary : Set where
   constructor sourceParserRoundTripBoundary
   field
     dependentPayloadRejoinPaid : Bool
+    rejoinImageDeterminesOriginalPayload : Bool
     sourceRegimePrefixRejoinPaid : Bool
     ordinaryAnchorImageCarriesNoHiddenPayload : Bool
     inverseConcreteAnchorToSourceWordPaidHere : Bool
 
 sourceParserImageIsLossless : SourceParserRoundTripBoundary
 sourceParserImageIsLossless =
-  sourceParserRoundTripBoundary true true true false
+  sourceParserRoundTripBoundary true true true true false
