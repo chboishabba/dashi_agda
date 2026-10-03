@@ -22,7 +22,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR136TraceAnomalyOrderDominanceEx
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_; _<ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.Foundations.CMP119AntigravityRealPhysicalTraceAnomalyCapstoneExact as Capstone
@@ -97,8 +97,7 @@ embeddedR136ResponseNegativeFromUpperWeld :
       R136ToRealTraceAnomalyUpperWeld
         division laws strict embedding convention gibbs exponential fullSupport
         input r136Response) →
-  Embed.embed embedding r136Response <ℝ
-    DASHI.Foundations.RealAnalysisAxioms.0ℝ
+  Embed.embed embedding r136Response <ℝ 0ℝ
 embeddedR136ResponseNegativeFromUpperWeld
     division laws strict embedding realOrder convention gibbs exponential
     fullSupport input r136Response weld =
