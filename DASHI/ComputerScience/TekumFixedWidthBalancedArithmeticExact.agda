@@ -1,5 +1,6 @@
 module DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Data.Nat.Base using (_<_; _⊔_)
@@ -19,14 +20,17 @@ import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact as Centered
 import DASHI.ComputerScience.TekumAnchorArithmeticExact as Anchor
 
 ------------------------------------------------------------------------
--- Cyclic rank arithmetic for Hunhold's fixed-width int_n.
+-- CYCLIC CARRY-DISCARD FIXED-WIDTH BACKEND
 --
--- The centered rank r encodes value r-A_n in Z/(3^n).  Therefore adding two
--- centered values corresponds to the rank formula
+-- The centered rank r encodes value r-A_n in Z/(3^n).  This owner implements
+-- the carry-discard interpretation described in the prose below Hunhold
+-- Definition 5.  The printed Equation (1) uses a different overflow adjustment;
+-- that discrepancy is isolated in TekumDefinition5ConsistencyExact and is NOT
+-- silently identified with this backend.
 --
---   r ⊞ s = r + s + (A_n + 1)  (mod 3^n),
---
--- since -(A_n) ≡ A_n+1 modulo 2*A_n+1.
+-- The anchor only subtracts A_n from a modulus in [0,A_n], so it never enters
+-- an overflow branch.  Hence this cyclic backend can instantiate the abstract
+-- anchor arithmetic without resolving the Equation (1) / prose discrepancy.
 ------------------------------------------------------------------------
 
 modulusSize : Nat → Nat
@@ -65,9 +69,6 @@ subtractCentered x y = addCentered x (negateCentered y)
 
 ------------------------------------------------------------------------
 -- Symmetric absolute-value rank.
---
--- rank r and opposite r represent v and -v.  Their larger centered rank is
--- precisely the nonnegative magnitude representative.
 ------------------------------------------------------------------------
 
 maxRank : ∀ {n} → Fin n → Fin n → Fin n
@@ -155,13 +156,21 @@ concreteAnchorNegationInvariant :
 concreteAnchorNegationInvariant {n} x =
   Anchor.anchorNegationInvariant (tekumBalancedArithmetic n) x
 
-------------------------------------------------------------------------
--- Small fixed-width regressions.
-------------------------------------------------------------------------
-
 oneTritPositivePlusPositiveWrapsNegative :
   addWord
     (Trit.pos Data.Vec.∷ Data.Vec.[])
     (Trit.pos Data.Vec.∷ Data.Vec.[])
   ≡ (Trit.neg Data.Vec.∷ Data.Vec.[])
 oneTritPositivePlusPositiveWrapsNegative = refl
+
+record FixedWidthBackendBoundary : Set where
+  constructor fixedWidthBackendBoundary
+  field
+    centeredBijectionReused : Bool
+    carryDiscardCyclicArithmeticImplemented : Bool
+    printedDefinition5EquationIdentifiedWithCarryDiscard : Bool
+    hostOverflowUsed : Bool
+
+canonicalFixedWidthBackendBoundary : FixedWidthBackendBoundary
+canonicalFixedWidthBackendBoundary =
+  fixedWidthBackendBoundary true true false false
