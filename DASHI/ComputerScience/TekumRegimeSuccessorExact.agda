@@ -1,6 +1,7 @@
 module DASHI.ComputerScience.TekumRegimeSuccessorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer.Base as ℤ using (_<_)
 open import Data.Vec using (Vec)
 open import Data.Vec.Base using (reverse)
 
@@ -73,16 +74,18 @@ regimeHasBalancedSuccessor :
   ∀ {r} (w : RegimeSuccessor r) → Succ.HasSuccessor (regimeLST r)
 regimeHasBalancedSuccessor next-rm7 = Succ.negativeHead
 regimeHasBalancedSuccessor next-rm6 = Succ.zeroHead
-regimeHasBalancedSuccessor next-rm5 = Succ.positiveCarry Succ.negativeHead
+regimeHasBalancedSuccessor next-rm5 =
+  Succ.positiveCarry (Succ.positiveCarry Succ.negativeHead)
 regimeHasBalancedSuccessor next-rm4 = Succ.negativeHead
 regimeHasBalancedSuccessor next-rm3 = Succ.zeroHead
 regimeHasBalancedSuccessor next-rm2 = Succ.positiveCarry Succ.negativeHead
 regimeHasBalancedSuccessor next-rm1 = Succ.negativeHead
 regimeHasBalancedSuccessor next-r0  = Succ.zeroHead
-regimeHasBalancedSuccessor next-rp1 = Succ.positiveCarry Succ.negativeHead
+regimeHasBalancedSuccessor next-rp1 = Succ.positiveCarry Succ.zeroHead
 regimeHasBalancedSuccessor next-rp2 = Succ.negativeHead
 regimeHasBalancedSuccessor next-rp3 = Succ.zeroHead
-regimeHasBalancedSuccessor next-rp4 = Succ.positiveCarry Succ.negativeHead
+regimeHasBalancedSuccessor next-rp4 =
+  Succ.positiveCarry (Succ.positiveCarry Succ.zeroHead)
 regimeHasBalancedSuccessor next-rp5 = Succ.negativeHead
 regimeHasBalancedSuccessor next-rp6 = Succ.zeroHead
 
@@ -106,6 +109,6 @@ regimeWordSuccessor next-rp6 = refl
 
 regimeExponentBlocksStrictlyIncrease :
   ∀ {r} (w : RegimeSuccessor r) →
-  Interval.regimeUpper r Interval.< Interval.regimeLower (nextRegime r w)
+  Interval.regimeUpper r ℤ.< Interval.regimeLower (nextRegime r w)
 regimeExponentBlocksStrictlyIncrease w =
   Interval.stepRegimeIntervalsOrdered (regimeStep w)
