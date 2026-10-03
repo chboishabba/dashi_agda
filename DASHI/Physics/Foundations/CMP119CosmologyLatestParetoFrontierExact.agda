@@ -10,15 +10,18 @@ open import Agda.Builtin.Nat using (Nat)
 -- The one-point gravitational stress owner is R144's effective-action response
 -- D_Gamma = - D Z / Z, not +D log Z.  Balaban's blocked log-weight convention
 -- remains source-relevant, but is not the gravitational one-point orientation.
+--
+-- The E1 signed-axis action is no longer a physical residual.  The repository's
+-- actual seven B_4 hypercubic generators now compile definitionally to the
+-- signed rank-two action on the ten symmetric tensor slots.
 ------------------------------------------------------------------------
 
 -- Novel/source-facing DASHI reconstruction work.
 data NovelReconstructionResidual : Set where
-  e1-signed-axis-action : NovelReconstructionResidual
   e1-component-permutation-and-local-activity-covariance : NovelReconstructionResidual
   e1-first-variation-naturality : NovelReconstructionResidual
   e1-r133-transport-equivariance : NovelReconstructionResidual
-  e2-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
+  e2e4-shared-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
 
 -- Imported marked-OS interpretation/authority boundaries.
 data StandardOSBoundary : Set where
@@ -46,7 +49,7 @@ data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
 
 novelReconstructionResidualCount : Nat
-novelReconstructionResidualCount = 5
+novelReconstructionResidualCount = 4
 
 standardOSBoundaryCount : Nat
 standardOSBoundaryCount = 2
@@ -55,7 +58,7 @@ standardAnalysisBoundaryCount : Nat
 standardAnalysisBoundaryCount = 1
 
 reconstructionInterfaceCount : Nat
-reconstructionInterfaceCount = 7
+reconstructionInterfaceCount = 6
 
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
@@ -80,8 +83,7 @@ e4IndependentStressObservableSelectionStillExists = false
 round281E4DecayWitnessCompilerOwnedFromSharedE2Observable : Bool
 round281E4DecayWitnessCompilerOwnedFromSharedE2Observable = true
 
--- E1 reductions and firewall: Round103 leaves Tangent/Component opaque, so no
--- canonical local Euclidean action is manufactured from carrier structure.
+-- E1 reductions.
 e1GlobalPotentialCovarianceStillPrimitive : Bool
 e1GlobalPotentialCovarianceStillPrimitive = false
 
@@ -94,6 +96,12 @@ e1FiniteReindexingStillIndependent = false
 e1PerComponentD1CovarianceStillIndependent : Bool
 e1PerComponentD1CovarianceStillIndependent = false
 
+e1SignedAxisActionStillPhysical : Bool
+e1SignedAxisActionStillPhysical = false
+
+e1ActualB4GeneratorSignedActionConstructed : Bool
+e1ActualB4GeneratorSignedActionConstructed = true
+
 e1OneDerivativeNaturalityLawStillPhysical : Bool
 e1OneDerivativeNaturalityLawStillPhysical = true
 
@@ -103,8 +111,13 @@ e1PlainTenSlotPermutationHandlesReflections = false
 e1SignedReflectionReadoutRequired : Bool
 e1SignedReflectionReadoutRequired = true
 
-e1Round103TangentAndComponentCarriersAreOpaque : Bool
-e1Round103TangentAndComponentCarriersAreOpaque = true
+e1RemainingTensorSymmetryLeafIsReadoutCovarianceOnActualB4Generators : Bool
+e1RemainingTensorSymmetryLeafIsReadoutCovarianceOnActualB4Generators = true
+
+-- Round103's generic Tangent/Component remain opaque in the generic route;
+-- the preferred ten-slot tangent path now has a concrete signed B_4 action.
+e1GenericRound103TangentAndComponentCarriersAreOpaque : Bool
+e1GenericRound103TangentAndComponentCarriersAreOpaque = true
 
 -- E2/E4 reductions.
 e2NeedsNewGramPositivityEstimate : Bool
@@ -115,6 +128,9 @@ e4NeedsNewClusteringEstimate = false
 
 e2AndE4UseSamePinnedStressObservable : Bool
 e2AndE4UseSamePinnedStressObservable = true
+
+e2AndE4StillNeedTwoIndependentStressEncodingMaps : Bool
+e2AndE4StillNeedTwoIndependentStressEncodingMaps = false
 
 -- Wightman/terminal reconstruction has one stress object.
 independentTerminalWightmanHingeChoiceStillExists : Bool
