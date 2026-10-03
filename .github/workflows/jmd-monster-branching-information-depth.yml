@@ -9,6 +9,7 @@ on:
       - 'DASHI/Moonshine/Monster196883BabyBranchPrimeSupportExact.agda'
       - 'DASHI/Moonshine/MonsterBinaryTernaryInformationDepthExact.agda'
       - 'DASHI/Moonshine/JMDGF4096MonsterTwoLocalProvenanceExact.agda'
+      - 'DASHI/Moonshine/JMDMonsterRepresentationCrossPollinationMaxCutExact.agda'
       - 'scripts/check_jmd_monster_branching_information_depth.sh'
       - '.github/workflows/jmd-monster-branching-information-depth.yml'
   pull_request:
@@ -16,6 +17,7 @@ on:
       - 'DASHI/Moonshine/Monster196883BabyBranchPrimeSupportExact.agda'
       - 'DASHI/Moonshine/MonsterBinaryTernaryInformationDepthExact.agda'
       - 'DASHI/Moonshine/JMDGF4096MonsterTwoLocalProvenanceExact.agda'
+      - 'DASHI/Moonshine/JMDMonsterRepresentationCrossPollinationMaxCutExact.agda'
       - 'scripts/check_jmd_monster_branching_information_depth.sh'
       - '.github/workflows/jmd-monster-branching-information-depth.yml'
 
