@@ -13,12 +13,11 @@ module DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsTypedReceiptsEx
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _<_; -_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as Signed
-import DASHI.Physics.Foundations.CMP119CosmologyE1SignedReadoutCovarianceExact as Readout
 import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumTailThresholdExact as Threshold
 import DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorExact as Direct
@@ -31,17 +30,31 @@ import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102
 
 ------------------------------------------------------------------------
 -- A1: differentiated change-of-variables / signed B4 readout covariance.
+--
+-- IMPORTANT: the literal R144 finite-D1 component readout is rational.  Do not
+-- silently promote it to a real-valued surrogate at the source-receipt layer.
 ------------------------------------------------------------------------
+
+applyRationalBasisSign : Signed.BasisSign → ℚ → ℚ
+applyRationalBasisSign Signed.plus value = value
+applyRationalBasisSign Signed.minus value = - value
+
+signedRationalComponentReadout :
+  (K.SymmetricTensorComponent4 → ℚ) →
+  Signed.SignedSymmetricComponent → ℚ
+signedRationalComponentReadout readout signed =
+  applyRationalBasisSign (Signed.sign signed)
+    (readout (Signed.component signed))
 
 record A1R144SignedB4SourceReceipt
     (Background : Set)
     (actBackground : Hyper.HypercubicGenerator → Background → Background)
-    (readout : Background → K.SymmetricTensorComponent4 → ℝ)
+    (readout : Background → K.SymmetricTensorComponent4 → ℚ)
     : Set₁ where
   field
     signedReadoutCovariant :
       ∀ generator background component →
-      Readout.signedComponentReadout
+      signedRationalComponentReadout
         (readout (actBackground generator background))
         (Signed.actSignedComponent
           (Axis.hypercubicSignedAxisAction generator) component)
@@ -194,6 +207,9 @@ genericSetValuedReceiptSocketsRemain = false
 
 a1ReceiptIsExactSignedB4Covariance : Bool
 a1ReceiptIsExactSignedB4Covariance = true
+
+a1ExactReceiptUsesRationalR144Readout : Bool
+a1ExactReceiptUsesRationalR144Readout = true
 
 a2MeaningRelationIsExternalParameter : Bool
 a2MeaningRelationIsExternalParameter = true
