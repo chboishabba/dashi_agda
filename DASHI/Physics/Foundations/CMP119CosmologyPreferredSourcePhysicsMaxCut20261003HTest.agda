@@ -21,11 +21,17 @@ b1IsOneDirectTailInequality = refl
 b1CannotComeFromDifferenceDataAlone : Subject.b1CannotBeRecoveredFromR109DifferenceDataAlone ≡ true
 b1CannotComeFromDifferenceDataAlone = refl
 
+b1TerminalConsumerNeedsNoFamilyOrObservable : Subject.b1ConsumerNeedsFiniteFamilyOrObservable ≡ false
+b1TerminalConsumerNeedsNoFamilyOrObservable = refl
+
 b2IsOneLiteralSourceNumeratorMargin : Subject.b2IsOneUnnormalizedSourceNumeratorTailMargin ≡ true
 b2IsOneLiteralSourceNumeratorMargin = refl
 
 b2DoesNotRequireERBVacuumDecomposition : Subject.b2RequiresERBVacuumDecomposition ≡ false
 b2DoesNotRequireERBVacuumDecomposition = refl
+
+b1b2CloseTerminalSignRoute : Subject.b1b2DirectSourceMarginCompilesToMatterAcceleration ≡ true
+b1b2CloseTerminalSignRoute = refl
 
 rawEq223DoesNotFixMetricSign : Subject.rawEq223ObjectsAloneDoNotFixRequiredMetricSign ≡ true
 rawEq223DoesNotFixMetricSign = refl
