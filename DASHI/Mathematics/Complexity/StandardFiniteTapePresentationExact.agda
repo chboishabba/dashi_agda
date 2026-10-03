@@ -4,29 +4,25 @@ module DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact where
 -- FINITE PRESENTATION OF THE CONVENTIONAL SINGLE-TAPE TM
 --
 -- A complexity model needs finite syntax, not merely an extensional
--- transition function.  This owner equips the conventional split-tape machine
--- with the exact finite data already used by ConcreteTapeMachine:
--- finite state/symbol enumerations and a literal rule list.  The standard
--- transition function is required to be exactly the sequential first-match
--- interpretation of that list.
+-- transition function.  This owner records exactly the finite control data:
+-- finite state/symbol enumerations, blank/initial/accepting symbols/states,
+-- and a literal deterministic rule list.
 --
--- Consequently conversion to ConcreteTapeMachine is data-preserving, and the
--- Concrete -> standard control adapter recovers the original transition
--- function extensionally.  No hidden oracle transition survives the bridge.
+-- The conventional split-tape transition function is DERIVED from this finite
+-- program text by the existing sequential first-match interpreter.  Thus no
+-- separate extensional transition oracle is stored, and conversion to the
+-- existing ConcreteTapeMachine carrier is data-preserving by construction.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Maybe using (Maybe)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
-import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact as Interpreter
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleKeyDeterminismExact as Determinism
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 
 ------------------------------------------------------------------------
--- Finite, rule-table presented conventional TM.
+-- Finite, rule-table presented conventional TM syntax.
 ------------------------------------------------------------------------
 
 record FinitePresentedStandardTM : Set₁ where
@@ -35,11 +31,13 @@ record FinitePresentedStandardTM : Set₁ where
     Symbol : Set
     finiteState : Local.FiniteEnumeration State
     finiteSymbol : Local.FiniteEnumeration Symbol
-    machine : Standard.StandardSingleTapeMachine State Symbol
+    blank : Symbol
+    initialState : State
+    acceptingState : State
     rules : List (Local.TapeRule State Symbol)
 
-    -- Bare rule lists are not deterministic in the existing carrier; the
-    -- standard presentation explicitly records the required uniqueness law.
+    -- Bare rule lists are not deterministic in the repository carrier; the
+    -- standard finite presentation records the actual dispatch uniqueness law.
     dispatchUnique :
       ∀ {left right : Local.TapeRule State Symbol} →
       Local.RuleOccurs left rules →
@@ -48,42 +46,33 @@ record FinitePresentedStandardTM : Set₁ where
       Local.readSymbol left ≡ Local.readSymbol right →
       left ≡ right
 
-    -- The extensional transition function contains no more information than
-    -- the literal finite program text: it is exactly first-match execution of
-    -- this rule list with the supplied equality deciders.
-    transitionIsFirstMatch :
-      (q : State) →
-      (a : Symbol) →
-      Standard.transition machine q a
-      ≡ presentedTransition q a
-
-  presentedConcreteView : Local.ConcreteTapeMachine
-  presentedConcreteView = record
-    { Local.State = State
-    ; Local.Symbol = Symbol
-    ; Local.finiteState = finiteState
-    ; Local.finiteSymbol = finiteSymbol
-    ; Local.blank = Standard.blank machine
-    ; Local.initialState = Standard.initialState machine
-    ; Local.acceptingState = Standard.acceptingState machine
-    ; Local.rules = rules
-    }
-
-  presentedTransition :
-    State → Symbol → Maybe (Standard.StandardTransition State Symbol)
-  presentedTransition q a =
-    Standard.concreteControlTransition presentedConcreteView q a
-
 open FinitePresentedStandardTM public
 
 ------------------------------------------------------------------------
--- Literal conversion to the existing ConcreteTapeMachine carrier.
+-- Exact concrete view and derived conventional machine.
 ------------------------------------------------------------------------
 
 finitePresentedStandardToConcrete :
   FinitePresentedStandardTM → Local.ConcreteTapeMachine
-finitePresentedStandardToConcrete presentation =
-  presentedConcreteView presentation
+finitePresentedStandardToConcrete presentation = record
+  { Local.State = State presentation
+  ; Local.Symbol = Symbol presentation
+  ; Local.finiteState = finiteState presentation
+  ; Local.finiteSymbol = finiteSymbol presentation
+  ; Local.blank = blank presentation
+  ; Local.initialState = initialState presentation
+  ; Local.acceptingState = acceptingState presentation
+  ; Local.rules = rules presentation
+  }
+
+finitePresentedStandardMachine :
+  (presentation : FinitePresentedStandardTM) →
+  Standard.StandardSingleTapeMachine
+    (State presentation)
+    (Symbol presentation)
+finitePresentedStandardMachine presentation =
+  Standard.standardControlOfConcrete
+    (finitePresentedStandardToConcrete presentation)
 
 finitePresentedStandardToConcrete_dispatchUnique :
   (presentation : FinitePresentedStandardTM) →
@@ -92,8 +81,26 @@ finitePresentedStandardToConcrete_dispatchUnique :
 finitePresentedStandardToConcrete_dispatchUnique presentation =
   dispatchUnique presentation
 
+@[simp] finitePresentedStandard_blank :
+  (presentation : FinitePresentedStandardTM) →
+  Standard.blank (finitePresentedStandardMachine presentation)
+    ≡ blank presentation
+finitePresentedStandard_blank presentation = refl
+
+@[simp] finitePresentedStandard_initialState :
+  (presentation : FinitePresentedStandardTM) →
+  Standard.initialState (finitePresentedStandardMachine presentation)
+    ≡ initialState presentation
+finitePresentedStandard_initialState presentation = refl
+
+@[simp] finitePresentedStandard_acceptingState :
+  (presentation : FinitePresentedStandardTM) →
+  Standard.acceptingState (finitePresentedStandardMachine presentation)
+    ≡ acceptingState presentation
+finitePresentedStandard_acceptingState presentation = refl
+
 ------------------------------------------------------------------------
--- Concrete -> finite-presented-standard is canonical.
+-- Deterministic ConcreteTapeMachine -> finite standard syntax is canonical.
 ------------------------------------------------------------------------
 
 concreteToFinitePresentedStandard :
@@ -105,14 +112,15 @@ concreteToFinitePresentedStandard concrete deterministic = record
   ; Symbol = Local.Symbol concrete
   ; finiteState = Local.finiteState concrete
   ; finiteSymbol = Local.finiteSymbol concrete
-  ; machine = Standard.standardControlOfConcrete concrete
+  ; blank = Local.blank concrete
+  ; initialState = Local.initialState concrete
+  ; acceptingState = Local.acceptingState concrete
   ; rules = Local.rules concrete
   ; dispatchUnique = deterministic
-  ; transitionIsFirstMatch = λ q a → refl
   }
 
 ------------------------------------------------------------------------
--- Round-trip data are literally the same concrete program.
+-- Round-trip data are literally the same concrete finite program.
 ------------------------------------------------------------------------
 
 concreteRoundTrip :
@@ -123,38 +131,34 @@ concreteRoundTrip :
   ≡ concrete
 concreteRoundTrip concrete deterministic = refl
 
-/-- Going standard presentation -> concrete -> standard recovers the original
-transition function pointwise. -/
-finitePresentedStandardTransition_roundTrip :
-  (presentation : FinitePresentedStandardTM) →
-  (q : State presentation) →
-  (a : Symbol presentation) →
-  Standard.transition
-      (Standard.standardControlOfConcrete
-        (finitePresentedStandardToConcrete presentation)) q a
-    ≡ Standard.transition (machine presentation) q a
-finitePresentedStandardTransition_roundTrip presentation q a =
-  (transitionIsFirstMatch presentation q a)⁻¹
-  where
-    _⁻¹ : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-    refl ⁻¹ = refl
+/-- The conventional machine obtained after the round trip is therefore
+exactly the repository's canonical standard control adapter for the original
+concrete machine. -/
+concreteStandardMachineRoundTrip :
+  (concrete : Local.ConcreteTapeMachine) →
+  (deterministic : Determinism.RuleKeyDeterministic concrete) →
+  finitePresentedStandardMachine
+      (concreteToFinitePresentedStandard concrete deterministic)
+    ≡ Standard.standardControlOfConcrete concrete
+concreteStandardMachineRoundTrip concrete deterministic = refl
 
 ------------------------------------------------------------------------
 -- MAX-CUT STATUS
 --
 -- PAID (subject to exact-head Agda certification):
--- * a conventional standard single-tape machine now has a finite program
---   presentation suitable for complexity theory;
--- * no transition oracle is hidden: transition = sequential rule-table scan;
--- * standard presentation -> ConcreteTapeMachine preserves all program data;
--- * deterministic ConcreteTapeMachine -> finite standard presentation is
---   canonical and round-trips definitionally;
--- * standard transition is recovered pointwise after the round trip.
+-- * conventional deterministic single-tape machines now have finite program
+--   syntax suitable for a complexity-model equivalence theorem;
+-- * no transition oracle is hidden: the transition is derived by the existing
+--   literal first-match rule-table interpreter;
+-- * finite standard syntax -> ConcreteTapeMachine preserves all finite data;
+-- * deterministic ConcreteTapeMachine -> finite standard syntax is canonical
+--   and round-trips definitionally;
+-- * the derived conventional machine also round-trips definitionally.
 --
 -- REMAINING MODEL-INVARIANCE WORK:
--- * tape/configuration encoding and chained run transport (one-step local
---   correspondence already exists in ConcreteTapeStandardOneStepExact);
--- * polynomial clock accounting, using static |rules| control overhead and
+-- * chained tape/configuration run transport (the one-step local weld is
+--   already in ConcreteTapeStandardOneStepExact);
+-- * polynomial clock accounting using fixed |rules| control overhead and the
 --   existing linear T-step blank padding;
 -- * language/acceptance preservation.
 --
