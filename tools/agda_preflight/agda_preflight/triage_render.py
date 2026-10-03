@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 from dataclasses import dataclass
 import hashlib
 from pathlib import Path
@@ -77,10 +77,10 @@ class LogicalDiagnostic:
 class TriageReport:
     root: Path
     diagnostics: tuple[object, ...]
+    selected_diagnostics: tuple[object, ...]
     logical: tuple[LogicalDiagnostic, ...]
     fingerprint: str
     absolute_paths: bool = False
-
 
 
 def _display_path(path: Path, root: Path, absolute: bool) -> str:
@@ -115,7 +115,7 @@ def _family(code: str) -> str:
     return _SIBLING_FAMILIES.get(code, code)
 
 
-def _logical_message(diagnostics: Sequence[object], kind: str, subject: str) -> str:
+def _logical_message(diagnostics: Sequence[object], kind: str) -> str:
     messages = [diag.message for diag in diagnostics]
     if kind == "receiver":
         receiver = next(
@@ -154,6 +154,9 @@ def _logical_message(diagnostics: Sequence[object], kind: str, subject: str) -> 
 
 
 def _cause_key(diagnostics: Sequence[object], kind: str, subject: str, message: str) -> tuple[str, ...]:
+    explicit = {diag.root_cause for diag in diagnostics if getattr(diag, "root_cause", None)}
+    if len(explicit) == 1:
+        return (kind, "explicit", next(iter(explicit)))
     if kind == "type-value":
         term = next(
             (match.group(1) for diag in diagnostics if (match := _KNOWN_TERM.search(diag.message))),
@@ -189,11 +192,14 @@ def build_triage(
     absolute_paths: bool = False,
     only_kind: str | None = None,
 ) -> TriageReport:
+    selected = tuple(
+        diagnostic
+        for diagnostic in diagnostics
+        if only_kind is None or _kind(diagnostic.code) == only_kind
+    )
     grouped: dict[tuple, list[object]] = defaultdict(list)
-    for diagnostic in diagnostics:
+    for diagnostic in selected:
         kind = _kind(diagnostic.code)
-        if only_kind and kind != only_kind:
-            continue
         subject = _subject(diagnostic.message, diagnostic.code)
         key = (
             Path(diagnostic.path),
@@ -211,7 +217,7 @@ def build_triage(
         codes = tuple(sorted({member.code for member in members}))
         kinds = {_kind(code) for code in codes}
         kind = next(iter(kinds)) if len(kinds) == 1 else "diagnostic"
-        message = _logical_message(members, kind, subject)
+        message = _logical_message(members, kind)
         evidence_values = {member.evidence for member in members}
         minimum_values = {member.minimum_evidence for member in members}
         evidence = next(iter(evidence_values)) if len(evidence_values) == 1 else "+".join(sorted(evidence_values))
@@ -238,6 +244,7 @@ def build_triage(
     return TriageReport(
         root=root,
         diagnostics=tuple(diagnostics),
+        selected_diagnostics=selected,
         logical=tuple(logical),
         fingerprint=_fingerprint(logical),
         absolute_paths=absolute_paths,
@@ -245,8 +252,16 @@ def build_triage(
 
 
 def _counts(items: Sequence[LogicalDiagnostic]) -> tuple[int, int]:
-    errors = sum(item.severity == "error" for item in items)
-    warnings = sum(item.severity == "warning" for item in items)
+    errors = sum(
+        diagnostic.severity == "error"
+        for item in items
+        for diagnostic in item.diagnostics
+    )
+    warnings = sum(
+        diagnostic.severity == "warning"
+        for item in items
+        for diagnostic in item.diagnostics
+    )
     return errors, warnings
 
 
@@ -281,6 +296,11 @@ def _cause_label(group: Sequence[LogicalDiagnostic]) -> str:
     return first.message.splitlines()[0]
 
 
+def _code_label(group: Sequence[LogicalDiagnostic]) -> str:
+    codes = sorted({code for item in group for code in item.codes})
+    return "TSAGDA" + "/".join(code.removeprefix("TSAGDA") for code in codes)
+
+
 def _evidence_line(item: LogicalDiagnostic) -> str | None:
     if item.evidence != item.minimum_evidence:
         return f"evidence: {item.evidence} → requires {item.minimum_evidence}"
@@ -296,7 +316,12 @@ def _render_file_header(path: str, items: Sequence[LogicalDiagnostic], cause_cou
     return lines
 
 
+def _locations(items: Sequence[LogicalDiagnostic]) -> str:
+    return "  ".join(f"{item.line}:{item.column}" for item in items)
+
+
 def render_grouped(report: TriageReport) -> str:
+    """Render the default cause-first human triage view."""
     if not report.logical:
         return "agda-preflight: no high-confidence issues found"
 
@@ -310,25 +335,37 @@ def render_grouped(report: TriageReport) -> str:
         items = by_file[path]
         file_causes = [group for group in all_cause_groups if group[0].display_path == path]
         output.extend(_render_file_header(path, items, len(file_causes)))
-        output.append("")
-        for item in items:
-            subject = f"  {item.subject}" if item.subject else ""
-            sev = "E" if item.severity == "error" else "W"
-            output.append(
-                f"{item.line}:{item.column:<3} {sev} {item.code_label:<15}{subject}"
-            )
-            output.append(f"        {item.message}")
-            evidence = _evidence_line(item)
-            if evidence:
-                output.append(f"        {evidence}")
-            output.append("")
+        output.extend(["", "Root causes", "───────────"])
 
-        output.extend(["Root causes", "───────────"])
-        for group in file_causes:
-            codes = sorted({code for item in group for code in item.codes})
-            code_label = "TSAGDA" + "/".join(code.removeprefix("TSAGDA") for code in codes)
-            output.append(f"{len(group):>2} × {_cause_label(group):<52} {code_label}")
-        output.append("")
+        for index, group in enumerate(file_causes, 1):
+            first = group[0]
+            output.append(
+                f"[{index}] {_cause_label(group)}  ×{len(group)}  [{first.kind}]"
+            )
+            subjects = {item.subject for item in group}
+            visible = group[:7]
+            if len(subjects) == 1:
+                if first.subject:
+                    output.append(f"    {first.subject}")
+                output.append(f"      {_locations(visible)}")
+            else:
+                for item in visible:
+                    subject = item.subject or "<source>"
+                    output.append(f"    {subject:<48} {item.line}:{item.column}")
+
+            output.append(f"      {first.message}")
+            output.append(f"      codes: {_code_label(group)}")
+            evidence_lines = sorted(
+                {line for item in group if (line := _evidence_line(item))}
+            )
+            for evidence in evidence_lines:
+                output.append(f"      {evidence}")
+            if len(group) > len(visible):
+                hidden = len(group) - len(visible)
+                output.append(
+                    f"      … {hidden} similar findings hidden; use --by-location or --verbose"
+                )
+            output.append("")
 
     errors, warnings = _counts(report.logical)
     output.append(f"{errors} errors · {warnings} warnings · {len(all_cause_groups)} root causes")
@@ -354,7 +391,9 @@ def render_location(report: TriageReport) -> str:
         evidence = _evidence_line(item)
         if evidence:
             output.append(f"      {evidence}")
+    errors, warnings = _counts(report.logical)
     output.append("")
+    output.append(f"{errors} errors · {warnings} warnings · {len(_cause_groups(report.logical))} root causes")
     output.append(f"fingerprint: {report.fingerprint}")
     return "\n".join(output)
 
@@ -378,13 +417,9 @@ def render_compact(report: TriageReport) -> str:
 
 def render_verbose(report: TriageReport) -> str:
     output = []
-    selected_ids = {
-        id(diagnostic)
-        for item in report.logical
-        for diagnostic in item.diagnostics
-    }
+    selected_ids = {id(diagnostic) for diagnostic in report.selected_diagnostics}
     for diagnostic in report.diagnostics:
-        if selected_ids and id(diagnostic) not in selected_ids:
+        if id(diagnostic) not in selected_ids:
             continue
         display_path = _display_path(Path(diagnostic.path), report.root, report.absolute_paths)
         head = (
