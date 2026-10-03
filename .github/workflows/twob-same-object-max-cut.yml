@@ -7,6 +7,7 @@ on:
       - feature/j369-ogg-address-ssp15-no-go-20260925
     paths:
       - 'DASHI/Moonshine/OggSSP2BM22RuntimeMaxCutReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BM22d2Completion10RuntimeReceiptExact.agda'
       - 'DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda'
       - 'DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda'
       - 'DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda'
@@ -16,6 +17,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Moonshine/OggSSP2BM22RuntimeMaxCutReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BM22d2Completion10RuntimeReceiptExact.agda'
       - 'DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda'
       - 'DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda'
       - 'DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda'
