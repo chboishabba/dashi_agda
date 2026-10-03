@@ -9,12 +9,29 @@ open import DASHI.ComputerScience.TekumMonotoneMagnitudeExact public
     ; sameExponentSignificandStrictForcesMagnitudeStrict
     )
 
+open import DASHI.ComputerScience.TekumPositiveSourceSuccessorAnchorExact public
+  using
+    ( positiveSourceStepRaisesAnchorRank
+    ; positiveSourceSuccessorAnchorsAreAdjacent
+    )
+
+open import DASHI.ComputerScience.TekumSourceOrderExact public
+  using
+    ( PositiveAdjacentOrder
+    ; positiveAdjacentSourceCodeStrict
+    ; hunholdProposition4PositiveAdjacent
+    )
+
 ------------------------------------------------------------------------
 -- Proposition 4 frontier
 --
--- The rational/numerical side is now explicit: exponent increase and the
--- same-exponent significand increase both compile to strict magnitude order.
--- The outstanding theorem is solely the source-code successor/carry analysis
--- that produces one of those two witnesses for each adjacent positive code,
--- plus the sign/special branches.
+-- Paid here:
+--   * adjacent positive source magnitudes -> adjacent corrected anchor ranks;
+--   * given an anchor successor witness, the successor word is the next anchor;
+--   * each of Hunhold's fraction/exponent/regime carry cases -> strict rational
+--     magnitude order.
+--
+-- Remaining structural leaf: derive PositiveAdjacentOrder directly from two
+-- successfully parsed adjacent positive source words.  Only after that leaf,
+-- plus the sign/special cases, is the full source Prop. 4 flag allowed true.
 ------------------------------------------------------------------------
