@@ -7,9 +7,12 @@ open import Data.Vec using (Vec)
 import DASHI.Algebra.Trit as Trit
 
 ------------------------------------------------------------------------
--- The anchor is a same-width balanced-ternary word.  Hunhold Definition 7 is
--- anc_n(t)=|t|-11...1.  The arithmetic constructor remains a separate producer;
--- this module owns the lossless field split/rejoin used downstream.
+-- The anchor is a same-width balanced-ternary word. Hunhold Definition 7 is
+-- anc_n(t)=|t|-1T...1T at even source widths. The arithmetic constructor and
+-- literal alternating midpoint are owned by TekumFixedWidthBalancedArithmetic-
+-- Exact / TekumSourceAnchorCenterExact; this module owns only the lossless
+-- field split/rejoin used downstream.
+------------------------------------------------------------------------
 
 record Regime3 : Set where
   constructor regime3
@@ -26,9 +29,6 @@ record AnchorFields (n : Nat) : Set where
     exponentPlusFraction : Vec Trit.Trit n
 open AnchorFields public
 
--- A structural field view keeps exact payload plus the declared dependent
--- split lengths.  The arithmetic obligation exponentCount+fractionCount=n is
--- carried by the producer, rather than erased by a lossy parser.
 record CertifiedAnchorFields (n : Nat) : Set where
   constructor certifiedAnchorFields
   field
