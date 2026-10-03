@@ -15,9 +15,9 @@ module DASHI.Physics.YangMills.BalabanCMP119LiteralResidualWeldMaxCut20261002Exa
 --   * B_k: source-native boundary object, with analytic/localized reinjection;
 --   * vacuum: one scale-indexed source object, canonically constant on the
 --             configuration carrier;
---   * B/R source polymers: executable positive/negative/crossing OS support
---     classification once their published Polymer carrier is identified with
---     the literal periodic block-polymer carrier.
+--   * E/B/R localized supports: one common executable positive/negative/
+--     crossing OS classifier on the literal periodic block-polymer carrier,
+--     once each source support dictionary is supplied.
 --
 -- The remaining literal Lean weld is therefore NOT another dyadic theorem.
 -- It is the common-evaluator theorem saying that evaluation of the selected
@@ -43,6 +43,7 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact as RSource
 import DASHI.Physics.YangMills.BalabanCMP119ReflectionPolymerGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanCMP119BoundaryReflectionSupportCutExact as BSupport
 import DASHI.Physics.YangMills.BalabanCMP122ROperationReflectionSupportCutExact as RSupport
+import DASHI.Physics.YangMills.BalabanCMP119RegularEReflectionSupportCutExact as ESupport
 
 ------------------------------------------------------------------------
 -- Eq. (2.23) survives any selected action evaluator on the SAME source action.
@@ -166,6 +167,11 @@ vacuumConstantCarrierDonorLevel = RP.cmp119ReflectionMaxCutCompilerLevel
 reflectionPolymerGeometryDonorLevel : ProofLevel
 reflectionPolymerGeometryDonorLevel = Geometry.reflectionPolymerGeometryCompilerLevel
 
+-- E localized components use the same classifier after exactly one explicit
+-- component->periodic-polymer support dictionary is supplied.
+regularEReflectionSupportDonorLevel : ProofLevel
+regularEReflectionSupportDonorLevel = ESupport.regularEReflectionSupportClassifierLevel
+
 -- B terms already inherit the OS class of the SAME source polymer once the
 -- source Polymer parameter is the periodic block carrier.
 boundaryReflectionSupportDonorLevel : ProofLevel
@@ -183,6 +189,12 @@ commonActionEvaluatorAdditiveSemanticsLevel = conditional
 regularESelectedCarrierInstantiationLevel : ProofLevel
 regularESelectedCarrierInstantiationLevel =
   E.literalCMP119RegularESection2PredicateInstantiationLevel
+
+-- E now has no missing classifier; only the physical support dictionary tying
+-- each existing source `Component` to its actual periodic polymer remains.
+regularEComponentToPeriodicPolymerSupportLevel : ProofLevel
+regularEComponentToPeriodicPolymerSupportLevel =
+  ESupport.regularEComponentPeriodicSupportDictionaryLevel
 
 -- R's dyadic arithmetic is already downstream; the surviving source payment is
 -- the published-polymer dictionary plus the existing weight-split/entropy
@@ -207,12 +219,10 @@ vacuumEvaluatorIsSourceConstantLevel : ProofLevel
 vacuumEvaluatorIsSourceConstantLevel =
   RP.cmp119VacuumActionEvaluatorConstantIdentificationLevel
 
--- E remains the asymmetric sector in the representation layer: the current
--- exact source form exposes `Component`, not a component->periodic-polymer
--- support map.  That map must be source-written before E can share the B/R OS
--- classifier and the final common shell carrier.
-regularEComponentToPeriodicPolymerSupportLevel : ProofLevel
-regularEComponentToPeriodicPolymerSupportLevel = conditional
+-- One common shell family must still be shown to contain the selected E/R/B
+-- periodic supports with exactly the evaluator convention consumed by Lean.
+commonERBPeriodicSupportToSelectedShellCarrierLevel : ProofLevel
+commonERBPeriodicSupportToSelectedShellCarrierLevel = conditional
 
 fullResidualEqualsSelectedFiniteShellTailLevel : ProofLevel
 fullResidualEqualsSelectedFiniteShellTailLevel = conditional
