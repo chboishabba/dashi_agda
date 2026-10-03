@@ -1,7 +1,7 @@
 module DASHI.ComputerScience.TekumSignedMagnitudeInjectiveExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; -_; _<_)
 import Data.Rational.Properties as ℚP
@@ -22,7 +22,7 @@ negativePositiveDistinct :
   ∀ {m n : ℚ} →
   0ℚ ℚ.< m → 0ℚ ℚ.< n →
   (ℚ.- m) ≡ n →
-  Data.Empty.⊥
+  ⊥
 negativePositiveDistinct mPositive nPositive eq =
   ℚP.<⇒≢
     (ℚP.<-trans (ℚP.neg-antimono-< mPositive) nPositive)
@@ -32,7 +32,7 @@ positiveNegativeDistinct :
   ∀ {m n : ℚ} →
   0ℚ ℚ.< m → 0ℚ ℚ.< n →
   m ≡ (ℚ.- n) →
-  Data.Empty.⊥
+  ⊥
 positiveNegativeDistinct mPositive nPositive eq =
   negativePositiveDistinct nPositive mPositive (sym eq)
 
