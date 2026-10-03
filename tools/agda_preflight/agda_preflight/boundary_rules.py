@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from pathlib import Path
 import re
-from typing import Iterable
 
 from .checker import Diagnostic
 
@@ -18,6 +17,8 @@ _WORD = r"[A-Za-z_][A-Za-z0-9_']*"
 
 
 def _line_text(source: str, line: int) -> str:
+    """Return one 1-based source line, or an empty string out of range."""
+
     lines = source.splitlines()
     if 1 <= line <= len(lines):
         return lines[line - 1]
@@ -53,15 +54,11 @@ def _is_constructor_field_transition_gap(source: str, line: int) -> bool:
     if constructor_index >= field_index:
         return False
 
-    # Require a record header before the transition, either in the local window
-    # or in the preceding bounded context. This prevents generic constructor /
-    # field words in comments or unrelated syntax from suppressing TSAGDA000.
     context_start = max(0, window_start - 12)
     context = lines[context_start : window_start + field_index + 1]
     if not any(_RECORD.match(text) for text in context):
         return False
 
-    # Only suppress diagnostics located on the small transition surface.
     interesting = range(
         max(0, window_start + constructor_index - 1),
         min(len(lines), window_start + field_index + 2),
@@ -99,7 +96,12 @@ def _visible_qualified_receiver(summary, diagnostic) -> bool:
 
 
 def _imported_qualified_constructors(checker, summary) -> dict[str, set[str]]:
-    """Map constructor basenames to non-open import aliases that own them."""
+    """Map constructor basenames to non-open import aliases that own them.
+
+    Open imports are deliberately excluded: in that case an unqualified name
+    can itself denote the constructor, so syntax/index evidence cannot safely
+    classify the token as a shadowing variable.
+    """
 
     opened_aliases = {
         item.alias
@@ -109,8 +111,6 @@ def _imported_qualified_constructors(checker, summary) -> dict[str, set[str]]:
     result: dict[str, set[str]] = {}
     for alias, interface in checker.imported_interfaces(summary).items():
         if alias in opened_aliases:
-            # Once opened, an unqualified occurrence may itself be a constructor
-            # pattern, so tree/index evidence alone cannot call it a binder.
             continue
         constructors = set()
         for _datatype, names in interface.data_constructors:
@@ -126,10 +126,10 @@ def _imported_qualified_constructors(checker, summary) -> dict[str, set[str]]:
 def _shadow_diagnostics(checker, summary) -> list[Diagnostic]:
     """Predict Agda PatternShadowsConstructor at user-authored binder clauses.
 
-    Only constructors reachable through a *non-open* imported alias are used.
-    Therefore an unqualified same-basename token on a clause LHS cannot be that
-    imported constructor; it is a binder/pattern name and the shadow claim is
-    structurally sound. Generated with-clauses are intentionally not predicted.
+    Only constructors reachable through a non-open imported alias are used.
+    Therefore an unqualified same-basename token on a recognized clause LHS
+    cannot be that imported constructor. Generated with-clauses are not
+    predicted: preflight reports the source binder that causes them instead.
     """
 
     owners = _imported_qualified_constructors(checker, summary)
@@ -143,12 +143,17 @@ def _shadow_diagnostics(checker, summary) -> list[Diagnostic]:
             lhs = clause.lhs_text
             if not lhs:
                 continue
-            # Skip the defining function head. We only inspect the pattern tail.
             head_match = re.match(rf"\s*{_WORD}", lhs)
-            tail_start = head_match.end() if head_match else 0
+            if head_match is None:
+                # Operators/mixfix/otherwise unfamiliar clause heads stay on
+                # the false-negative side until the AST exposes binders rigidly.
+                continue
+            tail_start = head_match.end()
             tail = lhs[tail_start:]
             for basename, aliases in owners.items():
-                pattern = re.compile(rf"(?<![A-Za-z0-9_'.]){re.escape(basename)}(?![A-Za-z0-9_'])")
+                pattern = re.compile(
+                    rf"(?<![A-Za-z0-9_'.]){re.escape(basename)}(?![A-Za-z0-9_'])"
+                )
                 match = pattern.search(tail)
                 if match is None:
                     continue
@@ -189,10 +194,11 @@ def _shadow_diagnostics(checker, summary) -> list[Diagnostic]:
 
 
 def install_checker_boundary_rules(Checker) -> None:
-    """Install narrow compatibility rules without changing diagnostic payloads.
+    """Install narrow compatibility rules around the tree-sitter/Agda boundary.
 
-    This is kept as a separate layer because these rules describe known
-    tree-sitter/Agda boundary behavior, not Agda language semantics generally.
+    These wrappers deliberately leave the raw Diagnostic model unchanged. They
+    suppress two known tree grammar/application false positives and add the
+    conservative index-backed TSAGDA300 producer before optional Agda refinement.
     """
 
     if getattr(Checker, "_dashi_boundary_rules_installed", False):
@@ -202,6 +208,8 @@ def install_checker_boundary_rules(Checker) -> None:
     original_structural = Checker.structural_check
 
     def syntax_with_known_gaps(self, summary):
+        """Filter only the bounded constructor→field grammar-gap TSAGDA000."""
+
         diagnostics = original_syntax(self, summary)
         return [
             diagnostic
@@ -216,6 +224,8 @@ def install_checker_boundary_rules(Checker) -> None:
         ]
 
     def structural_with_boundary_rules(self, path: Path):
+        """Refine structural false positives and append sound shadow warnings."""
+
         diagnostics = list(original_structural(self, path))
         summary = self.parse_summary(path)
 
