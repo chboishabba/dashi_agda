@@ -9,11 +9,16 @@ module DASHI.Physics.Foundations.CMP119CosmologyMathematicalMaxCut20261003BExact
 -- source coordinate is explicitly nonnegative, so it cannot be consumed as a
 -- signed telescope without an additional same-object theorem.
 --
--- Therefore the shortest preferred B1 route is again the direct quantitative
--- statement already used by the downstream consumer:
+-- The concrete preferred consumer used two fields at cutoff k:
 --
---   completed selected response
---     <= pinned finite expectation_k + embedded Round109 tail_k.
+--   F_k = embed(D_Gamma,k),
+--   embed(Q_R136) <= F_k + embed(Tail_R109(k)).
+--
+-- Their composition is the only fact consumed downstream, so B1 is now cut to
+-- one direct source inequality:
+--
+--   embed(Q_R136)
+--     <= embed(D_Gamma,k) + embed(Tail_R109(k)).
 --
 -- On the Eq.(2.23) side, all algebra downstream of the source metric family is
 -- closed.  Given a combined E/R/B envelope M and Round109 tail T_k, the one
@@ -30,8 +35,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 -- Preferred R144/R109 route.
 data PreferredB1Residual : Set where
-  pinned-finite-expectation-to-completed-response-round109-tail :
-    PreferredB1Residual
+  direct-r144-dgamma-to-r136-round109-tail : PreferredB1Residual
 
 -- Preferred Eq.(2.23) route.
 data PreferredEq223Residual : Set where
@@ -59,6 +63,15 @@ round109NonnegativeDifferenceIsNotSignedTelescope = true
 
 preferredB1IsAbsolutePinnedFiniteTail : Bool
 preferredB1IsAbsolutePinnedFiniteTail = true
+
+preferredB1CompressedToDirectR144R109TailInequality : Bool
+preferredB1CompressedToDirectR144R109TailInequality = true
+
+preferredB1NeedsSeparatePinnedExpectationEquality : Bool
+preferredB1NeedsSeparatePinnedExpectationEquality = false
+
+preferredB1NeedsSeparateCompletionFieldAtConsumer : Bool
+preferredB1NeedsSeparateCompletionFieldAtConsumer = false
 
 preferredB1NeedsIndependentFiniteFamilyChoice : Bool
 preferredB1NeedsIndependentFiniteFamilyChoice = false
