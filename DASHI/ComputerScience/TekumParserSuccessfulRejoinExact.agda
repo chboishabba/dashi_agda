@@ -3,12 +3,15 @@ module DASHI.ComputerScience.TekumParserSuccessfulRejoinExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_+_)
 open import Data.Maybe using (just; nothing)
+open import Data.Product using (_,_)
 open import Data.Vec using (Vec; []; _∷_)
-open import Data.Vec.Base using (reverse; _++_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Vec.Base using (_++_)
+open import Data.Vec.Properties using (reverse-injective)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
+import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
 import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
 import DASHI.ComputerScience.TekumSourceWordRoundTripExact as RoundTrip
@@ -85,10 +88,9 @@ successfulParseDeterminesConcreteAnchor :
   Source.parseOrdinaryAnchor right ≡ just (s , payload₂ , parsed₂) →
   RoundTrip.rejoinParsedAnchorMSB parsed₁
     ≡ RoundTrip.rejoinParsedAnchorMSB parsed₂ →
-  DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact.concreteAnchor left
-    ≡ DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact.concreteAnchor right
+  Fixed.concreteAnchor left ≡ Fixed.concreteAnchor right
 successfulParseDeterminesConcreteAnchor left right leftParse rightParse rejoinEq =
-  Data.Vec.Properties.reverse-injective
+  reverse-injective
     (trans
       (parseOrdinaryAnchorSuccessfulRejoin left leftParse)
       (trans rejoinEq
