@@ -8,6 +8,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredA1CanonicalReceiptAdapterExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredA2SelectedReceiptAdapterExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SourceNaturalityToR144MarkedExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SourceNaturalityToR144MarkedTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003GExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003GTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HExact.agda'
@@ -75,6 +77,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredA1CanonicalReceiptAdapterExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredA2SelectedReceiptAdapterExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SourceNaturalityToR144MarkedExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SourceNaturalityToR144MarkedTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR144R109DirectTailAnchorExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyUnnormalizedSourceTailMarginExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyDirectTailFromSourceNumeratorExact.agda \
