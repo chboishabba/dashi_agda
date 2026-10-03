@@ -26,13 +26,28 @@ import DASHI.ComputerScience.TekumFiniteSemanticsExact
 import DASHI.ComputerScience.TekumExactTriadicSemanticsExact
 import DASHI.ComputerScience.TekumSourceWordDecodeExact
 import DASHI.ComputerScience.TekumSourceWordRoundTripExact
+import DASHI.ComputerScience.TekumParserSuccessfulRejoinExact
 import DASHI.ComputerScience.TekumParsedExactTriadicWeldExact
 import DASHI.ComputerScience.TekumParsedExactRationalCoordinatesExact
 import DASHI.ComputerScience.TekumFractionRangeExact
 import DASHI.ComputerScience.TekumFractionRationalRangeExact
+import DASHI.ComputerScience.TekumFractionInjectiveExact
 import DASHI.ComputerScience.TekumSignificandRangeExact
 import DASHI.ComputerScience.TekumTriadicScaleExact
 import DASHI.ComputerScience.TekumExponentBandExact
+import DASHI.ComputerScience.TekumIntegerSuccessorGapExact
+import DASHI.ComputerScience.TekumRegimeExponentIntervalExact
+import DASHI.ComputerScience.TekumRegimeChainExact
+import DASHI.ComputerScience.TekumOrdinaryFactorizationExact
+import DASHI.ComputerScience.TekumParsedBandMembershipExact
+import DASHI.ComputerScience.TekumParsedExponentInjectiveExact
+import DASHI.ComputerScience.TekumParsedFieldRecoveryExact
+import DASHI.ComputerScience.TekumParsedPayloadInjectiveExact
+import DASHI.ComputerScience.TekumSignedMagnitudeInjectiveExact
+import DASHI.ComputerScience.TekumSignedAbsoluteWordInjectiveExact
+import DASHI.ComputerScience.TekumPositiveAnchorInjectiveExact
+import DASHI.ComputerScience.TekumSourceAnchorInjectiveExact
+import DASHI.ComputerScience.TekumSourceWordInjectiveExact
 import DASHI.ComputerScience.TekumSourceNegationExact
 import DASHI.ComputerScience.TekumFormalPropertiesExact
 import DASHI.ComputerScience.TekumNegationExact
@@ -140,7 +155,7 @@ canonicalTekumVerifiedAssemblyBoundary =
     true true true true true true true true true
     true true true true true true true true false
     true
-    false true false false false true
+    true true false false false true
     true true true true
     true true true true false true true true true false
     true true true true
