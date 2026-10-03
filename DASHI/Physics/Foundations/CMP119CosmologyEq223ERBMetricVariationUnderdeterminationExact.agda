@@ -18,7 +18,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223ERBMetricVariationUnderdete
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
