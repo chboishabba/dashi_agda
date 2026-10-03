@@ -3,7 +3,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 required = {
-    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': ['eval-involution', 'threeTritExtremalPositiveWeight'],
+    'DASHI/Algebra/BalancedTernaryIntegerExact.agda': [
+        'eval-involution', 'threeTritExtremalPositiveWeight',
+        'toIntegerSwapSign', 'toIntegerInvertWord',
+    ],
     'DASHI/Algebra/BalancedTernaryA003462BridgeExact.agda': ['threePositiveTritEvaluationMatchesA003462Magnitude'],
     'DASHI/Algebra/BalancedTernaryFiniteCarrierExact.agda': ['finTritRoundTrip', 'tritFinRoundTrip', 'fromToFin3', 'toFromFin3', 'canonicalFin3VectorEnumerationLength'],
     'DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda': [
@@ -70,4 +73,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: source parser roundtrip, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: positional negation, source parser roundtrip, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
