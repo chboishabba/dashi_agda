@@ -6,17 +6,19 @@ import Data.Integer.Properties as ℤP
 import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; ½; _+_; _*_; _<_; Positive; positive)
+  (ℚ; 0ℚ; 1ℚ; ½; -_; _+_; _*_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
 open ℚP using (_<?_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 open import Data.Rational.Unnormalised.Base as ℚᵘ
   using (ℚᵘ; 1ℚᵘ; _/_; _+_; _≃_; *≡*)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import Relation.Binary.PropositionalEquality.≡-Reasoning
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
+import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
 import DASHI.ComputerScience.TekumFractionRationalRangeExact as Fraction
 import DASHI.ComputerScience.TekumSignificandRangeExact as Sig
 import DASHI.ComputerScience.TekumTriadicScaleExact as Scale
@@ -155,3 +157,37 @@ parsedMagnitudeInExponentBand parsed
     < Band.bandUpper exponent
   upper =
     ℚP.*-monoʳ-<-pos (Scale.triadicScale exponent) (proj₂ sigBand)
+
+------------------------------------------------------------------------
+-- Literal parser value = external sign applied to the positive magnitude.
+------------------------------------------------------------------------
+
+zeroTimes : (x : ℚ) → 0ℚ ℚ.* x ≡ 0ℚ
+zeroTimes = solve-∀
+
+applyRationalSignMul :
+  (s : Anchor.TekumSign) (x y : ℚ) →
+  Factor.applyRationalSign s x ℚ.* y
+  ≡ Factor.applyRationalSign s (x ℚ.* y)
+applyRationalSignMul Anchor.negativeSign x y =
+  sym (ℚP.neg-distribˡ-* x y)
+applyRationalSignMul Anchor.zeroSign x y = zeroTimes y
+applyRationalSignMul Anchor.positiveSign x y = refl
+
+parsedOrdinaryRationalIsSignedMagnitude :
+  ∀ {extra r payload}
+  (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit (8 + extra))
+  (parsed : Source.ParsedPayload extra r payload) →
+  Source.ordinaryRationalFromParsed word parsed
+  ≡ Factor.applyRationalSign (Source.signOfWord word) (parsedMagnitude parsed)
+parsedOrdinaryRationalIsSignedMagnitude word parsed =
+  trans
+    (Factor.parsedOrdinaryCanonicalProduct word parsed)
+    (trans
+      (cong
+        (λ s → s ℚ.* Factor.canonicalSourceScale parsed)
+        (Factor.canonicalSignedSignificandIsApplySign word parsed))
+      (applyRationalSignMul
+        (Source.signOfWord word)
+        (Factor.canonicalUnsignedSignificand parsed)
+        (Factor.canonicalSourceScale parsed)))
