@@ -6,13 +6,15 @@ import Data.Integer.Properties as ℤP
 import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; Positive; positive)
+  (ℚ; 0ℚ; 1ℚ; ½; _+_; _*_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
+open ℚP using (_<?_)
 open import Data.Rational.Unnormalised.Base as ℚᵘ
   using (ℚᵘ; 1ℚᵘ; _/_; _+_; _≃_; *≡*)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 open import Relation.Binary.PropositionalEquality.≡-Reasoning
+open import Relation.Nullary.Decidable.Core using (toWitness)
 
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.ComputerScience.TekumFractionRationalRangeExact as Fraction
@@ -24,9 +26,6 @@ import DASHI.ComputerScience.TekumOrdinaryFactorizationExact as Factor
 
 ------------------------------------------------------------------------
 -- ACTUAL PARSER MAGNITUDE IN THE SOURCE EXPONENT BAND
---
--- This file closes the semantic gap between the parser's literal exact
--- significand and the already-proved abstract source band 1/2 < 1+f < 3/2.
 ------------------------------------------------------------------------
 
 rawSourceFraction :
@@ -108,6 +107,9 @@ parsedMagnitudeIsSourceFormula parsed
   rewrite canonicalUnsignedSignificandIsSourceSignificand parsed
         | Factor.canonicalSourceScaleIsTriadicScale parsed = refl
 
+zeroBelowHalf : 0ℚ < ½
+zeroBelowHalf = toWitness {a? = 0ℚ <? ½} _
+
 parsedMagnitudePositive :
   ∀ {extra r payload}
   (parsed : Source.ParsedPayload extra r payload) →
@@ -118,7 +120,7 @@ parsedMagnitudePositive parsed
     sigBand = Sig.significandStrictBand (Source.fractionLST parsed)
 
     sigPositive : 0ℚ < Sig.significand (Source.fractionLST parsed)
-    sigPositive = ℚP.<-trans Band.bandLowerPositiveZero (proj₁ sigBand)
+    sigPositive = ℚP.<-trans zeroBelowHalf (proj₁ sigBand)
 
     instance scalePositive : Positive (Scale.triadicScale (Factor.sourceExponentInteger parsed))
         scalePositive = positive (Scale.triadicScalePositive (Factor.sourceExponentInteger parsed))
@@ -126,15 +128,6 @@ parsedMagnitudePositive parsed
   ℚP.*-monoʳ-<-pos
     (Scale.triadicScale (Factor.sourceExponentInteger parsed))
     sigPositive
-  where
-  -- The lower band coefficient is positive, hence 0 < 1/2.
-  Band.bandLowerPositiveZero : 0ℚ < Sig.significand (Source.fractionLST parsed)
-  Band.bandLowerPositiveZero =
-    ℚP.<-trans
-      (Band.bandLowerPositive (Factor.sourceExponentInteger parsed))
-      (ℚP.*-monoʳ-<-pos
-        (Scale.triadicScale (Factor.sourceExponentInteger parsed))
-        (proj₁ (Sig.significandStrictBand (Source.fractionLST parsed))))
 
 parsedMagnitudeInExponentBand :
   ∀ {extra r payload}
