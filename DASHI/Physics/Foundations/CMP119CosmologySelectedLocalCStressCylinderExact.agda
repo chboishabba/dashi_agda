@@ -28,10 +28,10 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 1ℝ; 0ℝ; _≤ℝ
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as LocalC
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
+import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as PhysicalLimit
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureContinuumOS2Exact as FiniteOS2
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
-import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as GramOS
 import DASHI.Physics.YangMills.BalabanCMP116119NormalizedExpectationDerivativeRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanCMP116TwoSourceSpatialShellRound279Exact as R279
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
@@ -162,8 +162,7 @@ selectedStressContinuumOS2 :
   0ℝ ≤ℝ
     Gram.physicalReflectedGramQuadraticForm
       (OS2.operations (OSSystem.observableAlgebra osInputs))
-      (DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact.limitExpectation
-        (OSSystem.family osInputs group))
+      (PhysicalLimit.limitExpectation (OSSystem.family osInputs group))
       (selectedSingletonFamily selected)
 selectedStressContinuumOS2
     {osInputs = osInputs} {group = group} selected =
@@ -225,7 +224,7 @@ selectedStressOnlySufficesForE4 : Bool
 selectedStressOnlySufficesForE4 = true
 
 allStressCylinderEncodingNoLongerParetoPremise : Bool
-allStressCylinderEncodingNoLongerParetoPremise = false
+allStressCylinderEncodingNoLongerParetoPremise = true
 
 remainingSharedPhysicalLeafIsOneSelectedObservableAndAdmissibility : Bool
 remainingSharedPhysicalLeafIsOneSelectedObservableAndAdmissibility = true
