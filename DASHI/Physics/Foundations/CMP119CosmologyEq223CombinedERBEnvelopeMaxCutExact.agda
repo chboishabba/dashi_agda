@@ -125,7 +125,7 @@ module _
     combinedERBNumerator
       ≤ combinedUpper envelope * densityIntegral
   combinedERBNumeratorBelowFactoredUpper envelope =
-    trans
+    ℚP.≤-trans
       (Order.weightedNumeratorBelowConstant
         orderLaws combinedERBDiagonalTrace
         (combinedUpper envelope)
