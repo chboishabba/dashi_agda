@@ -1,8 +1,7 @@
 module DASHI.ComputerScience.TekumBalancedSuccessorExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _*_)
+open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_)
 open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver using () renaming
   ( solve to solveℤ
@@ -12,7 +11,6 @@ open +-*-Solver using () renaming
   ; _:=_ to _ℤ=_
   )
 open import Data.Vec using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
@@ -26,7 +24,7 @@ import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact as Positional
 --   1 -> T with carry
 --
 -- The empty/all-positive case wraps and is deliberately excluded from the
--- arithmetic successor theorem.  This is exactly the carry mechanism used by
+-- arithmetic successor theorem. This is the exact carry kernel used by
 -- Hunhold Proposition 4 before the infinity endpoint.
 ------------------------------------------------------------------------
 
@@ -75,37 +73,10 @@ successorInteger {xs = Trit.pos ∷ xs} (positiveCarry carry)
       ℤ= (conℤ (+ 1) ℤ+ (conℤ (+ 3) ℤ* t)) ℤ+ conℤ (+ 1))
     refl (BT.toInteger (BT.eval xs))
 
-------------------------------------------------------------------------
--- The witness is exactly "not all positive", exposed structurally rather than
--- through a Boolean so downstream parser proofs can pattern-match on carry.
-------------------------------------------------------------------------
-
+-- Structural eliminator used by the parser-carry proof: a carry past a leading
+-- positive trit preserves the witness on the remaining higher-order digits.
 hasSuccessorTail :
-  ∀ {n} {t : Trit.Trit} {xs : Vec Trit.Trit n} →
-  HasSuccessor (t ∷ xs) →
-  t ≡ Trit.pos →
+  ∀ {n} {xs : Vec Trit.Trit n} →
+  HasSuccessor (Trit.pos ∷ xs) →
   HasSuccessor xs
-hasSuccessorTail negativeHead ()
-hasSuccessorTail zeroHead ()
-hasSuccessorTail (positiveCarry carry) refl = carry
-
-successorInjectiveOnWitness :
-  ∀ {n} {left right : Vec Trit.Trit n} →
-  HasSuccessor left →
-  HasSuccessor right →
-  successorWord left ≡ successorWord right →
-  left ≡ right
-successorInjectiveOnWitness leftWitness rightWitness successorEq =
-  Positional.toIntegerInjective
-    (let
-       leftStep = successorInteger leftWitness
-       rightStep = successorInteger rightWitness
-     in
-     ℤ.+-cancelʳ-≡
-       (BT.toInteger (BT.eval left))
-       (BT.toInteger (BT.eval right))
-       (+ 1)
-       (trans leftStep (trans (cong (λ w → BT.toInteger (BT.eval w)) successorEq) (Relation.Binary.PropositionalEquality.sym rightStep))))
-  where
-  left = _
-  right = _
+hasSuccessorTail (positiveCarry carry) = carry
