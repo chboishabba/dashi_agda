@@ -14,7 +14,7 @@ open import Agda.Builtin.String using (String)
 -- Lean branch:
 --   agent/rh-marked-cluster-target-reflection
 -- Donor head at refresh:
---   4f5eb569fea4987f75abe42950bf82b0660c5ec7
+--   e1d51ebb6de529da936ce947ace9fa97608c8670
 --
 -- Paid in Lean source:
 --   * same-object uniform M0 envelope;
@@ -29,7 +29,11 @@ open import Agda.Builtin.String using (String)
 --     signed-pole core;
 --   * exact compensation-floor identity;
 --   * final Route-A adverse-vs-compensation balance compiler;
---   * finite mid-strip mesh/Lipschitz compiler.
+--   * finite mid-strip mesh/Lipschitz compiler;
+--   * literal arbitrary-endpoint RvM zero-count upper bound;
+--   * exact inverse-square finite-window <= N(A,B)/d^2 carrier weld;
+--   * positive-height left/right shell bounds and unconditional all-real
+--     unit-window inverse-square bounds using the same literal Ncount carrier.
 --
 -- Fail-closed boundary:
 --   the final normalized four-window determinant bookkeeping that consumes the
@@ -39,7 +43,8 @@ open import Agda.Builtin.String using (String)
 -- Current analytic wall:
 --   finite determinant transport / fixed-width witness
 --     -> uniform oscillatory curvature
---     -> quantitative RvM bound on the literal inverse-square zero tail
+--     -> sum the now-explicit two-sided inverse-square unit/dyadic shell budget
+--        to obtain the quantitative O(log t / t) literal zero tail
 --     -> translated gamma+pole gain versus local slack.
 --
 -- Route B remains the independent eventual signed-correlation gap theorem.
@@ -63,6 +68,9 @@ record ThreeTapCurrentLeanFrontier : Set where
     compensationFloorIdentitySourceWritten : Bool
     routeAAsymptoticBalanceCompilerSourceWritten : Bool
     midStripFiniteMeshCompilerSourceWritten : Bool
+    arbitraryEndpointLiteralZeroCountBoundSourceWritten : Bool
+    inverseSquareLiteralWindowBridgeSourceWritten : Bool
+    allRealUnitInverseSquareBoundSourceWritten : Bool
 
     uniformHighTPoleLocalizationPaid : Bool
     uniformOscillatoryCurvaturePaid : Bool
@@ -83,6 +91,9 @@ record ThreeTapCurrentLeanFrontier : Set where
     compensationIdentityPaid : compensationFloorIdentitySourceWritten ≡ true
     routeABalanceCompilerPaid : routeAAsymptoticBalanceCompilerSourceWritten ≡ true
     meshCompilerPaid : midStripFiniteMeshCompilerSourceWritten ≡ true
+    arbitraryEndpointLiteralCountPaid : arbitraryEndpointLiteralZeroCountBoundSourceWritten ≡ true
+    inverseSquareWindowBridgePaid : inverseSquareLiteralWindowBridgeSourceWritten ≡ true
+    allRealUnitInverseSquarePaid : allRealUnitInverseSquareBoundSourceWritten ≡ true
 
     poleLocalizationStillOpen : uniformHighTPoleLocalizationPaid ≡ false
     curvatureStillOpen : uniformOscillatoryCurvaturePaid ≡ false
@@ -103,17 +114,17 @@ currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
     "agent/rh-marked-cluster-target-reflection"
-    "4f5eb569fea4987f75abe42950bf82b0660c5ec7"
+    "e1d51ebb6de529da936ce947ace9fa97608c8670"
 
-    true true true true true true true true true true true
+    true true true true true true true true true true true true true true
 
     false false false false false false false
 
-    refl refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl refl
 
-    "finite normalized four-window determinant transport from the paid uniform pole-weight modulus -> fixed-width witness -> uniform oscillatory curvature -> quantitative RvM bound on threeTapInverseSquareZeroTailAfter(t,t/2) -> translated gamma+pole gain versus local slack; after a one-scale PASS, use the already-owned finite mid-strip mesh compiler"
-    "Lean owns the real-analysis surface. Agda mirrors source-written status and provenance only; do not manufacture the missing determinant transport, curvature, RvM-tail, compensation-sign, or RH arguments here."
+    "finite normalized four-window determinant transport from the paid uniform pole-weight modulus -> fixed-width witness -> uniform oscillatory curvature -> sum the source-written literal positive-height shell and all-real unit-window inverse-square bounds into threeTapInverseSquareZeroTailAfter(t,t/2) <= C log(t)/t -> translated gamma+pole gain versus local slack; after a one-scale PASS, use the already-owned finite mid-strip mesh compiler"
+    "Lean owns the real-analysis surface. Agda mirrors source-written status and provenance only; do not manufacture the missing determinant transport, curvature, shell summation, compensation-sign, or RH arguments here."
     "Keep the signed fifth-cap route independent: prove eventual nonnegativity of signedFifthCorrelationGapAt and feed the common canonical terminal consumer."
 
 uniformPoleWeightEquicontinuityIsCurrent :
@@ -121,10 +132,20 @@ uniformPoleWeightEquicontinuityIsCurrent :
     currentThreeTapCurrentLeanFrontier ≡ true
 uniformPoleWeightEquicontinuityIsCurrent = refl
 
+allRealUnitInverseSquareIsCurrent :
+  ThreeTapCurrentLeanFrontier.allRealUnitInverseSquareBoundSourceWritten
+    currentThreeTapCurrentLeanFrontier ≡ true
+allRealUnitInverseSquareIsCurrent = refl
+
 uniformCurvatureIsStillOpen :
   ThreeTapCurrentLeanFrontier.uniformOscillatoryCurvaturePaid
     currentThreeTapCurrentLeanFrontier ≡ false
 uniformCurvatureIsStillOpen = refl
+
+inverseSquareTailIsStillOpen :
+  ThreeTapCurrentLeanFrontier.inverseSquareRvMTailPaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+inverseSquareTailIsStillOpen = refl
 
 rhNotClaimedByAgdaStatusMirror :
   ThreeTapCurrentLeanFrontier.rhDerivedHere
