@@ -80,8 +80,10 @@ B1AbsoluteSameSequenceDirectTailReceipt :
   (source : R109.SourceNativeStressScaleCauchy) →
   (completedRationalResponse finiteRationalDGamma : ℚ) →
   Nat → Set₁
-B1AbsoluteSameSequenceDirectTailReceipt =
+B1AbsoluteSameSequenceDirectTailReceipt
+    embedding source completed finite start =
   Direct.DirectR144R109TailAnchor
+    embedding source completed finite start
 
 ------------------------------------------------------------------------
 -- B2: source-native strict Eq.(2.23) envelope actually consumed by the sign
