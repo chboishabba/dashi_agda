@@ -4,29 +4,22 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressSelectedSemanticsExa
 ------------------------------------------------------------------------
 -- SELECTED MARKED-OS SEMANTICS FOR B0 / B3.
 --
--- Do not leave arbitrary functions
---
---   nuclear continuity -> E0
---   symmetry/locality   -> E3
---
--- inside the physical max-cut.  For the selected DASHI marked hierarchy we
--- name exactly the predicates already produced by Round109 and Local-C.
---
--- This is an INTERNAL semantic specialization.  It does not claim that the
--- repository has independently formalized the external Schwartz/distribution
--- definition of Osterwalder--Schrader E0/E3.  That identification belongs to
--- the standard-imported marked OS reconstruction theorem boundary.
+-- Internal semantic specialization only: Round109 nuclear continuity and
+-- Local-C symmetry/locality are the selected DASHI marked-E0/E3 predicates.
+-- Identifying these named predicates with the external OS topology/locality
+-- definitions remains at the standard-imported marked reconstruction boundary.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSHypothesisMaxCutExact as Cut
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as LocalC
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R109NuclearStressExact as R109Nuclear
 import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact as Marked
+import DASHI.Physics.YangMills.BalabanCharacteristicNuclearContinuityTransportExact as Nuclear
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
 import DASHI.Physics.YangMills.BalabanSameFamilyOSStressRecoveryRound128Exact as R128
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as R123
@@ -36,13 +29,14 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106E
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 
 record SelectedMarkedE0
-    {C CompletedState Composite : Set}
+    {C : Nuclear.ContinuityScale}
+    {CompletedState Composite : Set}
     {dataSet : Marked.SameFamilyMarkedSourceData C CompletedState Composite}
     (field : Marked.SameFamilyNuclearCompositeField dataSet)
     : Set₁ where
   constructor selected-marked-e0
   field
-    nuclearContinuity :
+    continuityIsTheSelectedRound109Continuity :
       Marked.fieldNuclearContinuous field
       ≡ Marked.fieldNuclearContinuous field
 
@@ -53,7 +47,7 @@ selectedMarkedE0 :
     {dataSet : Marked.SameFamilyMarkedSourceData C CompletedState Composite}
     (field : Marked.SameFamilyNuclearCompositeField dataSet) →
   SelectedMarkedE0 field
-selectedMarkedE0 field = selected-marked-e0 _
+selectedMarkedE0 field = selected-marked-e0 refl
 
 record SelectedMarkedE3
     {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -74,10 +68,8 @@ record SelectedMarkedE3
     : Set₁ where
   constructor selected-marked-e3
   field
-    symmetric :
-      LocalC.Symmetric localC (LocalC.stressTensor localC)
-    local :
-      LocalC.LocalStressTensor localC (LocalC.stressTensor localC)
+    symmetric : LocalC.Symmetric localC (LocalC.stressTensor localC)
+    local : LocalC.LocalStressTensor localC (LocalC.stressTensor localC)
 
 open SelectedMarkedE3 public
 
@@ -137,15 +129,10 @@ record SelectedMarkedOSResiduals
         osInputs reconstruction group)
     : Set₂ where
   field
-    sameFamilyOSRecovery :
-      R128.SameFamilyOSStressRecovery stressLane
-
-    markedStressCompletion :
-      R109.LiteralSchwingerStressMarkedCompletion Y group
-
+    sameFamilyOSRecovery : R128.SameFamilyOSStressRecovery stressLane
+    markedStressCompletion : R109.LiteralSchwingerStressMarkedCompletion Y group
     markedStressIsPinnedLocalCStress :
-      Top.stressTensor Y group
-      ≡ LocalC.stressTensor localC
+      Top.stressTensor Y group ≡ LocalC.stressTensor localC
 
     MarkedE1EuclideanTensorCovariance : Set
     MarkedE2ReflectionPositivityCompatibility : Set
@@ -220,7 +207,7 @@ asMarkedStressOSHypothesisMaxCut {localC = localC} residuals =
   ; Cut.MarkedStressOSHypothesisMaxCut.nuclearContinuityToMarkedE0 =
       λ _ → selectedMarkedE0 nuclearField
   ; Cut.MarkedStressOSHypothesisMaxCut.localCSymmetryLocalityToMarkedE3 =
-      λ pair → selected-marked-e3 (Data.Product.proj₁ pair) (Data.Product.proj₂ pair)
+      λ pair → selected-marked-e3 (proj₁ pair) (proj₂ pair)
   ; Cut.MarkedStressOSHypothesisMaxCut.markedE1 = markedE1 residuals
   ; Cut.MarkedStressOSHypothesisMaxCut.markedE2 = markedE2 residuals
   ; Cut.MarkedStressOSHypothesisMaxCut.markedE4 = markedE4 residuals
