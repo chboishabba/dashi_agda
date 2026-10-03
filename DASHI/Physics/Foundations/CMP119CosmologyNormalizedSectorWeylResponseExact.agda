@@ -1,24 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyNormalizedSectorWeylResponseExact where
 
-------------------------------------------------------------------------
--- FINITE EFFECTIVE-ACTION WEYL RESPONSE = N_nonWilson / Z.
---
--- Fixed Haar gives
---
---   D_Weyl Z = - N_nonWilson.
---
--- With Gamma = -log Z and Z>0,
---
---   D_Weyl Gamma = - D_Weyl Z / Z = N_nonWilson / Z.
---
--- This is the quantitative normalization needed to compare a finite sector
--- margin with the explicit R109 remaining tail.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _<_; -_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _<_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
@@ -47,7 +32,7 @@ finiteGammaWeylIsNormalizedNonWilsonNumerator :
     (laws : Sign.RationalWeylSignIntegrationLaws measure)
     (partition : Partition.PhysicalFinitePartitionAuthority measure)
     (referenceFixed :
-      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ ℚ.0ℚ) →
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ) →
   Convention.matterEffectiveActionWeylResponse measure partition d
   ≡ normalizedNonWilsonWeylNumerator measure partition d
 finiteGammaWeylIsNormalizedNonWilsonNumerator
@@ -76,15 +61,15 @@ normalizedSectorMarginForcesFiniteGammaNegative :
     (laws : Sign.RationalWeylSignIntegrationLaws measure)
     (partition : Partition.PhysicalFinitePartitionAuthority measure)
     (referenceFixed :
-      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ ℚ.0ℚ)
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ)
     margin →
-  normalizedNonWilsonWeylNumerator measure partition d + margin < ℚ.0ℚ →
+  normalizedNonWilsonWeylNumerator measure partition d + margin < 0ℚ →
   Convention.matterEffectiveActionWeylResponse measure partition d + margin
-    < ℚ.0ℚ
+    < 0ℚ
 normalizedSectorMarginForcesFiniteGammaNegative
     measure d laws partition referenceFixed margin sectorMargin =
   subst
-    (λ value → value + margin < ℚ.0ℚ)
+    (λ value → value + margin < 0ℚ)
     (finiteGammaWeylIsNormalizedNonWilsonNumerator
       measure d laws partition referenceFixed)
     sectorMargin
