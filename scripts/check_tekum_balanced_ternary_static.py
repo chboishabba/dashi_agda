@@ -29,6 +29,15 @@ required = {
         'twoTritZeroPositiveInteger',
         'twoTritPositivePositiveInteger',
     ],
+    'DASHI/Algebra/BalancedTernaryRankReconstructionExact.agda': [
+        'rankWord',
+        'unrankWord',
+        'unrankRankWord',
+        'rankUnrankWord',
+        'rankToNatCode',
+        'natCodeStrictBound',
+        'pow3RightMatchesPow3',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': [
         'bf16ScaledExactFormat',
         'TaperedWidthAllocation',
@@ -108,4 +117,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: positional injectivity, rational semantics, finite 3^n carrier, dual p-adic cylinder naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: positional injectivity + rank reconstruction, rational semantics, dual p-adic cylinder naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
