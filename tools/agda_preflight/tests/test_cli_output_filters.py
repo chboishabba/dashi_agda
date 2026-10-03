@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from agda_preflight.cli import main
@@ -26,10 +27,8 @@ hole = ?
 
 def test_errors_only_hides_warnings_but_keeps_errors(tmp_path, capsys):
     path = noisy_module(tmp_path)
-
     status = main([str(path), "--root", str(tmp_path), "--errors-only"])
     output = capsys.readouterr().out
-
     assert status == 1
     assert "TSAGDA012" in output
     assert "TSAGDA008" not in output
@@ -38,12 +37,8 @@ def test_errors_only_hides_warnings_but_keeps_errors(tmp_path, capsys):
 
 def test_errors_only_filters_json_payload(tmp_path, capsys):
     path = noisy_module(tmp_path)
-
-    status = main(
-        [str(path), "--root", str(tmp_path), "--json", "--errors-only"]
-    )
+    status = main([str(path), "--root", str(tmp_path), "--json", "--errors-only"])
     output = capsys.readouterr().out
-
     assert status == 1
     assert '"TSAGDA012"' in output
     assert '"TSAGDA008"' not in output
@@ -52,10 +47,8 @@ def test_errors_only_filters_json_payload(tmp_path, capsys):
 
 def test_quiet_hides_warnings_but_keeps_errors(tmp_path, capsys):
     path = noisy_module(tmp_path)
-
     status = main([str(path), "--root", str(tmp_path), "--quiet"])
     output = capsys.readouterr().out
-
     assert status == 1
     assert "TSAGDA012" in output
     assert "TSAGDA008" not in output
@@ -64,10 +57,8 @@ def test_quiet_hides_warnings_but_keeps_errors(tmp_path, capsys):
 
 def test_quiet_success_is_silent(tmp_path, capsys):
     path = write_module(tmp_path, "Clean", "module Clean where\n")
-
     status = main([str(path), "--root", str(tmp_path), "--quiet"])
     output = capsys.readouterr().out
-
     assert status == 0
     assert output == ""
 
@@ -75,19 +66,38 @@ def test_quiet_success_is_silent(tmp_path, capsys):
 def test_quiet_snapshot_write_is_silent(tmp_path, capsys):
     path = write_module(tmp_path, "Clean", "module Clean where\n")
     snapshot = tmp_path / "api.json"
-
-    status = main(
-        [
-            str(path),
-            "--root",
-            str(tmp_path),
-            "--quiet",
-            "--write-api-snapshot",
-            str(snapshot),
-        ]
-    )
+    status = main([
+        str(path), "--root", str(tmp_path), "--quiet",
+        "--write-api-snapshot", str(snapshot),
+    ])
     output = capsys.readouterr().out
-
     assert status == 0
     assert snapshot.exists()
     assert output == ""
+
+
+def test_quiet_still_prints_requested_triage_delta(tmp_path, capsys):
+    path = write_module(tmp_path, "Clean", "module Clean where\n")
+    previous = tmp_path / "before.json"
+    previous.write_text(
+        json.dumps({"schema": "dashi-agda-preflight-triage-v1", "fingerprint": "old", "root_causes": []}),
+        encoding="utf-8",
+    )
+    status = main([
+        str(path), "--root", str(tmp_path), "--quiet",
+        "--compare-triage-summary", str(previous),
+    ])
+    output = capsys.readouterr().out
+    assert status == 0
+    assert "Δ since previous run" in output
+
+
+def test_only_kind_reports_when_filter_selects_nothing(tmp_path, capsys):
+    path = noisy_module(tmp_path)
+    status = main([
+        str(path), "--root", str(tmp_path),
+        "--only-kind", "receiver",
+    ])
+    output = capsys.readouterr().out
+    assert status == 1
+    assert "no receiver diagnostics" in output
