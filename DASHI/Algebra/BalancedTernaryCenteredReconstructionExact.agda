@@ -6,10 +6,18 @@ open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s⁻¹)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
-open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _-_; -_; _≤_)
+open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _-_; -_; _≤_; +≤+)
 import Data.Integer.Properties as ℤP
-open import Data.Integer.Solver using (module +-*-Solver) renaming (module +-*-Solver to ℤSolver)
-open ℤSolver using () renaming (solve to solveℤ; _:+_ to _ℤ+_; _:-_ to _ℤ-_; _:*_ to _ℤ*_; con to conℤ; _:=_ to _ℤ=_)
+import Data.Integer.Solver as IntSolver
+open IntSolver.+-*-Solver using ()
+  renaming
+    ( solve to solveℤ
+    ; _:+_ to _ℤ+_
+    ; _:-_ to _ℤ-_
+    ; _:*_ to _ℤ*_
+    ; con to conℤ
+    ; _:=_ to _ℤ=_
+    )
 open import Data.Fin.Base using (Fin; toℕ)
 import Data.Fin.Properties as FinP
 open import Data.Product using (_×_; _,_)
@@ -134,7 +142,7 @@ centeredValueLower {n} c =
     ℤ.- (+ (Positional.center n))
       ≡⟨ sym (ℤP.+-identityˡ (ℤ.- (+ (Positional.center n)))) ⟩
     (+ 0) ℤ.+ (ℤ.- (+ (Positional.center n)))
-      ≤⟨ ℤP.+-monoˡ-≤ (ℤ.- (+ (Positional.center n))) (ℤ.+≤+ z≤n) ⟩
+      ≤⟨ ℤP.+-monoˡ-≤ (ℤ.- (+ (Positional.center n))) (+≤+ z≤n) ⟩
     (+ (toℕ (rank c))) ℤ.+ (ℤ.- (+ (Positional.center n)))
       ∎
 
@@ -147,7 +155,7 @@ centeredValueUpper {n} c =
     centeredValue c
       ≤⟨ ℤP.+-monoˡ-≤
             (ℤ.- (+ (Positional.center n)))
-            (ℤ.+≤+ (rankNatAtMostTwiceCenter (rank c))) ⟩
+            (+≤+ (rankNatAtMostTwiceCenter (rank c))) ⟩
     (+ (2 * Positional.center n)) ℤ.- (+ (Positional.center n))
       ≡⟨ doubleCenterMinusCenter n ⟩
     + (Positional.center n)
