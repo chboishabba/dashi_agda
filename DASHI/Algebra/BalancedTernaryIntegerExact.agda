@@ -3,8 +3,11 @@ module DASHI.Algebra.BalancedTernaryIntegerExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.Integer using (ℤ; +_) renaming (_-_ to _-ℤ_)
+open import Data.Integer as ℤ using (ℤ; +_; -_; _+_) renaming (_-_ to _-ℤ_)
+import Data.Integer.Properties as ℤP
 open import Data.Vec using (Vec; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality.≡-Reasoning
 
 import DASHI.Algebra.Trit as Trit
 
@@ -68,6 +71,38 @@ eval-involution (t ∷ ts)
 toInteger : SignedWeight → ℤ
 toInteger w =
   (+ (positiveWeight w)) -ℤ (+ (negativeWeight w))
+
+------------------------------------------------------------------------
+-- The ledger swap is literal additive negation on the canonical integer
+-- interpretation.  This closes the semantic half of digitwise balanced-trit
+-- negation rather than leaving it only as a positive/negative-weight swap.
+------------------------------------------------------------------------
+
+toIntegerSwapSign :
+  (w : SignedWeight) →
+  toInteger (swapSign w) ≡ - (toInteger w)
+toIntegerSwapSign (signedWeight p n) =
+  begin
+    (+ n) -ℤ (+ p)
+  ≡⟨ refl ⟩
+    (+ n) ℤ.+ (- (+ p))
+  ≡⟨ ℤP.+-comm (+ n) (- (+ p)) ⟩
+    (- (+ p)) ℤ.+ (+ n)
+  ≡⟨ cong ((- (+ p)) ℤ.+_) (sym (ℤP.neg-involutive (+ n))) ⟩
+    (- (+ p)) ℤ.+ (- (- (+ n)))
+  ≡⟨ sym (ℤP.neg-distrib-+ (+ p) (- (+ n))) ⟩
+    - ((+ p) ℤ.+ (- (+ n)))
+  ≡⟨ refl ⟩
+    - ((+ p) -ℤ (+ n))
+  ∎
+
+toIntegerInvertWord :
+  ∀ {n} (ts : Vec Trit.Trit n) →
+  toInteger (eval (invertWord ts)) ≡ - (toInteger (eval ts))
+toIntegerInvertWord ts =
+  trans
+    (cong toInteger (eval-involution ts))
+    (toIntegerSwapSign (eval ts))
 
 pow3 : Nat → Nat
 pow3 zero = 1
