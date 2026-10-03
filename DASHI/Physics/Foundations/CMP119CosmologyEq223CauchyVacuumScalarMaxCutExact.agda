@@ -22,7 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; -_; _<_)
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Foundations.CMP119CosmologyEq223DiagonalCauchyMajorantExact as Cauchy
 import DASHI.Physics.Foundations.CMP119CosmologyEq223NegativeSectorDominanceExact as Dominance
