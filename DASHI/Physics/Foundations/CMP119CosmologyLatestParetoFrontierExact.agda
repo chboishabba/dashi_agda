@@ -15,6 +15,10 @@ open import Agda.Builtin.Nat using (Nat)
 -- R109 insertion pair as a real cylinder observable, with admissibility pinned
 -- to the published Wilson/OS predicates.  There is no independently chosen
 -- stress observable and no presentation-local admissibility vocabulary.
+-- The R109 pair carrier itself has no observable evaluator; the dedicated
+-- underdetermination theorem shows that the remaining leaf is exactly the
+-- source-semantics map from the published pair to a configuration-space real
+-- observable (or an equivalent same-object theorem).
 --
 -- Preferred finite->continuum sign transport uses the ACTUAL Round109 tail;
 -- no exact finite-cutoff = continuum R136 equality is charged.  The finite
@@ -25,7 +29,7 @@ open import Agda.Builtin.Nat using (Nat)
 data NovelReconstructionResidual : Set where
   e1-r144-canonical-b4-signed-readout-covariance-and-whole-lattice-attachment :
     NovelReconstructionResidual
-  e2e4-source-native-r109-pair-to-published-os-cylinder-presentation :
+  e2e4-source-native-r109-pair-semantics-evaluator :
     NovelReconstructionResidual
 
 data StandardOSBoundary : Set where
@@ -135,6 +139,12 @@ r109IndependentSelectedObservableStillPresentationData = false
 r109SelectedObservableDefinedFromLiteralInsertionPair : Bool
 r109SelectedObservableDefinedFromLiteralInsertionPair = true
 
+r109PairCarrierContainsSelectedObservableEvaluator : Bool
+r109PairCarrierContainsSelectedObservableEvaluator = false
+
+r109BarePairDeterminesUniqueObservableSemantics : Bool
+r109BarePairDeterminesUniqueObservableSemantics = false
+
 r109ArbitraryPositiveTimePredicateStillPresentationData : Bool
 r109ArbitraryPositiveTimePredicateStillPresentationData = false
 
@@ -146,6 +156,9 @@ r109PublishedOSAdmissibilityPredicatesPinned = true
 
 r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility : Bool
 r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility = true
+
+r109RemainingPhysicalLeafIsSourceSemanticsEvaluator : Bool
+r109RemainingPhysicalLeafIsSourceSemanticsEvaluator = true
 
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned : Bool
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned = true
