@@ -9,6 +9,13 @@ import sys
 from .checker import Checker, Diagnostic
 from .rules import api_snapshot, api_drift
 from .scope_backend import AgdaAutoRefineBackend, AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
+from .triage_render import (
+    build_triage,
+    render_compact,
+    render_grouped,
+    render_location,
+    render_verbose,
+)
 
 
 def _format(diag) -> str:
@@ -42,7 +49,7 @@ def main(argv=None) -> int:
         action="store_true",
         help="print affected modules in frontier order and exit",
     )
-    parser.add_argument("--json", action="store_true", help="emit JSON diagnostics")
+    parser.add_argument("--json", action="store_true", help="emit lossless JSON diagnostics")
     parser.add_argument(
         "--errors-only",
         action="store_true",
@@ -52,6 +59,49 @@ def main(argv=None) -> int:
         "--quiet",
         action="store_true",
         help="hide warnings and success chatter; errors are still printed",
+    )
+    presentation = parser.add_mutually_exclusive_group()
+    presentation.add_argument(
+        "--compact",
+        action="store_true",
+        help="one logical diagnostic per line plus root-cause summary",
+    )
+    presentation.add_argument(
+        "--verbose",
+        action="store_true",
+        help="show every raw diagnostic with full evidence metadata",
+    )
+    presentation.add_argument(
+        "--by-location",
+        action="store_true",
+        help="show merged logical diagnostics in source order",
+    )
+    presentation.add_argument(
+        "--by-cause",
+        action="store_true",
+        help="group human output by root cause (the default)",
+    )
+    parser.add_argument(
+        "--absolute-paths",
+        action="store_true",
+        help="show absolute paths in human output instead of repository-relative paths",
+    )
+    parser.add_argument(
+        "--only-kind",
+        choices=(
+            "receiver",
+            "arity",
+            "placeholder",
+            "type-value",
+            "parser",
+            "shadowing",
+            "rewrite",
+            "deprecated-api",
+            "agda-error",
+            "agda-warning",
+            "diagnostic",
+        ),
+        help="restrict human output to one actionability class; does not change exit status",
     )
     parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
     parser.add_argument("--api-baseline", type=Path, help="compare current exported API to a prior snapshot")
@@ -160,6 +210,7 @@ def main(argv=None) -> int:
         state = {}
         stack = []
         cycles = []
+
         def visit(node):
             state[node] = 1
             stack.append(node)
@@ -174,6 +225,7 @@ def main(argv=None) -> int:
                         cycles.append(cycle)
             stack.pop()
             state[node] = 2
+
         visit(start)
         for cycle in cycles:
             print(" -> ".join(cycle))
@@ -200,15 +252,30 @@ def main(argv=None) -> int:
 
     if not (args.quiet and not displayed):
         if args.json:
+            # JSON remains deliberately lossless: no sibling merging or display
+            # clustering. This keeps MCP/automation consumers stable.
             print(json.dumps([d.as_dict() for d in displayed], indent=2))
+        elif displayed:
+            report = build_triage(
+                displayed,
+                args.root,
+                absolute_paths=args.absolute_paths,
+                only_kind=args.only_kind,
+            )
+            if args.verbose:
+                print(render_verbose(report))
+            elif args.compact:
+                print(render_compact(report))
+            elif args.by_location:
+                print(render_location(report))
+            else:
+                # --by-cause is an explicit spelling of the default.
+                print(render_grouped(report))
         else:
-            for diag in displayed:
-                print(_format(diag))
-            if not displayed:
-                if args.errors_only:
-                    print("agda-preflight: no errors found")
-                else:
-                    print("agda-preflight: no high-confidence issues found")
+            if args.errors_only:
+                print("agda-preflight: no errors found")
+            else:
+                print("agda-preflight: no high-confidence issues found")
 
     return 1 if any(d.severity == "error" for d in diagnostics) else 0
 
