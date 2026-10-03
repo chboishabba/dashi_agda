@@ -339,8 +339,19 @@ def install_checker_boundary_rules(Checker) -> None:
             and not _term_is_equality_operand(summary, diagnostic)
         ]
 
-        additions = []
-        additions.extend(_lean_reverse_rewrite_diagnostics(summary))
+        reverse_rewrite = _lean_reverse_rewrite_diagnostics(summary)
+        reverse_lines = {diagnostic.line for diagnostic in reverse_rewrite}
+        if reverse_lines:
+            diagnostics = [
+                diagnostic
+                for diagnostic in diagnostics
+                if not (
+                    diagnostic.code == "TSAGDA000"
+                    and diagnostic.line in reverse_lines
+                )
+            ]
+
+        additions = list(reverse_rewrite)
         additions.extend(_fragile_rewrite_diagnostics(summary))
         additions.extend(_wrong_hiding_diagnostics(summary))
         additions.extend(_shadow_diagnostics(self, summary))
