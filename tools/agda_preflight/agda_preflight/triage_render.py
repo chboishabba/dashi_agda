@@ -167,10 +167,10 @@ def _cause_key(diagnostics: Sequence[object], kind: str, subject: str, message: 
     return (kind, subject, message)
 
 
-def _fingerprint(logical: Iterable[LogicalDiagnostic]) -> str:
+def _fingerprint(logical: Iterable[LogicalDiagnostic], root: Path) -> str:
     rows = sorted(
         (
-            item.display_path,
+            _display_path(item.path, root, False),
             str(item.line),
             str(item.column),
             item.severity,
@@ -246,7 +246,7 @@ def build_triage(
         diagnostics=tuple(diagnostics),
         selected_diagnostics=selected,
         logical=tuple(logical),
-        fingerprint=_fingerprint(logical),
+        fingerprint=_fingerprint(logical, root),
         absolute_paths=absolute_paths,
     )
 
