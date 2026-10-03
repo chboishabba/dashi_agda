@@ -1,18 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE4Round281Exact where
 
-------------------------------------------------------------------------
--- MARKED E4 ON THE SOURCE-NATIVE ROUND281 ROUTE.
---
--- The hard decay estimate is already owned by CMP116/Round279/281.  The only
--- stress-specific physical seam is an encoding of the selected Local-C stress
--- as the literal observable whose J-direction is consumed by Round281.
--- Once supplied, the selected stress covariance inherits the existing
--- geometric decay theorem definitionally; no new clustering estimate remains.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as LocalC
@@ -26,9 +15,8 @@ import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumu
 record LocalCStressRound281Selection
     {G X Configuration Position CurvaturePolynomial LocalOperator
      OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-     Scale Volume Root ContinuumFamily Core
-     sequenceLimit limitLaws quotient division S osInputs reconstruction group
-     Observable Scalar SourceDirection : Set}
+     Scale Volume Root ContinuumFamily Core Observable Scalar SourceDirection : Set}
+    {sequenceLimit limitLaws quotient division S osInputs reconstruction group}
     {algebra : Cumulant.TwoSourceMomentAlgebra Observable Scalar}
     {calculus : Cumulant.NormalizedLogSourceCalculus algebra}
     {published : R281.CMP116119PublishedTwoSourceLocalization Scale Volume Root}
@@ -54,16 +42,15 @@ open LocalCStressRound281Selection public
 selectedStressObservable :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-      Scale Volume Root ContinuumFamily Core
+      Scale Volume Root ContinuumFamily Core Observable Scalar SourceDirection
       sequenceLimit limitLaws quotient division S osInputs reconstruction group
-      Observable Scalar SourceDirection algebra calculus published meaning localC round281} →
+      algebra calculus published meaning localC round281} →
   LocalCStressRound281Selection
     {G} {X} {Configuration} {Position} {CurvaturePolynomial} {LocalOperator}
     {OPECoefficient} {StressTensor} {Hilbert} {Vector} {Hamiltonian} {Algebra}
-    {Scale} {Volume} {Root} {ContinuumFamily} {Core}
+    {Scale} {Volume} {Root} {ContinuumFamily} {Core} {Observable} {Scalar} {SourceDirection}
     {sequenceLimit} {limitLaws} {quotient} {division} {S}
     {osInputs} {reconstruction} {group}
-    {Observable} {Scalar} {SourceDirection}
     {algebra} {calculus} {published} {meaning}
     localC round281 →
   Observable
@@ -73,17 +60,16 @@ selectedStressObservable {localC = localC} selection =
 selectedStressSourceDirection :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-      Scale Volume Root ContinuumFamily Core
+      Scale Volume Root ContinuumFamily Core Observable Scalar SourceDirection
       sequenceLimit limitLaws quotient division S osInputs reconstruction group
-      Observable Scalar SourceDirection algebra calculus published meaning localC round281}
+      algebra calculus published meaning localC round281}
     (selection :
       LocalCStressRound281Selection
         {G} {X} {Configuration} {Position} {CurvaturePolynomial} {LocalOperator}
         {OPECoefficient} {StressTensor} {Hilbert} {Vector} {Hamiltonian} {Algebra}
-        {Scale} {Volume} {Root} {ContinuumFamily} {Core}
+        {Scale} {Volume} {Root} {ContinuumFamily} {Core} {Observable} {Scalar} {SourceDirection}
         {sequenceLimit} {limitLaws} {quotient} {division} {S}
         {osInputs} {reconstruction} {group}
-        {Observable} {Scalar} {SourceDirection}
         {algebra} {calculus} {published} {meaning}
         localC round281) →
   SourceDirection
@@ -93,17 +79,16 @@ selectedStressSourceDirection {meaning = meaning} selection =
 selectedStressGeometricClustering :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-      Scale Volume Root ContinuumFamily Core
+      Scale Volume Root ContinuumFamily Core Observable Scalar SourceDirection
       sequenceLimit limitLaws quotient division S osInputs reconstruction group
-      Observable Scalar SourceDirection algebra calculus published meaning localC round281}
+      algebra calculus published meaning localC round281}
     (selection :
       LocalCStressRound281Selection
         {G} {X} {Configuration} {Position} {CurvaturePolynomial} {LocalOperator}
         {OPECoefficient} {StressTensor} {Hilbert} {Vector} {Hamiltonian} {Algebra}
-        {Scale} {Volume} {Root} {ContinuumFamily} {Core}
+        {Scale} {Volume} {Root} {ContinuumFamily} {Core} {Observable} {Scalar} {SourceDirection}
         {sequenceLimit} {limitLaws} {quotient} {division} {S}
         {osInputs} {reconstruction} {group}
-        {Observable} {Scalar} {SourceDirection}
         {algebra} {calculus} {published} {meaning}
         localC round281)
     scale volume other →
@@ -144,17 +129,16 @@ record SelectedMarkedE4
 selectedMarkedE4 :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Vector Hamiltonian Algebra
-      Scale Volume Root ContinuumFamily Core
+      Scale Volume Root ContinuumFamily Core Observable Scalar SourceDirection
       sequenceLimit limitLaws quotient division S osInputs reconstruction group
-      Observable Scalar SourceDirection algebra calculus published meaning localC round281}
+      algebra calculus published meaning localC round281}
     (selection :
       LocalCStressRound281Selection
         {G} {X} {Configuration} {Position} {CurvaturePolynomial} {LocalOperator}
         {OPECoefficient} {StressTensor} {Hilbert} {Vector} {Hamiltonian} {Algebra}
-        {Scale} {Volume} {Root} {ContinuumFamily} {Core}
+        {Scale} {Volume} {Root} {ContinuumFamily} {Core} {Observable} {Scalar} {SourceDirection}
         {sequenceLimit} {limitLaws} {quotient} {division} {S}
         {osInputs} {reconstruction} {group}
-        {Observable} {Scalar} {SourceDirection}
         {algebra} {calculus} {published} {meaning}
         localC round281) →
   SelectedMarkedE4
