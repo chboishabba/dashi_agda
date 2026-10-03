@@ -7,6 +7,7 @@ import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as B
 import DASHI.Physics.Foundations.CMP119SymmetricWilsonGibbsAnchorConstructorExact as Anchor
 import DASHI.Physics.Foundations.CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerExact as FamilyCompiler
 import DASHI.Physics.Foundations.CMP119AntigravitySelectedMetricFamilyOrderedHaarClosureExact as Closure
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedWilsonGibbsMinimalAnchorExact as Minimal
 import DASHI.Physics.Foundations.CMP119AntigravityOrderedHaarStrictPositivityExact as Ordered
 import DASHI.Physics.Foundations.CMP119AntigravitySU2OrderedHaarTraceClosureExact as SU2Ordered
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTraceInsertionReductionExact as WilsonTrace
@@ -126,7 +127,7 @@ module _
     canonicalSourceDiagonalActiveSumNegative :
       (input : CanonicalSourceOrderedHaarTraceInput) →
       ∀ background →
-      Closure.Minimal.selectedDiagonalActiveSum
+      Minimal.selectedDiagonalActiveSum
         domain realization representation selected
         measureWeld wilsonInsertion
         background
