@@ -9,16 +9,23 @@ open import Agda.Builtin.Nat using (Nat)
 --
 -- One-point gravity uses Gamma = -log Z, hence D_Gamma = -DZ/Z.
 -- Marked E1 is one signed-B4 covariance theorem on the actual R144 ten-slot
--- readout.  Marked E2/E4 are one selected finite-stress-insertion presentation.
+-- readout.
+--
+-- Marked E2/E4 now use a FUNCTIONAL presentation of the selected source-native
+-- R109 insertion pair as a real cylinder observable, with admissibility pinned
+-- to the published Wilson/OS predicates.  There is no independently chosen
+-- stress observable and no presentation-local admissibility vocabulary.
 --
 -- Preferred finite->continuum sign transport uses the ACTUAL Round109 tail;
--- no exact finite-cutoff = continuum R136 equality is charged.
+-- no exact finite-cutoff = continuum R136 equality is charged.  The finite
+-- endpoint sequence is the literal pinned-family expectation of the SAME E2
+-- stress observable; no arbitrary `Nat -> Q` endpoint sequence remains.
 ------------------------------------------------------------------------
 
 data NovelReconstructionResidual : Set where
   e1-r144-canonical-b4-signed-readout-covariance-and-whole-lattice-attachment :
     NovelReconstructionResidual
-  e2e4-r109-stress-insertion-to-selected-real-cylinder-presentation :
+  e2e4-source-native-r109-pair-to-published-os-cylinder-presentation :
     NovelReconstructionResidual
 
 data StandardOSBoundary : Set where
@@ -30,9 +37,9 @@ data StandardAnalysisBoundary : Set where
 
 -- Preferred effective-action sign route.
 data PreferredSignResidual : Set where
-  r144-finite-dgamma-is-r109-absolute-expectation-sequence :
+  r144-finite-dgamma-to-same-pinned-r109-expectation-and-completion :
     PreferredSignResidual
-  eq223-combined-erb-vacuum-plus-r109-tail-margin :
+  eq223-source-native-metric-variation-strict-margin :
     PreferredSignResidual
 
 -- Alternate trace-anomaly route.
@@ -103,7 +110,10 @@ e1FirstVariationNaturalityIsProducerStrategy = true
 e1GenericR244ComponentCarrierIsOpaque : Bool
 e1GenericR244ComponentCarrierIsOpaque = true
 
--- E2/E4 no longer require an encoding of every stress value.
+------------------------------------------------------------------------
+-- E2/E4 reductions.
+------------------------------------------------------------------------
+
 e2NeedsNewGramPositivityEstimate : Bool
 e2NeedsNewGramPositivityEstimate = false
 
@@ -116,20 +126,26 @@ e2AndE4UseSamePinnedStressObservable = true
 allStressCylinderEncodingStillParetoPremise : Bool
 allStressCylinderEncodingStillParetoPremise = false
 
-selectedStressOnlyCylinderDataSufficeForE2E4 : Bool
-selectedStressOnlyCylinderDataSufficeForE2E4 = true
-
-r109FiniteStressInsertionPresentationIsSharedE2E4Leaf : Bool
-r109FiniteStressInsertionPresentationIsSharedE2E4Leaf = true
-
 r109ArbitraryObservableMeaningPredicateStillIndependent : Bool
 r109ArbitraryObservableMeaningPredicateStillIndependent = false
 
-r109InsertionIdentityNowDefinitionallyPinned : Bool
-r109InsertionIdentityNowDefinitionallyPinned = true
+r109IndependentSelectedObservableStillPresentationData : Bool
+r109IndependentSelectedObservableStillPresentationData = false
 
-r109RemainingCylinderDataAreObservablePositiveTimeAndGaugeAdmissibility : Bool
-r109RemainingCylinderDataAreObservablePositiveTimeAndGaugeAdmissibility = true
+r109SelectedObservableDefinedFromLiteralInsertionPair : Bool
+r109SelectedObservableDefinedFromLiteralInsertionPair = true
+
+r109ArbitraryPositiveTimePredicateStillPresentationData : Bool
+r109ArbitraryPositiveTimePredicateStillPresentationData = false
+
+r109ArbitraryGaugePredicateStillPresentationData : Bool
+r109ArbitraryGaugePredicateStillPresentationData = false
+
+r109PublishedOSAdmissibilityPredicatesPinned : Bool
+r109PublishedOSAdmissibilityPredicatesPinned = true
+
+r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility : Bool
+r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility = true
 
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned : Bool
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned = true
@@ -160,14 +176,19 @@ positiveEq223BalanceWouldGiveOppositeDGammaSign = true
 --
 --   D_Gamma,k^Weyl <= M_ERB + c_V.
 --
--- The preferred continuum route then pays the ACTUAL Round109 tail:
+-- The preferred continuum route pays the ACTUAL Round109 tail:
 --
 --   (M_ERB + c_V) + Tail_R109(k) < 0.
 --
 -- Round130/R136 already identify the completed four-direction R109 functional
--- with the literal R136 response.  The remaining same-object theorem is only
--- that the finite R144 D_Gamma values are the absolute R109 expectation
--- sequence to which the published Cauchy tail applies.
+-- with the literal R136 response.  The finite absolute endpoint is no longer an
+-- arbitrary sequence: it is
+--
+--   finiteExpectation (family osInputs group) k selectedR109StressObservable.
+--
+-- The remaining B1 same-object theorem is the quantitative attachment of the
+-- R144 finite D_Gamma/source value and R109 completion bound to that exact
+-- pinned-family sequence.
 eq223FiniteMeasureNormalizationStillInSignLeaf : Bool
 eq223FiniteMeasureNormalizationStillInSignLeaf = false
 
@@ -195,16 +216,35 @@ exactFiniteResponseEqualsR136WeldStillPreferredPremise = false
 preferredFiniteToContinuumUsesExplicitR109Tail : Bool
 preferredFiniteToContinuumUsesExplicitR109Tail = true
 
-preferredSameSequenceLeafIsR144FiniteDGammaToR109AbsoluteExpectation : Bool
-preferredSameSequenceLeafIsR144FiniteDGammaToR109AbsoluteExpectation = true
+r109RemainingTailAntitoneCompilerOwned : Bool
+r109RemainingTailAntitoneCompilerOwned = true
+
+negativeSourceTailBudgetPersistsAtLaterScales : Bool
+negativeSourceTailBudgetPersistsAtLaterScales = true
+
+preferredFiniteEndpointSequenceStillArbitrary : Bool
+preferredFiniteEndpointSequenceStillArbitrary = false
+
+preferredFiniteEndpointUsesSamePinnedFamilyAndE2Observable : Bool
+preferredFiniteEndpointUsesSamePinnedFamilyAndE2Observable = true
+
+preferredSameSequenceLeafIsConcreteR144R109CompletionAttachment : Bool
+preferredSameSequenceLeafIsConcreteR144R109CompletionAttachment = true
 
 eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail : Bool
 eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail = true
 
--- Primary-source asymptotics already give E/R/B analytic envelopes, with R
--- parametrically g^{kappa0}-small and B exponentially localized.  What is not
--- source-written yet is their calibration to the selected metric chart and a
--- sign/magnitude theorem for the selected vacuum Weyl coefficient c_V.
+-- Source-side no-go audit: raw Eq.(2.23) assembly fixes the E/R/B/V objects but
+-- the current realization interface supplies their metric variations separately.
+-- The same raw source admits different E/R/B Weyl traces and different vacuum
+-- coefficients.  Therefore Sect.-2 localization and object identity cannot by
+-- themselves manufacture the cosmological source sign.
+eq223RawSourceAloneFixesMetricTrace : Bool
+eq223RawSourceAloneFixesMetricTrace = false
+
+eq223SourceNativeMetricFamilyCalibrationStillRequired : Bool
+eq223SourceNativeMetricFamilyCalibrationStillRequired = true
+
 eq223SourceAnalyticERBEnvelopesLocated : Bool
 eq223SourceAnalyticERBEnvelopesLocated = true
 
