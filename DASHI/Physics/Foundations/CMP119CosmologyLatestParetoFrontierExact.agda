@@ -8,36 +8,44 @@ open import Agda.Builtin.Nat using (Nat)
 -- LIVE PARETO FRONTIER AFTER THE 2026-10-03 UNIVERSE-EXPANSION MAX-CUT.
 ------------------------------------------------------------------------
 
-data ReconstructionResidual : Set where
-  e1-signed-axis-action : ReconstructionResidual
-  e1-component-permutation-and-local-activity-covariance : ReconstructionResidual
-  e1-first-variation-naturality : ReconstructionResidual
-  e1-r133-transport-equivariance : ReconstructionResidual
-  e2-localc-stress-cylinder-encoding-and-admissibility : ReconstructionResidual
-  os-external-selected-e0-e3-e4-interpretation : ReconstructionResidual
-  os-standard-marked-reconstruction-authority : ReconstructionResidual
+-- Novel/source-facing DASHI reconstruction work.
+data NovelReconstructionResidual : Set where
+  e1-signed-axis-action : NovelReconstructionResidual
+  e1-component-permutation-and-local-activity-covariance : NovelReconstructionResidual
+  e1-first-variation-naturality : NovelReconstructionResidual
+  e1-r133-transport-equivariance : NovelReconstructionResidual
+  e2-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
 
--- Preferred source-facing sign route: Balaban's generated blocked action is
--- +D log(weight) oriented.  No Gamma=-log Z branch is charged here.
+-- These are imported-theorem interpretation/authority boundaries, not new
+-- analytic estimates to be reproved inside DASHI.
+data StandardOSBoundary : Set where
+  os-external-selected-e0-e3-e4-interpretation : StandardOSBoundary
+  os-standard-marked-reconstruction-authority : StandardOSBoundary
+
+-- Preferred source-facing sign route: Balaban generated blocked action is
+-- +D log(weight) oriented.
 data PreferredSignResidual : Set where
   r136-same-object-log-weight-weld : PreferredSignResidual
   eq223-positive-four-sector-balance : PreferredSignResidual
 
--- Sufficient source decomposition for the preferred positive four-sector
--- balance.  These two signs are stronger than necessary but source-literal.
+-- Source-literal sufficient condition for the preferred positive balance.
 data VacuumDominanceResidual : Set where
   eq223-vacuum-weyl-coefficient-positive : VacuumDominanceResidual
   eq223-erb-weighted-numerator-nonnegative : VacuumDominanceResidual
 
--- Alternate trace-anomaly route.  The strict real sign is already compiled;
--- what remains is same-object R136 identification plus order reflection if the
--- rational terminal consumer is used.
+-- Alternate trace-anomaly route.
 data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
   rational-order-reflection-if-rational-sign-required : AlternateAnomalyResidual
 
-reconstructionResidualCount : Nat
-reconstructionResidualCount = 7
+novelReconstructionResidualCount : Nat
+novelReconstructionResidualCount = 5
+
+standardOSBoundaryCount : Nat
+standardOSBoundaryCount = 2
+
+reconstructionInterfaceCount : Nat
+reconstructionInterfaceCount = 7
 
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
@@ -48,13 +56,19 @@ vacuumDominanceSufficientResidualCount = 2
 alternateAnomalyResidualCount : Nat
 alternateAnomalyResidualCount = 2
 
--- B0/B3 are internally selected semantics now; only the external OS theorem's
--- interpretation remains at the standard-import boundary.
+-- B0/B3 and E4 selected semantics are internally constructed; only external
+-- interpretation lives at the standard OS boundary.
 b0InternalBridgeStillArbitrary : Bool
 b0InternalBridgeStillArbitrary = false
 
 b3InternalBridgeStillArbitrary : Bool
 b3InternalBridgeStillArbitrary = false
+
+e4IndependentStressObservableSelectionStillExists : Bool
+e4IndependentStressObservableSelectionStillExists = false
+
+round281E4DecayWitnessCompilerOwnedFromSharedE2Observable : Bool
+round281E4DecayWitnessCompilerOwnedFromSharedE2Observable = true
 
 -- E1 reductions.
 e1GlobalPotentialCovarianceStillPrimitive : Bool
@@ -85,14 +99,8 @@ e2NeedsNewGramPositivityEstimate = false
 e4NeedsNewClusteringEstimate : Bool
 e4NeedsNewClusteringEstimate = false
 
-e4IndependentStressObservableSelectionStillExists : Bool
-e4IndependentStressObservableSelectionStillExists = false
-
 e2AndE4UseSamePinnedStressObservable : Bool
 e2AndE4UseSamePinnedStressObservable = true
-
-round281E4DecayWitnessCompilerOwnedFromSharedE2Observable : Bool
-round281E4DecayWitnessCompilerOwnedFromSharedE2Observable = true
 
 -- Wightman/terminal reconstruction has one stress object.
 independentTerminalWightmanHingeChoiceStillExists : Bool
@@ -133,8 +141,8 @@ traceAnomalyEmbeddedRealNegativityAutomaticallyGivesRationalNegativity = false
 traceAnomalyRationalSignNowCompilesToMatterAcceleration : Bool
 traceAnomalyRationalSignNowCompilesToMatterAcceleration = true
 
--- Older finite D_Gamma/R109 absolute-anchor machinery remains a valid alternate
--- consistency route, but is not charged to the preferred Balaban scheduler.
+-- Older finite D_Gamma/R109 absolute-anchor machinery is retained only as an
+-- alternate convention/consistency route.
 finiteGammaAbsoluteExpectationRouteIsPreferred : Bool
 finiteGammaAbsoluteExpectationRouteIsPreferred = false
 
