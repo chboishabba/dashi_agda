@@ -1,13 +1,15 @@
 module DASHI.ComputerScience.TekumSourceNegationExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (zero; suc; _+_)
 open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; -_)
-open import Data.Maybe.Base as Maybe using (just; nothing)
+open import Data.Maybe.Base as Maybe using (just; nothing; map)
 open import Data.Product using (_,_)
+open import Data.Vec using (Vec)
 open import Data.Vec.Base using (reverse)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
 import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
@@ -27,7 +29,7 @@ signOfIntegerNegation (+ (suc n)) = refl
 signOfIntegerNegation -[1+ n ] = refl
 
 signOfInvertWord :
-  ∀ {n} (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit n) →
+  ∀ {n} (word : Vec Trit.Trit n) →
   Source.signOfWord (BT.invertWord word)
   ≡ Anchor.flipSign (Source.signOfWord word)
 signOfInvertWord word =
@@ -36,7 +38,7 @@ signOfInvertWord word =
     (signOfIntegerNegation (BT.toInteger (BT.eval word)))
 
 signOfNegateWord :
-  ∀ {n} (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit n) →
+  ∀ {n} (word : Vec Trit.Trit n) →
   Source.signOfWord (Fixed.negateWord word)
   ≡ Anchor.flipSign (Source.signOfWord word)
 signOfNegateWord word =
@@ -50,14 +52,14 @@ signOfNegateWord word =
 
 anchorMSBNegationInvariant :
   ∀ {extra}
-  (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit (8 + extra)) →
+  (word : Vec Trit.Trit (8 + extra)) →
   Source.anchorMSB (Fixed.negateWord word) ≡ Source.anchorMSB word
 anchorMSBNegationInvariant word =
   cong reverse (Fixed.concreteAnchorNegationInvariant word)
 
 parseOrdinaryAnchorNegationInvariant :
   ∀ {extra}
-  (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit (8 + extra)) →
+  (word : Vec Trit.Trit (8 + extra)) →
   Source.parseOrdinaryAnchor (Fixed.negateWord word)
   ≡ Source.parseOrdinaryAnchor word
 parseOrdinaryAnchorNegationInvariant word =
@@ -69,7 +71,7 @@ parseOrdinaryAnchorNegationInvariant word =
 
 ordinaryParsedNegation :
   ∀ {extra r payload}
-  (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit (8 + extra))
+  (word : Vec Trit.Trit (8 + extra))
   (parsed : Source.ParsedPayload extra r payload) →
   Sem.ordinary (Source.ordinaryFromParsed (Fixed.negateWord word) parsed)
   ≡ Sem.negateTekumValue
@@ -87,7 +89,7 @@ ordinaryParsedNegation word parsed
 
 parseTekumWordNegation :
   ∀ {extra}
-  (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit (8 + extra)) →
+  (word : Vec Trit.Trit (8 + extra)) →
   Source.parseTekumWord (Fixed.negateWord word)
   ≡ Maybe.map Sem.negateTekumValue (Source.parseTekumWord word)
 parseTekumWordNegation word
