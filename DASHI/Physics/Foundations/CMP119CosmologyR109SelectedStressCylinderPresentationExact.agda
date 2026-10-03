@@ -19,6 +19,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
+import DASHI.Physics.Foundations.CMP119CosmologyR109FunctionalStressCylinderPresentationExact as Functional
 import DASHI.Physics.Foundations.CMP119CosmologySelectedLocalCStressCylinderExact as Selected
 import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
@@ -88,6 +89,53 @@ record R109SelectedStressCylinderPresentation
       WilsonOS.GaugeInvariant publishedOS selectedObservable
 
 open R109SelectedStressCylinderPresentation public
+
+fromFunctionalPresentation :
+  ∀ {C S Y group
+      G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient Hilbert Vector Hamiltonian Algebra
+      Scale Volume Root ContinuumFamily Core
+      sequenceLimit limitLaws quotient division osS osInputs reconstruction
+      localC} →
+  Functional.FunctionalR109StressCylinderPresentation
+    {C = C} {S = S} Y group
+    {G = G} {X = X} {Configuration = Configuration}
+    {Position = Position} {CurvaturePolynomial = CurvaturePolynomial}
+    {LocalOperator = LocalOperator} {OPECoefficient = OPECoefficient}
+    {Hilbert = Hilbert} {Vector = Vector}
+    {Hamiltonian = Hamiltonian} {Algebra = Algebra}
+    {Scale = Scale} {Volume = Volume} {Root = Root}
+    {ContinuumFamily = ContinuumFamily} {Core = Core}
+    {sequenceLimit = sequenceLimit} {limitLaws = limitLaws}
+    {quotient = quotient} {division = division}
+    {osS = osS} {osInputs = osInputs} {reconstruction = reconstruction}
+    localC →
+  R109SelectedStressCylinderPresentation
+    {C = C} {S = S} Y group
+    {G = G} {X = X} {Configuration = Configuration}
+    {Position = Position} {CurvaturePolynomial = CurvaturePolynomial}
+    {LocalOperator = LocalOperator} {OPECoefficient = OPECoefficient}
+    {Hilbert = Hilbert} {Vector = Vector}
+    {Hamiltonian = Hamiltonian} {Algebra = Algebra}
+    {Scale = Scale} {Volume = Volume} {Root = Root}
+    {ContinuumFamily = ContinuumFamily} {Core = Core}
+    {sequenceLimit = sequenceLimit} {limitLaws = limitLaws}
+    {quotient = quotient} {division = division}
+    {osS = osS} {osInputs = osInputs} {reconstruction = reconstruction}
+    localC
+fromFunctionalPresentation presentation = record
+  { provenance = Functional.provenance presentation
+  ; round109 = Functional.round109 presentation
+  ; completionMatches = Functional.completionMatches presentation
+  ; selectedObservable = Functional.selectedStressObservable presentation
+  ; StressInsertionObservableMeaning =
+      λ pair observable →
+        Functional.ordinaryObservableOfPair presentation pair ≡ observable
+  ; selectedObservablePresentsR110StressInsertion = refl
+  ; publishedOS = Functional.publishedOS presentation
+  ; selectedPositiveTime = Functional.selectedPositiveTime presentation
+  ; selectedGaugeInvariant = Functional.selectedGaugeInvariant presentation
+  }
 
 asSelectedLocalCStressCylinder :
   ∀ {C S Y group
@@ -179,6 +227,9 @@ selectedStressInsertionSemanticsStillPhysical = true
 
 functionalPairEvaluatorIsStrictlyStrongerInterface : Bool
 functionalPairEvaluatorIsStrictlyStrongerInterface = true
+
+functionalPresentationCompilesToSelectedPresentation : Bool
+functionalPresentationCompilesToSelectedPresentation = true
 
 publishedOSAdmissibilityPredicatesPinned : Bool
 publishedOSAdmissibilityPredicatesPinned = true
