@@ -14,6 +14,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyFiniteSectorMarginToExpansionMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyRealR136TraceReadoutBridgeExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyRealTraceToExpansionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCRealTraceSignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCAnomalyToExpansionMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyUniverseExpansionMaxCut20261003Exact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda'
@@ -61,6 +63,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyFiniteSectorMarginToExpansionMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyRealR136TraceReadoutBridgeExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyRealTraceToExpansionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCRealTraceSignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCAnomalyToExpansionMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyUniverseExpansionMaxCut20261003Exact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
