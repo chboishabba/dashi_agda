@@ -10,15 +10,20 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredA2SelectedReceiptAdapterExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003GExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003GTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144CanonicalB4ReadoutExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119CosmologyR109FunctionalStressCylinderPresentationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109SelectedStressCylinderPresentationExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119CosmologyR109WilsonAdmissibleStressCylinderExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119CosmologyConcreteFiniteR109RealCompletionExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteR109TailToR136Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR109PairObservableUnderdeterminationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR109AbsoluteExpectationAnchorNoGoExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109DirectTailAnchorExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyUnnormalizedSourceTailMarginExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyDirectTailFromSourceNumeratorExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyDirectSourceNumeratorTailToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyDirectSourceNumeratorTailToExpansionTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ERBMetricVariationUnderdeterminationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumMetricSignUnderdeterminationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerExact.agda'
@@ -51,7 +56,7 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore cache
         uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Typecheck preferred A1/A2/B1/B2 source max-cut and terminal route
+      - name: Typecheck final source-native preferred max-cut and terminal route
         shell: bash
         run: |
           nix develop --accept-flake-config --command bash -lc '
@@ -60,16 +65,18 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredA1CanonicalReceiptAdapterExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredA2SelectedReceiptAdapterExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2RouteExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003GExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144R109DirectTailAnchorExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyUnnormalizedSourceTailMarginExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyDirectTailFromSourceNumeratorExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyDirectSourceNumeratorTailToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyDirectSourceNumeratorTailToExpansionTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HTest.agda \
               DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerTest.agda \
               DASHI/Physics/Foundations/CMP119CanonicalSourceOrderedHaarTraceClosureExact.agda \
               DASHI/Physics/Foundations/CMP119CanonicalSourceOrderedHaarTraceClosureTest.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2TypedReceiptTest.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003GTest.agda
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2TypedReceiptTest.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
             done
