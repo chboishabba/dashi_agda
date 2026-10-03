@@ -7,10 +7,9 @@ open import Agda.Builtin.Nat using (Nat)
 ------------------------------------------------------------------------
 -- LIVE PARETO FRONTIER AFTER THE 2026-10-03 UNIVERSE-EXPANSION MAX-CUT.
 --
--- Sign correction: the one-point gravitational stress owner is R144's
--- effective-action response D_Gamma = - D Z / Z, not +D log Z.  Balaban's
--- blocked log-weight convention remains source-relevant, but it is not the
--- preferred gravitational one-point orientation.
+-- The one-point gravitational stress owner is R144's effective-action response
+-- D_Gamma = - D Z / Z, not +D log Z.  Balaban's blocked log-weight convention
+-- remains source-relevant, but is not the gravitational one-point orientation.
 ------------------------------------------------------------------------
 
 -- Novel/source-facing DASHI reconstruction work.
@@ -21,11 +20,15 @@ data NovelReconstructionResidual : Set where
   e1-r133-transport-equivariance : NovelReconstructionResidual
   e2-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
 
--- These are imported-theorem interpretation/authority boundaries, not new
--- analytic estimates to be reproved inside DASHI.
+-- Imported marked-OS interpretation/authority boundaries.
 data StandardOSBoundary : Set where
   os-external-selected-e0-e3-e4-interpretation : StandardOSBoundary
   os-standard-marked-reconstruction-authority : StandardOSBoundary
+
+-- Standard scalar-analysis authority.  Embedding-specific rational negativity
+-- reflection is now compiler output from rational trichotomy + this authority.
+data StandardAnalysisBoundary : Set where
+  real-strict-order-asymmetry : StandardAnalysisBoundary
 
 -- Preferred GRAVITATIONAL sign route.  R144 owns Gamma = -log Z, so negative
 -- R136 stress trace requires a negative Eq.(2.23) non-Wilson sector balance.
@@ -33,22 +36,23 @@ data PreferredSignResidual : Set where
   r136-same-object-effective-action-weld : PreferredSignResidual
   eq223-negative-four-sector-balance : PreferredSignResidual
 
--- One sufficient way to prove that negative balance.  The old
--- c_V>0 / ERB>=0 route proves the opposite D_Gamma sign and is therefore not
--- the preferred gravitational scheduler.
+-- A source estimate that would discharge the preferred balance directly.
 data NegativeBalanceResidual : Set where
   eq223-negative-balance-source-estimate : NegativeBalanceResidual
 
--- Alternate trace-anomaly route.
+-- Alternate anomaly route.  The order-reflection item is no longer a
+-- model-specific leaf; it is derived from StandardAnalysisBoundary above.
 data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
-  rational-order-reflection-if-rational-sign-required : AlternateAnomalyResidual
 
 novelReconstructionResidualCount : Nat
 novelReconstructionResidualCount = 5
 
 standardOSBoundaryCount : Nat
 standardOSBoundaryCount = 2
+
+standardAnalysisBoundaryCount : Nat
+standardAnalysisBoundaryCount = 1
 
 reconstructionInterfaceCount : Nat
 reconstructionInterfaceCount = 7
@@ -60,7 +64,7 @@ negativeBalanceResidualCount : Nat
 negativeBalanceResidualCount = 1
 
 alternateAnomalyResidualCount : Nat
-alternateAnomalyResidualCount = 2
+alternateAnomalyResidualCount = 1
 
 -- B0/B3 and E4 selected semantics are internally constructed; only external
 -- interpretation lives at the standard OS boundary.
@@ -76,7 +80,8 @@ e4IndependentStressObservableSelectionStillExists = false
 round281E4DecayWitnessCompilerOwnedFromSharedE2Observable : Bool
 round281E4DecayWitnessCompilerOwnedFromSharedE2Observable = true
 
--- E1 reductions.
+-- E1 reductions and firewall: Round103 leaves Tangent/Component opaque, so no
+-- canonical local Euclidean action is manufactured from carrier structure.
 e1GlobalPotentialCovarianceStillPrimitive : Bool
 e1GlobalPotentialCovarianceStillPrimitive = false
 
@@ -97,6 +102,9 @@ e1PlainTenSlotPermutationHandlesReflections = false
 
 e1SignedReflectionReadoutRequired : Bool
 e1SignedReflectionReadoutRequired = true
+
+e1Round103TangentAndComponentCarriersAreOpaque : Bool
+e1Round103TangentAndComponentCarriersAreOpaque = true
 
 -- E2/E4 reductions.
 e2NeedsNewGramPositivityEstimate : Bool
@@ -153,13 +161,16 @@ traceAnomalyAlternateRouteNeedsEq223SectorSign = false
 traceAnomalyAlternateRouteStillNeedsSameObjectWeld : Bool
 traceAnomalyAlternateRouteStillNeedsSameObjectWeld = true
 
-traceAnomalyEmbeddedRealNegativityAutomaticallyGivesRationalNegativity : Bool
-traceAnomalyEmbeddedRealNegativityAutomaticallyGivesRationalNegativity = false
+traceAnomalyEmbeddingSpecificOrderReflectionStillPhysical : Bool
+traceAnomalyEmbeddingSpecificOrderReflectionStillPhysical = false
+
+traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder : Bool
+traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder = true
 
 traceAnomalyRationalSignNowCompilesToMatterAcceleration : Bool
 traceAnomalyRationalSignNowCompilesToMatterAcceleration = true
 
--- The finite D_Gamma/R109 absolute-anchor machinery is now aligned with the
+-- The finite D_Gamma/R109 absolute-anchor machinery is aligned with the
 -- one-point gravitational convention and remains a valid competing producer B
 -- route.  It is not yet closed because the absolute tail anchor is still open.
 finiteGammaAbsoluteExpectationRouteIsConventionCorrect : Bool
