@@ -12,6 +12,8 @@ on:
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact.agda'
+      - 'DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda'
       - '.github/workflows/p-concrete-tape-determinism-agda.yml'
   pull_request:
     paths:
@@ -22,6 +24,8 @@ on:
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact.agda'
+      - 'DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda'
       - '.github/workflows/p-concrete-tape-determinism-agda.yml'
   workflow_dispatch:
 
@@ -45,3 +49,5 @@ jobs:
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/StandardSingleTapeMachineExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/ConcreteTapeStandardOneStepExact.agda
