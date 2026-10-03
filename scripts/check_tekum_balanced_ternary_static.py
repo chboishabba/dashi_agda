@@ -68,6 +68,12 @@ required = {
         'tekumPrecisionConjugatesToDual',
         'dualTwoStepComposition',
     ],
+    'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': [
+        'dualDropOneIsInit',
+        'toKernelInitNaturality',
+        'dualPrecisionTwoIsCylinderRefinementTwo',
+        'finiteNaturalityOnly',
+    ],
     'DASHI/ComputerScience/TekumTernaryStoredProgramExecutionExact.agda': [
         'regimeStorageRoundTrip',
         'ternaryExecutionMatchesNative',
@@ -102,4 +108,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: positional injectivity, rational semantics, finite 3^n carrier, dual p-adic chart, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: positional injectivity, rational semantics, finite 3^n carrier, dual p-adic cylinder naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
