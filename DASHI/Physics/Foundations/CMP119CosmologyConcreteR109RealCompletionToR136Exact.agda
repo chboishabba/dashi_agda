@@ -98,16 +98,7 @@ module _
   where
 
   module C = Concrete family source observable embedding
-  module S = SignCompiler family source observable
-    (record
-      { base = embedding
-      ; oneExact = oneExactPlaceholder
-      ; addExact = addExactPlaceholder
-      }) realOrder reflection
 
-  -- The pure-real route does not require additive embedding laws.  Construct a
-  -- local proof directly from the real completion inequality and reflect only
-  -- the final completed value's sign.
   concreteRealTailMarginForcesR136Negative :
     (anchor :
       C.ConcreteFiniteR109RealCompletion
@@ -127,13 +118,6 @@ module _
         (SignCompiler.weakThenStrict realOrder
           (C.completionUpperTail anchor start)
           marginNegative))
-
-  -- Dummy names below are intentionally unreachable: the pure-real theorem
-  -- above is the preferred compiler and requires no additive embedding.  They
-  -- keep no proof content and are not exported.
-  postulate
-    oneExactPlaceholder : Set
-    addExactPlaceholder : Set
 
 concreteRealCompletionToR136CompilerOwned : Bool
 concreteRealCompletionToR136CompilerOwned = true
