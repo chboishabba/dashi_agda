@@ -80,11 +80,11 @@ shared4096ScalarPaid =
 
 monsterFixedWidthBitDepth : Nat
 monsterFixedWidthBitDepth =
-  Depth.RadixDepthReceipt.upperExponent Depth.monsterBinaryDepthReceipt
+  Depth.upperExponent Depth.monsterBinaryDepthReceipt
 
 monsterFixedWidthTritDepth : Nat
 monsterFixedWidthTritDepth =
-  Depth.RadixDepthReceipt.upperExponent Depth.monsterTernaryDepthReceipt
+  Depth.upperExponent Depth.monsterTernaryDepthReceipt
 
 monsterFixedWidthBitDepthIs180 :
   monsterFixedWidthBitDepth ≡ 180
