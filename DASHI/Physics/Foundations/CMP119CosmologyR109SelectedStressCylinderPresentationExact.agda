@@ -4,21 +4,6 @@ module DASHI.Physics.Foundations.CMP119CosmologyR109SelectedStressCylinderPresen
 ------------------------------------------------------------------------
 -- TERMINAL SHARED E2/E4 PRODUCER:
 -- R110 FINITE STRESS INSERTION -> ONE SELECTED REAL CYLINDER OBSERVABLE.
---
--- Existing same-object chain:
---   R110 finite source-native stress insertion
---     -> R110 marked completion
---     -> Round109 completed marked stress
---     -> literal Clay stress
---     -> concrete Local-C stress.
---
--- The only missing presentation theorem is finite/observable:
---   the exact R110 `stressInsertion` pair is represented by one
---   `Configuration -> R` cylinder observable on the literal CMP119 family.
---
--- Positive-time and gauge admissibility are attached to THAT selected
--- observable.  The selected-only E2/E4 owner then supplies OS2 positivity and
--- Round281 clustering without an all-stress encoding family.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,6 +12,7 @@ open import Data.Product using (_×_; _,_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.Foundations.CMP119CosmologySelectedLocalCStressCylinderExact as Selected
+import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
 import DASHI.Physics.YangMills.BalabanStressSameObjectProvenanceRound110Exact as R110
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -62,8 +48,6 @@ record R109SelectedStressCylinderPresentation
       Round109.Round109ConcreteLocalCStressWeld
         Y group localC
 
-    -- The R110 finite insertion and the Round109->Local-C weld must refer to
-    -- the same marked completion, not merely isomorphic completion packages.
     completionMatches :
       R110.markedCompletion provenance
       ≡ Round109.completion round109
@@ -76,16 +60,16 @@ record R109SelectedStressCylinderPresentation
     selectedPositiveTime : PositiveTimeSupported selectedObservable
     selectedGaugeInvariant : GaugeInvariantObservable selectedObservable
 
-    -- Exact remaining finite-presentation seam.  The relation is source/model
-    -- specific because R109's LocalInsertionPair carrier is intentionally
-    -- abstract in the imported source ABI.
+    -- Exact remaining finite-presentation seam.  Its left endpoint is not the
+    -- whole Cauchy package but the literal selected R109 insertion pair.
     StressInsertionObservableMeaning :
-      R109.SourceNativeStressScaleCauchy →
+      Source.SourceNativeOrdinaryCharacteristicPair
+        (R109.source (R110.sourceCauchy provenance)) →
       (Configuration → ℝ) → Set
 
     selectedObservablePresentsR110StressInsertion :
       StressInsertionObservableMeaning
-        (R110.sourceCauchy provenance)
+        (R109.stressInsertion (R110.sourceCauchy provenance))
         selectedObservable
 
 open R109SelectedStressCylinderPresentation public
@@ -138,7 +122,8 @@ asSelectedLocalCStressCylinder {localC = localC} presentation = record
       λ stress observable →
         (stress ≡ LocalC.stressTensor localC)
         × StressInsertionObservableMeaning presentation
-            (R110.sourceCauchy (provenance presentation)) observable
+            (R109.stressInsertion
+              (R110.sourceCauchy (provenance presentation))) observable
   ; Selected.SelectedLocalCStressCylinder.selectedObservableMeansLocalCStress =
       refl , selectedObservablePresentsR110StressInsertion presentation
   }
@@ -171,8 +156,8 @@ sameCompletionEndpointAlreadyCarriesLocalCIdentity presentation =
 allStressEncodingFamilyEliminated : Bool
 allStressEncodingFamilyEliminated = true
 
-remainingE2E4NovelProducerIsFiniteStressInsertionPresentation : Bool
-remainingE2E4NovelProducerIsFiniteStressInsertionPresentation = true
+remainingE2E4NovelProducerIsExactR109InsertionPresentation : Bool
+remainingE2E4NovelProducerIsExactR109InsertionPresentation = true
 
 continuumStressIdentityIsNotASecondE2E4Leaf : Bool
 continuumStressIdentityIsNotASecondE2E4Leaf = true
