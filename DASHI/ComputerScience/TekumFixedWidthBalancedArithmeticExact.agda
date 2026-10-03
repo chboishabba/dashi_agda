@@ -19,6 +19,7 @@ import DASHI.Algebra.BalancedTernaryRankReconstructionExact as Rank
 import DASHI.Algebra.BalancedTernaryRankNegationExact as RankNeg
 import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact as Centered
 import DASHI.ComputerScience.TekumAnchorArithmeticExact as Anchor
+import DASHI.ComputerScience.TekumSourceAnchorCenterExact as SourceCenter
 
 ------------------------------------------------------------------------
 -- CYCLIC CARRY-DISCARD FIXED-WIDTH BACKEND
@@ -29,9 +30,9 @@ import DASHI.ComputerScience.TekumAnchorArithmeticExact as Anchor
 -- that discrepancy is isolated in TekumDefinition5ConsistencyExact and is NOT
 -- silently identified with this backend.
 --
--- The anchor only subtracts A_n from a modulus in [0,A_n], so it never enters
--- an overflow branch.  Hence this cyclic backend can instantiate the abstract
--- anchor arithmetic without resolving the Equation (1) / prose discrepancy.
+-- Definition 7 subtracts the alternating midpoint code 1T...1T, not the
+-- maximal positive code 11...1.  Because repository vectors are LST-first,
+-- SourceCenter.sourceAnchorCenterWord stores that source word as T1T1....
 ------------------------------------------------------------------------
 
 modulusSize : Nat → Nat
@@ -141,6 +142,8 @@ modulusNegateWord x
             (negateCentered (Centered.encodeCentered x))
         | modulusNegateCentered (Centered.encodeCentered x) = refl
 
+-- Maximum positive source code.  This remains useful for carrier/range proofs,
+-- but it is deliberately not the Definition 7 anchor midpoint.
 allPositiveWord : (n : Nat) → Vec Trit.Trit n
 allPositiveWord n = replicate n Trit.pos
 
@@ -151,7 +154,7 @@ tekumBalancedArithmetic n = record
   ; negate = negateWord
   ; modulus = modulusWord
   ; subtract = subtractWord
-  ; allOnes = allPositiveWord n
+  ; allOnes = SourceCenter.sourceAnchorCenterWord n
   ; modulusNegate = modulusNegateWord
   }
 
@@ -165,6 +168,14 @@ concreteAnchorNegationInvariant :
 concreteAnchorNegationInvariant {n} x =
   Anchor.anchorNegationInvariant (tekumBalancedArithmetic n) x
 
+-- Direct Definition-7 regression: the 4-trit source code 1T1T is stored
+-- LST-first as T1T1 and anchors to zero because it is the midpoint word.
+sourceMidpointAnchorsToZeroWidth4 :
+  concreteAnchor (SourceCenter.sourceAnchorCenterWord 4)
+  ≡ Trit.zer Data.Vec.∷ Trit.zer Data.Vec.∷
+    Trit.zer Data.Vec.∷ Trit.zer Data.Vec.∷ Data.Vec.[]
+sourceMidpointAnchorsToZeroWidth4 = refl
+
 oneTritPositivePlusPositiveWrapsNegative :
   addWord
     (Trit.pos Data.Vec.∷ Data.Vec.[])
@@ -177,9 +188,10 @@ record FixedWidthBackendBoundary : Set where
   field
     centeredBijectionReused : Bool
     carryDiscardCyclicArithmeticImplemented : Bool
+    sourceAlternatingAnchorMidpointImplemented : Bool
     printedDefinition5EquationIdentifiedWithCarryDiscard : Bool
     hostOverflowUsed : Bool
 
 canonicalFixedWidthBackendBoundary : FixedWidthBackendBoundary
 canonicalFixedWidthBackendBoundary =
-  fixedWidthBackendBoundary true true false false
+  fixedWidthBackendBoundary true true true false false
