@@ -14,7 +14,7 @@ open import Agda.Builtin.String using (String)
 -- Lean branch:
 --   agent/rh-marked-cluster-target-reflection
 -- Donor head at refresh:
---   e1d51ebb6de529da936ce947ace9fa97608c8670
+--   c93c941adad9925963412d90c3e271e1fa3b6c81
 --
 -- Paid in Lean source:
 --   * same-object uniform M0 envelope;
@@ -33,18 +33,25 @@ open import Agda.Builtin.String using (String)
 --   * literal arbitrary-endpoint RvM zero-count upper bound;
 --   * exact inverse-square finite-window <= N(A,B)/d^2 carrier weld;
 --   * positive-height left/right shell bounds and unconditional all-real
---     unit-window inverse-square bounds using the same literal Ncount carrier.
+--     unit-window inverse-square bounds using the same literal Ncount carrier;
+--   * dyadic half-height shell geometry and the exact numerical identity
+--       sum_k ((log t + 1) + k) 2^-k / t = (2 log t + 4) / t;
+--   * fail-closed compiler from one exact literal carrier-to-shell inequality
+--     to ThreeTapInverseSquareTailBound, with a harmless factor-four loss.
 --
 -- Fail-closed boundary:
---   the final normalized four-window determinant bookkeeping that consumes the
---   uniform pole-weight modulus has not been claimed as kernel-paid.  An
---   unchecked draft was removed rather than left in the tree.
+--   the normalized four-window determinant bookkeeping / uniform curvature is
+--   not claimed as kernel-paid, and the literal complementary zero carrier has
+--   not yet been partitioned and compared to the paid dyadic shell majorant.
+--   The unconditional regression therefore remains intentionally red until the
+--   carrier-to-shell theorem exists.  No exact-head Lean Actions receipt exists
+--   for the donor head recorded here.
 --
 -- Current analytic wall:
 --   finite determinant transport / fixed-width witness
 --     -> uniform oscillatory curvature
---     -> sum the now-explicit two-sided inverse-square unit/dyadic shell budget
---        to obtain the quantitative O(log t / t) literal zero tail
+--     -> literal complementary-zero carrier partition into paid unit/dyadic
+--        windows (all subsequent geometric/log series algebra is now paid)
 --     -> translated gamma+pole gain versus local slack.
 --
 -- Route B remains the independent eventual signed-correlation gap theorem.
@@ -114,7 +121,7 @@ currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
     "agent/rh-marked-cluster-target-reflection"
-    "e1d51ebb6de529da936ce947ace9fa97608c8670"
+    "c93c941adad9925963412d90c3e271e1fa3b6c81"
 
     true true true true true true true true true true true true true true
 
@@ -123,8 +130,8 @@ currentThreeTapCurrentLeanFrontier =
     refl refl refl refl refl refl refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl refl
 
-    "finite normalized four-window determinant transport from the paid uniform pole-weight modulus -> fixed-width witness -> uniform oscillatory curvature -> sum the source-written literal positive-height shell and all-real unit-window inverse-square bounds into threeTapInverseSquareZeroTailAfter(t,t/2) <= C log(t)/t -> translated gamma+pole gain versus local slack; after a one-scale PASS, use the already-owned finite mid-strip mesh compiler"
-    "Lean owns the real-analysis surface. Agda mirrors source-written status and provenance only; do not manufacture the missing determinant transport, curvature, shell summation, compensation-sign, or RH arguments here."
+    "finite normalized four-window determinant transport from the paid uniform pole-weight modulus -> fixed-width witness -> uniform oscillatory curvature; independently, prove the one remaining literal complementary-zero carrier-to-dyadic-shell inequality ThreeTapInverseSquareShellPartitionBound (the numerical dyadic sum and its compiler to O(log t/t) are already source-written); then prove translated gamma+pole gain versus local slack; after a one-scale PASS, use the already-owned finite mid-strip mesh compiler"
+    "Lean owns the real-analysis surface. Agda mirrors source-written status and provenance only; do not manufacture the missing determinant transport, curvature, carrier partition, compensation-sign, or RH arguments here."
     "Keep the signed fifth-cap route independent: prove eventual nonnegativity of signedFifthCorrelationGapAt and feed the common canonical terminal consumer."
 
 uniformPoleWeightEquicontinuityIsCurrent :
