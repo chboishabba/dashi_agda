@@ -20,6 +20,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109WilsonAdmissibleStressCylinderTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109FunctionalStressCylinderPresentationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109FunctionalStressCylinderPresentationTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR109PairObservableUnderdeterminationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressSharedE2E4ObservableExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109TailMonotonicityExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109TailMonotonicityTest.agda'
@@ -93,6 +94,7 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyR109WilsonAdmissibleStressCylinderTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR109FunctionalStressCylinderPresentationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR109FunctionalStressCylinderPresentationTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR109PairObservableUnderdeterminationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR109TailMonotonicityExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR109TailMonotonicityTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyConcreteFiniteR109RealCompletionExact.agda \
