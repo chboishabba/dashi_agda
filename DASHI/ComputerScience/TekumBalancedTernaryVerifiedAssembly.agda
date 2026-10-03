@@ -53,6 +53,7 @@ import DASHI.ComputerScience.TekumSourceNegationExact
 import DASHI.ComputerScience.TekumFormalPropertiesExact
 import DASHI.ComputerScience.TekumNegationExact
 import DASHI.ComputerScience.TekumUniquenessExact
+import DASHI.ComputerScience.TekumMonotoneMagnitudeExact
 import DASHI.ComputerScience.TekumMonotonicityExact
 import DASHI.ComputerScience.TekumTruncationRoundingExact
 import DASHI.ComputerScience.TekumProposition5CounterexampleExact
@@ -157,7 +158,7 @@ canonicalTekumVerifiedAssemblyBoundary =
     true true true true true true true true true
     true true true true true true true true false
     true
-    false true false false false true
+    true true false false false true
     true true true true
     true true true true false true true true true false
     true true true true
