@@ -4,9 +4,11 @@ from agda_preflight.checker import Diagnostic
 from agda_preflight.triage_render import (
     build_triage,
     render_compact,
+    render_delta,
     render_grouped,
     render_location,
     render_verbose,
+    triage_snapshot,
 )
 
 
@@ -63,6 +65,7 @@ def test_grouped_render_uses_relative_paths_and_merges_compatible_siblings(tmp_p
     assert "TSAGDA120/123" in output
     assert "Root causes" in output
     assert "fingerprint: preflight:" in output
+    assert "7 errors · 0 warnings" in output
 
 
 def test_compact_render_is_one_logical_issue_per_line(tmp_path):
@@ -126,3 +129,28 @@ def test_evidence_is_prominent_when_requirement_differs(tmp_path):
     output = render_grouped(build_triage(diagnostics, tmp_path))
 
     assert "evidence: dashi-index → requires agda-scope" in output
+
+
+def test_snapshot_and_delta_report_root_cause_changes(tmp_path):
+    before = build_triage(sample(tmp_path), tmp_path)
+    after_diagnostics = [
+        diagnostic
+        for diagnostic in sample(tmp_path)
+        if diagnostic.code != "TSAGDA204" or diagnostic.line != 396
+    ]
+    after = build_triage(after_diagnostics, tmp_path)
+
+    snapshot = triage_snapshot(before)
+    delta = render_delta(snapshot, after)
+
+    assert snapshot["fingerprint"] == before.fingerprint
+    assert "Δ since previous run" in delta
+    assert "-1" in delta
+    assert "unresolved proof placeholder" in delta
+
+
+def test_delta_reports_unchanged_fingerprint(tmp_path):
+    report = build_triage(sample(tmp_path), tmp_path)
+    delta = render_delta(triage_snapshot(report), report)
+
+    assert "no diagnostic changes" in delta
