@@ -53,6 +53,7 @@ _TREE_ONLY = {
     "TSAGDA012",  # interaction hole
     "TSAGDA013",  # raw underscore in exported signature
     "TSAGDA061",  # duplicate record assignment
+    "TSAGDA090",  # qualified field in record construction
     "TSAGDA150",  # fixity references unknown local declaration
     "TSAGDA151",  # conflicting fixity
     "TSAGDA152",  # local mixfix hole count
