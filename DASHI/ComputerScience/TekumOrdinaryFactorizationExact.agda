@@ -6,9 +6,9 @@ open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _*_)
 import Data.Integer.Properties as ℤP
 open import Data.Nat.Base using (NonZero)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Base as ℚ using (ℚ; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Unnormalised.Base as ℚᵘ using (ℚᵘ; _/_; _*_; _≃_; *≡*)
+open import Data.Rational.Unnormalised.Base as ℚᵘ using (ℚᵘ; _/_; _+_; _*_; _≃_; *≡*)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
 open import Data.Vec using (Vec)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -26,17 +26,6 @@ import DASHI.ComputerScience.TekumTriadicScaleExact as Scale
 
 ------------------------------------------------------------------------
 -- SAME-OBJECT ORDINARY FACTORISATION
---
--- The literal parser decoder has already been exposed as
---
---   s ((3^p + I(F)) 3^{e+}) / 3^{e-+p}.
---
--- This owner proves, first in the unnormalised rational setoid, that this is
--- exactly the source product
---
---   s ((3^p + I(F))/3^p) * 3^e.
---
--- Canonical ℚ equality is obtained only afterwards through fromℚᵘ-cong.
 ------------------------------------------------------------------------
 
 balancedPow3Add :
@@ -81,6 +70,14 @@ sourceUnsignedSignificandInteger parsed =
   (+ (BT.pow3 (sourceFractionWidth parsed)))
   ℤ.+ BT.toInteger (BT.eval (Source.fractionLST parsed))
 
+rawUnsignedSourceSignificand :
+  ∀ {extra r payload} →
+  Source.ParsedPayload extra r payload → ℚᵘ
+rawUnsignedSourceSignificand parsed =
+  let instance denominatorNonZero = balancedPow3NonZero (sourceFractionWidth parsed)
+  in sourceUnsignedSignificandInteger parsed
+     ℚᵘ./ BT.pow3 (sourceFractionWidth parsed)
+
 rawSourceSignificand :
   ∀ {extra r payload} →
   Vec Trit.Trit (8 + extra) →
@@ -117,10 +114,6 @@ rawParsedExact word parsed =
   let instance denominatorNonZero = Coordinates.parsedSourceDenominatorNonZero parsed
   in Coordinates.parsedSourceNumerator word parsed
      ℚᵘ./ Coordinates.parsedSourceDenominator parsed
-
-------------------------------------------------------------------------
--- The only case distinction is the signed exponent representation.
-------------------------------------------------------------------------
 
 parsedOrdinaryRawFactorization :
   ∀ {extra r payload}
@@ -165,9 +158,7 @@ parsedOrdinaryRawFactorization {extra} {r} word parsed
   ℚᵘ.*≡* refl
 
 ------------------------------------------------------------------------
--- Transport the literal raw product into canonical ℚ without normalisation
--- guesswork.  The proof uses only the standard toℚᵘ multiplication
--- homomorphism and the canonical/raw roundtrip equivalence.
+-- Generic canonical/raw transport for addition and multiplication.
 ------------------------------------------------------------------------
 
 fromRawProduct :
@@ -177,37 +168,42 @@ fromRawProduct :
 fromRawProduct p q =
   ℚP.toℚᵘ-injective proof
   where
-  leftToRaw :
-    ℚ.toℚᵘ (ℚ.fromℚᵘ (p ℚᵘ.* q)) ℚᵘ.≃ (p ℚᵘ.* q)
   leftToRaw = ℚP.toℚᵘ-fromℚᵘ (p ℚᵘ.* q)
-
-  pToRaw : ℚ.toℚᵘ (ℚ.fromℚᵘ p) ℚᵘ.≃ p
   pToRaw = ℚP.toℚᵘ-fromℚᵘ p
-
-  qToRaw : ℚ.toℚᵘ (ℚ.fromℚᵘ q) ℚᵘ.≃ q
   qToRaw = ℚP.toℚᵘ-fromℚᵘ q
-
-  factorsToRaw :
-    (ℚ.toℚᵘ (ℚ.fromℚᵘ p) ℚᵘ.* ℚ.toℚᵘ (ℚ.fromℚᵘ q))
-    ℚᵘ.≃ (p ℚᵘ.* q)
   factorsToRaw = ℚᵘP.*-cong pToRaw qToRaw
-
-  canonicalProductToFactors :
-    ℚ.toℚᵘ (ℚ.fromℚᵘ p ℚ.* ℚ.fromℚᵘ q)
-    ℚᵘ.≃
-    (ℚ.toℚᵘ (ℚ.fromℚᵘ p) ℚᵘ.* ℚ.toℚᵘ (ℚ.fromℚᵘ q))
   canonicalProductToFactors =
     ℚP.toℚᵘ-homo-* (ℚ.fromℚᵘ p) (ℚ.fromℚᵘ q)
-
-  proof :
-    ℚ.toℚᵘ (ℚ.fromℚᵘ (p ℚᵘ.* q))
-    ℚᵘ.≃
-    ℚ.toℚᵘ (ℚ.fromℚᵘ p ℚ.* ℚ.fromℚᵘ q)
   proof =
     ℚᵘP.≃-trans leftToRaw
       (ℚᵘP.≃-trans
         (ℚᵘP.≃-sym factorsToRaw)
         (ℚᵘP.≃-sym canonicalProductToFactors))
+
+fromRawSum :
+  (p q : ℚᵘ) →
+  ℚ.fromℚᵘ (p ℚᵘ.+ q)
+  ≡ ℚ.fromℚᵘ p ℚ.+ ℚ.fromℚᵘ q
+fromRawSum p q =
+  ℚP.toℚᵘ-injective proof
+  where
+  leftToRaw = ℚP.toℚᵘ-fromℚᵘ (p ℚᵘ.+ q)
+  pToRaw = ℚP.toℚᵘ-fromℚᵘ p
+  qToRaw = ℚP.toℚᵘ-fromℚᵘ q
+  factorsToRaw = ℚᵘP.+-cong pToRaw qToRaw
+  canonicalSumToFactors =
+    ℚP.toℚᵘ-homo-+ (ℚ.fromℚᵘ p) (ℚ.fromℚᵘ q)
+  proof =
+    ℚᵘP.≃-trans leftToRaw
+      (ℚᵘP.≃-trans
+        (ℚᵘP.≃-sym factorsToRaw)
+        (ℚᵘP.≃-sym canonicalSumToFactors))
+
+canonicalUnsignedSignificand :
+  ∀ {extra r payload} →
+  Source.ParsedPayload extra r payload → ℚ
+canonicalUnsignedSignificand parsed =
+  ℚ.fromℚᵘ (rawUnsignedSourceSignificand parsed)
 
 canonicalSignedSignificand :
   ∀ {extra r payload} →
