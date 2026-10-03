@@ -23,6 +23,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyEq223DirectTailThresholdToR136Ex
 import DASHI.Physics.Foundations.CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact as Envelope
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumTailThresholdExact as Threshold
+import DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact as Typed
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
 import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
@@ -170,8 +171,39 @@ module _
       (D.directVacuumThresholdForcesNegativeR136
         start anchor envelope threshold)
 
+  directTypedVacuumThresholdForcesPositiveMatterAcceleration :
+    (start : Nat)
+    (anchor :
+      Direct.DirectR144R109TailAnchor
+        embedding r109Source completedResponse
+        (D.F.finiteEffectiveActionWeyl) start)
+    (envelope : E.CombinedERBTraceEnvelope)
+    (threshold :
+      Typed.B2Eq223LiteralVacuumThresholdReceipt
+        (E.combinedUpper envelope)
+        (Eq223.eq223VacuumTraceCoefficient sourceVariation)
+        (Tail.r109RemainingTail r109Source start))
+    (root : Root.MarkedStressOSMaxCutRoot recovery selected directions localC)
+    (positiveGravityFactor : ℚ) →
+    0ℚ < positiveGravityFactor →
+    0ℚ <
+      Vacuum.matterAccelerationContribution
+        positiveGravityFactor
+        (Terminal.lorentzianIsotropicStress
+          (Root.reconstructedTerminalConsequences
+            recovery selected directions localC root))
+  directTypedVacuumThresholdForcesPositiveMatterAcceleration
+      start anchor envelope threshold root positiveGravityFactor factorPositive =
+    directVacuumThresholdForcesPositiveMatterAcceleration
+      start anchor envelope
+      (Typed.vacuumBelowRequiredUpper threshold)
+      root positiveGravityFactor factorPositive
+
 directPreferredConsumerCompilesToMatterAcceleration : Bool
 directPreferredConsumerCompilesToMatterAcceleration = true
+
+typedPreferredB2ReceiptCompilesToMatterAcceleration : Bool
+typedPreferredB2ReceiptCompilesToMatterAcceleration = true
 
 directPreferredExpansionNeedsFiniteFamilyOrObservable : Bool
 directPreferredExpansionNeedsFiniteFamilyOrObservable = false
