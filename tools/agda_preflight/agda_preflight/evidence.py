@@ -24,6 +24,8 @@ class DiagnosticPolicy:
     description: str = ""
 
 
+# Default policy is intentionally conservative: an unclassified diagnostic may
+# be emitted from the DASHI structural index, but not from raw syntax alone.
 _DEFAULT_POLICY = DiagnosticPolicy(
     EvidenceLevel.DASHI_INDEX,
     True,
@@ -36,9 +38,12 @@ def _policy(
     hard: bool = True,
     description: str = "",
 ) -> DiagnosticPolicy:
+    """Build one explicit evidence contract."""
+
     return DiagnosticPolicy(minimum, hard, description)
 
 
+# Diagnostics that are sound from concrete syntax alone.
 _TREE_ONLY = {
     "TSAGDA000", "TSAGDA004", "TSAGDA005", "TSAGDA006", "TSAGDA007",
     "TSAGDA010", "TSAGDA011", "TSAGDA012", "TSAGDA013", "TSAGDA061",
@@ -49,6 +54,7 @@ _TREE_ONLY = {
 }
 
 
+# Cross-node/module facts that the structural index can establish rigidly.
 _INDEX_SAFE = {
     "TSAGDA001", "TSAGDA002", "TSAGDA003",
     "TSAGDA008", "TSAGDA009",
@@ -68,33 +74,37 @@ _INDEX_SAFE = {
     "TSAGDA180", "TSAGDA181", "TSAGDA182", "TSAGDA183", "TSAGDA184",
     "TSAGDA185", "TSAGDA186", "TSAGDA200", "TSAGDA202", "TSAGDA203",
     "TSAGDA205", "TSAGDA206", "TSAGDA207", "TSAGDA208",
-    # Tree/index can predict constructor shadowing from an explicit imported
-    # constructor table. Agda may later emit the same public code with stronger
-    # agda-scope evidence.
+    # A non-open imported constructor is only reachable through its alias, so
+    # an unqualified same-basename token on a recognized clause LHS is a binder
+    # shadow, not a constructor occurrence. Agda can later confirm the same
+    # public TSAGDA300 code with stronger evidence.
     "TSAGDA300",
 }
 
 
+# Scope-dependent suspicions remain advisory until Agda resolves names/layout.
 _SCOPE_REQUIRED = {
     "TSAGDA021", "TSAGDA022", "TSAGDA023", "TSAGDA024", "TSAGDA025",
     "TSAGDA026", "TSAGDA027", "TSAGDA055", "TSAGDA084", "TSAGDA113",
     "TSAGDA154",
-    # Whether a qualified projection has a receiver can depend on the precise
-    # application tree produced for qualified/mixfix syntax. Keep structural
-    # sightings useful, but require Agda-resolved scope before making them hard.
+    # Qualified projection application trees are a known tree-sitter boundary:
+    # `Render.klein R` can be accepted by Agda while the tree view detaches R.
     "TSAGDA049", "TSAGDA052",
 }
 
 
+# These conclusions are typing judgments, not safe syntax/index facts.
 _TYPECHECK_REQUIRED: Set[str] = {
     "TSAGDA040", "TSAGDA041", "TSAGDA045", "TSAGDA072", "TSAGDA075",
     "TSAGDA076", "TSAGDA110", "TSAGDA114",
-    # A proof-shaped RHS can legitimately inhabit a result whose equality
-    # nature is hidden behind an alias/projection. That is a typing judgment.
+    # Proof-shaped RHS values can inhabit equality results hidden by aliases or
+    # projections; deciding that they are the wrong kind of value needs typing.
     "TSAGDA104",
 }
 
 
+# Pure projections of native Agda diagnostics that have no structural producer.
+# TSAGDA300 is intentionally absent: it now has both index and native sources.
 _AGDA_NATIVE = {
     "TSAGDA301",  # RewritesNothing
     "TSAGDA302",  # UserWarning/deprecation
@@ -124,6 +134,8 @@ _ALIAS_TO_CANONICAL.update({
 
 
 def canonical_code(code: str) -> str:
+    """Collapse compatibility aliases for triage without changing emission."""
+
     return _ALIAS_TO_CANONICAL.get(code, code)
 
 
@@ -161,7 +173,13 @@ for code in _AGDA_NATIVE:
 
 
 def policy_for(code: str) -> DiagnosticPolicy:
-    """Return the explicit evidence contract for CODE."""
+    """Return the explicit evidence contract for CODE.
+
+    New diagnostics must be classified deliberately. Falling back silently is
+    exactly how an unsafe structural heuristic can accidentally become a hard
+    error, so an unclassified code is a programming error.
+    """
+
     try:
         return DIAGNOSTIC_POLICIES[code]
     except KeyError as exc:
@@ -171,6 +189,8 @@ def policy_for(code: str) -> DiagnosticPolicy:
 
 
 def classify_codes(codes: Iterable[str]) -> Mapping[EvidenceLevel, Set[str]]:
+    """Group diagnostic codes by minimum evidence layer."""
+
     grouped: Dict[EvidenceLevel, Set[str]] = {}
     for code in codes:
         grouped.setdefault(policy_for(code).minimum, set()).add(code)
@@ -178,6 +198,8 @@ def classify_codes(codes: Iterable[str]) -> Mapping[EvidenceLevel, Set[str]]:
 
 
 def evidence_name(level: EvidenceLevel) -> str:
+    """Return the stable serialized name for an evidence level."""
+
     return {
         EvidenceLevel.TREE_SITTER: "tree-sitter",
         EvidenceLevel.DASHI_INDEX: "dashi-index",
