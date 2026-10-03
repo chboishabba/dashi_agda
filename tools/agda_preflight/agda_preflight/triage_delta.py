@@ -2,9 +2,17 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 from typing import Any
 
 from .triage_render import TriageReport, _cause_groups, _cause_label, _code_label
+
+
+def _stable_path(path: Path, root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(root.resolve()))
+    except (ValueError, OSError):
+        return str(path)
 
 
 def _signature(path: str, cause_key: tuple[str, ...]) -> str:
@@ -16,10 +24,11 @@ def triage_snapshot(report: TriageReport) -> dict[str, Any]:
     causes = []
     for group in _cause_groups(report.logical):
         first = group[0]
+        path = _stable_path(first.path, report.root)
         causes.append(
             {
-                "signature": _signature(first.display_path, first.cause_key),
-                "path": first.display_path,
+                "signature": _signature(path, first.cause_key),
+                "path": path,
                 "kind": first.kind,
                 "label": _cause_label(group),
                 "codes": _code_label(group),
