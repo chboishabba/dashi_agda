@@ -10,6 +10,9 @@ open import Agda.Builtin.Nat using (Nat)
 -- One-point gravity uses Gamma = -log Z, hence D_Gamma = -DZ/Z.
 -- Marked E1 is one signed-B4 covariance theorem on the actual R144 ten-slot
 -- readout.  Marked E2/E4 are one selected finite-stress-insertion presentation.
+--
+-- Preferred finite->continuum sign transport uses the ACTUAL Round109 tail;
+-- no exact finite-cutoff = continuum R136 equality is charged.
 ------------------------------------------------------------------------
 
 data NovelReconstructionResidual : Set where
@@ -27,8 +30,9 @@ data StandardAnalysisBoundary : Set where
 
 -- Preferred effective-action sign route.
 data PreferredSignResidual : Set where
-  r136-same-object-effective-action-weld : PreferredSignResidual
-  eq223-combined-erb-envelope-and-vacuum-scalar-margin :
+  r144-finite-dgamma-is-r109-absolute-expectation-sequence :
+    PreferredSignResidual
+  eq223-combined-erb-vacuum-plus-r109-tail-margin :
     PreferredSignResidual
 
 -- Alternate trace-anomaly route.
@@ -152,18 +156,18 @@ preferredNegativeR136NeedsNegativeEq223Balance = true
 positiveEq223BalanceWouldGiveOppositeDGammaSign : Bool
 positiveEq223BalanceWouldGiveOppositeDGammaSign = true
 
--- The terminal Eq.(2.23) source coordinate is now one UNIFORM upper envelope
--- on the already-combined four-diagonal E+R+B trace,
+-- Quantitative finite source compiler:
 --
---   E_diag4(U) + R_diag4(U) + B_diag4(U) <= M_ERB,
+--   D_Gamma,k^Weyl <= M_ERB + c_V.
 --
--- plus the one scalar source inequality
+-- The preferred continuum route then pays the ACTUAL Round109 tail:
 --
---   M_ERB < - c_V.
+--   (M_ERB + c_V) + Tail_R109(k) < 0.
 --
--- The older three sectorwise Cauchy constants remain a producer strategy and
--- compile to this combined envelope.  Positive Haar integration, normalization,
--- four-diagonal arithmetic and the common density factor are compiler-owned.
+-- Round130/R136 already identify the completed four-direction R109 functional
+-- with the literal R136 response.  The remaining same-object theorem is only
+-- that the finite R144 D_Gamma values are the absolute R109 expectation
+-- sequence to which the published Cauchy tail applies.
 eq223FiniteMeasureNormalizationStillInSignLeaf : Bool
 eq223FiniteMeasureNormalizationStillInSignLeaf = false
 
@@ -182,11 +186,20 @@ eq223ThreeUniformDiagonalCauchyCalibrationsRemainProducerStrategy = true
 eq223CombinedERBEnvelopeIsTerminalSourceCoordinate : Bool
 eq223CombinedERBEnvelopeIsTerminalSourceCoordinate = true
 
-eq223ScalarVacuumMarginRemains : Bool
-eq223ScalarVacuumMarginRemains = true
+eq223FiniteEffectiveActionUpperBoundCompilerOwned : Bool
+eq223FiniteEffectiveActionUpperBoundCompilerOwned = true
 
-eq223PreferredScalarMarginHasShapeCombinedERBBelowMinusCV : Bool
-eq223PreferredScalarMarginHasShapeCombinedERBBelowMinusCV = true
+exactFiniteResponseEqualsR136WeldStillPreferredPremise : Bool
+exactFiniteResponseEqualsR136WeldStillPreferredPremise = false
+
+preferredFiniteToContinuumUsesExplicitR109Tail : Bool
+preferredFiniteToContinuumUsesExplicitR109Tail = true
+
+preferredSameSequenceLeafIsR144FiniteDGammaToR109AbsoluteExpectation : Bool
+preferredSameSequenceLeafIsR144FiniteDGammaToR109AbsoluteExpectation = true
+
+eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail : Bool
+eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail = true
 
 -- Primary-source asymptotics already give E/R/B analytic envelopes, with R
 -- parametrically g^{kappa0}-small and B exponentially localized.  What is not
