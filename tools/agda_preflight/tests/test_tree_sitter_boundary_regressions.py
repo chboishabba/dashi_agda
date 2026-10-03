@@ -134,7 +134,34 @@ walk (pair ∷ pairs) = pair ∷ walk pairs
     assert hits
     assert all(d.severity == "warning" for d in hits)
     assert all(d.evidence == "dashi-index" for d in hits)
-    assert {d.line for d in hits} == {9, 13}
+    assert {d.line for d in hits} == {10, 14}
     assert all("Cube.pair" in d.message for d in hits)
     # Constructor use itself is not a binder shadow.
-    assert not any(d.line == 6 for d in hits)
+    assert not any(d.line == 7 for d in hits)
+
+
+def test_opened_constructor_is_not_guessed_to_be_a_shadowing_binder(tmp_path):
+    write_module(
+        tmp_path,
+        "OpenedCube",
+        """module OpenedCube where
+
+data Pair (A B : Set) : Set where
+  pair : A → B → Pair A B
+""",
+    )
+    path = write_module(
+        tmp_path,
+        "OpenedUse",
+        """module OpenedUse where
+
+open import OpenedCube
+
+first : {A B : Set} → Pair A B → A
+first (pair a b) = a
+""",
+    )
+
+    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA300"]
+
+    assert hits == []
