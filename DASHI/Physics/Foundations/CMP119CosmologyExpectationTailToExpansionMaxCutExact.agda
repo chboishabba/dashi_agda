@@ -16,12 +16,13 @@ module DASHI.Physics.Foundations.CMP119CosmologyExpectationTailToExpansionMaxCut
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_; _+_)
-open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst)
 
 import DASHI.Physics.Foundations.CMP119CosmologyR144R109ExpectationCompletionMaxCutExact as Completion
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact as Vacuum
+import DASHI.Physics.Foundations.CMP119CosmologyLocalCWightmanTerminalMaxCutExact as Terminal
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
@@ -106,12 +107,13 @@ module _
     Completion.finiteExpectation anchor start
       + Completion.r109RemainingTail source start < 0ℚ →
     Root.literalContinuumTrace recovery selected directions localC < 0ℚ
-  finiteTailMarginForcesLiteralR136TraceNegative bridge start marginNegative =
+  finiteTailMarginForcesLiteralR136TraceNegative
+      {anchor = anchor} bridge start marginNegative =
     subst
       (λ value → value < 0ℚ)
       (completedExpectationIsLiteralR136Trace bridge)
       (Completion.negativeFiniteMarginForcesNegativeCompletion
-        _ start marginNegative)
+        anchor start marginNegative)
 
   finiteTailMarginForcesPositiveMatterAcceleration :
     ∀ {source : R109.SourceNativeStressScaleCauchy}
@@ -126,7 +128,7 @@ module _
     0ℚ <
       Vacuum.matterAccelerationContribution
         positiveGravityFactor
-        (Root.Terminal.lorentzianIsotropicStress
+        (Terminal.lorentzianIsotropicStress
           (Root.reconstructedTerminalConsequences
             recovery selected directions localC root))
   finiteTailMarginForcesPositiveMatterAcceleration
