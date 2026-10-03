@@ -20,6 +20,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyConnectedResponseDoesNotPayPartitionB2Test.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144CanonicalB4ReadoutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109SelectedStressCylinderPresentationExact.agda'
@@ -82,6 +84,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyConnectedResponseDoesNotPayPartitionB2Test.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003IExact.agda \
