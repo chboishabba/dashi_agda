@@ -28,6 +28,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyE1R143LocalizedCompilerExact as 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
+import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
 import DASHI.Physics.YangMills.BalabanBC2CompactGroupSameDensityRound119Exact as BC2
 import DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Exact as R143
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionDensityRound132Exact as R132
@@ -62,8 +63,8 @@ asDifferentiatedEuclideanCovariance :
     laws stress EuclideanAction →
   MarkedE1.DifferentiatedEuclideanCovariance
     EuclideanAction
-    (Carrier.Configuration (Present.bc1Carrier present))
-    (Carrier.Tangent (Present.bc1Carrier present))
+    (Source.Background (Carrier.source (Present.bc1Carrier present)))
+    (Source.Tangent (Carrier.source (Present.bc1Carrier present)))
     ℝ
 asDifferentiatedEuclideanCovariance
     {present = present} dataSet = record
