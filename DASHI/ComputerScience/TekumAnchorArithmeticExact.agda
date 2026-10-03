@@ -7,11 +7,17 @@ open import Relation.Binary.PropositionalEquality using (cong)
 
 ------------------------------------------------------------------------
 -- Hunhold Definition 7:
---   anc_n(t) = |t| - 11...1.
+--   anc_n(t) = |t| - 1T...1T.
+--
+-- `allOnes` is retained as the historical interface-field name, but its source
+-- meaning is the alternating midpoint code 1T...1T (MSB-first), not 11...1.
+-- TekumFixedWidthBalancedArithmeticExact instantiates it with the literal
+-- source midpoint word.
 --
 -- This owner states the exact algebra needed from any fixed-width balanced
 -- arithmetic backend and proves the load-bearing negation invariance once
 -- abs(-t)=abs(t) is supplied.
+------------------------------------------------------------------------
 
 record FixedWidthBalancedArithmetic (n : Nat) : Set₁ where
   field
