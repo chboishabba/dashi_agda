@@ -8,7 +8,7 @@ open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:-_; _:*_; con; _:=_)
 open import Data.Nat.Base using (_<_; z≤n; s≤s)
 import Data.Nat.Properties as ℕP
-import Data.Nat.DivMod as ℕDiv
+open import Data.Nat.DivMod using (_%_; [m+kn]%n≡m%n; m<n⇒m%n≡m)
 open import Data.Vec using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -85,11 +85,9 @@ evalIntegerCons :
 evalIntegerCons t ts =
   trans
     (toIntegerAddWeight (BT.tritWeight t) (BT.scaleThree (BT.eval ts)))
-    (trans
-      (cong₂ ℤ._+_
-        (toIntegerTritWeight t)
-        (toIntegerScaleThree (BT.eval ts)))
-      refl)
+    (cong₂ ℤ._+_
+      (toIntegerTritWeight t)
+      (toIntegerScaleThree (BT.eval ts)))
   where
   cong₂ : ∀ {A B C : Set} (f : A → B → C)
     {x x′ : A} {y y′ : B} →
@@ -165,17 +163,14 @@ digitNatLessThree Trit.pos = s≤s (s≤s (s≤s z≤n))
 
 natCodeModThree :
   ∀ {n} (t : Trit.Trit) (ts : Vec Trit.Trit n) →
-  natCode (t ∷ ts) mod 3 ≡ digitNat t
+  natCode (t ∷ ts) % 3 ≡ digitNat t
 natCodeModThree t ts =
   trans
-    (cong (λ k → (digitNat t + k) mod 3)
+    (cong (λ k → (digitNat t + k) % 3)
       (ℕP.*-comm 3 (natCode ts)))
     (trans
-      (ℕDiv.[m+kn]%n≡m%n (digitNat t) (natCode ts) 3)
-      (ℕDiv.m<n⇒m%n≡m (digitNatLessThree t)))
-  where
-  infixl 7 _mod_
-  _mod_ = Agda.Builtin.Nat.mod-helper 0 2
+      ([m+kn]%n≡m%n (digitNat t) (natCode ts) 3)
+      (m<n⇒m%n≡m (digitNatLessThree t)))
 
 -- Constructor-level statement used by the recursive proof.  This is the
 -- exact finite remainder separation {-1,0,+1} mod 3, expressed through the
@@ -200,17 +195,14 @@ natCodeInjective {suc n} {t ∷ ts} {u ∷ us} eq with
   balancedRemainderDistinct
     (trans
       (sym (natCodeModThree t ts))
-      (trans (cong (λ k → k mod 3) eq) (natCodeModThree u us)))
-  where
-  infixl 7 _mod_
-  _mod_ = Agda.Builtin.Nat.mod-helper 0 2
+      (trans (cong (λ k → k % 3) eq) (natCodeModThree u us)))
 ... | refl =
   cong (t ∷_)
     (natCodeInjective
       (ℕP.*-cancelˡ-≡
         (natCode ts) (natCode us) 3
         (ℕP.+-cancelˡ-≡
-          (3 * natCode ts) (3 * natCode us) (digitNat t) eq)))
+          (digitNat t) (3 * natCode ts) (3 * natCode us) eq)))
 
 toIntegerInjective :
   ∀ {n} {x y : Vec Trit.Trit n} →
