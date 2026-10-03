@@ -3,7 +3,9 @@ module DASHI.ComputerScience.TekumRegimeChainExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Integer.Base as ℤ using (ℤ; -[1+_]; _≤_; _<_)
+import Data.Integer.Base as ℤ
+open ℤ using (ℤ; -[1+_]; _≤_)
+open import Data.Nat.Base using (_<_)
 import Data.Integer.Properties as ℤP
 import Data.Nat.Properties as NatP
 open import Relation.Binary.Definitions using (tri<; tri≈; tri>)
@@ -14,16 +16,10 @@ import DASHI.ComputerScience.TekumIntegerSuccessorGapExact as Gap
 import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumRegimeExponentIntervalExact as Interval
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
+import DASHI.ComputerScience.TekumTriadicScaleExact as Scale
 
 ------------------------------------------------------------------------
 -- THE FIFTEEN REGIME INTERVALS AS ONE CONTIGUOUS CHAIN
---
--- The interval cardinalities are the exponent-field state counts:
---
---   243,81,27,9,3,1,1,1,1,1,3,9,27,81,243.
---
--- Encoding each block by its predecessor count makes adjacency definitional:
--- lower(i+1) = succ(upper(i)).
 ------------------------------------------------------------------------
 
 regimeIndex : Regime.RegimeCode → Nat
@@ -84,9 +80,7 @@ regimeIndexInjective :
 regimeIndexInjective {r} {s} eq =
   trans
     (sym (regimeFromIndexRoundTrip r))
-    (trans
-      (cong regimeFromIndex eq)
-      (regimeFromIndexRoundTrip s))
+    (trans (cong regimeFromIndex eq) (regimeFromIndexRoundTrip s))
 
 spanPredAtIndex : Nat → Nat
 spanPredAtIndex 0 = 242
@@ -112,46 +106,38 @@ chainLower (suc i) =
   Band.advanceExponent (suc (spanPredAtIndex i)) (chainLower i)
 
 chainUpper : Nat → ℤ
-chainUpper i =
-  Band.advanceExponent (spanPredAtIndex i) (chainLower i)
+chainUpper i = Band.advanceExponent (spanPredAtIndex i) (chainLower i)
 
 chainStepBoundary :
-  (i : Nat) →
-  chainLower (suc i) ≡
-  DASHI.ComputerScience.TekumTriadicScaleExact.integerSucc (chainUpper i)
+  (i : Nat) → chainLower (suc i) ≡ Scale.integerSucc (chainUpper i)
 chainStepBoundary i = refl
 
 advanceNondecreasing :
-  (n : Nat) (e : ℤ) →
-  e ≤ Band.advanceExponent n e
+  (n : Nat) (e : ℤ) → e ≤ Band.advanceExponent n e
 advanceNondecreasing zero e = ℤP.≤-refl
 advanceNondecreasing (suc n) e =
   ℤP.≤-trans
     (advanceNondecreasing n e)
-    (ℤP.<⇒≤
-      (Interval.integerLessSuccessor (Band.advanceExponent n e)))
+    (ℤP.<⇒≤ (Interval.integerLessSuccessor (Band.advanceExponent n e)))
 
 chainIntervalNonempty :
-  (i : Nat) →
-  chainLower i ≤ chainUpper i
+  (i : Nat) → chainLower i ≤ chainUpper i
 chainIntervalNonempty i =
   advanceNondecreasing (spanPredAtIndex i) (chainLower i)
 
 chainStepOrdered :
-  (i : Nat) →
-  chainUpper i < chainLower (suc i)
+  (i : Nat) → chainUpper i ℤ.< chainLower (suc i)
 chainStepOrdered i =
   subst
-    (λ z → chainUpper i < z)
+    (λ z → chainUpper i ℤ.< z)
     (sym (chainStepBoundary i))
     (Interval.integerLessSuccessor (chainUpper i))
 
 chainUpperBeforeOffset :
-  (i k : Nat) →
-  chainUpper i < chainLower (i + suc k)
+  (i k : Nat) → chainUpper i ℤ.< chainLower (i + suc k)
 chainUpperBeforeOffset i zero =
   subst
-    (λ j → chainUpper i < chainLower j)
+    (λ j → chainUpper i ℤ.< chainLower j)
     (sym oneStep)
     (chainStepOrdered i)
   where
@@ -162,7 +148,7 @@ chainUpperBeforeOffset i zero =
       (cong suc (NatP.+-identityʳ i))
 chainUpperBeforeOffset i (suc k) =
   subst
-    (λ j → chainUpper i < chainLower j)
+    (λ j → chainUpper i ℤ.< chainLower j)
     (sym (NatP.+-suc i (suc k)))
     (ℤP.<-trans
       (ℤP.<-≤-trans
@@ -171,14 +157,12 @@ chainUpperBeforeOffset i (suc k) =
       (chainStepOrdered (i + suc k)))
 
 chainIntervalsOrderedFromLess :
-  ∀ {i j : Nat} →
-  i NatP.< j →
-  chainUpper i < chainLower j
+  ∀ {i j : Nat} → i < j → chainUpper i ℤ.< chainLower j
 chainIntervalsOrderedFromLess {i} {j} i<j
   with Gap.natStrictGap i<j
 ... | k , eq =
   subst
-    (λ q → chainUpper i < chainLower q)
+    (λ q → chainUpper i ℤ.< chainLower q)
     eq
     (chainUpperBeforeOffset i k)
 
@@ -226,29 +210,26 @@ regimeUpperMatchesChain Regime.rp7 = refl
 
 regimeIntervalsOrderedFromIndex :
   ∀ {r s} →
-  regimeIndex r NatP.< regimeIndex s →
-  Interval.regimeUpper r < Interval.regimeLower s
+  regimeIndex r < regimeIndex s →
+  Interval.regimeUpper r ℤ.< Interval.regimeLower s
 regimeIntervalsOrderedFromIndex {r} {s} order
-  rewrite regimeUpperMatchesChain r
-        | regimeLowerMatchesChain s =
+  rewrite regimeUpperMatchesChain r | regimeLowerMatchesChain s =
   chainIntervalsOrderedFromLess order
 
 ------------------------------------------------------------------------
 -- Total regime comparison and uniqueness of interval membership.
 ------------------------------------------------------------------------
 
-data RegimeComparison
-    (r s : Regime.RegimeCode) : Set where
+data RegimeComparison (r s : Regime.RegimeCode) : Set where
   same : r ≡ s → RegimeComparison r s
   before :
-    Interval.regimeUpper r < Interval.regimeLower s →
+    Interval.regimeUpper r ℤ.< Interval.regimeLower s →
     RegimeComparison r s
   after :
-    Interval.regimeUpper s < Interval.regimeLower r →
+    Interval.regimeUpper s ℤ.< Interval.regimeLower r →
     RegimeComparison r s
 
-compareRegimes :
-  (r s : Regime.RegimeCode) → RegimeComparison r s
+compareRegimes : (r s : Regime.RegimeCode) → RegimeComparison r s
 compareRegimes r s with NatP.<-cmp (regimeIndex r) (regimeIndex s)
 ... | tri< i<j _ _ = before (regimeIntervalsOrderedFromIndex i<j)
 ... | tri≈ _ i≡j _ = same (regimeIndexInjective i≡j)
@@ -258,21 +239,18 @@ beforeExponentContradiction :
   ∀ {extra r s payload₁ payload₂}
   (p : Source.ParsedPayload extra r payload₁)
   (q : Source.ParsedPayload extra s payload₂) →
-  Interval.regimeUpper r < Interval.regimeLower s →
+  Interval.regimeUpper r ℤ.< Interval.regimeLower s →
   Interval.parsedExponentInteger p ≡ Interval.parsedExponentInteger q →
   ⊥
 beforeExponentContradiction p q intervalsOrdered exponentEq =
   ℤP.<⇒≢ strict exponentEq
   where
   strict :
-    Interval.parsedExponentInteger p
-    < Interval.parsedExponentInteger q
+    Interval.parsedExponentInteger p ℤ.< Interval.parsedExponentInteger q
   strict =
     ℤP.≤-<-trans
       (Interval.parsedExponentUpper p)
-      (ℤP.<-≤-trans
-        intervalsOrdered
-        (Interval.parsedExponentLower q))
+      (ℤP.<-≤-trans intervalsOrdered (Interval.parsedExponentLower q))
 
 equalParsedExponentForcesRegime :
   ∀ {extra r s payload₁ payload₂}
