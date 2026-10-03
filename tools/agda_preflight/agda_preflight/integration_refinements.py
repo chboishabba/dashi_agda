@@ -58,7 +58,14 @@ def _cache_native(instance, attribute: str, native) -> None:
             key = Path(item.path).resolve()
         except OSError:
             key = Path(item.path)
-        cache.setdefault(key, []).append(item)
+        bucket = cache.setdefault(key, [])
+        location = _resolved_location(item.code, item.path, item.line, item.column)
+        if not any(
+            _resolved_location(existing.code, existing.path, existing.line, existing.column)
+            == location
+            for existing in bucket
+        ):
+            bucket.append(item)
 
 
 def install_scope_refinements() -> None:
@@ -103,7 +110,10 @@ def install_scope_refinements() -> None:
 
     def refine(self, summary, diagnostics):
         path = summary.path.resolve()
-        current = list(diagnostics)
+        # Let the original negative-oracle logic suppress structural suspicions
+        # first. Native messages are then replayed so cached successful probes
+        # cannot accidentally erase warnings/errors they emitted themselves.
+        current = original_refine(self, summary, list(diagnostics))
         current = _append_native_diagnostics(
             current,
             self._scope_native_by_path.get(path, ()),
@@ -114,7 +124,7 @@ def install_scope_refinements() -> None:
             self._typecheck_native_by_path.get(path, ()),
             EvidenceLevel.AGDA_TYPECHECKER,
         )
-        return original_refine(self, summary, current)
+        return current
 
     cls.__init__ = __init__
     cls.probe_scope = probe_scope
