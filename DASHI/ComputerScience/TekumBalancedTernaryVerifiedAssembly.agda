@@ -27,6 +27,7 @@ import DASHI.ComputerScience.TekumExactTriadicSemanticsExact
 import DASHI.ComputerScience.TekumSourceWordDecodeExact
 import DASHI.ComputerScience.TekumSourceWordRoundTripExact
 import DASHI.ComputerScience.TekumParsedExactTriadicWeldExact
+import DASHI.ComputerScience.TekumParsedExactRationalCoordinatesExact
 import DASHI.ComputerScience.TekumFractionRangeExact
 import DASHI.ComputerScience.TekumFractionRationalRangeExact
 import DASHI.ComputerScience.TekumSignificandRangeExact
@@ -81,6 +82,7 @@ record TekumVerifiedAssemblyBoundary : Set where
     exactTriadicSignedScaleSemanticsPresent : Bool
     canonicalRationalOrdinaryDecoderPresent : Bool
     parsedExactTriadicCoordinatesWelded : Bool
+    parsedExactRationalCoordinatesPaid : Bool
     rationalFractionHalfBoundPaid : Bool
     exactSignificandBandPaid : Bool
     adjacentExponentBandSeparationPaid : Bool
@@ -136,7 +138,7 @@ canonicalTekumVerifiedAssemblyBoundary =
   tekumVerifiedAssemblyBoundary
     true true true true true true true true true
     true true true true true true true true true
-    true true true true true true true false
+    true true true true true true true true false
     true
     false true false false false true
     true true true true
