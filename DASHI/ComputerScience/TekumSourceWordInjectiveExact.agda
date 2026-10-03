@@ -4,15 +4,14 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (_+_)
 open import Data.Maybe using (just)
 open import Data.Product using (_,_; proj₁; proj₂)
-open import Data.Rational.Base using (ℚ)
 open import Data.Vec using (Vec)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Algebra.Trit as Trit
+import DASHI.ComputerScience.TekumOrdinaryFactorizationExact as Factor
 import DASHI.ComputerScience.TekumParsedBandMembershipExact as Parsed
 import DASHI.ComputerScience.TekumParsedPayloadInjectiveExact as Payload
 import DASHI.ComputerScience.TekumParserSuccessfulRejoinExact as Parser
-import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumSignedMagnitudeInjectiveExact as Signed
 import DASHI.ComputerScience.TekumSourceAnchorInjectiveExact as SourceAnchor
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
@@ -32,10 +31,10 @@ ordinarySignedMagnitudeEquality :
   (q : Source.ParsedPayload extra s payload₂) →
   Source.ordinaryRationalFromParsed left p
     ≡ Source.ordinaryRationalFromParsed right q →
-  DASHI.ComputerScience.TekumOrdinaryFactorizationExact.applyRationalSign
+  Factor.applyRationalSign
       (Source.signOfWord left) (Parsed.parsedMagnitude p)
     ≡
-  DASHI.ComputerScience.TekumOrdinaryFactorizationExact.applyRationalSign
+  Factor.applyRationalSign
       (Source.signOfWord right) (Parsed.parsedMagnitude q)
 ordinarySignedMagnitudeEquality left right p q valueEq =
   trans
