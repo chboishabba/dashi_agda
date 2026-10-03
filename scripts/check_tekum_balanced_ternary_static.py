@@ -15,40 +15,22 @@ required = {
     'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
     'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': ['canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective'],
     'DASHI/ComputerScience/TekumIntegerSuccessorGapExact.agda': ['advancePositive', 'advanceCommuteSucc', 'advanceNegativeToZero', 'advanceNegativeGap', 'integerLessHasPositiveAdvance'],
-    'DASHI/ComputerScience/TekumRegimeExponentIntervalExact.agda': [
-        'regimeLower', 'regimeUpper', 'parsedExponentRange', 'RegimeStep',
-        'adjacentRegimeBoundary', 'stepRegimeIntervalsOrdered', 'regimeIntervalNonempty',
+    'DASHI/ComputerScience/TekumRegimeExponentIntervalExact.agda': ['regimeLower', 'regimeUpper', 'parsedExponentRange', 'RegimeStep', 'adjacentRegimeBoundary', 'stepRegimeIntervalsOrdered', 'regimeIntervalNonempty'],
+    'DASHI/ComputerScience/TekumRegimeChainExact.agda': [
+        'regimeIndex', 'regimeFromIndex', 'regimeIndexInjective', 'spanPredAtIndex',
+        'chainLower', 'chainUpper', 'chainIntervalsOrderedFromLess',
+        'regimeLowerMatchesChain', 'regimeUpperMatchesChain', 'RegimeComparison',
+        'compareRegimes', 'equalParsedExponentForcesRegime',
     ],
-    'DASHI/ComputerScience/TekumParsedExponentInjectiveExact.agda': [
-        'equalParsedMagnitudesForceExponent', 'leftExponentStrictContradiction',
-        'rightExponentStrictContradiction',
-    ],
+    'DASHI/ComputerScience/TekumParsedExponentInjectiveExact.agda': ['equalParsedMagnitudesForceExponent', 'leftExponentStrictContradiction', 'rightExponentStrictContradiction'],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
-    'DASHI/ComputerScience/TekumExponentBandExact.agda': [
-        'bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality', 'InBand',
-        'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands', 'advanceExponent',
-        'scaleBelowSuccessor', 'bandUpperSuccStrict', 'bandUpperAdvanceStrict',
-        'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint',
-    ],
+    'DASHI/ComputerScience/TekumExponentBandExact.agda': ['bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality', 'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands', 'advanceExponent', 'scaleBelowSuccessor', 'bandUpperSuccStrict', 'bandUpperAdvanceStrict', 'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint'],
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
     'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
-    'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': [
-        'rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization',
-        'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg',
-        'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand',
-        'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale',
-        'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct',
-    ],
-    'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': [
-        'rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction',
-        'canonicalUnsignedSignificandIsSourceSignificand', 'parsedMagnitude',
-        'parsedMagnitudeInExponentBand', 'parsedOrdinaryRationalIsSignedMagnitude',
-    ],
-    'DASHI/ComputerScience/TekumWheelStateParityExact.agda': [
-        'EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd',
-        'pow3Mod4OneImpliesEvenWidth', 'wheelQuarterIntegralityIffEvenWidth',
-    ],
+    'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': ['rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization', 'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg', 'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale', 'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct'],
+    'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': ['rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction', 'canonicalUnsignedSignificandIsSourceSignificand', 'parsedMagnitude', 'parsedMagnitudeInExponentBand', 'parsedOrdinaryRationalIsSignedMagnitude'],
+    'DASHI/ComputerScience/TekumWheelStateParityExact.agda': ['EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd', 'pow3Mod4OneImpliesEvenWidth', 'wheelQuarterIntegralityIffEvenWidth'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['pow3NonZero', 'exactTriadicRationalUsesSignedDivision'],
     'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualPrecisionTwoIsCylinderRefinementTwo'],
     'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda': ['canonicalTekumVerifiedAssemblyBoundary'],
@@ -66,4 +48,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: equal parsed magnitudes recover integer exponent; regime intervals, successor gaps, fraction injectivity, signed magnitude factorization, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: regime chain gives total interval disjointness and exponent→regime recovery; parsed magnitude exponent injectivity, fraction injectivity, signed factorization, wheel parity, parser recovery, source negation and p-adic naturality present.')
