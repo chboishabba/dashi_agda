@@ -13,6 +13,9 @@ required = {
     'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': ['rejoinPayloadCorrect', 'rejoinParsedAnchorPayloadCorrect', 'rejoinPayloadDeterminesSourcePayload', 'sourceParserImageIsLossless'],
     'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
     'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
+    'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': [
+        'canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective',
+    ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
     'DASHI/ComputerScience/TekumExponentBandExact.agda': [
@@ -63,4 +66,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: literal ordinary value is signed positive band magnitude; canonical source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: fixed-width canonical fraction injectivity; literal ordinary value is signed positive band magnitude; source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
