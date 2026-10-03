@@ -36,6 +36,10 @@ required = {
         'integerToIntCode', 'exponentIntCode', 'fractionIntCode', 'ordinaryFromParsed',
         'parseTekumWord', 'decodeNormalWidthTekumWord', 'normalWidthParserUsesSourceFieldOrder',
     ],
+    'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': [
+        'rejoinPayload', 'rejoinPayloadCorrect', 'regimePrefixMSB', 'rejoinAnchorMSB',
+        'rejoinParsedAnchorMSB', 'rejoinParsedAnchorPayloadCorrect', 'sourceParserImageIsLossless',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
@@ -66,4 +70,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: source parser, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: source parser roundtrip, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
