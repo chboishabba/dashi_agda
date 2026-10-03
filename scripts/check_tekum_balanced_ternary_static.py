@@ -19,6 +19,10 @@ required = {
         'regimeLower', 'regimeUpper', 'parsedExponentRange', 'RegimeStep',
         'adjacentRegimeBoundary', 'stepRegimeIntervalsOrdered', 'regimeIntervalNonempty',
     ],
+    'DASHI/ComputerScience/TekumParsedExponentInjectiveExact.agda': [
+        'equalParsedMagnitudesForceExponent', 'leftExponentStrictContradiction',
+        'rightExponentStrictContradiction',
+    ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
     'DASHI/ComputerScience/TekumExponentBandExact.agda': [
@@ -62,4 +66,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: regime exponent intervals, integer successor gaps, fraction injectivity, signed band magnitude, source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: equal parsed magnitudes recover integer exponent; regime intervals, successor gaps, fraction injectivity, signed magnitude factorization, wheel parity, parser recovery, source negation and p-adic naturality present.')
