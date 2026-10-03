@@ -13,7 +13,7 @@ open import Agda.Builtin.Nat using (Nat)
 ------------------------------------------------------------------------
 
 data NovelReconstructionResidual : Set where
-  e1-r144-signed-b4-readout-covariance-and-whole-lattice-attachment :
+  e1-r144-canonical-b4-signed-readout-covariance-and-whole-lattice-attachment :
     NovelReconstructionResidual
   e2e4-r109-stress-insertion-to-selected-real-cylinder-presentation :
     NovelReconstructionResidual
@@ -28,7 +28,7 @@ data StandardAnalysisBoundary : Set where
 -- Preferred effective-action sign route.
 data PreferredSignResidual : Set where
   r136-same-object-effective-action-weld : PreferredSignResidual
-  eq223-three-cauchy-calibrations-and-vacuum-scalar-margin :
+  eq223-combined-erb-envelope-and-vacuum-scalar-margin :
     PreferredSignResidual
 
 -- Alternate trace-anomaly route.
@@ -78,6 +78,12 @@ e1SignedAxisActionStillPhysical = false
 e1ActualB4GeneratorSignedActionConstructed : Bool
 e1ActualB4GeneratorSignedActionConstructed = true
 
+e1GeneratorToEuclideanActionMapStillIndependent : Bool
+e1GeneratorToEuclideanActionMapStillIndependent = false
+
+e1CanonicalB4ActionCarrierNowLiteral : Bool
+e1CanonicalB4ActionCarrierNowLiteral = true
+
 e1R133TransportEquivarianceStillShortestRoutePremise : Bool
 e1R133TransportEquivarianceStillShortestRoutePremise = false
 
@@ -112,6 +118,15 @@ selectedStressOnlyCylinderDataSufficeForE2E4 = true
 r109FiniteStressInsertionPresentationIsSharedE2E4Leaf : Bool
 r109FiniteStressInsertionPresentationIsSharedE2E4Leaf = true
 
+r109ArbitraryObservableMeaningPredicateStillIndependent : Bool
+r109ArbitraryObservableMeaningPredicateStillIndependent = false
+
+r109InsertionIdentityNowDefinitionallyPinned : Bool
+r109InsertionIdentityNowDefinitionallyPinned = true
+
+r109RemainingCylinderDataAreObservablePositiveTimeAndGaugeAdmissibility : Bool
+r109RemainingCylinderDataAreObservablePositiveTimeAndGaugeAdmissibility = true
+
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned : Bool
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned = true
 
@@ -137,11 +152,18 @@ preferredNegativeR136NeedsNegativeEq223Balance = true
 positiveEq223BalanceWouldGiveOppositeDGammaSign : Bool
 positiveEq223BalanceWouldGiveOppositeDGammaSign = true
 
--- Eq.(2.23) route is now source-level: three uniform diagonal Cauchy constants
--- and one scalar vacuum-margin inequality
---   4 (M_E + M_R + M_B) < -c_V.
--- Positive Haar integration, four-diagonal summation and the common density
--- factor are compiler-owned.
+-- The terminal Eq.(2.23) source coordinate is now one UNIFORM upper envelope
+-- on the already-combined four-diagonal E+R+B trace,
+--
+--   E_diag4(U) + R_diag4(U) + B_diag4(U) <= M_ERB,
+--
+-- plus the one scalar source inequality
+--
+--   M_ERB < - c_V.
+--
+-- The older three sectorwise Cauchy constants remain a producer strategy and
+-- compile to this combined envelope.  Positive Haar integration, normalization,
+-- four-diagonal arithmetic and the common density factor are compiler-owned.
 eq223FiniteMeasureNormalizationStillInSignLeaf : Bool
 eq223FiniteMeasureNormalizationStillInSignLeaf = false
 
@@ -151,14 +173,20 @@ eq223FourDiagonalArithmeticStillInSignLeaf = false
 eq223IntegratedERBMajorantsStillIndependent : Bool
 eq223IntegratedERBMajorantsStillIndependent = false
 
-eq223ThreeUniformDiagonalCauchyCalibrationsRemain : Bool
-eq223ThreeUniformDiagonalCauchyCalibrationsRemain = true
+eq223ThreeUniformDiagonalCauchyCalibrationsAreTerminal : Bool
+eq223ThreeUniformDiagonalCauchyCalibrationsAreTerminal = false
+
+eq223ThreeUniformDiagonalCauchyCalibrationsRemainProducerStrategy : Bool
+eq223ThreeUniformDiagonalCauchyCalibrationsRemainProducerStrategy = true
+
+eq223CombinedERBEnvelopeIsTerminalSourceCoordinate : Bool
+eq223CombinedERBEnvelopeIsTerminalSourceCoordinate = true
 
 eq223ScalarVacuumMarginRemains : Bool
 eq223ScalarVacuumMarginRemains = true
 
-eq223PreferredScalarMarginHasShapeFourERBBelowMinusCV : Bool
-eq223PreferredScalarMarginHasShapeFourERBBelowMinusCV = true
+eq223PreferredScalarMarginHasShapeCombinedERBBelowMinusCV : Bool
+eq223PreferredScalarMarginHasShapeCombinedERBBelowMinusCV = true
 
 -- Primary-source asymptotics already give E/R/B analytic envelopes, with R
 -- parametrically g^{kappa0}-small and B exponentially localized.  What is not
