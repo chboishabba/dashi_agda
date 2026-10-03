@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2RouteExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2TypedReceiptTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144CanonicalB4ReadoutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109FunctionalStressCylinderPresentationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109WilsonAdmissibleStressCylinderExact.agda'
@@ -36,11 +38,17 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore cache
         uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Typecheck preferred A1/A2/B1/B2 route
+      - name: Typecheck preferred A1/A2/B1/B2 route and exact receipt regression
         shell: bash
         run: |
           nix develop --accept-flake-config --command bash -lc '
             set -euo pipefail
-            agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2RouteExact.agda
+            for f in \
+              DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2RouteExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2TypedReceiptTest.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
+            done
           '
