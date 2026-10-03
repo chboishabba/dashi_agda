@@ -5,6 +5,8 @@ on:
     paths:
       - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109OneEndpointSequenceExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109OneEndpointSequenceTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109AdjacentStepSequenceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109AdjacentStepSequenceTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionExact.agda'
@@ -12,6 +14,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003Exact.agda'
       - '.github/workflows/cmp119-cosmology-math-maxcut-20261003.yml'
   workflow_dispatch:
 
@@ -46,12 +49,15 @@ jobs:
             for source in \
               DASHI/Physics/Foundations/CMP119CosmologyR144R109OneEndpointSequenceExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR144R109OneEndpointSequenceTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144R109AdjacentStepSequenceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144R109AdjacentStepSequenceTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumThresholdToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003Exact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
