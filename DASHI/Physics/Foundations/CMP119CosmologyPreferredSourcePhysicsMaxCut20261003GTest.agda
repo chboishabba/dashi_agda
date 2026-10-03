@@ -34,6 +34,14 @@ b1ArbitrarySequenceGone = refl
 b2IsEnvelopePlusLiteralThreshold : Subject.b2IsCombinedERBEnvelopePlusLiteralVacuumThreshold ≡ true
 b2IsEnvelopePlusLiteralThreshold = refl
 
+b2FiniteNegativityAlreadyCompilerOwned :
+  Subject.b2CanonicalSourceCanAlreadyCompileStrictFiniteTraceNegativity ≡ true
+b2FiniteNegativityAlreadyCompilerOwned = refl
+
+b2RemainingStrengthIsTailMargin :
+  Subject.b2RemainingPreferredSignStrengthIsQuantitativeTailMargin ≡ true
+b2RemainingStrengthIsTailMargin = refl
+
 fifthReceiptIsFallbackOnly : Subject.preferredRouteChargesAnomalyFallbackAsFifthLeaf ≡ false
 fifthReceiptIsFallbackOnly = refl
 
