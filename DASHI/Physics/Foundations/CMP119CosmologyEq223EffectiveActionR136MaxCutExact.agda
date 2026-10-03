@@ -23,9 +23,10 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223EffectiveActionR136MaxCutEx
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_; -_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
+import DASHI.Physics.Foundations.CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact as Envelope
 import DASHI.Physics.Foundations.CMP119CosmologyEq223NegativeSectorDominanceExact as Eq223Sign
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
 import DASHI.Physics.Foundations.CMP119CosmologyFiniteWeylConventionFirewallExact as Convention
@@ -33,6 +34,8 @@ import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSignMaxCutExact as Sign
 import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
+import DASHI.Physics.Foundations.CMP119CosmologyVacuumSectorFactorizationExact as VacuumFactor
+import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureOrderExact as Order
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
@@ -127,8 +130,35 @@ module _
       (Eq223Sign.literalDominanceForcesNegativeEffectiveActionWeyl
         sourceVariation measure partition laws referenceFixed dominance)
 
+  combinedEnvelopeMarginForcesNegativeR136 :
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (partition : Partition.PhysicalFinitePartitionAuthority measure)
+    (orderLaws : Order.RationalPositiveFiniteMeasureOrderLaws measure)
+    (scaleLaw : VacuumFactor.RationalHaarScaleLaw measure)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (referenceFixed :
+      ∀ h x → Source.referenceMeasureLogVariation d h x ≡ 0ℚ)
+    (weld : R136EffectiveActionResponseWeld measure partition)
+    (envelope :
+      Envelope.CombinedERBTraceEnvelope
+        sourceVariation measure orderLaws partition scaleLaw) →
+    Envelope.combinedUpper envelope
+      < - Eq223.eq223VacuumTraceCoefficient sourceVariation →
+    r136Response < 0ℚ
+  combinedEnvelopeMarginForcesNegativeR136
+      measure partition orderLaws scaleLaw laws referenceFixed weld
+      envelope sourceMargin =
+    literalDominanceForcesNegativeR136
+      measure partition laws referenceFixed weld
+      (Envelope.combinedEnvelopeVacuumMarginForcesLiteralDominance
+        sourceVariation measure orderLaws partition scaleLaw
+        envelope sourceMargin)
+
   gravitationalOrientationNoLongerFreeBranch : Bool
   gravitationalOrientationNoLongerFreeBranch = true
 
-  remainingPreferredSignLeavesAreSameObjectResponseAndOneDominanceInequality : Bool
-  remainingPreferredSignLeavesAreSameObjectResponseAndOneDominanceInequality = true
+  remainingPreferredSignLeavesAreSameObjectResponseAndCombinedSourceEnvelope : Bool
+  remainingPreferredSignLeavesAreSameObjectResponseAndCombinedSourceEnvelope = true
+
+  threeSectorCauchyConstantsNoLongerTerminalR136Inputs : Bool
+  threeSectorCauchyConstantsNoLongerTerminalR136Inputs = true
