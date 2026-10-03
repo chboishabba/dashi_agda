@@ -23,9 +23,11 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --
 -- B2 is strictly closer to the literal finite source than the older sufficient
 -- condition c_V < -(M_ERB + Tail).  Positive Z converts this one numerator
--- margin into DGamma_k + Tail < 0, and B1 then gives Q_R136 < 0.  The older
--- Eq.(2.23) E/R/B/vacuum envelope remains a producer strategy, not the final
--- terminal source interface.
+-- margin into DGamma_k + Tail < 0, and B1 then gives Q_R136 < 0.  The direct
+-- source-numerator terminal owner now feeds that exact sign into the existing
+-- marked-OS / Local-C matter-acceleration consumer.  The older Eq.(2.23)
+-- E/R/B/vacuum envelope remains a producer strategy, not the final terminal
+-- source interface.
 --
 -- The four residuals below are intentionally NOT inhabited here.  Existing
 -- finite countermodels/no-go owners prove that the currently weaker repository
@@ -42,6 +44,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyR109AbsoluteExpectationAnchorNoG
 import DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorExact as B1
 import DASHI.Physics.Foundations.CMP119CosmologyDirectTailFromSourceNumeratorExact as B2
 import DASHI.Physics.Foundations.CMP119CosmologyUnnormalizedSourceTailMarginExact as NumeratorMargin
+import DASHI.Physics.Foundations.CMP119CosmologyDirectSourceNumeratorTailToExpansionExact as DirectTerminal
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ERBMetricVariationUnderdeterminationExact as ERBNoGo
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumMetricSignUnderdeterminationExact as VacuumNoGo
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredA1CanonicalReceiptAdapterExact as A1Adapter
@@ -101,13 +104,9 @@ b1CannotBeRecoveredFromR109DifferenceDataAlone : Bool
 b1CannotBeRecoveredFromR109DifferenceDataAlone =
   B1NoGo.absoluteExpectationAnchorIsGenuineAdditionalInformation
 
-b1ConsumerNeedsNoFiniteFamilyOrObservable : Bool
-b1ConsumerNeedsNoFiniteFamilyOrObservable =
-  notBool B1.consumerNeedsFiniteFamilyOrObservable
-  where
-    notBool : Bool → Bool
-    notBool true = false
-    notBool false = true
+b1ConsumerNeedsFiniteFamilyOrObservable : Bool
+b1ConsumerNeedsFiniteFamilyOrObservable =
+  B1.consumerNeedsFiniteFamilyOrObservable
 
 ------------------------------------------------------------------------
 -- B2: final source-facing sign condition.
@@ -124,6 +123,10 @@ b2RequiresERBVacuumDecomposition =
 b2NumeratorMarginCompilesToNormalizedPreferredMargin : Bool
 b2NumeratorMarginCompilesToNormalizedPreferredMargin =
   NumeratorMargin.sourceNumeratorMarginIsSufficientForPreferredB2
+
+b1b2DirectSourceMarginCompilesToMatterAcceleration : Bool
+b1b2DirectSourceMarginCompilesToMatterAcceleration =
+  DirectTerminal.directSourceNumeratorTailMarginCompilesToMatterAcceleration
 
 rawEq223ObjectsAloneDoNotFixRequiredMetricSign : Bool
 rawEq223ObjectsAloneDoNotFixRequiredMetricSign =
