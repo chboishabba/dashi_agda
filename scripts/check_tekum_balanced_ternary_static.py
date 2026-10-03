@@ -51,6 +51,10 @@ required = {
         'anchorMSBNegationInvariant', 'parseOrdinaryAnchorNegationInvariant',
         'ordinaryParsedNegation', 'parseTekumWordNegation',
     ],
+    'DASHI/ComputerScience/TekumFractionRangeExact.agda': [
+        'fractionIntegerLower', 'fractionIntegerUpper', 'fractionIntegerRange',
+        'twiceCenterPlusOneIsPowerThree', 'twiceCenterStrictlyBelowPowerThree',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
@@ -81,4 +85,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: source-level negation, positional/rank negation, parser roundtrip, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: exact fraction range, source-level negation, parser roundtrip, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
