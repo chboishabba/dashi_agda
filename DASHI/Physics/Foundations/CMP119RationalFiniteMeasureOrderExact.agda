@@ -12,7 +12,8 @@ module DASHI.Physics.Foundations.CMP119RationalFiniteMeasureOrderExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Linear
@@ -52,12 +53,20 @@ weightedNumeratorMonotone :
   (∀ configuration → left configuration ≤ right configuration) →
   weightedNumerator measure left ≤ weightedNumerator measure right
 weightedNumeratorMonotone {measure = measure} laws left right pointwise =
-  haarIntegralMonotone laws _ _
-    (λ configuration →
-      ℚP.*-monoˡ-≤-nonNeg
-        (Physical.density measure configuration)
-        (densityNonnegative laws configuration)
-        (pointwise configuration))
+  haarIntegralMonotone laws _ _ pointwiseWeighted
+  where
+  pointwiseWeighted : ∀ configuration →
+    Physical.density measure configuration * left configuration
+    ≤ Physical.density measure configuration * right configuration
+  pointwiseWeighted configuration =
+    let
+      instance
+        densityNN : NonNegative (Physical.density measure configuration)
+        densityNN = nonNegative (densityNonnegative laws configuration)
+    in
+    ℚP.*-monoˡ-≤-nonNeg
+      (Physical.density measure configuration)
+      (pointwise configuration)
 
 constantObservable :
   ∀ {Configuration} → ℚ → Configuration → ℚ
