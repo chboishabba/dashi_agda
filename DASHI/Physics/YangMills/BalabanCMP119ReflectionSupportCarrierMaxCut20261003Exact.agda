@@ -20,16 +20,17 @@ module DASHI.Physics.YangMills.BalabanCMP119ReflectionSupportCarrierMaxCut202610
 --
 -- The repository already has a coordinate-bearing finite physical carrier:
 -- `PeriodicTracePolymer L`, whose support is a literal connected list of
--- `periodicTorus4Definition L` sites.  This is the least-inflated existing
+-- `periodicTorus4Definition L` sites. This is the least-inflated existing
 -- carrier on which the missing B/E/R reflection-side audit can be stated.
 --
--- This module records that representation correction.  It does NOT infer an
+-- This module records that representation correction. It does NOT infer an
 -- OS certificate from spatial support, analyticity, exponential localization,
 -- or KP membership.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -46,12 +47,11 @@ weakSupportCarriesOnlyLinkKind : Bool
 weakSupportCarriesOnlyLinkKind = true
 
 weakPolymerSupportIsSpatialityPredicate :
-  Weak.PolymerSupport ≡ Weak.AllSpatialLinks ∘ Weak.supportLinks
+  Weak.PolymerSupport ≡ (λ polymer → Weak.AllSpatialLinks (Weak.supportLinks polymer))
 weakPolymerSupportIsSpatialityPredicate = refl
 
--- This is a status firewall, not a metatheoretic impossibility proof about all
--- conceivable encodings into String identifiers.  No source theorem currently
--- identifies those opaque identifiers with literal Euclidean-time coordinates.
+-- Status firewall: no source theorem currently identifies the opaque String
+-- identifiers in Weak.Link with literal Euclidean-time coordinates.
 weakSupportHasSourceBackedOSTimeCoordinate : Bool
 weakSupportHasSourceBackedOSTimeCoordinate = false
 
@@ -70,8 +70,7 @@ LiteralReflectionPolymer : Nat → Set
 LiteralReflectionPolymer = Trace.PeriodicTracePolymer
 
 literalReflectionPolymerSupport :
-  ∀ {L} → LiteralReflectionPolymer L →
-  Agda.Builtin.List.List (LiteralReflectionSupport L)
+  ∀ {L} → LiteralReflectionPolymer L → List (LiteralReflectionSupport L)
 literalReflectionPolymerSupport = Trace.tracePolymerSupport
 
 literalReflectionPolymerSupportConnected :
@@ -94,14 +93,33 @@ record CMP119ReflectionSupportDictionary
   field
     toLiteralTrace : SourcePolymer → LiteralReflectionPolymer L
 
-    -- This is the important physical same-object field: the literal trace must
-    -- be the support of the SAME localized source term, not merely a convenient
-    -- connected polymer with similar size.
+    -- The literal trace must be the support of the SAME localized source term,
+    -- not merely a convenient connected polymer with similar size.
     SameSourceSupport : SourcePolymer → LiteralReflectionPolymer L → Set
     sameSourceSupport : ∀ sourcePolymer →
       SameSourceSupport sourcePolymer (toLiteralTrace sourcePolymer)
 
 open CMP119ReflectionSupportDictionary public
+
+data ReflectionSupportDisposition
+    {SourcePolymer : Set} {L : Nat}
+    (dictionary : CMP119ReflectionSupportDictionary SourcePolymer L)
+    (SupportEntirelyPositive
+      SupportEntirelyNegative
+      SupportCrossesPlane : LiteralReflectionPolymer L → Set)
+    (sourcePolymer : SourcePolymer) : Set where
+  entirelyPositive :
+    SupportEntirelyPositive (toLiteralTrace dictionary sourcePolymer) →
+    ReflectionSupportDisposition dictionary
+      SupportEntirelyPositive SupportEntirelyNegative SupportCrossesPlane sourcePolymer
+  entirelyNegative :
+    SupportEntirelyNegative (toLiteralTrace dictionary sourcePolymer) →
+    ReflectionSupportDisposition dictionary
+      SupportEntirelyPositive SupportEntirelyNegative SupportCrossesPlane sourcePolymer
+  crossesPlane :
+    SupportCrossesPlane (toLiteralTrace dictionary sourcePolymer) →
+    ReflectionSupportDisposition dictionary
+      SupportEntirelyPositive SupportEntirelyNegative SupportCrossesPlane sourcePolymer
 
 record CMP119SectorReflectionGeometry
     (SourcePolymer : Set) (L : Nat)
@@ -116,9 +134,9 @@ record CMP119SectorReflectionGeometry
     SupportCrossesPlane : LiteralReflectionPolymer L → Set
 
     classifySourcePolymer : ∀ sourcePolymer →
-      SupportEntirelyPositive (toLiteralTrace dictionary sourcePolymer)
-      ⊎ SupportEntirelyNegative (toLiteralTrace dictionary sourcePolymer)
-      ⊎ SupportCrossesPlane (toLiteralTrace dictionary sourcePolymer)
+      ReflectionSupportDisposition dictionary
+        SupportEntirelyPositive SupportEntirelyNegative SupportCrossesPlane
+        sourcePolymer
 
 open CMP119SectorReflectionGeometry public
 
@@ -135,8 +153,6 @@ data ReflectionSupportLeaf : Set where
   regularECrossingKernelAudit
   rOperationCrossingKernelAudit : ReflectionSupportLeaf
 
--- The source-backed analytic/localization theorem for B remains useful, but it
--- supplies none of the seven reflection-support leaves above.
 boundaryAnalyticLocalizationIsNotReflectionGeometry : Bool
 boundaryAnalyticLocalizationIsNotReflectionGeometry = true
 
@@ -144,7 +160,6 @@ boundaryAnalyticLocalizationIsNotReflectionGeometryIsTrue :
   boundaryAnalyticLocalizationIsNotReflectionGeometry ≡ true
 boundaryAnalyticLocalizationIsNotReflectionGeometryIsTrue = refl
 
--- Vacuum remains outside this support audit after its constant-source recut.
 vacuumStillRemovedFromCrossPlaneCut :
   RP.reflectionAuditStatus RP.vacuumV ≡ RP.reflectedHalfClosed
 vacuumStillRemovedFromCrossPlaneCut = RP.vacuumRemovedFromCrossPlaneCut
@@ -152,7 +167,6 @@ vacuumStillRemovedFromCrossPlaneCut = RP.vacuumRemovedFromCrossPlaneCut
 reflectionSupportCarrierMaxCutLevel : ProofLevel
 reflectionSupportCarrierMaxCutLevel = machineChecked
 
--- These are the actual next physical representation/geometric theorems.
 boundarySourceToLiteralTraceLevel : ProofLevel
 boundarySourceToLiteralTraceLevel = conditional
 
