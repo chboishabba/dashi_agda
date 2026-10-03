@@ -160,12 +160,12 @@ ordinaryFromParsed :
   Vec Trit.Trit (8 + extra) →
   ParsedPayload extra r payload →
   Sem.OrdinaryTekum
-ordinaryFromParsed {extra} word parsed =
+ordinaryFromParsed {extra} {r = r} word parsed =
   Sem.ordinaryTekum
     (signOfWord word)
     (exponentIntCode parsed)
     (fractionIntCode parsed)
-    (Regime.fractionCount (8 + extra) _)
+    (Regime.fractionCount (8 + extra) r)
 
 ordinaryRationalFromParsed :
   ∀ {extra r payload} →
