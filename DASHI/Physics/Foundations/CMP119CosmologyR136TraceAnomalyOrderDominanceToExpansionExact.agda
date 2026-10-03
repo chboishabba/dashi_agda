@@ -15,6 +15,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR136TraceAnomalyOrderDominanceTo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -59,7 +60,7 @@ module _
     {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
     {History Cell : Set}
-    {cutoff : Agda.Builtin.Nat.Nat}
+    {cutoff : Nat}
     {present : Present.PresentCutPhysicalSourceInputs History Cell cutoff}
     {actionWeld : R132.UnifiedGeneratedActionDensity
       {trajectory = trajectory} {split = split} {inputs = inputs} present}
