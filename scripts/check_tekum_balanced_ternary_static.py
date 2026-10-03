@@ -21,6 +21,19 @@ required = {
     'DASHI/ComputerScience/TekumParsedFieldRecoveryExact.agda': [
         'equalMagnitudeForceRegime', 'equalExponentSameRegimeForceExponentField',
         'equalMagnitudeSameRegimeForceSignificand', 'equalMagnitudeSameRegimeForceFraction',
+        'equalExponentSameRegimeForceExponentMSB', 'equalMagnitudeSameRegimeForceFractionMSB',
+    ],
+    # Prop. 2 is not closed merely because the numerical fields are recoverable:
+    # the actual parser payload and then the original signed source word must be
+    # recovered on the same objects.
+    'DASHI/ComputerScience/TekumParsedPayloadInjectiveExact.agda': [
+        'sameRegimeFieldsDeterminePayload', 'equalMagnitudeDeterminesRegimeAndPayload',
+        'equalMagnitudeDeterminesRejoinedAnchor',
+    ],
+    'DASHI/ComputerScience/TekumSourceWordInjectiveExact.agda': [
+        'sameSignAnchorDeterminesSourceWord', 'ordinaryEqualDeterminesSign',
+        'ordinaryEqualDeterminesMagnitude', 'ordinaryRationalInjectiveOnParsedWords',
+        'hunholdProposition2Injective',
     ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
@@ -28,7 +41,7 @@ required = {
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
     'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
     'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': ['rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization', 'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg', 'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale', 'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct'],
-    'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': ['rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction', 'canonicalUnsignedSignificandIsSourceSignificand', 'parsedMagnitude', 'parsedMagnitudeInExponentBand', 'parsedOrdinaryRationalIsSignedMagnitude'],
+    'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': ['rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction', 'canonicalUnsignedSignificandIsSourceSignificand', 'parsedMagnitude', 'parsedMagnitudePositive', 'parsedMagnitudeInExponentBand', 'parsedOrdinaryRationalIsSignedMagnitude'],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': ['EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd', 'pow3Mod4OneImpliesEvenWidth', 'wheelQuarterIntegralityIffEvenWidth'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['pow3NonZero', 'exactTriadicRationalUsesSignedDivision'],
     'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualPrecisionTwoIsCylinderRefinementTwo'],
@@ -47,4 +60,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: parsed magnitude recovers regime and exact exponent/fraction fields; regime chain, exponent injectivity, fraction injectivity, signed factorization, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: Prop. 2 end-to-end owner chain is present: exact signed factorization, arbitrary-gap exponent uniqueness, regime/exponent/fraction recovery, parser payload reconstruction, signed source-word recovery and final ordinary injectivity; wheel parity, source negation and p-adic naturality also present.')
