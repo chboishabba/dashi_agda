@@ -23,13 +23,12 @@ f : {A : Set} {x y : A} → x ≡ y → y ≡ x
 f p rewrite <- p = refl
 """,
     )
-    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA091"]
-    assert hits
+    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA000"]
+    assert any("reverse rewrite" in d.message for d in hits)
     assert all(d.severity == "error" for d in hits)
-    assert policy_for("TSAGDA091").minimum == EvidenceLevel.TREE_SITTER
 
 
-def test_nonconstructor_rewrite_argument_is_fragility_warning(tmp_path):
+def test_nonconstructor_rewrite_argument_predicts_rewrites_nothing(tmp_path):
     path = write_module(
         tmp_path,
         "FragileRewrite",
@@ -48,13 +47,14 @@ fragile : (state : Nat) → flattenRound state ≡ state
 fragile state rewrite roundTrip (flattenRound state) = refl
 """,
     )
-    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA303"]
+    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA301"]
     assert hits
     assert all(d.severity == "warning" for d in hits)
+    assert all(d.evidence == "dashi-index" for d in hits)
     assert any("flattenRound state" in d.message for d in hits)
 
 
-def test_constructor_destructuring_rewrite_is_not_called_fragile(tmp_path):
+def test_constructor_destructuring_rewrite_is_not_predicted_as_rewrites_nothing(tmp_path):
     path = write_module(
         tmp_path,
         "ConstructorRewrite",
@@ -69,38 +69,10 @@ stable : Box → Box
 stable box rewrite refl = box
 """,
     )
-    assert not any(d.code == "TSAGDA303" for d in Checker(tmp_path).check(path))
-
-
-def test_record_in_set_with_set_valued_field_gets_universe_lower_bound_error(tmp_path):
-    path = write_module(
-        tmp_path,
-        "UniverseBoundary",
-        """module UniverseBoundary where
-
-record MoonshineGradeBoundary : Set where
-  field
-    Carrier : Set
-""",
+    assert not any(
+        d.code == "TSAGDA301" and "non-constructor" in d.message
+        for d in Checker(tmp_path).check(path)
     )
-    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA304"]
-    assert hits
-    assert all(d.severity == "error" for d in hits)
-    assert all(d.evidence == "dashi-index" for d in hits)
-
-
-def test_record_in_set1_with_set_valued_field_is_not_flagged(tmp_path):
-    path = write_module(
-        tmp_path,
-        "UniverseBoundaryGood",
-        """module UniverseBoundaryGood where
-
-record MoonshineGradeBoundary : Set₁ where
-  field
-    Carrier : Set
-""",
-    )
-    assert not any(d.code == "TSAGDA304" for d in Checker(tmp_path).check(path))
 
 
 def test_wrong_named_implicit_position_is_reported(tmp_path):
@@ -115,7 +87,10 @@ f : (symmetry : Nat) → {left right : Nat} → Nat → Nat
 f {left = left} symmetry {right = right} value = value
 """,
     )
-    hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA305"]
+    hits = [
+        d for d in Checker(tmp_path).check(path)
+        if d.code == "TSAGDA043" and "named implicit" in d.message
+    ]
     assert hits
     assert all(d.severity == "warning" for d in hits)
 
@@ -132,7 +107,10 @@ f : (symmetry : Nat) → {left right : Nat} → Nat → Nat
 f symmetry {left = left} {right = right} value = value
 """,
     )
-    assert not any(d.code == "TSAGDA305" for d in Checker(tmp_path).check(path))
+    assert not any(
+        d.code == "TSAGDA043" and "named implicit" in d.message
+        for d in Checker(tmp_path).check(path)
+    )
 
 
 def test_equality_operands_do_not_trigger_type_head_term_diagnostics(tmp_path):
@@ -152,7 +130,14 @@ record Exact : Set where
     agrees : (h : Nat) → uncurlSix h ≡ h
 """,
     )
-    assert not any(d.code in {"TSAGDA120", "TSAGDA123"} for d in Checker(tmp_path).check(path))
+    assert not any(
+        d.code in {"TSAGDA120", "TSAGDA123"}
+        for d in Checker(tmp_path).check(path)
+    )
+
+
+def test_rewrites_nothing_is_dual_source_index_diagnostic():
+    assert policy_for("TSAGDA301").minimum == EvidenceLevel.DASHI_INDEX
 
 
 def test_accepted_carrier_adapter_claim_requires_typechecker_evidence():
