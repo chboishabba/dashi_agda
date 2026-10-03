@@ -15,9 +15,11 @@ required = {
     'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
     'DASHI/ComputerScience/TekumFractionRangeExact.agda': ['fractionIntegerRange', 'twiceCenterStrictlyBelowPowerThree'],
     'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['rawFractionStrictHalfBound', 'fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
-    'DASHI/ComputerScience/TekumSignificandRangeExact.agda': [
-        'significand', 'threeHalves', 'halfBelowSignificand', 'significandBelowThreeHalves',
-        'significandStrictBand', 'nextExponentLowerEqualsCurrentUpper',
+    'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
+    'DASHI/ComputerScience/TekumTriadicScaleExact.agda': [
+        'integerSucc', 'rawTriadicScale', 'triadicScale', 'rawTriadicScalePositive',
+        'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc',
+        'intCodeTriadicScale', 'intCodeTriadicScaleCanonical',
     ],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['pow3NonZero', 'exactTriadicRationalUsesSignedDivision'],
     'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualPrecisionTwoIsCylinderRefinementTwo'],
@@ -36,4 +38,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: strict significand band, canonical fraction band, exact parser codes, source negation and p-adic naturality present.')
+print('Tekum static regression: signed triadic exponent scale, significand/fraction bands, exact parser codes, source negation and p-adic naturality present.')
