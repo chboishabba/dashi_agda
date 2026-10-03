@@ -14,17 +14,18 @@ required = {
     'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
     'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
     'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': ['canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective'],
-    'DASHI/ComputerScience/TekumIntegerSuccessorGapExact.agda': [
-        'advancePositive', 'advanceCommuteSucc', 'advanceNegativeToZero',
-        'advanceNegativeGap', 'integerLessHasPositiveAdvance',
+    'DASHI/ComputerScience/TekumIntegerSuccessorGapExact.agda': ['advancePositive', 'advanceCommuteSucc', 'advanceNegativeToZero', 'advanceNegativeGap', 'integerLessHasPositiveAdvance'],
+    'DASHI/ComputerScience/TekumRegimeExponentIntervalExact.agda': [
+        'regimeLower', 'regimeUpper', 'parsedExponentRange', 'RegimeStep',
+        'adjacentRegimeBoundary', 'stepRegimeIntervalsOrdered', 'regimeIntervalNonempty',
     ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
     'DASHI/ComputerScience/TekumExponentBandExact.agda': [
-        'bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality',
-        'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands',
-        'advanceExponent', 'scaleBelowSuccessor', 'bandUpperSuccStrict',
-        'bandUpperAdvanceStrict', 'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint',
+        'bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality', 'InBand',
+        'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands', 'advanceExponent',
+        'scaleBelowSuccessor', 'bandUpperSuccStrict', 'bandUpperAdvanceStrict',
+        'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint',
     ],
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
     'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
@@ -61,4 +62,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: integer strict order has positive successor gap; fraction injectivity, signed band magnitude, source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: regime exponent intervals, integer successor gaps, fraction injectivity, signed band magnitude, source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
