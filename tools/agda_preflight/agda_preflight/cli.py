@@ -9,6 +9,7 @@ import sys
 from .checker import Checker, Diagnostic
 from .rules import api_snapshot, api_drift
 from .scope_backend import AgdaAutoRefineBackend, AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
+from .triage_delta import render_delta, triage_snapshot
 from .triage_render import (
     build_triage,
     render_compact,
@@ -103,6 +104,16 @@ def main(argv=None) -> int:
         ),
         help="restrict human output to one actionability class; does not change exit status",
     )
+    parser.add_argument(
+        "--write-triage-summary",
+        type=Path,
+        help="write a stable root-cause/fingerprint snapshot for a later delta",
+    )
+    parser.add_argument(
+        "--compare-triage-summary",
+        type=Path,
+        help="append a root-cause delta against a prior triage snapshot",
+    )
     parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
     parser.add_argument("--api-baseline", type=Path, help="compare current exported API to a prior snapshot")
     parser.add_argument("--cycles", action="store_true", help="report repository import cycles containing FILE")
@@ -167,6 +178,9 @@ def main(argv=None) -> int:
         parser.error(
             "--agda-typecheck-runner requires --agda-auto-refine=typecheck"
         )
+
+    if args.json and args.compare_triage_summary:
+        parser.error("--compare-triage-summary is a human-output option and cannot be combined with --json")
 
     agda_extra_args = tuple(shlex.split(args.agda_extra_args or ""))
     scope_backend = None
@@ -249,6 +263,24 @@ def main(argv=None) -> int:
         if errors_only
         else diagnostics
     )
+    report = build_triage(
+        displayed,
+        args.root,
+        absolute_paths=args.absolute_paths,
+        only_kind=args.only_kind,
+    )
+
+    if args.write_triage_summary:
+        args.write_triage_summary.parent.mkdir(parents=True, exist_ok=True)
+        args.write_triage_summary.write_text(
+            json.dumps(triage_snapshot(report), indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+    delta_text = None
+    if args.compare_triage_summary:
+        previous = json.loads(args.compare_triage_summary.read_text(encoding="utf-8"))
+        delta_text = render_delta(previous, report)
 
     if not (args.quiet and not displayed):
         if args.json:
@@ -256,12 +288,6 @@ def main(argv=None) -> int:
             # clustering. This keeps MCP/automation consumers stable.
             print(json.dumps([d.as_dict() for d in displayed], indent=2))
         elif displayed:
-            report = build_triage(
-                displayed,
-                args.root,
-                absolute_paths=args.absolute_paths,
-                only_kind=args.only_kind,
-            )
             if args.verbose:
                 print(render_verbose(report))
             elif args.compact:
@@ -271,11 +297,16 @@ def main(argv=None) -> int:
             else:
                 # --by-cause is an explicit spelling of the default.
                 print(render_grouped(report))
+            if delta_text:
+                print()
+                print(delta_text)
         else:
             if args.errors_only:
                 print("agda-preflight: no errors found")
             else:
                 print("agda-preflight: no high-confidence issues found")
+            if delta_text:
+                print(delta_text)
 
     return 1 if any(d.severity == "error" for d in diagnostics) else 0
 
