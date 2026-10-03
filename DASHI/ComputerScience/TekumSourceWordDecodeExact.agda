@@ -198,11 +198,19 @@ ordinaryRationalFromParsed :
 ordinaryRationalFromParsed word parsed =
   Exact.ordinaryRational (ordinaryFromParsed word parsed)
 
+------------------------------------------------------------------------
+-- Complete source decoder.
+--
+-- Hunhold reserves the SOURCE strings T...T, 0...0 and 1...1 for NaR, zero
+-- and infinity.  Classification therefore happens before anchoring.  The
+-- anchor is only the ordinary-field coordinate chart.
+------------------------------------------------------------------------
+
 parseTekumWord :
   ∀ {extra} →
   Vec Trit.Trit (8 + extra) →
   Maybe Sem.TekumValue
-parseTekumWord word with Special.classifySpecial (Fixed.concreteAnchor word)
+parseTekumWord word with Special.classifySpecial word
 ... | just specialValue = just (Sem.special specialValue)
 ... | nothing with parseOrdinaryAnchor word
 ...   | nothing = nothing
@@ -222,7 +230,7 @@ record SourceFieldOrderBoundary : Set where
     repositoryIntegerFieldsReadLeastSignificantFirst : Bool
     parserReversesAnchorExactlyOnce : Bool
     parserReversesEachNumericFieldBeforeIntegerDecode : Bool
-    specialClassificationAppliedToAnchor : Bool
+    specialClassificationAppliedToSourceWord : Bool
     parityRestrictionProvedInThisOwner : Bool
 
 normalWidthParserUsesSourceFieldOrder : SourceFieldOrderBoundary
