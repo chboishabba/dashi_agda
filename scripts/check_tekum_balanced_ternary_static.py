@@ -18,6 +18,9 @@ required = {
         'rankWord', 'unrankWord', 'unrankRankWord', 'rankUnrankWord',
         'rankToNatCode', 'natCodeStrictBound', 'pow3RightMatchesPow3',
     ],
+    'DASHI/Algebra/BalancedTernaryRankNegationExact.agda': [
+        'digitNatInvertComplement', 'natCodeInvertComplement', 'rankInvertIsOpposite',
+    ],
     'DASHI/Algebra/BalancedTernaryCenteredReconstructionExact.agda': [
         'twiceCenterPlusOne', 'CenteredInteger', 'centeredValue',
         'encodeCentered', 'decodeCentered', 'decodeEncodeCentered', 'encodeDecodeCentered',
@@ -25,7 +28,7 @@ required = {
     ],
     'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': [
         'wrapRank', 'negateCentered', 'addCentered', 'subtractCentered', 'modulusCentered',
-        'negateWord', 'addWord', 'subtractWord', 'modulusWord', 'allPositiveWord',
+        'negateWord', 'negateWordIsInvertWord', 'addWord', 'subtractWord', 'modulusWord', 'allPositiveWord',
         'modulusNegateWord', 'tekumBalancedArithmetic', 'concreteAnchor',
         'concreteAnchorNegationInvariant', 'oneTritPositivePlusPositiveWrapsNegative',
     ],
@@ -73,4 +76,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: positional negation, source parser roundtrip, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: positional/rank negation, source parser roundtrip, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
