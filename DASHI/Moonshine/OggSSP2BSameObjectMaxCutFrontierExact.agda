@@ -3,25 +3,36 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 ------------------------------------------------------------------------
 -- 2B SAME-OBJECT MAX-CUT FRONTIER
 --
--- This is the canonical programme-status owner after the runtime screens.
--- It keeps focus on the original 2B recognition problem and deliberately
--- treats 31/279, 4371, 4096, radix depth and Frobenius observations as
--- downstream/supporting material unless they construct one of the same-object
--- welds below.
+-- Canonical status after the finite runtime screens and source recut.
 --
--- Remaining scientific spine:
+-- Closed / externally sourced:
+--   * three 2B fibres and the local C3 carrier cycle;
+--   * self-dual integral Moonshine form with Monster symmetry;
+--   * 2B-pure local subgroup and pure order-three transporter;
+--   * generic conjugacy -> Tate transport algebra;
+--   * M24-duad restriction contains 10a^5 and 10b^5;
+--   * bare M22 involution cannot realize Completion10 five-pair phase;
+--   * binary-tetrahedral defect meaning is the centralizer 2-adic exponent,
+--     with sourced profile 3,3,2,1,1;
+--   * transported 30 and its downstream arithmetic remain available.
 --
---   A' actual Monster-local order-three action on the integral Moonshine
---      carrier, hence actual Tate intertwiners among the three 2B fibres;
+-- Remaining same-object welds:
 --
---   B' one actual ten-dimensional 10a/10b subquotient of one Tate fibre;
+--   A' represent the full sourced integral Monster action on the repo's actual
+--      weight-two/Tate carrier and identify the current 4A multiplicity owner
+--      with that carrier.  Then the known C3 transport is automatic.
 --
---   C' a larger sourced action/filtration realizing Completion10 on that
---      subquotient (the bare M22 involution route is dead);
+--   B' realize one observed 10a or 10b as a genuine subquotient of one actual
+--      2B Tate fibre.
 --
---   D  a source-defined five-mode invariant with profile 3,3,2,1,1;
+--   C' identify a larger sourced action/filtration on that Q10 whose binary
+--      operator is Completion10.  The bare M22 involution route is dead.
 --
---   E  only afterwards promote 30 -> 31 -> 279 to a same-object observable.
+--   D  identify the five recognized Q10 modes with the five independently
+--      sourced binary-tetrahedral order strata.  The defect invariant itself
+--      is no longer open.
+--
+--   E  only after A'-D promote 30 -> 31 -> 279 to same-object observables.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -32,8 +43,9 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.OggSSP2BPureKleinFourThreeTateFibreExact as Three
-import DASHI.Moonshine.OggSSP2BPureKleinFourM24S3LocalRouteExact as Local
 import DASHI.Moonshine.OggSSP2BM22RuntimeMaxCutReceiptExact as Runtime
+import DASHI.Moonshine.OggSSP2BIntegralMoonshineLocalActionSourceExact as ActionSource
+import DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact as DefectSource
 import DASHI.Moonshine.OggP31CompletionTenTwoSevenNineCrossPollinationExact as P279
 
 ------------------------------------------------------------------------
@@ -78,21 +90,59 @@ bareM22CompletionRouteKilled =
   Runtime.bareM22InvolutionDoesNotRealizeCompletionFivePairs
 
 ------------------------------------------------------------------------
--- 3. Three hard same-object welds.
+-- 3. A' source existence is paid; formal same-object acquisition is not.
 ------------------------------------------------------------------------
 
-data ActualMoonshineLocalRepresentationAcquired : Set where
-data ActualTateTransportPaid : Set where
+externalIntegralLocalActionSourced :
+  ActionSource.restrictedLocalActionExistsMathematically
+    ActionSource.canonicalIntegralMoonshineLocalActionSource
+  ≡ true
+externalIntegralLocalActionSourced =
+  ActionSource.externalRestrictedLocalActionIsSourced
+
+formalTateCarrierWeldOpen :
+  ActionSource.sameObjectTateCarrierWeldPaid
+    ActionSource.canonicalIntegralMoonshineLocalActionSource
+  ≡ false
+formalTateCarrierWeldOpen =
+  ActionSource.repoSameObjectTateCarrierWeldStillOpen
+
+------------------------------------------------------------------------
+-- 4. D invariant meaning is paid; actual mode recognition is not.
+------------------------------------------------------------------------
+
+defectIdentityThree :
+  DefectSource.twoAdicCentralizerExponent DefectSource.identity ≡ 3
+defectIdentityThree = DefectSource.defectIdentityIsThree
+
+defectMinusOneThree :
+  DefectSource.twoAdicCentralizerExponent DefectSource.centralMinusOne ≡ 3
+defectMinusOneThree = DefectSource.defectMinusOneIsThree
+
+defectOrderFourTwo :
+  DefectSource.twoAdicCentralizerExponent DefectSource.orderFour ≡ 2
+defectOrderFourTwo = DefectSource.defectOrderFourIsTwo
+
+defectOrderThreeOne :
+  DefectSource.twoAdicCentralizerExponent DefectSource.orderThree ≡ 1
+defectOrderThreeOne = DefectSource.defectOrderThreeIsOne
+
+defectOrderSixOne :
+  DefectSource.twoAdicCentralizerExponent DefectSource.orderSix ≡ 1
+defectOrderSixOne = DefectSource.defectOrderSixIsOne
+
+------------------------------------------------------------------------
+-- 5. Three hard formal same-object welds plus the D recognition map.
+------------------------------------------------------------------------
+
+data FormalIntegralTateCarrierWeldPaid : Set where
 data ActualTateTenSubquotientPaid : Set where
 data LargerCompletionActionPaid : Set where
-data SourceFiveModeDefectPaid : Set where
+data ActualQ10ModeToOrderStratumRecognitionPaid : Set where
 
-actualLocalRepresentationStillOpen :
-  ActualMoonshineLocalRepresentationAcquired → ⊥
-actualLocalRepresentationStillOpen ()
-
-actualTateTransportStillOpen : ActualTateTransportPaid → ⊥
-actualTateTransportStillOpen ()
+formalIntegralTateCarrierWeldStillOpen :
+  FormalIntegralTateCarrierWeldPaid → ⊥
+formalIntegralTateCarrierWeldStillOpen ()
 
 actualTenSubquotientStillOpen : ActualTateTenSubquotientPaid → ⊥
 actualTenSubquotientStillOpen ()
@@ -100,11 +150,12 @@ actualTenSubquotientStillOpen ()
 largerCompletionActionStillOpen : LargerCompletionActionPaid → ⊥
 largerCompletionActionStillOpen ()
 
-sourceFiveModeDefectStillOpen : SourceFiveModeDefectPaid → ⊥
-sourceFiveModeDefectStillOpen ()
+actualModeDefectRecognitionStillOpen :
+  ActualQ10ModeToOrderStratumRecognitionPaid → ⊥
+actualModeDefectRecognitionStillOpen ()
 
 ------------------------------------------------------------------------
--- 4. Downstream observer arithmetic remains available but unpromoted.
+-- 6. Downstream observer arithmetic remains available but unpromoted.
 ------------------------------------------------------------------------
 
 pointedThirtyArithmetic : 1 + transportedSelectedTotal ≡ P279.p31Value
@@ -124,7 +175,7 @@ p31To279StillObserverOnly : P31To279PromotedSameObject → ⊥
 p31To279StillObserverOnly ()
 
 ------------------------------------------------------------------------
--- 5. Canonical status after max-cut.
+-- 7. Canonical status after max-cut.
 ------------------------------------------------------------------------
 
 record SameObjectMaxCutStatus : Set where
@@ -132,7 +183,8 @@ record SameObjectMaxCutStatus : Set where
   field
     threeFibreArchitectureClosed : Bool
     localPureC3FiniteElementFound : Bool
-    genericTateTransportAlgebraClosed : Bool
+    externalIntegralMonsterActionSourced : Bool
+    genericConjugacyToTateCompilerClosed : Bool
     thirtyTraceSplitClosed : Bool
 
     duadTenFactorsObserved : Bool
@@ -140,11 +192,13 @@ record SameObjectMaxCutStatus : Set where
     tenBIdentified : Bool
     bareM22CompletionRouteKilled : Bool
 
-    actualMoonshineLocalRepresentationPaid : Bool
-    actualTateTransportPaid : Bool
+    binaryTetrahedralDefectMeaningSourced : Bool
+    defectProfileThreeThreeTwoOneOnePaid : Bool
+
+    formalIntegralTateCarrierWeldPaid : Bool
     actualTateTenSubquotientPaid : Bool
     largerCompletionActionPaid : Bool
-    sourceFiveModeDefectPaid : Bool
+    actualQ10ModeToDefectStratumRecognitionPaid : Bool
 
     p31SameObjectPromotionPaid : Bool
     twoSevenNineSameObjectPromotionPaid : Bool
@@ -154,8 +208,9 @@ record SameObjectMaxCutStatus : Set where
 canonicalSameObjectMaxCutStatus : SameObjectMaxCutStatus
 canonicalSameObjectMaxCutStatus =
   same-object-max-cut-status
+    true true true true true
     true true true true
-    true true true true
-    false false false false false
+    true true
+    false false false false
     false false true
-    "A': acquire the actual local-group representation on the integral Moonshine carrier so the known C3 conjugacy compiles to Tate transport; B': realize one observed 10a/10b factor as an actual Tate subquotient; C': find a larger sourced action or filtration realizing Completion10; then source the 3,3,2,1,1 invariant before touching 31/279 promotion"
+    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': realize one observed 10a/10b factor as an actual Tate subquotient; C': source the larger Completion10 action; D: identify the actual Q10 Mode5 labels with binary-tetrahedral order strata; only then promote 31/279"
