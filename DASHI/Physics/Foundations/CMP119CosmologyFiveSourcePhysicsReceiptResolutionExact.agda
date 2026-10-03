@@ -14,15 +14,17 @@ module DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsReceiptResoluti
 --   A2  selected R109 insertion -> real cylinder semantics
 --   B1  absolute same-sequence R136/R109 direct-tail attachment
 --   B2  source-native Eq.(2.23) metric-family strict negative envelope
---   C   embedded R136 trace -> selected renormalized anomaly trace
+--   C   embed(Q_R136) <= selected renormalized anomaly trace
 --
 -- A2, B1 and B2 have constructive underdetermination/no-go owners already in
 -- this branch.  A1 has an explicit countermodel showing additive D1 linearity
 -- does not imply symmetry covariance, while the existing whole-lattice source
 -- theorem owns expectation invariance rather than differentiated naturality.
 -- C has the standard trace-anomaly theorem and pinned Local-C same-stress
--- plumbing, but the source citation explicitly does not identify the R136
--- readout with the renormalized trace numerator.
+-- plumbing, but the source citation does not compare the R136 scalar readout
+-- with the selected renormalized trace numerator.  Exact equality would be a
+-- sufficient producer for C, but is Pareto-overstrong: one-sided dominance is
+-- the actual terminal obligation.
 --
 -- Therefore the mathematically honest "complete all five" operation is to
 -- expose the exact evidence sockets and forbid a compiler-only promotion.  A
@@ -39,6 +41,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyR109AbsoluteExpectationAnchorNoG
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ERBMetricVariationUnderdeterminationExact as B2ERBNoGo
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumMetricSignUnderdeterminationExact as B2VacuumNoGo
 import DASHI.Physics.Foundations.CMP119AntigravityRealTraceAnomalySameObjectExact as CBoundary
+import DASHI.Physics.Foundations.CMP119CosmologyR136TraceAnomalyOrderDominanceExact as CDominance
 
 ------------------------------------------------------------------------
 -- Terminal receipt labels.
@@ -49,7 +52,7 @@ data SourcePhysicsReceipt : Set where
   a2-r109-selected-insertion-semantics : SourcePhysicsReceipt
   b1-r136-r109-absolute-direct-tail-attachment : SourcePhysicsReceipt
   b2-eq223-source-metric-family-negative-envelope : SourcePhysicsReceipt
-  c-r136-renormalized-trace-readout-identity : SourcePhysicsReceipt
+  c-r136-below-selected-anomaly-trace : SourcePhysicsReceipt
 
 terminalSourcePhysicsReceiptCount : Nat
 terminalSourcePhysicsReceiptCount = 5
@@ -79,9 +82,9 @@ record B2SourceMetricFamilyNegativeEnvelopeReceipt : Set₁ where
     sourceMetricFamilyCalibrationLaw : Set
     sourceNegativeEnvelopeLaw : Set
 
-record CR136RenormalizedTraceReadoutReceipt : Set₁ where
+record CR136SelectedAnomalyUpperComparisonReceipt : Set₁ where
   field
-    r136RenormalizedTraceSameReadoutLaw : Set
+    r136BelowSelectedAnomalyTraceLaw : Set
 
 ------------------------------------------------------------------------
 -- Audit facts: why no compiler can manufacture the five receipts.
@@ -119,8 +122,13 @@ b2RawEq223VacuumSignUnderdetermined : Bool
 b2RawEq223VacuumSignUnderdetermined =
   B2VacuumNoGo.sourceBackedVacuumMetricVariationStillRequired
 
-cRequiresR136RenormalizedTraceReadoutIdentity : Bool
-cRequiresR136RenormalizedTraceReadoutIdentity = true
+cRequiresR136BelowSelectedAnomalyTrace : Bool
+cRequiresR136BelowSelectedAnomalyTrace =
+  CDominance.remainingFallbackPhysicalLeafIsR136BelowSelectedAnomalyTrace
+
+cExactReadoutEqualityIsParetoOverstrong : Bool
+cExactReadoutEqualityIsParetoOverstrong =
+  CDominance.anomalyFallbackExactEqualityIsParetoOverstrong
 
 cTraceAnomalyCitationAloneInsufficient : Bool
 cTraceAnomalyCitationAloneInsufficient = true
