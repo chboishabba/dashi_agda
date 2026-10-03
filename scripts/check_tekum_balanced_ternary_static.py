@@ -13,8 +13,10 @@ required = {
     'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': ['rejoinPayloadCorrect', 'rejoinParsedAnchorPayloadCorrect', 'rejoinPayloadDeterminesSourcePayload', 'sourceParserImageIsLossless'],
     'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
     'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
-    'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': [
-        'canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective',
+    'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': ['canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective'],
+    'DASHI/ComputerScience/TekumIntegerSuccessorGapExact.agda': [
+        'advancePositive', 'advanceCommuteSucc', 'advanceNegativeToZero',
+        'advanceNegativeGap', 'integerLessHasPositiveAdvance',
     ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
@@ -24,14 +26,8 @@ required = {
         'advanceExponent', 'scaleBelowSuccessor', 'bandUpperSuccStrict',
         'bandUpperAdvanceStrict', 'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint',
     ],
-    'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': [
-        'exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit',
-        'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger',
-    ],
-    'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': [
-        'parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates',
-        'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates',
-    ],
+    'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
+    'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
     'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': [
         'rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization',
         'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg',
@@ -41,9 +37,8 @@ required = {
     ],
     'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': [
         'rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction',
-        'canonicalUnsignedSignificandIsSourceSignificand',
-        'parsedMagnitude', 'parsedMagnitudeInExponentBand',
-        'parsedOrdinaryRationalIsSignedMagnitude',
+        'canonicalUnsignedSignificandIsSourceSignificand', 'parsedMagnitude',
+        'parsedMagnitudeInExponentBand', 'parsedOrdinaryRationalIsSignedMagnitude',
     ],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': [
         'EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd',
@@ -66,4 +61,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: fixed-width canonical fraction injectivity; literal ordinary value is signed positive band magnitude; source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: integer strict order has positive successor gap; fraction injectivity, signed band magnitude, source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
