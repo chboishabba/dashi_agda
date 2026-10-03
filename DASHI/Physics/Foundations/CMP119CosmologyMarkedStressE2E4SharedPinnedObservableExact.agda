@@ -3,14 +3,6 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2E4SharedPinnedObse
 
 ------------------------------------------------------------------------
 -- ONE PINNED LOCAL-C STRESS OBSERVABLE FOR BOTH E2 AND E4.
---
--- E2 already requires an encoding
---
---   StressTensor -> Configuration -> R
---
--- into the pinned OS cylinder algebra.  Round281 E4 only needs a selected
--- Local-C stress observable.  Do not choose that observable independently:
--- reuse the E2 encoding definitionally.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -86,8 +78,43 @@ selectedE2StressObservableIsSelectedE4StressObservable :
   ≡ E2.encodeStress embedding (LocalC.stressTensor localC)
 selectedE2StressObservableIsSelectedE4StressObservable embedding = refl
 
+selectedMarkedE4FromSharedE2Observable :
+  ∀ {C S}
+    {Y : Top.LiteralYangMillsConstruction C S}
+    {group : Top.CompactSimpleGroup C}
+    {G X Configuration Position CurvaturePolynomial LocalOperator
+     OPECoefficient Hilbert Vector Hamiltonian Algebra
+     Scale Volume Root ContinuumFamily Core Scalar SourceDirection : Set}
+    {sequenceLimit limitLaws quotient division osS osInputs reconstruction}
+    {localC :
+      LocalC.PinnedCMP119ConcreteLocalCInputs
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient (Top.StressTensor C)
+        Hilbert Vector Hamiltonian Algebra
+        Scale Volume Root ContinuumFamily Core
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        {S = osS}
+        osInputs reconstruction group}
+    {algebra : Cumulant.TwoSourceMomentAlgebra (Configuration → ℝ) Scalar}
+    {calculus : Cumulant.NormalizedLogSourceCalculus algebra}
+    {published : R281.CMP116119PublishedTwoSourceLocalization Scale Volume Root}
+    {meaning : Cumulant.LiteralTwoSourceInsertionMeaning calculus SourceDirection}
+    {round281 : R281.LiteralTwoSourceNormalizedExpectationWeld published meaning}
+    (embedding : E2.PinnedLocalCStressCylinderEmbedding Y group localC) →
+  E4.SelectedMarkedE4
+    (R281.asRound279SpatialShell round281)
+    (E2.encodeStress embedding (LocalC.stressTensor localC))
+selectedMarkedE4FromSharedE2Observable embedding =
+  E4.selectedMarkedE4 (asRound281StressSelection embedding)
+
 independentE4StressObservableChoiceEliminated : Bool
 independentE4StressObservableChoiceEliminated = true
 
-remainingE2E4LeavesAreAdmissibilityReflectionAndOS4Semantics : Bool
-remainingE2E4LeavesAreAdmissibilityReflectionAndOS4Semantics = true
+round281DecayWitnessIsCompilerOutputFromSharedE2Observable : Bool
+round281DecayWitnessIsCompilerOutputFromSharedE2Observable = true
+
+remainingE2E4LeavesAreE2AdmissibilityReflectionAndExternalOS4Interpretation : Bool
+remainingE2E4LeavesAreE2AdmissibilityReflectionAndExternalOS4Interpretation = true
