@@ -5,8 +5,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeStandardOneStepExact where
 --
 -- This owner projects the already-proved intrinsic concrete row decomposition
 -- onto the conventional split-tape configuration of StandardSingleTapeMachine.
--- The left list is nearest-cell-first, so the proven-plain concrete prefix is
--- reversed; the right list is already in nearest-cell-first row order.
+-- The left list is nearest-cell-first.  We therefore reverse the proven-plain
+-- row-order prefix structurally with `farLeftSymbols`: the immediate left cell
+-- remains visibly at the head of the standard left tape, while farther-left
+-- cells are appended in reverse row order.
 --
 -- For each of the three literal rule directions, the conventional standard
 -- step is exactly the projection of the concrete radius-one rewrite.
@@ -15,7 +17,6 @@ module DASHI.Mathematics.Complexity.ConcreteTapeStandardOneStepExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (nothing; just)
-open import Data.List.Base using (reverse)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -26,7 +27,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRelationalRuleAgreem
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 
 ------------------------------------------------------------------------
--- Erase a proof-known-plain cell list to its literal symbol list.
+-- Erase proof-known-plain cell lists to symbol lists.
 ------------------------------------------------------------------------
 
 plainSymbols :
@@ -36,6 +37,16 @@ plainSymbols :
 plainSymbols WF.plainNil = []
 plainSymbols (WF.plainCons {symbol = symbol} rest) =
   symbol ∷ plainSymbols rest
+
+/-- Symbols lying strictly farther left than the immediate left neighbour,
+written nearest-head-first for the conventional split-tape model. -/
+farLeftSymbols :
+  ∀ {State Symbol : Set}
+    {cells : List (Local.TapeCell State Symbol)} →
+  WF.PlainCells cells → List Symbol
+farLeftSymbols WF.plainNil = []
+farLeftSymbols (WF.plainCons {symbol = symbol} rest) =
+  Local.append (farLeftSymbols rest) (symbol ∷ [])
 
 ------------------------------------------------------------------------
 -- Intrinsic before-row projection.
@@ -48,7 +59,7 @@ standardBeforeOfInterior :
 standardBeforeOfInterior interior =
   Standard.standard-configuration
     (Character.leftSymbol interior ∷
-      reverse (plainSymbols (Character.prefixPlain interior)))
+      farLeftSymbols (Character.prefixPlain interior))
     (Character.headState interior)
     (Character.readSymbol interior)
     (Character.rightSymbol interior ∷
@@ -67,7 +78,7 @@ standardAfterOfRule interior rule
     with Local.direction rule
 ... | Local.moveLeft =
   Standard.standard-configuration
-    (reverse (plainSymbols (Character.prefixPlain interior)))
+    (farLeftSymbols (Character.prefixPlain interior))
     (Local.targetState rule)
     (Character.leftSymbol interior)
     (Local.writeSymbol rule ∷
@@ -76,7 +87,7 @@ standardAfterOfRule interior rule
 ... | Local.stayPut =
   Standard.standard-configuration
     (Character.leftSymbol interior ∷
-      reverse (plainSymbols (Character.prefixPlain interior)))
+      farLeftSymbols (Character.prefixPlain interior))
     (Local.targetState rule)
     (Local.writeSymbol rule)
     (Character.rightSymbol interior ∷
@@ -85,7 +96,7 @@ standardAfterOfRule interior rule
   Standard.standard-configuration
     (Local.writeSymbol rule ∷
       Character.leftSymbol interior ∷
-      reverse (plainSymbols (Character.prefixPlain interior)))
+      farLeftSymbols (Character.prefixPlain interior))
     (Local.targetState rule)
     (Character.rightSymbol interior)
     (plainSymbols (Character.suffixPlain interior))
@@ -128,7 +139,7 @@ standardNext_of_fetch :
     ≡ just (standardAfterOfRule interior (Interpreter.rule matched))
 standardNext_of_fetch {machine} interior fetchEq
     rewrite fetchEq =
-  congrJust (Standard.standardApplyMatchedRuleExact interior _)
+  congrJust (standardApplyMatchedRuleExact interior _)
   where
     congrJust : ∀ {A : Set} {x y : A} → x ≡ y → just x ≡ just y
     congrJust refl = refl
@@ -172,22 +183,21 @@ wellFormedConcreteStepProjectsToStandardStep
     (Character.wellFormedStepBeforeInterior wellFormed)
     fetchEq
 
-/-!
-MAX-CUT STATUS
-
-PAID (subject to exact-head Agda certification):
-* proof-preserving extraction of symbol lists from concrete plain contexts;
-* actual intrinsic concrete before row -> conventional split-tape config;
-* exact left/stay/right correspondence for the same selected rule;
-* first-match concrete execution -> standard execution;
-* relational WellFormedMachineStep -> the same standard execution under
-  RuleDispatchUnique.
-
-NEXT:
-* relate `standardAfterOfRule` back to the exact relational after row through
-  `PNotEqualsNPConcreteTapeRelationalAfterRowExact` (the row equality itself is
-  already paid);
-* iterate the one-step projection through the existing T+1 margin theorem;
-* provide/reify finite standard transition tables in the reverse direction;
-* prove polynomial clock transport and freeze P infrastructure.
--/
+------------------------------------------------------------------------
+-- MAX-CUT STATUS
+--
+-- PAID (subject to exact-head Agda certification):
+-- * proof-preserving extraction of symbol lists from concrete plain contexts;
+-- * structural nearest-head-first reversal of the concrete left prefix;
+-- * actual intrinsic concrete before row -> conventional split-tape config;
+-- * exact left/stay/right correspondence for the same selected rule;
+-- * first-match concrete execution -> standard execution;
+-- * relational WellFormedMachineStep -> the same standard execution under
+--   RuleDispatchUnique.
+--
+-- NEXT:
+-- * identify these intrinsic before/after projections with the canonical
+--   ExactlyOneHead projection;
+-- * iterate through WellFormedTapeRun;
+-- * prove polynomial clock/language transport and freeze P infrastructure.
+------------------------------------------------------------------------
