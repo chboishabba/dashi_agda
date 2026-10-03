@@ -1,0 +1,39 @@
+name: P standard reverse-run exact
+
+on:
+  push:
+    branches:
+      - 'agent/pnp-direct-sat-lower-bound-20260924'
+    paths:
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeTimeBudgetPaddingExact.agda'
+      - '.github/workflows/p-standard-reverse-run.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: p-standard-reverse-run-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Typecheck reverse-run owner
+        run: |
+          set -euxo pipefail
+          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda | tee p-standard-reverse-run.log
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p-standard-reverse-run-log
+          path: p-standard-reverse-run.log
