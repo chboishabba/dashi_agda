@@ -1,0 +1,65 @@
+name: CMP119 cosmology Pareto max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SignedSymmetricTangentExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SignedReadoutCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1HypercubicSignedAxisActionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1HypercubicSignedReadoutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1SignedMarkedStressFamilyExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144DirectMarkedCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144HypercubicReadoutMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressSharedE2E4ObservableExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144EffectiveActionStressExpectationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionR136MaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyWeldExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - '.github/workflows/cmp119-cosmology-pareto-maxcut.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-pareto-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck compressed cosmology max-cut
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SignedSymmetricTangentExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SignedReadoutCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1HypercubicSignedAxisActionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1HypercubicSignedReadoutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1SignedMarkedStressFamilyExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1R144DirectMarkedCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1R144HypercubicReadoutMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressSharedE2E4ObservableExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144EffectiveActionStressExpectationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionR136MaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyWeldExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '
