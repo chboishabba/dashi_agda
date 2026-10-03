@@ -1,12 +1,12 @@
 module DASHI.ComputerScience.TekumPositiveAnchorInjectiveExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_; _∸_)
 import Data.Fin.Base as Fin using (toℕ; opposite; fromℕ<)
 import Data.Fin.Properties as FinP
 open import Data.Integer.Base as ℤ using (+_; ∣_∣)
-open import Data.Nat.Base using (_≤_; _<_; _⊔_; _∸_)
-import Data.Nat.DivMod as DivMod using (_%_; [m+kn]%n≡m%n; m<n⇒m%n≡m)
+open import Data.Nat.Base using (_≤_; _<_)
+import Data.Nat.DivMod as DivMod using (_%_; [m+n]%n≡m%n; m<n⇒m%n≡m)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
@@ -20,22 +20,12 @@ import DASHI.Algebra.BalancedTernaryRankReconstructionExact as Rank
 import DASHI.Algebra.BalancedTernaryRankNegationExact as RankNeg
 import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact as Centered
 import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
+import DASHI.ComputerScience.TekumSourceAnchorCenterExact as SourceCenter
+import DASHI.ComputerScience.TekumWidthAdmissibilityExact as Width
 
 ------------------------------------------------------------------------
--- THE CONCRETE HUNHOLD ANCHOR IS INJECTIVE ON THE POSITIVE HALF
+-- POSITIVE SOURCE WORDS: GENERIC CENTERED FACTS
 ------------------------------------------------------------------------
-
-allPositiveNatCode :
-  (n : Nat) →
-  Positional.natCode (Fixed.allPositiveWord n)
-  ≡ 2 * Positional.center n
-allPositiveNatCode zero = refl
-allPositiveNatCode (suc n)
-  rewrite allPositiveNatCode n =
-  solve 1
-    (λ c → con 2 :+ (con 3 :* (con 2 :* c))
-      := con 2 :* (con 1 :+ (con 3 :* c)))
-    refl (Positional.center n)
 
 positiveNatCode :
   ∀ {n m}
@@ -61,14 +51,6 @@ twiceCenterAsSum :
 twiceCenterAsSum n =
   solve 1 (λ c → con 2 :* c := c :+ c) refl (Positional.center n)
 
-twiceCenterMinusCenter :
-  (n : Nat) →
-  (2 * Positional.center n) ∸ Positional.center n
-  ≡ Positional.center n
-twiceCenterMinusCenter n
-  rewrite twiceCenterAsSum n =
-  NatP.m+n∸n≡m (Positional.center n) (Positional.center n)
-
 positiveMagnitudeBound :
   ∀ {n m}
   (word : Vec Trit.Trit n) →
@@ -81,15 +63,13 @@ positiveMagnitudeBound {n} {m} word valueEq =
     (Positional.center n)
     boundWithCommonTail
   where
-  codeEq = positiveNatCode word valueEq
-
   rankBound :
     suc m + Positional.center n
     ≤ 2 * Positional.center n
   rankBound =
     subst
       (λ k → k ≤ 2 * Positional.center n)
-      codeEq
+      (positiveNatCode word valueEq)
       (rankCodeUpper word)
 
   boundWithCommonTail :
@@ -136,10 +116,10 @@ positiveOppositeBelowRank {n} word valueEq =
     (2 * Positional.center n ∸ Positional.natCode word)
     ≤ Positional.center n
   complementBelowCenter =
+    let center = Positional.center n in
     subst
-      (λ upper →
-        (2 * Positional.center n ∸ Positional.natCode word) ≤ upper)
-      (twiceCenterMinusCenter n)
+      (λ upper → (2 * center ∸ Positional.natCode word) ≤ upper)
+      (NatP.m+n∸n≡m center center)
       (NatP.∸-mono NatP.≤-refl (positiveCenterBelowRank word valueEq))
 
 positiveModulusCentered :
@@ -173,19 +153,32 @@ encodeModulusWordPositive word valueEq =
       (Fixed.modulusCentered (Centered.encodeCentered word)))
     (positiveModulusCentered word valueEq)
 
-negatedAllPositiveRankZero :
-  (n : Nat) →
+------------------------------------------------------------------------
+-- CORRECT DEFINITION-7 MIDPOINT COORDINATES
+------------------------------------------------------------------------
+
+fourCMinusThreeC :
+  (c : Nat) → 2 * (2 * c) ∸ 3 * c ≡ c
+fourCMinusThreeC c =
+  trans
+    (cong (_∸ 3 * c)
+      (solve 1
+        (λ x → con 2 :* (con 2 :* x) := (con 3 :* x) :+ x)
+        refl c))
+    (NatP.m+n∸m≡n (3 * c) c)
+
+negatedSourceCenterRank :
+  ∀ {n} (even : Width.EvenWidth n) →
   toℕ
     (Centered.rank
       (Fixed.negateCentered
-        (Centered.encodeCentered (Fixed.allPositiveWord n))))
-  ≡ 0
-negatedAllPositiveRankZero n =
-  trans
-    (RankNeg.oppositeRankToNatCode (Fixed.allPositiveWord n))
-    (trans
-      (cong (2 * Positional.center n ∸_) (allPositiveNatCode n))
-      (NatP.n∸n≡0 (2 * Positional.center n)))
+        (Centered.encodeCentered (SourceCenter.sourceAnchorCenterWord n))))
+  ≡ SourceCenter.sourceCenterMagnitudeAt even
+negatedSourceCenterRank {n} even
+  rewrite RankNeg.oppositeRankToNatCode (SourceCenter.sourceAnchorCenterWord n)
+        | SourceCenter.centerAtEvenWidth even
+        | SourceCenter.sourceCenterNatCodeAtEvenWidth even =
+  fourCMinusThreeC (SourceCenter.sourceCenterMagnitudeAt even)
 
 wrapRankToNat :
   ∀ {n} (k : Nat) →
@@ -197,51 +190,90 @@ wrapRankToNat {n} k =
       (fromℕ< (DivMod.m%n<n k (Fixed.modulusSize n))))
     (FinP.toℕ-fromℕ< (DivMod.m%n<n k (Fixed.modulusSize n)))
 
-centerBelowModulus :
-  (n : Nat) → Positional.center n < Fixed.modulusSize n
-centerBelowModulus n =
-  NatP.≤-<-trans
-    (subst
-      (Positional.center n ≤_)
-      (sym (twiceCenterAsSum n))
-      (NatP.m≤m+n (Positional.center n) (Positional.center n)))
-    (NatP.n<1+n (2 * Positional.center n))
-
-positiveWrapExact :
-  ∀ {n m} →
+baseBelowModulus :
+  ∀ {n m}
+  (even : Width.EvenWidth n) →
   suc m ≤ Positional.center n →
-  ((suc m + Positional.center n) + 0 + suc (Positional.center n))
-    % Fixed.modulusSize n
-  ≡ suc m
-positiveWrapExact {n} {m} magnitudeBound =
-  trans
-    (cong
-      (_% Fixed.modulusSize n)
-      (solve 2
-        (λ a c →
-          (a :+ c) :+ con 0 :+ (con 1 :+ c)
-          := a :+ (con 1 :+ (con 2 :* c)))
-        refl (suc m) (Positional.center n)))
-    (trans
-      ([m+kn]%n≡m%n (suc m) 1 (Fixed.modulusSize n))
-      (m<n⇒m%n≡m magnitudeBelowModulus))
+  suc m + SourceCenter.sourceCenterMagnitudeAt even
+    < Fixed.modulusSize n
+baseBelowModulus {n} {m} even magnitudeBound
+  rewrite SourceCenter.centerAtEvenWidth even =
+  NatP.≤-<-trans baseAtMostThreeC threeCBelowModulus
   where
-  magnitudeBelowModulus : suc m < Fixed.modulusSize n
-  magnitudeBelowModulus =
-    NatP.≤-<-trans magnitudeBound (centerBelowModulus n)
+  c = SourceCenter.sourceCenterMagnitudeAt even
+
+  baseAtMostThreeC : suc m + c ≤ 3 * c
+  baseAtMostThreeC =
+    subst
+      (λ upper → suc m + c ≤ upper)
+      (solve 1 (λ x → (con 2 :* x) :+ x := con 3 :* x) refl c)
+      (NatP.+-monoʳ-≤ c magnitudeBound)
+
+  threeCBelowFourCPlusOne : 3 * c < suc (4 * c)
+  threeCBelowFourCPlusOne =
+    NatP.≤-<-trans
+      (subst
+        (3 * c ≤_)
+        (solve 1 (λ x → (con 3 :* x) :+ x := con 4 :* x) refl c)
+        (NatP.m≤m+n (3 * c) c))
+      (NatP.n<1+n (4 * c))
+
+  threeCBelowModulus : 3 * c < suc (2 * (2 * c))
+  threeCBelowModulus =
+    subst
+      (3 * c <_)
+      (cong suc (solve 1 (λ x → con 4 :* x := con 2 :* (con 2 :* x)) refl c))
+      threeCBelowFourCPlusOne
+
+positiveWrapExactEven :
+  ∀ {n m}
+  (even : Width.EvenWidth n) →
+  suc m ≤ Positional.center n →
+  ((suc m + Positional.center n)
+      + SourceCenter.sourceCenterMagnitudeAt even
+      + suc (Positional.center n))
+    % Fixed.modulusSize n
+  ≡ suc m + SourceCenter.sourceCenterMagnitudeAt even
+positiveWrapExactEven {n} {m} even magnitudeBound =
+  trans
+    (cong (_% Fixed.modulusSize n) totalAsBasePlusModulus)
+    (trans
+      ([m+n]%n≡m%n
+        (suc m + SourceCenter.sourceCenterMagnitudeAt even)
+        (Fixed.modulusSize n))
+      (m<n⇒m%n≡m (baseBelowModulus even magnitudeBound)))
+  where
+  c = SourceCenter.sourceCenterMagnitudeAt even
+
+  totalAsBasePlusModulus :
+    (suc m + Positional.center n) + c + suc (Positional.center n)
+    ≡ (suc m + c) + Fixed.modulusSize n
+  totalAsBasePlusModulus
+    rewrite SourceCenter.centerAtEvenWidth even =
+    solve 2
+      (λ a x →
+        (a :+ (con 2 :* x)) :+ x :+ (con 1 :+ (con 2 :* x))
+        := (a :+ x) :+ (con 1 :+ (con 2 :* (con 2 :* x))))
+      refl (suc m) c
+
+------------------------------------------------------------------------
+-- THE CORRECTED CONCRETE ANCHOR IS INJECTIVE ON THE POSITIVE HALF.
+------------------------------------------------------------------------
 
 positiveConcreteAnchorRank :
   ∀ {n m}
+  (even : Width.EvenWidth n)
   (word : Vec Trit.Trit n) →
   BT.toInteger (BT.eval word) ≡ + (suc m) →
-  toℕ (Rank.rankWord (Fixed.concreteAnchor word)) ≡ suc m
-positiveConcreteAnchorRank {n} {m} word valueEq =
+  toℕ (Rank.rankWord (Fixed.concreteAnchor word))
+  ≡ suc m + SourceCenter.sourceCenterMagnitudeAt even
+positiveConcreteAnchorRank {n} {m} even word valueEq =
   trans decodedRank stateRank
   where
   anchorState =
     Fixed.subtractCentered
       (Centered.encodeCentered (Fixed.modulusWord word))
-      (Centered.encodeCentered (Fixed.allPositiveWord n))
+      (Centered.encodeCentered (SourceCenter.sourceAnchorCenterWord n))
 
   decodedRank :
     toℕ (Rank.rankWord (Fixed.concreteAnchor word))
@@ -251,33 +283,44 @@ positiveConcreteAnchorRank {n} {m} word valueEq =
       (λ c → toℕ (Centered.rank c))
       (Centered.encodeDecodeCentered anchorState)
 
-  stateRank : toℕ (Centered.rank anchorState) ≡ suc m
+  stateRank :
+    toℕ (Centered.rank anchorState)
+    ≡ suc m + SourceCenter.sourceCenterMagnitudeAt even
   stateRank
     rewrite encodeModulusWordPositive word valueEq
           | Rank.rankToNatCode word
           | positiveNatCode word valueEq
-          | negatedAllPositiveRankZero n =
+          | negatedSourceCenterRank even =
     trans
       (wrapRankToNat
-        ((suc m + Positional.center n) + 0 + suc (Positional.center n)))
-      (positiveWrapExact (positiveMagnitudeBound word valueEq))
+        ((suc m + Positional.center n)
+          + SourceCenter.sourceCenterMagnitudeAt even
+          + suc (Positional.center n)))
+      (positiveWrapExactEven even (positiveMagnitudeBound word valueEq))
 
 positiveAnchorInjective :
   ∀ {n} {left right : Vec Trit.Trit n} {m k} →
+  (even : Width.EvenWidth n) →
   BT.toInteger (BT.eval left) ≡ + (suc m) →
   BT.toInteger (BT.eval right) ≡ + (suc k) →
   Fixed.concreteAnchor left ≡ Fixed.concreteAnchor right →
   left ≡ right
-positiveAnchorInjective {left = left} {right = right} leftPositive rightPositive anchorEq =
+positiveAnchorInjective {left = left} {right = right} {m} {k}
+    even leftPositive rightPositive anchorEq =
   Positional.toIntegerInjective integerEq
   where
-  magnitudeEq : suc _ ≡ suc _
-  magnitudeEq =
+  c = SourceCenter.sourceCenterMagnitudeAt even
+
+  shiftedMagnitudeEq : suc m + c ≡ suc k + c
+  shiftedMagnitudeEq =
     trans
-      (sym (positiveConcreteAnchorRank left leftPositive))
+      (sym (positiveConcreteAnchorRank even left leftPositive))
       (trans
         (cong (λ w → toℕ (Rank.rankWord w)) anchorEq)
-        (positiveConcreteAnchorRank right rightPositive))
+        (positiveConcreteAnchorRank even right rightPositive))
+
+  magnitudeEq : suc m ≡ suc k
+  magnitudeEq = NatP.+-cancelʳ-≡ (suc m) (suc k) c shiftedMagnitudeEq
 
   integerEq :
     BT.toInteger (BT.eval left) ≡ BT.toInteger (BT.eval right)
