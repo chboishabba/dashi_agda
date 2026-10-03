@@ -11,7 +11,7 @@ from .boundary_refinements import install_boundary_refinements
 from .integration_refinements import install_scope_refinements
 
 install_checker_boundary_rules(Checker)
-install_boundary_refinements()
+install_boundary_refinements(Checker)
 install_scope_refinements()
 
 __all__ = ["Checker", "Diagnostic"]
