@@ -14,6 +14,12 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003IExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003ITest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003I1Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003I1Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyConnectedResponseDoesNotPayPartitionB2Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyConnectedResponseDoesNotPayPartitionB2Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144CanonicalB4ReadoutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityDoesNotForceB4CovarianceExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109SelectedStressCylinderPresentationExact.agda'
@@ -72,10 +78,16 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyDirectTailFromSourceNumeratorExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyDirectSourceNumeratorTailToExpansionExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyDirectSourceNumeratorTailToExpansionTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyConnectedResponseDoesNotPayPartitionB2Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyConnectedResponseDoesNotPayPartitionB2Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionDerivativeTailMarginTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003HTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003IExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003ITest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003I1Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261003I1Test.agda \
               DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerTest.agda \
               DASHI/Physics/Foundations/CMP119CanonicalSourceOrderedHaarTraceClosureExact.agda \
