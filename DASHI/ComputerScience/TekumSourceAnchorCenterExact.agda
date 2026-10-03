@@ -2,7 +2,7 @@ module DASHI.ComputerScience.TekumSourceAnchorCenterExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _*_)
+open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_)
 open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver using () renaming
   ( solve to solveℤ
@@ -14,7 +14,7 @@ open +-*-Solver using () renaming
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Data.Vec using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
@@ -55,10 +55,6 @@ sourceAnchorCenterInteger4 = refl
 
 ------------------------------------------------------------------------
 -- Closed coordinates without division.
---
--- C_k is the integer represented by the 2k-trit midpoint 1T...1T. It obeys
--- C_0 = 0 and C_{k+1}=2+9C_k.  The ordinary centered carrier bound at width
--- 2k is exactly 2C_k; equivalently the midpoint really is half of A_{2k}.
 ------------------------------------------------------------------------
 
 evenLength : Nat → Nat
@@ -91,7 +87,7 @@ sourceCenterIntegerEvenLength (suc k)
             (sourceAnchorCenterWord (evenLength k)) =
   solveℤ 1
     (λ c →
-      conℤ (+ 0) ℤ+ (conℤ (+ 3) ℤ* (conℤ (+ 1) ℤ+ (conℤ (+ 3) ℤ* c)))
+      conℤ -[1+ 0 ] ℤ+ (conℤ (+ 3) ℤ* (conℤ (+ 1) ℤ+ (conℤ (+ 3) ℤ* c)))
       ℤ= conℤ (+ 2) ℤ+ (conℤ (+ 9) ℤ* c))
     refl (+ (sourceCenterMagnitude k))
 
