@@ -55,6 +55,11 @@ required = {
         'fractionIntegerLower', 'fractionIntegerUpper', 'fractionIntegerRange',
         'twiceCenterPlusOneIsPowerThree', 'twiceCenterStrictlyBelowPowerThree',
     ],
+    'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': [
+        'fractionTwiceUpperInteger', 'fractionTwiceLowerInteger',
+        'rawFraction', 'canonicalFraction', 'rawFractionStrictHalfBound',
+        'fractionStrictHalfBound', 'canonicalFractionIsSignedDivision',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': [
@@ -88,4 +93,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: signed canonical rational decoder, exact fraction range, source-level negation, parser roundtrip, centered backend, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: canonical rational fraction band, signed decoder, source-level negation, parser roundtrip, centered backend, p-adic naturality and hardware boundaries present.')
