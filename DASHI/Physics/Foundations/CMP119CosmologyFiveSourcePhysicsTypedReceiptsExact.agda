@@ -88,18 +88,18 @@ record A2SelectedR109WilsonAdmissibleInsertionReceipt
         (Configuration → ℝ) ℝ)
     : Set₁ where
   field
-    selectedObservable : Configuration → ℝ
+    exactSelectedObservable : Configuration → ℝ
 
-    selectedInsertionHasMeaning :
+    exactSelectedInsertionHasMeaning :
       Meaning
         (Source.pair (R109.stressInsertion source))
-        selectedObservable
+        exactSelectedObservable
 
-    selectedPositiveTime :
-      WilsonOS.PositiveTimeObservable publishedOS selectedObservable
+    exactSelectedPositiveTime :
+      WilsonOS.PositiveTimeObservable publishedOS exactSelectedObservable
 
-    selectedGaugeInvariant :
-      WilsonOS.GaugeInvariant publishedOS selectedObservable
+    exactSelectedGaugeInvariant :
+      WilsonOS.GaugeInvariant publishedOS exactSelectedObservable
 
 open A2SelectedR109WilsonAdmissibleInsertionReceipt public
 
