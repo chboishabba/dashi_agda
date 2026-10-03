@@ -1,14 +1,13 @@
 from pathlib import Path
 
 from agda_preflight.checker import Diagnostic
+from agda_preflight.triage_delta import render_delta, triage_snapshot
 from agda_preflight.triage_render import (
     build_triage,
     render_compact,
-    render_delta,
     render_grouped,
     render_location,
     render_verbose,
-    triage_snapshot,
 )
 
 
