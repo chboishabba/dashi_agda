@@ -24,8 +24,6 @@ def _shadow_diagnostics(checker, summary) -> list[Diagnostic]:
             tokens = significant_tokens(summary.ast.source_bytes, clause.lhs_node)
             if len(tokens) <= 1:
                 continue
-            # The first significant token is the defining function head. Every
-            # later candidate must be one complete unqualified token.
             for index, token in enumerate(tokens[1:], 1):
                 basename = token.text
                 aliases = owners.get(basename)
@@ -59,7 +57,36 @@ def _shadow_diagnostics(checker, summary) -> list[Diagnostic]:
     return out
 
 
-def install_boundary_refinements() -> None:
+def _is_module_assignment_tsagda090(summary, diagnostic) -> bool:
+    """Identify TSAGDA090 accidentally emitted for record module assignments."""
+
+    if diagnostic.code != "TSAGDA090":
+        return False
+    for record_expr in summary.ast.record_expressions:
+        for assignment in record_expr.assignments:
+            if getattr(assignment.node, "type", None) != "module_assignment":
+                continue
+            if assignment.line != diagnostic.line:
+                continue
+            if assignment.name and assignment.name in diagnostic.message:
+                return True
+    return False
+
+
+def install_boundary_refinements(Checker) -> None:
     """Install conservative post-review refinements for boundary diagnostics."""
 
     boundary_rules._shadow_diagnostics = _shadow_diagnostics
+    if getattr(Checker, "_dashi_boundary_review_refined", False):
+        return
+    original_syntax = Checker._syntax_diagnostics
+
+    def syntax_without_module_assignment_false_positive(self, summary):
+        return [
+            diagnostic
+            for diagnostic in original_syntax(self, summary)
+            if not _is_module_assignment_tsagda090(summary, diagnostic)
+        ]
+
+    Checker._syntax_diagnostics = syntax_without_module_assignment_false_positive
+    Checker._dashi_boundary_review_refined = True
