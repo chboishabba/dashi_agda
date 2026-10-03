@@ -15,9 +15,17 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --         F_k = embed(DGamma_k)
 --       and
 --         embed(Q_R136) <= F_k + embed(Tail_109(k));
---   B2  one combined E/R/B pointwise envelope M_ERB together with the literal
---       source threshold
---         c_V < -(M_ERB + Tail_109(k)).
+--   B2  quantitative source negativity strong enough to beat Tail_109(k).
+--
+-- The Eq.(2.23) coordinate realization of B2 is
+--
+--   c_V < -(M_ERB + Tail_109(k)),
+--
+-- where M_ERB is one combined E/R/B envelope.  A newer canonical-source lane
+-- already compiles the selected source anchor + ordered Haar/SU(2) trace data
+-- to STRICT finite diagonal negativity.  Therefore "prove any negative sign"
+-- is no longer the B2 frontier; the surviving strength is the quantitative
+-- tail-beating margin.
 --
 -- All arithmetic/order transport below B1+B2 is already compiler-owned by the
 -- concrete R109-tail -> R136 -> terminal-acceleration route.  A1/A2 belong to
@@ -36,6 +44,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyConcreteFiniteR109RealCompletion
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ConcreteR109TailToR136Exact as B1Concrete
 import DASHI.Physics.Foundations.CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact as B2Envelope
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumTailThresholdExact as B2Threshold
+import DASHI.Physics.Foundations.CMP119CanonicalSourceOrderedHaarTraceClosureExact as CanonicalTrace
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact as Terminal
 import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as Prior
 
@@ -49,7 +58,7 @@ data PreferredSourcePhysicsResidual : Set where
   b1-concrete-pinned-r109-completion-and-finite-attachment :
     PreferredSourcePhysicsResidual
 
-  b2-eq223-combined-erb-envelope-and-vacuum-threshold :
+  b2-quantitative-source-negativity-beats-r109-tail :
     PreferredSourcePhysicsResidual
 
 preferredSourcePhysicsResidualCount : Nat
@@ -128,6 +137,18 @@ b2ThreeSeparateSectorCalibrationsAreNotTerminal =
 b2TailIsPartOfLiteralVacuumBudget : Bool
 b2TailIsPartOfLiteralVacuumBudget =
   B2Threshold.round109TailIsPartOfRequiredVacuumBudget
+
+b2CanonicalSourceCanAlreadyCompileStrictFiniteTraceNegativity : Bool
+b2CanonicalSourceCanAlreadyCompileStrictFiniteTraceNegativity =
+  CanonicalTrace.canonicalSourceEqualityCompilesToFiniteTraceNegativity
+
+b2FiniteNegativityAloneDoesNotPayTailMargin : Bool
+b2FiniteNegativityAloneDoesNotPayTailMargin =
+  CanonicalTrace.finiteTraceNegativityAlonePaysR109TailMargin
+
+b2RemainingPreferredSignStrengthIsQuantitativeTailMargin : Bool
+b2RemainingPreferredSignStrengthIsQuantitativeTailMargin =
+  CanonicalTrace.remainingPreferredSignStrengthIsQuantitativeTailMargin
 
 b2RawEq223SourceAloneDoesNotFixThreshold : Bool
 b2RawEq223SourceAloneDoesNotFixThreshold = true
