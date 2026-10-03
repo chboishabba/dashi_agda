@@ -2,10 +2,9 @@ module DASHI.ComputerScience.TekumMonotoneMagnitudeExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base as ℤ using (_<_)
-open import Data.Product using (_,_)
-open import Data.Rational.Base as ℚ using (_<_; _*_; Positive; positive)
+open import Data.Rational.Base as ℚ using (_<_; Positive; positive)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.ComputerScience.TekumExponentBandExact as Band
 import DASHI.ComputerScience.TekumIntegerSuccessorGapExact as Gap
@@ -38,7 +37,7 @@ exponentStrictForcesMagnitudeStrict p q exponentLt
     (Parsed.parsedMagnitudeInExponentBand p)
     (subst
       (λ e → Band.InBand e (Parsed.parsedMagnitude q))
-      (Relation.Binary.PropositionalEquality.sym advanceEq)
+      (sym advanceEq)
       (Parsed.parsedMagnitudeInExponentBand q))
 
 sameExponentSignificandStrictForcesMagnitudeStrict :
