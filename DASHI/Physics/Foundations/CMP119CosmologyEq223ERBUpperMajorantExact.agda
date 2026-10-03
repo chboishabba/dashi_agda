@@ -15,7 +15,6 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223ERBUpperMajorantExact where
 --   N_E <= M_E,  N_R <= M_R,  N_B <= M_B
 --
 -- and
---
 --   M_E + M_R + M_B < -N_V,
 --
 -- then the literal Eq.(2.23) dominance follows.  This owner is pinned to the
@@ -25,15 +24,15 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223ERBUpperMajorantExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; -_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Foundations.CMP119CosmologyEq223NegativeSectorDominanceExact as Dominance
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
 import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact as Sector
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumSectorFactorizationExact as Vacuum
-import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
 
@@ -103,26 +102,11 @@ module _
       (literalERBBelowUpperTotal bounds)
       upperStrict
 
-  record FactoredVacuumMargin
-      (partition : Partition.PhysicalFinitePartitionAuthority measure)
-      (scaleLaw : Vacuum.RationalHaarScaleLaw measure)
-      : Set₁ where
-    field
-      vacuumConstant : Vacuum.VacuumTraceConstant d
-
-      upperTotalBelowFactoredVacuum :
-        erbUpperTotal
-          -- The bounds are supplied to the theorem below; this field is only
-          -- the source-side vacuum datum and is intentionally not used here.
-          ?
-        < - (Vacuum.coefficient vacuumConstant
-              * Physical.haarIntegral measure (Physical.density measure))
-
-  -- The useful factored form is theorem-level rather than stored in the record:
-  -- it keeps E/R/B majorants and the vacuum source datum independent.
+  -- Since the vacuum trace is configuration-independent, its selected numerator
+  -- factors exactly as c_V times the density integral.  Hence source estimates
+  -- may compare the E/R/B upper budget directly with this factored vacuum term.
   factoredVacuumMarginForcesDominance :
     (bounds : LiteralERBUpperMajorants)
-    (partition : Partition.PhysicalFinitePartitionAuthority measure)
     (scaleLaw : Vacuum.RationalHaarScaleLaw measure)
     (constant : Vacuum.VacuumTraceConstant d) →
     erbUpperTotal bounds
@@ -130,13 +114,12 @@ module _
             * Physical.haarIntegral measure (Physical.density measure)) →
     Dominance.LiteralNegativeSectorDominance realization measure
   factoredVacuumMarginForcesDominance
-      bounds partition scaleLaw constant margin =
+      bounds scaleLaw constant margin =
     upperTotalBelowNegativeVacuumForcesDominance
       bounds
-      (Relation.Binary.PropositionalEquality.subst
+      (subst
         (λ value → erbUpperTotal bounds < - value)
-        (Relation.Binary.PropositionalEquality.sym
-          (Vacuum.vacuumNumeratorFactors measure d scaleLaw constant))
+        (sym (Vacuum.vacuumNumeratorFactors measure d scaleLaw constant))
         margin)
 
   sourceSignNowAcceptsThreeUpperBoundsPlusOneStrictMargin : Bool
