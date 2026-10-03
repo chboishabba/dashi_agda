@@ -4,15 +4,22 @@ module DASHI.Physics.Foundations.CMP119CosmologyR144R109OneEndpointSequenceExact
 ------------------------------------------------------------------------
 -- R144 <-> R109 SAME-SEQUENCE MAX-CUT.
 --
--- Round109 already owns the scale-difference/telescope coordinate.  Difference
--- data determine a response sequence only up to one additive constant.  Hence,
--- once the R144 finite response is shown to have the SAME differences as the
--- selected R109 response, a SINGLE absolute endpoint calibration fixes the
--- entire finite sequence.
+-- Difference data determine a response sequence only up to one additive
+-- constant.  Therefore, ONCE two finite response sequences are identified as
+-- having the same SIGNED differences, a SINGLE absolute endpoint calibration
+-- fixes the whole sequence.
 --
--- This is the exact algebraic complement to
--- `CMP119CosmologyR109AbsoluteExpectationAnchorNoGoExact`: the no-go proves an
--- endpoint is necessary; this file proves one endpoint is sufficient.
+-- Important source boundary: the present Round109 source interface exposes a
+-- nonnegative `ordinaryDifference` controlled by the RG tail.  It does not yet
+-- identify that scalar with the signed difference of the pinned finite
+-- expectation sequence.  Thus this file does NOT claim that Round109 alone has
+-- discharged `sameScaleDifferences`; that same-object interpretation remains a
+-- physical/source theorem.
+--
+-- This is the algebraic complement to
+-- `CMP119CosmologyR109AbsoluteExpectationAnchorNoGoExact`: all-scale absolute
+-- calibration is redundant after signed differences match, but the signed
+-- difference identification itself is not manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -79,8 +86,11 @@ calibrationForcesSameFiniteSequence {responses} calibration =
     (baseEndpointExact calibration)
     (sameScaleDifferences responses)
 
-round109DifferenceDataLeavesOneAdditiveConstant : Bool
-round109DifferenceDataLeavesOneAdditiveConstant = true
+signedDifferenceMatchLeavesOnlyOneAdditiveConstant : Bool
+signedDifferenceMatchLeavesOnlyOneAdditiveConstant = true
+
+currentRound109NonnegativeDifferenceIsAlreadySignedDifferenceIdentity : Bool
+currentRound109NonnegativeDifferenceIsAlreadySignedDifferenceIdentity = false
 
 remainingAbsoluteDebtIsOneEndpoint : Bool
 remainingAbsoluteDebtIsOneEndpoint = true
