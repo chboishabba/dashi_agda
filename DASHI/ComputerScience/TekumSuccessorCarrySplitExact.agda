@@ -61,16 +61,14 @@ fractionCarryCase carry = successorStopsInPrefix carry
 
 exponentCarryCase :
   ∀ {p e r}
-  (fractionWidth : Nat)
   {exponent : Vec Trit.Trit e}
   {regime : Vec Trit.Trit r} →
-  p ≡ fractionWidth →
   Succ.HasSuccessor exponent →
   Succ.successorWord (allPositive p ++ exponent ++ regime)
   ≡ allNegative p ++ Succ.successorWord exponent ++ regime
-exponentCarryCase {p} fractionWidth refl carry =
+exponentCarryCase {p} {exponent = exponent} {regime = regime} carry =
   trans
-    (successorAllPositiveAppend p (_ ++ _))
+    (successorAllPositiveAppend p (exponent ++ regime))
     (cong (allNegative p ++_) (successorStopsInPrefix carry))
 
 regimeCarryCase :
@@ -79,7 +77,8 @@ regimeCarryCase :
   Succ.HasSuccessor regime →
   Succ.successorWord (allPositive p ++ allPositive e ++ regime)
   ≡ allNegative p ++ allNegative e ++ Succ.successorWord regime
-regimeCarryCase {p} {e} carry =
+regimeCarryCase {p} {e} {regime = regime} carry =
   trans
-    (successorAllPositiveAppend p (allPositive e ++ _))
-    (cong (allNegative p ++_) (successorAllPositiveAppend e _))
+    (successorAllPositiveAppend p (allPositive e ++ regime))
+    (cong (allNegative p ++_)
+      (successorAllPositiveAppend e regime))
