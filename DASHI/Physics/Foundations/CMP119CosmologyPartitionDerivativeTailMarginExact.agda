@@ -23,10 +23,10 @@ module DASHI.Physics.Foundations.CMP119CosmologyPartitionDerivativeTailMarginExa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _<_ ; -_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; _<_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (subst; subst₂; sym)
+open import Relation.Binary.PropositionalEquality using (subst; subst₂)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionWeylTraceExact as Weyl
