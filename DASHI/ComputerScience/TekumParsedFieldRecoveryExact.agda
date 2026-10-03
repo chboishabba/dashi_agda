@@ -12,6 +12,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact as Positional
+import DASHI.ComputerScience.TekumExactTriadicSemanticsExact as Exact
 import DASHI.ComputerScience.TekumFractionInjectiveExact as FractionInjective
 import DASHI.ComputerScience.TekumFractionRationalRangeExact as Fraction
 import DASHI.ComputerScience.TekumOrdinaryFactorizationExact as Factor
@@ -33,7 +34,7 @@ import DASHI.ComputerScience.TekumTriadicScaleExact as Scale
 ------------------------------------------------------------------------
 
 module RingZ = NR IntRS.ring
-open RingZ using (Κ; Ι; _⊕_; _⊖_; _⊜_)
+open RingZ using (_⊕_; ⊝_; _⊜_)
 
 cancelRightAdd :
   (x y b : ℤ) → x ℤ.+ b ≡ y ℤ.+ b → x ≡ y
@@ -47,7 +48,7 @@ cancelRightAdd x y b eq =
   subtractRight : (a c : ℤ) → (a ℤ.+ c) ℤ.- c ≡ a
   subtractRight a c =
     RingZ.solve 2
-      (λ a c → (((a ⊕ c) ⊖ c) ⊜ a))
+      (λ a c → (((a ⊕ c) ⊕ (⊝ c)) ⊜ a))
       refl a c
 
 -- Equality of the positive magnitudes first identifies the integer exponent by
@@ -63,6 +64,9 @@ equalMagnitudeForceRegime p q magnitudeEq =
   RegimeChain.equalParsedExponentForcesRegime p q
     (ExponentInjective.equalParsedMagnitudesForceExponent p q magnitudeEq)
 
+regimeBiasInteger : Regime.RegimeCode → ℤ
+regimeBiasInteger r = Exact.intCodeToInteger (Regime.bias r)
+
 -- Once the regime is fixed, equal decoded exponents cancel the common source
 -- bias.  Balanced positional injectivity then recovers the literal exponent
 -- trits (in the parser's LST orientation).
@@ -75,14 +79,10 @@ equalExponentSameRegimeForceExponentField :
 equalExponentSameRegimeForceExponentField {r = r} p q exponentEq =
   Positional.toIntegerInjective fieldIntegerEq
   where
-  bias = Factor.sourceExponentInteger
-
   fieldPlusBiasEq :
-    BT.toInteger (BT.eval (Source.exponentLST p)) ℤ.+
-      Factor.sourceExponentIntegerFromBias r
+    BT.toInteger (BT.eval (Source.exponentLST p)) ℤ.+ regimeBiasInteger r
     ≡
-    BT.toInteger (BT.eval (Source.exponentLST q)) ℤ.+
-      Factor.sourceExponentIntegerFromBias r
+    BT.toInteger (BT.eval (Source.exponentLST q)) ℤ.+ regimeBiasInteger r
   fieldPlusBiasEq =
     trans
       (sym (Source.exponentIntCodeInteger p))
@@ -95,7 +95,7 @@ equalExponentSameRegimeForceExponentField {r = r} p q exponentEq =
     cancelRightAdd
       (BT.toInteger (BT.eval (Source.exponentLST p)))
       (BT.toInteger (BT.eval (Source.exponentLST q)))
-      (Factor.sourceExponentIntegerFromBias r)
+      (regimeBiasInteger r)
       fieldPlusBiasEq
 
 -- Equal magnitude at an equal exponent leaves only the significand.  We cancel
