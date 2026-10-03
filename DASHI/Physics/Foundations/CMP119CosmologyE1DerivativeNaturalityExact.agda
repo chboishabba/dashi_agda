@@ -3,19 +3,12 @@ module DASHI.Physics.Foundations.CMP119CosmologyE1DerivativeNaturalityExact wher
 
 ------------------------------------------------------------------------
 -- ONE CHAIN-RULE/NATURALITY LAW PAYS EVERY LOCAL D1 COVARIANCE.
---
--- R142's FirstVariationLinearity contains additivity/congruence in the
--- differentiated function but no naturality under configuration maps.  Hence
--- local activity covariance cannot by itself imply marked D1 covariance.
---
--- The least additional calculus theorem is the ordinary derivative naturality
--- law below.  It is stated for an equivariant pair f,g, so no inverse action is
--- required in the carrier.  Once supplied, every localized CMP116 activity
--- inherits D1 covariance from its zeroth-order Euclidean covariance.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+import Data.List.Relation.Binary.Permutation.Propositional as Perm
 
 import DASHI.Physics.Foundations.CMP119CosmologyE1ComponentPermutationExact as PermE1
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
@@ -31,7 +24,7 @@ record EuclideanFirstVariationNaturality
 
     firstVariationNaturalForEquivariantPair :
       ∀ action
-        (left right : Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ)
+        (left right : Configuration → ℝ)
         configuration tangent →
       (∀ x → left (actConfiguration action x) ≡ right x) →
       D1.firstVariation calculus left
@@ -65,8 +58,7 @@ record LocalizedActivityEuclideanGeometry
     componentPermutation :
       ∀ action →
       Finite.mapList (actComponent action) (Finite.components dataSet)
-      Data.List.Relation.Binary.Permutation.Propositional._↭_
-      Finite.components dataSet
+      Perm.↭ Finite.components dataSet
 
     localActivityCovariant :
       ∀ action component configuration →
