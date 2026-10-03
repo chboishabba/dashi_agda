@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CanonicalSourceOrderedHaarTraceClosureExact where
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as Basis
@@ -137,3 +138,12 @@ module _
         domain realization representation selected
         measureWeld wilsonInsertion
         (asExistingOrderedHaarClosureInput input)
+
+canonicalSourceEqualityCompilesToFiniteTraceNegativity : Bool
+canonicalSourceEqualityCompilesToFiniteTraceNegativity = true
+
+finiteTraceNegativityAlonePaysR109TailMargin : Bool
+finiteTraceNegativityAlonePaysR109TailMargin = false
+
+remainingPreferredSignStrengthIsQuantitativeTailMargin : Bool
+remainingPreferredSignStrengthIsQuantitativeTailMargin = true
