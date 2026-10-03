@@ -13,10 +13,12 @@ open import Data.Rational.Tactic.RingSolver using (solve-∀)
 open import Data.Rational.Unnormalised.Base as ℚᵘ
   using (ℚᵘ; 1ℚᵘ; _/_; _+_; _≃_; *≡*)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
+open import Data.Vec using (Vec)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import Relation.Binary.PropositionalEquality.≡-Reasoning
 open import Relation.Nullary.Decidable.Core using (toWitness)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
 import DASHI.ComputerScience.TekumFractionRationalRangeExact as Fraction
@@ -176,7 +178,7 @@ applyRationalSignMul Anchor.positiveSign x y = refl
 
 parsedOrdinaryRationalIsSignedMagnitude :
   ∀ {extra r payload}
-  (word : Data.Vec.Vec DASHI.Algebra.Trit.Trit (8 + extra))
+  (word : Vec Trit.Trit (8 + extra))
   (parsed : Source.ParsedPayload extra r payload) →
   Source.ordinaryRationalFromParsed word parsed
   ≡ Factor.applyRationalSign (Source.signOfWord word) (parsedMagnitude parsed)
