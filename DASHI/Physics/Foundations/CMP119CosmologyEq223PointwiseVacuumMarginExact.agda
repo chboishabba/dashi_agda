@@ -3,33 +3,16 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223PointwiseVacuumMarginExact 
 
 ------------------------------------------------------------------------
 -- SOURCE-LEVEL SIGN CUT AFTER CANCELLING THE COMMON POSITIVE DENSITY FACTOR.
---
--- Suppose the literal Eq.(2.23) four-diagonal traces satisfy pointwise bounds
---
---   tr_E <= M_E,   tr_R <= M_R,   tr_B <= M_B.
---
--- Positive Haar integration gives weighted numerator majorants
---   N_E <= M_E I, N_R <= M_R I, N_B <= M_B I,
--- where I = integral rho.  The configuration-independent vacuum numerator is
---   N_V = c_V I.
---
--- Since I>0, the ONE source-level scalar inequality
---
---   M_E + M_R + M_B < -c_V
---
--- implies the full literal finite-measure dominance
---   N_E + N_R + N_B < -N_V.
---
--- This is the sharp Pareto form of the preferred Eq.(2.23) sign route.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
-  (ℚ; _+_; _*_; -_; _<_; Positive; positive)
+  (ℚ; 0ℚ; _+_; _*_; -_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using
+  (_≡_; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ERBUpperMajorantExact as ERB
 import DASHI.Physics.Foundations.CMP119CosmologyEq223NegativeSectorDominanceExact as Dominance
