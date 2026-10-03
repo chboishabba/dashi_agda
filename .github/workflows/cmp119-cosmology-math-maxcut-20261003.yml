@@ -19,6 +19,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Exact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceToExpansionExact.agda'
@@ -75,6 +77,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Exact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceToExpansionExact.agda \
