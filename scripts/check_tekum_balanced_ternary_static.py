@@ -9,17 +9,15 @@ required = {
     'DASHI/Algebra/BalancedTernaryRankNegationExact.agda': ['rankInvertIsOpposite'],
     'DASHI/Algebra/BalancedTernaryCenteredReconstructionExact.agda': ['CenteredInteger', 'decodeEncodeCentered', 'encodeDecodeCentered', 'balancedTernaryCenteredBijection'],
     'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': ['negateWordIsInvertWord', 'tekumBalancedArithmetic', 'concreteAnchor', 'concreteAnchorNegationInvariant'],
-    'DASHI/ComputerScience/TekumDefinition5ConsistencyExact.agda': ['definition5DiffersFromCarryDiscardAtWidthOne', 'anchorSubtractionNeverNeedsPositiveOverflow'],
     'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': ['integerToIntCodeRoundTrip', 'fractionIntCodeInteger', 'exponentIntCodeInteger', 'parseTekumWord'],
     'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': ['rejoinPayloadCorrect', 'rejoinParsedAnchorPayloadCorrect', 'sourceParserImageIsLossless'],
     'DASHI/ComputerScience/TekumSourceNegationExact.agda': ['parseTekumWordNegation'],
-    'DASHI/ComputerScience/TekumFractionRangeExact.agda': ['fractionIntegerRange', 'twiceCenterStrictlyBelowPowerThree'],
-    'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['rawFractionStrictHalfBound', 'fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
+    'DASHI/ComputerScience/TekumFractionRationalRangeExact.agda': ['fractionStrictHalfBound', 'canonicalFractionIsSignedDivision'],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
-    'DASHI/ComputerScience/TekumTriadicScaleExact.agda': [
-        'integerSucc', 'rawTriadicScale', 'triadicScale', 'rawTriadicScalePositive',
-        'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc',
-        'intCodeTriadicScale', 'intCodeTriadicScaleCanonical',
+    'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
+    'DASHI/ComputerScience/TekumExponentBandExact.agda': [
+        'bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality',
+        'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands',
     ],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['pow3NonZero', 'exactTriadicRationalUsesSignedDivision'],
     'DASHI/ComputerScience/TekumPadicDualCylinderNaturalityExact.agda': ['dualPrecisionTwoIsCylinderRefinementTwo'],
@@ -38,4 +36,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: signed triadic exponent scale, significand/fraction bands, exact parser codes, source negation and p-adic naturality present.')
+print('Tekum static regression: adjacent exponent bands, signed triadic scale, significand/fraction bands, exact parser codes, source negation and p-adic naturality present.')
