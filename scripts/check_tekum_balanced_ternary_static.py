@@ -72,9 +72,18 @@ required = {
         'exponentStrictForcesMagnitudeStrict',
         'sameExponentSignificandStrictForcesMagnitudeStrict',
     ],
+    'DASHI/ComputerScience/TekumPositiveSourceSuccessorAnchorExact.agda': [
+        'positiveSourceStepRaisesAnchorRank',
+        'positiveSourceSuccessorAnchorsAreAdjacent',
+    ],
+    'DASHI/ComputerScience/TekumSourceOrderExact.agda': [
+        'PositiveAdjacentOrder',
+        'positiveAdjacentSourceCodeStrict',
+        'hunholdProposition4PositiveAdjacent',
+    ],
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
     'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
-    'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': ['rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization', 'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg', 'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale', 'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct'],
+    'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': ['rawUnsignedSourceSignificand', 'rawSourceScale', 'rawSourceFactorization', 'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg', 'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale', 'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct'],
     'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': ['rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction', 'canonicalUnsignedSignificandIsSourceSignificand', 'parsedMagnitude', 'parsedMagnitudePositive', 'parsedMagnitudeInExponentBand', 'parsedOrdinaryRationalIsSignedMagnitude'],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': ['EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd', 'pow3Mod4OneImpliesEvenWidth', 'wheelQuarterIntegralityIffEvenWidth'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['pow3NonZero', 'exactTriadicRationalUsesSignedDivision'],
@@ -115,4 +124,4 @@ assembly = (ROOT / 'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.a
 if 'true true false false false true' not in assembly:
     raise SystemExit('assembly must record corrected Prop. 2 and source-domain Prop. 3 as source-paid, with Prop. 4/5 and numerical no-double-rounding still false')
 
-print('Tekum static regression: Definition 7 midpoint and source special classification are corrected; Prop. 2 is source-reclosed with explicit even-width evidence; source-domain Prop. 3 remains present; Prop. 4 numeric monotonicity compilers are present; Proposition 5 edge obstructions are recorded; no kernel-compilation claim is implied by this static gate.')
+print('Tekum static regression: Definition 7 midpoint and source special classification are corrected; Prop. 2 is source-reclosed with explicit even-width evidence; source-domain Prop. 3 remains present; Prop. 4 now requires the positive source-successor/anchor-successor and adjacent-order owners; Proposition 5 edge obstructions are recorded; no kernel-compilation claim is implied by this static gate.')
