@@ -4,12 +4,15 @@ module DASHI.Mathematics.Complexity.ConcreteTapeStandardClockExact where
 -- CLOCK TRANSPORT FOR THE CONCRETE <-> CONVENTIONAL STANDARD TM BRIDGE
 --
 -- `ConcreteTapeStandardRunExact` already proves one standard step for every
--- concrete edge and exact preservation of run length.  This owner records the
--- resulting complexity consequence against the literal first-match rule-table
--- interpreter: step count is identical, while dispatch work is bounded by the
--- static rule-table width per step.  The finite tape window used by the
--- concrete model is independently bounded linearly in the time budget by
--- `ConcreteTapeTimeBudgetPaddingExact`.
+-- concrete edge.  This owner packages the resulting complexity statement
+-- against the literal first-match rule-table interpreter:
+--
+--   * projected step count is exactly the concrete run length;
+--   * accumulated dispatch work is <= T * |rules|;
+--   * the guarded concrete tape window has inputWidth + 2*T cells.
+--
+-- Thus the forward Concrete -> standard model translation has an explicit
+-- linear/polynomial clock receipt with no hidden extensional transition oracle.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -19,10 +22,34 @@ import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
+import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
+import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact as Interpreter
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleKeyDeterminismExact as Determinism
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Bridge
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
+
+------------------------------------------------------------------------
+-- Literal standard run length, read back from the inductive run witness.
+------------------------------------------------------------------------
+
+standardRunLengthIndexed :
+  ∀ {State Symbol machine steps start finish} →
+  Bridge.StandardExactRun {State} {Symbol} machine steps start finish → Nat
+standardRunLengthIndexed Bridge.standardRunDone = zero
+standardRunLengthIndexed (Bridge.standardRunStep edge rest) =
+  suc (standardRunLengthIndexed rest)
+
+standardRunLengthIndexed_exact :
+  ∀ {State Symbol machine steps start finish}
+    (run : Bridge.StandardExactRun {State} {Symbol} machine steps start finish) →
+  standardRunLengthIndexed run ≡ steps
+standardRunLengthIndexed_exact Bridge.standardRunDone = refl
+standardRunLengthIndexed_exact (Bridge.standardRunStep edge rest)
+  rewrite standardRunLengthIndexed_exact rest = refl
 
 ------------------------------------------------------------------------
 -- Accumulated literal dispatch work along an exact conventional run whose
@@ -63,23 +90,22 @@ standardRunDispatchWorkBound
     (standardRunDispatchWorkBound rest)
 
 ------------------------------------------------------------------------
--- Exact step-clock preservation for a projected concrete run.
+-- Exact step-clock preservation for the concrete run projection.
 ------------------------------------------------------------------------
 
 projectedStepClockIdentity :
   ∀ {machine start rows finish}
-    (deterministic :
-      DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.RuleKeyDeterministic machine)
-    (startUnique :
-      DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact.ExactlyOneHead
-        (Local.cells start))
-    (concreteRun :
-      DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact.WellFormedTapeRun
-        machine start rows finish) →
-  let projected = Bridge.projectWellFormedTapeRun deterministic startUnique concreteRun
-  in Bridge.standardRunLength (Bridge.standardRun projected)
-      ≡ DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact.runLength concreteRun
-projectedStepClockIdentity = Bridge.projectWellFormedTapeRun_preservesLength
+    (deterministic : Determinism.RuleKeyDeterministic machine)
+    (startUnique : WF.ExactlyOneHead (Local.cells start))
+    (concreteRun : Run.WellFormedTapeRun machine start rows finish) →
+  let projected =
+        Bridge.projectWellFormedTapeRun deterministic startUnique concreteRun
+  in standardRunLengthIndexed (Bridge.standardRun projected)
+      ≡ Run.runLength concreteRun
+projectedStepClockIdentity deterministic startUnique concreteRun =
+  standardRunLengthIndexed_exact
+    (Bridge.standardRun
+      (Bridge.projectWellFormedTapeRun deterministic startUnique concreteRun))
 
 ------------------------------------------------------------------------
 -- Static polynomial-overhead receipt.
@@ -93,7 +119,7 @@ record ConcreteStandardClockReceipt
         (run : Bridge.StandardExactRun
           (Standard.standardControlOfConcrete machine)
           steps start finish) →
-      Bridge.standardRunLength run ≡ steps
+      standardRunLengthIndexed run ≡ steps
 
     dispatchWorkLinearPaid :
       ∀ {steps start finish}
@@ -104,28 +130,10 @@ record ConcreteStandardClockReceipt
         ≤ steps * Canonical.listLength (Local.rules machine)
 
     guardedTapeWidthLinearPaid :
-      ∀ (input : DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact.InputWord machine)
+      ∀ (input : Input.InputWord machine)
         (steps : Nat) →
-      DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact.listLength
-        (Guard.guardedInitialCells input steps)
-      ≡
-      DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact.initialInputCellCount input
-        + (2 * steps)
-
-standardRunLengthIndexed :
-  ∀ {State Symbol machine steps start finish} →
-  Bridge.StandardExactRun {State} {Symbol} machine steps start finish → Nat
-standardRunLengthIndexed Bridge.standardRunDone = zero
-standardRunLengthIndexed (Bridge.standardRunStep edge rest) =
-  suc (standardRunLengthIndexed rest)
-
-standardRunLengthIndexed_exact :
-  ∀ {State Symbol machine steps start finish}
-    (run : Bridge.StandardExactRun {State} {Symbol} machine steps start finish) →
-  standardRunLengthIndexed run ≡ steps
-standardRunLengthIndexed_exact Bridge.standardRunDone = refl
-standardRunLengthIndexed_exact (Bridge.standardRunStep edge rest)
-  rewrite standardRunLengthIndexed_exact rest = refl
+      Coordinate.listLength (Guard.guardedInitialCells input steps)
+      ≡ Input.initialInputCellCount input + (2 * steps)
 
 concreteStandardClockReceipt :
   (machine : Local.ConcreteTapeMachine) →
@@ -140,7 +148,7 @@ concreteStandardClockReceipt machine = record
 -- MAX-CUT STATUS
 --
 -- PAID HERE (subject to exact-head Agda certification):
--- * exact equality of concrete and standard step clocks on the projected run;
+-- * exact equality of concrete and standard step clocks on projected runs;
 -- * accumulated first-match dispatch work <= T * |rules|;
 -- * finite concrete tape width = input width + 2T;
 -- * therefore the already-constructed Concrete -> standard simulation has
