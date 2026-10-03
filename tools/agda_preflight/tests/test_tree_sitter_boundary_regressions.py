@@ -12,10 +12,15 @@ def write_module(root: Path, module: str, source: str) -> Path:
 
 
 def test_constructor_then_field_record_layout_is_known_tree_sitter_gap(tmp_path):
-    path = write_module(
-        tmp_path,
-        "RecordGap",
-        """module RecordGap where
+    modules = (
+        "DASHI.Moonshine.OggSSP2BIntegralMoonshineLocalActionSourceExact",
+        "DASHI.Moonshine.OggSSP2BTateGradingConventionBridgeExact",
+    )
+    for module in modules:
+        path = write_module(
+            tmp_path,
+            module,
+            f"""module {module} where
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Nat using (Nat)
@@ -28,11 +33,11 @@ record RuntimeReceipt (enabled : Bool) : Set where
     label : String
     agrees : Bool
 """,
-    )
+        )
 
-    diagnostics = Checker(tmp_path).check(path)
+        diagnostics = Checker(tmp_path).check(path)
 
-    assert not any(d.code == "TSAGDA000" for d in diagnostics)
+        assert not any(d.code == "TSAGDA000" for d in diagnostics)
 
 
 def test_qualified_record_assignment_remains_a_hard_syntax_error(tmp_path):
