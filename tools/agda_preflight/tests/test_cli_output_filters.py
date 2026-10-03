@@ -50,14 +50,16 @@ def test_errors_only_filters_json_payload(tmp_path, capsys):
     assert '"severity": "warning"' not in output
 
 
-def test_quiet_suppresses_human_output_but_preserves_exit_status(tmp_path, capsys):
+def test_quiet_hides_warnings_but_keeps_errors(tmp_path, capsys):
     path = noisy_module(tmp_path)
 
     status = main([str(path), "--root", str(tmp_path), "--quiet"])
     output = capsys.readouterr().out
 
     assert status == 1
-    assert output == ""
+    assert "TSAGDA012" in output
+    assert "TSAGDA008" not in output
+    assert ": warning:" not in output
 
 
 def test_quiet_success_is_silent(tmp_path, capsys):
