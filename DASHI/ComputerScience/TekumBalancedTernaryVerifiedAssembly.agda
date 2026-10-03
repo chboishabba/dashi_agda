@@ -54,6 +54,8 @@ import DASHI.ComputerScience.TekumFormalPropertiesExact
 import DASHI.ComputerScience.TekumNegationExact
 import DASHI.ComputerScience.TekumUniquenessExact
 import DASHI.ComputerScience.TekumMonotoneMagnitudeExact
+import DASHI.ComputerScience.TekumPositiveSourceSuccessorAnchorExact
+import DASHI.ComputerScience.TekumSourceOrderExact
 import DASHI.ComputerScience.TekumMonotonicityExact
 import DASHI.ComputerScience.TekumTruncationRoundingExact
 import DASHI.ComputerScience.TekumProposition5CounterexampleExact
