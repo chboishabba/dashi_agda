@@ -8,6 +8,8 @@ on:
     paths:
       - 'scripts/m22_completion10_involution_screen.g'
       - 'scripts/check_m22_completion10_involution_screen.sh'
+      - 'scripts/m22d2_completion10_outer_involution_screen.g'
+      - 'scripts/check_m22d2_completion10_outer_involution_screen.sh'
       - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
       - 'scripts/render_m22_completion10_runtime_certificate.py'
       - 'scripts/check_twob_pure_klein_m24_s3_local_group.sh'
@@ -18,6 +20,12 @@ on:
     paths:
       - 'scripts/m22_completion10_involution_screen.g'
       - 'scripts/check_m22_completion10_involution_screen.sh'
+      - 'scripts/m22d2_completion10_outer_involution_screen.g'
+      - 'scripts/check_m22d2_completion10_outer_involution_screen.sh'
+      - 'scripts/m24_276_to_m22_f2_composition_screen.g'
+      - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
+      - 'scripts/twob_pure_klein_m24_s3_local_group.g'
+      - 'scripts/check_twob_pure_klein_m24_s3_local_group.sh'
       - '.github/workflows/m22-completion10-involution-screen.yml'
 
 concurrency:
@@ -46,6 +54,12 @@ jobs:
         run: |
           set -euo pipefail
           bash scripts/check_m22_completion10_involution_screen.sh
+
+      - name: Screen actual M22:2 10d GF2 outer involutions
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_m22d2_completion10_outer_involution_screen.sh
 
       - name: Screen M24 276-point module restricted to M22
         shell: bash
@@ -94,6 +108,7 @@ jobs:
           name: m22-completion10-screens
           path: |
             build/m22_completion10_involution_screen.json
+            build/m22d2_completion10_outer_involution_screen.json
             build/m24_276_to_m22_f2_composition_screen.json
             build/twob_pure_klein_m24_s3_local_group.json
             build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
