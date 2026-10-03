@@ -44,7 +44,18 @@ def triage_snapshot(report: TriageReport) -> dict[str, Any]:
     }
 
 
+def _safe_count(item) -> int:
+    if not isinstance(item, dict):
+        return 0
+    try:
+        return int(item.get("count", 0))
+    except (TypeError, ValueError):
+        return 0
+
+
 def render_delta(previous: dict[str, Any], current: TriageReport) -> str:
+    if not isinstance(previous, dict):
+        previous = {}
     current_snapshot = triage_snapshot(current)
     if previous.get("fingerprint") == current_snapshot["fingerprint"]:
         return f"Δ since previous run: no diagnostic changes ({current.fingerprint})"
@@ -54,16 +65,13 @@ def render_delta(previous: dict[str, Any], current: TriageReport) -> str:
         for item in previous.get("root_causes", [])
         if isinstance(item, dict) and item.get("signature")
     }
-    new = {
-        item["signature"]: item
-        for item in current_snapshot["root_causes"]
-    }
+    new = {item["signature"]: item for item in current_snapshot["root_causes"]}
     rows = []
     for signature in sorted(set(old) | set(new)):
         before = old.get(signature)
         after = new.get(signature)
-        before_count = int(before.get("count", 0)) if before else 0
-        after_count = int(after.get("count", 0)) if after else 0
+        before_count = _safe_count(before)
+        after_count = _safe_count(after)
         delta = after_count - before_count
         if delta == 0:
             continue
