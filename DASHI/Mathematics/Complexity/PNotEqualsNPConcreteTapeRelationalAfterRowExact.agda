@@ -8,8 +8,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRelationalAfterRowEx
 -- common prefix, the configured new three-cell window, and the common suffix.
 -- `afterRowForRule` is defined by the same three directional windows.
 --
--- Hence, after case-splitting on the genuine RuleRealizesWindow witness, the
--- remaining equality is only injectivity of the one-field TapeRow record.
+-- We first extract the executable after-row by pattern matching the genuine
+-- RuleRealizesWindow witness.  Then `afterShape` gives exact row equality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -30,72 +30,85 @@ tapeRowCellsInjective :
 tapeRowCellsInjective {left = Local.tape-row xs} {right = Local.tape-row .xs} refl = refl
 
 ------------------------------------------------------------------------
+-- Canonical executable row extracted from a relational well-formed step.
+------------------------------------------------------------------------
+
+relationalExecutableAfter :
+  ∀ {machine before after} →
+  WF.WellFormedMachineStep machine before after →
+  Local.TapeRow machine
+relationalExecutableAfter {machine} wellFormed
+    with Local.ruleIsConfigured (WF.step wellFormed)
+... | Local.realizes-left
+      {leftSymbol = left} {rightSymbol = right} =
+  Window.afterRowForRule
+    machine
+    (Local.prefix occurrence)
+    left right
+    (Local.suffix occurrence)
+    (Local.rule (WF.step wellFormed))
+  where
+    occurrence = WF.occurrence (WF.wellFormedOccurrence wellFormed)
+... | Local.realizes-stay
+      {leftSymbol = left} {rightSymbol = right} =
+  Window.afterRowForRule
+    machine
+    (Local.prefix occurrence)
+    left right
+    (Local.suffix occurrence)
+    (Local.rule (WF.step wellFormed))
+  where
+    occurrence = WF.occurrence (WF.wellFormedOccurrence wellFormed)
+... | Local.realizes-right
+      {leftSymbol = left} {rightSymbol = right} =
+  Window.afterRowForRule
+    machine
+    (Local.prefix occurrence)
+    left right
+    (Local.suffix occurrence)
+    (Local.rule (WF.step wellFormed))
+  where
+    occurrence = WF.occurrence (WF.wellFormedOccurrence wellFormed)
+
+------------------------------------------------------------------------
 -- Exact row-level converse seam.
 ------------------------------------------------------------------------
 
 relationalAfterRowEqualsExecutableAfterRow :
   ∀ {machine before after}
     (wellFormed : WF.WellFormedMachineStep machine before after) →
-  let step = WF.step wellFormed
-      occurrence = WF.occurrence (WF.wellFormedOccurrence wellFormed)
-  in
-  after ≡
-    Window.afterRowForRule
-      machine
-      (Local.prefix occurrence)
-      _
-      _
-      (Local.suffix occurrence)
-      (Local.rule step)
+  after ≡ relationalExecutableAfter wellFormed
 relationalAfterRowEqualsExecutableAfterRow wellFormed
     with Local.ruleIsConfigured (WF.step wellFormed)
-... | Local.realizes-left
-      {leftSymbol = left} {rightSymbol = right} =
+... | Local.realizes-left =
   tapeRowCellsInjective
     (Local.afterShape
       (WF.occurrence (WF.wellFormedOccurrence wellFormed)))
-... | Local.realizes-stay
-      {leftSymbol = left} {rightSymbol = right} =
+... | Local.realizes-stay =
   tapeRowCellsInjective
     (Local.afterShape
       (WF.occurrence (WF.wellFormedOccurrence wellFormed)))
-... | Local.realizes-right
-      {leftSymbol = left} {rightSymbol = right} =
+... | Local.realizes-right =
   tapeRowCellsInjective
     (Local.afterShape
       (WF.occurrence (WF.wellFormedOccurrence wellFormed)))
-
-------------------------------------------------------------------------
--- A more explicit projection form is useful downstream: the two anonymous
--- symbol arguments above are definitionally the old left/right plain cells
--- exposed by the directional realization witness.
-------------------------------------------------------------------------
 
 relationalAfterCellsEqualsExecutableAfterCells :
   ∀ {machine before after}
     (wellFormed : WF.WellFormedMachineStep machine before after) →
-  let step = WF.step wellFormed
-      occurrence = WF.occurrence (WF.wellFormedOccurrence wellFormed)
-  in
-  Local.cells after ≡
-    Local.cells
-      (Window.afterRowForRule
-        machine
-        (Local.prefix occurrence)
-        _
-        _
-        (Local.suffix occurrence)
-        (Local.rule step))
-relationalAfterCellsEqualsExecutableAfterCells wellFormed =
-  case relationalAfterRowEqualsExecutableAfterRow wellFormed of λ where
-    refl → refl
+  Local.cells after ≡ Local.cells (relationalExecutableAfter wellFormed)
+relationalAfterCellsEqualsExecutableAfterCells wellFormed
+    with relationalAfterRowEqualsExecutableAfterRow wellFormed
+... | refl = refl
 
 ------------------------------------------------------------------------
 -- MAX-CUT STATUS
 --
 -- PAID IN THIS OWNER:
--- * exact dependent row equality between every relational well-formed output
---   and `Window.afterRowForRule` for the same literal occurrence and rule;
+-- * the directional realization witness determines the exact executable
+--   `afterRowForRule` on the relational occurrence's prefix/suffix;
+-- * every relational well-formed output row equals that canonical executable
+--   row exactly;
 -- * no synthetic transition carrier and no change to machine semantics.
 --
 -- Together with PNotEqualsNPConcreteTapeRelationalRuleAgreementExact:
@@ -104,7 +117,7 @@ relationalAfterCellsEqualsExecutableAfterCells wellFormed =
 -- * this file -> selected executable output row = relational output row.
 --
 -- NEXT:
--- * package the two equalities into the extensional execute<->relational iff;
+-- * package these into the extensional execute<->relational theorem;
 -- * then freeze local semantics and pay standard deterministic-TM polynomial
 --   simulation/clock transport.
 ------------------------------------------------------------------------
