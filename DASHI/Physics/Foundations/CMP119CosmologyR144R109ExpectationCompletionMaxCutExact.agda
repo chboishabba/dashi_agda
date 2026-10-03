@@ -28,8 +28,11 @@ module DASHI.Physics.Foundations.CMP119CosmologyR144R109ExpectationCompletionMax
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_; _<_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _*_; _≤_; _<_; -_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as Ring
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
 import DASHI.Physics.YangMills.BalabanContinuumScaleLocalObservableCauchyExact as Scale
@@ -51,8 +54,6 @@ r109RemainingTail source start =
 record R144R109AbsoluteExpectationCompletion
     (source : R109.SourceNativeStressScaleCauchy) : Set₁ where
   field
-    -- These are absolute normalized one-point responses of the SAME selected
-    -- stress insertion; unlike R109.stressDifference they are not magnitudes.
     finiteExpectation : Nat → ℚ
     completedExpectation : ℚ
 
@@ -83,23 +84,26 @@ negativeFiniteResponseWithExplicitTailMargin :
   finiteExpectation anchor start ≤ - margin →
   r109RemainingTail source start < margin →
   completedExpectation anchor < 0ℚ
-negativeFiniteResponseWithExplicitTailMargin anchor start margin finiteBelow tailBelow =
+negativeFiniteResponseWithExplicitTailMargin
+    {source = source} anchor start margin finiteBelow tailBelow =
   let
     summed :
-      finiteExpectation anchor start + r109RemainingTail _ start
+      finiteExpectation anchor start + r109RemainingTail source start
       < (- margin) + margin
     summed =
       ℚP.+-mono-≤-< finiteBelow tailBelow
+
+    summedBelowZero :
+      finiteExpectation anchor start + r109RemainingTail source start < 0ℚ
+    summedBelowZero =
+      subst
+        (λ right →
+          finiteExpectation anchor start + r109RemainingTail source start < right)
+        (Ring.solve-∀ margin)
+        summed
   in
-  ℚP.≤-<-trans
-    (completionUpperTail anchor start)
-    (subst
-      (λ right →
-        finiteExpectation anchor start + r109RemainingTail _ start < right)
-      (let open import Data.Rational.Tactic.RingSolver as Ring in Ring.solve-∀ margin)
-      summed)
-  where
-    open import Relation.Binary.PropositionalEquality using (subst)
+  negativeFiniteMarginForcesNegativeCompletion
+    anchor start summedBelowZero
 
 r109CauchyEstimateAlreadyOwned : Bool
 r109CauchyEstimateAlreadyOwned = true
