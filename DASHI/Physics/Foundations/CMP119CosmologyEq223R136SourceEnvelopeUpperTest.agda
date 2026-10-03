@@ -3,12 +3,17 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223R136SourceEnvelopeUpperTest
 
 import DASHI.Physics.Foundations.CMP119CosmologyEq223R136SourceEnvelopeUpperExact as Subject
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
-sourceEnvelopeEliminatesFiniteDGammaFromTerminalConsumer : Bool
-sourceEnvelopeEliminatesFiniteDGammaFromTerminalConsumer =
-  Subject.sourceEnvelopeTerminalConsumerNeedsFiniteDGamma
+sourceEnvelopeEliminatesFiniteDGammaFromTerminalConsumer :
+  Subject.sourceEnvelopeTerminalConsumerNeedsFiniteDGamma ≡ false
+sourceEnvelopeEliminatesFiniteDGammaFromTerminalConsumer = refl
 
-sourceEnvelopeUsesExistingRealWeakOrder : Bool
-sourceEnvelopeUsesExistingRealWeakOrder =
-  Subject.sourceEnvelopeUsesExistingRealWeakOrderAuthority
+sourceEnvelopeUsesExistingRealWeakOrder :
+  Subject.sourceEnvelopeUsesExistingRealWeakOrderAuthority ≡ true
+sourceEnvelopeUsesExistingRealWeakOrder = refl
+
+sourceEnvelopeAddsNoPhysicalPremise :
+  Subject.sourceEnvelopeAddsNewPhysicalPremise ≡ false
+sourceEnvelopeAddsNoPhysicalPremise = refl
