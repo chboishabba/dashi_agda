@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact as Typed
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredA1A2B1B2RouteExact as Route
+import DASHI.Physics.Foundations.CMP119CosmologyEq223DirectTailThresholdToExpansionExact as Terminal
 
 -- A2 must be the actual Wilson/OS-admissible selected R109 cylinder surface,
 -- not merely an arbitrary pair-to-observable meaning socket.
@@ -32,3 +33,7 @@ negativeR136CompilerAlreadyPresent = refl
 terminalAccelerationCompilerAlreadyPresent :
   Route.terminalConsumerAlreadyCompilesNegativeR136ToMatterAcceleration ≡ true
 terminalAccelerationCompilerAlreadyPresent = refl
+
+exactTypedB2ReceiptFeedsTerminalAcceleration :
+  Terminal.typedPreferredB2ReceiptCompilesToMatterAcceleration ≡ true
+exactTypedB2ReceiptFeedsTerminalAcceleration = refl
