@@ -21,14 +21,6 @@ import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
 
 ------------------------------------------------------------------------
 -- SOURCE ORIENTATION
---
--- Hunhold writes t = t_(n-1)...t_0 and Definition 8 states
---
---   r ++ e ++ f := anc_n(t)
---
--- in most-significant-first order.  DASHI's canonical positional vectors are
--- least-significant-first, so source parsing reverses the concrete anchor once,
--- then reverses each numeric field before calling the existing integer map.
 ------------------------------------------------------------------------
 
 signOfInteger : ℤ → Anchor.TekumSign
@@ -43,9 +35,21 @@ integerToIntCode : ℤ → Sem.IntCode
 integerToIntCode (+ n) = Sem.nonnegative n
 integerToIntCode -[1+ n ] = Sem.negative (suc n)
 
+integerToIntCodeRoundTrip :
+  (z : ℤ) → Exact.intCodeToInteger (integerToIntCode z) ≡ z
+integerToIntCodeRoundTrip (+ zero) = refl
+integerToIntCodeRoundTrip (+ (suc n)) = refl
+integerToIntCodeRoundTrip -[1+ n ] = refl
+
 addIntCode : Sem.IntCode → Sem.IntCode → Sem.IntCode
 addIntCode x y =
   integerToIntCode (Exact.intCodeToInteger x ℤ.+ Exact.intCodeToInteger y)
+
+addIntCodeInteger :
+  (x y : Sem.IntCode) →
+  Exact.intCodeToInteger (addIntCode x y)
+  ≡ Exact.intCodeToInteger x ℤ.+ Exact.intCodeToInteger y
+addIntCodeInteger x y = integerToIntCodeRoundTrip _
 
 anchorMSB :
   ∀ {extra} →
@@ -115,12 +119,6 @@ fractionLST :
   Vec Trit.Trit (Regime.fractionCount (8 + extra) r)
 fractionLST parsed = reverse (fractionMSB parsed)
 
-------------------------------------------------------------------------
--- Parse the ordinary source anchor.  Factoring through parseAnchorMSB makes
--- anchor invariance reusable by the source-negation theorem rather than
--- re-proving the dependent split after negation.
-------------------------------------------------------------------------
-
 ParsedOrdinaryAnchor : Nat → Set
 ParsedOrdinaryAnchor extra =
   Σ Regime.RegimeCode λ r →
@@ -155,12 +153,30 @@ exponentIntCode {r = r} parsed =
     (integerToIntCode (BT.toInteger (BT.eval (exponentLST parsed))))
     (Regime.bias r)
 
+exponentIntCodeInteger :
+  ∀ {extra r payload}
+  (parsed : ParsedPayload extra r payload) →
+  Exact.intCodeToInteger (exponentIntCode parsed)
+  ≡ BT.toInteger (BT.eval (exponentLST parsed))
+      ℤ.+ Exact.intCodeToInteger (Regime.bias r)
+exponentIntCodeInteger {r = r} parsed =
+  addIntCodeInteger
+    (integerToIntCode (BT.toInteger (BT.eval (exponentLST parsed))))
+    (Regime.bias r)
+
 fractionIntCode :
   ∀ {extra r payload} →
   ParsedPayload extra r payload →
   Sem.IntCode
 fractionIntCode parsed =
   integerToIntCode (BT.toInteger (BT.eval (fractionLST parsed)))
+
+fractionIntCodeInteger :
+  ∀ {extra r payload}
+  (parsed : ParsedPayload extra r payload) →
+  Exact.intCodeToInteger (fractionIntCode parsed)
+  ≡ BT.toInteger (BT.eval (fractionLST parsed))
+fractionIntCodeInteger parsed = integerToIntCodeRoundTrip _
 
 ordinaryFromParsed :
   ∀ {extra r payload} →
@@ -181,13 +197,6 @@ ordinaryRationalFromParsed :
   ℚ
 ordinaryRationalFromParsed word parsed =
   Exact.ordinaryRational (ordinaryFromParsed word parsed)
-
-------------------------------------------------------------------------
--- Full normal-width Definition 8 parser.
---
--- Equation (16) classifies the ANCHOR r++e++f, not the original t.  Only the
--- ordinary branch needs regime decoding.
-------------------------------------------------------------------------
 
 parseTekumWord :
   ∀ {extra} →
