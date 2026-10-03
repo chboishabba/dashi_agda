@@ -150,7 +150,8 @@ def main(argv=None) -> int:
             json.dumps(api_snapshot(checker), indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-        print(args.write_api_snapshot)
+        if not args.quiet:
+            print(args.write_api_snapshot)
         return 0
 
     if args.cycles:
