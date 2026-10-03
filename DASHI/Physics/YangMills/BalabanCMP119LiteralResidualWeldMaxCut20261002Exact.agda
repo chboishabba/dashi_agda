@@ -14,7 +14,10 @@ module DASHI.Physics.YangMills.BalabanCMP119LiteralResidualWeldMaxCut20261002Exa
 --          transfer after the existing weight-split/entropy inputs;
 --   * B_k: source-native boundary object, with analytic/localized reinjection;
 --   * vacuum: one scale-indexed source object, canonically constant on the
---             configuration carrier.
+--             configuration carrier;
+--   * B/R source polymers: executable positive/negative/crossing OS support
+--     classification once their published Polymer carrier is identified with
+--     the literal periodic block-polymer carrier.
 --
 -- The remaining literal Lean weld is therefore NOT another dyadic theorem.
 -- It is the common-evaluator theorem saying that evaluation of the selected
@@ -37,6 +40,9 @@ import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound
 import DASHI.Physics.YangMills.BalabanYM4ROperationEntropyShellExact as Shell
 import DASHI.Physics.YangMills.BalabanYM4LargeFieldContributionSharedSlackExact as LF
 import DASHI.Physics.YangMills.BalabanCMP122Equation1100DirectExact as RSource
+import DASHI.Physics.YangMills.BalabanCMP119ReflectionPolymerGeometryExact as Geometry
+import DASHI.Physics.YangMills.BalabanCMP119BoundaryReflectionSupportCutExact as BSupport
+import DASHI.Physics.YangMills.BalabanCMP122ROperationReflectionSupportCutExact as RSupport
 
 ------------------------------------------------------------------------
 -- Eq. (2.23) survives any selected action evaluator on the SAME source action.
@@ -156,6 +162,20 @@ rOperationDyadicShellDonorLevel = R.cmp122Equation1100EntropyAssemblyLevel
 vacuumConstantCarrierDonorLevel : ProofLevel
 vacuumConstantCarrierDonorLevel = RP.cmp119ReflectionMaxCutCompilerLevel
 
+-- The common periodic-polymer OS classifier itself is now executable.
+reflectionPolymerGeometryDonorLevel : ProofLevel
+reflectionPolymerGeometryDonorLevel = Geometry.reflectionPolymerGeometryCompilerLevel
+
+-- B terms already inherit the OS class of the SAME source polymer once the
+-- source Polymer parameter is the periodic block carrier.
+boundaryReflectionSupportDonorLevel : ProofLevel
+boundaryReflectionSupportDonorLevel = BSupport.boundaryReflectionSupportCutCompilerLevel
+
+-- Eq. (1.100) R terms likewise retain their source norm/decay while being
+-- classified by the SAME source polymer.
+rOperationReflectionSupportDonorLevel : ProofLevel
+rOperationReflectionSupportDonorLevel = RSupport.rOperationReflectionSupportCutCompilerLevel
+
 -- Genuine remaining physical/same-object leaves.
 commonActionEvaluatorAdditiveSemanticsLevel : ProofLevel
 commonActionEvaluatorAdditiveSemanticsLevel = conditional
@@ -164,8 +184,21 @@ regularESelectedCarrierInstantiationLevel : ProofLevel
 regularESelectedCarrierInstantiationLevel =
   E.literalCMP119RegularESection2PredicateInstantiationLevel
 
+-- R's dyadic arithmetic is already downstream; the surviving source payment is
+-- the published-polymer dictionary plus the existing weight-split/entropy
+-- identification on that same carrier.
+rOperationPublishedPolymerDictionaryLevel : ProofLevel
+rOperationPublishedPolymerDictionaryLevel =
+  RSupport.cmp122ROperationPublishedPolymerToPeriodicCarrierLevel
+
 rOperationWeightSplitAndRootedEntropyLevel : ProofLevel
 rOperationWeightSplitAndRootedEntropyLevel = conditional
+
+-- B localization is source-owned, but its published X must still be identified
+-- with the periodic polymer before the selected shell embedding is same-object.
+boundaryPublishedPolymerDictionaryLevel : ProofLevel
+boundaryPublishedPolymerDictionaryLevel =
+  BSupport.cmp119BoundaryPublishedPolymerToPeriodicCarrierLevel
 
 boundaryLocalizedTermsToSelectedShellsLevel : ProofLevel
 boundaryLocalizedTermsToSelectedShellsLevel = conditional
@@ -173,6 +206,13 @@ boundaryLocalizedTermsToSelectedShellsLevel = conditional
 vacuumEvaluatorIsSourceConstantLevel : ProofLevel
 vacuumEvaluatorIsSourceConstantLevel =
   RP.cmp119VacuumActionEvaluatorConstantIdentificationLevel
+
+-- E remains the asymmetric sector in the representation layer: the current
+-- exact source form exposes `Component`, not a component->periodic-polymer
+-- support map.  That map must be source-written before E can share the B/R OS
+-- classifier and the final common shell carrier.
+regularEComponentToPeriodicPolymerSupportLevel : ProofLevel
+regularEComponentToPeriodicPolymerSupportLevel = conditional
 
 fullResidualEqualsSelectedFiniteShellTailLevel : ProofLevel
 fullResidualEqualsSelectedFiniteShellTailLevel = conditional
