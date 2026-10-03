@@ -39,8 +39,9 @@ required = {
     ],
     'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': [
         'signOfWord', 'ParsedPayload', 'parsePayload', 'anchorMSB', 'parseAnchorMSB', 'parseOrdinaryAnchor',
-        'integerToIntCode', 'exponentIntCode', 'fractionIntCode', 'ordinaryFromParsed',
-        'parseTekumWord', 'decodeNormalWidthTekumWord', 'normalWidthParserUsesSourceFieldOrder',
+        'integerToIntCode', 'integerToIntCodeRoundTrip', 'exponentIntCode', 'fractionIntCode',
+        'fractionIntCodeInteger', 'ordinaryFromParsed', 'parseTekumWord',
+        'decodeNormalWidthTekumWord', 'normalWidthParserUsesSourceFieldOrder',
     ],
     'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': [
         'rejoinPayload', 'rejoinPayloadCorrect', 'regimePrefixMSB', 'rejoinAnchorMSB',
@@ -93,4 +94,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: canonical rational fraction band, signed decoder, source-level negation, parser roundtrip, centered backend, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: parser integer-code roundtrips, canonical rational fraction band, signed decoder, source-level negation, centered backend and p-adic naturality present.')
