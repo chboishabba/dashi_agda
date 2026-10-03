@@ -7,6 +7,7 @@ on:
     paths:
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardInfrastructureFreezeExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeTimeBudgetPaddingExact.agda'
@@ -28,11 +29,12 @@ jobs:
         with:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
-      - name: Typecheck reverse-run and language owners
+      - name: Typecheck reverse-run, language, and freeze owners
         run: |
           set -euxo pipefail
           agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda
-          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda | tee p-standard-reverse-run.log
+          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda
+          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardInfrastructureFreezeExact.agda | tee p-standard-reverse-run.log
       - name: Upload log
         if: always()
         uses: actions/upload-artifact@v4
