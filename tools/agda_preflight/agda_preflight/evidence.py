@@ -115,7 +115,7 @@ _SCOPE_REQUIRED = {
 }
 
 
-# Kept for future diagnostics whose truth genuinely requires the kernel.
+# Kept for diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
     "TSAGDA040",  # over-application can depend on result-type unfolding
     "TSAGDA041",  # under-application / saturation is a typing judgment
@@ -125,6 +125,20 @@ _TYPECHECK_REQUIRED: Set[str] = {
     "TSAGDA076",  # partial application vs type use needs elaborated typing
     "TSAGDA110",  # compatibility alias of TSAGDA045
     "TSAGDA114",  # clause constructor/result-head comparison needs unfolding
+}
+
+
+# Diagnostics in the 3xx range below are not structural guesses at all: they
+# are lossless projections of messages emitted by an Agda process/runner.
+# Keep explicit policies so policy_for remains total and accidental new codes
+# still fail closed until classified.
+_AGDA_NATIVE = {
+    "TSAGDA300",  # PatternShadowsConstructor
+    "TSAGDA301",  # RewritesNothing
+    "TSAGDA302",  # UserWarning/deprecation
+    "TSAGDA390",  # ParseError
+    "TSAGDA398",  # other named/unnamed Agda error
+    "TSAGDA399",  # other named/unnamed Agda warning
 }
 
 
@@ -179,6 +193,12 @@ for code in _TYPECHECK_REQUIRED:
         EvidenceLevel.AGDA_TYPECHECKER,
         False,
         "requires full Agda typechecking",
+    )
+for code in _AGDA_NATIVE:
+    DIAGNOSTIC_POLICIES[code] = _policy(
+        EvidenceLevel.AGDA_SCOPE,
+        True,
+        "native diagnostic emitted by an Agda process or Agda-compatible runner",
     )
 
 
