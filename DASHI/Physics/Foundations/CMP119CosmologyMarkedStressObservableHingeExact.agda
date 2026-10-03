@@ -16,18 +16,19 @@ module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressObservableHingeExact
 -- and reuses it for:
 --   * E2 inclusion in the reflected positive-time cylinder algebra;
 --   * E4 selection of the stress observable in the R274 clustering theorem.
---
--- The remaining obligations are semantic/admissibility laws on that one map,
--- not two independent same-object selections.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (_≤_; _*_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2CylinderEmbeddingExact as E2
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE4ClusteringExact as E4
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274Exact as R274
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
+import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 record SharedStressObservableHinge
     {Scale Volume Root State Observable StressMark : Set}
@@ -121,10 +122,8 @@ record SharedStressE4Semantics
         R274.connectedCovarianceMagnitude twoSource
           state (selectedStressObservable hinge) other
         ≤
-        DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact.quarter
-        *
-        DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact.rationalPower
-          DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.half
+        Shell.quarter
+        * Power.rationalPower Geo.half
           (R274.physicalDistance twoSource
             (selectedStressObservable hinge) other))
       → MarkedE4ClusterCompatibility
