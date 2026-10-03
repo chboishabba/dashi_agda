@@ -24,8 +24,6 @@ class DiagnosticPolicy:
     description: str = ""
 
 
-# Default policy is intentionally conservative: an unclassified diagnostic may
-# be emitted from the DASHI structural index, but not from raw syntax alone.
 _DEFAULT_POLICY = DiagnosticPolicy(
     EvidenceLevel.DASHI_INDEX,
     True,
@@ -43,22 +41,20 @@ def _policy(
     return DiagnosticPolicy(minimum, hard, description)
 
 
-# Diagnostics that are sound from concrete syntax alone.
 _TREE_ONLY = {
     "TSAGDA000", "TSAGDA004", "TSAGDA005", "TSAGDA006", "TSAGDA007",
     "TSAGDA010", "TSAGDA011", "TSAGDA012", "TSAGDA013", "TSAGDA061",
-    "TSAGDA090", "TSAGDA150", "TSAGDA151", "TSAGDA152", "TSAGDA153",
-    "TSAGDA161", "TSAGDA162", "TSAGDA163", "TSAGDA164", "TSAGDA165",
-    "TSAGDA170", "TSAGDA172", "TSAGDA173", "TSAGDA174", "TSAGDA175",
-    "TSAGDA201", "TSAGDA204",
+    "TSAGDA090", "TSAGDA091", "TSAGDA150", "TSAGDA151", "TSAGDA152",
+    "TSAGDA153", "TSAGDA161", "TSAGDA162", "TSAGDA163", "TSAGDA164",
+    "TSAGDA165", "TSAGDA170", "TSAGDA172", "TSAGDA173", "TSAGDA174",
+    "TSAGDA175", "TSAGDA201", "TSAGDA204",
 }
 
 
-# Cross-node/module facts that the structural index can establish rigidly.
 _INDEX_SAFE = {
     "TSAGDA001", "TSAGDA002", "TSAGDA003",
     "TSAGDA008", "TSAGDA009",
-    "TSAGDA020", "TSAGDA028", "TSAGDA029", "TSAGDA030",
+    "TSAGDA020", "TSAGDA029", "TSAGDA030",
     "TSAGDA042", "TSAGDA043", "TSAGDA044", "TSAGDA046", "TSAGDA047",
     "TSAGDA048", "TSAGDA050", "TSAGDA051", "TSAGDA053", "TSAGDA054",
     "TSAGDA056", "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064",
@@ -73,44 +69,32 @@ _INDEX_SAFE = {
     "TSAGDA143", "TSAGDA160", "TSAGDA166", "TSAGDA171",
     "TSAGDA180", "TSAGDA181", "TSAGDA182", "TSAGDA183", "TSAGDA184",
     "TSAGDA185", "TSAGDA186", "TSAGDA200", "TSAGDA202", "TSAGDA203",
-    "TSAGDA205", "TSAGDA206", "TSAGDA207", "TSAGDA208",
-    # A non-open imported constructor is only reachable through its alias, so
-    # an unqualified same-basename token on a recognized clause LHS is a binder
-    # shadow, not a constructor occurrence. Agda can later confirm the same
-    # public TSAGDA300 code with stronger evidence.
+    "TSAGDA205", "TSAGDA207", "TSAGDA208",
+    "TSAGDA303", "TSAGDA304",
     "TSAGDA300",
 }
 
 
-# Scope-dependent suspicions remain advisory until Agda resolves names/layout.
 _SCOPE_REQUIRED = {
     "TSAGDA021", "TSAGDA022", "TSAGDA023", "TSAGDA024", "TSAGDA025",
-    "TSAGDA026", "TSAGDA027", "TSAGDA055", "TSAGDA084", "TSAGDA113",
-    "TSAGDA154",
-    # Qualified projection application trees are a known tree-sitter boundary:
-    # `Render.klein R` can be accepted by Agda while the tree view detaches R.
+    "TSAGDA026", "TSAGDA027", "TSAGDA028", "TSAGDA055", "TSAGDA084",
+    "TSAGDA113", "TSAGDA154", "TSAGDA305",
     "TSAGDA049", "TSAGDA052",
 }
 
 
-# These conclusions are typing judgments, not safe syntax/index facts.
 _TYPECHECK_REQUIRED: Set[str] = {
     "TSAGDA040", "TSAGDA041", "TSAGDA045", "TSAGDA072", "TSAGDA075",
-    "TSAGDA076", "TSAGDA110", "TSAGDA114",
-    # Proof-shaped RHS values can inhabit equality results hidden by aliases or
-    # projections; deciding that they are the wrong kind of value needs typing.
-    "TSAGDA104",
+    "TSAGDA076", "TSAGDA104", "TSAGDA110", "TSAGDA114", "TSAGDA206",
 }
 
 
-# Pure projections of native Agda diagnostics that have no structural producer.
-# TSAGDA300 is intentionally absent: it now has both index and native sources.
 _AGDA_NATIVE = {
-    "TSAGDA301",  # RewritesNothing
-    "TSAGDA302",  # UserWarning/deprecation
-    "TSAGDA390",  # ParseError
-    "TSAGDA398",  # other named/unnamed Agda error
-    "TSAGDA399",  # other named/unnamed Agda warning
+    "TSAGDA301",
+    "TSAGDA302",
+    "TSAGDA390",
+    "TSAGDA398",
+    "TSAGDA399",
 }
 
 
@@ -173,12 +157,7 @@ for code in _AGDA_NATIVE:
 
 
 def policy_for(code: str) -> DiagnosticPolicy:
-    """Return the explicit evidence contract for CODE.
-
-    New diagnostics must be classified deliberately. Falling back silently is
-    exactly how an unsafe structural heuristic can accidentally become a hard
-    error, so an unclassified code is a programming error.
-    """
+    """Return the explicit evidence contract for CODE."""
 
     try:
         return DIAGNOSTIC_POLICIES[code]
