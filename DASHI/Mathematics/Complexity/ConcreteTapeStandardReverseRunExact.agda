@@ -7,17 +7,11 @@ module DASHI.Mathematics.Complexity.ConcreteTapeStandardReverseRunExact where
 --
 -- A standard run is reified from a concrete row whose canonical projection is
 -- the standard start configuration and whose head has T+1 cells of margin on
--- each side.  At each edge we inspect the SAME first-match rule lookup used by
--- `standardControlOfConcrete`:
---
--- * `nothing` contradicts the given successful standard edge;
--- * `just rule` is executed by the existing proof-producing concrete executor;
--- * canonical one-step preservation forces the concrete successor projection
---   to be exactly the supplied standard successor.
---
--- The existing head-margin theorem consumes at most one cell per step, so the
--- induction closes with one cell of margin at the final row.  No new machine,
--- transition, or run semantics are introduced.
+-- each side. At each edge we inspect the SAME first-match lookup used by
+-- `standardControlOfConcrete`. A successful standard edge forces that lookup
+-- to return a rule, the existing proof-producing executor constructs the
+-- concrete step, and canonical one-step preservation forces its successor to
+-- project to the supplied standard successor.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -25,7 +19,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
-open import Data.Product using (Σ; _,_; _×_)
+open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -35,6 +29,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeExecutableRelationalEquivalenceExact as Execute
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact as Interpreter
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleKeyDeterminismExact as Determinism
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardOneStepExact as OneStep
@@ -52,7 +47,7 @@ marginOne :
     {cells : List (Local.TapeCell State Symbol)} →
   Margin.HeadMargin (suc k) cells →
   Margin.HeadMargin 1 cells
-marginOne {k = k} margin = record
+marginOne margin = record
   { Margin.leftMargin =
       ≤-trans-local (s≤s z≤n) (Margin.leftMargin margin)
   ; Margin.rightMargin =
@@ -79,7 +74,7 @@ standardEdgeForcesConcreteExecution :
 standardEdgeForcesConcreteExecution {machine} interior edge
     with Character.rowShape interior
 ... | refl
-    with DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeRuleTableInterpreterExact.fetchConcreteRule
+    with Interpreter.fetchConcreteRule
       machine
       (Character.headState interior)
       (Character.readSymbol interior)
@@ -103,8 +98,7 @@ record ReifiedStandardStep
     after : Local.TapeRow machine
     concreteStep : WF.WellFormedMachineStep machine before after
     afterUnique : WF.ExactlyOneHead (Local.cells after)
-    afterProjection :
-      Canonical.canonicalProjection afterUnique ≡ next
+    afterProjection : Canonical.canonicalProjection afterUnique ≡ next
 
 open ReifiedStandardStep public
 
@@ -154,8 +148,8 @@ reifyStandardStep
         edge
 
     execution = standardEdgeForcesConcreteExecution interior intrinsicEdge
-    chosenAfter = Data.Product.proj₁ execution
-    executionExact = Data.Product.proj₂ execution
+    chosenAfter = proj₁ execution
+    executionExact = proj₂ execution
 
     chosenStep : WF.WellFormedMachineStep machine before chosenAfter
     chosenStep = Execute.executeInteriorAfterSound interior executionExact
@@ -188,10 +182,8 @@ reifyStandardStep
       just (Canonical.canonicalProjection chosenAfterUnique) ≡ just next
     justOutputsEqual = trans (sym projectedEdgeAtCurrent) edge
 
-    projectionExact :
-      Canonical.canonicalProjection chosenAfterUnique ≡ next
-    projectionExact
-      with justOutputsEqual
+    projectionExact : Canonical.canonicalProjection chosenAfterUnique ≡ next
+    projectionExact with justOutputsEqual
     ... | refl = refl
 
 ------------------------------------------------------------------------
@@ -215,8 +207,7 @@ record ReifiedStandardRun
     finish : Local.TapeRow machine
     concreteRun : Run.WellFormedTapeRun machine start rows finish
     finalUnique : WF.ExactlyOneHead (Local.cells finish)
-    finalProjection :
-      Canonical.canonicalProjection finalUnique ≡ standardFinish
+    finalProjection : Canonical.canonicalProjection finalUnique ≡ standardFinish
     finalMargin : Margin.HeadMargin 1 (Local.cells finish)
 
 open ReifiedStandardRun public
@@ -225,8 +216,7 @@ reifyStandardRun :
   ∀ {machine steps standardStart standardFinish start}
     (deterministic : Determinism.RuleKeyDeterministic machine)
     (startUnique : WF.ExactlyOneHead (Local.cells start))
-    (startProjection :
-      Canonical.canonicalProjection startUnique ≡ standardStart)
+    (startProjection : Canonical.canonicalProjection startUnique ≡ standardStart)
     (startMargin : Margin.HeadMargin (suc steps) (Local.cells start))
     (standardRun :
       Forward.StandardExactRun
@@ -245,8 +235,7 @@ reifyStandardRun deterministic startUnique startProjection startMargin
     }
 reifyStandardRun
     deterministic startUnique startProjection startMargin
-    (Forward.standardRunStep {steps = steps} {current = current}
-      {next = next} edge rest) =
+    (Forward.standardRunStep {steps = steps} {next = next} edge rest) =
   record
     { rows = ReifiedStandardStep.after one ∷ ReifiedStandardRun.rows recursive
     ; finish = ReifiedStandardRun.finish recursive
@@ -262,19 +251,14 @@ reifyStandardRun
     one : ReifiedStandardStep startUnique next
     one =
       reifyStandardStep
-        deterministic
-        startUnique
-        (marginOne startMargin)
-        startProjection
-        edge
+        deterministic startUnique (marginOne startMargin) startProjection edge
 
     afterMargin :
       Margin.HeadMargin (suc steps)
         (Local.cells (ReifiedStandardStep.after one))
     afterMargin =
       Margin.wellFormedStepMargin
-        (ReifiedStandardStep.concreteStep one)
-        startMargin
+        (ReifiedStandardStep.concreteStep one) startMargin
 
     recursive =
       reifyStandardRun
@@ -283,48 +267,6 @@ reifyStandardRun
         (ReifiedStandardStep.afterProjection one)
         afterMargin
         rest
-
-/-- The converse preserves the literal step count: one concrete run edge is
-constructed for every standard edge. -/
-reifyStandardRun_preservesLength :
-  ∀ {machine steps standardStart standardFinish start}
-    (deterministic : Determinism.RuleKeyDeterministic machine)
-    (startUnique : WF.ExactlyOneHead (Local.cells start))
-    (startProjection :
-      Canonical.canonicalProjection startUnique ≡ standardStart)
-    (startMargin : Margin.HeadMargin (suc steps) (Local.cells start))
-    (standardRun :
-      Forward.StandardExactRun
-        (Standard.standardControlOfConcrete machine)
-        steps standardStart standardFinish) →
-  Run.runLength
-      (ReifiedStandardRun.concreteRun
-        (reifyStandardRun deterministic startUnique startProjection
-          startMargin standardRun))
-    ≡ steps
-reifyStandardRun_preservesLength
-    deterministic startUnique startProjection startMargin
-    Forward.standardRunDone = refl
-reifyStandardRun_preservesLength
-    deterministic startUnique startProjection startMargin
-    (Forward.standardRunStep edge rest)
-  rewrite reifyStandardRun_preservesLength
-    deterministic
-    (ReifiedStandardStep.after
-      (reifyStandardStep deterministic startUnique (marginOne startMargin)
-        startProjection edge)
-      |> λ _ → ReifiedStandardStep.afterUnique
-        (reifyStandardStep deterministic startUnique (marginOne startMargin)
-          startProjection edge))
-    (ReifiedStandardStep.afterProjection
-      (reifyStandardStep deterministic startUnique (marginOne startMargin)
-        startProjection edge))
-    (Margin.wellFormedStepMargin
-      (ReifiedStandardStep.concreteStep
-        (reifyStandardStep deterministic startUnique (marginOne startMargin)
-          startProjection edge))
-      startMargin)
-    rest = refl
 
 ------------------------------------------------------------------------
 -- Acceptance endpoint transport.
@@ -340,7 +282,7 @@ reifiedFinalAccepting :
     (reified : ReifiedStandardRun start startUnique standardRun) →
   Standard.standardAccepting standardFinish →
   Accepting.AcceptingInteriorRow machine (ReifiedStandardRun.finish reified)
-reifiedFinalAccepting reified standardAccepting = record
+reifiedFinalAccepting {machine} reified standardAccepting = record
   { Accepting.interior = finalInterior
   ; Accepting.headIsAccepting = headAccepting
   }
@@ -360,7 +302,7 @@ reifiedFinalAccepting reified standardAccepting = record
         (ReifiedStandardRun.finalUnique reified) finalInterior
 
     headAccepting :
-      Character.headState finalInterior ≡ Local.acceptingState _
+      Character.headState finalInterior ≡ Local.acceptingState machine
     headAccepting =
       trans
         (sym projectionState)
@@ -369,7 +311,7 @@ reifiedFinalAccepting reified standardAccepting = record
           standardAccepting)
 
 ------------------------------------------------------------------------
--- Finite-presentation specialization: the standard machine here is
+-- Finite-presentation specialization. The standard machine here is
 -- definitionally the same first-match control adapter as the concrete machine.
 ------------------------------------------------------------------------
 
@@ -379,8 +321,7 @@ reifyFinitePresentedStandardRun :
     (start : Local.TapeRow
       (Presented.finitePresentedStandardToConcrete presentation))
     (startUnique : WF.ExactlyOneHead (Local.cells start))
-    (startProjection :
-      Canonical.canonicalProjection startUnique ≡ standardStart)
+    (startProjection : Canonical.canonicalProjection startUnique ≡ standardStart)
     (startMargin : Margin.HeadMargin (suc steps) (Local.cells start))
     (standardRun :
       Forward.StandardExactRun
@@ -399,14 +340,12 @@ reifyFinitePresentedStandardRun presentation =
 --   executor to one WellFormedMachineStep;
 -- * canonical successor projection is exactly the supplied standard successor;
 -- * a T-step run reifies with T+1 initial head margin;
--- * the reverse transport preserves step count exactly;
+-- * the returned concrete run is indexed by that same T-step standard run;
 -- * the final row retains one-cell margin and standard acceptance transports
 --   to the literal concrete accepting endpoint predicate;
 -- * the theorem specializes definitionally to FinitePresentedStandardTM.
 --
--- The remaining language wrapper is now only input-endpoint packaging:
--- identify the canonical standard input configuration with the existing
--- `guardedInitialRow input T`, combine this reverse theorem with
--- `projectAcceptingWellFormedRun`, and state the resulting acceptance iff.
--- No further transition/run representation machinery is required.
+-- Remaining wrapper only: identify the canonical standard input configuration
+-- with `guardedInitialRow input T` and state acceptance iff. No further
+-- transition/run representation machinery is required.
 ------------------------------------------------------------------------
