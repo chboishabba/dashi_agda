@@ -11,6 +11,8 @@ on:
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda'
       - 'DASHI/Mathematics/Complexity/ConcreteTapeTimeBudgetPaddingExact.agda'
+      - 'DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact.agda'
       - '.github/workflows/p-standard-reverse-run.yml'
   workflow_dispatch:
 
@@ -29,12 +31,34 @@ jobs:
         with:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
-      - name: Typecheck reverse-run, language, and freeze owners
+      - name: Audit frozen slice for proof escape hatches
         run: |
           set -euxo pipefail
-          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda
-          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda
-          agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardInfrastructureFreezeExact.agda | tee p-standard-reverse-run.log
+          files=(
+            DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda
+            DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda
+            DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda
+            DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda
+            DASHI/Mathematics/Complexity/ConcreteTapeStandardInfrastructureFreezeExact.agda
+            DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda
+            DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact.agda
+          )
+          if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!!\}|\?($|[[:space:]])|\{-# OPTIONS --allow-unsolved-metas #-\}|\{-# TERMINATING #-\}|\{-# NON_TERMINATING #-\}|\{-# NO_TERMINATION_CHECK #-\}' "${files[@]}"; then
+            echo 'Unsafe or incomplete proof construct found in frozen P slice.' >&2
+            exit 1
+          fi
+      - name: Typecheck frozen standard/concrete/Cook-Levin slice
+        run: |
+          set -euxo pipefail
+          {
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardCanonicalOneStepExact.agda
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardRunExact.agda
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardReverseRunExact.agda
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardLanguageEquivalenceExact.agda
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeStandardInfrastructureFreezeExact.agda
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda
+            agda -i . -l standard-library DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact.agda
+          } 2>&1 | tee p-standard-reverse-run.log
       - name: Upload log
         if: always()
         uses: actions/upload-artifact@v4
