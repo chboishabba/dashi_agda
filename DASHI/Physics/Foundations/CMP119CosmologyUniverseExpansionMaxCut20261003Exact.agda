@@ -8,9 +8,7 @@ open import Agda.Builtin.Nat using (Nat)
 -- LIVE UNIVERSE-EXPANSION MAX-CUT (2026-10-03)
 ------------------------------------------------------------------------
 
--- A: marked OS reconstruction.  Global E1 potential/BC2 covariance is already
--- compiler-owned; the E1 leaf below is the literal local tangent/component
--- geometry and componentwise covariance needed to instantiate that compiler.
+-- A: marked OS reconstruction.
 data MarkedOSResidual : Set where
   b0NuclearTopologyInterpretation
   e1LiteralLocalEuclideanGeometry
@@ -22,15 +20,15 @@ data MarkedOSResidual : Set where
 markedOSResidualCount : Nat
 markedOSResidualCount = 5
 
--- E2 and E4 now share ONE stress->observable realization; independent stress
--- selections are no longer charged twice.
+e1GlobalPotentialAndBC2CovarianceCompilerOwned : Bool
+e1GlobalPotentialAndBC2CovarianceCompilerOwned = true
+
 e2E4IndependentStressSelectionsEliminated : Bool
 e2E4IndependentStressSelectionsEliminated = true
 
--- B: finite selected stress expectation -> completed R109/R136 expectation.
--- Round130/R136 now compile the completed four-direction R109 functional
--- directly to the literal R136 response, so only the finite ABSOLUTE anchor is
--- still open.
+-- B: needed by the finite-sector route.  Round130/R136 already compile the
+-- completed four-direction R109 functional directly to the literal R136
+-- response, leaving only the finite ABSOLUTE expectation anchor.
 data ExpectationCompletionResidual : Set where
   finiteGammaExpectationIsR109AbsoluteResponse
     : ExpectationCompletionResidual
@@ -41,26 +39,36 @@ expectationCompletionResidualCount = 1
 completedExpectationToR136IdentityCompilerOwned : Bool
 completedExpectationToR136IdentityCompilerOwned = true
 
--- C has TWO legitimate producer routes.  They are alternatives, not premises
--- to be charged simultaneously.
+-- C has TWO alternative producer routes.
 data TraceSignRoute : Set where
   finiteSectorMarginRoute
   realTraceAnomalyRoute
     : TraceSignRoute
 
--- Finite route: after normalization, the exact useful condition is that the
--- selected non-Wilson Gamma response beats the explicit remaining R109 tail.
+-- C_sector: normalized non-Wilson Gamma response must beat the explicit R109
+-- remaining tail at some anchored finite scale.
 data FiniteSectorSignResidual : Set where
   sourceNormalizedNonWilsonMarginBeatsR109Tail
     : FiniteSectorSignResidual
 
--- Anomaly route: the real trace anomaly lane already has strict-sign compilers;
--- cosmology needs the same-object anomaly weld and a scalar/readout bridge from
--- that real trace to the exact rational R136 trace used by the terminal root.
+-- C_anomaly: the strict-sign algebra is already compiled on the pinned Local-C
+-- stress object.  The sign-specific same-object leaf is now only the selected
+-- Local-C F2 numerator = literal physical weighted-F2 numerator.  Cosmology
+-- additionally needs the real Local-C trace readout = embedded rational R136
+-- trace convention.
 data RealAnomalySignResidual : Set where
-  selectedTraceAnomalySameObjectWeld
+  selectedLocalCF2IsPhysicalWeightedF2
   realTraceReadoutIsEmbeddedR136Trace
     : RealAnomalySignResidual
+
+anomalyRouteUsesOwnAbsoluteFiniteObservableConvergence : Bool
+anomalyRouteUsesOwnAbsoluteFiniteObservableConvergence = true
+
+anomalyRouteDoesNotRequireProducerB : Bool
+anomalyRouteDoesNotRequireProducerB = true
+
+anomalySignPinnedToLocalCStressObject : Bool
+anomalySignPinnedToLocalCStressObject = true
 
 -- D: downstream sign algebra is compiled.
 accelerationSignAlgebraAlreadyCompiled : Bool
@@ -72,10 +80,10 @@ negativeR136TraceSufficesOnVacuumBranch = true
 finiteSectorMarginRouteCompilesToMatterAcceleration : Bool
 finiteSectorMarginRouteCompilesToMatterAcceleration = true
 
-realNegativeTraceRouteCompilesToMatterAcceleration : Bool
-realNegativeTraceRouteCompilesToMatterAcceleration = true
+pinnedLocalCAnomalyRouteCompilesToMatterAcceleration : Bool
+pinnedLocalCAnomalyRouteCompilesToMatterAcceleration = true
 
--- Full cosmology remains downstream and is not silently claimed.
+-- Full cosmology remains downstream.
 fullFriedmannTrajectoryAlreadySolved : Bool
 fullFriedmannTrajectoryAlreadySolved = false
 
@@ -95,12 +103,16 @@ negativeTraceAloneOutsideVacuumBranchDoesNotCountAsAcceleration = true
 finiteDZSignDoesNotCountAsEffectiveActionStressSign : Bool
 finiteDZSignDoesNotCountAsEffectiveActionStressSign = true
 
--- Current shortest-route shape:
+-- Shortest routes:
 --
---   A: pay five marked-OS same-object/semantic residuals
---   B: pay ONE absolute finite-expectation anchor
---   C: choose ONE sign producer:
---        C_sector  : normalized sector margin beats explicit R109 tail
---        C_anomaly : same-object negative real trace + R136 readout weld
---   D: existing compiler gives negative active stress and positive matter
---      acceleration contribution for positive gravitational prefactor.
+--   common: A = five marked-OS residuals
+--
+--   sector route:
+--     B = one absolute finite-expectation anchor
+--     C_sector = normalized sector margin beats R109 tail
+--     -> D
+--
+--   anomaly route:
+--     C_anomaly = physical-F2 same-object weld + real/R136 readout weld
+--     (its own finite-observable vanishing-error transport bypasses B)
+--     -> D
