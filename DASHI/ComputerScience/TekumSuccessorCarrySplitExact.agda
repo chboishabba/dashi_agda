@@ -21,6 +21,7 @@ import DASHI.ComputerScience.TekumBalancedSuccessorExact as Succ
 --   1. carry stops inside the fraction;
 --   2. an all-1 fraction wraps to all-T and carry stops in the exponent;
 --   3. all-1 fraction and exponent wrap and carry enters the regime.
+-- The only fourth result is the all-positive terminal word.
 ------------------------------------------------------------------------
 
 allPositive : (n : Nat) → Vec Trit.Trit n
@@ -30,6 +31,21 @@ allPositive (suc n) = Trit.pos ∷ allPositive n
 allNegative : (n : Nat) → Vec Trit.Trit n
 allNegative zero = []
 allNegative (suc n) = Trit.neg ∷ allNegative n
+
+data IncrementView : ∀ {n} → Vec Trit.Trit n → Set where
+  terminal : ∀ {n} {xs : Vec Trit.Trit n} →
+    xs ≡ allPositive n → IncrementView xs
+  incrementable : ∀ {n} {xs : Vec Trit.Trit n} →
+    Succ.HasSuccessor xs → IncrementView xs
+
+classifyIncrement :
+  ∀ {n} (xs : Vec Trit.Trit n) → IncrementView xs
+classifyIncrement [] = terminal refl
+classifyIncrement (Trit.neg ∷ xs) = incrementable Succ.negativeHead
+classifyIncrement (Trit.zer ∷ xs) = incrementable Succ.zeroHead
+classifyIncrement (Trit.pos ∷ xs) with classifyIncrement xs
+... | terminal eq = terminal (cong (Trit.pos ∷_) eq)
+... | incrementable carry = incrementable (Succ.positiveCarry carry)
 
 successorAllPositiveAppend :
   ∀ (p : Nat) {m} (tail : Vec Trit.Trit m) →
@@ -82,3 +98,41 @@ regimeCarryCase {p} {e} {regime = regime} carry =
     (successorAllPositiveAppend p (allPositive e ++ regime))
     (cong (allNegative p ++_)
       (successorAllPositiveAppend e regime))
+
+data ThreeFieldCarry
+    {p e r}
+    (fraction : Vec Trit.Trit p)
+    (exponent : Vec Trit.Trit e)
+    (regime : Vec Trit.Trit r) : Set where
+  fractionStops :
+    Succ.HasSuccessor fraction →
+    ThreeFieldCarry fraction exponent regime
+  exponentStops :
+    fraction ≡ allPositive p →
+    Succ.HasSuccessor exponent →
+    ThreeFieldCarry fraction exponent regime
+  regimeStops :
+    fraction ≡ allPositive p →
+    exponent ≡ allPositive e →
+    Succ.HasSuccessor regime →
+    ThreeFieldCarry fraction exponent regime
+  terminalMaximum :
+    fraction ≡ allPositive p →
+    exponent ≡ allPositive e →
+    regime ≡ allPositive r →
+    ThreeFieldCarry fraction exponent regime
+
+classifyThreeFieldCarry :
+  ∀ {p e r}
+  (fraction : Vec Trit.Trit p)
+  (exponent : Vec Trit.Trit e)
+  (regime : Vec Trit.Trit r) →
+  ThreeFieldCarry fraction exponent regime
+classifyThreeFieldCarry fraction exponent regime
+  with classifyIncrement fraction
+... | incrementable fractionCarry = fractionStops fractionCarry
+... | terminal fractionMax with classifyIncrement exponent
+...   | incrementable exponentCarry = exponentStops fractionMax exponentCarry
+...   | terminal exponentMax with classifyIncrement regime
+...     | incrementable regimeCarry = regimeStops fractionMax exponentMax regimeCarry
+...     | terminal regimeMax = terminalMaximum fractionMax exponentMax regimeMax
