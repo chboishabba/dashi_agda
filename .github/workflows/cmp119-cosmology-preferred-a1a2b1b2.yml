@@ -12,6 +12,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109DirectTailAnchorExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223VacuumTailThresholdExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerTest.agda'
       - '.github/workflows/cmp119-cosmology-preferred-a1a2b1b2.yml'
   workflow_dispatch:
 
@@ -47,6 +49,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyFiveSourcePhysicsTypedReceiptsExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2RouteExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CanonicalWilsonGibbsMetricFamilyWeldCompilerTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredA1A2B1B2TypedReceiptTest.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
