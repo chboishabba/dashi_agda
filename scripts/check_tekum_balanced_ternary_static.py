@@ -31,6 +31,11 @@ required = {
         'carryDiscardWidthOnePositiveOverflow', 'definition5DiffersFromCarryDiscardAtWidthOne',
         'anchorSubtractionNeverNeedsPositiveOverflow', 'sourceEquationAndCarryDescriptionSeparated',
     ],
+    'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': [
+        'signOfWord', 'ParsedPayload', 'parsePayload', 'anchorMSB', 'parseOrdinaryAnchor',
+        'integerToIntCode', 'exponentIntCode', 'fractionIntCode', 'ordinaryFromParsed',
+        'parseTekumWord', 'decodeNormalWidthTekumWord', 'normalWidthParserUsesSourceFieldOrder',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
@@ -61,4 +66,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: Definition 5 audit, centered backend, positional reconstruction, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: source parser, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
