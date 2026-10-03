@@ -8,6 +8,11 @@ import DASHI.Physics.Foundations.CMP119CosmologyFiveSourcePhysicsTypedReceiptsEx
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredA1A2B1B2RouteExact as Route
 import DASHI.Physics.Foundations.CMP119CosmologyEq223DirectTailThresholdToExpansionExact as Terminal
 
+-- A1 must use the literal rational R144 finite-D1 readout carrier.
+a1UsesLiteralRationalR144Readout :
+  Typed.a1ExactReceiptUsesRationalR144Readout ≡ true
+a1UsesLiteralRationalR144Readout = refl
+
 -- A2 must be the actual Wilson/OS-admissible selected R109 cylinder surface,
 -- not merely an arbitrary pair-to-observable meaning socket.
 a2PinsPublishedWilsonOSAdmissibility :
