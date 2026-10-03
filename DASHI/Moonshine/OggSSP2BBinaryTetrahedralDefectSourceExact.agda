@@ -19,7 +19,7 @@ module DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact where
 --
 -- whose exact powers of two are
 --
---   2^3*3, 2^3*3, 2^2, 2*3, 2*3.
+--   8,8,4,2,2 = 2^3,2^3,2^2,2^1,2^1.
 --
 -- Hence the independently defined 2-adic centralizer-exponent profile is
 -- exactly
@@ -33,7 +33,7 @@ module DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_; _^_)
+open import Agda.Builtin.Nat using (Nat; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -72,6 +72,15 @@ twoAdicCentralizerExponent orderFour = 2
 twoAdicCentralizerExponent orderThree = 1
 twoAdicCentralizerExponent orderSix = 1
 
+/-- Literal largest power of two dividing the representative centralizer order.
+Kept explicit to avoid depending on a particular exponentiation API. -/
+twoPrimaryPart : OrderStratum → Nat
+twoPrimaryPart identity = 8
+twoPrimaryPart centralMinusOne = 8
+twoPrimaryPart orderFour = 4
+twoPrimaryPart orderThree = 2
+twoPrimaryPart orderSix = 2
+
 centralizerOddPart : OrderStratum → Nat
 centralizerOddPart identity = 3
 centralizerOddPart centralMinusOne = 3
@@ -81,8 +90,7 @@ centralizerOddPart orderSix = 3
 
 centralizerTwoAdicFactorization :
   (s : OrderStratum) →
-  (2 ^ twoAdicCentralizerExponent s) * centralizerOddPart s
-  ≡ centralizerOrder s
+  twoPrimaryPart s * centralizerOddPart s ≡ centralizerOrder s
 centralizerTwoAdicFactorization identity = refl
 centralizerTwoAdicFactorization centralMinusOne = refl
 centralizerTwoAdicFactorization orderFour = refl
