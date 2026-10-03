@@ -7,7 +7,11 @@ import so every CLI, service, pytest and MCP entrypoint sees the same behavior.
 
 from .checker import Checker, Diagnostic
 from .boundary_rules import install_checker_boundary_rules
+from .boundary_refinements import install_boundary_refinements
+from .integration_refinements import install_scope_refinements
 
 install_checker_boundary_rules(Checker)
+install_boundary_refinements()
+install_scope_refinements()
 
 __all__ = ["Checker", "Diagnostic"]
