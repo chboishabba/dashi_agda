@@ -22,6 +22,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223CauchyVacuumScalarMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ThreeCauchyToCombinedEnvelopeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223FiniteEffectiveActionUpperExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223CombinedEnvelopeR109TailToR136Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223R109TailToExpansionMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR144EffectiveActionStressExpectationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionR136MaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyWeldExact.agda'
@@ -76,6 +79,9 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyEq223CauchyVacuumScalarMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223ThreeCauchyToCombinedEnvelopeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223FiniteEffectiveActionUpperExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223CombinedEnvelopeR109TailToR136Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223R109TailToExpansionMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR144EffectiveActionStressExpectationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223EffectiveActionR136MaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyWeldExact.agda \
