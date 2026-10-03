@@ -1,22 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact where
 
-------------------------------------------------------------------------
--- FULL LATTICE-EUCLIDEAN ACTION NEEDS A SIGNED SYMMETRIC BASIS.
---
--- The preferred R245/R122 finite tangent carrier is the ten basis labels
--- `SymmetricTensorComponent4`.  Axis permutations act on those labels, but a
--- coordinate reflection sends an off-diagonal basis tensor to MINUS another
--- basis tensor.  The sign cannot be represented by a bare component label.
---
--- This module constructs the minimal signed lift and makes that obstruction
--- executable.  The remaining E1 carrier seam is now explicit:
---
---   signed basis action -> current R143 first-variation/readout convention.
-------------------------------------------------------------------------
-
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 
@@ -68,8 +55,6 @@ componentAxes K.component13 = axis1 , axis3
 componentAxes K.component22 = axis2 , axis2
 componentAxes K.component23 = axis2 , axis3
 componentAxes K.component33 = axis3 , axis3
-  where
-    open import Agda.Builtin.Sigma using (_,_)
 
 record SignedAxisAction : Set₁ where
   field
@@ -87,8 +72,6 @@ actSignedComponent action component with componentAxes component
   signed-component
     (multiplySign (axisSign action left) (axisSign action right))
     (componentOfPair (axisImage action left) (axisImage action right))
-  where
-    open import Agda.Builtin.Sigma using (_,_)
 
 forgetSign : SignedSymmetricComponent → K.SymmetricTensorComponent4
 forgetSign = component
