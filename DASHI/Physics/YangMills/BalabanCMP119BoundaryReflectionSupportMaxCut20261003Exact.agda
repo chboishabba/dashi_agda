@@ -7,24 +7,17 @@ module DASHI.Physics.YangMills.BalabanCMP119BoundaryReflectionSupportMaxCut20261
 -- Source owner:
 --   BalabanCMP119CMP122BoundaryReinjectionSourceExact
 --
--- The published/source-backed BoundaryTermClass owns, for every (scale,X):
---   * the localized boundary terms B_k(X),
---   * common-domain analyticity,
---   * gauge invariance,
---   * exponential localization.
---
--- It does NOT own a spacetime support map for Polymer, a selected Euclidean
--- time reflection, or a theorem saying whether X lies in the positive half,
--- negative half, or crosses the OS plane.  Hence those facts cannot be
--- manufactured from exponential localization.
---
--- This file adds exactly the missing dictionary.  Once instantiated on the
--- literal CMP119 polymer carrier, all one-sided B terms are removed from the
--- nontrivial RP cut and only `crossing` polymers require a cross-plane kernel.
+-- The source-backed BoundaryTermClass owns localized B_k(X), analyticity,
+-- gauge invariance and exponential localization.  It does NOT own spacetime
+-- support relative to the selected OS plane or reflection pairing of the
+-- localized boundary expressions.  Both are therefore explicit physical
+-- dictionary leaves here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
+open import Data.List.Base using (map)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119CMP122BoundaryReinjectionSourceExact as B
@@ -58,21 +51,31 @@ record CMP119BoundaryReflectionSupportDictionary
       B.CMP119BoundaryTermClass
         Scale Polymer BoundaryTerm AnalyticDomain) : Set₁ where
   field
-    -- SAME published polymer carrier; no replacement support datatype.
+    -- SAME published carriers; no replacement polymer/action datatype.
     reflectedPolymer : Scale → Polymer → Polymer
+    reflectedBoundaryTerm : BoundaryTerm → BoundaryTerm
     supportClass : Scale → Polymer → ReflectionSupportClass
 
     reflectedPolymerInvolutive : ∀ scale polymer →
       reflectedPolymer scale (reflectedPolymer scale polymer) ≡ polymer
 
+    reflectedBoundaryTermInvolutive : ∀ term →
+      reflectedBoundaryTerm (reflectedBoundaryTerm term) ≡ term
+
     supportClassReflectionLaw : ∀ scale polymer →
       supportClass scale (reflectedPolymer scale polymer) ≡
         reflectSupportClass (supportClass scale polymer)
 
-    -- The source's localized B_k(X) terms remain attached to that same X.
-    -- This field is the literal source/repository dictionary obligation: the
-    -- Polymer index used by boundaryTerms is the physical support polymer
-    -- being classified, not merely an unrelated label.
+    -- The actual localized source list on reflected X is the reflected list of
+    -- the source terms on X.  This is the reflection pairing needed before a
+    -- one-sided polymer can be absorbed into the two half actions.
+    boundaryTermsReflectionLaw : ∀ scale polymer →
+      B.boundaryTerms sourceClass scale (reflectedPolymer scale polymer)
+      ≡ map reflectedBoundaryTerm
+          (B.boundaryTerms sourceClass scale polymer)
+
+    -- The source's Polymer index is the physical support being classified,
+    -- rather than an unrelated bookkeeping label.
     BoundaryTermsUsePhysicalPolymerSupport : Scale → Polymer → Set
     boundaryTermsUsePhysicalPolymerSupport : ∀ scale polymer →
       BoundaryTermsUsePhysicalPolymerSupport scale polymer
@@ -129,12 +132,15 @@ crossingBoundaryPolymerIsPhysicalRPLeaf dictionary scale polymer refl = refl
 cmp119BoundaryReflectionClassificationCompilerLevel : ProofLevel
 cmp119BoundaryReflectionClassificationCompilerLevel = machineChecked
 
--- The source citation does not supply this OS-time support dictionary.
+-- CMP119/CMP122 source citation currently supplies neither the selected OS
+-- support map nor this exact reflected-term list equality.
 cmp119BoundaryPhysicalReflectionSupportDictionaryLevel : ProofLevel
 cmp119BoundaryPhysicalReflectionSupportDictionaryLevel = conditional
 
--- Even after support classification, each crossing B polymer still needs an
--- actual reflected-half/PSD kernel theorem.  Analyticity/localization is not it.
+cmp119BoundaryPhysicalTermReflectionPairingLevel : ProofLevel
+cmp119BoundaryPhysicalTermReflectionPairingLevel = conditional
+
+-- Crossing B polymers still need a genuine PSD/reflected-half certificate.
 cmp119BoundaryCrossingKernelCertificateLevel : ProofLevel
 cmp119BoundaryCrossingKernelCertificateLevel = conditional
 
