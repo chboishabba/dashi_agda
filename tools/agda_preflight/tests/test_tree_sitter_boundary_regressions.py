@@ -38,9 +38,7 @@ record RuntimeReceipt (enabled : Bool) : Set where
     agrees : Bool
 """,
         )
-
         diagnostics = Checker(tmp_path).check(path)
-
         assert not any(d.code == "TSAGDA000" for d in diagnostics)
 
 
@@ -60,9 +58,7 @@ bad : Tower
 bad = record { Tower.Point = Set }
 """,
     )
-
     hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA090"]
-
     assert hits
     assert all(d.severity == "error" for d in hits)
     assert policy_for("TSAGDA090").minimum == EvidenceLevel.TREE_SITTER
@@ -95,9 +91,7 @@ render : Render.JPhaseRenderingAlgebra → Nat
 render R = Render.klein R
 """,
     )
-
     diagnostics = Checker(tmp_path).check(path)
-
     assert not any(d.code in {"TSAGDA049", "TSAGDA052"} for d in diagnostics)
 
 
@@ -116,11 +110,9 @@ def test_equality_value_diagnostic_requires_typechecker_evidence():
     assert policy.hard_error_allowed is False
 
 
-def test_imported_constructor_shadow_is_predicted_at_user_authored_binders(tmp_path):
-    """A non-open imported constructor can soundly drive TSAGDA300 prediction."""
-
+def _write_cube(root: Path) -> None:
     write_module(
-        tmp_path,
+        root,
         "Cube",
         """module Cube where
 
@@ -128,6 +120,12 @@ data Pair (A B : Set) : Set where
   pair : A → B → Pair A B
 """,
     )
+
+
+def test_imported_constructor_shadow_is_advisory_at_user_authored_binders(tmp_path):
+    """Non-open constructor collisions are useful predictions, not scope proof."""
+
+    _write_cube(tmp_path)
     path = write_module(
         tmp_path,
         "Shadow",
@@ -147,15 +145,41 @@ walk [] = []
 walk (pair ∷ pairs) = pair ∷ walk pairs
 """,
     )
-
     hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA300"]
-
     assert hits
     assert all(d.severity == "warning" for d in hits)
     assert all(d.evidence == "dashi-index" for d in hits)
+    assert all(d.minimum_evidence == "agda-scope" for d in hits)
+    assert all(d.evidence_sufficient is False for d in hits)
     assert {d.line for d in hits} == {10, 14}
     assert all("Cube.pair" in d.message for d in hits)
     assert not any(d.line == 7 for d in hits)
+    assert policy_for("TSAGDA300").minimum == EvidenceLevel.AGDA_SCOPE
+
+
+def test_constructor_shadow_does_not_partial_match_agda_identifiers(tmp_path):
+    """Hyphens, unicode suffixes, and named implicits must not match `pair`."""
+
+    _write_cube(tmp_path)
+    path = write_module(
+        tmp_path,
+        "ShadowNames",
+        """module ShadowNames where
+
+open import Agda.Builtin.Nat using (Nat)
+import Cube as Cube
+
+pair-name : Nat → Nat
+pair-name pair-x = pair-x
+
+subscript : Nat → Nat
+subscript pair₁ = pair₁
+
+named : {pair : Nat} → Nat
+named {pair = p} = p
+""",
+    )
+    assert not any(d.code == "TSAGDA300" for d in Checker(tmp_path).check(path))
 
 
 def test_opened_constructor_is_not_guessed_to_be_a_shadowing_binder(tmp_path):
@@ -181,7 +205,5 @@ first : {A B : Set} → Pair A B → A
 first (pair a b) = a
 """,
     )
-
     hits = [d for d in Checker(tmp_path).check(path) if d.code == "TSAGDA300"]
-
     assert hits == []
