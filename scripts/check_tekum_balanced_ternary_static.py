@@ -10,6 +10,8 @@ required = {
     'DASHI/Algebra/BalancedTernaryCenteredReconstructionExact.agda': ['CenteredInteger', 'decodeEncodeCentered', 'encodeDecodeCentered', 'balancedTernaryCenteredBijection'],
     'DASHI/ComputerScience/TekumSourceAnchorCenterExact.agda': [
         'sourceAnchorCenterWord', 'sourceAnchorCenterInteger2', 'sourceAnchorCenterInteger4',
+        'sourceCenterMagnitude', 'centerAtEvenWidth', 'sourceCenterNatCodeAtEvenWidth',
+        'sourceCenterIntegerAtEvenWidth',
     ],
     'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': [
         'negateWordIsInvertWord', 'tekumBalancedArithmetic', 'concreteAnchor',
@@ -51,20 +53,25 @@ required = {
         'signAbsoluteIntegerInjective', 'sameSignAbsoluteValueDeterminesSourceWord',
     ],
     'DASHI/ComputerScience/TekumPositiveAnchorInjectiveExact.agda': [
-        'positiveMagnitudeBound', 'positiveModulusCentered',
-        'positiveConcreteAnchorRank', 'positiveAnchorInjective',
+        'positiveMagnitudeBound', 'positiveModulusCentered', 'negatedSourceCenterRank',
+        'positiveWrapExactEven', 'positiveConcreteAnchorRank', 'positiveAnchorInjective',
     ],
     'DASHI/ComputerScience/TekumSourceAnchorInjectiveExact.agda': [
         'negateWordInvolutive', 'negativeNegatesPositive',
-        'sameSignAnchorDeterminesSourceWord',
+        'sameSignAnchorDeterminesSourceWord', 'Width.EvenWidth',
     ],
     'DASHI/ComputerScience/TekumSourceWordInjectiveExact.agda': [
         'ordinaryEqualDeterminesSign', 'ordinaryEqualDeterminesMagnitude',
         'ordinaryRationalInjectiveOnParsedWords', 'hunholdProposition2Injective',
+        'Width.EvenWidth (8 + extra)',
     ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
     'DASHI/ComputerScience/TekumExponentBandExact.agda': ['bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality', 'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands', 'advanceExponent', 'scaleBelowSuccessor', 'bandUpperSuccStrict', 'bandUpperAdvanceStrict', 'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint'],
+    'DASHI/ComputerScience/TekumMonotoneMagnitudeExact.agda': [
+        'exponentStrictForcesMagnitudeStrict',
+        'sameExponentSignificandStrictForcesMagnitudeStrict',
+    ],
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
     'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
     'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': ['rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization', 'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg', 'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale', 'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct'],
@@ -105,7 +112,7 @@ if 'Special.classifySpecial word' not in source:
     raise SystemExit('source special classifier not applied to source word')
 
 assembly = (ROOT / 'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda').read_text(encoding='utf-8')
-if 'false true false false false true' not in assembly:
-    raise SystemExit('assembly must fail-close Prop. 2 after the Definition-7 anchor correction')
+if 'true true false false false true' not in assembly:
+    raise SystemExit('assembly must record corrected Prop. 2 and source-domain Prop. 3 as source-paid, with Prop. 4/5 and numerical no-double-rounding still false')
 
-print('Tekum static regression: source Definition 7 midpoint and source special classification are corrected; Prop. 2 is fail-closed pending re-proof against that anchor; source-domain Prop. 3 remains present; the finite-edge obstruction to Proposition 5 is recorded; no kernel-compilation claim is implied by this static gate.')
+print('Tekum static regression: Definition 7 midpoint and source special classification are corrected; Prop. 2 is source-reclosed with explicit even-width evidence; source-domain Prop. 3 remains present; Prop. 4 numeric monotonicity compilers are present; Proposition 5 edge obstructions are recorded; no kernel-compilation claim is implied by this static gate.')
