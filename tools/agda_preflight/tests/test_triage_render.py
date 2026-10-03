@@ -113,6 +113,14 @@ def test_fingerprint_is_stable_under_input_order(tmp_path):
     assert first.fingerprint == second.fingerprint
 
 
+def test_fingerprint_is_stable_across_absolute_path_rendering(tmp_path):
+    relative = build_triage(sample(tmp_path), tmp_path)
+    absolute = build_triage(sample(tmp_path), tmp_path, absolute_paths=True)
+
+    assert relative.fingerprint == absolute.fingerprint
+    assert triage_snapshot(relative)["root_causes"] == triage_snapshot(absolute)["root_causes"]
+
+
 def test_evidence_is_prominent_when_requirement_differs(tmp_path):
     path = tmp_path / "DASHI" / "Deferred.agda"
     diagnostics = [
