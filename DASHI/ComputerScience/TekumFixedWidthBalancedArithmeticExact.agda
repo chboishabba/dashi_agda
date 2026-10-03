@@ -16,6 +16,7 @@ import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact as Positional
 import DASHI.Algebra.BalancedTernaryRankReconstructionExact as Rank
+import DASHI.Algebra.BalancedTernaryRankNegationExact as RankNeg
 import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact as Centered
 import DASHI.ComputerScience.TekumAnchorArithmeticExact as Anchor
 
@@ -109,6 +110,14 @@ modulusNegateCentered (Centered.centeredInteger r)
 negateWord : ∀ {n} → Vec Trit.Trit n → Vec Trit.Trit n
 negateWord x =
   Centered.decodeCentered (negateCentered (Centered.encodeCentered x))
+
+negateWordIsInvertWord :
+  ∀ {n} (x : Vec Trit.Trit n) →
+  negateWord x ≡ BT.invertWord x
+negateWordIsInvertWord {n} x =
+  trans
+    (cong (Rank.unrankWord n) (sym (RankNeg.rankInvertIsOpposite x)))
+    (Rank.unrankRankWord (BT.invertWord x))
 
 addWord : ∀ {n} → Vec Trit.Trit n → Vec Trit.Trit n → Vec Trit.Trit n
 addWord x y =
