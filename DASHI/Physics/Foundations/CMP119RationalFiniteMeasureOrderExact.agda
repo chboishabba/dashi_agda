@@ -4,17 +4,21 @@ module DASHI.Physics.Foundations.CMP119RationalFiniteMeasureOrderExact where
 ------------------------------------------------------------------------
 -- POSITIVE RATIONAL HAAR INTEGRATION -> WEIGHTED NUMERATOR MONOTONICITY.
 --
--- The older rational stress integration owner retained only linearity.  For the
--- Eq.(2.23) sign max-cut we also need the standard order property of integration
--- against a nonnegative density.  This file isolates exactly that additional
--- finite-measure law and compiles pointwise sector bounds to weighted-numerator
--- bounds.  No sector sign or cosmological sign is assumed here.
+-- The older rational stress integration owner retained only additive linearity.
+-- For the Eq.(2.23) sign max-cut we also need the standard order property of
+-- integration against a nonnegative density and scalar linearity.  The latter
+-- lets constant pointwise majorants factor through the common density integral,
+-- which is what ultimately cancels the finite-measure normalization from the
+-- E/R/B-versus-vacuum sign comparison.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as Ring
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Linear
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
@@ -33,6 +37,13 @@ record RationalPositiveFiniteMeasureOrderLaws
       (∀ configuration → left configuration ≤ right configuration) →
       Physical.haarIntegral measure left
       ≤ Physical.haarIntegral measure right
+
+    haarIntegralScale :
+      ∀ scalar observable →
+      Physical.haarIntegral measure
+        (λ configuration → scalar * observable configuration)
+      ≡
+      scalar * Physical.haarIntegral measure observable
 
 open RationalPositiveFiniteMeasureOrderLaws public
 
@@ -83,8 +94,30 @@ weightedNumeratorBelowConstant :
 weightedNumeratorBelowConstant laws observable upper pointwise =
   weightedNumeratorMonotone laws observable (constantObservable upper) pointwise
 
+weightedConstantFactorsDensityIntegral :
+  ∀ {Configuration}
+    {measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ}
+    (laws : RationalPositiveFiniteMeasureOrderLaws measure)
+    scalar →
+  weightedNumerator measure (constantObservable scalar)
+  ≡
+  scalar * Physical.haarIntegral measure (Physical.density measure)
+weightedConstantFactorsDensityIntegral {measure = measure} laws scalar =
+  trans
+    (Linear.haarIntegralCongruent (linear laws)
+      (λ configuration →
+        Physical.density measure configuration * scalar)
+      (λ configuration →
+        scalar * Physical.density measure configuration)
+      (λ configuration →
+        Ring.solve-∀ (Physical.density measure configuration) scalar))
+    (haarIntegralScale laws scalar (Physical.density measure))
+
 positiveHaarOrderIsStandardFiniteMeasureLaw : Bool
 positiveHaarOrderIsStandardFiniteMeasureLaw = true
 
 pointwiseSectorMajorantNowCompilesToWeightedNumeratorMajorant : Bool
 pointwiseSectorMajorantNowCompilesToWeightedNumeratorMajorant = true
+
+constantMajorantsFactorThroughCommonDensityIntegral : Bool
+constantMajorantsFactorThroughCommonDensityIntegral = true
