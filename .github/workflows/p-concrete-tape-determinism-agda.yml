@@ -9,6 +9,7 @@ on:
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleTableInterpreterExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalRuleAgreementExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda'
       - '.github/workflows/p-concrete-tape-determinism-agda.yml'
   pull_request:
@@ -17,6 +18,7 @@ on:
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleTableInterpreterExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalRuleAgreementExact.agda'
+      - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda'
       - 'DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda'
       - '.github/workflows/p-concrete-tape-determinism-agda.yml'
   workflow_dispatch:
@@ -38,4 +40,5 @@ jobs:
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleTableInterpreterExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRuleKeyDeterminismExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalRuleAgreementExact.agda
+          nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeRelationalAfterRowExact.agda
           nix develop .# --command agda -i . DASHI/Mathematics/Complexity/PNotEqualsNPConcreteTapeIntrinsicOperationalStepExact.agda
