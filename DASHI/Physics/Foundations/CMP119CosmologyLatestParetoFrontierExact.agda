@@ -11,16 +11,16 @@ open import Agda.Builtin.Nat using (Nat)
 -- D_Gamma = - D Z / Z, not +D log Z.  Balaban's blocked log-weight convention
 -- remains source-relevant, but is not the gravitational one-point orientation.
 --
--- The E1 signed-axis action is no longer a physical residual.  The repository's
--- actual seven B_4 hypercubic generators now compile definitionally to the
--- signed rank-two action on the ten symmetric tensor slots.
+-- Marked E1 now takes the direct R143/R144 route: R143 proves global BC2 D1 is
+-- the finite localized D1 sum, and R144 proves the selected stress first
+-- variation is that SAME finite sum.  R133 auxiliary transport-equivariance is
+-- therefore not charged to the shortest marked-E1 cut.
 ------------------------------------------------------------------------
 
 -- Novel/source-facing DASHI reconstruction work.
 data NovelReconstructionResidual : Set where
   e1-component-permutation-and-local-activity-covariance : NovelReconstructionResidual
   e1-first-variation-naturality : NovelReconstructionResidual
-  e1-r133-transport-equivariance : NovelReconstructionResidual
   e2e4-shared-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
 
 -- Imported marked-OS interpretation/authority boundaries.
@@ -29,7 +29,7 @@ data StandardOSBoundary : Set where
   os-standard-marked-reconstruction-authority : StandardOSBoundary
 
 -- Standard scalar-analysis authority.  Embedding-specific rational negativity
--- reflection is now compiler output from rational trichotomy + this authority.
+-- reflection is compiler output from rational trichotomy + this authority.
 data StandardAnalysisBoundary : Set where
   real-strict-order-asymmetry : StandardAnalysisBoundary
 
@@ -41,7 +41,7 @@ data PreferredSignResidual : Set where
 
 -- A source estimate that would discharge the preferred balance directly.
 data NegativeBalanceResidual : Set where
-  eq223-negative-balance-source-estimate : NegativeBalanceResidual
+  eq223-erb-upper-majorants-beat-negative-vacuum : NegativeBalanceResidual
 
 -- Alternate anomaly route.  The order-reflection item is no longer a
 -- model-specific leaf; it is derived from StandardAnalysisBoundary above.
@@ -49,7 +49,7 @@ data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
 
 novelReconstructionResidualCount : Nat
-novelReconstructionResidualCount = 4
+novelReconstructionResidualCount = 3
 
 standardOSBoundaryCount : Nat
 standardOSBoundaryCount = 2
@@ -58,7 +58,7 @@ standardAnalysisBoundaryCount : Nat
 standardAnalysisBoundaryCount = 1
 
 reconstructionInterfaceCount : Nat
-reconstructionInterfaceCount = 6
+reconstructionInterfaceCount = 5
 
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
@@ -101,6 +101,12 @@ e1SignedAxisActionStillPhysical = false
 
 e1ActualB4GeneratorSignedActionConstructed : Bool
 e1ActualB4GeneratorSignedActionConstructed = true
+
+e1R133TransportEquivarianceStillShortestRoutePremise : Bool
+e1R133TransportEquivarianceStillShortestRoutePremise = false
+
+e1R143R144DirectSameD1CompilerOwnsSelectedStressProvenance : Bool
+e1R143R144DirectSameD1CompilerOwnsSelectedStressProvenance = true
 
 e1OneDerivativeNaturalityLawStillPhysical : Bool
 e1OneDerivativeNaturalityLawStillPhysical = true
@@ -166,6 +172,11 @@ oldPositiveVacuumDominanceRouteIsPreferredForOnePointGravity = false
 
 preferredEq223NegativeR136NowCompilesToMatterAcceleration : Bool
 preferredEq223NegativeR136NowCompilesToMatterAcceleration = true
+
+-- The exact sign calculation now accepts three literal E/R/B upper majorants
+-- and one strict vacuum-margin comparison.  No E/R/B sign assumption is used.
+eq223PreferredSignReducedToUpperMajorantsVersusVacuumMargin : Bool
+eq223PreferredSignReducedToUpperMajorantsVersusVacuumMargin = true
 
 -- Alternate anomaly route.
 traceAnomalyAlternateRouteSourceWritten : Bool
