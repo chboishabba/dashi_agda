@@ -11,6 +11,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144DirectMarkedCompilerExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144HypercubicReadoutMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyE1R144CanonicalB4ReadoutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityNaturalityNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1LinearityNaturalityNoGoTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologySelectedLocalCStressCylinderExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109SelectedStressCylinderPresentationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyR109LiteralStressCylinderMaxCutExact.agda'
@@ -82,6 +84,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyE1R144DirectMarkedCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyE1R144HypercubicReadoutMaxCutExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyE1R144CanonicalB4ReadoutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1LinearityNaturalityNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1LinearityNaturalityNoGoTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologySelectedLocalCStressCylinderExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR109SelectedStressCylinderPresentationExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyR109LiteralStressCylinderMaxCutExact.agda \
