@@ -1,15 +1,16 @@
 module DASHI.ComputerScience.TekumFractionSuccessorExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_; _<_ ; +<+; -<+; -<-)
+open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; _+_; _*_; _<_; +<+; -<+; -<-)
 import Data.Integer.Properties as ℤP
-open import Data.Nat.Base using (z<s)
+open import Data.Nat.Base as Nat using (suc)
+import Data.Nat.Properties as NatP
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _+_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Unnormalised.Base as ℚᵘ using (_<_)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
 open import Data.Vec using (Vec)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumBalancedSuccessorExact as Succ
@@ -25,10 +26,9 @@ import DASHI.ComputerScience.TekumSignificandRangeExact as Sig
 ------------------------------------------------------------------------
 
 integerAddOneStrict : (z : ℤ) → z ℤ.< z ℤ.+ (+ 1)
-integerAddOneStrict (+ n) = +<+ (Data.Nat.Properties.n<1+n n)
+integerAddOneStrict (+ n) = +<+ (NatP.n<1+n n)
 integerAddOneStrict -[1+ 0 ] = -<+
-integerAddOneStrict -[1+ Data.Nat.Base.suc n ] =
-  -<- (Data.Nat.Properties.n<1+n n)
+integerAddOneStrict -[1+ suc n ] = -<- (NatP.n<1+n n)
 
 rawFractionSuccessorStrict :
   ∀ {p} {fraction : Vec Trit.Trit p} →
@@ -54,7 +54,7 @@ rawFractionSuccessorStrict {p} {fraction} carry =
       (λ z →
         Fraction.fractionNumerator fraction ℤ.* (+ denominator)
         ℤ.< z ℤ.* (+ denominator))
-      (Relation.Binary.PropositionalEquality.sym numeratorStep)
+      (sym numeratorStep)
       (ℤP.*-monoʳ-<-pos (+ denominator)
         (integerAddOneStrict (Fraction.fractionNumerator fraction)))
 
