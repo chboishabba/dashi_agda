@@ -14,7 +14,7 @@ open import Agda.Builtin.String using (String)
 -- Lean branch:
 --   agent/rh-marked-cluster-target-reflection
 -- Donor head at refresh:
---   c93c941adad9925963412d90c3e271e1fa3b6c81
+--   3d62a006ad3904e43f4e4f35a06cba90cce36be9
 --
 -- Paid in Lean source:
 --   * same-object uniform M0 envelope;
@@ -37,15 +37,17 @@ open import Agda.Builtin.String using (String)
 --   * dyadic half-height shell geometry and the exact numerical identity
 --       sum_k ((log t + 1) + k) 2^-k / t = (2 log t + 4) / t;
 --   * fail-closed compiler from one exact literal carrier-to-shell inequality
---     to ThreeTapInverseSquareTailBound, with a harmless factor-four loss.
+--     to ThreeTapInverseSquareTailBound, with a harmless factor-four loss;
+--   * compile-time regression of that conditional compiler without naming an
+--     unproved unconditional tail producer.
 --
 -- Fail-closed boundary:
 --   the normalized four-window determinant bookkeeping / uniform curvature is
 --   not claimed as kernel-paid, and the literal complementary zero carrier has
 --   not yet been partitioned and compared to the paid dyadic shell majorant.
---   The unconditional regression therefore remains intentionally red until the
---   carrier-to-shell theorem exists.  No exact-head Lean Actions receipt exists
---   for the donor head recorded here.
+--   The regression is conditional on precisely that missing producer rather
+--   than using an unresolved identifier.  No exact-head Lean Actions receipt
+--   exists for the donor head recorded here.
 --
 -- Current analytic wall:
 --   finite determinant transport / fixed-width witness
@@ -121,7 +123,7 @@ currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
     "agent/rh-marked-cluster-target-reflection"
-    "c93c941adad9925963412d90c3e271e1fa3b6c81"
+    "3d62a006ad3904e43f4e4f35a06cba90cce36be9"
 
     true true true true true true true true true true true true true true
 
