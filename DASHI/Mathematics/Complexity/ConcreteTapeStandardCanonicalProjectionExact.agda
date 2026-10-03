@@ -17,7 +17,6 @@ module DASHI.Mathematics.Complexity.ConcreteTapeStandardCanonicalProjectionExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -32,6 +31,16 @@ plainCellsToSymbols WF.plainNil = []
 plainCellsToSymbols (WF.plainCons {symbol = symbol} rest) =
   symbol ∷ plainCellsToSymbols rest
 
+plainCellsToSymbols-unique :
+  ∀ {State Symbol : Set}
+    {cells : List (Local.TapeCell State Symbol)}
+    (left right : WF.PlainCells cells) →
+  plainCellsToSymbols left ≡ plainCellsToSymbols right
+plainCellsToSymbols-unique WF.plainNil WF.plainNil = refl
+plainCellsToSymbols-unique
+    (WF.plainCons left) (WF.plainCons right)
+  rewrite plainCellsToSymbols-unique left right = refl
+
 appendSymbolFarLeft :
   ∀ {State Symbol : Set}
     {machine : Standard.StandardSingleTapeMachine State Symbol} →
@@ -42,6 +51,19 @@ appendSymbolFarLeft symbol
     (Standard.standard-configuration left q a right) =
   Standard.standard-configuration
     (Local.append left (symbol ∷ [])) q a right
+
+foldPlainPrefixFarLeft :
+  ∀ {State Symbol : Set}
+    {cells : List (Local.TapeCell State Symbol)}
+    {std : Standard.StandardSingleTapeMachine State Symbol} →
+  WF.PlainCells cells →
+  Standard.StandardConfiguration std →
+  Standard.StandardConfiguration std
+foldPlainPrefixFarLeft WF.plainNil config = config
+foldPlainPrefixFarLeft
+    (WF.plainCons {symbol = symbol} rest) config =
+  appendSymbolFarLeft symbol
+    (foldPlainPrefixFarLeft rest config)
 
 canonicalProjectionCells :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -75,20 +97,26 @@ projectPlainPrefix :
     (unique : WF.ExactlyOneHead rest) →
   canonicalProjectionCells (WF.prependPlain prefixPlain unique)
     ≡ foldPlainPrefixFarLeft prefixPlain (canonicalProjectionCells unique)
-  where
-    foldPlainPrefixFarLeft :
-      ∀ {State Symbol : Set}
-        {cells : List (Local.TapeCell State Symbol)}
-        {std : Standard.StandardSingleTapeMachine State Symbol} →
-      WF.PlainCells cells →
-      Standard.StandardConfiguration std →
-      Standard.StandardConfiguration std
-    foldPlainPrefixFarLeft WF.plainNil config = config
-    foldPlainPrefixFarLeft (WF.plainCons {symbol = symbol} rest) config =
-      appendSymbolFarLeft symbol (foldPlainPrefixFarLeft rest config)
 projectPlainPrefix WF.plainNil unique = refl
 projectPlainPrefix (WF.plainCons prefixPlain) unique
   rewrite projectPlainPrefix prefixPlain unique = refl
+
+------------------------------------------------------------------------
+-- The observable projection is independent of the proof of ExactlyOneHead.
+------------------------------------------------------------------------
+
+canonicalProjectionCells-unique :
+  ∀ {machine : Local.ConcreteTapeMachine}
+    {cells : List
+      (Local.TapeCell (Local.State machine) (Local.Symbol machine))}
+    (left right : WF.ExactlyOneHead cells) →
+  canonicalProjectionCells left ≡ canonicalProjectionCells right
+canonicalProjectionCells-unique
+    (WF.headHere leftPlain) (WF.headHere rightPlain)
+  rewrite plainCellsToSymbols-unique leftPlain rightPlain = refl
+canonicalProjectionCells-unique
+    (WF.plainBefore left) (WF.plainBefore right)
+  rewrite canonicalProjectionCells-unique left right = refl
 
 ------------------------------------------------------------------------
 -- A row equality transports canonical projection without changing the value.
@@ -102,31 +130,7 @@ canonicalProjection_transport :
     (uniqueRight : WF.ExactlyOneHead (Local.cells right)) →
   canonicalProjection uniqueLeft ≡ canonicalProjection uniqueRight
 canonicalProjection_transport refl uniqueLeft uniqueRight =
-  canonicalProjection_uniqueProof uniqueLeft uniqueRight
-  where
-    canonicalProjection_uniqueProof :
-      ∀ {machine : Local.ConcreteTapeMachine}
-        {cells : List
-          (Local.TapeCell (Local.State machine) (Local.Symbol machine))}
-        (u v : WF.ExactlyOneHead cells) →
-      canonicalProjectionCells u ≡ canonicalProjectionCells v
-    canonicalProjection_uniqueProof
-        (WF.headHere p) (WF.headHere q) =
-      cong (Standard.standard-configuration [] _ _)
-        (plainSymbols_uniqueProof p q)
-      where
-        plainSymbols_uniqueProof :
-          ∀ {State Symbol : Set}
-            {cells : List (Local.TapeCell State Symbol)}
-            (p q : WF.PlainCells cells) →
-          plainCellsToSymbols p ≡ plainCellsToSymbols q
-        plainSymbols_uniqueProof WF.plainNil WF.plainNil = refl
-        plainSymbols_uniqueProof
-            (WF.plainCons p) (WF.plainCons q)
-          rewrite plainSymbols_uniqueProof p q = refl
-    canonicalProjection_uniqueProof
-        (WF.plainBefore u) (WF.plainBefore v)
-      rewrite canonicalProjection_uniqueProof u v = refl
+  canonicalProjectionCells-unique uniqueLeft uniqueRight
 
 ------------------------------------------------------------------------
 -- MAX-CUT STATUS
