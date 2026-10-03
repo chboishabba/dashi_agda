@@ -1,13 +1,12 @@
 module DASHI.ComputerScience.TekumFractionInjectiveExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer.Base as ℤ using (+_)
+open import Data.Integer.Base as ℤ using (+_; _*_)
 import Data.Integer.Properties as ℤP
-open import Data.Rational.Base as ℚ using (ℚ)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Unnormalised.Base as ℚᵘ using (_≃_)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
 open import Data.Vec using (Vec)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
@@ -25,7 +24,7 @@ import DASHI.ComputerScience.TekumFractionRationalRangeExact as Fraction
 canonicalFractionEqualityToRaw :
   ∀ {p} {x y : Vec Trit.Trit p} →
   Fraction.canonicalFraction x ≡ Fraction.canonicalFraction y →
-  Fraction.rawFraction x Data.Rational.Unnormalised.Base.≃ Fraction.rawFraction y
+  Fraction.rawFraction x ℚᵘ.≃ Fraction.rawFraction y
 canonicalFractionEqualityToRaw {x = x} {y = y} eq =
   ℚᵘP.≃-trans
     (ℚᵘP.≃-sym (ℚP.toℚᵘ-fromℚᵘ (Fraction.rawFraction x)))
@@ -47,8 +46,8 @@ fractionNumeratorEquality {p} {x} {y} eq =
   rawEq = canonicalFractionEqualityToRaw eq
 
   cross :
-    BT.toInteger (BT.eval x) ℤP.* (+ (Fraction.fractionDenominator p))
-    ≡ BT.toInteger (BT.eval y) ℤP.* (+ (Fraction.fractionDenominator p))
+    BT.toInteger (BT.eval x) ℤ.* (+ (Fraction.fractionDenominator p))
+    ≡ BT.toInteger (BT.eval y) ℤ.* (+ (Fraction.fractionDenominator p))
   cross = ℚᵘP.drop-*≡* rawEq
 
 canonicalFractionInjective :
