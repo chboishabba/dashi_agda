@@ -20,6 +20,12 @@ required = {
         'encodeCentered', 'decodeCentered', 'decodeEncodeCentered', 'encodeDecodeCentered',
         'centeredValueWithinRange', 'centeredValueEncode', 'balancedTernaryCenteredBijection',
     ],
+    'DASHI/ComputerScience/TekumFixedWidthBalancedArithmeticExact.agda': [
+        'wrapRank', 'negateCentered', 'addCentered', 'subtractCentered', 'modulusCentered',
+        'negateWord', 'addWord', 'subtractWord', 'modulusWord', 'allPositiveWord',
+        'modulusNegateWord', 'tekumBalancedArithmetic', 'concreteAnchor',
+        'concreteAnchorNegationInvariant', 'oneTritPositivePlusPositiveWrapsNegative',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
@@ -50,4 +56,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: positional injectivity + centered reconstruction, rational semantics, dual p-adic cylinder naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: centered int_n backend, positional reconstruction, rational semantics, dual p-adic naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
