@@ -43,6 +43,16 @@ def main(argv=None) -> int:
         help="print affected modules in frontier order and exit",
     )
     parser.add_argument("--json", action="store_true", help="emit JSON diagnostics")
+    parser.add_argument(
+        "--errors-only",
+        action="store_true",
+        help="show only error diagnostics; exit status still reflects the full check",
+    )
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="hide warnings and success chatter; errors are still printed",
+    )
     parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
     parser.add_argument("--api-baseline", type=Path, help="compare current exported API to a prior snapshot")
     parser.add_argument("--cycles", action="store_true", help="report repository import cycles containing FILE")
@@ -180,13 +190,24 @@ def main(argv=None) -> int:
         baseline = json.loads(args.api_baseline.read_text(encoding="utf-8"))
         diagnostics.extend(api_drift(checker, baseline, Diagnostic))
 
-    if args.json:
-        print(json.dumps([d.as_dict() for d in diagnostics], indent=2))
-    else:
-        for diag in diagnostics:
-            print(_format(diag))
-        if not diagnostics:
-            print("agda-preflight: no high-confidence issues found")
+    errors_only = args.errors_only or args.quiet
+    displayed = (
+        [diag for diag in diagnostics if diag.severity == "error"]
+        if errors_only
+        else diagnostics
+    )
+
+    if not (args.quiet and not displayed):
+        if args.json:
+            print(json.dumps([d.as_dict() for d in displayed], indent=2))
+        else:
+            for diag in displayed:
+                print(_format(diag))
+            if not displayed:
+                if args.errors_only:
+                    print("agda-preflight: no errors found")
+                else:
+                    print("agda-preflight: no high-confidence issues found")
 
     return 1 if any(d.severity == "error" for d in diagnostics) else 0
 
