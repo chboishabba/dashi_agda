@@ -5,6 +5,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Algebra.BalancedTernaryIntegerExact
 import DASHI.Algebra.BalancedTernaryA003462BridgeExact
 import DASHI.Algebra.BalancedTernaryFiniteCarrierExact
+import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact
+import DASHI.Algebra.BalancedTernaryRankReconstructionExact
+import DASHI.Algebra.BalancedTernaryRankNegationExact
+import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact
 import DASHI.Foundations.RadixScaledExactFormat
 import DASHI.Foundations.BinaryFloatingPoint
 import DASHI.Codec.TriadicPAdicCodec
@@ -14,10 +18,15 @@ import DASHI.ComputerScience.TekumWheelStateParityExact
 import DASHI.ComputerScience.TekumWidthAdmissibilityExact
 import DASHI.ComputerScience.TekumAnchorArithmeticExact
 import DASHI.ComputerScience.TekumAnchorCodecExact
+import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact
+import DASHI.ComputerScience.TekumDefinition5ConsistencyExact
 import DASHI.ComputerScience.TekumRegimeExponentExact
 import DASHI.ComputerScience.TekumSpecialValuesExact
 import DASHI.ComputerScience.TekumFiniteSemanticsExact
 import DASHI.ComputerScience.TekumExactTriadicSemanticsExact
+import DASHI.ComputerScience.TekumSourceWordDecodeExact
+import DASHI.ComputerScience.TekumSourceWordRoundTripExact
+import DASHI.ComputerScience.TekumSourceNegationExact
 import DASHI.ComputerScience.TekumFormalPropertiesExact
 import DASHI.ComputerScience.TekumNegationExact
 import DASHI.ComputerScience.TekumUniquenessExact
@@ -28,6 +37,7 @@ import DASHI.ComputerScience.TekumFloatingPointStructuralBridgeExact
 import DASHI.ComputerScience.TekumTriadicPAdicKernelBridgeExact
 import DASHI.ComputerScience.TekumPadicOrientationBoundaryExact
 import DASHI.ComputerScience.TekumPadicDualChartExact
+import DASHI.ComputerScience.TekumPadicDualCylinderNaturalityExact
 import DASHI.ComputerScience.TekumTernaryStoredProgramExecutionExact
 import DASHI.ComputerScience.TernarySignedDigitAdderSemanticsExact
 import DASHI.ComputerScience.TernarySignedDigitBinaryCodeBridgeExact
@@ -47,6 +57,9 @@ record TekumVerifiedAssemblyBoundary : Set where
     finiteTritFin3BijectionPaid : Bool
     finiteTritPowerThreeCardinalityPaid : Bool
     positionalIntegerInjectivityPaid : Bool
+    centeredReconstructionBijectionPaid : Bool
+    fixedWidthCarryDiscardBackendPresent : Bool
+    digitwiseNegationEqualsCenteredNegation : Bool
 
     sourceAnchorDefinitionPresent : Bool
     anchorNegationInvarianceCompilerPresent : Bool
@@ -54,13 +67,19 @@ record TekumVerifiedAssemblyBoundary : Set where
     sourceExponentCountAndBiasTablePresent : Bool
     specialNaRZeroInfinityClassifierPresent : Bool
     dependentAnchorFieldCarrierPresent : Bool
+    sourceWordParserPresent : Bool
+    parsedPayloadRejoinPaid : Bool
 
     exactSymbolicFiniteSemanticsPresent : Bool
     exactTriadicSignedScaleSemanticsPresent : Bool
     canonicalRationalOrdinaryDecoderPresent : Bool
     machineFloatUsedAsSemanticAuthority : Bool
 
-    injectivityMonotonicityRoundingInterfacesPresent : Bool
+    sourceProp2InjectivityPaid : Bool
+    sourceProp3NegationPaid : Bool
+    sourceProp4MonotonicityPaid : Bool
+    sourceProp5NearestRoundingPaid : Bool
+    numericalNoDoubleRoundingPaid : Bool
     structuralPrecisionCompositionPresent : Bool
 
     existingFloatingCoordinateRolesReused : Bool
@@ -76,6 +95,7 @@ record TekumVerifiedAssemblyBoundary : Set where
     reversalDualChartPresent : Bool
     dualChartInvolutive : Bool
     dualPrecisionCompositionPaid : Bool
+    dualPrecisionEqualsExecutableCylinderRefinement : Bool
     tekumPromotedToLiteralPAdicValuation : Bool
 
     existingTernary27StorageReused : Bool
@@ -87,6 +107,7 @@ record TekumVerifiedAssemblyBoundary : Set where
     triadicByteABIBoundaryReused : Bool
     signedDigitAdderSemanticContractPresent : Bool
     fpgaResultAttributionPresent : Bool
+    concreteSchloeglFeyGateNetworkPaid : Bool
 
     directSSPTritBijectionPresent : Bool
     positionedSSPResidualReopeningPresent : Bool
@@ -100,13 +121,13 @@ record TekumVerifiedAssemblyBoundary : Set where
 canonicalTekumVerifiedAssemblyBoundary : TekumVerifiedAssemblyBoundary
 canonicalTekumVerifiedAssemblyBoundary =
   tekumVerifiedAssemblyBoundary
-    true true true true true false
-    true true true true true true
+    true true true true true true true true true
+    true true true true true true true true
     true true true false
-    true true
+    false true false false false true
     true true true true
-    true true true true false true true true false
+    true true true true false true true true true false
     true true true true
-    true true true true
+    true true true true false
     true true true true false
     true false
