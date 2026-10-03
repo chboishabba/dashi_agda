@@ -8,14 +8,15 @@ module DASHI.Physics.YangMills.BalabanCMP119RegularEReflectionSupportMaxCut20261
 --
 --   E_k(A) = sum_X E_k(X,A)
 --
--- on its literal selected `Component` list.  Therefore no new localization
--- theorem is needed for reflection positivity.  What is missing is the OS
+-- on its literal selected `Component` list. Therefore no new localization
+-- theorem is needed for reflection positivity. What is missing is the OS
 -- geometry of those SAME components and the reflection law of their localized
 -- activities.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119RegularESection2PredicateRound246Exact as E
@@ -23,7 +24,7 @@ import DASHI.Physics.YangMills.BalabanCMP119BoundaryReflectionSupportMaxCut20261
 
 record CMP119RegularEReflectionSupportDictionary
     {Density Background Volume Component : Set}
-    {scale : Agda.Builtin.Nat.Nat} {density : Density}
+    {scale : Nat} {density : Density}
     (form : E.CMP119RegularESection2Form
       Density Background Volume Component scale density) : Set₁ where
   field
@@ -41,7 +42,7 @@ record CMP119RegularEReflectionSupportDictionary
       supportClass volume (reflectedComponent volume component) ≡
         Support.reflectSupportClass (supportClass volume component)
 
-    -- Actual same-object localized E reflection law.  This is what turns a
+    -- Actual same-object localized E reflection law. This is what turns a
     -- positive/negative component pair into reflected half-action factors.
     localizedRegularActivityReflectionLaw : ∀ volume component background →
       E.localizedRegularActivity form volume
