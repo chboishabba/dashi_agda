@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR109TailMonotonicityTest where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base as Nat using (_≤_)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _≤_; _<_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyR109TailMonotonicityExact as TailMono
 import DASHI.Physics.Foundations.CMP119CosmologyR144R109ExpectationCompletionMaxCutExact as Tail
@@ -15,3 +15,13 @@ r109TailAntitoneRegression :
   near Nat.≤ far →
   Tail.r109RemainingTail source far ≤ Tail.r109RemainingTail source near
 r109TailAntitoneRegression = TailMono.r109RemainingTailAntitone
+
+laterScalePreservesNegativeBudgetRegression :
+  (source : R109.SourceNativeStressScaleCauchy) →
+  (sourceUpper : ℚ) →
+  ∀ {near far : Nat} →
+  near Nat.≤ far →
+  sourceUpper + Tail.r109RemainingTail source near < 0ℚ →
+  sourceUpper + Tail.r109RemainingTail source far < 0ℚ
+laterScalePreservesNegativeBudgetRegression =
+  TailMono.laterScalePreservesNegativeSourceTailBudget
