@@ -8,6 +8,7 @@ targets=(
   DASHI/Moonshine/OggSSP2BM22RuntimeMaxCutReceiptExact.agda
   DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda
   DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda
+  DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda
   DASHI/Moonshine/OggSSP2BSameObjectMaxCutFrontierExact.agda
 )
 
@@ -33,13 +34,18 @@ grep -q 'defectOrderThreeIsOne' "${targets[2]}"
 grep -q 'defectOrderSixIsOne' "${targets[2]}"
 grep -q 'matchingNumbersDoNotConstructModeRecognition' "${targets[2]}"
 
-grep -q 'externalIntegralLocalActionSourced' "${targets[3]}"
-grep -q 'tenDimensionalFactorMultiplicityIsTen' "${targets[3]}"
-grep -q 'bareM22CompletionRouteKilled' "${targets[3]}"
-grep -q 'formalIntegralTateCarrierWeldStillOpen' "${targets[3]}"
-grep -q 'actualTenSubquotientStillOpen' "${targets[3]}"
-grep -q 'largerCompletionActionStillOpen' "${targets[3]}"
-grep -q 'actualModeDefectRecognitionStillOpen' "${targets[3]}"
-grep -q 'thirtyToP31StillObserverOnly' "${targets[3]}"
+grep -q 'apparentParityConflictResolved' "${targets[3]}"
+grep -q 'currentWeightTwoH0OrientationRetained' "${targets[3]}"
+grep -q 'currentWeightThreeH1OrientationRetained' "${targets[3]}"
+grep -q 'parityConventionShiftIsRequired' "${targets[3]}"
+
+grep -q 'externalIntegralLocalActionSourced' "${targets[4]}"
+grep -q 'tenDimensionalFactorMultiplicityIsTen' "${targets[4]}"
+grep -q 'bareM22CompletionRouteKilled' "${targets[4]}"
+grep -q 'formalIntegralTateCarrierWeldStillOpen' "${targets[4]}"
+grep -q 'actualTenSubquotientStillOpen' "${targets[4]}"
+grep -q 'largerCompletionActionStillOpen' "${targets[4]}"
+grep -q 'actualModeDefectRecognitionStillOpen' "${targets[4]}"
+grep -q 'thirtyToP31StillObserverOnly' "${targets[4]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
