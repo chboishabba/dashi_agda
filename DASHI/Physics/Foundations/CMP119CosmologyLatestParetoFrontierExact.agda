@@ -11,16 +11,19 @@ open import Agda.Builtin.Nat using (Nat)
 -- D_Gamma = - D Z / Z, not +D log Z.  Balaban's blocked log-weight convention
 -- remains source-relevant, but is not the gravitational one-point orientation.
 --
--- Marked E1 now takes the direct R143/R144 route: R143 proves global BC2 D1 is
--- the finite localized D1 sum, and R144 proves the selected stress first
--- variation is that SAME finite sum.  R133 auxiliary transport-equivariance is
--- therefore not charged to the shortest marked-E1 cut.
+-- Marked E1 is now charged at the consumer boundary as ONE same-object theorem:
+-- the actual R144 ten finite-D1 readouts transform as a signed symmetric
+-- rank-two tensor under the repository's concrete B_4 hypercubic generators,
+-- using the SAME whole-lattice CMP119 configuration action as OS1.
+--
+-- Local component reindexing/activity covariance and first-variation naturality
+-- remain the preferred producer strategy for that theorem; they are no longer
+-- double-counted as independent terminal residuals.
 ------------------------------------------------------------------------
 
 -- Novel/source-facing DASHI reconstruction work.
 data NovelReconstructionResidual : Set where
-  e1-component-permutation-and-local-activity-covariance : NovelReconstructionResidual
-  e1-first-variation-naturality : NovelReconstructionResidual
+  e1-r144-signed-b4-readout-covariance-and-whole-lattice-attachment : NovelReconstructionResidual
   e2e4-shared-localc-stress-cylinder-encoding-and-admissibility : NovelReconstructionResidual
 
 -- Imported marked-OS interpretation/authority boundaries.
@@ -49,7 +52,7 @@ data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
 
 novelReconstructionResidualCount : Nat
-novelReconstructionResidualCount = 3
+novelReconstructionResidualCount = 2
 
 standardOSBoundaryCount : Nat
 standardOSBoundaryCount = 2
@@ -58,7 +61,7 @@ standardAnalysisBoundaryCount : Nat
 standardAnalysisBoundaryCount = 1
 
 reconstructionInterfaceCount : Nat
-reconstructionInterfaceCount = 5
+reconstructionInterfaceCount = 4
 
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
@@ -108,22 +111,33 @@ e1R133TransportEquivarianceStillShortestRoutePremise = false
 e1R143R144DirectSameD1CompilerOwnsSelectedStressProvenance : Bool
 e1R143R144DirectSameD1CompilerOwnsSelectedStressProvenance = true
 
-e1OneDerivativeNaturalityLawStillPhysical : Bool
-e1OneDerivativeNaturalityLawStillPhysical = true
-
+-- The full-reflection consumer is now the signed readout family, not an
+-- impossible negative value inside the bare ten-slot tangent-label carrier.
 e1PlainTenSlotPermutationHandlesReflections : Bool
 e1PlainTenSlotPermutationHandlesReflections = false
 
 e1SignedReflectionReadoutRequired : Bool
 e1SignedReflectionReadoutRequired = true
 
-e1RemainingTensorSymmetryLeafIsReadoutCovarianceOnActualB4Generators : Bool
-e1RemainingTensorSymmetryLeafIsReadoutCovarianceOnActualB4Generators = true
+e1TerminalPhysicalLeafIsOneR144SignedB4ReadoutTheorem : Bool
+e1TerminalPhysicalLeafIsOneR144SignedB4ReadoutTheorem = true
 
--- Round103's generic Tangent/Component remain opaque in the generic route;
--- the preferred ten-slot tangent path now has a concrete signed B_4 action.
-e1GenericRound103TangentAndComponentCarriersAreOpaque : Bool
-e1GenericRound103TangentAndComponentCarriersAreOpaque = true
+e1LocalComponentCovarianceIsProducerStrategy : Bool
+e1LocalComponentCovarianceIsProducerStrategy = true
+
+e1FirstVariationNaturalityIsProducerStrategy : Bool
+e1FirstVariationNaturalityIsProducerStrategy = true
+
+-- R244's generic Component carrier remains opaque.  The source locations we
+-- have verified support the localized decomposition and whole-lattice
+-- covariance, but not yet a separately located theorem that our chosen opaque
+-- Component carrier transforms term-by-term.  Do not promote that stronger
+-- statement without a source attachment.
+e1GenericR244ComponentCarrierIsOpaque : Bool
+e1GenericR244ComponentCarrierIsOpaque = true
+
+e1PerComponentSourceCovarianceLocatedInPrimarySource : Bool
+e1PerComponentSourceCovarianceLocatedInPrimarySource = false
 
 -- E2/E4 reductions.
 e2NeedsNewGramPositivityEstimate : Bool
@@ -137,6 +151,9 @@ e2AndE4UseSamePinnedStressObservable = true
 
 e2AndE4StillNeedTwoIndependentStressEncodingMaps : Bool
 e2AndE4StillNeedTwoIndependentStressEncodingMaps = false
+
+sharedE2E4CylinderEncodingStillPhysical : Bool
+sharedE2E4CylinderEncodingStillPhysical = true
 
 -- Wightman/terminal reconstruction has one stress object.
 independentTerminalWightmanHingeChoiceStillExists : Bool
