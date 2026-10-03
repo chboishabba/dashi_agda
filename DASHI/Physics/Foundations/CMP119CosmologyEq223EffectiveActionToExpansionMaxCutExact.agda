@@ -18,9 +18,10 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223EffectiveActionToExpansionM
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_; -_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
+import DASHI.Physics.Foundations.CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact as Envelope
 import DASHI.Physics.Foundations.CMP119CosmologyEq223EffectiveActionR136MaxCutExact as Preferred
 import DASHI.Physics.Foundations.CMP119CosmologyEq223NegativeSectorDominanceExact as Eq223Sign
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
@@ -30,7 +31,9 @@ import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExa
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact as Vacuum
+import DASHI.Physics.Foundations.CMP119CosmologyVacuumSectorFactorizationExact as VacuumFactor
 import DASHI.Physics.Foundations.CMP119CosmologyLocalCWightmanTerminalMaxCutExact as Terminal
+import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureOrderExact as Order
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
@@ -157,5 +160,49 @@ module _
           recovery selected directions sourceVariation
           measure partition laws referenceFixed responseWeld dominance))
 
+  combinedEnvelopeMarginForcesPositiveMatterAcceleration :
+    (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ)
+    (partition : Partition.PhysicalFinitePartitionAuthority measure)
+    (orderLaws : Order.RationalPositiveFiniteMeasureOrderLaws measure)
+    (scaleLaw : VacuumFactor.RationalHaarScaleLaw measure)
+    (laws : Sign.RationalWeylSignIntegrationLaws measure)
+    (referenceFixed :
+      ∀ h x →
+      Source.referenceMeasureLogVariation
+        (Eq223.sourceCompleteFiniteMetricVariation sourceVariation) h x
+      ≡ 0ℚ)
+    (responseWeld :
+      Preferred.R136EffectiveActionResponseWeld
+        recovery selected directions sourceVariation measure partition)
+    (envelope :
+      Envelope.CombinedERBTraceEnvelope
+        sourceVariation measure orderLaws partition scaleLaw)
+    (sourceMargin :
+      Envelope.combinedUpper envelope
+        < - Eq223.eq223VacuumTraceCoefficient sourceVariation)
+    (root : Root.MarkedStressOSMaxCutRoot recovery selected directions localC)
+    (positiveGravityFactor : ℚ) →
+    0ℚ < positiveGravityFactor →
+    0ℚ <
+      Vacuum.matterAccelerationContribution
+        positiveGravityFactor
+        (Terminal.lorentzianIsotropicStress
+          (Root.reconstructedTerminalConsequences
+            recovery selected directions localC root))
+  combinedEnvelopeMarginForcesPositiveMatterAcceleration
+      measure partition orderLaws scaleLaw laws referenceFixed responseWeld
+      envelope sourceMargin root positiveGravityFactor factorPositive =
+    Root.rootLiteralContinuumTraceNegativeGivesPositiveMatterAcceleration
+      recovery selected directions localC
+      positiveGravityFactor root factorPositive
+      (r136NegativeGivesLiteralTraceNegative
+        (Preferred.combinedEnvelopeMarginForcesNegativeR136
+          recovery selected directions sourceVariation
+          measure partition orderLaws scaleLaw laws referenceFixed responseWeld
+          envelope sourceMargin))
+
   correctedEffectiveActionRouteCompilesEndToEnd : Bool
   correctedEffectiveActionRouteCompilesEndToEnd = true
+
+  combinedEq223EnvelopeRouteCompilesEndToEnd : Bool
+  combinedEq223EnvelopeRouteCompilesEndToEnd = true
