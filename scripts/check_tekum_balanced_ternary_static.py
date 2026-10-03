@@ -16,13 +16,12 @@ required = {
     'DASHI/ComputerScience/TekumFractionInjectiveExact.agda': ['canonicalFractionEqualityToRaw', 'fractionNumeratorEquality', 'canonicalFractionInjective'],
     'DASHI/ComputerScience/TekumIntegerSuccessorGapExact.agda': ['advancePositive', 'advanceCommuteSucc', 'advanceNegativeToZero', 'advanceNegativeGap', 'integerLessHasPositiveAdvance'],
     'DASHI/ComputerScience/TekumRegimeExponentIntervalExact.agda': ['regimeLower', 'regimeUpper', 'parsedExponentRange', 'RegimeStep', 'adjacentRegimeBoundary', 'stepRegimeIntervalsOrdered', 'regimeIntervalNonempty'],
-    'DASHI/ComputerScience/TekumRegimeChainExact.agda': [
-        'regimeIndex', 'regimeFromIndex', 'regimeIndexInjective', 'spanPredAtIndex',
-        'chainLower', 'chainUpper', 'chainIntervalsOrderedFromLess',
-        'regimeLowerMatchesChain', 'regimeUpperMatchesChain', 'RegimeComparison',
-        'compareRegimes', 'equalParsedExponentForcesRegime',
-    ],
+    'DASHI/ComputerScience/TekumRegimeChainExact.agda': ['regimeIndex', 'regimeFromIndex', 'regimeIndexInjective', 'spanPredAtIndex', 'chainLower', 'chainUpper', 'chainIntervalsOrderedFromLess', 'regimeLowerMatchesChain', 'regimeUpperMatchesChain', 'RegimeComparison', 'compareRegimes', 'equalParsedExponentForcesRegime'],
     'DASHI/ComputerScience/TekumParsedExponentInjectiveExact.agda': ['equalParsedMagnitudesForceExponent', 'leftExponentStrictContradiction', 'rightExponentStrictContradiction'],
+    'DASHI/ComputerScience/TekumParsedFieldRecoveryExact.agda': [
+        'equalMagnitudeForceRegime', 'equalExponentSameRegimeForceExponentField',
+        'equalMagnitudeSameRegimeForceSignificand', 'equalMagnitudeSameRegimeForceFraction',
+    ],
     'DASHI/ComputerScience/TekumSignificandRangeExact.agda': ['significandStrictBand', 'nextExponentLowerEqualsCurrentUpper'],
     'DASHI/ComputerScience/TekumTriadicScaleExact.agda': ['integerSucc', 'triadicScale', 'triadicScalePositive', 'rawTriadicScaleSucc', 'triadicScaleSucc', 'intCodeTriadicScaleCanonical'],
     'DASHI/ComputerScience/TekumExponentBandExact.agda': ['bandLower', 'bandUpper', 'bandLowerPositive', 'adjacentBoundaryEquality', 'InBand', 'adjacentBandsDisjoint', 'sameValueCannotOccupyAdjacentBands', 'advanceExponent', 'scaleBelowSuccessor', 'bandUpperSuccStrict', 'bandUpperAdvanceStrict', 'bandsOrderedByPositiveGap', 'positiveGapBandsDisjoint'],
@@ -48,4 +47,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: regime chain gives total interval disjointness and exponent→regime recovery; parsed magnitude exponent injectivity, fraction injectivity, signed factorization, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: parsed magnitude recovers regime and exact exponent/fraction fields; regime chain, exponent injectivity, fraction injectivity, signed factorization, wheel parity, parser recovery, source negation and p-adic naturality present.')
