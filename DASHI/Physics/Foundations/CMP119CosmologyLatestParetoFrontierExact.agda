@@ -5,25 +5,34 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-03.
+-- LIVE PARETO FRONTIER / 2026-10-03 / OVERLAY E.
 --
 -- One-point gravity uses Gamma = -log Z, hence D_Gamma = -DZ/Z.
--- Marked E1 is one signed-B4 covariance theorem on the actual R144 ten-slot
--- readout.
 --
--- Marked E2/E4 now use a FUNCTIONAL presentation of the selected source-native
--- R109 insertion pair as a real cylinder observable, with admissibility pinned
--- to the published Wilson/OS predicates.  There is no independently chosen
--- stress observable and no presentation-local admissibility vocabulary.
--- The R109 pair carrier itself has no observable evaluator; the dedicated
--- underdetermination theorem shows that the remaining leaf is exactly the
--- source-semantics map from the published pair to a configuration-space real
--- observable (or an equivalent same-object theorem).
+-- E1 is one direct signed-B4 covariance theorem on the actual selected R144
+-- finite D1 readout.  The canonical seven-generator attachment is identity and
+-- additive first-variation linearity alone does not imply this covariance.
 --
--- Preferred finite->continuum sign transport uses the ACTUAL Round109 tail;
--- no exact finite-cutoff = continuum R136 equality is charged.  The finite
--- endpoint sequence is the literal pinned-family expectation of the SAME E2
--- stress observable; no arbitrary `Nat -> Q` endpoint sequence remains.
+-- E2/E4 is now restricted to source semantics of the ONE literal selected R109
+-- stress insertion.  No global source-pair -> observable evaluator is charged.
+-- The selected observable carries an explicit meaning relation to that R109
+-- insertion, and positive-time/gauge predicates are pinned to published OS.
+-- The pinned finite-expectation consumer now consumes this selected presentation
+-- directly, so the stronger functional pair evaluator is not hidden downstream.
+--
+-- Preferred sign transport is compressed to a source envelope:
+--
+--   embed Q_R136 <= embed ((M_ERB + c_V) + Tail_R109(k)).
+--
+-- This removes finite D_Gamma from the terminal consumer state but does NOT
+-- merge the two physical source payments B1 (completion tail attachment) and
+-- B2 (strict negativity of the Eq.(2.23) source envelope).
+--
+-- The anomaly fallback is Pareto-minimal at one one-sided comparison
+--
+--   embed Q_R136 <= selected anomaly trace,
+--
+-- not exact equality.
 ------------------------------------------------------------------------
 
 data NovelReconstructionResidual : Set where
@@ -39,39 +48,35 @@ data StandardOSBoundary : Set where
 data StandardAnalysisBoundary : Set where
   real-strict-order-asymmetry : StandardAnalysisBoundary
 
--- Preferred effective-action sign route.
 data PreferredSignResidual : Set where
   r144-finite-dgamma-to-same-pinned-r109-expectation-and-completion :
     PreferredSignResidual
   eq223-source-native-metric-variation-strict-margin :
     PreferredSignResidual
 
--- Alternate trace-anomaly route.
 data AlternateAnomalyResidual : Set where
   r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
 
 novelReconstructionResidualCount : Nat
 novelReconstructionResidualCount = 2
-
 standardOSBoundaryCount : Nat
 standardOSBoundaryCount = 2
-
 standardAnalysisBoundaryCount : Nat
 standardAnalysisBoundaryCount = 1
-
 preferredSignResidualCount : Nat
 preferredSignResidualCount = 2
-
 alternateAnomalyResidualCount : Nat
 alternateAnomalyResidualCount = 1
 
+totalTerminalPhysicalResidualCount : Nat
+totalTerminalPhysicalResidualCount = 5
+
 ------------------------------------------------------------------------
--- Reconstruction reductions.
+-- E1 reconstruction.
 ------------------------------------------------------------------------
 
 b0InternalBridgeStillArbitrary : Bool
 b0InternalBridgeStillArbitrary = false
-
 b3InternalBridgeStillArbitrary : Bool
 b3InternalBridgeStillArbitrary = false
 
@@ -111,11 +116,17 @@ e1LocalComponentCovarianceIsProducerStrategy = true
 e1FirstVariationNaturalityIsProducerStrategy : Bool
 e1FirstVariationNaturalityIsProducerStrategy = true
 
+e1AdditiveFirstVariationLinearityAloneClosesCovariance : Bool
+e1AdditiveFirstVariationLinearityAloneClosesCovariance = false
+
+e1WholeLatticeExpectationInvarianceAloneClosesD1Covariance : Bool
+e1WholeLatticeExpectationInvarianceAloneClosesD1Covariance = false
+
 e1GenericR244ComponentCarrierIsOpaque : Bool
 e1GenericR244ComponentCarrierIsOpaque = true
 
 ------------------------------------------------------------------------
--- E2/E4 reductions.
+-- E2/E4 reconstruction.
 ------------------------------------------------------------------------
 
 e2NeedsNewGramPositivityEstimate : Bool
@@ -136,14 +147,17 @@ r109ArbitraryObservableMeaningPredicateStillIndependent = false
 r109IndependentSelectedObservableStillPresentationData : Bool
 r109IndependentSelectedObservableStillPresentationData = false
 
-r109SelectedObservableDefinedFromLiteralInsertionPair : Bool
-r109SelectedObservableDefinedFromLiteralInsertionPair = true
-
 r109PairCarrierContainsSelectedObservableEvaluator : Bool
 r109PairCarrierContainsSelectedObservableEvaluator = false
 
 r109BarePairDeterminesUniqueObservableSemantics : Bool
 r109BarePairDeterminesUniqueObservableSemantics = false
+
+r109GlobalPairToObservableEvaluatorStillRequired : Bool
+r109GlobalPairToObservableEvaluatorStillRequired = false
+
+r109SelectedInsertionMeaningRelationStillRequired : Bool
+r109SelectedInsertionMeaningRelationStillRequired = true
 
 r109ArbitraryPositiveTimePredicateStillPresentationData : Bool
 r109ArbitraryPositiveTimePredicateStillPresentationData = false
@@ -155,10 +169,16 @@ r109PublishedOSAdmissibilityPredicatesPinned : Bool
 r109PublishedOSAdmissibilityPredicatesPinned = true
 
 r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility : Bool
-r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility = true
+r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility = false
 
 r109RemainingPhysicalLeafIsSourceSemanticsEvaluator : Bool
-r109RemainingPhysicalLeafIsSourceSemanticsEvaluator = true
+r109RemainingPhysicalLeafIsSourceSemanticsEvaluator = false
+
+r109RemainingPhysicalLeafIsSelectedStressInsertionSemantics : Bool
+r109RemainingPhysicalLeafIsSelectedStressInsertionSemantics = true
+
+r109PinnedFiniteExpectationConsumerNeedsGlobalPairEvaluator : Bool
+r109PinnedFiniteExpectationConsumerNeedsGlobalPairEvaluator = false
 
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned : Bool
 round109CompletionToConcreteLocalCStressAlreadyCompilerOwned = true
@@ -167,7 +187,7 @@ independentTerminalWightmanHingeChoiceStillExists : Bool
 independentTerminalWightmanHingeChoiceStillExists = false
 
 ------------------------------------------------------------------------
--- Sign reductions.
+-- Preferred sign route.
 ------------------------------------------------------------------------
 
 finiteOnePointStressOrientationIsEffectiveActionDGamma : Bool
@@ -185,23 +205,6 @@ preferredNegativeR136NeedsNegativeEq223Balance = true
 positiveEq223BalanceWouldGiveOppositeDGammaSign : Bool
 positiveEq223BalanceWouldGiveOppositeDGammaSign = true
 
--- Quantitative finite source compiler:
---
---   D_Gamma,k^Weyl <= M_ERB + c_V.
---
--- The preferred continuum route pays the ACTUAL Round109 tail:
---
---   (M_ERB + c_V) + Tail_R109(k) < 0.
---
--- Round130/R136 already identify the completed four-direction R109 functional
--- with the literal R136 response.  The finite absolute endpoint is no longer an
--- arbitrary sequence: it is
---
---   finiteExpectation (family osInputs group) k selectedR109StressObservable.
---
--- The remaining B1 same-object theorem is the quantitative attachment of the
--- R144 finite D_Gamma/source value and R109 completion bound to that exact
--- pinned-family sequence.
 eq223FiniteMeasureNormalizationStillInSignLeaf : Bool
 eq223FiniteMeasureNormalizationStillInSignLeaf = false
 
@@ -244,14 +247,21 @@ preferredFiniteEndpointUsesSamePinnedFamilyAndE2Observable = true
 preferredSameSequenceLeafIsConcreteR144R109CompletionAttachment : Bool
 preferredSameSequenceLeafIsConcreteR144R109CompletionAttachment = true
 
+preferredB1CompressedToDirectR136TailReceipt : Bool
+preferredB1CompressedToDirectR136TailReceipt = true
+
+preferredTerminalSignConsumerNeedsFiniteDGamma : Bool
+preferredTerminalSignConsumerNeedsFiniteDGamma = false
+
+preferredTerminalSignConsumerUsesR136SourceEnvelope : Bool
+preferredTerminalSignConsumerUsesR136SourceEnvelope = true
+
+sourceEnvelopeCompressionMergesB1AndB2PhysicalPayments : Bool
+sourceEnvelopeCompressionMergesB1AndB2PhysicalPayments = false
+
 eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail : Bool
 eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail = true
 
--- Source-side no-go audit: raw Eq.(2.23) assembly fixes the E/R/B/V objects but
--- the current realization interface supplies their metric variations separately.
--- The same raw source admits different E/R/B Weyl traces and different vacuum
--- coefficients.  Therefore Sect.-2 localization and object identity cannot by
--- themselves manufacture the cosmological source sign.
 eq223RawSourceAloneFixesMetricTrace : Bool
 eq223RawSourceAloneFixesMetricTrace = false
 
@@ -264,7 +274,10 @@ eq223SourceAnalyticERBEnvelopesLocated = true
 eq223VacuumWeylCoefficientSignMagnitudeStillPhysical : Bool
 eq223VacuumWeylCoefficientSignMagnitudeStillPhysical = true
 
--- Alternate anomaly route bypasses Eq.(2.23) sector arithmetic altogether.
+------------------------------------------------------------------------
+-- Alternate anomaly route.
+------------------------------------------------------------------------
+
 traceAnomalyAlternateRouteSourceWritten : Bool
 traceAnomalyAlternateRouteSourceWritten = true
 
@@ -272,7 +285,13 @@ traceAnomalyAlternateRouteNeedsEq223SectorSign : Bool
 traceAnomalyAlternateRouteNeedsEq223SectorSign = false
 
 traceAnomalyAlternateRouteStillNeedsSameObjectWeld : Bool
-traceAnomalyAlternateRouteStillNeedsSameObjectWeld = true
+traceAnomalyAlternateRouteStillNeedsSameObjectWeld = false
+
+traceAnomalyExactEqualityIsParetoOverstrong : Bool
+traceAnomalyExactEqualityIsParetoOverstrong = true
+
+traceAnomalyOneSidedR136UpperComparisonStillPhysical : Bool
+traceAnomalyOneSidedR136UpperComparisonStillPhysical = true
 
 traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder : Bool
 traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder = true
@@ -292,3 +311,6 @@ fullFriedmannTrajectoryAlreadySolved = false
 
 remainingWorkIsUpstreamReconstructionAndSourceSign : Bool
 remainingWorkIsUpstreamReconstructionAndSourceSign = true
+
+remainingWorkIsFiveSourcePhysicsLeaves : Bool
+remainingWorkIsFiveSourcePhysicsLeaves = true
