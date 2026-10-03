@@ -5,6 +5,8 @@ from agda_preflight.evidence import EvidenceLevel, policy_for
 
 
 def write_module(root: Path, module: str, source: str) -> Path:
+    """Write one repository-shaped Agda module under ROOT."""
+
     path = root.joinpath(*module.split(".")).with_suffix(".agda")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(source, encoding="utf-8")
@@ -12,6 +14,8 @@ def write_module(root: Path, module: str, source: str) -> Path:
 
 
 def test_constructor_then_field_record_layout_is_known_tree_sitter_gap(tmp_path):
+    """Valid Agda records must not need eta-equality to placate tree-sitter."""
+
     modules = (
         "DASHI.Moonshine.OggSSP2BIntegralMoonshineLocalActionSourceExact",
         "DASHI.Moonshine.OggSSP2BTateGradingConventionBridgeExact",
@@ -41,6 +45,8 @@ record RuntimeReceipt (enabled : Bool) : Set where
 
 
 def test_qualified_record_assignment_remains_a_hard_syntax_error(tmp_path):
+    """The real Agda parser mismatch TSAGDA090 stays hard at syntax evidence."""
+
     path = write_module(
         tmp_path,
         "QualifiedField",
@@ -63,6 +69,8 @@ bad = record { Tower.Point = Set }
 
 
 def test_visible_imported_projection_receiver_does_not_emit_missing_receiver(tmp_path):
+    """An Agda-accepted `Render.klein R` shape must not be called receiverless."""
+
     write_module(
         tmp_path,
         "Render",
@@ -94,17 +102,23 @@ render R = Render.klein R
 
 
 def test_projection_receiver_diagnostics_require_agda_scope_evidence():
+    """Ambiguous projection receiver claims cannot be hard at index evidence."""
+
     assert policy_for("TSAGDA049").minimum == EvidenceLevel.AGDA_SCOPE
     assert policy_for("TSAGDA052").minimum == EvidenceLevel.AGDA_SCOPE
 
 
 def test_equality_value_diagnostic_requires_typechecker_evidence():
+    """Proof-vs-value classification is a typing judgment when aliases intervene."""
+
     policy = policy_for("TSAGDA104")
     assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
     assert policy.hard_error_allowed is False
 
 
 def test_imported_constructor_shadow_is_predicted_at_user_authored_binders(tmp_path):
+    """A non-open imported constructor can soundly drive TSAGDA300 prediction."""
+
     write_module(
         tmp_path,
         "Cube",
@@ -141,11 +155,12 @@ walk (pair ∷ pairs) = pair ∷ walk pairs
     assert all(d.evidence == "dashi-index" for d in hits)
     assert {d.line for d in hits} == {10, 14}
     assert all("Cube.pair" in d.message for d in hits)
-    # Constructor use itself is not a binder shadow.
     assert not any(d.line == 7 for d in hits)
 
 
 def test_opened_constructor_is_not_guessed_to_be_a_shadowing_binder(tmp_path):
+    """Opened constructors remain ambiguous and are left to Agda scope checking."""
+
     write_module(
         tmp_path,
         "OpenedCube",
