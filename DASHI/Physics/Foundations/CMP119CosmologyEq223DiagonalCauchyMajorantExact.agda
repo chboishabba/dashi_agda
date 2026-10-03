@@ -8,24 +8,17 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223DiagonalCauchyMajorantExact
 -- smaller common polydisc costs inverse radius while preserving the external
 -- localization majorant.  CMP119 imports that analytic class for E, supplies the
 -- stronger R bound (2.31), and the B bound (2.42).
---
--- The remaining model-specific calibration is therefore not four derivatives
--- per sector.  It is one uniform diagonal metric-derivative upper constant for
--- each source sector on the selected common metric chart.  This file compiles
--- those THREE source/Cauchy constants into the exact four-diagonal pointwise
--- bounds consumed by the preferred cosmology sign route.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyEq223PointwiseToNumeratorMajorantExact as Pointwise
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
+import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact as Sector
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureOrderExact as Order
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
@@ -89,7 +82,7 @@ module _
   regularTraceBelowFourTimes :
     (bounds : UniformDiagonalCauchyUpperBounds) →
     ∀ configuration →
-    DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact.regularDiagonalTrace
+    Sector.regularDiagonalTrace
       (Eq223.sourceCompleteFiniteMetricVariation realization) configuration
     ≤ fourTimes (regularPerDiagonalUpper bounds)
   regularTraceBelowFourTimes bounds configuration =
@@ -104,7 +97,7 @@ module _
   rOperationTraceBelowFourTimes :
     (bounds : UniformDiagonalCauchyUpperBounds) →
     ∀ configuration →
-    DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact.rOperationDiagonalTrace
+    Sector.rOperationDiagonalTrace
       (Eq223.sourceCompleteFiniteMetricVariation realization) configuration
     ≤ fourTimes (rOperationPerDiagonalUpper bounds)
   rOperationTraceBelowFourTimes bounds configuration =
@@ -119,7 +112,7 @@ module _
   boundaryTraceBelowFourTimes :
     (bounds : UniformDiagonalCauchyUpperBounds) →
     ∀ configuration →
-    DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact.boundaryDiagonalTrace
+    Sector.boundaryDiagonalTrace
       (Eq223.sourceCompleteFiniteMetricVariation realization) configuration
     ≤ fourTimes (boundaryPerDiagonalUpper bounds)
   boundaryTraceBelowFourTimes bounds configuration =
