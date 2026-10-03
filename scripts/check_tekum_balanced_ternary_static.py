@@ -57,7 +57,10 @@ required = {
     ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
-    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
+    'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': [
+        'ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant',
+        'pow3IsNatPower', 'pow3NonZero', 'exactTriadicRationalUsesSignedDivision',
+    ],
     'DASHI/ComputerScience/TekumRegimeExponentExact.agda': ['decodeEncodeRegime', 'outerPositiveBiasIs244'],
     'DASHI/ComputerScience/TekumFloatingPointStructuralBridgeExact.agda': [
         'tekumOrientationRoleMatchesBF16SignRole', 'tekumScaleRoleMatchesBF16ExponentRole',
@@ -85,4 +88,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: exact fraction range, source-level negation, parser roundtrip, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: signed canonical rational decoder, exact fraction range, source-level negation, parser roundtrip, centered backend, p-adic naturality and hardware boundaries present.')
