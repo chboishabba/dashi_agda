@@ -46,7 +46,6 @@ import DASHI.Physics.Foundations.CMP119CosmologyEq223CombinedERBEnvelopeMaxCutEx
 import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumTailThresholdExact as B2Threshold
 import DASHI.Physics.Foundations.CMP119CanonicalSourceOrderedHaarTraceClosureExact as CanonicalTrace
 import DASHI.Physics.Foundations.CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionExact as Terminal
-import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as Prior
 
 data PreferredSourcePhysicsResidual : Set where
   a1-r144-canonical-b4-signed-readout-covariance :
@@ -142,8 +141,8 @@ b2CanonicalSourceCanAlreadyCompileStrictFiniteTraceNegativity : Bool
 b2CanonicalSourceCanAlreadyCompileStrictFiniteTraceNegativity =
   CanonicalTrace.canonicalSourceEqualityCompilesToFiniteTraceNegativity
 
-b2FiniteNegativityAloneDoesNotPayTailMargin : Bool
-b2FiniteNegativityAloneDoesNotPayTailMargin =
+b2FiniteNegativityAlonePaysR109TailMargin : Bool
+b2FiniteNegativityAlonePaysR109TailMargin =
   CanonicalTrace.finiteTraceNegativityAlonePaysR109TailMargin
 
 b2RemainingPreferredSignStrengthIsQuantitativeTailMargin : Bool
