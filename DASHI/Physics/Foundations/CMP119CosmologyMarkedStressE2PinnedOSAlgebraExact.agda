@@ -1,15 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2PinnedOSAlgebraExact where
 
-------------------------------------------------------------------------
--- E2 ON THE ACTUAL PINNED CMP119 OS CYLINDER ALGEBRA.
---
--- The generic marked-E2 compiler is already enough once the selected stress
--- mark is an admissible reflected positive-time cylinder observable.  This
--- owner removes the remaining arbitrary OS algebra choice: the target algebra
--- is exactly OSSystem.observableAlgebra osInputs on the same CMP119 family.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -18,6 +9,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2CylinderEmbeddingE
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as LocalC
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as OSSystem
+import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 
 record PinnedLocalCStressCylinderEmbedding
     {C : Top.LiteralYangMillsCarriers}
@@ -42,14 +34,10 @@ record PinnedLocalCStressCylinderEmbedding
         osInputs reconstruction group)
     : Set₁ where
   field
-    encodeStress :
-      Top.StressTensor C → Configuration → ℝ
+    encodeStress : Top.StressTensor C → Configuration → ℝ
 
-    PositiveTimeSupported :
-      (Configuration → ℝ) → Set
-
-    GaugeInvariantObservable :
-      (Configuration → ℝ) → Set
+    PositiveTimeSupported : (Configuration → ℝ) → Set
+    GaugeInvariantObservable : (Configuration → ℝ) → Set
 
     selectedStressPositiveTime :
       PositiveTimeSupported
@@ -59,8 +47,7 @@ record PinnedLocalCStressCylinderEmbedding
       GaugeInvariantObservable
         (encodeStress (LocalC.stressTensor localC))
 
-    reflectStressMark :
-      Top.StressTensor C → Top.StressTensor C
+    reflectStressMark : Top.StressTensor C → Top.StressTensor C
 
     allStressPositiveTime :
       ∀ stress → PositiveTimeSupported (encodeStress stress)
@@ -71,10 +58,9 @@ record PinnedLocalCStressCylinderEmbedding
     encodeCommutesWithReflection :
       ∀ stress →
       encodeStress (reflectStressMark stress)
-      ≡
-      DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact.reflectObservable
-        (OSSystem.observableAlgebra osInputs)
-        (encodeStress stress)
+      ≡ OS2.reflectObservable
+          (OSSystem.observableAlgebra osInputs)
+          (encodeStress stress)
 
 open PinnedLocalCStressCylinderEmbedding public
 
