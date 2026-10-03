@@ -23,6 +23,15 @@ open import Agda.Builtin.Nat using (Nat)
 --
 -- That threshold compiles through the concrete B1 route to negative R136 trace
 -- and the existing positive matter-acceleration consumer.
+--
+-- The anomaly fallback is also sharpened.  Exact equality
+--
+--   embed Q_R136 = Q_anomaly
+--
+-- is stronger than the sign consumer needs.  Since Q_anomaly < 0 is already
+-- owned, the Pareto-minimal fallback is the one-sided dominance
+--
+--   embed Q_R136 <= Q_anomaly.
 ------------------------------------------------------------------------
 
 data R144R109Residual : Set where
@@ -36,7 +45,7 @@ data Eq223Residual : Set where
     Eq223Residual
 
 data AlternateResidual : Set where
-  r136-embedded-real-is-selected-anomaly-trace : AlternateResidual
+  r136-embedded-real-below-selected-anomaly-trace : AlternateResidual
 
 r144R109ResidualCount : Nat
 r144R109ResidualCount = 2
@@ -83,5 +92,11 @@ eq223VacuumThresholdStillNeedsFiniteEqualsContinuum = false
 eq223VacuumThresholdCompilesToExpansion : Bool
 eq223VacuumThresholdCompilesToExpansion = true
 
-anomalyFallbackStillOneSameObjectWeld : Bool
-anomalyFallbackStillOneSameObjectWeld = true
+anomalyFallbackExactEqualityStillTerminal : Bool
+anomalyFallbackExactEqualityStillTerminal = false
+
+anomalyFallbackOneSidedDominanceIsTerminal : Bool
+anomalyFallbackOneSidedDominanceIsTerminal = true
+
+anomalyFallbackOneSidedDominanceCompilesToExpansion : Bool
+anomalyFallbackOneSidedDominanceCompilesToExpansion = true
