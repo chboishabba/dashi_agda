@@ -19,6 +19,10 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Exact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceToExpansionTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003Exact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003BExact.agda'
@@ -71,6 +75,10 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteVacuumThresholdToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Exact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyEq223DirectTailThresholdToR136Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderDominanceToExpansionTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003Exact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003BExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyMathematicalMaxCut20261003BTest.agda \
