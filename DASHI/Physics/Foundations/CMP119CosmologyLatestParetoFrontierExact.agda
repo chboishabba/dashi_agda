@@ -1,15 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
-------------------------------------------------------------------------
--- OCTOBER-3 LATEST PARETO FRONTIER.
---
--- Everything listed as compiler-owned below has a dedicated source-written
--- owner on this branch.  The residual constructors are the physical/same-object
--- leaves that still need inhabitants; they are deliberately not hidden behind
--- old downstream terminal records.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
@@ -23,13 +14,17 @@ data ReconstructionResidual : Set where
   os-external-selected-e0-e3-interpretation : ReconstructionResidual
   os-standard-marked-reconstruction-authority : ReconstructionResidual
 
-data SignResidual : Set where
-  r136-same-object-log-weight-weld : SignResidual
-  eq223-positive-four-sector-balance : SignResidual
+data PreferredSignResidual : Set where
+  r136-same-object-log-weight-weld : PreferredSignResidual
+  eq223-positive-four-sector-balance : PreferredSignResidual
 
 data VacuumDominanceResidual : Set where
   eq223-vacuum-weyl-coefficient-positive : VacuumDominanceResidual
   eq223-erb-weighted-numerator-nonnegative : VacuumDominanceResidual
+
+data AlternateAnomalyResidual : Set where
+  r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
+  rational-order-reflection-if-rational-sign-required : AlternateAnomalyResidual
 
 reconstructionResidualCount : Nat
 reconstructionResidualCount = 8
@@ -39,6 +34,9 @@ preferredSignResidualCount = 2
 
 vacuumDominanceSufficientResidualCount : Nat
 vacuumDominanceSufficientResidualCount = 2
+
+alternateAnomalyResidualCount : Nat
+alternateAnomalyResidualCount = 2
 
 b0InternalBridgeStillArbitrary : Bool
 b0InternalBridgeStillArbitrary = false
@@ -91,8 +89,17 @@ vacuumCoefficientStillFreeScalar = false
 preferredNegativeR136NeedsPositiveEq223Balance : Bool
 preferredNegativeR136NeedsPositiveEq223Balance = true
 
-traceAnomalyCouldProvideAlternateSignRouteAfterSameObjectWeld : Bool
-traceAnomalyCouldProvideAlternateSignRouteAfterSameObjectWeld = true
+traceAnomalyAlternateRouteSourceWritten : Bool
+traceAnomalyAlternateRouteSourceWritten = true
+
+traceAnomalyAlternateRouteNeedsEq223SectorSign : Bool
+traceAnomalyAlternateRouteNeedsEq223SectorSign = false
+
+traceAnomalyAlternateRouteStillNeedsSameObjectWeld : Bool
+traceAnomalyAlternateRouteStillNeedsSameObjectWeld = true
+
+traceAnomalyEmbeddedRealNegativityAutomaticallyGivesRationalNegativity : Bool
+traceAnomalyEmbeddedRealNegativityAutomaticallyGivesRationalNegativity = false
 
 terminalVacuumCosmologyAlgebraStillFrontier : Bool
 terminalVacuumCosmologyAlgebraStillFrontier = false
