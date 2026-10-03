@@ -31,14 +31,16 @@ required = {
     ],
     'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': [
         'rawUnsignedSourceSignificand', 'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization',
-        'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum',
-        'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSourceScale',
+        'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg',
+        'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand',
+        'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale',
         'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct',
     ],
     'DASHI/ComputerScience/TekumParsedBandMembershipExact.agda': [
         'rawSourceFraction', 'rawUnsignedSignificandOnePlusFraction',
         'canonicalUnsignedSignificandIsSourceSignificand',
         'parsedMagnitude', 'parsedMagnitudeInExponentBand',
+        'parsedOrdinaryRationalIsSignedMagnitude',
     ],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': [
         'EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd',
@@ -61,4 +63,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: actual parsed magnitude lies in its exponent band; canonical ordinary product factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: literal ordinary value is signed positive band magnitude; canonical source factorization, arbitrary band separation, wheel parity, parser recovery, source negation and p-adic naturality present.')
