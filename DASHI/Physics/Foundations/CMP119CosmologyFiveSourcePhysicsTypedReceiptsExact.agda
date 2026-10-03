@@ -20,10 +20,12 @@ import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as Signed
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedReadoutCovarianceExact as Readout
 import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
+import DASHI.Physics.Foundations.CMP119CosmologyEq223VacuumTailThresholdExact as Threshold
 import DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorExact as Direct
 import DASHI.Physics.YangMills.BalabanCMP119CompatibleLocalExpectationFlowExact as Source
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Hyper
+import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as WilsonOS
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as Additive
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 
@@ -53,6 +55,10 @@ open A1R144SignedB4SourceReceipt public
 --
 -- `Meaning` is an argument, not a field.  Thus a receipt cannot close A2 by
 -- inventing its own semantics relation after seeing the selected observable.
+--
+-- The exact preferred receipt additionally pins admissibility to the published
+-- Wilson OS surface.  The older semantics-only receipt remains available as a
+-- weaker diagnostic interface; it is not the preferred-route A2 payment.
 ------------------------------------------------------------------------
 
 record A2SelectedR109InsertionSemanticsReceipt
@@ -71,6 +77,32 @@ record A2SelectedR109InsertionSemanticsReceipt
 
 open A2SelectedR109InsertionSemanticsReceipt public
 
+record A2SelectedR109WilsonAdmissibleInsertionReceipt
+    (source : R109.SourceNativeStressScaleCauchy)
+    (Configuration : Set)
+    (Meaning :
+      Source.LocalInsertionPair (R109.source source) →
+      (Configuration → ℝ) → Set)
+    (publishedOS :
+      WilsonOS.WilsonReflectionPositivityData
+        (Configuration → ℝ) ℝ)
+    : Set₁ where
+  field
+    selectedObservable : Configuration → ℝ
+
+    selectedInsertionHasMeaning :
+      Meaning
+        (Source.pair (R109.stressInsertion source))
+        selectedObservable
+
+    selectedPositiveTime :
+      WilsonOS.PositiveTimeObservable publishedOS selectedObservable
+
+    selectedGaugeInvariant :
+      WilsonOS.GaugeInvariant publishedOS selectedObservable
+
+open A2SelectedR109WilsonAdmissibleInsertionReceipt public
+
 ------------------------------------------------------------------------
 -- B1: exact canonical direct-tail attachment.
 ------------------------------------------------------------------------
@@ -87,8 +119,15 @@ B1AbsoluteSameSequenceDirectTailReceipt
 
 ------------------------------------------------------------------------
 -- B2: source-native strict Eq.(2.23) envelope actually consumed by the sign
--- route.  Source metric-family calibration must produce these exact scalars;
--- the receipt only records the resulting strict physical inequality.
+-- route.
+--
+-- The preferred route is literally
+--
+--   c_V < -(M_ERB + Tail_109(k)).
+--
+-- Store that threshold itself as the exact B2 evidence.  Its strict-envelope
+-- form is then a theorem, not extra source data.  The older envelope-only
+-- record is retained for compatibility with earlier Pareto overlays.
 ------------------------------------------------------------------------
 
 record B2Eq223StrictSourceEnvelopeReceipt
@@ -98,6 +137,35 @@ record B2Eq223StrictSourceEnvelopeReceipt
       (combinedERBUpper + vacuumCoefficient) + tail < 0ℚ
 
 open B2Eq223StrictSourceEnvelopeReceipt public
+
+record B2Eq223LiteralVacuumThresholdReceipt
+    (combinedERBUpper vacuumCoefficient tail : ℚ) : Set where
+  field
+    vacuumBelowRequiredUpper :
+      vacuumCoefficient <
+        Threshold.requiredVacuumUpper combinedERBUpper tail
+
+open B2Eq223LiteralVacuumThresholdReceipt public
+
+b2ThresholdStrictNegativeEnvelope :
+  ∀ {combinedERBUpper vacuumCoefficient tail} →
+  B2Eq223LiteralVacuumThresholdReceipt
+    combinedERBUpper vacuumCoefficient tail →
+  (combinedERBUpper + vacuumCoefficient) + tail < 0ℚ
+b2ThresholdStrictNegativeEnvelope
+    {combinedERBUpper} {vacuumCoefficient} {tail} receipt =
+  Threshold.vacuumBelowRequiredUpperForcesStrictMargin
+    combinedERBUpper vacuumCoefficient tail
+    (vacuumBelowRequiredUpper receipt)
+
+b2ThresholdAsStrictEnvelopeReceipt :
+  ∀ {combinedERBUpper vacuumCoefficient tail} →
+  B2Eq223LiteralVacuumThresholdReceipt
+    combinedERBUpper vacuumCoefficient tail →
+  B2Eq223StrictSourceEnvelopeReceipt
+    combinedERBUpper vacuumCoefficient tail
+b2ThresholdAsStrictEnvelopeReceipt receipt = record
+  { strictNegativeEnvelope = b2ThresholdStrictNegativeEnvelope receipt }
 
 ------------------------------------------------------------------------
 -- C: Pareto-minimal anomaly fallback.  Equality is deliberately not required.
@@ -130,11 +198,20 @@ a1ReceiptIsExactSignedB4Covariance = true
 a2MeaningRelationIsExternalParameter : Bool
 a2MeaningRelationIsExternalParameter = true
 
+a2ExactReceiptPinsPublishedWilsonOSAdmissibility : Bool
+a2ExactReceiptPinsPublishedWilsonOSAdmissibility = true
+
 b1ReceiptReusesCanonicalDirectTailAnchor : Bool
 b1ReceiptReusesCanonicalDirectTailAnchor = true
 
 b2ReceiptIsStrictCombinedVacuumTailEnvelope : Bool
 b2ReceiptIsStrictCombinedVacuumTailEnvelope = true
+
+b2ExactReceiptStoresLiteralVacuumThreshold : Bool
+b2ExactReceiptStoresLiteralVacuumThreshold = true
+
+b2LiteralThresholdCompilesToStrictEnvelope : Bool
+b2LiteralThresholdCompilesToStrictEnvelope = true
 
 cReceiptIsOneSidedAnomalyDominance : Bool
 cReceiptIsOneSidedAnomalyDominance = true
