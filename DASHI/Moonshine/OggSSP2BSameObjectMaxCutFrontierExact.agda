@@ -12,6 +12,9 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --   * generic conjugacy -> Tate transport algebra;
 --   * M24-duad restriction contains 10a^5 and 10b^5;
 --   * bare M22 involution cannot realize Completion10 five-pair phase;
+--   * M22:2 DOES contain the finite Completion10 phase candidate: in both
+--     ten-dimensional modules an outer involution class has J2^5 shape and a
+--     verified five-swapped-pair basis;
 --   * binary-tetrahedral defect meaning is the centralizer 2-adic exponent,
 --     with sourced profile 3,3,2,1,1;
 --   * transported 30 and its downstream arithmetic remain available.
@@ -22,11 +25,12 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --      weight-two/Tate carrier and identify the current 4A multiplicity owner
 --      with that carrier.  Then the known C3 transport is automatic.
 --
---   B' realize one observed 10a or 10b as a genuine subquotient of one actual
---      2B Tate fibre.
+--   B' realize one observed M22:2 ten-module (restricting to 10a/10b) as a
+--      genuine subquotient of one actual 2B Tate fibre.
 --
---   C' identify a larger sourced action/filtration on that Q10 whose binary
---      operator is Completion10.  The bare M22 involution route is dead.
+--   C' prove the sourced M22:2 outer involution action descends to that SAME
+--      Tate subquotient and becomes the Completion10 binary phase.  The finite
+--      phase source is no longer open; only the actual-Tate same-object weld is.
 --
 --   D  identify the five recognized Q10 modes with the five independently
 --      sourced binary-tetrahedral order strata.  The defect invariant itself
@@ -44,6 +48,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.OggSSP2BPureKleinFourThreeTateFibreExact as Three
 import DASHI.Moonshine.OggSSP2BM22RuntimeMaxCutReceiptExact as Runtime
+import DASHI.Moonshine.OggSSP2BM22d2Completion10RuntimeReceiptExact as CompletionRuntime
 import DASHI.Moonshine.OggSSP2BIntegralMoonshineLocalActionSourceExact as ActionSource
 import DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact as DefectSource
 import DASHI.Moonshine.OggP31CompletionTenTwoSevenNineCrossPollinationExact as P279
@@ -89,6 +94,24 @@ bareM22CompletionRouteKilled :
 bareM22CompletionRouteKilled =
   Runtime.bareM22InvolutionDoesNotRealizeCompletionFivePairs
 
+m22d2FiniteCompletionPhaseObserved :
+  CompletionRuntime.finiteCompletionPhaseCandidatePaid
+    CompletionRuntime.canonicalFiniteM22d2Completion10Receipt
+  ≡ true
+m22d2FiniteCompletionPhaseObserved =
+  CompletionRuntime.finiteCompletionPhaseCandidateIsPaid
+
+m22d2OuterFivePairBasisVerified :
+  CompletionRuntime.fiveSwapPairsVerified
+    CompletionRuntime.tenAOuterCompletionCandidate
+  ≡ true
+m22d2OuterFivePairBasisVerified = refl
+
+m22d2OuterMatchCountIsTwo :
+  CompletionRuntime.outerJ2x5MatchCount ≡ 2
+m22d2OuterMatchCountIsTwo =
+  CompletionRuntime.outerJ2x5MatchCountIsTwo
+
 ------------------------------------------------------------------------
 -- 3. A' source existence is paid; formal same-object acquisition is not.
 ------------------------------------------------------------------------
@@ -132,12 +155,12 @@ defectOrderSixOne :
 defectOrderSixOne = DefectSource.defectOrderSixIsOne
 
 ------------------------------------------------------------------------
--- 5. Three hard formal same-object welds plus the D recognition map.
+-- 5. Remaining formal same-object welds.
 ------------------------------------------------------------------------
 
 data FormalIntegralTateCarrierWeldPaid : Set where
 data ActualTateTenSubquotientPaid : Set where
-data LargerCompletionActionPaid : Set where
+data ActualTateCompletionActionPaid : Set where
 data ActualQ10ModeToOrderStratumRecognitionPaid : Set where
 
 formalIntegralTateCarrierWeldStillOpen :
@@ -147,8 +170,8 @@ formalIntegralTateCarrierWeldStillOpen ()
 actualTenSubquotientStillOpen : ActualTateTenSubquotientPaid → ⊥
 actualTenSubquotientStillOpen ()
 
-largerCompletionActionStillOpen : LargerCompletionActionPaid → ⊥
-largerCompletionActionStillOpen ()
+actualTateCompletionActionStillOpen : ActualTateCompletionActionPaid → ⊥
+actualTateCompletionActionStillOpen ()
 
 actualModeDefectRecognitionStillOpen :
   ActualQ10ModeToOrderStratumRecognitionPaid → ⊥
@@ -175,7 +198,7 @@ p31To279StillObserverOnly : P31To279PromotedSameObject → ⊥
 p31To279StillObserverOnly ()
 
 ------------------------------------------------------------------------
--- 7. Canonical status after max-cut.
+-- 7. Canonical status after C' max-cut.
 ------------------------------------------------------------------------
 
 record SameObjectMaxCutStatus : Set where
@@ -191,13 +214,15 @@ record SameObjectMaxCutStatus : Set where
     tenAIdentified : Bool
     tenBIdentified : Bool
     bareM22CompletionRouteKilled : Bool
+    m22d2OuterCompletionCandidateObserved : Bool
+    m22d2OuterFivePairBasisVerified : Bool
 
     binaryTetrahedralDefectMeaningSourced : Bool
     defectProfileThreeThreeTwoOneOnePaid : Bool
 
     formalIntegralTateCarrierWeldPaid : Bool
     actualTateTenSubquotientPaid : Bool
-    largerCompletionActionPaid : Bool
+    actualTateCompletionActionPaid : Bool
     actualQ10ModeToDefectStratumRecognitionPaid : Bool
 
     p31SameObjectPromotionPaid : Bool
@@ -209,8 +234,8 @@ canonicalSameObjectMaxCutStatus : SameObjectMaxCutStatus
 canonicalSameObjectMaxCutStatus =
   same-object-max-cut-status
     true true true true true
-    true true true true
+    true true true true true true
     true true
     false false false false
     false false true
-    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': realize one observed 10a/10b factor as an actual Tate subquotient; C': source the larger Completion10 action; D: identify the actual Q10 Mode5 labels with binary-tetrahedral order strata; only then promote 31/279"
+    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': identify one observed M22:2 ten-module as an actual Tate subquotient; C': prove its sourced outer J2^5 involution is the action on that same Tate subquotient; D: identify the actual Q10 Mode5 labels with binary-tetrahedral order strata; only then promote 31/279"
