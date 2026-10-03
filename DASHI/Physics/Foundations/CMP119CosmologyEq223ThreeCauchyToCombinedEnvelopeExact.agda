@@ -7,16 +7,16 @@ module DASHI.Physics.Foundations.CMP119CosmologyEq223ThreeCauchyToCombinedEnvelo
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _+_; _≤_; _<_; -_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Foundations.CMP119CosmologyEq223CombinedERBEnvelopeMaxCutExact as Combined
 import DASHI.Physics.Foundations.CMP119CosmologyEq223DiagonalCauchyMajorantExact as Cauchy
+import DASHI.Physics.Foundations.CMP119CosmologyEq223NegativeSectorDominanceExact as Dominance
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
 import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
-import DASHI.Physics.Foundations.CMP119CosmologyR136WeylSectorDecompositionExact as Sector
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumSectorFactorizationExact as Vacuum
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureOrderExact as Order
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
@@ -91,16 +91,17 @@ module _
             (combinedTraceBelowThreeTraceUpper bounds configuration)
     }
 
-  oldCauchyScalarMarginFeedsCombinedCut :
+  oldCauchyScalarMarginForcesLiteralDominance :
     (bounds : C.UniformDiagonalCauchyUpperBounds) →
     C.fourTimes
       ((C.regularPerDiagonalUpper bounds
         + C.rOperationPerDiagonalUpper bounds)
         + C.boundaryPerDiagonalUpper bounds)
       < - Eq223.eq223VacuumTraceCoefficient realization →
-    E.CombinedERBTraceEnvelope
-  oldCauchyScalarMarginFeedsCombinedCut bounds margin =
-    asCombinedERBEnvelope bounds
+    Dominance.LiteralNegativeSectorDominance realization measure
+  oldCauchyScalarMarginForcesLiteralDominance bounds margin =
+    E.combinedEnvelopeVacuumMarginForcesLiteralDominance
+      (asCombinedERBEnvelope bounds) margin
 
   threeCauchyConstantsAreNotTerminalCosmologyCoordinates : Bool
   threeCauchyConstantsAreNotTerminalCosmologyCoordinates = true
