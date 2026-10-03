@@ -38,13 +38,18 @@ required = {
         'anchorSubtractionNeverNeedsPositiveOverflow', 'sourceEquationAndCarryDescriptionSeparated',
     ],
     'DASHI/ComputerScience/TekumSourceWordDecodeExact.agda': [
-        'signOfWord', 'ParsedPayload', 'parsePayload', 'anchorMSB', 'parseOrdinaryAnchor',
+        'signOfWord', 'ParsedPayload', 'parsePayload', 'anchorMSB', 'parseAnchorMSB', 'parseOrdinaryAnchor',
         'integerToIntCode', 'exponentIntCode', 'fractionIntCode', 'ordinaryFromParsed',
         'parseTekumWord', 'decodeNormalWidthTekumWord', 'normalWidthParserUsesSourceFieldOrder',
     ],
     'DASHI/ComputerScience/TekumSourceWordRoundTripExact.agda': [
         'rejoinPayload', 'rejoinPayloadCorrect', 'regimePrefixMSB', 'rejoinAnchorMSB',
         'rejoinParsedAnchorMSB', 'rejoinParsedAnchorPayloadCorrect', 'sourceParserImageIsLossless',
+    ],
+    'DASHI/ComputerScience/TekumSourceNegationExact.agda': [
+        'signOfIntegerNegation', 'signOfInvertWord', 'signOfNegateWord',
+        'anchorMSBNegationInvariant', 'parseOrdinaryAnchorNegationInvariant',
+        'ordinaryParsedNegation', 'parseTekumWordNegation',
     ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
@@ -76,4 +81,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: positional/rank negation, source parser roundtrip, Definition 5 audit, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
+print('Tekum static regression: source-level negation, positional/rank negation, parser roundtrip, centered backend, rational semantics, p-adic naturality and hardware boundaries present.')
