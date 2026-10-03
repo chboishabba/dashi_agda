@@ -14,9 +14,15 @@ import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
 import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
 import DASHI.ComputerScience.TekumPositiveAnchorInjectiveExact as Positive
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
+import DASHI.ComputerScience.TekumWidthAdmissibilityExact as Width
 
 ------------------------------------------------------------------------
--- EXTERNAL SIGN + CONCRETE ANCHOR RECOVERS THE ORIGINAL SOURCE WORD
+-- EXTERNAL SIGN + CORRECTED CONCRETE ANCHOR RECOVERS THE SOURCE WORD
+--
+-- The alternating Definition-7 midpoint proof needs the source even-width
+-- witness explicitly.  This is not additional mathematics: core Tekum widths
+-- are even by definition, and carrying the witness here prevents the old
+-- all-positive-midpoint shortcut from silently reappearing.
 ------------------------------------------------------------------------
 
 invertWordInvolutive :
@@ -52,10 +58,12 @@ negativeNegatesPositive word valueEq =
 
 sameSignAnchorDeterminesSourceWord :
   ∀ {n} {left right : Vec Trit.Trit n} →
+  (even : Width.EvenWidth n) →
   Source.signOfWord left ≡ Source.signOfWord right →
   Fixed.concreteAnchor left ≡ Fixed.concreteAnchor right →
   left ≡ right
-sameSignAnchorDeterminesSourceWord {left = left} {right = right} signEq anchorEq
+sameSignAnchorDeterminesSourceWord {left = left} {right = right}
+    even signEq anchorEq
   with BT.toInteger (BT.eval left) in leftValue
      | BT.toInteger (BT.eval right) in rightValue
 ... | + 0 | + 0 =
@@ -88,7 +96,7 @@ sameSignAnchorDeterminesSourceWord {left = left} {right = right} signEq anchorEq
   positiveZeroImpossible : Anchor.positiveSign ≡ Anchor.zeroSign → ⊥
   positiveZeroImpossible ()
 ... | + (suc m) | + (suc n) =
-  Positive.positiveAnchorInjective leftValue rightValue anchorEq
+  Positive.positiveAnchorInjective even leftValue rightValue anchorEq
 ... | + (suc m) | -[1+ n ] =
   ⊥-elim (positiveNegativeImpossible integerSignEq)
   where
@@ -134,7 +142,7 @@ sameSignAnchorDeterminesSourceWord {left = left} {right = right} signEq anchorEq
 
   negatedEq : Fixed.negateWord left ≡ Fixed.negateWord right
   negatedEq =
-    Positive.positiveAnchorInjective
+    Positive.positiveAnchorInjective even
       (negativeNegatesPositive left leftValue)
       (negativeNegatesPositive right rightValue)
       negatedAnchorEq
