@@ -2,12 +2,11 @@ module DASHI.ComputerScience.TekumPositiveAnchorInjectiveExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.Fin.Base using (toℕ)
+import Data.Fin.Base as Fin using (toℕ; opposite; fromℕ<)
 import Data.Fin.Properties as FinP
 open import Data.Integer.Base as ℤ using (+_; ∣_∣)
-import Data.Integer.Properties as ℤP
-open import Data.Nat.Base using (_≤_; _<_; _⊔_)
-open import Data.Nat.DivMod using (_%_; [m+kn]%n≡m%n; m<n⇒m%n≡m)
+open import Data.Nat.Base using (_≤_; _<_; _⊔_; _∸_)
+import Data.Nat.DivMod as DivMod using (_%_; [m+kn]%n≡m%n; m<n⇒m%n≡m)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
@@ -24,12 +23,6 @@ import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
 
 ------------------------------------------------------------------------
 -- THE CONCRETE HUNHOLD ANCHOR IS INJECTIVE ON THE POSITIVE HALF
---
--- For a positive source integer m>0 the shifted finite rank is A_n+m.
--- The modulus therefore selects that rank (rather than its opposite), and
--- subtracting the all-positive word translates A_n+m to rank m.  This is the
--- finite-backend theorem needed to invert the negation-invariant anchor once
--- the external sign has been recovered.
 ------------------------------------------------------------------------
 
 allPositiveNatCode :
@@ -70,7 +63,7 @@ twiceCenterAsSum n =
 
 twiceCenterMinusCenter :
   (n : Nat) →
-  2 * Positional.center n NatP.∸ Positional.center n
+  (2 * Positional.center n) ∸ Positional.center n
   ≡ Positional.center n
 twiceCenterMinusCenter n
   rewrite twiceCenterAsSum n =
@@ -123,7 +116,7 @@ positiveOppositeBelowRank :
   ∀ {n m}
   (word : Vec Trit.Trit n) →
   BT.toInteger (BT.eval word) ≡ + (suc m) →
-  toℕ (Data.Fin.Base.opposite (Rank.rankWord word))
+  toℕ (opposite (Rank.rankWord word))
   ≤ toℕ (Rank.rankWord word)
 positiveOppositeBelowRank {n} word valueEq =
   subst
@@ -140,12 +133,12 @@ positiveOppositeBelowRank {n} word valueEq =
       (positiveCenterBelowRank word valueEq)
 
   complementBelowCenter :
-    2 * Positional.center n NatP.∸ Positional.natCode word
+    (2 * Positional.center n ∸ Positional.natCode word)
     ≤ Positional.center n
   complementBelowCenter =
     subst
       (λ upper →
-        2 * Positional.center n NatP.∸ Positional.natCode word ≤ upper)
+        (2 * Positional.center n ∸ Positional.natCode word) ≤ upper)
       (twiceCenterMinusCenter n)
       (NatP.∸-mono NatP.≤-refl (positiveCenterBelowRank word valueEq))
 
@@ -162,11 +155,23 @@ positiveModulusCentered word valueEq =
   r = Rank.rankWord word
 
   maxIsOriginal :
-    toℕ (Fixed.maxRank r (Data.Fin.Base.opposite r)) ≡ toℕ r
+    toℕ (Fixed.maxRank r (opposite r)) ≡ toℕ r
   maxIsOriginal =
     trans
-      (Fixed.maxRankToNat r (Data.Fin.Base.opposite r))
+      (Fixed.maxRankToNat r (opposite r))
       (NatP.m≥n⇒m⊔n≡m (positiveOppositeBelowRank word valueEq))
+
+encodeModulusWordPositive :
+  ∀ {n m}
+  (word : Vec Trit.Trit n) →
+  BT.toInteger (BT.eval word) ≡ + (suc m) →
+  Centered.encodeCentered (Fixed.modulusWord word)
+  ≡ Centered.encodeCentered word
+encodeModulusWordPositive word valueEq =
+  trans
+    (Centered.encodeDecodeCentered
+      (Fixed.modulusCentered (Centered.encodeCentered word)))
+    (positiveModulusCentered word valueEq)
 
 negatedAllPositiveRankZero :
   (n : Nat) →
@@ -179,7 +184,7 @@ negatedAllPositiveRankZero n =
   trans
     (RankNeg.oppositeRankToNatCode (Fixed.allPositiveWord n))
     (trans
-      (cong (2 * Positional.center n NatP.∸_) (allPositiveNatCode n))
+      (cong (2 * Positional.center n ∸_) (allPositiveNatCode n))
       (NatP.n∸n≡0 (2 * Positional.center n)))
 
 wrapRankToNat :
@@ -189,10 +194,18 @@ wrapRankToNat {n} k =
   trans
     (FinP.toℕ-cast
       (sym (Centered.pow3RightIsSucTwiceCenter n))
-      (Data.Fin.Base.fromℕ<
-        (Data.Nat.DivMod.m%n<n k (Fixed.modulusSize n))))
-    (FinP.toℕ-fromℕ<
-      (Data.Nat.DivMod.m%n<n k (Fixed.modulusSize n)))
+      (fromℕ< (DivMod.m%n<n k (Fixed.modulusSize n))))
+    (FinP.toℕ-fromℕ< (DivMod.m%n<n k (Fixed.modulusSize n)))
+
+centerBelowModulus :
+  (n : Nat) → Positional.center n < Fixed.modulusSize n
+centerBelowModulus n =
+  NatP.≤-<-trans
+    (subst
+      (Positional.center n ≤_)
+      (sym (twiceCenterAsSum n))
+      (NatP.m≤m+n (Positional.center n) (Positional.center n)))
+    (NatP.n<1+n (2 * Positional.center n))
 
 positiveWrapExact :
   ∀ {n m} →
@@ -215,8 +228,7 @@ positiveWrapExact {n} {m} magnitudeBound =
   where
   magnitudeBelowModulus : suc m < Fixed.modulusSize n
   magnitudeBelowModulus =
-    NatP.≤-<-trans magnitudeBound
-      (NatP.n<1+n (2 * Positional.center n))
+    NatP.≤-<-trans magnitudeBound (centerBelowModulus n)
 
 positiveConcreteAnchorRank :
   ∀ {n m}
@@ -224,29 +236,31 @@ positiveConcreteAnchorRank :
   BT.toInteger (BT.eval word) ≡ + (suc m) →
   toℕ (Rank.rankWord (Fixed.concreteAnchor word)) ≡ suc m
 positiveConcreteAnchorRank {n} {m} word valueEq =
-  trans
-    decodedRank
-    (trans
-      (wrapRankToNat
-        ((suc m + Positional.center n) + 0 + suc (Positional.center n)))
-      (positiveWrapExact (positiveMagnitudeBound word valueEq)))
+  trans decodedRank stateRank
   where
-  subtraction =
+  anchorState =
     Fixed.subtractCentered
-      (Centered.encodeCentered word)
+      (Centered.encodeCentered (Fixed.modulusWord word))
       (Centered.encodeCentered (Fixed.allPositiveWord n))
 
   decodedRank :
     toℕ (Rank.rankWord (Fixed.concreteAnchor word))
-    ≡ toℕ (Centered.rank subtraction)
-  decodedRank
-    rewrite positiveModulusCentered word valueEq
+    ≡ toℕ (Centered.rank anchorState)
+  decodedRank =
+    cong
+      (λ c → toℕ (Centered.rank c))
+      (Centered.encodeDecodeCentered anchorState)
+
+  stateRank : toℕ (Centered.rank anchorState) ≡ suc m
+  stateRank
+    rewrite encodeModulusWordPositive word valueEq
           | Rank.rankToNatCode word
           | positiveNatCode word valueEq
           | negatedAllPositiveRankZero n =
-    cong
-      (λ c → toℕ (Centered.rank c))
-      (Centered.encodeDecodeCentered subtraction)
+    trans
+      (wrapRankToNat
+        ((suc m + Positional.center n) + 0 + suc (Positional.center n)))
+      (positiveWrapExact (positiveMagnitudeBound word valueEq))
 
 positiveAnchorInjective :
   ∀ {n} {left right : Vec Trit.Trit n} {m k} →
