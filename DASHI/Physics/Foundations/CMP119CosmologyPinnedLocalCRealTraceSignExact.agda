@@ -1,15 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyPinnedLocalCRealTraceSignExact where
 
-------------------------------------------------------------------------
--- PREFERRED ANOMALY SIGN PRODUCER FOR COSMOLOGY.
---
--- Keep the trace on the SAME pinned Local-C stress object.  The only extra
--- same-object sign weld is that the anomaly transport's selected finite F^2
--- numerator is the literal physical weighted F^2 numerator whose strict
--- positivity is already proved.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -116,11 +107,12 @@ selectedLocalCFiniteTraceNegative :
       {fullSupport = fullSupport} f2Positivity) →
   Transport.selectedFiniteQuantumTraceNumerator transport <ℝ 0ℝ
 selectedLocalCFiniteTraceNegative
+    {transport = transport}
     {strict = strict} {embedding = embedding}
     {convention = convention} weld =
   subst
     (λ value → value <ℝ 0ℝ)
-    (sym (Transport.selectedFiniteTraceIsSU2BetaF2 _))
+    (sym (Transport.selectedFiniteTraceIsSU2BetaF2 transport))
     (Strict.negativeTimesPositive strict
       (Trace.realSU2TraceCoefficientNegative strict embedding convention)
       (selectedLocalCF2Positive weld))
