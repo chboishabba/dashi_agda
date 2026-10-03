@@ -21,6 +21,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyR109PairObservableUnderdetermina
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
