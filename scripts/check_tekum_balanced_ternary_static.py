@@ -26,6 +26,11 @@ required = {
         'modulusNegateWord', 'tekumBalancedArithmetic', 'concreteAnchor',
         'concreteAnchorNegationInvariant', 'oneTritPositivePlusPositiveWrapsNegative',
     ],
+    'DASHI/ComputerScience/TekumDefinition5ConsistencyExact.agda': [
+        'sourceOverflowAdjustment', 'definition5WidthOnePositiveOverflow',
+        'carryDiscardWidthOnePositiveOverflow', 'definition5DiffersFromCarryDiscardAtWidthOne',
+        'anchorSubtractionNeverNeedsPositiveOverflow', 'sourceEquationAndCarryDescriptionSeparated',
+    ],
     'DASHI/Foundations/RadixScaledExactFormat.agda': ['bf16ScaledExactFormat', 'TaperedWidthAllocation'],
     'DASHI/Codec/TriadicPAdicCylinderExact.agda': ['canonicalTriadicCylinderSystem', 'projectCompatible'],
     'DASHI/ComputerScience/TekumExactTriadicSemanticsExact.agda': ['ordinaryExactTriadic', 'ordinaryRational', 'applySignFlip', 'flipExactTriadicDenominatorInvariant'],
@@ -56,4 +61,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: centered int_n backend, positional reconstruction, rational semantics, dual p-adic naturality, ternary-machine, ABI and SSP/FRACTRAN welds present.')
+print('Tekum static regression: Definition 5 audit, centered backend, positional reconstruction, rational semantics, p-adic naturality and hardware boundaries present.')
