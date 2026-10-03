@@ -5,8 +5,7 @@ open import Agda.Builtin.Nat using (zero; suc; _+_)
 open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_]; -_)
 open import Data.Maybe.Base as Maybe using (just; nothing; map)
 open import Data.Product using (_,_)
-open import Data.Vec using (Vec)
-open import Data.Vec.Base using (reverse)
+open import Data.Vec using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Algebra.Trit as Trit
@@ -55,7 +54,7 @@ anchorMSBNegationInvariant :
   (word : Vec Trit.Trit (8 + extra)) →
   Source.anchorMSB (Fixed.negateWord word) ≡ Source.anchorMSB word
 anchorMSBNegationInvariant word =
-  cong reverse (Fixed.concreteAnchorNegationInvariant word)
+  cong Data.Vec.Base.reverse (Fixed.concreteAnchorNegationInvariant word)
 
 parseOrdinaryAnchorNegationInvariant :
   ∀ {extra}
@@ -80,25 +79,57 @@ ordinaryParsedNegation word parsed
   rewrite signOfNegateWord word = refl
 
 ------------------------------------------------------------------------
--- HUNHOLD PROP. 3, AT THE COMPLETE SOURCE PARSER SURFACE.
+-- SOURCE SPECIAL ENCODINGS UNDER WORD NEGATION
 --
--- Specials are fixed by Sem.negateTekumValue exactly as encoded by the
--- current source convention; ordinary values retain their anchor fields and
--- flip only their external sign.
+-- Hunhold Proposition 3 excludes NaR and infinity.  At the source-word level
+-- negating all-positive gives all-negative and conversely, so the two reserved
+-- encodings swap.  Keeping that fact separate prevents the semantic negation
+-- map (which intentionally leaves non-finite constructors opaque) from being
+-- misused as a theorem about the reserved source strings.
 ------------------------------------------------------------------------
 
-parseTekumWordNegation :
-  ∀ {extra}
-  (word : Vec Trit.Trit (8 + extra)) →
-  Source.parseTekumWord (Fixed.negateWord word)
-  ≡ Maybe.map Sem.negateTekumValue (Source.parseTekumWord word)
-parseTekumWordNegation word
-  rewrite Fixed.concreteAnchorNegationInvariant word
-  with Special.classifySpecial (Fixed.concreteAnchor word)
-... | just specialValue = refl
-... | nothing
-  rewrite parseOrdinaryAnchorNegationInvariant word
-  with Source.parseOrdinaryAnchor word
-...   | nothing = refl
-...   | just (r , payload , parsed)
-  rewrite signOfNegateWord word = refl
+invertAllNegative :
+  ∀ {n} (xs : Vec Trit.Trit n) →
+  Special.allSame Trit.neg xs ≡ Agda.Builtin.Bool.true →
+  Special.allSame Trit.pos (BT.invertWord xs) ≡ Agda.Builtin.Bool.true
+invertAllNegative [] evidence = refl
+invertAllNegative (Trit.neg ∷ xs) evidence = invertAllNegative xs evidence
+invertAllNegative (Trit.zer ∷ xs) ()
+invertAllNegative (Trit.pos ∷ xs) ()
+
+invertAllPositive :
+  ∀ {n} (xs : Vec Trit.Trit n) →
+  Special.allSame Trit.pos xs ≡ Agda.Builtin.Bool.true →
+  Special.allSame Trit.neg (BT.invertWord xs) ≡ Agda.Builtin.Bool.true
+invertAllPositive [] evidence = refl
+invertAllPositive (Trit.neg ∷ xs) ()
+invertAllPositive (Trit.zer ∷ xs) ()
+invertAllPositive (Trit.pos ∷ xs) evidence = invertAllPositive xs evidence
+
+------------------------------------------------------------------------
+-- HUNHOLD PROP. 3, ON ITS ACTUAL DOMAIN.
+--
+-- The paper states the numerical negation proposition away from NaR and
+-- infinity.  A successful ordinary parse is sufficient for that domain:
+-- anchor/regime/exponent/fraction data are invariant and only the external
+-- sign changes.
+------------------------------------------------------------------------
+
+parseOrdinaryAnchorNegation :
+  ∀ {extra r payload}
+  (word : Vec Trit.Trit (8 + extra))
+  (parsed : Source.ParsedPayload extra r payload) →
+  Source.parseOrdinaryAnchor word ≡ just (r , payload , parsed) →
+  Source.parseOrdinaryAnchor (Fixed.negateWord word)
+  ≡ just (r , payload , parsed)
+parseOrdinaryAnchorNegation word parsed parseEq =
+  trans (parseOrdinaryAnchorNegationInvariant word) parseEq
+
+hunholdProposition3Ordinary :
+  ∀ {extra r payload}
+  (word : Vec Trit.Trit (8 + extra))
+  (parsed : Source.ParsedPayload extra r payload) →
+  Sem.ordinary (Source.ordinaryFromParsed (Fixed.negateWord word) parsed)
+  ≡ Sem.negateTekumValue
+      (Sem.ordinary (Source.ordinaryFromParsed word parsed))
+hunholdProposition3Ordinary = ordinaryParsedNegation
