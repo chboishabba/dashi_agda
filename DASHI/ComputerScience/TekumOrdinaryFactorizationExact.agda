@@ -6,9 +6,10 @@ open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _*_)
 import Data.Integer.Properties as ℤP
 open import Data.Nat.Base using (NonZero)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; -_; _+_; _*_)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Unnormalised.Base as ℚᵘ using (ℚᵘ; _/_; _+_; _*_; _≃_; *≡*)
+open import Data.Rational.Unnormalised.Base as ℚᵘ
+  using (ℚᵘ; 0ℚᵘ; -_; _/_; _+_; _*_; _≃_; *≡*)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
 open import Data.Vec using (Vec)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -158,7 +159,7 @@ parsedOrdinaryRawFactorization {extra} {r} word parsed
   ℚᵘ.*≡* refl
 
 ------------------------------------------------------------------------
--- Generic canonical/raw transport for addition and multiplication.
+-- Generic canonical/raw transport.
 ------------------------------------------------------------------------
 
 fromRawProduct :
@@ -199,6 +200,27 @@ fromRawSum p q =
         (ℚᵘP.≃-sym factorsToRaw)
         (ℚᵘP.≃-sym canonicalSumToFactors))
 
+fromRawNeg :
+  (p : ℚᵘ) →
+  ℚ.fromℚᵘ (ℚᵘ.- p) ≡ ℚ.- (ℚ.fromℚᵘ p)
+fromRawNeg p =
+  ℚP.toℚᵘ-injective proof
+  where
+  leftToRaw = ℚP.toℚᵘ-fromℚᵘ (ℚᵘ.- p)
+  pToRaw = ℚP.toℚᵘ-fromℚᵘ p
+  negativeFactorToRaw = ℚᵘP.-‿cong pToRaw
+  canonicalNegativeToFactor = ℚP.toℚᵘ-homo‿- (ℚ.fromℚᵘ p)
+  proof =
+    ℚᵘP.≃-trans leftToRaw
+      (ℚᵘP.≃-trans
+        (ℚᵘP.≃-sym negativeFactorToRaw)
+        (ℚᵘP.≃-sym canonicalNegativeToFactor))
+
+applyRationalSign : Anchor.TekumSign → ℚ → ℚ
+applyRationalSign Anchor.negativeSign x = ℚ.- x
+applyRationalSign Anchor.zeroSign x = 0ℚ
+applyRationalSign Anchor.positiveSign x = x
+
 canonicalUnsignedSignificand :
   ∀ {extra r payload} →
   Source.ParsedPayload extra r payload → ℚ
@@ -211,6 +233,23 @@ canonicalSignedSignificand :
   Source.ParsedPayload extra r payload → ℚ
 canonicalSignedSignificand word parsed =
   ℚ.fromℚᵘ (rawSourceSignificand word parsed)
+
+canonicalSignedSignificandIsApplySign :
+  ∀ {extra r payload}
+  (word : Vec Trit.Trit (8 + extra))
+  (parsed : Source.ParsedPayload extra r payload) →
+  canonicalSignedSignificand word parsed
+  ≡ applyRationalSign (Source.signOfWord word)
+      (canonicalUnsignedSignificand parsed)
+canonicalSignedSignificandIsApplySign word parsed
+  with Source.signOfWord word
+... | Anchor.negativeSign = fromRawNeg (rawUnsignedSourceSignificand parsed)
+... | Anchor.zeroSign =
+  trans
+    (ℚP.fromℚᵘ-cong
+      (ℚᵘP.↥p≡0⇒p≃0 (rawSourceSignificand word parsed) refl))
+    refl
+... | Anchor.positiveSign = refl
 
 canonicalSourceScale :
   ∀ {extra r payload} →
