@@ -6,9 +6,10 @@ open import Data.Integer.Base as ℤ using (ℤ; +_; _+_; _*_)
 import Data.Integer.Properties as ℤP
 open import Data.Nat.Base using (NonZero)
 import Data.Nat.Properties as NatP
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _*_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Unnormalised.Base as ℚᵘ using (ℚᵘ; _/_; _*_; _≃_; *≡*)
+import Data.Rational.Unnormalised.Properties as ℚᵘP
 open import Data.Vec using (Vec)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
@@ -163,6 +164,69 @@ parsedOrdinaryRawFactorization {extra} {r} word parsed
               (sourceUnsignedSignificandInteger parsed)) =
   ℚᵘ.*≡* refl
 
+------------------------------------------------------------------------
+-- Transport the literal raw product into canonical ℚ without normalisation
+-- guesswork.  The proof uses only the standard toℚᵘ multiplication
+-- homomorphism and the canonical/raw roundtrip equivalence.
+------------------------------------------------------------------------
+
+fromRawProduct :
+  (p q : ℚᵘ) →
+  ℚ.fromℚᵘ (p ℚᵘ.* q)
+  ≡ ℚ.fromℚᵘ p ℚ.* ℚ.fromℚᵘ q
+fromRawProduct p q =
+  ℚP.toℚᵘ-injective proof
+  where
+  leftToRaw :
+    ℚ.toℚᵘ (ℚ.fromℚᵘ (p ℚᵘ.* q)) ℚᵘ.≃ (p ℚᵘ.* q)
+  leftToRaw = ℚP.toℚᵘ-fromℚᵘ (p ℚᵘ.* q)
+
+  pToRaw : ℚ.toℚᵘ (ℚ.fromℚᵘ p) ℚᵘ.≃ p
+  pToRaw = ℚP.toℚᵘ-fromℚᵘ p
+
+  qToRaw : ℚ.toℚᵘ (ℚ.fromℚᵘ q) ℚᵘ.≃ q
+  qToRaw = ℚP.toℚᵘ-fromℚᵘ q
+
+  factorsToRaw :
+    (ℚ.toℚᵘ (ℚ.fromℚᵘ p) ℚᵘ.* ℚ.toℚᵘ (ℚ.fromℚᵘ q))
+    ℚᵘ.≃ (p ℚᵘ.* q)
+  factorsToRaw = ℚᵘP.*-cong pToRaw qToRaw
+
+  canonicalProductToFactors :
+    ℚ.toℚᵘ (ℚ.fromℚᵘ p ℚ.* ℚ.fromℚᵘ q)
+    ℚᵘ.≃
+    (ℚ.toℚᵘ (ℚ.fromℚᵘ p) ℚᵘ.* ℚ.toℚᵘ (ℚ.fromℚᵘ q))
+  canonicalProductToFactors =
+    ℚP.toℚᵘ-homo-* (ℚ.fromℚᵘ p) (ℚ.fromℚᵘ q)
+
+  proof :
+    ℚ.toℚᵘ (ℚ.fromℚᵘ (p ℚᵘ.* q))
+    ℚᵘ.≃
+    ℚ.toℚᵘ (ℚ.fromℚᵘ p ℚ.* ℚ.fromℚᵘ q)
+  proof =
+    ℚᵘP.≃-trans leftToRaw
+      (ℚᵘP.≃-trans
+        (ℚᵘP.≃-sym factorsToRaw)
+        (ℚᵘP.≃-sym canonicalProductToFactors))
+
+canonicalSignedSignificand :
+  ∀ {extra r payload} →
+  Vec Trit.Trit (8 + extra) →
+  Source.ParsedPayload extra r payload → ℚ
+canonicalSignedSignificand word parsed =
+  ℚ.fromℚᵘ (rawSourceSignificand word parsed)
+
+canonicalSourceScale :
+  ∀ {extra r payload} →
+  Source.ParsedPayload extra r payload → ℚ
+canonicalSourceScale parsed = ℚ.fromℚᵘ (rawSourceScale parsed)
+
+canonicalSourceScaleIsTriadicScale :
+  ∀ {extra r payload}
+  (parsed : Source.ParsedPayload extra r payload) →
+  canonicalSourceScale parsed ≡ Scale.triadicScale (sourceExponentInteger parsed)
+canonicalSourceScaleIsTriadicScale parsed = refl
+
 parsedOrdinaryAsRawExact :
   ∀ {extra r payload}
   (word : Vec Trit.Trit (8 + extra))
@@ -183,3 +247,17 @@ parsedOrdinaryCanonicalFactorization word parsed =
   trans
     (parsedOrdinaryAsRawExact word parsed)
     (ℚP.fromℚᵘ-cong (parsedOrdinaryRawFactorization word parsed))
+
+parsedOrdinaryCanonicalProduct :
+  ∀ {extra r payload}
+  (word : Vec Trit.Trit (8 + extra))
+  (parsed : Source.ParsedPayload extra r payload) →
+  Source.ordinaryRationalFromParsed word parsed
+  ≡ canonicalSignedSignificand word parsed
+      ℚ.* canonicalSourceScale parsed
+parsedOrdinaryCanonicalProduct word parsed =
+  trans
+    (parsedOrdinaryCanonicalFactorization word parsed)
+    (fromRawProduct
+      (rawSourceSignificand word parsed)
+      (rawSourceScale parsed))
