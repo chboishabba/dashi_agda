@@ -31,7 +31,9 @@ required = {
     ],
     'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': [
         'rawSourceSignificand', 'rawSourceScale', 'rawSourceFactorization',
-        'parsedOrdinaryRawFactorization', 'parsedOrdinaryCanonicalFactorization',
+        'parsedOrdinaryRawFactorization', 'fromRawProduct',
+        'canonicalSignedSignificand', 'canonicalSourceScale',
+        'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct',
     ],
     'DASHI/ComputerScience/TekumWheelStateParityExact.agda': [
         'EvenWidth', 'OddWidth', 'pow3Mod4TwoStep', 'pow3Mod4Even', 'pow3Mod4Odd',
@@ -54,4 +56,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum static regression: arbitrary exponent-band separation, ordinary same-object factorization, exact source rational coordinates, general wheel parity, parser recovery, source negation and p-adic naturality present.')
+print('Tekum static regression: canonical ordinary product factorization, arbitrary exponent-band separation, exact source rational coordinates, general wheel parity, parser recovery, source negation and p-adic naturality present.')
