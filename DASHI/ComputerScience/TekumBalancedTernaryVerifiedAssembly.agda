@@ -18,6 +18,7 @@ import DASHI.ComputerScience.TekumWheelStateParityExact
 import DASHI.ComputerScience.TekumWidthAdmissibilityExact
 import DASHI.ComputerScience.TekumAnchorArithmeticExact
 import DASHI.ComputerScience.TekumAnchorCodecExact
+import DASHI.ComputerScience.TekumSourceAnchorCenterExact
 import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact
 import DASHI.ComputerScience.TekumDefinition5ConsistencyExact
 import DASHI.ComputerScience.TekumRegimeExponentExact
@@ -54,6 +55,7 @@ import DASHI.ComputerScience.TekumNegationExact
 import DASHI.ComputerScience.TekumUniquenessExact
 import DASHI.ComputerScience.TekumMonotonicityExact
 import DASHI.ComputerScience.TekumTruncationRoundingExact
+import DASHI.ComputerScience.TekumProposition5CounterexampleExact
 import DASHI.ComputerScience.TekumPrecisionCompositionExact
 import DASHI.ComputerScience.TekumFloatingPointStructuralBridgeExact
 import DASHI.ComputerScience.TekumTriadicPAdicKernelBridgeExact
@@ -155,7 +157,7 @@ canonicalTekumVerifiedAssemblyBoundary =
     true true true true true true true true true
     true true true true true true true true false
     true
-    true true false false false true
+    false true false false false true
     true true true true
     true true true true false true true true true false
     true true true true
