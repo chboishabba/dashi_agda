@@ -3,7 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.\n-- Verification root for exact trialectic<->369/hypervoxel ultrametric/refinement/descent tranche.
+-- This is an aggregate import only.  It does not strengthen any source claim.\n-- Verification root for Sweetgrass/Two-Eyed braided trialectic provenance tranche.
 -- In particular:
 --   * citations do not import proof or authority;
 --   * a general relational architecture is not a trauma-causal theorem;
@@ -21,8 +21,17 @@ import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact
+import DASHI.Reasoning.Trialectic369CechCornerStarRecognitionExact
+import DASHI.Core.ActionOrbitRecognitionFunctorExact
+import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact
+import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact
+import DASHI.Core.ProvenancePreservingRecognitionFunctorExact
+import DASHI.Reasoning.Trialectic369CechGrothendieckComparisonExact
+import DASHI.Reasoning.TrialecticAttachedTwoCellExact
+import DASHI.Reasoning.TrialecticDyadicCoverNerveExact
 import DASHI.Reasoning.Trialectic369RubikRefinementExact
 import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact
+import DASHI.Reasoning.Trialectic369DeclaredRowConsumerExact
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact
 import DASHI.Reasoning.TrialecticProductiveJoinDescentExact
 import DASHI.Reasoning.TrialecticLocalLogicQualificationExact
