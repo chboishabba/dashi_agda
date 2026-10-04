@@ -9,6 +9,7 @@ targets=(
   DASHI/Moonshine/OggSSP2BM22d2Completion10RuntimeReceiptExact.agda
   DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda
   DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda
+  DASHI/Moonshine/OggSSP2BDefectRecognitionAmbiguityExact.agda
   DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda
   DASHI/Moonshine/OggSSP2BSameObjectMaxCutFrontierExact.agda
 )
@@ -38,23 +39,27 @@ grep -q 'defectIdentityIsThree' "${targets[3]}"
 grep -q 'defectMinusOneIsThree' "${targets[3]}"
 grep -q 'defectOrderFourIsTwo' "${targets[3]}"
 grep -q 'defectOrderThreeIsOne' "${targets[3]}"
-grep -q 'defectOrderSixIsOne' "${targets[3]}"
+grep -q 'defectOrderSixOne' "${targets[3]}" || grep -q 'defectOrderSixIsOne' "${targets[3]}"
 grep -q 'matchingNumbersDoNotConstructModeRecognition' "${targets[3]}"
 
-grep -q 'apparentParityConflictResolved' "${targets[4]}"
-grep -q 'currentWeightTwoH0OrientationRetained' "${targets[4]}"
-grep -q 'currentWeightThreeH1OrientationRetained' "${targets[4]}"
-grep -q 'parityConventionShiftIsRequired' "${targets[4]}"
+grep -q 'defectCompatibleChartCountIsFour' "${targets[4]}"
+grep -q 'fourCompatibleChartsDoNotSelectActualSourceChart' "${targets[4]}"
 
-grep -q 'externalIntegralLocalActionSourced' "${targets[5]}"
-grep -q 'tenDimensionalFactorMultiplicityIsTen' "${targets[5]}"
-grep -q 'bareM22CompletionRouteKilled' "${targets[5]}"
-grep -q 'm22d2FiniteCompletionPhaseObserved' "${targets[5]}"
-grep -q 'm22d2OuterFivePairBasisVerified' "${targets[5]}"
-grep -q 'formalIntegralTateCarrierWeldStillOpen' "${targets[5]}"
-grep -q 'actualTenSubquotientStillOpen' "${targets[5]}"
-grep -q 'actualTateCompletionActionStillOpen' "${targets[5]}"
-grep -q 'actualModeDefectRecognitionStillOpen' "${targets[5]}"
-grep -q 'thirtyToP31StillObserverOnly' "${targets[5]}"
+grep -q 'apparentParityConflictResolved' "${targets[5]}"
+grep -q 'currentWeightTwoH0OrientationRetained' "${targets[5]}"
+grep -q 'currentWeightThreeH1OrientationRetained' "${targets[5]}"
+grep -q 'parityConventionShiftIsRequired' "${targets[5]}"
+
+grep -q 'externalIntegralLocalActionSourced' "${targets[6]}"
+grep -q 'tenDimensionalFactorMultiplicityIsTen' "${targets[6]}"
+grep -q 'bareM22CompletionRouteKilled' "${targets[6]}"
+grep -q 'm22d2FiniteCompletionPhaseObserved' "${targets[6]}"
+grep -q 'm22d2OuterFivePairBasisVerified' "${targets[6]}"
+grep -q 'defectCompatibleChartCountIsFour' "${targets[6]}"
+grep -q 'formalIntegralTateCarrierWeldStillOpen' "${targets[6]}"
+grep -q 'actualTenSubquotientStillOpen' "${targets[6]}"
+grep -q 'actualTateCompletionActionStillOpen' "${targets[6]}"
+grep -q 'actualModeDefectRecognitionStillOpen' "${targets[6]}"
+grep -q 'thirtyToP31StillObserverOnly' "${targets[6]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
