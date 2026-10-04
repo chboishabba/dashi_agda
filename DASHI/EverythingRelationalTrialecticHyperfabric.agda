@@ -3,7 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.\n-- Disambiguation verification root: categorical level, causal status, bridge grade.
+-- This is an aggregate import only.  It does not strengthen any source claim.\n-- Exhaustive conversation-audit verification root.
 -- In particular:
 --   * citations do not import proof or authority;
 --   * a general relational architecture is not a trauma-causal theorem;
@@ -13,49 +13,24 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 
 import DASHI.Core.RelationalTrialecticSourceAtlasExact
-import DASHI.Core.RelationalTrialecticDisambiguationExact
 import DASHI.Core.RelationalSelfStalkExact
 import DASHI.Core.RelationalSelfDescentExact
 import DASHI.Core.RelationalTransportDescentSheafExact
-import DASHI.Core.RelationalTransportGroupoidActionExact
-import DASHI.Core.RelationalTransportActionTwoCellExact
 import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
-import DASHI.Reasoning.Trialectic369DescentNaturalityExact
-import DASHI.Reasoning.Trialectic369CechCornerStarRecognitionExact
-import DASHI.Core.ActionOrbitRecognitionFunctorExact
-import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact
-import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact
-import DASHI.Core.ProvenancePreservingRecognitionFunctorExact
-import DASHI.Reasoning.Trialectic369CechGrothendieckComparisonExact
-import DASHI.Reasoning.TrialecticAttachedTwoCellExact
-import DASHI.Reasoning.TrialecticDyadicCoverNerveExact
-import DASHI.Reasoning.Trialectic369RubikRefinementExact
-import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact
-import DASHI.Reasoning.Trialectic369DeclaredRowConsumerExact
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact
 import DASHI.Reasoning.TrialecticProductiveJoinDescentExact
-import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact
-import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact
-import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact
-import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
-import DASHI.Reasoning.TrialecticGrothendieckTransitionCocycleExact
-import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact
-import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact
-import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact
 import DASHI.Reasoning.TrialecticLocalLogicQualificationExact
 import DASHI.Reasoning.RelationalPerspectiveSubjectExact
 import DASHI.Reasoning.RelationalPerspectiveIntegrationExact
 
 import DASHI.Foundations.RelationalStageTwelveSiteExact
-import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact
 import DASHI.Foundations.RelationalDepthPresheafExact
 import DASHI.Foundations.RelationalDepthBidescentExact
 import DASHI.Foundations.TrialecticDepthHyperformExact
 import DASHI.Foundations.RelationalObserverNonaryD4DecompositionExact
 import DASHI.Foundations.TrialecticD4C3ResidualBoundaryExact
-import DASHI.Foundations.TrialecticZeroToThirteenStageBoundaryExact
 
 import DASHI.Cognition.PNF.TrialecticMentalizingCalibrationExact
 import DASHI.Cognition.PNF.PerspectiveAllocationExact
@@ -88,9 +63,3 @@ import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact
 import DASHI.Cognition.PNF.DecisionActionFibreMultiplicityExact
 import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge
 import DASHI.Reasoning.TraumaAttractorBranchRegulationExact
-
--- Literal CP¹ atlas transport is tested against actual chart-consumer descent.
-import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAtlasConsumerDescentNoGoExact
-import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineQuadraticHomogeneousTransportExact
-import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineQuadraticGraphEquationExact
-import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineQuadraticPointSectionPullbackExact
