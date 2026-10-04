@@ -75,9 +75,18 @@ powerUpEntry =
   origin-source-entry
     metaPositionPowerUp
     "user-supplied raw origin transcript"
-    "+10% / 1.1 versus 1.0 shorthand for one additional meta-level of representation"
-    "number-role atlas / level-indexed recharting"
-    "not an empirical universal 10-percent law"
+    "+10% / 1.1 versus 1.0; the raw nongin metaphor explicitly compares 'my 1.1 army vs your 1 army', with 1.1 knowledge retaining one additional frame/removal level"
+    "DASHI.Core.NonginOnePointOneArmyRefinementExact / number-role atlas / level-indexed recharting"
+    "historical comparative-representation metaphor; not an empirical universal 10-percent law, intelligence ranking, or physical constant"
+
+onePointOneArmyEntry : OriginSourceEntry
+onePointOneArmyEntry =
+  origin-source-entry
+    metaPositionPowerUp
+    "user-supplied raw nongin transcript"
+    "1 + 1/10 = 1.1 > 1; 'my 1.1 army vs your 1 army'; one layer of removal can carry distinctions unavailable in the lower frame"
+    "DASHI.Core.NonginOnePointOneArmyRefinementExact"
+    "historical source for the metaphor only; the strict-projection and consumer-separation theorems are later DASHI formal reconstruction"
 
 oddsEntry : OriginSourceEntry
 oddsEntry =
