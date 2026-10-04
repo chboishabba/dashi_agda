@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- CURRENT LEAN THREE-TAP / PORTFOLIO MAX-CUT FRONTIER
+-- CURRENT LEAN THREE-ROUTE MAX-CUT FRONTIER
 --
 -- Status/provenance mirror only.  Real analysis remains Lean-owned.
 --
@@ -14,62 +14,39 @@ open import Agda.Builtin.String using (String)
 -- Lean branch:
 --   agent/rh-marked-cluster-target-reflection
 -- Donor head at refresh:
---   442903ad4905845ebe5bcaa294bb7c02a77d97a4
+--   bc1d67a09e7de828ac877e354d671d4c0b80b8c8
 --
--- Paid in Lean source:
---   * same-object uniform M0 envelope;
---   * explicit finite half-height O(log t / t) budget;
---   * actual transformed q^-2 pair decay;
---   * fixed canonical alpha strip |alpha| <= 1/25;
---   * exact complementary inverse-square zero-tail carrier;
---   * compiler from a uniform curvature bound to the actual far tail;
---   * explicit t-uniform pole-weight Lipschitz/equicontinuity estimate on the
---     fixed four-window support region;
---   * conditional compiler from uniform pole localization to one fixed-width
---     signed-pole core;
---   * exact compensation-floor identity;
---   * final Route-A adverse-vs-compensation balance compiler;
---   * finite mid-strip mesh/Lipschitz compiler;
---   * literal arbitrary-endpoint RvM zero-count upper bound;
---   * exact inverse-square finite-window <= N(A,B)/d^2 carrier weld;
---   * positive-height left/right shell bounds and unconditional all-real
---     unit-window inverse-square bounds using the same literal Ncount carrier;
---   * boundary-safe first right inverse-square source window
---       (3t/2 - 1, 2t]
---     with separation t/2 - 1, so the literal gamma=3t/2 boundary no longer
---     requires a separate fibre or a carrier change;
---   * dyadic half-height shell geometry and the exact numerical identity
---       sum_k ((log t + 1) + k) 2^-k / t = (2 log t + 4) / t;
---   * fail-closed compiler from one exact literal carrier-to-shell inequality
---     to ThreeTapInverseSquareTailBound, with a harmless factor-four loss;
---   * compile-time regression of that conditional compiler without naming an
---     unproved unconditional tail producer;
---   * correct-polarity V4/H4 lower fourth-angular compiler:
---       literalLocalCenteredFourthAngularAt_lower;
---   * same-object A2 upper-source compiler:
---       literalOffOrdExactAt_le_postSixthV4H4AbsorbBudgetAt;
---     therefore the old G3 orientation wall is source-written past and the
---     remaining A2 theorem is the strict scalar ABSORB comparison;
---   * Route-B exact scalar
---       signedFifthCorrelationGapAt
---       = Credit - Debt + OuterBudget - 3 eps,
---     plus a direct compiler from eventual gap >= 0 to SignedFifthInteriorTarget.
+-- A1 paid/source-written in Lean:
+--   * finite half-height O(log t/t) budget and exact q^-2 pair decay;
+--   * literal complementary inverse-square tail carrier;
+--   * arbitrary-endpoint and all-real inverse-square window bounds;
+--   * exact dyadic numerical series and conditional carrier-to-tail compiler;
+--   * right half-height boundary repaired by (3t/2-1,2t];
+--   * exact complement chart split gamma<=t/2 or gamma>=3t/2.
+-- A1 still open:
+--   * countable assignment/summation of those charts into paid shells;
+--   * fixed-width witness / compact-alpha uniform curvature;
+--   * translated gamma+pole gain versus local slack.
 --
--- Fail-closed boundary:
---   the normalized four-window determinant bookkeeping / uniform curvature is
---   not claimed as kernel-paid, and the literal complementary zero carrier has
---   not yet been completely summed into the paid dyadic/unit windows.  The
---   right half-height endpoint defect itself is paid by the widened first right
---   window above.  The A2 polarity is paid but its exposed strict ABSORB scalar
---   inequality is not.  Route B still lacks eventual gap nonnegativity.  No
---   exact-head Lean Actions receipt exists for the donor head recorded here.
+-- A2 paid/source-written in Lean:
+--   * correct-polarity V4/H4 lower fourth-angular compiler and same-object
+--     upper source bound;
+--   * selected witness -(3/20)pi^6 <= M6_signed < 0;
+--   * selected M6 cap strictly beats the dominant quartic target coefficient;
+--   * exact local scalar = positive debt - smooth-mu gain;
+--   * the canonical smooth-mu gain is strictly positive for t>=200.
+-- A2 still open:
+--   * lower-order local debt + signed FarExact
+--       < compensationTargetThreshold + smooth-mu gain.
 --
--- Current analytic portfolio:
---   A1: literal complementary-zero carrier summation
---       -> uniform witness width / oscillatory curvature
---       -> translated gamma+pole gain versus local slack;
---   A2: strict post-sixth V4/H4 ABSORB scalar inequality;
---   B : eventual signedFifthCorrelationGapAt >= 0.
+-- Route B paid/source-written in Lean:
+--   * exact G_n = Credit-Debt+OuterBudget-3eps;
+--   * exact direct form G_n = physicalCapInterior+OuterBudget-3eps;
+--   * eventual G_n>=0 compiles to the signed-fifth interior target.
+-- Route B still open:
+--   * eventual nonnegativity of that exact scalar.
+--
+-- No exact-head Lean kernel receipt and no RH claim are made here.
 ------------------------------------------------------------------------
 
 record ThreeTapCurrentLeanFrontier : Set where
@@ -79,48 +56,50 @@ record ThreeTapCurrentLeanFrontier : Set where
     branch : String
     donorHead : String
 
-    uniformM0EnvelopeSourceWritten : Bool
-    finiteLogOverTSourceWritten : Bool
-    inverseSquarePairDecaySourceWritten : Bool
-    fixedAlphaStripSourceWritten : Bool
-    inverseSquareTailCarrierSourceWritten : Bool
-    uniformCurvatureToFarCompilerSourceWritten : Bool
-    uniformPoleWeightEquicontinuitySourceWritten : Bool
-    uniformPoleLocalizationToFixedWidthCompilerSourceWritten : Bool
-    compensationFloorIdentitySourceWritten : Bool
-    routeAAsymptoticBalanceCompilerSourceWritten : Bool
-    midStripFiniteMeshCompilerSourceWritten : Bool
-    arbitraryEndpointLiteralZeroCountBoundSourceWritten : Bool
-    inverseSquareLiteralWindowBridgeSourceWritten : Bool
-    allRealUnitInverseSquareBoundSourceWritten : Bool
+    a1FiniteAndDecaySourceWritten : Bool
+    a1LiteralWindowMachinerySourceWritten : Bool
+    a1BoundaryAndChartGeometrySourceWritten : Bool
+    a1DyadicSeriesSourceWritten : Bool
+    a1CarrierToTailCompilerSourceWritten : Bool
 
-    uniformHighTPoleLocalizationPaid : Bool
-    uniformOscillatoryCurvaturePaid : Bool
-    inverseSquareRvMTailPaid : Bool
-    gammaPoleGainVsSlackPaid : Bool
+    a2CorrectPolaritySourceWritten : Bool
+    a2TerminalM6CertificateSourceWritten : Bool
+    a2DominantCoefficientPaid : Bool
+    a2DebtMinusMuGainNormalFormSourceWritten : Bool
+    a2CanonicalMuGainPositiveSourceWritten : Bool
+
+    routeBExactGapSourceWritten : Bool
+    routeBDirectCapGapSourceWritten : Bool
+    routeBTerminalCompilerSourceWritten : Bool
+
+    a1CarrierSummationPaid : Bool
+    a1UniformCurvaturePaid : Bool
+    a1CompensationPaid : Bool
+    a2StrictScalarPaid : Bool
     routeBEventualGapPaid : Bool
     exactHeadLeanKernelReceipt : Bool
     rhDerivedHere : Bool
 
-    uniformM0Paid : uniformM0EnvelopeSourceWritten ≡ true
-    finiteAsymptoticPaid : finiteLogOverTSourceWritten ≡ true
-    pairDecayPaid : inverseSquarePairDecaySourceWritten ≡ true
-    alphaStripPaid : fixedAlphaStripSourceWritten ≡ true
-    inverseSquareCarrierPaid : inverseSquareTailCarrierSourceWritten ≡ true
-    curvatureCompilerPaid : uniformCurvatureToFarCompilerSourceWritten ≡ true
-    poleWeightEquicontinuityPaid : uniformPoleWeightEquicontinuitySourceWritten ≡ true
-    fixedWidthCompilerPaid : uniformPoleLocalizationToFixedWidthCompilerSourceWritten ≡ true
-    compensationIdentityPaid : compensationFloorIdentitySourceWritten ≡ true
-    routeABalanceCompilerPaid : routeAAsymptoticBalanceCompilerSourceWritten ≡ true
-    meshCompilerPaid : midStripFiniteMeshCompilerSourceWritten ≡ true
-    arbitraryEndpointLiteralCountPaid : arbitraryEndpointLiteralZeroCountBoundSourceWritten ≡ true
-    inverseSquareWindowBridgePaid : inverseSquareLiteralWindowBridgeSourceWritten ≡ true
-    allRealUnitInverseSquarePaid : allRealUnitInverseSquareBoundSourceWritten ≡ true
+    a1FiniteAndDecayPaid : a1FiniteAndDecaySourceWritten ≡ true
+    a1LiteralWindowsPaid : a1LiteralWindowMachinerySourceWritten ≡ true
+    a1BoundaryGeometryPaid : a1BoundaryAndChartGeometrySourceWritten ≡ true
+    a1SeriesPaid : a1DyadicSeriesSourceWritten ≡ true
+    a1ConditionalTailCompilerPaid : a1CarrierToTailCompilerSourceWritten ≡ true
 
-    poleLocalizationStillOpen : uniformHighTPoleLocalizationPaid ≡ false
-    curvatureStillOpen : uniformOscillatoryCurvaturePaid ≡ false
-    inverseSquareTailStillOpen : inverseSquareRvMTailPaid ≡ false
-    compensationAsymptoticsStillOpen : gammaPoleGainVsSlackPaid ≡ false
+    a2PolarityPaid : a2CorrectPolaritySourceWritten ≡ true
+    a2M6Paid : a2TerminalM6CertificateSourceWritten ≡ true
+    a2LeadingSignPaid : a2DominantCoefficientPaid ≡ true
+    a2NormalFormPaid : a2DebtMinusMuGainNormalFormSourceWritten ≡ true
+    a2MuGainPaid : a2CanonicalMuGainPositiveSourceWritten ≡ true
+
+    routeBGapPaid : routeBExactGapSourceWritten ≡ true
+    routeBDirectPaid : routeBDirectCapGapSourceWritten ≡ true
+    routeBCompilerPaid : routeBTerminalCompilerSourceWritten ≡ true
+
+    a1CarrierStillOpen : a1CarrierSummationPaid ≡ false
+    a1CurvatureStillOpen : a1UniformCurvaturePaid ≡ false
+    a1CompensationStillOpen : a1CompensationPaid ≡ false
+    a2ScalarStillOpen : a2StrictScalarPaid ≡ false
     routeBStillOpen : routeBEventualGapPaid ≡ false
     kernelReceiptStillOpen : exactHeadLeanKernelReceipt ≡ false
     rhStillOpen : rhDerivedHere ≡ false
@@ -136,38 +115,47 @@ currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
     "agent/rh-marked-cluster-target-reflection"
-    "442903ad4905845ebe5bcaa294bb7c02a77d97a4"
+    "bc1d67a09e7de828ac877e354d671d4c0b80b8c8"
 
-    true true true true true true true true true true true true true true
+    true true true true true
+    true true true true true
+    true true true
 
     false false false false false false false
 
-    refl refl refl refl refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl
+    refl refl refl refl refl
+    refl refl refl
     refl refl refl refl refl refl refl
 
-    "A1: finish the literal complementary-zero carrier summation into the already-paid left/right source windows (the gamma=3t/2 boundary is now absorbed by the widened first right window), then fixed-width witness -> uniform oscillatory curvature, then translated gamma+pole gain versus local slack. A2: prove the strict post-sixth V4/H4 ABSORB scalar inequality; the old fourth-angular/G3 orientation wall is already paid. B: prove eventual signedFifthCorrelationGapAt >= 0. Mid-strip remains downstream of a genuine near-line PASS."
-    "Lean owns the real-analysis surface. Agda mirrors source-written status and provenance only; do not manufacture the missing carrier summation, determinant/curvature, compensation-sign, A2 ABSORB scalar, Route-B eventual gap, or RH arguments here."
-    "Keep the signed fifth-cap route independent: prove eventual nonnegativity of signedFifthCorrelationGapAt and feed the common canonical terminal consumer."
+    "A2: prove or refute localPositiveDebt + signed FarExact < compensationTargetThreshold + positive smooth-mu gain. A1: finish countable chart-to-shell summation, then uniform curvature and compensation. B: prove eventual signedFifthCorrelationGapAt >= 0 directly or through credit/debt bounds."
+    "Lean owns all real analysis. Agda mirrors source-written provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 strict scalar, Route-B sign, kernel receipt, or RH."
+    "Route B remains independent; cancellation may be estimated directly through physicalCapInterior rather than forcing separate credit/debt estimates."
 
-uniformPoleWeightEquicontinuityIsCurrent :
-  ThreeTapCurrentLeanFrontier.uniformPoleWeightEquicontinuitySourceWritten
+a2DominantCoefficientIsPaid :
+  ThreeTapCurrentLeanFrontier.a2DominantCoefficientPaid
     currentThreeTapCurrentLeanFrontier ≡ true
-uniformPoleWeightEquicontinuityIsCurrent = refl
+a2DominantCoefficientIsPaid = refl
 
-allRealUnitInverseSquareIsCurrent :
-  ThreeTapCurrentLeanFrontier.allRealUnitInverseSquareBoundSourceWritten
+a2MuGainIsPositiveSourceWritten :
+  ThreeTapCurrentLeanFrontier.a2CanonicalMuGainPositiveSourceWritten
     currentThreeTapCurrentLeanFrontier ≡ true
-allRealUnitInverseSquareIsCurrent = refl
+a2MuGainIsPositiveSourceWritten = refl
 
-uniformCurvatureIsStillOpen :
-  ThreeTapCurrentLeanFrontier.uniformOscillatoryCurvaturePaid
+a1CarrierIsStillOpen :
+  ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
     currentThreeTapCurrentLeanFrontier ≡ false
-uniformCurvatureIsStillOpen = refl
+a1CarrierIsStillOpen = refl
 
-inverseSquareTailIsStillOpen :
-  ThreeTapCurrentLeanFrontier.inverseSquareRvMTailPaid
+a2ScalarIsStillOpen :
+  ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
     currentThreeTapCurrentLeanFrontier ≡ false
-inverseSquareTailIsStillOpen = refl
+a2ScalarIsStillOpen = refl
+
+routeBIsStillOpen :
+  ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+routeBIsStillOpen = refl
 
 rhNotClaimedByAgdaStatusMirror :
   ThreeTapCurrentLeanFrontier.rhDerivedHere
