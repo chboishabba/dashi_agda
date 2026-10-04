@@ -9,13 +9,11 @@ module DASHI.Physics.Closure.NSClayFacingBPositiveMaxCut20261004Exact where
 --     unordered physical pair rows retaining their actual shell indices;
 --   * those exact rows compile into the existing B1/B2/B3 payment records, so
 --     analytic producers no longer restate live-block same-object equalities;
---   * R498 already closes B7 finite output aggregation on the literal R406
---     weighted-remainder carrier;
+--   * R498 closes B7 finite output aggregation on the literal R406 carrier;
 --   * the attempted universal direct-companion = coherent-covariance equality
 --     is rejected by the R289/R611 degree audit (5 versus 4);
---   * the correct exact R406 dynamic normal form is now exposed instead:
---
---         weightedRemainder = canonicalGramDebt + offDiagonalFluxTangent.
+--   * the exact R406 debt+flux-tangent and endpoint normal forms are already
+--     available with no new NS estimate.
 --
 -- Surviving positive B leaves:
 --
@@ -23,14 +21,14 @@ module DASHI.Physics.Closure.NSClayFacingBPositiveMaxCut20261004Exact where
 --   B2  signed DFL-DHH per-shell estimate on the extracted rows,
 --   B3  signed DHH intra-shell L2 aggregation on the extracted rows,
 --   B4  strict critical touching operator estimate with theta < 1,
---   B7a prove the stored R406 flux tangent is the actual time derivative and
---       compile its integral to an endpoint term,
---   B7b pay the resulting quartic canonical Gram debt (or replace this branch
---       by another quantitative R406 transport),
+--   B7  ONE valid R406 producer route:
+--         (Q5) direct signed quintic spacetime budget, OR
+--         (Q4+E) quartic Gram + weighted-flux endpoint bounds,
 --   Bcont continuum/periodic continuation inputs.
 --
--- B4 remains the highest-information strict analytic wall.  B7 is now a
--- dynamic/spacetime problem, not a representation weld.
+-- B4 remains the highest-information strict analytic wall.  B7 is a genuine
+-- analytic producer choice, not a representation weld and not two cumulative
+-- obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -45,15 +43,19 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativ
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact as B7Direct
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact as B7Boundary
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutExact as B7Dynamic
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutExact as B7Producer
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
+
+boolOr : Bool → Bool → Bool
+boolOr true _ = true
+boolOr false b = b
 
 data PositiveBLeaf : Set where
   b1RowsToLiteralShellPayment : PositiveBLeaf
   b2ExtractedDFLDHHPerShellSignedEstimate : PositiveBLeaf
   b3ExtractedDHHIntraShellSignedL2 : PositiveBLeaf
   b4StrictCriticalSignedOperator : PositiveBLeaf
-  b7ActualFluxDerivativeEndpoint : PositiveBLeaf
-  b7QuarticGramDebtPayment : PositiveBLeaf
+  b7OneValidR406Producer : PositiveBLeaf
   bContinuationInputs : PositiveBLeaf
 
 positiveBLeafClosed : PositiveBLeaf → Bool
@@ -65,10 +67,9 @@ positiveBLeafClosed b3ExtractedDHHIntraShellSignedL2 =
   B3.deepHHIntraShellSignedL2AggregationInhabitedHere
 positiveBLeafClosed b4StrictCriticalSignedOperator =
   B4.criticalTouchingStrictOperatorCertificateInhabitedHere
-positiveBLeafClosed b7ActualFluxDerivativeEndpoint =
-  B7Dynamic.b7ActualFluxDerivativeClosed
-positiveBLeafClosed b7QuarticGramDebtPayment =
-  B7Dynamic.b7QuarticGramDebtPaymentClosed
+positiveBLeafClosed b7OneValidR406Producer =
+  boolOr B7Producer.b7DirectSignedQuinticRouteClosed
+    B7Producer.b7QuarticGramEndpointRouteClosed
 positiveBLeafClosed bContinuationInputs =
   Continuum.periodicContinuumBKMCompletionInputsInhabited
 
@@ -77,47 +78,45 @@ positiveBLeafClosed bContinuationInputs =
 ------------------------------------------------------------------------
 
 deepPairExtractionClosed : Bool
-deepPairExtractionClosed =
-  Extract.b1LiteralDFLPairExtractionClosed
+deepPairExtractionClosed = Extract.b1LiteralDFLPairExtractionClosed
 
 dflDhhPairExtractionClosed : Bool
-dflDhhPairExtractionClosed =
-  Extract.b2LiteralDFLDHHPairExtractionClosed
+dflDhhPairExtractionClosed = Extract.b2LiteralDFLDHHPairExtractionClosed
 
 dhhPairExtractionClosed : Bool
-dhhPairExtractionClosed =
-  Extract.b3LiteralDHHPairExtractionClosed
+dhhPairExtractionClosed = Extract.b3LiteralDHHPairExtractionClosed
 
 pairRowsRetainActualShellIndices : Bool
-pairRowsRetainActualShellIndices =
-  Extract.literalRowsRetainActualShellIndices
+pairRowsRetainActualShellIndices = Extract.literalRowsRetainActualShellIndices
 
 b1B3LiveBlockSameObjectFieldsCompiledFromRows : Bool
 b1B3LiveBlockSameObjectFieldsCompiledFromRows =
   RowCompiler.b1B3LiveBlockSameObjectFieldsCompiledFromRows
 
 r406GlobalAggregationClosed : Bool
-r406GlobalAggregationClosed =
-  B7Direct.b7R406GlobalAggregationClosed
+r406GlobalAggregationClosed = B7Direct.b7R406GlobalAggregationClosed
 
 r406LiteralR498CarrierReused : Bool
-r406LiteralR498CarrierReused =
-  B7Direct.b7R498LiteralRemainderCarrierReused
+r406LiteralR498CarrierReused = B7Direct.b7R498LiteralRemainderCarrierReused
 
 b7UniversalSameObjectEqualityAdmissible : Bool
 b7UniversalSameObjectEqualityAdmissible =
   B7Boundary.b7UniversalDirectCompanionCovarianceEqualityAdmissible
 
-b7DynamicOrQuantitativeTransportRequired : Bool
-b7DynamicOrQuantitativeTransportRequired =
-  B7Boundary.b7RequiresDynamicOrQuantitativeTransport
-
 b7DebtPlusFluxTangentDecompositionClosed : Bool
 b7DebtPlusFluxTangentDecompositionClosed =
   B7Dynamic.b7R406DebtPlusFluxTangentDecompositionClosed
 
+b7ExactEndpointNormalFormCompilerClosed : Bool
+b7ExactEndpointNormalFormCompilerClosed =
+  B7Producer.b7ExactEndpointNormalFormCompilerClosed
+
+b7QuarticGramEndpointCompilerAvailable : Bool
+b7QuarticGramEndpointCompilerAvailable =
+  B7Producer.b7QuarticGramEndpointCompilerAvailable
+
 ------------------------------------------------------------------------
--- Genuine remaining analytic / dynamic leaves.
+-- Genuine remaining analytic / producer leaves.
 ------------------------------------------------------------------------
 
 b1LiteralShellPhysicalPaymentClosed : Bool
@@ -136,17 +135,17 @@ b4StrictMarginClosed : Bool
 b4StrictMarginClosed =
   B4.criticalTouchingStrictOperatorCertificateInhabitedHere
 
-b7ActualFluxDerivativeClosed : Bool
-b7ActualFluxDerivativeClosed =
-  B7Dynamic.b7ActualFluxDerivativeClosed
+b7DirectSignedQuinticRouteClosed : Bool
+b7DirectSignedQuinticRouteClosed =
+  B7Producer.b7DirectSignedQuinticRouteClosed
 
-b7QuarticGramDebtPaymentClosed : Bool
-b7QuarticGramDebtPaymentClosed =
-  B7Dynamic.b7QuarticGramDebtPaymentClosed
+b7QuarticGramEndpointRouteClosed : Bool
+b7QuarticGramEndpointRouteClosed =
+  B7Producer.b7QuarticGramEndpointRouteClosed
 
-b7DynamicTransportClosed : Bool
-b7DynamicTransportClosed =
-  B7Dynamic.b7DynamicSpacetimeTransportClosed
+b7OneProducerRouteClosed : Bool
+b7OneProducerRouteClosed =
+  boolOr b7DirectSignedQuinticRouteClosed b7QuarticGramEndpointRouteClosed
 
 continuationInputsClosed : Bool
 continuationInputsClosed =
@@ -159,7 +158,7 @@ continuationInputsClosed =
 data PositiveBPriority : Set where
   prerequisitePhysicalPayments : PositiveBPriority
   strictCriticalMargin : PositiveBPriority
-  dynamicR406Transport : PositiveBPriority
+  r406Producer : PositiveBPriority
   continuation : PositiveBPriority
 
 currentExecutionPriority : PositiveBPriority
@@ -176,6 +175,9 @@ b4RequiresStrictThetaBelowOne = true
 
 b7UniversalEqualityRouteRejectedByHomogeneity : Bool
 b7UniversalEqualityRouteRejectedByHomogeneity = true
+
+b7RepresentationOnlyWorkRemaining : Bool
+b7RepresentationOnlyWorkRemaining = false
 
 r823ReserveMachineryShouldReopen : Bool
 r823ReserveMachineryShouldReopen = false
@@ -201,13 +203,17 @@ b7UniversalSameObjectEqualityAdmissibleIsFalse :
   b7UniversalSameObjectEqualityAdmissible ≡ false
 b7UniversalSameObjectEqualityAdmissibleIsFalse = refl
 
-b7DynamicOrQuantitativeTransportRequiredIsTrue :
-  b7DynamicOrQuantitativeTransportRequired ≡ true
-b7DynamicOrQuantitativeTransportRequiredIsTrue = refl
-
 b7DebtPlusFluxTangentDecompositionClosedIsTrue :
   b7DebtPlusFluxTangentDecompositionClosed ≡ true
 b7DebtPlusFluxTangentDecompositionClosedIsTrue = refl
+
+b7ExactEndpointNormalFormCompilerClosedIsTrue :
+  b7ExactEndpointNormalFormCompilerClosed ≡ true
+b7ExactEndpointNormalFormCompilerClosedIsTrue = refl
+
+b7QuarticGramEndpointCompilerAvailableIsTrue :
+  b7QuarticGramEndpointCompilerAvailable ≡ true
+b7QuarticGramEndpointCompilerAvailableIsTrue = refl
 
 genericRepresentationWorkRemainingInB1B3IsFalse :
   genericRepresentationWorkRemainingInB1B3 ≡ false
@@ -215,6 +221,10 @@ genericRepresentationWorkRemainingInB1B3IsFalse = refl
 
 b4RequiresStrictThetaBelowOneIsTrue : b4RequiresStrictThetaBelowOne ≡ true
 b4RequiresStrictThetaBelowOneIsTrue = refl
+
+b7RepresentationOnlyWorkRemainingIsFalse :
+  b7RepresentationOnlyWorkRemaining ≡ false
+b7RepresentationOnlyWorkRemainingIsFalse = refl
 
 r823ReserveMachineryShouldReopenIsFalse :
   r823ReserveMachineryShouldReopen ≡ false
