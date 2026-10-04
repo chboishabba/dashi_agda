@@ -10,11 +10,22 @@ normalFormPaid = refl
 preferred : Cut.q4ePreferredB7Route ≡ true
 preferred = refl
 
-ftcStillOpen : Cut.q4eOffDiagonalFluxFTCClosed ≡ false
-ftcStillOpen = refl
+derivativeCompilerPaid :
+  Cut.q4eOffDiagonalFluxDerivativeCompilerClosed ≡ true
+derivativeCompilerPaid = refl
+
+ftcCompilerPaid :
+  Cut.q4eOffDiagonalFluxFTCClosedGivenOrdinaryScalarFTC ≡ true
+ftcCompilerPaid = refl
+
+twoAnalyticLeaves : Cut.q4eResearchLeavesReducedToTwoAnalyticBounds ≡ true
+twoAnalyticLeaves = refl
 
 gramStillOpen : Cut.q4eIntegratedGramBoundClosed ≡ false
 gramStillOpen = refl
 
 endpointStillOpen : Cut.q4eFluxEndpointBoundClosed ≡ false
 endpointStillOpen = refl
+
+noPlumbingRemaining : Cut.q4eRepresentationOrTemporalPlumbingRemaining ≡ false
+noPlumbingRemaining = refl
