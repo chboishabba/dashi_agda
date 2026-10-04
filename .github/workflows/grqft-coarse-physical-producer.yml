@@ -1,0 +1,45 @@
+name: GRQFT coarse physical producer
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'DASHI/Physics/Foundations/CoarseObservableFactorisationBidiExact.agda'
+      - 'DASHI/Physics/Foundations/CMSCoarseObservableContactBidiExact.agda'
+      - 'DASHI/Physics/Foundations/FiniteWarpedSourceProducerBidiExact.agda'
+      - '.github/workflows/grqft-coarse-physical-producer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: grqft-coarse-producer-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck the three new owner modules
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CoarseObservableFactorisationBidiExact.agda \
+              DASHI/Physics/Foundations/CMSCoarseObservableContactBidiExact.agda \
+              DASHI/Physics/Foundations/FiniteWarpedSourceProducerBidiExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '
