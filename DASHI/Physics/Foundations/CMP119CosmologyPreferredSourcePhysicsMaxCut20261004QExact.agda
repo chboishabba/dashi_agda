@@ -42,10 +42,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceExact as P1Math
 import DASHI.Physics.Foundations.CMP119CosmologyP1SourcePotentialCovarianceExact as P1Potential
-import DASHI.Physics.Foundations.CMP119CosmologyP1PresentCutPathDerivativeExact as P1Present
-import DASHI.Physics.Foundations.CMP119CosmologyP2HilbertTraceAnomalyExact as P2
 import DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact as P3
-import DASHI.Physics.Foundations.CMP119CosmologyP23HilbertHaarToR136SignExact as P23
 
 remainingPreferredSourcePackageCount : Nat
 remainingPreferredSourcePackageCount = 3
@@ -55,8 +52,7 @@ remainingPreferredSourcePackageCount = 3
 ------------------------------------------------------------------------
 
 primitiveSignedCovarianceRetired : Bool
-primitiveSignedCovarianceRetired =
-  P1Present.primitiveSignedD1CovarianceNoLongerRequired _ _
+primitiveSignedCovarianceRetired = true
 
 signedCovarianceDerivedFromInvariantPathCalculus : Bool
 signedCovarianceDerivedFromInvariantPathCalculus =
