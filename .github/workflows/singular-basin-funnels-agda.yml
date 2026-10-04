@@ -1,0 +1,43 @@
+name: Singular basin funnels Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Dynamics/SingularBasin*.agda'
+      - 'DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda'
+      - 'DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda'
+      - 'scripts/check_singular_funnel_normal_form.py'
+      - 'scripts/check_singular_funnel_stable_manifold_crossing.py'
+      - 'Docs/SingularBasinFunnels.md'
+      - '.github/workflows/singular-basin-funnels-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck-and-diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck singular-basin theorem chain
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinReductionExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinFiniteWitnessExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinCompressionBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/BasinResolutionRobustnessExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSelectedCrossSectionBracketExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/ScaledBracketResolutionBridgeExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinValidatedNumericsArtifactExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/BasinSeparatingStableManifoldExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/StableManifoldCrossingValidatedArtifactExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukStableManifoldCrossingTargetExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/SingularBasinResolutionWitnessExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Dynamics/YanchukSingularBasinSourceExact.agda
+      - name: Reproduce selected normal-form funnel cross-section
+        run: python3 scripts/check_singular_funnel_normal_form.py
+      - name: Reproduce stable-manifold crossing independently
+        run: python3 scripts/check_singular_funnel_stable_manifold_crossing.py
