@@ -35,6 +35,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyEq223CauchyVacuumScalarMaxCutExa
 import DASHI.Physics.Foundations.CMP119CosmologyEq223DiagonalCauchyMajorantExact as Cauchy
 import DASHI.Physics.Foundations.CMP119CosmologyEq223PointwiseVacuumMarginExact as PointwiseMargin
 import DASHI.Physics.Foundations.CMP119CosmologyEq223SourceMetricVariationExact as Eq223
+import DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact as Source
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionTailSourceScalarMarginExact as Scalar
 import DASHI.Physics.Foundations.CMP119CosmologyPartitionWeylTraceExact as Weyl
 import DASHI.Physics.Foundations.CMP119CosmologyPhysicalFinitePartitionAuthorityExact as Partition
@@ -64,7 +65,7 @@ module _
     (signLaws : Sign.RationalWeylSignIntegrationLaws measure)
     (referenceFixed :
       ∀ h x →
-      DASHI.Physics.Foundations.CMP119CosmologyPartitionStressFirstVariationExact.referenceMeasureLogVariation
+      Source.referenceMeasureLogVariation
         (Eq223.sourceCompleteFiniteMetricVariation realization) h x
       ≡ 0ℚ)
   where
