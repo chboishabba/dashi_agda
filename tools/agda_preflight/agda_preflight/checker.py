@@ -573,6 +573,30 @@ class Checker:
                         "Fix syntax before semantic preflight; Agda may report a later, noisier error.",
                     )
                 )
+
+        # Agda's record-construction grammar requires an unqualified field name
+        # on the left-hand side. tree-sitter-agda accepts qualified qids here,
+        # so catch this parser mismatch explicitly before semantic resolution.
+        for record_expr in summary.ast.record_expressions:
+            if record_expr.context == "pattern":
+                continue
+            for assignment in record_expr.assignments:
+                if "." not in assignment.name:
+                    continue
+                field_name = assignment.name.rsplit(".", 1)[-1]
+                result.append(
+                    Diagnostic(
+                        "TSAGDA090",
+                        (
+                            f"qualified record field {assignment.name} is invalid in "
+                            "record construction"
+                        ),
+                        summary.path,
+                        assignment.line,
+                        1,
+                        f"Use the unqualified field name {field_name}.",
+                    )
+                )
         return result
 
     def _projection_sort_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
