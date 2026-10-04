@@ -1,6 +1,9 @@
 module DASHI.ComputerScience.TekumParsedAnchorListExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (_+_)
+open import Data.Maybe.Base using (just)
+open import Data.Product.Base using (_,_)
 import Data.List.Base as List
 import Data.List.Properties as ListP
 import Data.Vec.Base as Vec
@@ -83,7 +86,7 @@ rejoinParsedAnchorReverseList {r = r} parsed =
 
 anchorMSBReverseToSourceList :
   ∀ {extra}
-  (word : Vec.Vec Trit.Trit (8 Agda.Builtin.Nat.+ extra)) →
+  (word : Vec.Vec Trit.Trit (8 + extra)) →
   List.reverse (Vec.toList (Source.anchorMSB word))
   ≡ Vec.toList (Fixed.concreteAnchor word)
 anchorMSBReverseToSourceList word =
@@ -94,8 +97,8 @@ anchorMSBReverseToSourceList word =
 
 successfulParseAnchorList :
   ∀ {extra r payload parsed}
-  (word : Vec.Vec Trit.Trit (8 Agda.Builtin.Nat.+ extra)) →
-  Source.parseOrdinaryAnchor word ≡ Data.Maybe.Base.just (r Data.Product.Base., payload Data.Product.Base., parsed) →
+  (word : Vec.Vec Trit.Trit (8 + extra)) →
+  Source.parseOrdinaryAnchor word ≡ just (r , payload , parsed) →
   Vec.toList (Fixed.concreteAnchor word) ≡ parsedAnchorList parsed
 successfulParseAnchorList word parseEq =
   trans
