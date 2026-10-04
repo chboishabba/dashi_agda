@@ -2,99 +2,84 @@
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-04 / OVERLAY Q.
+-- LIVE PARETO FRONTIER / 2026-10-05 / OVERLAY R.
 --
--- The former P1/P2/P3 presentation-level leaves are retired:
+-- P1/P2/P3 presentation equalities are retired.  Research now sits on three
+-- source-native constructions/theorems:
 --
---   P1 signed R144 B4 covariance
---      -> DERIVED from invariant effective potential + equivariant source path
---         + ordinary path-derivative semantics.
+--   R1  literal compact-gauge one-parameter background path x exp(tX), its B4
+--       equivariance, and identification of BC2.firstVariation with the path
+--       derivative.  Signed R144 covariance is then compiler output.
 --
---   P2 free R136 <-> Local-C trace-frame calibration
---      -> RETIRED by defining the anomaly trace as the Hilbert/metric trace of
---         the SAME R130/R136/Local-C stress.
+--   R2  the renormalized Hilbert/Weyl trace-anomaly Ward identity on the SAME
+--       pinned R136/Local-C stress and F^2 operator.  The R136 Hilbert trace
+--       identity and SU(2) coefficient algebra are already compiler-owned.
 --
---   P3 exact Local-C F^2 = one finite physical F^2 numerator
---      -> RETIRED; the correct theorem is common-limit uniqueness for pointwise
---         the SAME finite F^2 sequence.
+--   R3  construct the selected F^2 observable/finite-state source expectation
+--       and literal physical-Haar quadrature on that same selected state family.
+--       The old pointwise finite-sequence weld is gone: the Haar side is compiled
+--       onto the Local-C approximateExpectation sequence with the sum of the two
+--       existing vanishing error budgets.
 --
--- Preferred source packages now live one layer deeper:
---
---   Q1  selected source path is the actual BC2 directional-derivative path and
---       is B4-equivariant, with reflection signs represented by t -> -t;
---
---   Q2  the nonperturbative Hilbert trace anomaly on the exact pinned Local-C
---       pair:
---         HilbertTrace(T_ren) = b_SU2 * [F^2]_ren;
---
---   Q3  the Local-C finite-F^2 limit transport and physical-Haar representation
---       use pointwise the SAME finite physical F^2 sequence.
---
--- P2+P3 then compile directly to negative rational R136 once the physical Haar
--- F^2 expectation is strictly positive.  The preferred sign route uses neither
--- Eq.(2.23) vacuum dominance nor finite D_Gamma/R109-tail sign transport.
+-- No Eq.(2.23) vacuum gap or finite D_Gamma/R109-tail sign route is required by
+-- the preferred anomaly path.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RExact as R
 
 remainingPreferredSourcePackageCount : Nat
-remainingPreferredSourcePackageCount = Q.remainingPreferredSourcePackageCount
+remainingPreferredSourcePackageCount = R.remainingPreferredSourcePackageCount
 
 primitiveSignedR144B4CovarianceStillOpen : Bool
 primitiveSignedR144B4CovarianceStillOpen = false
 
-primitiveSignedR144B4CovarianceRetired : Bool
-primitiveSignedR144B4CovarianceRetired = Q.primitiveSignedCovarianceRetired
-
-q1PathDerivativeSemanticsAndEquivarianceStillOpen : Bool
-q1PathDerivativeSemanticsAndEquivarianceStillOpen =
-  Q.q1IsPathDerivativeSemanticsAndEquivariance
+r1LiteralCompactGaugeSourcePathStillOpen : Bool
+r1LiteralCompactGaugeSourcePathStillOpen =
+  R.q1RemainingTheoremIsLiteralCompactGaugeSourcePathRealization
 
 freeTraceFrameCalibrationStillOpen : Bool
 freeTraceFrameCalibrationStillOpen = false
 
-freeTraceFrameCalibrationRetired : Bool
-freeTraceFrameCalibrationRetired = Q.freeTraceFrameCalibrationRetired
+r136HilbertTraceEqualityCompilerOwned : Bool
+r136HilbertTraceEqualityCompilerOwned =
+  R.r136IsSamePinnedLocalCHilbertTraceCompilerOwned
 
-q2NonperturbativeHilbertTraceAnomalyStillOpen : Bool
-q2NonperturbativeHilbertTraceAnomalyStillOpen =
-  Q.q2IsNonperturbativeHilbertTraceAnomalyOnExactLocalCPair
+r2RenormalizedHilbertWeylWardIdentityStillOpen : Bool
+r2RenormalizedHilbertWeylWardIdentityStillOpen =
+  R.q2RemainingTheoremIsRenormalizedHilbertWeylWardIdentity
 
 exactFiniteContinuumF2WeldStillOpen : Bool
 exactFiniteContinuumF2WeldStillOpen = false
 
-exactFiniteContinuumF2WeldRetired : Bool
-exactFiniteContinuumF2WeldRetired = Q.exactFiniteContinuumF2WeldRetired
-
 q3PointwiseCommonFinitePhysicalF2SequenceStillOpen : Bool
-q3PointwiseCommonFinitePhysicalF2SequenceStillOpen =
-  Q.q3IsPointwiseCommonFinitePhysicalF2Sequence
+q3PointwiseCommonFinitePhysicalF2SequenceStillOpen = false
 
-r136HilbertTraceEqualityCompilerOwned : Bool
-r136HilbertTraceEqualityCompilerOwned = Q.r136HilbertTraceEqualityIsCompilerOwned
+r3ApproximateExpectationHaarCompilerOwned : Bool
+r3ApproximateExpectationHaarCompilerOwned =
+  R.q3ApproximateExpectationHaarCompilerOwned
 
-p23CompilesPhysicalHaarPositivityToNegativeR136 : Bool
-p23CompilesPhysicalHaarPositivityToNegativeR136 =
-  Q.p23CompilesPhysicalHaarPositivityToNegativeR136
+r3SelectedF2ObservableAndHaarGeometryStillOpen : Bool
+r3SelectedF2ObservableAndHaarGeometryStillOpen =
+  R.q3RemainingSourceWorkIsSelectedF2ObservableAndLiteralHaarQuadrature
 
 preferredRouteNeedsFiniteDGamma : Bool
-preferredRouteNeedsFiniteDGamma = Q.preferredRouteUsesFiniteDGammaR109Tail
+preferredRouteNeedsFiniteDGamma = false
 
 preferredRouteNeedsRound109Tail : Bool
-preferredRouteNeedsRound109Tail = Q.preferredRouteUsesFiniteDGammaR109Tail
+preferredRouteNeedsRound109Tail = false
 
 preferredRouteNeedsEq223VacuumMetricGap : Bool
-preferredRouteNeedsEq223VacuumMetricGap = Q.preferredRouteUsesEq223VacuumGap
+preferredRouteNeedsEq223VacuumMetricGap = false
 
 remainingAdapterDebt : Nat
-remainingAdapterDebt = Q.remainingAdapterDebtInScopedPreferredRoute
+remainingAdapterDebt = R.remainingAdapterDebtInScopedPreferredRoute
 
-remainingWorkIsSourceConstructionOrSourceTheorems : Bool
-remainingWorkIsSourceConstructionOrSourceTheorems =
-  Q.remainingPackagesAreSourceConstructionOrSourceTheorems
+remainingWorkIsSourceGeometryWardIdentityAndMeasureConstruction : Bool
+remainingWorkIsSourceGeometryWardIdentityAndMeasureConstruction =
+  R.remainingWorkIsSourceGeometryWardIdentityAndMeasureConstruction
 
 fullFriedmannTrajectoryAlreadySolved : Bool
 fullFriedmannTrajectoryAlreadySolved = false
