@@ -8,8 +8,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyB1SelectedSameSequenceMaxCutExac
 --
 --   embed Q_R136 <= F_k + embed Tail_109(k)
 --
--- should not be treated as primitive physics.  It follows from two much more
--- transparent SAME-SEQUENCE facts:
+-- is not primitive physics.  It follows from two SAME-SEQUENCE facts:
 --
 --   (1) every later selected finite expectation is below the selected start
 --       plus the literal Round109 tail;
@@ -17,12 +16,15 @@ module DASHI.Physics.Foundations.CMP119CosmologyB1SelectedSameSequenceMaxCutExac
 --   (2) the selected completed R136 scalar is the limit endpoint of THAT SAME
 --       finite expectation sequence.
 --
--- The final passage from all finite upper bounds to the real limit is ordinary
--- order/topology, represented here by one standard limit-order authority.
+-- Passing a uniform upper bound to the limit, and deleting a finite prefix of
+-- a convergent sequence, are ordinary real-analysis laws.  The repository's
+-- abstract limit interface does not export those laws, so they are stated here
+-- explicitly as standard limit-order authority rather than smuggled in as
+-- definitional equalities.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Rational.Base as ℚ using (ℚ)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -30,7 +32,6 @@ open import Relation.Binary.PropositionalEquality using (subst)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_; _≤ℝ_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyConcreteFiniteR109RealCompletionExact as Concrete
-import DASHI.Physics.Foundations.CMP119CosmologyR144R109ExpectationCompletionMaxCutExact as Tail
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as Additive
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
@@ -40,7 +41,7 @@ import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimi
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
-record RealLimitPreservesUniformUpperBounds
+record RealTailLimitOrderAuthority
     (sequenceLimit : Seq.RealSequenceLimitByVanishingError) : Set₁ where
   field
     limitBelowConstantFromPointwise :
@@ -48,7 +49,12 @@ record RealLimitPreservesUniformUpperBounds
       (∀ n → sequence n ≤ℝ upper) →
       Seq.limit sequenceLimit sequence ≤ℝ upper
 
-open RealLimitPreservesUniformUpperBounds public
+    finitePrefixDoesNotChangeLimit :
+      ∀ (sequence : Nat → ℝ) start →
+      Seq.limit sequenceLimit (λ count → sequence (start + count))
+      ≡ Seq.limit sequenceLimit sequence
+
+open RealTailLimitOrderAuthority public
 
 module _
     {Configuration : Set}
@@ -90,7 +96,7 @@ module _
   open SelectedR109SameSequenceCompletion public
 
   selectedSameSequenceCompilesConcreteCompletion :
-    RealLimitPreservesUniformUpperBounds sequenceLimit →
+    RealTailLimitOrderAuthority sequenceLimit →
     ∀ {completed} →
     SelectedR109SameSequenceCompletion completed →
     C.ConcreteFiniteR109RealCompletion completed
@@ -100,53 +106,30 @@ module _
           let
             upper = C.finiteR109Expectation start +ℝ C.embeddedR109Tail start
             shifted = λ count → C.finiteR109Expectation (start + count)
+
             shiftedBelow : ∀ count → shifted count ≤ℝ upper
             shiftedBelow = finiteFutureBelowStartPlusTail sameSequence start
 
-            -- This is the one standard topology step.  The authority is stated
-            -- on the selected tail sequence so no YM-specific analysis is
-            -- hidden in it.
-            limitShiftedBelow :
+            shiftedLimitBelow :
               Seq.limit sequenceLimit shifted ≤ℝ upper
-            limitShiftedBelow =
-              limitBelowConstantFromPointwise limitOrder shifted upper shiftedBelow
+            shiftedLimitBelow =
+              limitBelowConstantFromPointwise
+                limitOrder shifted upper shiftedBelow
+
+            fullLimitBelow :
+              Seq.limit sequenceLimit C.finiteR109Expectation ≤ℝ upper
+            fullLimitBelow =
+              subst
+                (λ value → value ≤ℝ upper)
+                (finitePrefixDoesNotChangeLimit
+                  limitOrder C.finiteR109Expectation start)
+                shiftedLimitBelow
           in
-          -- The source completion endpoint is the limit of the unshifted
-          -- sequence.  A fully generic shift-invariance theorem would allow us
-          -- to rewrite `limit shifted` here; rather than smuggling that law into
-          -- definitional equality, retain its exact same-sequence content below.
-          selectedLimitUpper start upper limitShiftedBelow
+          subst
+            (λ value → value ≤ℝ upper)
+            (completedIsSelectedFiniteExpectationLimit sameSequence)
+            fullLimitBelow
     }
-    where
-    postulate-free-placeholder : Bool
-    postulate-free-placeholder = true
-
-    -- Shift invariance is ordinary sequence-limit analysis, but the repository
-    -- limit interface does not currently export it.  Keep it explicit as a
-    -- standard authority rather than inventing a proof from weaker fields.
-    selectedLimitUpper :
-      ∀ start upper →
-      Seq.limit sequenceLimit
-        (λ count → C.finiteR109Expectation (start + count)) ≤ℝ upper →
-      Embed.embed baseEmbedding _ ≤ℝ upper
-    selectedLimitUpper start upper shiftedBelow =
-      transportCompleted
-        (completedIsSelectedFiniteExpectationLimit sameSequence)
-        (limitOfTailIsLimit start shiftedBelow)
-      where
-      transportCompleted :
-        ∀ {completed limitValue : ℝ} →
-        completed ≡ limitValue →
-        limitValue ≤ℝ upper →
-        completed ≤ℝ upper
-      transportCompleted refl proof = proof
-
-      limitOfTailIsLimit :
-        ∀ start →
-        Seq.limit sequenceLimit
-          (λ count → C.finiteR109Expectation (start + count)) ≤ℝ upper →
-        Seq.limit sequenceLimit C.finiteR109Expectation ≤ℝ upper
-      limitOfTailIsLimit start proof = proof
 
 round109FiniteTailSemanticsIsSourceLeaf : Bool
 round109FiniteTailSemanticsIsSourceLeaf = true
@@ -157,5 +140,5 @@ completionEndpointIdentityIsSourceLeaf = true
 directTailInequalityIsCompilerOutput : Bool
 directTailInequalityIsCompilerOutput = true
 
-b1IsNotMerelyAnAdditiveConstantProblemAfterSameSequenceWeld : Bool
-b1IsNotMerelyAnAdditiveConstantProblemAfterSameSequenceWeld = true
+finitePrefixLimitLawIsGenericAnalysisNotYMPhysics : Bool
+finitePrefixLimitLawIsGenericAnalysisNotYMPhysics = true
