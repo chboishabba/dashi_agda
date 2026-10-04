@@ -24,6 +24,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
 import DASHI.Physics.Foundations.CMP119CosmologyR136LocalCTraceAnomalyExact as Direct
+import DASHI.Physics.Foundations.CMP119CosmologyRealR136TraceReadoutBridgeExact as RealBridge
 import DASHI.Physics.Foundations.CMP119AntigravityPinnedLocalCTraceAnomalyBridgeExact as LocalTrace
 import DASHI.Physics.Foundations.CMP119AntigravityRealSU2TraceClosureExact as SU2Trace
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
@@ -92,6 +93,11 @@ module _
 
   r136Response = Continuum.continuumFourDiagonalResponse recovery selected directions
 
+  localCTrace : ℝ
+  localCTrace =
+    LocalTrace.stressTraceNumerator readout
+      (ConcreteLocalC.stressTensor concreteLocalC)
+
   record TraceFrameCalibration : Set₁ where
     field
       embeddedFourDirectionPairingIsLiteralClayStressTrace :
@@ -101,19 +107,35 @@ module _
 
   open TraceFrameCalibration public
 
+  embeddedR136IsLocalCTrace :
+    TraceFrameCalibration →
+    Embed.embed embedding r136Response ≡ localCTrace
+  embeddedR136IsLocalCTrace calibration =
+    trans
+      (cong (Embed.embed embedding)
+        (Continuum.continuumFourDiagonalResponseIsLiteralStressPairing
+          recovery selected directions))
+      (trans
+        (embeddedFourDirectionPairingIsLiteralClayStressTrace calibration)
+        (cong (LocalTrace.stressTraceNumerator readout)
+          (Round109.literalClayStressIsConcreteLocalCStress round109)))
+
   asDirectLocalCTraceWeld :
     TraceFrameCalibration →
     Direct.R136LocalCTraceReadoutWeld readout r136Response
   asDirectLocalCTraceWeld calibration = record
     { Direct.R136LocalCTraceReadoutWeld.embeddedR136IsSelectedLocalCStressTrace =
-        trans
-          (cong (Embed.embed embedding)
-            (Continuum.continuumFourDiagonalResponseIsLiteralStressPairing
-              recovery selected directions))
-          (trans
-            (embeddedFourDirectionPairingIsLiteralClayStressTrace calibration)
-            (cong (LocalTrace.stressTraceNumerator readout)
-              (Round109.literalClayStressIsConcreteLocalCStress round109)))
+        embeddedR136IsLocalCTrace calibration
+    }
+
+  asRealTraceReadoutWeld :
+    TraceFrameCalibration →
+    RealBridge.NegativeOrderReflectionAtZero embedding →
+    RealBridge.R136RealTraceReadoutWeld embedding r136Response localCTrace
+  asRealTraceReadoutWeld calibration reflection = record
+    { RealBridge.R136RealTraceReadoutWeld.sameReadout =
+        embeddedR136IsLocalCTrace calibration
+    ; RealBridge.R136RealTraceReadoutWeld.negativeReflection = reflection
     }
 
 fourAdmittedDirectionsDoNotByThemselvesDefineRenormalizedTrace : Bool
@@ -124,3 +146,6 @@ remainingAnomalyWeldIsScalarTraceFrameCalibration = true
 
 noSecondStressObjectNeededForAnomalyRoute : Bool
 noSecondStressObjectNeededForAnomalyRoute = true
+
+traceFrameCalibrationCompilesToExistingRealTraceBridge : Bool
+traceFrameCalibrationCompilesToExistingRealTraceBridge = true
