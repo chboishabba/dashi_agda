@@ -3,6 +3,15 @@ module DASHI.Reasoning.Everything where
 -- Reasoning domain rollup.
 
 import DASHI.Reasoning.RelationalEverything
+import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact
+import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact
+import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact
+import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact
+import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
+import DASHI.Reasoning.TrialecticGrothendieckTransitionCocycleExact
+import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact
+import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact
+import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact
 import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.PathologicEverything
 import DASHI.Reasoning.AccessBiasFallacySeparationExact
