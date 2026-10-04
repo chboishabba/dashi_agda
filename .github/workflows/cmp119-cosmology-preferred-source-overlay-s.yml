@@ -1,0 +1,103 @@
+name: CMP119 cosmology preferred source overlay S
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1InvariantPathDerivativeCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1SourcePotentialCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutPathDerivativeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2LinearityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2LinearityTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPathDefinedPresentCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPathDefinedPresentCutTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1CompactGaugeExponentialPathExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1CompactGaugeExponentialPathTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutCompactGaugePathExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutCompactGaugePathTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPresentCutSourceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPresentCutSourceTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2HilbertTraceAnomalyExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExactTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateHaarQuadratureExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateHaarQuadratureTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3MarkedCurvatureLocalCRechartExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3MarkedCurvatureLocalCRechartTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3R129RechartedLocalCF2Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3R129RechartedLocalCF2Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP23HilbertHaarToR136SignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005SExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005STest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - '.github/workflows/cmp119-cosmology-preferred-source-overlay-s.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-preferred-source-overlay-s-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck overlay S research frontier
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for f in \
+              DASHI/Physics/Foundations/CMP119CosmologyP1InvariantPathDerivativeCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1SourcePotentialCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutPathDerivativeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2LinearityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PathDefinedBC2LinearityTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPathDefinedPresentCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPathDefinedPresentCutTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1CompactGaugeExponentialPathExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1CompactGaugeExponentialPathTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutCompactGaugePathExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutCompactGaugePathTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPresentCutSourceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PreferredPresentCutSourceTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2HilbertTraceAnomalyExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExactTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateHaarQuadratureExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateHaarQuadratureTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3MarkedCurvatureLocalCRechartExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3MarkedCurvatureLocalCRechartTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3R129RechartedLocalCF2Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3R129RechartedLocalCF2Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP23HilbertHaarToR136SignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005SExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005STest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
+            done
+          '
