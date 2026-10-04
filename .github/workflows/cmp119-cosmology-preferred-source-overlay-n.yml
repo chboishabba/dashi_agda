@@ -1,0 +1,61 @@
+name: CMP119 cosmology preferred source overlay N
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyA2LocalCWilsonPresentationCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyA2LocalCWilsonPresentationCompilerTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyB1SelectedSameSequenceMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyB1SelectedSameSequenceMaxCutTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NTest.agda'
+      - '.github/workflows/cmp119-cosmology-preferred-source-overlay-n.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-preferred-source-overlay-n-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck corrected preferred source basis
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for f in \
+              DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyA2LocalCWilsonPresentationCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyA2LocalCWilsonPresentationCompilerTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyB1SelectedSameSequenceMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyB1SelectedSameSequenceMaxCutTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NTest.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
+            done
+          '
