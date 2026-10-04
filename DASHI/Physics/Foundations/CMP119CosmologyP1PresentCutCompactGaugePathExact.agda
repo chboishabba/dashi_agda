@@ -22,6 +22,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyP1CompactGaugeExponentialPathExa
 import DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceExact as Path
 import DASHI.Physics.Foundations.CMP119CosmologyP1SourcePotentialCovarianceExact as Potential
 import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
+import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as Signed
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
@@ -68,9 +69,6 @@ module _
           (Potential.actBackground potentialGeometry)
           Axis.hypercubicSignedAxisAction
 
-      -- The one genuinely differentiated source statement left at this layer:
-      -- BC2's selected first variation is the ordinary derivative along the
-      -- literal compact-gauge exponential path.
       bc2FirstVariationIsExponentialPathDerivative :
         ∀ background component →
         BC2.firstVariation (Present.bc2 present)
@@ -109,7 +107,7 @@ module _
     PresentPath.signedFiniteD1 presentData laws
       (Potential.actBackground
         (potentialGeometry data) generator background)
-      (DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact.actSignedComponent
+      (Signed.actSignedComponent
         (Axis.hypercubicSignedAxisAction generator) component)
     ≡ PresentPath.finiteD1AtComponent presentData laws background component
   signedFiniteD1CovariantFromCompactGaugePath data =
