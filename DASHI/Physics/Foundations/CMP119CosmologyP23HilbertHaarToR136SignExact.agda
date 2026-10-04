@@ -24,6 +24,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyP2HilbertTraceAnomalyExact as P2
 import DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact as P3
 import DASHI.Physics.Foundations.CMP119CosmologyContinuumWeylStressPairingExact as Continuum
 import DASHI.Physics.Foundations.CMP119CosmologyStandardRealOrderReflectionExact as Order
+import DASHI.Physics.Foundations.CMP119CosmologyRealR136TraceReadoutBridgeExact as Readout
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteToLocalCAnomalyLimitTransportExact as LocalLimit
 import DASHI.Physics.Foundations.CMP119AntigravityRealHaarExpectationRepresentationExact as HaarLimit
 import DASHI.Physics.Foundations.CMP119AntigravityRealStrictSignExact as Strict
@@ -45,6 +46,7 @@ import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as ConcreteLocalC
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ConcreteLocalCExact as Round109
+import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
 
 module _
     {trajectory split}
@@ -118,7 +120,7 @@ module _
         0ℝ <ℝ
           P2.localOperatorNumerator
             recovery selected directions concreteLocalC round109 embedding convention source
-            (DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact.localOperator
+            (Local.localOperator
               (P2.localPackage recovery selected directions concreteLocalC round109 embedding convention)
               (P2.fieldStrengthSquarePolynomial
                 recovery selected directions concreteLocalC round109 embedding convention source))
@@ -156,7 +158,7 @@ module _
               recovery selected directions concreteLocalC round109 embedding convention))
           hilbertTraceNegative
     in
-    DASHI.Physics.Foundations.CMP119CosmologyRealR136TraceReadoutBridgeExact.reflectNegative
+    Readout.reflectNegative
       (Order.negativeOrderReflectionAtZero realOrder embedding)
       (Continuum.continuumFourDiagonalResponse recovery selected directions)
       embeddedR136Negative
