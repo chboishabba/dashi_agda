@@ -11,19 +11,17 @@ module DASHI.Physics.Foundations.CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimi
 --   (1) finite CMP119 F^2_n -> pinned Local-C F^2 with a vanishing error;
 --   (2) finite CMP119 F^2_n -> physical Haar F^2 with a vanishing error.
 --
--- If these are the SAME finite sequence, uniqueness of the repository's
--- canonical limit gives
+-- If these are pointwise the SAME finite sequence, the canonical limit's
+-- congruence law gives
 --
 --       LocalC(F^2) = physicalHaar(F^2).
 --
--- Strict positivity can therefore be transported from the physical Haar
--- expectation to the renormalized Local-C operator without the false-shaped
--- premise "finite cutoff = continuum renormalized observable".
+-- No function extensionality and no exact finite=continuum identity is needed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _<ℝ_)
 
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteToLocalCAnomalyLimitTransportExact as LocalLimit
@@ -55,8 +53,9 @@ record LocalCF2PhysicalHaarCommonLimit
     : Set₁ where
   field
     sameFiniteF2Sequence :
-      LocalLimit.finiteF2Numerator localTransport
-      ≡ HaarLimit.finiteCMP119Expectation physicalHaar
+      ∀ cutoff →
+      LocalLimit.finiteF2Numerator localTransport cutoff
+      ≡ HaarLimit.finiteCMP119Expectation physicalHaar cutoff
 
 open LocalCF2PhysicalHaarCommonLimit public
 
@@ -91,7 +90,9 @@ localCF2EqualsPhysicalHaarExpectation
     (sym
       (LocalLimit.finiteF2LimitIsPinnedLocalCF2 localTransport))
     (trans
-      (cong (Seq.limit sequenceLimit)
+      (Seq.limitCongruent sequenceLimit
+        (LocalLimit.finiteF2Numerator localTransport)
+        (HaarLimit.finiteCMP119Expectation physicalHaar)
         (sameFiniteF2Sequence common))
       (HaarLimit.physicalHaarExpectationIsFiniteCMP119Limit physicalHaar))
 
@@ -127,8 +128,11 @@ physicalHaarPositiveGivesLocalCF2Positive common physicalPositive =
 exactFiniteEqualsContinuumF2NoLongerRequired : Bool
 exactFiniteEqualsContinuumF2NoLongerRequired = true
 
-p3ReducesToSameFiniteSequenceAndTwoExistingLimitRepresentations : Bool
-p3ReducesToSameFiniteSequenceAndTwoExistingLimitRepresentations = true
+functionExtensionalityNotRequiredForCommonLimit : Bool
+functionExtensionalityNotRequiredForCommonLimit = true
+
+p3ReducesToPointwiseSameFiniteSequenceAndTwoExistingLimitRepresentations : Bool
+p3ReducesToPointwiseSameFiniteSequenceAndTwoExistingLimitRepresentations = true
 
 p3CommonLimitIsOrdinaryAnalysisNotNewAnomalyPhysics : Bool
 p3CommonLimitIsOrdinaryAnalysisNotNewAnomalyPhysics = true
