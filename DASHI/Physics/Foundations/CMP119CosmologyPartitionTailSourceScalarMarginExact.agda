@@ -31,7 +31,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyPartitionTailSourceScalarMarginE
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; _<_)
+  (ℚ; 0ℚ; _+_; _*_; -_; _≤_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
 open import Relation.Binary.PropositionalEquality using (subst; subst₂)
@@ -67,8 +67,8 @@ sourceScalarMarginForcesPartitionTailDominance
     scaledMargin =
       let
         instance
-          zPositiveI : ℚ.Positive z
-          zPositiveI = ℚ.positive zPositive
+          zPositiveI : Positive z
+          zPositiveI = positive zPositive
       in
       subst
         (λ right → ((erbUpper + tail) + vacuumCoefficient) * z < right)
