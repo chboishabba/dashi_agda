@@ -19,23 +19,32 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact as
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
+import DASHI.Physics.YangMills.YangMillsClaySourceNativeA3MaxCutRound504Exact as A3SourceCut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as A3Measure
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as A3MeasureCut
+import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as A3PhysicalRep
 import DASHI.Physics.YangMills.YangMillsClayRepresentedA3Round480Exact as A3
+import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45Source
+import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45Cut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
+import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMaxCutRound505Exact as FiniteOSCut
 
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as BWEXT
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
+import DASHI.Physics.YangMills.YangMillsClayMassGapSemanticMaxCutRound503Exact as BSemCut
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as C
 
 import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact as G1
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as G2
+import DASHI.Physics.YangMills.YangMillsClayNontrivialitySemanticMaxCutRound502Exact as G2Cut
 
 import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as Terminal
+import DASHI.Physics.YangMills.YangMillsClayTerminalContractSemanticMaxCutRound506Exact as Contract
 
 ------------------------------------------------------------------------
 -- A / finite RG, continuum, OS.
@@ -43,7 +52,19 @@ import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as 
 
 aFiniteSymmetryAndRPSourceLevel : ProofLevel
 aFiniteSymmetryAndRPSourceLevel =
-  FiniteOS.literalRound462PublishedFiniteOSApplicationLevel
+  FiniteOSCut.round505FiniteOSAssemblyCompilerLevel
+
+aFiniteEuclideanSameObjectAttachmentLevel : ProofLevel
+aFiniteEuclideanSameObjectAttachmentLevel =
+  FiniteOSCut.literalRound505EuclideanSameObjectAttachmentLevel
+
+aFiniteBosonicSameObjectAttachmentLevel : ProofLevel
+aFiniteBosonicSameObjectAttachmentLevel =
+  FiniteOSCut.literalRound505BosonicSameObjectAttachmentLevel
+
+aFiniteWilsonRPSameObjectAttachmentLevel : ProofLevel
+aFiniteWilsonRPSameObjectAttachmentLevel =
+  FiniteOSCut.literalRound505WilsonRPSameObjectAttachmentLevel
 
 a1CurrentStepBetaSourceLevel : ProofLevel
 a1CurrentStepBetaSourceLevel =
@@ -55,7 +76,23 @@ a2GeneratedHistoryShellIsCMP116BetaMarkLevel =
 
 a3SourceNativeSameFamilyContinuumOSLevel : ProofLevel
 a3SourceNativeSameFamilyContinuumOSLevel =
-  A3Source.literalRound457SourceNativeContinuumOSLevel
+  A3SourceCut.round504SameFamilyRecoveryCompilerLevel
+
+a3StressDensityIsLiteralFiniteMeasureLevel : ProofLevel
+a3StressDensityIsLiteralFiniteMeasureLevel =
+  A3SourceCut.literalRound504StressDensityIsLiteralFiniteMeasureLevel
+
+a3FiniteFamilyContinuumLimitLevel : ProofLevel
+a3FiniteFamilyContinuumLimitLevel =
+  A3SourceCut.literalRound504FiniteFamilyContinuumLimitLevel
+
+a3LiteralSchwingerBelongsLevel : ProofLevel
+a3LiteralSchwingerBelongsLevel =
+  A3SourceCut.literalRound504LiteralSchwingerBelongsLevel
+
+a3SourceOSIsLiteralSchwingerLevel : ProofLevel
+a3SourceOSIsLiteralSchwingerLevel =
+  A3SourceCut.literalRound504SourceOSIsLiteralSchwingerLevel
 
 -- Representation safety is an additional genuine requirement for the physical
 -- expectation-functional carrier: construct an actual countably-additive
@@ -66,7 +103,15 @@ a3CountablyAdditiveRepresentationLevel =
 
 a3FiniteProjectiveCylinderPremeasureLevel : ProofLevel
 a3FiniteProjectiveCylinderPremeasureLevel =
-  A3MeasureCut.literalRound495FiniteProjectivePremeasureLevel
+  A3PhysicalRep.round499ProjectivePremeasureAssemblyLevel
+
+a3CylinderEventIndicatorSemanticsLevel : ProofLevel
+a3CylinderEventIndicatorSemanticsLevel =
+  A3PhysicalRep.literalRound499CylinderEventIndicatorSemanticsLevel
+
+a3ProjectiveEventExpectationConsistencyLevel : ProofLevel
+a3ProjectiveEventExpectationConsistencyLevel =
+  A3PhysicalRep.literalRound499ProjectiveEventExpectationConsistencyLevel
 
 a3ContinuityAtEmptyLevel : ProofLevel
 a3ContinuityAtEmptyLevel =
@@ -82,15 +127,35 @@ a3CylinderExpectationIntegralIdentificationLevel =
 
 a3RepresentedLiteralSemanticsLevel : ProofLevel
 a3RepresentedLiteralSemanticsLevel =
-  A3.literalRound480RepresentedContinuumSemanticsLevel
+  A3Direct.round497RepresentedSourceNativeA3CompilerLevel
 
 a45QuantitativeMomentToFiniteOS05Level : ProofLevel
 a45QuantitativeMomentToFiniteOS05Level =
-  A45Source.literalRound464QuantitativeMomentToOS05Level
+  A45Cut.round500OS05CompilerLevel
+
+a45QuantitativeFiniteExpectationAttachmentLevel : ProofLevel
+a45QuantitativeFiniteExpectationAttachmentLevel =
+  A45Cut.literalRound500QuantitativeFiniteExpectationAttachmentLevel
+
+a4FiniteRegularityFromQuantitativeBoundsLevel : ProofLevel
+a4FiniteRegularityFromQuantitativeBoundsLevel =
+  A45Cut.literalRound500FiniteRegularityFromQuantitativeBoundsLevel
+
+a5FiniteGrowthFromQuantitativeBoundsLevel : ProofLevel
+a5FiniteGrowthFromQuantitativeBoundsLevel =
+  A45Cut.literalRound500FiniteGrowthFromQuantitativeBoundsLevel
 
 a45RepresentedOSPredicateExtensionalityLevel : ProofLevel
 a45RepresentedOSPredicateExtensionalityLevel =
-  A45.literalRound481ExtensionalOSMeaningLevel
+  A45Ext.round501RepresentedOSTransportCompilerLevel
+
+a4RepresentedRegularityExtensionalityLevel : ProofLevel
+a4RepresentedRegularityExtensionalityLevel =
+  A45Ext.literalRound501RegularityExtensionalityLevel
+
+a5RepresentedGrowthExtensionalityLevel : ProofLevel
+a5RepresentedGrowthExtensionalityLevel =
+  A45Ext.literalRound501GrowthExtensionalityLevel
 
 ------------------------------------------------------------------------
 -- B / published literal CMP116 -> same-H positive transfer gap.
@@ -199,6 +264,10 @@ independentFourthCumulantMandatory = false
 round485RepresentedTerminalCompilerLevel : ProofLevel
 round485RepresentedTerminalCompilerLevel =
   Terminal.round484RepresentedTerminalCompilerLevel
+
+terminalContractSemanticInventoryLevel : ProofLevel
+terminalContractSemanticInventoryLevel =
+  Contract.round506TerminalSemanticInventoryCompilerLevel
 
 round485MaximumCutCompilerLevel : ProofLevel
 round485MaximumCutCompilerLevel = machineChecked

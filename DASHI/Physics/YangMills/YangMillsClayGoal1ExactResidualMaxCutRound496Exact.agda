@@ -39,7 +39,6 @@ import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45R
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
-import DASHI.Physics.YangMills.BalabanWilsonSourceFirstWEXTMaxCutExact as SourceFirstWEXT
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
 import DASHI.Physics.YangMills.YangMillsClayMassGapSemanticMaxCutRound503Exact as BSemCut
@@ -399,32 +398,6 @@ nontrivialitySemanticAssemblyLevel =
 caratheodoryExtensionLevel : ProofLevel
 caratheodoryExtensionLevel =
   Measure.round495CaratheodoryExtensionAuthorityLevel
-
-
--- Source-first refinement of the two coarse WEXT residual leaves.
-wextSourceFirstKPDatumConstructionLevel : ProofLevel
-wextSourceFirstKPDatumConstructionLevel =
-  SourceFirstWEXT.sourceFirstKPDatumConstructionLevel
-
-wextLiteralTerminalKPFamilyInstantiationLevel : ProofLevel
-wextLiteralTerminalKPFamilyInstantiationLevel =
-  SourceFirstWEXT.literalTerminalKPFamilyInstantiationLevel
-
-wextCommonDomainTwoWilsonDifferentiationLevel : ProofLevel
-wextCommonDomainTwoWilsonDifferentiationLevel =
-  SourceFirstWEXT.commonDomainTwoWilsonDifferentiationLevel
-
-wextPointwiseCMP116ClusterChargeLevel : ProofLevel
-wextPointwiseCMP116ClusterChargeLevel =
-  SourceFirstWEXT.pointwiseCMP116ClusterChargeLevel
-
-wextSummedCMP116ChargeBelowPhysicalRootedShellLevel : ProofLevel
-wextSummedCMP116ChargeBelowPhysicalRootedShellLevel =
-  SourceFirstWEXT.summedCMP116ChargeBelowPhysicalRootedShellLevel
-
-wextLiteralMarkedKPGeneratingFunctionalSameObjectLevel : ProofLevel
-wextLiteralMarkedKPGeneratingFunctionalSameObjectLevel =
-  SourceFirstWEXT.literalMarkedKPGeneratingFunctionalSameObjectLevel
 
 wextFiniteTriangleLevel : ProofLevel
 wextFiniteTriangleLevel =
