@@ -10,6 +10,7 @@ targets=(
   DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda
   DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda
   DASHI/Moonshine/OggSSP2BDefectRecognitionAmbiguityExact.agda
+  DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda
   DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda
   DASHI/Moonshine/OggSSP2BSameObjectMaxCutFrontierExact.agda
 )
@@ -45,21 +46,26 @@ grep -q 'matchingNumbersDoNotConstructModeRecognition' "${targets[3]}"
 grep -q 'defectCompatibleChartCountIsFour' "${targets[4]}"
 grep -q 'fourCompatibleChartsDoNotSelectActualSourceChart' "${targets[4]}"
 
-grep -q 'apparentParityConflictResolved' "${targets[5]}"
-grep -q 'currentWeightTwoH0OrientationRetained' "${targets[5]}"
-grep -q 'currentWeightThreeH1OrientationRetained' "${targets[5]}"
-grep -q 'parityConventionShiftIsRequired' "${targets[5]}"
+grep -q 'provenanceChoiceCountIsFour' "${targets[5]}"
+grep -q 'orderFourIsForced' "${targets[5]}"
+grep -q 'toFiveModeRecognition' "${targets[5]}"
+grep -q 'defectProfileDoesNotConstructTwoProvenanceBits' "${targets[5]}"
 
-grep -q 'externalIntegralLocalActionSourced' "${targets[6]}"
-grep -q 'tenDimensionalFactorMultiplicityIsTen' "${targets[6]}"
-grep -q 'bareM22CompletionRouteKilled' "${targets[6]}"
-grep -q 'm22d2FiniteCompletionPhaseObserved' "${targets[6]}"
-grep -q 'm22d2OuterFivePairBasisVerified' "${targets[6]}"
-grep -q 'defectCompatibleChartCountIsFour' "${targets[6]}"
-grep -q 'formalIntegralTateCarrierWeldStillOpen' "${targets[6]}"
-grep -q 'actualTenSubquotientStillOpen' "${targets[6]}"
-grep -q 'actualTateCompletionActionStillOpen' "${targets[6]}"
-grep -q 'actualModeDefectRecognitionStillOpen' "${targets[6]}"
-grep -q 'thirtyToP31StillObserverOnly' "${targets[6]}"
+grep -q 'apparentParityConflictResolved' "${targets[6]}"
+grep -q 'currentWeightTwoH0OrientationRetained' "${targets[6]}"
+grep -q 'currentWeightThreeH1OrientationRetained' "${targets[6]}"
+grep -q 'parityConventionShiftIsRequired' "${targets[6]}"
+
+grep -q 'externalIntegralLocalActionSourced' "${targets[7]}"
+grep -q 'tenDimensionalFactorMultiplicityIsTen' "${targets[7]}"
+grep -q 'bareM22CompletionRouteKilled' "${targets[7]}"
+grep -q 'm22d2FiniteCompletionPhaseObserved' "${targets[7]}"
+grep -q 'm22d2OuterFivePairBasisVerified' "${targets[7]}"
+grep -q 'defectCompatibleChartCountIsFour' "${targets[7]}"
+grep -q 'formalIntegralTateCarrierWeldStillOpen' "${targets[7]}"
+grep -q 'actualTenSubquotientStillOpen' "${targets[7]}"
+grep -q 'actualTateCompletionActionStillOpen' "${targets[7]}"
+grep -q 'actualModeDefectRecognitionStillOpen' "${targets[7]}"
+grep -q 'thirtyToP31StillObserverOnly' "${targets[7]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
