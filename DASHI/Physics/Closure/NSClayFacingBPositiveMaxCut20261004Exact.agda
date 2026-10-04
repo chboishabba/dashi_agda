@@ -9,6 +9,8 @@ module DASHI.Physics.Closure.NSClayFacingBPositiveMaxCut20261004Exact where
 --     unordered physical pair rows retaining their actual shell indices;
 --   * those exact rows compile into the existing B1/B2/B3 payment records, so
 --     analytic producers no longer restate live-block same-object equalities;
+--   * B4's arbitrary `signedOperatorValue` alias is eliminated: the strict
+--     certificate now targets the literal `criticalTouchingSigned` scalar;
 --   * R498 closes B7 finite output aggregation on the literal R406 carrier;
 --   * the attempted universal direct-companion = coherent-covariance equality
 --     is rejected by the R289/R611 degree audit (5 versus 4);
@@ -20,7 +22,7 @@ module DASHI.Physics.Closure.NSClayFacingBPositiveMaxCut20261004Exact where
 --   B1  extracted rows -> literal shell/Bernstein payment + local ED allocation,
 --   B2  signed DFL-DHH per-shell estimate on the extracted rows,
 --   B3  signed DHH intra-shell L2 aggregation on the extracted rows,
---   B4  strict critical touching operator estimate with theta < 1,
+--   B4  literal strict inequality with one common 0 <= theta < 1,
 --   B7  ONE valid R406 producer route:
 --         (Q5) direct signed quintic spacetime budget, OR
 --         (Q4+E) quartic Gram + weighted-flux endpoint bounds,
@@ -39,7 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRo
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as B2
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as B3
-import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact as B4
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutExact as B4
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact as B7Direct
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact as B7Boundary
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutExact as B7Dynamic
@@ -66,7 +68,7 @@ positiveBLeafClosed b2ExtractedDFLDHHPerShellSignedEstimate =
 positiveBLeafClosed b3ExtractedDHHIntraShellSignedL2 =
   B3.deepHHIntraShellSignedL2AggregationInhabitedHere
 positiveBLeafClosed b4StrictCriticalSignedOperator =
-  B4.criticalTouchingStrictOperatorCertificateInhabitedHere
+  B4.b4DirectStrictEstimateClosedHere
 positiveBLeafClosed b7OneValidR406Producer =
   boolOr B7Producer.b7DirectSignedQuinticRouteClosed
     B7Producer.b7QuarticGramEndpointRouteClosed
@@ -92,6 +94,13 @@ pairRowsRetainActualShellIndices = Extract.literalRowsRetainActualShellIndices
 b1B3LiveBlockSameObjectFieldsCompiledFromRows : Bool
 b1B3LiveBlockSameObjectFieldsCompiledFromRows =
   RowCompiler.b1B3LiveBlockSameObjectFieldsCompiledFromRows
+
+b4ArbitraryOperatorAliasEliminated : Bool
+b4ArbitraryOperatorAliasEliminated = B4.b4ArbitrarySignedOperatorAliasEliminated
+
+b4LegacyCompilerReusableFromDirectCertificate : Bool
+b4LegacyCompilerReusableFromDirectCertificate =
+  B4.b4LegacyCompilerReusableFromDirectCertificate
 
 r406GlobalAggregationClosed : Bool
 r406GlobalAggregationClosed = B7Direct.b7R406GlobalAggregationClosed
@@ -132,8 +141,7 @@ b3SignedIntraShellL2Closed =
   B3.deepHHIntraShellSignedL2AggregationInhabitedHere
 
 b4StrictMarginClosed : Bool
-b4StrictMarginClosed =
-  B4.criticalTouchingStrictOperatorCertificateInhabitedHere
+b4StrictMarginClosed = B4.b4DirectStrictEstimateClosedHere
 
 b7DirectSignedQuinticRouteClosed : Bool
 b7DirectSignedQuinticRouteClosed =
@@ -167,11 +175,11 @@ currentExecutionPriority = prerequisitePhysicalPayments
 highestInformationResearchWall : PositiveBPriority
 highestInformationResearchWall = strictCriticalMargin
 
-genericRepresentationWorkRemainingInB1B3 : Bool
-genericRepresentationWorkRemainingInB1B3 = false
+genericRepresentationWorkRemainingInB1B4 : Bool
+genericRepresentationWorkRemainingInB1B4 = false
 
 b4RequiresStrictThetaBelowOne : Bool
-b4RequiresStrictThetaBelowOne = true
+b4RequiresStrictThetaBelowOne = B4.b4RequiresStrictThetaBelowOne
 
 b7UniversalEqualityRouteRejectedByHomogeneity : Bool
 b7UniversalEqualityRouteRejectedByHomogeneity = true
@@ -196,6 +204,10 @@ b1B3LiveBlockSameObjectFieldsCompiledFromRowsIsTrue :
   b1B3LiveBlockSameObjectFieldsCompiledFromRows ≡ true
 b1B3LiveBlockSameObjectFieldsCompiledFromRowsIsTrue = refl
 
+b4ArbitraryOperatorAliasEliminatedIsTrue :
+  b4ArbitraryOperatorAliasEliminated ≡ true
+b4ArbitraryOperatorAliasEliminatedIsTrue = refl
+
 r406GlobalAggregationClosedIsTrue : r406GlobalAggregationClosed ≡ true
 r406GlobalAggregationClosedIsTrue = refl
 
@@ -215,9 +227,9 @@ b7QuarticGramEndpointCompilerAvailableIsTrue :
   b7QuarticGramEndpointCompilerAvailable ≡ true
 b7QuarticGramEndpointCompilerAvailableIsTrue = refl
 
-genericRepresentationWorkRemainingInB1B3IsFalse :
-  genericRepresentationWorkRemainingInB1B3 ≡ false
-genericRepresentationWorkRemainingInB1B3IsFalse = refl
+genericRepresentationWorkRemainingInB1B4IsFalse :
+  genericRepresentationWorkRemainingInB1B4 ≡ false
+genericRepresentationWorkRemainingInB1B4IsFalse = refl
 
 b4RequiresStrictThetaBelowOneIsTrue : b4RequiresStrictThetaBelowOne ≡ true
 b4RequiresStrictThetaBelowOneIsTrue = refl
