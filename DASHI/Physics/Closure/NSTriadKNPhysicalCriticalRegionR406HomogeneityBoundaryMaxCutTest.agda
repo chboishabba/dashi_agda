@@ -11,3 +11,7 @@ universalEqualityRejected = refl
 quantitativeTransportRequired :
   Cut.b7RequiresDynamicOrQuantitativeTransport ≡ true
 quantitativeTransportRequired = refl
+
+quantitativeTransportStillOpen :
+  Cut.b7DynamicOrQuantitativeTransportClosed ≡ false
+quantitativeTransportStillOpen = refl
