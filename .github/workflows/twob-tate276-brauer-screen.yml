@@ -1,0 +1,41 @@
+name: 2B Tate 276 Brauer screen
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/j369-ogg-address-ssp15-no-go-20260925
+    paths:
+      - 'scripts/twob_tate276_m24_brauer_character_screen.g'
+      - 'scripts/check_twob_tate276_m24_brauer_character_screen.sh'
+      - '.github/workflows/twob-tate276-brauer-screen.yml'
+  pull_request:
+    paths:
+      - 'scripts/twob_tate276_m24_brauer_character_screen.g'
+      - 'scripts/check_twob_tate276_m24_brauer_character_screen.sh'
+      - '.github/workflows/twob-tate276-brauer-screen.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  screen:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install GAP and CTblLib
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-character-tables
+      - name: Run class-fusion / Brauer-character screen
+        run: bash scripts/check_twob_tate276_m24_brauer_character_screen.sh
+      - name: Upload runtime certificate JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: twob-tate276-m24-brauer-character-screen
+          path: build/twob_tate276_m24_brauer_character_screen.json
+          if-no-files-found: warn
