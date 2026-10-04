@@ -257,3 +257,5 @@ import DASHI.Core.ParityLaneEigenOperatorCore
 import DASHI.Core.Prelude
 import DASHI.Visual.ColourPerceptionDASHI
 import DASHI.Visual.RepositoryEvolutionEverything
+import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt
+import DASHI.Physics.Closure.WolfPrize2026UltracoldControlBridge
