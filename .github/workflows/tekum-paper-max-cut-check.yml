@@ -74,6 +74,7 @@ jobs:
               DASHI/ComputerScience/TekumParsedAnchorListExact.agda
               DASHI/ComputerScience/TekumParsedAdjacentCarryExtractExact.agda
               DASHI/ComputerScience/TekumMonotonicityExact.agda
+              DASHI/ComputerScience/TekumProposition4PositiveChainExact.agda
               DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
               DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda
             )
