@@ -14,7 +14,7 @@ residualBoardCompilerMachineChecked = refl
 
 residualLeafCountIsSixtyEight :
   R496.residualLeafCount ≡ 68
-residualLeafCountIsThirty = refl
+residualLeafCountIsSixtyEight = refl
 
 constructorEqualitiesPruned :
   R496.constructorChoiceEqualitiesCountedAsResidualLeaves ≡ false
