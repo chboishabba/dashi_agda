@@ -255,15 +255,7 @@ import DASHI.Biology.WorldRegularityHyperformalismCrossPollinationExact
 import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact
 
 ------------------------------------------------------------------------
--- Chegen / Walsh undermethylation reel: attributed source separation,
--- one-carbon/SAM/histamine network, assertion cone, and BIDI inverse residual.
-import DASHI.Biology.ChegenWalshUndermethylationSourceAtlasExact
-import DASHI.Biology.OneCarbonHistamineMethylationNetworkExact
-import DASHI.Biology.ChegenWalshUndermethylationAssertionConeExact
-import DASHI.Biology.ChegenWalshUndermethylationBidiResidualExact
-
-import DASHI.Biology.HistamineCompartmentClearanceExact
-import DASHI.Biology.MonoamineBiosynthesisPathSeparationExact
-import DASHI.Biology.MethylDonorEpigeneticWeldExact
-import DASHI.Biology.WalshObservableCollisionExact
-import DASHI.Biology.WalshPhenotypeEvidenceAuditExact
+-- PMDD steroid-sensitivity / histamine-amplification candidate.
+import DASHI.Biology.PMDDHistamineAmplificationExact
+import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact
+import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact
