@@ -28,6 +28,17 @@ import DASHI.Economics.AIScalingLawRegimeMonitorExact
 import DASHI.Economics.AIScalingEvidenceAuthorityCrossPollinationExact
 import DASHI.Economics.AIInfrastructureRegimeClassifierExact
 
+-- Global funding / open-model / regulatory-political-economy synthesis.
+import DASHI.Economics.GlobalFundingLiquidityRealisationExact
+import DASHI.Economics.AIUbiquityRentInversionExact
+import DASHI.Economics.AISafetyRegulatoryMoatGameExact
+import DASHI.Economics.JPYJGBTreasuryFundingTransmission2026Exact
+import DASHI.Economics.AIEnergyInfrastructureFundingStress2026Exact
+import DASHI.Economics.AgentAccessBoundaryLegalMechanismExact
+import DASHI.Economics.GeopoliticalEnergyAITreasuryTransmissionExact
+import DASHI.Economics.AIGlobalPoliticalEconomySourceAtlas2026Exact
+import DASHI.Economics.AIGlobalFundingRegulatorySynthesisExact
+
 -- Source-bounded current-regime calibrations.  Each application owner retains
 -- its own source/interpretation/promotional boundaries.
 import DASHI.Economics.MicrosoftCloudAIMarginPressure2026Exact
