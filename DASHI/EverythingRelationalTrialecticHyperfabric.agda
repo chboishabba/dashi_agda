@@ -3,7 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.
+-- This is an aggregate import only.  It does not strengthen any source claim.\n-- Disambiguation verification root: categorical level, causal status, bridge grade.
 -- In particular:
 --   * citations do not import proof or authority;
 --   * a general relational architecture is not a trauma-causal theorem;
