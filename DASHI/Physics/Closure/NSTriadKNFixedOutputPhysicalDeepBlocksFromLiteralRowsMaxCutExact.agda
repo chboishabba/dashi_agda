@@ -17,6 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRo
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
@@ -66,19 +67,17 @@ module FromLiteralRows
       shellBudgetsPaidByLocalED :
         FF.sumShellBudget receipts ≤ coefficient * localED
 
-  open B1LiteralRowPayment public
-
   b1RowsBuildExistingLeaf :
     B1LiteralRowPayment → FF.PhysicalDeepFarLowLiteralShellData
   b1RowsBuildExistingLeaf D = record
-    { FF.receipts = receipts D
-    ; FF.coefficient = coefficient D
-    ; FF.localED = localED D
+    { FF.receipts = B1LiteralRowPayment.receipts D
+    ; FF.coefficient = B1LiteralRowPayment.coefficient D
+    ; FF.localED = B1LiteralRowPayment.localED D
     ; FF.liveBlockIsLiteralShellMass =
         trans X.b1LiveBlockIsLiteralRows
-          (sym (shellMassesAreExtractedRows D))
+          (sym (B1LiteralRowPayment.shellMassesAreExtractedRows D))
     ; FF.literalShellBudgetsPaidByLocalED =
-        shellBudgetsPaidByLocalED D
+        B1LiteralRowPayment.shellBudgetsPaidByLocalED D
     }
 
   ----------------------------------------------------------------------
@@ -97,19 +96,17 @@ module FromLiteralRows
       shellPairBudgetsPaidByLocalED :
         FH.sumBudget receipts ≤ coefficient * localED
 
-  open B2LiteralRowPayment public
-
   b2RowsBuildExistingLeaf :
     B2LiteralRowPayment → FH.PhysicalDeepFarLowDeepHHFractionalShellData
   b2RowsBuildExistingLeaf D = record
-    { FH.receipts = receipts D
-    ; FH.coefficient = coefficient D
-    ; FH.localED = localED D
+    { FH.receipts = B2LiteralRowPayment.receipts D
+    ; FH.coefficient = B2LiteralRowPayment.coefficient D
+    ; FH.localED = B2LiteralRowPayment.localED D
     ; FH.liveBlockIsShellPairSum =
         trans X.b2LiveBlockIsLiteralRows
-          (sym (shellPairMassesAreExtractedRows D))
+          (sym (B2LiteralRowPayment.shellPairMassesAreExtractedRows D))
     ; FH.shellPairBudgetsPaidByLocalED =
-        shellPairBudgetsPaidByLocalED D
+        B2LiteralRowPayment.shellPairBudgetsPaidByLocalED D
     }
 
   ----------------------------------------------------------------------
@@ -128,19 +125,17 @@ module FromLiteralRows
       shellBudgetsPaidByLocalED :
         HH.sumBudget receipts ≤ coefficient * localED
 
-  open B3LiteralRowPayment public
-
   b3RowsBuildExistingLeaf :
     B3LiteralRowPayment → HH.PhysicalDeepHHFractionalShellData
   b3RowsBuildExistingLeaf D = record
-    { HH.receipts = receipts D
-    ; HH.coefficient = coefficient D
-    ; HH.localED = localED D
+    { HH.receipts = B3LiteralRowPayment.receipts D
+    ; HH.coefficient = B3LiteralRowPayment.coefficient D
+    ; HH.localED = B3LiteralRowPayment.localED D
     ; HH.liveBlockIsShellSum =
         trans X.b3LiveBlockIsLiteralRows
-          (sym (shellMassesAreExtractedRows D))
+          (sym (B3LiteralRowPayment.shellMassesAreExtractedRows D))
     ; HH.shellBudgetsPaidByLocalED =
-        shellBudgetsPaidByLocalED D
+        B3LiteralRowPayment.shellBudgetsPaidByLocalED D
     }
 
 ------------------------------------------------------------------------
