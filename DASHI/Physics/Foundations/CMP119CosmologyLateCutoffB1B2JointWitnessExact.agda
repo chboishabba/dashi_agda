@@ -48,8 +48,6 @@ module _
     (embedding : Additive.OrderedAdditiveRationalRealEmbedding)
   where
 
-  module Same = B1 family source observable embedding
-
   record LateCutoffB1B2Witness
       (completed : ℚ)
       (finiteRationalDGamma : Nat → ℚ)
@@ -70,8 +68,10 @@ module _
     (limitOrder : B1.RealTailLimitOrderAuthority sequenceLimit) →
     (tailDecay : B2.R109TailEventuallyFitsStrictGap source) →
     ∀ {completed finiteRationalDGamma base ceiling} →
-    Same.SelectedR109SameSequenceCompletion completed →
-    Same.AllCutoffR144FiniteExpectationAttachment finiteRationalDGamma →
+    B1.SelectedR109SameSequenceCompletion
+      family source observable embedding completed →
+    B1.AllCutoffR144FiniteExpectationAttachment
+      family source observable embedding finiteRationalDGamma →
     base < ceiling →
     LateCutoffB1B2Witness completed finiteRationalDGamma base ceiling
   compileLateCutoffB1B2Witness
@@ -84,7 +84,8 @@ module _
     in record
       { LateCutoffB1B2Witness.cutoff = k
       ; LateCutoffB1B2Witness.b1Anchor =
-          Same.directAnchorAtAnyCutoff
+          B1.directAnchorAtAnyCutoff
+            family source observable embedding
             limitOrder sameSequence finiteAttachment k
       ; LateCutoffB1B2Witness.b2CoefficientMargin = margin
       }
