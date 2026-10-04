@@ -80,6 +80,9 @@ module EndpointSplit
       (R408.LiteralDynamics.literalPhysicalTrajectory
         Time initialTime integrateTo VectorDerivativeOf D)) where
 
+  module Literal = R408.LiteralDynamics
+    Time initialTime integrateTo VectorDerivativeOf
+
   module C = FTCCompiler.Q4EFTCCompiler
     Time initialTime integrateTo
     VectorDerivativeOf ScalarDerivativeOf
@@ -89,7 +92,7 @@ module EndpointSplit
   module LiveQ4E = Q4E.LiveNormalForm
     Time initialTime integrateTo VectorDerivativeOf integration
 
-  T = R408.LiteralDynamics.literalPhysicalTrajectory D
+  T = Literal.literalPhysicalTrajectory D
 
   record SplitQ4EAnalyticBounds : Set₁ where
     field
