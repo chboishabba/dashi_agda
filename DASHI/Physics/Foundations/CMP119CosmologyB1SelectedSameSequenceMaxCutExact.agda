@@ -27,7 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_; _≤ℝ_)
 
@@ -78,16 +78,12 @@ module _
   record SelectedR109SameSequenceCompletion
       (completedRationalExpectation : ℚ) : Set₁ where
     field
-      -- Source-semantics theorem: the Round109 local-response telescope is
-      -- really controlling the actual selected finite expectation sequence.
       finiteFutureBelowStartPlusTail :
         ∀ start count →
         C.finiteR109Expectation (start + count)
         ≤ℝ
         C.finiteR109Expectation start +ℝ C.embeddedR109Tail start
 
-      -- Same-object endpoint theorem: the rational completed response used by
-      -- R130/R136 is the canonical real limit of this exact finite sequence.
       completedIsSelectedFiniteExpectationLimit :
         Embed.embed baseEmbedding completedRationalExpectation
         ≡
@@ -127,7 +123,7 @@ module _
           in
           subst
             (λ value → value ≤ℝ upper)
-            (completedIsSelectedFiniteExpectationLimit sameSequence)
+            (sym (completedIsSelectedFiniteExpectationLimit sameSequence))
             fullLimitBelow
     }
 
