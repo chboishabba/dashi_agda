@@ -1,0 +1,11 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261005STest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261005SExact as S
+
+novelCountRegression = S.remainingNovelSourceAttachmentCount
+standardCountRegression = S.remainingStandardImportedAuthorityCount
+s1Regression = S.s1IsActualB4EquivariantSourcePathAttachment
+s2Regression = S.s2IsStandardRenormalizedHilbertWeylWardAuthority
+s3aRegression = S.s3aIsSelectedMarkedF2SourceAtR129
+s3bRegression = S.s3bIsFiniteSourceExpectationToPhysicalHaarRepresentation
