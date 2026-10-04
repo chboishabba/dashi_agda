@@ -185,7 +185,11 @@ orderFourAssignmentIsForced :
 orderFourAssignmentIsForced = DefectBits.orderFourIsForced
 
 centralSignShortcutStillKilled :
-  CentralSignNoGo.CompletionModePreservingPhaseIsCentralSignOnStrata → ⊥
+  (bits : DefectBits.ProvenanceBits) →
+  ((mode : Completion.ComplementMode5) →
+    CentralSignNoGo.centralSignOnStratum (DefectBits.chartFromBits bits mode)
+    ≡ DefectBits.chartFromBits bits mode) →
+  ⊥
 centralSignShortcutStillKilled =
   CentralSignNoGo.completionModePreservingPhaseIsNotCentralSignOnStrata
 
