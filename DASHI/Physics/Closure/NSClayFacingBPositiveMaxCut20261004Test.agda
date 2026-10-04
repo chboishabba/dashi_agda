@@ -18,3 +18,12 @@ b7UniversalEqualityRejected = refl
 
 b7TransportRequired : Cut.b7DynamicOrQuantitativeTransportRequired ≡ true
 b7TransportRequired = refl
+
+b7DynamicAlgebraPaid : Cut.b7DebtPlusFluxTangentDecompositionClosed ≡ true
+b7DynamicAlgebraPaid = refl
+
+b7FluxDerivativeStillOpen : Cut.b7ActualFluxDerivativeClosed ≡ false
+b7FluxDerivativeStillOpen = refl
+
+b7QuarticDebtStillOpen : Cut.b7QuarticGramDebtPaymentClosed ≡ false
+b7QuarticDebtStillOpen = refl
