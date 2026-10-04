@@ -54,6 +54,7 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Moonshine.OggSSP2BPureKleinFourThreeTateFibreExact as Three
 import DASHI.Moonshine.OggSSP2BM22RuntimeMaxCutReceiptExact as Runtime
 import DASHI.Moonshine.OggSSP2BM22d2Completion10RuntimeReceiptExact as CompletionRuntime
@@ -179,8 +180,7 @@ remainingDefectSourceDecisionCountIsTwo = refl
 
 orderFourAssignmentIsForced :
   (bits : DefectBits.ProvenanceBits) →
-  DefectBits.chartFromBits bits
-    DASHI.Biology.NonaryCompletionPhaseQuotientExact.mode27
+  DefectBits.chartFromBits bits Completion.mode27
   ≡ DefectSource.orderFour
 orderFourAssignmentIsForced = DefectBits.orderFourIsForced
 
