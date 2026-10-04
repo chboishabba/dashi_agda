@@ -7,32 +7,41 @@ module DASHI.Physics.Closure.NSClayFacingBPositiveMaxCut20261004Exact where
 --
 --   * the three live deep-only R236 scalars are reconstructed as literal
 --     unordered physical pair rows retaining their actual shell indices;
---   * B7 finite output aggregation is reduced through the existing R498 exact
---     remainder identity to one per-output direct-companion/covariance weld.
+--   * those exact rows compile into the existing B1/B2/B3 payment records, so
+--     analytic producers no longer restate live-block same-object equalities;
+--   * R498 already closes B7 finite output aggregation on the literal R406
+--     weighted-remainder carrier.
 --
--- Therefore the surviving positive B leaves are no longer generic extraction
--- or global summation problems.  They are:
+-- The attempted final B7 equality between the direct resolvent companion and
+-- live coherent covariance is NOT a valid universal same-object producer:
+-- the existing R289/R611 homogeneity audit puts the R406 nonlinear remainder
+-- at velocity degree 5 and the coherent covariance at degree 4.  B7 is therefore
+-- recut to a trajectory-specific dynamic transport or quantitative inequality.
 --
---   B1  rows -> literal infinity-shell Bernstein data + local ED allocation,
+-- Surviving positive B leaves:
+--
+--   B1  extracted rows -> literal shell/Bernstein payment + local ED allocation,
 --   B2  signed DFL-DHH per-shell estimate on the extracted rows,
 --   B3  signed DHH intra-shell L2 aggregation on the extracted rows,
 --   B4  strict critical touching operator estimate with theta < 1,
---   B7  per-output direct-resolvent-companion = live covariance same-object,
+--   B7  dynamic/quantitative transport of the literal quintic R406 remainder,
 --   Bcont continuum/periodic continuation inputs.
 --
--- B4 remains the highest-information analytic wall.  B1-B3 are prerequisite
--- physical payments; B7 is now a local semantic weld rather than a global one.
+-- B4 remains the highest-information strict analytic wall.  B7 is no longer
+-- misclassified as a representation weld.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionLiteralPairExtractionMaxCutExact as Extract
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutExact as RowCompiler
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as B2
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as B3
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact as B4
-import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact as B7
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact as B7Direct
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact as B7
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
 
 data PositiveBLeaf : Set where
@@ -40,7 +49,7 @@ data PositiveBLeaf : Set where
   b2ExtractedDFLDHHPerShellSignedEstimate : PositiveBLeaf
   b3ExtractedDHHIntraShellSignedL2 : PositiveBLeaf
   b4StrictCriticalSignedOperator : PositiveBLeaf
-  b7PerOutputDirectCompanionCovarianceWeld : PositiveBLeaf
+  b7DynamicOrQuantitativeR406Transport : PositiveBLeaf
   bContinuationInputs : PositiveBLeaf
 
 positiveBLeafClosed : PositiveBLeaf → Bool
@@ -52,8 +61,8 @@ positiveBLeafClosed b3ExtractedDHHIntraShellSignedL2 =
   B3.deepHHIntraShellSignedL2AggregationInhabitedHere
 positiveBLeafClosed b4StrictCriticalSignedOperator =
   B4.criticalTouchingStrictOperatorCertificateInhabitedHere
-positiveBLeafClosed b7PerOutputDirectCompanionCovarianceWeld =
-  B7.b7PerOutputDirectCompanionCovarianceWeldClosed
+positiveBLeafClosed b7DynamicOrQuantitativeR406Transport =
+  B7.b7DynamicOrQuantitativeTransportClosed
 positiveBLeafClosed bContinuationInputs =
   Continuum.periodicContinuumBKMCompletionInputsInhabited
 
@@ -77,16 +86,28 @@ pairRowsRetainActualShellIndices : Bool
 pairRowsRetainActualShellIndices =
   Extract.literalRowsRetainActualShellIndices
 
+b1B3LiveBlockSameObjectFieldsCompiledFromRows : Bool
+b1B3LiveBlockSameObjectFieldsCompiledFromRows =
+  RowCompiler.b1B3LiveBlockSameObjectFieldsCompiledFromRows
+
 r406GlobalAggregationClosed : Bool
 r406GlobalAggregationClosed =
-  B7.b7R406GlobalAggregationClosed
+  B7Direct.b7R406GlobalAggregationClosed
 
 r406LiteralR498CarrierReused : Bool
 r406LiteralR498CarrierReused =
-  B7.b7R498LiteralRemainderCarrierReused
+  B7Direct.b7R498LiteralRemainderCarrierReused
+
+b7UniversalSameObjectEqualityAdmissible : Bool
+b7UniversalSameObjectEqualityAdmissible =
+  B7.b7UniversalDirectCompanionCovarianceEqualityAdmissible
+
+b7DynamicOrQuantitativeTransportRequired : Bool
+b7DynamicOrQuantitativeTransportRequired =
+  B7.b7RequiresDynamicOrQuantitativeTransport
 
 ------------------------------------------------------------------------
--- Genuine remaining analytic / semantic leaves.
+-- Genuine remaining analytic / dynamic leaves.
 ------------------------------------------------------------------------
 
 b1LiteralShellPhysicalPaymentClosed : Bool
@@ -105,9 +126,9 @@ b4StrictMarginClosed : Bool
 b4StrictMarginClosed =
   B4.criticalTouchingStrictOperatorCertificateInhabitedHere
 
-b7LocalSameObjectClosed : Bool
-b7LocalSameObjectClosed =
-  B7.b7PerOutputDirectCompanionCovarianceWeldClosed
+b7DynamicTransportClosed : Bool
+b7DynamicTransportClosed =
+  B7.b7DynamicOrQuantitativeTransportClosed
 
 continuationInputsClosed : Bool
 continuationInputsClosed =
@@ -120,7 +141,7 @@ continuationInputsClosed =
 data PositiveBPriority : Set where
   prerequisitePhysicalPayments : PositiveBPriority
   strictCriticalMargin : PositiveBPriority
-  localR406SemanticWeld : PositiveBPriority
+  dynamicR406Transport : PositiveBPriority
   continuation : PositiveBPriority
 
 currentExecutionPriority : PositiveBPriority
@@ -135,6 +156,9 @@ genericRepresentationWorkRemainingInB1B3 = false
 b4RequiresStrictThetaBelowOne : Bool
 b4RequiresStrictThetaBelowOne = true
 
+b7UniversalEqualityRouteRejectedByHomogeneity : Bool
+b7UniversalEqualityRouteRejectedByHomogeneity = true
+
 r823ReserveMachineryShouldReopen : Bool
 r823ReserveMachineryShouldReopen = false
 
@@ -148,8 +172,20 @@ clayPromotion = false
 deepPairExtractionClosedIsTrue : deepPairExtractionClosed ≡ true
 deepPairExtractionClosedIsTrue = refl
 
+b1B3LiveBlockSameObjectFieldsCompiledFromRowsIsTrue :
+  b1B3LiveBlockSameObjectFieldsCompiledFromRows ≡ true
+b1B3LiveBlockSameObjectFieldsCompiledFromRowsIsTrue = refl
+
 r406GlobalAggregationClosedIsTrue : r406GlobalAggregationClosed ≡ true
 r406GlobalAggregationClosedIsTrue = refl
+
+b7UniversalSameObjectEqualityAdmissibleIsFalse :
+  b7UniversalSameObjectEqualityAdmissible ≡ false
+b7UniversalSameObjectEqualityAdmissibleIsFalse = refl
+
+b7DynamicOrQuantitativeTransportRequiredIsTrue :
+  b7DynamicOrQuantitativeTransportRequired ≡ true
+b7DynamicOrQuantitativeTransportRequiredIsTrue = refl
 
 genericRepresentationWorkRemainingInB1B3IsFalse :
   genericRepresentationWorkRemainingInB1B3 ≡ false
