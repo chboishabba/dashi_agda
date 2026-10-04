@@ -11,6 +11,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyB1SelectedSameSequenceMaxCutTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLateCutoffB1B2JointWitnessExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLateCutoffB1B2JointWitnessTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NTest.agda'
       - '.github/workflows/cmp119-cosmology-preferred-source-overlay-n.yml'
@@ -53,6 +55,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyB1SelectedSameSequenceMaxCutTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyB2StrictSourceGapEventuallyPaysTailTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLateCutoffB1B2JointWitnessExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLateCutoffB1B2JointWitnessTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NTest.agda
             do
