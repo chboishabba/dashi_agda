@@ -3,4 +3,5 @@ module DASHI.Cognition.PNF.SensibLawSourceMaterialisationEverything where
 import DASHI.Cognition.PNF.SensibLawOALCPostgresPersistenceExact
 import DASHI.Cognition.PNF.SensibLawOALCPostgresCacheFirstResolutionExact
 import DASHI.Cognition.PNF.SensibLawOALCProviderPinnedEphemeralMaterialisationExact
+import DASHI.Cognition.PNF.SensibLawProviderLegalSourceRegistrationExact
 import DASHI.Law.SensibLawMaboDistributedLegalCorpusMaterialisationExact
