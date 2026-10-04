@@ -26,11 +26,14 @@ import DASHI.Physics.Foundations.CMP119CosmologyP1CompactGaugeExponentialPathExa
 import DASHI.Physics.Foundations.CMP119CosmologyP1PathDefinedBC2Exact as PathBC2
 import DASHI.Physics.Foundations.CMP119CosmologyP1PathDefinedBC2LinearityExact as Linear
 import DASHI.Physics.Foundations.CMP119CosmologyP1PresentCutCompactGaugePathExact as PresentPath
+import DASHI.Physics.Foundations.CMP119CosmologyP1PresentCutPathDerivativeExact as PathBase
 import DASHI.Physics.Foundations.CMP119CosmologyP1SourcePotentialCovarianceExact as Potential
 import DASHI.Physics.Foundations.CMP119CosmologyE1HypercubicSignedAxisActionExact as Axis
 import DASHI.Physics.Foundations.CMP119CosmologyE1SignedSymmetricTangentExact as Signed
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
+import DASHI.Physics.YangMills.BalabanFunctionalRegularESourceFlowRound242Exact as SourceFlow
+import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as Localization
 import DASHI.Physics.YangMills.BalabanBC1CanonicalCarrierCompilerRound115Exact as BC1
 import DASHI.Physics.YangMills.BalabanBC1PhysicalCompositeChainRuleRound118Exact as Composite
 import DASHI.Physics.YangMills.BalabanA1WQRPhysicalJetRound123Exact as A1
@@ -47,9 +50,9 @@ record PreferredPathDefinedPresentCutSource
     {trajectory split}
     {inputs : Beta.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
-    (source : DASHI.Physics.YangMills.BalabanFunctionalRegularESourceFlowRound242Exact.FunctionalRegularESourceFlowInputs
+    (source : SourceFlow.FunctionalRegularESourceFlowInputs
       {trajectory = trajectory} {split = split} inputs)
-    (localization : DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact.CMP119RegularELocalizationCarrier source)
+    (localization : Localization.CMP119RegularELocalizationCarrier source)
     (bc1Canonical : Present10.SymmetricFunctionalRegularEBC1Inputs source localization)
     : Set₂ where
 
@@ -123,8 +126,6 @@ asRound143Linearity :
     (asPresentCutPhysicalSourceInputs data)
 asRound143Linearity data =
   let
-    presentData = asSymmetricPresentCutInputs data
-    present = asPresentCutPhysicalSourceInputs data
     sourcePath = GaugePath.sourcePath (compactGaugePath data)
     linear = Linear.pathFirstVariationLinearity (derivativeLaws data) sourcePath
   in record
@@ -164,14 +165,14 @@ preferredPresentCutSignedFiniteD1Covariant :
         {trajectory = trajectory} {split = split} {inputs = inputs}
         source localization bc1Canonical) →
   ∀ generator background component →
-  DASHI.Physics.Foundations.CMP119CosmologyP1PresentCutPathDerivativeExact.signedFiniteD1
+  PathBase.signedFiniteD1
     (asSymmetricPresentCutInputs data)
     (asRound143Linearity data)
     (Potential.actBackground (potentialGeometry data) generator background)
     (Signed.actSignedComponent
       (Axis.hypercubicSignedAxisAction generator) component)
   ≡
-  DASHI.Physics.Foundations.CMP119CosmologyP1PresentCutPathDerivativeExact.finiteD1AtComponent
+  PathBase.finiteD1AtComponent
     (asSymmetricPresentCutInputs data)
     (asRound143Linearity data)
     background component
