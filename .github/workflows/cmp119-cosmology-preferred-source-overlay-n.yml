@@ -17,6 +17,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyIrreducibleSourceTheorems20261004Exact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyIrreducibleSourceTheorems20261004Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPrimarySourceScopeAudit20261004Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPrimarySourceScopeAudit20261004Test.agda'
+      - 'Docs/CMP119CosmologyPrimarySourceScopeAudit20261004.md'
       - '.github/workflows/cmp119-cosmology-preferred-source-overlay-n.yml'
   workflow_dispatch:
 
@@ -62,7 +65,9 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004NTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyIrreducibleSourceTheorems20261004Exact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyIrreducibleSourceTheorems20261004Test.agda
+              DASHI/Physics/Foundations/CMP119CosmologyIrreducibleSourceTheorems20261004Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPrimarySourceScopeAudit20261004Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPrimarySourceScopeAudit20261004Test.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
             done
