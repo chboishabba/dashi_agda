@@ -1,316 +1,88 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
+------------------------------------------------------------------------
+-- LIVE PARETO FRONTIER / 2026-10-04 / OVERLAY P.
+--
+-- Preferred route after max-cut:
+--
+--   P1  signed R144 B4 readout covariance
+--   P2  R136 four-direction pairing = Local-C renormalized trace readout
+--       on the SAME literal Clay/Local-C stress
+--   P3  Local-C selected F^2 readout = physical positive Wilson/Gibbs F^2
+--
+-- Everything else in the former six-source schedule has been eliminated from
+-- the preferred route:
+--
+--   * R109 pair -> cylinder semantics: bypassed by direct Local-C stress
+--     encoding + pinned Wilson admissibility.
+--   * finite expectation = D_Gamma: presentation bridge retired.
+--   * Round109 tail / finite->continuum D_Gamma sign route: valid alternate,
+--     but dominated by the direct continuum Local-C anomaly route.
+--   * Eq.(2.23) vacuum sign: not source-determined by the current metric
+--     realization interface; explicit same-source c_V=0,+1,-1 countermodels
+--     exist when only the vacuum metric derivative is varied.
+--
+-- Downstream of P2+P3 the repository already owns:
+--   Local-C trace anomaly identity,
+--   negative SU(2) trace coefficient,
+--   physical F^2 positivity,
+--   rational/real sign reflection,
+--   R136/local-C same-stress transport,
+--   marked-OS vacuum/active-stress compilation,
+--   and positive matter-acceleration transport.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
-------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-03 / OVERLAY E.
---
--- One-point gravity uses Gamma = -log Z, hence D_Gamma = -DZ/Z.
---
--- E1 is one direct signed-B4 covariance theorem on the actual selected R144
--- finite D1 readout.  The canonical seven-generator attachment is identity and
--- additive first-variation linearity alone does not imply this covariance.
---
--- E2/E4 is now restricted to source semantics of the ONE literal selected R109
--- stress insertion.  No global source-pair -> observable evaluator is charged.
--- The selected observable carries an explicit meaning relation to that R109
--- insertion, and positive-time/gauge predicates are pinned to published OS.
--- The pinned finite-expectation consumer now consumes this selected presentation
--- directly, so the stronger functional pair evaluator is not hidden downstream.
---
--- Preferred sign transport is compressed to a source envelope:
---
---   embed Q_R136 <= embed ((M_ERB + c_V) + Tail_R109(k)).
---
--- This removes finite D_Gamma from the terminal consumer state but does NOT
--- merge the two physical source payments B1 (completion tail attachment) and
--- B2 (strict negativity of the Eq.(2.23) source envelope).
---
--- The anomaly fallback is Pareto-minimal at one one-sided comparison
---
---   embed Q_R136 <= selected anomaly trace,
---
--- not exact equality.
-------------------------------------------------------------------------
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004PExact as P
 
-data NovelReconstructionResidual : Set where
-  e1-r144-canonical-b4-signed-readout-covariance-and-whole-lattice-attachment :
-    NovelReconstructionResidual
-  e2e4-source-native-r109-pair-semantics-evaluator :
-    NovelReconstructionResidual
+remainingPreferredSourceTheoremCount : Nat
+remainingPreferredSourceTheoremCount = P.remainingPreferredSourceTheoremCount
 
-data StandardOSBoundary : Set where
-  os-external-selected-e0-e3-e4-interpretation : StandardOSBoundary
-  os-standard-marked-reconstruction-authority : StandardOSBoundary
+p1SignedR144B4CovarianceStillOpen : Bool
+p1SignedR144B4CovarianceStillOpen =
+  P.p1SignedR144B4CovarianceStillSourceTheorem
 
-data StandardAnalysisBoundary : Set where
-  real-strict-order-asymmetry : StandardAnalysisBoundary
+p2TraceFrameCalibrationStillOpen : Bool
+p2TraceFrameCalibrationStillOpen =
+  P.p2TraceFrameCalibrationStillSourceTheorem
 
-data PreferredSignResidual : Set where
-  r144-finite-dgamma-to-same-pinned-r109-expectation-and-completion :
-    PreferredSignResidual
-  eq223-source-native-metric-variation-strict-margin :
-    PreferredSignResidual
+p3PhysicalLocalCF2SameObjectStillOpen : Bool
+p3PhysicalLocalCF2SameObjectStillOpen =
+  P.p3PhysicalLocalCF2SameObjectStillSourceTheorem
 
-data AlternateAnomalyResidual : Set where
-  r136-embedded-real-is-selected-anomaly-trace : AlternateAnomalyResidual
+round109PairSemanticsRetired : Bool
+round109PairSemanticsRetired = P.a2PairSemanticsRetired
 
-novelReconstructionResidualCount : Nat
-novelReconstructionResidualCount = 2
-standardOSBoundaryCount : Nat
-standardOSBoundaryCount = 2
-standardAnalysisBoundaryCount : Nat
-standardAnalysisBoundaryCount = 1
-preferredSignResidualCount : Nat
-preferredSignResidualCount = 2
-alternateAnomalyResidualCount : Nat
-alternateAnomalyResidualCount = 1
+finiteDGammaTailRouteRetiredFromPreferredScheduler : Bool
+finiteDGammaTailRouteRetiredFromPreferredScheduler = P.finiteTailRouteRetired
 
-totalTerminalPhysicalResidualCount : Nat
-totalTerminalPhysicalResidualCount = 5
+eq223VacuumSignRouteRetiredFromPreferredScheduler : Bool
+eq223VacuumSignRouteRetiredFromPreferredScheduler = P.eq223RouteRetired
 
-------------------------------------------------------------------------
--- E1 reconstruction.
-------------------------------------------------------------------------
+preferredSignRouteIsDirectLocalCAnomaly : Bool
+preferredSignRouteIsDirectLocalCAnomaly = P.preferredSignRouteIsDirectLocalCAnomaly
 
-b0InternalBridgeStillArbitrary : Bool
-b0InternalBridgeStillArbitrary = false
-b3InternalBridgeStillArbitrary : Bool
-b3InternalBridgeStillArbitrary = false
+preferredRouteNeedsFiniteDGamma : Bool
+preferredRouteNeedsFiniteDGamma = P.finiteDGammaSignTransportNeededByPreferredRoute
 
-e1GlobalPotentialCovarianceStillPrimitive : Bool
-e1GlobalPotentialCovarianceStillPrimitive = false
+preferredRouteNeedsRound109Tail : Bool
+preferredRouteNeedsRound109Tail = P.round109TailNeededByPreferredRoute
 
-e1GlobalBC2D1CovarianceStillPrimitive : Bool
-e1GlobalBC2D1CovarianceStillPrimitive = false
+preferredRouteNeedsEq223VacuumMetricGap : Bool
+preferredRouteNeedsEq223VacuumMetricGap =
+  P.eq223VacuumMetricGapNeededByPreferredRoute
 
-e1FiniteReindexingStillIndependent : Bool
-e1FiniteReindexingStillIndependent = false
+preferredRouteUsesSameLiteralStressObject : Bool
+preferredRouteUsesSameLiteralStressObject = P.preferredRouteUsesSameLiteralStressObject
 
-e1PerComponentD1CovarianceStillIndependent : Bool
-e1PerComponentD1CovarianceStillIndependent = false
-
-e1SignedAxisActionStillPhysical : Bool
-e1SignedAxisActionStillPhysical = false
-
-e1ActualB4GeneratorSignedActionConstructed : Bool
-e1ActualB4GeneratorSignedActionConstructed = true
-
-e1GeneratorToEuclideanActionMapStillIndependent : Bool
-e1GeneratorToEuclideanActionMapStillIndependent = false
-
-e1CanonicalB4ActionCarrierNowLiteral : Bool
-e1CanonicalB4ActionCarrierNowLiteral = true
-
-e1R133TransportEquivarianceStillShortestRoutePremise : Bool
-e1R133TransportEquivarianceStillShortestRoutePremise = false
-
-e1TerminalPhysicalLeafIsOneR144SignedB4ReadoutTheorem : Bool
-e1TerminalPhysicalLeafIsOneR144SignedB4ReadoutTheorem = true
-
-e1LocalComponentCovarianceIsProducerStrategy : Bool
-e1LocalComponentCovarianceIsProducerStrategy = true
-
-e1FirstVariationNaturalityIsProducerStrategy : Bool
-e1FirstVariationNaturalityIsProducerStrategy = true
-
-e1AdditiveFirstVariationLinearityAloneClosesCovariance : Bool
-e1AdditiveFirstVariationLinearityAloneClosesCovariance = false
-
-e1WholeLatticeExpectationInvarianceAloneClosesD1Covariance : Bool
-e1WholeLatticeExpectationInvarianceAloneClosesD1Covariance = false
-
-e1GenericR244ComponentCarrierIsOpaque : Bool
-e1GenericR244ComponentCarrierIsOpaque = true
-
-------------------------------------------------------------------------
--- E2/E4 reconstruction.
-------------------------------------------------------------------------
-
-e2NeedsNewGramPositivityEstimate : Bool
-e2NeedsNewGramPositivityEstimate = false
-
-e4NeedsNewClusteringEstimate : Bool
-e4NeedsNewClusteringEstimate = false
-
-e2AndE4UseSamePinnedStressObservable : Bool
-e2AndE4UseSamePinnedStressObservable = true
-
-allStressCylinderEncodingStillParetoPremise : Bool
-allStressCylinderEncodingStillParetoPremise = false
-
-r109ArbitraryObservableMeaningPredicateStillIndependent : Bool
-r109ArbitraryObservableMeaningPredicateStillIndependent = false
-
-r109IndependentSelectedObservableStillPresentationData : Bool
-r109IndependentSelectedObservableStillPresentationData = false
-
-r109PairCarrierContainsSelectedObservableEvaluator : Bool
-r109PairCarrierContainsSelectedObservableEvaluator = false
-
-r109BarePairDeterminesUniqueObservableSemantics : Bool
-r109BarePairDeterminesUniqueObservableSemantics = false
-
-r109GlobalPairToObservableEvaluatorStillRequired : Bool
-r109GlobalPairToObservableEvaluatorStillRequired = false
-
-r109SelectedInsertionMeaningRelationStillRequired : Bool
-r109SelectedInsertionMeaningRelationStillRequired = true
-
-r109ArbitraryPositiveTimePredicateStillPresentationData : Bool
-r109ArbitraryPositiveTimePredicateStillPresentationData = false
-
-r109ArbitraryGaugePredicateStillPresentationData : Bool
-r109ArbitraryGaugePredicateStillPresentationData = false
-
-r109PublishedOSAdmissibilityPredicatesPinned : Bool
-r109PublishedOSAdmissibilityPredicatesPinned = true
-
-r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility : Bool
-r109RemainingCylinderPresentationIsPairToObservableMapPlusPublishedAdmissibility = false
-
-r109RemainingPhysicalLeafIsSourceSemanticsEvaluator : Bool
-r109RemainingPhysicalLeafIsSourceSemanticsEvaluator = false
-
-r109RemainingPhysicalLeafIsSelectedStressInsertionSemantics : Bool
-r109RemainingPhysicalLeafIsSelectedStressInsertionSemantics = true
-
-r109PinnedFiniteExpectationConsumerNeedsGlobalPairEvaluator : Bool
-r109PinnedFiniteExpectationConsumerNeedsGlobalPairEvaluator = false
-
-round109CompletionToConcreteLocalCStressAlreadyCompilerOwned : Bool
-round109CompletionToConcreteLocalCStressAlreadyCompilerOwned = true
-
-independentTerminalWightmanHingeChoiceStillExists : Bool
-independentTerminalWightmanHingeChoiceStillExists = false
-
-------------------------------------------------------------------------
--- Preferred sign route.
-------------------------------------------------------------------------
-
-finiteOnePointStressOrientationIsEffectiveActionDGamma : Bool
-finiteOnePointStressOrientationIsEffectiveActionDGamma = true
-
-finiteOnePointStressOrientationIsPlusDLogZ : Bool
-finiteOnePointStressOrientationIsPlusDLogZ = false
-
-balabanBlockedLogWeightStillUsesPlusDLogZ : Bool
-balabanBlockedLogWeightStillUsesPlusDLogZ = true
-
-preferredNegativeR136NeedsNegativeEq223Balance : Bool
-preferredNegativeR136NeedsNegativeEq223Balance = true
-
-positiveEq223BalanceWouldGiveOppositeDGammaSign : Bool
-positiveEq223BalanceWouldGiveOppositeDGammaSign = true
-
-eq223FiniteMeasureNormalizationStillInSignLeaf : Bool
-eq223FiniteMeasureNormalizationStillInSignLeaf = false
-
-eq223FourDiagonalArithmeticStillInSignLeaf : Bool
-eq223FourDiagonalArithmeticStillInSignLeaf = false
-
-eq223IntegratedERBMajorantsStillIndependent : Bool
-eq223IntegratedERBMajorantsStillIndependent = false
-
-eq223ThreeUniformDiagonalCauchyCalibrationsAreTerminal : Bool
-eq223ThreeUniformDiagonalCauchyCalibrationsAreTerminal = false
-
-eq223ThreeUniformDiagonalCauchyCalibrationsRemainProducerStrategy : Bool
-eq223ThreeUniformDiagonalCauchyCalibrationsRemainProducerStrategy = true
-
-eq223CombinedERBEnvelopeIsTerminalSourceCoordinate : Bool
-eq223CombinedERBEnvelopeIsTerminalSourceCoordinate = true
-
-eq223FiniteEffectiveActionUpperBoundCompilerOwned : Bool
-eq223FiniteEffectiveActionUpperBoundCompilerOwned = true
-
-exactFiniteResponseEqualsR136WeldStillPreferredPremise : Bool
-exactFiniteResponseEqualsR136WeldStillPreferredPremise = false
-
-preferredFiniteToContinuumUsesExplicitR109Tail : Bool
-preferredFiniteToContinuumUsesExplicitR109Tail = true
-
-r109RemainingTailAntitoneCompilerOwned : Bool
-r109RemainingTailAntitoneCompilerOwned = true
-
-negativeSourceTailBudgetPersistsAtLaterScales : Bool
-negativeSourceTailBudgetPersistsAtLaterScales = true
-
-preferredFiniteEndpointSequenceStillArbitrary : Bool
-preferredFiniteEndpointSequenceStillArbitrary = false
-
-preferredFiniteEndpointUsesSamePinnedFamilyAndE2Observable : Bool
-preferredFiniteEndpointUsesSamePinnedFamilyAndE2Observable = true
-
-preferredSameSequenceLeafIsConcreteR144R109CompletionAttachment : Bool
-preferredSameSequenceLeafIsConcreteR144R109CompletionAttachment = true
-
-preferredB1CompressedToDirectR136TailReceipt : Bool
-preferredB1CompressedToDirectR136TailReceipt = true
-
-preferredTerminalSignConsumerNeedsFiniteDGamma : Bool
-preferredTerminalSignConsumerNeedsFiniteDGamma = false
-
-preferredTerminalSignConsumerUsesR136SourceEnvelope : Bool
-preferredTerminalSignConsumerUsesR136SourceEnvelope = true
-
-sourceEnvelopeCompressionMergesB1AndB2PhysicalPayments : Bool
-sourceEnvelopeCompressionMergesB1AndB2PhysicalPayments = false
-
-eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail : Bool
-eq223PreferredContinuumMarginHasShapeCombinedPlusVacuumPlusTail = true
-
-eq223RawSourceAloneFixesMetricTrace : Bool
-eq223RawSourceAloneFixesMetricTrace = false
-
-eq223SourceNativeMetricFamilyCalibrationStillRequired : Bool
-eq223SourceNativeMetricFamilyCalibrationStillRequired = true
-
-eq223SourceAnalyticERBEnvelopesLocated : Bool
-eq223SourceAnalyticERBEnvelopesLocated = true
-
-eq223VacuumWeylCoefficientSignMagnitudeStillPhysical : Bool
-eq223VacuumWeylCoefficientSignMagnitudeStillPhysical = true
-
-------------------------------------------------------------------------
--- Alternate anomaly route.
-------------------------------------------------------------------------
-
-traceAnomalyAlternateRouteSourceWritten : Bool
-traceAnomalyAlternateRouteSourceWritten = true
-
-traceAnomalyAlternateRouteNeedsEq223SectorSign : Bool
-traceAnomalyAlternateRouteNeedsEq223SectorSign = false
-
-traceAnomalyAlternateRouteStillNeedsSameObjectWeld : Bool
-traceAnomalyAlternateRouteStillNeedsSameObjectWeld = false
-
-traceAnomalyExactEqualityIsParetoOverstrong : Bool
-traceAnomalyExactEqualityIsParetoOverstrong = true
-
-traceAnomalyOneSidedR136UpperComparisonStillPhysical : Bool
-traceAnomalyOneSidedR136UpperComparisonStillPhysical = true
-
-traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder : Bool
-traceAnomalyOrderReflectionCompilerOwnedGivenStandardRealOrder = true
-
-traceAnomalyRationalSignNowCompilesToMatterAcceleration : Bool
-traceAnomalyRationalSignNowCompilesToMatterAcceleration = true
-
-------------------------------------------------------------------------
--- Downstream status.
-------------------------------------------------------------------------
-
-terminalVacuumCosmologyAlgebraStillFrontier : Bool
-terminalVacuumCosmologyAlgebraStillFrontier = false
+remainingAdapterDebt : Nat
+remainingAdapterDebt = P.remainingAdapterDebtInScopedPreferredRoute
 
 fullFriedmannTrajectoryAlreadySolved : Bool
 fullFriedmannTrajectoryAlreadySolved = false
 
-remainingWorkIsUpstreamReconstructionAndSourceSign : Bool
-remainingWorkIsUpstreamReconstructionAndSourceSign = true
-
-remainingWorkIsFiveSourcePhysicsLeaves : Bool
-remainingWorkIsFiveSourcePhysicsLeaves = true
+noSyntheticPhysicalIdentificationAdded : Bool
+noSyntheticPhysicalIdentificationAdded = P.noSyntheticPhysicalIdentificationAdded
