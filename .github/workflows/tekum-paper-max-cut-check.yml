@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/ComputerScience/Tekum*.agda'
       - 'scripts/check_tekum_balanced_ternary_static.py'
+      - 'scripts/check_tekum_prop4_extractor_static.py'
       - '.github/workflows/tekum-paper-max-cut-check.yml'
 
 concurrency:
@@ -24,7 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run Tekum static regression
-        run: python3 scripts/check_tekum_balanced_ternary_static.py
+        run: |
+          python3 scripts/check_tekum_balanced_ternary_static.py
+          python3 scripts/check_tekum_prop4_extractor_static.py
 
   focused-agda:
     runs-on: ubuntu-latest
@@ -68,6 +71,8 @@ jobs:
               DASHI/ComputerScience/TekumMonotoneMagnitudeExact.agda
               DASHI/ComputerScience/TekumPositiveSourceSuccessorAnchorExact.agda
               DASHI/ComputerScience/TekumSourceOrderExact.agda
+              DASHI/ComputerScience/TekumParsedAnchorListExact.agda
+              DASHI/ComputerScience/TekumParsedAdjacentCarryExtractExact.agda
               DASHI/ComputerScience/TekumMonotonicityExact.agda
               DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
               DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda
