@@ -6,11 +6,17 @@ import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 oldFourOpaqueLeafAccountingRetiredRegression =
   N.oldFourOpaqueLeafAccountingRetired
 
-a2PresentationLeafEliminatedRegression =
-  N.a2PresentationLeafEliminated
+a2IndependentObservableChoiceEliminatedRegression =
+  N.a2IndependentObservableChoiceEliminated
+
+a2PairToObservableSameObjectSemanticsStillOpenRegression =
+  N.a2PairToObservableSameObjectSemanticsStillOpen
 
 b1DirectInequalityIsCompilerOutputRegression =
   N.b1DirectInequalityIsCompilerOutput
+
+b1MovesWithLateB2CutoffRegression =
+  N.b1MovesWithLateB2Cutoff
 
 b2QuantitativeTailMarginIsCompilerOutputRegression =
   N.b2QuantitativeTailMarginIsCompilerOutput
