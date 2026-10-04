@@ -4,8 +4,6 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 ------------------------------------------------------------------------
 -- OVERLAY O / 2026-10-04: SOURCE FRONTIER AFTER IMPLEMENTING BELOW THE OLD SIX.
 --
--- The old six-statement ledger was not minimal.
---
 -- RETIRED:
 --   old #2  Round109 pair = selected Local-C cylinder semantics.
 --           Marked E2/E4 consumes the selected Local-C stress cylinder directly;
@@ -16,15 +14,16 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --
 -- REJECTED AS A SOURCE CONSEQUENCE:
 --   old #6  M_ERB < -c_V from raw Eq.(2.23).
---           The current metric-realization interface permits the same raw source
---           and identical non-vacuum data with c_V = 0,+1,-1.  This sign route
---           therefore needs extra physical metric calibration and is not the
---           preferred source scheduler.
+--           `CMP119CosmologyEq223VacuumMetricSignUnderdeterminationExact`
+--           constructs, from one raw source and one fixed non-vacuum metric
+--           realization, replacements with c_V = 0,+1,-1.  Thus the raw source
+--           interface cannot imply the requested sign without extra physical
+--           metric calibration.
 --
 -- PREFERRED SIGN ROUTE:
 --   R136 literal metric stress is already the same literal Clay/Local-C stress.
 --   The anomaly lane leaves only a scalar trace-frame/readout calibration and
---   the existing physical Local-C F^2 same-object weld.
+--   the physical Local-C F^2 same-object weld.
 --
 -- CURRENT FIVE SOURCE THEOREMS:
 --
@@ -35,9 +34,6 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --      readout on the same literal stress (trace-frame calibration);
 --   O5 Local-C selected F^2 readout is the physical strictly-positive F^2
 --      numerator used by the Wilson/Gibbs positivity theorem.
---
--- Everything else in the scoped six-leaf programme is compiler-owned, bypassed,
--- or formally underdetermined by the advertised source interface.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -63,9 +59,7 @@ o1SignedR144B4CovarianceStillSourceTheorem =
   A1.terminalA1SourceLawMustBeSignedReadoutCovariance
 
 o1UnsignedPermutationDoesNotSuffice : Bool
-o1UnsignedPermutationDoesNotSuffice =
-  let value = A1.unsignedComponentPermutationAlonePaysA1
-  in false
+o1UnsignedPermutationDoesNotSuffice = false
 
 ------------------------------------------------------------------------
 -- Old A2 leaf retired.
@@ -88,12 +82,10 @@ finiteExpectationBridgeRetired =
   B1Direct.directDGammaSequenceEliminatesFiniteExpectationBridge
 
 o2DirectDGammaRound109CauchyStillSourceTheorem : Bool
-o2DirectDGammaRound109CauchyStillSourceTheorem =
-  B1Direct.remainingB1SourceContentIsDirectDGammaCauchyAndEndpoint
+o2DirectDGammaRound109CauchyStillSourceTheorem = true
 
 o3DGammaCompletionEndpointStillSourceTheorem : Bool
-o3DGammaCompletionEndpointStillSourceTheorem =
-  B1Direct.remainingB1SourceContentIsDirectDGammaCauchyAndEndpoint
+o3DGammaCompletionEndpointStillSourceTheorem = true
 
 b1DirectAnchorAtEveryCutoffIsCompilerOutput : Bool
 b1DirectAnchorAtEveryCutoffIsCompilerOutput =
@@ -101,18 +93,18 @@ b1DirectAnchorAtEveryCutoffIsCompilerOutput =
 
 ------------------------------------------------------------------------
 -- Old Eq.(2.23) B2 source-sign route retired.
+-- The imported no-go module carries the explicit parameterized countermodels;
+-- these booleans are only scheduler accounting, not substitutes for them.
 ------------------------------------------------------------------------
 
 eq223VacuumGapRouteRetired : Bool
 eq223VacuumGapRouteRetired = true
 
 eq223RawSourceFixesVacuumMetricSign : Bool
-eq223RawSourceFixesVacuumMetricSign =
-  Eq223NoGo.rawEq223SourceAloneFixesVacuumMetricSign
+eq223RawSourceFixesVacuumMetricSign = false
 
 eq223NeedsExtraMetricCalibrationIfReactivated : Bool
-eq223NeedsExtraMetricCalibrationIfReactivated =
-  Eq223NoGo.sourceBackedVacuumMetricVariationStillRequired
+eq223NeedsExtraMetricCalibrationIfReactivated = true
 
 ------------------------------------------------------------------------
 -- O4/O5: preferred same-stress anomaly sign route.
@@ -126,9 +118,11 @@ o5PhysicalLocalCF2SameObjectStillSourceTheorem : Bool
 o5PhysicalLocalCF2SameObjectStillSourceTheorem =
   LocalCSign.remainingAnomalySignLeafIsPhysicalF2SameObjectWeld
 
+-- `CMP119CosmologyR136LocalCSameStressExact` proves this for every concrete
+-- instantiated lane; the declaration is parameterized, so keep only scheduler
+-- truth here instead of misusing it as a zero-argument constant.
 anomalyRouteUsesSameLiteralStress : Bool
-anomalyRouteUsesSameLiteralStress =
-  SameStress.sameLiteralStressObjectAlreadyProved
+anomalyRouteUsesSameLiteralStress = true
 
 anomalyRouteNeedsSecondStressObject : Bool
 anomalyRouteNeedsSecondStressObject = false
