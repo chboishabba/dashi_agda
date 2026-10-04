@@ -21,14 +21,16 @@ module DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleWitnessStrengthAudit
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≢_; sym; trans)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 1ℚ)
-open import Data.Product using (Σ; _,_)
+open import Data.Product using (Σ; _,_; proj₁)
 open import Data.Sum.Base using (inj₁; inj₂)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
 import DASHI.Mathematics.AlgebraicGeometry.HodgeLiteralCycleClassMapBridgeExact as Literal
 import DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact as Exact
+import DASHI.Mathematics.AlgebraicGeometry.HodgeAlgebraicCycleClayCoreExact as Clay
 
 ------------------------------------------------------------------------
 -- Real witness-carrying refinement of the existing literal cycle carrier.
@@ -146,14 +148,43 @@ syntacticallyWitnessedCycleHasCertificates =
 syntacticUniversalHodgeCycleProducer :
   ∀ {variety comparison hodge codimension} →
   (alpha :
-    DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact.RationalHodgeClassExact
+    Exact.RationalHodgeClassExact
       hodge codimension) →
-  Data.Product.Σ
+  Σ
     (Hodge.RationalAlgebraicCycle variety codimension)
     (λ cycle → WitnessedRationalAlgebraicCycle cycle)
 syntacticUniversalHodgeCycleProducer alpha =
   syntacticallyWitnessedCycle ,
   syntacticallyWitnessedCycleHasCertificates
+
+------------------------------------------------------------------------
+-- Nontriviality check on the ACTUAL Clay singular-class target.
+--
+-- Because the universal syntactic producer ignores its alpha argument, a
+-- FIXED cycle-class map assigns both outputs the same singular class.
+-- Therefore it cannot represent two different rational Hodge classes.
+--
+-- This is an exact obstruction to promoting the synthetic total producer
+-- into the universal Hodge theorem merely by inhabiting its support fields.
+------------------------------------------------------------------------
+
+syntacticProducerCannotRepresentDistinctSingularClasses :
+  ∀ {variety comparison hodge codimension}
+    (background : Clay.RationalAlgebraicCycleClassBackground hodge)
+    (left right : Exact.RationalHodgeClassExact hodge codimension) →
+  Exact.singularClass left ≢ Exact.singularClass right →
+  Clay.singularCycleClass background codimension
+    (Data.Product.proj₁
+      (syntacticUniversalHodgeCycleProducer left))
+    ≡ Exact.singularClass left →
+  Clay.singularCycleClass background codimension
+    (Data.Product.proj₁
+      (syntacticUniversalHodgeCycleProducer right))
+    ≡ Exact.singularClass right →
+  ⊥
+syntacticProducerCannotRepresentDistinctSingularClasses
+    background left right distinct leftRep rightRep =
+  distinct (trans (sym leftRep) rightRep)
 
 ------------------------------------------------------------------------
 -- Counterexample: nonempty rational generator with no valid witnesses.

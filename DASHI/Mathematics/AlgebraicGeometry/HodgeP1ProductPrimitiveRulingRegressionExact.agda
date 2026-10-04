@@ -1,0 +1,270 @@
+module DASHI.Mathematics.AlgebraicGeometry.HodgeP1ProductPrimitiveRulingRegressionExact where
+
+------------------------------------------------------------------------
+-- P¹ × P¹ PRIMITIVE REGRESSION ON THE TWO ACTUAL RULING DIRECTIONS
+--
+-- Existing owner ProjectiveLineProductHodgeExact supplies the two independent
+-- (1,1) tensor basis directions:
+--
+--   basis11Left  = [pt] ⊗ 1
+--   basis11Right = 1 ⊗ [pt].
+--
+-- This file equips their rational span with the standard intersection form
+--
+--   h₁² = 0,  h₂² = 0,  h₁·h₂ = 1,
+--
+-- and uses the diagonal polarization h=h₁+h₂. The difference
+--
+--   δ = h₁-h₂
+--
+-- is nonzero, primitive (δ·h=0), has δ²=-2, and is anti-invariant under
+-- the actual factor-swap on the two ruling directions.
+--
+-- This is a controlled algebraic regression: BOTH ruling classes are already
+-- algebraic on P¹×P¹. It tests primitive decomposition/correspondence behavior;
+-- it does NOT address an unknown Hodge class.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
+open import Data.Rational using (ℚ; _+_; _*_; -_; _-_; _/_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineProductHodgeExact as Product
+
+------------------------------------------------------------------------
+-- Rational span of the literal two (1,1) ruling basis directions.
+------------------------------------------------------------------------
+
+record RulingClass : Set where
+  constructor ruling-class
+  field
+    h₁Coefficient : ℚ
+    h₂Coefficient : ℚ
+
+open RulingClass public
+
+h₁ h₂ : RulingClass
+h₁ = ruling-class 1 0
+h₂ = ruling-class 0 1
+
+add : RulingClass → RulingClass → RulingClass
+add (ruling-class a b) (ruling-class c d) =
+  ruling-class (a + c) (b + d)
+
+neg : RulingClass → RulingClass
+neg (ruling-class a b) =
+  ruling-class (- a) (- b)
+
+sub : RulingClass → RulingClass → RulingClass
+sub left right = add left (neg right)
+
+diagonalPolarization : RulingClass
+diagonalPolarization = add h₁ h₂
+
+primitiveDifference : RulingClass
+primitiveDifference = sub h₁ h₂
+
+------------------------------------------------------------------------
+-- Standard intersection pairing on the two ruling classes.
+------------------------------------------------------------------------
+
+intersection : RulingClass → RulingClass → ℚ
+intersection (ruling-class a b) (ruling-class c d) =
+  a * d + b * c
+
+h₁SelfIntersectionZero :
+  intersection h₁ h₁ ≡ 0
+h₁SelfIntersectionZero = refl
+
+h₂SelfIntersectionZero :
+  intersection h₂ h₂ ≡ 0
+h₂SelfIntersectionZero = refl
+
+rulingsMeetOnce :
+  intersection h₁ h₂ ≡ 1
+rulingsMeetOnce = refl
+
+primitiveDifferenceOrthogonalToPolarization :
+  intersection primitiveDifference diagonalPolarization ≡ 0
+primitiveDifferenceOrthogonalToPolarization = ℚRing.solve
+
+primitiveDifferenceSelfIntersection :
+  intersection primitiveDifference primitiveDifference ≡ - 2
+primitiveDifferenceSelfIntersection = ℚRing.solve
+
+------------------------------------------------------------------------
+-- Factor swap is an honest correspondence on this two-ruling regression:
+-- it exchanges the two ProductHodgeExact (1,1) basis directions.
+------------------------------------------------------------------------
+
+swapRulings : RulingClass → RulingClass
+swapRulings (ruling-class a b) =
+  ruling-class b a
+
+swapH₁IsH₂ :
+  swapRulings h₁ ≡ h₂
+swapH₁IsH₂ = refl
+
+swapH₂IsH₁ :
+  swapRulings h₂ ≡ h₁
+swapH₂IsH₁ = refl
+
+swapPreservesDiagonalPolarization :
+  swapRulings diagonalPolarization ≡ diagonalPolarization
+swapPreservesDiagonalPolarization = refl
+
+swapNegatesPrimitiveDifference :
+  swapRulings primitiveDifference ≡ neg primitiveDifference
+swapNegatesPrimitiveDifference = refl
+
+------------------------------------------------------------------------
+-- Tie the two abstract coefficients back to the EXISTING Hodge basis labels.
+-- These are not newly invented dimensions: ProductHodgeExact proves both
+-- selected basis vectors have bidegree (1,1).
+------------------------------------------------------------------------
+
+rulingBasisBidegrees :
+  Product.productBidegree Product.basis11Left ≡ Product.bidegree 1 1
+  ×
+  Product.productBidegree Product.basis11Right ≡ Product.bidegree 1 1
+rulingBasisBidegrees =
+  Product.basis11LeftDegree ,
+  Product.basis11RightDegree
+
+------------------------------------------------------------------------
+-- Literal factor-swap on the EXISTING P¹×P¹ Künneth basis.
+------------------------------------------------------------------------
+
+swapProductBasis :
+  Product.ProductBasis →
+  Product.ProductBasis
+swapProductBasis basis =
+  Product.tensorBasis
+    (Product.rightFactor basis)
+    (Product.leftFactor basis)
+
+swapBasis00 :
+  swapProductBasis Product.basis00 ≡ Product.basis00
+swapBasis00 = refl
+
+swapBasis11Left :
+  swapProductBasis Product.basis11Left ≡ Product.basis11Right
+swapBasis11Left = refl
+
+swapBasis11Right :
+  swapProductBasis Product.basis11Right ≡ Product.basis11Left
+swapBasis11Right = refl
+
+swapBasis22 :
+  swapProductBasis Product.basis22 ≡ Product.basis22
+swapBasis22 = refl
+
+swapPreservesProductBidegree :
+  (basis : Product.ProductBasis) →
+  Product.productBidegree (swapProductBasis basis)
+  ≡
+  Product.productBidegree basis
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1Unit Product.p1Unit) =
+  refl
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1Unit Product.p1PointClass) =
+  refl
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1PointClass Product.p1Unit) =
+  refl
+swapPreservesProductBidegree
+    (Product.tensorBasis Product.p1PointClass Product.p1PointClass) =
+  refl
+
+------------------------------------------------------------------------
+-- Full rational factor-swap eigenspace decomposition.
+--
+-- Every class a h₁ + b h₂ splits into a swap-invariant diagonal part and a
+-- swap-anti-invariant primitive part. This is the exact finite regression
+-- analogue of "known algebraic contribution + primitive residual".
+------------------------------------------------------------------------
+
+scale : ℚ → RulingClass → RulingClass
+scale scalar (ruling-class a b) =
+  ruling-class (scalar * a) (scalar * b)
+
+diagonalCoefficient : RulingClass → ℚ
+diagonalCoefficient (ruling-class a b) =
+  (a + b) / 2
+
+primitiveCoefficient : RulingClass → ℚ
+primitiveCoefficient (ruling-class a b) =
+  (a - b) / 2
+
+diagonalPart : RulingClass → RulingClass
+diagonalPart cls =
+  scale (diagonalCoefficient cls) diagonalPolarization
+
+primitivePart : RulingClass → RulingClass
+primitivePart cls =
+  scale (primitiveCoefficient cls) primitiveDifference
+
+rulingClassExtensionality :
+  ∀ {left right : RulingClass} →
+  h₁Coefficient left ≡ h₁Coefficient right →
+  h₂Coefficient left ≡ h₂Coefficient right →
+  left ≡ right
+rulingClassExtensionality
+    {ruling-class _ _} {ruling-class _ _} refl refl =
+  refl
+
+diagonalPlusPrimitiveReconstructs :
+  (cls : RulingClass) →
+  add (diagonalPart cls) (primitivePart cls) ≡ cls
+diagonalPlusPrimitiveReconstructs (ruling-class a b) =
+  rulingClassExtensionality
+    ℚRing.solve
+    ℚRing.solve
+
+diagonalPartSwapInvariant :
+  (cls : RulingClass) →
+  swapRulings (diagonalPart cls) ≡ diagonalPart cls
+diagonalPartSwapInvariant (ruling-class a b) =
+  rulingClassExtensionality refl refl
+
+primitivePartSwapAntiInvariant :
+  (cls : RulingClass) →
+  swapRulings (primitivePart cls) ≡ neg (primitivePart cls)
+primitivePartSwapAntiInvariant (ruling-class a b) =
+  rulingClassExtensionality refl refl
+
+primitivePartOrthogonalToPolarization :
+  (cls : RulingClass) →
+  intersection (primitivePart cls) diagonalPolarization ≡ 0
+primitivePartOrthogonalToPolarization (ruling-class a b) =
+  ℚRing.solve
+
+------------------------------------------------------------------------
+-- The regression therefore has an exact two-channel complete response:
+--
+--   arbitrary ruling class
+--      = invariant algebraic channel + primitive anti-invariant channel.
+--
+-- Both channels are already algebraic here. The Clay problem begins only
+-- when this pattern is transported to a variety with genuinely unknown
+-- primitive rational Hodge classes.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- MAX-CUT STATUS
+--
+-- PAID on P¹×P¹ regression:
+--   two independent literal (1,1) directions
+--   intersection lattice of the ruling span
+--   diagonal-polarization primitive direction
+--   nonzero negative self-intersection (-2)
+--   factor-swap correspondence: h fixed, δ -> -δ
+--
+-- OPEN for Clay:
+--   genuine Chow-group owner and cycle-class map
+--   induced correspondence action on actual singular cohomology
+--   migration to varieties with unknown primitive rational Hodge classes
+--   universal algebraic lift / strict residual decomposition
+------------------------------------------------------------------------
