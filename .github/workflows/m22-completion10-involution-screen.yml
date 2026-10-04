@@ -1,0 +1,115 @@
+name: M22 Completion10 involution screen
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/j369-ogg-address-ssp15-no-go-20260925
+    paths:
+      - 'scripts/m22_completion10_involution_screen.g'
+      - 'scripts/check_m22_completion10_involution_screen.sh'
+      - 'scripts/m22d2_completion10_outer_involution_screen.g'
+      - 'scripts/check_m22d2_completion10_outer_involution_screen.sh'
+      - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
+      - 'scripts/render_m22_completion10_runtime_certificate.py'
+      - 'scripts/check_twob_pure_klein_m24_s3_local_group.sh'
+      - 'scripts/twob_pure_klein_m24_s3_local_group.g'
+      - 'scripts/m24_276_to_m22_f2_composition_screen.g'
+      - '.github/workflows/m22-completion10-involution-screen.yml'
+  pull_request:
+    paths:
+      - 'scripts/m22_completion10_involution_screen.g'
+      - 'scripts/check_m22_completion10_involution_screen.sh'
+      - 'scripts/m22d2_completion10_outer_involution_screen.g'
+      - 'scripts/check_m22d2_completion10_outer_involution_screen.sh'
+      - 'scripts/m24_276_to_m22_f2_composition_screen.g'
+      - 'scripts/check_m24_276_to_m22_f2_composition_screen.sh'
+      - 'scripts/twob_pure_klein_m24_s3_local_group.g'
+      - 'scripts/check_twob_pure_klein_m24_s3_local_group.sh'
+      - '.github/workflows/m22-completion10-involution-screen.yml'
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  screen:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install GAP AtlasRep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-atlasrep gap-ctbllib python3
+
+      - name: Screen actual M22 10d GF2 involutions
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_m22_completion10_involution_screen.sh
+
+      - name: Screen actual M22:2 10d GF2 outer involutions
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_m22d2_completion10_outer_involution_screen.sh
+
+      - name: Screen M24 276-point module restricted to M22
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_m24_276_to_m22_f2_composition_screen.sh
+
+      - name: Run sourced 2B-pure M24 x S3 local quotient
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/check_twob_pure_klein_m24_s3_local_group.sh
+
+      - name: Render typed Agda runtime certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/render_m22_completion10_runtime_certificate.py \
+            build/m22_completion10_involution_screen.json \
+            build/m24_276_to_m22_f2_composition_screen.json \
+            build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Typecheck generated M22 runtime certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p DASHI/Moonshine/Generated
+          cp build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda \
+            DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+          export AGDA_FLAKE='github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin'
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+          rm DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+
+      - name: Upload M22 Completion10 receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m22-completion10-screens
+          path: |
+            build/m22_completion10_involution_screen.json
+            build/m22d2_completion10_outer_involution_screen.json
+            build/m24_276_to_m22_f2_composition_screen.json
+            build/twob_pure_klein_m24_s3_local_group.json
+            build/generated/DASHI/Moonshine/Generated/M22Completion10RuntimeCertificate.agda
+          if-no-files-found: warn

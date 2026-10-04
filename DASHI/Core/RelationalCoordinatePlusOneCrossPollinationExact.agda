@@ -1,0 +1,275 @@
+module DASHI.Core.RelationalCoordinatePlusOneCrossPollinationExact where
+
+------------------------------------------------------------------------
+-- RELATIONAL COORDINATE / +1 CROSS-POLLINATION
+--
+-- Existing repo constructions contain several exact "+1" shapes:
+--
+--   9 + 1 = 10
+--     exceptional observer / completion marker;
+--
+--   10 + 1 = 11
+--     cross-scale carried bundle plus one fresh local unit;
+--
+--   53 + 1 = 54
+--     restoration of the secondary invariant line;
+--
+--   196883 + 1 = 196884
+--     restoration of the weight-two conformal/vacuum line.
+--
+-- Nongin 1.1, TSFV history fibres and twistronics registration are NOT
+-- identified with those arithmetic units.  They share only the more abstract
+-- possibility that retaining one additional distinction/coordinate can make a
+-- coarse quotient insufficient for a declared consumer.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.String using (String)
+
+import DASHI.Foundations.ObserverExtensionBoundary as Observer
+import DASHI.Foundations.StageValuationBundleAtlas as Stage
+import DASHI.Foundations.JPlusOneScaleBridge as JPlusOne
+import DASHI.Moonshine.Base369MonsterTwoComponentCompletionBidiExact as MonsterPlusOne
+import DASHI.Core.NonginOnePointOneArmyRefinementExact as Nongin
+import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFV
+import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
+import DASHI.Core.ConsumerGuidedReopenableRefinementExact as Refine
+import DASHI.Core.CoarseUnitFineFibreCapacityExact as Capacity
+import DASHI.Core.LatentDistinctionActivationExact as Activation
+import DASHI.Core.NonginOnePointOneFutureSplitExact as NonginDynamic
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as TSFVCaustic
+import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
+import DASHI.Biology.JCoarseFineEvaluationFibreExact as JEval
+
+------------------------------------------------------------------------
+-- 1. Exact arithmetic owners reused, not duplicated.
+------------------------------------------------------------------------
+
+ninePlusOneIsTen : 9 + 1 ≡ 10
+ninePlusOneIsTen = Observer.exceptionalObserverCount
+
+tenPlusOneIsEleven :
+  Stage.Stage11CrossScaleJoin.carriedBundleValue Stage.canonicalStage11CrossScaleJoin
+  + Stage.Stage11CrossScaleJoin.freshLocalValue Stage.canonicalStage11CrossScaleJoin
+  ≡ Stage.Stage11CrossScaleJoin.joinedValue Stage.canonicalStage11CrossScaleJoin
+tenPlusOneIsEleven =
+  Stage.Stage11CrossScaleJoin.joinIsEleven Stage.canonicalStage11CrossScaleJoin
+
+fiftyThreePlusOneIsFiftyFour : 53 + 1 ≡ 54
+fiftyThreePlusOneIsFiftyFour = refl
+
+monsterPlusOneIsMoonshine : 196883 + 1 ≡ 196884
+monsterPlusOneIsMoonshine = JPlusOne.moonshineCoefficientIsRepresentationPlusOne
+
+------------------------------------------------------------------------
+-- 2. Typed role separation.
+------------------------------------------------------------------------
+
+data PlusOneRole : Set where
+  exceptionalObserverMarker : PlusOneRole
+  crossScaleFreshLocalUnit : PlusOneRole
+  secondaryInvariantLine : PlusOneRole
+  weightTwoConformalLine : PlusOneRole
+  nonginFrameCoordinate : PlusOneRole
+  tsfvHistoryResidualCoordinate : PlusOneRole
+  twistronicsRegistrationCoordinate : PlusOneRole
+
+exceptionalNotFreshLocal :
+  exceptionalObserverMarker ≡ crossScaleFreshLocalUnit -> ⊥
+exceptionalNotFreshLocal ()
+
+secondaryInvariantNotConformal :
+  secondaryInvariantLine ≡ weightTwoConformalLine -> ⊥
+secondaryInvariantNotConformal ()
+
+nonginFrameNotTwist :
+  nonginFrameCoordinate ≡ twistronicsRegistrationCoordinate -> ⊥
+nonginFrameNotTwist ()
+
+tsfvHistoryNotTwist :
+  tsfvHistoryResidualCoordinate ≡ twistronicsRegistrationCoordinate -> ⊥
+tsfvHistoryNotTwist ()
+
+------------------------------------------------------------------------
+-- 3. Reuse the exact one-plus shapes already present in the Monster lane.
+------------------------------------------------------------------------
+
+nineToTenShape : MonsterPlusOne.OnePlusShape
+nineToTenShape = MonsterPlusOne.coarseNineToTenShape
+
+fiftyThreeToFiftyFourShape : MonsterPlusOne.OnePlusShape
+fiftyThreeToFiftyFourShape =
+  MonsterPlusOne.secondaryFiftyThreeToFiftyFourShape
+
+monsterToMoonshineShape : MonsterPlusOne.OnePlusShape
+monsterToMoonshineShape =
+  MonsterPlusOne.weightTwoMonsterToMoonshineShape
+
+tenToElevenFreshUnit : JPlusOne.FreshUnitExtension
+tenToElevenFreshUnit = JPlusOne.stage11FreshUnitExtension
+
+------------------------------------------------------------------------
+-- 4. Consumer-sensitive extension instances.
+--
+-- These are not cardinal +1 claims.  They are strict/non-factorable
+-- refinement witnesses showing that a retained distinction can matter.
+------------------------------------------------------------------------
+
+nonginRefinement :
+  Refine.ConsumerGuidedRefinement
+    (Nongin.onePointZeroProject {Nongin.Base1} {Nongin.Frame2})
+    (Nongin.onePointOneProject {Nongin.Base1} {Nongin.Frame2})
+    Nongin.frameSensitiveResponse
+nonginRefinement = Nongin.canonicalOnePointOneRefinement
+
+tsfvCoarseObservationCannotServeHistorySensitiveChoice :
+  NonFactor.FactorsThrough
+    TSFVCaustic.historyProjection
+    TSFV.historySensitiveChoice -> ⊥
+tsfvCoarseObservationCannotServeHistorySensitiveChoice =
+  TSFV.causticProjectionInsufficientForHistorySensitiveChoice
+
+------------------------------------------------------------------------
+-- 5. Shared interpretation boundary.
+------------------------------------------------------------------------
+
+record RelationalCoordinatePlusOneBoundary : Set where
+  constructor relational-coordinate-plus-one-boundary
+  field
+    exactNinePlusOneReused : Bool
+    exactTenPlusOneReused : Bool
+    exactFiftyThreePlusOneReused : Bool
+    exactMonsterPlusOneReused : Bool
+
+    arithmeticPlusOneRolesAreIdentical : Bool
+    arithmeticPlusOneRolesAreIdenticalIsFalse :
+      arithmeticPlusOneRolesAreIdentical ≡ false
+
+    nonginOnePointOneIsLiteralCardinalPlusOne : Bool
+    nonginOnePointOneIsLiteralCardinalPlusOneIsFalse :
+      nonginOnePointOneIsLiteralCardinalPlusOne ≡ false
+
+    tsfvHistoryResidualIsLiteralCardinalPlusOne : Bool
+    tsfvHistoryResidualIsLiteralCardinalPlusOneIsFalse :
+      tsfvHistoryResidualIsLiteralCardinalPlusOne ≡ false
+
+    twistAngleIsLiteralCardinalPlusOne : Bool
+    twistAngleIsLiteralCardinalPlusOneIsFalse :
+      twistAngleIsLiteralCardinalPlusOne ≡ false
+
+    sharedExtensionShapeCanMotivateComparator : Bool
+    consumerRelevanceRequiresDistinguishingWitness : Bool
+    sameShapeImpliesSameMechanism : Bool
+    sameShapeImpliesSameMechanismIsFalse :
+      sameShapeImpliesSameMechanism ≡ false
+
+    interpretation : String
+
+canonicalRelationalCoordinatePlusOneBoundary :
+  RelationalCoordinatePlusOneBoundary
+canonicalRelationalCoordinatePlusOneBoundary =
+  relational-coordinate-plus-one-boundary
+    true true true true
+    false refl
+    false refl
+    false refl
+    false refl
+    true
+    true
+    false refl
+    "Exact +1 arithmetic is role-indexed. Nongin frame, TSFV history residual and twistronics registration are non-arithmetic retained distinctions; their common content is only that an added distinction can defeat a coarse factorisation for a consumer that actually separates its fibres."
+
+
+------------------------------------------------------------------------
+-- 6. Coarse-unit / fine-fibre amplification boundary.
+--
+-- One distinguished coarse unit may index a large fine coordinate family.
+-- This is a carrier-capacity statement only; relevance still depends on a
+-- consumer/future distinction.
+------------------------------------------------------------------------
+
+jCompletionFineCoordinateCountIs19683 :
+  Capacity.jFineCoordinateCount ≡ 19683
+jCompletionFineCoordinateCountIs19683 =
+  Capacity.jFineCoordinateCountIs19683
+
+jCompletionSectorDimensionIs19683 :
+  Harmonic.completionHarmonicDimension
+  ≡ 19683
+jCompletionSectorDimensionIs19683 =
+  Capacity.jCompletionElementarySectorHas19683Coordinates
+
+jFixedEvaluationFibreCardinalityStillNotPromoted :
+  JEval.fixedValueAssignmentFibreHasCardinalityThreePowerNine
+    JEval.canonicalJCoarseFineEvaluationBoundary
+  ≡ false
+jFixedEvaluationFibreCardinalityStillNotPromoted =
+  Capacity.fixedJValueFibreCardinalityNotPromoted
+
+record PlusOneFibreAmplificationBoundary : Set where
+  constructor plus-one-fibre-amplification-boundary
+  field
+    coarseUnitCanIndexLargeFineCoordinateFamily : Bool
+    futureRelevantFineClassesForceResidualCapacity : Bool
+    jCompletionFineCoordinate19683Reused : Bool
+    jFixedEvaluationFibreCardinality19683Claimed : Bool
+    jFixedEvaluationFibreCardinality19683ClaimedIsFalse :
+      jFixedEvaluationFibreCardinality19683Claimed ≡ false
+    oneCoarseUnitMeansOneFineState : Bool
+    oneCoarseUnitMeansOneFineStateIsFalse :
+      oneCoarseUnitMeansOneFineState ≡ false
+    largeFineFibreMeansUniversalAdvantage : Bool
+    largeFineFibreMeansUniversalAdvantageIsFalse :
+      largeFineFibreMeansUniversalAdvantage ≡ false
+
+canonicalPlusOneFibreAmplificationBoundary :
+  PlusOneFibreAmplificationBoundary
+canonicalPlusOneFibreAmplificationBoundary =
+  plus-one-fibre-amplification-boundary
+    true true true
+    false refl
+    false refl
+    false refl
+
+
+------------------------------------------------------------------------
+-- 7. Extension shape versus dynamically activated distinction.
+--
+-- A cardinal/completion +1 does not become future-load-bearing merely because
+-- it is an extension.  Dynamic relevance requires an actual common-trace
+-- terminalisation defect / LatentDistinctionActivation.
+------------------------------------------------------------------------
+
+nonginFrameExtensionIsDynamicallyActivated :
+  Activation.LatentDistinctionActivation
+    NonginDynamic.nonginFrameActionSystem
+    NonginDynamic.observeNongin
+nonginFrameExtensionIsDynamicallyActivated =
+  NonginDynamic.nonginTerminalisationDefect
+
+record PlusOneDynamicActivationBoundary : Set where
+  constructor plus-one-dynamic-activation-boundary
+  field
+    extensionShapeAloneImpliesDynamicActivation : Bool
+    extensionShapeAloneImpliesDynamicActivationIsFalse :
+      extensionShapeAloneImpliesDynamicActivation ≡ false
+    nonginFrameHasConcreteActivationWitness : Bool
+    ninePlusOneHasActivationWitnessHere : Bool
+    tenPlusOneHasActivationWitnessHere : Bool
+    fiftyThreePlusOneHasActivationWitnessHere : Bool
+    monsterPlusOneHasActivationWitnessHere : Bool
+    arithmeticEqualityCreatesFutureDistinction : Bool
+    arithmeticEqualityCreatesFutureDistinctionIsFalse :
+      arithmeticEqualityCreatesFutureDistinction ≡ false
+
+canonicalPlusOneDynamicActivationBoundary :
+  PlusOneDynamicActivationBoundary
+canonicalPlusOneDynamicActivationBoundary =
+  plus-one-dynamic-activation-boundary
+    false refl
+    true
+    false false false false
+    false refl

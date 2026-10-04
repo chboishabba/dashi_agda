@@ -1,0 +1,69 @@
+name: 2B same-object max-cut
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/j369-ogg-address-ssp15-no-go-20260925
+    paths:
+      - 'DASHI/Moonshine/OggSSP2BM22RuntimeMaxCutReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BM22d2Completion10RuntimeReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BDefectRecognitionAmbiguityExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BBinaryTetrahedralCentralSignPhaseNoGoExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BSameObjectMaxCutFrontierExact.agda'
+      - 'scripts/check_twob_same_object_max_cut.sh'
+      - '.github/workflows/twob-same-object-max-cut.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/OggSSP2BM22RuntimeMaxCutReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BM22d2Completion10RuntimeReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BIntegralMoonshineLocalActionSourceExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BBinaryTetrahedralDefectSourceExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BDefectRecognitionAmbiguityExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BBinaryTetrahedralCentralSignPhaseNoGoExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BTateGradingConventionBridgeExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BSameObjectMaxCutFrontierExact.agda'
+      - 'scripts/check_twob_same_object_max_cut.sh'
+      - '.github/workflows/twob-same-object-max-cut.yml'
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  AGDA_FLAKE: github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin
+  AGDA_JOBS: '2'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Cache pinned Agda environment
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: ${{ runner.os }}-agda29-86a1179c1f886da773dc53be920bcca5d876884e
+          restore-keys: |
+            ${{ runner.os }}-agda29-
+      - name: Check 2B same-object max-cut
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          bash scripts/check_twob_same_object_max_cut.sh
