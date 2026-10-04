@@ -13,8 +13,14 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPositiveMaxCut20261004Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPositiveMaxCut20261004Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBResearchCutExact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBResearchCut20261004Test.agda'
       - '.github/workflows/ns-b-positive-maxcut.yml'
   pull_request:
     paths:
@@ -26,8 +32,14 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPositiveMaxCut20261004Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPositiveMaxCut20261004Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBResearchCutExact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBResearchCut20261004Test.agda'
       - '.github/workflows/ns-b-positive-maxcut.yml'
   workflow_dispatch:
 
@@ -62,5 +74,11 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutTest.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DynamicMaxCutTest.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406ProducerChoiceMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPositiveMaxCut20261004Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPositiveMaxCut20261004Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBResearchCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBResearchCut20261004Test.agda
