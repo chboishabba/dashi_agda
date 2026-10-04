@@ -18,13 +18,21 @@ required = {
     ],
     'DASHI/ComputerScience/TekumMonotonicityExact.agda': [
         'hunholdProposition4PositiveParsedAdjacent',
+        'hunholdProposition4PositiveSourceAdjacent',
+    ],
+    'DASHI/ComputerScience/TekumProposition4PositiveChainExact.agda': [
+        'ParsedAnchorNode',
+        'ParsedAnchorStep',
+        'parsedAnchorStepStrict',
+        'ParsedAnchorChain',
+        'parsedAnchorChainStrict',
     ],
 }
 
 for rel, needles in required.items():
     path = ROOT / rel
     if not path.exists():
-        raise SystemExit(f'missing Prop. 4 extractor owner: {rel}')
+        raise SystemExit(f'missing Prop. 4 max-cut owner: {rel}')
     text = path.read_text(encoding='utf-8')
     for needle in needles:
         if needle not in text:
@@ -33,4 +41,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum Prop. 4 extractor static gate: parser LST list normal form, adjacent carry extraction, and parsed-adjacent monotonicity endpoint are present.')
+print('Tekum Prop. 4 max-cut static gate: parser LST normal form, adjacent carry extraction, parsed-adjacent monotonicity, and arbitrary finite parsed-chain transitivity are present. Full source Prop. 4 remains fail-closed until source code order constructs the parsed chain.')
