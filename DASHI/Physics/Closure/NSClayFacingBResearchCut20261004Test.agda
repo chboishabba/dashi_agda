@@ -7,6 +7,12 @@ import DASHI.Physics.Closure.NSClayFacingBResearchCutExact as B
 literalPairExtractionPaid : B.bLiteralDeepPairExtractionClosed ≡ true
 literalPairExtractionPaid = refl
 
+b4AliasEliminated : B.bB4ArbitraryOperatorAliasEliminated ≡ true
+b4AliasEliminated = refl
+
+b4StrictEstimateOpen : B.bCriticalStrictSignedOperatorClosed ≡ false
+b4StrictEstimateOpen = refl
+
 legacyB7EqualityRejected : B.bR406UniversalCovarianceEqualityAdmissible ≡ false
 legacyB7EqualityRejected = refl
 
