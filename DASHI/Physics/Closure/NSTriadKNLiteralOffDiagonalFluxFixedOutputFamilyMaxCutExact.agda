@@ -2,11 +2,6 @@ module DASHI.Physics.Closure.NSTriadKNLiteralOffDiagonalFluxFixedOutputFamilyMax
 
 ------------------------------------------------------------------------
 -- POSITIVE B7 Q4+E / FIXED-OUTPUT OFF-DIAGONAL R290 DERIVATIVE FAMILY
---
--- Enumerates the exact R396 unordered list-position pairs on one nonzero
--- physical output fibre and assigns the literal off-diagonal pair derivative
--- datum to each pair.  The resulting R422 flux/tangent sums are exactly the
--- R385 sums on the same R396 pair enumeration at every time.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -14,6 +9,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (_++_)
+open import Data.Rational using (Positive)
 open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
@@ -30,6 +26,8 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputFluxFiniteDerivativeCompilerRou
 import DASHI.Physics.Closure.NSTriadKNR418FinitePairFamilyToR409Round422Exact as R422
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
+import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
+import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
 import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNFiniteWeightedGramFluxAggregationRound385Exact as R385
@@ -117,8 +115,7 @@ module FixedOutputFamily
   pairCurves = buildAllData fibre allOutput
 
   sumCurvesAppend :
-    (curves : List (R422.PairCurveDerivativeData Time DerivativeOf)) →
-    (more : List (R422.PairCurveDerivativeData Time DerivativeOf)) →
+    (curves more : List (R422.PairCurveDerivativeData Time DerivativeOf)) →
     (time : Time) →
     R412.sumCurves (R422.fluxTerms (curves ++ more)) time
     ≡ R412.sumCurves (R422.fluxTerms curves) time
@@ -128,8 +125,7 @@ module FixedOutputFamily
     rewrite sumCurvesAppend curves more time = refl
 
   sumTangentCurvesAppend :
-    (curves : List (R422.PairCurveDerivativeData Time DerivativeOf)) →
-    (more : List (R422.PairCurveDerivativeData Time DerivativeOf)) →
+    (curves more : List (R422.PairCurveDerivativeData Time DerivativeOf)) →
     (time : Time) →
     R412.sumCurves (R422.tangentTerms (curves ++ more)) time
     ≡ R412.sumCurves (R422.tangentTerms curves) time
@@ -139,7 +135,7 @@ module FixedOutputFamily
     rewrite sumTangentCurvesAppend curves more time = refl
 
   sumFluxAppend :
-    (left right : List _) →
+    (left right : List R290.DampedGramPair) →
     R385.sumWeightedFlux (left ++ right)
     ≡ R385.sumWeightedFlux left + R385.sumWeightedFlux right
   sumFluxAppend [] right = refl
@@ -147,7 +143,7 @@ module FixedOutputFamily
     rewrite sumFluxAppend rest right = refl
 
   sumTangentAppend :
-    (left right : List _) →
+    (left right : List R290.DampedGramPair) →
     R385.sumWeightedFluxTangent (left ++ right)
     ≡ R385.sumWeightedFluxTangent left
       + R385.sumWeightedFluxTangent right
@@ -167,9 +163,7 @@ module FixedOutputFamily
     (positive :
       (beta : Physical.PhysicalTriadIncidence) →
       beta R396.OccursIn rest →
-      Data.Rational.Positive
-        (DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact.pairRate
-          (Local.P.physicalDoubleMixedPair alpha beta))) →
+      Positive (R291.pairRate (Local.P.physicalDoubleMixedPair alpha beta))) →
     R412.sumCurves
       (R422.fluxTerms (buildHeadData alpha alphaOutput rest restOutput)) time
     ≡ R385.sumWeightedFlux (Local.headR290Pairs alpha rest positive)
@@ -192,9 +186,7 @@ module FixedOutputFamily
     (positive :
       (beta : Physical.PhysicalTriadIncidence) →
       beta R396.OccursIn rest →
-      Data.Rational.Positive
-        (DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact.pairRate
-          (Local.P.physicalDoubleMixedPair alpha beta))) →
+      Positive (R291.pairRate (Local.P.physicalDoubleMixedPair alpha beta))) →
     R412.sumCurves
       (R422.tangentTerms (buildHeadData alpha alphaOutput rest restOutput)) time
     ≡ R385.sumWeightedFluxTangent (Local.headR290Pairs alpha rest positive)
