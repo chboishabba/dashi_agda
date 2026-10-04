@@ -12,3 +12,9 @@ r406AggregationClosed = refl
 
 strictMarginStillOpen : Cut.b4StrictMarginClosed ≡ false
 strictMarginStillOpen = refl
+
+b7UniversalEqualityRejected : Cut.b7UniversalSameObjectEqualityAdmissible ≡ false
+b7UniversalEqualityRejected = refl
+
+b7TransportRequired : Cut.b7DynamicOrQuantitativeTransportRequired ≡ true
+b7TransportRequired = refl
