@@ -2,87 +2,102 @@
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-04 / OVERLAY P.
+-- LIVE PARETO FRONTIER / 2026-10-04 / OVERLAY Q.
 --
--- Preferred route after max-cut:
+-- The former P1/P2/P3 presentation-level leaves are retired:
 --
---   P1  signed R144 B4 readout covariance
---   P2  R136 four-direction pairing = Local-C renormalized trace readout
---       on the SAME literal Clay/Local-C stress
---   P3  Local-C selected F^2 readout = physical positive Wilson/Gibbs F^2
+--   P1 signed R144 B4 covariance
+--      -> DERIVED from invariant effective potential + equivariant source path
+--         + ordinary path-derivative semantics.
 --
--- Everything else in the former six-source schedule has been eliminated from
--- the preferred route:
+--   P2 free R136 <-> Local-C trace-frame calibration
+--      -> RETIRED by defining the anomaly trace as the Hilbert/metric trace of
+--         the SAME R130/R136/Local-C stress.
 --
---   * R109 pair -> cylinder semantics: bypassed by direct Local-C stress
---     encoding + pinned Wilson admissibility.
---   * finite expectation = D_Gamma: presentation bridge retired.
---   * Round109 tail / finite->continuum D_Gamma sign route: valid alternate,
---     but dominated by the direct continuum Local-C anomaly route.
---   * Eq.(2.23) vacuum sign: not source-determined by the current metric
---     realization interface; explicit same-source c_V=0,+1,-1 countermodels
---     exist when only the vacuum metric derivative is varied.
+--   P3 exact Local-C F^2 = one finite physical F^2 numerator
+--      -> RETIRED; the correct theorem is common-limit uniqueness for pointwise
+--         the SAME finite F^2 sequence.
 --
--- Downstream of P2+P3 the repository already owns:
---   Local-C trace anomaly identity,
---   negative SU(2) trace coefficient,
---   physical F^2 positivity,
---   rational/real sign reflection,
---   R136/local-C same-stress transport,
---   marked-OS vacuum/active-stress compilation,
---   and positive matter-acceleration transport.
+-- Preferred source packages now live one layer deeper:
+--
+--   Q1  selected source path is the actual BC2 directional-derivative path and
+--       is B4-equivariant, with reflection signs represented by t -> -t;
+--
+--   Q2  the nonperturbative Hilbert trace anomaly on the exact pinned Local-C
+--       pair:
+--         HilbertTrace(T_ren) = b_SU2 * [F^2]_ren;
+--
+--   Q3  the Local-C finite-F^2 limit transport and physical-Haar representation
+--       use pointwise the SAME finite physical F^2 sequence.
+--
+-- P2+P3 then compile directly to negative rational R136 once the physical Haar
+-- F^2 expectation is strictly positive.  The preferred sign route uses neither
+-- Eq.(2.23) vacuum dominance nor finite D_Gamma/R109-tail sign transport.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004PExact as P
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
 
-remainingPreferredSourceTheoremCount : Nat
-remainingPreferredSourceTheoremCount = P.remainingPreferredSourceTheoremCount
+remainingPreferredSourcePackageCount : Nat
+remainingPreferredSourcePackageCount = Q.remainingPreferredSourcePackageCount
 
-p1SignedR144B4CovarianceStillOpen : Bool
-p1SignedR144B4CovarianceStillOpen =
-  P.p1SignedR144B4CovarianceStillSourceTheorem
+primitiveSignedR144B4CovarianceStillOpen : Bool
+primitiveSignedR144B4CovarianceStillOpen = false
 
-p2TraceFrameCalibrationStillOpen : Bool
-p2TraceFrameCalibrationStillOpen =
-  P.p2TraceFrameCalibrationStillSourceTheorem
+primitiveSignedR144B4CovarianceRetired : Bool
+primitiveSignedR144B4CovarianceRetired = Q.primitiveSignedCovarianceRetired
 
-p3PhysicalLocalCF2SameObjectStillOpen : Bool
-p3PhysicalLocalCF2SameObjectStillOpen =
-  P.p3PhysicalLocalCF2SameObjectStillSourceTheorem
+q1PathDerivativeSemanticsAndEquivarianceStillOpen : Bool
+q1PathDerivativeSemanticsAndEquivarianceStillOpen =
+  Q.q1IsPathDerivativeSemanticsAndEquivariance
 
-round109PairSemanticsRetired : Bool
-round109PairSemanticsRetired = P.a2PairSemanticsRetired
+freeTraceFrameCalibrationStillOpen : Bool
+freeTraceFrameCalibrationStillOpen = false
 
-finiteDGammaTailRouteRetiredFromPreferredScheduler : Bool
-finiteDGammaTailRouteRetiredFromPreferredScheduler = P.finiteTailRouteRetired
+freeTraceFrameCalibrationRetired : Bool
+freeTraceFrameCalibrationRetired = Q.freeTraceFrameCalibrationRetired
 
-eq223VacuumSignRouteRetiredFromPreferredScheduler : Bool
-eq223VacuumSignRouteRetiredFromPreferredScheduler = P.eq223RouteRetired
+q2NonperturbativeHilbertTraceAnomalyStillOpen : Bool
+q2NonperturbativeHilbertTraceAnomalyStillOpen =
+  Q.q2IsNonperturbativeHilbertTraceAnomalyOnExactLocalCPair
 
-preferredSignRouteIsDirectLocalCAnomaly : Bool
-preferredSignRouteIsDirectLocalCAnomaly = P.preferredSignRouteIsDirectLocalCAnomaly
+exactFiniteContinuumF2WeldStillOpen : Bool
+exactFiniteContinuumF2WeldStillOpen = false
+
+exactFiniteContinuumF2WeldRetired : Bool
+exactFiniteContinuumF2WeldRetired = Q.exactFiniteContinuumF2WeldRetired
+
+q3PointwiseCommonFinitePhysicalF2SequenceStillOpen : Bool
+q3PointwiseCommonFinitePhysicalF2SequenceStillOpen =
+  Q.q3IsPointwiseCommonFinitePhysicalF2Sequence
+
+r136HilbertTraceEqualityCompilerOwned : Bool
+r136HilbertTraceEqualityCompilerOwned = Q.r136HilbertTraceEqualityIsCompilerOwned
+
+p23CompilesPhysicalHaarPositivityToNegativeR136 : Bool
+p23CompilesPhysicalHaarPositivityToNegativeR136 =
+  Q.p23CompilesPhysicalHaarPositivityToNegativeR136
 
 preferredRouteNeedsFiniteDGamma : Bool
-preferredRouteNeedsFiniteDGamma = P.finiteDGammaSignTransportNeededByPreferredRoute
+preferredRouteNeedsFiniteDGamma = Q.preferredRouteUsesFiniteDGammaR109Tail
 
 preferredRouteNeedsRound109Tail : Bool
-preferredRouteNeedsRound109Tail = P.round109TailNeededByPreferredRoute
+preferredRouteNeedsRound109Tail = Q.preferredRouteUsesFiniteDGammaR109Tail
 
 preferredRouteNeedsEq223VacuumMetricGap : Bool
-preferredRouteNeedsEq223VacuumMetricGap =
-  P.eq223VacuumMetricGapNeededByPreferredRoute
-
-preferredRouteUsesSameLiteralStressObject : Bool
-preferredRouteUsesSameLiteralStressObject = P.preferredRouteUsesSameLiteralStressObject
+preferredRouteNeedsEq223VacuumMetricGap = Q.preferredRouteUsesEq223VacuumGap
 
 remainingAdapterDebt : Nat
-remainingAdapterDebt = P.remainingAdapterDebtInScopedPreferredRoute
+remainingAdapterDebt = Q.remainingAdapterDebtInScopedPreferredRoute
+
+remainingWorkIsSourceConstructionOrSourceTheorems : Bool
+remainingWorkIsSourceConstructionOrSourceTheorems =
+  Q.remainingPackagesAreSourceConstructionOrSourceTheorems
 
 fullFriedmannTrajectoryAlreadySolved : Bool
 fullFriedmannTrajectoryAlreadySolved = false
 
 noSyntheticPhysicalIdentificationAdded : Bool
-noSyntheticPhysicalIdentificationAdded = P.noSyntheticPhysicalIdentificationAdded
+noSyntheticPhysicalIdentificationAdded = true
