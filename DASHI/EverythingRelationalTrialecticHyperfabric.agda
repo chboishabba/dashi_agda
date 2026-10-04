@@ -3,7 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.\n-- Exhaustive conversation-audit verification root.
+-- This is an aggregate import only.  It does not strengthen any source claim.\n-- Final attachment/conversation audit verification root.
 -- In particular:
 --   * citations do not import proof or authority;
 --   * a general relational architecture is not a trauma-causal theorem;
@@ -26,11 +26,13 @@ import DASHI.Reasoning.RelationalPerspectiveSubjectExact
 import DASHI.Reasoning.RelationalPerspectiveIntegrationExact
 
 import DASHI.Foundations.RelationalStageTwelveSiteExact
+import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact
 import DASHI.Foundations.RelationalDepthPresheafExact
 import DASHI.Foundations.RelationalDepthBidescentExact
 import DASHI.Foundations.TrialecticDepthHyperformExact
 import DASHI.Foundations.RelationalObserverNonaryD4DecompositionExact
 import DASHI.Foundations.TrialecticD4C3ResidualBoundaryExact
+import DASHI.Foundations.TrialecticZeroToThirteenStageBoundaryExact
 
 import DASHI.Cognition.PNF.TrialecticMentalizingCalibrationExact
 import DASHI.Cognition.PNF.PerspectiveAllocationExact
