@@ -11,9 +11,12 @@ Subcommands:
 
   advance
       Apply an explicit reviewed decision overlay, refresh the adaptive queue,
-      rebuild the 43,996-row processing ledger, emit the next full-text
-      retrieval residual, optionally retrieve a bounded batch, rebuild the
-      full-text gate, and parse newly verified artifacts.
+      then advance retrieval/full-text state.
+
+  resume
+      Without replaying any screening decision, rebuild the current processing
+      and retrieval residuals, retrieve the next bounded batch, rebuild the
+      verified full-text gate, and optionally invoke the legacy parse adapter.
 
 Candidate recommendations are never auto-promoted.
 """
@@ -254,6 +257,102 @@ def parse_verified(
     run(cmd, cwd=DASHI_ROOT)
 
 
+
+def advance_retrieval_state(
+    *,
+    slr_root: Path,
+    artifact_root: Path,
+    ledger: Path,
+    fetch_max_items: int,
+    fetch_timeout: float,
+    fetch_max_bytes: int,
+    parse_verified_flag: bool,
+    parse_max_items: int | None,
+) -> dict[str, Any]:
+    persistent_retrieved = artifact_root / "fulltext" / "retrieved-artifacts.jsonl"
+    fulltext_index = build_fulltext_index(
+        slr_root=slr_root,
+        ledger=ledger,
+        artifact_root=artifact_root,
+        retrieved_manifest=(
+            persistent_retrieved if persistent_retrieved.exists() else None
+        ),
+    )
+    processing, residual = build_processing_and_residual(
+        artifact_root=artifact_root,
+        ledger=ledger,
+        fulltext_index=fulltext_index,
+    )
+
+    retrieval_returncode = None
+    if fetch_max_items > 0:
+        new_manifest = artifact_root / "fulltext" / "retrieved-artifacts.new.jsonl"
+        failure_log = artifact_root / "fulltext" / "retrieval-failures.jsonl"
+        retrieval_returncode = run(
+            [
+                sys.executable,
+                str(HERE / "fetch_retrieval_residual.py"),
+                "--residual",
+                str(residual),
+                "--cache-dir",
+                str(artifact_root / "fulltext" / "cache"),
+                "--output-manifest",
+                str(new_manifest),
+                "--failure-log",
+                str(failure_log),
+                "--max-items",
+                str(fetch_max_items),
+                "--timeout",
+                str(fetch_timeout),
+                "--max-bytes",
+                str(fetch_max_bytes),
+            ],
+            cwd=DASHI_ROOT,
+            allow_codes={0, 2},
+        )
+
+        if new_manifest.exists():
+            merge_retrieved_manifests(
+                persistent_retrieved if persistent_retrieved.exists() else None,
+                new_manifest,
+                persistent_retrieved,
+            )
+            fulltext_index = build_fulltext_index(
+                slr_root=slr_root,
+                ledger=ledger,
+                artifact_root=artifact_root,
+                retrieved_manifest=persistent_retrieved,
+            )
+            processing, residual = build_processing_and_residual(
+                artifact_root=artifact_root,
+                ledger=ledger,
+                fulltext_index=fulltext_index,
+            )
+
+    verified_rows = [
+        row for row in read_tsv(fulltext_index)
+        if row.get("status") == "verified"
+    ]
+    if parse_verified_flag and verified_rows:
+        parse_verified(
+            slr_root=slr_root,
+            artifact_root=artifact_root,
+            max_items=parse_max_items,
+        )
+
+    return {
+        "authoritative_ledger": str(ledger),
+        "processing_ledger": str(processing),
+        "retrieval_residual": str(residual),
+        "verified_fulltext_count": len(verified_rows),
+        "retrieval_transport_returncode": retrieval_returncode,
+        "candidate_auto_promoted": False,
+        "retrieval_creates_screening_decision": False,
+        "parse_creates_reviewed_evidence": False,
+        "parse_creates_source_audit_admission": False,
+    }
+
+
 def cmd_prepare(args: argparse.Namespace) -> int:
     slr_root = resolve_slr_root(args.slr_root)
     artifact_root = args.artifact_root.resolve()
@@ -281,81 +380,57 @@ def cmd_advance(args: argparse.Namespace) -> int:
         max_packets=args.max_packets,
         selection=args.selection,
     )
-
-    persistent_retrieved = artifact_root / "fulltext" / "retrieved-artifacts.jsonl"
-    fulltext_index = build_fulltext_index(
+    summary = advance_retrieval_state(
         slr_root=slr_root,
-        ledger=ledger,
-        artifact_root=artifact_root,
-        retrieved_manifest=persistent_retrieved if persistent_retrieved.exists() else None,
-    )
-    processing, residual = build_processing_and_residual(
         artifact_root=artifact_root,
         ledger=ledger,
-        fulltext_index=fulltext_index,
+        fetch_max_items=args.fetch_max_items,
+        fetch_timeout=args.fetch_timeout,
+        fetch_max_bytes=args.fetch_max_bytes,
+        parse_verified_flag=args.parse_verified,
+        parse_max_items=args.parse_max_items,
     )
-
-    retrieval_returncode = None
-    if args.fetch_max_items > 0:
-        new_manifest = artifact_root / "fulltext" / "retrieved-artifacts.new.jsonl"
-        failure_log = artifact_root / "fulltext" / "retrieval-failures.jsonl"
-        retrieval_returncode = run([
-            sys.executable,
-            str(HERE / "fetch_retrieval_residual.py"),
-            "--residual", str(residual),
-            "--cache-dir", str(artifact_root / "fulltext" / "cache"),
-            "--output-manifest", str(new_manifest),
-            "--failure-log", str(failure_log),
-            "--max-items", str(args.fetch_max_items),
-            "--timeout", str(args.fetch_timeout),
-            "--max-bytes", str(args.fetch_max_bytes),
-        ], cwd=DASHI_ROOT, allow_codes={0, 2})
-
-        if new_manifest.exists():
-            merge_retrieved_manifests(
-                persistent_retrieved if persistent_retrieved.exists() else None,
-                new_manifest,
-                persistent_retrieved,
-            )
-            fulltext_index = build_fulltext_index(
-                slr_root=slr_root,
-                ledger=ledger,
-                artifact_root=artifact_root,
-                retrieved_manifest=persistent_retrieved,
-            )
-            processing, residual = build_processing_and_residual(
-                artifact_root=artifact_root,
-                ledger=ledger,
-                fulltext_index=fulltext_index,
-            )
-
-    verified_rows = [
-        row for row in read_tsv(fulltext_index)
-        if row.get("status") == "verified"
-    ]
-    if args.parse_verified and verified_rows:
-        parse_verified(
-            slr_root=slr_root,
-            artifact_root=artifact_root,
-            max_items=args.parse_max_items,
-        )
-
-    summary = {
-        "schema": "digital-esd-screen-review-retrieve-parse-loop-v1",
-        "authoritative_ledger": str(ledger),
-        "processing_ledger": str(processing),
-        "retrieval_residual": str(residual),
-        "verified_fulltext_count": len(verified_rows),
-        "retrieval_transport_returncode": retrieval_returncode,
-        "next_review_packets": str(artifact_root / "review" / "review_packets.jsonl"),
-        "candidate_auto_promoted": False,
-        "retrieval_creates_screening_decision": False,
-        "parse_creates_reviewed_evidence": False,
-        "parse_creates_source_audit_admission": False,
-    }
+    summary.update({
+        "schema": "digital-esd-screen-review-retrieve-parse-loop-v2",
+        "mode": "advance-reviewed-overlay",
+        "next_review_packets": str(
+            artifact_root / "review" / "review_packets.jsonl"
+        ),
+    })
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 0
 
+
+def cmd_resume(args: argparse.Namespace) -> int:
+    slr_root = resolve_slr_root(args.slr_root)
+    artifact_root = args.artifact_root.resolve()
+    ledger = authoritative_ledger(artifact_root)
+
+    prepare_review(
+        slr_root=slr_root,
+        artifact_root=artifact_root,
+        max_packets=args.max_packets,
+        selection=args.selection,
+    )
+    summary = advance_retrieval_state(
+        slr_root=slr_root,
+        artifact_root=artifact_root,
+        ledger=ledger,
+        fetch_max_items=args.fetch_max_items,
+        fetch_timeout=args.fetch_timeout,
+        fetch_max_bytes=args.fetch_max_bytes,
+        parse_verified_flag=args.parse_verified,
+        parse_max_items=args.parse_max_items,
+    )
+    summary.update({
+        "schema": "digital-esd-screen-review-retrieve-parse-loop-v2",
+        "mode": "resume-without-decision-replay",
+        "next_review_packets": str(
+            artifact_root / "review" / "review_packets.jsonl"
+        ),
+    })
+    print(json.dumps(summary, indent=2, sort_keys=True))
+    return 0
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -388,6 +463,23 @@ def main() -> int:
     a.add_argument("--parse-verified", action="store_true")
     a.add_argument("--parse-max-items", type=int)
     a.set_defaults(func=cmd_advance)
+
+
+    r = sub.add_parser("resume")
+    r.add_argument("--slr-root", type=Path)
+    r.add_argument("--artifact-root", type=Path, required=True)
+    r.add_argument("--max-packets", type=int, default=50)
+    r.add_argument(
+        "--selection",
+        choices=("calibration-first", "pareto-first"),
+        default="calibration-first",
+    )
+    r.add_argument("--fetch-max-items", type=int, default=20)
+    r.add_argument("--fetch-timeout", type=float, default=30.0)
+    r.add_argument("--fetch-max-bytes", type=int, default=100 * 1024 * 1024)
+    r.add_argument("--parse-verified", action="store_true")
+    r.add_argument("--parse-max-items", type=int)
+    r.set_defaults(func=cmd_resume)
 
     args = ap.parse_args()
     return int(args.func(args))

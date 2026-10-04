@@ -1194,73 +1194,173 @@ now blocked on obtaining additional authoritatively retained full-text bytes,
 not on parser architecture.
 
 
-## Round-1 title/abstract review execution
+## Situated trajectory cross-pollination recut
 
-The first explicit review tranche has now been recovered from the retained
-50-line review overlay and normalised into the authoritative Digital-ESD
-screening-override schema:
+The situated-return tranche now reuses broader canonical formalism without
+promoting those source domains into empirical Digital-ESD findings.
 
-`artifacts/digital-esd/screening/reviewer-decisions-round1.jsonl`
-
-Round-1 denominator:
+The primary situated trajectory retains, independently:
 
 ```text
-reviewed records      50
-exclude               27
-probable              11
-include                4
-unresolved             8
-retained for fulltext 15
+pedagogical outcome
+capability
+recognition
+reachability
+contestability
+counterfactual context
+memory revision
+evidence provenance
+source independence
+decision autonomy
+benefit / burden / externality incidence
+voice / authority
+control / mediation
+practical exit
+lifecycle position
+temporal position
+economic return
 ```
 
-The 15 authoritative `include | probable` decisions are separately queued in:
-
-`artifacts/digital-esd/fulltext/fulltext-retrieval-seed-round1.jsonl`
-
-with the retained boundary:
+The cross-pollination reuses constructive non-factorability already present
+elsewhere in the repository:
 
 ```text
-screening decision -> retrieval queue
-!= source truth
+capability != recognition
+availability != reachability != contestable agency
+intervention label != counterfactual-relative effect
+observed group != individual effect
+formal connection != effective connection != authority
+report/testimony != latent memory reliability
+repeated report != independent corroboration
+collective narrative != individual latent memory state
+remembered content != source origin
+formal family choice != effective intersectional capability
+recognition != distribution != representation
+citation agreement != primary-source support
+perceived independence != provenance independence
+same output != independent generation
+```
+
+This creates an additional corpus-synthesis stop rule:
+
+```text
+raw source count
+!= independent evidential support
+
+citation agreement
+!= direct primary support
+
+repeated result
+!= independent replication
+```
+
+Dependence does not mean zero evidence; it means that provenance/genealogy must
+remain explicit before synthesis treats observations as independent support.
+
+### Formal expansion stop rule
+
+This cross-pollination does not reopen unconstrained framework growth.  The
+framework is now frozen by default.  Further coordinates are admitted only
+when a reviewed/admitted corpus object produces a literal consumer collision
+that the current situated trajectory cannot distinguish.
+
+The execution priority remains:
+
+```text
+screen
+-> retrieve
+-> parse
+-> review canonical evidence
+-> SourceAuditAdmission
+-> framework challenge
+-> corpus-level blind-spot / source-dependence analysis
+```
+
+
+
+## Academic corpus / SensibLaw DB-native recut
+
+Runtime weld: **SLR PR #50** (`agent/digital-esd-db-native-world-v2`) adds the clean PostgreSQL world materializer and bounded agent-inspection command. The dashi `run_world.py` façade delegates to that runtime; the superseded SLR PR #49 is closed.
+
+The scholarly-review world must reuse the existing SensibLaw/SLR evidence and
+source-review owners rather than materialising a parallel Digital-ESD academic
+ontology.
+
+Canonical scholarly distinctions already present in the repository include:
+
+```text
+AttributedSource
+!= source authority
+
+EvidenceManifestation
+-> EvidenceSourceRevision
+-> EvidenceSpan
+-> EvidenceObservation
+
+parser / PNF candidate
+!= paper truth
+
+review acceptance
 != SourceAuditAdmission
+
+title equality
+!= same publication identity
+
+publication QID
+is not required for scholarly identity
+
+included publication count
+!= independent evidence units
+
+pooled estimate
+!= publication-bias state
+
+transparent reporting / PRISMA
+!= review truth
+
+citation visibility
+!= replicability / evidentiary weight
+
+primary-source role
+!= proposition truth
 ```
 
-The eight unresolved rows remain unresolved and remain in the denominator.
-The 27 exclusions remain ledgered and are not discarded.
+Digital-ESD already owns a second-stage scholarly bridge through
+`DigitalESDSLRSourceReviewBridgeExact`, a design-relative claim-ceiling owner
+through `DigitalESDStudyClaimCeilingExact`, and source-genealogy/systematic-
+review boundaries through the Ibrahim/SensibLaw evidence-synthesis owners.
 
-### Important fixture boundary
-
-The 43,996-row `fixtures/digital_esd_ledger.tsv` currently present in the SLR
-core repository is an infrastructure/regression fixture with generated
-`digital-education-source-N-...pipeline-validation` content. Its current P0-D
-controller score is derived from a hash of record/run identity.
-
-Therefore:
+The newer canonical scale owner
+`DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact` recuts corpus-scale
+processing around persistent compilation state:
 
 ```text
-SLR synthetic 43,996-row fixture
-!= real ERIC title/abstract corpus
-!= scientific screening evidence
+L0 immutable source bytes -> revision -> exact regions
+L1 semantic-eligible region -> parser success OR residual -> candidate PNF
+L2 candidate semantics -> reconciliation candidates
+L3 explicit review / admission
 ```
 
-It may test scale, denominator integrity, replay and parser plumbing, but real
-Digital-ESD screening decisions must remain grounded in the actual ERIC
-title/abstract review packets / deduplicated metadata artifact.
-
-### Immediate next execution
+and explicitly states:
 
 ```text
-50 reviewed
--> 15 retained/probable
--> retrieve exact full-text artifacts
--> hash + same-object weld
--> parse canonical document structure / evidence
--> per-study review/audit
-
-8 unresolved
--> targeted evidence/title-abstract resolution
--> explicit review again
-
-remaining ERIC denominator
--> prepare next adaptive review tranche
+runtime state requires flat-file handoff = false
+JSON is canonical runtime database      = false
+TSV is canonical runtime database       = false
+Postgres creates global semantic truth  = false
 ```
+
+Therefore the production world should be PostgreSQL-native. JSON/JSONL remains
+only a bounded inspection/export/receipt surface.
+
+The intended agent entry point remains one command, but its production meaning
+is:
+
+```text
+run world
+-> update DB-native source / parser / PNF / reconciliation state
+-> recompute review/acquisition/framework residuals
+-> return a bounded inspection projection
+```
+
+not "serialize the whole corpus graph to JSON".
