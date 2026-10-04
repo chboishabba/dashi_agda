@@ -10,5 +10,17 @@ literalPairExtractionPaid = refl
 legacyB7EqualityRejected : B.bR406UniversalCovarianceEqualityAdmissible ≡ false
 legacyB7EqualityRejected = refl
 
-dynamicB7StillOpen : B.bR406DynamicTransportClosed ≡ false
-dynamicB7StillOpen = refl
+endpointCompilerPaid : B.bR406ExactEndpointNormalFormCompilerClosed ≡ true
+endpointCompilerPaid = refl
+
+quarticCompilerAvailable : B.bR406QuarticGramEndpointCompilerAvailable ≡ true
+quarticCompilerAvailable = refl
+
+directProducerOpen : B.bR406DirectSignedQuinticRouteClosed ≡ false
+directProducerOpen = refl
+
+quarticProducerOpen : B.bR406QuarticGramEndpointRouteClosed ≡ false
+quarticProducerOpen = refl
+
+oneProducerStillOpen : B.bR406OneProducerRouteClosed ≡ false
+oneProducerStillOpen = refl
