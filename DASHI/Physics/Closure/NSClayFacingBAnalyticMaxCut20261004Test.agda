@@ -16,6 +16,9 @@ q4ePreferred = refl
 q5Fallback : Cut.b7DirectQuinticFallback ≡ true
 q5Fallback = refl
 
+continuationCompilerPaid : Cut.bContinuationCompilerMachineChecked ≡ true
+continuationCompilerPaid = refl
+
 b1StillOpen : Cut.b1AnalyticClosed ≡ false
 b1StillOpen = refl
 
@@ -27,6 +30,9 @@ b3StillOpen = refl
 
 b4StillOpen : Cut.b4AnalyticClosed ≡ false
 b4StillOpen = refl
+
+uniformLocalEDStillOpen : Cut.bUniformLocalEDAllocationClosed ≡ false
+uniformLocalEDStillOpen = refl
 
 b7StillOpen : Cut.b7OneProducerClosed ≡ false
 b7StillOpen = refl
