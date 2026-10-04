@@ -2,25 +2,19 @@
 module DASHI.Physics.Foundations.CMP119CosmologyB1SelectedSameSequenceMaxCutExact where
 
 ------------------------------------------------------------------------
--- B1 SOURCE MAX-CUT: WHAT THE DIRECT TAIL RECEIPT REALLY NEEDS.
+-- B1 SOURCE MAX-CUT: SELECTED SAME SEQUENCE, ALL CUTOFFS.
 --
--- The direct terminal inequality
+-- The terminal direct-tail inequality is compiler output once three exact
+-- same-object facts are paid:
 --
---   embed Q_R136 <= F_k + embed Tail_109(k)
+--   (1) Round109 controls every future value of the actual selected finite
+--       expectation sequence by its literal tail;
+--   (2) the R136 completed scalar is the limit of that SAME finite sequence;
+--   (3) at every cutoff, that finite expectation is exactly the embedded
+--       rational R144 finite D_Gamma readout.
 --
--- is not primitive physics.  It follows from two SAME-SEQUENCE facts:
---
---   (1) every later selected finite expectation is below the selected start
---       plus the literal Round109 tail;
---
---   (2) the selected completed R136 scalar is the limit endpoint of THAT SAME
---       finite expectation sequence.
---
--- Passing a uniform upper bound to the limit, and deleting a finite prefix of
--- a convergent sequence, are ordinary real-analysis laws.  The repository's
--- abstract limit interface does not export those laws, so they are stated here
--- explicitly as standard limit-order authority rather than smuggled in as
--- definitional equalities.
+-- (3) is deliberately all-cutoff.  This lets a later B2 geometric-tail theorem
+-- choose whatever sufficiently late cutoff it needs without losing B1.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -32,6 +26,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_; _≤ℝ_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyConcreteFiniteR109RealCompletionExact as Concrete
+import DASHI.Physics.Foundations.CMP119CosmologyR144R109DirectTailAnchorExact as Direct
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as Additive
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as R109
@@ -91,6 +86,16 @@ module _
 
   open SelectedR109SameSequenceCompletion public
 
+  record AllCutoffR144FiniteExpectationAttachment
+      (finiteRationalDGamma : Nat → ℚ) : Set₁ where
+    field
+      finiteExpectationIsEmbeddedR144DGamma :
+        ∀ cutoff →
+        C.finiteR109Expectation cutoff
+        ≡ Embed.embed baseEmbedding (finiteRationalDGamma cutoff)
+
+  open AllCutoffR144FiniteExpectationAttachment public
+
   selectedSameSequenceCompilesConcreteCompletion :
     RealTailLimitOrderAuthority sequenceLimit →
     ∀ {completed} →
@@ -127,14 +132,35 @@ module _
             fullLimitBelow
     }
 
+  directAnchorAtAnyCutoff :
+    (limitOrder : RealTailLimitOrderAuthority sequenceLimit) →
+    ∀ {completed finiteRationalDGamma} →
+    SelectedR109SameSequenceCompletion completed →
+    AllCutoffR144FiniteExpectationAttachment finiteRationalDGamma →
+    ∀ cutoff →
+    Direct.DirectR144R109TailAnchor
+      embedding source completed (finiteRationalDGamma cutoff) cutoff
+  directAnchorAtAnyCutoff
+      limitOrder sameSequence finiteAttachment cutoff =
+    Direct.fromConcreteCompletionAndFiniteIdentity
+      family source observable embedding
+      (selectedSameSequenceCompilesConcreteCompletion limitOrder sameSequence)
+      (finiteExpectationIsEmbeddedR144DGamma finiteAttachment cutoff)
+
 round109FiniteTailSemanticsIsSourceLeaf : Bool
 round109FiniteTailSemanticsIsSourceLeaf = true
 
 completionEndpointIdentityIsSourceLeaf : Bool
 completionEndpointIdentityIsSourceLeaf = true
 
+allCutoffR144FiniteAttachmentIsSourceLeaf : Bool
+allCutoffR144FiniteAttachmentIsSourceLeaf = true
+
 directTailInequalityIsCompilerOutput : Bool
 directTailInequalityIsCompilerOutput = true
+
+directB1AnchorCanFollowB2ToAnyLateCutoff : Bool
+directB1AnchorCanFollowB2ToAnyLateCutoff = true
 
 finitePrefixLimitLawIsGenericAnalysisNotYMPhysics : Bool
 finitePrefixLimitLawIsGenericAnalysisNotYMPhysics = true
