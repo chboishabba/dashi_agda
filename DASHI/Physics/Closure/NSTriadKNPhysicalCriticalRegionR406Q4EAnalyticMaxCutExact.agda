@@ -3,31 +3,27 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4EAnalyticMaxCu
 ------------------------------------------------------------------------
 -- POSITIVE B7 / PREFERRED Q4+E ANALYTIC MAX-CUT
 --
--- The exact direct-resolvent Gram/flux normal form is already available:
+-- Exact source now supplies:
 --
---   4 * integral C_direct
---     = integral offDiagonalGram
---       + integral offDiagonalFluxTangent.
+--   * the direct-resolvent Gram/flux normal form,
+--   * the literal global off-diagonal R290 derivative family,
+--   * exact attachment to R406's canonical pair list,
+--   * endpoint FTC given the repository's ordinary scalar FTC authority.
 --
--- The existing compiler turns this into an R503 budget once three receipts are
--- supplied:
+-- Therefore the preferred B7 route now has exactly TWO genuine analytic
+-- inequalities left:
 --
---   Q4a  cutoff-uniform integrated off-diagonal Gram bound,
---   E0   exact FTC for the same weighted off-diagonal flux curve,
---   E1   cutoff-uniform weighted-flux endpoint bound.
+--   Q4  cutoff-uniform integrated off-diagonal Gram bound,
+--   E   cutoff-uniform weighted-flux endpoint-increment bound.
 --
--- Only Q4a and E1 are genuine estimates.  E0 is standard derivative/FTC
--- plumbing, but no concrete literal off-diagonal R422 family currently closes
--- it in the repository, so it remains fail-closed here rather than being
--- silently treated as an estimate or as already proved.
+-- Neither is manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNDirectResolventGramFluxNormalFormExact as Q4E
-import DASHI.Physics.Closure.NSTriadKNR418FinitePairFamilyToR409Round422Exact as R422
-import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4EFTCCompilerMaxCutExact as FTC
 
 q4eExactNormalFormClosed : Bool
 q4eExactNormalFormClosed = Q4E.directR503QuarticGramPlusEndpointProducerAvailable
@@ -35,8 +31,17 @@ q4eExactNormalFormClosed = Q4E.directR503QuarticGramPlusEndpointProducerAvailabl
 q4ePreferredB7Route : Bool
 q4ePreferredB7Route = true
 
-q4eOffDiagonalFluxFTCClosed : Bool
-q4eOffDiagonalFluxFTCClosed = false
+q4eOffDiagonalFluxDerivativeCompilerClosed : Bool
+q4eOffDiagonalFluxDerivativeCompilerClosed =
+  FTC.q4eLiteralOffDiagonalDerivativeCompilerClosed
+
+q4eOffDiagonalFluxFTCClosedGivenOrdinaryScalarFTC : Bool
+q4eOffDiagonalFluxFTCClosedGivenOrdinaryScalarFTC =
+  FTC.q4eEndpointFTCClosedGivenOrdinaryScalarFTC
+
+q4eResearchLeavesReducedToTwoAnalyticBounds : Bool
+q4eResearchLeavesReducedToTwoAnalyticBounds =
+  FTC.q4eResearchLeavesReducedToTwoAnalyticBounds
 
 q4eIntegratedGramBoundClosed : Bool
 q4eIntegratedGramBoundClosed = false
@@ -44,16 +49,8 @@ q4eIntegratedGramBoundClosed = false
 q4eFluxEndpointBoundClosed : Bool
 q4eFluxEndpointBoundClosed = false
 
-q4eOnlyStandardTemporalSeamBeforeEndpointEstimate : Bool
-q4eOnlyStandardTemporalSeamBeforeEndpointEstimate =
-  R422.round422RemainingTemporalLeafIsActualCellCurveDifferentiation
-
-q4eProjectedCrossProductRuleIsTemporalRoot : Bool
-q4eProjectedCrossProductRuleIsTemporalRoot =
-  R426.round426RemainingAnalyticLawIsProjectedCrossProductRule
-
-q4eIntroducesNewRepresentationCarrier : Bool
-q4eIntroducesNewRepresentationCarrier = false
+q4eRepresentationOrTemporalPlumbingRemaining : Bool
+q4eRepresentationOrTemporalPlumbingRemaining = false
 
 q4eIntroducesQuinticEstimate : Bool
 q4eIntroducesQuinticEstimate = false
@@ -67,9 +64,17 @@ q4eExactNormalFormClosedIsTrue = refl
 q4ePreferredB7RouteIsTrue : q4ePreferredB7Route ≡ true
 q4ePreferredB7RouteIsTrue = refl
 
-q4eOffDiagonalFluxFTCClosedIsFalse :
-  q4eOffDiagonalFluxFTCClosed ≡ false
-q4eOffDiagonalFluxFTCClosedIsFalse = refl
+q4eOffDiagonalFluxDerivativeCompilerClosedIsTrue :
+  q4eOffDiagonalFluxDerivativeCompilerClosed ≡ true
+q4eOffDiagonalFluxDerivativeCompilerClosedIsTrue = refl
+
+q4eOffDiagonalFluxFTCClosedGivenOrdinaryScalarFTCIsTrue :
+  q4eOffDiagonalFluxFTCClosedGivenOrdinaryScalarFTC ≡ true
+q4eOffDiagonalFluxFTCClosedGivenOrdinaryScalarFTCIsTrue = refl
+
+q4eResearchLeavesReducedToTwoAnalyticBoundsIsTrue :
+  q4eResearchLeavesReducedToTwoAnalyticBounds ≡ true
+q4eResearchLeavesReducedToTwoAnalyticBoundsIsTrue = refl
 
 q4eIntegratedGramBoundClosedIsFalse :
   q4eIntegratedGramBoundClosed ≡ false
@@ -78,3 +83,7 @@ q4eIntegratedGramBoundClosedIsFalse = refl
 q4eFluxEndpointBoundClosedIsFalse :
   q4eFluxEndpointBoundClosed ≡ false
 q4eFluxEndpointBoundClosedIsFalse = refl
+
+q4eRepresentationOrTemporalPlumbingRemainingIsFalse :
+  q4eRepresentationOrTemporalPlumbingRemaining ≡ false
+q4eRepresentationOrTemporalPlumbingRemainingIsFalse = refl
