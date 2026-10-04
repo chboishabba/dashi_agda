@@ -21,6 +21,7 @@ import Data.List.Relation.Binary.Permutation.Propositional as Perm
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.Foundations.CMP119CosmologyE1ComponentPermutationExact as Permutation
+import DASHI.Physics.Foundations.CMP119CosmologyE1LocalizedD1CovarianceExact as FiniteReal
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
 import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
@@ -119,7 +120,7 @@ localizedPotentialCovariant {carrier = carrier} geometry action background =
             (actComponent geometry action) components))
   in
   trans reindex
-    (DASHI.Physics.Foundations.CMP119CosmologyE1LocalizedD1CovarianceExact.sumMappedCong
+    (FiniteReal.sumMappedCong
       permutedWeight originalWeight components
       (λ component →
         localizedActivityCovariant geometry action component background))
