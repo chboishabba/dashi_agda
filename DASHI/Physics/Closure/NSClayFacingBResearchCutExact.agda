@@ -14,6 +14,9 @@ module DASHI.Physics.Closure.NSClayFacingBResearchCutExact where
 -- Those rows compile into the existing B1/B2/B3 payment records, so the leaf
 -- producers no longer restate a live-block same-object equality.
 --
+-- B4's arbitrary operator alias has also been removed: its producer now targets
+-- the literal critical-touching scalar directly with one strict theta < 1.
+--
 -- B7 finite aggregation and exact endpoint/dynamic normal forms are already
 -- available.  The attempted universal direct-companion = coherent-covariance
 -- weld is rejected by the R289/R611 homogeneity audit (degree 5 vs degree 4).
@@ -28,7 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowFractionalShe
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as B2
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as B3
-import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact as B4
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutExact as B4
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionAnalyticAssemblyExact as B5
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyProducerExact as B6
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DecompositionExact as B7Legacy
@@ -91,7 +94,10 @@ bB3ShellFoldCompilerClosed : Bool
 bB3ShellFoldCompilerClosed = B3.deepHHShellFoldClosed
 
 bB4SignedOperatorCompilerClosed : Bool
-bB4SignedOperatorCompilerClosed = B4.criticalTouchingSignedBlockOperatorCompilerClosed
+bB4SignedOperatorCompilerClosed = B4.b4LegacyCompilerReusableFromDirectCertificate
+
+bB4ArbitraryOperatorAliasEliminated : Bool
+bB4ArbitraryOperatorAliasEliminated = B4.b4ArbitrarySignedOperatorAliasEliminated
 
 bB5PhysicalPaymentAssemblyClosed : Bool
 bB5PhysicalPaymentAssemblyClosed = B5.fixedOutputB1B4ToPhysicalPaymentCompilerClosed
@@ -140,7 +146,7 @@ bDHHIntraShellSignedL2Closed : Bool
 bDHHIntraShellSignedL2Closed = B3.deepHHIntraShellSignedL2AggregationInhabitedHere
 
 bCriticalStrictSignedOperatorClosed : Bool
-bCriticalStrictSignedOperatorClosed = B4.criticalTouchingStrictOperatorCertificateInhabitedHere
+bCriticalStrictSignedOperatorClosed = B4.b4DirectStrictEstimateClosedHere
 
 bLegacyLiteralR406CovarianceEqualityClosed : Bool
 bLegacyLiteralR406CovarianceEqualityClosed = B7Legacy.literalR406SameObjectEqualityInhabitedHere
@@ -154,8 +160,8 @@ bR406QuarticGramEndpointRouteClosed = B7Producer.b7QuarticGramEndpointRouteClose
 bR406OneProducerRouteClosed : Bool
 bR406OneProducerRouteClosed = boolOr bR406DirectSignedQuinticRouteClosed bR406QuarticGramEndpointRouteClosed
 
-/-- Compatibility name for older consumers: the active B7 requirement is now
-one valid producer route, not a universal same-object equality. -/
+/-- Compatibility names for older consumers: the active B7 requirement is one
+valid producer route, not a universal same-object equality. -/
 bLiteralR406SameObjectClosed : Bool
 bLiteralR406SameObjectClosed = bR406OneProducerRouteClosed
 
@@ -167,6 +173,9 @@ currentBResidual = literalDFLFilteredBlockToShellData
 
 bHighestInformationWallIsStrictCriticalOperator : Bool
 bHighestInformationWallIsStrictCriticalOperator = true
+
+bGenericRepresentationWorkRemainingInB1B4 : Bool
+bGenericRepresentationWorkRemainingInB1B4 = false
 
 bGenericAnalysisReimplementationRequired : Bool
 bGenericAnalysisReimplementationRequired = false
@@ -187,6 +196,10 @@ bLiteralDeepPairExtractionClosedIsTrue = refl
 bB1B3LiveBlockSameObjectFieldsCompiledFromRowsIsTrue :
   bB1B3LiveBlockSameObjectFieldsCompiledFromRows ≡ true
 bB1B3LiveBlockSameObjectFieldsCompiledFromRowsIsTrue = refl
+
+bB4ArbitraryOperatorAliasEliminatedIsTrue :
+  bB4ArbitraryOperatorAliasEliminated ≡ true
+bB4ArbitraryOperatorAliasEliminatedIsTrue = refl
 
 bR406GlobalFiniteAggregationClosedIsTrue : bR406GlobalFiniteAggregationClosed ≡ true
 bR406GlobalFiniteAggregationClosedIsTrue = refl
@@ -212,11 +225,16 @@ bR406QuarticGramEndpointRouteClosedIsFalse = refl
 bR406OneProducerRouteClosedIsFalse : bR406OneProducerRouteClosed ≡ false
 bR406OneProducerRouteClosedIsFalse = refl
 
+bGenericRepresentationWorkRemainingInB1B4IsFalse :
+  bGenericRepresentationWorkRemainingInB1B4 ≡ false
+bGenericRepresentationWorkRemainingInB1B4IsFalse = refl
+
 bGenericAnalysisReimplementationRequiredIsFalse : bGenericAnalysisReimplementationRequired ≡ false
 bGenericAnalysisReimplementationRequiredIsFalse = refl
 
 bShouldMigrateToLeanIsFalse : bShouldMigrateToLean ≡ false
 bShouldMigrateToLeanIsFalse = refl
 
-bKeepExactSameObjectAgdaLaneIsTrue : bKeepExactSameObjectAgdaLane ≡ true
+bKeepExactSameObjectAgdaLaneIsTrue :
+  bKeepExactSameObjectAgdaLane ≡ true
 bKeepExactSameObjectAgdaLaneIsTrue = refl
