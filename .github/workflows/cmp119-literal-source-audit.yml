@@ -1,0 +1,88 @@
+name: CMP119 literal source action and stress audits
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda"
+      - "DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyWeakYMAccelerationObstructionExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyPhysicalFinitePartitionAuthorityExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyR144CompleteActionPartitionResponseExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologySelectedDensityR144PartitionWeldExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyContinuumWeylStressPairingExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTraceContinuationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCBoostCovarianceExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologySelectedStressTensorCovarianceCompilerExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyVacuumTraceActiveCollapseExact.agda"
+      - "DASHI/Physics/Foundations/CMP119FourDiagonalLiteralFiniteMeasureLorentzianTraceExact.agda"
+      - "DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda"
+      - "DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda"
+      - "scripts/grqft_selected_finite_stress_exact_audit.py"
+      - "scripts/grqft_su2_literal_wilson_exact.py"
+      - "scripts/grqft_su2_six_plane_partition_metric_source.py"
+      - "scripts/test_grqft_su2_six_plane_partition_metric_source.py"
+      - "scripts/test_grqft_su2_literal_wilson_exact.py"
+      - "scripts/test_grqft_literal_su2_to_cmp119_normalization.py"
+      - "scripts/grqft_selected_wilson_normalization_audit.py"
+      - "scripts/test_grqft_selected_wilson_normalization_audit.py"
+      - "scripts/test_grqft_selected_finite_stress_exact_audit.py"
+      - ".github/workflows/cmp119-literal-source-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python3 -m unittest discover -s scripts -p "test_grqft_selected_finite_stress_exact_audit.py" -v
+          python3 -m unittest discover -s scripts -p "test_grqft_su2_literal_wilson_exact.py" -v
+          python3 -m unittest discover -s scripts -p "test_grqft_literal_su2_to_cmp119_normalization.py" -v
+          python3 -m unittest discover -s scripts -p "test_grqft_su2_six_plane_partition_metric_source.py" -v
+          python3 -m unittest discover -s scripts -p "test_grqft_selected_wilson_normalization_audit.py" -v
+  source-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for path in \
+              DASHI/Physics/Foundations/CMP119LiteralWilsonProjectorSignAuditExact.agda \
+              DASHI/Physics/Foundations/CMP119SUNWilsonMatrixBareNormalizationExact.agda \
+              DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyWeakYMAccelerationObstructionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144CompleteActionPartitionResponseExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedDensityR144PartitionWeldExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyContinuumWeylStressPairingExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTraceContinuationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCBoostCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedStressTensorCovarianceCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumTraceActiveCollapseExact.agda \
+              DASHI/Physics/Foundations/CMP119FourDiagonalLiteralFiniteMeasureLorentzianTraceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPhysicalFinitePartitionAuthorityExact.agda \
+              DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$path"
+            done
+          '

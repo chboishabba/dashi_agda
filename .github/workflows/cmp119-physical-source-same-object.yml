@@ -1,0 +1,131 @@
+name: CMP119 physical source same-object checks
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/Physics/Foundations/CMP119CosmologyR144EffectiveActionStressExpectationExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyFiniteWeylConventionFirewallExact.agda"
+      - "DASHI/Physics/Foundations/CMP119CosmologyVacuumDominatedWeylSignExact.agda"
+      - 'DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144CompleteActionPartitionResponseExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumTraceActiveCollapseExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumContinuationCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantVacuumExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantContinuationCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPoincareVacuumStressMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumExpectationBoostCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyContinuumStressPoincareMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologySelectedBoostTensorActionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologySelectedStressTensorCovarianceCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyTerminalStressCovarianceMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136LocalCSameStressExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCBoostCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTraceContinuationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanStressHingeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanTerminalMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSWightmanReconstructionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR133E1NaturalityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1FiniteEuclideanAttachmentExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1LocalizedD1CovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1R143LocalizedCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223SourceMetricVariationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyConventionAwareSectorSignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyE1WholeLatticeLocalizedMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136FiniteWeylConventionWeldExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223R136SignMaxCutExact.agda'
+      - '.github/workflows/cmp119-physical-source-same-object.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-physical-source-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck physical-source and partition-stress owners
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CMP119WarpedVacuumWeakYMPhysicalSameObjectNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119WilsonGibbsVanishingInsertionTraceNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119SelectedFiniteTraceSilenceNoGoExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionStressFirstVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPartitionWeylTraceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144CompleteActionPartitionResponseExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumTraceActiveCollapseExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumContinuationCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantVacuumExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyBoostInvariantContinuationCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPoincareVacuumStressMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumExpectationBoostCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyContinuumStressPoincareMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedBoostTensorActionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedStressTensorCovarianceCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyTerminalStressCovarianceMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136LocalCSameStressExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCBoostCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTraceContinuationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCTerminalMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanStressHingeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLocalCWightmanTerminalMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSWightmanReconstructionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSTerminalCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSHypothesisMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda \
+          DASHI/Physics/Foundations/CMP119CosmologyFiniteWeylConventionFirewallExact.agda \
+          DASHI/Physics/Foundations/CMP119CosmologyR144EffectiveActionStressExpectationExact.agda \
+          DASHI/Physics/Foundations/CMP119CosmologyVacuumDominatedWeylSignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE1DifferentiatedCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2CylinderEmbeddingExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE4ClusteringExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSParetoFrontierExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR133E1NaturalityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSectorDecompositionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1FiniteEuclideanAttachmentExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyVacuumSectorFactorizationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1LocalizedD1CovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1R143LocalizedCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223SourceMetricVariationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyConventionAwareSectorSignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyE1WholeLatticeLocalizedMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136FiniteWeylConventionWeldExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223R136SignMaxCutExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '

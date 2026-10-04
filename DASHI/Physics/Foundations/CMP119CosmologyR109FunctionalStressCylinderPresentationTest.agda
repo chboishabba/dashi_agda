@@ -1,0 +1,10 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyR109FunctionalStressCylinderPresentationTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyR109FunctionalStressCylinderPresentationExact as New
+
+adapterToWilsonAdmissiblePresentationExists =
+  New.asWilsonAdmissibleR109StressCylinderPresentation
+
+selectedObservableIsNotIndependentRegression =
+  New.selectedObservableIsDefinedFromSelectedR109Insertion
