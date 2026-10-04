@@ -66,6 +66,11 @@ b7QuantitativeR406TransportMayReplaceEquality = true
 b7RequiresDynamicOrQuantitativeTransport : Bool
 b7RequiresDynamicOrQuantitativeTransport = true
 
+/-- The required replacement transport is not supplied by this homogeneity
+boundary; it is the surviving B7 mathematical leaf. -/
+b7DynamicOrQuantitativeTransportClosed : Bool
+b7DynamicOrQuantitativeTransportClosed = false
+
 b7GlobalFiniteAggregationAlreadyClosed : Bool
 b7GlobalFiniteAggregationAlreadyClosed = Direct.b7R406GlobalAggregationClosed
 
@@ -94,6 +99,10 @@ b7UniversalDirectCompanionCovarianceEqualityAdmissibleIsFalse = refl
 b7RequiresDynamicOrQuantitativeTransportIsTrue :
   b7RequiresDynamicOrQuantitativeTransport ≡ true
 b7RequiresDynamicOrQuantitativeTransportIsTrue = refl
+
+b7DynamicOrQuantitativeTransportClosedIsFalse :
+  b7DynamicOrQuantitativeTransportClosed ≡ false
+b7DynamicOrQuantitativeTransportClosedIsFalse = refl
 
 b7NoGoClaimsPointwiseMismatchAlwaysNonzeroIsFalse :
   b7NoGoClaimsPointwiseMismatchAlwaysNonzero ≡ false
