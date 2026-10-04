@@ -7,11 +7,14 @@ import DASHI.Physics.Closure.NSClayFacingBPositiveMaxCut20261004Exact as Cut
 pairExtractionClosed : Cut.deepPairExtractionClosed ≡ true
 pairExtractionClosed = refl
 
-r406AggregationClosed : Cut.r406GlobalAggregationClosed ≡ true
-r406AggregationClosed = refl
+b4AliasEliminated : Cut.b4ArbitraryOperatorAliasEliminated ≡ true
+b4AliasEliminated = refl
 
 strictMarginStillOpen : Cut.b4StrictMarginClosed ≡ false
 strictMarginStillOpen = refl
+
+r406AggregationClosed : Cut.r406GlobalAggregationClosed ≡ true
+r406AggregationClosed = refl
 
 b7UniversalEqualityRejected : Cut.b7UniversalSameObjectEqualityAdmissible ≡ false
 b7UniversalEqualityRejected = refl
