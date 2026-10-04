@@ -9,6 +9,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionLiteralPairExtractionMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact.agda'
@@ -28,6 +30,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionLiteralPairExtractionMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact.agda'
@@ -70,6 +74,8 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionLiteralPairExtractionMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutExact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalDeepBlocksFromLiteralRowsMaxCutTest.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingDirectCertificateMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutExact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406DirectCompanionMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406HomogeneityBoundaryMaxCutExact.agda
