@@ -1,0 +1,75 @@
+name: CMP119 cosmology preferred source overlay R
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1InvariantPathDerivativeCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1InvariantPathDerivativeCovarianceTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1SourcePotentialCovarianceExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1SourcePotentialCovarianceTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutPathDerivativeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutPathDerivativeTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2HilbertTraceAnomalyExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2HilbertTraceAnomalyTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExactTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP23HilbertHaarToR136SignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP23HilbertHaarToR136SignTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - '.github/workflows/cmp119-cosmology-preferred-source-overlay-r.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-preferred-source-overlay-r-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck overlay R research frontier
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for f in \
+              DASHI/Physics/Foundations/CMP119CosmologyP1InvariantPathDerivativeCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1InvariantPathDerivativeCovarianceTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1SourcePotentialCovarianceExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1SourcePotentialCovarianceTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutPathDerivativeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP1PresentCutPathDerivativeTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2HilbertTraceAnomalyExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2HilbertTraceAnomalyTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3LocalCF2PhysicalHaarCommonLimitTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3ApproximateExpectationHaarExactTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP23HilbertHaarToR136SignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP23HilbertHaarToR136SignTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005RTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
+            done
+          '
