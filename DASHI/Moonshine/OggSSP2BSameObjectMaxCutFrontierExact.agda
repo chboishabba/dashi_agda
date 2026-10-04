@@ -17,6 +17,8 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --     verified five-swapped-pair basis;
 --   * binary-tetrahedral defect meaning is the centralizer 2-adic exponent,
 --     with sourced profile 3,3,2,1,1;
+--   * defect preservation cuts D from 120 arbitrary bijections to exactly four
+--     source-compatible charts;
 --   * transported 30 and its downstream arithmetic remain available.
 --
 -- Remaining same-object welds:
@@ -32,9 +34,8 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --      Tate subquotient and becomes the Completion10 binary phase.  The finite
 --      phase source is no longer open; only the actual-Tate same-object weld is.
 --
---   D  identify the five recognized Q10 modes with the five independently
---      sourced binary-tetrahedral order strata.  The defect invariant itself
---      is no longer open.
+--   D  source-select one of the four defect-compatible Mode5 <->
+--      binary-tetrahedral order-stratum charts.
 --
 --   E  only after A'-D promote 30 -> 31 -> 279 to same-object observables.
 ------------------------------------------------------------------------
@@ -51,6 +52,7 @@ import DASHI.Moonshine.OggSSP2BM22RuntimeMaxCutReceiptExact as Runtime
 import DASHI.Moonshine.OggSSP2BM22d2Completion10RuntimeReceiptExact as CompletionRuntime
 import DASHI.Moonshine.OggSSP2BIntegralMoonshineLocalActionSourceExact as ActionSource
 import DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact as DefectSource
+import DASHI.Moonshine.OggSSP2BDefectRecognitionAmbiguityExact as DefectAmbiguity
 import DASHI.Moonshine.OggP31CompletionTenTwoSevenNineCrossPollinationExact as P279
 
 ------------------------------------------------------------------------
@@ -131,7 +133,7 @@ formalTateCarrierWeldOpen =
   ActionSource.repoSameObjectTateCarrierWeldStillOpen
 
 ------------------------------------------------------------------------
--- 4. D invariant meaning is paid; actual mode recognition is not.
+-- 4. D invariant meaning is paid; only four source charts remain.
 ------------------------------------------------------------------------
 
 defectIdentityThree :
@@ -153,6 +155,11 @@ defectOrderThreeOne = DefectSource.defectOrderThreeIsOne
 defectOrderSixOne :
   DefectSource.twoAdicCentralizerExponent DefectSource.orderSix ≡ 1
 defectOrderSixOne = DefectSource.defectOrderSixIsOne
+
+defectCompatibleChartCountIsFour :
+  DefectAmbiguity.defectCompatibleChartCount ≡ 4
+defectCompatibleChartCountIsFour =
+  DefectAmbiguity.defectCompatibleChartCountIsFour
 
 ------------------------------------------------------------------------
 -- 5. Remaining formal same-object welds.
@@ -207,7 +214,7 @@ p31To279StillObserverOnly : P31To279PromotedSameObject → ⊥
 p31To279StillObserverOnly ()
 
 ------------------------------------------------------------------------
--- 7. Canonical status after C' max-cut.
+-- 7. Canonical status after C'/D max-cut.
 ------------------------------------------------------------------------
 
 record SameObjectMaxCutStatus : Set where
@@ -228,6 +235,7 @@ record SameObjectMaxCutStatus : Set where
 
     binaryTetrahedralDefectMeaningSourced : Bool
     defectProfileThreeThreeTwoOneOnePaid : Bool
+    defectCompatibleChartCount : Nat
 
     formalIntegralTateCarrierWeldPaid : Bool
     actualTateTenSubquotientPaid : Bool
@@ -244,7 +252,7 @@ canonicalSameObjectMaxCutStatus =
   same-object-max-cut-status
     true true true true true
     true true true true true true
-    true true
+    true true 4
     false false false false
     false false true
-    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': identify one observed M22:2 ten-module as an actual Tate subquotient; C': prove its sourced outer J2^5 involution is the action on that same Tate subquotient; D: identify the actual Q10 Mode5 labels with binary-tetrahedral order strata; only then promote 31/279"
+    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': identify one observed M22:2 ten-module as an actual Tate subquotient; C': prove its sourced outer J2^5 involution is the action on that same Tate subquotient; D: source-select one of four defect-compatible Mode5/order-stratum charts; only then promote 31/279"
