@@ -21,8 +21,10 @@ module DASHI.Moonshine.OggSSP2BDefectRecognitionAmbiguityExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _*_)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
@@ -69,9 +71,6 @@ record DefectRecognitionAmbiguityStatus : Set where
     defectCompatibleBijections : Nat
     sourceChartSelected : Bool
     nextResidual : String
-
-open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.String using (String)
 
 canonicalDefectRecognitionAmbiguityStatus :
   DefectRecognitionAmbiguityStatus
