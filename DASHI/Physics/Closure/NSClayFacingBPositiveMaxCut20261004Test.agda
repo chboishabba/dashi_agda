@@ -16,14 +16,17 @@ strictMarginStillOpen = refl
 b7UniversalEqualityRejected : Cut.b7UniversalSameObjectEqualityAdmissible ≡ false
 b7UniversalEqualityRejected = refl
 
-b7TransportRequired : Cut.b7DynamicOrQuantitativeTransportRequired ≡ true
-b7TransportRequired = refl
+b7EndpointCompilerPaid : Cut.b7ExactEndpointNormalFormCompilerClosed ≡ true
+b7EndpointCompilerPaid = refl
 
-b7DynamicAlgebraPaid : Cut.b7DebtPlusFluxTangentDecompositionClosed ≡ true
-b7DynamicAlgebraPaid = refl
+b7QuarticCompilerAvailable : Cut.b7QuarticGramEndpointCompilerAvailable ≡ true
+b7QuarticCompilerAvailable = refl
 
-b7FluxDerivativeStillOpen : Cut.b7ActualFluxDerivativeClosed ≡ false
-b7FluxDerivativeStillOpen = refl
+b7DirectProducerStillOpen : Cut.b7DirectSignedQuinticRouteClosed ≡ false
+b7DirectProducerStillOpen = refl
 
-b7QuarticDebtStillOpen : Cut.b7QuarticGramDebtPaymentClosed ≡ false
-b7QuarticDebtStillOpen = refl
+b7QuarticProducerStillOpen : Cut.b7QuarticGramEndpointRouteClosed ≡ false
+b7QuarticProducerStillOpen = refl
+
+b7AtLeastOneProducerStillOpen : Cut.b7OneProducerRouteClosed ≡ false
+b7AtLeastOneProducerStillOpen = refl
