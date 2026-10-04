@@ -16,7 +16,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Moonshine.OggSSP2BBinaryTetrahedralDefectSourceExact as Defect
+import DASHI.Moonshine.OggSSP2BDefectTwoBitProvenanceSelectorExact as Bits
 
 centralSignOnStratum : Defect.OrderStratum → Defect.OrderStratum
 centralSignOnStratum Defect.identity = Defect.centralMinusOne
@@ -34,22 +36,44 @@ centralSignOnStratumInvolutive Defect.orderFour = refl
 centralSignOnStratumInvolutive Defect.orderThree = refl
 centralSignOnStratumInvolutive Defect.orderSix = refl
 
-data CentralSignFixesIdentityStratum : Set where
+------------------------------------------------------------------------
+-- The no-go is computed on the actual four candidate charts.
+------------------------------------------------------------------------
 
-centralSignMovesIdentity : CentralSignFixesIdentityStratum → ⊥
-centralSignMovesIdentity ()
+centralSignChangesMode09 :
+  (bits : Bits.ProvenanceBits) →
+  centralSignOnStratum (Bits.chartFromBits bits Completion.mode09)
+  ≡ Bits.chartFromBits bits Completion.mode09 →
+  ⊥
+centralSignChangesMode09
+  (Bits.provenance-bits Bits.mode09IsIdentity Bits.mode36IsOrderThree) ()
+centralSignChangesMode09
+  (Bits.provenance-bits Bits.mode18IsIdentity Bits.mode36IsOrderThree) ()
+centralSignChangesMode09
+  (Bits.provenance-bits Bits.mode09IsIdentity Bits.mode45IsOrderThree) ()
+centralSignChangesMode09
+  (Bits.provenance-bits Bits.mode18IsIdentity Bits.mode45IsOrderThree) ()
 
-data CentralSignFixesOrderThreeStratum : Set where
+/-- No one of the four defect-compatible charts can make central-sign
+multiplication act trivially on every Mode5 stratum.  But Completion10
+BinaryPhase is trivial on the Mode5 quotient, because complement preserves
+Mode5.  Therefore central -1 cannot source-select BinaryPhase at this quotient
+level. -/
+noCandidateChartIntertwinesModePreservingPhaseWithCentralSign :
+  (bits : Bits.ProvenanceBits) →
+  ((mode : Completion.ComplementMode5) →
+    centralSignOnStratum (Bits.chartFromBits bits mode)
+    ≡ Bits.chartFromBits bits mode) →
+  ⊥
+noCandidateChartIntertwinesModePreservingPhaseWithCentralSign bits h =
+  centralSignChangesMode09 bits (h Completion.mode09)
 
-centralSignMovesOrderThree : CentralSignFixesOrderThreeStratum → ⊥
-centralSignMovesOrderThree ()
-
--- Semantic firewall: any proposed provenance argument that equates the
--- Completion10 mode-preserving phase flip with this order-stratum permutation
--- must supply additional structure below the Mode5 quotient; equality on the
--- quotient itself is impossible because central sign moves four strata.
-data CompletionModePreservingPhaseIsCentralSignOnStrata : Set where
-
+/-- Compatibility name for the canonical frontier. -/
 completionModePreservingPhaseIsNotCentralSignOnStrata :
-  CompletionModePreservingPhaseIsCentralSignOnStrata → ⊥
-completionModePreservingPhaseIsNotCentralSignOnStrata ()
+  (bits : Bits.ProvenanceBits) →
+  ((mode : Completion.ComplementMode5) →
+    centralSignOnStratum (Bits.chartFromBits bits mode)
+    ≡ Bits.chartFromBits bits mode) →
+  ⊥
+completionModePreservingPhaseIsNotCentralSignOnStrata =
+  noCandidateChartIntertwinesModePreservingPhaseWithCentralSign
