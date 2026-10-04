@@ -3,15 +3,12 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4EFTCCompilerMa
 ------------------------------------------------------------------------
 -- POSITIVE B7 Q4+E / REMOVE THE STANDARD FTC SEAM
 --
--- The literal global off-diagonal R406 flux derivative is now constructed from
--- the exact R396 unordered pair family.  Given the repository's ordinary scalar
--- FTC authority, the Q4+E producer therefore needs only TWO analytic bounds:
+-- The literal global off-diagonal R406 flux derivative is constructed from the
+-- exact R396 unordered pair family.  Given ordinary scalar FTC, the Q4+E
+-- producer therefore needs only TWO analytic bounds:
 --
 --   (Q4) cutoff-uniform integrated off-diagonal Gram,
 --   (E)  cutoff-uniform weighted-flux endpoint increment.
---
--- This owner compiles those two bounds into the existing DirectGramFluxBudget.
--- No Navier--Stokes estimate is introduced by the compiler itself.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -68,11 +65,11 @@ module Q4EFTCCompiler
     Time initialTime integrateTo VectorDerivativeOf
   module Boundary = R409.Boundary
     Time initialTime integrateTo VectorDerivativeOf ScalarDerivativeOf
-  module Derivative = Global.GlobalOffDiagonalDerivative
+  module DerivativeAt (cutoff : Nat) = Global.GlobalOffDiagonalDerivative
     Time initialTime integrateTo
     VectorDerivativeOf ScalarDerivativeOf
     projectedCross vectorAlgebra hermitianCalculus
-    constantCalculus scalarAlgebra D R
+    constantCalculus scalarAlgebra D R cutoff
   module LiveQ4E = Q4E.LiveNormalForm
     Time initialTime integrateTo VectorDerivativeOf integration
 
@@ -86,7 +83,7 @@ module Q4EFTCCompiler
   offDiagonalFluxFTC cutoff terminal =
     R564.scalarEndpointFTC564 FTC
       (Boundary.derivativeIsExactR406Tangent
-        (Derivative.exactR406FluxDerivative cutoff))
+        (DerivativeAt.exactR406FluxDerivative cutoff))
       terminal
 
   record Q4EAnalyticBounds : Set₁ where
@@ -116,10 +113,6 @@ module Q4EFTCCompiler
     ; LiveQ4E.offDiagonalFluxFTC = offDiagonalFluxFTC
     ; LiveQ4E.fluxEndpointBudget = fluxEndpointBudget B
     }
-
-------------------------------------------------------------------------
--- Status.
-------------------------------------------------------------------------
 
 q4eLiteralOffDiagonalDerivativeCompilerClosed : Bool
 q4eLiteralOffDiagonalDerivativeCompilerClosed = true
