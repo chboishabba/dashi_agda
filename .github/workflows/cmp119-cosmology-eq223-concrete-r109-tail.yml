@@ -1,0 +1,49 @@
+name: CMP119 Eq223 concrete R109 tail route
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologySelectedR109RealTailSignCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyConcreteR109RealCompletionToR136Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteR109TailToR136Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteR109TailToR136Test.agda'
+      - '.github/workflows/cmp119-cosmology-eq223-concrete-r109-tail.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-eq223-concrete-r109-tail-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck concrete preferred tail route
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedR109RealTailSignCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyConcreteR109RealCompletionToR136Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteR109TailToR136Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyEq223ConcreteR109TailToR136Test.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '

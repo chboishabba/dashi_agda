@@ -1,0 +1,43 @@
+name: CMP119 selected R109 real-tail sign compiler
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologySelectedR109RealTailSignCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologySelectedR109RealTailSignCompilerTest.agda'
+      - '.github/workflows/cmp119-cosmology-selected-r109-real-tail.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-selected-r109-real-tail-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck selected R109 real-tail sign compiler
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedR109RealTailSignCompilerExact.agda
+            agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library \
+              DASHI/Physics/Foundations/CMP119CosmologySelectedR109RealTailSignCompilerTest.agda
+          '

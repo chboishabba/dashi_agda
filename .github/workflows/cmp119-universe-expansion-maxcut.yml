@@ -1,0 +1,82 @@
+name: CMP119 universe expansion max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144R109ExpectationCompletionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136CompletedFourDiagonalExpectationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR144AbsoluteExpectationToR136Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologySectorDominanceSignMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressObservableHingeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2E4SharedPinnedObservableExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyExpectationTailToExpansionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyNormalizedSectorWeylResponseExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologySectorMarginToR136CompletionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyFiniteSectorMarginToExpansionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyBalabanPreferredSignToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyRealR136TraceReadoutBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyToExpansionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyRealTraceToExpansionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCRealTraceSignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCAnomalyToExpansionMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyUniverseExpansionMaxCut20261003Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyMarkedStressOSMaxCutRootExact.agda'
+      - '.github/workflows/cmp119-universe-expansion-maxcut.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-universe-expansion-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck universe-expansion max-cut owners
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for source in \
+              DASHI/Physics/Foundations/CMP119CosmologyR136WeylSignMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144R109ExpectationCompletionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136CompletedFourDiagonalExpectationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR144AbsoluteExpectationToR136Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologySectorDominanceSignMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressObservableHingeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyMarkedStressE2E4SharedPinnedObservableExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyNormalizedSectorWeylResponseExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologySectorMarginToR136CompletionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyExpectationTailToExpansionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyFiniteSectorMarginToExpansionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyBalabanPreferredSignToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyRealR136TraceReadoutBridgeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyOrderBridgeExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceAnomalyToExpansionExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyRealTraceToExpansionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCRealTraceSignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCAnomalyToExpansionMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyUniverseExpansionMaxCut20261003Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLatestParetoFrontierExact.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$source"
+            done
+          '

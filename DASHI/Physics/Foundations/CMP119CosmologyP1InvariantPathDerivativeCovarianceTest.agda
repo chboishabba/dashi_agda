@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceExact as P1
+
+signedPathDerivativeCovarianceRegression =
+  P1.signedReadoutCovariantFromInvariantPotential
+
+unsignedDerivativeSignTransportRegression =
+  P1.unsignedDerivativeTransformsWithBasisSign
+
+p1NoLongerPrimitiveOncePathDerivativeSemanticsExistsRegression =
+  P1.p1SignedCovarianceIsCompilerOutputFromInvariantPathDerivative

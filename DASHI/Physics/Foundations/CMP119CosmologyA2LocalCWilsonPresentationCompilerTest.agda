@@ -1,0 +1,16 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyA2LocalCWilsonPresentationCompilerTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyA2LocalCWilsonPresentationCompilerExact as A2
+
+localCStressEncodingPaysObservableChoiceRegression =
+  A2.localCStressEncodingPaysObservableChoice
+
+publishedWilsonApplicationPaysAdmissibilityRegression =
+  A2.publishedWilsonApplicationPaysAdmissibility
+
+noIndependentA2SelectedObservableRegression =
+  A2.noIndependentA2SelectedObservable
+
+pairToObservableSemanticsStillOpenRegression =
+  A2.remainingA2SourceDebtIsPairToObservableSameObjectSemantics

@@ -1,0 +1,10 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyE1LinearityNaturalityNoGoTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyE1LinearityNaturalityNoGoExact as NoGo
+
+linearityDoesNotSupplyNaturalityRegression =
+  NoGo.firstVariationLinearityDoesNotImplyActionNaturality
+
+potentialCovarianceDoesNotSupplyD1CovarianceRegression =
+  NoGo.invariantPotentialDoesNotForceMarkedDerivativeCovariance

@@ -1,0 +1,65 @@
+name: CMP119 cosmology preferred source overlay P
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLocalCSelectedCylinderDirectExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyLocalCSelectedCylinderDirectTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136LocalCTraceAnomalyExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136LocalCTraceAnomalyTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceFrameCalibrationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136TraceFrameCalibrationTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCRealTraceSignExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyR136LocalCSameStressExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004PExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004PTest.agda'
+      - '.github/workflows/cmp119-cosmology-preferred-source-overlay-p.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cmp119-cosmology-preferred-source-overlay-p-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout including dependencies
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore cache
+        uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck final preferred source max-cut
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            for f in \
+              DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyA1UnsignedTangentSignFirewallTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLocalCSelectedCylinderDirectExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyLocalCSelectedCylinderDirectTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136LocalCTraceAnomalyExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136LocalCTraceAnomalyTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceFrameCalibrationExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136TraceFrameCalibrationTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPinnedLocalCRealTraceSignExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyR136LocalCSameStressExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004PExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261004PTest.agda
+            do
+              agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
+            done
+          '

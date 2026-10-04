@@ -1,0 +1,13 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyDirectDGammaR109CompletionTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyDirectDGammaR109CompletionExact as Direct
+
+directDGammaSequenceEliminatesFiniteExpectationBridgeRegression =
+  Direct.directDGammaSequenceEliminatesFiniteExpectationBridge
+
+allCutoffDirectAnchorIsCompilerOutputRegression =
+  Direct.allCutoffDirectAnchorIsCompilerOutput
+
+remainingB1SourceContentIsDirectDGammaCauchyAndEndpointRegression =
+  Direct.remainingB1SourceContentIsDirectDGammaCauchyAndEndpoint

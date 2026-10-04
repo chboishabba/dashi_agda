@@ -1,0 +1,12 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QTest where
+
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
+
+preferredSourcePackageCountRegression = Q.remainingPreferredSourcePackageCount
+
+primitiveP1CovarianceRetiredRegression = Q.primitiveSignedCovarianceRetired
+
+freeP2TraceCalibrationRetiredRegression = Q.freeTraceFrameCalibrationRetired
+
+exactP3FiniteContinuumWeldRetiredRegression = Q.exactFiniteContinuumF2WeldRetired
