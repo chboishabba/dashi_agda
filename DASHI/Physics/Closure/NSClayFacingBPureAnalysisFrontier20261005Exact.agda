@@ -18,11 +18,20 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 -- The older Gate-2A 1/6 + 1/12 = 1/4 route remains a lawful optional producer,
 -- but it is not required and is not treated as same-object evidence.
 --
--- Remaining board after that:
+-- Preferred B7/Q4 route is also sharpened: ordinary monotone/scaled
+-- integration compiles a pointwise
+--
+--   G_offdiag,N(t) <= A * D_N(t)
+--
+-- plus cutoff-uniform integrated dissipation into the required integrated Gram
+-- budget.  Thus time integration is not an independent Q4 research leaf.
+--
+-- Remaining board:
+--   B4 strict principal+defect attachment
 --   B1 literal rows -> ED
 --   B2 literal rows -> ED
 --   B3 literal rows -> ED
---   Q4 integrated off-diagonal Gram
+--   Q4 pointwise physical off-diagonal Gram -> dissipation
 --   E+ uniform positive terminal flux/amplitude
 --   Q5 direct signed quintic (fallback only)
 --   B-continuation inputs.
@@ -34,13 +43,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as Previous
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact as Q4Pointwise
 
 data PureBAnalyticLeaf : Set where
   b4StrictSplitPhysicalAttachment : PureBAnalyticLeaf
   b1LiteralRowsED : PureBAnalyticLeaf
   b2LiteralRowsED : PureBAnalyticLeaf
   b3LiteralRowsED : PureBAnalyticLeaf
-  q4IntegratedGram : PureBAnalyticLeaf
+  q4PointwisePhysicalGram : PureBAnalyticLeaf
   ePositiveTerminalFlux : PureBAnalyticLeaf
   q5SignedQuinticFallback : PureBAnalyticLeaf
   bContinuationInputs : PureBAnalyticLeaf
@@ -54,8 +64,8 @@ pureBLeafClosed b2LiteralRowsED =
   Previous.finalBLeafClosed Previous.b2LiteralRowsLocalED
 pureBLeafClosed b3LiteralRowsED =
   Previous.finalBLeafClosed Previous.b3LiteralRowsLocalED
-pureBLeafClosed q4IntegratedGram =
-  Previous.finalBLeafClosed Previous.q4IntegratedOffDiagonalGram
+pureBLeafClosed q4PointwisePhysicalGram =
+  Q4Pointwise.q4PointwisePhysicalGramEstimateClosedHere
 pureBLeafClosed ePositiveTerminalFlux =
   Previous.finalBLeafClosed Previous.ePositiveTerminalFluxAmplitude
 pureBLeafClosed q5SignedQuinticFallback =
@@ -80,6 +90,14 @@ b4QuarterMarginOptionalCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
 
 b4ResearchLeafNowStrictPrincipalPlusDefect : Bool
 b4ResearchLeafNowStrictPrincipalPlusDefect = true
+
+q4PointwiseToSpacetimeCompilerClosed : Bool
+q4PointwiseToSpacetimeCompilerClosed =
+  Q4Pointwise.q4PointwiseToSpacetimeCompilerClosed
+
+q4IntegratedBoundIndependentLeaf : Bool
+q4IntegratedBoundIndependentLeaf =
+  Q4Pointwise.q4IntegratedBoundIndependentResearchLeaf
 
 bLocalEDIndependentLeaf : Bool
 bLocalEDIndependentLeaf = Previous.localEDIndependentLeaf
@@ -111,6 +129,14 @@ b4QuarterMarginOptionalCompilerClosedIsTrue = refl
 b4ResearchLeafNowStrictPrincipalPlusDefectIsTrue :
   b4ResearchLeafNowStrictPrincipalPlusDefect ≡ true
 b4ResearchLeafNowStrictPrincipalPlusDefectIsTrue = refl
+
+q4PointwiseToSpacetimeCompilerClosedIsTrue :
+  q4PointwiseToSpacetimeCompilerClosed ≡ true
+q4PointwiseToSpacetimeCompilerClosedIsTrue = refl
+
+q4IntegratedBoundIndependentLeafIsFalse :
+  q4IntegratedBoundIndependentLeaf ≡ false
+q4IntegratedBoundIndependentLeafIsFalse = refl
 
 bLocalEDIndependentLeafIsFalse : bLocalEDIndependentLeaf ≡ false
 bLocalEDIndependentLeafIsFalse = refl
