@@ -2,5 +2,10 @@ module DASHI.Governance.FederatedSubsidiarityGovernanceEverything where
 
 import DASHI.Governance.AuthorityMandateCore
 import DASHI.Governance.SituatedConstituency
+import DASHI.Governance.LocalGlobalCouncilGluing
+import DASHI.Governance.CouncilDelegationGraph
 import DASHI.Governance.FederatedSubsidiarityGovernanceExact
 import DASHI.Governance.FederatedSubsidiarityGovernanceRegression
+import DASHI.Governance.FederatedDecisionIncidenceExact
+import DASHI.Governance.FederatedDecisionIncidenceRegression
+import DASHI.Governance.FederatedCouncilIncidenceBridgeExact
