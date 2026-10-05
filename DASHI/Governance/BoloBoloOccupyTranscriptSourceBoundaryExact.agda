@@ -36,6 +36,7 @@ canonicalAttachedTranscriptArtifact =
 
 data TranscriptClaimStatus : Set where
   authorReportedExperience : TranscriptClaimStatus
+  authorReportedAspiration : TranscriptClaimStatus
   authorInterpretation : TranscriptClaimStatus
   namedReferenceOnly : TranscriptClaimStatus
 
@@ -52,7 +53,7 @@ open TranscriptClaim public
 occupyParticipationClaim : TranscriptClaim
 occupyParticipationClaim =
   transcriptClaim
-    "author reports joining Occupy Wall Street in New York in 2011 and participating for six weeks"
+    "author reports joining Occupy Wall Street in New York on 17 September 2011 and participating for six weeks"
     authorReportedExperience
     true
     false
@@ -62,6 +63,14 @@ occupyProcessClaim =
   transcriptClaim
     "author reports working groups and daily general assemblies using horizontal direct-democracy and consensus-building techniques"
     authorReportedExperience
+    true
+    false
+
+parallelStructureAspirationClaim : TranscriptClaim
+parallelStructureAspirationClaim =
+  transcriptClaim
+    "author reports believing Occupy could keep growing parallel community structures, connect with other Occupy camps, and become a viable alternative society"
+    authorReportedAspiration
     true
     false
 
@@ -97,6 +106,14 @@ socialEcologyAssessmentClaim =
     true
     false
 
+boloBoloReferenceClaim : TranscriptClaim
+boloBoloReferenceClaim =
+  transcriptClaim
+    "author identifies Bolo Bolo as an obscure political-philosophy essay from 1983"
+    namedReferenceOnly
+    true
+    false
+
 boloBoloEncounterClaim : TranscriptClaim
 boloBoloEncounterClaim =
   transcriptClaim
@@ -105,10 +122,18 @@ boloBoloEncounterClaim =
     true
     false
 
+sr15ReferenceClaim : TranscriptClaim
+sr15ReferenceClaim =
+  transcriptClaim
+    "author names the IPCC 2018 Special Report on Global Warming of 1.5 C, SR15"
+    namedReferenceOnly
+    true
+    false
+
 sr15ReadingClaim : TranscriptClaim
 sr15ReadingClaim =
   transcriptClaim
-    "author reports a team reading the IPCC 2018 Special Report on Global Warming of 1.5 C and rejecting doom-oriented headlines as the most cynical interpretation"
+    "author reports a team reading SR15 and rejecting doom-oriented headlines as the most cynical interpretation"
     authorInterpretation
     true
     false
@@ -117,11 +142,14 @@ canonicalTranscriptClaims : List TranscriptClaim
 canonicalTranscriptClaims =
   occupyParticipationClaim
   ∷ occupyProcessClaim
+  ∷ parallelStructureAspirationClaim
   ∷ consensusDifficultyClaim
   ∷ growthDeteriorationClaim
   ∷ socialEcologyEncounterClaim
   ∷ socialEcologyAssessmentClaim
+  ∷ boloBoloReferenceClaim
   ∷ boloBoloEncounterClaim
+  ∷ sr15ReferenceClaim
   ∷ sr15ReadingClaim
   ∷ []
 
@@ -130,6 +158,7 @@ record BoloBoloOccupyTranscriptBoundary : Set where
   field
     occupyParticipationReported : Bool
     horizontalConsensusProcessReported : Bool
+    parallelCommunityStructureAspirationReported : Bool
     consensusDifficultyIsAuthorInterpretation : Bool
     growthComplexityDeteriorationIsAuthorInterpretation : Bool
     socialEcologyEncounterReported : Bool
@@ -137,6 +166,7 @@ record BoloBoloOccupyTranscriptBoundary : Set where
     sr15ReadingReported : Bool
     boloBoloInstitutionalSpecificationPresent : Bool
     sr15DetailedPathwaySpecificationPresent : Bool
+    formalTransitionOperationSetQuotedFromTranscript : Bool
     transcriptProvesQuantitativeCoordinationScalingLaw : Bool
     transcriptProvesFederationEmpiricallySuperior : Bool
     transcriptCreatesPoliticalAuthority : Bool
@@ -154,6 +184,8 @@ canonicalBoloBoloOccupyTranscriptBoundary =
     true
     true
     true
+    true
+    false
     false
     false
     false
@@ -167,6 +199,6 @@ canonicalBoloBoloOccupyTranscriptReceipt =
     "Bolo Bolo / Occupy transcript source boundary"
     "DASHI.Governance.BoloBoloOccupyTranscriptSourceBoundaryExact"
     "canonicalBoloBoloOccupyTranscriptBoundary"
-    "pins the attached SRT by filename/SHA-256/final timestamp and records only the autobiographical reports, author interpretations and named-reference surface actually present in that clip"
-    "the clip does not yet supply a Bolo Bolo institutional specification, detailed SR1.5 pathway, quantitative coordination-scaling law, empirical federation-superiority theorem or political authority"
+    "pins the attached SRT by filename/SHA-256/final timestamp and records the author's Occupy experience, parallel-community aspiration, consensus/growth interpretation, social-ecology encounter, Bolo Bolo reference and opening SR1.5 framing"
+    "the clip does not supply the formal transition-operation set, a Bolo Bolo institutional specification, detailed SR1.5 pathway, quantitative coordination-scaling law, empirical federation-superiority theorem or political authority"
     "agda -i . DASHI/Governance/BoloBoloOccupyTranscriptRegression.agda"
