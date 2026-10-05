@@ -14,6 +14,26 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- not yet state a detailed Bolo Bolo institutional design or climate pathway.
 ------------------------------------------------------------------------
 
+record AttachedTranscriptArtifact : Set where
+  constructor attachedTranscriptArtifact
+  field
+    sourceFileLabel : String
+    sourceSHA256 : String
+    clipStartMillis : Nat
+    clipEndMillis : Nat
+    exactAttachedBytesInspected : Bool
+
+open AttachedTranscriptArtifact public
+
+canonicalAttachedTranscriptArtifact : AttachedTranscriptArtifact
+canonicalAttachedTranscriptArtifact =
+  attachedTranscriptArtifact
+    "transcript-2026-10-05 (1).srt"
+    "cf41e893419cf0d39524d779937332e149d1ae01deb0b3df688a9a28772969f8"
+    0
+    169000
+    true
+
 data TranscriptClaimStatus : Set where
   authorReportedExperience : TranscriptClaimStatus
   authorInterpretation : TranscriptClaimStatus
@@ -147,6 +167,6 @@ canonicalBoloBoloOccupyTranscriptReceipt =
     "Bolo Bolo / Occupy transcript source boundary"
     "DASHI.Governance.BoloBoloOccupyTranscriptSourceBoundaryExact"
     "canonicalBoloBoloOccupyTranscriptBoundary"
-    "records only the autobiographical reports, author interpretations and named-reference surface actually present in the attached clip"
+    "pins the attached SRT by filename/SHA-256/final timestamp and records only the autobiographical reports, author interpretations and named-reference surface actually present in that clip"
     "the clip does not yet supply a Bolo Bolo institutional specification, detailed SR1.5 pathway, quantitative coordination-scaling law, empirical federation-superiority theorem or political authority"
     "agda -i . DASHI/Governance/BoloBoloOccupyTranscriptRegression.agda"
