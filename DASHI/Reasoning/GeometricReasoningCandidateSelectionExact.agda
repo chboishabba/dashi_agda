@@ -5,15 +5,13 @@ module DASHI.Reasoning.GeometricReasoningCandidateSelectionExact where
 --
 -- DASHI CONTRIBUTION
 --
--- This owner deliberately treats E8, Monster 3A/3B/3C, and an unstructured
--- baseline as competing candidate geometries.  A successful fit is evidence
--- for that declared experiment only; it does not identify a physical or
--- mathematical mechanism without an explicit recognition/realisation witness.
+-- E8, Monster 3A/3B/3C, and an unstructured baseline are competing candidate
+-- geometries.  A successful fit is evidence for a declared experiment only;
+-- it does not identify a mechanism without an explicit recognition witness.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -38,7 +36,7 @@ candidateName monster3CLocalGeometry = "monster-3c-local"
 candidateName genericFiniteActionGeometry = "generic-finite-action"
 
 ------------------------------------------------------------------------
--- 2. Generic action candidate.
+-- 2. Generic action candidate and fitted interventions.
 ------------------------------------------------------------------------
 
 record ActionCandidate (G Z : Set) : Set₁ where
@@ -77,22 +75,6 @@ open InterventionActionFit public
 -- 3. Composition is an independent diagnostic.
 ------------------------------------------------------------------------
 
-record InterventionCompositionFit
-    {I G X Z : Set}
-    (candidate : ActionCandidate G Z)
-    (fit : InterventionActionFit candidate (λ x → x) (λ _ x → x)) : Set₁ where
-  constructor intervention-composition-fit
-  field
-    composeIntervention : I → I → I
-    labelComposition :
-      (i j : I) →
-      labelAction fit (composeIntervention i j)
-      ≡ compose candidate (labelAction fit i) (labelAction fit j)
-
--- The specialized record above is intentionally not the main public fitting
--- API; it exists only to make the composition criterion independently typed.
--- Concrete experiment owners normally carry their own encoder/intervention.
-
 record CompositionReceipt (I G : Set) : Set₁ where
   constructor composition-receipt
   field
@@ -129,11 +111,9 @@ record GeometricReasoningLayerTrace : Set₁ where
     InterventionId : Set
     CandidateId : Set
     MetricValue : Set
-
     layer : LayerId
     intervention : InterventionId
     candidate : CandidateId
-
     pairAccuracy : MetricValue
     displacementAlignment : MetricValue
     rootEntropyOrOccupancy : MetricValue
@@ -149,7 +129,7 @@ record GeometricReasoningLayerTrace : Set₁ where
 -- 5. Proposed action-compression quality metric surface.
 --
 -- This is explicitly a DASHI proposal, not a Sophontic definition and not a
--- source claim.  A concrete numerical owner may instantiate the score algebra.
+-- source claim.  Concrete numerical owners may instantiate the score algebra.
 ------------------------------------------------------------------------
 
 record ActionCompressionQualityDefinition : Set₁ where
