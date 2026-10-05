@@ -3,6 +3,8 @@ module DASHI.Governance.BoloBoloSocialEcologyCrossPollinationExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Core.TernaryRoleCarrierExact as Ternary
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact as Hierarchy
 import DASHI.Core.CriticalSocialEcologyObserverRegimeExact as Observer
 import DASHI.Governance.BoloBoloOccupyTranscriptSourceBoundaryExact as Transcript
@@ -20,14 +22,14 @@ import DASHI.Governance.RevolutionaryPracticeBraid as Practice
 ------------------------------------------------------------------------
 
 sameCarrierDoesNotDetermineSocialRank :
-  Hierarchy.rankedRegime Hierarchy.Ternary.code2 Hierarchy.Ternary.code1
-  ≡ Hierarchy.nonrankingRegime Hierarchy.Ternary.code2 Hierarchy.Ternary.code1
+  Hierarchy.rankedRegime Ternary.code2 Ternary.code1
+  ≡ Hierarchy.nonrankingRegime Ternary.code2 Ternary.code1
   → ⊥
 sameCarrierDoesNotDetermineSocialRank =
   Hierarchy.sameCarrierDifferentRanking
 
 nominalLiberatoryLabelDoesNotRecoverAffordance :
-  Observer.INF.FactorsThrough
+  INF.FactorsThrough
     Observer.nominalLiberatoryObserver
     Observer.realizedRemain
   → ⊥
