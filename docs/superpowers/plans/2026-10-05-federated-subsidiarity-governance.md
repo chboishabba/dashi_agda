@@ -4,7 +4,7 @@
 
 **Goal:** Add a reusable Agda governance owner for local issue scope, subsidiarity, federation composition, coordination-load decomposition, transition reachability and abstract viability envelopes.
 
-**Architecture:** Reuse `AuthorityMandateCore` and `SituatedConstituency`; add one focused exact owner plus one finite regression owner. Keep all empirical superiority, legitimacy and ecological claims outside the proof kernel unless supplied as explicit witnesses.
+**Architecture:** Reuse `AuthorityMandateCore` and `SituatedConstituency`; add one focused exact owner plus one regression owner and a focused roll-up. Keep all empirical superiority, legitimacy and ecological claims outside the proof kernel unless supplied as explicit witnesses.
 
 **Tech Stack:** Agda 2.9-style source, DASHI core prelude, existing governance receipt/authority modules.
 
@@ -35,11 +35,11 @@
 
 **Interfaces:**
 - Consumes: intended names from Task 2.
-- Produces: finite compile-time examples for local exclusion, reachability and load decomposition.
+- Produces: compile-time theorem/API checks for local exclusion, reachability, load decomposition and authority firewalls.
 
-- [ ] Write the regression module against the intended API before the production owner exists.
+- [x] Write the regression module against the intended API before the production owner exists.
 - [ ] Verify RED by observing the module cannot resolve `DASHI.Governance.FederatedSubsidiarityGovernanceExact` on the regression-only commit when an Agda runner is available.
-- [ ] Commit the regression-only state.
+- [x] Commit the regression-only state.
 
 ### Task 2: Exact governance owner
 
@@ -49,27 +49,27 @@
 **Interfaces:**
 - Produces: `IssueScope`, `FederatedGovernance`, `SubsidiarityWitness`, `nonMemberCannotParticipateLocal`, `federatedLoad`, `federatedLoadUpperBound`, `ComposablePair`, `pairGuarantees`, `TransitionKind`, `TransitionSystem`, `Reachable`, `ViabilityEnvelope`.
 
-- [ ] Implement the minimal data/record layer required by the regression.
-- [ ] Prove only definitional/witness-driven theorems.
-- [ ] Add a non-promoting `GenericReceipt` and explicit authority/source boundary booleans.
+- [x] Implement the minimal data/record layer required by the regression.
+- [x] Prove only definitional/witness-driven theorems.
+- [x] Add a non-promoting `GenericReceipt` and explicit authority/source boundary booleans.
 - [ ] Run focused Agda check when available: `agda -i . DASHI/Governance/FederatedSubsidiarityGovernanceRegression.agda`.
-- [ ] Commit.
+- [x] Commit.
 
-### Task 3: Governance aggregate
+### Task 3: Focused governance aggregate
 
 **Files:**
-- Modify: `DASHI/Governance/Everything.agda`
+- Create: `DASHI/Governance/FederatedSubsidiarityGovernanceEverything.agda`
 
 **Interfaces:**
-- Consumes: Task 2 exact owner and Task 1 regression.
-- Produces: repository-wide governance aggregation exposure.
+- Consumes: Task 2 exact owner, Task 1 regression, existing mandate and constituency owners.
+- Produces: a focused aggregation surface without rewriting the high-churn global `DASHI/Governance/Everything.agda`.
 
-- [ ] Import exact owner and regression.
-- [ ] Run focused aggregate check when available: `agda -i . DASHI/Governance/Everything.agda`.
-- [ ] Commit.
+- [x] Import exact owner, regression and reused parent owners.
+- [ ] Run focused aggregate check when available: `agda -i . DASHI/Governance/FederatedSubsidiarityGovernanceEverything.agda`.
+- [x] Commit.
 
 ### Task 4: Verification and PR boundary
 
-- [ ] Inspect branch diff for accidental empirical promotion or duplicated authority semantics.
+- [x] Inspect branch diff for accidental empirical promotion or duplicated authority semantics.
 - [ ] Check exact-head workflow status if GitHub Actions surfaces a run.
-- [ ] Open a PR describing source-derived motivation, proved structural results and remaining empirical/source residuals.
+- [ ] Open a PR describing source-derived motivation, proved structural source and remaining empirical/source residuals.
