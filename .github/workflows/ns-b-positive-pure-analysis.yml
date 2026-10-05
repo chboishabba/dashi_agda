@@ -9,6 +9,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - '.github/workflows/ns-b-positive-pure-analysis.yml'
@@ -18,6 +20,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - '.github/workflows/ns-b-positive-pure-analysis.yml'
@@ -47,5 +51,7 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutTest.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda
