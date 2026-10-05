@@ -25,5 +25,11 @@ pathGeometryRemains = refl
 haarGeometryRemains : T.productHaarQuadratureGeometryRequired ≡ true
 haarGeometryRemains = refl
 
+massDiscrepancyRetired : T.massDiscrepancyEstimateStillPhysical ≡ false
+massDiscrepancyRetired = refl
+
+exactMassChoiceCompiled : T.exactHaarCellMassEliminatesDiscrepancy ≡ true
+exactMassChoiceCompiled = refl
+
 wardRemains : T.renormalizedHilbertWeylWardAuthorityRequired ≡ true
 wardRemains = refl
