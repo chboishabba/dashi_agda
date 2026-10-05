@@ -104,6 +104,62 @@ subsidiarityObstructsTotalGlobalCoupling
       (globallyCoupled issue)
 
 ------------------------------------------------------------------------
+-- Strict participation-contraction order.
+--
+-- `narrowIssue` is strictly less participation-coupled than `broadIssue` when
+-- every narrow participant is also a broad participant and at least one broad
+-- participant is excluded from the narrow issue.
+------------------------------------------------------------------------
+
+record StrictParticipationContraction
+  {Agent Community Issue : Set}
+  (governance : Base.FederatedGovernance Agent Community Issue)
+  (narrowIssue broadIssue : Issue) : Set₁ where
+  constructor strictParticipationContraction
+  field
+    participantInclusion :
+      ∀ agent →
+      Base.participates governance agent narrowIssue →
+      Base.participates governance agent broadIssue
+
+    strictParticipantWitness :
+      Σ Agent
+        (λ agent →
+          Base.participates governance agent broadIssue
+          × ¬ Base.participates governance agent narrowIssue)
+
+open StrictParticipationContraction public
+
+localToGlobalStrictParticipationContraction :
+  ∀ {Agent Community Issue : Set}
+    {governance : Base.FederatedGovernance Agent Community Issue} →
+  (subsidiarity : Base.SubsidiarityWitness governance) →
+  ∀ {localIssue broadIssue community} →
+  Base.scopeOf governance localIssue ≡ Base.localTo community →
+  Σ Agent (λ agent → ¬ Base.memberOf governance agent community) →
+  GloballyCoupledIssue governance broadIssue →
+  StrictParticipationContraction governance localIssue broadIssue
+localToGlobalStrictParticipationContraction
+  subsidiarity
+  {localIssue}
+  {broadIssue}
+  {community}
+  localScope
+  (outsider , outsiderNotMember)
+  broadCoupling =
+    strictParticipationContraction
+      (λ agent localParticipation → broadCoupling agent)
+      (outsider ,
+        ( broadCoupling outsider
+        , λ outsiderLocalParticipation →
+            outsiderNotMember
+              (Base.localParticipationScoped
+                subsidiarity
+                localScope
+                outsiderLocalParticipation)
+        ))
+
+------------------------------------------------------------------------
 -- Proof-carrying finite incidence accounting.
 --
 -- Counts are supplied by an external finite enumeration/audit.  This record
@@ -125,7 +181,7 @@ record IncidenceAccounting : Set where
 open IncidenceAccounting public
 
 totalEdgesPartition :
-  ∀ accounting →
+  (accounting : IncidenceAccounting) →
   totalEdges accounting ≡
     localEdges accounting
       + boundaryEdges accounting
@@ -146,6 +202,7 @@ record DecisionIncidenceBoundary : Set where
     graphEdgesCreatePoliticalLegitimacy : Bool
     localityProvesEmpiricalEfficiency : Bool
     absenceOfGlobalCouplingImpliesDemocracy : Bool
+    strictParticipationContractionIsCostMeasurement : Bool
     quantitativeScalingLawEmpiricallyEstablished : Bool
     suppliedCountsNeedExternalJustification : Bool
     boundaryIssuesMayCrossCommunities : Bool
@@ -156,6 +213,7 @@ open DecisionIncidenceBoundary public
 canonicalDecisionIncidenceBoundary : DecisionIncidenceBoundary
 canonicalDecisionIncidenceBoundary =
   decisionIncidenceBoundary
+    false
     false
     false
     false
@@ -171,6 +229,6 @@ canonicalFederatedDecisionIncidenceReceipt =
     "federated decision-incidence locality core"
     "DASHI.Governance.FederatedDecisionIncidenceExact"
     "canonicalDecisionIncidenceBoundary"
-    "represents participation as agent-issue incidence, proves that subsidiarity localises local-issue edges, and proves that any local issue with an outsider obstructs total global coupling"
-    "finite incidence counts remain externally supplied and no empirical efficiency, democracy, legitimacy or quantitative social-scaling law is promoted"
+    "represents participation as agent-issue incidence, proves that subsidiarity localises local-issue edges, obstructs total global coupling when a local issue has an outsider, and constructs a strict participation-fibre contraction against any supplied globally coupled comparison issue"
+    "finite incidence counts remain externally supplied and neither strict set contraction nor graph locality is promoted to empirical efficiency, democracy, legitimacy or a quantitative social-scaling law"
     "agda -i . DASHI/Governance/FederatedDecisionIncidenceRegression.agda"
