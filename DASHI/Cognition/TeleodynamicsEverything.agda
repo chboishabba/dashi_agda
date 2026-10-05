@@ -1,4 +1,5 @@
 module DASHI.Cognition.TeleodynamicsEverything where
 
 import DASHI.Cognition.TeleodynamicsPrincipiaTwoExact
+import DASHI.Cognition.TeleodynamicsCognitionBridge
 import DASHI.Cognition.TeleodynamicsRegression
