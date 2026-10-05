@@ -20,6 +20,12 @@ q4PointwiseCompiler = F.q4PointwiseToSpacetimeCompilerClosedIsTrue
 q4IntegratedNotIndependent : F.q4IntegratedBoundIndependentLeaf ≡ false
 q4IntegratedNotIndependent = F.q4IntegratedBoundIndependentLeafIsFalse
 
+positiveEndpointAggregation : F.ePositiveOutputAggregationClosed ≡ true
+positiveEndpointAggregation = F.ePositiveOutputAggregationClosedIsTrue
+
+positiveEndpointNoOutputCount : F.ePositiveOutputAggregationAddsCardinalityFactor ≡ false
+positiveEndpointNoOutputCount = F.ePositiveOutputAggregationAddsCardinalityFactorIsFalse
+
 localEDGone : F.bLocalEDIndependentLeaf ≡ false
 localEDGone = F.bLocalEDIndependentLeafIsFalse
 
