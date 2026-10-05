@@ -185,9 +185,9 @@ reachableStep :
   ∀ {State : Set}
     {transitionSystem : TransitionSystem State}
     {source target} →
-  transitionSystem ↝ source →
+  _↝_ transitionSystem source target →
   Reachable transitionSystem source target
-reachableStep {target = target} (kind , witness) =
+reachableStep (kind , witness) =
   reachableByStep witness
 
 ------------------------------------------------------------------------
