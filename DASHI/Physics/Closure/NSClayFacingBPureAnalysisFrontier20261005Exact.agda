@@ -26,13 +26,21 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 -- plus cutoff-uniform integrated dissipation into the required integrated Gram
 -- budget.  Thus time integration is not an independent Q4 research leaf.
 --
+-- For E+, R461 already reduces one fixed-output positive endpoint to an
+-- amplitude square.  The new output aggregator proves
+--
+--   sum_k F_k^+ <= W * (sum_k a_k)^2
+--
+-- with no output-count factor.  Hence the endpoint research leaf is a single
+-- cutoff-uniform global amplitude-sum bound on the literal companion family.
+--
 -- Remaining board:
 --   B4 strict principal+defect attachment
 --   B1 literal rows -> ED
 --   B2 literal rows -> ED
 --   B3 literal rows -> ED
 --   Q4 pointwise physical off-diagonal Gram -> dissipation
---   E+ uniform positive terminal flux/amplitude
+--   E+ global physical amplitude-sum bound
 --   Q5 direct signed quintic (fallback only)
 --   B-continuation inputs.
 ------------------------------------------------------------------------
@@ -44,6 +52,7 @@ import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact as Q4Pointwise
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpointAmplitudeMaxCutExact as EndpointAmplitude
 
 data PureBAnalyticLeaf : Set where
   b4StrictSplitPhysicalAttachment : PureBAnalyticLeaf
@@ -51,7 +60,7 @@ data PureBAnalyticLeaf : Set where
   b2LiteralRowsED : PureBAnalyticLeaf
   b3LiteralRowsED : PureBAnalyticLeaf
   q4PointwisePhysicalGram : PureBAnalyticLeaf
-  ePositiveTerminalFlux : PureBAnalyticLeaf
+  ePositiveGlobalAmplitudeSum : PureBAnalyticLeaf
   q5SignedQuinticFallback : PureBAnalyticLeaf
   bContinuationInputs : PureBAnalyticLeaf
 
@@ -66,8 +75,8 @@ pureBLeafClosed b3LiteralRowsED =
   Previous.finalBLeafClosed Previous.b3LiteralRowsLocalED
 pureBLeafClosed q4PointwisePhysicalGram =
   Q4Pointwise.q4PointwisePhysicalGramEstimateClosedHere
-pureBLeafClosed ePositiveTerminalFlux =
-  Previous.finalBLeafClosed Previous.ePositiveTerminalFluxAmplitude
+pureBLeafClosed ePositiveGlobalAmplitudeSum =
+  EndpointAmplitude.eGlobalAmplitudeSumProducerClosedHere
 pureBLeafClosed q5SignedQuinticFallback =
   Previous.finalBLeafClosed Previous.q5DirectSignedQuintic
 pureBLeafClosed bContinuationInputs =
@@ -98,6 +107,14 @@ q4PointwiseToSpacetimeCompilerClosed =
 q4IntegratedBoundIndependentLeaf : Bool
 q4IntegratedBoundIndependentLeaf =
   Q4Pointwise.q4IntegratedBoundIndependentResearchLeaf
+
+ePositiveOutputAggregationClosed : Bool
+ePositiveOutputAggregationClosed =
+  EndpointAmplitude.ePositiveOutputAggregationClosed
+
+ePositiveOutputAggregationAddsCardinalityFactor : Bool
+ePositiveOutputAggregationAddsCardinalityFactor =
+  EndpointAmplitude.ePositiveOutputAggregationIntroducesCardinalityFactor
 
 bLocalEDIndependentLeaf : Bool
 bLocalEDIndependentLeaf = Previous.localEDIndependentLeaf
@@ -137,6 +154,14 @@ q4PointwiseToSpacetimeCompilerClosedIsTrue = refl
 q4IntegratedBoundIndependentLeafIsFalse :
   q4IntegratedBoundIndependentLeaf ≡ false
 q4IntegratedBoundIndependentLeafIsFalse = refl
+
+ePositiveOutputAggregationClosedIsTrue :
+  ePositiveOutputAggregationClosed ≡ true
+ePositiveOutputAggregationClosedIsTrue = refl
+
+ePositiveOutputAggregationAddsCardinalityFactorIsFalse :
+  ePositiveOutputAggregationAddsCardinalityFactor ≡ false
+ePositiveOutputAggregationAddsCardinalityFactorIsFalse = refl
 
 bLocalEDIndependentLeafIsFalse : bLocalEDIndependentLeaf ≡ false
 bLocalEDIndependentLeafIsFalse = refl
