@@ -42,6 +42,18 @@ subsidiarityBlocksTotalGlobalCoupling :
 subsidiarityBlocksTotalGlobalCoupling =
   Incidence.subsidiarityObstructsTotalGlobalCoupling
 
+localIssueStrictlyContractsAgainstGlobalComparison :
+  ∀ {A C I : Set}
+    {g : Base.FederatedGovernance A C I} →
+  (s : Base.SubsidiarityWitness g) →
+  ∀ {localIssue broadIssue community} →
+  Base.scopeOf g localIssue ≡ Base.localTo community →
+  Σ A (λ agent → ¬ Base.memberOf g agent community) →
+  Incidence.GloballyCoupledIssue g broadIssue →
+  Incidence.StrictParticipationContraction g localIssue broadIssue
+localIssueStrictlyContractsAgainstGlobalComparison =
+  Incidence.localToGlobalStrictParticipationContraction
+
 accountingExample : Incidence.IncidenceAccounting
 accountingExample =
   Incidence.incidenceAccounting
@@ -58,6 +70,12 @@ accountingExamplePartition :
     + Incidence.federationWideEdges accountingExample
 accountingExamplePartition =
   Incidence.totalEdgesPartition accountingExample
+
+strictContractionIsNotCostMeasurement :
+  Incidence.strictParticipationContractionIsCostMeasurement
+    Incidence.canonicalDecisionIncidenceBoundary
+  ≡ false
+strictContractionIsNotCostMeasurement = refl
 
 quantitativeLawStillExternal :
   Incidence.quantitativeScalingLawEmpiricallyEstablished
