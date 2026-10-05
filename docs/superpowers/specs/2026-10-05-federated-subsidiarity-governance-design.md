@@ -18,11 +18,11 @@ The new owner must not duplicate those semantics.
 It introduces:
 
 1. `IssueScope` with local, boundary and federation-wide constructors.
-2. `FederatedGovernance` carrying communities, agents, issues, membership, participation and issue scope.
+2. `FederatedGovernance` carrying agents, communities, issues, membership, participation and issue scope.
 3. `SubsidiarityWitness` stating that participation in a local issue requires membership in the affected community.
 4. A theorem that a non-member cannot participate in a local issue under a subsidiarity witness.
 5. Coordination-load decomposition into local and boundary load, with an exact upper-bound theorem for the defined federated load.
-6. A minimal `CommunityGuarantee` / `ComposablePair` carrier showing that local guarantees can be retained under an explicitly compatible interface without inventing compatibility.
+6. A `ComposablePair` carrier showing that local guarantees can be retained under an explicitly compatible interface without inventing compatibility.
 7. A transition system with create/join/exit/split/federate/share-infrastructure transition kinds and reflexive-transitive reachability.
 8. A `ViabilityEnvelope` separating governance, ecological/resource and basic-needs predicates. No thresholds or empirical constants are invented.
 9. Explicit firewalls: formalisation does not prove decentralisation is empirically superior; consensus is not definitionally democracy; federation is not definitionally legitimate; ecological viability is not inferred from governance form.
@@ -42,13 +42,13 @@ The transcript supplies motivation and the governance-scaling problem statement.
 
 ## Regression owner
 
-`DASHI/Governance/FederatedSubsidiarityGovernanceRegression.agda` will instantiate a two-community finite example and verify:
+`DASHI/Governance/FederatedSubsidiarityGovernanceRegression.agda` pins the public theorem/API surface for:
 
-- a local issue scoped to community A excludes an agent known not to belong to A;
-- one transition is reachable;
-- the federated load is exactly local load plus boundary load;
-- the canonical authority-boundary booleans remain non-promoting.
+- local non-member exclusion;
+- one-step transition reachability;
+- exact `3 + 5 = 8` load decomposition;
+- non-promoting legitimacy, empirical-superiority and ecological-inference firewalls.
 
 ## Aggregation
 
-Import both new modules from `DASHI/Governance/Everything.agda`.
+Use the focused roll-up `DASHI/Governance/FederatedSubsidiarityGovernanceEverything.agda`. The global `DASHI/Governance/Everything.agda` is intentionally left untouched in this tranche to avoid a whole-file replacement of a large, high-churn aggregate through the connector.
