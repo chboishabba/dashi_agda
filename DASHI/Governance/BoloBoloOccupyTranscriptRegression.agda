@@ -13,6 +13,18 @@ attachedTranscriptEndsAt169Seconds :
   Source.clipEndMillis Source.canonicalAttachedTranscriptArtifact ≡ 169000
 attachedTranscriptEndsAt169Seconds = refl
 
+parallelStructureAspirationIsAttributed :
+  Source.parallelCommunityStructureAspirationReported
+    Source.canonicalBoloBoloOccupyTranscriptBoundary
+  ≡ true
+parallelStructureAspirationIsAttributed = refl
+
+formalTransitionOperationsAreNotQuoted :
+  Source.formalTransitionOperationSetQuotedFromTranscript
+    Source.canonicalBoloBoloOccupyTranscriptBoundary
+  ≡ false
+formalTransitionOperationsAreNotQuoted = refl
+
 occupyConsensusDifficultyIsAttributed :
   Source.consensusDifficultyIsAuthorInterpretation
     Source.canonicalBoloBoloOccupyTranscriptBoundary
