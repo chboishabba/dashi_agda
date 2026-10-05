@@ -9,7 +9,7 @@ import DASHI.Governance.FederatedSubsidiarityGovernanceExact as F
 ------------------------------------------------------------------------
 
 nonMemberLocalParticipationIsImpossible :
-  ∀ {ℓ} {A C I : Set} →
+  ∀ {A C I : Set} →
   (g : F.FederatedGovernance A C I) →
   (s : F.SubsidiarityWitness g) →
   ∀ {a c i} →
