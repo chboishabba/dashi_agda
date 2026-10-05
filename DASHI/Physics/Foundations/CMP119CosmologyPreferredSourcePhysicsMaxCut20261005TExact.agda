@@ -11,7 +11,12 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 -- data record.
 --
 -- The Local-C rechart now consumes a separately constructed physical marked
--- curvature/F^2 family on the exact carrier.  Hence the preferred frontier is:
+-- curvature/F^2 family on the exact carrier.  The Haar lane is also tightened:
+-- choose each quadrature weight to be the exact source/Haar cell mass.  Then
+-- mass discrepancy is identically zero and only the shrinking-cell oscillation
+-- theorem remains geometric.
+--
+-- Preferred frontier:
 --
 --   T1  construct the actual CMP109/116 one-parameter Background path and its
 --       B4-equivariant compact/source geometry on the literal Background;
@@ -22,9 +27,8 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --   T3  construct the physical marked F^2 source family on the exact completed
 --       Composite carrier (NO equality to the stress marked source);
 --
---   T4  construct literal product-Haar quadrature geometry with vanishing cell
---       oscillation and mass-discrepancy budgets for the selected source
---       expectation.
+--   T4  construct literal product-Haar cells/nodes with exact Haar cell masses
+--       and prove the selected integrand's cell oscillation budget vanishes.
 --
 -- T2 is the one standard imported analytic authority.  T1/T3/T4 are concrete
 -- source constructions.  All covariance/rechart/common-limit/sign transport
@@ -38,7 +42,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyP1PreferredPathDefinedPresentCut
 import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact as P2
 import DASHI.Physics.Foundations.CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact as P3
 import DASHI.Physics.Foundations.CMP119CosmologyP3ApproximateExpectationHaarExact as P3Limit
-import DASHI.Physics.YangMills.BalabanCompactHaarFiniteQuadratureErrorExact as Haar
+import DASHI.Physics.YangMills.BalabanCompactHaarExactMassQuadratureExact as ExactMass
 
 remainingNovelSourceConstructionCount : Nat
 remainingNovelSourceConstructionCount = 3
@@ -95,7 +99,12 @@ cellOscillationEstimateStillPhysical : Bool
 cellOscillationEstimateStillPhysical = true
 
 massDiscrepancyEstimateStillPhysical : Bool
-massDiscrepancyEstimateStillPhysical = true
+massDiscrepancyEstimateStillPhysical =
+  ExactMass.independentMassDiscrepancyEstimateRequired
+
+exactHaarCellMassEliminatesDiscrepancy : Bool
+exactHaarCellMassEliminatesDiscrepancy =
+  ExactMass.exactCellMassEliminatesMassDiscrepancy
 
 commonLimitAfterHaarGeometryIsCompilerOwned : Bool
 commonLimitAfterHaarGeometryIsCompilerOwned =
