@@ -5,11 +5,14 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact as F
 
-quarterCompiler : F.b4QuarterMarginCompilerClosed ≡ true
-quarterCompiler = F.b4QuarterMarginCompilerClosedIsTrue
+strictSplitCompiler : F.b4GenericStrictSplitCompilerClosed ≡ true
+strictSplitCompiler = F.b4GenericStrictSplitCompilerClosedIsTrue
 
-quarterStrict : F.b4QuarterThetaStrictlyBelowOne ≡ true
-quarterStrict = F.b4QuarterThetaStrictlyBelowOneIsTrue
+fixedQuarterNotRequired : F.b4FixedQuarterMarginRequired ≡ false
+fixedQuarterNotRequired = F.b4FixedQuarterMarginRequiredIsFalse
+
+quarterOptional : F.b4QuarterMarginOptionalCompilerClosed ≡ true
+quarterOptional = F.b4QuarterMarginOptionalCompilerClosedIsTrue
 
 localEDGone : F.bLocalEDIndependentLeaf ≡ false
 localEDGone = F.bLocalEDIndependentLeafIsFalse
