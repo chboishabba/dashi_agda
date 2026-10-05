@@ -14,7 +14,6 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerFullActionLawExact as FullActio
 import DASHI.Reasoning.GeometricReasoningCandidateSelectionExact as Candidates
 import DASHI.Wikimedia.IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact as T1T2
 
--- The order-three lanes remain distinct model candidates.
 monster3ANormalizer : Branching.ThreeLocalNormalizerKind
 monster3ANormalizer = Branching.normalizerKind Branching.class3A
 
@@ -37,6 +36,22 @@ monster3BFullActionLawReceipt = FullAction.canonicalFullHeisenbergActionLawRecei
 
 monster3BFullActionLawConsumed : Bool
 monster3BFullActionLawConsumed = true
+
+-- The exact central composition term is the semantic composition diagnostic we
+-- discussed: the phase of g*h contains b_g . a_h in addition to the two
+-- individual central phases.  This is a donor theorem about the finite 3B
+-- candidate action, not evidence that model interventions realize it.
+monster3BCentralCocycleDiagnostic :
+  (g h : H.Heisenberg6) →
+  H.centralPhase (H.compose g h)
+  ≡ G._+3_
+      (H.centralPhase g)
+      (G._+3_
+        (H.centralPhase h)
+        (H.dot6
+          (H.modulationPart (H.quotient g))
+          (H.translationPart (H.quotient h))))
+monster3BCentralCocycleDiagnostic g h = refl
 
 record Monster3BSemanticActionFit
     (Intervention Input : Set)
@@ -97,6 +112,7 @@ record GeometricReasoningExperimentBoard : Set where
     nuisanceControlsRequired : Bool
     layerwiseTraceRequired : Bool
     compositionTestRequired : Bool
+    cocycleTestRequired : Bool
     orientationTestRequired : Bool
     heldOutComparisonRequired : Bool
 
@@ -108,7 +124,7 @@ canonicalExperimentBoard =
     Candidates.monster3ALocalGeometry
     Candidates.monster3BHeisenbergGeometry
     Candidates.monster3CLocalGeometry
-    true true true true true true
+    true true true true true true true
 
 data Monster3BActionCreatesSemanticMechanism : Set where
 data ThreeLocalLabelCreatesWinningModel : Set where
@@ -130,6 +146,7 @@ record LilaMonsterGeometricReasoningBoundary : Set where
   field
     threeAThreeBThreeCDistinct : Bool
     monster3BFullActionLawPaid : Bool
+    centralCocycleDiagnosticPaid : Bool
     semantic3BFitCandidateOnly : Bool
     t1LiteralWordPaid : Bool
     t2CentralRolePaid : Bool
@@ -142,4 +159,4 @@ canonicalLilaMonsterGeometricReasoningBoundary :
   LilaMonsterGeometricReasoningBoundary
 canonicalLilaMonsterGeometricReasoningBoundary =
   lila-monster-geometric-reasoning-boundary
-    true true true true true false false true false
+    true true true true true true false false true false
