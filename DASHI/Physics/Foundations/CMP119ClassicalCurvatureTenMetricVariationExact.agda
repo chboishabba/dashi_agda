@@ -32,6 +32,7 @@ half : ℚ
 half = + 1 / 2
 
 record CurvatureSix : Set where
+  constructor curvature-six
   field
     f01 f02 f03 f12 f13 f23 : Curl.RationalVector3
 
