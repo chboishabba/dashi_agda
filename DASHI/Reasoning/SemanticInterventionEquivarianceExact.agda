@@ -1,30 +1,10 @@
 module DASHI.Reasoning.SemanticInterventionEquivarianceExact where
 
-------------------------------------------------------------------------
--- SEMANTIC INTERVENTION / REPRESENTATION EQUIVARIANCE
---
--- DASHI CONTRIBUTION
---
--- This owner packages the counterfactual-pair geometry discussed in the LILA /
--- Sophontic / Monster cross-pollination without attributing it to any one
--- external project.  The load-bearing theorem is generic:
---
---   representation equivariance + decoder compatibility + model factorisation
---   -------------------------------------------------------------------------
---                              model equivariance
---
--- Nothing here says a concrete language model satisfies these hypotheses.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
-
-------------------------------------------------------------------------
--- 1. Typed interventions.
-------------------------------------------------------------------------
 
 data InterventionKind : Set where
   labelChanging : InterventionKind
@@ -54,10 +34,6 @@ record PairCorrect
 
 open PairCorrect public
 
-------------------------------------------------------------------------
--- 2. Model-level equivariance.
-------------------------------------------------------------------------
-
 record ModelEquivariance
     {X Y : Set}
     (model : X → Y)
@@ -81,10 +57,6 @@ modelEquivarianceYieldsPairCorrect :
 modelEquivarianceYieldsPairCorrect equivariance x =
   pair-correct (commutes equivariance x)
 
-------------------------------------------------------------------------
--- 3. Representation-level action and decoder compatibility.
-------------------------------------------------------------------------
-
 record RepresentationEquivariance
     {X Y Z : Set}
     (model : X → Y)
@@ -94,21 +66,16 @@ record RepresentationEquivariance
     encode : X → Z
     decode : Z → Y
     representationAction : Z → Z
-
     modelFactorsThroughRepresentation :
-      (x : X) →
-      decode (encode x) ≡ model x
-
+      (x : X) → decode (encode x) ≡ model x
     representationCommutes :
       (x : X) →
       encode (actX intervention x)
       ≡ representationAction (encode x)
-
     decoderCompatible :
       (z : Z) →
       decode (representationAction z)
       ≡ actY intervention (decode z)
-
     justification : String
 
 open RepresentationEquivariance public
@@ -119,22 +86,20 @@ representationEquivarianceImpliesModelEquivariance :
     {intervention : SemanticIntervention X Y} →
   RepresentationEquivariance {X} {Y} {Z} model intervention →
   ModelEquivariance model intervention
-representationEquivarianceImpliesModelEquivariance witness =
+representationEquivarianceImpliesModelEquivariance
+    {intervention = intervention} witness =
   model-equivariance λ x →
     trans
-      (sym (modelFactorsThroughRepresentation witness (actX _ x)))
+      (sym (modelFactorsThroughRepresentation witness (actX intervention x)))
       (trans
         (cong (decode witness) (representationCommutes witness x))
         (trans
           (decoderCompatible witness (encode witness x))
-          (cong (actY _) (modelFactorsThroughRepresentation witness x))))
+          (cong (actY intervention)
+            (modelFactorsThroughRepresentation witness x))))
 
 representationToModelEquivarianceTheoremAvailable : Bool
 representationToModelEquivarianceTheoremAvailable = true
-
-------------------------------------------------------------------------
--- 4. Composition-sensitive reasoning surface.
-------------------------------------------------------------------------
 
 record InterventionComposition
     {X Y : Set}
@@ -142,11 +107,9 @@ record InterventionComposition
   constructor intervention-composition
   field
     inputComposition :
-      (x : X) →
-      actX composed x ≡ actX first (actX second x)
+      (x : X) → actX composed x ≡ actX first (actX second x)
     outputComposition :
-      (y : Y) →
-      actY composed y ≡ actY first (actY second y)
+      (y : Y) → actY composed y ≡ actY first (actY second y)
 
 open InterventionComposition public
 
@@ -158,19 +121,17 @@ modelEquivarianceComposes :
   ModelEquivariance model first →
   ModelEquivariance model second →
   ModelEquivariance model composed
-modelEquivarianceComposes composition firstEq secondEq =
+modelEquivarianceComposes
+    {first = first} {second = second} {composed = composed}
+    composition firstEq secondEq =
   model-equivariance λ x →
     trans
       (cong model (inputComposition composition x))
       (trans
-        (commutes firstEq (actX _ x))
+        (commutes firstEq (actX second x))
         (trans
-          (cong (actY _) (commutes secondEq x))
+          (cong (actY first) (commutes secondEq x))
           (sym (outputComposition composition (model x)))))
-
-------------------------------------------------------------------------
--- 5. Fail-closed promotion boundary.
-------------------------------------------------------------------------
 
 data PairAccuracyCreatesRepresentationLaw : Set where
 data RepresentationGeometryCreatesCausalMechanism : Set where
