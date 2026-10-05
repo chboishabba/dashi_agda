@@ -68,8 +68,9 @@ record SelectedResidualConsumer
           (residual code state)
           receipt
 
--- A collision is enough to prove that a consumer cannot descend through the
--- geometric surface alone.
+-- A collision is a concrete non-descent witness.  The repository deliberately
+-- does not turn this record alone into a universal theorem about an arbitrary
+-- caller-supplied factorisation; each consumer proves its own contradiction.
 record SurfaceCollision
     {State Surface Output : Set}
     (surface : State → Surface)
@@ -82,28 +83,6 @@ record SurfaceCollision
 
 open SurfaceCollision public
 
-surfaceCollisionBlocksFactorisation :
-  ∀ {State Surface Output : Set}
-    {surface : State → Surface}
-    {consumer : State → Output} →
-  SurfaceCollision surface consumer →
-  ((consume : Surface → Output) →
-    ((state : State) → consumer state ≡ consume (surface state))) →
-  ⊥
-surfaceCollisionBlocksFactorisation collision descent =
-  differentConsumer collision
-    (let consume = λ s → consumer (left collision) in
-     let impossibleDescent = descent consume in
-     -- The supplied descent family would have to agree on equal surfaces.
-     -- We keep this theorem interface conservative; concrete owners normally
-     -- prove the collision contradiction with their actual consumer decoder.
-     refl)
-
--- The generic collision theorem above is intentionally not exported as the
--- principal API because arbitrary caller-supplied descent is awkward to use in
--- intensional equality.  The exact reopening theorem is the stable positive
--- result and concrete non-descent owners carry their own collision proof.
-
 record GeometricReasoningSurfaceResidualBoundary : Set where
   constructor geometric-reasoning-surface-residual-boundary
   field
@@ -112,6 +91,7 @@ record GeometricReasoningSurfaceResidualBoundary : Set where
     surfaceOnlyConsumerTyped : Bool
     selectedResidualConsumerTyped : Bool
     collisionWitnessTyped : Bool
+    genericCollisionAutoPromotedToUniversalNonDescent : Bool
     geometricSurfaceAutomaticallyComplete : Bool
     residualAvailabilityAutomaticallyProvesNecessity : Bool
 
@@ -119,4 +99,4 @@ canonicalGeometricReasoningSurfaceResidualBoundary :
   GeometricReasoningSurfaceResidualBoundary
 canonicalGeometricReasoningSurfaceResidualBoundary =
   geometric-reasoning-surface-residual-boundary
-    true true true true true false false
+    true true true true true false false false
