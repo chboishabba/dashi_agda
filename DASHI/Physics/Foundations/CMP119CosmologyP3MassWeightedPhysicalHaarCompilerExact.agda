@@ -17,6 +17,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
@@ -113,8 +114,7 @@ quadratureBudgetVanishes {sequenceLimit = sequenceLimit} data =
         (Weighted.asFiniteQuadrature
           (weightedQuadratureAt data refinement)))
     (λ refinement →
-      Relation.Binary.PropositionalEquality.sym
-        (quadratureBudgetIsUniformOscillation data refinement))
+      sym (quadratureBudgetIsUniformOscillation data refinement))
     (uniformOscillationVanishes data)
 
 asPhysicalHaarWeld :
