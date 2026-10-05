@@ -37,14 +37,18 @@ module DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; div-helper)
 open import Data.List.Base using (List; []; _∷_; _++_; filter; map)
-open import Data.Nat using (_/_)
 open import Data.Nat.Divisibility using (_∣?_) 
 open import Data.Nat.Properties renaming (_≟_ to nat≟)
 open import Relation.Nullary.Decidable.Core using (_×?_; yes; no)
 
+divNat : Nat → Nat → Nat
+divNat m zero = zero
+divNat m (suc n) = div-helper 0 n m n
+
 powNat : Nat → Nat → Nat
+powNat (suc zero) exponent = 1
 powNat base zero = 1
 powNat base (suc exponent) = base * powNat base exponent
 
@@ -74,7 +78,7 @@ termForDivisor :
 termForDivisor weightMinusOne m n d =
   heckeTerm
     (powNat d weightMinusOne)
-    ((m * n) / (d * d))
+    (divNat (m * n) (d * d))
 
 heckeProductExpression :
   Nat → Nat → Nat → HeckeExpression
@@ -130,6 +134,7 @@ hecke93AnyWeight weightMinusOne = refl
 ------------------------------------------------------------------------
 
 scaleTerm : Nat → HeckeTerm → HeckeTerm
+scaleTerm (suc zero) term = term
 scaleTerm scalar (heckeTerm c i) = heckeTerm (scalar * c) i
 
 scaleExpression : Nat → HeckeExpression → HeckeExpression
@@ -138,21 +143,20 @@ scaleExpression scalar expression = map (scaleTerm scalar) expression
 multiplyBasisByExpression :
   Nat → Nat → HeckeExpression → HeckeExpression
 multiplyBasisByExpression weightMinusOne m [] = []
-multiplyBasisByExpression weightMinusOne m (heckeTerm c n ∷ rest) =
+multiplyBasisByExpression weightMinusOne m ((heckeTerm c n) ∷ rest) =
   scaleExpression c (heckeProductExpression weightMinusOne m n)
   ++ multiplyBasisByExpression weightMinusOne m rest
 
+insertTerm : HeckeTerm → HeckeExpression → HeckeExpression
+insertTerm term [] = term ∷ []
+insertTerm (heckeTerm c i) ((heckeTerm d j) ∷ rest) with nat≟ i j
+... | yes refl = (heckeTerm (c + d) i) ∷ rest
+... | no _ne   = (heckeTerm c i) ∷ (heckeTerm d j) ∷ rest
+
 combineAdjacentLikeTerms : HeckeExpression → HeckeExpression
 combineAdjacentLikeTerms [] = []
-combineAdjacentLikeTerms (term ∷ []) = term ∷ []
-combineAdjacentLikeTerms
-  (heckeTerm c i ∷ heckeTerm d j ∷ rest)
-  with nat≟ i j
-... | yes refl =
-  combineAdjacentLikeTerms (heckeTerm (c + d) i ∷ rest)
-... | no _ =
-  heckeTerm c i
-    ∷ combineAdjacentLikeTerms (heckeTerm d j ∷ rest)
+combineAdjacentLikeTerms (term ∷ rest) =
+  insertTerm term (combineAdjacentLikeTerms rest)
 
 ------------------------------------------------------------------------
 -- Word normal forms.

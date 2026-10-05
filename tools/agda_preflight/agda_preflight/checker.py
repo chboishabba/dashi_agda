@@ -573,6 +573,30 @@ class Checker:
                         "Fix syntax before semantic preflight; Agda may report a later, noisier error.",
                     )
                 )
+
+        # Agda's record-construction grammar requires an unqualified field name
+        # on the left-hand side. tree-sitter-agda accepts qualified qids here,
+        # so catch this parser mismatch explicitly before semantic resolution.
+        for record_expr in summary.ast.record_expressions:
+            if record_expr.context == "pattern":
+                continue
+            for assignment in record_expr.assignments:
+                if "." not in assignment.name:
+                    continue
+                field_name = assignment.name.rsplit(".", 1)[-1]
+                result.append(
+                    Diagnostic(
+                        "TSAGDA090",
+                        (
+                            f"qualified record field {assignment.name} is invalid in "
+                            "record construction"
+                        ),
+                        summary.path,
+                        assignment.line,
+                        1,
+                        f"Use the unqualified field name {field_name}.",
+                    )
+                )
         return result
 
     def _projection_sort_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
@@ -598,6 +622,22 @@ class Checker:
                 if entry is None:
                     continue
                 record_name, _ = entry
+                ast_rec = summary.ast.records.get(record_name)
+                if ast_rec is not None and ast_rec.node is not None:
+                    start_line = ast_rec.line
+                    start_col = ast_rec.node.start_point[1]
+                    lines = summary.ast.source.splitlines()
+                    end_line = start_line
+                    for lno in range(start_line, len(lines)):
+                        line_str = lines[lno]
+                        if not line_str.strip():
+                            continue
+                        indent = len(line_str) - len(line_str.lstrip())
+                        if indent <= start_col:
+                            break
+                        end_line = lno + 1
+                    if start_line <= ast_sig.line <= end_line:
+                        continue
                 following = tokens[index + 1] if index + 1 < len(tokens) else None
                 # A type-valued projection is suspicious only when it terminates
                 # a type atom instead of receiving its record value.

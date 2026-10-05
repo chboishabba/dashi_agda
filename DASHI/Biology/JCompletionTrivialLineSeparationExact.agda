@@ -73,7 +73,7 @@ unreducedCarrierDimension =
 unreducedCarrierDimensionExact : unreducedCarrierDimension ≡ 54
 unreducedCarrierDimensionExact = refl
 
-record UnitRoleBoundary : Set where
+record UnitRoleBoundary : Set₁ where
   constructor unitRoleBoundary
   field
     completionChannelIsKnownMonsterInvariantLine : Set

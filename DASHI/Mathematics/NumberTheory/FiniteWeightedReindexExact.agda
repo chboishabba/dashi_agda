@@ -306,4 +306,4 @@ uniqueMembershipEquivalenceToPermutation
   in
   Perm.trans
     (Perm.prep x tailPermutation)
-    (PermP.↭-sym (removeAtPermutation selected))
+    (Perm.↭-sym (removeAtPermutation selected))

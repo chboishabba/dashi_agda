@@ -51,8 +51,8 @@ qNormSquareRadiusFromUnitPhase :
     (qFromRadiusAndPhase ratio phase)
     ratio
 qNormSquareRadiusFromUnitPhase phase {ratio} phaseUnit ratioNN = record
-  { Norm.ratioNonnegative = ratioNN
-  ; Norm.normSquareAgreement =
+  { ratioNonnegative = ratioNN
+  ; normSquareAgreement =
       Norm.unitPhaseScaledNormSquare phaseUnit
   }
 

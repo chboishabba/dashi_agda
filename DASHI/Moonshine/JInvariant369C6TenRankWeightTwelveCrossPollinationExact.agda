@@ -109,12 +109,12 @@ smithIsNotModularReflectionAtC6 =
   Separation.smithHalfTurnIsNotModularReflection
 
 -- Yet the current C3 quotient cannot see the Smith half-turn.
-c3ErasesSmithHalfTurn :
+c3ErasesSmithHalfTurnProof :
   (x : Base.HexTruth) →
   SmithHalf.hexTriadicPhase (SmithHalf.mobiusTransport x)
   ≡
   SmithHalf.hexTriadicPhase x
-c3ErasesSmithHalfTurn =
+c3ErasesSmithHalfTurnProof =
   SmithHalf.mobiusTransport-preservesTriadicPhase
 
 -- Modular reflection DOES descend nontrivially to the phase C3 quotient.

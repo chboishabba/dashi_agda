@@ -96,9 +96,9 @@ qRadiusUnitInterval :
   BishopReal._<_ BishopReal.0ℝ imag →
   Unit.BishopUnitIntervalRatio (qRadius piB imag)
 qRadiusUnitInterval piPositive imagPositive = record
-  { Unit.ratioNonnegative =
+  { ratioNonnegative =
       BishopP.<⇒≤ (qRadiusPositive piPositive imagPositive)
-  ; Unit.ratioBelowOne =
+  ; ratioBelowOne =
       qRadiusBelowOne piPositive imagPositive
   }
 

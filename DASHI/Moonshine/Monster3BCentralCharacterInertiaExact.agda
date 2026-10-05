@@ -74,13 +74,13 @@ CentralEigenspace action phase =
 
 stateOf :
   ∀ {State action phase} → CentralEigenspace {State} action phase → State
-stateOf = proj₁
+stateOf (state , _) = state
 
 centralEigenlaw :
   ∀ {State action phase} →
   (eigenstate : CentralEigenspace {State} action phase) →
-  centralAct action (stateOf eigenstate)
-  ≡ phaseScale action phase (stateOf eigenstate)
+  centralAct action (proj₁ eigenstate)
+  ≡ phaseScale action phase (proj₁ eigenstate)
 centralEigenlaw = proj₂
 
 ------------------------------------------------------------------------

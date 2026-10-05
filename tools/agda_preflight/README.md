@@ -943,6 +943,7 @@ These checks are intentionally restricted to simple non-indexed datatypes.
 - `TSAGDA087` trivial missing finite constructor case
 - `TSAGDA088` clause visibly unreachable after catch-all
 - `TSAGDA089` duplicate constructor branch
+- `TSAGDA090` qualified field in record construction
 
 ### Equality combinator structure
 
@@ -1039,6 +1040,15 @@ report:
 - `TSAGDA206` same-carrier adapter visibly switches carrier family
 - `TSAGDA207` bidi source/target outer shapes disagree
 - `TSAGDA208` factor-through/admissibility bridge visibly uses another carrier family
+
+### Native Agda diagnostics
+
+- `TSAGDA300` `PatternShadowsConstructor`
+- `TSAGDA301` `RewritesNothing`
+- `TSAGDA302` `UserWarning` / deprecation
+- `TSAGDA390` `ParseError`
+- `TSAGDA398` other named/unnamed native Agda error
+- `TSAGDA399` other named/unnamed native Agda warning
 
 ## One-command triage workflow
 

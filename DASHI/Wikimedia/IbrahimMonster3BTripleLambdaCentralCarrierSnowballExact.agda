@@ -123,7 +123,7 @@ primaryThreeLiftRowFamily = three-lift-row-family
 -- Conditional ordering surface: useful for search, never theorem promotion.
 ------------------------------------------------------------------------
 
-record CandidateRowLambdaOrdering : Set where
+record CandidateRowLambdaOrdering : Set₁ where
   constructor candidate-row-lambda-ordering
   field
     class18Candidate : Lambda3

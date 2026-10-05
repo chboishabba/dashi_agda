@@ -182,16 +182,20 @@ dialecticToBase369 state =
 base369DialecticRoundTrip :
   (state : Cube.OneRoundInteractionState) →
   dialecticToBase369 (base369ToDialectic state) ≡ state
-base369DialecticRoundTrip state
-  rewrite nineDialecticRoundTrip (Aggregate.flattenRound state)
-        | Aggregate.rebuildFlattenRoundTrip state = refl
+base369DialecticRoundTrip state =
+  trans
+    (cong Aggregate.rebuildRound
+      (nineDialecticRoundTrip (Aggregate.flattenRound state)))
+    (Aggregate.rebuildFlattenRoundTrip state)
 
 dialecticBase369RoundTrip :
   (state : Dialectic.State9) →
   base369ToDialectic (dialecticToBase369 state) ≡ state
-dialecticBase369RoundTrip state
-  rewrite Aggregate.flattenRebuildRoundTrip (dialecticToNineTrits state)
-        | dialecticNineRoundTrip state = refl
+dialecticBase369RoundTrip state =
+  trans
+    (cong nineTritsToDialectic
+      (Aggregate.flattenRebuildRoundTrip (dialecticToNineTrits state)))
+    (dialecticNineRoundTrip state)
 
 epistemic9ToBase369 : Epistemic9 → Cube.OneRoundInteractionState
 epistemic9ToBase369 state =
@@ -204,16 +208,20 @@ base369ToEpistemic9 state =
 epistemic9Base369RoundTrip :
   (state : Epistemic9) →
   base369ToEpistemic9 (epistemic9ToBase369 state) ≡ state
-epistemic9Base369RoundTrip state
-  rewrite Aggregate.flattenRebuildRoundTrip (epistemic9ToNineTrits state)
-        | epistemic9RoundTrip state = refl
+epistemic9Base369RoundTrip state =
+  trans
+    (cong nineTritsToEpistemic9
+      (Aggregate.flattenRebuildRoundTrip (epistemic9ToNineTrits state)))
+    (epistemic9RoundTrip state)
 
 base369Epistemic9RoundTrip :
   (state : Cube.OneRoundInteractionState) →
   epistemic9ToBase369 (base369ToEpistemic9 state) ≡ state
-base369Epistemic9RoundTrip state
-  rewrite nineTritsEpistemic9RoundTrip (Aggregate.flattenRound state)
-        | Aggregate.rebuildFlattenRoundTrip state = refl
+base369Epistemic9RoundTrip state =
+  trans
+    (cong Aggregate.rebuildRound
+      (nineTritsEpistemic9RoundTrip (Aggregate.flattenRound state)))
+    (Aggregate.rebuildFlattenRoundTrip state)
 
 monsterOggToCommonTrit : Lane.MonsterPrimeLane → SSP.SSPTrit
 monsterOggToCommonTrit = Monster.oggPrimeResidueTrit

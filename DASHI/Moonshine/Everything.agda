@@ -50,6 +50,9 @@ import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact
 import DASHI.Moonshine.JInvariant369Zeta6561MonsterCrosswalkExact
 import DASHI.Moonshine.JInvariant369TenRankSeventeenHyperformalismExact
 
+import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact
+import DASHI.Moonshine.OggSSPP2WeilHeisenbergNativeBidiExact
+
 module DASHI.Moonshine.Everything where
 
 -- Moonshine domain rollup.
@@ -60,3 +63,9 @@ module DASHI.Moonshine.Everything where
 
 
 
+
+import DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact
+import DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact
+
+import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact
+import DASHI.Moonshine.JInvariant369OggAddressResidualFibreExact
