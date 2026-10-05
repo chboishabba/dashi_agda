@@ -7,6 +7,8 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - '.github/workflows/ns-b-positive-pure-analysis.yml'
@@ -14,6 +16,8 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutTest.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutTest.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - '.github/workflows/ns-b-positive-pure-analysis.yml'
@@ -41,5 +45,7 @@ jobs:
         run: |
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutTest.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutTest.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda
