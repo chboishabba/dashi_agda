@@ -1,4 +1,4 @@
-name: CMP119 cosmology preferred source overlay T
+name: CMP119 cosmology preferred source overlay U
 
 on:
   pull_request:
@@ -7,8 +7,14 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureTest.agda'
+      - 'DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UTest.agda'
       - '.github/workflows/cmp119-cosmology-preferred-source-overlay-t.yml'
   workflow_dispatch:
 
@@ -16,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: cmp119-cosmology-preferred-source-overlay-t-${{ github.ref }}
+  group: cmp119-cosmology-preferred-source-overlay-u-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -35,7 +41,7 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore cache
         uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Typecheck overlay T source-construction frontier
+      - name: Typecheck overlay U source-construction frontier
         shell: bash
         run: |
           nix develop --accept-flake-config --command bash -lc '
@@ -45,8 +51,14 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureExact.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureTest.agda \
+              DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationExact.agda \
+              DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UTest.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
             done
