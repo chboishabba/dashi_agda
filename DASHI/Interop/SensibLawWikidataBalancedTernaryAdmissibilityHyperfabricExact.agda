@@ -148,24 +148,24 @@ snakBitView orientation meaning = Bits.bitStreamView (encodeSnakTrit orientation
 
 data AdmissibilityState : Set where
   rejected : AdmissibilityState
-  open : AdmissibilityState
+  openState : AdmissibilityState
   admitted : AdmissibilityState
 
 admissibilityTrit : AdmissibilityState → Trit.Trit
 admissibilityTrit rejected = Trit.neg
-admissibilityTrit open = Trit.zer
+admissibilityTrit openState = Trit.zer
 admissibilityTrit admitted = Trit.pos
 
 tritAdmissibility : Trit.Trit → AdmissibilityState
 tritAdmissibility Trit.neg = rejected
-tritAdmissibility Trit.zer = open
+tritAdmissibility Trit.zer = openState
 tritAdmissibility Trit.pos = admitted
 
 admissibilityRoundTrip :
   (state : AdmissibilityState) →
   tritAdmissibility (admissibilityTrit state) ≡ state
 admissibilityRoundTrip rejected = refl
-admissibilityRoundTrip open = refl
+admissibilityRoundTrip openState = refl
 admissibilityRoundTrip admitted = refl
 
 record NDimAdmissibilityFibre : Set₁ where

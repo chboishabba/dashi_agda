@@ -65,11 +65,11 @@ complexCarrierModel C =
     R = Real.real (Complex.realPackage C)
     CE = Complex.complexExponential C
   in record
-    { EML.Carrier = Complex.ComplexPair R
-    ; EML.one = Complex.oneC
-    ; EML.exp = Complex.expC CE
-    ; EML.log = λ z -> z
-    ; EML.sub = Complex._-C_
+    { Carrier = Complex.ComplexPair R
+    ; one = Complex.oneC
+    ; exp = Complex.expC CE
+    ; log = λ z -> z
+    ; sub = Complex._-C_
     }
 
 constructedComplexCalculatorSemantics :
@@ -83,42 +83,42 @@ constructedComplexCalculatorSemantics C =
     one = Complex.oneC {R = R}
     piC = Complex.complex (Complex.pi CE) (Real.zero R)
   in record
-    { Sem.integerS = λ _ -> zero
-    ; Sem.rationalS = λ _ -> zero
-    ; Sem.piS = piC
-    ; Sem.eS = zero
-    ; Sem.iS = Complex.imaginaryUnit
-    ; Sem.minusOneS = zero
-    ; Sem.oneS = one
-    ; Sem.twoS = Complex._+C_ one one
-    ; Sem.expS = Complex.expC CE
-    ; Sem.logS = λ z -> z
-    ; Sem.inverseS = λ z -> z
-    ; Sem.halfS = λ z -> z
-    ; Sem.negateS = λ z -> Complex._-C_ zero z
-    ; Sem.sqrtS = λ z -> z
-    ; Sem.squareS = λ z -> Complex._*C_ z z
-    ; Sem.sigmoidS = λ z -> z
-    ; Sem.sinS = λ z -> z
-    ; Sem.cosS = λ z -> z
-    ; Sem.tanS = λ z -> z
-    ; Sem.arcSinS = λ z -> z
-    ; Sem.arcCosS = λ z -> z
-    ; Sem.arcTanS = λ z -> z
-    ; Sem.sinhS = λ z -> z
-    ; Sem.coshS = λ z -> z
-    ; Sem.tanhS = λ z -> z
-    ; Sem.arcSinhS = λ z -> z
-    ; Sem.arcCoshS = λ z -> z
-    ; Sem.arcTanhS = λ z -> z
-    ; Sem.addS = Complex._+C_
-    ; Sem.subtractS = Complex._-C_
-    ; Sem.multiplyS = Complex._*C_
-    ; Sem.divideS = λ x y -> x
-    ; Sem.logBaseS = λ x y -> x
-    ; Sem.powerS = λ x y -> x
-    ; Sem.averageS = λ x y -> x
-    ; Sem.hypotenuseS = λ x y -> x
+    { integerS = λ _ -> zero
+    ; rationalS = λ _ -> zero
+    ; piS = piC
+    ; eS = zero
+    ; iS = Complex.imaginaryUnit
+    ; minusOneS = zero
+    ; oneS = one
+    ; twoS = Complex._+C_ one one
+    ; expS = Complex.expC CE
+    ; logS = λ z -> z
+    ; inverseS = λ z -> z
+    ; halfS = λ z -> z
+    ; negateS = λ z -> Complex._-C_ zero z
+    ; sqrtS = λ z -> z
+    ; squareS = λ z -> Complex._*C_ z z
+    ; sigmoidS = λ z -> z
+    ; sinS = λ z -> z
+    ; cosS = λ z -> z
+    ; tanS = λ z -> z
+    ; arcSinS = λ z -> z
+    ; arcCosS = λ z -> z
+    ; arcTanS = λ z -> z
+    ; sinhS = λ z -> z
+    ; coshS = λ z -> z
+    ; tanhS = λ z -> z
+    ; arcSinhS = λ z -> z
+    ; arcCoshS = λ z -> z
+    ; arcTanhS = λ z -> z
+    ; addS = Complex._+C_
+    ; subtractS = Complex._-C_
+    ; multiplyS = Complex._*C_
+    ; divideS = λ x y -> x
+    ; logBaseS = λ x y -> x
+    ; powerS = λ x y -> x
+    ; averageS = λ x y -> x
+    ; hypotenuseS = λ x y -> x
     }
 
 qEnvironment :

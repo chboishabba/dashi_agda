@@ -72,6 +72,7 @@ class AstRecord:
     fields: Dict[str, AstField] = field(default_factory=dict)
     field_occurrences: List[AstField] = field(default_factory=list)
     constructor: Optional[str] = None
+    field_surface_complete: bool = True
     node: object | None = None
 
 
@@ -128,6 +129,8 @@ class AstRecordExpression:
     line: int
     node: object
     owner_function: Optional[str]
+    context: str = "unknown"
+    is_update: bool = False
     parent_field: Optional[str] = None
     parent_record_start: Optional[int] = None
     assignments: List[AstFieldAssignment] = field(default_factory=list)
@@ -361,8 +364,11 @@ def application_view(source_bytes: bytes, node) -> Optional[AstApplication]:
         return None
 
     head_atom = atoms[0]
+    head_tokens = significant_tokens(source_bytes, head_atom)
+    if not head_tokens or head_tokens[0].text in {"(", "{", "{{", "⦃"}:
+        return None
     head_names = [
-        token for token in significant_tokens(source_bytes, head_atom)
+        token for token in head_tokens
         if token.node_type in {"qid", "id"}
     ]
     if not head_names:
@@ -598,8 +604,16 @@ def _signature_parts(source_bytes: bytes, node) -> Tuple[Tuple[str, ...], Option
             if name:
                 # A declaration LHS should be one name; avoid swallowing its args.
                 names = (name.split()[0],)
-    exprs = list(descendants(node, "expr"))
-    type_node = exprs[-1] if exprs else None
+    type_node = None
+    saw_colon = False
+    for child in node.children:
+        if child.type == ":":
+            saw_colon = True
+        elif saw_colon and child.type == "expr":
+            type_node = child
+            break
+    if type_node is None:
+        type_node = first_descendant(node, "expr")
     return names, type_node
 
 
@@ -648,9 +662,25 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
                     rec.constructor = tokens[1]
                 sibling = sibling.next_named_sibling
                 continue
+
+        # An indented sibling inside the record layout that we cannot model
+        # means the record body surface is incomplete (common with internal
+        # open/import blocks in tree-sitter-agda grammar gaps).
+        if sibling.start_point[1] > node.start_point[1]:
+            rec.field_surface_complete = False
         break
 
+    saw_field_keyword = False
+    saw_fields_node = False
     for owner in related:
+        owner_tokens = [token.text for token in significant_tokens(source_bytes, owner)]
+        if "field" in owner_tokens:
+            saw_field_keyword = True
+        if owner.type == "ERROR" and "field" in owner_tokens:
+            rec.field_surface_complete = False
+        if any(descendants(owner, "open", "import")):
+            rec.field_surface_complete = False
+
         ctor = first_descendant(owner, "record_constructor")
         if ctor is not None and rec.constructor is None:
             ident = first_descendant(ctor, "id")
@@ -661,9 +691,13 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
                 rec.constructor = tokens[1]
 
         for fields_node in descendants(owner, "fields"):
+            saw_fields_node = True
+            if any(True for _ in descendants(fields_node, "ERROR")):
+                rec.field_surface_complete = False
             for sig in descendants(fields_node, "signature"):
                 names, type_node = _signature_parts(source_bytes, sig)
-                if type_node is None:
+                if type_node is None or not names:
+                    rec.field_surface_complete = False
                     continue
                 typ = node_text(source_bytes, type_node).strip()
                 for field_name in names:
@@ -672,6 +706,9 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
                     item = AstField(field_name, typ, line_of(sig), type_node)
                     rec.field_occurrences.append(item)
                     rec.fields[field_name] = item
+
+    if saw_field_keyword and not saw_fields_node:
+        rec.field_surface_complete = False
     return rec
 
 
@@ -781,6 +818,7 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
 
 def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpression:
     owner_function = None
+    context = "unknown"
     parent_field = None
     parent_record_start = None
 
@@ -802,15 +840,53 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
             signature = _function_signature(source_bytes, parent)
             if clause is not None:
                 owner_function = clause.name
+                if (
+                    clause.lhs_node is not None
+                    and clause.lhs_node.start_byte <= node.start_byte
+                    and node.end_byte <= clause.lhs_node.end_byte
+                ):
+                    context = "pattern"
+                elif (
+                    clause.rhs_node is not None
+                    and clause.rhs_node.start_byte <= node.start_byte
+                    and node.end_byte <= clause.rhs_node.end_byte
+                ):
+                    context = "expression"
             elif signature is not None:
                 owner_function = signature.names[0]
             break
         parent = parent.parent
 
+    tokens = significant_tokens(source_bytes, node)
+    record_index = next(
+        (index for index, token in enumerate(tokens) if token.text == "record"),
+        None,
+    )
+    brace_index = (
+        next(
+            (
+                index
+                for index, token in enumerate(tokens)
+                if token.text == "{"
+                and (record_index is None or index > record_index)
+            ),
+            None,
+        )
+        if record_index is not None
+        else None
+    )
+    is_update = (
+        record_index is not None
+        and brace_index is not None
+        and brace_index > record_index + 1
+    )
+
     expr = AstRecordExpression(
         line=line_of(node),
         node=node,
         owner_function=owner_function,
+        context=context,
+        is_update=is_update,
         parent_field=parent_field,
         parent_record_start=parent_record_start,
     )
@@ -939,6 +1015,66 @@ def _append_import(index: AstIndex, item: ImportDecl) -> None:
             OpenDecl(item.alias, item.line, item.public, item.directives)
         )
 
+@dataclass(frozen=True)
+class ImportSurface:
+    path: Path
+    module_name: str
+    imports: Tuple[ImportDecl, ...]
+    opens: Tuple[OpenDecl, ...]
+
+
+def build_import_surface(
+    parser,
+    path: Path,
+    root_path: Path,
+    source: str,
+) -> ImportSurface:
+    """Parse only module/import/open structure for fast closure discovery.
+
+    This deliberately reuses the same tree-sitter import/open recovery helpers
+    as build_ast_index(), including the known ERROR-node alias recovery, but
+    skips record/data/function indexing and all diagnostics.
+    """
+    source_bytes = source.encode("utf-8")
+    tree = parser.parse(source_bytes)
+    root = tree.root_node
+    imports: List[ImportDecl] = []
+    opens: List[OpenDecl] = []
+
+    def append_import(item: ImportDecl) -> None:
+        key = (item.module, item.alias, item.line, item.opened)
+        if any((x.module, x.alias, x.line, x.opened) == key for x in imports):
+            return
+        imports.append(item)
+        if item.opened:
+            opens.append(
+                OpenDecl(item.alias, item.line, item.public, item.directives)
+            )
+
+    for node in descendants(root):
+        if node.type == "open":
+            imp, opened = _parse_open_node(source_bytes, node)
+            if imp is not None:
+                append_import(imp)
+            if opened is not None and imp is None:
+                opens.append(opened)
+        elif node.type == "import" and (node.parent is None or node.parent.type != "open"):
+            imp = _parse_import_node(source_bytes, node)
+            if imp is not None:
+                append_import(imp)
+        elif node.type == "ERROR":
+            recovered = _recover_import_from_error(source_bytes, node)
+            if recovered is not None:
+                append_import(recovered)
+
+    return ImportSurface(
+        path=path,
+        module_name=_module_name_from_tree(source_bytes, root, path, root_path),
+        imports=tuple(imports),
+        opens=tuple(opens),
+    )
+
+
 def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstIndex:
     source_bytes = source.encode("utf-8")
     tree = parser.parse(source_bytes)
@@ -971,6 +1107,25 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             recovered = _recover_import_from_error(source_bytes, node)
             if recovered is not None:
                 _append_import(index, recovered)
+            elif node.start_point[1] == 0:
+                name = _name_from_node(source_bytes, first_descendant(node, "qid", "id"))
+                sibling = node.next_named_sibling
+                if name and _valid_function_name(name) and sibling is not None and sibling.type == "function":
+                    sib_tokens = significant_tokens(source_bytes, sibling)
+                    if sib_tokens and sib_tokens[0].text == ":":
+                        expr_node = first_descendant(sibling, "expr")
+                        if expr_node is None:
+                            lhs = first_descendant(sibling, "lhs")
+                            if lhs is not None and len(lhs.named_children) >= 2:
+                                expr_node = lhs.named_children[-1]
+                            elif sibling.named_children:
+                                expr_node = sibling.named_children[-1]
+                        type_text = node_text(source_bytes, expr_node).strip() if expr_node is not None else ""
+                        if not type_text and len(sib_tokens) > 1:
+                            type_text = " ".join(t.text for t in sib_tokens[1:])
+                        sig = AstSignature((name,), type_text, line_of(node), expr_node, sibling)
+                        index.signature_occurrences.setdefault(name, []).append(sig)
+                        index.signatures[name] = sig
         elif node.type in {"record", "record_signature"}:
             rec = _record_from_node(source_bytes, node)
             if rec is not None:
@@ -982,6 +1137,9 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
                         existing.constructor = rec.constructor
                     existing.field_occurrences.extend(rec.field_occurrences)
                     existing.fields.update(rec.fields)
+                    existing.field_surface_complete = (
+                        existing.field_surface_complete or rec.field_surface_complete
+                    )
         elif node.type in {"data", "data_signature"}:
             data = _data_from_node(source_bytes, node)
             if data is not None:

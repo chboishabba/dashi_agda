@@ -71,8 +71,8 @@ record SourceSupportObservation
     contentAcquisition : Ternary.AdmissibilityState
     propositionSupport : Ternary.AdmissibilityState
     authority : Ternary.AdmissibilityState
-    propositionSupportStillOpen : propositionSupport ≡ Ternary.open
-    authorityStillOpen : authority ≡ Ternary.open
+    propositionSupportStillOpen : propositionSupport ≡ Ternary.openState
+    authorityStillOpen : authority ≡ Ternary.openState
     sourceSupportPaid : Bool
     sourceSupportPaidIsFalse : sourceSupportPaid ≡ false
 open SourceSupportObservation public
@@ -85,8 +85,8 @@ canonicalFetchedSourceObservation residual =
   sourceSupportObservation
     Ternary.admitted
     Ternary.admitted
-    Ternary.open
-    Ternary.open
+    Ternary.openState
+    Ternary.openState
     refl
     refl
     false

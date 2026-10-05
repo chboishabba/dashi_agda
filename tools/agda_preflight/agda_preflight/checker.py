@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
+import hashlib
+from typing import Callable, Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
 from tree_sitter import Language, Parser
 import tree_sitter_agda
@@ -11,6 +12,10 @@ from .rules import extended_diagnostics
 from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
 from .shapes import shape_from_node, terminal_head, explicit_arity
 from .evidence import DIAGNOSTIC_ALIASES, EvidenceLevel, evidence_name, policy_for
+from .timing import Profiler
+from .fixes import SuggestedFix
+from .fix_engine import enrich_diagnostics
+from .interfaces import ModuleInterface, interface_from_summary
 
 
 
@@ -27,9 +32,23 @@ class Diagnostic:
     evidence: str = "dashi-index"
     minimum_evidence: str = "dashi-index"
     evidence_sufficient: bool = True
+    root_cause: Optional[str] = None
+    explanation: Optional[str] = None
+    expected: Optional[str] = None
+    found: Optional[str] = None
+    fixes: Tuple[SuggestedFix, ...] = field(default_factory=tuple)
+
+    @property
+    def diagnostic_id(self) -> str:
+        payload = (
+            f"{self.path.resolve()}\0{self.code}\0{self.line}\0"
+            f"{self.column}\0{self.message}"
+        ).encode("utf-8")
+        return hashlib.sha256(payload).hexdigest()[:24]
 
     def as_dict(self) -> dict:
         return {
+            "id": self.diagnostic_id,
             "code": self.code,
             "message": self.message,
             "path": str(self.path),
@@ -41,6 +60,11 @@ class Diagnostic:
             "evidence": self.evidence,
             "minimum_evidence": self.minimum_evidence,
             "evidence_sufficient": self.evidence_sufficient,
+            "root_cause": self.root_cause,
+            "explanation": self.explanation,
+            "expected": self.expected,
+            "found": self.found,
+            "fixes": [fix.as_dict() for fix in self.fixes],
         }
 
 
@@ -178,10 +202,23 @@ class Checker:
         *,
         evidence_level: EvidenceLevel = EvidenceLevel.DASHI_INDEX,
         scope_backend=None,
+        profiler: Optional[Profiler] = None,
+        interfaces: Optional[Dict[str, ModuleInterface]] = None,
+        interface_loader: Optional[
+            Callable[[str], Optional[ModuleInterface]]
+        ] = None,
     ):
         self.root = root.resolve()
-        self.parser = _parser()
+        self.profiler = profiler
+        if profiler is None:
+            self.parser = _parser()
+        else:
+            with profiler.stage("startup.tree_sitter_parser"):
+                self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
+        self._interface_cache: Dict[Path, ModuleInterface] = {}
+        self._preloaded_interfaces = dict(interfaces or {})
+        self._interface_loader = interface_loader
         self._export_cache: Dict[Path, Set[str]] = {}
         self._diagnostic_cache: Dict[Path, List[Diagnostic]] = {}
         self.evidence_level = evidence_level
@@ -206,8 +243,15 @@ class Checker:
         cached = self._summary_cache.get(path)
         if cached is not None:
             return cached
-        source = path.read_text(encoding="utf-8")
-        ast = build_ast_index(self.parser, path, self.root, source)
+        if self.profiler is None:
+            source = path.read_text(encoding="utf-8")
+            ast = build_ast_index(self.parser, path, self.root, source)
+        else:
+            self.profiler.count("files_parsed")
+            with self.profiler.stage("source.read"):
+                source = path.read_text(encoding="utf-8")
+            with self.profiler.stage("parse.tree_sitter"):
+                ast = build_ast_index(self.parser, path, self.root, source)
         records: Dict[str, RecordInfo] = {}
         for name, record in ast.records.items():
             records[name] = RecordInfo(
@@ -269,7 +313,7 @@ class Checker:
 
     def exported_names(
         self,
-        summary: ModuleSummary,
+        summary,
         _seen: Optional[Set[Path]] = None,
     ) -> Set[str]:
         """Return local exports plus conservative public re-exports.
@@ -278,6 +322,9 @@ class Checker:
         guessing about private/abstract visibility or unresolved module
         applications; those remain outside the hard structural contract.
         """
+        if isinstance(summary, ModuleInterface):
+            return set(summary.exports)
+
         cached = self._export_cache.get(summary.path)
         if cached is not None:
             return set(cached)
@@ -334,6 +381,48 @@ class Checker:
                 out[alias] = self.parse_summary(path)
         return out
 
+    def module_interface(self, summary: ModuleSummary) -> ModuleInterface:
+        path = summary.path.resolve()
+        cached = self._interface_cache.get(path)
+        if cached is not None:
+            return cached
+        interface = interface_from_summary(self.root, summary)
+        self._interface_cache[path] = interface
+        return interface
+
+    def interface_for_module(
+        self,
+        module: str,
+    ) -> Optional[ModuleInterface]:
+        preloaded = self._preloaded_interfaces.get(module)
+        if preloaded is not None:
+            return preloaded
+        if self._interface_loader is not None:
+            loaded = self._interface_loader(module)
+            if loaded is not None:
+                self._preloaded_interfaces[module] = loaded
+                return loaded
+        path = self.module_path(module)
+        if not path.exists():
+            return None
+        summary = self.parse_summary(path)
+        interface = self.module_interface(summary)
+        return replace(
+            interface,
+            resolved_exports=tuple(sorted(self.exported_names(summary))),
+        )
+
+    def imported_interfaces(
+        self,
+        summary: ModuleSummary,
+    ) -> Dict[str, ModuleInterface]:
+        out: Dict[str, ModuleInterface] = {}
+        for alias, module in summary.imports.items():
+            interface = self.interface_for_module(module)
+            if interface is not None:
+                out[alias] = interface
+        return out
+
     def structural_check(self, path: Path) -> List[Diagnostic]:
         """Run and cache the cheap tree/index pass without external refinement."""
         path = path.resolve()
@@ -343,11 +432,20 @@ class Checker:
 
         summary = self.parse_summary(path)
         diagnostics: List[Diagnostic] = []
-        diagnostics.extend(self._syntax_diagnostics(summary))
-        diagnostics.extend(self._projection_sort_diagnostics(summary))
-        diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
-        diagnostics.extend(self._record_shape_diagnostics(summary))
-        diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
+        if self.profiler is None:
+            diagnostics.extend(self._syntax_diagnostics(summary))
+            diagnostics.extend(self._projection_sort_diagnostics(summary))
+            diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
+            diagnostics.extend(self._record_shape_diagnostics(summary))
+            diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
+        else:
+            self.profiler.count("diagnostics_recomputed")
+            with self.profiler.stage("diagnostics.local"):
+                diagnostics.extend(self._syntax_diagnostics(summary))
+                diagnostics.extend(self._projection_sort_diagnostics(summary))
+                diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
+                diagnostics.extend(self._record_shape_diagnostics(summary))
+                diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
 
         # Apply evidence provenance without invoking an external backend.
         backend = self.scope_backend
@@ -382,6 +480,11 @@ class Checker:
             if key not in seen:
                 seen.add(key)
                 unique.append(d)
+        if self.profiler is None:
+            unique = enrich_diagnostics(self, summary, unique)
+        else:
+            with self.profiler.stage("fixes.generate"):
+                unique = enrich_diagnostics(self, summary, unique)
         result = sorted(unique, key=lambda d: (d.line, d.column, d.code))
         self._diagnostic_cache[path] = list(result)
         return result
@@ -470,6 +573,30 @@ class Checker:
                         "Fix syntax before semantic preflight; Agda may report a later, noisier error.",
                     )
                 )
+
+        # Agda's record-construction grammar requires an unqualified field name
+        # on the left-hand side. tree-sitter-agda accepts qualified qids here,
+        # so catch this parser mismatch explicitly before semantic resolution.
+        for record_expr in summary.ast.record_expressions:
+            if record_expr.context == "pattern":
+                continue
+            for assignment in record_expr.assignments:
+                if "." not in assignment.name:
+                    continue
+                field_name = assignment.name.rsplit(".", 1)[-1]
+                result.append(
+                    Diagnostic(
+                        "TSAGDA090",
+                        (
+                            f"qualified record field {assignment.name} is invalid in "
+                            "record construction"
+                        ),
+                        summary.path,
+                        assignment.line,
+                        1,
+                        f"Use the unqualified field name {field_name}.",
+                    )
+                )
         return result
 
     def _projection_sort_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
@@ -495,6 +622,22 @@ class Checker:
                 if entry is None:
                     continue
                 record_name, _ = entry
+                ast_rec = summary.ast.records.get(record_name)
+                if ast_rec is not None and ast_rec.node is not None:
+                    start_line = ast_rec.line
+                    start_col = ast_rec.node.start_point[1]
+                    lines = summary.ast.source.splitlines()
+                    end_line = start_line
+                    for lno in range(start_line, len(lines)):
+                        line_str = lines[lno]
+                        if not line_str.strip():
+                            continue
+                        indent = len(line_str) - len(line_str.lstrip())
+                        if indent <= start_col:
+                            break
+                        end_line = lno + 1
+                    if start_line <= ast_sig.line <= end_line:
+                        continue
                 following = tokens[index + 1] if index + 1 < len(tokens) else None
                 # A type-valued projection is suspicious only when it terminates
                 # a type atom instead of receiving its record value.
@@ -519,7 +662,7 @@ class Checker:
         self, summary: ModuleSummary
     ) -> List[Diagnostic]:
         """Find a projection receiver written as '_' despite a matching binder."""
-        imported = self.imported_summaries(summary)
+        imported = self.imported_interfaces(summary)
         result: List[Diagnostic] = []
 
         for function_name, clauses in summary.ast.clauses.items():
@@ -543,8 +686,8 @@ class Checker:
                         continue
                     matching_record = None
                     matching_binder = None
-                    for record_name, record in imported_summary.records.items():
-                        if field_name not in record.fields:
+                    for record_name, record in imported_summary.record_map.items():
+                        if field_name not in record.field_map:
                             continue
                         qualified = f"{alias}.{record_name}"
                         for binder in binders:
@@ -579,7 +722,7 @@ class Checker:
 
     def _record_shape_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
         result: List[Diagnostic] = []
-        imported = self.imported_summaries(summary)
+        imported = self.imported_interfaces(summary)
 
         def resolve_record_from_signature(signature):
             if signature is None or signature.type_node is None:
@@ -591,7 +734,7 @@ class Checker:
                 alias, record_name = head.rsplit(".", 1)
                 owner = imported.get(alias)
                 if owner is not None:
-                    record = owner.ast.records.get(record_name)
+                    record = owner.record_map.get(record_name)
                     if record is not None:
                         return owner, record
             record = summary.ast.records.get(head)
@@ -618,13 +761,15 @@ class Checker:
                     if "." in clean:
                         alias, record_name = clean.rsplit(".", 1)
                         owner = imported.get(alias)
-                        if owner is not None and record_name in owner.ast.records:
-                            return owner, owner.ast.records[record_name]
+                        if owner is not None and record_name in owner.record_map:
+                            return owner, owner.record_map[record_name]
                     if clean in summary.ast.records:
                         return summary, summary.ast.records[clean]
             return None
 
         for record_expr in summary.ast.record_expressions:
+            if record_expr.context == "pattern":
+                continue
             if not record_expr.owner_function:
                 continue
             signature = summary.ast.signatures.get(record_expr.owner_function)
@@ -632,13 +777,27 @@ class Checker:
             if target_ref is None:
                 continue
             target_owner, target = target_ref
-            target_bytes = target_owner.ast.source_bytes
 
             for assignment in record_expr.assignments:
-                expected = target.fields.get(assignment.name)
-                if expected is None or expected.type_node is None or assignment.expr_node is None:
+                target_fields = (
+                    target.field_map
+                    if isinstance(target_owner, ModuleInterface)
+                    else target.fields
+                )
+                expected = target_fields.get(assignment.name)
+                if expected is None or assignment.expr_node is None:
                     continue
-                expected_head = terminal_head(shape_from_node(target_bytes, expected.type_node))
+                if isinstance(target_owner, ModuleInterface):
+                    expected_head = expected.terminal_head
+                else:
+                    if expected.type_node is None:
+                        continue
+                    expected_head = terminal_head(
+                        shape_from_node(
+                            target_owner.ast.source_bytes,
+                            expected.type_node,
+                        )
+                    )
                 tokens = significant_tokens(summary.ast.source_bytes, assignment.expr_node)
 
                 # High-confidence structural form:
@@ -653,12 +812,25 @@ class Checker:
                 if source_ref is None:
                     continue
                 source_owner, source_record = source_ref
-                actual = source_record.fields.get(projection)
-                if actual is None or actual.type_node is None:
-                    continue
-                actual_head = terminal_head(
-                    shape_from_node(source_owner.ast.source_bytes, actual.type_node)
+                source_fields = (
+                    source_record.field_map
+                    if isinstance(source_owner, ModuleInterface)
+                    else source_record.fields
                 )
+                actual = source_fields.get(projection)
+                if actual is None:
+                    continue
+                if isinstance(source_owner, ModuleInterface):
+                    actual_head = actual.terminal_head
+                else:
+                    if actual.type_node is None:
+                        continue
+                    actual_head = terminal_head(
+                        shape_from_node(
+                            source_owner.ast.source_bytes,
+                            actual.type_node,
+                        )
+                    )
                 if expected_head is None or actual_head is None or expected_head == actual_head:
                     continue
                 sortish = {"Set", "Set₀", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}

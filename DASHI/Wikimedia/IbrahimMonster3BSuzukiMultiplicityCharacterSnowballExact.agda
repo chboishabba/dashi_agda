@@ -84,7 +84,7 @@ pairedOuterTotalIs131220 = refl
 data SelectedCentralPhase : Set where
   zetaPhase zetaSquaredPhase : SelectedCentralPhase
 
-record SuzukiMultiplicityCharacter : Set where
+record SuzukiMultiplicityCharacter : Set₁ where
   constructor suzuki-multiplicity-character
   field
     characterTablePosition : Nat
@@ -95,7 +95,7 @@ record SuzukiMultiplicityCharacter : Set where
 
 open SuzukiMultiplicityCharacter public
 
-record ExtendedHeisenbergCharacter : Set where
+record ExtendedHeisenbergCharacter : Set₁ where
   constructor extended-heisenberg-character
   field
     degree : Nat
@@ -262,7 +262,7 @@ atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity :
   AtlasRepModularModelCreatesComplexMonsterMultiplicity → ⊥
 atlasRepModularModelDoesNotCreateComplexMonsterMultiplicity ()
 
-sourceFormulaDoesNotCreateSameObjectIntertwiner :
+sourceFormulaDoesNotCreateSameObjectMonsterIntertwiner :
   SourceTensorFormulaCreatesSameObjectMonsterIntertwiner → ⊥
 sourceFormulaDoesNotCreateSameObjectMonsterIntertwiner ()
 

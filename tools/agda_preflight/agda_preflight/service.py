@@ -1,0 +1,1058 @@
+from __future__ import annotations
+
+import argparse
+import heapq
+import json
+from pathlib import Path
+import sys
+import time
+from typing import IO, Any, Dict, List, Optional, Set, Tuple
+
+from .apply_edits import EditApplicationError, apply_text_edits
+from .source_index import SourceIndex
+from .semantic_catalog import SemanticCatalog
+from .promotion import CommandPromoter
+from .timing import Profiler, TimingSnapshot
+
+
+def _snapshot_delta(
+    before: TimingSnapshot,
+    after: TimingSnapshot,
+    total_ns: int,
+) -> dict:
+    stage_names = set(before.stages_ns) | set(after.stages_ns)
+    count_names = set(before.counts) | set(after.counts)
+    return {
+        "request_total_ms": round(total_ns / 1_000_000.0, 3),
+        "stages_ms": {
+            name: round(
+                (
+                    after.stages_ns.get(name, 0)
+                    - before.stages_ns.get(name, 0)
+                )
+                / 1_000_000.0,
+                3,
+            )
+            for name in sorted(stage_names)
+            if after.stages_ns.get(name, 0)
+            != before.stages_ns.get(name, 0)
+        },
+        "counts": {
+            name: (
+                after.counts.get(name, 0)
+                - before.counts.get(name, 0)
+            )
+            for name in sorted(count_names)
+            if after.counts.get(name, 0)
+            != before.counts.get(name, 0)
+        },
+    }
+
+
+class _RollupCandidateCache:
+    """In-memory top-diagnostic heaps for one trusted rollup."""
+
+    def __init__(self, priority) -> None:
+        self.priority = priority
+        self.generations: Dict[str, int] = {}
+        self.candidates: Dict[
+            str,
+            Tuple[Optional[object], Optional[object]],
+        ] = {}
+        self.any_heap: List[tuple] = []
+        self.fixable_heap: List[tuple] = []
+        self.by_id: Dict[str, object] = {}
+        self.compactions = 0
+
+    def _live_heap_entries(self) -> int:
+        return sum(
+            int(top is not None) + int(fixable is not None)
+            for top, fixable in self.candidates.values()
+        )
+
+    def _compact_if_needed(self) -> None:
+        live = self._live_heap_entries()
+        total = len(self.any_heap) + len(self.fixable_heap)
+        threshold = max(64, max(1, live) * 4)
+        if total <= threshold:
+            return
+
+        self.any_heap = []
+        self.fixable_heap = []
+        for module, (top, fixable) in self.candidates.items():
+            generation = self.generations[module]
+            self._push(
+                self.any_heap,
+                module,
+                generation,
+                top,
+            )
+            self._push(
+                self.fixable_heap,
+                module,
+                generation,
+                fixable,
+            )
+        heapq.heapify(self.any_heap)
+        heapq.heapify(self.fixable_heap)
+        self.compactions += 1
+
+    def _push(
+        self,
+        heap: List[tuple],
+        module: str,
+        generation: int,
+        diagnostic,
+    ) -> None:
+        if diagnostic is None:
+            return
+        heapq.heappush(
+            heap,
+            (
+                self.priority(diagnostic),
+                module,
+                generation,
+                diagnostic.diagnostic_id,
+            ),
+        )
+
+    def replace(
+        self,
+        module: str,
+        top,
+        fixable,
+    ) -> None:
+        previous = self.candidates.get(module)
+        if previous is not None:
+            for diagnostic in previous:
+                if diagnostic is not None:
+                    self.by_id.pop(diagnostic.diagnostic_id, None)
+
+        generation = self.generations.get(module, 0) + 1
+        self.generations[module] = generation
+        self.candidates[module] = (top, fixable)
+        for diagnostic in (top, fixable):
+            if diagnostic is not None:
+                self.by_id[diagnostic.diagnostic_id] = diagnostic
+        self._push(
+            self.any_heap,
+            module,
+            generation,
+            top,
+        )
+        self._push(
+            self.fixable_heap,
+            module,
+            generation,
+            fixable,
+        )
+        self._compact_if_needed()
+
+    def _peek(self, *, require_fix: bool):
+        heap = self.fixable_heap if require_fix else self.any_heap
+        index = 1 if require_fix else 0
+        while heap:
+            _, module, generation, diagnostic_id = heap[0]
+            if self.generations.get(module) != generation:
+                heapq.heappop(heap)
+                continue
+            pair = self.candidates.get(module)
+            diagnostic = pair[index] if pair is not None else None
+            if (
+                diagnostic is None
+                or diagnostic.diagnostic_id != diagnostic_id
+            ):
+                heapq.heappop(heap)
+                continue
+            return diagnostic
+        return None
+
+    def peek(self, *, require_fix: bool):
+        return self._peek(require_fix=require_fix)
+
+    def lookup(self, diagnostic_id: str):
+        return self.by_id.get(diagnostic_id)
+
+
+class DashiAgdaService:
+    """Long-lived incremental analysis service over one source-index DB."""
+
+    def __init__(
+        self,
+        root: Path,
+        index_path: Path,
+        *,
+        jobs: int = 0,
+        semantic_catalog: Optional[Path] = None,
+        promoter_command: Optional[str] = None,
+        promoter_timeout: float = 900.0,
+    ) -> None:
+        self.root = root.resolve()
+        self.profiler = Profiler()
+        self.index = SourceIndex(
+            self.root,
+            index_path,
+            profiler=self.profiler,
+            jobs=jobs,
+        )
+        self.jobs = jobs
+        self._trusted_targets: Set[Path] = set()
+        self._trusted_closures: Dict[Path, Tuple[str, ...]] = {}
+        self._candidate_rollups: Dict[
+            Path,
+            _RollupCandidateCache,
+        ] = {}
+        self.semantic_path = (
+            semantic_catalog.resolve()
+            if semantic_catalog is not None
+            else None
+        )
+        self.semantic = (
+            SemanticCatalog(self.semantic_path)
+            if self.semantic_path is not None
+            and self.semantic_path.exists()
+            else None
+        )
+        self.promoter = (
+            CommandPromoter(
+                promoter_command,
+                root=self.root,
+                catalog=self.semantic_path,
+                timeout=promoter_timeout,
+            )
+            if promoter_command is not None
+            and self.semantic_path is not None
+            else None
+        )
+
+    def close(self) -> None:
+        if self.semantic is not None:
+            self.semantic.close()
+        self.index.close()
+
+    def __enter__(self) -> "DashiAgdaService":
+        return self
+
+    def __exit__(self, exc_type, exc, tb) -> None:
+        self.close()
+
+    def _target_path(self, target: str) -> Path:
+        path = Path(target)
+        if not path.is_absolute():
+            path = self.root / path
+        return path.resolve()
+
+    def _trust_target(self, target: Path) -> None:
+        modules = self.index.cached_closure_modules(target)
+        if modules is None:
+            return
+        self._trusted_targets.add(target)
+        self._trusted_closures[target] = modules
+        self.profiler.count("trusted_targets_added")
+
+    def _drop_trust(self, target: Optional[Path] = None) -> None:
+        if target is None:
+            dropped = len(self._trusted_targets)
+            self._trusted_targets.clear()
+            self._trusted_closures.clear()
+            self._candidate_rollups.clear()
+        else:
+            dropped = 1 if target in self._trusted_targets else 0
+            self._trusted_targets.discard(target)
+            self._trusted_closures.pop(target, None)
+            self._candidate_rollups.pop(target, None)
+        if dropped:
+            self.profiler.count("trusted_targets_dropped", dropped)
+
+    @staticmethod
+    def _diagnostic_priority(diagnostic):
+        return (
+            0 if diagnostic.severity == "error" else 1,
+            0 if diagnostic.evidence_sufficient else 1,
+            0 if any(fix.edits for fix in diagnostic.fixes) else 1,
+            str(diagnostic.path),
+            diagnostic.line,
+            diagnostic.column,
+            diagnostic.code,
+        )
+
+    def _build_candidate_rollup(
+        self,
+        target: Path,
+        *,
+        validate_freshness: bool,
+    ) -> Optional[_RollupCandidateCache]:
+        with self.profiler.stage("session.candidate_snapshot"):
+            snapshot = self.index.cached_candidate_snapshot(
+                target,
+                validate_freshness=validate_freshness,
+            )
+        if snapshot is None:
+            return None
+
+        cache = _RollupCandidateCache(
+            self._diagnostic_priority
+        )
+        with self.profiler.stage("session.candidate_heap_build"):
+            for module, top, fixable in snapshot:
+                cache.replace(module, top, fixable)
+        self._candidate_rollups[target] = cache
+        self.profiler.count(
+            "session_candidate_rollups_built"
+        )
+        self.profiler.count(
+            "session_candidate_modules",
+            len(snapshot),
+        )
+        return cache
+
+    def _candidate_rollup(
+        self,
+        target: Path,
+        *,
+        validate_freshness: bool,
+    ) -> Optional[_RollupCandidateCache]:
+        cached = self._candidate_rollups.get(target)
+        if cached is not None:
+            self.profiler.count(
+                "session_candidate_rollup_hits"
+            )
+            return cached
+        return self._build_candidate_rollup(
+            target,
+            validate_freshness=validate_freshness,
+        )
+
+    def _cached_session_diagnostic(
+        self,
+        diagnostic_id: str,
+    ):
+        for cache in self._candidate_rollups.values():
+            diagnostic = cache.lookup(diagnostic_id)
+            if diagnostic is not None:
+                self.profiler.count("session_candidate_id_hits")
+                return diagnostic
+        return None
+
+    def _refresh_rollup_module_candidates(
+        self,
+        module: str,
+        path: Path,
+    ) -> None:
+        top, fixable = self.index.cached_module_candidates(path)
+        updated = 0
+        for target, cache in self._candidate_rollups.items():
+            modules = self._trusted_closures.get(target, ())
+            if module not in modules:
+                continue
+            cache.replace(module, top, fixable)
+            updated += 1
+        if updated:
+            self.profiler.count(
+                "session_candidate_modules_refreshed",
+                updated,
+            )
+
+    def _drop_trust_containing(self, module: str) -> None:
+        targets = [
+            target
+            for target, modules in self._trusted_closures.items()
+            if module in modules
+        ]
+        for target in targets:
+            self._drop_trust(target)
+        if targets:
+            self.profiler.count(
+                "trusted_rollups_invalidated",
+                len(targets),
+            )
+
+    def _start_request(self) -> Tuple[TimingSnapshot, int]:
+        self.index.begin_request()
+        return self.profiler.snapshot(), time.perf_counter_ns()
+
+    def _finish_request(
+        self,
+        before: TimingSnapshot,
+        started_ns: int,
+    ) -> dict:
+        return _snapshot_delta(
+            before,
+            self.profiler.snapshot(),
+            time.perf_counter_ns() - started_ns,
+        )
+
+    def _ensure_semantic_catalog(self) -> None:
+        if (
+            self.semantic is None
+            and self.semantic_path is not None
+            and self.semantic_path.exists()
+        ):
+            self.semantic = SemanticCatalog(self.semantic_path)
+
+    def _refresh_semantic_catalog(self) -> None:
+        if self.semantic is not None:
+            self.semantic.close()
+            self.semantic = None
+        self._ensure_semantic_catalog()
+
+    def _semantic_lookup(
+        self,
+        module_hashes: Dict[str, str],
+    ) -> Dict[str, dict]:
+        self._ensure_semantic_catalog()
+        if self.semantic is None or not module_hashes:
+            return {}
+        with self.profiler.stage("semantic.catalog_lookup"):
+            items = self.semantic.lookup(
+                module_hashes,
+                module_hashes,
+            )
+        return {
+            module: item.as_dict()
+            for module, item in sorted(items.items())
+        }
+
+    @staticmethod
+    def _semantic_counts(items: Dict[str, dict]) -> dict:
+        return {
+            "fresh": sum(
+                1 for item in items.values()
+                if item["freshness"] == "fresh"
+            ),
+            "stale": sum(
+                1 for item in items.values()
+                if item["freshness"] == "stale"
+            ),
+            "unknown": sum(
+                1 for item in items.values()
+                if item["freshness"] == "unknown"
+            ),
+        }
+
+    def diagnose(
+        self,
+        target: str,
+        *,
+        errors_only: bool = False,
+        limit: Optional[int] = None,
+    ) -> dict:
+        before, started = self._start_request()
+        target_path = self._target_path(target)
+        result = self.index.diagnose(target_path)
+        self._trust_target(target_path)
+        diagnostics = result.diagnostics
+        if errors_only:
+            diagnostics = [
+                item
+                for item in diagnostics
+                if item.severity == "error"
+            ]
+
+        diagnostics_total = len(diagnostics)
+        if limit is not None:
+            if limit < 0:
+                raise ValueError("diagnostic limit must be non-negative")
+            diagnostics = diagnostics[:limit]
+
+        semantic = self._semantic_lookup(
+            dict(result.source_hashes)
+        )
+        return {
+            "modules": list(result.modules),
+            "cache_hit": result.cache_hit,
+            "diagnostics": [
+                item.as_dict()
+                for item in diagnostics
+            ],
+            "diagnostics_total": diagnostics_total,
+            "diagnostics_returned": len(diagnostics),
+            "diagnostics_truncated": len(diagnostics) < diagnostics_total,
+            "semantic": semantic,
+            "semantic_counts": self._semantic_counts(semantic),
+            "profile": self._finish_request(before, started),
+        }
+
+    def next_error(
+        self,
+        target: str,
+        *,
+        require_fix: bool = False,
+    ) -> dict:
+        before, started = self._start_request()
+        target_path = self._target_path(target)
+        trusted = target_path in self._trusted_targets
+        if trusted:
+            self.profiler.count("trusted_session_hits")
+
+        cache = self._candidate_rollup(
+            target_path,
+            validate_freshness=not trusted,
+        )
+        if cache is None:
+            # Missing/stale candidate rows: rebuild the persistent target once,
+            # then establish both trust and the in-memory candidate snapshot.
+            self.index.diagnose(target_path)
+            self._trust_target(target_path)
+            cache = self._build_candidate_rollup(
+                target_path,
+                validate_freshness=False,
+            )
+        elif not trusted:
+            self._trust_target(target_path)
+
+        diagnostic = (
+            cache.peek(require_fix=require_fix)
+            if cache is not None
+            else None
+        )
+        self.profiler.count("session_candidate_heap_peeks")
+        semantic = {}
+        if diagnostic is not None and self.semantic_path is not None:
+            identity = self.index.source_identity(diagnostic.path)
+            if identity is not None:
+                module_name, source_hash = identity
+                semantic = self._semantic_lookup(
+                    {module_name: source_hash}
+                )
+        return {
+            "status": (
+                "diagnostic"
+                if diagnostic is not None
+                else "clean"
+            ),
+            "diagnostic": (
+                diagnostic.as_dict()
+                if diagnostic is not None
+                else None
+            ),
+            "semantic": semantic,
+            "profile": self._finish_request(before, started),
+        }
+
+    def apply_fix(
+        self,
+        target: str,
+        diagnostic_id: str,
+        *,
+        fix_index: int = 0,
+        allow_likely: bool = False,
+    ) -> dict:
+        before, started = self._start_request()
+        target_path = self._target_path(target)
+
+        diagnostic = self._cached_session_diagnostic(
+            diagnostic_id
+        )
+        if diagnostic is None:
+            diagnostic = self.index.find_cached_diagnostic(
+                target_path,
+                diagnostic_id,
+            )
+        if diagnostic is None:
+            result = self.index.diagnose(target_path)
+            diagnostic = next(
+                (
+                    item
+                    for item in result.diagnostics
+                    if item.diagnostic_id == diagnostic_id
+                ),
+                None,
+            )
+        if diagnostic is None:
+            raise ValueError(
+                "diagnostic ID is not present in the current source-index result"
+            )
+        if fix_index < 0 or fix_index >= len(diagnostic.fixes):
+            raise ValueError(
+                f"diagnostic has {len(diagnostic.fixes)} fix(es); "
+                f"fix index {fix_index} is out of range"
+            )
+
+        fix = diagnostic.fixes[fix_index]
+        if fix.applicability == "speculative":
+            raise ValueError(
+                "speculative fixes cannot be machine-applied"
+            )
+        if (
+            fix.applicability == "likely"
+            and not allow_likely
+        ):
+            raise ValueError(
+                "likely fixes require allow_likely=true"
+            )
+        if not fix.edits:
+            raise ValueError(
+                "selected fix has no exact machine-applicable edits"
+            )
+
+        before_state = self.index.source_state(diagnostic.path)
+
+        try:
+            changed = apply_text_edits(fix.edits)
+        except EditApplicationError as error:
+            raise ValueError(str(error)) from error
+
+        # The edit happened during this request, so clear request-local parsed
+        # state once more before verifying the changed module.
+        self.index.begin_request()
+        after = self.index.diagnose(diagnostic.path)
+        after_state = self.index.source_state(diagnostic.path)
+        if (
+            before_state is None
+            or after_state is None
+            or before_state[2] != after_state[2]
+        ):
+            module = (
+                after_state[0]
+                if after_state is not None
+                else (
+                    before_state[0]
+                    if before_state is not None
+                    else None
+                )
+            )
+            if module is None:
+                self._drop_trust()
+            else:
+                self._drop_trust_containing(module)
+        else:
+            self.profiler.count("trusted_session_api_stable_edits")
+            self._refresh_rollup_module_candidates(
+                after_state[0],
+                diagnostic.path,
+            )
+
+        resolved = all(
+            item.diagnostic_id != diagnostic_id
+            for item in after.diagnostics
+            if item.path.resolve() == diagnostic.path.resolve()
+        )
+
+        return {
+            "diagnostic_id": diagnostic_id,
+            "fix": fix.as_dict(),
+            "changed_files": [
+                str(path)
+                for path in changed
+            ],
+            "resolved": resolved,
+            "profile": self._finish_request(before, started),
+        }
+
+    def affected(
+        self,
+        target: str,
+        *,
+        within: Optional[str] = None,
+    ) -> dict:
+        before, started = self._start_request()
+        scope_modules = None
+        if within is not None:
+            within_path = self._target_path(within)
+            if within_path in self._trusted_targets:
+                self.profiler.count("trusted_session_hits")
+                scope_modules = set(
+                    self._trusted_closures.get(within_path, ())
+                )
+            else:
+                scoped = self.index.diagnose(within_path)
+                scope_modules = set(scoped.modules)
+                self._trust_target(within_path)
+
+        modules = list(
+            self.index.affected_modules(self._target_path(target))
+        )
+        if scope_modules is not None:
+            modules = [
+                module
+                for module in modules
+                if module in scope_modules
+            ]
+
+        return {
+            "modules": modules,
+            "count": len(modules),
+            "scope": (
+                "indexed-cache-only"
+                if within is None
+                else "subject-closure"
+            ),
+            "within": within,
+            "profile": self._finish_request(before, started),
+        }
+
+    def refresh(self, target: str) -> dict:
+        """Observe an out-of-band edit and repair trusted rollup state."""
+        before, started = self._start_request()
+        target_path = self._target_path(target)
+        before_state = self.index.source_state(target_path)
+
+        result = self.index.diagnose(target_path)
+        after_state = self.index.source_state(target_path)
+
+        api_stable = (
+            before_state is not None
+            and after_state is not None
+            and before_state[2] == after_state[2]
+        )
+        if api_stable:
+            self.profiler.count("trusted_session_api_stable_refreshes")
+            self._refresh_rollup_module_candidates(
+                after_state[0],
+                target_path,
+            )
+        else:
+            module = (
+                after_state[0]
+                if after_state is not None
+                else (
+                    before_state[0]
+                    if before_state is not None
+                    else None
+                )
+            )
+            if module is None:
+                self._drop_trust()
+            else:
+                self._drop_trust_containing(module)
+
+        # Direct refresh establishes the target itself as trusted for the
+        # observed post-refresh source, even when containing rollups were
+        # invalidated by an API change.
+        self._trust_target(target_path)
+        return {
+            "target": str(target_path),
+            "modules": len(result.modules),
+            "diagnostics": len(result.diagnostics),
+            "cache_hit": result.cache_hit,
+            "api_stable": api_stable,
+            "profile": self._finish_request(before, started),
+        }
+
+    def semantic_status(self, target: str) -> dict:
+        before, started = self._start_request()
+        hashes = self.index.closure_source_hashes(Path(target))
+        if hashes is None:
+            result = self.index.diagnose(Path(target))
+            hashes = result.source_hashes
+        module_hashes = dict(hashes)
+        semantic = self._semantic_lookup(module_hashes)
+        counts = self._semantic_counts(semantic)
+        return {
+            "modules": len(module_hashes),
+            "catalog_hits": len(semantic),
+            "catalog_misses": max(
+                0,
+                len(module_hashes) - len(semantic),
+            ),
+            "fresh": counts["fresh"],
+            "stale": counts["stale"],
+            "unknown": counts["unknown"],
+            "snapshots": semantic,
+            "profile": self._finish_request(before, started),
+        }
+
+    @staticmethod
+    def _output_tail(text: str, limit: int = 8192) -> str:
+        return text if len(text) <= limit else text[-limit:]
+
+    def promote(self, target: str) -> dict:
+        if self.promoter is None:
+            raise ValueError(
+                "semantic promotion is not configured; "
+                "start the service with --semantic-catalog and --promoter-command"
+            )
+        if self.semantic_path is None:
+            raise ValueError("semantic catalog path is not configured")
+
+        before, started = self._start_request()
+        target_path = Path(target)
+        if not target_path.is_absolute():
+            target_path = self.root / target_path
+        target_path = target_path.resolve()
+
+        # Refresh source identity before invoking any external checker.
+        result = self.index.diagnose(target_path)
+        identity = self.index.source_identity(target_path)
+        if identity is None:
+            raise ValueError(
+                f"target is not indexed as an Agda module: {target_path}"
+            )
+        module_name, source_hash = identity
+
+        command_result = self.promoter.run(
+            path=target_path,
+            module=module_name,
+        )
+
+        # Source may have changed while the external checker was running.
+        # Re-index after promotion and prove freshness against the *current*
+        # worktree, not merely the source hash captured before invocation.
+        self.index.begin_request()
+        post_result = self.index.diagnose(target_path)
+        post_identity = self.index.source_identity(target_path)
+        if post_identity is None:
+            raise ValueError(
+                f"target disappeared from source index after promotion: {target_path}"
+            )
+        post_module_name, current_source_hash = post_identity
+        if post_module_name != module_name:
+            raise ValueError(
+                "target module identity changed during promotion: "
+                f"{module_name} -> {post_module_name}"
+            )
+
+        # The external writer may have created or replaced the catalog. Reopen
+        # it and prove promotion from the checked-source SHA postcondition.
+        self._refresh_semantic_catalog()
+        semantic = self._semantic_lookup(
+            dict(post_result.source_hashes)
+        )
+        target_semantic = semantic.get(module_name)
+        freshness = (
+            target_semantic["freshness"]
+            if target_semantic is not None
+            else "unknown"
+        )
+
+        if command_result.returncode != 0:
+            status = "failed"
+        elif freshness == "fresh":
+            status = "promoted"
+        else:
+            status = "unverified"
+
+        counts = self._semantic_counts(semantic)
+        receipt = {
+            "status": status,
+            "module_name": module_name,
+            "target_path": str(target_path),
+            "requested_source_sha256": source_hash,
+            "source_sha256": current_source_hash,
+            "promoter_returncode": command_result.returncode,
+            "promoter_elapsed_ms": round(
+                command_result.elapsed_ms,
+                3,
+            ),
+            "semantic_freshness": freshness,
+            "semantic_counts": counts,
+            "semantic": target_semantic,
+            "promoter_receipt": command_result.receipt,
+            "stdout_tail": self._output_tail(
+                command_result.stdout
+            ),
+            "stderr_tail": self._output_tail(
+                command_result.stderr
+            ),
+        }
+        receipt_id = self.index.record_promotion(receipt)
+        receipt["receipt_id"] = receipt_id
+        receipt["profile"] = self._finish_request(before, started)
+        return receipt
+
+    def promotion_history(
+        self,
+        module_name: Optional[str] = None,
+        limit: int = 20,
+    ) -> dict:
+        before, started = self._start_request()
+        receipts = self.index.promotion_history(
+            module_name=module_name,
+            limit=limit,
+        )
+        return {
+            "receipts": receipts,
+            "profile": self._finish_request(before, started),
+        }
+
+    def cache_status(self) -> dict:
+        before, started = self._start_request()
+        result = self.index.cache_stats()
+        result["session"] = {
+            "trusted_targets": len(self._trusted_targets),
+            "candidate_rollups": len(self._candidate_rollups),
+            "candidate_modules": sum(
+                len(cache.candidates)
+                for cache in self._candidate_rollups.values()
+            ),
+            "candidate_heap_entries": sum(
+                len(cache.any_heap) + len(cache.fixable_heap)
+                for cache in self._candidate_rollups.values()
+            ),
+            "candidate_live_entries": sum(
+                cache._live_heap_entries()
+                for cache in self._candidate_rollups.values()
+            ),
+            "candidate_heap_compactions": sum(
+                cache.compactions
+                for cache in self._candidate_rollups.values()
+            ),
+        }
+        result["profile"] = self._finish_request(
+            before,
+            started,
+        )
+        return result
+
+    def dispatch(
+        self,
+        method: str,
+        params: Optional[Dict[str, Any]] = None,
+    ) -> dict:
+        params = dict(params or {})
+        if method == "diagnose":
+            return self.diagnose(**params)
+        if method == "next_error":
+            return self.next_error(**params)
+        if method == "apply_fix":
+            return self.apply_fix(**params)
+        if method == "cache_status":
+            return self.cache_status()
+        if method == "affected":
+            return self.affected(**params)
+        if method == "refresh":
+            return self.refresh(**params)
+        if method == "semantic_status":
+            return self.semantic_status(**params)
+        if method == "promote":
+            return self.promote(**params)
+        if method == "promotion_history":
+            return self.promotion_history(**params)
+        if method == "ping":
+            return {"status": "ok"}
+        raise ValueError(f"unknown service method: {method}")
+
+
+def serve_streams(
+    service: DashiAgdaService,
+    input_stream: IO[str],
+    output_stream: IO[str],
+) -> None:
+    for raw_line in input_stream:
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        request_id = None
+        try:
+            request = json.loads(line)
+            if not isinstance(request, dict):
+                raise ValueError("request must be a JSON object")
+            request_id = request.get("id")
+            method = request.get("method")
+            if not isinstance(method, str) or not method:
+                raise ValueError("request method must be a non-empty string")
+
+            if method == "shutdown":
+                response = {
+                    "id": request_id,
+                    "ok": True,
+                    "result": {"status": "shutdown"},
+                }
+                output_stream.write(
+                    json.dumps(
+                        response,
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    )
+                    + "\n"
+                )
+                output_stream.flush()
+                return
+
+            params = request.get("params", {})
+            if params is None:
+                params = {}
+            if not isinstance(params, dict):
+                raise ValueError("request params must be a JSON object")
+
+            response = {
+                "id": request_id,
+                "ok": True,
+                "result": service.dispatch(method, params),
+            }
+        except Exception as error:
+            response = {
+                "id": request_id,
+                "ok": False,
+                "error": {
+                    "type": type(error).__name__,
+                    "message": str(error),
+                },
+            }
+
+        output_stream.write(
+            json.dumps(
+                response,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n"
+        )
+        output_stream.flush()
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(
+        prog="dashi-agda-server",
+        description=(
+            "Long-lived JSONL service for incremental Agda source diagnostics"
+        ),
+    )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=Path.cwd(),
+        help="repository root (default: current directory)",
+    )
+    parser.add_argument(
+        "--index",
+        type=Path,
+        default=Path(".cache/agda_preflight/source-index.sqlite3"),
+        help="persistent source-index database",
+    )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=0,
+        help="cold-bootstrap workers; 0 = auto",
+    )
+    parser.add_argument(
+        "--semantic-catalog",
+        type=Path,
+        help="optional read-only agda2lean semantic catalog",
+    )
+    parser.add_argument(
+        "--promoter-command",
+        help=(
+            "explicit semantic promotion command; supports {file}, {module}, "
+            "{root}, {catalog}, and {receipt} placeholders"
+        ),
+    )
+    parser.add_argument(
+        "--promoter-timeout",
+        type=float,
+        default=900.0,
+        help="promotion subprocess timeout in seconds (default: 900)",
+    )
+    args = parser.parse_args(argv)
+
+    with DashiAgdaService(
+        args.root,
+        args.index,
+        jobs=args.jobs,
+        semantic_catalog=args.semantic_catalog,
+        promoter_command=args.promoter_command,
+        promoter_timeout=args.promoter_timeout,
+    ) as service:
+        serve_streams(
+            service,
+            sys.stdin,
+            sys.stdout,
+        )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

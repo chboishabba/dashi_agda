@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Iterable, List, Optional
 import json
 import shlex
+import sys
 
 import pytest
 
@@ -65,6 +66,15 @@ def pytest_addoption(parser):
         help=(
             "exit-code-only scope checker command; supports {file} placeholder "
             "and participates in aggregate auto-refinement"
+        ),
+    )
+    group.addoption(
+        "--agda-typecheck-runner",
+        action="store",
+        default=None,
+        help=(
+            "exit-code-only full Agda checker command; supports {file} placeholder "
+            "and participates in aggregate typecheck refinement"
         ),
     )
     group.addoption(
@@ -139,6 +149,7 @@ def _checker(config) -> Checker:
         root = _repo_root(config)
         command = config.getoption("--agda-scope-command")
         scope_runner = config.getoption("--agda-scope-runner")
+        typecheck_runner = config.getoption("--agda-typecheck-runner")
         native_scope = config.getoption("--agda-scope-check")
         typecheck_oracle = config.getoption("--agda-typecheck-oracle")
         auto_refine = config.getoption("--agda-auto-refine")
@@ -160,6 +171,10 @@ def _checker(config) -> Checker:
         if scope_runner and not auto_refine:
             raise pytest.UsageError(
                 "--agda-scope-runner requires --agda-auto-refine"
+            )
+        if typecheck_runner and auto_refine != "typecheck":
+            raise pytest.UsageError(
+                "--agda-typecheck-runner requires --agda-auto-refine=typecheck"
             )
         agda_extra_args = tuple(
             shlex.split(config.getoption("--agda-extra-args") or "")
@@ -186,6 +201,7 @@ def _checker(config) -> Checker:
                 typecheck=auto_refine == "typecheck",
                 extra_args=agda_extra_args,
                 scope_command=scope_runner,
+                typecheck_command=typecheck_runner,
             )
         cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
@@ -237,6 +253,7 @@ def _prime_scope_closure(
     root_path: Path,
     collected: List[CollectedModule],
     terminalreporter=None,
+    config=None,
 ) -> None:
     """Certify only dependency subtrees that contain deferred scope findings.
 
@@ -254,15 +271,30 @@ def _prime_scope_closure(
     selected = {item.path.resolve() for item in collected}
     path_to_module = {item.path.resolve(): item.module for item in collected}
 
+    capmanager = (
+        config.pluginmanager.getplugin("capturemanager")
+        if config is not None else None
+    )
+
     def log(message: str) -> None:
-        if terminalreporter is not None:
-            terminalreporter.write_line(message)
-            flush = getattr(terminalreporter, "_tw", None)
-            if flush is not None:
-                try:
-                    flush.flush()
-                except Exception:
-                    pass
+        def write_now() -> None:
+            if terminalreporter is not None:
+                terminalreporter.write_line(message)
+                flush = getattr(terminalreporter, "_tw", None)
+                if flush is not None:
+                    try:
+                        flush.flush()
+                    except Exception:
+                        pass
+            else:
+                sys.stderr.write(message + "\n")
+                sys.stderr.flush()
+
+        if capmanager is not None:
+            with capmanager.global_and_fixture_disabled():
+                write_now()
+        else:
+            write_now()
 
     log(
         f"Scanning {len(collected)} modules for deferred Agda-scope candidates..."
@@ -390,6 +422,170 @@ def _prime_scope_closure(
     visit(root, aggregate_root=True)
 
 
+def _prime_typecheck_closure(
+    checker: Checker,
+    root_path: Path,
+    collected: List[CollectedModule],
+    terminalreporter=None,
+    config=None,
+) -> None:
+    """Certify only dependency subtrees containing AGDA_TYPECHECKER candidates."""
+    backend = checker.scope_backend
+    if not isinstance(backend, AgdaAutoRefineBackend) or not backend.use_typecheck:
+        return
+    if len(collected) <= 1:
+        return
+
+    selected = {item.path.resolve() for item in collected}
+    path_to_module = {item.path.resolve(): item.module for item in collected}
+    capmanager = (
+        config.pluginmanager.getplugin("capturemanager")
+        if config is not None else None
+    )
+
+    def log(message: str) -> None:
+        def write_now() -> None:
+            if terminalreporter is not None:
+                terminalreporter.write_line(message)
+                flush = getattr(terminalreporter, "_tw", None)
+                if flush is not None:
+                    try:
+                        flush.flush()
+                    except Exception:
+                        pass
+            else:
+                sys.stderr.write(message + "\n")
+                sys.stderr.flush()
+
+        if capmanager is not None:
+            with capmanager.global_and_fixture_disabled():
+                write_now()
+        else:
+            write_now()
+
+    type_candidates = set()
+    for item in collected:
+        if backend.scope_failed(item.path):
+            continue
+        diagnostics = checker.structural_check(item.path)
+        if any(
+            (not diagnostic.evidence_sufficient)
+            and diagnostic.minimum_evidence == "agda-typechecker"
+            for diagnostic in diagnostics
+        ):
+            type_candidates.add(item.path.resolve())
+
+    backend.set_typecheck_candidates(type_candidates)
+    if not type_candidates:
+        return
+
+    children = {}
+    for item in collected:
+        summary = checker.parse_summary(item.path)
+        deps = []
+        for module in sorted(set(summary.imports.values())):
+            child = checker.module_path(module).resolve()
+            if child in selected:
+                deps.append(child)
+        children[item.path.resolve()] = tuple(deps)
+
+    descendant_cache = {}
+    descendant_active = set()
+
+    def descendants_including(path: Path):
+        key = path.resolve()
+        cached = descendant_cache.get(key)
+        if cached is not None:
+            return cached
+        if key in descendant_active:
+            return {key}
+        descendant_active.add(key)
+        try:
+            result = {key}
+            for child in children.get(key, ()):
+                result.update(descendants_including(child))
+            descendant_cache[key] = result
+            return result
+        finally:
+            descendant_active.remove(key)
+
+    visiting = set()
+
+    def visit(path: Path, *, aggregate_root: bool = False) -> None:
+        key = path.resolve()
+        if key not in selected or key in visiting or backend.typecheck_known(key):
+            return
+
+        subtree = descendants_including(key)
+        relevant = subtree & type_candidates
+        if not relevant:
+            return
+
+        module = path_to_module.get(key, str(key))
+
+        visiting.add(key)
+        try:
+            # A module already known to fail scope cannot possibly pass a full
+            # typecheck. Descend without paying the stronger oracle at this node.
+            if backend.scope_failed(key):
+                backend._typecheck_failed.add(key)
+                for child in children.get(key, ()):
+                    if descendants_including(child) & type_candidates:
+                        visit(child, aggregate_root=True)
+                return
+
+            log(
+                f"  [typecheck-probe] {module} "
+                f"({len(relevant)} deferred candidate"
+                f"{'s' if len(relevant) != 1 else ''})..."
+            )
+            if backend.probe_typecheck(key, aggregate_root=aggregate_root):
+                backend.mark_typecheck_validated(subtree)
+                log(
+                    f"  [typecheck-probe] {module} ✓ certified "
+                    f"{len(subtree)} modules / {len(relevant)} candidates"
+                )
+                return
+
+            partial_modules = getattr(
+                backend.typecheck,
+                "last_partial_validated_modules",
+                (),
+            )
+            partial_paths = {
+                checker.module_path(module_name).resolve()
+                for module_name in partial_modules
+                if checker.module_path(module_name).resolve() in selected
+            }
+            if partial_paths:
+                backend.mark_typecheck_validated(partial_paths)
+                type_candidates.difference_update(partial_paths)
+                log(
+                    f"  [typecheck-probe] {module} ✗ unresolved, but Agda "
+                    f"partially certified {len(partial_paths)} modules; "
+                    "descending into remaining candidates"
+                )
+            else:
+                log(
+                    f"  [typecheck-probe] {module} ✗ unresolved; "
+                    "descending into relevant imports"
+                )
+
+            for child in children.get(key, ()):
+                if descendants_including(child) & type_candidates:
+                    visit(child, aggregate_root=True)
+        finally:
+            visiting.remove(key)
+
+    root = root_path.resolve()
+    log(
+        f"Priming Agda typecheck closure for "
+        f"{path_to_module.get(root, str(root))} "
+        f"({len(collected)} modules, {len(type_candidates)} typecheck candidates)..."
+    )
+    visit(root, aggregate_root=True)
+
+
 
 class AgdaModuleFile(pytest.File):
     def collect(self):
@@ -419,8 +615,26 @@ class AgdaModuleFile(pytest.File):
                     path,
                     selected,
                     terminalreporter=terminalreporter,
+                    config=config,
                 )
                 primed.add(root_key)
+
+        if dependencies and config.getoption("--agda-auto-refine") == "typecheck":
+            primed_type = getattr(config, "_dashi_agda_typecheck_primed_roots", None)
+            if primed_type is None:
+                primed_type = set()
+                setattr(config, "_dashi_agda_typecheck_primed_roots", primed_type)
+            root_key = path.resolve()
+            if root_key not in primed_type:
+                terminalreporter = config.pluginmanager.getplugin("terminalreporter")
+                _prime_typecheck_closure(
+                    checker,
+                    path,
+                    selected,
+                    terminalreporter=terminalreporter,
+                    config=config,
+                )
+                primed_type.add(root_key)
 
         for collected in selected:
             if collected.module in seen:
