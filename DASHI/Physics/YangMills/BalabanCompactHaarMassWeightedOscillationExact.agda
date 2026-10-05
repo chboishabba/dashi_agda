@@ -128,8 +128,7 @@ massWeightedTotalBudgetIsUniformOscillation data =
       Sums.realSum (cells data)
         (λ cell →
           sourceCellMass data cell *ℝ omega +ℝ
-          ExactMass.ExactMassQuadratureData.discrepancyError
-            (asExactMassQuadrature data) cell)
+          Quad.discrepancyError q cell)
       ≡
       Sums.realSum (cells data)
         (λ cell → sourceCellMass data cell *ℝ omega)
@@ -138,8 +137,7 @@ massWeightedTotalBudgetIsUniformOscillation data =
         (cells data)
         (λ cell →
           sourceCellMass data cell *ℝ omega +ℝ
-          ExactMass.ExactMassQuadratureData.discrepancyError
-            (asExactMassQuadrature data) cell)
+          Quad.discrepancyError q cell)
         (λ cell → sourceCellMass data cell *ℝ omega)
         (λ cell → +-identityʳ (sourceCellMass data cell *ℝ omega))
 
