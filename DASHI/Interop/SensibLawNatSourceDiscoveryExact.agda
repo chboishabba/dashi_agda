@@ -45,7 +45,7 @@ record LocatorCandidate
     candidateRankReference : String
     candidateReference : String
     sameSourceIdentityState : Ternary.AdmissibilityState
-    sameSourceIdentityStillOpen : sameSourceIdentityState ≡ Ternary.open
+    sameSourceIdentityStillOpen : sameSourceIdentityState ≡ Ternary.openState
     sourceSupportPaid : Bool
     sourceSupportPaidIsFalse : sourceSupportPaid ≡ false
 open LocatorCandidate public
@@ -62,7 +62,7 @@ sourceIdentityTrit sameSource = Trit.pos
 
 sourceIdentityAdmissibility : SourceIdentityDisposition → Ternary.AdmissibilityState
 sourceIdentityAdmissibility differentSource = Ternary.rejected
-sourceIdentityAdmissibility identityUnresolved = Ternary.open
+sourceIdentityAdmissibility identityUnresolved = Ternary.openState
 sourceIdentityAdmissibility sameSource = Ternary.admitted
 
 sameSourcePaid : SourceIdentityDisposition → Bool

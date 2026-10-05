@@ -4,6 +4,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count, direct_binding_parameters, explicit_declaration_parameter_count, module_application_target_and_args
 from .shapes import shape_from_node, shape_from_tokens, terminal_head, explicit_arity, equality_shape, split_top_level, PiShape, HeadShape
+from .interfaces import ModuleInterface
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
@@ -50,33 +51,83 @@ def _diag(D, code, msg, s, line, col=1, hint=None, severity="error", confidence=
     return D(code, msg, s.path, line, col, hint, severity, confidence)
 
 
+def _records(owner):
+    return owner.record_map if isinstance(owner, ModuleInterface) else owner.ast.records
+
+
+def _signatures(owner):
+    return owner.signature_map if isinstance(owner, ModuleInterface) else owner.ast.signatures
+
+
+def _record_fields(record):
+    return record.field_map if hasattr(record, "field_map") else record.fields
+
+
+def _field_terminal(owner, field):
+    if isinstance(owner, ModuleInterface):
+        return field.terminal_head
+    if field.type_node is None:
+        return None
+    return terminal_head(shape_from_node(owner.ast.source_bytes, field.type_node))
+
+
+def _field_explicit_arity(owner, field):
+    if isinstance(owner, ModuleInterface):
+        return field.explicit_arity
+    if field.type_node is None:
+        return 0
+    return explicit_arity(shape_from_node(owner.ast.source_bytes, field.type_node))
+
+
 def _resolve_record_head(checker, summary, head):
     if not head:
         return None
-    imported = checker.imported_summaries(summary)
+    imported = checker.imported_interfaces(summary)
     if "." in head:
         alias, name = head.rsplit(".", 1)
         owner = imported.get(alias)
-        if owner is not None and name in owner.ast.records:
-            return owner, owner.ast.records[name]
+        if owner is not None and name in owner.record_map:
+            return owner, owner.record_map[name]
     if head in summary.ast.records:
         return summary, summary.ast.records[head]
     return None
 
 
 def _resolve_record_ast(checker, summary, signature):
-    if signature is None or signature.type_node is None:
+    if signature is None:
         return None
-    head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+    if signature.type_node is not None:
+        head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+    elif signature.type_text:
+        head = signature.type_text.split("→")[-1].strip().split()
+        head = head[0] if head else None
+    else:
+        return None
     return _resolve_record_head(checker, summary, head)
 
 
 def _resolve_field_record_ast(checker, owner_summary, field):
-    if field is None or field.type_node is None:
+    if field is None:
         return None
-    head = terminal_head(
-        shape_from_node(owner_summary.ast.source_bytes, field.type_node)
-    )
+    head = _field_terminal(owner_summary, field)
+    if head is None:
+        return None
+    # Imported interfaces already carry fully qualified/local terminal heads,
+    # but resolving a field result record only needs the owner module's local
+    # schema when there is no source ModuleSummary to recurse through.
+    if isinstance(owner_summary, ModuleInterface):
+        if "." in head:
+            alias, short = head.rsplit(".", 1)
+            module = owner_summary.import_map.get(alias)
+            if module is not None:
+                target_owner = checker.interface_for_module(module)
+                if target_owner is not None:
+                    record = target_owner.record_map.get(short)
+                    if record is not None:
+                        return target_owner, record
+        short = head.rsplit(".", 1)[-1]
+        record = owner_summary.record_map.get(short)
+        return (owner_summary, record) if record is not None else None
     return _resolve_record_head(checker, owner_summary, head)
 
 
@@ -135,7 +186,7 @@ def extended_diagnostics(checker, s, D):
         ]
         for name, items in s.ast.clauses.items()
     }
-    imported = checker.imported_summaries(s)
+    imported = checker.imported_interfaces(s)
 
     try:
         expected = ".".join(s.path.relative_to(checker.root).with_suffix("").parts)
@@ -261,6 +312,7 @@ def extended_diagnostics(checker, s, D):
     record_expr_by_start = {
         expr.node.start_byte: expr
         for expr in s.ast.record_expressions
+        if expr.context != "pattern"
     }
     record_target_cache = {}
 
@@ -283,9 +335,10 @@ def extended_diagnostics(checker, s, D):
                 return None
             parent_owner, parent_record = parent_target
             parent_field_name = record_expr.parent_field
-            field = parent_record.fields.get(parent_field_name)
+            parent_fields = _record_fields(parent_record)
+            field = parent_fields.get(parent_field_name)
             if field is None and parent_field_name:
-                field = parent_record.fields.get(parent_field_name.rsplit(".", 1)[-1])
+                field = parent_fields.get(parent_field_name.rsplit(".", 1)[-1])
             target = _resolve_field_record_ast(checker, parent_owner, field)
             record_target_cache[key] = target
             return target
@@ -299,6 +352,8 @@ def extended_diagnostics(checker, s, D):
         return target
 
     for record_expr in s.ast.record_expressions:
+        if record_expr.context == "pattern":
+            continue
         target_ref = resolve_record_expression_target(record_expr)
         if target_ref is None:
             continue
@@ -308,15 +363,16 @@ def extended_diagnostics(checker, s, D):
         # valid Agda record layouts are currently tree-sitter grammar gaps and
         # yield an empty field map; treating that as "record has no fields"
         # manufactures TSAGDA060/062 false positives.
-        if not target.fields:
+        if not target.field_surface_complete:
             continue
         assignments = _assignment_map(record_expr)
+        target_fields = _record_fields(target)
 
         def target_field_name(name):
-            if name in target.fields:
+            if name in target_fields:
                 return name
             short = name.rsplit(".", 1)[-1]
-            if short in target.fields:
+            if short in target_fields:
                 return short
             return None
 
@@ -333,13 +389,13 @@ def extended_diagnostics(checker, s, D):
             if names.count(name) > 1:
                 duplicate = next(a for resolved, _, a in normalized if resolved == name)
                 out.append(_diag(D, "TSAGDA061", f"field {name} is assigned more than once", s, duplicate.line))
-        missing = [name for name in target.fields if name not in names]
-        if missing:
+        missing = [name for name in target_fields if name not in names]
+        if missing and not record_expr.is_update:
             out.append(_diag(D, "TSAGDA062", f"record {target.name} is missing fields: {', '.join(missing)}", s, record_expr.line))
         for resolved, original, assignment in normalized:
-            field = target.fields.get(resolved) if resolved is not None else None
+            field = target_fields.get(resolved) if resolved is not None else None
             name = resolved or original
-            if field is None or field.type_node is None or assignment.expr_node is None:
+            if field is None or assignment.expr_node is None:
                 continue
             lambda_node = next((n for n in assignment.expr_node.named_children if n.type == "lambda"), None)
             if lambda_node is None:
@@ -351,7 +407,7 @@ def extended_diagnostics(checker, s, D):
                 if arrows:
                     before = tokens[:arrows[0]]
                     got = sum(1 for token in before if token.node_type in {"id", "bid"} and token.text not in {"λ"})
-                want = explicit_arity(shape_from_node(target_owner.ast.source_bytes, field.type_node))
+                want = _field_explicit_arity(target_owner, field)
                 if want and got != want:
                     out.append(_diag(D, "TSAGDA064", f"field {name} lambda has {got} binders; target field has {want} explicit arguments", s, assignment.line))
 
@@ -627,7 +683,18 @@ def extended_diagnostics(checker, s, D):
             return
 
         temporary.append(module)
-        for dependency in sorted(set(summary.imports.values())):
+        import_targets = (
+            summary.imports.values()
+            if isinstance(summary.imports, dict)
+            else [target for _, target in summary.imports]
+        )
+        for dependency in sorted(set(import_targets)):
+            dependency_interface = checker.interface_for_module(dependency)
+            if dependency_interface is not None:
+                visit_import_cone(dependency_interface)
+                if cycle_found:
+                    break
+                continue
             dependency_path = checker.module_path(dependency)
             if not dependency_path.exists():
                 continue
@@ -726,12 +793,9 @@ def extended_diagnostics(checker, s, D):
 
     imported_projection_specs = {}
     for alias, mod in imported.items():
-        for rname, record in mod.ast.records.items():
-            for fname, field in record.fields.items():
-                arity = (
-                    explicit_arity(shape_from_node(mod.ast.source_bytes, field.type_node))
-                    if field.type_node is not None else 0
-                )
+        for rname, record in mod.record_map.items():
+            for fname, field in record.field_map.items():
+                arity = _field_explicit_arity(mod, field)
                 imported_projection_specs[f"{alias}.{fname}"] = (mod, rname, field, 1 + arity)
 
     app_head_spans = []
@@ -752,7 +816,7 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, "TSAGDA053", f"{app.head} is visibly over-applied ({got}>{want})", s, line, col))
 
         receiver = app.explicit_args[0].text.strip()
-        if receiver in mod.ast.records or receiver in mod.ast.signatures:
+        if receiver in mod.record_map or receiver in mod.signature_map:
             out.append(_diag(D, "TSAGDA051", f"{app.head} receives known declaration/type name {receiver} where a {owner} value is expected", s, line, col, severity="warning", confidence="medium"))
 
         containing = None
@@ -781,7 +845,7 @@ def extended_diagnostics(checker, s, D):
                         .replace(",", " ").split()
                     )
                     record_heads = {word.rsplit(".", 1)[-1] for word in words}
-                    imported_records = set(mod.ast.records)
+                    imported_records = set(mod.record_map)
                     mismatched = sorted((record_heads & imported_records) - {owner})
                     if mismatched:
                         out.append(_diag(D, "TSAGDA054", f"projection {app.head} belongs to {owner}, but receiver {receiver} is declared as {mismatched[0]}", s, line, col))
@@ -839,7 +903,13 @@ def extended_diagnostics(checker, s, D):
                         break
 
     # TSAGDA120/121/123: AST-backed rigid declaration sanity.
-    known_terms = set(s.ast.clauses) | set(ctors)
+    known_type_aliases = set()
+    for sname, sig in s.ast.signatures.items():
+        if sig.type_node is not None:
+            thead = terminal_head(shape_from_node(s.ast.source_bytes, sig.type_node))
+            if thead and (thead == "Set" or thead.startswith("Set") or thead.startswith("Setω") or thead == "Prop"):
+                known_type_aliases.add(sname)
+    known_terms = (set(s.ast.clauses) | set(ctors)) - known_type_aliases
     for rname, rec in s.ast.records.items():
         for fname, field in rec.fields.items():
             if field.type_node is None:
@@ -956,6 +1026,8 @@ def extended_diagnostics(checker, s, D):
     for token in root_tokens:
         if token.node_type != "qid" or "." not in token.text:
             continue
+        if token.text == s.module_name or token.text in s.imports.values():
+            continue
         alias = token.text.split(".", 1)[0]
         if alias not in known_aliases and alias not in local_prefixes and alias[:1].isupper():
             out.append(_diag(D, "TSAGDA022", f"qualified prefix {alias} is not a known import alias or local namespace", s, token.line, token.column, severity="warning", confidence="medium"))
@@ -1018,11 +1090,10 @@ def extended_diagnostics(checker, s, D):
                         out.append(_diag(D, "TSAGDA041", f"RHS {rhs_view.head} is a known function left unapplied in a saturated result position", s, clause.line, severity="warning", confidence="medium"))
 
     # TSAGDA048: AST parameterized module application arity.
-    module_params = {}
-    for alias, mod in imported.items():
-        outer_module = next((node for node in mod.ast.tree.root_node.named_children if node.type == "module"), None)
-        if outer_module is not None:
-            module_params[alias] = explicit_declaration_parameter_count(mod.ast.source_bytes, outer_module)
+    module_params = {
+        alias: mod.module_parameter_count
+        for alias, mod in imported.items()
+    }
 
     for macro in s.ast.module_macro_nodes:
         target, args = module_application_target_and_args(s.ast.source_bytes, macro)
@@ -1071,6 +1142,8 @@ def extended_diagnostics(checker, s, D):
         if record.constructor
     }
     for record_expr in s.ast.record_expressions:
+        if record_expr.context == "pattern":
+            continue
         owner = record_expr.owner_function
         if not owner:
             continue
@@ -1083,10 +1156,10 @@ def extended_diagnostics(checker, s, D):
             continue
         target_owner, target = target_ref
         for fname, assignment in _assignment_map(record_expr):
-            field = target.fields.get(fname)
-            if field is None or field.type_node is None or assignment.expr_node is None:
+            field = _record_fields(target).get(fname)
+            if field is None or assignment.expr_node is None:
                 continue
-            field_head = terminal_head(shape_from_node(target_owner.ast.source_bytes, field.type_node))
+            field_head = _field_terminal(target_owner, field)
             tokens = significant_tokens(s.ast.source_bytes, assignment.expr_node)
             if len(tokens) == 1 and tokens[0].text == "Set" and field_head not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
                 out.append(_diag(D, "TSAGDA200", f"adapter field {fname} supplies Set where target expects witness/result {field_head}", s, assignment.line))
@@ -1213,6 +1286,8 @@ def extended_diagnostics(checker, s, D):
     # TSAGDA071: known term supplied in a type/sort-valued record field.
     known_term_heads = set(clauses) | set(ctors)
     for record_expr in s.ast.record_expressions:
+        if record_expr.context == "pattern":
+            continue
         owner = record_expr.owner_function
         if not owner:
             continue
@@ -1220,11 +1295,12 @@ def extended_diagnostics(checker, s, D):
         if target_ref is None:
             continue
         target_owner, target = target_ref
+        target_fields = _record_fields(target)
         for fname, assignment in _assignment_map(record_expr):
-            field = target.fields.get(fname)
-            if field is None or field.type_node is None or assignment.expr_node is None:
+            field = target_fields.get(fname)
+            if field is None or assignment.expr_node is None:
                 continue
-            field_head = terminal_head(shape_from_node(target_owner.ast.source_bytes, field.type_node))
+            field_head = _field_terminal(target_owner, field)
             if field_head not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
                 continue
             ident = _single_identifier(s.ast.source_bytes, assignment.expr_node)

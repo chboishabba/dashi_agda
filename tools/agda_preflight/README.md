@@ -39,6 +39,515 @@ The checker must not attempt:
 - reflection/macro execution;
 - proof validity.
 
+## Interactive incremental workflow
+
+The production-facing hot path is now `dashi-agda`, not pytest:
+
+```bash
+dashi-agda diagnose DASHI/Biology/Everything.agda --profile
+dashi-agda next-error DASHI/Biology/Everything.agda --require-fix --json
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 7 --jobs 8
+```
+
+`diagnose` never invokes Agda. It uses a persistent SQLite/WAL source index
+under `.cache/agda_preflight/source-index.sqlite3` by default. The index stores
+module identity, source freshness/hash, direct import edges, dependency
+fingerprints and cached structural diagnostics.
+
+A warm unchanged rollup request performs:
+
+```text
+SQLite open
+  -> indexed dependency-closure query
+  -> stat closure files
+  -> return cached diagnostics
+```
+
+and the required performance invariant is:
+
+```text
+files_parsed = 0
+checker_instances = 0
+```
+
+If a source file changes, its structural public-API fingerprint is recomputed
+from exported signatures, record/data schemas, nested modules and explicit
+public re-export directives. Importers depend on that API fingerprint rather
+than the dependency's raw source hash. An implementation-only edit therefore
+reparses the leaf while reusing importer diagnostics; exported API changes
+still invalidate the affected importer chain.
+
+Every interactive request has request-local telemetry. JSON output includes
+per-stage milliseconds and counts such as:
+
+```text
+request.total
+db.open
+db.schema
+closure.lookup
+source.stat
+source.read
+source.hash
+parse.tree_sitter
+diagnostics.local
+fixes.generate
+semantic.catalog_lookup
+
+modules_in_closure
+files_stat
+files_parsed
+dirty_modules
+modules_cached
+diagnostics_cached
+diagnostics_recomputed
+semantic_snapshot_hits
+semantic_snapshot_misses
+```
+
+`dashi-agda benchmark` measures a cold temporary-index bootstrap separately
+from repeated warm requests and reports min/p50/p95/max warm latency plus the
+warm parse-count invariant.
+
+Diagnostics can also carry structured repair metadata:
+
+```text
+root_cause
+explanation
+expected
+found
+fixes[]
+  title
+  applicability = machine_safe | likely | speculative
+  rationale
+  validation = structural | scope | typecheck
+  edits[]
+```
+
+The current fix-enrichment layer covers high-value projection and record-field
+failures without weakening the diagnostic rules themselves.
+
+Every diagnostic also has a stable worktree-local ID. Agent workflows can ask
+for the highest-priority actionable error and, where an exact edit span exists,
+apply it explicitly:
+
+```bash
+dashi-agda next-error DASHI/Biology/Everything.agda --require-fix --json
+
+dashi-agda apply-fix DASHI/Biology/Everything.agda <diagnostic-id> \
+  --fix 0 \
+  --allow-likely
+```
+
+`machine_safe` edits may be applied directly. `likely` edits require the
+explicit `--allow-likely` gate. `speculative` fixes are never machine-applied.
+Record-field edits additionally require value-expression provenance: assignments
+that occur in a record pattern on a function LHS can be diagnosed as pattern
+syntax but are never validated against the result record or exposed as machine
+edits.
+
+`apply_fix` reporting `resolved=true` means that the original structural
+diagnostic ID disappeared after the edit. It is not a semantic proof. Likely
+repairs remain provisional until an explicit promotion/Agda boundary validates
+them.
+After an edit, `apply-fix` immediately re-runs structural diagnosis through
+the persistent index and reports whether the original diagnostic ID vanished.
+It does not invoke Agda.
+
+The benchmark command is also an executable performance gate. Defaults are:
+
+```text
+cold bootstrap     <= 60,000 ms
+warm diagnose p95   <= 10,000 ms
+warm isolated next-error p95 <= 2,000 ms
+trusted-session next-error p95 <= 50 ms
+every warm/agent run parses zero files
+```
+
+A benchmark exits nonzero if any of those conditions fail. The benchmark
+reports `agent_next_error.request_total` separately from the full warm
+diagnostic report so agent iteration latency cannot be hidden by aggregate
+diagnostic JSON decoding.
+
+Persistent cache validity is also analyzer-semantic rather than Git-head based.
+The source index stores two analyzer fingerprints:
+
+```text
+interface analyzer fingerprint
+  ast_index + shapes + interfaces + tree-sitter versions
+
+diagnostic analyzer fingerprint
+  interface fingerprint + checker/rules/evidence/fix machinery
+```
+
+A diagnostic-only implementation change preserves persisted interfaces and the
+module graph while invalidating diagnostic/top-candidate payloads. An
+interface/parser semantic change invalidates both layers. Unrelated repository
+commits do not discard the cache.
+
+
+### Parallel cold bootstrap
+
+A genuinely cold target now uses two parallel tree-sitter phases and one parent
+SQLite transaction:
+
+```text
+parallel interface discovery
+  -> parse each module once
+  -> dependency closure + immutable imported-module interfaces
+  -> parallel structural diagnostic batches
+       parse each target module once
+       imported context comes from immutable interfaces
+  -> parent computes API/dependency fingerprints
+  -> one SQLite/WAL batch transaction
+```
+
+The intentional from-empty-database cold parse floor is therefore approximately
+**2.0x** the unique closure: one parse to construct each reusable interface and
+one parse for each module's own local diagnostics. The diagnostic phase itself
+should remain at **1.0x** regardless of shared dependency depth.
+
+Interfaces are persisted in source-index schema v3. On a later subject rollup,
+closure discovery checks SQLite before scheduling phase-A work. A fresh cached
+module contributes its import graph and immutable interface without parsing.
+After current API/dependency fingerprints are recomputed, a module whose stored
+dependency fingerprint still matches also reuses its cached diagnostics and is
+removed from phase B entirely.
+
+Consequently a new subject sharing already-indexed foundations pays only for
+new/stale modules rather than a fixed 2x cost over the whole transitive closure.
+The same persisted interfaces are exposed lazily to the ordinary incremental
+Checker path, so editing one consumer can still require exactly one source parse
+even when its diagnostics inspect imported records or projections.
+
+Workers never write SQLite. This avoids WAL contention and lets each process
+reuse parsed dependency summaries across its assigned chunk.
+
+`--jobs 0` selects up to eight workers automatically; `--jobs 1` keeps the
+legacy sequential refresh path. For the large Biology rollup, compare the new
+cold path explicitly rather than relying on one wall-clock number:
+
+```bash
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 3 --jobs 2 --json
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 3 --jobs 4 --json
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 3 --jobs 8 --json
+```
+
+Cold telemetry includes:
+
+```text
+cold.import_discovery        wall time
+cold.parallel_diagnostics    wall time
+cold.worker_parse            cumulative worker parse time
+cold.worker_diagnostics      cumulative worker rule time
+db.batch_write               one parent transaction
+
+cold_workers
+cold_modules_discovered
+cold_interface_files_parsed
+cold_interface_cache_hits
+cold_interface_cache_misses
+cold_diagnostic_cache_hits
+cold_diagnostic_cache_misses
+cold_diagnostic_targets
+cold_batches
+cold_batch_dependency_surface
+cold_predicted_amplification_milli
+cold_worker_files_parsed
+cold_parse_amplification_milli
+cold_interface_parse_savings
+cold_total_files_parsed
+cold_total_parse_amplification_milli
+```
+
+`cold_worker_files_parsed` deliberately counts dependency parses inside
+workers as well as requested modules. Cold diagnostic targets are now
+partitioned by dependency affinity: each module's transitive dependency set is
+computed from the lightweight import graph, large cones are scheduled first,
+and targets are assigned to a balanced worker whose existing dependency
+surface would grow the least.
+
+Two amplification ratios distinguish scheduler quality from the representation
+limit:
+
+```text
+cold_predicted_amplification_milli
+    scheduler's dependency-surface overlap / unique closure
+
+cold_parse_amplification_milli
+    actual worker parses / unique closure
+
+cold_unpredicted_parse_overhead
+    actual parses beyond the scheduler's predicted dependency surface
+```
+
+The immutable imported-module interface now removes that imported AST parse
+cost entirely from phase B. Consequently:
+
+```text
+cold_parse_amplification_milli
+    should be ~1000 (one local diagnostic parse per module)
+
+cold_total_parse_amplification_milli
+    should be ~2000 (interface parse + local diagnostic parse)
+
+cold_interface_parse_savings
+    dependency-context parses avoided relative to the affinity scheduler's
+    dependency surface
+```
+
+If phase-B amplification rises materially above 1000, an interface lookup has
+fallen back to source parsing and should be treated as a correctness/performance
+regression. Once the 2x floor is confirmed, the next possible cold optimization
+is to reuse/persist interface snapshots so unchanged modules do not need the
+phase-A parse on a fresh diagnostic database.
+
+### Last-known-good semantic catalog
+
+The source index can optionally join against the existing `agda2lean`
+SQLite catalog:
+
+```bash
+dashi-agda diagnose DASHI/Biology/Everything.agda \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite \
+  --json
+```
+
+This exposes existing semantic module object hashes, declaration counts and
+term counts without invoking Agda. `agda2lean` catalog schema v3 can also
+store the exact SHA256 of the Agda source accepted for each semantic module
+head. The source index compares that checked hash with its current source hash:
+
+```text
+fresh
+    checked_source_sha256 == current source_sha256
+
+stale
+    both hashes are known and differ
+
+unknown
+    legacy catalog row has no checked source hash
+```
+
+The long-lived service accepts the same catalog:
+
+```bash
+dashi-agda-server \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite
+```
+
+Its `next_error` result includes semantic freshness for the diagnostic's
+module, and the JSONL `semantic_status` method reports fresh/stale/unknown
+counts for an indexed subject closure without invoking Agda.
+
+Semantic promotion is a separate, explicit operation. Configure a promoter
+command when starting the service; diagnose/next_error/apply_fix never invoke
+it:
+
+```bash
+dashi-agda-server \
+  --root . \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite \
+  --promoter-command '/path/to/agda2lean/scripts/a2l_project.py promote --source-root {root} --entry {module} --backend /path/to/agda2lean-agda --emitter /path/to/agda2lean --catalog {catalog} --cache-root /path/to/cache --jobs 4 --receipt {receipt}'
+```
+
+The service substitutes `{file}`, `{module}`, `{root}`, `{catalog}` and
+`{receipt}` without using a shell. A promotion request is fail-closed:
+
+```text
+current source SHA
+    -> explicit external promoter
+    -> re-index current source after promoter exits
+    -> reopen semantic catalog
+    -> checked_source_sha256 must equal post-run current source SHA
+    -> only then status = promoted
+```
+
+Exit code zero alone is not promotion evidence. If the command succeeds but the
+catalog head is absent or stale, the result is `unverified`. If the source
+changes while the external checker is running, the post-run SHA comparison
+detects the race and promotion remains unverified.
+
+Every attempt is persisted in source-index schema v5 with requested/current
+source hashes, promoter return code, semantic freshness, bounded stdout/stderr
+tails and the promoter's own JSON receipt.
+
+Pytest remains the regression/full-audit surface for the checker itself; it is
+not the normal agent runtime.
+
+### Long-lived agent service
+
+For repeated agent work, `dashi-agda-server` keeps the SQLite/WAL connection
+and persistent source index alive across requests:
+
+```bash
+dashi-agda-server \
+  --root . \
+  --index .cache/agda_preflight/source-index.sqlite3 \
+  --jobs 8
+```
+
+The service speaks newline-delimited JSON on stdin/stdout. Example requests:
+
+```json
+{"id":1,"method":"next_error","params":{"target":"DASHI/Biology/Everything.agda","require_fix":true}}
+{"id":2,"method":"apply_fix","params":{"target":"DASHI/Biology/Everything.agda","diagnostic_id":"...","fix_index":0,"allow_likely":true}}
+{"id":3,"method":"promote","params":{"target":"DASHI/Biology/SomeFixedModule.agda"}}
+{"id":4,"method":"promotion_history","params":{"module_name":"DASHI.Biology.SomeFixedModule","limit":10}}
+{"id":5,"method":"semantic_status","params":{"target":"DASHI/Biology/Everything.agda"}}
+{"id":6,"method":"affected","params":{"target":"DASHI/Biology/SomeFixedModule.agda"}}
+{"id":7,"method":"cache_status","params":{}}
+{"id":8,"method":"shutdown","params":{}}
+```
+
+Supported methods are currently:
+
+```text
+diagnose
+next_error
+apply_fix
+semantic_status
+affected
+promote
+promotion_history
+cache_status
+ping
+shutdown
+```
+
+The process is persistent, while parsed module/checker state remains
+request-local: `SourceIndex.begin_request()` still clears live AST/checker
+objects before every operation. After one rollup has been filesystem-validated
+in a long-lived service session, however, compact closure/candidate state is
+marked trusted. The service builds two in-memory priority heaps per trusted
+rollup (all candidates and fixable candidates), so repeated `next_error` calls
+are heap peeks rather than recursive closure SQL + JSON decoding. Diagnostic IDs
+are also indexed in memory for the normal `next_error -> apply_fix` loop.
+
+API-stable edits update only the changed module's heap generation; API-changing
+edits invalidate trusted rollups containing that module. Explicit
+`refresh(target)` uses the same API-stability rule for out-of-band editor/git
+changes. Scoped `affected` calls continue to reuse the trusted closure and
+reverse-import graph.
+
+Heap invalidation is lazy, with bounded compaction after repeated replacements,
+so long repair sessions remain proportional to live module candidates rather
+than the number of historical fixes.
+SQLite state, WAL/page cache, interfaces, diagnostics and analyzer identities
+remain persistent.
+
+The JSONL service is the transport-independent core. The optional MCP adapter
+maps directly onto the same service methods; it does not reimplement repository
+traversal, cache invalidation, diagnostics or fix application.
+
+### MCP agent interface
+
+Install the optional MCP SDK extra on Python 3.10+:
+
+```bash
+pip install -e 'tools/agda_preflight[mcp]'
+```
+
+Then a local MCP host can launch the persistent stdio server directly:
+
+```bash
+dashi-agda-mcp \
+  --root /path/to/dashi_agda \
+  --index /path/to/dashi_agda/.cache/agda_preflight/source-index.sqlite3 \
+  --jobs 8
+```
+
+A typical stdio MCP host configuration is:
+
+```json
+{
+  "mcpServers": {
+    "dashi-agda": {
+      "command": "/path/to/dashi_agda/.venv/bin/dashi-agda-mcp",
+      "args": [
+        "--root", "/path/to/dashi_agda",
+        "--index", "/path/to/dashi_agda/.cache/agda_preflight/source-index.sqlite3",
+        "--jobs", "8"
+      ]
+    }
+  }
+}
+```
+
+The registered MCP tools are:
+
+```text
+diagnose            read-only structural diagnostics for a target/rollup
+next_error          read-only highest-priority diagnostic
+affected            read-only reverse-import consumer frontier; optionally scoped by within=Subject/Everything.agda
+cache_status        read-only persistent cache/index + trusted-session heap statistics
+semantic_status     read-only fresh/stale/unknown semantic snapshots
+apply_fix           source mutation through exact suggested edits
+promote             explicit fail-closed external semantic promotion
+promotion_history   read-only persisted promotion receipts
+ping                liveness
+```
+
+For MCP, `diagnose` defaults to at most 200 returned diagnostics and reports
+`diagnostics_total`, `diagnostics_returned`, and
+`diagnostics_truncated`. This prevents a large rollup from flooding agent
+context. Use `next_error` for the normal iterative repair loop.
+
+`affected` is explicit about completeness. Without `within`, it returns the
+frontier among modules already present in the persistent index and labels the
+scope `indexed-cache-only`. Passing, for example,
+
+```json
+{"target":"DASHI/Biology/Foo.agda","within":"DASHI/Biology/Everything.agda"}
+```
+
+first ensures that subject closure is indexed and returns only consumers inside
+it, labeled `subject-closure`.
+
+The mutation boundary is intentional:
+
+```text
+diagnose / next_error / affected / cache_status / semantic_status
+    never invoke Agda and never edit source
+
+apply_fix
+    may edit source, but only through an exact stored fix span
+    speculative fixes are rejected
+    likely fixes require allow_likely=true
+
+promote
+    is the explicit external semantic-check boundary
+    and succeeds only when the post-run semantic catalog proves freshness
+```
+
+The MCP process owns one long-lived `DashiAgdaService`, so SQLite/WAL state,
+OS page cache, persisted interfaces, diagnostic summaries, trusted closure
+membership and the reverse-import graph are reused across tool calls. Each
+request still calls `SourceIndex.begin_request()` so live AST/checker objects
+never leak between requests. Once a rollup is trusted, external filesystem edits
+are intentionally not discovered by repeatedly statting thousands of files;
+call `refresh(target)` when edits may have occurred outside the MCP service.
+
+MCP SDK v2 runs synchronous handlers on worker threads, while the analysis
+service owns a thread-affine SQLite connection. The adapter therefore registers
+all MCP tools as async wrappers that execute the synchronous service call
+directly on the server event-loop thread. Calls are intentionally serialized at
+that boundary; this preserves SQLite affinity and prevents concurrent source
+mutation races in `apply_fix` / `promote`.
+
+For a configured agda2lean semantic catalog/promoter, pass the same options as
+the JSONL service:
+
+```bash
+dashi-agda-mcp \
+  --root /path/to/dashi_agda \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite \
+  --promoter-command '/path/to/promoter ... {file} ... {receipt}'
+```
+
+The MCP adapter uses the official SDK-v2 `MCPServer` API. The MCP dependency is
+kept optional so the core analyzer and its Python 3.9 floor do not depend on the
+SDK runtime.
+
 ## Current implementation status
 
 The frontend is now **tree-sitter-first and regex-free for Agda syntax parsing**.
@@ -348,11 +857,11 @@ heuristic families are emitted as warnings.
 ### Modules / imports / names
 
 - `TSAGDA020` imported repository module does not exist
-- `TSAGDA021` qualified symbol not exported by the apparent module; requires `AGDA_SCOPE` for a hard conclusion
+- `TSAGDA021` unknown qualified symbol on a known module alias
 - `TSAGDA022` malformed/unknown import alias use
-- `TSAGDA023` apparent unknown symbol in `using (...)`; requires `AGDA_SCOPE`
+- `TSAGDA023` unknown symbol in `using (...)`
 - `TSAGDA024` unknown symbol in `hiding (...)`
-- `TSAGDA025` apparent unknown renaming source; requires `AGDA_SCOPE`
+- `TSAGDA025` unknown renaming source
 - `TSAGDA026` open/renaming collision
 - `TSAGDA027` ambiguous unqualified exported name from multiple opens
 - `TSAGDA028` conflicting aliases for imports
@@ -434,6 +943,7 @@ These checks are intentionally restricted to simple non-indexed datatypes.
 - `TSAGDA087` trivial missing finite constructor case
 - `TSAGDA088` clause visibly unreachable after catch-all
 - `TSAGDA089` duplicate constructor branch
+- `TSAGDA090` qualified field in record construction
 
 ### Equality combinator structure
 
@@ -530,6 +1040,15 @@ report:
 - `TSAGDA206` same-carrier adapter visibly switches carrier family
 - `TSAGDA207` bidi source/target outer shapes disagree
 - `TSAGDA208` factor-through/admissibility bridge visibly uses another carrier family
+
+### Native Agda diagnostics
+
+- `TSAGDA300` `PatternShadowsConstructor`
+- `TSAGDA301` `RewritesNothing`
+- `TSAGDA302` `UserWarning` / deprecation
+- `TSAGDA390` `ParseError`
+- `TSAGDA398` other named/unnamed native Agda error
+- `TSAGDA399` other named/unnamed native Agda warning
 
 ## One-command triage workflow
 

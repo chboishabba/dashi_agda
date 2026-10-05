@@ -26,7 +26,7 @@ module DASHI.Physics.Foundations.SmithChartComplexReflectionExact where
 -- without asserting an unsafe division implementation here.
 ------------------------------------------------------------------------
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (zero)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; refl)

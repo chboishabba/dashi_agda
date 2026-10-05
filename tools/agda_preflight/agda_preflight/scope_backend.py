@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 import shlex
 import subprocess
 from typing import List, Protocol, Sequence, Set, Tuple
 
+from .agda_output import NativeAgdaDiagnostic, parse_agda_diagnostics
 from .evidence import EvidenceLevel, evidence_name, policy_for
 
 
@@ -15,6 +17,48 @@ DiagnosticKey = Tuple[str, int, int]
 
 def diagnostic_key(diagnostic) -> DiagnosticKey:
     return (diagnostic.code, diagnostic.line, diagnostic.column)
+
+
+def _append_native_diagnostics(
+    diagnostics: List,
+    native: Sequence[NativeAgdaDiagnostic],
+    level: EvidenceLevel,
+) -> List:
+    if not native:
+        return diagnostics
+
+    # Local import avoids a module cycle: Checker owns the public Diagnostic
+    # type while checker instances receive these backends from the CLI/plugin.
+    from .checker import Diagnostic
+
+    out = list(diagnostics)
+    existing = {
+        (diag.code, str(diag.path), diag.line, diag.column, diag.message)
+        for diag in out
+    }
+    evidence = evidence_name(level)
+    for item in native:
+        key = (item.code, str(item.path), item.line, item.column, item.message)
+        if key in existing:
+            continue
+        existing.add(key)
+        out.append(
+            Diagnostic(
+                item.code,
+                item.message,
+                item.path,
+                item.line,
+                item.column,
+                hint=f"Native Agda diagnostic class: {item.agda_class}.",
+                severity=item.severity,
+                confidence="agda-confirmed",
+                evidence=evidence,
+                minimum_evidence=evidence,
+                evidence_sufficient=True,
+                root_cause=f"Agda {item.agda_class}",
+            )
+        )
+    return out
 
 
 @dataclass(frozen=True)
@@ -48,7 +92,23 @@ class ExternalScopeBackend:
     ):
         if isinstance(command, str):
             command = shlex.split(command)
-        self.command = tuple(command)
+
+        env_overrides = {}
+        command_parts = list(command)
+        while command_parts:
+            part = command_parts[0]
+            if "=" not in part or part.startswith("="):
+                break
+            key, value = part.split("=", 1)
+            if not key or not all(ch.isalnum() or ch == "_" for ch in key):
+                break
+            if key[0].isdigit():
+                break
+            env_overrides[key] = value
+            command_parts.pop(0)
+
+        self.command = tuple(command_parts)
+        self.env_overrides = env_overrides
         self.cwd = cwd
         self.timeout = timeout
 
@@ -60,9 +120,12 @@ class ExternalScopeBackend:
 
     def _run(self, path: Path) -> ScopeRefinement:
         try:
+            env = os.environ.copy()
+            env.update(self.env_overrides)
             completed = subprocess.run(
                 self._argv(path),
                 cwd=self.cwd,
+                env=env,
                 text=True,
                 capture_output=True,
                 timeout=self.timeout,
@@ -143,7 +206,8 @@ class CommandScopeCheckBackend:
     The command receives the absolute module path as its final argument unless
     the literal placeholder {file} appears in argv. Exit status 0 means the
     module scope-check succeeded; any nonzero status leaves structural scope
-    suspicions unresolved.
+    suspicions unresolved. Native Agda-looking diagnostics emitted by the
+    command are retained independently of the exit status.
     """
 
     def __init__(
@@ -155,7 +219,23 @@ class CommandScopeCheckBackend:
     ):
         if isinstance(command, str):
             command = shlex.split(command)
-        self.command = tuple(command)
+
+        env_overrides = {}
+        command_parts = list(command)
+        while command_parts:
+            part = command_parts[0]
+            if "=" not in part or part.startswith("="):
+                break
+            key, value = part.split("=", 1)
+            if not key or not all(ch.isalnum() or ch == "_" for ch in key):
+                break
+            if key[0].isdigit():
+                break
+            env_overrides[key] = value
+            command_parts.pop(0)
+
+        self.command = tuple(command_parts)
+        self.env_overrides = env_overrides
         self.cwd = cwd
         self.timeout = timeout
         self.attempted = 0
@@ -164,6 +244,7 @@ class CommandScopeCheckBackend:
         self.last_checked_modules: Tuple[str, ...] = ()
         self.last_partial_validated_modules: Tuple[str, ...] = ()
         self.partial_validated_modules: Set[str] = set()
+        self.last_native_diagnostics: Tuple[NativeAgdaDiagnostic, ...] = ()
 
     @staticmethod
     def _checked_modules(output: str) -> Tuple[str, ...]:
@@ -171,6 +252,8 @@ class CommandScopeCheckBackend:
         seen = set()
         for raw_line in output.splitlines():
             line = raw_line.strip()
+            if line.startswith("(") and ") Checking " in line:
+                line = line.split(") ", 1)[1].strip()
             if not line.startswith("Checking "):
                 continue
             if line.startswith("Checking:"):
@@ -194,9 +277,12 @@ class CommandScopeCheckBackend:
         self.attempted += 1
         output = ""
         try:
+            env = os.environ.copy()
+            env.update(self.env_overrides)
             completed = subprocess.run(
                 self._argv(path),
                 cwd=self.cwd,
+                env=env,
                 text=True,
                 capture_output=True,
                 timeout=self.timeout,
@@ -210,6 +296,7 @@ class CommandScopeCheckBackend:
             output = stdout + "\n" + stderr
             ok = False
 
+        self.last_native_diagnostics = tuple(parse_agda_diagnostics(output))
         checked = self._checked_modules(output)
         self.last_checked_modules = checked
         self.last_partial_validated_modules = checked if ok else checked[:-1]
@@ -222,13 +309,19 @@ class CommandScopeCheckBackend:
         return ok
 
     def refine(self, summary, diagnostics: List):
-        if not self._scope_ok(summary.path):
-            return diagnostics
-        return [
-            diagnostic
-            for diagnostic in diagnostics
-            if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
-        ]
+        ok = self._scope_ok(summary.path)
+        current = list(diagnostics)
+        if ok:
+            current = [
+                diagnostic
+                for diagnostic in current
+                if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
+            ]
+        return _append_native_diagnostics(
+            current,
+            self.last_native_diagnostics,
+            EvidenceLevel.AGDA_SCOPE,
+        )
 
 
 class AgdaScopeCheckBackend:
@@ -236,7 +329,8 @@ class AgdaScopeCheckBackend:
 
     Success means scope-dependent structural suspicions are false positives for
     that module and can be removed. Failure does not identify a specific
-    TSAGDA suspicion, so diagnostics remain advisory rather than being promoted.
+    TSAGDA suspicion, but native Agda warnings/errors are retained as compiler
+    diagnostics rather than being reduced to the process exit status.
     """
 
     def __init__(
@@ -254,9 +348,11 @@ class AgdaScopeCheckBackend:
         self.attempted = 0
         self.succeeded = 0
         self.failed = 0
+        self.last_native_diagnostics: Tuple[NativeAgdaDiagnostic, ...] = ()
 
     def _scope_ok(self, path: Path) -> bool:
         self.attempted += 1
+        output = ""
         try:
             completed = subprocess.run(
                 [
@@ -271,9 +367,14 @@ class AgdaScopeCheckBackend:
                 timeout=self.timeout,
                 check=False,
             )
+            output = (completed.stdout or "") + "\n" + (completed.stderr or "")
             ok = completed.returncode == 0
-        except subprocess.TimeoutExpired:
+        except subprocess.TimeoutExpired as exc:
+            stdout = exc.stdout.decode() if isinstance(exc.stdout, bytes) else (exc.stdout or "")
+            stderr = exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
+            output = stdout + "\n" + stderr
             ok = False
+        self.last_native_diagnostics = tuple(parse_agda_diagnostics(output))
         if ok:
             self.succeeded += 1
         else:
@@ -281,27 +382,27 @@ class AgdaScopeCheckBackend:
         return ok
 
     def refine(self, summary, diagnostics: List):
-        if not self._scope_ok(summary.path):
-            return diagnostics
-
-        out = []
-        for diagnostic in diagnostics:
-            policy = policy_for(diagnostic.code)
-            if policy.minimum == EvidenceLevel.AGDA_SCOPE:
-                # Successful Agda scope checking is stronger evidence than our
-                # structural suspicion for scope/name-resolution questions.
-                continue
-            out.append(diagnostic)
-        return out
+        ok = self._scope_ok(summary.path)
+        current = list(diagnostics)
+        if ok:
+            current = [
+                diagnostic
+                for diagnostic in current
+                if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
+            ]
+        return _append_native_diagnostics(
+            current,
+            self.last_native_diagnostics,
+            EvidenceLevel.AGDA_SCOPE,
+        )
 
 
 class AgdaTypecheckBackend:
     """Use a successful full Agda check as a negative oracle.
 
     If Agda accepts the module, structural suspicions that require AGDA_SCOPE
-    or AGDA_TYPECHECKER evidence are necessarily false positives. Policy/trust
-    diagnostics and syntax/index facts remain visible because Agda acceptance
-    does not invalidate those architectural constraints.
+    or AGDA_TYPECHECKER evidence are necessarily false positives. Native Agda
+    diagnostics are retained on both successful and failed runs.
     """
 
     def __init__(
@@ -319,9 +420,11 @@ class AgdaTypecheckBackend:
         self.attempted = 0
         self.succeeded = 0
         self.failed = 0
+        self.last_native_diagnostics: Tuple[NativeAgdaDiagnostic, ...] = ()
 
     def _typecheck_ok(self, path: Path) -> bool:
         self.attempted += 1
+        output = ""
         try:
             completed = subprocess.run(
                 [
@@ -335,9 +438,14 @@ class AgdaTypecheckBackend:
                 timeout=self.timeout,
                 check=False,
             )
+            output = (completed.stdout or "") + "\n" + (completed.stderr or "")
             ok = completed.returncode == 0
-        except subprocess.TimeoutExpired:
+        except subprocess.TimeoutExpired as exc:
+            stdout = exc.stdout.decode() if isinstance(exc.stdout, bytes) else (exc.stdout or "")
+            stderr = exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
+            output = stdout + "\n" + stderr
             ok = False
+        self.last_native_diagnostics = tuple(parse_agda_diagnostics(output))
         if ok:
             self.succeeded += 1
         else:
@@ -345,19 +453,49 @@ class AgdaTypecheckBackend:
         return ok
 
     def refine(self, summary, diagnostics: List):
-        if not self._typecheck_ok(summary.path):
-            return diagnostics
+        ok = self._typecheck_ok(summary.path)
+        current = list(diagnostics)
+        if ok:
+            current = [
+                diagnostic
+                for diagnostic in current
+                if policy_for(diagnostic.code).minimum
+                not in {
+                    EvidenceLevel.AGDA_SCOPE,
+                    EvidenceLevel.AGDA_TYPECHECKER,
+                }
+            ]
+        return _append_native_diagnostics(
+            current,
+            self.last_native_diagnostics,
+            EvidenceLevel.AGDA_TYPECHECKER,
+        )
 
-        out = []
-        for diagnostic in diagnostics:
-            policy = policy_for(diagnostic.code)
-            if policy.minimum in {
-                EvidenceLevel.AGDA_SCOPE,
-                EvidenceLevel.AGDA_TYPECHECKER,
-            }:
-                continue
-            out.append(diagnostic)
-        return out
+
+class CommandTypecheckBackend(CommandScopeCheckBackend):
+    """Use an arbitrary exit-code command as a full Agda typecheck oracle."""
+
+    def _typecheck_ok(self, path: Path) -> bool:
+        return self._scope_ok(path)
+
+    def refine(self, summary, diagnostics: List):
+        ok = self._typecheck_ok(summary.path)
+        current = list(diagnostics)
+        if ok:
+            current = [
+                diagnostic
+                for diagnostic in current
+                if policy_for(diagnostic.code).minimum
+                not in {
+                    EvidenceLevel.AGDA_SCOPE,
+                    EvidenceLevel.AGDA_TYPECHECKER,
+                }
+            ]
+        return _append_native_diagnostics(
+            current,
+            self.last_native_diagnostics,
+            EvidenceLevel.AGDA_TYPECHECKER,
+        )
 
 
 class AgdaAutoRefineBackend:
@@ -370,6 +508,8 @@ class AgdaAutoRefineBackend:
 
     This keeps the common path cheap while making large aggregate sweeps
     self-triaging instead of dumping every deferred suspicion on the user.
+    Native diagnostics are harvested from whichever probes actually run; auto
+    refinement does not become an unconditional full-repository typecheck.
     """
 
     def __init__(
@@ -382,6 +522,7 @@ class AgdaAutoRefineBackend:
         typecheck: bool = False,
         extra_args: Sequence[str] = (),
         scope_command: Sequence[str] | str | None = None,
+        typecheck_command: Sequence[str] | str | None = None,
     ):
         if scope_command is None:
             self.scope = AgdaScopeCheckBackend(
@@ -396,17 +537,28 @@ class AgdaAutoRefineBackend:
                 cwd=cwd,
                 timeout=scope_timeout,
             )
-        self.typecheck = AgdaTypecheckBackend(
-            agda_bin,
-            cwd=cwd,
-            timeout=typecheck_timeout,
-            extra_args=extra_args,
-        )
+        if typecheck_command is None:
+            self.typecheck = AgdaTypecheckBackend(
+                agda_bin,
+                cwd=cwd,
+                timeout=typecheck_timeout,
+                extra_args=extra_args,
+            )
+        else:
+            self.typecheck = CommandTypecheckBackend(
+                typecheck_command,
+                cwd=cwd,
+                timeout=typecheck_timeout,
+            )
         self.use_typecheck = typecheck
         self._scope_validated: Set[Path] = set()
         self._scope_failed: Set[Path] = set()
         self._scope_probe_roots: Set[Path] = set()
         self._scope_candidates: Set[Path] = set()
+        self._typecheck_validated: Set[Path] = set()
+        self._typecheck_failed: Set[Path] = set()
+        self._typecheck_probe_roots: Set[Path] = set()
+        self._typecheck_candidates: Set[Path] = set()
 
     @staticmethod
     def _key(path: Path) -> Path:
@@ -447,6 +599,40 @@ class AgdaAutoRefineBackend:
     def set_scope_candidates(self, paths) -> None:
         self._scope_candidates = {self._key(path) for path in paths}
 
+    def typecheck_known(self, path: Path) -> bool:
+        key = self._key(path)
+        return key in self._typecheck_validated or key in self._typecheck_failed
+
+    def typecheck_validated(self, path: Path) -> bool:
+        return self._key(path) in self._typecheck_validated
+
+    def typecheck_failed(self, path: Path) -> bool:
+        return self._key(path) in self._typecheck_failed
+
+    def probe_typecheck(self, path: Path, *, aggregate_root: bool = False) -> bool:
+        key = self._key(path)
+        if key in self._typecheck_validated:
+            return True
+        if key in self._typecheck_failed:
+            return False
+        ok = self.typecheck._typecheck_ok(key)
+        if aggregate_root:
+            self._typecheck_probe_roots.add(key)
+        if ok:
+            self._typecheck_validated.add(key)
+        else:
+            self._typecheck_failed.add(key)
+        return ok
+
+    def mark_typecheck_validated(self, paths) -> None:
+        for path in paths:
+            key = self._key(path)
+            self._typecheck_validated.add(key)
+            self._typecheck_failed.discard(key)
+
+    def set_typecheck_candidates(self, paths) -> None:
+        self._typecheck_candidates = {self._key(path) for path in paths}
+
     @staticmethod
     def _needs(diagnostics: List, level: EvidenceLevel) -> bool:
         return any(
@@ -476,10 +662,19 @@ class AgdaAutoRefineBackend:
                     getattr(self.scope, "partial_validated_modules", ())
                 ),
             },
+            "typecheck_cache": {
+                "validated_modules": len(self._typecheck_validated),
+                "failed_frontier_modules": len(self._typecheck_failed),
+                "aggregate_probe_roots": len(self._typecheck_probe_roots),
+                "candidate_modules": len(self._typecheck_candidates),
+                "partial_progress_modules": len(
+                    getattr(self.typecheck, "partial_validated_modules", ())
+                ),
+            },
         }
 
     def refine(self, summary, diagnostics: List):
-        current = diagnostics
+        current = list(diagnostics)
 
         if self._needs(current, EvidenceLevel.AGDA_SCOPE):
             path = summary.path.resolve()
@@ -490,36 +685,68 @@ class AgdaAutoRefineBackend:
                     if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
                 ]
             elif self.scope_failed(path):
-                # A closure prepass already established that this module is on
-                # the unresolved scope frontier. Do not launch the same failed
-                # process again during the pytest item.
                 return current
             else:
                 scope_ok = self.probe_scope(path)
+                current = _append_native_diagnostics(
+                    current,
+                    getattr(self.scope, "last_native_diagnostics", ()),
+                    EvidenceLevel.AGDA_SCOPE,
+                )
                 if scope_ok:
                     current = [
                         diagnostic
                         for diagnostic in current
                         if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
+                        or diagnostic.code.startswith("TSAGDA3")
                     ]
                 else:
-                    # Full typechecking cannot succeed if scope checking already
-                    # fails, so do not pay the more expensive oracle cost.
                     return current
 
-        if (
-            self.use_typecheck
-            and self._needs(current, EvidenceLevel.AGDA_TYPECHECKER)
-            and self.typecheck._typecheck_ok(summary.path)
-        ):
-            current = [
-                diagnostic
-                for diagnostic in current
-                if policy_for(diagnostic.code).minimum
-                not in {
-                    EvidenceLevel.AGDA_SCOPE,
+        if self.use_typecheck and self._needs(current, EvidenceLevel.AGDA_TYPECHECKER):
+            path = summary.path.resolve()
+            if self.typecheck_validated(path):
+                current = [
+                    diagnostic
+                    for diagnostic in current
+                    if policy_for(diagnostic.code).minimum
+                    not in {
+                        EvidenceLevel.AGDA_SCOPE,
+                        EvidenceLevel.AGDA_TYPECHECKER,
+                    }
+                    or diagnostic.code.startswith("TSAGDA3")
+                ]
+            elif not self.typecheck_failed(path):
+                typecheck_ok = self.probe_typecheck(path)
+                current = _append_native_diagnostics(
+                    current,
+                    getattr(self.typecheck, "last_native_diagnostics", ()),
                     EvidenceLevel.AGDA_TYPECHECKER,
-                }
-            ]
+                )
+                if typecheck_ok:
+                    current = [
+                        diagnostic
+                        for diagnostic in current
+                        if policy_for(diagnostic.code).minimum
+                        not in {
+                            EvidenceLevel.AGDA_SCOPE,
+                            EvidenceLevel.AGDA_TYPECHECKER,
+                        }
+                        or diagnostic.code.startswith("TSAGDA3")
+                    ]
 
         return current
+
+
+# Re-export the parser from the historical backend module for callers/tests that
+# treat scope_backend as the Agda subprocess integration surface.
+__all__ = [
+    "AgdaAutoRefineBackend",
+    "AgdaScopeCheckBackend",
+    "AgdaTypecheckBackend",
+    "CommandScopeCheckBackend",
+    "CommandTypecheckBackend",
+    "ExternalScopeBackend",
+    "NativeAgdaDiagnostic",
+    "parse_agda_diagnostics",
+]

@@ -23,12 +23,12 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.List.Base using (filter)
 import Data.List.Relation.Unary.All as All
-open import Data.Nat.Base using (_≤_; z≤n)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Nat.Divisibility using (_∣?_)
 import Data.Nat.Properties as NatP
 open import Data.Product using (proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; subst₂; sym; trans)
 
 import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 import DASHI.Mathematics.NumberTheory.FiniteDependentPairCardinalityExact as Card
@@ -75,14 +75,36 @@ sigma5Three = refl
 -- Monotonicity of natural powers.
 ------------------------------------------------------------------------
 
+powNatZero : (base : Nat) → Hecke.powNat base zero ≡ 1
+powNatZero zero = refl
+powNatZero (suc zero) = refl
+powNatZero (suc (suc n)) = refl
+
+powNatPositive : ∀ base exp → 1 ≤ Hecke.powNat (suc base) exp
+powNatPositive base zero =
+  subst (1 ≤_) (sym (powNatZero (suc base))) NatP.≤-refl
+powNatPositive zero (suc exp) = NatP.≤-refl
+powNatPositive (suc b) (suc exp) =
+  NatP.≤-trans
+    (powNatPositive (suc b) exp)
+    (NatP.m≤m+n
+      (Hecke.powNat (suc (suc b)) exp)
+      (suc b * Hecke.powNat (suc (suc b)) exp))
+
 powNatMonotone :
   (exponent : Nat) →
   ∀ {left right : Nat} →
   left ≤ right →
   Hecke.powNat left exponent ≤ Hecke.powNat right exponent
-powNatMonotone zero left≤right = NatP.≤-refl
-powNatMonotone (suc exponent) left≤right =
-  NatP.*-mono left≤right (powNatMonotone exponent left≤right)
+powNatMonotone zero {left} {right} left≤right =
+  subst₂ _≤_ (sym (powNatZero left)) (sym (powNatZero right)) NatP.≤-refl
+powNatMonotone (suc exponent) z≤n = z≤n
+powNatMonotone (suc exponent) (s≤s {zero} {zero} unusedStep) = NatP.≤-refl
+powNatMonotone (suc exponent) (s≤s {zero} {suc right'} unusedStep) =
+  powNatPositive (suc right') (suc exponent)
+powNatMonotone (suc exponent) (s≤s {suc left'} {zero} ())
+powNatMonotone (suc exponent) (s≤s {suc left'} {suc right'} p) =
+  NatP.*-mono-≤ (s≤s p) (powNatMonotone exponent (s≤s p))
 
 ------------------------------------------------------------------------
 -- Generic bounded filtered fold.
@@ -102,9 +124,11 @@ filteredWeightedFoldBound
   n bound weight (d ∷ ds) (All._∷_ d≤n rest) pointwise
   with d ∣? n
 ... | yes dividesProof =
-  NatP.+-mono
-    (pointwise d d≤n)
-    (filteredWeightedFoldBound n bound weight ds rest pointwise)
+  NatP.≤-trans
+    (NatP.+-mono-≤
+      (pointwise d d≤n)
+      (filteredWeightedFoldBound n bound weight ds rest pointwise))
+    (NatP.≤-reflexive (sym (NatP.*-suc bound (Reindex.listLength ds))))
 ... | no notDivides =
   NatP.≤-trans
     (filteredWeightedFoldBound n bound weight ds rest pointwise)
@@ -113,15 +137,22 @@ filteredWeightedFoldBound
   tail : Nat
   tail = bound * Reindex.listLength ds
 
-  tailBelowNext : tail ≤ bound + tail
+  tailBelowNext : tail ≤ bound * suc (Reindex.listLength ds)
   tailBelowNext =
     NatP.≤-trans
       (NatP.m≤m+n tail bound)
-      (NatP.≤-reflexive (NatP.+-comm tail bound))
+      (NatP.≤-trans
+        (NatP.≤-reflexive (NatP.+-comm tail bound))
+        (NatP.≤-reflexive (sym (NatP.*-suc bound (Reindex.listLength ds)))))
 
 ------------------------------------------------------------------------
 -- sigma_k(n) <= n^(k+1).
 ------------------------------------------------------------------------
+
+powNatSuc : (n exp : Nat) → n * Hecke.powNat n exp ≡ Hecke.powNat n (suc exp)
+powNatSuc zero exp = refl
+powNatSuc (suc zero) exp = refl
+powNatSuc (suc (suc n)) exp = refl
 
 sigmaPowerBound :
   (exponent n : Nat) →
@@ -130,7 +161,9 @@ sigmaPowerBound exponent n =
   NatP.≤-trans
     raw
     (NatP.≤-reflexive
-      (NatP.*-comm (Hecke.powNat n exponent) n))
+      (trans
+        (NatP.*-comm (Hecke.powNat n exponent) n)
+        (powNatSuc n exponent)))
   where
   raw :
     sigmaPower exponent n

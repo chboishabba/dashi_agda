@@ -77,15 +77,15 @@ record ActualMultiplicityTwelveSeventyEightAttachment
     blockRecognition :
       Split.TwelveSeventyEightRecognition
         (Fin 90)
-        MultiplicityInertia
+        (ActualMultiplicityInertiaAttachment.MultiplicityInertia inertiaAttachment)
         TwelveCarrier
         SeventyEightCarrier
 
     blockActionIsActualMultiplicityAction :
-      (inertia : MultiplicityInertia) →
+      (inertia : ActualMultiplicityInertiaAttachment.MultiplicityInertia inertiaAttachment) →
       (multiplicity : Fin 90) →
       Split.multiplicityAct blockRecognition inertia multiplicity
-      ≡ multiplicityAct inertia multiplicity
+      ≡ ActualMultiplicityInertiaAttachment.multiplicityAct inertiaAttachment inertia multiplicity
 
 open ActualMultiplicityTwelveSeventyEightAttachment public
 

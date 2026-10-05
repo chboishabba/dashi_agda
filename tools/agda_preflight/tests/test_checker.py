@@ -329,28 +329,6 @@ mk =
     assert any(d.code == "TSAGDA062" for d in hits)
 
 
-
-def test_qualified_record_field_assignment_matches_local_field_name(tmp_path):
-    path = write_module(
-        tmp_path,
-        "QualifiedRecordField",
-        """module QualifiedRecordField where
-
-record R : Set₁ where
-  field
-    A : Set
-
-mk : R
-mk =
-  record
-    { R.A = Set
-    }
-""",
-    )
-
-    hits = Checker(tmp_path).check(path)
-    assert not any(d.code in {"TSAGDA060", "TSAGDA062"} for d in hits)
-
 def test_obvious_negative_occurrence_is_reported(tmp_path):
     path = write_module(
         tmp_path,
@@ -987,4 +965,60 @@ mk =
         d.code in {"TSAGDA060", "TSAGDA062"}
         and d.line >= 12
         for d in diagnostics
+    )
+
+
+
+def test_record_update_inherits_unspecified_fields(tmp_path):
+    path = write_module(
+        tmp_path,
+        "RecordUpdate",
+        """module RecordUpdate where
+
+record R : Set₁ where
+  field
+    first : Set
+    second : Set
+
+base : R
+base =
+  record
+    { first = Set
+    ; second = Set
+    }
+
+updated : R
+updated =
+  record base
+    { second = Set
+    }
+
+incomplete : R
+incomplete =
+  record
+    { second = Set
+    }
+""",
+    )
+
+    checker = Checker(tmp_path)
+    summary = checker.parse_summary(path)
+    updates = [
+        item for item in summary.ast.record_expressions
+        if item.owner_function == "updated"
+    ]
+    assert updates
+    assert updates[0].is_update is True
+
+    diagnostics = checker.check(path)
+    update_missing = [
+        item for item in diagnostics
+        if item.code == "TSAGDA062"
+        and item.line == updates[0].line
+    ]
+    assert update_missing == []
+    assert any(
+        item.code == "TSAGDA062"
+        and "first" in item.message
+        for item in diagnostics
     )
