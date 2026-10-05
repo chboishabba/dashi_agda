@@ -1,0 +1,6 @@
+module DASHI.Governance.FederatedSubsidiarityGovernanceEverything where
+
+import DASHI.Governance.AuthorityMandateCore
+import DASHI.Governance.SituatedConstituency
+import DASHI.Governance.FederatedSubsidiarityGovernanceExact
+import DASHI.Governance.FederatedSubsidiarityGovernanceRegression
