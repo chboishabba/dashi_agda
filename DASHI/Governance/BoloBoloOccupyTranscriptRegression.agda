@@ -4,6 +4,15 @@ open import DASHI.Core.Prelude
 
 import DASHI.Governance.BoloBoloOccupyTranscriptSourceBoundaryExact as Source
 
+attachedTranscriptDigestPinned :
+  Source.sourceSHA256 Source.canonicalAttachedTranscriptArtifact
+  ≡ "cf41e893419cf0d39524d779937332e149d1ae01deb0b3df688a9a28772969f8"
+attachedTranscriptDigestPinned = refl
+
+attachedTranscriptEndsAt169Seconds :
+  Source.clipEndMillis Source.canonicalAttachedTranscriptArtifact ≡ 169000
+attachedTranscriptEndsAt169Seconds = refl
+
 occupyConsensusDifficultyIsAttributed :
   Source.consensusDifficultyIsAuthorInterpretation
     Source.canonicalBoloBoloOccupyTranscriptBoundary
