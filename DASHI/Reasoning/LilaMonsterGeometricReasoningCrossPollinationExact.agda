@@ -11,8 +11,21 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFunctionModuleExact as Schrodinger
 import DASHI.Moonshine.Monster3BFiniteSchrodingerHeisenbergActionExact as Action
 import DASHI.Moonshine.Monster3BFiniteSchrodingerFullActionLawExact as FullAction
+import DASHI.Physics.Closure.LilaE8InitialisationPriorNote as LilaPrior
 import DASHI.Reasoning.GeometricReasoningCandidateSelectionExact as Candidates
 import DASHI.Wikimedia.IbrahimMonster3BT1WordT2ScalarRoutingSnowballExact as T1T2
+
+------------------------------------------------------------------------
+-- 1. Existing provenance and distinct order-three lanes.
+------------------------------------------------------------------------
+
+lilaEngineeringPriorStatus : LilaPrior.LilaE8RelatedProjectNoteStatus
+lilaEngineeringPriorStatus = LilaPrior.canonicalLilaE8RelatedProjectNoteStatus
+
+lilaPriorCannotPromoteDASHIReceipt :
+  LilaPrior.DASHIReceiptPromotedByLilaE8RelatedProjectNote → ⊥
+lilaPriorCannotPromoteDASHIReceipt =
+  LilaPrior.lilaE8RelatedProjectNotePromotionImpossibleHere
 
 monster3ANormalizer : Branching.ThreeLocalNormalizerKind
 monster3ANormalizer = Branching.normalizerKind Branching.class3A
@@ -22,6 +35,10 @@ monster3BNormalizer = Branching.normalizerKind Branching.class3B
 
 monster3CNormalizer : Branching.ThreeLocalNormalizerKind
 monster3CNormalizer = Branching.normalizerKind Branching.class3C
+
+------------------------------------------------------------------------
+-- 2. Existing full 3B action and exact central cocycle diagnostic.
+------------------------------------------------------------------------
 
 monster3BActionComposition :
   (g h : H.Heisenberg6) →
@@ -37,10 +54,6 @@ monster3BFullActionLawReceipt = FullAction.canonicalFullHeisenbergActionLawRecei
 monster3BFullActionLawConsumed : Bool
 monster3BFullActionLawConsumed = true
 
--- The exact central composition term is the semantic composition diagnostic we
--- discussed: the phase of g*h contains b_g . a_h in addition to the two
--- individual central phases.  This is a donor theorem about the finite 3B
--- candidate action, not evidence that model interventions realize it.
 monster3BCentralCocycleDiagnostic :
   (g h : H.Heisenberg6) →
   H.centralPhase (H.compose g h)
@@ -52,6 +65,10 @@ monster3BCentralCocycleDiagnostic :
           (H.modulationPart (H.quotient g))
           (H.translationPart (H.quotient h))))
 monster3BCentralCocycleDiagnostic g h = refl
+
+------------------------------------------------------------------------
+-- 3. Candidate semantic-action and composition fitting sockets.
+------------------------------------------------------------------------
 
 record Monster3BSemanticActionFit
     (Intervention Input : Set)
@@ -82,6 +99,10 @@ record Monster3BCompositionFit
       ≡ H.compose (fitElement i) (fitElement j)
     provenance : String
 
+------------------------------------------------------------------------
+-- 4. t1/t2 relative-orientation source status.
+------------------------------------------------------------------------
+
 record RelativeOrientationDiagnostic : Set where
   constructor relative-orientation-diagnostic
   field
@@ -99,6 +120,10 @@ canonicalRelativeOrientationDiagnostic =
     (T1T2.exactMatrixElementPaid T1T2.extraspecialT2Routing)
     (T1T2.exactScalarOrientationPaid T1T2.extraspecialT2Routing)
     (T1T2.historicalQWordAlignmentPaid T1T2.extraspecialT2Routing)
+
+------------------------------------------------------------------------
+-- 5. Experiment board.
+------------------------------------------------------------------------
 
 record GeometricReasoningExperimentBoard : Set where
   constructor geometric-reasoning-experiment-board
@@ -126,6 +151,10 @@ canonicalExperimentBoard =
     Candidates.monster3CLocalGeometry
     true true true true true true true
 
+------------------------------------------------------------------------
+-- 6. Fail-closed promotions.
+------------------------------------------------------------------------
+
 data Monster3BActionCreatesSemanticMechanism : Set where
 data ThreeLocalLabelCreatesWinningModel : Set where
 data T1T2RoleCreatesRelativeOrientation : Set where
@@ -144,6 +173,8 @@ t1t2RoleCannotCreateOrientation ()
 record LilaMonsterGeometricReasoningBoundary : Set where
   constructor lila-monster-geometric-reasoning-boundary
   field
+    lilaEngineeringPriorProvenanceConsumed : Bool
+    lilaPriorPromotionFirewallConsumed : Bool
     threeAThreeBThreeCDistinct : Bool
     monster3BFullActionLawPaid : Bool
     centralCocycleDiagnosticPaid : Bool
@@ -159,4 +190,4 @@ canonicalLilaMonsterGeometricReasoningBoundary :
   LilaMonsterGeometricReasoningBoundary
 canonicalLilaMonsterGeometricReasoningBoundary =
   lila-monster-geometric-reasoning-boundary
-    true true true true true true false false true false
+    true true true true true true true true false false true false
