@@ -16,7 +16,7 @@ module DASHI.Reasoning.T5E8RelativeComplementCandidateExact where
 --
 -- and constructs a canonical three-state diagonal embedding into Kernel5.
 -- It DOES NOT identify the remaining states with E8 roots.  That promotion is
--- represented by an explicit two-sided recognition contract.
+-- represented by an explicit two-sided recognition + action-intertwining law.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -121,9 +121,19 @@ record E8RelativeComplementRecognition : Set₁ where
     relativeRoundTrip :
       (point : RelativeKernel5Point) →
       rootToRelative (relativeToRoot point) ≡ point
-    rootCountReceipt : Set
+
+    RootCount240Receipt : Set
+    rootCount240Receipt : RootCount240Receipt
     rootCountReceiptJustification : String
-    actionIntertwiningReceipt : Set
+
+    Action : Set
+    rootAction : Action → E8RootCarrier → E8RootCarrier
+    relativeAction : Action → RelativeKernel5Point → RelativeKernel5Point
+    actionIntertwining :
+      (g : Action) →
+      (root : E8RootCarrier) →
+      rootToRelative (rootAction g root)
+      ≡ relativeAction g (rootToRelative root)
     actionIntertwiningJustification : String
 
 open E8RelativeComplementRecognition public
