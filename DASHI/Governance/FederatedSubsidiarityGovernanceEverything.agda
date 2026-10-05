@@ -6,6 +6,7 @@ import DASHI.Governance.LocalGlobalCouncilGluing
 import DASHI.Governance.CouncilDelegationGraph
 import DASHI.Core.SocialEcologyHierarchyProjectionBoundaryExact
 import DASHI.Core.CriticalSocialEcologyObserverRegimeExact
+import DASHI.Core.IntersectionalNonFactorability
 import DASHI.Governance.RevolutionaryPracticeBraid
 import DASHI.Interop.PolisITIRDeliberationBoundary
 import DASHI.Governance.BoloBoloOccupyTranscriptSourceBoundaryExact
@@ -21,3 +22,7 @@ import DASHI.Governance.BoloBoloSocialEcologyCrossPollinationExact
 import DASHI.Governance.BoloBoloSocialEcologyCrossPollinationRegression
 import DASHI.Governance.FederatedPolisDeliberationBridgeExact
 import DASHI.Governance.FederatedPolisDeliberationBridgeRegression
+import DASHI.Governance.FederatedViabilityTransitionExact
+import DASHI.Governance.FederatedViabilityTransitionRegression
+import DASHI.Governance.ConsensusDemocracyNonFactorabilityExact
+import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
