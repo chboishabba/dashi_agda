@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanCompactHaarMassWeightedOscillationExact wh
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 1ℝ; _+ℝ_; _*ℝ_; absℝ; _-ℝ_; _≤ℝ_;
