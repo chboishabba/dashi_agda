@@ -8,13 +8,15 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 --
 -- Highest-information B4 route:
 --   literal critical row fold = principal + defect
---   principal <= (1/6) Mcore + cP ED
---   defect    <= (1/12) Mcore + cD ED
+--   principal <= thetaP Mcore + cP ED
+--   defect    <= thetaD Mcore + cD ED
+--   thetaP + thetaD < 1
 --   ------------------------------------------------
---   critical  <= (1/4) Mcore + (cP+cD) ED, with 1/4 < 1.
+--   critical  <= (thetaP+thetaD) Mcore + (cP+cD) ED.
 --
--- The compiler for the last line is closed.  What remains is the physical
--- principal/defect attachment on the literal critical row carrier.
+-- This generic strict-split compiler is the canonical B4 research interface.
+-- The older Gate-2A 1/6 + 1/12 = 1/4 route remains a lawful optional producer,
+-- but it is not required and is not treated as same-object evidence.
 --
 -- Remaining board after that:
 --   B1 literal rows -> ED
@@ -30,10 +32,11 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as Previous
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
 
 data PureBAnalyticLeaf : Set where
-  b4QuarterMarginPhysicalAttachment : PureBAnalyticLeaf
+  b4StrictSplitPhysicalAttachment : PureBAnalyticLeaf
   b1LiteralRowsED : PureBAnalyticLeaf
   b2LiteralRowsED : PureBAnalyticLeaf
   b3LiteralRowsED : PureBAnalyticLeaf
@@ -43,8 +46,8 @@ data PureBAnalyticLeaf : Set where
   bContinuationInputs : PureBAnalyticLeaf
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
-pureBLeafClosed b4QuarterMarginPhysicalAttachment =
-  Quarter.b4QuarterMarginPhysicalAttachmentClosedHere
+pureBLeafClosed b4StrictSplitPhysicalAttachment =
+  Split.b4StrictSplitPhysicalAttachmentClosedHere
 pureBLeafClosed b1LiteralRowsED =
   Previous.finalBLeafClosed Previous.b1LiteralRowsLocalED
 pureBLeafClosed b2LiteralRowsED =
@@ -61,19 +64,22 @@ pureBLeafClosed bContinuationInputs =
   Previous.finalBLeafClosed Previous.bContinuationInputs
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
-currentHighestInformationLeaf = b4QuarterMarginPhysicalAttachment
+currentHighestInformationLeaf = b4StrictSplitPhysicalAttachment
 
 b4DirectStrictMarginCompilerClosed : Bool
 b4DirectStrictMarginCompilerClosed = Previous.b4LiteralRowOperatorCompilerClosed
 
-b4QuarterMarginCompilerClosed : Bool
-b4QuarterMarginCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
+b4GenericStrictSplitCompilerClosed : Bool
+b4GenericStrictSplitCompilerClosed = Split.b4StrictSplitCompilerClosed
 
-b4QuarterThetaStrictlyBelowOne : Bool
-b4QuarterThetaStrictlyBelowOne = Quarter.b4QuarterThetaStrictlyBelowOne
+b4FixedQuarterMarginRequired : Bool
+b4FixedQuarterMarginRequired = Split.b4StrictSplitRequiresQuarterMargin
 
-b4ResearchLeafNowPrincipalPlusDefect : Bool
-b4ResearchLeafNowPrincipalPlusDefect = true
+b4QuarterMarginOptionalCompilerClosed : Bool
+b4QuarterMarginOptionalCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
+
+b4ResearchLeafNowStrictPrincipalPlusDefect : Bool
+b4ResearchLeafNowStrictPrincipalPlusDefect = true
 
 bLocalEDIndependentLeaf : Bool
 bLocalEDIndependentLeaf = Previous.localEDIndependentLeaf
@@ -90,17 +96,21 @@ pureAnalysisFrontierClosed = false
 clayPromotion : Bool
 clayPromotion = false
 
-b4QuarterMarginCompilerClosedIsTrue :
-  b4QuarterMarginCompilerClosed ≡ true
-b4QuarterMarginCompilerClosedIsTrue = refl
+b4GenericStrictSplitCompilerClosedIsTrue :
+  b4GenericStrictSplitCompilerClosed ≡ true
+b4GenericStrictSplitCompilerClosedIsTrue = refl
 
-b4QuarterThetaStrictlyBelowOneIsTrue :
-  b4QuarterThetaStrictlyBelowOne ≡ true
-b4QuarterThetaStrictlyBelowOneIsTrue = refl
+b4FixedQuarterMarginRequiredIsFalse :
+  b4FixedQuarterMarginRequired ≡ false
+b4FixedQuarterMarginRequiredIsFalse = refl
 
-b4ResearchLeafNowPrincipalPlusDefectIsTrue :
-  b4ResearchLeafNowPrincipalPlusDefect ≡ true
-b4ResearchLeafNowPrincipalPlusDefectIsTrue = refl
+b4QuarterMarginOptionalCompilerClosedIsTrue :
+  b4QuarterMarginOptionalCompilerClosed ≡ true
+b4QuarterMarginOptionalCompilerClosedIsTrue = refl
+
+b4ResearchLeafNowStrictPrincipalPlusDefectIsTrue :
+  b4ResearchLeafNowStrictPrincipalPlusDefect ≡ true
+b4ResearchLeafNowStrictPrincipalPlusDefectIsTrue = refl
 
 bLocalEDIndependentLeafIsFalse : bLocalEDIndependentLeaf ≡ false
 bLocalEDIndependentLeafIsFalse = refl
