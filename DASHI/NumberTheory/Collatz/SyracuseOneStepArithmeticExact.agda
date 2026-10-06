@@ -19,6 +19,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
+import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateCompilerExact as AffineCompiler
 
 instance
@@ -200,3 +201,7 @@ canonicalOneStepAffineSource = record
   { AffineCompiler.evenStepExact = evenStepExact
   ; AffineCompiler.oddStepExact = oddStepExact
   }
+
+canonicalAffineIterateSource : Affine.SyracuseAffineIterateSource
+canonicalAffineIterateSource =
+  AffineCompiler.compileAffineIterateSource canonicalOneStepAffineSource
