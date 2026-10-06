@@ -1,0 +1,38 @@
+name: Collatz Syracuse same-object Agda
+
+on:
+  push:
+    branches:
+      - collatz-syracuse-same-object-20261006
+  pull_request:
+    paths:
+      - 'DASHI/NumberTheory/Collatz/**'
+      - 'DASHI/Analysis/CollatzSyracuse*.agda'
+      - 'scripts/check_collatz_syracuse_*.py'
+      - 'scripts/check_collatz_syracuse_exact.sh'
+      - '.github/workflows/collatz-syracuse-same-object.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: collatz-syracuse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Python parity-cylinder calibration
+        run: python3 scripts/check_collatz_syracuse_parity_cylinder.py
+      - name: Python affine-iterate calibration
+        run: python3 scripts/check_collatz_syracuse_affine_iterate.py
+      - name: Static literal Syracuse audit
+        run: bash scripts/check_collatz_syracuse_exact.sh
+      - name: Typecheck Collatz/Syracuse max-cut root
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
