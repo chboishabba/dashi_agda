@@ -9,6 +9,7 @@ import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
 import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact as LibraryGraph
 import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Longitudinal
 import DASHI.Governance.OccupyLibraryMeetingDurationEvidenceExact as Duration
+import DASHI.Governance.OccupyMeetingPanelExact as Panel
 import DASHI.Governance.OccupyCoordinationBurdenExperimentDesignExact as BurdenDesign
 import DASHI.Governance.OccupyHeldOutMeetingValidationExact as HeldOut
 import DASHI.Governance.OccupyCoordinationCausalPromotionExact as Causal
@@ -55,6 +56,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     occupyArchiveCandidate : Archive.ArchivalIncidenceCandidate
     occupyLibraryObservedEdges : List LibraryGraph.ObservedEdge
     occupyLongitudinalObservedEdges : List Longitudinal.LongitudinalEdge
+    occupyDevelopmentMeetingPanel : List Panel.MeetingPanelRow
     oct15Duration : Duration.MeetingDurationObservation
     oct22Duration : Duration.MeetingDurationObservation
     prospectiveHeldOutPlan : HeldOut.ProspectiveHeldOutPlan
@@ -69,6 +71,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     boundedArchivalInteractionEvidencePresent : Bool
     boundedFiniteArchivalIncidenceGraphPresent : Bool
     longitudinalArchivalIncidenceFamilyPresent : Bool
+    sourceExplicitMeetingPanelPresent : Bool
     archivalProcessBurdenObservationsPresent : Bool
     measuredMeetingDurationEvidencePresent : Bool
     coordinationBurdenExperimentDesignPresent : Bool
@@ -89,6 +92,7 @@ canonicalFederatedGovernanceEvidenceInstantiation =
     Archive.adashSpokesCouncilCandidate
     LibraryGraph.canonicalObservedEdges
     Longitudinal.longitudinalObservedEdges
+    Panel.canonicalDevelopmentPanel
     Duration.oct15FirstFormalMeeting
     Duration.oct22Meeting
     HeldOut.canonicalProspectiveHeldOutPlan
@@ -98,6 +102,7 @@ canonicalFederatedGovernanceEvidenceInstantiation =
     Bookchin.canonicalBookchinConfederalismSourceBoundary
     Bookchin.canonicalBookchinDASHIAlignment
     SR15.canonicalSR15SourceBoundary
+    true
     true
     true
     true
@@ -130,6 +135,7 @@ record FederatedGovernanceEvidenceBoundary : Set where
     occupyArchivePaysBoundedNamedInteraction : Bool
     occupyArchivePaysBoundedFiniteIncidenceGraph : Bool
     occupyArchivePaysLongitudinalIncidenceFamily : Bool
+    occupyArchivePaysSourceExplicitMeetingPanel : Bool
     occupyArchivePaysProcessBurdenObservations : Bool
     occupyArchivePaysMeasuredMeetingDurations : Bool
     dashiPaysCoordinationBurdenExperimentDesign : Bool
@@ -173,6 +179,7 @@ canonicalFederatedGovernanceEvidenceBoundary =
     true
     true
     true
+    true
     false
     false
     false
@@ -187,6 +194,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed bolo'bolo, bounded and longitudinal Occupy archival incidence, archival process-strain and measured-duration observations, Occupy scholarship, external quantitative group-decision evidence, Bookchin confederalism, IPCC SR1.5 evidence, a DASHI-derived burden experiment-design frontier, prospective held-out protocol and causal-promotion obligation surface while preserving source class and claim ceilings"
-    "two real meeting durations, a prospective validation protocol and an explicit causal-promotion obligation surface are paid as evidence/methodology; the causal graph remains a DASHI candidate design, while complete real-institution incidence, an empirical coordination-cost functional, a quantitative OWS incidence-to-burden relationship, causal promotion and actual prospective held-out validation remain unpaid"
+    "assembles independently attributed bolo'bolo, bounded and longitudinal Occupy archival incidence, a source-explicit meeting panel with preserved missingness, archival process-strain and measured-duration observations, Occupy scholarship, external quantitative group-decision evidence, Bookchin confederalism, IPCC SR1.5 evidence, a DASHI-derived burden experiment-design frontier, deterministic manifest-first held-out protocol and causal-promotion obligation surface while preserving source class and claim ceilings"
+    "the panel and split protocol are paid methodology/evidence surfaces only: missingness is not zero, posted agenda count is not the observed issue set, and complete real-institution incidence, an empirical coordination-cost functional, a quantitative/causal OWS incidence-to-burden relationship and actual prospective held-out validation remain unpaid"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
