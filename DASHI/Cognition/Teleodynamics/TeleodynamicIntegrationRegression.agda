@@ -2,6 +2,7 @@ module DASHI.Cognition.Teleodynamics.TeleodynamicIntegrationRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Cognition.Teleodynamics.TeleodynamicAttentionAdapterExact as Attention
 import DASHI.Cognition.Teleodynamics.TeleodynamicArchitectureRelationExact as Relation
