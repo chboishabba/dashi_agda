@@ -10,10 +10,17 @@ import DASHI.Interop.PNFSpectralFieldGraph as Spectral
 ------------------------------------------------------------------------
 -- GEOMETRIC / SPECTRAL MARKET-STRESS INTERFACE
 --
--- The economic graph and the capability-substitution graph are distinct.
--- This module records the exact observables a later numeric/data owner must
--- instantiate.  It does not fabricate spectral values from qualitative edges.
+-- Financial entanglement and capability substitution are distinct geometries.
+-- A later numeric/data owner must instantiate weights; qualitative evidence is
+-- not silently promoted into fabricated eigenvalues or conductance numbers.
 ------------------------------------------------------------------------
+
+record RepoSpectralBridge : Set where
+  constructor repoSpectralBridge
+  field
+    laplacianOperator : Spectral.GraphLaplacianOperator
+
+open RepoSpectralBridge public
 
 record EntanglementStressObservables : Set₁ where
   field
@@ -51,7 +58,7 @@ record CapabilityCompressionObservables : Set₁ where
 
 open CapabilityCompressionObservables public
 
-record JointCapitalRecoveryStress : Set₁ where
+record JointCapitalRecoveryStress : Set₂ where
   field
     FinancialObservables : Set₁
     CapabilityObservables : Set₁
@@ -61,10 +68,6 @@ record JointCapitalRecoveryStress : Set₁ where
     strategicBackstopDependence : Trit
 
 open JointCapitalRecoveryStress public
-
-------------------------------------------------------------------------
--- Discrete state classifier for source-bounded use before numeric calibration.
-------------------------------------------------------------------------
 
 record QualitativeJointStress : Set where
   constructor qualitativeJointStress
@@ -82,10 +85,6 @@ open QualitativeJointStress public
 candidateOctober2026JointStress : QualitativeJointStress
 candidateOctober2026JointStress =
   qualitativeJointStress true true true true true true true
-
-------------------------------------------------------------------------
--- Firewalls: geometry is evidence structure, not an automatic market verdict.
-------------------------------------------------------------------------
 
 data HighSpectralRadiusImpliesBubblePermission : Set where
 data LowTerminalConductanceImpliesInsolvencyPermission : Set where
@@ -107,10 +106,6 @@ highEntanglementDoesNotAutoProveAntitrustLiability ()
 policyBackstopSalienceDoesNotAutoProveCapture :
   PolicyBackstopSalienceImpliesCapturePermission → ⊥
 policyBackstopSalienceDoesNotAutoProveCapture ()
-
-------------------------------------------------------------------------
--- Cross-owner witnesses keep the whole broader discussion connected.
-------------------------------------------------------------------------
 
 capitalState : Capital.TwoGeometryCapitalRecoveryState
 capitalState = Capital.candidateTwoGeometryState2026
