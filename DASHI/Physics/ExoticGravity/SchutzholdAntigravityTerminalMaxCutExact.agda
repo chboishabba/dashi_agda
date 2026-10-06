@@ -5,6 +5,8 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Laws.GaugeInteractionLaws as Gauge
 import DASHI.Physics.Laws.GravityCosmologyLaws as Gravity
 import DASHI.Physics.GR.SchutzholdEMGWSourceLawExact as Source
+import DASHI.Physics.GR.SchutzholdInteractionWorkNormalizationExact as Work
+import DASHI.Physics.GR.SchutzholdFrequencyPhaseReadoutExact as FrequencyPhase
 import DASHI.Physics.GR.ControlledEMGravitationalWaveEnergyExchangeExact as Exchange
 import DASHI.Physics.GR.ControlledEMGWExchangeFiniteReversalExact as Reversal
 import DASHI.Physics.GR.ControlledEMGWReadoutSignPropagationExact as Readout
@@ -23,6 +25,7 @@ import DASHI.Physics.YangMills.MaxwellHodgeR144ControlledExchangeWeldExact as Ma
 --   R144 metric/stress first-variation machinery
 --   controlled exchange/reversal algebra
 --   SI Planck/frequency authority
+--   Schuetzhold Eq. (4)/(5)/(7), half-cycle shift and delayed-phase strategy
 --   antigravity ordinary-vs-alternative same-object residual comparator.
 --
 -- The remaining fields below are deliberately physical same-object/calibration
@@ -44,21 +47,16 @@ record SchutzholdPhysicalRealisation
       Calibration.EnergyFrequencyPhaseCalibration
         (MaxwellR144.interactionFromMaxwellHodge maxwellR144)
 
+    workLaw :
+      Work.SchutzholdInteractionWorkLaw
+        (MaxwellR144.interactionFromMaxwellHodge maxwellR144)
+
+    frequencyPhaseReadout :
+      FrequencyPhase.SchutzholdFrequencyPhaseReadout
+        (MaxwellR144.interactionFromMaxwellHodge maxwellR144)
+
     SourceHamiltonianSameObjectReceipt : Set
     sourceHamiltonianSameObjectReceipt : SourceHamiltonianSameObjectReceipt
-
-    SourceEnergyTransferSameObjectReceipt : Set
-    sourceEnergyTransferSameObjectReceipt : SourceEnergyTransferSameObjectReceipt
-
-    SourceDispersionSameObjectReceipt : Set
-    sourceDispersionSameObjectReceipt : SourceDispersionSameObjectReceipt
-
-    SourceHalfCycleEnergyShiftSameObjectReceipt : Set
-    sourceHalfCycleEnergyShiftSameObjectReceipt :
-      SourceHalfCycleEnergyShiftSameObjectReceipt
-
-    DelayedPhaseSameObjectReceipt : Set
-    delayedPhaseSameObjectReceipt : DelayedPhaseSameObjectReceipt
 
     WeakFieldGWIsSameMetricPerturbationReceipt : Set
     weakFieldGWIsSameMetricPerturbationReceipt :
@@ -125,14 +123,24 @@ sourceAbsorptionSecondHalf :
   ≡ Exchange.absorptionLike
 sourceAbsorptionSecondHalf = Source.sourceOppositeScheduleAbsorptionSecondHalf
 
+existingWorkBoundary : Work.SchutzholdWorkNormalizationBoundary
+existingWorkBoundary = Work.canonicalSchutzholdWorkNormalizationBoundary
+
+existingFrequencyPhaseBoundary : FrequencyPhase.SchutzholdFrequencyPhaseBoundary
+existingFrequencyPhaseBoundary =
+  FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
+
 ------------------------------------------------------------------------
--- Terminal frontier: only genuinely physical welding/calibration remains.
+-- Terminal frontier after the source-law max-cut.
 ------------------------------------------------------------------------
 
 record SchutzholdTerminalFrontier : Set where
   constructor schutzhold-terminal-frontier
   field
     sourceEquationsFormalised : Bool
+    sourceEq5WorkLawFormalised : Bool
+    sourceEq7FrequencyLawFormalised : Bool
+    sourceDelayedPhaseLawFormalised : Bool
     directionPhaseReversalFormalised : Bool
     maxwellFieldReused : Bool
     metricDependentHodgeReused : Bool
@@ -144,19 +152,22 @@ record SchutzholdTerminalFrontier : Set where
     duplicateMaxwellNeeded : Bool
     duplicateHodgeNeeded : Bool
     duplicateSIConstantsNeeded : Bool
+    duplicateWorkLawNeeded : Bool
+    duplicateFrequencyPhaseLawNeeded : Bool
     duplicateAntigravityComparatorNeeded : Bool
 
     hilbertStressVariationPhysicalWeldOpen : Bool
     gwToR144MetricTangentPhysicalWeldOpen : Bool
     emStressToR144InsertionPhysicalWeldOpen : Bool
-    sourceEq5ToInteractionWorkNormalizationOpen : Bool
-    sourceEq7ToMeasuredFrequencyCalibrationOpen : Bool
-    delayedPathFrequencyToPhaseCalibrationOpen : Bool
+    renormalizedDirectionalExpectationNumericsOpen : Bool
+    interactionSpacetimeIntegralCalibrationOpen : Bool
+    concreteLaserFrequencyCalibrationOpen : Bool
+    concreteDelayLineCalibrationOpen : Bool
     apparatusCalibrationAndNoiseModelOpen : Bool
 
 canonicalSchutzholdTerminalFrontier : SchutzholdTerminalFrontier
 canonicalSchutzholdTerminalFrontier =
   schutzhold-terminal-frontier
+    true true true true true true true true true true true
+    false false false false false false
     true true true true true true true true
-    false false false false
-    true true true true true true true
