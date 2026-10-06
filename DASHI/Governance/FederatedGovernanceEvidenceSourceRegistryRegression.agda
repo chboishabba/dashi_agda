@@ -30,6 +30,22 @@ occupyArchiveDatasetDOIPinned :
   ≡ "10.5255/UKDA-SN-853247"
 occupyArchiveDatasetDOIPinned = refl
 
+hwangGuynesDOIPinned :
+  Registry.doiOrIdentifier Source.hwangGuynes1994Source ≡ "10.1016/0378-7206(94)90092-2"
+hwangGuynesDOIPinned = refl
+
+millerVanbergDOIPinned :
+  Registry.doiOrIdentifier Source.millerVanberg2015Source ≡ "10.1016/j.ejpoleco.2014.09.005"
+millerVanbergDOIPinned = refl
+
+mckoyDOIPinned :
+  Registry.doiOrIdentifier Source.mckoyEtAl2012Source ≡ "10.1016/j.protcy.2012.09.052"
+mckoyDOIPinned = refl
+
+luYuanMcLeodDOIPinned :
+  Registry.doiOrIdentifier Source.luYuanMcLeod2012Source ≡ "10.1177/1088868311417243"
+luYuanMcLeodDOIPinned = refl
+
 sameThemeDoesNotMergeSources :
   Source.sameGovernanceThemeCollapsesProvenance Source.canonicalGovernanceEvidenceRegistryBoundary ≡ false
 sameThemeDoesNotMergeSources = refl
