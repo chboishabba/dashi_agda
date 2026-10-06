@@ -1,9 +1,12 @@
 from pathlib import Path
 
 p = Path("DASHI/Biology/GABAPhenotypeEvidenceExact.agda")
+r = Path("DASHI/Biology/GABAPhenotypeEvidenceRegression.agda")
 assert p.exists(), "missing GABAPhenotypeEvidenceExact.agda"
+assert r.exists(), "missing GABAPhenotypeEvidenceRegression.agda"
 
 text = p.read_text(encoding="utf-8")
+regression = r.read_text(encoding="utf-8")
 
 required = [
     "import DASHI.Core.AttributedSourceCore as Source",
@@ -16,6 +19,7 @@ required = [
     "thoughtSuppressionEvidenceDoesNotPromoteToEmotionSuppression",
     "noAttachmentBridgeFromSynchronyWithoutReceipt",
     "noNeuroinflammationBridgeFromGABAWithoutReceipt",
+    "sensoryAssociationDoesNotUniversalizeAutism",
     "schmitz2017ThoughtSuppression",
     "autismGABAMetaAnalysis2024",
     "puts2017SensorimotorGABA",
@@ -41,6 +45,17 @@ required = [
 for needle in required:
     assert needle in text, f"missing required surface: {needle}"
 
+for needle in [
+    "sourceAtlasNonAuthorityRegression",
+    "gabaCandidateBoundaryRegression",
+    "associationCausalityGateRegression",
+    "autismCausalSufficiencyGateRegression",
+    "adhdCausalSufficiencyGateRegression",
+    "sensoryUniversalizationGateRegression",
+    "canonicalBoundaryRegression",
+]:
+    assert needle in regression, f"missing regression proof: {needle}"
+
 for forbidden in [
     "systematic-review / meta-analysis source registry row",
     "PTSD magnetic-resonance-spectroscopy study source registry row",
@@ -52,4 +67,4 @@ for forbidden in [
 ]:
     assert forbidden not in text, f"forbidden or stale promotion/attribution present: {forbidden}"
 
-print("GABA phenotype evidence attribution/promotion surface checks passed")
+print("GABA phenotype evidence attribution/promotion/regression surface checks passed")
