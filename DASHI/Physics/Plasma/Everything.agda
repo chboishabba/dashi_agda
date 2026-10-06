@@ -24,6 +24,12 @@ import DASHI.Physics.Plasma.DynamicZeroBounceAdmissibilityExact
 import DASHI.Physics.Plasma.TriadicZeroBounceControlExact
 import DASHI.Physics.Plasma.TriadicHolonomyZeroBounceSearchExact
 import DASHI.Physics.Plasma.ZeroBounceHybridBenchmarkExact
+import DASHI.Physics.Plasma.CircularAlfvenZeroBounceSeedExact
+import DASHI.Physics.Plasma.HelicalScrewPinchZeroBounceEquilibriumExact
+import DASHI.Physics.Plasma.ToroidalAlfvenZeroBounceEmbeddingFrontierExact
+import DASHI.Physics.Plasma.ZeroBounceConstructiveSeedsEverything
+import DASHI.Physics.Plasma.TriadicCurvatureDriftCancellationExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceTriadicCurvatureSearchExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
