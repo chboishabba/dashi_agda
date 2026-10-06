@@ -122,6 +122,55 @@ canonicalObservedEdgeCount : edgeCount canonicalObservedEdges ≡ 18
 canonicalObservedEdgeCount = refl
 
 ------------------------------------------------------------------------
+-- Descriptive incidence degrees.
+--
+-- These are exact counts for the finite admitted row set above.  They are not
+-- a coordination-cost function, importance score, speaking-time measure or
+-- exhaustive participation count for the meeting.
+------------------------------------------------------------------------
+
+observedIssueDegree : Issue → Nat
+observedIssueDegree spokesCouncilProposal = 1
+observedIssueDegree financeIntegration = 3
+observedIssueDegree libraryBudget = 1
+observedIssueDegree silentReadingTechnology = 3
+observedIssueDegree electricityGenerator = 2
+observedIssueDegree townPlanningShelter = 3
+observedIssueDegree guestSpeakerCoordination = 2
+observedIssueDegree zinesAndPamphlets = 2
+observedIssueDegree printedGovernanceArchive = 1
+observedIssueDegree meetingTime = 0
+observedIssueDegree libraryClosingTime = 0
+
+observedParticipantDegree : Participant → Nat
+observedParticipantDegree adash = 1
+observedParticipantDegree steve = 3
+observedParticipantDegree betsy = 2
+observedParticipantDegree stephen = 2
+observedParticipantDegree frances = 3
+observedParticipantDegree eric = 1
+observedParticipantDegree orion = 1
+observedParticipantDegree sean = 1
+observedParticipantDegree thaddeus = 2
+observedParticipantDegree michael = 1
+observedParticipantDegree zach = 1
+
+issueDegreeTotal :
+  observedIssueDegree spokesCouncilProposal
+  + observedIssueDegree financeIntegration
+  + observedIssueDegree libraryBudget
+  + observedIssueDegree silentReadingTechnology
+  + observedIssueDegree electricityGenerator
+  + observedIssueDegree townPlanningShelter
+  + observedIssueDegree guestSpeakerCoordination
+  + observedIssueDegree zinesAndPamphlets
+  + observedIssueDegree printedGovernanceArchive
+  + observedIssueDegree meetingTime
+  + observedIssueDegree libraryClosingTime
+  ≡ 18
+issueDegreeTotal = refl
+
+------------------------------------------------------------------------
 -- Decision/outcome observations are deliberately separate from speaker edges.
 -- These constructors state only that the inspected minutes report the named
 -- outcome for the issue; they do not assign that outcome as every speaker's
@@ -159,6 +208,7 @@ record LibraryArchivalIncidenceBoundary : Set where
   field
     rowsAreSourceExplicitNamedInteractions : Bool
     outcomesKeptSeparateFromSpeakerRows : Bool
+    descriptiveDegreesDerivedFromAdmittedRows : Bool
 
     attendanceCrossProductPromoted : Bool
     speakerEdgeEncodesAgreement : Bool
@@ -167,6 +217,7 @@ record LibraryArchivalIncidenceBoundary : Set where
     speakerEdgeCreatesMandate : Bool
     meetingGraphGeneralisedToAllOWS : Bool
     finiteGraphIsCompleteMeetingTranscript : Bool
+    observedDegreeInterpretedAsCoordinationCost : Bool
     finiteGraphPaysCoordinationCostLaw : Bool
 
 open LibraryArchivalIncidenceBoundary public
@@ -176,6 +227,8 @@ canonicalLibraryIncidenceBoundary =
   libraryArchivalIncidenceBoundary
     true
     true
+    true
+    false
     false
     false
     false
@@ -191,6 +244,6 @@ canonicalOccupyLibraryArchivalIncidenceReceipt =
     "real bounded OWS Library Working Group incidence graph"
     "DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact"
     "canonicalLibraryIncidenceBoundary"
-    "instantiates eighteen explicit named participant-to-issue interactions from the 22 October 2011 People's Library working-group minutes and keeps reported consensus outcomes in a separate relation"
-    "the graph does not infer attendee-by-agenda edges, individual agreement or votes, representation, mandate, movement-wide completeness, or a coordination-cost scaling law"
+    "instantiates eighteen explicit named participant-to-issue interactions from the 22 October 2011 People's Library working-group minutes, keeps reported consensus outcomes separate, and exposes exact descriptive issue/participant degrees for the admitted edge set"
+    "the graph does not infer attendee-by-agenda edges, individual agreement or votes, representation, mandate, movement-wide completeness, or reinterpret descriptive incidence degree as coordination cost"
     "agda -i . DASHI/Governance/OccupyLibraryArchivalIncidenceFiniteExampleRegression.agda"
