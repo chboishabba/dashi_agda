@@ -24,6 +24,18 @@ issueCountControlRequired :
   Design.requiresIssueCountControl Design.canonicalMeasurementRequirements ≡ true
 issueCountControlRequired = refl
 
+oct15DurationPaid :
+  Design.meetingDurationMinutes Design.oct15CurrentMeasurement ≡ Design.measured 180
+oct15DurationPaid = refl
+
+oct22IncidenceRowsPaid :
+  Design.observedIncidenceEdges Design.oct22CurrentMeasurement ≡ Design.measured 18
+oct22IncidenceRowsPaid = refl
+
+oct22DurationPaid :
+  Design.meetingDurationMinutes Design.oct22CurrentMeasurement ≡ Design.measured 155
+oct22DurationPaid = refl
+
 nov28IncidenceRowsPaid :
   Design.observedIncidenceEdges Design.nov28CurrentMeasurement ≡ Design.measured 7
 nov28IncidenceRowsPaid = refl
