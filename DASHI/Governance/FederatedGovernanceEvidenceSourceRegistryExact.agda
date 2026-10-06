@@ -73,6 +73,16 @@ pollettaHoban2016Source = Registry.source-reference
   "interview-based social-movement study"
   "evidence that activists pragmatically adapted consensus, including committee devolution and voting in some settings; not a uniform account of all Occupy camps"
 
+kinnaPrichard2019ArchiveSource : Registry.SourceReference
+kinnaPrichard2019ArchiveSource = Registry.source-reference
+  "Ruth Kinna and Alex Prichard"
+  "Archival and workshop materials relating to constitutional practices in grass roots anarchistic organisations 2011-2018"
+  "UK Data Service ReShare"
+  2019
+  "10.5255/UKDA-SN-853247"
+  "open archival data collection"
+  "source identity for the open OccupyFiles.zip bundle containing General Assembly minutes from Occupy Wall Street, Occupy London St Paul's and Occupy Oakland; corpus availability does not imply complete participant-issue coding"
+
 ipccSR15Source : Registry.SourceReference
 ipccSR15Source = Registry.source-reference
   "Intergovernmental Panel on Climate Change"
@@ -91,6 +101,7 @@ canonicalGovernanceEvidenceSources =
   ∷ savio2015Source
   ∷ hammond2013Source
   ∷ pollettaHoban2016Source
+  ∷ kinnaPrichard2019ArchiveSource
   ∷ ipccSR15Source
   ∷ []
 
@@ -120,6 +131,6 @@ canonicalGovernanceEvidenceSourceRegistryReceipt =
     "federated governance evidence source registry"
     "DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryExact"
     "canonicalGovernanceEvidenceRegistryBoundary"
-    "pins canonical bibliographic identities and bounded evidentiary roles for bolo'bolo, Bookchin confederalism, four Occupy studies and IPCC SR1.5 using the existing generic SourceReference carrier"
+    "pins canonical bibliographic identities and bounded evidentiary roles for bolo'bolo, Bookchin confederalism, four Occupy studies, the Kinna-Prichard Occupy archival corpus and IPCC SR1.5 using the existing generic SourceReference carrier"
     "registry membership creates no theorem authority, structural similarity does not merge provenance, and agreement does not manufacture evidentiary independence"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceSourceRegistryRegression.agda"
