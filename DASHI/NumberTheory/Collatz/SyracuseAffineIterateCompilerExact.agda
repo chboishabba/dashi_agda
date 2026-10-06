@@ -40,13 +40,22 @@ evenAffineStep :
   (p next current a : Nat) →
   2 * next ≡ current →
   2 * (p * next + a) ≡ p * current + 2 * a
-evenAffineStep p next current a step rewrite step =
-  solve 3
-    (λ p current a →
-      (p :* current) :+ (con 2 :* a)
-      :=
-      (p :* current) :+ (con 2 :* a))
-    refl
+evenAffineStep p next current a step =
+  let
+    rearrange :
+      2 * (p * next + a) ≡ p * (2 * next) + 2 * a
+    rearrange =
+      solve 3
+        (λ p next a →
+          con 2 :* ((p :* next) :+ a)
+          :=
+          (p :* (con 2 :* next)) :+ (con 2 :* a))
+        refl
+    afterStep :
+      p * (2 * next) + 2 * a ≡ p * current + 2 * a
+    afterStep = cong (λ value → p * value + 2 * a) step
+  in
+  trans rearrange afterStep
 
 oddAffineStep :
   (p next current a : Nat) →
@@ -64,12 +73,10 @@ oddAffineStep p next current a step =
           :=
           (p :* (con 2 :* next)) :+ (con 2 :* a))
         refl
-
     afterStep :
       p * (2 * next) + 2 * a
       ≡ p * (3 * current + 1) + 2 * a
     afterStep = cong (λ value → p * value + 2 * a) step
-
     normalize :
       p * (3 * current + 1) + 2 * a
       ≡ (3 * p) * current + (p + 2 * a)
