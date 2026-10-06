@@ -6,16 +6,20 @@ import DASHI.Physics.Laws.GravityCosmologyLaws as Laws
 import DASHI.Physics.GR.ControlledEMGravitationalWaveEnergyExchangeExact as Exchange
 import DASHI.Physics.GR.ControlledEMGWExchangeFiniteReversalExact as Reversal
 import DASHI.Physics.GR.MaxwellGWControlledExchangeSameObjectExact as MaxwellGW
+import DASHI.Physics.GR.MaxwellMetricHodgeStressEnergyExact as MaxwellStress
+import DASHI.Physics.GR.ControlledEMGWEnergyFrequencyPhaseCalibrationExact as Calibration
 import DASHI.Physics.ExoticGravity.AntigravityControlledGWExchangeCrossPollinationExact as Anti
 import DASHI.Physics.YangMills.R144EMGWControlledExchangeInstantiationExact as R144GW
 
 ------------------------------------------------------------------------
 -- END-TO-END MAX-CUT COMPILER
 --
--- This is intentionally a compiler of already-explicit receipts.  It does not
--- manufacture the missing physical EM stress tensor or metric-tangent weld.
--- Once those same-object receipts exist, the rest of the route into the
--- antigravity residual comparator is structural.
+-- Maxwell and metric-dependent Hodge structure are already repo objects, and
+-- the SI/Planck energy-frequency authority surface already exists.  This
+-- compiler therefore does not list those as missing physics.  The remaining
+-- physical seam is exact same-object realization: Hilbert metric variation,
+-- R144 tangent/stress insertion, interaction-work normalization, and the
+-- experiment-specific delay-line calibration.
 ------------------------------------------------------------------------
 
 record ControlledGWExchangePhysicalInputs
@@ -107,8 +111,16 @@ finiteDoubleReversalPaid :
   ≡ sign
 finiteDoubleReversalPaid = Reversal.doubleReversalRestoresSign
 
+existingMaxwellMetricHodgeBoundary : MaxwellStress.MaxwellMetricHodgeStressBoundary
+existingMaxwellMetricHodgeBoundary =
+  MaxwellStress.canonicalMaxwellMetricHodgeStressBoundary
+
+existingEnergyFrequencyBoundary : Calibration.EnergyFrequencyPhaseBoundary
+existingEnergyFrequencyBoundary =
+  Calibration.canonicalEnergyFrequencyPhaseBoundary
+
 ------------------------------------------------------------------------
--- Frontier accounting.
+-- Frontier accounting after reuse audit.
 ------------------------------------------------------------------------
 
 record ControlledGWExchangeFrontier : Set where
@@ -116,18 +128,25 @@ record ControlledGWExchangeFrontier : Set where
   field
     finiteReversalAlgebraClosed : Bool
     canonicalMaxwellFieldCarrierConnected : Bool
+    existingMetricDependentHodgeConnected : Bool
     weakFieldGWCarrierConnected : Bool
     antigravityResidualCompilerConnected : Bool
     r144AbstractStressVariationConnected : Bool
+    exactSIPlanckFrequencyAuthorityConnected : Bool
 
-    physicalEMStressTensorFromMetricHodgeStillOpen : Bool
+    newIndependentMaxwellTheoryStillNeeded : Bool
+    newIndependentHodgeTheoryStillNeeded : Bool
+    newIndependentConstantsTableStillNeeded : Bool
+
+    hilbertEMStressMetricVariationSameObjectStillOpen : Bool
     physicalGWToR144MetricTangentSameObjectStillOpen : Bool
     physicalEMStressToR144InsertionSameObjectStillOpen : Bool
-    workFunctionalNormalizationStillOpen : Bool
-    frequencyPhaseCalibrationStillOpen : Bool
+    interactionWorkNormalizationStillOpen : Bool
+    experimentSpecificDelayPhaseCalibrationStillOpen : Bool
 
 canonicalControlledGWExchangeFrontier : ControlledGWExchangeFrontier
 canonicalControlledGWExchangeFrontier =
   controlled-gw-exchange-frontier
-    true true true true true
+    true true true true true true true
+    false false false
     true true true true true
