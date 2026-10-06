@@ -24,8 +24,10 @@ def test_route_b_exact_but_firehose_marginal():
 
 
 def test_route_c_current_circular_seed_is_not_geodesic():
-    rms = circular_seed_geodesic_curvature_rms(R0=3.0, r=1.0, B0=1.0, C=0.5, samples=3000)
-    assert rms > 0.05
+    rms = circular_seed_geodesic_curvature_rms(
+        R0=3.0, r=1.0, B0=1.0, C=0.5, samples=8000, ds=1e-3
+    )
+    assert rms > 0.1
 
 
 def test_c3_inversion_fixed_plus_inverse_pair():
