@@ -6,6 +6,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Bolo
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact as Occupy
 import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
+import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact as LibraryGraph
 import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bookchin
 import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
@@ -13,8 +14,8 @@ import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 -- CROSS-SOURCE EVIDENCE INSTANTIATION CAPSTONE.
 --
 -- Attribution rule: agreement or structural similarity never collapses source
--- provenance.  Each lane retains its own author/institution, evidentiary role,
--- and claim ceiling.  The capstone merely assembles already-typed lanes.
+-- provenance. Each lane retains its own author/institution, evidentiary role,
+-- and claim ceiling. The capstone merely assembles already-typed lanes.
 ------------------------------------------------------------------------
 
 data EvidenceProvenanceClass : Set where
@@ -43,6 +44,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
   field
     boloAtlas : Bolo.BoloBoloPrimarySourceAtlas
     occupyArchiveCandidate : Archive.ArchivalIncidenceCandidate
+    occupyLibraryObservedEdges : List LibraryGraph.ObservedEdge
     occupySynthesis : Occupy.OccupyEvidenceSynthesis
     bookchinSource : Bookchin.BookchinConfederalismSourceBoundary
     bookchinBridge : Bookchin.BookchinDASHIAlignment
@@ -50,6 +52,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
 
     nestedCommunityArchitectureEvidencePresent : Bool
     boundedArchivalInteractionEvidencePresent : Bool
+    boundedFiniteArchivalIncidenceGraphPresent : Bool
     consensusBurdenBenefitPluralEvidencePresent : Bool
     recallableConfederalCoordinationEvidencePresent : Bool
     transitionViabilityConstraintEvidencePresent : Bool
@@ -62,10 +65,12 @@ canonicalFederatedGovernanceEvidenceInstantiation =
   federatedGovernanceEvidenceInstantiation
     Bolo.canonicalBoloBoloPrimarySourceAtlas
     Archive.adashSpokesCouncilCandidate
+    LibraryGraph.canonicalObservedEdges
     Occupy.canonicalOccupyEvidenceSynthesis
     Bookchin.canonicalBookchinConfederalismSourceBoundary
     Bookchin.canonicalBookchinDASHIAlignment
     SR15.canonicalSR15SourceBoundary
+    true
     true
     true
     true
@@ -87,6 +92,7 @@ record FederatedGovernanceEvidenceBoundary : Set where
 
     boloSourcePaysNestedArchitecture : Bool
     occupyArchivePaysBoundedNamedInteraction : Bool
+    occupyArchivePaysBoundedFiniteIncidenceGraph : Bool
     occupyLiteraturePaysPluralProcessEvidence : Bool
     bookchinSourcePaysRecallableConfederalCoordination : Bool
     sr15PaysSystemTransitionConstraintSurface : Bool
@@ -112,6 +118,7 @@ canonicalFederatedGovernanceEvidenceBoundary =
     true
     true
     true
+    true
     false
     false
     false
@@ -123,6 +130,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed bolo'bolo, bounded Occupy archival interaction evidence, Occupy scholarship, Bookchin confederalism and IPCC SR1.5 evidence while preserving source class and claim ceilings"
-    "cross-source similarity does not merge provenance; a single bounded archival interaction is not a complete real participant-issue matrix, and actual legitimacy, an empirical coordination-cost functional and concrete climate viability remain unpaid"
+    "assembles independently attributed bolo'bolo, bounded Occupy archival interaction and finite incidence-graph evidence, Occupy scholarship, Bookchin confederalism and IPCC SR1.5 evidence while preserving source class and claim ceilings"
+    "the real eighteen-edge working-group specimen remains bounded to one inspected meeting and descriptive degree is not coordination cost; complete real-institution incidence, actual legitimacy and concrete climate viability remain unpaid"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
