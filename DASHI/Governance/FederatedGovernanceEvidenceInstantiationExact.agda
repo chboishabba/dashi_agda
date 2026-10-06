@@ -7,6 +7,8 @@ import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Bolo
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact as Occupy
 import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
 import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact as LibraryGraph
+import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Longitudinal
+import DASHI.Governance.OccupyCoordinationBurdenExperimentDesignExact as BurdenDesign
 import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bookchin
 import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
@@ -45,6 +47,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     boloAtlas : Bolo.BoloBoloPrimarySourceAtlas
     occupyArchiveCandidate : Archive.ArchivalIncidenceCandidate
     occupyLibraryObservedEdges : List LibraryGraph.ObservedEdge
+    occupyLongitudinalObservedEdges : List Longitudinal.LongitudinalEdge
     occupySynthesis : Occupy.OccupyEvidenceSynthesis
     bookchinSource : Bookchin.BookchinConfederalismSourceBoundary
     bookchinBridge : Bookchin.BookchinDASHIAlignment
@@ -53,6 +56,9 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     nestedCommunityArchitectureEvidencePresent : Bool
     boundedArchivalInteractionEvidencePresent : Bool
     boundedFiniteArchivalIncidenceGraphPresent : Bool
+    longitudinalArchivalIncidenceFamilyPresent : Bool
+    archivalProcessBurdenObservationsPresent : Bool
+    coordinationBurdenExperimentDesignPresent : Bool
     consensusBurdenBenefitPluralEvidencePresent : Bool
     recallableConfederalCoordinationEvidencePresent : Bool
     transitionViabilityConstraintEvidencePresent : Bool
@@ -66,10 +72,14 @@ canonicalFederatedGovernanceEvidenceInstantiation =
     Bolo.canonicalBoloBoloPrimarySourceAtlas
     Archive.adashSpokesCouncilCandidate
     LibraryGraph.canonicalObservedEdges
+    Longitudinal.longitudinalObservedEdges
     Occupy.canonicalOccupyEvidenceSynthesis
     Bookchin.canonicalBookchinConfederalismSourceBoundary
     Bookchin.canonicalBookchinDASHIAlignment
     SR15.canonicalSR15SourceBoundary
+    true
+    true
+    true
     true
     true
     true
@@ -93,6 +103,9 @@ record FederatedGovernanceEvidenceBoundary : Set where
     boloSourcePaysNestedArchitecture : Bool
     occupyArchivePaysBoundedNamedInteraction : Bool
     occupyArchivePaysBoundedFiniteIncidenceGraph : Bool
+    occupyArchivePaysLongitudinalIncidenceFamily : Bool
+    occupyArchivePaysProcessBurdenObservations : Bool
+    dashiPaysCoordinationBurdenExperimentDesign : Bool
     occupyLiteraturePaysPluralProcessEvidence : Bool
     bookchinSourcePaysRecallableConfederalCoordination : Bool
     sr15PaysSystemTransitionConstraintSurface : Bool
@@ -100,6 +113,7 @@ record FederatedGovernanceEvidenceBoundary : Set where
     actualPolityLegitimacyPaid : Bool
     actualParticipantIssueIncidencePaid : Bool
     empiricalCoordinationCostFunctionalPaid : Bool
+    quantitativeIncidenceBurdenRelationshipPaid : Bool
     concreteClimateViabilityOfFederationPaid : Bool
 
 open FederatedGovernanceEvidenceBoundary public
@@ -119,6 +133,10 @@ canonicalFederatedGovernanceEvidenceBoundary =
     true
     true
     true
+    true
+    true
+    true
+    false
     false
     false
     false
@@ -130,6 +148,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed bolo'bolo, bounded Occupy archival interaction and finite incidence-graph evidence, Occupy scholarship, Bookchin confederalism and IPCC SR1.5 evidence while preserving source class and claim ceilings"
-    "the real eighteen-edge working-group specimen remains bounded to one inspected meeting and descriptive degree is not coordination cost; complete real-institution incidence, actual legitimacy and concrete climate viability remain unpaid"
+    "assembles independently attributed bolo'bolo, bounded and longitudinal Occupy archival incidence, archival process-strain observations, Occupy scholarship, Bookchin confederalism, IPCC SR1.5 evidence and a DASHI-derived experiment-design frontier while preserving source class and claim ceilings"
+    "fifty-two admitted archival rows and qualitative process-strain co-occurrences are descriptive only; complete real-institution incidence, an empirical coordination-cost functional, a quantitative incidence-to-burden relationship, actual legitimacy and concrete climate viability remain unpaid"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
