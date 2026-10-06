@@ -64,11 +64,23 @@ archivalProcessBurdenObservationsArePaid :
   ≡ true
 archivalProcessBurdenObservationsArePaid = refl
 
+measuredDurationsArePaid :
+  Capstone.occupyArchivePaysMeasuredMeetingDurations
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+measuredDurationsArePaid = refl
+
 experimentDesignSurfaceIsPaid :
   Capstone.dashiPaysCoordinationBurdenExperimentDesign
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ true
 experimentDesignSurfaceIsPaid = refl
+
+prospectiveHeldOutProtocolIsPaid :
+  Capstone.dashiPaysProspectiveHeldOutProtocol
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+prospectiveHeldOutProtocolIsPaid = refl
 
 generalMechanismPlausibilityIsPaid :
   Capstone.generalGroupDecisionEvidencePaysMechanismPlausibility
@@ -93,3 +105,9 @@ quantitativeIncidenceBurdenRelationshipStillUnpaid :
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ false
 quantitativeIncidenceBurdenRelationshipStillUnpaid = refl
+
+prospectiveHeldOutValidationStillUnpaid :
+  Capstone.prospectiveHeldOutValidationPaid
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ false
+prospectiveHeldOutValidationStillUnpaid = refl
