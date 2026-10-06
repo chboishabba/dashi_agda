@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Bolo
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact as Occupy
+import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
 import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bookchin
 import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
@@ -18,18 +19,21 @@ import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
 data EvidenceProvenanceClass : Set where
   primaryPoliticalDesignSource : EvidenceProvenanceClass
+  primaryArchivalRecord : EvidenceProvenanceClass
   empiricalSocialMovementStudy : EvidenceProvenanceClass
   primaryAssessmentSource : EvidenceProvenanceClass
   dashiDerivedBridge : EvidenceProvenanceClass
 
 data EvidenceLane : Set where
   boloPrimaryLane : EvidenceLane
+  occupyArchivalLane : EvidenceLane
   occupyEmpiricalLane : EvidenceLane
   bookchinPrimaryLane : EvidenceLane
   sr15PrimaryLane : EvidenceLane
 
 laneClass : EvidenceLane → EvidenceProvenanceClass
 laneClass boloPrimaryLane = primaryPoliticalDesignSource
+laneClass occupyArchivalLane = primaryArchivalRecord
 laneClass occupyEmpiricalLane = empiricalSocialMovementStudy
 laneClass bookchinPrimaryLane = primaryPoliticalDesignSource
 laneClass sr15PrimaryLane = primaryAssessmentSource
@@ -38,12 +42,14 @@ record FederatedGovernanceEvidenceInstantiation : Set where
   constructor federatedGovernanceEvidenceInstantiation
   field
     boloAtlas : Bolo.BoloBoloPrimarySourceAtlas
+    occupyArchiveCandidate : Archive.ArchivalIncidenceCandidate
     occupySynthesis : Occupy.OccupyEvidenceSynthesis
     bookchinSource : Bookchin.BookchinConfederalismSourceBoundary
     bookchinBridge : Bookchin.BookchinDASHIAlignment
     sr15Source : SR15.SR15SourceBoundary
 
     nestedCommunityArchitectureEvidencePresent : Bool
+    boundedArchivalInteractionEvidencePresent : Bool
     consensusBurdenBenefitPluralEvidencePresent : Bool
     recallableConfederalCoordinationEvidencePresent : Bool
     transitionViabilityConstraintEvidencePresent : Bool
@@ -55,10 +61,12 @@ canonicalFederatedGovernanceEvidenceInstantiation :
 canonicalFederatedGovernanceEvidenceInstantiation =
   federatedGovernanceEvidenceInstantiation
     Bolo.canonicalBoloBoloPrimarySourceAtlas
+    Archive.adashSpokesCouncilCandidate
     Occupy.canonicalOccupyEvidenceSynthesis
     Bookchin.canonicalBookchinConfederalismSourceBoundary
     Bookchin.canonicalBookchinDASHIAlignment
     SR15.canonicalSR15SourceBoundary
+    true
     true
     true
     true
@@ -78,6 +86,7 @@ record FederatedGovernanceEvidenceBoundary : Set where
     occupyEvidencePaysQuantitativeScalingLaw : Bool
 
     boloSourcePaysNestedArchitecture : Bool
+    occupyArchivePaysBoundedNamedInteraction : Bool
     occupyLiteraturePaysPluralProcessEvidence : Bool
     bookchinSourcePaysRecallableConfederalCoordination : Bool
     sr15PaysSystemTransitionConstraintSurface : Bool
@@ -102,6 +111,7 @@ canonicalFederatedGovernanceEvidenceBoundary =
     true
     true
     true
+    true
     false
     false
     false
@@ -113,6 +123,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed bolo'bolo, Occupy scholarship, Bookchin confederalism and IPCC SR1.5 evidence into the existing governance programme while preserving source class and claim ceilings"
-    "cross-source structural similarity does not merge provenance; actual legitimacy, real participant-issue incidence, an empirical coordination-cost functional and concrete climate viability of a federation remain unpaid"
+    "assembles independently attributed bolo'bolo, bounded Occupy archival interaction evidence, Occupy scholarship, Bookchin confederalism and IPCC SR1.5 evidence while preserving source class and claim ceilings"
+    "cross-source similarity does not merge provenance; a single bounded archival interaction is not a complete real participant-issue matrix, and actual legitimacy, an empirical coordination-cost functional and concrete climate viability remain unpaid"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
