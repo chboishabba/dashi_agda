@@ -9,7 +9,8 @@ module DASHI.NumberTheory.Collatz.SyracuseExact where
 -- this module.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Nat using (_∸_)
 open import Data.Nat.DivMod using (_/_; _%_)
@@ -25,12 +26,18 @@ toNat : PositiveNat → Nat
 toNat (positiveNat n) = suc n
 
 ------------------------------------------------------------------------
+-- Literal parity observable.  Keeping it here makes the branch selector and
+-- the itinerary consume the same definition rather than two extensionally
+-- equal tests that would later need a weld.
+------------------------------------------------------------------------
+
+parityBool : PositiveNat → Bool
+parityBool (positiveNat n) with (suc n) % 2
+... | zero = false
+... | suc _ = true
+
+------------------------------------------------------------------------
 -- Shortcut Collatz/Syracuse map.
---
--- Positive input x is represented by n=x-1.  The result is again stored by
--- predecessor.  Modulo two has only remainders zero/one; pattern matching on
--- zero versus successor therefore selects the even/odd branch without adding
--- a second dynamical object.
 ------------------------------------------------------------------------
 
 shortcutIndex : Nat → Nat
@@ -44,6 +51,46 @@ shortcutSyracuse (positiveNat n) = positiveNat (shortcutIndex n)
 -- Positivity is paid by construction: the codomain itself is PositiveNat.
 shortcutSyracusePositive : PositiveNat → PositiveNat
 shortcutSyracusePositive = shortcutSyracuse
+
+------------------------------------------------------------------------
+-- Exact branch equations on the structural positive representation.
+--
+-- These are theorem-bearing general equations, not finite specimens.  They
+-- are definitionally aligned with `parityBool` because both inspect the same
+-- modulo-two remainder.
+------------------------------------------------------------------------
+
+shortcutIndexParityFalse :
+  (n : Nat) →
+  parityBool (positiveNat n) ≡ false →
+  shortcutIndex n ≡ ((suc n) / 2) ∸ 1
+shortcutIndexParityFalse n with (suc n) % 2
+... | zero = λ _ → refl
+... | suc _ = λ ()
+
+shortcutIndexParityTrue :
+  (n : Nat) →
+  parityBool (positiveNat n) ≡ true →
+  shortcutIndex n ≡ (((3 * suc n) + 1) / 2) ∸ 1
+shortcutIndexParityTrue n with (suc n) % 2
+... | zero = λ ()
+... | suc _ = λ _ → refl
+
+shortcutSyracuseParityFalse :
+  (n : Nat) →
+  parityBool (positiveNat n) ≡ false →
+  shortcutSyracuse (positiveNat n)
+  ≡ positiveNat (((suc n) / 2) ∸ 1)
+shortcutSyracuseParityFalse n even =
+  cong positiveNat (shortcutIndexParityFalse n even)
+
+shortcutSyracuseParityTrue :
+  (n : Nat) →
+  parityBool (positiveNat n) ≡ true →
+  shortcutSyracuse (positiveNat n)
+  ≡ positiveNat ((((3 * suc n) + 1) / 2) ∸ 1)
+shortcutSyracuseParityTrue n odd =
+  cong positiveNat (shortcutIndexParityTrue n odd)
 
 syracuseIterate : Nat → PositiveNat → PositiveNat
 syracuseIterate zero x = x
@@ -93,21 +140,13 @@ shortcut-seven = refl
 shortcut-eight : shortcutSyracuse eight ≡ four
 shortcut-eight = refl
 
-------------------------------------------------------------------------
--- Promotion boundary.
---
--- General even/odd arithmetic rewriting of toNat(shortcutSyracuse x) is kept
--- separate from the definition.  Downstream same-object work consumes the
--- literal executable map above; it may not replace it by the finite 3z/3z-1
--- chain merely because both expose binary branches.
-------------------------------------------------------------------------
-
 record SyracuseLiteralBoundary : Set where
   constructor syracuseLiteralBoundary
   field
     positiveCarrierStructural : Nat
+    generalParityBranchEquationsOwned : Nat
     probabilityIntroducedHere : Nat
     finiteAffineChainIdentifiedWithSyracuse : Nat
 
 canonicalSyracuseLiteralBoundary : SyracuseLiteralBoundary
-canonicalSyracuseLiteralBoundary = syracuseLiteralBoundary 1 0 0
+canonicalSyracuseLiteralBoundary = syracuseLiteralBoundary 1 1 0 0
