@@ -26,7 +26,7 @@ meetingFamilyTotalPinned = refl
 
 dec04MediationBurdenObserved :
   Longitudinal.ProcessBurdenObserved Longitudinal.dec04Meeting Longitudinal.majorityMeetingTimeSpentInMediation
-ndec04MediationBurdenObserved = Longitudinal.dec04MajorityMediation
+dec04MediationBurdenObserved = Longitudinal.dec04MajorityMediation
 
 nov28DiscussionBreakdownObserved :
   Longitudinal.ProcessBurdenObserved Longitudinal.nov28Meeting Longitudinal.discussionBreakdown
