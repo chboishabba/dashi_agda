@@ -22,6 +22,18 @@ codingRuleFreezeRequired :
   ≡ true
 codingRuleFreezeRequired = refl
 
+manifestFreezeRequired :
+  HeldOut.corpusManifestMustBeFrozenBeforeSelection
+    HeldOut.canonicalHeldOutBoundary
+  ≡ true
+manifestFreezeRequired = refl
+
+deterministicSelectionRequired :
+  HeldOut.selectionRuleMustBeOutcomeBlindAndDeterministic
+    HeldOut.canonicalHeldOutBoundary
+  ≡ true
+deterministicSelectionRequired = refl
+
 currentArchiveHasNoProspectiveHeldOutReceipt :
   HeldOut.prospectiveHeldOutValidationPaid
     HeldOut.canonicalHeldOutBoundary
