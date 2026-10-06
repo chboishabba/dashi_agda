@@ -1,0 +1,7 @@
+module DASHI.Reasoning.Trialectic369E6ExteriorSquareEverything where
+
+import DASHI.Foundations.F3SymplecticFourExteriorSquareExact
+import DASHI.Foundations.F3SymplecticFourExteriorSquareValidation
+import DASHI.Foundations.F3PrimitiveQuadraticStandardChartExact
+import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact
+import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
