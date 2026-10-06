@@ -12,6 +12,7 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderCompilerExact where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.DivMod using (_%_)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
@@ -83,10 +84,6 @@ record CylinderOneStepArithmetic : Set₁ where
 
 open CylinderOneStepArithmetic public
 
-------------------------------------------------------------------------
--- Word-head elimination is purely structural and requires no number theory.
-------------------------------------------------------------------------
-
 bit0TailFromWord :
   {m : Nat} →
   (tail : Binary.BinaryWord m) →
@@ -111,10 +108,6 @@ bit1TailFromWord tail x whole with Itinerary.parity x
 ... | true with whole
 ... | refl = refl
 
-------------------------------------------------------------------------
--- Full forward classification.
-------------------------------------------------------------------------
-
 forwardClassification :
   (arithmetic : CylinderOneStepArithmetic) →
   {m : Nat} →
@@ -135,10 +128,6 @@ forwardClassification arithmetic {suc m} (Binary.bit1 tail) x whole =
     (forwardClassification arithmetic tail
       (Syracuse.shortcutSyracuse x)
       (bit1TailFromWord tail x whole))
-
-------------------------------------------------------------------------
--- Full reverse reification.
-------------------------------------------------------------------------
 
 reverseClassification :
   (arithmetic : CylinderOneStepArithmetic) →
@@ -171,10 +160,6 @@ reverseClassification arithmetic {suc m} (Binary.bit1 tail) x residue =
   trans
     (Itinerary.firstParityTrue x parityTrue)
     (cong Binary.bit1 tailWord)
-
-------------------------------------------------------------------------
--- Canonical compiler into the existing C3/C5 source interface.
-------------------------------------------------------------------------
 
 compileParityCylinderSource :
   CylinderOneStepArithmetic →
