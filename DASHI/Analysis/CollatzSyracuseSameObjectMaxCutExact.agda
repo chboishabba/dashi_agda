@@ -2,9 +2,6 @@ module DASHI.Analysis.CollatzSyracuseSameObjectMaxCutExact where
 
 ------------------------------------------------------------------------
 -- COLLATZ / SYRACUSE SAME-OBJECT MAX-CUT AUDIT
---
--- Status is deliberately non-promoting.  A record/interface can be compiled
--- while its mathematical source inhabitant remains open.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -14,6 +11,7 @@ import DASHI.NumberTheory.Collatz.SyracuseExact
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderCandidateExact
+import DASHI.NumberTheory.Collatz.SyracuseParityCylinderCompilerExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderLeanCrossProverWeldExact
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftBoundaryExact
@@ -41,6 +39,7 @@ data CollatzCut : Set where
   C1-literalSyracuse : CollatzCut
   C2-parityObserver : CollatzCut
   C3-residueCylinderForward : CollatzCut
+  C3a-oneStepCylinderArithmetic : CollatzCut
   C4-itineraryShift : CollatzCut
   C5-residueCylinderReverse : CollatzCut
   C6-affineIterate : CollatzCut
@@ -60,9 +59,10 @@ data CollatzCut : Set where
 cutStatus : CollatzCut → MaxCutStatus
 cutStatus C1-literalSyracuse = proved
 cutStatus C2-parityObserver = proved
-cutStatus C3-residueCylinderForward = sourceSpecificOpen
+cutStatus C3-residueCylinderForward = conditionalOnHypothesis
+cutStatus C3a-oneStepCylinderArithmetic = sourceSpecificOpen
 cutStatus C4-itineraryShift = proved
-cutStatus C5-residueCylinderReverse = sourceSpecificOpen
+cutStatus C5-residueCylinderReverse = conditionalOnHypothesis
 cutStatus C6-affineIterate = conditionalOnHypothesis
 cutStatus C7-stoppedLogRemainder = conditionalOnHypothesis
 cutStatus C8-finiteTransferIntertwiner = refutedRoute
@@ -93,13 +93,17 @@ oldSpectralConcentrationNotCriticalPath :
   cutStatus C12a-oldSpectralConcentration ≡ refutedRoute
 oldSpectralConcentrationNotCriticalPath = refl
 
-literalAndShiftPaid :
-  cutStatus C1-literalSyracuse ≡ proved
-literalAndShiftPaid = refl
+cylinderForwardCompilerClosed :
+  cutStatus C3-residueCylinderForward ≡ conditionalOnHypothesis
+cylinderForwardCompilerClosed = refl
 
-residueCylinderStillRealArithmetic :
-  cutStatus C3-residueCylinderForward ≡ sourceSpecificOpen
-residueCylinderStillRealArithmetic = refl
+cylinderReverseCompilerClosed :
+  cutStatus C5-residueCylinderReverse ≡ conditionalOnHypothesis
+cylinderReverseCompilerClosed = refl
+
+oneStepCylinderArithmeticIsTheLiveWall :
+  cutStatus C3a-oneStepCylinderArithmetic ≡ sourceSpecificOpen
+oneStepCylinderArithmeticIsTheLiveWall = refl
 
 record MaxCutBoundary : Set where
   constructor maxCutBoundary
@@ -110,6 +114,7 @@ record MaxCutBoundary : Set where
     openSourcesRemainVisible : Nat
     completeBlockBernoulliNeedsSpectralMixing : Nat
     directCylinderBijectionCanReplaceSpectralRoute : Nat
+    arbitraryLengthCylinderInductionAlreadyCompiled : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
-canonicalMaxCutBoundary = maxCutBoundary 0 0 0 1 0 1
+canonicalMaxCutBoundary = maxCutBoundary 0 0 0 1 0 1 1
