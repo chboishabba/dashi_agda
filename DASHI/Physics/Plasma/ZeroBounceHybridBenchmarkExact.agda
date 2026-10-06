@@ -7,6 +7,7 @@ import DASHI.Physics.Plasma.MobiusFrameHybridTrappedParticleCandidateExact as Hy
 import DASHI.Physics.Plasma.TrappedParticleInvariantReferenceExact as Invariant
 import DASHI.Physics.Plasma.ZeroBouncePopulationExact as ZeroBounce
 import DASHI.Physics.Plasma.TriadicZeroBounceControlExact as Triadic
+import DASHI.Physics.Plasma.TriadicHolonomyZeroBounceSearchExact as Search
 
 ------------------------------------------------------------------------
 -- ZERO-BOUNCE + BEST-KNOWN-INVARIANT BENCHMARK
@@ -14,6 +15,8 @@ import DASHI.Physics.Plasma.TriadicZeroBounceControlExact as Triadic
 -- Primary objective: no magnetic-mirror bounce for the declared reactor
 -- population.  Secondary/fallback objective for any unavoidable residual set:
 -- match or beat the best declared optimized-stellarator trapped-particle chart.
+-- Generic C_(3^n) search candidates must pass the dynamic / equilibrium /
+-- engineering acceptance gate before they enter this benchmark object.
 ------------------------------------------------------------------------
 
 record ZeroBounceHybridCandidate : Set₁ where
@@ -23,6 +26,11 @@ record ZeroBounceHybridCandidate : Set₁ where
     population : ZeroBounce.DeclaredParticlePopulation
     zeroBounce : ZeroBounce.ZeroBounceReceipt population
     triadicControl : Triadic.TriadicDetrappingSchedule population
+
+    triadicHolonomyCandidate : Search.TriadicHolonomySearchCandidate population
+    triadicHolonomyAccepted :
+      Search.AcceptedTriadicHolonomyCandidate population triadicHolonomyCandidate
+
     noBounceAcrossFiniteBetaEquilibriumReceipt : Set
     noBounceAcrossCollisionalBroadeningReceipt : Set
     noBounceAcrossEnergeticParticlePopulationReceipt : Set
@@ -59,6 +67,10 @@ record ZeroBounceHybridBoundary : Set where
     triadicControlLabelAloneProvesZeroBounceIsFalse :
       triadicControlLabelAloneProvesZeroBounce ≡ false
 
+    unacceptedC3nSearchCandidateMayEnterBenchmark : Bool
+    unacceptedC3nSearchCandidateMayEnterBenchmarkIsFalse :
+      unacceptedC3nSearchCandidateMayEnterBenchmark ≡ false
+
     zeroBounceAloneProvesBetterReactor : Bool
     zeroBounceAloneProvesBetterReactorIsFalse :
       zeroBounceAloneProvesBetterReactor ≡ false
@@ -70,6 +82,7 @@ record ZeroBounceHybridBoundary : Set where
 canonicalZeroBounceHybridBoundary : ZeroBounceHybridBoundary
 canonicalZeroBounceHybridBoundary =
   zero-bounce-hybrid-boundary
+    false refl
     false refl
     false refl
     false refl
