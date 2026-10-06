@@ -85,6 +85,22 @@ greenwaldMSTExtended = sota-source-claim
   "https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.133.055101"
   "2026-10-06"
 
+omnigenousUmbilic : SOTASourceClaim
+omnigenousUmbilic = sota-source-claim
+  "Gaur et al. omnigenous umbilic stellarators"
+  "omnigenous high-curvature twisted-boundary stellarator family"
+  "2025/2026 work constructs finite-beta and vacuum omnigenous configurations whose trapped-particle confinement is assessed with second-adiabatic-invariant structure; some boundaries exhibit a strongly twisted Mobius-like appearance"
+  "https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/omnigenous-umbilic-stellarators/9B2DA755935A20E123403AACC45833CA ; https://arxiv.org/abs/2505.04211"
+  "2026-10-06"
+
+maximumJQI : SOTASourceClaim
+maximumJQI = sota-source-claim
+  "maximum-J quasi-isodynamic stellarator literature"
+  "quasi-isodynamic / omnigenous trapped-particle optimization"
+  "maximum-J strengthens an omnigenous trapped-particle target by requiring favorable radial dependence of the second adiabatic invariant; ideal omnigenity requires negligible field-line-label dependence of J_parallel"
+  "https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/maximumj-property-in-quasiisodynamic-stellarators/4691B14FC2713173CD8AB2490649761A ; https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/magnetic-fields-with-general-omnigenity/8E3A81AF1CCBBB9CFBC9F3B0EFF6053D"
+  "2026-10-06"
+
 record SOTARegistryBoundary : Set where
   constructor sota-registry-boundary
   field
