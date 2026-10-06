@@ -4,7 +4,10 @@ module DASHI.Analysis.CollatzSyracuseParityObserverExact where
 -- SAME-OBJECT PARITY OBSERVER
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.DivMod using (_%_)
+open import Data.Product using (_×_)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.Foundations.HyperformChartGluingExact as Gluing
@@ -32,9 +35,6 @@ observerFibreIsResidueCylinder :
     Gluing.ObserverFibre (syracuseParityObserver m) word x)
 observerFibreIsResidueCylinder source word x =
   Cylinder.parityCylinderIff source word x
-  where
-    open import Data.Nat.DivMod using (_%_)
-    open import Data.Product using (_×_)
 
 record ParityObserverBoundary : Set where
   constructor parityObserverBoundary
