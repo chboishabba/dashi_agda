@@ -12,6 +12,8 @@ def main() -> None:
     assert r["section_is_right_inverse"] is True
     assert r["kernel_index_equals_image_index"] is True
     assert r["same_object_kernel_identification"] is True
+    assert r["alternating_form_descends_left"] is True
+    assert r["alternating_form_descends_right"] is True
     assert r["descended_form_is_standard_symplectic"] is True
     assert r["root_count"] == 240
     assert r["nonzero_quotient_classes_hit"] == 80
