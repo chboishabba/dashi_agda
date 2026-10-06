@@ -13,7 +13,15 @@ import DASHI.Physics.Plasma.MagneticConfinementMachineExact as Confinement
 -- The Greenwald fraction is represented as an empirical operating coordinate,
 -- not a universal theorem.  Modern high-density results motivate carrying
 -- profile, edge-collisionality, beta, wall and feedback coordinates separately.
+--
+-- IMPORTANT SAME-OBJECT NOTE:
+-- Greenwald uses electron/particle number density, not mass density.  Keep the
+-- L^-3 carrier separate from SI.Density = kg m^-3.
 ------------------------------------------------------------------------
+
+NumberDensity : SI.Dimension
+NumberDensity =
+  SI.dim SI.minusThree SI.zeroI SI.zeroI SI.zeroI SI.zeroI SI.zeroI SI.zeroI
 
 data DensityLimitModel : Set where
   greenwaldEmpiricalScaling : DensityLimitModel
@@ -27,7 +35,7 @@ record DensityOperatingEnvelope
   constructor density-operating-envelope
   field
     model : DensityLimitModel
-    lineAveragedDensity : SI.Measurement SI.Density SI.unitScale
+    lineAveragedNumberDensity : SI.Measurement NumberDensity SI.unitScale
     greenwaldFraction : SI.Measurement SI.Dimensionless SI.unitScale
     coreGreenwaldFraction : SI.Measurement SI.Dimensionless SI.unitScale
     pedestalGreenwaldFraction : SI.Measurement SI.Dimensionless SI.unitScale
@@ -81,6 +89,10 @@ record DensityLimitBoundary : Set where
     coreAndPedestalDensityShouldRemainDistinctIsTrue :
       coreAndPedestalDensityShouldRemainDistinct ≡ true
 
+    numberDensityMustNotBeIdentifiedWithMassDensity : Bool
+    numberDensityMustNotBeIdentifiedWithMassDensityIsTrue :
+      numberDensityMustNotBeIdentifiedWithMassDensity ≡ true
+
     densityLimitSearchMayUseCollisionalityBetaWallAndFeedback : Bool
     densityLimitSearchMayUseCollisionalityBetaWallAndFeedbackIsTrue :
       densityLimitSearchMayUseCollisionalityBetaWallAndFeedback ≡ true
@@ -91,5 +103,6 @@ canonicalDensityLimitBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
     true refl
