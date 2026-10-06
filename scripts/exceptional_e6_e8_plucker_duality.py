@@ -6,7 +6,6 @@ import json
 
 P = 3
 
-# E6 quotient bilinear form used by ExceptionalE6Mod3FiniteGeometryExact.
 B_E6 = (
     (2, 2, 0, 0, 0),
     (2, 2, 2, 0, 2),
@@ -15,7 +14,6 @@ B_E6 = (
     (0, 2, 0, 0, 2),
 )
 
-# Plucker quadratic q = -p12^2 - p13*p24 + p14*p23.
 B_PLUCKER = (
     (2, 0, 0, 0, 0),
     (0, 0, 0, 0, 1),
@@ -24,7 +22,6 @@ B_PLUCKER = (
     (0, 1, 0, 0, 0),
 )
 
-# M^T B_E6 M = 2 B_PLUCKER.
 M = (
     (0, 0, 1, 1, 2),
     (0, 0, 0, 0, 1),
@@ -32,6 +29,22 @@ M = (
     (1, 2, 1, 2, 1),
     (1, 0, 2, 1, 2),
 )
+
+M_INV = (
+    (0, 2, 2, 2, 2),
+    (0, 1, 1, 0, 0),
+    (2, 1, 1, 1, 2),
+    (2, 0, 2, 2, 1),
+    (0, 1, 0, 0, 0),
+)
+
+
+def add(u, v):
+    return tuple((a + b) % P for a, b in zip(u, v))
+
+
+def smul(a, u):
+    return tuple((a * x) % P for x in u)
 
 
 def matvec(a, v):
@@ -55,6 +68,8 @@ def bilinear(b, x, y):
 
 def rank_mod(a):
     a = [list(row) for row in a]
+    if not a:
+        return 0
     m, n = len(a), len(a[0])
     r = 0
     for c in range(n):
@@ -83,6 +98,17 @@ def canon(v):
     raise AssertionError("unreachable")
 
 
+def span_projective(rows):
+    out = set()
+    for coeffs in itertools.product(range(P), repeat=len(rows)):
+        v = tuple(0 for _ in range(len(rows[0])))
+        for c, row in zip(coeffs, rows):
+            v = add(v, smul(c, row))
+        if any(v):
+            out.add(canon(v))
+    return frozenset(out)
+
+
 def symplectic4(u, v):
     return (u[0] * v[1] - u[1] * v[0] + u[2] * v[3] - u[3] * v[2]) % P
 
@@ -97,13 +123,9 @@ def symplectic_lines():
     for a, b in itertools.combinations(points, 2):
         if symplectic4(a, b) != 0:
             continue
-        line = set()
-        for x, y in itertools.product(range(P), repeat=2):
-            v = tuple((x * a[i] + y * b[i]) % P for i in range(4))
-            if any(v):
-                line.add(canon(v))
+        line = span_projective((a, b))
         if len(line) == 4:
-            out.add(frozenset(line))
+            out.add(line)
     return sorted(out, key=lambda s: sorted(s))
 
 
@@ -125,8 +147,7 @@ def plucker(line):
 
 
 def plucker5(line):
-    p = plucker(line)
-    return p[:5]
+    return plucker(line)[:5]
 
 
 def e6_image(line):
@@ -141,9 +162,25 @@ def e6_null_points():
     })
 
 
+def line_from_e6_null(x):
+    y = matvec(M_INV, x)
+    p12, p13, p14, p23, p24 = y
+    p34 = (-p12) % P
+    skew = (
+        (0, p12, p13, p14),
+        ((-p12) % P, 0, p23, p24),
+        ((-p13) % P, (-p23) % P, 0, p34),
+        ((-p14) % P, (-p24) % P, (-p34) % P, 0),
+    )
+    rows = tuple(row for row in skew if any(row))
+    line = span_projective(rows)
+    return line, rank_mod(skew)
+
+
 def compute_receipt():
     lhs = matmul(transpose(M), matmul(B_E6, M))
     rhs = tuple(tuple((2 * x) % P for x in row) for row in B_PLUCKER)
+    ident5 = tuple(tuple(1 if i == j else 0 for j in range(5)) for i in range(5))
     lines = symplectic_lines()
     images = [e6_image(line) for line in lines]
     nulls = e6_null_points()
@@ -154,16 +191,26 @@ def compute_receipt():
         for j in range(i + 1, len(lines)):
             b = lines[j]
             xb = images[j]
-            intersects = bool(a & b)
-            orthogonal = bilinear(B_E6, xa, xb) == 0
-            if intersects != orthogonal:
+            if bool(a & b) != (bilinear(B_E6, xa, xb) == 0):
                 pairwise = False
                 break
         if not pairwise:
             break
 
+    inverse_ok = True
+    inverse_rank_two = True
+    inverse_isotropic = True
+    for x in nulls:
+        line, rank = line_from_e6_null(x)
+        inverse_rank_two &= rank == 2
+        inverse_isotropic &= len(line) == 4 and all(
+            symplectic4(a, b) == 0 for a, b in itertools.combinations(line, 2)
+        )
+        inverse_ok &= e6_image(line) == x
+
     return {
         "matrix_rank": rank_mod(M),
+        "inverse_matrix_identity": matmul(M, M_INV) == ident5 and matmul(M_INV, M) == ident5,
         "gram_identity": lhs == rhs,
         "gram_scalar": 2,
         "symplectic_projective_points": len(pg3_points()),
@@ -174,7 +221,11 @@ def compute_receipt():
         "image_equals_null_quadric": set(images) == set(nulls),
         "pairwise_incidence_checked": pairwise,
         "line_intersection_iff_e6_orthogonality": pairwise,
+        "inverse_skew_rank_two_all40": inverse_rank_two,
+        "inverse_planes_symplectic_isotropic_all40": inverse_isotropic,
+        "two_sided_roundtrip_all40": inverse_ok,
         "matrix": M,
+        "inverse_matrix": M_INV,
     }
 
 
