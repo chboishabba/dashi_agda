@@ -30,6 +30,8 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v9
       - name: Python parity-cylinder calibration
         run: python3 scripts/check_collatz_syracuse_parity_cylinder.py
+      - name: Python one-step residue calibration
+        run: python3 scripts/check_collatz_syracuse_one_step.py
       - name: Python affine-iterate calibration
         run: python3 scripts/check_collatz_syracuse_affine_iterate.py
       - name: Static literal Syracuse audit
