@@ -10,15 +10,9 @@ import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Archive
 ------------------------------------------------------------------------
 -- OCCUPY COORDINATION-BURDEN EXPERIMENT-DESIGN FRONTIER.
 --
--- This owner does not estimate a causal effect.  It specializes the repo's
+-- This owner does not estimate a causal effect. It specializes the repo's
 -- generic robustness / experiment-design frontier to the archival governance
 -- problem exposed by the People's Library minutes.
---
--- Provenance split:
---   * meeting/incidence/process observations come from primary archival records;
---   * the measurement design below is DASHI-derived;
---   * causal or cost-functional claims remain uninstantiated until the design's
---     required measurements, controls and validation receipts are actually paid.
 ------------------------------------------------------------------------
 
 data OptionalNat : Set where
@@ -83,24 +77,14 @@ open CoordinationBurdenMeasurementRequirements public
 canonicalMeasurementRequirements : CoordinationBurdenMeasurementRequirements
 canonicalMeasurementRequirements =
   coordinationBurdenMeasurementRequirements
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
+    true true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Existing archival packet expressed at the measurement interface.
 --
 -- Only measurements actually paid by the current archive are populated.
--- Unknown duration/mediation/table counts remain `unmeasured`; qualitative
--- phrases such as "majority of our time" are not silently converted to minutes.
+-- Qualitative phrases such as "majority of our time" are not converted to
+-- invented minutes.
 ------------------------------------------------------------------------
 
 nov28CurrentMeasurement : MeetingMeasurement
@@ -109,8 +93,8 @@ nov28CurrentMeasurement =
     "People's Library Working Group 2011-11-28"
     Archive.minutesIndexURL
     (measured 7)
-    unmeasured
-    unmeasured
+    (measured 19)
+    (measured 5)
     unmeasured
     unmeasured
     unmeasured
@@ -128,14 +112,14 @@ dec04CurrentMeasurement =
     unmeasured
     unmeasured
     unmeasured
-    unmeasured
+    (measured 10)
     unmeasured
     unmeasured
     false
 
 ------------------------------------------------------------------------
 -- Candidate experiments are framed using the repo-generic ExperimentDesign
--- carrier.  The score is only a prioritization heuristic for evidence
+-- carrier. The score is only a prioritization heuristic for evidence
 -- acquisition; it is not a scientific result or authority.
 ------------------------------------------------------------------------
 
@@ -160,10 +144,7 @@ PreferredAcquisition left right = acquisitionPriority right ≤ acquisitionPrior
 
 canonicalAcquisitionDesign : Robust.ExperimentDesign EvidenceAcquisitionExperiment Nat
 canonicalAcquisitionDesign =
-  Robust.experimentDesign
-    acquisitionPriority
-    PreferredAcquisition
-    ⊤
+  Robust.experimentDesign acquisitionPriority PreferredAcquisition ⊤
 
 ------------------------------------------------------------------------
 -- Promotion boundary.
@@ -192,19 +173,8 @@ open CoordinationBurdenExperimentBoundary public
 canonicalExperimentBoundary : CoordinationBurdenExperimentBoundary
 canonicalExperimentBoundary =
   coordinationBurdenExperimentBoundary
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    true
-    true
-    true
-    true
-    true
+    false false false false false false false false
+    true true true true true
 
 ------------------------------------------------------------------------
 -- Generic robustness frontier is retained rather than redefined.
@@ -226,6 +196,6 @@ canonicalOccupyCoordinationBurdenExperimentReceipt =
     "Occupy coordination-burden experiment-design frontier"
     "DASHI.Governance.OccupyCoordinationBurdenExperimentDesignExact"
     "canonicalExperimentBoundary"
-    "specializes the existing robust experiment-inference frontier to require incidence, duration, mediation, tabled-item, decision, participant, issue, meeting-type, external-shock and source-completeness measurements before quantitative burden inference"
-    "current archival co-occurrence is descriptive only: no empirical coordination-cost functional or causal incidence-to-burden relationship is paid, and held-out validation plus quantitative identifiability remain required"
+    "specializes the existing robust experiment-inference frontier; current source-paid measurements now include seven admitted Nov-28 incidence rows, nineteen named attendees, five listed agenda items, and ten Dec-04 agenda items explicitly tabled because of mediation"
+    "meeting duration and mediation duration remain unmeasured; current archival co-occurrence is descriptive only and pays neither an empirical coordination-cost functional nor a causal incidence-to-burden relationship"
     "agda -i . DASHI/Governance/OccupyCoordinationBurdenExperimentDesignRegression.agda"
