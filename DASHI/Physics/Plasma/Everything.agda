@@ -16,6 +16,9 @@ import DASHI.Physics.Plasma.GreenwaldDensityOperatingEnvelopeBidiExact
 import DASHI.Physics.Plasma.MagneticConfinementSOTARegistry20261006
 import DASHI.Physics.Plasma.CommercialConfinementParetoHyperfabricExact
 import DASHI.Physics.Plasma.ProgrammableTokamakStellaratorHybridExact
+import DASHI.Physics.Plasma.TrappedParticleInvariantReferenceExact
+import DASHI.Physics.Plasma.MobiusFrameBounceCancellationExact
+import DASHI.Physics.Plasma.MobiusFrameHybridTrappedParticleCandidateExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
