@@ -19,6 +19,9 @@ import DASHI.Physics.Plasma.ProgrammableTokamakStellaratorHybridExact
 import DASHI.Physics.Plasma.TrappedParticleInvariantReferenceExact
 import DASHI.Physics.Plasma.MobiusFrameBounceCancellationExact
 import DASHI.Physics.Plasma.MobiusFrameHybridTrappedParticleCandidateExact
+import DASHI.Physics.Plasma.ZeroBouncePopulationExact
+import DASHI.Physics.Plasma.TriadicZeroBounceControlExact
+import DASHI.Physics.Plasma.ZeroBounceHybridBenchmarkExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
