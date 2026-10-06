@@ -101,6 +101,22 @@ maximumJQI = sota-source-claim
   "https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/maximumj-property-in-quasiisodynamic-stellarators/4691B14FC2713173CD8AB2490649761A ; https://www.cambridge.org/core/journals/journal-of-plasma-physics/article/magnetic-fields-with-general-omnigenity/8E3A81AF1CCBBB9CFBC9F3B0EFF6053D"
   "2026-10-06"
 
+rotatingMagneticFieldCurrentDrive : SOTASourceClaim
+rotatingMagneticFieldCurrentDrive = sota-source-claim
+  "rotamak / FRC rotating-magnetic-field literature"
+  "time-dependent rotating transverse magnetic field control"
+  "rotating magnetic fields have been used experimentally and theoretically for non-inductive current drive and sustainment in FRC / rotamak configurations; this establishes physical rotating-field control as a real actuator class, not a proof of zero-bounce confinement"
+  "Jones, Phys. Plasmas 6 (1999) 1950, doi:10.1063/1.873452 ; Steinhauer, Phys. Plasmas 18 (2011) 070501, doi:10.1063/1.3613680"
+  "2026-10-06"
+
+rotatingMagneticFieldHeatingRisk : SOTASourceClaim
+rotatingMagneticFieldHeatingRisk = sota-source-claim
+  "Cohen-Glasser RMF orbit study"
+  "ion-cyclotron-range rotating magnetic field in FRC geometry"
+  "Hamiltonian orbit calculations found explosive ion heating when the rotating magnetic field frequency approaches the ion-cyclotron range; dynamic de-trapping therefore needs an explicit resonance/heating exclusion rather than a faster-is-better rule"
+  "Cohen and Glasser, Phys. Rev. Lett. 85 (2000) 5114, doi:10.1103/PhysRevLett.85.5114"
+  "2026-10-06"
+
 record SOTARegistryBoundary : Set where
   constructor sota-registry-boundary
   field
