@@ -6,6 +6,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Bolo
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact as Occupy
 import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
+import DASHI.Governance.OccupyArchivalObservationModelExact as Observation
 import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact as LibraryGraph
 import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Longitudinal
 import DASHI.Governance.OccupyLibraryMeetingDurationEvidenceExact as Duration
@@ -17,29 +18,11 @@ import DASHI.Governance.GeneralGroupDecisionQuantitativeEvidenceAtlasExact as Ge
 import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bookchin
 import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
-------------------------------------------------------------------------
--- CROSS-SOURCE EVIDENCE INSTANTIATION CAPSTONE.
---
--- Attribution rule: agreement or structural similarity never collapses source
--- provenance. Each lane retains its own author/institution, evidentiary role,
--- and claim ceiling. The capstone merely assembles already-typed lanes.
-------------------------------------------------------------------------
-
 data EvidenceProvenanceClass : Set where
-  primaryPoliticalDesignSource : EvidenceProvenanceClass
-  primaryArchivalRecord : EvidenceProvenanceClass
-  empiricalSocialMovementStudy : EvidenceProvenanceClass
-  externalGroupDecisionExperiment : EvidenceProvenanceClass
-  primaryAssessmentSource : EvidenceProvenanceClass
-  dashiDerivedBridge : EvidenceProvenanceClass
+  primaryPoliticalDesignSource primaryArchivalRecord empiricalSocialMovementStudy externalGroupDecisionExperiment primaryAssessmentSource dashiDerivedBridge : EvidenceProvenanceClass
 
 data EvidenceLane : Set where
-  boloPrimaryLane : EvidenceLane
-  occupyArchivalLane : EvidenceLane
-  occupyEmpiricalLane : EvidenceLane
-  generalGroupDecisionLane : EvidenceLane
-  bookchinPrimaryLane : EvidenceLane
-  sr15PrimaryLane : EvidenceLane
+  boloPrimaryLane occupyArchivalLane occupyEmpiricalLane generalGroupDecisionLane bookchinPrimaryLane sr15PrimaryLane : EvidenceLane
 
 laneClass : EvidenceLane → EvidenceProvenanceClass
 laneClass boloPrimaryLane = primaryPoliticalDesignSource
@@ -66,26 +49,11 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     bookchinSource : Bookchin.BookchinConfederalismSourceBoundary
     bookchinBridge : Bookchin.BookchinDASHIAlignment
     sr15Source : SR15.SR15SourceBoundary
-
-    nestedCommunityArchitectureEvidencePresent : Bool
-    boundedArchivalInteractionEvidencePresent : Bool
-    boundedFiniteArchivalIncidenceGraphPresent : Bool
-    longitudinalArchivalIncidenceFamilyPresent : Bool
-    sourceExplicitMeetingPanelPresent : Bool
-    archivalProcessBurdenObservationsPresent : Bool
-    measuredMeetingDurationEvidencePresent : Bool
-    coordinationBurdenExperimentDesignPresent : Bool
-    prospectiveHeldOutProtocolPresent : Bool
-    causalPromotionObligationSurfacePresent : Bool
-    consensusBurdenBenefitPluralEvidencePresent : Bool
-    generalGroupDecisionQuantitativeEvidencePresent : Bool
-    recallableConfederalCoordinationEvidencePresent : Bool
-    transitionViabilityConstraintEvidencePresent : Bool
+    nestedCommunityArchitectureEvidencePresent boundedArchivalInteractionEvidencePresent boundedFiniteArchivalIncidenceGraphPresent longitudinalArchivalIncidenceFamilyPresent sourceExplicitMeetingPanelPresent archivalObservationModelPresent archivalProcessBurdenObservationsPresent measuredMeetingDurationEvidencePresent coordinationBurdenExperimentDesignPresent prospectiveHeldOutProtocolPresent causalPromotionObligationSurfacePresent consensusBurdenBenefitPluralEvidencePresent generalGroupDecisionQuantitativeEvidencePresent recallableConfederalCoordinationEvidencePresent transitionViabilityConstraintEvidencePresent : Bool
 
 open FederatedGovernanceEvidenceInstantiation public
 
-canonicalFederatedGovernanceEvidenceInstantiation :
-  FederatedGovernanceEvidenceInstantiation
+canonicalFederatedGovernanceEvidenceInstantiation : FederatedGovernanceEvidenceInstantiation
 canonicalFederatedGovernanceEvidenceInstantiation =
   federatedGovernanceEvidenceInstantiation
     Bolo.canonicalBoloBoloPrimarySourceAtlas
@@ -102,91 +70,23 @@ canonicalFederatedGovernanceEvidenceInstantiation =
     Bookchin.canonicalBookchinConfederalismSourceBoundary
     Bookchin.canonicalBookchinDASHIAlignment
     SR15.canonicalSR15SourceBoundary
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-
-------------------------------------------------------------------------
--- What is now paid, and what is not.
-------------------------------------------------------------------------
+    true true true true true true true true true true true true true true true
 
 record FederatedGovernanceEvidenceBoundary : Set where
   constructor federatedGovernanceEvidenceBoundary
   field
-    crossSourceAgreementCollapsesProvenance : Bool
-    boloArchitectureAttributedToBookchin : Bool
-    bookchinConfederalismAttributedToPM : Bool
-    ipccTransitionEvidenceCreatesPoliticalDoctrine : Bool
-    occupyEvidencePaysQuantitativeScalingLaw : Bool
-    generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling : Bool
-
-    boloSourcePaysNestedArchitecture : Bool
-    occupyArchivePaysBoundedNamedInteraction : Bool
-    occupyArchivePaysBoundedFiniteIncidenceGraph : Bool
-    occupyArchivePaysLongitudinalIncidenceFamily : Bool
-    occupyArchivePaysSourceExplicitMeetingPanel : Bool
-    occupyArchivePaysProcessBurdenObservations : Bool
-    occupyArchivePaysMeasuredMeetingDurations : Bool
-    dashiPaysCoordinationBurdenExperimentDesign : Bool
-    dashiPaysProspectiveHeldOutProtocol : Bool
-    dashiPaysCausalPromotionObligationSurface : Bool
-    occupyLiteraturePaysPluralProcessEvidence : Bool
-    generalGroupDecisionEvidencePaysMechanismPlausibility : Bool
-    bookchinSourcePaysRecallableConfederalCoordination : Bool
-    sr15PaysSystemTransitionConstraintSurface : Bool
-
-    actualPolityLegitimacyPaid : Bool
-    actualParticipantIssueIncidencePaid : Bool
-    empiricalCoordinationCostFunctionalPaid : Bool
-    quantitativeIncidenceBurdenRelationshipPaid : Bool
-    incidenceBurdenCausalEffectPromoted : Bool
-    prospectiveHeldOutValidationPaid : Bool
-    concreteClimateViabilityOfFederationPaid : Bool
+    crossSourceAgreementCollapsesProvenance boloArchitectureAttributedToBookchin bookchinConfederalismAttributedToPM ipccTransitionEvidenceCreatesPoliticalDoctrine occupyEvidencePaysQuantitativeScalingLaw generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling : Bool
+    boloSourcePaysNestedArchitecture occupyArchivePaysBoundedNamedInteraction occupyArchivePaysBoundedFiniteIncidenceGraph occupyArchivePaysLongitudinalIncidenceFamily occupyArchivePaysSourceExplicitMeetingPanel dashiPaysArchivalObservationModel occupyArchivePaysProcessBurdenObservations occupyArchivePaysMeasuredMeetingDurations dashiPaysCoordinationBurdenExperimentDesign dashiPaysProspectiveHeldOutProtocol dashiPaysCausalPromotionObligationSurface occupyLiteraturePaysPluralProcessEvidence generalGroupDecisionEvidencePaysMechanismPlausibility bookchinSourcePaysRecallableConfederalCoordination sr15PaysSystemTransitionConstraintSurface : Bool
+    actualPolityLegitimacyPaid actualParticipantIssueIncidencePaid empiricalCoordinationCostFunctionalPaid quantitativeIncidenceBurdenRelationshipPaid incidenceBurdenCausalEffectPromoted prospectiveHeldOutValidationPaid concreteClimateViabilityOfFederationPaid : Bool
 
 open FederatedGovernanceEvidenceBoundary public
 
-canonicalFederatedGovernanceEvidenceBoundary :
-  FederatedGovernanceEvidenceBoundary
+canonicalFederatedGovernanceEvidenceBoundary : FederatedGovernanceEvidenceBoundary
 canonicalFederatedGovernanceEvidenceBoundary =
   federatedGovernanceEvidenceBoundary
-    false
-    false
-    false
-    false
-    false
-    false
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
-    false
-    false
+    false false false false false false
+    true true true true true true true true true true true true true true true
+    false false false false false false false
 
 canonicalFederatedGovernanceEvidenceReceipt : GenericReceipt.GenericReceipt
 canonicalFederatedGovernanceEvidenceReceipt =
@@ -194,6 +94,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed bolo'bolo, bounded and longitudinal Occupy archival incidence, a source-explicit meeting panel with preserved missingness, archival process-strain and measured-duration observations, Occupy scholarship, external quantitative group-decision evidence, Bookchin confederalism, IPCC SR1.5 evidence, a DASHI-derived burden experiment-design frontier, deterministic manifest-first held-out protocol and causal-promotion obligation surface while preserving source class and claim ceilings"
-    "the panel and split protocol are paid methodology/evidence surfaces only: missingness is not zero, posted agenda count is not the observed issue set, and complete real-institution incidence, an empirical coordination-cost functional, a quantitative/causal OWS incidence-to-burden relationship and actual prospective held-out validation remain unpaid"
+    "assembles independently attributed political-design, archival, empirical and assessment lanes with a source-explicit meeting panel, deterministic held-out protocol, causal-promotion surface and a DASHI archival event-record-coding observation model"
+    "coding fidelity, documentary soundness and documentary completeness remain distinct; missingness is not zero, posted agenda count is not the observed issue set, and complete incidence, empirical cost, causal effect and prospective held-out validation remain unpaid"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
