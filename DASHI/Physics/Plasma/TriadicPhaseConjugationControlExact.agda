@@ -3,38 +3,54 @@ module DASHI.Physics.Plasma.TriadicPhaseConjugationControlExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Foundations.Base369TriadicPhaseTower as Tower
+import DASHI.Algebra.TriadicDepthOneCharacters as C3
+import DASHI.Moonshine.C3FourierConjugationExact as Fourier
+import DASHI.Moonshine.C3CyclotomicRealDescentExact as Descent
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact as Zeta54
 
 ------------------------------------------------------------------------
 -- C3 PHASE + INVERSION/CONJUGATION CONTROL OWNER
 --
--- Repo-native inspiration:
---   {1,zeta,zeta^-1} = fixed phase + nontrivial inverse pair.
+-- This module REUSES the repository's literal depth-one C3 phase carrier rather
+-- than copying it.  Hence the plasma control chart inherits the theorem-level
+-- identities already proved by the Fourier/cyclotomic owners:
 --
--- Plasma use is only the abstract phase-action shape:
---   phase0 fixed; phase+ <-> phase- under inversion/conjugation.
+--   zeta^2 = zeta^-1,
+--   inversePhase (inversePhase p) = p,
+--   one fixed conjugation orbit + one nontrivial inverse pair.
 --
--- No E8, cyclotomic, Heisenberg, or moonshine object is identified physically
--- with the plasma.  This module is a structural donor for actuator/control
--- symmetry and same-object phase bookkeeping only.
+-- Plasma use remains only the phase-action shape.  No E8, cyclotomic,
+-- Heisenberg, or moonshine carrier is physically identified with the plasma.
 ------------------------------------------------------------------------
 
-data TriadicControlPhase : Set where
-  fixedPhase : TriadicControlPhase
-  positivePhase : TriadicControlPhase
-  negativePhase : TriadicControlPhase
+TriadicControlPhase : Set
+TriadicControlPhase = C3.C3Phase
+
+fixedPhase positivePhase negativePhase : TriadicControlPhase
+fixedPhase = Fourier.one
+positivePhase = Fourier.zeta
+negativePhase = Fourier.zetaSquared
 
 inversePhase : TriadicControlPhase → TriadicControlPhase
-inversePhase fixedPhase = fixedPhase
-inversePhase positivePhase = negativePhase
-inversePhase negativePhase = positivePhase
+inversePhase = Fourier.inversePhase
 
 inversePhaseInvolutive : (p : TriadicControlPhase) →
   inversePhase (inversePhase p) ≡ p
-inversePhaseInvolutive fixedPhase = refl
-inversePhaseInvolutive positivePhase = refl
-inversePhaseInvolutive negativePhase = refl
+inversePhaseInvolutive = Fourier.inversePhaseInvolutive
+
+positiveSquaredIsNegative :
+  C3.multiplyPhase positivePhase positivePhase ≡ negativePhase
+positiveSquaredIsNegative = Fourier.zetaSquaredIsSquareOfZeta
+
+negativeIsInversePositive : negativePhase ≡ inversePhase positivePhase
+negativeIsInversePositive = Fourier.zetaSquaredIsInverseZeta
+
+positiveTimesNegativeIsFixed :
+  C3.multiplyPhase positivePhase negativePhase ≡ fixedPhase
+positiveTimesNegativeIsFixed = Fourier.zetaTimesInverseZetaIsOne
+
+phaseOrbit : TriadicControlPhase → Descent.C3ConjugationOrbit
+phaseOrbit = Descent.conjugationOrbit
 
 record TriadicConjugationControlReceipt : Set₁ where
   constructor triadic-conjugation-control-receipt
@@ -53,6 +69,10 @@ open TriadicConjugationControlReceipt public
 record TriadicConjugationBoundary : Set where
   constructor triadic-conjugation-boundary
   field
+    literalRepoC3CarrierReused : Bool
+    literalRepoC3CarrierReusedIsTrue :
+      literalRepoC3CarrierReused ≡ true
+
     zetaStructureMayDonatePhaseActionShape : Bool
     zetaStructureMayDonatePhaseActionShapeIsTrue :
       zetaStructureMayDonatePhaseActionShape ≡ true
@@ -73,10 +93,11 @@ canonicalTriadicConjugationBoundary : TriadicConjugationBoundary
 canonicalTriadicConjugationBoundary =
   triadic-conjugation-boundary
     true refl
+    true refl
     false refl
     false refl
     true refl
 
 zetaStructuralDonorReference : String
 zetaStructuralDonorReference =
-  "DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact: nontrivial zeta/zeta^-1 sheet pair over the ternary carrier; structural phase-action donor only."
+  "C3FourierConjugationExact + C3CyclotomicRealDescentExact + Base369ZetaHeisenbergFiftyFourCarrierExact: literal C3 phase/inversion owner and nontrivial zeta/zeta^-1 sheet pair; physical plasma identification remains false."
