@@ -40,8 +40,20 @@ boundedOccupyInteractionIsPaid :
   ≡ true
 boundedOccupyInteractionIsPaid = refl
 
+boundedFiniteOccupyGraphIsPaid :
+  Capstone.occupyArchivePaysBoundedFiniteIncidenceGraph
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+boundedFiniteOccupyGraphIsPaid = refl
+
 completeRealIncidenceStillUnpaid :
   Capstone.actualParticipantIssueIncidencePaid
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ false
 completeRealIncidenceStillUnpaid = refl
+
+coordinationCostStillUnpaid :
+  Capstone.empiricalCoordinationCostFunctionalPaid
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ false
+coordinationCostStillUnpaid = refl
