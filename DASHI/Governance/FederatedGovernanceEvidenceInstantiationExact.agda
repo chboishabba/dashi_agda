@@ -9,6 +9,7 @@ import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
 import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact as LibraryGraph
 import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Longitudinal
 import DASHI.Governance.OccupyCoordinationBurdenExperimentDesignExact as BurdenDesign
+import DASHI.Governance.GeneralGroupDecisionQuantitativeEvidenceAtlasExact as General
 import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bookchin
 import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
@@ -24,6 +25,7 @@ data EvidenceProvenanceClass : Set where
   primaryPoliticalDesignSource : EvidenceProvenanceClass
   primaryArchivalRecord : EvidenceProvenanceClass
   empiricalSocialMovementStudy : EvidenceProvenanceClass
+  externalGroupDecisionExperiment : EvidenceProvenanceClass
   primaryAssessmentSource : EvidenceProvenanceClass
   dashiDerivedBridge : EvidenceProvenanceClass
 
@@ -31,6 +33,7 @@ data EvidenceLane : Set where
   boloPrimaryLane : EvidenceLane
   occupyArchivalLane : EvidenceLane
   occupyEmpiricalLane : EvidenceLane
+  generalGroupDecisionLane : EvidenceLane
   bookchinPrimaryLane : EvidenceLane
   sr15PrimaryLane : EvidenceLane
 
@@ -38,6 +41,7 @@ laneClass : EvidenceLane → EvidenceProvenanceClass
 laneClass boloPrimaryLane = primaryPoliticalDesignSource
 laneClass occupyArchivalLane = primaryArchivalRecord
 laneClass occupyEmpiricalLane = empiricalSocialMovementStudy
+laneClass generalGroupDecisionLane = externalGroupDecisionExperiment
 laneClass bookchinPrimaryLane = primaryPoliticalDesignSource
 laneClass sr15PrimaryLane = primaryAssessmentSource
 
@@ -49,6 +53,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     occupyLibraryObservedEdges : List LibraryGraph.ObservedEdge
     occupyLongitudinalObservedEdges : List Longitudinal.LongitudinalEdge
     occupySynthesis : Occupy.OccupyEvidenceSynthesis
+    generalGroupDecisionSources : List General.GeneralGroupDecisionSource
     bookchinSource : Bookchin.BookchinConfederalismSourceBoundary
     bookchinBridge : Bookchin.BookchinDASHIAlignment
     sr15Source : SR15.SR15SourceBoundary
@@ -60,6 +65,7 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     archivalProcessBurdenObservationsPresent : Bool
     coordinationBurdenExperimentDesignPresent : Bool
     consensusBurdenBenefitPluralEvidencePresent : Bool
+    generalGroupDecisionQuantitativeEvidencePresent : Bool
     recallableConfederalCoordinationEvidencePresent : Bool
     transitionViabilityConstraintEvidencePresent : Bool
 
@@ -74,9 +80,11 @@ canonicalFederatedGovernanceEvidenceInstantiation =
     LibraryGraph.canonicalObservedEdges
     Longitudinal.longitudinalObservedEdges
     Occupy.canonicalOccupyEvidenceSynthesis
+    General.canonicalGeneralGroupDecisionSources
     Bookchin.canonicalBookchinConfederalismSourceBoundary
     Bookchin.canonicalBookchinDASHIAlignment
     SR15.canonicalSR15SourceBoundary
+    true
     true
     true
     true
@@ -99,6 +107,7 @@ record FederatedGovernanceEvidenceBoundary : Set where
     bookchinConfederalismAttributedToPM : Bool
     ipccTransitionEvidenceCreatesPoliticalDoctrine : Bool
     occupyEvidencePaysQuantitativeScalingLaw : Bool
+    generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling : Bool
 
     boloSourcePaysNestedArchitecture : Bool
     occupyArchivePaysBoundedNamedInteraction : Bool
@@ -107,6 +116,7 @@ record FederatedGovernanceEvidenceBoundary : Set where
     occupyArchivePaysProcessBurdenObservations : Bool
     dashiPaysCoordinationBurdenExperimentDesign : Bool
     occupyLiteraturePaysPluralProcessEvidence : Bool
+    generalGroupDecisionEvidencePaysMechanismPlausibility : Bool
     bookchinSourcePaysRecallableConfederalCoordination : Bool
     sr15PaysSystemTransitionConstraintSurface : Bool
 
@@ -127,6 +137,8 @@ canonicalFederatedGovernanceEvidenceBoundary =
     false
     false
     false
+    false
+    true
     true
     true
     true
@@ -148,6 +160,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed bolo'bolo, bounded and longitudinal Occupy archival incidence, archival process-strain observations, Occupy scholarship, Bookchin confederalism, IPCC SR1.5 evidence and a DASHI-derived experiment-design frontier while preserving source class and claim ceilings"
-    "fifty-two admitted archival rows and qualitative process-strain co-occurrences are descriptive only; complete real-institution incidence, an empirical coordination-cost functional, a quantitative incidence-to-burden relationship, actual legitimacy and concrete climate viability remain unpaid"
+    "assembles independently attributed bolo'bolo, bounded and longitudinal Occupy archival incidence, archival process-strain observations, Occupy scholarship, external quantitative group-decision evidence, Bookchin confederalism, IPCC SR1.5 evidence and a DASHI-derived experiment-design frontier while preserving source class and claim ceilings"
+    "external group-decision experiments pay mechanism plausibility but not direct Occupy validation; fifty-two admitted archival rows and qualitative process-strain co-occurrences remain descriptive, while complete real-institution incidence, an empirical coordination-cost functional and a quantitative OWS incidence-to-burden relationship remain unpaid"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
