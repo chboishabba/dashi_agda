@@ -8,18 +8,18 @@ import DASHI.Physics.GR.ControlledEMGWExchangeFiniteReversalExact as Reversal
 import DASHI.Physics.GR.MaxwellGWControlledExchangeSameObjectExact as MaxwellGW
 import DASHI.Physics.GR.MaxwellMetricHodgeStressEnergyExact as MaxwellStress
 import DASHI.Physics.GR.ControlledEMGWEnergyFrequencyPhaseCalibrationExact as Calibration
+import DASHI.Physics.GR.SchutzholdInteractionWorkNormalizationExact as Work
+import DASHI.Physics.GR.SchutzholdFrequencyPhaseReadoutExact as FrequencyPhase
 import DASHI.Physics.ExoticGravity.AntigravityControlledGWExchangeCrossPollinationExact as Anti
 import DASHI.Physics.YangMills.R144EMGWControlledExchangeInstantiationExact as R144GW
 
 ------------------------------------------------------------------------
 -- END-TO-END MAX-CUT COMPILER
 --
--- Maxwell and metric-dependent Hodge structure are already repo objects, and
--- the SI/Planck energy-frequency authority surface already exists.  This
--- compiler therefore does not list those as missing physics.  The remaining
--- physical seam is exact same-object realization: Hilbert metric variation,
--- R144 tangent/stress insertion, interaction-work normalization, and the
--- experiment-specific delay-line calibration.
+-- Maxwell and metric-dependent Hodge structure are already repo objects, the
+-- SI/Planck energy-frequency authority surface already exists, and Schuetzhold
+-- fixes the symbolic work/frequency/delayed-phase laws.  The remaining seam is
+-- exact same-object realization and quantitative apparatus calibration.
 ------------------------------------------------------------------------
 
 record ControlledGWExchangePhysicalInputs
@@ -82,10 +82,6 @@ record ControlledGWExchangeResidualClosure
 
 open ControlledGWExchangeResidualClosure public
 
-------------------------------------------------------------------------
--- Finite reversal algebra is already paid independently of the physical weld.
-------------------------------------------------------------------------
-
 finiteOrthogonalReversalPaid :
   Reversal.reversalActsOnSign
     Exchange.orthogonalPathExchange Exchange.emissionLike
@@ -119,9 +115,12 @@ existingEnergyFrequencyBoundary : Calibration.EnergyFrequencyPhaseBoundary
 existingEnergyFrequencyBoundary =
   Calibration.canonicalEnergyFrequencyPhaseBoundary
 
-------------------------------------------------------------------------
--- Frontier accounting after reuse audit.
-------------------------------------------------------------------------
+existingWorkLawBoundary : Work.SchutzholdWorkNormalizationBoundary
+existingWorkLawBoundary = Work.canonicalSchutzholdWorkNormalizationBoundary
+
+existingFrequencyPhaseLawBoundary : FrequencyPhase.SchutzholdFrequencyPhaseBoundary
+existingFrequencyPhaseLawBoundary =
+  FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
 
 record ControlledGWExchangeFrontier : Set where
   constructor controlled-gw-exchange-frontier
@@ -133,20 +132,24 @@ record ControlledGWExchangeFrontier : Set where
     antigravityResidualCompilerConnected : Bool
     r144AbstractStressVariationConnected : Bool
     exactSIPlanckFrequencyAuthorityConnected : Bool
+    sourceWorkLawConnected : Bool
+    sourceFrequencyPhaseLawConnected : Bool
 
     newIndependentMaxwellTheoryStillNeeded : Bool
     newIndependentHodgeTheoryStillNeeded : Bool
     newIndependentConstantsTableStillNeeded : Bool
+    newIndependentWorkLawStillNeeded : Bool
+    newIndependentFrequencyPhaseLawStillNeeded : Bool
 
     hilbertEMStressMetricVariationSameObjectStillOpen : Bool
     physicalGWToR144MetricTangentSameObjectStillOpen : Bool
     physicalEMStressToR144InsertionSameObjectStillOpen : Bool
-    interactionWorkNormalizationStillOpen : Bool
-    experimentSpecificDelayPhaseCalibrationStillOpen : Bool
+    renormalizedExpectationAndIntegralNumericsStillOpen : Bool
+    experimentSpecificLaserDelayNoiseCalibrationStillOpen : Bool
 
 canonicalControlledGWExchangeFrontier : ControlledGWExchangeFrontier
 canonicalControlledGWExchangeFrontier =
   controlled-gw-exchange-frontier
-    true true true true true true true
-    false false false
+    true true true true true true true true true
+    false false false false false
     true true true true true
