@@ -35,6 +35,55 @@ canonicalE6WeylComputationReceipt =
     51840 51840 20 true 15 true true
     "generated from the six standard E6 simple reflections; quotient matrices preserve the mod-3 bilinear form; finite BFS and graph isomorphism checked locally"
 
+record HyperfabricNormalizerComputationReceipt : Set where
+  constructor hyperfabric-normalizer-computation-receipt
+  field
+    grade : E6.EvidenceGrade
+    h4Count h3Count h2Count h1Count : Nat
+    h4Stabilizer h3Stabilizer h2Stabilizer h1Stabilizer : Nat
+    h3ReflectionCoreOrder h2ReflectionCoreOrder : Nat
+    h4h3Edges h3h2Edges h2h1Edges : Nat
+    completeFlags completeFlagStabilizer : Nat
+    rootNeighborhoodIsKG62 : Bool
+    localPythonReproduced : Bool
+    provenance : String
+open HyperfabricNormalizerComputationReceipt public
+
+canonicalHyperfabricNormalizerComputationReceipt :
+  HyperfabricNormalizerComputationReceipt
+canonicalHyperfabricNormalizerComputationReceipt =
+  hyperfabric-normalizer-computation-receipt
+    E6.localFiniteComputation
+    36 120 270 36
+    1440 432 192 1440
+    216 96
+    360 1080 540
+    6480 8
+    true true
+    "exhaustive projective-subspace enumeration plus reduced W(E6) BFS; H3 reflection core has order 216 = |W(A2^3)| and H2 core order 96 = |W(A1^2 x A3)|"
+
+record A2CubedRadicalComputationReceipt : Set where
+  constructor a2-cubed-radical-computation-receipt
+  field
+    grade : E6.EvidenceGrade
+    h3PatchCount : Nat
+    distinctA2CubedSubsystems : Nat
+    patchesPerA2CubedSubsystem : Nat
+    nullProjectiveLines : Nat
+    uniqueRadicalPerH3 : Bool
+    sameRadicalIffSameA2CubedSubsystem : Bool
+    localPythonReproduced : Bool
+    provenance : String
+open A2CubedRadicalComputationReceipt public
+
+canonicalA2CubedRadicalComputationReceipt : A2CubedRadicalComputationReceipt
+canonicalA2CubedRadicalComputationReceipt =
+  a2-cubed-radical-computation-receipt
+    E6.localFiniteComputation
+    120 40 3 40
+    true true true
+    "each H3 has one radical null line and a 9-projective-root A2^3 subsystem; the 120 H3 patches collapse to 40 subsystem classes, exactly three patches per radical/subsystem class"
+
 record E8OrderThreeComputationReceipt : Set where
   constructor e8-order-three-computation-receipt
   field
@@ -71,6 +120,7 @@ record DualGeneralizedQuadrangleComputationReceipt : Set where
     e8SymplecticLines : Nat
     e6NullPointGraphIsomorphicToE8PointGraph : Bool
     e6NullPointGraphIsomorphicToE8LineIntersectionGraph : Bool
+    a2CubedGraphIsomorphicToE8LineIntersectionGraph : Bool
     localPythonReproduced : Bool
     provenance : String
 open DualGeneralizedQuadrangleComputationReceipt public
@@ -81,8 +131,8 @@ canonicalDualGeneralizedQuadrangleComputationReceipt =
   dual-generalized-quadrangle-computation-receipt
     E6.localFiniteComputation
     40 40 40
-    false true true
-    "E6 null projective graph and standard symplectic W(3,3) point graph are non-isomorphic; E6 null graph is isomorphic to the W(3,3) line-intersection graph, consistent with Q(4,3) duality"
+    false true true true
+    "E6 null projective graph is not the W(3,3) point graph; it is isomorphic to the W(3,3) line-intersection graph. Reindexing the same E6 null graph by its canonical 40 A2^3 radical classes gives the same tested dual-line weld."
 
 record T4LinearObstructionComputationReceipt : Set where
   constructor t4-linear-obstruction-computation-receipt
