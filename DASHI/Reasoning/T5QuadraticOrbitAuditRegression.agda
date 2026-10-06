@@ -2,6 +2,7 @@ module DASHI.Reasoning.T5QuadraticOrbitAuditRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (_+_)
 
 import DASHI.Reasoning.T5QuadraticOrbitAuditExact as Q
 
