@@ -8,7 +8,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.Base using (NonZero)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Foundations.Base369Nat as B369
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact as Cylinder
@@ -24,9 +24,7 @@ pow2IsSuccessor (suc m) with pow2IsSuccessor m
 pow2NonZero : (m : Nat) → NonZero (Cylinder.pow2 m)
 pow2NonZero m with pow2IsSuccessor m
 ... | predecessor , proof =
-  subst NonZero (Relation.Binary.PropositionalEquality.sym proof) B369.nonZero
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
+  subst NonZero (sym proof) B369.nonZero
 
 record Pow2ArithmeticBoundary : Set where
   constructor pow2ArithmeticBoundary
