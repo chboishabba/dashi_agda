@@ -33,3 +33,15 @@ occupyEvidenceDoesNotPayScalingLaw :
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ false
 occupyEvidenceDoesNotPayScalingLaw = refl
+
+boundedOccupyInteractionIsPaid :
+  Capstone.occupyArchivePaysBoundedNamedInteraction
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+boundedOccupyInteractionIsPaid = refl
+
+completeRealIncidenceStillUnpaid :
+  Capstone.actualParticipantIssueIncidencePaid
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ false
+completeRealIncidenceStillUnpaid = refl
