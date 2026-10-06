@@ -18,14 +18,14 @@ U = sp.Matrix([
 
 # Concrete section R : F3^4 -> F3^8 with U R = I.
 R = sp.Matrix([
-    [0, 0, 1, 0],
-    [0, 0, 0, 2],
-    [0, 1, 1, 0],
-    [0, 1, 0, 2],
+    [0, 1, 2, 2],
+    [2, 1, 2, 2],
+    [2, 0, 2, 1],
+    [1, 2, 1, 2],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
-    [1, 2, 2, 0],
+    [0, 0, 0, 0],
 ])
 
 J = sp.Matrix([
@@ -106,9 +106,9 @@ def compute_receipt() -> dict[str, object]:
     quotient_rank = rank_mod3(u3)
     image_rank = rank_mod3(a3)
 
-    # U has rank four, so ker(U mod 3) has 3^4 elements inside F3^8.
-    # The integer kernel has index 3^4=81. Since (1-w)E8 is contained in
-    # ker(U) and has the same index det(1-w)=81, the two sublattices coincide.
+    # U has rank four, so ker(U mod 3) has index 3^4 in Z^8.
+    # Since (1-w)E8 is contained in ker(U) and has the same index
+    # |det(1-w)|=81, the two sublattices are equal.
     kernel_index = P**quotient_rank
     equal_index = kernel_index == det_a
     same_object_kernel = kills and quotient_rank == 4 and equal_index
