@@ -5,7 +5,9 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
+import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
+import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact as First
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 import DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Exact as R143
@@ -53,17 +55,12 @@ record SchutzholdR144CanonicalMetricWeld
         (toCanonicalMetricPerturbation perturbation)
 
     globalBackground :
-      Source.Background
-        (DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.source
-          (Present.bc1Carrier present))
+      Source.Background (Carrier.source (Present.bc1Carrier present))
 
     globalTangent :
       SchutzholdMetricPerturbation →
-      Source.Tangent
-        (DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact.source
-          (Present.bc1Carrier present))
+      Source.Tangent (Carrier.source (Present.bc1Carrier present))
 
-    -- Same tangent in the substituted stress activity.
     canonicalTangentIsR144Tangent :
       ∀ perturbation →
       Domain.metricPerturbationToBackgroundTangent domain
@@ -73,13 +70,6 @@ record SchutzholdR144CanonicalMetricWeld
       R144.globalTangentToStressTangent r144 (globalTangent perturbation)
 
 open SchutzholdR144CanonicalMetricWeld public
-
-------------------------------------------------------------------------
--- Item 1/2/3 theorem: once the physical GW has been identified with an
--- admissible canonical metric perturbation, the metric first variation is
--- definitionally routed to the existing stress pairing, and that tangent is
--- the same tangent consumed by R144.
-------------------------------------------------------------------------
 
 schutzholdMetricVariationIsCanonicalStressPairing :
   ∀ {trajectory split inputs History Cell cutoff present actionWeld laws}
@@ -94,7 +84,7 @@ schutzholdMetricVariationIsCanonicalStressPairing :
     (weld : SchutzholdR144CanonicalMetricWeld r144 domain representation) →
   ∀ perturbation →
   StressRep.firstVariationReadout representation
-    (DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityFirstVariationRound105Exact.substitutedFirstVariation
+    (First.substitutedFirstVariation
       (R144.stressActivity r144)
       (R144.globalBackgroundToStressBackground r144 (globalBackground weld))
       (Domain.metricPerturbationToBackgroundTangent domain
@@ -105,11 +95,32 @@ schutzholdMetricVariationIsCanonicalStressPairing :
     (StressRep.stressTensor representation)
     (toCanonicalMetricPerturbation weld perturbation)
 schutzholdMetricVariationIsCanonicalStressPairing
-    {domain = domain} {representation = representation} weld perturbation =
+    {r144 = r144} {domain = domain} {representation = representation}
+    weld perturbation =
   StressRep.admittedMetricVariationEqualsStressPairing representation
-    (R144.globalBackgroundToStressBackground _ (globalBackground weld))
+    (R144.globalBackgroundToStressBackground r144 (globalBackground weld))
     (toCanonicalMetricPerturbation weld perturbation)
     (schutzholdPerturbationAdmissible weld perturbation)
+
+schutzholdCanonicalTangentIsR144StressTangent :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld laws}
+    {r144 : R144.CompositeStressFirstVariationInputs
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {History = History} {Cell = Cell} {cutoff = cutoff}
+      {present = present} actionWeld laws}
+    {Scale Volume}
+    {domain : Domain.CanonicalMetricSourceDomain Scale Volume
+      (R144.stressActivity r144)}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    (weld : SchutzholdR144CanonicalMetricWeld r144 domain representation) →
+  ∀ perturbation →
+  Domain.metricPerturbationToBackgroundTangent domain
+    (R144.globalBackgroundToStressBackground r144 (globalBackground weld))
+    (toCanonicalMetricPerturbation weld perturbation)
+  ≡
+  R144.globalTangentToStressTangent r144 (globalTangent weld perturbation)
+schutzholdCanonicalTangentIsR144StressTangent weld =
+  canonicalTangentIsR144Tangent weld
 
 record SchutzholdR144CompilerBoundary : Set where
   constructor schutzhold-r144-compiler-boundary
