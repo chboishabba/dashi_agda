@@ -6,6 +6,11 @@ import DASHI.Physics.Plasma.FRCCompressionFusionHyperfabricExact
 import DASHI.Physics.Plasma.MagneticNozzleMomentumConversionBidiExact
 import DASHI.Physics.Plasma.MHDMaxwellLorentzReductionBidiExact
 import DASHI.Physics.Plasma.FusionPropulsionScienceBidiCrossPollinationExact
+import DASHI.Physics.Plasma.MagneticConfinementMachineExact
+import DASHI.Physics.Plasma.TokamakConfinementExact
+import DASHI.Physics.Plasma.StellaratorConfinementExact
+import DASHI.Physics.Plasma.MagneticConfinementExperimentalAuthorityBidiExact
+import DASHI.Physics.Plasma.TokamakStellaratorBidiExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
