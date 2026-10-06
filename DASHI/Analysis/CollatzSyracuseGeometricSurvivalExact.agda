@@ -2,6 +2,10 @@ module DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact where
 
 ------------------------------------------------------------------------
 -- GEOMETRIC SURVIVAL COMPILER FOR THE SAME-OBJECT CYLINDER ROUTE
+--
+-- The generic numerical bound itself remains owned by
+-- FiniteUniformBranchingHittingTailExact.  This module records exactly the
+-- Syracuse-specific producers required before that theorem may be consumed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
@@ -16,27 +20,18 @@ record SyracuseGeometricSurvivalSource : Set₁ where
     exactBranchCountPaid : Set
     killedContinuationPaid : Set
     aggregateRecurrencePaid : Set
+    sampledStartTransportPaid : Set
 
 open SyracuseGeometricSurvivalSource public
-
-genericSurvivorBound :
-  (source : SyracuseGeometricSurvivalSource) →
-  (q : Nat) →
-  Tail.survivors (compiler source) q
-  Tail.≤
-  Tail.Decay.powNat
-    (Tail.branchFactor (Tail.family (compiler source)) Tail.- 1) q
-    Tail.* Tail.survivors (compiler source) 0
-genericSurvivorBound source q =
-  Tail.genericGeometricSurvivorBound (compiler source) q
 
 record GeometricSurvivalBoundary : Set where
   constructor geometricSurvivalBoundary
   field
+    genericBoundAlreadyOwnedByRepo : Nat
     spectralGapRequired : Nat
     killedContinuationRequired : Nat
     aggregateRecurrenceRequired : Nat
     universalIntegerStoppingAutomatic : Nat
 
 canonicalGeometricSurvivalBoundary : GeometricSurvivalBoundary
-canonicalGeometricSurvivalBoundary = geometricSurvivalBoundary 0 1 1 0
+canonicalGeometricSurvivalBoundary = geometricSurvivalBoundary 1 0 1 1 0
