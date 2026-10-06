@@ -32,9 +32,18 @@ nov28DiscussionBreakdownObserved :
   Longitudinal.ProcessBurdenObserved Longitudinal.nov28Meeting Longitudinal.discussionBreakdown
 nov28DiscussionBreakdownObserved = Longitudinal.nov28Breakdown
 
+nov28CooccurrenceIsDescriptive :
+  (Longitudinal.edgeCount Longitudinal.nov28Edges ≡ 7) ×
+  Longitudinal.ProcessBurdenObserved Longitudinal.nov28Meeting Longitudinal.discussionBreakdown
+nov28CooccurrenceIsDescriptive = Longitudinal.nov28IncidenceAndBreakdownCooccur
+
 incidenceDoesNotCauseBurdenByDefinition :
   Longitudinal.incidenceCountCausallyExplainsBurden Longitudinal.canonicalLongitudinalBoundary ≡ false
 incidenceDoesNotCauseBurdenByDefinition = refl
+
+descriptiveCooccurrenceDoesNotIdentifyCause :
+  Longitudinal.descriptiveCooccurrenceIsCausalIdentification Longitudinal.canonicalLongitudinalBoundary ≡ false
+descriptiveCooccurrenceDoesNotIdentifyCause = refl
 
 burdenObservationsAreNotCostFunctional :
   Longitudinal.processObservationIsCoordinationCost Longitudinal.canonicalLongitudinalBoundary ≡ false
