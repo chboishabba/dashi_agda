@@ -5,6 +5,7 @@ from exceptional_e6_e8_plucker_duality import compute_receipt
 def main() -> None:
     r = compute_receipt()
     assert r["matrix_rank"] == 5
+    assert r["inverse_matrix_identity"] is True
     assert r["gram_identity"] is True
     assert r["gram_scalar"] == 2
     assert r["symplectic_projective_points"] == 40
@@ -15,6 +16,9 @@ def main() -> None:
     assert r["image_equals_null_quadric"] is True
     assert r["pairwise_incidence_checked"] is True
     assert r["line_intersection_iff_e6_orthogonality"] is True
+    assert r["inverse_skew_rank_two_all40"] is True
+    assert r["inverse_planes_symplectic_isotropic_all40"] is True
+    assert r["two_sided_roundtrip_all40"] is True
 
 
 if __name__ == "__main__":
