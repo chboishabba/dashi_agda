@@ -34,6 +34,12 @@ occupyEvidenceDoesNotPayScalingLaw :
   ≡ false
 occupyEvidenceDoesNotPayScalingLaw = refl
 
+generalEvidenceDoesNotDirectlyValidateOccupy :
+  Capstone.generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ false
+generalEvidenceDoesNotDirectlyValidateOccupy = refl
+
 boundedOccupyInteractionIsPaid :
   Capstone.occupyArchivePaysBoundedNamedInteraction
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
@@ -63,6 +69,12 @@ experimentDesignSurfaceIsPaid :
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ true
 experimentDesignSurfaceIsPaid = refl
+
+generalMechanismPlausibilityIsPaid :
+  Capstone.generalGroupDecisionEvidencePaysMechanismPlausibility
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+generalMechanismPlausibilityIsPaid = refl
 
 completeRealIncidenceStillUnpaid :
   Capstone.actualParticipantIssueIncidencePaid
