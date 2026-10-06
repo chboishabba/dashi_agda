@@ -30,9 +30,9 @@ open ArchivalCollectionReference public
 nycgaArchivedWebsite : ArchivalCollectionReference
 nycgaArchivedWebsite =
   archivalCollectionReference
-    "New York City General Assembly archived website"
+    "New York City General Assembly at #OccupyWallStreet Archived Website"
     "Tamiment Library and Robert F. Wagner Labor Archives, New York University"
-    "https://findingaids.library.nyu.edu/tamwag/tam_630/"
+    "https://findingaids.library.nyu.edu/tamwag/web_arc_003/contents/aspace_ref1107/"
     "archive metadata states that the NYCGA website contains General Assembly meeting minutes, proposals, working-group material and activist resources; availability does not establish completeness or truth"
 
 owsArchivesWorkingGroupRecords : ArchivalCollectionReference
@@ -40,7 +40,7 @@ owsArchivesWorkingGroupRecords =
   archivalCollectionReference
     "Occupy Wall Street Archives Working Group Records"
     "Tamiment Library and Robert F. Wagner Labor Archives, New York University"
-    "https://findingaids.library.nyu.edu/tamwag/tam_583/"
+    "https://findingaids.library.nyu.edu/tamwag/tam_630/"
     "collection metadata documents General Assembly, Spokes Council and working-group decisions, notes, proposals and organizational material; collection scope does not convert every record into a vote transcript"
 
 kinnaPrichardOccupyDataset : ArchivalCollectionReference
@@ -48,7 +48,7 @@ kinnaPrichardOccupyDataset =
   archivalCollectionReference
     "Archival and workshop materials relating to constitutional practices in grass roots anarchistic organisations 2011-2018"
     "UK Data Service ReShare"
-    "https://reshare.ukdataservice.ac.uk/853098/"
+    "https://reshare.ukdataservice.ac.uk/853247/"
     "dataset includes statements and General Assembly minutes from Occupy Wall Street, Occupy London St Paul's and Occupy Oakland; corpus availability is not participant-level incidence completeness"
 
 peopleLibraryMinutes : ArchivalCollectionReference
@@ -56,7 +56,7 @@ peopleLibraryMinutes =
   archivalCollectionReference
     "Occupy Wall Street Library Working Group minutes, 22 October 2011"
     "People's Library / Occupy Wall Street archival web record"
-    "https://peopleslibrary.wordpress.com/2011/10/23/library-working-group-meeting-minutes-102211/"
+    "https://peopleslibrary.wordpress.com/2011/10/22/library-working-group-meeting-minutes/"
     "bounded working-group meeting record with named participants, facilitation roles, agenda items and named speakers; it is not a NYCGA-wide population census"
 
 canonicalOccupyArchivalCollections : List ArchivalCollectionReference
@@ -125,7 +125,7 @@ adashSpokesCouncilCandidate =
     "the source explicitly associates the named speaker with the named proposal; only a bounded participation edge is paid"
 
 ------------------------------------------------------------------------
--- Non-edge examples: useful for preventing cross-product fabrication.
+-- Non-edge example: useful for preventing cross-product fabrication.
 ------------------------------------------------------------------------
 
 steveFacilitationCandidate : ArchivalIncidenceCandidate
