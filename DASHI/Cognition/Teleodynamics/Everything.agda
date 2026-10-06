@@ -13,6 +13,8 @@ import DASHI.Cognition.Teleodynamics.ExceptionalPriorFamilyExact
 import DASHI.Cognition.Teleodynamics.ExceptionalPriorRegression
 import DASHI.Cognition.Teleodynamics.AlbertPriorBridgeExact
 import DASHI.Cognition.Teleodynamics.AlbertPriorBridgeRegression
+import DASHI.Cognition.Teleodynamics.ExceptionalE6Mod3FiniteGeometryExact
+import DASHI.Cognition.Teleodynamics.ExceptionalE6Mod3FiniteGeometryRegression
 import DASHI.Cognition.Teleodynamics.TeleodynamicCovarianceAdapterExact
 import DASHI.Cognition.Teleodynamics.TeleodynamicCovarianceRegression
 import DASHI.Cognition.Teleodynamics.LLMGeometricPriorBridgeExact
