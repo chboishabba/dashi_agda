@@ -8,17 +8,17 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.DivMod using (_%_)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
 
 pow2 : Nat → Nat
-pow2 0 = 1
+pow2 zero = 1
 pow2 (suc n) = 2 * pow2 n
-  where open import Agda.Builtin.Nat using (_*_)
 
 record ParityCylinderSource : Set₁ where
   field
@@ -60,7 +60,6 @@ parityCylinderIff :
 parityCylinderIff source word x =
   parityWordImpliesResidue source word x ,
   residueImpliesParityWord source word x
-  where open import Data.Product using (_×_; _,_)
 
 ------------------------------------------------------------------------
 -- The source is intentionally an explicit producer.  An inhabitant requires
