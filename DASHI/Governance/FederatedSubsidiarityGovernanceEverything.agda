@@ -31,7 +31,7 @@ import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 -- Evidence acquisition / instantiation lane. Primary political-design sources,
 -- empirical movement scholarship, primary archival records, external group-
 -- decision experiments, assessment evidence, and DASHI-derived bridges remain
--- separately attributed.
+-- separately attributed; longitudinal co-occurrence is not causal promotion.
 import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryExact
 import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryRegression
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
