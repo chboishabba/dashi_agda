@@ -25,6 +25,11 @@ pollettaHobanDOIPinned :
   Registry.doiOrIdentifier Source.pollettaHoban2016Source ≡ "10.5964/jspp.v4i1.524"
 pollettaHobanDOIPinned = refl
 
+occupyArchiveDatasetDOIPinned :
+  Registry.doiOrIdentifier Source.kinnaPrichard2019ArchiveSource
+  ≡ "10.5255/UKDA-SN-853247"
+occupyArchiveDatasetDOIPinned = refl
+
 sameThemeDoesNotMergeSources :
   Source.sameGovernanceThemeCollapsesProvenance Source.canonicalGovernanceEvidenceRegistryBoundary ≡ false
 sameThemeDoesNotMergeSources = refl
