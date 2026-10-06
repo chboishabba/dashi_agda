@@ -56,7 +56,7 @@ minutesIndexURL = "https://peopleslibrary.wordpress.com/the-working-group/workin
 ------------------------------------------------------------------------
 -- 22 October 2011: same admitted relation surface as the separately typed
 -- finite specimen, repeated here as strings only so the longitudinal family
--- has one uniform carrier.  This is not a second independent source.
+-- has one uniform carrier. This is not a second independent source.
 ------------------------------------------------------------------------
 
 oct22Edges : List LongitudinalEdge
@@ -83,8 +83,6 @@ oct22Edges =
 
 ------------------------------------------------------------------------
 -- 20 November 2011.
--- Source section explicitly names the people attached to these reportbacks,
--- proposals or discussion topics.  Rows do not encode stance or agreement.
 ------------------------------------------------------------------------
 
 nov20Edges : List LongitudinalEdge
@@ -150,19 +148,20 @@ jan08Edges =
   ∷ []
 
 ------------------------------------------------------------------------
--- Longitudinal family.  Appending is defined locally to avoid treating counts
--- as anything more than the admitted archival coding surface.
+-- Longitudinal family. A named append helper avoids relying on or shadowing any
+-- list-append operator exported by another owner.
 ------------------------------------------------------------------------
 
-_++_ : ∀ {A : Set} → List A → List A → List A
-[] ++ ys = ys
-(x ∷ xs) ++ ys = x ∷ (xs ++ ys)
-
-infixr 5 _++_
+appendEdges : List LongitudinalEdge → List LongitudinalEdge → List LongitudinalEdge
+appendEdges [] ys = ys
+appendEdges (x ∷ xs) ys = x ∷ appendEdges xs ys
 
 longitudinalObservedEdges : List LongitudinalEdge
 longitudinalObservedEdges =
-  oct22Edges ++ nov20Edges ++ nov28Edges ++ dec11Edges ++ jan08Edges
+  appendEdges oct22Edges
+    (appendEdges nov20Edges
+      (appendEdges nov28Edges
+        (appendEdges dec11Edges jan08Edges)))
 
 canonicalLongitudinalObservedEdgeCount :
   edgeCount longitudinalObservedEdges ≡ 52
@@ -170,10 +169,6 @@ canonicalLongitudinalObservedEdgeCount = refl
 
 ------------------------------------------------------------------------
 -- Separate archival process-observation relation.
---
--- These are what the minutes report about meeting process.  They are not
--- participant-level edges and are not a cost function.  In particular, this
--- module proves no causal relation from incidence count/degree to strain.
 ------------------------------------------------------------------------
 
 data ProcessObservationKind : Set where
@@ -201,6 +196,13 @@ data ProcessBurdenObserved : MeetingId → ProcessObservationKind → Set where
   mar11BureaucracyFrustration :
     ProcessBurdenObserved mar11Meeting explicitBureaucracyFrustration
 
+-- Descriptive co-occurrence only: this packages two independently source-paid
+-- observations from the 28 November minutes. It adds no causal arrow.
+nov28IncidenceAndBreakdownCooccur :
+  (edgeCount nov28Edges ≡ 7) ×
+  ProcessBurdenObserved nov28Meeting discussionBreakdown
+nov28IncidenceAndBreakdownCooccur = refl , nov28Breakdown
+
 ------------------------------------------------------------------------
 -- Attribution / inference firewall.
 ------------------------------------------------------------------------
@@ -219,6 +221,7 @@ record LongitudinalIncidenceBoundary : Set where
     incidenceCountIsSpeakingTime : Bool
     processObservationIsCoordinationCost : Bool
     incidenceCountCausallyExplainsBurden : Bool
+    descriptiveCooccurrenceIsCausalIdentification : Bool
     selectedMeetingsAreCompleteOWSCorpus : Bool
     sourceMinutesAssumedCompleteTranscripts : Bool
     longitudinalFamilyCreatesPoliticalAuthority : Bool
@@ -241,6 +244,7 @@ canonicalLongitudinalBoundary =
     false
     false
     false
+    false
 
 canonicalOccupyLibraryLongitudinalIncidenceReceipt : GenericReceipt.GenericReceipt
 canonicalOccupyLibraryLongitudinalIncidenceReceipt =
@@ -248,6 +252,6 @@ canonicalOccupyLibraryLongitudinalIncidenceReceipt =
     "longitudinal People's Library archival incidence family"
     "DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact"
     "canonicalLongitudinalBoundary"
-    "codes fifty-two explicit named-person-to-topic archival rows across five selected People's Library meetings and separately records source-reported process strain from later meeting minutes"
-    "the selected graph family is not a complete OWS corpus; row counts are not importance, speaking time or coordination cost, and the coexistence of incidence structure with process-strain observations proves no causal scaling law"
+    "codes fifty-two explicit named-person-to-topic archival rows across five selected People's Library meetings and separately records source-reported process strain, including a bounded 28 November incidence/strain co-occurrence"
+    "the selected graph family is not a complete OWS corpus; row counts are not importance, speaking time or coordination cost, and descriptive co-occurrence proves no causal scaling law"
     "agda -i . DASHI/Governance/OccupyLibraryLongitudinalIncidenceRegression.agda"
