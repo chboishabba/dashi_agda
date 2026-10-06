@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
 import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Archive
+import DASHI.Governance.OccupyLibraryMeetingDurationEvidenceExact as Duration
 
 ------------------------------------------------------------------------
 -- OCCUPY COORDINATION-BURDEN EXPERIMENT-DESIGN FRONTIER.
@@ -86,6 +87,36 @@ canonicalMeasurementRequirements =
 -- Qualitative phrases such as "majority of our time" are not converted to
 -- invented minutes.
 ------------------------------------------------------------------------
+
+oct15CurrentMeasurement : MeetingMeasurement
+oct15CurrentMeasurement =
+  meetingMeasurement
+    "People's Library first formal Working Group meeting 2011-10-15"
+    (Duration.sourceURL Duration.oct15FirstFormalMeeting)
+    unmeasured
+    unmeasured
+    unmeasured
+    (measured 180)
+    unmeasured
+    unmeasured
+    unmeasured
+    unmeasured
+    false
+
+oct22CurrentMeasurement : MeetingMeasurement
+oct22CurrentMeasurement =
+  meetingMeasurement
+    "People's Library Working Group 2011-10-22"
+    (Duration.sourceURL Duration.oct22Meeting)
+    (measured 18)
+    unmeasured
+    unmeasured
+    (measured 155)
+    unmeasured
+    unmeasured
+    unmeasured
+    unmeasured
+    false
 
 nov28CurrentMeasurement : MeetingMeasurement
 nov28CurrentMeasurement =
@@ -196,6 +227,6 @@ canonicalOccupyCoordinationBurdenExperimentReceipt =
     "Occupy coordination-burden experiment-design frontier"
     "DASHI.Governance.OccupyCoordinationBurdenExperimentDesignExact"
     "canonicalExperimentBoundary"
-    "specializes the existing robust experiment-inference frontier; current source-paid measurements now include seven admitted Nov-28 incidence rows, nineteen named attendees, five listed agenda items, and ten Dec-04 agenda items explicitly tabled because of mediation"
-    "meeting duration and mediation duration remain unmeasured; current archival co-occurrence is descriptive only and pays neither an empirical coordination-cost functional nor a causal incidence-to-burden relationship"
+    "specializes the existing robust experiment-inference frontier; source-paid measurements now include 180 minutes for the first formal 15 October meeting, 155 minutes plus eighteen admitted incidence rows for 22 October, seven admitted Nov-28 rows with nineteen named attendees and five listed agenda items, and ten Dec-04 agenda items explicitly tabled because of mediation"
+    "mediation duration and many controls remain unmeasured; measured meeting duration is not coordination cost, archival co-occurrence is descriptive only, and no causal incidence-to-burden relationship is paid"
     "agda -i . DASHI/Governance/OccupyCoordinationBurdenExperimentDesignRegression.agda"
