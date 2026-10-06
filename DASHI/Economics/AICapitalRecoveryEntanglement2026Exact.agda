@@ -14,21 +14,17 @@ import DASHI.Economics.AIUbiquityRentInversionExact as Ubiquity
 ------------------------------------------------------------------------
 -- AI CAPITAL-RECOVERY / ENTANGLEMENT CALIBRATION, OCTOBER 2026
 --
--- This owner formalises the joint state discussed across the AI-capex,
--- circular-financing, open-weight substitution, funding-stress and China
--- calibration lanes.  It deliberately separates:
---   * named source receipts,
---   * graph/topology witnesses,
---   * commercial-margin / capital-recovery observables,
---   * policy-backstop / strategic-value hypotheses.
---
--- No named-company observation below automatically proves fraud, insolvency,
--- antitrust liability, regulatory capture, a bubble, or an inevitable crash.
+-- Source receipts, graph/topology witnesses, margin/capital-recovery
+-- observables and policy hypotheses remain distinct.  No named-company
+-- observation automatically proves fraud, insolvency, antitrust liability,
+-- regulatory capture, a bubble or an inevitable crash.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Source receipts
-------------------------------------------------------------------------
+primaryPublicationKind : Source.SourceKind
+primaryPublicationKind = Source.namedSourceKind "primary company publication"
+
+platformTelemetryKind : Source.SourceKind
+platformTelemetryKind = Source.namedSourceKind "primary platform telemetry"
 
 cerebrasOpenAIPartnershipSource : Source.AttributedSource
 cerebrasOpenAIPartnershipSource = Source.mkNoDOISource
@@ -37,8 +33,8 @@ cerebrasOpenAIPartnershipSource = Source.mkNoDOISource
   "OpenAI"
   "2026-01-14"
   "https://openai.com/index/cerebras-partnership/"
-  Source.primarySource
-  "OpenAI announced a partnership, not an acquisition: Cerebras will add 750 MW of low-latency inference capacity to OpenAI's platform in tranches through 2028."
+  primaryPublicationKind
+  "primary carrier for a 750 MW partnership; does not establish an acquisition"
   Source.publicAttribution
 
 cerebrasQ12026Source : Source.AttributedSource
@@ -48,8 +44,8 @@ cerebrasQ12026Source = Source.mkNoDOISource
   "Cerebras investor relations"
   "2026-06-23"
   "https://investors.cerebras.ai/news-releases/news-release-details/cerebras-systems-announces-strong-first-quarter-2026-results"
-  Source.primarySource
-  "Primary-source carrier for the >USD 20 billion 750 MW OpenAI agreement, AWS partnership and Cerebras operating results."
+  primaryPublicationKind
+  "primary carrier for the >USD 20 billion 750 MW OpenAI agreement, AWS partnership and company-reported operating results"
   Source.publicAttribution
 
 softbankCreditReuters2026 : Source.AttributedSource
@@ -60,7 +56,7 @@ softbankCreditReuters2026 = Source.mkNoDOISource
   "2026-09-30"
   "https://www.reuters.com/legal/transactional/ai-borrowers-face-tough-sell-risky-corners-us-credit-market-2026-09-30/"
   Source.newsSource
-  "Secondary source for AI leveraged-finance growth and SoftBank borrowing yields reported in the 8.625%-9.75% range; this is evidence of funding stress, not a universal 10% minimum hurdle rule."
+  "secondary carrier for AI leveraged-finance growth and reported SoftBank yields of 8.625%-9.75%; not a universal 10% minimum rule"
   Source.publicAttribution
 
 kiloOpenWeightShare2026 : Source.AttributedSource
@@ -70,8 +66,8 @@ kiloOpenWeightShare2026 = Source.mkNoDOISource
   "Kilo AI"
   "2026-07"
   "https://blog.kilo.ai/p/open-weights-is-all-you-need"
-  Source.primarySource
-  "Platform-specific usage observation: open-weight models represented 79.1% of token usage on Kilo in the week of 20 July 2026; this is not a global market-share theorem."
+  platformTelemetryKind
+  "platform-local observation: 79.1% open-weight token usage in the week of 20 July 2026; not global market share"
   Source.publicAttribution
 
 vercelOpenWeightShare2026 : Source.AttributedSource
@@ -81,13 +77,9 @@ vercelOpenWeightShare2026 = Source.mkNoDOISource
   "Vercel"
   "2026-07-13"
   "https://vercel.com/blog/ai-gateway-production-index-july-2026"
-  Source.primarySource
-  "Platform-specific production-router observation: open-weight models were 29% of June 2026 token volume but under 4% of spend, supporting a usage-versus-rent separation."
+  platformTelemetryKind
+  "platform-local observation: open weights were 29% of June 2026 token volume and under 4% of spend; not global market share"
   Source.publicAttribution
-
-------------------------------------------------------------------------
--- Bounded empirical observations
-------------------------------------------------------------------------
 
 record BoundedObservation : Set where
   constructor boundedObservation
@@ -113,27 +105,23 @@ cerebrasOpenAIIsPartnershipNotAcquisition = boundedObservation
 softbankFundingStressObservation : BoundedObservation
 softbankFundingStressObservation = boundedObservation
   "SoftBank / AI leveraged finance"
-  "Reported borrowing yields in the high-single-digit to near-10% range are evidence that marginal AI-linked funding can be expensive."
+  "High-single-digit to near-10% reported borrowing yields support a funding-stress coordinate."
   softbankCreditReuters2026
   false false false false false
 
 kiloOpenWeightUsageObservation : BoundedObservation
 kiloOpenWeightUsageObservation = boundedObservation
   "Kilo production token mix"
-  "Open-weight models reached 79.1% of platform token usage in the cited week, while the source itself does not establish global AI usage share."
+  "Open weights reached 79.1% of platform token usage in the cited week; global share is not established."
   kiloOpenWeightShare2026
   false false false false false
 
 vercelUsageSpendDivergenceObservation : BoundedObservation
 vercelUsageSpendDivergenceObservation = boundedObservation
   "Vercel AI Gateway"
-  "Open-weight models represented a materially larger share of token volume than spend, consistent with lower proprietary rent per token on that platform."
+  "Open-weight token share materially exceeded spend share in the cited window."
   vercelOpenWeightShare2026
   false false false false false
-
-------------------------------------------------------------------------
--- Multiplex economic graph coordinates
-------------------------------------------------------------------------
 
 data FlowChannel : Set where
   equity capital debt guarantee hardware cloud services revenue
@@ -163,15 +151,9 @@ record EntanglementCoordinates : Set where
 
 open EntanglementCoordinates public
 
--- Candidate calibration only.  "neg" terminal conductance means weak / not
--- established independent terminal-flow evidence, not literal negative cash.
 candidateOctober2026Entanglement : EntanglementCoordinates
 candidateOctober2026Entanglement =
   entanglementCoordinates pos pos pos pos neg pos pos
-
-------------------------------------------------------------------------
--- Crack-spread analogues
-------------------------------------------------------------------------
 
 record AIInferenceCrackSpread : Set₁ where
   field
@@ -191,9 +173,6 @@ record AIScarcityRentSpread : Set₁ where
     OpenSubstitutePricePerQualityUnit : Set
     scarcitySpread : ClosedPricePerQualityUnit → OpenSubstitutePricePerQualityUnit → Set
 
--- These are interfaces, not numeric claims.  Concrete owners must choose a
--- quality-normalisation and source the corresponding price/cost observations.
-
 data TokenPriceImpliesQualityAdjustedSpreadPermission : Set where
 data PositiveGrossMarginImpliesPositiveCapitalSpreadPermission : Set where
 data HighClosedModelPriceImpliesProtectedScarcityRentPermission : Set where
@@ -209,10 +188,6 @@ positiveGrossMarginDoesNotAutoCloseCapitalSpread ()
 highClosedPriceDoesNotAutoCloseProtectedScarcityRent :
   HighClosedModelPriceImpliesProtectedScarcityRentPermission → ⊥
 highClosedPriceDoesNotAutoCloseProtectedScarcityRent ()
-
-------------------------------------------------------------------------
--- Two-geometry state: financial entanglement vs capability substitution
-------------------------------------------------------------------------
 
 record FinancialGeometryState : Set where
   constructor financialGeometryState
@@ -245,10 +220,6 @@ candidateTwoGeometryState2026 = twoGeometryCapitalRecoveryState
   (capabilityGeometryState true true true true)
   false refl
 
-------------------------------------------------------------------------
--- Commercial-moat -> strategic/policy-backstop hypothesis
-------------------------------------------------------------------------
-
 record MoatDecomposition : Set where
   constructor moatDecomposition
   field
@@ -260,8 +231,6 @@ record MoatDecomposition : Set where
     nationalSecurityDesignation : Trit
     policyBackstop : Trit
 
-open MoatDecomposition public
-
 record StrategicBackstopTransitionHypothesis : Set where
   constructor strategicBackstopTransitionHypothesis
   field
@@ -271,8 +240,6 @@ record StrategicBackstopTransitionHypothesis : Set where
     policyBackstopProbabilityRising : Bool
     sourceBackedAsCausalTransition : Bool
 
--- This is deliberately *not* promoted to a factual causal claim.  It records
--- the testable hypothesis discussed in the political-economy lane.
 candidateCommercialToStrategicMoatHypothesis : StrategicBackstopTransitionHypothesis
 candidateCommercialToStrategicMoatHypothesis =
   strategicBackstopTransitionHypothesis true true true true false
@@ -292,10 +259,6 @@ sunkCapitalDoesNotAutoProveTooBigToFail ()
 openWeightsDoNotAutoProveNoCommercialMoat :
   OpenWeightsImplyNoCommercialMoatPermission → ⊥
 openWeightsDoNotAutoProveNoCommercialMoat ()
-
-------------------------------------------------------------------------
--- Existing-owner bridges
-------------------------------------------------------------------------
 
 fundingClockStillRequiresRealisedReturn : Funding.FundingClock
 fundingClockStillRequiresRealisedReturn = Funding.candidateBurryStyleFundingClock
