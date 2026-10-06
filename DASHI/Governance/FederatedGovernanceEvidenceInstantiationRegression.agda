@@ -82,6 +82,12 @@ prospectiveHeldOutProtocolIsPaid :
   ≡ true
 prospectiveHeldOutProtocolIsPaid = refl
 
+causalPromotionObligationSurfaceIsPaid :
+  Capstone.dashiPaysCausalPromotionObligationSurface
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+causalPromotionObligationSurfaceIsPaid = refl
+
 generalMechanismPlausibilityIsPaid :
   Capstone.generalGroupDecisionEvidencePaysMechanismPlausibility
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
@@ -105,6 +111,12 @@ quantitativeIncidenceBurdenRelationshipStillUnpaid :
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ false
 quantitativeIncidenceBurdenRelationshipStillUnpaid = refl
+
+causalEffectStillUnpromoted :
+  Capstone.incidenceBurdenCausalEffectPromoted
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ false
+causalEffectStillUnpromoted = refl
 
 prospectiveHeldOutValidationStillUnpaid :
   Capstone.prospectiveHeldOutValidationPaid
