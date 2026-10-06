@@ -61,3 +61,20 @@ def strictly_dominates(
         left[key] < right[key] if sense == "min" else left[key] > right[key]
         for key, sense in axes.items()
     )
+
+
+def pareto_frontier(candidates, axes):
+    """Return candidates not strictly dominated by any other candidate.
+
+    Input order is preserved. Hard physical/engineering admissibility belongs
+    upstream; this routine only applies the declared multi-axis order.
+    """
+    items = list(candidates)
+    return [
+        candidate
+        for i, candidate in enumerate(items)
+        if not any(
+            i != j and strictly_dominates(other, candidate, axes)
+            for j, other in enumerate(items)
+        )
+    ]
