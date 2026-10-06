@@ -1,8 +1,7 @@
 module DASHI.Cognition.Teleodynamics.LilaE8Regression where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Algebra.Trit.E8RootEnumeration as E8
 import DASHI.Cognition.Teleodynamics.LilaE8QuantizerExact as Q
@@ -21,7 +20,8 @@ externalShapeAdapterRecordsHalf128 = refl
 
 zeroScaleBiasReducesToBaseline :
   B.biasedScore B.demoZeroScaleBias ≡ B.baselineScore B.demoZeroScaleBias
-zeroScaleBiasReducesToBaseline = B.zeroScaleReducesToBaseline B.demoZeroScaleBias
+zeroScaleBiasReducesToBaseline =
+  B.zeroScaleReducesToBaseline B.demoZeroScaleBias refl
 
 rootUseDoesNotEstablishEquivariance :
   B.e8EquivarianceEstablished B.canonicalE8AttentionBoundary ≡ false
