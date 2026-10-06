@@ -7,6 +7,7 @@ import DASHI.Foundations.Base369TriadicPhaseTower as Tower
 import DASHI.Foundations.Base369BinaryTernaryRefinement as R23
 import DASHI.Physics.Closure.TeslaPolyphaseHistoricalBoundary as Tesla
 import DASHI.Physics.Plasma.ZeroBouncePopulationExact as ZeroBounce
+import DASHI.Physics.Plasma.DynamicZeroBounceAdmissibilityExact as Dynamic
 
 ------------------------------------------------------------------------
 -- TRIADIC / 3^n ZERO-BOUNCE CONTROL CANDIDATE
@@ -43,6 +44,7 @@ record TriadicDetrappingSchedule
     movingMagneticMinimumReceipt : Set
     trappedPassingBoundaryCrossingReceipt : Set
     noNetHeatingOrLossPenaltyReceipt : Set
+    dynamicAdmissibility : Dynamic.DynamicDetrappingAdmissibility population
     zeroBounceTargetReceipt : ZeroBounce.ZeroBounceReceipt population
     scheduleReference : String
 
@@ -63,6 +65,10 @@ record TriadicZeroBounceBoundary : Set where
     phaseRefinementAloneProvesDetrappingIsFalse :
       phaseRefinementAloneProvesDetrapping ≡ false
 
+    dynamicAdmissibilityRequired : Bool
+    dynamicAdmissibilityRequiredIsTrue :
+      dynamicAdmissibilityRequired ≡ true
+
     rotatingFieldTeslaContextMayMotivateBridge : Bool
     rotatingFieldTeslaContextMayMotivateBridgeIsTrue :
       rotatingFieldTeslaContextMayMotivateBridge ≡ true
@@ -77,6 +83,7 @@ canonicalTriadicZeroBounceBoundary =
     true refl
     false refl
     false refl
+    true refl
     (Tesla.rotatingFieldContextMayMotivateBridge Tesla.teslaPolyphaseBoundary)
     refl
     (Tesla.base369AttributedToTesla Tesla.teslaPolyphaseBoundary)
