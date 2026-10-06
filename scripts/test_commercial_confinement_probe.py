@@ -4,6 +4,7 @@ from commercial_confinement_probe import (
     greenwald_density_m3,
     greenwald_fraction,
     net_electric_mw,
+    pareto_frontier,
     strictly_dominates,
     weakly_dominates,
 )
@@ -32,8 +33,21 @@ def test_pareto():
     assert not weakly_dominates(reference, candidate, axes)
 
 
+def test_frontier():
+    axes = {"net_electric": "max", "recirc": "min"}
+    points = [
+        {"name": "dominated", "net_electric": 200, "recirc": 120},
+        {"name": "balanced", "net_electric": 250, "recirc": 100},
+        {"name": "high_net", "net_electric": 300, "recirc": 120},
+        {"name": "low_recirc", "net_electric": 220, "recirc": 80},
+    ]
+    front = pareto_frontier(points, axes)
+    assert [point["name"] for point in front] == ["balanced", "high_net", "low_recirc"]
+
+
 if __name__ == "__main__":
     test_greenwald()
     test_net_electric()
     test_pareto()
+    test_frontier()
     print("ok")
