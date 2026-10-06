@@ -12,7 +12,7 @@ open import Data.Nat.Base using (NonZero; nonZero)
 open import Data.Nat.DivMod using
   (_%_; _/_; m%n<n; m≡m%n+[m/n]*n; m≥n⇒m/n>0)
 open import Data.Nat.Divisibility using
-  (_∣_; divides; m%n≡0⇒n∣m; m∣n⇒n≡quotient*m)
+  (_∣_; divides; quotient; m%n≡0⇒n∣m; m∣n⇒n≡quotient*m; n/m≡quotient)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -79,11 +79,18 @@ quotientTimesTwoExact :
   Itinerary.parity x ≡ false →
   (Syracuse.toNat x / 2) * 2 ≡ Syracuse.toNat x
 quotientTimesTwoExact x parityFalse =
-  sym
-    (m∣n⇒n≡quotient*m
-      (m%n≡0⇒n∣m
-        (Syracuse.toNat x) 2
-        (parityFalseModTwo x parityFalse)))
+  let
+    witness = m%n≡0⇒n∣m
+      (Syracuse.toNat x) 2
+      (parityFalseModTwo x parityFalse)
+    quotientAgreement :
+      Syracuse.toNat x / 2 ≡ quotient witness
+    quotientAgreement = n/m≡quotient witness
+    witnessExact :
+      quotient witness * 2 ≡ Syracuse.toNat x
+    witnessExact = sym (m∣n⇒n≡quotient*m witness)
+  in
+  trans (cong (_* 2) quotientAgreement) witnessExact
 
 sucPredPositiveQuotient :
   (x : Syracuse.PositiveNat) →
@@ -141,7 +148,7 @@ oddNumeratorDivisible x parityTrue =
             (con 2 :+ (con 3 :* q)) :* con 2)
           refl)
   in
-  divides (2 + 3 * q) (sym numeratorShape)
+  divides (2 + 3 * q) numeratorShape
 
 oddQuotientTimesTwoExact :
   (x : Syracuse.PositiveNat) →
@@ -149,7 +156,16 @@ oddQuotientTimesTwoExact :
   ((3 * Syracuse.toNat x + 1) / 2) * 2
   ≡ 3 * Syracuse.toNat x + 1
 oddQuotientTimesTwoExact x parityTrue =
-  sym (m∣n⇒n≡quotient*m (oddNumeratorDivisible x parityTrue))
+  let
+    witness = oddNumeratorDivisible x parityTrue
+    quotientAgreement :
+      (3 * Syracuse.toNat x + 1) / 2 ≡ quotient witness
+    quotientAgreement = n/m≡quotient witness
+    witnessExact :
+      quotient witness * 2 ≡ 3 * Syracuse.toNat x + 1
+    witnessExact = sym (m∣n⇒n≡quotient*m witness)
+  in
+  trans (cong (_* 2) quotientAgreement) witnessExact
 
 oddQuotientPositiveNormalize :
   (x : Syracuse.PositiveNat) →
