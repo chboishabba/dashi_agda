@@ -24,6 +24,30 @@ issueCountControlRequired :
   Design.requiresIssueCountControl Design.canonicalMeasurementRequirements ≡ true
 issueCountControlRequired = refl
 
+nov28IncidenceRowsPaid :
+  Design.observedIncidenceEdges Design.nov28CurrentMeasurement ≡ Design.measured 7
+nov28IncidenceRowsPaid = refl
+
+nov28NamedParticipantsPaid :
+  Design.namedParticipantCount Design.nov28CurrentMeasurement ≡ Design.measured 19
+nov28NamedParticipantsPaid = refl
+
+nov28AgendaItemsPaid :
+  Design.distinctIssueCount Design.nov28CurrentMeasurement ≡ Design.measured 5
+nov28AgendaItemsPaid = refl
+
+dec04TabledItemsPaid :
+  Design.tabledAgendaItemCount Design.dec04CurrentMeasurement ≡ Design.measured 10
+dec04TabledItemsPaid = refl
+
+nov28DurationStillUnmeasured :
+  Design.meetingDurationMinutes Design.nov28CurrentMeasurement ≡ Design.unmeasured
+nov28DurationStillUnmeasured = refl
+
+dec04MediationMinutesStillUnmeasured :
+  Design.mediationMinutes Design.dec04CurrentMeasurement ≡ Design.unmeasured
+dec04MediationMinutesStillUnmeasured = refl
+
 currentArchiveDoesNotPayCostFunctional :
   Design.empiricalCoordinationCostFunctionalPaid Design.canonicalExperimentBoundary ≡ false
 currentArchiveDoesNotPayCostFunctional = refl
