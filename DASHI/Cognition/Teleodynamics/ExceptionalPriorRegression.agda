@@ -2,6 +2,7 @@ module DASHI.Cognition.Teleodynamics.ExceptionalPriorRegression where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Cognition.Teleodynamics.GeometricLearnerPriorExact as Prior
 import DASHI.Cognition.Teleodynamics.ExceptionalPriorFamilyExact as Exceptional
