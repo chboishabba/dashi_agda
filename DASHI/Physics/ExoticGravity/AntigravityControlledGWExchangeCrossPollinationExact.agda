@@ -5,16 +5,19 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.GR.ControlledEMGravitationalWaveEnergyExchangeExact as Exchange
+import DASHI.Physics.GR.ControlledEMGWEinsteinCouplingDegeneracyExact as SignedExchange
 import DASHI.Physics.ExoticGravity.AntigravityUnificationInteractionExact as Anti
 
 ------------------------------------------------------------------------
 -- ANTIGRAVITY x CONTROLLED EM <-> GW ENERGY EXCHANGE
 --
--- This module installs the Schützhold-style optical Weber-bar proposal as a
--- new *comparison channel* in the antigravity programme.  It does not infer
--- antigravity from stimulated GW emission/absorption.  Instead it creates a
--- same-object discriminator between ordinary-GR and alternative/signed/
--- effective-coupling predictions under one controlled interaction geometry.
+-- This module installs the Schuetzhold optical-Weber-bar proposal as a new
+-- comparison channel in the antigravity programme.  It does not infer
+-- antigravity from stimulated GW emission/absorption.  Alternative predictions
+-- must be physically distinct on the same interaction: either a re-solved
+-- source/metric model or an explicit modified local photon-graviton coupling.
+-- Merely relabelling the Einstein source coupling sign while freezing the same
+-- physical h_{mu nu} and T_{mu nu} is intentionally rejected.
 ------------------------------------------------------------------------
 
 data GravityExchangeComparator : Set where
@@ -75,6 +78,9 @@ record SameObjectExchangeComparison
     SameInteractionAlternativeObservation : Set
     sameInteractionAlternativeObservation : SameInteractionAlternativeObservation
 
+    AlternativeIsPhysicallyDistinctReceipt : Set
+    alternativeIsPhysicallyDistinctReceipt : AlternativeIsPhysicallyDistinctReceipt
+
     OrdinaryResidual : Set
     ordinaryResidual : OrdinaryResidual
 
@@ -89,7 +95,7 @@ record SameObjectExchangeComparison
 open SameObjectExchangeComparison public
 
 ------------------------------------------------------------------------
--- Promotion firewall.
+-- Promotion and model-identity firewall.
 ------------------------------------------------------------------------
 
 record AntigravityExchangeBoundary : Set where
@@ -105,11 +111,17 @@ record AntigravityExchangeBoundary : Set where
     reversalControlRequiredForSignSensitiveClaim : Bool
     residualComparisonMayDiscriminateModels : Bool
     modelDiscriminationMayRefineAntigravityExperimentDesign : Bool
+    fixedHNaiveEinsteinSignRelabelCountsAsAlternativeModel : Bool
+    signedGAlternativeMustResolveSourceOrModifyLocalCoupling : Bool
 
 canonicalAntigravityExchangeBoundary : AntigravityExchangeBoundary
 canonicalAntigravityExchangeBoundary =
   antigravity-exchange-boundary
-    true false false false true true true true true true
+    true false false false true true true true true true false true
+
+existingSignedExchangeBoundary : SignedExchange.ControlledExchangeSignedGBoundary
+existingSignedExchangeBoundary =
+  SignedExchange.canonicalControlledExchangeSignedGBoundary
 
 ------------------------------------------------------------------------
 -- Existing antigravity architecture remains authoritative.
@@ -119,17 +131,7 @@ existingAntigravityBoundary : Anti.AntigravityUnificationBoundary
 existingAntigravityBoundary = Anti.canonicalAntigravityUnificationBoundary
 
 ------------------------------------------------------------------------
--- Max-cut route encoded as obligations rather than prose promotion:
---
--- literal h_{mu nu} + literal EM T_{mu nu}
---   -> controlled interaction carrier
---   -> energy conservation receipt
---   -> optical frequency / phase readout
---   -> reversal receipt
---   -> ordinary-GR prediction
---   -> same-object alternative prediction
---   -> residual ordering
---   -> model discriminator only.
+-- Max-cut route encoded as obligations rather than prose promotion.
 ------------------------------------------------------------------------
 
 record ControlledExchangeMaxCut : Set₁ where
