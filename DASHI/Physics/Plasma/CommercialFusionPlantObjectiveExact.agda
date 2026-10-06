@@ -14,12 +14,23 @@ import DASHI.Physics.Plasma.MagneticConfinementMachineExact as Confinement
 -- exports electricity while closing fuel, heat, maintenance, materials and
 -- availability obligations.  All quantities below are state-indexed so that
 -- a plasma result cannot silently become a plant result.
+--
+-- Fuel-cycle obligations remain generic here.  D-T instantiations may require
+-- tritium breeding/inventory closure; p-11B instantiations instead inherit
+-- advanced-temperature, radiation, ash-removal and charged-product conversion
+-- obligations.  Neither fuel is silently universalized by this owner.
 ------------------------------------------------------------------------
+
+data FusionFuelClass : Set where
+  deuteriumTritium : FusionFuelClass
+  protonBoron11 : FusionFuelClass
+  otherDeclaredFusionFuel : FusionFuelClass
 
 record CommercialFusionPlantState
     (plasma : Confinement.MagneticConfinementState) : Set₁ where
   constructor commercial-fusion-plant-state
   field
+    fuelClass : FusionFuelClass
     equilibrium : Confinement.EquilibriumReceipt plasma
     stability : Confinement.StabilityReceipt plasma
     transport : Confinement.TransportReceipt plasma
@@ -38,7 +49,9 @@ record CommercialFusionPlantState
     heatConversionReceipt : Set
     neutronOrProductEnergyCaptureReceipt : Set
     fuelCycleClosureReceipt : Set
-    tritiumSelfSufficiencyReceipt : Set
+    fuelInventorySelfSufficiencyReceipt : Set
+    radiationLossAndRecoveryReceipt : Set
+    fusionProductAshRemovalReceipt : Set
     plasmaFacingMaterialLifetimeReceipt : Set
     divertorOrExhaustLifetimeReceipt : Set
     remoteMaintenanceReceipt : Set
@@ -87,6 +100,10 @@ record CommercialFusionBoundary : Set where
     compactGeometryAloneImpliesLowerElectricityCostIsFalse :
       compactGeometryAloneImpliesLowerElectricityCost ≡ false
 
+    fuelClassAloneProvesCommerciality : Bool
+    fuelClassAloneProvesCommercialityIsFalse :
+      fuelClassAloneProvesCommerciality ≡ false
+
     netElectricRequiresRecirculatingPowerAccounting : Bool
     netElectricRequiresRecirculatingPowerAccountingIsTrue :
       netElectricRequiresRecirculatingPowerAccounting ≡ true
@@ -98,6 +115,7 @@ record CommercialFusionBoundary : Set where
 canonicalCommercialFusionBoundary : CommercialFusionBoundary
 canonicalCommercialFusionBoundary =
   commercial-fusion-boundary
+    false refl
     false refl
     false refl
     false refl
