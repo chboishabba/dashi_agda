@@ -3,7 +3,6 @@ module DASHI.Economics.AIAntitrustCompetitiveIndependence2026Exact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Economics.AICapitalRecoveryEntanglement2026Exact as Capital
 
 ------------------------------------------------------------------------
@@ -47,7 +46,7 @@ candidateHyperscalerLabEntanglement2026 =
 
 data MultiRoleEntanglementImpliesCollusionPermission : Set where
 data CommonInvestorImpliesAntitrustViolationPermission : Set where
-\data RivalInvestmentImpliesCompetitionEliminatedPermission : Set where
+data RivalInvestmentImpliesCompetitionEliminatedPermission : Set where
 
 multiRoleEntanglementDoesNotAutoProveCollusion :
   MultiRoleEntanglementImpliesCollusionPermission → ⊥
