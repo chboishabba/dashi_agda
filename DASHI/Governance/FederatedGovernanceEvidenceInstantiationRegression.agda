@@ -58,6 +58,12 @@ longitudinalOccupyGraphFamilyIsPaid :
   ≡ true
 longitudinalOccupyGraphFamilyIsPaid = refl
 
+sourceExplicitMeetingPanelIsPaid :
+  Capstone.occupyArchivePaysSourceExplicitMeetingPanel
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+sourceExplicitMeetingPanelIsPaid = refl
+
 archivalProcessBurdenObservationsArePaid :
   Capstone.occupyArchivePaysProcessBurdenObservations
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
