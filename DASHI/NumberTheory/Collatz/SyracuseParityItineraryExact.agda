@@ -7,15 +7,13 @@ module DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.DivMod using (_%_)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 
+-- Exact reuse of the literal branch selector; no second parity definition.
 parity : Syracuse.PositiveNat → Bool
-parity x with Syracuse.toNat x % 2
-... | zero = false
-... | suc _ = true
+parity = Syracuse.parityBool
 
 epsilon : Nat → Syracuse.PositiveNat → Bool
 epsilon zero x = parity x
