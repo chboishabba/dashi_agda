@@ -8,7 +8,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 ------------------------------------------------------------------------
 -- Canonical bibliography / bounded-role registry for the evidence tranche.
 --
--- Reuses the existing generic SourceReference type.  Registry membership fixes
+-- Reuses the existing generic SourceReference type. Registry membership fixes
 -- bibliographic identity and bounded evidentiary role only; it creates no
 -- theorem authority and does not merge sources that discuss similar themes.
 ------------------------------------------------------------------------
@@ -83,6 +83,46 @@ kinnaPrichard2019ArchiveSource = Registry.source-reference
   "open archival data collection"
   "source identity for the open OccupyFiles.zip bundle containing General Assembly minutes from Occupy Wall Street, Occupy London St Paul's and Occupy Oakland; corpus availability does not imply complete participant-issue coding"
 
+hwangGuynes1994Source : Registry.SourceReference
+hwangGuynes1994Source = Registry.source-reference
+  "Hsin-Ginn Hwang and Jan L. Guynes"
+  "The effect of group size on group performance in computer-supported decision making"
+  "Information & Management 26(4):189-198"
+  1994
+  "10.1016/0378-7206(94)90092-2"
+  "randomized computer-supported group-decision experiment"
+  "general evidence that 9-person groups took longer than 3-person groups and generated more alternatives in the studied setting; not direct Occupy evidence or a universal law"
+
+millerVanberg2015Source : Registry.SourceReference
+millerVanberg2015Source = Registry.source-reference
+  "Luis Miller and Christoph Vanberg"
+  "Group size and decision rules in legislative bargaining"
+  "European Journal of Political Economy 37:288-302"
+  2015
+  "10.1016/j.ejpoleco.2014.09.005"
+  "experimental legislative-bargaining study"
+  "general evidence that larger groups and unanimity increased costly delay in the studied bargaining game; not a direct model of horizontal Occupy consensus"
+
+mckoyEtAl2012Source : Registry.SourceReference
+mckoyEtAl2012Source = Registry.source-reference
+  "Marques McKoy; Samantha Spitler; Kelsey Zuchegno; Alana Enslein; Stephen Hobbs; Robert A. Reeves; Tadd B. Patton; W. F. Lawless"
+  "An Experimental Physiological Approach to Group Decision Making: Consensus Rule vs Majority Rule"
+  "Procedia Technology 5:475-480"
+  2012
+  "10.1016/j.protcy.2012.09.052"
+  "small-group laboratory comparison of consensus and majority rules"
+  "general evidence about discussion/engagement and decision-time differences with task-dependent follow-up; not an Occupy rule-effect estimate"
+
+luYuanMcLeod2012Source : Registry.SourceReference
+luYuanMcLeod2012Source = Registry.source-reference
+  "Li Lu; Y. Connie Yuan; Poppy Lauretta McLeod"
+  "Twenty-Five Years of Hidden Profiles in Group Decision Making: A Meta-Analysis"
+  "Personality and Social Psychology Review 16(1):54-75"
+  2012
+  "10.1177/1088868311417243"
+  "meta-analysis of hidden-profile group-decision studies"
+  "general evidence that group size and information structure moderate information pooling and decision quality; not an Occupy coordination-cost coefficient"
+
 ipccSR15Source : Registry.SourceReference
 ipccSR15Source = Registry.source-reference
   "Intergovernmental Panel on Climate Change"
@@ -102,6 +142,10 @@ canonicalGovernanceEvidenceSources =
   ∷ hammond2013Source
   ∷ pollettaHoban2016Source
   ∷ kinnaPrichard2019ArchiveSource
+  ∷ hwangGuynes1994Source
+  ∷ millerVanberg2015Source
+  ∷ mckoyEtAl2012Source
+  ∷ luYuanMcLeod2012Source
   ∷ ipccSR15Source
   ∷ []
 
@@ -131,6 +175,6 @@ canonicalGovernanceEvidenceSourceRegistryReceipt =
     "federated governance evidence source registry"
     "DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryExact"
     "canonicalGovernanceEvidenceRegistryBoundary"
-    "pins canonical bibliographic identities and bounded evidentiary roles for bolo'bolo, Bookchin confederalism, four Occupy studies, the Kinna-Prichard Occupy archival corpus and IPCC SR1.5 using the existing generic SourceReference carrier"
-    "registry membership creates no theorem authority, structural similarity does not merge provenance, and agreement does not manufacture evidentiary independence"
+    "pins canonical bibliographic identities and bounded roles for bolo'bolo, Bookchin confederalism, Occupy studies and archival data, four external quantitative group-decision sources, and IPCC SR1.5 using the existing generic SourceReference carrier"
+    "registry membership creates no theorem authority, structural similarity does not merge provenance, and external group-decision experiments do not become Occupy evidence merely because they share decision-process variables"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceSourceRegistryRegression.agda"
