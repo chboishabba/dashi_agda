@@ -46,6 +46,24 @@ boundedFiniteOccupyGraphIsPaid :
   ≡ true
 boundedFiniteOccupyGraphIsPaid = refl
 
+longitudinalOccupyGraphFamilyIsPaid :
+  Capstone.occupyArchivePaysLongitudinalIncidenceFamily
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+longitudinalOccupyGraphFamilyIsPaid = refl
+
+archivalProcessBurdenObservationsArePaid :
+  Capstone.occupyArchivePaysProcessBurdenObservations
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+archivalProcessBurdenObservationsArePaid = refl
+
+experimentDesignSurfaceIsPaid :
+  Capstone.dashiPaysCoordinationBurdenExperimentDesign
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ true
+experimentDesignSurfaceIsPaid = refl
+
 completeRealIncidenceStillUnpaid :
   Capstone.actualParticipantIssueIncidencePaid
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
@@ -57,3 +75,9 @@ coordinationCostStillUnpaid :
     Capstone.canonicalFederatedGovernanceEvidenceBoundary
   ≡ false
 coordinationCostStillUnpaid = refl
+
+quantitativeIncidenceBurdenRelationshipStillUnpaid :
+  Capstone.quantitativeIncidenceBurdenRelationshipPaid
+    Capstone.canonicalFederatedGovernanceEvidenceBoundary
+  ≡ false
+quantitativeIncidenceBurdenRelationshipStillUnpaid = refl
