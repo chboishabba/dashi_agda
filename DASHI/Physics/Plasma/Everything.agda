@@ -30,6 +30,9 @@ import DASHI.Physics.Plasma.ToroidalAlfvenZeroBounceEmbeddingFrontierExact
 import DASHI.Physics.Plasma.ZeroBounceConstructiveSeedsEverything
 import DASHI.Physics.Plasma.TriadicCurvatureDriftCancellationExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceTriadicCurvatureSearchExact
+import DASHI.Physics.Plasma.TriadicPhaseFourierProjectorExact
+import DASHI.Physics.Plasma.FiniteAspectRatioTriadicCurvatureResidualExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceCurvatureMaxCutExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
