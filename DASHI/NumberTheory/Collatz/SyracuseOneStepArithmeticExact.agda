@@ -5,17 +5,17 @@ module DASHI.NumberTheory.Collatz.SyracuseOneStepArithmeticExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat.Base using (_<_; NonZero; nonZero)
+open import Data.Nat using (_∸_; _≤_; _<_; z≤n; s≤s)
+open import Data.Nat.Base using (NonZero; nonZero)
 open import Data.Nat.DivMod using
-  (_%_; _/_; m%n<n; m≡m%n+[m/n]*n; m*n/n≡m)
+  (_%_; _/_; m%n<n; m≡m%n+[m/n]*n; m≥n⇒m/n>0)
 open import Data.Nat.Divisibility using
-  (_∣_; m%n≡0⇒n∣m; n/m≡quotient)
+  (_∣_; divides; m%n≡0⇒n∣m; m∣n⇒n≡quotient*m)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
@@ -48,52 +48,52 @@ parityTrueModTwo (Syracuse.positiveNat n) with suc n % 2
 ... | zero = λ ()
 ... | suc r = λ _ → remainderSucBelowTwoIsOne r (m%n<n (suc n) 2)
 
-positiveQuotientFromPositiveDividend :
-  (x q : Nat) →
-  x ≡ q * 2 →
-  (x ≡ 0 → ⊥) →
-  Σ Nat (λ predecessor → q ≡ suc predecessor)
-positiveQuotientFromPositiveDividend x zero equation xNonZero =
-  ⊥-elim (xNonZero (trans equation refl))
-positiveQuotientFromPositiveDividend x (suc q) equation xNonZero =
-  q , refl
-  where open import Data.Product using (Σ; _,_)
+sucPredOfPositive :
+  (q : Nat) →
+  0 < q →
+  suc (q ∸ 1) ≡ q
+sucPredOfPositive zero ()
+sucPredOfPositive (suc q) positive = refl
 
-positiveNatToNatNonZero :
+evenQuotientPositive :
   (x : Syracuse.PositiveNat) →
-  Syracuse.toNat x ≡ 0 → ⊥
-positiveNatToNatNonZero (Syracuse.positiveNat n) ()
+  Itinerary.parity x ≡ false →
+  0 < Syracuse.toNat x / 2
+evenQuotientPositive (Syracuse.positiveNat zero) ()
+evenQuotientPositive (Syracuse.positiveNat (suc n)) parityFalse =
+  m≥n⇒m/n>0 (s≤s (s≤s z≤n))
+
+numeratorAtLeastTwo :
+  (n : Nat) →
+  2 ≤ 3 * suc n + 1
+numeratorAtLeastTwo n = s≤s (s≤s z≤n)
+
+oddQuotientPositive :
+  (x : Syracuse.PositiveNat) →
+  0 < (3 * Syracuse.toNat x + 1) / 2
+oddQuotientPositive (Syracuse.positiveNat n) =
+  m≥n⇒m/n>0 (numeratorAtLeastTwo n)
 
 quotientTimesTwoExact :
   (x : Syracuse.PositiveNat) →
   Itinerary.parity x ≡ false →
   (Syracuse.toNat x / 2) * 2 ≡ Syracuse.toNat x
 quotientTimesTwoExact x parityFalse =
-  let
-    divisible : 2 ∣ Syracuse.toNat x
-    divisible = m%n≡0⇒n∣m
-      (Syracuse.toNat x) 2 (parityFalseModTwo x parityFalse)
-  in
-  sym (Data.Nat.Divisibility.m∣n⇒n≡quotient*m divisible)
-  where
-    open import Data.Nat.Divisibility using (m∣n⇒n≡quotient*m)
+  sym
+    (m∣n⇒n≡quotient*m
+      (m%n≡0⇒n∣m
+        (Syracuse.toNat x) 2
+        (parityFalseModTwo x parityFalse)))
 
 sucPredPositiveQuotient :
   (x : Syracuse.PositiveNat) →
   Itinerary.parity x ≡ false →
   suc ((Syracuse.toNat x / 2) ∸ 1)
   ≡ Syracuse.toNat x / 2
-sucPredPositiveQuotient x parityFalse with Syracuse.toNat x / 2 | inspect (λ y → Syracuse.toNat x / 2) x/2eq
-... | zero | _ =
-  ⊥-elim
-    (positiveNatToNatNonZero x
-      (trans
-        (sym (quotientTimesTwoExact x parityFalse))
-        (cong (_* 2) x/2eq)))
-... | suc q | _ = refl
-  where
-    open import Agda.Builtin.Nat using (_∸_)
-    open import Relation.Binary.PropositionalEquality using (inspect)
+sucPredPositiveQuotient x parityFalse =
+  sucPredOfPositive
+    (Syracuse.toNat x / 2)
+    (evenQuotientPositive x parityFalse)
 
 evenStepExact :
   (x : Syracuse.PositiveNat) →
@@ -108,8 +108,7 @@ evenStepExact (Syracuse.positiveNat n) parityFalse =
     orient :
       2 * (Syracuse.toNat (Syracuse.positiveNat n) / 2)
       ≡ (Syracuse.toNat (Syracuse.positiveNat n) / 2) * 2
-    orient =
-      solve 1 (λ q → con 2 :* q := q :* con 2) refl
+    orient = solve 1 (λ q → con 2 :* q := q :* con 2) refl
   in
   trans
     (cong (λ y → 2 * Syracuse.toNat y) branch)
@@ -125,11 +124,11 @@ oddNumeratorDivisible x parityTrue =
   let
     remainderOne = parityTrueModTwo x parityTrue
     decomposition = m≡m%n+[m/n]*n (Syracuse.toNat x) 2
-    xShape :
-      Syracuse.toNat x
-      ≡ 1 + (Syracuse.toNat x / 2) * 2
-    xShape = trans decomposition (cong (λ r → r + (Syracuse.toNat x / 2) * 2) remainderOne)
     q = Syracuse.toNat x / 2
+    xShape : Syracuse.toNat x ≡ 1 + q * 2
+    xShape =
+      trans decomposition
+        (cong (λ r → r + q * 2) remainderOne)
     numeratorShape :
       3 * Syracuse.toNat x + 1 ≡ (2 + 3 * q) * 2
     numeratorShape =
@@ -142,9 +141,7 @@ oddNumeratorDivisible x parityTrue =
             (con 2 :+ (con 3 :* q)) :* con 2)
           refl)
   in
-  Data.Nat.Divisibility.divides (2 + 3 * q) (sym numeratorShape)
-  where
-    open import Data.Nat.Divisibility using (divides)
+  divides (2 + 3 * q) (sym numeratorShape)
 
 oddQuotientTimesTwoExact :
   (x : Syracuse.PositiveNat) →
@@ -152,36 +149,16 @@ oddQuotientTimesTwoExact :
   ((3 * Syracuse.toNat x + 1) / 2) * 2
   ≡ 3 * Syracuse.toNat x + 1
 oddQuotientTimesTwoExact x parityTrue =
-  sym
-    (Data.Nat.Divisibility.m∣n⇒n≡quotient*m
-      (oddNumeratorDivisible x parityTrue))
-  where
-    open import Data.Nat.Divisibility using (m∣n⇒n≡quotient*m)
+  sym (m∣n⇒n≡quotient*m (oddNumeratorDivisible x parityTrue))
 
 oddQuotientPositiveNormalize :
   (x : Syracuse.PositiveNat) →
-  Itinerary.parity x ≡ true →
   suc (((3 * Syracuse.toNat x + 1) / 2) ∸ 1)
   ≡ (3 * Syracuse.toNat x + 1) / 2
-oddQuotientPositiveNormalize x parityTrue with (3 * Syracuse.toNat x + 1) / 2
-... | zero =
-  ⊥-elim
-    (positiveNatToNatNonZero x
-      (let impossible : 3 * Syracuse.toNat x + 1 ≡ 0
-           impossible = trans
-             (sym (oddQuotientTimesTwoExact x parityTrue))
-             refl
-       in
-       let collapse : Syracuse.toNat x ≡ 0
-           collapse =
-             -- 3*x+1 cannot be zero for a positive x; the zero quotient branch
-             -- is structurally impossible.  Solver turns `3*x+1=0` into the
-             -- required contradiction after patterning on x below.
-             case x of λ where
-               (Syracuse.positiveNat n) →
-                 case impossible of λ ())
-... | suc q = refl
-  where open import Agda.Builtin.Nat using (_∸_)
+oddQuotientPositiveNormalize x =
+  sucPredOfPositive
+    ((3 * Syracuse.toNat x + 1) / 2)
+    (oddQuotientPositive x)
 
 oddStepExact :
   (x : Syracuse.PositiveNat) →
@@ -191,7 +168,7 @@ oddStepExact :
 oddStepExact (Syracuse.positiveNat n) parityTrue =
   let
     branch = Syracuse.shortcutSyracuseParityTrue n parityTrue
-    normalize = oddQuotientPositiveNormalize (Syracuse.positiveNat n) parityTrue
+    normalize = oddQuotientPositiveNormalize (Syracuse.positiveNat n)
     quotientExact = oddQuotientTimesTwoExact (Syracuse.positiveNat n) parityTrue
     orient :
       2 * ((3 * suc n + 1) / 2)
