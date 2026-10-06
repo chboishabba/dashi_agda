@@ -12,18 +12,6 @@ import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
 -- EVIDENCE INSTANTIATION MAX-CUT
---
--- This module pays only source-bounded bridge obligations found in the
--- literature search.  It deliberately distinguishes:
---
---   * an observed synchrony/attachment association from an attachment
---     definition or classifier;
---   * a GABA/neuroimmune mechanistic literature bridge from diagnosis-level
---     causal sufficiency;
---   * heterogeneous ADHD GABA findings from a single scalar low-GABA law.
---
--- Every scientific row is an AttributedSource.  Citation imports neither proof
--- nor authority beyond the explicit relationship string.
 ------------------------------------------------------------------------
 
 nguyen2024Source : Source.AttributedSource
@@ -106,12 +94,8 @@ cheng2026Source =
 
 canonicalInstantiationSources : List Source.AttributedSource
 canonicalInstantiationSources =
-  nguyen2024Source ∷
-  crowley2016Source ∷
-  schur2016Source ∷
-  puts2020Source ∷
-  harris2021Source ∷
-  cheng2026Source ∷ []
+  nguyen2024Source ∷ crowley2016Source ∷ schur2016Source ∷
+  puts2020Source ∷ harris2021Source ∷ cheng2026Source ∷ []
 
 canonicalInstantiationSourceAtlas : Source.AttributedSourceAtlas
 canonicalInstantiationSourceAtlas =
@@ -126,7 +110,7 @@ canonicalInstantiationSourceAtlasNonPromoting :
 canonicalInstantiationSourceAtlasNonPromoting = refl
 
 ------------------------------------------------------------------------
--- Synchrony <-> attachment: bounded association bridge.
+-- Synchrony / attachment association.
 ------------------------------------------------------------------------
 
 record SynchronyAttachmentAssociationReceipt : Set where
@@ -138,13 +122,9 @@ record SynchronyAttachmentAssociationReceipt : Set where
     attachmentMeasurementReference : String
     associationReference : String
     subgroupAndRegionDependenceRetained : Bool
-    subgroupAndRegionDependenceRetainedIsTrue :
-      subgroupAndRegionDependenceRetained ≡ true
+    subgroupAndRegionDependenceRetainedIsTrue : subgroupAndRegionDependenceRetained ≡ true
     definitionOrClassifierAuthority : Bool
-    definitionOrClassifierAuthorityIsFalse :
-      definitionOrClassifierAuthority ≡ false
-
-open SynchronyAttachmentAssociationReceipt public
+    definitionOrClassifierAuthorityIsFalse : definitionOrClassifierAuthority ≡ false
 
 nguyen2024SynchronyAttachmentAssociation : SynchronyAttachmentAssociationReceipt
 nguyen2024SynchronyAttachmentAssociation =
@@ -154,8 +134,7 @@ nguyen2024SynchronyAttachmentAssociation =
     "fNIRS hyperscanning interpersonal neural synchrony in frontal and temporal regions"
     "Adult Attachment Interview for parents and story-completion attachment task for children"
     "Attachment representations were associated with interpersonal neural synchrony during cooperation; maternal insecurity and daughter security showed different regional directions."
-    true refl
-    false refl
+    true refl false refl
 
 nguyen2024SynchronyAttachmentBridge : Bridge.SynchronyAttachmentBridge
 nguyen2024SynchronyAttachmentBridge =
@@ -170,12 +149,11 @@ nguyen2024SynchronyAttachmentBridge =
 
 data SynchronyDefinesAttachmentPermission : Set where
 
-synchronyAssociationDoesNotDefineAttachment :
-  SynchronyDefinesAttachmentPermission → ⊥
+synchronyAssociationDoesNotDefineAttachment : SynchronyDefinesAttachmentPermission → ⊥
 synchronyAssociationDoesNotDefineAttachment ()
 
 ------------------------------------------------------------------------
--- GABA <-> neuroinflammation: mechanistic review bridge, not diagnostic cause.
+-- GABA / neuroinflammation review bridge.
 ------------------------------------------------------------------------
 
 crowley2016NeuroimmuneEvidence : Evidence.RegionalGABAEvidence
@@ -191,8 +169,7 @@ crowley2016NeuroimmuneEvidence =
     Evidence.systematicReviewEvidence
     "Review-level reciprocal GABAergic/neuroimmune mechanism evidence. This row does not encode a diagnosis, a single direction of effect, an individual classifier, or causal sufficiency for a neurodevelopmental phenotype."
 
-crowley2016NeuroimmuneBridge :
-  Bridge.NeurochemicalInflammationBridge crowley2016NeuroimmuneEvidence
+crowley2016NeuroimmuneBridge : Bridge.NeurochemicalInflammationBridge crowley2016NeuroimmuneEvidence
 crowley2016NeuroimmuneBridge =
   Bridge.neurochemical-inflammation-bridge
     (Bridge.promotion-validation
@@ -205,12 +182,11 @@ crowley2016NeuroimmuneBridge =
 
 data NeuroimmuneReviewIsDiagnosisCausalPermission : Set where
 
-neuroimmuneReviewDoesNotPayDiagnosisCausation :
-  NeuroimmuneReviewIsDiagnosisCausalPermission → ⊥
+neuroimmuneReviewDoesNotPayDiagnosisCausation : NeuroimmuneReviewIsDiagnosisCausalPermission → ⊥
 neuroimmuneReviewDoesNotPayDiagnosisCausation ()
 
 ------------------------------------------------------------------------
--- ADHD: heterogeneous measurement atlas.
+-- ADHD heterogeneous evidence atlas.
 ------------------------------------------------------------------------
 
 data ADHDMeasurementDomain : Set where
@@ -242,54 +218,40 @@ record ADHDGABAStudyReceipt : Set where
     symptomRelationFinding : ADHDSymptomRelationFinding
     scopeBoundary : String
 
-open ADHDGABAStudyReceipt public
-
 schur2016ADHDMetaReceipt : ADHDGABAStudyReceipt
 schur2016ADHDMetaReceipt =
-  adhd-gaba-study-receipt
-    schur2016Source
-    brainMRS
+  adhd-gaba-study-receipt schur2016Source brainMRS
     "ADHD subset within a seven-disorder H-MRS systematic review/meta-analysis"
     "brain H-MRS studies pooled across reported regions"
     "1H-MRS meta-analysis"
-    noSignificantOverallDifference
-    noGeneralSymptomRelationPaid
+    noSignificantOverallDifference noGeneralSymptomRelationPaid
     "No significant pooled ADHD-control GABA difference is not evidence of exact equality and does not erase region-, age-, or assay-specific effects."
 
 puts2020ADHDStriatalReceipt : ADHDGABAStudyReceipt
 puts2020ADHDStriatalReceipt =
-  adhd-gaba-study-receipt
-    puts2020Source
-    regionSpecificBrainMRS
+  adhd-gaba-study-receipt puts2020Source regionSpecificBrainMRS
     "50 unmedicated children aged 5-9 years, 26 ADHD and 24 controls"
     "striatum, with DLPFC, ACC, and premotor cortex also measured"
     "7T MRS with LCModel; reported GABA/Cr"
-    lowerInSelectedRegion
-    noSignificantClinicalSymptomCorrelation
+    lowerInSelectedRegion noSignificantClinicalSymptomCorrelation
     "Lower GABA/Cr was striatal in this cohort; the same group difference was not reported in ACC, DLPFC, or premotor cortex, and behavioral manifestations did not significantly correlate with metabolites."
 
 harris2021ADHDSensorimotorReceipt : ADHDGABAStudyReceipt
 harris2021ADHDSensorimotorReceipt =
-  adhd-gaba-study-receipt
-    harris2021Source
-    multimodalMRSTMS
+  adhd-gaba-study-receipt harris2021Source multimodalMRSTMS
     "37 children with ADHD and 45 typically developing children aged 8-12 years across two sites"
     "left sensorimotor cortex"
     "GABA-edited MRS plus single/paired-pulse TMS during rest and GO/STOP task states"
-    noGroupDifferenceInSelectedRegion
-    noSignificantClinicalSymptomCorrelation
+    noGroupDifferenceInSelectedRegion noSignificantClinicalSymptomCorrelation
     "GABA+ did not differ overall between groups or correlate with ADHD clinical symptoms; neurophysiological relations varied with state and measure."
 
 cheng2026ADHDSerumReceipt : ADHDGABAStudyReceipt
 cheng2026ADHDSerumReceipt =
-  adhd-gaba-study-receipt
-    cheng2026Source
-    peripheralSerum
+  adhd-gaba-study-receipt cheng2026Source peripheralSerum
     "145 children with ADHD and 120 healthy controls"
     "peripheral serum"
     "ultra-performance liquid chromatography-tandem mass spectrometry; serum GABA, glutamate, and GABA/Glu ratio"
-    higherPeripheralLevel
-    positiveSymptomCorrelation
+    higherPeripheralLevel positiveSymptomCorrelation
     "Serum GABA is not a brain-MRS measurement. Higher serum GABA/GABA-Glu ratio and positive SNAP-IV correlations cannot be collapsed into a central regional GABA law; independent clinical validation was explicitly requested."
 
 record ADHDEvidenceHeterogeneityAtlas : Set where
@@ -302,14 +264,11 @@ record ADHDEvidenceHeterogeneityAtlas : Set where
     regionDependenceRetained : Bool
     regionDependenceRetainedIsTrue : regionDependenceRetained ≡ true
     assayCompartmentDependenceRetained : Bool
-    assayCompartmentDependenceRetainedIsTrue :
-      assayCompartmentDependenceRetained ≡ true
+    assayCompartmentDependenceRetainedIsTrue : assayCompartmentDependenceRetained ≡ true
     uniformLowGABADirectionAvailable : Bool
-    uniformLowGABADirectionAvailableIsFalse :
-      uniformLowGABADirectionAvailable ≡ false
+    uniformLowGABADirectionAvailableIsFalse : uniformLowGABADirectionAvailable ≡ false
     uniformInverseSeverityRelationAvailable : Bool
-    uniformInverseSeverityRelationAvailableIsFalse :
-      uniformInverseSeverityRelationAvailable ≡ false
+    uniformInverseSeverityRelationAvailableIsFalse : uniformInverseSeverityRelationAvailable ≡ false
 
 canonicalADHDEvidenceHeterogeneityAtlas : ADHDEvidenceHeterogeneityAtlas
 canonicalADHDEvidenceHeterogeneityAtlas =
@@ -318,20 +277,16 @@ canonicalADHDEvidenceHeterogeneityAtlas =
     puts2020ADHDStriatalReceipt
     harris2021ADHDSensorimotorReceipt
     cheng2026ADHDSerumReceipt
-    true refl
-    true refl
-    false refl
-    false refl
+    true refl true refl false refl false refl
 
 data ADHDGeneralLowGABAPermission : Set where
 data ADHDHigherGABALowerSeverityPermission : Set where
 
-a dhdEvidenceDoesNotPayGeneralLowGABA : ADHDGeneralLowGABAPermission → ⊥
-a dhdEvidenceDoesNotPayGeneralLowGABA ()
+adhdEvidenceDoesNotPayGeneralLowGABA : ADHDGeneralLowGABAPermission → ⊥
+adhdEvidenceDoesNotPayGeneralLowGABA ()
 
-a dhdEvidenceDoesNotPayInverseSeverityLaw :
-  ADHDHigherGABALowerSeverityPermission → ⊥
-a dhdEvidenceDoesNotPayInverseSeverityLaw ()
+adhdEvidenceDoesNotPayInverseSeverityLaw : ADHDHigherGABALowerSeverityPermission → ⊥
+adhdEvidenceDoesNotPayInverseSeverityLaw ()
 
 ------------------------------------------------------------------------
 -- Canonical boundary.
@@ -341,34 +296,21 @@ record GABAEvidenceInstantiationBoundary : Set where
   constructor gaba-evidence-instantiation-boundary
   field
     synchronyAttachmentAssociationInstantiated : Bool
-    synchronyAttachmentAssociationInstantiatedIsTrue :
-      synchronyAttachmentAssociationInstantiated ≡ true
+    synchronyAttachmentAssociationInstantiatedIsTrue : synchronyAttachmentAssociationInstantiated ≡ true
     synchronyDoesNotDefineAttachment : Bool
-    synchronyDoesNotDefineAttachmentIsFalse :
-      synchronyDoesNotDefineAttachment ≡ false
+    synchronyDoesNotDefineAttachmentIsFalse : synchronyDoesNotDefineAttachment ≡ false
     neuroimmuneMechanisticBridgeInstantiated : Bool
-    neuroimmuneMechanisticBridgeInstantiatedIsTrue :
-      neuroimmuneMechanisticBridgeInstantiated ≡ true
+    neuroimmuneMechanisticBridgeInstantiatedIsTrue : neuroimmuneMechanisticBridgeInstantiated ≡ true
     neuroimmuneReviewPaysDiagnosisCausation : Bool
-    neuroimmuneReviewPaysDiagnosisCausationIsFalse :
-      neuroimmuneReviewPaysDiagnosisCausation ≡ false
+    neuroimmuneReviewPaysDiagnosisCausationIsFalse : neuroimmuneReviewPaysDiagnosisCausation ≡ false
     adhdHeterogeneityAtlasInstantiated : Bool
-    adhdHeterogeneityAtlasInstantiatedIsTrue :
-      adhdHeterogeneityAtlasInstantiated ≡ true
+    adhdHeterogeneityAtlasInstantiatedIsTrue : adhdHeterogeneityAtlasInstantiated ≡ true
     adhdGeneralLowGABAClaimPaid : Bool
-    adhdGeneralLowGABAClaimPaidIsFalse :
-      adhdGeneralLowGABAClaimPaid ≡ false
+    adhdGeneralLowGABAClaimPaidIsFalse : adhdGeneralLowGABAClaimPaid ≡ false
     adhdInverseSeverityLawPaid : Bool
-    adhdInverseSeverityLawPaidIsFalse :
-      adhdInverseSeverityLawPaid ≡ false
+    adhdInverseSeverityLawPaidIsFalse : adhdInverseSeverityLawPaid ≡ false
 
 canonicalGABAEvidenceInstantiationBoundary : GABAEvidenceInstantiationBoundary
 canonicalGABAEvidenceInstantiationBoundary =
   gaba-evidence-instantiation-boundary
-    true refl
-    false refl
-    true refl
-    false refl
-    true refl
-    false refl
-    false refl
+    true refl false refl true refl false refl true refl false refl false refl
