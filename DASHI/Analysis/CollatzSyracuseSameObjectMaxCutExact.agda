@@ -13,6 +13,7 @@ import DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderCandidateExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderCompilerExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderLeanCrossProverWeldExact
+import DASHI.NumberTheory.Collatz.SyracuseZ2InverseBranchSourceExact
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftBoundaryExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftExact
@@ -44,12 +45,13 @@ data CollatzCut : Set where
   C5-residueCylinderReverse : CollatzCut
   C6-affineIterate : CollatzCut
   C7-stoppedLogRemainder : CollatzCut
-  C8-finiteTransferIntertwiner : CollatzCut
+  C8a-relationMatrixTransfer : CollatzCut
+  C8b-z2InverseBranchTransfer : CollatzCut
   C9-fullCylinderSeam : CollatzCut
-  C10-repairedFiniteMixing : CollatzCut
+  C10-repairedRelationMixing : CollatzCut
   C11-samplingPushforward : CollatzCut
   C12a-directParityBernoulli : CollatzCut
-  C12a-oldSpectralConcentration : CollatzCut
+  C12a-oldRelationSpectralConcentration : CollatzCut
   C12b-prefixAbsorption : CollatzCut
   C13-integerStoppingTransport : CollatzCut
   C14-promotionFirewall : CollatzCut
@@ -65,12 +67,13 @@ cutStatus C4-itineraryShift = proved
 cutStatus C5-residueCylinderReverse = conditionalOnHypothesis
 cutStatus C6-affineIterate = conditionalOnHypothesis
 cutStatus C7-stoppedLogRemainder = conditionalOnHypothesis
-cutStatus C8-finiteTransferIntertwiner = refutedRoute
+cutStatus C8a-relationMatrixTransfer = refutedRoute
+cutStatus C8b-z2InverseBranchTransfer = sourceSpecificOpen
 cutStatus C9-fullCylinderSeam = conditionalOnHypothesis
-cutStatus C10-repairedFiniteMixing = compiledFromRepo
+cutStatus C10-repairedRelationMixing = compiledFromRepo
 cutStatus C11-samplingPushforward = sourceSpecificOpen
 cutStatus C12a-directParityBernoulli = conditionalOnHypothesis
-cutStatus C12a-oldSpectralConcentration = refutedRoute
+cutStatus C12a-oldRelationSpectralConcentration = refutedRoute
 cutStatus C12b-prefixAbsorption = conditionalOnHypothesis
 cutStatus C13-integerStoppingTransport = conditionalOnHypothesis
 cutStatus C14-promotionFirewall = proved
@@ -85,13 +88,17 @@ finiteChainStillNotIntegerSyracuse :
   cutStatus oldFiniteEqualsIntegerRoute ≡ refutedRoute
 finiteChainStillNotIntegerSyracuse = refl
 
-spectralIntertwinerRejected :
-  cutStatus C8-finiteTransferIntertwiner ≡ refutedRoute
-spectralIntertwinerRejected = refl
+relationMatrixIntertwinerRejected :
+  cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
+relationMatrixIntertwinerRejected = refl
 
-oldSpectralConcentrationNotCriticalPath :
-  cutStatus C12a-oldSpectralConcentration ≡ refutedRoute
-oldSpectralConcentrationNotCriticalPath = refl
+z2InverseBranchTransferIsLiveCandidate :
+  cutStatus C8b-z2InverseBranchTransfer ≡ sourceSpecificOpen
+z2InverseBranchTransferIsLiveCandidate = refl
+
+oldRelationSpectralConcentrationNotCriticalPath :
+  cutStatus C12a-oldRelationSpectralConcentration ≡ refutedRoute
+oldRelationSpectralConcentrationNotCriticalPath = refl
 
 cylinderForwardCompilerClosed :
   cutStatus C3-residueCylinderForward ≡ conditionalOnHypothesis
@@ -108,13 +115,14 @@ oneStepCylinderArithmeticIsTheLiveWall = refl
 record MaxCutBoundary : Set where
   constructor maxCutBoundary
   field
-    finiteMixingImpliesUniversalStopping : Nat
+    relationMixingImpliesUniversalStopping : Nat
     interfaceRecordCountsAsSourceProof : Nat
     exhaustiveSpecimensCountAsGeneralProof : Nat
     openSourcesRemainVisible : Nat
     completeBlockBernoulliNeedsSpectralMixing : Nat
-    directCylinderBijectionCanReplaceSpectralRoute : Nat
+    directCylinderBijectionCanReplaceRelationSpectralRoute : Nat
     arbitraryLengthCylinderInductionAlreadyCompiled : Nat
+    z2InverseFormulaStillNeedsFiniteNatWeld : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
-canonicalMaxCutBoundary = maxCutBoundary 0 0 0 1 0 1 1
+canonicalMaxCutBoundary = maxCutBoundary 0 0 0 1 0 1 1 1
