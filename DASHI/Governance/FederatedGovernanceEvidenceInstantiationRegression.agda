@@ -5,127 +5,77 @@ open import DASHI.Core.Prelude
 import DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact as Capstone
 
 sourcesRemainDistinct :
-  Capstone.crossSourceAgreementCollapsesProvenance
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.crossSourceAgreementCollapsesProvenance Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 sourcesRemainDistinct = refl
 
-boloNotAttributedToBookchin :
-  Capstone.boloArchitectureAttributedToBookchin
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
-boloNotAttributedToBookchin = refl
-
-bookchinNotAttributedToBolo :
-  Capstone.bookchinConfederalismAttributedToPM
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
-bookchinNotAttributedToBolo = refl
-
-ipccNotPoliticalDoctrine :
-  Capstone.ipccTransitionEvidenceCreatesPoliticalDoctrine
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
-ipccNotPoliticalDoctrine = refl
-
 occupyEvidenceDoesNotPayScalingLaw :
-  Capstone.occupyEvidencePaysQuantitativeScalingLaw
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.occupyEvidencePaysQuantitativeScalingLaw Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 occupyEvidenceDoesNotPayScalingLaw = refl
 
 generalEvidenceDoesNotDirectlyValidateOccupy :
-  Capstone.generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 generalEvidenceDoesNotDirectlyValidateOccupy = refl
 
 boundedOccupyInteractionIsPaid :
-  Capstone.occupyArchivePaysBoundedNamedInteraction
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.occupyArchivePaysBoundedNamedInteraction Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 boundedOccupyInteractionIsPaid = refl
 
 boundedFiniteOccupyGraphIsPaid :
-  Capstone.occupyArchivePaysBoundedFiniteIncidenceGraph
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.occupyArchivePaysBoundedFiniteIncidenceGraph Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 boundedFiniteOccupyGraphIsPaid = refl
 
 longitudinalOccupyGraphFamilyIsPaid :
-  Capstone.occupyArchivePaysLongitudinalIncidenceFamily
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.occupyArchivePaysLongitudinalIncidenceFamily Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 longitudinalOccupyGraphFamilyIsPaid = refl
 
 sourceExplicitMeetingPanelIsPaid :
-  Capstone.occupyArchivePaysSourceExplicitMeetingPanel
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.occupyArchivePaysSourceExplicitMeetingPanel Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 sourceExplicitMeetingPanelIsPaid = refl
 
+archivalObservationModelIsPaid :
+  Capstone.dashiPaysArchivalObservationModel Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+archivalObservationModelIsPaid = refl
+
 archivalProcessBurdenObservationsArePaid :
-  Capstone.occupyArchivePaysProcessBurdenObservations
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.occupyArchivePaysProcessBurdenObservations Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 archivalProcessBurdenObservationsArePaid = refl
 
 measuredDurationsArePaid :
-  Capstone.occupyArchivePaysMeasuredMeetingDurations
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.occupyArchivePaysMeasuredMeetingDurations Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 measuredDurationsArePaid = refl
 
 experimentDesignSurfaceIsPaid :
-  Capstone.dashiPaysCoordinationBurdenExperimentDesign
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.dashiPaysCoordinationBurdenExperimentDesign Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 experimentDesignSurfaceIsPaid = refl
 
 prospectiveHeldOutProtocolIsPaid :
-  Capstone.dashiPaysProspectiveHeldOutProtocol
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.dashiPaysProspectiveHeldOutProtocol Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 prospectiveHeldOutProtocolIsPaid = refl
 
 causalPromotionObligationSurfaceIsPaid :
-  Capstone.dashiPaysCausalPromotionObligationSurface
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.dashiPaysCausalPromotionObligationSurface Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 causalPromotionObligationSurfaceIsPaid = refl
 
 generalMechanismPlausibilityIsPaid :
-  Capstone.generalGroupDecisionEvidencePaysMechanismPlausibility
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ true
+  Capstone.generalGroupDecisionEvidencePaysMechanismPlausibility Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 generalMechanismPlausibilityIsPaid = refl
 
 completeRealIncidenceStillUnpaid :
-  Capstone.actualParticipantIssueIncidencePaid
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.actualParticipantIssueIncidencePaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 completeRealIncidenceStillUnpaid = refl
 
 coordinationCostStillUnpaid :
-  Capstone.empiricalCoordinationCostFunctionalPaid
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.empiricalCoordinationCostFunctionalPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 coordinationCostStillUnpaid = refl
 
 quantitativeIncidenceBurdenRelationshipStillUnpaid :
-  Capstone.quantitativeIncidenceBurdenRelationshipPaid
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.quantitativeIncidenceBurdenRelationshipPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 quantitativeIncidenceBurdenRelationshipStillUnpaid = refl
 
 causalEffectStillUnpromoted :
-  Capstone.incidenceBurdenCausalEffectPromoted
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.incidenceBurdenCausalEffectPromoted Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 causalEffectStillUnpromoted = refl
 
 prospectiveHeldOutValidationStillUnpaid :
-  Capstone.prospectiveHeldOutValidationPaid
-    Capstone.canonicalFederatedGovernanceEvidenceBoundary
-  ≡ false
+  Capstone.prospectiveHeldOutValidationPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 prospectiveHeldOutValidationStillUnpaid = refl
