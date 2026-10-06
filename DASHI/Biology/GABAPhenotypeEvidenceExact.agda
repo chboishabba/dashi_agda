@@ -3,83 +3,143 @@ module DASHI.Biology.GABAPhenotypeEvidenceExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import DASHI.Core.Prelude using (⊥)
 
 import DASHI.Biology.NeurochemicalVocabularyReceipt as Vocabulary
 import DASHI.Biology.NeurotypeProcessingGeometryExact as Geometry
+import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.CandidateOnlyCore as CandidateOnlyCore
 
 ------------------------------------------------------------------------
 -- GABA / PHENOTYPE EVIDENCE LAYER
 --
--- This module is deliberately an evidence-and-promotion boundary, not a
--- neurodevelopmental causal theory.  It formalises the strongest safe shape
--- recoverable from the 2026-10-06 transcript audit:
+-- This is an evidence-and-promotion boundary, not a neurodevelopmental causal
+-- theory.  The source-side shape is:
 --
---   named source -> population/region/measurement/task/phenotype receipt
---                -> bounded association claim
---                -/-> diagnosis, whole-brain state, causal necessity,
---                    causal sufficiency, attachment status, or another domain
---                    without an explicit downstream bridge receipt.
+--   attributed source
+--     -> population / region / measurement / task / phenotype receipt
+--     -> bounded empirical relation
+--     -/-> whole-brain state, individual diagnosis, causal necessity,
+--         causal sufficiency, attachment status, neuroinflammation, or an
+--         uncited cross-domain mechanism.
 --
--- Attribution rule: externally sourced claims remain attached to named source
--- metadata and a role string.  Synthetic theorem witnesses below are marked as
--- synthetic and are not population estimates, diagnostic cut-offs, effect
--- sizes, or replacements for the cited studies.
+-- Attribution follows DASHI.Core.AttributedSourceCore.  A citation identifies
+-- provenance and its relationship to this formalisation; it imports neither
+-- proof nor scientific authority.  No synthetic carrier below is an empirical
+-- effect size, diagnostic threshold, or population estimate.
 ------------------------------------------------------------------------
 
-record LiteratureSource : Set where
-  constructor literatureSource
-  field
-    authors : String
-    title : String
-    venue : String
-    year : Nat
-    doi : String
-    role : String
-
-open LiteratureSource public
-
-schmitz2017Source : LiteratureSource
+schmitz2017Source : Source.AttributedSource
 schmitz2017Source =
-  literatureSource
-    "Thomas W. Schmitz; Michael C. Correia; Catarina S. Ferreira; Adrian Prescot; Michael C. Anderson"
+  Source.mkDOISource
+    "Taylor W. Schmitz; Marta M. Correia; Catarina S. Ferreira; Andrew P. Prescot; Michael C. Anderson"
     "Hippocampal GABA enables inhibitory control over unwanted thoughts"
     "Nature Communications 8:1311"
-    2017
+    "2017"
     "10.1038/s41467-017-00956-z"
-    "healthy-young-adult hippocampal GABA / Think-No-Think association; does not establish emotion suppression or diagnostic causation"
+    "https://doi.org/10.1038/s41467-017-00956-z"
+    Source.academicArticleSource
+    "Pays the healthy-young-adult hippocampal GABA / Think-No-Think retrieval-suppression association. It does not pay emotion suppression, diagnosis, or causal sufficiency."
+    Source.publicAttribution
 
-autismGABAMetaAnalysis2024Source : LiteratureSource
+autismGABAMetaAnalysis2024Source : Source.AttributedSource
 autismGABAMetaAnalysis2024Source =
-  literatureSource
-    "systematic-review / meta-analysis source registry row"
-    "GABA concentration in autism spectrum disorder: a systematic review and meta-analysis of proton magnetic resonance spectroscopy studies"
-    "2024 systematic review and meta-analysis"
-    2024
-    "PMID:38796123"
-    "group-level autism/GABA synthesis; heterogeneous regional and methodological evidence, not causal sufficiency"
+  Source.mkDOISource
+    "Alice R. Thomson; Duanghathai Pasanta; Tomoki Arichi; Nicolaas A. Puts"
+    "Neurometabolite differences in Autism as assessed with Magnetic Resonance Spectroscopy: A systematic review and meta-analysis"
+    "Neuroscience & Biobehavioral Reviews 162:105728"
+    "2024"
+    "10.1016/j.neubiorev.2024.105728"
+    "https://doi.org/10.1016/j.neubiorev.2024.105728"
+    Source.academicArticleSource
+    "Pays a group-level meta-analytic autism/GABA direction while retaining demographic, regional, and methodological heterogeneity. It does not classify individuals or prove causal sufficiency."
+    Source.publicAttribution
 
-ptsdGABA2013Source : LiteratureSource
-ptsdGABA2013Source =
-  literatureSource
-    "PTSD magnetic-resonance-spectroscopy study source registry row"
-    "Reduced GABA in the anterior insula in posttraumatic stress disorder"
-    "2013 magnetic resonance spectroscopy study"
-    2013
-    "PMID:23861191"
-    "regional PTSD/GABA association fixture; does not define PTSD by GABA level"
+puts2017Source : Source.AttributedSource
+puts2017Source =
+  Source.mkDOISource
+    "Nicolaas A. J. Puts; Ericka L. Wodka; Ashley D. Harris; Deana Crocetti; Mark Tommerdahl; Stewart H. Mostofsky; Richard A. E. Edden"
+    "Reduced GABA and altered somatosensory function in children with autism spectrum disorder"
+    "Autism Research 10(4):608-619"
+    "2017"
+    "10.1002/aur.1691"
+    "https://doi.org/10.1002/aur.1691"
+    Source.academicArticleSource
+    "Pays reduced sensorimotor GABA in the studied autistic-child cohort and task-specific associations with tactile measures; occipital GABA was not reduced."
+    Source.publicAttribution
 
-ptsdMRSReview2022Source : LiteratureSource
+umesawa2020Source : Source.AttributedSource
+umesawa2020Source =
+  Source.mkDOISource
+    "Yumi Umesawa; Takeshi Atsumi; Mrinmoy Chakrabarty; Reiko Fukatsu; Masakazu Ide"
+    "GABA Concentration in the Left Ventral Premotor Cortex Associates With Sensory Hyper-Responsiveness in Autism Spectrum Disorders Without Intellectual Disability"
+    "Frontiers in Neuroscience 14:482"
+    "2020"
+    "10.3389/fnins.2020.00482"
+    "https://doi.org/10.3389/fnins.2020.00482"
+    Source.academicArticleSource
+    "Pays a negative association between left ventral premotor-cortex GABA and sensory hyper-responsiveness in the studied cohort; it does not universalise a sensory-severity law."
+    Source.publicAttribution
+
+ptsdGABA2014Source : Source.AttributedSource
+ptsdGABA2014Source =
+  Source.mkDOISource
+    "Isabelle M. Rosso; Melissa R. Weiner; David J. Crowley; Marisa M. Silveri; Scott L. Rauch; J. Eric Jensen"
+    "Insula and anterior cingulate GABA levels in posttraumatic stress disorder: preliminary findings using magnetic resonance spectroscopy"
+    "Depression and Anxiety 31(2):115-123"
+    "2014"
+    "10.1002/da.22155"
+    "https://doi.org/10.1002/da.22155"
+    Source.academicArticleSource
+    "Pays the preliminary right-anterior-insula group difference; dorsal ACC did not significantly differ and insula GABA was not significantly associated with PTSD symptom severity."
+    Source.publicAttribution
+
+ptsdMRSReview2022Source : Source.AttributedSource
 ptsdMRSReview2022Source =
-  literatureSource
-    "systematic-review source registry row"
-    "Magnetic resonance spectroscopy in post-traumatic stress disorder: an updated systematic review"
-    "2022 systematic review"
-    2022
-    "PMID:36237981"
-    "cross-study heterogeneity boundary for PTSD metabolite claims"
+  Source.mkDOISource
+    "Kelley M. Swanberg; Leonardo Campos; Chadi G. Abdallah; Christoph Juchem"
+    "Proton Magnetic Resonance Spectroscopy in Post-Traumatic Stress Disorder-Updated Systematic Review and Meta-Analysis"
+    "Chronic Stress 6:24705470221128004"
+    "2022"
+    "10.1177/24705470221128004"
+    "https://doi.org/10.1177/24705470221128004"
+    Source.academicArticleSource
+    "Pays the cross-study MRS review boundary: the strongest replicated meta-analytic signal was not a general GABA law, and heterogeneity varied widely across analyses."
+    Source.publicAttribution
+
+transcriptSource : Source.AttributedSource
+transcriptSource =
+  Source.mkNoDOISource
+    "unidentified speaker in user-supplied transcript"
+    "transcript-2026-10-06 (1).srt"
+    "user-supplied SRT transcript"
+    "2026"
+    ""
+    Source.archivalSource
+    "Primary source for the claims audited below. Speaker identity is not inferred. External scientific support is represented only by separate attributed-source receipts."
+    Source.existenceOnlyAttribution
+
+canonicalEvidenceSources : List Source.AttributedSource
+canonicalEvidenceSources =
+  schmitz2017Source ∷
+  autismGABAMetaAnalysis2024Source ∷
+  puts2017Source ∷
+  umesawa2020Source ∷
+  ptsdGABA2014Source ∷
+  ptsdMRSReview2022Source ∷ []
+
+canonicalSourceAtlas : Source.AttributedSourceAtlas
+canonicalSourceAtlas =
+  Source.mkSourceAtlas
+    "GABA phenotype evidence atlas"
+    "DASHI.Biology.GABAPhenotypeEvidenceExact"
+    canonicalEvidenceSources
+    "Named scientific sources supporting bounded GABA/phenotype receipts; citations do not promote claims beyond the named study scope."
+
+canonicalSourceAtlasDoesNotCreateAuthority :
+  Source.atlasCreatesAuthority canonicalSourceAtlas ≡ false
+canonicalSourceAtlasDoesNotCreateAuthority = refl
 
 ------------------------------------------------------------------------
 -- Typed empirical coordinates.
@@ -87,6 +147,8 @@ ptsdMRSReview2022Source =
 
 data PopulationKind : Set where
   healthyYoungAdults : PopulationKind
+  autisticChildren : PopulationKind
+  autisticParticipantsWithoutID : PopulationKind
   autisticParticipants : PopulationKind
   adhdParticipants : PopulationKind
   ptsdParticipants : PopulationKind
@@ -95,23 +157,30 @@ data PopulationKind : Set where
 data BrainRegion : Set where
   hippocampus : BrainRegion
   sensorimotorCortex : BrainRegion
+  occipitalCortex : BrainRegion
+  leftVentralPremotorCortex : BrainRegion
   medialPrefrontalCortex : BrainRegion
   anteriorInsula : BrainRegion
+  dorsalAnteriorCingulate : BrainRegion
   multipleOrMixedRegions : BrainRegion
 
 data MeasurementKind : Set where
   protonMRS : MeasurementKind
+  gabaEditedMRS : MeasurementKind
   spectroscopyMetaAnalysis : MeasurementKind
   otherGABAMeasurement : MeasurementKind
 
 data TaskKind : Set where
   thinkNoThinkTask : TaskKind
-  sensoryTask : TaskKind
+  tactileTaskBattery : TaskKind
+  sensoryQuestionnaire : TaskKind
   symptomAssociation : TaskKind
   noSingleTask : TaskKind
 
 data PhenotypeKind : Set where
   retrievalSuppressionPerformance : PhenotypeKind
+  tactileProcessingDifference : PhenotypeKind
+  sensoryHyperResponsiveness : PhenotypeKind
   sensoryProcessingDifference : PhenotypeKind
   autismDiagnosticCoordinate : PhenotypeKind
   adhdDiagnosticCoordinate : PhenotypeKind
@@ -126,6 +195,7 @@ data Direction : Set where
   negativeAssociation : Direction
   groupLower : Direction
   groupHigher : Direction
+  noSignificantGroupDifference : Direction
   heterogeneousOrMixed : Direction
   directionNotPromoted : Direction
 
@@ -139,7 +209,7 @@ data EvidenceClass : Set where
 record RegionalGABAEvidence : Set where
   constructor regionalGABAEvidence
   field
-    source : LiteratureSource
+    source : Source.AttributedSource
     population : PopulationKind
     region : BrainRegion
     measurement : MeasurementKind
@@ -166,7 +236,7 @@ schmitz2017ThoughtSuppression =
     retrievalSuppressionPerformance
     positiveAssociation
     observationalAssociation
-    "Bound to the cited healthy-participant hippocampal Think/No-Think result; not promoted to emotion suppression, autism, ADHD, PTSD, or whole-brain GABA."
+    "Greater resting hippocampal GABA predicted better mnemonic control in the study. The functional-specificity comparison was action stopping, not emotional suppression."
 
 autismGABAMetaAnalysis2024 : RegionalGABAEvidence
 autismGABAMetaAnalysis2024 =
@@ -179,26 +249,71 @@ autismGABAMetaAnalysis2024 =
     autismDiagnosticCoordinate
     groupLower
     systematicReviewEvidence
-    "Group-level meta-analytic direction only; heterogeneity and regional variation block individual classification and causal-sufficiency promotion."
+    "Overall lower GABA at group level in the meta-analysis; demographic, regional, and methodological variation remains explicit and blocks individual or universal promotion."
 
-ptsdAnteriorInsulaGABA2013 : RegionalGABAEvidence
-ptsdAnteriorInsulaGABA2013 =
+puts2017SensorimotorGABA : RegionalGABAEvidence
+puts2017SensorimotorGABA =
   regionalGABAEvidence
-    ptsdGABA2013Source
+    puts2017Source
+    autisticChildren
+    sensorimotorCortex
+    gabaEditedMRS
+    tactileTaskBattery
+    tactileProcessingDifference
+    groupLower
+    groupDifference
+    "Sensorimotor GABA was lower in the studied autistic-child group; occipital GABA was reported as normal. Several tactile associations were task-specific, so this row does not encode a scalar symptom-severity law."
+
+umesawa2020SensoryHyperResponsiveness : RegionalGABAEvidence
+umesawa2020SensoryHyperResponsiveness =
+  regionalGABAEvidence
+    umesawa2020Source
+    autisticParticipantsWithoutID
+    leftVentralPremotorCortex
+    protonMRS
+    sensoryQuestionnaire
+    sensoryHyperResponsiveness
+    negativeAssociation
+    observationalAssociation
+    "Lower left-vPMC GABA was associated with greater sensory hyper-responsiveness in the studied ASD group; region, cohort, and instrument remain part of the receipt."
+
+ptsdAnteriorInsulaGABA2014 : RegionalGABAEvidence
+ptsdAnteriorInsulaGABA2014 =
+  regionalGABAEvidence
+    ptsdGABA2014Source
     ptsdParticipants
     anteriorInsula
     protonMRS
     symptomAssociation
     ptsdDiagnosticCoordinate
     groupLower
-    observationalAssociation
-    "Regional case-control association only; not a definition, necessity theorem, or sufficient mechanism of PTSD."
+    groupDifference
+    "Right anterior-insula GABA was lower in the preliminary PTSD sample; dorsal ACC did not significantly differ, and insula GABA was not significantly associated with PTSD symptom severity."
+
+ptsdMRSReview2022 : RegionalGABAEvidence
+ptsdMRSReview2022 =
+  regionalGABAEvidence
+    ptsdMRSReview2022Source
+    mixedOrMetaAnalyticPopulation
+    multipleOrMixedRegions
+    spectroscopyMetaAnalysis
+    noSingleTask
+    ptsdDiagnosticCoordinate
+    heterogeneousOrMixed
+    systematicReviewEvidence
+    "The systematic review/meta-analysis reports strong methodological and regional heterogeneity; it does not license a general PTSD = low-GABA law."
 
 ------------------------------------------------------------------------
 -- Existing-repo attachment.
 ------------------------------------------------------------------------
 
+gabaVocabularyOwner : CandidateOnlyCore.CandidateOnlyRow
 gabaVocabularyOwner = Vocabulary.gabaCandidate
+
+gabaVocabularyOwnerRemainsCandidateOnly :
+  CandidateOnlyCore.candidateOnly gabaVocabularyOwner ≡ true
+gabaVocabularyOwnerRemainsCandidateOnly =
+  CandidateOnlyCore.candidateOnlyIsTrue Vocabulary.gabaCandidateReceipt
 
 autismCoordinateOwner : Geometry.NeurotypeCoordinate
 autismCoordinateOwner = Geometry.autisticCoordinate
@@ -212,11 +327,9 @@ audhdCoordinateOwner = Geometry.audhdCoordinate
 ------------------------------------------------------------------------
 -- Promotion gates.
 --
--- These empty permission types encode absence of authority.  Downstream work
--- can introduce evidence-bearing adapters without changing the meaning of the
--- source receipts above.  No proposition here claims that a bridge is
--- impossible in nature; only that this module does not possess the receipt
--- required to promote the source claim.
+-- Empty permission types encode absence of authority in this module.  They do
+-- not assert that such bridges are impossible in nature; they assert only that
+-- the cited evidence receipts above do not themselves inhabit the bridge.
 ------------------------------------------------------------------------
 
 data AssociationIsCausalSufficiencyPermission : Set where
@@ -236,6 +349,8 @@ data GABADefinesNeuroinflammationPermission : Set where
 data AutismCausedByLowGABAPermission : Set where
 
 data ADHDCausedByLowGABAPermission : Set where
+
+data SensoryAssociationIsGlobalSeverityLawPermission : Set where
 
 associationDoesNotImplyCausalSufficiency :
   AssociationIsCausalSufficiencyPermission → ⊥
@@ -273,8 +388,12 @@ adhdGABAHypothesisDoesNotProveCausalSufficiency :
   ADHDCausedByLowGABAPermission → ⊥
 adhdGABAHypothesisDoesNotProveCausalSufficiency ()
 
+sensoryAssociationDoesNotUniversalizeAutism :
+  SensoryAssociationIsGlobalSeverityLawPermission → ⊥
+sensoryAssociationDoesNotUniversalizeAutism ()
+
 ------------------------------------------------------------------------
--- Transcript-audit statuses.
+-- Literal transcript audit.
 ------------------------------------------------------------------------
 
 data AuditStatus : Set where
@@ -287,6 +406,8 @@ data AuditStatus : Set where
 record TranscriptClaimAudit : Set where
   constructor transcriptClaimAudit
   field
+    origin : Source.AttributedSource
+    sourceSpan : String
     transcriptClaim : String
     status : AuditStatus
     basis : String
@@ -296,41 +417,53 @@ open TranscriptClaimAudit public
 transcriptClaimAudits : List TranscriptClaimAudit
 transcriptClaimAudits =
   transcriptClaimAudit
-    "hippocampal GABA predicts successful thought suppression"
+    transcriptSource
+    "00:00:00,000 --> 00:00:05,620"
+    "GABA goes as far as to predict successful thought suppression, not emotional suppression."
     supportedBounded
-    "Schmitz et al. 2017 receipt: bounded to hippocampus, healthy young adults, and Think/No-Think retrieval suppression." ∷
+    "Schmitz et al. 2017 supports the hippocampal-GABA / retrieval-suppression component. Its explicit functional comparison is action stopping, not emotion suppression, so the final contrast is not promoted." ∷
   transcriptClaimAudit
-    "the cited result specifically excludes emotional suppression"
-    needsNamedReceipt
-    "The bounded receipt does not carry an emotion-suppression comparison." ∷
-  transcriptClaimAudit
-    "autism has lower GABA"
-    candidateAssociationOnly
-    "2024 meta-analytic group-level direction with heterogeneity; no individual or universal diagnostic promotion." ∷
-  transcriptClaimAudit
-    "GABA is sufficient to create autism"
+    transcriptSource
+    "00:00:13,030 --> 00:00:21,220"
+    "GABA is enough to create autism."
     blockedPromotion
-    "Association/group-difference receipts do not contain causal-sufficiency authority." ∷
+    "Group differences and associations do not supply a causal-sufficiency receipt." ∷
   transcriptClaimAudit
-    "ADHD generally has lower GABA"
+    transcriptSource
+    "00:00:22,000 --> 00:00:28,020"
+    "The GABA pathway is enough to create ADHD."
+    blockedPromotion
+    "No causal-sufficiency receipt is present; this module deliberately has no general ADHD-low-GABA evidence row." ∷
+  transcriptClaimAudit
+    transcriptSource
+    "00:00:28,340 --> 00:00:38,440"
+    "GABA levels in ADHD are lower."
     needsNamedReceipt
-    "No general low-GABA ADHD receipt is admitted by this module." ∷
+    "No general diagnosis-wide ADHD-low-GABA receipt is admitted here." ∷
   transcriptClaimAudit
-    "higher GABA implies lower ADHD symptom severity"
+    transcriptSource
+    "00:00:38,440 --> 00:00:45,900"
+    "Higher the GABA, lower the ADHD symptom severity."
     needsNamedReceipt
-    "Requires named population, region, measurement, severity instrument, direction, and source." ∷
+    "Requires a named population, brain region, measurement method, symptom instrument, direction/effect estimate, and source." ∷
   transcriptClaimAudit
-    "GABA is implicated in PTSD"
+    transcriptSource
+    "00:01:09,380 --> 00:01:13,460"
+    "lack of neurosynchrony means by definition insecure attachment"
+    domainBridgeMissing
+    "Neural synchrony and attachment status are different empirical domains; no definitional or validated empirical adapter is present." ∷
+  transcriptClaimAudit
+    transcriptSource
+    "00:01:22,930 --> 00:01:26,610"
+    "GABA is lower in autism compared to healthy controls."
     candidateAssociationOnly
-    "Regional spectroscopy evidence is representable; systematic review heterogeneity blocks definition or sufficiency." ∷
+    "The 2024 meta-analysis supports a group-level lower-GABA direction overall, while preserving regional, demographic, and methodological heterogeneity." ∷
   transcriptClaimAudit
-    "neural synchrony deficit means insecure attachment by definition"
-    domainBridgeMissing
-    "Synchrony and attachment are distinct phenotype domains; no definitional bridge receipt is present." ∷
-  transcriptClaimAudit
-    "GABA state determines neuroinflammation"
-    domainBridgeMissing
-    "Neurochemical and neuroinflammatory coordinates require an explicit empirical adapter." ∷ []
+    transcriptSource
+    "00:01:26,960 --> 00:01:35,190"
+    "Lower GABA is associated with greater sensory sensitivity in autism."
+    candidateAssociationOnly
+    "Puts et al. 2017 and Umesawa et al. 2020 support bounded regional/task-specific sensory associations; they do not establish a universal whole-brain or global symptom-severity law." ∷ []
 
 ------------------------------------------------------------------------
 -- Claim-boundary summary.
@@ -341,6 +474,8 @@ record GABAPhenotypeBoundary : Set where
   field
     regionalEvidenceIsRepresentable : Bool
     regionalEvidenceIsRepresentableIsTrue : regionalEvidenceIsRepresentable ≡ true
+    canonicalAttributionCoreIsUsed : Bool
+    canonicalAttributionCoreIsUsedIsTrue : canonicalAttributionCoreIsUsed ≡ true
     sourceAttributionIsRetained : Bool
     sourceAttributionIsRetainedIsTrue : sourceAttributionIsRetained ≡ true
     associationAutoPromotesToCausation : Bool
@@ -351,12 +486,16 @@ record GABAPhenotypeBoundary : Set where
     diagnosisAutoDeterminesGABAIsFalse : diagnosisAutoDeterminesGABA ≡ false
     crossDomainAttachmentBridgeIsAutomatic : Bool
     crossDomainAttachmentBridgeIsAutomaticIsFalse : crossDomainAttachmentBridgeIsAutomatic ≡ false
+    sensoryAssociationIsUniversalSeverityLaw : Bool
+    sensoryAssociationIsUniversalSeverityLawIsFalse : sensoryAssociationIsUniversalSeverityLaw ≡ false
 
 canonicalGABAPhenotypeBoundary : GABAPhenotypeBoundary
 canonicalGABAPhenotypeBoundary =
   gabaPhenotypeBoundary
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
