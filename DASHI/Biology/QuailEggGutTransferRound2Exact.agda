@@ -13,7 +13,7 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Design
 
 ovomucoidStability1994Source : Source.AttributedSource
 ovomucoidStability1994Source = Source.mkDOISource
-  "Japanese quail ovomucoid study authors as indexed by Journal of Nutritional Science and Vitaminology"
+  "Kyoko Takahashi; Satomi Kitao; Misao Tashiro; Toshio Asao; Masao Kanamori"
   "Inhibitory Specificity against Various Trypsins and Stability of Ovomucoid from Japanese Quail Egg White"
   "Journal of Nutritional Science and Vitaminology 40(6):593-601" "1994"
   "10.3177/jnsv.40.593" "https://doi.org/10.3177/jnsv.40.593"
