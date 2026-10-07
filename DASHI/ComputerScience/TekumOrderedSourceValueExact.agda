@@ -12,6 +12,7 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Vec.Base using (Vec; replicate)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Nullary.Negation using (¬_)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact as Centered
@@ -28,10 +29,6 @@ import DASHI.ComputerScience.TekumWidthAdmissibilityExact as Width
 
 ------------------------------------------------------------------------
 -- SOURCE-FAITHFUL ORDERED VALUE
---
--- NaR is the minimum reserved source code and infinity the maximum.  Zero is
--- the ordinary rational zero point.  Ordinary finite values delegate exactly
--- to the existing canonical Data.Rational.Base.ℚ decoder.
 ------------------------------------------------------------------------
 
 data OrderedTekumValue : Set where
@@ -243,7 +240,7 @@ sourceIntegerStrictImpliesOrderedStrict :
   (rightDecode : SourceOrderedDecode right) →
   BT.toInteger (BT.eval left) ℤ.< BT.toInteger (BT.eval right) →
   orderedValue leftDecode <ᵀ orderedValue rightDecode
-sourceIntegerStrictImpliesOrderedStrict even
+sourceIntegerStrictImpliesOrderedStrict even {left = left} {right = right}
     (decodedNaR leftNaR) (decodedNaR rightNaR) integerLt =
   ⊥-elim
     (ℤP.<-irrefl refl
@@ -257,20 +254,20 @@ sourceIntegerStrictImpliesOrderedStrict even
     (decodedNaR leftNaR) (decodedInfinity rightInfinity) integerLt = naRInfinity
 sourceIntegerStrictImpliesOrderedStrict even
     (decodedNaR leftNaR) (decodedOrdinary rightClass rightParse) integerLt = naRFinite
-sourceIntegerStrictImpliesOrderedStrict even
+sourceIntegerStrictImpliesOrderedStrict even {left = left} {right = right}
     (decodedZero leftZero) (decodedNaR rightNaR) integerLt =
   ⊥-elim
-    (nothingBelowNaR _
+    (nothingBelowNaR left
       (subst
-        (λ z → BT.toInteger (BT.eval _) ℤ.< z)
+        (λ z → BT.toInteger (BT.eval left) ℤ.< z)
         (SpecialOrder.classifiedNaRInteger rightNaR)
         integerLt))
-sourceIntegerStrictImpliesOrderedStrict even
+sourceIntegerStrictImpliesOrderedStrict even {left = left} {right = right}
     (decodedZero leftZero) (decodedZero rightZero) integerLt =
   ⊥-elim
     (ℤP.<-irrefl refl
       (subst
-        (λ word → BT.toInteger (BT.eval _) ℤ.< BT.toInteger (BT.eval word))
+        (λ word → BT.toInteger (BT.eval left) ℤ.< BT.toInteger (BT.eval word))
         (sym (SpecialOrder.sameZeroWord leftZero rightZero))
         integerLt))
 sourceIntegerStrictImpliesOrderedStrict even
@@ -284,15 +281,15 @@ sourceIntegerStrictImpliesOrderedStrict even {right = right}
         (λ z → z ℤ.< BT.toInteger (BT.eval right))
         (SpecialOrder.classifiedZeroInteger leftZero)
         integerLt))
-sourceIntegerStrictImpliesOrderedStrict even {left = left}
+sourceIntegerStrictImpliesOrderedStrict even {left = left} {right = right}
     (decodedInfinity leftInfinity) rightDecode integerLt =
   ⊥-elim
-    (nothingAboveInfinity _
+    (nothingAboveInfinity right
       (subst
-        (λ z → z ℤ.< BT.toInteger (BT.eval _))
+        (λ z → z ℤ.< BT.toInteger (BT.eval right))
         (SpecialOrder.classifiedInfinityInteger leftInfinity)
         integerLt))
-sourceIntegerStrictImpliesOrderedStrict even {left = left}
+sourceIntegerStrictImpliesOrderedStrict even {left = left} {right = right}
     (decodedOrdinary {parsed = parsed} leftClass leftParse)
     (decodedNaR rightNaR) integerLt =
   ⊥-elim
