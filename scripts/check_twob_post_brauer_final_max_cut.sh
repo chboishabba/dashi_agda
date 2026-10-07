@@ -34,7 +34,7 @@ grep -q 'finiteOuterSourceFound' "${targets[3]}"
 grep -q 'brauerPassDoesNotDetermineOuterJ2x5Action' "${targets[3]}"
 
 grep -q 'brauerAllRowsMatch' "${targets[4]}"
-grep -q 'semisimplifiedIngressPaid' "${targets[4]}"
+grep -q 'semisimplifiedIngressIsPaid' "${targets[4]}"
 grep -q 'outerJ2x5MatchesTwo' "${targets[4]}"
 grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[4]}"
 grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[4]}"
