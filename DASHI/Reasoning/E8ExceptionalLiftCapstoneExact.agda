@@ -7,13 +7,20 @@ module DASHI.Reasoning.E8ExceptionalLiftCapstoneExact where
 --
 -- The companion Lean finite producer now source-writes a literal E8 branching
 -- with 240 = 72 + 6 + 6 * 27, exact E6 action on the 72-sector, six transitive
--- mixed 27 fibres, Schlaefli relation geometry, and a concrete same-object
--- recognition of one mixed fibre with an E6 minuscule 27 weight orbit.
+-- mixed 27 fibres, Schlaefli relation geometry, a concrete same-object
+-- recognition of one mixed fibre with an E6 minuscule 27 weight orbit, and an
+-- explicit A5 six-object action closing to all 720 permutations.
 --
--- This Agda owner types that promotion surface without importing an unobserved
--- Lean kernel result as an Agda theorem.  Crucially, E6 minuscule same-object
--- recognition is separated from Albert/Jordan algebra recognition: an Albert
--- product, unit, cubic norm, and F4 automorphism structure remain extra data.
+-- The existing Agda Ternary27Point now additionally has a literal two-sided
+-- absolute six-face 6+15+6 chart.  Companion Lean source checks that the
+-- induced non-Cayley relation is SRG(27,16,10,8) and agrees pointwise with the
+-- E6 minuscule relation.
+--
+-- This Agda owner types those promotion surfaces without importing an
+-- unobserved Lean kernel result as an Agda theorem.  E6 minuscule/relation
+-- recognition is kept distinct from an independently derived E6 action on the
+-- pre-existing hyperfabric operations and from Albert/Jordan algebra
+-- recognition: product, unit, cubic norm and F4 automorphisms remain extra data.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -22,6 +29,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Foundations.E6F3GeneratedGroupClosureExact as Group
 import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact as E6
+import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact as T27
 
 record E8BranchingLedger : Set where
   constructor e8-branching-ledger
@@ -141,6 +149,14 @@ record ExceptionalLiftBoundary : Set where
     minuscule27SameObjectReceiptTyped : Bool
     minuscule27ActionIntertwinerReceiptTyped : Bool
     minuscule27RelationIntertwinerReceiptTyped : Bool
+
+    typedTernary27SixPlusFifteenPlusSixChartPaidInAgda : Bool
+    typedTernary27SchlafliLeanProducerSourceWritten : Bool
+    typedTernary27MinusculeRelationLeanProducerSourceWritten : Bool
+    a5SixObjectS6LeanProducerSourceWritten : Bool
+    independentRawTernary27E6ActionPaid : Bool
+    selectedQ2StabilizerA5SameObjectPaid : Bool
+
     albert27AlgebraReceiptTyped : Bool
 
     leanExceptionalLiftProducerSourceWritten : Bool
@@ -158,6 +174,8 @@ canonicalExceptionalLiftBoundary : ExceptionalLiftBoundary
 canonicalExceptionalLiftBoundary =
   exceptional-lift-boundary
     true true true true true true
-    true true true true
+    true true true
+    true true true true false false
+    true
     true true false false false
     false false false
