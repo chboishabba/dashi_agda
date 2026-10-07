@@ -33,19 +33,25 @@ Frobenius-orbit hypotheses numerically confirmed:
 
 The two distinct realizations of 24 show directly that orbit count alone cannot identify a tower.
 
-T5 records the **field-side** subfield lattice mechanically. For example, `GF(81)=GF(3^4)` contributes subfield sizes `[3,9,81]`. Matching that lattice against a DASHI sub-carrier lattice still requires an independently constructed object map and recognition proof.
+T5 records the **field-side** subfield lattice mechanically. For `GF(81)=GF(3^4)` the selected field presentation now also pays an explicit object-side chain. `GF(3)` is the constant-coordinate line, while its unique `GF(9)` subfield is exactly the nine-state linear image
+
+```text
+(a,b) |-> (a,b,-b,0).
+```
+
+The naive prefix plane `(a,b,0,0)` is not that subfield. This object map is source-written and runtime-checked against the Frobenius² fixed set, but remains presentation-dependent rather than an intrinsic prior DASHI subfield semantics.
 
 ## K4/K5/K6 structural promotion
 
-`OggSSPTriadicKernelF3LinearExact.agda` now source-writes the coordinate `F3` operations on the existing `TriadicPAdicCodec.Kernel d` carrier using
+`OggSSPTriadicKernelF3LinearExact.agda` source-writes the coordinate `F3` operations on the existing `TriadicPAdicCodec.Kernel d` carrier using
 
 ```text
 zer = 0, pos = 1, neg = 2 = -1.
 ```
 
-The finite scalar laws are paid by exhaustive constructors and lifted pointwise to kernels. The source now proves the additive group laws, scalar identity/zero laws, both distributivity laws, scalar associativity, and that the pre-existing codec inversion is exactly scalar multiplication by `-1`. Thus `Kernel d` has a source-written `F3` vector-space law bundle, in particular for `K4`, `K5`, and `K6`.
+The finite scalar laws are paid by exhaustive constructors and lifted pointwise to kernels. The source proves the additive group laws, scalar identity/zero laws, both distributivity laws, scalar associativity, and that the pre-existing codec inversion is exactly scalar multiplication by `-1`. Thus `Kernel d` has a source-written `F3` vector-space law bundle, in particular for `K4`, `K5`, and `K6`.
 
-`scripts/j369_kernel_field_recognition.py` then checks selected irreducible polynomial presentations for degrees 4, 5 and 6. The resulting coordinate fields have orders `81`, `243`, and `729`; their nonzero multiplicative groups contain primitive elements of exact orders `80`, `242`, and `728` respectively. Every nonzero coordinate is exhaustively checked to have an inverse.
+`scripts/j369_kernel_field_recognition.py` checks selected irreducible polynomial presentations for degrees 4, 5 and 6. The resulting coordinate fields have orders `81`, `243`, and `729`; their nonzero multiplicative groups contain primitive elements of exact orders `80`, `242`, and `728` respectively. Every nonzero coordinate is exhaustively checked to have an inverse.
 
 The generated Frobenius orbit profiles are:
 
@@ -55,7 +61,7 @@ GF(243): 3 fixed + 48 five-cycles
 GF(729): 3 fixed + 3 two-cycles + 8 three-cycles + 116 six-cycles
 ```
 
-For the already-existing `C2` negation action, punctured `K4/K5/K6` split into exactly `40/121/364` two-cycles. Thus the coordinate object map and the `-1` action intertwiner are now genuinely paid. The selected extension-field multiplication remains a chosen presentation, not a theorem that prior DASHI actions already supplied that multiplication.
+For the already-existing `C2` negation action, punctured `K4/K5/K6` split into exactly `40/121/364` two-cycles. Thus the coordinate object map and the `-1` action intertwiner are genuinely paid. The selected extension-field multiplication remains a chosen presentation, not a theorem that prior DASHI actions already supplied that multiplication.
 
 ## The 1,330-state numerical graph
 
@@ -99,7 +105,8 @@ The old blanket numerical field candidates remain unrecognized. The new `K4/K5/K
 - `C2` arrow/action seam for negation: paid;
 - runtime orbit profiles: paid;
 - selected finite-field multiplication/inverses: runtime paid;
-- canonicity of that multiplication from prior repo semantics: unpaid;
+- selected `GF(3) < GF(9) < GF(81)` object maps for K4: paid for the chosen presentation;
+- canonicity of that multiplication/subfield tower from prior repo semantics: unpaid;
 - full action-groupoid recognition against field multiplication/Frobenius: unpaid.
 
-So the remaining mathematical frontier is no longer cardinal arithmetic or `F3` linearity. It is to derive a canonical multiplication/Frobenius action from independently existing DASHI structure, or prove that no such promotion is justified, and separately to construct the missing canonical total step for the full signed 15-lane execution state.
+So the remaining mathematical frontier is no longer cardinal arithmetic, `F3` linearity, or existence of a chosen field/subfield presentation. It is to derive a **canonical** multiplication/Frobenius action from independently existing DASHI structure, or prove that no such promotion is justified, and separately to construct the missing canonical total step for the full signed 15-lane execution state.
