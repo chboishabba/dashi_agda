@@ -3,3 +3,6 @@ module DASHI.Physics.Plasma.Ternary27SearchEverything where
 import DASHI.Physics.Plasma.Ternary27SpectralGeometryCarrierExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27ConeSearchExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27MaxCutExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceSparseSupportExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceSupportPatchHyperfabricExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceSparseSupportMaxCutExact
