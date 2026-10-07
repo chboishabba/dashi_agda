@@ -11,6 +11,10 @@ on:
       - 'DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3ExactMassOscillationOnlyExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3ExactMassOscillationOnlyTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda'
@@ -55,6 +59,10 @@ jobs:
               DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3MassWeightedPhysicalHaarCompilerTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3ExactMassOscillationOnlyExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3ExactMassOscillationOnlyTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda \
