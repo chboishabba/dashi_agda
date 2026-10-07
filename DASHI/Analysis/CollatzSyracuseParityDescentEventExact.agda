@@ -6,7 +6,7 @@ module DASHI.Analysis.CollatzSyracuseParityDescentEventExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Bool.Base using (T)
 open import Data.List.Base using (length)
@@ -16,6 +16,7 @@ open import Data.Unit.Base using (tt)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
+import DASHI.Core.BinaryWordIntegerChernoffExact as Chernoff
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
@@ -57,15 +58,23 @@ parityDriftBadᵇ word with parityDriftGoodᵇ word
 ... | true = false
 ... | false = true
 
+badIndicator :
+  {m : Nat} →
+  Binary.BinaryWord m → Nat
+badIndicator word with parityDriftBadᵇ word
+... | true = 1
+... | false = 0
+
 ------------------------------------------------------------------------
--- Exact finite bad-word numerator.  No real-valued probability is introduced.
+-- Exact finite bad-word numerator.  It uses the same recursive word fold as
+-- the integer-Chernoff theorem, so no list/fold same-carrier adapter is needed.
 ------------------------------------------------------------------------
 
-countTrue : List Bool → Nat
-countTrue [] = zero
-countTrue (false ∷ tail) = countTrue tail
-countTrue (true ∷ tail) = suc (countTrue tail)
+badWordCount : Nat → Nat
+badWordCount m = Chernoff.wordFold (badIndicator {m})
 
+-- A list-valued executable surface is retained only as a regression/inspection
+-- view.  It is not the theorem-bearing count used downstream.
 badOutcomeList :
   (m : Nat) →
   List Bool
@@ -76,9 +85,6 @@ badOutcomeListLength :
   length (badOutcomeList m) ≡ Binary.pow2Count m
 badOutcomeListLength m =
   Binary.allOutcomesLength (parityDriftBadᵇ {m})
-
-badWordCount : Nat → Nat
-badWordCount m = countTrue (badOutcomeList m)
 
 ------------------------------------------------------------------------
 -- Same-object descent consumer.
@@ -98,10 +104,11 @@ record ParityDescentEventBoundary : Set where
     literalGoodEventOwned : Nat
     executableDecisionOwned : Nat
     exactBadWordNumeratorOwned : Nat
+    theoremCountUsesChernoffFold : Nat
     goodEventToIntegerDescentOwned : Nat
     exponentialTailBoundOwned : Nat
     universalStoppingOwned : Nat
 
 canonicalParityDescentEventBoundary : ParityDescentEventBoundary
 canonicalParityDescentEventBoundary =
-  parityDescentEventBoundary 1 1 1 1 0 0
+  parityDescentEventBoundary 1 1 1 1 1 0 0
