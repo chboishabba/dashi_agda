@@ -14,6 +14,10 @@ on:
       - 'scripts/check_m22d2_outer_class_m24_cycle_tate_defect_screen.sh'
       - 'scripts/twob_local_outer_lift_monster_class_probe.g'
       - 'scripts/check_twob_local_outer_lift_monster_class_probe.sh'
+      - 'scripts/m24_exterior_square24_duad276_screen.g'
+      - 'scripts/check_m24_exterior_square24_duad276_screen.sh'
+      - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
+      - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
       - 'scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh'
       - 'scripts/render_twob_char2_extension_runtime_certificate.py'
@@ -28,6 +32,10 @@ on:
       - 'scripts/check_m22d2_outer_class_m24_cycle_tate_defect_screen.sh'
       - 'scripts/twob_local_outer_lift_monster_class_probe.g'
       - 'scripts/check_twob_local_outer_lift_monster_class_probe.sh'
+      - 'scripts/m24_exterior_square24_duad276_screen.g'
+      - 'scripts/check_m24_exterior_square24_duad276_screen.sh'
+      - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
+      - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
       - 'scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh'
       - 'scripts/render_twob_char2_extension_runtime_certificate.py'
@@ -56,6 +64,10 @@ jobs:
         run: bash scripts/check_m22d2_outer_class_m24_cycle_tate_defect_screen.sh
       - name: Probe full local lift and Monster class ambiguity
         run: bash scripts/check_twob_local_outer_lift_monster_class_probe.sh
+      - name: Verify exterior-square 24 equals duad-276 over GF2
+        run: bash scripts/check_m24_exterior_square24_duad276_screen.sh
+      - name: Probe 2^24.Co1 characteristic-two representations
+        run: bash scripts/check_twob_2pow24_co1_char2_rep_probe.sh
       - name: Identify Fi22:2 natural 2^10 Completion10 donor
         run: bash scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh
       - name: Render exact Agda runtime certificate
@@ -77,5 +89,7 @@ jobs:
             build/m22d2_duad276_extension_fingerprint_screen.json
             build/m22d2_outer_class_m24_cycle_tate_defect_screen.json
             build/twob_local_outer_lift_monster_class_probe.json
+            build/m24_exterior_square24_duad276_screen.json
+            build/twob_2pow24_co1_char2_rep_probe.json
             build/fi22d2_2pow10_m22d2_natural_module_screen.json
             DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
