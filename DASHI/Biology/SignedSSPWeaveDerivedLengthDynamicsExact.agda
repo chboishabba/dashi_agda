@@ -27,6 +27,8 @@ import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact as Rich
 import DASHI.Geometry.SSP369Ultrametric as SSP
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 
+open Rich.RichMetadataDynamics
+
 instructionExecutionCost : Signed.WeaveInstruction → Nat
 instructionExecutionCost Signed.buildSixByNineFibre = 54
 instructionExecutionCost Signed.removeInvariantMode = 0
