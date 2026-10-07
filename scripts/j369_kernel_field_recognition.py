@@ -115,6 +115,36 @@ def k4_gf9_linear_image():
     return [(a, b, (-b) % 3, 0) for a in range(3) for b in range(3)]
 
 
+def swap01(x):
+    y = list(x); y[0], y[1] = y[1], y[0]; return tuple(y)
+
+
+def conjugated_multiply(model, a, b):
+    return swap01(model.mul(swap01(a), swap01(b)))
+
+
+def multiplication_noncanonicity_witness(model):
+    for a in model.elements:
+        for b in model.elements:
+            original = model.mul(a, b)
+            conjugated = conjugated_multiply(model, a, b)
+            if original != conjugated:
+                return {
+                    'left': list(a), 'right': list(b),
+                    'original_product': list(original),
+                    'swap_conjugated_product': list(conjugated)
+                }
+    raise AssertionError('coordinate swap unexpectedly preserves multiplication')
+
+
+def coordinate_swap_preserves_addition_negation(model):
+    for x in model.elements:
+        if swap01(model.neg(x)) != model.neg(swap01(x)): return False
+        for y in model.elements:
+            if swap01(model.add(x, y)) != model.add(swap01(x), swap01(y)): return False
+    return True
+
+
 def heisenberg_translate(axis, x):
     y = list(x); y[axis] = (y[axis] + 1) % 3; return tuple(y)
 
@@ -188,14 +218,23 @@ def recognition_summary():
     fields = {}
     for d in (4, 5, 6):
         m = model_for_degree(d); nonzero = [x for x in m.elements if x != m.zero]; primitive = find_primitive_element(m)
-        fields[str(d)] = {'order': m.order, 'modulus_low_to_high': list(m.modulus),
+        fields[str(d)] = {
+            'order': m.order,
+            'modulus_low_to_high': list(m.modulus),
             'frobenius_orbits': orbit_profile(m.elements, m.frobenius),
             'negation_orbits_all': orbit_profile(m.elements, m.neg),
             'negation_orbits_nonzero': orbit_profile(nonzero, m.neg),
-            'primitive_element': list(primitive), 'primitive_order': multiplicative_order(m, primitive),
-            'kernel_coordinate_object_map_paid': True, 'c2_negation_action_intertwining_paid': True,
+            'primitive_element': list(primitive),
+            'primitive_order': multiplicative_order(m, primitive),
+            'kernel_coordinate_object_map_paid': True,
+            'c2_negation_action_intertwining_paid': True,
             'chosen_field_multiplication_runtime_verified': True,
-            'canonical_field_multiplication_from_existing_repo_action': False, 'full_recognition_paid': False}
+            'coordinate_swap_preserves_addition_and_negation': coordinate_swap_preserves_addition_negation(m),
+            'coordinate_swap_changes_chosen_multiplication': True,
+            'multiplication_noncanonicity_witness': multiplication_noncanonicity_witness(m),
+            'canonical_field_multiplication_from_existing_repo_action': False,
+            'full_recognition_paid': False
+        }
     m4 = model_for_degree(4); gf9 = set(k4_gf9_linear_image())
     fields['4']['gf9_subfield_linear_image_size'] = len(gf9)
     fields['4']['gf9_subfield_equals_frobenius2_fixed_set'] = gf9 == {x for x in m4.elements if m4.pow(x, 9) == x}
