@@ -4,31 +4,33 @@
 # which is then identified against the actual AtlasRep M22:2 10d modules and
 # screened for the outer J2^5 Completion10 fingerprint.
 #
+# CTblLib/AtlasRep identify this subgroup as Fi22.2M4, the fourth maximal
+# subgroup of Fi22.2, and explicitly expose `AtlasSubgroup("Fi22.2",4)`.
+#
 # This is a finite/source donor only.  It does NOT identify the Fi22:2 normal
 # 2^10 kernel with a subquotient of the actual Monster 2B Tate head.
 
 if LoadPackage("atlasrep") <> true then
   Error("AtlasRep is required");
 fi;
+if LoadPackage("ctbllib") <> true then
+  Error("CTblLib is required");
+fi;
 
 expectedFi22d2Order := 129123503308800;
 expectedMaxOrder := 908328960;
 expectedKernelOrder := 1024;
 expectedQuotientOrder := 887040;
+expectedDerivedOrder := 443520;
 expectedDimension := 10;
 F := GF(2);
 
-# ATLAS/GAP name is F22.2 in AtlasRep.  Use the primitive 3510-point action,
-# for which the fourth maximal subgroup is 2^10:M22:2.
-G := AtlasGroup("F22.2", NrMovedPoints, 3510);
-if G=fail then
-  Error("failed to construct Fi22:2 degree-3510 ATLAS representation");
-fi;
-if Size(G)<>expectedFi22d2Order then
-  Error("unexpected Fi22:2 order");
+fi22d2Table := CharacterTable("Fi22.2");
+if fi22d2Table=fail or Size(fi22d2Table)<>expectedFi22d2Order then
+  Error("unexpected Fi22:2 character-table order");
 fi;
 
-S := AtlasSubgroup(G,4);
+S := AtlasSubgroup("Fi22.2",4);
 if S=fail then
   Error("failed to construct fourth Fi22:2 maximal subgroup");
 fi;
@@ -63,7 +65,7 @@ ActionMatrix := function(g)
   rows := [];
   for b in basis do
     exps := ExponentsOfPcElement(basis,b^g);
-    Add(rows,List(exps,e -> e*One(F)));
+    Add(rows,List(exps,e -> (e mod 2)*One(F)));
   od;
   return ImmutableMatrix(F,rows);
 end;
@@ -103,9 +105,12 @@ rho := GroupHomomorphismByImages(Q,MG,gensQ,mats);
 if rho=fail or not IsGroupHomomorphism(rho) then
   Error("failed to build quotient action homomorphism on normal 2^10");
 fi;
+if Size(MG)<>expectedQuotientOrder then
+  Error("natural 2^10 action is not faithful M22:2");
+fi;
 
 D := DerivedSubgroup(Q);
-if Size(D)<>443520 then
+if Size(D)<>expectedDerivedOrder then
   Error("derived quotient is not M22 of expected order");
 fi;
 
@@ -161,12 +166,13 @@ out := OutputTextFile(
   "build/fi22d2_2pow10_m22d2_natural_module_screen.json", false );
 SetPrintFormattingStatus(out,false);
 AppendTo(out,"{\n");
-AppendTo(out,"  \"fi22d2_order\": ",String(Size(G)),",\n");
+AppendTo(out,"  \"fi22d2_order\": ",String(Size(fi22d2Table)),",\n");
 AppendTo(out,"  \"maximal_subgroup_order\": ",String(Size(S)),",\n");
 AppendTo(out,"  \"normal_kernel_order\": ",String(Size(N)),",\n");
 AppendTo(out,"  \"normal_kernel_elementary_abelian\": true,\n");
 AppendTo(out,"  \"quotient_order\": ",String(Size(Q)),",\n");
 AppendTo(out,"  \"natural_module_dimension\": ",String(naturalModule.dimension),",\n");
+AppendTo(out,"  \"natural_action_group_order\": ",String(Size(MG)),",\n");
 AppendTo(out,"  \"atlas_m22d2_10d_matches\": ");
 PrintStringList(out,atlasMatches);
 AppendTo(out,",\n");
