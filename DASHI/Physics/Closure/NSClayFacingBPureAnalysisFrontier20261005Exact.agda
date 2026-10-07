@@ -7,18 +7,17 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 --   * Core-Core principal + Core-noncore defect split: closed;
 --   * individual R236 live-block welds: closed;
 --   * literal M_core on the ACTUAL Core-Core row family: closed;
---   * sharp R579 transport gives P_Core-Core <= (1/2) M_core with NO ED.
+--   * sharp R579 transport gives P_Core-Core <= (1/2) M_core with NO ED;
+--   * the remaining defect is exactly the negative sum of the DFL/Core and
+--     DHH/Core bipartite covariances, with the four-aggregate closed form.
 --
--- Therefore the entire remaining B4 theorem is ONE defect remainder:
+-- Therefore the entire remaining B4 theorem is ONE signed aggregate estimate:
 --
 --   D_Core-noncore <= theta_D M_core + c_D ED,
 --   1/2 + theta_D < 1,
 --
--- uniformly in physical state/output/cutoff.  Once this is inhabited the
--- existing literal strict-split compiler closes B4 automatically.
---
--- B1/B2/B3 and B7/continuation retain the previously sharpened physical
--- producer leaves.  R823 and the old representation programme stay frozen.
+-- uniformly in physical state/output/cutoff.  Pair enumeration, the principal
+-- estimate and the free companion scalar are all off-board.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -28,6 +27,7 @@ import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as 
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact as LiteralSplit
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact as Companion
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact as Half
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact as Defect
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
@@ -55,12 +55,9 @@ pureBLeafClosed b4CoreNoncoreDefectRemainder = b4DefectRemainderClosed
 pureBLeafClosed b1PhysicalShellReceiptsToLocalED = b1PhysicalProducerClosed
 pureBLeafClosed b2PhysicalSignedShellPairsToLocalED = b2PhysicalProducerClosed
 pureBLeafClosed b3PhysicalIntraShellSignedL2ToLocalED = b3PhysicalProducerClosed
-pureBLeafClosed q4PointwisePhysicalGram =
-  Q4Pointwise.q4PointwisePhysicalGramEstimateClosedHere
-pureBLeafClosed ePositiveGlobalAmplitudeSum =
-  EndpointAmplitude.eGlobalAmplitudeSumProducerClosedHere
-pureBLeafClosed q5SignedQuinticFallback =
-  Previous.finalBLeafClosed Previous.q5DirectSignedQuintic
+pureBLeafClosed q4PointwisePhysicalGram = Q4Pointwise.q4PointwisePhysicalGramEstimateClosedHere
+pureBLeafClosed ePositiveGlobalAmplitudeSum = EndpointAmplitude.eGlobalAmplitudeSumProducerClosedHere
+pureBLeafClosed q5SignedQuinticFallback = Previous.finalBLeafClosed Previous.q5DirectSignedQuintic
 pureBLeafClosed bContinuationPhysicalInputs = bContinuationPhysicalInputsClosed
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
@@ -79,9 +76,6 @@ b4PrincipalDefectLiveBlockWeldClosed = LiteralSplit.b4PrincipalDefectLiveBlockWe
 b4LiteralCoreCompanionMeaningClosed : Bool
 b4LiteralCoreCompanionMeaningClosed = Companion.b4LiteralCoreCompanionMeaningClosed
 
-b4PrincipalBaselineYoungBoundClosed : Bool
-b4PrincipalBaselineYoungBoundClosed = Companion.b4PrincipalBaselineYoungBoundClosed
-
 b4PrincipalHalfCompanionBoundClosed : Bool
 b4PrincipalHalfCompanionBoundClosed = Half.b4PrincipalHalfCompanionBoundClosed
 
@@ -90,6 +84,12 @@ b4PrincipalNeedsEDRemainder = Half.b4PrincipalNeedsEDRemainder
 
 b4RemainingStrictMarginIsDefectBelowHalf : Bool
 b4RemainingStrictMarginIsDefectBelowHalf = Half.b4RemainingStrictMarginIsDefectBelowHalf
+
+b4DefectBipartiteSameObjectClosed : Bool
+b4DefectBipartiteSameObjectClosed = Defect.b4DefectBipartiteSameObjectClosed
+
+b4DefectFourAggregateNormalFormClosed : Bool
+b4DefectFourAggregateNormalFormClosed = Defect.b4DefectFourAggregateNormalFormClosed
 
 b4DefectRemainderClosed : Bool
 b4DefectRemainderClosed = Half.b4DefectRemainderClosed
@@ -100,23 +100,14 @@ b4LiteralCompanionStrictSplitCompilerClosed = Companion.b4LiteralCompanionStrict
 b4FreeCompanionScalarStillRequired : Bool
 b4FreeCompanionScalarStillRequired = Companion.b4FreeCompanionScalarStillRequiredByPreferredRoute
 
-b4DirectStrictMarginCompilerClosed : Bool
-b4DirectStrictMarginCompilerClosed = Previous.b4LiteralRowOperatorCompilerClosed
-
 b4GenericStrictSplitCompilerClosed : Bool
 b4GenericStrictSplitCompilerClosed = Split.b4StrictSplitCompilerClosed
-
-b4FixedQuarterMarginRequired : Bool
-b4FixedQuarterMarginRequired = Split.b4StrictSplitRequiresQuarterMargin
-
-b4QuarterMarginOptionalCompilerClosed : Bool
-b4QuarterMarginOptionalCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
 
 b4ResearchLeafNowOnlyDefectRemainder : Bool
 b4ResearchLeafNowOnlyDefectRemainder = true
 
 ------------------------------------------------------------------------
--- B1 exact cut.
+-- B1/B2/B3 exact cuts.
 ------------------------------------------------------------------------
 
 b1LiteralRowsExtracted : Bool
@@ -137,10 +128,6 @@ b1LocalEDAllocationClosed = B1.deepFarLowLiteralInfinityShellLocalEDAllocationIn
 b1PhysicalProducerClosed : Bool
 b1PhysicalProducerClosed = false
 
-------------------------------------------------------------------------
--- B2 exact cut.
-------------------------------------------------------------------------
-
 b2LiteralRowsExtracted : Bool
 b2LiteralRowsExtracted = Extract.b2LiteralDFLDHHPairExtractionClosed
 
@@ -155,10 +142,6 @@ b2PerShellSignedEstimateClosed = B2.deepFarLowDeepHHPerShellNullBernsteinEstimat
 
 b2PhysicalProducerClosed : Bool
 b2PhysicalProducerClosed = false
-
-------------------------------------------------------------------------
--- B3 exact cut.
-------------------------------------------------------------------------
 
 b3LiteralRowsExtracted : Bool
 b3LiteralRowsExtracted = Extract.b3LiteralDHHPairExtractionClosed
@@ -185,7 +168,7 @@ b3PhysicalProducerClosed : Bool
 b3PhysicalProducerClosed = false
 
 ------------------------------------------------------------------------
--- B7 compiler surface.
+-- B7 and continuation compiler surfaces.
 ------------------------------------------------------------------------
 
 q4PointwiseToSpacetimeCompilerClosed : Bool
@@ -199,10 +182,6 @@ ePositiveOutputAggregationClosed = EndpointAmplitude.ePositiveOutputAggregationC
 
 ePositiveOutputAggregationAddsCardinalityFactor : Bool
 ePositiveOutputAggregationAddsCardinalityFactor = EndpointAmplitude.ePositiveOutputAggregationIntroducesCardinalityFactor
-
-------------------------------------------------------------------------
--- B-continuation exact cut.
-------------------------------------------------------------------------
 
 bContinuationAssemblyMachineChecked : Bool
 bContinuationAssemblyMachineChecked = true
@@ -253,6 +232,12 @@ b4FreeCompanionScalarStillRequiredIsFalse = refl
 b4RemainingStrictMarginIsDefectBelowHalfIsTrue :
   b4RemainingStrictMarginIsDefectBelowHalf ≡ true
 b4RemainingStrictMarginIsDefectBelowHalfIsTrue = refl
+
+b4DefectBipartiteSameObjectClosedIsTrue : b4DefectBipartiteSameObjectClosed ≡ true
+b4DefectBipartiteSameObjectClosedIsTrue = refl
+
+b4DefectFourAggregateNormalFormClosedIsTrue : b4DefectFourAggregateNormalFormClosed ≡ true
+b4DefectFourAggregateNormalFormClosedIsTrue = refl
 
 b4DefectRemainderClosedIsFalse : b4DefectRemainderClosed ≡ false
 b4DefectRemainderClosedIsFalse = refl
