@@ -34,6 +34,17 @@ def test_anisotropic_TOV_conservation_obstruction_is_explicit():
         assert token in text
 
 
+def test_conserved_profile_compiler_eliminates_tangential_pressure_unknown():
+    text = read("DASHI/Physics/Foundations/PositiveGConservedAnisotropicProfileCompilerExact.agda")
+    for token in (
+        "tangentialPressureFromConservation",
+        "conservationResidualFactorization",
+        "activeSourceAfterConservationCompiler",
+        "tangentialPressureNoLongerIndependentUnknown",
+    ):
+        assert token in text
+
+
 def test_local_active_stress_is_not_promoted_to_global_exterior_mass():
     text = read("DASHI/Physics/Foundations/LocalActiveStressGlobalExteriorMassFirewallExact.agda")
     for token in (
@@ -64,6 +75,7 @@ def test_A_to_E_terminal_owner_exists_and_is_fail_closed():
         "stageBActiveStressCriterion",
         "stageCWeakFieldMetricSolve",
         "stageCNonlinearConservationAudit",
+        "stageCConservedProfileCompiler",
         "stageCGlobalExteriorPromotionAudit",
         "stageDFourChannelProjection",
         "stageESameObjectExperiment",
