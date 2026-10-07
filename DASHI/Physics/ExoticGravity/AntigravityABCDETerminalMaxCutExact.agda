@@ -21,6 +21,7 @@ import DASHI.Physics.Foundations.GRQFTCMP119NambuBuriedVacuumReadoutExact as Bur
 import DASHI.Physics.Foundations.GRQFTCMP119BuriedSourceAncestryReductionExact as Ancestry
 import DASHI.Physics.Foundations.GRQFTSourceAmplitudeDrivenIsraelKottlerExact as SourceDriven
 import DASHI.Physics.Foundations.GRQFTCMP119VacuumEnergyCosmologicalStressCompilerExact as VacuumStress
+import DASHI.Physics.Foundations.GRQFTCMP119DirectSourceKottlerRouteExact as DirectSource
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExact as ConcreteObservables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
@@ -91,6 +92,15 @@ stageCSourceVacuumStressTransport :
   VacuumStress.SourceNativeVacuumCosmologicalStressBoundary
 stageCSourceVacuumStressTransport =
   VacuumStress.canonicalSourceNativeVacuumCosmologicalStressBoundary
+
+stageCDirectSourceKottlerRoute : DirectSource.DirectSourceKottlerBoundary
+stageCDirectSourceKottlerRoute = DirectSource.canonicalDirectSourceKottlerBoundary
+
+directSourceVacuumToKottlerRouteConstructed : Bool
+directSourceVacuumToKottlerRouteConstructed = true
+
+rawEq223ResponseToPinnedR136IsIndependentCrossCheck : Bool
+rawEq223ResponseToPinnedR136IsIndependentCrossCheck = true
 
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
@@ -165,6 +175,8 @@ record AntigravityABCDEPromotionBoundary : Set where
     normalizedCMP119TensorTransportClosed : Bool
     sourceAmplitudeGeometryInversionClosed : Bool
     sourceCoefficientToCosmologicalStressShapeClosed : Bool
+    directSourceVacuumToStaticKottlerCompilerClosed : Bool
+    pinnedR136RequiredForStaticGeometryConstruction : Bool
     concreteMechanicalObservableProjectionClosed : Bool
     kottlerAmplitudeToMetricPerturbationClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
@@ -182,4 +194,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true true true true true true false false false false false false false true
+    true true true true true true true false true true true true true false false false false false false false true
