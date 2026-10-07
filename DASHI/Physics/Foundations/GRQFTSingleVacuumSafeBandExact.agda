@@ -10,23 +10,11 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as Single
 
-------------------------------------------------------------------------
--- ONE-COORDINATE SAFE BAND FOR THE SINGLE-VACUUM BRANCH
---
--- Fix y = 9x/10.  Substitution into the exact rational-square Israel margins
--- leaves one interior lapse coordinate x.  The factorisations below show why
--- the rational open band
---
---     3/5 < x < 7/10
---
--- is a convenient sufficient design region: mass, outward acceleration,
--- NEC/DEC and SEC-violation margins all have the desired orientation there.
--- Order propagation is deliberately kept separate from these exact polynomial
--- identities, so no hidden positivity/cancellation assumptions are introduced.
-------------------------------------------------------------------------
-
 nineTenths : ℚ
 nineTenths = Int.+ 9 / 10
+
+oneTwoHundredth : ℚ
+oneTwoHundredth = Int.+ 1 / 200
 
 safeLowerX : ℚ
 safeLowerX = Int.+ 3 / 5
@@ -58,35 +46,23 @@ outwardFactorization radius x = solve (radius ∷ x ∷ [])
 necDecFactorization :
   ∀ radius x →
   Single.sameVacuumNECDECMargin radius x (exteriorLapseFromInterior x)
-  ≡ (radius * x / (Int.+ 200 / 1))
+  ≡ oneTwoHundredth * radius * x
       * ((Int.+ 57 / 1) * x * x - (Int.+ 20 / 1))
 necDecFactorization radius x = solve (radius ∷ x ∷ [])
 
 secViolationFactorization :
   ∀ radius x →
   Single.sameVacuumSECViolationMargin radius x (exteriorLapseFromInterior x)
-  ≡ (radius * x / (Int.+ 200 / 1))
+  ≡ oneTwoHundredth * radius * x
       * ((Int.+ 20 / 1) - (Int.+ 39 / 1) * x * x)
 secViolationFactorization radius x = solve (radius ∷ x ∷ [])
 
 pressureTensionFactorization :
   ∀ radius x →
   Single.sameVacuumPressureTensionMargin radius x (exteriorLapseFromInterior x)
-  ≡ (radius * x / (Int.+ 200 / 1))
+  ≡ oneTwoHundredth * radius * x
       * ((Int.+ 20 / 1) - (Int.+ 21 / 1) * x * x)
 pressureTensionFactorization radius x = solve (radius ∷ x ∷ [])
-
-------------------------------------------------------------------------
--- SOURCE-CONIC HOMOGENEOUS PARAMETERIZATION
---
--- For q = lambda t^2, write
---
---   X = 3-q,  D = 3+q,  R_num = 6t.
---
--- Then X/D and R_num/D are the usual rational parametrization of
--- x^2 + (lambda/3) R^2 = 1.  We prove the denominator-cleared identity, which
--- is the exact form required by the current no-hidden-cancellation discipline.
-------------------------------------------------------------------------
 
 conicQ : ℚ → ℚ → ℚ
 conicQ lambda t = lambda * t * t
@@ -110,8 +86,6 @@ conicHomogeneousIdentity :
     * conicDenominator lambda t * conicDenominator lambda t
 conicHomogeneousIdentity lambda t = solve (lambda ∷ t ∷ [])
 
--- The safe x-band corresponds to the following q endpoints under
--- x=(3-q)/(3+q), expressed without division.
 sourceQLowerMapsToUpperX :
   (Int.+ 10 / 1) * ((Int.+ 3 / 1) - sourceQSafeLower)
   ≡ (Int.+ 7 / 1) * ((Int.+ 3 / 1) + sourceQSafeLower)
