@@ -22,9 +22,10 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --      same-object binding of the selected F2 mark to those source coordinates
 --      with uniform positive radii/constants and gauge/local semantics.
 --
--- S3b: exact Haar masses erase discrepancy. Direct oscillation convergence is
---      also not primitive: a uniform Eq.(1.71) Lipschitz cell bound plus a
---      vanishing product-Haar mesh compiles to oscillation -> 0.
+-- S3b: first instantiate the LITERAL finite Eq.(1.71) fibre/density/integral.
+--      Exact Haar masses erase discrepancy. Direct oscillation convergence is
+--      not primitive: a uniform Eq.(1.71) Lipschitz cell bound plus a vanishing
+--      product-Haar mesh compiles to oscillation -> 0.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -35,6 +36,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyP1PublishedEuclideanBackgroundCo
 import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact as S2
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as S3F2
 import DASHI.Physics.Foundations.CMP119CosmologyP3CMP116MarkedF2SourceMaxCutExact as S3Source
+import DASHI.Physics.Foundations.CMP119CosmologyP3Equation171LiteralRealizationMaxCutExact as S3Eq171
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedStateMassWeightedHaarExact as S3Haar
 import DASHI.Physics.Foundations.CMP119CosmologyP3ExactMassOscillationOnlyExact as ExactMass
 import DASHI.Physics.Foundations.CMP119CosmologyP3LipschitzOscillationCompilerExact as Lipschitz
@@ -117,8 +119,16 @@ s3GaugeLocalSemanticsRequired =
   S3Source.selectedF2GaugeLocalSemanticsRequired
 
 ------------------------------------------------------------------------
--- S3b: literal Eq.(1.71) Lipschitz cell estimate + vanishing Haar mesh.
+-- S3b: literal Eq.(1.71) realization + Lipschitz mesh convergence.
 ------------------------------------------------------------------------
+
+s3LiteralEquation171FiniteRealizationRequired : Bool
+s3LiteralEquation171FiniteRealizationRequired =
+  S3Eq171.literalEquation171FiniteCarrierDensityIntegralRealizationRequired
+
+s3AbstractEquation171CallbackSuffices : Bool
+s3AbstractEquation171CallbackSuffices =
+  S3Eq171.abstractEquation171CallbackAloneDeterminesLipschitzBound
 
 s3IndependentOscillationVanishingRequired : Bool
 s3IndependentOscillationVanishingRequired =
