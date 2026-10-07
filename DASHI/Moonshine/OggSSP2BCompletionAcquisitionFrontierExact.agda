@@ -65,11 +65,12 @@ canonicalCompletionAcquisitionStatus =
     false false
     2 false
     false false
-    "Execute and ingest the finite M22:2-on-duad stable-subquotient and Fi22:2 natural-2^10 screens; then acquire/reconstruct the explicit Monster GF(2) action restricted to the 2B-local M22:2 and construct the same N<=S chain inside Hhat0(2B,V2). Separately source the two remaining Mode5/2T orientation bits."
+    "Execute and ingest the finite M22:2-on-duad stable-subquotient and Fi22:2 natural-2^10 screens; then acquire/reconstruct the Parker-Wilson Monster GF(2) vector-action implementation (mop2/vecsuz/vecT), or equivalent 2B-local restriction data, and construct the same N<=S chain inside Hhat0(2B,V2). Separately source the two remaining Mode5/2T orientation bits."
 
-semisimplifiedIngressPaid :
-  Post.PostBrauerStatus.semisimplifiedIngressPaid Post.canonicalPostBrauerStatus ≡ true
-semisimplifiedIngressPaid = refl
+postBrauerSemisimplifiedIngressAlreadyPaid :
+  Post.Brauer.semisimplifiedIngressPaid Post.Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ true
+postBrauerSemisimplifiedIngressAlreadyPaid =
+  Post.Brauer.semisimplifiedIngressIsPaid
 
 fi22NaturalTenRankIsTen : Fi22.normalKernelF2Rank ≡ 10
 fi22NaturalTenRankIsTen = Fi22.normalKernelRankIsTen
