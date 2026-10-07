@@ -40,6 +40,7 @@ import DASHI.Analysis.CollatzSyracuseRationalDriftApproximantsExact
 import DASHI.Analysis.CollatzSyracuseAlignedBlockDescentExact
 import DASHI.Analysis.CollatzSyracuseAlignedBlockTailExact
 import DASHI.Analysis.CollatzSyracuseUnalignedIntervalTailCompilerExact
+import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact
 import DASHI.Analysis.CollatzSyracusePrefixAbsorptionWeldExact
 import DASHI.Analysis.CollatzSyracuseUniformHittingBlockExact
 import DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact
@@ -88,7 +89,8 @@ data CollatzCut : Set where
   C13a-alignedBlockLiteralDescent : CollatzCut
   C13b-alignedBlockFiniteTail : CollatzCut
   C13c-rationalAlignedBlockFiniteTail : CollatzCut
-  C13-integerStoppingTransport : CollatzCut
+  C13-universalStoppingCompiler : CollatzCut
+  C13d-allStartsGoodPrefixProducer : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
   oldFiniteEqualsIntegerRoute : CollatzCut
@@ -127,7 +129,8 @@ cutStatus C12d-prefixAbsorption = conditionalOnHypothesis
 cutStatus C13a-alignedBlockLiteralDescent = proved
 cutStatus C13b-alignedBlockFiniteTail = proved
 cutStatus C13c-rationalAlignedBlockFiniteTail = proved
-cutStatus C13-integerStoppingTransport = conditionalOnHypothesis
+cutStatus C13-universalStoppingCompiler = compiledFromRepo
+cutStatus C13d-allStartsGoodPrefixProducer = sourceSpecificOpen
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
 cutStatus oldFiniteEqualsIntegerRoute = refutedRoute
@@ -204,6 +207,14 @@ rationalAlignedBlockFiniteTailPaid :
   cutStatus C13c-rationalAlignedBlockFiniteTail ≡ proved
 rationalAlignedBlockFiniteTailPaid = refl
 
+universalStoppingCompilerPaid :
+  cutStatus C13-universalStoppingCompiler ≡ compiledFromRepo
+universalStoppingCompilerPaid = refl
+
+allStartsGoodPrefixStillOpen :
+  cutStatus C13d-allStartsGoodPrefixProducer ≡ sourceSpecificOpen
+allStartsGoodPrefixStillOpen = refl
+
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
 oldRelationSpectralConcentrationNotCriticalPath = refl
@@ -230,9 +241,10 @@ record MaxCutBoundary : Set where
     rationalLiteralAlignedTailPaidHere : Nat
     unalignedBoundaryCompilerPaidHere : Nat
     exactArbitraryIntervalSplitStillSeparate : Nat
+    universalStoppingCompilerPaidHere : Nat
+    allStartsGoodPrefixProducerStillSeparate : Nat
     logWeightedSamplingStillSeparate : Nat
-    universalStoppingStillSeparate : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1
