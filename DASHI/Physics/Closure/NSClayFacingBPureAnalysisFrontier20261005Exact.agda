@@ -1,22 +1,29 @@
 module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact where
 
 ------------------------------------------------------------------------
--- CLAY-FACING B / PURE-ANALYSIS FRONTIER AFTER PR #1039 MERGE
+-- CLAY-FACING B / PURE-ANALYSIS FRONTIER / IRREDUCIBLE 2026-10-07 CUT
 --
--- Representation/provenance is frozen.  This board records only theorem-
--- producing physical estimates on already-literal carriers.
+-- Representation/provenance is frozen except where same-object semantics are
+-- necessary to make an analytic theorem non-vacuous.
 --
--- B4: exact literal Core-Core principal + Core-noncore defect split is closed;
--- remaining are the two uniform physical estimates and thetaP+thetaD<1.
--- B1: literal rows/shell/support/Bernstein fold are closed; remaining physical
--- receipt population + local-ED payment.
--- B2: literal rows/cardinality-free shell-pair fold are closed; remaining
--- physical shell-pair population + signed per-shell estimate + local ED.
--- B3: literal rows/component low-output/gap summation/fold are closed; remaining
--- physical shell population + intra-shell signed L2 + local ED.
--- Q4/E+ remain their sharpened pointwise/amplitude physical producers.
--- B-continuation: the BKM/compactness assembly is not being reproved; the live
--- seam is inhabiting its selected-family cutoff-uniform/limit-transport inputs.
+-- B4 is now on a fully literal semantic surface:
+--   * exact Core-Core principal + Core-noncore defect row split;
+--   * exact weld of those rows to the live R236 block coordinates;
+--   * literal M_core fixed as the existing same-pair Young companion summed
+--     over the ACTUAL Core-Core rows;
+--   * coefficient-one baseline P_Core-Core <= M_core already proved.
+--
+-- Therefore B4's genuine theorem is no longer a bound against an arbitrary
+-- `coreCompanionMass`.  It is the strict improvement
+--
+--   P_Core-Core <= theta_P M_core + c_P ED
+--   D_Core-noncore <= theta_D M_core + c_D ED
+--   theta_P + theta_D < 1,
+--
+-- uniformly in physical state/output/cutoff, against that fixed M_core.
+--
+-- B1/B2/B3 and B7/continuation retain the previously sharpened physical
+-- producer leaves.  No old R823 or representation programme is reopened.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -24,6 +31,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as Previous
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact as LiteralSplit
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact as Companion
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
@@ -37,7 +45,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpoint
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
 
 data PureBAnalyticLeaf : Set where
-  b4PrincipalDefectPhysicalEstimates : PureBAnalyticLeaf
+  b4LiteralCompanionStrictPhysicalEstimates : PureBAnalyticLeaf
   b1PhysicalShellReceiptsToLocalED : PureBAnalyticLeaf
   b2PhysicalSignedShellPairsToLocalED : PureBAnalyticLeaf
   b3PhysicalIntraShellSignedL2ToLocalED : PureBAnalyticLeaf
@@ -47,7 +55,7 @@ data PureBAnalyticLeaf : Set where
   bContinuationPhysicalInputs : PureBAnalyticLeaf
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
-pureBLeafClosed b4PrincipalDefectPhysicalEstimates = false
+pureBLeafClosed b4LiteralCompanionStrictPhysicalEstimates = false
 pureBLeafClosed b1PhysicalShellReceiptsToLocalED = b1PhysicalProducerClosed
 pureBLeafClosed b2PhysicalSignedShellPairsToLocalED = b2PhysicalProducerClosed
 pureBLeafClosed b3PhysicalIntraShellSignedL2ToLocalED = b3PhysicalProducerClosed
@@ -60,14 +68,35 @@ pureBLeafClosed q5SignedQuinticFallback =
 pureBLeafClosed bContinuationPhysicalInputs = bContinuationPhysicalInputsClosed
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
-currentHighestInformationLeaf = b4PrincipalDefectPhysicalEstimates
+currentHighestInformationLeaf = b4LiteralCompanionStrictPhysicalEstimates
 
 ------------------------------------------------------------------------
--- B4 exact progress and compiler surface.
+-- B4 exact cut.
 ------------------------------------------------------------------------
 
 b4LiteralPrincipalDefectSplitClosed : Bool
 b4LiteralPrincipalDefectSplitClosed = LiteralSplit.b4LiteralPrincipalDefectSplitClosed
+
+b4PrincipalDefectLiveBlockWeldClosed : Bool
+b4PrincipalDefectLiveBlockWeldClosed = LiteralSplit.b4PrincipalDefectLiveBlockWeldClosed
+
+b4LiteralCoreCompanionMeaningClosed : Bool
+b4LiteralCoreCompanionMeaningClosed = Companion.b4LiteralCoreCompanionMeaningClosed
+
+b4PrincipalBaselineYoungBoundClosed : Bool
+b4PrincipalBaselineYoungBoundClosed = Companion.b4PrincipalBaselineYoungBoundClosed
+
+b4LiteralCompanionStrictSplitCompilerClosed : Bool
+b4LiteralCompanionStrictSplitCompilerClosed = Companion.b4LiteralCompanionStrictSplitCompilerClosed
+
+b4FreeCompanionScalarStillRequired : Bool
+b4FreeCompanionScalarStillRequired = Companion.b4FreeCompanionScalarStillRequiredByPreferredRoute
+
+b4PrincipalStrictImprovementClosed : Bool
+b4PrincipalStrictImprovementClosed = Companion.b4PrincipalStrictImprovementBelowOneClosed
+
+b4DefectPhysicalPaymentClosed : Bool
+b4DefectPhysicalPaymentClosed = Companion.b4DefectPhysicalPaymentClosed
 
 b4PrincipalDefectPhysicalEstimatesClosed : Bool
 b4PrincipalDefectPhysicalEstimatesClosed = false
@@ -182,8 +211,6 @@ bContinuationAssemblyMachineChecked = true
 bContinuationGenericCompactnessAlreadyStandardImported : Bool
 bContinuationGenericCompactnessAlreadyStandardImported = true
 
--- The selected physical family must still inhabit the cutoff-uniform vorticity
--- and limit-transport inputs of PeriodicCutoffUniformContinuumInputs.
 bContinuationPhysicalInputsClosed : Bool
 bContinuationPhysicalInputsClosed = Continuum.periodicContinuumBKMCompletionInputsInhabited
 
@@ -208,6 +235,18 @@ clayPromotion = false
 
 b4LiteralPrincipalDefectSplitClosedIsTrue : b4LiteralPrincipalDefectSplitClosed ≡ true
 b4LiteralPrincipalDefectSplitClosedIsTrue = refl
+
+b4PrincipalDefectLiveBlockWeldClosedIsTrue : b4PrincipalDefectLiveBlockWeldClosed ≡ true
+b4PrincipalDefectLiveBlockWeldClosedIsTrue = refl
+
+b4LiteralCoreCompanionMeaningClosedIsTrue : b4LiteralCoreCompanionMeaningClosed ≡ true
+b4LiteralCoreCompanionMeaningClosedIsTrue = refl
+
+b4PrincipalBaselineYoungBoundClosedIsTrue : b4PrincipalBaselineYoungBoundClosed ≡ true
+b4PrincipalBaselineYoungBoundClosedIsTrue = refl
+
+b4FreeCompanionScalarStillRequiredIsFalse : b4FreeCompanionScalarStillRequired ≡ false
+b4FreeCompanionScalarStillRequiredIsFalse = refl
 
 b4PrincipalDefectPhysicalEstimatesClosedIsFalse : b4PrincipalDefectPhysicalEstimatesClosed ≡ false
 b4PrincipalDefectPhysicalEstimatesClosedIsFalse = refl
