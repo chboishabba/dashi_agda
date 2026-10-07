@@ -14,19 +14,26 @@ REQUIRED = {
         "CanonicalTieKey", "canonicalNearest", "canonicalNearestInExactNearestSet", "dashiNearestRound"
     ],
     "DASHI/ComputerScience/TekumRawNearestCorrectionExact.agda": [
-        "rawTruncationCandidate", "rawTargetOrdinary", "rawNearestDisplacement"
+        "rawTruncationCandidate", "rawTargetOrdinary", "rawNearestDisplacement",
+        "uniformRadiusOneRawCorrectionRefuted"
     ],
     "DASHI/ComputerScience/TekumEfficientNearestRoundingExact.agda": [
         "uniformLocalCorrectionNotEstablished"
     ],
     "DASHI/ComputerScience/TekumNearestNoDoubleRoundingExact.agda": [
-        "dashiNearestNoDoubleRoundingCounterexample", "universalNoDoubleRoundingRefuted"
+        "dashiNearestNoDoubleRoundingCounterexample", "universalNoDoubleRoundingRefuted",
+        "sourceDecoderSameObject", "intermediateDecoderSameObject",
+        "twoStageDecoderSameObject", "directDecoderSameObject"
     ],
     "DASHI/ComputerScience/TekumDASHIRoundingBoundaryExact.agda": [
         "hunholdRawTruncationNearestRefuted", "dashiExactNearestSemanticsPresent",
         "nearestExistencePaid", "canonicalTieRulePaid", "rawCorrectionRadiusCharacterized",
         "efficientNearestImplementationPaid", "efficientNearestEqualsSemanticOraclePaid",
-        "nearestNoDoubleRoundingPaid", "nearestNoDoubleRoundingRefuted"
+        "nearestNoDoubleRoundingPaid", "nearestNoDoubleRoundingRefuted",
+        "nearestNoDoubleMutualExclusion"
+    ],
+    "DASHI/ComputerScience/TekumDASHIRoundingAssemblyExact.agda": [
+        "TekumBalancedTernaryVerifiedAssembly", "TekumDASHIRoundingBoundaryExact"
     ],
 }
 
@@ -38,10 +45,19 @@ for rel, needles in REQUIRED.items():
         assert needle in text, f"missing {needle} in {rel}"
 
 sem = (ROOT / "DASHI/ComputerScience/TekumExactNearestRoundingSemantics.agda").read_text()
-assert "Sem.special Sem.naR" not in sem or "FiniteTekumWord" in sem
 assert "ordinaryRational" in sem
+assert "truncateTwo" not in sem, "raw truncation leaked into semantic authority"
 
 assembly = (ROOT / "DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda").read_text()
 assert "sourceProp5NearestRoundingPaid : Bool" in assembly
 assert "numericalNoDoubleRoundingPaid : Bool" in assembly
+
+boundary = (ROOT / "DASHI/ComputerScience/TekumDASHIRoundingBoundaryExact.agda").read_text()
+assert "false  -- general Agda finite-minimum witness construction still separate" in boundary
+assert "noDoubleRefuted" in boundary
+
+receipt = (ROOT / "docs/superpowers/receipts/2026-10-07-tekum-nearest-rounding-enumeration.md").read_text()
+for needle in ("59,046", "6,558", "531,438", "59,046", "-265591"):
+    assert needle in receipt
+
 print("DASHI exact-nearest static surface: OK")
