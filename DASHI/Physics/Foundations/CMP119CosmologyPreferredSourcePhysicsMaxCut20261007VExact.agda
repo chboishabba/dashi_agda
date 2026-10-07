@@ -2,21 +2,26 @@
 module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261007VExact where
 
 ------------------------------------------------------------------------
--- OVERLAY V / 2026-10-07: POST-UNIQUENESS / SELECTED-F2 / EXACT-HAAR CUT.
+-- OVERLAY V / 2026-10-07: SOURCE-THEOREM MAX-CUT.
 --
 -- This supersedes U as the preferred accounting surface.
 --
--- S1: background equivariance is DERIVED from uniqueness of the constrained
---     variational minimizer. The source payment is concrete invariance of the
---     action/constraint/regular gauge for the literal B4 generators.
+-- S1: CMP119 already publishes Euclidean covariance of the regular E_j source
+--     (2.29), including the B-coordinate form (3.58).  Do NOT re-prove that.
+--     The genuine source work is the same-object weld from the repository's
+--     abstract CMP109/116 Background/tangent to that literal B-coordinate and
+--     the ten canonical metric/source directions.  Variational uniqueness is a
+--     valid optional producer of background naturality, not a second premise.
 --
 -- S2: once the renormalized Hilbert/Weyl identity is stated on the exact
 --     stress/F2 operator pair, authority-record instantiation is compiler-only.
 --
 -- S3a: the route consumes ONE selected marked F2 source, not a universal
---      curvature-polynomial family. Nuclear completion is compiler-owned.
+--      curvature-polynomial family.  Weighted Cauchy and geometric shell
+--      summation are compiler-owned; the source estimate is pushed back to the
+--      literal differentiated CMP116 activity/entropy decay on that same mark.
 --
--- S3b: exact Haar masses erase discrepancy. Direct oscillation convergence is
+-- S3b: exact Haar masses erase discrepancy.  Direct oscillation convergence is
 --      also not primitive: a uniform Eq.(1.71) Lipschitz cell bound plus a
 --      vanishing product-Haar mesh compiles to oscillation -> 0.
 ------------------------------------------------------------------------
@@ -24,41 +29,56 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Physics.YangMills.BalabanBackgroundMinimizerSymmetryNaturalityExact as S1
+import DASHI.Physics.YangMills.BalabanBackgroundMinimizerSymmetryNaturalityExact as Variational
+import DASHI.Physics.Foundations.CMP119CosmologyP1PublishedEuclideanBackgroundCovarianceExact as S1
 import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact as S2
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as S3F2
+import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedF2HilbertMaxCutExact as S3Hilbert
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedStateMassWeightedHaarExact as S3Haar
 import DASHI.Physics.Foundations.CMP119CosmologyP3ExactMassOscillationOnlyExact as ExactMass
 import DASHI.Physics.Foundations.CMP119CosmologyP3LipschitzOscillationCompilerExact as Lipschitz
 
 ------------------------------------------------------------------------
--- Terminal theorem accounting.
+-- Terminal dependency-package accounting.
 ------------------------------------------------------------------------
 
-remainingNovelSourceTheoremCount : Nat
-remainingNovelSourceTheoremCount = 3
+remainingNovelSourcePackageCount : Nat
+remainingNovelSourcePackageCount = 3
 
-remainingStandardImportedTheoremCount : Nat
-remainingStandardImportedTheoremCount = 1
+remainingStandardImportedAuthorityCount : Nat
+remainingStandardImportedAuthorityCount = 2
 
-remainingPreferredTheoremCount : Nat
-remainingPreferredTheoremCount = 4
+remainingPreferredPackageCount : Nat
+remainingPreferredPackageCount = 4
 
--- S1 source theorem package: instantiate the variational problem on the literal
--- CMP109/116 carrier and prove B4 invariance of its defining data.
-s1ConcreteVariationalB4InvarianceRequired : Bool
-s1ConcreteVariationalB4InvarianceRequired = true
+------------------------------------------------------------------------
+-- S1: published Euclidean covariance + SAME-OBJECT source-coordinate weld.
+------------------------------------------------------------------------
+
+s1PublishedPotentialCovarianceNeedsFreshProof : Bool
+s1PublishedPotentialCovarianceNeedsFreshProof =
+  S1.publishedPotentialCovarianceNeedsFreshProof
+
+s1SameObjectBackgroundAndTangentIdentificationRequired : Bool
+s1SameObjectBackgroundAndTangentIdentificationRequired =
+  S1.remainingS1WorkIsSameObjectBackgroundAndTangentIdentification
+
+s1TenMetricDirectionsInPublishedBActionRequired : Bool
+s1TenMetricDirectionsInPublishedBActionRequired =
+  S1.remainingS1WorkIncludesTenMetricDirectionsInPublishedBAction
 
 s1PrimitiveBackgroundEquivarianceRequired : Bool
 s1PrimitiveBackgroundEquivarianceRequired =
-  S1.primitiveSelectedBackgroundEquivarianceRequired
+  Variational.primitiveSelectedBackgroundEquivarianceRequired
 
-s1NaturalityCompilerClosedOnceInvariant : Bool
-s1NaturalityCompilerClosedOnceInvariant =
-  S1.backgroundNaturalityFollowsFromInvariantVariationalProblem
+s1VariationalNaturalityAvailableAsCompiler : Bool
+s1VariationalNaturalityAvailableAsCompiler =
+  Variational.backgroundNaturalityFollowsFromInvariantVariationalProblem
 
--- S2 source theorem: the standard renormalized operator Ward identity on the
--- exact pair. No separate authority-record instantiation remains.
+------------------------------------------------------------------------
+-- S2: exact renormalized operator Ward identity.
+------------------------------------------------------------------------
+
 s2ExactRenormalizedOperatorIdentityRequired : Bool
 s2ExactRenormalizedOperatorIdentityRequired =
   S2.remainingR2WorkIsExactRenormalizedOperatorIdentity
@@ -67,9 +87,10 @@ s2AuthorityRecordInstantiationRequired : Bool
 s2AuthorityRecordInstantiationRequired =
   S2.remainingR2WorkIsInstantiationOfStandardWardAuthority
 
--- S3a source theorem package: construct exactly one selected marked F2 source
--- on the completed state. The Hilbert estimate itself has been reduced further
--- to literal differentiated-source coefficient-energy control.
+------------------------------------------------------------------------
+-- S3a: ONE selected F2 mark; quantitative Hilbert debt pushed to source decay.
+------------------------------------------------------------------------
+
 s3SelectedMarkedF2SourceRequired : Bool
 s3SelectedMarkedF2SourceRequired =
   S3F2.remainingSelectedF2SourceWorkIsPhysicalMarkedSourceDataAndSemantics
@@ -78,9 +99,18 @@ s3UniversalMarkedCurvatureFamilyRequired : Bool
 s3UniversalMarkedCurvatureFamilyRequired =
   S3F2.universalMarkedCurvatureFamilyRequiredForCosmology
 
--- S3b source theorem package: prove an Eq.(1.71) Lipschitz cell estimate and
--- construct the product-Haar refinement with vanishing mesh. Their composition
--- supplies the old oscillation-vanishing field automatically.
+s3IndependentHilbertInequalityRequired : Bool
+s3IndependentHilbertInequalityRequired =
+  S3Hilbert.abstractIndependentHilbertInequalityRequired
+
+s3UniformMarkedCoefficientEnergyRequired : Bool
+s3UniformMarkedCoefficientEnergyRequired =
+  S3Hilbert.remainingSelectedF2HilbertSourceWorkIsUniformCoefficientEnergy
+
+------------------------------------------------------------------------
+-- S3b: literal Eq.(1.71) Lipschitz cell estimate + vanishing Haar mesh.
+------------------------------------------------------------------------
+
 s3IndependentOscillationVanishingRequired : Bool
 s3IndependentOscillationVanishingRequired =
   Lipschitz.independentOscillationVanishingTheoremRequired
@@ -130,5 +160,5 @@ eq223VacuumGapRouteRequired = false
 remainingAdapterDebt : Nat
 remainingAdapterDebt = 0
 
-preferredFrontierContainsOnlySourceMathematicsOrImportedWardTheorem : Bool
-preferredFrontierContainsOnlySourceMathematicsOrImportedWardTheorem = true
+preferredFrontierContainsOnlySourceMathematicsOrImportedAuthority : Bool
+preferredFrontierContainsOnlySourceMathematicsOrImportedAuthority = true
