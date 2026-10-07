@@ -9,6 +9,8 @@ targets=(
   DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda
   DASHI/Moonshine/OggSSP2BDefectProvenanceSearchNoGoExact.agda
   DASHI/Moonshine/OggSSP2BMonster2LocalThree276SourceExact.agda
+  DASHI/Moonshine/OggSSP2BFi22d2NaturalTenSourceExact.agda
+  DASHI/Moonshine/OggSSP2BMonsterGF2RepresentationSourceExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda
 )
@@ -35,15 +37,23 @@ grep -q 'three276SourcePaid' "${targets[3]}"
 grep -q 'trialitySourcePaid' "${targets[3]}"
 grep -q 'characteristicTwoTateIdentificationStillOpen' "${targets[3]}"
 
-grep -q 'brauerIngressPaid' "${targets[4]}"
-grep -q 'finiteOuterSourceFound' "${targets[4]}"
-grep -q 'brauerPassDoesNotDetermineOuterJ2x5Action' "${targets[4]}"
+grep -q 'normalKernelRankIsTen' "${targets[4]}"
+grep -q 'fi22NaturalTenDoesNotIdentifyActualTateQ10' "${targets[4]}"
+grep -q 'runtimeOuterJ2x5OnNaturalTenPaid' "${targets[4]}"
 
-grep -q 'brauerAllRowsMatch' "${targets[5]}"
-grep -q 'semisimplifiedIngressReceiptPaid' "${targets[5]}"
-grep -q 'outerJ2x5MatchesTwo' "${targets[5]}"
-grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[5]}"
-grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[5]}"
-grep -q 'actualOuterActionOnSameQStillOpen' "${targets[5]}"
+grep -q 'monsterGF2DimensionExact' "${targets[5]}"
+grep -q 'explicitMonsterGF2RepresentationSourced' "${targets[5]}"
+grep -q 'existenceDoesNotConstructStableQ10' "${targets[5]}"
+
+grep -q 'brauerIngressPaid' "${targets[6]}"
+grep -q 'finiteOuterSourceFound' "${targets[6]}"
+grep -q 'brauerPassDoesNotDetermineOuterJ2x5Action' "${targets[6]}"
+
+grep -q 'brauerAllRowsMatch' "${targets[7]}"
+grep -q 'semisimplifiedIngressIsPaid' "${targets[7]}"
+grep -q 'outerJ2x5MatchesTwo' "${targets[7]}"
+grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[7]}"
+grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[7]}"
+grep -q 'actualOuterActionOnSameQStillOpen' "${targets[7]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
