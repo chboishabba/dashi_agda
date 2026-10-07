@@ -6,3 +6,6 @@ import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27MaxCutExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceSparseSupportExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceSupportPatchHyperfabricExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceSparseSupportMaxCutExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceArchitectureForkExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceCoilInverseBoundaryExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceCoilInverseMaxCutExact
