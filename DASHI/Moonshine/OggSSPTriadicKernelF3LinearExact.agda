@@ -119,6 +119,7 @@ record KernelF3LinearBoundary : Set where
     scalarActionSourceWritten : Bool
     zeroAndOneLawsPaid : Bool
     existingKernelInversionIsMinusOneScalar : Bool
+    fullVectorSpaceLawBundlePackaged : Bool
     chosenExtensionMultiplicationIntrinsicToPriorRepo : Bool
     fullFiniteFieldRecognitionClaimedHere : Bool
 
@@ -126,4 +127,4 @@ canonicalKernelF3LinearBoundary : KernelF3LinearBoundary
 canonicalKernelF3LinearBoundary =
   kernel-f3-linear-boundary
     true true true true true
-    false false
+    false false false
