@@ -3,10 +3,13 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderCompilerExact where
 ------------------------------------------------------------------------
 -- GENERIC PARITY-CYLINDER INDUCTION COMPILER
 --
--- This file factors the remaining C3/C5 arithmetic wall into literal one-step
--- residue laws.  Once those laws are supplied for the concrete recursive
--- residue candidate, the full arbitrary-length forward/reverse cylinder theorem
--- is compiled here by induction on BinaryWord.
+-- Once the four literal one-step residue laws are supplied for the concrete
+-- recursive residue candidate, the full arbitrary-length forward/reverse
+-- cylinder theorem is compiled here by induction on BinaryWord.
+--
+-- Residue-code injectivity is no longer an independent arithmetic premise:
+-- reverse classification plus a positive representative of every residue
+-- derives it generically.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (false; true)
@@ -20,6 +23,7 @@ import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact as Cylinder
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderCandidateExact as Candidate
+import DASHI.NumberTheory.Collatz.SyracuseParityCylinderRepresentativeExact as Representative
 
 record CylinderOneStepArithmetic : Set₁ where
   field
@@ -75,12 +79,6 @@ record CylinderOneStepArithmetic : Set₁ where
       ×
       (Syracuse.toNat (Syracuse.shortcutSyracuse x) % Cylinder.pow2 m
         ≡ Candidate.residueCandidate tail)
-
-    candidateInjective :
-      {m : Nat} →
-      (left right : Binary.BinaryWord m) →
-      Candidate.residueCandidate left ≡ Candidate.residueCandidate right →
-      left ≡ right
 
 open CylinderOneStepArithmetic public
 
@@ -161,6 +159,17 @@ reverseClassification arithmetic {suc m} (Binary.bit1 tail) x residue =
     (Itinerary.firstParityTrue x parityTrue)
     (cong Binary.bit1 tailWord)
 
+candidateInjective :
+  (arithmetic : CylinderOneStepArithmetic) →
+  {m : Nat} →
+  (left right : Binary.BinaryWord m) →
+  Candidate.residueCandidate left ≡ Candidate.residueCandidate right →
+  left ≡ right
+candidateInjective arithmetic =
+  Representative.candidateInjectiveFromReverse
+    (candidateBounded arithmetic)
+    (reverseClassification arithmetic)
+
 compileParityCylinderSource :
   CylinderOneStepArithmetic →
   Cylinder.ParityCylinderSource
@@ -177,8 +186,9 @@ record CylinderCompilerBoundary : Set where
   field
     arbitraryLengthInductionOwned : Nat
     wordHeadEliminationOwned : Nat
-    oneStepArithmeticStillRequired : Nat
+    oneStepBranchArithmeticStillRequired : Nat
+    independentCandidateInjectivityRequired : Nat
     cardinalityShortcutUsed : Nat
 
 canonicalCylinderCompilerBoundary : CylinderCompilerBoundary
-canonicalCylinderCompilerBoundary = cylinderCompilerBoundary 1 1 1 0
+canonicalCylinderCompilerBoundary = cylinderCompilerBoundary 1 1 1 0 0
