@@ -34,11 +34,11 @@ s1NoPrimitiveEquivariance = refl
 s1UniquenessCompiler : V.s1VariationalNaturalityAvailableAsCompiler ≡ true
 s1UniquenessCompiler = refl
 
-s2NoInstantiationDebt : V.s2AuthorityRecordInstantiationRequired ≡ false
-s2NoInstantiationDebt = refl
+s2NoFreshWardProof : V.s2FreshRenormalizedOperatorIdentityRequired ≡ false
+s2NoFreshWardProof = refl
 
-s2OperatorIdentityRemains : V.s2ExactRenormalizedOperatorIdentityRequired ≡ true
-s2OperatorIdentityRemains = refl
+s2SameObjectWeldRemains : V.s2SameObjectTraceF2AuthorityWeldRequired ≡ true
+s2SameObjectWeldRemains = refl
 
 s3SelectedMarkedSourceRemains : V.s3SelectedMarkedF2SourceRequired ≡ true
 s3SelectedMarkedSourceRemains = refl
@@ -58,6 +58,13 @@ s3MarkedCoordinateRadiusWeldRemains = refl
 
 s3GaugeLocalSemanticsRemain : V.s3GaugeLocalSemanticsRequired ≡ true
 s3GaugeLocalSemanticsRemain = refl
+
+s3LiteralEquation171RealizationRemains :
+  V.s3LiteralEquation171FiniteRealizationRequired ≡ true
+s3LiteralEquation171RealizationRemains = refl
+
+s3AbstractEquation171Insufficient : V.s3AbstractEquation171CallbackSuffices ≡ false
+s3AbstractEquation171Insufficient = refl
 
 s3NoIndependentOscillationLimit : V.s3IndependentOscillationVanishingRequired ≡ false
 s3NoIndependentOscillationLimit = refl
