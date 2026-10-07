@@ -9,17 +9,22 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 --   * literal M_core on the ACTUAL Core-Core row family: closed;
 --   * sharp R579 transport gives P_Core-Core <= (1/2) M_core with NO ED;
 --   * defect = -[Bip(DFL,Core)+Bip(DHH,Core)] exactly;
---   * the bipartite defect = -coherentWork M R_defect for one explicit vector;
---   * sharp R579 also gives defect <= ||M||^2 + ||R_defect||^2.
+--   * because both pieces share the SAME Core side, this is now fused further
+--     to ONE Bip(Noncore,Core), where Noncore = DFL ++ DHH;
+--   * the old eight scalar moments collapse to the standard four bipartite
+--     moments of that binary partition;
+--   * the fused defect is -coherentWork M R_noncore/core for ONE explicit
+--     residual vector, with the sharp R579 Young envelope already closed.
 --
 -- Therefore the only remaining B4 research content is a physical payment of
--- the literal signed vector residual (preferred) or, sufficiently, its sharp
--- vector-norm envelope into
+-- that ONE literal binary-partition residual (preferably signed, sufficiently
+-- via its sharp vector-norm envelope) into
 --
 --   theta_D M_core + c_D ED,    1/2 + theta_D < 1,
 --
--- uniformly in physical state/output/cutoff.  Pair enumeration, scalar moment
--- expansion, the principal estimate and the free companion scalar are off-board.
+-- uniformly in physical state/output/cutoff. Pair enumeration, DFL-vs-DHH
+-- separation inside the defect, scalar moment expansion, the principal
+-- estimate, and the free companion scalar are all off-board.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -31,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingLiteralCompanion20
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact as Half
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact as Defect
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectVector20261007Exact as DefectVector
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact as NoncoreCore
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as B2
@@ -43,7 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpoint
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
 
 data PureBAnalyticLeaf : Set where
-  b4CoreNoncoreDefectVectorPayment : PureBAnalyticLeaf
+  b4NoncoreCoreDefectPayment : PureBAnalyticLeaf
   b1PhysicalShellReceiptsToLocalED : PureBAnalyticLeaf
   b2PhysicalSignedShellPairsToLocalED : PureBAnalyticLeaf
   b3PhysicalIntraShellSignedL2ToLocalED : PureBAnalyticLeaf
@@ -53,7 +59,7 @@ data PureBAnalyticLeaf : Set where
   bContinuationPhysicalInputs : PureBAnalyticLeaf
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
-pureBLeafClosed b4CoreNoncoreDefectVectorPayment = b4DefectRemainderClosed
+pureBLeafClosed b4NoncoreCoreDefectPayment = b4DefectRemainderClosed
 pureBLeafClosed b1PhysicalShellReceiptsToLocalED = b1PhysicalProducerClosed
 pureBLeafClosed b2PhysicalSignedShellPairsToLocalED = b2PhysicalProducerClosed
 pureBLeafClosed b3PhysicalIntraShellSignedL2ToLocalED = b3PhysicalProducerClosed
@@ -63,7 +69,7 @@ pureBLeafClosed q5SignedQuinticFallback = Previous.finalBLeafClosed Previous.q5D
 pureBLeafClosed bContinuationPhysicalInputs = bContinuationPhysicalInputsClosed
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
-currentHighestInformationLeaf = b4CoreNoncoreDefectVectorPayment
+currentHighestInformationLeaf = b4NoncoreCoreDefectPayment
 
 ------------------------------------------------------------------------
 -- B4 exact cut.
@@ -96,11 +102,20 @@ b4DefectFourAggregateNormalFormClosed = Defect.b4DefectFourAggregateNormalFormCl
 b4DefectOneVectorNormalFormClosed : Bool
 b4DefectOneVectorNormalFormClosed = DefectVector.b4DefectOneVectorNormalFormClosed
 
+b4DefectNoncoreCoreBipartiteClosed : Bool
+b4DefectNoncoreCoreBipartiteClosed = NoncoreCore.b4DefectNoncoreCoreBipartiteClosed
+
+b4DefectNoncoreCoreFourAggregateClosed : Bool
+b4DefectNoncoreCoreFourAggregateClosed = NoncoreCore.b4DefectNoncoreCoreFourAggregateClosed
+
+b4DefectNoncoreCoreVectorClosed : Bool
+b4DefectNoncoreCoreVectorClosed = NoncoreCore.b4DefectNoncoreCoreVectorClosed
+
 b4DefectSharpVectorYoungClosed : Bool
-b4DefectSharpVectorYoungClosed = DefectVector.b4DefectSharpVectorYoungClosed
+b4DefectSharpVectorYoungClosed = NoncoreCore.b4DefectNoncoreCoreSharpYoungClosed
 
 b4DefectPhysicalVectorBudgetClosed : Bool
-b4DefectPhysicalVectorBudgetClosed = DefectVector.b4DefectPhysicalVectorBudgetClosed
+b4DefectPhysicalVectorBudgetClosed = NoncoreCore.b4DefectNoncoreCorePhysicalBudgetClosed
 
 b4DefectRemainderClosed : Bool
 b4DefectRemainderClosed = Half.b4DefectRemainderClosed
@@ -114,8 +129,8 @@ b4FreeCompanionScalarStillRequired = Companion.b4FreeCompanionScalarStillRequire
 b4GenericStrictSplitCompilerClosed : Bool
 b4GenericStrictSplitCompilerClosed = Split.b4StrictSplitCompilerClosed
 
-b4ResearchLeafNowOnlyDefectVectorPayment : Bool
-b4ResearchLeafNowOnlyDefectVectorPayment = true
+b4ResearchLeafNowOnlyOneBinaryPartitionPayment : Bool
+b4ResearchLeafNowOnlyOneBinaryPartitionPayment = true
 
 ------------------------------------------------------------------------
 -- B1/B2/B3 exact cuts.
@@ -252,6 +267,15 @@ b4DefectFourAggregateNormalFormClosedIsTrue = refl
 b4DefectOneVectorNormalFormClosedIsTrue : b4DefectOneVectorNormalFormClosed ≡ true
 b4DefectOneVectorNormalFormClosedIsTrue = refl
 
+b4DefectNoncoreCoreBipartiteClosedIsTrue : b4DefectNoncoreCoreBipartiteClosed ≡ true
+b4DefectNoncoreCoreBipartiteClosedIsTrue = refl
+
+b4DefectNoncoreCoreFourAggregateClosedIsTrue : b4DefectNoncoreCoreFourAggregateClosed ≡ true
+b4DefectNoncoreCoreFourAggregateClosedIsTrue = refl
+
+b4DefectNoncoreCoreVectorClosedIsTrue : b4DefectNoncoreCoreVectorClosed ≡ true
+b4DefectNoncoreCoreVectorClosedIsTrue = refl
+
 b4DefectSharpVectorYoungClosedIsTrue : b4DefectSharpVectorYoungClosed ≡ true
 b4DefectSharpVectorYoungClosedIsTrue = refl
 
@@ -260,6 +284,10 @@ b4DefectPhysicalVectorBudgetClosedIsFalse = refl
 
 b4DefectRemainderClosedIsFalse : b4DefectRemainderClosed ≡ false
 b4DefectRemainderClosedIsFalse = refl
+
+b4ResearchLeafNowOnlyOneBinaryPartitionPaymentIsTrue :
+  b4ResearchLeafNowOnlyOneBinaryPartitionPayment ≡ true
+b4ResearchLeafNowOnlyOneBinaryPartitionPaymentIsTrue = refl
 
 b1ShellPaymentCompilerClosedIsTrue : b1ShellPaymentCompilerClosed ≡ true
 b1ShellPaymentCompilerClosedIsTrue = refl
