@@ -37,15 +37,12 @@ module DASHI.Mathematics.Algebra.RationalAlbertTrialityDerivationDecompositionEx
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (0ℚ; 1ℚ)
 
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact as O
 import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact as A
 import DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact as J
 import DASHI.Mathematics.Algebra.RationalAlbertDerivationDimensionExact as Der
-
-------------------------------------------------------------------------
--- Abstract source-facing triality law.
-------------------------------------------------------------------------
 
 record OctonionTrialityTriple : Set₁ where
   field
@@ -69,23 +66,15 @@ trialityAlbertAction t (A.albert a b c x y z) =
     (second t y)
     (third t z)
 
-------------------------------------------------------------------------
--- Explicit Peirce-family ingredients on the actual Albert product.
-------------------------------------------------------------------------
-
 diagonalA diagonalB diagonalC : A.RationalAlbert
 diagonalA = A.albert 1ℚ 0ℚ 0ℚ O.zeroO O.zeroO O.zeroO
 diagonalB = A.albert 0ℚ 1ℚ 0ℚ O.zeroO O.zeroO O.zeroO
 diagonalC = A.albert 0ℚ 0ℚ 1ℚ O.zeroO O.zeroO O.zeroO
-  where
-    open import Data.Rational.Base using (0ℚ; 1ℚ)
 
 embedX embedY embedZ : O.RationalOctonion → A.RationalAlbert
 embedX x = A.albert 0ℚ 0ℚ 0ℚ x O.zeroO O.zeroO
 embedY y = A.albert 0ℚ 0ℚ 0ℚ O.zeroO y O.zeroO
 embedZ z = A.albert 0ℚ 0ℚ 0ℚ O.zeroO O.zeroO z
-  where
-    open import Data.Rational.Base using (0ℚ)
 
 peirceX peirceY peirceZ : O.RationalOctonion → A.RationalAlbert → A.RationalAlbert
 peirceX x = Der.innerDerivation diagonalB (embedX x)
