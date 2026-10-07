@@ -35,14 +35,24 @@ arbitraryProgramValuationReplayPaid : Bool
 arbitraryProgramValuationReplayPaid = true
 arbitraryProgramInvariantUnitReplayPaid : Bool
 arbitraryProgramInvariantUnitReplayPaid = true
-richMachineCompilerGivenMetadataPaid : Bool
-richMachineCompilerGivenMetadataPaid = true
+genericProgramLengthDynamicsPaid : Bool
+genericProgramLengthDynamicsPaid = true
+genericExecutionLengthDynamicsPaid : Bool
+genericExecutionLengthDynamicsPaid = true
+genericNormalFormLengthDynamicsPaid : Bool
+genericNormalFormLengthDynamicsPaid = true
+richMachineCompilerGivenResidualMetadataPaid : Bool
+richMachineCompilerGivenResidualMetadataPaid = true
 canonicalVirtualRichProjectionPaid : Bool
 canonicalVirtualRichProjectionPaid = true
 canonicalGeometryRichProjectionPaid : Bool
 canonicalGeometryRichProjectionPaid = true
-metadataDynamicsRecoveredFromPriorRepo : Bool
-metadataDynamicsRecoveredFromPriorRepo = false
+addressDynamicsRecovered : Bool
+addressDynamicsRecovered = false
+zeroResidualDynamicsRecovered : Bool
+zeroResidualDynamicsRecovered = false
+residualWitnessLengthDynamicsRecovered : Bool
+residualWitnessLengthDynamicsRecovered = false
 
 -- Compatibility receipt: an unconditional arbitrary rich projection is still unpaid.
 machineToRichSignedStateProjectionPaid : Bool
