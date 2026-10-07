@@ -1,12 +1,10 @@
 module DASHI.ComputerScience.TekumProposition5NoGoExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Maybe.Base using (just)
+open import Data.Maybe.Base using (Maybe; just)
 open import Data.Product.Base using (_×_; _,_)
-open import Data.Vec.Base using (Vec)
 open import Relation.Nullary.Negation using (¬_)
 
-import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
 import DASHI.ComputerScience.TekumProposition5CounterexampleExact as Counterexample
 import DASHI.ComputerScience.TekumSpecialValuesExact as Special
@@ -20,24 +18,31 @@ import DASHI.ComputerScience.TekumSpecialValuesExact as Special
 -- reserved endpoints: the negative edge reaches NaR and the positive edge
 -- reaches infinity.  Any unrestricted finite-target theorem would therefore
 -- imply the impossible boundary obligations packaged below.
+--
+-- This is only the first obstruction.  TekumProposition5FiniteNearestNoGoExact
+-- separately shows that even restricting to raw truncations that remain
+-- ordinary finite does not recover nearestness.
 ------------------------------------------------------------------------
 
-infix 4 _≢_
-_≢_ : ∀ {A : Set} → A → A → Set
-x ≢ y = ¬ (x ≡ y)
-
-IsFiniteLowerPrecision : Vec Trit.Trit 8 → Set
-IsFiniteLowerPrecision word =
-  (Special.classifySpecial word ≢ just Sem.naR) ×
-  (Special.classifySpecial word ≢ just Sem.infinity)
+IsFiniteLowerPrecision :
+  {A : Set} →
+  (classify : A → Maybe Sem.SpecialValue) →
+  A → Set
+IsFiniteLowerPrecision classify word =
+  (classify word ≢ just Sem.naR) ×
+  (classify word ≢ just Sem.infinity)
+  where
+  infix 4 _≢_
+  _≢_ : ∀ {X : Set} → X → X → Set
+  x ≢ y = ¬ (x ≡ y)
 
 negativeEdgeFinite : Set
 negativeEdgeFinite =
-  IsFiniteLowerPrecision Counterexample.negativeEdgeRounded8
+  IsFiniteLowerPrecision Special.classifySpecial Counterexample.negativeEdgeRounded8
 
 positiveEdgeFinite : Set
 positiveEdgeFinite =
-  IsFiniteLowerPrecision Counterexample.positiveEdgeRounded8
+  IsFiniteLowerPrecision Special.classifySpecial Counterexample.positiveEdgeRounded8
 
 record RawTruncationFiniteClosed : Set where
   constructor rawTruncationFiniteClosed
