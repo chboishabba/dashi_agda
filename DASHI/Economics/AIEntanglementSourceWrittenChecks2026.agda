@@ -90,10 +90,6 @@ currentExecutableParityRemainsOpen = refl
 closedSyntheticExecutableParityReachesAuthority : Parity.classifyRuntimeAuthorityParity Parity.syntheticClosedRuntimeParity ≡ Authority.realizedCapitalRecoveryCertified
 closedSyntheticExecutableParityReachesAuthority = refl
 
-------------------------------------------------------------------------
--- Residual-conditioned Pareto acquisition checks.
-------------------------------------------------------------------------
-
 proposalShortcutCannotEnterHardAdmittedStratum : Portfolio.admissibleNow Acquisition.aiCapitalAcquisitionPortfolio Acquisition.publicSourceAcquisitionAuthority Acquisition.reportedProposalShortcut ≡ false
 proposalShortcutCannotEnterHardAdmittedStratum = refl
 
@@ -115,15 +111,20 @@ paretoAcquisitionDoesNotCreateEmpiricalAuthority = refl
 acquisitionSourceAtlasRemainsNonPromoting : Source.atlasCreatesAuthority AcquisitionSources.aiCapitalParetoAcquisitionAtlas ≡ false
 acquisitionSourceAtlasRemainsNonPromoting = refl
 
-------------------------------------------------------------------------
--- Bounded evidence checks.
-------------------------------------------------------------------------
-
 negativeOperatingEvidenceStillDoesNotCloseCapitalSpread : Bounded.pointProducerClosed Bounded.anthropicCapitalSpreadEvidence ≡ false
 negativeOperatingEvidenceStillDoesNotCloseCapitalSpread = refl
 
 fundingSpreadObservationIsPointClosed : Bounded.pointProducerClosed Bounded.fundingPressureEvidence ≡ true
 fundingSpreadObservationIsPointClosed = refl
+
+inferencePriceDirectionStillDoesNotCloseInferenceMargin : Bounded.pointProducerClosed Bounded.inferenceSpreadEvidence ≡ false
+inferencePriceDirectionStillDoesNotCloseInferenceMargin = refl
+
+scarcityUsageSpendGapStillDoesNotCloseScarcityRent : Bounded.pointProducerClosed Bounded.scarcitySpreadEvidence ≡ false
+scarcityUsageSpendGapStillDoesNotCloseScarcityRent = refl
+
+capabilityDirectionStillDoesNotCloseCapabilityDistance : Bounded.pointProducerClosed Bounded.capabilityCompressionEvidence ≡ false
+capabilityDirectionStillDoesNotCloseCapabilityDistance = refl
 
 gpuDepreciationIntervalStillDoesNotCloseReplacementCapex : Bounded.pointProducerClosed Bounded.gpuReplacementEvidence ≡ false
 gpuDepreciationIntervalStillDoesNotCloseReplacementCapex = refl
@@ -133,3 +134,15 @@ policyEvidenceStillDoesNotCloseNumericBackstop = refl
 
 rolloverFundingEvidenceStillDoesNotCloseRefinancing : Bounded.pointProducerClosed Bounded.rolloverEvidence ≡ false
 rolloverFundingEvidenceStillDoesNotCloseRefinancing = refl
+
+marketFlipAbsenceRemainsExplicit : Bounded.stage Bounded.marketFlipEvidence ≡ Bounded.noEvidenceStage
+marketFlipAbsenceRemainsExplicit = refl
+
+marketVolAbsenceRemainsExplicit : Bounded.stage Bounded.marketVolEvidence ≡ Bounded.noEvidenceStage
+marketVolAbsenceRemainsExplicit = refl
+
+terminalPayerAbsenceRemainsExplicit : Bounded.stage Bounded.terminalPayerCoverageEvidence ≡ Bounded.noEvidenceStage
+terminalPayerAbsenceRemainsExplicit = refl
+
+partialRevenueVectorStillDoesNotCloseCoverage : Bounded.pointProducerClosed Bounded.revenueVectorEvidence ≡ false
+partialRevenueVectorStillDoesNotCloseCoverage = refl
