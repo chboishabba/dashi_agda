@@ -13,8 +13,10 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 --     the ten canonical metric/source directions. Variational uniqueness is a
 --     valid optional producer of background naturality, not a second premise.
 --
--- S2: once the renormalized Hilbert/Weyl identity is stated on the exact
---     stress/F2 operator pair, authority-record instantiation is compiler-only.
+-- S2: the Collins--Duncan--Joglekar renormalized trace-anomaly identity is
+--     already a proof-bearing imported authority. The model-specific payment is
+--     only same-object transport of the exact Hilbert trace and selected F2 to
+--     that renormalized operator pair; equality algebra is compiler-owned.
 --
 -- S3a: CMP116 already publishes differentiated analytic localization and the
 --      (1.26)--(1.29) positive rate split. Geometric summation and weighted
@@ -33,7 +35,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.BalabanBackgroundMinimizerSymmetryNaturalityExact as Variational
 import DASHI.Physics.Foundations.CMP119CosmologyP1PublishedEuclideanBackgroundCovarianceExact as S1
-import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact as S2
+import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedTraceF2AuthorityCompilerExact as S2
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as S3F2
 import DASHI.Physics.Foundations.CMP119CosmologyP3CMP116MarkedF2SourceMaxCutExact as S3Source
 import DASHI.Physics.Foundations.CMP119CosmologyP3Equation171LiteralRealizationMaxCutExact as S3Eq171
@@ -79,16 +81,16 @@ s1VariationalNaturalityAvailableAsCompiler =
   Variational.backgroundNaturalityFollowsFromInvariantVariationalProblem
 
 ------------------------------------------------------------------------
--- S2: exact renormalized operator Ward identity.
+-- S2: imported trace anomaly + SAME-OBJECT Local-C/renormalized operator weld.
 ------------------------------------------------------------------------
 
-s2ExactRenormalizedOperatorIdentityRequired : Bool
-s2ExactRenormalizedOperatorIdentityRequired =
-  S2.remainingR2WorkIsExactRenormalizedOperatorIdentity
+s2FreshRenormalizedOperatorIdentityRequired : Bool
+s2FreshRenormalizedOperatorIdentityRequired =
+  S2.renormalizedTraceAnomalyIdentityNeedsFreshProof
 
-s2AuthorityRecordInstantiationRequired : Bool
-s2AuthorityRecordInstantiationRequired =
-  S2.remainingR2WorkIsInstantiationOfStandardWardAuthority
+s2SameObjectTraceF2AuthorityWeldRequired : Bool
+s2SameObjectTraceF2AuthorityWeldRequired =
+  S2.remainingS2WorkIsSameObjectTraceF2AuthorityWeld
 
 ------------------------------------------------------------------------
 -- S3a: ONE selected F2 mark; source decay/rate split already imported.
