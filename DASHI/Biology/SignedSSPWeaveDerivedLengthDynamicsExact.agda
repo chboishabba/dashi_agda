@@ -24,6 +24,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact as Rich
+import DASHI.Geometry.SSP369Ultrametric as SSP
+import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 
 instructionExecutionCost : Signed.WeaveInstruction → Nat
 instructionExecutionCost Signed.buildSixByNineFibre = 54
@@ -63,16 +65,16 @@ canonicalGeometryNormalFormLengthIsTwo = refl
 
 record ResidualMetadataDynamics : Set₁ where
   field
-    initialAddress : List Signed.WeaveInstruction → Signed.SSP.Address 3
+    initialAddress : List Signed.WeaveInstruction → SSP.Address 3
     stepAddress :
-      Signed.WeaveInstruction → Signed.SSP.Address 3 → Signed.SSP.Address 3
+      Signed.WeaveInstruction → SSP.Address 3 → SSP.Address 3
 
     initialResidual :
-      List Signed.WeaveInstruction → Signed.Zero.ApproachDirection
+      List Signed.WeaveInstruction → Zero.ApproachDirection
     stepResidual :
       Signed.WeaveInstruction →
-      Signed.Zero.ApproachDirection →
-      Signed.Zero.ApproachDirection
+      Zero.ApproachDirection →
+      Zero.ApproachDirection
 
     initialResidualWitnessLength : List Signed.WeaveInstruction → Nat
     stepResidualWitnessLength : Signed.WeaveInstruction → Nat → Nat
