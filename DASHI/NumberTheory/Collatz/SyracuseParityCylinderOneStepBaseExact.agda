@@ -5,8 +5,9 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderOneStepBaseExact where
 --
 -- The residue-zero base case and candidate-reduction property do not depend on
 -- Collatz-specific branch algebra.  They follow directly from the definitions
--- and the standard library modulo laws.  The remaining source record therefore
--- contains only the four branch transports plus injectivity.
+-- and the standard library modulo laws.  Candidate-code injectivity is now
+-- derived generically from reverse classification, so only the four branch
+-- transports remain in the source record.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (false; true)
@@ -95,12 +96,6 @@ record CylinderHardArithmetic : Set₁ where
       (Syracuse.toNat (Syracuse.shortcutSyracuse x) % Cylinder.pow2 m
         ≡ Candidate.residueCandidate tail)
 
-    candidateInjective :
-      {m : Nat} →
-      (left right : Binary.BinaryWord m) →
-      Candidate.residueCandidate left ≡ Candidate.residueCandidate right →
-      left ≡ right
-
 open CylinderHardArithmetic public
 
 compileOneStepArithmetic :
@@ -113,7 +108,6 @@ compileOneStepArithmetic hard = record
   ; Compiler.bit1Forward = bit1Forward hard
   ; Compiler.bit0Reverse = bit0Reverse hard
   ; Compiler.bit1Reverse = bit1Reverse hard
-  ; Compiler.candidateInjective = candidateInjective hard
   }
 
 record OneStepBaseBoundary : Set where
@@ -125,4 +119,4 @@ record OneStepBaseBoundary : Set where
     candidateInjectivityStillSourceSpecific : Nat
 
 canonicalOneStepBaseBoundary : OneStepBaseBoundary
-canonicalOneStepBaseBoundary = oneStepBaseBoundary 1 1 1 1
+canonicalOneStepBaseBoundary = oneStepBaseBoundary 1 1 1 0
