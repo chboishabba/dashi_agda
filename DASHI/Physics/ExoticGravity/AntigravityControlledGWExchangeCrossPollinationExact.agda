@@ -10,14 +10,6 @@ import DASHI.Physics.ExoticGravity.AntigravityUnificationInteractionExact as Ant
 
 ------------------------------------------------------------------------
 -- ANTIGRAVITY x CONTROLLED EM <-> GW ENERGY EXCHANGE
---
--- This module installs the Schuetzhold optical-Weber-bar proposal as a new
--- comparison channel in the antigravity programme.  It does not infer
--- antigravity from stimulated GW emission/absorption.  Alternative predictions
--- must be physically distinct on the same interaction: either a re-solved
--- source/metric model or an explicit modified local photon-graviton coupling.
--- Merely relabelling the Einstein source coupling sign while freezing the same
--- physical h_{mu nu} and T_{mu nu} is intentionally rejected.
 ------------------------------------------------------------------------
 
 data GravityExchangeComparator : Set where
@@ -63,7 +55,7 @@ record ControlledExchangeObservation : Set₁ where
 open ControlledExchangeObservation public
 
 ------------------------------------------------------------------------
--- Same-object comparison weld.
+-- Same-object comparison weld.  Interaction identity is literal equality.
 ------------------------------------------------------------------------
 
 record SameObjectExchangeComparison
@@ -72,11 +64,13 @@ record SameObjectExchangeComparison
     (observed : ControlledExchangeObservation) : Set₁ where
   constructor same-object-exchange-comparison
   field
-    SameInteractionOrdinaryObservation : Set
-    sameInteractionOrdinaryObservation : SameInteractionOrdinaryObservation
+    sameInteractionOrdinaryObservation :
+      AttributedExchangePrediction.interaction ordinary
+      ≡ ControlledExchangeObservation.interaction observed
 
-    SameInteractionAlternativeObservation : Set
-    sameInteractionAlternativeObservation : SameInteractionAlternativeObservation
+    sameInteractionAlternativeObservation :
+      AttributedExchangePrediction.interaction alternative
+      ≡ ControlledExchangeObservation.interaction observed
 
     AlternativeIsPhysicallyDistinctReceipt : Set
     alternativeIsPhysicallyDistinctReceipt : AlternativeIsPhysicallyDistinctReceipt
@@ -93,10 +87,6 @@ record SameObjectExchangeComparison
     status : ExchangeClaimStatus
 
 open SameObjectExchangeComparison public
-
-------------------------------------------------------------------------
--- Promotion and model-identity firewall.
-------------------------------------------------------------------------
 
 record AntigravityExchangeBoundary : Set where
   constructor antigravity-exchange-boundary
@@ -123,15 +113,12 @@ existingSignedExchangeBoundary : SignedExchange.ControlledExchangeSignedGBoundar
 existingSignedExchangeBoundary =
   SignedExchange.canonicalControlledExchangeSignedGBoundary
 
-------------------------------------------------------------------------
--- Existing antigravity architecture remains authoritative.
-------------------------------------------------------------------------
-
 existingAntigravityBoundary : Anti.AntigravityUnificationBoundary
 existingAntigravityBoundary = Anti.canonicalAntigravityUnificationBoundary
 
 ------------------------------------------------------------------------
--- Max-cut route encoded as obligations rather than prose promotion.
+-- Max-cut route: every prediction/observation consumes the literal selected
+-- interaction carrier.
 ------------------------------------------------------------------------
 
 record ControlledExchangeMaxCut : Set₁ where
@@ -141,6 +128,13 @@ record ControlledExchangeMaxCut : Set₁ where
     observed : ControlledExchangeObservation
     ordinary : AttributedExchangePrediction
     alternative : AttributedExchangePrediction
+
+    ordinaryUsesInteraction :
+      AttributedExchangePrediction.interaction ordinary ≡ interaction
+    alternativeUsesInteraction :
+      AttributedExchangePrediction.interaction alternative ≡ interaction
+    observationUsesInteraction :
+      ControlledExchangeObservation.interaction observed ≡ interaction
 
     conservationPaid : Exchange.StressEnergyConservationReceipt interaction
     workToFrequencyPaid : Exchange.WorkToFrequencyReceipt interaction
