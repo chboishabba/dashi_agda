@@ -1,118 +1,151 @@
 # J369 finite-field and transition atlas — 2026-10-07
 
-This tranche turns the PR #1053 finite-field ticket and requested graph-style visualisation into deterministic numerical outputs. It intentionally does **not** use generative imagery.
+This tranche turns the PR #1053 finite-field ticket and graph request into deterministic numerical outputs plus exact source-side recognition boundaries. It intentionally does **not** use generated imagery and does not promote cardinality coincidences to semantic identity.
 
-## Generator
+## Reproducible generators
 
 ```bash
 python3 scripts/j369_field_transition_atlas.py --outdir /tmp/j369-field-atlas
 python3 scripts/j369_kernel_field_recognition.py --output /tmp/kernelFieldRecognition.json
+python3 scripts/j369_maxcut_runtime_receipt.py --output /tmp/OggSSPMaxCutRuntimeGenerated.agda
+./scripts/check_j369_field_transition_atlas.sh
 ```
 
-Outputs include `fieldBracketTable.csv`, `fieldCandidates.csv`, `atlasManifest.json`, `fieldRelationGraph.svg`, `legacyMass18TransitionGraph.svg`, `legacyMass18EdgeDensity.svg`, `legacyMass18Transitions.csv`, `kernelFieldRecognition.json`, and generated Agda certificates.
-
-`./scripts/check_j369_field_transition_atlas.sh` runs both stdlib-only test suites, regenerates the outputs, and diffs the committed small certificates.
+The checker runs both Python test suites, regenerates the committed CSV/JSON certificates and both generated Agda receipts, and diffs them byte-for-byte.
 
 ## Field-bracket results
 
-The generator independently re-derives all 16 authoritative rows. In particular:
-
-- `196830` is bracketed by `196817` and `196831`;
-- `196831` passes exact integer primality testing, so `196830 = |GF(196831)^*|` numerically;
-- `80 = |GF(81)^*|`, with `81 = 3^4`;
-- `810 = |GF(811)^*|`;
-- exact fields occur at `5, 9, 27, 31, 81, 243, 729`.
-
-Frobenius-orbit hypotheses numerically confirmed:
-
-- `3 = orbits(GF(4)/GF(2))`;
-- `6 = orbits(GF(9)/GF(3))`, also `orbits(GF(16)/GF(2))`;
-- `10 = orbits(GF(16)/GF(4))`;
-- `15 = orbits(GF(25)/GF(5))`;
-- `24 = orbits(GF(81)/GF(3)) = orbits(GF(64)/GF(4))`.
-
-The two distinct realizations of 24 show directly that orbit count alone cannot identify a tower.
-
-T5 records the **field-side** subfield lattice mechanically. For `GF(81)=GF(3^4)` the selected field presentation now also pays an explicit object-side chain. `GF(3)` is the constant-coordinate line, while its unique `GF(9)` subfield is exactly the nine-state linear image
+All 16 authoritative carrier rows are regenerated. Important exact numerical hits include
 
 ```text
-(a,b) |-> (a,b,-b,0).
+196817 < 196830 < 196831,  196831 prime,
+196830 = |GF(196831)*|,
+80 = |GF(81)*|,
+810 = |GF(811)*|.
 ```
 
-The naive prefix plane `(a,b,0,0)` is not that subfield. This object map is source-written and runtime-checked against the Frobenius² fixed set, but remains presentation-dependent rather than an intrinsic prior DASHI subfield semantics.
+The Frobenius-orbit hypotheses
 
-## K4/K5/K6 structural promotion
+```text
+3  = orbits(GF(4)/GF(2))
+6  = orbits(GF(9)/GF(3)) = orbits(GF(16)/GF(2))
+10 = orbits(GF(16)/GF(4))
+15 = orbits(GF(25)/GF(5))
+24 = orbits(GF(81)/GF(3)) = orbits(GF(64)/GF(4))
+```
 
-`OggSSPTriadicKernelF3LinearExact.agda` source-writes the coordinate `F3` operations on the existing `TriadicPAdicCodec.Kernel d` carrier using
+are verified numerically. The two distinct realizations of 24 are retained as a direct counterexample to orbit-count uniqueness.
+
+## K4/K5/K6: F3 structure and selected fields
+
+`OggSSPTriadicKernelF3LinearExact.agda` source-writes the coordinate `F3` operations on the existing `TriadicPAdicCodec.Kernel d` carrier with
 
 ```text
 zer = 0, pos = 1, neg = 2 = -1.
 ```
 
-The finite scalar laws are paid by exhaustive constructors and lifted pointwise to kernels. The source proves the additive group laws, scalar identity/zero laws, both distributivity laws, scalar associativity, and that the pre-existing codec inversion is exactly scalar multiplication by `-1`. Thus `Kernel d` has a source-written `F3` vector-space law bundle, in particular for `K4`, `K5`, and `K6`.
+The source proves the additive group laws, scalar identity/zero, both distributivity laws, scalar associativity, and
 
-`scripts/j369_kernel_field_recognition.py` checks selected irreducible polynomial presentations for degrees 4, 5 and 6. The resulting coordinate fields have orders `81`, `243`, and `729`; their nonzero multiplicative groups contain primitive elements of exact orders `80`, `242`, and `728` respectively. Every nonzero coordinate is exhaustively checked to have an inverse.
+```text
+scale(-1) = existing invertKernel.
+```
 
-The generated Frobenius orbit profiles are:
+The runtime field recognizer then exhaustively verifies selected irreducible polynomial presentations of `GF(3^4)`, `GF(3^5)`, and `GF(3^6)`. Every nonzero element has an inverse and primitive elements have exact orders
+
+```text
+80, 242, 728.
+```
+
+Frobenius profiles are
 
 ```text
 GF(81):  3 fixed + 3 two-cycles + 18 four-cycles
 GF(243): 3 fixed + 48 five-cycles
-GF(729): 3 fixed + 3 two-cycles + 8 three-cycles + 116 six-cycles
+GF(729): 3 fixed + 3 two-cycles + 8 three-cycles + 116 six-cycles.
 ```
 
-For the already-existing `C2` negation action, punctured `K4/K5/K6` split into exactly `40/121/364` two-cycles. Thus the coordinate object map and the `-1` action intertwiner are genuinely paid. The selected extension-field multiplication remains a chosen presentation, not a theorem that prior DASHI actions already supplied that multiplication.
-
-## The 1,330-state numerical graph
-
-`DASHI.Biology.FRACTRANSSPTransitionExact` already owns a four-exponent legacy projection with total `firstEnabledStep`. Restricting `(a47,b53,c59,d71)` to non-negative states of total mass 18 gives
+For K4, the selected `GF(9)` subfield is exactly
 
 ```text
-C(18 + 4 - 1, 4 - 1) = C(21,3) = 1330
+(a,b) |-> (a,b,-b,0),
 ```
 
-states. One total transition per state gives exactly **1,330 nodes and 1,330 directed edges**.
+which equals the `x^9=x` fixed set and is closed under the selected addition and multiplication. The naive prefix plane `(a,b,0,0)` is not that subfield.
 
-This matches the node/edge counts in the supplied browser screenshot, but does **not** identify the graphs. Under the deterministic 37-column embedding the DASHI graph has 233 distinct 2D displacement vectors. An exhaustive scan of row-major widths `2..200` finds **no** 12-vector realization; the minimum is 196 vectors, reached at widths 173 and 189. The screenshot's 12-vector statistic is therefore not recovered by this embedding family.
+## Existing Heisenberg action now welded to kernel addition
 
-## Full signed-weave graph frontier
-
-The repository already pays the full 15-lane carrier path:
+The repo already owns `X6 = F3^6`, six coordinate translations, and an exact two-sided chart
 
 ```text
-SSP15 internal lane
-  <-> chosen Ogg prime lane
-  <-> SignedSSP prime lane
-  -> pointed signed lane
-  -> full SSPValuation
-  -> SignedSSPExecutionState/program machinery.
+X6 <-> Kernel 6.
 ```
 
-However `SignedSSPFRACTRANWeaveExact` does **not** currently own a canonical total step
+`OggSSPKernelHeisenbergAdditiveIntertwinerExact.agda` proves that each old Heisenberg coordinate translation is exactly addition of the corresponding F3 basis vector after the chart. The first four axes restrict to the canonical K4 slice. This independently anchors the additive structure to prior DASHI action semantics rather than merely to the selected field model.
+
+The numerical verifier exhaustively checks all `729 * 6` K6 translation cases and the `81 * 4` K4 restricted cases.
+
+## Explicit non-canonicity of the selected multiplication
+
+The paid additive/negation structure still does **not** determine a unique extension-field product. Swapping the first two coordinates is an exact source-level automorphism of K4 addition and existing inversion. At runtime the same coordinate swap preserves addition and negation in degrees 4,5,6, but conjugating the selected multiplication through it changes the product in every degree.
+
+For K4 one witness is
 
 ```text
-SignedSSPExecutionState -> SignedSSPExecutionState.
+a = b = (0,0,0,1)
+original product       = (0,1,2,1)
+swap-conjugated product = (1,0,2,1).
 ```
 
-`OggSSPFullSignedTransitionGraphFrontierExact.agda` makes that missing constructor explicit as `FullSignedTransitionGraphSocket`. No full 15-lane transition graph is generated until such a scheduler is supplied; inventing one for visualization would exceed the current formal source.
+Analogous explicit witnesses are recorded for K5 and K6 in `kernelFieldRecognition.json`.
 
-## Recognition boundary
+Therefore the already-paid additive / global-negation data cannot by itself select the chosen multiplication. This does **not** prove that no richer existing DASHI action can select one; `OggSSPTriadicKernelCanonicalFieldActionFrontierExact.agda` isolates exactly that remaining richer-action socket.
 
-The old blanket numerical field candidates remain unrecognized. The new `K4/K5/K6` cut pays more narrowly:
+## The real 1,330-state legacy graph
 
-- coordinate object map: paid;
-- full additive/scalar `F3` vector-space law surface: paid in source;
-- `C2` arrow/action seam for negation: paid;
-- runtime orbit profiles: paid;
-- selected finite-field multiplication/inverses: runtime paid;
-- selected `GF(3) < GF(9) < GF(81)` object maps for K4: paid for the chosen presentation;
-- canonicity of that multiplication/subfield tower from prior repo semantics: unpaid;
-- full action-groupoid recognition against field multiplication/Frobenius: unpaid.
+`FRACTRANSSPTransitionExact.firstEnabledStep` on the nonnegative four-coordinate mass-18 slice has
 
-So the remaining mathematical frontier is no longer cardinal arithmetic, `F3` linearity, or existence of a chosen field/subfield presentation. It is to derive a **canonical** multiplication/Frobenius action from independently existing DASHI structure, or prove that no such promotion is justified, and separately to construct the missing canonical total step for the full signed 15-lane execution state.
+```text
+C(21,3) = 1330
+```
 
-## Verification
+states and, because the step is total on the slice, exactly 1,330 directed edges.
 
-Fresh numerical verification after the final max-cut exercises eight recognition tests: irreducibility/order, exhaustive nonzero inverses, `-1`/negation compatibility, Frobenius and negation orbit profiles, the cyclic order-80 K4 puncture, the explicit GF(9) subfield image and closure, the complete row-major width 2..200 falsifier, and the full-signed scheduler frontier. All eight pass. The original field-bracket/orbit/mass-18 assertions were also rerun unchanged and pass.
+This matches the supplied browser screenshot's node/edge counts but not its displacement statistic. The deterministic 37-column embedding gives 233 displacement vectors. Exhaustively scanning all row-major widths `2..200` finds no 12-vector realization; the minimum is 196 at widths 173 and 189. Same-graph recognition is therefore rejected.
 
-Agda is not installed in the current execution environment. Consequently these source-written Agda owners are **not** represented as locally typechecked; exact-head Agda checking remains the compiler-side gate.
+## Full signed-weave execution: scheduler paid, projection still open
+
+`SignedSSPFRACTRANWeaveExact` already owns the fifteen-lane signed valuation carrier and the weave instruction language. The summary record `SignedSSPExecutionState`, however, stores only aggregate lengths and does **not** retain the remaining instruction list, so it cannot determine a unique next instruction by itself.
+
+`SignedSSPWeaveProgramMachineExact.agda` now constructs the maximal canonical executable state:
+
+```text
+ProgramMachineState = remaining program + accumulated WeaveEffect.
+```
+
+Its total step pops the first instruction and uses the pre-existing `applyInstruction`; the halted state is a fixed point. The machine is proved to agree with existing `executeProgram`, and both canonical 53 programs terminate with the existing canonical final effects.
+
+The remaining graph seam is now narrower than “find a scheduler.” `WeaveEffect` counts prime introductions but does not retain which prime was introduced, while `SignedSSPExecutionState` additionally carries address, zero-residual direction, and length metadata. `ProgramMachineToSignedStateProjection` is the exact missing information-preserving bridge.
+
+## Current max-cut
+
+Paid:
+
+- deterministic T1–T6 field-bracket/candidate generation;
+- explicit F3 vector-space structure on K4/K5/K6;
+- source-level `-1 = invertKernel` seam;
+- existing Heisenberg translations intertwined with F3 addition;
+- selected finite-field multiplication, inverses, primitive elements, Frobenius profiles;
+- selected `GF(3) < GF(9) < GF(81)` object maps;
+- explicit runtime/source evidence that additive/negation structure does not select the chosen multiplication;
+- real 1,330-state legacy transition graph and the 12-vector falsifier;
+- canonical total program-counter machine for the full signed weave language.
+
+Still open:
+
+1. a richer independently existing DASHI action that canonically determines multiplication/Frobenius on K4/K5/K6, or an exact no-go for every candidate action family;
+2. full action/orbit/stabilizer recognition once such an action is supplied;
+3. the information-preserving `ProgramMachineState -> SignedSSPExecutionState` projection, or a proof that the summary type is intentionally too coarse for such a projection;
+4. generation of the full rich fifteen-lane graph only after that bridge is paid;
+5. exact-head Agda typechecking in an environment with Agda installed.
+
+Agda is not installed in the current execution environment, so no local compiler-success claim is made for the new Agda owners.
