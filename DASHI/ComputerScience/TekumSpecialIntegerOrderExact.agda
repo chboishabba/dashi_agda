@@ -1,11 +1,13 @@
 module DASHI.ComputerScience.TekumSpecialIntegerOrderExact where
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base as ℤ using (+_; -_)
-open import Data.Maybe.Base using (just; nothing)
+import Data.Integer.Properties as ℤP
+open import Data.Maybe.Base using (just)
 open import Data.Vec.Base as Vec using (Vec; []; _∷_; replicate)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
@@ -131,7 +133,7 @@ allPositiveInteger n =
       (BT.toIntegerInvertWord (replicate n Trit.neg))
       (trans
         (cong ℤ.-_ (allNegativeInteger n))
-        (Data.Integer.Properties.neg-involutive (+ (Positional.center n)))))
+        (ℤP.neg-involutive (+ (Positional.center n)))))
 
 classifiedNaRInteger :
   ∀ {n} {word : Vec Trit.Trit n} →
