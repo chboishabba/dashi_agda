@@ -21,11 +21,11 @@ module DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact as O
 import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact as A
 import DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact as J
+import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact as Laws
 
 cycleA : A.RationalAlbert → A.RationalAlbert
 cycleA (A.albert a b c x y z) = A.albert c a b z x y
@@ -45,29 +45,19 @@ cycleCubedIdentity (A.albert _ _ _ _ _ _) = refl
 
 swapSquaredIdentity : ∀ value → swapA (swapA value) ≡ value
 swapSquaredIdentity (A.albert a b c x y z) =
-  cong
-    (λ triple → A.albert a b c (proj₁ triple) (proj₁ (proj₂ triple)) (proj₂ (proj₂ triple)))
-    nested
-  where
-    open import Data.Product using (_×_; _,_; proj₁; proj₂)
-    nested :
-      (O.octonionConjugate (O.octonionConjugate x) ,
-       (O.octonionConjugate (O.octonionConjugate y) ,
-        O.octonionConjugate (O.octonionConjugate z)))
-      ≡ (x , (y , z))
-    nested rewrite
-      O.octonionConjugateInvolutive x |
-      O.octonionConjugateInvolutive y |
-      O.octonionConjugateInvolutive z = refl
+  Laws.albertExt refl refl refl
+    (O.octonionConjugateInvolutive x)
+    (O.octonionConjugateInvolutive y)
+    (O.octonionConjugateInvolutive z)
 
 /-- Dihedral presentation: s r s = r^{-1} = r^2. -/
 swapCycleSwap : ∀ value →
   swapA (cycleA (swapA value)) ≡ cycleSquared value
-swapCycleSwap (A.albert a b c x y z)
-  rewrite
-    O.octonionConjugateInvolutive x |
-    O.octonionConjugateInvolutive y |
-    O.octonionConjugateInvolutive z = refl
+swapCycleSwap (A.albert a b c x y z) =
+  Laws.albertExt refl refl refl
+    (O.octonionConjugateInvolutive z)
+    (O.octonionConjugateInvolutive x)
+    (O.octonionConjugateInvolutive y)
 
 ------------------------------------------------------------------------
 -- Recognition sockets for the product/norm preservation theorems.
