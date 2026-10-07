@@ -4,9 +4,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Integer.Base as ℤ using (+_; -[1+_])
-open import Data.Maybe.Base using (nothing)
+open import Data.Maybe.Base using (just; nothing)
 open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Product.Base using (_×_; _,_)
 import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Data.Nat.Solver using (module +-*-Solver)
@@ -16,8 +17,10 @@ import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryCenteredReconstructionExact as Centered
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact as Positional
+import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
 import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
 import DASHI.ComputerScience.TekumOrdinaryFactorizationExact as Factor
+import DASHI.ComputerScience.TekumParsedAnchorCodeExact as Code
 import DASHI.ComputerScience.TekumParsedAnchorListExact as AnchorList
 import DASHI.ComputerScience.TekumPositiveAnchorInjectiveExact as PositiveAnchor
 import DASHI.ComputerScience.TekumProposition4NegativeGlobalExact as NegativeGlobal
@@ -45,9 +48,7 @@ fourCenterMagnitudePlusOne :
   4 * SourceCenter.sourceCenterMagnitudeAt even + 1
   ≡ 27 * Raw.payloadScale extra
 fourCenterMagnitudePlusOne {extra} even =
-  trans
-    normalizedCenter
-    (widthPowerAsTwentySevenPayloadScale extra)
+  trans normalizedCenter (widthPowerAsTwentySevenPayloadScale extra)
   where
   c = SourceCenter.sourceCenterMagnitudeAt even
 
@@ -73,7 +74,7 @@ sixPayloadScaleBelowCenterMagnitude :
   6 * Raw.payloadScale extra
   ≤ SourceCenter.sourceCenterMagnitudeAt even
 sixPayloadScaleBelowCenterMagnitude {extra} even =
-  NatP.*-cancelˡ-≤ 4 sixP c fourScaled
+  NatP.*-cancelˡ-≤ 4 fourScaled
   where
   p = Raw.payloadScale extra
   c = SourceCenter.sourceCenterMagnitudeAt even
@@ -108,9 +109,7 @@ sixPayloadScaleBelowCenterMagnitude {extra} even =
     NatP.+-cancelʳ-≤ (24 * p) (4 * c) 1
       twentyFourPPlusOneBelowFourCPlusOne
 
-  sixP = 6 * p
-
-  fourScaled : 4 * sixP ≤ 4 * c
+  fourScaled : 4 * (6 * p) ≤ 4 * c
   fourScaled =
     subst
       (_≤ 4 * c)
@@ -123,7 +122,7 @@ threeCenterMagnitudeBelowTwentyOnePayloadScale :
   3 * SourceCenter.sourceCenterMagnitudeAt even
   < 21 * Raw.payloadScale extra
 threeCenterMagnitudeBelowTwentyOnePayloadScale {extra} even =
-  NatP.*-cancelˡ-< 4 (3 * c) (21 * p) scaledStrict
+  NatP.*-cancelˡ-< 4 scaledStrict
   where
   p = Raw.payloadScale extra
   c = SourceCenter.sourceCenterMagnitudeAt even
@@ -138,12 +137,19 @@ threeCenterMagnitudeBelowTwentyOnePayloadScale {extra} even =
         (cong (3 *_) (fourCenterMagnitudePlusOne even))
         (solve 1 (λ x → con 3 :* (con 27 :* x) := con 81 :* x) refl p))
 
+  zeroBelowThree : 0 < 3
+  zeroBelowThree = s≤s z≤n
+
+  twelveCBelowTwelveCPlusThree : 12 * c < 12 * c + 3
+  twelveCBelowTwelveCPlusThree =
+    subst
+      (λ left → left < 12 * c + 3)
+      (NatP.+-identityʳ (12 * c))
+      (NatP.+-monoˡ-< (12 * c) zeroBelowThree)
+
   twelveCBelowEightyOneP : 12 * c < 81 * p
   twelveCBelowEightyOneP =
-    subst
-      (12 * c <_)
-      tripleIdentity
-      (NatP.m<m+n (12 * c) (s≤s (s≤s (s≤s z≤n))))
+    subst (12 * c <_) tripleIdentity twelveCBelowTwelveCPlusThree
 
   eightyOnePBelowEightyFourP : 81 * p ≤ 84 * p
   eightyOnePBelowEightyFourP =
@@ -173,8 +179,7 @@ nonSpecialZeroImpossible :
   Special.classifySpecial word ≡ nothing →
   BT.toInteger (BT.eval word) ≡ + 0 →
   ⊥
-nonSpecialZeroImpossible {extra} word nonSpecial zeroEq =
-  contradiction
+nonSpecialZeroImpossible {extra} word nonSpecial zeroEq = contradiction
   where
   zeroWord = Vec.replicate (8 + extra) Trit.zer
 
@@ -183,7 +188,7 @@ nonSpecialZeroImpossible {extra} word nonSpecial zeroEq =
     Positional.toIntegerInjective
       (trans zeroEq (sym (SpecialOrder.allZeroInteger (8 + extra))))
 
-  contradictionEq : nothing ≡ Data.Maybe.Base.just DASHI.ComputerScience.TekumFiniteSemanticsExact.zeroValue
+  contradictionEq : nothing ≡ just Sem.zeroValue
   contradictionEq =
     trans
       (sym nonSpecial)
@@ -205,12 +210,10 @@ anchorNatCodeBandForPositive :
   (word : Vec.Vec Trit.Trit (8 + extra)) →
   BT.toInteger (BT.eval word) ≡ + (suc m) →
   (6 * Raw.payloadScale extra
-    ≤ Positional.natCode (Fixed.concreteAnchor word))
-  Data.Product.Base.×
+    ≤ Positional.natCode (Fixed.concreteAnchor word)) ×
   (Positional.natCode (Fixed.concreteAnchor word)
     < 21 * Raw.payloadScale extra)
-anchorNatCodeBandForPositive {extra} {m} even word positiveEq =
-  lower , upper
+anchorNatCodeBandForPositive {extra} {m} even word positiveEq = lower , upper
   where
   c = SourceCenter.sourceCenterMagnitudeAt even
 
@@ -256,16 +259,50 @@ anchorNatCodeBandForNegative :
   (word : Vec.Vec Trit.Trit (8 + extra)) →
   BT.toInteger (BT.eval word) ≡ -[1+ m ] →
   (6 * Raw.payloadScale extra
-    ≤ Positional.natCode (Fixed.concreteAnchor word))
-  Data.Product.Base.×
+    ≤ Positional.natCode (Fixed.concreteAnchor word)) ×
   (Positional.natCode (Fixed.concreteAnchor word)
     < 21 * Raw.payloadScale extra)
-anchorNatCodeBandForNegative {extra} even word negativeEq
-  rewrite NegativeGlobal.negativeAnchorNatCode even word negativeEq =
-  let positiveWord = Fixed.negateWord word in
-  anchorNatCodeBandForPositive
-    even positiveWord
-    (NegativeGlobal.negatedNegativeIsPositive word negativeEq)
+anchorNatCodeBandForNegative {extra} {m} even word negativeEq = lower , upper
+  where
+  c = SourceCenter.sourceCenterMagnitudeAt even
+  positiveWord = Fixed.negateWord word
+  positiveEq = NegativeGlobal.negatedNegativeIsPositive word negativeEq
+
+  anchorEq :
+    Positional.natCode (Fixed.concreteAnchor word) ≡ suc m + c
+  anchorEq = NegativeGlobal.negativeAnchorNatCode even word negativeEq
+
+  lower : 6 * Raw.payloadScale extra ≤ Positional.natCode (Fixed.concreteAnchor word)
+  lower =
+    subst
+      (6 * Raw.payloadScale extra ≤_)
+      (sym anchorEq)
+      (NatP.≤-trans
+        (sixPayloadScaleBelowCenterMagnitude even)
+        (NatP.m≤n+m c (suc m)))
+
+  magnitudeBound : suc m ≤ 2 * c
+  magnitudeBound =
+    subst
+      (suc m ≤_)
+      (SourceCenter.centerAtEvenWidth even)
+      (PositiveAnchor.positiveMagnitudeBound positiveWord positiveEq)
+
+  anchorBelowThreeC : suc m + c ≤ 3 * c
+  anchorBelowThreeC =
+    subst
+      (suc m + c ≤_)
+      (solve 1 (λ x → (con 2 :* x) :+ x := con 3 :* x) refl c)
+      (NatP.+-monoʳ-≤ c magnitudeBound)
+
+  upper : Positional.natCode (Fixed.concreteAnchor word) < 21 * Raw.payloadScale extra
+  upper =
+    subst
+      (_< 21 * Raw.payloadScale extra)
+      (sym anchorEq)
+      (NatP.≤-<-trans
+        anchorBelowThreeC
+        (threeCenterMagnitudeBelowTwentyOnePayloadScale even))
 
 rawAnchorCodeIsConcreteNatCode :
   ∀ {extra} (word : Vec.Vec Trit.Trit (8 + extra)) →
@@ -281,25 +318,18 @@ nonSpecialAnchorBand :
   (even : Width.EvenWidth (8 + extra))
   (word : Vec.Vec Trit.Trit (8 + extra)) →
   Special.classifySpecial word ≡ nothing →
-  (6 * Raw.payloadScale extra ≤ Raw.rawAnchorCode (Source.anchorMSB word))
-  Data.Product.Base.×
+  (6 * Raw.payloadScale extra ≤ Raw.rawAnchorCode (Source.anchorMSB word)) ×
   (Raw.rawAnchorCode (Source.anchorMSB word) < 21 * Raw.payloadScale extra)
 nonSpecialAnchorBand {extra} even word nonSpecial
   with BT.toInteger (BT.eval word) in valueEq
 ... | + 0 = ⊥-elim (nonSpecialZeroImpossible word nonSpecial valueEq)
-... | + (suc m) =
-  transportBand
-    (anchorNatCodeBandForPositive even word valueEq)
-... | -[1+ m ] =
-  transportBand
-    (anchorNatCodeBandForNegative even word valueEq)
+... | + (suc m) = transportBand (anchorNatCodeBandForPositive even word valueEq)
+... | -[1+ m ] = transportBand (anchorNatCodeBandForNegative even word valueEq)
   where
   transportBand :
-    (6 * Raw.payloadScale extra ≤ Positional.natCode (Fixed.concreteAnchor word))
-    Data.Product.Base.×
+    (6 * Raw.payloadScale extra ≤ Positional.natCode (Fixed.concreteAnchor word)) ×
     (Positional.natCode (Fixed.concreteAnchor word) < 21 * Raw.payloadScale extra) →
-    (6 * Raw.payloadScale extra ≤ Raw.rawAnchorCode (Source.anchorMSB word))
-    Data.Product.Base.×
+    (6 * Raw.payloadScale extra ≤ Raw.rawAnchorCode (Source.anchorMSB word)) ×
     (Raw.rawAnchorCode (Source.anchorMSB word) < 21 * Raw.payloadScale extra)
   transportBand (lower , upper)
     rewrite rawAnchorCodeIsConcreteNatCode word = lower , upper
