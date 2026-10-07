@@ -16,6 +16,14 @@ structuralContractionPaid :
   Evaluation.structuralLocalityContractionPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
 structuralContractionPaid = refl
 
+incidenceCompressionPaid :
+  Evaluation.incidenceCompressionScenarioPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+incidenceCompressionPaid = refl
+
+incidenceToCostBridgePaid :
+  Evaluation.incidenceCompressionCostBridgePaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+incidenceToCostBridgePaid = refl
+
 conditionalWinTheoremPaid :
   Evaluation.conditionalFederationWinTheoremPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
 conditionalWinTheoremPaid = refl
@@ -36,6 +44,10 @@ directExperimentDesignPaid :
   Evaluation.directFlatVersusNestedExperimentDesignPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
 directExperimentDesignPaid = refl
 
+empiricalPromotionGatePaid :
+  Evaluation.validatedEmpiricalPromotionGatePaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+empiricalPromotionGatePaid = refl
+
 empiricalCostTermsUnpaid :
   Evaluation.empiricalCostTermsIdentified Evaluation.canonicalBoloEvaluationBoundary ≡ false
 empiricalCostTermsUnpaid = refl
@@ -47,6 +59,14 @@ targetQualifiedBoundsUnpaid = refl
 robustTargetWinUnpaid :
   Evaluation.robustTargetCoordinationWinPaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
 robustTargetWinUnpaid = refl
+
+validatedAdvantageUnpaid :
+  Evaluation.validatedCoordinationAdvantagePaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
+validatedAdvantageUnpaid = refl
+
+validatedDisadvantageUnpaid :
+  Evaluation.validatedCoordinationDisadvantagePaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
+validatedDisadvantageUnpaid = refl
 
 directExperimentNotRun :
   Evaluation.directFlatVersusNestedExperimentRun Evaluation.canonicalBoloEvaluationBoundary ≡ false
