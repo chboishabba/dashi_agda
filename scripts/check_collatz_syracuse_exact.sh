@@ -49,6 +49,7 @@ formal_files=(
   DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
   DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
   DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
+  DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
   DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
   DASHI/Analysis/CollatzSyracuseHoeffdingMathlibBoundaryExact.agda
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
@@ -62,73 +63,40 @@ for file in "${formal_files[@]}"; do
   ! grep -Eq '= *\?' "$file"
 done
 
-grep -q 'canonicalParityCylinderSource' \
-  DASHI/NumberTheory/Collatz/SyracuseParityCylinderOddBranchExact.agda
-grep -q 'canonicalCompleteBlockUniformWordMass' \
-  DASHI/Analysis/CollatzSyracuseCompleteBlockBijectionExact.agda
-grep -q 'alignedBlockUniformWordMass' \
-  DASHI/Analysis/CollatzSyracuseAlignedBlockUniformityExact.agda
-grep -q 'canonicalCompleteBlockParityWordLaw' \
-  DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
-grep -q 'strictAffineMarginImpliesDescent' \
-  DASHI/NumberTheory/Collatz/SyracuseAffineDescentMarginExact.agda
-grep -q 'coarseParityMarginImpliesDescent' \
-  DASHI/NumberTheory/Collatz/SyracuseAffineCorrectionBoundExact.agda
-grep -q 'integerChernoff' \
-  DASHI/Core/BinaryWordIntegerChernoffExact.agda
-grep -q 'badWordCount' \
-  DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
-grep -q 'fiveEightBadWordBound' \
-  DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
-grep -q 'rationalBadWordBound' \
-  DASHI/Analysis/CollatzSyracuseRationalDriftTailExact.agda
-grep -q 'seventeenTwentySevenLiteralAlignedTail' \
-  DASHI/Analysis/CollatzSyracuseRationalDriftApproximantsExact.agda
-grep -q 'rationalAlignedBlockNonDescentBound' \
-  DASHI/Analysis/CollatzSyracuseRationalAlignedBlockTailExact.agda
-grep -q 'middleAlignedScaledTail' \
-  DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
-grep -q 'unalignedIntervalScaledTail' \
-  DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
-grep -q 'universalStoppingFromStrictDescent' \
-  DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
-grep -q 'strictDescentFromUniversalStopping' \
-  DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
-grep -q 'canonicalUniversalStoppingEquivalence' \
-  DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
-grep -q 'strictDescentImpliesExactAffineMargin' \
-  DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
-grep -q 'fromLiteralStrictDescentSource' \
-  DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
-grep -q 'universalStoppingFromUnboundedFrontier' \
-  DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
-grep -q 'affineCorrectionCocycle' \
-  DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
-grep -q 'barrier546DropsBelow511' \
-  DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
-grep -q 'affineTransfer546' \
-  DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
-grep -q 'nonDescentImpliesBadWord' \
-  DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
-grep -q 'alignedBlockFiveEightNonDescentBound' \
-  DASHI/Analysis/CollatzSyracuseAlignedBlockTailExact.agda
-grep -q 'cutStatus C11d-unalignedBoundaryCompiler = proved' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C11f-exactArbitraryIntervalSplit = nonCriticalOptional' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C12c-exponentialBadWordTail = proved' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C12c2-parametricRationalTail = proved' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C13a-alignedBlockLiteralDescent = proved' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C13b-alignedBlockFiniteTail = proved' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C13c-rationalAlignedBlockFiniteTail = proved' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C13-universalStoppingCompiler = compiledFromRepo' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C13d-allStartsStrictDescentProducer = sourceSpecificOpen' \
-  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'canonicalParityCylinderSource' DASHI/NumberTheory/Collatz/SyracuseParityCylinderOddBranchExact.agda
+grep -q 'canonicalCompleteBlockUniformWordMass' DASHI/Analysis/CollatzSyracuseCompleteBlockBijectionExact.agda
+grep -q 'alignedBlockUniformWordMass' DASHI/Analysis/CollatzSyracuseAlignedBlockUniformityExact.agda
+grep -q 'canonicalCompleteBlockParityWordLaw' DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
+grep -q 'strictAffineMarginImpliesDescent' DASHI/NumberTheory/Collatz/SyracuseAffineDescentMarginExact.agda
+grep -q 'coarseParityMarginImpliesDescent' DASHI/NumberTheory/Collatz/SyracuseAffineCorrectionBoundExact.agda
+grep -q 'integerChernoff' DASHI/Core/BinaryWordIntegerChernoffExact.agda
+grep -q 'badWordCount' DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
+grep -q 'fiveEightBadWordBound' DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
+grep -q 'rationalBadWordBound' DASHI/Analysis/CollatzSyracuseRationalDriftTailExact.agda
+grep -q 'seventeenTwentySevenLiteralAlignedTail' DASHI/Analysis/CollatzSyracuseRationalDriftApproximantsExact.agda
+grep -q 'rationalAlignedBlockNonDescentBound' DASHI/Analysis/CollatzSyracuseRationalAlignedBlockTailExact.agda
+grep -q 'middleAlignedScaledTail' DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
+grep -q 'unalignedIntervalScaledTail' DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
+grep -q 'universalStoppingFromStrictDescent' DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
+grep -q 'strictDescentFromUniversalStopping' DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
+grep -q 'canonicalUniversalStoppingEquivalence' DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
+grep -q 'strictDescentImpliesExactAffineMargin' DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
+grep -q 'fromLiteralStrictDescentSource' DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
+grep -q 'universalStoppingFromUnboundedFrontier' DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+grep -q 'affineCorrectionCocycle' DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
+grep -q 'adjacentSwapCorrection' DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
+grep -q 'barrier546DropsBelow511' DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
+grep -q 'affineTransfer546' DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
+grep -q 'nonDescentImpliesBadWord' DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
+grep -q 'alignedBlockFiveEightNonDescentBound' DASHI/Analysis/CollatzSyracuseAlignedBlockTailExact.agda
+grep -q 'cutStatus C11d-unalignedBoundaryCompiler = proved' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C11f-exactArbitraryIntervalSplit = nonCriticalOptional' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C12c-exponentialBadWordTail = proved' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C12c2-parametricRationalTail = proved' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13a-alignedBlockLiteralDescent = proved' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13b-alignedBlockFiniteTail = proved' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13c-rationalAlignedBlockFiniteTail = proved' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13-universalStoppingCompiler = compiledFromRepo' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13d-allStartsStrictDescentProducer = sourceSpecificOpen' DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
