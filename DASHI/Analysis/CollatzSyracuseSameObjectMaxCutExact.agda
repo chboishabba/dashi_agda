@@ -34,8 +34,12 @@ import DASHI.Analysis.CollatzSyracuseSamplingPushforwardExact
 import DASHI.Analysis.CollatzSyracuseParityBernoulliExact
 import DASHI.Analysis.CollatzSyracuseParityDescentEventExact
 import DASHI.Analysis.CollatzSyracuseFiveEightTailExact
+import DASHI.Analysis.CollatzSyracuseRationalDriftTailExact
+import DASHI.Analysis.CollatzSyracuseRationalAlignedBlockTailExact
+import DASHI.Analysis.CollatzSyracuseRationalDriftApproximantsExact
 import DASHI.Analysis.CollatzSyracuseAlignedBlockDescentExact
 import DASHI.Analysis.CollatzSyracuseAlignedBlockTailExact
+import DASHI.Analysis.CollatzSyracuseUnalignedIntervalTailCompilerExact
 import DASHI.Analysis.CollatzSyracusePrefixAbsorptionWeldExact
 import DASHI.Analysis.CollatzSyracuseUniformHittingBlockExact
 import DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact
@@ -73,14 +77,17 @@ data CollatzCut : Set where
   C11a-completeBlockBijection : CollatzCut
   C11b-completeBlockUniformPushforward : CollatzCut
   C11c-alignedBlockUniformity : CollatzCut
-  C11d-unalignedBoundaryFragments : CollatzCut
+  C11d-unalignedBoundaryCompiler : CollatzCut
+  C11f-exactArbitraryIntervalSplit : CollatzCut
   C11e-logWeightedSampling : CollatzCut
   C12a-directParityBernoulliLaw : CollatzCut
   C12b-exactBadWordNumerator : CollatzCut
   C12c-exponentialBadWordTail : CollatzCut
+  C12c2-parametricRationalTail : CollatzCut
   C12d-prefixAbsorption : CollatzCut
   C13a-alignedBlockLiteralDescent : CollatzCut
   C13b-alignedBlockFiniteTail : CollatzCut
+  C13c-rationalAlignedBlockFiniteTail : CollatzCut
   C13-integerStoppingTransport : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
@@ -109,14 +116,17 @@ cutStatus C10-repairedRelationMixing = compiledFromRepo
 cutStatus C11a-completeBlockBijection = proved
 cutStatus C11b-completeBlockUniformPushforward = proved
 cutStatus C11c-alignedBlockUniformity = proved
-cutStatus C11d-unalignedBoundaryFragments = conditionalOnHypothesis
+cutStatus C11d-unalignedBoundaryCompiler = proved
+cutStatus C11f-exactArbitraryIntervalSplit = sourceSpecificOpen
 cutStatus C11e-logWeightedSampling = sourceSpecificOpen
 cutStatus C12a-directParityBernoulliLaw = proved
 cutStatus C12b-exactBadWordNumerator = proved
 cutStatus C12c-exponentialBadWordTail = proved
+cutStatus C12c2-parametricRationalTail = proved
 cutStatus C12d-prefixAbsorption = conditionalOnHypothesis
 cutStatus C13a-alignedBlockLiteralDescent = proved
 cutStatus C13b-alignedBlockFiniteTail = proved
+cutStatus C13c-rationalAlignedBlockFiniteTail = proved
 cutStatus C13-integerStoppingTransport = conditionalOnHypothesis
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
@@ -154,6 +164,10 @@ alignedBlockUniformityPaid :
   cutStatus C11c-alignedBlockUniformity ≡ proved
 alignedBlockUniformityPaid = refl
 
+unalignedBoundaryCompilerPaid :
+  cutStatus C11d-unalignedBoundaryCompiler ≡ proved
+unalignedBoundaryCompilerPaid = refl
+
 directBernoulliLawPaid :
   cutStatus C12a-directParityBernoulliLaw ≡ proved
 directBernoulliLawPaid = refl
@@ -165,6 +179,10 @@ exactBadWordNumeratorPaid = refl
 exponentialBadWordTailPaid :
   cutStatus C12c-exponentialBadWordTail ≡ proved
 exponentialBadWordTailPaid = refl
+
+parametricRationalTailPaid :
+  cutStatus C12c2-parametricRationalTail ≡ proved
+parametricRationalTailPaid = refl
 
 affineCorrectionBoundPaid :
   cutStatus C7c-affineCorrectionBound ≡ proved
@@ -181,6 +199,10 @@ alignedBlockLiteralDescentPaid = refl
 alignedBlockFiniteTailPaid :
   cutStatus C13b-alignedBlockFiniteTail ≡ proved
 alignedBlockFiniteTailPaid = refl
+
+rationalAlignedBlockFiniteTailPaid :
+  cutStatus C13c-rationalAlignedBlockFiniteTail ≡ proved
+rationalAlignedBlockFiniteTailPaid = refl
 
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
@@ -204,11 +226,13 @@ record MaxCutBoundary : Set where
     parityCountDescentCompilerPaidHere : Nat
     exactBadWordNumeratorPaidHere : Nat
     alignedBlockFiniteTailPaidHere : Nat
-    unalignedBoundaryCountingStillSeparate : Nat
-    exponentialTailStillSeparate : Nat
+    rationalTailParametricPaidHere : Nat
+    rationalLiteralAlignedTailPaidHere : Nat
+    unalignedBoundaryCompilerPaidHere : Nat
+    exactArbitraryIntervalSplitStillSeparate : Nat
     logWeightedSamplingStillSeparate : Nat
     universalStoppingStillSeparate : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 0 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1
