@@ -21,6 +21,7 @@ import DASHI.NumberTheory.Collatz.SyracuseOneStepArithmeticExact
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderLeanCrossProverWeldExact
 import DASHI.NumberTheory.Collatz.SyracuseZ2InverseBranchSourceExact
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact
+import DASHI.NumberTheory.Collatz.SyracuseAffineDescentMarginExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftBoundaryExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftExact
 import DASHI.Analysis.CollatzSyracuseParityObserverExact
@@ -54,7 +55,9 @@ data CollatzCut : Set where
   C5-residueCylinderReverse : CollatzCut
   C5a-residueCodeInjective : CollatzCut
   C6-affineIterate : CollatzCut
-  C7-stoppedLogRemainder : CollatzCut
+  C7a-stoppedLogRemainder : CollatzCut
+  C7b-affineScalarMarginDescent : CollatzCut
+  C7c-affineScalarMarginProduction : CollatzCut
   C8a-relationMatrixTransfer : CollatzCut
   C8b-finiteInverseBranchWeld : CollatzCut
   C8c-z2TransferOperatorIntertwiner : CollatzCut
@@ -83,7 +86,9 @@ cutStatus C4-itineraryShift = proved
 cutStatus C5-residueCylinderReverse = proved
 cutStatus C5a-residueCodeInjective = proved
 cutStatus C6-affineIterate = proved
-cutStatus C7-stoppedLogRemainder = conditionalOnHypothesis
+cutStatus C7a-stoppedLogRemainder = conditionalOnHypothesis
+cutStatus C7b-affineScalarMarginDescent = proved
+cutStatus C7c-affineScalarMarginProduction = sourceSpecificOpen
 cutStatus C8a-relationMatrixTransfer = refutedRoute
 cutStatus C8b-finiteInverseBranchWeld = proved
 cutStatus C8c-z2TransferOperatorIntertwiner = sourceSpecificOpen
@@ -133,6 +138,10 @@ directBernoulliLawPaid :
   cutStatus C12a-directParityBernoulliLaw ≡ proved
 directBernoulliLawPaid = refl
 
+affineMarginCompilerPaid :
+  cutStatus C7b-affineScalarMarginDescent ≡ proved
+affineMarginCompilerPaid = refl
+
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
 oldRelationSpectralConcentrationNotCriticalPath = refl
@@ -149,10 +158,12 @@ record MaxCutBoundary : Set where
     arbitraryLengthCylinderInductionPaid : Nat
     agdaNativeInv3Paid : Nat
     completeBlockUniformityPaidHere : Nat
+    logarithmNecessaryForLiteralDescent : Nat
+    affineScalarMarginCompilerPaidHere : Nat
     arbitrarySamplingStillSeparate : Nat
     realConcentrationStillSeparate : Nat
     universalStoppingStillSeparate : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 0 1 1 1 1
