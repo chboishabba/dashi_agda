@@ -1,13 +1,18 @@
 # Probe the within-fibre M22:2 outer involution through the actual constructible
 # Monster-local group H = 2^(2+11+22).(M24 x S3).
 #
-# The current CTblLib has the local character table and a stored fusion to the
-# Monster.  We prefer that authoritative fusion; `PossibleClassFusions` is only
-# a compatibility fallback for older CTblLib installations.
+# We lift the unique outer M22:2 class with (class size, centralizer)=(1386,640)
+# from the M24 quotient.  A full lift can act nontrivially on the central 2^2,
+# so we DO NOT choose an arbitrary central involution: we select a nonidentity
+# central involution actually fixed by the lift.  If no such involution exists,
+# this particular lift does not furnish the commuting C2xC2 test and the script
+# fails honestly.
 #
-# A lift in the non-split local 2-extension can depend on kernel choices, so the
-# script records the selected lift order/centralizer and does not promote it to
-# the desired involution unless those facts actually hold.
+# CTblLib class fusions are then used fail-closed.  If the Monster labels of
+# h and ah are invariant across every admissible local->Monster fusion, we also
+# compute the rational V^natural_2 = 1 + 196883 character traces and the four
+# C2xC2 eigenspace multiplicities.  These are inputs for an integral/mod-4
+# extension test; they do NOT themselves identify the mod-2 Tate extension.
 
 if LoadPackage("atlasrep") <> true then Error("AtlasRep is required"); fi;
 if LoadPackage("ctbllib") <> true then Error("CTblLib is required"); fi;
@@ -16,6 +21,7 @@ localName := "2^(2+11+22).(M24xS3)";
 expectedLocalOrder := 50472333605150392320;
 expectedM24Order := 244823040;
 expectedM22d2Order := 887040;
+weightTwoDimension := 196884;
 
 G := AtlasGroup(localName);
 if G=fail or Size(G)<>expectedLocalOrder then Error("failed to construct local group"); fi;
@@ -66,8 +72,13 @@ O2 := PCore(G,2);
 Z2 := Centre(O2);
 centralInvolutions := Filtered(Elements(Z2),z -> z<>One(Z2) and Order(z)=2);
 if Length(centralInvolutions)<3 then Error("local 2-core centre does not expose three involutions"); fi;
-a := centralInvolutions[1];
+fixedCentralInvolutions := Filtered(centralInvolutions,z -> z^hLift=z);
+if Length(fixedCentralInvolutions)=0 then
+  Error("selected outer lift fixes no nonidentity central 2B involution");
+fi;
+a := fixedCentralInvolutions[1];
 commutes := Comm(hLift,a)=One(G);
+if not commutes then Error("fixed central involution does not commute with lift"); fi;
 ah := a*hLift;
 
 localTbl := CharacterTable(localName);
@@ -97,17 +108,46 @@ sigA := ElementSignature(a);
 sigH := ElementSignature(hLift);
 sigAH := ElementSignature(ah);
 
-PossibleMonsterLabels := function(sig)
-  local labels,fi,ci;
-  labels := [];
+PossibleMonsterPositions := function(sig)
+  local positions,fi,ci;
+  positions := [];
   for fi in [1..Length(fusions)] do
-    for ci in sig[3] do AddSet(labels,monsterNames[fusions[fi][ci]]); od;
+    for ci in sig[3] do AddSet(positions,fusions[fi][ci]); od;
   od;
-  return labels;
+  return positions;
 end;
-labelsA := PossibleMonsterLabels(sigA);
-labelsH := PossibleMonsterLabels(sigH);
-labelsAH := PossibleMonsterLabels(sigAH);
+positionsA := PossibleMonsterPositions(sigA);
+positionsH := PossibleMonsterPositions(sigH);
+positionsAH := PossibleMonsterPositions(sigAH);
+labelsA := List(positionsA,p -> monsterNames[p]);
+labelsH := List(positionsH,p -> monsterNames[p]);
+labelsAH := List(positionsAH,p -> monsterNames[p]);
+
+# Weight-two character is 1 + the unique 196883-dimensional irreducible.
+monsterIrr := Irr(monster);
+chiPositions := Filtered([1..Length(monsterIrr)],i -> monsterIrr[i][1]=196883);
+if Length(chiPositions)<>1 then Error("Monster table does not expose unique 196883 irrep"); fi;
+chi196883 := monsterIrr[chiPositions[1]];
+WeightTwoTraceAt := p -> 1 + chi196883[p];
+
+traceA := fail; traceH := fail; traceAH := fail;
+eigenspaceMultiplicities := fail;
+if Length(positionsA)=1 and Length(positionsH)=1 and Length(positionsAH)=1
+   and Order(a)=2 and Order(hLift)=2 and Order(ah)=2 then
+  traceA := WeightTwoTraceAt(positionsA[1]);
+  traceH := WeightTwoTraceAt(positionsH[1]);
+  traceAH := WeightTwoTraceAt(positionsAH[1]);
+  nums := [
+    weightTwoDimension + traceA + traceH + traceAH,
+    weightTwoDimension + traceA - traceH - traceAH,
+    weightTwoDimension - traceA + traceH - traceAH,
+    weightTwoDimension - traceA - traceH + traceAH
+  ];
+  if not ForAll(nums,n -> n mod 4 = 0) then
+    Error("fusion-invariant commuting involution traces do not yield integral V4 multiplicities");
+  fi;
+  eigenspaceMultiplicities := List(nums,n -> n/4);
+fi;
 
 PrintNatList := function(out,xs)
   local i; AppendTo(out,"[");
@@ -124,6 +164,12 @@ PrintSig := function(out,sig,labels)
   AppendTo(out,"{\"order\":",String(sig[1]),",\"centralizer_order\":",String(sig[2]),",\"compatible_local_table_classes\":");
   PrintNatList(out,sig[3]); AppendTo(out,",\"possible_monster_classes\":"); PrintStringList(out,labels); AppendTo(out,"}");
 end;
+PrintMaybeInt := function(out,x)
+  if x=fail then AppendTo(out,"null"); else AppendTo(out,String(x)); fi;
+end;
+PrintMaybeNatList := function(out,x)
+  if x=fail then AppendTo(out,"null"); else PrintNatList(out,x); fi;
+end;
 
 out := OutputTextFile("build/twob_local_outer_lift_monster_class_probe.json",false);
 SetPrintFormattingStatus(out,false);
@@ -132,18 +178,26 @@ AppendTo(out,"  \"local_group_order\":",String(Size(G)),",\n");
 AppendTo(out,"  \"o2_order\":",String(Size(O2)),",\n");
 AppendTo(out,"  \"o2_centre_order\":",String(Size(Z2)),",\n");
 AppendTo(out,"  \"central_involution_count\":",String(Length(centralInvolutions)),",\n");
+AppendTo(out,"  \"fixed_central_involution_count\":",String(Length(fixedCentralInvolutions)),",\n");
 AppendTo(out,"  \"outer_quotient_class_size\":1386,\n");
 AppendTo(out,"  \"outer_quotient_centralizer_order\":640,\n");
 AppendTo(out,"  \"full_lift_order\":",String(Order(hLift)),",\n");
+AppendTo(out,"  \"product_order\":",String(Order(ah)),",\n");
 AppendTo(out,"  \"lift_commutes_with_selected_central_2B\":",JsonBool(commutes),",\n");
 AppendTo(out,"  \"fusion_source\":\"",fusionSource,"\",\n");
 AppendTo(out,"  \"possible_fusion_count\":",String(Length(fusions)),",\n");
 AppendTo(out,"  \"a_signature\":"); PrintSig(out,sigA,labelsA); AppendTo(out,",\n");
 AppendTo(out,"  \"h_signature\":"); PrintSig(out,sigH,labelsH); AppendTo(out,",\n");
 AppendTo(out,"  \"ah_signature\":"); PrintSig(out,sigAH,labelsAH); AppendTo(out,",\n");
+AppendTo(out,"  \"a_monster_class_fusion_invariant\":",JsonBool(Length(labelsA)=1),",\n");
 AppendTo(out,"  \"h_monster_class_fusion_invariant\":",JsonBool(Length(labelsH)=1),",\n");
-AppendTo(out,"  \"ah_monster_class_fusion_invariant\":",JsonBool(Length(labelsAH)=1),"\n}\n");
+AppendTo(out,"  \"ah_monster_class_fusion_invariant\":",JsonBool(Length(labelsAH)=1),",\n");
+AppendTo(out,"  \"weight_two_trace_a\":"); PrintMaybeInt(out,traceA); AppendTo(out,",\n");
+AppendTo(out,"  \"weight_two_trace_h\":"); PrintMaybeInt(out,traceH); AppendTo(out,",\n");
+AppendTo(out,"  \"weight_two_trace_ah\":"); PrintMaybeInt(out,traceAH); AppendTo(out,",\n");
+AppendTo(out,"  \"v4_rational_eigenspace_multiplicities\":"); PrintMaybeNatList(out,eigenspaceMultiplicities); AppendTo(out,"\n}\n");
 CloseStream(out);
 Print("2B local outer-lift Monster class probe: lift order=",Order(hLift),
-  "; commute=",commutes,"; fusion=",fusionSource,"; H labels=",labelsH,"; aH labels=",labelsAH,"\n");
+  "; product order=",Order(ah),"; fixed central 2B count=",Length(fixedCentralInvolutions),
+  "; fusion=",fusionSource,"; H labels=",labelsH,"; aH labels=",labelsAH,"\n");
 QUIT;
