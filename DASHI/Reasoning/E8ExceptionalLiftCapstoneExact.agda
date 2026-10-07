@@ -5,14 +5,15 @@ module DASHI.Reasoning.E8ExceptionalLiftCapstoneExact where
 --
 -- DASHI CONTRIBUTION
 --
--- The Lean finite producer now source-writes a literal E8 branching with:
---   240 = 72 + 6 + 6 * 27,
--- a same-object/action E6 sector, six E6-stable transitive mixed 27 fibres,
--- and Schlaefli relation geometry on each selected 27-fibre.
+-- The companion Lean finite producer now source-writes a literal E8 branching
+-- with 240 = 72 + 6 + 6 * 27, exact E6 action on the 72-sector, six transitive
+-- mixed 27 fibres, Schlaefli relation geometry, and a concrete same-object
+-- recognition of one mixed fibre with an E6 minuscule 27 weight orbit.
 --
--- This Agda owner types that exact promotion surface without importing an
--- unobserved Lean kernel result as an Agda theorem.  Full ternary-240 and
--- Albert/minuscule-27 same-action recognition remain independent receipts.
+-- This Agda owner types that promotion surface without importing an unobserved
+-- Lean kernel result as an Agda theorem.  Crucially, E6 minuscule same-object
+-- recognition is separated from Albert/Jordan algebra recognition: an Albert
+-- product, unit, cubic norm, and F4 automorphism structure remain extra data.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -88,17 +89,44 @@ record FullTernary240Recognition
     actionIntertwines : Set
 open FullTernary240Recognition public
 
-record Albert27Recognition
+------------------------------------------------------------------------
+-- E6 MINUSCULE 27: SAME OBJECT / ACTION / RELATION RECEIPT
+------------------------------------------------------------------------
+
+record E6Minuscule27SameObjectReceipt
   (M : Mixed27RelationReceipt) : Set₁ where
   field
-    AlbertCarrier27 : Set
-    AlbertActor : Set
-    albertAction : AlbertActor → AlbertCarrier27 → AlbertCarrier27
-    albertRelation : AlbertCarrier27 → AlbertCarrier27 → Set
+    WeightCarrier27 : Set
+    E6Actor : Set
+    weightAction : E6Actor → WeightCarrier27 → WeightCarrier27
+    invariantWeightRelation : WeightCarrier27 → WeightCarrier27 → Set
+
     sameObjectBijectionReceipt : Set
     actionIntertwinerReceipt : Set
     relationIntertwinerReceipt : Set
-open Albert27Recognition public
+open E6Minuscule27SameObjectReceipt public
+
+------------------------------------------------------------------------
+-- ALBERT/JORDAN LAYER: STRICTLY STRONGER THAN MINUSCULE WEIGHT GEOMETRY
+------------------------------------------------------------------------
+
+record Albert27AlgebraRecognition
+  {M : Mixed27RelationReceipt}
+  (R : E6Minuscule27SameObjectReceipt M) : Set₁ where
+  field
+    JordanCarrier27 : Set
+    jordanProduct : JordanCarrier27 → JordanCarrier27 → JordanCarrier27
+    jordanUnit : JordanCarrier27
+    cubicNorm : JordanCarrier27 → Set
+    F4Actor : Set
+    f4Action : F4Actor → JordanCarrier27 → JordanCarrier27
+
+    underlyingCarrierMatchesMinusculeReceipt : Set
+    jordanIdentitiesReceipt : Set
+    unitReceipt : Set
+    cubicNormCompatibilityReceipt : Set
+    f4AutomorphismReceipt : Set
+open Albert27AlgebraRecognition public
 
 record ExceptionalLiftBoundary : Set where
   constructor exceptional-lift-boundary
@@ -110,12 +138,19 @@ record ExceptionalLiftBoundary : Set where
     schlafli27RecognitionReceiptTyped : Bool
     e8Branching72Plus6PlusSix27Typed : Bool
 
+    minuscule27SameObjectReceiptTyped : Bool
+    minuscule27ActionIntertwinerReceiptTyped : Bool
+    minuscule27RelationIntertwinerReceiptTyped : Bool
+    albert27AlgebraReceiptTyped : Bool
+
     leanExceptionalLiftProducerSourceWritten : Bool
+    leanMinuscule27ProducerSourceWritten : Bool
     leanExactHeadKernelReceiptObserved : Bool
     agdaLiteralE8EnumerationKernelPaidHere : Bool
+    agdaMinuscule27SameObjectKernelPaidHere : Bool
 
     fullTernary240SameActionRecognitionPaid : Bool
-    albert27SameActionRecognitionPaid : Bool
+    albert27AlgebraRecognitionPaid : Bool
     cardinalityAlonePromotesEitherRecognition : Bool
 open ExceptionalLiftBoundary public
 
@@ -123,5 +158,6 @@ canonicalExceptionalLiftBoundary : ExceptionalLiftBoundary
 canonicalExceptionalLiftBoundary =
   exceptional-lift-boundary
     true true true true true true
-    true false false
+    true true true true
+    true true false false false
     false false false
