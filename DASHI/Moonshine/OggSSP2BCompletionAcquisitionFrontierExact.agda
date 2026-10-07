@@ -3,26 +3,10 @@ module DASHI.Moonshine.OggSSP2BCompletionAcquisitionFrontierExact where
 ------------------------------------------------------------------------
 -- CANONICAL 2B COMPLETION ACQUISITION FRONTIER
 --
--- This owner keeps the post-Brauer completion programme focused on the one
--- remaining same-object acquisition rather than reopening numeric discovery.
---
--- Paid:
---   * Tate-vs-duad 2-regular Brauer fingerprint / semisimplified ingress;
---   * M22 10a/10b finite composition-factor identification;
---   * M22:2 outer J2^5 Completion10 source;
---   * generic three-fibre Tate transport compiler;
---   * binary-tetrahedral defect invariant and 4 -> 2-bit D reduction.
---
--- Newly available acquisition routes:
---   * explicit MeatAxe N<=S chain screen on the finite duad-276 M22:2 module;
---   * source-native normal 2^10 in 2^10:M22:2 < Fi22:2;
---   * externally constructed 196882-dimensional Monster representation over F2.
---
--- Not paid:
---   * an actual M22:2-stable N<=S<=Hhat0(2B,V2) whose quotient is the selected
---     10d module and carries the sourced outer J2^5 action;
---   * the two external D provenance bits;
---   * downstream 30->31->279 same-object promotions.
+-- The programme is now a same-object extension problem, not a representation
+-- discovery problem.  The finite target is much stronger than a Brauer/JH
+-- fingerprint: we have an explicit stable-quotient screen, an exact whole-276
+-- 2-singular Tate-defect target 12, and a mod-4 integral C2 fingerprint.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -31,10 +15,11 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.OggSSP2BTate276M24BrauerRuntimeReceiptExact as Brauer
-import DASHI.Moonshine.OggSSP2BPostBrauerSameObjectFrontierExact as Post
 import DASHI.Moonshine.OggSSP2BFi22d2NaturalTenSourceExact as Fi22
 import DASHI.Moonshine.OggSSP2BMonsterGF2RepresentationSourceExact as MonsterF2
 import DASHI.Moonshine.OggSSP2BDefectProvenanceSearchNoGoExact as DNoGo
+import DASHI.Moonshine.OggSSP2BM24Outer2BDuadTateDefectExact as Defect12
+import DASHI.Moonshine.OggSSP2BMod4ExtensionAcquisitionExact as Mod4
 
 record CompletionAcquisitionStatus : Set where
   constructor completion-acquisition-status
@@ -44,6 +29,11 @@ record CompletionAcquisitionStatus : Set where
     finiteM22d2OuterJ2x5Paid : Bool
     finiteDuadExplicitStableSubquotientScreenImplemented : Bool
     finiteDuadExplicitStableSubquotientRuntimePaid : Bool
+    exactDuadWhole276DefectTwelvePaid : Bool
+    finiteDuadModFourFingerprintPaid : Bool
+    localOuterMonsterClassProbeImplemented : Bool
+    actualTateOuterDefectTwelvePaid : Bool
+    actualMoonshineModFourFingerprintPaid : Bool
     fi22NaturalTenSourceDonorPaid : Bool
     fi22NaturalTenRuntimeIdentificationPaid : Bool
     monsterGF2RepresentationSourcePaid : Bool
@@ -61,16 +51,24 @@ canonicalCompletionAcquisitionStatus =
   completion-acquisition-status
     true true true
     true false
+    true true true
+    false false
     true false
     true false
     false false
     2 false
     false false
-    "Execute and ingest the finite M22:2-on-duad stable-subquotient and Fi22:2 natural-2^10 screens; then acquire/reconstruct the Parker-Wilson Monster GF(2) vector-action implementation (mop2/vecsuz/vecT), or equivalent 2B-local restriction data, and construct the same N<=S chain inside Hhat0(2B,V2). Separately source the two remaining Mode5/2T orientation bits."
+    "First execute the finite stable-subquotient / extension-fingerprint / Fi22 screens and the local Monster class probe. Then compute the actual within-fibre C2 Tate defect on Hhat0(2B,V2): the duad-extension hypothesis predicts exactly 12. In parallel use the fusion-invariant Monster classes/traces of the commuting lift to constrain V_Z modulo 4 and compare against the finite E+^12 + E0^132 fingerprint. Only after those extension tests pass, construct the literal M22:2-stable N<=S<=Hhat0(2B,V2) and descend the sourced outer J2^5 action. Separately source the two remaining Mode5/2T orientation bits."
 
 postBrauerSemisimplifiedIngressAlreadyPaid :
   Brauer.semisimplifiedIngressPaid Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ true
 postBrauerSemisimplifiedIngressAlreadyPaid = Brauer.semisimplifiedIngressIsPaid
+
+finiteWhole276DefectTargetIsTwelve : Defect12.iteratedTateDefectDimension ≡ 12
+finiteWhole276DefectTargetIsTwelve = Defect12.iteratedTateDefectIsTwelve
+
+finiteModFourRankIs276 : Mod4.integralRank ≡ 276
+finiteModFourRankIs276 = Mod4.integralRankIs276
 
 fi22NaturalTenRankIsTen : Fi22.normalKernelF2Rank ≡ 10
 fi22NaturalTenRankIsTen = Fi22.normalKernelRankIsTen
