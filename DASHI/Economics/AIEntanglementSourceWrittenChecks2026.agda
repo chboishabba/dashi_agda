@@ -13,12 +13,7 @@ import DASHI.Economics.AIAntitrustCompetitiveIndependence2026Exact as Antitrust
 import DASHI.Economics.AIMultiplexSourceWeightedGraph2026Exact as WeightedGraph
 import DASHI.Economics.AIPartialCoordinateBounds2026Exact as Bounds
 import DASHI.Economics.AITradeRealizationCapitalAuthorityCrossPollination2026Exact as Authority
-
-------------------------------------------------------------------------
--- Source-written reduction checks.  These are deliberately small `refl`
--- endpoints: if a future edit silently promotes a candidate/source receipt,
--- the aggregation target should stop reducing as recorded here.
-------------------------------------------------------------------------
+import DASHI.Economics.AICapitalRuntimeAuthorityParity2026Exact as Parity
 
 cerebrasAcquisitionNotEstablished :
   Capital.provesBubble Capital.cerebrasOpenAIIsPartnershipNotAcquisition ≡ false
@@ -37,9 +32,7 @@ broadcomLoopNotFraudTheorem :
 broadcomLoopNotFraudTheorem = refl
 
 openWeightFlipNotGlobalMarketTheorem :
-  OpenTransition.exactGlobalEightyTwentyFlipEstablished
-    OpenTransition.sourceBoundedOpenWeightFlip
-  ≡ false
+  OpenTransition.exactGlobalEightyTwentyFlipEstablished OpenTransition.sourceBoundedOpenWeightFlip ≡ false
 openWeightFlipNotGlobalMarketTheorem = refl
 
 slimMoEDoesNotCloseNoMoat :
@@ -47,14 +40,11 @@ slimMoEDoesNotCloseNoMoat :
 slimMoEDoesNotCloseNoMoat = refl
 
 chinaCompetitiveCalibrationDoesNotCloseNoMoat :
-  Competitive.provesClosedModelNoMoat
-    Competitive.candidateCompetitiveSubstitution2026
-  ≡ false
+  Competitive.provesClosedModelNoMoat Competitive.candidateCompetitiveSubstitution2026 ≡ false
 chinaCompetitiveCalibrationDoesNotCloseNoMoat = refl
 
 jointStressPolicySalienceIsCandidatePositive :
-  Geometry.policyBackstopSalienceRising Geometry.candidateOctober2026JointStress
-  ≡ true
+  Geometry.policyBackstopSalienceRising Geometry.candidateOctober2026JointStress ≡ true
 jointStressPolicySalienceIsCandidatePositive = refl
 
 policyCausalCaptureStillOpen :
@@ -62,26 +52,19 @@ policyCausalCaptureStillOpen :
 policyCausalCaptureStillOpen = refl
 
 antitrustLegalConclusionStillOpen :
-  Antitrust.legalAntitrustViolationEstablished
-    Antitrust.candidateHyperscalerLabEntanglement2026
-  ≡ false
+  Antitrust.legalAntitrustViolationEstablished Antitrust.candidateHyperscalerLabEntanglement2026 ≡ false
 antitrustLegalConclusionStillOpen = refl
 
 weightedGraphTerminalCoverageStillOpen :
-  WeightedGraph.terminalCoverageComplete
-    WeightedGraph.currentOctober2026WeightedGraphCut
-  ≡ false
+  WeightedGraph.terminalCoverageComplete WeightedGraph.currentOctober2026WeightedGraphCut ≡ false
 weightedGraphTerminalCoverageStillOpen = refl
 
 weightedGraphConcentrationCoverageStillOpen :
-  WeightedGraph.concentrationCoverageComplete
-    WeightedGraph.currentOctober2026WeightedGraphCut
-  ≡ false
+  WeightedGraph.concentrationCoverageComplete WeightedGraph.currentOctober2026WeightedGraphCut ≡ false
 weightedGraphConcentrationCoverageStillOpen = refl
 
 partialBoundsStillDoNotPromotePointEstimate :
-  Bounds.pointEstimatePromotionAllowed Bounds.currentPartialCoordinateCut
-  ≡ false
+  Bounds.pointEstimatePromotionAllowed Bounds.currentPartialCoordinateCut ≡ false
 partialBoundsStillDoNotPromotePointEstimate = refl
 
 anthropicKnownCustomerHHILowerBoundBps :
@@ -93,11 +76,39 @@ anthropicKnownCustomerHHIUpperBoundBps :
 anthropicKnownCustomerHHIUpperBoundBps = refl
 
 reportedRevenueStillNotTerminalAuthority :
-  Authority.classifyAICapitalPerformance false true true true
-  ≡ Authority.noTerminalPayerAuthority
+  Authority.classifyAICapitalPerformance false true true true ≡ Authority.noTerminalPayerAuthority
 reportedRevenueStillNotTerminalAuthority = refl
 
-allCapitalBoundariesDischargedClassifiesCertified :
-  Authority.classifyAICapitalPerformance true true true true
+legacyAllCapitalBoundariesDischargedClassifiesCertified :
+  Authority.classifyAICapitalPerformance true true true true ≡ Authority.realizedCapitalRecoveryCertified
+legacyAllCapitalBoundariesDischargedClassifiesCertified = refl
+
+runtimeParityMustCloseBeforeAuthority :
+  Authority.classifyAICapitalPerformanceMaxCut false true true true true true true
+  ≡ Authority.runtimeParityUnresolved
+runtimeParityMustCloseBeforeAuthority = refl
+
+rolloverIsIndependentAuthorityRung :
+  Authority.classifyAICapitalPerformanceMaxCut true true true true false true true
+  ≡ Authority.rolloverOrRefinancingUnresolved
+rolloverIsIndependentAuthorityRung = refl
+
+persistenceIsIndependentAuthorityRung :
+  Authority.classifyAICapitalPerformanceMaxCut true true true true true true false
+  ≡ Authority.persistenceOrRobustnessUnresolved
+persistenceIsIndependentAuthorityRung = refl
+
+allMaxCutBoundariesDischargedClassifiesCertified :
+  Authority.classifyAICapitalPerformanceMaxCut true true true true true true true
   ≡ Authority.realizedCapitalRecoveryCertified
-allCapitalBoundariesDischargedClassifiesCertified = refl
+allMaxCutBoundariesDischargedClassifiesCertified = refl
+
+currentExecutableParityRemainsOpen :
+  Parity.classifyRuntimeAuthorityParity Parity.currentRuntimeParity20261007
+  ≡ Authority.runtimeParityUnresolved
+currentExecutableParityRemainsOpen = refl
+
+closedSyntheticExecutableParityReachesAuthority :
+  Parity.classifyRuntimeAuthorityParity Parity.syntheticClosedRuntimeParity
+  ≡ Authority.realizedCapitalRecoveryCertified
+closedSyntheticExecutableParityReachesAuthority = refl

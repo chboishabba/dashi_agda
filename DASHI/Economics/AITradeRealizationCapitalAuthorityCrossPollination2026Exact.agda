@@ -11,21 +11,19 @@ import DASHI.Economics.DashiTradeAICapitalStressRuntimeCrossPollination2026Exact
 
 ------------------------------------------------------------------------
 -- TRADE REALISATION AUTHORITY -> AI CAPITAL REALISATION AUTHORITY
---
--- dashiTRADE distinguishes proposal/performance metrics from realized net
--- returns after viability and trajectory costs.  The AI-capital analogue is:
--- reported revenue, EBITDA, utilisation, backlog or valuation are intermediate
--- metrics until the capital trajectory retains funding, depreciation,
--- replacement-capex, obsolescence and terminal-payer obligations.
 ------------------------------------------------------------------------
 
 data AICapitalPerformanceResidual : Set where
+  runtimeParityUnresolved : AICapitalPerformanceResidual
   noTerminalPayerAuthority : AICapitalPerformanceResidual
   fundingCostUnresolved : AICapitalPerformanceResidual
   depreciationOrReplacementUnresolved : AICapitalPerformanceResidual
+  rolloverOrRefinancingUnresolved : AICapitalPerformanceResidual
   obsolescenceResidual : AICapitalPerformanceResidual
+  persistenceOrRobustnessUnresolved : AICapitalPerformanceResidual
   realizedCapitalRecoveryCertified : AICapitalPerformanceResidual
 
+-- Legacy four-boundary surface retained for existing consumers.
 classifyAICapitalPerformance :
   Bool → Bool → Bool → Bool → AICapitalPerformanceResidual
 classifyAICapitalPerformance false funding replacement obsolescence =
@@ -37,6 +35,33 @@ classifyAICapitalPerformance true true false obsolescence =
 classifyAICapitalPerformance true true true false = obsolescenceResidual
 classifyAICapitalPerformance true true true true =
   realizedCapitalRecoveryCertified
+
+-- Exact max-cut surface.  No runtime state can enter the economic ladder until
+-- same-object parity is established.  Rollover/refinancing and persistence are
+-- explicit rungs rather than being silently absorbed into another label.
+classifyAICapitalPerformanceMaxCut :
+  Bool → Bool → Bool → Bool → Bool → Bool → Bool → AICapitalPerformanceResidual
+classifyAICapitalPerformanceMaxCut false terminal funding replacement rollover obsolescence persistence =
+  runtimeParityUnresolved
+classifyAICapitalPerformanceMaxCut true false funding replacement rollover obsolescence persistence =
+  noTerminalPayerAuthority
+classifyAICapitalPerformanceMaxCut true true false replacement rollover obsolescence persistence =
+  fundingCostUnresolved
+classifyAICapitalPerformanceMaxCut true true true false rollover obsolescence persistence =
+  depreciationOrReplacementUnresolved
+classifyAICapitalPerformanceMaxCut true true true true false obsolescence persistence =
+  rolloverOrRefinancingUnresolved
+classifyAICapitalPerformanceMaxCut true true true true true false persistence =
+  obsolescenceResidual
+classifyAICapitalPerformanceMaxCut true true true true true true false =
+  persistenceOrRobustnessUnresolved
+classifyAICapitalPerformanceMaxCut true true true true true true true =
+  realizedCapitalRecoveryCertified
+
+runtimeParityResidualIsNotCertified :
+  classifyAICapitalPerformanceMaxCut false true true true true true true
+  ≡ realizedCapitalRecoveryCertified → ⊥
+runtimeParityResidualIsNotCertified ()
 
 noTerminalPayerIsNotCertified :
   classifyAICapitalPerformance false true true true
@@ -53,10 +78,20 @@ replacementResidualIsNotCertified :
   ≡ realizedCapitalRecoveryCertified → ⊥
 replacementResidualIsNotCertified ()
 
+rolloverResidualIsNotCertified :
+  classifyAICapitalPerformanceMaxCut true true true true false true true
+  ≡ realizedCapitalRecoveryCertified → ⊥
+rolloverResidualIsNotCertified ()
+
 obsolescenceResidualIsNotCertified :
   classifyAICapitalPerformance true true true false
   ≡ realizedCapitalRecoveryCertified → ⊥
 obsolescenceResidualIsNotCertified ()
+
+persistenceResidualIsNotCertified :
+  classifyAICapitalPerformanceMaxCut true true true true true true false
+  ≡ realizedCapitalRecoveryCertified → ⊥
+persistenceResidualIsNotCertified ()
 
 data ReportedRevenueImpliesCapitalAuthorityPermission : Set where
 data ReportedEBITDAImpliesCapitalAuthorityPermission : Set where
@@ -94,7 +129,7 @@ terminalSignalFirewall = Terminal.surroundingSignalsDoNotAutoPromoteToEconomicVa
 
 runtimeBoundaryStatement : String
 runtimeBoundaryStatement =
-  "The dashiTRADE terminal-authority seam survives cross-pollination: AI revenue, EBITDA, backlog, utilisation and valuation remain pre-terminal metrics until external payer, funding-cost, depreciation/replacement and obsolescence obligations are discharged."
+  "The dashiTRADE terminal-authority seam survives cross-pollination: AI revenue, EBITDA, backlog, utilisation and valuation remain pre-terminal metrics until same-object parity, external payer, funding-cost, depreciation/replacement, rollover/refinancing, obsolescence and persistence obligations are discharged."
 
 runtimeStateStillSeparate : Runtime.RuntimeObservedAIState
 runtimeStateStillSeparate = Runtime.candidateOctober2026RuntimeState
