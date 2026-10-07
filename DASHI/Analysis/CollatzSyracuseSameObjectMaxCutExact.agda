@@ -33,6 +33,8 @@ import DASHI.Analysis.CollatzSyracuseAlignedBlockUniformityExact
 import DASHI.Analysis.CollatzSyracuseSamplingPushforwardExact
 import DASHI.Analysis.CollatzSyracuseParityBernoulliExact
 import DASHI.Analysis.CollatzSyracuseParityDescentEventExact
+import DASHI.Analysis.CollatzSyracuseFiveEightTailExact
+import DASHI.Analysis.CollatzSyracuseAlignedBlockDescentExact
 import DASHI.Analysis.CollatzSyracusePrefixAbsorptionWeldExact
 import DASHI.Analysis.CollatzSyracuseUniformHittingBlockExact
 import DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact
@@ -76,6 +78,7 @@ data CollatzCut : Set where
   C12b-exactBadWordNumerator : CollatzCut
   C12c-exponentialBadWordTail : CollatzCut
   C12d-prefixAbsorption : CollatzCut
+  C13a-alignedBlockLiteralDescent : CollatzCut
   C13-integerStoppingTransport : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
@@ -108,8 +111,9 @@ cutStatus C11d-unalignedBoundaryFragments = conditionalOnHypothesis
 cutStatus C11e-logWeightedSampling = sourceSpecificOpen
 cutStatus C12a-directParityBernoulliLaw = proved
 cutStatus C12b-exactBadWordNumerator = proved
-cutStatus C12c-exponentialBadWordTail = sourceSpecificOpen
+cutStatus C12c-exponentialBadWordTail = proved
 cutStatus C12d-prefixAbsorption = conditionalOnHypothesis
+cutStatus C13a-alignedBlockLiteralDescent = proved
 cutStatus C13-integerStoppingTransport = conditionalOnHypothesis
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
@@ -155,6 +159,10 @@ exactBadWordNumeratorPaid :
   cutStatus C12b-exactBadWordNumerator ≡ proved
 exactBadWordNumeratorPaid = refl
 
+exponentialBadWordTailPaid :
+  cutStatus C12c-exponentialBadWordTail ≡ proved
+exponentialBadWordTailPaid = refl
+
 affineCorrectionBoundPaid :
   cutStatus C7c-affineCorrectionBound ≡ proved
 affineCorrectionBoundPaid = refl
@@ -162,6 +170,10 @@ affineCorrectionBoundPaid = refl
 parityCountDescentPaid :
   cutStatus C7d-parityCountDescentCriterion ≡ proved
 parityCountDescentPaid = refl
+
+alignedBlockLiteralDescentPaid :
+  cutStatus C13a-alignedBlockLiteralDescent ≡ proved
+alignedBlockLiteralDescentPaid = refl
 
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
@@ -191,4 +203,4 @@ record MaxCutBoundary : Set where
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 0 1 1
