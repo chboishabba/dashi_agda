@@ -1,0 +1,33 @@
+module DASHI.Governance.BoloBoloComparatorEvidenceInstantiationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact as Capstone
+
+provenancePreserved :
+  Capstone.independentComparatorProvenancePreserved Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+provenancePreserved = refl
+
+sameContextTransitionPaid :
+  Capstone.sameContextOWSStructuralTransitionPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+sameContextTransitionPaid = refl
+
+mixedSpokesEvidencePaid :
+  Capstone.mixedSpokesMechanismEvidencePaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+mixedSpokesEvidencePaid = refl
+
+comparatorCadencePaid :
+  Capstone.comparatorGovernanceCadenceCoordinatesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+comparatorCadencePaid = refl
+
+primarySpokesMinutesStillUnpaid :
+  Capstone.underlyingPrimarySpokesMinutesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
+primarySpokesMinutesStillUnpaid = refl
+
+targetBoundsStillUnpaid :
+  Capstone.targetQualifiedPrimitiveBoloCostBoundsPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
+targetBoundsStillUnpaid = refl
+
+comparatorsDoNotEstablishSuperiority :
+  Capstone.comparatorEvidenceAloneEstablishesBoloSuperiority Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
+comparatorsDoNotEstablishSuperiority = refl
