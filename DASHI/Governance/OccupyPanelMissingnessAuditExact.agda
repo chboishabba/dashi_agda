@@ -13,6 +13,7 @@ record PanelMissingnessAudit : Set where
   field
     owsDevelopmentRecordCount : Nat
     owsLexicalObservedCount : Nat
+    owsInterfaceLexicalObservedCount : Nat
     owsDurationObservedCount : Nat
     peoplesLibrarySourceExplicitPanelRows : Nat
     peoplesLibraryNetworkFeatureRows : Nat
@@ -21,7 +22,7 @@ record PanelMissingnessAudit : Set where
 open PanelMissingnessAudit public
 
 canonicalMissingnessAudit : PanelMissingnessAudit
-canonicalMissingnessAudit = panelMissingnessAudit 38 38 6 7 5 0
+canonicalMissingnessAudit = panelMissingnessAudit 38 38 38 6 7 5 0
 
 record MissingnessBoundary : Set where
   constructor missingnessBoundary
@@ -47,6 +48,6 @@ canonicalMissingnessAuditReceipt =
     "Occupy meeting-panel missingness and documentary-completeness audit"
     "DASHI.Governance.OccupyPanelMissingnessAuditExact"
     "canonicalMissingnessBoundary"
-    "pins thirty-eight development OWS lexical rows, six source-explicit OWS duration rows, seven source-explicit People's Library panel rows, five People's Library network-feature rows, and zero rows currently carrying a documentary-completeness proof"
+    "pins thirty-eight development OWS general lexical rows, thirty-eight development OWS interface-process lexical rows, six source-explicit OWS duration rows, seven source-explicit People's Library panel rows, five People's Library network-feature rows, and zero rows currently carrying a documentary-completeness proof"
     "missing values are not zero or reverse-engineered from anonymisation markers; missingness is not assumed ignorable, complete cases are not assumed representative, transcript length does not prove documentary completeness, and source regime remains an explicit analysis coordinate"
     "agda -i . DASHI/Governance/OccupyPanelMissingnessAuditRegression.agda"
