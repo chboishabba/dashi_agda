@@ -10,6 +10,7 @@ on:
       - 'scripts/check_m22d2_276_ten_factor_identification_screen.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
       - 'scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh'
+      - 'scripts/render_twob_char2_extension_runtime_certificate.py'
       - '.github/workflows/twob-char2-extension-screens.yml'
   pull_request:
     paths:
@@ -17,6 +18,7 @@ on:
       - 'scripts/check_m22d2_276_ten_factor_identification_screen.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
       - 'scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh'
+      - 'scripts/render_twob_char2_extension_runtime_certificate.py'
       - '.github/workflows/twob-char2-extension-screens.yml'
 
 permissions:
@@ -29,14 +31,25 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: DeterminateSystems/nix-installer-action@v17
       - name: Install GAP AtlasRep
         run: |
           sudo apt-get update
           sudo apt-get install -y gap gap-atlasrep gap-ctbllib python3
-      - name: Identify M22:2 ten-factors inside duad 276
+      - name: Identify M22:2 stable ten-subquotient inside duad 276
         run: bash scripts/check_m22d2_276_ten_factor_identification_screen.sh
       - name: Identify Fi22:2 natural 2^10 Completion10 donor
         run: bash scripts/check_fi22d2_2pow10_m22d2_natural_module_screen.sh
+      - name: Render exact Agda runtime certificate
+        run: |
+          python3 scripts/render_twob_char2_extension_runtime_certificate.py \
+            build/m22d2_276_ten_factor_identification_screen.json \
+            build/fi22d2_2pow10_m22d2_natural_module_screen.json \
+            DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
+      - name: Typecheck generated runtime certificate
+        run: |
+          scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
       - name: Upload characteristic-two runtime receipts
         uses: actions/upload-artifact@v4
         with:
@@ -44,3 +57,4 @@ jobs:
           path: |
             build/m22d2_276_ten_factor_identification_screen.json
             build/fi22d2_2pow10_m22d2_natural_module_screen.json
+            DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
