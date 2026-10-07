@@ -22,18 +22,6 @@ import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExac
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
 
-------------------------------------------------------------------------
--- A -> E strongest-current terminal owner.
---
--- Existing GRQFT machinery already supplies a nonlinear de-Sitter/Kottler
--- junction and a stronger Nambu-Goto/Israel bubble with positive metric mass,
--- positive Newton G, DEC-compatible shell stress and outward exterior
--- acceleration.  Concrete mechanical/lapse observables are now projected from
--- that SAME selected geometry.  Schuetzhold's controlled optical energy-
--- exchange channel additionally requires deliberate time-dependent modulation
--- of the otherwise static candidate geometry.
-------------------------------------------------------------------------
-
 stageASourceContract : Source.LocalizedAnisotropicRepulsiveShellWitness
 stageASourceContract = Source.canonicalLocalizedAnisotropicRepulsiveShellWitness
 
@@ -117,6 +105,7 @@ record AntigravityABCDEFrontier : Set where
     stageCOutwardExteriorAccelerationConstructed : Bool
     stageDConcreteMechanicalObservablesConstructed : Bool
     stageDConcreteLapseCarriersConstructed : Bool
+    stageDKottlerAmplitudeToMetricPerturbationClosed : Bool
     stageDFourChannelProjectionCompiled : Bool
     stageESameObjectComparatorCompiled : Bool
     oppositeCouplingNotPromotedToOppositeGeometry : Bool
@@ -127,7 +116,8 @@ record AntigravityABCDEFrontier : Set where
     sourceNativeCMP119PotentialCouplingStillOpen : Bool
     finiteThicknessWallStillOpen : Bool
     SIStressCalibrationStillOpen : Bool
-    dynamicOpticalModulationOfStaticDeviceStillOpen : Bool
+    physicalAmplitudeModulationStillOpen : Bool
+    schutzholdTTModeSameObjectStillOpen : Bool
     physicalDeviceStressRealisationStillOpen : Bool
     apparatusCalibrationStillOpen : Bool
     empiricalReplicationStillOpen : Bool
@@ -135,8 +125,8 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true true true true true true true true
-    false true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true
+    false true true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -146,10 +136,11 @@ record AntigravityABCDEPromotionBoundary : Set where
     selectedNambuGotoSurfaceEquationOfStateClosed : Bool
     normalizedCMP119TensorTransportClosed : Bool
     concreteMechanicalObservableProjectionClosed : Bool
+    kottlerAmplitudeToMetricPerturbationClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
     sourceNativeTwoAmplitudeReadoutClosed : Bool
     sourceNativePinnedStressSameObjectClosed : Bool
-    dynamicSchutzholdReadoutForDeviceClosed : Bool
+    dynamicSchutzholdTTReadoutForDeviceClosed : Bool
     fullPhysicalDeviceDemonstrated : Bool
     weightOnlyObservationProvesMetric : Bool
     opticalOnlyObservationProvesAntigravity : Bool
@@ -158,4 +149,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true false false false false false false true
+    true true true true true true true false false false false false false true
