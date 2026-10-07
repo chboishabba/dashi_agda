@@ -22,6 +22,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Product using (_×_; _,_)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Moonshine.Base369Ternary27FaceHypercubeAttachmentBidiExact as FaceAxis
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
@@ -67,7 +68,7 @@ modulationRoleBasis = H.modulationBasis
 canonicalDualPairNontrivial :
   (axis : G.Axis6) →
   H.symplecticPair (translationRoleBasis axis) (modulationRoleBasis axis)
-  ≡ DASHI.Algebra.Trit.pos
+  ≡ Trit.pos
 canonicalDualPairNontrivial = H.canonicalBasisPairIsNontrivial
 
 ------------------------------------------------------------------------
