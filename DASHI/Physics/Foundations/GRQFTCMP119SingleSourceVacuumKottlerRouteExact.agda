@@ -15,6 +15,17 @@ import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as Geometry
 
+------------------------------------------------------------------------
+-- One literal source scale is sufficient for the normalized static geometry.
+--
+-- IMPORTANT PROMOTION FIREWALL:
+-- `sourceAmplitude` is the existing LocalizedAction rational readout of the
+-- literal CMP119 vacuum term.  `vacuumStressAt sourceAmplitude` is the repo's
+-- normalized GRQFT stress-ray compiler.  This file does NOT prove that the
+-- action readout is already the physically SI-normalized cosmological Lambda.
+-- That metric-variation / physical-normalization weld remains separate.
+------------------------------------------------------------------------
+
 record SingleSourceVacuum
     {Density Background Fluctuation : Set}
     (source : Source.CMP119Section2SourceNativeState
@@ -55,8 +66,6 @@ record SingleSourceVacuumKottlerCandidate
     positiveInteriorLapseRoot : 0ℚ < interiorLapseRoot
     positiveExteriorLapseRoot : 0ℚ < exteriorLapseRoot
 
-    -- Denominator-cleared source/geometry identification.  This avoids
-    -- manufacturing cancellation by radius^2 inside the rational lane.
     sourceAmplitudeMatchesInteriorScaledGeometry :
       (sourceAmplitude selected * radius * radius)
       ≡ Geometry.three * (1ℚ - interiorLapseRoot * interiorLapseRoot)
@@ -77,7 +86,6 @@ record SingleSourceVacuumKottlerCandidate
       0ℚ < Geometry.sameVacuumSECViolationMargin
         radius interiorLapseRoot exteriorLapseRoot
 
-  -- The exact exterior scaled-amplitude identity now follows without division.
   sameSourceAmplitudeFeedsInteriorExterior :
     (sourceAmplitude selected * radius * radius) * radius
     ≡ Geometry.sameVacuumExteriorScaledAmplitude
@@ -98,9 +106,11 @@ record SingleSourceVacuumKottlerBoundary : Set where
     secondSourceVacuumScaleRequired : Bool
     exactFixtureAmplitudeRequired : Bool
     oneScaleGeometricAdmissibilityStillRequired : Bool
+    actionReadoutAloneProvesPhysicalCosmologicalAmplitude : Bool
+    physicalMetricAmplitudeWeldStillRequired : Bool
 
 canonicalSingleSourceVacuumKottlerBoundary :
   SingleSourceVacuumKottlerBoundary
 canonicalSingleSourceVacuumKottlerBoundary =
   single-source-vacuum-kottler-boundary
-    true true true true false false true
+    true true true true false false true false true
