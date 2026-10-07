@@ -1,7 +1,6 @@
 module DASHI.Governance.FederatedGovernanceEvidenceInstantiationRegression where
 
 open import DASHI.Core.Prelude
-
 import DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact as Capstone
 
 sourcesRemainDistinct :
@@ -11,6 +10,14 @@ sourcesRemainDistinct = refl
 curationDoesNotBecomeMinuteAuthorship :
   Capstone.curatedArchiveMetadataBecomesUnderlyingMinuteAuthorship Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 curationDoesNotBecomeMinuteAuthorship = refl
+
+rawNamesNotRequiredForCorrelation :
+  Capstone.rawParticipantNamesRequiredForCorrelation Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
+rawNamesNotRequiredForCorrelation = refl
+
+participantPseudonymisationPaid :
+  Capstone.dashiPaysParticipantPseudonymisation Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+participantPseudonymisationPaid = refl
 
 occupyCorpusMaterialised :
   Capstone.occupyCorpusMaterialisationPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
