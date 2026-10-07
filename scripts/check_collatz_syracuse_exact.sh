@@ -16,6 +16,7 @@ grep -q 'shortcutSyracuseParityTrue' "$owner"
 grep -q 'syracuseIterateSuc' "$owner"
 
 formal_files=(
+  DASHI/Core/BinaryWordIntegerChernoffExact.agda
   DASHI/NumberTheory/Collatz/SyracuseExact.agda
   DASHI/NumberTheory/Collatz/SyracuseParityItineraryExact.agda
   DASHI/NumberTheory/Collatz/SyracusePow2ArithmeticExact.agda
@@ -37,6 +38,8 @@ formal_files=(
   DASHI/Analysis/CollatzSyracuseAlignedBlockUniformityExact.agda
   DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
   DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
+  DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
+  DASHI/Analysis/CollatzSyracuseHoeffdingMathlibBoundaryExact.agda
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 )
 
@@ -60,7 +63,11 @@ grep -q 'strictAffineMarginImpliesDescent' \
   DASHI/NumberTheory/Collatz/SyracuseAffineDescentMarginExact.agda
 grep -q 'coarseParityMarginImpliesDescent' \
   DASHI/NumberTheory/Collatz/SyracuseAffineCorrectionBoundExact.agda
+grep -q 'integerChernoff' \
+  DASHI/Core/BinaryWordIntegerChernoffExact.agda
 grep -q 'badWordCount' \
   DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
+grep -q 'fiveEightBadWordBound' \
+  DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
