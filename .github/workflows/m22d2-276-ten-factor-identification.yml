@@ -1,0 +1,38 @@
+name: M22d2 276 ten-factor identification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/2b-same-object-final-maxcut-20261007
+    paths:
+      - 'scripts/m22d2_276_ten_factor_identification_screen.g'
+      - 'scripts/check_m22d2_276_ten_factor_identification_screen.sh'
+      - '.github/workflows/m22d2-276-ten-factor-identification.yml'
+  pull_request:
+    paths:
+      - 'scripts/m22d2_276_ten_factor_identification_screen.g'
+      - 'scripts/check_m22d2_276_ten_factor_identification_screen.sh'
+      - '.github/workflows/m22d2-276-ten-factor-identification.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  gap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install GAP AtlasRep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gap gap-atlasrep gap-ctbllib python3
+      - name: Run M22:2-on-duad-276 ten-factor screen
+        run: bash scripts/check_m22d2_276_ten_factor_identification_screen.sh
+      - name: Upload runtime receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: m22d2-276-ten-factor-identification
+          path: build/m22d2_276_ten_factor_identification_screen.json
