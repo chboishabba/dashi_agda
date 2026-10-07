@@ -3,34 +3,32 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 ------------------------------------------------------------------------
 -- CLAY-FACING B / PURE-ANALYSIS FRONTIER AFTER PR #1039 MERGE
 --
--- The representation/provenance programme is frozen.  This owner records only
--- theorem-producing analytic routes.
+-- Representation/provenance is frozen.  This board now records only the
+-- theorem-producing physical estimates on already-literal carriers.
 --
--- B4 has now advanced one more exact step.  The literal critical-touching row
--- fold is partitioned on the SAME row carrier into
+-- B4:
+--   the SAME literal critical-touching row carrier is already split as
+--   Core-Core principal + Core-noncore defect.  Remaining: the two uniform
+--   physical estimates and thetaP+thetaD<1.
 --
---   principal = literal Core-Core rows,
---   defect    = literal Core-noncore rows,
+-- B1:
+--   literal DFL-DFL rows, actual shell indices, canonical shell support,
+--   finite Bernstein shell payment, and shell folding are already compiled.
+--   Remaining: populate the literal physical shell receipts and pay their
+--   summed budget by one output-local ED with cutoff-independent coefficient.
 --
--- with the exact live identity
+-- B2:
+--   literal DFL-DHH rows and cardinality-free shell-pair folding are compiled.
+--   Remaining: physical shell-pair population + the per-shell signed
+--   null/Bernstein estimate + local-ED allocation with uniform coefficient.
 --
---   criticalTouchingSigned = principal + defect.
+-- B3:
+--   literal DHH-DHH rows, low-output component estimate, shell-gap summation,
+--   and cardinality-free shell folding are compiled.  Remaining: physical
+--   shell population + the intra-shell signed L2 estimate + local-ED allocation
+--   with uniform coefficient.
 --
--- Therefore the remaining B4 theorem is no longer to discover a decomposition.
--- It is exactly the pair of physical estimates
---
---   principal <= thetaP Mcore + cP ED
---   defect    <= thetaD Mcore + cD ED
---   thetaP + thetaD < 1,
---
--- uniformly in physical state/output/cutoff.  The generic strict-split
--- compiler then closes the literal B4 payment.  The older fixed quarter route
--- remains an optional producer only.
---
--- Preferred B7/Q4 route remains pointwise Gram -> dissipation, because ordinary
--- monotone/scaled integration is already compiled.  E+ remains one uniform
--- global amplitude-sum bound because finite output aggregation is cardinality
--- free.
+-- Q4 and E+ remain their already-sharpened physical producer leaves.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -40,14 +38,20 @@ import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as 
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact as LiteralSplit
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as B2
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as B3
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionLiteralPairExtractionMaxCutExact as Extract
+import DASHI.Physics.Closure.NSTriadKNHeterochiralHHGapEnvelopeRound136Exact as R136
+import DASHI.Physics.Closure.NSTriadKNR106ComponentLowOutputBoundRound574Exact as R574
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact as Q4Pointwise
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpointAmplitudeMaxCutExact as EndpointAmplitude
 
 data PureBAnalyticLeaf : Set where
   b4PrincipalDefectPhysicalEstimates : PureBAnalyticLeaf
-  b1LiteralRowsED : PureBAnalyticLeaf
-  b2LiteralRowsED : PureBAnalyticLeaf
-  b3LiteralRowsED : PureBAnalyticLeaf
+  b1PhysicalShellReceiptsToLocalED : PureBAnalyticLeaf
+  b2PhysicalSignedShellPairsToLocalED : PureBAnalyticLeaf
+  b3PhysicalIntraShellSignedL2ToLocalED : PureBAnalyticLeaf
   q4PointwisePhysicalGram : PureBAnalyticLeaf
   ePositiveGlobalAmplitudeSum : PureBAnalyticLeaf
   q5SignedQuinticFallback : PureBAnalyticLeaf
@@ -55,12 +59,9 @@ data PureBAnalyticLeaf : Set where
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
 pureBLeafClosed b4PrincipalDefectPhysicalEstimates = false
-pureBLeafClosed b1LiteralRowsED =
-  Previous.finalBLeafClosed Previous.b1LiteralRowsLocalED
-pureBLeafClosed b2LiteralRowsED =
-  Previous.finalBLeafClosed Previous.b2LiteralRowsLocalED
-pureBLeafClosed b3LiteralRowsED =
-  Previous.finalBLeafClosed Previous.b3LiteralRowsLocalED
+pureBLeafClosed b1PhysicalShellReceiptsToLocalED = b1PhysicalProducerClosed
+pureBLeafClosed b2PhysicalSignedShellPairsToLocalED = b2PhysicalProducerClosed
+pureBLeafClosed b3PhysicalIntraShellSignedL2ToLocalED = b3PhysicalProducerClosed
 pureBLeafClosed q4PointwisePhysicalGram =
   Q4Pointwise.q4PointwisePhysicalGramEstimateClosedHere
 pureBLeafClosed ePositiveGlobalAmplitudeSum =
@@ -98,6 +99,82 @@ b4QuarterMarginOptionalCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
 
 b4ResearchLeafNowOnlyPhysicalEstimates : Bool
 b4ResearchLeafNowOnlyPhysicalEstimates = true
+
+------------------------------------------------------------------------
+-- B1 exact cut.
+------------------------------------------------------------------------
+
+b1LiteralRowsExtracted : Bool
+b1LiteralRowsExtracted = Extract.b1LiteralDFLPairExtractionClosed
+
+b1ShellPaymentCompilerClosed : Bool
+b1ShellPaymentCompilerClosed = B1.deepFarLowLiteralInfinityShellFoldCompilerClosed
+
+b1CanonicalShellSupportClosed : Bool
+b1CanonicalShellSupportClosed = B1.deepFarLowLiteralInfinityShellSupportChoiceClosed
+
+b1PhysicalReceiptPopulationClosed : Bool
+b1PhysicalReceiptPopulationClosed =
+  B1.deepFarLowLiteralInfinityShellPhysicalExtractorInhabitedHere
+
+b1LocalEDAllocationClosed : Bool
+b1LocalEDAllocationClosed =
+  B1.deepFarLowLiteralInfinityShellLocalEDAllocationInhabitedHere
+
+b1PhysicalProducerClosed : Bool
+b1PhysicalProducerClosed = false
+
+------------------------------------------------------------------------
+-- B2 exact cut.
+------------------------------------------------------------------------
+
+b2LiteralRowsExtracted : Bool
+b2LiteralRowsExtracted = Extract.b2LiteralDFLDHHPairExtractionClosed
+
+b2ShellFoldCompilerClosed : Bool
+b2ShellFoldCompilerClosed = B2.deepFarLowDeepHHBipartiteShellFoldClosed
+
+b2PhysicalShellPairPopulationClosed : Bool
+b2PhysicalShellPairPopulationClosed =
+  B2.deepFarLowDeepHHLiteralShellPairExtractorInhabitedHere
+
+b2PerShellSignedEstimateClosed : Bool
+b2PerShellSignedEstimateClosed =
+  B2.deepFarLowDeepHHPerShellNullBernsteinEstimateInhabitedHere
+
+b2PhysicalProducerClosed : Bool
+b2PhysicalProducerClosed = false
+
+------------------------------------------------------------------------
+-- B3 exact cut.
+------------------------------------------------------------------------
+
+b3LiteralRowsExtracted : Bool
+b3LiteralRowsExtracted = Extract.b3LiteralDHHPairExtractionClosed
+
+b3ShellFoldCompilerClosed : Bool
+b3ShellFoldCompilerClosed = B3.deepHHShellFoldClosed
+
+b3GapSummationClosed : Bool
+b3GapSummationClosed = R136.round136HHGapIndexSummationClosed
+
+b3ComponentLowOutputClosed : Bool
+b3ComponentLowOutputClosed =
+  R574.round574AllFourPhysicalHelicalComponentsHaveLowOutputBound
+
+b3GapAndComponentInfrastructureClosed : Bool
+b3GapAndComponentInfrastructureClosed = true
+
+b3PhysicalShellPopulationClosed : Bool
+b3PhysicalShellPopulationClosed =
+  B3.deepHHLiteralFilteredBlockShellExtractorInhabitedHere
+
+b3IntraShellSignedL2Closed : Bool
+b3IntraShellSignedL2Closed =
+  B3.deepHHIntraShellSignedL2AggregationInhabitedHere
+
+b3PhysicalProducerClosed : Bool
+b3PhysicalProducerClosed = false
 
 ------------------------------------------------------------------------
 -- B7 compiler surface.
@@ -145,6 +222,25 @@ b4LiteralPrincipalDefectSplitClosedIsTrue = refl
 b4PrincipalDefectPhysicalEstimatesClosedIsFalse :
   b4PrincipalDefectPhysicalEstimatesClosed ≡ false
 b4PrincipalDefectPhysicalEstimatesClosedIsFalse = refl
+
+b1ShellPaymentCompilerClosedIsTrue : b1ShellPaymentCompilerClosed ≡ true
+b1ShellPaymentCompilerClosedIsTrue = refl
+
+b1PhysicalProducerClosedIsFalse : b1PhysicalProducerClosed ≡ false
+b1PhysicalProducerClosedIsFalse = refl
+
+b2ShellFoldCompilerClosedIsTrue : b2ShellFoldCompilerClosed ≡ true
+b2ShellFoldCompilerClosedIsTrue = refl
+
+b2PhysicalProducerClosedIsFalse : b2PhysicalProducerClosed ≡ false
+b2PhysicalProducerClosedIsFalse = refl
+
+b3GapAndComponentInfrastructureClosedIsTrue :
+  b3GapAndComponentInfrastructureClosed ≡ true
+b3GapAndComponentInfrastructureClosedIsTrue = refl
+
+b3PhysicalProducerClosedIsFalse : b3PhysicalProducerClosed ≡ false
+b3PhysicalProducerClosedIsFalse = refl
 
 b4GenericStrictSplitCompilerClosedIsTrue :
   b4GenericStrictSplitCompilerClosed ≡ true
