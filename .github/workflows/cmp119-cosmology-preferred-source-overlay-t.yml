@@ -5,6 +5,10 @@ on:
     paths:
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Test.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureTest.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationExact.agda'
@@ -53,6 +57,10 @@ jobs:
             for f in \
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda \
+              DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Exact.agda \
+              DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Test.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureExact.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureTest.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationExact.agda \
