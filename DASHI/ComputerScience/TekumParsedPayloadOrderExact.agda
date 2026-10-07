@@ -3,9 +3,12 @@ module DASHI.ComputerScience.TekumParsedPayloadOrderExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Data.Empty using (⊥-elim)
-open import Data.Integer.Base as ℤ using (+_; -_; _+_; _<_ ; +<+)
+open import Data.Integer.Base as ℤ using (+_; -_; _+_; _<_; +<+)
 import Data.Integer.Properties as ℤP
+import Data.List.Base as List
 import Data.Nat.Properties as NatP
+open import Data.Rational.Base as ℚ using (_<_)
+import Data.Vec.Base as Vec
 import Data.Vec.Properties as VecP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
@@ -19,6 +22,7 @@ open +-*-Solver using () renaming
 open import Relation.Binary.Definitions using (tri<; tri≈; tri>)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.Algebra.BalancedTernaryPositionalInjectiveExact as Positional
 import DASHI.Algebra.BalancedTernaryRankReconstructionExact as Rank
@@ -27,19 +31,17 @@ import DASHI.ComputerScience.TekumFractionOrderExact as FractionOrder
 import DASHI.ComputerScience.TekumMonotoneMagnitudeExact as Monotone
 import DASHI.ComputerScience.TekumOrdinaryFactorizationExact as Factor
 import DASHI.ComputerScience.TekumParsedAnchorCodeExact as Code
+import DASHI.ComputerScience.TekumParsedAnchorListExact as AnchorList
 import DASHI.ComputerScience.TekumParsedBandMembershipExact as Parsed
 import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
-import DASHI.ComputerScience.TekumSignificandRangeExact as Sig
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
-import DASHI.ComputerScience.TekumSourceWordRoundTripExact as RoundTrip
-import DASHI.ComputerScience.TekumParsedAnchorListExact as AnchorList
 
 ------------------------------------------------------------------------
 -- CENTERED INTEGER ORDER FROM SHIFTED BASE-THREE CODE ORDER
 ------------------------------------------------------------------------
 
 integerFromNatCode :
-  ∀ {n} (word : Data.Vec.Base.Vec DASHI.Algebra.Trit.Trit n) →
+  ∀ {n} (word : Vec.Vec Trit.Trit n) →
   BT.toInteger (BT.eval word)
   ≡ (+ (Positional.natCode word)) ℤ.+ (ℤ.- (+ (Positional.center n)))
 integerFromNatCode {n} word
@@ -51,7 +53,7 @@ integerFromNatCode {n} word
     (+ (Positional.center n))
 
 integerStrictFromNatCodeStrict :
-  ∀ {n} {left right : Data.Vec.Base.Vec DASHI.Algebra.Trit.Trit n} →
+  ∀ {n} {left right : Vec.Vec Trit.Trit n} →
   Positional.natCode left < Positional.natCode right →
   BT.toInteger (BT.eval left) ℤ.< BT.toInteger (BT.eval right)
 integerStrictFromNatCodeStrict {n} {left} {right} codeLt
@@ -85,14 +87,14 @@ payloadCodeFormula {extra} {r} parsed =
     (cong Code.listCode (AnchorList.rejoinPayloadReverseList parsed))
     (trans
       (Code.listCodeAppend
-        (Data.Vec.Base.toList (Source.fractionLST parsed))
-        (Data.Vec.Base.toList (Source.exponentLST parsed)))
+        (Vec.toList (Source.fractionLST parsed))
+        (Vec.toList (Source.exponentLST parsed)))
       normalized)
   where
   normalized :
-    Code.listCode (Data.Vec.Base.toList (Source.fractionLST parsed))
-      + BT.pow3 (Data.List.Base.length (Data.Vec.Base.toList (Source.fractionLST parsed)))
-          * Code.listCode (Data.Vec.Base.toList (Source.exponentLST parsed))
+    Code.listCode (Vec.toList (Source.fractionLST parsed))
+      + BT.pow3 (List.length (Vec.toList (Source.fractionLST parsed)))
+          * Code.listCode (Vec.toList (Source.exponentLST parsed))
     ≡ fractionFieldCode parsed
       + BT.pow3 (Regime.fractionCount (8 + extra) r) * exponentFieldCode parsed
   normalized
@@ -145,12 +147,9 @@ laterExponentForcesReversePayloadOrder {extra} {r} left right expLt
   where
   p = BT.pow3 (Regime.fractionCount (8 + extra) r)
 
-  exponentStep : suc (exponentFieldCode right) ≤ exponentFieldCode left
-  exponentStep = expLt
-
   scaledExponentStep :
     p * suc (exponentFieldCode right) ≤ p * exponentFieldCode left
-  scaledExponentStep = NatP.*-mono-≤ NatP.≤-refl exponentStep
+  scaledExponentStep = NatP.*-mono-≤ NatP.≤-refl expLt
 
   rightBelowLeftBase :
     fractionFieldCode right + p * exponentFieldCode right
@@ -250,31 +249,17 @@ sameRegimeExponentFieldEqual :
   (right : Source.ParsedPayload extra r payload₂) →
   exponentFieldCode left ≡ exponentFieldCode right →
   Factor.sourceExponentInteger left ≡ Factor.sourceExponentInteger right
-sameRegimeExponentFieldEqual {r = r} left right codeEq =
-  cong
-    (λ z → z ℤ.+ Exact.intCodeToInteger (Regime.bias r))
-    (cong
-      (λ word → BT.toInteger (BT.eval word))
-      (Positional.natCodeInjective codeEq))
-  |> transport
-  where
-  transport :
-    (BT.toInteger (BT.eval (Source.exponentLST left))
-      ℤ.+ Exact.intCodeToInteger (Regime.bias r)
-     ≡
-     BT.toInteger (BT.eval (Source.exponentLST right))
-      ℤ.+ Exact.intCodeToInteger (Regime.bias r)) →
-    Factor.sourceExponentInteger left ≡ Factor.sourceExponentInteger right
-  transport eq
-    rewrite Source.exponentIntCodeInteger left
-          | Source.exponentIntCodeInteger right = eq
+sameRegimeExponentFieldEqual {r = r} left right codeEq
+  rewrite Source.exponentIntCodeInteger left
+        | Source.exponentIntCodeInteger right
+        | Positional.natCodeInjective codeEq = refl
 
 sameRegimePayloadOrderStrict :
   ∀ {extra r payload₁ payload₂}
   (left : Source.ParsedPayload extra r payload₁)
   (right : Source.ParsedPayload extra r payload₂) →
   SameRegimePayloadOrder left right →
-  Parsed.parsedMagnitude left Data.Rational.Base.< Parsed.parsedMagnitude right
+  Parsed.parsedMagnitude left ℚ.< Parsed.parsedMagnitude right
 sameRegimePayloadOrderStrict left right (earlierExponentField exponentLt) =
   Monotone.exponentStrictForcesMagnitudeStrict left right
     (sameRegimeExponentFieldStrict left right exponentLt)
