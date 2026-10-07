@@ -1,0 +1,31 @@
+module DASHI.Governance.AnarchyRulesSupplementalResearchArtifactsRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.AnarchyRulesSupplementalResearchArtifactsExact as Supplemental
+
+visitZipHashPinned :
+  Supplemental.packageSha256 Supplemental.visitDatesParticipationPackage
+  ≡ "3a5ae76be371ddf6ee44ec6ae08c6a9a74e0cb478c99cefcae7052acbb989b31"
+visitZipHashPinned = refl
+
+surveyHashPinned :
+  Supplemental.artifactSha256 Supplemental.membershipSurveyQuestionnaire
+  ≡ "09bb4c4be0cc7a68218a3d99a95546dfc24b0360bb9c33e1747f810f8bd8c1b6"
+surveyHashPinned = refl
+
+visitPackageMemberCountPinned :
+  Supplemental.nonDirectoryMemberCount Supplemental.visitDatesParticipationPackage ≡ 3
+visitPackageMemberCountPinned = refl
+
+questionnaireIsNotResponseData :
+  Supplemental.questionnaireContainsParticipantResponses Supplemental.canonicalSupplementalBoundary ≡ false
+questionnaireIsNotResponseData = refl
+
+researchInstrumentIsNotOccupyMinute :
+  Supplemental.supplementalArtifactsAreOWSGAMinutes Supplemental.canonicalSupplementalBoundary ≡ false
+researchInstrumentIsNotOccupyMinute = refl
+
+instrumentDoesNotValidateOccupyScaling :
+  Supplemental.supplementalArtifactsValidateOccupyScaling Supplemental.canonicalSupplementalBoundary ≡ false
+instrumentDoesNotValidateOccupyScaling = refl
