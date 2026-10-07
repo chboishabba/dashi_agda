@@ -11,6 +11,7 @@ import DASHI.Economics.AIGeometricMarketStressOperator2026Exact as Geometry
 import DASHI.Economics.AIPolicyBackstopCommercialMoat2026Exact as Policy
 import DASHI.Economics.AIAntitrustCompetitiveIndependence2026Exact as Antitrust
 import DASHI.Economics.AIMultiplexSourceWeightedGraph2026Exact as WeightedGraph
+import DASHI.Economics.AIPartialCoordinateBounds2026Exact as Bounds
 import DASHI.Economics.AITradeRealizationCapitalAuthorityCrossPollination2026Exact as Authority
 
 ------------------------------------------------------------------------
@@ -77,6 +78,19 @@ weightedGraphConcentrationCoverageStillOpen :
     WeightedGraph.currentOctober2026WeightedGraphCut
   ≡ false
 weightedGraphConcentrationCoverageStillOpen = refl
+
+partialBoundsStillDoNotPromotePointEstimate :
+  Bounds.pointEstimatePromotionAllowed Bounds.currentPartialCoordinateCut
+  ≡ false
+partialBoundsStillDoNotPromotePointEstimate = refl
+
+anthropicKnownCustomerHHILowerBoundBps :
+  Bounds.lower Bounds.anthropicCustomerConcentrationBounds ≡ 288
+anthropicKnownCustomerHHILowerBoundBps = refl
+
+anthropicKnownCustomerHHIUpperBoundBps :
+  Bounds.upper Bounds.anthropicCustomerConcentrationBounds ≡ 6064
+anthropicKnownCustomerHHIUpperBoundBps = refl
 
 reportedRevenueStillNotTerminalAuthority :
   Authority.classifyAICapitalPerformance false true true true
