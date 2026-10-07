@@ -10,7 +10,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 novelCount : V.remainingNovelSourcePackageCount ≡ 3
 novelCount = refl
 
-importedCount : V.remainingStandardImportedAuthorityCount ≡ 2
+importedCount : V.remainingStandardImportedAuthorityCount ≡ 3
 importedCount = refl
 
 totalCount : V.remainingPreferredPackageCount ≡ 4
@@ -46,11 +46,18 @@ s3SelectedMarkedSourceRemains = refl
 s3NoUniversalFamily : V.s3UniversalMarkedCurvatureFamilyRequired ≡ false
 s3NoUniversalFamily = refl
 
+s3NoFreshDecay : V.s3FreshDifferentiatedDecayTheoremRequired ≡ false
+s3NoFreshDecay = refl
+
 s3NoIndependentHilbertInequality : V.s3IndependentHilbertInequalityRequired ≡ false
 s3NoIndependentHilbertInequality = refl
 
-s3CoefficientEnergyRemains : V.s3UniformMarkedCoefficientEnergyRequired ≡ true
-s3CoefficientEnergyRemains = refl
+s3MarkedCoordinateRadiusWeldRemains :
+  V.s3MarkedCoordinateAndUniformRadiusWeldRequired ≡ true
+s3MarkedCoordinateRadiusWeldRemains = refl
+
+s3GaugeLocalSemanticsRemain : V.s3GaugeLocalSemanticsRequired ≡ true
+s3GaugeLocalSemanticsRemain = refl
 
 s3NoIndependentOscillationLimit : V.s3IndependentOscillationVanishingRequired ≡ false
 s3NoIndependentOscillationLimit = refl
