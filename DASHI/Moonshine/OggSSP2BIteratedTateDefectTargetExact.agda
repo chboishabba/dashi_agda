@@ -1,7 +1,17 @@
 module DASHI.Moonshine.OggSSP2BIteratedTateDefectTargetExact where
 
 ------------------------------------------------------------------------
--- ITERATED TATE DEFECT TARGET FOR THE 2B-PURE KLEIN-FOUR TEST
+-- ITERATED C2-TATE DEFECT TARGET FOR THE WITHIN-FIBRE OUTER ACTION
+--
+-- Geometry distinction:
+--   * the sourced S3 factor in the 2B-pure Klein-four normalizer permutes the
+--     three 2B fibres;
+--   * the Completion10 involution is the outer involution in the within-fibre
+--     M22:2 <= M24 factor.
+--
+-- Therefore this owner does NOT identify that outer involution with a second
+-- nontrivial element of the pure Klein four.  It records the C2-Tate defect of
+-- its action on one already-formed 2B Tate fibre.
 --
 -- For an involution h in characteristic two, N = h - 1 satisfies N^2 = 0.
 -- If the module decomposes as J1^a + J2^b then:
@@ -15,9 +25,9 @@ module DASHI.Moonshine.OggSSP2BIteratedTateDefectTargetExact where
 --   defect + 2 * rank(N) = ambient dimension.
 --
 -- The Completion10 target J2^5 has ambient=10, rank=5, defect=0.
--- On the full 276 Tate head the new GAP screen computes the corresponding
--- duad-side target for every outer M22:2 involution class; the actual Moonshine
--- iterated-Tate value remains a same-object test, not a promoted theorem.
+-- On the full 276 Tate head the GAP/duad route computes a corresponding
+-- within-fibre M22:2 outer-class target.  The actual Moonshine value remains a
+-- same-object extension test, not a promoted pure-Klein-four identity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -53,10 +63,11 @@ record IteratedTateComparisonBoundary : Set where
     genericDefectFormulaFormalized : Bool
     completion10ZeroDefectTargetFormalized : Bool
     duadOuterClassRuntimeScreenImplemented : Bool
-    actualTwoBKleinFourIteratedTateComputed : Bool
+    outerActionIdentifiedWithPureKleinFourElement : Bool
+    actualTwoBTateFibreOuterDefectComputed : Bool
     actualTateDefectMatchedToDuadExtension : Bool
 
 canonicalIteratedTateComparisonBoundary : IteratedTateComparisonBoundary
 canonicalIteratedTateComparisonBoundary =
   iterated-tate-comparison-boundary
-    true true true false false
+    true true true false false false
