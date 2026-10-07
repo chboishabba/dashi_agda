@@ -7,9 +7,14 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Test.agda'
       - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Test.agda'
       - 'DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda'
@@ -19,9 +24,14 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Test.agda'
       - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Test.agda'
       - 'DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda'
@@ -51,9 +61,14 @@ jobs:
         run: |
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda
