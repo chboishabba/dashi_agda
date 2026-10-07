@@ -7,6 +7,7 @@ import DASHI.Physics.ExoticGravity.EngineeredInertialGravitationalBidiExact as B
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Search
 import DASHI.Physics.ExoticGravity.WeightMetricApparentMassExact as Weight
 import DASHI.Physics.ExoticGravity.SchutzholdAntigravityTerminalMaxCutExact as Schutzhold
+import DASHI.Physics.Foundations.GRQFTLocalizedAnisotropicRepulsiveShellExact as PositiveG
 
 ------------------------------------------------------------------------
 -- DEVICE -> SOURCE -> METRIC -> MULTI-CHANNEL OBSERVABLE COMPILER
@@ -37,6 +38,13 @@ data ReversalParity : Set where
   reversalEven : ReversalParity
   reversalOdd : ReversalParity
   reversalModelSpecific : ReversalParity
+
+data GravitySourceRoute : Set where
+  ordinaryGRRoute : GravitySourceRoute
+  positiveGActiveStressRouteTag : GravitySourceRoute
+  universalNegativeGRoute : GravitySourceRoute
+  materialEffectiveNegativeGRoute : GravitySourceRoute
+  sourceSpecificEffectiveCouplingRoute : GravitySourceRoute
 
 record DeviceStateModel : Set₁ where
   constructor device-state-model
@@ -120,6 +128,40 @@ record DevicePredictions
 open DevicePredictions public
 
 ------------------------------------------------------------------------
+-- MODULATED / LOCK-IN EXPERIMENT
+--
+-- The controlled device state should be deliberately modulated so any metric
+-- response carries the imposed drive frequency/phase.  This turns the metric
+-- lane into a synchronous discriminator instead of a DC drift measurement.
+------------------------------------------------------------------------
+
+record DeviceModulationExperiment
+    (model : DeviceStateModel) : Set₁ where
+  constructor device-modulation-experiment
+  field
+    baselineState : DeviceState model
+    drivenState : DeviceState model
+
+    ModulationPhase : Set
+    ModulationFrequency : Set
+    LockInObservable : Set
+
+    drivePhase : ModulationPhase
+    modulationFrequency : ModulationFrequency
+    lockInObservable : LockInObservable
+
+    sameApparatusAcrossModulation : Set
+    sameApparatusAcrossModulationReceipt : sameApparatusAcrossModulation
+
+    modulationLockInReceipt : Set
+    modulationLockInReceiptValue : modulationLockInReceipt
+
+    expectedReversalParity :
+      DeviceControlReversal → DeviceObservationChannel → ReversalParity
+
+open DeviceModulationExperiment public
+
+------------------------------------------------------------------------
 -- Same-object calibrated comparison.
 ------------------------------------------------------------------------
 
@@ -190,6 +232,43 @@ record MetricCrossChannelWeld
 open MetricCrossChannelWeld public
 
 ------------------------------------------------------------------------
+-- POSITIVE-G / NEGATIVE-ACTIVE-STRESS ROUTE
+--
+-- The repo already contains an exact finite witness with positive density,
+-- anisotropic tension, negative integrated active source and outward exterior
+-- response under positive G.  Therefore the device search must compare this
+-- route against signed-G alternatives rather than assuming negative G is the
+-- only route to a repulsive gravitational response.
+------------------------------------------------------------------------
+
+positiveGActiveStressRoute :
+  PositiveG.LocalizedAnisotropicRepulsiveShellWitness
+positiveGActiveStressRoute =
+  PositiveG.canonicalLocalizedAnisotropicRepulsiveShellWitness
+
+existingLocalizedPositiveGRepulsiveShell :
+  PositiveG.LocalizedAnisotropicRepulsiveShellWitness
+existingLocalizedPositiveGRepulsiveShell = positiveGActiveStressRoute
+
+existingLiTorrKernel : Bidi.CommonMechanismKernel
+existingLiTorrKernel = Bidi.liTorrKernel
+
+record PositiveGActiveStressDeviceBoundary : Set where
+  constructor positive-g-active-stress-device-boundary
+  field
+    positiveGActiveStressRouteAlreadyConstructed : Bool
+    negativeGRequiredForOutwardExteriorResponse : Bool
+    negativeInertialMassRequiredForOutwardExteriorResponse : Bool
+    deviceStressTensorStillRequiresPhysicalRealisation : Bool
+    exactStaticDeviceMetricStillRequiresSolution : Bool
+
+canonicalPositiveGActiveStressDeviceBoundary :
+  PositiveGActiveStressDeviceBoundary
+canonicalPositiveGActiveStressDeviceBoundary =
+  positive-g-active-stress-device-boundary
+    true false false true true
+
+------------------------------------------------------------------------
 -- Existing architectural donors remain authoritative.
 ------------------------------------------------------------------------
 
@@ -222,9 +301,11 @@ record AntigravityDeviceDiscriminatorBoundary : Set where
     couplingSignLabelAloneSuppliesOppositeMetric : Bool
     sourceMustBeResolvedBeforeMetricComparison : Bool
     ordinaryMomentumAndEMChannelsMustClose : Bool
+    modulationLockInPreferredToUnmodulatedDCClaim : Bool
+    positiveGActiveStressMustRemainLiveSearchRoute : Bool
 
 canonicalAntigravityDeviceDiscriminatorBoundary :
   AntigravityDeviceDiscriminatorBoundary
 canonicalAntigravityDeviceDiscriminatorBoundary =
   antigravity-device-discriminator-boundary
-    false false true true true false true true
+    false false true true true false true true true true
