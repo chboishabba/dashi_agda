@@ -44,6 +44,18 @@ b4DefectNoncoreCoreFourMoments = F.b4DefectNoncoreCoreFourAggregateClosedIsTrue
 b4DefectNoncoreCoreVector : F.b4DefectNoncoreCoreVectorClosed ≡ true
 b4DefectNoncoreCoreVector = F.b4DefectNoncoreCoreVectorClosedIsTrue
 
+b4R440SubsetWeld : F.b4DefectR440SubsetWeldClosed ≡ true
+b4R440SubsetWeld = F.b4DefectR440SubsetWeldClosedIsTrue
+
+b4PhysicalResidualNormalForm : F.b4DefectPhysicalResidualNormalFormClosed ≡ true
+b4PhysicalResidualNormalForm = F.b4DefectPhysicalResidualNormalFormClosedIsTrue
+
+b4SignedPhysicalWork : F.b4DefectSignedPhysicalWorkClosed ≡ true
+b4SignedPhysicalWork = F.b4DefectSignedPhysicalWorkClosedIsTrue
+
+b4ResidualNotAbstract : F.b4DefectResidualStillAbstractCarrier ≡ false
+b4ResidualNotAbstract = F.b4DefectResidualStillAbstractCarrierIsFalse
+
 b4DefectSharpEnvelopeClosed : F.b4DefectSharpVectorYoungClosed ≡ true
 b4DefectSharpEnvelopeClosed = F.b4DefectSharpVectorYoungClosedIsTrue
 
@@ -52,6 +64,9 @@ b4DefectPhysicalBudgetOpen = F.b4DefectPhysicalVectorBudgetClosedIsFalse
 
 b4DefectOpen : F.b4DefectRemainderClosed ≡ false
 b4DefectOpen = F.b4DefectRemainderClosedIsFalse
+
+b4OnlyPhysicalR440Payment : F.b4ResearchLeafNowOnlyPhysicalR440Payment ≡ true
+b4OnlyPhysicalR440Payment = F.b4ResearchLeafNowOnlyPhysicalR440PaymentIsTrue
 
 b1ShellCompilerClosed : F.b1ShellPaymentCompilerClosed ≡ true
 b1ShellCompilerClosed = F.b1ShellPaymentCompilerClosedIsTrue
