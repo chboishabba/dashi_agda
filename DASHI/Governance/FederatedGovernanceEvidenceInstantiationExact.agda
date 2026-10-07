@@ -4,9 +4,12 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Bolo
+import DASHI.Governance.BoloBoloIncidenceCompressionExact as Compression
+import DASHI.Governance.BoloBoloIncidenceCompressionCostBridgeExact as CompressionBridge
 import DASHI.Governance.BoloBoloRobustCostBoundsExact as Robust
 import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact as PairedExperiment
+import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact as Promotion
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact as Occupy
 import DASHI.Governance.OccupyParticipantPseudonymisationExact as Privacy
 import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
@@ -15,6 +18,7 @@ import DASHI.Governance.OccupyFilesCorpusReceiptExact as Corpus
 import DASHI.Governance.OccupyOWSManifestExact as Manifest
 import DASHI.Governance.OccupyOWSDevelopmentDurationPanelExact as OWSDuration
 import DASHI.Governance.OccupyOWSDevelopmentTextProcessPanelExact as OWSText
+import DASHI.Governance.OccupyOWSDevelopmentInterfaceProcessPanelExact as OWSInterface
 import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact as LibraryGraph
 import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Longitudinal
 import DASHI.Governance.OccupyPseudonymousNetworkFeaturesExact as Network
@@ -32,10 +36,22 @@ import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bookchin
 import DASHI.Governance.IPCCSR15TransitionViabilityBridgeExact as SR15
 
 data EvidenceProvenanceClass : Set where
-  primaryPoliticalDesignSource primaryArchivalRecord curatedArchiveMetadata empiricalSocialMovementStudy externalGroupDecisionExperiment primaryAssessmentSource dashiDerivedBridge : EvidenceProvenanceClass
+  primaryPoliticalDesignSource : EvidenceProvenanceClass
+  primaryArchivalRecord : EvidenceProvenanceClass
+  curatedArchiveMetadata : EvidenceProvenanceClass
+  empiricalSocialMovementStudy : EvidenceProvenanceClass
+  externalGroupDecisionExperiment : EvidenceProvenanceClass
+  primaryAssessmentSource : EvidenceProvenanceClass
+  dashiDerivedBridge : EvidenceProvenanceClass
 
 data EvidenceLane : Set where
-  boloPrimaryLane occupyArchivalLane occupyCuratedCorpusLane occupyEmpiricalLane generalGroupDecisionLane bookchinPrimaryLane sr15PrimaryLane : EvidenceLane
+  boloPrimaryLane : EvidenceLane
+  occupyArchivalLane : EvidenceLane
+  occupyCuratedCorpusLane : EvidenceLane
+  occupyEmpiricalLane : EvidenceLane
+  generalGroupDecisionLane : EvidenceLane
+  bookchinPrimaryLane : EvidenceLane
+  sr15PrimaryLane : EvidenceLane
 
 laneClass : EvidenceLane → EvidenceProvenanceClass
 laneClass boloPrimaryLane = primaryPoliticalDesignSource
@@ -50,13 +66,19 @@ record FederatedGovernanceEvidenceInstantiation : Set where
   constructor federatedGovernanceEvidenceInstantiation
   field
     boloAtlas : Bolo.BoloBoloPrimarySourceAtlas
+    boloCompressionBoundary : Compression.IncidenceCompressionBoundary
+    boloCompressionCostBridgeBoundary : CompressionBridge.CompressionCostBridgeBoundary
     robustBoloBoundTargets : Robust.NestedCostBoundTargets
+    boloTransferBoundary : Transfer.CalibrationTransferBoundary
     directBoloExperimentMapping : PairedExperiment.CounterfactualTermMappingPlan
+    boloPromotionBoundary : Promotion.EmpiricalPromotionBoundary
+
     participantPrivacyBoundary : Privacy.PseudonymisationBoundary
     occupyCorpusReceipt : Corpus.OccupyFilesCorpusReceipt
     occupyOWSManifest : List Manifest.OWSRecord
     occupyOWSDevelopmentDurations : List OWSDuration.OWSDurationRow
     occupyOWSDevelopmentTextProcess : List OWSText.TextProcessRow
+    occupyOWSDevelopmentInterfaceProcess : List OWSInterface.InterfaceProcessRow
     occupyArchiveCandidate : Archive.ArchivalIncidenceCandidate
     occupyLibraryObservedEdges : List LibraryGraph.ObservedEdge
     occupyLongitudinalObservedEdges : List Longitudinal.LongitudinalEdge
@@ -75,58 +97,230 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     bookchinSource : Bookchin.BookchinConfederalismSourceBoundary
     bookchinBridge : Bookchin.BookchinDASHIAlignment
     sr15Source : SR15.SR15SourceBoundary
-    participantPseudonymisationPresent materialisedOccupyCorpusPresent checksumPinnedOWSManifestPresent protectedHoldoutAssignmentPresent owsDevelopmentDurationPanelPresent owsDevelopmentTextProcessPanelPresent pseudonymousNetworkFeaturesPresent meetingLevelProcessPanelPresent panelMissingnessAuditPresent developmentDiagnosticsPresent holdoutPromotionGatePresent nestedCommunityArchitectureEvidencePresent boundedArchivalInteractionEvidencePresent boundedFiniteArchivalIncidenceGraphPresent longitudinalArchivalIncidenceFamilyPresent sourceExplicitMeetingPanelPresent archivalObservationModelPresent archivalProcessBurdenObservationsPresent measuredMeetingDurationEvidencePresent coordinationBurdenExperimentDesignPresent prospectiveHeldOutProtocolPresent causalPromotionObligationSurfacePresent robustCostBoundTheoremPresent calibrationTransferFirewallPresent directFlatNestedExperimentDesignPresent consensusBurdenBenefitPluralEvidencePresent generalGroupDecisionQuantitativeEvidencePresent recallableConfederalCoordinationEvidencePresent transitionViabilityConstraintEvidencePresent : Bool
+
+    participantPseudonymisationPresent : Bool
+    materialisedOccupyCorpusPresent : Bool
+    checksumPinnedOWSManifestPresent : Bool
+    protectedHoldoutAssignmentPresent : Bool
+    owsDevelopmentDurationPanelPresent : Bool
+    owsDevelopmentTextProcessPanelPresent : Bool
+    owsDevelopmentInterfaceProcessPanelPresent : Bool
+    pseudonymousNetworkFeaturesPresent : Bool
+    meetingLevelProcessPanelPresent : Bool
+    panelMissingnessAuditPresent : Bool
+    developmentDiagnosticsPresent : Bool
+    holdoutPromotionGatePresent : Bool
+    nestedCommunityArchitectureEvidencePresent : Bool
+    boundedArchivalInteractionEvidencePresent : Bool
+    boundedFiniteArchivalIncidenceGraphPresent : Bool
+    longitudinalArchivalIncidenceFamilyPresent : Bool
+    sourceExplicitMeetingPanelPresent : Bool
+    archivalObservationModelPresent : Bool
+    archivalProcessBurdenObservationsPresent : Bool
+    measuredMeetingDurationEvidencePresent : Bool
+    coordinationBurdenExperimentDesignPresent : Bool
+    prospectiveHeldOutProtocolPresent : Bool
+    causalPromotionObligationSurfacePresent : Bool
+    incidenceCompressionScenarioPresent : Bool
+    incidenceCompressionCostBridgePresent : Bool
+    robustCostBoundTheoremPresent : Bool
+    calibrationTransferFirewallPresent : Bool
+    directFlatNestedExperimentDesignPresent : Bool
+    empiricalBoloPromotionGatePresent : Bool
+    consensusBurdenBenefitPluralEvidencePresent : Bool
+    generalGroupDecisionQuantitativeEvidencePresent : Bool
+    recallableConfederalCoordinationEvidencePresent : Bool
+    transitionViabilityConstraintEvidencePresent : Bool
 
 open FederatedGovernanceEvidenceInstantiation public
 
 canonicalFederatedGovernanceEvidenceInstantiation : FederatedGovernanceEvidenceInstantiation
-canonicalFederatedGovernanceEvidenceInstantiation =
-  federatedGovernanceEvidenceInstantiation
-    Bolo.canonicalBoloBoloPrimarySourceAtlas
-    Robust.canonicalNestedCostBoundTargets
-    PairedExperiment.canonicalCounterfactualTermMappingPlan
-    Privacy.canonicalPseudonymisationBoundary
-    Corpus.canonicalOccupyFilesCorpusReceipt
-    Manifest.canonicalOWSRecords
-    OWSDuration.canonicalOWSDurationRows
-    OWSText.canonicalTextProcessRows
-    Archive.boundedSpeakerProposalCandidate
-    LibraryGraph.canonicalObservedEdges
-    Longitudinal.longitudinalObservedEdges
-    Network.canonicalNetworkFeatureRows
-    Panel.canonicalDevelopmentPanel
-    ProcessPanel.canonicalMeetingLevelProcessPanel
-    Missingness.canonicalMissingnessAudit
-    Diagnostics.canonicalDevelopmentDiagnosticBoundary
-    HoldoutGate.canonicalHoldoutPromotionBoundary
-    Duration.oct15FirstFormalMeeting
-    Duration.oct22Meeting
-    HeldOut.canonicalProspectiveHeldOutPlan
-    Causal.candidateCausalGraph
-    Occupy.canonicalOccupyEvidenceSynthesis
-    General.canonicalGeneralGroupDecisionSources
-    Bookchin.canonicalBookchinConfederalismSourceBoundary
-    Bookchin.canonicalBookchinDASHIAlignment
-    SR15.canonicalSR15SourceBoundary
-    true true true true true true true true true true true
-    true true true true true true true true true true true true true true true true true true
+canonicalFederatedGovernanceEvidenceInstantiation = record
+  { boloAtlas = Bolo.canonicalBoloBoloPrimarySourceAtlas
+  ; boloCompressionBoundary = Compression.canonicalIncidenceCompressionBoundary
+  ; boloCompressionCostBridgeBoundary = CompressionBridge.canonicalCompressionCostBridgeBoundary
+  ; robustBoloBoundTargets = Robust.canonicalNestedCostBoundTargets
+  ; boloTransferBoundary = Transfer.canonicalCalibrationTransferBoundary
+  ; directBoloExperimentMapping = PairedExperiment.canonicalCounterfactualTermMappingPlan
+  ; boloPromotionBoundary = Promotion.canonicalEmpiricalPromotionBoundary
+  ; participantPrivacyBoundary = Privacy.canonicalPseudonymisationBoundary
+  ; occupyCorpusReceipt = Corpus.canonicalOccupyFilesCorpusReceipt
+  ; occupyOWSManifest = Manifest.canonicalOWSRecords
+  ; occupyOWSDevelopmentDurations = OWSDuration.canonicalOWSDurationRows
+  ; occupyOWSDevelopmentTextProcess = OWSText.canonicalTextProcessRows
+  ; occupyOWSDevelopmentInterfaceProcess = OWSInterface.canonicalInterfaceProcessRows
+  ; occupyArchiveCandidate = Archive.boundedSpeakerProposalCandidate
+  ; occupyLibraryObservedEdges = LibraryGraph.canonicalObservedEdges
+  ; occupyLongitudinalObservedEdges = Longitudinal.longitudinalObservedEdges
+  ; occupyPseudonymousNetworkFeatures = Network.canonicalNetworkFeatureRows
+  ; occupyDevelopmentMeetingPanel = Panel.canonicalDevelopmentPanel
+  ; occupyMeetingLevelProcessPanel = ProcessPanel.canonicalMeetingLevelProcessPanel
+  ; occupyMissingnessAudit = Missingness.canonicalMissingnessAudit
+  ; occupyDevelopmentDiagnosticBoundary = Diagnostics.canonicalDevelopmentDiagnosticBoundary
+  ; occupyHoldoutPromotionBoundary = HoldoutGate.canonicalHoldoutPromotionBoundary
+  ; oct15Duration = Duration.oct15FirstFormalMeeting
+  ; oct22Duration = Duration.oct22Meeting
+  ; prospectiveHeldOutPlan = HeldOut.canonicalProspectiveHeldOutPlan
+  ; candidateCausalGraph = Causal.candidateCausalGraph
+  ; occupySynthesis = Occupy.canonicalOccupyEvidenceSynthesis
+  ; generalGroupDecisionSources = General.canonicalGeneralGroupDecisionSources
+  ; bookchinSource = Bookchin.canonicalBookchinConfederalismSourceBoundary
+  ; bookchinBridge = Bookchin.canonicalBookchinDASHIAlignment
+  ; sr15Source = SR15.canonicalSR15SourceBoundary
+  ; participantPseudonymisationPresent = true
+  ; materialisedOccupyCorpusPresent = true
+  ; checksumPinnedOWSManifestPresent = true
+  ; protectedHoldoutAssignmentPresent = true
+  ; owsDevelopmentDurationPanelPresent = true
+  ; owsDevelopmentTextProcessPanelPresent = true
+  ; owsDevelopmentInterfaceProcessPanelPresent = true
+  ; pseudonymousNetworkFeaturesPresent = true
+  ; meetingLevelProcessPanelPresent = true
+  ; panelMissingnessAuditPresent = true
+  ; developmentDiagnosticsPresent = true
+  ; holdoutPromotionGatePresent = true
+  ; nestedCommunityArchitectureEvidencePresent = true
+  ; boundedArchivalInteractionEvidencePresent = true
+  ; boundedFiniteArchivalIncidenceGraphPresent = true
+  ; longitudinalArchivalIncidenceFamilyPresent = true
+  ; sourceExplicitMeetingPanelPresent = true
+  ; archivalObservationModelPresent = true
+  ; archivalProcessBurdenObservationsPresent = true
+  ; measuredMeetingDurationEvidencePresent = true
+  ; coordinationBurdenExperimentDesignPresent = true
+  ; prospectiveHeldOutProtocolPresent = true
+  ; causalPromotionObligationSurfacePresent = true
+  ; incidenceCompressionScenarioPresent = true
+  ; incidenceCompressionCostBridgePresent = true
+  ; robustCostBoundTheoremPresent = true
+  ; calibrationTransferFirewallPresent = true
+  ; directFlatNestedExperimentDesignPresent = true
+  ; empiricalBoloPromotionGatePresent = true
+  ; consensusBurdenBenefitPluralEvidencePresent = true
+  ; generalGroupDecisionQuantitativeEvidencePresent = true
+  ; recallableConfederalCoordinationEvidencePresent = true
+  ; transitionViabilityConstraintEvidencePresent = true
+  }
 
 record FederatedGovernanceEvidenceBoundary : Set where
   constructor federatedGovernanceEvidenceBoundary
   field
-    crossSourceAgreementCollapsesProvenance boloArchitectureAttributedToBookchin bookchinConfederalismAttributedToPM ipccTransitionEvidenceCreatesPoliticalDoctrine occupyEvidencePaysQuantitativeScalingLaw generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling curatedArchiveMetadataBecomesUnderlyingMinuteAuthorship rawParticipantNamesRequiredForCorrelation completeNamedParticipantIssueMatrixRequired : Bool
-    dashiPaysParticipantPseudonymisation occupyCorpusMaterialisationPaid occupyOWSManifestFreezePaid occupyProtectedHoldoutAssignmentPaid occupyOWSDevelopmentDurationPanelPaid occupyOWSDevelopmentTextProcessPanelPaid dashiPaysPseudonymousNetworkFeatures dashiPaysMeetingLevelProcessPanel dashiPaysPanelMissingnessAudit dashiPaysDevelopmentDiagnostics dashiPaysHoldoutPromotionGate boloSourcePaysNestedArchitecture occupyArchivePaysBoundedNamedInteraction occupyArchivePaysBoundedFiniteIncidenceGraph occupyArchivePaysLongitudinalIncidenceFamily occupyArchivePaysSourceExplicitMeetingPanel dashiPaysArchivalObservationModel occupyArchivePaysProcessBurdenObservations occupyArchivePaysMeasuredMeetingDurations dashiPaysCoordinationBurdenExperimentDesign dashiPaysProspectiveHeldOutProtocol dashiPaysCausalPromotionObligationSurface dashiPaysRobustCostBoundTheorem dashiPaysCalibrationTransferFirewall dashiPaysDirectFlatNestedExperimentDesign occupyLiteraturePaysPluralProcessEvidence generalGroupDecisionEvidencePaysMechanismPlausibility bookchinSourcePaysRecallableConfederalCoordination sr15PaysSystemTransitionConstraintSurface : Bool
-    targetQualifiedBoloCostBoundsPaid robustBoloCoordinationWinPaid directFlatNestedExperimentRun actualPolityLegitimacyPaid actualParticipantIssueIncidencePaid empiricalCoordinationCostFunctionalPaid quantitativeIncidenceBurdenRelationshipPaid incidenceBurdenCausalEffectPromoted prospectiveHeldOutValidationPaid concreteClimateViabilityOfFederationPaid : Bool
+    crossSourceAgreementCollapsesProvenance : Bool
+    boloArchitectureAttributedToBookchin : Bool
+    bookchinConfederalismAttributedToPM : Bool
+    ipccTransitionEvidenceCreatesPoliticalDoctrine : Bool
+    occupyEvidencePaysQuantitativeScalingLaw : Bool
+    generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling : Bool
+    curatedArchiveMetadataBecomesUnderlyingMinuteAuthorship : Bool
+    rawParticipantNamesRequiredForCorrelation : Bool
+    completeNamedParticipantIssueMatrixRequired : Bool
+
+    dashiPaysParticipantPseudonymisation : Bool
+    occupyCorpusMaterialisationPaid : Bool
+    occupyOWSManifestFreezePaid : Bool
+    occupyProtectedHoldoutAssignmentPaid : Bool
+    occupyOWSDevelopmentDurationPanelPaid : Bool
+    occupyOWSDevelopmentTextProcessPanelPaid : Bool
+    dashiPaysOWSInterfaceProcessPanel : Bool
+    dashiPaysPseudonymousNetworkFeatures : Bool
+    dashiPaysMeetingLevelProcessPanel : Bool
+    dashiPaysPanelMissingnessAudit : Bool
+    dashiPaysDevelopmentDiagnostics : Bool
+    dashiPaysHoldoutPromotionGate : Bool
+    boloSourcePaysNestedArchitecture : Bool
+    occupyArchivePaysBoundedNamedInteraction : Bool
+    occupyArchivePaysBoundedFiniteIncidenceGraph : Bool
+    occupyArchivePaysLongitudinalIncidenceFamily : Bool
+    occupyArchivePaysSourceExplicitMeetingPanel : Bool
+    dashiPaysArchivalObservationModel : Bool
+    occupyArchivePaysProcessBurdenObservations : Bool
+    occupyArchivePaysMeasuredMeetingDurations : Bool
+    dashiPaysCoordinationBurdenExperimentDesign : Bool
+    dashiPaysProspectiveHeldOutProtocol : Bool
+    dashiPaysCausalPromotionObligationSurface : Bool
+    dashiPaysIncidenceCompressionScenario : Bool
+    dashiPaysIncidenceCompressionCostBridge : Bool
+    dashiPaysRobustCostBoundTheorem : Bool
+    dashiPaysCalibrationTransferFirewall : Bool
+    dashiPaysDirectFlatNestedExperimentDesign : Bool
+    dashiPaysEmpiricalBoloPromotionGate : Bool
+    occupyLiteraturePaysPluralProcessEvidence : Bool
+    generalGroupDecisionEvidencePaysMechanismPlausibility : Bool
+    bookchinSourcePaysRecallableConfederalCoordination : Bool
+    sr15PaysSystemTransitionConstraintSurface : Bool
+
+    targetQualifiedBoloCostBoundsPaid : Bool
+    robustBoloCoordinationWinPaid : Bool
+    validatedBoloCoordinationAdvantagePaid : Bool
+    validatedBoloCoordinationDisadvantagePaid : Bool
+    directFlatNestedExperimentRun : Bool
+    actualPolityLegitimacyPaid : Bool
+    actualParticipantIssueIncidencePaid : Bool
+    empiricalCoordinationCostFunctionalPaid : Bool
+    quantitativeIncidenceBurdenRelationshipPaid : Bool
+    incidenceBurdenCausalEffectPromoted : Bool
+    prospectiveHeldOutValidationPaid : Bool
+    concreteClimateViabilityOfFederationPaid : Bool
 
 open FederatedGovernanceEvidenceBoundary public
 
 canonicalFederatedGovernanceEvidenceBoundary : FederatedGovernanceEvidenceBoundary
-canonicalFederatedGovernanceEvidenceBoundary =
-  federatedGovernanceEvidenceBoundary
-    false false false false false false false false false
-    true true true true true true true true true true true
-    true true true true true true true true true true true true true true true true true true
-    false false false false false false false false false false
+canonicalFederatedGovernanceEvidenceBoundary = record
+  { crossSourceAgreementCollapsesProvenance = false
+  ; boloArchitectureAttributedToBookchin = false
+  ; bookchinConfederalismAttributedToPM = false
+  ; ipccTransitionEvidenceCreatesPoliticalDoctrine = false
+  ; occupyEvidencePaysQuantitativeScalingLaw = false
+  ; generalGroupDecisionEvidenceDirectlyValidatesOccupyScaling = false
+  ; curatedArchiveMetadataBecomesUnderlyingMinuteAuthorship = false
+  ; rawParticipantNamesRequiredForCorrelation = false
+  ; completeNamedParticipantIssueMatrixRequired = false
+  ; dashiPaysParticipantPseudonymisation = true
+  ; occupyCorpusMaterialisationPaid = true
+  ; occupyOWSManifestFreezePaid = true
+  ; occupyProtectedHoldoutAssignmentPaid = true
+  ; occupyOWSDevelopmentDurationPanelPaid = true
+  ; occupyOWSDevelopmentTextProcessPanelPaid = true
+  ; dashiPaysOWSInterfaceProcessPanel = true
+  ; dashiPaysPseudonymousNetworkFeatures = true
+  ; dashiPaysMeetingLevelProcessPanel = true
+  ; dashiPaysPanelMissingnessAudit = true
+  ; dashiPaysDevelopmentDiagnostics = true
+  ; dashiPaysHoldoutPromotionGate = true
+  ; boloSourcePaysNestedArchitecture = true
+  ; occupyArchivePaysBoundedNamedInteraction = true
+  ; occupyArchivePaysBoundedFiniteIncidenceGraph = true
+  ; occupyArchivePaysLongitudinalIncidenceFamily = true
+  ; occupyArchivePaysSourceExplicitMeetingPanel = true
+  ; dashiPaysArchivalObservationModel = true
+  ; occupyArchivePaysProcessBurdenObservations = true
+  ; occupyArchivePaysMeasuredMeetingDurations = true
+  ; dashiPaysCoordinationBurdenExperimentDesign = true
+  ; dashiPaysProspectiveHeldOutProtocol = true
+  ; dashiPaysCausalPromotionObligationSurface = true
+  ; dashiPaysIncidenceCompressionScenario = true
+  ; dashiPaysIncidenceCompressionCostBridge = true
+  ; dashiPaysRobustCostBoundTheorem = true
+  ; dashiPaysCalibrationTransferFirewall = true
+  ; dashiPaysDirectFlatNestedExperimentDesign = true
+  ; dashiPaysEmpiricalBoloPromotionGate = true
+  ; occupyLiteraturePaysPluralProcessEvidence = true
+  ; generalGroupDecisionEvidencePaysMechanismPlausibility = true
+  ; bookchinSourcePaysRecallableConfederalCoordination = true
+  ; sr15PaysSystemTransitionConstraintSurface = true
+  ; targetQualifiedBoloCostBoundsPaid = false
+  ; robustBoloCoordinationWinPaid = false
+  ; validatedBoloCoordinationAdvantagePaid = false
+  ; validatedBoloCoordinationDisadvantagePaid = false
+  ; directFlatNestedExperimentRun = false
+  ; actualPolityLegitimacyPaid = false
+  ; actualParticipantIssueIncidencePaid = false
+  ; empiricalCoordinationCostFunctionalPaid = false
+  ; quantitativeIncidenceBurdenRelationshipPaid = false
+  ; incidenceBurdenCausalEffectPromoted = false
+  ; prospectiveHeldOutValidationPaid = false
+  ; concreteClimateViabilityOfFederationPaid = false
+  }
 
 canonicalFederatedGovernanceEvidenceReceipt : GenericReceipt.GenericReceipt
 canonicalFederatedGovernanceEvidenceReceipt =
@@ -134,6 +328,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed political-design, archival, curated-corpus, empirical and assessment lanes with privacy-preserving longitudinal features, meeting-level process data, explicit missingness, development/holdout gates, robust bolo cost-bound targets, cross-context calibration-transfer firewalls and a direct same-context flat-vs-nested experiment design"
-    "the evidence does not yet supply target-qualified bolo cost bounds, a robust target coordination-win certificate, a completed direct flat-vs-nested experiment, an empirical coordination-cost functional, an incidence-to-burden causal effect, political legitimacy or concrete federation viability"
+    "assembles independently attributed political-design, archival, curated-corpus, empirical and assessment lanes with privacy-preserving longitudinal features, meeting-level process data, a new OWS interface-process lexical surface, explicit missingness and holdout gates, idealised incidence-compression accounting, robust bolo cost-bound theorems, cross-context transfer firewalls, a direct flat-vs-nested experiment design and a symmetric validated promotion/falsification gate"
+    "the evidence still does not supply target-qualified bolo cost bounds, a robust or validated target coordination classification, a completed flat-vs-nested experiment, an empirical coordination-cost functional, an incidence-to-burden causal effect, political legitimacy or concrete federation viability"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
