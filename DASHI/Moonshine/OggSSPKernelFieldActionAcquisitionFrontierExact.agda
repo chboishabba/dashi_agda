@@ -25,6 +25,8 @@ import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact as Axis0
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Actual
 import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as Candidate
 import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
 
 ------------------------------------------------------------------------
@@ -77,6 +79,48 @@ shortestSourceWouldCompileActualMonsterActionIsTrue :
   shortestSourceWouldCompileActualMonsterAction ≡ true
 shortestSourceWouldCompileActualMonsterActionIsTrue = refl
 
+-- The selected-3B *linear* route has also been audited.  It is a large
+-- constituent/Hom-space action route, not an X6 endomorphism.  Its canonical
+-- core and same-action equation are both still source obligations; the
+-- projected route separately lacks the actual retraction and projected-action
+-- equation.  Consequently this stack cannot currently be mined for a hidden
+-- X6 -> X6 field generator.
+selected3BLinearCoreInhabitedHere : Bool
+selected3BLinearCoreInhabitedHere =
+  LinearCore.canonicalCoreInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+
+selected3BLinearCoreInhabitedHereIsFalse :
+  selected3BLinearCoreInhabitedHere ≡ false
+selected3BLinearCoreInhabitedHereIsFalse = refl
+
+selected3BLinearActionIntertwiningInhabitedHere : Bool
+selected3BLinearActionIntertwiningInhabitedHere =
+  LinearCore.actionIntertwiningInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+
+selected3BLinearActionIntertwiningInhabitedHereIsFalse :
+  selected3BLinearActionIntertwiningInhabitedHere ≡ false
+selected3BLinearActionIntertwiningInhabitedHereIsFalse = refl
+
+selected3BProjectedRetractionInhabitedHere : Bool
+selected3BProjectedRetractionInhabitedHere =
+  Projected.actualLinearRetractionInhabitedHere
+    Projected.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+
+selected3BProjectedRetractionInhabitedHereIsFalse :
+  selected3BProjectedRetractionInhabitedHere ≡ false
+selected3BProjectedRetractionInhabitedHereIsFalse = refl
+
+selected3BProjectedActionEquationInhabitedHere : Bool
+selected3BProjectedActionEquationInhabitedHere =
+  Projected.actualProjectedActionEquationInhabitedHere
+    Projected.canonicalTrialectic369Selected3BProjectedActionMaxCutBoundary
+
+selected3BProjectedActionEquationInhabitedHereIsFalse :
+  selected3BProjectedActionEquationInhabitedHere ≡ false
+selected3BProjectedActionEquationInhabitedHereIsFalse = refl
+
 -- The older direct owner still correctly says it does not inhabit the source
 -- locally; the compiler chain above explains how that Bool becomes irrelevant
 -- once the Base369 candidate is actually supplied.
@@ -122,6 +166,8 @@ record FieldActionAcquisitionBoundary : Set where
     rankOneWeilLaneNeedsActualTorsionTransport : Bool
     shortest3BCompilerChainLocated : Bool
     shortest3BLaneNeedsBase369CandidateSource : Bool
+    selected3BLinearLaneNeedsCanonicalCore : Bool
+    selected3BProjectedLaneNeedsRetractionAndEquation : Bool
     exceptionalF4E6LaneNeedsSameActionRecognition : Bool
     independentlyOwnedK6FieldSelectingOperatorLocated : Bool
     fullFieldRecognitionReady : Bool
@@ -129,5 +175,5 @@ record FieldActionAcquisitionBoundary : Set where
 canonicalFieldActionAcquisitionBoundary : FieldActionAcquisitionBoundary
 canonicalFieldActionAcquisitionBoundary =
   field-action-acquisition-boundary
-    true true true true true
+    true true true true true true true
     false false
