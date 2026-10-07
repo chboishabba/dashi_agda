@@ -1,33 +1,33 @@
 module DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact where
 
 ------------------------------------------------------------------------
--- UNIVERSAL STOPPING COMPILER FROM A LITERAL STRICT-DESCENT PRODUCER
+-- UNIVERSAL STOPPING <-> LITERAL STRICT-DESCENT PRODUCER
 --
--- This isolates the genuine terminal Collatz wall.  If every literal positive
--- integer x > 1 has some finite shortcut-Syracuse prefix that lands at a
--- strictly smaller positive integer, then well-founded induction on Nat proves
--- that every x reaches 1.
+-- The genuine terminal Collatz wall can be stated exactly:
 --
--- The existing affine/parity theorem gives one sufficient (but deliberately
--- stronger) producer interface: choose m with 3^m <= x and prove the actual
--- parity word satisfies
+--   every x > 1 has some finite shortcut-Syracuse iterate below x.
+--
+-- This is equivalent to universal stopping.  The forward implication is
+-- well-founded induction on the literal positive integer.  The reverse
+-- implication uses the eventual iterate 1, which is strictly below x > 1.
+--
+-- The existing affine/parity theorem provides a stronger sufficient sub-route:
+-- choose m with 3^m <= x and prove the actual parity word satisfies
 --
 --   2 * 3^(ones word) <= 2^m.
 --
 -- That coarse sufficient interface is not asserted to exist for every start;
--- small literal starts such as x = 3 already show why the terminal source must
--- remain the weaker, exact StrictDescentSource.  Finite-density / Chernoff tails
--- likewise do not inhabit the universal source because they do not eliminate
--- every exceptional start.
+-- finite-density / Chernoff tails likewise do not eliminate every exceptional
+-- start.  They therefore cannot inhabit the exact terminal source by themselves.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat using (_<_; z≤n; s≤s)
 open import Data.Nat.Induction using (Acc; acc; <-wellFounded)
 import Data.Product as Product
 open Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
@@ -60,7 +60,7 @@ open LiteralStrictDescentSource public
 
 -- Strong sufficient sub-route.  This is intentionally not identified with the
 -- terminal source: the affine correction estimate can be too coarse for a
--- particular small start even when that start genuinely reaches a lower value.
+-- particular start even when that start genuinely reaches a lower value.
 record GoodPrefixDescentSource : Set₁ where
   field
     chosenHorizon :
@@ -143,15 +143,61 @@ universalStoppingFromGoodPrefixes source =
   universalStoppingFromStrictDescent
     (asLiteralStrictDescentSource source)
 
+strictDescentFromUniversalStopping :
+  ((x : Syracuse.PositiveNat) → ReachesOne x) →
+  LiteralStrictDescentSource
+strictDescentFromUniversalStopping stops = record
+  { descend = λ x nontrivial →
+      let
+        stopped = stops x
+        k = Product.proj₁ stopped
+        atOne = Product.proj₂ stopped
+
+        toNatAtOne :
+          Syracuse.toNat (Syracuse.syracuseIterate k x) ≡ 1
+        toNatAtOne = cong Syracuse.toNat atOne
+
+        smaller :
+          Syracuse.toNat (Syracuse.syracuseIterate k x)
+          < Syracuse.toNat x
+        smaller =
+          subst
+            (λ value → value < Syracuse.toNat x)
+            (sym toNatAtOne)
+            nontrivial
+      in
+      k , smaller
+  }
+
+record UniversalStoppingEquivalence : Set₁ where
+  constructor universalStoppingEquivalence
+  field
+    strictDescentToStopping :
+      LiteralStrictDescentSource →
+      (x : Syracuse.PositiveNat) →
+      ReachesOne x
+
+    stoppingToStrictDescent :
+      ((x : Syracuse.PositiveNat) → ReachesOne x) →
+      LiteralStrictDescentSource
+
+canonicalUniversalStoppingEquivalence : UniversalStoppingEquivalence
+canonicalUniversalStoppingEquivalence =
+  universalStoppingEquivalence
+    universalStoppingFromStrictDescent
+    strictDescentFromUniversalStopping
+
 record UniversalStoppingBoundary : Set where
   constructor universalStoppingBoundary
   field
     iterateCompositionOwned : Nat
     wellFoundedCompilerOwned : Nat
+    reverseStoppingToDescentOwned : Nat
+    strictDescentEquivalenceOwned : Nat
     affineGoodPrefixSufficientCompilerOwned : Nat
     finiteDensityTailEliminatesEveryException : Nat
     allStartsLiteralStrictDescentProducerOwned : Nat
 
 canonicalUniversalStoppingBoundary : UniversalStoppingBoundary
 canonicalUniversalStoppingBoundary =
-  universalStoppingBoundary 1 1 1 0 0
+  universalStoppingBoundary 1 1 1 1 1 0 0
