@@ -8,6 +8,22 @@ sourcesRemainDistinct :
   Capstone.crossSourceAgreementCollapsesProvenance Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 sourcesRemainDistinct = refl
 
+curationDoesNotBecomeMinuteAuthorship :
+  Capstone.curatedArchiveMetadataBecomesUnderlyingMinuteAuthorship Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
+curationDoesNotBecomeMinuteAuthorship = refl
+
+occupyCorpusMaterialised :
+  Capstone.occupyCorpusMaterialisationPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+occupyCorpusMaterialised = refl
+
+owsManifestFrozen :
+  Capstone.occupyOWSManifestFreezePaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+owsManifestFrozen = refl
+
+protectedHoldoutAssignmentPaid :
+  Capstone.occupyProtectedHoldoutAssignmentPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+protectedHoldoutAssignmentPaid = refl
+
 occupyEvidenceDoesNotPayScalingLaw :
   Capstone.occupyEvidencePaysQuantitativeScalingLaw Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 occupyEvidenceDoesNotPayScalingLaw = refl
