@@ -5,17 +5,27 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Foundations.AlbertJordanExternalDonorExact as Donor
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact as E8
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutExact as Finite
 
 ------------------------------------------------------------------------
 -- ALBERT / F4 MAX-CUT
 --
--- The companion Lean tranche now pays a theorem-level scalar/traceless split
--- from tr(1)=3 and types the Jordan-automorphism / E6-unit-stabilizer target.
--- Agda records those as cross-prover receipts, not as Agda kernel theorems.
+-- The companion Lean tranche now pays all finite/linear prerequisites:
 --
--- The already-paid E6 minuscule 27 is a finite weight orbit.  An Albert algebra
--- is a 27-dimensional vector space.  The correct bridge is via 27 one-
--- dimensional weight lines, not by identifying the finite set with all vectors.
+-- * theorem-level scalar/traceless split from tr(1)=3;
+-- * 27-dimensional minuscule coordinate module with 27 weight lines;
+-- * noncanonical linear transport to every finite 27-dimensional real J;
+-- * typed ternary origin+26 split and linear basis transport to any 26-dim J0;
+-- * E6 diagram fold with exact W(F4) order 1152 and explicit 48-root F4 system;
+-- * restricted minuscule 27 = 24 short-root weights + three folded-zero weights;
+-- * the three zero lines carry S3 and split as fixed 1 + sum-zero 2;
+-- * therefore the finite W(F4) representation pays 27 = 1 + (24+2) = 1+26;
+-- * the canonical T5 non-diagonal 240 is not invariant under the existing E6
+--   action, blocking that natural full-E8 same-action route.
+--
+-- Agda records these as cross-prover/source receipts.  It does not manufacture
+-- Lean kernel theorems in Agda.  The genuine remaining wall is compatibility
+-- with the actual Albert product/cubic and the continuous/algebraic F4 theorem.
 ------------------------------------------------------------------------
 
 record ScalarTracelessDecompositionReceipt : Set₁ where
@@ -106,6 +116,7 @@ record AlbertF4Frontier : Set where
     externalFullCubicIdentitiesSourceWritten : Bool
 
     leanScalarTracelessLinearEquivalenceSourceWritten : Bool
+    leanTracelessFinrank26SourceWritten : Bool
     scalarTracelessReceiptTypedInAgda : Bool
     albertStructureReceiptTypedInAgda : Bool
     jordanAutomorphismReceiptTypedInAgda : Bool
@@ -116,21 +127,31 @@ record AlbertF4Frontier : Set where
     existingTernary27SchlafliRelationPaid : Bool
     existingE6Minuscule27SameObjectReceiptTyped : Bool
 
+    leanCanonicalMinusculeModule27SourceWritten : Bool
+    leanLinearMinusculeTransportSourceWritten : Bool
+    leanTernaryOriginPlus26BasisTransportSourceWritten : Bool
+    leanFoldedWeyl1152SourceWritten : Bool
+    leanF4Root48SourceWritten : Bool
+    leanFiniteWeylOnePlus26SourceWritten : Bool
+    leanNaturalRelative240E6NoGoSourceWritten : Bool
+
     sameKernelAlbertInstantiationPaid : Bool
-    actualMinusculeWeightLineRecognitionPaid : Bool
     actualAlbertJordanWeldPaid : Bool
+    actualE6JordanAutomorphismCompatibilityPaid : Bool
+    actualAlbertUnitIdentificationPaid : Bool
     actualF4AutomorphismRecognitionPaid : Bool
     actualE6UnitStabilizerRecognitionPaid : Bool
-    actualTernaryOnePlus26BasisWeldPaid : Bool
-    fullTernary240E8RecognitionPaid : Bool
+    actualTernaryAlbertActionCompatibilityPaid : Bool
+    alternativeTernary240E8RecognitionPaid : Bool
 open AlbertF4Frontier public
 
 currentAlbertF4Frontier : AlbertF4Frontier
 currentAlbertF4Frontier = albert-f4-frontier
   true true true true true false
-  true true true true true true true
+  true true true true true true true true
   true true
-  false false false false false false false
+  true true true true true true true
+  false false false false false false false false
 
 ------------------------------------------------------------------------
 -- No-promotion checks.
@@ -138,6 +159,8 @@ currentAlbertF4Frontier = albert-f4-frontier
 
 data Minuscule27CreatesAlbertAlgebra : Set where
 data Dimension52CreatesF4 : Set where
+data FiniteWeylF4CreatesAlbertAutomorphismGroup : Set where
+data LinearTransportCreatesJordanCompatibility : Set where
 data AlbertRecognitionCreatesFullTernaryE8 : Set where
 
 minuscule27DoesNotCreateAlbert : Minuscule27CreatesAlbertAlgebra → {A : Set} → A
@@ -145,6 +168,14 @@ minuscule27DoesNotCreateAlbert ()
 
 dimension52DoesNotCreateF4 : Dimension52CreatesF4 → {A : Set} → A
 dimension52DoesNotCreateF4 ()
+
+finiteWeylDoesNotCreateAlbertAutGroup :
+  FiniteWeylF4CreatesAlbertAutomorphismGroup → {A : Set} → A
+finiteWeylDoesNotCreateAlbertAutGroup ()
+
+linearTransportDoesNotCreateJordanCompatibility :
+  LinearTransportCreatesJordanCompatibility → {A : Set} → A
+linearTransportDoesNotCreateJordanCompatibility ()
 
 albertDoesNotCreateFullTernaryE8 : AlbertRecognitionCreatesFullTernaryE8 → {A : Set} → A
 albertDoesNotCreateFullTernaryE8 ()
