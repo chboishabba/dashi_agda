@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
