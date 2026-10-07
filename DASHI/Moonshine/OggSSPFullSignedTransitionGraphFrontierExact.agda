@@ -8,12 +8,14 @@ module DASHI.Moonshine.OggSSPFullSignedTransitionGraphFrontierExact where
 --   * total program-counter machine;
 --   * executed trace retaining prime identity;
 --   * arbitrary-program replay of valuation + invariant-unit semantics;
---   * a total rich-state machine compiler once metadata dynamics are supplied;
+--   * generic program/execution/normal-form length dynamics;
+--   * a total rich-state machine compiler once the residual metadata dynamics
+--     are supplied;
 --   * exact rich projections for both existing canonical 53 programs.
 --
--- The only remaining graph constructor is the metadata dynamics for address,
--- zero-residual direction, and description/execution lengths.  Those fields are
--- not determined by the existing WeaveInstruction language.
+-- The only remaining graph constructor is now the residual metadata policy:
+-- address369, zero-residual direction, and residual-witness length.  Existing
+-- legacy owners provide partial examples but not a general WeaveInstruction law.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -25,6 +27,7 @@ import DASHI.Biology.SignedSSPWeaveProgramMachineExact as Machine
 import DASHI.Biology.SignedSSPWeaveInstructionTraceExact as Trace
 import DASHI.Biology.SignedSSPWeaveSemanticCoreReplayExact as Core
 import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact as Compiler
+import DASHI.Biology.SignedSSPWeaveDerivedLengthDynamicsExact as Derived
 import DASHI.Biology.SignedSSPWeaveCanonicalProjectionExact as Canonical
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Branch
 import DASHI.Moonshine.Generated.OggSSPKernelFieldRecognitionGenerated as Generated
@@ -64,6 +67,16 @@ canonicalGeometryValuationRecovered :
   ≡ Signed.zeroValuation prime
 canonicalGeometryValuationRecovered = Core.canonicalGeometryValuationPointwise
 
+canonicalVirtualExecutionLengthRecovered :
+  Derived.programExecutionCost Signed.canonicalVirtualFiftyThreeProgram ≡ 3
+canonicalVirtualExecutionLengthRecovered =
+  Derived.canonicalVirtualExecutionCostIsThree
+
+canonicalGeometryExecutionLengthRecovered :
+  Derived.programExecutionCost Signed.canonicalGeometricFiftyThreeProgram ≡ 54
+canonicalGeometryExecutionLengthRecovered =
+  Derived.canonicalGeometryExecutionCostIsFiftyFour
+
 canonicalVirtualRichProjectionPaid :
   Canonical.canonicalRichSignedState Canonical.virtualFiftyThreeRun
   ≡ Signed.canonicalVirtualFiftyThreeState
@@ -74,11 +87,15 @@ canonicalGeometryRichProjectionPaid :
   ≡ Signed.canonicalGeometryFiftyThreeState
 canonicalGeometryRichProjectionPaid = Canonical.canonicalGeometryProjectionExact
 
--- Supplying exactly this record is sufficient to compile a total rich-state
--- machine for arbitrary programs.  No additional valuation or scheduler socket
--- remains.
-FullRichGraphMetadataSocket : Set₁
-FullRichGraphMetadataSocket = Compiler.RichMetadataDynamics
+-- Supplying only this reduced socket now suffices to compile the full
+-- RichMetadataDynamics record; scheduler, valuation and three length fields no
+-- longer remain as independent obligations.
+FullRichGraphResidualMetadataSocket : Set₁
+FullRichGraphResidualMetadataSocket = Derived.ResidualMetadataDynamics
+
+compileFullRichMetadata :
+  FullRichGraphResidualMetadataSocket → Compiler.RichMetadataDynamics
+compileFullRichMetadata = Derived.compileRichMetadataDynamics
 
 runtimeSearchFoundCanonicalTotalStepOnSummaryAlone :
   Generated.fullSignedCanonicalTotalStepFound ≡ false
@@ -92,14 +109,18 @@ record FullSignedTransitionGraphBoundary : Set where
     executedTraceRetainsPrimeIdentity : Bool
     arbitraryProgramValuationReplayPaid : Bool
     arbitraryProgramInvariantUnitReplayPaid : Bool
-    richMachineCompilerGivenMetadataPaid : Bool
+    genericProgramLengthDynamicsPaid : Bool
+    genericExecutionLengthDynamicsPaid : Bool
+    genericNormalFormLengthDynamicsPaid : Bool
+    richMachineCompilerGivenResidualMetadataPaid : Bool
     canonicalVirtualRichProjectionPaid : Bool
     canonicalGeometryRichProjectionPaid : Bool
-    metadataDynamicsRecoveredFromPriorRepo : Bool
+    addressResidualWitnessDynamicsRecovered : Bool
     fullArbitraryRichSignedGraphUnconditional : Bool
 
 canonicalFullSignedTransitionGraphBoundary : FullSignedTransitionGraphBoundary
 canonicalFullSignedTransitionGraphBoundary =
   full-signed-transition-graph-boundary
-    true true true true true true true true
+    true true true true true
+    true true true true true true
     false false
