@@ -11,6 +11,15 @@ cCoordinatesClosed = CD.cOfficialCoordinateAuditClosedIsTrue
 dCoordinatesClosed : CD.dOfficialCoordinateAuditClosed ≡ true
 dCoordinatesClosed = CD.dOfficialCoordinateAuditClosedIsTrue
 
+cDependencyRouteAudited : CD.cReleasedDependencyRouteSourceAudited ≡ true
+cDependencyRouteAudited = CD.cReleasedDependencyRouteSourceAuditedIsTrue
+
+dDependencyRouteAudited : CD.dReleasedDependencyRouteSourceAudited ≡ true
+dDependencyRouteAudited = CD.dReleasedDependencyRouteSourceAuditedIsTrue
+
+independentBuildNotWitnessed : CD.independentKernelBuildWitnessedHere ≡ false
+independentBuildNotWitnessed = CD.independentKernelBuildWitnessedHereIsFalse
+
 reconstructionNotGate : CD.independentDASHIReconstructionGatesAudit ≡ false
 reconstructionNotGate = CD.independentDASHIReconstructionGatesAuditIsFalse
 
