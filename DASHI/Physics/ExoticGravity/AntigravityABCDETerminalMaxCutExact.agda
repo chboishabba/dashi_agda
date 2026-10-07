@@ -22,6 +22,8 @@ import DASHI.Physics.Foundations.GRQFTCMP119BuriedSourceAncestryReductionExact a
 import DASHI.Physics.Foundations.GRQFTSourceAmplitudeDrivenIsraelKottlerExact as SourceDriven
 import DASHI.Physics.Foundations.GRQFTCMP119VacuumEnergyCosmologicalStressCompilerExact as VacuumStress
 import DASHI.Physics.Foundations.GRQFTCMP119DirectSourceKottlerRouteExact as DirectSource
+import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as SingleGeometry
+import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExact as ConcreteObservables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
@@ -96,8 +98,22 @@ stageCSourceVacuumStressTransport =
 stageCDirectSourceKottlerRoute : DirectSource.DirectSourceKottlerBoundary
 stageCDirectSourceKottlerRoute = DirectSource.canonicalDirectSourceKottlerBoundary
 
+stageCSingleVacuumGeometry : SingleGeometry.SingleVacuumIsraelKottlerBoundary
+stageCSingleVacuumGeometry =
+  SingleGeometry.canonicalSingleVacuumIsraelKottlerBoundary
+
+stageCSingleSourceVacuumRoute : SingleSource.SingleSourceVacuumKottlerBoundary
+stageCSingleSourceVacuumRoute =
+  SingleSource.canonicalSingleSourceVacuumKottlerBoundary
+
 directSourceVacuumToKottlerRouteConstructed : Bool
 directSourceVacuumToKottlerRouteConstructed = true
+
+singleSourceVacuumStaticRouteConstructed : Bool
+singleSourceVacuumStaticRouteConstructed = true
+
+twoDistinctSourceVacuumScalesRequired : Bool
+twoDistinctSourceVacuumScalesRequired = false
 
 rawEq223ResponseToPinnedR136IsIndependentCrossCheck : Bool
 rawEq223ResponseToPinnedR136IsIndependentCrossCheck = true
@@ -138,6 +154,8 @@ record AntigravityABCDEFrontier : Set where
     stageCOutwardExteriorAccelerationConstructed : Bool
     stageCSourceAmplitudeGeometryInversionClosed : Bool
     stageCSourceCoefficientToCosmologicalStressShapeClosed : Bool
+    stageCSingleVacuumRepulsiveFixtureConstructed : Bool
+    stageCSingleSourceVacuumStaticCompilerConstructed : Bool
     stageDConcreteMechanicalObservablesConstructed : Bool
     stageDConcreteLapseCarriersConstructed : Bool
     stageDKottlerAmplitudeToMetricPerturbationClosed : Bool
@@ -148,7 +166,8 @@ record AntigravityABCDEFrontier : Set where
     asymptoticallyFlatPositiveDensityRepulsiveExteriorAvailable : Bool
     sourceNativeVacuumReadoutStillOpen : Bool
     sourceNativeExactFixtureValuesRequired : Bool
-    sourceAmplitudeAdmissibilityStillOpen : Bool
+    twoDistinctSourceVacuumScalesRequired : Bool
+    singleSourceAmplitudeAdmissibilityStillOpen : Bool
     sourceNativePinnedStressWeldStillOpen : Bool
     rawEq223ResponseToPinnedR136StillOpen : Bool
     sourceNativeDoubleWellDynamicsStillOpen : Bool
@@ -163,8 +182,8 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true true true true true true true true true true true true true
-    false false false true false true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true true true true true true
+    false false false false true false true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -176,14 +195,17 @@ record AntigravityABCDEPromotionBoundary : Set where
     sourceAmplitudeGeometryInversionClosed : Bool
     sourceCoefficientToCosmologicalStressShapeClosed : Bool
     directSourceVacuumToStaticKottlerCompilerClosed : Bool
+    singleVacuumIsraelKottlerMathClosed : Bool
+    singleSourceVacuumStaticCompilerClosed : Bool
     pinnedR136RequiredForStaticGeometryConstruction : Bool
+    twoDistinctSourceVacuumScalesRequired : Bool
     concreteMechanicalObservableProjectionClosed : Bool
     kottlerAmplitudeToMetricPerturbationClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
     sourceNativeVacuumReadoutCarrierClosed : Bool
     sourceNativeToRawAncestryClosed : Bool
     exactFixtureVacuumValuesRequired : Bool
-    sourceAmplitudeAdmissibilityClosed : Bool
+    singleSourceAmplitudeAdmissibilityClosed : Bool
     rawEq223ResponseToPinnedR136Closed : Bool
     dynamicSchutzholdTTReadoutForDeviceClosed : Bool
     fullPhysicalDeviceDemonstrated : Bool
@@ -194,4 +216,5 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true true false true true true true true false false false false false false false true
+    true true true true true true true true true false false
+    true true true true true false false false false false false false true
