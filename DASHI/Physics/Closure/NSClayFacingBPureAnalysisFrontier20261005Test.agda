@@ -35,6 +35,15 @@ b4DefectAggregateClosed = F.b4DefectFourAggregateNormalFormClosedIsTrue
 b4DefectVectorClosed : F.b4DefectOneVectorNormalFormClosed ≡ true
 b4DefectVectorClosed = F.b4DefectOneVectorNormalFormClosedIsTrue
 
+b4DefectNoncoreCoreClosed : F.b4DefectNoncoreCoreBipartiteClosed ≡ true
+b4DefectNoncoreCoreClosed = F.b4DefectNoncoreCoreBipartiteClosedIsTrue
+
+b4DefectNoncoreCoreFourMoments : F.b4DefectNoncoreCoreFourAggregateClosed ≡ true
+b4DefectNoncoreCoreFourMoments = F.b4DefectNoncoreCoreFourAggregateClosedIsTrue
+
+b4DefectNoncoreCoreVector : F.b4DefectNoncoreCoreVectorClosed ≡ true
+b4DefectNoncoreCoreVector = F.b4DefectNoncoreCoreVectorClosedIsTrue
+
 b4DefectSharpEnvelopeClosed : F.b4DefectSharpVectorYoungClosed ≡ true
 b4DefectSharpEnvelopeClosed = F.b4DefectSharpVectorYoungClosedIsTrue
 
