@@ -14,6 +14,11 @@ import DASHI.Economics.AIMultiplexSourceWeightedGraph2026Exact as WeightedGraph
 import DASHI.Economics.AIPartialCoordinateBounds2026Exact as Bounds
 import DASHI.Economics.AITradeRealizationCapitalAuthorityCrossPollination2026Exact as Authority
 import DASHI.Economics.AICapitalRuntimeAuthorityParity2026Exact as Parity
+import DASHI.Economics.AICapitalResidualParetoAcquisition2026Exact as Acquisition
+import DASHI.Economics.AICapitalParetoAcquisitionSourceAtlas2026Exact as AcquisitionSources
+import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
+import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Time
 
 cerebrasAcquisitionNotEstablished :
   Capital.provesBubble Capital.cerebrasOpenAIIsPartnershipNotAcquisition ≡ false
@@ -112,3 +117,45 @@ closedSyntheticExecutableParityReachesAuthority :
   Parity.classifyRuntimeAuthorityParity Parity.syntheticClosedRuntimeParity
   ≡ Authority.realizedCapitalRecoveryCertified
 closedSyntheticExecutableParityReachesAuthority = refl
+
+------------------------------------------------------------------------
+-- Residual-conditioned Pareto acquisition checks.
+------------------------------------------------------------------------
+
+proposalShortcutCannotEnterHardAdmittedStratum :
+  Portfolio.admissibleNow
+    Acquisition.aiCapitalAcquisitionPortfolio
+    Acquisition.publicSourceAcquisitionAuthority
+    Acquisition.reportedProposalShortcut
+  ≡ false
+proposalShortcutCannotEnterHardAdmittedStratum = refl
+
+terminalPayerRouteIsCurrentTerminalCandidate :
+  Portfolio.relevantNow
+    Acquisition.aiCapitalAcquisitionPortfolio
+    Time.terminalPayerCoverageOpen
+    Acquisition.capitalRecoveryConsumer
+    Acquisition.terminalPayerVectorRoute
+  ≡ true
+terminalPayerRouteIsCurrentTerminalCandidate = refl
+
+terminalPayerRouteIsStaleForCapitalSpreadResidual :
+  Portfolio.relevantNow
+    Acquisition.aiCapitalAcquisitionPortfolio
+    Time.capitalSpreadProducerOpen
+    Acquisition.capitalRecoveryConsumer
+    Acquisition.terminalPayerVectorRoute
+  ≡ false
+terminalPayerRouteIsStaleForCapitalSpreadResidual = refl
+
+paretoAcquisitionDoesNotRequireScalarWinner :
+  Acquisition.weightedScalarWinnerRequired Acquisition.canonicalAICapitalParetoAcquisitionBoundary ≡ false
+paretoAcquisitionDoesNotRequireScalarWinner = refl
+
+paretoAcquisitionDoesNotCreateEmpiricalAuthority :
+  Acquisition.paretoFrontierCreatesEmpiricalAuthority Acquisition.canonicalAICapitalParetoAcquisitionBoundary ≡ false
+paretoAcquisitionDoesNotCreateEmpiricalAuthority = refl
+
+acquisitionSourceAtlasRemainsNonPromoting :
+  Source.atlasCreatesAuthority AcquisitionSources.aiCapitalParetoAcquisitionAtlas ≡ false
+acquisitionSourceAtlasRemainsNonPromoting = refl
