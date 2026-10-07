@@ -16,18 +16,20 @@ module DASHI.Physics.Foundations.CMP119CosmologyP1PublishedEuclideanBackgroundCo
 --     = E^(j)( U_j(exp(i B)), z ).
 --
 -- The source therefore already supplies the scalar-potential covariance needed
--- by the derivative compiler.  The cosmology proof must not repay that as a new
--- theorem.  The surviving work is same-object identification of the repository
+-- by the derivative compiler. The cosmology proof must not repay that as a new
+-- theorem. The surviving work is same-object identification of the repository
 -- CMP109/116 Background/tangent with this literal B-coordinate and its B4
 -- action, including the ten canonical metric/source directions.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 record PublishedCMP119EuclideanBackgroundCovariance
     (Background EuclideanAction : Set)
-    (potential : Background → DASHI.Foundations.RealAnalysisAxioms.ℝ)
+    (potential : Background → ℝ)
     : Set₁ where
   field
     actBackground : EuclideanAction → Background → Background
