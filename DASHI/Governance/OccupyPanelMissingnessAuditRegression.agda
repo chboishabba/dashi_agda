@@ -13,6 +13,9 @@ durationObservedCountPinned = refl
 lexicalCoveragePinned : Audit.owsLexicalObservedCount Audit.canonicalMissingnessAudit ≡ 38
 lexicalCoveragePinned = refl
 
+interfaceLexicalCoveragePinned : Audit.owsInterfaceLexicalObservedCount Audit.canonicalMissingnessAudit ≡ 38
+interfaceLexicalCoveragePinned = refl
+
 missingDurationNotZero : Audit.missingDurationImputedAsZero Audit.canonicalMissingnessBoundary ≡ false
 missingDurationNotZero = refl
 
