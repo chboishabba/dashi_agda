@@ -1,4 +1,5 @@
 {
+  "canonical_signed_core_replay_verified": true,
   "existing_heisenberg_translation_intertwines_f3_addition": true,
   "fields": {
     "4": {
@@ -211,15 +212,19 @@
     }
   },
   "full_signed_weave_frontier": {
+    "arbitrary_program_invariant_unit_replay_paid": true,
+    "arbitrary_program_valuation_replay_paid": true,
+    "canonical_geometry_rich_projection_paid": true,
     "canonical_total_program_counter_machine_paid": true,
-    "canonical_total_step_over_summary_state_alone_found": false,
+    "canonical_virtual_rich_projection_paid": true,
+    "executed_trace_retains_prime_identity": true,
     "full_rich_signed_transition_graph_claimed": false,
     "lane_count": 15,
-    "machine_to_rich_signed_state_projection_paid": false,
-    "pointed_lane_to_full_valuation_paid": true,
-    "reason": "The remaining program list makes the scheduler total. WeaveEffect retains counts rather than prime identity, while SignedSSPExecutionState additionally owns address/residual/length metadata; a faithful projection therefore still needs an independent witness.",
-    "signed_multiplicity_and_program_machinery_paid": true
+    "metadata_dynamics_recovered_from_prior_repo": false,
+    "reason": "Instruction replay now reconstructs prime identity, valuation, and invariant units. Only address369, zero-residual direction, and description/execution-length dynamics remain external to WeaveInstruction.",
+    "rich_machine_compiler_given_metadata_paid": true
   },
+  "heisenberg_coordinate_swap_preserves_dot6_exhaustive": true,
   "row_major_12_vector_scan": {
     "matching_12_vector_columns": [],
     "minimum_vector_columns": [
