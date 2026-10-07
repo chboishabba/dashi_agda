@@ -43,7 +43,7 @@ T5 records the **field-side** subfield lattice mechanically. For example, `GF(81
 zer = 0, pos = 1, neg = 2 = -1.
 ```
 
-In particular the pre-existing codec inversion is proved to be scalar multiplication by `-1` on every kernel depth.
+The finite scalar laws are paid by exhaustive constructors and lifted pointwise to kernels. The source now proves the additive group laws, scalar identity/zero laws, both distributivity laws, scalar associativity, and that the pre-existing codec inversion is exactly scalar multiplication by `-1`. Thus `Kernel d` has a source-written `F3` vector-space law bundle, in particular for `K4`, `K5`, and `K6`.
 
 `scripts/j369_kernel_field_recognition.py` then checks selected irreducible polynomial presentations for degrees 4, 5 and 6. The resulting coordinate fields have orders `81`, `243`, and `729`; their nonzero multiplicative groups contain primitive elements of exact orders `80`, `242`, and `728` respectively. Every nonzero coordinate is exhaustively checked to have an inverse.
 
@@ -95,11 +95,11 @@ SignedSSPExecutionState -> SignedSSPExecutionState.
 The old blanket numerical field candidates remain unrecognized. The new `K4/K5/K6` cut pays more narrowly:
 
 - coordinate object map: paid;
-- explicit additive/scalar `F3` structure: paid;
+- full additive/scalar `F3` vector-space law surface: paid in source;
 - `C2` arrow/action seam for negation: paid;
 - runtime orbit profiles: paid;
 - selected finite-field multiplication/inverses: runtime paid;
 - canonicity of that multiplication from prior repo semantics: unpaid;
 - full action-groupoid recognition against field multiplication/Frobenius: unpaid.
 
-So the remaining mathematical frontier is no longer cardinal arithmetic. It is to derive a canonical multiplication/Frobenius action from independently existing DASHI structure, or prove that no such promotion is justified, and separately to construct the missing canonical total step for the full signed 15-lane execution state.
+So the remaining mathematical frontier is no longer cardinal arithmetic or `F3` linearity. It is to derive a canonical multiplication/Frobenius action from independently existing DASHI structure, or prove that no such promotion is justified, and separately to construct the missing canonical total step for the full signed 15-lane execution state.
