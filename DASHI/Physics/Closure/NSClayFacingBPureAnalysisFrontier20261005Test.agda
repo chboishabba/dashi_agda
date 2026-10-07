@@ -5,6 +5,12 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact as F
 
+b4LiteralSplitClosed : F.b4LiteralPrincipalDefectSplitClosed ≡ true
+b4LiteralSplitClosed = F.b4LiteralPrincipalDefectSplitClosedIsTrue
+
+b4PhysicalEstimatesRemain : F.b4PrincipalDefectPhysicalEstimatesClosed ≡ false
+b4PhysicalEstimatesRemain = F.b4PrincipalDefectPhysicalEstimatesClosedIsFalse
+
 strictSplitCompiler : F.b4GenericStrictSplitCompilerClosed ≡ true
 strictSplitCompiler = F.b4GenericStrictSplitCompilerClosedIsTrue
 
