@@ -9,19 +9,6 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Foundations.PositiveGActiveStressWeakFieldMetricExact as Weak
 
-------------------------------------------------------------------------
--- ANISOTROPIC STATIC CONSERVATION AUDIT
---
--- In a static spherically symmetric chart, local stress conservation has the
--- anisotropic TOV shape
---
---   p_r' + (rho + p_r) Phi' - 2 (p_t - p_r) / r = 0.
---
--- We encode the exact algebraic residual.  This does not claim the full
--- Einstein/TOV system has been solved; it identifies the precise obstruction
--- for the current two-zone constant-pressure fixture.
-------------------------------------------------------------------------
-
 anisotropicConservationResidual :
   ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 anisotropicConservationResidual rho pr pt prPrime phiPrime inverseRadius =
@@ -45,7 +32,7 @@ boundaryConstantPrPrime : ℚ
 boundaryConstantPrPrime = 0ℚ
 
 requiredBoundaryPhiPrime : ℚ
-requiredBoundaryPhiPrime = - (Int.+ 2 / Int.+ 1)
+requiredBoundaryPhiPrime = - (Int.+ 2 / 1)
 
 boundaryConstantPressureRequiresPhiPrimeMinusTwo :
   anisotropicConservationResidual
@@ -64,7 +51,7 @@ weakFieldBoundaryResidual =
     weakFieldBoundaryPhiPrime boundaryInverseRadius
 
 weakFieldBoundaryResidualIsFiveThirds :
-  weakFieldBoundaryResidual ≡ Int.+ 5 / Int.+ 3
+  weakFieldBoundaryResidual ≡ Int.+ 5 / 3
 weakFieldBoundaryResidualIsFiveThirds = solve []
 
 data ConservedStaticSolutionStatus : Set where
