@@ -58,9 +58,9 @@ uniformMeaningfulAdvantageImpliesPerModelMargin :
   UniformMeaningfulAdvantage threshold family →
   (i : Index family) →
   Significance.MeaningfulOrderImprovement threshold (model family i)
-uniformMeaningfulAdvantageImpliesPerModelMargin certificate i =
+uniformMeaningfulAdvantageImpliesPerModelMargin {family = family} certificate i =
   Significance.robustMeaningfulWinImpliesMargin
-    (Transfer.targetBounds (targetEvidence _ i))
+    (Transfer.targetBounds (targetEvidence family i))
     (everyAdmissibleModelWins certificate i)
 
 uniformMeaningfulDisadvantageImpliesPerModelMargin :
@@ -68,9 +68,9 @@ uniformMeaningfulDisadvantageImpliesPerModelMargin :
   UniformMeaningfulDisadvantage threshold family →
   (i : Index family) →
   Significance.MeaningfulOrderLoss threshold (model family i)
-uniformMeaningfulDisadvantageImpliesPerModelMargin certificate i =
+uniformMeaningfulDisadvantageImpliesPerModelMargin {family = family} certificate i =
   Significance.robustMeaningfulLossImpliesMargin
-    (Transfer.targetBounds (targetEvidence _ i))
+    (Transfer.targetBounds (targetEvidence family i))
     (everyAdmissibleModelLoses certificate i)
 
 ------------------------------------------------------------------------
