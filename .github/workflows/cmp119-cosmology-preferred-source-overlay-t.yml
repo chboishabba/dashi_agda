@@ -3,6 +3,8 @@ name: CMP119 cosmology preferred source overlay U
 on:
   pull_request:
     paths:
+      - 'DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda'
       - 'DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Exact.agda'
@@ -55,6 +57,8 @@ jobs:
           nix develop --accept-flake-config --command bash -lc '
             set -euo pipefail
             for f in \
+              DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityExact.agda \
+              DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda \
               DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Exact.agda \
