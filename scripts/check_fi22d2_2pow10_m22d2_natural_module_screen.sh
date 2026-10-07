@@ -23,6 +23,7 @@ data = json.loads(p.read_text())
 
 assert data["fi22d2_order"] == 129123503308800
 assert data["maximal_subgroup_order"] == 908328960
+assert 129123503308800 // 908328960 == 142155
 assert data["normal_kernel_order"] == 1024
 assert data["normal_kernel_elementary_abelian"] is True
 assert data["quotient_order"] == 887040
@@ -34,6 +35,7 @@ assert data["outer_J2x5_match_count"] > 0, "natural 2^10 module must expose the 
 assert data["finite_source_native_completion10_module_identified"] is True
 assert data["actual_2b_tate_same_object_identified"] is False
 
+print("Fi22:2 maximal index:", 142155)
 print("Fi22:2 normal 2^10 Atlas matches:", data["atlas_m22d2_10d_matches"])
 print("natural action group order:", data["natural_action_group_order"])
 print("outer involution rows:", data["outer_involution_rows"])
