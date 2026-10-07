@@ -13,11 +13,6 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Design
 
 ------------------------------------------------------------------------
 -- QUAIL EGG / HISTAMINE / GUT SNOWBALL
---
--- Source roles remain claim-relative. Quail-egg cell/mouse anti-degranulation
--- evidence is not promoted to human IBS treatment; recombinant ovomucoid is not
--- identified with whole-food exposure; gut DAO is not inferred from serum DAO;
--- microbial histamine and mast-cell histamine remain distinct source terms.
 ------------------------------------------------------------------------
 
 lianto2018Source : Source.AttributedSource
@@ -32,7 +27,7 @@ lianto2018Source = Source.mkDOISource
 
 ovomucoid2023Source : Source.AttributedSource
 ovomucoid2023Source = Source.mkDOISource
-  "authors as reported by Food Science and Human Wellness source"
+  "Mengzhen Hao; Shuai Yang; Shiwen Han; Huilian Che"
   "The amino acids differences in epitopes may promote the different allergenicity of ovomucoid derived from hen eggs and quail eggs"
   "Food Science and Human Wellness 12(3):861-870" "2023"
   "10.1016/j.fshw.2022.09.028" "https://doi.org/10.1016/j.fshw.2022.09.028"
@@ -112,8 +107,8 @@ record IBSMicrobialHistamineReceipt : Set where
         mouseTransferMechanismRetained : Bool
         universalIBSCauseClaimed : Bool
 
- dePalma2022IBSHistamineReceipt : IBSMicrobialHistamineReceipt
- dePalma2022IBSHistamineReceipt = ibs-microbial-histamine-receipt
+dePalma2022IBSHistamineReceipt : IBSMicrobialHistamineReceipt
+dePalma2022IBSHistamineReceipt = ibs-microbial-histamine-receipt
   dePalma2022Source true true true false
 
 record GutHistamineCompartmentWeld : Set where
