@@ -27,6 +27,7 @@ assert data["normal_kernel_order"] == 1024
 assert data["normal_kernel_elementary_abelian"] is True
 assert data["quotient_order"] == 887040
 assert data["natural_module_dimension"] == 10
+assert data["natural_action_group_order"] == 887040
 assert data["atlas_m22d2_10d_matches"], "natural 2^10 action must match an Atlas M22:2 10d module"
 assert data["outer_involution_rows"], "expected at least one outer involution class"
 assert data["outer_J2x5_match_count"] > 0, "natural 2^10 module must expose the outer J2^5 fingerprint"
@@ -34,6 +35,7 @@ assert data["finite_source_native_completion10_module_identified"] is True
 assert data["actual_2b_tate_same_object_identified"] is False
 
 print("Fi22:2 normal 2^10 Atlas matches:", data["atlas_m22d2_10d_matches"])
+print("natural action group order:", data["natural_action_group_order"])
 print("outer involution rows:", data["outer_involution_rows"])
 print("outer J2^5 match count:", data["outer_J2x5_match_count"])
 print("finite source-native Completion10 donor: PASS")
