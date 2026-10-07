@@ -11,7 +11,11 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderOddResidualExact where
 -- residue code.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Nat.DivMod using (_%_)
+open import Data.Product using (_×_)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
@@ -28,20 +32,20 @@ record OddCylinderResidual : Set₁ where
       {m : Nat} →
       (tail : Binary.BinaryWord m) →
       (x : Syracuse.PositiveNat) →
-      Itinerary.parityWord (Agda.Builtin.Nat.suc m) x ≡ Binary.bit1 tail →
+      Itinerary.parityWord (suc m) x ≡ Binary.bit1 tail →
       Syracuse.toNat (Syracuse.shortcutSyracuse x) % Cylinder.pow2 m
         ≡ Candidate.residueCandidate tail →
-      Syracuse.toNat x % Cylinder.pow2 (Agda.Builtin.Nat.suc m)
+      Syracuse.toNat x % Cylinder.pow2 (suc m)
         ≡ Candidate.residueCandidate (Binary.bit1 tail)
 
     bit1Reverse :
       {m : Nat} →
       (tail : Binary.BinaryWord m) →
       (x : Syracuse.PositiveNat) →
-      Syracuse.toNat x % Cylinder.pow2 (Agda.Builtin.Nat.suc m)
+      Syracuse.toNat x % Cylinder.pow2 (suc m)
         ≡ Candidate.residueCandidate (Binary.bit1 tail) →
-      (Itinerary.parity x ≡ Agda.Builtin.Bool.true)
-      Data.Product.×
+      (Itinerary.parity x ≡ true)
+      ×
       (Syracuse.toNat (Syracuse.shortcutSyracuse x) % Cylinder.pow2 m
         ≡ Candidate.residueCandidate tail)
 
