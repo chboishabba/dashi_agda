@@ -8,6 +8,10 @@ nestedSourceDesignPresent :
   Evaluation.nestedSourceDesignPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
 nestedSourceDesignPresent = refl
 
+derivedScaleEnvelopePresent :
+  Evaluation.derivedScaleEnvelopePaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+derivedScaleEnvelopePresent = refl
+
 structuralContractionPaid :
   Evaluation.structuralLocalityContractionPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
 structuralContractionPaid = refl
