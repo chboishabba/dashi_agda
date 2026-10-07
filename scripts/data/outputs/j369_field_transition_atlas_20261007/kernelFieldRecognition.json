@@ -1,0 +1,60 @@
+{
+  "fields": {
+    "4": {
+      "c2_negation_action_intertwining_paid": true,
+      "canonical_field_multiplication_from_existing_repo_action": false,
+      "chosen_field_multiplication_runtime_verified": true,
+      "frobenius_orbits": {"1": 3, "2": 3, "4": 18},
+      "full_recognition_paid": false,
+      "kernel_coordinate_object_map_paid": true,
+      "modulus_low_to_high": [1, 0, 1, 1, 1],
+      "negation_orbits_all": {"1": 1, "2": 40},
+      "negation_orbits_nonzero": {"2": 40},
+      "order": 81,
+      "primitive_element": [0, 0, 1, 1],
+      "primitive_order": 80
+    },
+    "5": {
+      "c2_negation_action_intertwining_paid": true,
+      "canonical_field_multiplication_from_existing_repo_action": false,
+      "chosen_field_multiplication_runtime_verified": true,
+      "frobenius_orbits": {"1": 3, "5": 48},
+      "full_recognition_paid": false,
+      "kernel_coordinate_object_map_paid": true,
+      "modulus_low_to_high": [1, 0, 0, 0, 2, 1],
+      "negation_orbits_all": {"1": 1, "2": 121},
+      "negation_orbits_nonzero": {"2": 121},
+      "order": 243,
+      "primitive_element": [0, 0, 0, 0, 2],
+      "primitive_order": 242
+    },
+    "6": {
+      "c2_negation_action_intertwining_paid": true,
+      "canonical_field_multiplication_from_existing_repo_action": false,
+      "chosen_field_multiplication_runtime_verified": true,
+      "frobenius_orbits": {"1": 3, "2": 3, "3": 8, "6": 116},
+      "full_recognition_paid": false,
+      "kernel_coordinate_object_map_paid": true,
+      "modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
+      "negation_orbits_all": {"1": 1, "2": 364},
+      "negation_orbits_nonzero": {"2": 364},
+      "order": 729,
+      "primitive_element": [0, 0, 0, 0, 1, 1],
+      "primitive_order": 728
+    }
+  },
+  "full_signed_weave_frontier": {
+    "canonical_total_step_over_full_signed_state_found": false,
+    "full_signed_transition_graph_claimed": false,
+    "lane_count": 15,
+    "pointed_lane_to_full_valuation_paid": true,
+    "reason": "SignedSSPFRACTRANWeaveExact owns the 15-lane valuation/program carriers but no canonical total transition over SignedSSPExecutionState; inventing one would exceed the formal source.",
+    "signed_multiplicity_and_program_machinery_paid": true
+  },
+  "row_major_12_vector_scan": {
+    "matching_12_vector_columns": [],
+    "minimum_vector_columns": [173, 189],
+    "minimum_vector_count": 196,
+    "node_count": 1330
+  }
+}
