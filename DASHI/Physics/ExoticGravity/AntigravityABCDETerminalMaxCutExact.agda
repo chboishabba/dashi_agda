@@ -19,6 +19,8 @@ import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Nam
 import DASHI.Physics.Foundations.GRQFTSourceNativeNambuBubbleConditionalExact as SourceNative
 import DASHI.Physics.Foundations.GRQFTCMP119NambuBuriedVacuumReadoutExact as BuriedReadout
 import DASHI.Physics.Foundations.GRQFTCMP119BuriedSourceAncestryReductionExact as Ancestry
+import DASHI.Physics.Foundations.GRQFTSourceAmplitudeDrivenIsraelKottlerExact as SourceDriven
+import DASHI.Physics.Foundations.GRQFTCMP119VacuumEnergyCosmologicalStressCompilerExact as VacuumStress
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExact as ConcreteObservables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
@@ -80,6 +82,16 @@ stageASourceNativeVacuumReadout =
 stageASourceAncestryReduction : Ancestry.BuriedSourceAncestryBoundary
 stageASourceAncestryReduction = Ancestry.canonicalBuriedSourceAncestryBoundary
 
+stageCSourceAmplitudeDrivenGeometry :
+  SourceDriven.SourceAmplitudeDrivenIsraelKottlerBoundary
+stageCSourceAmplitudeDrivenGeometry =
+  SourceDriven.canonicalSourceAmplitudeDrivenIsraelKottlerBoundary
+
+stageCSourceVacuumStressTransport :
+  VacuumStress.SourceNativeVacuumCosmologicalStressBoundary
+stageCSourceVacuumStressTransport =
+  VacuumStress.canonicalSourceNativeVacuumCosmologicalStressBoundary
+
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
 
@@ -114,6 +126,8 @@ record AntigravityABCDEFrontier : Set where
     stageCPositiveMetricMassRetained : Bool
     stageCPositiveNewtonGRetained : Bool
     stageCOutwardExteriorAccelerationConstructed : Bool
+    stageCSourceAmplitudeGeometryInversionClosed : Bool
+    stageCSourceCoefficientToCosmologicalStressShapeClosed : Bool
     stageDConcreteMechanicalObservablesConstructed : Bool
     stageDConcreteLapseCarriersConstructed : Bool
     stageDKottlerAmplitudeToMetricPerturbationClosed : Bool
@@ -123,10 +137,11 @@ record AntigravityABCDEFrontier : Set where
 
     asymptoticallyFlatPositiveDensityRepulsiveExteriorAvailable : Bool
     sourceNativeVacuumReadoutStillOpen : Bool
-    sourceNativeTwoVacuumValuesStillOpen : Bool
+    sourceNativeExactFixtureValuesRequired : Bool
+    sourceAmplitudeAdmissibilityStillOpen : Bool
     sourceNativePinnedStressWeldStillOpen : Bool
     rawEq223ResponseToPinnedR136StillOpen : Bool
-    sourceNativeCMP119PotentialCouplingStillOpen : Bool
+    sourceNativeDoubleWellDynamicsStillOpen : Bool
     finiteThicknessWallStillOpen : Bool
     SIStressCalibrationStillOpen : Bool
     physicalAmplitudeModulationStillOpen : Bool
@@ -138,8 +153,8 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true true true true true true true true true true true
-    false false true false true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true true true true
+    false false false true false true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -148,12 +163,15 @@ record AntigravityABCDEPromotionBoundary : Set where
     selectedIsraelShellMathClosed : Bool
     selectedNambuGotoSurfaceEquationOfStateClosed : Bool
     normalizedCMP119TensorTransportClosed : Bool
+    sourceAmplitudeGeometryInversionClosed : Bool
+    sourceCoefficientToCosmologicalStressShapeClosed : Bool
     concreteMechanicalObservableProjectionClosed : Bool
     kottlerAmplitudeToMetricPerturbationClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
     sourceNativeVacuumReadoutCarrierClosed : Bool
     sourceNativeToRawAncestryClosed : Bool
-    sourceNativeTwoAmplitudeValuesClosed : Bool
+    exactFixtureVacuumValuesRequired : Bool
+    sourceAmplitudeAdmissibilityClosed : Bool
     rawEq223ResponseToPinnedR136Closed : Bool
     dynamicSchutzholdTTReadoutForDeviceClosed : Bool
     fullPhysicalDeviceDemonstrated : Bool
@@ -164,4 +182,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true true true true false false false false false false true
+    true true true true true true true true true true true false false false false false false false true
