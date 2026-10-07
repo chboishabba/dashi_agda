@@ -3,15 +3,18 @@ module DASHI.Biology.SignedSSPWeaveMetadataAcquisitionFrontierExact where
 ------------------------------------------------------------------------
 -- METADATA-DYNAMICS ACQUISITION FRONTIER FOR THE FULL SIGNED WEAVE GRAPH
 --
--- Existing nearby owners do contain pieces of the missing metadata policy:
+-- Existing nearby owners now pay more of the rich-state metadata policy:
 --   * legacy FRACTRAN prime transport preserves the 3/6/9 address;
 --   * successful legacy prime transport records fromPositive residual approach;
---   * Hyperfabric owns the program/execution/normal/residual length carrier.
+--   * generic weave program/execution/normal-form lengths are mechanically
+--     derived by SignedSSPWeaveDerivedLengthDynamicsExact.
 --
--- What the repo does not currently own is an exact map from the general
--- WeaveInstruction language to those legacy rules, nor per-instruction dynamics
--- for the description-length fields.  This module cross-pollinates the paid
--- pieces without silently identifying the two machines.
+-- What remains genuinely external is therefore only:
+--   * the address update semantics of general weave instructions/refineAt369;
+--   * the zero-residual-direction update semantics of general instructions;
+--   * residual-witness-length dynamics.
+-- No map between the legacy four-rule machine and the general weave language is
+-- invented here.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -21,6 +24,7 @@ import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Biology.FRACTRANSSPTransitionExact as Legacy
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Hyper
 import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact as Compiler
+import DASHI.Biology.SignedSSPWeaveDerivedLengthDynamicsExact as Derived
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 
 legacyCanonicalAddressTransportPaid :
@@ -39,15 +43,25 @@ legacyResidualTransportToPositivePaid :
   ≡ Zero.fromPositive
 legacyResidualTransportToPositivePaid = refl
 
+canonicalVirtualExecutionLengthRecovered :
+  Derived.programExecutionCost Signed.canonicalVirtualFiftyThreeProgram ≡ 3
+canonicalVirtualExecutionLengthRecovered =
+  Derived.canonicalVirtualExecutionCostIsThree
+
+canonicalGeometryExecutionLengthRecovered :
+  Derived.programExecutionCost Signed.canonicalGeometricFiftyThreeProgram ≡ 54
+canonicalGeometryExecutionLengthRecovered =
+  Derived.canonicalGeometryExecutionCostIsFiftyFour
+
 existingComplexityCarrier : Set
 existingComplexityCarrier = Hyper.WeaveComplexity
 
-fullMetadataDynamicsSocket : Set₁
-fullMetadataDynamicsSocket = Compiler.RichMetadataDynamics
+residualMetadataDynamicsSocket : Set₁
+residualMetadataDynamicsSocket = Derived.ResidualMetadataDynamics
 
--- No constructor is supplied: a general WeaveInstruction-to-legacy-rule
--- compiler is not present in the source tree, and refineAt369 has no existing
--- address-transition semantics beyond its aggregate effect counter.
+fullMetadataDynamicsCompiler :
+  Derived.ResidualMetadataDynamics → Compiler.RichMetadataDynamics
+fullMetadataDynamicsCompiler = Derived.compileRichMetadataDynamics
 
 record SignedSSPWeaveMetadataAcquisitionBoundary : Set where
   constructor signed-ssp-weave-metadata-acquisition-boundary
@@ -55,9 +69,13 @@ record SignedSSPWeaveMetadataAcquisitionBoundary : Set where
     legacyAddressPreservationPolicyLocated : Bool
     legacyResidualDirectionPolicyLocated : Bool
     typedComplexityCarrierLocated : Bool
+    genericProgramLengthDynamicsPaid : Bool
+    genericExecutionLengthDynamicsPaid : Bool
+    genericNormalFormLengthDynamicsPaid : Bool
     generalWeaveInstructionToLegacyRuleMapLocated : Bool
     refineAt369AddressDynamicsLocated : Bool
-    perInstructionDescriptionLengthDynamicsLocated : Bool
+    generalZeroResidualDynamicsLocated : Bool
+    residualWitnessLengthDynamicsLocated : Bool
     fullRichMetadataDynamicsRecovered : Bool
 
 canonicalSignedSSPWeaveMetadataAcquisitionBoundary :
@@ -65,4 +83,5 @@ canonicalSignedSSPWeaveMetadataAcquisitionBoundary :
 canonicalSignedSSPWeaveMetadataAcquisitionBoundary =
   signed-ssp-weave-metadata-acquisition-boundary
     true true true
-    false false false false
+    true true true
+    false false false false false
