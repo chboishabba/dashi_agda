@@ -45,15 +45,28 @@ def test_conserved_profile_compiler_eliminates_tangential_pressure_unknown():
         assert token in text
 
 
-def test_local_active_stress_is_not_promoted_to_global_exterior_mass():
-    text = read("DASHI/Physics/Foundations/LocalActiveStressGlobalExteriorMassFirewallExact.agda")
+def test_strongest_existing_nonlinear_repulsive_geometry_is_consumed():
+    terminal = read("DASHI/Physics/ExoticGravity/AntigravityABCDETerminalMaxCutExact.agda")
     for token in (
-        "localActiveStressDoesNotAutomaticallyGiveNegativeGlobalMass",
-        "localToyResponseIsNotAutomaticallyExactGRExterior",
-        "exactGlobalExteriorMassChargeSolved",
-        "globalExteriorPromotionRequiresAllThoseReceipts",
+        "stageCIsraelBranchMaxCut",
+        "stageCNambuGotoRepulsiveBubbleBoundary",
+        "stageCSourceNativeNambuConditionalBoundary",
+        "selectedNonlinearRepulsiveExteriorGeometryConstructed",
+        "sourceNativeVacuumReadoutStillOpen",
+        "sourceNativePinnedStressWeldStillOpen",
     ):
-        assert token in text
+        assert token in terminal
+
+    bubble = read("DASHI/Physics/Foundations/GRQFTNambuGotoRepulsiveBubbleMaxCutExact.agda")
+    for token in (
+        "positiveMetricMass",
+        "positiveNewtonGCompatible",
+        "outwardExteriorAcceleration",
+        "nambuGotoEquationOfState",
+        "necWecDecCompatible",
+        "sourceNativeCMP119PotentialCouplingDerived",
+    ):
+        assert token in bubble
 
 
 def test_device_observable_compiler_covers_weight_freefall_clock_optical():
@@ -76,10 +89,10 @@ def test_A_to_E_terminal_owner_exists_and_is_fail_closed():
         "stageCWeakFieldMetricSolve",
         "stageCNonlinearConservationAudit",
         "stageCConservedProfileCompiler",
-        "stageCGlobalExteriorPromotionAudit",
+        "stageCSphericalExteriorMassObstruction",
+        "stageCLocalRepulsiveInteriorFamily",
         "stageDFourChannelProjection",
         "stageESameObjectExperiment",
-        "fullNonlinearCompactEinsteinSolveStillOpen",
         "physicalDeviceStressRealisationStillOpen",
     ):
         assert token in text
