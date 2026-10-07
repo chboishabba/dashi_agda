@@ -23,3 +23,15 @@ prospectiveValidationRequired = refl
 coordinationAdvantageNotLegitimacy :
   Gate.validatedCoordinationAdvantageCreatesPoliticalLegitimacy Gate.canonicalEmpiricalPromotionBoundary ≡ false
 coordinationAdvantageNotLegitimacy = refl
+
+meaningfulThresholdMustBeFrozen :
+  Gate.practicalThresholdMustBeFrozenBeforeTargetOutcome Gate.canonicalMeaningfulPromotionBoundary ≡ true
+meaningfulThresholdMustBeFrozen = refl
+
+strictValidatedDifferenceNotAutomaticallyMeaningful :
+  Gate.strictValidatedDifferenceAutomaticallyCountsAsMeaningful Gate.canonicalMeaningfulPromotionBoundary ≡ false
+strictValidatedDifferenceNotAutomaticallyMeaningful = refl
+
+meaningfulAdvantageStillNotLegitimacy :
+  Gate.meaningfulValidatedAdvantageCreatesPoliticalLegitimacy Gate.canonicalMeaningfulPromotionBoundary ≡ false
+meaningfulAdvantageStillNotLegitimacy = refl
