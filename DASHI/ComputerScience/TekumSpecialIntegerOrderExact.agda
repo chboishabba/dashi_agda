@@ -40,6 +40,24 @@ allSameTrueWord {t = Trit.pos} {word = Trit.zer ∷ xs} ()
 allSameTrueWord {t = Trit.pos} {word = Trit.pos ∷ xs} eq =
   cong (Trit.pos ∷_) (allSameTrueWord eq)
 
+classifyAllNegative :
+  (n : Nat) →
+  Special.classifySpecial (replicate n Trit.neg) ≡ just Sem.naR
+classifyAllNegative zero = refl
+classifyAllNegative (suc n) rewrite classifyAllNegative n = refl
+
+classifyAllZero :
+  (n : Nat) →
+  Special.classifySpecial (replicate n Trit.zer) ≡ just Sem.zeroValue
+classifyAllZero zero = refl
+classifyAllZero (suc n) rewrite classifyAllZero n = refl
+
+classifyAllPositive :
+  (n : Nat) →
+  Special.classifySpecial (replicate n Trit.pos) ≡ just Sem.infinity
+classifyAllPositive zero = refl
+classifyAllPositive (suc n) rewrite classifyAllPositive n = refl
+
 classifyNaRWord :
   ∀ {n} {word : Vec Trit.Trit n} →
   Special.classifySpecial word ≡ just Sem.naR →
