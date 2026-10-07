@@ -3,13 +3,8 @@ module DASHI.Analysis.CollatzSyracuseRationalDriftTailExact where
 ------------------------------------------------------------------------
 -- PARAMETRIC RATIONAL PARITY-DRIFT TAIL
 --
--- The five-eighths theorem is only one integer instance of a more general
--- finite argument.  If
---
---   3^a <= 2^b,
---
--- then at horizon m = b*n + 1 every parity word with at most a*n odd steps
--- satisfies the literal affine descent margin
+-- If 3^a <= 2^b, then at horizon m = b*n + 1 every parity word
+-- with at most a*n odd steps satisfies
 --
 --   2 * 3^(ones w) <= 2^m.
 --
@@ -19,7 +14,7 @@ module DASHI.Analysis.CollatzSyracuseRationalDriftTailExact where
 --   2^(a*n+1) * badWordCount(b*n+1) <= 3^(b*n+1).
 --
 -- No logarithm, probability measure, spectral gap, or asymptotic theorem is
--- used.  Rational approximants to log_3(2) enter only through the explicit
+-- used. Rational approximants to log_3(2) enter only through the explicit
 -- integer power comparison 3^a <= 2^b.
 ------------------------------------------------------------------------
 
@@ -27,8 +22,10 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Bool.Base using (T)
-open import Data.Nat using (_≤_; _≤ᵇ_; z≤n)
+open import Data.Nat using (_≤_; _≤ᵇ_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Data.Unit.Base using (tt)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary.Negation.Core using (¬_; contradiction)
@@ -37,10 +34,6 @@ import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.Core.BinaryWordIntegerChernoffExact as Chernoff
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
 import DASHI.Analysis.CollatzSyracuseParityDescentEventExact as Event
-
-------------------------------------------------------------------------
--- Shared power / one-count carriers.
-------------------------------------------------------------------------
 
 powAgreement :
   (base exponent : Nat) →
@@ -56,10 +49,6 @@ onesAgreement :
 onesAgreement Binary.end = refl
 onesAgreement (Binary.bit0 tail) = onesAgreement tail
 onesAgreement (Binary.bit1 tail) = cong suc (onesAgreement tail)
-
-------------------------------------------------------------------------
--- Elementary power algebra.
-------------------------------------------------------------------------
 
 powAdd :
   (base left right : Nat) →
@@ -84,8 +73,8 @@ powMonotoneThree :
   left ≤ right →
   Affine.powNat 3 left ≤ Affine.powNat 3 right
 powMonotoneThree {zero} {right} z≤n =
-  oneLePow 3 right (NatP.s≤s z≤n)
-powMonotoneThree {suc left} {suc right} (NatP.s≤s relation) =
+  oneLePow 3 right (s≤s z≤n)
+powMonotoneThree {suc left} {suc right} (s≤s relation) =
   NatP.*-monoʳ-≤ 3 (powMonotoneThree relation)
 
 ------------------------------------------------------------------------
@@ -105,10 +94,7 @@ rationalGrowth a b step (suc n) =
     oldRight = Affine.powNat 2 (b * n + 1)
 
     expA : a * suc n ≡ a * n + a
-    expA =
-      trans
-        (NatP.*-suc a n)
-        (NatP.+-comm a (a * n))
+    expA = trans (NatP.*-suc a n) (NatP.+-comm a (a * n))
 
     expB : b * suc n + 1 ≡ (b * n + 1) + b
     expB =
@@ -116,9 +102,7 @@ rationalGrowth a b step (suc n) =
         (cong (_+ 1) (NatP.*-suc b n))
         (trans
           (NatP.+-assoc b (b * n) 1)
-          (trans
-            (cong (b +_) (NatP.+-comm (b * n) 1))
-            (sym (NatP.+-assoc (b * n) 1 b))))
+          (NatP.+-comm b (b * n + 1)))
 
     leftFactor :
       2 * Affine.powNat 3 (a * suc n)
@@ -128,21 +112,11 @@ rationalGrowth a b step (suc n) =
         (cong (λ exponent → 2 * Affine.powNat 3 exponent) expA)
         (trans
           (cong (2 *_) (powAdd 3 (a * n) a))
-          (trans
-            (NatP.*-assoc 2 (Affine.powNat 3 (a * n)) (Affine.powNat 3 a))
-            (trans
-              (cong (_* Affine.powNat 3 a)
-                (NatP.*-comm 2 (Affine.powNat 3 (a * n))))
-              (trans
-                (sym (NatP.*-assoc
-                  (Affine.powNat 3 (a * n)) 2 (Affine.powNat 3 a)))
-                (trans
-                  (cong (Affine.powNat 3 (a * n) *_)
-                    (NatP.*-comm 2 (Affine.powNat 3 a)))
-                  (NatP.*-assoc
-                    (Affine.powNat 3 (a * n))
-                    (Affine.powNat 3 a)
-                    2))))))
+          (solve 2
+            (λ x y → con 2 :* (x :* y) := y :* (con 2 :* x))
+            refl
+            (Affine.powNat 3 (a * n))
+            (Affine.powNat 3 a)))
 
     rightFactor :
       Affine.powNat 2 (b * suc n + 1)
@@ -179,10 +153,6 @@ rationalGood a b n step s≤an =
   NatP.≤-trans
     (NatP.*-monoʳ-≤ 2 (powMonotoneThree s≤an))
     (rationalGrowth a b step n)
-
-------------------------------------------------------------------------
--- Bad-word subset of the >= a*n+1 tail.
-------------------------------------------------------------------------
 
 badWordForcesRationalTail :
   (a b n : Nat) →
@@ -244,10 +214,6 @@ badCountLeRationalTailCount a b n step =
     Event.badIndicator
     (Chernoff.atLeastIndicator (a * n + 1))
     (badIndicatorLeRationalTailIndicator a b n step)
-
-------------------------------------------------------------------------
--- Parametric integer concentration theorem.
-------------------------------------------------------------------------
 
 rationalBadWordBound :
   (a b n : Nat) →
