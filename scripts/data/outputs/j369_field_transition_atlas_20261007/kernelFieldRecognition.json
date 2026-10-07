@@ -1,9 +1,12 @@
 {
+  "existing_heisenberg_translation_intertwines_f3_addition": true,
   "fields": {
     "4": {
       "c2_negation_action_intertwining_paid": true,
       "canonical_field_multiplication_from_existing_repo_action": false,
       "chosen_field_multiplication_runtime_verified": true,
+      "coordinate_swap_changes_chosen_multiplication": true,
+      "coordinate_swap_preserves_addition_and_negation": true,
       "frobenius_orbits": {
         "1": 3,
         "2": 3,
@@ -21,6 +24,32 @@
         1,
         1
       ],
+      "multiplication_noncanonicity_witness": {
+        "left": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "original_product": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "right": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "swap_conjugated_product": [
+          1,
+          0,
+          2,
+          1
+        ]
+      },
       "negation_orbits_all": {
         "1": 1,
         "2": 40
@@ -42,6 +71,8 @@
       "c2_negation_action_intertwining_paid": true,
       "canonical_field_multiplication_from_existing_repo_action": false,
       "chosen_field_multiplication_runtime_verified": true,
+      "coordinate_swap_changes_chosen_multiplication": true,
+      "coordinate_swap_preserves_addition_and_negation": true,
       "frobenius_orbits": {
         "1": 3,
         "5": 48
@@ -56,6 +87,36 @@
         2,
         1
       ],
+      "multiplication_noncanonicity_witness": {
+        "left": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "original_product": [
+          2,
+          0,
+          0,
+          0,
+          1
+        ],
+        "right": [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "swap_conjugated_product": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
       "negation_orbits_all": {
         "1": 1,
         "2": 121
@@ -77,6 +138,8 @@
       "c2_negation_action_intertwining_paid": true,
       "canonical_field_multiplication_from_existing_repo_action": false,
       "chosen_field_multiplication_runtime_verified": true,
+      "coordinate_swap_changes_chosen_multiplication": true,
+      "coordinate_swap_preserves_addition_and_negation": true,
       "frobenius_orbits": {
         "1": 3,
         "2": 3,
@@ -94,6 +157,40 @@
         1,
         1
       ],
+      "multiplication_noncanonicity_witness": {
+        "left": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "original_product": [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0
+        ],
+        "right": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "swap_conjugated_product": [
+          2,
+          1,
+          0,
+          1,
+          0,
+          0
+        ]
+      },
       "negation_orbits_all": {
         "1": 1,
         "2": 364
@@ -114,11 +211,13 @@
     }
   },
   "full_signed_weave_frontier": {
-    "canonical_total_step_over_full_signed_state_found": false,
-    "full_signed_transition_graph_claimed": false,
+    "canonical_total_program_counter_machine_paid": true,
+    "canonical_total_step_over_summary_state_alone_found": false,
+    "full_rich_signed_transition_graph_claimed": false,
     "lane_count": 15,
+    "machine_to_rich_signed_state_projection_paid": false,
     "pointed_lane_to_full_valuation_paid": true,
-    "reason": "SignedSSPFRACTRANWeaveExact has the full carrier/program surface but no canonical total SignedSSPExecutionState step.",
+    "reason": "The remaining program list makes the scheduler total. WeaveEffect retains counts rather than prime identity, while SignedSSPExecutionState additionally owns address/residual/length metadata; a faithful projection therefore still needs an independent witness.",
     "signed_multiplicity_and_program_machinery_paid": true
   },
   "row_major_12_vector_scan": {
