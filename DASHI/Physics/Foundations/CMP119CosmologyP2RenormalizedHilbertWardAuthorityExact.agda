@@ -5,28 +5,22 @@ module DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthori
 -- R2 SOURCE AUTHORITY IN ITS NATURAL DOMAIN.
 --
 -- Primary gauge-theory EMT/trace-anomaly results do not state a theorem about
--- an arbitrary CMP119 scalar.  They state a Ward/operator identity for the
+-- an arbitrary CMP119 scalar. They state a Ward/operator identity for the
 -- renormalized energy-momentum tensor and the renormalized F^2 operator.
 --
 -- Local-C already carries the exact applicability witness relevant here:
 -- `ShortDistanceAFMatching`, on the SAME continuum family as its local
--- curvature operators and local conserved stress tensor.  Therefore expose the
--- imported theorem as a function of that matching witness.  Applying it to a
--- Local-C package uses `shortDistanceAFMatching` directly; no independent
--- "selected trace = renormalized trace" scalar weld is required.
+-- curvature operators and local conserved stress tensor.
 --
--- Authorities/calibration:
---   Collins--Duncan--Joglekar, Phys. Rev. D 16 (1977) 438,
---     DOI 10.1103/PhysRevD.16.438.
---   N. K. Nielsen, Nucl. Phys. B 120 (1977) 212,
---     DOI 10.1016/0550-3213(77)90040-2.
---   K. Fujikawa, Phys. Rev. D 23 (1981) 2262,
---     DOI 10.1103/PhysRevD.23.2262.
+-- MAX-CUT CORRECTION:
+-- once the operator identity has already been proved/stated on that exact
+-- Local-C pair, wrapping it as an authority conditional on AF matching is pure
+-- compiler work. No second theorem or authority-instantiation leaf survives.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -57,9 +51,6 @@ record RenormalizedHilbertWeylWardAuthority
     (localOperatorNumerator : LocalOperator → ℝ)
     : Set₁ where
   field
-    -- Standard renormalized Weyl/Callan--Symanzik identity, formulated on the
-    -- exact operator pair to which it is applied.  Local-C's AF matching is the
-    -- applicability witness, rather than a post-hoc scalar identification.
     hilbertWeylWardFromAFMatching :
       Local.ShortDistanceAFMatching localC →
       hilbertTraceNumerator (Local.stressTensor localC)
@@ -92,6 +83,52 @@ applyRenormalizedHilbertWeylWard {localC = localC} authority =
   hilbertWeylWardFromAFMatching authority
     (Local.shortDistanceAFMatching localC)
 
+------------------------------------------------------------------------
+-- MAX-CUT COMPILER
+------------------------------------------------------------------------
+
+fromExactLocalCOperatorIdentity :
+  ∀ {ContinuumFamily CurvaturePolynomial LocalOperator Position
+      OPECoefficient StressTensor Hamiltonian embedding convention
+      hilbertTraceNumerator fieldStrengthSquarePolynomial localOperatorNumerator}
+    {localC :
+      Local.ContinuumLocalOperatorOPEStressTensor
+        ContinuumFamily CurvaturePolynomial LocalOperator Position
+        OPECoefficient StressTensor Hamiltonian} →
+  hilbertTraceNumerator (Local.stressTensor localC)
+  ≡
+  SU2Trace.realSU2TraceCoefficient embedding convention
+  *ℝ
+  localOperatorNumerator
+    (Local.localOperator localC fieldStrengthSquarePolynomial) →
+  RenormalizedHilbertWeylWardAuthority
+    localC embedding convention hilbertTraceNumerator
+    fieldStrengthSquarePolynomial localOperatorNumerator
+fromExactLocalCOperatorIdentity identity = record
+  { RenormalizedHilbertWeylWardAuthority.hilbertWeylWardFromAFMatching =
+      λ _ → identity
+  }
+
+exactOperatorIdentityRoundTripsThroughAuthority :
+  ∀ {ContinuumFamily CurvaturePolynomial LocalOperator Position
+      OPECoefficient StressTensor Hamiltonian embedding convention
+      hilbertTraceNumerator fieldStrengthSquarePolynomial localOperatorNumerator}
+    {localC :
+      Local.ContinuumLocalOperatorOPEStressTensor
+        ContinuumFamily CurvaturePolynomial LocalOperator Position
+        OPECoefficient StressTensor Hamiltonian}
+    (identity :
+      hilbertTraceNumerator (Local.stressTensor localC)
+      ≡
+      SU2Trace.realSU2TraceCoefficient embedding convention
+      *ℝ
+      localOperatorNumerator
+        (Local.localOperator localC fieldStrengthSquarePolynomial)) →
+  applyRenormalizedHilbertWeylWard
+    (fromExactLocalCOperatorIdentity identity)
+  ≡ identity
+exactOperatorIdentityRoundTripsThroughAuthority identity = refl
+
 renormalizedHilbertWeylWardAuthorityLevel : ProofLevel
 renormalizedHilbertWeylWardAuthorityLevel = standardImported
 
@@ -101,5 +138,11 @@ localCShortDistanceMatchingIsTheApplicabilityWitness = true
 noCMP119SpecificTraceScalarWeldRequired : Bool
 noCMP119SpecificTraceScalarWeldRequired = true
 
+authorityRecordInstantiationAddsNoMathematics : Bool
+authorityRecordInstantiationAddsNoMathematics = true
+
 remainingR2WorkIsInstantiationOfStandardWardAuthority : Bool
-remainingR2WorkIsInstantiationOfStandardWardAuthority = true
+remainingR2WorkIsInstantiationOfStandardWardAuthority = false
+
+remainingR2WorkIsExactRenormalizedOperatorIdentity : Bool
+remainingR2WorkIsExactRenormalizedOperatorIdentity = true
