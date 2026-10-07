@@ -79,6 +79,16 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
             a = tuple(witness['left']); b = tuple(witness['right'])
             self.assertNotEqual(model.mul(a, b), recognition.conjugated_multiply(model, a, b))
 
+    def test_coordinate_swap_preserves_full_x6_dot_pairing(self):
+        self.assertTrue(recognition.coordinate_swap_preserves_dot6_exhaustive())
+
+    def test_signed_semantic_core_replay_recovers_canonical_programs(self):
+        self.assertTrue(recognition.canonical_signed_core_replay_verified())
+        virtual = recognition.replay_signed_semantic_core(recognition.CANONICAL_VIRTUAL_PROGRAM)
+        self.assertEqual(virtual['valuation'][59], 1)
+        self.assertEqual(virtual['valuation'][7], -1)
+        self.assertEqual(virtual['invariant_units'], 1)
+
     def test_row_major_legacy_embeddings_do_not_produce_twelve_vectors(self):
         scan = recognition.scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200)
         self.assertEqual(scan['node_count'], 1330)
@@ -86,13 +96,17 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
         self.assertEqual(scan['minimum_vector_count'], 196)
         self.assertEqual(scan['minimum_vector_columns'], [173, 189])
 
-    def test_full_signed_weave_frontier_is_narrowed_to_projection(self):
+    def test_full_signed_weave_frontier_is_only_metadata_dynamics(self):
         frontier = recognition.full_signed_weave_frontier()
         self.assertEqual(frontier['lane_count'], 15)
-        self.assertTrue(frontier['pointed_lane_to_full_valuation_paid'])
         self.assertTrue(frontier['canonical_total_program_counter_machine_paid'])
-        self.assertFalse(frontier['machine_to_rich_signed_state_projection_paid'])
-        self.assertFalse(frontier['canonical_total_step_over_summary_state_alone_found'])
+        self.assertTrue(frontier['executed_trace_retains_prime_identity'])
+        self.assertTrue(frontier['arbitrary_program_valuation_replay_paid'])
+        self.assertTrue(frontier['arbitrary_program_invariant_unit_replay_paid'])
+        self.assertTrue(frontier['rich_machine_compiler_given_metadata_paid'])
+        self.assertTrue(frontier['canonical_virtual_rich_projection_paid'])
+        self.assertTrue(frontier['canonical_geometry_rich_projection_paid'])
+        self.assertFalse(frontier['metadata_dynamics_recovered_from_prior_repo'])
         self.assertFalse(frontier['full_rich_signed_transition_graph_claimed'])
 
 
