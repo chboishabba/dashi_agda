@@ -3,20 +3,14 @@ module DASHI.Physics.Closure.NSClayFacingCDReleasedAuditFrontier20261007Exact wh
 ------------------------------------------------------------------------
 -- CLAY-FACING C/D / RELEASED-PROOF AUDIT FRONTIER / 2026-10-07
 --
--- The released comparator statements are already source-aligned to the
--- official Fefferman C/D coordinates, and the coordinate-by-coordinate audit
--- is already theorem-bearing in Agda.  Do not turn optional DASHI Fourier/
--- 369/R406 reconstruction into a prerequisite.
+-- Official statement-coordinate alignment, current-head statement freshness,
+-- and the current released C/D dependency routes are source-audited.  Optional
+-- DASHI Fourier/369/R406 reconstruction remains outside that requirement.
 --
--- The remaining work is publication/referee audit of the released proof and
--- its ordinary mathematical dependencies.  That work is not represented by
--- fake internal PDE booleans here.
---
--- Source freshness: the original DASHI alignment audited OpenAI commit
--- 8937a8f4..., while the current public head is f9e8bc5b....  The comparator
--- C/D theorem statements are unchanged across those commits even though the
--- proof implementations/import routes changed.  This keeps the source-
--- coordinate alignment current without claiming an independent Agda proof.
+-- What remains is reproducibility/publication work: an independently witnessed
+-- kernel build, conventional independent reconstruction, independent referee
+-- reproduction, and community/CMI evaluation.  None is represented as a fake
+-- internal PDE theorem.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -27,15 +21,16 @@ import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact as Audit
 import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as Source
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact as AnyOne
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact as Fresh
+import DASHI.Physics.Closure.NSClayFacingCDPublicationAuditLedger20261007Exact as Ledger
 
 data CDAuditLane : Set where
   cWholeSpaceReleasedAudit : CDAuditLane
   dPeriodicReleasedAudit : CDAuditLane
 
 data PublicationAuditResidual : Set where
-  releasedProofDependencyAudit : PublicationAuditResidual
-  releasedProofKernelRecheck : PublicationAuditResidual
-  releasedProofExpositionAudit : PublicationAuditResidual
+  independentKernelBuild : PublicationAuditResidual
+  independentConventionalReconstruction : PublicationAuditResidual
+  independentRefereeReproduction : PublicationAuditResidual
   communityCMIEvaluation : PublicationAuditResidual
 
 cOfficialCoordinateAuditClosed : Bool
@@ -65,6 +60,22 @@ currentReleasedHeadRequiresReopeningCoordinateAudit =
 releasedProofImplementationChangedSincePinnedAudit : Bool
 releasedProofImplementationChangedSincePinnedAudit =
   Fresh.releasedProofImplementationChanged
+
+cReleasedDependencyRouteSourceAudited : Bool
+cReleasedDependencyRouteSourceAudited = Ledger.cReleasedDependencyRouteSourceAudited
+
+dReleasedDependencyRouteSourceAudited : Bool
+dReleasedDependencyRouteSourceAudited = Ledger.dReleasedDependencyRouteSourceAudited
+
+independentKernelBuildWitnessedHere : Bool
+independentKernelBuildWitnessedHere = Ledger.independentKernelBuildWitnessedHere
+
+conventionalIndependentReconstructionClosed : Bool
+conventionalIndependentReconstructionClosed =
+  Ledger.conventionalIndependentReconstructionClosed
+
+independentRefereeReproductionClosed : Bool
+independentRefereeReproductionClosed = Ledger.independentRefereeReproductionClosed
 
 releasedCDAnyOneCompilerClosed : Bool
 releasedCDAnyOneCompilerClosed = AnyOne.eitherReleasedAlternativeSuffices
@@ -110,6 +121,18 @@ dCurrentReleasedHeadStatementStableIsTrue = refl
 currentReleasedHeadRequiresReopeningCoordinateAuditIsFalse :
   currentReleasedHeadRequiresReopeningCoordinateAudit ≡ false
 currentReleasedHeadRequiresReopeningCoordinateAuditIsFalse = refl
+
+cReleasedDependencyRouteSourceAuditedIsTrue :
+  cReleasedDependencyRouteSourceAudited ≡ true
+cReleasedDependencyRouteSourceAuditedIsTrue = refl
+
+dReleasedDependencyRouteSourceAuditedIsTrue :
+  dReleasedDependencyRouteSourceAudited ≡ true
+dReleasedDependencyRouteSourceAuditedIsTrue = refl
+
+independentKernelBuildWitnessedHereIsFalse :
+  independentKernelBuildWitnessedHere ≡ false
+independentKernelBuildWitnessedHereIsFalse = refl
 
 independentDASHIReconstructionGatesAuditIsFalse :
   independentDASHIReconstructionGatesAudit ≡ false
