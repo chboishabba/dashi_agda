@@ -13,15 +13,17 @@ module DASHI.Analysis.CollatzSyracuseRationalDriftApproximantsExact where
 -- deterministic descent words while retaining an exact integer Chernoff tail.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Nat using (_≤_)
 import Data.Nat.Properties as NatP
 open import Data.Unit.Base using (tt)
 
 import DASHI.Core.BinaryWordIntegerChernoffExact as Chernoff
+import DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact as Cylinder
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
 import DASHI.Analysis.CollatzSyracuseParityDescentEventExact as Event
 import DASHI.Analysis.CollatzSyracuseRationalDriftTailExact as Rational
+import DASHI.Analysis.CollatzSyracuseRationalAlignedBlockTailExact as Aligned
 
 fiveEightPower :
   Affine.powNat 3 5 ≤ Affine.powNat 2 8
@@ -47,15 +49,27 @@ seventeenTwentySevenTail :
 seventeenTwentySevenTail n =
   Rational.rationalBadWordBound 17 27 n seventeenTwentySevenPower
 
+seventeenTwentySevenLiteralAlignedTail :
+  (n block : Nat) →
+  Affine.powNat 3 (27 * n + 1)
+    ≤ block * Cylinder.pow2 (27 * n + 1) →
+  Chernoff.powNat 2 (17 * n + 1)
+    * Aligned.alignedBlockNonDescentCount 27 n block
+  ≤ Chernoff.powNat 3 (27 * n + 1)
+seventeenTwentySevenLiteralAlignedTail n block threshold =
+  Aligned.rationalAlignedBlockNonDescentBound
+    17 27 n block seventeenTwentySevenPower threshold
+
 record RationalApproximantBoundary : Set where
   constructor rationalApproximantBoundary
   field
     fiveEightRecovered : Nat
     seventeenTwentySevenOwned : Nat
+    seventeenTwentySevenLiteralStartsOwned : Nat
     logarithmUsedInProof : Nat
     thresholdCanBeImprovedByIntegerPowers : Nat
     universalStoppingOwned : Nat
 
 canonicalRationalApproximantBoundary : RationalApproximantBoundary
 canonicalRationalApproximantBoundary =
-  rationalApproximantBoundary 1 1 0 1 0
+  rationalApproximantBoundary 1 1 1 0 1 0
