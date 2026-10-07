@@ -1,6 +1,6 @@
 # J369 finite-field and transition atlas — 2026-10-07
 
-This tranche turns the PR #1053 finite-field ticket and graph request into deterministic numerical outputs plus exact source-side recognition boundaries. It intentionally does **not** use generated imagery and does not promote cardinality coincidences to semantic identity.
+This tranche turns the PR #1053 finite-field ticket and graph request into deterministic numerical outputs plus exact source-side recognition boundaries. It does **not** use generated imagery and does not promote cardinality coincidences to semantic identity.
 
 ## Reproducible generators
 
@@ -34,7 +34,7 @@ The Frobenius-orbit hypotheses
 24 = orbits(GF(81)/GF(3)) = orbits(GF(64)/GF(4))
 ```
 
-are verified numerically. The two distinct realizations of 24 are retained as a direct counterexample to orbit-count uniqueness.
+are verified numerically. The two distinct realizations of 24 remain an explicit counterexample to orbit-count uniqueness.
 
 ## K4/K5/K6: F3 structure and selected fields
 
@@ -50,13 +50,13 @@ The source proves the additive group laws, scalar identity/zero, both distributi
 scale(-1) = existing invertKernel.
 ```
 
-The runtime field recognizer then exhaustively verifies selected irreducible polynomial presentations of `GF(3^4)`, `GF(3^5)`, and `GF(3^6)`. Every nonzero element has an inverse and primitive elements have exact orders
+The runtime recognizer exhaustively verifies selected irreducible polynomial presentations of `GF(3^4)`, `GF(3^5)`, and `GF(3^6)`. Every nonzero element has an inverse and primitive elements have orders
 
 ```text
 80, 242, 728.
 ```
 
-Frobenius profiles are
+The Frobenius profiles are
 
 ```text
 GF(81):  3 fixed + 3 two-cycles + 18 four-cycles
@@ -72,33 +72,41 @@ For K4, the selected `GF(9)` subfield is exactly
 
 which equals the `x^9=x` fixed set and is closed under the selected addition and multiplication. The naive prefix plane `(a,b,0,0)` is not that subfield.
 
-## Existing Heisenberg action now welded to kernel addition
+## Existing Heisenberg action is welded to kernel addition
 
-The repo already owns `X6 = F3^6`, six coordinate translations, and an exact two-sided chart
+The repo already owns `X6 = F3^6`, six coordinate translations, and the exact chart
 
 ```text
 X6 <-> Kernel 6.
 ```
 
-`OggSSPKernelHeisenbergAdditiveIntertwinerExact.agda` proves that each old Heisenberg coordinate translation is exactly addition of the corresponding F3 basis vector after the chart. The first four axes restrict to the canonical K4 slice. This independently anchors the additive structure to prior DASHI action semantics rather than merely to the selected field model.
+`OggSSPKernelHeisenbergAdditiveIntertwinerExact.agda` proves that each old Heisenberg coordinate translation is addition of the corresponding F3 basis vector after that chart; the first four axes restrict to K4. The numerical verifier exhaustively checks all `729 * 6` K6 cases and all `81 * 4` restricted K4 cases.
 
-The numerical verifier exhaustively checks all `729 * 6` K6 translation cases and the `81 * 4` K4 restricted cases.
+## Stronger field no-go: the full standard Heisenberg structure is insufficient
 
-## Explicit non-canonicity of the selected multiplication
+The selected extension-field product is not determined by the paid additive data. Swapping the first two coordinates preserves addition and negation but changes the selected multiplication in degrees 4, 5 and 6.
 
-The paid additive/negation structure still does **not** determine a unique extension-field product. Swapping the first two coordinates is an exact source-level automorphism of K4 addition and existing inversion. At runtime the same coordinate swap preserves addition and negation in degrees 4,5,6, but conjugating the selected multiplication through it changes the product in every degree.
-
-For K4 one witness is
+The max-cut now goes further. `OggSSPHeisenbergSymplecticFieldNoGoExact.agda` applies the same coordinate swap to both halves of the existing
 
 ```text
-a = b = (0,0,0,1)
-original product        = (0,1,2,1)
-swap-conjugated product = (1,0,2,1).
+X6 + X6*
 ```
 
-Analogous explicit witnesses are recorded for K5 and K6 in `kernelFieldRecognition.json`.
+Heisenberg quotient and proves:
 
-Therefore the already-paid additive / global-negation data cannot by itself select the chosen multiplication. This does **not** prove that no richer existing DASHI action can select one; `OggSSPTriadicKernelCanonicalFieldActionFrontierExact.agda` isolates exactly that remaining richer-action socket.
+- the X6 swap is involutive;
+- X6 addition and negation are preserved;
+- the actual six-coordinate `dot6` is preserved;
+- the alternating `symplecticPair` is preserved;
+- the actual Heisenberg central-extension `compose` law is preserved.
+
+The deterministic numerical pass independently checks `dot6` preservation on all
+
+```text
+729 * 729 = 531441
+```
+
+X6 pairs. Yet the same X6 symmetry changes the selected `GF(3^6)` multiplication. Therefore **the whole currently paid standard finite-Heisenberg/symplectic structure cannot canonically select that field product**. A future positive field-recognition theorem must use richer prior DASHI action data that breaks this symmetry; more additive/Heisenberg computation cannot close the gap.
 
 ## The real 1,330-state legacy graph
 
@@ -108,23 +116,53 @@ Therefore the already-paid additive / global-negation data cannot by itself sele
 C(21,3) = 1330
 ```
 
-states and, because the step is total on the slice, exactly 1,330 directed edges.
+states and 1,330 directed edges. This matches the supplied browser screenshot's node/edge counts but not its displacement statistic. The deterministic 37-column embedding gives 233 displacement vectors, and scanning widths `2..200` finds no 12-vector realization; the minimum is 196 at widths 173 and 189. Same-graph recognition is therefore rejected.
 
-This matches the supplied browser screenshot's node/edge counts but not its displacement statistic. The deterministic 37-column embedding gives 233 displacement vectors. Exhaustively scanning all row-major widths `2..200` finds no 12-vector realization; the minimum is 196 at widths 173 and 189. Same-graph recognition is therefore rejected.
+## Full signed-weave execution: semantic core now reconstructed
 
-## Full signed-weave execution: scheduler paid, projection still open
+`SignedSSPWeaveProgramMachineExact.agda` gives a total program-counter machine over the existing `WeaveInstruction` / `applyInstruction` semantics.
 
-`SignedSSPFRACTRANWeaveExact` already owns the fifteen-lane signed valuation carrier and the weave instruction language. The summary record `SignedSSPExecutionState`, however, stores only aggregate lengths and does **not** retain the remaining instruction list, so it cannot determine a unique next instruction by itself.
-
-`SignedSSPWeaveProgramMachineExact.agda` now constructs the maximal canonical executable state:
+`SignedSSPWeaveInstructionTraceExact.agda` then retains the exact executed instruction trace, so prime identity is no longer lost by the aggregate `WeaveEffect`. In particular the canonical virtual program retains exactly
 
 ```text
-ProgramMachineState = remaining program + accumulated WeaveEffect.
++59, -7, invariant-unit.
 ```
 
-Its total step pops the first instruction and uses the pre-existing `applyInstruction`; the halted state is a fixed point. The machine is proved to agree with existing `executeProgram`, and both canonical 53 programs terminate with the existing canonical final effects.
+`SignedSSPWeaveSemanticCoreReplayExact.agda` goes further and replays arbitrary instruction streams into:
 
-The remaining graph seam is now narrower than “find a scheduler.” `WeaveEffect` counts prime introductions but does not retain which prime was introduced, while `SignedSSPExecutionState` additionally carries address, zero-residual direction, and length metadata. `ProgramMachineToSignedStateProjection` is the exact missing information-preserving bridge.
+- the full fifteen-lane signed valuation;
+- the invariant-unit count.
+
+The canonical virtual program is proved pointwise to recover `virtualFiftyThreeValuation`, and the canonical geometric program is proved pointwise to recover the zero valuation. The Python receipt independently checks the same replay.
+
+`SignedSSPWeaveCanonicalProjectionExact.agda` closes the rich-state projection for both existing canonical 53 programs.
+
+## Only metadata dynamics remain for the arbitrary full rich graph
+
+`SignedSSPWeaveRichMetadataCompilerExact.agda` isolates the genuinely missing data in one record:
+
+```text
+RichMetadataDynamics
+```
+
+containing only the dynamics for
+
+- `address369`;
+- `zeroApproachResidual`;
+- `programLength`;
+- `executionLength`;
+- `normalFormLength`;
+- `residualWitnessLength`.
+
+Given that record, the repo now compiles a total rich program machine and its `SignedSSPExecutionState` projection definitionally. No additional scheduler, valuation, prime-identity, or invariant-unit socket remains.
+
+The acquisition search also found useful prior pieces:
+
+- `FRACTRANSSPTransitionExact` already proves legacy prime transport preserves the canonical 3/6/9 address;
+- successful legacy prime transport records `Zero.fromPositive` residual direction;
+- `SelfIndexingHyperfabricTetrationExact` already owns the typed program/execution/normal/residual complexity carrier.
+
+`SignedSSPWeaveMetadataAcquisitionFrontierExact.agda` records those facts. The repo does **not** currently contain a general `WeaveInstruction -> FRACTRANRule` map, an address semantics for `refineAt369`, or per-instruction description-length dynamics, so those legacy pieces cannot honestly be promoted to a full arbitrary metadata policy.
 
 ## Current max-cut
 
@@ -136,16 +174,18 @@ Paid:
 - existing Heisenberg translations intertwined with F3 addition;
 - selected finite-field multiplication, inverses, primitive elements, Frobenius profiles;
 - selected `GF(3) < GF(9) < GF(81)` object maps;
-- explicit runtime/source evidence that additive/negation structure does not select the chosen multiplication;
-- real 1,330-state legacy transition graph and the 12-vector falsifier;
-- canonical total program-counter machine for the full signed weave language.
+- an exact no-go showing the full current finite-Heisenberg/symplectic structure does not select the chosen K6 field multiplication;
+- the real 1,330-state legacy transition graph and 12-vector falsifier;
+- total signed-weave program-counter machine;
+- exact executed trace with prime identity;
+- arbitrary-program fifteen-lane valuation + invariant-unit replay;
+- exact rich projections for both canonical 53 programs;
+- total arbitrary rich-state compiler conditional only on `RichMetadataDynamics`.
 
 Still open:
 
-1. a richer independently existing DASHI action that canonically determines multiplication/Frobenius on K4/K5/K6, or an exact no-go for every candidate action family;
-2. full action/orbit/stabilizer recognition once such an action is supplied;
-3. the information-preserving `ProgramMachineState -> SignedSSPExecutionState` projection, or a proof that the summary type is intentionally too coarse for such a projection;
-4. generation of the full rich fifteen-lane graph only after that bridge is paid;
-5. exact-head Agda typechecking in an environment with Agda installed.
+1. **Field recognition:** an independently existing richer DASHI action that breaks the proved Heisenberg symmetry and canonically determines multiplication/Frobenius, followed by the remaining action/orbit/stabilizer recognition contract; or a stronger no-go for any additional candidate action family.
+2. **Full arbitrary signed graph:** source the remaining `RichMetadataDynamics` (address/residual/length policy). Existing legacy address/residual and hyperfabric complexity owners are partial inputs, but no exact compiler from general `WeaveInstruction` is currently present.
+3. **Compiler gate:** exact-head Agda typechecking of the new owners in an environment with Agda installed.
 
-Agda is not installed in the current execution environment, so no local compiler-success claim is made for the new Agda owners.
+The numerical checks for the strengthened cut pass locally, including exhaustive field inverses/orbits, the `GF(9)` subfield, 531,441 X6 dot-pair preservation checks, signed semantic-core replay, and the 1,330-state displacement scan. Agda is not installed in the current execution environment, so no local Agda compiler-success claim is made.
