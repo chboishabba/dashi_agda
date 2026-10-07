@@ -122,7 +122,7 @@ threeCenterMagnitudeBelowTwentyOnePayloadScale :
   3 * SourceCenter.sourceCenterMagnitudeAt even
   < 21 * Raw.payloadScale extra
 threeCenterMagnitudeBelowTwentyOnePayloadScale {extra} even =
-  NatP.*-cancelˡ-< 4 scaledStrict
+  NatP.*-cancelˡ-< 4 (3 * c) (21 * p) scaledStrict
   where
   p = Raw.payloadScale extra
   c = SourceCenter.sourceCenterMagnitudeAt even
