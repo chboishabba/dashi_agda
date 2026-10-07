@@ -81,6 +81,12 @@ required = {
         'positiveAdjacentSourceCodeStrict',
         'hunholdProposition4PositiveAdjacent',
     ],
+    'DASHI/ComputerScience/TekumProposition4GlobalExact.agda': [
+        'sourceOrderedValue', 'hunholdProposition4Global',
+    ],
+    'DASHI/ComputerScience/TekumSourceParserTotalityExact.agda': [
+        'nonSpecialParseTotal', 'totalSourceParse',
+    ],
     'DASHI/ComputerScience/TekumParsedExactTriadicWeldExact.agda': ['exactPow3MatchesBalancedPow3', 'parsedExactBaseUnit', 'parsedExactAdjustmentInteger', 'parsedExactScale', 'parsedExactUnsignedSignificandInteger'],
     'DASHI/ComputerScience/TekumParsedExactRationalCoordinatesExact.agda': ['parsedSourceUnsignedNumerator', 'parsedExactNumeratorUsesSourceCoordinates', 'parsedExactDenominatorUsesSourceCoordinates', 'parsedOrdinaryRationalUsesExactSourceCoordinates'],
     'DASHI/ComputerScience/TekumOrdinaryFactorizationExact.agda': ['rawUnsignedSourceSignificand', 'rawSourceScale', 'rawSourceFactorization', 'parsedOrdinaryRawFactorization', 'fromRawProduct', 'fromRawSum', 'fromRawNeg', 'applyRationalSign', 'canonicalUnsignedSignificand', 'canonicalSignedSignificand', 'canonicalSignedSignificandIsApplySign', 'canonicalSourceScale', 'parsedOrdinaryCanonicalFactorization', 'parsedOrdinaryCanonicalProduct'],
@@ -121,7 +127,7 @@ if 'Special.classifySpecial word' not in source:
     raise SystemExit('source special classifier not applied to source word')
 
 assembly = (ROOT / 'DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda').read_text(encoding='utf-8')
-if 'true true false false false true' not in assembly:
-    raise SystemExit('assembly must record corrected Prop. 2 and source-domain Prop. 3 as source-paid, with Prop. 4/5 and numerical no-double-rounding still false')
+if 'true true true false false true' not in assembly:
+    raise SystemExit('assembly must record Props. 2, 3, and full source Prop. 4 as paid; Prop. 5 and numerical no-double-rounding remain false')
 
-print('Tekum static regression: Definition 7 midpoint and source special classification are corrected; Prop. 2 is source-reclosed with explicit even-width evidence; source-domain Prop. 3 remains present; Prop. 4 now requires the positive source-successor/anchor-successor and adjacent-order owners; Proposition 5 edge obstructions are recorded; no kernel-compilation claim is implied by this static gate.')
+print('Tekum static regression: Definition 7 midpoint/source specials corrected; Props. 2 and 3 source-paid; full core-width Prop. 4 ordered-code monotonicity and parser totality source-written; unrestricted Prop. 5 remains counterexample-blocked; no kernel-compilation claim is implied by this static gate.')
