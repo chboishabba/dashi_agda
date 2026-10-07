@@ -1,5 +1,6 @@
 module DASHI.Biology.IBSGutBrainImmuneSystemsRegression where
 
+open import DASHI.Core.Prelude using (⊥)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Biology.IBSGutBrainImmuneSystemsHyperfabricExact as IBS
