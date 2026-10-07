@@ -18,5 +18,13 @@ def test_one_literal_cmp119_scale_can_feed_both_static_regions():
         "SingleSourceVacuumKottlerCandidate",
         "sameSourceAmplitudeFeedsInteriorExterior",
         "secondSourceVacuumScaleRequired",
+        "actionReadoutAloneProvesPhysicalCosmologicalAmplitude",
+        "physicalMetricAmplitudeWeldStillRequired",
     ):
         assert token in text
+
+
+def test_terminal_keeps_physical_metric_amplitude_weld_open():
+    text = read("DASHI/Physics/ExoticGravity/AntigravityABCDETerminalMaxCutExact.agda")
+    assert "sourceActionReadoutToPhysicalMetricAmplitudeStillOpen" in text
+    assert "doubleWellRequiredForPreferredStaticRoute" in text
