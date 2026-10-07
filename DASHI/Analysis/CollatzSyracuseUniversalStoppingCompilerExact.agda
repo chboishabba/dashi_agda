@@ -21,17 +21,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat using (_<_; z≤n; s≤s)
 open import Data.Nat.Induction using (Acc; acc; <-wellFounded)
-open import Data.Product using (Σ; _,_)
+import Data.Product as Product
+open Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
 import DASHI.Analysis.CollatzSyracuseParityDescentEventExact as Event
-
-------------------------------------------------------------------------
--- Iterate composition.
-------------------------------------------------------------------------
 
 syracuseIterateAdd :
   (m k : Nat) →
@@ -41,10 +38,6 @@ syracuseIterateAdd :
 syracuseIterateAdd zero k x = refl
 syracuseIterateAdd (suc m) k x =
   syracuseIterateAdd m k (Syracuse.shortcutSyracuse x)
-
-------------------------------------------------------------------------
--- Literal stopping proposition.
-------------------------------------------------------------------------
 
 ReachesOne : Syracuse.PositiveNat → Set
 ReachesOne x =
@@ -60,10 +53,6 @@ record LiteralStrictDescentSource : Set₁ where
         < Syracuse.toNat x)
 
 open LiteralStrictDescentSource public
-
-------------------------------------------------------------------------
--- Existing affine/parity machinery is a sufficient strict-descent producer.
-------------------------------------------------------------------------
 
 record GoodPrefixDescentSource : Set₁ where
   field
@@ -100,10 +89,6 @@ asLiteralStrictDescentSource source = record
       m , descent
   }
 
-------------------------------------------------------------------------
--- Well-founded stopping compiler.
-------------------------------------------------------------------------
-
 reachesOneFromStrictDescentAcc :
   (source : LiteralStrictDescentSource) →
   (x : Syracuse.PositiveNat) →
@@ -117,15 +102,15 @@ reachesOneFromStrictDescentAcc source x@(Syracuse.positiveNat (suc n)) (acc wf) 
     nontrivial = s≤s (s≤s z≤n)
 
     descentWitness = descend source x nontrivial
-    m = Data.Product.proj₁ descentWitness
-    smaller = Data.Product.proj₂ descentWitness
+    m = Product.proj₁ descentWitness
+    smaller = Product.proj₂ descentWitness
     y = Syracuse.syracuseIterate m x
 
     yStops : ReachesOne y
     yStops = reachesOneFromStrictDescentAcc source y (wf smaller)
 
-    k = Data.Product.proj₁ yStops
-    yStopsAtK = Data.Product.proj₂ yStops
+    k = Product.proj₁ yStops
+    yStopsAtK = Product.proj₂ yStops
 
     composed :
       Syracuse.syracuseIterate (m + k) x ≡ Syracuse.one
