@@ -33,6 +33,28 @@ def main() -> None:
     duad_paid = bool(duad["finite_duad_same_quotient_Bprime_Cprime_paid"])
     fi22_paid = bool(fi22["finite_source_native_completion10_module_identified"])
 
+    # Fail closed: this renderer is a promotion boundary, not a formatter for
+    # arbitrary runtime JSON.
+    if duad.get("dimension") != 276 or quotient_dim != 10:
+        raise SystemExit("unexpected duad stable-subquotient dimensions")
+    if not duad_paid or duad.get("selected_outer_J2x5_match_count", 0) <= 0:
+        raise SystemExit("duad finite same-quotient B'+C' receipt not paid")
+    if not duad.get("selected_factor_atlasrep_matches"):
+        raise SystemExit("selected duad ten-factor lacks AtlasRep identification")
+    if duad.get("actual_2b_tate_stable_subquotient_identified") is not False:
+        raise SystemExit("duad runtime illegally promoted actual Tate same-object weld")
+
+    if fi22.get("natural_module_dimension") != 10:
+        raise SystemExit("Fi22 natural module is not ten-dimensional")
+    if fi22.get("natural_action_group_order") != 887040:
+        raise SystemExit("Fi22 natural action is not faithful M22:2")
+    if not fi22_paid or fi22.get("outer_J2x5_match_count", 0) <= 0:
+        raise SystemExit("Fi22 source-native Completion10 donor not paid")
+    if not fi22.get("atlas_m22d2_10d_matches"):
+        raise SystemExit("Fi22 natural ten lacks AtlasRep identification")
+    if fi22.get("actual_2b_tate_same_object_identified") is not False:
+        raise SystemExit("Fi22 runtime illegally promoted actual Tate same-object weld")
+
     module = f'''module DASHI.Moonshine.Generated.TwoBChar2ExtensionRuntimeCertificate where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -80,6 +102,9 @@ selectedUpperDimension = {duad['selected_upper_dimension']}
 selectedQuotientDimension : Nat
 selectedQuotientDimension = {quotient_dim}
 
+selectedAtlasMatchCount : Nat
+selectedAtlasMatchCount = {len(duad['selected_factor_atlasrep_matches'])}
+
 selectedOuterJ2x5MatchCount : Nat
 selectedOuterJ2x5MatchCount = {duad['selected_outer_J2x5_match_count']}
 
@@ -95,6 +120,9 @@ fi22d2NormalKernelOrder = {fi22['normal_kernel_order']}
 fi22d2NaturalModuleDimension : Nat
 fi22d2NaturalModuleDimension = {fi22['natural_module_dimension']}
 
+fi22d2NaturalActionGroupOrder : Nat
+fi22d2NaturalActionGroupOrder = {fi22['natural_action_group_order']}
+
 fi22d2AtlasTenMatchCount : Nat
 fi22d2AtlasTenMatchCount = {len(fi22['atlas_m22d2_10d_matches'])}
 
@@ -106,6 +134,9 @@ finiteSourceNativeCompletion10DonorPaid = {b(fi22_paid)}
 
 fi22d2NaturalModuleDimensionIsTen : fi22d2NaturalModuleDimension ≡ 10
 fi22d2NaturalModuleDimensionIsTen = refl
+
+fi22d2NaturalActionIsFaithfulM22d2 : fi22d2NaturalActionGroupOrder ≡ 887040
+fi22d2NaturalActionIsFaithfulM22d2 = refl
 
 -- Same-object promotion firewall: neither finite receipt constructs the actual
 -- characteristic-two Tate extension chain.
