@@ -51,8 +51,8 @@ import DASHI.Analysis.CollatzSyracuseStoppingConcentrationExact
 data MaxCutStatus : Set where
   proved : MaxCutStatus
   compiledFromRepo : MaxCutStatus
-  conditionalOnHypothesis : MaxCutStatus
   sourceSpecificOpen : MaxCutStatus
+  nonCriticalOptional : MaxCutStatus
   refutedRoute : MaxCutStatus
 
 data CollatzCut : Set where
@@ -90,7 +90,7 @@ data CollatzCut : Set where
   C13b-alignedBlockFiniteTail : CollatzCut
   C13c-rationalAlignedBlockFiniteTail : CollatzCut
   C13-universalStoppingCompiler : CollatzCut
-  C13d-allStartsGoodPrefixProducer : CollatzCut
+  C13d-allStartsStrictDescentProducer : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
   oldFiniteEqualsIntegerRoute : CollatzCut
@@ -106,31 +106,31 @@ cutStatus C4-itineraryShift = proved
 cutStatus C5-residueCylinderReverse = proved
 cutStatus C5a-residueCodeInjective = proved
 cutStatus C6-affineIterate = proved
-cutStatus C7a-stoppedLogRemainder = conditionalOnHypothesis
+cutStatus C7a-stoppedLogRemainder = nonCriticalOptional
 cutStatus C7b-affineScalarMarginDescent = proved
 cutStatus C7c-affineCorrectionBound = proved
 cutStatus C7d-parityCountDescentCriterion = proved
 cutStatus C8a-relationMatrixTransfer = refutedRoute
 cutStatus C8b-finiteInverseBranchWeld = proved
-cutStatus C8c-z2TransferOperatorIntertwiner = sourceSpecificOpen
+cutStatus C8c-z2TransferOperatorIntertwiner = nonCriticalOptional
 cutStatus C9-fullCylinderSeam = compiledFromRepo
 cutStatus C10-repairedRelationMixing = compiledFromRepo
 cutStatus C11a-completeBlockBijection = proved
 cutStatus C11b-completeBlockUniformPushforward = proved
 cutStatus C11c-alignedBlockUniformity = proved
 cutStatus C11d-unalignedBoundaryCompiler = proved
-cutStatus C11f-exactArbitraryIntervalSplit = sourceSpecificOpen
-cutStatus C11e-logWeightedSampling = sourceSpecificOpen
+cutStatus C11f-exactArbitraryIntervalSplit = nonCriticalOptional
+cutStatus C11e-logWeightedSampling = nonCriticalOptional
 cutStatus C12a-directParityBernoulliLaw = proved
 cutStatus C12b-exactBadWordNumerator = proved
 cutStatus C12c-exponentialBadWordTail = proved
 cutStatus C12c2-parametricRationalTail = proved
-cutStatus C12d-prefixAbsorption = conditionalOnHypothesis
+cutStatus C12d-prefixAbsorption = nonCriticalOptional
 cutStatus C13a-alignedBlockLiteralDescent = proved
 cutStatus C13b-alignedBlockFiniteTail = proved
 cutStatus C13c-rationalAlignedBlockFiniteTail = proved
 cutStatus C13-universalStoppingCompiler = compiledFromRepo
-cutStatus C13d-allStartsGoodPrefixProducer = sourceSpecificOpen
+cutStatus C13d-allStartsStrictDescentProducer = sourceSpecificOpen
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
 cutStatus oldFiniteEqualsIntegerRoute = refutedRoute
@@ -211,9 +211,17 @@ universalStoppingCompilerPaid :
   cutStatus C13-universalStoppingCompiler ≡ compiledFromRepo
 universalStoppingCompilerPaid = refl
 
-allStartsGoodPrefixStillOpen :
-  cutStatus C13d-allStartsGoodPrefixProducer ≡ sourceSpecificOpen
-allStartsGoodPrefixStillOpen = refl
+strictDescentTerminalWallVisible :
+  cutStatus C13d-allStartsStrictDescentProducer ≡ sourceSpecificOpen
+strictDescentTerminalWallVisible = refl
+
+stoppedLogRouteOptional :
+  cutStatus C7a-stoppedLogRemainder ≡ nonCriticalOptional
+stoppedLogRouteOptional = refl
+
+z2TransferRouteOptional :
+  cutStatus C8c-z2TransferOperatorIntertwiner ≡ nonCriticalOptional
+z2TransferRouteOptional = refl
 
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
@@ -225,7 +233,7 @@ record MaxCutBoundary : Set where
     relationMixingImpliesUniversalStopping : Nat
     interfaceRecordCountsAsSourceProof : Nat
     exhaustiveSpecimensCountAsGeneralProof : Nat
-    openSourcesRemainVisible : Nat
+    onlyCriticalOpenSourceIsLiteralStrictDescent : Nat
     completeBlockBernoulliNeedsSpectralMixing : Nat
     directCylinderBijectionReplacesRelationSpectralRoute : Nat
     arbitraryLengthCylinderInductionPaid : Nat
@@ -240,11 +248,10 @@ record MaxCutBoundary : Set where
     rationalTailParametricPaidHere : Nat
     rationalLiteralAlignedTailPaidHere : Nat
     unalignedBoundaryCompilerPaidHere : Nat
-    exactArbitraryIntervalSplitStillSeparate : Nat
     universalStoppingCompilerPaidHere : Nat
-    allStartsGoodPrefixProducerStillSeparate : Nat
-    logWeightedSamplingStillSeparate : Nat
+    strictDescentEquivalentToStopping : Nat
+    optionalParallelRoutesDoNotBlockMaxCut : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1
