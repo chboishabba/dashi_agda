@@ -17,6 +17,7 @@ import DASHI.Physics.Foundations.GRQFTIsraelBranchMaxCutExact as Israel
 import DASHI.Physics.Foundations.GRQFTDECRepulsiveExteriorMaxCutExact as DECExterior
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Nambu
 import DASHI.Physics.Foundations.GRQFTSourceNativeNambuBubbleConditionalExact as SourceNative
+import DASHI.Physics.Foundations.GRQFTCMP119NambuBuriedVacuumReadoutExact as BuriedReadout
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExact as ConcreteObservables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
@@ -71,6 +72,10 @@ stageCSourceNativeNambuConditionalBoundary :
 stageCSourceNativeNambuConditionalBoundary =
   SourceNative.canonicalSourceNativeNambuBubbleClosureBoundary
 
+stageASourceNativeVacuumReadout : BuriedReadout.BuriedVacuumReadoutBoundary
+stageASourceNativeVacuumReadout =
+  BuriedReadout.canonicalBuriedVacuumReadoutBoundary
+
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
 
@@ -89,6 +94,7 @@ record AntigravityABCDEFrontier : Set where
   constructor antigravity-a-b-c-d-e-frontier
   field
     stageASourceShapeConstructed : Bool
+    stageASourceNativeVacuumReadoutCarrierConstructed : Bool
     stageBActiveStressSignMathClosed : Bool
     stageCWeakFieldPoissonFixtureSolved : Bool
     stageCConservationCompilerConstructed : Bool
@@ -112,6 +118,7 @@ record AntigravityABCDEFrontier : Set where
 
     asymptoticallyFlatPositiveDensityRepulsiveExteriorAvailable : Bool
     sourceNativeVacuumReadoutStillOpen : Bool
+    sourceNativeTwoVacuumValuesStillOpen : Bool
     sourceNativePinnedStressWeldStillOpen : Bool
     sourceNativeCMP119PotentialCouplingStillOpen : Bool
     finiteThicknessWallStillOpen : Bool
@@ -125,8 +132,8 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true true true true true true true true true
-    false true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true
+    false false true true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -138,7 +145,8 @@ record AntigravityABCDEPromotionBoundary : Set where
     concreteMechanicalObservableProjectionClosed : Bool
     kottlerAmplitudeToMetricPerturbationClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
-    sourceNativeTwoAmplitudeReadoutClosed : Bool
+    sourceNativeVacuumReadoutCarrierClosed : Bool
+    sourceNativeTwoAmplitudeValuesClosed : Bool
     sourceNativePinnedStressSameObjectClosed : Bool
     dynamicSchutzholdTTReadoutForDeviceClosed : Bool
     fullPhysicalDeviceDemonstrated : Bool
@@ -149,4 +157,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true true false false false false false false true
+    true true true true true true true true false false false false false false true
