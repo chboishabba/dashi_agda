@@ -33,12 +33,13 @@ def test_outward_interior_requires_nonzero_boundary_stress_or_surface_layer():
         assert token in text
 
 
-def test_terminal_maxcut_consumes_global_obstruction():
+def test_terminal_maxcut_scopes_obstruction_to_asymptotically_flat_branch():
     text = read("DASHI/Physics/ExoticGravity/AntigravityABCDETerminalMaxCutExact.agda")
     for token in (
         "stageCSphericalExteriorMassObstruction",
         "stageCInteriorBoundaryObstruction",
-        "repulsiveVacuumExteriorWithPositiveDensityStillOpen",
-        "localInteriorMetricEngineeringRouteStillLive",
+        "asymptoticallyFlatPositiveDensityRepulsiveExteriorAvailable",
+        "stageCIsraelJunctionConstructed",
+        "selectedNonlinearRepulsiveExteriorGeometryConstructed",
     ):
         assert token in text
