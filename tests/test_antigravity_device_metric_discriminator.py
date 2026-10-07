@@ -35,6 +35,7 @@ EXPECTED = {
         "positiveGActiveStressRoute",
         "existingLocalizedPositiveGRepulsiveShell",
         "existingLiTorrKernel",
+        "existingSchutzholdTerminalFrontier",
     ),
 }
 
@@ -61,6 +62,8 @@ def test_negative_g_scope_search_consumes_non_geometric_opposite_firewall() -> N
     text = read(EXOTIC / "AntigravityNegativeGCouplingScopeProofSearchExact.agda")
     assert "AntigravitySearchNonGeometricOppositeExact as NonGeometric" in text
     assert "existingNonGeometricOppositeBoundary" in text
+    assert "NegativeGGeometricPromotionGate" in text
+    assert "geometricOppositeReceipt" in text
     assert "geometricOppositeRequiresSolvedGeometryReceipt" in read(
         EXOTIC / "AntigravitySearchNonGeometricOppositeExact.agda"
     )
@@ -89,6 +92,7 @@ def test_device_discriminator_requires_same_object_and_cross_channel_checks() ->
         "reversalRepresentation",
         "modulationLockInReceipt",
         "positiveGActiveStressRoute",
+        "existingSchutzholdTerminalFrontier",
     ):
         assert token in text
 
