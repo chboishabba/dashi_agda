@@ -23,6 +23,17 @@ def test_positive_g_weak_field_metric_owner_exists():
         assert token in text
 
 
+def test_anisotropic_TOV_conservation_obstruction_is_explicit():
+    text = read("DASHI/Physics/Foundations/PositiveGAnisotropicTOVConservationExact.agda")
+    for token in (
+        "anisotropicConservationResidual",
+        "boundaryConstantPressureRequiresPhiPrimeMinusTwo",
+        "weakFieldBoundaryResidualIsFiveThirds",
+        "currentTwoZoneFixtureIsNotFullConservedStaticSolution",
+    ):
+        assert token in text
+
+
 def test_device_observable_compiler_covers_weight_freefall_clock_optical():
     text = read("DASHI/Physics/ExoticGravity/AntigravityDeviceMetricObservableCompilerExact.agda")
     for token in (
@@ -41,6 +52,7 @@ def test_A_to_E_terminal_owner_exists_and_is_fail_closed():
         "stageASourceContract",
         "stageBActiveStressCriterion",
         "stageCWeakFieldMetricSolve",
+        "stageCNonlinearConservationAudit",
         "stageDFourChannelProjection",
         "stageESameObjectExperiment",
         "fullNonlinearCompactEinsteinSolveStillOpen",
