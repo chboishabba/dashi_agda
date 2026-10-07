@@ -6,18 +6,16 @@ Source benchmark (arXiv:2502.10221 / PRL 135, 171501):
   pulse energy ~ mJ, GW angular frequency ~ 2*pi*kHz,
   phase accumulation time of a few seconds.
 
-The benchmark also derives the ideal coherent-state delay requirement
+The benchmark derives the ideal coherent-state delay requirement
 
-    h * Omega * tau * sqrt(N) >= target_snr,
+    |h| * Omega * tau * sqrt(N) >= target_snr,
 
-so a million-reflection delay is an example rather than a mathematical
-requirement.  Optical survival is separately parameterized by per-reflection
-loss.  This is not a complete apparatus noise model and does not claim an
-experimental observation.
+and separately parameterizes per-reflection optical loss.  It is not a complete
+apparatus noise model and does not claim an experimental observation.
 """
 
 from dataclasses import dataclass
-from math import exp, log, pi, sqrt
+from math import exp, inf, log, pi, sqrt
 
 HBAR = 1.054_571_817e-34  # J s, rounded numerical realization
 C = 299_792_458.0  # m/s, exact SI value represented as float here
@@ -26,10 +24,10 @@ C = 299_792_458.0  # m/s, exact SI value represented as float here
 @dataclass(frozen=True)
 class Benchmark:
     strain: float = 1.0e-22
-    optical_omega: float = 1.0e15  # rad/s order-of-magnitude benchmark
-    pulse_energy: float = 1.0e-3  # J
+    optical_omega: float = 1.0e15
+    pulse_energy: float = 1.0e-3
     gw_frequency_hz: float = 1.0e3
-    delay_time: float = 3.0  # s
+    delay_time: float = 3.0
     target_snr: float = 1.0
     reflection_count: int = 1_000_000
     per_reflection_loss: float = 1.0e-6
@@ -49,18 +47,23 @@ def evaluate(b: Benchmark = Benchmark()) -> dict[str, float]:
     graviton_equivalent_count = half_cycle_delta_energy / graviton_energy
 
     coherent_shot_phase = 1.0 / sqrt(photon_count)
-    shot_noise_snr = relative_phase / coherent_shot_phase
+    shot_noise_snr = abs(relative_phase) / coherent_shot_phase
     effective_path_length_m = C * b.delay_time
 
-    # tau_min follows directly from h Omega tau sqrt(N) >= target_snr.
-    minimum_delay_for_target_snr = (
-        b.target_snr
-        / (b.strain * b.optical_omega * sqrt(photon_count))
-    )
+    signal_rate = abs(b.strain * b.optical_omega) * sqrt(photon_count)
+    if b.target_snr <= 0.0:
+        minimum_delay_for_target_snr = 0.0
+    elif signal_rate == 0.0:
+        minimum_delay_for_target_snr = inf
+    else:
+        minimum_delay_for_target_snr = b.target_snr / signal_rate
     minimum_path_for_target_snr_m = C * minimum_delay_for_target_snr
 
-    # Independent optical-loss budget.  For small loss ell, survival after M
-    # reflections is (1-ell)^M; exp(-M ell) is retained as the asymptotic check.
+    if b.reflection_count < 1:
+        raise ValueError("reflection_count must be >= 1")
+    if not 0.0 <= b.per_reflection_loss < 1.0:
+        raise ValueError("per_reflection_loss must satisfy 0 <= loss < 1")
+
     exact_survival = (1.0 - b.per_reflection_loss) ** b.reflection_count
     exponential_survival = exp(-b.per_reflection_loss * b.reflection_count)
     half_survival_loss_budget = 1.0 - exp(log(0.5) / b.reflection_count)
@@ -90,26 +93,34 @@ def evaluate(b: Benchmark = Benchmark()) -> dict[str, float]:
 def verify(b: Benchmark = Benchmark()) -> dict[str, float]:
     r = evaluate(b)
 
-    # Algebraic source-law checks.
     assert abs(r["differential_delta_omega_s^-1"] - b.strain * b.optical_omega) <= 1e-30
     assert abs(r["relative_phase_rad"] - b.strain * b.optical_omega * b.delay_time) <= 1e-30
     assert abs(r["half_cycle_delta_energy_J"] - 0.5 * b.strain * b.pulse_energy) <= 1e-40
 
-    # Paper-scale sanity windows, deliberately loose/order-of-magnitude.
+    # These are benchmark-scale checks on the physical laser/GW inputs, not on
+    # the independently tunable reflection count.
     assert 1e15 <= r["photon_count"] <= 1e17
-    assert 1e-8 <= r["differential_delta_omega_s^-1"] <= 1e-6
-    assert 1e-8 <= r["relative_phase_rad"] <= 1e-6
+    assert 1e-8 <= abs(r["differential_delta_omega_s^-1"]) <= 1e-6
+    assert 1e-8 <= abs(r["relative_phase_rad"]) <= 1e-6
     assert 1e-9 <= r["coherent_shot_phase_rad"] <= 1e-7
     assert r["shot_noise_snr_ideal"] > 1.0
-    assert r["graviton_equivalent_count"] > 1.0
+    assert abs(r["graviton_equivalent_count"]) > 1.0
     assert 1e8 <= r["effective_path_length_m"] <= 2e9
-
-    # Design-tradeoff checks.
     assert 0.05 <= r["minimum_delay_for_target_snr_s"] <= 0.2
     assert 1e7 <= r["minimum_path_for_target_snr_m"] <= 1e8
+
+    # Parameterized optical-loss checks.
     assert abs(r["optical_survival_fraction"] - r["optical_survival_exp_approx"]) < 1e-6
-    assert 5e-7 <= r["loss_per_reflection_for_50pct_survival"] <= 1e-6
-    assert 2e-6 <= r["loss_per_reflection_for_10pct_survival"] <= 3e-6
+    expected_half = 1.0 - exp(log(0.5) / b.reflection_count)
+    expected_tenth = 1.0 - exp(log(0.1) / b.reflection_count)
+    assert abs(r["loss_per_reflection_for_50pct_survival"] - expected_half) < 1e-15
+    assert abs(r["loss_per_reflection_for_10pct_survival"] - expected_tenth) < 1e-15
+
+    # Retain the headline million-reflection sanity windows only for that
+    # specific paper-scale design point.
+    if b.reflection_count == Benchmark().reflection_count:
+        assert 5e-7 <= r["loss_per_reflection_for_50pct_survival"] <= 1e-6
+        assert 2e-6 <= r["loss_per_reflection_for_10pct_survival"] <= 3e-6
 
     return r
 
