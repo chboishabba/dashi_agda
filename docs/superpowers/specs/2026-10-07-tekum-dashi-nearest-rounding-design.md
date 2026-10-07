@@ -6,7 +6,7 @@ Architectural design for a new DASHI rounding semantics. This design is intentio
 
 ## Goal
 
-Define an exact rational nearest-rounding semantics from a higher-width ordinary finite Tékum value to the ordinary finite values at a lower width, derive a deterministic DASHI rounding operator from that semantics, characterize the relation between this new operator and raw anchor truncation, and prove or refute no-double-rounding for the new operator.
+Define an exact rational nearest-rounding semantics from a higher-width ordinary finite Tékum value to the ordinary finite values at a lower supported width, derive a deterministic DASHI rounding operator from that semantics, characterize the relation between this new operator and raw anchor truncation, and prove or refute no-double-rounding for the new operator.
 
 ## Attribution Boundary
 
@@ -28,11 +28,19 @@ The programme must reuse, rather than duplicate:
 
 Machine floating point must not be used as semantic authority.
 
+## Supported Width Boundary
+
+Numerical same-object rounding is defined only where the existing source parser and exact decoder are defined. The current parser surface is `Vec Trit.Trit (8 + extra)`, and the paper-facing source theorems use admissible even core widths. Therefore the canonical numerical programme is restricted to supported even widths `n >= 8`.
+
+Structural vector truncation may still be stated below width 8, but such results are not source-level Tékum numerical rounding theorems.
+
+Consequently the first three-level same-object no-double-rounding chain is `12 → 10 → 8`, not `10 → 8 → 6`.
+
 ## Semantic Model
 
 ### Finite target carrier
 
-For an admissible target width `m`, define the carrier of ordinary finite Tékum source words at that width. A member packages:
+For a supported admissible target width `m`, define the carrier of ordinary finite Tékum source words at that width. A member packages:
 
 - a source word of width `m`;
 - proof that the source parser decodes it as `Sem.ordinary ordinary`;
@@ -50,12 +58,12 @@ in exact `ℚ`.
 
 ### Nearest set
 
-For source `x` and target width `m`, define `NearestSet x m` as the ordinary finite target candidates with globally minimal exact rational distance. The semantic specification is set-valued: ties are represented honestly rather than eliminated by definition.
+For source `x` and supported target width `m`, define `NearestSet x m` as the ordinary finite target candidates with globally minimal exact rational distance. The semantic specification is set-valued: ties are represented honestly rather than eliminated by definition.
 
 Required semantic properties:
 
 - target carrier is finite;
-- target carrier is nonempty at all supported target widths;
+- target carrier is nonempty at every supported target width;
 - nearest candidates exist;
 - every member of `NearestSet` has the same minimal distance;
 - every candidate outside `NearestSet` has distance at least that minimum.
@@ -80,7 +88,7 @@ The tie rule must satisfy:
 - it is not chosen solely to force a no-double-rounding theorem;
 - the theorem `dashiNearestRoundIsNearest` proves the chosen result is in `exactNearestSet`.
 
-No concrete tie rule is fixed in advance. The implementation plan must first enumerate exact ties at small widths and then select the simplest representation-intrinsic rule consistent with those results.
+No concrete tie rule is fixed in advance. The implementation plan must first enumerate exact ties at small supported widths and then select the simplest representation-intrinsic rule consistent with those results.
 
 ## Raw-Truncation Comparison
 
@@ -97,7 +105,7 @@ Define comparison data:
 - whether the raw result belongs to `exactNearestSet`;
 - an integer-code correction displacement from raw result to canonical nearest result whenever both are ordinary finite.
 
-The programme must exhaustively measure the correction radius on tractable widths before introducing an efficient local algorithm.
+The programme must exhaustively measure the correction radius on tractable supported widths before introducing an efficient local algorithm.
 
 ## Efficient Implementation Strategy
 
@@ -125,7 +133,7 @@ Only hypotheses supported by exact computation and proof may be promoted.
 
 ## No-Double-Rounding Programme
 
-For widths `n > m > k`, compare:
+For supported widths `n > m > k`, compare:
 
 `dashiNearestRound m→k (dashiNearestRound n→m x)`
 
@@ -133,7 +141,7 @@ with
 
 `dashiNearestRound n→k x`.
 
-The programme must first perform exact exhaustive searches at the smallest informative width chains (at least 10→8→6 and, if computationally practical, 12→10→8). The outcome determines the theorem lane:
+The programme must first perform exact exhaustive searches at the smallest informative same-object width chain, `12 → 10 → 8`, and then larger supported chains if computationally practical. The outcome determines the theorem lane:
 
 ### If equality holds on exhaustive probes
 
@@ -155,14 +163,14 @@ The final owner must therefore expose either a theorem or a falsifier, never an 
 ## Proposed File Responsibilities
 
 - `DASHI/ComputerScience/TekumExactNearestRoundingSemantics.agda`
-  - finite target carrier;
+  - supported-width finite target carrier;
   - exact rational distance;
   - nearest predicate/set;
   - existence/minimum semantic statements.
 
 - `DASHI/ComputerScience/TekumNearestRoundingEnumerationExact.agda`
   - executable finite enumeration surface;
-  - small-width exact fixtures;
+  - small-supported-width exact fixtures;
   - tie and correction-radius receipts.
 
 - `DASHI/ComputerScience/TekumRawNearestCorrectionExact.agda`
@@ -179,7 +187,7 @@ The final owner must therefore expose either a theorem or a falsifier, never an 
   - theorem equating efficient result with canonical exact nearest rounding.
 
 - `DASHI/ComputerScience/TekumNearestNoDoubleRoundingExact.agda`
-  - exhaustive width-chain probes;
+  - exhaustive supported width-chain probes;
   - global theorem or exact minimal counterexample.
 
 - `DASHI/ComputerScience/TekumDASHIRoundingBoundaryExact.agda`
@@ -205,11 +213,11 @@ The last two are mutually exclusive in the final accepted state.
 
 ## Max-Cut Order
 
-A. Build exact finite target carrier and exact-rational distance.
+A. Build supported-width exact finite target carrier and exact-rational distance.
 
 B. Build nearest-set oracle and existence/minimum witnesses.
 
-C. Exhaustively enumerate small widths to map ties and raw-to-nearest displacement.
+C. Exhaustively enumerate small supported widths to map ties and raw-to-nearest displacement.
 
 D. Select and formalize the canonical tie rule from actual tie data.
 
@@ -217,7 +225,7 @@ E. Determine the smallest viable local correction radius; prove it sufficient or
 
 F. Prove `dashiNearestRoundIsNearest` and, if an efficient algorithm survives, `efficientNearestEqualsCanonicalNearest`.
 
-G. Exhaustively test 10→8→6 and larger practical chains for no-double-rounding.
+G. Exhaustively test `12 → 10 → 8` and larger practical supported chains for no-double-rounding.
 
 H. Close with either a global no-double-rounding theorem or an exact minimal counterexample/no-go owner.
 
@@ -231,7 +239,7 @@ Do not rescue a failed theorem by silently shrinking the domain, changing the me
 
 The programme is complete when the repository has:
 
-1. one exact set-valued nearest-rounding semantic oracle over ordinary finite targets;
+1. one exact set-valued nearest-rounding semantic oracle over ordinary finite targets at supported widths;
 2. one deterministic DASHI rounding operator with explicit tie policy and proof of nearestness;
 3. an exact characterization of how raw truncation differs from canonical nearest rounding;
 4. either a proved efficient local correction algorithm equivalent to the oracle or an exact no-go/open boundary explaining why not;
