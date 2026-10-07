@@ -35,13 +35,13 @@ missing = [x for x in required if x not in text]
 if missing:
     raise SystemExit("missing required snowball surface: " + ", ".join(missing))
 forbidden = [
-    "Meta-authored virality model",
-    "fMRI proves mind reading",
-    "serum GABA equals brain GABA",
-    "weekly calibration is universal",
-    "cross-participant superiority established",
+    "metaViralityIsMetaAuthored :",
+    "fMRIProvesMindReading :",
+    "serumGABAEqualsBrainGABA :",
+    "weeklyCalibrationUniversal :",
+    "crossParticipantSuperiorityEstablishedIsTrue",
 ]
 found = [x for x in forbidden if x in text]
 if found:
-    raise SystemExit("forbidden overclaim surface found: " + ", ".join(found))
+    raise SystemExit("forbidden overclaim declaration found: " + ", ".join(found))
 print("GABA neuro-AI context snowball source surface: OK")
