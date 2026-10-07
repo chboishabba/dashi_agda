@@ -60,6 +60,7 @@ import DASHI.Economics.ChinaEconomicLeadershipCrossSourceJoinExact
 
 -- October 2026 capital-recovery / circular-financing max-cut.
 import DASHI.Economics.AICapitalRecoveryEntanglement2026Exact
+import DASHI.Economics.AnthropicProspectusCapitalRecovery2026Exact
 import DASHI.Economics.AICerebrasChinaOpenWeightCalibration2026Exact
 import DASHI.Economics.AIGeometricMarketStressOperator2026Exact
 import DASHI.Economics.AIOpenClosedGrowthCapitalRecoveryExact
