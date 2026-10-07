@@ -18,13 +18,15 @@ import DASHI.Governance.BoloBoloRobustCostBoundsExact as Robust
 MeaningfulOrderImprovement :
   Nat → Comparison.CounterfactualCoordinationCostModel → Set
 MeaningfulOrderImprovement threshold model =
-  Comparison.federatedCoordinationCost model + suc threshold
+  Comparison.retainedCost model
+  + (Comparison.federationOverhead model + suc threshold)
   < Comparison.globalCoordinationCost model
 
 MeaningfulOrderLoss :
   Nat → Comparison.CounterfactualCoordinationCostModel → Set
 MeaningfulOrderLoss threshold model =
-  Comparison.globalCoordinationCost model + suc threshold
+  Comparison.retainedCost model
+  + (Comparison.removedGlobalCouplingCost model + suc threshold)
   < Comparison.federatedCoordinationCost model
 
 record RobustMeaningfulWin
