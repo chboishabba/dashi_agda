@@ -4,84 +4,55 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Governance.OccupyParticipantPseudonymisationExact as Privacy
 
 ------------------------------------------------------------------------
--- REAL BOUNDED FINITE INCIDENCE EXAMPLE.
+-- REAL BOUNDED FINITE INCIDENCE EXAMPLE, PSEUDONYMISED.
 --
 -- Primary archival source:
 -- People's Library / Occupy Wall Street Library Working Group minutes,
 -- 22 October 2011.
 -- https://peopleslibrary.wordpress.com/2011/10/22/library-working-group-meeting-minutes/
 --
--- Attribution rule:
---   * constructors below encode only explicit named utterance -> agenda/proposal
---     associations visible in the inspected minutes;
---   * consensus/temp-check outcomes are represented by a distinct relation;
---   * no attendance x agenda cross-product is generated;
---   * no speaker edge is interpreted as agreement, vote, mandate or authority.
+-- Participant labels in this derived formal table are keyed-HMAC pseudonyms.
+-- Raw source names are intentionally not propagated here.
 ------------------------------------------------------------------------
 
 data Participant : Set where
-  adash : Participant
-  steve : Participant
-  betsy : Participant
-  stephen : Participant
-  frances : Participant
-  eric : Participant
-  orion : Participant
-  sean : Participant
-  thaddeus : Participant
-  michael : Participant
-  zach : Participant
-
+  p-ebddda : Participant
+  p-442ac6 : Participant
+  p-aeedd2 : Participant
+  p-81d19f : Participant
+  p-33f894 : Participant
+  p-2b47b2 : Participant
+  p-61309c : Participant
+  p-a936c6 : Participant
+  p-b64222 : Participant
+  p-bc1911 : Participant
+  p-fc55c2 : Participant
 
 data Issue : Set where
-  spokesCouncilProposal : Issue
-  financeIntegration : Issue
-  libraryBudget : Issue
-  silentReadingTechnology : Issue
-  electricityGenerator : Issue
-  townPlanningShelter : Issue
-  guestSpeakerCoordination : Issue
-  zinesAndPamphlets : Issue
-  printedGovernanceArchive : Issue
-  meetingTime : Issue
-  libraryClosingTime : Issue
-
-------------------------------------------------------------------------
--- Explicit source-paid participant -> issue relations.
-------------------------------------------------------------------------
+  spokesCouncilProposal financeIntegration libraryBudget silentReadingTechnology electricityGenerator townPlanningShelter guestSpeakerCoordination zinesAndPamphlets printedGovernanceArchive meetingTime libraryClosingTime : Issue
 
 data ExplicitInteraction : Participant → Issue → Set where
-  adashSpokes : ExplicitInteraction adash spokesCouncilProposal
-
-  steveFinance : ExplicitInteraction steve financeIntegration
-  betsyFinance : ExplicitInteraction betsy financeIntegration
-  stephenBudget : ExplicitInteraction stephen libraryBudget
-  francesFinance : ExplicitInteraction frances financeIntegration
-
-  orionSilentReading : ExplicitInteraction orion silentReadingTechnology
-  stephenSilentReading : ExplicitInteraction stephen silentReadingTechnology
-  betsySilentReading : ExplicitInteraction betsy silentReadingTechnology
-
-  ericGenerator : ExplicitInteraction eric electricityGenerator
-  francesGenerator : ExplicitInteraction frances electricityGenerator
-
-  francesTownPlanning : ExplicitInteraction frances townPlanningShelter
-  seanTownPlanning : ExplicitInteraction sean townPlanningShelter
-  thaddeusTownPlanning : ExplicitInteraction thaddeus townPlanningShelter
-
-  steveGuestSpeakers : ExplicitInteraction steve guestSpeakerCoordination
-  michaelGuestSpeakers : ExplicitInteraction michael guestSpeakerCoordination
-
-  thaddeusZines : ExplicitInteraction thaddeus zinesAndPamphlets
-  zachZines : ExplicitInteraction zach zinesAndPamphlets
-
-  stevePrintedArchive : ExplicitInteraction steve printedGovernanceArchive
-
-------------------------------------------------------------------------
--- Finite row carrier used only to audit the explicitly admitted source rows.
-------------------------------------------------------------------------
+  e01 : ExplicitInteraction p-ebddda spokesCouncilProposal
+  e02 : ExplicitInteraction p-442ac6 financeIntegration
+  e03 : ExplicitInteraction p-aeedd2 financeIntegration
+  e04 : ExplicitInteraction p-81d19f libraryBudget
+  e05 : ExplicitInteraction p-33f894 financeIntegration
+  e06 : ExplicitInteraction p-2b47b2 silentReadingTechnology
+  e07 : ExplicitInteraction p-81d19f silentReadingTechnology
+  e08 : ExplicitInteraction p-aeedd2 silentReadingTechnology
+  e09 : ExplicitInteraction p-61309c electricityGenerator
+  e10 : ExplicitInteraction p-33f894 electricityGenerator
+  e11 : ExplicitInteraction p-33f894 townPlanningShelter
+  e12 : ExplicitInteraction p-a936c6 townPlanningShelter
+  e13 : ExplicitInteraction p-b64222 townPlanningShelter
+  e14 : ExplicitInteraction p-442ac6 guestSpeakerCoordination
+  e15 : ExplicitInteraction p-bc1911 guestSpeakerCoordination
+  e16 : ExplicitInteraction p-b64222 zinesAndPamphlets
+  e17 : ExplicitInteraction p-fc55c2 zinesAndPamphlets
+  e18 : ExplicitInteraction p-442ac6 printedGovernanceArchive
 
 record ObservedEdge : Set where
   constructor observedEdge
@@ -89,29 +60,28 @@ record ObservedEdge : Set where
     participant : Participant
     issue : Issue
     witness : ExplicitInteraction participant issue
-
 open ObservedEdge public
 
 canonicalObservedEdges : List ObservedEdge
 canonicalObservedEdges =
-  observedEdge adash spokesCouncilProposal adashSpokes
-  ∷ observedEdge steve financeIntegration steveFinance
-  ∷ observedEdge betsy financeIntegration betsyFinance
-  ∷ observedEdge stephen libraryBudget stephenBudget
-  ∷ observedEdge frances financeIntegration francesFinance
-  ∷ observedEdge orion silentReadingTechnology orionSilentReading
-  ∷ observedEdge stephen silentReadingTechnology stephenSilentReading
-  ∷ observedEdge betsy silentReadingTechnology betsySilentReading
-  ∷ observedEdge eric electricityGenerator ericGenerator
-  ∷ observedEdge frances electricityGenerator francesGenerator
-  ∷ observedEdge frances townPlanningShelter francesTownPlanning
-  ∷ observedEdge sean townPlanningShelter seanTownPlanning
-  ∷ observedEdge thaddeus townPlanningShelter thaddeusTownPlanning
-  ∷ observedEdge steve guestSpeakerCoordination steveGuestSpeakers
-  ∷ observedEdge michael guestSpeakerCoordination michaelGuestSpeakers
-  ∷ observedEdge thaddeus zinesAndPamphlets thaddeusZines
-  ∷ observedEdge zach zinesAndPamphlets zachZines
-  ∷ observedEdge steve printedGovernanceArchive stevePrintedArchive
+  observedEdge p-ebddda spokesCouncilProposal e01
+  ∷ observedEdge p-442ac6 financeIntegration e02
+  ∷ observedEdge p-aeedd2 financeIntegration e03
+  ∷ observedEdge p-81d19f libraryBudget e04
+  ∷ observedEdge p-33f894 financeIntegration e05
+  ∷ observedEdge p-2b47b2 silentReadingTechnology e06
+  ∷ observedEdge p-81d19f silentReadingTechnology e07
+  ∷ observedEdge p-aeedd2 silentReadingTechnology e08
+  ∷ observedEdge p-61309c electricityGenerator e09
+  ∷ observedEdge p-33f894 electricityGenerator e10
+  ∷ observedEdge p-33f894 townPlanningShelter e11
+  ∷ observedEdge p-a936c6 townPlanningShelter e12
+  ∷ observedEdge p-b64222 townPlanningShelter e13
+  ∷ observedEdge p-442ac6 guestSpeakerCoordination e14
+  ∷ observedEdge p-bc1911 guestSpeakerCoordination e15
+  ∷ observedEdge p-b64222 zinesAndPamphlets e16
+  ∷ observedEdge p-fc55c2 zinesAndPamphlets e17
+  ∷ observedEdge p-442ac6 printedGovernanceArchive e18
   ∷ []
 
 edgeCount : List ObservedEdge → Nat
@@ -120,14 +90,6 @@ edgeCount (_ ∷ rest) = suc (edgeCount rest)
 
 canonicalObservedEdgeCount : edgeCount canonicalObservedEdges ≡ 18
 canonicalObservedEdgeCount = refl
-
-------------------------------------------------------------------------
--- Descriptive incidence degrees.
---
--- These are exact counts for the finite admitted row set above.  They are not
--- a coordination-cost function, importance score, speaking-time measure or
--- exhaustive participation count for the meeting.
-------------------------------------------------------------------------
 
 observedIssueDegree : Issue → Nat
 observedIssueDegree spokesCouncilProposal = 1
@@ -143,39 +105,21 @@ observedIssueDegree meetingTime = 0
 observedIssueDegree libraryClosingTime = 0
 
 observedParticipantDegree : Participant → Nat
-observedParticipantDegree adash = 1
-observedParticipantDegree steve = 3
-observedParticipantDegree betsy = 2
-observedParticipantDegree stephen = 2
-observedParticipantDegree frances = 3
-observedParticipantDegree eric = 1
-observedParticipantDegree orion = 1
-observedParticipantDegree sean = 1
-observedParticipantDegree thaddeus = 2
-observedParticipantDegree michael = 1
-observedParticipantDegree zach = 1
+observedParticipantDegree p-ebddda = 1
+observedParticipantDegree p-442ac6 = 3
+observedParticipantDegree p-aeedd2 = 2
+observedParticipantDegree p-81d19f = 2
+observedParticipantDegree p-33f894 = 3
+observedParticipantDegree p-2b47b2 = 1
+observedParticipantDegree p-61309c = 1
+observedParticipantDegree p-a936c6 = 1
+observedParticipantDegree p-b64222 = 2
+observedParticipantDegree p-bc1911 = 1
+observedParticipantDegree p-fc55c2 = 1
 
 issueDegreeTotal :
-  observedIssueDegree spokesCouncilProposal
-  + observedIssueDegree financeIntegration
-  + observedIssueDegree libraryBudget
-  + observedIssueDegree silentReadingTechnology
-  + observedIssueDegree electricityGenerator
-  + observedIssueDegree townPlanningShelter
-  + observedIssueDegree guestSpeakerCoordination
-  + observedIssueDegree zinesAndPamphlets
-  + observedIssueDegree printedGovernanceArchive
-  + observedIssueDegree meetingTime
-  + observedIssueDegree libraryClosingTime
-  ≡ 18
+  observedIssueDegree spokesCouncilProposal + observedIssueDegree financeIntegration + observedIssueDegree libraryBudget + observedIssueDegree silentReadingTechnology + observedIssueDegree electricityGenerator + observedIssueDegree townPlanningShelter + observedIssueDegree guestSpeakerCoordination + observedIssueDegree zinesAndPamphlets + observedIssueDegree printedGovernanceArchive + observedIssueDegree meetingTime + observedIssueDegree libraryClosingTime ≡ 18
 issueDegreeTotal = refl
-
-------------------------------------------------------------------------
--- Decision/outcome observations are deliberately separate from speaker edges.
--- These constructors state only that the inspected minutes report the named
--- outcome for the issue; they do not assign that outcome as every speaker's
--- individual stance.
-------------------------------------------------------------------------
 
 data DecisionObserved : Issue → Set where
   financeConsensus : DecisionObserved financeIntegration
@@ -184,66 +128,29 @@ data DecisionObserved : Issue → Set where
   meetingTimeConsensus : DecisionObserved meetingTime
   closingTimeNoFixedClosureConsensus : DecisionObserved libraryClosingTime
 
-------------------------------------------------------------------------
--- Source anchors for the bounded specimen.
-------------------------------------------------------------------------
-
 meetingDate : String
 meetingDate = "2011-10-22"
-
 sourceURL : String
-sourceURL =
-  "https://peopleslibrary.wordpress.com/2011/10/22/library-working-group-meeting-minutes/"
-
+sourceURL = "https://peopleslibrary.wordpress.com/2011/10/22/library-working-group-meeting-minutes/"
 sourceScope : String
-sourceScope =
-  "People's Library / OWS Library Working Group meeting; not the whole NYCGA"
-
-------------------------------------------------------------------------
--- No-promotion firewall.
-------------------------------------------------------------------------
+sourceScope = "People's Library / OWS Library Working Group meeting; not the whole NYCGA"
 
 record LibraryArchivalIncidenceBoundary : Set where
   constructor libraryArchivalIncidenceBoundary
   field
-    rowsAreSourceExplicitNamedInteractions : Bool
-    outcomesKeptSeparateFromSpeakerRows : Bool
-    descriptiveDegreesDerivedFromAdmittedRows : Bool
-
-    attendanceCrossProductPromoted : Bool
-    speakerEdgeEncodesAgreement : Bool
-    speakerEdgeEncodesVote : Bool
-    speakerEdgeEncodesRepresentation : Bool
-    speakerEdgeCreatesMandate : Bool
-    meetingGraphGeneralisedToAllOWS : Bool
-    finiteGraphIsCompleteMeetingTranscript : Bool
-    observedDegreeInterpretedAsCoordinationCost : Bool
-    finiteGraphPaysCoordinationCostLaw : Bool
-
+    rowsAreSourceExplicitPseudonymousInteractions outcomesKeptSeparateFromSpeakerRows descriptiveDegreesDerivedFromAdmittedRows rawNamesPropagatedIntoFormalTable attendanceCrossProductPromoted speakerEdgeEncodesAgreement speakerEdgeEncodesVote speakerEdgeEncodesRepresentation speakerEdgeCreatesMandate meetingGraphGeneralisedToAllOWS finiteGraphIsCompleteMeetingTranscript observedDegreeInterpretedAsCoordinationCost finiteGraphPaysCoordinationCostLaw : Bool
 open LibraryArchivalIncidenceBoundary public
 
 canonicalLibraryIncidenceBoundary : LibraryArchivalIncidenceBoundary
 canonicalLibraryIncidenceBoundary =
-  libraryArchivalIncidenceBoundary
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
+  libraryArchivalIncidenceBoundary true true true false false false false false false false false false false
 
 canonicalOccupyLibraryArchivalIncidenceReceipt : GenericReceipt.GenericReceipt
 canonicalOccupyLibraryArchivalIncidenceReceipt =
   GenericReceipt.mkNonPromotingReceipt
-    "real bounded OWS Library Working Group incidence graph"
+    "pseudonymised bounded OWS Library Working Group incidence graph"
     "DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact"
     "canonicalLibraryIncidenceBoundary"
-    "instantiates eighteen explicit named participant-to-issue interactions from the 22 October 2011 People's Library working-group minutes, keeps reported consensus outcomes separate, and exposes exact descriptive issue/participant degrees for the admitted edge set"
-    "the graph does not infer attendee-by-agenda edges, individual agreement or votes, representation, mandate, movement-wide completeness, or reinterpret descriptive incidence degree as coordination cost"
+    "instantiates eighteen explicit participant-to-issue interactions from the 22 October 2011 People's Library working-group minutes using collision-audited opaque participant tokens and keeping reported consensus outcomes separate"
+    "raw names are not propagated into this derived table; source citation remains public, pseudonym tokens preserve bounded correlation only, and the graph does not infer votes, representation, mandate, completeness or coordination cost"
     "agda -i . DASHI/Governance/OccupyLibraryArchivalIncidenceFiniteExampleRegression.agda"
