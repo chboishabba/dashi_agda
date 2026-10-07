@@ -79,5 +79,7 @@ grep -q 'cutStatus C12c-exponentialBadWordTail = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 grep -q 'cutStatus C13a-alignedBlockLiteralDescent = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13b-alignedBlockFiniteTail = proved' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
