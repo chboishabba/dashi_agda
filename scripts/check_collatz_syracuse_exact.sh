@@ -39,6 +39,7 @@ formal_files=(
   DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
   DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
   DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
+  DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
   DASHI/Analysis/CollatzSyracuseHoeffdingMathlibBoundaryExact.agda
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 )
@@ -69,5 +70,11 @@ grep -q 'badWordCount' \
   DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
 grep -q 'fiveEightBadWordBound' \
   DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
+grep -q 'nonDescentImpliesBadWord' \
+  DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
+grep -q 'cutStatus C12c-exponentialBadWordTail = proved' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13a-alignedBlockLiteralDescent = proved' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
