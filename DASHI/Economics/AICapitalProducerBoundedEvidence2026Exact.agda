@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Economics.AICapitalParetoAcquisitionSourceAtlas2026Exact as Sources
 
 ------------------------------------------------------------------------
@@ -105,5 +106,5 @@ boundedEvidenceNeverCreatesTerminalAuthority :
 boundedEvidenceNeverCreatesTerminalAuthority = refl
 
 acquisitionAtlasStillNonPromoting :
-  Sources.Source.atlasCreatesAuthority Sources.aiCapitalParetoAcquisitionAtlas ≡ false
+  Source.atlasCreatesAuthority Sources.aiCapitalParetoAcquisitionAtlas ≡ false
 acquisitionAtlasStillNonPromoting = Sources.atlasDoesNotCreateAuthority
