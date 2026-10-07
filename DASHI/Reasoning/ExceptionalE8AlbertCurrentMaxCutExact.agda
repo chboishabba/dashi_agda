@@ -3,48 +3,38 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 ------------------------------------------------------------------------
 -- CURRENT EXCEPTIONAL E8 / ALBERT MAX-CUT
 --
--- This owner is a fail-closed status surface spanning the companion Lean
--- structured-E8 producer and the source-native Agda rational Albert algebra.
+-- Structured E8 (companion Lean) is source-written through an intrinsic
+-- inverse-Cartan glue reflection and E8 Coxeter root datum on 240 roots.
 --
--- Structured E8 (companion Lean):
---   * structured 240 = 72 + 6 + 6*27;
---   * exact W(E6) x W(A2) branching;
---   * inverse-Cartan E6+A2 pairing;
---   * intrinsic norm-two glue root and cross-branch reflection;
---   * rank-eight E8 Cartan Gram with determinant one;
---   * E8 Coxeter action on all 240 structured roots;
---   * local diagnostic generated order 696729600.
+-- Rational Albert (this Agda branch) now contains:
+--   * H_3(O_Q) = Q^3 + O_Q^3, coordinate dimension 27;
+--   * identity, trace and cubic norm;
+--   * explicit Jordan product, commutativity, unit and Jordan identity;
+--   * coordinate S3 automorphisms preserving product/cubic;
+--   * two explicit octonion signed-monomial automorphism generators;
+--   * exhaustive signed-basis runtime closure 1344;
+--   * diagonal Albert lift, commuting with coordinate S3, combined runtime
+--     automorphism subgroup order 8064;
+--   * exact rational derivation system rank 677 in 729 unknowns, hence
+--     dim Der(J)=52;
+--   * all 351 inner commutators span exact rational rank 52.
 --
--- Rational Albert (this Agda branch):
---   * exact rational octonions already existed;
---   * H_3(O_Q) coordinate carrier = Q^3 + O_Q^3, dimension 27;
---   * distinguished identity, trace and cubic norm;
---   * explicit symmetrised Hermitian Jordan product;
---   * source-written commutativity, unit and Jordan-identity coordinate proofs;
---   * explicit S3 coordinate automorphism subgroup, with product/cubic
---     preservation source-written.
+-- Negative control:
+-- a natural order-192 signed-monomial line stabilizer times the independent
+-- coordinate S3 has order 1152, but this is NOT promoted to W(F4); the missing
+-- ingredient is the nontrivial D4 triality action, not order alone.
 --
 -- Remaining exceptional-algebra wall:
---   source-native octonion G2 / Spin(8) triality automorphisms sufficient to
---   generate/recognize full F4 = Aut(H_3(O)).  Repository search finds planning
---   references but no such implementation on the live branch.
---
--- Independent remaining lanes:
---   * Monster/3B normalizer conjugation physical realization;
---   * original punctured T5 recognition (companion Lean now shows the paid E6
---     action does not restrict to that 240-state complement);
---   * empirical/LILA instantiation.
+--   source-native D4/Spin(8) triality (or equivalent Cartan/root recognition),
+--   then identify Der(J) as Lie type F4 and Aut(J) as the corresponding F4
+--   algebraic/Lie group.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact as Cubic
-import DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact as Product
-import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact as Laws
-import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact as S3
-import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismLawsExact as S3Laws
+import DASHI.Mathematics.Algebra.RationalAlbertF4CurrentMaxCutExact as F4Cut
 
 record ExceptionalCurrentMaxCut : Set where
   constructor exceptional-current-max-cut
@@ -58,14 +48,19 @@ record ExceptionalCurrentMaxCut : Set where
     rationalAlbertCoordinateDimension27Paid : Bool
     rationalAlbertCubicNormPaid : Bool
     rationalAlbertJordanProductSourceWritten : Bool
-    rationalAlbertCommutativitySourceWritten : Bool
-    rationalAlbertUnitLawsSourceWritten : Bool
-    rationalAlbertJordanIdentitySourceWritten : Bool
-    rationalAlbertS3AutomorphismSubgroupSourceWritten : Bool
-    rationalAlbertS3ProductCubicPreservationSourceWritten : Bool
+    rationalAlbertJordanLawsSourceWritten : Bool
+    rationalAlbertCoordinateS3AutomorphismsSourceWritten : Bool
+    signedMonomialOctonionAutomorphismsSourceWritten : Bool
+    signedMonomialClosure1344RuntimeChecked : Bool
+    signedMonomialAlbertLiftSourceWritten : Bool
+    explicitAlbertAutomorphismSubgroup8064RuntimeChecked : Bool
+    derivationConstraintRank677RuntimeChecked : Bool
+    derivationDimension52RuntimeChecked : Bool
+    innerDerivationSpan52RuntimeChecked : Bool
+    order1152RejectedAsWeylF4Recognition : Bool
+    nontrivialD4TrialityPaid : Bool
+    f4LieAlgebraRecognitionPaid : Bool
     fullF4AutomorphismRecognitionPaid : Bool
-    octonionG2AutomorphismImplementationPaid : Bool
-    spin8TrialityImplementationPaid : Bool
     monsterNormalizerPhysicalRealizationPaid : Bool
     originalPuncturedT5SameObjectRecognitionPaid : Bool
     empiricalLilaInstantiationPaid : Bool
@@ -77,8 +72,8 @@ canonicalExceptionalCurrentMaxCut =
   exceptional-current-max-cut
     240 696729600
     true true true
-    true true true
+    true true true true true true
     true true true true
-    true true
+    true true true true
     false false false false false false
-    "Structured E8 is closed at source level through an intrinsic inverse-Cartan glue reflection and E8 Coxeter root datum. Rational Albert H3(O_Q), cubic norm, Jordan product/laws and an S3 automorphism subgroup are source-written. The current algebraic wall is full F4: construct source-native octonion G2 / Spin(8) triality automorphisms and prove their Albert product/cubic preservation."
+    "Structured E8 is closed at source level. The rational Albert algebra, cubic norm, Jordan laws, explicit S3 and signed-monomial automorphisms are source-written; exact rational runtime gives dim Der(J)=52 with inner span 52. The active exceptional wall is nontrivial D4/Spin(8) triality and Lie/root classification to identify Der(J) and Aut(J) as F4, not another cardinality match."
