@@ -3,27 +3,22 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 ------------------------------------------------------------------------
 -- CLAY-FACING B / PURE-ANALYSIS FRONTIER / IRREDUCIBLE 2026-10-07 CUT
 --
--- Representation/provenance is frozen except where same-object semantics are
--- necessary to make an analytic theorem non-vacuous.
+-- B4 is now literal and non-vacuous:
+--   * Core-Core principal + Core-noncore defect split: closed;
+--   * individual R236 live-block welds: closed;
+--   * literal M_core on the ACTUAL Core-Core row family: closed;
+--   * sharp R579 transport gives P_Core-Core <= (1/2) M_core with NO ED.
 --
--- B4 is now on a fully literal semantic surface:
---   * exact Core-Core principal + Core-noncore defect row split;
---   * exact weld of those rows to the live R236 block coordinates;
---   * literal M_core fixed as the existing same-pair Young companion summed
---     over the ACTUAL Core-Core rows;
---   * coefficient-one baseline P_Core-Core <= M_core already proved.
+-- Therefore the entire remaining B4 theorem is ONE defect remainder:
 --
--- Therefore B4's genuine theorem is no longer a bound against an arbitrary
--- `coreCompanionMass`.  It is the strict improvement
+--   D_Core-noncore <= theta_D M_core + c_D ED,
+--   1/2 + theta_D < 1,
 --
---   P_Core-Core <= theta_P M_core + c_P ED
---   D_Core-noncore <= theta_D M_core + c_D ED
---   theta_P + theta_D < 1,
---
--- uniformly in physical state/output/cutoff, against that fixed M_core.
+-- uniformly in physical state/output/cutoff.  Once this is inhabited the
+-- existing literal strict-split compiler closes B4 automatically.
 --
 -- B1/B2/B3 and B7/continuation retain the previously sharpened physical
--- producer leaves.  No old R823 or representation programme is reopened.
+-- producer leaves.  R823 and the old representation programme stay frozen.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -32,6 +27,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as Previous
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact as LiteralSplit
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact as Companion
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact as Half
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
@@ -45,7 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpoint
 import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
 
 data PureBAnalyticLeaf : Set where
-  b4LiteralCompanionStrictPhysicalEstimates : PureBAnalyticLeaf
+  b4CoreNoncoreDefectRemainder : PureBAnalyticLeaf
   b1PhysicalShellReceiptsToLocalED : PureBAnalyticLeaf
   b2PhysicalSignedShellPairsToLocalED : PureBAnalyticLeaf
   b3PhysicalIntraShellSignedL2ToLocalED : PureBAnalyticLeaf
@@ -55,7 +51,7 @@ data PureBAnalyticLeaf : Set where
   bContinuationPhysicalInputs : PureBAnalyticLeaf
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
-pureBLeafClosed b4LiteralCompanionStrictPhysicalEstimates = false
+pureBLeafClosed b4CoreNoncoreDefectRemainder = b4DefectRemainderClosed
 pureBLeafClosed b1PhysicalShellReceiptsToLocalED = b1PhysicalProducerClosed
 pureBLeafClosed b2PhysicalSignedShellPairsToLocalED = b2PhysicalProducerClosed
 pureBLeafClosed b3PhysicalIntraShellSignedL2ToLocalED = b3PhysicalProducerClosed
@@ -68,7 +64,7 @@ pureBLeafClosed q5SignedQuinticFallback =
 pureBLeafClosed bContinuationPhysicalInputs = bContinuationPhysicalInputsClosed
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
-currentHighestInformationLeaf = b4LiteralCompanionStrictPhysicalEstimates
+currentHighestInformationLeaf = b4CoreNoncoreDefectRemainder
 
 ------------------------------------------------------------------------
 -- B4 exact cut.
@@ -86,20 +82,23 @@ b4LiteralCoreCompanionMeaningClosed = Companion.b4LiteralCoreCompanionMeaningClo
 b4PrincipalBaselineYoungBoundClosed : Bool
 b4PrincipalBaselineYoungBoundClosed = Companion.b4PrincipalBaselineYoungBoundClosed
 
+b4PrincipalHalfCompanionBoundClosed : Bool
+b4PrincipalHalfCompanionBoundClosed = Half.b4PrincipalHalfCompanionBoundClosed
+
+b4PrincipalNeedsEDRemainder : Bool
+b4PrincipalNeedsEDRemainder = Half.b4PrincipalNeedsEDRemainder
+
+b4RemainingStrictMarginIsDefectBelowHalf : Bool
+b4RemainingStrictMarginIsDefectBelowHalf = Half.b4RemainingStrictMarginIsDefectBelowHalf
+
+b4DefectRemainderClosed : Bool
+b4DefectRemainderClosed = Half.b4DefectRemainderClosed
+
 b4LiteralCompanionStrictSplitCompilerClosed : Bool
 b4LiteralCompanionStrictSplitCompilerClosed = Companion.b4LiteralCompanionStrictSplitCompilerClosed
 
 b4FreeCompanionScalarStillRequired : Bool
 b4FreeCompanionScalarStillRequired = Companion.b4FreeCompanionScalarStillRequiredByPreferredRoute
-
-b4PrincipalStrictImprovementClosed : Bool
-b4PrincipalStrictImprovementClosed = Companion.b4PrincipalStrictImprovementBelowOneClosed
-
-b4DefectPhysicalPaymentClosed : Bool
-b4DefectPhysicalPaymentClosed = Companion.b4DefectPhysicalPaymentClosed
-
-b4PrincipalDefectPhysicalEstimatesClosed : Bool
-b4PrincipalDefectPhysicalEstimatesClosed = false
 
 b4DirectStrictMarginCompilerClosed : Bool
 b4DirectStrictMarginCompilerClosed = Previous.b4LiteralRowOperatorCompilerClosed
@@ -113,8 +112,8 @@ b4FixedQuarterMarginRequired = Split.b4StrictSplitRequiresQuarterMargin
 b4QuarterMarginOptionalCompilerClosed : Bool
 b4QuarterMarginOptionalCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
 
-b4ResearchLeafNowOnlyPhysicalEstimates : Bool
-b4ResearchLeafNowOnlyPhysicalEstimates = true
+b4ResearchLeafNowOnlyDefectRemainder : Bool
+b4ResearchLeafNowOnlyDefectRemainder = true
 
 ------------------------------------------------------------------------
 -- B1 exact cut.
@@ -242,14 +241,21 @@ b4PrincipalDefectLiveBlockWeldClosedIsTrue = refl
 b4LiteralCoreCompanionMeaningClosedIsTrue : b4LiteralCoreCompanionMeaningClosed ≡ true
 b4LiteralCoreCompanionMeaningClosedIsTrue = refl
 
-b4PrincipalBaselineYoungBoundClosedIsTrue : b4PrincipalBaselineYoungBoundClosed ≡ true
-b4PrincipalBaselineYoungBoundClosedIsTrue = refl
+b4PrincipalHalfCompanionBoundClosedIsTrue : b4PrincipalHalfCompanionBoundClosed ≡ true
+b4PrincipalHalfCompanionBoundClosedIsTrue = refl
+
+b4PrincipalNeedsEDRemainderIsFalse : b4PrincipalNeedsEDRemainder ≡ false
+b4PrincipalNeedsEDRemainderIsFalse = refl
 
 b4FreeCompanionScalarStillRequiredIsFalse : b4FreeCompanionScalarStillRequired ≡ false
 b4FreeCompanionScalarStillRequiredIsFalse = refl
 
-b4PrincipalDefectPhysicalEstimatesClosedIsFalse : b4PrincipalDefectPhysicalEstimatesClosed ≡ false
-b4PrincipalDefectPhysicalEstimatesClosedIsFalse = refl
+b4RemainingStrictMarginIsDefectBelowHalfIsTrue :
+  b4RemainingStrictMarginIsDefectBelowHalf ≡ true
+b4RemainingStrictMarginIsDefectBelowHalfIsTrue = refl
+
+b4DefectRemainderClosedIsFalse : b4DefectRemainderClosed ≡ false
+b4DefectRemainderClosedIsFalse = refl
 
 b1ShellPaymentCompilerClosedIsTrue : b1ShellPaymentCompilerClosed ≡ true
 b1ShellPaymentCompilerClosedIsTrue = refl
@@ -271,15 +277,6 @@ b3PhysicalProducerClosedIsFalse = refl
 
 b4GenericStrictSplitCompilerClosedIsTrue : b4GenericStrictSplitCompilerClosed ≡ true
 b4GenericStrictSplitCompilerClosedIsTrue = refl
-
-b4FixedQuarterMarginRequiredIsFalse : b4FixedQuarterMarginRequired ≡ false
-b4FixedQuarterMarginRequiredIsFalse = refl
-
-b4QuarterMarginOptionalCompilerClosedIsTrue : b4QuarterMarginOptionalCompilerClosed ≡ true
-b4QuarterMarginOptionalCompilerClosedIsTrue = refl
-
-b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue : b4ResearchLeafNowOnlyPhysicalEstimates ≡ true
-b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue = refl
 
 q4PointwiseToSpacetimeCompilerClosedIsTrue : q4PointwiseToSpacetimeCompilerClosed ≡ true
 q4PointwiseToSpacetimeCompilerClosedIsTrue = refl
