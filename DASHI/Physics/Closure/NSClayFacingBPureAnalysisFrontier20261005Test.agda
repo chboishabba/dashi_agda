@@ -8,6 +8,18 @@ import DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact as F
 b4LiteralSplitClosed : F.b4LiteralPrincipalDefectSplitClosed ≡ true
 b4LiteralSplitClosed = F.b4LiteralPrincipalDefectSplitClosedIsTrue
 
+b4LiveBlockWeldClosed : F.b4PrincipalDefectLiveBlockWeldClosed ≡ true
+b4LiveBlockWeldClosed = F.b4PrincipalDefectLiveBlockWeldClosedIsTrue
+
+b4LiteralCompanionClosed : F.b4LiteralCoreCompanionMeaningClosed ≡ true
+b4LiteralCompanionClosed = F.b4LiteralCoreCompanionMeaningClosedIsTrue
+
+b4BaselineBoundClosed : F.b4PrincipalBaselineYoungBoundClosed ≡ true
+b4BaselineBoundClosed = F.b4PrincipalBaselineYoungBoundClosedIsTrue
+
+b4FreeCompanionGone : F.b4FreeCompanionScalarStillRequired ≡ false
+b4FreeCompanionGone = F.b4FreeCompanionScalarStillRequiredIsFalse
+
 b4PhysicalEstimatesRemain : F.b4PrincipalDefectPhysicalEstimatesClosed ≡ false
 b4PhysicalEstimatesRemain = F.b4PrincipalDefectPhysicalEstimatesClosedIsFalse
 
