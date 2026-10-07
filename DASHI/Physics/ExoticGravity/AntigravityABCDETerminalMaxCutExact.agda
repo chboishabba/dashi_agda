@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.ExoticGravity.AntigravityABCDETerminalMaxCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -12,10 +11,6 @@ import DASHI.Physics.Foundations.PositiveGAnisotropicTOVConservationExact as TOV
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
-
-------------------------------------------------------------------------
--- A -> E TERMINAL MAX-CUT
-------------------------------------------------------------------------
 
 stageASourceContract : Source.LocalizedAnisotropicRepulsiveShellWitness
 stageASourceContract = Source.canonicalLocalizedAnisotropicRepulsiveShellWitness
