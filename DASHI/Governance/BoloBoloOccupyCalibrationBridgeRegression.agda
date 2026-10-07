@@ -12,6 +12,18 @@ networkFeaturesAvailable :
   Calibration.pseudonymousNetworkEvidenceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
 networkFeaturesAvailable = refl
 
+boundaryObservableSurfacePaid :
+  Calibration.boundaryOverheadObservableSurfaceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+boundaryObservableSurfacePaid = refl
+
+delegationObservableSurfacePaid :
+  Calibration.delegationOverheadObservableSurfaceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+delegationObservableSurfacePaid = refl
+
+unresolvedObservableSurfacePaid :
+  Calibration.unresolvedDependencyObservableSurfaceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+unresolvedObservableSurfacePaid = refl
+
 removedCouplingCostNotIdentified :
   Calibration.removedGlobalCouplingCostIdentified Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
 removedCouplingCostNotIdentified = refl
@@ -27,6 +39,10 @@ delegationOverheadNotIdentified = refl
 unresolvedOverheadNotIdentified :
   Calibration.unresolvedDependencyOverheadIdentified Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
 unresolvedOverheadNotIdentified = refl
+
+lexicalInterfaceCountsDoNotIdentifyCostBounds :
+  Calibration.interfaceLexicalCountsIdentifyCostBounds Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+lexicalInterfaceCountsDoNotIdentifyCostBounds = refl
 
 currentLexicalModelFailsGate :
   Calibration.currentDurationPredictorPassesDevelopmentGate Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
