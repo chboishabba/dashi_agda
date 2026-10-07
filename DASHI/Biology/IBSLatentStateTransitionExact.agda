@@ -17,7 +17,7 @@ import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
 -- IBS LATENT-STATE / TRANSITION RECONSTRUCTION
 --
 -- Attribution rule: empirical sources below pay only their reported temporal
--- observations/designs.  Terms such as regime, latent state, attractor and
+-- observations/designs. Terms such as regime, latent state, attractor and
 -- hysteresis are repository-side structural hypotheses until a named
 -- validation receipt discharges the relevant empirical obligations.
 ------------------------------------------------------------------------
@@ -110,7 +110,7 @@ chanEMAEvidence = temporal-state-evidence
   laggedAssociationObserved true false false false
 
 yunusovaEMAEvidence : TemporalStateEvidence
-unusovaEMAEvidence = temporal-state-evidence
+yunusovaEMAEvidence = temporal-state-evidence
   yunusova2026Source intensiveEMA
   "357 adults meeting Rome IV IBS criteria"
   "3 EMA surveys/day for 7 days"
@@ -128,11 +128,6 @@ chenTrajectoryEvidence = temporal-state-evidence
 canonicalTemporalStateEvidenceAtlas : List TemporalStateEvidence
 canonicalTemporalStateEvidenceAtlas =
   marsFlareEvidence ∷ chanEMAEvidence ∷ yunusovaEMAEvidence ∷ chenTrajectoryEvidence ∷ []
-
-------------------------------------------------------------------------
--- Structural latent-state model.  These constructors organise hypotheses;
--- empirical source rows above do not assert that these states literally exist.
-------------------------------------------------------------------------
 
 data IBSLatentRegimeCandidate : Set where
   relativelyStableCandidate : IBSLatentRegimeCandidate
@@ -168,10 +163,6 @@ flareTransitionCandidate = candidate-state-transition
   "prior state/history retained; flare sample is not treated as memoryless"
   "candidate transition suggested by temporal observations; no attractor/hysteresis validation"
 
-------------------------------------------------------------------------
--- Non-identifiability / attribution firewalls.
-------------------------------------------------------------------------
-
 data SameSymptomsIdentifySameLatentStatePermission : Set where
 sameSymptomsDoNotIdentifySameLatentState : SameSymptomsIdentifySameLatentStatePermission → ⊥
 sameSymptomsDoNotIdentifySameLatentState ()
@@ -187,10 +178,6 @@ trajectoryClusterDoesNotValidateAttractor ()
 data FlareRemissionDifferenceProvesHysteresisPermission : Set where
 flareRemissionDifferenceDoesNotProveHysteresis : FlareRemissionDifferenceProvesHysteresisPermission → ⊥
 flareRemissionDifferenceDoesNotProveHysteresis ()
-
-------------------------------------------------------------------------
--- Existing temporal/path and attractor-validation owners.
-------------------------------------------------------------------------
 
 record IBSTemporalPathBoundary : Set where
   constructor ibs-temporal-path-boundary
@@ -209,11 +196,6 @@ canonicalIBSTemporalPathBoundary = ibs-temporal-path-boundary
   Temporal.canonicalTemporalPathBoundary
   AttractorValidation.canonicalAttractorAuthorityBoundary
   true true true true true
-
-------------------------------------------------------------------------
--- Pareto acquisition frontier: prioritise temporal interventions that separate
--- regime candidates and direction rather than collecting more cross-sections.
-------------------------------------------------------------------------
 
 data TransitionAcquisitionStatus : Set where
   paidLongitudinalObservation : TransitionAcquisitionStatus
