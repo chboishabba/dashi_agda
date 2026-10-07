@@ -33,6 +33,30 @@ minusculeRelationIntertwinerTyped :
   Lift.minuscule27RelationIntertwinerReceiptTyped Lift.canonicalExceptionalLiftBoundary ≡ true
 minusculeRelationIntertwinerTyped = refl
 
+typedTernaryChartPaid :
+  Lift.typedTernary27SixPlusFifteenPlusSixChartPaidInAgda Lift.canonicalExceptionalLiftBoundary ≡ true
+typedTernaryChartPaid = refl
+
+typedTernarySchlafliProducerRecorded :
+  Lift.typedTernary27SchlafliLeanProducerSourceWritten Lift.canonicalExceptionalLiftBoundary ≡ true
+typedTernarySchlafliProducerRecorded = refl
+
+typedTernaryMinusculeProducerRecorded :
+  Lift.typedTernary27MinusculeRelationLeanProducerSourceWritten Lift.canonicalExceptionalLiftBoundary ≡ true
+typedTernaryMinusculeProducerRecorded = refl
+
+a5SixObjectProducerRecorded :
+  Lift.a5SixObjectS6LeanProducerSourceWritten Lift.canonicalExceptionalLiftBoundary ≡ true
+a5SixObjectProducerRecorded = refl
+
+rawTernaryE6ActionNotInvented :
+  Lift.independentRawTernary27E6ActionPaid Lift.canonicalExceptionalLiftBoundary ≡ false
+rawTernaryE6ActionNotInvented = refl
+
+selectedStabilizerWeldNotInvented :
+  Lift.selectedQ2StabilizerA5SameObjectPaid Lift.canonicalExceptionalLiftBoundary ≡ false
+selectedStabilizerWeldNotInvented = refl
+
 leanMinusculeProducerSourceWritten :
   Lift.leanMinuscule27ProducerSourceWritten Lift.canonicalExceptionalLiftBoundary ≡ true
 leanMinusculeProducerSourceWritten = refl
