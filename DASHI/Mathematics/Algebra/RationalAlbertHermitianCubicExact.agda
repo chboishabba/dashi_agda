@@ -107,10 +107,7 @@ realPartO : O.RationalOctonion → ℚ
 realPartO (O.oct (Q.quat scalar _ _ _) _) = scalar
 
 tripleReal : O.RationalOctonion → O.RationalOctonion → O.RationalOctonion → ℚ
-tripleReal x y z = realPartO ((O._*o_ x y) O.*o z)
-
-rSub : ℚ → ℚ → ℚ
-rSub left right = left + (- right)
+tripleReal x y z = realPartO (O._*o_ (O._*o_ x y) z)
 
 cubicNorm : RationalAlbert → ℚ
 cubicNorm (albert a b c x y z) =
