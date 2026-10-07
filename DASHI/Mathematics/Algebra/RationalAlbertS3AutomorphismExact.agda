@@ -55,9 +55,9 @@ swapCycleSwap : ∀ value →
   swapA (cycleA (swapA value)) ≡ cycleSquared value
 swapCycleSwap (A.albert a b c x y z) =
   Laws.albertExt refl refl refl
+    (O.octonionConjugateInvolutive y)
     (O.octonionConjugateInvolutive z)
     (O.octonionConjugateInvolutive x)
-    (O.octonionConjugateInvolutive y)
 
 ------------------------------------------------------------------------
 -- Recognition sockets for the product/norm preservation theorems.
