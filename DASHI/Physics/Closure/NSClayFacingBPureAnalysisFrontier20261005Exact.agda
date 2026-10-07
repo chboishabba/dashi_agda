@@ -3,32 +3,20 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 ------------------------------------------------------------------------
 -- CLAY-FACING B / PURE-ANALYSIS FRONTIER AFTER PR #1039 MERGE
 --
--- Representation/provenance is frozen.  This board now records only the
--- theorem-producing physical estimates on already-literal carriers.
+-- Representation/provenance is frozen.  This board records only theorem-
+-- producing physical estimates on already-literal carriers.
 --
--- B4:
---   the SAME literal critical-touching row carrier is already split as
---   Core-Core principal + Core-noncore defect.  Remaining: the two uniform
---   physical estimates and thetaP+thetaD<1.
---
--- B1:
---   literal DFL-DFL rows, actual shell indices, canonical shell support,
---   finite Bernstein shell payment, and shell folding are already compiled.
---   Remaining: populate the literal physical shell receipts and pay their
---   summed budget by one output-local ED with cutoff-independent coefficient.
---
--- B2:
---   literal DFL-DHH rows and cardinality-free shell-pair folding are compiled.
---   Remaining: physical shell-pair population + the per-shell signed
---   null/Bernstein estimate + local-ED allocation with uniform coefficient.
---
--- B3:
---   literal DHH-DHH rows, low-output component estimate, shell-gap summation,
---   and cardinality-free shell folding are compiled.  Remaining: physical
---   shell population + the intra-shell signed L2 estimate + local-ED allocation
---   with uniform coefficient.
---
--- Q4 and E+ remain their already-sharpened physical producer leaves.
+-- B4: exact literal Core-Core principal + Core-noncore defect split is closed;
+-- remaining are the two uniform physical estimates and thetaP+thetaD<1.
+-- B1: literal rows/shell/support/Bernstein fold are closed; remaining physical
+-- receipt population + local-ED payment.
+-- B2: literal rows/cardinality-free shell-pair fold are closed; remaining
+-- physical shell-pair population + signed per-shell estimate + local ED.
+-- B3: literal rows/component low-output/gap summation/fold are closed; remaining
+-- physical shell population + intra-shell signed L2 + local ED.
+-- Q4/E+ remain their sharpened pointwise/amplitude physical producers.
+-- B-continuation: the BKM/compactness assembly is not being reproved; the live
+-- seam is inhabiting its selected-family cutoff-uniform/limit-transport inputs.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -46,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNHeterochiralHHGapEnvelopeRound136Exact as 
 import DASHI.Physics.Closure.NSTriadKNR106ComponentLowOutputBoundRound574Exact as R574
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact as Q4Pointwise
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpointAmplitudeMaxCutExact as EndpointAmplitude
+import DASHI.Physics.Closure.NSPeriodicCutoffUniformContinuumBKMCompletion as Continuum
 
 data PureBAnalyticLeaf : Set where
   b4PrincipalDefectPhysicalEstimates : PureBAnalyticLeaf
@@ -55,7 +44,7 @@ data PureBAnalyticLeaf : Set where
   q4PointwisePhysicalGram : PureBAnalyticLeaf
   ePositiveGlobalAmplitudeSum : PureBAnalyticLeaf
   q5SignedQuinticFallback : PureBAnalyticLeaf
-  bContinuationInputs : PureBAnalyticLeaf
+  bContinuationPhysicalInputs : PureBAnalyticLeaf
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
 pureBLeafClosed b4PrincipalDefectPhysicalEstimates = false
@@ -68,8 +57,7 @@ pureBLeafClosed ePositiveGlobalAmplitudeSum =
   EndpointAmplitude.eGlobalAmplitudeSumProducerClosedHere
 pureBLeafClosed q5SignedQuinticFallback =
   Previous.finalBLeafClosed Previous.q5DirectSignedQuintic
-pureBLeafClosed bContinuationInputs =
-  Previous.finalBLeafClosed Previous.bContinuationInputs
+pureBLeafClosed bContinuationPhysicalInputs = bContinuationPhysicalInputsClosed
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
 currentHighestInformationLeaf = b4PrincipalDefectPhysicalEstimates
@@ -79,8 +67,7 @@ currentHighestInformationLeaf = b4PrincipalDefectPhysicalEstimates
 ------------------------------------------------------------------------
 
 b4LiteralPrincipalDefectSplitClosed : Bool
-b4LiteralPrincipalDefectSplitClosed =
-  LiteralSplit.b4LiteralPrincipalDefectSplitClosed
+b4LiteralPrincipalDefectSplitClosed = LiteralSplit.b4LiteralPrincipalDefectSplitClosed
 
 b4PrincipalDefectPhysicalEstimatesClosed : Bool
 b4PrincipalDefectPhysicalEstimatesClosed = false
@@ -114,12 +101,10 @@ b1CanonicalShellSupportClosed : Bool
 b1CanonicalShellSupportClosed = B1.deepFarLowLiteralInfinityShellSupportChoiceClosed
 
 b1PhysicalReceiptPopulationClosed : Bool
-b1PhysicalReceiptPopulationClosed =
-  B1.deepFarLowLiteralInfinityShellPhysicalExtractorInhabitedHere
+b1PhysicalReceiptPopulationClosed = B1.deepFarLowLiteralInfinityShellPhysicalExtractorInhabitedHere
 
 b1LocalEDAllocationClosed : Bool
-b1LocalEDAllocationClosed =
-  B1.deepFarLowLiteralInfinityShellLocalEDAllocationInhabitedHere
+b1LocalEDAllocationClosed = B1.deepFarLowLiteralInfinityShellLocalEDAllocationInhabitedHere
 
 b1PhysicalProducerClosed : Bool
 b1PhysicalProducerClosed = false
@@ -135,12 +120,10 @@ b2ShellFoldCompilerClosed : Bool
 b2ShellFoldCompilerClosed = B2.deepFarLowDeepHHBipartiteShellFoldClosed
 
 b2PhysicalShellPairPopulationClosed : Bool
-b2PhysicalShellPairPopulationClosed =
-  B2.deepFarLowDeepHHLiteralShellPairExtractorInhabitedHere
+b2PhysicalShellPairPopulationClosed = B2.deepFarLowDeepHHLiteralShellPairExtractorInhabitedHere
 
 b2PerShellSignedEstimateClosed : Bool
-b2PerShellSignedEstimateClosed =
-  B2.deepFarLowDeepHHPerShellNullBernsteinEstimateInhabitedHere
+b2PerShellSignedEstimateClosed = B2.deepFarLowDeepHHPerShellNullBernsteinEstimateInhabitedHere
 
 b2PhysicalProducerClosed : Bool
 b2PhysicalProducerClosed = false
@@ -159,19 +142,16 @@ b3GapSummationClosed : Bool
 b3GapSummationClosed = R136.round136HHGapIndexSummationClosed
 
 b3ComponentLowOutputClosed : Bool
-b3ComponentLowOutputClosed =
-  R574.round574AllFourPhysicalHelicalComponentsHaveLowOutputBound
+b3ComponentLowOutputClosed = R574.round574AllFourPhysicalHelicalComponentsHaveLowOutputBound
 
 b3GapAndComponentInfrastructureClosed : Bool
 b3GapAndComponentInfrastructureClosed = true
 
 b3PhysicalShellPopulationClosed : Bool
-b3PhysicalShellPopulationClosed =
-  B3.deepHHLiteralFilteredBlockShellExtractorInhabitedHere
+b3PhysicalShellPopulationClosed = B3.deepHHLiteralFilteredBlockShellExtractorInhabitedHere
 
 b3IntraShellSignedL2Closed : Bool
-b3IntraShellSignedL2Closed =
-  B3.deepHHIntraShellSignedL2AggregationInhabitedHere
+b3IntraShellSignedL2Closed = B3.deepHHIntraShellSignedL2AggregationInhabitedHere
 
 b3PhysicalProducerClosed : Bool
 b3PhysicalProducerClosed = false
@@ -181,20 +161,31 @@ b3PhysicalProducerClosed = false
 ------------------------------------------------------------------------
 
 q4PointwiseToSpacetimeCompilerClosed : Bool
-q4PointwiseToSpacetimeCompilerClosed =
-  Q4Pointwise.q4PointwiseToSpacetimeCompilerClosed
+q4PointwiseToSpacetimeCompilerClosed = Q4Pointwise.q4PointwiseToSpacetimeCompilerClosed
 
 q4IntegratedBoundIndependentLeaf : Bool
-q4IntegratedBoundIndependentLeaf =
-  Q4Pointwise.q4IntegratedBoundIndependentResearchLeaf
+q4IntegratedBoundIndependentLeaf = Q4Pointwise.q4IntegratedBoundIndependentResearchLeaf
 
 ePositiveOutputAggregationClosed : Bool
-ePositiveOutputAggregationClosed =
-  EndpointAmplitude.ePositiveOutputAggregationClosed
+ePositiveOutputAggregationClosed = EndpointAmplitude.ePositiveOutputAggregationClosed
 
 ePositiveOutputAggregationAddsCardinalityFactor : Bool
-ePositiveOutputAggregationAddsCardinalityFactor =
-  EndpointAmplitude.ePositiveOutputAggregationIntroducesCardinalityFactor
+ePositiveOutputAggregationAddsCardinalityFactor = EndpointAmplitude.ePositiveOutputAggregationIntroducesCardinalityFactor
+
+------------------------------------------------------------------------
+-- B-continuation exact cut.
+------------------------------------------------------------------------
+
+bContinuationAssemblyMachineChecked : Bool
+bContinuationAssemblyMachineChecked = true
+
+bContinuationGenericCompactnessAlreadyStandardImported : Bool
+bContinuationGenericCompactnessAlreadyStandardImported = true
+
+-- The selected physical family must still inhabit the cutoff-uniform vorticity
+-- and limit-transport inputs of PeriodicCutoffUniformContinuumInputs.
+bContinuationPhysicalInputsClosed : Bool
+bContinuationPhysicalInputsClosed = Continuum.periodicContinuumBKMCompletionInputsInhabited
 
 bLocalEDIndependentLeaf : Bool
 bLocalEDIndependentLeaf = Previous.localEDIndependentLeaf
@@ -215,12 +206,10 @@ clayPromotion = false
 -- Receipts.
 ------------------------------------------------------------------------
 
-b4LiteralPrincipalDefectSplitClosedIsTrue :
-  b4LiteralPrincipalDefectSplitClosed ≡ true
+b4LiteralPrincipalDefectSplitClosedIsTrue : b4LiteralPrincipalDefectSplitClosed ≡ true
 b4LiteralPrincipalDefectSplitClosedIsTrue = refl
 
-b4PrincipalDefectPhysicalEstimatesClosedIsFalse :
-  b4PrincipalDefectPhysicalEstimatesClosed ≡ false
+b4PrincipalDefectPhysicalEstimatesClosedIsFalse : b4PrincipalDefectPhysicalEstimatesClosed ≡ false
 b4PrincipalDefectPhysicalEstimatesClosedIsFalse = refl
 
 b1ShellPaymentCompilerClosedIsTrue : b1ShellPaymentCompilerClosed ≡ true
@@ -235,44 +224,41 @@ b2ShellFoldCompilerClosedIsTrue = refl
 b2PhysicalProducerClosedIsFalse : b2PhysicalProducerClosed ≡ false
 b2PhysicalProducerClosedIsFalse = refl
 
-b3GapAndComponentInfrastructureClosedIsTrue :
-  b3GapAndComponentInfrastructureClosed ≡ true
+b3GapAndComponentInfrastructureClosedIsTrue : b3GapAndComponentInfrastructureClosed ≡ true
 b3GapAndComponentInfrastructureClosedIsTrue = refl
 
 b3PhysicalProducerClosedIsFalse : b3PhysicalProducerClosed ≡ false
 b3PhysicalProducerClosedIsFalse = refl
 
-b4GenericStrictSplitCompilerClosedIsTrue :
-  b4GenericStrictSplitCompilerClosed ≡ true
+b4GenericStrictSplitCompilerClosedIsTrue : b4GenericStrictSplitCompilerClosed ≡ true
 b4GenericStrictSplitCompilerClosedIsTrue = refl
 
-b4FixedQuarterMarginRequiredIsFalse :
-  b4FixedQuarterMarginRequired ≡ false
+b4FixedQuarterMarginRequiredIsFalse : b4FixedQuarterMarginRequired ≡ false
 b4FixedQuarterMarginRequiredIsFalse = refl
 
-b4QuarterMarginOptionalCompilerClosedIsTrue :
-  b4QuarterMarginOptionalCompilerClosed ≡ true
+b4QuarterMarginOptionalCompilerClosedIsTrue : b4QuarterMarginOptionalCompilerClosed ≡ true
 b4QuarterMarginOptionalCompilerClosedIsTrue = refl
 
-b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue :
-  b4ResearchLeafNowOnlyPhysicalEstimates ≡ true
+b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue : b4ResearchLeafNowOnlyPhysicalEstimates ≡ true
 b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue = refl
 
-q4PointwiseToSpacetimeCompilerClosedIsTrue :
-  q4PointwiseToSpacetimeCompilerClosed ≡ true
+q4PointwiseToSpacetimeCompilerClosedIsTrue : q4PointwiseToSpacetimeCompilerClosed ≡ true
 q4PointwiseToSpacetimeCompilerClosedIsTrue = refl
 
-q4IntegratedBoundIndependentLeafIsFalse :
-  q4IntegratedBoundIndependentLeaf ≡ false
+q4IntegratedBoundIndependentLeafIsFalse : q4IntegratedBoundIndependentLeaf ≡ false
 q4IntegratedBoundIndependentLeafIsFalse = refl
 
-ePositiveOutputAggregationClosedIsTrue :
-  ePositiveOutputAggregationClosed ≡ true
+ePositiveOutputAggregationClosedIsTrue : ePositiveOutputAggregationClosed ≡ true
 ePositiveOutputAggregationClosedIsTrue = refl
 
-ePositiveOutputAggregationAddsCardinalityFactorIsFalse :
-  ePositiveOutputAggregationAddsCardinalityFactor ≡ false
+ePositiveOutputAggregationAddsCardinalityFactorIsFalse : ePositiveOutputAggregationAddsCardinalityFactor ≡ false
 ePositiveOutputAggregationAddsCardinalityFactorIsFalse = refl
+
+bContinuationAssemblyMachineCheckedIsTrue : bContinuationAssemblyMachineChecked ≡ true
+bContinuationAssemblyMachineCheckedIsTrue = refl
+
+bContinuationPhysicalInputsClosedIsFalse : bContinuationPhysicalInputsClosed ≡ false
+bContinuationPhysicalInputsClosedIsFalse = refl
 
 bLocalEDIndependentLeafIsFalse : bLocalEDIndependentLeaf ≡ false
 bLocalEDIndependentLeafIsFalse = refl
