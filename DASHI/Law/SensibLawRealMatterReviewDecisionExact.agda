@@ -31,18 +31,27 @@ record GenericHumanReviewReceipt : Set where
 
 open GenericHumanReviewReceipt public
 
+record ExactReviewItemBinding : Set where
+  constructor exact-review-item-binding
+  field
+    sourceManifestationRef : String
+    candidatePnfBatchRef : String
+    candidateFactorRef : String
+    consumerRef : String
+    acceptedOrQualified : Bool
+    acceptedOrQualifiedIsTrue : acceptedOrQualified ≡ true
+
+open ExactReviewItemBinding public
+
 record LegalEvidenceReviewDecision : Set where
   constructor legal-evidence-review-decision
   field
     genericReview : GenericHumanReviewReceipt
-    consumerRef : String
+    exactReviewItemBinding : ExactReviewItemBinding
     requirementRef : String
     evidenceRoleRef : String
     normativeOrderRef : String
     propositionRef : String
-    sourceManifestationRef : String
-    candidatePnfBatchRef : String
-    candidateFactorRef : String
     candidateOnly : Bool
     candidateOnlyIsTrue : candidateOnly ≡ true
     createsSemanticAuthority : Bool
@@ -64,6 +73,11 @@ record RealMatterReviewBoundary : Set where
       exactSourceAndCandidateRequiredBeforeReview ≡ true
     genericHumanReviewReceiptRequired : Bool
     genericHumanReviewReceiptRequiredIsTrue : genericHumanReviewReceiptRequired ≡ true
+    exactReviewItemProvenanceRequired : Bool
+    exactReviewItemProvenanceRequiredIsTrue : exactReviewItemProvenanceRequired ≡ true
+    sameObservationReceiptMayRebindDifferentCandidate : Bool
+    sameObservationReceiptMayRebindDifferentCandidateIsFalse :
+      sameObservationReceiptMayRebindDifferentCandidate ≡ false
     evidenceRoleRequiresDurableDecision : Bool
     evidenceRoleRequiresDurableDecisionIsTrue : evidenceRoleRequiresDurableDecision ≡ true
     normativeOrderRequiresDurableDecision : Bool
@@ -85,6 +99,8 @@ canonicalRealMatterReviewBoundary =
     true refl
     true refl
     true refl
+    false refl
+    true refl
     true refl
     false refl
     false refl
@@ -97,6 +113,7 @@ canonicalRealMatterReviewBoundary =
 
 data GenericReviewReceiptEqualsLegalEvidenceDecision : Set where
 data CandidatePnfPaysLegalReviewDecision : Set where
+data SameObservationReceiptMayRebindDifferentCandidate : Set where
 data DownstreamMayRestateEvidenceRole : Set where
 data DownstreamMayRestateNormativeOrder : Set where
 data LegalReviewDecisionCreatesApplicability : Set where
@@ -109,6 +126,10 @@ genericReviewReceiptDoesNotEqualLegalEvidenceDecision ()
 candidatePnfDoesNotPayLegalReviewDecision :
   CandidatePnfPaysLegalReviewDecision → ⊥
 candidatePnfDoesNotPayLegalReviewDecision ()
+
+sameObservationReceiptCannotRebindDifferentCandidate :
+  SameObservationReceiptMayRebindDifferentCandidate → ⊥
+sameObservationReceiptCannotRebindDifferentCandidate ()
 
 downstreamCannotRestateEvidenceRole : DownstreamMayRestateEvidenceRole → ⊥
 downstreamCannotRestateEvidenceRole ()
