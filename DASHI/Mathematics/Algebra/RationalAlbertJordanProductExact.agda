@@ -21,6 +21,7 @@ module DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; ½; _+_; _*_; -_)
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
@@ -67,7 +68,6 @@ jordanProduct
     d2 : ℚ
     d2 = c * c' + innerO y y' + innerO x x'
 
-    -- (1,2) Hermitian coordinate.
     ox : O.RationalOctonion
     ox = halfO
       (sumO6
@@ -78,7 +78,6 @@ jordanProduct
         (A.scaleO b' x)
         (A.scaleO c x'))
 
-    -- (2,0) Hermitian coordinate.
     oy : O.RationalOctonion
     oy = halfO
       (sumO6
@@ -89,7 +88,6 @@ jordanProduct
         (O._*o_ (O.octonionConjugate x') (O.octonionConjugate z))
         (A.scaleO c' y))
 
-    -- (0,1) Hermitian coordinate.
     oz : O.RationalOctonion
     oz = halfO
       (sumO6
@@ -112,13 +110,11 @@ data ProductCommutativityPaid : Set where
 data UnitLawsPaid : Set where
 data JordanIdentityPaid : Set where
 
-def JordanIdentity : Set
+JordanIdentity : Set
 JordanIdentity =
   (x y : A.RationalAlbert) →
     jordanProduct (jordanProduct (squareA x) y) x
     ≡ jordanProduct (squareA x) (jordanProduct y x)
-  where
-    open import Agda.Builtin.Equality using (_≡_)
 
 record AlbertProductFrontier : Set where
   constructor albert-product-frontier
