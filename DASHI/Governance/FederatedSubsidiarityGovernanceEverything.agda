@@ -29,15 +29,19 @@ import DASHI.Governance.ConsensusDemocracyNonFactorabilityExact
 import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 
 -- Re-centred bolo'bolo evaluation lane: source-bounded nested design,
--- derived scale envelope, subsidiarity/incidence contraction, exact/robust
--- counterfactual comparison, Occupy calibration + transfer firewall, direct
--- same-context flat-vs-nested experiment design, and project frontier.
+-- scale/topology scenarios, incidence compression, exact + robust cost
+-- comparison, Occupy calibration, transfer qualification, direct target
+-- experiment design, and symmetric promotion/falsification gate.
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
 import DASHI.Governance.BoloBoloPrimarySourceAtlasRegression
 import DASHI.Governance.BoloBoloDerivedScaleEnvelopeExact
 import DASHI.Governance.BoloBoloDerivedScaleEnvelopeRegression
 import DASHI.Governance.BoloBoloSubsidiarityIncidenceBridgeExact
 import DASHI.Governance.BoloBoloSubsidiarityIncidenceBridgeRegression
+import DASHI.Governance.BoloBoloIncidenceCompressionExact
+import DASHI.Governance.BoloBoloIncidenceCompressionRegression
+import DASHI.Governance.BoloBoloIncidenceCompressionCostBridgeExact
+import DASHI.Governance.BoloBoloIncidenceCompressionCostBridgeRegression
 import DASHI.Governance.BoloBoloFederationCostComparisonExact
 import DASHI.Governance.BoloBoloFederationCostComparisonRegression
 import DASHI.Governance.BoloBoloRobustCostBoundsExact
@@ -48,6 +52,8 @@ import DASHI.Governance.BoloBoloCalibrationTransferExact
 import DASHI.Governance.BoloBoloCalibrationTransferRegression
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentRegression
+import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact
+import DASHI.Governance.BoloBoloEmpiricalPromotionGateRegression
 import DASHI.Governance.BoloBoloCounterfactualEvaluationExact
 import DASHI.Governance.BoloBoloCounterfactualEvaluationRegression
 
@@ -69,6 +75,8 @@ import DASHI.Governance.OccupyOWSDevelopmentDurationPanelExact
 import DASHI.Governance.OccupyOWSDevelopmentDurationPanelRegression
 import DASHI.Governance.OccupyOWSDevelopmentTextProcessPanelExact
 import DASHI.Governance.OccupyOWSDevelopmentTextProcessPanelRegression
+import DASHI.Governance.OccupyOWSDevelopmentInterfaceProcessPanelExact
+import DASHI.Governance.OccupyOWSDevelopmentInterfaceProcessPanelRegression
 import DASHI.Governance.AnarchyRulesSupplementalResearchArtifactsExact
 import DASHI.Governance.AnarchyRulesSupplementalResearchArtifactsRegression
 import DASHI.Governance.OccupyLibraryArchivalIncidenceFiniteExampleExact
