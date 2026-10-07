@@ -29,8 +29,9 @@ import DASHI.Governance.ConsensusDemocracyNonFactorabilityExact
 import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 
 -- Re-centred bolo'bolo evaluation lane: source-bounded nested design,
--- derived scale envelope, subsidiarity/incidence contraction, conditional
--- counterfactual win theorem, Occupy calibration sockets, and project frontier.
+-- derived scale envelope, subsidiarity/incidence contraction, exact/robust
+-- counterfactual comparison, Occupy calibration + transfer firewall, direct
+-- same-context flat-vs-nested experiment design, and project frontier.
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
 import DASHI.Governance.BoloBoloPrimarySourceAtlasRegression
 import DASHI.Governance.BoloBoloDerivedScaleEnvelopeExact
@@ -39,8 +40,14 @@ import DASHI.Governance.BoloBoloSubsidiarityIncidenceBridgeExact
 import DASHI.Governance.BoloBoloSubsidiarityIncidenceBridgeRegression
 import DASHI.Governance.BoloBoloFederationCostComparisonExact
 import DASHI.Governance.BoloBoloFederationCostComparisonRegression
+import DASHI.Governance.BoloBoloRobustCostBoundsExact
+import DASHI.Governance.BoloBoloRobustCostBoundsRegression
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeRegression
+import DASHI.Governance.BoloBoloCalibrationTransferExact
+import DASHI.Governance.BoloBoloCalibrationTransferRegression
+import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact
+import DASHI.Governance.BoloBoloPairedGovernanceExperimentRegression
 import DASHI.Governance.BoloBoloCounterfactualEvaluationExact
 import DASHI.Governance.BoloBoloCounterfactualEvaluationRegression
 
