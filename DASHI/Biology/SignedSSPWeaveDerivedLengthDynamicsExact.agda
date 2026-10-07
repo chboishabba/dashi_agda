@@ -85,7 +85,7 @@ compileRichMetadataDynamics :
   ResidualMetadataDynamics → Rich.RichMetadataDynamics
 compileRichMetadataDynamics residual =
   record
-    { Rich.initialMetadata = λ program →
+    { initialMetadata = λ program →
         Rich.rich-execution-metadata
           (initialAddress residual program)
           (initialResidual residual program)
@@ -93,7 +93,7 @@ compileRichMetadataDynamics residual =
           0
           (programNormalFormLength program)
           (initialResidualWitnessLength residual program)
-    ; Rich.stepMetadata = λ instruction metadata →
+    ; stepMetadata = λ instruction metadata →
         Rich.rich-execution-metadata
           (stepAddress residual instruction (Rich.address369 metadata))
           (stepResidual residual instruction (Rich.zeroApproachResidual metadata))
