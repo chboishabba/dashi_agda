@@ -4,25 +4,35 @@ open import DASHI.Core.Prelude
 
 import DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionExact as Transition
 
-firstSpokesDayPinned :
-  Transition.firstSpokesCouncilDayNovember2011 Transition.canonicalTransitionWindow ≡ 7
+firstSpokesDayPinned : Transition.firstSpokesCouncilDayNovember2011 Transition.canonicalTransitionWindow ≡ 7
 firstSpokesDayPinned = refl
 
-postDevelopmentRowsPinned :
-  Transition.postTransitionDevelopmentRecordCount Transition.canonicalTransitionWindow ≡ 3
+postDevelopmentRowsPinned : Transition.postTransitionDevelopmentRecordCount Transition.canonicalTransitionWindow ≡ 3
 postDevelopmentRowsPinned = refl
 
-postHoldoutPreserved :
-  Transition.protectedHoldoutConsumed Transition.canonicalOWSSpokesTransitionBoundary ≡ false
+scaleShockOrganizerLowerBoundPinned : Transition.lateOctoberActiveOrganizerLowerBound Transition.canonicalOWSScaleShockContext ≡ 4000
+scaleShockOrganizerLowerBoundPinned = refl
+
+scaleShockWorkingGroupLowerBoundPinned : Transition.lateOctoberWorkingGroupLowerBound Transition.canonicalOWSScaleShockContext ≡ 100
+scaleShockWorkingGroupLowerBoundPinned = refl
+
+scaleCountsNotCensus : Transition.sourceScaleCountsAreExactPopulationCensus Transition.canonicalOWSSpokesTransitionBoundary ≡ false
+scaleCountsNotCensus = refl
+
+postHoldoutPreserved : Transition.protectedHoldoutConsumed Transition.canonicalOWSSpokesTransitionBoundary ≡ false
 postHoldoutPreserved = refl
 
-postDelegateLexicalAggregatePinned :
-  Transition.delegateParagraphs Transition.postSpokesDevelopmentLexicalAggregate ≡ 4
+postDelegateLexicalAggregatePinned : Transition.delegateParagraphs Transition.postSpokesDevelopmentLexicalAggregate ≡ 4
 postDelegateLexicalAggregatePinned = refl
 
 onlyOnePostDurationRow : Transition.postSpokesDurationRowCount ≡ 1
 onlyOnePostDurationRow = refl
 
-noCausalPromotion :
-  Transition.lexicalBeforeAfterDifferenceIsCausalEffect Transition.canonicalOWSSpokesTransitionBoundary ≡ false
+mixedMechanismEvidencePinned : Transition.mixedMechanismEvidence Transition.canonicalSpokesMechanismObservations ≡ true
+mixedMechanismEvidencePinned = refl
+
+retrospectiveAccountNotPrimaryMinutes : Transition.retrospectiveAccountEqualsUnderlyingMinuteRecord Transition.canonicalOWSSpokesTransitionBoundary ≡ false
+retrospectiveAccountNotPrimaryMinutes = refl
+
+noCausalPromotion : Transition.lexicalBeforeAfterDifferenceIsCausalEffect Transition.canonicalOWSSpokesTransitionBoundary ≡ false
 noCausalPromotion = refl
