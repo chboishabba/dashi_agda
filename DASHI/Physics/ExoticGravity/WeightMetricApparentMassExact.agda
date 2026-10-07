@@ -1,6 +1,8 @@
 module DASHI.Physics.ExoticGravity.WeightMetricApparentMassExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 ------------------------------------------------------------------------
 -- WEIGHT / APPARENT MASS / METRIC ARE DISTINCT OBSERVABLE COORDINATES
@@ -68,6 +70,47 @@ apparentMassReadout experiment =
   inferApparentMass experiment
     (referenceGravityCalibration experiment)
     (apparentWeightReadout experiment)
+
+------------------------------------------------------------------------
+-- EXACT FINITE SUPPORT-FORCE MODEL
+--
+-- On one calibrated local lab chart we can write the scale reading as
+--
+--   W = m_passive * a_support + F_non-grav.
+--
+-- This is not a complete GR worldline theorem.  It is the exact local
+-- support-force algebra needed to show that a weight change can happen with the
+-- metric held fixed whenever support acceleration or ordinary force changes.
+------------------------------------------------------------------------
+
+rationalWeight : ℚ → ℚ → ℚ → ℚ
+rationalWeight passiveMass supportAcceleration nonGravityForce =
+  passiveMass * supportAcceleration + nonGravityForce
+
+apparentMassFromSupportForce : ℚ → ℚ → ℚ
+apparentMassFromSupportForce supportForce inverseReferenceGravity =
+  supportForce * inverseReferenceGravity
+
+sameMetricSupportAccelerationChangesWeight :
+  ∀ passiveMass acceleration0 acceleration1 nonGravityForce →
+  rationalWeight passiveMass acceleration1 nonGravityForce
+  - rationalWeight passiveMass acceleration0 nonGravityForce
+  ≡ passiveMass * (acceleration1 - acceleration0)
+sameMetricSupportAccelerationChangesWeight = solve-∀
+
+sameMetricOrdinaryForceChangesWeight :
+  ∀ passiveMass supportAcceleration force0 force1 →
+  rationalWeight passiveMass supportAcceleration force1
+  - rationalWeight passiveMass supportAcceleration force0
+  ≡ force1 - force0
+sameMetricOrdinaryForceChangesWeight = solve-∀
+
+apparentMassTracksSupportForceAtFixedCalibration :
+  ∀ weight0 weight1 inverseReferenceGravity →
+  apparentMassFromSupportForce weight1 inverseReferenceGravity
+  - apparentMassFromSupportForce weight0 inverseReferenceGravity
+  ≡ (weight1 - weight0) * inverseReferenceGravity
+apparentMassTracksSupportForceAtFixedCalibration = solve-∀
 
 ------------------------------------------------------------------------
 -- A metric change can alter a weight reading only through a specified
