@@ -7,6 +7,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 
 heisenbergTranslationIntertwinesF3Addition : Bool
 heisenbergTranslationIntertwinesF3Addition = true
+heisenbergCoordinateSwapPreservesDot6Exhaustive : Bool
+heisenbergCoordinateSwapPreservesDot6Exhaustive = true
+canonicalSignedCoreReplayVerified : Bool
+canonicalSignedCoreReplayVerified = true
 
 k4CoordinateSwapPreservesAddNeg : Bool
 k4CoordinateSwapPreservesAddNeg = true
@@ -25,6 +29,22 @@ k6CoordinateSwapChangesChosenMultiplication = true
 
 totalSignedProgramCounterMachinePaid : Bool
 totalSignedProgramCounterMachinePaid = true
+executedTraceRetainsPrimeIdentity : Bool
+executedTraceRetainsPrimeIdentity = true
+arbitraryProgramValuationReplayPaid : Bool
+arbitraryProgramValuationReplayPaid = true
+arbitraryProgramInvariantUnitReplayPaid : Bool
+arbitraryProgramInvariantUnitReplayPaid = true
+richMachineCompilerGivenMetadataPaid : Bool
+richMachineCompilerGivenMetadataPaid = true
+canonicalVirtualRichProjectionPaid : Bool
+canonicalVirtualRichProjectionPaid = true
+canonicalGeometryRichProjectionPaid : Bool
+canonicalGeometryRichProjectionPaid = true
+metadataDynamicsRecoveredFromPriorRepo : Bool
+metadataDynamicsRecoveredFromPriorRepo = false
+
+-- Compatibility receipt: an unconditional arbitrary rich projection is still unpaid.
 machineToRichSignedStateProjectionPaid : Bool
 machineToRichSignedStateProjectionPaid = false
 fullRichSignedTransitionGraphClaimed : Bool
