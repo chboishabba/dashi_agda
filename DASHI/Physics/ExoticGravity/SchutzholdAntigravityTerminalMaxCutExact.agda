@@ -19,16 +19,6 @@ import DASHI.Physics.YangMills.R144EMGWControlledExchangeInstantiationExact as R
 import DASHI.Physics.YangMills.MaxwellHodgeR144ControlledExchangeWeldExact as MaxwellR144
 import DASHI.Physics.YangMills.SchutzholdR144CanonicalMetricStressCompilerExact as CanonicalStress
 
-------------------------------------------------------------------------
--- TERMINAL MAX-CUT FOR THE SCHUTZHOLD CONTROLLED-EXCHANGE LANE
---
--- The hard algebra for the selected physical sector is now source-written:
--- Eq. (3) metric variation, selected stress pairing, Eq. (5) pure-mode average
--- transfer, Eq. (7) differential frequency shift, delayed phase accumulation,
--- and coherent half-cycle accumulation.  The general repo metric-stress theorem
--- and R144 tangent map are also consumed rather than re-proved.
-------------------------------------------------------------------------
-
 record SchutzholdPhysicalRealisation
     (maxwell : Gauge.MaxwellFieldLaw)
     (state : MaxwellStress.MaxwellMetricHodgeState maxwell)
@@ -56,15 +46,13 @@ record SchutzholdPhysicalRealisation
     sourceHamiltonianSameObjectReceipt : SourceHamiltonianSameObjectReceipt
 
     WeakFieldGWIsSameMetricPerturbationReceipt : Set
-    weakFieldGWIsSameMetricPerturbationReceipt :
-      WeakFieldGWIsSameMetricPerturbationReceipt
+    weakFieldGWIsSameMetricPerturbationReceipt : WeakFieldGWIsSameMetricPerturbationReceipt
 
 open SchutzholdPhysicalRealisation public
 
 record SchutzholdAntigravityComparison
     {maxwell state stress gravity wave}
-    (physical :
-      SchutzholdPhysicalRealisation maxwell state stress gravity wave) : Set₁ where
+    (physical : SchutzholdPhysicalRealisation maxwell state stress gravity wave) : Set₁ where
   constructor schutzhold-antigravity-comparison
   field
     ordinaryPrediction : Anti.AttributedExchangePrediction
@@ -79,20 +67,22 @@ record SchutzholdAntigravityComparison
       Anti.comparator ordinaryPrediction ≡ Anti.ordinaryGRExchangeComparator
 
     alternativeIsAlternative :
-      Anti.comparator alternativePrediction
-      ≡ Anti.alternativeCouplingExchangeComparator
+      Anti.comparator alternativePrediction ≡ Anti.alternativeCouplingExchangeComparator
 
-    OrdinaryUsesPhysicalInteractionReceipt : Set
-    ordinaryUsesPhysicalInteractionReceipt :
-      OrdinaryUsesPhysicalInteractionReceipt
+    ordinaryUsesPhysicalInteraction :
+      Anti.AttributedExchangePrediction.interaction ordinaryPrediction
+      ≡ MaxwellR144.interactionFromMaxwellHodge
+          (SchutzholdPhysicalRealisation.maxwellR144 physical)
 
-    AlternativeUsesSamePhysicalInteractionReceipt : Set
-    alternativeUsesSamePhysicalInteractionReceipt :
-      AlternativeUsesSamePhysicalInteractionReceipt
+    alternativeUsesPhysicalInteraction :
+      Anti.AttributedExchangePrediction.interaction alternativePrediction
+      ≡ MaxwellR144.interactionFromMaxwellHodge
+          (SchutzholdPhysicalRealisation.maxwellR144 physical)
 
-    ObservationUsesSamePhysicalInteractionReceipt : Set
-    observationUsesSamePhysicalInteractionReceipt :
-      ObservationUsesSamePhysicalInteractionReceipt
+    observationUsesPhysicalInteraction :
+      Anti.ControlledExchangeObservation.interaction observation
+      ≡ MaxwellR144.interactionFromMaxwellHodge
+          (SchutzholdPhysicalRealisation.maxwellR144 physical)
 
 open SchutzholdAntigravityComparison public
 
@@ -120,8 +110,7 @@ existingWorkBoundary : Work.SchutzholdWorkNormalizationBoundary
 existingWorkBoundary = Work.canonicalSchutzholdWorkNormalizationBoundary
 
 existingFrequencyPhaseBoundary : FrequencyPhase.SchutzholdFrequencyPhaseBoundary
-existingFrequencyPhaseBoundary =
-  FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
+existingFrequencyPhaseBoundary = FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
 
 existingSpecializedVariationScope : Specialized.SpecializedVariationScope
 existingSpecializedVariationScope = Specialized.canonicalSpecializedVariationScope
@@ -130,12 +119,7 @@ existingPureModeScope : PureMode.PureModeSensitivityScope
 existingPureModeScope = PureMode.canonicalPureModeSensitivityScope
 
 existingCanonicalStressCompilerBoundary : CanonicalStress.SchutzholdR144CompilerBoundary
-existingCanonicalStressCompilerBoundary =
-  CanonicalStress.canonicalSchutzholdR144CompilerBoundary
-
-------------------------------------------------------------------------
--- Terminal frontier after solving the selected-sector mathematics.
-------------------------------------------------------------------------
+existingCanonicalStressCompilerBoundary = CanonicalStress.canonicalSchutzholdR144CompilerBoundary
 
 record SchutzholdTerminalFrontier : Set where
   constructor schutzhold-terminal-frontier
@@ -158,6 +142,7 @@ record SchutzholdTerminalFrontier : Set where
     planckFrequencyAuthorityReused : Bool
     antigravityResidualComparatorReused : Bool
     executablePaperScaleBenchmarkAdded : Bool
+    literalInteractionCarrierEqualitiesEnforced : Bool
 
     duplicateMaxwellNeeded : Bool
     duplicateHodgeNeeded : Bool
@@ -180,6 +165,6 @@ canonicalSchutzholdTerminalFrontier : SchutzholdTerminalFrontier
 canonicalSchutzholdTerminalFrontier =
   schutzhold-terminal-frontier
     true true true true true true true true true true
-    true true true true true true true true
+    true true true true true true true true true
     false false false false false false false
     true true true true true true true true
