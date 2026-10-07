@@ -15,5 +15,7 @@ import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionValidation
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutExact
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutValidation
 import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact
 import DASHI.Reasoning.AlbertF4ExceptionalCapstoneValidation
