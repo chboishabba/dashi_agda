@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import itertools, json
+import argparse, itertools, json
 from collections import Counter
 from dataclasses import dataclass
+from pathlib import Path
 
 SELECTED_MODULI = {
     4: (1, 0, 1, 1, 1),       # x^4 + x^3 + x^2 + 1
@@ -180,7 +181,6 @@ def scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200):
         'minimum_vector_count': minimum,
         'minimum_vector_columns': [c for c, n in counts.items() if n == minimum],
         'matching_12_vector_columns': [c for c, n in counts.items() if n == 12],
-        'column_scan': counts,
     }
 
 
@@ -225,7 +225,15 @@ def recognition_summary():
 
 
 def main():
-    print(json.dumps(recognition_summary(), indent=2, sort_keys=True))
+    p = argparse.ArgumentParser()
+    p.add_argument('--output', type=Path)
+    args = p.parse_args()
+    text = json.dumps(recognition_summary(), indent=2, sort_keys=True) + '\n'
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(text)
+    else:
+        print(text, end='')
 
 
 if __name__ == '__main__':
