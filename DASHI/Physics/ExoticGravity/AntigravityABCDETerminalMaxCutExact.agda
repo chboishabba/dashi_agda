@@ -10,6 +10,8 @@ import DASHI.Physics.Foundations.PositiveGActiveStressWeakFieldMetricExact as Me
 import DASHI.Physics.Foundations.PositiveGAnisotropicTOVConservationExact as TOV
 import DASHI.Physics.Foundations.PositiveGConservedAnisotropicProfileCompilerExact as Profile
 import DASHI.Physics.Foundations.LocalActiveStressGlobalExteriorMassFirewallExact as Global
+import DASHI.Physics.Foundations.PositiveGSphericalExteriorMassObstructionExact as ExteriorMass
+import DASHI.Physics.Foundations.PositiveGSphericalInteriorRepulsionBoundaryExact as InteriorBoundary
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
@@ -33,6 +35,16 @@ stageCConservedProfileCompiler = Profile.canonicalConservedAnisotropicProfileCom
 stageCGlobalExteriorPromotionAudit : Global.LocalGlobalExteriorBoundary
 stageCGlobalExteriorPromotionAudit = Global.canonicalLocalGlobalExteriorBoundary
 
+stageCSphericalExteriorMassObstruction :
+  ExteriorMass.PositiveGSphericalExteriorMassBoundary
+stageCSphericalExteriorMassObstruction =
+  ExteriorMass.canonicalPositiveGSphericalExteriorMassBoundary
+
+stageCInteriorBoundaryObstruction :
+  InteriorBoundary.PositiveGSphericalInteriorBoundary
+stageCInteriorBoundaryObstruction =
+  InteriorBoundary.canonicalPositiveGSphericalInteriorBoundary
+
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
 
@@ -53,6 +65,8 @@ record AntigravityABCDEFrontier : Set where
     stageCNonlinearConservationAudited : Bool
     stageCConservationCompilerConstructed : Bool
     stageCGlobalExteriorPromotionAudited : Bool
+    stageCSphericalPositiveDensityExteriorObstructionProved : Bool
+    stageCSmoothBoundaryRepulsionObstructionProved : Bool
     stageDFourChannelProjectionCompiled : Bool
     stageESameObjectComparatorCompiled : Bool
     oppositeCouplingNotPromotedToOppositeGeometry : Bool
@@ -60,6 +74,8 @@ record AntigravityABCDEFrontier : Set where
     sameObjectConservedShellToWeakFieldMetricStillOpen : Bool
     coupledEinsteinProfileEquationStillOpen : Bool
     exactGlobalExteriorMassChargeStillOpen : Bool
+    repulsiveVacuumExteriorWithPositiveDensityStillOpen : Bool
+    localInteriorMetricEngineeringRouteStillLive : Bool
     physicalDeviceStressRealisationStillOpen : Bool
     apparatusCalibrationStillOpen : Bool
     empiricalReplicationStillOpen : Bool
@@ -68,14 +84,16 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true
-    true true true true true true true
+    true true true true true true true true true true true true true
+    true true true false true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
   field
     weakFieldPoissonFixtureMathematicsClosed : Bool
     conservationUnknownReducedByOneFunction : Bool
+    positiveDensityRepulsiveVacuumExteriorAvailable : Bool
+    localInteriorMetricEngineeringRouteStillAvailable : Bool
     sameObjectPhysicalAToEChainClosed : Bool
     nonlinearCurrentShellAlreadyConserved : Bool
     globalExteriorMassSignAlreadySolved : Bool
@@ -88,4 +106,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true false false false false false false true true
+    true true false true false false false false false false true true
