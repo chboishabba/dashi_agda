@@ -28,11 +28,6 @@ import DASHI.Governance.FederatedViabilityTransitionRegression
 import DASHI.Governance.ConsensusDemocracyNonFactorabilityExact
 import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 
--- Evidence acquisition / instantiation lane. Primary political-design sources,
--- empirical movement scholarship, primary archival records, curated corpus
--- metadata, research instruments, external group-decision experiments,
--- assessment evidence, and DASHI-derived parsing/privacy/bridges remain
--- separately attributed.
 import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryExact
 import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryRegression
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
