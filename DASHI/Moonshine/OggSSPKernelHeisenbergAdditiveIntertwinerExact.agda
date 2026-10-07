@@ -2,19 +2,11 @@ module DASHI.Moonshine.OggSSPKernelHeisenbergAdditiveIntertwinerExact where
 
 ------------------------------------------------------------------------
 -- EXISTING HEISENBERG TRANSLATIONS <-> NEW F3 KERNEL ADDITION
---
--- This pays an independently pre-existing action seam.  The repo already owns
--- X6 = F3^6 together with six coordinate translations, and separately owns the
--- exact X6 <-> Kernel 6 chart.  The F3-linear owner introduced on #1105 is
--- therefore not merely a convenient presentation: its six +1 basis
--- translations are literally the old Heisenberg translations under that chart.
---
--- This still does NOT recover a field multiplication on Kernel 6.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import DASHI.Algebra.Trit using (neg; zer; pos)
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Codec.TriadicPAdicCodec as Codec
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -22,6 +14,15 @@ import DASHI.Analysis.RiemannQuarticTriadicCodecKernelBridgeExact as Bridge
 import DASHI.Moonshine.OggSSPTriadicKernelF3LinearExact as Linear
 
 open Codec using ([]ᵥ; _∷ᵥ_)
+
+-- H.increment and Linear addition by +1 are distinct definitions with the same
+-- finite table, so pay the bridge by cases rather than pretending it is refl on
+-- an unknown coordinate.
+heisenbergIncrementIsLinearPlusOne :
+  (x : Trit) → H.increment x ≡ Linear._⊕₃_ pos x
+heisenbergIncrementIsLinearPlusOne neg = refl
+heisenbergIncrementIsLinearPlusOne zer = refl
+heisenbergIncrementIsLinearPlusOne pos = refl
 
 basis6 : H.Axis6 → Linear.Kernel6
 basis6 H.axis0 = pos ∷ᵥ zer ∷ᵥ zer ∷ᵥ zer ∷ᵥ zer ∷ᵥ zer ∷ᵥ []ᵥ
@@ -39,17 +40,21 @@ heisenbergTranslationIntertwinesKernelAddition :
   (x : H.X6) →
   Bridge.x6ToKernel6 (H.translate axis x)
   ≡ kernelTranslate6 axis (Bridge.x6ToKernel6 x)
-heisenbergTranslationIntertwinesKernelAddition H.axis0 (H.x6 a0 a1 a2 a3 a4 a5) = refl
-heisenbergTranslationIntertwinesKernelAddition H.axis1 (H.x6 a0 a1 a2 a3 a4 a5) = refl
-heisenbergTranslationIntertwinesKernelAddition H.axis2 (H.x6 a0 a1 a2 a3 a4 a5) = refl
-heisenbergTranslationIntertwinesKernelAddition H.axis3 (H.x6 a0 a1 a2 a3 a4 a5) = refl
-heisenbergTranslationIntertwinesKernelAddition H.axis4 (H.x6 a0 a1 a2 a3 a4 a5) = refl
-heisenbergTranslationIntertwinesKernelAddition H.axis5 (H.x6 a0 a1 a2 a3 a4 a5) = refl
+heisenbergTranslationIntertwinesKernelAddition H.axis0 (H.x6 a0 a1 a2 a3 a4 a5)
+  rewrite heisenbergIncrementIsLinearPlusOne a0 = refl
+heisenbergTranslationIntertwinesKernelAddition H.axis1 (H.x6 a0 a1 a2 a3 a4 a5)
+  rewrite heisenbergIncrementIsLinearPlusOne a1 = refl
+heisenbergTranslationIntertwinesKernelAddition H.axis2 (H.x6 a0 a1 a2 a3 a4 a5)
+  rewrite heisenbergIncrementIsLinearPlusOne a2 = refl
+heisenbergTranslationIntertwinesKernelAddition H.axis3 (H.x6 a0 a1 a2 a3 a4 a5)
+  rewrite heisenbergIncrementIsLinearPlusOne a3 = refl
+heisenbergTranslationIntertwinesKernelAddition H.axis4 (H.x6 a0 a1 a2 a3 a4 a5)
+  rewrite heisenbergIncrementIsLinearPlusOne a4 = refl
+heisenbergTranslationIntertwinesKernelAddition H.axis5 (H.x6 a0 a1 a2 a3 a4 a5)
+  rewrite heisenbergIncrementIsLinearPlusOne a5 = refl
 
 -- A canonical four-coordinate slice of X6 reuses the first four Heisenberg
--- translation axes.  This is an additive-action embedding only; it does not
--- assert that the chosen GF(81) multiplication is inherited from X6.
-
+-- translation axes.  This is an additive-action embedding only.
 data Axis4 : Set where
   axis0 axis1 axis2 axis3 : Axis4
 
@@ -79,10 +84,14 @@ k4TranslationIsRestrictedExistingHeisenbergTranslation :
     (H.translate (axis4To6 axis)
       (Bridge.kernel6ToX6 (embedK4InK6 kernel)))
   ≡ embedK4InK6 (kernelTranslate4 axis kernel)
-k4TranslationIsRestrictedExistingHeisenbergTranslation axis0 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ) = refl
-k4TranslationIsRestrictedExistingHeisenbergTranslation axis1 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ) = refl
-k4TranslationIsRestrictedExistingHeisenbergTranslation axis2 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ) = refl
-k4TranslationIsRestrictedExistingHeisenbergTranslation axis3 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ) = refl
+k4TranslationIsRestrictedExistingHeisenbergTranslation axis0 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ)
+  rewrite heisenbergIncrementIsLinearPlusOne a = refl
+k4TranslationIsRestrictedExistingHeisenbergTranslation axis1 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ)
+  rewrite heisenbergIncrementIsLinearPlusOne b = refl
+k4TranslationIsRestrictedExistingHeisenbergTranslation axis2 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ)
+  rewrite heisenbergIncrementIsLinearPlusOne c = refl
+k4TranslationIsRestrictedExistingHeisenbergTranslation axis3 (a ∷ᵥ b ∷ᵥ c ∷ᵥ d ∷ᵥ []ᵥ)
+  rewrite heisenbergIncrementIsLinearPlusOne d = refl
 
 record KernelHeisenbergAdditiveIntertwinerBoundary : Set where
   constructor kernel-heisenberg-additive-intertwiner-boundary
