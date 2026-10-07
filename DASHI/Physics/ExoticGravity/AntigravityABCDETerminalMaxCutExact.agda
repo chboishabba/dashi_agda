@@ -18,20 +18,20 @@ import DASHI.Physics.Foundations.GRQFTDECRepulsiveExteriorMaxCutExact as DECExte
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Nambu
 import DASHI.Physics.Foundations.GRQFTSourceNativeNambuBubbleConditionalExact as SourceNative
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
+import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExact as ConcreteObservables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
 
 ------------------------------------------------------------------------
 -- A -> E strongest-current terminal owner.
 --
--- The asymptotically-flat Lambda_out=0 positive-density obstruction remains a
--- useful no-go branch, but it is NOT the strongest positive-G construction.
 -- Existing GRQFT machinery already supplies a nonlinear de-Sitter/Kottler
 -- junction and a stronger Nambu-Goto/Israel bubble with positive metric mass,
 -- positive Newton G, DEC-compatible shell stress and outward exterior
--- acceleration.  The remaining source-native seam is the literal CMP119/YM
--- production of the selected two vacuum amplitudes, same-object pinned stress,
--- finite-thickness wall dynamics, and SI calibration.
+-- acceleration.  Concrete mechanical/lapse observables are now projected from
+-- that SAME selected geometry.  Schuetzhold's controlled optical energy-
+-- exchange channel additionally requires deliberate time-dependent modulation
+-- of the otherwise static candidate geometry.
 ------------------------------------------------------------------------
 
 stageASourceContract : Source.LocalizedAnisotropicRepulsiveShellWitness
@@ -86,6 +86,11 @@ stageCSourceNativeNambuConditionalBoundary =
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
 
+stageDConcreteNambuKottlerObservables :
+  ConcreteObservables.NambuKottlerObservableBoundary
+stageDConcreteNambuKottlerObservables =
+  ConcreteObservables.canonicalNambuKottlerObservableBoundary
+
 stageESameObjectExperiment : Experiment.AntigravityDeviceDiscriminatorBoundary
 stageESameObjectExperiment = Experiment.canonicalAntigravityDeviceDiscriminatorBoundary
 
@@ -110,6 +115,8 @@ record AntigravityABCDEFrontier : Set where
     stageCPositiveMetricMassRetained : Bool
     stageCPositiveNewtonGRetained : Bool
     stageCOutwardExteriorAccelerationConstructed : Bool
+    stageDConcreteMechanicalObservablesConstructed : Bool
+    stageDConcreteLapseCarriersConstructed : Bool
     stageDFourChannelProjectionCompiled : Bool
     stageESameObjectComparatorCompiled : Bool
     oppositeCouplingNotPromotedToOppositeGeometry : Bool
@@ -120,6 +127,7 @@ record AntigravityABCDEFrontier : Set where
     sourceNativeCMP119PotentialCouplingStillOpen : Bool
     finiteThicknessWallStillOpen : Bool
     SIStressCalibrationStillOpen : Bool
+    dynamicOpticalModulationOfStaticDeviceStillOpen : Bool
     physicalDeviceStressRealisationStillOpen : Bool
     apparatusCalibrationStillOpen : Bool
     empiricalReplicationStillOpen : Bool
@@ -127,8 +135,8 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true true true true true true
-    false true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true
+    false true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -137,9 +145,11 @@ record AntigravityABCDEPromotionBoundary : Set where
     selectedIsraelShellMathClosed : Bool
     selectedNambuGotoSurfaceEquationOfStateClosed : Bool
     normalizedCMP119TensorTransportClosed : Bool
+    concreteMechanicalObservableProjectionClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
     sourceNativeTwoAmplitudeReadoutClosed : Bool
     sourceNativePinnedStressSameObjectClosed : Bool
+    dynamicSchutzholdReadoutForDeviceClosed : Bool
     fullPhysicalDeviceDemonstrated : Bool
     weightOnlyObservationProvesMetric : Bool
     opticalOnlyObservationProvesAntigravity : Bool
@@ -148,4 +158,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true false false false false false true
+    true true true true true true false false false false false false true
