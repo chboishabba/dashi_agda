@@ -24,4 +24,6 @@ def test_cmp119_nambu_readout_reuses_existing_localized_action_projector():
 def test_terminal_no_longer_calls_the_readout_carrier_missing():
     text = read("DASHI/Physics/ExoticGravity/AntigravityABCDETerminalMaxCutExact.agda")
     assert "sourceNativeVacuumReadoutCarrierConstructed" in text
-    assert "sourceNativeTwoVacuumValuesStillOpen" in text
+    assert "sourceNativeVacuumReadoutStillOpen" in text
+    assert "sourceNativeExactFixtureValuesRequired" in text
+    assert "sourceAmplitudeAdmissibilityStillOpen" in text
