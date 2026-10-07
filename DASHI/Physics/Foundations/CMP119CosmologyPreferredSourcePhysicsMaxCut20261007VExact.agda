@@ -7,21 +7,22 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 -- This supersedes U as the preferred accounting surface.
 --
 -- S1: CMP119 already publishes Euclidean covariance of the regular E_j source
---     (2.29), including the B-coordinate form (3.58).  Do NOT re-prove that.
+--     (2.29), including the B-coordinate form (3.58). Do NOT re-prove that.
 --     The genuine source work is the same-object weld from the repository's
 --     abstract CMP109/116 Background/tangent to that literal B-coordinate and
---     the ten canonical metric/source directions.  Variational uniqueness is a
+--     the ten canonical metric/source directions. Variational uniqueness is a
 --     valid optional producer of background naturality, not a second premise.
 --
 -- S2: once the renormalized Hilbert/Weyl identity is stated on the exact
 --     stress/F2 operator pair, authority-record instantiation is compiler-only.
 --
--- S3a: the route consumes ONE selected marked F2 source, not a universal
---      curvature-polynomial family.  Weighted Cauchy and geometric shell
---      summation are compiler-owned; the source estimate is pushed back to the
---      literal differentiated CMP116 activity/entropy decay on that same mark.
+-- S3a: CMP116 already publishes differentiated analytic localization and the
+--      (1.26)--(1.29) positive rate split. Geometric summation and weighted
+--      Cauchy/Hilbert transport are compiler-owned. The novel payment is only
+--      same-object binding of the selected F2 mark to those source coordinates
+--      with uniform positive radii/constants and gauge/local semantics.
 --
--- S3b: exact Haar masses erase discrepancy.  Direct oscillation convergence is
+-- S3b: exact Haar masses erase discrepancy. Direct oscillation convergence is
 --      also not primitive: a uniform Eq.(1.71) Lipschitz cell bound plus a
 --      vanishing product-Haar mesh compiles to oscillation -> 0.
 ------------------------------------------------------------------------
@@ -33,7 +34,7 @@ import DASHI.Physics.YangMills.BalabanBackgroundMinimizerSymmetryNaturalityExact
 import DASHI.Physics.Foundations.CMP119CosmologyP1PublishedEuclideanBackgroundCovarianceExact as S1
 import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact as S2
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as S3F2
-import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedF2HilbertMaxCutExact as S3Hilbert
+import DASHI.Physics.Foundations.CMP119CosmologyP3CMP116MarkedF2SourceMaxCutExact as S3Source
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedStateMassWeightedHaarExact as S3Haar
 import DASHI.Physics.Foundations.CMP119CosmologyP3ExactMassOscillationOnlyExact as ExactMass
 import DASHI.Physics.Foundations.CMP119CosmologyP3LipschitzOscillationCompilerExact as Lipschitz
@@ -46,7 +47,7 @@ remainingNovelSourcePackageCount : Nat
 remainingNovelSourcePackageCount = 3
 
 remainingStandardImportedAuthorityCount : Nat
-remainingStandardImportedAuthorityCount = 2
+remainingStandardImportedAuthorityCount = 3
 
 remainingPreferredPackageCount : Nat
 remainingPreferredPackageCount = 4
@@ -88,7 +89,7 @@ s2AuthorityRecordInstantiationRequired =
   S2.remainingR2WorkIsInstantiationOfStandardWardAuthority
 
 ------------------------------------------------------------------------
--- S3a: ONE selected F2 mark; quantitative Hilbert debt pushed to source decay.
+-- S3a: ONE selected F2 mark; source decay/rate split already imported.
 ------------------------------------------------------------------------
 
 s3SelectedMarkedF2SourceRequired : Bool
@@ -99,13 +100,21 @@ s3UniversalMarkedCurvatureFamilyRequired : Bool
 s3UniversalMarkedCurvatureFamilyRequired =
   S3F2.universalMarkedCurvatureFamilyRequiredForCosmology
 
+s3FreshDifferentiatedDecayTheoremRequired : Bool
+s3FreshDifferentiatedDecayTheoremRequired =
+  S3Source.freshDifferentiatedDecayTheoremRequired
+
 s3IndependentHilbertInequalityRequired : Bool
 s3IndependentHilbertInequalityRequired =
-  S3Hilbert.abstractIndependentHilbertInequalityRequired
+  S3Source.freshHilbertInequalityRequired
 
-s3UniformMarkedCoefficientEnergyRequired : Bool
-s3UniformMarkedCoefficientEnergyRequired =
-  S3Hilbert.remainingSelectedF2HilbertSourceWorkIsUniformCoefficientEnergy
+s3MarkedCoordinateAndUniformRadiusWeldRequired : Bool
+s3MarkedCoordinateAndUniformRadiusWeldRequired =
+  S3Source.selectedF2MarkedCoordinateAndUniformRadiusWeldRequired
+
+s3GaugeLocalSemanticsRequired : Bool
+s3GaugeLocalSemanticsRequired =
+  S3Source.selectedF2GaugeLocalSemanticsRequired
 
 ------------------------------------------------------------------------
 -- S3b: literal Eq.(1.71) Lipschitz cell estimate + vanishing Haar mesh.
