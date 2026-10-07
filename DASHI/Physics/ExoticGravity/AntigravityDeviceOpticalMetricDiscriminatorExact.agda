@@ -272,6 +272,9 @@ canonicalPositiveGActiveStressDeviceBoundary =
 -- Existing architectural donors remain authoritative.
 ------------------------------------------------------------------------
 
+existingSchutzholdTerminalFrontier : Schutzhold.SchutzholdTerminalFrontier
+existingSchutzholdTerminalFrontier = Schutzhold.canonicalSchutzholdTerminalFrontier
+
 existingHyperfabricBoundary : Hyper.ObservableProjectionBoundary
 existingHyperfabricBoundary = Hyper.canonicalObservableProjectionBoundary
 
