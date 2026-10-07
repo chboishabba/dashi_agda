@@ -72,6 +72,16 @@ prop5DerivedNumericalNoDoubleRoundingRouteImpossible route =
   FiniteNoGo.rawTargetNotNearestAgainstFiniteCompetitor
     (finiteCounterexampleMustStillBeNearest route)
 
+-- Strongest surviving no-double-rounding statement: exact composition of the
+-- raw word projection.  This is intentionally NOT named a numerical nearest
+-- rounding theorem, because Proposition 5's nearestness premise is false.
+rawWordNoDoubleTruncation :
+  ∀ {n}
+  (xs : Vec Trit.Trit (suc (suc (suc (suc n))))) →
+  Truncate.truncateTwo (Truncate.truncateTwo xs)
+  ≡ Precision.truncateFourDirect xs
+rawWordNoDoubleTruncation = structuralNoDoubleTruncation
+
 record TekumRoundingMaxCutBoundary : Set where
   constructor tekumRoundingMaxCutBoundary
   field
