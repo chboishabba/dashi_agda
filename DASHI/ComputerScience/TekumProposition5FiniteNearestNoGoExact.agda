@@ -44,6 +44,10 @@ import DASHI.ComputerScience.TekumTruncationRoundingExact as Truncate
 -- Therefore the raw target is distance 4/2187 from the source whereas the
 -- competitor is distance 2/2187.  The raw target is strictly NOT nearest even
 -- though source, target and competitor are all ordinary finite values.
+--
+-- This is stronger than the endpoint NaR/infinity obstruction: it rules out
+-- the proposed repair "restrict Proposition 5 to raw truncations that remain
+-- finite" without making any appeal to special-value semantics.
 ------------------------------------------------------------------------
 
 finiteNearestCounterexample10 : Vec Trit.Trit 10
