@@ -21,7 +21,7 @@ neuralinkCalibrationBurdenRegression :
 neuralinkCalibrationBurdenRegression = P.neuralink2026CalibrationReceipt
 
 aliceObserverPluralityRegression :
-  Alice.AdmissiblePromotionRoute Alice.adultObservationEqualsChildExperienceRoute → ⊥
+  Alice.AdmissiblePromotionRoute Alice.adultObservationEqualsChildExperienceRoute → Alice.Never
 aliceObserverPluralityRegression = Alice.adultObservationDoesNotEqualChildExperience
 
 fmriMindReadingStillBlocked :
