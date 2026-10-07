@@ -11,6 +11,11 @@ module DASHI.Physics.Closure.NSABCDMaxCut20261007Exact where
 -- A retains the public A1 -> A2 -> A3 architecture but exposes the actual
 -- physical subleaves.  B imports the post-#1039 pure-analysis board.  C/D are
 -- frozen against accidental reclassification as internal theorem-discovery.
+--
+-- Current-head source freshness is also explicit: the OpenAI release advanced
+-- beyond the originally pinned comparator commit, but the C/D comparator
+-- theorem statements stayed stable, so the official-coordinate audit does not
+-- reopen merely because the proof implementation changed.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -72,6 +77,16 @@ cOfficialSourceAuditClosed = CD.cOfficialCoordinateAuditClosed
 dOfficialSourceAuditClosed : Bool
 dOfficialSourceAuditClosed = CD.dOfficialCoordinateAuditClosed
 
+cCurrentReleasedHeadStatementStable : Bool
+cCurrentReleasedHeadStatementStable = CD.cCurrentReleasedHeadStatementStable
+
+dCurrentReleasedHeadStatementStable : Bool
+dCurrentReleasedHeadStatementStable = CD.dCurrentReleasedHeadStatementStable
+
+cdCurrentHeadRequiresReopeningCoordinateAudit : Bool
+cdCurrentHeadRequiresReopeningCoordinateAudit =
+  CD.currentReleasedHeadRequiresReopeningCoordinateAudit
+
 cdIndependentReconstructionGatesAudit : Bool
 cdIndependentReconstructionGatesAudit = CD.independentDASHIReconstructionGatesAudit
 
@@ -100,6 +115,18 @@ clayPromotion = false
 bRepresentationProgrammeFrozenIsTrue :
   bRepresentationProgrammeFrozen ≡ true
 bRepresentationProgrammeFrozenIsTrue = refl
+
+cCurrentReleasedHeadStatementStableIsTrue :
+  cCurrentReleasedHeadStatementStable ≡ true
+cCurrentReleasedHeadStatementStableIsTrue = refl
+
+dCurrentReleasedHeadStatementStableIsTrue :
+  dCurrentReleasedHeadStatementStable ≡ true
+dCurrentReleasedHeadStatementStableIsTrue = refl
+
+cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse :
+  cdCurrentHeadRequiresReopeningCoordinateAudit ≡ false
+cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse = refl
 
 cdIndependentReconstructionGatesAuditIsFalse :
   cdIndependentReconstructionGatesAudit ≡ false
