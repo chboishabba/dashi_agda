@@ -4,25 +4,28 @@ open import DASHI.Core.Prelude
 
 import DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact as Longitudinal
 
-nov20EdgeCountPinned :
-  Longitudinal.edgeCount Longitudinal.nov20Edges ≡ 9
+nov20EdgeCountPinned : Longitudinal.edgeCount Longitudinal.nov20Edges ≡ 9
 nov20EdgeCountPinned = refl
 
-nov28EdgeCountPinned :
-  Longitudinal.edgeCount Longitudinal.nov28Edges ≡ 7
+nov28EdgeCountPinned : Longitudinal.edgeCount Longitudinal.nov28Edges ≡ 7
 nov28EdgeCountPinned = refl
 
-dec11EdgeCountPinned :
-  Longitudinal.edgeCount Longitudinal.dec11Edges ≡ 11
+dec11EdgeCountPinned : Longitudinal.edgeCount Longitudinal.dec11Edges ≡ 11
 dec11EdgeCountPinned = refl
 
-jan08EdgeCountPinned :
-  Longitudinal.edgeCount Longitudinal.jan08Edges ≡ 7
+jan08EdgeCountPinned : Longitudinal.edgeCount Longitudinal.jan08Edges ≡ 7
 jan08EdgeCountPinned = refl
 
-meetingFamilyTotalPinned :
-  Longitudinal.edgeCount Longitudinal.longitudinalObservedEdges ≡ 52
+meetingFamilyTotalPinned : Longitudinal.edgeCount Longitudinal.longitudinalObservedEdges ≡ 52
 meetingFamilyTotalPinned = refl
+
+pseudonymsUsed :
+  Longitudinal.pseudonymousParticipantTokensUsed Longitudinal.canonicalLongitudinalBoundary ≡ true
+pseudonymsUsed = refl
+
+rawNamesNotPropagated :
+  Longitudinal.rawNamesPropagatedIntoDerivedRows Longitudinal.canonicalLongitudinalBoundary ≡ false
+rawNamesNotPropagated = refl
 
 dec04MediationBurdenObserved :
   Longitudinal.ProcessBurdenObserved Longitudinal.dec04Meeting Longitudinal.majorityMeetingTimeSpentInMediation
@@ -33,8 +36,7 @@ nov28DiscussionBreakdownObserved :
 nov28DiscussionBreakdownObserved = Longitudinal.nov28Breakdown
 
 nov28CooccurrenceIsDescriptive :
-  (Longitudinal.edgeCount Longitudinal.nov28Edges ≡ 7) ×
-  Longitudinal.ProcessBurdenObserved Longitudinal.nov28Meeting Longitudinal.discussionBreakdown
+  (Longitudinal.edgeCount Longitudinal.nov28Edges ≡ 7) × Longitudinal.ProcessBurdenObserved Longitudinal.nov28Meeting Longitudinal.discussionBreakdown
 nov28CooccurrenceIsDescriptive = Longitudinal.nov28IncidenceAndBreakdownCooccur
 
 incidenceDoesNotCauseBurdenByDefinition :
