@@ -1,0 +1,20 @@
+module DASHI.Governance.OccupyDevelopmentDiagnosticsRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.OccupyDevelopmentDiagnosticsExact as Diagnostics
+
+baselineMAEPinned : Diagnostics.looMAEThousandths Diagnostics.interceptBaseline ≡ 172667
+baselineMAEPinned = refl
+
+proposalModelWorseThanBaselinePinned : Diagnostics.looMAEThousandths Diagnostics.proposalLexemeModel ≡ 208141
+proposalModelWorseThanBaselinePinned = refl
+
+noNontrivialModelPromoted : Diagnostics.nontrivialDurationModelPassesDevelopmentGate Diagnostics.canonicalDevelopmentDiagnosticBoundary ≡ false
+noNontrivialModelPromoted = refl
+
+holdoutRemainsProtected : Diagnostics.protectedHoldoutConsumedByDiagnostics Diagnostics.canonicalDevelopmentDiagnosticBoundary ≡ false
+holdoutRemainsProtected = refl
+
+burdenNotEstimated : Diagnostics.durationPredictionEqualsCoordinationBurden Diagnostics.canonicalDevelopmentDiagnosticBoundary ≡ false
+burdenNotEstimated = refl
