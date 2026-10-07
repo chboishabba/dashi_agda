@@ -1,0 +1,22 @@
+module DASHI.Biology.GABANeuroAIContextParetoSnowballRegression where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Biology.GABANeuroAIContextParetoSnowballExact as P
+import DASHI.Core.SelectiveInvalidationParetoFrontierBidiExact as Pareto
+import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
+
+paretoOwnerReused : Pareto.RecursiveParetoCompatibility
+paretoOwnerReused = P.paretoCompatibility P.canonicalAcquisitionParetoBoundary
+
+peripheralCentralRoutesToExperiment : Snowball.DiscoveryRoute
+peripheralCentralRoutesToExperiment = P.discoveryRoute P.peripheralCentralTransportAcquisition
+
+crossParticipantDecoderRemainsUnpaid : P.AcquisitionStatus
+crossParticipantDecoderRemainsUnpaid = P.status P.crossParticipantDecoderTransferAcquisition
+
+metaNeuroAIProvenanceRemainsSplit : P.AcquisitionStatus
+metaNeuroAIProvenanceRemainsSplit = P.status P.metaNeuroAIAcquisition
+
+canonicalParetoSnowballRegression : P.GABANeuroAIParetoSnowballBoundary
+canonicalParetoSnowballRegression = P.canonicalGABANeuroAIParetoSnowballBoundary
