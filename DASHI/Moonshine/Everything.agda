@@ -63,6 +63,7 @@ import DASHI.Biology.SignedSSPWeaveInstructionTraceExact
 import DASHI.Biology.SignedSSPWeaveSemanticCoreReplayExact
 import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact
 import DASHI.Biology.SignedSSPWeaveCanonicalProjectionExact
+import DASHI.Biology.SignedSSPWeaveMetadataAcquisitionFrontierExact
 import DASHI.Moonshine.OggSSPFullSignedTransitionGraphFrontierExact
 
 module DASHI.Moonshine.Everything where
