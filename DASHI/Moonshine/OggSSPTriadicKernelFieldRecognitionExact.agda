@@ -6,10 +6,13 @@ open import Data.Empty using (⊥)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Codec.TriadicPAdicCodec as Codec
+open Codec using ([]ᵥ; _∷ᵥ_)
 import DASHI.Moonshine.OggSSPTriadicKernelF3LinearExact as Linear
 import DASHI.Moonshine.Generated.OggSSPKernelFieldRecognitionGenerated as Generated
 
-Kernel4 Kernel5 Kernel6 : Set
+Kernel1 Kernel2 Kernel4 Kernel5 Kernel6 : Set
+Kernel1 = Codec.Kernel 1
+Kernel2 = Codec.Kernel 2
 Kernel4 = Linear.Kernel4
 Kernel5 = Linear.Kernel5
 Kernel6 = Linear.Kernel6
@@ -49,8 +52,43 @@ k5FrobeniusOrbitChecksum = Generated.k5FrobeniusOrbitChecksum
 k6FrobeniusOrbitChecksum : 3 + 2 * 3 + 3 * 8 + 6 * 116 ≡ 729
 k6FrobeniusOrbitChecksum = Generated.k6FrobeniusOrbitChecksum
 
--- Source-level action weld: the pre-existing codec inversion is exactly the
--- scalar -1 action for the explicit F3 coordinate operations.
+------------------------------------------------------------------------
+-- Chosen T5 subfield object maps inside the selected GF(81) presentation.
+--
+-- GF(3) is the constant-coordinate line.  The unique GF(9) fixed field of
+-- Frobenius^2 is runtime-identified with the explicit linear image
+--
+--   (a,b) |-> (a,b,-b,0).
+--
+-- The naive prefix plane (a,b,0,0) is explicitly rejected by the runtime
+-- certificate.  These maps therefore belong to the chosen field presentation;
+-- they are not promoted to an intrinsic prior DASHI subfield semantics.
+------------------------------------------------------------------------
+
+embedGF3InK4 : Kernel1 → Kernel4
+embedGF3InK4 (a ∷ᵥ []ᵥ) =
+  a ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ Trit.zer ∷ᵥ []ᵥ
+
+embedGF9InK4 : Kernel2 → Kernel4
+embedGF9InK4 (a ∷ᵥ b ∷ᵥ []ᵥ) =
+  a ∷ᵥ b ∷ᵥ Trit.inv b ∷ᵥ Trit.zer ∷ᵥ []ᵥ
+
+k4GF9ChosenObjectMapCountExact :
+  Generated.k4GF9SubfieldLinearImageSize ≡ 9
+k4GF9ChosenObjectMapCountExact = Generated.k4GF9SubfieldCountExact
+
+k4GF9ChosenObjectMapMatchesFrobenius2Runtime :
+  Generated.k4GF9SubfieldEqualsFrobenius2FixedSet ≡ true
+k4GF9ChosenObjectMapMatchesFrobenius2Runtime = refl
+
+k4GF9NaivePrefixRejectedRuntime :
+  Generated.k4GF9SubfieldIsNaivePrefixK2 ≡ false
+k4GF9NaivePrefixRejectedRuntime = refl
+
+------------------------------------------------------------------------
+-- Source-level C2 action weld.
+------------------------------------------------------------------------
+
 k4MinusOneActionIsExistingInversion :
   (x : Kernel4) → Linear.scaleKernel Trit.neg x ≡ Codec.invertKernel x
 k4MinusOneActionIsExistingInversion = Linear.scaleMinusOneIsCodecInversion
@@ -72,6 +110,7 @@ record PartialRecognitionPayment : Set where
     c2ActionIntertwiningPaid : Bool
     c2OrbitProfileRuntimePaid : Bool
     chosenFieldMultiplicationRuntimePaid : Bool
+    chosenT5SubfieldObjectMapPaid : Bool
     chosenFieldMultiplicationCanonical : Bool
     fullActionGroupoidRecognitionPaid : Bool
 
@@ -79,20 +118,25 @@ open PartialRecognitionPayment public
 
 k4FieldRecognitionPayment : PartialRecognitionPayment
 k4FieldRecognitionPayment =
-  partial-recognition-payment true true true true true true false false
+  partial-recognition-payment true true true true true true true false false
 k5FieldRecognitionPayment : PartialRecognitionPayment
 k5FieldRecognitionPayment =
-  partial-recognition-payment true true true true true true false false
+  partial-recognition-payment true true true true true true false false false
 k6FieldRecognitionPayment : PartialRecognitionPayment
 k6FieldRecognitionPayment =
-  partial-recognition-payment true true true true true true false false
+  partial-recognition-payment true true true true true true false false false
 
 data ChosenPolynomialImpliesCanonicalFieldStructure : Set where
+data ChosenGF9EmbeddingImpliesIntrinsicSubfieldSemantics : Set where
 data C2NegationIntertwiningImpliesFullMultiplicativeRecognition : Set where
 
 chosenPolynomialDoesNotBecomeCanonical :
   ChosenPolynomialImpliesCanonicalFieldStructure → ⊥
 chosenPolynomialDoesNotBecomeCanonical ()
+
+chosenGF9EmbeddingDoesNotBecomeIntrinsic :
+  ChosenGF9EmbeddingImpliesIntrinsicSubfieldSemantics → ⊥
+chosenGF9EmbeddingDoesNotBecomeIntrinsic ()
 
 c2SeamDoesNotPayFullRecognition :
   C2NegationIntertwiningImpliesFullMultiplicativeRecognition → ⊥
@@ -106,13 +150,16 @@ record TriadicKernelFieldRecognitionBoundary : Set where
     k6CoordinateFieldModelRuntimeVerified : Bool
     existingNegationWeldedToMinusOneScalar : Bool
     k4PunctureCyclic80RuntimeVerified : Bool
+    k4ChosenGF9SubfieldObjectMapPaid : Bool
+    k4NaivePrefixGF9Rejected : Bool
     rowMajor12VectorHypothesisSurvives : Bool
     canonicalFieldMultiplicationRecoveredFromPriorRepo : Bool
+    intrinsicSubfieldSemanticsRecoveredFromPriorRepo : Bool
     fullFiniteFieldRecognitionClosed : Bool
 
 canonicalTriadicKernelFieldRecognitionBoundary :
   TriadicKernelFieldRecognitionBoundary
 canonicalTriadicKernelFieldRecognitionBoundary =
   triadic-kernel-field-recognition-boundary
-    true true true true true
-    false false false
+    true true true true true true true
+    false false false false
