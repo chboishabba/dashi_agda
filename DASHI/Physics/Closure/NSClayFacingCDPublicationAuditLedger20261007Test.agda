@@ -11,6 +11,12 @@ cStatementAuditClosed = A.cStatementCoordinateAuditClosedIsTrue
 dStatementAuditClosed : A.dStatementCoordinateAuditClosed ≡ true
 dStatementAuditClosed = A.dStatementCoordinateAuditClosedIsTrue
 
+cDependencyRouteAudited : A.cReleasedDependencyRouteSourceAudited ≡ true
+cDependencyRouteAudited = A.cReleasedDependencyRouteSourceAuditedIsTrue
+
+dDependencyRouteAudited : A.dReleasedDependencyRouteSourceAudited ≡ true
+dDependencyRouteAudited = A.dReleasedDependencyRouteSourceAuditedIsTrue
+
 currentHeadPinned : A.currentReleasedHeadPinnedForAudit ≡ true
 currentHeadPinned = A.currentReleasedHeadPinnedForAuditIsTrue
 
@@ -19,6 +25,9 @@ metadataNoSorryAudited = A.currentMetadataNoSorryAuditClosedIsTrue
 
 buildNotWitnessed : A.independentKernelBuildWitnessedHere ≡ false
 buildNotWitnessed = A.independentKernelBuildWitnessedHereIsFalse
+
+reconstructionNotClaimed : A.conventionalIndependentReconstructionClosed ≡ false
+reconstructionNotClaimed = A.conventionalIndependentReconstructionClosedIsFalse
 
 refereeNotClaimed : A.independentRefereeReproductionClosed ≡ false
 refereeNotClaimed = A.independentRefereeReproductionClosedIsFalse
