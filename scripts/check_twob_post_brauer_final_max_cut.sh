@@ -12,6 +12,7 @@ targets=(
   DASHI/Moonshine/OggSSP2BFi22d2NaturalTenSourceExact.agda
   DASHI/Moonshine/OggSSP2BMonsterGF2RepresentationSourceExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda
+  DASHI/Moonshine/OggSSP2BSemisimplificationSelfDualityExtensionNoGoExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda
   DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda
 )
@@ -50,17 +51,22 @@ grep -q 'brauerIngressPaid' "${targets[6]}"
 grep -q 'finiteOuterSourceFound' "${targets[6]}"
 grep -q 'brauerPassDoesNotDetermineOuterJ2x5Action' "${targets[6]}"
 
-grep -q 'brauerAllRowsMatch' "${targets[7]}"
-grep -q 'semisimplifiedIngressIsPaid' "${targets[7]}"
-grep -q 'outerJ2x5MatchesTwo' "${targets[7]}"
-grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[7]}"
-grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[7]}"
-grep -q 'actualOuterActionOnSameQStillOpen' "${targets[7]}"
+grep -q 'sameSemisimplifiedProfile' "${targets[7]}"
+grep -q 'nonsplitPreservesForm' "${targets[7]}"
+grep -q 'fixedCountsDiffer' "${targets[7]}"
+grep -q 'semisimplificationAndSelfDualityDetermineExtension' "${targets[7]}"
 
-grep -q 'canonicalCompletionAcquisitionStatus' "${targets[8]}"
-grep -q 'postBrauerSemisimplifiedIngressAlreadyPaid' "${targets[8]}"
-grep -q 'fi22NaturalTenRankIsTen' "${targets[8]}"
-grep -q 'monsterGF2DimensionIs196882' "${targets[8]}"
-grep -q 'remainingDefectSourceBitsIsTwo' "${targets[8]}"
+grep -q 'brauerAllRowsMatch' "${targets[8]}"
+grep -q 'semisimplifiedIngressIsPaid' "${targets[8]}"
+grep -q 'outerJ2x5MatchesTwo' "${targets[8]}"
+grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[8]}"
+grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[8]}"
+grep -q 'actualOuterActionOnSameQStillOpen' "${targets[8]}"
+
+grep -q 'canonicalCompletionAcquisitionStatus' "${targets[9]}"
+grep -q 'postBrauerSemisimplifiedIngressAlreadyPaid' "${targets[9]}"
+grep -q 'fi22NaturalTenRankIsTen' "${targets[9]}"
+grep -q 'monsterGF2DimensionIs196882' "${targets[9]}"
+grep -q 'remainingDefectSourceBitsIsTwo' "${targets[9]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
