@@ -144,12 +144,8 @@ record SameObjectDeviceComparison
     CrossChannelConsistency : Set
     crossChannelConsistency : CrossChannelConsistency
 
-    ReversalRepresentation :
-      DeviceControlReversal → DeviceObservationChannel → ReversalParity → Set
-
     reversalRepresentation :
       DeviceControlReversal → DeviceObservationChannel → ReversalParity → Set
-    reversalRepresentation = ReversalRepresentation
 
     Residual : Set
     ordinaryResidual : Residual
