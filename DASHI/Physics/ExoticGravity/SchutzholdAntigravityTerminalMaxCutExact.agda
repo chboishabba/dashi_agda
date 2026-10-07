@@ -7,6 +7,8 @@ import DASHI.Physics.Laws.GravityCosmologyLaws as Gravity
 import DASHI.Physics.GR.SchutzholdEMGWSourceLawExact as Source
 import DASHI.Physics.GR.SchutzholdInteractionWorkNormalizationExact as Work
 import DASHI.Physics.GR.SchutzholdFrequencyPhaseReadoutExact as FrequencyPhase
+import DASHI.Physics.GR.SchutzholdSpecializedMaxwellVariationExact as Specialized
+import DASHI.Physics.GR.SchutzholdPureModeSensitivityExact as PureMode
 import DASHI.Physics.GR.ControlledEMGravitationalWaveEnergyExchangeExact as Exchange
 import DASHI.Physics.GR.ControlledEMGWExchangeFiniteReversalExact as Reversal
 import DASHI.Physics.GR.ControlledEMGWReadoutSignPropagationExact as Readout
@@ -15,21 +17,16 @@ import DASHI.Physics.GR.ControlledEMGWEnergyFrequencyPhaseCalibrationExact as Ca
 import DASHI.Physics.ExoticGravity.AntigravityControlledGWExchangeCrossPollinationExact as Anti
 import DASHI.Physics.YangMills.R144EMGWControlledExchangeInstantiationExact as R144
 import DASHI.Physics.YangMills.MaxwellHodgeR144ControlledExchangeWeldExact as MaxwellR144
+import DASHI.Physics.YangMills.SchutzholdR144CanonicalMetricStressCompilerExact as CanonicalStress
 
 ------------------------------------------------------------------------
 -- TERMINAL MAX-CUT FOR THE SCHUTZHOLD CONTROLLED-EXCHANGE LANE
 --
--- Everything already present in-repo is consumed here:
---   Maxwell F and metric-dependent Hodge star
---   weak-field gravitational-wave carrier
---   R144 metric/stress first-variation machinery
---   controlled exchange/reversal algebra
---   SI Planck/frequency authority
---   Schuetzhold Eq. (4)/(5)/(7), half-cycle shift and delayed-phase strategy
---   antigravity ordinary-vs-alternative same-object residual comparator.
---
--- The remaining fields below are deliberately physical same-object/calibration
--- receipts; no second Maxwell, Hodge, GR, SI or antigravity theory is invented.
+-- The hard algebra for the selected physical sector is now source-written:
+-- Eq. (3) metric variation, selected stress pairing, Eq. (5) pure-mode average
+-- transfer, Eq. (7) differential frequency shift, delayed phase accumulation,
+-- and coherent half-cycle accumulation.  The general repo metric-stress theorem
+-- and R144 tangent map are also consumed rather than re-proved.
 ------------------------------------------------------------------------
 
 record SchutzholdPhysicalRealisation
@@ -99,10 +96,6 @@ record SchutzholdAntigravityComparison
 
 open SchutzholdAntigravityComparison public
 
-------------------------------------------------------------------------
--- Source-routing theorems imported/paid directly.
-------------------------------------------------------------------------
-
 sourceEmissionFirstHalf :
   Source.exchangeSign (Source.energyFlow Source.hIncreasing Source.xDirection)
   ≡ Exchange.emissionLike
@@ -130,44 +123,63 @@ existingFrequencyPhaseBoundary : FrequencyPhase.SchutzholdFrequencyPhaseBoundary
 existingFrequencyPhaseBoundary =
   FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
 
+existingSpecializedVariationScope : Specialized.SpecializedVariationScope
+existingSpecializedVariationScope = Specialized.canonicalSpecializedVariationScope
+
+existingPureModeScope : PureMode.PureModeSensitivityScope
+existingPureModeScope = PureMode.canonicalPureModeSensitivityScope
+
+existingCanonicalStressCompilerBoundary : CanonicalStress.SchutzholdR144CompilerBoundary
+existingCanonicalStressCompilerBoundary =
+  CanonicalStress.canonicalSchutzholdR144CompilerBoundary
+
 ------------------------------------------------------------------------
--- Terminal frontier after the source-law max-cut.
+-- Terminal frontier after solving the selected-sector mathematics.
 ------------------------------------------------------------------------
 
 record SchutzholdTerminalFrontier : Set where
   constructor schutzhold-terminal-frontier
   field
     sourceEquationsFormalised : Bool
+    specializedEq3MetricVariationDerived : Bool
+    selectedStressPairingDerived : Bool
     sourceEq5WorkLawFormalised : Bool
+    pureModeAverageTransferDerived : Bool
     sourceEq7FrequencyLawFormalised : Bool
-    sourceDelayedPhaseLawFormalised : Bool
+    differentialFrequencyShiftDerived : Bool
+    delayedRelativePhaseDerived : Bool
+    coherentHalfCycleAccumulationDerived : Bool
     directionPhaseReversalFormalised : Bool
     maxwellFieldReused : Bool
     metricDependentHodgeReused : Bool
+    canonicalMetricStressRepresentationReused : Bool
     r144StressVariationReused : Bool
     weakFieldGWInterfaceReused : Bool
     planckFrequencyAuthorityReused : Bool
     antigravityResidualComparatorReused : Bool
+    executablePaperScaleBenchmarkAdded : Bool
 
     duplicateMaxwellNeeded : Bool
     duplicateHodgeNeeded : Bool
     duplicateSIConstantsNeeded : Bool
+    duplicateStressTheoremNeededForSelectedSector : Bool
     duplicateWorkLawNeeded : Bool
     duplicateFrequencyPhaseLawNeeded : Bool
     duplicateAntigravityComparatorNeeded : Bool
 
-    hilbertStressVariationPhysicalWeldOpen : Bool
-    gwToR144MetricTangentPhysicalWeldOpen : Bool
-    emStressToR144InsertionPhysicalWeldOpen : Bool
-    renormalizedDirectionalExpectationNumericsOpen : Bool
-    interactionSpacetimeIntegralCalibrationOpen : Bool
-    concreteLaserFrequencyCalibrationOpen : Bool
-    concreteDelayLineCalibrationOpen : Bool
-    apparatusCalibrationAndNoiseModelOpen : Bool
+    physicalGWToCanonicalMetricPerturbationIdentificationOpen : Bool
+    canonicalPerturbationAdmissibilityForActualPulseOpen : Bool
+    actualPulseModePurityAndDirectionalExpectationCalibrationOpen : Bool
+    actualTimingAndReflectionCoherenceOpen : Bool
+    actualLaserFrequencyMetrologyReceiptOpen : Bool
+    actualDelayLineStorageLossCalibrationOpen : Bool
+    technicalNoiseAndSystematicsModelOpen : Bool
+    empiricalCoincidenceObservationOpen : Bool
 
 canonicalSchutzholdTerminalFrontier : SchutzholdTerminalFrontier
 canonicalSchutzholdTerminalFrontier =
   schutzhold-terminal-frontier
-    true true true true true true true true true true true
-    false false false false false false
+    true true true true true true true true true true
+    true true true true true true true true
+    false false false false false false false
     true true true true true true true true
