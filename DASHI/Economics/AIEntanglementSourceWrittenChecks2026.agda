@@ -10,6 +10,8 @@ import DASHI.Economics.AIOpenWeightMarketTransition2026Exact as OpenTransition
 import DASHI.Economics.AIGeometricMarketStressOperator2026Exact as Geometry
 import DASHI.Economics.AIPolicyBackstopCommercialMoat2026Exact as Policy
 import DASHI.Economics.AIAntitrustCompetitiveIndependence2026Exact as Antitrust
+import DASHI.Economics.AIMultiplexSourceWeightedGraph2026Exact as WeightedGraph
+import DASHI.Economics.AITradeRealizationCapitalAuthorityCrossPollination2026Exact as Authority
 
 ------------------------------------------------------------------------
 -- Source-written reduction checks.  These are deliberately small `refl`
@@ -63,3 +65,25 @@ antitrustLegalConclusionStillOpen :
     Antitrust.candidateHyperscalerLabEntanglement2026
   ≡ false
 antitrustLegalConclusionStillOpen = refl
+
+weightedGraphTerminalCoverageStillOpen :
+  WeightedGraph.terminalCoverageComplete
+    WeightedGraph.currentOctober2026WeightedGraphCut
+  ≡ false
+weightedGraphTerminalCoverageStillOpen = refl
+
+weightedGraphConcentrationCoverageStillOpen :
+  WeightedGraph.concentrationCoverageComplete
+    WeightedGraph.currentOctober2026WeightedGraphCut
+  ≡ false
+weightedGraphConcentrationCoverageStillOpen = refl
+
+reportedRevenueStillNotTerminalAuthority :
+  Authority.classifyAICapitalPerformance false true true true
+  ≡ Authority.noTerminalPayerAuthority
+reportedRevenueStillNotTerminalAuthority = refl
+
+allCapitalBoundariesDischargedClassifiesCertified :
+  Authority.classifyAICapitalPerformance true true true true
+  ≡ Authority.realizedCapitalRecoveryCertified
+allCapitalBoundariesDischargedClassifiesCertified = refl
