@@ -115,6 +115,9 @@ singleSourceVacuumStaticRouteConstructed = true
 twoDistinctSourceVacuumScalesRequired : Bool
 twoDistinctSourceVacuumScalesRequired = false
 
+doubleWellRequiredForPreferredStaticRoute : Bool
+doubleWellRequiredForPreferredStaticRoute = false
+
 rawEq223ResponseToPinnedR136IsIndependentCrossCheck : Bool
 rawEq223ResponseToPinnedR136IsIndependentCrossCheck = true
 
@@ -168,6 +171,7 @@ record AntigravityABCDEFrontier : Set where
     sourceNativeExactFixtureValuesRequired : Bool
     twoDistinctSourceVacuumScalesRequired : Bool
     singleSourceAmplitudeAdmissibilityStillOpen : Bool
+    sourceActionReadoutToPhysicalMetricAmplitudeStillOpen : Bool
     sourceNativePinnedStressWeldStillOpen : Bool
     rawEq223ResponseToPinnedR136StillOpen : Bool
     sourceNativeDoubleWellDynamicsStillOpen : Bool
@@ -183,7 +187,7 @@ canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
     true true true true true true true true true true true true true true true true true true true true true true true true true true true
-    false false false false true false true true true true true true true true true
+    false false false false true true false true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -199,6 +203,7 @@ record AntigravityABCDEPromotionBoundary : Set where
     singleSourceVacuumStaticCompilerClosed : Bool
     pinnedR136RequiredForStaticGeometryConstruction : Bool
     twoDistinctSourceVacuumScalesRequired : Bool
+    doubleWellRequiredForPreferredStaticRoute : Bool
     concreteMechanicalObservableProjectionClosed : Bool
     kottlerAmplitudeToMetricPerturbationClosed : Bool
     sourceNativeVacuumEnergySequenceExists : Bool
@@ -206,6 +211,7 @@ record AntigravityABCDEPromotionBoundary : Set where
     sourceNativeToRawAncestryClosed : Bool
     exactFixtureVacuumValuesRequired : Bool
     singleSourceAmplitudeAdmissibilityClosed : Bool
+    actionReadoutToPhysicalMetricAmplitudeClosed : Bool
     rawEq223ResponseToPinnedR136Closed : Bool
     dynamicSchutzholdTTReadoutForDeviceClosed : Bool
     fullPhysicalDeviceDemonstrated : Bool
@@ -216,5 +222,5 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true true true true false false
-    true true true true true false false false false false false false true
+    true true true true true true true true true false false false
+    true true true true true false false false false false false false false true
