@@ -8,6 +8,7 @@ open import Data.Rational.Base using (1ℚ; -_)
 import DASHI.Physics.Foundations.GRQFTLocalizedAnisotropicRepulsiveShellExact as Source
 import DASHI.Physics.Foundations.CMP119AntigravityTimelikeEnergySharpActiveStressCriterionExact as Active
 import DASHI.Physics.Foundations.PositiveGActiveStressWeakFieldMetricExact as Metric
+import DASHI.Physics.Foundations.PositiveGAnisotropicTOVConservationExact as TOV
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
@@ -25,6 +26,9 @@ stageBActiveStressCriterion = Source.boundaryActiveStressIsNegativeOne
 
 stageCWeakFieldMetricSolve : Metric.WeakFieldMetricSolveBoundary
 stageCWeakFieldMetricSolve = Metric.canonicalWeakFieldMetricSolveBoundary
+
+stageCNonlinearConservationAudit : TOV.AnisotropicTOVConservationBoundary
+stageCNonlinearConservationAudit = TOV.canonicalAnisotropicTOVConservationBoundary
 
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
@@ -44,6 +48,7 @@ record AntigravityABCDEFrontier : Set where
     stageCWeakFieldExteriorSolved : Bool
     stageCWeakFieldSurfaceMatched : Bool
     stageCOutwardAccelerationDerived : Bool
+    stageCNonlinearConservationAudited : Bool
     stageDFourChannelProjectionCompiled : Bool
     stageESameObjectComparatorCompiled : Bool
     oppositeCouplingNotPromotedToOppositeGeometry : Bool
@@ -57,13 +62,14 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true
+    true true true true true true true true true true
     true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
   field
     weakFieldMathematicalLaneClosed : Bool
+    nonlinearCurrentShellAlreadyConserved : Bool
     fullPhysicalDeviceDemonstrated : Bool
     weightOnlyObservationProvesMetric : Bool
     opticalOnlyObservationProvesAntigravity : Bool
@@ -73,4 +79,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true false false false true true
+    true false false false false true true
