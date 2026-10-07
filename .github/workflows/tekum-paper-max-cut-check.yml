@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - research/tekum-balanced-ternary-20261002
+      - agent/tekum-prop4-source-order-maxcut-20261007
   pull_request:
     paths:
       - 'DASHI/ComputerScience/Tekum*.agda'
@@ -68,11 +69,20 @@ jobs:
               DASHI/ComputerScience/TekumSuccessorCarrySplitExact.agda
               DASHI/ComputerScience/TekumRegimeSuccessorExact.agda
               DASHI/ComputerScience/TekumFractionSuccessorExact.agda
+              DASHI/ComputerScience/TekumFractionOrderExact.agda
               DASHI/ComputerScience/TekumMonotoneMagnitudeExact.agda
               DASHI/ComputerScience/TekumPositiveSourceSuccessorAnchorExact.agda
               DASHI/ComputerScience/TekumSourceOrderExact.agda
               DASHI/ComputerScience/TekumParsedAnchorListExact.agda
               DASHI/ComputerScience/TekumParsedAdjacentCarryExtractExact.agda
+              DASHI/ComputerScience/TekumParsedAnchorCodeExact.agda
+              DASHI/ComputerScience/TekumParsedAnchorBlockOrderExact.agda
+              DASHI/ComputerScience/TekumParsedPayloadOrderExact.agda
+              DASHI/ComputerScience/TekumParsedAnchorStrictOrderExact.agda
+              DASHI/ComputerScience/TekumProposition4PositiveGlobalExact.agda
+              DASHI/ComputerScience/TekumProposition4NegativeGlobalExact.agda
+              DASHI/ComputerScience/TekumSpecialIntegerOrderExact.agda
+              DASHI/ComputerScience/TekumOrderedSourceValueExact.agda
               DASHI/ComputerScience/TekumMonotonicityExact.agda
               DASHI/ComputerScience/TekumProposition4PositiveChainExact.agda
               DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
