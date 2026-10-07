@@ -32,6 +32,15 @@ b4DefectBipartiteClosed = F.b4DefectBipartiteSameObjectClosedIsTrue
 b4DefectAggregateClosed : F.b4DefectFourAggregateNormalFormClosed ≡ true
 b4DefectAggregateClosed = F.b4DefectFourAggregateNormalFormClosedIsTrue
 
+b4DefectVectorClosed : F.b4DefectOneVectorNormalFormClosed ≡ true
+b4DefectVectorClosed = F.b4DefectOneVectorNormalFormClosedIsTrue
+
+b4DefectSharpEnvelopeClosed : F.b4DefectSharpVectorYoungClosed ≡ true
+b4DefectSharpEnvelopeClosed = F.b4DefectSharpVectorYoungClosedIsTrue
+
+b4DefectPhysicalBudgetOpen : F.b4DefectPhysicalVectorBudgetClosed ≡ false
+b4DefectPhysicalBudgetOpen = F.b4DefectPhysicalVectorBudgetClosedIsFalse
+
 b4DefectOpen : F.b4DefectRemainderClosed ≡ false
 b4DefectOpen = F.b4DefectRemainderClosedIsFalse
 
