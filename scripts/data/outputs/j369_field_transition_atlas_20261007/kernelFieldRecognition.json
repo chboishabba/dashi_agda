@@ -16,23 +16,63 @@
       "chosen_field_multiplication_runtime_verified": true,
       "coordinate_swap_changes_chosen_multiplication": true,
       "coordinate_swap_preserves_addition_and_negation": true,
-      "frobenius_orbits": {"1": 3, "2": 3, "4": 18},
+      "frobenius_orbits": {
+        "1": 3,
+        "2": 3,
+        "4": 18
+      },
       "full_recognition_paid": false,
       "gf9_subfield_equals_frobenius2_fixed_set": true,
       "gf9_subfield_is_naive_prefix_k2": false,
       "gf9_subfield_linear_image_size": 9,
       "kernel_coordinate_object_map_paid": true,
-      "modulus_low_to_high": [1, 0, 1, 1, 1],
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
       "multiplication_noncanonicity_witness": {
-        "left": [0, 0, 0, 1],
-        "original_product": [0, 1, 2, 1],
-        "right": [0, 0, 0, 1],
-        "swap_conjugated_product": [1, 0, 2, 1]
+        "left": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "original_product": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "right": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "swap_conjugated_product": [
+          1,
+          0,
+          2,
+          1
+        ]
       },
-      "negation_orbits_all": {"1": 1, "2": 40},
-      "negation_orbits_nonzero": {"2": 40},
+      "negation_orbits_all": {
+        "1": 1,
+        "2": 40
+      },
+      "negation_orbits_nonzero": {
+        "2": 40
+      },
       "order": 81,
-      "primitive_element": [0, 0, 1, 1],
+      "primitive_element": [
+        0,
+        0,
+        1,
+        1
+      ],
       "primitive_order": 80,
       "t5_chosen_subfield_lattice_object_map_paid": true
     },
@@ -42,20 +82,65 @@
       "chosen_field_multiplication_runtime_verified": true,
       "coordinate_swap_changes_chosen_multiplication": true,
       "coordinate_swap_preserves_addition_and_negation": true,
-      "frobenius_orbits": {"1": 3, "5": 48},
+      "frobenius_orbits": {
+        "1": 3,
+        "5": 48
+      },
       "full_recognition_paid": false,
       "kernel_coordinate_object_map_paid": true,
-      "modulus_low_to_high": [1, 0, 0, 0, 2, 1],
+      "modulus_low_to_high": [
+        1,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
       "multiplication_noncanonicity_witness": {
-        "left": [0, 0, 0, 0, 1],
-        "original_product": [2, 0, 0, 0, 1],
-        "right": [0, 1, 0, 0, 0],
-        "swap_conjugated_product": [0, 0, 0, 0, 1]
+        "left": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "original_product": [
+          2,
+          0,
+          0,
+          0,
+          1
+        ],
+        "right": [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "swap_conjugated_product": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
       },
-      "negation_orbits_all": {"1": 1, "2": 121},
-      "negation_orbits_nonzero": {"2": 121},
+      "negation_orbits_all": {
+        "1": 1,
+        "2": 121
+      },
+      "negation_orbits_nonzero": {
+        "2": 121
+      },
       "order": 243,
-      "primitive_element": [0, 0, 0, 0, 2],
+      "primitive_element": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
       "primitive_order": 242
     },
     "6": {
@@ -64,20 +149,73 @@
       "chosen_field_multiplication_runtime_verified": true,
       "coordinate_swap_changes_chosen_multiplication": true,
       "coordinate_swap_preserves_addition_and_negation": true,
-      "frobenius_orbits": {"1": 3, "2": 3, "3": 8, "6": 116},
+      "frobenius_orbits": {
+        "1": 3,
+        "2": 3,
+        "3": 8,
+        "6": 116
+      },
       "full_recognition_paid": false,
       "kernel_coordinate_object_map_paid": true,
-      "modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
+      "modulus_low_to_high": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
       "multiplication_noncanonicity_witness": {
-        "left": [0, 0, 0, 0, 0, 1],
-        "original_product": [1, 2, 0, 1, 0, 0],
-        "right": [0, 0, 0, 0, 0, 1],
-        "swap_conjugated_product": [2, 1, 0, 1, 0, 0]
+        "left": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "original_product": [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0
+        ],
+        "right": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "swap_conjugated_product": [
+          2,
+          1,
+          0,
+          1,
+          0,
+          0
+        ]
       },
-      "negation_orbits_all": {"1": 1, "2": 364},
-      "negation_orbits_nonzero": {"2": 364},
+      "negation_orbits_all": {
+        "1": 1,
+        "2": 364
+      },
+      "negation_orbits_nonzero": {
+        "2": 364
+      },
       "order": 729,
-      "primitive_element": [0, 0, 0, 0, 1, 1],
+      "primitive_element": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
       "primitive_order": 728
     }
   },
@@ -95,7 +233,11 @@
     "generic_program_length_dynamics_paid": true,
     "lane_count": 15,
     "reason": "Instruction replay reconstructs prime identity, valuation and invariant units; program/execution/normal-form lengths are now mechanically derived. Only address369, zero-residual direction and residual-witness-length dynamics remain external.",
-    "remaining_metadata_fields": ["address369", "zeroApproachResidual", "residualWitnessLength"],
+    "remaining_metadata_fields": [
+      "address369",
+      "zeroApproachResidual",
+      "residualWitnessLength"
+    ],
     "residual_witness_length_dynamics_recovered": false,
     "rich_machine_compiler_given_residual_metadata_paid": true,
     "zero_residual_dynamics_recovered": false
@@ -103,7 +245,10 @@
   "heisenberg_coordinate_swap_preserves_dot6_exhaustive": true,
   "row_major_12_vector_scan": {
     "matching_12_vector_columns": [],
-    "minimum_vector_columns": [173, 189],
+    "minimum_vector_columns": [
+      173,
+      189
+    ],
     "minimum_vector_count": 196,
     "node_count": 1330
   }
