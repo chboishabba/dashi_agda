@@ -35,6 +35,7 @@ import DASHI.Analysis.CollatzSyracuseParityBernoulliExact
 import DASHI.Analysis.CollatzSyracuseParityDescentEventExact
 import DASHI.Analysis.CollatzSyracuseFiveEightTailExact
 import DASHI.Analysis.CollatzSyracuseAlignedBlockDescentExact
+import DASHI.Analysis.CollatzSyracuseAlignedBlockTailExact
 import DASHI.Analysis.CollatzSyracusePrefixAbsorptionWeldExact
 import DASHI.Analysis.CollatzSyracuseUniformHittingBlockExact
 import DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact
@@ -79,6 +80,7 @@ data CollatzCut : Set where
   C12c-exponentialBadWordTail : CollatzCut
   C12d-prefixAbsorption : CollatzCut
   C13a-alignedBlockLiteralDescent : CollatzCut
+  C13b-alignedBlockFiniteTail : CollatzCut
   C13-integerStoppingTransport : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
@@ -114,6 +116,7 @@ cutStatus C12b-exactBadWordNumerator = proved
 cutStatus C12c-exponentialBadWordTail = proved
 cutStatus C12d-prefixAbsorption = conditionalOnHypothesis
 cutStatus C13a-alignedBlockLiteralDescent = proved
+cutStatus C13b-alignedBlockFiniteTail = proved
 cutStatus C13-integerStoppingTransport = conditionalOnHypothesis
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
@@ -175,6 +178,10 @@ alignedBlockLiteralDescentPaid :
   cutStatus C13a-alignedBlockLiteralDescent ≡ proved
 alignedBlockLiteralDescentPaid = refl
 
+alignedBlockFiniteTailPaid :
+  cutStatus C13b-alignedBlockFiniteTail ≡ proved
+alignedBlockFiniteTailPaid = refl
+
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
 oldRelationSpectralConcentrationNotCriticalPath = refl
@@ -196,6 +203,7 @@ record MaxCutBoundary : Set where
     affineCorrectionBoundPaidHere : Nat
     parityCountDescentCompilerPaidHere : Nat
     exactBadWordNumeratorPaidHere : Nat
+    alignedBlockFiniteTailPaidHere : Nat
     unalignedBoundaryCountingStillSeparate : Nat
     exponentialTailStillSeparate : Nat
     logWeightedSamplingStillSeparate : Nat
@@ -203,4 +211,4 @@ record MaxCutBoundary : Set where
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 0 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 0 1 1
