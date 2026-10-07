@@ -7,6 +7,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloFederationCostComparisonExact as Comparison
 import DASHI.Governance.OccupyMeetingLevelProcessPanelExact as Panel
 import DASHI.Governance.OccupyPseudonymousNetworkFeaturesExact as Network
+import DASHI.Governance.OccupyOWSDevelopmentInterfaceProcessPanelExact as InterfacePanel
 import DASHI.Governance.OccupyPanelMissingnessAuditExact as Missingness
 import DASHI.Governance.OccupyDevelopmentDiagnosticsExact as Diagnostics
 import DASHI.Governance.OccupyHoldoutPromotionGateExact as HoldoutGate
@@ -15,7 +16,7 @@ import DASHI.Governance.OccupyHoldoutPromotionGateExact as HoldoutGate
 -- OCCUPY -> BOLO'BOLO COST-MODEL CALIBRATION SOCKET.
 --
 -- Occupy is used here as an empirical calibration / falsification source for
--- DASHI's counterfactual model.  It is not treated as proof that bolo'bolo
+-- DASHI's counterfactual model. It is not treated as proof that bolo'bolo
 -- works, nor are OWS process observables silently reinterpreted as the cost
 -- components required by the federation win theorem.
 ------------------------------------------------------------------------
@@ -51,8 +52,8 @@ boundaryOverheadSocket : CalibrationSocket
 boundaryOverheadSocket =
   calibrationSocket
     boundaryOverheadTerm
-    "boundary/inter-community coordination observables"
-    false
+    "development-only inter-group / liaison / spokes / working-group lexical process surface"
+    true
     false
     false
 
@@ -60,8 +61,8 @@ delegationOverheadSocket : CalibrationSocket
 delegationOverheadSocket =
   calibrationSocket
     delegationOverheadTerm
-    "delegation/reportback/recall process observables"
-    false
+    "development-only report-back / delegate / spokes lexical process surface"
+    true
     false
     false
 
@@ -69,7 +70,7 @@ unresolvedDependencySocket : CalibrationSocket
 unresolvedDependencySocket =
   calibrationSocket
     unresolvedDependencyTerm
-    "tabled/unresolved/process-strain observations"
+    "development-only tabled / mediation plus existing block/process-strain observables"
     true
     false
     false
@@ -101,6 +102,7 @@ record BoloOccupyCalibrationPacket : Set where
   field
     meetingPanel : Panel.MeetingLevelProcessPanel
     networkRows : List Network.NetworkFeatureRow
+    interfaceProcessRows : List InterfacePanel.InterfaceProcessRow
     developmentDiagnostics : List Diagnostics.DurationModelDiagnostic
     calibrationSockets : List CalibrationSocket
 
@@ -111,6 +113,7 @@ canonicalBoloOccupyCalibrationPacket =
   boloOccupyCalibrationPacket
     Panel.canonicalMeetingLevelProcessPanel
     Network.canonicalNetworkFeatureRows
+    InterfacePanel.canonicalInterfaceProcessRows
     Diagnostics.canonicalDurationDiagnostics
     canonicalCalibrationSockets
 
@@ -123,6 +126,9 @@ record BoloOccupyCalibrationBoundary : Set where
   field
     meetingLevelProcessEvidenceAvailable : Bool
     pseudonymousNetworkEvidenceAvailable : Bool
+    boundaryOverheadObservableSurfaceAvailable : Bool
+    delegationOverheadObservableSurfaceAvailable : Bool
+    unresolvedDependencyObservableSurfaceAvailable : Bool
     documentaryMissingnessAudited : Bool
     currentDurationPredictorPassesDevelopmentGate : Bool
     protectedHoldoutMayBeConsumedNow : Bool
@@ -133,6 +139,7 @@ record BoloOccupyCalibrationBoundary : Set where
     unresolvedDependencyOverheadIdentified : Bool
     documentaryCompletenessProved : Bool
 
+    interfaceLexicalCountsIdentifyCostBounds : Bool
     occupyObservablesEqualCoordinationCostTerms : Bool
     occupyAutomaticallyValidatesBoloArchitecture : Bool
     sourceRegimesSilentlyPooled : Bool
@@ -147,6 +154,10 @@ canonicalBoloOccupyCalibrationBoundary =
     true
     true
     true
+    true
+    true
+    true
+    false
     false
     false
     false
@@ -191,6 +202,6 @@ canonicalBoloOccupyCalibrationReceipt =
     "Occupy calibration socket for bolo'bolo counterfactual comparison"
     "DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact"
     "canonicalBoloOccupyCalibrationBoundary / canonicalCalibrationObligations"
-    "recasts the existing Occupy corpus, meeting-level process panel, pseudonymous network features, missingness audit and development diagnostics as calibration/falsification inputs for the DASHI bolo-federation cost model, with separate sockets for removed global coupling, boundary overhead, delegation overhead, unresolved dependencies and documentary completeness"
-    "available observables are not definitionally cost terms; no required cost component is yet identified, the current lexical duration models fail their development gate, protected holdout access remains blocked, and the RemovalPaysOverhead win condition is therefore not empirically instantiated"
+    "recasts the Occupy corpus, meeting-level process panel, pseudonymous network features and a new development-only interface-process lexical panel as calibration/falsification inputs for the DASHI bolo-federation model; observable surfaces are now present for removed coupling, boundary/interface activity, delegation/reportback activity, unresolved/process-strain activity and documentary completeness"
+    "the newly exposed report-back/delegate/spokes/liaison/inter-group/working-group/mediation/tabled lexical measurements are not semantic overhead events or cost bounds; no required cost component is identified, current duration models fail their development gate, protected holdout access remains blocked, and the federation win condition is not empirically instantiated"
     "agda -i . DASHI/Governance/BoloBoloOccupyCalibrationBridgeRegression.agda"
