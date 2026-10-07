@@ -56,6 +56,11 @@ multiplicativeOneRight neg = refl
 multiplicativeOneRight zer = refl
 multiplicativeOneRight pos = refl
 
+multiplicativeZeroRight : (x : Trit) → x ⊗₃ zer ≡ zer
+multiplicativeZeroRight neg = refl
+multiplicativeZeroRight zer = refl
+multiplicativeZeroRight pos = refl
+
 minusOneActsByInverse : (x : Trit) → neg ⊗₃ x ≡ inv x
 minusOneActsByInverse neg = refl
 minusOneActsByInverse zer = refl
@@ -247,7 +252,7 @@ scaleOneIdentity (x ∷ᵥ xs)
 scaleZeroVector : {d : Nat} → (a : Trit) → scaleKernel a zeroKernel ≡ zeroKernel
 scaleZeroVector {zero} a = refl
 scaleZeroVector {suc d} a
-  rewrite scaleZeroVector {d} a = refl
+  rewrite multiplicativeZeroRight a | scaleZeroVector {d} a = refl
 
 scaleZeroScalar : {d : Nat} → (x : Kernel d) → scaleKernel zer x ≡ zeroKernel
 scaleZeroScalar []ᵥ = refl
