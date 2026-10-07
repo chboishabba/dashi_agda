@@ -2,10 +2,6 @@ module DASHI.NumberTheory.Collatz.SyracuseNatModCongruenceExact where
 
 ------------------------------------------------------------------------
 -- SMALL NATURAL-NUMBER MODULO CONGRUENCE COMPILER
---
--- This is deliberately generic arithmetic.  It packages the standard-library
--- remainder distribution laws so the Syracuse odd branch can be written as a
--- unit-cancellation argument instead of bespoke remainder manipulation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -85,9 +81,67 @@ addRightCongruence :
 addRightCongruence relation = addCongruence relation modRefl
 
 ------------------------------------------------------------------------
--- Unit cancellation.
+-- Translation cancellation.
 --
--- If u*v = 1 modulo N, then multiplication by v is injective modulo N.
+-- Supplying an additive inverse of the translated term turns a congruence of
+-- `left + addend` and `right + addend` back into a congruence of left/right.
+------------------------------------------------------------------------
+
+addCancelRightWithInverse :
+  {modulus addend undo left right : Nat} →
+  {{_ : NonZero modulus}} →
+  (addend + undo) ≈[ modulus ] 0 →
+  (left + addend) ≈[ modulus ] (right + addend) →
+  left ≈[ modulus ] right
+addCancelRightWithInverse {modulus} {addend} {undo} {left} {right} inverse relation =
+  let
+    shifted :
+      ((left + addend) + undo)
+      ≈[ modulus ]
+      ((right + addend) + undo)
+    shifted = addRightCongruence relation
+
+    leftAssoc :
+      ((left + addend) + undo)
+      ≈[ modulus ]
+      (left + (addend + undo))
+    leftAssoc = fromEquality (NatP.+-assoc left addend undo)
+
+    rightAssoc :
+      ((right + addend) + undo)
+      ≈[ modulus ]
+      (right + (addend + undo))
+    rightAssoc = fromEquality (NatP.+-assoc right addend undo)
+
+    leftInverse :
+      (left + (addend + undo)) ≈[ modulus ] (left + 0)
+    leftInverse = addCongruence modRefl inverse
+
+    rightInverse :
+      (right + (addend + undo)) ≈[ modulus ] (right + 0)
+    rightInverse = addCongruence modRefl inverse
+
+    leftNormalize : (left + 0) ≈[ modulus ] left
+    leftNormalize = fromEquality (NatP.+-identityʳ left)
+
+    rightNormalize : (right + 0) ≈[ modulus ] right
+    rightNormalize = fromEquality (NatP.+-identityʳ right)
+
+    leftToShifted : left ≈[ modulus ] ((left + addend) + undo)
+    leftToShifted =
+      modSym
+        (modTrans leftAssoc
+          (modTrans leftInverse leftNormalize))
+
+    shiftedToRight : ((right + addend) + undo) ≈[ modulus ] right
+    shiftedToRight =
+      modTrans rightAssoc
+        (modTrans rightInverse rightNormalize)
+  in
+  modTrans leftToShifted (modTrans shifted shiftedToRight)
+
+------------------------------------------------------------------------
+-- Multiplicative unit cancellation.
 ------------------------------------------------------------------------
 
 unitCancelLeft :
@@ -146,7 +200,8 @@ record NatModCongruenceBoundary : Set where
   field
     additionCongruenceOwned : Nat
     multiplicationCongruenceOwned : Nat
+    translationCancellationOwned : Nat
     unitCancellationOwned : Nat
 
 canonicalNatModCongruenceBoundary : NatModCongruenceBoundary
-canonicalNatModCongruenceBoundary = natModCongruenceBoundary 1 1 1
+canonicalNatModCongruenceBoundary = natModCongruenceBoundary 1 1 1 1
