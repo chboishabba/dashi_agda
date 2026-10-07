@@ -15,6 +15,7 @@ import DASHI.Physics.Plasma.CommercialFusionPlantObjectiveExact
 import DASHI.Physics.Plasma.GreenwaldDensityOperatingEnvelopeBidiExact
 import DASHI.Physics.Plasma.MagneticConfinementSOTARegistry20261006
 import DASHI.Physics.Plasma.CommercialConfinementParetoHyperfabricExact
+import DASHI.Physics.Plasma.CommercialConfinementSearchArithmeticExact
 import DASHI.Physics.Plasma.ProgrammableTokamakStellaratorHybridExact
 import DASHI.Physics.Plasma.TrappedParticleInvariantReferenceExact
 import DASHI.Physics.Plasma.MobiusFrameBounceCancellationExact
@@ -47,6 +48,7 @@ import DASHI.Physics.Plasma.ToroidalZeroBounceAdmissibleConeSearchExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceContinuationExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceGeometryParetoExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceAdmissibleSearchMaxCutExact
+import DASHI.Physics.Plasma.Ternary27SearchEverything
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
