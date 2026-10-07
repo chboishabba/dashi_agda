@@ -8,13 +8,17 @@ module DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact where
 -- strictly smaller positive integer, then well-founded induction on Nat proves
 -- that every x reaches 1.
 --
--- The existing affine/parity theorem gives a sufficient producer interface:
--- choose m with 3^m <= x and prove the actual parity word satisfies
+-- The existing affine/parity theorem gives one sufficient (but deliberately
+-- stronger) producer interface: choose m with 3^m <= x and prove the actual
+-- parity word satisfies
 --
 --   2 * 3^(ones word) <= 2^m.
 --
--- Finite-density / Chernoff tails do not inhabit this producer because they do
--- not eliminate every exceptional start.  That distinction is the max-cut.
+-- That coarse sufficient interface is not asserted to exist for every start;
+-- small literal starts such as x = 3 already show why the terminal source must
+-- remain the weaker, exact StrictDescentSource.  Finite-density / Chernoff tails
+-- likewise do not inhabit the universal source because they do not eliminate
+-- every exceptional start.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -54,6 +58,9 @@ record LiteralStrictDescentSource : Set₁ where
 
 open LiteralStrictDescentSource public
 
+-- Strong sufficient sub-route.  This is intentionally not identified with the
+-- terminal source: the affine correction estimate can be too coarse for a
+-- particular small start even when that start genuinely reaches a lower value.
 record GoodPrefixDescentSource : Set₁ where
   field
     chosenHorizon :
@@ -141,9 +148,9 @@ record UniversalStoppingBoundary : Set where
   field
     iterateCompositionOwned : Nat
     wellFoundedCompilerOwned : Nat
-    affineGoodPrefixCompilerOwned : Nat
+    affineGoodPrefixSufficientCompilerOwned : Nat
     finiteDensityTailEliminatesEveryException : Nat
-    allStartsGoodPrefixProducerOwned : Nat
+    allStartsLiteralStrictDescentProducerOwned : Nat
 
 canonicalUniversalStoppingBoundary : UniversalStoppingBoundary
 canonicalUniversalStoppingBoundary =
