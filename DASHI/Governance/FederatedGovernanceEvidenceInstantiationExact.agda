@@ -7,9 +7,13 @@ import DASHI.Governance.BoloBoloPrimarySourceAtlasExact as Bolo
 import DASHI.Governance.BoloBoloIncidenceCompressionExact as Compression
 import DASHI.Governance.BoloBoloIncidenceCompressionCostBridgeExact as CompressionBridge
 import DASHI.Governance.BoloBoloRobustCostBoundsExact as Robust
+import DASHI.Governance.BoloBoloNestedCostBoundCompilerExact as ComponentCompiler
+import DASHI.Governance.BoloBoloPracticalSignificanceExact as Significance
+import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerExact as LinearCompiler
 import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact as PairedExperiment
 import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact as Promotion
+import DASHI.Governance.BoloBoloModelClassRobustnessExact as ModelRobustness
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact as Occupy
 import DASHI.Governance.OccupyParticipantPseudonymisationExact as Privacy
 import DASHI.Governance.OccupyArchivalIncidenceEvidenceExact as Archive
@@ -69,9 +73,14 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     boloCompressionBoundary : Compression.IncidenceCompressionBoundary
     boloCompressionCostBridgeBoundary : CompressionBridge.CompressionCostBridgeBoundary
     robustBoloBoundTargets : Robust.NestedCostBoundTargets
+    nestedCostBoundCompilerBoundary : ComponentCompiler.NestedCostBoundCompilerBoundary
+    practicalSignificanceBoundary : Significance.PracticalSignificanceBoundary
+    linearCalibrationCompilerBoundary : LinearCompiler.LinearCalibrationCompilerBoundary
     boloTransferBoundary : Transfer.CalibrationTransferBoundary
     directBoloExperimentMapping : PairedExperiment.CounterfactualTermMappingPlan
     boloPromotionBoundary : Promotion.EmpiricalPromotionBoundary
+    boloMeaningfulPromotionBoundary : Promotion.MeaningfulPromotionBoundary
+    boloModelClassRobustnessBoundary : ModelRobustness.ModelClassRobustnessBoundary
 
     participantPrivacyBoundary : Privacy.PseudonymisationBoundary
     occupyCorpusReceipt : Corpus.OccupyFilesCorpusReceipt
@@ -124,9 +133,14 @@ record FederatedGovernanceEvidenceInstantiation : Set where
     incidenceCompressionScenarioPresent : Bool
     incidenceCompressionCostBridgePresent : Bool
     robustCostBoundTheoremPresent : Bool
+    componentwiseCostBoundCompilerPresent : Bool
+    practicalSignificanceGatePresent : Bool
+    linearCalibrationBoundCompilerPresent : Bool
     calibrationTransferFirewallPresent : Bool
     directFlatNestedExperimentDesignPresent : Bool
     empiricalBoloPromotionGatePresent : Bool
+    meaningfulBoloPromotionGatePresent : Bool
+    modelClassRobustnessGatePresent : Bool
     consensusBurdenBenefitPluralEvidencePresent : Bool
     generalGroupDecisionQuantitativeEvidencePresent : Bool
     recallableConfederalCoordinationEvidencePresent : Bool
@@ -140,9 +154,14 @@ canonicalFederatedGovernanceEvidenceInstantiation = record
   ; boloCompressionBoundary = Compression.canonicalIncidenceCompressionBoundary
   ; boloCompressionCostBridgeBoundary = CompressionBridge.canonicalCompressionCostBridgeBoundary
   ; robustBoloBoundTargets = Robust.canonicalNestedCostBoundTargets
+  ; nestedCostBoundCompilerBoundary = ComponentCompiler.canonicalNestedCostBoundCompilerBoundary
+  ; practicalSignificanceBoundary = Significance.canonicalPracticalSignificanceBoundary
+  ; linearCalibrationCompilerBoundary = LinearCompiler.canonicalLinearCalibrationCompilerBoundary
   ; boloTransferBoundary = Transfer.canonicalCalibrationTransferBoundary
   ; directBoloExperimentMapping = PairedExperiment.canonicalCounterfactualTermMappingPlan
   ; boloPromotionBoundary = Promotion.canonicalEmpiricalPromotionBoundary
+  ; boloMeaningfulPromotionBoundary = Promotion.canonicalMeaningfulPromotionBoundary
+  ; boloModelClassRobustnessBoundary = ModelRobustness.canonicalModelClassRobustnessBoundary
   ; participantPrivacyBoundary = Privacy.canonicalPseudonymisationBoundary
   ; occupyCorpusReceipt = Corpus.canonicalOccupyFilesCorpusReceipt
   ; occupyOWSManifest = Manifest.canonicalOWSRecords
@@ -193,9 +212,14 @@ canonicalFederatedGovernanceEvidenceInstantiation = record
   ; incidenceCompressionScenarioPresent = true
   ; incidenceCompressionCostBridgePresent = true
   ; robustCostBoundTheoremPresent = true
+  ; componentwiseCostBoundCompilerPresent = true
+  ; practicalSignificanceGatePresent = true
+  ; linearCalibrationBoundCompilerPresent = true
   ; calibrationTransferFirewallPresent = true
   ; directFlatNestedExperimentDesignPresent = true
   ; empiricalBoloPromotionGatePresent = true
+  ; meaningfulBoloPromotionGatePresent = true
+  ; modelClassRobustnessGatePresent = true
   ; consensusBurdenBenefitPluralEvidencePresent = true
   ; generalGroupDecisionQuantitativeEvidencePresent = true
   ; recallableConfederalCoordinationEvidencePresent = true
@@ -241,18 +265,29 @@ record FederatedGovernanceEvidenceBoundary : Set where
     dashiPaysIncidenceCompressionScenario : Bool
     dashiPaysIncidenceCompressionCostBridge : Bool
     dashiPaysRobustCostBoundTheorem : Bool
+    dashiPaysComponentwiseCostBoundCompiler : Bool
+    dashiPaysPracticalSignificanceGate : Bool
+    dashiPaysLinearCalibrationBoundCompiler : Bool
     dashiPaysCalibrationTransferFirewall : Bool
     dashiPaysDirectFlatNestedExperimentDesign : Bool
     dashiPaysEmpiricalBoloPromotionGate : Bool
+    dashiPaysMeaningfulBoloPromotionGate : Bool
+    dashiPaysModelClassRobustnessGate : Bool
     occupyLiteraturePaysPluralProcessEvidence : Bool
     generalGroupDecisionEvidencePaysMechanismPlausibility : Bool
     bookchinSourcePaysRecallableConfederalCoordination : Bool
     sr15PaysSystemTransitionConstraintSurface : Bool
 
     targetQualifiedBoloCostBoundsPaid : Bool
+    minimumMeaningfulThresholdPaid : Bool
+    admissibleTargetModelFamilyPaid : Bool
     robustBoloCoordinationWinPaid : Bool
     validatedBoloCoordinationAdvantagePaid : Bool
     validatedBoloCoordinationDisadvantagePaid : Bool
+    validatedMeaningfulBoloAdvantagePaid : Bool
+    validatedMeaningfulBoloDisadvantagePaid : Bool
+    uniformModelFamilyAdvantagePaid : Bool
+    uniformModelFamilyDisadvantagePaid : Bool
     directFlatNestedExperimentRun : Bool
     actualPolityLegitimacyPaid : Bool
     actualParticipantIssueIncidencePaid : Bool
@@ -301,17 +336,28 @@ canonicalFederatedGovernanceEvidenceBoundary = record
   ; dashiPaysIncidenceCompressionScenario = true
   ; dashiPaysIncidenceCompressionCostBridge = true
   ; dashiPaysRobustCostBoundTheorem = true
+  ; dashiPaysComponentwiseCostBoundCompiler = true
+  ; dashiPaysPracticalSignificanceGate = true
+  ; dashiPaysLinearCalibrationBoundCompiler = true
   ; dashiPaysCalibrationTransferFirewall = true
   ; dashiPaysDirectFlatNestedExperimentDesign = true
   ; dashiPaysEmpiricalBoloPromotionGate = true
+  ; dashiPaysMeaningfulBoloPromotionGate = true
+  ; dashiPaysModelClassRobustnessGate = true
   ; occupyLiteraturePaysPluralProcessEvidence = true
   ; generalGroupDecisionEvidencePaysMechanismPlausibility = true
   ; bookchinSourcePaysRecallableConfederalCoordination = true
   ; sr15PaysSystemTransitionConstraintSurface = true
   ; targetQualifiedBoloCostBoundsPaid = false
+  ; minimumMeaningfulThresholdPaid = false
+  ; admissibleTargetModelFamilyPaid = false
   ; robustBoloCoordinationWinPaid = false
   ; validatedBoloCoordinationAdvantagePaid = false
   ; validatedBoloCoordinationDisadvantagePaid = false
+  ; validatedMeaningfulBoloAdvantagePaid = false
+  ; validatedMeaningfulBoloDisadvantagePaid = false
+  ; uniformModelFamilyAdvantagePaid = false
+  ; uniformModelFamilyDisadvantagePaid = false
   ; directFlatNestedExperimentRun = false
   ; actualPolityLegitimacyPaid = false
   ; actualParticipantIssueIncidencePaid = false
@@ -328,6 +374,6 @@ canonicalFederatedGovernanceEvidenceReceipt =
     "federated governance evidence instantiation capstone"
     "DASHI.Governance.FederatedGovernanceEvidenceInstantiationExact"
     "canonicalFederatedGovernanceEvidenceBoundary"
-    "assembles independently attributed political-design, archival, curated-corpus, empirical and assessment lanes with privacy-preserving longitudinal features, meeting-level process data, a new OWS interface-process lexical surface, explicit missingness and holdout gates, idealised incidence-compression accounting, robust bolo cost-bound theorems, cross-context transfer firewalls, a direct flat-vs-nested experiment design and a symmetric validated promotion/falsification gate"
-    "the evidence still does not supply target-qualified bolo cost bounds, a robust or validated target coordination classification, a completed flat-vs-nested experiment, an empirical coordination-cost functional, an incidence-to-burden causal effect, political legitimacy or concrete federation viability"
+    "assembles independently attributed political-design, archival, curated-corpus, empirical and assessment lanes with privacy-preserving longitudinal features, meeting-level process data, OWS interface-process lexical surfaces, explicit missingness and holdout gates, incidence-compression accounting, robust bolo cost-bound theorems, componentwise and count-times-weight bound compilers, a practical-significance gate, cross-context transfer firewall, direct flat-vs-nested experiment design, symmetric meaningful promotion/falsification and predeclared model-class robustness"
+    "the evidence still does not supply target-qualified primitive cost bounds, a target-study meaningful threshold or admissible model family, a robust/validated meaningful target coordination classification, a completed flat-vs-nested experiment, an empirical coordination-cost functional, an incidence-to-burden causal effect, political legitimacy or concrete federation viability"
     "agda -i . DASHI/Governance/FederatedGovernanceEvidenceInstantiationRegression.agda"
