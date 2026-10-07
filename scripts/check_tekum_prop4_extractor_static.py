@@ -55,6 +55,10 @@ required = {
     'DASHI/ComputerScience/TekumProposition4GlobalExact.agda': [
         'sourceOrderedValue', 'hunholdProposition4Global',
     ],
+    'DASHI/ComputerScience/TekumProposition4PaperExact.agda': [
+        'TekumOrderedValue', 'integerCodeOrderAgreesWithTekum',
+        'hunholdProposition4',
+    ],
 }
 
 for rel, needles in required.items():
@@ -69,4 +73,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum Prop. 4 max-cut static gate: arbitrary radix-block order, positive/negative ordinary order, exact special endpoints, core-width parser totality, and the full source ordered-code endpoint are present.')
+print('Tekum Prop. 4 max-cut static gate: arbitrary radix-block order, positive/negative ordinary order, exact special endpoints, core-width parser totality, full source ordered-code endpoint, and the paper-facing Proposition 4 interface are present.')
