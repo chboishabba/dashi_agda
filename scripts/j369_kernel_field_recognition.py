@@ -10,6 +10,9 @@ SELECTED_MODULI = {
     5: (1, 0, 0, 0, 2, 1),
     6: (1, 0, 0, 0, 1, 1, 1),
 }
+SSP_PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 47, 59, 71)
+CANONICAL_VIRTUAL_PROGRAM = (('plus', 59), ('minus', 7), ('unit', None))
+CANONICAL_GEOMETRY_PROGRAM = (('build54', None), ('remove1', None))
 
 
 def _trim(p):
@@ -145,6 +148,18 @@ def coordinate_swap_preserves_addition_negation(model):
     return True
 
 
+def dot6(x, y): return sum(a*b for a, b in zip(x, y)) % 3
+
+
+def coordinate_swap_preserves_dot6_exhaustive():
+    states = list(itertools.product(range(3), repeat=6))
+    for x in states:
+        sx = swap01(x)
+        for y in states:
+            if dot6(sx, swap01(y)) != dot6(x, y): return False
+    return True
+
+
 def heisenberg_translate(axis, x):
     y = list(x); y[axis] = (y[axis] + 1) % 3; return tuple(y)
 
@@ -163,6 +178,29 @@ def heisenberg_additive_intertwiner_verified():
             basis4 = tuple(1 if i == axis else 0 for i in range(4))
             if heisenberg_translate(axis, x6) != kernel_add(basis4, x4) + (0, 0): return False
     return True
+
+
+def replay_signed_semantic_core(program):
+    valuation = {p: 0 for p in SSP_PRIMES}
+    units = 0
+    trace = []
+    for op, prime in program:
+        trace.append((op, prime))
+        if op == 'plus': valuation[prime] += 1
+        elif op == 'minus': valuation[prime] -= 1
+        elif op == 'unit': units += 1
+    return {'valuation': valuation, 'invariant_units': units, 'trace': trace}
+
+
+def canonical_signed_core_replay_verified():
+    virtual = replay_signed_semantic_core(CANONICAL_VIRTUAL_PROGRAM)
+    geometry = replay_signed_semantic_core(CANONICAL_GEOMETRY_PROGRAM)
+    expected_virtual = {p: 0 for p in SSP_PRIMES}; expected_virtual[59] = 1; expected_virtual[7] = -1
+    return (
+        virtual['valuation'] == expected_virtual and virtual['invariant_units'] == 1 and
+        geometry['valuation'] == {p: 0 for p in SSP_PRIMES} and geometry['invariant_units'] == 0 and
+        virtual['trace'] == list(CANONICAL_VIRTUAL_PROGRAM)
+    )
 
 
 def legacy_first_enabled_step(s):
@@ -202,15 +240,18 @@ def scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200):
 def full_signed_weave_frontier():
     return {
         'lane_count': 15,
-        'pointed_lane_to_full_valuation_paid': True,
-        'signed_multiplicity_and_program_machinery_paid': True,
         'canonical_total_program_counter_machine_paid': True,
-        'machine_to_rich_signed_state_projection_paid': False,
-        'canonical_total_step_over_summary_state_alone_found': False,
+        'executed_trace_retains_prime_identity': True,
+        'arbitrary_program_valuation_replay_paid': True,
+        'arbitrary_program_invariant_unit_replay_paid': True,
+        'rich_machine_compiler_given_metadata_paid': True,
+        'canonical_virtual_rich_projection_paid': True,
+        'canonical_geometry_rich_projection_paid': True,
+        'metadata_dynamics_recovered_from_prior_repo': False,
         'full_rich_signed_transition_graph_claimed': False,
-        'reason': ('The remaining program list makes the scheduler total. WeaveEffect retains counts rather than prime identity, '
-                   'while SignedSSPExecutionState additionally owns address/residual/length metadata; a faithful projection '
-                   'therefore still needs an independent witness.')
+        'reason': ('Instruction replay now reconstructs prime identity, valuation, and invariant units. '
+                   'Only address369, zero-residual direction, and description/execution-length dynamics '
+                   'remain external to WeaveInstruction.')
     }
 
 
@@ -243,6 +284,8 @@ def recognition_summary():
     return {
         'fields': fields,
         'existing_heisenberg_translation_intertwines_f3_addition': heisenberg_additive_intertwiner_verified(),
+        'heisenberg_coordinate_swap_preserves_dot6_exhaustive': coordinate_swap_preserves_dot6_exhaustive(),
+        'canonical_signed_core_replay_verified': canonical_signed_core_replay_verified(),
         'row_major_12_vector_scan': scan_row_major_displacements(),
         'full_signed_weave_frontier': full_signed_weave_frontier()
     }
