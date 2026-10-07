@@ -68,6 +68,9 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
                 self.assertIn(model.add(x, y), image)
                 self.assertIn(model.mul(x, y), image)
 
+    def test_existing_heisenberg_translations_are_kernel_f3_addition(self):
+        self.assertTrue(recognition.heisenberg_additive_intertwiner_verified())
+
     def test_row_major_legacy_embeddings_do_not_produce_twelve_vectors(self):
         scan = recognition.scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200)
         self.assertEqual(scan['node_count'], 1330)
@@ -75,12 +78,14 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
         self.assertEqual(scan['minimum_vector_count'], 196)
         self.assertEqual(scan['minimum_vector_columns'], [173, 189])
 
-    def test_full_signed_weave_transition_frontier_remains_uninvented(self):
+    def test_full_signed_weave_frontier_is_narrowed_to_projection(self):
         frontier = recognition.full_signed_weave_frontier()
         self.assertEqual(frontier['lane_count'], 15)
         self.assertTrue(frontier['pointed_lane_to_full_valuation_paid'])
-        self.assertFalse(frontier['canonical_total_step_over_full_signed_state_found'])
-        self.assertFalse(frontier['full_signed_transition_graph_claimed'])
+        self.assertTrue(frontier['canonical_total_program_counter_machine_paid'])
+        self.assertFalse(frontier['machine_to_rich_signed_state_projection_paid'])
+        self.assertFalse(frontier['canonical_total_step_over_summary_state_alone_found'])
+        self.assertFalse(frontier['full_rich_signed_transition_graph_claimed'])
 
 
 if __name__ == '__main__':
