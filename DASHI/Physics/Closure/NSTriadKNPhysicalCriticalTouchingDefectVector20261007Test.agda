@@ -11,5 +11,8 @@ defectVectorClosed = V.b4DefectOneVectorNormalFormClosedIsTrue
 noAbsoluteValue : V.b4DefectVectorNormalFormIntroducesAbsoluteValue ≡ false
 noAbsoluteValue = V.b4DefectVectorNormalFormIntroducesAbsoluteValueIsFalse
 
-normPaymentOpen : V.b4DefectVectorNormPaymentClosed ≡ false
-normPaymentOpen = V.b4DefectVectorNormPaymentClosedIsFalse
+sharpVectorEnvelope : V.b4DefectSharpVectorYoungClosed ≡ true
+sharpVectorEnvelope = V.b4DefectSharpVectorYoungClosedIsTrue
+
+physicalBudgetOpen : V.b4DefectPhysicalVectorBudgetClosed ≡ false
+physicalBudgetOpen = V.b4DefectPhysicalVectorBudgetClosedIsFalse
