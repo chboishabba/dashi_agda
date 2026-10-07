@@ -75,9 +75,7 @@ oneLePow :
   1 ≤ Affine.powNat base exponent
 oneLePow base zero basePositive = NatP.≤-refl
 oneLePow base (suc exponent) basePositive =
-  NatP.≤-trans
-    (oneLePow base exponent basePositive)
-    (NatP.*-monoʳ-≤ basePositive (oneLePow base exponent basePositive))
+  NatP.*-mono-≤ basePositive (oneLePow base exponent basePositive)
 
 powMonotoneThree :
   {left right : Nat} →
@@ -196,7 +194,7 @@ badWordForcesTail n word bad =
 
 badIndicatorLeTailIndicator :
   (n : Nat) →
-  (word : Binary.BinaryWord (8 * n + 1)) →
+  (word : Binary.BinaryOutcomeEnumerationExact.BinaryWord (8 * n + 1)) →
   Event.badIndicator word
   ≤ Chernoff.atLeastIndicator (5 * n + 1) word
 badIndicatorLeTailIndicator n word
