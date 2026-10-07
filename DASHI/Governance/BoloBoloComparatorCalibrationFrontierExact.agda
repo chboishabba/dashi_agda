@@ -41,6 +41,35 @@ canonicalComparatorStructuralCoordinates =
     26 179 112
 
 ------------------------------------------------------------------------
+-- SOURCE-EXPLICIT GOVERNANCE WORKLOAD / CADENCE COORDINATES.
+--
+-- Porto Alegre: the 44-member COP met for at least two hours weekly during the
+-- July-September budget phase in the cited historical case description.
+-- Mondragon: an individual cooperative's Management Council reports to its
+-- elected Governing Council at least monthly in the cited 2023 case study.
+--
+-- These are process-cadence lower bounds in their own contexts. They are not
+-- total coordination cost, do not include preparation/reportback outside the
+-- meeting, and do not transport automatically to a bolo target.
+------------------------------------------------------------------------
+
+record ComparatorWorkloadCoordinates : Set where
+  constructor comparatorWorkloadCoordinates
+  field
+    portoAlegreCouncilMembers : Nat
+    portoAlegreCouncilMeetingMinutesPerWeekLowerBound : Nat
+    mondragonManagementReportbacksPerMonthLowerBound : Nat
+    portoTimingIsWholeDelegationCost : Bool
+    mondragonMonthlyReportIsWholeDelegationCost : Bool
+    comparatorCadenceAutomaticallyTransfersToBolo : Bool
+
+open ComparatorWorkloadCoordinates public
+
+canonicalComparatorWorkloadCoordinates : ComparatorWorkloadCoordinates
+canonicalComparatorWorkloadCoordinates =
+  comparatorWorkloadCoordinates 44 120 1 false false false
+
+------------------------------------------------------------------------
 -- Primitive-term calibration frontier.
 ------------------------------------------------------------------------
 
@@ -57,6 +86,7 @@ record PrimitiveCalibrationFrontier : Set where
     largeUrbanNestedParticipationObserved : Bool
     comparativeDecentralisationPlusCoordinationPerformanceObserved : Bool
     positiveAndNegativePolycentricOutcomesObservedAcrossLiterature : Bool
+    comparatorGovernanceCadenceMeasured : Bool
 
     targetQualifiedRemovedCostLowerBoundPaid : Bool
     targetQualifiedBoundaryCostUpperBoundPaid : Bool
@@ -71,7 +101,7 @@ canonicalPrimitiveCalibrationFrontier : PrimitiveCalibrationFrontier
 canonicalPrimitiveCalibrationFrontier =
   primitiveCalibrationFrontier
     true true true true
-    true true true true true
+    true true true true true true
     false false false false false false
 
 ------------------------------------------------------------------------
@@ -85,8 +115,8 @@ record ComparatorAcquisitionRoadmap : Set where
     extractSameProcessObservablesFromSpokesMinutes : Bool
     preserveExistingGAHoldout : Bool
     modelEvictionAndTimeTrendAsTransitionConfounds : Bool
-    acquirePortoAlegreProcessTimingAndDelegateWorkloadIfAvailable : Bool
-    acquireMondragonGovernanceTransactionWorkloadIfAvailable : Bool
+    acquireAdditionalPortoAlegreProcessTimingAndDelegateWorkload : Bool
+    acquireAdditionalMondragonGovernanceTransactionWorkload : Bool
     useCrossCaseEvidenceToPredeclareAdmissibleModelFamily : Bool
     consumeHistoricalHoldoutBeforeDevelopmentGatePasses : Bool
     runDirectFlatNestedPilotIfObservationalBoundsRemainNonIdentifying : Bool
@@ -103,6 +133,7 @@ record ComparatorCalibrationBoundary : Set where
     delegateCountEqualsDelegationCost : Bool
     representativeRatioEqualsEfficiency : Bool
     institutionalLongevityEqualsSuperiority : Bool
+    governanceCadenceEqualsTotalCoordinationCost : Bool
     crossDomainCoordinationPerformanceEqualsBoloCost : Bool
     comparatorCasesCanConstrainPlausibleModelFamilies : Bool
     sameContextSpokesTransitionHasHighestHistoricalDesignRelevance : Bool
@@ -112,14 +143,14 @@ open ComparatorCalibrationBoundary public
 
 canonicalComparatorCalibrationBoundary : ComparatorCalibrationBoundary
 canonicalComparatorCalibrationBoundary =
-  comparatorCalibrationBoundary false false false false true true true
+  comparatorCalibrationBoundary false false false false false true true true
 
 canonicalComparatorCalibrationFrontierReceipt : GenericReceipt.GenericReceipt
 canonicalComparatorCalibrationFrontierReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "bolo'bolo real-world comparator calibration frontier"
     "DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact"
-    "canonicalComparatorStructuralCoordinates / canonicalPrimitiveCalibrationFrontier / canonicalComparatorAcquisitionRoadmap / canonicalComparatorCalibrationBoundary"
-    "records source-paid scale coordinates from Porto Alegre, Mondragon and comparative polycentric-governance studies and classifies the evidence frontier: all four mechanism surfaces now have real-world comparators, including a same-context OWS flat-to-Spokes transition, durable multi-level federation and comparative decentralisation-plus-coordination performance"
-    "none of the institutional counts is a cost coefficient or efficiency ratio and no target-qualified primitive cost or per-unit weight bound is yet paid; the next historical acquisition is the underlying OWS Spokes minutes while the existing GA holdout remains protected, followed by direct target experimentation if observational bounds remain non-identifying"
+    "canonicalComparatorStructuralCoordinates / canonicalComparatorWorkloadCoordinates / canonicalPrimitiveCalibrationFrontier / canonicalComparatorAcquisitionRoadmap / canonicalComparatorCalibrationBoundary"
+    "records source-paid scale and governance-cadence coordinates from Porto Alegre and Mondragon plus comparative polycentric-governance case counts; all four mechanism surfaces now have real-world comparators, including a same-context OWS flat-to-Spokes transition, durable multi-level federation, large urban nested participation and comparative decentralisation-plus-coordination performance"
+    "Porto Alegre's at-least-two-hours-per-week council cadence and Mondragon's at-least-monthly management-to-governing-council reportback are comparator-specific workload observations rather than total coordination costs or transferable bolo bounds; the next historical acquisition remains the underlying OWS Spokes minutes while the protected GA holdout stays unspent"
     "agda -i . DASHI/Governance/BoloBoloComparatorCalibrationFrontierRegression.agda"
