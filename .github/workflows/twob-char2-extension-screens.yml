@@ -16,6 +16,11 @@ on:
       - 'scripts/check_twob_local_outer_lift_monster_class_probe.sh'
       - 'scripts/m24_exterior_square24_duad276_screen.g'
       - 'scripts/check_m24_exterior_square24_duad276_screen.sh'
+      - 'scripts/co1_f2_24_exterior_square276_fingerprint.g'
+      - 'scripts/check_co1_f2_24_exterior_square276_fingerprint.sh'
+      - 'scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g'
+      - 'scripts/twob_centralizer_virtual_24_276_brauer_identity.g'
+      - 'scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh'
       - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
       - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
@@ -34,6 +39,11 @@ on:
       - 'scripts/check_twob_local_outer_lift_monster_class_probe.sh'
       - 'scripts/m24_exterior_square24_duad276_screen.g'
       - 'scripts/check_m24_exterior_square24_duad276_screen.sh'
+      - 'scripts/co1_f2_24_exterior_square276_fingerprint.g'
+      - 'scripts/check_co1_f2_24_exterior_square276_fingerprint.sh'
+      - 'scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g'
+      - 'scripts/twob_centralizer_virtual_24_276_brauer_identity.g'
+      - 'scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh'
       - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
       - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
@@ -66,6 +76,12 @@ jobs:
         run: bash scripts/check_twob_local_outer_lift_monster_class_probe.sh
       - name: Verify exterior-square 24 equals duad-276 over GF2
         run: bash scripts/check_m24_exterior_square24_duad276_screen.sh
+      - name: Compute Co1 exterior-square 276 extension fingerprint
+        run: bash scripts/check_co1_f2_24_exterior_square276_fingerprint.sh
+      - name: Verify Co1 Sym2(24) quotient is exterior-square 276
+        run: gap -q scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g
+      - name: Test 2B-centralizer virtual 24/276 Brauer identity
+        run: bash scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh
       - name: Probe 2^24.Co1 characteristic-two representations
         run: bash scripts/check_twob_2pow24_co1_char2_rep_probe.sh
       - name: Identify Fi22:2 natural 2^10 Completion10 donor
@@ -90,6 +106,9 @@ jobs:
             build/m22d2_outer_class_m24_cycle_tate_defect_screen.json
             build/twob_local_outer_lift_monster_class_probe.json
             build/m24_exterior_square24_duad276_screen.json
+            build/co1_f2_24_exterior_square276_fingerprint.json
+            build/co1_f2_symmetric_square_300_to_exterior276_screen.json
+            build/twob_centralizer_virtual_24_276_brauer_identity.json
             build/twob_2pow24_co1_char2_rep_probe.json
             build/fi22d2_2pow10_m22d2_natural_module_screen.json
             DASHI/Moonshine/Generated/TwoBChar2ExtensionRuntimeCertificate.agda
