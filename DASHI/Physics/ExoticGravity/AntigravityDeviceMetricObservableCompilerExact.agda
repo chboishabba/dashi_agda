@@ -3,39 +3,23 @@ module DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExac
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Physics.Foundations.PositiveGActiveStressWeakFieldMetricExact as Metric
 import DASHI.Physics.ExoticGravity.WeightMetricApparentMassExact as Weight
 
-------------------------------------------------------------------------
--- ONE METRIC -> FOUR OBSERVABLES
---
--- The selected weak-field metric/potential is projected into independent
--- consumers.  The consumers may have different calibration gains, but they are
--- not permitted to silently choose different metric amplitudes.
-------------------------------------------------------------------------
-
 freeFallPrediction : ℚ → ℚ
 freeFallPrediction radius = Metric.interiorOutwardAcceleration radius
 
--- Device-induced support-force change.  An outward gravitational acceleration
--- reduces the inward/upward support force needed to hold a positive passive
--- mass on the same laboratory worldline.
 supportWeightPrediction : ℚ → ℚ → ℚ
 supportWeightPrediction passiveMass outwardAcceleration =
   - (passiveMass * outwardAcceleration)
 
--- Weak-field gravitational clock/redshift projection: calibration supplies the
--- inverse-c^2 factor in the chosen SI realization.
 clockFractionalShiftPrediction : ℚ → ℚ → ℚ
 clockFractionalShiftPrediction potentialDifference inverseCSquared =
   potentialDifference * inverseCSquared
 
--- Linearized optical metric transducer.  The gain may represent the selected
--- Schuetzhold dynamic path/frequency/delay calibration; the metric amplitude is
--- still the same geometry consumed by the other channels.
 opticalMetricPrediction : ℚ → ℚ → ℚ
 opticalMetricPrediction metricAmplitude opticalGain =
   metricAmplitude * opticalGain
