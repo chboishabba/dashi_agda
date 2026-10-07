@@ -32,8 +32,11 @@ formal_files=(
   DASHI/NumberTheory/Collatz/SyracuseAffineIterateExact.agda
   DASHI/NumberTheory/Collatz/SyracuseAffineIterateCompilerExact.agda
   DASHI/NumberTheory/Collatz/SyracuseAffineDescentMarginExact.agda
+  DASHI/NumberTheory/Collatz/SyracuseAffineCorrectionBoundExact.agda
   DASHI/Analysis/CollatzSyracuseCompleteBlockBijectionExact.agda
+  DASHI/Analysis/CollatzSyracuseAlignedBlockUniformityExact.agda
   DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
+  DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 )
 
@@ -49,9 +52,15 @@ grep -q 'canonicalParityCylinderSource' \
   DASHI/NumberTheory/Collatz/SyracuseParityCylinderOddBranchExact.agda
 grep -q 'canonicalCompleteBlockUniformWordMass' \
   DASHI/Analysis/CollatzSyracuseCompleteBlockBijectionExact.agda
+grep -q 'alignedBlockUniformWordMass' \
+  DASHI/Analysis/CollatzSyracuseAlignedBlockUniformityExact.agda
 grep -q 'canonicalCompleteBlockParityWordLaw' \
   DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
 grep -q 'strictAffineMarginImpliesDescent' \
   DASHI/NumberTheory/Collatz/SyracuseAffineDescentMarginExact.agda
+grep -q 'coarseParityMarginImpliesDescent' \
+  DASHI/NumberTheory/Collatz/SyracuseAffineCorrectionBoundExact.agda
+grep -q 'badWordCount' \
+  DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
