@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloFederationCostComparisonExact as Comparison
 import DASHI.Governance.BoloBoloRobustCostBoundsExact as Bounds
+import DASHI.Governance.BoloBoloPracticalSignificanceExact as Significance
 import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
 
 ------------------------------------------------------------------------
@@ -75,6 +76,66 @@ validatedDisadvantageImpliesStrictOrderLoss certificate =
     (robustLossWitness certificate)
 
 ------------------------------------------------------------------------
+-- Stronger meaningful-promotion tier.
+--
+-- A strict validated difference may still be substantively negligible.  The
+-- stronger certificate freezes a minimum meaningful margin before target
+-- outcomes are inspected and requires a robust bound separation exceeding
+-- that threshold.
+------------------------------------------------------------------------
+
+record MeaningfulValidationObligations : Set₁ where
+  constructor meaningfulValidationObligations
+  field
+    baseValidation : ValidationObligations
+    PracticalThresholdFrozen : Set
+    practicalThresholdFrozenWitness : PracticalThresholdFrozen
+
+open MeaningfulValidationObligations public
+
+record ValidatedMeaningfulBoloCoordinationAdvantage
+  (threshold : Nat)
+  (model : Comparison.CounterfactualCoordinationCostModel) : Set₁ where
+  constructor validatedMeaningfulBoloCoordinationAdvantage
+  field
+    targetEvidence : Transfer.BoloTargetBoundEvidence model
+    meaningfulWinWitness :
+      Significance.RobustMeaningfulWin threshold (Transfer.targetBounds targetEvidence)
+    meaningfulValidation : MeaningfulValidationObligations
+
+open ValidatedMeaningfulBoloCoordinationAdvantage public
+
+validatedMeaningfulAdvantageImpliesMargin :
+  ∀ {threshold model} →
+  ValidatedMeaningfulBoloCoordinationAdvantage threshold model →
+  Significance.MeaningfulOrderImprovement threshold model
+validatedMeaningfulAdvantageImpliesMargin certificate =
+  Significance.robustMeaningfulWinImpliesMargin
+    (Transfer.targetBounds (targetEvidence certificate))
+    (meaningfulWinWitness certificate)
+
+record ValidatedMeaningfulBoloCoordinationDisadvantage
+  (threshold : Nat)
+  (model : Comparison.CounterfactualCoordinationCostModel) : Set₁ where
+  constructor validatedMeaningfulBoloCoordinationDisadvantage
+  field
+    targetEvidence : Transfer.BoloTargetBoundEvidence model
+    meaningfulLossWitness :
+      Significance.RobustMeaningfulLoss threshold (Transfer.targetBounds targetEvidence)
+    meaningfulValidation : MeaningfulValidationObligations
+
+open ValidatedMeaningfulBoloCoordinationDisadvantage public
+
+validatedMeaningfulDisadvantageImpliesMargin :
+  ∀ {threshold model} →
+  ValidatedMeaningfulBoloCoordinationDisadvantage threshold model →
+  Significance.MeaningfulOrderLoss threshold model
+validatedMeaningfulDisadvantageImpliesMargin certificate =
+  Significance.robustMeaningfulLossImpliesMargin
+    (Transfer.targetBounds (targetEvidence certificate))
+    (meaningfulLossWitness certificate)
+
+------------------------------------------------------------------------
 -- Interpretation boundary.
 ------------------------------------------------------------------------
 
@@ -108,12 +169,26 @@ canonicalEmpiricalPromotionBoundary =
     false
     false
 
+record MeaningfulPromotionBoundary : Set where
+  constructor meaningfulPromotionBoundary
+  field
+    practicalThresholdMustBeFrozenBeforeTargetOutcome : Bool
+    strictValidatedDifferenceAutomaticallyCountsAsMeaningful : Bool
+    meaningfulValidatedAdvantageCreatesPoliticalLegitimacy : Bool
+    meaningfulValidatedLossRefutesEveryNestedVariant : Bool
+
+open MeaningfulPromotionBoundary public
+
+canonicalMeaningfulPromotionBoundary : MeaningfulPromotionBoundary
+canonicalMeaningfulPromotionBoundary =
+  meaningfulPromotionBoundary true false false false
+
 canonicalBoloEmpiricalPromotionGateReceipt : GenericReceipt.GenericReceipt
 canonicalBoloEmpiricalPromotionGateReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "bolo'bolo empirical comparative promotion gate"
     "DASHI.Governance.BoloBoloEmpiricalPromotionGateExact"
-    "ValidatedBoloCoordinationAdvantage / ValidatedBoloCoordinationDisadvantage / canonicalEmpiricalPromotionBoundary"
-    "separates a target-qualified robust bound classification from a validated comparative coordination claim by requiring frozen estimand/measurement definitions, documentary audit, sensitivity analysis and prospective validation or replication; the same gate supports a validated robust-loss certificate that can falsify the claimed coordination advantage for the tested model/context"
+    "ValidatedBoloCoordinationAdvantage / ValidatedBoloCoordinationDisadvantage / ValidatedMeaningfulBoloCoordinationAdvantage / ValidatedMeaningfulBoloCoordinationDisadvantage"
+    "separates target-qualified robust bound classifications from validated comparative coordination claims by requiring frozen estimand/measurement definitions, documentary audit, sensitivity analysis and prospective validation or replication; a stronger meaningful tier additionally freezes a minimum practical margin before target outcomes and requires conservative bounds to clear it, symmetrically for advantage and disadvantage"
     "validated coordination advantage still creates neither political legitimacy nor ecological viability or universal optimality, while a validated disadvantage applies only to the tested model/context rather than refuting every possible bolo variant"
     "agda -i . DASHI/Governance/BoloBoloEmpiricalPromotionGateRegression.agda"
