@@ -16,7 +16,9 @@ import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerExact as LinearCom
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact as Calibration
 import DASHI.Governance.BoloBoloComparatorEvidenceAtlasExact as Comparators
 import DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionExact as Spokes
+import DASHI.Governance.BoloBoloOWSSpokesRateShiftExact as SpokesShift
 import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact as Polycentric
+import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as NetworkEvidence
 import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as ComparatorFrontier
 import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact as Experiment
@@ -35,7 +37,8 @@ import DASHI.Governance.BoloBoloModelClassRobustnessExact as ModelRobustness
 --   -> predeclared minimum meaningful margin
 --   -> historical Occupy calibration
 --   -> independent real-world nested/polycentric comparators
---   -> same-context OWS flat-to-Spokes interrupted transition
+--   -> same-context OWS flat-to-Spokes interrupted transition + rate check
+--   -> task-contingent network evidence constraining model-family assumptions
 --   -> cross-context transfer qualification or direct target measurement
 --   -> same-context flat-vs-nested experiment
 --   -> sensitivity + prospective validation / replication
@@ -59,7 +62,9 @@ record BoloCounterfactualEvaluation : Set where
     calibrationObligations : Calibration.BoloComparisonCalibrationObligations
     comparatorEvidenceBoundary : Comparators.ComparatorEvidenceBoundary
     spokesTransitionBoundary : Spokes.OWSSpokesTransitionBoundary
+    spokesRateShiftBoundary : SpokesShift.RateShiftBoundary
     polycentricEvidenceSynthesis : Polycentric.PolycentricEvidenceSynthesis
+    organizationalNetworkBoundary : NetworkEvidence.OrganizationalNetworkEvidenceBoundary
     comparatorPrimitiveFrontier : ComparatorFrontier.PrimitiveCalibrationFrontier
     comparatorAcquisitionRoadmap : ComparatorFrontier.ComparatorAcquisitionRoadmap
     comparatorCalibrationBoundary : ComparatorFrontier.ComparatorCalibrationBoundary
@@ -86,7 +91,9 @@ canonicalBoloCounterfactualEvaluation = record
   ; calibrationObligations = Calibration.canonicalCalibrationObligations
   ; comparatorEvidenceBoundary = Comparators.canonicalComparatorEvidenceBoundary
   ; spokesTransitionBoundary = Spokes.canonicalOWSSpokesTransitionBoundary
+  ; spokesRateShiftBoundary = SpokesShift.canonicalRateShiftBoundary
   ; polycentricEvidenceSynthesis = Polycentric.canonicalPolycentricEvidenceSynthesis
+  ; organizationalNetworkBoundary = NetworkEvidence.canonicalOrganizationalNetworkEvidenceBoundary
   ; comparatorPrimitiveFrontier = ComparatorFrontier.canonicalPrimitiveCalibrationFrontier
   ; comparatorAcquisitionRoadmap = ComparatorFrontier.canonicalComparatorAcquisitionRoadmap
   ; comparatorCalibrationBoundary = ComparatorFrontier.canonicalComparatorCalibrationBoundary
@@ -113,7 +120,9 @@ record BoloEvaluationBoundary : Set where
     occupyCalibrationFrontierPaid : Bool
     realWorldComparatorAtlasPaid : Bool
     owsSpokesInterruptedTransitionPaid : Bool
+    normalizedSpokesTransitionCheckPaid : Bool
     polycentricEvidenceSynthesisPaid : Bool
+    taskContingentNetworkEvidencePaid : Bool
     comparatorCalibrationFrontierPaid : Bool
     crossContextTransferFirewallPaid : Bool
     directFlatVersusNestedExperimentDesignPaid : Bool
@@ -152,6 +161,7 @@ record BoloEvaluationBoundary : Set where
     validatedCoordinationDisadvantageRefutesEveryPossibleBoloVariant : Bool
     oneFavouredCostModelEnoughForRobustRecommendation : Bool
     anyTinyStrictWinEnoughForMeaningfulRecommendation : Bool
+    universalMonotoneDecentralizationAdvantageAssumed : Bool
 
 open BoloEvaluationBoundary public
 
@@ -170,7 +180,9 @@ canonicalBoloEvaluationBoundary = record
   ; occupyCalibrationFrontierPaid = true
   ; realWorldComparatorAtlasPaid = true
   ; owsSpokesInterruptedTransitionPaid = true
+  ; normalizedSpokesTransitionCheckPaid = true
   ; polycentricEvidenceSynthesisPaid = true
+  ; taskContingentNetworkEvidencePaid = true
   ; comparatorCalibrationFrontierPaid = true
   ; crossContextTransferFirewallPaid = true
   ; directFlatVersusNestedExperimentDesignPaid = true
@@ -206,88 +218,19 @@ canonicalBoloEvaluationBoundary = record
   ; validatedCoordinationDisadvantageRefutesEveryPossibleBoloVariant = false
   ; oneFavouredCostModelEnoughForRobustRecommendation = false
   ; anyTinyStrictWinEnoughForMeaningfulRecommendation = false
+  ; universalMonotoneDecentralizationAdvantageAssumed = false
   }
-
-data BoloResearchLane : Set where
-  sourceArchitectureLane : BoloResearchLane
-  derivedScaleScenarioLane : BoloResearchLane
-  localityTopologyLane : BoloResearchLane
-  incidenceCompressionLane : BoloResearchLane
-  incidenceToCostBridgeLane : BoloResearchLane
-  exactCounterfactualCostLane : BoloResearchLane
-  robustPartialIdentificationLane : BoloResearchLane
-  componentwiseBoundCompilerLane : BoloResearchLane
-  practicalSignificanceLane : BoloResearchLane
-  linearCalibrationCompilerLane : BoloResearchLane
-  occupyCalibrationLane : BoloResearchLane
-  realWorldComparatorLane : BoloResearchLane
-  sameContextSpokesTransitionLane : BoloResearchLane
-  polycentricEvidenceSynthesisLane : BoloResearchLane
-  comparatorCalibrationFrontierLane : BoloResearchLane
-  crossContextTransferLane : BoloResearchLane
-  directPairedExperimentLane : BoloResearchLane
-  validatedPromotionFalsificationLane : BoloResearchLane
-  modelClassRobustnessLane : BoloResearchLane
-  legitimacyLane : BoloResearchLane
-  ecologicalResourceViabilityLane : BoloResearchLane
-  comparativeValidationLane : BoloResearchLane
-
-record BoloResearchLaneStatus : Set where
-  constructor boloResearchLaneStatus
-  field
-    lane : BoloResearchLane
-    structuralSurfacePresent : Bool
-    empiricalPromotionPaid : Bool
-
-open BoloResearchLaneStatus public
-
-canonicalLaneStatuses : List BoloResearchLaneStatus
-canonicalLaneStatuses =
-  boloResearchLaneStatus sourceArchitectureLane true false
-  ∷ boloResearchLaneStatus derivedScaleScenarioLane true false
-  ∷ boloResearchLaneStatus localityTopologyLane true false
-  ∷ boloResearchLaneStatus incidenceCompressionLane true false
-  ∷ boloResearchLaneStatus incidenceToCostBridgeLane true false
-  ∷ boloResearchLaneStatus exactCounterfactualCostLane true false
-  ∷ boloResearchLaneStatus robustPartialIdentificationLane true false
-  ∷ boloResearchLaneStatus componentwiseBoundCompilerLane true false
-  ∷ boloResearchLaneStatus practicalSignificanceLane true false
-  ∷ boloResearchLaneStatus linearCalibrationCompilerLane true false
-  ∷ boloResearchLaneStatus occupyCalibrationLane true false
-  ∷ boloResearchLaneStatus realWorldComparatorLane true false
-  ∷ boloResearchLaneStatus sameContextSpokesTransitionLane true false
-  ∷ boloResearchLaneStatus polycentricEvidenceSynthesisLane true false
-  ∷ boloResearchLaneStatus comparatorCalibrationFrontierLane true false
-  ∷ boloResearchLaneStatus crossContextTransferLane true false
-  ∷ boloResearchLaneStatus directPairedExperimentLane true false
-  ∷ boloResearchLaneStatus validatedPromotionFalsificationLane true false
-  ∷ boloResearchLaneStatus modelClassRobustnessLane true false
-  ∷ boloResearchLaneStatus legitimacyLane true false
-  ∷ boloResearchLaneStatus ecologicalResourceViabilityLane true false
-  ∷ boloResearchLaneStatus comparativeValidationLane true false
-  ∷ []
 
 ------------------------------------------------------------------------
 -- Max-cut interpretation.
 --
--- Real-world comparators now cover every mechanism class in the candidate
--- cost model, but they do not identify target cost coefficients.  The closest
--- historical transition is OWS GA -> Spokes Council; the available source
--- record is mixed and confounded, and the underlying Spokes minutes are still
--- an acquisition target.  The remaining chain is therefore evidential:
---
---   source architecture
---   -> topology/locality scenario
---   -> incidence reduction accounting
---   -> primitive count/weight bounds
---   -> compiled cost bounds
---   -> exact/robust comparison
---   -> predeclared meaningful margin
---   -> target qualification
---   -> direct or transported evidence
---   -> sensitivity + prospective validation
---   -> robustness across a predeclared admissible cost-model family
---   -> meaningful validated advantage/disadvantage.
+-- Real-world comparators now cover every mechanism class in the candidate cost
+-- model, while independent organizational evidence requires context-sensitive
+-- admissible models rather than a monotone decentralization prior. The closest
+-- historical transition remains OWS GA -> Spokes Council; its available source
+-- record is mixed/confounded, normalized lexical uptake confirms a structural
+-- transition but not an outcome effect, and the underlying Spokes minutes are
+-- still an acquisition target.
 ------------------------------------------------------------------------
 
 canonicalBoloCounterfactualEvaluationReceipt : GenericReceipt.GenericReceipt
@@ -295,7 +238,7 @@ canonicalBoloCounterfactualEvaluationReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "bolo'bolo counterfactual evaluation max-cut"
     "DASHI.Governance.BoloBoloCounterfactualEvaluationExact"
-    "canonicalBoloEvaluationBoundary / canonicalLaneStatuses"
-    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, the mixed/confounded same-context OWS GA-to-Spokes transition, polycentric evidence synthesis, transfer qualification, direct trial design, validated promotion/falsification and predeclared model-family robustness"
-    "all candidate mechanism classes now have real-world observable analogues, but target-qualified primitive cost/weight bounds remain unpaid; the underlying Spokes minutes are still an acquisition target and comparator similarity, institutional durability or cross-domain performance cannot substitute for direct target measurement or qualified transport"
+    "canonicalBoloEvaluationBoundary"
+    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, the mixed/confounded OWS GA-to-Spokes transition and normalized transition check, polycentric evidence synthesis, task-contingent network evidence, transfer qualification, direct trial design, validated promotion/falsification and predeclared model-family robustness"
+    "all candidate mechanism classes now have real-world observable analogues and comparator workload/cadence coordinates, but target-qualified primitive cost/weight bounds remain unpaid; the underlying Spokes minutes remain an acquisition target and no monotone decentralization advantage or cross-domain transfer is assumed"
     "agda -i . DASHI/Governance/BoloBoloCounterfactualEvaluationRegression.agda"
