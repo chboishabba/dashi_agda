@@ -40,11 +40,6 @@ canonicalBoloNestedArchitectureDesign =
 
 ------------------------------------------------------------------------
 -- Structural counterfactual accounting.
---
--- The transformation asks what happens when some participation coupling that
--- would otherwise be paid at the global layer is retained locally while a
--- smaller interface/delegation surface is introduced at federation layers.
--- Counts are externally audited coordinates, not source-authored numbers.
 ------------------------------------------------------------------------
 
 record FederationTransformationAccounting : Set where
@@ -69,10 +64,6 @@ newFederationInterfaceEdges accounting =
 
 ------------------------------------------------------------------------
 -- Abstract coordination-cost decomposition.
---
--- These are already-costed coordinates.  No claim is made here that one edge
--- has unit cost, that cost is linear in edge count, or that the components are
--- empirically identified.  That is deliberately left to the calibration lane.
 ------------------------------------------------------------------------
 
 record CounterfactualCoordinationCostModel : Set where
@@ -102,11 +93,6 @@ federatedCoordinationCost model =
 
 ------------------------------------------------------------------------
 -- Exact win condition.
---
--- `RemovalPaysOverhead` is the sharp finite-Nat condition that the cost removed
--- from the global layer exceeds all newly introduced federation overhead by a
--- positive margin.  The theorem transports that local condition into a strict
--- whole-system comparison.
 ------------------------------------------------------------------------
 
 record RemovalPaysOverhead
@@ -143,13 +129,6 @@ removalPaysOverheadImpliesStrictImprovement {model} witness =
           (federationOverhead model)
           (suc (improvementMargin witness))))
 
-------------------------------------------------------------------------
--- Converse diagnostic: if the federation overhead is exactly the removed
--- global cost, the model has no positive improvement margin to expose here.
--- This is a boundary classification rather than an impossibility theorem for
--- richer/nonlinear models.
-------------------------------------------------------------------------
-
 record BreakEvenCostWitness
   (model : CounterfactualCoordinationCostModel) : Set where
   constructor breakEvenCostWitness
@@ -160,10 +139,81 @@ record BreakEvenCostWitness
 open BreakEvenCostWitness public
 
 ------------------------------------------------------------------------
--- Synthetic arithmetic example.
+-- Linear weighted specialization.
 --
--- This example tests the theorem surface only.  It is not fitted to Occupy,
--- bolo'bolo, or any empirical social system.
+-- This is the explicit candidate formula discussed in the research programme:
+--
+--   α ΔE  >  β B + γ D + δ U
+--
+-- where ΔE is removed global coupling, B is new boundary coupling, D is new
+-- delegation/reportback coupling and U is unresolved dependency overhead.
+-- The weights are supplied model parameters. They are not p.m.'s numbers and
+-- are not inferred from the source's population scales.
+------------------------------------------------------------------------
+
+record LinearCoordinationWeights : Set where
+  constructor linearCoordinationWeights
+  field
+    incidenceWeight : Nat
+    boundaryWeight : Nat
+    delegationWeight : Nat
+    unresolvedWeight : Nat
+
+open LinearCoordinationWeights public
+
+weightedFederationOverhead :
+  LinearCoordinationWeights →
+  FederationTransformationAccounting →
+  Nat
+weightedFederationOverhead weights accounting =
+  boundaryWeight weights * newBoundaryEdges accounting
+  + delegationWeight weights * newDelegationEdges accounting
+  + unresolvedWeight weights * unresolvedDependencyEdges accounting
+
+linearCostModel :
+  LinearCoordinationWeights →
+  FederationTransformationAccounting →
+  CounterfactualCoordinationCostModel
+linearCostModel weights accounting =
+  counterfactualCoordinationCostModel
+    (incidenceWeight weights * retainedLocalEdges accounting)
+    (incidenceWeight weights * removedGlobalEdges accounting)
+    (boundaryWeight weights * newBoundaryEdges accounting)
+    (delegationWeight weights * newDelegationEdges accounting)
+    (unresolvedWeight weights * unresolvedDependencyEdges accounting)
+
+record LinearWinCondition
+  (weights : LinearCoordinationWeights)
+  (accounting : FederationTransformationAccounting) : Set where
+  constructor linearWinCondition
+  field
+    linearImprovementMargin : Nat
+    exactWeightedDominance :
+      incidenceWeight weights * removedGlobalEdges accounting
+      ≡ weightedFederationOverhead weights accounting
+        + suc linearImprovementMargin
+
+open LinearWinCondition public
+
+linearWinConditionPaysOverhead :
+  ∀ {weights accounting} →
+  LinearWinCondition weights accounting →
+  RemovalPaysOverhead (linearCostModel weights accounting)
+linearWinConditionPaysOverhead condition =
+  removalPaysOverhead
+    (linearImprovementMargin condition)
+    (exactWeightedDominance condition)
+
+linearWinConditionImpliesStrictImprovement :
+  ∀ {weights accounting} →
+  LinearWinCondition weights accounting →
+  StrictCostImprovement (linearCostModel weights accounting)
+linearWinConditionImpliesStrictImprovement condition =
+  removalPaysOverheadImpliesStrictImprovement
+    (linearWinConditionPaysOverhead condition)
+
+------------------------------------------------------------------------
+-- Synthetic arithmetic examples.
 ------------------------------------------------------------------------
 
 syntheticCostModel : CounterfactualCoordinationCostModel
@@ -182,6 +232,32 @@ syntheticRemovalPaysOverhead =
 syntheticStrictCostImprovement : StrictCostImprovement syntheticCostModel
 syntheticStrictCostImprovement =
   removalPaysOverheadImpliesStrictImprovement syntheticRemovalPaysOverhead
+
+syntheticAccounting : FederationTransformationAccounting
+syntheticAccounting =
+  federationTransformationAccounting
+    100
+    40
+    60
+    10
+    10
+    5
+    refl
+
+syntheticUnitWeights : LinearCoordinationWeights
+syntheticUnitWeights =
+  linearCoordinationWeights 1 1 1 1
+
+syntheticLinearWinCondition :
+  LinearWinCondition syntheticUnitWeights syntheticAccounting
+syntheticLinearWinCondition =
+  linearWinCondition 34 refl
+
+syntheticLinearStrictImprovement :
+  StrictCostImprovement
+    (linearCostModel syntheticUnitWeights syntheticAccounting)
+syntheticLinearStrictImprovement =
+  linearWinConditionImpliesStrictImprovement syntheticLinearWinCondition
 
 ------------------------------------------------------------------------
 -- Attribution / empirical-promotion firewall.
@@ -222,7 +298,7 @@ canonicalBoloFederationCostComparisonReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "bolo'bolo nested-federation counterfactual cost comparison"
     "DASHI.Governance.BoloBoloFederationCostComparisonExact"
-    "removalPaysOverheadImpliesStrictImprovement / canonicalBoloComparisonBoundary"
-    "separates p.m.'s nested kana-bolo-tega design input from a DASHI-derived counterfactual cost decomposition and proves that removing global-coupling cost yields a strict whole-system improvement whenever it exceeds newly introduced boundary, delegation and unresolved-dependency overhead by a positive margin"
-    "the source does not supply the cost model or coefficients; Occupy does not automatically validate bolo'bolo, nonlinear costs remain possible, and empirical superiority remains unpaid until the model terms are independently calibrated/identified"
+    "removalPaysOverheadImpliesStrictImprovement / linearWinConditionImpliesStrictImprovement / canonicalBoloComparisonBoundary"
+    "separates p.m.'s nested kana-bolo-tega design input from DASHI-derived counterfactual accounting, proves the abstract positive-margin federation win theorem, and specializes it to the explicit candidate inequality alpha*removed-global-coupling > beta*boundary + gamma*delegation + delta*unresolved-dependency overhead"
+    "the source does not supply the cost model or weights; source population numbers are not coefficients, nonlinear costs remain possible, and empirical superiority remains unpaid until model terms and weights are independently calibrated or bounded"
     "agda -i . DASHI/Governance/BoloBoloFederationCostComparisonRegression.agda"
