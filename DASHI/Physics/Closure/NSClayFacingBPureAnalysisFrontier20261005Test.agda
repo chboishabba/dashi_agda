@@ -11,6 +11,24 @@ b4LiteralSplitClosed = F.b4LiteralPrincipalDefectSplitClosedIsTrue
 b4PhysicalEstimatesRemain : F.b4PrincipalDefectPhysicalEstimatesClosed ≡ false
 b4PhysicalEstimatesRemain = F.b4PrincipalDefectPhysicalEstimatesClosedIsFalse
 
+b1ShellCompilerClosed : F.b1ShellPaymentCompilerClosed ≡ true
+b1ShellCompilerClosed = F.b1ShellPaymentCompilerClosedIsTrue
+
+b1PhysicalProducerOpen : F.b1PhysicalProducerClosed ≡ false
+b1PhysicalProducerOpen = F.b1PhysicalProducerClosedIsFalse
+
+b2ShellFoldClosed : F.b2ShellFoldCompilerClosed ≡ true
+b2ShellFoldClosed = F.b2ShellFoldCompilerClosedIsTrue
+
+b2PhysicalProducerOpen : F.b2PhysicalProducerClosed ≡ false
+b2PhysicalProducerOpen = F.b2PhysicalProducerClosedIsFalse
+
+b3GapAndComponentClosed : F.b3GapAndComponentInfrastructureClosed ≡ true
+b3GapAndComponentClosed = F.b3GapAndComponentInfrastructureClosedIsTrue
+
+b3IntraShellOpen : F.b3PhysicalProducerClosed ≡ false
+b3IntraShellOpen = F.b3PhysicalProducerClosedIsFalse
+
 strictSplitCompiler : F.b4GenericStrictSplitCompilerClosed ≡ true
 strictSplitCompiler = F.b4GenericStrictSplitCompilerClosedIsTrue
 
