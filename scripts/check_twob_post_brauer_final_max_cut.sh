@@ -13,6 +13,7 @@ targets=(
   DASHI/Moonshine/OggSSP2BMonsterGF2RepresentationSourceExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda
+  DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -55,5 +56,10 @@ grep -q 'outerJ2x5MatchesTwo' "${targets[7]}"
 grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[7]}"
 grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[7]}"
 grep -q 'actualOuterActionOnSameQStillOpen' "${targets[7]}"
+
+grep -q 'canonicalCompletionAcquisitionStatus' "${targets[8]}"
+grep -q 'fi22NaturalTenRankIsTen' "${targets[8]}"
+grep -q 'monsterGF2DimensionIs196882' "${targets[8]}"
+grep -q 'remainingDefectSourceBitsIsTwo' "${targets[8]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
