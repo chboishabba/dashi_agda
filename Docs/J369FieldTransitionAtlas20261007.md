@@ -92,7 +92,7 @@ For K4 one witness is
 
 ```text
 a = b = (0,0,0,1)
-original product       = (0,1,2,1)
+original product        = (0,1,2,1)
 swap-conjugated product = (1,0,2,1).
 ```
 
