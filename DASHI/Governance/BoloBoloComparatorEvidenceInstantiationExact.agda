@@ -10,20 +10,12 @@ import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact as Polycentric
 import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as NetworkEvidence
 import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as Frontier
 
-------------------------------------------------------------------------
--- COMPARATOR-EVIDENCE CAPSTONE.
---
--- Kept separate from the older Occupy evidence ledger because these sources
--- have independent provenance, domains and outcome definitions. They inform
--- model-family plausibility and measurement design without becoming replicas
--- of OWS, p.m. or each other.
-------------------------------------------------------------------------
-
 record BoloComparatorEvidenceInstantiation : Set where
   constructor boloComparatorEvidenceInstantiation
   field
     comparatorCases : List Atlas.ComparatorEvidenceCase
     comparatorBoundary : Atlas.ComparatorEvidenceBoundary
+    owsScaleShock : Spokes.OWSScaleShockContext
     owsSpokesWindow : Spokes.InterruptedTransitionWindow
     owsSpokesMechanisms : Spokes.SpokesMechanismObservations
     owsSpokesBoundary : Spokes.OWSSpokesTransitionBoundary
@@ -43,6 +35,7 @@ canonicalBoloComparatorEvidenceInstantiation : BoloComparatorEvidenceInstantiati
 canonicalBoloComparatorEvidenceInstantiation = record
   { comparatorCases = Atlas.canonicalComparatorEvidenceCases
   ; comparatorBoundary = Atlas.canonicalComparatorEvidenceBoundary
+  ; owsScaleShock = Spokes.canonicalOWSScaleShockContext
   ; owsSpokesWindow = Spokes.canonicalTransitionWindow
   ; owsSpokesMechanisms = Spokes.canonicalSpokesMechanismObservations
   ; owsSpokesBoundary = Spokes.canonicalOWSSpokesTransitionBoundary
@@ -61,6 +54,7 @@ record ComparatorEvidenceInstantiationBoundary : Set where
   constructor comparatorEvidenceInstantiationBoundary
   field
     independentComparatorProvenancePreserved : Bool
+    owsScaleShockContextPaid : Bool
     sameContextOWSStructuralTransitionPaid : Bool
     mixedSpokesMechanismEvidencePaid : Bool
     normalizedSpokesTransitionCheckPaid : Bool
@@ -78,7 +72,7 @@ open ComparatorEvidenceInstantiationBoundary public
 canonicalComparatorEvidenceInstantiationBoundary : ComparatorEvidenceInstantiationBoundary
 canonicalComparatorEvidenceInstantiationBoundary =
   comparatorEvidenceInstantiationBoundary
-    true true true true true true true true true false false false
+    true true true true true true true true true true false false false
 
 canonicalBoloComparatorEvidenceInstantiationReceipt : GenericReceipt.GenericReceipt
 canonicalBoloComparatorEvidenceInstantiationReceipt =
@@ -86,6 +80,6 @@ canonicalBoloComparatorEvidenceInstantiationReceipt =
     "bolo'bolo comparator evidence instantiation capstone"
     "DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact"
     "canonicalBoloComparatorEvidenceInstantiation / canonicalComparatorEvidenceInstantiationBoundary"
-    "assembles independently attributed comparator evidence for the OWS GA-to-Spokes transition, its normalized development-only lexical transition check, Porto Alegre nested participatory budgeting, Mondragon multi-level cooperative governance, comparative/systematic polycentric-governance evidence and task-contingent organizational-network experiments, including source-explicit scale and cadence coordinates"
+    "assembles independently attributed comparator evidence for the reported OWS scale shock and GA-to-Spokes transition, its normalized development-only lexical transition check, Porto Alegre nested participatory budgeting, Mondragon multi-level cooperative governance, comparative/systematic polycentric-governance evidence and task-contingent organizational-network experiments, including source-explicit scale and cadence coordinates"
     "the underlying November 2011 Spokes minutes remain unmaterialised and none of the comparator observations supplies a target-qualified primitive bolo cost/weight bound or political-superiority claim; comparator evidence constrains mechanism plausibility and admissible model design only until explicit transport or direct target measurement is paid"
     "agda -i . DASHI/Governance/BoloBoloComparatorEvidenceInstantiationRegression.agda"
