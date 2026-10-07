@@ -18,6 +18,9 @@ EXPECTED = {
         "metricChangeCanAlterWeightGivenSupportModel",
         "apparentMassIsNotDefinitionallyInertialMass",
         "apparentMassIsNotDefinitionallyPassiveGravitationalResponse",
+        "rationalWeight",
+        "apparentMassFromSupportForce",
+        "sameMetricSupportAccelerationChangesWeight",
     ),
     "AntigravityDeviceOpticalMetricDiscriminatorExact.agda": (
         "deviceStateToStressEnergy",
@@ -70,6 +73,7 @@ def test_weight_and_metric_are_not_conflated() -> None:
     assert "metricChangeCanAlterWeightGivenSupportModel : Bool" in text
     assert "metricChangeCanAlterWeightGivenSupportModelIsTrue" in text
     assert "support-force observable" in text
+    assert "sameMetricSupportAccelerationChangesWeight" in text
 
 
 def test_device_discriminator_requires_same_object_and_cross_channel_checks() -> None:
