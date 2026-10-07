@@ -12,11 +12,6 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 -- Purpose: expose the exact remaining same-object weld without pretending the
 -- concrete electromagnetic stress tensor or gravitational-wave metric tangent
 -- has already been identified with an R144 inhabitant.
---
--- R144 supplies the repo's composite stress first-variation spine.  The new
--- Schützhold interaction supplies a concrete physical target in which the
--- metric perturbation h_{mu nu} is paired with EM stress-energy T_{mu nu}.
--- The bridge is therefore stated as an explicit receipt package.
 ------------------------------------------------------------------------
 
 record R144EMGWStressVariationWeld : Set₁ where
@@ -44,10 +39,6 @@ record R144EMGWStressVariationWeld : Set₁ where
 
 open R144EMGWStressVariationWeld public
 
-------------------------------------------------------------------------
--- Fail-closed scope: importing R144 is not itself the physical weld.
-------------------------------------------------------------------------
-
 record R144EMGWBoundary : Set where
   constructor r144-emgw-boundary
   field
@@ -63,9 +54,9 @@ canonicalR144EMGWBoundary =
   r144-emgw-boundary true false false true true true
 
 ------------------------------------------------------------------------
--- Explicit max-cut: once the two same-object identifications and the pairing
--- receipt are supplied, the existing controlled-exchange carrier can consume
--- the result without any additional promotion axiom.
+-- Exact max-cut: the controlled carrier itself is definitionally constrained
+-- to be the carrier stored in the R144 weld.  No arbitrary proposition can
+-- stand in for this same-object equality.
 ------------------------------------------------------------------------
 
 record R144ControlledExchangeMaxCut : Set₁ where
@@ -74,8 +65,8 @@ record R144ControlledExchangeMaxCut : Set₁ where
     weld : R144EMGWStressVariationWeld
     controlledExchange : Exchange.EMGWInteractionCarrier
 
-    SameControlledInteractionReceipt : Set
-    sameControlledInteractionReceipt : SameControlledInteractionReceipt
+    controlledExchangeIsWeldInteraction :
+      controlledExchange ≡ R144EMGWStressVariationWeld.interaction weld
 
     R144ToControlledInteractionReceipt : Set
     r144ToControlledInteractionReceipt : R144ToControlledInteractionReceipt
