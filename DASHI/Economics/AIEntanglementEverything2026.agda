@@ -10,6 +10,7 @@ import DASHI.Economics.AnthropicProspectusCapitalRecovery2026Exact
 import DASHI.Economics.AICerebrasChinaOpenWeightCalibration2026Exact
 import DASHI.Economics.AISlimMoECostCompression2026Exact
 import DASHI.Economics.AIOpenWeightMarketTransition2026Exact
+import DASHI.Economics.AIRelationshipDataProviderBoundary2026Exact
 import DASHI.Economics.AIGeometricMarketStressOperator2026Exact
 import DASHI.Economics.AIOpenClosedGrowthCapitalRecoveryExact
 import DASHI.Economics.AIPolicyBackstopCommercialMoat2026Exact
@@ -17,3 +18,4 @@ import DASHI.Economics.AIAntitrustCompetitiveIndependence2026Exact
 import DASHI.Economics.AIProductivityValidationGap2026Exact
 import DASHI.Economics.AIExternalPayerConductance2026Exact
 import DASHI.Economics.AICircularFinancingSourceAtlas2026Exact
+import DASHI.Economics.AIEntanglementSourceWrittenChecks2026
