@@ -8,6 +8,9 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalDefectRow
 splitClosed : S.b4LiteralPrincipalDefectSplitClosed ≡ true
 splitClosed = S.b4LiteralPrincipalDefectSplitClosedIsTrue
 
+liveBlockWeldClosed : S.b4PrincipalDefectLiveBlockWeldClosed ≡ true
+liveBlockWeldClosed = S.b4PrincipalDefectLiveBlockWeldClosedIsTrue
+
 principalEstimateOpen : S.b4PrincipalPhysicalEstimateClosedHere ≡ false
 principalEstimateOpen = S.b4PrincipalPhysicalEstimateClosedHereIsFalse
 
