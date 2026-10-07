@@ -35,6 +35,17 @@ aiCreditReuters20260922 = Source.mkNoDOISource
   "secondary carrier for AI-related investment-grade spreads around 115 bp versus 78 bp for broad investment grade; closes a funding-stress observation, not WACC or rollover"
   Source.publicAttribution
 
+vercelGatewaySeptember2026 : Source.AttributedSource
+vercelGatewaySeptember2026 = Source.mkNoDOISource
+  "Vercel"
+  "Open-weight models take 56% of token volume, Astra doubles Fable 5.1 spend"
+  "Vercel AI Gateway Production Index"
+  "2026-09-17"
+  "https://vercel.com/blog/ai-gateway-production-index-september-2026"
+  (Source.namedSourceKind "primary platform telemetry")
+  "primary platform-local carrier for August 2026 open-weight token share 56 percent, spend share 14 percent and average token-price decline 23.2 percent; not a global market-share or scarcity-rent theorem"
+  Source.publicAttribution
+
 gpuCollateralReuters20261001 : Source.AttributedSource
 gpuCollateralReuters20261001 = Source.mkNoDOISource
   "Reuters"
@@ -85,11 +96,12 @@ aiCapitalParetoAcquisitionAtlas = Source.mkSourceAtlas
   "DASHI.Economics.AICapitalParetoAcquisitionSourceAtlas2026Exact"
   (anthropicProfitabilityReuters20261007 ∷
    aiCreditReuters20260922 ∷
+   vercelGatewaySeptember2026 ∷
    gpuCollateralReuters20261001 ∷
    aiBorrowersReuters20260930 ∷
    fercPJMReuters20260930 ∷
    aragonDataCentreReuters20261006 ∷ [])
-  "source-bounded acquisition evidence for profitability direction, funding stress, replacement/obsolescence, refinancing/funding and policy-support residual routes; sources do not themselves close the runtime producer vector except where a separately declared point observation is explicitly constructed"
+  "source-bounded acquisition evidence for profitability direction, funding stress, open-weight usage/spend divergence, replacement/obsolescence, refinancing/funding and policy-support residual routes; sources do not themselves close the runtime producer vector except where a separately declared point observation is explicitly constructed"
 
 atlasDoesNotCreateAuthority :
   Source.atlasCreatesAuthority aiCapitalParetoAcquisitionAtlas ≡ false
