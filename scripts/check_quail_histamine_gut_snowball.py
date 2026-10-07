@@ -16,6 +16,12 @@ paths = [
     ROOT / "DASHI/Biology/QuailEggGutTransferRound2Regression.agda",
     ROOT / "DASHI/Biology/GutMastCellMechanismRouteAtlasExact.agda",
     ROOT / "DASHI/Biology/GutMastCellMechanismRouteAtlasRegression.agda",
+    ROOT / "DASHI/Biology/QuailEggOralGIAnimalBridgeExact.agda",
+    ROOT / "DASHI/Biology/QuailEggOralGIAnimalBridgeRegression.agda",
+    ROOT / "DASHI/Biology/QuailEggIBSTransferLadderExact.agda",
+    ROOT / "DASHI/Biology/QuailEggIBSTransferLadderRegression.agda",
+    ROOT / "DASHI/Biology/IBSHistamineH1InterventionUpdateExact.agda",
+    ROOT / "DASHI/Biology/IBSHistamineH1InterventionUpdateRegression.agda",
 ]
 text = "\n".join(p.read_text(encoding="utf-8") for p in paths)
 required = [
@@ -31,6 +37,9 @@ required = [
     "10.1159/000534825",
     "10.3177/jnsv.40.593",
     "10.1053/j.gastro.2025.07.016",
+    "10.1038/s41598-018-19309-x",
+    "10.1136/gutjnl-2023-331634",
+    "10.1111/nmo.70242",
     "canonicalGutHistamineCompartmentWeld",
     "canonicalQuailEggIBSExperimentRequirement",
     "canonicalGutAcquisitionFrontier",
@@ -39,6 +48,8 @@ required = [
     "canonicalQuailHistamineMicrobiomeHostBridge",
     "canonicalSameObjectQuailGutExperiment",
     "canonicalGutMastCellMechanismRouteAtlas",
+    "canonicalQuailEggIBSTransferLadder",
+    "canonicalIBSHistamineH1InterventionBoundary",
 ]
 missing = [x for x in required if x not in text]
 if missing:
@@ -52,6 +63,8 @@ forbidden = [
     "hen egg tolerance guarantees quail egg tolerance",
     "ovomucoid stability proves gut target engagement",
     "all mast cell pathways are identical",
+    "mouse EoE proves human IBS",
+    "open label equals randomized placebo controlled",
 ]
 found = [x for x in forbidden if x in text]
 if found:
