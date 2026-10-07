@@ -46,8 +46,8 @@ record LinearizedAdmissibleConeReceipt : Set₁ where
 open LinearizedAdmissibleConeReceipt public
 
 AdmissibleDirection :
-  LinearizedAdmissibleConeReceipt →
-  AmbientDirection → Set
+  (cone : LinearizedAdmissibleConeReceipt) →
+  AmbientDirection cone → Set
 AdmissibleDirection cone direction =
   tangentNullspace cone direction
   × activeInequalityCone cone direction
@@ -60,7 +60,6 @@ record ToroidalAdmissibleConeSearch
   field
     State : Set
     decodeState : State → ToroidalDesignSearchState population
-    Move Parameter : Set
     system : Transition.AdmissibleTransitionSystem
     sameStateCarrierReceipt : Transition.State system ≡ State
     coneAtState : State → LinearizedAdmissibleConeReceipt
