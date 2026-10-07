@@ -1,0 +1,5 @@
+module DASHI.Physics.Plasma.Ternary27SearchEverything where
+
+import DASHI.Physics.Plasma.Ternary27SpectralGeometryCarrierExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27ConeSearchExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27MaxCutExact
