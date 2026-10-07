@@ -45,6 +45,8 @@ jobs:
         run: python3 scripts/check_collatz_syracuse_aligned_tail.py
       - name: Python strict-descent frontier calibration
         run: python3 scripts/check_collatz_syracuse_strict_descent.py
+      - name: Python affine-transfer max-cut calibration
+        run: python3 scripts/check_collatz_syracuse_affine_transfer.py
       - name: Static literal Syracuse audit
         run: bash scripts/check_collatz_syracuse_exact.sh
       - name: Typecheck exact affine terminal equivalence
@@ -53,6 +55,8 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
       - name: Typecheck affine correction cocycle
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
+      - name: Typecheck adjacent correction swap
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
       - name: Typecheck first affine-transfer barrier
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
       - name: Typecheck Collatz/Syracuse max-cut root
