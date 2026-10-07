@@ -24,6 +24,10 @@ protectedHoldoutAssignmentPaid :
   Capstone.occupyProtectedHoldoutAssignmentPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 protectedHoldoutAssignmentPaid = refl
 
+owsDevelopmentDurationPanelPaid :
+  Capstone.occupyOWSDevelopmentDurationPanelPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+owsDevelopmentDurationPanelPaid = refl
+
 occupyEvidenceDoesNotPayScalingLaw :
   Capstone.occupyEvidencePaysQuantitativeScalingLaw Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 occupyEvidenceDoesNotPayScalingLaw = refl
