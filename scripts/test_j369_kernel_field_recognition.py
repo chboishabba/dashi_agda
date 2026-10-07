@@ -71,6 +71,14 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
     def test_existing_heisenberg_translations_are_kernel_f3_addition(self):
         self.assertTrue(recognition.heisenberg_additive_intertwiner_verified())
 
+    def test_additive_negation_structure_does_not_select_unique_multiplication(self):
+        for d in (4, 5, 6):
+            model = recognition.model_for_degree(d)
+            self.assertTrue(recognition.coordinate_swap_preserves_addition_negation(model))
+            witness = recognition.multiplication_noncanonicity_witness(model)
+            a = tuple(witness['left']); b = tuple(witness['right'])
+            self.assertNotEqual(model.mul(a, b), recognition.conjugated_multiply(model, a, b))
+
     def test_row_major_legacy_embeddings_do_not_produce_twelve_vectors(self):
         scan = recognition.scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200)
         self.assertEqual(scan['node_count'], 1330)
