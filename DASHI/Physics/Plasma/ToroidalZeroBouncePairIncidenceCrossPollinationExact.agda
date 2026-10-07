@@ -13,15 +13,16 @@ import DASHI.Foundations.MixedPrimeResolution as Mixed
 --
 -- The current 27-coordinate magnet chart has three pinned gauge/constant
 -- coordinates, hence 24 free coordinates and C(24,2)=276 unordered support
--- pairs.  PR #276 already owns the generic finite pair-incidence discipline
--- used in the Navier--Stokes shell programme: explicit pair lists, soundness,
--- no-duplicates, incidence folds and row/column budgets.  This owner reuses
--- that theorem shape for magnet support search, without identifying magnet
--- supports with Fourier resonant pairs.
+-- pairs.  The existing NSPairIncidenceKernel / NSZ3 quantitative owners supply
+-- the generic finite pair-incidence discipline used in the Navier--Stokes shell
+-- programme: explicit pair lists, soundness, no-duplicates, incidence folds and
+-- row/column budgets.  This owner reuses that theorem shape for magnet support
+-- search, without identifying magnet supports with Fourier resonant pairs.
 --
--- PR #243 contributes factor-depth / ternary-refinement coordinates only.
--- PR #270 contributes the producer->integrated-expenditure architecture only.
--- Cross-domain semantics remain distinct.
+-- MixedPrimeResolution contributes factor-depth / ternary-refinement
+-- coordinates only.  The compact-Gamma stack contributes the local-producer ->
+-- integrated-expenditure -> continuation architecture only.  Cross-domain
+-- semantics remain distinct.
 ------------------------------------------------------------------------
 
 freeMagnetCoordinateCount : Nat
@@ -155,4 +156,4 @@ canonicalPairIncidenceCrossPollinationBoundary =
 
 crossPollinationReference : String
 crossPollinationReference =
-  "PR #276 pair-incidence discipline + PR #243 factor-depth refinement + PR #270 producer-to-expenditure architecture; semantics remain domain-local until explicit recognition receipts are inhabited."
+  "NSPairIncidenceKernel + NSZ3 quantitative pair enumeration + MixedPrimeResolution + compact-Gamma producer/expenditure theorem shape; semantics remain domain-local until explicit recognition receipts are inhabited."
