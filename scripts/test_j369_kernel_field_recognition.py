@@ -72,7 +72,8 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
         scan = recognition.scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200)
         self.assertEqual(scan['node_count'], 1330)
         self.assertEqual(scan['matching_12_vector_columns'], [])
-        self.assertGreaterEqual(scan['minimum_vector_count'], 13)
+        self.assertEqual(scan['minimum_vector_count'], 196)
+        self.assertEqual(scan['minimum_vector_columns'], [173, 189])
 
     def test_full_signed_weave_transition_frontier_remains_uninvented(self):
         frontier = recognition.full_signed_weave_frontier()
