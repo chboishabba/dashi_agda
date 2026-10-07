@@ -17,7 +17,8 @@ module DASHI.Analysis.CollatzSyracuseAlignedBlockTailExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
-open import Data.Nat using (_≤_; _<_ ; z≤n)
+open import Data.Fin.Base using (Fin)
+open import Data.Nat using (_≤_; _<_; z≤n)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary using (yes; no)
@@ -40,10 +41,8 @@ horizon n = 8 * n + 1
 wordIndex :
   {n : Nat} →
   Binary.BinaryWord (horizon n) →
-  Data.Fin.Base.Fin (Cylinder.pow2 (horizon n))
+  Fin (Cylinder.pow2 (horizon n))
 wordIndex = Block.inverseWordIndex
-  where
-  import Data.Fin.Base
 
 wordStart :
   (n block : Nat) →
