@@ -1,0 +1,20 @@
+module DASHI.Governance.OccupyMeetingLevelProcessPanelRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.OccupyMeetingLevelProcessPanelExact as Panel
+
+owsDevelopmentRecordCountPinned : Panel.owsDevelopmentRecordCount Panel.canonicalMeetingLevelProcessPanel ≡ 38
+owsDevelopmentRecordCountPinned = refl
+
+libraryNetworkMeetingCountPinned : Panel.libraryNetworkMeetingCount Panel.canonicalMeetingLevelProcessPanel ≡ 5
+libraryNetworkMeetingCountPinned = refl
+
+sourceRegimeRequired : Panel.sourceRegimeIndicatorRequired Panel.canonicalMeetingLevelProcessBoundary ≡ true
+sourceRegimeRequired = refl
+
+noSilentCrossSourceIdentityJoin : Panel.crossSourceParticipantIdentityAutomaticallyJoined Panel.canonicalMeetingLevelProcessBoundary ≡ false
+noSilentCrossSourceIdentityJoin = refl
+
+noNamedMatrixTarget : Panel.completeNamedParticipantIssueMatrixIsAnalysisTarget Panel.canonicalMeetingLevelProcessBoundary ≡ false
+noNamedMatrixTarget = refl
