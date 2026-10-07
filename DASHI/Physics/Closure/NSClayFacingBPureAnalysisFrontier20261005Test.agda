@@ -14,14 +14,20 @@ b4LiveBlockWeldClosed = F.b4PrincipalDefectLiveBlockWeldClosedIsTrue
 b4LiteralCompanionClosed : F.b4LiteralCoreCompanionMeaningClosed ≡ true
 b4LiteralCompanionClosed = F.b4LiteralCoreCompanionMeaningClosedIsTrue
 
-b4BaselineBoundClosed : F.b4PrincipalBaselineYoungBoundClosed ≡ true
-b4BaselineBoundClosed = F.b4PrincipalBaselineYoungBoundClosedIsTrue
+b4PrincipalHalfClosed : F.b4PrincipalHalfCompanionBoundClosed ≡ true
+b4PrincipalHalfClosed = F.b4PrincipalHalfCompanionBoundClosedIsTrue
+
+b4PrincipalNoED : F.b4PrincipalNeedsEDRemainder ≡ false
+b4PrincipalNoED = F.b4PrincipalNeedsEDRemainderIsFalse
 
 b4FreeCompanionGone : F.b4FreeCompanionScalarStillRequired ≡ false
 b4FreeCompanionGone = F.b4FreeCompanionScalarStillRequiredIsFalse
 
-b4PhysicalEstimatesRemain : F.b4PrincipalDefectPhysicalEstimatesClosed ≡ false
-b4PhysicalEstimatesRemain = F.b4PrincipalDefectPhysicalEstimatesClosedIsFalse
+b4OnlyDefectRemains : F.b4RemainingStrictMarginIsDefectBelowHalf ≡ true
+b4OnlyDefectRemains = F.b4RemainingStrictMarginIsDefectBelowHalfIsTrue
+
+b4DefectOpen : F.b4DefectRemainderClosed ≡ false
+b4DefectOpen = F.b4DefectRemainderClosedIsFalse
 
 b1ShellCompilerClosed : F.b1ShellPaymentCompilerClosed ≡ true
 b1ShellCompilerClosed = F.b1ShellPaymentCompilerClosedIsTrue
@@ -43,12 +49,6 @@ b3IntraShellOpen = F.b3PhysicalProducerClosedIsFalse
 
 strictSplitCompiler : F.b4GenericStrictSplitCompilerClosed ≡ true
 strictSplitCompiler = F.b4GenericStrictSplitCompilerClosedIsTrue
-
-fixedQuarterNotRequired : F.b4FixedQuarterMarginRequired ≡ false
-fixedQuarterNotRequired = F.b4FixedQuarterMarginRequiredIsFalse
-
-quarterOptional : F.b4QuarterMarginOptionalCompilerClosed ≡ true
-quarterOptional = F.b4QuarterMarginOptionalCompilerClosedIsTrue
 
 q4PointwiseCompiler : F.q4PointwiseToSpacetimeCompilerClosed ≡ true
 q4PointwiseCompiler = F.q4PointwiseToSpacetimeCompilerClosedIsTrue
