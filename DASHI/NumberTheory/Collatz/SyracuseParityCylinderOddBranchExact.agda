@@ -7,8 +7,8 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderOddBranchExact where
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _-_)
-open import Data.Empty using (⊥-elim)
-open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Nat using (_≤_; _<_)
 open import Data.Nat.Base using (NonZero; nonZero)
 open import Data.Nat.DivMod using (_%_; [m+n]%n≡m%n; m*n%n≡0; n%n≡0)
 import Data.Nat.Properties as NatP
@@ -31,6 +31,9 @@ import DASHI.NumberTheory.Collatz.SyracuseParityCylinderOddResidualExact as Resi
 instance
   nonZeroTwo : NonZero 2
   nonZeroTwo = nonZero
+
+oneModTwoNotZero : 1 % 2 ≡ 0 % 2 → ⊥
+oneModTwoNotZero ()
 
 ------------------------------------------------------------------------
 -- Generic helpers at level m+1.
@@ -163,7 +166,7 @@ oddCandidateEquation {m} tail =
     totalPositive =
       NatP.≤-trans
         (Pow2.pow2Positive (suc m))
-        (NatP.n≤m+n modulus (2 * r))
+        (NatP.m≤n+m modulus (2 * r))
 
     predecessorRestores : rawPredecessor + 1 ≡ 2 * r + modulus
     predecessorRestores = NatP.m∸n+n≡m totalPositive
@@ -295,7 +298,7 @@ parityMustBeTrueFromOddEquation {m} x r equation with Itinerary.parity x
         (Mod.modSym translatedIsOne)
         (Mod.modTrans projectedEquation rightIsZero)
   in
-  ⊥-elim (λ () → oneEqualsZero)
+  ⊥-elim (oneModTwoNotZero oneEqualsZero)
 
 bit1ReversePaid :
   {m : Nat} →
