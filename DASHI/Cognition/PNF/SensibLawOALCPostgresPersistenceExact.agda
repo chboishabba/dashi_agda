@@ -7,7 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawOALCLegislationParserInputContractExact as OALC
-import DASHI.Cognition.PNF.SensibLawOALCNativeShardResolutionExact as Native
+import DASHI.Cognition.PNF.SensibLawOALCResolutionCompletenessFallbackExact as Resolution
 
 ------------------------------------------------------------------------
 -- OALC / LEGALFOLLOW POSTGRES PERSISTENCE
@@ -45,7 +45,7 @@ record PersistedExternalSourceRevision
     jurisdictionRef : String
     documentTypeRef : String
     temporalCoverage : OALC.OALCTemporalCoverage
-    resolutionPath : Native.NativeOALCResolutionPath
+    resolutionPath : Resolution.OALCResolutionPath
     sourceURLRef : String
     receiptDigestRef : String
 

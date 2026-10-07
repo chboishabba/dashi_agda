@@ -70,7 +70,7 @@ open LegalFollowGraphExecution public
 -- Blocked legal-follow plans remain blocked at search compilation.
 ------------------------------------------------------------------------
 
-record BlockedLegalFollowSearchBridge : Set where
+record BlockedLegalFollowSearchBridge : Set₁ where
   constructor blockedLegalFollowSearchBridge
   field
     blockedDemand : Scheduler.BlockedLegalResidualDemand
