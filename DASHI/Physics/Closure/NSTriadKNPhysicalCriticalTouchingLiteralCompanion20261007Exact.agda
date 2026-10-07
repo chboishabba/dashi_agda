@@ -32,8 +32,9 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingLiteralCompanion20
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _<_; ∣_∣)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_; ∣_∣)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -52,10 +53,6 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictS
 
 F : C3.RealField _
 F = Rational.rationalRealField
-
-------------------------------------------------------------------------
--- Literal same-pair Young companion on an arbitrary selected row list.
-------------------------------------------------------------------------
 
 rowCompanion :
   C3.Complex3 F →
@@ -95,7 +92,7 @@ negativeCoherentPairTermBelowYoung mixed rate value alpha beta =
     raw = ℚP.p≤∣p∣ (0ℚ - product)
 
     negMeaning : 0ℚ - product ≡ - product
-    negMeaning = ℚP.+-identityˡ (- product)
+    negMeaning = solve (product ∷ [])
 
     absNeg : ∣ 0ℚ - product ∣ ≡ ∣ product ∣
     absNeg =
@@ -142,10 +139,6 @@ rowSumBelowCompanion mixed rate value (row ∷ rest) =
   ℚP.+-mono-≤
     (rowSignedBelowCompanion mixed rate value row)
     (rowSumBelowCompanion mixed rate value rest)
-
-------------------------------------------------------------------------
--- Live principal companion and semantic strict-split compiler.
-------------------------------------------------------------------------
 
 module LiveLiteralCompanion
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
@@ -221,10 +214,6 @@ module LiveLiteralCompanion
     G.O.LiteralRowStrictCriticalTouchingCertificate
   buildsLiteralB4Certificate D =
     G.strictSplitBuildsLiteralRowCertificate (toGenericStrictSplit D)
-
-------------------------------------------------------------------------
--- Status.
-------------------------------------------------------------------------
 
 b4LiteralCoreCompanionMeaningClosed : Bool
 b4LiteralCoreCompanionMeaningClosed = true
