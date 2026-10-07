@@ -1,0 +1,111 @@
+name: NS ABCD max-cut 2026-10-07
+
+on:
+  push:
+    branches:
+      - 'agent/ns-b-positive-pure-analysis-maxcut'
+    paths:
+      - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectVector20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectVector20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
+      - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSABCDMaxCut20261007Test.agda'
+      - '.github/workflows/ns-abcd-maxcut-20261007.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectVector20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectVector20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
+      - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSABCDMaxCut20261007Test.agda'
+      - '.github/workflows/ns-abcd-maxcut-20261007.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  semantic-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Agda semantic preflight
+        run: python -m pip install -e tools/agda_preflight
+      - name: Preflight ABCD max-cut owners
+        run: |
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectVector20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectVector20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectNoncoreCore20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDPublicationAuditLedger20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingCDReleasedAuditFrontier20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSABCDMaxCut20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSABCDMaxCut20261007Test.agda
