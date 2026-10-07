@@ -6,8 +6,8 @@ module DASHI.Moonshine.OggSSPKernelFieldActionAcquisitionFrontierExact where
 -- #1105 proves that the entire currently paid standard finite-Heisenberg/
 -- symplectic carrier admits a coordinate symmetry which changes the selected
 -- GF(3^6) multiplication.  This module audits the obvious richer action lanes
--- already present in the repository and records exactly why none may yet be
--- promoted to the desired field generator.
+-- already present in the repository and records the first genuinely external
+-- source seam in each lane.
 --
 -- The target is not another cardinality match.  We need an independently owned
 -- F3-linear endomorphism of the SAME X6/Kernel6 carrier whose action breaks the
@@ -23,6 +23,8 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.OggSSPHeisenbergSymplecticFieldNoGoExact as NoGo
 import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact as Axis0
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Actual
+import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as Candidate
+import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestBridge
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
 
 ------------------------------------------------------------------------
@@ -54,14 +56,38 @@ rankOneActualWeilPairingTransportPaidIsFalse :
   rankOneActualWeilPairingTransportPaid ≡ false
 rankOneActualWeilPairingTransportPaidIsFalse = refl
 
-actualMonsterActionRecognitionInhabitedHere : Bool
-actualMonsterActionRecognitionInhabitedHere =
+-- ActualMonster3BActionRecognition is NOT an independent leaf: once a shortest
+-- 3B source exists, Trialectic369Shortest3BActionSourceBridgeExact compiles it.
+-- The genuinely external seam is one step earlier, at the Base369 candidate.
+base369ShortestCandidateInhabitedHere : Bool
+base369ShortestCandidateInhabitedHere =
+  Candidate.base369CandidateInhabitedHere
+    Candidate.canonicalBase369ShortestFrontierCandidateBoundary
+
+base369ShortestCandidateInhabitedHereIsFalse :
+  base369ShortestCandidateInhabitedHere ≡ false
+base369ShortestCandidateInhabitedHereIsFalse = refl
+
+shortestSourceWouldCompileActualMonsterAction : Bool
+shortestSourceWouldCompileActualMonsterAction =
+  ShortestBridge.actualActionRecognitionCompiled
+    ShortestBridge.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+
+shortestSourceWouldCompileActualMonsterActionIsTrue :
+  shortestSourceWouldCompileActualMonsterAction ≡ true
+shortestSourceWouldCompileActualMonsterActionIsTrue = refl
+
+-- The older direct owner still correctly says it does not inhabit the source
+-- locally; the compiler chain above explains how that Bool becomes irrelevant
+-- once the Base369 candidate is actually supplied.
+actualMonsterActionRecognitionInhabitedLocally : Bool
+actualMonsterActionRecognitionInhabitedLocally =
   Actual.actualActionRecognitionInhabitedHere
     Actual.canonicalActualActionRecognitionBoundary
 
-actualMonsterActionRecognitionInhabitedHereIsFalse :
-  actualMonsterActionRecognitionInhabitedHere ≡ false
-actualMonsterActionRecognitionInhabitedHereIsFalse = refl
+actualMonsterActionRecognitionInhabitedLocallyIsFalse :
+  actualMonsterActionRecognitionInhabitedLocally ≡ false
+actualMonsterActionRecognitionInhabitedLocallyIsFalse = refl
 
 exceptionalMonsterAlbertSameActionPaid : Bool
 exceptionalMonsterAlbertSameActionPaid =
@@ -77,15 +103,14 @@ exceptionalMonsterAlbertSameActionPaidIsFalse = refl
 --
 -- `breaksCoordinateSwap` is deliberately proof-relevant rather than a Bool:
 -- the acquired operator must visibly distinguish the symmetry responsible for
--- the current no-go.  `degreeSixFieldGeneratorReceipt` is kept abstract until
+-- the current no-go.  `degreeSixFieldGeneratorReceipt` stays abstract until
 -- the repository owns an independently checked minimal-polynomial interface.
 ------------------------------------------------------------------------
 
 record RicherK6FieldSelectingAction : Set₁ where
   field
     operator : H.X6 → H.X6
-    breaksCoordinateSwap :
-      Set
+    breaksCoordinateSwap : Set
     degreeSixFieldGeneratorReceipt : Set
 
 open RicherK6FieldSelectingAction public
@@ -95,7 +120,8 @@ record FieldActionAcquisitionBoundary : Set where
   field
     standardHeisenbergSymplecticLaneExhausted : Bool
     rankOneWeilLaneNeedsActualTorsionTransport : Bool
-    actualMonsterActionLaneNeedsRecognitionInhabitant : Bool
+    shortest3BCompilerChainLocated : Bool
+    shortest3BLaneNeedsBase369CandidateSource : Bool
     exceptionalF4E6LaneNeedsSameActionRecognition : Bool
     independentlyOwnedK6FieldSelectingOperatorLocated : Bool
     fullFieldRecognitionReady : Bool
@@ -103,5 +129,5 @@ record FieldActionAcquisitionBoundary : Set where
 canonicalFieldActionAcquisitionBoundary : FieldActionAcquisitionBoundary
 canonicalFieldActionAcquisitionBoundary =
   field-action-acquisition-boundary
-    true true true true
+    true true true true true
     false false
