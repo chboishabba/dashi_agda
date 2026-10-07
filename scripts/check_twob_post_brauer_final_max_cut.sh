@@ -13,6 +13,8 @@ targets=(
   DASHI/Moonshine/OggSSP2BMonsterGF2RepresentationSourceExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda
   DASHI/Moonshine/OggSSP2BSemisimplificationSelfDualityExtensionNoGoExact.agda
+  DASHI/Moonshine/OggSSP2BIteratedTateDefectTargetExact.agda
+  DASHI/Moonshine/OggSSP2BM22d2OuterClassDuadDefectExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda
   DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda
 )
@@ -56,17 +58,26 @@ grep -q 'nonsplitPreservesForm' "${targets[7]}"
 grep -q 'fixedCountsDiffer' "${targets[7]}"
 grep -q 'semisimplificationAndSelfDualityDetermineExtension' "${targets[7]}"
 
-grep -q 'brauerAllRowsMatch' "${targets[8]}"
-grep -q 'semisimplifiedIngressIsPaid' "${targets[8]}"
-grep -q 'outerJ2x5MatchesTwo' "${targets[8]}"
-grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[8]}"
-grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[8]}"
-grep -q 'actualOuterActionOnSameQStillOpen' "${targets[8]}"
+grep -q 'completion10IteratedTateDefectIsZero' "${targets[8]}"
+grep -q 'duadOuterClassRuntimeScreenImplemented' "${targets[8]}"
+grep -q 'actualTwoBKleinFourIteratedTateComputed' "${targets[8]}"
 
-grep -q 'canonicalCompletionAcquisitionStatus' "${targets[9]}"
-grep -q 'postBrauerSemisimplifiedIngressAlreadyPaid' "${targets[9]}"
-grep -q 'fi22NaturalTenRankIsTen' "${targets[9]}"
-grep -q 'monsterGF2DimensionIs196882' "${targets[9]}"
-grep -q 'remainingDefectSourceBitsIsTwo' "${targets[9]}"
+grep -q 'm24TwoBCentralizerIsTwelveTimesLocal' "${targets[9]}"
+grep -q 'duadRankIs132' "${targets[9]}"
+grep -q 'duadFixedDimensionIs144' "${targets[9]}"
+grep -q 'duadIteratedTateDefectIs12' "${targets[9]}"
+
+grep -q 'brauerAllRowsMatch' "${targets[10]}"
+grep -q 'semisimplifiedIngressIsPaid' "${targets[10]}"
+grep -q 'outerJ2x5MatchesTwo' "${targets[10]}"
+grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[10]}"
+grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[10]}"
+grep -q 'actualOuterActionOnSameQStillOpen' "${targets[10]}"
+
+grep -q 'canonicalCompletionAcquisitionStatus' "${targets[11]}"
+grep -q 'postBrauerSemisimplifiedIngressAlreadyPaid' "${targets[11]}"
+grep -q 'fi22NaturalTenRankIsTen' "${targets[11]}"
+grep -q 'monsterGF2DimensionIs196882' "${targets[11]}"
+grep -q 'remainingDefectSourceBitsIsTwo' "${targets[11]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
