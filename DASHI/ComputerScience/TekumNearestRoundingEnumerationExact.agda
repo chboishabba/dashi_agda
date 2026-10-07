@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Fin.Base using (Fin)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product.Base using (Σ; _,_)
+open import Data.Rational.Base using (_≤_)
 
 import DASHI.Algebra.BalancedTernaryRankReconstructionExact as Rank
 import DASHI.ComputerScience.TekumExactNearestRoundingSemantics as Near
@@ -57,7 +58,7 @@ nearestDistanceMinimal :
   {chosen : Near.FiniteTekumWord targetExtra} →
   exactNearestSet source chosen →
   (other : Near.FiniteTekumWord targetExtra) →
-  Near.finiteDistance source chosen Near.≤? Near.finiteDistance source other
+  Near.finiteDistance source chosen ≤ Near.finiteDistance source other
 nearestDistanceMinimal nearest other = nearest other
 
 ------------------------------------------------------------------------
