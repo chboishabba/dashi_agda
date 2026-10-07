@@ -43,6 +43,8 @@ jobs:
         run: python3 scripts/check_collatz_syracuse_rational_tail.py
       - name: Python aligned-block literal tail calibration
         run: python3 scripts/check_collatz_syracuse_aligned_tail.py
+      - name: Python strict-descent frontier calibration
+        run: python3 scripts/check_collatz_syracuse_strict_descent.py
       - name: Static literal Syracuse audit
         run: bash scripts/check_collatz_syracuse_exact.sh
       - name: Typecheck Collatz/Syracuse max-cut root
