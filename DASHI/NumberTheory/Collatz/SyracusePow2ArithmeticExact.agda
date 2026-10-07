@@ -6,6 +6,7 @@ module DASHI.NumberTheory.Collatz.SyracusePow2ArithmeticExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Data.Nat using (_<_; z≤n; s≤s)
 open import Data.Nat.Base using (NonZero)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -26,11 +27,17 @@ pow2NonZero m with pow2IsSuccessor m
 ... | predecessor , proof =
   subst NonZero (sym proof) B369.nonZero
 
+pow2Positive : (m : Nat) → 0 < Cylinder.pow2 m
+pow2Positive m with pow2IsSuccessor m
+... | predecessor , proof =
+  subst (0 <_) (sym proof) (s≤s z≤n)
+
 record Pow2ArithmeticBoundary : Set where
   constructor pow2ArithmeticBoundary
   field
     successorShapeOwned : Nat
     nonZeroOwned : Nat
+    positivityOwned : Nat
 
 canonicalPow2ArithmeticBoundary : Pow2ArithmeticBoundary
-canonicalPow2ArithmeticBoundary = pow2ArithmeticBoundary 1 1
+canonicalPow2ArithmeticBoundary = pow2ArithmeticBoundary 1 1 1
