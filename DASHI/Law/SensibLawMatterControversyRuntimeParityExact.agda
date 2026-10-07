@@ -39,6 +39,9 @@ record RuntimeMatterControversy : Set where
   field
     matterRef : String
     controversyRef : String
+    stageRef : String
+    priorControversyRefs : List String
+    rootPropositionRef : String
     proofGraph : Lee.ProofGraph
     normativeOrderRefs : List String
     reviewedEvidenceRefs : List String
@@ -61,6 +64,9 @@ record RuntimeReverseProofProjection : Set where
   field
     controversy : RuntimeMatterControversy
     reverse : Lee.ReverseProofSearch
+    targetPropositionRef : String
+    targetIsPersistedRoot :
+      targetPropositionRef ≡ RuntimeMatterControversy.rootPropositionRef controversy
     sameGraphObject : Lee.graph reverse ≡ RuntimeMatterControversy.proofGraph controversy
     potentialReopeningOnly : Bool
     potentialReopeningOnlyIsTrue : potentialReopeningOnly ≡ true
@@ -129,6 +135,12 @@ record MatterControversyRuntimeBoundary : Set where
       responseModePreservedNotBooleanNegation ≡ true
     samePersistedMatterRequired : Bool
     samePersistedMatterRequiredIsTrue : samePersistedMatterRequired ≡ true
+    immutableStageSnapshotRequired : Bool
+    immutableStageSnapshotRequiredIsTrue : immutableStageSnapshotRequired ≡ true
+    supersessionMustStayInSameMatter : Bool
+    supersessionMustStayInSameMatterIsTrue : supersessionMustStayInSameMatter ≡ true
+    reverseSearchTargetsPersistedRoot : Bool
+    reverseSearchTargetsPersistedRootIsTrue : reverseSearchTargetsPersistedRoot ≡ true
     reviewedEvidenceOwnerReopened : Bool
     reviewedEvidenceOwnerReopenedIsTrue : reviewedEvidenceOwnerReopened ≡ true
     reviewedPropositionIdentityReopenedExactly : Bool
@@ -175,6 +187,9 @@ canonicalMatterControversyRuntimeBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -189,6 +204,9 @@ canonicalMatterControversyRuntimeBoundary =
 
 data TypedResponseEqualsBooleanNegation : Set where
 data DifferentMatterMayShareControversyIdentity : Set where
+data LaterStageMayRewriteEarlierControversy : Set where
+data SupersessionMayCrossMatter : Set where
+data ReverseSearchMayRetargetRootProposition : Set where
 data ReviewedEvidenceMayBeRestatedByPersonaProjection : Set where
 data ReviewedEvidenceMayPayDifferentProposition : Set where
 data RelationalResidualMayBeInventedByControversyProjection : Set where
@@ -204,6 +222,15 @@ typedResponseDoesNotEqualBooleanNegation ()
 
 differentMatterCannotShareControversyIdentity : DifferentMatterMayShareControversyIdentity → ⊥
 differentMatterCannotShareControversyIdentity ()
+
+laterStageCannotRewriteEarlierControversy : LaterStageMayRewriteEarlierControversy → ⊥
+laterStageCannotRewriteEarlierControversy ()
+
+supersessionCannotCrossMatter : SupersessionMayCrossMatter → ⊥
+supersessionCannotCrossMatter ()
+
+reverseSearchCannotRetargetRootProposition : ReverseSearchMayRetargetRootProposition → ⊥
+reverseSearchCannotRetargetRootProposition ()
 
 personaCannotRestateReviewedEvidence : ReviewedEvidenceMayBeRestatedByPersonaProjection → ⊥
 personaCannotRestateReviewedEvidence ()
