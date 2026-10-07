@@ -34,8 +34,9 @@ def test_same_object_welds_use_propositional_equality() -> None:
     weld = read("DASHI/Physics/YangMills/MaxwellHodgeR144ControlledExchangeWeldExact.agda")
     assert "interactionFromMaxwellHodge" in weld
     assert "interactionFromR144" in weld
-    assert "sameInteraction : interactionFromMaxwellHodge" in weld
-    assert "≡ interactionFromR144" in weld
+    assert "sameInteraction :" in weld
+    assert "interactionFromMaxwellHodge weld" in weld
+    assert "≡ interactionFromR144 weld" in weld
     assert "SameInteractionReceipt : Set" not in weld
 
     r144 = read("DASHI/Physics/YangMills/R144EMGWControlledExchangeInstantiationExact.agda")
