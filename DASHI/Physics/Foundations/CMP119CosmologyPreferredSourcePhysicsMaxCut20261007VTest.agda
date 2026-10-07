@@ -28,10 +28,13 @@ s2NoInstantiationDebt = refl
 s2OperatorIdentityRemains : V.s2ExactRenormalizedOperatorIdentityRequired ≡ true
 s2OperatorIdentityRemains = refl
 
-s3MarkedFamilyRemains : V.s3PhysicalMarkedF2FamilyRequired ≡ true
-s3MarkedFamilyRemains = refl
+s3SelectedMarkedSourceRemains : V.s3SelectedMarkedF2SourceRequired ≡ true
+s3SelectedMarkedSourceRemains = refl
 
-s3NoPostHocF2Equality : V.s3PostHocCompletedF2EqualityRequired ≡ false
+s3NoUniversalFamily : V.s3UniversalMarkedCurvatureFamilyRequired ≡ false
+s3NoUniversalFamily = refl
+
+s3NoPostHocF2Equality : V.postHocCompletedF2EqualityRequired ≡ false
 s3NoPostHocF2Equality = refl
 
 s3NoMassDiscrepancy : V.s3IndependentMassDiscrepancyConvergenceRequired ≡ false
