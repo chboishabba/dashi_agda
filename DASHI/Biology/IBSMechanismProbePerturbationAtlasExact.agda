@@ -124,8 +124,8 @@ bileAcidSequestrationProbe = mechanism-probe bileAcidProbe randomizedMechanistic
   "strong target-engagement probe for a selected bile-acid fibre; lack of broad clinical difference in a small study blocks target-engagement=whole-symptom-closure"
   false
 
-centralInteroceptiveProbe : MechanismProbe
-centralInteroceptiveProbe = mechanism-probe centralInteroceptiveProbe interventionWithImaging lowen2013Source
+centralInteroceptiveMechanismProbe : MechanismProbe
+centralInteroceptiveMechanismProbe = mechanism-probe centralInteroceptiveProbe interventionWithImaging lowen2013Source
   "gut-directed hypnotherapy / educational intervention"
   "fMRI response during expected and delivered rectal distension"
   "symptom response"
@@ -135,7 +135,7 @@ centralInteroceptiveProbe = mechanism-probe centralInteroceptiveProbe interventi
 canonicalIBSMechanismProbeAtlas : List MechanismProbe
 canonicalIBSMechanismProbeAtlas =
   lowFODMAPProbe ∷ rifaximinProbe ∷ fODMAPChallengeProbe ∷
-  bileAcidSequestrationProbe ∷ centralInteroceptiveProbe ∷ []
+  bileAcidSequestrationProbe ∷ centralInteroceptiveMechanismProbe ∷ []
 
 data ResponseIdentifiesUniqueMechanismPermission : Set where
 responseDoesNotIdentifyUniqueMechanism : ResponseIdentifiesUniqueMechanismPermission → ⊥
