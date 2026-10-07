@@ -1,21 +1,33 @@
 module DASHI.Physics.Closure.NSABCDMaxCut20261007Exact where
 
 ------------------------------------------------------------------------
--- NAVIER--STOKES A/B/C/D / AUTHORITATIVE MAX-CUT / 2026-10-07
+-- NAVIER--STOKES A/B/C/D / AUTHORITATIVE IRREDUCIBLE MAX-CUT / 2026-10-07
 --
--- A and B remain independent internal theorem-development programmes.
--- C and D are released-proof source-audit/publication lanes: their official
--- coordinate alignment is already closed and an independent DASHI Agda
--- reconstruction is not a prerequisite for that audit.
+-- A/B remain internal theorem-development programmes.  C/D are released-proof
+-- source-audit/publication lanes.  No new representation layer is permitted by
+-- this owner: each open A/B leaf is a physical population/inequality or final
+-- continuation input on an already-literal carrier.
 --
--- A retains the public A1 -> A2 -> A3 architecture but exposes the actual
--- physical subleaves.  B imports the post-#1039 pure-analysis board.  C/D are
--- frozen against accidental reclassification as internal theorem-discovery.
+-- A:
+--   A1 actual continuum population of the already-canonical pair carrier
+--      + high-frequency physical heat/envelope weld
+--   A2 low/high physical majorant inequalities
+--   A3 continuation/literal NS-pressure-global-smooth assembly
+--   (canonical pair/resolvent/origin, compensated-field and signed-Lebesgue
+--    compilers are already closed)
 --
--- Current-head source freshness is also explicit: the OpenAI release advanced
--- beyond the originally pinned comparator commit, but the C/D comparator
--- theorem statements stayed stable, so the official-coordinate audit does not
--- reopen merely because the proof implementation changed.
+-- B:
+--   B4 principal/defect physical estimates on an exact literal split
+--   B1/B2/B3 physical shell receipts/cancellation/local-ED payments
+--   Q4 pointwise off-diagonal Gram -> dissipation
+--   E+ cutoff-uniform physical amplitude-sum bound
+--   (Q4+E preferred) OR Q5 fallback
+--   selected-family continuum/BKM input population
+--
+-- C/D:
+--   statement coordinates, current-head freshness, and released dependency
+--   routes are source-audited.  Independent build/reconstruction/referee/CMI
+--   evaluation remain publication residuals, not internal PDE theorem leaves.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -45,6 +57,15 @@ laneMode laneD = releasedProofAudit
 aCurrentHighestInformationLeaf : A.APureLeaf
 aCurrentHighestInformationLeaf = A.currentHighestInformationALeaf
 
+aCanonicalPairInfrastructureClosed : Bool
+aCanonicalPairInfrastructureClosed = A.aCanonicalPairInfrastructureClosed
+
+aA3PhysicalFieldAssemblyClosed : Bool
+aA3PhysicalFieldAssemblyClosed = A.aA3PhysicalFieldAssemblyClosed
+
+aA3SignedLebesgueAssemblyClosed : Bool
+aA3SignedLebesgueAssemblyClosed = A.aA3SignedLebesgueAssemblyClosed
+
 aCompilerStackClosed : Bool
 aCompilerStackClosed = A.aCompilerStackClosed
 
@@ -57,6 +78,24 @@ aInternalFrontierClosed = A.aInternalFrontierClosed
 
 bCurrentHighestInformationLeaf : B.PureBAnalyticLeaf
 bCurrentHighestInformationLeaf = B.currentHighestInformationLeaf
+
+bLiteralPrincipalDefectSplitClosed : Bool
+bLiteralPrincipalDefectSplitClosed = B.b4LiteralPrincipalDefectSplitClosed
+
+bB1ShellCompilerClosed : Bool
+bB1ShellCompilerClosed = B.b1ShellPaymentCompilerClosed
+
+bB2ShellCompilerClosed : Bool
+bB2ShellCompilerClosed = B.b2ShellFoldCompilerClosed
+
+bB3GapAndComponentInfrastructureClosed : Bool
+bB3GapAndComponentInfrastructureClosed = B.b3GapAndComponentInfrastructureClosed
+
+bContinuationAssemblyMachineChecked : Bool
+bContinuationAssemblyMachineChecked = B.bContinuationAssemblyMachineChecked
+
+bContinuationPhysicalInputsClosed : Bool
+bContinuationPhysicalInputsClosed = B.bContinuationPhysicalInputsClosed
 
 bRepresentationProgrammeFrozen : Bool
 bRepresentationProgrammeFrozen = true
@@ -87,6 +126,12 @@ cdCurrentHeadRequiresReopeningCoordinateAudit : Bool
 cdCurrentHeadRequiresReopeningCoordinateAudit =
   CD.currentReleasedHeadRequiresReopeningCoordinateAudit
 
+cdReleasedDependencyRoutesSourceAudited : Bool
+cdReleasedDependencyRoutesSourceAudited = true
+
+cdIndependentKernelBuildWitnessedHere : Bool
+cdIndependentKernelBuildWitnessedHere = CD.independentKernelBuildWitnessedHere
+
 cdIndependentReconstructionGatesAudit : Bool
 cdIndependentReconstructionGatesAudit = CD.independentDASHIReconstructionGatesAudit
 
@@ -112,8 +157,23 @@ releasedDSourceAuditClosed = CD.dOfficialCoordinateAuditClosed
 clayPromotion : Bool
 clayPromotion = false
 
-bRepresentationProgrammeFrozenIsTrue :
-  bRepresentationProgrammeFrozen ≡ true
+------------------------------------------------------------------------
+-- Regression receipts.
+------------------------------------------------------------------------
+
+aCanonicalPairInfrastructureClosedIsTrue :
+  aCanonicalPairInfrastructureClosed ≡ true
+aCanonicalPairInfrastructureClosedIsTrue = refl
+
+bLiteralPrincipalDefectSplitClosedIsTrue :
+  bLiteralPrincipalDefectSplitClosed ≡ true
+bLiteralPrincipalDefectSplitClosedIsTrue = refl
+
+bContinuationAssemblyMachineCheckedIsTrue :
+  bContinuationAssemblyMachineChecked ≡ true
+bContinuationAssemblyMachineCheckedIsTrue = refl
+
+bRepresentationProgrammeFrozenIsTrue : bRepresentationProgrammeFrozen ≡ true
 bRepresentationProgrammeFrozenIsTrue = refl
 
 cCurrentReleasedHeadStatementStableIsTrue :
@@ -127,6 +187,14 @@ dCurrentReleasedHeadStatementStableIsTrue = refl
 cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse :
   cdCurrentHeadRequiresReopeningCoordinateAudit ≡ false
 cdCurrentHeadRequiresReopeningCoordinateAuditIsFalse = refl
+
+cdReleasedDependencyRoutesSourceAuditedIsTrue :
+  cdReleasedDependencyRoutesSourceAudited ≡ true
+cdReleasedDependencyRoutesSourceAuditedIsTrue = refl
+
+cdIndependentKernelBuildWitnessedHereIsFalse :
+  cdIndependentKernelBuildWitnessedHere ≡ false
+cdIndependentKernelBuildWitnessedHereIsFalse = refl
 
 cdIndependentReconstructionGatesAuditIsFalse :
   cdIndependentReconstructionGatesAudit ≡ false
