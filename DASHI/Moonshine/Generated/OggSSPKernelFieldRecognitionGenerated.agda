@@ -50,13 +50,10 @@ k6FrobeniusSixCycleCount = 116
 
 k4GF9SubfieldLinearImageSize : Nat
 k4GF9SubfieldLinearImageSize = 9
-
 k4GF9SubfieldEqualsFrobenius2FixedSet : Bool
 k4GF9SubfieldEqualsFrobenius2FixedSet = true
-
 k4GF9SubfieldIsNaivePrefixK2 : Bool
 k4GF9SubfieldIsNaivePrefixK2 = false
-
 k4T5ChosenSubfieldObjectMapPaid : Bool
 k4T5ChosenSubfieldObjectMapPaid = true
 
