@@ -31,8 +31,9 @@ import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 -- Re-centred bolo'bolo evaluation lane: source-bounded nested design,
 -- scale/topology scenarios, incidence compression, exact + robust cost
 -- comparison, component/count/weight bound compilers, meaningful-margin and
--- model-class robustness, Occupy calibration, transfer qualification, direct
--- target experiment design, and symmetric promotion/falsification gate.
+-- model-class robustness, Occupy calibration, independent real-world
+-- comparators, transfer qualification, direct target experiment design, and
+-- symmetric promotion/falsification gate.
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
 import DASHI.Governance.BoloBoloPrimarySourceAtlasRegression
 import DASHI.Governance.BoloBoloDerivedScaleEnvelopeExact
@@ -55,6 +56,14 @@ import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerExact
 import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerRegression
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeRegression
+import DASHI.Governance.BoloBoloComparatorEvidenceAtlasExact
+import DASHI.Governance.BoloBoloComparatorEvidenceAtlasRegression
+import DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionExact
+import DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionRegression
+import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact
+import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisRegression
+import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact
+import DASHI.Governance.BoloBoloComparatorCalibrationFrontierRegression
 import DASHI.Governance.BoloBoloCalibrationTransferExact
 import DASHI.Governance.BoloBoloCalibrationTransferRegression
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact
