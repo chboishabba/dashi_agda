@@ -30,8 +30,9 @@ import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 
 -- Re-centred bolo'bolo evaluation lane: source-bounded nested design,
 -- scale/topology scenarios, incidence compression, exact + robust cost
--- comparison, Occupy calibration, transfer qualification, direct target
--- experiment design, and symmetric promotion/falsification gate.
+-- comparison, component/count/weight bound compilers, meaningful-margin and
+-- model-class robustness, Occupy calibration, transfer qualification, direct
+-- target experiment design, and symmetric promotion/falsification gate.
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
 import DASHI.Governance.BoloBoloPrimarySourceAtlasRegression
 import DASHI.Governance.BoloBoloDerivedScaleEnvelopeExact
@@ -46,6 +47,12 @@ import DASHI.Governance.BoloBoloFederationCostComparisonExact
 import DASHI.Governance.BoloBoloFederationCostComparisonRegression
 import DASHI.Governance.BoloBoloRobustCostBoundsExact
 import DASHI.Governance.BoloBoloRobustCostBoundsRegression
+import DASHI.Governance.BoloBoloNestedCostBoundCompilerExact
+import DASHI.Governance.BoloBoloNestedCostBoundCompilerRegression
+import DASHI.Governance.BoloBoloPracticalSignificanceExact
+import DASHI.Governance.BoloBoloPracticalSignificanceRegression
+import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerExact
+import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerRegression
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact
 import DASHI.Governance.BoloBoloOccupyCalibrationBridgeRegression
 import DASHI.Governance.BoloBoloCalibrationTransferExact
@@ -54,6 +61,8 @@ import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentRegression
 import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact
 import DASHI.Governance.BoloBoloEmpiricalPromotionGateRegression
+import DASHI.Governance.BoloBoloModelClassRobustnessExact
+import DASHI.Governance.BoloBoloModelClassRobustnessRegression
 import DASHI.Governance.BoloBoloCounterfactualEvaluationExact
 import DASHI.Governance.BoloBoloCounterfactualEvaluationRegression
 
