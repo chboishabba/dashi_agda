@@ -5,6 +5,9 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Economics.AICapitalRecoveryEntanglement2026Exact as Capital
+import DASHI.Economics.AnthropicProspectusCapitalRecovery2026Exact as Anthropic
+import DASHI.Economics.AISlimMoECostCompression2026Exact as SlimMoE
+import DASHI.Economics.AIOpenWeightMarketTransition2026Exact as OpenTransition
 
 ------------------------------------------------------------------------
 -- SOURCE ATLAS FOR THE OCTOBER 2026 CIRCULAR-FINANCING TRANCHE
@@ -44,14 +47,34 @@ vercelUsageSpendEntry = atlasEntry
   "Vercel reported open-weight token volume far above its spend share in June 2026, supporting a usage/rent divergence observation on that gateway."
   Capital.vercelOpenWeightShare2026 true false
 
+vercelTransitionEntry : AtlasEntry
+vercelTransitionEntry = atlasEntry
+  "Vercel reported open-weight token share rising from 7% in December 2025 to 56% in August 2026, with 14% of August spend; this is gateway-local telemetry."
+  OpenTransition.vercelSeptember2026 true false
+
+slimMoEEntry : AtlasEntry
+slimMoEEntry = atlasEntry
+  "SlimMoE compresses Phi-3.5-MoE 41.9B/6.6B-active into 7.6B/2.4B-active and 3.8B/1.1B-active variants using 400B distillation tokens, with source-reported single-GPU fine-tuning feasibility."
+  SlimMoE.slimMoEPaper true false
+
+anthropicOperatingLossEntry : AtlasEntry
+anthropicOperatingLossEntry = atlasEntry
+  "Anthropic's prospectus reporting distinguishes more than USD 8 billion of operating loss from the much larger GAAP net loss affected by financing-instrument accounting."
+  Anthropic.reutersS1QA2026 false false
+
+anthropicBroadcomEntry : AtlasEntry
+anthropicBroadcomEntry = atlasEntry
+  "Broadcom-linked financing of up to USD 42 billion is associated with Anthropic's five-year USD 125.2 billion compute-capacity commitment and includes a convertible instrument."
+  Anthropic.reutersBroadcomLoan2026 false false
+
 ------------------------------------------------------------------------
 -- Attribution firewall.
 ------------------------------------------------------------------------
 
 data SecondaryGraphImpliesPrimaryTransactionTermsPermission : Set where
 data PlatformTelemetryImpliesGlobalMarketSharePermission : Set where
-
 data UnsourcedAcquisitionImpliesAcquisitionFactPermission : Set where
+data SourceCitationImpliesCausalEconomicTheoremPermission : Set where
 
 secondaryGraphDoesNotAutoProvePrimaryTransactionTerms :
   SecondaryGraphImpliesPrimaryTransactionTermsPermission → ⊥
@@ -64,3 +87,7 @@ platformTelemetryDoesNotAutoProveGlobalMarketShare ()
 unsourcedAcquisitionDoesNotAutoPromoteToFact :
   UnsourcedAcquisitionImpliesAcquisitionFactPermission → ⊥
 unsourcedAcquisitionDoesNotAutoPromoteToFact ()
+
+sourceCitationDoesNotAutoProveCausalEconomicTheorem :
+  SourceCitationImpliesCausalEconomicTheoremPermission → ⊥
+sourceCitationDoesNotAutoProveCausalEconomicTheorem ()
