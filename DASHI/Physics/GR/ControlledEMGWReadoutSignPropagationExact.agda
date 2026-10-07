@@ -6,12 +6,14 @@ import DASHI.Physics.GR.ControlledEMGravitationalWaveEnergyExchangeExact as Exch
 import DASHI.Physics.GR.ControlledEMGWExchangeFiniteReversalExact as Reversal
 
 ------------------------------------------------------------------------
--- SIGN PROPAGATION: WORK -> FREQUENCY -> DELAYED PHASE
+-- SIGN PROPAGATION: EXCHANGE WORK -> EM FREQUENCY -> DELAYED PHASE
 --
--- This is deliberately only the sign layer.  Numerical normalization still
--- belongs to the physical work/frequency/phase receipts in the interaction
--- carrier.  Once those calibrated maps preserve orientation, the controlled
--- reversal propagates all the way to the interferometric phase sign.
+-- Sign convention:
+--   positive work sign = energy delivered BY the EM field TO the GW;
+--   negative work sign = energy delivered TO the EM field FROM the GW.
+-- Therefore Delta E_EM = hbar Delta Omega carries the opposite sign from this
+-- exchange-work convention.  Frequency and delayed optical phase then share
+-- the same sign.
 ------------------------------------------------------------------------
 
 data ReadoutSign : Set where
@@ -30,10 +32,20 @@ flipReadoutSign negativeReadout = positiveReadout
 flipReadoutSign zeroReadout = zeroReadout
 
 frequencySignFromWorkSign : ReadoutSign → ReadoutSign
-frequencySignFromWorkSign sign = sign
+frequencySignFromWorkSign sign = flipReadoutSign sign
 
 phaseSignFromFrequencySign : ReadoutSign → ReadoutSign
 phaseSignFromFrequencySign sign = sign
+
+emissionFrequencySignIsNegative :
+  frequencySignFromWorkSign (exchangeToWorkSign Exchange.emissionLike)
+  ≡ negativeReadout
+emissionFrequencySignIsNegative = refl
+
+absorptionFrequencySignIsPositive :
+  frequencySignFromWorkSign (exchangeToWorkSign Exchange.absorptionLike)
+  ≡ positiveReadout
+absorptionFrequencySignIsPositive = refl
 
 exchangeFlipCommutesWithWorkSign :
   ∀ sign →
@@ -42,6 +54,12 @@ exchangeFlipCommutesWithWorkSign :
 exchangeFlipCommutesWithWorkSign Exchange.emissionLike = refl
 exchangeFlipCommutesWithWorkSign Exchange.absorptionLike = refl
 exchangeFlipCommutesWithWorkSign Exchange.zeroExchange = refl
+
+flipReadoutInvolutive :
+  ∀ sign → flipReadoutSign (flipReadoutSign sign) ≡ sign
+flipReadoutInvolutive positiveReadout = refl
+flipReadoutInvolutive zeroReadout = refl
+flipReadoutInvolutive negativeReadout = refl
 
 reversalPropagatesToPhaseSign :
   ∀ reversal sign →
@@ -52,18 +70,21 @@ reversalPropagatesToPhaseSign :
   flipReadoutSign
     (phaseSignFromFrequencySign
       (frequencySignFromWorkSign (exchangeToWorkSign sign)))
-reversalPropagatesToPhaseSign Exchange.orthogonalPathExchange sign =
-  exchangeFlipCommutesWithWorkSign sign
-reversalPropagatesToPhaseSign Exchange.halfCyclePhaseExchange sign =
-  exchangeFlipCommutesWithWorkSign sign
-reversalPropagatesToPhaseSign Exchange.polarizationExchange sign =
-  exchangeFlipCommutesWithWorkSign sign
+reversalPropagatesToPhaseSign Exchange.orthogonalPathExchange Exchange.emissionLike = refl
+reversalPropagatesToPhaseSign Exchange.orthogonalPathExchange Exchange.absorptionLike = refl
+reversalPropagatesToPhaseSign Exchange.orthogonalPathExchange Exchange.zeroExchange = refl
+reversalPropagatesToPhaseSign Exchange.halfCyclePhaseExchange Exchange.emissionLike = refl
+reversalPropagatesToPhaseSign Exchange.halfCyclePhaseExchange Exchange.absorptionLike = refl
+reversalPropagatesToPhaseSign Exchange.halfCyclePhaseExchange Exchange.zeroExchange = refl
+reversalPropagatesToPhaseSign Exchange.polarizationExchange Exchange.emissionLike = refl
+reversalPropagatesToPhaseSign Exchange.polarizationExchange Exchange.absorptionLike = refl
+reversalPropagatesToPhaseSign Exchange.polarizationExchange Exchange.zeroExchange = refl
 
 record ReadoutSignBoundary : Set where
   constructor readout-sign-boundary
   field
     exchangeReversalPropagatesToWorkSign : Bool
-    workSignPropagatesToFrequencySign : Bool
+    exchangeWorkSignOpposesEMFrequencySign : Bool
     frequencySignPropagatesToDelayedPhaseSign : Bool
     numericalCalibrationStillRequired : Bool
     signTheoremAloneDoesNotEstablishDetectability : Bool
