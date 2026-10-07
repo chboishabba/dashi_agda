@@ -58,6 +58,7 @@ grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[7]}"
 grep -q 'actualOuterActionOnSameQStillOpen' "${targets[7]}"
 
 grep -q 'canonicalCompletionAcquisitionStatus' "${targets[8]}"
+grep -q 'postBrauerSemisimplifiedIngressAlreadyPaid' "${targets[8]}"
 grep -q 'fi22NaturalTenRankIsTen' "${targets[8]}"
 grep -q 'monsterGF2DimensionIs196882' "${targets[8]}"
 grep -q 'remainingDefectSourceBitsIsTwo' "${targets[8]}"
