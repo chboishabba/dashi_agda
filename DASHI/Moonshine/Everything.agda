@@ -52,6 +52,7 @@ import DASHI.Moonshine.JInvariant369TenRankSeventeenHyperformalismExact
 
 import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact
 import DASHI.Moonshine.OggSSPP2WeilHeisenbergNativeBidiExact
+import DASHI.Moonshine.OggSSPFiniteFieldBracketExact
 
 module DASHI.Moonshine.Everything where
 
