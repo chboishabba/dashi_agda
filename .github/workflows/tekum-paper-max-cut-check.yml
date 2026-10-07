@@ -83,6 +83,10 @@ jobs:
               DASHI/ComputerScience/TekumProposition4NegativeGlobalExact.agda
               DASHI/ComputerScience/TekumSpecialIntegerOrderExact.agda
               DASHI/ComputerScience/TekumOrderedSourceValueExact.agda
+              DASHI/ComputerScience/TekumRawAnchorRegimeBandExact.agda
+              DASHI/ComputerScience/TekumSourceAnchorRegimeBandExact.agda
+              DASHI/ComputerScience/TekumSourceParserTotalityExact.agda
+              DASHI/ComputerScience/TekumProposition4GlobalExact.agda
               DASHI/ComputerScience/TekumMonotonicityExact.agda
               DASHI/ComputerScience/TekumProposition4PositiveChainExact.agda
               DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
