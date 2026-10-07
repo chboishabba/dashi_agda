@@ -7,6 +7,8 @@ on:
       - agent/2b-same-object-final-maxcut-20261007
     paths:
       - 'DASHI/Moonshine/OggSSP2BTate276M24BrauerRuntimeReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BMonster2LocalThree276SourceExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda'
       - 'DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda'
       - 'DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda'
       - 'scripts/check_twob_post_brauer_final_max_cut.sh'
@@ -14,6 +16,8 @@ on:
   pull_request:
     paths:
       - 'DASHI/Moonshine/OggSSP2BTate276M24BrauerRuntimeReceiptExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BMonster2LocalThree276SourceExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda'
       - 'DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda'
       - 'DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda'
       - 'scripts/check_twob_post_brauer_final_max_cut.sh'
