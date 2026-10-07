@@ -16,9 +16,9 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 -- S3a: the route consumes ONE selected marked F2 source, not a universal
 --      curvature-polynomial family. Nuclear completion is compiler-owned.
 --
--- S3b: selected-state exact Haar masses erase discrepancy exactly. The only
---      convergence payment is shrinking-cell oscillation for the literal
---      Eq.(1.71) density; common-limit algebra is downstream compiler work.
+-- S3b: exact Haar masses erase discrepancy. Direct oscillation convergence is
+--      also not primitive: a uniform Eq.(1.71) Lipschitz cell bound plus a
+--      vanishing product-Haar mesh compiles to oscillation -> 0.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -29,6 +29,7 @@ import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthori
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as S3F2
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedStateMassWeightedHaarExact as S3Haar
 import DASHI.Physics.Foundations.CMP119CosmologyP3ExactMassOscillationOnlyExact as ExactMass
+import DASHI.Physics.Foundations.CMP119CosmologyP3LipschitzOscillationCompilerExact as Lipschitz
 
 ------------------------------------------------------------------------
 -- Terminal theorem accounting.
@@ -43,7 +44,7 @@ remainingStandardImportedTheoremCount = 1
 remainingPreferredTheoremCount : Nat
 remainingPreferredTheoremCount = 4
 
--- S1 source theorem: instantiate the variational problem on the literal
+-- S1 source theorem package: instantiate the variational problem on the literal
 -- CMP109/116 carrier and prove B4 invariance of its defining data.
 s1ConcreteVariationalB4InvarianceRequired : Bool
 s1ConcreteVariationalB4InvarianceRequired = true
@@ -66,8 +67,9 @@ s2AuthorityRecordInstantiationRequired : Bool
 s2AuthorityRecordInstantiationRequired =
   S2.remainingR2WorkIsInstantiationOfStandardWardAuthority
 
--- S3a source theorem: construct exactly one selected marked F2 source on the
--- completed state, with its Hilbert modulus and gauge/local semantics.
+-- S3a source theorem package: construct exactly one selected marked F2 source
+-- on the completed state. The Hilbert estimate itself has been reduced further
+-- to literal differentiated-source coefficient-energy control.
 s3SelectedMarkedF2SourceRequired : Bool
 s3SelectedMarkedF2SourceRequired =
   S3F2.remainingSelectedF2SourceWorkIsPhysicalMarkedSourceDataAndSemantics
@@ -76,9 +78,20 @@ s3UniversalMarkedCurvatureFamilyRequired : Bool
 s3UniversalMarkedCurvatureFamilyRequired =
   S3F2.universalMarkedCurvatureFamilyRequiredForCosmology
 
--- S3b source theorem: literal Eq.(1.71) shrinking-cell oscillation.
-s3LiteralEquation171ShrinkingCellOscillationRequired : Bool
-s3LiteralEquation171ShrinkingCellOscillationRequired = true
+-- S3b source theorem package: prove an Eq.(1.71) Lipschitz cell estimate and
+-- construct the product-Haar refinement with vanishing mesh. Their composition
+-- supplies the old oscillation-vanishing field automatically.
+s3IndependentOscillationVanishingRequired : Bool
+s3IndependentOscillationVanishingRequired =
+  Lipschitz.independentOscillationVanishingTheoremRequired
+
+s3Equation171LipschitzCellBoundRequired : Bool
+s3Equation171LipschitzCellBoundRequired =
+  Lipschitz.remainingEquation171AnalyticWorkIsLipschitzCellBound
+
+s3ProductHaarVanishingMeshRequired : Bool
+s3ProductHaarVanishingMeshRequired =
+  Lipschitz.remainingHaarPartitionWorkIsVanishingMesh
 
 s3IndependentMassDiscrepancyConvergenceRequired : Bool
 s3IndependentMassDiscrepancyConvergenceRequired =
