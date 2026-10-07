@@ -6,7 +6,7 @@ module DASHI.Analysis.CollatzSyracuseCompleteBlockBijectionExact where
 -- `Fin (2^m)` is interpreted as a residue coordinate.  Residue 0 is represented
 -- by the positive start 2^m; every nonzero residue r is represented by r.
 -- Thus the literal start set is exactly {1,...,2^m}, only cyclically ordered by
--- residue.  The inverse word index is the now-proved parity-cylinder residue.
+-- residue.  The inverse word index is the proved parity-cylinder residue.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -14,7 +14,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin; fromℕ<; toℕ)
 import Data.Fin.Properties as FinP
 open import Data.Nat.DivMod using (_%_; m<n⇒m%n≡m)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.Core.FiniteUniformBijectionTransportExact as Uniform
@@ -23,7 +23,6 @@ import DASHI.NumberTheory.Collatz.SyracuseParityItineraryExact as Itinerary
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderExact as Cylinder
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderCandidateExact as Candidate
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderEvenBranchExact as Even
-import DASHI.NumberTheory.Collatz.SyracuseParityCylinderOneStepBaseExact as Base
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderRepresentativeExact as Representative
 import DASHI.NumberTheory.Collatz.SyracuseParityCylinderOddBranchExact as Odd
 import DASHI.NumberTheory.Collatz.SyracusePow2ArithmeticExact as Pow2
@@ -60,25 +59,25 @@ blockWord :
   Binary.BinaryWord m
 blockWord {m} index = Itinerary.parityWord m (blockStart index)
 
-wordIndex :
+inverseWordIndex :
   {m : Nat} →
   Binary.BinaryWord m →
   Fin (Cylinder.pow2 m)
-wordIndex word = fromℕ< (Even.candidateLessPow2 word)
+inverseWordIndex word = fromℕ< (Even.candidateLessPow2 word)
 
-wordIndexToNat :
+inverseWordIndexToNat :
   {m : Nat} →
   (word : Binary.BinaryWord m) →
-  toℕ (wordIndex word) ≡ Candidate.residueCandidate word
-wordIndexToNat word = FinP.toℕ-fromℕ< (Even.candidateLessPow2 word)
+  toℕ (inverseWordIndex word) ≡ Candidate.residueCandidate word
+inverseWordIndexToNat word = FinP.toℕ-fromℕ< (Even.candidateLessPow2 word)
 
-wordIndexWord :
+inverseWordRoundTrip :
   {m : Nat} →
   (word : Binary.BinaryWord m) →
-  blockWord (wordIndex word) ≡ word
-wordIndexWord {m} word =
+  blockWord (inverseWordIndex word) ≡ word
+inverseWordRoundTrip {m} word =
   let
-    index = wordIndex word
+    index = inverseWordIndex word
 
     residue :
       Syracuse.toNat (blockStart index) % Cylinder.pow2 m
@@ -86,7 +85,7 @@ wordIndexWord {m} word =
     residue =
       trans
         (blockStartResidue index)
-        (wordIndexToNat word)
+        (inverseWordIndexToNat word)
   in
   Cylinder.residueImpliesParityWord
     Odd.canonicalParityCylinderSource
@@ -94,11 +93,11 @@ wordIndexWord {m} word =
     (blockStart index)
     residue
 
-indexWordIndex :
+indexRoundTrip :
   {m : Nat} →
   (index : Fin (Cylinder.pow2 m)) →
-  wordIndex (blockWord index) ≡ index
-indexWordIndex {m} index =
+  inverseWordIndex (blockWord index) ≡ index
+indexRoundTrip {m} index =
   FinP.toℕ-injective toNatEquality
   where
   source = Odd.canonicalParityCylinderSource
@@ -119,41 +118,21 @@ indexWordIndex {m} index =
     trans (sym forward) (blockStartResidue index)
 
   toNatEquality :
-    toℕ (wordIndex (blockWord index)) ≡ toℕ index
+    toℕ (inverseWordIndex (blockWord index)) ≡ toℕ index
   toNatEquality =
     trans
-      (wordIndexToNat (blockWord index))
+      (inverseWordIndexToNat (blockWord index))
       candidateIsIndex
 
-canonicalCompleteBlockWordIndexSource :
-  (m : Nat) →
-  CompleteBlockWordIndexSource m
-canonicalCompleteBlockWordIndexSource m = record
-  { wordIndex = wordIndex
-  ; indexWordIndex = indexWordIndex
-  ; wordIndexWord = wordIndexWord
-  }
-  where
-  record CompleteBlockWordIndexSource (level : Nat) : Set₁ where
-    field
-      wordIndex : Binary.BinaryWord level → Fin (Cylinder.pow2 level)
-      indexWordIndex :
-        (index : Fin (Cylinder.pow2 level)) →
-        wordIndex (blockWord index) ≡ index
-      wordIndexWord :
-        (word : Binary.BinaryWord level) →
-        blockWord (wordIndex word) ≡ word
-
--- Public record kept at top-level compatibility shape.
 record CompleteBlockWordIndexSource (m : Nat) : Set₁ where
   field
-    wordIndexField : Binary.BinaryWord m → Fin (Cylinder.pow2 m)
-    indexWordIndexField :
+    wordIndex : Binary.BinaryWord m → Fin (Cylinder.pow2 m)
+    indexWordIndex :
       (index : Fin (Cylinder.pow2 m)) →
-      wordIndexField (blockWord index) ≡ index
-    wordIndexWordField :
+      wordIndex (blockWord index) ≡ index
+    wordIndexWord :
       (word : Binary.BinaryWord m) →
-      blockWord (wordIndexField word) ≡ word
+      blockWord (wordIndex word) ≡ word
 
 open CompleteBlockWordIndexSource public
 
@@ -161,9 +140,9 @@ canonicalCompleteBlockSource :
   (m : Nat) →
   CompleteBlockWordIndexSource m
 canonicalCompleteBlockSource m = record
-  { wordIndexField = wordIndex
-  ; indexWordIndexField = indexWordIndex
-  ; wordIndexWordField = wordIndexWord
+  { wordIndex = inverseWordIndex
+  ; indexWordIndex = indexRoundTrip
+  ; wordIndexWord = inverseWordRoundTrip
   }
 
 completeBlockWordBijection :
@@ -174,9 +153,9 @@ completeBlockWordBijection :
     (Binary.BinaryWord m)
 completeBlockWordBijection source = record
   { Uniform.to = blockWord
-  ; Uniform.from = wordIndexField source
-  ; Uniform.fromTo = indexWordIndexField source
-  ; Uniform.toFrom = wordIndexWordField source
+  ; Uniform.from = wordIndex source
+  ; Uniform.fromTo = indexWordIndex source
+  ; Uniform.toFrom = wordIndexWord source
   }
 
 completeBlockUniformWordMass :
