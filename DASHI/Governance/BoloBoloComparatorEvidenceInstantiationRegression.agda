@@ -4,30 +4,32 @@ open import DASHI.Core.Prelude
 
 import DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact as Capstone
 
-provenancePreserved :
-  Capstone.independentComparatorProvenancePreserved Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+provenancePreserved : Capstone.independentComparatorProvenancePreserved Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 provenancePreserved = refl
 
-sameContextTransitionPaid :
-  Capstone.sameContextOWSStructuralTransitionPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+sameContextTransitionPaid : Capstone.sameContextOWSStructuralTransitionPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 sameContextTransitionPaid = refl
 
-mixedSpokesEvidencePaid :
-  Capstone.mixedSpokesMechanismEvidencePaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+mixedSpokesEvidencePaid : Capstone.mixedSpokesMechanismEvidencePaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 mixedSpokesEvidencePaid = refl
 
-comparatorCadencePaid :
-  Capstone.comparatorGovernanceCadenceCoordinatesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+normalizedSpokesShiftPaid : Capstone.normalizedSpokesTransitionCheckPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+normalizedSpokesShiftPaid = refl
+
+polycentricComparativeEvidencePaid : Capstone.crossDomainPolycentricComparativeEvidencePaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+polycentricComparativeEvidencePaid = refl
+
+taskContingentNetworkEvidencePaid : Capstone.taskContingentNetworkEvidencePaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+taskContingentNetworkEvidencePaid = refl
+
+comparatorCadencePaid : Capstone.comparatorGovernanceCadenceCoordinatesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 comparatorCadencePaid = refl
 
-primarySpokesMinutesStillUnpaid :
-  Capstone.underlyingPrimarySpokesMinutesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
+primarySpokesMinutesStillUnpaid : Capstone.underlyingPrimarySpokesMinutesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
 primarySpokesMinutesStillUnpaid = refl
 
-targetBoundsStillUnpaid :
-  Capstone.targetQualifiedPrimitiveBoloCostBoundsPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
+targetBoundsStillUnpaid : Capstone.targetQualifiedPrimitiveBoloCostBoundsPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
 targetBoundsStillUnpaid = refl
 
-comparatorsDoNotEstablishSuperiority :
-  Capstone.comparatorEvidenceAloneEstablishesBoloSuperiority Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
+comparatorsDoNotEstablishSuperiority : Capstone.comparatorEvidenceAloneEstablishesBoloSuperiority Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
 comparatorsDoNotEstablishSuperiority = refl
