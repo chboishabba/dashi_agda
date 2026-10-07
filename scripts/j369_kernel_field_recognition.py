@@ -14,8 +14,7 @@ SELECTED_MODULI = {
 
 def _trim(p):
     p = list(p)
-    while len(p) > 1 and p[-1] % 3 == 0:
-        p.pop()
+    while len(p) > 1 and p[-1] % 3 == 0: p.pop()
     return tuple(x % 3 for x in p)
 
 
@@ -116,6 +115,26 @@ def k4_gf9_linear_image():
     return [(a, b, (-b) % 3, 0) for a in range(3) for b in range(3)]
 
 
+def heisenberg_translate(axis, x):
+    y = list(x); y[axis] = (y[axis] + 1) % 3; return tuple(y)
+
+
+def kernel_add(a, b): return tuple((x + y) % 3 for x, y in zip(a, b))
+
+
+def heisenberg_additive_intertwiner_verified():
+    for x in itertools.product(range(3), repeat=6):
+        for axis in range(6):
+            basis = tuple(1 if i == axis else 0 for i in range(6))
+            if heisenberg_translate(axis, x) != kernel_add(basis, x): return False
+    for x4 in itertools.product(range(3), repeat=4):
+        x6 = x4 + (0, 0)
+        for axis in range(4):
+            basis4 = tuple(1 if i == axis else 0 for i in range(4))
+            if heisenberg_translate(axis, x6) != kernel_add(basis4, x4) + (0, 0): return False
+    return True
+
+
 def legacy_first_enabled_step(s):
     a, b, c, d = s
     if a > 0: return a - 1, b, c + 1, d
@@ -151,11 +170,18 @@ def scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200):
 
 
 def full_signed_weave_frontier():
-    return {'lane_count': 15, 'pointed_lane_to_full_valuation_paid': True,
-            'signed_multiplicity_and_program_machinery_paid': True,
-            'canonical_total_step_over_full_signed_state_found': False,
-            'full_signed_transition_graph_claimed': False,
-            'reason': 'SignedSSPFRACTRANWeaveExact has the full carrier/program surface but no canonical total SignedSSPExecutionState step.'}
+    return {
+        'lane_count': 15,
+        'pointed_lane_to_full_valuation_paid': True,
+        'signed_multiplicity_and_program_machinery_paid': True,
+        'canonical_total_program_counter_machine_paid': True,
+        'machine_to_rich_signed_state_projection_paid': False,
+        'canonical_total_step_over_summary_state_alone_found': False,
+        'full_rich_signed_transition_graph_claimed': False,
+        'reason': ('The remaining program list makes the scheduler total. WeaveEffect retains counts rather than prime identity, '
+                   'while SignedSSPExecutionState additionally owns address/residual/length metadata; a faithful projection '
+                   'therefore still needs an independent witness.')
+    }
 
 
 def recognition_summary():
@@ -175,8 +201,12 @@ def recognition_summary():
     fields['4']['gf9_subfield_equals_frobenius2_fixed_set'] = gf9 == {x for x in m4.elements if m4.pow(x, 9) == x}
     fields['4']['gf9_subfield_is_naive_prefix_k2'] = gf9 == {(a,b,0,0) for a in range(3) for b in range(3)}
     fields['4']['t5_chosen_subfield_lattice_object_map_paid'] = True
-    return {'fields': fields, 'row_major_12_vector_scan': scan_row_major_displacements(),
-            'full_signed_weave_frontier': full_signed_weave_frontier()}
+    return {
+        'fields': fields,
+        'existing_heisenberg_translation_intertwines_f3_addition': heisenberg_additive_intertwiner_verified(),
+        'row_major_12_vector_scan': scan_row_major_displacements(),
+        'full_signed_weave_frontier': full_signed_weave_frontier()
+    }
 
 
 def main():
