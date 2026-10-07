@@ -4,8 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 required = {
     'DASHI/ComputerScience/TekumParsedAnchorListExact.agda': [
-        'parsedAnchorList',
-        'successfulParseAnchorList',
+        'parsedAnchorList', 'successfulParseAnchorList',
     ],
     'DASHI/ComputerScience/TekumParsedAdjacentCarryExtractExact.agda': [
         'extractPositiveAdjacentOrder',
@@ -31,12 +30,10 @@ required = {
         'parsedAnchorCodeStrictMagnitudeStrict',
     ],
     'DASHI/ComputerScience/TekumProposition4PositiveGlobalExact.agda': [
-        'positiveSourceOrderRaisesAnchorCode',
-        'hunholdProposition4PositiveGlobal',
+        'positiveSourceOrderRaisesAnchorCode', 'hunholdProposition4PositiveGlobal',
     ],
     'DASHI/ComputerScience/TekumProposition4NegativeGlobalExact.agda': [
-        'negativeSourceOrderReversesAnchorCode',
-        'hunholdProposition4NegativeGlobal',
+        'negativeSourceOrderReversesAnchorCode', 'hunholdProposition4NegativeGlobal',
     ],
     'DASHI/ComputerScience/TekumSpecialIntegerOrderExact.agda': [
         'classifyNaRWord', 'classifyZeroWord', 'classifyInfinityWord',
@@ -45,6 +42,18 @@ required = {
     'DASHI/ComputerScience/TekumOrderedSourceValueExact.agda': [
         'OrderedTekumValue', 'SourceOrderedDecode',
         'ordinaryIntegerStrict', 'sourceIntegerStrictImpliesOrderedStrict',
+    ],
+    'DASHI/ComputerScience/TekumRawAnchorRegimeBandExact.agda': [
+        'rawAnchorCodeFormula', 'anchorBandParsesRegime',
+    ],
+    'DASHI/ComputerScience/TekumSourceAnchorRegimeBandExact.agda': [
+        'fourCenterMagnitudePlusOne', 'nonSpecialAnchorBand',
+    ],
+    'DASHI/ComputerScience/TekumSourceParserTotalityExact.agda': [
+        'nonSpecialParseTotal', 'totalSourceParse',
+    ],
+    'DASHI/ComputerScience/TekumProposition4GlobalExact.agda': [
+        'sourceOrderedValue', 'hunholdProposition4Global',
     ],
 }
 
@@ -60,4 +69,4 @@ for rel, needles in required.items():
         if bad in text:
             raise SystemExit(f'forbidden marker {bad!r} in {rel}')
 
-print('Tekum Prop. 4 max-cut static gate: arbitrary parsed-anchor radix order, global positive/negative ordinary order, exact special endpoints, and the source-faithful ordered-value compiler are present. Remaining full-totality leaf: prove every non-special core-width source word has a successful ordinary parse.')
+print('Tekum Prop. 4 max-cut static gate: arbitrary radix-block order, positive/negative ordinary order, exact special endpoints, core-width parser totality, and the full source ordered-code endpoint are present.')
