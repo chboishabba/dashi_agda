@@ -10,6 +10,7 @@ on:
       - 'DASHI/ComputerScience/Tekum*.agda'
       - 'scripts/check_tekum_balanced_ternary_static.py'
       - 'scripts/check_tekum_prop4_extractor_static.py'
+      - 'scripts/check_tekum_prop5_nogo_static.py'
       - '.github/workflows/tekum-paper-max-cut-check.yml'
 
 concurrency:
@@ -29,6 +30,7 @@ jobs:
         run: |
           python3 scripts/check_tekum_balanced_ternary_static.py
           python3 scripts/check_tekum_prop4_extractor_static.py
+          python3 scripts/check_tekum_prop5_nogo_static.py
 
   focused-agda:
     runs-on: ubuntu-latest
@@ -87,9 +89,11 @@ jobs:
               DASHI/ComputerScience/TekumSourceAnchorRegimeBandExact.agda
               DASHI/ComputerScience/TekumSourceParserTotalityExact.agda
               DASHI/ComputerScience/TekumProposition4GlobalExact.agda
+              DASHI/ComputerScience/TekumProposition4PaperExact.agda
               DASHI/ComputerScience/TekumMonotonicityExact.agda
               DASHI/ComputerScience/TekumProposition4PositiveChainExact.agda
               DASHI/ComputerScience/TekumProposition5CounterexampleExact.agda
+              DASHI/ComputerScience/TekumProposition5NoGoExact.agda
               DASHI/ComputerScience/TekumBalancedTernaryVerifiedAssembly.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
