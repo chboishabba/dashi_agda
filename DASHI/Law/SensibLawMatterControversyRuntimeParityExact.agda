@@ -131,8 +131,19 @@ record MatterControversyRuntimeBoundary : Set where
     samePersistedMatterRequiredIsTrue : samePersistedMatterRequired ≡ true
     reviewedEvidenceOwnerReopened : Bool
     reviewedEvidenceOwnerReopenedIsTrue : reviewedEvidenceOwnerReopened ≡ true
+    reviewedPropositionIdentityReopenedExactly : Bool
+    reviewedPropositionIdentityReopenedExactlyIsTrue :
+      reviewedPropositionIdentityReopenedExactly ≡ true
     relationalResidualOwnerReopened : Bool
     relationalResidualOwnerReopenedIsTrue : relationalResidualOwnerReopened ≡ true
+    relationalResidualSourcePairReopenedExactly : Bool
+    relationalResidualSourcePairReopenedExactlyIsTrue :
+      relationalResidualSourcePairReopenedExactly ≡ true
+    proofObligationOwnerMustExistInControversy : Bool
+    proofObligationOwnerMustExistInControversyIsTrue :
+      proofObligationOwnerMustExistInControversy ≡ true
+    operatorReadableWordingRequired : Bool
+    operatorReadableWordingRequiredIsTrue : operatorReadableWordingRequired ≡ true
     normativeOrderCoordinatesPreserved : Bool
     normativeOrderCoordinatesPreservedIsTrue : normativeOrderCoordinatesPreserved ≡ true
     reverseSearchCreatesActualReopening : Bool
@@ -160,6 +171,10 @@ canonicalMatterControversyRuntimeBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -175,7 +190,10 @@ canonicalMatterControversyRuntimeBoundary =
 data TypedResponseEqualsBooleanNegation : Set where
 data DifferentMatterMayShareControversyIdentity : Set where
 data ReviewedEvidenceMayBeRestatedByPersonaProjection : Set where
+data ReviewedEvidenceMayPayDifferentProposition : Set where
 data RelationalResidualMayBeInventedByControversyProjection : Set where
+data RelationalResidualMayCompareDifferentSourcePair : Set where
+data ProofObligationMayHaveDanglingOwner : Set where
 data NormativeOrderCoordinateImpliesNormativeHierarchy : Set where
 data PotentialReopeningEqualsActualReopening : Set where
 data PersonaProjectionMutatesCanonicalMatter : Set where
@@ -190,8 +208,17 @@ differentMatterCannotShareControversyIdentity ()
 personaCannotRestateReviewedEvidence : ReviewedEvidenceMayBeRestatedByPersonaProjection → ⊥
 personaCannotRestateReviewedEvidence ()
 
+reviewedEvidenceCannotPayDifferentProposition : ReviewedEvidenceMayPayDifferentProposition → ⊥
+reviewedEvidenceCannotPayDifferentProposition ()
+
 controversyCannotInventRelationalResidual : RelationalResidualMayBeInventedByControversyProjection → ⊥
 controversyCannotInventRelationalResidual ()
+
+relationalResidualCannotCompareDifferentSourcePair : RelationalResidualMayCompareDifferentSourcePair → ⊥
+relationalResidualCannotCompareDifferentSourcePair ()
+
+proofObligationCannotHaveDanglingOwner : ProofObligationMayHaveDanglingOwner → ⊥
+proofObligationCannotHaveDanglingOwner ()
 
 normativeOrderCoordinateDoesNotImplyHierarchy : NormativeOrderCoordinateImpliesNormativeHierarchy → ⊥
 normativeOrderCoordinateDoesNotImplyHierarchy ()
