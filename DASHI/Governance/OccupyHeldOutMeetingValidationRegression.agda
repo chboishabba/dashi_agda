@@ -10,32 +10,38 @@ alreadyInspectedCannotBeRetrofitted :
   ≡ false
 alreadyInspectedCannotBeRetrofitted = refl
 
-freezeBeforeCodingRequired :
-  HeldOut.heldOutSetMustBeFrozenBeforeOutcomeCoding
+corpusMaterialisationPaid :
+  HeldOut.corpusMaterialisationPaid HeldOut.canonicalHeldOutBoundary ≡ true
+corpusMaterialisationPaid = refl
+
+manifestFreezePaid :
+  HeldOut.corpusManifestFreezePaid HeldOut.canonicalHeldOutBoundary ≡ true
+manifestFreezePaid = refl
+
+holdoutAssignmentPaid :
+  HeldOut.holdoutAssignmentPaid HeldOut.canonicalHeldOutBoundary ≡ true
+holdoutAssignmentPaid = refl
+
+outcomeBlindSelectionRequired :
+  HeldOut.selectionRuleMustBeOutcomeBlindAndDeterministic
     HeldOut.canonicalHeldOutBoundary
   ≡ true
-freezeBeforeCodingRequired = refl
+outcomeBlindSelectionRequired = refl
 
 codingRuleFreezeRequired :
-  HeldOut.codingProtocolMustBeFrozenBeforeHeldOutExtraction
+  HeldOut.codingProtocolMustBeFrozenBeforeHeldOutOutcomeExtraction
     HeldOut.canonicalHeldOutBoundary
   ≡ true
 codingRuleFreezeRequired = refl
 
-manifestFreezeRequired :
-  HeldOut.corpusManifestMustBeFrozenBeforeSelection
-    HeldOut.canonicalHeldOutBoundary
-  ≡ true
-manifestFreezeRequired = refl
+heldOutOutcomeExtractionStillUnpaid :
+  HeldOut.heldOutOutcomeExtractionPaid HeldOut.canonicalHeldOutBoundary ≡ false
+heldOutOutcomeExtractionStillUnpaid = refl
 
-deterministicSelectionRequired :
-  HeldOut.selectionRuleMustBeOutcomeBlindAndDeterministic
-    HeldOut.canonicalHeldOutBoundary
-  ≡ true
-deterministicSelectionRequired = refl
+heldOutEvaluationStillUnpaid :
+  HeldOut.heldOutEvaluationPaid HeldOut.canonicalHeldOutBoundary ≡ false
+heldOutEvaluationStillUnpaid = refl
 
-currentArchiveHasNoProspectiveHeldOutReceipt :
-  HeldOut.prospectiveHeldOutValidationPaid
-    HeldOut.canonicalHeldOutBoundary
-  ≡ false
-currentArchiveHasNoProspectiveHeldOutReceipt = refl
+prospectiveValidationStillUnpaid :
+  HeldOut.prospectiveHeldOutValidationPaid HeldOut.canonicalHeldOutBoundary ≡ false
+prospectiveValidationStillUnpaid = refl
