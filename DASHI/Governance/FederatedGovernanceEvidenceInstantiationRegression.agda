@@ -28,6 +28,10 @@ owsDevelopmentDurationPanelPaid :
   Capstone.occupyOWSDevelopmentDurationPanelPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
 owsDevelopmentDurationPanelPaid = refl
 
+owsDevelopmentTextProcessPanelPaid :
+  Capstone.occupyOWSDevelopmentTextProcessPanelPaid Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ true
+owsDevelopmentTextProcessPanelPaid = refl
+
 occupyEvidenceDoesNotPayScalingLaw :
   Capstone.occupyEvidencePaysQuantitativeScalingLaw Capstone.canonicalFederatedGovernanceEvidenceBoundary ≡ false
 occupyEvidenceDoesNotPayScalingLaw = refl
