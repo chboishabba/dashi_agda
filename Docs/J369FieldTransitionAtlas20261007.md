@@ -110,3 +110,9 @@ The old blanket numerical field candidates remain unrecognized. The new `K4/K5/K
 - full action-groupoid recognition against field multiplication/Frobenius: unpaid.
 
 So the remaining mathematical frontier is no longer cardinal arithmetic, `F3` linearity, or existence of a chosen field/subfield presentation. It is to derive a **canonical** multiplication/Frobenius action from independently existing DASHI structure, or prove that no such promotion is justified, and separately to construct the missing canonical total step for the full signed 15-lane execution state.
+
+## Verification
+
+Fresh numerical verification after the final max-cut exercises eight recognition tests: irreducibility/order, exhaustive nonzero inverses, `-1`/negation compatibility, Frobenius and negation orbit profiles, the cyclic order-80 K4 puncture, the explicit GF(9) subfield image and closure, the complete row-major width 2..200 falsifier, and the full-signed scheduler frontier. All eight pass. The original field-bracket/orbit/mass-18 assertions were also rerun unchanged and pass.
+
+Agda is not installed in the current execution environment. Consequently these source-written Agda owners are **not** represented as locally typechecked; exact-head Agda checking remains the compiler-side gate.
