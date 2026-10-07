@@ -50,6 +50,12 @@ positiveEndpointAggregation = F.ePositiveOutputAggregationClosedIsTrue
 positiveEndpointNoOutputCount : F.ePositiveOutputAggregationAddsCardinalityFactor ≡ false
 positiveEndpointNoOutputCount = F.ePositiveOutputAggregationAddsCardinalityFactorIsFalse
 
+continuationAssemblyChecked : F.bContinuationAssemblyMachineChecked ≡ true
+continuationAssemblyChecked = F.bContinuationAssemblyMachineCheckedIsTrue
+
+continuationPhysicalInputsOpen : F.bContinuationPhysicalInputsClosed ≡ false
+continuationPhysicalInputsOpen = F.bContinuationPhysicalInputsClosedIsFalse
+
 localEDGone : F.bLocalEDIndependentLeaf ≡ false
 localEDGone = F.bLocalEDIndependentLeafIsFalse
 
