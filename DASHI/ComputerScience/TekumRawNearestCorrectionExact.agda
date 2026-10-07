@@ -28,14 +28,15 @@ rawTruncationCandidate {extra} source =
     (Truncate.truncateTwo (Fixed.concreteAnchor source))
     (Center.sourceAnchorCenterWord (8 + extra))
 
-rawTargetOrdinary :
-  ∀ {extra} → Vec Trit.Trit (8 + extra) → Set
-rawTargetOrdinary word =
-  Sem.OrdinaryTekum ×
-  (Σ Sem.OrdinaryTekum λ ordinary →
-    Source.parseTekumWord word ≡ just (Sem.ordinary ordinary))
-  where
-  open import Data.Product.Base using (_×_; Σ)
+record RawTargetOrdinary
+    {extra}
+    (word : Vec Trit.Trit (8 + extra)) : Set where
+  constructor rawTargetOrdinary
+  field
+    ordinary : Sem.OrdinaryTekum
+    decoderSameObject :
+      Source.parseTekumWord word ≡ just (Sem.ordinary ordinary)
+open RawTargetOrdinary public
 
 rawNearestDisplacement :
   ∀ {n} → Vec Trit.Trit n → Vec Trit.Trit n → ℤ
