@@ -28,10 +28,22 @@ import DASHI.Governance.FederatedViabilityTransitionRegression
 import DASHI.Governance.ConsensusDemocracyNonFactorabilityExact
 import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 
-import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryExact
-import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryRegression
+-- Re-centred bolo'bolo evaluation lane: source-bounded nested design,
+-- subsidiarity/incidence contraction, conditional counterfactual win theorem,
+-- Occupy calibration sockets, and the project-level promotion frontier.
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
 import DASHI.Governance.BoloBoloPrimarySourceAtlasRegression
+import DASHI.Governance.BoloBoloSubsidiarityIncidenceBridgeExact
+import DASHI.Governance.BoloBoloSubsidiarityIncidenceBridgeRegression
+import DASHI.Governance.BoloBoloFederationCostComparisonExact
+import DASHI.Governance.BoloBoloFederationCostComparisonRegression
+import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact
+import DASHI.Governance.BoloBoloOccupyCalibrationBridgeRegression
+import DASHI.Governance.BoloBoloCounterfactualEvaluationExact
+import DASHI.Governance.BoloBoloCounterfactualEvaluationRegression
+
+import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryExact
+import DASHI.Governance.FederatedGovernanceEvidenceSourceRegistryRegression
 import DASHI.Governance.OccupyConsensusEvidenceAtlasExact
 import DASHI.Governance.OccupyConsensusEvidenceAtlasRegression
 import DASHI.Governance.OccupyParticipantPseudonymisationExact
