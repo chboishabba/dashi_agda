@@ -75,13 +75,17 @@ def field_bracket_rows(carriers):
 def numeric_candidates(n,q_limit=1000,m_limit=6):
     out=[]
     pp=prime_power(n)
-    if pp:out.append((1,'T1',f'GF({n})',{'p':pp[0],'k':pp[1]}))
+    if pp:
+        out.append((1,'T1',f'GF({n})',{'p':pp[0],'k':pp[1]}))
+        if pp[1]>1:
+            out.append((5,'T5',f'GF({n}) subfield lattice',{'subfield_sizes':[pp[0]**d for d in divisors(pp[1])]}))
     if prime_power(n+1):out.append((2,'T2',f'GF({n+1})*',{}))
     for q in prime_powers_up_to(q_limit):
         for m in range(2,m_limit+1):
             upper=q**m
             if frobenius_orbit_count(q,m)==n:
                 out.append((3,'T3',f'orbits(GF({upper})/GF({q}))',{'q':q,'m':m,'upper':upper}))
+                out.append((5,'T5',f'GF({upper})/GF({q}) subfield lattice',{'q':q,'m':m,'subfield_sizes':[q**d for d in divisors(m)]}))
             if m==2:
                 fixed,pairs=q,(q*q-q)//2
                 if n in (fixed,pairs,q*q):
