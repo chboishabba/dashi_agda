@@ -4,7 +4,7 @@ module DASHI.Physics.Foundations.GRQFTCMP119DirectSourceKottlerRouteExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _<_; _*_; _+_; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _<_; _*_; _-_)
 
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as Source
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
@@ -12,18 +12,15 @@ import DASHI.Physics.Foundations.GRQFTCMP119NambuBuriedVacuumReadoutExact as Rea
 import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTSourceAmplitudeDrivenIsraelKottlerExact as Geometry
+import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact as Window
 
 ------------------------------------------------------------------------
 -- DIRECT SOURCE VACUUM -> COSMOLOGICAL STRESS -> KOTTLER ROUTE
 --
--- This is the shortest static geometry route discovered by archaeology.
--- It does NOT require the independently useful R136/pinned-stress route.
---
--- The literal Section-2 source, specialized to the already-used LocalizedAction
--- realization, owns a vacuum term at every scale.  The existing projector gives
--- its rational amplitude.  The normalized cosmological stress shape is then
--- simply the existing vacuumStressAt amplitude.  Geometry consumes those same
--- literal amplitudes through the source-driven Israel/Kottler inversion.
+-- The static route does not require the independently useful R136 stress lane.
+-- The literal source vacuum term is read by the already-existing LocalizedAction
+-- projector; that SAME rational amplitude feeds the existing cosmological
+-- stress ray and the source-driven Israel/Kottler inversion.
 ------------------------------------------------------------------------
 
 record SourceAmplitudePair
@@ -109,45 +106,6 @@ sourceDrivenMass pair radius exteriorLapseRoot =
   Geometry.sourceExteriorMass radius exteriorLapseRoot
     (exteriorAmplitude pair)
 
-record DirectSourceKottlerAdmissibility
-    {Density Background Fluctuation : Set}
-    {source : Source.CMP119Section2SourceNativeState
-      Density Background Fluctuation
-      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
-      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction}
-    (pair : SourceAmplitudePair source) : Set where
-  constructor direct-source-kottler-admissibility
-  field
-    radius interiorLapseRoot exteriorLapseRoot : ℚ
-
-    positiveRadius : 0ℚ < radius
-    positiveInteriorLapseRoot : 0ℚ < interiorLapseRoot
-    positiveExteriorLapseRoot : 0ℚ < exteriorLapseRoot
-
-    interiorAmplitudeMatchesRoot :
-      Geometry.sourceInteriorRootResidual
-        radius interiorLapseRoot (interiorAmplitude pair)
-      ≡ 0ℚ
-
-    positiveMass :
-      0ℚ < sourceDrivenMass pair radius exteriorLapseRoot
-
-    outwardExteriorMargin :
-      0ℚ <
-        Geometry.sourceDrivenOutwardMarginIdentity
-          radius exteriorLapseRoot
-          (Geometry.sourceExteriorScaledAmplitude
-            radius (exteriorAmplitude pair))
-          |>Margin
-
-    positiveNECDECMargin :
-      0ℚ < Geometry.sourceDrivenNECDECMargin
-        radius interiorLapseRoot exteriorLapseRoot
-        (Geometry.sourceExteriorScaledAmplitude
-          radius (exteriorAmplitude pair))
-
--- Agda has no pipeline operator here; expose the actual margin separately and
--- use it in a second, compiler-friendly admissibility surface below.
 sourceOutwardMargin :
   ∀ {Density Background Fluctuation}
     {source : Source.CMP119Section2SourceNativeState
@@ -156,10 +114,25 @@ sourceOutwardMargin :
       T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction} →
   SourceAmplitudePair source → ℚ → ℚ → ℚ
 sourceOutwardMargin pair radius y =
-  let scaled = Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair)
-  in
-  scaled -
-    (Geometry.three * sourceDrivenMass pair radius y)
+  Window.outwardAccelerationMargin
+    (sourceDrivenMass pair radius y)
+    (Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair))
+
+sourceOutwardMarginIdentity :
+  ∀ {Density Background Fluctuation}
+    {source : Source.CMP119Section2SourceNativeState
+      Density Background Fluctuation
+      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
+      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction}
+    (pair : SourceAmplitudePair source) radius y →
+  sourceOutwardMargin pair radius y
+  ≡ Geometry.threeHalves
+      * (Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair)
+        - radius * (Data.Integer.Base.+ 1 Data.Rational.Base./ 1 - y * y))
+sourceOutwardMarginIdentity pair radius y =
+  Geometry.sourceDrivenOutwardMarginIdentity
+    radius y
+    (Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair))
 
 record DirectSourceKottlerCandidate
     {Density Background Fluctuation : Set}
