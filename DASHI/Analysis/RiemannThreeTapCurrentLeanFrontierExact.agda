@@ -14,7 +14,7 @@ open import Agda.Builtin.String using (String)
 -- Lean branch:
 --   agent/rh-postmerge-maxcut-20261007
 -- Donor head at refresh:
---   aa289254b8400a84f808aa48eda0e5aa094068b8
+--   d4db1536707e18cd0a7551e30f996edf29626a5a
 --
 -- Fail-closed accounting:
 --   K = source/kernel theorem on the same proof graph;
@@ -33,6 +33,11 @@ open import Agda.Builtin.String using (String)
 --       expandedZeroCount / (t/16)^2
 --     contribution after terminal normalization;
 --   * selected dominant M6 allowance still leaves strict positive headroom;
+--   * the exact leading local allowance is now exposed as
+--       A6 + A8(W) < targetStrength,
+--     with A6 the paid M6 allowance and
+--       A8(W) = (3/1700)*eta0^2*fourthLipschitz(W);
+--     equivalently A8(W) must fit inside the paid dominant headroom;
 --   * FarExact is exactly FarBaseExact + FarHorizontalExact;
 --   * FarBase has an unconditional inverse-square shell bound;
 --   * FarHorizontal and combined FarExact have the same shell compiler once a
@@ -41,7 +46,9 @@ open import Agda.Builtin.String using (String)
 --     is r^-6, so four extra powers must come from cancellation/sign rather than
 --     remote Fourier decay.
 -- A2 still open:
---   * selected leading D6/D8 versus mu-gain/count constant comparison;
+--   * selected-witness fourthLipschitz sharpening enough to pay A8, or a sharper
+--     signed eighth treatment (the generic explicit G1 K bound is too coarse to
+--     be promoted to this PASS merely because it is unconditional);
 --   * selected horizontal far-curvature constant CH;
 --   * explicit completed compensation lower bound;
 --   * the resulting strict scalar PASS, or a formal eventual no-go.
@@ -169,7 +176,7 @@ currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
     "agent/rh-postmerge-maxcut-20261007"
-    "aa289254b8400a84f808aa48eda0e5aa094068b8"
+    "d4db1536707e18cd0a7551e30f996edf29626a5a"
 
     true true true true true
     true true true true true true true true true true true true
@@ -182,8 +189,8 @@ currentThreeTapCurrentLeanFrontier =
     refl refl refl refl refl refl
     refl refl refl refl refl refl refl refl refl refl refl refl
 
-    "A2: compare the selected leading sixth/eighth constants against smooth-mu/count scale, prove selected HorizontalFarCurvatureBound CH, and prove completed same-object compensation; then PASS or formal no-go. A1: prove ThreeTapInverseSquareShellPartitionBound, then uniform curvature and compensation. B: prove boundary decay, eventual signedFifthCorrelationGapAt >= 0, and outer-terminal convergence."
-    "Lean owns all real analysis. Agda mirrors K/U/O/C provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 leading constants/far curvature/compensation/strict scalar, Route-B sign/limits, kernel receipt, or RH."
+    "A2: fit the selected eighth allowance (3/1700)*eta0^2*fourthLipschitz inside the already-paid dominant M6 headroom, or sharpen the signed eighth treatment; then prove selected HorizontalFarCurvatureBound CH and completed same-object compensation before PASS/no-go. A1: prove ThreeTapInverseSquareShellPartitionBound, then uniform curvature and compensation. B: prove boundary decay, eventual signedFifthCorrelationGapAt >= 0, and outer-terminal convergence."
+    "Lean owns all real analysis. Agda mirrors K/U/O/C provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 selected-K/far-curvature/compensation/strict scalar, Route-B sign/limits, kernel receipt, or RH."
     "Route B now has exactly three analytic producers: boundary decay, eventual direct signed-gap nonnegativity, and outer-terminal convergence. Large-cutoff ownership is mechanical and no longer counts as an analytic premise."
 
 a2DominantCoefficientIsPaid :
