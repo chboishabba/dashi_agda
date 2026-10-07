@@ -12,7 +12,6 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 import DASHI.Algebra.BalancedTernaryIntegerExact as BT
 import DASHI.ComputerScience.TekumParsedAnchorCodeExact as Code
 import DASHI.ComputerScience.TekumRegimeChainExact as Chain
-import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
 
 ------------------------------------------------------------------------
@@ -53,16 +52,9 @@ laterRegimeForcesReverseCodeOrder :
   (right : Source.ParsedPayload extra s payload₂) →
   Chain.regimeIndex s < Chain.regimeIndex r →
   Code.parsedAnchorCode right < Code.parsedAnchorCode left
-laterRegimeForcesReverseCodeOrder {extra} {r} {s} left right s<r =
-  subst
-    (λ leftCode → Code.parsedAnchorCode right < leftCode)
-    (sym (Code.parsedAnchorCodeFormula left))
-    (subst
-      (λ rightCode →
-        rightCode
-        < Code.payloadCode left + BT.pow3 (5 + extra) * Code.regimeCode r)
-      (sym (Code.parsedAnchorCodeFormula right))
-      normalized)
+laterRegimeForcesReverseCodeOrder {extra} {r} {s} left right s<r
+  rewrite Code.parsedAnchorCodeFormula right
+        | Code.parsedAnchorCodeFormula left = normalized
   where
   p = BT.pow3 (5 + extra)
 
@@ -116,23 +108,29 @@ sameRegimeCodeOrderForcesPayloadOrder {extra} {r} {s}
     (BT.pow3 (5 + extra) * Code.regimeCode r)
     commonTailOrder
   where
-  regimeEq : r ≡ s
-  regimeEq = Chain.regimeIndexInjective indexEq
+  regimeCodeEq : Code.regimeCode r ≡ Code.regimeCode s
+  regimeCodeEq
+    rewrite Code.regimeCodeIsSixPlusIndex r
+          | Code.regimeCodeIsSixPlusIndex s
+          | indexEq = refl
+
+  normalizedCodeOrder :
+    Code.payloadCode left + BT.pow3 (5 + extra) * Code.regimeCode r
+    < Code.payloadCode right + BT.pow3 (5 + extra) * Code.regimeCode s
+  normalizedCodeOrder
+    rewrite sym (Code.parsedAnchorCodeFormula left)
+          | sym (Code.parsedAnchorCodeFormula right) = codeLt
 
   commonTailOrder :
     Code.payloadCode left + BT.pow3 (5 + extra) * Code.regimeCode r
     < Code.payloadCode right + BT.pow3 (5 + extra) * Code.regimeCode r
-  commonTailOrder
-    rewrite regimeEq =
+  commonTailOrder =
     subst
-      (λ leftCode →
-        leftCode
-        < Code.payloadCode right + BT.pow3 (5 + extra) * Code.regimeCode s)
-      (Code.parsedAnchorCodeFormula left)
-      (subst
-        (λ rightCode → Code.parsedAnchorCode left < rightCode)
-        (Code.parsedAnchorCodeFormula right)
-        codeLt)
+      (λ code →
+        Code.payloadCode left + BT.pow3 (5 + extra) * Code.regimeCode r
+        < Code.payloadCode right + BT.pow3 (5 + extra) * code)
+      (sym regimeCodeEq)
+      normalizedCodeOrder
 
 parsedAnchorCodeStrictImpliesBlockOrder :
   ∀ {extra r s payload₁ payload₂}
