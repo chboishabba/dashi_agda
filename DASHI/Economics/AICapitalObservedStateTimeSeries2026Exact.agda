@@ -21,6 +21,7 @@ data MissingCapitalProducer : Set where
   inferenceSpreadProducerOpen : MissingCapitalProducer
   scarcitySpreadProducerOpen : MissingCapitalProducer
   capabilityCompressionProducerOpen : MissingCapitalProducer
+  replacementDepreciationProducerOpen : MissingCapitalProducer
   rolloverProducerOpen : MissingCapitalProducer
   policyBackstopProducerOpen : MissingCapitalProducer
   marketFlipProducerOpen : MissingCapitalProducer
@@ -51,7 +52,7 @@ currentObservedCapitalState20261007 = observedCapitalStatePoint
   Graph.currentOctober2026WeightedGraphCut
   Runtime.candidateOctober2026RuntimeState
   Authority.noTerminalPayerAuthority
-  "open producers: capital spread, inference spread, scarcity spread, capability compression, rollover, policy-backstop salience, market flip/vol, terminal-payer coverage and complete revenue vector"
+  "open producers: capital spread, inference spread, scarcity spread, capability compression, replacement/depreciation, rollover, policy-backstop salience, market flip/vol, terminal-payer coverage and complete revenue vector"
   false refl
   false refl
   false refl
