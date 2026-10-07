@@ -32,6 +32,8 @@ Frobenius-orbit hypotheses numerically confirmed:
 
 The two distinct realizations of 24 show directly that orbit count alone cannot identify a tower.
 
+T5 now records the **field-side** subfield lattice mechanically. For example, `GF(81)=GF(3^4)` contributes subfield sizes `[3,9,81]`, and the `GF(81)/GF(3)` candidate for carrier 24 carries the same field-side chain. This is deliberately not an object-side recognition statement: matching that lattice against a DASHI sub-carrier lattice still requires an independently constructed object map and recognition proof.
+
 ## The 1,330-state numerical graph
 
 `DASHI.Biology.FRACTRANSSPTransitionExact` already owns a four-exponent legacy projection with total `firstEnabledStep`. Restricting `(a47,b53,c59,d71)` to non-negative states of total mass 18 gives
@@ -46,6 +48,6 @@ This matches the node/edge counts in the supplied browser screenshot, but does *
 
 ## Recognition boundary
 
-All field/tower hits remain numerical candidates. `OggSSPFiniteFieldBracketExact.agda` records object map, arrow map, action intertwining, orbit map, representative compatibility, stabilizer preservation/reflection, and semantic `pi0` payment as **unpaid**. T5 object/subfield-lattice matching is not inferred from cardinalities.
+All field/tower hits remain numerical candidates. `OggSSPFiniteFieldBracketExact.agda` records object map, arrow map, action intertwining, orbit map, representative compatibility, stabilizer preservation/reflection, and semantic `pi0` payment as **unpaid**. T5 field-side lattice data is generated, but object/subfield-lattice matching is not inferred from cardinalities.
 
 The `80/81` interpretation remains open as a semantic recognition problem despite the exact cardinal arithmetic.
