@@ -13,15 +13,6 @@ import DASHI.Physics.GR.SchutzholdFrequencyPhaseReadoutExact as FrequencyPhase
 import DASHI.Physics.ExoticGravity.AntigravityControlledGWExchangeCrossPollinationExact as Anti
 import DASHI.Physics.YangMills.R144EMGWControlledExchangeInstantiationExact as R144GW
 
-------------------------------------------------------------------------
--- END-TO-END MAX-CUT COMPILER
---
--- Maxwell and metric-dependent Hodge structure are already repo objects, the
--- SI/Planck energy-frequency authority surface already exists, and Schuetzhold
--- fixes the symbolic work/frequency/delayed-phase laws.  The remaining seam is
--- exact same-object realization and quantitative apparatus calibration.
-------------------------------------------------------------------------
-
 record ControlledGWExchangePhysicalInputs
     (law : Laws.EinsteinGravityLaw)
     (wave : Laws.GravitationalWaveLaw law) : Set₁ where
@@ -30,8 +21,9 @@ record ControlledGWExchangePhysicalInputs
     maxwellGW : MaxwellGW.MaxwellGWControlledExchangeWeld law wave
     r144GW : R144GW.R144EMGWStressVariationWeld
 
-    SameInteractionAcrossMaxwellAndR144 : Set
-    sameInteractionAcrossMaxwellAndR144 : SameInteractionAcrossMaxwellAndR144
+    maxwellAndR144InteractionsEqual :
+      MaxwellGW.MaxwellGWControlledExchangeWeld.interaction maxwellGW
+      ≡ R144GW.R144EMGWStressVariationWeld.interaction r144GW
 
     PhysicalReversalRealizationReceipt : Set
     physicalReversalRealizationReceipt : PhysicalReversalRealizationReceipt
@@ -48,14 +40,20 @@ record ControlledGWExchangePredictionInputs
     ordinary : Anti.AttributedExchangePrediction
     alternative : Anti.AttributedExchangePrediction
 
-    ordinaryUsesPhysicalInteraction : Set
-    ordinaryUsesPhysicalInteractionReceipt : ordinaryUsesPhysicalInteraction
+    ordinaryUsesPhysicalInteraction :
+      Anti.AttributedExchangePrediction.interaction ordinary
+      ≡ MaxwellGW.MaxwellGWControlledExchangeWeld.interaction
+          (ControlledGWExchangePhysicalInputs.maxwellGW physical)
 
-    alternativeUsesPhysicalInteraction : Set
-    alternativeUsesPhysicalInteractionReceipt : alternativeUsesPhysicalInteraction
+    alternativeUsesPhysicalInteraction :
+      Anti.AttributedExchangePrediction.interaction alternative
+      ≡ MaxwellGW.MaxwellGWControlledExchangeWeld.interaction
+          (ControlledGWExchangePhysicalInputs.maxwellGW physical)
 
-    observationUsesPhysicalInteraction : Set
-    observationUsesPhysicalInteractionReceipt : observationUsesPhysicalInteraction
+    observationUsesPhysicalInteraction :
+      Anti.ControlledExchangeObservation.interaction observed
+      ≡ MaxwellGW.MaxwellGWControlledExchangeWeld.interaction
+          (ControlledGWExchangePhysicalInputs.maxwellGW physical)
 
 open ControlledGWExchangePredictionInputs public
 
@@ -83,44 +81,37 @@ record ControlledGWExchangeResidualClosure
 open ControlledGWExchangeResidualClosure public
 
 finiteOrthogonalReversalPaid :
-  Reversal.reversalActsOnSign
-    Exchange.orthogonalPathExchange Exchange.emissionLike
+  Reversal.reversalActsOnSign Exchange.orthogonalPathExchange Exchange.emissionLike
   ≡ Exchange.absorptionLike
 finiteOrthogonalReversalPaid = Reversal.orthogonalPathReversesEmission
 
 finiteHalfCycleReversalPaid :
-  Reversal.reversalActsOnSign
-    Exchange.halfCyclePhaseExchange Exchange.emissionLike
+  Reversal.reversalActsOnSign Exchange.halfCyclePhaseExchange Exchange.emissionLike
   ≡ Exchange.absorptionLike
 finiteHalfCycleReversalPaid = Reversal.halfCycleReversesEmission
 
 finitePolarizationReversalPaid :
-  Reversal.reversalActsOnSign
-    Exchange.polarizationExchange Exchange.emissionLike
+  Reversal.reversalActsOnSign Exchange.polarizationExchange Exchange.emissionLike
   ≡ Exchange.absorptionLike
 finitePolarizationReversalPaid = Reversal.polarizationReversesEmission
 
 finiteDoubleReversalPaid :
   ∀ reversal sign →
   Reversal.reversalActsOnSign reversal
-    (Reversal.reversalActsOnSign reversal sign)
-  ≡ sign
+    (Reversal.reversalActsOnSign reversal sign) ≡ sign
 finiteDoubleReversalPaid = Reversal.doubleReversalRestoresSign
 
 existingMaxwellMetricHodgeBoundary : MaxwellStress.MaxwellMetricHodgeStressBoundary
-existingMaxwellMetricHodgeBoundary =
-  MaxwellStress.canonicalMaxwellMetricHodgeStressBoundary
+existingMaxwellMetricHodgeBoundary = MaxwellStress.canonicalMaxwellMetricHodgeStressBoundary
 
 existingEnergyFrequencyBoundary : Calibration.EnergyFrequencyPhaseBoundary
-existingEnergyFrequencyBoundary =
-  Calibration.canonicalEnergyFrequencyPhaseBoundary
+existingEnergyFrequencyBoundary = Calibration.canonicalEnergyFrequencyPhaseBoundary
 
 existingWorkLawBoundary : Work.SchutzholdWorkNormalizationBoundary
 existingWorkLawBoundary = Work.canonicalSchutzholdWorkNormalizationBoundary
 
 existingFrequencyPhaseLawBoundary : FrequencyPhase.SchutzholdFrequencyPhaseBoundary
-existingFrequencyPhaseLawBoundary =
-  FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
+existingFrequencyPhaseLawBoundary = FrequencyPhase.canonicalSchutzholdFrequencyPhaseBoundary
 
 record ControlledGWExchangeFrontier : Set where
   constructor controlled-gw-exchange-frontier
@@ -134,6 +125,7 @@ record ControlledGWExchangeFrontier : Set where
     exactSIPlanckFrequencyAuthorityConnected : Bool
     sourceWorkLawConnected : Bool
     sourceFrequencyPhaseLawConnected : Bool
+    literalInteractionCarrierEqualitiesEnforced : Bool
 
     newIndependentMaxwellTheoryStillNeeded : Bool
     newIndependentHodgeTheoryStillNeeded : Bool
@@ -150,6 +142,6 @@ record ControlledGWExchangeFrontier : Set where
 canonicalControlledGWExchangeFrontier : ControlledGWExchangeFrontier
 canonicalControlledGWExchangeFrontier =
   controlled-gw-exchange-frontier
-    true true true true true true true true true
+    true true true true true true true true true true
     false false false false false
     true true true true true
