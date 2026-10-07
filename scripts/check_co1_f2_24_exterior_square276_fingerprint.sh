@@ -14,14 +14,18 @@ assert d['co1_order']==4157776806543360000
 assert d['source_module_dimension']==24
 assert d['exterior_square_dimension']==276
 assert sum(d['composition_factor_dimensions'])==276
+assert len(d['composition_factor_kinds'])==len(d['composition_factor_dimensions'])
 assert d['composition_series_dimensions'][0]==0
 assert d['composition_series_dimensions'][-1]==276
 assert sum(d['indecomposable_dimensions'])==276
 assert d['endomorphism_algebra_dimension']>=1
+assert d['trivial_factor_count']+d['atlas_274_factor_count']+d['unidentified_factor_count']==len(d['composition_factor_dimensions'])
 assert d['normal_2pow24_triviality_on_tate_proved'] is False
 assert d['actual_2b_tate_identified_with_exterior_square'] is False
 print('Co1 wedge2(24) factors:',d['composition_factor_dimensions'])
+print('factor kinds:',d['composition_factor_kinds'])
+print('1/274/1 profile?:',d['one_274_one_composition_profile'])
 print('series:',d['composition_series_dimensions'])
 print('rad/soc/end:',d['radical_dimension'],d['socle_dimension'],d['endomorphism_algebra_dimension'])
-print('indecomposable:',d['indecomposable_dimensions'])
+print('indecomposable:',d['indecomposable_dimensions'],'module indecomposable?',d['module_indecomposable'])
 PY
