@@ -47,9 +47,9 @@ brauerLiftIndependence :
   Brauer.allLiftTracesIndependent Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ true
 brauerLiftIndependence = Brauer.allLiftTracesIndependentIsTrue
 
-semisimplifiedIngressPaid :
+semisimplifiedIngressIsPaid :
   Brauer.semisimplifiedIngressPaid Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ true
-semisimplifiedIngressPaid = Brauer.semisimplifiedIngressIsPaid
+semisimplifiedIngressIsPaid = Brauer.semisimplifiedIngressIsPaid
 
 literalTateDuadIsomorphismStillOpen :
   Brauer.literalTateDuadIsomorphismPaid Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ false
