@@ -78,10 +78,12 @@ record WeakFieldMetricSolveBoundary : Set where
     surfacePotentialMatched : Bool
     surfaceDerivativeMatched : Bool
     outwardFreeFallDerived : Bool
+    selectedPoissonFixtureOnly : Bool
+    sameObjectConservedShellSourceEstablished : Bool
     fullNonlinearCompactEinsteinSolveStillOpen : Bool
     fullTOVConservationStillOpen : Bool
 
 canonicalWeakFieldMetricSolveBoundary : WeakFieldMetricSolveBoundary
 canonicalWeakFieldMetricSolveBoundary =
   weak-field-metric-solve-boundary
-    true true true true true true true true true
+    true true true true true true true true false true true
