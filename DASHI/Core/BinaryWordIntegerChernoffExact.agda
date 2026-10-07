@@ -14,12 +14,15 @@ module DASHI.Core.BinaryWordIntegerChernoffExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl; cong; cong₂)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Bool.Base using (T)
 open import Data.Nat using (_≤_; _≤ᵇ_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Data.Unit.Base using (tt)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 
@@ -73,8 +76,6 @@ scaleFold {suc m} scale f =
     (cong₂ _+_
       (scaleFold scale (λ tail → f (Binary.bit0 tail)))
       (scaleFold scale (λ tail → f (Binary.bit1 tail))))
-  where
-  open import Agda.Builtin.Equality using (cong₂)
 
 wordWeight :
   {m : Nat} →
@@ -99,16 +100,16 @@ weightedTotalPowThree (suc m) =
     oneHalf :
       wordFold (λ tail → wordWeight (Binary.bit1 tail)) ≡ 2 * total
     oneHalf = sym (scaleFold 2 (wordWeight {m}))
+
+    combine : total + 2 * total ≡ 3 * total
+    combine =
+      solve 1
+        (λ x → x :+ (con 2 :* x) := con 3 :* x)
+        refl total
   in
   trans
     (cong₂ _+_ zeroHalf oneHalf)
-    (trans
-      (NatP.+-comm total (2 * total))
-      (trans
-        (sym (NatP.*-suc total 2))
-        (cong (3 *_) (weightedTotalPowThree m))))
-  where
-  open import Agda.Builtin.Equality using (cong₂)
+    (trans combine (cong (3 *_) (weightedTotalPowThree m)))
 
 oneLePowTwo : (n : Nat) → 1 ≤ powNat 2 n
 oneLePowTwo zero = NatP.≤-refl
@@ -146,11 +147,14 @@ indicatorWeightBound {k = k} word with k ≤ᵇ ones word in decision
   let
     k≤ones : k ≤ ones word
     k≤ones = NatP.≤ᵇ⇒≤ k (ones word) (subst T (sym decision) tt)
+
+    raw : powNat 2 k ≤ wordWeight word
+    raw = powTwoMonotone k≤ones
   in
   subst
-    (_≤ wordWeight word)
-    (NatP.*-identityʳ (powNat 2 k))
-    (powTwoMonotone k≤ones)
+    (λ left → left ≤ wordWeight word)
+    (sym (NatP.*-identityʳ (powNat 2 k)))
+    raw
 
 integerChernoff :
   (m k : Nat) →
@@ -170,12 +174,14 @@ integerChernoff m k =
         (λ word → powNat 2 k * atLeastIndicator k word)
         wordWeight
         indicatorWeightBound
+
+    toPower : weightedTotal m ≤ powNat 3 m
+    toPower = NatP.≤-reflexive (weightedTotalPowThree m)
   in
   subst
-    (_≤ powNat 3 m)
+    (λ left → left ≤ powNat 3 m)
     (sym scaledCount)
-    (NatP.≤-trans pointwiseBound
-      (NatP.≤-reflexive (weightedTotalPowThree m)))
+    (NatP.≤-trans pointwiseBound toPower)
 
 record IntegerChernoffBoundary : Set where
   constructor integerChernoffBoundary
