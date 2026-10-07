@@ -3,17 +3,15 @@ module DASHI.Moonshine.OggSSPHeisenbergSymplecticFieldNoGoExact where
 ------------------------------------------------------------------------
 -- FULL HEISENBERG/SYMPLECTIC NO-GO FOR CANONICAL FIELD MULTIPLICATION
 --
--- The paid Monster 3B finite-Heisenberg spine owns X6 + X6* with its exact
--- alternating symplectic pairing.  Swapping coordinates 0 and 1 simultaneously
--- in both halves preserves that pairing (and the additive structure), while the
--- generated finite-field receipt proves that the same coordinate swap changes
--- the selected GF(3^6) multiplication.  Therefore the currently paid standard
--- Heisenberg/symplectic structure still does not single out that multiplication.
+-- Swapping coordinates 0 and 1 simultaneously in X6 and X6* preserves the
+-- additive structure, dot product, alternating symplectic pairing, and the
+-- actual Heisenberg central-extension composition.  Runtime conjugation through
+-- the same X6 symmetry changes the selected GF(3^6) multiplication.  Hence the
+-- currently paid standard finite-Heisenberg structure cannot single it out.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
@@ -21,8 +19,7 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergDotBilinearityExact as Dot
 import DASHI.Moonshine.Generated.OggSSPMaxCutRuntimeGenerated as Runtime
 
 swap01X6 : G.X6 → G.X6
-swap01X6 (G.x6 a0 a1 a2 a3 a4 a5) =
-  G.x6 a1 a0 a2 a3 a4 a5
+swap01X6 (G.x6 a0 a1 a2 a3 a4 a5) = G.x6 a1 a0 a2 a3 a4 a5
 
 swap01X6Involutive : (x : G.X6) → swap01X6 (swap01X6 x) ≡ x
 swap01X6Involutive (G.x6 a0 a1 a2 a3 a4 a5) = refl
@@ -59,8 +56,7 @@ swap01Symplectic12 u =
     (swap01X6 (H.modulationPart u))
 
 swap01Symplectic12Involutive :
-  (u : H.Symplectic12) →
-  swap01Symplectic12 (swap01Symplectic12 u) ≡ u
+  (u : H.Symplectic12) → swap01Symplectic12 (swap01Symplectic12 u) ≡ u
 swap01Symplectic12Involutive (H.symplectic12 x y)
   rewrite swap01X6Involutive x | swap01X6Involutive y = refl
 
@@ -75,8 +71,29 @@ swap01PreservesSymplecticPair
         | swap01X6PreservesDot y xdual
   = refl
 
--- The same X6 coordinate symmetry changes the chosen degree-six field product
--- in the exhaustive runtime presentation.
+swap01Heisenberg6 : H.Heisenberg6 → H.Heisenberg6
+swap01Heisenberg6 g =
+  H.heisenberg6
+    (swap01Symplectic12 (H.quotient g))
+    (H.centralPhase g)
+
+swap01Heisenberg6Involutive :
+  (g : H.Heisenberg6) → swap01Heisenberg6 (swap01Heisenberg6 g) ≡ g
+swap01Heisenberg6Involutive (H.heisenberg6 q z)
+  rewrite swap01Symplectic12Involutive q = refl
+
+swap01HeisenbergPreservesCompose :
+  (g h : H.Heisenberg6) →
+  swap01Heisenberg6 (H.compose g h)
+  ≡ H.compose (swap01Heisenberg6 g) (swap01Heisenberg6 h)
+swap01HeisenbergPreservesCompose
+  (H.heisenberg6 (H.symplectic12 x xdual) z)
+  (H.heisenberg6 (H.symplectic12 y ydual) w)
+  rewrite swap01X6PreservesAdd x y
+        | swap01X6PreservesAdd xdual ydual
+        | swap01X6PreservesDot xdual y
+  = refl
+
 runtimeSymplecticCoordinateSwapChangesChosenK6Multiplication :
   Runtime.k6CoordinateSwapChangesChosenMultiplication ≡ true
 runtimeSymplecticCoordinateSwapChangesChosenK6Multiplication = refl
@@ -88,6 +105,7 @@ record HeisenbergSymplecticFieldNoGoBoundary : Set where
     additiveStructurePreserved : Bool
     negationPreserved : Bool
     fullStandardSymplecticPairPreserved : Bool
+    heisenbergCentralExtensionCompositionPreserved : Bool
     selectedK6FieldMultiplicationChanged : Bool
     currentHeisenbergSymplecticDataSelectsChosenFieldProduct : Bool
     richerPriorActionStillCouldSelectFieldProduct : Bool
@@ -96,6 +114,6 @@ canonicalHeisenbergSymplecticFieldNoGoBoundary :
   HeisenbergSymplecticFieldNoGoBoundary
 canonicalHeisenbergSymplecticFieldNoGoBoundary =
   heisenberg-symplectic-field-no-go-boundary
-    true true true true
+    true true true true true
     Runtime.k6CoordinateSwapChangesChosenMultiplication
     false true
