@@ -3,10 +3,9 @@ module DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact where
 ------------------------------------------------------------------------
 -- RICH SIGNED-STATE MACHINE COMPILER WITH ONLY METADATA DYNAMICS ABSTRACT
 --
--- Semantic-core replay now reconstructs valuation and invariant units from the
+-- Semantic-core replay reconstructs valuation and invariant units from the
 -- existing instruction stream.  The only data not determined by an arbitrary
 -- WeaveInstruction are the address/residual/description-length components.
--- Supply exactly those dynamics and the full rich execution machine compiles.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -15,12 +14,14 @@ open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Biology.SignedSSPWeaveSemanticCoreReplayExact as Core
+import DASHI.Geometry.SSP369Ultrametric as SSP
+import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 
 record RichExecutionMetadata : Set where
   constructor rich-execution-metadata
   field
-    address369 : Signed.SSP.Address 3
-    zeroApproachResidual : Signed.Zero.ApproachDirection
+    address369 : SSP.Address 3
+    zeroApproachResidual : Zero.ApproachDirection
     programLength : Nat
     executionLength : Nat
     normalFormLength : Nat
