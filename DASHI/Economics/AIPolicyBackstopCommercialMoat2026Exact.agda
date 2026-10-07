@@ -6,7 +6,7 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Economics.AICapitalRecoveryEntanglement2026Exact as Capital
 import DASHI.Economics.PolicyBackstopCommercialDisciplineExact as Policy
-import DASHI.Economics.AICriticalInfrastructurePoliticsCrossPollinationExact as Critical
+import DASHI.Economics.AISafetyRegulatoryMoatGameExact as Regulatory
 
 ------------------------------------------------------------------------
 -- COMMERCIAL-MOAT / STRATEGIC-BACKSTOP SEPARATION
@@ -50,10 +50,6 @@ candidateOctober2026CommercialStrategicState : CommercialStrategicSeparation
 candidateOctober2026CommercialStrategicState =
   commercialStrategicSeparation neg pos pos pos pos pos false
 
-------------------------------------------------------------------------
--- Hypothesis, not promoted causal fact.
-------------------------------------------------------------------------
-
 record BackstopTransitionHypothesis : Set where
   constructor backstopTransitionHypothesis
   field
@@ -85,13 +81,25 @@ stateProcurementDoesNotAutoProvePrivateViability :
 stateProcurementDoesNotAutoProvePrivateViability ()
 
 ------------------------------------------------------------------------
--- Existing repo firewall retained at this surface.
+-- Existing repo machinery retained rather than duplicated.
 ------------------------------------------------------------------------
 
 policySupportStillDoesNotCloseCommercialViability :
   Policy.PolicySupportImpliesCommercialViabilityPermission → ⊥
 policySupportStillDoesNotCloseCommercialViability =
   Policy.policySupportDoesNotAutoPromoteToCommercialViability
+
+structuralRegulatoryMoatWithoutIntent : Regulatory.RegulatoryMoatReceipt
+structuralRegulatoryMoatWithoutIntent =
+  Regulatory.canonicalStructuralMoatWithoutIntent
+
+concentratedInterestBoundary : Regulatory.ConcentratedInterestGame
+concentratedInterestBoundary = Regulatory.canonicalConcentratedInterestGame
+
+regulatoryMoatStillDoesNotProveConspiracy :
+  Regulatory.RegulatoryMoatImpliesConspiracyPermission → ⊥
+regulatoryMoatStillDoesNotProveConspiracy =
+  Regulatory.moatDoesNotAutoProveConspiracy
 
 capitalMoatHypothesis : Capital.StrategicBackstopTransitionHypothesis
 capitalMoatHypothesis = Capital.candidateCommercialToStrategicMoatHypothesis
