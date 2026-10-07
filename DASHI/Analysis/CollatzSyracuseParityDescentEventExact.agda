@@ -12,6 +12,7 @@ open import Data.Bool.Base using (T)
 open import Data.List.Base using (length)
 open import Data.Nat using (_≤_; _<_; _≤ᵇ_)
 import Data.Nat.Properties as NatP
+open import Data.Unit.Base using (tt)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
@@ -47,7 +48,7 @@ parityDriftGoodᵇTrue {m} word decision =
   NatP.≤ᵇ⇒≤
     (2 * Affine.powNat 3 (Affine.parityCount word))
     (Affine.powNat 2 m)
-    (subst T decision _)
+    (subst T decision tt)
 
 parityDriftBadᵇ :
   {m : Nat} →
