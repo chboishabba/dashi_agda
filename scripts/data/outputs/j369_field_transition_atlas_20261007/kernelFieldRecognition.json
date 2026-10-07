@@ -10,6 +10,9 @@
         "4": 18
       },
       "full_recognition_paid": false,
+      "gf9_subfield_equals_frobenius2_fixed_set": true,
+      "gf9_subfield_is_naive_prefix_k2": false,
+      "gf9_subfield_linear_image_size": 9,
       "kernel_coordinate_object_map_paid": true,
       "modulus_low_to_high": [
         1,
@@ -32,7 +35,8 @@
         1,
         1
       ],
-      "primitive_order": 80
+      "primitive_order": 80,
+      "t5_chosen_subfield_lattice_object_map_paid": true
     },
     "5": {
       "c2_negation_action_intertwining_paid": true,
@@ -114,7 +118,7 @@
     "full_signed_transition_graph_claimed": false,
     "lane_count": 15,
     "pointed_lane_to_full_valuation_paid": true,
-    "reason": "SignedSSPFRACTRANWeaveExact owns the 15-lane valuation/program carriers but no canonical total transition over SignedSSPExecutionState; inventing one would exceed the formal source.",
+    "reason": "SignedSSPFRACTRANWeaveExact has the full carrier/program surface but no canonical total SignedSSPExecutionState step.",
     "signed_multiplicity_and_program_machinery_paid": true
   },
   "row_major_12_vector_scan": {
