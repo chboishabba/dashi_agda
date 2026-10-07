@@ -2,6 +2,7 @@ module DASHI.ComputerScience.TekumNearestNoDoubleRoundingExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Maybe.Base using (just)
+open import Data.Rational.Base using (ℚ)
 open import Data.Vec using (Vec; []; _∷_)
 open import Relation.Nullary.Negation.Core using (¬_)
 
@@ -10,17 +11,6 @@ import DASHI.ComputerScience.TekumAnchorCodecExact as Anchor
 import DASHI.ComputerScience.TekumExactTriadicSemanticsExact as Exact
 import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
-
-------------------------------------------------------------------------
--- DASHI EXACT-NEAREST NO-DOUBLE-ROUNDING FALSIFIER
---
--- Exact exhaustive search over the first supported chain 12→10→8, using the
--- intrinsic lower-source-code tie rule, finds its source-code-minimal mismatch
--- at source code -265591.  This owner pins the literal same-object words and
--- parser decodes.  The exhaustive minimality/global-nearest census remains in
--- scripts/tekum_nearest_rounding_exhaustive.py and its receipt; it is not
--- silently promoted into an Agda proof term.
-------------------------------------------------------------------------
 
 source12 : Vec Trit.Trit 12
 source12 =
@@ -74,12 +64,18 @@ directDecoderSameObject :
   Source.parseTekumWord directFinal8 ≡ just (Sem.ordinary directOrdinary)
 directDecoderSameObject = refl
 
+sourceValue : ℚ
 sourceValue = Exact.ordinaryRational sourceOrdinary
+
+intermediateValue : ℚ
 intermediateValue = Exact.ordinaryRational intermediateOrdinary
+
+twoStageValue : ℚ
 twoStageValue = Exact.ordinaryRational twoStageOrdinary
+
+directValue : ℚ
 directValue = Exact.ordinaryRational directOrdinary
 
--- The two final source words are definitionally distinct at their head trit.
 twoStageAndDirectDiffer : ¬ (twoStageFinal8 ≡ directFinal8)
 twoStageAndDirectDiffer ()
 
@@ -107,18 +103,16 @@ dashiNearestNoDoubleRoundingCounterexample =
     directDecoderSameObject
     twoStageAndDirectDiffer
 
--- Universal equality at this concrete canonical witness is impossible.
 universalNoDoubleRoundingRefuted :
   ¬ (twoStageFinal8 ≡ directFinal8)
 universalNoDoubleRoundingRefuted = twoStageAndDirectDiffer
 
 ------------------------------------------------------------------------
--- Discovery receipt (exact rational values):
+-- Exact executable receipt values:
 -- source      = -448599938492324310442483952132513863641390497147438380708009220498080919908972335004317
 -- intermediate= -457064088275198354035738366323693370502548808414371180344009394469742824058198228117606
 -- two-stage   = -685596132412797531053607549485540055753823212621556770516014091704614236087297342176409
 -- direct      = -228532044137599177017869183161846685251274404207185590172004697234871412029099114058803
---
--- Stage two is an exact tie between codes -3279 and -3278; lower-code policy
--- chooses -3279.  Direct 12→8 exact-nearest is unique at -3278.
+-- Stage two is an exact tie at source codes -3279/-3278; lower-code DASHI
+-- policy chooses -3279. Direct 12→8 exact-nearest is unique at -3278.
 ------------------------------------------------------------------------
