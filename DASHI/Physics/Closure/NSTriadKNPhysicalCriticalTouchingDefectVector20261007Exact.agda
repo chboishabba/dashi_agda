@@ -3,35 +3,36 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectVector202610
 ------------------------------------------------------------------------
 -- POSITIVE B4 / CORE-NONCORE DEFECT -> ONE COHERENT VECTOR RESIDUAL
 --
--- The previous max-cut puts the remaining defect exactly on two bipartite
--- covariance sums.  Because every live work scalar is
+-- The defect is exactly
 --
---   w_tau = 2 Re <M , A_tau>,
+--   - coherentWork M R_defect.
 --
--- the bipartite four-aggregate expression is itself one coherent work.  This
--- owner constructs that vector literally and proves
+-- R579's sharp negative-side Hermitian Young inequality therefore also gives
 --
---   defect = - coherentWork M R_defect.
+--   defect <= ||M||^2 + ||R_defect||^2.
 --
--- No absolute value or estimate is used.  The surviving B4 analysis is now a
--- norm/geometry payment for one explicit vector residual (or a sharper signed
--- estimate on the same pairing), not an eight-scalar-moment problem.
+-- This closes the pairing estimate itself.  The remaining physical B4 theorem
+-- is the literal vector-norm budget that must put this quantity under the
+-- remaining <1/2 companion allowance plus ED.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; -_; _*_ ; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R579
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
@@ -136,20 +137,9 @@ bipartiteCovarianceIsVectorWork mixed rate value left right =
                   (Work.workScaleRight (0ℚ - rL) mixed foldR)
                   (Work.workScaleRight (0ℚ - rR) mixed foldL))))))
 
-    weightedLMeaning :
-      Work.coherentWork mixed weightedL ≡ scalarWeightedL
     weightedLMeaning = Vector.weightedVectorWorkMeaning mixed rate value left
-
-    weightedRMeaning :
-      Work.coherentWork mixed weightedR ≡ scalarWeightedR
     weightedRMeaning = Vector.weightedVectorWorkMeaning mixed rate value right
-
-    workLMeaning :
-      Work.coherentWork mixed foldL ≡ scalarWorkL
     workLMeaning = sym (Pair.workSumAgainstFold mixed value left)
-
-    workRMeaning :
-      Work.coherentWork mixed foldR ≡ scalarWorkR
     workRMeaning = sym (Pair.workSumAgainstFold mixed value right)
 
     normalized :
@@ -228,14 +218,46 @@ module LiveDefectVector
         (defectCovarianceIsVectorWork
           (Live.mixed output) Rate.inputMass Live.value R.items))
 
+  negativeWorkBelowNorms :
+    0ℚ - Work.coherentWork (Live.mixed output) residual
+    ≤ L2.complex3NormSquared (Live.mixed output)
+      + L2.complex3NormSquared residual
+  negativeWorkBelowNorms =
+    let
+      cross = R179.realHermitianCross (Live.mixed output) residual
+      meaning :
+        0ℚ - Work.coherentWork (Live.mixed output) residual
+        ≡ - (R579.two * cross)
+      meaning = solve (cross ∷ [])
+    in
+    subst
+      (_≤ L2.complex3NormSquared (Live.mixed output)
+        + L2.complex3NormSquared residual)
+      (sym meaning)
+      (R579.negTwoRealCrossUpper (Live.mixed output) residual)
+
+  defectBelowSharpVectorYoung :
+    R.defect
+    ≤ L2.complex3NormSquared (Live.mixed output)
+      + L2.complex3NormSquared residual
+  defectBelowSharpVectorYoung =
+    subst
+      (_≤ L2.complex3NormSquared (Live.mixed output)
+        + L2.complex3NormSquared residual)
+      (sym defectIsNegativeVectorWork)
+      negativeWorkBelowNorms
+
 b4DefectOneVectorNormalFormClosed : Bool
 b4DefectOneVectorNormalFormClosed = true
 
 b4DefectVectorNormalFormIntroducesAbsoluteValue : Bool
 b4DefectVectorNormalFormIntroducesAbsoluteValue = false
 
-b4DefectVectorNormPaymentClosed : Bool
-b4DefectVectorNormPaymentClosed = false
+b4DefectSharpVectorYoungClosed : Bool
+b4DefectSharpVectorYoungClosed = true
+
+b4DefectPhysicalVectorBudgetClosed : Bool
+b4DefectPhysicalVectorBudgetClosed = false
 
 clayPromotion : Bool
 clayPromotion = false
@@ -248,6 +270,10 @@ b4DefectVectorNormalFormIntroducesAbsoluteValueIsFalse :
   b4DefectVectorNormalFormIntroducesAbsoluteValue ≡ false
 b4DefectVectorNormalFormIntroducesAbsoluteValueIsFalse = refl
 
-b4DefectVectorNormPaymentClosedIsFalse :
-  b4DefectVectorNormPaymentClosed ≡ false
-b4DefectVectorNormPaymentClosedIsFalse = refl
+b4DefectSharpVectorYoungClosedIsTrue :
+  b4DefectSharpVectorYoungClosed ≡ true
+b4DefectSharpVectorYoungClosedIsTrue = refl
+
+b4DefectPhysicalVectorBudgetClosedIsFalse :
+  b4DefectPhysicalVectorBudgetClosed ≡ false
+b4DefectPhysicalVectorBudgetClosedIsFalse = refl
