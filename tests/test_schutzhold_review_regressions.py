@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import math
+import sys
 from pathlib import Path
 
 
@@ -16,9 +17,11 @@ def read(rel: str) -> str:
 
 def load_benchmark_module():
     path = REPO_ROOT / "scripts" / "schutzhold_emgw_benchmark.py"
-    spec = importlib.util.spec_from_file_location("schutzhold_emgw_benchmark", path)
+    name = "schutzhold_emgw_benchmark"
+    spec = importlib.util.spec_from_file_location(name, path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
     spec.loader.exec_module(module)
     return module
 
