@@ -67,6 +67,32 @@ preSpokesDurationRowCount = 5
 postSpokesDurationRowCount : Nat
 postSpokesDurationRowCount = 1
 
+------------------------------------------------------------------------
+-- Mixed mechanism observations from Holmes' participant-organizer account.
+--
+-- These are source claims about the early Spokes meetings, not DASHI causal
+-- estimates.  The inaugural format is reported as easier to hear and allowing
+-- more in-depth group-first discussion; later meetings also show facilitation
+-- breakdown, conflict and implementation confusion around spoke rotation.
+------------------------------------------------------------------------
+
+record SpokesMechanismObservations : Set where
+  constructor spokesMechanismObservations
+  field
+    groupFirstDiscussionReported : Bool
+    inauguralMeetingEasierToHearReported : Bool
+    inauguralMeetingMoreInDepthDiscussionReported : Bool
+    laterFacilitationBreakdownReported : Bool
+    laterConflictReported : Bool
+    spokeRotationImplementationProblemReported : Bool
+    mixedMechanismEvidence : Bool
+
+open SpokesMechanismObservations public
+
+canonicalSpokesMechanismObservations : SpokesMechanismObservations
+canonicalSpokesMechanismObservations =
+  spokesMechanismObservations true true true true true true true
+
 record OWSSpokesTransitionBoundary : Set where
   constructor owsSpokesTransitionBoundary
   field
@@ -79,6 +105,7 @@ record OWSSpokesTransitionBoundary : Set where
     facilitationLearningHeldFixed : Bool
     evictionShockAbsent : Bool
     lexicalBeforeAfterDifferenceIsCausalEffect : Bool
+    qualitativeImprovementReportIsCausalEffect : Bool
     durationCoverageSupportsEffectEstimate : Bool
     transitionUsefulForMechanismAndMeasurementDesign : Bool
 
@@ -87,14 +114,14 @@ open OWSSpokesTransitionBoundary public
 canonicalOWSSpokesTransitionBoundary : OWSSpokesTransitionBoundary
 canonicalOWSSpokesTransitionBoundary =
   owsSpokesTransitionBoundary
-    true true false false false false false false false false true
+    true true false false false false false false false false false true
 
 canonicalOWSSpokesInterruptedTransitionReceipt : GenericReceipt.GenericReceipt
 canonicalOWSSpokesInterruptedTransitionReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "OWS Spokes Council interrupted same-context transition"
     "DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionExact"
-    "canonicalTransitionWindow / preSpokesDevelopmentLexicalAggregate / postSpokesDevelopmentLexicalAggregate / canonicalOWSSpokesTransitionBoundary"
-    "recasts the creation of the OWS Spokes Council as the closest available same-movement flat-to-nested structural transition and freezes development-only pre/post lexical aggregates while preserving the protected 8 November holdout"
-    "the window is extremely short and confounded by changing issue mix, participant composition, facilitation learning and the 15 November eviction; only one post-transition GA duration row is source-paid, so no causal coordination-cost effect or bolo cost bound is promoted"
+    "canonicalTransitionWindow / canonicalSpokesMechanismObservations / preSpokesDevelopmentLexicalAggregate / postSpokesDevelopmentLexicalAggregate / canonicalOWSSpokesTransitionBoundary"
+    "recasts the creation of the OWS Spokes Council as the closest available same-movement flat-to-nested structural transition, preserves the protected 8 November holdout, and records mixed mechanism evidence: inaugural group-first discussion was reported as easier to hear and more in-depth, while later meetings also experienced facilitation breakdown, conflict and rotation-rule implementation problems"
+    "the window is extremely short and confounded by changing issue mix, participant composition, facilitation learning and the 15 November eviction; only one post-transition GA duration row is source-paid, so neither lexical differences nor qualitative reports are promoted to a causal coordination-cost effect or bolo cost bound"
     "agda -i . DASHI/Governance/BoloBoloOWSSpokesInterruptedTransitionRegression.agda"
