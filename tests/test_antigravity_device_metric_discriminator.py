@@ -27,6 +27,11 @@ EXPECTED = {
         "samePhysicalDeviceState",
         "crossChannelConsistency",
         "candidateResidualBetterThanOrdinaryResidual",
+        "DeviceModulationExperiment",
+        "modulationLockInReceipt",
+        "positiveGActiveStressRoute",
+        "existingLocalizedPositiveGRepulsiveShell",
+        "existingLiTorrKernel",
     ),
 }
 
@@ -78,6 +83,8 @@ def test_device_discriminator_requires_same_object_and_cross_channel_checks() ->
         "clockChannel",
         "opticalPhaseChannel",
         "reversalRepresentation",
+        "modulationLockInReceipt",
+        "positiveGActiveStressRoute",
     ):
         assert token in text
 
