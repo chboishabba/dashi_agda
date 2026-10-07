@@ -54,8 +54,10 @@ import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact
 import DASHI.Moonshine.OggSSPP2WeilHeisenbergNativeBidiExact
 import DASHI.Moonshine.OggSSPFiniteFieldBracketExact
 import DASHI.Moonshine.OggSSPTriadicKernelF3LinearExact
+import DASHI.Moonshine.OggSSPKernelHeisenbergAdditiveIntertwinerExact
 import DASHI.Moonshine.OggSSPTriadicKernelFieldRecognitionExact
 import DASHI.Moonshine.OggSSPTriadicKernelCanonicalFieldActionFrontierExact
+import DASHI.Biology.SignedSSPWeaveProgramMachineExact
 import DASHI.Moonshine.OggSSPFullSignedTransitionGraphFrontierExact
 
 module DASHI.Moonshine.Everything where
