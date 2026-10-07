@@ -29,9 +29,9 @@ for x in range(2, 200_000):
         max_start = x
 
 # The coarse affine-good-prefix sufficient route is strictly stronger than
-# literal descent: 3 reaches a lower value at horizon 5, while 3^5 > 3.
-assert first_strict_descent(3) == (5, 2)
-assert 3**5 > 3
+# literal descent: 3 reaches a lower value at horizon 4, while 3^4 > 3.
+assert first_strict_descent(3) == (4, 2)
+assert 3**4 > 3
 
 print("collatz syracuse strict-descent finite regression: PASS")
 print("checked starts: 2..199999")
