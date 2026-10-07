@@ -26,6 +26,12 @@ b4FreeCompanionGone = F.b4FreeCompanionScalarStillRequiredIsFalse
 b4OnlyDefectRemains : F.b4RemainingStrictMarginIsDefectBelowHalf ≡ true
 b4OnlyDefectRemains = F.b4RemainingStrictMarginIsDefectBelowHalfIsTrue
 
+b4DefectBipartiteClosed : F.b4DefectBipartiteSameObjectClosed ≡ true
+b4DefectBipartiteClosed = F.b4DefectBipartiteSameObjectClosedIsTrue
+
+b4DefectAggregateClosed : F.b4DefectFourAggregateNormalFormClosed ≡ true
+b4DefectAggregateClosed = F.b4DefectFourAggregateNormalFormClosedIsTrue
+
 b4DefectOpen : F.b4DefectRemainderClosed ≡ false
 b4DefectOpen = F.b4DefectRemainderClosedIsFalse
 
