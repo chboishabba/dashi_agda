@@ -8,6 +8,7 @@ import DASHI.Physics.Foundations.GRQFTLocalizedAnisotropicRepulsiveShellExact as
 import DASHI.Physics.Foundations.CMP119AntigravityTimelikeEnergySharpActiveStressCriterionExact as Active
 import DASHI.Physics.Foundations.PositiveGActiveStressWeakFieldMetricExact as Metric
 import DASHI.Physics.Foundations.PositiveGAnisotropicTOVConservationExact as TOV
+import DASHI.Physics.Foundations.LocalActiveStressGlobalExteriorMassFirewallExact as Global
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
@@ -25,6 +26,9 @@ stageCWeakFieldMetricSolve = Metric.canonicalWeakFieldMetricSolveBoundary
 stageCNonlinearConservationAudit : TOV.AnisotropicTOVConservationBoundary
 stageCNonlinearConservationAudit = TOV.canonicalAnisotropicTOVConservationBoundary
 
+stageCGlobalExteriorPromotionAudit : Global.LocalGlobalExteriorBoundary
+stageCGlobalExteriorPromotionAudit = Global.canonicalLocalGlobalExteriorBoundary
+
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
 
@@ -39,15 +43,17 @@ record AntigravityABCDEFrontier : Set where
   field
     stageASourceShapeConstructed : Bool
     stageBActiveStressSignMathClosed : Bool
-    stageCWeakFieldInteriorSolved : Bool
-    stageCWeakFieldExteriorSolved : Bool
+    stageCWeakFieldPoissonFixtureSolved : Bool
     stageCWeakFieldSurfaceMatched : Bool
-    stageCOutwardAccelerationDerived : Bool
+    stageCOutwardAccelerationDerivedForFixture : Bool
     stageCNonlinearConservationAudited : Bool
+    stageCGlobalExteriorPromotionAudited : Bool
     stageDFourChannelProjectionCompiled : Bool
     stageESameObjectComparatorCompiled : Bool
     oppositeCouplingNotPromotedToOppositeGeometry : Bool
 
+    sameObjectConservedShellToWeakFieldMetricStillOpen : Bool
+    exactGlobalExteriorMassChargeStillOpen : Bool
     physicalDeviceStressRealisationStillOpen : Bool
     apparatusCalibrationStillOpen : Bool
     empiricalReplicationStillOpen : Bool
@@ -58,13 +64,15 @@ canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
     true true true true true true true true true true
-    true true true true true
+    true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
   field
-    weakFieldMathematicalLaneClosed : Bool
+    weakFieldPoissonFixtureMathematicsClosed : Bool
+    sameObjectPhysicalAToEChainClosed : Bool
     nonlinearCurrentShellAlreadyConserved : Bool
+    globalExteriorMassSignAlreadySolved : Bool
     fullPhysicalDeviceDemonstrated : Bool
     weightOnlyObservationProvesMetric : Bool
     opticalOnlyObservationProvesAntigravity : Bool
@@ -74,4 +82,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true false false false false true true
+    true false false false false false false true true
