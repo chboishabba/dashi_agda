@@ -36,6 +36,11 @@ rowCount : List TextProcessRow → Nat
 rowCount [] = 0
 rowCount (_ ∷ xs) = 1 + rowCount xs
 
+row1 row2 row3 row4 row5 row6 row7 row8 row9 row10 row11
+  row13 row14 row15 row16 row18 row19 row20 row21 row23 row24 row25 row26
+  row28 row29 row30 row31 row33 row34 row35 row36 row38 row39 row40 row41
+  row43 row44 row45 : TextProcessRow
+
 row1 = textProcessRow Manifest.record1 869 0 0 0 4
 row2 = textProcessRow Manifest.record2 152 0 0 0 2
 row3 = textProcessRow Manifest.record3 182 3 0 0 0
