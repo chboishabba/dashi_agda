@@ -2,12 +2,6 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderRepresentativeExact wher
 
 ------------------------------------------------------------------------
 -- POSITIVE REPRESENTATIVES AND DERIVED RESIDUE-CODE INJECTIVITY
---
--- A separate recursive injectivity proof for the residue code is unnecessary.
--- Every residue below 2^m has a literal positive-integer representative:
--- nonzero r is represented by r itself, while residue zero is represented by
--- 2^m.  Therefore any reverse cylinder classifier immediately makes the
--- residue code injective.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -66,7 +60,7 @@ candidateInjectiveFromReverse :
   (left right : Binary.BinaryWord m) →
   Candidate.residueCandidate left ≡ Candidate.residueCandidate right →
   left ≡ right
-candidateInjectiveFromReverse candidateBounded reverseClassification left right candidatesEqual =
+candidateInjectiveFromReverse candidateBounded reverseClassification {m} left right candidatesEqual =
   let
     boundedLeft = candidateBounded left
     x = positiveRepresentative (Candidate.residueCandidate left) boundedLeft
@@ -74,7 +68,7 @@ candidateInjectiveFromReverse candidateBounded reverseClassification left right 
       (Candidate.residueCandidate left) boundedLeft
 
     xResidueRight :
-      Syracuse.toNat x % Cylinder.pow2 _
+      Syracuse.toNat x % Cylinder.pow2 m
       ≡ Candidate.residueCandidate right
     xResidueRight = trans xResidueLeft candidatesEqual
 
