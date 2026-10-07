@@ -119,10 +119,15 @@ startBelowOddScale :
   (x : Nat) →
   x ≤ Affine.powNat 3 oddCount * x
 startBelowOddScale oddCount x =
+  let
+    p = Affine.powNat 3 oddCount
+    raw : 1 * x ≤ p * x
+    raw = NatP.*-monoˡ-≤ x (oneLePowThree oddCount)
+  in
   subst
-    (x ≤_)
+    (λ left → left ≤ p * x)
     (NatP.*-identityˡ x)
-    (NatP.*-monoˡ-≤ x (oneLePowThree oddCount))
+    raw
 
 coarseParityMarginImpliesScalarMargin :
   (m : Nat) →
