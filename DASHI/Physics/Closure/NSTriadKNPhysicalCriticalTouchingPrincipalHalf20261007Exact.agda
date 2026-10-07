@@ -62,10 +62,6 @@ oneHalfNN = toWitness {a? = 0ℚ ℚP.≤? oneHalf} _
 oneHalfStrictlyBelowOne : oneHalf < one
 oneHalfStrictlyBelowOne = toWitness {a? = oneHalf ℚP.<? one} _
 
-------------------------------------------------------------------------
--- Sharp absolute coherent-work bound from R579's two-sided primitive theorem.
-------------------------------------------------------------------------
-
 sharpCoherentWorkMagnitude :
   (u v : C3.Complex3 F) →
   ∣ Work.coherentWork u v ∣
@@ -105,11 +101,6 @@ sharpWorkDifferenceMagnitude mixed value alpha beta =
         + L2.complex3NormSquared difference)
     (sym bridge)
     sharp
-
-------------------------------------------------------------------------
--- Each selected literal row costs only HALF of the loose companion used by the
--- previous quantitative-pair owner.
-------------------------------------------------------------------------
 
 rowSignedBelowHalfCompanion :
   (mixed : C3.Complex3 F) →
@@ -171,7 +162,7 @@ rowSumBelowHalfCompanion :
   Rows.sumRows rate (Pair.cellWork mixed value) rows
   ≤ oneHalf * Companion.companionSum mixed rate value rows
 rowSumBelowHalfCompanion mixed rate value [] =
-  subst (0ℚ ≤_) (sym (solve [])) ℚP.≤-refl
+  subst (0ℚ ≤_) (solve []) ℚP.≤-refl
 rowSumBelowHalfCompanion mixed rate value (row ∷ rest) =
   let
     added = ℚP.+-mono-≤
@@ -190,10 +181,6 @@ rowSumBelowHalfCompanion mixed rate value (row ∷ rest) =
     (Rows.sumRows rate (Pair.cellWork mixed value) (row ∷ rest) ≤_)
     endpoint
     added
-
-------------------------------------------------------------------------
--- Live B4 consequence.
-------------------------------------------------------------------------
 
 module LivePrincipalHalf
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
@@ -241,9 +228,9 @@ module LivePrincipalHalf
     ; Live.principalStrictBound =
         subst
           (R.principal ≤_)
-          (sym (solve (Live.coreCompanionMass ∷ []) :
+          (solve (Live.coreCompanionMass ∷ []) :
             oneHalf * Live.coreCompanionMass
-            ≡ oneHalf * Live.coreCompanionMass + 0ℚ * localED D))
+            ≡ oneHalf * Live.coreCompanionMass + 0ℚ * localED D)
           principalHalfBound
     ; Live.defectBound = defectBound D
     }
