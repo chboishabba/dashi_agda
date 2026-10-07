@@ -6,56 +6,45 @@ module DASHI.Physics.Closure.NSClayFacingBPureAnalysisFrontier20261005Exact wher
 -- The representation/provenance programme is frozen.  This owner records only
 -- theorem-producing analytic routes.
 --
--- Highest-information B4 route:
---   literal critical row fold = principal + defect
+-- B4 has now advanced one more exact step.  The literal critical-touching row
+-- fold is partitioned on the SAME row carrier into
+--
+--   principal = literal Core-Core rows,
+--   defect    = literal Core-noncore rows,
+--
+-- with the exact live identity
+--
+--   criticalTouchingSigned = principal + defect.
+--
+-- Therefore the remaining B4 theorem is no longer to discover a decomposition.
+-- It is exactly the pair of physical estimates
+--
 --   principal <= thetaP Mcore + cP ED
 --   defect    <= thetaD Mcore + cD ED
---   thetaP + thetaD < 1
---   ------------------------------------------------
---   critical  <= (thetaP+thetaD) Mcore + (cP+cD) ED.
+--   thetaP + thetaD < 1,
 --
--- This generic strict-split compiler is the canonical B4 research interface.
--- The older Gate-2A 1/6 + 1/12 = 1/4 route remains a lawful optional producer,
--- but it is not required and is not treated as same-object evidence.
+-- uniformly in physical state/output/cutoff.  The generic strict-split
+-- compiler then closes the literal B4 payment.  The older fixed quarter route
+-- remains an optional producer only.
 --
--- Preferred B7/Q4 route is also sharpened: ordinary monotone/scaled
--- integration compiles a pointwise
---
---   G_offdiag,N(t) <= A * D_N(t)
---
--- plus cutoff-uniform integrated dissipation into the required integrated Gram
--- budget.  Thus time integration is not an independent Q4 research leaf.
---
--- For E+, R461 already reduces one fixed-output positive endpoint to an
--- amplitude square.  The new output aggregator proves
---
---   sum_k F_k^+ <= W * (sum_k a_k)^2
---
--- with no output-count factor.  Hence the endpoint research leaf is a single
--- cutoff-uniform global amplitude-sum bound on the literal companion family.
---
--- Remaining board:
---   B4 strict principal+defect attachment
---   B1 literal rows -> ED
---   B2 literal rows -> ED
---   B3 literal rows -> ED
---   Q4 pointwise physical off-diagonal Gram -> dissipation
---   E+ global physical amplitude-sum bound
---   Q5 direct signed quintic (fallback only)
---   B-continuation inputs.
+-- Preferred B7/Q4 route remains pointwise Gram -> dissipation, because ordinary
+-- monotone/scaled integration is already compiled.  E+ remains one uniform
+-- global amplitude-sum bound because finite output aggregation is cardinality
+-- free.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSClayFacingBFinalAnalyticFrontier20261004Exact as Previous
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Exact as LiteralSplit
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingStrictSplitMaxCutExact as Split
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingQuarterMarginMaxCutExact as Quarter
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406Q4PointwiseSpacetimeMaxCutExact as Q4Pointwise
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406PositiveEndpointAmplitudeMaxCutExact as EndpointAmplitude
 
 data PureBAnalyticLeaf : Set where
-  b4StrictSplitPhysicalAttachment : PureBAnalyticLeaf
+  b4PrincipalDefectPhysicalEstimates : PureBAnalyticLeaf
   b1LiteralRowsED : PureBAnalyticLeaf
   b2LiteralRowsED : PureBAnalyticLeaf
   b3LiteralRowsED : PureBAnalyticLeaf
@@ -65,8 +54,7 @@ data PureBAnalyticLeaf : Set where
   bContinuationInputs : PureBAnalyticLeaf
 
 pureBLeafClosed : PureBAnalyticLeaf → Bool
-pureBLeafClosed b4StrictSplitPhysicalAttachment =
-  Split.b4StrictSplitPhysicalAttachmentClosedHere
+pureBLeafClosed b4PrincipalDefectPhysicalEstimates = false
 pureBLeafClosed b1LiteralRowsED =
   Previous.finalBLeafClosed Previous.b1LiteralRowsLocalED
 pureBLeafClosed b2LiteralRowsED =
@@ -83,7 +71,18 @@ pureBLeafClosed bContinuationInputs =
   Previous.finalBLeafClosed Previous.bContinuationInputs
 
 currentHighestInformationLeaf : PureBAnalyticLeaf
-currentHighestInformationLeaf = b4StrictSplitPhysicalAttachment
+currentHighestInformationLeaf = b4PrincipalDefectPhysicalEstimates
+
+------------------------------------------------------------------------
+-- B4 exact progress and compiler surface.
+------------------------------------------------------------------------
+
+b4LiteralPrincipalDefectSplitClosed : Bool
+b4LiteralPrincipalDefectSplitClosed =
+  LiteralSplit.b4LiteralPrincipalDefectSplitClosed
+
+b4PrincipalDefectPhysicalEstimatesClosed : Bool
+b4PrincipalDefectPhysicalEstimatesClosed = false
 
 b4DirectStrictMarginCompilerClosed : Bool
 b4DirectStrictMarginCompilerClosed = Previous.b4LiteralRowOperatorCompilerClosed
@@ -97,8 +96,12 @@ b4FixedQuarterMarginRequired = Split.b4StrictSplitRequiresQuarterMargin
 b4QuarterMarginOptionalCompilerClosed : Bool
 b4QuarterMarginOptionalCompilerClosed = Quarter.b4QuarterMarginCompilerClosed
 
-b4ResearchLeafNowStrictPrincipalPlusDefect : Bool
-b4ResearchLeafNowStrictPrincipalPlusDefect = true
+b4ResearchLeafNowOnlyPhysicalEstimates : Bool
+b4ResearchLeafNowOnlyPhysicalEstimates = true
+
+------------------------------------------------------------------------
+-- B7 compiler surface.
+------------------------------------------------------------------------
 
 q4PointwiseToSpacetimeCompilerClosed : Bool
 q4PointwiseToSpacetimeCompilerClosed =
@@ -131,6 +134,18 @@ pureAnalysisFrontierClosed = false
 clayPromotion : Bool
 clayPromotion = false
 
+------------------------------------------------------------------------
+-- Receipts.
+------------------------------------------------------------------------
+
+b4LiteralPrincipalDefectSplitClosedIsTrue :
+  b4LiteralPrincipalDefectSplitClosed ≡ true
+b4LiteralPrincipalDefectSplitClosedIsTrue = refl
+
+b4PrincipalDefectPhysicalEstimatesClosedIsFalse :
+  b4PrincipalDefectPhysicalEstimatesClosed ≡ false
+b4PrincipalDefectPhysicalEstimatesClosedIsFalse = refl
+
 b4GenericStrictSplitCompilerClosedIsTrue :
   b4GenericStrictSplitCompilerClosed ≡ true
 b4GenericStrictSplitCompilerClosedIsTrue = refl
@@ -143,9 +158,9 @@ b4QuarterMarginOptionalCompilerClosedIsTrue :
   b4QuarterMarginOptionalCompilerClosed ≡ true
 b4QuarterMarginOptionalCompilerClosedIsTrue = refl
 
-b4ResearchLeafNowStrictPrincipalPlusDefectIsTrue :
-  b4ResearchLeafNowStrictPrincipalPlusDefect ≡ true
-b4ResearchLeafNowStrictPrincipalPlusDefectIsTrue = refl
+b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue :
+  b4ResearchLeafNowOnlyPhysicalEstimates ≡ true
+b4ResearchLeafNowOnlyPhysicalEstimatesIsTrue = refl
 
 q4PointwiseToSpacetimeCompilerClosedIsTrue :
   q4PointwiseToSpacetimeCompilerClosed ≡ true
