@@ -3,8 +3,10 @@ module DASHI.ComputerScience.TekumProposition5NoGoExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Maybe.Base using (just)
 open import Data.Product.Base using (_×_; _,_)
+open import Data.Vec.Base using (Vec)
 open import Relation.Nullary.Negation using (¬_)
 
+import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
 import DASHI.ComputerScience.TekumProposition5CounterexampleExact as Counterexample
 import DASHI.ComputerScience.TekumSpecialValuesExact as Special
@@ -20,25 +22,22 @@ import DASHI.ComputerScience.TekumSpecialValuesExact as Special
 -- imply the impossible boundary obligations packaged below.
 ------------------------------------------------------------------------
 
-IsFiniteLowerPrecision :
-  {A : Set} →
-  (classify : A → _) →
-  A → Set
-IsFiniteLowerPrecision classify word =
-  (classify word ≢ just Sem.naR) ×
-  (classify word ≢ just Sem.infinity)
-  where
-  infix 4 _≢_
-  _≢_ : ∀ {X : Set} → X → X → Set
-  x ≢ y = ¬ (x ≡ y)
+infix 4 _≢_
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = ¬ (x ≡ y)
+
+IsFiniteLowerPrecision : Vec Trit.Trit 8 → Set
+IsFiniteLowerPrecision word =
+  (Special.classifySpecial word ≢ just Sem.naR) ×
+  (Special.classifySpecial word ≢ just Sem.infinity)
 
 negativeEdgeFinite : Set
 negativeEdgeFinite =
-  IsFiniteLowerPrecision Special.classifySpecial Counterexample.negativeEdgeRounded8
+  IsFiniteLowerPrecision Counterexample.negativeEdgeRounded8
 
 positiveEdgeFinite : Set
 positiveEdgeFinite =
-  IsFiniteLowerPrecision Special.classifySpecial Counterexample.positiveEdgeRounded8
+  IsFiniteLowerPrecision Counterexample.positiveEdgeRounded8
 
 record RawTruncationFiniteClosed : Set where
   constructor rawTruncationFiniteClosed
