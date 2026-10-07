@@ -39,8 +39,12 @@ formal_files=(
   DASHI/Analysis/CollatzSyracuseParityBernoulliExact.agda
   DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
   DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
+  DASHI/Analysis/CollatzSyracuseRationalDriftTailExact.agda
+  DASHI/Analysis/CollatzSyracuseRationalAlignedBlockTailExact.agda
+  DASHI/Analysis/CollatzSyracuseRationalDriftApproximantsExact.agda
   DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
   DASHI/Analysis/CollatzSyracuseAlignedBlockTailExact.agda
+  DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
   DASHI/Analysis/CollatzSyracuseHoeffdingMathlibBoundaryExact.agda
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 )
@@ -71,15 +75,33 @@ grep -q 'badWordCount' \
   DASHI/Analysis/CollatzSyracuseParityDescentEventExact.agda
 grep -q 'fiveEightBadWordBound' \
   DASHI/Analysis/CollatzSyracuseFiveEightTailExact.agda
+grep -q 'rationalBadWordBound' \
+  DASHI/Analysis/CollatzSyracuseRationalDriftTailExact.agda
+grep -q 'seventeenTwentySevenLiteralAlignedTail' \
+  DASHI/Analysis/CollatzSyracuseRationalDriftApproximantsExact.agda
+grep -q 'rationalAlignedBlockNonDescentBound' \
+  DASHI/Analysis/CollatzSyracuseRationalAlignedBlockTailExact.agda
+grep -q 'middleAlignedScaledTail' \
+  DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
+grep -q 'unalignedIntervalScaledTail' \
+  DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
 grep -q 'nonDescentImpliesBadWord' \
   DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
 grep -q 'alignedBlockFiveEightNonDescentBound' \
   DASHI/Analysis/CollatzSyracuseAlignedBlockTailExact.agda
+grep -q 'cutStatus C11d-unalignedBoundaryCompiler = proved' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C11f-exactArbitraryIntervalSplit = sourceSpecificOpen' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 grep -q 'cutStatus C12c-exponentialBadWordTail = proved' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C12c2-parametricRationalTail = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 grep -q 'cutStatus C13a-alignedBlockLiteralDescent = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 grep -q 'cutStatus C13b-alignedBlockFiniteTail = proved' \
+  DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
+grep -q 'cutStatus C13c-rationalAlignedBlockFiniteTail = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
