@@ -4,42 +4,108 @@
       "c2_negation_action_intertwining_paid": true,
       "canonical_field_multiplication_from_existing_repo_action": false,
       "chosen_field_multiplication_runtime_verified": true,
-      "frobenius_orbits": {"1": 3, "2": 3, "4": 18},
+      "frobenius_orbits": {
+        "1": 3,
+        "2": 3,
+        "4": 18
+      },
       "full_recognition_paid": false,
       "kernel_coordinate_object_map_paid": true,
-      "modulus_low_to_high": [1, 0, 1, 1, 1],
-      "negation_orbits_all": {"1": 1, "2": 40},
-      "negation_orbits_nonzero": {"2": 40},
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "negation_orbits_all": {
+        "1": 1,
+        "2": 40
+      },
+      "negation_orbits_nonzero": {
+        "2": 40
+      },
       "order": 81,
-      "primitive_element": [0, 0, 1, 1],
+      "primitive_element": [
+        0,
+        0,
+        1,
+        1
+      ],
       "primitive_order": 80
     },
     "5": {
       "c2_negation_action_intertwining_paid": true,
       "canonical_field_multiplication_from_existing_repo_action": false,
       "chosen_field_multiplication_runtime_verified": true,
-      "frobenius_orbits": {"1": 3, "5": 48},
+      "frobenius_orbits": {
+        "1": 3,
+        "5": 48
+      },
       "full_recognition_paid": false,
       "kernel_coordinate_object_map_paid": true,
-      "modulus_low_to_high": [1, 0, 0, 0, 2, 1],
-      "negation_orbits_all": {"1": 1, "2": 121},
-      "negation_orbits_nonzero": {"2": 121},
+      "modulus_low_to_high": [
+        1,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "negation_orbits_all": {
+        "1": 1,
+        "2": 121
+      },
+      "negation_orbits_nonzero": {
+        "2": 121
+      },
       "order": 243,
-      "primitive_element": [0, 0, 0, 0, 2],
+      "primitive_element": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
       "primitive_order": 242
     },
     "6": {
       "c2_negation_action_intertwining_paid": true,
       "canonical_field_multiplication_from_existing_repo_action": false,
       "chosen_field_multiplication_runtime_verified": true,
-      "frobenius_orbits": {"1": 3, "2": 3, "3": 8, "6": 116},
+      "frobenius_orbits": {
+        "1": 3,
+        "2": 3,
+        "3": 8,
+        "6": 116
+      },
       "full_recognition_paid": false,
       "kernel_coordinate_object_map_paid": true,
-      "modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
-      "negation_orbits_all": {"1": 1, "2": 364},
-      "negation_orbits_nonzero": {"2": 364},
+      "modulus_low_to_high": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "negation_orbits_all": {
+        "1": 1,
+        "2": 364
+      },
+      "negation_orbits_nonzero": {
+        "2": 364
+      },
       "order": 729,
-      "primitive_element": [0, 0, 0, 0, 1, 1],
+      "primitive_element": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
       "primitive_order": 728
     }
   },
@@ -53,7 +119,10 @@
   },
   "row_major_12_vector_scan": {
     "matching_12_vector_columns": [],
-    "minimum_vector_columns": [173, 189],
+    "minimum_vector_columns": [
+      173,
+      189
+    ],
     "minimum_vector_count": 196,
     "node_count": 1330
   }
