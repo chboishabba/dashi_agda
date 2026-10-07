@@ -12,6 +12,7 @@ import DASHI.Physics.Foundations.PositiveGConservedAnisotropicProfileCompilerExa
 import DASHI.Physics.Foundations.LocalActiveStressGlobalExteriorMassFirewallExact as Global
 import DASHI.Physics.Foundations.PositiveGSphericalExteriorMassObstructionExact as ExteriorMass
 import DASHI.Physics.Foundations.PositiveGSphericalInteriorRepulsionBoundaryExact as InteriorBoundary
+import DASHI.Physics.Foundations.PositiveGLocalRepulsiveInteriorFamilyExact as LocalInterior
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
 import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as Opposite
@@ -45,6 +46,10 @@ stageCInteriorBoundaryObstruction :
 stageCInteriorBoundaryObstruction =
   InteriorBoundary.canonicalPositiveGSphericalInteriorBoundary
 
+stageCLocalRepulsiveInteriorFamily : LocalInterior.LocalRepulsiveInteriorBoundary
+stageCLocalRepulsiveInteriorFamily =
+  LocalInterior.canonicalLocalRepulsiveInteriorBoundary
+
 stageDFourChannelProjection : Observables.DeviceMetricObservableBoundary
 stageDFourChannelProjection = Observables.canonicalDeviceMetricObservableBoundary
 
@@ -67,15 +72,17 @@ record AntigravityABCDEFrontier : Set where
     stageCGlobalExteriorPromotionAudited : Bool
     stageCSphericalPositiveDensityExteriorObstructionProved : Bool
     stageCSmoothBoundaryRepulsionObstructionProved : Bool
+    stageCLocalRepulsiveInteriorFamilyConstructed : Bool
+    stageCLocalRadialEinsteinEquationPaid : Bool
+    stageCLocalTangentialStressCompiledFromConservation : Bool
     stageDFourChannelProjectionCompiled : Bool
     stageESameObjectComparatorCompiled : Bool
     oppositeCouplingNotPromotedToOppositeGeometry : Bool
 
     sameObjectConservedShellToWeakFieldMetricStillOpen : Bool
-    coupledEinsteinProfileEquationStillOpen : Bool
     exactGlobalExteriorMassChargeStillOpen : Bool
-    repulsiveVacuumExteriorWithPositiveDensityStillOpen : Bool
-    localInteriorMetricEngineeringRouteStillLive : Bool
+    positiveDensityRepulsiveVacuumExteriorAvailable : Bool
+    localInteriorNeedsTransitionOrSurfaceLayer : Bool
     physicalDeviceStressRealisationStillOpen : Bool
     apparatusCalibrationStillOpen : Bool
     empiricalReplicationStillOpen : Bool
@@ -84,14 +91,15 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true
-    true true true false true true true true true
+    true true true true true true true true true true true true true true true true
+    true true false true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
   field
     weakFieldPoissonFixtureMathematicsClosed : Bool
     conservationUnknownReducedByOneFunction : Bool
+    localRepulsiveInteriorEinsteinFamilyConstructed : Bool
     positiveDensityRepulsiveVacuumExteriorAvailable : Bool
     localInteriorMetricEngineeringRouteStillAvailable : Bool
     sameObjectPhysicalAToEChainClosed : Bool
@@ -106,4 +114,4 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true false true false false false false false false true true
+    true true true false true false false false false false false true true
