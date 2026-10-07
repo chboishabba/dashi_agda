@@ -1,0 +1,19 @@
+module DASHI.Biology.NeuralPredictionAcquisitionParetoRegression where
+
+import DASHI.Biology.NeuralPredictionAcquisitionParetoExact as P
+import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
+
+metaMechanismAcquisitionRegression : P.PredictionAcquisitionNode
+metaMechanismAcquisitionRegression = P.metaMechanismSeparationAcquisition
+
+videoViralityAcquisitionRegression : P.PredictionAcquisitionNode
+videoViralityAcquisitionRegression = P.videoNeuroforecastAcquisition
+
+multimodalInterfaceRegression : P.MultimodalInterfaceBoundary
+multimodalInterfaceRegression = P.canonicalMultimodalInterfaceBoundary
+
+neuralinkIndependentReplicationRoute : Snowball.DiscoveryRoute
+neuralinkIndependentReplicationRoute = P.discoveryRoute P.neuralinkIndependentReplicationAcquisition
+
+canonicalPredictionParetoRegression : P.NeuralPredictionAcquisitionBoundary
+canonicalPredictionParetoRegression = P.canonicalNeuralPredictionAcquisitionBoundary
