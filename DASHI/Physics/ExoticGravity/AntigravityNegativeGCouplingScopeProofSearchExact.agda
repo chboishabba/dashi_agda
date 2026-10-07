@@ -81,6 +81,36 @@ coherentMaterialEffectiveGTarget =
     true true true true true true
 
 ------------------------------------------------------------------------
+-- Geometric-promotion gate.
+--
+-- A coupling/sign candidate cannot be promoted to "opposite geometry" merely
+-- from its search label.  The scope-specific model must be re-solved and the
+-- resulting metric must satisfy the explicit geometric-opposite predicate.
+------------------------------------------------------------------------
+
+record NegativeGGeometricPromotionGate : Set₁ where
+  constructor negative-g-geometric-promotion-gate
+  field
+    scope : Scope.CouplingScope
+    searchState : NonGeometric.AntigravitySearchState
+    geometricOppositeReceipt :
+      NonGeometric.GeometricOppositeReceipt searchState
+
+    scopeSpecificSourceResolved : Bool
+    scopeSpecificSourceResolvedIsTrue :
+      scopeSpecificSourceResolved ≡ true
+
+    observableReprojectedFromResolvedMetric : Bool
+    observableReprojectedFromResolvedMetricIsTrue :
+      observableReprojectedFromResolvedMetric ≡ true
+
+    sameExperimentalInputsRetained : Bool
+    sameExperimentalInputsRetainedIsTrue :
+      sameExperimentalInputsRetained ≡ true
+
+open NegativeGGeometricPromotionGate public
+
+------------------------------------------------------------------------
 -- Exact introspective collision: observing only a local repulsive surface does
 -- not tell the scheduler whether to search cross-scale universality or a
 -- same-apparatus material transition.
@@ -122,12 +152,13 @@ record NegativeGCouplingScopeProofSearchBoundary : Set where
     scopeSelectionRequiresEvidenceBeyondLocalRepulsiveSurface : Bool
     signOppositeAutomaticallyMeansGeometricOpposite : Bool
     oppositeMetricClaimRequiresResolvedGeometryCheck : Bool
+    geometricPromotionGateRequiresReceipt : Bool
 
 canonicalNegativeGCouplingScopeProofSearchBoundary :
   NegativeGCouplingScopeProofSearchBoundary
 canonicalNegativeGCouplingScopeProofSearchBoundary =
   negative-g-coupling-scope-proof-search-boundary
-    false true true true true false true false true
+    false true true true true false true false true true
 
 existingUniversalSearchBoundary : Universal.NegativeGCrossScaleProofSearchBoundary
 existingUniversalSearchBoundary = Universal.canonicalNegativeGCrossScaleProofSearchBoundary
