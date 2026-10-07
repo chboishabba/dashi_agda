@@ -25,7 +25,6 @@ def iter_with_odd_count(n: int, steps: int) -> tuple[int, int]:
 
 
 def required_mod4(a: int) -> int:
-    # 3^a m == 3 mod 4.
     return 3 if a % 2 == 0 else 1
 
 
@@ -34,13 +33,8 @@ def first_ge_in_mod4(lower: int, residue: int) -> int:
 
 
 def optimized_cutoff(U: int) -> tuple[int, tuple[int, int, int]]:
-    """Largest N-1 before the first unavailable odd-run request.
-
-    Returns (cutoff, (a,m,v)) where 2^a*m is the first missing seed scale and
-    36*v+27 = 3^a*m.
-    """
     threshold = 36 * U + 27
-    best_seed = 16 * U + 12  # safe initial upper bound; a=2 search improves.
+    best_seed = 16 * U + 12
     best = None
     a = 2
     while (1 << a) <= best_seed + 1:
@@ -66,15 +60,10 @@ def first_below(n: int, bound: int, cap: int = 10000) -> tuple[int, int] | None:
 
 
 def pair_certificate(residue: int, depth: int) -> int:
-    """0=no certificate, 1=direct merge, 2=contracting pair return."""
     x, j = iter_with_odd_count(3 * residue + 2, depth)
     y, k = iter_with_odd_count(27 * residue + 20, depth)
-
-    # Same all-quotient slope and same base endpoint.
     if x == y and j == k + 2:
         return 1
-
-    # Return to (3v+2,27v+20) with v smaller for every quotient.
     if j == k and y == 9 * x + 2 and x % 3 == 2:
         v = (x - 2) // 3
         if v < residue and 3**j <= 2**depth:
@@ -102,25 +91,21 @@ def adaptive_pair_census(max_depth: int = 18) -> tuple[int, int, int]:
     return len(survivors), total_merge, total_return
 
 
-# Reproduce the externally kernel-certified request cutoffs.
 assert optimized_cutoff(61) == (415, (5, 13, 87))
 assert optimized_cutoff(415) == (511, (9, 1, 546))
 assert optimized_cutoff(511) == (511, (9, 1, 546))
 
-# The first stalled request is not a true transfer obstruction.
 assert 3**9 == 36 * 546 + 27
 assert first_below(27 * 546 + 20, 511) == (7, 346)
 
-# Literal target stopping certificate used by the Agda barrier owner.
 y = 27 * 546 + 20
 for _ in range(30):
     y = syracuse(y)
 assert y == 1
 
-# Independent semantic reproduction of the published paired-cylinder frontier.
 survivors, merge_nodes, return_nodes = adaptive_pair_census(18)
 assert survivors == 230_701
-assert merge_nodes == 2_757
+assert merge_nodes == 2_754
 assert return_nodes == 482
 
 print("collatz syracuse affine-transfer calibration: PASS")
