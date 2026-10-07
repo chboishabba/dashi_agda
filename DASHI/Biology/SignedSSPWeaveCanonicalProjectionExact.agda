@@ -11,6 +11,7 @@ module DASHI.Biology.SignedSSPWeaveCanonicalProjectionExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Biology.SignedSSPWeaveProgramMachineExact as Machine
@@ -45,13 +46,6 @@ canonicalProgramMachineIsHalted virtualFiftyThreeRun =
   Machine.canonicalVirtualMachineHalts
 canonicalProgramMachineIsHalted geometricFiftyThreeRun =
   Machine.canonicalGeometricMachineHalts
-
-canonicalProgramMachineEffectMatchesRichSource :
-  (run : CanonicalWeaveRun) →
-  Machine.accumulatedEffect (canonicalProgramMachineState run)
-  ≡
-  Machine.accumulatedEffect (canonicalProgramMachineState run)
-canonicalProgramMachineEffectMatchesRichSource run = refl
 
 canonicalVirtualProjectionExact :
   canonicalRichSignedState virtualFiftyThreeRun
