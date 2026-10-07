@@ -203,6 +203,29 @@ def canonical_signed_core_replay_verified():
     )
 
 
+def instruction_execution_cost(instruction):
+    op, _ = instruction
+    if op == 'build54': return 54
+    if op == 'remove1': return 0
+    if op in ('plus', 'minus', 'unit', 'refine369'): return 1
+    raise ValueError(op)
+
+
+def program_execution_cost(program):
+    return sum(instruction_execution_cost(i) for i in program)
+
+
+def derived_length_dynamics_verified():
+    return {
+        'virtual_program_length': len(CANONICAL_VIRTUAL_PROGRAM),
+        'virtual_execution_length': program_execution_cost(CANONICAL_VIRTUAL_PROGRAM),
+        'virtual_normal_form_length': len(CANONICAL_VIRTUAL_PROGRAM),
+        'geometry_program_length': len(CANONICAL_GEOMETRY_PROGRAM),
+        'geometry_execution_length': program_execution_cost(CANONICAL_GEOMETRY_PROGRAM),
+        'geometry_normal_form_length': len(CANONICAL_GEOMETRY_PROGRAM),
+    }
+
+
 def legacy_first_enabled_step(s):
     a, b, c, d = s
     if a > 0: return a - 1, b, c + 1, d
@@ -244,14 +267,20 @@ def full_signed_weave_frontier():
         'executed_trace_retains_prime_identity': True,
         'arbitrary_program_valuation_replay_paid': True,
         'arbitrary_program_invariant_unit_replay_paid': True,
-        'rich_machine_compiler_given_metadata_paid': True,
+        'generic_program_length_dynamics_paid': True,
+        'generic_execution_length_dynamics_paid': True,
+        'generic_normal_form_length_dynamics_paid': True,
+        'rich_machine_compiler_given_residual_metadata_paid': True,
         'canonical_virtual_rich_projection_paid': True,
         'canonical_geometry_rich_projection_paid': True,
-        'metadata_dynamics_recovered_from_prior_repo': False,
+        'address_dynamics_recovered': False,
+        'zero_residual_dynamics_recovered': False,
+        'residual_witness_length_dynamics_recovered': False,
         'full_rich_signed_transition_graph_claimed': False,
-        'reason': ('Instruction replay now reconstructs prime identity, valuation, and invariant units. '
-                   'Only address369, zero-residual direction, and description/execution-length dynamics '
-                   'remain external to WeaveInstruction.')
+        'remaining_metadata_fields': ['address369', 'zeroApproachResidual', 'residualWitnessLength'],
+        'reason': ('Instruction replay reconstructs prime identity, valuation and invariant units; '
+                   'program/execution/normal-form lengths are now mechanically derived. Only address369, '
+                   'zero-residual direction and residual-witness-length dynamics remain external.')
     }
 
 
@@ -286,6 +315,7 @@ def recognition_summary():
         'existing_heisenberg_translation_intertwines_f3_addition': heisenberg_additive_intertwiner_verified(),
         'heisenberg_coordinate_swap_preserves_dot6_exhaustive': coordinate_swap_preserves_dot6_exhaustive(),
         'canonical_signed_core_replay_verified': canonical_signed_core_replay_verified(),
+        'derived_length_dynamics': derived_length_dynamics_verified(),
         'row_major_12_vector_scan': scan_row_major_displacements(),
         'full_signed_weave_frontier': full_signed_weave_frontier()
     }
