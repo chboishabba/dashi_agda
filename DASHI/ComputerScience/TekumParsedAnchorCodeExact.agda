@@ -2,6 +2,8 @@ module DASHI.ComputerScience.TekumParsedAnchorCodeExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Maybe.Base using (just)
+open import Data.Product.Base using (_,_)
 import Data.List.Base as List
 import Data.List.Properties as ListP
 import Data.Vec.Base as Vec
@@ -17,6 +19,7 @@ import DASHI.Algebra.BalancedTernaryRankReconstructionExact as Rank
 import DASHI.ComputerScience.TekumFixedWidthBalancedArithmeticExact as Fixed
 import DASHI.ComputerScience.TekumParsedAnchorListExact as AnchorList
 import DASHI.ComputerScience.TekumRegimeChainExact as Chain
+import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumRegimeSuccessorExact as RegimeStep
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
 import DASHI.ComputerScience.TekumSourceWordRoundTripExact as RoundTrip
@@ -32,7 +35,7 @@ import DASHI.ComputerScience.TekumSourceWordRoundTripExact as RoundTrip
 --
 --   U + 3^(5+extra) * R,
 --
--- where 0 <= U < 3^(5+extra).  This is the block decomposition needed to
+-- where 0 <= U < 3^(5+extra). This is the block decomposition needed to
 -- turn full anchor-code order into regime-first lexicographic order.
 ------------------------------------------------------------------------
 
@@ -75,7 +78,7 @@ payloadCode :
   Source.ParsedPayload extra r payload → Nat
 payloadCode parsed = listCode (payloadList parsed)
 
-regimeCode : RegimeStep.RegimeCode → Nat
+regimeCode : Regime.RegimeCode → Nat
 regimeCode r = listCode (Vec.toList (RegimeStep.regimeLST r))
 
 payloadLength :
@@ -99,9 +102,9 @@ payloadCodeBound :
   ∀ {extra r payload}
   (parsed : Source.ParsedPayload extra r payload) →
   payloadCode parsed < BT.pow3 (5 + extra)
-payloadCodeBound parsed =
+payloadCodeBound {extra} parsed =
   subst
-    (_< BT.pow3 (5 + _))
+    (λ k → k < BT.pow3 (5 + extra))
     (sym payloadCodeAsNatCode)
     (Rank.natCodeStrictBound (Vec.reverse (RoundTrip.rejoinPayload parsed)))
   where
@@ -120,7 +123,7 @@ parsedAnchorListAsPayloadRegime :
   ≡ payloadList parsed List.++ Vec.toList (RegimeStep.regimeLST r)
 parsedAnchorListAsPayloadRegime {r = r} parsed =
   cong
-    (List._++ Vec.toList (RegimeStep.regimeLST r))
+    (λ xs → xs List.++ Vec.toList (RegimeStep.regimeLST r))
     (sym (AnchorList.rejoinPayloadReverseList parsed))
 
 parsedAnchorCode :
@@ -147,8 +150,7 @@ parsedAnchorCodeFormula {extra} {r} parsed =
 successfulParseNatCode :
   ∀ {extra r payload parsed}
   (word : Vec.Vec Trit.Trit (8 + extra)) →
-  Source.parseOrdinaryAnchor word
-    ≡ Data.Maybe.Base.just (r Data.Product.Base., payload Data.Product.Base., parsed) →
+  Source.parseOrdinaryAnchor word ≡ just (r , payload , parsed) →
   Positional.natCode (Fixed.concreteAnchor word) ≡ parsedAnchorCode parsed
 successfulParseNatCode word parseEq =
   trans
@@ -156,20 +158,20 @@ successfulParseNatCode word parseEq =
     (cong listCode (AnchorList.successfulParseAnchorList word parseEq))
 
 regimeCodeIsSixPlusIndex :
-  (r : RegimeStep.RegimeCode) →
+  (r : Regime.RegimeCode) →
   regimeCode r ≡ 6 + Chain.regimeIndex r
-regimeCodeIsSixPlusIndex RegimeStep.rm7 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rm6 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rm5 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rm4 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rm3 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rm2 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rm1 = refl
-regimeCodeIsSixPlusIndex RegimeStep.r0 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp1 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp2 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp3 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp4 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp5 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp6 = refl
-regimeCodeIsSixPlusIndex RegimeStep.rp7 = refl
+regimeCodeIsSixPlusIndex Regime.rm7 = refl
+regimeCodeIsSixPlusIndex Regime.rm6 = refl
+regimeCodeIsSixPlusIndex Regime.rm5 = refl
+regimeCodeIsSixPlusIndex Regime.rm4 = refl
+regimeCodeIsSixPlusIndex Regime.rm3 = refl
+regimeCodeIsSixPlusIndex Regime.rm2 = refl
+regimeCodeIsSixPlusIndex Regime.rm1 = refl
+regimeCodeIsSixPlusIndex Regime.r0 = refl
+regimeCodeIsSixPlusIndex Regime.rp1 = refl
+regimeCodeIsSixPlusIndex Regime.rp2 = refl
+regimeCodeIsSixPlusIndex Regime.rp3 = refl
+regimeCodeIsSixPlusIndex Regime.rp4 = refl
+regimeCodeIsSixPlusIndex Regime.rp5 = refl
+regimeCodeIsSixPlusIndex Regime.rp6 = refl
+regimeCodeIsSixPlusIndex Regime.rp7 = refl
