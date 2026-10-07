@@ -5,10 +5,9 @@ open import Data.Integer.Base as ℤ using (+_; _*_; _<_)
 import Data.Integer.Properties as ℤP
 open import Data.Rational.Base as ℚ using (1ℚ; _+_; _<_)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Unnormalised.Base as ℚᵘ using (_<_)
+open import Data.Rational.Unnormalised.Base as ℚᵘ using (_<_; *<*)
 import Data.Rational.Unnormalised.Properties as ℚᵘP
 open import Data.Vec using (Vec)
-open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumFractionRationalRangeExact as Fraction
@@ -18,9 +17,9 @@ import DASHI.ComputerScience.TekumSignificandRangeExact as Sig
 -- ARBITRARY SAME-WIDTH FRACTION ORDER
 --
 -- The earlier successor owner pays the adjacent case needed by the carry
--- proof.  Proposition 4 for arbitrary code gaps also needs the direct fact
+-- proof. Proposition 4 for arbitrary code gaps also needs the direct fact
 -- that strict centered-integer order of two same-width fraction fields is
--- exactly strict rational/significand order.  This owner pays that numerical
+-- exactly strict rational/significand order. This owner pays that numerical
 -- compiler once, with no source-code or parser assumptions.
 ------------------------------------------------------------------------
 
@@ -29,7 +28,7 @@ rawFractionIntegerStrict :
   Fraction.fractionNumerator left ℤ.< Fraction.fractionNumerator right →
   Fraction.rawFraction left ℚᵘ.< Fraction.rawFraction right
 rawFractionIntegerStrict {p} {left} {right} numeratorLt =
-  ℚᵘP.*<* rawCross
+  ℚᵘ.*<* rawCross
   where
   denominator = Fraction.fractionDenominator p
 
