@@ -10,10 +10,9 @@ import DASHI.Physics.YangMills.R144EMGWControlledExchangeInstantiationExact as R
 ------------------------------------------------------------------------
 -- MAXWELL/HODGE -> HILBERT STRESS -> R144 -> CONTROLLED EM-GW EXCHANGE
 --
--- This module removes the false frontier "Maxwell/Hodge missing".  Those
--- objects already exist in GaugeInteractionLaws.  The exact remaining seam is
--- the physical Hilbert first variation and its same-object identification with
--- the R144 stress insertion and metric tangent.
+-- Maxwell/Hodge already exist in-repo.  Critically, "same interaction" below
+-- is now propositional equality of the literal carriers, not an arbitrary Set
+-- receipt.
 ------------------------------------------------------------------------
 
 record MaxwellHodgeR144ExchangeWeld
@@ -27,8 +26,9 @@ record MaxwellHodgeR144ExchangeWeld
 
     r144 : R144GW.R144EMGWStressVariationWeld
 
-    SameInteractionReceipt : Set
-    sameInteractionReceipt : SameInteractionReceipt
+    interactionEquality :
+      MaxwellStress.MaxwellHilbertExchangeWeld.interaction hilbertExchange
+      ≡ R144GW.R144EMGWStressVariationWeld.interaction r144
 
     SameMetricTangentReceipt : Set
     sameMetricTangentReceipt : SameMetricTangentReceipt
@@ -56,6 +56,13 @@ interactionFromR144 :
 interactionFromR144 weld =
   R144GW.R144EMGWStressVariationWeld.interaction
     (MaxwellHodgeR144ExchangeWeld.r144 weld)
+
+sameInteraction :
+  ∀ {maxwell state stress}
+    (weld : MaxwellHodgeR144ExchangeWeld maxwell state stress) →
+  interactionFromMaxwellHodge weld
+  ≡ interactionFromR144 weld
+sameInteraction weld = interactionEquality weld
 
 record MaxwellHodgeR144Boundary : Set where
   constructor maxwell-hodge-r144-boundary
