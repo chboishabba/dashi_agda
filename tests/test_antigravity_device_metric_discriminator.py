@@ -49,6 +49,15 @@ def test_opposite_search_firewall_is_fail_closed() -> None:
     assert "geometricOppositeRequiresSolvedGeometryReceipt" in text
 
 
+def test_negative_g_scope_search_consumes_non_geometric_opposite_firewall() -> None:
+    text = read(EXOTIC / "AntigravityNegativeGCouplingScopeProofSearchExact.agda")
+    assert "AntigravitySearchNonGeometricOppositeExact as NonGeometric" in text
+    assert "existingNonGeometricOppositeBoundary" in text
+    assert "geometricOppositeRequiresSolvedGeometryReceipt" in read(
+        EXOTIC / "AntigravitySearchNonGeometricOppositeExact.agda"
+    )
+
+
 def test_weight_and_metric_are_not_conflated() -> None:
     text = read(EXOTIC / "WeightMetricApparentMassExact.agda")
     assert "weightChangeImpliesMetricChange : Bool" in text
