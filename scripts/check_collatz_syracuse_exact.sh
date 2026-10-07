@@ -88,7 +88,9 @@ grep -q 'unalignedIntervalScaledTail' \
   DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
 grep -q 'universalStoppingFromStrictDescent' \
   DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
-grep -q 'universalStoppingFromGoodPrefixes' \
+grep -q 'strictDescentFromUniversalStopping' \
+  DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
+grep -q 'canonicalUniversalStoppingEquivalence' \
   DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
 grep -q 'nonDescentImpliesBadWord' \
   DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
@@ -96,7 +98,7 @@ grep -q 'alignedBlockFiveEightNonDescentBound' \
   DASHI/Analysis/CollatzSyracuseAlignedBlockTailExact.agda
 grep -q 'cutStatus C11d-unalignedBoundaryCompiler = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C11f-exactArbitraryIntervalSplit = sourceSpecificOpen' \
+grep -q 'cutStatus C11f-exactArbitraryIntervalSplit = nonCriticalOptional' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 grep -q 'cutStatus C12c-exponentialBadWordTail = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
@@ -110,7 +112,7 @@ grep -q 'cutStatus C13c-rationalAlignedBlockFiniteTail = proved' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 grep -q 'cutStatus C13-universalStoppingCompiler = compiledFromRepo' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
-grep -q 'cutStatus C13d-allStartsGoodPrefixProducer = sourceSpecificOpen' \
+grep -q 'cutStatus C13d-allStartsStrictDescentProducer = sourceSpecificOpen' \
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 
 echo 'collatz syracuse exact static checks: PASS'
