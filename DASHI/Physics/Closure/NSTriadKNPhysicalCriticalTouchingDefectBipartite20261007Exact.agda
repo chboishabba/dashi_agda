@@ -1,30 +1,12 @@
 module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact where
 
-------------------------------------------------------------------------
--- POSITIVE B4 / CORE-NONCORE DEFECT -> EXACT BIPARTITE COVARIANCE NORMAL FORM
---
--- After the principal Core-Core half-margin is closed, B4 has one remaining
--- signed scalar: the Core-noncore defect.  Do not replace it by an absolute
--- majorant.  The existing R236 filtered-list owner already knows the exact
--- DFL/Core and DHH/Core bipartite covariance objects.
---
--- This owner proves on the SAME physical pair graph
---
---   defect
---     = - [ Bip(DFL,Core) + Bip(DHH,Core) ]
---
--- and then rewrites each bipartite term by the existing four-aggregate closed
--- form.  Thus pair enumeration is removed from the final B4 research seam;
--- no estimate, norm, shell count, or cutoff-cardinality bound is introduced.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -46,8 +28,7 @@ F = Rational.rationalRealField
 
 positiveDefectBlock : Blocks.RegionPairBlocks → ℚ
 positiveDefectBlock blocks =
-  Blocks.deepFarLowCriticalCore blocks
-  + Blocks.deepHighHighCriticalCore blocks
+  Blocks.deepFarLowCriticalCore blocks + Blocks.deepHighHighCriticalCore blocks
 
 positiveDefectBlocksAdd :
   (left right : Blocks.RegionPairBlocks) →
@@ -80,40 +61,6 @@ defectAgainstFiltered rate work head rest
 ... | Routing.criticalCoreRegion =
   Bip.bipartiteRow rate work head (Filtered.deepFarLowItems rest)
   + Bip.bipartiteRow rate work head (Filtered.deepHighHighItems rest)
-
-positiveDefectRouteMeaning :
-  (rate work : Physical.PhysicalTriadIncidence → ℚ) →
-  (alpha beta : Physical.PhysicalTriadIncidence) →
-  positiveDefectBlock
-    (Blocks.routePair alpha beta (Blocks.pairTerm rate work alpha beta))
-  ≡
-  let term = Blocks.pairTerm rate work alpha beta
-  in
-  case Routing.criticalRegionTag alpha of λ where
-    Routing.deepFarLowRegion →
-      case Routing.criticalRegionTag beta of λ where
-        Routing.criticalCoreRegion → term
-        _ → 0ℚ
-    Routing.deepHighHighRegion →
-      case Routing.criticalRegionTag beta of λ where
-        Routing.criticalCoreRegion → term
-        _ → 0ℚ
-    Routing.criticalCoreRegion →
-      case Routing.criticalRegionTag beta of λ where
-        Routing.deepFarLowRegion → term
-        Routing.deepHighHighRegion → term
-        Routing.criticalCoreRegion → 0ℚ
-positiveDefectRouteMeaning rate work alpha beta
-  with Routing.criticalRegionTag alpha | Routing.criticalRegionTag beta
-... | Routing.deepFarLowRegion | Routing.deepFarLowRegion = solve []
-... | Routing.deepFarLowRegion | Routing.deepHighHighRegion = solve []
-... | Routing.deepFarLowRegion | Routing.criticalCoreRegion = solve []
-... | Routing.deepHighHighRegion | Routing.deepFarLowRegion = solve []
-... | Routing.deepHighHighRegion | Routing.deepHighHighRegion = solve []
-... | Routing.deepHighHighRegion | Routing.criticalCoreRegion = solve []
-... | Routing.criticalCoreRegion | Routing.deepFarLowRegion = solve []
-... | Routing.criticalCoreRegion | Routing.deepHighHighRegion = solve []
-... | Routing.criticalCoreRegion | Routing.criticalCoreRegion = solve []
 
 positiveDefectAgainstHeadMeaning :
   (rate work : Physical.PhysicalTriadIncidence → ℚ) →
@@ -214,10 +161,6 @@ splitDefectBlockIsNegativePositiveDefect blocks =
     ∷ Blocks.deepHighHighCriticalCore blocks
     ∷ [])
 
-------------------------------------------------------------------------
--- Four-aggregate normal form of the two bipartite terms.
-------------------------------------------------------------------------
-
 defectAggregateNormalForm :
   (rate work : Physical.PhysicalTriadIncidence → ℚ) →
   List Physical.PhysicalTriadIncidence → ℚ
@@ -247,10 +190,6 @@ defectCovarianceClosedForm :
 defectCovarianceClosedForm rate work items
   rewrite Filtered.deepFarLowCoreClosedForm rate work items
         | Filtered.deepHighHighCoreClosedForm rate work items = solve []
-
-------------------------------------------------------------------------
--- Live same-object endpoint.
-------------------------------------------------------------------------
 
 module LiveDefectBipartite
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
@@ -290,10 +229,6 @@ module LiveDefectBipartite
       (cong (0ℚ -_)
         (defectCovarianceClosedForm
           Rate.inputMass (Live.work output) R.items))
-
-------------------------------------------------------------------------
--- Status.
-------------------------------------------------------------------------
 
 b4DefectBipartiteSameObjectClosed : Bool
 b4DefectBipartiteSameObjectClosed = true
