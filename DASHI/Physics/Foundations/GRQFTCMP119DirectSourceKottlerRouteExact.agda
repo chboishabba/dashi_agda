@@ -4,7 +4,7 @@ module DASHI.Physics.Foundations.GRQFTCMP119DirectSourceKottlerRouteExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _<_; _*_; _-_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as Source
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
@@ -16,11 +16,6 @@ import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact as Wi
 
 ------------------------------------------------------------------------
 -- DIRECT SOURCE VACUUM -> COSMOLOGICAL STRESS -> KOTTLER ROUTE
---
--- The static route does not require the independently useful R136 stress lane.
--- The literal source vacuum term is read by the already-existing LocalizedAction
--- projector; that SAME rational amplitude feeds the existing cosmological
--- stress ray and the source-driven Israel/Kottler inversion.
 ------------------------------------------------------------------------
 
 record SourceAmplitudePair
@@ -116,22 +111,6 @@ sourceOutwardMargin :
 sourceOutwardMargin pair radius y =
   Window.outwardAccelerationMargin
     (sourceDrivenMass pair radius y)
-    (Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair))
-
-sourceOutwardMarginIdentity :
-  ∀ {Density Background Fluctuation}
-    {source : Source.CMP119Section2SourceNativeState
-      Density Background Fluctuation
-      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
-      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction}
-    (pair : SourceAmplitudePair source) radius y →
-  sourceOutwardMargin pair radius y
-  ≡ Geometry.threeHalves
-      * (Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair)
-        - radius * (Data.Integer.Base.+ 1 Data.Rational.Base./ 1 - y * y))
-sourceOutwardMarginIdentity pair radius y =
-  Geometry.sourceDrivenOutwardMarginIdentity
-    radius y
     (Geometry.sourceExteriorScaledAmplitude radius (exteriorAmplitude pair))
 
 record DirectSourceKottlerCandidate
