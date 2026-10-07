@@ -16,13 +16,20 @@ def test_nambu_kottler_observable_compiler_is_concrete():
         "fixtureSupportWeightChange",
         "fixtureExteriorLapseRoot",
         "fixtureInteriorLapseRoot",
+        "kottlerLapseDeltaLinear",
+        "fixtureMetricTTDeltaIsFourThirdsDeltaLambda",
         "sameNambuKottlerGeometryFeedsMechanicalAndClockChannels",
-        "SchutzholdDynamicOpticalUseRequiresTimeDependentModulation",
+        "SchutzholdTTModeIdentificationStillOpen",
     ):
         assert token in text
 
 
 def test_terminal_consumes_concrete_nambu_kottler_observables():
     text = read("DASHI/Physics/ExoticGravity/AntigravityABCDETerminalMaxCutExact.agda")
-    assert "stageDConcreteNambuKottlerObservables" in text
-    assert "dynamicOpticalModulationOfStaticDeviceStillOpen" in text
+    for token in (
+        "stageDConcreteNambuKottlerObservables",
+        "stageDKottlerAmplitudeToMetricPerturbationClosed",
+        "physicalAmplitudeModulationStillOpen",
+        "schutzholdTTModeSameObjectStillOpen",
+    ):
+        assert token in text
