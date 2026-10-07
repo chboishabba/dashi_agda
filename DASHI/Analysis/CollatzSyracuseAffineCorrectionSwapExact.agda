@@ -21,11 +21,10 @@ module DASHI.Analysis.CollatzSyracuseAffineCorrectionSwapExact where
 -- made here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
-open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
@@ -63,7 +62,13 @@ localOneZeroCorrection :
   Affine.affineAdditiveTerm (oneZero suffix)
   ≡ Affine.powNat 3 (Affine.parityCount suffix)
       + 4 * Affine.affineAdditiveTerm suffix
-localOneZeroCorrection suffix = refl
+localOneZeroCorrection suffix =
+  solve 2
+    (λ p a →
+      p :+ (con 2 :* (con 2 :* a))
+      :=
+      p :+ (con 4 :* a))
+    refl
 
 localSwap :
   {n : Nat} →
@@ -99,11 +104,11 @@ adjacentSwapCorrection {p} prefix suffix
   rewrite Cocycle.affineCorrectionCocycle prefix (zeroOne suffix)
         | Cocycle.affineCorrectionCocycle prefix (oneZero suffix)
         | localSwap suffix =
-  solve 4
-    (λ q a r d →
-      (q :* a) :+ (r :* (d :+ q))
+  solve 5
+    (λ q a r d s →
+      (q :* a) :+ (r :* (d :+ s))
       :=
-      ((q :* a) :+ (r :* d)) :+ (r :* q))
+      ((q :* a) :+ (r :* d)) :+ (r :* s))
     refl
 
 record AffineCorrectionSwapBoundary : Set where
