@@ -1,0 +1,27 @@
+module DASHI.Governance.BoloBoloNestedCostBoundCompilerRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloNestedCostBoundCompilerExact as Compiler
+import DASHI.Governance.BoloBoloRobustCostBoundsExact as Robust
+
+componentBoundsCompile :
+  Robust.overheadUpper (Compiler.compileNestedComponentBounds Compiler.syntheticNestedComponentBounds)
+  ≡ Compiler.nestedComponentOverheadUpper Compiler.syntheticNestedComponentBounds
+componentBoundsCompile = refl
+
+syntheticComponentUpperPinned :
+  Compiler.nestedComponentOverheadUpper Compiler.syntheticNestedComponentBounds ≡ 30
+syntheticComponentUpperPinned = refl
+
+syntheticRobustWinPaid :
+  Robust.StrictOrderImprovement Compiler.syntheticNestedBoundModel
+syntheticRobustWinPaid = Compiler.syntheticNestedStrictImprovement
+
+componentBoundsNotSourceClaims :
+  Compiler.componentBoundsQuotedFromBoloBolo Compiler.canonicalNestedCostBoundCompilerBoundary ≡ false
+componentBoundsNotSourceClaims = refl
+
+componentBoundsDoNotCreateLegitimacy :
+  Compiler.componentBoundsCreatePoliticalLegitimacy Compiler.canonicalNestedCostBoundCompilerBoundary ≡ false
+componentBoundsDoNotCreateLegitimacy = refl
