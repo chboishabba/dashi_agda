@@ -4,20 +4,23 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Governance.OccupyFilesCorpusReceiptExact as Corpus
+import DASHI.Governance.OccupyOWSManifestExact as Manifest
 
 ------------------------------------------------------------------------
 -- PROSPECTIVE HELD-OUT VALIDATION PROTOCOL.
 --
--- Several People's Library meetings have already been inspected during
--- evidence acquisition. They cannot honestly be called held out after their
--- contents or process outcomes are known.
+-- People's Library development evidence and the materialised OWS GA corpus
+-- are distinct archival lanes. Already-inspected records cannot honestly be
+-- called held out after their contents or process outcomes are known.
 --
 -- Provenance / methodology rule:
 --   * archive records supply observations;
---   * DASHI supplies the coding and validation protocol;
---   * candidate held-out records must be selected outcome-blind;
---   * corpus manifest, coding vocabulary, confounds and model family must be
---     frozen before held-out extraction/evaluation.
+--   * Kinna/Prichard supply curation/selection metadata for OccupyFiles;
+--   * DASHI supplies parsing, coding and validation protocol;
+--   * candidate held-out records are selected outcome-blind;
+--   * coding vocabulary, confounds and model family remain frozen before
+--     held-out outcome extraction/evaluation.
 ------------------------------------------------------------------------
 
 data DevelopmentEvidenceClass : Set where
@@ -25,6 +28,7 @@ data DevelopmentEvidenceClass : Set where
   sourceUsedToDesignCoding : DevelopmentEvidenceClass
   sourceUsedToDesignOutcomeVocabulary : DevelopmentEvidenceClass
   sourceUsedToDesignPanelMissingness : DevelopmentEvidenceClass
+  corpusRecordExposedBeforeManifestFreeze : DevelopmentEvidenceClass
 
 record AlreadyInspectedMeeting : Set where
   constructor alreadyInspectedMeeting
@@ -51,38 +55,38 @@ knownDevelopmentMeetings =
   ∷ []
 
 ------------------------------------------------------------------------
--- Prospective manifest-first split.
+-- Materialised manifest-first split.
 --
--- The Kinna-Prichard corpus has not yet materialised in this environment.
--- Therefore no concrete held-out records are claimed. Instead the split rule
--- is frozen now, before outcome extraction:
+-- OccupyFiles.zip is now materialised and checksum-pinned by Corpus.
+-- Manifest pins forty-five OWS records. During structural localisation the
+-- first seven records had substantive content exposed, so they are forced to
+-- development. Among the remaining still-uninspected records, every fifth
+-- eligible record is protected as prospective holdout.
 --
---   1. materialise corpus;
---   2. freeze manifest + checksum;
---   3. retain Wall Street meeting-minute records only under a predeclared
---      inclusion rule;
---   4. sort by stable canonical corpus identifier / filename;
---   5. assign every fifth eligible record (indices 5,10,15,...) to holdout;
---   6. all remaining eligible records are development/training records;
---   7. never reassign after reading outcomes.
+-- Protected OWS corpus indices:
+--   12, 17, 22, 27, 32, 37, 42
+-- corresponding to 2011-09-30, 10-09, 10-15, 10-20, 10-26, 11-01, 11-08.
 --
--- This is a DASHI validation design, not an archival-source claim.
+-- This split is DASHI methodology, not an archival-source claim.
 ------------------------------------------------------------------------
 
 record ProspectiveHeldOutPlan : Set where
   constructor prospectiveHeldOutPlan
   field
     sourceCorpusLabel : String
-    manifestFreezeRule : String
+    packageSha256 : String
+    splitManifestSha256 : String
     eligibilityRule : String
     selectionRule : String
     incidenceCodingRule : String
     outcomeCodingRule : String
     confoundVocabulary : String
     modelFamily : String
-    meetingSetFrozenBeforeExtraction : Bool
+    corpusMaterialised : Bool
     corpusManifestFrozenBeforeSelection : Bool
-    codingProtocolFrozenBeforeExtraction : Bool
+    preFreezeInspectedRecordsForcedDevelopment : Bool
+    heldOutAssignmentApplied : Bool
+    codingProtocolFrozenBeforeHeldOutOutcomeExtraction : Bool
     modelFamilyFrozenBeforeOutcomeEvaluation : Bool
     assignmentImmutableAfterOutcomeInspection : Bool
 
@@ -91,14 +95,17 @@ open ProspectiveHeldOutPlan public
 canonicalProspectiveHeldOutPlan : ProspectiveHeldOutPlan
 canonicalProspectiveHeldOutPlan =
   prospectiveHeldOutPlan
-    "Kinna-Prichard OccupyFiles corpus once materialised; Wall Street meeting-minute records only"
-    "materialise corpus, enumerate canonical record identifiers/filenames, and record a corpus-manifest checksum before assigning development versus held-out records"
-    "include only records identified by the frozen manifest/source metadata as Occupy Wall Street meeting minutes; exclude non-Wall-Street camps and non-meeting artifacts by the frozen rule"
-    "sort eligible records by stable canonical corpus identifier or filename; assign every fifth eligible record (5,10,15,...) to held out and all others to development; never alter assignment after reading outcomes"
+    "Kinna-Prichard OccupyFiles corpus; Occupy Wall Street GA records"
+    (Corpus.packageSha256 Corpus.canonicalOccupyFilesCorpusReceipt)
+    Manifest.splitManifestSha256
+    "use the forty-five parser-detected OWS records; records whose substantive contents were exposed before manifest freeze are development-only"
+    "after excluding pre-freeze-inspected records, preserve canonical corpus order and assign every fifth still-uninspected eligible record to holdout; protected corpus indices are 12,17,22,27,32,37,42"
     "admit only explicit named-person-to-named-issue/topic associations; never attendance x agenda cross-products; collapse repeated same-person/same-issue utterances within meeting"
     "record only source-explicit duration, mediation, tabled/unresolved items, decisions, interruption/conflict observations; qualitative wording stays qualitative"
     "participant count, issue count, meeting type, external shock/context, source completeness, repeated participants"
     "predeclared candidate relation from incidence/control coordinates to independently coded burden outcomes"
+    true
+    true
     true
     true
     true
@@ -113,10 +120,14 @@ record HeldOutValidationBoundary : Set where
     modelChoiceAfterHeldOutOutcomesStillCountsAsHeldOut : Bool
     outcomeAwareRecordSelectionAllowed : Bool
 
-    heldOutSetMustBeFrozenBeforeOutcomeCoding : Bool
-    corpusManifestMustBeFrozenBeforeSelection : Bool
+    corpusMaterialisationPaid : Bool
+    corpusManifestFreezePaid : Bool
+    holdoutAssignmentPaid : Bool
+    heldOutOutcomeExtractionPaid : Bool
+    heldOutEvaluationPaid : Bool
+
     selectionRuleMustBeOutcomeBlindAndDeterministic : Bool
-    codingProtocolMustBeFrozenBeforeHeldOutExtraction : Bool
+    codingProtocolMustBeFrozenBeforeHeldOutOutcomeExtraction : Bool
     modelFamilyMustBeFrozenBeforeHeldOutEvaluation : Bool
     sourceCompletenessStillRequiresAudit : Bool
 
@@ -134,6 +145,9 @@ canonicalHeldOutBoundary =
     true
     true
     true
+    false
+    false
+    true
     true
     true
     true
@@ -145,6 +159,6 @@ canonicalOccupyHeldOutValidationReceipt =
     "prospective Occupy meeting held-out validation protocol"
     "DASHI.Governance.OccupyHeldOutMeetingValidationExact"
     "canonicalHeldOutBoundary"
-    "marks every already-inspected People's Library meeting as development evidence and freezes a manifest-first, deterministic, outcome-blind every-fifth-record held-out assignment for eligible Wall Street meeting minutes once the Kinna-Prichard corpus is materialised"
-    "the split rule is paid but the validation result is not: no held-out receipt exists until a checksum-pinned corpus manifest is materialised, the frozen assignment is applied before outcome extraction, and held-out records are evaluated under the frozen coding/model protocol"
+    "consumes the materialised OccupyFiles package and checksum-pinned forty-five-record OWS manifest; forces the seven records exposed before manifest freeze to development and freezes seven still-uninspected OWS records as outcome-blind prospective holdout"
+    "materialisation, manifest freeze and assignment are paid, but held-out outcome extraction/evaluation are intentionally unpaid; protected substantive contents must remain uninspected until coding/model freeze and evaluation"
     "agda -i . DASHI/Governance/OccupyHeldOutMeetingValidationRegression.agda"
