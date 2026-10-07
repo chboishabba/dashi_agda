@@ -14,17 +14,37 @@ open import Agda.Builtin.String using (String)
 -- Lean branch:
 --   agent/rh-postmerge-maxcut-20261007
 -- Donor head at refresh:
---   f4fcbd410949d0323d47b75f5103a46a2be79a6e
+--   aa289254b8400a84f808aa48eda0e5aa094068b8
 --
--- Post-merge A2 audit:
+-- Fail-closed accounting:
+--   K = source/kernel theorem on the same proof graph;
+--   U = unconditional analytic input instantiated on the literal carrier;
+--   O = genuinely open scalar/limit producer;
+--   C = circular/RH-equivalent/logically inert as an RH producer.
+-- C contributes zero proof-distance reduction.
+--
+-- Post-merge A2 audit paid/source-written in Lean:
 --   * compensationTargetThreshold is explicitly
 --       4*combinedZeroHeightDefect + integral signedOrdinateTest*mu;
---     no abstract high-ordinate contradiction proposition is hidden there;
---   * positive local debt is exactly split into vertical/count/sixth/eighth
---     coordinates;
---   * selected dominant M6 allowance leaves strict positive headroom on every
---     strength-floor witness;
---   * the remaining scalar itself is still unpaid.
+--   * positive local debt is exactly split into vertical/count/sixth/eighth;
+--   * it is further reassociated into lower-order vertical+count versus the
+--     leading-scale sixth+eighth pair;
+--   * exact canonical-radius expansions show BOTH D6 and D8 contain a leading
+--       expandedZeroCount / (t/16)^2
+--     contribution after terminal normalization;
+--   * selected dominant M6 allowance still leaves strict positive headroom;
+--   * FarExact is exactly FarBaseExact + FarHorizontalExact;
+--   * FarBase has an unconditional inverse-square shell bound;
+--   * FarHorizontal and combined FarExact have the same shell compiler once a
+--     selected HorizontalFarCurvatureBound CH is supplied;
+--   * fixed-q normalized compensation starts at r^-2 while the quartic target
+--     is r^-6, so four extra powers must come from cancellation/sign rather than
+--     remote Fourier decay.
+-- A2 still open:
+--   * selected leading D6/D8 versus mu-gain/count constant comparison;
+--   * selected horizontal far-curvature constant CH;
+--   * explicit completed compensation lower bound;
+--   * the resulting strict scalar PASS, or a formal eventual no-go.
 --
 -- A1 paid/source-written in Lean:
 --   * finite half-height O(log t/t) budget and exact q^-2 pair decay;
@@ -34,15 +54,17 @@ open import Agda.Builtin.String using (String)
 --   * right half-height boundary repaired by (3t/2-1,2t];
 --   * exact complement chart split gamma<=t/2 or gamma>=3t/2.
 -- A1 still open:
---   * countable assignment/summation of those charts into paid shells;
+--   * ThreeTapInverseSquareShellPartitionBound, i.e. actual countable
+--     assignment/summation of those charts into the paid shell family;
 --   * fixed-width witness / compact-alpha uniform curvature;
 --   * translated gamma+pole gain versus local slack.
 --
 -- Route B paid/source-written in Lean:
 --   * exact G_n = Credit-Debt+OuterBudget-3eps;
 --   * exact direct form G_n = physicalCapInterior+OuterBudget-3eps;
---   * direct eventual gap + boundary decay + outer convergence compiles to the
---     existing SignedFifthAnalyticInput.
+--   * sufficiently-large natural cutoff ownership is automatic/Archimedean;
+--   * signedFifthAnalyticInput_of_three_producers exposes exactly boundary
+--     decay + eventual direct gap sign + outer convergence.
 -- Route B still open:
 --   * eventual nonnegativity of the exact signed scalar;
 --   * selected-witness upper-boundary decay;
@@ -72,15 +94,24 @@ record ThreeTapCurrentLeanFrontier : Set where
     a2ThresholdProvenanceExplicit : Bool
     a2FourDebtDecompositionSourceWritten : Bool
     a2DominantHeadroomPositiveSourceWritten : Bool
+    a2LeadingScaleSplitSourceWritten : Bool
+    a2CanonicalEnvelopeExpansionsSourceWritten : Bool
+    a2FarBaseShellPaid : Bool
+    a2FarHorizontalConditionalCompilerSourceWritten : Bool
 
     routeBExactGapSourceWritten : Bool
     routeBDirectCapGapSourceWritten : Bool
     routeBTerminalCompilerSourceWritten : Bool
     routeBFullAuxiliaryCompilerSourceWritten : Bool
+    routeBCutoffOwnershipSourceWritten : Bool
+    routeBThreeProducerCompilerSourceWritten : Bool
 
     a1CarrierSummationPaid : Bool
     a1UniformCurvaturePaid : Bool
     a1CompensationPaid : Bool
+    a2LeadingConstantsPaid : Bool
+    a2HorizontalFarCurvaturePaid : Bool
+    a2CompensationPaid : Bool
     a2StrictScalarPaid : Bool
     routeBEventualGapPaid : Bool
     routeBBoundaryDecayPaid : Bool
@@ -102,15 +133,24 @@ record ThreeTapCurrentLeanFrontier : Set where
     a2ThresholdAuditPaid : a2ThresholdProvenanceExplicit ≡ true
     a2FourDebtSplitPaid : a2FourDebtDecompositionSourceWritten ≡ true
     a2HeadroomPaid : a2DominantHeadroomPositiveSourceWritten ≡ true
+    a2LeadingScaleAuditPaid : a2LeadingScaleSplitSourceWritten ≡ true
+    a2EnvelopeExpansionAuditPaid : a2CanonicalEnvelopeExpansionsSourceWritten ≡ true
+    a2FarBaseShellAuditPaid : a2FarBaseShellPaid ≡ true
+    a2FarHorizontalCompilerAuditPaid : a2FarHorizontalConditionalCompilerSourceWritten ≡ true
 
     routeBGapPaid : routeBExactGapSourceWritten ≡ true
     routeBDirectPaid : routeBDirectCapGapSourceWritten ≡ true
     routeBCompilerPaid : routeBTerminalCompilerSourceWritten ≡ true
     routeBHonestAuxCompilerPaid : routeBFullAuxiliaryCompilerSourceWritten ≡ true
+    routeBCutoffOwnershipPaid : routeBCutoffOwnershipSourceWritten ≡ true
+    routeBThreeProducerCompilerPaid : routeBThreeProducerCompilerSourceWritten ≡ true
 
     a1CarrierStillOpen : a1CarrierSummationPaid ≡ false
     a1CurvatureStillOpen : a1UniformCurvaturePaid ≡ false
     a1CompensationStillOpen : a1CompensationPaid ≡ false
+    a2LeadingConstantsStillOpen : a2LeadingConstantsPaid ≡ false
+    a2HorizontalFarCurvatureStillOpen : a2HorizontalFarCurvaturePaid ≡ false
+    a2CompensationStillOpen : a2CompensationPaid ≡ false
     a2ScalarStillOpen : a2StrictScalarPaid ≡ false
     routeBSignStillOpen : routeBEventualGapPaid ≡ false
     routeBBoundaryStillOpen : routeBBoundaryDecayPaid ≡ false
@@ -129,22 +169,22 @@ currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
     "agent/rh-postmerge-maxcut-20261007"
-    "f4fcbd410949d0323d47b75f5103a46a2be79a6e"
+    "aa289254b8400a84f808aa48eda0e5aa094068b8"
 
     true true true true true
-    true true true true true true true true
-    true true true true
+    true true true true true true true true true true true true
+    true true true true true true
 
-    false false false false false false false false false
+    false false false false false false false false false false false false
 
     refl refl refl refl refl
-    refl refl refl refl refl refl refl refl
-    refl refl refl refl
-    refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl refl refl refl
 
-    "A2: prove or refute verticalDebt+countDebt+sixthDebt+eighthDebt+signed FarExact < explicit compensationTargetThreshold+positive smooth-mu gain. A1: finish countable chart-to-shell summation, then uniform curvature and compensation. B: pay boundary decay and outer convergence and prove eventual signedFifthCorrelationGapAt >= 0."
-    "Lean owns all real analysis. Agda mirrors source-written provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 strict scalar, Route-B sign/limits, kernel receipt, or RH."
-    "Route B's eventual gap is the only genuinely signed inequality, but boundary decay and outer-terminal convergence remain independent selected-witness obligations until Lean discharges them."
+    "A2: compare the selected leading sixth/eighth constants against smooth-mu/count scale, prove selected HorizontalFarCurvatureBound CH, and prove completed same-object compensation; then PASS or formal no-go. A1: prove ThreeTapInverseSquareShellPartitionBound, then uniform curvature and compensation. B: prove boundary decay, eventual signedFifthCorrelationGapAt >= 0, and outer-terminal convergence."
+    "Lean owns all real analysis. Agda mirrors K/U/O/C provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 leading constants/far curvature/compensation/strict scalar, Route-B sign/limits, kernel receipt, or RH."
+    "Route B now has exactly three analytic producers: boundary decay, eventual direct signed-gap nonnegativity, and outer-terminal convergence. Large-cutoff ownership is mechanical and no longer counts as an analytic premise."
 
 a2DominantCoefficientIsPaid :
   ThreeTapCurrentLeanFrontier.a2DominantCoefficientPaid
@@ -156,20 +196,55 @@ a2ThresholdProvenanceIsExplicit :
     currentThreeTapCurrentLeanFrontier ≡ true
 a2ThresholdProvenanceIsExplicit = refl
 
-a2FourDebtSplitIsSourceWritten :
-  ThreeTapCurrentLeanFrontier.a2FourDebtDecompositionSourceWritten
+a2LeadingScaleSplitIsSourceWritten :
+  ThreeTapCurrentLeanFrontier.a2LeadingScaleSplitSourceWritten
     currentThreeTapCurrentLeanFrontier ≡ true
-a2FourDebtSplitIsSourceWritten = refl
+a2LeadingScaleSplitIsSourceWritten = refl
 
-a2DominantHeadroomIsPositiveSourceWritten :
-  ThreeTapCurrentLeanFrontier.a2DominantHeadroomPositiveSourceWritten
+a2EnvelopeExpansionsAreSourceWritten :
+  ThreeTapCurrentLeanFrontier.a2CanonicalEnvelopeExpansionsSourceWritten
     currentThreeTapCurrentLeanFrontier ≡ true
-a2DominantHeadroomIsPositiveSourceWritten = refl
+a2EnvelopeExpansionsAreSourceWritten = refl
+
+a2FarBaseShellIsPaid :
+  ThreeTapCurrentLeanFrontier.a2FarBaseShellPaid
+    currentThreeTapCurrentLeanFrontier ≡ true
+a2FarBaseShellIsPaid = refl
+
+a2FarHorizontalCompilerIsSourceWritten :
+  ThreeTapCurrentLeanFrontier.a2FarHorizontalConditionalCompilerSourceWritten
+    currentThreeTapCurrentLeanFrontier ≡ true
+a2FarHorizontalCompilerIsSourceWritten = refl
+
+routeBCutoffOwnershipIsSourceWritten :
+  ThreeTapCurrentLeanFrontier.routeBCutoffOwnershipSourceWritten
+    currentThreeTapCurrentLeanFrontier ≡ true
+routeBCutoffOwnershipIsSourceWritten = refl
+
+routeBThreeProducerCompilerIsSourceWritten :
+  ThreeTapCurrentLeanFrontier.routeBThreeProducerCompilerSourceWritten
+    currentThreeTapCurrentLeanFrontier ≡ true
+routeBThreeProducerCompilerIsSourceWritten = refl
 
 a1CarrierIsStillOpen :
   ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
     currentThreeTapCurrentLeanFrontier ≡ false
 a1CarrierIsStillOpen = refl
+
+a2LeadingConstantsAreStillOpen :
+  ThreeTapCurrentLeanFrontier.a2LeadingConstantsPaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+a2LeadingConstantsAreStillOpen = refl
+
+a2HorizontalFarCurvatureIsStillOpen :
+  ThreeTapCurrentLeanFrontier.a2HorizontalFarCurvaturePaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+a2HorizontalFarCurvatureIsStillOpen = refl
+
+a2CompensationIsStillOpen :
+  ThreeTapCurrentLeanFrontier.a2CompensationPaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+a2CompensationIsStillOpen = refl
 
 a2ScalarIsStillOpen :
   ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
