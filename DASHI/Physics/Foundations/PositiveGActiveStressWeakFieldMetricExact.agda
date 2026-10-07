@@ -9,27 +9,6 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Foundations.GRQFTLocalizedAnisotropicRepulsiveShellExact as Shell
 
-------------------------------------------------------------------------
--- POSITIVE-G NEGATIVE-ACTIVE-STRESS: EXACT NORMALIZED WEAK-FIELD SOLVE
---
--- This is the strongest closed metric sector needed by the current device
--- roadmap without pretending that the nonlinear compact Einstein/TOV problem
--- is already solved.  We normalize the positive coupling and source radius to
--- one and use the shell's negative active-source sign.  For
---
---   Laplacian Phi = activeSourceDensity
---
--- the unit-ball solution with vacuum 1/r exterior is
---
---   Phi_in(r)  = (3-r^2)/6,
---   Phi_out(q) = q/3, q = 1/r.
---
--- Its radial derivative at the surface is -1/3 on both sides.  The physical
--- free-fall acceleration is -grad Phi, hence outward for this negative active
--- source.  The metric is the standard weak-field metric encoded through Phi;
--- full nonlinear compact matching remains a separate frontier.
-------------------------------------------------------------------------
-
 activeSourceDensity : ℚ
 activeSourceDensity = - 1ℚ
 
@@ -37,15 +16,17 @@ unitRadius : ℚ
 unitRadius = 1ℚ
 
 oneThird : ℚ
-oneThird = Int.+ 1 / Int.+ 3
+oneThird = Int.+ 1 / 3
 
 oneSixth : ℚ
-oneSixth = Int.+ 1 / Int.+ 6
+oneSixth = Int.+ 1 / 6
+
+three : ℚ
+three = Int.+ 3 / 1
 
 interiorPotential : ℚ → ℚ
-interiorPotential r = oneSixth * ((Int.+ 3 / Int.+ 1) - r * r)
+interiorPotential r = oneSixth * (three - r * r)
 
--- q is inverse radius.  This keeps the exact exterior algebra polynomial.
 exteriorPotential : ℚ → ℚ
 exteriorPotential inverseRadius = oneThird * inverseRadius
 
