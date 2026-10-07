@@ -23,5 +23,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact
 import DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact
 import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact
 import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact
+import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismLawsExact
+import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
