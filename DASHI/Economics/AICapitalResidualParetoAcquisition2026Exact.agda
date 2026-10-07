@@ -12,46 +12,25 @@ import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Interop.StateIndexedLiveCutParetoCrossPollinationExact as StateIndexed
 import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Time
 
-------------------------------------------------------------------------
--- AI-CAPITAL RESIDUAL -> SOURCE-ACQUISITION PARETO ADAPTER
-------------------------------------------------------------------------
-
 data CapitalAcquisitionRoute : Set where
-  terminalPayerVectorRoute : CapitalAcquisitionRoute
-  capitalSpreadFilingsRoute : CapitalAcquisitionRoute
-  inferenceQualityServingRoute : CapitalAcquisitionRoute
-  scarcityOpenClosedRoute : CapitalAcquisitionRoute
-  gpuReplacementRoute : CapitalAcquisitionRoute
-  rolloverFinanceRoute : CapitalAcquisitionRoute
-  policyGridRoute : CapitalAcquisitionRoute
-  marketSeriesRoute : CapitalAcquisitionRoute
-  reportedProposalShortcut : CapitalAcquisitionRoute
+  terminalPayerVectorRoute capitalSpreadFilingsRoute inferenceQualityServingRoute
+  scarcityOpenClosedRoute gpuReplacementRoute rolloverFinanceRoute policyGridRoute
+  marketSeriesRoute persistenceReplicationRoute reportedProposalShortcut : CapitalAcquisitionRoute
 
-data CapitalAcquisitionConsumer : Set where
-  capitalRecoveryConsumer : CapitalAcquisitionConsumer
-
-data CapitalSourceAuthority : Set where
-  publicSourceAcquisitionAuthority : CapitalSourceAuthority
+data CapitalAcquisitionConsumer : Set where capitalRecoveryConsumer : CapitalAcquisitionConsumer
+data CapitalSourceAuthority : Set where publicSourceAcquisitionAuthority : CapitalSourceAuthority
 
 routeMove : CapitalAcquisitionRoute → Choice.InformationMove
-routeMove terminalPayerVectorRoute = Choice.informationMove Choice.takeMeasurement 2
-  "complete same-horizon terminal payer / revenue vector" "filing and source acquisition" "public source evidence required"
-routeMove capitalSpreadFilingsRoute = Choice.informationMove Choice.takeMeasurement 5
-  "realised ROIC-WACC producer" "company filings and debt instruments" "same-entity same-horizon accounting authority required"
-routeMove inferenceQualityServingRoute = Choice.informationMove Choice.takeMeasurement 3
-  "quality-adjusted inference spread" "serving-price, quality and provider-cost join" "platform telemetry alone is insufficient"
-routeMove scarcityOpenClosedRoute = Choice.informationMove Choice.takeMeasurement 3
-  "open/closed quality-price scarcity spread" "platform telemetry plus declared capability chart" "platform-local evidence only"
-routeMove gpuReplacementRoute = Choice.informationMove Choice.takeMeasurement 1
-  "GPU replacement/depreciation route" "lender collateral/depreciation evidence" "replacement evidence is not capital recovery"
-routeMove rolloverFinanceRoute = Choice.informationMove Choice.takeMeasurement 2
-  "same-borrower refinancing/rollover schedule" "debt maturity and refinancing evidence" "funding spread alone is insufficient"
-routeMove policyGridRoute = Choice.informationMove Choice.takeMeasurement 2
-  "policy/grid backstop salience route" "regulator and permitting evidence" "policy salience is not capture probability"
-routeMove marketSeriesRoute = Choice.informationMove Choice.takeMeasurement 1
-  "fixed-window AI-linked market flip/volatility series" "declared basket plus broad benchmark" "market state remains separate from fundamentals"
-routeMove reportedProposalShortcut = Choice.informationMove Choice.takeMeasurement 0
-  "reported proposal shortcut" "proposal/report only" "not admitted"
+routeMove terminalPayerVectorRoute = Choice.informationMove Choice.takeMeasurement 2 "complete same-horizon terminal payer / revenue vector" "filing and source acquisition" "public source evidence required"
+routeMove capitalSpreadFilingsRoute = Choice.informationMove Choice.takeMeasurement 5 "realised ROIC-WACC producer" "company filings and debt instruments" "same-entity same-horizon accounting authority required"
+routeMove inferenceQualityServingRoute = Choice.informationMove Choice.takeMeasurement 3 "quality-adjusted inference spread" "serving-price, quality and provider-cost join" "platform telemetry alone is insufficient"
+routeMove scarcityOpenClosedRoute = Choice.informationMove Choice.takeMeasurement 3 "open/closed quality-price scarcity spread" "platform telemetry plus declared capability chart" "platform-local evidence only"
+routeMove gpuReplacementRoute = Choice.informationMove Choice.takeMeasurement 1 "GPU replacement/depreciation route" "lender collateral/depreciation evidence" "replacement evidence is not capital recovery"
+routeMove rolloverFinanceRoute = Choice.informationMove Choice.takeMeasurement 2 "same-borrower refinancing/rollover schedule" "debt maturity and refinancing evidence" "funding spread alone is insufficient"
+routeMove policyGridRoute = Choice.informationMove Choice.takeMeasurement 2 "policy/grid backstop salience route" "regulator and permitting evidence" "policy salience is not capture probability"
+routeMove marketSeriesRoute = Choice.informationMove Choice.takeMeasurement 1 "fixed-window AI-linked market flip/volatility series" "declared basket plus broad benchmark" "market state remains separate from fundamentals"
+routeMove persistenceReplicationRoute = Choice.informationMove Choice.replicateMeasurement 2 "second comparable AI-capital state point" "same producer/coverage/horizon protocol" "replication does not create authority unless comparison gates close"
+routeMove reportedProposalShortcut = Choice.informationMove Choice.takeMeasurement 0 "reported proposal shortcut" "proposal/report only" "not admitted"
 
 routeReduction : CapitalAcquisitionRoute → Reduction.ReductionEnvelope
 routeReduction terminalPayerVectorRoute = Reduction.reductionEnvelope 1 2 "may close terminal-payer and revenue-vector residuals"
@@ -62,6 +41,7 @@ routeReduction gpuReplacementRoute = Reduction.reductionEnvelope 0 1 "directly i
 routeReduction rolloverFinanceRoute = Reduction.reductionEnvelope 0 1 "requires maturity/refinancing closure"
 routeReduction policyGridRoute = Reduction.reductionEnvelope 0 1 "policy salience route remains noncausal"
 routeReduction marketSeriesRoute = Reduction.reductionEnvelope 1 2 "fixed series can close flip/volatility producers"
+routeReduction persistenceReplicationRoute = Reduction.reductionEnvelope 0 1 "one further comparable state may discharge only the first persistence comparison obligation"
 routeReduction reportedProposalShortcut = Reduction.reductionEnvelope 0 2 "nominal shortcut excluded by admission"
 
 routeRelevant : Time.MissingCapitalProducer → CapitalAcquisitionConsumer → CapitalAcquisitionRoute → Bool
@@ -77,6 +57,7 @@ routeRelevant Time.marketFlipProducerOpen capitalRecoveryConsumer marketSeriesRo
 routeRelevant Time.marketVolProducerOpen capitalRecoveryConsumer marketSeriesRoute = true
 routeRelevant Time.terminalPayerCoverageOpen capitalRecoveryConsumer terminalPayerVectorRoute = true
 routeRelevant Time.revenueVectorCoverageOpen capitalRecoveryConsumer terminalPayerVectorRoute = true
+routeRelevant Time.persistenceTrajectoryOpen capitalRecoveryConsumer persistenceReplicationRoute = true
 routeRelevant _ _ _ = false
 
 routeAdmitted : CapitalSourceAuthority → CapitalAcquisitionRoute → Bool
@@ -84,60 +65,33 @@ routeAdmitted publicSourceAcquisitionAuthority reportedProposalShortcut = false
 routeAdmitted publicSourceAcquisitionAuthority _ = true
 
 routeReference : CapitalAcquisitionRoute → String
-routeReference terminalPayerVectorRoute = "Anthropic filing/revenue-routing route; complete payer vector still open"
-routeReference capitalSpreadFilingsRoute = "same-entity filings/debt route for realised ROIC-WACC"
-routeReference inferenceQualityServingRoute = "quality-adjusted serving economics route"
-routeReference scarcityOpenClosedRoute = "open/closed quality-price substitution route"
-routeReference gpuReplacementRoute = "Reuters lender GPU depreciation/replacement evidence, 2026-10-01"
-routeReference rolloverFinanceRoute = "Reuters AI leveraged-finance route plus same-borrower maturities"
-routeReference policyGridRoute = "FERC/PJM and permitting policy-support route"
-routeReference marketSeriesRoute = "fixed-window AI-linked basket / benchmark series"
-routeReference reportedProposalShortcut = "negative fixture: proposal cannot win by zero declared cost"
+routeReference terminalPayerVectorRoute = "complete payer/revenue vector"
+routeReference capitalSpreadFilingsRoute = "same-entity realised ROIC-WACC"
+routeReference inferenceQualityServingRoute = "quality-adjusted serving economics"
+routeReference scarcityOpenClosedRoute = "open/closed quality-price substitution"
+routeReference gpuReplacementRoute = "GPU replacement/depreciation"
+routeReference rolloverFinanceRoute = "same-borrower refinancing schedule"
+routeReference policyGridRoute = "grid/permitting policy support"
+routeReference marketSeriesRoute = "fixed AI-linked market series"
+routeReference persistenceReplicationRoute = "replicate comparable X_t under same comparison key"
+routeReference reportedProposalShortcut = "inadmissible zero-cost negative fixture"
 
 aiCapitalAcquisitionPortfolio : Portfolio.ExperimentPortfolio
-aiCapitalAcquisitionPortfolio = Portfolio.experimentPortfolio
-  CapitalAcquisitionRoute Time.MissingCapitalProducer CapitalAcquisitionConsumer CapitalSourceAuthority
-  routeMove routeReduction routeRelevant routeAdmitted routeReference
+aiCapitalAcquisitionPortfolio = Portfolio.experimentPortfolio CapitalAcquisitionRoute Time.MissingCapitalProducer CapitalAcquisitionConsumer CapitalSourceAuthority routeMove routeReduction routeRelevant routeAdmitted routeReference
 
 terminalPayerCandidate : Portfolio.PortfolioCandidate aiCapitalAcquisitionPortfolio Time.terminalPayerCoverageOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority terminalPayerVectorRoute
-terminalPayerCandidate = Portfolio.portfolioCandidate refl refl "directly attacks the first terminal coverage residual" "declared source-acquisition cost 2; reduction envelope 1-2"
-
-capitalSpreadCandidate : Portfolio.PortfolioCandidate aiCapitalAcquisitionPortfolio Time.capitalSpreadProducerOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority capitalSpreadFilingsRoute
-capitalSpreadCandidate = Portfolio.portfolioCandidate refl refl "same-entity realised return and funding cost close the capital-spread producer" "higher acquisition cost retained rather than replaced by revenue/gross-margin proxies"
-
+terminalPayerCandidate = Portfolio.portfolioCandidate refl refl "terminal residual live" "cost 2"
 replacementCandidate : Portfolio.PortfolioCandidate aiCapitalAcquisitionPortfolio Time.replacementDepreciationProducerOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority gpuReplacementRoute
-replacementCandidate = Portfolio.portfolioCandidate refl refl "lender depreciation evidence attacks the explicit replacement/depreciation residual" "interval evidence narrows the residual but does not itself close company replacement capex"
-
-marketSeriesCandidate : Portfolio.PortfolioCandidate aiCapitalAcquisitionPortfolio Time.marketFlipProducerOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority marketSeriesRoute
-marketSeriesCandidate = Portfolio.portfolioCandidate refl refl "fixed-window market series directly closes a current market-dynamics producer" "cheap route remains separate from terminal economic authority"
+replacementCandidate = Portfolio.portfolioCandidate refl refl "replacement residual live" "interval evidence narrows only"
+persistenceCandidate : Portfolio.PortfolioCandidate aiCapitalAcquisitionPortfolio Time.persistenceTrajectoryOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority persistenceReplicationRoute
+persistenceCandidate = Portfolio.portfolioCandidate refl refl "single current X_t leaves persistence live" "replicate under identical comparison definitions"
 
 proposalShortcutNotAdmitted : Portfolio.admissibleNow aiCapitalAcquisitionPortfolio publicSourceAcquisitionAuthority reportedProposalShortcut ≡ false
 proposalShortcutNotAdmitted = refl
+persistenceRouteRelevant : Portfolio.relevantNow aiCapitalAcquisitionPortfolio Time.persistenceTrajectoryOpen capitalRecoveryConsumer persistenceReplicationRoute ≡ true
+persistenceRouteRelevant = refl
 
-terminalRouteBecomesIrrelevantToCapitalSpread : Portfolio.relevantNow aiCapitalAcquisitionPortfolio Time.capitalSpreadProducerOpen capitalRecoveryConsumer terminalPayerVectorRoute ≡ false
-terminalRouteBecomesIrrelevantToCapitalSpread = refl
-
-replacementRouteIsRelevantWhenReplacementResidualLive : Portfolio.relevantNow aiCapitalAcquisitionPortfolio Time.replacementDepreciationProducerOpen capitalRecoveryConsumer gpuReplacementRoute ≡ true
-replacementRouteIsRelevantWhenReplacementResidualLive = refl
-
-terminalPayerParetoProblem : Pareto.ConsumerMDLProblem
-terminalPayerParetoProblem = StateIndexed.asStateIndexedMDLProblem aiCapitalAcquisitionPortfolio Time.terminalPayerCoverageOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority
-
-terminalPayerRouteEligible : Pareto.Eligible terminalPayerParetoProblem terminalPayerVectorRoute
-terminalPayerRouteEligible = StateIndexed.portfolioCandidateIsEligible terminalPayerCandidate
-
-replacementParetoProblem : Pareto.ConsumerMDLProblem
-replacementParetoProblem = StateIndexed.asStateIndexedMDLProblem aiCapitalAcquisitionPortfolio Time.replacementDepreciationProducerOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority
-
-replacementRouteEligible : Pareto.Eligible replacementParetoProblem gpuReplacementRoute
-replacementRouteEligible = StateIndexed.portfolioCandidateIsEligible replacementCandidate
-
-data CapitalAcquisitionAxis : Set where
-  acquisitionCostAxis : CapitalAcquisitionAxis
-  residualSurvivalAxis : CapitalAcquisitionAxis
-  horizonPenaltyAxis : CapitalAcquisitionAxis
-  dependencyDepthAxis : CapitalAcquisitionAxis
-  authorityBurdenAxis : CapitalAcquisitionAxis
+data CapitalAcquisitionAxis : Set where acquisitionCostAxis residualSurvivalAxis horizonPenaltyAxis dependencyDepthAxis authorityBurdenAxis : CapitalAcquisitionAxis
 
 routeAxisCost : CapitalAcquisitionAxis → CapitalAcquisitionRoute → Nat
 routeAxisCost acquisitionCostAxis terminalPayerVectorRoute = 2
@@ -148,51 +102,37 @@ routeAxisCost acquisitionCostAxis gpuReplacementRoute = 1
 routeAxisCost acquisitionCostAxis rolloverFinanceRoute = 2
 routeAxisCost acquisitionCostAxis policyGridRoute = 2
 routeAxisCost acquisitionCostAxis marketSeriesRoute = 1
+routeAxisCost acquisitionCostAxis persistenceReplicationRoute = 2
 routeAxisCost acquisitionCostAxis reportedProposalShortcut = 0
-routeAxisCost residualSurvivalAxis terminalPayerVectorRoute = 1
-routeAxisCost residualSurvivalAxis capitalSpreadFilingsRoute = 0
-routeAxisCost residualSurvivalAxis inferenceQualityServingRoute = 1
-routeAxisCost residualSurvivalAxis scarcityOpenClosedRoute = 1
-routeAxisCost residualSurvivalAxis gpuReplacementRoute = 1
-routeAxisCost residualSurvivalAxis rolloverFinanceRoute = 1
-routeAxisCost residualSurvivalAxis policyGridRoute = 1
+routeAxisCost residualSurvivalAxis persistenceReplicationRoute = 1
 routeAxisCost residualSurvivalAxis marketSeriesRoute = 0
+routeAxisCost residualSurvivalAxis capitalSpreadFilingsRoute = 0
 routeAxisCost residualSurvivalAxis reportedProposalShortcut = 0
+routeAxisCost residualSurvivalAxis _ = 1
 routeAxisCost horizonPenaltyAxis terminalPayerVectorRoute = 2
-routeAxisCost horizonPenaltyAxis capitalSpreadFilingsRoute = 1
-routeAxisCost horizonPenaltyAxis inferenceQualityServingRoute = 1
-routeAxisCost horizonPenaltyAxis scarcityOpenClosedRoute = 1
-routeAxisCost horizonPenaltyAxis gpuReplacementRoute = 1
-routeAxisCost horizonPenaltyAxis rolloverFinanceRoute = 1
-routeAxisCost horizonPenaltyAxis policyGridRoute = 0
-routeAxisCost horizonPenaltyAxis marketSeriesRoute = 0
-routeAxisCost horizonPenaltyAxis reportedProposalShortcut = 0
-routeAxisCost dependencyDepthAxis terminalPayerVectorRoute = 1
+routeAxisCost horizonPenaltyAxis _ = 0
 routeAxisCost dependencyDepthAxis capitalSpreadFilingsRoute = 3
 routeAxisCost dependencyDepthAxis inferenceQualityServingRoute = 3
+routeAxisCost dependencyDepthAxis persistenceReplicationRoute = 2
 routeAxisCost dependencyDepthAxis scarcityOpenClosedRoute = 2
-routeAxisCost dependencyDepthAxis gpuReplacementRoute = 1
 routeAxisCost dependencyDepthAxis rolloverFinanceRoute = 2
 routeAxisCost dependencyDepthAxis policyGridRoute = 2
-routeAxisCost dependencyDepthAxis marketSeriesRoute = 1
-routeAxisCost dependencyDepthAxis reportedProposalShortcut = 0
+routeAxisCost dependencyDepthAxis _ = 1
 routeAxisCost authorityBurdenAxis terminalPayerVectorRoute = 2
-routeAxisCost authorityBurdenAxis capitalSpreadFilingsRoute = 1
 routeAxisCost authorityBurdenAxis inferenceQualityServingRoute = 2
 routeAxisCost authorityBurdenAxis scarcityOpenClosedRoute = 2
-routeAxisCost authorityBurdenAxis gpuReplacementRoute = 1
-routeAxisCost authorityBurdenAxis rolloverFinanceRoute = 1
-routeAxisCost authorityBurdenAxis policyGridRoute = 1
-routeAxisCost authorityBurdenAxis marketSeriesRoute = 1
 routeAxisCost authorityBurdenAxis reportedProposalShortcut = 0
+routeAxisCost authorityBurdenAxis _ = 1
 
 axisReference : CapitalAcquisitionAxis → String
-axisReference acquisitionCostAxis = "declared acquisition effort; lower is better"
-axisReference residualSurvivalAxis = "declared target residual survival after route; lower is better"
-axisReference horizonPenaltyAxis = "same-horizon reconciliation burden; lower is better"
-axisReference dependencyDepthAxis = "prerequisite join/transform depth; lower is better"
-axisReference authorityBurdenAxis = "source/admission authority burden; lower is better"
+axisReference acquisitionCostAxis = "declared acquisition effort"
+axisReference residualSurvivalAxis = "declared residual survival"
+axisReference horizonPenaltyAxis = "same-horizon reconciliation burden"
+axisReference dependencyDepthAxis = "prerequisite join depth"
+axisReference authorityBurdenAxis = "source/admission burden"
 
+terminalPayerParetoProblem : Pareto.ConsumerMDLProblem
+terminalPayerParetoProblem = StateIndexed.asStateIndexedMDLProblem aiCapitalAcquisitionPortfolio Time.terminalPayerCoverageOpen capitalRecoveryConsumer publicSourceAcquisitionAuthority
 capitalAcquisitionCosts : Pareto.CostHyperfabric terminalPayerParetoProblem
 capitalAcquisitionCosts = Pareto.costHyperfabric CapitalAcquisitionAxis routeAxisCost axisReference
 
@@ -200,17 +140,13 @@ record AICapitalParetoAcquisitionBoundary : Set where
   constructor aiCapitalParetoAcquisitionBoundary
   field
     hardAdmissionPrecedesPareto : Bool
-    hardAdmissionPrecedesParetoIsTrue : hardAdmissionPrecedesPareto ≡ true
     residualUpdateMayChangeRouteSalience : Bool
-    residualUpdateMayChangeRouteSalienceIsTrue : residualUpdateMayChangeRouteSalience ≡ true
     replacementResidualIsExplicitlySchedulable : Bool
-    replacementResidualIsExplicitlySchedulableIsTrue : replacementResidualIsExplicitlySchedulable ≡ true
+    persistenceResidualIsExplicitlySchedulable : Bool
     weightedScalarWinnerRequired : Bool
-    weightedScalarWinnerRequiredIsFalse : weightedScalarWinnerRequired ≡ false
     paretoFrontierCreatesEmpiricalAuthority : Bool
-    paretoFrontierCreatesEmpiricalAuthorityIsFalse : paretoFrontierCreatesEmpiricalAuthority ≡ false
     cheapProposalMayBypassSourceAdmission : Bool
-    cheapProposalMayBypassSourceAdmissionIsFalse : cheapProposalMayBypassSourceAdmission ≡ false
 
+open AICapitalParetoAcquisitionBoundary public
 canonicalAICapitalParetoAcquisitionBoundary : AICapitalParetoAcquisitionBoundary
-canonicalAICapitalParetoAcquisitionBoundary = aiCapitalParetoAcquisitionBoundary true refl true refl true refl false refl false refl false refl
+canonicalAICapitalParetoAcquisitionBoundary = aiCapitalParetoAcquisitionBoundary true true true true false false false
