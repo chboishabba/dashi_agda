@@ -11,6 +11,12 @@ module DASHI.Physics.Closure.NSClayFacingCDReleasedAuditFrontier20261007Exact wh
 -- The remaining work is publication/referee audit of the released proof and
 -- its ordinary mathematical dependencies.  That work is not represented by
 -- fake internal PDE booleans here.
+--
+-- Source freshness: the original DASHI alignment audited OpenAI commit
+-- 8937a8f4..., while the current public head is f9e8bc5b....  The comparator
+-- C/D theorem statements are unchanged across those commits even though the
+-- proof implementations/import routes changed.  This keeps the source-
+-- coordinate alignment current without claiming an independent Agda proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -20,6 +26,7 @@ import DASHI.Physics.Closure.NSClayFacingCDMaxCut20261002Exact as Old
 import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact as Audit
 import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as Source
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact as AnyOne
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact as Fresh
 
 data CDAuditLane : Set where
   cWholeSpaceReleasedAudit : CDAuditLane
@@ -42,6 +49,22 @@ cSourceStatementAlignmentClosed = Source.releasedComparatorCExactlyMatchesClayC
 
 dSourceStatementAlignmentClosed : Bool
 dSourceStatementAlignmentClosed = Source.releasedComparatorDExactlyMatchesClayD
+
+cCurrentReleasedHeadStatementStable : Bool
+cCurrentReleasedHeadStatementStable =
+  Fresh.cComparatorStatementStableAcrossReleaseCommits
+
+dCurrentReleasedHeadStatementStable : Bool
+dCurrentReleasedHeadStatementStable =
+  Fresh.dComparatorStatementStableAcrossReleaseCommits
+
+currentReleasedHeadRequiresReopeningCoordinateAudit : Bool
+currentReleasedHeadRequiresReopeningCoordinateAudit =
+  Fresh.currentHeadRequiresReopeningClayCoordinateAlignment
+
+releasedProofImplementationChangedSincePinnedAudit : Bool
+releasedProofImplementationChangedSincePinnedAudit =
+  Fresh.releasedProofImplementationChanged
 
 releasedCDAnyOneCompilerClosed : Bool
 releasedCDAnyOneCompilerClosed = AnyOne.eitherReleasedAlternativeSuffices
@@ -75,6 +98,18 @@ cOfficialCoordinateAuditClosedIsTrue = refl
 
 dOfficialCoordinateAuditClosedIsTrue : dOfficialCoordinateAuditClosed ≡ true
 dOfficialCoordinateAuditClosedIsTrue = refl
+
+cCurrentReleasedHeadStatementStableIsTrue :
+  cCurrentReleasedHeadStatementStable ≡ true
+cCurrentReleasedHeadStatementStableIsTrue = refl
+
+dCurrentReleasedHeadStatementStableIsTrue :
+  dCurrentReleasedHeadStatementStable ≡ true
+dCurrentReleasedHeadStatementStableIsTrue = refl
+
+currentReleasedHeadRequiresReopeningCoordinateAuditIsFalse :
+  currentReleasedHeadRequiresReopeningCoordinateAudit ≡ false
+currentReleasedHeadRequiresReopeningCoordinateAuditIsFalse = refl
 
 independentDASHIReconstructionGatesAuditIsFalse :
   independentDASHIReconstructionGatesAudit ≡ false
