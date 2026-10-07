@@ -41,7 +41,33 @@ syntheticImprovementMarginPinned = refl
 
 syntheticStrictImprovement :
   Comparison.StrictCostImprovement Comparison.syntheticCostModel
-syntheticStrictImprovement = Comparison.removalPaysOverheadImpliesStrictImprovement Comparison.syntheticRemovalPaysOverhead
+syntheticStrictImprovement =
+  Comparison.removalPaysOverheadImpliesStrictImprovement Comparison.syntheticRemovalPaysOverhead
+
+linearRemovedCouplingPinned :
+  Comparison.removedGlobalCouplingCost
+    (Comparison.linearCostModel Comparison.syntheticUnitWeights Comparison.syntheticAccounting)
+  ≡ 60
+linearRemovedCouplingPinned = refl
+
+linearFederationOverheadPinned :
+  Comparison.weightedFederationOverhead Comparison.syntheticUnitWeights Comparison.syntheticAccounting
+  ≡ 25
+linearFederationOverheadPinned = refl
+
+linearWinMarginPinned :
+  Comparison.linearImprovementMargin Comparison.syntheticLinearWinCondition ≡ 34
+linearWinMarginPinned = refl
+
+linearWinImpliesStrictImprovement :
+  Comparison.StrictCostImprovement
+    (Comparison.linearCostModel Comparison.syntheticUnitWeights Comparison.syntheticAccounting)
+linearWinImpliesStrictImprovement =
+  Comparison.linearWinConditionImpliesStrictImprovement Comparison.syntheticLinearWinCondition
+
+sourcePopulationDoesNotBecomeWeight :
+  Comparison.sourcePopulationNumbersBecomeCostCoefficients Comparison.canonicalBoloComparisonBoundary ≡ false
+sourcePopulationDoesNotBecomeWeight = refl
 
 noEmpiricalSuperiorityPromotion :
   Comparison.empiricalBoloSuperiorityEstablished Comparison.canonicalBoloComparisonBoundary ≡ false
