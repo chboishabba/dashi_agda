@@ -60,6 +60,8 @@ import DASHI.Moonshine.OggSSPTriadicKernelFieldRecognitionExact
 import DASHI.Moonshine.OggSSPTriadicKernelCanonicalFieldActionFrontierExact
 import DASHI.Biology.SignedSSPWeaveProgramMachineExact
 import DASHI.Biology.SignedSSPWeaveInstructionTraceExact
+import DASHI.Biology.SignedSSPWeaveSemanticCoreReplayExact
+import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact
 import DASHI.Biology.SignedSSPWeaveCanonicalProjectionExact
 import DASHI.Moonshine.OggSSPFullSignedTransitionGraphFrontierExact
 
