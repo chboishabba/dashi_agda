@@ -16,10 +16,8 @@ import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
 ------------------------------------------------------------------------
 -- IBS CAUSAL MAINTENANCE REGIME HYPOTHESES
 --
--- These are repository-side candidate partitions of a coupled DGBI system.
--- Sources below pay only bounded observations, predictive associations,
--- intervention contrasts, or protocol designs.  No citation by itself proves
--- that one candidate regime exists as a natural kind in a given participant.
+-- Sources pay only the observations/designs explicitly attributed below.
+-- Candidate regimes are repo-side structural hypotheses, not source claims.
 ------------------------------------------------------------------------
 
 black2026Source : Source.AttributedSource
@@ -34,13 +32,14 @@ black2026Source = Source.mkDOISource
   Source.publicAttribution
 
 actionable2025Source : Source.AttributedSource
-actionable2025Source = Source.mkNoDOISource
-  "authors as indexed by The American Journal of Gastroenterology"
+actionable2025Source = Source.mkDOISource
+  "Andrea Shin; Kyle Staller; David J Levinthal"
   "Actionable Clinical Features and Biomarkers to Facilitate the Management of Irritable Bowel Syndrome"
   "American Journal of Gastroenterology" "2025"
-  "https://pubmed.ncbi.nlm.nih.gov/41257528/"
+  "10.14309/ajg.0000000000003859"
+  "https://doi.org/10.14309/ajg.0000000000003859"
   Source.academicArticleSource
-  "Review-level argument for mechanism-informed clinical features and biomarkers because symptom subtype does not identify the active mechanism in an individual. It does not validate a causal classifier."
+  "Review-level argument for mechanism-informed clinical features and biomarkers because symptom subtype does not identify the active mechanism in an individual. It does not validate a causal classifier. David J Levinthal is retained as this paper's author and is not identified with Michael Levin or the repo's Levin bioelectric programme."
   Source.publicAttribution
 
 jarrett2015Source : Source.AttributedSource
@@ -55,21 +54,23 @@ jarrett2015Source = Source.mkDOISource
   Source.publicAttribution
 
 wish2026Source : Source.AttributedSource
-wish2026Source = Source.mkNoDOISource
+wish2026Source = Source.mkDOISource
   "Elizabeth N Madva et al."
   "The WISH 2.0 Intervention for Irritable Bowel Syndrome: Protocol for a Pilot Randomized Controlled Trial"
-  "JMIR Research Protocols" "2026"
-  "https://pubmed.ncbi.nlm.nih.gov/42492091/"
+  "JMIR Research Protocols 15:e98352" "2026"
+  "10.2196/98352"
+  "https://doi.org/10.2196/98352"
   Source.academicArticleSource
   "Protocol-level evidence only: plans repeated candidate gut-brain mechanism measurements including HRV, interoception, whole-transcriptome RNA sequencing and serum inflammatory biomarkers around a behavioural intervention. No completed causal result is imported."
   Source.publicAttribution
 
 nitns2026Source : Source.AttributedSource
-nitns2026Source = Source.mkNoDOISource
-  "authors as indexed by PubMed"
+nitns2026Source = Source.mkDOISource
+  "Yanbin Wei; Zihe Shi; Shanshan Wu; Xin Yao"
   "Efficacy and safety of non-invasive transcutaneous nerve stimulation in patients with irritable bowel syndrome: a systematic review and meta-analysis"
-  "systematic review and meta-analysis" "2026"
-  "https://pubmed.ncbi.nlm.nih.gov/41948519/"
+  "Therapeutic Advances in Gastroenterology 19:17562848261436121" "2026"
+  "10.1177/17562848261436121"
+  "https://doi.org/10.1177/17562848261436121"
   Source.academicArticleSource
   "Four RCTs / 170 participants were synthesized; symptom and quality-of-life outcomes improved and HRV findings suggested possible autonomic modulation, but evidence quality was low to very low and does not establish an autonomic-only IBS mechanism."
   Source.publicAttribution
@@ -151,18 +152,12 @@ canonicalCandidateMaintenanceRegimeAtlas =
   microbialImmuneRegime ∷ barrierSensoryRegime ∷ autonomicCentralRegime ∷
   bileAcidMotilityRegime ∷ mixedCoupledRegime ∷ []
 
-------------------------------------------------------------------------
--- Attribution and inverse-problem firewalls.
-------------------------------------------------------------------------
-
 data SymptomPatternIdentifiesMaintenanceRegimePermission : Set where
-symptomPatternDoesNotIdentifyMaintenanceRegime :
-  SymptomPatternIdentifiesMaintenanceRegimePermission → ⊥
+symptomPatternDoesNotIdentifyMaintenanceRegime : SymptomPatternIdentifiesMaintenanceRegimePermission → ⊥
 symptomPatternDoesNotIdentifyMaintenanceRegime ()
 
 data SingleInterventionResponseIdentifiesUniqueRegimePermission : Set where
-singleInterventionResponseDoesNotIdentifyUniqueRegime :
-  SingleInterventionResponseIdentifiesUniqueRegimePermission → ⊥
+singleInterventionResponseDoesNotIdentifyUniqueRegime : SingleInterventionResponseIdentifiesUniqueRegimePermission → ⊥
 singleInterventionResponseDoesNotIdentifyUniqueRegime ()
 
 data BiomarkerPanelEqualsCausalRegimePermission : Set where
@@ -173,10 +168,9 @@ data PredictiveBiomarkerIsMediatorPermission : Set where
 predictiveBiomarkerDoesNotBecomeMediator : PredictiveBiomarkerIsMediatorPermission → ⊥
 predictiveBiomarkerDoesNotBecomeMediator ()
 
-------------------------------------------------------------------------
--- Minimal discrimination contract. This is an experimental design object,
--- not a clinical diagnostic or patient-specific mechanistic label.
-------------------------------------------------------------------------
+data LevinthalIsMichaelLevinPermission : Set where
+levinthalCitationDoesNotBecomeMichaelLevinCitation : LevinthalIsMichaelLevinPermission → ⊥
+levinthalCitationDoesNotBecomeMichaelLevinCitation ()
 
 record RegimeDiscriminationPanel : Set where
   constructor regime-discrimination-panel
@@ -203,14 +197,7 @@ canonicalRegimeDiscriminationPanel = regime-discrimination-panel
   Systems.symptomTrajectoryAxis Systems.microbiomeFunctionAxis Systems.metabolomeAxis
   Systems.histamineMastCellAxis Systems.epithelialBarrierAxis Systems.bileAcidAxis
   Systems.autonomicAxis Systems.visceralSensitivityAxis Systems.centralInteroceptivePainAxis
-  Systems.dietExposureAxis
-  true true true true false
-
-------------------------------------------------------------------------
--- Causal-estimand weld. We reuse the exact owner; candidate regimes do not
--- count as causal effects until an intervention/comparator/outcome/time scope
--- and matching witness are supplied.
-------------------------------------------------------------------------
+  Systems.dietExposureAxis true true true true false
 
 record MaintenanceCausalEstimandObligation : Set₁ where
   constructor maintenance-causal-estimand-obligation
@@ -228,18 +215,13 @@ open MaintenanceCausalEstimandObligation public
 
 canonicalMaintenanceCausalEstimandObligation : MaintenanceCausalEstimandObligation
 canonicalMaintenanceCausalEstimandObligation = maintenance-causal-estimand-obligation
-  Causal.canonicalCausalEffectEstimandBoundary
-  mixedCoupledCandidate
+  Causal.canonicalCausalEffectEstimandBoundary mixedCoupledCandidate
   "mechanism-selective perturbation, predeclared"
   "matched sham/control/alternative fibre perturbation"
   "proximal target-engagement coordinate"
   "symptom/functional trajectory plus competing-fibre responses"
   "predeclared acute + recovery + persistence horizons"
   true true
-
-------------------------------------------------------------------------
--- Pareto acquisition frontier.
-------------------------------------------------------------------------
 
 data RegimeAcquisitionStatus : Set where
   boundedEvidenceAcquired : RegimeAcquisitionStatus
@@ -262,8 +244,7 @@ open CausalMaintenanceParetoNode public
 
 autonomicPredictionNode : CausalMaintenanceParetoNode
 autonomicPredictionNode = causal-maintenance-pareto-node
-  "autonomic baseline as differential-response predictor"
-  boundedEvidenceAcquired Snowball.externalKnowledgeComparison
+  "autonomic baseline as differential-response predictor" boundedEvidenceAcquired Snowball.externalKnowledgeComparison
   "Jarrett 2015 DOI 10.5056/jnm15067"
   "prediction may reflect arousal, central state, correlated peripheral state or effect modification"
   "replicate under preregistered treatment-by-autonomic interaction with synchronized gut/immune/central measurements"
@@ -271,26 +252,23 @@ autonomicPredictionNode = causal-maintenance-pareto-node
 
 brainGutTrialDesignNode : CausalMaintenanceParetoNode
 brainGutTrialDesignNode = causal-maintenance-pareto-node
-  "multi-fibre brain-gut intervention measurement"
-  prospectiveDiscriminationNeeded Snowball.experimentalDesign
-  "WISH 2.0 protocol: HRV + interoception + transcriptome + inflammatory biomarkers"
+  "multi-fibre brain-gut intervention measurement" prospectiveDiscriminationNeeded Snowball.experimentalDesign
+  "WISH 2.0 protocol DOI 10.2196/98352: HRV + interoception + transcriptome + inflammatory biomarkers"
   "protocol has not yet produced efficacy or mediation evidence"
   "preserve treatment/control contrast and model proximal, distal and mediator outcomes separately when results mature"
   "planned measurement is not acquired causal evidence"
 
 neuromodulationNode : CausalMaintenanceParetoNode
 neuromodulationNode = causal-maintenance-pareto-node
-  "autonomic neuromodulation as system probe"
-  boundedEvidenceAcquired Snowball.externalKnowledgeComparison
-  "2026 NITNS meta-analysis, four RCTs / 170 participants"
+  "autonomic neuromodulation as system probe" boundedEvidenceAcquired Snowball.externalKnowledgeComparison
+  "Wei et al. 2026 DOI 10.1177/17562848261436121; four RCTs / 170 participants"
   "low/very-low quality evidence and heterogeneous modalities/subtypes; HRV mechanism remains suggestive"
   "larger sham-controlled trials with HRV plus peripheral mechanistic panel and trajectory outcomes"
   "clinical benefit does not prove autonomic-only maintenance"
 
 orthogonalProbeNode : CausalMaintenanceParetoNode
 orthogonalProbeNode = causal-maintenance-pareto-node
-  "orthogonal sequential perturbation discrimination"
-  orthogonalPerturbationNeeded Snowball.experimentalDesign
+  "orthogonal sequential perturbation discrimination" orthogonalPerturbationNeeded Snowball.experimentalDesign
   "existing IBSMechanismProbePerturbationAtlasExact"
   "one responder contrast cannot separate shared downstream pathways from the intended target fibre"
   "within-person randomized/crossover sequence of at least two fibre-distinct probes with washout and common measurement panel"
@@ -298,8 +276,7 @@ orthogonalProbeNode = causal-maintenance-pareto-node
 
 mediatorNode : CausalMaintenanceParetoNode
 mediatorNode = causal-maintenance-pareto-node
-  "causal mediator identification"
-  mediatorIdentificationNeeded Snowball.experimentalDesign
+  "causal mediator identification" mediatorIdentificationNeeded Snowball.experimentalDesign
   "CausalEffectEstimandExact mediation surface"
   "current associations/predictors are not controlled direct or mediated indirect effects"
   "predeclare mediator, intervention, comparator, population and time; measure mediator before distal outcome where design permits"
@@ -307,8 +284,7 @@ mediatorNode = causal-maintenance-pareto-node
 
 transportNode : CausalMaintenanceParetoNode
 transportNode = causal-maintenance-pareto-node
-  "held-out maintenance-regime transport"
-  externalTransportNeeded Snowball.externalKnowledgeComparison
+  "held-out maintenance-regime transport" externalTransportNeeded Snowball.externalKnowledgeComparison
   "current cohorts and intervention studies are assay/population/context specific"
   "regime discriminator may fail across diet, geography, sex, infection history, assay or treatment context"
   "held-out multi-site validation of the full discrimination contract and treatment interactions"
@@ -335,7 +311,5 @@ record IBSCausalMaintenanceBoundary : Set where
 
 canonicalIBSCausalMaintenanceBoundary : IBSCausalMaintenanceBoundary
 canonicalIBSCausalMaintenanceBoundary = ibs-causal-maintenance-boundary
-  Whole.canonicalIBSWholeSystemBoundary
-  Transition.canonicalIBSLatentStateTransitionBoundary
-  Probe.canonicalIBSMechanismProbeBoundary
-  true false false false true true false
+  Whole.canonicalIBSWholeSystemBoundary Transition.canonicalIBSLatentStateTransitionBoundary
+  Probe.canonicalIBSMechanismProbeBoundary true false false false true true false
