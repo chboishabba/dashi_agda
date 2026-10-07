@@ -14,16 +14,12 @@ import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTSourceAmplitudeDrivenIsraelKottlerExact as Geometry
 import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact as Window
 
-------------------------------------------------------------------------
--- DIRECT SOURCE VACUUM -> COSMOLOGICAL STRESS -> KOTTLER ROUTE
-------------------------------------------------------------------------
-
 record SourceAmplitudePair
     {Density Background Fluctuation : Set}
     (source : Source.CMP119Section2SourceNativeState
       Density Background Fluctuation
       T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
-      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction) : Set where
+      T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction) : Set₁ where
   constructor source-amplitude-pair
   field
     interiorScale exteriorScale : Nat
@@ -119,7 +115,7 @@ record DirectSourceKottlerCandidate
       Density Background Fluctuation
       T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction
       T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction}
-    (pair : SourceAmplitudePair source) : Set where
+    (pair : SourceAmplitudePair source) : Set₁ where
   constructor direct-source-kottler-candidate
   field
     radius interiorLapseRoot exteriorLapseRoot : ℚ
