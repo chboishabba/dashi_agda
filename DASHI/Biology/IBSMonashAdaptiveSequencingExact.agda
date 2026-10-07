@@ -72,7 +72,7 @@ silva2026Source = Source.mkDOISource
   "10.1002/ueg2.70173"
   "https://doi.org/10.1002/ueg2.70173"
   Source.academicArticleSource
-  "Monash-linked long-term observational/retrospective evidence examining sucrase-isomaltase hypomorphic variants and outcomes after FODMAP education. Genetic association is not a deterministic diet-response classifier or causal maintenance regime."
+  "Monash-linked retrospective cohort testing sucrase-isomaltase hypomorphic variants as a possible modifier after FODMAP education. Single-variant carriage was not associated with initial FODMAP response, long-term symptom control, or current sucrose/starch intake in the represented cohort. This negative stratification result is not universal genetic irrelevance."
   Source.publicAttribution
 
 data MonashEvidenceRole : Set where
@@ -112,8 +112,8 @@ canonicalMonashIBSProgrammeAtlas =
     "nutrient-specific symptom provocation/rescue"
     false false ∷
   monash-ibs-evidence silva2026Source digestiveGeneticModifier
-    "sucrase-isomaltase hypomorphic-variant status after FODMAP education"
-    "long-term symptom/dietary outcome association"
+    "single sucrase-isomaltase hypomorphic-variant status after FODMAP education"
+    "negative stratification result for initial response, long-term symptom control and sucrose/starch intake in the represented cohort"
     false false ∷ []
 
 data TreatmentResponseIdentifiesMechanismPermission : Set where
@@ -228,12 +228,12 @@ canonicalAdaptiveTreatmentSequencingFrontier =
     "prospective SMART-like or response-adaptive trial with locked switching rules, proximal target engagement and patient-centred outcomes"
     "an informative probe is not necessarily the clinically best treatment, and clinical benefit is not information gain" ∷
   adaptive-sequencing-node
-    "long-term personalized carbohydrate handling"
+    "SI genotype negative-stratification"
     Snowball.externalKnowledgeComparison
-    "Silva 2026 adds sucrase-isomaltase genotype as a candidate modifier after FODMAP education"
-    "needs prospective genotype-by-diet interaction and replication"
-    "predeclared interaction study rather than post-hoc mechanistic labeling"
-    "genotype association is neither deterministic intolerance nor causal-regime identity" ∷ []
+    "Silva 2026 found no association of single SI hypomorphic variants with initial or long-term FODMAP outcomes in the represented cohort"
+    "double-carriers were sparse and retrospective ascertainment limits broader inference"
+    "prospective genotype-by-diet interaction only if this residual remains decision-relevant"
+    "negative single-variant result blocks a positive modifier claim but does not prove universal genetic irrelevance" ∷ []
 
 record MonashAdaptiveBoundary : Set where
   constructor monash-adaptive-boundary
