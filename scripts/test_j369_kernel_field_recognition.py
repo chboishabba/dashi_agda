@@ -55,6 +55,19 @@ class J369KernelFieldRecognitionTest(unittest.TestCase):
         generator = recognition.find_primitive_element(model)
         self.assertEqual(recognition.multiplicative_order(model, generator), 80)
 
+    def test_k4_gf9_subfield_is_explicit_linear_k2_image(self):
+        model = recognition.model_for_degree(4)
+        fixed = {x for x in model.elements if model.pow(x, 9) == x}
+        image = set(recognition.k4_gf9_linear_image())
+        self.assertEqual(len(fixed), 9)
+        self.assertEqual(image, fixed)
+        prefix = {(a, b, 0, 0) for a in range(3) for b in range(3)}
+        self.assertNotEqual(prefix, fixed)
+        for x in image:
+            for y in image:
+                self.assertIn(model.add(x, y), image)
+                self.assertIn(model.mul(x, y), image)
+
     def test_row_major_legacy_embeddings_do_not_produce_twelve_vectors(self):
         scan = recognition.scan_row_major_displacements(total_mass=18, min_cols=2, max_cols=200)
         self.assertEqual(scan['node_count'], 1330)
