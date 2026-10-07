@@ -13,6 +13,10 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Test.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Exact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedMarkedF2Exact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedMarkedF2Test.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedF2HilbertMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedF2HilbertMaxCutTest.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureTest.agda'
       - 'DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationExact.agda'
@@ -23,6 +27,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3ExactMassOscillationOnlyTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3LipschitzOscillationCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP3LipschitzOscillationCompilerTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda'
@@ -71,6 +77,10 @@ jobs:
               DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Test.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Exact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3SourceFirstF2Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedMarkedF2Exact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedMarkedF2Test.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedF2HilbertMaxCutExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3SelectedF2HilbertMaxCutTest.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureExact.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarExactMassQuadratureTest.agda \
               DASHI/Physics/YangMills/BalabanCompactHaarMassWeightedOscillationExact.agda \
@@ -81,6 +91,8 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyP3ExactMassOscillationOnlyTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3SelectedStateMassWeightedHaarTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3LipschitzOscillationCompilerExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP3LipschitzOscillationCompilerTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda \
