@@ -8,11 +8,11 @@ realBoundedEdgeCountPinned :
   Example.edgeCount Example.canonicalObservedEdges ≡ 18
 realBoundedEdgeCountPinned = refl
 
-adashSpokesEdgePresent :
+firstPseudonymousSpokesEdgePresent :
   Example.ExplicitInteraction
-    Example.adash
+    Example.p-ebddda
     Example.spokesCouncilProposal
-adashSpokesEdgePresent = Example.adashSpokes
+firstPseudonymousSpokesEdgePresent = Example.e01
 
 financeConsensusObservedSeparately :
   Example.DecisionObserved Example.financeIntegration
@@ -26,28 +26,26 @@ silentReadingObservedDegreePinned :
   Example.observedIssueDegree Example.silentReadingTechnology ≡ 3
 silentReadingObservedDegreePinned = refl
 
-steveObservedDegreePinned :
-  Example.observedParticipantDegree Example.steve ≡ 3
-steveObservedDegreePinned = refl
+participant442ac6DegreePinned :
+  Example.observedParticipantDegree Example.p-442ac6 ≡ 3
+participant442ac6DegreePinned = refl
 
-francesObservedDegreePinned :
-  Example.observedParticipantDegree Example.frances ≡ 3
-francesObservedDegreePinned = refl
+participant33f894DegreePinned :
+  Example.observedParticipantDegree Example.p-33f894 ≡ 3
+participant33f894DegreePinned = refl
+
+rawNamesNotPropagated :
+  Example.rawNamesPropagatedIntoFormalTable Example.canonicalLibraryIncidenceBoundary ≡ false
+rawNamesNotPropagated = refl
 
 descriptiveDegreeIsNotCost :
-  Example.observedDegreeInterpretedAsCoordinationCost
-    Example.canonicalLibraryIncidenceBoundary
-  ≡ false
+  Example.observedDegreeInterpretedAsCoordinationCost Example.canonicalLibraryIncidenceBoundary ≡ false
 descriptiveDegreeIsNotCost = refl
 
 attendanceDoesNotGenerateAllIssueEdges :
-  Example.attendanceCrossProductPromoted
-    Example.canonicalLibraryIncidenceBoundary
-  ≡ false
+  Example.attendanceCrossProductPromoted Example.canonicalLibraryIncidenceBoundary ≡ false
 attendanceDoesNotGenerateAllIssueEdges = refl
 
 speakerEdgeDoesNotEncodeAgreement :
-  Example.speakerEdgeEncodesAgreement
-    Example.canonicalLibraryIncidenceBoundary
-  ≡ false
+  Example.speakerEdgeEncodesAgreement Example.canonicalLibraryIncidenceBoundary ≡ false
 speakerEdgeDoesNotEncodeAgreement = refl
