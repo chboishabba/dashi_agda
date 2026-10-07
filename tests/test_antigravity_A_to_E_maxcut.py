@@ -34,6 +34,17 @@ def test_anisotropic_TOV_conservation_obstruction_is_explicit():
         assert token in text
 
 
+def test_local_active_stress_is_not_promoted_to_global_exterior_mass():
+    text = read("DASHI/Physics/Foundations/LocalActiveStressGlobalExteriorMassFirewallExact.agda")
+    for token in (
+        "localActiveStressDoesNotAutomaticallyGiveNegativeGlobalMass",
+        "localToyResponseIsNotAutomaticallyExactGRExterior",
+        "exactGlobalExteriorMassChargeSolved",
+        "globalExteriorPromotionRequiresAllThoseReceipts",
+    ):
+        assert token in text
+
+
 def test_device_observable_compiler_covers_weight_freefall_clock_optical():
     text = read("DASHI/Physics/ExoticGravity/AntigravityDeviceMetricObservableCompilerExact.agda")
     for token in (
@@ -53,6 +64,7 @@ def test_A_to_E_terminal_owner_exists_and_is_fail_closed():
         "stageBActiveStressCriterion",
         "stageCWeakFieldMetricSolve",
         "stageCNonlinearConservationAudit",
+        "stageCGlobalExteriorPromotionAudit",
         "stageDFourChannelProjection",
         "stageESameObjectExperiment",
         "fullNonlinearCompactEinsteinSolveStillOpen",
