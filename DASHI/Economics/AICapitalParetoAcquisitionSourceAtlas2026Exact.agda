@@ -13,6 +13,28 @@ import DASHI.Core.AttributedSourceCore as Source
 -- terminal capital-recovery authority.
 ------------------------------------------------------------------------
 
+anthropicProfitabilityReuters20261007 : Source.AttributedSource
+anthropicProfitabilityReuters20261007 = Source.mkNoDOISource
+  "Reuters Open Interest"
+  "Can AI labs ever turn a profit?"
+  "Reuters"
+  "2026-10-07"
+  "https://www.reuters.com/commentary/reuters-open-interest/can-ai-labs-ever-turn-profit-joachim-klement-2026-10-07/"
+  Source.newsSource
+  "secondary carrier for Anthropic 2025 revenue USD 4.6B, operating loss USD 8.06B and compute/infrastructure spend USD 7.3B; supports a negative operating-return diagnostic but not realised ROIC-WACC"
+  Source.publicAttribution
+
+aiCreditReuters20260922 : Source.AttributedSource
+aiCreditReuters20260922 = Source.mkNoDOISource
+  "Reuters"
+  "Corporate bond buyers get picky with flood of AI debt"
+  "Reuters"
+  "2026-09-22"
+  "https://www.reuters.com/legal/transactional/corporate-bond-buyers-get-picky-with-flood-ai-debt-2026-09-22/"
+  Source.newsSource
+  "secondary carrier for AI-related investment-grade spreads around 115 bp versus 78 bp for broad investment grade; closes a funding-stress observation, not WACC or rollover"
+  Source.publicAttribution
+
 gpuCollateralReuters20261001 : Source.AttributedSource
 gpuCollateralReuters20261001 = Source.mkNoDOISource
   "Reuters"
@@ -61,11 +83,13 @@ aiCapitalParetoAcquisitionAtlas : Source.AttributedSourceAtlas
 aiCapitalParetoAcquisitionAtlas = Source.mkSourceAtlas
   "AI capital Pareto acquisition source atlas, October 2026"
   "DASHI.Economics.AICapitalParetoAcquisitionSourceAtlas2026Exact"
-  (gpuCollateralReuters20261001 ∷
+  (anthropicProfitabilityReuters20261007 ∷
+   aiCreditReuters20260922 ∷
+   gpuCollateralReuters20261001 ∷
    aiBorrowersReuters20260930 ∷
    fercPJMReuters20260930 ∷
    aragonDataCentreReuters20261006 ∷ [])
-  "source-bounded acquisition evidence for replacement/obsolescence, refinancing/funding and policy-support residual routes; sources do not themselves close the runtime producer vector"
+  "source-bounded acquisition evidence for profitability direction, funding stress, replacement/obsolescence, refinancing/funding and policy-support residual routes; sources do not themselves close the runtime producer vector except where a separately declared point observation is explicitly constructed"
 
 atlasDoesNotCreateAuthority :
   Source.atlasCreatesAuthority aiCapitalParetoAcquisitionAtlas ≡ false
