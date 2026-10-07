@@ -24,6 +24,7 @@ import DASHI.Physics.Foundations.GRQFTCMP119VacuumEnergyCosmologicalStressCompil
 import DASHI.Physics.Foundations.GRQFTCMP119DirectSourceKottlerRouteExact as DirectSource
 import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as SingleGeometry
 import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
+import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
 import DASHI.Physics.ExoticGravity.AntigravityDeviceMetricObservableCompilerExact as Observables
 import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExact as ConcreteObservables
 import DASHI.Physics.ExoticGravity.AntigravityDeviceOpticalMetricDiscriminatorExact as Experiment
@@ -106,6 +107,9 @@ stageCSingleSourceVacuumRoute : SingleSource.SingleSourceVacuumKottlerBoundary
 stageCSingleSourceVacuumRoute =
   SingleSource.canonicalSingleSourceVacuumKottlerBoundary
 
+stageCSingleVacuumSafeBand : SafeBand.SingleVacuumSafeBandBoundary
+stageCSingleVacuumSafeBand = SafeBand.canonicalSingleVacuumSafeBandBoundary
+
 directSourceVacuumToKottlerRouteConstructed : Bool
 directSourceVacuumToKottlerRouteConstructed = true
 
@@ -159,6 +163,8 @@ record AntigravityABCDEFrontier : Set where
     stageCSourceCoefficientToCosmologicalStressShapeClosed : Bool
     stageCSingleVacuumRepulsiveFixtureConstructed : Bool
     stageCSingleSourceVacuumStaticCompilerConstructed : Bool
+    stageCSingleVacuumSafeBandPolynomialReductionClosed : Bool
+    stageCSourceConicHomogeneousParameterizationClosed : Bool
     stageDConcreteMechanicalObservablesConstructed : Bool
     stageDConcreteLapseCarriersConstructed : Bool
     stageDKottlerAmplitudeToMetricPerturbationClosed : Bool
@@ -171,6 +177,7 @@ record AntigravityABCDEFrontier : Set where
     sourceNativeExactFixtureValuesRequired : Bool
     twoDistinctSourceVacuumScalesRequired : Bool
     singleSourceAmplitudeAdmissibilityStillOpen : Bool
+    singleSourceSafeBandOrderWitnessStillOpen : Bool
     sourceActionReadoutToPhysicalMetricAmplitudeStillOpen : Bool
     sourceNativePinnedStressWeldStillOpen : Bool
     rawEq223ResponseToPinnedR136StillOpen : Bool
@@ -186,8 +193,8 @@ record AntigravityABCDEFrontier : Set where
 canonicalAntigravityABCDEFrontier : AntigravityABCDEFrontier
 canonicalAntigravityABCDEFrontier =
   antigravity-a-b-c-d-e-frontier
-    true true true true true true true true true true true true true true true true true true true true true true true true true true true
-    false false false false true true false true true true true true true true true true
+    true true true true true true true true true true true true true true true true true true true true true true true true true true true true true
+    false false false false true true true false true true true true true true true true true
 
 record AntigravityABCDEPromotionBoundary : Set where
   constructor antigravity-a-b-c-d-e-promotion-boundary
@@ -201,6 +208,7 @@ record AntigravityABCDEPromotionBoundary : Set where
     directSourceVacuumToStaticKottlerCompilerClosed : Bool
     singleVacuumIsraelKottlerMathClosed : Bool
     singleSourceVacuumStaticCompilerClosed : Bool
+    singleVacuumSafeBandReductionClosed : Bool
     pinnedR136RequiredForStaticGeometryConstruction : Bool
     twoDistinctSourceVacuumScalesRequired : Bool
     doubleWellRequiredForPreferredStaticRoute : Bool
@@ -211,6 +219,7 @@ record AntigravityABCDEPromotionBoundary : Set where
     sourceNativeToRawAncestryClosed : Bool
     exactFixtureVacuumValuesRequired : Bool
     singleSourceAmplitudeAdmissibilityClosed : Bool
+    singleSourceSafeBandOrderWitnessClosed : Bool
     actionReadoutToPhysicalMetricAmplitudeClosed : Bool
     rawEq223ResponseToPinnedR136Closed : Bool
     dynamicSchutzholdTTReadoutForDeviceClosed : Bool
@@ -222,5 +231,5 @@ record AntigravityABCDEPromotionBoundary : Set where
 canonicalAntigravityABCDEPromotionBoundary : AntigravityABCDEPromotionBoundary
 canonicalAntigravityABCDEPromotionBoundary =
   antigravity-a-b-c-d-e-promotion-boundary
-    true true true true true true true true true false false false
-    true true true true true false false false false false false false false true
+    true true true true true true true true true true false false false
+    true true true true true false false false false false false false false false true
