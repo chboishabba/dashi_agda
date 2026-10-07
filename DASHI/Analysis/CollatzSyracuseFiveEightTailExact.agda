@@ -23,13 +23,13 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Bool.Base using (T)
-open import Data.Empty using (⊥; contradiction)
 open import Data.Nat using (_≤_; _<_; _≤ᵇ_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Data.Unit.Base using (tt)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Nullary.Negation.Core using (¬_; contradiction)
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.Core.BinaryWordIntegerChernoffExact as Chernoff
@@ -194,7 +194,7 @@ badWordForcesTail n word bad =
 
 badIndicatorLeTailIndicator :
   (n : Nat) →
-  (word : Binary.BinaryOutcomeEnumerationExact.BinaryWord (8 * n + 1)) →
+  (word : Binary.BinaryWord (8 * n + 1)) →
   Event.badIndicator word
   ≤ Chernoff.atLeastIndicator (5 * n + 1) word
 badIndicatorLeTailIndicator n word
