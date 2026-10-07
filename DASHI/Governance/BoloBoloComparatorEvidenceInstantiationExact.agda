@@ -5,14 +5,16 @@ open import DASHI.Core.Prelude
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Governance.BoloBoloComparatorEvidenceAtlasExact as Atlas
 import DASHI.Governance.BoloBoloOWSSpokesInterruptedTransitionExact as Spokes
+import DASHI.Governance.BoloBoloOWSSpokesRateShiftExact as SpokesShift
 import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact as Polycentric
+import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as NetworkEvidence
 import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as Frontier
 
 ------------------------------------------------------------------------
 -- COMPARATOR-EVIDENCE CAPSTONE.
 --
 -- Kept separate from the older Occupy evidence ledger because these sources
--- have independent provenance, domains and outcome definitions.  They inform
+-- have independent provenance, domains and outcome definitions. They inform
 -- model-family plausibility and measurement design without becoming replicas
 -- of OWS, p.m. or each other.
 ------------------------------------------------------------------------
@@ -25,7 +27,10 @@ record BoloComparatorEvidenceInstantiation : Set where
     owsSpokesWindow : Spokes.InterruptedTransitionWindow
     owsSpokesMechanisms : Spokes.SpokesMechanismObservations
     owsSpokesBoundary : Spokes.OWSSpokesTransitionBoundary
+    owsSpokesRateShiftRows : List SpokesShift.RateShiftRow
+    owsSpokesRateShiftBoundary : SpokesShift.RateShiftBoundary
     polycentricSynthesis : Polycentric.PolycentricEvidenceSynthesis
+    organizationalNetworkBoundary : NetworkEvidence.OrganizationalNetworkEvidenceBoundary
     structuralCoordinates : Frontier.ComparatorStructuralCoordinates
     workloadCoordinates : Frontier.ComparatorWorkloadCoordinates
     primitiveFrontier : Frontier.PrimitiveCalibrationFrontier
@@ -41,7 +46,10 @@ canonicalBoloComparatorEvidenceInstantiation = record
   ; owsSpokesWindow = Spokes.canonicalTransitionWindow
   ; owsSpokesMechanisms = Spokes.canonicalSpokesMechanismObservations
   ; owsSpokesBoundary = Spokes.canonicalOWSSpokesTransitionBoundary
+  ; owsSpokesRateShiftRows = SpokesShift.canonicalRateShiftRows
+  ; owsSpokesRateShiftBoundary = SpokesShift.canonicalRateShiftBoundary
   ; polycentricSynthesis = Polycentric.canonicalPolycentricEvidenceSynthesis
+  ; organizationalNetworkBoundary = NetworkEvidence.canonicalOrganizationalNetworkEvidenceBoundary
   ; structuralCoordinates = Frontier.canonicalComparatorStructuralCoordinates
   ; workloadCoordinates = Frontier.canonicalComparatorWorkloadCoordinates
   ; primitiveFrontier = Frontier.canonicalPrimitiveCalibrationFrontier
@@ -55,7 +63,9 @@ record ComparatorEvidenceInstantiationBoundary : Set where
     independentComparatorProvenancePreserved : Bool
     sameContextOWSStructuralTransitionPaid : Bool
     mixedSpokesMechanismEvidencePaid : Bool
+    normalizedSpokesTransitionCheckPaid : Bool
     crossDomainPolycentricComparativeEvidencePaid : Bool
+    taskContingentNetworkEvidencePaid : Bool
     largeUrbanNestedParticipationComparatorPaid : Bool
     durableFederatedCooperativeComparatorPaid : Bool
     comparatorGovernanceCadenceCoordinatesPaid : Bool
@@ -68,7 +78,7 @@ open ComparatorEvidenceInstantiationBoundary public
 canonicalComparatorEvidenceInstantiationBoundary : ComparatorEvidenceInstantiationBoundary
 canonicalComparatorEvidenceInstantiationBoundary =
   comparatorEvidenceInstantiationBoundary
-    true true true true true true true false false false
+    true true true true true true true true true false false false
 
 canonicalBoloComparatorEvidenceInstantiationReceipt : GenericReceipt.GenericReceipt
 canonicalBoloComparatorEvidenceInstantiationReceipt =
@@ -76,6 +86,6 @@ canonicalBoloComparatorEvidenceInstantiationReceipt =
     "bolo'bolo comparator evidence instantiation capstone"
     "DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact"
     "canonicalBoloComparatorEvidenceInstantiation / canonicalComparatorEvidenceInstantiationBoundary"
-    "assembles independently attributed comparator evidence for the OWS GA-to-Spokes transition, Porto Alegre nested participatory budgeting, Mondragon multi-level cooperative governance and comparative/systematic polycentric-governance evidence, including source-explicit scale and cadence coordinates"
+    "assembles independently attributed comparator evidence for the OWS GA-to-Spokes transition, its normalized development-only lexical transition check, Porto Alegre nested participatory budgeting, Mondragon multi-level cooperative governance, comparative/systematic polycentric-governance evidence and task-contingent organizational-network experiments, including source-explicit scale and cadence coordinates"
     "the underlying November 2011 Spokes minutes remain unmaterialised and none of the comparator observations supplies a target-qualified primitive bolo cost/weight bound or political-superiority claim; comparator evidence constrains mechanism plausibility and admissible model design only until explicit transport or direct target measurement is paid"
     "agda -i . DASHI/Governance/BoloBoloComparatorEvidenceInstantiationRegression.agda"
