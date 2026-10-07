@@ -13,7 +13,7 @@ import DASHI.Governance.OccupyLibraryMeetingDurationEvidenceExact as Duration
 --
 -- This owner does not estimate a causal effect. It specializes the repo's
 -- generic robustness / experiment-design frontier to the archival governance
--- problem exposed by the People's Library minutes.
+-- problem exposed by the meeting-level process panel.
 ------------------------------------------------------------------------
 
 data OptionalNat : Set where
@@ -37,189 +37,92 @@ record MeetingMeasurement : Set where
 
 open MeetingMeasurement public
 
-------------------------------------------------------------------------
--- Observable / control vocabulary.
-------------------------------------------------------------------------
-
 data BurdenOutcome : Set where
-  totalMeetingDuration : BurdenOutcome
-  mediationTime : BurdenOutcome
-  tabledAgendaItems : BurdenOutcome
-  unresolvedAgendaItems : BurdenOutcome
-  processInterruptions : BurdenOutcome
-  explicitConflictFlag : BurdenOutcome
-
+  totalMeetingDuration mediationTime tabledAgendaItems unresolvedAgendaItems processInterruptions explicitConflictFlag : BurdenOutcome
 
 data RequiredControl : Set where
-  participantCountControl : RequiredControl
-  issueCountControl : RequiredControl
-  meetingTypeControl : RequiredControl
-  externalShockControl : RequiredControl
-  sourceCompletenessControl : RequiredControl
-  repeatedParticipantControl : RequiredControl
+  participantCountControl issueCountControl meetingTypeControl externalShockControl sourceCompletenessControl repeatedParticipantControl sourceRegimeControl : RequiredControl
 
 record CoordinationBurdenMeasurementRequirements : Set where
   constructor coordinationBurdenMeasurementRequirements
   field
-    requiresIncidenceMeasurement : Bool
-    requiresMeetingDuration : Bool
-    requiresMediationTime : Bool
-    requiresTabledItemCount : Bool
-    requiresDecisionCount : Bool
-    requiresParticipantCountControl : Bool
-    requiresIssueCountControl : Bool
-    requiresMeetingTypeControl : Bool
-    requiresExternalShockControl : Bool
-    requiresSourceCompletenessAudit : Bool
-    requiresRepeatedParticipantHandling : Bool
-
+    requiresIncidenceMeasurement requiresMeetingDuration requiresMediationTime requiresTabledItemCount requiresDecisionCount requiresParticipantCountControl requiresIssueCountControl requiresMeetingTypeControl requiresExternalShockControl requiresSourceCompletenessAudit requiresRepeatedParticipantHandling requiresSourceRegimeControl : Bool
 open CoordinationBurdenMeasurementRequirements public
 
 canonicalMeasurementRequirements : CoordinationBurdenMeasurementRequirements
-canonicalMeasurementRequirements =
-  coordinationBurdenMeasurementRequirements
-    true true true true true true true true true true true
-
-------------------------------------------------------------------------
--- Existing archival packet expressed at the measurement interface.
---
--- Only measurements actually paid by the current archive are populated.
--- Qualitative phrases such as "majority of our time" are not converted to
--- invented minutes.
-------------------------------------------------------------------------
+canonicalMeasurementRequirements = coordinationBurdenMeasurementRequirements true true true true true true true true true true true true
 
 oct15CurrentMeasurement : MeetingMeasurement
 oct15CurrentMeasurement =
-  meetingMeasurement
-    "People's Library first formal Working Group meeting 2011-10-15"
+  meetingMeasurement "People's Library first formal Working Group meeting 2011-10-15"
     (Duration.sourceURL Duration.oct15FirstFormalMeeting)
-    unmeasured
-    unmeasured
-    unmeasured
-    (measured 180)
-    unmeasured
-    unmeasured
-    unmeasured
-    unmeasured
-    false
+    unmeasured unmeasured unmeasured (measured 180) unmeasured unmeasured unmeasured unmeasured false
 
 oct22CurrentMeasurement : MeetingMeasurement
 oct22CurrentMeasurement =
-  meetingMeasurement
-    "People's Library Working Group 2011-10-22"
+  meetingMeasurement "People's Library Working Group 2011-10-22"
     (Duration.sourceURL Duration.oct22Meeting)
-    (measured 18)
-    unmeasured
-    unmeasured
-    (measured 155)
-    unmeasured
-    unmeasured
-    unmeasured
-    unmeasured
-    false
+    (measured 18) unmeasured unmeasured (measured 155) unmeasured unmeasured unmeasured unmeasured false
 
 nov28CurrentMeasurement : MeetingMeasurement
 nov28CurrentMeasurement =
-  meetingMeasurement
-    "People's Library Working Group 2011-11-28"
-    Archive.minutesIndexURL
-    (measured 7)
-    (measured 19)
-    (measured 5)
-    unmeasured
-    unmeasured
-    unmeasured
-    unmeasured
-    unmeasured
-    false
+  meetingMeasurement "People's Library Working Group 2011-11-28" Archive.minutesIndexURL
+    (measured 7) (measured 19) (measured 5) unmeasured unmeasured unmeasured unmeasured unmeasured false
 
 dec04CurrentMeasurement : MeetingMeasurement
 dec04CurrentMeasurement =
-  meetingMeasurement
-    "People's Library Working Group 2011-12-04"
-    Archive.minutesIndexURL
-    unmeasured
-    unmeasured
-    unmeasured
-    unmeasured
-    unmeasured
-    (measured 10)
-    unmeasured
-    unmeasured
-    false
+  meetingMeasurement "People's Library Working Group 2011-12-04" Archive.minutesIndexURL
+    unmeasured unmeasured unmeasured unmeasured unmeasured (measured 10) unmeasured unmeasured false
 
 ------------------------------------------------------------------------
--- Candidate experiments are framed using the repo-generic ExperimentDesign
--- carrier. The score is only a prioritization heuristic for evidence
--- acquisition; it is not a scientific result or authority.
+-- CURRENT ACQUISITION FRONTIER AFTER CORPUS MATERIALISATION.
+--
+-- Materialising OccupyFiles and freezing the holdout are paid and therefore
+-- removed from the active acquisition queue. Named-person reconstruction is
+-- not an objective. The remaining work targets meeting-level observables and
+-- documentary/source-regime controls.
 ------------------------------------------------------------------------
 
 data EvidenceAcquisitionExperiment : Set where
-  materialiseKinnaPrichardCorpus : EvidenceAcquisitionExperiment
-  extractMoreNamedMeetingEdges : EvidenceAcquisitionExperiment
-  recoverMeetingStartEndTimes : EvidenceAcquisitionExperiment
+  recoverMoreMeetingDurations : EvidenceAcquisitionExperiment
   recoverMediationDurations : EvidenceAcquisitionExperiment
-  countTabledAndDecidedItems : EvidenceAcquisitionExperiment
-  buildHeldOutMeetingSet : EvidenceAcquisitionExperiment
+  countResolvedTabledAndUnresolvedItems : EvidenceAcquisitionExperiment
+  auditDocumentaryCompleteness : EvidenceAcquisitionExperiment
+  expandSourceRegimeControls : EvidenceAcquisitionExperiment
+  extractMorePseudonymousNetworkFeaturesWherePaid : EvidenceAcquisitionExperiment
+  acquireFreshDevelopmentRowsBeforeHoldout : EvidenceAcquisitionExperiment
 
 acquisitionPriority : EvidenceAcquisitionExperiment → Nat
-acquisitionPriority materialiseKinnaPrichardCorpus = 6
-acquisitionPriority extractMoreNamedMeetingEdges = 5
-acquisitionPriority recoverMeetingStartEndTimes = 5
-acquisitionPriority recoverMediationDurations = 5
-acquisitionPriority countTabledAndDecidedItems = 4
-acquisitionPriority buildHeldOutMeetingSet = 6
+acquisitionPriority recoverMoreMeetingDurations = 6
+acquisitionPriority recoverMediationDurations = 6
+acquisitionPriority countResolvedTabledAndUnresolvedItems = 5
+acquisitionPriority auditDocumentaryCompleteness = 6
+acquisitionPriority expandSourceRegimeControls = 5
+acquisitionPriority extractMorePseudonymousNetworkFeaturesWherePaid = 3
+acquisitionPriority acquireFreshDevelopmentRowsBeforeHoldout = 6
 
 PreferredAcquisition : EvidenceAcquisitionExperiment → EvidenceAcquisitionExperiment → Set
 PreferredAcquisition left right = acquisitionPriority right ≤ acquisitionPriority left
 
 canonicalAcquisitionDesign : Robust.ExperimentDesign EvidenceAcquisitionExperiment Nat
-canonicalAcquisitionDesign =
-  Robust.experimentDesign acquisitionPriority PreferredAcquisition ⊤
-
-------------------------------------------------------------------------
--- Promotion boundary.
-------------------------------------------------------------------------
+canonicalAcquisitionDesign = Robust.experimentDesign acquisitionPriority PreferredAcquisition ⊤
 
 record CoordinationBurdenExperimentBoundary : Set where
   constructor coordinationBurdenExperimentBoundary
   field
-    archivalCooccurrenceIdentifiesCausalEffect : Bool
-    observedEdgeCountIsCoordinationCost : Bool
-    qualitativeMajorityTimeIsNumericMinutes : Bool
-    selectedMeetingFamilyIsRandomSample : Bool
-    sourceCompletenessAssumed : Bool
-    experimentDesignAloneCreatesEvidence : Bool
-    empiricalCoordinationCostFunctionalPaid : Bool
-    quantitativeIncidenceBurdenRelationshipPaid : Bool
-
-    participantAndIssueControlsRequired : Bool
-    sourceCompletenessAuditRequired : Bool
-    modelDiscrepancyMustRemainExplicit : Bool
-    quantitativeIdentifiabilityRequired : Bool
-    heldOutMeetingValidationRequired : Bool
-
+    archivalCooccurrenceIdentifiesCausalEffect observedEdgeCountIsCoordinationCost qualitativeMajorityTimeIsNumericMinutes selectedMeetingFamilyIsRandomSample sourceCompletenessAssumed experimentDesignAloneCreatesEvidence empiricalCoordinationCostFunctionalPaid quantitativeIncidenceBurdenRelationshipPaid completeNamedParticipantMatrixRequired : Bool
+    participantAndIssueControlsRequired sourceCompletenessAuditRequired sourceRegimeControlRequired modelDiscrepancyMustRemainExplicit quantitativeIdentifiabilityRequired heldOutMeetingValidationRequired : Bool
 open CoordinationBurdenExperimentBoundary public
 
 canonicalExperimentBoundary : CoordinationBurdenExperimentBoundary
 canonicalExperimentBoundary =
   coordinationBurdenExperimentBoundary
-    false false false false false false false false
-    true true true true true
-
-------------------------------------------------------------------------
--- Generic robustness frontier is retained rather than redefined.
-------------------------------------------------------------------------
+    false false false false false false false false false
+    true true true true true true
 
 robustnessObligations : List Robust.RobustnessObligation
 robustnessObligations =
-  Robust.modelDiscrepancy
-  ∷ Robust.vectorStateParameterControl
-  ∷ Robust.correlatedUncertainty
-  ∷ Robust.experimentDesign
-  ∷ Robust.quantitativeLocalIdentifiability
-  ∷ Robust.heldOutRepairValidation
-  ∷ []
+  Robust.modelDiscrepancy ∷ Robust.vectorStateParameterControl ∷ Robust.correlatedUncertainty ∷ Robust.experimentDesign ∷ Robust.quantitativeLocalIdentifiability ∷ Robust.heldOutRepairValidation ∷ []
 
 canonicalOccupyCoordinationBurdenExperimentReceipt : GenericReceipt.GenericReceipt
 canonicalOccupyCoordinationBurdenExperimentReceipt =
@@ -227,6 +130,6 @@ canonicalOccupyCoordinationBurdenExperimentReceipt =
     "Occupy coordination-burden experiment-design frontier"
     "DASHI.Governance.OccupyCoordinationBurdenExperimentDesignExact"
     "canonicalExperimentBoundary"
-    "specializes the existing robust experiment-inference frontier; source-paid measurements now include 180 minutes for the first formal 15 October meeting, 155 minutes plus eighteen admitted incidence rows for 22 October, seven admitted Nov-28 rows with nineteen named attendees and five listed agenda items, and ten Dec-04 agenda items explicitly tabled because of mediation"
-    "mediation duration and many controls remain unmeasured; measured meeting duration is not coordination cost, archival co-occurrence is descriptive only, and no causal incidence-to-burden relationship is paid"
+    "reuses the robust experiment-inference frontier and recuts the active acquisition programme after corpus materialisation toward additional duration/mediation/outcome coordinates, documentary-completeness auditing, source-regime controls and fresh development evidence; named-person reconstruction is not an objective"
+    "current development diagnostics do not justify opening the protected holdout; meeting duration is not coordination cost, archival co-occurrence is descriptive only, source regime and missingness remain explicit, and no quantitative or causal incidence-to-burden relationship is paid"
     "agda -i . DASHI/Governance/OccupyCoordinationBurdenExperimentDesignRegression.agda"
