@@ -11,7 +11,7 @@ componentBoundsCompile :
 componentBoundsCompile = refl
 
 syntheticComponentUpperPinned :
-  Compiler.nestedComponentOverheadUpper Compiler.syntheticNestedComponentBounds ≡ 30
+  Compiler.nestedComponentOverheadUpper Compiler.syntheticNestedComponentBounds ≡ 0
 syntheticComponentUpperPinned = refl
 
 syntheticRobustWinPaid :
