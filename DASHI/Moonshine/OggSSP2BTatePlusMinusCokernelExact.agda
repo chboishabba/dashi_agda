@@ -30,7 +30,7 @@ module DASHI.Moonshine.OggSSP2BTatePlusMinusCokernelExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; _+_; _-_)
 
 minusReductionDimension : Nat
 minusReductionDimension = 98304
