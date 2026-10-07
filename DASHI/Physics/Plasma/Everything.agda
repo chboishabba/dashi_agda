@@ -43,6 +43,10 @@ import DASHI.Physics.Plasma.TriadicPhaseConjugationControlExact
 import DASHI.Physics.Plasma.ToroidalConstantMagnitudeABCMaxCutExact
 import DASHI.Physics.Plasma.ToroidalConstantMagnitudeHybridABCExact
 import DASHI.Physics.Plasma.ToroidalGeodesicMagnetGeometrySearchExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceAdmissibleConeSearchExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceContinuationExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceGeometryParetoExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceAdmissibleSearchMaxCutExact
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
