@@ -1,10 +1,12 @@
-name: CMP119 cosmology preferred source overlay U
+name: CMP119 cosmology preferred source overlay V
 
 on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityExact.agda'
       - 'DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda'
       - 'DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Exact.agda'
@@ -25,6 +27,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda'
       - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UTest.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261007VExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261007VTest.agda'
       - '.github/workflows/cmp119-cosmology-preferred-source-overlay-t.yml'
   workflow_dispatch:
 
@@ -32,7 +36,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: cmp119-cosmology-preferred-source-overlay-u-${{ github.ref }}
+  group: cmp119-cosmology-preferred-source-overlay-v-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -51,7 +55,7 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Restore cache
         uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Typecheck overlay U source-construction frontier
+      - name: Typecheck overlay V source-construction frontier
         shell: bash
         run: |
           nix develop --accept-flake-config --command bash -lc '
@@ -59,6 +63,8 @@ jobs:
             for f in \
               DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityExact.agda \
               DASHI/Physics/YangMills/BalabanBackgroundMinimizerSymmetryNaturalityTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyP2RenormalizedHilbertWardAuthorityTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyP3DistinctF2MarkedSourceSameCarrierTest.agda \
               DASHI/Physics/YangMills/YangMillsSourceFirstCurvatureChoiceRound523Exact.agda \
@@ -78,7 +84,9 @@ jobs:
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TExact.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005TTest.agda \
               DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UExact.agda \
-              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UTest.agda
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261005UTest.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261007VExact.agda \
+              DASHI/Physics/Foundations/CMP119CosmologyPreferredSourcePhysicsMaxCut20261007VTest.agda
             do
               agda -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library "$f"
             done
