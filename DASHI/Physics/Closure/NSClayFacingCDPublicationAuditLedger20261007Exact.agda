@@ -3,22 +3,27 @@ module DASHI.Physics.Closure.NSClayFacingCDPublicationAuditLedger20261007Exact w
 ------------------------------------------------------------------------
 -- CLAY-FACING C/D / PUBLICATION AND REPRODUCIBILITY AUDIT LEDGER / 2026-10-07
 --
--- This is an attribution-preserving audit owner, not a new Navier--Stokes proof.
--- It separates what is already source/theorem-statement audited from what still
--- requires an independently witnessed build/referee reproduction.
+-- Attribution-preserving audit owner; not a new Navier--Stokes proof.
 --
--- Source authority:
---   * official C/D coordinate audit: existing DASHI source-audit theorem;
---   * current released Lean head: f9e8bc5b38b6e212696e8a30e3e91517af887bbd;
---   * current statements stable relative to the originally audited release;
---   * current formalization metadata reports both comparator declarations
---     proved with sorry_count 0.
+-- In addition to the already-closed official statement-coordinate audit, the
+-- current released Lean dependency routes were inspected at
+-- f9e8bc5b38b6e212696e8a30e3e91517af887bbd:
 --
--- Not claimed here:
---   * an independently witnessed kernel build in this DASHI execution;
---   * a conventional independent line-by-line reconstruction;
---   * an independent referee reproduction;
---   * CMI adjudication or award.
+-- C:
+--   R3.ComparatorBridge.globalSolutionOfComparator preserves nu, force, zero
+--   datum, equation, divergence and bounded-energy class; comparator_of_breakdown
+--   feeds that same competitor into the theorem_1_1 global exclusion.
+--
+-- D:
+--   PeriodicComparatorSolution.periodicPaperSolution_of_comparator preserves
+--   nu, force, time, zero datum, equation and BOTH velocity/pressure periodicity;
+--   PeriodicViscosity.excludes_global_solution uses finite-slab classical
+--   uniqueness with the same positive viscosity/force/datum and contradicts
+--   the candidate's unbounded speed at time one.
+--
+-- Thus these are now SOURCE-DEPENDENCY AUDITS.  They remain distinct from an
+-- independently witnessed kernel build, independent reconstruction, referee
+-- reproduction, or CMI adjudication.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -52,8 +57,7 @@ independentRefereeReproductionClosed : Bool
 independentRefereeReproductionClosed = false
 
 ------------------------------------------------------------------------
--- C: exact statement-coordinate audit.  These booleans are routed from the
--- existing source receipts; they do not assert DASHI authorship of the proof.
+-- C: statement-coordinate + released dependency-route audit.
 ------------------------------------------------------------------------
 
 cStatementCoordinateAuditClosed : Bool
@@ -91,21 +95,28 @@ cNoGlobalSmoothSolutionAudited : Bool
 cNoGlobalSmoothSolutionAudited =
   Source.noGlobalSmoothSolutionC Source.releasedClayCSourceReceipt
 
--- Same-nu/same-data/same-force and uniqueness/finite-time obstruction are proof
--- dependency audits, not merely statement coordinates.  They remain separate
--- until independently reconstructed/reviewed rather than being inferred from a
--- theorem-name receipt.
+-- Current R3 bridge explicitly preserves the selected nu, prescribed force and
+-- zero datum when a comparator solution is converted into a
+-- GlobalFiniteEnergySolution.
 cSameNuSameDataSameForceDependencyAuditClosed : Bool
-cSameNuSameDataSameForceDependencyAuditClosed = false
+cSameNuSameDataSameForceDependencyAuditClosed = true
 
-cBoundedEnergyUniquenessDependencyAuditClosed : Bool
-cBoundedEnergyUniquenessDependencyAuditClosed = false
+-- globalSolutionOfComparator reconstructs the exact equation/divergence and
+-- the comparator's uniformly bounded kinetic-energy condition on the paper's
+-- GlobalFiniteEnergySolution structure.
+cBoundedEnergyClassBridgeAuditClosed : Bool
+cBoundedEnergyClassBridgeAuditClosed = true
 
-cFiniteTimeObstructionDependencyAuditClosed : Bool
-cFiniteTimeObstructionDependencyAuditClosed = false
+-- theorem_1_1 produces CandidateProperties together with
+-- ¬ Nonempty (GlobalFiniteEnergySolution nu f) for that same force.
+cGlobalExclusionDependencyAuditClosed : Bool
+cGlobalExclusionDependencyAuditClosed = true
+
+cReleasedDependencyRouteSourceAudited : Bool
+cReleasedDependencyRouteSourceAudited = true
 
 ------------------------------------------------------------------------
--- D: exact statement-coordinate audit.
+-- D: statement-coordinate + released dependency-route audit.
 ------------------------------------------------------------------------
 
 dStatementCoordinateAuditClosed : Bool
@@ -147,20 +158,33 @@ dNoGlobalSmoothSolutionAudited : Bool
 dNoGlobalSmoothSolutionAudited =
   Source.noGlobalSmoothSolutionD Source.releasedClayDSourceReceipt
 
+-- PeriodicPaperComparator and PeriodicComparatorSolution explicitly preserve
+-- the selected positive viscosity, same force, zero datum and time variable.
 dSameDataSameForceSameViscosityDependencyAuditClosed : Bool
-dSameDataSameForceSameViscosityDependencyAuditClosed = false
+dSameDataSameForceSameViscosityDependencyAuditClosed = true
 
+-- PeriodicViscosity.excludes_global_solution calls
+-- PeriodicViscosityUniqueness.classical_uniqueness_on_Icc on each t<1 slab.
 dFiniteSlabUniquenessDependencyAuditClosed : Bool
-dFiniteSlabUniquenessDependencyAuditClosed = false
+dFiniteSlabUniquenessDependencyAuditClosed = true
 
+-- CandidateProperties carries SpeedUnboundedAtOne and excludes a continuous
+-- global extension by the finite-slab identification above.
 dFiniteTimeUnboundednessDependencyAuditClosed : Bool
-dFiniteTimeUnboundednessDependencyAuditClosed = false
+dFiniteTimeUnboundednessDependencyAuditClosed = true
 
-dHypotheticalGlobalBoundednessDependencyAuditClosed : Bool
-dHypotheticalGlobalBoundednessDependencyAuditClosed = false
+-- A hypothetical comparator global solution is converted to a global smooth
+-- periodic paper solution before applying the exclusion theorem.
+dHypotheticalGlobalCompetitorBridgeAuditClosed : Bool
+dHypotheticalGlobalCompetitorBridgeAuditClosed = true
 
+-- periodicPaperSolution_of_comparator copies the comparator pressure periodicity
+-- field explicitly, not merely velocity periodicity.
 dPeriodicPressureDependencyAuditClosed : Bool
-dPeriodicPressureDependencyAuditClosed = false
+dPeriodicPressureDependencyAuditClosed = true
+
+dReleasedDependencyRouteSourceAudited : Bool
+dReleasedDependencyRouteSourceAudited = true
 
 ------------------------------------------------------------------------
 -- Publication/adjudication boundary.
@@ -182,6 +206,14 @@ cStatementCoordinateAuditClosedIsTrue = refl
 dStatementCoordinateAuditClosedIsTrue : dStatementCoordinateAuditClosed ≡ true
 dStatementCoordinateAuditClosedIsTrue = refl
 
+cReleasedDependencyRouteSourceAuditedIsTrue :
+  cReleasedDependencyRouteSourceAudited ≡ true
+cReleasedDependencyRouteSourceAuditedIsTrue = refl
+
+dReleasedDependencyRouteSourceAuditedIsTrue :
+  dReleasedDependencyRouteSourceAudited ≡ true
+dReleasedDependencyRouteSourceAuditedIsTrue = refl
+
 currentReleasedHeadPinnedForAuditIsTrue : currentReleasedHeadPinnedForAudit ≡ true
 currentReleasedHeadPinnedForAuditIsTrue = refl
 
@@ -190,6 +222,10 @@ currentMetadataNoSorryAuditClosedIsTrue = refl
 
 independentKernelBuildWitnessedHereIsFalse : independentKernelBuildWitnessedHere ≡ false
 independentKernelBuildWitnessedHereIsFalse = refl
+
+conventionalIndependentReconstructionClosedIsFalse :
+  conventionalIndependentReconstructionClosed ≡ false
+conventionalIndependentReconstructionClosedIsFalse = refl
 
 independentRefereeReproductionClosedIsFalse : independentRefereeReproductionClosed ≡ false
 independentRefereeReproductionClosedIsFalse = refl
