@@ -64,7 +64,7 @@ oct22Edges =
 
 nov20Edges : List LongitudinalEdge
 nov20Edges =
-  longitudinalEdge nov20Meeting Privacy.p-232026 "legal representation / Norman Siegel" minutesIndexURL
+  longitudinalEdge nov20Meeting Privacy.p-232026 "legal representation / external counsel" minutesIndexURL
   ∷ longitudinalEdge nov20Meeting Privacy.p-aeedd2 "meeting-location communication failure" minutesIndexURL
   ∷ longitudinalEdge nov20Meeting Privacy.p-aeedd2 "occupied office allocation" minutesIndexURL
   ∷ longitudinalEdge nov20Meeting Privacy.p-fc55c2 "recovered books / evidence handling" minutesIndexURL
