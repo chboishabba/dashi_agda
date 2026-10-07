@@ -1,0 +1,31 @@
+module DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloLinearCalibrationBoundCompilerExact as Compiler
+import DASHI.Governance.BoloBoloRobustCostBoundsExact as Robust
+import DASHI.Governance.BoloBoloPracticalSignificanceExact as Significance
+
+syntheticRemovedLowerPinned :
+  Compiler.removedCostLower Compiler.syntheticLinearCalibrationBounds ≡ 3
+syntheticRemovedLowerPinned = refl
+
+syntheticOverheadUpperPinned :
+  Compiler.federationOverheadUpper Compiler.syntheticLinearCalibrationBounds ≡ 0
+syntheticOverheadUpperPinned = refl
+
+syntheticStrictWinPaid :
+  Robust.StrictOrderImprovement Compiler.syntheticLinearBoundModel
+syntheticStrictWinPaid = Compiler.syntheticLinearStrictImprovement
+
+syntheticMeaningfulWinPaid :
+  Significance.MeaningfulOrderImprovement 1 Compiler.syntheticLinearBoundModel
+syntheticMeaningfulWinPaid = Compiler.syntheticLinearMeaningfulImprovement
+
+weightsRemainCalibrationInputs :
+  Compiler.weightBoundsQuotedFromBoloBolo Compiler.canonicalLinearCalibrationCompilerBoundary ≡ false
+weightsRemainCalibrationInputs = refl
+
+lexicalCountsNotSemanticCosts :
+  Compiler.owsLexicalCountsAutomaticallyBecomeEventCounts Compiler.canonicalLinearCalibrationCompilerBoundary ≡ false
+lexicalCountsNotSemanticCosts = refl
