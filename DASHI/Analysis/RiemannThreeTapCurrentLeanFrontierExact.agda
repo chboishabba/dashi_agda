@@ -12,9 +12,19 @@ open import Agda.Builtin.String using (String)
 -- Lean repository:
 --   chboishabba/dashi_lean4
 -- Lean branch:
---   agent/rh-marked-cluster-target-reflection
+--   agent/rh-postmerge-maxcut-20261007
 -- Donor head at refresh:
---   bc1d67a09e7de828ac877e354d671d4c0b80b8c8
+--   f4fcbd410949d0323d47b75f5103a46a2be79a6e
+--
+-- Post-merge A2 audit:
+--   * compensationTargetThreshold is explicitly
+--       4*combinedZeroHeightDefect + integral signedOrdinateTest*mu;
+--     no abstract high-ordinate contradiction proposition is hidden there;
+--   * positive local debt is exactly split into vertical/count/sixth/eighth
+--     coordinates;
+--   * selected dominant M6 allowance leaves strict positive headroom on every
+--     strength-floor witness;
+--   * the remaining scalar itself is still unpaid.
 --
 -- A1 paid/source-written in Lean:
 --   * finite half-height O(log t/t) budget and exact q^-2 pair decay;
@@ -28,23 +38,15 @@ open import Agda.Builtin.String using (String)
 --   * fixed-width witness / compact-alpha uniform curvature;
 --   * translated gamma+pole gain versus local slack.
 --
--- A2 paid/source-written in Lean:
---   * correct-polarity V4/H4 lower fourth-angular compiler and same-object
---     upper source bound;
---   * selected witness -(3/20)pi^6 <= M6_signed < 0;
---   * selected M6 cap strictly beats the dominant quartic target coefficient;
---   * exact local scalar = positive debt - smooth-mu gain;
---   * the canonical smooth-mu gain is strictly positive for t>=200.
--- A2 still open:
---   * lower-order local debt + signed FarExact
---       < compensationTargetThreshold + smooth-mu gain.
---
 -- Route B paid/source-written in Lean:
 --   * exact G_n = Credit-Debt+OuterBudget-3eps;
 --   * exact direct form G_n = physicalCapInterior+OuterBudget-3eps;
---   * eventual G_n>=0 compiles to the signed-fifth interior target.
+--   * direct eventual gap + boundary decay + outer convergence compiles to the
+--     existing SignedFifthAnalyticInput.
 -- Route B still open:
---   * eventual nonnegativity of that exact scalar.
+--   * eventual nonnegativity of the exact signed scalar;
+--   * selected-witness upper-boundary decay;
+--   * selected-witness outer-terminal convergence.
 --
 -- No exact-head Lean kernel receipt and no RH claim are made here.
 ------------------------------------------------------------------------
@@ -67,16 +69,22 @@ record ThreeTapCurrentLeanFrontier : Set where
     a2DominantCoefficientPaid : Bool
     a2DebtMinusMuGainNormalFormSourceWritten : Bool
     a2CanonicalMuGainPositiveSourceWritten : Bool
+    a2ThresholdProvenanceExplicit : Bool
+    a2FourDebtDecompositionSourceWritten : Bool
+    a2DominantHeadroomPositiveSourceWritten : Bool
 
     routeBExactGapSourceWritten : Bool
     routeBDirectCapGapSourceWritten : Bool
     routeBTerminalCompilerSourceWritten : Bool
+    routeBFullAuxiliaryCompilerSourceWritten : Bool
 
     a1CarrierSummationPaid : Bool
     a1UniformCurvaturePaid : Bool
     a1CompensationPaid : Bool
     a2StrictScalarPaid : Bool
     routeBEventualGapPaid : Bool
+    routeBBoundaryDecayPaid : Bool
+    routeBOuterConvergencePaid : Bool
     exactHeadLeanKernelReceipt : Bool
     rhDerivedHere : Bool
 
@@ -91,16 +99,22 @@ record ThreeTapCurrentLeanFrontier : Set where
     a2LeadingSignPaid : a2DominantCoefficientPaid ≡ true
     a2NormalFormPaid : a2DebtMinusMuGainNormalFormSourceWritten ≡ true
     a2MuGainPaid : a2CanonicalMuGainPositiveSourceWritten ≡ true
+    a2ThresholdAuditPaid : a2ThresholdProvenanceExplicit ≡ true
+    a2FourDebtSplitPaid : a2FourDebtDecompositionSourceWritten ≡ true
+    a2HeadroomPaid : a2DominantHeadroomPositiveSourceWritten ≡ true
 
     routeBGapPaid : routeBExactGapSourceWritten ≡ true
     routeBDirectPaid : routeBDirectCapGapSourceWritten ≡ true
     routeBCompilerPaid : routeBTerminalCompilerSourceWritten ≡ true
+    routeBHonestAuxCompilerPaid : routeBFullAuxiliaryCompilerSourceWritten ≡ true
 
     a1CarrierStillOpen : a1CarrierSummationPaid ≡ false
     a1CurvatureStillOpen : a1UniformCurvaturePaid ≡ false
     a1CompensationStillOpen : a1CompensationPaid ≡ false
     a2ScalarStillOpen : a2StrictScalarPaid ≡ false
-    routeBStillOpen : routeBEventualGapPaid ≡ false
+    routeBSignStillOpen : routeBEventualGapPaid ≡ false
+    routeBBoundaryStillOpen : routeBBoundaryDecayPaid ≡ false
+    routeBOuterLimitStillOpen : routeBOuterConvergencePaid ≡ false
     kernelReceiptStillOpen : exactHeadLeanKernelReceipt ≡ false
     rhStillOpen : rhDerivedHere ≡ false
 
@@ -114,33 +128,43 @@ currentThreeTapCurrentLeanFrontier : ThreeTapCurrentLeanFrontier
 currentThreeTapCurrentLeanFrontier =
   three-tap-current-lean-frontier
     "chboishabba/dashi_lean4"
-    "agent/rh-marked-cluster-target-reflection"
-    "bc1d67a09e7de828ac877e354d671d4c0b80b8c8"
+    "agent/rh-postmerge-maxcut-20261007"
+    "f4fcbd410949d0323d47b75f5103a46a2be79a6e"
 
     true true true true true
-    true true true true true
-    true true true
+    true true true true true true true true
+    true true true true
 
-    false false false false false false false
+    false false false false false false false false false
 
     refl refl refl refl refl
-    refl refl refl refl refl
-    refl refl refl
-    refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl
+    refl refl refl refl
+    refl refl refl refl refl refl refl refl refl
 
-    "A2: prove or refute localPositiveDebt + signed FarExact < compensationTargetThreshold + positive smooth-mu gain. A1: finish countable chart-to-shell summation, then uniform curvature and compensation. B: prove eventual signedFifthCorrelationGapAt >= 0 directly or through credit/debt bounds."
-    "Lean owns all real analysis. Agda mirrors source-written provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 strict scalar, Route-B sign, kernel receipt, or RH."
-    "Route B remains independent; cancellation may be estimated directly through physicalCapInterior rather than forcing separate credit/debt estimates."
+    "A2: prove or refute verticalDebt+countDebt+sixthDebt+eighthDebt+signed FarExact < explicit compensationTargetThreshold+positive smooth-mu gain. A1: finish countable chart-to-shell summation, then uniform curvature and compensation. B: pay boundary decay and outer convergence and prove eventual signedFifthCorrelationGapAt >= 0."
+    "Lean owns all real analysis. Agda mirrors source-written provenance/status only and must not manufacture A1 shell summation, curvature, compensation, A2 strict scalar, Route-B sign/limits, kernel receipt, or RH."
+    "Route B's eventual gap is the only genuinely signed inequality, but boundary decay and outer-terminal convergence remain independent selected-witness obligations until Lean discharges them."
 
 a2DominantCoefficientIsPaid :
   ThreeTapCurrentLeanFrontier.a2DominantCoefficientPaid
     currentThreeTapCurrentLeanFrontier ≡ true
 a2DominantCoefficientIsPaid = refl
 
-a2MuGainIsPositiveSourceWritten :
-  ThreeTapCurrentLeanFrontier.a2CanonicalMuGainPositiveSourceWritten
+a2ThresholdProvenanceIsExplicit :
+  ThreeTapCurrentLeanFrontier.a2ThresholdProvenanceExplicit
     currentThreeTapCurrentLeanFrontier ≡ true
-a2MuGainIsPositiveSourceWritten = refl
+a2ThresholdProvenanceIsExplicit = refl
+
+a2FourDebtSplitIsSourceWritten :
+  ThreeTapCurrentLeanFrontier.a2FourDebtDecompositionSourceWritten
+    currentThreeTapCurrentLeanFrontier ≡ true
+a2FourDebtSplitIsSourceWritten = refl
+
+a2DominantHeadroomIsPositiveSourceWritten :
+  ThreeTapCurrentLeanFrontier.a2DominantHeadroomPositiveSourceWritten
+    currentThreeTapCurrentLeanFrontier ≡ true
+a2DominantHeadroomIsPositiveSourceWritten = refl
 
 a1CarrierIsStillOpen :
   ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
@@ -152,10 +176,20 @@ a2ScalarIsStillOpen :
     currentThreeTapCurrentLeanFrontier ≡ false
 a2ScalarIsStillOpen = refl
 
-routeBIsStillOpen :
+routeBSignIsStillOpen :
   ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
     currentThreeTapCurrentLeanFrontier ≡ false
-routeBIsStillOpen = refl
+routeBSignIsStillOpen = refl
+
+routeBBoundaryDecayIsStillOpen :
+  ThreeTapCurrentLeanFrontier.routeBBoundaryDecayPaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+routeBBoundaryDecayIsStillOpen = refl
+
+routeBOuterConvergenceIsStillOpen :
+  ThreeTapCurrentLeanFrontier.routeBOuterConvergencePaid
+    currentThreeTapCurrentLeanFrontier ≡ false
+routeBOuterConvergenceIsStillOpen = refl
 
 rhNotClaimedByAgdaStatusMirror :
   ThreeTapCurrentLeanFrontier.rhDerivedHere
