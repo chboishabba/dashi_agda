@@ -207,6 +207,16 @@ PrintF2Matrix := function(out,m)
   AppendTo(out,"]");
 end;
 
+PrintF2MatrixList := function(out,ms)
+  local i;
+  AppendTo(out,"[");
+  for i in [1..Length(ms)] do
+    if i>1 then AppendTo(out,","); fi;
+    PrintF2Matrix(out,ms[i]);
+  od;
+  AppendTo(out,"]");
+end;
+
 PrintPermutationImages := function(out,g)
   PrintNatList(out,List([1..expectedDegree],i -> i^g));
 end;
@@ -259,7 +269,7 @@ AppendTo(out,"  \"selected_factor_atlasrep_matches\": "); PrintStringList(out,se
 AppendTo(out,"  \"selected_lower_basis\": "); PrintF2Matrix(out,selectedLowerBasis); AppendTo(out,",\n");
 AppendTo(out,"  \"selected_upper_basis\": "); PrintF2Matrix(out,selectedUpperBasis); AppendTo(out,",\n");
 AppendTo(out,"  \"ambient_m22d2_generator_permutations\": "); PrintPermutationGeneratorList(out,GeneratorsOfGroup(H2)); AppendTo(out,",\n");
-AppendTo(out,"  \"selected_quotient_generators\": "); PrintF2Matrix(out,selectedFactor.generators); AppendTo(out,",\n");
+AppendTo(out,"  \"selected_quotient_generators\": "); PrintF2MatrixList(out,selectedFactor.generators); AppendTo(out,",\n");
 AppendTo(out,"  \"selected_outer_involution_rows\": "); PrintOuterRows(out,selectedOuterRows); AppendTo(out,",\n");
 AppendTo(out,"  \"selected_outer_J2x5_match_count\": ",String(selectedOuterJ2x5Count),",\n");
 AppendTo(out,"  \"finite_duad_same_quotient_Bprime_Cprime_paid\": true,\n");
