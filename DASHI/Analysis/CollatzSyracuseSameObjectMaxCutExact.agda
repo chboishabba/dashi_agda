@@ -22,14 +22,17 @@ import DASHI.NumberTheory.Collatz.SyracuseParityCylinderLeanCrossProverWeldExact
 import DASHI.NumberTheory.Collatz.SyracuseZ2InverseBranchSourceExact
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact
 import DASHI.NumberTheory.Collatz.SyracuseAffineDescentMarginExact
+import DASHI.NumberTheory.Collatz.SyracuseAffineCorrectionBoundExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftBoundaryExact
 import DASHI.NumberTheory.Collatz.SyracuseLogDriftExact
 import DASHI.Analysis.CollatzSyracuseParityObserverExact
 import DASHI.Analysis.CollatzSyracuseFiniteTransferSameObjectWeldExact
 import DASHI.Analysis.CollatzSyracuseCylinderInterfaceMatchExact
 import DASHI.Analysis.CollatzSyracuseCompleteBlockBijectionExact
+import DASHI.Analysis.CollatzSyracuseAlignedBlockUniformityExact
 import DASHI.Analysis.CollatzSyracuseSamplingPushforwardExact
 import DASHI.Analysis.CollatzSyracuseParityBernoulliExact
+import DASHI.Analysis.CollatzSyracuseParityDescentEventExact
 import DASHI.Analysis.CollatzSyracusePrefixAbsorptionWeldExact
 import DASHI.Analysis.CollatzSyracuseUniformHittingBlockExact
 import DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact
@@ -57,7 +60,8 @@ data CollatzCut : Set where
   C6-affineIterate : CollatzCut
   C7a-stoppedLogRemainder : CollatzCut
   C7b-affineScalarMarginDescent : CollatzCut
-  C7c-affineScalarMarginProduction : CollatzCut
+  C7c-affineCorrectionBound : CollatzCut
+  C7d-parityCountDescentCriterion : CollatzCut
   C8a-relationMatrixTransfer : CollatzCut
   C8b-finiteInverseBranchWeld : CollatzCut
   C8c-z2TransferOperatorIntertwiner : CollatzCut
@@ -65,11 +69,13 @@ data CollatzCut : Set where
   C10-repairedRelationMixing : CollatzCut
   C11a-completeBlockBijection : CollatzCut
   C11b-completeBlockUniformPushforward : CollatzCut
-  C11c-arbitraryIntervalBoundary : CollatzCut
-  C11d-logWeightedSampling : CollatzCut
+  C11c-alignedBlockUniformity : CollatzCut
+  C11d-unalignedBoundaryFragments : CollatzCut
+  C11e-logWeightedSampling : CollatzCut
   C12a-directParityBernoulliLaw : CollatzCut
-  C12b-BernoulliConcentration : CollatzCut
-  C12c-prefixAbsorption : CollatzCut
+  C12b-exactBadWordNumerator : CollatzCut
+  C12c-exponentialBadWordTail : CollatzCut
+  C12d-prefixAbsorption : CollatzCut
   C13-integerStoppingTransport : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
@@ -88,7 +94,8 @@ cutStatus C5a-residueCodeInjective = proved
 cutStatus C6-affineIterate = proved
 cutStatus C7a-stoppedLogRemainder = conditionalOnHypothesis
 cutStatus C7b-affineScalarMarginDescent = proved
-cutStatus C7c-affineScalarMarginProduction = sourceSpecificOpen
+cutStatus C7c-affineCorrectionBound = proved
+cutStatus C7d-parityCountDescentCriterion = proved
 cutStatus C8a-relationMatrixTransfer = refutedRoute
 cutStatus C8b-finiteInverseBranchWeld = proved
 cutStatus C8c-z2TransferOperatorIntertwiner = sourceSpecificOpen
@@ -96,11 +103,13 @@ cutStatus C9-fullCylinderSeam = compiledFromRepo
 cutStatus C10-repairedRelationMixing = compiledFromRepo
 cutStatus C11a-completeBlockBijection = proved
 cutStatus C11b-completeBlockUniformPushforward = proved
-cutStatus C11c-arbitraryIntervalBoundary = conditionalOnHypothesis
-cutStatus C11d-logWeightedSampling = sourceSpecificOpen
+cutStatus C11c-alignedBlockUniformity = proved
+cutStatus C11d-unalignedBoundaryFragments = conditionalOnHypothesis
+cutStatus C11e-logWeightedSampling = sourceSpecificOpen
 cutStatus C12a-directParityBernoulliLaw = proved
-cutStatus C12b-BernoulliConcentration = conditionalOnHypothesis
-cutStatus C12c-prefixAbsorption = conditionalOnHypothesis
+cutStatus C12b-exactBadWordNumerator = proved
+cutStatus C12c-exponentialBadWordTail = sourceSpecificOpen
+cutStatus C12d-prefixAbsorption = conditionalOnHypothesis
 cutStatus C13-integerStoppingTransport = conditionalOnHypothesis
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
@@ -134,13 +143,25 @@ completeBlockUniformityPaid :
   cutStatus C11b-completeBlockUniformPushforward ≡ proved
 completeBlockUniformityPaid = refl
 
+alignedBlockUniformityPaid :
+  cutStatus C11c-alignedBlockUniformity ≡ proved
+alignedBlockUniformityPaid = refl
+
 directBernoulliLawPaid :
   cutStatus C12a-directParityBernoulliLaw ≡ proved
 directBernoulliLawPaid = refl
 
-affineMarginCompilerPaid :
-  cutStatus C7b-affineScalarMarginDescent ≡ proved
-affineMarginCompilerPaid = refl
+exactBadWordNumeratorPaid :
+  cutStatus C12b-exactBadWordNumerator ≡ proved
+exactBadWordNumeratorPaid = refl
+
+affineCorrectionBoundPaid :
+  cutStatus C7c-affineCorrectionBound ≡ proved
+affineCorrectionBoundPaid = refl
+
+parityCountDescentPaid :
+  cutStatus C7d-parityCountDescentCriterion ≡ proved
+parityCountDescentPaid = refl
 
 oldRelationSpectralConcentrationNotCriticalPath :
   cutStatus C8a-relationMatrixTransfer ≡ refutedRoute
@@ -158,12 +179,16 @@ record MaxCutBoundary : Set where
     arbitraryLengthCylinderInductionPaid : Nat
     agdaNativeInv3Paid : Nat
     completeBlockUniformityPaidHere : Nat
+    alignedBlockUniformityPaidHere : Nat
     logarithmNecessaryForLiteralDescent : Nat
-    affineScalarMarginCompilerPaidHere : Nat
-    arbitrarySamplingStillSeparate : Nat
-    realConcentrationStillSeparate : Nat
+    affineCorrectionBoundPaidHere : Nat
+    parityCountDescentCompilerPaidHere : Nat
+    exactBadWordNumeratorPaidHere : Nat
+    unalignedBoundaryCountingStillSeparate : Nat
+    exponentialTailStillSeparate : Nat
+    logWeightedSamplingStillSeparate : Nat
     universalStoppingStillSeparate : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 0 1 1 1 1
+  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1
