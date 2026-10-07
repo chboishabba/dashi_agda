@@ -21,6 +21,7 @@ module DASHI.NumberTheory.Collatz.SyracuseInv3Pow2Exact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _-_)
+open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
 open import Data.Nat.Base using (NonZero; nonZero)
 open import Data.Nat.DivMod using (_%_; [m+kn]%n≡m%n; n%1≡0)
 import Data.Nat.Properties as NatP
@@ -42,13 +43,13 @@ instance
 ------------------------------------------------------------------------
 
 oneLessThanFour : 1 < 4
-oneLessThanFour = NatP.s≤s (NatP.s≤s NatP.z≤n)
+oneLessThanFour = s≤s (s≤s z≤n)
 
 inv3CandidatePositive :
   (m : Nat) →
   0 < Candidate.inv3Candidate (suc m)
-inv3CandidatePositive zero = NatP.s≤s NatP.z≤n
-inv3CandidatePositive (suc zero) = NatP.s≤s NatP.z≤n
+inv3CandidatePositive zero = s≤s z≤n
+inv3CandidatePositive (suc zero) = s≤s z≤n
 inv3CandidatePositive (suc (suc m)) =
   let
     a = Candidate.inv3Candidate (suc m)
@@ -90,7 +91,7 @@ inv3ExactQuotient (suc (suc m)) with inv3ExactQuotient m
     fourLeFourA = NatP.*-monoʳ-≤ 4 oneLeA
 
     oneLeFourA : 1 ≤ 4 * a
-    oneLeFourA = NatP.≤-trans (NatP.s≤s NatP.z≤n) fourLeFourA
+    oneLeFourA = NatP.≤-trans (s≤s z≤n) fourLeFourA
 
     predecessorRestores : b + 1 ≡ 4 * a
     predecessorRestores = NatP.m∸n+n≡m oneLeFourA
