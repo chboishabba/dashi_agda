@@ -1,15 +1,16 @@
 module DASHI.ComputerScience.TekumSourceParserTotalityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (_+_)
+open import Agda.Builtin.Nat using (_+_; _*_)
 open import Data.Maybe.Base using (just; nothing)
 open import Data.Product.Base using (_,_)
 import Data.Vec.Base as Vec
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.ComputerScience.TekumFiniteSemanticsExact as Sem
 import DASHI.ComputerScience.TekumRawAnchorRegimeBandExact as Raw
+import DASHI.ComputerScience.TekumRegimeExponentExact as Regime
 import DASHI.ComputerScience.TekumSourceAnchorRegimeBandExact as Band
 import DASHI.ComputerScience.TekumSourceWordDecodeExact as Source
 import DASHI.ComputerScience.TekumSpecialValuesExact as Special
@@ -23,7 +24,7 @@ record OrdinaryParseWitness {extra}
     (word : Vec.Vec Trit.Trit (8 + extra)) : Set where
   constructor ordinaryParseWitness
   field
-    regime : DASHI.ComputerScience.TekumRegimeExponentExact.RegimeCode
+    regime : Regime.RegimeCode
     payload : Vec.Vec Trit.Trit (5 + extra)
     parsed : Source.ParsedPayload extra regime payload
     parseEq :
