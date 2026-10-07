@@ -46,6 +46,10 @@ formal_files=(
   DASHI/Analysis/CollatzSyracuseAlignedBlockTailExact.agda
   DASHI/Analysis/CollatzSyracuseUnalignedIntervalTailCompilerExact.agda
   DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
+  DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
+  DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+  DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
+  DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
   DASHI/Analysis/CollatzSyracuseHoeffdingMathlibBoundaryExact.agda
   DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
 )
@@ -92,6 +96,18 @@ grep -q 'strictDescentFromUniversalStopping' \
   DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
 grep -q 'canonicalUniversalStoppingEquivalence' \
   DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
+grep -q 'strictDescentImpliesExactAffineMargin' \
+  DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
+grep -q 'fromLiteralStrictDescentSource' \
+  DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
+grep -q 'universalStoppingFromUnboundedFrontier' \
+  DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+grep -q 'affineCorrectionCocycle' \
+  DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
+grep -q 'barrier546DropsBelow511' \
+  DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
+grep -q 'affineTransfer546' \
+  DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
 grep -q 'nonDescentImpliesBadWord' \
   DASHI/Analysis/CollatzSyracuseAlignedBlockDescentExact.agda
 grep -q 'alignedBlockFiveEightNonDescentBound' \
