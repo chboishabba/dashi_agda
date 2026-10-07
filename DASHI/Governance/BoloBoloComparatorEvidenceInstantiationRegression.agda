@@ -7,6 +7,9 @@ import DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact as Capstone
 provenancePreserved : Capstone.independentComparatorProvenancePreserved Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 provenancePreserved = refl
 
+owsScaleShockPaid : Capstone.owsScaleShockContextPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+owsScaleShockPaid = refl
+
 sameContextTransitionPaid : Capstone.sameContextOWSStructuralTransitionPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 sameContextTransitionPaid = refl
 
