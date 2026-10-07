@@ -32,10 +32,8 @@ brauerIngressPaid :
   ≡ true
 brauerIngressPaid = Brauer.semisimplifiedIngressIsPaid
 
-ordinaryBrauerCannotSeeAllP2Sectors :
-  Regularity.ordinaryRepresentativeBrauerShortcutRejected
-    Regularity.OrdinaryBrauerEvaluationOnEverySectorRepresentativePaysFiveSectorRule
-ordinaryBrauerCannotSeeAllP2Sectors = Regularity.ordinaryBrauerRepresentativeShortcutRejected
+regularityBoundary : Regularity.P2InertiaBrauerRegularityBoundary
+regularityBoundary = Regularity.canonicalP2InertiaBrauerRegularityBoundary
 
 data BrauerPassDeterminesOuterJ2x5Action : Set where
 
