@@ -2,23 +2,21 @@
 module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261007VExact where
 
 ------------------------------------------------------------------------
--- OVERLAY V / 2026-10-07: POST-UNIQUENESS / SOURCE-FIRST / EXACT-HAAR CUT.
+-- OVERLAY V / 2026-10-07: POST-UNIQUENESS / SELECTED-F2 / EXACT-HAAR CUT.
 --
 -- This supersedes U as the preferred accounting surface.
 --
 -- S1: background equivariance is DERIVED from uniqueness of the constrained
---     variational minimizer.  The source payment is only concrete invariance
---     of action/constraint/regular gauge for the literal B4 generators.
+--     variational minimizer. The source payment is concrete invariance of the
+--     action/constraint/regular gauge for the literal B4 generators.
 --
 -- S2: once the renormalized Hilbert/Weyl identity is stated on the exact
---     Local-C stress/F^2 pair, authority-record instantiation is compiler-only.
---     The payment is the operator Ward identity itself.
+--     stress/F2 operator pair, authority-record instantiation is compiler-only.
 --
--- S3a: choose literal F^2 source-first from the completed marked-curvature
---      family.  The completed-vs-literal equality is refl.  The payment is
---      construction of the physical marked F^2 family/Hilbert modulus.
+-- S3a: the route consumes ONE selected marked F2 source, not a universal
+--      curvature-polynomial family. Nuclear completion is compiler-owned.
 --
--- S3b: selected-state exact Haar masses erase discrepancy exactly.  The only
+-- S3b: selected-state exact Haar masses erase discrepancy exactly. The only
 --      convergence payment is shrinking-cell oscillation for the literal
 --      Eq.(1.71) density; common-limit algebra is downstream compiler work.
 ------------------------------------------------------------------------
@@ -28,7 +26,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.YangMills.BalabanBackgroundMinimizerSymmetryNaturalityExact as S1
 import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedHilbertWardAuthorityExact as S2
-import DASHI.Physics.Foundations.CMP119CosmologyP3SourceFirstF2Exact as S3F2
+import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as S3F2
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedStateMassWeightedHaarExact as S3Haar
 import DASHI.Physics.Foundations.CMP119CosmologyP3ExactMassOscillationOnlyExact as ExactMass
 
@@ -59,7 +57,7 @@ s1NaturalityCompilerClosedOnceInvariant =
   S1.backgroundNaturalityFollowsFromInvariantVariationalProblem
 
 -- S2 source theorem: the standard renormalized operator Ward identity on the
--- exact Local-C pair.  No separate record instantiation remains.
+-- exact pair. No separate authority-record instantiation remains.
 s2ExactRenormalizedOperatorIdentityRequired : Bool
 s2ExactRenormalizedOperatorIdentityRequired =
   S2.remainingR2WorkIsExactRenormalizedOperatorIdentity
@@ -68,15 +66,15 @@ s2AuthorityRecordInstantiationRequired : Bool
 s2AuthorityRecordInstantiationRequired =
   S2.remainingR2WorkIsInstantiationOfStandardWardAuthority
 
--- S3a source theorem: build the physical marked-curvature family containing
--- the F^2 polynomial.  Literal F^2 selection thereafter is definitional.
-s3PhysicalMarkedF2FamilyRequired : Bool
-s3PhysicalMarkedF2FamilyRequired =
-  S3F2.physicalMarkedCurvatureFamilyStillRequired
+-- S3a source theorem: construct exactly one selected marked F2 source on the
+-- completed state, with its Hilbert modulus and gauge/local semantics.
+s3SelectedMarkedF2SourceRequired : Bool
+s3SelectedMarkedF2SourceRequired =
+  S3F2.remainingSelectedF2SourceWorkIsPhysicalMarkedSourceDataAndSemantics
 
-s3PostHocCompletedF2EqualityRequired : Bool
-s3PostHocCompletedF2EqualityRequired =
-  S3F2.postHocCompletedF2EqualityRequired
+s3UniversalMarkedCurvatureFamilyRequired : Bool
+s3UniversalMarkedCurvatureFamilyRequired =
+  S3F2.universalMarkedCurvatureFamilyRequiredForCosmology
 
 -- S3b source theorem: literal Eq.(1.71) shrinking-cell oscillation.
 s3LiteralEquation171ShrinkingCellOscillationRequired : Bool
@@ -106,6 +104,9 @@ freeTraceFrameCalibrationRequired = false
 
 r129StressSourceEqualsF2SourceRequired : Bool
 r129StressSourceEqualsF2SourceRequired = false
+
+postHocCompletedF2EqualityRequired : Bool
+postHocCompletedF2EqualityRequired = false
 
 finiteDGammaR109TailRouteRequired : Bool
 finiteDGammaR109TailRouteRequired = false
