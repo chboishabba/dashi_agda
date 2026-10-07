@@ -3,12 +3,10 @@ module DASHI.NumberTheory.Collatz.SyracuseParityCylinderOddResidualExact where
 ------------------------------------------------------------------------
 -- ODD-ONLY RESIDUAL AFTER EXACT EVEN-BRANCH CLOSURE
 --
--- The generic cylinder compiler originally exposed five source-specific fields:
--- bit0 forward/reverse, bit1 forward/reverse, and candidate injectivity.
--- `SyracuseParityCylinderEvenBranchExact` pays both bit0 fields from the
--- literal Syracuse even equation.  This owner makes the remaining frontier
--- exact: odd forward/reverse transport plus uniqueness of the recursive
--- residue code.
+-- `SyracuseParityCylinderEvenBranchExact` pays both bit0 fields.  Residue-code
+-- injectivity is now derived generically from reverse classification and a
+-- positive representative of every residue.  The only source-specific fields
+-- left here are therefore the two odd branch transports.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true)
@@ -49,12 +47,6 @@ record OddCylinderResidual : Set₁ where
       (Syracuse.toNat (Syracuse.shortcutSyracuse x) % Cylinder.pow2 m
         ≡ Candidate.residueCandidate tail)
 
-    candidateInjective :
-      {m : Nat} →
-      (left right : Binary.BinaryWord m) →
-      Candidate.residueCandidate left ≡ Candidate.residueCandidate right →
-      left ≡ right
-
 open OddCylinderResidual public
 
 compileHardArithmetic :
@@ -65,7 +57,6 @@ compileHardArithmetic odd = record
   ; Base.bit1Forward = bit1Forward odd
   ; Base.bit0Reverse = Even.bit0ReversePaid
   ; Base.bit1Reverse = bit1Reverse odd
-  ; Base.candidateInjective = candidateInjective odd
   }
 
 compileOneStepArithmetic :
@@ -90,4 +81,4 @@ record OddResidualBoundary : Set where
     candidateInjectivityStillOpen : Nat
 
 canonicalOddResidualBoundary : OddResidualBoundary
-canonicalOddResidualBoundary = oddResidualBoundary 0 0 1 1 1
+canonicalOddResidualBoundary = oddResidualBoundary 0 0 1 1 0
