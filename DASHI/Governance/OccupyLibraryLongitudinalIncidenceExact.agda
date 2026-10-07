@@ -4,43 +4,31 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Governance.OccupyParticipantPseudonymisationExact as Privacy
 
 ------------------------------------------------------------------------
--- LONGITUDINAL REAL ARCHIVAL INCIDENCE FAMILY.
+-- LONGITUDINAL ARCHIVAL INCIDENCE FAMILY, PSEUDONYMISED.
 --
 -- Primary archival source:
 -- People's Library / Occupy Wall Street Library Working Group minutes.
 -- https://peopleslibrary.wordpress.com/the-working-group/working-group-meeting-minutes/
 -- plus the dedicated 22 October 2011 minutes page.
 --
--- Attribution / coding rule:
---   * each edge below is a DASHI archival coding of an explicit named-person
---     -> named agenda/proposal/topic association visible in the minutes;
---   * the coding is not attributed to the meeting participants;
---   * attendance, facilitation and agenda presence are not cross-producted;
---   * repeated utterances by the same person on the same issue are collapsed
---     to one bounded incidence row in this descriptive graph;
---   * process-burden observations are held in a different relation and do not
---     become a causal consequence of incidence count.
+-- Each participant label below is a stable keyed-HMAC pseudonym produced by
+-- DASHI's privacy layer. Public source anchors are retained, but raw person
+-- names are intentionally not propagated into this derived table.
 ------------------------------------------------------------------------
 
 data MeetingId : Set where
-  oct22Meeting : MeetingId
-  nov20Meeting : MeetingId
-  nov28Meeting : MeetingId
-  dec04Meeting : MeetingId
-  dec11Meeting : MeetingId
-  jan08Meeting : MeetingId
-  mar11Meeting : MeetingId
+  oct22Meeting nov20Meeting nov28Meeting dec04Meeting dec11Meeting jan08Meeting mar11Meeting : MeetingId
 
 record LongitudinalEdge : Set where
   constructor longitudinalEdge
   field
     meeting : MeetingId
-    participantLabel : String
+    participantToken : Privacy.ParticipantToken
     issueLabel : String
     sourceAnchor : String
-
 open LongitudinalEdge public
 
 edgeCount : List LongitudinalEdge → Nat
@@ -49,108 +37,80 @@ edgeCount (_ ∷ rest) = suc (edgeCount rest)
 
 oct22URL : String
 oct22URL = "https://peopleslibrary.wordpress.com/2011/10/22/library-working-group-meeting-minutes/"
-
 minutesIndexURL : String
 minutesIndexURL = "https://peopleslibrary.wordpress.com/the-working-group/working-group-meeting-minutes/"
 
-------------------------------------------------------------------------
--- 22 October 2011: same admitted relation surface as the separately typed
--- finite specimen, repeated here as strings only so the longitudinal family
--- has one uniform carrier. This is not a second independent source.
-------------------------------------------------------------------------
-
 oct22Edges : List LongitudinalEdge
 oct22Edges =
-  longitudinalEdge oct22Meeting "Adash (Structure)" "Spokes Council proposal" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Steve S." "Finance integration" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Betsy" "Finance integration" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Stephen" "Library budget" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Frances" "Finance integration" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Orion" "Silent Reading technology" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Stephen" "Silent Reading technology" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Betsy" "Silent Reading technology" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Eric" "Electricity / generator" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Frances" "Electricity / generator" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Frances" "Town planning / shelter" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Sean" "Town planning / shelter" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Thaddeus" "Town planning / shelter" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Steve S." "Guest-speaker coordination" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Michael" "Guest-speaker coordination" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Thaddeus" "Zines / pamphlets" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Zach" "Zines / pamphlets" oct22URL
-  ∷ longitudinalEdge oct22Meeting "Steve S." "Printed governance archive" oct22URL
+  longitudinalEdge oct22Meeting Privacy.p-ebddda "Spokes Council proposal" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-442ac6 "Finance integration" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-aeedd2 "Finance integration" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-81d19f "Library budget" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-33f894 "Finance integration" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-2b47b2 "Silent Reading technology" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-81d19f "Silent Reading technology" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-aeedd2 "Silent Reading technology" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-61309c "Electricity / generator" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-33f894 "Electricity / generator" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-33f894 "Town planning / shelter" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-a936c6 "Town planning / shelter" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-b64222 "Town planning / shelter" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-442ac6 "Guest-speaker coordination" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-bc1911 "Guest-speaker coordination" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-b64222 "Zines / pamphlets" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-fc55c2 "Zines / pamphlets" oct22URL
+  ∷ longitudinalEdge oct22Meeting Privacy.p-442ac6 "Printed governance archive" oct22URL
   ∷ []
-
-------------------------------------------------------------------------
--- 20 November 2011.
-------------------------------------------------------------------------
 
 nov20Edges : List LongitudinalEdge
 nov20Edges =
-  longitudinalEdge nov20Meeting "Bill" "legal representation / Norman Siegel" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Betsy" "meeting-location communication failure" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Betsy" "occupied office allocation" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Zach" "recovered books / evidence handling" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Briar" "mirror catalogue proposal" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Betsy" "email-list and blog membership proposal" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Briar" "blog comment policy" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Stephen" "Library 3.0 / portable-action practice" minutesIndexURL
-  ∷ longitudinalEdge nov20Meeting "Sean" "Finance transparency / Spokes Council reportback" minutesIndexURL
+  longitudinalEdge nov20Meeting Privacy.p-232026 "legal representation / Norman Siegel" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-aeedd2 "meeting-location communication failure" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-aeedd2 "occupied office allocation" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-fc55c2 "recovered books / evidence handling" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-f0412f "mirror catalogue proposal" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-aeedd2 "email-list and blog membership proposal" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-f0412f "blog comment policy" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-81d19f "Library 3.0 / portable-action practice" minutesIndexURL
+  ∷ longitudinalEdge nov20Meeting Privacy.p-a936c6 "Finance transparency / Spokes Council reportback" minutesIndexURL
   ∷ []
-
-------------------------------------------------------------------------
--- 28 November 2011.
-------------------------------------------------------------------------
 
 nov28Edges : List LongitudinalEdge
 nov28Edges =
-  longitudinalEdge nov28Meeting "Danny" "team cohesion / communication" minutesIndexURL
-  ∷ longitudinalEdge nov28Meeting "Zach" "book count and recovered-book processing" minutesIndexURL
-  ∷ longitudinalEdge nov28Meeting "Bill" "legal action against city" minutesIndexURL
-  ∷ longitudinalEdge nov28Meeting "Michele" "community accountability proposal" minutesIndexURL
-  ∷ longitudinalEdge nov28Meeting "Scales" "future library infrastructure" minutesIndexURL
-  ∷ longitudinalEdge nov28Meeting "Frances" "squat / physical-space proposal" minutesIndexURL
-  ∷ longitudinalEdge nov28Meeting "Michele" "storage and processing of new books" minutesIndexURL
+  longitudinalEdge nov28Meeting Privacy.p-3d9d51 "team cohesion / communication" minutesIndexURL
+  ∷ longitudinalEdge nov28Meeting Privacy.p-fc55c2 "book count and recovered-book processing" minutesIndexURL
+  ∷ longitudinalEdge nov28Meeting Privacy.p-232026 "legal action against city" minutesIndexURL
+  ∷ longitudinalEdge nov28Meeting Privacy.p-f4f5bb "community accountability proposal" minutesIndexURL
+  ∷ longitudinalEdge nov28Meeting Privacy.p-c3fe3a "future library infrastructure" minutesIndexURL
+  ∷ longitudinalEdge nov28Meeting Privacy.p-33f894 "squat / physical-space proposal" minutesIndexURL
+  ∷ longitudinalEdge nov28Meeting Privacy.p-f4f5bb "storage and processing of new books" minutesIndexURL
   ∷ []
-
-------------------------------------------------------------------------
--- 11 December 2011.
-------------------------------------------------------------------------
 
 dec11Edges : List LongitudinalEdge
 dec11Edges =
-  longitudinalEdge dec11Meeting "Sean" "Free Literature cargo-bike proposal" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Thadeaus" "Free Literature cargo-bike proposal" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Colin" "Free Literature cargo-bike proposal" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Zach" "Free Literature cargo-bike proposal" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Stephen" "Free Literature cargo-bike proposal" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Stephen" "open letter after Love Your Librarian Awards" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Scales" "Occupy office exclusivity concern" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Charlie" "book pickup and drop-off" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Sean" "Hyperallergic book pickup" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Scales" "ALA representation concern" minutesIndexURL
-  ∷ longitudinalEdge dec11Meeting "Michele" "Occupy Writers support / statement" minutesIndexURL
+  longitudinalEdge dec11Meeting Privacy.p-a936c6 "Free Literature cargo-bike proposal" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-614e70 "Free Literature cargo-bike proposal" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-16fcb5 "Free Literature cargo-bike proposal" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-fc55c2 "Free Literature cargo-bike proposal" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-81d19f "Free Literature cargo-bike proposal" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-81d19f "open letter after Love Your Librarian Awards" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-c3fe3a "Occupy office exclusivity concern" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-649768 "book pickup and drop-off" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-a936c6 "Hyperallergic book pickup" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-c3fe3a "ALA representation concern" minutesIndexURL
+  ∷ longitudinalEdge dec11Meeting Privacy.p-f4f5bb "Occupy Writers support / statement" minutesIndexURL
   ∷ []
-
-------------------------------------------------------------------------
--- 8 January 2012.
-------------------------------------------------------------------------
 
 jan08Edges : List LongitudinalEdge
 jan08Edges =
-  longitudinalEdge jan08Meeting "Frances" "shopping carts for mobile actions" minutesIndexURL
-  ∷ longitudinalEdge jan08Meeting "Charlie" "Spokes Council dysfunction / participation" minutesIndexURL
-  ∷ longitudinalEdge jan08Meeting "Frances" "Spokes Council procedural proposal" minutesIndexURL
-  ∷ longitudinalEdge jan08Meeting "Danny" "innovative-libraries conference representation" minutesIndexURL
-  ∷ longitudinalEdge jan08Meeting "Sean" "bookstore solidarity / distributed library space" minutesIndexURL
-  ∷ longitudinalEdge jan08Meeting "Tim" "Staten Island public squat / library donations" minutesIndexURL
-  ∷ longitudinalEdge jan08Meeting "Frances" "WePay / accounting point-person work" minutesIndexURL
+  longitudinalEdge jan08Meeting Privacy.p-33f894 "shopping carts for mobile actions" minutesIndexURL
+  ∷ longitudinalEdge jan08Meeting Privacy.p-649768 "Spokes Council dysfunction / participation" minutesIndexURL
+  ∷ longitudinalEdge jan08Meeting Privacy.p-33f894 "Spokes Council procedural proposal" minutesIndexURL
+  ∷ longitudinalEdge jan08Meeting Privacy.p-3d9d51 "innovative-libraries conference representation" minutesIndexURL
+  ∷ longitudinalEdge jan08Meeting Privacy.p-a936c6 "bookstore solidarity / distributed library space" minutesIndexURL
+  ∷ longitudinalEdge jan08Meeting Privacy.p-7d95b2 "Staten Island public squat / library donations" minutesIndexURL
+  ∷ longitudinalEdge jan08Meeting Privacy.p-33f894 "WePay / accounting point-person work" minutesIndexURL
   ∷ []
-
-------------------------------------------------------------------------
--- Longitudinal family. A named append helper avoids relying on or shadowing any
--- list-append operator exported by another owner.
-------------------------------------------------------------------------
 
 appendEdges : List LongitudinalEdge → List LongitudinalEdge → List LongitudinalEdge
 appendEdges [] ys = ys
@@ -158,100 +118,42 @@ appendEdges (x ∷ xs) ys = x ∷ appendEdges xs ys
 
 longitudinalObservedEdges : List LongitudinalEdge
 longitudinalObservedEdges =
-  appendEdges oct22Edges
-    (appendEdges nov20Edges
-      (appendEdges nov28Edges
-        (appendEdges dec11Edges jan08Edges)))
+  appendEdges oct22Edges (appendEdges nov20Edges (appendEdges nov28Edges (appendEdges dec11Edges jan08Edges)))
 
-canonicalLongitudinalObservedEdgeCount :
-  edgeCount longitudinalObservedEdges ≡ 52
+canonicalLongitudinalObservedEdgeCount : edgeCount longitudinalObservedEdges ≡ 52
 canonicalLongitudinalObservedEdgeCount = refl
 
-------------------------------------------------------------------------
--- Separate archival process-observation relation.
-------------------------------------------------------------------------
-
 data ProcessObservationKind : Set where
-  shorterFusesAndNastierEmailThreads : ProcessObservationKind
-  discussionBreakdown : ProcessObservationKind
-  majorityMeetingTimeSpentInMediation : ProcessObservationKind
-  manyAgendaItemsTabledByMediation : ProcessObservationKind
-  almostEntireMeetingSpentOnConflict : ProcessObservationKind
-  explicitBureaucracyFrustration : ProcessObservationKind
-
+  shorterFusesAndNastierEmailThreads discussionBreakdown majorityMeetingTimeSpentInMediation manyAgendaItemsTabledByMediation almostEntireMeetingSpentOnConflict explicitBureaucracyFrustration : ProcessObservationKind
 
 data ProcessBurdenObserved : MeetingId → ProcessObservationKind → Set where
-  nov28CommunicationStrain :
-    ProcessBurdenObserved nov28Meeting shorterFusesAndNastierEmailThreads
-  nov28Breakdown :
-    ProcessBurdenObserved nov28Meeting discussionBreakdown
+  nov28CommunicationStrain : ProcessBurdenObserved nov28Meeting shorterFusesAndNastierEmailThreads
+  nov28Breakdown : ProcessBurdenObserved nov28Meeting discussionBreakdown
+  dec04MajorityMediation : ProcessBurdenObserved dec04Meeting majorityMeetingTimeSpentInMediation
+  dec04AgendaTabled : ProcessBurdenObserved dec04Meeting manyAgendaItemsTabledByMediation
+  dec04AlmostEntireMeetingConflict : ProcessBurdenObserved dec04Meeting almostEntireMeetingSpentOnConflict
+  mar11BureaucracyFrustration : ProcessBurdenObserved mar11Meeting explicitBureaucracyFrustration
 
-  dec04MajorityMediation :
-    ProcessBurdenObserved dec04Meeting majorityMeetingTimeSpentInMediation
-  dec04AgendaTabled :
-    ProcessBurdenObserved dec04Meeting manyAgendaItemsTabledByMediation
-  dec04AlmostEntireMeetingConflict :
-    ProcessBurdenObserved dec04Meeting almostEntireMeetingSpentOnConflict
-
-  mar11BureaucracyFrustration :
-    ProcessBurdenObserved mar11Meeting explicitBureaucracyFrustration
-
--- Descriptive co-occurrence only: this packages two independently source-paid
--- observations from the 28 November minutes. It adds no causal arrow.
 nov28IncidenceAndBreakdownCooccur :
-  (edgeCount nov28Edges ≡ 7) ×
-  ProcessBurdenObserved nov28Meeting discussionBreakdown
+  (edgeCount nov28Edges ≡ 7) × ProcessBurdenObserved nov28Meeting discussionBreakdown
 nov28IncidenceAndBreakdownCooccur = refl , nov28Breakdown
-
-------------------------------------------------------------------------
--- Attribution / inference firewall.
-------------------------------------------------------------------------
 
 record LongitudinalIncidenceBoundary : Set where
   constructor longitudinalIncidenceBoundary
   field
-    rowsAreArchivalCodingNotParticipantFormalism : Bool
-    repeatedSamePersonIssueUtterancesCollapsed : Bool
-    processObservationsSeparatedFromIncidenceRows : Bool
-
-    attendanceAgendaCrossProductPromoted : Bool
-    interactionRowEncodesAgreement : Bool
-    interactionRowEncodesVote : Bool
-    incidenceCountIsImportance : Bool
-    incidenceCountIsSpeakingTime : Bool
-    processObservationIsCoordinationCost : Bool
-    incidenceCountCausallyExplainsBurden : Bool
-    descriptiveCooccurrenceIsCausalIdentification : Bool
-    selectedMeetingsAreCompleteOWSCorpus : Bool
-    sourceMinutesAssumedCompleteTranscripts : Bool
-    longitudinalFamilyCreatesPoliticalAuthority : Bool
-
+    rowsAreArchivalCodingNotParticipantFormalism repeatedSamePersonIssueUtterancesCollapsed processObservationsSeparatedFromIncidenceRows pseudonymousParticipantTokensUsed rawNamesPropagatedIntoDerivedRows attendanceAgendaCrossProductPromoted interactionRowEncodesAgreement interactionRowEncodesVote incidenceCountIsImportance incidenceCountIsSpeakingTime processObservationIsCoordinationCost incidenceCountCausallyExplainsBurden descriptiveCooccurrenceIsCausalIdentification selectedMeetingsAreCompleteOWSCorpus sourceMinutesAssumedCompleteTranscripts longitudinalFamilyCreatesPoliticalAuthority : Bool
 open LongitudinalIncidenceBoundary public
 
 canonicalLongitudinalBoundary : LongitudinalIncidenceBoundary
 canonicalLongitudinalBoundary =
-  longitudinalIncidenceBoundary
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
-    false
+  longitudinalIncidenceBoundary true true true true false false false false false false false false false false false false
 
 canonicalOccupyLibraryLongitudinalIncidenceReceipt : GenericReceipt.GenericReceipt
 canonicalOccupyLibraryLongitudinalIncidenceReceipt =
   GenericReceipt.mkNonPromotingReceipt
-    "longitudinal People's Library archival incidence family"
+    "pseudonymised longitudinal People's Library archival incidence family"
     "DASHI.Governance.OccupyLibraryLongitudinalIncidenceExact"
     "canonicalLongitudinalBoundary"
-    "codes fifty-two explicit named-person-to-topic archival rows across five selected People's Library meetings and separately records source-reported process strain, including a bounded 28 November incidence/strain co-occurrence"
-    "the selected graph family is not a complete OWS corpus; row counts are not importance, speaking time or coordination cost, and descriptive co-occurrence proves no causal scaling law"
+    "codes fifty-two explicit participant-to-topic archival rows across five selected People's Library meetings using stable collision-audited participant pseudonyms and separately records source-reported process strain"
+    "raw person names are not propagated into derived rows; source anchors remain public; selected graph rows are not a complete OWS corpus, coordination-cost measure, causal scaling law, or political authority"
     "agda -i . DASHI/Governance/OccupyLibraryLongitudinalIncidenceRegression.agda"
