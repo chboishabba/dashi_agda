@@ -11,6 +11,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Test.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda'
@@ -30,6 +32,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Test.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Test.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
       - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda'
       - 'DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda'
@@ -69,6 +73,8 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalDefectRows20261007Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingLiteralCompanion20261007Test.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingPrincipalHalf20261007Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Test.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSOpenAI2026ReleasedCDCurrentHeadAudit20261007Exact.agda
