@@ -31,8 +31,8 @@ selectedJusticeLeeSearchBoundary = Lee.canonicalSearchAdmissionBoundary
 selectedReviewBoundary : Review.RealMatterReviewBoundary
 selectedReviewBoundary = Review.canonicalRealMatterReviewBoundary
 
-selectedResumeBoundary : Resume.RealMatterReviewedResumeBoundary
-selectedResumeBoundary = Resume.canonicalRealMatterReviewedResumeBoundary
+selectedResumeBoundary : Resume.ReviewedResumeBoundary
+selectedResumeBoundary = Resume.canonicalReviewedResumeBoundary
 
 record RuntimeMatterControversy : Set where
   constructor runtime-matter-controversy
@@ -61,7 +61,7 @@ record RuntimeReverseProofProjection : Set where
   field
     controversy : RuntimeMatterControversy
     reverse : Lee.ReverseProofSearch
-    sameGraphObject : Lee.graph reverse ≡ proofGraph controversy
+    sameGraphObject : Lee.graph reverse ≡ RuntimeMatterControversy.proofGraph controversy
     potentialReopeningOnly : Bool
     potentialReopeningOnlyIsTrue : potentialReopeningOnly ≡ true
     createsActualReopening : Bool
@@ -112,12 +112,12 @@ record SharedMatterPersonaBundle : Set where
     client : PersonaProjection
     solicitor : PersonaProjection
     court : PersonaProjection
-    clientSameMatter : matterRef client ≡ RuntimeMatterControversy.matterRef controversy
-    solicitorSameMatter : matterRef solicitor ≡ RuntimeMatterControversy.matterRef controversy
-    courtSameMatter : matterRef court ≡ RuntimeMatterControversy.matterRef controversy
-    clientSameControversy : controversyRef client ≡ RuntimeMatterControversy.controversyRef controversy
-    solicitorSameControversy : controversyRef solicitor ≡ RuntimeMatterControversy.controversyRef controversy
-    courtSameControversy : controversyRef court ≡ RuntimeMatterControversy.controversyRef controversy
+    clientSameMatter : PersonaProjection.matterRef client ≡ RuntimeMatterControversy.matterRef controversy
+    solicitorSameMatter : PersonaProjection.matterRef solicitor ≡ RuntimeMatterControversy.matterRef controversy
+    courtSameMatter : PersonaProjection.matterRef court ≡ RuntimeMatterControversy.matterRef controversy
+    clientSameControversy : PersonaProjection.controversyRef client ≡ RuntimeMatterControversy.controversyRef controversy
+    solicitorSameControversy : PersonaProjection.controversyRef solicitor ≡ RuntimeMatterControversy.controversyRef controversy
+    courtSameControversy : PersonaProjection.controversyRef court ≡ RuntimeMatterControversy.controversyRef controversy
 
 open SharedMatterPersonaBundle public
 
