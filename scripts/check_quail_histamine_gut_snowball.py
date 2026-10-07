@@ -8,6 +8,14 @@ paths = [
     ROOT / "DASHI/Biology/QuailEggHistamineGutParetoSnowballExact.agda",
     ROOT / "DASHI/Biology/QuailEggHumanOralTransferExact.agda",
     ROOT / "DASHI/Biology/QuailEggHumanOralTransferRegression.agda",
+    ROOT / "DASHI/Biology/QuailEggAllergySafetyBoundaryExact.agda",
+    ROOT / "DASHI/Biology/QuailEggAllergySafetyBoundaryRegression.agda",
+    ROOT / "DASHI/Biology/QuailHistamineMicrobiomeHostBridgeExact.agda",
+    ROOT / "DASHI/Biology/QuailHistamineMicrobiomeHostBridgeRegression.agda",
+    ROOT / "DASHI/Biology/QuailEggGutTransferRound2Exact.agda",
+    ROOT / "DASHI/Biology/QuailEggGutTransferRound2Regression.agda",
+    ROOT / "DASHI/Biology/GutMastCellMechanismRouteAtlasExact.agda",
+    ROOT / "DASHI/Biology/GutMastCellMechanismRouteAtlasRegression.agda",
 ]
 text = "\n".join(p.read_text(encoding="utf-8") for p in paths)
 required = [
@@ -19,10 +27,18 @@ required = [
     "10.3389/fmicb.2020.01130",
     "10.1002/fsn3.147",
     "10.1017/S0022215122001219",
+    "10.1016/j.jacig.2025.100486",
+    "10.1159/000534825",
+    "10.3177/jnsv.40.593",
+    "10.1053/j.gastro.2025.07.016",
     "canonicalGutHistamineCompartmentWeld",
     "canonicalQuailEggIBSExperimentRequirement",
     "canonicalGutAcquisitionFrontier",
     "canonicalQuailHumanOralTransferBoundary",
+    "canonicalQuailEggAllergySafetyBoundary",
+    "canonicalQuailHistamineMicrobiomeHostBridge",
+    "canonicalSameObjectQuailGutExperiment",
+    "canonicalGutMastCellMechanismRouteAtlas",
 ]
 missing = [x for x in required if x not in text]
 if missing:
@@ -33,6 +49,9 @@ forbidden = [
     "recombinant ovomucoid equals whole quail egg",
     "fermented fish pH proves gut pH",
     "rhinitis trial proves IBS efficacy",
+    "hen egg tolerance guarantees quail egg tolerance",
+    "ovomucoid stability proves gut target engagement",
+    "all mast cell pathways are identical",
 ]
 found = [x for x in forbidden if x in text]
 if found:
