@@ -34,7 +34,8 @@ import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
 ------------------------------------------------------------------------
 
 vacuumNegativeActiveGivesPositiveAcceleration :
-  ∀ positiveGravityFactor stress →
+  (positiveGravityFactor : ℚ) →
+  (stress : VacuumSign.IsotropicLorentzianStress) →
   0ℚ < positiveGravityFactor →
   VacuumSign.activeStress stress < 0ℚ →
   0ℚ < VacuumSign.matterAccelerationContribution positiveGravityFactor stress
