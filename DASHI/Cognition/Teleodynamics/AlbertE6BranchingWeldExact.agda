@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.Algebra.RationalAlbertJordanExact as A
 import DASHI.Cognition.Teleodynamics.E8ExceptionalBranchingBridgeExact as Branch
-import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as T27
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 
 ------------------------------------------------------------------------
 -- Three different 27-sized objects now coexist and must not be collapsed:
@@ -30,7 +30,7 @@ record ProductNormRecognition
 record Ternary27AlbertRecognition : Set₁ where
   field
     carrierRecognition :
-      ProductNormRecognition T27.Ternary27Point A.RationalAlbert
+      ProductNormRecognition Geometry.Ternary27Point A.RationalAlbert
     productTransported : Bool
     cubicNormTransported : Bool
     distinguishedOriginMapsToAlbertUnit : Bool
