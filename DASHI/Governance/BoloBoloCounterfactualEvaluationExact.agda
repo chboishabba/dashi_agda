@@ -29,6 +29,16 @@ import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact as Promotion
 import DASHI.Governance.BoloBoloLongitudinalPromotionGateExact as Longitudinal
 import DASHI.Governance.BoloBoloModelClassRobustnessExact as ModelRobustness
 
+------------------------------------------------------------------------
+-- PROJECT OBJECTIVE
+--
+-- Under what empirically plausible, target-qualified and longitudinally stable
+-- coordination model does nested kana -> bolo -> tega governance outperform a
+-- globally coupled comparison after accounting for federation overhead,
+-- interface capacity, actor adaptation, realised topology and institutional
+-- evolution?
+------------------------------------------------------------------------
+
 record BoloCounterfactualEvaluation : Set where
   constructor boloCounterfactualEvaluation
   field
@@ -251,9 +261,9 @@ canonicalBoloEvaluationBoundary = record
 canonicalBoloCounterfactualEvaluationReceipt : GenericReceipt.GenericReceipt
 canonicalBoloCounterfactualEvaluationReceipt =
   GenericReceipt.mkNonPromotingReceipt
-    "bolo'bolo counterfactual evaluation max-cut"
+    "bolo'bolo persistent adaptive counterfactual evaluation max-cut"
     "DASHI.Governance.BoloBoloCounterfactualEvaluationExact"
     "canonicalBoloEvaluationBoundary"
-    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, comparator workload/versioning, dynamic institutional feedback and adaptive model reopening, shared-interface capacity/bottleneck analysis, transfer qualification, direct trial design, snapshot and longitudinal promotion/falsification, and predeclared model-family robustness"
-    "the remaining frontier is empirical and longitudinal: target-qualified cost bounds, target interface capacity/concurrent-demand measurements, a predeclared target model family and practical threshold, direct or qualified repeated outcomes, realised-topology/actor-adaptation/version audits and prospective validation; snapshot advantage, declared architecture or local feasibility alone cannot establish long-run nested-governance performance"
+    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, comparator workload/versioning, dynamic institutional feedback and evidence-triggered model reopening, shared-interface capacity/bottleneck analysis, transfer qualification, a capacity-aware longitudinal paired trial, snapshot and repeated-period promotion/falsification, and predeclared model-family robustness"
+    "the remaining frontier is empirical and longitudinal: target-qualified cost bounds, target interface capacity/concurrent-demand/backlog measurements, a predeclared target model family and practical threshold, direct or qualified repeated outcomes, realised-topology/actor-adaptation/version audits and prospective validation; the final target is persistent adaptive advantage or disadvantage, not a one-shot snapshot win"
     "agda -i . DASHI/Governance/BoloBoloCounterfactualEvaluationRegression.agda"
