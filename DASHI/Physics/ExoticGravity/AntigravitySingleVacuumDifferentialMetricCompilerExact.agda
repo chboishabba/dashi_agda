@@ -2,7 +2,7 @@
 module DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricCompilerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; sym)
+open import Agda.Builtin.Equality using (_≡_)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
@@ -12,16 +12,6 @@ import DASHI.Physics.ExoticGravity.AntigravityNambuKottlerObservableCompilerExac
 
 ------------------------------------------------------------------------
 -- DIFFERENTIAL SOURCE AMPLITUDE -> SELECTED KOTTLER METRIC RESPONSE
---
--- Existing owners prove independently:
---
---   Delta Lambda_phys = K (A_on - A_off)       [common additive C cancels]
---   Delta g_tt        = (4/3) Delta Lambda     [selected R=2 Kottler fixture]
---
--- Compose them on the literal same modulation object.  This is the exact
--- lock-in geometry compiler; it still does not construct A_on-A_off from a
--- laboratory control and does not identify the scalar g_tt perturbation with a
--- transverse-traceless gravitational-wave mode.
 ------------------------------------------------------------------------
 
 fixtureMetricResponseFromVacuumModulation :
