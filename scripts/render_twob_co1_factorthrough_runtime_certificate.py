@@ -46,8 +46,9 @@ def main() -> None:
     assert virtual["virtual_276_identity_has_same_solution"] is True
     assert virtual["integral_norm_exact_sequence_paid"] is False
 
-    # Augmentation-filtration obstruction: once the actual Tate JH profile is
-    # 1,274,1 these vanishings force the normal 2^24 action to be trivial.
+    # Runtime premises for the augmentation-filtration theorem.  These numeric
+    # facts do NOT themselves instantiate the proof-bearing first-nonzero-layer
+    # extraction on the actual Tate module.
     assert hom["natural_dimension"] == 24
     assert hom["large_simple_dimension"] == 274
     assert hom["tensor_dimension"] == 24 * 274
@@ -56,9 +57,9 @@ def main() -> None:
     assert hom["hom_24_tensor_274_to_1_dimension"] == 0
     assert hom["hom_24_tensor_274_to_274_dimension"] == 0
     assert hom["all_augmentation_adjacent_homs_vanish"] is True
-    assert hom["normal_2pow24_triviality_on_any_1_274_1_filtered_module_forced"] is True
 
-    # Residual 24 -> Sym2(24) rigidity.
+    # Residual 24 -> Sym2(24) rigidity premises.  This proves uniqueness of a
+    # nonzero equivariant map, not that the actual norm residual map is nonzero.
     assert frob["natural_dimension"] == 24
     assert frob["symmetric_square_dimension"] == 300
     assert frob["explicit_frobenius_rank"] == 24
@@ -77,9 +78,6 @@ def main() -> None:
     assert decomp["actual_norm_map_98280_isomorphism_paid"] is False
     assert decomp["actual_tate_exterior_square_weld_paid"] is False
 
-    # The residual 276 JH profile must agree with the actual Co1 wedge candidate.
-    # We only need one rigid candidate with degree support 1/274 and total profile
-    # matching two trivial factors plus one 274 factor.
     rigid_profile_match = False
     for c in decomp["rigid_support_candidates"]:
         sparse = c["residual_276_sparse"]
@@ -104,24 +102,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- GENERATED RUNTIME RECEIPT: Co1 FACTOR-THROUGH / TATE-COKERNEL MAX-CUT
 --
--- Inputs:
---   * actual Atlas Co1 wedge^2(24) modular fingerprint;
---   * executed 2B-centralizer virtual 24/276 Brauer identity;
---   * actual Atlas Co1 augmentation Hom-space computation;
---   * Hom_Co1(24,Sym^2(24)) uniqueness / explicit Frobenius embedding;
---   * actual 2-modular decomposition matrix of 2^(1+24).Co1.
---
--- Together these pay substantially more than the old semisimplified screen:
---   1. the actual Tate quotient has JH profile 1,274,1;
---   2. the normal 2^24 action is forced trivial by the augmentation criterion;
---   3. the residual 24 -> 300 equivariant lane is uniquely the Frobenius-square
---      embedding once known nonzero;
---   4. the common 98280 JH support is separated from the residual lanes.
---
--- The remaining same-object seam is deliberately narrower but still real:
--- prove that the actual norm map identifies the common 98280 extension lane
--- (and hence realizes the nonzero residual 24 map).  Only then may Tate276 be
--- promoted to the actual wedge^2(24)/duad module.
+-- This generated owner certifies finite/runtime PREMISES only.  In particular,
+-- zero Hom dimensions do not by themselves prove that the normal 2^24 acts
+-- trivially on the actual Tate head: that promotion must pass through the
+-- proof-bearing augmentation-filtration theorem.  Likewise uniqueness of the
+-- nonzero 24 -> Sym2(24) Hom identifies the actual residual norm map only after
+-- rank rigidity proves that actual residual map is nonzero.
 ------------------------------------------------------------------------
 
 wedgeReceiptSha256 : String
@@ -172,20 +158,26 @@ hom24Tensor274To274Dimension = {hom['hom_24_tensor_274_to_274_dimension']}
 actualTateCo1SemisimplifiedProfileOne274OnePaid : Bool
 actualTateCo1SemisimplifiedProfileOne274OnePaid = true
 
-augmentationHomObstructionPaid : Bool
-augmentationHomObstructionPaid = true
+augmentationHomRuntimePremisesPaid : Bool
+augmentationHomRuntimePremisesPaid = true
+
+proofBearingAugmentationPromotionPaid : Bool
+proofBearingAugmentationPromotionPaid = false
 
 normal2Pow24ActionForcedTrivialByCriterion : Bool
-normal2Pow24ActionForcedTrivialByCriterion = true
+normal2Pow24ActionForcedTrivialByCriterion = false
 
 actualTateFactorsThroughCo1ByCriterion : Bool
-actualTateFactorsThroughCo1ByCriterion = true
+actualTateFactorsThroughCo1ByCriterion = false
 
 residual24HomLineUnique : Bool
 residual24HomLineUnique = true
 
-residual24UniqueMapIsFrobenius : Bool
-residual24UniqueMapIsFrobenius = true
+uniqueNonzero24ToSym2MapIsFrobenius : Bool
+uniqueNonzero24ToSym2MapIsFrobenius = true
+
+actualNormResidual24MapForcedFrobenius : Bool
+actualNormResidual24MapForcedFrobenius = false
 
 common98280SupportSeparatedFromResidualLanes : Bool
 common98280SupportSeparatedFromResidualLanes = true
