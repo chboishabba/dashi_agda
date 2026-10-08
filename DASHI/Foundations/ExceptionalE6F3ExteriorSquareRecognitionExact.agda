@@ -3,37 +3,20 @@ module DASHI.Foundations.ExceptionalE6F3ExteriorSquareRecognitionExact where
 ------------------------------------------------------------------------
 -- F3^4 EXTERIOR-SQUARE / E6 MOD-3 NULL-CONE RECOGNITION
 --
--- DASHI CONTRIBUTION
---
--- This owner formalizes the exact finite coordinate bridge discovered by
--- exhaustive local computation:
---
---   four-trit symplectic carrier V = F3^4
---       -> primitive exterior-square coordinates Lambda^2_0 V ~= F3^5
---       -> standard five-coordinate quadratic carrier.
---
--- The raw punctured four-trit carrier V\{0} is NOT identified with the
--- resulting 80-state null carrier.  The exceptional 80 is the derived
--- nonzero decomposable/primitive null-bivector carrier.  Same-action
--- PGSp4(3) <-> W(E6) promotion remains behind an explicit recognition
--- interface; this file does not manufacture the group isomorphism from
--- cardinality.
+-- Exact finite owner for the primitive exterior-square chart.  The raw
+-- punctured four-trit carrier is deliberately NOT identified with the
+-- derived 80-state nonzero null-bivector carrier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import Data.List.Base using (map; concatMap; filterᵇ)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
-
-------------------------------------------------------------------------
--- 1. Concrete F3 helpers.
-------------------------------------------------------------------------
 
 infixl 6 _+3_
 infixl 7 _*3_
@@ -44,8 +27,8 @@ _+3_ = G._+3_
 _*3_ : Trit → Trit → Trit
 _*3_ = H._*3_
 
--3_ : Trit → Trit
--3_ = G.negate3
+neg3 : Trit → Trit
+neg3 = G.negate3
 
 tritEq : Trit → Trit → Bool
 tritEq neg neg = true
@@ -63,10 +46,6 @@ _andB_ : Bool → Bool → Bool
 true andB b = b
 false andB b = false
 
-notB : Bool → Bool
-notB true = false
-notB false = true
-
 infixr 3 _orB_
 _orB_ : Bool → Bool → Bool
 true orB b = true
@@ -75,10 +54,8 @@ false orB b = b
 boolEq : Bool → Bool → Bool
 boolEq true true = true
 boolEq false false = true
-boolEq _ _ = false
-
-impliesB : Bool → Bool → Bool
-impliesB a b = notB a orB b
+boolEq true false = false
+boolEq false true = false
 
 allTrue : List Bool → Bool
 allTrue [] = true
@@ -102,41 +79,38 @@ sum5 : Trit → Trit → Trit → Trit → Trit → Trit
 sum5 a b c d e = a +3 (b +3 (c +3 (d +3 e)))
 
 ------------------------------------------------------------------------
--- 2. Four-trit carrier and symplectic form.
+-- Four-trit symplectic carrier.
 ------------------------------------------------------------------------
 
 record F3Four : Set where
   constructor f3four
-  field
-    x1 x2 x3 x4 : Trit
+  field x1 x2 x3 x4 : Trit
 open F3Four public
 
 symplectic4 : F3Four → F3Four → Trit
 symplectic4 u v =
   sum4
     (x1 u *3 x2 v)
-    (-3 (x2 u *3 x1 v))
+    (neg3 (x2 u *3 x1 v))
     (x3 u *3 x4 v)
-    (-3 (x4 u *3 x3 v))
+    (neg3 (x4 u *3 x3 v))
 
 ------------------------------------------------------------------------
--- 3. Primitive exterior-square coordinates.
---
--- Coordinates are (p12,p13,p14,p23,p24); on the symplectic primitive
--- hyperplane p34 = -p12, so the sixth Plucker coordinate is dependent.
+-- Primitive exterior-square coordinates.
+-- Coordinates are p12,p13,p14,p23,p24; on the primitive hyperplane
+-- p34 = -p12, so the sixth Plucker coordinate is dependent.
 ------------------------------------------------------------------------
 
 record PrimitiveBivector5 : Set where
   constructor primitiveBivector5
-  field
-    p12 p13 p14 p23 p24 : Trit
+  field p12 p13 p14 p23 p24 : Trit
 open PrimitiveBivector5 public
 
 pluckerQ : PrimitiveBivector5 → Trit
 pluckerQ p =
   sum3
-    (-3 (square (p12 p)))
-    (-3 (p13 p *3 p24 p))
+    (neg3 (square (p12 p)))
+    (neg3 (p13 p *3 p24 p))
     (p14 p *3 p23 p)
 
 primitiveSupport : PrimitiveBivector5 → Bool
@@ -150,20 +124,19 @@ primitiveSupport p =
 wedgePrimitiveCoordinates : F3Four → F3Four → PrimitiveBivector5
 wedgePrimitiveCoordinates u v =
   primitiveBivector5
-    ((x1 u *3 x2 v) +3 (-3 (x2 u *3 x1 v)))
-    ((x1 u *3 x3 v) +3 (-3 (x3 u *3 x1 v)))
-    ((x1 u *3 x4 v) +3 (-3 (x4 u *3 x1 v)))
-    ((x2 u *3 x3 v) +3 (-3 (x3 u *3 x2 v)))
-    ((x2 u *3 x4 v) +3 (-3 (x4 u *3 x2 v)))
+    ((x1 u *3 x2 v) +3 neg3 (x2 u *3 x1 v))
+    ((x1 u *3 x3 v) +3 neg3 (x3 u *3 x1 v))
+    ((x1 u *3 x4 v) +3 neg3 (x4 u *3 x1 v))
+    ((x2 u *3 x3 v) +3 neg3 (x3 u *3 x2 v))
+    ((x2 u *3 x4 v) +3 neg3 (x4 u *3 x2 v))
 
 ------------------------------------------------------------------------
--- 4. Standard F3^5 quadratic carrier and explicit change of basis.
+-- Standard five-coordinate quadratic carrier and explicit change of basis.
 ------------------------------------------------------------------------
 
 record StandardFive : Set where
   constructor standardFive
-  field
-    z1 z2 z3 z4 z5 : Trit
+  field z1 z2 z3 z4 z5 : Trit
 open StandardFive public
 
 standardQ : StandardFive → Trit
@@ -183,38 +156,26 @@ standardSupport z =
   orB tritNonzero (z4 z)
   orB tritNonzero (z5 z)
 
--- Matrix over F3:
--- [0 0 2 1 0]
--- [0 2 0 0 2]
--- [0 1 1 1 2]
--- [0 1 2 2 2]
--- [1 0 0 0 0]
 primitiveToStandard : PrimitiveBivector5 → StandardFive
 primitiveToStandard p =
   standardFive
-    ((-3 p14 p) +3 p23 p)
-    ((-3 p13 p) +3 (-3 p24 p))
-    (sum4 (p13 p) (p14 p) (p23 p) (-3 p24 p))
-    (sum4 (p13 p) (-3 p14 p) (-3 p23 p) (-3 p24 p))
+    (neg3 (p14 p) +3 p23 p)
+    (neg3 (p13 p) +3 neg3 (p24 p))
+    (sum4 (p13 p) (p14 p) (p23 p) (neg3 (p24 p)))
+    (sum4 (p13 p) (neg3 (p14 p)) (neg3 (p23 p)) (neg3 (p24 p)))
     (p12 p)
 
--- Inverse matrix over F3:
--- [0 0 0 0 1]
--- [0 1 1 1 0]
--- [1 0 1 2 0]
--- [2 0 1 2 0]
--- [0 1 2 2 0]
 standardToPrimitive : StandardFive → PrimitiveBivector5
 standardToPrimitive z =
   primitiveBivector5
     (z5 z)
     (sum3 (z2 z) (z3 z) (z4 z))
-    (sum3 (z1 z) (z3 z) (-3 z4 z))
-    (sum3 (-3 z1 z) (z3 z) (-3 z4 z))
-    (sum3 (z2 z) (-3 z3 z) (-3 z4 z))
+    (sum3 (z1 z) (z3 z) (neg3 (z4 z)))
+    (sum3 (neg3 (z1 z)) (z3 z) (neg3 (z4 z)))
+    (sum3 (z2 z) (neg3 (z3 z)) (neg3 (z4 z)))
 
 ------------------------------------------------------------------------
--- 5. Exact finite enumeration and decidable equality.
+-- Exact exhaustive finite receipts over all 3^5 states.
 ------------------------------------------------------------------------
 
 trits : List Trit
@@ -264,15 +225,11 @@ standardRoundTripCheck z =
 
 quadraticIntertwiningCheck : PrimitiveBivector5 → Bool
 quadraticIntertwiningCheck p =
-  tritEq
-    (standardQ (primitiveToStandard p))
-    (neg *3 pluckerQ p)
+  tritEq (standardQ (primitiveToStandard p)) (neg *3 pluckerQ p)
 
 supportIntertwiningCheck : PrimitiveBivector5 → Bool
 supportIntertwiningCheck p =
-  boolEq
-    (primitiveSupport p)
-    (standardSupport (primitiveToStandard p))
+  boolEq (primitiveSupport p) (standardSupport (primitiveToStandard p))
 
 primitiveRoundTripExhaustive :
   allTrue (map primitiveRoundTripCheck primitiveEnumeration) ≡ true
@@ -291,7 +248,7 @@ supportIntertwiningExhaustive :
 supportIntertwiningExhaustive = refl
 
 ------------------------------------------------------------------------
--- 6. Derived nonzero null carriers: the honest exceptional 80-state object.
+-- Derived nonzero null carrier.  Both coordinate presentations enumerate 80.
 ------------------------------------------------------------------------
 
 primitiveNullNonzero : PrimitiveBivector5 → Bool
@@ -303,19 +260,15 @@ standardNullNonzero z =
   tritEq (standardQ z) zer andB standardSupport z
 
 primitiveNull80Enumeration : List PrimitiveBivector5
-primitiveNull80Enumeration =
-  filterᵇ primitiveNullNonzero primitiveEnumeration
+primitiveNull80Enumeration = filterᵇ primitiveNullNonzero primitiveEnumeration
 
 standardNull80Enumeration : List StandardFive
-standardNull80Enumeration =
-  filterᵇ standardNullNonzero standardEnumeration
+standardNull80Enumeration = filterᵇ standardNullNonzero standardEnumeration
 
-primitiveNull80Count :
-  Reindex.listLength primitiveNull80Enumeration ≡ 80
+primitiveNull80Count : Reindex.listLength primitiveNull80Enumeration ≡ 80
 primitiveNull80Count = refl
 
-standardNull80Count :
-  Reindex.listLength standardNull80Enumeration ≡ 80
+standardNull80Count : Reindex.listLength standardNull80Enumeration ≡ 80
 standardNull80Count = refl
 
 nullPredicateIntertwiningCheck : PrimitiveBivector5 → Bool
@@ -329,7 +282,7 @@ nullPredicateIntertwiningExhaustive :
 nullPredicateIntertwiningExhaustive = refl
 
 ------------------------------------------------------------------------
--- 7. Recognition interfaces for the next same-action cut.
+-- Same-action recognition sockets.  These are contracts, not promotions.
 ------------------------------------------------------------------------
 
 record ProjectiveIncidenceDualityRecognition : Set₁ where
@@ -337,11 +290,9 @@ record ProjectiveIncidenceDualityRecognition : Set₁ where
     SymplecticProjectiveLine NullProjectivePoint : Set
     lineToNullPoint : SymplecticProjectiveLine → NullProjectivePoint
     nullPointToLine : NullProjectivePoint → SymplecticProjectiveLine
-    lineRoundTrip :
-      (line : SymplecticProjectiveLine) →
+    lineRoundTrip : (line : SymplecticProjectiveLine) →
       nullPointToLine (lineToNullPoint line) ≡ line
-    pointRoundTrip :
-      (point : NullProjectivePoint) →
+    pointRoundTrip : (point : NullProjectivePoint) →
       lineToNullPoint (nullPointToLine point) ≡ point
     LinesIntersect NullPointsOrthogonal :
       SymplecticProjectiveLine → SymplecticProjectiveLine → Set
@@ -357,15 +308,9 @@ record PGSp4WeylRecognition : Set₁ where
     fourAction : PGSp4Actor → FourState → FourState
     fiveAction : WeylE6Actor → FiveState → FiveState
     exteriorSquareMap : FourState → FiveState
-    sameActionIntertwiner :
-      (g : PGSp4Actor) →
-      (state : FourState) →
+    sameActionIntertwiner : (g : PGSp4Actor) → (state : FourState) →
       exteriorSquareMap (fourAction g state)
       ≡ fiveAction (actorToWeyl g) (exteriorSquareMap state)
-
-------------------------------------------------------------------------
--- 8. Fail-closed boundary.
-------------------------------------------------------------------------
 
 record ExceptionalE6F3ExteriorSquareRecognitionBoundary : Set where
   constructor exceptional-e6-f3-exterior-square-recognition-boundary
