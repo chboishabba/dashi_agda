@@ -21,6 +21,21 @@ def test_localized_vacuum_readout_reuses_existing_projector():
         assert token in text
 
 
+def test_source_vacuum_pair_feeds_parameterized_israel_geometry():
+    text = read("DASHI/Physics/Foundations/CMP119AntigravitySourceVacuumIsraelAdmissionExact.agda")
+    for token in (
+        "SourceVacuumPair",
+        "sourceInteriorLambda",
+        "sourceExteriorLambda",
+        "SourceVacuumIsraelAdmission",
+        "interiorLambdaMatchesSource",
+        "exteriorLambdaMatchesSource",
+        "fixedTwentyOneSixtyFourAndNineteenFortyEightRequired",
+        "sourceToGeometryEqualitiesStillRequired",
+    ):
+        assert token in text
+
+
 def test_eq223_metric_stress_route_bypasses_old_ancestry_adapter():
     text = read("DASHI/Physics/Foundations/CMP119AntigravityEq223MetricStressReuseMaxCutExact.agda")
     for token in (
@@ -37,10 +52,12 @@ def test_terminal_owner_compresses_remaining_source_frontier():
     text = read("DASHI/Physics/ExoticGravity/AntigravitySourceNativeReuseTerminalExact.agda")
     for token in (
         "canonicalLocalizedVacuumReadoutBoundary",
+        "canonicalSourceVacuumIsraelAdmissionBoundary",
         "canonicalEq223MetricStressReuseBoundary",
         "rationalVacuumReadoutIsNoLongerIndependentLeaf",
         "oldPinnedStressAncestryAuthorityIsNoLongerPreferredLeaf",
-        "actualTwoSourceAmplitudeValuesStillOpen",
+        "fixedMagicAmplitudePairIsNoLongerRequired",
+        "sourceToGeometryAdmissionStillOpen",
         "actualR136EffectiveActionResponseEqualityStillOpen",
     ):
         assert token in text
