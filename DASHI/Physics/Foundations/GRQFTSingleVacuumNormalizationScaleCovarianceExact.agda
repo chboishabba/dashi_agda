@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as Safe
 
@@ -44,7 +45,7 @@ conicQNormalizationScaleCovariant :
   Safe.conicQ (rescaledVacuumAmplitude lambda k) newRadius
     ≡ Safe.conicQ lambda oldRadius
 conicQNormalizationScaleCovariant lambda k oldRadius newRadius match
-  rewrite radialScaleMatch match =
+  rewrite sym (radialScaleMatch match) =
     solve-∀ lambda k newRadius
 
 record PhysicalVacuumMultiplicativePromotion : Set where
