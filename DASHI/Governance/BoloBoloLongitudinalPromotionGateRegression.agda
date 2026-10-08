@@ -12,6 +12,14 @@ snapshotLossNotLongRunLoss :
   Longitudinal.snapshotMeaningfulLossAutomaticallyEstablishesLongRunLoss Longitudinal.canonicalLongitudinalPromotionBoundary ≡ false
 snapshotLossNotLongRunLoss = refl
 
+atLeastTwoPeriodsRequired :
+  Longitudinal.atLeastTwoCertifiedPeriodsRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+atLeastTwoPeriodsRequired = refl
+
+samePolarityRequired :
+  Longitudinal.repeatedSamePolarityRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+samePolarityRequired = refl
+
 repeatedMeasurementRequired :
   Longitudinal.repeatedMeasurementRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
 repeatedMeasurementRequired = refl
