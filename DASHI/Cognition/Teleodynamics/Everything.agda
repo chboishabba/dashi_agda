@@ -41,3 +41,4 @@ import DASHI.Cognition.Teleodynamics.TetracodeE8ExplicitMapRegression
 import DASHI.Cognition.Teleodynamics.E8ExceptionalBranchingBridgeExact
 import DASHI.Cognition.Teleodynamics.E8ExceptionalBranchingRegression
 import DASHI.Cognition.Teleodynamics.AlbertE6BranchingWeldExact
+import DASHI.Cognition.Teleodynamics.AlbertE6BranchingWeldRegression
