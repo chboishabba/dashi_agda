@@ -22,15 +22,11 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPTerminalPrefixCompletenessVerifi
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
-import DASHI.Mathematics.Complexity.PNotEqualsNPTransitionGeneratedRestrictionQuotientExact as Generated
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as FutureSAT
 
@@ -50,9 +46,6 @@ fullyRestrict (bit ∷ bits) formula =
 
 ------------------------------------------------------------------------
 -- Push a remaining-variable suffix back through an existing derivation.
---
--- If d : root -> current and suffix assigns every variable still in current,
--- completePrefixFrom d suffix assigns every variable of root.
 ------------------------------------------------------------------------
 
 completePrefixFrom :
@@ -100,8 +93,7 @@ completePrefixReplay
   completePrefixReplay derivation (true ∷ suffix)
 
 ------------------------------------------------------------------------
--- Terminal specialization: every zero-variable derivation is a full literal
--- prefix, and replaying that prefix reconstructs the same terminal formula.
+-- Terminal specialization.
 ------------------------------------------------------------------------
 
 terminalPrefix :
@@ -284,14 +276,9 @@ verifierFollowsDerivation
 verifierFollowsDerivation
     candidate
     terminalLabel
-    (Family.restrictionFalse {currentVariables = remaining} {current = current} derivation)
+    (Family.restrictionFalse {current = current} derivation)
     rootVerified =
-  verifierFollowsDerivation
-    candidate
-    terminalLabel
-    derivation
-    rootVerified
-    |> falseBranch
+  falseBranch
   where
     parentState : Fin (Candidate.stateCount candidate)
     parentState = Candidate.candidateSelect candidate derivation
@@ -323,14 +310,9 @@ verifierFollowsDerivation
 verifierFollowsDerivation
     candidate
     terminalLabel
-    (Family.restrictionTrue {currentVariables = remaining} {current = current} derivation)
+    (Family.restrictionTrue {current = current} derivation)
     rootVerified =
-  verifierFollowsDerivation
-    candidate
-    terminalLabel
-    derivation
-    rootVerified
-    |> trueBranch
+  trueBranch
   where
     parentState : Fin (Candidate.stateCount candidate)
     parentState = Candidate.candidateSelect candidate derivation
