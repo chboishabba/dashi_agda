@@ -3,6 +3,7 @@ module DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoTwistronicsCrossPollination
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Physics.CondensedMatter.FlatBandTwistronicsFe5GeTe2CrossPollinationExact as FlatTwist
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBlochRepresentationBoundaryExact as CoBloch
@@ -32,15 +33,13 @@ canonicalRegistrationSymmetryCrossPollination =
   registration-symmetry-cross-pollination
     true true false false false
 
--- Consume the existing attributed twistronics source atlas rather than copying
--- its external claims into this material lane.
+existingTwistronicsSourceAtlas : Attribution.AttributedSourceAtlas
 existingTwistronicsSourceAtlas = Twist.twistronicsSourceAtlas
 
--- Consume the existing mechanism-neutral theorem architecture only.
+existingFlatBandCrossPollinationBoundary :
+  FlatTwist.GrapheneFe5GeTe2CrossPollinationBoundary
 existingFlatBandCrossPollinationBoundary =
   FlatTwist.canonicalGrapheneFe5GeTe2CrossPollinationBoundary
 
--- The Co material-Hamiltonian leaf remains whatever the Co lane itself says;
--- cross-pollination cannot promote it.
 existingCoMaterialHamiltonianStatus : CoBloch.MaterialHamiltonianStatus
 existingCoMaterialHamiltonianStatus = CoBloch.canonicalMaterialHamiltonianStatus
