@@ -11,16 +11,14 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1StagedRootedConstructorExact w
 --   if it strictly fits the requested budget, return the SAME canonical
 --   zero-arity rooted key list with the strict-work receipt;
 --   otherwise return an explicit sourceWorkExhausted proof.
---
--- Later stages (global packing, verifier-backed admission, concrete emitting
--- machine and full charged fit) remain separate typed stop reasons rather than
--- being silently collapsed to nothing.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Maybe.Base using (nothing)
 open import Data.Nat.Base using (_≤_; _<_)
+open import Data.Product using (Σ; _×_; _,_)
 import Data.Nat.Properties as NatP
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
@@ -28,10 +26,6 @@ import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CanonicalTruthTableMergeExact as Merge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1RootedExhaustiveMergeExact as Root
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1CompletedRootedSourceGateExact as Completed
-
-------------------------------------------------------------------------
--- Same-object source success payload.
-------------------------------------------------------------------------
 
 record RootedSourceReady
     {rootVariables : Nat}
@@ -53,10 +47,6 @@ record RootedSourceReady
       budget
 
 open RootedSourceReady public
-
-------------------------------------------------------------------------
--- Explicit source-stage result.
-------------------------------------------------------------------------
 
 data RootedSourceStageResult
     {rootVariables : Nat}
@@ -91,10 +81,6 @@ runRootedSourceStage root budget
   sourceWorkExhausted
     (NatP.≮⇒≥ doesNotFit)
 
-------------------------------------------------------------------------
--- Exhaustive characterization of Stage 1.
-------------------------------------------------------------------------
-
 sourceReadyImpliesCompletedGateSuccess :
   ∀ {rootVariables : Nat}
     {root : SAT.BooleanFormula rootVariables}
@@ -112,8 +98,6 @@ sourceReadyImpliesCompletedGateSuccess ready =
   terminalKeys ready
   ,
   (terminalKeysExact ready , sourceWorkFits ready)
-  where
-    open import Data.Product using (Σ; _×_; _,_)
 
 sourceExhaustionImpliesCompletedGateFailure :
   ∀ {rootVariables : Nat}
@@ -122,16 +106,15 @@ sourceExhaustionImpliesCompletedGateFailure :
   budget ≤ Completed.completedRootedSourceWork root →
   Completed.completedRootedSourceGate root budget
   ≡
-  Data.Maybe.Base.nothing
-sourceExhaustionImpliesCompletedGateFailure exhausted =
+  nothing
+sourceExhaustionImpliesCompletedGateFailure
+    {root = root}
+    {budget = budget}
+    exhausted =
   Completed.completedRootedSourceFailsOnExhaustion
-    _
-    _
+    root
+    budget
     exhausted
-
-------------------------------------------------------------------------
--- The rest of the constructor is now an explicit staged frontier.
-------------------------------------------------------------------------
 
 data PostSourceStopReason : Set where
   packedTransitionCandidateMissing : PostSourceStopReason
@@ -151,14 +134,11 @@ record PostSourceFrontier
 ------------------------------------------------------------------------
 -- MAX-CUT INTERPRETATION
 --
--- The old arbitrary constructor could simply return nothing with no reason.
--- At the rooted source stage that opacity is gone:
---
+-- Stage 1 is total and same-object:
 --   work < budget  -> exact sourceReady
---   budget <= work -> exact sourceWorkExhausted
+--   budget <= work -> exact sourceWorkExhausted.
 --
--- Therefore any future first-step progress proof has a concrete first branch
--- to eliminate.  Success does NOT yet promote to a DirectDP/Q1 run; packing,
+-- Success does NOT yet promote to a DirectDP/Q1 run; packing,
 -- verifier-backed admission, concrete machine execution and the final charged
 -- inequality remain explicit subsequent stages.
 ------------------------------------------------------------------------
