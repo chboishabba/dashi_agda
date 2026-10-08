@@ -55,6 +55,7 @@ REQUIRED = {
         "humanPKPriority = 2",
         "historicalUsePriority = 1",
         "historicalControlledPerformanceEvidenceNowAcquired = true",
+        "transcriptionDependenceEvidenceNowAcquired = true",
         "reviewRepetitionDoesNotIncreaseAuthority = refl",
     ],
     "DASHI/Biology/BemethylActoprotectorMaxCutExact.agda": [
