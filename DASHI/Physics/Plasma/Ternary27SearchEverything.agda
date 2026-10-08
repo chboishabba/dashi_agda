@@ -1,0 +1,20 @@
+module DASHI.Physics.Plasma.Ternary27SearchEverything where
+
+import DASHI.Physics.Plasma.Ternary27SpectralGeometryCarrierExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27ConeSearchExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceTernary27MaxCutExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceSparseSupportExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceSupportPatchHyperfabricExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceSparseSupportMaxCutExact
+import DASHI.Physics.Plasma.ToroidalZeroBouncePairIncidenceCrossPollinationExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceM24DuadRecognitionExact
+import DASHI.Physics.Plasma.ToroidalZeroBouncePhaseResolvedSupportExact
+import DASHI.Physics.Plasma.ToroidalZeroBounce276243RecognitionMaxCutExact
+import DASHI.Physics.Plasma.PhaseRook270Exact
+import DASHI.Physics.Plasma.PhaseCore243FiveTritExact
+import DASHI.Physics.Plasma.Phase243ActionIntertwinerExact
+import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact
+import DASHI.Physics.Plasma.Phase243RookMaxCutExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceArchitectureForkExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceCoilInverseBoundaryExact
+import DASHI.Physics.Plasma.ToroidalZeroBounceCoilInverseMaxCutExact
