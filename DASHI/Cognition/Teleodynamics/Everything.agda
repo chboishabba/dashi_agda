@@ -32,3 +32,5 @@ import DASHI.Cognition.Teleodynamics.TeleodynamicRealizationWeldExact
 import DASHI.Cognition.Teleodynamics.TeleodynamicRealizationWeldRegression
 import DASHI.Cognition.Teleodynamics.TeleodynamicConsensusConnectivityExact
 import DASHI.Cognition.Teleodynamics.TeleodynamicConsensusConnectivityRegression
+import DASHI.Cognition.Teleodynamics.T5E8CyclicActionBridgeExact
+import DASHI.Cognition.Teleodynamics.T5E8CyclicActionRegression
