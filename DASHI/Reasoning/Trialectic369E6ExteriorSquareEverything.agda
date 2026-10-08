@@ -8,6 +8,7 @@ import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact
 import DASHI.Foundations.E6F3ExteriorSquareRecognitionValidation
 import DASHI.Foundations.E6F3GeneratedGroupClosureExact
 import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
+import DASHI.Foundations.AlbertJordanExternalDonorExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
@@ -49,3 +50,14 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutExact
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutValidation
+import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact
+import DASHI.Reasoning.AlbertF4ExceptionalCapstoneValidation
+
+-- Ternary basis / first-Tits / physics-facing max-cut.
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact
+import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
+import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
+import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
