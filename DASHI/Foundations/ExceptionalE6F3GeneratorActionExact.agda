@@ -1,13 +1,5 @@
 module DASHI.Foundations.ExceptionalE6F3GeneratorActionExact where
 
-------------------------------------------------------------------------
--- GENERATOR-LEVEL PGSp4(3) / W(E6) EXTERIOR-SQUARE ACTION BRIDGE
---
--- Six explicit 4x4 multiplier-minus-one symplectic similitudes lift the six
--- reduced E6 simple reflections.  Their exterior-square action on primitive
--- bivectors commutes with the standard five-coordinate E6 action.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -44,21 +36,10 @@ dot5 a b =
     (E._*3_ (E.z5 a) (E.z5 b))
 
 apply4 : Matrix4 → E.F3Four → E.F3Four
-apply4 m v =
-  E.f3four
-    (dot4 (r1 m) v)
-    (dot4 (r2 m) v)
-    (dot4 (r3 m) v)
-    (dot4 (r4 m) v)
+apply4 m v = E.f3four (dot4 (r1 m) v) (dot4 (r2 m) v) (dot4 (r3 m) v) (dot4 (r4 m) v)
 
 apply5 : Matrix5 → E.StandardFive → E.StandardFive
-apply5 m v =
-  E.standardFive
-    (dot5 (s1 m) v)
-    (dot5 (s2 m) v)
-    (dot5 (s3 m) v)
-    (dot5 (s4 m) v)
-    (dot5 (s5 m) v)
+apply5 m v = E.standardFive (dot5 (s1 m) v) (dot5 (s2 m) v) (dot5 (s3 m) v) (dot5 (s4 m) v) (dot5 (s5 m) v)
 
 primitiveAsFive : E.PrimitiveBivector5 → E.StandardFive
 primitiveAsFive p = E.standardFive (E.p12 p) (E.p13 p) (E.p14 p) (E.p23 p) (E.p24 p)
@@ -82,72 +63,32 @@ v5 : Trit → Trit → Trit → Trit → Trit → E.StandardFive
 v5 = E.standardFive
 
 lift4 : SimpleE6Generator → Matrix4
-lift4 s0 = matrix4
-  (v4 neg zer neg neg) (v4 zer neg neg pos)
-  (v4 pos pos pos zer) (v4 pos neg zer pos)
-lift4 s1 = matrix4
-  (v4 zer zer neg zer) (v4 zer zer zer pos)
-  (v4 pos zer zer zer) (v4 zer neg zer zer)
-lift4 s2 = matrix4
-  (v4 zer zer pos pos) (v4 zer zer pos zer)
-  (v4 zer neg zer zer) (v4 neg pos zer zer)
-lift4 s3 = matrix4
-  (v4 zer zer neg pos) (v4 zer zer neg neg)
-  (v4 neg neg zer zer) (v4 pos neg zer zer)
-lift4 s4 = matrix4
-  (v4 pos zer neg neg) (v4 zer pos zer neg)
-  (v4 neg pos neg zer) (v4 zer neg zer neg)
-lift4 s5 = matrix4
-  (v4 zer zer pos pos) (v4 zer zer neg pos)
-  (v4 pos neg zer zer) (v4 pos pos zer zer)
+lift4 s0 = matrix4 (v4 neg zer neg neg) (v4 zer neg neg pos) (v4 pos pos pos zer) (v4 pos neg zer pos)
+lift4 s1 = matrix4 (v4 zer zer neg zer) (v4 zer zer zer pos) (v4 pos zer zer zer) (v4 zer neg zer zer)
+lift4 s2 = matrix4 (v4 zer zer pos pos) (v4 zer zer pos zer) (v4 zer neg zer zer) (v4 neg pos zer zer)
+lift4 s3 = matrix4 (v4 zer zer neg pos) (v4 zer zer neg neg) (v4 neg neg zer zer) (v4 pos neg zer zer)
+lift4 s4 = matrix4 (v4 pos zer neg neg) (v4 zer pos zer neg) (v4 neg pos neg zer) (v4 zer neg zer neg)
+lift4 s5 = matrix4 (v4 zer zer pos pos) (v4 zer zer neg pos) (v4 pos neg zer zer) (v4 pos pos zer zer)
 
 primitiveActionMatrix : SimpleE6Generator → Matrix5
-primitiveActionMatrix s0 = matrix5
-  (v5 zer pos neg neg neg) (v5 pos zer pos pos pos)
-  (v5 neg pos zer neg neg) (v5 neg pos neg zer neg) (v5 neg pos neg neg zer)
-primitiveActionMatrix s1 = matrix5
-  (v5 pos zer zer zer zer) (v5 zer pos zer zer zer)
-  (v5 zer zer zer neg zer) (v5 zer zer neg zer zer) (v5 zer zer zer zer pos)
-primitiveActionMatrix s2 = matrix5
-  (v5 pos zer zer zer zer) (v5 zer zer zer pos pos)
-  (v5 zer pos pos neg neg) (v5 zer zer zer pos zer) (v5 zer pos zer neg zer)
-primitiveActionMatrix s3 = matrix5
-  (v5 pos zer zer zer zer) (v5 zer neg pos neg pos)
-  (v5 zer pos neg neg pos) (v5 zer neg neg neg neg) (v5 zer pos pos neg neg)
-primitiveActionMatrix s4 = matrix5
-  (v5 zer zer neg pos pos) (v5 neg pos neg pos pos)
-  (v5 pos zer neg neg neg) (v5 neg zer neg neg pos) (v5 zer zer zer zer pos)
-primitiveActionMatrix s5 = matrix5
-  (v5 pos zer zer zer zer) (v5 zer neg neg pos pos)
-  (v5 zer neg neg neg neg) (v5 zer pos neg neg pos) (v5 zer pos neg pos neg)
+primitiveActionMatrix s0 = matrix5 (v5 zer pos neg neg neg) (v5 pos zer pos pos pos) (v5 neg pos zer neg neg) (v5 neg pos neg zer neg) (v5 neg pos neg neg zer)
+primitiveActionMatrix s1 = matrix5 (v5 pos zer zer zer zer) (v5 zer pos zer zer zer) (v5 zer zer zer neg zer) (v5 zer zer neg zer zer) (v5 zer zer zer zer pos)
+primitiveActionMatrix s2 = matrix5 (v5 pos zer zer zer zer) (v5 zer zer zer pos pos) (v5 zer pos pos neg neg) (v5 zer zer zer pos zer) (v5 zer pos zer neg zer)
+primitiveActionMatrix s3 = matrix5 (v5 pos zer zer zer zer) (v5 zer neg pos neg pos) (v5 zer pos neg neg pos) (v5 zer neg neg neg neg) (v5 zer pos pos neg neg)
+primitiveActionMatrix s4 = matrix5 (v5 zer zer neg pos pos) (v5 neg pos neg pos pos) (v5 pos zer neg neg neg) (v5 neg zer neg neg pos) (v5 zer zer zer zer pos)
+primitiveActionMatrix s5 = matrix5 (v5 pos zer zer zer zer) (v5 zer neg neg pos pos) (v5 zer neg neg neg neg) (v5 zer pos neg neg pos) (v5 zer pos neg pos neg)
 
 weyl5 : SimpleE6Generator → Matrix5
-weyl5 s0 = matrix5
-  (v5 pos zer zer zer zer) (v5 zer pos zer zer zer)
-  (v5 zer zer pos zer zer) (v5 zer zer zer zer pos) (v5 zer zer zer pos zer)
-weyl5 s1 = matrix5
-  (v5 pos zer zer zer zer) (v5 zer pos zer zer zer)
-  (v5 zer zer zer pos zer) (v5 zer zer pos zer zer) (v5 zer zer zer zer pos)
-weyl5 s2 = matrix5
-  (v5 zer zer neg zer zer) (v5 zer pos zer zer zer)
-  (v5 neg zer zer zer zer) (v5 zer zer zer pos zer) (v5 zer zer zer zer pos)
-weyl5 s3 = matrix5
-  (v5 zer neg zer zer zer) (v5 neg zer zer zer zer)
-  (v5 zer zer pos zer zer) (v5 zer zer zer pos zer) (v5 zer zer zer zer pos)
-weyl5 s4 = matrix5
-  (v5 zer neg pos pos pos) (v5 neg zer pos pos pos)
-  (v5 pos pos zer neg neg) (v5 pos pos neg zer neg) (v5 pos pos neg neg zer)
-weyl5 s5 = matrix5
-  (v5 zer pos zer zer zer) (v5 pos zer zer zer zer)
-  (v5 zer zer pos zer zer) (v5 zer zer zer pos zer) (v5 zer zer zer zer pos)
+weyl5 s0 = matrix5 (v5 pos zer zer zer zer) (v5 zer pos zer zer zer) (v5 zer zer pos zer zer) (v5 zer zer zer zer pos) (v5 zer zer zer pos zer)
+weyl5 s1 = matrix5 (v5 pos zer zer zer zer) (v5 zer pos zer zer zer) (v5 zer zer zer pos zer) (v5 zer zer pos zer zer) (v5 zer zer zer zer pos)
+weyl5 s2 = matrix5 (v5 zer zer neg zer zer) (v5 zer pos zer zer zer) (v5 neg zer zer zer zer) (v5 zer zer zer pos zer) (v5 zer zer zer zer pos)
+weyl5 s3 = matrix5 (v5 zer neg zer zer zer) (v5 neg zer zer zer zer) (v5 zer zer pos zer zer) (v5 zer zer zer pos zer) (v5 zer zer zer zer pos)
+weyl5 s4 = matrix5 (v5 zer neg pos pos pos) (v5 neg zer pos pos pos) (v5 pos pos zer neg neg) (v5 pos pos neg zer neg) (v5 pos pos neg neg zer)
+weyl5 s5 = matrix5 (v5 zer pos zer zer zer) (v5 pos zer zer zer zer) (v5 zer zer pos zer zer) (v5 zer zer zer pos zer) (v5 zer zer zer zer pos)
 
 fourEnumeration : List E.F3Four
 fourEnumeration =
-  concatMap (λ a →
-  concatMap (λ b →
-  concatMap (λ c →
-  map (λ d → E.f3four a b c d) E.trits)
-  E.trits) E.trits) E.trits
+  concatMap (λ a → concatMap (λ b → concatMap (λ c → map (λ d → E.f3four a b c d) E.trits) E.trits) E.trits) E.trits
 
 similitudeCheck : SimpleE6Generator → E.F3Four → E.F3Four → Bool
 similitudeCheck g u v =
@@ -156,7 +97,9 @@ similitudeCheck g u v =
     (E.neg3 (E.symplectic4 u v))
 
 wedgeCovarianceCheck : SimpleE6Generator → E.F3Four → E.F3Four → Bool
-wedgeCovarianceCheck g u v =
+wedgeCovarianceCheck g u v with E.tritEq (E.symplectic4 u v) zer
+... | false = true
+... | true =
   E.primitiveEq
     (E.wedgePrimitiveCoordinates (apply4 (lift4 g) u) (apply4 (lift4 g) v))
     (applyPrimitive5 (primitiveActionMatrix g) (E.wedgePrimitiveCoordinates u v))
@@ -168,28 +111,19 @@ standardIntertwiningCheck g p =
     (apply5 (weyl5 g) (E.primitiveToStandard p))
 
 weylQuadraticCheck : SimpleE6Generator → E.StandardFive → Bool
-weylQuadraticCheck g z =
-  E.tritEq (E.standardQ (apply5 (weyl5 g) z)) (E.standardQ z)
+weylQuadraticCheck g z = E.tritEq (E.standardQ (apply5 (weyl5 g) z)) (E.standardQ z)
 
 similitudeChecks : List Bool
-similitudeChecks =
-  concatMap
-    (λ g → concatMap (λ u → map (similitudeCheck g u) fourEnumeration) fourEnumeration)
-    generators
+similitudeChecks = concatMap (λ g → concatMap (λ u → map (similitudeCheck g u) fourEnumeration) fourEnumeration) generators
 
 wedgeCovarianceChecks : List Bool
-wedgeCovarianceChecks =
-  concatMap
-    (λ g → concatMap (λ u → map (wedgeCovarianceCheck g u) fourEnumeration) fourEnumeration)
-    generators
+wedgeCovarianceChecks = concatMap (λ g → concatMap (λ u → map (wedgeCovarianceCheck g u) fourEnumeration) fourEnumeration) generators
 
 standardIntertwiningChecks : List Bool
-standardIntertwiningChecks =
-  concatMap (λ g → map (standardIntertwiningCheck g) E.primitiveEnumeration) generators
+standardIntertwiningChecks = concatMap (λ g → map (standardIntertwiningCheck g) E.primitiveEnumeration) generators
 
 weylQuadraticChecks : List Bool
-weylQuadraticChecks =
-  concatMap (λ g → map (weylQuadraticCheck g) E.standardEnumeration) generators
+weylQuadraticChecks = concatMap (λ g → map (weylQuadraticCheck g) E.standardEnumeration) generators
 
 similitudeExhaustive : E.allTrue similitudeChecks ≡ true
 similitudeExhaustive = refl
@@ -215,7 +149,6 @@ record ExceptionalE6F3GeneratorActionBoundary : Set where
     projectiveKernelPlusMinusIPaid : Bool
 open ExceptionalE6F3GeneratorActionBoundary public
 
-canonicalExceptionalE6F3GeneratorActionBoundary :
-  ExceptionalE6F3GeneratorActionBoundary
+canonicalExceptionalE6F3GeneratorActionBoundary : ExceptionalE6F3GeneratorActionBoundary
 canonicalExceptionalE6F3GeneratorActionBoundary =
   exceptional-e6-f3-generator-action-boundary true true true true true false false
