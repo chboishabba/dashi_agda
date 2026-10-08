@@ -36,7 +36,7 @@ for rel, markers in REQUIRED.items():
     for marker in markers:
         assert marker in text, (rel, marker)
 
-everything = (ROOT / "DASHI/Biology/Everything.agda").read_text()
+rollup = (ROOT / "DASHI/Biology/BemethylActoprotectorEverything.agda").read_text()
 for owner in REQUIRED:
     module = owner.removesuffix(".agda").replace("/", ".")
-    assert f"import {module}" in everything
+    assert f"import {module}" in rollup
