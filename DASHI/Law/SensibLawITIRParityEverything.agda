@@ -15,6 +15,7 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
+import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as AIAgentAttribution
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -73,13 +74,10 @@ selectedFriendlyjordiesCompetingNarrativeBoundary :
 selectedFriendlyjordiesCompetingNarrativeBoundary =
   FriendlyjordiesCompeting.canonicalFriendlyjordiesSensibLawBoundary
 
-
-
 selectedFriendlyjordiesSourceTotality :
   FriendlyjordiesSourceTotality.SourceTotalComparison
 selectedFriendlyjordiesSourceTotality =
   FriendlyjordiesSourceTotality.canonicalFriendlyjordiesSourceTotality
-
 
 selectedFriendlyjordiesConstructiveSourceTotalityBoundary :
   FriendlyjordiesSourceTotality.ConstructiveSourceTotalityBoundary
@@ -90,3 +88,12 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
+
+-- AI-agent legal attribution is now carried through the same SensibLaw parity
+-- surface.  The named Medicare incident remains an explicitly unpromoted
+-- application until the exact runtime trace and offence/attribution receipts
+-- exist.
+selectedMedicareAIAgentLegalBoundary :
+  AIAgentAttribution.NamedIncidentLegalBoundary
+selectedMedicareAIAgentLegalBoundary =
+  AIAgentAttribution.medicareLegalAttributionBoundary
