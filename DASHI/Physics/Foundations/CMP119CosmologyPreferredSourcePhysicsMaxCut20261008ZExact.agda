@@ -39,6 +39,9 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4RefinementLi
 remainingModelSpecificSourcePackageCount : Nat
 remainingModelSpecificSourcePackageCount = 4
 
+remainingStandardImportedAuthorityCount : Nat
+remainingStandardImportedAuthorityCount = Y.remainingStandardImportedAuthorityCount
+
 remainingPreferredPackageCount : Nat
 remainingPreferredPackageCount = 4
 
