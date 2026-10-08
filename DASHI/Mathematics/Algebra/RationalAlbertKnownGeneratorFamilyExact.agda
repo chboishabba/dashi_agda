@@ -109,19 +109,53 @@ knownGeneratorPreservesCubic selectedMoufangTriality = T.trialityPreservesCubic
 
 ------------------------------------------------------------------------
 -- Exact next recognition seam.
+--
+-- This is intentionally stronger than a carrier/order receipt: it requires a
+-- literal group, a literal action on the same Albert carrier, exact agreement
+-- with all five already-owned generator maps, and inhabited generation/type
+-- recognition receipts.
 ------------------------------------------------------------------------
 
 record F4GenerationReceipt : Set₁ where
   field
     GeneratedGroup : Set
+    identityG : GeneratedGroup
+    multiplyG : GeneratedGroup → GeneratedGroup → GeneratedGroup
+    inverseG : GeneratedGroup → GeneratedGroup
+
+    associativityG : (a b c : GeneratedGroup) →
+      multiplyG (multiplyG a b) c ≡ multiplyG a (multiplyG b c)
+    leftIdentityG : (a : GeneratedGroup) → multiplyG identityG a ≡ a
+    rightIdentityG : (a : GeneratedGroup) → multiplyG a identityG ≡ a
+    leftInverseG : (a : GeneratedGroup) → multiplyG (inverseG a) a ≡ identityG
+    rightInverseG : (a : GeneratedGroup) → multiplyG a (inverseG a) ≡ identityG
+
+    actionG : GeneratedGroup → A.RationalAlbert → A.RationalAlbert
+    actionIdentity : (x : A.RationalAlbert) → actionG identityG x ≡ x
+    actionMultiply : (g h : GeneratedGroup) → (x : A.RationalAlbert) →
+      actionG (multiplyG g h) x ≡ actionG g (actionG h x)
+
     containsKnownGenerator : KnownAlbertGenerator → GeneratedGroup
-    everyGeneratedElementActsOnAlbert : GeneratedGroup → A.RationalAlbert → A.RationalAlbert
-    everyGeneratedElementIsBijective : Set
-    everyGeneratedElementPreservesJordan : Set
-    everyGeneratedElementPreservesCubic : Set
-    fullSpin8TrialityContained : Set
-    f4RootDatumRecognition : Set
-    everyAlbertAutomorphismGenerated : Set
+    knownGeneratorActionAgrees : (g : KnownAlbertGenerator) →
+      (x : A.RationalAlbert) →
+      actionG (containsKnownGenerator g) x ≡ act g x
+
+    GeneratedByKnownAndTrialityProperty : Set
+    generatedByKnownAndTriality : GeneratedByKnownAndTrialityProperty
+
+    EveryGeneratedElementPreservesJordanProperty : Set
+    everyGeneratedElementPreservesJordan :
+      EveryGeneratedElementPreservesJordanProperty
+    EveryGeneratedElementPreservesCubicProperty : Set
+    everyGeneratedElementPreservesCubic :
+      EveryGeneratedElementPreservesCubicProperty
+
+    FullSpin8TrialityContainedProperty : Set
+    fullSpin8TrialityContained : FullSpin8TrialityContainedProperty
+    F4RootDatumRecognitionProperty : Set
+    f4RootDatumRecognition : F4RootDatumRecognitionProperty
+    EveryAlbertAutomorphismGeneratedProperty : Set
+    everyAlbertAutomorphismGenerated : EveryAlbertAutomorphismGeneratedProperty
 
 open F4GenerationReceipt public
 
