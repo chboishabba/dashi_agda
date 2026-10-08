@@ -144,9 +144,6 @@ def product_support_counts():
     return counts
 
 
-# E6 simple-root Cartan in the determinant-three labelling used by the finite
-# quotient diagnostics.  Mod 3 its radical is one-dimensional; the first five
-# simple coordinates form the selected complement.
 E6_CARTAN = np.array([
     [2, 0, -1, 0, 0, 0],
     [0, 2, 0, -1, 0, 0],
@@ -192,7 +189,6 @@ def torus_laplacian():
 def poisson_potential():
     rho = e6_chart_source()
     L = torus_laplacian()
-    # Poisson plus mean-zero gauge fixing.
     M = L.col_join(sp.ones(1, 27))
     rhs = sp.Matrix(rho).col_join(sp.Matrix([0]))
     sol = list(sp.linsolve((M, rhs)))[0]
@@ -274,8 +270,6 @@ def conformal_geometry():
 
 
 def hypercharge_spectrum():
-    # Standard trinification 27:
-    #   (3,bar3,1) + (bar3,1,3) + (1,3,bar3).
     Xf = [1, 1, -2]
     Xa = [-1, -1, 2]
     T3f = [1, -1, 0]
@@ -368,14 +362,21 @@ def verify(seed=369):
     x100 = {coords[0]: 0, coords[1]: 1, coords[2]: 0, coords[3]: 0}
     assert sp.simplify(Rsc.subs(x100)) != 0
 
-    # Literal public PhysioNet subject-1 row pair.  Official visualisation code
-    # maps row k to k*20/60 minutes.  Row 120 is before LOC, row 487 after ROC.
-    loc = 40.4093
-    roc = 162.0028
+    # Public PhysioNet subject-1 discriminator.  The EDA visualisation maps
+    # row k -> k*20/60 minutes.  Raw subject files provide LOC/ROC in seconds;
+    # the compact LOC_ROC table is the same event clock after a common origin
+    # shift, which is checked rather than silently assumed.
+    raw_loc_seconds = 3625.32
+    raw_roc_seconds = 10920.93
+    adjusted_loc_minutes = 40.4093
+    adjusted_roc_minutes = 162.0028
+    offset_loc = raw_loc_seconds / 60 - adjusted_loc_minutes
+    offset_roc = raw_roc_seconds / 60 - adjusted_roc_minutes
+    assert abs(offset_loc - offset_roc) < 1e-12
     pre_k = 120
     post_k = 487
-    assert pre_k * 20 / 60 < loc
-    assert post_k * 20 / 60 > roc
+    assert pre_k * 20 / 60 + offset_loc < raw_loc_seconds / 60
+    assert post_k * 20 / 60 + offset_loc > raw_roc_seconds / 60
     pre = np.array([
         4.76208579591535,
         4.18793376064776,
@@ -404,6 +405,7 @@ def verify(seed=369):
         "hypercharge_sum": sum(ys, Fraction(0, 1)),
         "hypercharge_cube_sum": sum((y**3 for y in ys), Fraction(0, 1)),
         "physionet_subject1_log_distance": log_distance,
+        "physionet_time_origin_minutes": offset_loc,
     }
 
 
