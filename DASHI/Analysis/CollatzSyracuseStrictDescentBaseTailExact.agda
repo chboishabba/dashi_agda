@@ -58,7 +58,7 @@ smallBaseDescend x@(Syracuse.positiveNat (suc zero)) nontrivial bound =
 smallBaseDescend x@(Syracuse.positiveNat (suc (suc zero))) nontrivial bound =
   5 , strictDropFromReachOne x nontrivial 5 refl
 smallBaseDescend x@(Syracuse.positiveNat (suc (suc (suc zero)))) nontrivial bound =
-  3 , strictDropFromReachOne x nontrivial 3 refl
+  2 , strictDropFromReachOne x nontrivial 2 refl
 smallBaseDescend x@(Syracuse.positiveNat (suc (suc (suc (suc zero))))) nontrivial bound =
   4 , strictDropFromReachOne x nontrivial 4 refl
 smallBaseDescend x@(Syracuse.positiveNat (suc (suc (suc (suc (suc zero)))))) nontrivial bound =
