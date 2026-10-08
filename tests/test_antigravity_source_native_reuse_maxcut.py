@@ -21,6 +21,19 @@ def test_localized_vacuum_readout_reuses_existing_projector():
         assert token in text
 
 
+def test_direct_source_vacuum_compiles_to_cosmological_stress_without_pinned_tensor():
+    text = read("DASHI/Physics/Foundations/CMP119AntigravityDirectSourceVacuumStressExact.agda")
+    for token in (
+        "sourceVacuumStressAtScale",
+        "vacuumStressIsMinusLambdaMetric",
+        "symbolicVacuumVariationShape",
+        "fixedAmplitudeReceiptRequired",
+        "pinnedNormalizedStressTensorRequired",
+        "actualSourceVacuumCoefficientFeedsStressDirectly",
+    ):
+        assert token in text
+
+
 def test_source_vacuum_pair_feeds_parameterized_israel_geometry():
     text = read("DASHI/Physics/Foundations/CMP119AntigravitySourceVacuumIsraelAdmissionExact.agda")
     for token in (
@@ -52,10 +65,11 @@ def test_terminal_owner_compresses_remaining_source_frontier():
     text = read("DASHI/Physics/ExoticGravity/AntigravitySourceNativeReuseTerminalExact.agda")
     for token in (
         "canonicalLocalizedVacuumReadoutBoundary",
+        "canonicalDirectSourceVacuumStressBoundary",
         "canonicalSourceVacuumIsraelAdmissionBoundary",
         "canonicalEq223MetricStressReuseBoundary",
         "rationalVacuumReadoutIsNoLongerIndependentLeaf",
-        "oldPinnedStressAncestryAuthorityIsNoLongerPreferredLeaf",
+        "pinnedNormalizedStressIsNoLongerNeededForVacuumGeometryRoute",
         "fixedMagicAmplitudePairIsNoLongerRequired",
         "sourceToGeometryAdmissionStillOpen",
         "actualR136EffectiveActionResponseEqualityStillOpen",
