@@ -4,6 +4,7 @@ module DASHI.Physics.ExoticGravity.AntigravitySourceNativeReuseTerminalExact whe
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.Foundations.CMP119AntigravityLocalizedVacuumReadoutExact as Readout
+import DASHI.Physics.Foundations.CMP119AntigravityDirectSourceVacuumStressExact as DirectStress
 import DASHI.Physics.Foundations.CMP119AntigravitySourceVacuumIsraelAdmissionExact as Admission
 import DASHI.Physics.Foundations.CMP119AntigravityEq223MetricStressReuseMaxCutExact as Reuse
 import DASHI.Physics.Foundations.GRQFTSourceNativeNambuBubbleConditionalExact as SourceNative
@@ -14,23 +15,24 @@ import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 ------------------------------------------------------------------------
 -- ANTIGRAVITY SOURCE-NATIVE REUSE TERMINAL
 --
--- Current repo archaeology eliminates THREE avoidable construction leaves:
+-- Current repo archaeology eliminates FOUR avoidable construction leaves:
 --
 --   1. LocalizedAction vacuum energy already has a rational projector;
---   2. actual source vacuum values can feed the parameterized Israel/Kottler
---      geometry directly, so the historical 21/64 and 19/48 fixture values are
---      examples, not source obligations;
---   3. the preferred Eq.(2.23) metric-variation/R136 path consumes the literal
+--   2. that actual projected coefficient feeds the existing cosmological
+--      stress ray directly, without the separately pinned normalized tensor;
+--   3. actual source vacuum values can feed parameterized Israel/Kottler
+--      geometry, so 21/64 and 19/48 are examples rather than obligations;
+--   4. the preferred Eq.(2.23) metric-variation/R136 path consumes literal
 --      source E/R/B/V objects, so the old constructorless generic ancestry
---      adapter is not the preferred same-object interface.
---
--- The remaining source payments are direct: selected source values must admit
--- a physical geometry (or the preferred numerator/sign route must pay), and the
--- selected R136 response must equal the finite effective-action response.
+--      adapter is not the preferred same-object interface there either.
 ------------------------------------------------------------------------
 
 localizedReadoutBoundary : Readout.LocalizedVacuumReadoutBoundary
 localizedReadoutBoundary = Readout.canonicalLocalizedVacuumReadoutBoundary
+
+directSourceVacuumStressBoundary : DirectStress.DirectSourceVacuumStressBoundary
+directSourceVacuumStressBoundary =
+  DirectStress.canonicalDirectSourceVacuumStressBoundary
 
 sourceVacuumIsraelAdmissionBoundary : Admission.SourceVacuumIsraelAdmissionBoundary
 sourceVacuumIsraelAdmissionBoundary =
@@ -53,11 +55,11 @@ record AntigravitySourceNativeReuseFrontier : Set where
   constructor antigravity-source-native-reuse-frontier
   field
     rationalVacuumReadoutIsNoLongerIndependentLeaf : Bool
+    pinnedNormalizedStressIsNoLongerNeededForVacuumGeometryRoute : Bool
     oldPinnedStressAncestryAuthorityIsNoLongerPreferredLeaf : Bool
     fixedMagicAmplitudePairIsNoLongerRequired : Bool
     literalEq223MetricVariationAlreadyExists : Bool
     nonlinearRepulsiveGeometryAlreadyExists : Bool
-    normalizedCMP119TensorTransportAlreadyExists : Bool
 
     sourceToGeometryAdmissionStillOpen : Bool
     actualR136EffectiveActionResponseEqualityStillOpen : Bool
@@ -78,11 +80,11 @@ record AntigravitySourceNativeReuseMaxCut : Set where
   constructor antigravity-source-native-reuse-max-cut
   field
     arbitraryVacuumReadoutConstructionRequired : Bool
+    pinnedNormalizedStressForVacuumGeometryRequired : Bool
     exactTwentyOneSixtyFourAndNineteenFortyEightRequired : Bool
     independentPinnedStressAncestryAdapterRequired : Bool
     newNonlinearRepulsiveGeometryRequired : Bool
     newIsraelShellAlgebraRequired : Bool
-    newNormalizedStressTensorShapeRequired : Bool
 
     actualSourceToGeometryAdmissionRequired : Bool
     literalPreferredSourcePaymentRequired : Bool
