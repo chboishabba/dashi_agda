@@ -16,7 +16,7 @@ module DASHI.Mathematics.Algebra.RationalAlbertJordanExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
@@ -124,14 +124,6 @@ albertTrace value = diag1 value + diag2 value + diag3 value
 
 ------------------------------------------------------------------------
 -- Cubic determinant / norm
---
--- N(a1,a2,a3;x1,x2,x3)
---   = a1 a2 a3
---     - a1 n(x1) - a2 n(x2) - a3 n(x3)
---     + 2 Re((x1 x2) x3).
---
--- `doubleReal` is written using the checked octonion conjugation, so no
--- floating or complex embedding is introduced.
 ------------------------------------------------------------------------
 
 doubleReal : O.RationalOctonion → ℚ
