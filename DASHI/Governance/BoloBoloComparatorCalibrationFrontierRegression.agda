@@ -4,28 +4,25 @@ open import DASHI.Core.Prelude
 
 import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as Frontier
 
-portoRegionsPinned :
-  Frontier.portoAlegreRegionCount Frontier.canonicalComparatorStructuralCoordinates ≡ 16
+portoRegionsPinned : Frontier.portoAlegreRegionCount Frontier.canonicalComparatorStructuralCoordinates ≡ 16
 portoRegionsPinned = refl
 
-mondragonCooperativesPinned :
-  Frontier.mondragonCooperativeCount Frontier.canonicalComparatorStructuralCoordinates ≡ 95
+mondragonCooperativesPinned : Frontier.mondragonCooperativeCount Frontier.canonicalComparatorStructuralCoordinates ≡ 95
 mondragonCooperativesPinned = refl
 
-polycentricCasesPinned :
-  Frontier.polycentricWaterCaseCount Frontier.canonicalComparatorStructuralCoordinates ≡ 26
+polycentricCasesPinned : Frontier.polycentricWaterCaseCount Frontier.canonicalComparatorStructuralCoordinates ≡ 26
 polycentricCasesPinned = refl
 
-portoCouncilCadencePinned :
-  Frontier.portoAlegreCouncilMeetingMinutesPerWeekLowerBound Frontier.canonicalComparatorWorkloadCoordinates ≡ 120
+portoCouncilCadencePinned : Frontier.portoAlegreCouncilMeetingMinutesPerWeekLowerBound Frontier.canonicalComparatorWorkloadCoordinates ≡ 120
 portoCouncilCadencePinned = refl
 
-mondragonReportbackCadencePinned :
-  Frontier.mondragonManagementReportbacksPerMonthLowerBound Frontier.canonicalComparatorWorkloadCoordinates ≡ 1
+portoPersonMinutesPinned : Frontier.portoAlegreCouncilPersonMinutesPerWeekLowerBound Frontier.canonicalComparatorWorkloadCoordinates ≡ 5280
+portoPersonMinutesPinned = refl
+
+mondragonReportbackCadencePinned : Frontier.mondragonManagementReportbacksPerMonthLowerBound Frontier.canonicalComparatorWorkloadCoordinates ≡ 1
 mondragonReportbackCadencePinned = refl
 
-comparatorCadenceDoesNotAutoTransfer :
-  Frontier.comparatorCadenceAutomaticallyTransfersToBolo Frontier.canonicalComparatorWorkloadCoordinates ≡ false
+comparatorCadenceDoesNotAutoTransfer : Frontier.comparatorCadenceAutomaticallyTransfersToBolo Frontier.canonicalComparatorWorkloadCoordinates ≡ false
 comparatorCadenceDoesNotAutoTransfer = refl
 
 allMechanismSurfacesPresent :
@@ -35,26 +32,29 @@ allMechanismSurfacesPresent :
   × Frontier.unresolvedConflictMechanismObservable Frontier.canonicalPrimitiveCalibrationFrontier ≡ true
 allMechanismSurfacesPresent = refl , refl , refl , refl
 
-comparatorCadenceMeasured :
-  Frontier.comparatorGovernanceCadenceMeasured Frontier.canonicalPrimitiveCalibrationFrontier ≡ true
+comparatorCadenceMeasured : Frontier.comparatorGovernanceCadenceMeasured Frontier.canonicalPrimitiveCalibrationFrontier ≡ true
 comparatorCadenceMeasured = refl
 
-targetWeightBoundsStillUnpaid :
-  Frontier.targetQualifiedPerUnitWeightBoundsPaid Frontier.canonicalPrimitiveCalibrationFrontier ≡ false
+comparatorPositiveWorkloadPaid : Frontier.comparatorLocalPositiveGovernanceWorkloadObserved Frontier.canonicalPrimitiveCalibrationFrontier ≡ true
+comparatorPositiveWorkloadPaid = refl
+
+institutionalVersionChangePaid : Frontier.institutionalVersionChangeObserved Frontier.canonicalPrimitiveCalibrationFrontier ≡ true
+institutionalVersionChangePaid = refl
+
+targetWeightBoundsStillUnpaid : Frontier.targetQualifiedPerUnitWeightBoundsPaid Frontier.canonicalPrimitiveCalibrationFrontier ≡ false
 targetWeightBoundsStillUnpaid = refl
 
-spokesMinutesAreNextAcquisition :
-  Frontier.acquireUnderlyingOWSSpokesMinutes Frontier.canonicalComparatorAcquisitionRoadmap ≡ true
+spokesMinutesAreNextAcquisition : Frontier.acquireUnderlyingOWSSpokesMinutes Frontier.canonicalComparatorAcquisitionRoadmap ≡ true
 spokesMinutesAreNextAcquisition = refl
 
-holdoutStillProtected :
-  Frontier.consumeHistoricalHoldoutBeforeDevelopmentGatePasses Frontier.canonicalComparatorAcquisitionRoadmap ≡ false
+holdoutStillProtected : Frontier.consumeHistoricalHoldoutBeforeDevelopmentGatePasses Frontier.canonicalComparatorAcquisitionRoadmap ≡ false
 holdoutStillProtected = refl
 
-comparatorsConstrainModelsNotCosts :
-  Frontier.comparatorCasesCanConstrainPlausibleModelFamilies Frontier.canonicalComparatorCalibrationBoundary ≡ true
+comparatorsConstrainModelsNotCosts : Frontier.comparatorCasesCanConstrainPlausibleModelFamilies Frontier.canonicalComparatorCalibrationBoundary ≡ true
 comparatorsConstrainModelsNotCosts = refl
 
-cadenceIsNotTotalCost :
-  Frontier.governanceCadenceEqualsTotalCoordinationCost Frontier.canonicalComparatorCalibrationBoundary ≡ false
+cadenceIsNotTotalCost : Frontier.governanceCadenceEqualsTotalCoordinationCost Frontier.canonicalComparatorCalibrationBoundary ≡ false
 cadenceIsNotTotalCost = refl
+
+noSilentVersionSplice : Frontier.historicalAndCurrentInstitutionalCoordinatesCanBeSpliced Frontier.canonicalComparatorCalibrationBoundary ≡ false
+noSilentVersionSplice = refl
