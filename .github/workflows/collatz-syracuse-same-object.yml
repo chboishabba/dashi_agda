@@ -53,6 +53,8 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
       - name: Typecheck survivor-frontier compiler
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+      - name: Typecheck strict-descent base-tail compiler
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseStrictDescentBaseTailExact.agda
       - name: Typecheck affine correction cocycle
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
       - name: Typecheck adjacent correction swap
