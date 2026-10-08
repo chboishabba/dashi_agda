@@ -4,17 +4,16 @@ module DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 ------------------------------------------------------------------------
 -- OVERLAY Y / 2026-10-08: POST SOURCE-FIRST PUBLISHED-B RECUT.
 --
--- Overlay X still charged an S1 same-object equality between the abstract
--- CMP109/116 Background carrier and Bałaban's published B-coordinate, plus the
--- possibility of independent finite-tangent choices.  The current branch head
--- has now removed both pieces of representation debt by construction:
+-- S1 representation debt is now removed by construction:
+--   * Background = PublishedB;
+--   * Tangent = SymmetricTensorComponent4;
+--   * Round247's active regular-E/localization form witness compiles directly
+--     into this source-first published-B continuation.
 --
---   * SourceFirstPublishedBContinuation chooses Background = PublishedB;
---   * the same continuation chooses Tangent = SymmetricTensorComponent4.
---
--- Therefore S1 no longer asks for either post-hoc carrier equality.  The real
--- source payment is the literal CMP109 potential, the literal CMP116 localized
--- activities, and their published finite-sum identity on that chosen B carrier.
+-- Hence S1 does NOT require a post-hoc carrier equality, ten tangent choices,
+-- or the full quantitative CMP122 Theorem-1 package.  Its surviving source
+-- payment is the consumer-minimal literal active regular-E/localization form
+-- witness on the selected beta-driven source family.
 --
 -- S2/S3 remain physical/source packages rather than adapter debt:
 --   S2   apply the imported renormalized trace/F2 authority to the SAME Local-C
@@ -29,6 +28,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261007XExact as X
 import DASHI.Physics.Foundations.CMP119CosmologyP1SourceFirstPublishedBContinuationExact as B
+import DASHI.Physics.Foundations.CMP119CosmologyP1ActiveRegularEToPublishedBExact as ActiveB
 
 remainingModelSpecificSourcePackageCount : Nat
 remainingModelSpecificSourcePackageCount = 4
@@ -43,7 +43,7 @@ remainingAdapterDebt : Nat
 remainingAdapterDebt = 0
 
 ------------------------------------------------------------------------
--- S1: source-first continuation on the published B carrier.
+-- S1: consumer-minimal active regular-E form on the published B carrier.
 ------------------------------------------------------------------------
 
 s1PublishedBBackgroundSameObjectAttachmentRequired : Bool
@@ -60,7 +60,15 @@ s1PostHocTenTangentIdentificationsRequired = B.postHocTenTangentIdentificationsR
 
 s1RemainingWorkIsLiteralContinuationOnPublishedBCarrier : Bool
 s1RemainingWorkIsLiteralContinuationOnPublishedBCarrier =
-  B.remainingS1WorkIsLiteralContinuationOnPublishedBCarrier
+  ActiveB.literalActiveRegularEFormOnPublishedBStillRequired
+
+s1FullTheorem1QuantitativePackageRequired : Bool
+s1FullTheorem1QuantitativePackageRequired =
+  ActiveB.fullTheorem1QuantitativePackageRequiredForS1
+
+s1LiteralActiveRegularEFormOnPublishedBStillRequired : Bool
+s1LiteralActiveRegularEFormOnPublishedBStillRequired =
+  ActiveB.literalActiveRegularEFormOnPublishedBStillRequired
 
 s1PublishedPotentialCovarianceNeedsFreshProof : Bool
 s1PublishedPotentialCovarianceNeedsFreshProof =
