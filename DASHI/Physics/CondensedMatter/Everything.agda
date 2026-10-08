@@ -8,3 +8,13 @@ import DASHI.Physics.CondensedMatter.HexagonalSqrt3R30ReciprocalFoldingExact
 import DASHI.Physics.CondensedMatter.GaoFe5GeTe2Sqrt3R30SameObjectWeldExact
 import DASHI.Physics.CondensedMatter.ARPESBandFoldingWitnessGateExact
 import DASHI.Physics.CondensedMatter.GaoFe5GeTe2FigureReplayExact
+
+-- Co1/4TaSe2 altermagnet / magnetic-crystal lane.
+import DASHI.Physics.CondensedMatter.AltermagnetCoQuarterTaSeTwo
+import DASHI.Physics.CondensedMatter.AltermagnetCrystalActionBridgeExact
+import DASHI.Physics.CondensedMatter.AltermagnetNodalSymmetryExact
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoMagneticCellIdentificationExact
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPhysicalSymmetryExact
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBNS194268SameObjectExact
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBlochRepresentationBoundaryExact
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESWitnessGateExact
