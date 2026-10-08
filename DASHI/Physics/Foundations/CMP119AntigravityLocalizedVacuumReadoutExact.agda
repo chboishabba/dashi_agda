@@ -5,7 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (_/_)
+open import Data.Rational.Base using (ℚ; _/_)
 
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as Source
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
@@ -38,7 +38,7 @@ module _
     T4.LocalizedAction T4.LocalizedAction T4.LocalizedAction)
   where
 
-  localizedVacuumValue : Nat → Data.Rational.Base.ℚ
+  localizedVacuumValue : Nat → ℚ
   localizedVacuumValue scale =
     T4.plaquetteCoefficientProjector
       (Source.vacuumEnergy source scale)
