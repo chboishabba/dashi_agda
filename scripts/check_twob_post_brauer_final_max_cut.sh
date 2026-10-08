@@ -25,6 +25,8 @@ targets=(
   DASHI/Moonshine/OggSSP2BTateCokernelRankRigidityExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda
   DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda
+  DASHI/Moonshine/OggSSP2BActualQ10RecognitionContractExact.agda
+  DASHI/Moonshine/OggSSP2BActualQ10RecognitionValidation.agda
 )
 
 for target in "${targets[@]}"; do
@@ -93,5 +95,10 @@ grep -q 'integralWeightTwoRankClosurePaid' "${targets[19]}"
 grep -q 'frobeniusExteriorQuotientDimensionIs276' "${targets[19]}"
 grep -q 'actualNormCommon98280StillOpen' "${targets[19]}"
 grep -q 'remainingDefectSourceBitsIsTwo' "${targets[19]}"
+
+grep -q 'record ActualTateQ10Recognition' "${targets[20]}"
+grep -q 'sourcedOuterActionDescendsToSameQ' "${targets[20]}"
+grep -q 'canonicalActualQ10AcquisitionBoundary' "${targets[20]}"
+grep -q 'validationCurrentActualQ10PaidIsFalse' "${targets[21]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
