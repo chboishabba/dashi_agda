@@ -6,21 +6,20 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 -- Fail-closed status surface spanning the companion Lean structured-E8/F4
 -- finite producers and the source-native Agda rational Albert algebra.
 --
--- The live branch has advanced beyond the earlier "find any G2/triality"
--- frontier.  It now owns:
---   * a concrete signed-basis octonion automorphism subgroup of order 1344 and
---     its diagonal Albert lift preserving product and cubic norm;
---   * one explicit non-diagonal Moufang/Spin(8)-triality-type Albert
---     automorphism with an explicit two-sided inverse;
---   * five explicit same-carrier Albert automorphism generators in total,
---     each bijective and product/cubic preserving;
---   * exact-rational diagnostics on all 351 basis-pair inner derivations, with
---     span/derived dimension 52 and centre dimension 0.
+-- The live branch now owns:
+--   * a concrete signed-basis octonion automorphism subgroup diagnostic of
+--     order 1344 and its diagonal Albert lifts;
+--   * one explicit non-diagonal bijective Moufang triality automorphism;
+--   * five explicit same-carrier Albert automorphism generators, each
+--     bijective and Jordan/cubic preserving, plus arbitrary-word closure;
+--   * the generic source-written theorem that every [L_a,L_b] is a derivation;
+--   * exact-rational diagnostics that their span/derived algebra has dimension
+--     52 and centre dimension 0.
 --
--- Therefore the remaining exceptional wall is generation/type recognition:
--- prove the full Spin(8)/D4 triality family on the actual three octonion slots,
--- kernel-prove the 52-dimensional derivation algebra result, identify its F4
--- root datum/type, then weld Aut(H_3(O)) = F4 = Stab_E6(1).
+-- The remaining exceptional wall is therefore generation/type recognition and
+-- rank certification: full Spin(8)/D4 triality generation, an Agda-checkable
+-- 52-dimensional span/independence certificate, F4 root datum/type, then
+-- Aut(H_3(O)) = F4 = Stab_E6(1).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -36,6 +35,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisG2SubgroupExact as G2
 import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact as Triality
 import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact as Known
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact as Deriv
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as DerivLaw
 
 record ExceptionalCurrentMaxCut : Set where
   constructor exceptional-current-max-cut
@@ -66,11 +66,12 @@ record ExceptionalCurrentMaxCut : Set where
     selectedMoufangTrialityAutomorphismPaid : Bool
     selectedTrialityProductCubicPreservationPaid : Bool
     knownFiveAlbertGeneratorsBijectivePaid : Bool
+    allInnerDerivationLawsSourceWritten : Bool
     innerDerivationDimension52DiagnosticPaid : Bool
     innerDerivationPerfectCenterlessDiagnosticPaid : Bool
 
     fullSpin8TrialityFamilyPaid : Bool
-    allInnerDerivationsKernelPaid : Bool
+    innerDerivationSpan52KernelCertificatePaid : Bool
     f4RootDatumPaid : Bool
     fullF4AutomorphismRecognitionPaid : Bool
     actualE6UnitStabilizerRecognitionPaid : Bool
@@ -90,7 +91,7 @@ canonicalExceptionalCurrentMaxCut =
     true true true true
     true true
     true true true true true
-    true true true true true true
+    true true true true true true true
     false false false false false
     false false false
-    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. The rational Albert algebra now has an explicit S3 subgroup, a genuine signed-basis octonion subgroup of order 1344 lifted to Albert automorphisms, one non-diagonal bijective Moufang triality automorphism, and five explicit same-carrier bijective product/cubic-preserving generators in total, plus an exact-rational 52-dimensional perfect/centerless inner-derivation diagnostic. The remaining algebraic wall is full Spin(8)/D4 triality generation on the same Albert carrier, kernel proof of the derivation span/type, F4 root-datum recognition, and finally Aut(J)=F4=Stab_E6(1)."
+    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. The rational Albert algebra now has five explicit same-carrier bijective Jordan/cubic automorphism generators and a compiler proving arbitrary words in them remain automorphisms. The selected non-diagonal Moufang triality map has an explicit two-sided inverse. Every inner commutator [L_a,L_b] is now source-written as a derivation for arbitrary Albert a,b; the 52-dimensional perfect/centerless span remains an exact-rational diagnostic awaiting a replayable Agda rank certificate. The live algebraic wall is full Spin(8)/D4 triality generation, the 52-span certificate, F4 root-datum recognition, and finally Aut(J)=F4=Stab_E6(1)."
