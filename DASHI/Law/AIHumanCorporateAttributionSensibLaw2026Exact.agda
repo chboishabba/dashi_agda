@@ -59,10 +59,29 @@ record AgentConductEvidence : Set where
 
 open AgentConductEvidence public
 
+-- The runtime evidence and the legal carrier must literally meet on the same
+-- SensibLaw event/evidence identities; a narrative similarity is insufficient.
+record GroundedAgentLegalCase : Set where
+  constructor groundedAgentLegalCase
+  field
+    legalCarrier : SameObjectLegalCarrier
+    conductEvidence : AgentConductEvidence
+    eventEvidenceMatchesCarrier :
+      SensibLaw.EventEvidenceLink.linkedEvent
+        (AgentConductEvidence.eventEvidence conductEvidence)
+      ≡ SensibLaw.Event.eventId (SameObjectLegalCarrier.event legalCarrier)
+    evidenceIdentityPreserved :
+      SensibLaw.EventEvidenceLink.linkedEvidence
+        (AgentConductEvidence.eventEvidence conductEvidence)
+      ≡ SensibLaw.EvidenceItem.evidenceId
+        (AgentConductEvidence.evidenceItem conductEvidence)
+
+open GroundedAgentLegalCase public
+
 record LegalElementPayment : Set where
   constructor legalElementPayment
   field
-    carrier : SameObjectLegalCarrier
+    groundedCase : GroundedAgentLegalCase
     conductEvidenceRef : String
     faultEvidenceRef : String
     attributionEvidenceRef : String
@@ -93,7 +112,6 @@ record AccessToSensibLawBridge : Set where
   constructor accessToSensibLawBridge
   field
     accessCoordinates : Access.LegalAttributionCoordinates
-    legalCarrier : SameObjectLegalCarrier
     legalPayment : LegalElementPayment
     corporateAttribution : CorporateAttributionCoordinates
 
