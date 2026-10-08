@@ -9,6 +9,8 @@ import DASHI.Governance.BoloBoloOWSSpokesRateShiftExact as SpokesShift
 import DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact as Polycentric
 import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as NetworkEvidence
 import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as Frontier
+import DASHI.Governance.BoloBoloComparatorWorkloadLowerBoundExact as Workload
+import DASHI.Governance.BoloBoloComparatorInstitutionalVersioningExact as Versioning
 
 record BoloComparatorEvidenceInstantiation : Set where
   constructor boloComparatorEvidenceInstantiation
@@ -25,6 +27,11 @@ record BoloComparatorEvidenceInstantiation : Set where
     organizationalNetworkBoundary : NetworkEvidence.OrganizationalNetworkEvidenceBoundary
     structuralCoordinates : Frontier.ComparatorStructuralCoordinates
     workloadCoordinates : Frontier.ComparatorWorkloadCoordinates
+    comparatorWorkloadLowerBound : Workload.ComparatorWorkloadLowerBound
+    comparatorWorkloadBoundary : Workload.ComparatorWorkloadBoundary
+    historicalPortoVersion : Versioning.PortoAlegreHistoricalVersion
+    currentPorto2026Version : Versioning.PortoAlegreCurrent2026Version
+    comparatorVersioningBoundary : Versioning.ComparatorVersioningBoundary
     primitiveFrontier : Frontier.PrimitiveCalibrationFrontier
     acquisitionRoadmap : Frontier.ComparatorAcquisitionRoadmap
     calibrationBoundary : Frontier.ComparatorCalibrationBoundary
@@ -45,6 +52,11 @@ canonicalBoloComparatorEvidenceInstantiation = record
   ; organizationalNetworkBoundary = NetworkEvidence.canonicalOrganizationalNetworkEvidenceBoundary
   ; structuralCoordinates = Frontier.canonicalComparatorStructuralCoordinates
   ; workloadCoordinates = Frontier.canonicalComparatorWorkloadCoordinates
+  ; comparatorWorkloadLowerBound = Workload.canonicalComparatorWorkloadLowerBound
+  ; comparatorWorkloadBoundary = Workload.canonicalComparatorWorkloadBoundary
+  ; historicalPortoVersion = Versioning.canonicalPortoAlegreHistoricalVersion
+  ; currentPorto2026Version = Versioning.canonicalPortoAlegreCurrent2026Version
+  ; comparatorVersioningBoundary = Versioning.canonicalComparatorVersioningBoundary
   ; primitiveFrontier = Frontier.canonicalPrimitiveCalibrationFrontier
   ; acquisitionRoadmap = Frontier.canonicalComparatorAcquisitionRoadmap
   ; calibrationBoundary = Frontier.canonicalComparatorCalibrationBoundary
@@ -63,6 +75,8 @@ record ComparatorEvidenceInstantiationBoundary : Set where
     largeUrbanNestedParticipationComparatorPaid : Bool
     durableFederatedCooperativeComparatorPaid : Bool
     comparatorGovernanceCadenceCoordinatesPaid : Bool
+    comparatorLocalWorkloadFloorPaid : Bool
+    comparatorInstitutionalVersioningPaid : Bool
     underlyingPrimarySpokesMinutesPaid : Bool
     targetQualifiedPrimitiveBoloCostBoundsPaid : Bool
     comparatorEvidenceAloneEstablishesBoloSuperiority : Bool
@@ -72,7 +86,7 @@ open ComparatorEvidenceInstantiationBoundary public
 canonicalComparatorEvidenceInstantiationBoundary : ComparatorEvidenceInstantiationBoundary
 canonicalComparatorEvidenceInstantiationBoundary =
   comparatorEvidenceInstantiationBoundary
-    true true true true true true true true true true false false false
+    true true true true true true true true true true true true false false false
 
 canonicalBoloComparatorEvidenceInstantiationReceipt : GenericReceipt.GenericReceipt
 canonicalBoloComparatorEvidenceInstantiationReceipt =
@@ -80,6 +94,6 @@ canonicalBoloComparatorEvidenceInstantiationReceipt =
     "bolo'bolo comparator evidence instantiation capstone"
     "DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact"
     "canonicalBoloComparatorEvidenceInstantiation / canonicalComparatorEvidenceInstantiationBoundary"
-    "assembles independently attributed comparator evidence for the reported OWS scale shock and GA-to-Spokes transition, its normalized development-only lexical transition check, Porto Alegre nested participatory budgeting, Mondragon multi-level cooperative governance, comparative/systematic polycentric-governance evidence and task-contingent organizational-network experiments, including source-explicit scale and cadence coordinates"
-    "the underlying November 2011 Spokes minutes remain unmaterialised and none of the comparator observations supplies a target-qualified primitive bolo cost/weight bound or political-superiority claim; comparator evidence constrains mechanism plausibility and admissible model design only until explicit transport or direct target measurement is paid"
+    "assembles independently attributed comparator evidence for the reported OWS scale shock and GA-to-Spokes transition, its normalized development-only lexical transition check, Porto Alegre nested participatory budgeting, Mondragon multi-level cooperative governance, comparative/systematic polycentric-governance evidence and task-contingent organizational-network experiments; adds a comparator-local Porto Alegre council-workload floor and explicit historical/current institutional versioning"
+    "the underlying November 2011 Spokes minutes remain unmaterialised and none of the comparator-local workload or versioned institutional observations supplies a target-qualified primitive bolo cost/weight bound or political-superiority claim; comparator evidence constrains mechanism plausibility and admissible model design only until explicit transport or direct target measurement is paid"
     "agda -i . DASHI/Governance/BoloBoloComparatorEvidenceInstantiationRegression.agda"
