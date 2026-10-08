@@ -7,6 +7,7 @@ open import Data.Sum.Base using (inj₁)
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as AF
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert
+import DASHI.Mathematics.Algebra.RationalAlbertJordanExact as RationalAlbert
 import DASHI.Cognition.Teleodynamics.GeometricLearnerPriorExact as Prior
 
 ------------------------------------------------------------------------
@@ -14,8 +15,12 @@ import DASHI.Cognition.Teleodynamics.GeometricLearnerPriorExact as Prior
 --
 -- This reuses the exact existing ternary-27 carrier bijection
 --   Ternary27Point <-> ScalarLine + NonOrigin26
--- as an experiment codebook shape.  It imports no Jordan product and creates
--- no F4/E6 action.
+-- as an experiment codebook shape.
+--
+-- The repository now ALSO owns an independent rational H_3(O_Q) carrier with
+-- a concrete Jordan-product formula, unit and cubic norm.  That does not make
+-- the ternary-27 carrier an Albert algebra: promotion now requires an explicit
+-- two-sided carrier map which preserves the Jordan product and cubic norm.
 ------------------------------------------------------------------------
 
 scalarArmPoint : Albert.CubeAlbert27
@@ -24,6 +29,9 @@ scalarArmPoint = inj₁ AF.scalarLine
 originMapsToPriorScalar :
   Albert.toAlbertShape Geometry.origin ≡ scalarArmPoint
 originMapsToPriorScalar = Albert.originMapsToScalar
+
+repoNativeRationalAlbertDimension : RationalAlbert.rationalAlbertDimension ≡ 27
+repoNativeRationalAlbertDimension = RationalAlbert.rationalAlbertDimensionIs27
 
 ternaryAlbertPrior : Prior.GeometricLearnerPrior
 ternaryAlbertPrior =
@@ -36,15 +44,16 @@ ternaryAlbertPrior =
     "optional categorical/soft projection"
     "none required"
     "optional occupancy/alignment observer"
-    "DASHI carrier-shape bridge; no exceptional action inferred"
+    "DASHI carrier-shape bridge; rational Albert algebra exists separately"
     true false false false
 
-data AlbertPriorCreatesJordanProduct : Set where
+data TernaryPriorInheritsAlbertJordanProduct : Set where
 data AlbertPriorCreatesF4Action : Set where
 data AlbertPriorCreatesE6Action : Set where
 
-albertPriorDoesNotCreateJordanProduct : AlbertPriorCreatesJordanProduct → ⊥
-albertPriorDoesNotCreateJordanProduct ()
+ternaryPriorDoesNotInheritAlbertJordanProduct :
+  TernaryPriorInheritsAlbertJordanProduct → ⊥
+ternaryPriorDoesNotInheritAlbertJordanProduct ()
 
 albertPriorDoesNotCreateF4Action : AlbertPriorCreatesF4Action → ⊥
 albertPriorDoesNotCreateF4Action ()
@@ -57,10 +66,20 @@ record AlbertPriorBoundary : Set where
   field
     exactTernary27CarrierReused : Bool
     exactOriginPlus26BijectionReused : Bool
-    jordanProductCreated : Bool
+    repoNativeRationalAlbertCarrierAvailable : Bool
+    repoNativeJordanProductFormulaAvailable : Bool
+    repoNativeCubicNormFormulaAvailable : Bool
+    ternaryToRationalAlbertBijectionConstructed : Bool
+    ternaryProductIntertwinerConstructed : Bool
+    ternaryCubicNormPreservationProved : Bool
+    jordanProductInheritedByTernaryPrior : Bool
     f4ActionCreated : Bool
     e6ActionCreated : Bool
 
 canonicalAlbertPriorBoundary : AlbertPriorBoundary
 canonicalAlbertPriorBoundary =
-  albertPriorBoundary true true false false false
+  albertPriorBoundary
+    true true
+    true true true
+    false false false false
+    false false
