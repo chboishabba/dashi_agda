@@ -2,6 +2,7 @@ module DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESWitnessGateExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.CondensedMatter.ARPESBandFoldingWitnessGateExact as ARPES
@@ -42,7 +43,6 @@ canonicalCoARPESAcquisitionStatus =
     true true true
     false false false false false
 
--- Reuse, rather than duplicate, the repository-wide ARPES epistemic boundary.
 existingARPESPromotionBoundary : ARPES.WitnessPromotionBoundary
 existingARPESPromotionBoundary = ARPES.canonicalWitnessPromotionBoundary
 
@@ -62,8 +62,6 @@ canonicalCoARPESFitObligations : CoARPESFitObligations
 canonicalCoARPESFitObligations =
   co-arpes-fit-obligations false false false false false false false false
 
--- Existing sourced k-space assignments remain usable as source claims, but do
--- not become measured intensity arrays.
 existing48eVAssignment :
   Physical.experimentalKzAssignment Physical.eV48 ≡ Physical.zeroPlane
 existing48eVAssignment = refl
