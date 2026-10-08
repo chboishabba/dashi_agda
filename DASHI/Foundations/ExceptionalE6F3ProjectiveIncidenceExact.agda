@@ -1,15 +1,5 @@
 module DASHI.Foundations.ExceptionalE6F3ProjectiveIncidenceExact where
 
-------------------------------------------------------------------------
--- PROJECTIVE INCIDENCE DUALITY FOR THE F3 EXTERIOR-SQUARE E6 BRIDGE
---
--- Primitive nonzero null bivectors modulo sign give 40 canonical projective
--- representatives.  Standard nonzero null vectors modulo sign give another
--- 40.  The explicit change of basis from the exterior-square owner induces
--- a two-sided projective recognition and transports the Plucker polar-zero
--- relation to ordinary quadratic orthogonality.
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
@@ -18,10 +8,6 @@ open import Data.List.Base using (map; concatMap; filterᵇ)
 
 import DASHI.Foundations.ExceptionalE6F3ExteriorSquareRecognitionExact as E
 import DASHI.Mathematics.NumberTheory.FiniteWeightedReindexExact as Reindex
-
-------------------------------------------------------------------------
--- Canonical sign representatives modulo +/-1.
-------------------------------------------------------------------------
 
 canonicalSign5 : Trit → Trit → Trit → Trit → Trit → Bool
 canonicalSign5 neg b c d e = false
@@ -73,10 +59,12 @@ canonicalizeStandard z with standardCanonical z
 ... | false = negStandard z
 
 primitiveProjectiveNull : E.PrimitiveBivector5 → Bool
-primitiveProjectiveNull p = E.primitiveNullNonzero p E.andB primitiveCanonical p
+primitiveProjectiveNull p =
+  E._andB_ (E.primitiveNullNonzero p) (primitiveCanonical p)
 
 standardProjectiveNull : E.StandardFive → Bool
-standardProjectiveNull z = E.standardNullNonzero z E.andB standardCanonical z
+standardProjectiveNull z =
+  E._andB_ (E.standardNullNonzero z) (standardCanonical z)
 
 primitiveProjectiveEnumeration : List E.PrimitiveBivector5
 primitiveProjectiveEnumeration =
@@ -93,10 +81,6 @@ primitiveProjectiveEnumerationCount = refl
 standardProjectiveEnumerationCount :
   Reindex.listLength standardProjectiveEnumeration ≡ 40
 standardProjectiveEnumerationCount = refl
-
-------------------------------------------------------------------------
--- Projectivized two-sided chart.
-------------------------------------------------------------------------
 
 projectiveToStandard : E.PrimitiveBivector5 → E.StandardFive
 projectiveToStandard p = canonicalizeStandard (E.primitiveToStandard p)
@@ -140,27 +124,23 @@ projectiveStandardPredicateExhaustive :
   E.allTrue (map projectiveStandardPredicateCheck standardProjectiveEnumeration) ≡ true
 projectiveStandardPredicateExhaustive = refl
 
-------------------------------------------------------------------------
--- Incidence / orthogonality relation.
-------------------------------------------------------------------------
-
 pluckerPolar : E.PrimitiveBivector5 → E.PrimitiveBivector5 → Trit
 pluckerPolar p q =
   E.sum5
-    (E.p12 p E.*3 E.p12 q)
-    (E.neg3 (E.p13 p E.*3 E.p24 q))
-    (E.neg3 (E.p13 q E.*3 E.p24 p))
-    (E.p14 p E.*3 E.p23 q)
-    (E.p14 q E.*3 E.p23 p)
+    (E._*3_ (E.p12 p) (E.p12 q))
+    (E.neg3 (E._*3_ (E.p13 p) (E.p24 q)))
+    (E.neg3 (E._*3_ (E.p13 q) (E.p24 p)))
+    (E._*3_ (E.p14 p) (E.p23 q))
+    (E._*3_ (E.p14 q) (E.p23 p))
 
 standardDot : E.StandardFive → E.StandardFive → Trit
 standardDot z w =
   E.sum5
-    (E.z1 z E.*3 E.z1 w)
-    (E.z2 z E.*3 E.z2 w)
-    (E.z3 z E.*3 E.z3 w)
-    (E.z4 z E.*3 E.z4 w)
-    (E.z5 z E.*3 E.z5 w)
+    (E._*3_ (E.z1 z) (E.z1 w))
+    (E._*3_ (E.z2 z) (E.z2 w))
+    (E._*3_ (E.z3 z) (E.z3 w))
+    (E._*3_ (E.z4 z) (E.z4 w))
+    (E._*3_ (E.z5 z) (E.z5 w))
 
 lineIncidence : E.PrimitiveBivector5 → E.PrimitiveBivector5 → Bool
 lineIncidence p q = E.tritEq (pluckerPolar p q) zer
@@ -183,10 +163,6 @@ incidenceOrthogonalityChecks =
 incidenceOrthogonalityExhaustive :
   E.allTrue incidenceOrthogonalityChecks ≡ true
 incidenceOrthogonalityExhaustive = refl
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 record ExceptionalE6F3ProjectiveIncidenceBoundary : Set where
   constructor exceptional-e6-f3-projective-incidence-boundary
