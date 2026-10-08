@@ -14,9 +14,9 @@ module DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact 
 --
 -- form an explicit triality triple.  Acting by these three maps on the three
 -- off-diagonal coordinates of H_3(O_Q), while fixing the diagonal scalars,
--- preserves the Albert cubic and Jordan product.  This is a genuine non-diagonal
--- triality-type transformation and is stronger than the common diagonal G2
--- action constructed in the signed-basis owner.
+-- preserves the Albert cubic and Jordan product.  The explicit inverse uses
+-- -u on the left/right maps and the involutive middle map, so this selected
+-- transformation is genuinely bijective on the same Albert carrier.
 --
 -- Full Spin(8) triality and full F4 generation are not inferred from one triple.
 ------------------------------------------------------------------------
@@ -38,6 +38,13 @@ leftU x = O._*o_ O.e1 x
 rightU x = O._*o_ x O.e1
 middleU x = O._*o_ (O._*o_ O.e1 x) O.e1
 
+negU : O.RationalOctonion
+negU = O.negO O.e1
+
+leftUInverse rightUInverse : O.RationalOctonion → O.RationalOctonion
+leftUInverse x = O._*o_ negU x
+rightUInverse x = O._*o_ x negU
+
 /-- Coordinate form of the Moufang triality identity for the selected unit. -/
 selectedMoufangTriality : ∀ x y →
   O._*o_ (leftU x) (rightU y) ≡ middleU (O._*o_ x y)
@@ -56,6 +63,62 @@ selectedMoufangTriality
 trialityA : A.RationalAlbert → A.RationalAlbert
 trialityA (A.albert a b c x y z) =
   A.albert a b c (leftU x) (rightU y) (middleU z)
+
+trialityInverseA : A.RationalAlbert → A.RationalAlbert
+trialityInverseA (A.albert a b c x y z) =
+  A.albert a b c (leftUInverse x) (rightUInverse y) (middleU z)
+
+trialityInverseLeft : ∀ value →
+  trialityInverseA (trialityA value) ≡ value
+trialityInverseLeft
+  (A.albert a b c
+    (O.oct (Q.quat x0 x1 x2 x3) (Q.quat x4 x5 x6 x7))
+    (O.oct (Q.quat y0 y1 y2 y3) (Q.quat y4 y5 y6 y7))
+    (O.oct (Q.quat z0 z1 z2 z3) (Q.quat z4 z5 z6 z7))) =
+  Laws.albertExt
+    (solve vars) (solve vars) (solve vars)
+    (O.octonionExt
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars)))
+    (O.octonionExt
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars)))
+    (O.octonionExt
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars)))
+  where
+    vars : List ℚ
+    vars =
+      a ∷ b ∷ c ∷
+      x0 ∷ x1 ∷ x2 ∷ x3 ∷ x4 ∷ x5 ∷ x6 ∷ x7 ∷
+      y0 ∷ y1 ∷ y2 ∷ y3 ∷ y4 ∷ y5 ∷ y6 ∷ y7 ∷
+      z0 ∷ z1 ∷ z2 ∷ z3 ∷ z4 ∷ z5 ∷ z6 ∷ z7 ∷ []
+
+trialityInverseRight : ∀ value →
+  trialityA (trialityInverseA value) ≡ value
+trialityInverseRight
+  (A.albert a b c
+    (O.oct (Q.quat x0 x1 x2 x3) (Q.quat x4 x5 x6 x7))
+    (O.oct (Q.quat y0 y1 y2 y3) (Q.quat y4 y5 y6 y7))
+    (O.oct (Q.quat z0 z1 z2 z3) (Q.quat z4 z5 z6 z7))) =
+  Laws.albertExt
+    (solve vars) (solve vars) (solve vars)
+    (O.octonionExt
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars)))
+    (O.octonionExt
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars)))
+    (O.octonionExt
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+      (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars)))
+  where
+    vars : List ℚ
+    vars =
+      a ∷ b ∷ c ∷
+      x0 ∷ x1 ∷ x2 ∷ x3 ∷ x4 ∷ x5 ∷ x6 ∷ x7 ∷
+      y0 ∷ y1 ∷ y2 ∷ y3 ∷ y4 ∷ y5 ∷ y6 ∷ y7 ∷
+      z0 ∷ z1 ∷ z2 ∷ z3 ∷ z4 ∷ z5 ∷ z6 ∷ z7 ∷ []
 
 trialityPreservesProduct : ∀ left right →
   trialityA (J.jordanProduct left right) ≡
@@ -112,6 +175,7 @@ record TrialityBoundary : Set where
   constructor triality-boundary
   field
     selectedMoufangTriplePaid : Bool
+    AlbertBijectivityPaid : Bool
     AlbertProductPreservationPaid : Bool
     AlbertCubicPreservationPaid : Bool
     fullSpin8TrialityPaid : Bool
@@ -119,4 +183,4 @@ record TrialityBoundary : Set where
 open TrialityBoundary public
 
 canonicalBoundary : TrialityBoundary
-canonicalBoundary = triality-boundary true true true false false
+canonicalBoundary = triality-boundary true true true true false false
