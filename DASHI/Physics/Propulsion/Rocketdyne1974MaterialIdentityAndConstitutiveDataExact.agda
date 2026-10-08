@@ -11,7 +11,7 @@ open import Agda.Builtin.String using (String)
 -- NASA-CR-140308 / R-9557 and executive summary R-9557-1 identify the
 -- Durability Engine nozzle as WC103 columbium with Vac Hyd silicide coating
 -- VH-101, 80-percent bell, attached near epsilon 3:1 and extending to 40:1.
--- This pays the historical alloy/coating identity.  It does not import a
+-- This pays the historical alloy/coating identity. It does not import a
 -- modern datasheet as though it were the 1974 article's batch certificate.
 ------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ historicalGeometry =
 ------------------------------------------------------------------------
 -- CONSTITUTIVE ANCHORS
 --
--- These are bounded external anchors.  They constrain plausibility but are
+-- These are bounded external anchors. They constrain plausibility but are
 -- not silently promoted to the exact 1974 nozzle article's constitutive law.
 ------------------------------------------------------------------------
 
@@ -109,6 +109,25 @@ haynes25PlateAt2000F =
     modernManufacturerData false
     "Haynes International HAYNES 25 alloy brochure/current alloy page"
 
+-- ATI Wah Chang C-103 data mirrored by MatWeb provide a bounded comparator:
+-- 2000 F in vacuum: yield 20.0 ksi, UTS 27.0 ksi.
+c103At2000F : TensileAnchor
+c103At2000F =
+  tensile-anchor wc103Columbium 2000 200 270
+    "ATI Wah Chang C-103, vacuum"
+    secondaryDatabase false
+    "MatWeb ATI Wah Chang Nb/Nb Alloy C-103; information attributed to ATI Wah Chang"
+
+-- At 2500 F in vacuum the same external source reports yield 10.5 ksi,
+-- UTS 13.0 ksi. This brackets the historical ~2300 F observation but MUST
+-- NOT be interpolated into a same-article 2300 F allowable without a model.
+c103At2500F : TensileAnchor
+c103At2500F =
+  tensile-anchor wc103Columbium 2500 105 130
+    "ATI Wah Chang C-103, vacuum"
+    secondaryDatabase false
+    "MatWeb ATI Wah Chang Nb/Nb Alloy C-103; information attributed to ATI Wah Chang"
+
 record CreepAnchor : Set where
   constructor creep-anchor
   field
@@ -128,6 +147,21 @@ c103HistoricalCreepAnchor =
     "NASA NTRS 19800025047, Table I, C-103 creep data"
     "external constitutive comparator only; not a 1974 batch certificate"
 
+record ComparativeAnchorReceipt : Set where
+  constructor comparative-anchor-receipt
+  field
+    comparisonTemperatureF : Nat
+    haynesYieldTenthsKsi : Nat
+    c103YieldTenthsKsi : Nat
+    sameTemperature : Bool
+    sameProductFormOrBatch : Bool
+    admissibleConclusion : String
+
+at2000FComparativeAnchor : ComparativeAnchorReceipt
+at2000FComparativeAnchor =
+  comparative-anchor-receipt 2000 90 200 true false
+    "external data place C-103 above HAYNES 25 sheet in yield strength at 2000 F; this constrains plausibility but does not identify the 1974 failure stress"
+
 record MaterialDataBoundary : Set where
   constructor material-data-boundary
   field
@@ -138,7 +172,8 @@ record MaterialDataBoundary : Set where
     exact1974WC103ConstitutiveLawRecovered : Bool
     modernDataMayBoundPlausibility : Bool
     modernDataEqualsHistoricalArticle : Bool
+    interpolationTo2300FAutomaticallyAdmissible : Bool
 
 canonicalMaterialDataBoundary : MaterialDataBoundary
 canonicalMaterialDataBoundary =
-  material-data-boundary true true false false false true false
+  material-data-boundary true true false false false true false false
