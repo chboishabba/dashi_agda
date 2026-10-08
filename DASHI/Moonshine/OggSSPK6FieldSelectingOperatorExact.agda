@@ -24,7 +24,7 @@ import DASHI.Moonshine.OggSSPHeisenbergSymplecticFieldNoGoExact as NoGo
 _≢_ : {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
-record K6FieldSelectingOperator : Set where
+record K6FieldSelectingOperator : Set₁ where
   field
     operator : H.X6 → H.X6
 
@@ -43,12 +43,15 @@ record K6FieldSelectingOperator : Set where
       operator (NoGo.swap01X6 swapBreakingWitness)
       ≢ NoGo.swap01X6 (operator swapBreakingWitness)
 
-    -- Independently checked algebra-generation receipt.  These fields are
-    -- deliberately source-facing rather than inferred from cardinality.
+    -- Independently checked algebra-generation receipt.  Degree/cyclic-span
+    -- numerics are explicit, while any richer source-specific minimal-
+    -- polynomial theorem is carried as an inhabited proposition.
     minimalPolynomialDegree : Nat
     minimalPolynomialDegreeIsSix : minimalPolynomialDegree ≡ 6
     cyclicSpanDimension : Nat
     cyclicSpanDimensionIsSix : cyclicSpanDimension ≡ 6
+    FieldGeneratorReceipt : Set
+    fieldGeneratorReceipt : FieldGeneratorReceipt
 
 open K6FieldSelectingOperator public
 
@@ -81,10 +84,12 @@ canonicalAcquisitionTarget : K6FieldSelectorAcquisitionTarget
 canonicalAcquisitionTarget =
   k6-field-selector-acquisition-target 6 6 false false false
 
-record K6FieldRecognitionPromotion : Set where
+record K6FieldRecognitionPromotion : Set₁ where
   field
     selector : K6FieldSelectingOperator
-    sameCarrierIntertwiner : Set
-    actionOrbitStabilizerRecognition : Set
+    SameCarrierIntertwinerReceipt : Set
+    sameCarrierIntertwiner : SameCarrierIntertwinerReceipt
+    ActionOrbitStabilizerRecognitionReceipt : Set
+    actionOrbitStabilizerRecognition : ActionOrbitStabilizerRecognitionReceipt
 
 open K6FieldRecognitionPromotion public
