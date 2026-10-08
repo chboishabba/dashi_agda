@@ -12,9 +12,13 @@ import DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeExact as Dynam
 --
 -- A validated meaningful snapshot comparison is still weaker than a claim
 -- about institutional performance through adaptation. Long-run promotion must
--- carry evidence that realised topology, actor response, institutional version
--- and model revision have been audited across a declared longitudinal window.
+-- carry repeated same-polarity meaningful certificates plus evidence that
+-- realised topology, actor response, institutional version and model revision
+-- have been audited across a predeclared longitudinal window.
 ------------------------------------------------------------------------
+
+data AtLeastTwo {A : Set₁} : List A → Set₁ where
+  atLeastTwo : ∀ x y xs → AtLeastTwo (x ∷ y ∷ xs)
 
 record LongitudinalValidationObligations : Set₁ where
   constructor longitudinalValidationObligations
@@ -44,42 +48,32 @@ record LongitudinalValidatedMeaningfulBoloAdvantage
   (model : Comparison.CounterfactualCoordinationCostModel) : Set₁ where
   constructor longitudinalValidatedMeaningfulBoloAdvantage
   field
-    snapshotCertificate :
-      Promotion.ValidatedMeaningfulBoloCoordinationAdvantage threshold model
+    periodCertificates :
+      List (Promotion.ValidatedMeaningfulBoloCoordinationAdvantage threshold model)
+    atLeastTwoCertifiedPeriods : AtLeastTwo periodCertificates
     longitudinalValidation : LongitudinalValidationObligations
 
 open LongitudinalValidatedMeaningfulBoloAdvantage public
-
-snapshotFromLongitudinalAdvantage :
-  ∀ {threshold model} →
-  LongitudinalValidatedMeaningfulBoloAdvantage threshold model →
-  Promotion.ValidatedMeaningfulBoloCoordinationAdvantage threshold model
-snapshotFromLongitudinalAdvantage certificate =
-  snapshotCertificate certificate
 
 record LongitudinalValidatedMeaningfulBoloDisadvantage
   (threshold : Nat)
   (model : Comparison.CounterfactualCoordinationCostModel) : Set₁ where
   constructor longitudinalValidatedMeaningfulBoloDisadvantage
   field
-    snapshotCertificate :
-      Promotion.ValidatedMeaningfulBoloCoordinationDisadvantage threshold model
+    periodCertificates :
+      List (Promotion.ValidatedMeaningfulBoloCoordinationDisadvantage threshold model)
+    atLeastTwoCertifiedPeriods : AtLeastTwo periodCertificates
     longitudinalValidation : LongitudinalValidationObligations
 
 open LongitudinalValidatedMeaningfulBoloDisadvantage public
-
-snapshotFromLongitudinalDisadvantage :
-  ∀ {threshold model} →
-  LongitudinalValidatedMeaningfulBoloDisadvantage threshold model →
-  Promotion.ValidatedMeaningfulBoloCoordinationDisadvantage threshold model
-snapshotFromLongitudinalDisadvantage certificate =
-  snapshotCertificate certificate
 
 record LongitudinalPromotionBoundary : Set where
   constructor longitudinalPromotionBoundary
   field
     snapshotMeaningfulWinAutomaticallyEstablishesLongRunWin : Bool
     snapshotMeaningfulLossAutomaticallyEstablishesLongRunLoss : Bool
+    atLeastTwoCertifiedPeriodsRequired : Bool
+    repeatedSamePolarityRequired : Bool
     repeatedMeasurementRequired : Bool
     realisedTopologyAuditRequired : Bool
     actorAdaptationAuditRequired : Bool
@@ -95,7 +89,7 @@ canonicalLongitudinalPromotionBoundary : LongitudinalPromotionBoundary
 canonicalLongitudinalPromotionBoundary =
   longitudinalPromotionBoundary
     false false
-    true true true true true true
+    true true true true true true true true
     false false
 
 canonicalLongitudinalDynamicObligations : Dynamic.DynamicBoloEvaluationObligations
@@ -107,7 +101,7 @@ canonicalLongitudinalPromotionReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "bolo'bolo longitudinal adaptive-institution promotion gate"
     "DASHI.Governance.BoloBoloLongitudinalPromotionGateExact"
-    "LongitudinalValidatedMeaningfulBoloAdvantage / LongitudinalValidatedMeaningfulBoloDisadvantage / canonicalLongitudinalPromotionBoundary"
-    "adds a stronger promotion tier above validated meaningful snapshot comparison: a long-run coordination claim must also carry repeated measurement, realised-topology audit, actor-adaptation audit, institutional-version audit, evidence-triggered model reopening and a predeclared longitudinal window"
-    "snapshot validation remains necessary but not sufficient for long-run institutional performance, and even longitudinal coordination advantage creates neither political legitimacy nor ecological viability"
+    "LongitudinalValidatedMeaningfulBoloAdvantage / LongitudinalValidatedMeaningfulBoloDisadvantage / AtLeastTwo / canonicalLongitudinalPromotionBoundary"
+    "adds a stronger promotion tier above validated meaningful snapshot comparison: a long-run advantage or disadvantage must include at least two same-polarity validated meaningful period certificates plus repeated measurement, realised-topology audit, actor-adaptation audit, institutional-version audit, evidence-triggered model reopening and a predeclared longitudinal window"
+    "one snapshot or merely observing the institution for a long time is insufficient for a long-run performance claim, and even a repeated longitudinal coordination advantage creates neither political legitimacy nor ecological viability"
     "agda -i . DASHI/Governance/BoloBoloLongitudinalPromotionGateRegression.agda"
