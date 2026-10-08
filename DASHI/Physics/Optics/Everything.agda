@@ -1,0 +1,14 @@
+module DASHI.Physics.Optics.Everything where
+
+open import DASHI.Physics.Optics.CatastropheDiffractionNormalFormExact public
+open import DASHI.Physics.Optics.DiffuserImagingObserverDynamicRangeExact public
+open import DASHI.Physics.Optics.DiffuserRedundantRecoveryExact public
+open import DASHI.Physics.Optics.DiffuserNoiseStableRecoveryExact public
+open import DASHI.Physics.Optics.FresnelZonePlateDiffuserCodecBridgeExact public
+open import DASHI.Physics.Optics.FresnelAngularSpectrumPropagationExact public
+open import DASHI.Physics.Optics.DiffuserPhysicalForwardWeldExact public
+open import DASHI.Physics.Optics.DiffuserRestrictedStabilityProducerExact public
+open import DASHI.Physics.Optics.PhotonDetectorChannelExact public
+open import DASHI.Physics.Optics.DiffuserInformationDesignExact public
+open import DASHI.Physics.Optics.MatchedPhotonImagerComparatorExact public
+open import DASHI.Physics.Optics.Diffraction3DImagingPhysicalMaxCutExact public
