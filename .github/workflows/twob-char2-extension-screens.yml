@@ -19,10 +19,14 @@ on:
       - 'scripts/co1_f2_24_exterior_square276_fingerprint.g'
       - 'scripts/check_co1_f2_24_exterior_square276_fingerprint.sh'
       - 'scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g'
+      - 'scripts/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.g'
+      - 'scripts/check_co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.sh'
       - 'scripts/co1_normal2pow24_augmentation_hom_screen.g'
       - 'scripts/check_co1_normal2pow24_augmentation_hom_screen.sh'
       - 'scripts/twob_centralizer_virtual_24_276_brauer_identity.g'
       - 'scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh'
+      - 'scripts/twob_centralizer_mod2_decomposition_cancellation_screen.g'
+      - 'scripts/check_twob_centralizer_mod2_decomposition_cancellation_screen.sh'
       - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
       - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
@@ -45,10 +49,14 @@ on:
       - 'scripts/co1_f2_24_exterior_square276_fingerprint.g'
       - 'scripts/check_co1_f2_24_exterior_square276_fingerprint.sh'
       - 'scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g'
+      - 'scripts/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.g'
+      - 'scripts/check_co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.sh'
       - 'scripts/co1_normal2pow24_augmentation_hom_screen.g'
       - 'scripts/check_co1_normal2pow24_augmentation_hom_screen.sh'
       - 'scripts/twob_centralizer_virtual_24_276_brauer_identity.g'
       - 'scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh'
+      - 'scripts/twob_centralizer_mod2_decomposition_cancellation_screen.g'
+      - 'scripts/check_twob_centralizer_mod2_decomposition_cancellation_screen.sh'
       - 'scripts/twob_2pow24_co1_char2_rep_probe.g'
       - 'scripts/check_twob_2pow24_co1_char2_rep_probe.sh'
       - 'scripts/fi22d2_2pow10_m22d2_natural_module_screen.g'
@@ -86,16 +94,22 @@ jobs:
         run: bash scripts/check_co1_f2_24_exterior_square276_fingerprint.sh
       - name: Verify Co1 Sym2(24) quotient is exterior-square 276
         run: gap -q scripts/co1_f2_symmetric_square_300_to_exterior276_screen.g
+      - name: Test uniqueness of Co1 Frobenius 24 in Sym2(24)
+        run: bash scripts/check_co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.sh
       - name: Test Co1 augmentation Hom obstruction for normal 2^24 action
         run: bash scripts/check_co1_normal2pow24_augmentation_hom_screen.sh
       - name: Test 2B-centralizer virtual 24/276 Brauer identity
         run: bash scripts/check_twob_centralizer_virtual_24_276_brauer_identity.sh
+      - name: Test 2B-centralizer mod-2 decomposition cancellation
+        run: bash scripts/check_twob_centralizer_mod2_decomposition_cancellation_screen.sh
       - name: Render Co1 factor-through runtime certificate
         run: |
           python3 scripts/render_twob_co1_factorthrough_runtime_certificate.py \
             build/co1_f2_24_exterior_square276_fingerprint.json \
             build/twob_centralizer_virtual_24_276_brauer_identity.json \
             build/co1_normal2pow24_augmentation_hom_screen.json \
+            build/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.json \
+            build/twob_centralizer_mod2_decomposition_cancellation_screen.json \
             DASHI/Moonshine/Generated/TwoBCo1FactorThroughRuntimeCertificate.agda
       - name: Typecheck Co1 factor-through runtime certificate
         run: |
@@ -127,8 +141,10 @@ jobs:
             build/m24_exterior_square24_duad276_screen.json
             build/co1_f2_24_exterior_square276_fingerprint.json
             build/co1_f2_symmetric_square_300_to_exterior276_screen.json
+            build/co1_f2_frobenius24_sym2_300_hom_uniqueness_screen.json
             build/co1_normal2pow24_augmentation_hom_screen.json
             build/twob_centralizer_virtual_24_276_brauer_identity.json
+            build/twob_centralizer_mod2_decomposition_cancellation_screen.json
             build/twob_2pow24_co1_char2_rep_probe.json
             build/fi22d2_2pow10_m22d2_natural_module_screen.json
             DASHI/Moonshine/Generated/TwoBCo1FactorThroughRuntimeCertificate.agda
