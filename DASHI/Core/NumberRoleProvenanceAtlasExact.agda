@@ -33,6 +33,7 @@ import DASHI.Core.DecimalResidualRefinementExact as Decimal
 import DASHI.Core.FiniteBranchingCriticalityExact as Branch
 import DASHI.Core.LogisticFoldCriticalityExact as Logistic
 import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RH
+import DASHI.Moonshine.MonsterOgg279ProvenanceHubExact as N279
 
 ------------------------------------------------------------------------
 -- Typed roles.  Equal underlying scalars do not collapse these constructors.
@@ -52,6 +53,9 @@ data NumberRole : Set where
   decimalStratificationRole : NumberRole
   decimalJRetentionRole : NumberRole
   triadicJDepthRole : NumberRole
+  monsterOggNonaryProduct279Role : NumberRole
+  ternaryNumeral279Role : NumberRole
+  principiaCardinalKeyword279Role : NumberRole
 
 
 halfBranchingRoleDistinctFromLogisticRole :
@@ -73,6 +77,18 @@ halfRiemannRoleDistinctFromThreeAdicMinusHalfRole ()
 powerupRoleDistinctFromHalfThresholdRole :
   decimalTenPercentPowerupRole ≡ dyadicScreenCut → ⊥
 powerupRoleDistinctFromHalfThresholdRole ()
+
+monster279RoleDistinctFromTernary279Role :
+  monsterOggNonaryProduct279Role ≡ ternaryNumeral279Role → ⊥
+monster279RoleDistinctFromTernary279Role ()
+
+monster279RoleDistinctFromPrincipia279Role :
+  monsterOggNonaryProduct279Role ≡ principiaCardinalKeyword279Role → ⊥
+monster279RoleDistinctFromPrincipia279Role ()
+
+ternary279RoleDistinctFromPrincipia279Role :
+  ternaryNumeral279Role ≡ principiaCardinalKeyword279Role → ⊥
+ternary279RoleDistinctFromPrincipia279Role ()
 
 ------------------------------------------------------------------------
 -- Exact shared-scalar compatibility, without role identification.
@@ -109,6 +125,18 @@ ninePointNineHistoricalNumerator = Decimal.nineDepthOne
 nineDecimalDepthTwo :
   Decimal.decimalRefinementNumerator Decimal.d9 2 ≡ 999
 nineDecimalDepthTwo = Decimal.nineDepthTwo
+
+monster279ScalarIdentity :
+  N279.nonaryScale * N279.monsterLane31Value ≡ N279.single279
+monster279ScalarIdentity = N279.nonaryTimesMonster31Is279
+
+ternary279ScalarIdentity :
+  243 + 27 + 9 ≡ N279.single279
+ternary279ScalarIdentity = N279.ternarySparseExpansionIs279
+
+principia279ScalarIdentity :
+  N279.principiaCardinalKeywordHits ≡ N279.single279
+principia279ScalarIdentity = N279.principiaCardinalKeywordHitsIs279
 
 ------------------------------------------------------------------------
 -- Provenance entries.  These are metadata carriers, not evidence that the
@@ -333,6 +361,39 @@ triadicJElevenEntry =
     "DASHI.Biology.JFineCoarseRelativeScaleExact"
     currentRepoOwner
 
+monsterOgg279Entry : NumberProvenanceEntry
+monsterOgg279Entry =
+  number-provenance-entry
+    "279"
+    monsterOggNonaryProduct279Role
+    "DASHI Monster/Ogg/SSP15 p31 and nonary owners"
+    "nonary scale applied to the existing Monster/Ogg p31 lane"
+    "279 = 9 * monsterPrimeLaneToNat(p31) = 9 * 31"
+    "DASHI.Moonshine.MonsterOgg279ProvenanceHubExact"
+    currentRepoOwner
+
+ternaryNumeral279Entry : NumberProvenanceEntry
+ternaryNumeral279Entry =
+  number-provenance-entry
+    "279"
+    ternaryNumeral279Role
+    "DASHI ternary arithmetic owner"
+    "ordinary base-three numeral / sparse power expansion"
+    "279 = (101100)_3 = 3^5 + 3^3 + 3^2 = 243 + 27 + 9"
+    "DASHI.Moonshine.MonsterOgg279ProvenanceHubExact"
+    exactTheorem
+
+principiaCardinal279Entry : NumberProvenanceEntry
+principiaCardinal279Entry =
+  number-provenance-entry
+    "279"
+    principiaCardinalKeyword279Role
+    "Principia Mathematica Volume-I OCR inventory in the repository"
+    "observed OCR keyword-hit count for the cardinal vocabulary"
+    "canonicalPMVol1OCRFacts.cardinalKeywordHits = 279"
+    "DASHI.Foundations.PrincipiaVol1DashiBridge"
+    currentRepoOwner
+
 ------------------------------------------------------------------------
 -- Boundary: provenance records are intentionally plural.
 ------------------------------------------------------------------------
@@ -358,10 +419,14 @@ record NumberRoleProvenanceBoundary : Set where
     fivePointFiveIdentifiedWithHalfThreshold : Bool
     fivePointFiveIdentifiedWithHalfThresholdIsFalse :
       fivePointFiveIdentifiedWithHalfThreshold ≡ false
+    shared279ScalarIdentifies279Roles : Bool
+    shared279ScalarIdentifies279RolesIsFalse :
+      shared279ScalarIdentifies279Roles ≡ false
 
 canonicalNumberRoleProvenanceBoundary : NumberRoleProvenanceBoundary
 canonicalNumberRoleProvenanceBoundary =
   number-role-provenance-boundary
+    false refl
     false refl
     false refl
     false refl
