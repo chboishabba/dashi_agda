@@ -17,6 +17,8 @@ import DASHI.Economics.AICapitalRuntimeAuthorityParity2026Exact as Parity
 import DASHI.Economics.AICapitalResidualParetoAcquisition2026Exact as Acquisition
 import DASHI.Economics.AICapitalParetoAcquisitionSourceAtlas2026Exact as AcquisitionSources
 import DASHI.Economics.AICapitalProducerBoundedEvidence2026Exact as Bounded
+import DASHI.Economics.AIRegulatoryBurdenConcentrationSensibLaw2026Exact as RegulatorySensibLaw
+import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as LegalSensibLaw
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.ResidualConditionedExperimentPortfolioExact as Portfolio
 import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Time
@@ -146,3 +148,27 @@ terminalPayerAbsenceRemainsExplicit = refl
 
 partialRevenueVectorStillDoesNotCloseCoverage : Bounded.pointProducerClosed Bounded.revenueVectorEvidence ≡ false
 partialRevenueVectorStillDoesNotCloseCoverage = refl
+
+medicareExactTraceStillOpen :
+  LegalSensibLaw.exactRuntimeTraceAvailable LegalSensibLaw.medicareLegalAttributionBoundary ≡ false
+medicareExactTraceStillOpen = refl
+
+medicareMensReaStillOpen :
+  LegalSensibLaw.mensReaEstablished LegalSensibLaw.medicareLegalAttributionBoundary ≡ false
+medicareMensReaStillOpen = refl
+
+medicareCorporateLiabilityStillOpen :
+  LegalSensibLaw.corporateLiabilityEstablished LegalSensibLaw.medicareLegalAttributionBoundary ≡ false
+medicareCorporateLiabilityStillOpen = refl
+
+structuralRegulatoryAdvantageCanCoexistWithSafetyBasis :
+  RegulatorySensibLaw.safetyJustificationSupported RegulatorySensibLaw.canonicalSafetyAndStructuralMoat ≡ true
+structuralRegulatoryAdvantageCanCoexistWithSafetyBasis = refl
+
+structuralRegulatoryAdvantageIsPresent :
+  RegulatorySensibLaw.structuralIncumbentAdvantageSupported RegulatorySensibLaw.canonicalSafetyAndStructuralMoat ≡ true
+structuralRegulatoryAdvantageIsPresent = refl
+
+intentionalCaptureStillRequiresIndependentEvidence :
+  RegulatorySensibLaw.intentionalCaptureEstablished RegulatorySensibLaw.canonicalSafetyAndStructuralMoat ≡ false
+intentionalCaptureStillRequiresIndependentEvidence = refl
