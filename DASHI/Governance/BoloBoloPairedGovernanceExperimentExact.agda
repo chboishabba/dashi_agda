@@ -10,7 +10,7 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 --
 -- The cleanest way to avoid unqualified historical transfer is to compare a
 -- globally coupled process with a nested kana/bolo/tega-like routing scheme in
--- the same target context.  This module specifies the evidence obligations for
+-- the same target context. This module specifies the evidence obligations for
 -- such a pilot; it does not assert that the experiment has been run.
 ------------------------------------------------------------------------
 
@@ -27,6 +27,10 @@ data ProcessObservable : Set where
   participantIssueIncidenceCount : ProcessObservable
   documentedConflictMediationMinutes : ProcessObservable
   completedDecisionCount : ProcessObservable
+  peakConcurrentBoundaryDemand : ProcessObservable
+  measuredInterfaceCapacity : ProcessObservable
+  interfaceBacklogCount : ProcessObservable
+  realisedCrossGroupChannelCount : ProcessObservable
 
 record OutcomeVector : Set where
   constructor outcomeVector
@@ -39,12 +43,15 @@ record OutcomeVector : Set where
     incidenceEdges : Nat
     mediationMinutes : Nat
     completedDecisions : Nat
+    peakBoundaryDemand : Nat
+    interfaceCapacity : Nat
+    interfaceBacklog : Nat
+    realisedCrossGroupChannels : Nat
 
 open OutcomeVector public
 
 ------------------------------------------------------------------------
 -- Cost mapping is deliberately abstract and must be fixed before outcomes.
--- This avoids retrospectively choosing weights that make one arm look better.
 ------------------------------------------------------------------------
 
 record PredeclaredCostMapping : Set₁ where
@@ -72,15 +79,18 @@ record PairedGovernanceTrialDesign : Set₁ where
     attritionAndMissingnessAudited : Bool
     armFidelityAudited : Bool
     documentaryCompletenessAudited : Bool
+    interfaceCapacityMeasurementPlanned : Bool
+    concurrentBoundaryDemandMeasurementPlanned : Bool
+    backlogMeasurementPlanned : Bool
+    realisedInteractionTopologyAuditPlanned : Bool
+    repeatedFollowupWindowPlanned : Bool
+    actorAdaptationMeasurementPlanned : Bool
+    institutionalVersionTrackingPlanned : Bool
     analysisPlanFrozenBeforeOutcomeInspection : Bool
     uncertaintyAndSensitivityPlanPredeclared : Bool
     replicationOrProspectiveValidationPlanned : Bool
 
 open PairedGovernanceTrialDesign public
-
-------------------------------------------------------------------------
--- Direct estimand surface.
-------------------------------------------------------------------------
 
 record PairedObservation : Set where
   constructor pairedObservation
@@ -115,11 +125,7 @@ record DirectNestedWin
 open DirectNestedWin public
 
 ------------------------------------------------------------------------
--- Measurement mapping to the counterfactual theorem.
---
--- These are experiment-design obligations, not automatic identities.  A pilot
--- must specify how observed boundary/delegation/unresolved coordinates map to
--- the theorem's cost components and whether retained local work is comparable.
+-- Measurement mapping to the counterfactual theorem and capacity extension.
 ------------------------------------------------------------------------
 
 record CounterfactualTermMappingPlan : Set where
@@ -130,6 +136,10 @@ record CounterfactualTermMappingPlan : Set where
     delegationOverheadOperationalized : Bool
     unresolvedDependencyOperationalized : Bool
     retainedLocalWorkComparableAcrossArms : Bool
+    interfaceCapacityOperationalized : Bool
+    concurrentBoundaryDemandOperationalized : Bool
+    backlogOperationalized : Bool
+    realisedInteractionTopologyOperationalized : Bool
     measurementDefinitionsFrozenAcrossArms : Bool
     noOutcomeChosenOnlyAfterSeeingArmDifference : Bool
 
@@ -137,11 +147,10 @@ open CounterfactualTermMappingPlan public
 
 canonicalCounterfactualTermMappingPlan : CounterfactualTermMappingPlan
 canonicalCounterfactualTermMappingPlan =
-  counterfactualTermMappingPlan true true true true true true true
-
-------------------------------------------------------------------------
--- Interpretation boundary.
-------------------------------------------------------------------------
+  counterfactualTermMappingPlan
+    true true true true true
+    true true true true
+    true true
 
 record PairedExperimentBoundary : Set where
   constructor pairedExperimentBoundary
@@ -150,6 +159,9 @@ record PairedExperimentBoundary : Set where
     costMappingMustBeFrozenBeforeOutcomes : Bool
     flatVersusNestedContrastIsPrimaryStructuralComparison : Bool
     experimentMustMeasureFederationOverheadNotOnlyLocalSavings : Bool
+    experimentMustMeasureInterfaceDemandCapacityAndBacklog : Bool
+    experimentMustAuditRealisedNotOnlyDeclaredTopology : Bool
+    longitudinalFollowupNeededForLongRunClaim : Bool
     failedNestedArmIsInformativeFalsification : Bool
     experimentalCoordinationWinCreatesPoliticalLegitimacy : Bool
     experimentalCoordinationWinProvesEcologicalViability : Bool
@@ -161,22 +173,15 @@ open PairedExperimentBoundary public
 canonicalPairedExperimentBoundary : PairedExperimentBoundary
 canonicalPairedExperimentBoundary =
   pairedExperimentBoundary
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    true
+    true true true true true true true true
+    false false false true
 
 canonicalBoloPairedGovernanceExperimentReceipt : GenericReceipt.GenericReceipt
 canonicalBoloPairedGovernanceExperimentReceipt =
   GenericReceipt.mkNonPromotingReceipt
-    "direct flat-vs-nested governance experiment design"
+    "direct flat-vs-nested adaptive governance experiment design"
     "DASHI.Governance.BoloBoloPairedGovernanceExperimentExact"
-    "PairedGovernanceTrialDesign / DirectNestedWin / canonicalPairedExperimentBoundary"
-    "specifies the shortest direct empirical route to the bolo counterfactual: compare globally coupled and nested kana-bolo-tega-like decision routing in the same target context with matched/randomized issue exposure, frozen measurement and cost mapping, explicit arm-fidelity/documentary audits, uncertainty planning, and direct measurement of both locality savings and federation overhead"
-    "the experiment has not been run; a coordination-cost win would not create legitimacy, ecological viability or universal scale claims, and historical Occupy evidence remains contextual/design evidence rather than a substitute for the target comparison"
+    "PairedGovernanceTrialDesign / OutcomeVector / CounterfactualTermMappingPlan / DirectNestedWin / canonicalPairedExperimentBoundary"
+    "specifies the shortest direct empirical route to the bolo counterfactual in one target context while adding peak interface demand, measured coordination-interface capacity, backlog and realised interaction topology to the original cost/process observables, plus planned repeated follow-up, actor-adaptation measurement and institutional-version tracking"
+    "the experiment has not been run; a one-shot coordination-cost win cannot establish long-run adaptive performance, interface feasibility, legitimacy, ecological viability or universal scale, and historical/comparator evidence remains contextual/design evidence rather than a substitute for target measurements"
     "agda -i . DASHI/Governance/BoloBoloPairedGovernanceExperimentRegression.agda"
