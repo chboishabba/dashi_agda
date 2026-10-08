@@ -18,6 +18,7 @@ record ParetoSnowball : Set where
     historicalControlledPerformanceEvidenceNowAcquired : Bool
     heatOxygenHistoricalHumanEvidenceNowAcquired : Bool
     humanPKHistoricalExposureEvidenceNowAcquired : Bool
+    transcriptionDependenceEvidenceNowAcquired : Bool
     historicalUseFurtherAcquisitionChangesMechanismFrontier : Bool
 
     primaryOrIndexedHumanSourcesPreferred : Bool
@@ -41,12 +42,13 @@ canonicalParetoSnowball = record
   ; historicalControlledPerformanceEvidenceNowAcquired = true
   ; heatOxygenHistoricalHumanEvidenceNowAcquired = true
   ; humanPKHistoricalExposureEvidenceNowAcquired = true
+  ; transcriptionDependenceEvidenceNowAcquired = true
   ; historicalUseFurtherAcquisitionChangesMechanismFrontier = false
   ; primaryOrIndexedHumanSourcesPreferred = true
   ; reviewSnowballIsNavigationOnly = true
   ; reviewRepetitionCreatesIndependentReplication = false
   ; secondaryHistoricalRepetitionCreatesPrimaryReceipt = false
-  ; nextSourceQuery = "Acquire direct bemethyl target engagement or a causal molecular intervention. Historical controlled operator, heat/exertion, and human PK/excretion leaves are now source-paid at indexed-abstract level; next recover complete original methods and then seek modern independent same-compound replication."
+  ; nextSourceQuery = "Acquire a direct bemethyl target-engagement experiment or causal molecular perturbation that identifies the proximal target. Historical controlled operator, heat/exertion, human PK/excretion and transcription-dependence leaves are now source-paid; complete original methods and modern independent replication are the next efficacy-side cuts."
   }
 
 reviewRepetitionDoesNotIncreaseAuthority :
