@@ -8,6 +8,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Propulsion.RocketdyneBerylliumQualificationEvidenceExact as Rocket
 import DASHI.Physics.Propulsion.Rocketdyne1974MeasuredResultsExact as Data
+import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
+import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Cut
 import DASHI.Culture.AmyEskridgeHAL5AntigravitySourceEntitlementExact as Amy
 import DASHI.Culture.MissingDeceasedCombinedRocketScramjetVehicleBidiExact as Vehicle
 
@@ -70,8 +72,6 @@ amyTalkToPropulsionResearch =
     "2018 HAL5 historical antigravity presentation as a hypothesis catalogue"
     "No measured force, mechanism equivalence or Rocketdyne participation established"
 
--- The constructors establish a formal type-level separation, not a factual
--- assessment of any person's circumstances.
 hardwareNotTalk : testedHardware ≡ sourcedHistoricalTalk → ⊥
 hardwareNotTalk ()
 
@@ -104,7 +104,6 @@ ramptComparator =
     "Not established: normalize geometry, thrust class, propellants and pressure"
     "Raw time histories, engineering drawings, material revisions, inspection and acceptance records"
 
--- Directly use the already admitted Amy receipt and real-object owner.
 amySourced2018Talk : Amy.HAL5TalkSourceReceipt
 amySourced2018Talk = Amy.canonicalHAL5TalkSourceReceipt
 
@@ -126,7 +125,6 @@ canonicalNonPromotion : InvestigativeNonPromotion
 canonicalNonPromotion =
   non-promotion false false false false false false true
 
--- Material/valve outcomes remain source-specific; neither is a gravity test.
 archivalNozzleDamage : Data.ComponentOutcome
 archivalNozzleDamage = Data.nozzleHighTemperatureDamage
 
@@ -135,3 +133,14 @@ archivalValveFailure = Data.moogContamination
 
 archivalSteadyPerformance : Data.DecimalResult
 archivalSteadyPerformance = Data.unsaturatedIsp
+
+-- The new physics max-cut is explicitly reusable by the investigation without
+-- turning physical similarity into historical attribution.
+archivalTwoMaterialDiscriminator : Disc.TwoMaterialDiscriminator
+archivalTwoMaterialDiscriminator = Disc.currentDiscriminator
+
+archivalPhysicalIdentifiabilityCut : Cut.PhysicalMaxCut
+archivalPhysicalIdentifiabilityCut = Cut.currentPhysicalMaxCut
+
+physicalNonidentifiabilityDoesNotPromoteInvestigativeClaim : Bool
+physicalNonidentifiabilityDoesNotPromoteInvestigativeClaim = true
