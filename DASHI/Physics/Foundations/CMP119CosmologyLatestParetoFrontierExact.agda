@@ -4,15 +4,15 @@ module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 ------------------------------------------------------------------------
 -- LIVE PARETO FRONTIER / 2026-10-08 / OVERLAY Y.
 --
--- The preferred route now has four model-specific source/physics packages and
--- zero adapter debt.  Same-object work should continue only where it identifies
--- actual physical/source objects; post-hoc carrier equalities are retired when
--- the carrier can be chosen correctly by construction.
+-- Four model-specific source/physics packages remain and adapter debt is zero.
+-- Same-object work should continue only where it identifies actual source or
+-- physical objects; carrier equalities are retired whenever they can be chosen
+-- correctly by construction.
 --
--- S1  literal CMP109/116 continuation on the published B carrier.
---     Background=PublishedB and Tangent=ten-slot symmetric carrier are now
---     definitional.  Remaining content is the literal CMP109 potential, CMP116
---     localized activities, and their published finite-sum identity/covariance.
+-- S1  literal ACTIVE regular-E/localization form witness on the selected
+--     beta-driven published-B source.  Background=PublishedB, Tangent=ten-slot,
+--     and the CMP109/116 continuation itself are compiler-owned.  The full
+--     quantitative CMP122 package is stronger than this consumer requires.
 --
 -- S2  same-object application of the imported renormalized Hilbert/Weyl
 --     trace-anomaly authority to the exact pinned Local-C stress/F2 pair.
@@ -59,9 +59,13 @@ s1TenIndependentFiniteTangentChoicesStillOpen : Bool
 s1TenIndependentFiniteTangentChoicesStillOpen =
   Y.s1TenIndependentFiniteTangentChoicesRequired
 
-s1LiteralContinuationOnPublishedBCarrierStillOpen : Bool
-s1LiteralContinuationOnPublishedBCarrierStillOpen =
-  Y.s1RemainingWorkIsLiteralContinuationOnPublishedBCarrier
+s1LiteralActiveRegularEFormOnPublishedBStillOpen : Bool
+s1LiteralActiveRegularEFormOnPublishedBStillOpen =
+  Y.s1LiteralActiveRegularEFormOnPublishedBStillRequired
+
+s1FullTheorem1QuantitativePackageStillRequired : Bool
+s1FullTheorem1QuantitativePackageStillRequired =
+  Y.s1FullTheorem1QuantitativePackageRequired
 
 s1PublishedPotentialCovarianceNeedsFreshProof : Bool
 s1PublishedPotentialCovarianceNeedsFreshProof =
