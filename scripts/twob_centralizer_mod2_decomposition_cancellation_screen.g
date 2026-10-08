@@ -9,10 +9,13 @@
 #   [98304]_2 - [98280]_2 = [24],
 #   [98280]_2 + [1+299]_2 - [98304]_2 = [276].
 #
-# This screen asks the actual 2-modular decomposition matrix whether such a
-# nonnegative pair exists.  It records Brauer-character multiplicity vectors,
-# not an extension/module isomorphism; the actual norm-map placement remains a
-# separate same-object seam.
+# Besides detecting that Grothendieck/Jordan-Hoelder pattern, this screen asks
+# whether the common 98280 support is disjoint from the residual 24 and 276
+# supports.  If it is, no equivariant map from a module whose factors all lie
+# in the common lane can have nonzero image in the residual quotient lane.
+#
+# This still records composition-factor information, not an actual norm-map
+# isomorphism.  The same-object extension placement remains a separate seam.
 
 if LoadPackage("ctbllib") <> true then Error("CTblLib is required"); fi;
 
@@ -43,6 +46,7 @@ VecAdd:=function(a,b)
 end;
 Nonnegative:=v->ForAll(v,x->x>=0);
 WeightedDegree:=v->Sum([1..Length(v)],i->v[i]*modDeg[i]);
+Support:=v->Filtered([1..Length(v)],i->v[i]<>0);
 Sparse:=function(v)
   return Filtered(List([1..Length(v)],i->[i,modDeg[i],v[i]]),x->x[3]<>0);
 end;
@@ -56,7 +60,13 @@ for i983 in pos98304 do
         row300:=VecAdd(D[trivialPos],D[i299]);
         diff276:=VecSub(VecAdd(D[i982],row300),D[i983]);
         if Nonnegative(diff276) and WeightedDegree(diff276)=276 then
-          Add(candidates,[i983,i982,i299,diff24,diff276]);
+          supp982:=Support(D[i982]);
+          supp24:=Support(diff24);
+          supp276:=Support(diff276);
+          disjoint982_24:=Length(Intersection(Set(supp982),Set(supp24)))=0;
+          disjoint982_276:=Length(Intersection(Set(supp982),Set(supp276)))=0;
+          Add(candidates,[i983,i982,i299,diff24,diff276,
+            disjoint982_24,disjoint982_276,supp982,supp24,supp276]);
         fi;
       od;
     fi;
@@ -67,6 +77,11 @@ od;
 # degree 24, not merely a virtual sum of smaller factors.
 strong:=Filtered(candidates,c ->
   Sum(c[4])=1 and Length(Sparse(c[4]))=1 and Sparse(c[4])[1][2]=24);
+
+# Rigid-support candidate: in addition, the common 98280 support does not
+# overlap either residual support.  This is exactly the support-level no-leakage
+# condition used by the cancellation max-cut.
+rigid:=Filtered(strong,c -> c[6] and c[7]);
 
 PrintNatList:=function(out,xs)
   local i; AppendTo(out,"[");
@@ -80,20 +95,24 @@ PrintTriples:=function(out,xs)
     AppendTo(out,"[",String(x[1]),",",String(x[2]),",",String(x[3]),"]");
   od; AppendTo(out,"]");
 end;
+JsonBool:=function(x) if x then return "true"; else return "false"; fi; end;
 PrintCandidate:=function(out,c)
   AppendTo(out,"{\"ordinary_98304_position\":",String(c[1]),
     ",\"ordinary_98280_position\":",String(c[2]),
     ",\"ordinary_299_position\":",String(c[3]),
     ",\"residual_24_sparse\":"); PrintTriples(out,Sparse(c[4]));
   AppendTo(out,",\"residual_276_sparse\":"); PrintTriples(out,Sparse(c[5]));
-  AppendTo(out,"}");
+  AppendTo(out,",\"common_98280_support\":"); PrintNatList(out,c[8]);
+  AppendTo(out,",\"residual_24_support\":"); PrintNatList(out,c[9]);
+  AppendTo(out,",\"residual_276_support\":"); PrintNatList(out,c[10]);
+  AppendTo(out,",\"common_98280_disjoint_from_residual24\":",JsonBool(c[6]));
+  AppendTo(out,",\"common_98280_disjoint_from_residual276\":",JsonBool(c[7]),"}");
 end;
 PrintCandidateList:=function(out,xs)
   local i; AppendTo(out,"[");
   for i in [1..Length(xs)] do if i>1 then AppendTo(out,","); fi; PrintCandidate(out,xs[i]); od;
   AppendTo(out,"]");
 end;
-JsonBool:=function(x) if x then return "true"; else return "false"; fi; end;
 
 out:=OutputTextFile("build/twob_centralizer_mod2_decomposition_cancellation_screen.json",false);
 SetPrintFormattingStatus(out,false);
@@ -105,12 +124,15 @@ AppendTo(out,"  \"degree_98280_positions\":"); PrintNatList(out,pos98280); Appen
 AppendTo(out,"  \"degree_299_positions\":"); PrintNatList(out,pos299); AppendTo(out,",\n");
 AppendTo(out,"  \"candidate_count\":",String(Length(candidates)),",\n");
 AppendTo(out,"  \"strong_candidate_count\":",String(Length(strong)),",\n");
+AppendTo(out,"  \"rigid_support_candidate_count\":",String(Length(rigid)),",\n");
 AppendTo(out,"  \"candidates\":"); PrintCandidateList(out,candidates); AppendTo(out,",\n");
 AppendTo(out,"  \"strong_candidates\":"); PrintCandidateList(out,strong); AppendTo(out,",\n");
+AppendTo(out,"  \"rigid_support_candidates\":"); PrintCandidateList(out,rigid); AppendTo(out,",\n");
 AppendTo(out,"  \"jh_common_98280_plus_residual24_pattern_found\":",JsonBool(Length(strong)>0),",\n");
+AppendTo(out,"  \"common_98280_support_separated_from_residual_lanes\":",JsonBool(Length(rigid)>0),",\n");
 AppendTo(out,"  \"actual_norm_map_98280_isomorphism_paid\":false,\n");
 AppendTo(out,"  \"actual_tate_exterior_square_weld_paid\":false\n}\n");
 CloseStream(out);
 Print("2B centralizer mod-2 decomposition cancellation: candidates=",Length(candidates),
-  "; strong=",Length(strong),"\n");
+  "; strong=",Length(strong),"; rigid-support=",Length(rigid),"\n");
 QUIT;
