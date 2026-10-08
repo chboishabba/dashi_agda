@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.BemethylActoprotectorClaimAtlasExact as Claims
 import DASHI.Biology.BemethylMetabolicMechanismBoundaryExact as Mechanism
+import DASHI.Biology.BemethylMechanismInterventionAcquisitionExact as Intervention
 import DASHI.Biology.BemethylBioenergeticCrossPollinationExact as Weld
 import DASHI.Biology.BemethylHumanEvidenceAcquisitionExact as Human
 import DASHI.Biology.BemethylParetoSnowballExact as Pareto
@@ -14,6 +15,7 @@ record BemethylMaxCut : Set where
   field
     atlas : Claims.BemethylClaimAtlas
     metabolicBoundary : Mechanism.MechanismBoundary
+    mechanismIntervention : Intervention.MechanismInterventionAcquisition
     bioenergeticWeld : Weld.BemethylBioenergeticWeld
     humanEvidence : Human.HumanEvidenceAcquisition
     paretoSnowball : Pareto.ParetoSnowball
@@ -26,6 +28,7 @@ record BemethylMaxCut : Set where
     humanExposureEvidenceAcquired : Bool
     humanPKParameterEvidenceAcquired : Bool
     humanDiseaseContextMechanismEvidenceAcquired : Bool
+    transcriptionDependentMechanismEvidenceAcquired : Bool
 
     modernMechanismTargetIdentified : Bool
     directGenomeBindingReceiptPaid : Bool
@@ -44,6 +47,7 @@ canonicalBemethylMaxCut : BemethylMaxCut
 canonicalBemethylMaxCut = record
   { atlas = Claims.canonicalBemethylClaimAtlas
   ; metabolicBoundary = Mechanism.mitochondrialBoundary
+  ; mechanismIntervention = Intervention.canonicalMechanismInterventionAcquisition
   ; bioenergeticWeld = Weld.canonicalBemethylBioenergeticWeld
   ; humanEvidence = Human.canonicalHumanEvidenceAcquisition
   ; paretoSnowball = Pareto.canonicalParetoSnowball
@@ -55,6 +59,7 @@ canonicalBemethylMaxCut = record
   ; humanExposureEvidenceAcquired = true
   ; humanPKParameterEvidenceAcquired = true
   ; humanDiseaseContextMechanismEvidenceAcquired = true
+  ; transcriptionDependentMechanismEvidenceAcquired = true
   ; modernMechanismTargetIdentified = false
   ; directGenomeBindingReceiptPaid = false
   ; modernHumanPerformanceReplicationPaid = false
@@ -63,7 +68,7 @@ canonicalBemethylMaxCut = record
   ; exposureEfficacySameObjectPaid = false
   ; oxygenHeatIndependenceModernReplicationPaid = false
   ; clinicalRecommendationPaid = false
-  ; nextEmpiricalCut = "The historical controlled operator-performance, controlled heat/exertion, healthy-volunteer pharmacokinetic, and excretion leaves are now source-paid at indexed-abstract level. The highest-value remaining acquisition is direct molecular target engagement; next recover full original methods/exposure for the historical trials and obtain a modern independent same-compound replication with efficacy and exposure measured on the same participants."
+  ; nextEmpiricalCut = "Historical controlled operator-performance, controlled heat/exertion, healthy-volunteer pharmacokinetic/excretion, disease-context mechanism, and transcription-dependent rat antioxidant evidence are now source-paid at the indexed level. The irreducible mechanism leaf is direct bemethyl target engagement; then recover complete original methods/exposure and obtain modern independent same-compound replication with efficacy and exposure measured on the same participants."
   }
 
 transcriptPaid : transcriptFormalised canonicalBemethylMaxCut ≡ true
@@ -82,6 +87,10 @@ humanExposurePaid = refl
 
 humanPKParameterPaid : humanPKParameterEvidenceAcquired canonicalBemethylMaxCut ≡ true
 humanPKParameterPaid = refl
+
+transcriptionDependencePaid :
+  transcriptionDependentMechanismEvidenceAcquired canonicalBemethylMaxCut ≡ true
+transcriptionDependencePaid = refl
 
 modernTargetOpen : modernMechanismTargetIdentified canonicalBemethylMaxCut ≡ false
 modernTargetOpen = refl
