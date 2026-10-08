@@ -28,6 +28,12 @@ taskContingentNetworkEvidencePaid = refl
 comparatorCadencePaid : Capstone.comparatorGovernanceCadenceCoordinatesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
 comparatorCadencePaid = refl
 
+comparatorWorkloadFloorPaid : Capstone.comparatorLocalWorkloadFloorPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+comparatorWorkloadFloorPaid = refl
+
+comparatorVersioningPaid : Capstone.comparatorInstitutionalVersioningPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ true
+comparatorVersioningPaid = refl
+
 primarySpokesMinutesStillUnpaid : Capstone.underlyingPrimarySpokesMinutesPaid Capstone.canonicalComparatorEvidenceInstantiationBoundary ≡ false
 primarySpokesMinutesStillUnpaid = refl
 
