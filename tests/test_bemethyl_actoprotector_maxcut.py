@@ -3,6 +3,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED = {
+    "DASHI/Physics/Chemistry/BemethylChemicalIdentityBoundaryExact.agda": [
+        "module DASHI.Physics.Chemistry.BemethylChemicalIdentityBoundaryExact where",
+        "neutralFormula = \"C9H10N2S\"",
+        "isPurineBase = false",
+        "structuralSimilarityProvesGenomicTarget = false",
+        "saltIdentityEqualsNeutralIdentity = false",
+    ],
     "DASHI/Biology/BemethylActoprotectorClaimAtlasExact.agda": [
         "module DASHI.Biology.BemethylActoprotectorClaimAtlasExact where",
         "mechanismResolved = false",
@@ -21,6 +28,7 @@ REQUIRED = {
         "existingATPAdapter",
         "sameObjectHumanValidationPaid = false",
         "mechanismHypothesisDoesNotUpgradeExistingATPTheorem = refl",
+        "chemicalSimilarityDoesNotPayMechanism = refl",
     ],
     "DASHI/Biology/BemethylActoprotectorMaxCutExact.agda": [
         "module DASHI.Biology.BemethylActoprotectorMaxCutExact where",
