@@ -9,4 +9,5 @@ import DASHI.Governance.AUKUSEmbeddedAuthorityCommandNoncollapseExact
 import DASHI.Governance.IRISDenaMinisterialBriefingFOIBoundaryExact
 import DASHI.Governance.IRISDenaSameObjectAcquisitionMaxCutExact
 import DASHI.Governance.IRISDenaIranContraOpacityNonanalogyExact
+import DASHI.Governance.IRISDenaMaxCutSourceGuardExact
 import DASHI.Governance.OriginalThreadParetoMaxCut20261008Exact
