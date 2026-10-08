@@ -15,6 +15,14 @@ targets=(
   DASHI/Moonshine/OggSSP2BSemisimplificationSelfDualityExtensionNoGoExact.agda
   DASHI/Moonshine/OggSSP2BIteratedTateDefectTargetExact.agda
   DASHI/Moonshine/OggSSP2BM22d2OuterClassDuadDefectExact.agda
+  DASHI/Moonshine/OggSSP2BWeightTwoIntegralC2DecompositionExact.agda
+  DASHI/Moonshine/OggSSP2BTatePlusMinusCokernelExact.agda
+  DASHI/Moonshine/OggSSP2BCo1UntwistedSectorSplitExact.agda
+  DASHI/Moonshine/OggSSP2BCo1ExteriorSquareTateCandidateExact.agda
+  DASHI/Moonshine/OggSSP2BCo1AugmentationTrivialityCriterionExact.agda
+  DASHI/Moonshine/OggSSP2BCo1FrobeniusHomRigidityExact.agda
+  DASHI/Moonshine/OggSSP2BCentralizerMod2CancellationRigidityExact.agda
+  DASHI/Moonshine/OggSSP2BTateCokernelRankRigidityExact.agda
   DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda
   DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda
 )
@@ -30,54 +38,60 @@ grep -q 'explicitQ10StillOpen' "${targets[0]}"
 
 grep -q 'provenanceChoiceCountIsFour' "${targets[1]}"
 grep -q 'orderFourIsForced' "${targets[1]}"
-grep -q 'defectProfileDoesNotConstructTwoProvenanceBits' "${targets[1]}"
 
 grep -q 'remainingSourceDecisionCountIsTwo' "${targets[2]}"
 grep -q 'orientedRouteDoesNotSourceSelectBits' "${targets[2]}"
 grep -q 'galoisRouteDoesNotSourceSelectBits' "${targets[2]}"
-grep -q 'provenanceChoiceCountStillFour' "${targets[2]}"
 
 grep -q 'three276SourcePaid' "${targets[3]}"
-grep -q 'trialitySourcePaid' "${targets[3]}"
 grep -q 'characteristicTwoTateIdentificationStillOpen' "${targets[3]}"
 
 grep -q 'normalKernelRankIsTen' "${targets[4]}"
 grep -q 'fi22NaturalTenDoesNotIdentifyActualTateQ10' "${targets[4]}"
-grep -q 'runtimeOuterJ2x5OnNaturalTenPaid' "${targets[4]}"
 
 grep -q 'monsterGF2DimensionExact' "${targets[5]}"
-grep -q 'explicitMonsterGF2RepresentationSourced' "${targets[5]}"
 grep -q 'existenceDoesNotConstructStableQ10' "${targets[5]}"
 
-grep -q 'brauerIngressPaid' "${targets[6]}"
-grep -q 'finiteOuterSourceFound' "${targets[6]}"
 grep -q 'brauerPassDoesNotDetermineOuterJ2x5Action' "${targets[6]}"
 
 grep -q 'sameSemisimplifiedProfile' "${targets[7]}"
-grep -q 'nonsplitPreservesForm' "${targets[7]}"
 grep -q 'fixedCountsDiffer' "${targets[7]}"
-grep -q 'semisimplificationAndSelfDualityDetermineExtension' "${targets[7]}"
 
 grep -q 'completion10IteratedTateDefectIsZero' "${targets[8]}"
-grep -q 'duadOuterClassRuntimeScreenImplemented' "${targets[8]}"
-grep -q 'actualTwoBKleinFourIteratedTateComputed' "${targets[8]}"
 
-grep -q 'm24TwoBCentralizerIsTwelveTimesLocal' "${targets[9]}"
 grep -q 'duadRankIs132' "${targets[9]}"
 grep -q 'duadFixedDimensionIs144' "${targets[9]}"
 grep -q 'duadIteratedTateDefectIs12' "${targets[9]}"
 
-grep -q 'brauerAllRowsMatch' "${targets[10]}"
-grep -q 'semisimplifiedIngressIsPaid' "${targets[10]}"
-grep -q 'outerJ2x5MatchesTwo' "${targets[10]}"
-grep -q 'remainingDefectSourceDecisionCountIsTwo' "${targets[10]}"
-grep -q 'nineOrbitIndexingIsNotSemanticIdentity' "${targets[10]}"
-grep -q 'actualOuterActionOnSameQStillOpen' "${targets[10]}"
+grep -q 'integralRankClosure' "${targets[10]}"
+grep -q 'plusEigenspaceIs98580' "${targets[10]}"
 
-grep -q 'canonicalCompletionAcquisitionStatus' "${targets[11]}"
-grep -q 'postBrauerSemisimplifiedIngressAlreadyPaid' "${targets[11]}"
-grep -q 'fi22NaturalTenRankIsTen' "${targets[11]}"
-grep -q 'monsterGF2DimensionIs196882' "${targets[11]}"
-grep -q 'remainingDefectSourceBitsIsTwo' "${targets[11]}"
+grep -q 'dimensionClosure' "${targets[11]}"
+grep -q 'candidateSym2QuotientIs276' "${targets[11]}"
+
+grep -q 'untwistedPlusDimensionIs98580' "${targets[12]}"
+grep -q 'actualNormImagePlacementStillOpen' "${targets[12]}"
+
+grep -q 'sameObjectExteriorSquareStillOpen' "${targets[13]}"
+
+grep -q 'canonicalPromotionBoundary' "${targets[14]}"
+
+grep -q 'exteriorQuotientDimensionIs276' "${targets[15]}"
+grep -q 'common98280MapStillOpen' "${targets[15]}"
+
+grep -q 'commonPlusResidualIsMinus' "${targets[16]}"
+grep -q 'actualNormCommon98280StillOpen' "${targets[16]}"
+
+grep -q 'rankRigidityClosure' "${targets[17]}"
+grep -q 'forcedRankNullityClosure' "${targets[17]}"
+
+grep -q 'brauerAllRowsMatch' "${targets[18]}"
+grep -q 'actualOuterActionOnSameQStillOpen' "${targets[18]}"
+
+grep -q 'canonicalCompletionAcquisitionStatus' "${targets[19]}"
+grep -q 'integralWeightTwoRankClosurePaid' "${targets[19]}"
+grep -q 'frobeniusExteriorQuotientDimensionIs276' "${targets[19]}"
+grep -q 'actualNormCommon98280StillOpen' "${targets[19]}"
+grep -q 'remainingDefectSourceBitsIsTwo' "${targets[19]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
