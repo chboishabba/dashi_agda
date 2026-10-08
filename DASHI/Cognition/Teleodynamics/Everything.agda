@@ -34,3 +34,5 @@ import DASHI.Cognition.Teleodynamics.TeleodynamicConsensusConnectivityExact
 import DASHI.Cognition.Teleodynamics.TeleodynamicConsensusConnectivityRegression
 import DASHI.Cognition.Teleodynamics.T5E8CyclicActionBridgeExact
 import DASHI.Cognition.Teleodynamics.T5E8CyclicActionRegression
+import DASHI.Cognition.Teleodynamics.T5E8ProjectiveGeometryBoundaryExact
+import DASHI.Cognition.Teleodynamics.T5E8ProjectiveGeometryRegression
