@@ -2,86 +2,94 @@
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-08 / OVERLAY Y.
+-- LIVE PARETO FRONTIER / 2026-10-08 / OVERLAY Z.
 --
--- Four model-specific source/physics packages remain and adapter debt is zero.
--- Same-object work should continue only where it identifies actual source or
--- physical objects; carrier equalities are retired whenever they can be chosen
--- correctly by construction.
+-- Four physical/source packages remain; adapter debt is zero.
+-- Representation-only same-object equalities have been removed by choosing the
+-- source carriers and selected source objects correctly by construction.
 --
--- S1  literal ACTIVE regular-E/localization form witness on the selected
---     beta-driven published-B source.  Background=PublishedB, Tangent=ten-slot,
---     and the CMP109/116 continuation itself are compiler-owned.  The full
---     quantitative CMP122 package is stronger than this consumer requires.
+-- S1  one literal active regular-E/localization form witness on the selected
+--     beta-driven source.  Published-B background, ten-slot tangent carrier and
+--     CMP109/116 continuation are compiler-owned; the full quantitative CMP122
+--     theorem package is not a premise.
 --
--- S2  same-object application of the imported renormalized Hilbert/Weyl
---     trace-anomaly authority to the exact pinned Local-C stress/F2 pair.
---     No free CMP119 trace scalar and no fresh renormalized-operator identity.
+-- S3a select the exact R129 exported marked-source datum as F2 by construction.
+--     No R129 source equality and no Local-C operator equality remain.  Genuine
+--     work is the physical F2 interpretation/normalization/radius and gauge/local
+--     source semantics.
 --
--- S3a selected marked R129 coordinate is the physical F2 source, including the
---     remaining source coefficient/radius and gauge-local semantics.  No
---     universal marked-curvature family or independent Hilbert inequality.
+-- S2  apply the imported renormalized Hilbert/Weyl trace-anomaly authority
+--     directly to that selected completed F2.  Remaining same-object statements
+--     are Local-C Hilbert trace = renormalized trace and selected F2 =
+--     renormalized F2.  No independent Local-C F2 scalar survives.
 --
--- S3b literal Eq.(1.71) finite realization + Lipschitz cell bound + shrinking
---     product-Haar mesh, yielding the physical-Haar expectation on the SAME
---     finite sequence.  Independent discrepancy/state/cell-count debts are
---     compiler-retired.
---
--- Dominated finite-DGamma, R109-tail and old Eq.(2.23) sign lanes stay retired.
+-- S3b use the mass-exact Haar-weighted refinement-indexed Gate4 realization of
+--     Eq.(1.71).  Single-slice exact quadrature and mass discrepancy are not
+--     premises.  Remaining analysis is the literal tagged partition family plus
+--     vanishing cell oscillation; Lipschitz + shrinking mesh remains a producer
+--     for the latter.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008YExact as Y
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008ZExact as Z
 
 remainingModelSpecificSourcePackageCount : Nat
-remainingModelSpecificSourcePackageCount = Y.remainingModelSpecificSourcePackageCount
+remainingModelSpecificSourcePackageCount = Z.remainingModelSpecificSourcePackageCount
 
 remainingStandardImportedAuthorityCount : Nat
-remainingStandardImportedAuthorityCount = Y.remainingStandardImportedAuthorityCount
+remainingStandardImportedAuthorityCount = Z.remainingStandardImportedAuthorityCount
 
 remainingPreferredPackageCount : Nat
-remainingPreferredPackageCount = Y.remainingPreferredPackageCount
+remainingPreferredPackageCount = Z.remainingPreferredPackageCount
 
 remainingAdapterDebt : Nat
-remainingAdapterDebt = Y.remainingAdapterDebt
+remainingAdapterDebt = Z.remainingAdapterDebt
 
 ------------------------------------------------------------------------
 -- S1
 ------------------------------------------------------------------------
 
 s1PublishedBBackgroundSameObjectAttachmentStillOpen : Bool
-s1PublishedBBackgroundSameObjectAttachmentStillOpen =
-  Y.s1PublishedBBackgroundSameObjectAttachmentRequired
+s1PublishedBBackgroundSameObjectAttachmentStillOpen = false
 
 s1TenIndependentFiniteTangentChoicesStillOpen : Bool
-s1TenIndependentFiniteTangentChoicesStillOpen =
-  Y.s1TenIndependentFiniteTangentChoicesRequired
+s1TenIndependentFiniteTangentChoicesStillOpen = false
 
 s1LiteralActiveRegularEFormOnPublishedBStillOpen : Bool
 s1LiteralActiveRegularEFormOnPublishedBStillOpen =
-  Y.s1LiteralActiveRegularEFormOnPublishedBStillRequired
+  Z.s1LiteralActiveRegularEFormWitnessRequired
 
 s1FullTheorem1QuantitativePackageStillRequired : Bool
 s1FullTheorem1QuantitativePackageStillRequired =
-  Y.s1FullTheorem1QuantitativePackageRequired
+  Z.s1FullTheorem1QuantitativePackageRequired
 
 s1PublishedPotentialCovarianceNeedsFreshProof : Bool
-s1PublishedPotentialCovarianceNeedsFreshProof =
-  Y.s1PublishedPotentialCovarianceNeedsFreshProof
+s1PublishedPotentialCovarianceNeedsFreshProof = false
 
 ------------------------------------------------------------------------
 -- S2
 ------------------------------------------------------------------------
 
 s2SameObjectTraceF2AuthorityApplicationStillOpen : Bool
-s2SameObjectTraceF2AuthorityApplicationStillOpen =
-  Y.s2SameObjectTraceF2AuthorityApplicationRequired
+s2SameObjectTraceF2AuthorityApplicationStillOpen = true
 
 s2FreshRenormalizedOperatorIdentityStillOpen : Bool
 s2FreshRenormalizedOperatorIdentityStillOpen =
-  Y.s2FreshRenormalizedOperatorIdentityRequired
+  Z.s2FreshRenormalizedTraceAnomalyIdentityRequired
+
+s2IndependentLocalCF2ScalarStillOpen : Bool
+s2IndependentLocalCF2ScalarStillOpen =
+  Z.s2IndependentLocalCF2ScalarIdentificationRequired
+
+s2SelectedF2ToRenormalizedF2StillOpen : Bool
+s2SelectedF2ToRenormalizedF2StillOpen =
+  Z.s2SelectedF2ToRenormalizedF2SameObjectRequired
+
+s2LocalHilbertTraceToRenormalizedTraceStillOpen : Bool
+s2LocalHilbertTraceToRenormalizedTraceStillOpen =
+  Z.s2LocalHilbertTraceToRenormalizedTraceSameObjectRequired
 
 ------------------------------------------------------------------------
 -- S3a
@@ -89,50 +97,71 @@ s2FreshRenormalizedOperatorIdentityStillOpen =
 
 s3aSelectedPhysicalF2MarkedSourceStillOpen : Bool
 s3aSelectedPhysicalF2MarkedSourceStillOpen =
-  Y.s3aSelectedPhysicalF2MarkedSourceStillRequired
+  Z.s3aSelectedPhysicalF2SemanticsRequired
+
+s3aPostHocR129MarkedSourceEqualityStillOpen : Bool
+s3aPostHocR129MarkedSourceEqualityStillOpen =
+  Z.s3aPostHocR129MarkedSourceEqualityRequired
+
+s3aPostHocLocalCF2OperatorEqualityStillOpen : Bool
+s3aPostHocLocalCF2OperatorEqualityStillOpen =
+  Z.s3aPostHocLocalCF2OperatorEqualityRequired
 
 s3aUniversalMarkedCurvatureFamilyStillOpen : Bool
-s3aUniversalMarkedCurvatureFamilyStillOpen =
-  Y.s3aUniversalMarkedCurvatureFamilyRequired
+s3aUniversalMarkedCurvatureFamilyStillOpen = false
 
 s3aIndependentHilbertInequalityStillOpen : Bool
-s3aIndependentHilbertInequalityStillOpen =
-  Y.s3aIndependentHilbertInequalityRequired
+s3aIndependentHilbertInequalityStillOpen = false
 
 s3aF2CoefficientSameObjectIdentificationStillOpen : Bool
 s3aF2CoefficientSameObjectIdentificationStillOpen =
-  Y.s3aF2CoefficientSameObjectIdentificationRequired
+  Z.s3aUniformCoefficientRadiusAndNormalizationRequired
 
 s3aMarkedCoordinateAndUniformRadiusWeldStillOpen : Bool
 s3aMarkedCoordinateAndUniformRadiusWeldStillOpen =
-  Y.s3aMarkedCoordinateAndUniformRadiusWeldRequired
+  Z.s3aUniformCoefficientRadiusAndNormalizationRequired
 
 s3aGaugeLocalSemanticsStillOpen : Bool
-s3aGaugeLocalSemanticsStillOpen =
-  Y.s3aGaugeLocalSemanticsRequired
+s3aGaugeLocalSemanticsStillOpen = Z.s3aGaugeLocalSemanticsRequired
 
 ------------------------------------------------------------------------
 -- S3b
 ------------------------------------------------------------------------
 
 s3bFiniteSourceExpectationToPhysicalHaarStillOpen : Bool
-s3bFiniteSourceExpectationToPhysicalHaarStillOpen =
-  Y.s3bFiniteSourceExpectationToPhysicalHaarStillRequired
+s3bFiniteSourceExpectationToPhysicalHaarStillOpen = true
 
+s3bSingleSliceExactQuadratureShortcutStillOpen : Bool
+s3bSingleSliceExactQuadratureShortcutStillOpen =
+  Z.s3bSingleSliceExactQuadratureShortcutRequired
+
+s3bIndependentMassDiscrepancyStillOpen : Bool
+s3bIndependentMassDiscrepancyStillOpen =
+  Z.s3bIndependentMassDiscrepancyRequired
+
+s3bWeightedTaggedPartitionFamilyStillOpen : Bool
+s3bWeightedTaggedPartitionFamilyStillOpen =
+  Z.s3bWeightedTaggedPartitionFamilyRequired
+
+s3bWeightedOscillationVanishesStillOpen : Bool
+s3bWeightedOscillationVanishesStillOpen =
+  Z.s3bWeightedOscillationVanishesRequired
+
+-- Compatibility names for older consumers.  The preferred Z route packages
+-- these as a producer strategy for the weighted oscillation theorem rather than
+-- as separate terminal packages.
 s3bLiteralEquation171FiniteRealizationStillOpen : Bool
 s3bLiteralEquation171FiniteRealizationStillOpen =
-  Y.s3bLiteralEquation171FiniteRealizationRequired
+  Z.s3bWeightedTaggedPartitionFamilyRequired
 
 s3bEquation171LipschitzCellBoundStillOpen : Bool
-s3bEquation171LipschitzCellBoundStillOpen =
-  Y.s3bEquation171LipschitzCellBoundRequired
+s3bEquation171LipschitzCellBoundStillOpen = true
 
 s3bProductHaarVanishingMeshStillOpen : Bool
-s3bProductHaarVanishingMeshStillOpen =
-  Y.s3bProductHaarVanishingMeshRequired
+s3bProductHaarVanishingMeshStillOpen = true
 
 ------------------------------------------------------------------------
--- Retired/dominated work.
+-- Retired/dominated work and stopping rule.
 ------------------------------------------------------------------------
 
 postHocS1CarrierSameObjectProofRequired : Bool
@@ -154,7 +183,12 @@ fullFriedmannTrajectoryAlreadySolved : Bool
 fullFriedmannTrajectoryAlreadySolved = false
 
 sameObjectWorkShouldContinueAtPhysicalSourceAttachments : Bool
-sameObjectWorkShouldContinueAtPhysicalSourceAttachments = true
+sameObjectWorkShouldContinueAtPhysicalSourceAttachments =
+  Z.sameObjectWorkOnlyAtPhysicalSourceSemantics
+
+representationOnlySameObjectDebtRemains : Bool
+representationOnlySameObjectDebtRemains =
+  Z.representationOnlySameObjectDebtRemains
 
 noSyntheticPhysicalIdentificationAdded : Bool
 noSyntheticPhysicalIdentificationAdded = true
