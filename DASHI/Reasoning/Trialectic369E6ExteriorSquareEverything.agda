@@ -25,3 +25,4 @@ import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact
 import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
 import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
