@@ -8,7 +8,7 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- INFRASTRUCTURE COMMITMENT TRAJECTORIES
 --
--- These are heterogeneous accounting commitments.  Same-company/same-metric
+-- These are heterogeneous accounting commitments. Same-company/same-metric
 -- changes may be compared; heterogeneous totals are not summed into a synthetic
 -- 'AI liability' without a harmonized accounting scope.
 ------------------------------------------------------------------------
@@ -79,6 +79,7 @@ record CustomerFundedCapacity : Set where
     rpoBillionUSD : Nat
     customerPrepaidOrSuppliedHardwareBillionUSD : Nat
     reducesProviderCapitalNeed : Bool
+    systemCapitalNeedEliminated : Bool
     establishesIndependentTerminalCash : Bool
     source : Source.AttributedSource
 
@@ -86,7 +87,7 @@ open CustomerFundedCapacity public
 
 oracleCustomerFundedAIHardware : CustomerFundedCapacity
 oracleCustomerFundedAIHardware = customerFundedCapacity
-  "Oracle" 638 75 true false oracleFY2026Source
+  "Oracle" 638 75 true false false oracleFY2026Source
 
 record BroadCommitmentStack : Set where
   constructor broadCommitmentStack
@@ -125,13 +126,13 @@ coreWeaveNvidiaSupplierInvestorOverlap = supplierInvestorOverlap
   "CoreWeave" "NVIDIA" true 1700 2 false coreWeaveSupplierSource
 
 ------------------------------------------------------------------------
--- Accounting-scope firewalls.
+-- Accounting-scope / capital-transfer firewalls.
 ------------------------------------------------------------------------
 
 data HeterogeneousCommitmentsMayBeSummedPermission : Set where
 data CustomerPrepaymentImpliesTerminalDemandPermission : Set where
+data CustomerFundingEliminatesSystemCapitalNeedPermission : Set where
 data SupplierInvestorOverlapImpliesCircularRevenuePermission : Set where
-
 data LargeCommitmentImpliesInsolvencyPermission : Set where
 
 heterogeneousCommitmentsDoNotAutoSum : HeterogeneousCommitmentsMayBeSummedPermission → ⊥
@@ -140,11 +141,21 @@ heterogeneousCommitmentsDoNotAutoSum ()
 customerPrepaymentDoesNotAutoProveTerminalDemand : CustomerPrepaymentImpliesTerminalDemandPermission → ⊥
 customerPrepaymentDoesNotAutoProveTerminalDemand ()
 
+customerFundingDoesNotMakeSystemCapitalDisappear :
+  CustomerFundingEliminatesSystemCapitalNeedPermission → ⊥
+customerFundingDoesNotMakeSystemCapitalDisappear ()
+
 supplierInvestorOverlapDoesNotAutoProveCircularRevenue : SupplierInvestorOverlapImpliesCircularRevenuePermission → ⊥
 supplierInvestorOverlapDoesNotAutoProveCircularRevenue ()
 
 largeCommitmentDoesNotAutoProveInsolvency : LargeCommitmentImpliesInsolvencyPermission → ⊥
 largeCommitmentDoesNotAutoProveInsolvency ()
+
+oracleCustomerFundingReducesProviderNeed : reducesProviderCapitalNeed oracleCustomerFundedAIHardware ≡ true
+oracleCustomerFundingReducesProviderNeed = refl
+
+oracleCustomerFundingDoesNotEliminateSystemNeed : systemCapitalNeedEliminated oracleCustomerFundedAIHardware ≡ false
+oracleCustomerFundingDoesNotEliminateSystemNeed = refl
 
 oracleCustomerFundingStillNotTerminal : establishesIndependentTerminalCash oracleCustomerFundedAIHardware ≡ false
 oracleCustomerFundingStillNotTerminal = refl
