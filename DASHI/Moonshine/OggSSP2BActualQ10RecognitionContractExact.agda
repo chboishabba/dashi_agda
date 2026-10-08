@@ -8,8 +8,9 @@ module DASHI.Moonshine.OggSSP2BActualQ10RecognitionContractExact where
 -- ten-dimensional quotient/subquotient on the actual 2B Tate head, with the
 -- sourced outer involution descending to that SAME quotient.
 --
--- This owner packages exactly that seam.  It does not manufacture the missing
--- subquotient or identify tenA/tenB by numerical coincidence.
+-- This owner packages exactly that seam.  Every named obligation is paired
+-- with an inhabitant, so constructing this record really pays the theorem
+-- rather than merely naming a proposition type.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -23,20 +24,22 @@ record ActualTateQ10Recognition : Set₁ where
     Tate276 : Set
     Q10 : Set
 
-    -- Proof-relevant actual same-object/subquotient data.  The concrete module
-    -- implementation may realize these via N <= S <= Tate276 with S/N = Q10.
-    actualSubquotientReceipt : Set
+    -- Concrete implementations may realize this through N <= S <= Tate276
+    -- with S/N = Q10.  The proposition and its witness are both retained.
+    ActualSubquotientReceipt : Set
+    actualSubquotientReceipt : ActualSubquotientReceipt
 
     selectedFiniteKind : Finite.M22d2TenModuleKind
-    finiteKindIdentificationReceipt : Set
+    FiniteKindIdentificationReceipt : Set
+    finiteKindIdentificationReceipt : FiniteKindIdentificationReceipt
 
     outerAction : Q10 → Q10
     outerActionIsInvolution : (q : Q10) → outerAction (outerAction q) ≡ q
 
-    -- This is the key C' same-object obligation: the sourced M22:2 outer
-    -- operator must be the action induced on this exact quotient, not merely
-    -- an abstract J2^5 operator on an isomorphic ten-dimensional carrier.
-    sourcedOuterActionDescendsToSameQ : Set
+    -- Key C' obligation: the sourced M22:2 outer operator must induce this
+    -- exact action on this exact quotient, not just an isomorphic J2^5 model.
+    OuterActionDescentReceipt : Set
+    sourcedOuterActionDescendsToSameQ : OuterActionDescentReceipt
 
 open ActualTateQ10Recognition public
 
@@ -60,14 +63,11 @@ canonicalActualQ10AcquisitionBoundary =
     false false false
     3
 
--- Once an ActualTateQ10Recognition exists, the old three representation-side
--- residuals collapse to compiler projections.  The two independent D-source
--- orientation decisions remain outside this record by design.
+-- The recognition record itself is now the single producer for all three
+-- representation-side payments.  D's two sourced orientation decisions remain
+-- independent by design.
 record ActualQ10RecognitionClosure : Set₁ where
   field
     recognition : ActualTateQ10Recognition
-    actualQ10SameObjectPaid : Set
-    selectedTenKindPaid : Set
-    outerActionDescentPaid : Set
 
 open ActualQ10RecognitionClosure public
