@@ -23,6 +23,13 @@ REQUIRED = {
         "AntioxidantEnzymeRoute",
         "proteinSynthesisDependenceDoesNotIdentifyTarget = refl",
     ],
+    "DASHI/Biology/BemethylMechanismInterventionAcquisitionExact.agda": [
+        "module DASHI.Biology.BemethylMechanismInterventionAcquisitionExact where",
+        "actinomycinDInterventionObserved = true",
+        "protectiveEffectDependsOnTranscriptionCompatibleProcess = true",
+        "interventionIdentifiesDirectBemethylTarget = false",
+        "gstDockingIsMetabolismEvidenceNotActoprotectionTarget = refl",
+    ],
     "DASHI/Biology/BemethylBioenergeticCrossPollinationExact.agda": [
         "module DASHI.Biology.BemethylBioenergeticCrossPollinationExact where",
         "existingATPAdapter",
@@ -57,6 +64,7 @@ REQUIRED = {
         "historicalControlledPerformanceEvidenceAcquired = true",
         "humanExposureEvidenceAcquired = true",
         "humanPKParameterEvidenceAcquired = true",
+        "transcriptionDependentMechanismEvidenceAcquired = true",
         "modernMechanismTargetIdentified = false",
         "modernHumanPerformanceReplicationPaid = false",
         "clinicalRecommendationPaid = false",
