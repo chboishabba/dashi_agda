@@ -21,6 +21,10 @@ knownFiveGeneratorBijectivityPaid :
   Cut.knownFiveAlbertGeneratorsBijectivePaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
 knownFiveGeneratorBijectivityPaid = refl
 
+allInnerDerivationLawsSourceWritten :
+  Cut.allInnerDerivationLawsSourceWritten Cut.canonicalExceptionalCurrentMaxCut ≡ true
+allInnerDerivationLawsSourceWritten = refl
+
 innerDerivation52DiagnosticNowPaid :
   Cut.innerDerivationDimension52DiagnosticPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
 innerDerivation52DiagnosticNowPaid = refl
