@@ -3,33 +3,28 @@ module DASHI.Mathematics.Algebra.RationalOctonionG2DerivationExact where
 ------------------------------------------------------------------------
 -- RATIONAL OCTONION G2 DERIVATION / AUTOMORPHISM MAX-CUT
 --
--- This owner works in the repository's literal Cayley--Dickson convention.
--- It introduces the standard alternative-algebra derivation operator
+-- Literal operators for the standard alternative-algebra derivations
 --
 --   D(a,b) = [L_a,L_b] + [L_a,R_b] + [R_a,R_b]
 --
--- on the exact rational octonions, and two explicit signed imaginary-basis
--- automorphism candidates discovered by exhaustive exact finite search.
+-- plus two explicit signed imaginary-basis maps.  Companion exact Python
+-- (`scripts/rational_albert_g2_f4_probe.py`) verifies, in the repository's
+-- Cayley--Dickson convention:
 --
--- Companion exact Python (`scripts/rational_albert_g2_f4_probe.py`) verifies:
+-- * 1344 signed basis automorphisms of the seven imaginary units;
+-- * the explicit maps below have orders 7 and 4 and generate all 1344;
+-- * all 21 D(e_i,e_j), i<j, satisfy the derivation law on all 8x8 basis
+--   products;
+-- * the matrix span of those 21 derivations has rank 14.
 --
--- * all signed permutations of e1..e7 preserving the literal multiplication
---   table form a group of order 1344;
--- * the explicit generators below have orders 7 and 4 and generate all 1344;
--- * all 21 D(e_i,e_j), i<j, satisfy the derivation law on the complete 8x8
---   basis multiplication table;
--- * their 8x8 rational-matrix span has rank 14.
---
--- Multiplication and D are bilinear, so the basis derivation test is the exact
--- finite polynomial certificate behind the arbitrary-rational claim.  This
--- file records the literal operators and keeps the 1344/rank-14 computations
--- as executable cross-tool receipts rather than pretending Python is Agda
--- kernel authority.
+-- The executable finite results are retained as cross-tool receipts rather
+-- than silently promoted to Agda kernel authority.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; -_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; -_)
 
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact as O
@@ -64,10 +59,9 @@ e3 e5 e6 : O.RationalOctonion
 e3 = O.oct (Q.quat 0ℚ 0ℚ 0ℚ 1ℚ) Q.zeroQ
 e5 = O.oct Q.zeroQ (Q.quat 0ℚ 1ℚ 0ℚ 0ℚ)
 e6 = O.oct Q.zeroQ (Q.quat 0ℚ 0ℚ 1ℚ 0ℚ)
-  where open import Data.Rational.Base using (1ℚ)
 
 ------------------------------------------------------------------------
--- Two explicit signed-basis octonion maps.
+-- Explicit signed-basis automorphism candidates.
 --
 -- g7:
 -- e1->e2, e2->e4, e3->e6, e4->e3, e5->e1,
@@ -98,19 +92,18 @@ OctonionAutomorphism f =
 record G2ExactProbeReceipt : Set where
   constructor g2-exact-probe-receipt
   field
-    signedBasisAutomorphismCount : ℕ
-    generator7Order : ℕ
-    generator4Order : ℕ
-    generatedSignedBasisGroupOrder : ℕ
-    standardDerivationCandidates : ℕ
-    derivationSpanRank : ℕ
+    signedBasisAutomorphismCount : Nat
+    generator7Order : Nat
+    generator4Order : Nat
+    generatedSignedBasisGroupOrder : Nat
+    standardDerivationCandidates : Nat
+    derivationSpanRank : Nat
     allBasisDerivationChecksPassed : Bool
 open G2ExactProbeReceipt public
 
 canonicalG2ExactProbeReceipt : G2ExactProbeReceipt
 canonicalG2ExactProbeReceipt =
   g2-exact-probe-receipt 1344 7 4 1344 21 14 true
-  where open import Agda.Builtin.Nat using (ℕ)
 
 record G2PromotionBoundary : Set where
   constructor g2-promotion-boundary
