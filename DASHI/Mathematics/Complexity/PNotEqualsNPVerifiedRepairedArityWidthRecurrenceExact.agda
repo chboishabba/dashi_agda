@@ -2,29 +2,16 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPVerifiedRepairedArityWidthRecurr
 
 ------------------------------------------------------------------------
 -- VERIFIED TERMINAL TREE -> REPAIRED CHARGED Q1 RECURRENCE
---
--- Cross-pollinates the new executable terminal-tree verifier with the current
--- strongest non-vacuous repaired Q1 carrier.
---
--- Existing RepairedArityWidthRecurrenceExact already pays:
---   * reachable raw-node provenance;
---   * rewrite-program semantic reduction;
---   * one-node strict representatives;
---   * graph-cell + machine-step + next-authority strict charging;
---   * compilation to the Q2/finite-code Clay contradiction.
---
--- This owner removes its quantified terminalLabelCorrect premise from the
--- constructor-facing surface.  The caller supplies one finite Boolean
--- verification result over the Shannon tree instead.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Nat.Base using (_<_)
+open import Data.Nat.Base using (_≤_; _<_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
@@ -32,40 +19,29 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissi
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCandidateRepresentativeRepairExact as Repair
 import DASHI.Mathematics.Complexity.PNotEqualsNPVerifiedLocalArityTerminalAdmissionExact as Verified
 import DASHI.Mathematics.Complexity.PNotEqualsNPLocalArityTerminalAdmissionExact as Local
-import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPRepairedArityWidthRecurrenceExact as Repaired
+import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact as Width
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCodeClayClosureExact as ClayClosure
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneTerminationNoGoExact as NoGo
 
-------------------------------------------------------------------------
--- Repaired closed quotient derived from one finite verifier-backed admission.
-------------------------------------------------------------------------
-
 verifiedRepairedClosed :
   ∀ {rootVariables : Nat}
-    {root :
-      DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact.BooleanFormula
-        rootVariables}
+    {root : SAT.BooleanFormula rootVariables}
     (candidate : Repair.RepairedFiniteQ1Candidate root)
     (verified :
       Verified.VerifiedLocalArityTerminalAdmission
         (Repair.transitionCandidate candidate)) →
-  DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact.ClosedStrictRepresentativeQuotient
-    root
+  Closed.ClosedStrictRepresentativeQuotient root
 verifiedRepairedClosed candidate verified =
   Repaired.repairedClosed
     candidate
     (Local.localBuildsArityTrackedTerminalAdmission
       (Verified.verifiedBuildsLocalAdmission verified))
-
-------------------------------------------------------------------------
--- Same repaired machine execution, but semantic admission is now verifier-
--- backed rather than universally supplied.
-------------------------------------------------------------------------
 
 record VerifiedRepairedConstructionRun
     (state : Q2.BoundedSelfReferenceState) : Set₁ where
@@ -90,7 +66,7 @@ record VerifiedRepairedConstructionRun
     machineStepCount : Nat
 
     machineExecution :
-      DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact.Iterates
+      Executed.Iterates
         (Repaired.repairedCandidateMachineStep advance)
         machineStepCount
         (Repaired.working initialWork)
@@ -120,11 +96,6 @@ record VerifiedRepairedConstructionRun
       Q2.recursiveMeasure state
 
 open VerifiedRepairedConstructionRun public
-
-------------------------------------------------------------------------
--- Compile to the already-proved repaired recurrence.  This is the whole weld:
--- no downstream Q2, finite-code, width, or Clay theorem is duplicated.
-------------------------------------------------------------------------
 
 verifiedRunToRepairedRun :
   ∀ {state : Q2.BoundedSelfReferenceState} →
@@ -164,10 +135,6 @@ verifiedConstructorToQ2StepSystem constructor =
   Repaired.repairedConstructorToQ2StepSystem
     (verifiedConstructorToRepaired constructor)
 
-------------------------------------------------------------------------
--- Reuse the non-vacuous semantic-width obstruction unchanged.
-------------------------------------------------------------------------
-
 verifiedRepairedHighWidthBlocksRun :
   ∀ {state : Q2.BoundedSelfReferenceState}
     {next total : Nat} →
@@ -191,10 +158,6 @@ verifiedRepairedHighWidthBlocksRun
     measureBelowWidth
     (verifiedRunToRepairedRun run)
 
-------------------------------------------------------------------------
--- Clay-facing closure on the verifier-backed repaired path.
-------------------------------------------------------------------------
-
 verifiedRepairedRecurrenceFiniteCodeContradictsSATInP :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     (satP : PR.InP cost Clay.SATLanguage)
@@ -217,21 +180,7 @@ verifiedRepairedRecurrenceFiniteCodeContradictsSATInP
     semantics
 
 ------------------------------------------------------------------------
--- MAX-CUT STATUS
---
--- Paid on the strongest repaired path:
---   * terminal-prefix completeness;
---   * finite exhaustive terminal-label verification;
---   * semantic congruence via local arity/future-observation machinery;
---   * reachable provenance;
---   * evaluator-verified normalization programs;
---   * one-node strict representatives;
---   * graph/machine/next-authority charging;
---   * finite-code Clay compiler reuse.
---
--- Remaining live construction burden:
---   produce the repaired finite candidate + rewrite programs + local arity
---   laws with an execution whose charged strict inequality is actually
---   inhabited on every live recursive state, and pay the separate
---   Q1OppositeSATTerminalSemantics premise.
+-- On this path terminal semantic admission is now one finite Boolean verifier
+-- receipt.  Existing repaired provenance/normalisation/strictness/charging and
+-- the finite-code Clay compiler are reused unchanged.
 ------------------------------------------------------------------------
