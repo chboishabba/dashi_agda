@@ -1,0 +1,144 @@
+module DASHI.Mathematics.Algebra.RationalOctonionSignedBasisAutomorphismExact where
+
+------------------------------------------------------------------------
+-- EXPLICIT RATIONAL OCTONION AUTOMORPHISMS
+--
+-- The repository's Cayley--Dickson octonions admit many signed permutations
+-- of the seven imaginary basis vectors.  A local exhaustive basis-table probe
+-- found exactly 1344 such signed basis permutations preserving multiplication.
+-- Two small transformations generate that finite signed-basis automorphism
+-- group.  This file source-writes those two generators as actual rational
+-- octonion maps and proves multiplication / conjugation / norm preservation by
+-- exact coordinate polynomial identities.
+--
+-- The finite closure order 1344 remains a local combinatorial diagnostic here;
+-- this file does not identify the full algebraic automorphism group G2.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ; -_)
+open import Data.Rational.Tactic.RingSolver using (solve)
+
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionWilsonSecondVariationExact as Q
+import DASHI.Mathematics.Algebra.CayleyDicksonRationalOctonionExact as O
+
+------------------------------------------------------------------------
+-- Generator A.
+--
+-- On basis labels e1..e7 it implements
+--
+--   e1 -> -e1, e2 -> e2, e3 -> -e3,
+--   e4 <-> e5, e6 <-> e7.
+------------------------------------------------------------------------
+
+autoA : O.RationalOctonion → O.RationalOctonion
+autoA (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  O.oct
+    (Q.quat a0 (- a1) a2 (- a3))
+    (Q.quat a5 a4 a7 a6)
+
+------------------------------------------------------------------------
+-- Generator B.
+--
+-- Pure imaginary-basis permutation
+--
+--   1->2, 2->5, 3->7, 4->3, 5->1, 6->6, 7->4.
+------------------------------------------------------------------------
+
+autoB : O.RationalOctonion → O.RationalOctonion
+autoB (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  O.oct
+    (Q.quat a0 a5 a1 a4)
+    (Q.quat a7 a2 a6 a3)
+
+------------------------------------------------------------------------
+-- Exact multiplication preservation.
+------------------------------------------------------------------------
+
+autoAPreservesProduct : ∀ left right →
+  autoA (O._*o_ left right) ≡ O._*o_ (autoA left) (autoA right)
+autoAPreservesProduct
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7))
+  (O.oct (Q.quat b0 b1 b2 b3) (Q.quat b4 b5 b6 b7)) =
+  O.octonionExt
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+  where
+    vars : List ℚ
+    vars =
+      a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷
+      b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ []
+
+autoBPreservesProduct : ∀ left right →
+  autoB (O._*o_ left right) ≡ O._*o_ (autoB left) (autoB right)
+autoBPreservesProduct
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7))
+  (O.oct (Q.quat b0 b1 b2 b3) (Q.quat b4 b5 b6 b7)) =
+  O.octonionExt
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+  where
+    vars : List ℚ
+    vars =
+      a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷
+      b0 ∷ b1 ∷ b2 ∷ b3 ∷ b4 ∷ b5 ∷ b6 ∷ b7 ∷ []
+
+------------------------------------------------------------------------
+-- Conjugation and norm preservation.
+------------------------------------------------------------------------
+
+autoACommutesConjugation : ∀ value →
+  autoA (O.octonionConjugate value) ≡ O.octonionConjugate (autoA value)
+autoACommutesConjugation
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  O.octonionExt
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+  where
+    vars : List ℚ
+    vars = a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ []
+
+autoBCommutesConjugation : ∀ value →
+  autoB (O.octonionConjugate value) ≡ O.octonionConjugate (autoB value)
+autoBCommutesConjugation
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  O.octonionExt
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+  where
+    vars : List ℚ
+    vars = a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ []
+
+autoAPreservesNorm : ∀ value → O.octonionNormSq (autoA value) ≡ O.octonionNormSq value
+autoAPreservesNorm
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ [])
+
+autoBPreservesNorm : ∀ value → O.octonionNormSq (autoB value) ≡ O.octonionNormSq value
+autoBPreservesNorm
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ [])
+
+------------------------------------------------------------------------
+-- Exact frontier.
+------------------------------------------------------------------------
+
+record SignedBasisAutomorphismBoundary : Set where
+  constructor signed-basis-automorphism-boundary
+  field
+    generatorAProductPreserving : Bool
+    generatorBProductPreserving : Bool
+    generatorAConjugationPreserving : Bool
+    generatorBConjugationPreserving : Bool
+    generatorANormPreserving : Bool
+    generatorBNormPreserving : Bool
+    localSignedBasisClosureOrder : ℕ
+    fullG2RecognitionPaid : Bool
+open SignedBasisAutomorphismBoundary public
+
+canonicalBoundary : SignedBasisAutomorphismBoundary
+canonicalBoundary =
+  signed-basis-automorphism-boundary
+    true true true true true true 1344 false
