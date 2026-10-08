@@ -17,6 +17,10 @@ signedBasisG2SubgroupNowPaid :
   Cut.signedBasisG2SubgroupPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
 signedBasisG2SubgroupNowPaid = refl
 
+knownFiveGeneratorBijectivityPaid :
+  Cut.knownFiveAlbertGeneratorsBijectivePaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
+knownFiveGeneratorBijectivityPaid = refl
+
 innerDerivation52DiagnosticNowPaid :
   Cut.innerDerivationDimension52DiagnosticPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
 innerDerivation52DiagnosticNowPaid = refl
