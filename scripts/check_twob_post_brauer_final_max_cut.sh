@@ -27,6 +27,8 @@ targets=(
   DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda
   DASHI/Moonshine/OggSSP2BActualQ10RecognitionContractExact.agda
   DASHI/Moonshine/OggSSP2BActualQ10RecognitionValidation.agda
+  DASHI/Moonshine/OggSSP2B279FirewalledCrossPollinationExact.agda
+  DASHI/Moonshine/OggSSP2B279FirewallValidation.agda
 )
 
 for target in "${targets[@]}"; do
@@ -100,5 +102,9 @@ grep -q 'record ActualTateQ10Recognition' "${targets[20]}"
 grep -q 'sourcedOuterActionDescendsToSameQ' "${targets[20]}"
 grep -q 'canonicalActualQ10AcquisitionBoundary' "${targets[20]}"
 grep -q 'validationCurrentActualQ10PaidIsFalse' "${targets[21]}"
+
+grep -q 'scalar279FromP31IsPaid' "${targets[22]}"
+grep -q 'arithmetic279PaysActualQ10' "${targets[22]}"
+grep -q 'scalar279DoesNotPayActualQ10' "${targets[23]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
