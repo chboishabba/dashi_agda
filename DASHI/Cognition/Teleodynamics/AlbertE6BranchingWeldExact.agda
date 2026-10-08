@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.Algebra.RationalAlbertJordanExact as A
+import DASHI.Mathematics.Algebra.RationalAlbertJordanFrontierExact as AF
 import DASHI.Cognition.Teleodynamics.E8ExceptionalBranchingBridgeExact as Branch
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 
@@ -49,7 +50,9 @@ record AlbertE6BranchingBoundary : Set where
   field
     rationalAlbert27Available : Bool
     rationalAlbertProductAvailable : Bool
+    rationalAlbertUnitTheoremAvailable : Bool
     rationalAlbertCubicNormAvailable : Bool
+    rationalAlbertJordanIdentityKernelProved : Bool
     e8ThreeBy27FibresExecutable : Bool
     ternary27FiniteCarrierAvailable : Bool
     ternary27RecognizedAsRationalAlbert : Bool
@@ -63,7 +66,9 @@ open AlbertE6BranchingBoundary public
 canonicalAlbertE6BranchingBoundary : AlbertE6BranchingBoundary
 canonicalAlbertE6BranchingBoundary =
   boundary
-    true true true true true
+    true true true true
+    (AF.universalJordanIdentityKernelProved AF.currentRationalAlbertFrontier)
+    true true
     false false false false false
 
 rationalAlbertDimension27 : A.rationalAlbertDimension ≡ 27
