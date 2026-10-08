@@ -14,7 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat using (_<_; _≤_; s≤s; z≤n)
 open import Data.Nat.Base using (NonZero; nonZero)
-open import Data.Nat.DivMod using (m/n<m)
+open import Data.Nat.DivMod using (_/_; m/n<m)
 import Data.Product as Product
 open Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
