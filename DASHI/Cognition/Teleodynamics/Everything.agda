@@ -36,3 +36,5 @@ import DASHI.Cognition.Teleodynamics.T5E8CyclicActionBridgeExact
 import DASHI.Cognition.Teleodynamics.T5E8CyclicActionRegression
 import DASHI.Cognition.Teleodynamics.T5E8ProjectiveGeometryBoundaryExact
 import DASHI.Cognition.Teleodynamics.T5E8ProjectiveGeometryRegression
+import DASHI.Cognition.Teleodynamics.TetracodeE8ExplicitMapExact
+import DASHI.Cognition.Teleodynamics.TetracodeE8ExplicitMapRegression
