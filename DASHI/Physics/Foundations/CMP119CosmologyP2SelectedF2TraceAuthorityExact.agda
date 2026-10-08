@@ -17,7 +17,7 @@ module DASHI.Physics.Foundations.CMP119CosmologyP2SelectedF2TraceAuthorityExact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyP3SelectedMarkedF2Exact as Selected
 import DASHI.Physics.Foundations.CMP119CosmologyP2RenormalizedTraceF2AuthorityCompilerExact as Compiler
