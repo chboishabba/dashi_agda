@@ -38,3 +38,6 @@ import DASHI.Cognition.Teleodynamics.T5E8ProjectiveGeometryBoundaryExact
 import DASHI.Cognition.Teleodynamics.T5E8ProjectiveGeometryRegression
 import DASHI.Cognition.Teleodynamics.TetracodeE8ExplicitMapExact
 import DASHI.Cognition.Teleodynamics.TetracodeE8ExplicitMapRegression
+import DASHI.Cognition.Teleodynamics.E8ExceptionalBranchingBridgeExact
+import DASHI.Cognition.Teleodynamics.E8ExceptionalBranchingRegression
+import DASHI.Cognition.Teleodynamics.AlbertE6BranchingWeldExact
