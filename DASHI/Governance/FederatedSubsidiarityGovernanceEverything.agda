@@ -33,8 +33,9 @@ import DASHI.Governance.ConsensusDemocracyNonFactorabilityRegression
 -- comparison, component/count/weight bound compilers, meaningful-margin and
 -- model-class robustness, Occupy calibration, independent real-world
 -- comparators, comparator-local workload floors and institutional versioning,
--- transfer qualification, direct target experiment design, and symmetric
--- promotion/falsification gate.
+-- dynamic institutional feedback/adaptive model reopening, shared-interface
+-- capacity/bottleneck analysis, transfer qualification, direct target
+-- experiment design, and snapshot + longitudinal promotion/falsification gates.
 import DASHI.Governance.BoloBoloPrimarySourceAtlasExact
 import DASHI.Governance.BoloBoloPrimarySourceAtlasRegression
 import DASHI.Governance.BoloBoloDerivedScaleEnvelopeExact
@@ -75,12 +76,18 @@ import DASHI.Governance.BoloBoloComparatorInstitutionalVersioningExact
 import DASHI.Governance.BoloBoloComparatorInstitutionalVersioningRegression
 import DASHI.Governance.BoloBoloComparatorEvidenceInstantiationExact
 import DASHI.Governance.BoloBoloComparatorEvidenceInstantiationRegression
+import DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeExact
+import DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeRegression
+import DASHI.Governance.BoloBoloFederatedInterfaceCapacityBridgeExact
+import DASHI.Governance.BoloBoloFederatedInterfaceCapacityBridgeRegression
 import DASHI.Governance.BoloBoloCalibrationTransferExact
 import DASHI.Governance.BoloBoloCalibrationTransferRegression
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentRegression
 import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact
 import DASHI.Governance.BoloBoloEmpiricalPromotionGateRegression
+import DASHI.Governance.BoloBoloLongitudinalPromotionGateExact
+import DASHI.Governance.BoloBoloLongitudinalPromotionGateRegression
 import DASHI.Governance.BoloBoloModelClassRobustnessExact
 import DASHI.Governance.BoloBoloModelClassRobustnessRegression
 import DASHI.Governance.BoloBoloCounterfactualEvaluationExact
