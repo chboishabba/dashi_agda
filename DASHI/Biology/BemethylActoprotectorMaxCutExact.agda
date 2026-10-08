@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Biology.BemethylActoprotectorClaimAtlasExact as Claims
 import DASHI.Biology.BemethylMetabolicMechanismBoundaryExact as Mechanism
 import DASHI.Biology.BemethylMechanismInterventionAcquisitionExact as Intervention
+import DASHI.Biology.BemethylModernAthleteReplicationExact as ModernAthlete
 import DASHI.Biology.BemethylBioenergeticCrossPollinationExact as Weld
 import DASHI.Biology.BemethylHumanEvidenceAcquisitionExact as Human
 import DASHI.Biology.BemethylParetoSnowballExact as Pareto
@@ -16,6 +17,7 @@ record BemethylMaxCut : Set where
     atlas : Claims.BemethylClaimAtlas
     metabolicBoundary : Mechanism.MechanismBoundary
     mechanismIntervention : Intervention.MechanismInterventionAcquisition
+    modernAthleteEvidence : ModernAthlete.ModernAthleteReplication
     bioenergeticWeld : Weld.BemethylBioenergeticWeld
     humanEvidence : Human.HumanEvidenceAcquisition
     paretoSnowball : Pareto.ParetoSnowball
@@ -25,6 +27,9 @@ record BemethylMaxCut : Set where
     metabolismLiteratureCrossChecked : Bool
     controlledHumanHeatEvidenceAcquired : Bool
     historicalControlledPerformanceEvidenceAcquired : Bool
+    modernRandomizedAthleteEvidenceAcquired : Bool
+    modernDirectBetweenGroupEffectPaid : Bool
+    independentExternalPerformanceReplicationPaid : Bool
     humanExposureEvidenceAcquired : Bool
     humanPKParameterEvidenceAcquired : Bool
     humanDiseaseContextMechanismEvidenceAcquired : Bool
@@ -32,7 +37,6 @@ record BemethylMaxCut : Set where
 
     modernMechanismTargetIdentified : Bool
     directGenomeBindingReceiptPaid : Bool
-    modernHumanPerformanceReplicationPaid : Bool
     humanAntimutagenicOutcomePaid : Bool
     doseResponseSameObjectPaid : Bool
     exposureEfficacySameObjectPaid : Bool
@@ -48,6 +52,7 @@ canonicalBemethylMaxCut = record
   { atlas = Claims.canonicalBemethylClaimAtlas
   ; metabolicBoundary = Mechanism.mitochondrialBoundary
   ; mechanismIntervention = Intervention.canonicalMechanismInterventionAcquisition
+  ; modernAthleteEvidence = ModernAthlete.canonicalModernAthleteReplication
   ; bioenergeticWeld = Weld.canonicalBemethylBioenergeticWeld
   ; humanEvidence = Human.canonicalHumanEvidenceAcquisition
   ; paretoSnowball = Pareto.canonicalParetoSnowball
@@ -56,19 +61,21 @@ canonicalBemethylMaxCut = record
   ; metabolismLiteratureCrossChecked = true
   ; controlledHumanHeatEvidenceAcquired = true
   ; historicalControlledPerformanceEvidenceAcquired = true
+  ; modernRandomizedAthleteEvidenceAcquired = true
+  ; modernDirectBetweenGroupEffectPaid = false
+  ; independentExternalPerformanceReplicationPaid = false
   ; humanExposureEvidenceAcquired = true
   ; humanPKParameterEvidenceAcquired = true
   ; humanDiseaseContextMechanismEvidenceAcquired = true
   ; transcriptionDependentMechanismEvidenceAcquired = true
   ; modernMechanismTargetIdentified = false
   ; directGenomeBindingReceiptPaid = false
-  ; modernHumanPerformanceReplicationPaid = false
   ; humanAntimutagenicOutcomePaid = false
   ; doseResponseSameObjectPaid = false
   ; exposureEfficacySameObjectPaid = false
   ; oxygenHeatIndependenceModernReplicationPaid = false
   ; clinicalRecommendationPaid = false
-  ; nextEmpiricalCut = "Historical controlled operator-performance, controlled heat/exertion, healthy-volunteer pharmacokinetic/excretion, disease-context mechanism, and transcription-dependent rat antioxidant evidence are now source-paid at the indexed level. The irreducible mechanism leaf is direct bemethyl target engagement; then recover complete original methods/exposure and obtain modern independent same-compound replication with efficacy and exposure measured on the same participants."
+  ; nextEmpiricalCut = "The 2023 randomized double-blind placebo-controlled athlete study now pays modern same-compound evidence, but the recovered surface does not yet pay a direct Metaprot-vs-placebo effect estimate, participant-level exposure coupling, or independent external replication. Direct molecular target engagement remains the highest-value mechanism cut."
   }
 
 transcriptPaid : transcriptFormalised canonicalBemethylMaxCut ≡ true
@@ -82,6 +89,18 @@ historicalPerformancePaid :
   historicalControlledPerformanceEvidenceAcquired canonicalBemethylMaxCut ≡ true
 historicalPerformancePaid = refl
 
+modernRandomizedAthletePaid :
+  modernRandomizedAthleteEvidenceAcquired canonicalBemethylMaxCut ≡ true
+modernRandomizedAthletePaid = refl
+
+directModernBetweenGroupEffectOpen :
+  modernDirectBetweenGroupEffectPaid canonicalBemethylMaxCut ≡ false
+directModernBetweenGroupEffectOpen = refl
+
+independentExternalReplicationOpen :
+  independentExternalPerformanceReplicationPaid canonicalBemethylMaxCut ≡ false
+independentExternalReplicationOpen = refl
+
 humanExposurePaid : humanExposureEvidenceAcquired canonicalBemethylMaxCut ≡ true
 humanExposurePaid = refl
 
@@ -94,10 +113,6 @@ transcriptionDependencePaid = refl
 
 modernTargetOpen : modernMechanismTargetIdentified canonicalBemethylMaxCut ≡ false
 modernTargetOpen = refl
-
-modernHumanReplicationOpen :
-  modernHumanPerformanceReplicationPaid canonicalBemethylMaxCut ≡ false
-modernHumanReplicationOpen = refl
 
 sameObjectExposureEfficacyOpen :
   exposureEfficacySameObjectPaid canonicalBemethylMaxCut ≡ false
