@@ -5,7 +5,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DASHI = REPO_ROOT / "DASHI"
-EVERYTHING = DASHI / "Everything.agda"
+ROLLUP = DASHI / "Physics" / "Closure" / "YeRedshiftEverything.agda"
 
 EXPECTED = {
     "DASHI.Physics.Closure.BothwellYe2022PublishedGradientPayloadExact":
@@ -59,6 +59,9 @@ def test_redshift_comparison_is_same_scale_and_within_published_uncertainty() ->
         "canonicalPublishedSynchronousWithinOneQuotedUncertainty",
         "gravityFormulaReference",
         "speedOfLightExactSIReference",
+        "ghOverCSquaredScaledExact",
+        "canonicalLowerRoundingBoundHolds",
+        "canonicalUpperRoundingBoundHolds",
     ):
         assert name in text
 
@@ -83,8 +86,8 @@ def test_ingestion_status_reconciles_partial_source_ingestion_without_terminal_p
         assert marker in text
 
 
-def test_new_owners_are_exposed_once() -> None:
-    everything = read(EVERYTHING)
+def test_new_owners_are_exposed_once_by_focused_rollup() -> None:
+    rollup = read(ROLLUP)
     for module in EXPECTED:
         line = f"import {module}"
-        assert everything.count(line) == 1, f"expected exactly one import: {line}"
+        assert rollup.count(line) == 1, f"expected exactly one import: {line}"
