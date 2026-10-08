@@ -18,6 +18,14 @@ literalPublishedBContinuationRemains :
   Y.s1RemainingWorkIsLiteralContinuationOnPublishedBCarrier ≡ true
 literalPublishedBContinuationRemains = refl
 
+fullTheorem1PackageRetiredFromS1 :
+  Y.s1FullTheorem1QuantitativePackageRequired ≡ false
+fullTheorem1PackageRetiredFromS1 = refl
+
+literalActiveRegularEFormRemains :
+  Y.s1LiteralActiveRegularEFormOnPublishedBStillRequired ≡ true
+literalActiveRegularEFormRemains = refl
+
 sameObjectTraceF2AuthorityStillRequired :
   Y.s2SameObjectTraceF2AuthorityApplicationRequired ≡ true
 sameObjectTraceF2AuthorityStillRequired = refl
