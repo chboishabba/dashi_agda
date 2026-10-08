@@ -21,9 +21,12 @@ import DASHI.Governance.BoloBoloOrganizationalNetworkEvidenceExact as NetworkEvi
 import DASHI.Governance.BoloBoloComparatorCalibrationFrontierExact as ComparatorFrontier
 import DASHI.Governance.BoloBoloComparatorWorkloadLowerBoundExact as Workload
 import DASHI.Governance.BoloBoloComparatorInstitutionalVersioningExact as Versioning
+import DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeExact as Dynamic
+import DASHI.Governance.BoloBoloFederatedInterfaceCapacityBridgeExact as Capacity
 import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
 import DASHI.Governance.BoloBoloPairedGovernanceExperimentExact as Experiment
 import DASHI.Governance.BoloBoloEmpiricalPromotionGateExact as Promotion
+import DASHI.Governance.BoloBoloLongitudinalPromotionGateExact as Longitudinal
 import DASHI.Governance.BoloBoloModelClassRobustnessExact as ModelRobustness
 
 record BoloCounterfactualEvaluation : Set where
@@ -49,12 +52,17 @@ record BoloCounterfactualEvaluation : Set where
     comparatorWorkloadLowerBound : Workload.ComparatorWorkloadLowerBound
     comparatorWorkloadBoundary : Workload.ComparatorWorkloadBoundary
     comparatorVersioningBoundary : Versioning.ComparatorVersioningBoundary
+    dynamicInstitutionalFeedback : Dynamic.DynamicInstitutionalFeedbackBridge
+    dynamicEvaluationObligations : Dynamic.DynamicBoloEvaluationObligations
+    interfaceCapacityBoundary : Capacity.FederatedInterfaceCapacityBoundary
+    interfaceCapacityResearchBoundary : Capacity.InterfaceCapacityResearchBoundary
     comparatorAcquisitionRoadmap : ComparatorFrontier.ComparatorAcquisitionRoadmap
     comparatorCalibrationBoundary : ComparatorFrontier.ComparatorCalibrationBoundary
     transferBoundary : Transfer.CalibrationTransferBoundary
     directExperimentTermMapping : Experiment.CounterfactualTermMappingPlan
     empiricalPromotionBoundary : Promotion.EmpiricalPromotionBoundary
     meaningfulPromotionBoundary : Promotion.MeaningfulPromotionBoundary
+    longitudinalPromotionBoundary : Longitudinal.LongitudinalPromotionBoundary
     modelClassRobustnessBoundary : ModelRobustness.ModelClassRobustnessBoundary
 
 open BoloCounterfactualEvaluation public
@@ -81,12 +89,17 @@ canonicalBoloCounterfactualEvaluation = record
   ; comparatorWorkloadLowerBound = Workload.canonicalComparatorWorkloadLowerBound
   ; comparatorWorkloadBoundary = Workload.canonicalComparatorWorkloadBoundary
   ; comparatorVersioningBoundary = Versioning.canonicalComparatorVersioningBoundary
+  ; dynamicInstitutionalFeedback = Dynamic.canonicalDynamicInstitutionalFeedbackBridge
+  ; dynamicEvaluationObligations = Dynamic.canonicalDynamicBoloEvaluationObligations
+  ; interfaceCapacityBoundary = Capacity.canonicalFederatedInterfaceCapacityBoundary
+  ; interfaceCapacityResearchBoundary = Capacity.canonicalInterfaceCapacityResearchBoundary
   ; comparatorAcquisitionRoadmap = ComparatorFrontier.canonicalComparatorAcquisitionRoadmap
   ; comparatorCalibrationBoundary = ComparatorFrontier.canonicalComparatorCalibrationBoundary
   ; transferBoundary = Transfer.canonicalCalibrationTransferBoundary
   ; directExperimentTermMapping = Experiment.canonicalCounterfactualTermMappingPlan
   ; empiricalPromotionBoundary = Promotion.canonicalEmpiricalPromotionBoundary
   ; meaningfulPromotionBoundary = Promotion.canonicalMeaningfulPromotionBoundary
+  ; longitudinalPromotionBoundary = Longitudinal.canonicalLongitudinalPromotionBoundary
   ; modelClassRobustnessBoundary = ModelRobustness.canonicalModelClassRobustnessBoundary
   }
 
@@ -112,14 +125,19 @@ record BoloEvaluationBoundary : Set where
     comparatorCalibrationFrontierPaid : Bool
     comparatorLocalWorkloadFloorPaid : Bool
     comparatorInstitutionalVersioningPaid : Bool
+    dynamicInstitutionalFeedbackBridgePaid : Bool
+    adaptiveModelReopeningObligationPaid : Bool
+    interfaceCapacityBottleneckBridgePaid : Bool
     crossContextTransferFirewallPaid : Bool
     directFlatVersusNestedExperimentDesignPaid : Bool
     validatedEmpiricalPromotionGatePaid : Bool
     meaningfulEmpiricalPromotionGatePaid : Bool
+    longitudinalPromotionGatePaid : Bool
     modelClassRobustnessGatePaid : Bool
 
     empiricalCostTermsIdentified : Bool
     targetQualifiedCostBoundsPaid : Bool
+    targetInterfaceCapacityAndDemandPaid : Bool
     minimumMeaningfulThresholdTargetStudyPaid : Bool
     admissibleTargetModelFamilyPaid : Bool
     robustTargetCoordinationWinPaid : Bool
@@ -130,6 +148,8 @@ record BoloEvaluationBoundary : Set where
     validatedCoordinationDisadvantagePaid : Bool
     validatedMeaningfulAdvantagePaid : Bool
     validatedMeaningfulDisadvantagePaid : Bool
+    longitudinalMeaningfulAdvantagePaid : Bool
+    longitudinalMeaningfulDisadvantagePaid : Bool
     uniformModelFamilyAdvantagePaid : Bool
     uniformModelFamilyDisadvantagePaid : Bool
     prospectiveHoldoutSpendable : Bool
@@ -152,6 +172,9 @@ record BoloEvaluationBoundary : Set where
     oneFavouredCostModelEnoughForRobustRecommendation : Bool
     anyTinyStrictWinEnoughForMeaningfulRecommendation : Bool
     universalMonotoneDecentralizationAdvantageAssumed : Bool
+    snapshotWinAutomaticallyBecomesLongRunWin : Bool
+    declaredArchitectureAutomaticallyDeterminesRealisedTopology : Bool
+    localFeasibilityAutomaticallyImpliesJointInterfaceFeasibility : Bool
 
 open BoloEvaluationBoundary public
 
@@ -176,13 +199,18 @@ canonicalBoloEvaluationBoundary = record
   ; comparatorCalibrationFrontierPaid = true
   ; comparatorLocalWorkloadFloorPaid = true
   ; comparatorInstitutionalVersioningPaid = true
+  ; dynamicInstitutionalFeedbackBridgePaid = true
+  ; adaptiveModelReopeningObligationPaid = true
+  ; interfaceCapacityBottleneckBridgePaid = true
   ; crossContextTransferFirewallPaid = true
   ; directFlatVersusNestedExperimentDesignPaid = true
   ; validatedEmpiricalPromotionGatePaid = true
   ; meaningfulEmpiricalPromotionGatePaid = true
+  ; longitudinalPromotionGatePaid = true
   ; modelClassRobustnessGatePaid = true
   ; empiricalCostTermsIdentified = false
   ; targetQualifiedCostBoundsPaid = false
+  ; targetInterfaceCapacityAndDemandPaid = false
   ; minimumMeaningfulThresholdTargetStudyPaid = false
   ; admissibleTargetModelFamilyPaid = false
   ; robustTargetCoordinationWinPaid = false
@@ -193,6 +221,8 @@ canonicalBoloEvaluationBoundary = record
   ; validatedCoordinationDisadvantagePaid = false
   ; validatedMeaningfulAdvantagePaid = false
   ; validatedMeaningfulDisadvantagePaid = false
+  ; longitudinalMeaningfulAdvantagePaid = false
+  ; longitudinalMeaningfulDisadvantagePaid = false
   ; uniformModelFamilyAdvantagePaid = false
   ; uniformModelFamilyDisadvantagePaid = false
   ; prospectiveHoldoutSpendable = false
@@ -213,6 +243,9 @@ canonicalBoloEvaluationBoundary = record
   ; oneFavouredCostModelEnoughForRobustRecommendation = false
   ; anyTinyStrictWinEnoughForMeaningfulRecommendation = false
   ; universalMonotoneDecentralizationAdvantageAssumed = false
+  ; snapshotWinAutomaticallyBecomesLongRunWin = false
+  ; declaredArchitectureAutomaticallyDeterminesRealisedTopology = false
+  ; localFeasibilityAutomaticallyImpliesJointInterfaceFeasibility = false
   }
 
 canonicalBoloCounterfactualEvaluationReceipt : GenericReceipt.GenericReceipt
@@ -221,6 +254,6 @@ canonicalBoloCounterfactualEvaluationReceipt =
     "bolo'bolo counterfactual evaluation max-cut"
     "DASHI.Governance.BoloBoloCounterfactualEvaluationExact"
     "canonicalBoloEvaluationBoundary"
-    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, the mixed/confounded OWS GA-to-Spokes transition and normalized transition check, polycentric and task-contingent network evidence, a comparator-local non-zero governance workload floor, institutional versioning, transfer qualification, direct trial design, validated promotion/falsification and predeclared model-family robustness"
-    "all candidate mechanism classes now have real-world observable analogues and comparator workload/cadence coordinates, but comparator-local workload does not automatically transfer to a bolo target, historical/current institutional versions cannot be silently spliced, target-qualified primitive cost/weight bounds remain unpaid and the underlying Spokes minutes remain an acquisition target"
+    "closes the source-written and methodological chain from p.m.'s nested design through topology/incidence accounting, exact and robust cost comparison, bound compilers, practical significance, Occupy calibration, independent real-world comparators, comparator workload/versioning, dynamic institutional feedback and adaptive model reopening, shared-interface capacity/bottleneck analysis, transfer qualification, direct trial design, snapshot and longitudinal promotion/falsification, and predeclared model-family robustness"
+    "the remaining frontier is empirical and longitudinal: target-qualified cost bounds, target interface capacity/concurrent-demand measurements, a predeclared target model family and practical threshold, direct or qualified repeated outcomes, realised-topology/actor-adaptation/version audits and prospective validation; snapshot advantage, declared architecture or local feasibility alone cannot establish long-run nested-governance performance"
     "agda -i . DASHI/Governance/BoloBoloCounterfactualEvaluationRegression.agda"
