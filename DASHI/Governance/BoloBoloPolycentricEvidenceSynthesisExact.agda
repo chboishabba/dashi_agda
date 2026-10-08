@@ -6,11 +6,22 @@ import DASHI.Core.CriticalRelationalGrammarSourceRegistryExact as Registry
 import DASHI.Core.GenericReceipt as GenericReceipt
 
 ------------------------------------------------------------------------
--- EMPIRICAL POLYCENTRIC-GOVERNANCE SYNTHESIS.
+-- INDEPENDENT POLYCENTRIC-GOVERNANCE SOURCE SYNTHESIS.
 --
--- This is independent literature evidence about polycentric governance, not a
--- theorem about p.m.'s design and not an empirical bolo cost model.
+-- These sources independently motivate nested/polycentric and dynamic-feedback
+-- governance questions. They are not attributed to p.m. and do not constitute
+-- an empirical bolo cost model.
 ------------------------------------------------------------------------
+
+ostrom2010Source : Registry.SourceReference
+ostrom2010Source = Registry.source-reference
+  "Elinor Ostrom"
+  "Beyond Markets and States: Polycentric Governance of Complex Economic Systems"
+  "American Economic Review 100(3):641-672 / Nobel lecture material"
+  2010
+  "10.1257/aer.100.3.641"
+  "institutional analysis / polycentric-governance synthesis"
+  "source for the commons design-principle motif that larger connected systems can organise governance activities in multiple nested layers; not a prescription of p.m.'s kana/bolo/tega scales and not a bolo optimality theorem"
 
 baldwinEtAl2024Source : Registry.SourceReference
 baldwinEtAl2024Source = Registry.source-reference
@@ -20,7 +31,7 @@ baldwinEtAl2024Source = Registry.source-reference
   2024
   "10.1111/psj.12518"
   "systematic empirical-literature review"
-  "review of empirical polycentric-governance research showing both positive and negative features in practice, substantial context dependence, weak concept/variable standardization and limited longitudinal evidence; not a bolo effect estimate"
+  "review of empirical polycentric-governance research showing both positive and negative features in practice, substantial context dependence, weak concept/variable standardization and limited longitudinal evidence; proposes a Context-Operations-Outcomes-Feedbacks framework for studying dynamic evolution; not a bolo effect estimate"
 
 record PolycentricEvidenceSynthesis : Set where
   constructor polycentricEvidenceSynthesis
@@ -34,6 +45,15 @@ record PolycentricEvidenceSynthesis : Set where
     contextOftenUnderSpecified : Bool
     longTermChangeEvidenceLimited : Bool
     crossCaseTransportNeedsQualification : Bool
+
+    ostromNestedEnterprisesPrinciplePresent : Bool
+    ostromNestedLayersAddressLargerConnectedSystems : Bool
+    ostromPrincipleIsBoloEmpiricalOptimum : Bool
+
+    baldwinCOOFFrameworkProposed : Bool
+    baldwinFeedbackAdjustmentMechanismsExplicit : Bool
+    baldwinFrameworkDirectlyValidatesBolo : Bool
+
     directBoloCostBoundPaid : Bool
 
 open PolycentricEvidenceSynthesis public
@@ -41,14 +61,32 @@ open PolycentricEvidenceSynthesis public
 canonicalPolycentricEvidenceSynthesis : PolycentricEvidenceSynthesis
 canonicalPolycentricEvidenceSynthesis =
   polycentricEvidenceSynthesis
-    179 112 true true false false true true true false
+    179 112 true true false false true true true
+    true true false
+    true true false
+    false
+
+record PolycentricSourceAttributionBoundary : Set where
+  constructor polycentricSourceAttributionBoundary
+  field
+    ostromNestedEnterprisesAttributedToPM : Bool
+    pMArchitectureAttributedToOstrom : Bool
+    baldwinCOOFAttributedToPM : Bool
+    dashiDynamicTheoremsAttributedToOstromOrBaldwin : Bool
+    structuralAlignmentMayBeStudiedWithoutAuthorshipCollapse : Bool
+
+open PolycentricSourceAttributionBoundary public
+
+canonicalPolycentricSourceAttributionBoundary : PolycentricSourceAttributionBoundary
+canonicalPolycentricSourceAttributionBoundary =
+  polycentricSourceAttributionBoundary false false false false true
 
 canonicalPolycentricEvidenceSynthesisReceipt : GenericReceipt.GenericReceipt
 canonicalPolycentricEvidenceSynthesisReceipt =
   GenericReceipt.mkNonPromotingReceipt
-    "empirical polycentric-governance evidence synthesis"
+    "polycentric governance nested-enterprise and dynamic-feedback evidence synthesis"
     "DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact"
-    "canonicalPolycentricEvidenceSynthesis"
-    "records the Baldwin-Thiel-McGinnis-Kellner review's 179-paper empirical sample and 112-paper core functioning/performance subset together with its central finding that empirical polycentric governance exhibits both positive and negative features and remains difficult to compare across contexts because shared concepts, contextual specification and longitudinal evidence are limited"
-    "this literature synthesis strengthens DASHI transfer/model-robustness obligations but does not make polycentricity a panacea, identify a bolo cost coefficient or turn independent empirical studies into evidence authored by p.m."
+    "ostrom2010Source / baldwinEtAl2024Source / canonicalPolycentricEvidenceSynthesis / canonicalPolycentricSourceAttributionBoundary"
+    "records Ostrom's independently sourced nested-enterprise motif for larger connected commons systems and the Baldwin-Thiel-McGinnis-Kellner review's 179-paper empirical sample, 112-paper core subset, mixed outcomes and Context-Operations-Outcomes-Feedbacks dynamic framework"
+    "nested/polycentric structural similarity does not collapse authorship, neither source specifies p.m.'s architecture or target cost coefficients, and the literature strengthens longitudinal/context/feedback obligations rather than validating bolo'bolo directly"
     "agda -i . DASHI/Governance/BoloBoloPolycentricEvidenceSynthesisRegression.agda"
