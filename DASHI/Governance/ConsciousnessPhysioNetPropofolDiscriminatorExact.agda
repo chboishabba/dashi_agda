@@ -16,11 +16,12 @@ import DASHI.Governance.ConsciousnessPhysicalDiscriminatorSynthesisExact as Cons
 --
 -- The study supplies nine healthy-volunteer propofol experiments, behavioural
 -- loss/recovery-of-consciousness annotations, ECG, EDA and derived autonomic
--- coordinates.  Its published visualisation code maps each EDA summary row to
--- exactly 20 seconds (`row * 20 / 60` minutes).  This owner pins one literal
--- within-subject collision: subject 1, a row before LOC and a row after ROC are
--- both in the responsive behavioural region while their measured five-vector
--- physical coordinates differ strongly.
+-- coordinates.  Its published EDA visualisation maps each summary row to
+-- `row * 20 / 60` minutes.  The repository metadata labels the compact
+-- LOC_ROC table as seconds, but subject 1's raw files give LOC=3625.32 s and
+-- ROC=10920.93 s, while the compact values 40.4093 and 162.0028 are exactly
+-- those same events after a common 20.0127-minute origin shift.  This owner
+-- therefore records both clocks and makes the offset reconciliation explicit.
 --
 -- This is an empirical discriminator instance, not evidence that EDA/HRV is
 -- consciousness, not an exceptional-geometry neural realization, and not an
@@ -52,11 +53,20 @@ subject1PostROC =
     "0.0333121704836705"
     "0.00364258367063108"
 
-subject1LOCMinutes : String
-subject1LOCMinutes = "40.4093"
+subject1RawLOCSeconds : String
+subject1RawLOCSeconds = "3625.32"
 
-subject1ROCMinutes : String
-subject1ROCMinutes = "162.0028"
+subject1RawROCSeconds : String
+subject1RawROCSeconds = "10920.93"
+
+subject1AdjustedLOCMinutes : String
+subject1AdjustedLOCMinutes = "40.4093"
+
+subject1AdjustedROCMinutes : String
+subject1AdjustedROCMinutes = "162.0028"
+
+subject1CommonOriginOffsetMinutes : String
+subject1CommonOriginOffsetMinutes = "20.0127"
 
 preLOCRow : Nat
 preLOCRow = 120
@@ -64,11 +74,11 @@ preLOCRow = 120
 postROCRow : Nat
 postROCRow = 487
 
-preLOCTimeMinutes : String
-preLOCTimeMinutes = "40.0"
+preLOCTimeAdjustedMinutes : String
+preLOCTimeAdjustedMinutes = "40.0"
 
-postROCTimeMinutes : String
-postROCTimeMinutes = "162.33333333333333"
+postROCTimeAdjustedMinutes : String
+postROCTimeAdjustedMinutes = "162.33333333333333"
 
 logCoordinateDistance : String
 logCoordinateDistance = "2.279858209762054"
@@ -84,11 +94,11 @@ physioNetPropofolDiscriminatorReceipt =
     "same human subject 1 observed before behavioural LOC and after behavioural ROC"
     "computer-controlled propofol target-controlled infusion; behavioural button-response LOC/ROC task"
     "ECG + electrodermal activity with published derived EDA/autonomic summary coordinates"
-    "official EDA_deepdive_viz.m maps summary row k to k*20/60 minutes; subject-1 LOC=40.4093 min, ROC=162.0028 min"
-    "phenylephrine may be administered; autonomic and behavioural circuits are related but non-identical; motion/measurement and drug-response nuisance remain"
+    "EDA_deepdive_viz.m maps summary row k to k*20/60 minutes; raw subject-1 LOC/ROC are 3625.32/10920.93 seconds and reconcile with compact 40.4093/162.0028 values after common 20.0127-minute origin shift"
+    "phenylephrine may be administered; autonomic and behavioural circuits are related but non-identical; public metadata/unit wording for compact LOC_ROC table is retained as a provenance caveat"
     "coarse behaviour-only observer labels both selected states responsive/conscious, while a substrate-sensitive physical-coordinate observer distinguishes their measured autonomic vectors"
     "PhysioNet v1.0, Behavioral and autonomic dynamics during propofol-induced unconsciousness, DOI 10.13026/2rbc-1r03"
-    "within-dataset exact row/time and coordinate regression only; independent replication intentionally remains open for this first inhabitant"
+    "within-dataset exact row/time-origin reconciliation and coordinate regression only; independent replication intentionally remains open for this first inhabitant"
 
 record PhysioNetPropofolDiscriminatorLocalReceipt : Set where
   constructor physionet-propofol-discriminator-local-receipt
@@ -98,6 +108,7 @@ record PhysioNetPropofolDiscriminatorLocalReceipt : Set where
     behaviouralLOCROCAnnotations : Bool
     measuredPhysicalCoordinates : Bool
     rowTimeCalibrationAvailable : Bool
+    rawAndAdjustedClockOriginsReconciled : Bool
     preRowStrictlyBeforeLOCChecked : Bool
     postRowStrictlyAfterROCChecked : Bool
     sameCoarseResponsiveLabel : Bool
@@ -116,9 +127,9 @@ open PhysioNetPropofolDiscriminatorLocalReceipt public
 canonicalPhysioNetPropofolDiscriminatorLocalReceipt : PhysioNetPropofolDiscriminatorLocalReceipt
 canonicalPhysioNetPropofolDiscriminatorLocalReceipt =
   physionet-propofol-discriminator-local-receipt
-    true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true
     false false false
-    "A real subject supplies the required observer collision: responsive before LOC and responsive after ROC, yet the measured five-coordinate autonomic vectors differ (local Python log-coordinate distance 2.279858209762054). This pays an empirical discriminator shape only; it does not identify the measured coordinates with consciousness or with the exceptional hyperfabric."
+    "A real subject supplies the required observer collision after explicit time-origin reconciliation: responsive before LOC and responsive after ROC, yet the measured five-coordinate autonomic vectors differ (local Python log-coordinate distance 2.279858209762054). This pays an empirical discriminator shape only; it does not identify the measured coordinates with consciousness or with the exceptional hyperfabric."
 
 ------------------------------------------------------------------------
 -- No-promotion firewall.
