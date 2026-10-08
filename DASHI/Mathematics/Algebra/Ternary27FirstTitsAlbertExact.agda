@@ -23,6 +23,10 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geomet
 -- receipt.  The full vector carrier is ternary-valued functions on those 27
 -- basis slots and therefore has the repository's independent 3^27 function-
 -- space shape; no 27-point = 27-dimensional-set collapse is made here.
+--
+-- Characteristic three is deliberately kept visible: passing Jordan identities
+-- over F3 does not by itself prove simplicity or the exact classical Albert/F4
+-- recognition theorem.  That promotion remains a separate same-object gate.
 ------------------------------------------------------------------------
 
 data MatrixSector3 : Set where
@@ -85,12 +89,6 @@ Ternary27FunctionVector = Geometry.Ternary27Point → SSP.SSPTrit
 
 ------------------------------------------------------------------------
 -- Exact algebra interface.
---
--- A concrete first-Tits producer must supply the actual product and cubic on
--- the function/vector carrier.  The local Python diagnostic implements the
--- formulas over F3 as M3(F3)^3, verifies the full 27x27 basis Jordan-identity
--- table, random full-vector identities, and trinification cubic invariance.
--- Those computations are evidence, not Agda kernel authority.
 ------------------------------------------------------------------------
 
 record FirstTitsAlbertStructure : Set₁ where
@@ -121,6 +119,7 @@ record Ternary27FirstTitsLocalReceipt : Set where
     basisPairTwoCoordinateProductCount : Nat
     sl3CubedCubicNormChecksPass : Bool
     sameKernelAgdaFirstTitsProductPaid : Bool
+    characteristicThreeAlbertSimplicityPaid : Bool
     sameKernelAlbertIntertwinerPaid : Bool
     fullF4RecognitionPaid : Bool
     boundary : String
@@ -131,8 +130,8 @@ canonicalTernary27FirstTitsLocalReceipt =
   ternary27-first-tits-local-receipt
     true true true true true
     414 291 24 true
-    false false false
-    "The literal Ternary27Point carrier is now an exact basis-index set for the 27-dimensional M3^3 first-Tits/trinification coordinate space. Local exact F3 computation pays the product diagnostics, but a same-kernel Agda product/intertwiner and F4=Aut(J) theorem remain separate obligations."
+    false false false false
+    "The literal Ternary27Point carrier is now an exact basis-index set for the 27-dimensional M3^3 first-Tits/trinification coordinate space. Local exact F3 computation pays the Jordan/cubic diagnostics. Characteristic-three simplicity, same-kernel Agda product/intertwiner, and F4=Aut(J) remain separate obligations."
 
 ------------------------------------------------------------------------
 -- Non-promotion firewall.
@@ -142,8 +141,13 @@ data BasisIndexingCreatesAlbertTheorem : Set where
 
 data LocalPythonCreatesAgdaKernelTheorem : Set where
 
+data JordanIdentityCreatesAlbertSimplicity : Set where
+
 basisIndexingDoesNotCreateAlbertTheorem : BasisIndexingCreatesAlbertTheorem → {A : Set} → A
 basisIndexingDoesNotCreateAlbertTheorem ()
 
 localPythonDoesNotCreateAgdaKernelTheorem : LocalPythonCreatesAgdaKernelTheorem → {A : Set} → A
 localPythonDoesNotCreateAgdaKernelTheorem ()
+
+jordanIdentityDoesNotCreateAlbertSimplicity : JordanIdentityCreatesAlbertSimplicity → {A : Set} → A
+jordanIdentityDoesNotCreateAlbertSimplicity ()
