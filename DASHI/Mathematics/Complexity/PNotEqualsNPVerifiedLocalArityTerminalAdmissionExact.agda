@@ -13,8 +13,11 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin)
 open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.Nat.Base using (_<_)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as FutureSAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPLocalArityTerminalAdmissionExact as Local
 import DASHI.Mathematics.Complexity.PNotEqualsNPTerminalPrefixCompletenessVerifierExact as Terminal
@@ -80,7 +83,9 @@ verifiedBuildsLocalAdmission :
     {candidate : Candidate.TransitionTableCandidate root} →
   VerifiedLocalArityTerminalAdmission candidate →
   Local.LocalArityTerminalAdmission candidate
-verifiedBuildsLocalAdmission verified =
+verifiedBuildsLocalAdmission
+    {candidate = candidate}
+    verified =
   Local.local-arity-terminal-admission
     (stateArity verified)
     (rootStateArityExact verified)
@@ -91,15 +96,11 @@ verifiedBuildsLocalAdmission verified =
   where
     terminalCorrect :
       ∀ {terminal : SAT.BooleanFormula 0}
-        (derivation :
-          DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact.RestrictionDerivation
-            _ terminal) →
+        (derivation : Family.RestrictionDerivation _ terminal) →
       terminalLabel verified
         (Candidate.candidateSelect candidate derivation)
       ≡
-      SAT.evaluate
-        terminal
-        DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact.emptyAssignment
+      SAT.evaluate terminal FutureSAT.emptyAssignment
     terminalCorrect =
       Terminal.terminalVerifierSound
         candidate
