@@ -43,6 +43,11 @@ class ExceptionalPhysicsMaxCutProbeTests(unittest.TestCase):
             2.279858209762054,
             places=12,
         )
+        self.assertAlmostEqual(
+            self.out["physionet_time_origin_minutes"],
+            20.0127,
+            places=10,
+        )
 
 
 if __name__ == "__main__":
