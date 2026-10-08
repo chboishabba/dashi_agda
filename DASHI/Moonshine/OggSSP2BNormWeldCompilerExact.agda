@@ -18,12 +18,12 @@ module DASHI.Moonshine.OggSSP2BNormWeldCompilerExact where
 -- Therefore the residual 24 map is not an independent same-object theorem.
 -- After those finite/runtime facts are ingested, the literal vertical weld has
 -- one genuine map-level producer left: identify the actual norm map on the
--- common 98280 extension lane.  The Tate quotient is then forced to be
--- Sym2(24)/Frob(24) = wedge2(24) = duad276.
+-- common 98280 extension lane.  The final quotient-isomorphism theorem is kept
+-- separate until that same-object common-lane map is actually supplied.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _-_)
+open import Agda.Builtin.Nat using (Nat; _-_)
 
 commonDimension : Nat
 commonDimension = 98280
@@ -52,9 +52,8 @@ exteriorSquareDimension = symmetricSquareDimension - frobeniusImageDimension
 exteriorSquareDimensionIs276 : exteriorSquareDimension ≡ 276
 exteriorSquareDimensionIs276 = refl
 
--- Proof-relevant finite/runtime promotion.  These witnesses are deliberately
--- abstract here: generated runtime receipts or a kernel theorem must inhabit
--- them; Boolean status flags do not.
+-- Proof-relevant finite/runtime promotion.  Generated runtime receipts or
+-- kernel theorems must inhabit these coordinates; Boolean flags are not enough.
 record FiniteNormRigidityReceipt : Set₁ where
   constructor finite-norm-rigidity-receipt
   field
@@ -62,8 +61,8 @@ record FiniteNormRigidityReceipt : Set₁ where
     supportSeparationPaid : SupportSeparationPaid
     UniqueNonzeroFrobeniusHomPaid : Set
     uniqueNonzeroFrobeniusHomPaid : UniqueNonzeroFrobeniusHomPaid
-    ResidualMapForcedFrobenius : Set
-    residualMapForcedFrobenius : ResidualMapForcedFrobenius
+    ResidualMapFrobeniusWitness : Set
+    residualMapFrobeniusWitness : ResidualMapFrobeniusWitness
 
 open FiniteNormRigidityReceipt public
 
@@ -77,37 +76,50 @@ record Common98280NormSameObjectReceipt : Set₁ where
 
 open Common98280NormSameObjectReceipt public
 
-record TateExteriorSquareWeld : Set₁ where
-  constructor tate-exterior-square-weld
+-- After finite rigidity is paid, this compiler exposes the exact two inputs to
+-- the terminal quotient theorem: the actual common-lane identification and the
+-- already-forced residual Frobenius map.  It deliberately does NOT claim that
+-- the quotient is wedge2(24) until a separate quotient theorem consumes them.
+record NormWeldInputs : Set₁ where
+  constructor norm-weld-inputs
   field
-    CommonLane : Set
-    commonLane : CommonLane
-    ResidualFrobenius : Set
-    residualFrobenius : ResidualFrobenius
-    ExteriorSquareQuotient : Set
-    exteriorSquareQuotient : ExteriorSquareQuotient
+    CommonLaneIdentification : Set
+    commonLaneIdentification : CommonLaneIdentification
+    ResidualFrobeniusIdentification : Set
+    residualFrobeniusIdentification : ResidualFrobeniusIdentification
 
--- Compiler form of the max-cut.  The quotient theorem itself must come from
--- the source-native plus/minus cokernel together with the actual common-lane
--- identification; the finite residual lane is already rigid.
-tateCokernelForcedExteriorSquare :
+assembleNormWeldInputs :
   FiniteNormRigidityReceipt →
   Common98280NormSameObjectReceipt →
-  TateExteriorSquareWeld
-
-tateCokernelForcedExteriorSquare finite common =
-  tate-exterior-square-weld
+  NormWeldInputs
+assembleNormWeldInputs finite common =
+  norm-weld-inputs
     (ActualCommonNormMapIdentification common)
     (actualCommonNormMapIdentification common)
-    (ResidualMapForcedFrobenius finite)
-    (residualMapForcedFrobenius finite)
-    (ResidualMapForcedFrobenius finite)
-    (residualMapForcedFrobenius finite)
+    (ResidualMapFrobeniusWitness finite)
+    (residualMapFrobeniusWitness finite)
 
 residualMapForcedFrobenius :
   (finite : FiniteNormRigidityReceipt) →
-  ResidualMapForcedFrobenius finite
-residualMapForcedFrobenius = FiniteNormRigidityReceipt.residualMapForcedFrobenius
+  ResidualMapFrobeniusWitness finite
+residualMapForcedFrobenius = residualMapFrobeniusWitness
+
+-- This is the desired terminal theorem name, but its proof remains explicitly
+-- gated by a proof-relevant quotient-identification compiler rather than being
+-- manufactured from dimension arithmetic.
+record ExteriorSquareQuotientCompiler : Set₁ where
+  constructor exterior-square-quotient-compiler
+  field
+    compile : NormWeldInputs → Set
+
+tateCokernelForcedExteriorSquare :
+  ExteriorSquareQuotientCompiler →
+  FiniteNormRigidityReceipt →
+  Common98280NormSameObjectReceipt →
+  Set
+tateCokernelForcedExteriorSquare quotientCompiler finite common =
+  ExteriorSquareQuotientCompiler.compile quotientCompiler
+    (assembleNormWeldInputs finite common)
 
 onlyCommon98280MapRemains :
   Common98280NormSameObjectReceipt → Common98280NormSameObjectReceipt
