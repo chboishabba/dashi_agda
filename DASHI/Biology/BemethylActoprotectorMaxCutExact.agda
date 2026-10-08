@@ -22,7 +22,9 @@ record BemethylMaxCut : Set where
     historicalReviewCrossChecked : Bool
     metabolismLiteratureCrossChecked : Bool
     controlledHumanHeatEvidenceAcquired : Bool
+    historicalControlledPerformanceEvidenceAcquired : Bool
     humanExposureEvidenceAcquired : Bool
+    humanPKParameterEvidenceAcquired : Bool
     humanDiseaseContextMechanismEvidenceAcquired : Bool
 
     modernMechanismTargetIdentified : Bool
@@ -49,7 +51,9 @@ canonicalBemethylMaxCut = record
   ; historicalReviewCrossChecked = true
   ; metabolismLiteratureCrossChecked = true
   ; controlledHumanHeatEvidenceAcquired = true
+  ; historicalControlledPerformanceEvidenceAcquired = true
   ; humanExposureEvidenceAcquired = true
+  ; humanPKParameterEvidenceAcquired = true
   ; humanDiseaseContextMechanismEvidenceAcquired = true
   ; modernMechanismTargetIdentified = false
   ; directGenomeBindingReceiptPaid = false
@@ -59,7 +63,7 @@ canonicalBemethylMaxCut = record
   ; exposureEfficacySameObjectPaid = false
   ; oxygenHeatIndependenceModernReplicationPaid = false
   ; clinicalRecommendationPaid = false
-  ; nextEmpiricalCut = "Highest-value acquisition is direct molecular target engagement. Next is the original controlled performance literature with complete allocation/endpoints/exposure, followed by modern independent same-compound replication. Historical heat/exertion and human excretion evidence are now acquired but do not close modern replication or same-object exposure-efficacy."
+  ; nextEmpiricalCut = "The historical controlled operator-performance, controlled heat/exertion, healthy-volunteer pharmacokinetic, and excretion leaves are now source-paid at indexed-abstract level. The highest-value remaining acquisition is direct molecular target engagement; next recover full original methods/exposure for the historical trials and obtain a modern independent same-compound replication with efficacy and exposure measured on the same participants."
   }
 
 transcriptPaid : transcriptFormalised canonicalBemethylMaxCut ≡ true
@@ -69,8 +73,15 @@ controlledHumanHeatPaid :
   controlledHumanHeatEvidenceAcquired canonicalBemethylMaxCut ≡ true
 controlledHumanHeatPaid = refl
 
+historicalPerformancePaid :
+  historicalControlledPerformanceEvidenceAcquired canonicalBemethylMaxCut ≡ true
+historicalPerformancePaid = refl
+
 humanExposurePaid : humanExposureEvidenceAcquired canonicalBemethylMaxCut ≡ true
 humanExposurePaid = refl
+
+humanPKParameterPaid : humanPKParameterEvidenceAcquired canonicalBemethylMaxCut ≡ true
+humanPKParameterPaid = refl
 
 modernTargetOpen : modernMechanismTargetIdentified canonicalBemethylMaxCut ≡ false
 modernTargetOpen = refl
