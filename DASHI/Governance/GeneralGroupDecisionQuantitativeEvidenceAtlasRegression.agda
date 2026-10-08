@@ -1,0 +1,25 @@
+module DASHI.Governance.GeneralGroupDecisionQuantitativeEvidenceAtlasRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.GeneralGroupDecisionQuantitativeEvidenceAtlasExact as General
+
+largerGroupDelayEvidencePresent :
+  General.largerGroupDelayEvidencePresent General.canonicalGeneralGroupDecisionBoundary ≡ true
+largerGroupDelayEvidencePresent = refl
+
+consensusRuleTimeEvidencePresent :
+  General.consensusRuleTimeEvidencePresent General.canonicalGeneralGroupDecisionBoundary ≡ true
+consensusRuleTimeEvidencePresent = refl
+
+informationPoolingEvidencePresent :
+  General.groupSizeInformationPoolingEvidencePresent General.canonicalGeneralGroupDecisionBoundary ≡ true
+informationPoolingEvidencePresent = refl
+
+externalExperimentsDoNotDirectlyValidateOWS :
+  General.generalExperimentsDirectlyValidateOccupyScaling General.canonicalGeneralGroupDecisionBoundary ≡ false
+externalExperimentsDoNotDirectlyValidateOWS = refl
+
+crossTaskEffectNotUniversal :
+  General.effectDirectionUniversalAcrossTasks General.canonicalGeneralGroupDecisionBoundary ≡ false
+crossTaskEffectNotUniversal = refl

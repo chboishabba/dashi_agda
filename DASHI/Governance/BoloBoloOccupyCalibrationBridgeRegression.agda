@@ -1,0 +1,57 @@
+module DASHI.Governance.BoloBoloOccupyCalibrationBridgeRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloOccupyCalibrationBridgeExact as Calibration
+
+meetingPanelAvailable :
+  Calibration.meetingLevelProcessEvidenceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+meetingPanelAvailable = refl
+
+networkFeaturesAvailable :
+  Calibration.pseudonymousNetworkEvidenceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+networkFeaturesAvailable = refl
+
+boundaryObservableSurfacePaid :
+  Calibration.boundaryOverheadObservableSurfaceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+boundaryObservableSurfacePaid = refl
+
+delegationObservableSurfacePaid :
+  Calibration.delegationOverheadObservableSurfaceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+delegationObservableSurfacePaid = refl
+
+unresolvedObservableSurfacePaid :
+  Calibration.unresolvedDependencyObservableSurfaceAvailable Calibration.canonicalBoloOccupyCalibrationBoundary ≡ true
+unresolvedObservableSurfacePaid = refl
+
+removedCouplingCostNotIdentified :
+  Calibration.removedGlobalCouplingCostIdentified Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+removedCouplingCostNotIdentified = refl
+
+boundaryOverheadNotIdentified :
+  Calibration.boundaryOverheadCostIdentified Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+boundaryOverheadNotIdentified = refl
+
+delegationOverheadNotIdentified :
+  Calibration.delegationOverheadCostIdentified Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+delegationOverheadNotIdentified = refl
+
+unresolvedOverheadNotIdentified :
+  Calibration.unresolvedDependencyOverheadIdentified Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+unresolvedOverheadNotIdentified = refl
+
+lexicalInterfaceCountsDoNotIdentifyCostBounds :
+  Calibration.interfaceLexicalCountsIdentifyCostBounds Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+lexicalInterfaceCountsDoNotIdentifyCostBounds = refl
+
+currentLexicalModelFailsGate :
+  Calibration.currentDurationPredictorPassesDevelopmentGate Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+currentLexicalModelFailsGate = refl
+
+holdoutRemainsProtected :
+  Calibration.protectedHoldoutMayBeConsumedNow Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+holdoutRemainsProtected = refl
+
+boloWinConditionStillUninstantiated :
+  Calibration.removalPaysOverheadEmpiricallyInstantiated Calibration.canonicalBoloOccupyCalibrationBoundary ≡ false
+boloWinConditionStillUninstantiated = refl

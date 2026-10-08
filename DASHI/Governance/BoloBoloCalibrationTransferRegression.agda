@@ -1,0 +1,25 @@
+module DASHI.Governance.BoloBoloCalibrationTransferRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloCalibrationTransferExact as Transfer
+
+occupyNotTargetEquivalent :
+  Transfer.occupyContextDefinitionallyEquivalentToBoloTarget Transfer.canonicalCalibrationTransferBoundary ≡ false
+occupyNotTargetEquivalent = refl
+
+transferNeedsWitness :
+  Transfer.crossContextParameterTransportRequiresWitness Transfer.canonicalCalibrationTransferBoundary ≡ true
+transferNeedsWitness = refl
+
+directTargetMeasurementAllowed :
+  Transfer.directTargetMeasurementMayDischargeTransferNeed Transfer.canonicalCalibrationTransferBoundary ≡ true
+directTargetMeasurementAllowed = refl
+
+sourceScaleNotTransportCoefficient :
+  Transfer.sourceScaleNumbersAreTransferCoefficients Transfer.canonicalCalibrationTransferBoundary ≡ false
+sourceScaleNotTransportCoefficient = refl
+
+robustOccupyWinNotBoloWin :
+  Transfer.robustOccupyClassificationAutomaticallyBecomesBoloClassification Transfer.canonicalCalibrationTransferBoundary ≡ false
+robustOccupyWinNotBoloWin = refl

@@ -1,0 +1,53 @@
+module DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloDynamicInstitutionalFeedbackBridgeExact as Dynamic
+
+longitudinalMeasurementRequired :
+  Dynamic.repeatedLongitudinalMeasurementRequired Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+longitudinalMeasurementRequired = refl
+
+realisedTopologyAuditRequired :
+  Dynamic.realisedInteractionTopologyAuditRequired Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+realisedTopologyAuditRequired = refl
+
+actorAdaptationAuditRequired :
+  Dynamic.actorAdaptationAuditRequired Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+actorAdaptationAuditRequired = refl
+
+modelRevisionRequired :
+  Dynamic.evidenceTriggeredModelRevisionRequired Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+modelRevisionRequired = refl
+
+affectedCertificatesReconsidered :
+  Dynamic.dependencyAffectedCertificatesMustBeReconsidered Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+affectedCertificatesReconsidered = refl
+
+staticSnapshotNotLongRunProof :
+  Dynamic.staticCostSnapshotAlonePaysLongRunPerformance Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
+staticSnapshotNotLongRunProof = refl
+
+declaredArchitectureNotRealisedTopology :
+  Dynamic.declaredNestedArchitectureDeterminesRealisedCoordination Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
+declaredArchitectureNotRealisedTopology = refl
+
+samePresentDoesNotFixFuturePath :
+  Dynamic.samePresentSnapshotDeterminesFutureInstitutionalPath Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
+samePresentDoesNotFixFuturePath = refl
+
+oldCertificateDoesNotSurviveContraryEvidenceAutomatically :
+  Dynamic.oldModelCertificateSurvivesContraryEvidenceAutomatically Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
+oldCertificateDoesNotSurviveContraryEvidenceAutomatically = refl
+
+institutionalChangeNotImprovementProof :
+  Dynamic.institutionalEvolutionAutomaticallyMeansImprovement Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
+institutionalChangeNotImprovementProof = refl
+
+attributionPreserved :
+  Dynamic.crossPollinationRetainsAttributionSeparation Dynamic.canonicalSourceAlignmentBoundary ≡ true
+attributionPreserved = refl
+
+sourceAuthorsDoNotOwnDASHITheorems :
+  Dynamic.ostromOrBaldwinAuthoredDASHINonfactorabilityTheorems Dynamic.canonicalSourceAlignmentBoundary ≡ false
+sourceAuthorsDoNotOwnDASHITheorems = refl
