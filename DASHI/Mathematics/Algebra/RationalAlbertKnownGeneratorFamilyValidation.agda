@@ -5,6 +5,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact as G
 
+allFiveKnownGeneratorsBijective :
+  G.allKnownGeneratorsBijective G.canonicalKnownGeneratorBoundary ≡ true
+allFiveKnownGeneratorsBijective = refl
+
 allFiveKnownGeneratorsProductPreserving :
   G.allKnownGeneratorsProductPreserving G.canonicalKnownGeneratorBoundary ≡ true
 allFiveKnownGeneratorsProductPreserving = refl
