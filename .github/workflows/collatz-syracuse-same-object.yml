@@ -59,6 +59,22 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddTailReductionExact.agda
       - name: Typecheck odd-tail reduction validation
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddTailReductionValidation.agda
+      - name: Typecheck odd survivor frontier
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddSurvivorFrontierExact.agda
+      - name: Typecheck odd survivor frontier validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddSurvivorFrontierValidation.agda
+      - name: Typecheck odd-odd tail reduction
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddOddTailReductionExact.agda
+      - name: Typecheck odd-odd tail reduction validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddOddTailReductionValidation.agda
+      - name: Typecheck early cylinder elimination
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationExact.agda
+      - name: Typecheck early cylinder elimination validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationValidation.agda
+      - name: Typecheck terminal parity max-cut
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+      - name: Typecheck terminal parity max-cut validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutValidation.agda
       - name: Typecheck affine correction cocycle
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
       - name: Typecheck adjacent correction swap
