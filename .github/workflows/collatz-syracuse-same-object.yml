@@ -1,0 +1,91 @@
+name: Collatz Syracuse same-object Agda
+
+on:
+  push:
+    branches:
+      - collatz-syracuse-same-object-20261006
+  pull_request:
+    paths:
+      - 'DASHI/NumberTheory/Collatz/**'
+      - 'DASHI/Analysis/CollatzSyracuse*.agda'
+      - 'DASHI/Core/BinaryWordIntegerChernoffExact.agda'
+      - 'scripts/check_collatz_syracuse_*.py'
+      - 'scripts/check_collatz_syracuse_exact.sh'
+      - '.github/workflows/collatz-syracuse-same-object.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: collatz-syracuse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Python parity-cylinder calibration
+        run: python3 scripts/check_collatz_syracuse_parity_cylinder.py
+      - name: Python one-step residue calibration
+        run: python3 scripts/check_collatz_syracuse_one_step.py
+      - name: Python complete-block Bernoulli calibration
+        run: python3 scripts/check_collatz_syracuse_complete_block.py
+      - name: Python affine-iterate calibration
+        run: python3 scripts/check_collatz_syracuse_affine_iterate.py
+      - name: Python five-eighths tail calibration
+        run: python3 scripts/check_collatz_syracuse_five_eight_tail.py
+      - name: Python rational drift tail calibration
+        run: python3 scripts/check_collatz_syracuse_rational_tail.py
+      - name: Python aligned-block literal tail calibration
+        run: python3 scripts/check_collatz_syracuse_aligned_tail.py
+      - name: Python strict-descent frontier calibration
+        run: python3 scripts/check_collatz_syracuse_strict_descent.py
+      - name: Python affine-transfer max-cut calibration
+        run: python3 scripts/check_collatz_syracuse_affine_transfer.py
+      - name: Python early-cylinder calibration
+        run: python3 scripts/check_collatz_syracuse_early_cylinders.py
+      - name: Static literal Syracuse audit
+        run: bash scripts/check_collatz_syracuse_exact.sh
+      - name: Typecheck exact affine terminal equivalence
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
+      - name: Typecheck survivor-frontier compiler
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+      - name: Typecheck strict-descent base-tail compiler
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseStrictDescentBaseTailExact.agda
+      - name: Typecheck odd-tail reduction
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddTailReductionExact.agda
+      - name: Typecheck odd-tail reduction validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddTailReductionValidation.agda
+      - name: Typecheck odd survivor frontier
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddSurvivorFrontierExact.agda
+      - name: Typecheck odd survivor frontier validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddSurvivorFrontierValidation.agda
+      - name: Typecheck odd-odd tail reduction
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddOddTailReductionExact.agda
+      - name: Typecheck odd-odd tail reduction validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseOddOddTailReductionValidation.agda
+      - name: Typecheck early cylinder elimination
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationExact.agda
+      - name: Typecheck early cylinder elimination validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationValidation.agda
+      - name: Typecheck residual survivor frontier
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierExact.agda
+      - name: Typecheck residual survivor frontier validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierValidation.agda
+      - name: Typecheck terminal parity max-cut
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+      - name: Typecheck terminal parity max-cut validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutValidation.agda
+      - name: Typecheck affine correction cocycle
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
+      - name: Typecheck adjacent correction swap
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
+      - name: Typecheck first affine-transfer barrier
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
+      - name: Typecheck Collatz/Syracuse max-cut root
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseSameObjectMaxCutExact.agda
