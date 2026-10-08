@@ -42,11 +42,11 @@ record StrictPromotionPair
     (evidence : Evidence) : Set where
   constructor strict-promotion-pair
   field
-    boundClaimKey : String
-    boundClaimKeyMatches : boundClaimKey ≡ claimKey claim
-    boundEvidenceKey : String
-    boundEvidenceKeyMatches : boundEvidenceKey ≡ evidenceKey evidence
-    evidencePaysClaimReference : String
-    sameObjectReference : String
+    pairClaimKey : String
+    pairClaimKeyMatches : pairClaimKey ≡ claimKey claim
+    pairEvidenceKey : String
+    pairEvidenceKeyMatches : pairEvidenceKey ≡ evidenceKey evidence
+    pairEvidencePaysClaimReference : String
+    pairSameObjectReference : String
 
 open StrictPromotionPair public
