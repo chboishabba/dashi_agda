@@ -16,6 +16,14 @@ actorAdaptationAuditRequired :
   Dynamic.actorAdaptationAuditRequired Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
 actorAdaptationAuditRequired = refl
 
+modelRevisionRequired :
+  Dynamic.evidenceTriggeredModelRevisionRequired Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+modelRevisionRequired = refl
+
+affectedCertificatesReconsidered :
+  Dynamic.dependencyAffectedCertificatesMustBeReconsidered Dynamic.canonicalDynamicBoloEvaluationObligations ≡ true
+affectedCertificatesReconsidered = refl
+
 staticSnapshotNotLongRunProof :
   Dynamic.staticCostSnapshotAlonePaysLongRunPerformance Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
 staticSnapshotNotLongRunProof = refl
@@ -27,6 +35,10 @@ declaredArchitectureNotRealisedTopology = refl
 samePresentDoesNotFixFuturePath :
   Dynamic.samePresentSnapshotDeterminesFutureInstitutionalPath Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
 samePresentDoesNotFixFuturePath = refl
+
+oldCertificateDoesNotSurviveContraryEvidenceAutomatically :
+  Dynamic.oldModelCertificateSurvivesContraryEvidenceAutomatically Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
+oldCertificateDoesNotSurviveContraryEvidenceAutomatically = refl
 
 institutionalChangeNotImprovementProof :
   Dynamic.institutionalEvolutionAutomaticallyMeansImprovement Dynamic.canonicalDynamicBoloEvaluationObligations ≡ false
