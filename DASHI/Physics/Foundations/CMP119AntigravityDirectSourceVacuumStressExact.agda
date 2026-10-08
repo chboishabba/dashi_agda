@@ -4,6 +4,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityDirectSourceVacuumStressExact 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (_*_)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Closure.SymbolicEinsteinHilbertModel as EH
@@ -15,18 +16,6 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 
 ------------------------------------------------------------------------
 -- DIRECT SOURCE VACUUM -> COSMOLOGICAL STRESS
---
--- The older source-native compiler was packaged around one fixed two-amplitude
--- receipt.  For design search that is unnecessary.  On the concrete
--- LocalizedAction source we can read the ACTUAL vacuum coefficient at any scale
--- and feed it directly into the already-proved vacuum stress ray
---
---      T_mu_nu(lambda) = - lambda g_mu_nu.
---
--- This route does not require the separately pinned normalized CMP119 stress
--- tensor and does not require 21/64 or 19/48.  It uses the source's literal
--- vacuumEnergy object, the existing source projector, and the existing GRQFT
--- vacuum-stress compiler.
 ------------------------------------------------------------------------
 
 symbolicVacuumVariationShape :
@@ -50,7 +39,7 @@ module _
     ∀ scale (a b : Flat.Axis4) →
     sourceVacuumStressAtScale scale a b
     ≡ Readout.localizedVacuumValue source scale
-        Data.Rational.Base.* VacuumStress.negativeMetric a b
+        * VacuumStress.negativeMetric a b
   sourceVacuumStressIsMinusLambdaMetric scale a b =
     VacuumStress.vacuumStressIsMinusLambdaMetric
       (Readout.localizedVacuumValue source scale) a b
