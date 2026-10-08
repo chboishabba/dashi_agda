@@ -2,83 +2,140 @@
 module DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact where
 
 ------------------------------------------------------------------------
--- LIVE PARETO FRONTIER / 2026-10-05 / OVERLAY S.
+-- LIVE PARETO FRONTIER / 2026-10-08 / OVERLAY Y.
 --
--- The old P1/P2/P3 and Q/R presentation-level walls are retired.
+-- The preferred route now has four model-specific source/physics packages and
+-- zero adapter debt.  Same-object work should continue only where it identifies
+-- actual physical/source objects; post-hoc carrier equalities are retired when
+-- the carrier can be chosen correctly by construction.
 --
--- Novel source attachments:
---   S1  construct the actual one-parameter deformation for the TEN metric/source
---       directions in CMP109/116's abstract Background carrier and prove B4
---       equivariance.  BC2 derivative semantics, derivative linearity and signed
---       R144 covariance are compiler-owned.  Bałaban's gauge-background
---       exponential chart is source-backed, but it is not silently identified
---       with these later metric/source directions.
+-- S1  literal CMP109/116 continuation on the published B carrier.
+--     Background=PublishedB and Tangent=ten-slot symmetric carrier are now
+--     definitional.  Remaining content is the literal CMP109 potential, CMP116
+--     localized activities, and their published finite-sum identity/covariance.
 --
---   S3a identify the selected marked curvature source at R129 as physical F^2.
---       The Local-C operator equality itself is definitional after recharting.
+-- S2  same-object application of the imported renormalized Hilbert/Weyl
+--     trace-anomaly authority to the exact pinned Local-C stress/F2 pair.
+--     No free CMP119 trace scalar and no fresh renormalized-operator identity.
 --
---   S3b construct/identify the finite factorized source expectation with the
---       literal physical Haar expectation.  The common finite sequence, fixed
---       state family and combined vanishing error are all compiler-owned.
+-- S3a selected marked R129 coordinate is the physical F2 source, including the
+--     remaining source coefficient/radius and gauge-local semantics.  No
+--     universal marked-curvature family or independent Hilbert inequality.
 --
--- Standard imported authority:
---   S2  the renormalized Hilbert/Weyl Callan--Symanzik trace-anomaly Ward
---       identity on the AF-matched Local-C stress/F^2 operator pair.
---       No CMP119-specific scalar trace weld remains.
+-- S3b literal Eq.(1.71) finite realization + Lipschitz cell bound + shrinking
+--     product-Haar mesh, yielding the physical-Haar expectation on the SAME
+--     finite sequence.  Independent discrepancy/state/cell-count debts are
+--     compiler-retired.
 --
--- Dominated Eq.(2.23), finite-DGamma and R109-tail sign lanes stay retired.
+-- Dominated finite-DGamma, R109-tail and old Eq.(2.23) sign lanes stay retired.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 
-import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261005SExact as S
+import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261008YExact as Y
 
-remainingNovelSourceAttachmentCount : Nat
-remainingNovelSourceAttachmentCount = S.remainingNovelSourceAttachmentCount
+remainingModelSpecificSourcePackageCount : Nat
+remainingModelSpecificSourcePackageCount = Y.remainingModelSpecificSourcePackageCount
 
 remainingStandardImportedAuthorityCount : Nat
-remainingStandardImportedAuthorityCount = S.remainingStandardImportedAuthorityCount
+remainingStandardImportedAuthorityCount = Y.remainingStandardImportedAuthorityCount
 
-primitiveSignedR144B4CovarianceStillOpen : Bool
-primitiveSignedR144B4CovarianceStillOpen = false
+remainingPreferredPackageCount : Nat
+remainingPreferredPackageCount = Y.remainingPreferredPackageCount
 
-bc2DerivativeSemanticsStillOpen : Bool
-bc2DerivativeSemanticsStillOpen = false
+remainingAdapterDebt : Nat
+remainingAdapterDebt = Y.remainingAdapterDebt
 
-round143FirstVariationLinearityStillOpen : Bool
-round143FirstVariationLinearityStillOpen = false
+------------------------------------------------------------------------
+-- S1
+------------------------------------------------------------------------
 
-s1MetricSourcePathAttachmentStillOpen : Bool
-s1MetricSourcePathAttachmentStillOpen =
-  S.s1IsActualB4EquivariantSourcePathAttachment
+s1PublishedBBackgroundSameObjectAttachmentStillOpen : Bool
+s1PublishedBBackgroundSameObjectAttachmentStillOpen =
+  Y.s1PublishedBBackgroundSameObjectAttachmentRequired
 
-compactGaugeExponentialIsPreferredMetricSourcePath : Bool
-compactGaugeExponentialIsPreferredMetricSourcePath = false
+s1TenIndependentFiniteTangentChoicesStillOpen : Bool
+s1TenIndependentFiniteTangentChoicesStillOpen =
+  Y.s1TenIndependentFiniteTangentChoicesRequired
 
-s2WardIdentityIsStandardImported : Bool
-s2WardIdentityIsStandardImported =
-  S.s2IsStandardRenormalizedHilbertWeylWardAuthority
+s1LiteralContinuationOnPublishedBCarrierStillOpen : Bool
+s1LiteralContinuationOnPublishedBCarrierStillOpen =
+  Y.s1RemainingWorkIsLiteralContinuationOnPublishedBCarrier
 
-s2NeedsCMP119SpecificTraceWeld : Bool
-s2NeedsCMP119SpecificTraceWeld = false
+s1PublishedPotentialCovarianceNeedsFreshProof : Bool
+s1PublishedPotentialCovarianceNeedsFreshProof =
+  Y.s1PublishedPotentialCovarianceNeedsFreshProof
 
-s3aSelectedR129MarkedSourceIsPhysicalF2StillOpen : Bool
-s3aSelectedR129MarkedSourceIsPhysicalF2StillOpen =
-  S.s3aIsSelectedMarkedF2SourceAtR129
+------------------------------------------------------------------------
+-- S2
+------------------------------------------------------------------------
 
-s3aLocalCOperatorSameObjectStillOpen : Bool
-s3aLocalCOperatorSameObjectStillOpen = false
+s2SameObjectTraceF2AuthorityApplicationStillOpen : Bool
+s2SameObjectTraceF2AuthorityApplicationStillOpen =
+  Y.s2SameObjectTraceF2AuthorityApplicationRequired
+
+s2FreshRenormalizedOperatorIdentityStillOpen : Bool
+s2FreshRenormalizedOperatorIdentityStillOpen =
+  Y.s2FreshRenormalizedOperatorIdentityRequired
+
+------------------------------------------------------------------------
+-- S3a
+------------------------------------------------------------------------
+
+s3aSelectedPhysicalF2MarkedSourceStillOpen : Bool
+s3aSelectedPhysicalF2MarkedSourceStillOpen =
+  Y.s3aSelectedPhysicalF2MarkedSourceStillRequired
+
+s3aUniversalMarkedCurvatureFamilyStillOpen : Bool
+s3aUniversalMarkedCurvatureFamilyStillOpen =
+  Y.s3aUniversalMarkedCurvatureFamilyRequired
+
+s3aIndependentHilbertInequalityStillOpen : Bool
+s3aIndependentHilbertInequalityStillOpen =
+  Y.s3aIndependentHilbertInequalityRequired
+
+s3aF2CoefficientSameObjectIdentificationStillOpen : Bool
+s3aF2CoefficientSameObjectIdentificationStillOpen =
+  Y.s3aF2CoefficientSameObjectIdentificationRequired
+
+s3aMarkedCoordinateAndUniformRadiusWeldStillOpen : Bool
+s3aMarkedCoordinateAndUniformRadiusWeldStillOpen =
+  Y.s3aMarkedCoordinateAndUniformRadiusWeldRequired
+
+s3aGaugeLocalSemanticsStillOpen : Bool
+s3aGaugeLocalSemanticsStillOpen =
+  Y.s3aGaugeLocalSemanticsRequired
+
+------------------------------------------------------------------------
+-- S3b
+------------------------------------------------------------------------
 
 s3bFiniteSourceExpectationToPhysicalHaarStillOpen : Bool
 s3bFiniteSourceExpectationToPhysicalHaarStillOpen =
-  S.s3bIsFiniteSourceExpectationToPhysicalHaarRepresentation
+  Y.s3bFiniteSourceExpectationToPhysicalHaarStillRequired
 
-s3bPointwiseFiniteSequenceWeldStillOpen : Bool
-s3bPointwiseFiniteSequenceWeldStillOpen = false
+s3bLiteralEquation171FiniteRealizationStillOpen : Bool
+s3bLiteralEquation171FiniteRealizationStillOpen =
+  Y.s3bLiteralEquation171FiniteRealizationRequired
 
-s3bRefinementDependentStateEqualityStillOpen : Bool
-s3bRefinementDependentStateEqualityStillOpen = false
+s3bEquation171LipschitzCellBoundStillOpen : Bool
+s3bEquation171LipschitzCellBoundStillOpen =
+  Y.s3bEquation171LipschitzCellBoundRequired
+
+s3bProductHaarVanishingMeshStillOpen : Bool
+s3bProductHaarVanishingMeshStillOpen =
+  Y.s3bProductHaarVanishingMeshRequired
+
+------------------------------------------------------------------------
+-- Retired/dominated work.
+------------------------------------------------------------------------
+
+postHocS1CarrierSameObjectProofRequired : Bool
+postHocS1CarrierSameObjectProofRequired = false
+
+tenIndependentS1TangentSourceTheoremsRequired : Bool
+tenIndependentS1TangentSourceTheoremsRequired = false
 
 preferredRouteNeedsFiniteDGamma : Bool
 preferredRouteNeedsFiniteDGamma = false
@@ -89,19 +146,11 @@ preferredRouteNeedsRound109Tail = false
 preferredRouteNeedsEq223VacuumMetricGap : Bool
 preferredRouteNeedsEq223VacuumMetricGap = false
 
-remainingAdapterDebt : Nat
-remainingAdapterDebt = S.remainingAdapterDebt
-
-remainingNovelWorkIsThreeConcreteSourceAttachments : Bool
-remainingNovelWorkIsThreeConcreteSourceAttachments =
-  S.remainingNovelWorkIsThreeConcreteSourceAttachments
-
-remainingImportedTheoremIsOneWardIdentity : Bool
-remainingImportedTheoremIsOneWardIdentity =
-  S.remainingImportedTheoremIsOneWardIdentity
-
 fullFriedmannTrajectoryAlreadySolved : Bool
 fullFriedmannTrajectoryAlreadySolved = false
+
+sameObjectWorkShouldContinueAtPhysicalSourceAttachments : Bool
+sameObjectWorkShouldContinueAtPhysicalSourceAttachments = true
 
 noSyntheticPhysicalIdentificationAdded : Bool
 noSyntheticPhysicalIdentificationAdded = true
