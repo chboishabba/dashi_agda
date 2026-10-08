@@ -52,8 +52,10 @@ def test_strongest_existing_nonlinear_repulsive_geometry_is_consumed():
         "stageCNambuGotoRepulsiveBubbleBoundary",
         "stageCSourceNativeNambuConditionalBoundary",
         "selectedNonlinearRepulsiveExteriorGeometryConstructed",
-        "sourceNativeVacuumReadoutStillOpen",
-        "sourceNativePinnedStressWeldStillOpen",
+        "stageASourceNativeVacuumReadout",
+        "stageASourceAncestryReduction",
+        "stageCSingleSourceVacuumRoute",
+        "stageCSingleVacuumSafeBand",
     ):
         assert token in terminal
 
@@ -67,6 +69,31 @@ def test_strongest_existing_nonlinear_repulsive_geometry_is_consumed():
         "sourceNativeCMP119PotentialCouplingDerived",
     ):
         assert token in bubble
+
+
+def test_single_vacuum_normalization_scale_covariance_is_explicit():
+    text = read("DASHI/Physics/Foundations/GRQFTSingleVacuumNormalizationScaleCovarianceExact.agda")
+    for token in (
+        "rescaledVacuumAmplitude",
+        "InverseRadialScaleMatch",
+        "conicQNormalizationScaleCovariant",
+        "multiplicativeSquareNormalizationAbsorbableIntoRadius",
+        "additiveVacuumCountertermAbsorbedByThisTheorem",
+    ):
+        assert token in text
+
+
+def test_physical_promotion_maxcut_does_not_reopen_obsolete_source_leaves():
+    text = read("DASHI/Physics/ExoticGravity/AntigravitySingleVacuumPhysicalPromotionMaxCutExact.agda")
+    for token in (
+        "sourceNativeVacuumReadoutAlreadyOwned",
+        "sourceNativeAncestryAlreadyReduced",
+        "twoVacuumAmplitudesRequired",
+        "unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence",
+        "additiveVacuumRenormalizationStillOpen",
+        "absoluteSIDeviceScaleStillOpen",
+    ):
+        assert token in text
 
 
 def test_device_observable_compiler_covers_weight_freefall_clock_optical():
