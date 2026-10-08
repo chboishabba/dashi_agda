@@ -6,6 +6,14 @@ open import Agda.Builtin.String using (String)
 
 record HumanEvidenceAcquisition : Set where
   field
+    operatorPerformancePMID : String
+    operatorPerformanceSetting : String
+    operatorPerformancePlaceboControlled : Bool
+    operatorCompensatoryTrackingReportedImprovement : String
+    operatorPursuitTrackingErrorReportedRatio : String
+    operatorVisualSignalDetectionReportedRatio : String
+    operatorAbstractGivesSampleSize : Bool
+
     heatExertionPMID : String
     heatExertionDose : String
     heatExertionDoubleBlindControlled : Bool
@@ -18,6 +26,13 @@ record HumanEvidenceAcquisition : Set where
     carbonMonoxideHeatHumanVolunteerEvidence : Bool
     carbonMonoxideHeatIncludesPlacebo : Bool
     carbonMonoxideHeatExactAllocationRecovered : Bool
+
+    healthyVolunteerPKPMID : String
+    healthyVolunteerPKSingleOralDoseMg : String
+    healthyVolunteerPKCmax : String
+    healthyVolunteerPKTmax : String
+    healthyVolunteerPKObserved : Bool
+    healthyVolunteerPKAbstractGivesSampleSize : Bool
 
     humanExcretionPMID : String
     humanExcretionVolunteerCount : String
@@ -48,7 +63,14 @@ open HumanEvidenceAcquisition public
 
 canonicalHumanEvidenceAcquisition : HumanEvidenceAcquisition
 canonicalHumanEvidenceAcquisition = record
-  { heatExertionPMID = "9162292"
+  { operatorPerformancePMID = "3066983"
+  ; operatorPerformanceSetting = "simulated space flight and 56-hour continuous work"
+  ; operatorPerformancePlaceboControlled = true
+  ; operatorCompensatoryTrackingReportedImprovement = "about 10 percent higher"
+  ; operatorPursuitTrackingErrorReportedRatio = "1.8 times lower"
+  ; operatorVisualSignalDetectionReportedRatio = "2.4 times shorter"
+  ; operatorAbstractGivesSampleSize = false
+  ; heatExertionPMID = "9162292"
   ; heatExertionDose = "0.5 g single dose"
   ; heatExertionDoubleBlindControlled = true
   ; heatExertionMeasuresGasEnergyExchange = true
@@ -59,6 +81,12 @@ canonicalHumanEvidenceAcquisition = record
   ; carbonMonoxideHeatHumanVolunteerEvidence = true
   ; carbonMonoxideHeatIncludesPlacebo = true
   ; carbonMonoxideHeatExactAllocationRecovered = false
+  ; healthyVolunteerPKPMID = "21870773"
+  ; healthyVolunteerPKSingleOralDoseMg = "250"
+  ; healthyVolunteerPKCmax = "0.91 +/- 1.05 microgram/ml"
+  ; healthyVolunteerPKTmax = "1.06 +/- 0.16 h"
+  ; healthyVolunteerPKObserved = true
+  ; healthyVolunteerPKAbstractGivesSampleSize = false
   ; humanExcretionPMID = "30346653"
   ; humanExcretionVolunteerCount = "6 healthy volunteers"
   ; humanExcretionExposureObserved = true
@@ -78,12 +106,19 @@ canonicalHumanEvidenceAcquisition = record
   ; modernPerformanceReplicationPaid = false
   ; modernHeatOxygenReplicationPaid = false
   ; exposureEfficacySameObjectPaid = false
-  ; reading = "Indexed human evidence now pays historical controlled heat/exertion physiology, human excretion, disease-context immune outcomes, and human metabolic-marker observations; it still does not pay a molecular target, modern independent performance replication, or same-object exposure-efficacy closure"
+  ; reading = "Indexed human evidence now pays a historical placebo-controlled operator-performance experiment, controlled heat/exertion physiology, healthy-volunteer pharmacokinetic and excretion observations, disease-context immune outcomes, and human metabolic-marker observations; it still does not pay a molecular target, modern independent performance replication, or same-object exposure-efficacy closure"
   }
+
+historicalOperatorPerformancePaid :
+  operatorPerformancePlaceboControlled canonicalHumanEvidenceAcquisition ≡ true
+historicalOperatorPerformancePaid = refl
 
 controlledHeatEvidencePaid :
   heatExertionDoubleBlindControlled canonicalHumanEvidenceAcquisition ≡ true
 controlledHeatEvidencePaid = refl
+
+humanPKPaid : healthyVolunteerPKObserved canonicalHumanEvidenceAcquisition ≡ true
+humanPKPaid = refl
 
 humanExposurePaid :
   humanExcretionExposureObserved canonicalHumanEvidenceAcquisition ≡ true
