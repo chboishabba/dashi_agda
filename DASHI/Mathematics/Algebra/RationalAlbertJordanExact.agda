@@ -16,7 +16,8 @@ module DASHI.Mathematics.Algebra.RationalAlbertJordanExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat)
+import Agda.Builtin.Nat as ℕ
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
@@ -48,7 +49,7 @@ record RationalAlbert : Set where
 open RationalAlbert public
 
 rationalAlbertDimension : Nat
-rationalAlbertDimension = 3 + (3 * 8)
+rationalAlbertDimension = ℕ._+_ 3 (ℕ._*_ 3 8)
 
 rationalAlbertDimensionIs27 : rationalAlbertDimension ≡ 27
 rationalAlbertDimensionIs27 = refl
