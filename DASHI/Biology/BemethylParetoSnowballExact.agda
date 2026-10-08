@@ -16,6 +16,7 @@ record ParetoSnowball : Set where
     targetEngagementWouldCollapseMechanismLeaf : Bool
     modernPerformanceWouldCollapseReplicationLeaf : Bool
     historicalControlledPerformanceEvidenceNowAcquired : Bool
+    modernRandomizedAthleteEvidenceNowAcquired : Bool
     heatOxygenHistoricalHumanEvidenceNowAcquired : Bool
     humanPKHistoricalExposureEvidenceNowAcquired : Bool
     transcriptionDependenceEvidenceNowAcquired : Bool
@@ -40,6 +41,7 @@ canonicalParetoSnowball = record
   ; targetEngagementWouldCollapseMechanismLeaf = true
   ; modernPerformanceWouldCollapseReplicationLeaf = true
   ; historicalControlledPerformanceEvidenceNowAcquired = true
+  ; modernRandomizedAthleteEvidenceNowAcquired = true
   ; heatOxygenHistoricalHumanEvidenceNowAcquired = true
   ; humanPKHistoricalExposureEvidenceNowAcquired = true
   ; transcriptionDependenceEvidenceNowAcquired = true
@@ -48,7 +50,7 @@ canonicalParetoSnowball = record
   ; reviewSnowballIsNavigationOnly = true
   ; reviewRepetitionCreatesIndependentReplication = false
   ; secondaryHistoricalRepetitionCreatesPrimaryReceipt = false
-  ; nextSourceQuery = "Acquire a direct bemethyl target-engagement experiment or causal molecular perturbation that identifies the proximal target. Historical controlled operator, heat/exertion, human PK/excretion and transcription-dependence leaves are now source-paid; complete original methods and modern independent replication are the next efficacy-side cuts."
+  ; nextSourceQuery = "Acquire direct bemethyl target engagement or a proximal causal molecular perturbation. On efficacy, modern randomized athlete evidence now exists, so the next cut is a recovered direct Metaprot-vs-placebo effect estimate/statistical contrast, participant-level exposure coupling, and independent external replication rather than another review."
   }
 
 reviewRepetitionDoesNotIncreaseAuthority :
