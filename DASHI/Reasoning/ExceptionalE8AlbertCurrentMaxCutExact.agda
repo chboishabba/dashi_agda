@@ -11,7 +11,9 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 --   * a concrete signed-basis octonion automorphism subgroup of order 1344 and
 --     its diagonal Albert lift preserving product and cubic norm;
 --   * one explicit non-diagonal Moufang/Spin(8)-triality-type Albert
---     automorphism preserving product and cubic norm;
+--     automorphism with an explicit two-sided inverse;
+--   * five explicit same-carrier Albert automorphism generators in total,
+--     each bijective and product/cubic preserving;
 --   * exact-rational diagnostics on all 351 basis-pair inner derivations, with
 --     span/derived dimension 52 and centre dimension 0.
 --
@@ -32,6 +34,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact as S3
 import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismLawsExact as S3Laws
 import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisG2SubgroupExact as G2
 import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact as Triality
+import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact as Known
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact as Deriv
 
 record ExceptionalCurrentMaxCut : Set where
@@ -62,6 +65,7 @@ record ExceptionalCurrentMaxCut : Set where
     signedBasisG2SubgroupPaid : Bool
     selectedMoufangTrialityAutomorphismPaid : Bool
     selectedTrialityProductCubicPreservationPaid : Bool
+    knownFiveAlbertGeneratorsBijectivePaid : Bool
     innerDerivationDimension52DiagnosticPaid : Bool
     innerDerivationPerfectCenterlessDiagnosticPaid : Bool
 
@@ -86,7 +90,7 @@ canonicalExceptionalCurrentMaxCut =
     true true true true
     true true
     true true true true true
-    true true true true true
+    true true true true true true
     false false false false false
     false false false
-    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. The rational Albert algebra now has an explicit S3 subgroup, a genuine signed-basis octonion subgroup of order 1344 lifted to Albert automorphisms, one non-diagonal Moufang triality automorphism, and an exact-rational 52-dimensional perfect/centerless inner-derivation diagnostic. The remaining algebraic wall is full Spin(8)/D4 triality generation on the same Albert carrier, kernel proof of the derivation span/type, F4 root-datum recognition, and finally Aut(J)=F4=Stab_E6(1)."
+    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. The rational Albert algebra now has an explicit S3 subgroup, a genuine signed-basis octonion subgroup of order 1344 lifted to Albert automorphisms, one non-diagonal bijective Moufang triality automorphism, and five explicit same-carrier bijective product/cubic-preserving generators in total, plus an exact-rational 52-dimensional perfect/centerless inner-derivation diagnostic. The remaining algebraic wall is full Spin(8)/D4 triality generation on the same Albert carrier, kernel proof of the derivation span/type, F4 root-datum recognition, and finally Aut(J)=F4=Stab_E6(1)."
