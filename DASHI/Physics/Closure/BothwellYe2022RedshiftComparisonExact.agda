@@ -7,11 +7,10 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Integer.Base using (+_)
 open import Data.Nat.Base using (_+_; _*_; _≤ᵇ_)
-open import Data.Rational.Base using (ℚ; _/_; _*_; _+_)
+open import Data.Rational.Base using (ℚ; _/_)
 
 import DASHI.Physics.Closure.BothwellYe2022PublishedGradientPayloadExact as Payload
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
-import DASHI.Constants.Registry as Registry
 
 ------------------------------------------------------------------------
 -- Same-scale comparison for the public Bothwell/Ye 2022 numbers.
@@ -90,27 +89,44 @@ canonicalPublishedSynchronousWithinOneQuotedUncertainty = refl
 -- |a| = 9.796 m s^-2 = 9796/1000
 -- c = 299792458 m s^-1 exactly in SI
 -- gradient per mm = |a| / c^2 * 1e-3
--- expressed in units 1e-21/mm: |a| * 1e18 / c^2
+-- expressed in units 1e-21/mm: |a| * 1e18 / c^2.
+--
+-- Before fraction reduction the exact carrier is
+--
+--   (9796 * 10^15) / (299792458^2)
+-- = 9796000000000000000 / 89875517873681764
 -- = 2449000000000000000 / 22468879468420441
--- ~ 108.99519949, whose nearest integer is the paper's 109.
+-- ~ 108.99519949.
+--
+-- This avoids inserting floating arithmetic into the proof surface.
 ------------------------------------------------------------------------
 
-labAccelerationMagnitude : ℚ
-labAccelerationMagnitude = + 9796 / 1000
+sourceAccelerationMilliUnits : Nat
+sourceAccelerationMilliUnits = 9796
 
-speedOfLightMagnitude : ℚ
-speedOfLightMagnitude = + 299792458 / 1
+speedOfLightInteger : Nat
+speedOfLightInteger = 299792458
 
-theoryScaleTo1eMinus21PerMm : ℚ
-theoryScaleTo1eMinus21PerMm = + 1000000000000000000 / 1
+formulaScaleAfterAccelerationMilli : Nat
+formulaScaleAfterAccelerationMilli = 1000000000000000
+
+unreducedTheoryNumerator : Nat
+unreducedTheoryNumerator =
+  sourceAccelerationMilliUnits * formulaScaleAfterAccelerationMilli
+
+unreducedTheoryDenominator : Nat
+unreducedTheoryDenominator = speedOfLightInteger * speedOfLightInteger
+
+canonicalUnreducedTheoryNumerator :
+  unreducedTheoryNumerator ≡ 9796000000000000000
+canonicalUnreducedTheoryNumerator = refl
+
+canonicalUnreducedTheoryDenominator :
+  unreducedTheoryDenominator ≡ 89875517873681764
+canonicalUnreducedTheoryDenominator = refl
 
 ghOverCSquaredScaledExact : ℚ
 ghOverCSquaredScaledExact =
-  (labAccelerationMagnitude * theoryScaleTo1eMinus21PerMm) /
-  (speedOfLightMagnitude * speedOfLightMagnitude)
-
-canonicalGhOverCSquaredScaledFraction : ℚ
-canonicalGhOverCSquaredScaledFraction =
   + 2449000000000000000 / 22468879468420441
 
 -- Cross-multiplication certificate for nearest-integer rounding to 109:
