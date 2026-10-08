@@ -8,15 +8,15 @@ module DASHI.Mathematics.Algebra.RationalOctonionSignedBasisAutomorphismExact wh
 -- found exactly 1344 such signed basis permutations preserving multiplication.
 -- Two small transformations generate that finite signed-basis automorphism
 -- group.  This file source-writes those two generators as actual rational
--- octonion maps and proves multiplication / conjugation / norm preservation by
--- exact coordinate polynomial identities.
+-- octonion maps and proves finite order, multiplication / conjugation / norm
+-- preservation by exact coordinate identities.
 --
 -- The finite closure order 1344 remains a local combinatorial diagnostic here;
 -- this file does not identify the full algebraic automorphism group G2.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; -_)
@@ -32,6 +32,24 @@ autoA (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
 autoB : O.RationalOctonion → O.RationalOctonion
 autoB (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
   O.oct (Q.quat a0 a5 a1 a4) (Q.quat a7 a2 a6 a3)
+
+------------------------------------------------------------------------
+-- Explicit invertibility: A is an involution and B has order three.
+------------------------------------------------------------------------
+
+autoASquaredIdentity : ∀ value → autoA (autoA value) ≡ value
+autoASquaredIdentity
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) =
+  O.octonionExt
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+    (Q.quaternionExt (solve vars) (solve vars) (solve vars) (solve vars))
+  where
+    vars : List ℚ
+    vars = a0 ∷ a1 ∷ a2 ∷ a3 ∷ a4 ∷ a5 ∷ a6 ∷ a7 ∷ []
+
+autoBCubedIdentity : ∀ value → autoB (autoB (autoB value)) ≡ value
+autoBCubedIdentity
+  (O.oct (Q.quat a0 a1 a2 a3) (Q.quat a4 a5 a6 a7)) = refl
 
 autoAPreservesProduct : ∀ left right →
   autoA (O._*o_ left right) ≡ O._*o_ (autoA left) (autoA right)
@@ -94,6 +112,8 @@ autoBPreservesNorm
 record SignedBasisAutomorphismBoundary : Set where
   constructor signed-basis-automorphism-boundary
   field
+    generatorAOrderTwoPaid : Bool
+    generatorBOrderThreePaid : Bool
     generatorAProductPreserving : Bool
     generatorBProductPreserving : Bool
     generatorAConjugationPreserving : Bool
@@ -105,4 +125,6 @@ record SignedBasisAutomorphismBoundary : Set where
 open SignedBasisAutomorphismBoundary public
 
 canonicalBoundary : SignedBasisAutomorphismBoundary
-canonicalBoundary = signed-basis-automorphism-boundary true true true true true true 1344 false
+canonicalBoundary =
+  signed-basis-automorphism-boundary
+    true true true true true true true true 1344 false
