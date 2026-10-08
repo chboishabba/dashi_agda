@@ -1,0 +1,14 @@
+module DASHI.Biology.DyadicSynchronyDevelopmentalAttunementBridgeRegression where
+
+import DASHI.Biology.DyadicSynchronyDevelopmentalAttunementBridgeExact as P
+import DASHI.Reasoning.DevelopmentalAttunementPNFBridge as Attunement
+
+relationKindRegression : Attunement.DevelopmentalRelation
+relationKindRegression = P.relationKind P.canonicalDyadicSynchronyAttunementBridge
+
+fragmentationOwnerRegression :
+  Attunement.SameQuantityGreaterFragmentation Attunement.stableTrace Attunement.fragmentedTrace
+fragmentationOwnerRegression = P.fragmentationWitness P.canonicalDyadicSynchronyAttunementBridge
+
+canonicalBoundaryRegression : P.DyadicSynchronyAttunementBoundary
+canonicalBoundaryRegression = P.canonicalDyadicSynchronyAttunementBoundary
