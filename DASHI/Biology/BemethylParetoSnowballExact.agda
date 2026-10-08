@@ -15,6 +15,7 @@ record ParetoSnowball : Set where
 
     targetEngagementWouldCollapseMechanismLeaf : Bool
     modernPerformanceWouldCollapseReplicationLeaf : Bool
+    historicalControlledPerformanceEvidenceNowAcquired : Bool
     heatOxygenHistoricalHumanEvidenceNowAcquired : Bool
     humanPKHistoricalExposureEvidenceNowAcquired : Bool
     historicalUseFurtherAcquisitionChangesMechanismFrontier : Bool
@@ -37,6 +38,7 @@ canonicalParetoSnowball = record
   ; historicalUsePriority = 1
   ; targetEngagementWouldCollapseMechanismLeaf = true
   ; modernPerformanceWouldCollapseReplicationLeaf = true
+  ; historicalControlledPerformanceEvidenceNowAcquired = true
   ; heatOxygenHistoricalHumanEvidenceNowAcquired = true
   ; humanPKHistoricalExposureEvidenceNowAcquired = true
   ; historicalUseFurtherAcquisitionChangesMechanismFrontier = false
@@ -44,7 +46,7 @@ canonicalParetoSnowball = record
   ; reviewSnowballIsNavigationOnly = true
   ; reviewRepetitionCreatesIndependentReplication = false
   ; secondaryHistoricalRepetitionCreatesPrimaryReceipt = false
-  ; nextSourceQuery = "Acquire a direct bemethyl target-engagement or causal molecular intervention study; failing that, acquire the original controlled human performance papers with sample size, allocation, endpoints and exposure, then seek a modern independent replication"
+  ; nextSourceQuery = "Acquire direct bemethyl target engagement or a causal molecular intervention. Historical controlled operator, heat/exertion, and human PK/excretion leaves are now source-paid at indexed-abstract level; next recover complete original methods and then seek modern independent same-compound replication."
   }
 
 reviewRepetitionDoesNotIncreaseAuthority :
