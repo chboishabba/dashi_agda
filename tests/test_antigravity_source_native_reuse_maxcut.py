@@ -54,9 +54,10 @@ def test_eq223_metric_stress_route_bypasses_old_ancestry_adapter():
     for token in (
         "sourceCompleteFiniteMetricVariation",
         "vacuumVariationIsLiteralEq223V",
-        "sameObjectEffectiveActionResponse",
+        "sameObjectEffectiveActionResponseWeldExists",
         "oldPinnedStressAncestryAdapterRequiredOnPreferredRoute",
         "directResponseEqualityStillRequired",
+        "preferredRouteDoesNotClaimResponseEqualityWithoutWeld",
     ):
         assert token in text
 
@@ -71,6 +72,7 @@ def test_terminal_owner_compresses_remaining_source_frontier():
         "rationalVacuumReadoutIsNoLongerIndependentLeaf",
         "pinnedNormalizedStressIsNoLongerNeededForVacuumGeometryRoute",
         "fixedMagicAmplitudePairIsNoLongerRequired",
+        "differenceDataDoesNotFixAbsoluteSourceAnchor",
         "sourceToGeometryAdmissionStillOpen",
         "actualR136EffectiveActionResponseEqualityStillOpen",
     ):
