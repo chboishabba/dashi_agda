@@ -43,6 +43,16 @@ comparatorWorkloadFloorPaid : Evaluation.comparatorLocalWorkloadFloorPaid Evalua
 comparatorWorkloadFloorPaid = refl
 comparatorVersioningPaid : Evaluation.comparatorInstitutionalVersioningPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
 comparatorVersioningPaid = refl
+
+dynamicFeedbackPaid : Evaluation.dynamicInstitutionalFeedbackBridgePaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+dynamicFeedbackPaid = refl
+adaptiveReopeningPaid : Evaluation.adaptiveModelReopeningObligationPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+adaptiveReopeningPaid = refl
+interfaceCapacityBridgePaid : Evaluation.interfaceCapacityBottleneckBridgePaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+interfaceCapacityBridgePaid = refl
+longitudinalGatePaid : Evaluation.longitudinalPromotionGatePaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
+longitudinalGatePaid = refl
+
 underlyingSpokesMinutesStillOpen : Evaluation.underlyingOWSSpokesMinutesMaterialised Evaluation.canonicalBoloEvaluationBoundary ≡ false
 underlyingSpokesMinutesStillOpen = refl
 transferFirewallPaid : Evaluation.crossContextTransferFirewallPaid Evaluation.canonicalBoloEvaluationBoundary ≡ true
@@ -55,10 +65,13 @@ modelClassRobustnessPaid : Evaluation.modelClassRobustnessGatePaid Evaluation.ca
 modelClassRobustnessPaid = refl
 universalDecentralizationAdvantageNotAssumed : Evaluation.universalMonotoneDecentralizationAdvantageAssumed Evaluation.canonicalBoloEvaluationBoundary ≡ false
 universalDecentralizationAdvantageNotAssumed = refl
+
 empiricalCostTermsUnpaid : Evaluation.empiricalCostTermsIdentified Evaluation.canonicalBoloEvaluationBoundary ≡ false
 empiricalCostTermsUnpaid = refl
 targetQualifiedBoundsUnpaid : Evaluation.targetQualifiedCostBoundsPaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
 targetQualifiedBoundsUnpaid = refl
+targetInterfaceCapacityUnpaid : Evaluation.targetInterfaceCapacityAndDemandPaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
+targetInterfaceCapacityUnpaid = refl
 meaningfulThresholdTargetUnpaid : Evaluation.minimumMeaningfulThresholdTargetStudyPaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
 meaningfulThresholdTargetUnpaid = refl
 modelFamilyTargetUnpaid : Evaluation.admissibleTargetModelFamilyPaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
@@ -67,6 +80,10 @@ robustTargetWinUnpaid : Evaluation.robustTargetCoordinationWinPaid Evaluation.ca
 robustTargetWinUnpaid = refl
 validatedMeaningfulAdvantageUnpaid : Evaluation.validatedMeaningfulAdvantagePaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
 validatedMeaningfulAdvantageUnpaid = refl
+longitudinalAdvantageUnpaid : Evaluation.longitudinalMeaningfulAdvantagePaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
+longitudinalAdvantageUnpaid = refl
+longitudinalDisadvantageUnpaid : Evaluation.longitudinalMeaningfulDisadvantagePaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
+longitudinalDisadvantageUnpaid = refl
 uniformFamilyAdvantageUnpaid : Evaluation.uniformModelFamilyAdvantagePaid Evaluation.canonicalBoloEvaluationBoundary ≡ false
 uniformFamilyAdvantageUnpaid = refl
 directExperimentNotRun : Evaluation.directFlatVersusNestedExperimentRun Evaluation.canonicalBoloEvaluationBoundary ≡ false
@@ -79,6 +96,7 @@ comparativeSuperiorityUnpaid : Evaluation.empiricalComparativeSuperiorityEstabli
 comparativeSuperiorityUnpaid = refl
 holdoutNotSpendableYet : Evaluation.prospectiveHoldoutSpendable Evaluation.canonicalBoloEvaluationBoundary ≡ false
 holdoutNotSpendableYet = refl
+
 occupyBoundsDoNotAutoTransfer : Evaluation.occupyBoundsAutomaticallyTransferToBolo Evaluation.canonicalBoloEvaluationBoundary ≡ false
 occupyBoundsDoNotAutoTransfer = refl
 comparatorSimilarityDoesNotProveBolo : Evaluation.comparatorSimilarityAutomaticallyProvesBoloSuccess Evaluation.canonicalBoloEvaluationBoundary ≡ false
@@ -91,3 +109,9 @@ oneModelNotEnough : Evaluation.oneFavouredCostModelEnoughForRobustRecommendation
 oneModelNotEnough = refl
 tinyWinNotMeaningful : Evaluation.anyTinyStrictWinEnoughForMeaningfulRecommendation Evaluation.canonicalBoloEvaluationBoundary ≡ false
 tinyWinNotMeaningful = refl
+snapshotWinNotLongRunWin : Evaluation.snapshotWinAutomaticallyBecomesLongRunWin Evaluation.canonicalBoloEvaluationBoundary ≡ false
+snapshotWinNotLongRunWin = refl
+declaredArchitectureNotRealisedTopology : Evaluation.declaredArchitectureAutomaticallyDeterminesRealisedTopology Evaluation.canonicalBoloEvaluationBoundary ≡ false
+declaredArchitectureNotRealisedTopology = refl
+localFeasibilityNotJointCapacity : Evaluation.localFeasibilityAutomaticallyImpliesJointInterfaceFeasibility Evaluation.canonicalBoloEvaluationBoundary ≡ false
+localFeasibilityNotJointCapacity = refl
