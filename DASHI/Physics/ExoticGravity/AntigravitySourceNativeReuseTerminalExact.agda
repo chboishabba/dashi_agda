@@ -7,6 +7,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalizedVacuumReadoutExact as
 import DASHI.Physics.Foundations.CMP119AntigravityDirectSourceVacuumStressExact as DirectStress
 import DASHI.Physics.Foundations.CMP119AntigravitySourceVacuumIsraelAdmissionExact as Admission
 import DASHI.Physics.Foundations.CMP119AntigravityEq223MetricStressReuseMaxCutExact as Reuse
+import DASHI.Physics.Foundations.CMP119CosmologyR109AbsoluteExpectationAnchorNoGoExact as AbsoluteNoGo
 import DASHI.Physics.Foundations.GRQFTSourceNativeNambuBubbleConditionalExact as SourceNative
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Bubble
 import DASHI.Physics.Foundations.GRQFTDECRepulsiveExteriorMaxCutExact as Exterior
@@ -14,17 +15,6 @@ import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut2026
 
 ------------------------------------------------------------------------
 -- ANTIGRAVITY SOURCE-NATIVE REUSE TERMINAL
---
--- Current repo archaeology eliminates FOUR avoidable construction leaves:
---
---   1. LocalizedAction vacuum energy already has a rational projector;
---   2. that actual projected coefficient feeds the existing cosmological
---      stress ray directly, without the separately pinned normalized tensor;
---   3. actual source vacuum values can feed parameterized Israel/Kottler
---      geometry, so 21/64 and 19/48 are examples rather than obligations;
---   4. the preferred Eq.(2.23) metric-variation/R136 path consumes literal
---      source E/R/B/V objects, so the old constructorless generic ancestry
---      adapter is not the preferred same-object interface there either.
 ------------------------------------------------------------------------
 
 localizedReadoutBoundary : Readout.LocalizedVacuumReadoutBoundary
@@ -51,6 +41,15 @@ nambuGeometryBoundary = Bubble.canonicalNambuGotoRepulsiveBubbleMaxCutBoundary
 decExteriorBoundary : Exterior.DECRepulsiveExteriorMaxCutBoundary
 decExteriorBoundary = Exterior.canonicalDECRepulsiveExteriorMaxCutBoundary
 
+-- Existing generic same-sequence theorem: difference/tail control is invariant
+-- under a common additive translation, so it cannot determine an absolute
+-- endpoint.  The source-vacuum geometry lane has the analogous logical shape:
+-- the projector/readout exists, but an absolute selected source coefficient is
+-- genuine source information rather than something recoverable from drift alone.
+differenceDataDoesNotFixAbsoluteSourceAnchor : Bool
+differenceDataDoesNotFixAbsoluteSourceAnchor =
+  AbsoluteNoGo.absoluteExpectationAnchorIsGenuineAdditionalInformation
+
 record AntigravitySourceNativeReuseFrontier : Set where
   constructor antigravity-source-native-reuse-frontier
   field
@@ -60,6 +59,7 @@ record AntigravitySourceNativeReuseFrontier : Set where
     fixedMagicAmplitudePairIsNoLongerRequired : Bool
     literalEq223MetricVariationAlreadyExists : Bool
     nonlinearRepulsiveGeometryAlreadyExists : Bool
+    differenceDataDoesNotDetermineAbsoluteVacuumAnchor : Bool
 
     sourceToGeometryAdmissionStillOpen : Bool
     actualR136EffectiveActionResponseEqualityStillOpen : Bool
@@ -73,7 +73,7 @@ canonicalAntigravitySourceNativeReuseFrontier :
   AntigravitySourceNativeReuseFrontier
 canonicalAntigravitySourceNativeReuseFrontier =
   antigravity-source-native-reuse-frontier
-    true true true true true true
+    true true true true true true true
     true true true true true true true
 
 record AntigravitySourceNativeReuseMaxCut : Set where
@@ -86,7 +86,7 @@ record AntigravitySourceNativeReuseMaxCut : Set where
     newNonlinearRepulsiveGeometryRequired : Bool
     newIsraelShellAlgebraRequired : Bool
 
-    actualSourceToGeometryAdmissionRequired : Bool
+    actualAbsoluteSourceAnchorOrAdmissionRequired : Bool
     literalPreferredSourcePaymentRequired : Bool
     directSameObjectR136ResponsePaymentRequired : Bool
     physicalControlAndSICalibrationRequired : Bool
