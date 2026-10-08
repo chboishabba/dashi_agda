@@ -30,7 +30,15 @@ record PolicyEvidenceCarrier : Set where
     policySource : SensibLaw.LegalSource
     evidence : SensibLaw.EvidenceItem
     eventEvidence : SensibLaw.EventEvidenceLink
-    sourceIsWithinSystem : Bool
+    eventEvidenceEventIdentityPreserved :
+      SensibLaw.EventEvidenceLink.linkedEvent eventEvidence
+      ≡ SensibLaw.Event.eventId policyEvent
+    eventEvidenceItemIdentityPreserved :
+      SensibLaw.EventEvidenceLink.linkedEvidence eventEvidence
+      ≡ SensibLaw.EvidenceItem.evidenceId evidence
+    sourceSystemIdentityPreserved :
+      SensibLaw.LegalSource.sourceSystem policySource
+      ≡ SensibLaw.LegalSystem.systemId legalSystem
 
 open PolicyEvidenceCarrier public
 
