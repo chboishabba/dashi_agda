@@ -73,6 +73,10 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationExact.agda
       - name: Typecheck early cylinder elimination validation
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationValidation.agda
+      - name: Typecheck residual survivor frontier
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierExact.agda
+      - name: Typecheck residual survivor frontier validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierValidation.agda
       - name: Typecheck terminal parity max-cut
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
       - name: Typecheck terminal parity max-cut validation
