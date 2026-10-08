@@ -10,6 +10,11 @@ import DASHI.Physics.Plasma.ToroidalZeroBouncePairIncidenceCrossPollinationExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceM24DuadRecognitionExact
 import DASHI.Physics.Plasma.ToroidalZeroBouncePhaseResolvedSupportExact
 import DASHI.Physics.Plasma.ToroidalZeroBounce276243RecognitionMaxCutExact
+import DASHI.Physics.Plasma.PhaseRook270Exact
+import DASHI.Physics.Plasma.PhaseCore243FiveTritExact
+import DASHI.Physics.Plasma.Phase243ActionIntertwinerExact
+import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact
+import DASHI.Physics.Plasma.Phase243RookMaxCutExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceArchitectureForkExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceCoilInverseBoundaryExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceCoilInverseMaxCutExact
