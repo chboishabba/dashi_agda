@@ -11,18 +11,22 @@ import DASHI.Governance.OriginalThreadParetoAcquisitionExact as Previous
 import DASHI.Governance.IRISDenaHansardCorrectionAwareEvidenceExact as Hansard
 import DASHI.Governance.IRISDenaSameObjectAcquisitionMaxCutExact as IRIS
 import DASHI.Governance.AUKUSOnboardConductSovereigntyBoundaryExact as Sovereignty
+import DASHI.Governance.AUKUSEmbeddedAuthorityCommandNoncollapseExact as Authority
+import DASHI.Governance.IRISDenaMinisterialBriefingFOIBoundaryExact as Briefing
 import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as Iran
 
 ------------------------------------------------------------------------
 -- 2026-10-08 ORIGINAL-THREAD PARETO RECOMPUTATION
 --
--- Prior paid cells remain paid in Previous.  This owner recomputes only the
+-- Prior paid cells remain paid in Previous. This owner recomputes only the
 -- residual programme after discovering:
 --   * transcript ref. 29619 is published in full;
 --   * later Chief of Navy correction documents exist;
---   * the correct primary evidence object is correction-aware;
---   * statutory coverage, embedding policy constraints and actual duty are
---     separate sovereignty coordinates.
+--   * the correct primary hearing object is correction-aware;
+--   * leaked secondary reproductions narrow the 2024 embedded-authority
+--     directive while leaving the directive/MOU primary documents unacquired;
+--   * statutory coverage, direction authority, formal command, national-policy
+--     constraint and actual duty are separate sovereignty coordinates.
 ------------------------------------------------------------------------
 
 data LiveRequirement : Set where
@@ -43,8 +47,8 @@ embeddingProtocolCell : Pareto.RequirementCandidate LiveRequirement
 embeddingProtocolCell = Pareto.requirement-candidate
   irisEmbeddingProtocolText
   true true true true
-  3 6
-  "Acquire the actual Australian-US embedding rules/protocol governing RAN personnel during third-party hostilities; this can classify permitted duty but cannot by itself reconstruct the actual watch/task."
+  2 6
+  "Acquire the complete December 2024 Chief of Navy directive and September 2023 exchange-personnel MOU/operative annexes. Secondary reporting already attributes mandatory lawful/reasonable USN direction authority plus an explicit no-command clause, so the fibre is narrower but primary-document authority remains unpaid."
 
 exactOperationalCell : Pareto.RequirementCandidate LiveRequirement
 exactOperationalCell = Pareto.requirement-candidate
@@ -113,6 +117,15 @@ irisMinCut = IRIS.currentMinCut
 
 sovereigntyBoundary : Sovereignty.AUKUSCommandSovereigntyBoundary
 sovereigntyBoundary = Sovereignty.canonicalBoundary
+
+embeddedAuthorityBoundary : Authority.DirectionCommandBoundary
+embeddedAuthorityBoundary = Authority.canonicalBoundary
+
+embeddedDirectiveResidual : Authority.PrimaryDocumentResidual
+embeddedDirectiveResidual = Authority.directiveResidual
+
+ministerialBriefingFOIBoundary : Briefing.MinisterialBriefingFOIReceipt
+ministerialBriefingFOIBoundary = Briefing.canonicalReceipt
 
 iranResidual : Iran.SameEpisodeResidual
 iranResidual = Iran.sameEpisodeResidual
