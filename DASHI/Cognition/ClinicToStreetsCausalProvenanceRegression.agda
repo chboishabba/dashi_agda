@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.ClinicToStreetsCausalProvenanceExact as CTS
+import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact as Detector
 
 fullContextStructuralVisible :
   CTS.ProvenanceVisibility.structuralVisible CTS.fullContext ≡ true
@@ -35,9 +36,9 @@ therapyEssenceFirewall :
 therapyEssenceFirewall = CTS.effectSignatureDoesNotEstablishTherapyEssence
 
 coneInfluenceFirewall :
-  CTS.Detector.ConeDeformationImpliesInfluence → ⊥
+  Detector.ConeDeformationImpliesInfluence → ⊥
 coneInfluenceFirewall = CTS.coneDeformationStillDoesNotEstablishInfluence
 
 provenanceTruthFirewall :
-  CTS.Detector.ProvenanceImpliesTruth → ⊥
+  Detector.ProvenanceImpliesTruth → ⊥
 provenanceTruthFirewall = CTS.provenanceStillDoesNotEstablishTruth
