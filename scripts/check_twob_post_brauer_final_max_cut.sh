@@ -29,6 +29,8 @@ targets=(
   DASHI/Moonshine/OggSSP2BActualQ10RecognitionValidation.agda
   DASHI/Moonshine/OggSSP2B279FirewalledCrossPollinationExact.agda
   DASHI/Moonshine/OggSSP2B279FirewallValidation.agda
+  DASHI/Moonshine/OggSSP2BAugmentationArrowEliminationExact.agda
+  DASHI/Moonshine/OggSSP2BNormWeldCompilerExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -107,4 +109,14 @@ grep -q 'scalar279FromP31IsPaid' "${targets[22]}"
 grep -q 'arithmetic279PaysActualQ10' "${targets[22]}"
 grep -q 'scalar279DoesNotPayActualQ10' "${targets[23]}"
 
+grep -q 'nontrivialActionProducesRelevantArrow' "${targets[24]}"
+grep -q 'zeroRelevantArrowsForceTrivialNormalAction' "${targets[24]}"
+
+grep -q 'residualRankForcedTwentyFour' "${targets[25]}"
+grep -q 'commonKernelForced98280' "${targets[25]}"
+grep -q 'residualMapForcedFrobenius' "${targets[25]}"
+grep -q 'tateCokernelForcedExteriorSquare' "${targets[25]}"
+grep -q 'onlyCommon98280MapRemains' "${targets[25]}"
+
+python3 scripts/test_twob_norm_weld_maxcut.py
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
