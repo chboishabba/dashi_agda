@@ -17,9 +17,30 @@ positiveAndNegativeFeatures :
   × Synthesis.negativeFeaturesObservedInLiterature Synthesis.canonicalPolycentricEvidenceSynthesis ≡ true
 positiveAndNegativeFeatures = refl , refl
 
+ostromNestedEnterpriseMotifPinned :
+  Synthesis.ostromNestedEnterprisesPrinciplePresent Synthesis.canonicalPolycentricEvidenceSynthesis ≡ true
+ostromNestedEnterpriseMotifPinned = refl
+
+baldwinDynamicFeedbackPinned :
+  Synthesis.baldwinCOOFFrameworkProposed Synthesis.canonicalPolycentricEvidenceSynthesis ≡ true
+  × Synthesis.baldwinFeedbackAdjustmentMechanismsExplicit Synthesis.canonicalPolycentricEvidenceSynthesis ≡ true
+baldwinDynamicFeedbackPinned = refl , refl
+
 notPanacea :
   Synthesis.polycentricityIsEmpiricalPanacea Synthesis.canonicalPolycentricEvidenceSynthesis ≡ false
 notPanacea = refl
+
+ostromNotBoloOptimum :
+  Synthesis.ostromPrincipleIsBoloEmpiricalOptimum Synthesis.canonicalPolycentricEvidenceSynthesis ≡ false
+ostromNotBoloOptimum = refl
+
+baldwinDoesNotValidateBolo :
+  Synthesis.baldwinFrameworkDirectlyValidatesBolo Synthesis.canonicalPolycentricEvidenceSynthesis ≡ false
+baldwinDoesNotValidateBolo = refl
+
+attributionDoesNotCollapse :
+  Synthesis.structuralAlignmentMayBeStudiedWithoutAuthorshipCollapse Synthesis.canonicalPolycentricSourceAttributionBoundary ≡ true
+attributionDoesNotCollapse = refl
 
 noDirectBoloBound :
   Synthesis.directBoloCostBoundPaid Synthesis.canonicalPolycentricEvidenceSynthesis ≡ false
