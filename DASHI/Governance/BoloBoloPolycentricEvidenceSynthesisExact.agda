@@ -13,15 +13,25 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- an empirical bolo cost model.
 ------------------------------------------------------------------------
 
-ostrom2010Source : Registry.SourceReference
-ostrom2010Source = Registry.source-reference
+ostrom1990Source : Registry.SourceReference
+ostrom1990Source = Registry.source-reference
+  "Elinor Ostrom"
+  "Governing the Commons: The Evolution of Institutions for Collective Action"
+  "Cambridge University Press"
+  1990
+  "10.1017/CBO9780511807763"
+  "institutional-analysis monograph / common-pool-resource comparative synthesis"
+  "source for design principle 8: for CPRs that are parts of larger systems, appropriation, provision, monitoring, enforcement, conflict resolution and governance activities are organised in multiple layers of nested enterprises; not a prescription of p.m.'s kana/bolo/tega scales and not a bolo optimality theorem"
+
+ostrom2010PolycentricSource : Registry.SourceReference
+ostrom2010PolycentricSource = Registry.source-reference
   "Elinor Ostrom"
   "Beyond Markets and States: Polycentric Governance of Complex Economic Systems"
-  "American Economic Review 100(3):641-672 / Nobel lecture material"
+  "American Economic Review 100(3):641-672"
   2010
   "10.1257/aer.100.3.641"
-  "institutional analysis / polycentric-governance synthesis"
-  "source for the commons design-principle motif that larger connected systems can organise governance activities in multiple nested layers; not a prescription of p.m.'s kana/bolo/tega scales and not a bolo optimality theorem"
+  "polycentric-governance institutional synthesis"
+  "broader source context for polycentric governance of complex systems; kept separate from the 1990 nested-enterprises design-principle provenance"
 
 baldwinEtAl2024Source : Registry.SourceReference
 baldwinEtAl2024Source = Registry.source-reference
@@ -86,7 +96,7 @@ canonicalPolycentricEvidenceSynthesisReceipt =
   GenericReceipt.mkNonPromotingReceipt
     "polycentric governance nested-enterprise and dynamic-feedback evidence synthesis"
     "DASHI.Governance.BoloBoloPolycentricEvidenceSynthesisExact"
-    "ostrom2010Source / baldwinEtAl2024Source / canonicalPolycentricEvidenceSynthesis / canonicalPolycentricSourceAttributionBoundary"
-    "records Ostrom's independently sourced nested-enterprise motif for larger connected commons systems and the Baldwin-Thiel-McGinnis-Kellner review's 179-paper empirical sample, 112-paper core subset, mixed outcomes and Context-Operations-Outcomes-Feedbacks dynamic framework"
-    "nested/polycentric structural similarity does not collapse authorship, neither source specifies p.m.'s architecture or target cost coefficients, and the literature strengthens longitudinal/context/feedback obligations rather than validating bolo'bolo directly"
+    "ostrom1990Source / ostrom2010PolycentricSource / baldwinEtAl2024Source / canonicalPolycentricEvidenceSynthesis / canonicalPolycentricSourceAttributionBoundary"
+    "records Ostrom's 1990 nested-enterprises design principle for CPRs embedded in larger systems, separately retains Ostrom's 2010 polycentric-governance synthesis, and records the Baldwin-Thiel-McGinnis-Kellner review's 179-paper empirical sample, 112-paper core subset, mixed outcomes and Context-Operations-Outcomes-Feedbacks dynamic framework"
+    "nested/polycentric structural similarity does not collapse authorship, none of these sources specifies p.m.'s architecture or target cost coefficients, and the literature strengthens longitudinal/context/feedback obligations rather than validating bolo'bolo directly"
     "agda -i . DASHI/Governance/BoloBoloPolycentricEvidenceSynthesisRegression.agda"
