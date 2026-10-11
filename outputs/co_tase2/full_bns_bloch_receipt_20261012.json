@@ -1,0 +1,25 @@
+{
+  "authority": {
+    "authority_sha256": "32377c575e20bb24b243ee3a4b4b97f2c195058d4886798a18496b1d95d2085c",
+    "bns_number": "194.268",
+    "independent_operation_count": 24,
+    "modeled_operation_count": 24,
+    "exact_operation_table_match": true,
+    "missing_from_model": [],
+    "extra_in_model": []
+  },
+  "bloch": {
+    "bns_number": "194.268",
+    "bns_symbol": "P6_3'/m'm'c",
+    "magnetic_hall_symbol": "-P 6c' 2c",
+    "nuclear_ops": 24,
+    "antiunitary_ops": 12,
+    "bloch_covariance_tests": 384,
+    "sewing_cocycle_tests": 9216,
+    "nodal_tests": 32
+  },
+  "literal_bns_consumed_before_bloch_receipt": true,
+  "local_execution_date": "2026-10-12",
+  "material_hamiltonian_validated": false,
+  "epistemic_boundary": "Exact BNS operation-set identity and finite sewing/covariance tests are paid; the four-band H remains illustrative, not a DFT/Wannier Hamiltonian or quantitative ARPES fit."
+}
