@@ -3,23 +3,32 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 ------------------------------------------------------------------------
 -- CURRENT EXCEPTIONAL E8 / ALBERT MAX-CUT
 --
--- Fail-closed status surface spanning the companion Lean structured-E8/F4
--- finite producers and the source-native Agda rational Albert algebra.
+-- Fail-closed status surface spanning the source-native Agda rational Albert
+-- algebra and the companion Lean structured-E8 / finite-Spin / F4 producers.
 --
--- The live branch now owns:
---   * a concrete signed-basis octonion automorphism subgroup diagnostic of
---     order 1344 and its diagonal Albert lifts;
---   * one explicit non-diagonal bijective Moufang triality automorphism;
---   * five explicit same-carrier Albert automorphism generators, each
---     bijective and Jordan/cubic preserving, plus arbitrary-word closure;
---   * the generic source-written theorem that every [L_a,L_b] is a derivation;
---   * exact-rational diagnostics that their span/derived algebra has dimension
---     52 and centre dimension 0.
+-- Agda natively owns:
+--   * rational H3(O_Q), standard cubic and explicit Jordan product;
+--   * commutativity, unit laws and the exceptional Jordan identity;
+--   * explicit S3, signed-basis and Moufang-triality Albert automorphisms;
+--   * the generic theorem that every [L_a,L_b] is a derivation;
+--   * exact-rational executable diagnostics: derivation span/derived algebra
+--     dimension 52, center 0, regular centralizer dimension 4, and compactness
+--     / root-decomposition diagnostics.
 --
--- The remaining exceptional wall is therefore generation/type recognition and
--- rank certification: full Spin(8)/D4 triality generation, an Agda-checkable
--- 52-dimensional span/independence certificate, F4 root datum/type, then
--- Aut(H_3(O)) = F4 = Stab_E6(1).
+-- Companion Lean now independently owns:
+--   * intrinsic structured E8 root/Weyl data;
+--   * explicit finite W(F4) Cartan/root datum (48 roots, rank four);
+--   * four actual Spin/Tits Albert automorphisms and the exact 384 -> 192
+--     quotient to the independently constructed W(D4) kernel;
+--   * a native projective lift of one outer triality direction and an exhaustive
+--     obstruction to the other inside the current 73728 signed-basis subgroup;
+--   * an arbitrary-element inner-derivation theorem and exact local diagnostic
+--     52 = 28 + 24 = 28 + 8+8+8 on the same rational Albert formulas.
+--
+-- The remaining exceptional wall is no longer generation-by-small-subgroups or
+-- carrier arithmetic.  It is the explicit same-Lie-algebra/root-space bridge
+-- from the concrete Albert derivation algebra to the independent F4 root datum,
+-- plus the strictly stronger group recognition Aut(J)=F4=Stab_E6(1).
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -36,6 +45,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact 
 import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact as Known
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact as Deriv
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as DerivLaw
+import DASHI.Reasoning.AlbertF4LeanCrossProverMaxCutReceiptExact as LeanF4
 
 record ExceptionalCurrentMaxCut : Set where
   constructor exceptional-current-max-cut
@@ -56,12 +66,6 @@ record ExceptionalCurrentMaxCut : Set where
     rationalAlbertS3AutomorphismSubgroupSourceWritten : Bool
     rationalAlbertS3ProductCubicPreservationSourceWritten : Bool
 
-    companionLeanNativeRationalAlbertMirrorSourceWritten : Bool
-    companionLeanFoldedWeylOrder1152Paid : Bool
-    companionLeanD4KernelOrder192Paid : Bool
-    companionLeanThreeEightTrialitySectorsPaid : Bool
-    companionLeanLiteralAlbert3Plus8Plus8Plus8BasisPaid : Bool
-
     signedBasisG2SubgroupPaid : Bool
     selectedMoufangTrialityAutomorphismPaid : Bool
     selectedTrialityProductCubicPreservationPaid : Bool
@@ -70,9 +74,18 @@ record ExceptionalCurrentMaxCut : Set where
     innerDerivationDimension52DiagnosticPaid : Bool
     innerDerivationPerfectCenterlessDiagnosticPaid : Bool
 
-    fullSpin8TrialityFamilyPaid : Bool
-    innerDerivationSpan52KernelCertificatePaid : Bool
-    f4RootDatumPaid : Bool
+    companionLeanFoldedWeylOrder1152Paid : Bool
+    companionLeanF4Root48Rank4Paid : Bool
+    companionLeanSpinCover384ToD4_192Paid : Bool
+    companionLeanFourD4AlbertAutomorphismsPaid : Bool
+    companionLeanG05ProjectiveOuterLiftPaid : Bool
+    companionLeanG24CurrentSignedBasisObstructionPaid : Bool
+    companionLeanDerivation52_28_24DiagnosticPaid : Bool
+
+    agdaInnerDerivationSpan52KernelCertificatePaid : Bool
+    agdaFormalComplexificationPaid : Bool
+    agdaFormalRootSpaceDecompositionPaid : Bool
+    sameLieAlgebraF4RecognitionPaid : Bool
     fullF4AutomorphismRecognitionPaid : Bool
     actualE6UnitStabilizerRecognitionPaid : Bool
 
@@ -90,8 +103,8 @@ canonicalExceptionalCurrentMaxCut =
     true true true
     true true true true
     true true
-    true true true true true
     true true true true true true true
-    false false false false false
+    true true true true true true true
+    false false false false false false
     false false false
-    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. The rational Albert algebra now has five explicit same-carrier bijective Jordan/cubic automorphism generators and a compiler proving arbitrary words in them remain automorphisms. The selected non-diagonal Moufang triality map has an explicit two-sided inverse. Every inner commutator [L_a,L_b] is now source-written as a derivation for arbitrary Albert a,b; the 52-dimensional perfect/centerless span remains an exact-rational diagnostic awaiting a replayable Agda rank certificate. The live algebraic wall is full Spin(8)/D4 triality generation, the 52-span certificate, F4 root-datum recognition, and finally Aut(J)=F4=Stab_E6(1)."
+    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. Agda owns the actual rational Albert algebra and an arbitrary-element theorem that every inner commutator [L_a,L_b] is a derivation. Exact-rational diagnostics give a 52-dimensional perfect centerless derivation algebra with regular centralizer dimension four. Companion Lean independently pays the rank-four 48-root F4 datum, four actual D4/Spin Albert automorphisms with a 384-to-192 same-action quotient, a projective g05 outer lift, a current signed-basis obstruction for g24, and the exact-rational 52=28+24 triality diagnostic. The live wall is the formal complexified root-space/same-Lie-algebra bridge and then Aut(J)=F4=Stab_E6(1); neither dimension 52 nor root count 48 manufactures that bridge."
