@@ -26,6 +26,9 @@ import DASHI.Quantum.TSVF
 import DASHI.Quantum.TSVFTests
 import DASHI.Quantum.AnomalyFreedom
 
+import DASHI.Quantum.QuantumBirthmarkSourceBoundaryExact
+import DASHI.Quantum.QuantumBirthmarkErgodicityExact
+
 import DASHI.Quantum.QuantumMereologyOperatorLocalityAuthorityExact
 import DASHI.Quantum.QuantumMereologyHamiltonianTransportAuthorityExact
 import DASHI.Quantum.QuantumMereologySchwingerObjectiveExact
