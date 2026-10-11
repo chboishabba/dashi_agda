@@ -10,7 +10,7 @@ import DASHI.Cognition.EpsteinPsychedelicParetoSnowballExact as Pareto
 canonicalEpsteinPsychedelicBoundary :
   Network.canonicalEpsteinPsychedelicNetworkBoundary ≡
   Network.epstein-psychedelic-network-boundary
-    true true true true false false false false false
+    true true true true true true false false false false false
 canonicalEpsteinPsychedelicBoundary = refl
 
 sourceBoundaryKeepsAdministrationOpen :
@@ -36,6 +36,18 @@ fundingInstructionStillOpen = refl
 brokerageAttributionDoesNotPayCompletedIntroduction :
   Network.completedThirdPartyIntroductionPaid Network.yuAttributesEpsteinBrokerage ≡ false
 brokerageAttributionDoesNotPayCompletedIntroduction = refl
+
+kuhnIntroductionObserved :
+  Network.acknowledgedByIntroducedParty Network.kuhnIntroductionReceipt ≡ true
+kuhnIntroductionObserved = refl
+
+kuhnIntroductionPurposeBounded :
+  Network.psychedelicPurposeEstablished Network.kuhnIntroductionReceipt ≡ false
+kuhnIntroductionPurposeBounded = refl
+
+conveningProposalNotCompletion :
+  Network.completedAsProposed Network.jointCommunityConveningProposal ≡ false
+conveningProposalNotCompletion = refl
 
 currentEpsteinPsychedelicRoute :
   Pareto.currentFrontierExact ≡ Pareto.currentFrontierExact
