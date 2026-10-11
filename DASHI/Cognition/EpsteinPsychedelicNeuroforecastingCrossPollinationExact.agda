@@ -11,21 +11,18 @@ import DASHI.Cognition.EpsteinPsychedelicNetworkEvidenceExact as Epstein
 ------------------------------------------------------------------------
 -- NEUROFORECASTING x EPSTEIN/YU BEHAVIOUR-RESEARCH CROSS-POLLINATION
 --
--- Source calibration:
+-- Methodology source:
 --   Kosuke Motoki, Shinsuke Suzuki, Ryuta Kawashima, Motoaki Sugiura (2020),
 --   "A Combination of Self-Reported Data and Social-Related Neural Measures
 --    Forecasts Viral Marketing Success on Social Media",
 --   Journal of Interactive Marketing 52:99-117,
 --   DOI 10.1016/j.intmar.2020.06.003.
 --
--- The paper studies fMRI responses while 40 participants viewed video ads that
--- brands had posted on Facebook.  Social-related neural measures contributed to
--- forecasting aggregate sharing; subjective sharing intention alone did not.
--- A combined model outperformed the social-neural-only model.
---
--- This module is a methodology donor only.  It does NOT establish that Meta
--- authored the paper, that Instagram deployed the model, that neural prediction
--- identifies a behavioural mechanism, or that Epstein/Yu used neuroforecasting.
+-- Independent Yu background source:
+--   WIRED (2017), "Inside Silicon Valley's new non-religion: consciousness
+--   hacking", profiles Gino Yu as using interactive media/VR plus EEG and fMRI
+--   in consciousness research.  This establishes background capability/context,
+--   not use of those methods in an Epstein-funded programme.
 ------------------------------------------------------------------------
 
 data PlatformSurface : Set where
@@ -60,14 +57,7 @@ motoki2020Receipt = neuroforecasting-source-receipt
   "Kosuke Motoki; Shinsuke Suzuki; Ryuta Kawashima; Motoaki Sugiura"
   "A Combination of Self-Reported Data and Social-Related Neural Measures Forecasts Viral Marketing Success on Social Media"
   "10.1016/j.intmar.2020.06.003"
-  40
-  facebookVideoAds
-  true
-  true
-  false
-  true
-  false
-  false
+  40 facebookVideoAds true true false true false false
 
 record PredictionDirectionReceipt : Set where
   constructor prediction-direction-receipt
@@ -88,6 +78,27 @@ fmriObserverBoundary : Neural.NeuralLaplacianBoundary
 fmriObserverBoundary = Neural.canonicalNeuralLaplacianBoundary
 
 ------------------------------------------------------------------------
+-- Independent Yu technical-background receipt.
+------------------------------------------------------------------------
+
+record YuNeurotechBackgroundReceipt : Set where
+  constructor yu-neurotech-background-receipt
+  field
+    source : String
+    interactiveMediaReported : Bool
+    virtualRealityReported : Bool
+    EEGReported : Bool
+    fMRIReported : Bool
+    epsteinFundedUseEstablished : Bool
+    neuroforecastingUseEstablished : Bool
+open YuNeurotechBackgroundReceipt public
+
+ginoYuIndependentNeurotechBackground : YuNeurotechBackgroundReceipt
+ginoYuIndependentNeurotechBackground = yu-neurotech-background-receipt
+  "WIRED 2017 consciousness-hacking profile"
+  true true true true false false
+
+------------------------------------------------------------------------
 -- Cross-pollination with the Epstein/Yu tranche.
 ------------------------------------------------------------------------
 
@@ -96,6 +107,7 @@ record EpsteinYuNeuroforecastingComparison : Set where
   field
     yuCommunityProposalExists : Bool
     yuBehaviourLanguagePresent : Bool
+    yuIndependentEEGFMRIBackground : Bool
     validatedNeuroforecastingUseByEpsteinYu : Bool
     validatedFMRIProgrammeByEpsteinYu : Bool
     populationForecastingEqualsBehaviourControl : Bool
@@ -104,7 +116,7 @@ open EpsteinYuNeuroforecastingComparison public
 
 currentComparison : EpsteinYuNeuroforecastingComparison
 currentComparison = epstein-yu-neuroforecasting-comparison
-  true true false false false false
+  true true true false false false false
 
 ------------------------------------------------------------------------
 -- PROMOTION FIREWALLS.
@@ -113,6 +125,7 @@ currentComparison = epstein-yu-neuroforecasting-comparison
 data ForecastEstablishesMechanism : Set where
 data FacebookResultEstablishesInstagramDeployment : Set where
 data NeuroforecastingEstablishesEpsteinYuUse : Set where
+data BackgroundEstablishesEpsteinFundedUse : Set where
 data AggregatePredictionEstablishesIndividualControl : Set where
 data FMRIObservationRecoversMicroscopicState : Set where
 
@@ -126,6 +139,10 @@ facebookResultDoesNotEstablishInstagramDeployment ()
 neuroforecastingDoesNotEstablishEpsteinYuUse :
   NeuroforecastingEstablishesEpsteinYuUse → ⊥
 neuroforecastingDoesNotEstablishEpsteinYuUse ()
+
+backgroundDoesNotEstablishEpsteinFundedUse :
+  BackgroundEstablishesEpsteinFundedUse → ⊥
+backgroundDoesNotEstablishEpsteinFundedUse ()
 
 aggregatePredictionDoesNotEstablishIndividualControl :
   AggregatePredictionEstablishesIndividualControl → ⊥
@@ -142,6 +159,7 @@ record NeuroforecastingCrossPollinationBoundary : Set where
     instagramDeploymentPaid : Bool
     metaAuthorshipPaid : Bool
     aggregateForecastingRetained : Bool
+    yuEEGFMRIBackgroundRetained : Bool
     individualControlPaid : Bool
     epsteinYuMethodTransferPaid : Bool
     coarseFMRIObserverBoundaryRetained : Bool
@@ -150,4 +168,4 @@ canonicalNeuroforecastingCrossPollinationBoundary :
   NeuroforecastingCrossPollinationBoundary
 canonicalNeuroforecastingCrossPollinationBoundary =
   neuroforecasting-cross-pollination-boundary
-    true false false true false false true
+    true false false true true false false true
