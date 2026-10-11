@@ -6,6 +6,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact as VacuumSign
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumContinuationCompilerExact as Continuation
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabilityExact as VacuumNI
 import DASHI.Physics.Foundations.GRQFTSingleVacuumNormalizationScaleCovarianceExact as Scale
 import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
@@ -32,6 +33,10 @@ stageCNormalizationScaleCovariance = Scale.canonicalSingleVacuumNormalizationSca
 stageDDifferentialRenormalization : Differential.DifferentialVacuumRenormalizationBoundary
 stageDDifferentialRenormalization = Differential.canonicalDifferentialVacuumRenormalizationBoundary
 
+sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
+sourceVacuumSequenceRequiresIndependentPhysicalPayment =
+  VacuumNI.sourceVacuumSequenceRequiresIndependentPhysicalPayment
+
 record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
   constructor antigravity-single-vacuum-physical-promotion-frontier
   field
@@ -42,6 +47,8 @@ record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
     singleVacuumSafeBandOwned : Bool
     multiplicativeNormalizationScaleCovarianceOwned : Bool
     commonAdditiveCountertermCancelsInDifferentialLane : Bool
+    couplingAndERBHistoryDetermineVacuumSequence : Bool
+    sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 
     unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence : Bool
     unknownPositiveMultiplicativeMagnitudeBlocksAbsoluteDeviceSize : Bool
@@ -56,7 +63,7 @@ canonicalAntigravitySingleVacuumPhysicalPromotionFrontier :
   AntigravitySingleVacuumPhysicalPromotionFrontier
 canonicalAntigravitySingleVacuumPhysicalPromotionFrontier =
   antigravity-single-vacuum-physical-promotion-frontier
-    true true false true true true true
+    true true false true true true true false true
     false true true true true true true true
 
 selectedCMP119VacuumContinuationWeldStillOpen : Bool
