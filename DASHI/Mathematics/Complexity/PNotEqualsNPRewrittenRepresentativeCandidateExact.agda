@@ -4,7 +4,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPRewrittenRepresentativeCandidate
 -- REPAIRED Q1 REPRESENTATIVE CARRIER
 --
 -- RawRestrictionRepresentativeNoGoExact proves that a raw Shannon restriction
--- never has smaller Cook syntax-node count than its root.  Therefore the old
+-- never has smaller Cook syntax-node count than its root. Therefore the old
 -- carrier
 --
 --   reachable raw restriction + strictly-smaller raw restriction
@@ -12,19 +12,22 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPRewrittenRepresentativeCandidate
 -- is empty.
 --
 -- Repair:
---   raw reachable restriction = provenance / state-membership witness
---   RewriteProgram           = answer-blind normalization witness
---   literal terminal constant = strict semantic representative
+--   raw reachable restriction  = provenance / state-membership witness
+--   RewriteProgram             = answer-blind normalization witness
+--   literal terminal constant  = strict semantic representative
 --
 -- The only global strictness premise is that the root has more than one Cook
--- syntax node.  Every normalized representative is a literal constant of node
+-- syntax node. Every normalized representative is a literal constant of node
 -- count one.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin)
 open import Data.Nat.Base using (_<_)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -177,7 +180,7 @@ normalizedTruth :
     {root : SAT.BooleanFormula rootVariables}
     (candidate : RewrittenRepresentativeCandidate root)
     (state : Fin (Generated.stateCount (generatedQuotient candidate))) →
-  Agda.Builtin.Bool.Bool
+  Bool
 normalizedTruth candidate state =
   Rewrite.rewriteProgramTruth
     (normalization
@@ -212,9 +215,7 @@ rewrittenRepresentativeEquivalent :
         (Generated.step (generatedQuotient candidate))
         derivation))
 rewrittenRepresentativeEquivalent candidate derivation =
-  composeCookEquivalent
-    currentToRaw
-    rawToTerminal
+  composeCookEquivalent currentToRaw rawToTerminal
   where
     generated :
       Generated.TransitionGeneratedRestrictionQuotient root
@@ -245,8 +246,7 @@ rewrittenRepresentativeEquivalent candidate derivation =
         (Generated.step generated)
         (rawDerivation source)
     sameGenerated =
-      Agda.Builtin.Equality.sym
-        (rawSelectsState source)
+      sym (rawSelectsState source)
 
     currentToRaw :
       Strict.CookSatisfiabilityEquivalent
@@ -316,6 +316,6 @@ toRewriteGeneratedClosedRepresentativeQuotient candidate =
 --   literal constant.
 --
 -- Strict semantic representative and representative-equivalence are then
--- derived.  This is compatible with the raw-node-count no-go rather than
+-- derived. This is compatible with the raw-node-count no-go rather than
 -- contradicting it.
 ------------------------------------------------------------------------
