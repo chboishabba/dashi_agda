@@ -6,6 +6,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBNS194268SameObjectExact as BNS
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBlochRepresentationBoundaryExact as Bloch
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedMaterialProducerExact as Material
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedARPESConstraintsExact as PublishedARPES
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESWitnessGateExact as ARPES
 
 record CoQuarterTaSeTwoMaxCutStatus : Set where
@@ -18,6 +19,7 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     sewingCocycleExecutionClosed : Bool
     publishedCrystalBasisFixed : Bool
     publishedDFTRecipeFixed : Bool
+    publishedARPESSummaryConstraintsFixed : Bool
     materialHamiltonianClosed : Bool
     rawARPESPayloadPresent : Bool
     exactSpectralObserverClosed : Bool
@@ -27,6 +29,7 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
 canonicalCoQuarterTaSeTwoMaxCutStatus : CoQuarterTaSeTwoMaxCutStatus
 canonicalCoQuarterTaSeTwoMaxCutStatus =
   co-quarter-tase-two-max-cut-status
+    true
     true
     true
     true
@@ -48,6 +51,9 @@ existingBlochStatus = Bloch.canonicalBlochSewingContract
 
 existingMaterialProducerStatus : Material.MaterialHamiltonianProducerStatus
 existingMaterialProducerStatus = Material.canonicalMaterialHamiltonianProducerStatus
+
+existingPublishedARPESStatus : PublishedARPES.PublishedTargetStatus
+existingPublishedARPESStatus = PublishedARPES.canonicalPublishedTargetStatus
 
 existingARPESStatus : ARPES.CoARPESAcquisitionStatus
 existingARPESStatus = ARPES.canonicalCoARPESAcquisitionStatus
