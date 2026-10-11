@@ -16,6 +16,8 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact 
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
 import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as AIAgentAttribution
+import DASHI.Law.AustralianCommonwealthAgentComputerOffenceAttribution2026Exact as CommonwealthAgentLaw
+import DASHI.Law.AIAgentLegalAcquisitionProgress20261012Exact as AILegalProgress
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -89,11 +91,26 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
 
--- AI-agent legal attribution is now carried through the same SensibLaw parity
--- surface.  The named Medicare incident remains an explicitly unpromoted
--- application until the exact runtime trace and offence/attribution receipts
--- exist.
+-- AI-agent legal attribution is carried through the same SensibLaw parity
+-- surface. The Commonwealth primary-law owner now pays the candidate statutory
+-- source/element structure while runtime, applicability, fault and corporate
+-- attribution remain independent receipts.
 selectedMedicareAIAgentLegalBoundary :
   AIAgentAttribution.NamedIncidentLegalBoundary
 selectedMedicareAIAgentLegalBoundary =
   AIAgentAttribution.medicareLegalAttributionBoundary
+
+selectedMedicare4781Boundary :
+  CommonwealthAgentLaw.Section4781ApplicationBoundary
+selectedMedicare4781Boundary =
+  CommonwealthAgentLaw.medicare4781ApplicationBoundary
+
+selectedCandidateOffenceSourceProgress :
+  AILegalProgress.LegalProducerProgress
+selectedCandidateOffenceSourceProgress =
+  AILegalProgress.candidateOffenceSourceAcquired
+
+selectedCorporateFaultProgress :
+  AILegalProgress.LegalProducerProgress
+selectedCorporateFaultProgress =
+  AILegalProgress.corporateFaultStillOpen
