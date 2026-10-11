@@ -8,14 +8,19 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- DOBLIN / MAPS PUBLIC-BENEFIT <-> PRIVATE-PROFIT ATTRIBUTION OWNER
 --
--- Primary attributed source for this owner:
+-- Attributed source:
 --   Rick Doblin, "The Balance at MAPS Between Public Benefit and Private
 --   Profit", Psychedelic Alpha, 23 Jan 2023.
 --
--- This is Doblin writing about the organisation he founded.  It strongly pays
--- claims about his stated goals, reasoning and representation of MAPS/MAPS PBC,
--- but is not treated as independent verification of every financial or
--- institutional self-characterisation.
+-- Independent institutional follow-up:
+--   MAPS, "MAPS Welcomes New Investors, Name Change for MAPS Public Benefit
+--   Corporation", 5 Jan 2024.
+--
+-- Doblin's essay strongly pays claims about his stated goals, reasoning and
+-- representation of MAPS/MAPS PBC, but is not treated as independent
+-- verification of every financial or institutional self-characterisation.
+-- The 2024 MAPS release independently pays the later financing/ownership change
+-- as an institutional record, while still remaining a MAPS-authored source.
 ------------------------------------------------------------------------
 
 data AttributionKind : Set where
@@ -30,6 +35,9 @@ data GovernanceClaim : Set where
   donorFundedOpenScienceClaim : GovernanceClaim
   revenueShareFinancingClaim : GovernanceClaim
   publicBenefitPriorityClaim : GovernanceClaim
+  seriesAOver100mClaim : GovernanceClaim
+  sharedOwnershipAfterSeriesAClaim : GovernanceClaim
+  retainedVotingAndBoardOversightClaim : GovernanceClaim
 
 record AttributedGovernanceReceipt : Set where
   constructor attributed-governance-receipt
@@ -79,6 +87,33 @@ doblinRevenueShareReceipt = attributed-governance-receipt
   revenueShareFinancingClaim
   true false
 
+mapsSeriesAReceipt : AttributedGovernanceReceipt
+mapsSeriesAReceipt = attributed-governance-receipt
+  "Multidisciplinary Association for Psychedelic Studies"
+  "MAPS press release"
+  "2024-01-05"
+  independentInstitutionalRecord
+  seriesAOver100mClaim
+  true true
+
+mapsSharedOwnershipReceipt : AttributedGovernanceReceipt
+mapsSharedOwnershipReceipt = attributed-governance-receipt
+  "Multidisciplinary Association for Psychedelic Studies"
+  "MAPS press release"
+  "2024-01-05"
+  independentInstitutionalRecord
+  sharedOwnershipAfterSeriesAClaim
+  true true
+
+mapsOversightReceipt : AttributedGovernanceReceipt
+mapsOversightReceipt = attributed-governance-receipt
+  "Multidisciplinary Association for Psychedelic Studies"
+  "MAPS press release"
+  "2024-01-05"
+  independentInstitutionalRecord
+  retainedVotingAndBoardOversightClaim
+  true true
+
 ------------------------------------------------------------------------
 -- ATTRIBUTION FIREWALLS.
 ------------------------------------------------------------------------
@@ -87,6 +122,7 @@ data SelfReportIndependentlyVerifiesInstitution : Set where
 data PublicBenefitClaimProvesPublicBenefitOutcome : Set where
 data MissionStatementNegatesInvestorPressure : Set where
 data ForProfitTensionProvesCorruption : Set where
+data InstitutionalPressReleaseEqualsExternalAudit : Set where
 
 selfReportDoesNotIndependentlyVerify :
   SelfReportIndependentlyVerifiesInstitution → ⊥
@@ -104,6 +140,10 @@ forProfitTensionDoesNotProveCorruption :
   ForProfitTensionProvesCorruption → ⊥
 forProfitTensionDoesNotProveCorruption ()
 
+institutionalReleaseDoesNotEqualExternalAudit :
+  InstitutionalPressReleaseEqualsExternalAudit → ⊥
+institutionalReleaseDoesNotEqualExternalAudit ()
+
 record DoblinMAPSGovernanceBoundary : Set where
   constructor doblin-maps-governance-boundary
   field
@@ -112,7 +152,9 @@ record DoblinMAPSGovernanceBoundary : Set where
     publicBenefitProfitTensionExplicit : Bool
     publicBenefitClaimEqualsMeasuredOutcome : Bool
     investorPressureMayCoexistWithMission : Bool
+    laterSharedOwnershipInstitutionallyRecorded : Bool
+    institutionalRecordEqualsExternalAudit : Bool
 
 canonicalDoblinMAPSGovernanceBoundary : DoblinMAPSGovernanceBoundary
 canonicalDoblinMAPSGovernanceBoundary =
-  doblin-maps-governance-boundary true false true false true
+  doblin-maps-governance-boundary true false true false true true false
