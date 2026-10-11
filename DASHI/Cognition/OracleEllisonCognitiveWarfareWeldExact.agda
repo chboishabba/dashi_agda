@@ -13,6 +13,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact as Detection
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact as Existing
+import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Orthogonality
 import DASHI.Cognition.OracleEllisonChinaIsraelComparativeFibreExact as Compare
 
 ------------------------------------------------------------------------
@@ -37,6 +38,12 @@ existingConeDoesNotImplyHostileInfluence :
   ≡ false
 existingConeDoesNotImplyHostileInfluence = refl
 
+sensibLawSourceAttributionDoesNotCreateTruth :
+  Orthogonality.ProvenanceSemanticStatusOrthogonalityBoundary.sourceAttributionCreatesTruth
+    Orthogonality.canonicalProvenanceSemanticStatusOrthogonalityBoundary
+  ≡ false
+sensibLawSourceAttributionDoesNotCreateTruth = refl
+
 ------------------------------------------------------------------------
 -- Case interpretation.
 ------------------------------------------------------------------------
@@ -53,6 +60,9 @@ operationalIntegrationPaysPoliticalMotive = false
 sharedSecurityFunctionPaysCommonIdeology : Bool
 sharedSecurityFunctionPaysCommonIdeology = false
 
+localCounterevidencePaysGlobalAbsence : Bool
+localCounterevidencePaysGlobalAbsence = false
+
 provenanceCanRefineOriginQuery : Bool
 provenanceCanRefineOriginQuery = true
 
@@ -68,8 +78,9 @@ record OracleEllisonDetectorBoundary : Set where
     vendorCreatesControllerIdentity : Bool
     integrationCreatesMotive : Bool
     sameFunctionCreatesCommonIdeology : Bool
+    localCounterevidenceCreatesGlobalAbsence : Bool
 
 canonicalOracleEllisonDetectorBoundary : OracleEllisonDetectorBoundary
 canonicalOracleEllisonDetectorBoundary =
   oracle-ellison-detector-boundary
-    true true false false false false
+    true true false false false false false
