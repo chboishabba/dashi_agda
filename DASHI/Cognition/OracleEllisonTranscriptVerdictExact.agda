@@ -29,7 +29,7 @@ verdict Claims.ellisonImmortalityMotive = unsupported
 verdict Claims.oracleChinaPoliceGoldenShield = supported
 verdict Claims.oracleRafaelDefenseIntegration = supported
 verdict Claims.oracleNimbusPrimeCloudProvider = contradictedOrMateriallyCounterevidenced
-verdict Claims.oracleWritesIsraeliSecurityBlueprint = contradictedOrMateriallyCounterevidenced
+verdict Claims.oracleWritesIsraeliSecurityBlueprint = unsupported
 verdict Claims.commonControllerFromSharedVendor = unsupported
 
 ------------------------------------------------------------------------
@@ -47,6 +47,9 @@ interpretiveMeansFalse _ = false
 
 counterevidenceMeansNoOracleIsraelRelationship : Verdict → Bool
 counterevidenceMeansNoOracleIsraelRelationship _ = false
+
+unsupportedMeansContradicted : Verdict → Bool
+unsupportedMeansContradicted _ = false
 
 ------------------------------------------------------------------------
 -- Key regressions.
@@ -69,6 +72,11 @@ oracleNimbusPrimeCounterevidenced :
   ≡ contradictedOrMateriallyCounterevidenced
 oracleNimbusPrimeCounterevidenced = refl
 
+oracleBlueprintUnsupportedNotRefuted :
+  verdict Claims.oracleWritesIsraeliSecurityBlueprint
+  ≡ unsupported
+oracleBlueprintUnsupportedNotRefuted = refl
+
 record VerdictBoundary : Set where
   constructor verdict-boundary
   field
@@ -77,7 +85,8 @@ record VerdictBoundary : Set where
     supportedAntecedentDoesNotPayConsequent : Bool
     motiveRequiresIndependentPayment : Bool
     counterevidenceCanBeLocalToOneClaim : Bool
+    unsupportedDoesNotMeanFalse : Bool
 
 canonicalVerdictBoundary : VerdictBoundary
 canonicalVerdictBoundary =
-  verdict-boundary true true true true true
+  verdict-boundary true true true true true true
