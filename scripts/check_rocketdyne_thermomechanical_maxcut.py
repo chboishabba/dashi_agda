@@ -25,6 +25,10 @@ EXPECT = {
         "currentTerminalFrontier", "archiveGeometryExhaustedForUniqueStress",
         "sameModelCalibrationStillOpen", "empiricalMaterialDependencePaid"
     ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974LatestSourceComparisonNote.agda": [
+        "nasa2026NiobiumComparator", "canonicalContemporaryComparatorBoundary",
+        "contemporaryComparatorDoesNotPayHistoricalLaw"
+    ],
 }
 
 def main() -> int:
