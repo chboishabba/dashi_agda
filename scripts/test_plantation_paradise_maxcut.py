@@ -36,6 +36,7 @@ EXPECTED = {
         "recognitionCannotRecoverDistribution",
         "localExpansionDoesNotProveGlobalEmancipation",
         "sourceClaimDoesNotBecomeDASHITheorem",
+        "historicalClaimBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
         "_paradise-material-gap-paid",
