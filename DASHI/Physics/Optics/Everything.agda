@@ -12,3 +12,7 @@ open import DASHI.Physics.Optics.PhotonDetectorChannelExact public
 open import DASHI.Physics.Optics.DiffuserInformationDesignExact public
 open import DASHI.Physics.Optics.MatchedPhotonImagerComparatorExact public
 open import DASHI.Physics.Optics.Diffraction3DImagingPhysicalMaxCutExact public
+open import DASHI.Physics.Optics.BerkeleyDiffuserCamPublicCalibrationExact public
+open import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact public
+open import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact public
+open import DASHI.Physics.Optics.Diffraction3DImagingAcquisitionMaxCutExact public
