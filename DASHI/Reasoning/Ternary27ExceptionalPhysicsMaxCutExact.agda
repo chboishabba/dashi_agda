@@ -3,15 +3,19 @@ module DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Foundations.FirstTitsAlbertE6F4ClassicalSourceExact as Classical
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact as Tits
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsDerivationF4SignalExact as Derivation
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsF4RootRecognitionExact as F3Root
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact as RationalE6F4
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsGlobalE6F4RecognitionExact as GlobalE6F4
 import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact as H13
 import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact as SM
 import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact as TriE6
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact as GR
-import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact as GRNoGo
+import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact as ScalarNoGo
+import DASHI.Physics.Closure.E6HyperformPositiveGaugeVacuumNoGoExact as GaugeNoGo
+import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact as ClockNoGo
 import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact as Consciousness
 import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact as BrainIT
 import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact as AlbertF4
@@ -19,25 +23,22 @@ import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact as AlbertF4
 ------------------------------------------------------------------------
 -- CURRENT EXCEPTIONAL-PHYSICS MAX-CUT
 --
--- The mathematical frontier has moved past cardinality/dimension matching.
--- Local exact executables now operate on the actual first-Tits product/cubic:
+-- The programme is now past cardinality/dimension matching.  Local exact
+-- executables operate on the actual first-Tits product/cubic and recover the
+-- E6/F4 Lie-root structure; classical Albert theory supplies the matching
+-- global algebraic-group theorem at source level.  The live algebra seam is
+-- kernelization/application and split-form same-object realization.
 --
--- * literal ternary27 <-> first-Tits basis slots;
--- * literal ternary27 <-> Heisenberg/Schlaefli 6+15+6 chart;
--- * full first-Tits Jordan diagnostics;
--- * 52-dimensional derivations, inner-generated/perfect/centreless;
--- * rank-4 / 48-root mod-3 F4 root-set recognition;
--- * rational cubic norm-symmetry dimension 78 with rank-6 / 72-root E6 Cartan;
--- * rational unit stabilizer dimension 52 equals the Jordan-derivation subspace;
--- * rational F4 rank-4 / 48-root Cartan with 24 short + 24 long roots;
--- * literal SL3^3 trinification Cartan recovers that same E6 root system;
--- * standard hypercharge spectrum/anomaly sums on the same 27 carrier;
--- * exceptional quadratic -> Poisson -> nonflat continuum Lorentz metric;
--- * minimally-coupled scalar + vacuum matter family refuted at the origin;
--- * real propofol intervention discriminator plus Brain-IT neural-observation
---   acquisition lane.
---
--- Kernel/global-group/physical-observation promotions remain independent.
+-- The physical lanes are now equally explicit about falsifiers:
+-- * the literal SL3^3 action is inside the same first-Tits E6 symmetry;
+-- * the exceptional quadratic produces a nonflat continuum Lorentz metric;
+-- * minimally coupled scalar+vacuum and canonical positive-energy pure
+--   gauge+vacuum sourcing are locally impossible for that selected metric;
+-- * unit-amplitude metric + candidate one-Cs-period light-travel lattice scale
+--   overshoots the Bothwell--Ye clock gradient by >1e17, so a separately
+--   derived weak-coupling/refinement scale is mandatory;
+-- * propofol and Brain-IT provide real complementary empirical acquisition
+--   lanes, but no exceptional-neural same-object realization is manufactured.
 ------------------------------------------------------------------------
 
 record Ternary27ExceptionalPhysicsMaxCut : Set where
@@ -51,6 +52,8 @@ record Ternary27ExceptionalPhysicsMaxCut : Set where
     rationalE6LieRootRecognitionPaidLocally : Bool
     rationalF4LieRootRecognitionPaidLocally : Bool
     rationalUnitStabilizerEqualsDerivationsPaidLocally : Bool
+    classicalGlobalE6F4TheoremSourcePaid : Bool
+    sourceLevelGlobalE6F4ApplicationSupported : Bool
 
     trinificationLocalCubicActionPaid : Bool
     trinificationSameE6LieActionPaidLocally : Bool
@@ -59,6 +62,9 @@ record Ternary27ExceptionalPhysicsMaxCut : Set where
     exceptionalPoissonSourcePaid : Bool
     nonflatMetricConnectionDiagnosticsPaid : Bool
     minimalScalarPlusVacuumMatterRefuted : Bool
+    positiveGaugePlusVacuumMatterRefutedForSelectedMetric : Bool
+    naiveAtomicScaleUnitAmplitudeRefuted : Bool
+    weakGravityScaleRequired : Bool
 
     measuredPropofolPhysicalDiscriminatorPaid : Bool
     brainITMeasuredNeuralObservationDonorPinned : Bool
@@ -67,9 +73,10 @@ record Ternary27ExceptionalPhysicsMaxCut : Set where
     sameKernelAgdaE6F4RecognitionPaid : Bool
     splitFirstTitsToSplitOctonionAlbertSameObjectPaid : Bool
     positiveRationalAlbertEqualsSplitFirstTitsPaid : Bool
-    globalE6NormGroupRecognitionPaid : Bool
-    globalF4EqualsAlbertAutomorphismPaid : Bool
+    agdaGlobalE6NormGroupTheoremPaid : Bool
+    agdaGlobalF4AutomorphismTheoremPaid : Bool
     trinificationToRepoContinuousDHRSameSubgroupPaid : Bool
+    physicalWeakGravityScaleDerived : Bool
     physicalStressEnergyProducedIndependentlyPaid : Bool
     physicalEinsteinMatterEqualityPaid : Bool
     exceptionalNeuralSameObjectPaid : Bool
@@ -84,19 +91,15 @@ open Ternary27ExceptionalPhysicsMaxCut public
 currentTernary27ExceptionalPhysicsMaxCut : Ternary27ExceptionalPhysicsMaxCut
 currentTernary27ExceptionalPhysicsMaxCut =
   ternary27-exceptional-physics-max-cut
-    true true true true true true true true
+    true true true true true true true true true true
     true true true
-    true true true
+    true true true true true true
     true true
-    false false false false false false false false false false false
-    "Kernelize the actual first-Tits product/cubic and the rational 78/52 Lie-root computations. Construct the correct split-Albert/split-octonion same-object intertwiner; the old target to the repository positive rational H3(O_Q) is explicitly blocked by trace-signature mismatch. Then lift Lie-algebra recognition to the global E6 norm group and F4=Aut(J)=Stab_E6(1)."
-    "The literal SL3^3 action is now inside the same first-Tits E6 norm-symmetry algebra and supplies the standard hypercharge generator on the same 27. Remaining physics work is the continuous/DHR same-action interpretation, symmetry-breaking/scale realization and observed particle-dynamics receipts, not exceptional subgroup identification."
-    "The exceptional quadratic now derives a nonflat metric, and minimally-coupled scalar plus vacuum stress is locally impossible because G_mu_nu is not proportional to g_mu_nu at the stationary origin. Produce anisotropic gauge/spinor or nonminimal T_mu_nu independently from the trinification matter lane, calibrate it, and test Einstein equality on the same continuum carrier."
-    "Propofol pays a real intervention/state-transition discriminator and Brain-IT supplies a real fMRI/connectome-observation donor. Acquire raw same-subject neural coordinates with scanner/calibration provenance, apply a predeclared exceptional/topological feature map, and test held-out competing predictions. Decoder success or cluster counts cannot create the exceptional realization or consciousness mechanism."
-
-------------------------------------------------------------------------
--- Existing positive-rational Albert frontier remains a separate real-form lane.
-------------------------------------------------------------------------
+    false false false false false false false false false false false false
+    "Mathematically, the standard first-Tits/Albert classification now points to global E6 norm symmetry and F4 automorphisms, independently reinforced by the actual 78/52 Lie-root computations. Remaining algebra work is same-kernel proof that the source-written M3^3 formulas inhabit the classical first-Tits hypotheses, construction of the split-octonion same-object equivalence, and kernel/global-group formalization. The positive rational H3(O_Q) real form remains distinct by the proved trace-signature obstruction."
+    "The literal SL3^3 trinification action is already inside the same first-Tits E6 norm-symmetry algebra and yields the standard one-generation hypercharge spectrum. Remaining gauge work is the continuous/DHR action intertwiner, physical symmetry-breaking/scale realization, masses/couplings and held-out particle observables; exceptional subgroup identity itself is no longer the main wall."
+    "The selected exceptional Poisson metric is nonflat, but scalar+vacuum and canonical positive-energy pure gauge+vacuum sources fail locally, and the naive one-Cs-period light-travel edge with unit field amplitude overshoots the atomic-clock redshift gradient by >1e17. Derive the weak-coupling/refinement scale rather than fitting it, reconsider/enrich the metric ansatz if necessary, independently produce anisotropic/spinor/massive/nonminimal T_mu_nu, and test Einstein equality plus held-out clock/gravity observables."
+    "Propofol pays a real intervention/state-transition discriminator and Brain-IT supplies a real fMRI/connectome-observation donor. Acquire raw same-subject neural coordinates with scanner/calibration provenance, apply a predeclared exceptional/topological feature map, and test held-out competing predictions. Decoder success, 128 clusters, or behavioral collision cannot create the exceptional realization or consciousness mechanism."
 
 existingAlbertF4Frontier : AlbertF4.AlbertF4Frontier
 existingAlbertF4Frontier = AlbertF4.currentAlbertF4Frontier
@@ -106,13 +109,15 @@ record MaxCutAttributionBoundary : Set where
   field
     existingPositiveRationalAlbertRetained : Bool
     splitFirstTitsRouteKeptDistinct : Bool
+    classicalGroupTheoremSourceNotKernelAuthority : Bool
     localPythonIsNotAgdaKernelAuthority : Bool
-    lieRootRecognitionDoesNotCreateGlobalGroup : Bool
+    lieRootRecognitionDoesNotByItselfCreateGlobalKernelGroup : Bool
     trinificationDoesNotByItselfProvePhysicalSM : Bool
-    derivedMetricDoesNotByItselfProveEinsteinMatterPhysics : Bool
+    clockCalibrationMismatchDoesNotRefuteAbstractExceptionalGeometry : Bool
+    matterFamilyNoGosDoNotRefuteGR : Bool
     measuredDiscriminatorDoesNotByItselfProveConsciousness : Bool
 open MaxCutAttributionBoundary public
 
 canonicalMaxCutAttributionBoundary : MaxCutAttributionBoundary
 canonicalMaxCutAttributionBoundary =
-  max-cut-attribution-boundary true true true true true true true
+  max-cut-attribution-boundary true true true true true true true true true
