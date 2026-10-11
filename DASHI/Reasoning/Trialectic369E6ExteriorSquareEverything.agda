@@ -20,9 +20,18 @@ import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutValidation
 import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact
 import DASHI.Reasoning.AlbertF4ExceptionalCapstoneValidation
 
--- Ternary basis / first-Tits / physics-facing max-cut.
+-- Ternary basis / first-Tits / exceptional algebra recognition.
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsDerivationF4SignalExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsF4RootRecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact
+import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact
+
+-- Physics-facing max-cut.
 import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
+import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
+import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact
 import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
+import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact
 import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
