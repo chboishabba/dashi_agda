@@ -9,6 +9,7 @@ import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as D
 import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Id
 import DASHI.Physics.Propulsion.Rocketdyne1974ThermalModelValidationExact as Therm
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as Fals
+import DASHI.Physics.Propulsion.Rocketdyne1974LatestSourceComparisonNote as Latest
 
 ------------------------------------------------------------------------
 -- TERMINAL PUBLIC-SOURCE FRONTIER
@@ -22,10 +23,16 @@ import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierE
 --   * proof that missing local wall thickness makes thin-shell stress
 --     non-unique even at fixed pressure-radius load.
 --
+-- A 2026 NASA niobium-ODS stress-rupture result is retained only as a modern
+-- comparator showing that oxidation/coating remain live survivability
+-- coordinates. It does NOT pay the historical WC103/VH-101 constitutive law.
+--
 -- The remaining calibrated prediction is therefore an EXTERNAL producer problem,
 -- not another abstract formalisation problem.
 ------------------------------------------------------------------------
 
+-- "Exhausted" is scoped to the currently acquired public R-9557/R-9557-1
+-- report surface: the archive may contain further drawings or engineering data.
 archiveGeometryExhaustedForUniqueStress : Bool
 archiveGeometryExhaustedForUniqueStress = true
 
@@ -76,3 +83,6 @@ thermalReceipt = Therm.canonicalThermalModelBoundary
 
 materialDependenceReceipt : Fals.MaterialDependenceBoundary
 materialDependenceReceipt = Fals.canonicalMaterialDependenceBoundary
+
+contemporaryComparatorReceipt : Latest.ContemporaryComparatorBoundary
+contemporaryComparatorReceipt = Latest.canonicalContemporaryComparatorBoundary
