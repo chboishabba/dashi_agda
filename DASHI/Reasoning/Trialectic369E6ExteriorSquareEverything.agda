@@ -58,6 +58,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertF4CurrentMaxCutExact
 -- Same-carrier exceptional-group targets and sourced classification boundary.
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact
 import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
