@@ -16,6 +16,7 @@ data SourceRole : Set where
   directCorrespondence : SourceRole
   forwardedProposal : SourceRole
   fundingCorrespondence : SourceRole
+  fundingExecutionStatement : SourceRole
   conferencePacket : SourceRole
   plantLogisticsCorrespondence : SourceRole
   forwardedMediaItem : SourceRole
@@ -25,7 +26,10 @@ data SourceIdentity : Set where
   bachForbiddenResearch20160710 : SourceIdentity
   yuExperientialProposal20161017 : SourceIdentity
   yuUpdateCuba20170216 : SourceIdentity
-  yuNetworkReport20171113 : SourceIdentity
+  yuBenefactorBrokerage20170221 : SourceIdentity
+  epsteinCubaSent25k20170315 : SourceIdentity
+  yuPsychedelicAwakeningReport20171125 : SourceIdentity
+  epsteinSpecialAbilityFunding20180308 : SourceIdentity
   cubaConferenceAbstractPacket : SourceIdentity
   epsteinTrumpetPlants20140303 : SourceIdentity
   verglasScopolamineForward20150127 : SourceIdentity
@@ -35,7 +39,10 @@ sourceRole : SourceIdentity → SourceRole
 sourceRole bachForbiddenResearch20160710 = directCorrespondence
 sourceRole yuExperientialProposal20161017 = forwardedProposal
 sourceRole yuUpdateCuba20170216 = fundingCorrespondence
-sourceRole yuNetworkReport20171113 = directCorrespondence
+sourceRole yuBenefactorBrokerage20170221 = fundingCorrespondence
+sourceRole epsteinCubaSent25k20170315 = fundingExecutionStatement
+sourceRole yuPsychedelicAwakeningReport20171125 = directCorrespondence
+sourceRole epsteinSpecialAbilityFunding20180308 = fundingCorrespondence
 sourceRole cubaConferenceAbstractPacket = conferencePacket
 sourceRole epsteinTrumpetPlants20140303 = plantLogisticsCorrespondence
 sourceRole verglasScopolamineForward20150127 = forwardedMediaItem
@@ -45,7 +52,10 @@ sourceReference : SourceIdentity → String
 sourceReference bachForbiddenResearch20160710 = "EFTA02458524"
 sourceReference yuExperientialProposal20161017 = "EFTA00814480"
 sourceReference yuUpdateCuba20170216 = "EFTA01054265"
-sourceReference yuNetworkReport20171113 = "EFTA00957006"
+sourceReference yuBenefactorBrokerage20170221 = "EFTA00692098"
+sourceReference epsteinCubaSent25k20170315 = "EFTA01052096 / EFTA02656417 copies"
+sourceReference yuPsychedelicAwakeningReport20171125 = "EFTA00984125-EFTA00984126 / EFTA02581361 copy"
+sourceReference epsteinSpecialAbilityFunding20180308 = "EFTA00862301"
 sourceReference cubaConferenceAbstractPacket = "EFTA00797045"
 sourceReference epsteinTrumpetPlants20140303 = "EFTA00984429"
 sourceReference verglasScopolamineForward20150127 = "EFTA00865569"
@@ -58,8 +68,14 @@ boundedSourceClaim yuExperientialProposal20161017 =
   "Gino Yu forwarded Jeffrey Epstein planning for an experiential transformation event explicitly mentioning ayahuasca and ibogaine and described existing funding plus a search for additional sponsorship."
 boundedSourceClaim yuUpdateCuba20170216 =
   "Gino Yu sent Epstein an ayahuasca-experience attachment, described building a global research subject network, and asked whether USD 25,000 could be transferred for the Cuba event."
-boundedSourceClaim yuNetworkReport20171113 =
-  "Gino Yu reported further altered-state / protocol-development work to Epstein and sought Epstein's input; this source belongs to the same correspondence lineage."
+boundedSourceClaim yuBenefactorBrokerage20170221 =
+  "Yu cc'd Epstein to the Cuba organisers, called Epstein his benefactor, said Epstein could arrange the conference fund transfer, and explicitly described Epstein as well connected and able to bring significant relationships."
+boundedSourceClaim epsteinCubaSent25k20170315 =
+  "A preserved March 2017 correspondence copy quotes Epstein saying he had sent USD 25,000 for Cuba; this is a sender statement of transfer, while bank-level settlement remains a distinct stronger receipt."
+boundedSourceClaim yuPsychedelicAwakeningReport20171125 =
+  "Yu reported to Epstein on the sponsored Cuba event, talks to groups he called 'psychedelic awakening', work with two subjects, the prior USD 100,000 offer, travel to see Epstein and introductions to others; the attached correspondent also describes recent psilocybin use."
+boundedSourceClaim epsteinSpecialAbilityFunding20180308 =
+  "Epstein instructed Richard Kahn to send Yu USD 25,000 from his foundation so Yu could find people with 'special ability'; the instruction is direct funding/procurement evidence while final bank settlement remains separately verifiable."
 boundedSourceClaim cubaConferenceAbstractPacket =
   "A released conference abstract packet in the Epstein corpus contains material explicitly discussing ayahuasca, mescaline, ibogaine / iboga, wellness and retreat settings; packet presence is not itself proof that Epstein selected or endorsed each abstract."
 boundedSourceClaim epsteinTrumpetPlants20140303 =
@@ -78,11 +94,13 @@ record EpsteinPsychedelicSourceBoundary : Set where
     documentedInterestImpliesAdministration : Bool
     trumpetPlantEmailIdentifiesBrugmansia : Bool
     fundingOneEventImpliesFundingAllNetworkActivity : Bool
+    transferStatementEqualsBankSettlement : Bool
+    fundingInstructionEqualsCompletedPayment : Bool
     sourceAttributionRetained : Bool
 
 canonicalEpsteinPsychedelicSourceBoundary : EpsteinPsychedelicSourceBoundary
 canonicalEpsteinPsychedelicSourceBoundary =
-  epstein-psychedelic-source-boundary false false false false false false true
+  epstein-psychedelic-source-boundary false false false false false false false false true
 
 rickDoblinName : String
 rickDoblinName = "Rick Doblin"
