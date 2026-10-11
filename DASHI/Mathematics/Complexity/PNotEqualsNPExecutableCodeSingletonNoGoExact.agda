@@ -2,26 +2,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPExecutableCodeSingletonNoGoExact
 
 ------------------------------------------------------------------------
 -- GENERIC EXECUTABLE-CODE REFINEMENT STILL DOES NOT FORCE QUOTABLE PROGRAMS
---
--- PNotEqualsNPExecutablePolynomialCostRefinementExact adds:
---
---   Code : Set
---   code : Code
---   run  : Code -> Word -> Bool
---
--- but does not require Code to be finite/serializable or `run` to be the
--- semantics of a fixed finite interpreter.  Consequently every extensional
--- decider has the singleton realization:
---
---   Code = Unit
---   code = tt
---   run tt = decider.
---
--- Thus the generic executable refinement alone does not solve A0 quotation.
--- The literal deterministic concrete-tape bit carrier is genuinely stronger.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.Nat using (zero)
 open import Data.Product using (_,_)
@@ -29,10 +12,6 @@ open import Data.Unit using (⊤; tt)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPExecutablePolynomialCostRefinementExact as Exec
-
-------------------------------------------------------------------------
--- Trivial executable wrappers.
-------------------------------------------------------------------------
 
 trivialMapCode :
   ∀ {Word : Set}
@@ -70,10 +49,6 @@ trivialVerifierCode verifier = record
   ; Exec.codeSize = λ unit → zero
   }
 
-------------------------------------------------------------------------
--- The closure requirements can also be paid trivially.
-------------------------------------------------------------------------
-
 trivialExecutableCodeClosure :
   ∀ (Word : Set) →
   Exec.ExecutableCodeClosure Word
@@ -86,19 +61,14 @@ trivialExecutableCodeClosure Word = record
           (λ word → decider (map word))
   }
 
-------------------------------------------------------------------------
--- Therefore every base polynomial witness lifts to the generic executable
--- refinement.  The extra code field imposes no representation restriction.
-------------------------------------------------------------------------
-
 liftBasePolynomialMap :
   ∀ {Word : Set}
     {base : PR.PolynomialCostModel Word}
     {map : Word → Word} →
   PR.polynomialTimeMap base map →
   Exec.ExecutablePolynomialTimeMap base map
-liftBasePolynomialMap polynomial =
-  polynomial , trivialMapCode _
+liftBasePolynomialMap {map = map} polynomial =
+  polynomial , trivialMapCode map
 
 liftBasePolynomialDecider :
   ∀ {Word : Set}
@@ -106,8 +76,8 @@ liftBasePolynomialDecider :
     {decider : Word → Bool} →
   PR.polynomialTimeDecider base decider →
   Exec.ExecutablePolynomialTimeDecider base decider
-liftBasePolynomialDecider polynomial =
-  polynomial , trivialDeciderCode _
+liftBasePolynomialDecider {decider = decider} polynomial =
+  polynomial , trivialDeciderCode decider
 
 liftBasePolynomialVerifier :
   ∀ {Word Certificate : Set}
@@ -115,8 +85,8 @@ liftBasePolynomialVerifier :
     {verifier : Word → Certificate → Bool} →
   PR.polynomialTimeVerifier base verifier →
   Exec.ExecutablePolynomialTimeVerifier base verifier
-liftBasePolynomialVerifier polynomial =
-  polynomial , trivialVerifierCode _
+liftBasePolynomialVerifier {verifier = verifier} polynomial =
+  polynomial , trivialVerifierCode verifier
 
 liftBaseInPToTrivialExecutableRefinement :
   ∀ {Word : Set}
@@ -137,10 +107,6 @@ liftBaseInPToTrivialExecutableRefinement baseP = record
         (PR.polynomialDecision baseP)
   }
 
-------------------------------------------------------------------------
--- Exact boundary.
-------------------------------------------------------------------------
-
 record GenericExecutableRefinementBoundary : Set where
   constructor generic-executable-refinement-boundary
   field
@@ -151,8 +117,6 @@ record GenericExecutableRefinementBoundary : Set where
     finiteSerializableProgramForced : Bool
     concreteTapeExecutionForced : Bool
 
-open import Agda.Builtin.Bool using (false; true)
-
 canonicalGenericExecutableRefinementBoundary :
   GenericExecutableRefinementBoundary
 canonicalGenericExecutableRefinementBoundary =
@@ -162,9 +126,7 @@ canonicalGenericExecutableRefinementBoundary =
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
--- `ExecutableDeciderCode` should be read as an execution-equation wrapper, not
--- yet as a finite program model.  The actual Clay-facing executable refinement
--- must additionally constrain code/interpreter representation, e.g. the
--- deterministic concrete-tape static bit program introduced on the max-cut
--- branch.
+-- ExecutableDeciderCode is an execution-equation wrapper, not yet a finite
+-- serializable program model.  The literal deterministic concrete-tape code is
+-- a genuinely stronger representation surface.
 ------------------------------------------------------------------------
