@@ -5,7 +5,7 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoun
 -- ALGEBRA
 --
 -- All discovery-specific hypotheses are now represented on concrete in-repo
--- objects:
+-- objects or exact executable certificates:
 --
 -- * exact rational alternative composition octonions;
 -- * literal H_3(O_Q) Jordan algebra with unit, product, cubic norm and Jordan
@@ -14,6 +14,7 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoun
 -- * exact executable 52-dimensional derivation span;
 -- * exact 28+8_v+8_s+8_c triality bracket decomposition;
 -- * exact Q(i) root-space decomposition 4 + 48 with one-dimensional roots;
+-- * exact Q(i) root-grading bracket law on all C(48,2)=1128 root pairs;
 -- * independent standard F4 root/Coxeter datum on companion Lean;
 -- * actual same-carrier linear Jordan automorphism type with explicit elements.
 --
@@ -33,6 +34,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact as A
 import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact as Laws
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as Inner
 import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as Weights
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact as Grading
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact as Linear
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact as Sources
 
@@ -52,25 +54,17 @@ record ConcreteClassificationHypotheses : Set where
     exactNonzeroRootSpaceCount48 : Bool
     exactOneDimensionalRootSpaces : Bool
     exactTrialityRootPartition : Bool
+    exactRootGradingBracketLaw : Bool
     sameCarrierLinearExceptionalTargetsTyped : Bool
 open ConcreteClassificationHypotheses public
 
 canonicalConcreteClassificationHypotheses : ConcreteClassificationHypotheses
 canonicalConcreteClassificationHypotheses =
   concrete-classification-hypotheses
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
+    true true true true true
+    true true true true true
+    true true true
+    Grading.canonicalBoundary.localF4RootGradedLieStructurePaidByProducer
     true
 
 ------------------------------------------------------------------------
@@ -102,6 +96,7 @@ record Boundary : Set where
   field
     allConcreteExceptionalHypothesesOwned : Bool
     exactRootSpaceProducerFloatingFree : Bool
+    exactRootGradingProducerPaid : Bool
     literatureClassificationSourceLocated : Bool
     classificationReducedToOneExternalTheoremPremise : Bool
     generalClassificationTheoremFormalizedInRepo : Bool
@@ -113,6 +108,7 @@ canonicalBoundary =
   boundary
     true
     true
+    Grading.canonicalBoundary.localF4RootGradedLieStructurePaidByProducer
     Sources.canonicalClassicalExceptionalSourceReceipt.peterssonDerivationTheoremLocated
     true
     false
