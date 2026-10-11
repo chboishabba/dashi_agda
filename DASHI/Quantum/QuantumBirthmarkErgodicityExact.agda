@@ -10,18 +10,20 @@ import DASHI.Physics.Laws.ThermodynamicStatisticalLaws as Thermo
 import DASHI.Quantum.QuantumBirthmarkSourceBoundaryExact as Source
 
 ------------------------------------------------------------------------
--- UNIVERSAL SYMMETRY FACTOR
+-- UNIVERSAL SYMMETRY FACTOR WITHOUT ADDITIONAL SECTOR STRUCTURE
+--
+-- Extra symmetries are intentionally excluded from this two-case carrier and
+-- handled by QuantumBirthmarkSymmetrySectorExact.  This avoids incorrectly
+-- collapsing an intermediate sector-weighting problem to the GOE value 3.
 ------------------------------------------------------------------------
 
 data TimeReversalClass : Set where
   noTRS : TimeReversalClass
   hasTRS : TimeReversalClass
-  additionalSymmetry : TimeReversalClass
 
 universalFactor : TimeReversalClass → Nat
 universalFactor noTRS = Source.universalFactorWithoutTRS
 universalFactor hasTRS = Source.universalFactorWithTRS
-universalFactor additionalSymmetry = Source.universalFactorWithTRS
 
 universalFactor-noTRS : universalFactor noTRS ≡ 2
 universalFactor-noTRS = refl
@@ -55,8 +57,10 @@ record QuantumBirthmarkModel
 
     UniversalBirthmarkFactor : State → Nat
     symmetryClass : State → TimeReversalClass
+    noAdditionalSymmetryDegeneracy : State → Set
     universalFactorReceipt :
       (state : State) →
+      noAdditionalSymmetryDegeneracy state →
       UniversalBirthmarkFactor state ≡ universalFactor (symmetryClass state)
 
     RevivalEnhancement : Set
