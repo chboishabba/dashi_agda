@@ -31,11 +31,6 @@ universalFactor-hasTRS = refl
 
 ------------------------------------------------------------------------
 -- THIN REFINEMENT OF THE EXISTING QUANTUM-DYNAMICS OWNER
---
--- We do not replace State/Evolution/normalisation machinery.  The birthmark
--- layer adds the long-time comparison observable, symmetry factor, early-time
--- revival factor, and exploration-timescale predicates required by the PRX
--- framework.
 ------------------------------------------------------------------------
 
 record QuantumBirthmarkModel
@@ -46,13 +41,11 @@ record QuantumBirthmarkModel
   open Quantum.QuantumDynamics D
 
   field
-    -- State-selection / comparison boundary.
     Nonstationary : State → Set
     ClosedIsolatedRegime : State → Set
-    AProriMatched : State → State → Set
+    APrioriMatched : State → State → Set
     DynamicallyDistinguishable : State → State → Set
 
-    -- Long-time occupation/fidelity-like observable.
     Occupation : Set
     Ratio : Set
     longTimeOccupation : State → State → Occupation
@@ -60,7 +53,6 @@ record QuantumBirthmarkModel
     ClassicalErgodicBaseline : Ratio → Set
     AboveClassicalErgodicBaseline : Ratio → Set
 
-    -- Birthmark decomposition.
     UniversalBirthmarkFactor : State → Nat
     symmetryClass : State → TimeReversalClass
     universalFactorReceipt :
@@ -71,7 +63,6 @@ record QuantumBirthmarkModel
     revivalEnhancement : State → RevivalEnhancement
     BirthmarkDecomposition : State → Ratio → Set
 
-    -- Early/late dynamical scales.
     ThoulessTime : Time
     HeisenbergTime : Time
     EarlierThan : Time → Time → Set
@@ -79,9 +70,6 @@ record QuantumBirthmarkModel
     ExploredRegion : State → Time → Set
     MaximumExplorationPrinciple : State → Set
 
-    -- Core paper-facing receipts.  These are assumptions/interfaces whose
-    -- concrete analytic/RMT proofs remain source-owned rather than fabricated
-    -- from the generic DASHI carrier.
     universalMemory :
       (state : State) →
       Nonstationary state →
@@ -103,21 +91,17 @@ record QuantumBirthmarkModel
     scarIsBirthmarkSpecialCase : State → Set
 
 ------------------------------------------------------------------------
--- DIRECT REUSE THEOREM: EVERY NORMALISED EVOLUTE REMAINS NORMALISED
---
--- This theorem is not imported from the birthmark paper.  It is already
--- provided by DASHI's generic QuantumDynamics law surface and is reused here
--- to keep the new layer attached to the same physical state evolution.
+-- DIRECT REUSE THEOREM: NORMALISED EVOLUTION STAYS ON THE SAME CARRIER
 ------------------------------------------------------------------------
 
 normalisedEvolute :
   {Q : Quantum.QuantumKinematics} →
   (D : Quantum.QuantumDynamics Q) →
-  let open Quantum.QuantumKinematics Q
-      open Quantum.QuantumDynamics D
-  in (time : Time) (state : State) →
-     Normalised state →
-     Normalised (Evolution time state)
+  (time : Quantum.QuantumDynamics.Time D) →
+  (state : Quantum.QuantumKinematics.State Q) →
+  Quantum.QuantumKinematics.Normalised Q state →
+  Quantum.QuantumKinematics.Normalised Q
+    (Quantum.QuantumDynamics.Evolution D time state)
 normalisedEvolute D = Quantum.QuantumDynamics.normPreserved D
 
 ------------------------------------------------------------------------
@@ -149,11 +133,6 @@ birthmarkAuthorityBoundary = record
 
 ------------------------------------------------------------------------
 -- CROSS-POLLINATION WITH THE EXISTING THERMODYNAMIC AUTHORITY BOUNDARY
---
--- ThermodynamicStatisticalLaws already insists that ergodicity is an explicit
--- assumption.  The quantum-birthmark result therefore refines the conditions
--- under which that assumption may be used; it does not erase the second-law,
--- ensemble, coarse-graining, or thermodynamic-limit layers.
 ------------------------------------------------------------------------
 
 record BirthmarkThermodynamicBridge
