@@ -33,3 +33,5 @@ import DASHI.Quantum.QuantumMereologySchwingerObjectiveExact
 import DASHI.Quantum.QuantumMereologyCandidatePointerObservableExact
 import DASHI.Quantum.QuantumMereologySchwingerProducerExact
 import DASHI.Quantum.QuantumMereologyFiniteQuantumProducerAuthorityExact
+import DASHI.Quantum.QuantumMereologyMaxCutExact
+import DASHI.Quantum.QuantumMereologyMaxCutRegression
