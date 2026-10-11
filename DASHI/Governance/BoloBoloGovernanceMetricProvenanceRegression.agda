@@ -1,0 +1,33 @@
+module DASHI.Governance.BoloBoloGovernanceMetricProvenanceRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloGovernanceMetricProvenanceExact as Metric
+
+sameScalarDoesNotCollapseRole :
+  Metric.sameNatImpliesSameMetricRole Metric.canonicalGovernanceMetricProvenanceBoundary ≡ false
+sameScalarDoesNotCollapseRole = refl
+
+unitsCannotBeDropped :
+  Metric.unitLabelMayBeDropped Metric.canonicalGovernanceMetricProvenanceBoundary ≡ false
+unitsCannotBeDropped = refl
+
+provenanceCannotBeDropped :
+  Metric.provenanceMayBeDropped Metric.canonicalGovernanceMetricProvenanceBoundary ≡ false
+provenanceCannotBeDropped = refl
+
+comparatorMetricDoesNotAutoTransfer :
+  Metric.comparatorMetricAutomaticallyTransfersToTarget Metric.canonicalGovernanceMetricProvenanceBoundary ≡ false
+comparatorMetricDoesNotAutoTransfer = refl
+
+thresholdCannotBeChosenAfterOutcome :
+  Metric.targetThresholdMayBeChosenAfterOutcome Metric.canonicalGovernanceMetricProvenanceBoundary ≡ false
+thresholdCannotBeChosenAfterOutcome = refl
+
+repoAtlasIsMethodologicalDonorOnly :
+  Metric.numberRoleAtlasReusedAsMethodologicalDonor Metric.canonicalGovernanceMetricProvenanceBoundary ≡ true
+repoAtlasIsMethodologicalDonorOnly = refl
+
+governanceRolesNotAttributedToCoreAtlas :
+  Metric.governanceRoleConstructorsAttributedToNumberAtlas Metric.canonicalGovernanceMetricProvenanceBoundary ≡ false
+governanceRolesNotAttributedToCoreAtlas = refl
