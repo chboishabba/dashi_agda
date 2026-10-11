@@ -19,15 +19,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Analysis.RiemannQuarticPuncturedKernel4EnumerationExact as Raw
 import DASHI.Foundations.Base369T4SymplecticExteriorSquareE6BridgeExact as Exterior
 
-rawPuncturedT4CountIs80 :
-  Raw.puncturedKernel4EnumerationLengthIs80 ≡ refl
-rawPuncturedT4CountIs80 = refl
+-- Re-export the existing proof receipt under the cross-pollination owner.
+rawPuncturedT4CountIs80 = Raw.puncturedKernel4EnumerationLengthIs80
 
--- The concrete arithmetic comparison is exact, but is kept separate from any
--- identification of types or actions.
-rawAndDerivedCountsAgreeNumerically :
+-- The derived count is currently an exact exhaustive-script receipt rather
+-- than a kernel enumeration theorem, so only its pinned metadata is asserted.
+derivedOrientedLagCountPinned :
   Exterior.orientedLagrangianBivectorCount ≡ 80
-rawAndDerivedCountsAgreeNumerically = refl
+derivedOrientedLagCountPinned = refl
 
 record Trialectic369T4ExteriorSquareCrossPollinationBoundary : Set where
   constructor trialectic-369-t4-exterior-square-cross-pollination-boundary
