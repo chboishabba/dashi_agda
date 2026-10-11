@@ -28,6 +28,10 @@ import DASHI.Quantum.AnomalyFreedom
 
 import DASHI.Quantum.QuantumBirthmarkSourceBoundaryExact
 import DASHI.Quantum.QuantumBirthmarkErgodicityExact
+import DASHI.Quantum.QuantumBirthmarkFiniteRMTExact
+import DASHI.Quantum.QuantumBirthmarkSymmetrySectorExact
+import DASHI.Quantum.QuantumBirthmarkRevivalExact
+import DASHI.Quantum.QuantumBirthmarkStadiumReceiptExact
 
 import DASHI.Quantum.QuantumMereologyOperatorLocalityAuthorityExact
 import DASHI.Quantum.QuantumMereologyHamiltonianTransportAuthorityExact
