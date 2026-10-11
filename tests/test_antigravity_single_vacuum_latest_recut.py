@@ -31,13 +31,32 @@ def test_single_vacuum_safe_band_and_scale_covariance():
         assert token in scale
 
 
-def test_differential_common_counterterm_cancels():
-    text = read("DASHI/Physics/Foundations/GRQFTVacuumAmplitudeDifferentialRenormalizationExact.agda")
+def test_differential_common_counterterm_and_metric_response():
+    renorm = read("DASHI/Physics/Foundations/GRQFTVacuumAmplitudeDifferentialRenormalizationExact.agda")
+    metric = read("DASHI/Physics/ExoticGravity/AntigravitySingleVacuumDifferentialMetricCompilerExact.agda")
     for token in (
         "commonCountertermCancelsInDifference",
         "physicalVacuumDifferenceIsMultiplicativeSourceDifference",
         "modulatedVacuumDifferenceNeedsAbsoluteAdditiveZero",
         "sourceDifferenceCanDriveLockInLaneModuloCalibration",
+    ):
+        assert token in renorm
+    for token in (
+        "kottlerMetricTTDeltaIsRadiusSquaredThirdDeltaLambda",
+        "sourceModulationMetricTTDeltaIsCalibratedSourceDifference",
+        "scalarMetricPerturbationAlreadyEqualsSchutzholdTTMode",
+    ):
+        assert token in metric
+
+
+def test_physical_promotion_keeps_real_source_physics_open():
+    text = read("DASHI/Physics/ExoticGravity/AntigravitySingleVacuumPhysicalPromotionMaxCutExact.agda")
+    for token in (
+        "selectedCMP119VacuumContinuationWeldStillOpen",
+        "unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence",
+        "additiveStaticVacuumRenormalizationStillOpen",
+        "physicalControlToVacuumAmplitudeStillOpen",
+        "fullPhysicalDeviceDemonstrated",
     ):
         assert token in text
 
