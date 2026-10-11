@@ -58,6 +58,7 @@ data SourceRole : Set where
   donorEventReporting : SourceRole
   corporatePrimaryAnnouncement : SourceRole
   governmentProcurementRecord : SourceRole
+  courtTenderReporting : SourceRole
   investigativeReporting : SourceRole
   legislativeCommissionSummary : SourceRole
   transcriptInterpretation : SourceRole
@@ -67,6 +68,7 @@ data SourceIdentity : Set where
   friendsIDFEllison2017Record : SourceIdentity
   oracleRafael2024Announcement : SourceIdentity
   israelNimbusProcurementRecord : SourceIdentity
+  oracleNimbusTenderChallengeReporting : SourceIdentity
   associatedPressChinaSurveillance2025 : SourceIdentity
   ceccChinaMonitor2025 : SourceIdentity
   transcript20261002 : SourceIdentity
@@ -76,6 +78,7 @@ sourceRole israelGovernmentNetanyahuBiography = officialBiography
 sourceRole friendsIDFEllison2017Record = donorEventReporting
 sourceRole oracleRafael2024Announcement = corporatePrimaryAnnouncement
 sourceRole israelNimbusProcurementRecord = governmentProcurementRecord
+sourceRole oracleNimbusTenderChallengeReporting = courtTenderReporting
 sourceRole associatedPressChinaSurveillance2025 = investigativeReporting
 sourceRole ceccChinaMonitor2025 = legislativeCommissionSummary
 sourceRole transcript20261002 = transcriptInterpretation
@@ -89,10 +92,12 @@ sourceLocator oracleRafael2024Announcement =
   "Oracle News, 2024-09-10: Oracle and RAFAEL to Provide Cloud-Based AI Solutions for Defense Missions"
 sourceLocator israelNimbusProcurementRecord =
   "Government Procurement Administration, Project Nimbus: AWS and Google chosen cloud providers"
+sourceLocator oracleNimbusTenderChallengeReporting =
+  "2021 Jerusalem District Court / tender reporting: Oracle challenged its rejection from Project Nimbus; AWS and Google remained the selected providers"
 sourceLocator associatedPressChinaSurveillance2025 =
   "Associated Press investigation: U.S. technology and Chinese mass surveillance / Golden Shield"
 sourceLocator ceccChinaMonitor2025 =
-  "Congressional-Executive Commission on China, China Monitor #1, 2025-12-17"
+  "Congressional-Executive Commission on China, China Monitor #1; AP Golden Shield summary"
 sourceLocator transcript20261002 =
   "transcript-2026-10-02.srt"
 
@@ -140,7 +145,7 @@ oracleChinaCECCEvidence = evidence-edge
   ceccChinaMonitor2025
   oracleChinaPoliceGoldenShield
   corroboratingSupport
-  "CECC summarizes the AP leak and names Oracle in Golden Shield police-system upgrades; CECC summary does not replace AP's underlying investigation."
+  "CECC summarizes the AP investigation and names Oracle in Golden Shield police-system upgrades; CECC summary does not replace AP's underlying investigation."
 
 oracleRafaelEvidence : EvidenceEdge
 oracleRafaelEvidence = evidence-edge
@@ -149,19 +154,26 @@ oracleRafaelEvidence = evidence-edge
   directSupport
   "Oracle and RAFAEL state that IMILITE and FIRE WEAVER are available on OCI for defense missions."
 
-oracleNimbusCounterevidence : EvidenceEdge
-oracleNimbusCounterevidence = evidence-edge
+oracleNimbusSelectionCounterevidence : EvidenceEdge
+oracleNimbusSelectionCounterevidence = evidence-edge
   israelNimbusProcurementRecord
   oracleNimbusPrimeCloudProvider
   materialCounterevidence
   "Israeli procurement records identify AWS and Google as the selected public-cloud providers."
 
-oracleBlueprintCounterevidence : EvidenceEdge
-oracleBlueprintCounterevidence = evidence-edge
-  israelNimbusProcurementRecord
-  oracleWritesIsraeliSecurityBlueprint
+oracleNimbusChallengeCounterevidence : EvidenceEdge
+oracleNimbusChallengeCounterevidence = evidence-edge
+  oracleNimbusTenderChallengeReporting
+  oracleNimbusPrimeCloudProvider
   materialCounterevidence
-  "A major Israeli government cloud architecture is explicitly AWS/Google-led; this blocks promotion of Oracle to generic system-blueprint author from Nimbus evidence."
+  "Oracle's court challenge documents its position as an unsuccessful bidder rather than a selected Nimbus prime provider."
+
+oracleBlueprintInterpretation : EvidenceEdge
+oracleBlueprintInterpretation = evidence-edge
+  transcript20261002
+  oracleWritesIsraeliSecurityBlueprint
+  interpretationOnly
+  "The acquired Oracle-Israel evidence pays specific defense integration and an unsuccessful Nimbus bid; it does not establish generic authorship of Israel's security-system blueprint. Nimbus counterevidence is local to the Nimbus-prime-provider claim and does not refute every Oracle-Israel relationship."
 
 netanyahuControlWorldviewInterpretation : EvidenceEdge
 netanyahuControlWorldviewInterpretation = evidence-edge
@@ -196,8 +208,9 @@ record ClaimAtlasBoundary : Set where
     donationImpliesPolicyAuthorship : Bool
     vendorImpliesStateController : Bool
     deploymentImpliesMotive : Bool
+    localCounterevidenceRefutesAllRelationships : Bool
     transcriptInterpretationIsSourcePayment : Bool
 
 canonicalClaimAtlasBoundary : ClaimAtlasBoundary
 canonicalClaimAtlasBoundary =
-  claim-atlas-boundary false false false false false false
+  claim-atlas-boundary false false false false false false false
