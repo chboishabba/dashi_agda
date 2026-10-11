@@ -8,12 +8,17 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- LLM EVALUATION, GEOMETRIC PRIORS, AND POLITICAL-ECONOMY INTERPRETATION
 --
--- Repo-native donor idea (from the geometric-reasoning / teleodynamics lanes):
--- a semantic transformation should be tested as a structured action with
--- composition/orientation/nuisance/future-learning diagnostics.  "Opposite" is
--- therefore not assumed to mean a literal geometric negation in latent space.
--- E8/Leech/Monster are candidate prior/action families, not an automatic
--- ontology or mechanism.
+-- Repo-native donors (PR #1094 / #1095):
+--   SemanticInterventionEquivarianceExact
+--   GeometricReasoningCandidateSelectionExact
+--   LLMGeometricPriorBridgeExact
+--   GeometricLearnerPriorExact
+--
+-- Those owners establish that semantic transformations should be tested as
+-- structured actions with composition/orientation/nuisance/future-learning
+-- diagnostics; successful current fit does not determine future language.
+-- "Opposite" is therefore not assumed to mean literal geometric negation.
+-- E8/Leech/Monster are candidate prior/action families, not automatic ontology.
 ------------------------------------------------------------------------
 
 data EvaluationDiagnostic : Set where
@@ -85,10 +90,9 @@ currentBenchmarkEvidenceStatus = benchmark-evidence-status
 ------------------------------------------------------------------------
 -- POLITICAL-ECONOMY HYPOTHESIS
 --
--- Existing repo capital-recovery work motivates a testable hypothesis that
+-- Existing repo AI-capital-recovery work motivates a testable hypothesis that
 -- benchmark-visible capability can carry financing/valuation/market-signalling
--- value.  This module deliberately does not infer actor motive from that
--- incentive structure.
+-- value. This does not establish that labs design benchmarks for that purpose.
 ------------------------------------------------------------------------
 
 record EvaluationPoliticalEconomyHypothesis : Set where
@@ -105,6 +109,32 @@ open EvaluationPoliticalEconomyHypothesis public
 steelmanPoliticalEconomyHypothesis : EvaluationPoliticalEconomyHypothesis
 steelmanPoliticalEconomyHypothesis = evaluation-political-economy-hypothesis
   true true true false false false
+
+------------------------------------------------------------------------
+-- CHOMSKY x E8/LEECH CROSS-POLLINATION BOUNDARY
+--
+-- Chomsky contributes the hypothesis class that successful language behaviour
+-- may require strong internal structural priors / competence distinct from
+-- surface performance. The exceptional-geometry programme supplies candidate
+-- structured priors whose action/composition can be tested. Neither supplies
+-- the other: Chomsky does not imply E8/Leech, and E8/Leech fit does not recover
+-- human UG or a biological language mechanism.
+------------------------------------------------------------------------
+
+record ChomskyExceptionalPriorBridge : Set where
+  constructor chomsky-exceptional-prior-bridge
+  field
+    competencePerformanceDistinctionRelevant : Bool
+    structuralPriorQuestionRelevant : Bool
+    exceptionalFamiliesAreCandidatePriors : Bool
+    semanticActionCompositionIsDiagnostic : Bool
+    chomskySelectsE8OrLeech : Bool
+    e8OrLeechFitRecoversUniversalGrammar : Bool
+open ChomskyExceptionalPriorBridge public
+
+canonicalChomskyExceptionalPriorBridge : ChomskyExceptionalPriorBridge
+canonicalChomskyExceptionalPriorBridge =
+  chomsky-exceptional-prior-bridge true true true true false false
 
 ------------------------------------------------------------------------
 -- PROMOTION FIREWALLS
