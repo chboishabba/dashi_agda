@@ -15,6 +15,7 @@ module DASHI.Biology.SignedSSPWeaveAddressNeutralDynamicsExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Geometry.SSP369Ultrametric as SSP
