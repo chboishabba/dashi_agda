@@ -11,6 +11,9 @@ EXPECTED = {
         "EFTA01052096",
         "EFTA00984125",
         "EFTA00862301",
+        "EFTA00821182",
+        "EFTA00820611",
+        "EFTA00818930",
         "EFTA00984429",
         "EFTA00865569",
         "Rick Doblin",
@@ -26,6 +29,8 @@ EXPECTED = {
         "oneStrongEdgeDoesNotEstablishUniversalNetwork",
         "documentedInterestDoesNotEstablishAdministration",
         "yuAttributesEpsteinBrokerage",
+        "kuhnIntroductionReceipt",
+        "jointCommunityConveningProposal",
         "epsteinFundingSpecialAbilitySearch",
     ],
     "DASHI/Cognition/EpsteinPsychedelicParetoSnowballExact.agda": [
@@ -39,6 +44,8 @@ EXPECTED = {
         "canonicalEpsteinPsychedelicBoundary",
         "currentEpsteinPsychedelicRoute",
         "fundingSettlementStillOpen",
+        "kuhnIntroductionObserved",
+        "conveningProposalNotCompletion",
     ],
 }
 
