@@ -5,6 +5,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MODULE = REPO_ROOT / "DASHI" / "Physics" / "Closure" / "BothwellYe2022GeodeticCalibrationExact.agda"
+STATUS = REPO_ROOT / "DASHI" / "Physics" / "Closure" / "QuantumClockEmpiricalRedshiftIngestionStatusExact.agda"
 ROLLUP = REPO_ROOT / "DASHI" / "Physics" / "Closure" / "YeRedshiftEverything.agda"
 
 
@@ -39,6 +40,19 @@ def test_later_2025_survey_is_provenance_update_not_retroactive_measurement_rewr
         "f907622c980f8d7dedf3b2785c7ecfe0841e861f2197285e087545d852be2951f4505e96bfa1571d6eb5363569105336cb74bfcb8d1541512d921e251ea27a48",
         "laterSurveySupersedesNOSNGS77 = true",
         "laterSurveyRewritesPublished2022Calibration = false",
+    ):
+        assert marker in text
+
+
+def test_ingestion_status_marks_geodetic_calibration_paid_without_overstating_experiment_artifact() -> None:
+    text = read(STATUS)
+    for marker in (
+        "geodeticCalibrationIngested = true",
+        "geodeticCalibrationChecksumIngested = true",
+        "experimentPaperArtifactChecksumIngested = false",
+        "rawExperimentArraysAcquired = false",
+        "analysisCodeAcquired = false",
+        "terminalSIMetrologyPromotionAllowed = false",
     ):
         assert marker in text
 
