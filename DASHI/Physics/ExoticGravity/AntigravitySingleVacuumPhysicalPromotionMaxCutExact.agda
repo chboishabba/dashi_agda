@@ -11,6 +11,7 @@ import DASHI.Physics.Foundations.GRQFTSingleVacuumNormalizationScaleCovarianceEx
 import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
 import DASHI.Physics.Foundations.GRQFTVacuumAmplitudeDifferentialRenormalizationExact as Differential
+import DASHI.Physics.Foundations.GRQFTSingleVacuumPhysicalSignMaxCutExact as SignCut
 
 vacuumNegativeActiveGivesPositiveAcceleration :
   (positiveGravityFactor : ℚ) →
@@ -37,6 +38,9 @@ sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 sourceVacuumSequenceRequiresIndependentPhysicalPayment =
   VacuumNI.sourceVacuumSequenceRequiresIndependentPhysicalPayment
 
+sourceSignAndControlMaxCutOwned : Bool
+sourceSignAndControlMaxCutOwned = true
+
 record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
   constructor antigravity-single-vacuum-physical-promotion-frontier
   field
@@ -47,6 +51,7 @@ record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
     singleVacuumSafeBandOwned : Bool
     multiplicativeNormalizationScaleCovarianceOwned : Bool
     commonAdditiveCountertermCancelsInDifferentialLane : Bool
+    sourceSignAndControlMaxCutOwned : Bool
     couplingAndERBHistoryDetermineVacuumSequence : Bool
     sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 
@@ -63,12 +68,20 @@ canonicalAntigravitySingleVacuumPhysicalPromotionFrontier :
   AntigravitySingleVacuumPhysicalPromotionFrontier
 canonicalAntigravitySingleVacuumPhysicalPromotionFrontier =
   antigravity-single-vacuum-physical-promotion-frontier
-    true true false true true true true false true
+    true true false true true true true true false true
     false true true true true true true true
 
 selectedCMP119VacuumContinuationWeldStillOpen : Bool
 selectedCMP119VacuumContinuationWeldStillOpen =
   Continuation.selectedCMP119VacuumContinuationWeldStillOpen
+
+staticRouteNeedsPositivePromotedVacuumSign : Bool
+staticRouteNeedsPositivePromotedVacuumSign =
+  SignCut.staticRouteNeedsPositivePromotedVacuumSign
+
+differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal : Bool
+differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal =
+  SignCut.differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal
 
 record AntigravitySingleVacuumPromotionBoundary : Set where
   constructor antigravity-single-vacuum-promotion-boundary
