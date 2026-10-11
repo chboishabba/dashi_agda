@@ -11,7 +11,9 @@ module DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact where
 --   -> every odd/even prefix (10)
 --   -> exact early leaves 1100, 11010, 11100
 --   -> three residual literal prefix families 11011, 11101, 1111...
---   -> a residual-only finite-frontier compiler.
+--   -> a residual-only finite-frontier compiler
+--   -> generic fixed-word affine threshold certificates
+--   -> residual word-certificate coverage -> strict-descent frontier.
 --
 -- The residual producer is still theorem-strength.  Finite computation,
 -- density decay, spectral mixing, affine cocycles, or word surgery do not by
@@ -28,6 +30,8 @@ import DASHI.Analysis.CollatzSyracuseOddOddTailReductionExact as OddOdd
 import DASHI.Analysis.CollatzSyracuseOddSurvivorFrontierExact as OddFrontier
 import DASHI.Analysis.CollatzSyracuseEarlyCylinderEliminationExact as Early
 import DASHI.Analysis.CollatzSyracuseResidualSurvivorFrontierExact as ResidualFrontier
+import DASHI.Analysis.CollatzSyracuseUniformWordDescentCertificateExact as WordCert
+import DASHI.Analysis.CollatzSyracuseResidualWordCertificateFrontierExact as WordFrontier
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionCocycleExact as Cocycle
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionSwapExact as Swap
 import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact as Universal
@@ -44,6 +48,8 @@ record TerminalParityMaxCutBoundary : Set where
     residualThreeCylinderCompilerPaid : Nat
     oddFrontierCompilerPaid : Nat
     residualFrontierCompilerPaid : Nat
+    uniformWordDescentCertificatePaid : Nat
+    residualWordCertificateFrontierPaid : Nat
     affineCorrectionCocyclePaid : Nat
     adjacentCorrectionSwapPaid : Nat
     universalStoppingCompilerPaid : Nat
@@ -62,7 +68,7 @@ record TerminalParityMaxCutBoundary : Set where
 canonicalTerminalParityMaxCutBoundary : TerminalParityMaxCutBoundary
 canonicalTerminalParityMaxCutBoundary =
   terminalParityMaxCutBoundary
-    1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     0 0 0 0
     0 0 0 1
 
@@ -102,6 +108,18 @@ residualFrontierCompilerPaid :
   ≡ 1
 residualFrontierCompilerPaid = refl
 
+uniformWordCertificatePaid :
+  WordCert.UniformWordDescentCertificateBoundary.uniformThresholdCompilerPaid
+    WordCert.canonicalUniformWordDescentCertificateBoundary
+  ≡ 1
+uniformWordCertificatePaid = refl
+
+residualWordCertificateFrontierPaid :
+  WordFrontier.ResidualWordCertificateFrontierBoundary.finiteCertificateCoverageCompilerPaid
+    WordFrontier.canonicalResidualWordCertificateFrontierBoundary
+  ≡ 1
+residualWordCertificateFrontierPaid = refl
+
 correctionCocyclePaid :
   Cocycle.AffineCorrectionCocycleBoundary.exactCorrectionCocycleOwned
     Cocycle.canonicalAffineCorrectionCocycleBoundary
@@ -137,3 +155,9 @@ residualFrontierGrowthStillOpen :
     ResidualFrontier.canonicalResidualSurvivorFrontierBoundary
   ≡ 0
 residualFrontierGrowthStillOpen = refl
+
+certificateCoverageDoesNotCreateUnboundedness :
+  WordFrontier.ResidualWordCertificateFrontierBoundary.finiteCoverageCreatesUnboundedFrontier
+    WordFrontier.canonicalResidualWordCertificateFrontierBoundary
+  ≡ 0
+certificateCoverageDoesNotCreateUnboundedness = refl
