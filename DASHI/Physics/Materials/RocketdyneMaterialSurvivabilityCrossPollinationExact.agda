@@ -7,6 +7,9 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialIdentityAndConstitutiveDataExact as Mat
 import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
 import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Cut
+import DASHI.Physics.Propulsion.Rocketdyne1974ThermalModelValidationExact as Therm
+import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as Fals
+import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as Terminal
 import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact as FusionMat
 import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
 
@@ -43,7 +46,7 @@ rocketdyneToFusion : SurvivabilityTransfer
 rocketdyneToFusion = survivability-transfer
   "1974 radiation/insulation-cooled chemical-rocket nozzle"
   "fusion-propulsion material survivability"
-  "reuse provenance and same-model discrimination discipline"
+  "reuse provenance, source-validated thermal-model, and same-model discrimination discipline"
   false false false
   "plasma radiation, magnetic loading, neutron/ion damage and thermal environment are distinct producers"
 
@@ -59,6 +62,15 @@ rocketdyneEmpiricalDiscriminator = Disc.currentDiscriminator
 rocketdyneIdentifiabilityCut : Cut.PhysicalMaxCut
 rocketdyneIdentifiabilityCut = Cut.currentPhysicalMaxCut
 
+rocketdyneThermalValidation : Therm.ThermalModelBoundary
+rocketdyneThermalValidation = Therm.canonicalThermalModelBoundary
+
+rocketdyneMaterialDependence : Fals.MaterialDependenceBoundary
+rocketdyneMaterialDependence = Fals.canonicalMaterialDependenceBoundary
+
+rocketdyneTerminalFrontier : Terminal.TerminalPhysicalFrontier
+rocketdyneTerminalFrontier = Terminal.currentTerminalFrontier
+
 record CrossPollinationBoundary : Set where
   constructor cross-pollination-boundary
   field
@@ -66,8 +78,9 @@ record CrossPollinationBoundary : Set where
     sharedGrammarImpliesSameMaterial : Bool
     sharedGrammarImpliesSameProgramme : Bool
     historicalDiscriminatorMayConstrainMethod : Bool
+    temperatureOnlySurvivabilityModelIsAdequate : Bool
     destinationStillNeedsOwnValidation : Bool
 
 canonicalCrossPollinationBoundary : CrossPollinationBoundary
 canonicalCrossPollinationBoundary =
-  cross-pollination-boundary true false false true true
+  cross-pollination-boundary true false false true false true
