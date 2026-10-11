@@ -10,6 +10,7 @@ import DASHI.Economics.AICapitalProducerBoundedEvidence2026Exact as Bounded
 import DASHI.Economics.AICounterpartyRoleOverlap2026Exact as Counterparty
 import DASHI.Economics.AIInfrastructureCommitmentTrajectory2026Exact as Commitment
 import DASHI.Economics.AIRegulatoryBurdenConcentrationSensibLaw2026Exact as Regulatory
+import DASHI.Economics.AIAustraliaRegulatoryPolicyAcquisition20261012Exact as AustraliaPolicy
 import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Global
 
 ------------------------------------------------------------------------
@@ -112,11 +113,18 @@ marketFlipVolStillOpen = reconciledProducer
   "no declared comparable AI-linked basket and fixed-window market-series receipt is yet populated"
   false
 
+australiaPolicyTrajectoryPaid : ReconciledProducer
+australiaPolicyTrajectoryPaid = reconciledProducer
+  "Australian high-risk-AI guardrail policy trajectory"
+  paid "selected Australian policy lane"
+  "mandatory-guardrails proposal and regulatory-impact survey are acquired; government currently states the previous mandatory proposal will not proceed at this time while voluntary/guidance machinery persists"
+  false
+
 regulatoryMeasuredBurdenStillOpen : ReconciledProducer
 regulatoryMeasuredBurdenStillOpen = reconciledProducer
   "measured regulatory compliance burden / concentration response"
   open "policy-economy"
-  "structural moat mechanism is formalised, but a same-basis compliance-cost vector and observed entry/open-weight/concentration response remain unacquired"
+  "structural moat mechanism and an observed Australian policy trajectory exist, but a same-basis compliance-cost vector and observed entry/open-weight/concentration response remain unacquired"
   false
 
 ------------------------------------------------------------------------
@@ -172,6 +180,18 @@ marketVolEvidenceStillAbsent :
   Bounded.stage Bounded.marketVolEvidence ≡ Bounded.noEvidenceStage
 marketVolEvidenceStillAbsent = refl
 
+australiaMandatoryProposalCurrentlyNotProceeding :
+  AustraliaPolicy.mandatoryGuardrailsCurrentlyProceeding
+    AustraliaPolicy.mandatoryGuardrailsProposalAcquired ≡ false
+australiaMandatoryProposalCurrentlyNotProceeding =
+  AustraliaPolicy.mandatoryProposalCurrentlyNotProceeding
+
+regulatorySurveyStillLacksHarmonisedCostVector :
+  AustraliaPolicy.harmonisedCostVectorAcquired
+    AustraliaPolicy.regulatoryImpactSurveyAcquired ≡ false
+regulatorySurveyStillLacksHarmonisedCostVector =
+  AustraliaPolicy.sameBasisCostVectorStillOpen
+
 regulatorySameBasisCostStillOpen :
   Regulatory.sameBasisComplianceCostsAcquired
     Regulatory.currentRegulatoryBurdenResidual ≡ false
@@ -194,6 +214,7 @@ data EntityPaidImpliesGlobalPaidPermission : Set where
 data CommitmentScaleImpliesCapitalRecoveryPermission : Set where
 data RoleOverlapImpliesNoTerminalDemandPermission : Set where
 data StructuralMoatImpliesMeasuredBurdenPermission : Set where
+data ProposalOutcomeImpliesGenericMoatFalsePermission : Set where
 
 entityPaidDoesNotAutoCloseGlobal : EntityPaidImpliesGlobalPaidPermission → ⊥
 entityPaidDoesNotAutoCloseGlobal ()
@@ -210,6 +231,10 @@ structuralMoatDoesNotAutoCreateMeasuredBurden :
   StructuralMoatImpliesMeasuredBurdenPermission → ⊥
 structuralMoatDoesNotAutoCreateMeasuredBurden ()
 
+australianProposalOutcomeDoesNotRefuteGenericMoatMechanism :
+  ProposalOutcomeImpliesGenericMoatFalsePermission → ⊥
+australianProposalOutcomeDoesNotRefuteGenericMoatMechanism ()
+
 terminalBoundary : String
 terminalBoundary =
-  "The October-2026 tranche has paid entity rollover, entity persistence, selected counterparty-role overlap and infrastructure-commitment trajectories. It has not paid independent terminal-payer provenance, realised ROIC-WACC, global comparable persistence/rollover, quality-adjusted inference margin, capability-normalised scarcity rent, fixed-basket market dynamics or measured policy compliance/concentration response."
+  "The October-2026 tranche has paid entity rollover, entity persistence, selected counterparty-role overlap, infrastructure-commitment trajectories and one concrete Australian policy trajectory. It has not paid independent terminal-payer provenance, realised ROIC-WACC, global comparable persistence/rollover, quality-adjusted inference margin, capability-normalised scarcity rent, fixed-basket market dynamics or measured policy compliance/concentration response."
