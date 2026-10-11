@@ -27,12 +27,13 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPStagedReferenceDirectDPConstruct
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; zero; _+_)
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
-import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
@@ -44,16 +45,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPDirectDPChargedRecurrenceExact a
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
 
 ------------------------------------------------------------------------
--- Reference data on one bounded state.
+-- Reference candidate/admission on one bounded state.
 ------------------------------------------------------------------------
-
-referenceRoot :
-  Q2.BoundedSelfReferenceState →
-  Set
-referenceRoot state =
-  SAT.BooleanFormula
-    (Bridge.formulaVariableBound
-      (Q2.currentFormula state))
 
 referenceCandidate :
   (state : Q2.BoundedSelfReferenceState) →
@@ -98,7 +91,7 @@ referenceTotalCharge state =
     (referenceAdmission state)
 
 ------------------------------------------------------------------------
--- The literal one-step functional construction execution.
+-- Literal one-step functional construction execution.
 ------------------------------------------------------------------------
 
 referenceAdvance :
@@ -202,8 +195,7 @@ referenceChargeFitGivesProgress state fits
 ... | yes actualFits =
   λ ()
 ... | no doesNotFit =
-  Data.Empty.⊥-elim
-    (doesNotFit fits)
+  ⊥-elim (doesNotFit fits)
 
 referenceChargeExhaustionForcesStop :
   (state : Q2.BoundedSelfReferenceState) →
@@ -218,8 +210,7 @@ referenceChargeExhaustionForcesStop state exhausted
       (referenceTotalCharge state)
       (Q2.recursiveMeasure state)
 ... | yes fits =
-  Data.Empty.⊥-elim
-    (NatP.<⇒≱ fits exhausted)
+  ⊥-elim (NatP.<⇒≱ fits exhausted)
 ... | no doesNotFit =
   refl
 
