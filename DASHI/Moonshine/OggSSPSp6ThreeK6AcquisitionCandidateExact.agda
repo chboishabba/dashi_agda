@@ -20,8 +20,9 @@ module DASHI.Moonshine.OggSSPSp6ThreeK6AcquisitionCandidateExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 k6PuncturedCardinality : Nat
 k6PuncturedCardinality = 728
@@ -66,8 +67,6 @@ canonicalSp6ThreeK6CandidateBoundary =
 data PuncturedCardinalityImpliesSameObject : Set where
 
 data SixDimensionalGF3ImpliesChosenFieldProduct : Set where
-
-open import Data.Empty using (⊥)
 
 puncturedCardinalityDoesNotIdentifyCarrier :
   PuncturedCardinalityImpliesSameObject -> ⊥
