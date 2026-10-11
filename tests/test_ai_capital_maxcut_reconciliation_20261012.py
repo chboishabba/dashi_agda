@@ -22,11 +22,30 @@ def test_terminal_reconciliation_surface() -> None:
             "realisedROICWACCStillOpen",
             "qualityAdjustedInferenceMarginStillOpen",
             "openWeightPlatformPointPaid",
-            "marketEventEvidenceNowPartial",
-            "fixedAIBasketStillOpenAfterBroadMarketEvents",
+            "selectedFixedBasketMarketSeriesPaid",
+            "globalMarketDynamicsStillPartial",
+            "selectedBasketFlipRateNowPaid",
+            "selectedBasketVolatilityNowPaid",
+            "selectedBasketStillNotGlobalFlipRate",
+            "selectedBasketStillNotGlobalVolatility",
             "regulatoryMeasuredBurdenStillOpen",
             "globalStateStillNonPromotable",
         ],
+    )
+
+
+def test_fresh_market_owners_are_wired() -> None:
+    require(
+        "DASHI/Economics/AIMarketOpenWeightFreshAcquisition20261012Exact.agda",
+        ["vercelOpenWeightSnapshot20261010", "openWeightPointIs6130bp", "fixedBasketStillUnclosed"],
+    )
+    require(
+        "DASHI/Economics/AIFixedBasketMarketSeries20261012Exact.agda",
+        ["selectedAICapitalBasket", "selectedAICapitalBasketResult", "selectedFlipRateIsClosed", "globalVolatilityStillOpen"],
+    )
+    require(
+        "DASHI/Economics/AIEntanglementEverything2026.agda",
+        ["AIMarketOpenWeightFreshAcquisition20261012Exact", "AIFixedBasketMarketSeries20261012Exact", "AIMaxCutReconciliation20261012Exact"],
     )
 
 
