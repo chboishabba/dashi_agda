@@ -9,16 +9,16 @@
 #   [98304]_2 - [98280]_2 = [24],
 #   [98280]_2 + [1+299]_2 - [98304]_2 = [276].
 #
-# Earlier versions checked disjoint Brauer-character support.  This stronger
-# version also computes the 2-BLOCK of every Brauer constituent using CTBlocks.
-# If the common 98280 support and residual 24/276 supports lie in disjoint
-# blocks, then the modular category itself splits those lanes: cross-block
-# extensions and equivariant leakage are impossible, and block idempotents give
-# canonical source/target projections for the norm map.
+# This screen computes both irreducible Brauer support and CTBlocks 2-block
+# support.  It additionally requires the residual 24 to be the unique
+# degree-24 irreducible Brauer character in the table.  Combined with the
+# source-native rank-24 quotient, this removes extension ambiguity on that
+# residual block: a 24-dimensional module with one degree-24 composition factor
+# has composition length one.
 #
 # The script still does not manufacture the actual integral norm matrix.  It
-# certifies the representation-theoretic block separation that makes the
-# common/residual coordinate split canonical.
+# certifies the representation-theoretic block/simple-module rigidity used by
+# the proof-bearing norm-weld compiler.
 
 if LoadPackage("ctbllib") <> true then Error("CTblLib is required"); fi;
 if LoadPackage("ctblocks") <> true then Error("CTBlocks is required"); fi;
@@ -37,9 +37,14 @@ pos98304:=Positions(ordDeg,98304);
 pos98280:=Positions(ordDeg,98280);
 pos299:=Positions(ordDeg,299);
 pos1:=Positions(ordDeg,1);
+modPos24:=Positions(modDeg,24);
 if Length(pos98304)=0 or Length(pos98280)=0 or Length(pos299)=0 or Length(pos1)=0 then
   Error("required ordinary character degrees 1,299,98280,98304 not all present");
 fi;
+if Length(modPos24)<>1 then
+  Error("expected a unique degree-24 irreducible Brauer character");
+fi;
+unique24Pos:=modPos24[1];
 trivialPos:=pos1[1];
 
 # Map each irreducible Brauer character position to its unique 2-block number.
@@ -55,6 +60,7 @@ for i in [1..Length(modIrr)] do
   fi;
   Add(brauerBlockNumber,hits[1]);
 od;
+unique24Block:=brauerBlockNumber[unique24Pos];
 
 VecSub:=function(a,b)
   return List([1..Length(a)],i->a[i]-b[i]);
@@ -89,26 +95,24 @@ for i983 in pos98304 do
           disjoint982_276:=Length(Intersection(Set(supp982),Set(supp276)))=0;
           blockDisjoint982_24:=Length(Intersection(blocks982,blocks24))=0;
           blockDisjoint982_276:=Length(Intersection(blocks982,blocks276))=0;
+          residualIsUnique24:=supp24=[unique24Pos] and diff24[unique24Pos]=1;
           Add(candidates,[i983,i982,i299,diff24,diff276,
             disjoint982_24,disjoint982_276,supp982,supp24,supp276,
             blocks982,blocks24,blocks276,
-            blockDisjoint982_24,blockDisjoint982_276]);
+            blockDisjoint982_24,blockDisjoint982_276,residualIsUnique24]);
         fi;
       od;
     fi;
   od;
 od;
 
-# Strong candidate: residual 24 is one irreducible Brauer character of degree 24.
-strong:=Filtered(candidates,c ->
-  Sum(c[4])=1 and Length(Sparse(c[4]))=1 and Sparse(c[4])[1][2]=24);
+# Strong candidate: residual 24 is exactly the unique degree-24 Brauer simple.
+strong:=Filtered(candidates,c -> c[16]);
 
 # Support-rigid candidate: old no-overlap criterion.
 rigidSupport:=Filtered(strong,c -> c[6] and c[7]);
 
-# Block-rigid candidate: stronger categorical separation.  This is the preferred
-# cancellation gate because modules from distinct blocks have no cross-block
-# extensions and block idempotents provide canonical equivariant projections.
+# Block-rigid candidate: stronger categorical separation.
 rigidBlock:=Filtered(rigidSupport,c -> c[14] and c[15]);
 
 PrintNatList:=function(out,xs)
@@ -139,7 +143,8 @@ PrintCandidate:=function(out,c)
   AppendTo(out,",\"common_98280_disjoint_from_residual24\":",JsonBool(c[6]));
   AppendTo(out,",\"common_98280_disjoint_from_residual276\":",JsonBool(c[7]));
   AppendTo(out,",\"common_98280_block_disjoint_from_residual24\":",JsonBool(c[14]));
-  AppendTo(out,",\"common_98280_block_disjoint_from_residual276\":",JsonBool(c[15]),"}");
+  AppendTo(out,",\"common_98280_block_disjoint_from_residual276\":",JsonBool(c[15]));
+  AppendTo(out,",\"residual_is_unique_degree24_simple\":",JsonBool(c[16]),"}");
 end;
 PrintCandidateList:=function(out,xs)
   local i; AppendTo(out,"[");
@@ -153,6 +158,8 @@ AppendTo(out,"{\n");
 AppendTo(out,"  \"ordinary_character_count\":",String(Length(ordIrr)),",\n");
 AppendTo(out,"  \"brauer_character_count\":",String(Length(modIrr)),",\n");
 AppendTo(out,"  \"two_block_count\":",String(Length(blocks)),",\n");
+AppendTo(out,"  \"unique_degree24_brauer_position\":",String(unique24Pos),",\n");
+AppendTo(out,"  \"unique_degree24_brauer_block\":",String(unique24Block),",\n");
 AppendTo(out,"  \"brauer_irreducible_block_numbers\":"); PrintNatList(out,brauerBlockNumber); AppendTo(out,",\n");
 AppendTo(out,"  \"degree_98304_positions\":"); PrintNatList(out,pos98304); AppendTo(out,",\n");
 AppendTo(out,"  \"degree_98280_positions\":"); PrintNatList(out,pos98280); AppendTo(out,",\n");
@@ -165,6 +172,7 @@ AppendTo(out,"  \"candidates\":"); PrintCandidateList(out,candidates); AppendTo(
 AppendTo(out,"  \"strong_candidates\":"); PrintCandidateList(out,strong); AppendTo(out,",\n");
 AppendTo(out,"  \"rigid_support_candidates\":"); PrintCandidateList(out,rigidSupport); AppendTo(out,",\n");
 AppendTo(out,"  \"rigid_block_candidates\":"); PrintCandidateList(out,rigidBlock); AppendTo(out,",\n");
+AppendTo(out,"  \"residual_24_unique_simple_identified\":",JsonBool(Length(strong)>0),",\n");
 AppendTo(out,"  \"jh_common_98280_plus_residual24_pattern_found\":",JsonBool(Length(strong)>0),",\n");
 AppendTo(out,"  \"common_98280_support_separated_from_residual_lanes\":",JsonBool(Length(rigidSupport)>0),",\n");
 AppendTo(out,"  \"common_98280_block_separated_from_residual_lanes\":",JsonBool(Length(rigidBlock)>0),",\n");
@@ -173,6 +181,6 @@ AppendTo(out,"  \"actual_norm_map_98280_isomorphism_paid\":false,\n");
 AppendTo(out,"  \"actual_tate_exterior_square_weld_paid\":false\n}\n");
 CloseStream(out);
 Print("2B centralizer mod-2 decomposition cancellation: candidates=",Length(candidates),
-  "; strong=",Length(strong),"; rigid-support=",Length(rigidSupport),
+  "; strong-unique24=",Length(strong),"; rigid-support=",Length(rigidSupport),
   "; rigid-block=",Length(rigidBlock),"\n");
 QUIT;
