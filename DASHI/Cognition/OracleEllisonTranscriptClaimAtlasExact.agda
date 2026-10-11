@@ -70,7 +70,7 @@ data SourceIdentity : Set where
   israelNimbusProcurementRecord : SourceIdentity
   oracleNimbusTenderChallengeReporting : SourceIdentity
   associatedPressChinaSurveillance2025 : SourceIdentity
-  ceccChinaMonitor2025 : SourceIdentity
+  ceccChinaMonitor : SourceIdentity
   transcript20261002 : SourceIdentity
 
 sourceRole : SourceIdentity → SourceRole
@@ -80,7 +80,7 @@ sourceRole oracleRafael2024Announcement = corporatePrimaryAnnouncement
 sourceRole israelNimbusProcurementRecord = governmentProcurementRecord
 sourceRole oracleNimbusTenderChallengeReporting = courtTenderReporting
 sourceRole associatedPressChinaSurveillance2025 = investigativeReporting
-sourceRole ceccChinaMonitor2025 = legislativeCommissionSummary
+sourceRole ceccChinaMonitor = legislativeCommissionSummary
 sourceRole transcript20261002 = transcriptInterpretation
 
 sourceLocator : SourceIdentity → String
@@ -96,7 +96,7 @@ sourceLocator oracleNimbusTenderChallengeReporting =
   "2021 Jerusalem District Court / tender reporting: Oracle challenged its rejection from Project Nimbus; AWS and Google remained the selected providers"
 sourceLocator associatedPressChinaSurveillance2025 =
   "Associated Press investigation: U.S. technology and Chinese mass surveillance / Golden Shield"
-sourceLocator ceccChinaMonitor2025 =
+sourceLocator ceccChinaMonitor =
   "Congressional-Executive Commission on China, China Monitor #1; AP Golden Shield summary"
 sourceLocator transcript20261002 =
   "transcript-2026-10-02.srt"
@@ -142,7 +142,7 @@ oracleChinaAPEvidence = evidence-edge
 
 oracleChinaCECCEvidence : EvidenceEdge
 oracleChinaCECCEvidence = evidence-edge
-  ceccChinaMonitor2025
+  ceccChinaMonitor
   oracleChinaPoliceGoldenShield
   corroboratingSupport
   "CECC summarizes the AP investigation and names Oracle in Golden Shield police-system upgrades; CECC summary does not replace AP's underlying investigation."
