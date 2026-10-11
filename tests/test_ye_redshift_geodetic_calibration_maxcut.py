@@ -23,7 +23,7 @@ def test_geodetic_calibration_pins_authoritative_noaa_artifact_and_same_object_g
         "sourceGravityNanoMetresPerSecondSquared = 9796078684",
         "paperRoundedGravityNanoMetresPerSecondSquared = 9796000000",
         "roundingResidualNanoMetresPerSecondSquared = 78684",
-        "canonicalRoundingResidualWithinHalfMilliGal",
+        "canonicalRoundingResidualWithinHalfMilliMetrePerSecondSquared",
         "geodeticArtifactChecksumRecorded = true",
         "experimentPaperArtifactChecksumRecorded = false",
         "rawExperimentArraysAcquired = false",
