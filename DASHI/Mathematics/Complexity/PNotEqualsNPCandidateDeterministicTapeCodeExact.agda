@@ -71,9 +71,9 @@ endpointDecisionTrueGivesAccepting {machine} interior exact = record
 
 acceptingGivesEndpointDecisionTrue :
   ∀ {machine : Local.ConcreteTapeMachine}
-    {row : Local.TapeRow machine} →
-  Accepting.AcceptingInteriorRow machine row →
-  endpointDecision (Accepting.interior _) ≡ true
+    {row : Local.TapeRow machine}
+    (accepting : Accepting.AcceptingInteriorRow machine row) →
+  endpointDecision (Accepting.interior accepting) ≡ true
 acceptingGivesEndpointDecisionTrue {machine} accepting
     rewrite Accepting.headIsAccepting accepting =
   Local.decideEqualRefl
@@ -156,10 +156,10 @@ open CandidateDeterministicTapeCode public
 
 candidateProgramDescription :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
-    {candidate : Direct.PolynomialSATDeciderCandidate cost} →
-  CandidateDeterministicTapeCode candidate →
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (tape : CandidateDeterministicTapeCode candidate) →
   ProgramCode.ConcreteTapeProgramDescription
-    (machine _)
+    (machine tape)
 candidateProgramDescription tape =
   ProgramCode.canonicalConcreteTapeProgramDescription
     (machine tape)
