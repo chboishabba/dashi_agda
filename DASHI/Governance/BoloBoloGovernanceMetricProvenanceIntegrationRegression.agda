@@ -1,0 +1,21 @@
+module DASHI.Governance.BoloBoloGovernanceMetricProvenanceIntegrationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloGovernanceMetricProvenanceIntegrationExact as Integration
+
+metricFirewallPaid :
+  Integration.metricRoleProvenanceFirewallPaid Integration.canonicalMetricProvenanceIntegrationBoundary ≡ true
+metricFirewallPaid = refl
+
+equalScalarNoCrossRoleTransport :
+  Integration.equalScalarPaysCrossRoleTransport Integration.canonicalMetricProvenanceIntegrationBoundary ≡ false
+equalScalarNoCrossRoleTransport = refl
+
+comparatorScalarNoTargetTransfer :
+  Integration.sameScalarComparatorTargetPaysTransfer Integration.canonicalMetricProvenanceIntegrationBoundary ≡ false
+comparatorScalarNoTargetTransfer = refl
+
+thresholdScalarNoPracticalSignificance :
+  Integration.sameScalarThresholdOutcomePaysPracticalSignificance Integration.canonicalMetricProvenanceIntegrationBoundary ≡ false
+thresholdScalarNoPracticalSignificance = refl
