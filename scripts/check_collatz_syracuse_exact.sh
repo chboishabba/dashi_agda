@@ -101,7 +101,6 @@ grep -q 'universalStoppingFromResidualFrontier' DASHI/Analysis/CollatzSyracuseRe
 grep -q 'uniformWordCertificateImpliesDescent' DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateExact.agda
 grep -q 'universalStoppingFromResidualWordCertificateFrontier' DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
 grep -q 'finiteCoverageCreatesUnboundedFrontier : Nat' DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
-grep -q 'finiteCoverageCreatesUnboundedFrontier = refl' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda || true
 grep -q 'certificateCoverageDoesNotCreateUnboundedness' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'affineCorrectionCocycle' DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
 grep -q 'adjacentSwapCorrection' DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
