@@ -18,6 +18,8 @@ import DASHI.Cognition.ChomskyLanguageAIDisputeExact
 import DASHI.Cognition.ChomskyEpsteinRelationshipExact
 import DASHI.Cognition.EpsteinSciencePatronageMicrocosmExact
 import DASHI.Cognition.EpsteinBrainITGeometryContextExact
+import DASHI.Cognition.EpsteinNaturePublishingBoundaryExact
+import DASHI.Cognition.LLMGeometricPriorEvaluationPoliticalEconomyExact
 import DASHI.Cognition.EpsteinPsychedelicNetworkValidation
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
