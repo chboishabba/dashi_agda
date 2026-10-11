@@ -7,7 +7,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1StagedRootedSourceConstructorE
 --
 --   state -> Maybe run
 --
--- permits an opaque always-stop implementation.  The rooted source machinery
+-- permits an opaque always-stop implementation. The rooted source machinery
 -- already has a deterministic construction and one real gate: declared work
 -- must fit strictly inside the supplied budget.
 --
@@ -16,17 +16,18 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1StagedRootedSourceConstructorE
 --   sourceReady exact-output fit
 --   budgetExhausted budget<=declared-work
 --
--- Thus `nothing` is eliminated at the source-construction layer.  The next
+-- Thus `nothing` is eliminated at the source-construction layer. The next
 -- compiler may fail only for an additional EXPLICIT reason that it introduces.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; zero)
-open import Data.Maybe.Base using (just; nothing)
+open import Data.Empty using (⊥)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -79,63 +80,41 @@ stagedRootedSource root budget
     (NatP.≮⇒≥ doesNotFit)
 
 ------------------------------------------------------------------------
--- Exact agreement with the old Maybe gate.
+-- Projection recovers the previous Maybe gate exactly.
 ------------------------------------------------------------------------
 
-sourceReadyGivesGateSuccess :
+stageToMaybe :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {budget : Nat} →
+  RootedSourceStage root budget →
+  Maybe
+    (Σ
+      (List (Merge.SemanticKey zero))
+      (λ terminalKeys →
+        (terminalKeys
+          ≡ Root.rootedMergedSemanticKeys
+              (Completed.completeRootDescent root))
+        ×
+        (Completed.completedRootedSourceWork root < budget)))
+stageToMaybe (sourceReady terminalKeys exact fits) =
+  just (terminalKeys , (exact , fits))
+stageToMaybe (budgetExhausted exhausted) =
+  nothing
+
+stagedRootedSourceProjectsToOldGate :
   ∀ {rootVariables : Nat}
     (root : SAT.BooleanFormula rootVariables)
-    (budget : Nat)
-    {terminalKeys : List (Merge.SemanticKey zero)}
-    {exact :
-      terminalKeys
-      ≡ Root.rootedMergedSemanticKeys
-          (Completed.completeRootDescent root)}
-    {fits : Completed.completedRootedSourceWork root < budget} →
-  stagedRootedSource root budget
-  ≡ sourceReady terminalKeys exact fits →
-  Completed.completedRootedSourceGate root budget
+    (budget : Nat) →
+  stageToMaybe (stagedRootedSource root budget)
   ≡
-  just
-    (Root.rootedMergedSemanticKeys
-      (Completed.completeRootDescent root)
-    ,
-    (refl , fits))
-sourceReadyGivesGateSuccess root budget equality
+  Completed.completedRootedSourceGate root budget
+stagedRootedSourceProjectsToOldGate root budget
     with NatP._<?_
       (Completed.completedRootedSourceWork root)
       budget
-... | yes actualFits =
-  refl
-... | no doesNotFit =
-  impossible equality
-  where
-    impossible :
-      budgetExhausted
-        (NatP.≮⇒≥ doesNotFit)
-      ≡ sourceReady _ _ _ →
-      Completed.completedRootedSourceGate root budget
-      ≡ just
-          (Root.rootedMergedSemanticKeys
-            (Completed.completeRootDescent root)
-          ,
-          (refl , fits))
-    impossible ()
-
-budgetExhaustedGivesGateFailure :
-  ∀ {rootVariables : Nat}
-    (root : SAT.BooleanFormula rootVariables)
-    (budget : Nat)
-    {exhausted : budget ≤ Completed.completedRootedSourceWork root} →
-  stagedRootedSource root budget
-  ≡ budgetExhausted exhausted →
-  Completed.completedRootedSourceGate root budget
-  ≡ nothing
-budgetExhaustedGivesGateFailure root budget equality =
-  Completed.completedRootedSourceFailsOnExhaustion
-    root
-    budget
-    exhausted
+... | yes fits = refl
+... | no doesNotFit = refl
 
 ------------------------------------------------------------------------
 -- Exhaustion and success are disjoint by arithmetic, independent of syntax.
@@ -147,14 +126,14 @@ sourceFitAndExhaustionContradict :
     {budget : Nat} →
   Completed.completedRootedSourceWork root < budget →
   budget ≤ Completed.completedRootedSourceWork root →
-  Data.Empty.⊥
+  ⊥
 sourceFitAndExhaustionContradict fits exhausted =
   NatP.<⇒≱ fits exhausted
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
--- The rooted exhaustive source stage no longer has an opaque stop.  Its only
+-- The rooted exhaustive source stage no longer has an opaque stop. Its only
 -- failure reason is budget exhaustion.
 --
 -- Still missing for a live DirectDP run:
