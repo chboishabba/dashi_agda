@@ -3,49 +3,80 @@ module DASHI.Physics.ExoticGravity.AntigravitySourceNativeShortestPathMaxCutExac
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 
-import DASHI.Physics.Foundations.CMP119AntigravitySourceVacuumIsraelAdmissionExact as Admission
 import DASHI.Physics.Foundations.CMP119AntigravityEq223MetricStressReuseMaxCutExact as Reuse
+import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
+import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
+import DASHI.Physics.Foundations.GRQFTSingleVacuumNormalizationScaleCovarianceExact as Scale
+import DASHI.Physics.Foundations.GRQFTVacuumAmplitudeDifferentialRenormalizationExact as Differential
 import DASHI.Physics.ExoticGravity.AntigravitySourceNativeReuseTerminalExact as Terminal
 
 ------------------------------------------------------------------------
--- SOURCE-NATIVE ANTIGRAVITY SHORTEST-PATH RECUT
+-- LATEST SOURCE-NATIVE SHORTEST-PATH RECUT
 --
--- The previous terminal correctly exposed BOTH of the remaining source/physics
--- seams, but scheduled them conjunctively.  They belong to two different
--- closure routes:
+-- S: STATIC SINGLE-VACUUM
+--    one literal CMP119 vacuum scale -> source amplitude -> same-vacuum
+--    Israel/Kottler geometry.  A second source vacuum is not required.
+--    The dimensionless safe band depends on q = Lambda R^2, so an unknown
+--    positive multiplicative normalization rescales device radius rather than
+--    blocking geometric existence.  Additive renormalization / Lorentzian
+--    continuation and absolute SI size remain physical payments.
 --
---   V / VACUUM-ISRAEL ROUTE
---     actual source vacuum values
---       -> SourceVacuumIsraelAdmission
---       -> already-owned thin-wall Israel/Kottler geometry.
+-- D: DIFFERENTIAL / LOCK-IN
+--    ON/OFF source amplitudes with a state-independent additive counterterm.
+--    The additive term cancels exactly from Delta Lambda; positive
+--    multiplicative calibration, the control -> source-state map, and SI
+--    calibration remain.  Absolute static Lambda is not required for this
+--    differential lane.
 --
---   R / CONTINUUM-STRESS ROUTE
---     literal Eq.(2.23) metric response
---       -> direct finite/R136 same-object response weld
---       -> continuum stress / acceleration consumer.
---
--- Therefore a shortest-path proof must not charge the R136 response weld to V,
--- nor the two-scale Israel admission to R.  Finite-thickness wall dynamics and
--- source-native potential dynamics are optional strengthenings beyond the exact
--- thin-wall V consumer, not premises of that consumer.
+-- R: CONTINUUM STRESS
+--    literal Eq.(2.23) metric response -> direct finite/R136 same-object weld.
+--    This remains independent of the static/differential vacuum geometry lane.
 ------------------------------------------------------------------------
 
-record VacuumIsraelRouteBoundary : Set where
-  constructor vacuum-israel-route-boundary
-  field
-    sourceVacuumReadoutAlreadyOwned : Bool
-    cosmologicalStressShapeAlreadyOwned : Bool
-    thinWallIsraelGeometryAlreadyOwned : Bool
-    sourceVacuumIsraelAdmissionRequired : Bool
-    r136FiniteContinuumResponseWeldRequired : Bool
-    finiteThicknessWallRequired : Bool
-    sourceNativePotentialDynamicsRequired : Bool
-    physicalCalibrationRequired : Bool
+singleSourceBoundary : SingleSource.SingleSourceVacuumKottlerBoundary
+singleSourceBoundary = SingleSource.canonicalSingleSourceVacuumKottlerBoundary
 
-canonicalVacuumIsraelRouteBoundary : VacuumIsraelRouteBoundary
-canonicalVacuumIsraelRouteBoundary =
-  vacuum-israel-route-boundary
-    true true true true false false false true
+safeBandBoundary : SafeBand.SingleVacuumSafeBandBoundary
+safeBandBoundary = SafeBand.canonicalSingleVacuumSafeBandBoundary
+
+scaleBoundary : Scale.SingleVacuumNormalizationScaleBoundary
+scaleBoundary = Scale.canonicalSingleVacuumNormalizationScaleBoundary
+
+differentialBoundary : Differential.DifferentialVacuumRenormalizationBoundary
+differentialBoundary = Differential.canonicalDifferentialVacuumRenormalizationBoundary
+
+record SingleVacuumStaticRouteBoundary : Set where
+  constructor single-vacuum-static-route-boundary
+  field
+    oneLiteralSourceScaleSufficient : Bool
+    sameVacuumInteriorExteriorGeometryOwned : Bool
+    dimensionlessSafeBandOwned : Bool
+    positiveMultiplicativeNormalizationBlocksExistence : Bool
+    twoSourceVacuumAdmissionRequiredForStaticShortestPath : Bool
+    r136FiniteContinuumResponseWeldRequiredForStaticVacuumRoute : Bool
+    additiveRenormalizationAndLorentzianContinuationStillRequired : Bool
+    absoluteSIDeviceSizeStillRequired : Bool
+    physicalControlAndSICalibrationStillRequired : Bool
+
+canonicalSingleVacuumStaticRouteBoundary : SingleVacuumStaticRouteBoundary
+canonicalSingleVacuumStaticRouteBoundary =
+  single-vacuum-static-route-boundary
+    true true true false false false true true true
+
+record DifferentialLockInRouteBoundary : Set where
+  constructor differential-lock-in-route-boundary
+  field
+    commonAdditiveCountertermCancelsExactly : Bool
+    absoluteStaticLambdaRequiredForDifferentialLockIn : Bool
+    positiveMultiplicativeCalibrationStillRequired : Bool
+    stateIndependentCountertermReceiptStillRequired : Bool
+    physicalControlToSourceDifferenceStillRequired : Bool
+    physicalControlAndSICalibrationStillRequired : Bool
+    scalarMetricResponseAutomaticallySchutzholdTTMode : Bool
+
+canonicalDifferentialLockInRouteBoundary : DifferentialLockInRouteBoundary
+canonicalDifferentialLockInRouteBoundary =
+  differential-lock-in-route-boundary true false true true true true false
 
 record ContinuumStressRouteBoundary : Set where
   constructor continuum-stress-route-boundary
@@ -53,74 +84,41 @@ record ContinuumStressRouteBoundary : Set where
     literalEq223MetricVariationAlreadyOwned : Bool
     r136StressRecoverySurfaceAlreadyOwned : Bool
     directFiniteContinuumResponseWeldRequired : Bool
-    sourceVacuumIsraelAdmissionRequired : Bool
-    fixedVacuumAmplitudePairRequired : Bool
-    newIsraelGeometryRequired : Bool
-    physicalContinuationCalibrationRequired : Bool
+    sourceVacuumGeometryRequired : Bool
+    euclideanLorentzianAndStressConventionCalibrationRequired : Bool
+    physicalControlAndSICalibrationStillRequired : Bool
 
 canonicalContinuumStressRouteBoundary : ContinuumStressRouteBoundary
 canonicalContinuumStressRouteBoundary =
-  continuum-stress-route-boundary
-    true true true false false false true
+  continuum-stress-route-boundary true true true false true true
 
 ------------------------------------------------------------------------
--- Explicit non-double-counting flags used by the live scheduler.
+-- Explicit scheduler / non-double-counting facts.
 ------------------------------------------------------------------------
 
-thinWallVacuumRouteRequiresR136ResponseWeld : Bool
-thinWallVacuumRouteRequiresR136ResponseWeld = false
+twoSourceVacuumAdmissionRequiredForStaticShortestPath : Bool
+twoSourceVacuumAdmissionRequiredForStaticShortestPath = false
 
-continuumStressRouteRequiresSourceVacuumIsraelAdmission : Bool
-continuumStressRouteRequiresSourceVacuumIsraelAdmission = false
+absoluteStaticLambdaRequiredForDifferentialLockIn : Bool
+absoluteStaticLambdaRequiredForDifferentialLockIn = false
 
-sourceToGeometryAdmissionAndR136AreAlternativePayments : Bool
-sourceToGeometryAdmissionAndR136AreAlternativePayments = true
+r136FiniteContinuumResponseWeldRequiredForStaticVacuumRoute : Bool
+r136FiniteContinuumResponseWeldRequiredForStaticVacuumRoute = false
 
-finiteThicknessWallRequiredForThinWallClosure : Bool
-finiteThicknessWallRequiredForThinWallClosure = false
+unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence : Bool
+unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence = false
 
-sourceNativePotentialDynamicsRequiredForThinWallClosure : Bool
-sourceNativePotentialDynamicsRequiredForThinWallClosure = false
+physicalControlAndSICalibrationStillRequired : Bool
+physicalControlAndSICalibrationStillRequired = true
 
-------------------------------------------------------------------------
--- Honest remaining shortest-path leaves.
-------------------------------------------------------------------------
-
-record VacuumIsraelShortestPathLeaves : Set where
-  constructor vacuum-israel-shortest-path-leaves
-  field
-    actualSelectedSourceVacuaLandInAdmissibleIsraelRegion : Bool
-    physicalControlAndSICalibration : Bool
-    experimentalRealisation : Bool
-
-canonicalVacuumIsraelShortestPathLeaves : VacuumIsraelShortestPathLeaves
-canonicalVacuumIsraelShortestPathLeaves =
-  vacuum-israel-shortest-path-leaves true true true
-
-record ContinuumStressShortestPathLeaves : Set where
-  constructor continuum-stress-shortest-path-leaves
-  field
-    finiteEffectiveActionResponseIsSameR136Response : Bool
-    euclideanLorentzianAndStressConventionCalibration : Bool
-    physicalControlAndSICalibration : Bool
-    experimentalRealisation : Bool
-
-canonicalContinuumStressShortestPathLeaves : ContinuumStressShortestPathLeaves
-canonicalContinuumStressShortestPathLeaves =
-  continuum-stress-shortest-path-leaves true true true true
-
--- Existing source-native terminal remains the union-of-frontiers owner; this
--- module only corrects proof scheduling by exposing the disjunctive shortest
--- paths.  No source equality or physical admission is manufactured here.
-sourceNativeReuseTerminalStillAuthoritativeUnion : Bool
-sourceNativeReuseTerminalStillAuthoritativeUnion = true
-
-sourceVacuumAdmissionSurfaceExists : Bool
-sourceVacuumAdmissionSurfaceExists = true
+staticDifferentialAndContinuumAreAlternativeRoutes : Bool
+staticDifferentialAndContinuumAreAlternativeRoutes = true
 
 r136ResponseWeldSurfaceExists : Bool
-r136ResponseWeldSurfaceExists =
-  Reuse.sameObjectEffectiveActionResponseWeldExists
+r136ResponseWeldSurfaceExists = Reuse.sameObjectEffectiveActionResponseWeldExists
+
+sourceNativeReuseTerminalStillAuthoritativeUnion : Bool
+sourceNativeReuseTerminalStillAuthoritativeUnion = true
 
 noPhysicalPaymentPromotedByScheduler : Bool
 noPhysicalPaymentPromotedByScheduler = true
