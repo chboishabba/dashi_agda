@@ -13,6 +13,7 @@ import DASHI.Economics.AITwoSidedConcentrationPropagation20261012Exact as Concen
 import DASHI.Economics.AICoreWeaveDebtCostBoundary20261012Exact as DebtCost
 import DASHI.Economics.AICoreWeaveCapitalSpreadSign20261012Exact as CapitalSign
 import DASHI.Economics.AICoreWeaveCapitalReinvestmentCoverage20261012Exact as Reinvestment
+import DASHI.Economics.AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact as TerminalPayer
 
 ------------------------------------------------------------------------
 -- FINAL OCTOBER-12 RECONCILIATION
@@ -71,6 +72,16 @@ coreWeaveReinvestmentCoveragePaid = finalProducer
   "CoreWeave same-period internal reinvestment coverage" paid "CoreWeave H1-2026"
   "operating cash flow USD 3.663B versus capex USD 14.117B leaves an exact USD 10.454B same-period internal-cash shortfall" false
 
+coreWeaveNamedPayerCapacityPaid : FinalProducer
+coreWeaveNamedPayerCapacityPaid = finalProducer
+  "selected CoreWeave named-payer external-cash capacity" paid "CoreWeave -> Microsoft"
+  "CoreWeave discloses up to USD 43.8B of conditional Microsoft payments through 2033; Microsoft FY2026 independently reports USD 182.9B operating cash flow and USD 214.4B cloud revenue with increased customer cash receipts" false
+
+terminalPayerStillPartial : FinalProducer
+terminalPayerStillPartial = finalProducer
+  "complete independent terminal-payer provenance" partial "CoreWeave/entity/global"
+  "one named payer has an independently source-paid external-customer cash-generation surface, but conditional contract realisation, other payers and all financing/counterparty loops are not exhaustively traced" false
+
 replacementObsolescenceStillPartial : FinalProducer
 replacementObsolescenceStillPartial = finalProducer
   "replacement / obsolescence burden" partial "CoreWeave H1-2026 + lender economic-life evidence"
@@ -95,11 +106,6 @@ providerServingMarginStillOpen : FinalProducer
 providerServingMarginStillOpen = finalProducer
   "quality-adjusted provider serving margin" open "provider economics"
   "API price is observed but same-object marginal serving cost remains absent" false
-
-terminalPayerStillOpen : FinalProducer
-terminalPayerStillOpen = finalProducer
-  "independent terminal-payer provenance" open "global/entity"
-  "two-sided concentration and role overlap refine dependency topology but do not identify complete independent terminal cash" false
 
 numericROICWACCStillOpen : FinalProducer
 numericROICWACCStillOpen = finalProducer
@@ -160,12 +166,21 @@ coreWeaveReplacementCapexStillOpen :
   Reinvestment.replacementCapexIdentified Reinvestment.coreWeaveH12026ReinvestmentCoverage ≡ false
 coreWeaveReplacementCapexStillOpen = Reinvestment.coreWeaveReplacementCapexStillUnidentified
 
+coreWeaveMicrosoftExternalCashCapacityPaid :
+  TerminalPayer.selectedNamedPayerExternalCashCapacity TerminalPayer.coreWeaveMicrosoftTerminalPayerBoundary ≡ true
+coreWeaveMicrosoftExternalCashCapacityPaid = TerminalPayer.selectedNamedPayerCapacityIsPaid
+
+coreWeaveCompleteTerminalPayerStillOpen :
+  TerminalPayer.completeTerminalPayerProvenanceClosed TerminalPayer.coreWeaveMicrosoftTerminalPayerBoundary ≡ false
+coreWeaveCompleteTerminalPayerStillOpen = TerminalPayer.completeTerminalPayerProvenanceStillOpen
+
 data ScopedPaymentImpliesGlobalClosurePermission : Set where
 data PriceNormalizationImpliesMarginPermission : Set where
 data ConcentrationTopologyImpliesTerminalPayerPermission : Set where
 data DebtCostImpliesWACCPermission : Set where
 data SignOnlySpreadImpliesNumericSpreadPermission : Set where
 data CapexGapImpliesReplacementCapexPermission : Set where
+data NamedPayerCapacityImpliesCompleteTerminalPayerPermission : Set where
 
 scopedPaymentDoesNotAutoCloseGlobal : ScopedPaymentImpliesGlobalClosurePermission → ⊥
 scopedPaymentDoesNotAutoCloseGlobal ()
@@ -185,6 +200,10 @@ signOnlySpreadDoesNotAutoCreateNumericSpread ()
 capexGapDoesNotAutoIdentifyReplacementCapex : CapexGapImpliesReplacementCapexPermission → ⊥
 capexGapDoesNotAutoIdentifyReplacementCapex ()
 
+namedPayerCapacityDoesNotCloseCompleteTerminalProvenance :
+  NamedPayerCapacityImpliesCompleteTerminalPayerPermission → ⊥
+namedPayerCapacityDoesNotCloseCompleteTerminalProvenance ()
+
 finalBoundary : String
 finalBoundary =
-  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, debt-cost surface, sign-only negative ROIC-WACC result under declared conditions, and exact H1 internal-cash/capex shortfall are paid. Numerical ROIC/WACC, replacement-capex decomposition and terminal capital recovery remain open. The surviving substantive frontier is independent terminal-payer provenance, numerical realised ROIC-WACC, same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, entity-specific replacement/obsolescence decomposition, and measured regulatory burden/concentration response."
+  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, debt-cost surface, sign-only negative ROIC-WACC result under declared conditions, exact H1 internal-cash/capex shortfall, and one named Microsoft external-cash-capacity payer path are paid. Complete terminal-payer provenance is therefore partial rather than wholly absent, but numerical ROIC/WACC, replacement-capex decomposition and terminal capital recovery remain open. The surviving substantive frontier is exhaustive terminal-payer tracing, numerical realised ROIC-WACC, same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, entity-specific replacement/obsolescence decomposition, and measured regulatory burden/concentration response."
