@@ -8,17 +8,21 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt as Source
 import DASHI.Physics.Closure.BothwellYe2022PublishedGradientPayloadExact as Payload
 import DASHI.Physics.Closure.BothwellYe2022RedshiftComparisonExact as Compare
+import DASHI.Physics.Closure.BothwellYe2022GeodeticCalibrationExact as Geodetic
 import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest as Request
 import DASHI.Promotion.SIMetrologyPayloadDependencyDAG as SIDAG
 
 ------------------------------------------------------------------------
--- Reconciles the generic fail-closed request with the now-landed concrete
--- Bothwell/Ye source and numeric comparison owners.
+-- Reconciles the generic fail-closed request with the concrete Bothwell/Ye
+-- source, published numeric comparison and independently archived geodetic
+-- calibration owners.
 --
--- "experiment ingested" is decomposed into levels instead of one ambiguous
--- boolean.  Publication metadata/numbers are present; unpublished raw arrays,
--- checksum and full covariance remain external.  Consequently no generic
--- acceptance token and no terminal SI-metrology promotion is constructed.
+-- "experiment ingested" is decomposed into evidence levels instead of one
+-- ambiguous boolean.  Publication metadata/numbers and the cited NOAA
+-- calibration are present.  NOAA's calibration artifact is checksum-backed;
+-- the Nature experiment artifact/raw arrays, analysis code and full covariance
+-- remain external.  Consequently no generic acceptance token and no terminal
+-- SI-metrology promotion is constructed.
 ------------------------------------------------------------------------
 
 record EmpiricalRedshiftIngestionStatus : Set where
@@ -30,6 +34,9 @@ record EmpiricalRedshiftIngestionStatus : Set where
     publishedPayloadIsCanonical : publishedPayload ≡ Payload.canonicalPublishedGradientPayload
     comparisonReceipt : Compare.BothwellYe2022ComparisonReceipt
     comparisonReceiptIsCanonical : comparisonReceipt ≡ Compare.canonicalBothwellYe2022ComparisonReceipt
+    geodeticCalibrationReceipt : Geodetic.BothwellYe2022GeodeticCalibrationReceipt
+    geodeticCalibrationReceiptIsCanonical :
+      geodeticCalibrationReceipt ≡ Geodetic.canonicalBothwellYe2022GeodeticCalibrationReceipt
     genericRequest : Request.QuantumClockEmpiricalRedshiftReceiptRequest
     genericRequestIsCanonical : genericRequest ≡ Request.canonicalQuantumClockEmpiricalRedshiftReceiptRequest
 
@@ -43,15 +50,26 @@ record EmpiricalRedshiftIngestionStatus : Set where
     publishedSystematicsSummaryIngestedIsTrue : publishedSystematicsSummaryIngested ≡ true
     sameScaleComparisonConstructed : Bool
     sameScaleComparisonConstructedIsTrue : sameScaleComparisonConstructed ≡ true
+    geodeticCalibrationIngested : Bool
+    geodeticCalibrationIngestedIsTrue : geodeticCalibrationIngested ≡ true
+    geodeticCalibrationChecksumIngested : Bool
+    geodeticCalibrationChecksumIngestedIsTrue : geodeticCalibrationChecksumIngested ≡ true
 
     publicRawDataIngested : Bool
     publicRawDataIngestedIsFalse : publicRawDataIngested ≡ false
     artifactChecksumIngested : Bool
     artifactChecksumIngestedIsFalse : artifactChecksumIngested ≡ false
+    experimentPaperArtifactChecksumIngested : Bool
+    experimentPaperArtifactChecksumIngestedIsFalse :
+      experimentPaperArtifactChecksumIngested ≡ false
     fullCovarianceIngested : Bool
     fullCovarianceIngestedIsFalse : fullCovarianceIngested ≡ false
     analysisCodeIngested : Bool
     analysisCodeIngestedIsFalse : analysisCodeIngested ≡ false
+    rawExperimentArraysAcquired : Bool
+    rawExperimentArraysAcquiredIsFalse : rawExperimentArraysAcquired ≡ false
+    analysisCodeAcquired : Bool
+    analysisCodeAcquiredIsFalse : analysisCodeAcquired ≡ false
 
     genericAcceptanceTokenConstructed : Bool
     genericAcceptanceTokenConstructedIsFalse : genericAcceptanceTokenConstructed ≡ false
@@ -74,6 +92,8 @@ canonicalBothwellYe2022IngestionStatus = record
   ; publishedPayloadIsCanonical = refl
   ; comparisonReceipt = Compare.canonicalBothwellYe2022ComparisonReceipt
   ; comparisonReceiptIsCanonical = refl
+  ; geodeticCalibrationReceipt = Geodetic.canonicalBothwellYe2022GeodeticCalibrationReceipt
+  ; geodeticCalibrationReceiptIsCanonical = refl
   ; genericRequest = Request.canonicalQuantumClockEmpiricalRedshiftReceiptRequest
   ; genericRequestIsCanonical = refl
   ; experimentIdentified = true
@@ -86,14 +106,24 @@ canonicalBothwellYe2022IngestionStatus = record
   ; publishedSystematicsSummaryIngestedIsTrue = refl
   ; sameScaleComparisonConstructed = true
   ; sameScaleComparisonConstructedIsTrue = refl
+  ; geodeticCalibrationIngested = true
+  ; geodeticCalibrationIngestedIsTrue = refl
+  ; geodeticCalibrationChecksumIngested = true
+  ; geodeticCalibrationChecksumIngestedIsTrue = refl
   ; publicRawDataIngested = false
   ; publicRawDataIngestedIsFalse = refl
   ; artifactChecksumIngested = false
   ; artifactChecksumIngestedIsFalse = refl
+  ; experimentPaperArtifactChecksumIngested = false
+  ; experimentPaperArtifactChecksumIngestedIsFalse = refl
   ; fullCovarianceIngested = false
   ; fullCovarianceIngestedIsFalse = refl
   ; analysisCodeIngested = false
   ; analysisCodeIngestedIsFalse = refl
+  ; rawExperimentArraysAcquired = false
+  ; rawExperimentArraysAcquiredIsFalse = refl
+  ; analysisCodeAcquired = false
+  ; analysisCodeAcquiredIsFalse = refl
   ; genericAcceptanceTokenConstructed = false
   ; genericAcceptanceTokenConstructedIsFalse = refl
   ; genericPromotionTokenConstructed = false
@@ -101,15 +131,16 @@ canonicalBothwellYe2022IngestionStatus = record
   ; terminalSIMetrologyPromotionAllowed = false
   ; terminalSIMetrologyPromotionAllowedIsFalse = refl
   ; acquisitionResidual =
-      "obtain an immutable public or author-supplied artifact byte stream and record its SHA-256"
+      "pin/checksum the exact experiment publication or author-supplied experiment artifact bytes used for terminal ingestion"
       ∷ "obtain the experimental arrays underlying the fourteen fitted gradients or an authoritative exported data product"
       ∷ "obtain the analysis code or a reproducible equivalent sufficient to replay the fitted-gradient pipeline"
       ∷ "materialise the full covariance/independence treatment rather than only the published total systematic budget"
-      ∷ "construct the generic EmpiricalRedshiftReceiptAcceptanceToken only after those evidence rows are actually satisfied"
+      ∷ "construct the generic EmpiricalRedshiftReceiptAcceptanceToken only after those experiment-evidence rows are actually satisfied"
       ∷ []
   ; reading =
-      "The old generic statement that no experiment was ingested is now refined: a concrete experiment, publication metadata, published numbers and a same-scale comparison are ingested."
-      ∷ "What remains un-ingested is the stronger evidence needed by the generic acceptance contract: raw arrays, immutable artifact checksum, replayable code and full covariance/independence evidence."
+      "A concrete experiment, publication metadata, published numbers, source-reported systematics and a same-scale gh/c^2 comparison are ingested."
+      ∷ "The geodetic calibration is now independently source-closed at the public-artifact level: NOAA NOS NGS 77 is DOI-pinned, checksum-backed, and its JILA S1B60H gravity value rounds to the paper's 9.796 m s^-2 input."
+      ∷ "That checksum closes the calibration artifact only; it does not manufacture a checksum for the experiment paper, raw experimental arrays, analysis code or full covariance evidence."
       ∷ "The published comparison pays empirical consistency at the source-reported summary level but does not open the terminal SI-metrology gate."
       ∷ []
   }
@@ -117,6 +148,14 @@ canonicalBothwellYe2022IngestionStatus = record
 canonicalTerminalSIMetrologyStillClosed :
   terminalSIMetrologyPromotionAllowed canonicalBothwellYe2022IngestionStatus ≡ false
 canonicalTerminalSIMetrologyStillClosed = refl
+
+canonicalGeodeticCalibrationIngested :
+  geodeticCalibrationIngested canonicalBothwellYe2022IngestionStatus ≡ true
+canonicalGeodeticCalibrationIngested = refl
+
+canonicalGeodeticCalibrationChecksumIngested :
+  geodeticCalibrationChecksumIngested canonicalBothwellYe2022IngestionStatus ≡ true
+canonicalGeodeticCalibrationChecksumIngested = refl
 
 canonicalSIDAGTerminalStillClosed :
   SIDAG.terminalPromotionAllowed SIDAG.canonicalSIMetrologyPayloadDependencyDAG ≡ false
