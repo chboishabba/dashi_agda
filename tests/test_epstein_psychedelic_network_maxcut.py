@@ -47,6 +47,8 @@ EXPECTED = {
         "Motoki",
         "facebookVideoAds",
         "socialRelatedNeuralMeasureForecastsAggregateSharing",
+        "ginoYuIndependentNeurotechBackground",
+        "backgroundDoesNotEstablishEpsteinFundedUse",
         "forecastDoesNotEstablishMechanism",
         "facebookResultDoesNotEstablishInstagramDeployment",
         "neuroforecastingDoesNotEstablishEpsteinYuUse",
@@ -58,6 +60,8 @@ EXPECTED = {
         "selfReportDoesNotIndependentlyVerify",
         "publicBenefitPrivateProfitTension",
         "mapsPBCWhollyOwnedClaim",
+        "mapsSharedOwnershipReceipt",
+        "institutionalReleaseDoesNotEqualExternalAudit",
     ],
     "DASHI/Cognition/ChomskyLanguageAIDisputeExact.agda": [
         "ConsentDistrustDualityExact",
