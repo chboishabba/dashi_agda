@@ -12,7 +12,8 @@ module DASHI.Mathematics.CrossPollination.MillenniumP9MaxCut20261012Validation w
 --   * present structural self-quotation progress;
 --   * proof that present structural quotation is SAT-semantically inert;
 --   * opposite semantic diagonal logic;
---   * concrete Cook--Levin realization target.
+--   * concrete Cook--Levin realization target;
+--   * literal full-formula self-input growth no-go.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationValidation
@@ -33,11 +34,12 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPFixedWidthQuotedCorrectnessBound
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPOppositeSemanticProgramQuotationExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeSemanticQuotationBridgeExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPLiteralCookQuotationSelfInputNoGoExact
 
 ------------------------------------------------------------------------
 -- TRUST BOUNDARY
 --
 -- Importing this root is intended to make every new dependency visible to the
--- Agda checker.  It does not assert the final concrete opposite-interpreter
+-- Agda checker. It does not assert the final concrete opposite-interpreter
 -- realization exists; that remains the explicit open constructor surface.
 ------------------------------------------------------------------------
