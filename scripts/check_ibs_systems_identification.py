@@ -17,7 +17,7 @@ required = [
     "10.1016/j.ejim.2024.07.008",
     "10.1016/j.cgh.2026.04.014",
     "10.1053/j.gastro.2024.02.008",
-    "10.1016/j.cgh.2020.02.021",
+    "10.1016/j.cgh.2020.02.027",
     "10.1111/apt.12319",
     "canonicalIBSMeasurementAtlas",
     "canonicalMinimumDiscriminatingPanel",
