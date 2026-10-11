@@ -9,6 +9,8 @@ import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
 import DASHI.Physics.Materials.NickelBaseSuperalloyMechanismExact as Ni
 import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact as Fang
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
+import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as RocketFals
+import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as RocketTerminal
 
 ------------------------------------------------------------------------
 -- FUSION PROPULSION x MATERIAL SURVIVABILITY
@@ -77,12 +79,6 @@ fangArchitectedIntersection = fusion-propulsion-material-intersection
 
 ------------------------------------------------------------------------
 -- Historical quantum-vacuum wording in a fusion/propulsion programme.
---
--- NASA TechPort's Direct Energy Conversion for Nuclear Propulsion at Low
--- Specific Mass project discusses aneutronic-fusion products, TWDEC and plasma
--- propulsion, and its anticipated-benefits text mentions a 'Quantum Vacuum
--- thruster'.  That is an official historical mention, not a thrust-validation
--- receipt and not a zero-point-energy extraction receipt.
 ------------------------------------------------------------------------
 
 record QuantumVacuumProgrammeMention : Set where
@@ -127,6 +123,32 @@ existingFangBoundary = Fang.canonicalFangMetamaterialBoundary
 
 existingAntigravityBoundary : Anti.AntigravityPromotionBoundary
 existingAntigravityBoundary = Anti.canonicalAntigravityPromotionBoundary
+
+------------------------------------------------------------------------
+-- Rocketdyne provides a reusable experimental-design grammar:
+-- same reported thermal observation + different documented material/hardware
+-- state + opposite outcome => temperature-only observation is insufficient.
+-- This grammar may guide fusion/material qualification experiments, but the
+-- historical chemical-rocket result is not itself fusion-plasma evidence.
+------------------------------------------------------------------------
+
+rocketdyneMaterialDependenceBoundary : RocketFals.MaterialDependenceBoundary
+rocketdyneMaterialDependenceBoundary = RocketFals.canonicalMaterialDependenceBoundary
+
+rocketdyneTerminalFrontier : RocketTerminal.TerminalPhysicalFrontier
+rocketdyneTerminalFrontier = RocketTerminal.currentTerminalFrontier
+
+record MaterialDiscriminatorTransferBoundary : Set where
+  constructor material-discriminator-transfer-boundary
+  field
+    temperatureOnlyCanBeRejectedByMatchedOutcomeContrast : Bool
+    materialIdentityMustRemainExplicitWhenTestingMaterialEffect : Bool
+    rocketdyneOutcomeTransfersNumericallyToFusionPlasma : Bool
+    matchedEnvironmentGeometryAndConstitutiveDataStillRequired : Bool
+
+canonicalMaterialDiscriminatorTransferBoundary : MaterialDiscriminatorTransferBoundary
+canonicalMaterialDiscriminatorTransferBoundary =
+  material-discriminator-transfer-boundary true true false true
 
 ------------------------------------------------------------------------
 -- Named firewalls.
