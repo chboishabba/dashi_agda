@@ -27,13 +27,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Product using (Σ; _,_)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
+import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Exact
 
 ------------------------------------------------------------------------
@@ -145,20 +145,18 @@ deterministicExecutionToExactBudgetAcceptingRun :
       DeterministicExecution
         successor
         steps
-        (DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact.guardedInitialRow
-          input steps)
+        (Guard.guardedInitialRow input steps)
         finish) →
     Accepting.InitialInteriorRow
       machine
-      (DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact.guardedInitialRow
-        input steps) →
+      (Guard.guardedInitialRow input steps) →
     Accepting.AcceptingInteriorRow machine finish →
   Exact.ExactBudgetAcceptingRun input steps
 deterministicExecutionToExactBudgetAcceptingRun
-    input steps execution initial accepting =
+    input steps {finish} execution initial accepting =
   record
     { Exact.rows = executionRows execution
-    ; Exact.finish = _
+    ; Exact.finish = finish
     ; Exact.certificate = record
         { Accepting.initial = initial
         ; Accepting.run = executionToWellFormedRun execution
