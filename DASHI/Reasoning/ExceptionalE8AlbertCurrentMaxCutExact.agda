@@ -4,31 +4,30 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 -- CURRENT EXCEPTIONAL E8 / ALBERT MAX-CUT
 --
 -- Fail-closed status surface spanning the source-native Agda rational Albert
--- algebra and the companion Lean structured-E8 / finite-Spin / F4 producers.
+-- algebra and companion Lean structured-E8 / Spin-D4 / F4 producers.
 --
--- Agda natively owns:
---   * rational H3(O_Q), standard cubic and explicit Jordan product;
---   * commutativity, unit laws and the exceptional Jordan identity;
---   * explicit S3, signed-basis and Moufang-triality Albert automorphisms;
---   * the generic theorem that every [L_a,L_b] is a derivation;
---   * exact-rational executable diagnostics: derivation span/derived algebra
---     dimension 52, center 0, regular centralizer dimension 4, and compactness
---     / root-decomposition diagnostics.
+-- The local exceptional discovery wall has collapsed further:
 --
--- Companion Lean now independently owns:
---   * intrinsic structured E8 root/Weyl data;
---   * explicit finite W(F4) Cartan/root datum (48 roots, rank four);
---   * four actual Spin/Tits Albert automorphisms and the exact 384 -> 192
---     quotient to the independently constructed W(D4) kernel;
---   * a native projective lift of one outer triality direction and an exhaustive
---     obstruction to the other inside the current 73728 signed-basis subgroup;
---   * an arbitrary-element inner-derivation theorem and exact local diagnostic
---     52 = 28 + 24 = 28 + 8+8+8 on the same rational Albert formulas.
+-- * Agda owns the actual H_3(O_Q), cubic norm, Jordan product/identity;
+-- * every arbitrary inner commutator [L_a,L_b] is source-written as a
+--   derivation;
+-- * exact executable algebra gives derivation dimension 52 and the triality
+--   split 28+8_v+8_s+8_c with exact bracket containment;
+-- * four explicit commuting inner derivations distinguish the vector and two
+--   chiral half-spin eights;
+-- * an exact symbolic Q(i) projector producer now pays zero-weight rank 4 and
+--   48 one-dimensional nonzero weight/root spaces = 24+8+8+8, with no
+--   floating-point eigensolver;
+-- * companion Lean independently owns the 48-root F4 Cartan/Coxeter datum and
+--   Weyl order 1152, plus the existing finite Spin/D4 action receipts;
+-- * Agda owns an actual typed same-carrier linear Jordan-automorphism carrier
+--   and several explicit elements/subgroups.
 --
--- The remaining exceptional wall is no longer generation-by-small-subgroups or
--- carrier arithmetic.  It is the explicit same-Lie-algebra/root-space bridge
--- from the concrete Albert derivation algebra to the independent F4 root datum,
--- plus the strictly stronger group recognition Aut(J)=F4=Stab_E6(1).
+-- Therefore the remaining exceptional wall is now a GENERAL classification
+-- theorem: identify the concrete rational derivation Lie algebra / Aut(J) with
+-- the appropriate rational form of type F4 and the cubic linear symmetry group
+-- with type E6.  Classical sources pay that mathematics, but the general
+-- characteristic-zero classification theorem is not formalized in this repo.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -45,6 +44,11 @@ import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact 
 import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact as Known
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact as Deriv
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as DerivLaw
+import DASHI.Mathematics.Algebra.RationalAlbertTrialityDerivationExact as TrialityDeriv
+import DASHI.Mathematics.Algebra.RationalAlbertF4CartanRootReceiptExact as Cartan
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as ExactRoots
+import DASHI.Mathematics.Algebra.RationalAlbertLinearJordanAutomorphismExact as LinearAut
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact as Classification
 import DASHI.Reasoning.AlbertF4LeanCrossProverMaxCutReceiptExact as LeanF4
 
 record ExceptionalCurrentMaxCut : Set where
@@ -63,16 +67,19 @@ record ExceptionalCurrentMaxCut : Set where
     rationalAlbertCommutativitySourceWritten : Bool
     rationalAlbertUnitLawsSourceWritten : Bool
     rationalAlbertJordanIdentitySourceWritten : Bool
-    rationalAlbertS3AutomorphismSubgroupSourceWritten : Bool
-    rationalAlbertS3ProductCubicPreservationSourceWritten : Bool
 
     signedBasisG2SubgroupPaid : Bool
     selectedMoufangTrialityAutomorphismPaid : Bool
-    selectedTrialityProductCubicPreservationPaid : Bool
-    knownFiveAlbertGeneratorsBijectivePaid : Bool
+    knownAlbertGeneratorFamilyPaid : Bool
+    typedLinearJordanAutomorphismCarrierPaid : Bool
     allInnerDerivationLawsSourceWritten : Bool
-    innerDerivationDimension52DiagnosticPaid : Bool
-    innerDerivationPerfectCenterlessDiagnosticPaid : Bool
+
+    exactInnerDerivationDimension52Paid : Bool
+    exactTrialityTwentyEightEightEightEightPaid : Bool
+    exactTrialityBracketPatternPaid : Bool
+    exactCartanFourVectorSpinSpinPaid : Bool
+    exactQIRootSpacesFourPlusFortyEightPaid : Bool
+    floatingRootExtractionSuperseded : Bool
 
     companionLeanFoldedWeylOrder1152Paid : Bool
     companionLeanF4Root48Rank4Paid : Bool
@@ -80,11 +87,10 @@ record ExceptionalCurrentMaxCut : Set where
     companionLeanFourD4AlbertAutomorphismsPaid : Bool
     companionLeanG05ProjectiveOuterLiftPaid : Bool
     companionLeanG24CurrentSignedBasisObstructionPaid : Bool
-    companionLeanDerivation52_28_24DiagnosticPaid : Bool
 
-    agdaInnerDerivationSpan52KernelCertificatePaid : Bool
-    agdaFormalComplexificationPaid : Bool
-    agdaFormalRootSpaceDecompositionPaid : Bool
+    allConcreteClassificationHypothesesOwned : Bool
+    classificationReducedToSingleExternalPremise : Bool
+    generalExceptionalClassificationFormalizedInRepo : Bool
     sameLieAlgebraF4RecognitionPaid : Bool
     fullF4AutomorphismRecognitionPaid : Bool
     actualE6UnitStabilizerRecognitionPaid : Bool
@@ -102,9 +108,13 @@ canonicalExceptionalCurrentMaxCut =
     true true true
     true true true
     true true true true
-    true true
-    true true true true true true true
-    true true true true true true true
-    false false false false false false
+    true true true true true
+    true true true true
+    ExactRoots.canonicalBoundary.exactQIRootSpaceDecompositionPaidByProducer
+    true
+    true true true true true true
+    Classification.canonicalBoundary.allConcreteExceptionalHypothesesOwned
+    Classification.canonicalBoundary.classificationReducedToOneExternalTheoremPremise
+    false false false false
     false false false
-    "Structured E8 is source-written through the intrinsic glue/Coxeter root datum. Agda owns the actual rational Albert algebra and an arbitrary-element theorem that every inner commutator [L_a,L_b] is a derivation. Exact-rational diagnostics give a 52-dimensional perfect centerless derivation algebra with regular centralizer dimension four. Companion Lean independently pays the rank-four 48-root F4 datum, four actual D4/Spin Albert automorphisms with a 384-to-192 same-action quotient, a projective g05 outer lift, a current signed-basis obstruction for g24, and the exact-rational 52=28+24 triality diagnostic. The live wall is the formal complexified root-space/same-Lie-algebra bridge and then Aut(J)=F4=Stab_E6(1); neither dimension 52 nor root count 48 manufactures that bridge."
+    "Structured E8 and the concrete rational Albert discovery programme are source-written through the intrinsic E8 glue/Coxeter datum, actual Jordan algebra, generic inner derivations, exact 52=28+8+8+8 triality brackets, Cartan/chirality, and an exact non-floating Q(i) 4+48 one-dimensional root-space decomposition. Companion Lean independently owns the F4 root/Weyl datum and finite Spin/D4 action receipts. All concrete hypotheses for the classical characteristic-zero E6/F4 classification are now owned; the sole exceptional formal seam is formalizing/importing that general classification theorem on this rational form. Monster normalizer realization, genuinely new original-T5 recognition, and LILA remain independent lanes."
