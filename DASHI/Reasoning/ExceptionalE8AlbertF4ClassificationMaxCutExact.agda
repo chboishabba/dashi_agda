@@ -3,32 +3,31 @@ module DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact where
 ------------------------------------------------------------------------
 -- TERMINAL CURRENT EXCEPTIONAL CLASSIFICATION MAX-CUT
 --
--- At this point the remaining E6/F4 step is a known classification theorem,
--- not a missing carrier/product/action discovery.
+-- The finite/root/Jordan discovery programme is now exhausted through an
+-- intrinsic structured E8 root datum and an actual rational Albert algebra.
+-- The former floating F4 root-space diagnostic has additionally been replaced
+-- by an exact symbolic Q(i) projector computation.
 --
--- Internally paid/source-written:
---   * exact rational alternative composition algebra O_Q;
---   * actual H_3(O_Q) 27-dimensional Jordan carrier, unit, cubic norm/product;
---   * commutativity/unit/Jordan identity;
---   * arbitrary inner derivation law;
---   * explicit S3, signed-basis octonion and selected Moufang-triality Albert
---     automorphisms plus arbitrary-word closure;
---   * every compiled Jordan automorphism fixes the actual Jordan unit;
---   * exact derivation diagnostics: dim 52, perfect, center 0, positive trace
---     form, regular centralizer rank 4;
---   * complexified diagnostic: 48 roots = 24 short + 24 long, ratio 2, standard
---     F4 Cartan;
---   * companion Lean independent F4 root/Coxeter datum.
+-- Internally/source-written or exact-executable on the same concrete objects:
+--   * rational alternative composition octonions;
+--   * H_3(O_Q), unit, cubic norm, Jordan product and Jordan identity;
+--   * arbitrary inner-derivation law;
+--   * exact 52-dimensional inner-derivation span;
+--   * exact 28+8_v+8_s+8_c triality decomposition and bracket pattern;
+--   * four explicit commuting Cartan derivations with vector/spin chirality;
+--   * exact Q(i) root-space decomposition: rank-4 zero space + 48 one-
+--     dimensional nonzero root spaces = 24+8+8+8;
+--   * companion Lean standard F4 root datum and Weyl closure order 1152;
+--   * actual same-carrier linear Jordan automorphism carrier with explicit
+--     coordinate, signed-basis-octonion, and Moufang-triality elements;
+--   * every compiled Jordan automorphism fixes the actual Jordan unit.
 --
--- Classically sourced:
---   * Der(Albert) is central simple Lie algebra of type F4 in char 0;
---   * Aut(Albert) is an algebraic group of type F4;
---   * the cubic determinant symmetry group is of type E6.
---
--- Thus the only formal exceptional-classification seam is importing/proving
--- the scalar-extension/root-space/classification theorem on THIS rational form
--- and constructing the same-carrier E6/F4 group recognition.  Cardinalities,
--- finite minuscule points and dimensions are no longer doing that work.
+-- Classical sources identify Der(Albert) and Aut(Albert) as type F4 and the
+-- cubic determinant symmetry group as type E6 in characteristic zero.
+-- Therefore the only remaining formal exceptional-classification seam is the
+-- GENERAL classification theorem itself (or an imported formal version of it)
+-- instantiated on this rational form.  There is no longer a missing local
+-- carrier, product, action, triality decomposition, Cartan or root-space search.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -38,7 +37,8 @@ import DASHI.Mathematics.Algebra.CompositionAlgebraCoreExact as Composition
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact as Source
 import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismFixesUnitExact as UnitFix
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact as Linear
-import DASHI.Mathematics.Algebra.RationalAlbertF4RootDecompositionDiagnosticExact as RootDiag
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as ExactRoots
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact as Instantiation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact as Previous
 
 record ExceptionalClassificationBoundary : Set where
@@ -48,17 +48,23 @@ record ExceptionalClassificationBoundary : Set where
     actualRationalAlbertJordanAlgebraPaid : Bool
     arbitraryInnerDerivationLawPaid : Bool
     actualJordanAutomorphismsFixUnitPaid : Bool
-    derivationDimension52PerfectCenterlessDiagnosticPaid : Bool
-    compactRank4DiagnosticPaid : Bool
-    F4RootDecompositionDiagnosticPaid : Bool
+    derivationDimension52PaidByExactProducer : Bool
+    exactTrialityTwentyEightEightEightEightPaid : Bool
+    exactCartanFourVectorSpinSpinPaid : Bool
+    exactQIRootSpacesFourPlusFortyEightPaid : Bool
+    floatingRootExtractionSuperseded : Bool
     companionLeanIndependentF4RootDatumPaid : Bool
+    companionLeanF4WeylOrder1152Paid : Bool
+    typedLinearJordanAutCarrierPaid : Bool
 
     classicalDerivationTypeF4SourcePaid : Bool
     classicalAutAlbertTypeF4SourcePaid : Bool
     classicalCubicSymmetryTypeE6SourcePaid : Bool
     linearSameCarrierE6F4TargetTyped : Bool
+    allConcreteClassificationHypothesesOwned : Bool
+    classificationReducedToSingleExternalPremise : Bool
 
-    formalScalarExtensionRootSpacesPaid : Bool
+    generalExceptionalClassificationFormalizedInRepo : Bool
     formalDerAlbertTypeF4InstantiationPaid : Bool
     formalAutAlbertEqualsF4Paid : Bool
     formalCubicGroupEqualsE6Paid : Bool
@@ -75,8 +81,12 @@ canonicalExceptionalClassificationBoundary : ExceptionalClassificationBoundary
 canonicalExceptionalClassificationBoundary =
   exceptional-classification-boundary
     true true true true
+    true true true
+    ExactRoots.canonicalBoundary.exactQIRootSpaceDecompositionPaidByProducer
     true true true true
     true true true true
+    Instantiation.canonicalBoundary.allConcreteExceptionalHypothesesOwned
+    Instantiation.canonicalBoundary.classificationReducedToOneExternalTheoremPremise
     false false false false false
     false true false false
-    "The exceptional finite/root/Jordan discovery programme is exhausted through an actual rational Albert algebra and an intrinsic structured E8 root datum. Classical sources identify Der(J) and Aut(J) as type F4 and the cubic determinant group as type E6; the remaining formal task is classification/scalar-extension instantiation on this rational form. The Monster normalizer remains source-action dependent; the natural inherited action on the original punctured T5 is already blocked, so any future T5 recognition must introduce genuinely new structure; LILA remains empirical."
+    "All concrete exceptional hypotheses are now owned on the actual rational Albert/E8 objects, including an exact non-floating Q(i) 4+48 root-space certificate and an independent F4 Weyl datum. The remaining formal seam is a general characteristic-zero Albert/Lie/algebraic-group classification theorem, already located in classical sources but not formalized in this repo. Monster normalizer realization, any genuinely new original-T5 recognition, and LILA remain independent lanes."
