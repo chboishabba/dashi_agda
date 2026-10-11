@@ -6,6 +6,8 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Plasma.PhaseRook270Exact as Rook
 import DASHI.Physics.Plasma.PhaseCore243FiveTritExact as Bridge
 import DASHI.Physics.Plasma.Phase243ActionIntertwinerExact as Action
+import DASHI.Physics.Plasma.Phase243OrbitQuotientExact as Q54
+import DASHI.Physics.Plasma.Phase243EquivariantFibreSearchExact as Fibre
 import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact as Consumer
 
 ------------------------------------------------------------------------
@@ -16,12 +18,15 @@ import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact as Consumer
 --   270 = 243 + 27 invariant rook split;
 --   Core243 <-> FiveTrits total round-trip carrier recognition;
 --   AxisBoundary27 <-> Ternary27Point total round-trip carrier recognition;
---   exact C3 advance / inversion action transport through both bijections.
+--   exact C3 advance / inversion action transport through both bijections;
+--   exact Core243/(C3⋊C2) quotient to 54 incidence+relative-phase classes;
+--   explicit equivariance gate before a physical consumer may use that quotient;
+--   low-resolution hard-nonaxis 54-representative physical replay.
 --
 -- Open physical frontier:
---   populate the 243 base with continuous geometry/current amplitudes while
---   preserving non-axisymmetry, then pay free-boundary coil+plasma equilibrium,
---   full orbit/FOW/EP consumers and same-chart best-known comparison.
+--   replace the toy surface-field fibre by same-object coil+plasma free-boundary
+--   equilibrium, then pay full orbit/FOW/EP consumers and same-chart best-known
+--   comparison.  The numerical Core54 winner is reconnaissance, not acceptance.
 ------------------------------------------------------------------------
 
 record Phase243MaxCutStatus : Set where
@@ -37,9 +42,16 @@ record Phase243MaxCutStatus : Set where
     ternary27BoundaryBijectionPaidIsTrue : ternary27BoundaryBijectionPaid ≡ true
     phaseActionIntertwinerPaid : Bool
     phaseActionIntertwinerPaidIsTrue : phaseActionIntertwinerPaid ≡ true
-    nonAxisymmetricPhysicalRealizationPaid : Bool
-    nonAxisymmetricPhysicalRealizationPaidIsFalse :
-      nonAxisymmetricPhysicalRealizationPaid ≡ false
+    actionQuotient54Paid : Bool
+    actionQuotient54PaidIsTrue : actionQuotient54Paid ≡ true
+    quotientConsumerEquivarianceGatePaid : Bool
+    quotientConsumerEquivarianceGatePaidIsTrue : quotientConsumerEquivarianceGatePaid ≡ true
+    hardNonAxisymmetricNumericalFibreReplayPaid : Bool
+    hardNonAxisymmetricNumericalFibreReplayPaidIsTrue :
+      hardNonAxisymmetricNumericalFibreReplayPaid ≡ true
+    acceptedNonAxisymmetricPhysicalRealizationPaid : Bool
+    acceptedNonAxisymmetricPhysicalRealizationPaidIsFalse :
+      acceptedNonAxisymmetricPhysicalRealizationPaid ≡ false
     freeBoundaryEquilibriumPaid : Bool
     freeBoundaryEquilibriumPaidIsFalse : freeBoundaryEquilibriumPaid ≡ false
     fullOrbitBestReferencePaid : Bool
@@ -48,6 +60,9 @@ record Phase243MaxCutStatus : Set where
 canonicalPhase243MaxCutStatus : Phase243MaxCutStatus
 canonicalPhase243MaxCutStatus =
   phase243-max-cut-status
+    true refl
+    true refl
+    true refl
     true refl
     true refl
     true refl
@@ -70,6 +85,19 @@ phaseActionWitness :
   ≡ Action.advanceFiveTrits (Bridge.toFiveTrits x)
 phaseActionWitness = Action.coreAdvanceIntertwines
 
+quotientAdvanceWitness :
+  (x : Rook.Core243) →
+  Q54.quotientCore (Rook.advanceCore x) ≡ Q54.quotientCore x
+quotientAdvanceWitness = Q54.quotientAdvanceInvariant
+
+quotientRepresentativeWitness :
+  (x : Q54.Core54) →
+  Q54.quotientCore (Q54.representativeCore x) ≡ x
+quotientRepresentativeWitness = Q54.quotientRepresentativeRoundTrip
+
+numericalReplayWitness : Fibre.Core54NumericalReplayReceipt
+numericalReplayWitness = Fibre.canonicalCore54NumericalReplayReceipt
+
 nextPhysicalFrontier : String
 nextPhysicalFrontier =
-  "Enumerate/admissibility-rank Core243 as a finite base with continuous physical fibres; require a nonzero C3/non-axisymmetric realization, solve coil+plasma free-boundary ABC equilibrium on survivors, then run full guiding-centre/FOW/energetic-particle replay against the same best-known reference chart."
+  "Search only the 54 phase-action representatives for consumers with an explicit equivariance receipt; lift surviving hard-nonaxis fibres into the current-potential coil inverse, solve same-object coil+plasma free-boundary ABC equilibrium, then run guiding-centre/FOW/energetic-particle replay against the same best-known reference chart."
