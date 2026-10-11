@@ -20,11 +20,13 @@ import DASHI.Cognition.EpsteinPsychedelicSourceAtlasExact as Sources
 data NetworkNode : Set where
   jeffreyEpstein : NetworkNode
   ginoYu : NetworkNode
+  robertKuhn : NetworkNode
   joschaBach : NetworkNode
   rickDoblin : NetworkNode
   maps : NetworkNode
   cubaConsciousnessEvent : NetworkNode
   psychedelicResearchMilieu : NetworkNode
+  mindBodyResearchCommunity : NetworkNode
   specialAbilitySearch : NetworkNode
   ibogaineResearch : NetworkNode
   scopolamineInformation : NetworkNode
@@ -77,6 +79,47 @@ yuAttributesEpsteinBrokerage = brokerage-attribution-receipt
   Sources.yuBenefactorBrokerage20170221
   true true false
 
+record IntroductionReceipt : Set where
+  constructor introduction-receipt
+  field
+    requester : NetworkNode
+    broker : NetworkNode
+    introducedParty : NetworkNode
+    requestSource : Sources.SourceIdentity
+    completionSource : Sources.SourceIdentity
+    requested : Bool
+    performed : Bool
+    acknowledgedByIntroducedParty : Bool
+    psychedelicPurposeEstablished : Bool
+    wrongdoingEstablished : Bool
+open IntroductionReceipt public
+
+kuhnIntroductionReceipt : IntroductionReceipt
+kuhnIntroductionReceipt = introduction-receipt
+  jeffreyEpstein ginoYu robertKuhn
+  Sources.epsteinRequestsKuhnIntroduction20160818
+  Sources.kuhnAcknowledgesYuIntroduction20160821
+  true true true false false
+
+record ConveningProposalReceipt : Set where
+  constructor convening-proposal-receipt
+  field
+    proposer : NetworkNode
+    proposedWith : NetworkNode
+    targetCommunity : NetworkNode
+    sourceDocument : Sources.SourceIdentity
+    epsteinLocationProposed : Bool
+    combinedConnectionsProposed : Bool
+    communityBuildingExplicit : Bool
+    completedAsProposed : Bool
+open ConveningProposalReceipt public
+
+jointCommunityConveningProposal : ConveningProposalReceipt
+jointCommunityConveningProposal = convening-proposal-receipt
+  ginoYu jeffreyEpstein mindBodyResearchCommunity
+  Sources.yuJointCommunityConveningProposal20160908
+  true true true false
+
 yuToPsychedelicMilieu : NetworkEdge
 yuToPsychedelicMilieu = network-edge
   ginoYu psychedelicResearchMilieu
@@ -108,7 +151,7 @@ mapsToIbogaineProgramme = network-edge
   Genealogy.directDocumentedTransfer
   Genealogy.gradeA
   (Sources.mapsHistoricalIbogaineProgramme ∷ [])
-  "MAPS' own published history records observational ibogaine studies; this is an independently sourced institutional link, not an Epstein-to-MAPS edge."
+  "MAPS' own records describe a Rick Doblin-initiated ibogaine outcome-study effort and completed observational ibogaine studies; this is an independently sourced institutional link, not an Epstein-to-MAPS edge."
 
 epsteinToScopolamineInformation : NetworkEdge
 epsteinToScopolamineInformation = network-edge
@@ -137,6 +180,8 @@ data SameMilieuEstablishesCoordination : Set where
 data TrumpetPlantReferenceEstablishesScopolamineUse : Set where
 data BrokerageAttributionEstablishesCompletedIntroduction : Set where
 data TransferStatementEstablishesBankSettlement : Set where
+data ObservedIntroductionEstablishesPsychedelicPurpose : Set where
+data ConveningProposalEstablishesCompletedEvent : Set where
 
 documentedInterestDoesNotEstablishAdministration :
   DocumentedInterestEstablishesAdministration → ⊥
@@ -163,6 +208,14 @@ transferStatementDoesNotEstablishBankSettlement :
   TransferStatementEstablishesBankSettlement → ⊥
 transferStatementDoesNotEstablishBankSettlement ()
 
+observedIntroductionDoesNotEstablishPsychedelicPurpose :
+  ObservedIntroductionEstablishesPsychedelicPurpose → ⊥
+observedIntroductionDoesNotEstablishPsychedelicPurpose ()
+
+conveningProposalDoesNotEstablishCompletedEvent :
+  ConveningProposalEstablishesCompletedEvent → ⊥
+conveningProposalDoesNotEstablishCompletedEvent ()
+
 -- Re-export the generic universal-network firewall as the exact donor theorem.
 oneStrongEdgeDoesNotEstablishUniversalNetwork :
   Genealogy.OneStrongEdgeEstablishesUniversalNetwork → ⊥
@@ -176,6 +229,8 @@ record EpsteinPsychedelicNetworkBoundary : Set where
     explicitFundingRequestIsStrongEdge : Bool
     senderStatementOfTransferIsFundingEvidence : Bool
     explicitBrokerageAttributionRecorded : Bool
+    observedBrokeredIntroductionRecorded : Bool
+    jointConveningProposalRecorded : Bool
     proposedInviteIsStrongHistoricalEdge : Bool
     corpusAdjacencyCreatesCoordination : Bool
     networkPathCreatesDirectEpsteinMAPSFunding : Bool
@@ -184,4 +239,5 @@ record EpsteinPsychedelicNetworkBoundary : Set where
 
 canonicalEpsteinPsychedelicNetworkBoundary : EpsteinPsychedelicNetworkBoundary
 canonicalEpsteinPsychedelicNetworkBoundary =
-  epstein-psychedelic-network-boundary true true true true false false false false false
+  epstein-psychedelic-network-boundary
+    true true true true true true false false false false false
