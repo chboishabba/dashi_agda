@@ -227,9 +227,7 @@ data CommitmentScaleImpliesCapitalRecoveryPermission : Set where
 data RoleOverlapImpliesNoTerminalDemandPermission : Set where
 data StructuralMoatImpliesMeasuredBurdenPermission : Set where
 data ProposalOutcomeImpliesGenericMoatFalsePermission : Set where
-
 data PlatformShareImpliesGlobalSharePermission : Set where
-
 data BroadMarketEventsImpliesFixedAIBasketPermission : Set where
 
 entityPaidDoesNotAutoCloseGlobal : EntityPaidImpliesGlobalPaidPermission → ⊥
@@ -249,7 +247,7 @@ structuralMoatDoesNotAutoCreateMeasuredBurden ()
 
 australianProposalOutcomeDoesNotRefuteGenericMoatMechanism :
   ProposalOutcomeImpliesGenericMoatFalsePermission → ⊥
-australianProposalOutcomeDoesNotRefuteGenericMoatFalsePermission ()
+australianProposalOutcomeDoesNotRefuteGenericMoatMechanism ()
 
 platformShareDoesNotAutoCreateGlobalShare :
   PlatformShareImpliesGlobalSharePermission → ⊥
