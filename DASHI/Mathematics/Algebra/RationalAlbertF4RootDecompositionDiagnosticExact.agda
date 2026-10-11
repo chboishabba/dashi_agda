@@ -3,31 +3,27 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4RootDecompositionDiagnosticExac
 ------------------------------------------------------------------------
 -- ROOT-DECOMPOSITION DIAGNOSTIC ON THE SAME ALBERT DERIVATION ALGEBRA
 --
--- Companion exact/numerical scripts operate on the literal 27x27 matrices
--- generated from the repository's RationalAlbert Jordan product.  A 52-element
--- independent basis of inner derivations is selected exactly.  For the
--- deterministic regular element H = sum((i+1) D_i):
+-- Historical/compatibility owner.  The original deterministic probe used a
+-- numerical complexification of ad(H) after exact rational basis/rank work and
+-- found the expected F4 profile:
 --
---   * centralizer(H) has dimension 4;
---   * after numerical complexification of ad(H), there are exactly 48 nonzero
---     one-dimensional root spaces;
---   * the trace/Killing metric splits them into 24 short and 24 long roots;
---   * squared lengths are 1/18 and 1/9 in the chosen normalization (ratio 2);
---   * four root spaces have the standard F4 Cartan matrix
+--   centralizer dimension 4;
+--   48 nonzero one-dimensional root spaces;
+--   24 short + 24 long roots with squared-length ratio 2;
+--   a standard F4 Cartan simple system.
 --
---       [ 2 -1  0  0 ]
---       [-1  2 -1  0 ]
---       [ 0 -2  2 -1 ]
---       [ 0  0 -1  2 ].
---
--- The basis/rank/trace computations are exact rational where stated; the
--- eigenspace/root extraction is a deterministic floating diagnostic.  This
--- sharply identifies the intended type but does not replace a formal
--- complexification/root-space theorem in Agda.
+-- That floating root extraction has now been superseded by the exact symbolic
+-- Q(i) projector producer recorded in
+-- `RationalAlbertF4ExactWeightDecompositionReceiptExact`.  The exact producer
+-- proves zero-weight rank 4 and 24+8+8+8 one-dimensional nonzero weight spaces
+-- without floating point.  This module is retained so downstream historical
+-- imports remain valid while exposing the stronger status explicitly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
+
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as Exact
 
 record RootDecompositionDiagnostic : Set where
   constructor root-decomposition-diagnostic
@@ -57,6 +53,9 @@ record RootDecompositionBoundary : Set where
     longShortTwentyFourTwentyFourChecked : Bool
     lengthRatioTwoChecked : Bool
     standardF4CartanChecked : Bool
+    floatingRootExtractionSuperseded : Bool
+    exactQIWeightDecompositionProducerPaid : Bool
+    exactTrialityTwentyFourEightEightEightPaid : Bool
     agdaFormalComplexificationPaid : Bool
     agdaFormalRootSpaceDecompositionPaid : Bool
     sameLieAlgebraF4RecognitionPaid : Bool
@@ -66,4 +65,7 @@ canonicalBoundary : RootDecompositionBoundary
 canonicalBoundary =
   root-decomposition-boundary
     true true true true true true true
+    true
+    Exact.canonicalBoundary.exactQIRootSpaceDecompositionPaidByProducer
+    Exact.canonicalBoundary.exactTrialityRootPartitionPaidByProducer
     false false false
