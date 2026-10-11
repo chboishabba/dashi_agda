@@ -19,3 +19,4 @@ import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact
 import DASHI.Physics.Propulsion.Rocketdyne1974ThermalModelValidationExact
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact
 import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact
+import DASHI.Physics.Propulsion.Rocketdyne1974LatestSourceComparisonNote
