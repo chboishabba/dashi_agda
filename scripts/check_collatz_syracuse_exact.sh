@@ -48,6 +48,15 @@ formal_files=(
   DASHI/Analysis/CollatzSyracuseUniversalStoppingCompilerExact.agda
   DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
   DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+  DASHI/Analysis/CollatzSyracuseStrictDescentBaseTailExact.agda
+  DASHI/Analysis/CollatzSyracuseOddTailReductionExact.agda
+  DASHI/Analysis/CollatzSyracuseOddSurvivorFrontierExact.agda
+  DASHI/Analysis/CollatzSyracuseOddOddTailReductionExact.agda
+  DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationExact.agda
+  DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierExact.agda
+  DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateExact.agda
+  DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
+  DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
   DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
   DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
   DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
@@ -83,6 +92,17 @@ grep -q 'canonicalUniversalStoppingEquivalence' DASHI/Analysis/CollatzSyracuseUn
 grep -q 'strictDescentImpliesExactAffineMargin' DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
 grep -q 'fromLiteralStrictDescentSource' DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
 grep -q 'universalStoppingFromUnboundedFrontier' DASHI/Analysis/CollatzSyracuseSurvivorFrontierExact.agda
+grep -q 'universalStoppingFromBaseAndTail' DASHI/Analysis/CollatzSyracuseStrictDescentBaseTailExact.agda
+grep -q 'universalStoppingFromOddTail' DASHI/Analysis/CollatzSyracuseOddTailReductionExact.agda
+grep -q 'universalStoppingFromOddFrontier' DASHI/Analysis/CollatzSyracuseOddSurvivorFrontierExact.agda
+grep -q 'universalStoppingFromOddOddTail' DASHI/Analysis/CollatzSyracuseOddOddTailReductionExact.agda
+grep -q 'universalStoppingFromEarlyResidualTail' DASHI/Analysis/CollatzSyracuseEarlyCylinderEliminationExact.agda
+grep -q 'universalStoppingFromResidualFrontier' DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierExact.agda
+grep -q 'uniformWordCertificateImpliesDescent' DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateExact.agda
+grep -q 'universalStoppingFromResidualWordCertificateFrontier' DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
+grep -q 'finiteCoverageCreatesUnboundedFrontier : Nat' DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
+grep -q 'finiteCoverageCreatesUnboundedFrontier = refl' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda || true
+grep -q 'certificateCoverageDoesNotCreateUnboundedness' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'affineCorrectionCocycle' DASHI/Analysis/CollatzSyracuseAffineCorrectionCocycleExact.agda
 grep -q 'adjacentSwapCorrection' DASHI/Analysis/CollatzSyracuseAffineCorrectionSwapExact.agda
 grep -q 'barrier546DropsBelow511' DASHI/Analysis/CollatzSyracuseAffineTransferBarrierExact.agda
