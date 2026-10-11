@@ -15,15 +15,16 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoun
 -- * exact 28+8_v+8_s+8_c triality bracket decomposition;
 -- * exact Q(i) root-space decomposition 4 + 48 with one-dimensional roots;
 -- * exact Q(i) root-grading bracket law on all C(48,2)=1128 root pairs;
+-- * exact split-root-datum recognition as the standard F4 root set;
 -- * independent standard F4 root/Coxeter datum on companion Lean;
 -- * actual same-carrier linear Jordan automorphism type with explicit elements.
 --
--- What is left is no longer an exceptional-geometry search.  It is the general
--- characteristic-zero classification theorem that identifies the derivation
--- algebra / automorphism group of this Albert algebra with a rational form of
--- type F4, and the cubic linear symmetry group with type E6.  This module makes
--- that external theorem a single explicit premise instead of hiding it behind
--- several Boolean frontier flags.
+-- This closes the LOCAL Lie/root-data recognition after the splitting-field
+-- extension: Der(J) over Q(i) carries the split F4 root datum by exact producer.
+-- What remains is the stronger FORM/GROUP classification theorem: identify the
+-- original Q-form and the full algebraic groups Aut(J), cubic symmetry E6, and
+-- the F4 unit stabilizer.  That characteristic-zero classification is located
+-- in classical sources but is not formalized generally in this repo.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -35,6 +36,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact as Laws
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as Inner
 import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as Weights
 import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact as Grading
+import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact as SplitF4
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact as Linear
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact as Sources
 
@@ -55,6 +57,7 @@ record ConcreteClassificationHypotheses : Set where
     exactOneDimensionalRootSpaces : Bool
     exactTrialityRootPartition : Bool
     exactRootGradingBracketLaw : Bool
+    splitQIRootDatumTypeF4Recognized : Bool
     sameCarrierLinearExceptionalTargetsTyped : Bool
 open ConcreteClassificationHypotheses public
 
@@ -65,17 +68,16 @@ canonicalConcreteClassificationHypotheses =
     true true true true true
     true true true
     Grading.canonicalBoundary.localF4RootGradedLieStructurePaidByProducer
+    SplitF4.canonicalBoundary.splitLieRootDatumTypeF4Recognized
     true
 
 ------------------------------------------------------------------------
--- One imported theorem premise is enough to finish the naming/classification
--- layer.  It deliberately carries the source/form-sensitive content rather
--- than reconstructing classification from dimension or root counts.
+-- One imported theorem premise is enough to finish the Q-form/group layer.
 ------------------------------------------------------------------------
 
 record CharacteristicZeroAlbertClassificationTheorem : Set₁ where
   field
-    DerivationTypeF4 : Set
+    RationalDerivationFormOfF4 : Set
     AutomorphismGroupTypeF4 : Set
     CubicSymmetryGroupTypeE6 : Set
     F4EqualsUnitStabilizerInE6 : Set
@@ -85,7 +87,7 @@ record ClassificationInstantiation
     (classification : CharacteristicZeroAlbertClassificationTheorem) : Set₁ where
   field
     concreteHypotheses : ConcreteClassificationHypotheses
-    derivationF4 : DerivationTypeF4 classification
+    rationalDerivationForm : RationalDerivationFormOfF4 classification
     automorphismF4 : AutomorphismGroupTypeF4 classification
     cubicSymmetryE6 : CubicSymmetryGroupTypeE6 classification
     unitStabilizer : F4EqualsUnitStabilizerInE6 classification
@@ -97,10 +99,11 @@ record Boundary : Set where
     allConcreteExceptionalHypothesesOwned : Bool
     exactRootSpaceProducerFloatingFree : Bool
     exactRootGradingProducerPaid : Bool
+    splitQIRootDatumTypeF4Recognized : Bool
     literatureClassificationSourceLocated : Bool
-    classificationReducedToOneExternalTheoremPremise : Bool
+    remainingClassificationIsQFormAndGroupLevel : Bool
     generalClassificationTheoremFormalizedInRepo : Bool
-    actualInstantiationInhabited : Bool
+    actualQFormGroupInstantiationInhabited : Bool
 open Boundary public
 
 canonicalBoundary : Boundary
@@ -109,6 +112,7 @@ canonicalBoundary =
     true
     true
     Grading.canonicalBoundary.localF4RootGradedLieStructurePaidByProducer
+    SplitF4.canonicalBoundary.splitLieRootDatumTypeF4Recognized
     Sources.canonicalClassicalExceptionalSourceReceipt.peterssonDerivationTheoremLocated
     true
     false
@@ -116,4 +120,4 @@ canonicalBoundary =
 
 classificationSourceNote : String
 classificationSourceNote =
-  "Chevalley-Schafer / Petersson / Springer-Veldkamp: Der(Albert) and Aut(Albert) are type F4 in characteristic zero; cubic determinant symmetry is type E6."
+  "Chevalley-Schafer / Petersson / Springer-Veldkamp: the characteristic-zero Albert derivation algebra is a form of F4; Aut(Albert) is type F4; cubic determinant symmetry is type E6."
