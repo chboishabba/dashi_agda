@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as Bridge
 import DASHI.Law.AustralianCommonwealthAgentComputerOffenceAttribution2026Exact as Cth
+import DASHI.Law.OpenAIMedicareParliamentaryEvidence20261006Exact as Hearing
 
 ------------------------------------------------------------------------
 -- LEGAL ACQUISITION PROGRESS, 2026-10-12
@@ -36,6 +37,20 @@ reportedIncidentConductCandidate = legalProducerProgress
   "reported unauthorised-access conduct candidate"
   partial
   "government-confirmed incident reporting identifies unauthorised access, but public runtime evidence does not yet pay every statutory physical/fault element"
+  false
+
+postIncidentOrganisationalResponse : LegalProducerProgress
+postIncidentOrganisationalResponse = legalProducerProgress
+  "post-incident organisational response"
+  closed
+  "6 October parliamentary reporting carries apology, delayed-notification acknowledgement, new real-time internet-use monitoring/alerts and faster later notification"
+  false
+
+preIncidentRiskKnowledgeProgress : LegalProducerProgress
+preIncidentRiskKnowledgeProgress = legalProducerProgress
+  "pre-incident organisational knowledge / authorisation relevant to June conduct"
+  open
+  "post-incident response and later internal awareness do not establish what responsible humans or corporate decision-makers knew or authorised before the June event"
   false
 
 restrictedDataStatusProgress : LegalProducerProgress
@@ -89,6 +104,15 @@ financialAgentReuseStillSourceConditioned = true
 candidateSourcePaidButLiabilityOpen :
   promotesLiability candidateOffenceSourceAcquired ≡ false
 candidateSourcePaidButLiabilityOpen = refl
+
+postIncidentMonitoringReceiptPaid :
+  Hearing.ParliamentaryResponseEvidence.postIncidentMonitoringEstablished
+    Hearing.openAIParliamentaryResponseEvidence ≡ true
+postIncidentMonitoringReceiptPaid = Hearing.postIncidentMonitoringEstablished
+
+postIncidentResponseDoesNotPayPriorFault :
+  promotesLiability postIncidentOrganisationalResponse ≡ false
+postIncidentResponseDoesNotPayPriorFault = refl
 
 medicareApplicationStillOpen :
   Cth.offenceEstablished Cth.medicare4781ApplicationBoundary ≡ false
