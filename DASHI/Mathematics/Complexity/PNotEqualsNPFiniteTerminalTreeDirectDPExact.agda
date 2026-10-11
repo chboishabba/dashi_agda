@@ -7,27 +7,20 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFiniteTerminalTreeDirectDPExact 
 -- Its semantic input is an ArityTrackedTerminalAdmission, whose terminal part
 -- is still a global theorem over every zero-variable RestrictionDerivation.
 --
--- FiniteTerminalTreeAdmissionExact removes that global premise.  This owner
+-- FiniteTerminalTreeAdmissionExact removes that global premise. This owner
 -- puts the finite-tree certificate on the ACTUAL direct-DP charged path.
---
--- Primitive semantic admission is now only:
---   * local root/step arity laws;
---   * a finite binary tree following the emitted transition table;
---   * literal evaluation equalities at zero-variable leaves.
---
--- The global terminal theorem, global arity theorem, semantic congruence,
--- quotient DP and one-node authority are all derived downstream.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Nat.Base using (_<_)
+open import Data.Nat.Base using (_≤_; _<_)
 
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
-import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteTerminalTreeAdmissionExact as Tree
@@ -47,7 +40,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneTerminationNoGoExac
 
 treeAdmissionToArityAdmission :
   ∀ {rootVariables : Nat}
-    {root : DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact.BooleanFormula rootVariables}
+    {root : SAT.BooleanFormula rootVariables}
     {candidate : Candidate.TransitionTableCandidate root} →
   Tree.TreeLocalArityTerminalAdmission candidate →
   ArityTerminal.ArityTrackedTerminalAdmission candidate
@@ -151,7 +144,7 @@ treeConstructorToQ2StepSystem constructor =
     (treeConstructorToDirectDP constructor)
 
 ------------------------------------------------------------------------
--- All existing quantitative obstructions transport unchanged.
+-- Existing quantitative obstruction transported to the tree-certified path.
 ------------------------------------------------------------------------
 
 treeDirectDPHighWidthForcesStop :
@@ -177,16 +170,11 @@ treeDirectDPHighWidthForcesStop
     with constructor state
 ... | nothing = refl
 ... | just run =
-  impossible
+  ⊥-elim
     (DirectDP.directDPSingleLayerHighWidthBlocksRun
       witness
       measureBelowWidth
       (treeRunToDirectDPRun run))
-  where
-    impossible :
-      Data.Empty.⊥ →
-      just run ≡ nothing
-    impossible ()
 
 ------------------------------------------------------------------------
 -- Clay-facing compatibility theorem.
@@ -204,7 +192,7 @@ treeDirectDPRecurrenceContradictsSATInP :
     (NoGo.satPCandidate satP)
     (treeConstructorToQ2StepSystem constructor)
     initial →
-  Data.Empty.⊥
+  ⊥
 treeDirectDPRecurrenceContradictsSATInP
     satP
     constructor
@@ -220,11 +208,11 @@ treeDirectDPRecurrenceContradictsSATInP
 -- FRONTIER CONSEQUENCE
 --
 -- Global terminalLabelCorrect is no longer primitive on the live direct-DP
--- route.  Terminal semantic authority is a finite proof tree following the
+-- route. Terminal semantic authority is a finite proof tree following the
 -- exact emitted transition table.
 --
--- The remaining non-circular Clay debt is therefore NOT terminal semantics;
--- it is the candidate-coupled progress law identified on master:
+-- The remaining non-circular Clay debt is NOT terminal semantics. It is the
+-- candidate-coupled progress law identified on master:
 --
 --   candidate/self-code -> same-object live root -> constructor(root) != nothing.
 ------------------------------------------------------------------------
