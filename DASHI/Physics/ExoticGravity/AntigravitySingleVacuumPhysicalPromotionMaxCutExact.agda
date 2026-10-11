@@ -12,6 +12,7 @@ import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact 
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
 import DASHI.Physics.Foundations.GRQFTVacuumAmplitudeDifferentialRenormalizationExact as Differential
 import DASHI.Physics.Foundations.GRQFTSingleVacuumPhysicalSignMaxCutExact as SignCut
+import DASHI.Physics.Foundations.GRQFTSingleVacuumPositiveSourceNormalizedGeometryExact as PositiveGeometry
 
 vacuumNegativeActiveGivesPositiveAcceleration :
   (positiveGravityFactor : ℚ) →
@@ -34,12 +35,20 @@ stageCNormalizationScaleCovariance = Scale.canonicalSingleVacuumNormalizationSca
 stageDDifferentialRenormalization : Differential.DifferentialVacuumRenormalizationBoundary
 stageDDifferentialRenormalization = Differential.canonicalDifferentialVacuumRenormalizationBoundary
 
+stageCPositiveSourceNormalizedGeometry :
+  PositiveGeometry.PositiveSourceNormalizedGeometryBoundary
+stageCPositiveSourceNormalizedGeometry =
+  PositiveGeometry.canonicalPositiveSourceNormalizedGeometryBoundary
+
 sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 sourceVacuumSequenceRequiresIndependentPhysicalPayment =
   VacuumNI.sourceVacuumSequenceRequiresIndependentPhysicalPayment
 
 sourceSignAndControlMaxCutOwned : Bool
 sourceSignAndControlMaxCutOwned = true
+
+positiveSourceNormalizedGeometryCompilerOwned : Bool
+positiveSourceNormalizedGeometryCompilerOwned = true
 
 record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
   constructor antigravity-single-vacuum-physical-promotion-frontier
@@ -50,6 +59,8 @@ record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
     positiveGAccelerationSignTheoremOwned : Bool
     singleVacuumSafeBandOwned : Bool
     multiplicativeNormalizationScaleCovarianceOwned : Bool
+    generalPositiveSourceNormalizedGeometryOwned : Bool
+    rationalSquareDensityTheoremRequiredForStaticNormalizedExistence : Bool
     commonAdditiveCountertermCancelsInDifferentialLane : Bool
     sourceSignAndControlMaxCutOwned : Bool
     couplingAndERBHistoryDetermineVacuumSequence : Bool
@@ -68,7 +79,7 @@ canonicalAntigravitySingleVacuumPhysicalPromotionFrontier :
   AntigravitySingleVacuumPhysicalPromotionFrontier
 canonicalAntigravitySingleVacuumPhysicalPromotionFrontier =
   antigravity-single-vacuum-physical-promotion-frontier
-    true true false true true true true true false true
+    true true false true true true true false true true false true
     false true true true true true true true
 
 selectedCMP119VacuumContinuationWeldStillOpen : Bool
