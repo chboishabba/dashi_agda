@@ -23,6 +23,7 @@ import DASHI.Cognition.OracleEllisonCapabilityPromotionExact as Promotion
 import DASHI.Cognition.OracleEllisonChinaIsraelComparativeFibreExact as Compare
 import DASHI.Cognition.OracleEllisonCognitiveWarfareWeldExact as Weld
 import DASHI.Cognition.OracleEllisonTranscriptVerdictExact as Verdict
+import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Orthogonality
 
 ------------------------------------------------------------------------
 -- Regression pins.
@@ -59,9 +60,11 @@ provenanceDoesNotPayTruth :
 provenanceDoesNotPayTruth = refl
 
 sensibLawProvenanceOrthogonalityReused :
+  Orthogonality.ProvenanceSemanticStatusOrthogonalityBoundary.sourceAttributionCreatesTruth
+    Orthogonality.canonicalProvenanceSemanticStatusOrthogonalityBoundary
+  ≡ false
+sensibLawProvenanceOrthogonalityReused =
   Weld.sensibLawSourceAttributionDoesNotCreateTruth
-  ≡ refl
-sensibLawProvenanceOrthogonalityReused = refl
 
 netanyahuControlWorldviewVerdictPinned :
   Verdict.verdict Claims.netanyahuSayeretControlWorldview
