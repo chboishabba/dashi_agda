@@ -9,12 +9,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeSemanticQuotationBri
 --   SAT(quoteProgram p)  iff  finite opposite interpreter p returns true.
 --
 -- The repository's concrete Cook--Levin theorem already supplies exactly the
--- SAT <-> accepting-run half.  Therefore all that remains is to realize the
+-- SAT <-> accepting-run half. Therefore all that remains is to realize the
 -- finite opposite interpreter by one concrete tape machine with a literal input
 -- encoder and exact time budget.
---
--- This owner packages that realization and derives SemanticProgramQuotation
--- automatically. No SAT theorem is assumed by the realization record.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -38,19 +35,15 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Exact
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinCookFormulaExact as CookLevin
 
 ------------------------------------------------------------------------
--- The remaining execution-realization object.
---
--- It contains only machine/run semantics.  It does NOT contain a SAT formula,
--- satisfiability witness, or SAT-decision correctness theorem.
+-- First: finite concrete-machine DATA only.
 ------------------------------------------------------------------------
 
-record ConcreteOppositeInterpreterRealization
+record ConcreteOppositeInterpreterMachine
     {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
     (code : Actual.CandidateCodeRealization candidate) : Set₂ where
   field
-    machine :
-      Local.ConcreteTapeMachine
+    machine : Local.ConcreteTapeMachine
 
     stateCoverage :
       Canonical.EnumerationCoverage
@@ -71,54 +64,71 @@ record ConcreteOppositeInterpreterRealization
       Code.Program (Opposite.OppositeQuotedPrimitive code) →
       Nat
 
+open ConcreteOppositeInterpreterMachine public
+
+------------------------------------------------------------------------
+-- Quotation is DEFINED from the machine data, never supplied as authority.
+------------------------------------------------------------------------
+
+concreteQuotationSurface :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {code : Actual.CandidateCodeRealization candidate} →
+  ConcreteOppositeInterpreterMachine code →
+  Opposite.OppositeProgramQuotation code
+concreteQuotationSurface concrete = record
+  { Opposite.quoteProgram =
+      λ program →
+        CookLevin.guardedCookFormula
+          (stateCoverage concrete)
+          (symbolCoverage concrete)
+          (nonemptyRules concrete)
+          (encodeProgram concrete program)
+          (exactSteps concrete program)
+  }
+
+------------------------------------------------------------------------
+-- Second: prove the abstract finite interpreter and concrete accepting-run
+-- semantics coincide. No SAT formula/satisfiability field is present here.
+------------------------------------------------------------------------
+
+record ConcreteOppositeInterpreterRealization
+    {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (code : Actual.CandidateCodeRealization candidate) : Set₂ where
+  field
+    concrete : ConcreteOppositeInterpreterMachine code
+
     trueRunToExactBudget :
       (program : Code.Program (Opposite.OppositeQuotedPrimitive code)) →
       Code.run1
         (Opposite.oppositePrimitiveSemantics
           code
-          quotationSurface)
+          (concreteQuotationSurface concrete))
         program
         tt
       ≡ just true →
       Exact.ExactBudgetAcceptingRun
-        (encodeProgram program)
-        (exactSteps program)
+        (encodeProgram concrete program)
+        (exactSteps concrete program)
 
     exactBudgetToTrueRun :
       (program : Code.Program (Opposite.OppositeQuotedPrimitive code)) →
       Exact.ExactBudgetAcceptingRun
-        (encodeProgram program)
-        (exactSteps program) →
+        (encodeProgram concrete program)
+        (exactSteps concrete program) →
       Code.run1
         (Opposite.oppositePrimitiveSemantics
           code
-          quotationSurface)
+          (concreteQuotationSurface concrete))
         program
         tt
       ≡ just true
 
-  ----------------------------------------------------------------------
-  -- The quotation surface is DEFINED from the concrete machine.  It is not a
-  -- client-supplied semantic field.
-  ----------------------------------------------------------------------
-
-  quotationSurface :
-    Opposite.OppositeProgramQuotation code
-  quotationSurface = record
-    { Opposite.quoteProgram =
-        λ program →
-          CookLevin.guardedCookFormula
-            stateCoverage
-            symbolCoverage
-            nonemptyRules
-            (encodeProgram program)
-            (exactSteps program)
-    }
-
 open ConcreteOppositeInterpreterRealization public
 
 ------------------------------------------------------------------------
--- Concrete Cook--Levin gives the semantic quotation automatically.
+-- Concrete Cook--Levin gives SemanticProgramQuotation automatically.
 ------------------------------------------------------------------------
 
 concreteRealizationToSemanticQuotation :
@@ -129,16 +139,17 @@ concreteRealizationToSemanticQuotation :
   Opposite.SemanticProgramQuotation code
 concreteRealizationToSemanticQuotation realization = record
   { Opposite.quotation =
-      quotationSurface realization
+      concreteQuotationSurface
+        (concrete realization)
 
   ; Opposite.trueRunGivesSAT =
       λ program returnedTrue →
         CookLevin.exactBudgetRunToCookSatisfiable
-          (stateCoverage realization)
-          (symbolCoverage realization)
-          (nonemptyRules realization)
-          (encodeProgram realization program)
-          (exactSteps realization program)
+          (stateCoverage (concrete realization))
+          (symbolCoverage (concrete realization))
+          (nonemptyRules (concrete realization))
+          (encodeProgram (concrete realization) program)
+          (exactSteps (concrete realization) program)
           (trueRunToExactBudget
             realization
             program
@@ -150,17 +161,13 @@ concreteRealizationToSemanticQuotation realization = record
           realization
           program
           (CookLevin.cookSatisfiableToExactBudgetRun
-            (stateCoverage realization)
-            (symbolCoverage realization)
-            (nonemptyRules realization)
-            (encodeProgram realization program)
-            (exactSteps realization program)
+            (stateCoverage (concrete realization))
+            (symbolCoverage (concrete realization))
+            (nonemptyRules (concrete realization))
+            (encodeProgram (concrete realization) program)
+            (exactSteps (concrete realization) program)
             satisfiable)
   }
-
-------------------------------------------------------------------------
--- Therefore a concrete realization immediately gives a concrete SAT failure.
-------------------------------------------------------------------------
 
 concreteRealizationGivesDecisionFailure :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -203,7 +210,7 @@ concreteProducerGivesUniversalFailure producer candidate =
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
--- Cook--Levin semantic quotation itself is no longer open.  The exact wall is
+-- Cook--Levin semantic quotation itself is no longer open. The exact wall is
 -- now a concrete EXECUTION REALIZATION theorem:
 --
 --   finite opposite interpreter
