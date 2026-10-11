@@ -18,12 +18,16 @@ def test_final_reconciliation_surface() -> None:
             "selectedBenchmarkPricePairPaid",
             "coreWeaveTwoSidedConcentrationPaid",
             "coreWeaveDebtCostSurfacePaid",
+            "coreWeaveCapitalSpreadSignPaid",
+            "coreWeaveReinvestmentCoveragePaid",
+            "coreWeaveNamedPayerCapacityPaid",
+            "terminalPayerStillPartial",
+            "replacementObsolescenceStillPartial",
             "wholeComplexMarketDynamicsStillPartial",
             "globalOpenWeightTrajectoryStillOpen",
             "sameCapabilityScarcityRentStillOpen",
             "providerServingMarginStillOpen",
-            "terminalPayerStillOpen",
-            "realisedROICWACCStillOpen",
+            "numericROICWACCStillOpen",
         ],
     )
 
@@ -48,6 +52,18 @@ def test_new_scoped_owners_exist() -> None:
     require(
         "DASHI/Economics/AICoreWeaveDebtCostBoundary20261012Exact.agda",
         ["coreWeaveDebtCostBoundary", "debtSurfaceIsPaid", "waccStillOpen", "capitalSpreadStillOpen"],
+    )
+    require(
+        "DASHI/Economics/AICoreWeaveCapitalSpreadSign20261012Exact.agda",
+        ["coreWeaveCapitalSpreadSignNegative", "numericROICStillOpen", "numericWACCStillOpen"],
+    )
+    require(
+        "DASHI/Economics/AICoreWeaveCapitalReinvestmentCoverage20261012Exact.agda",
+        ["coreWeaveCashFundingShortfallIs10454", "coreWeaveReplacementCapexStillUnidentified"],
+    )
+    require(
+        "DASHI/Economics/AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact.agda",
+        ["selectedNamedPayerCapacityIsPaid", "completeTerminalPayerProvenanceStillOpen"],
     )
 
 
