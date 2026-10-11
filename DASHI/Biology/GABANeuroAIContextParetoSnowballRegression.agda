@@ -9,14 +9,17 @@ import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
 paretoOwnerReused : Pareto.RecursiveParetoCompatibility
 paretoOwnerReused = P.paretoCompatibility P.canonicalAcquisitionParetoBoundary
 
-peripheralCentralRoutesToExperiment : Snowball.DiscoveryRoute
-peripheralCentralRoutesToExperiment = P.discoveryRoute P.peripheralCentralTransportAcquisition
+peripheralCentralRoutesToExperiment :
+  P.discoveryRoute P.peripheralCentralTransportAcquisition ≡ Snowball.experimentalDesign
+peripheralCentralRoutesToExperiment = refl
 
-crossParticipantDecoderRemainsUnpaid : P.AcquisitionStatus
-crossParticipantDecoderRemainsUnpaid = P.status P.crossParticipantDecoderTransferAcquisition
+crossParticipantDecoderRemainsUnpaid :
+  P.status P.crossParticipantDecoderTransferAcquisition ≡ P.unresolvedTransfer
+crossParticipantDecoderRemainsUnpaid = refl
 
-metaNeuroAIProvenanceRemainsSplit : P.AcquisitionStatus
-metaNeuroAIProvenanceRemainsSplit = P.status P.metaNeuroAIAcquisition
+metaNeuroAIProvenanceRemainsSplit :
+  P.status P.metaNeuroAIAcquisition ≡ P.paidAndWelded
+metaNeuroAIProvenanceRemainsSplit = refl
 
 canonicalParetoSnowballRegression : P.GABANeuroAIParetoSnowballBoundary
 canonicalParetoSnowballRegression = P.canonicalGABANeuroAIParetoSnowballBoundary
