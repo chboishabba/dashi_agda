@@ -3,24 +3,20 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeFixedMaxCutClosureEx
 ------------------------------------------------------------------------
 -- CONCRETE-TAPE FIXED MAX-CUT -> SAT NOT IN P -> P != NP
 --
--- This owner is the current dependency-compressed closure theorem.
+-- Surviving obligations:
 --
--- Surviving constructive/model obligations:
---
---   A. candidateTape
+--   A. MODEL COVERAGE
 --      Every polynomial SAT candidate in the selected cost model is realized
 --      by one literal deterministic concrete tape program with an explicit
 --      arithmetic polynomial step bound.
 --
---   B. fixedOpposite
+--   B. FIXED OPPOSITE ENDPOINT
 --      For that exact tape-backed candidate code, construct ONE fixed concrete
---      machine/input/clock whose guarded Cook formula is satisfiable iff the
---      canonical opposite fixed computation returns true.
+--      machine/input/clock whose deterministic final control bit equals
 --
--- Everything after A+B is existing theorem plumbing:
---   fixed concrete semantic quotation -> SATDecisionFailure for each candidate
---   -> universal polynomial SAT failure -> SAT not in P
---   -> with established background for the SAME cost model, P != NP.
+--        not D(its own guarded Cook--Levin formula).
+--
+-- Everything after A+B is inherited theorem plumbing.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -29,11 +25,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateDeterministicTapeCodeExact as Tape
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedCandidateTapeExact as Clocked
-import DASHI.Mathematics.Complexity.PNotEqualsNPFixedConcreteTapeSemanticQuotationExact as FixedConcrete
-
-------------------------------------------------------------------------
--- Exact surviving producer.
-------------------------------------------------------------------------
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeEndpointDecisionExact as Endpoint
 
 record ConcreteTapeFixedMaxCutProducer
     (cost : PR.PolynomialCostModel Cook.BooleanFormula) : Set₃ where
@@ -44,15 +36,11 @@ record ConcreteTapeFixedMaxCutProducer
 
     fixedOpposite :
       (candidate : Direct.PolynomialSATDeciderCandidate cost) →
-      FixedConcrete.FixedConcreteOppositeRealization
+      Endpoint.FixedOppositeEndpointDecisionRealization
         (Tape.candidateTapeToCodeRealization
           (Clocked.tape (candidateTape candidate)))
 
 open ConcreteTapeFixedMaxCutProducer public
-
-------------------------------------------------------------------------
--- A+B give an explicit SAT error for every polynomial candidate.
-------------------------------------------------------------------------
 
 maxCutProducerGivesCandidateFailure :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -60,7 +48,7 @@ maxCutProducerGivesCandidateFailure :
     (candidate : Direct.PolynomialSATDeciderCandidate cost) →
   Direct.SATDecisionFailure candidate
 maxCutProducerGivesCandidateFailure producer candidate =
-  FixedConcrete.fixedConcreteRealizationGivesDecisionFailure
+  Endpoint.endpointDecisionRealizationGivesDecisionFailure
     (Tape.candidateTapeToCodeRealization
       (Clocked.tape
         (candidateTape producer candidate)))
@@ -72,10 +60,6 @@ maxCutProducerGivesUniversalFailure :
   Direct.UniversalPolynomialSATDecisionFailure cost
 maxCutProducerGivesUniversalFailure producer candidate =
   maxCutProducerGivesCandidateFailure producer candidate
-
-------------------------------------------------------------------------
--- Clay-core closure at the selected cost model.
-------------------------------------------------------------------------
 
 maxCutProducerGivesSATNotInP :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
@@ -114,7 +98,7 @@ record FixedOppositeSelfQuotationCompiler
   field
     compile :
       (candidate : Direct.PolynomialSATDeciderCandidate cost) →
-      FixedConcrete.FixedConcreteOppositeRealization
+      Endpoint.FixedOppositeEndpointDecisionRealization
         (Tape.candidateTapeToCodeRealization
           (Clocked.tape (realize coverage candidate)))
 
@@ -133,21 +117,17 @@ coverageAndCompilerGiveMaxCut coverage compiler = record
 ------------------------------------------------------------------------
 -- CURRENT FRONTIER
 --
--- The previous roadmap items are no longer independent blockers:
--- terminal verification, transition semantics, charged DirectDP plumbing,
--- finite candidate code, deterministic run uniqueness, fixed-width structural
--- quotation, and Cook--Levin iff have all been pushed below this surface.
---
--- The exact remaining theorem families are now:
+-- All downstream semantic directions are derived from one endpoint equation.
+-- The exact remaining theorem families are therefore:
 --
 --   MODEL-COVERAGE:
 --     ConcreteTapeCandidateCoverage cost
 --
---   DIAGONAL-CONSTRUCTOR:
+--   FIXED SELF-QUOTATION COMPILER:
 --     FixedOppositeSelfQuotationCompiler coverage
 --
 -- plus established NP background for the same cost model when promoting the
--- SAT lower bound to the repository's P != NP record.
+-- SAT lower bound to P != NP.
 --
 -- No theorem in this owner inhabits either open constructor.
 ------------------------------------------------------------------------
