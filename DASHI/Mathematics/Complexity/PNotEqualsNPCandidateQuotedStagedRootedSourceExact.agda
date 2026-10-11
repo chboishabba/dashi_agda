@@ -2,20 +2,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateQuotedStagedRootedSourc
 
 ------------------------------------------------------------------------
 -- CANDIDATE-QUOTED ROOT -> TOTAL STAGED ROOTED SOURCE RESULT
---
--- This binds the new explicit source-construction stop reason to the exact
--- fixed-width same-object candidate root already present on master.
---
--- There is no free initial formula and no arbitrary budget:
---   root   = cookToIndexed(currentFormula(candidateQuotedState))
---   budget = recursiveMeasure(candidateQuotedState)
---
--- The staged result is therefore literally:
---   sourceReady ...
---   or
---   budgetExhausted on the candidate's own recursive measure.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_; _<_)
 
@@ -43,6 +32,10 @@ module CandidateStagedSource
   candidateState =
     Fixed.fixedWidthCandidateQuotedState code codec
 
+  indexedRoot :
+    DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact.BooleanFormula
+      (Bridge.formulaVariableBound
+        (Q2.currentFormula candidateState))
   indexedRoot =
     Bridge.cookToIndexed
       (Q2.currentFormula candidateState)
@@ -64,15 +57,10 @@ module CandidateStagedSource
   sourceWork =
     Completed.completedRootedSourceWork indexedRoot
 
-  ----------------------------------------------------------------------
-  -- Branch-local consequences expose exactly what remains to be compiled.
-  ----------------------------------------------------------------------
-
   sourceReadyImpliesWorkFits :
     ∀ {terminalKeys exact fits} →
     stagedSource
-    ≡
-    Staged.sourceReady terminalKeys exact fits →
+    ≡ Staged.sourceReady terminalKeys exact fits →
     sourceWork < candidateBudget
   sourceReadyImpliesWorkFits {fits = fits} equality =
     fits
@@ -80,34 +68,19 @@ module CandidateStagedSource
   budgetExhaustedImpliesMeasureBelowSourceWork :
     ∀ {exhausted} →
     stagedSource
-    ≡
-    Staged.budgetExhausted exhausted →
+    ≡ Staged.budgetExhausted exhausted →
     candidateBudget ≤ sourceWork
   budgetExhaustedImpliesMeasureBelowSourceWork
       {exhausted = exhausted}
       equality =
     exhausted
 
-  ----------------------------------------------------------------------
-  -- Exact root identity firewall.
-  ----------------------------------------------------------------------
-
   candidateBudgetIsRecursiveMeasure :
     candidateBudget
-    ≡
-    Q2.recursiveMeasure candidateState
-  candidateBudgetIsRecursiveMeasure =
-    Agda.Builtin.Equality.refl
+    ≡ Q2.recursiveMeasure candidateState
+  candidateBudgetIsRecursiveMeasure = refl
 
 ------------------------------------------------------------------------
--- FRONTIER CONSEQUENCE
---
 -- On the exact same-object candidate root, the exhaustive rooted source stage
--- is now total and its stop reason is inspectable.  If it fails, the reason is
--- precisely that its declared work exhausts the candidate state's measure.
---
--- What remains before this is a live DirectDP constructor is a compiler from
--- the successful rooted source data to the single flat TransitionTableCandidate
--- plus a literal machine trace proving that every declared source operation was
--- actually paid.
+-- is total and its stop reason is inspectable.
 ------------------------------------------------------------------------
