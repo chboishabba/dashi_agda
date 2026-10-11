@@ -31,7 +31,7 @@ import DASHI.Analysis.CollatzSyracuseUniformWordDescentCertificateExact as Cert
 import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact as Universal
 
 WordCertificateWitness :
-  Nat → Syracuse.PositiveNat → Set₁
+  Nat → Syracuse.PositiveNat → Set
 WordCertificateWitness horizon x =
   Σ Nat (λ m →
     (m ≤ horizon)
