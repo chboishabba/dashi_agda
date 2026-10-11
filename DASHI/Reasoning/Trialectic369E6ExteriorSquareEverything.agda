@@ -9,6 +9,7 @@ import DASHI.Foundations.E6F3ExteriorSquareRecognitionValidation
 import DASHI.Foundations.E6F3GeneratedGroupClosureExact
 import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
 import DASHI.Foundations.AlbertJordanExternalDonorExact
+import DASHI.Foundations.FirstTitsAlbertE6F4ClassicalSourceExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
@@ -25,6 +26,7 @@ import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsDerivationF4SignalExact
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsF4RootRecognitionExact
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsGlobalE6F4RecognitionExact
 import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact
 
 -- Physics-facing max-cut.
@@ -32,6 +34,8 @@ import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
 import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
 import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact
+import DASHI.Physics.Closure.E6HyperformPositiveGaugeVacuumNoGoExact
+import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact
 import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
 import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact
 import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
