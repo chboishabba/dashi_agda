@@ -27,6 +27,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -183,6 +184,105 @@ record DeterministicRefinementComplete
       next successor before ≡ just after
 
 open DeterministicRefinementComplete public
+
+justInjective :
+  ∀ {A : Set} {left right : A} →
+  just left ≡ just right →
+  left ≡ right
+justInjective refl = refl
+
+sucInjective :
+  ∀ {left right : Nat} →
+  suc left ≡ suc right →
+  left ≡ right
+sucInjective refl = refl
+
+------------------------------------------------------------------------
+-- Completeness makes the relational run endpoint unique at a fixed length.
+------------------------------------------------------------------------
+
+deterministicExecutionUniqueFinish :
+  ∀ {machine : Local.ConcreteTapeMachine}
+    {successor : DeterministicTapeSuccessor machine}
+    (complete : DeterministicRefinementComplete machine successor)
+    {steps : Nat}
+    {start deterministicFinish relationalFinish : Local.TapeRow machine}
+    {rows : List (Local.TapeRow machine)}
+    (execution :
+      DeterministicExecution
+        successor steps start deterministicFinish)
+    (relational :
+      Run.WellFormedTapeRun
+        machine start rows relationalFinish) →
+    Run.runLength relational ≡ steps →
+    relationalFinish ≡ deterministicFinish
+deterministicExecutionUniqueFinish complete executionDone Run.runDone refl =
+  refl
+deterministicExecutionUniqueFinish complete executionDone
+    (Run.runStep step rest) ()
+deterministicExecutionUniqueFinish complete
+    (executionStep nextExact executionRest)
+    Run.runDone ()
+deterministicExecutionUniqueFinish
+    {successor = successor}
+    complete
+    (executionStep {current = current} {nextRow = deterministicNext}
+      nextExact executionRest)
+    (Run.runStep {next = relationalNext} relationalStep relationalRest)
+    lengthExact
+    with justInjective
+      (trans
+        (sym nextExact)
+        (everyWellFormedStepSelected complete relationalStep))
+... | refl =
+  deterministicExecutionUniqueFinish
+    complete
+    executionRest
+    relationalRest
+    (sucInjective lengthExact)
+
+transportAcceptingInterior :
+  ∀ {machine : Local.ConcreteTapeMachine}
+    {left right : Local.TapeRow machine} →
+  left ≡ right →
+  Accepting.AcceptingInteriorRow machine left →
+  Accepting.AcceptingInteriorRow machine right
+transportAcceptingInterior refl accepting = accepting
+
+------------------------------------------------------------------------
+-- Any exact-budget accepting run therefore certifies that the deterministic
+-- endpoint itself is accepting.
+------------------------------------------------------------------------
+
+exactBudgetRunForcesDeterministicAccepting :
+  ∀ {machine : Local.ConcreteTapeMachine}
+    {successor : DeterministicTapeSuccessor machine}
+    (complete : DeterministicRefinementComplete machine successor)
+    (input : Input.InputWord machine)
+    (steps : Nat)
+    {deterministicFinish : Local.TapeRow machine}
+    (execution :
+      DeterministicExecution
+        successor
+        steps
+        (Guard.guardedInitialRow input steps)
+        deterministicFinish) →
+    Exact.ExactBudgetAcceptingRun input steps →
+    Accepting.AcceptingInteriorRow machine deterministicFinish
+exactBudgetRunForcesDeterministicAccepting
+    complete input steps execution exact =
+  transportAcceptingInterior
+    endpointExact
+    (Accepting.accepting (Exact.certificate exact))
+  where
+    endpointExact :
+      Exact.finish exact ≡ deterministicFinish
+    endpointExact =
+      deterministicExecutionUniqueFinish
+        complete
+        execution
+        (Accepting.run (Exact.certificate exact))
+        (Exact.exactLength exact)
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
