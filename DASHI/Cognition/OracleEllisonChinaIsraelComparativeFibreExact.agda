@@ -35,7 +35,7 @@ data DeploymentStatus : Set where
   reportedOperationalIntegration : DeploymentStatus
   officialVendorIntegration : DeploymentStatus
   selectedPrimeProvider : DeploymentStatus
-  materiallyCounterevidencedPrimeProvider : DeploymentStatus
+  unsuccessfulBidder : DeploymentStatus
 
 record DeploymentEdge : Set where
   constructor deployment-edge
@@ -89,8 +89,8 @@ oracleNimbusEdge = deployment-edge
   israelGovernmentProcurement
   oracle
   publicGovernmentCloud
-  materiallyCounterevidencedPrimeProvider
-  "Oracle is not one of the selected prime Nimbus public-cloud providers in the official procurement record."
+  unsuccessfulBidder
+  "Oracle challenged its rejection from Nimbus; the government selected AWS and Google. This establishes a procurement relationship but not prime-provider deployment."
 
 ------------------------------------------------------------------------
 -- Comparison boundary.
@@ -114,6 +114,12 @@ operationalIntegrationImpliesNeutrality = false
 operationalIntegrationImpliesSovereignControl : Bool
 operationalIntegrationImpliesSovereignControl = false
 
+unsuccessfulNimbusBidRefutesRafaelIntegration : Bool
+unsuccessfulNimbusBidRefutesRafaelIntegration = false
+
+unsuccessfulNimbusBidRefutesEveryOracleIsraelRelationship : Bool
+unsuccessfulNimbusBidRefutesEveryOracleIsraelRelationship = false
+
 record ComparativeFibreBoundary : Set where
   constructor comparative-fibre-boundary
   field
@@ -122,7 +128,8 @@ record ComparativeFibreBoundary : Set where
     institutionalAuthorityRemainsSeparate : Bool
     deploymentPathRemainsSeparate : Bool
     controllerIdentityRemainsSeparate : Bool
+    counterevidenceRemainsClaimLocal : Bool
 
 canonicalComparativeFibreBoundary : ComparativeFibreBoundary
 canonicalComparativeFibreBoundary =
-  comparative-fibre-boundary true true true true true
+  comparative-fibre-boundary true true true true true true
