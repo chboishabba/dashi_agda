@@ -176,6 +176,7 @@ crowley2016NeuroimmuneBridge =
       crowley2016Source
       "Validated as a review-level mechanistic bridge between GABAergic signalling and neuroinflammatory processes only."
       true refl)
+    refl
     "glial/microglial inflammatory signalling, cytokine/chemokine responses, and immune-cell GABA receptor pathways reviewed across cited studies"
     "reciprocal neural-immune signalling; no single mediator is universalised by this adapter"
     "the review describes bidirectional interaction, so temporal direction is retained as mechanism-specific rather than collapsed to GABA -> inflammation"
@@ -297,8 +298,8 @@ record GABAEvidenceInstantiationBoundary : Set where
   field
     synchronyAttachmentAssociationInstantiated : Bool
     synchronyAttachmentAssociationInstantiatedIsTrue : synchronyAttachmentAssociationInstantiated ≡ true
-    synchronyDoesNotDefineAttachment : Bool
-    synchronyDoesNotDefineAttachmentIsFalse : synchronyDoesNotDefineAttachment ≡ false
+    synchronyDefinesAttachmentPaid : Bool
+    synchronyDefinesAttachmentPaidIsFalse : synchronyDefinesAttachmentPaid ≡ false
     neuroimmuneMechanisticBridgeInstantiated : Bool
     neuroimmuneMechanisticBridgeInstantiatedIsTrue : neuroimmuneMechanisticBridgeInstantiated ≡ true
     neuroimmuneReviewPaysDiagnosisCausation : Bool
