@@ -11,6 +11,7 @@ import DASHI.Governance.SocioTechnicalPowerSelectionAssayExact as Power
 import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
 import DASHI.Culture.HistoricalTotalityCriticalTheoryCrossPollinationExact as Totality
 import DASHI.Culture.PowersPlantationParadiseSourceAtlasExact as Sources
+import DASHI.Culture.PowersPlantationParadiseHistoricalClaimReceiptsExact as Claims
 import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performance
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
@@ -20,7 +21,7 @@ import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 --
 -- The question mark is formalised as a projection disagreement, not as a
 -- literal claim that a plantation state monotonically transforms into a
--- paradise state.  Cultural visibility, material affordance, redistribution,
+-- paradise state. Cultural visibility, material affordance, redistribution,
 -- representation, access and global emancipation remain independent axes.
 ------------------------------------------------------------------------
 
@@ -130,11 +131,15 @@ sourceClaimDoesNotBecomeDASHITheorem ()
 
 ------------------------------------------------------------------------
 -- Cross-pollination receipts: these values expose the imported boundaries so
--- downstream consumers can see exactly which generic owners are being reused.
+-- downstream consumers can see exactly which generic and historical owners are
+-- being reused.
 ------------------------------------------------------------------------
 
 sourceBoundary : Sources.PowersSourceBoundary
 sourceBoundary = Sources.canonicalPowersSourceBoundary
+
+historicalClaimBoundary : Claims.PowersHistoricalClaimBoundary
+historicalClaimBoundary = Claims.canonicalPowersHistoricalClaimBoundary
 
 performanceBoundary : Performance.ColonialPerformanceStatusBoundary
 performanceBoundary = Performance.canonicalColonialPerformanceStatusBoundary
