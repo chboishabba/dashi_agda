@@ -8,6 +8,10 @@ import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact
 import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact
 import DASHI.Cognition.CaveTraumaNonErasingReopeningExact
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact
+import DASHI.Cognition.EpsteinPsychedelicSourceAtlasExact
+import DASHI.Cognition.EpsteinPsychedelicNetworkEvidenceExact
+import DASHI.Cognition.EpsteinPsychedelicParetoSnowballExact
+import DASHI.Cognition.EpsteinPsychedelicNetworkValidation
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
