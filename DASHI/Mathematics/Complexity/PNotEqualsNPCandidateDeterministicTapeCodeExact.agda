@@ -8,21 +8,14 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateDeterministicTapeCodeEx
 -- witness by one same-object concrete tape program whose output is read from
 -- the deterministic final control state.
 --
--- The Boolean result is NOT supplied independently:
---
---   final head state == accepting state ? true : false
---
--- using the machine's existing finite-state equality decider.
---
--- Exact deterministic execution plus completeness then proves both directions
--- between candidate=true and an ExactBudgetAcceptingRun for the SAME machine,
--- input and time budget.
+-- The code carrier is the literal fixed-width static-program bit vector of the
+-- exact machine.  The proof-heavy decoded program description remains
+-- available separately as a receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Maybe.Base using (just)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -39,6 +32,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Acceptin
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Exact
+import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
 -- Read the result from the actual final control state.
@@ -154,6 +148,17 @@ open CandidateDeterministicTapeCode public
 -- Literal static machine code and exact code size.
 ------------------------------------------------------------------------
 
+candidateProgramBits :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (tape : CandidateDeterministicTapeCode candidate) →
+  CNF.Bits (ProgramCode.StaticProgramBitsWidth (machine tape))
+candidateProgramBits tape =
+  ProgramCode.encodeStaticProgram
+    (machine tape)
+    (stateCoverage tape)
+    (symbolCoverage tape)
+
 candidateProgramDescription :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
@@ -175,7 +180,7 @@ candidateProgramBitSize tape =
   ProgramCode.StaticProgramBitsWidth (machine tape)
 
 ------------------------------------------------------------------------
--- Tighten the existing CandidateCodeRealization to the literal tape program.
+-- Tighten CandidateCodeRealization to the literal bit-vector code.
 ------------------------------------------------------------------------
 
 candidateTapeToCodeRealization :
@@ -185,16 +190,18 @@ candidateTapeToCodeRealization :
   Actual.CandidateCodeRealization candidate
 candidateTapeToCodeRealization tape = record
   { Actual.CandidateCode =
-      ProgramCode.ConcreteTapeProgramDescription (machine tape)
+      CNF.Bits
+        (ProgramCode.StaticProgramBitsWidth
+          (machine tape))
   ; Actual.candidateCode =
-      candidateProgramDescription tape
+      candidateProgramBits tape
   ; Actual.runCandidateCode =
-      λ description formula →
+      λ codeBits formula →
         endpointDecision (finalInterior tape formula)
   ; Actual.codeDecisionExact =
       decisionExact tape
   ; Actual.codeSize =
-      λ description → candidateProgramBitSize tape
+      λ codeBits → candidateProgramBitSize tape
   }
 
 ------------------------------------------------------------------------
@@ -261,13 +268,12 @@ exactBudgetRunGivesCandidateTrue tape formula exact =
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
--- CandidateCodeRealization can now be paid by an actual finite tape program:
--- its code size is the literal static-program bit width and its decision bit is
--- read from the deterministic final control state.
+-- CandidateCodeRealization is now literally fixed-width machine bits; its size
+-- is the static-program bit width and its decision bit is read from the exact
+-- deterministic final control state.
 --
 -- Remaining universal debt:
---   every polynomial SAT candidate must be supplied/compiled as such a
---   deterministic tape program with honest polynomial time, and the opposite
---   interpreter must combine quotation + candidate execution + Boolean
---   negation on a single same-object concrete tape machine.
+--   every executable SAT candidate must be lowered to such a deterministic
+--   tape program, and the opposite interpreter must combine program quotation,
+--   candidate execution and Boolean negation in one concrete machine.
 ------------------------------------------------------------------------
