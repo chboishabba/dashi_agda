@@ -16,15 +16,11 @@ import DASHI.Biology.NeurochemicalVocabularyReceipt as Neurochem
 
 ------------------------------------------------------------------------
 -- IBS / DGBI WHOLE-SYSTEM HYPERFABRIC
---
--- IBS is represented as a coupled recurrent gut-brain-immune system rather
--- than a one-cause chain.  Individual mechanisms can be experimentally real
--- without being necessary, sufficient, universal, or scalar-complete causes.
 ------------------------------------------------------------------------
 
 black2026Source : Source.AttributedSource
 black2026Source = Source.mkDOISource
-  "Christopher J Black et al."
+  "Yasmin Nasser; Andrea Shin; Alexander C Ford; Michael Camilleri; Christopher J Black"
   "Pathophysiology of irritable bowel syndrome"
   "The Lancet Gastroenterology & Hepatology" "2026"
   "10.1016/S2468-1253(26)00148-2"
@@ -46,7 +42,7 @@ dong2024Source = Source.mkDOISource
 
 gabaIBS2025Source : Source.AttributedSource
 gabaIBS2025Source = Source.mkDOISource
-  "IBS GABA review authors as indexed by Frontiers in Pharmacology"
+  "Christian Lambiase et al."
   "Targeting gamma-aminobutyric acid pathways in irritable bowel syndrome: bridging central nervous system, enteric dysfunction, and the microbiota-gut-brain axis"
   "Frontiers in Pharmacology" "2025"
   "10.3389/fphar.2025.1677037"
