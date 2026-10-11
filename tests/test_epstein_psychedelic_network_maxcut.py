@@ -56,6 +56,16 @@ EXPECTED = {
         "facebookResultDoesNotEstablishInstagramDeployment",
         "neuroforecastingDoesNotEstablishEpsteinYuUse",
     ],
+    "DASHI/Cognition/EpsteinYuVRNeurotechAcquisitionExact.agda": [
+        "EFTA00820667",
+        "EFTA00438160",
+        "EFTA01059141",
+        "epsteinAIConsciousnessInterest",
+        "yuEEGIndustryExploration",
+        "yuViveHouseSetup",
+        "vrSetupDoesNotEstablishExperiment",
+        "aiConsciousnessInterestDoesNotEstablishMindControl",
+    ],
     "DASHI/Cognition/DoblinMAPSPublicBenefitPrivateProfitExact.agda": [
         "Psychedelic Alpha",
         "Rick Doblin",
