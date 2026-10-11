@@ -17,6 +17,7 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as Fr
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
 import DASHI.Law.AIHumanCorporateAttributionSensibLaw2026Exact as AIAgentAttribution
 import DASHI.Law.AustralianCommonwealthAgentComputerOffenceAttribution2026Exact as CommonwealthAgentLaw
+import DASHI.Law.OpenAIMedicareParliamentaryEvidence20261006Exact as MedicareHearing
 import DASHI.Law.AIAgentLegalAcquisitionProgress20261012Exact as AILegalProgress
 
 ------------------------------------------------------------------------
@@ -92,9 +93,9 @@ selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
 
 -- AI-agent legal attribution is carried through the same SensibLaw parity
--- surface. The Commonwealth primary-law owner now pays the candidate statutory
--- source/element structure while runtime, applicability, fault and corporate
--- attribution remain independent receipts.
+-- surface. The primary-law owner pays the candidate statutory structure;
+-- hearing evidence separately pays post-incident response facts without
+-- back-propagating them into June fault or liability.
 selectedMedicareAIAgentLegalBoundary :
   AIAgentAttribution.NamedIncidentLegalBoundary
 selectedMedicareAIAgentLegalBoundary =
@@ -105,10 +106,20 @@ selectedMedicare4781Boundary :
 selectedMedicare4781Boundary =
   CommonwealthAgentLaw.medicare4781ApplicationBoundary
 
+selectedMedicareParliamentaryResponse :
+  MedicareHearing.ParliamentaryResponseEvidence
+selectedMedicareParliamentaryResponse =
+  MedicareHearing.openAIParliamentaryResponseEvidence
+
 selectedCandidateOffenceSourceProgress :
   AILegalProgress.LegalProducerProgress
 selectedCandidateOffenceSourceProgress =
   AILegalProgress.candidateOffenceSourceAcquired
+
+selectedPostIncidentResponseProgress :
+  AILegalProgress.LegalProducerProgress
+selectedPostIncidentResponseProgress =
+  AILegalProgress.postIncidentOrganisationalResponse
 
 selectedCorporateFaultProgress :
   AILegalProgress.LegalProducerProgress
