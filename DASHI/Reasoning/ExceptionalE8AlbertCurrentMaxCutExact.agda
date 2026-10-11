@@ -4,29 +4,25 @@ module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 -- CURRENT EXCEPTIONAL E8 / ALBERT MAX-CUT
 --
 -- Fail-closed status surface spanning the source-native Agda rational Albert
--- algebra and companion Lean structured-E8 / Spin-D4 / F4 producers.
+-- algebra, companion Lean structured-E8 / Spin-D4 / F4 producers, and the
+-- external Monster-3B realization lane.
 --
--- Local exceptional discovery is now paid through an exact split-root-datum
--- recognition:
+-- Local exceptional discovery is paid through split-root-datum recognition:
+-- actual H_3(O_Q), arbitrary inner derivations, exact 52=28+8_v+8_s+8_c
+-- triality, Cartan/chirality, exact symbolic Q(i) 4+48 root spaces, exact root
+-- grading on all 1128 root pairs, and independent companion-Lean F4 root/Weyl
+-- data.
 --
--- * actual H_3(O_Q), cubic norm, Jordan product/identity;
--- * arbitrary inner commutators [L_a,L_b] are derivations;
--- * exact derivation dimension 52 and 28+8_v+8_s+8_c triality brackets;
--- * four explicit commuting Cartan derivations with vector/chiral-spin roles;
--- * exact symbolic Q(i) projectors give zero-weight rank 4 and 48
---   one-dimensional nonzero root spaces = 24+8+8+8;
--- * exact root grading is checked across all C(48,2)=1128 unordered root pairs;
--- * these root labels are literally the standard F4 set, giving split root-
---   datum type F4 over Q(i) by exact producer;
--- * companion Lean independently owns the same 48-root F4 Cartan/Coxeter datum
---   and Weyl order 1152, plus finite Spin/D4 action receipts;
--- * Agda owns a typed same-carrier linear Jordan-automorphism carrier.
+-- The remaining Albert/F4 wall is FORM/GROUP classification over Q.
 --
--- The remaining exceptional wall is therefore FORM/GROUP classification over
--- Q: identify the original rational form and the full algebraic groups Aut(J),
--- cubic E6, and F4 as unit stabilizer.  Classical sources pay that mathematics;
--- the general characteristic-zero classification theorem is not formalized in
--- this repo.
+-- The independent Monster wall has also narrowed: ATLAS/CTblLib now supplies a
+-- certified direct 12-dimensional GF(3) `2.Suz:2` module and a faithful
+-- Monster-normalizer realization showing that this module is symplectic and
+-- acts on the extraspecial `3_+^(1+12)`.  The repository owns a typed
+-- symplectic-basis / Heisenberg-cocycle lift compiler.  What remains there is
+-- import of the published matrices, a concrete basis change to `X6+X6*`, and
+-- the central cocycle correction required by the repository's chosen
+-- asymmetric Heisenberg multiplication.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -46,6 +42,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact 
 import DASHI.Mathematics.Algebra.RationalAlbertLinearJordanAutomorphismExact as LinearAut
 import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact as Classification
 import DASHI.Reasoning.AlbertF4LeanCrossProverMaxCutReceiptExact as LeanF4
+import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact as MonsterAtlas
 
 record ExceptionalCurrentMaxCut : Set where
   constructor exceptional-current-max-cut
@@ -91,6 +88,8 @@ record ExceptionalCurrentMaxCut : Set where
     fullF4AutomorphismRecognitionPaid : Bool
     actualE6UnitStabilizerRecognitionPaid : Bool
 
+    monsterNormalizerCertifiedSourceDataLocated : Bool
+    monsterSymplectic12IntertwinerCompilerTyped : Bool
     monsterNormalizerPhysicalRealizationPaid : Bool
     originalPuncturedT5SameObjectRecognitionPaid : Bool
     empiricalLilaInstantiationPaid : Bool
@@ -113,5 +112,8 @@ canonicalExceptionalCurrentMaxCut =
     Classification.canonicalBoundary.allConcreteExceptionalHypothesesOwned
     Classification.canonicalBoundary.remainingClassificationIsQFormAndGroupLevel
     false false false false
-    false false false
-    "Structured E8 and the concrete rational Albert discovery programme are source-written through the intrinsic E8 root datum, actual Jordan algebra, generic inner derivations, exact 52=28+8+8+8 triality brackets, exact Cartan/chirality, exact Q(i) 4+48 one-dimensional root spaces, and exact root grading on all 1128 root pairs. The split Q(i) root datum is recognized as F4 by exact producer and independently matched by companion Lean. The sole exceptional formal seam is now classification of the original Q-form and full algebraic groups Aut(J), cubic E6, and the F4 unit stabilizer. Monster normalizer realization, genuinely new original-T5 recognition, and LILA remain independent lanes."
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.certifiedMonsterNormalizerRepresentationLocated
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.symplecticBasisIntertwinerInterfacePaid
+    false
+    false false
+    "Structured E8 and the rational Albert discovery programme are paid through intrinsic E8, actual Jordan algebra, exact triality, exact Q(i) F4 root spaces and exact root grading; the split root datum is recognized as F4. The Albert formal seam is classification of the original Q-form/full groups. The Monster 3B source-data existence seam is now paid by certified ATLAS representations and a typed symplectic/Heisenberg lift compiler; remaining Monster work is concrete matrix import, symplectic basis normalization into X6+X6*, central cocycle correction, and instantiation of the existing translation-descent compiler. Genuinely new original-T5 recognition and LILA remain independent lanes."
