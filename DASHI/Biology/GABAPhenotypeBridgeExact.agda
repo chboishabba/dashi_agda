@@ -14,11 +14,11 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- GABA / PHENOTYPE TYPED BRIDGE LAYER
 --
--- This module does not promote any evidence receipt by itself.  It specifies
--- the typed obligations required for promotion.  In particular, a causal
--- bridge must carry the repository's existing CausalEffectEstimand object;
--- citation, association, group difference and diagnostic labels cannot stand
--- in for that object.
+-- Promotion receipts are evidence-indexed.  A validation source must be the
+-- source carried by the exact evidence value being promoted.  Causal promotion
+-- additionally carries a witness indexed by the exact association/estimand
+-- pair, preventing a scope receipt for one association from being reused for a
+-- different one merely because the outer types coincide.
 ------------------------------------------------------------------------
 
 record PromotionValidation : Set where
@@ -31,11 +31,26 @@ record PromotionValidation : Set where
 
 open PromotionValidation public
 
+record AssociationEstimandScopeWitness
+    (association : Evidence.RegionalGABAEvidence)
+    (estimand : Causal.CausalEffectEstimand) : Set where
+  constructor association-estimand-scope-witness
+  field
+    associationScopeReference : String
+    estimandScopeReference : String
+    populationAlignmentReference : String
+    interventionComparatorReference : String
+    outcomeTimeAlignmentReference : String
+
+open AssociationEstimandScopeWitness public
+
 record RegionalToWholeBrainBridge
     (regional : Evidence.RegionalGABAEvidence) : Set where
   constructor regional-to-whole-brain-bridge
   field
     validation : PromotionValidation
+    validationSourceMatchesEvidence :
+      source validation ≡ Evidence.source regional
     wholeBrainScopeReference : String
     transportReference : String
 
@@ -44,6 +59,8 @@ record GroupToIndividualBridge
   constructor group-to-individual-bridge
   field
     validation : PromotionValidation
+    validationSourceMatchesEvidence :
+      source validation ≡ Evidence.source groupEvidence
     individualSelectionReference : String
     calibrationReference : String
 
@@ -52,7 +69,11 @@ record AssociationToCausalBridge
   constructor association-to-causal-bridge
   field
     validation : PromotionValidation
+    validationSourceMatchesEvidence :
+      source validation ≡ Evidence.source association
     causalEstimand : Causal.CausalEffectEstimand
+    estimandScopeMatchesAssociation :
+      AssociationEstimandScopeWitness association causalEstimand
     identificationReference : String
     interventionReference : String
 
@@ -71,6 +92,8 @@ record NeurochemicalInflammationBridge
   constructor neurochemical-inflammation-bridge
   field
     validation : PromotionValidation
+    validationSourceMatchesEvidence :
+      source validation ≡ Evidence.source neurochemicalEvidence
     inflammatoryReadoutReference : String
     mediatorReference : String
     temporalDirectionReference : String
@@ -81,12 +104,14 @@ causalPromotionRequiresExistingEstimand :
   Causal.CausalEffectEstimand
 causalPromotionRequiresExistingEstimand bridge = causalEstimand bridge
 
+causalPromotionRequiresMatchedScope :
+  ∀ {association}
+    (bridge : AssociationToCausalBridge association) →
+  AssociationEstimandScopeWitness association (causalEstimand bridge)
+causalPromotionRequiresMatchedScope bridge = estimandScopeMatchesAssociation bridge
+
 ------------------------------------------------------------------------
 -- Evidence families.
---
--- These are families, not a theorem that every member lies on a single total
--- order.  Promotion authority comes from the typed validation / causal objects
--- above, not from the family tag alone.
 ------------------------------------------------------------------------
 
 data EvidenceFamily : Set where
@@ -113,11 +138,6 @@ record EvidenceFamilyReceipt : Set where
 
 ------------------------------------------------------------------------
 -- Sensory cross-pollination.
---
--- GABA evidence is attached to the already-existing processing geometry.  The
--- carrier does not assert that GABA determines weighting, context, geometry or
--- sensory load.  It makes those coordinates explicit so a future empirical
--- model can relate them without collapsing them.
 ------------------------------------------------------------------------
 
 record SensoryGABAInteractionCarrier : Set where
@@ -155,10 +175,6 @@ umesawaSensoryCarrier processing =
 
 ------------------------------------------------------------------------
 -- Memory / retrieval cross-pollination.
---
--- Schmitz et al. is a retrieval-suppression association.  This bridge attaches
--- that receipt to the existing memory-fibre owner without claiming GABA writes,
--- erases, increments, or otherwise changes the formal memory fibre.
 ------------------------------------------------------------------------
 
 record GABARetrievalMemoryBridge : Set where
@@ -192,9 +208,6 @@ schmitzEvidenceDoesNotByItselfChangeMemory memory = refl
 
 ------------------------------------------------------------------------
 -- Explicit ADHD evidence hole.
---
--- This records the minimum coordinates demanded by the transcript audit before
--- a general low-GABA or severity claim can even enter a promotion attempt.
 ------------------------------------------------------------------------
 
 record ADHDEvidenceGap : Set where
@@ -242,6 +255,10 @@ record GABAPhenotypeBridgeBoundary : Set where
     groupToIndividualRequiresBridgeIsTrue : groupToIndividualRequiresBridge ≡ true
     causalPromotionRequiresEstimand : Bool
     causalPromotionRequiresEstimandIsTrue : causalPromotionRequiresEstimand ≡ true
+    causalPromotionRequiresMatchedScope : Bool
+    causalPromotionRequiresMatchedScopeIsTrue : causalPromotionRequiresMatchedScope ≡ true
+    validationSourceMustMatchEvidence : Bool
+    validationSourceMustMatchEvidenceIsTrue : validationSourceMustMatchEvidence ≡ true
     sensoryContextRemainsExplicit : Bool
     sensoryContextRemainsExplicitIsTrue : sensoryContextRemainsExplicit ≡ true
     memoryMutationIsNotInferred : Bool
@@ -252,6 +269,8 @@ record GABAPhenotypeBridgeBoundary : Set where
 canonicalGABAPhenotypeBridgeBoundary : GABAPhenotypeBridgeBoundary
 canonicalGABAPhenotypeBridgeBoundary =
   gaba-phenotype-bridge-boundary
+    true refl
+    true refl
     true refl
     true refl
     true refl
