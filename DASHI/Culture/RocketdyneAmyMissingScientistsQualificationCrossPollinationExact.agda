@@ -10,6 +10,9 @@ import DASHI.Physics.Propulsion.RocketdyneBerylliumQualificationEvidenceExact as
 import DASHI.Physics.Propulsion.Rocketdyne1974MeasuredResultsExact as Data
 import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
 import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Cut
+import DASHI.Physics.Propulsion.Rocketdyne1974ThermalModelValidationExact as Therm
+import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as Fals
+import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as Terminal
 import DASHI.Culture.AmyEskridgeHAL5AntigravitySourceEntitlementExact as Amy
 import DASHI.Culture.MissingDeceasedCombinedRocketScramjetVehicleBidiExact as Vehicle
 
@@ -134,13 +137,26 @@ archivalValveFailure = Data.moogContamination
 archivalSteadyPerformance : Data.DecimalResult
 archivalSteadyPerformance = Data.unsaturatedIsp
 
--- The new physics max-cut is explicitly reusable by the investigation without
--- turning physical similarity into historical attribution.
 archivalTwoMaterialDiscriminator : Disc.TwoMaterialDiscriminator
 archivalTwoMaterialDiscriminator = Disc.currentDiscriminator
 
 archivalPhysicalIdentifiabilityCut : Cut.PhysicalMaxCut
 archivalPhysicalIdentifiabilityCut = Cut.currentPhysicalMaxCut
 
+archivalThermalModelReceipt : Therm.ThermalModelBoundary
+archivalThermalModelReceipt = Therm.canonicalThermalModelBoundary
+
+archivalMaterialDependenceBoundary : Fals.MaterialDependenceBoundary
+archivalMaterialDependenceBoundary = Fals.canonicalMaterialDependenceBoundary
+
+archivalTerminalPhysicalFrontier : Terminal.TerminalPhysicalFrontier
+archivalTerminalPhysicalFrontier = Terminal.currentTerminalFrontier
+
 physicalNonidentifiabilityDoesNotPromoteInvestigativeClaim : Bool
 physicalNonidentifiabilityDoesNotPromoteInvestigativeClaim = true
+
+materialDiscriminationDoesNotEstablishHistoricalCollaboration : Bool
+materialDiscriminationDoesNotEstablishHistoricalCollaboration = true
+
+sourceValidatedThermalModelDoesNotValidateAntigravity : Bool
+sourceValidatedThermalModelDoesNotValidateAntigravity = true
