@@ -12,11 +12,11 @@ import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPhysicalSymmetryExact as Ph
 -- CO1/4TASE2 -> GENERIC ARPES WITNESS GATE
 --
 -- Sprague et al. deposit the minimal raw ARPES dataset needed to replicate the
--- paper at UCF STARS dataset 30.  The dataset page is public and states that
--- the payload is Igor binary waves.  As of the 2026-10-08 acquisition attempt
--- from this execution environment, the native payload endpoint returns HTTP
--- 403, so no intensity array is invented and no exact observed spectral
--- witness is promoted.
+-- paper at UCF STARS dataset 30.  The public landing page states that the raw
+-- payload is Igor binary waves.  The native payload endpoint was retried on
+-- 2026-10-12 and still returned HTTP 403 from this execution environment.
+-- Therefore no intensity array, checksum, calibrated channel map or literal
+-- spectral witness is invented.
 ------------------------------------------------------------------------
 
 record CoARPESAcquisitionStatus : Set where
@@ -27,6 +27,9 @@ record CoARPESAcquisitionStatus : Set where
     sourceStatesRawARPESDeposited : Bool
     sourceStatesMinimalReplicationDataset : Bool
     payloadFormatIgorBinaryWave : Bool
+    landingPageReverified20261012 : Bool
+    nativePayloadEndpointRetried20261012 : Bool
+    nativePayloadEndpointReturned403 : Bool
     nativePayloadAcquiredInRepository : Bool
     calibratedAxesConstructed : Bool
     spinResolvedIntensityArrayConstructed : Bool
@@ -40,6 +43,7 @@ canonicalCoARPESAcquisitionStatus =
   co-arpes-acquisition-status
     "10.1038/s41467-026-76784-x"
     "https://stars.library.ucf.edu/datasets/30/"
+    true true true
     true true true
     false false false false false
 
