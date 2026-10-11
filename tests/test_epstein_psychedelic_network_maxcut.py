@@ -40,6 +40,15 @@ EXPECTED = {
         "ScopolamineTrumpetSameObject",
         "paretoRoutingCreatesTruth",
     ],
+    "DASHI/Cognition/EpsteinPsychedelicNeuroforecastingCrossPollinationExact.agda": [
+        "NeuralRepresentationLaplacianExact",
+        "Motoki",
+        "facebookVideoAds",
+        "socialRelatedNeuralMeasureForecastsAggregateSharing",
+        "forecastDoesNotEstablishMechanism",
+        "facebookResultDoesNotEstablishInstagramDeployment",
+        "neuroforecastingDoesNotEstablishEpsteinYuUse",
+    ],
     "DASHI/Cognition/EpsteinPsychedelicNetworkValidation.agda": [
         "canonicalEpsteinPsychedelicBoundary",
         "currentEpsteinPsychedelicRoute",
