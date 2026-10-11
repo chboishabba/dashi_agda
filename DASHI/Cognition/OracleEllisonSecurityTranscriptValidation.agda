@@ -48,10 +48,20 @@ sameVendorDoesNotCollapseStateObjective :
   ≡ false
 sameVendorDoesNotCollapseStateObjective = refl
 
+nimbusLossDoesNotEraseRafael :
+  Compare.unsuccessfulNimbusBidRefutesRafaelIntegration
+  ≡ false
+nimbusLossDoesNotEraseRafael = refl
+
 provenanceDoesNotPayTruth :
   Weld.provenancePaysTruth
   ≡ false
 provenanceDoesNotPayTruth = refl
+
+sensibLawProvenanceOrthogonalityReused :
+  Weld.sensibLawSourceAttributionDoesNotCreateTruth
+  ≡ refl
+sensibLawProvenanceOrthogonalityReused = refl
 
 netanyahuControlWorldviewVerdictPinned :
   Verdict.verdict Claims.netanyahuSayeretControlWorldview
@@ -65,5 +75,5 @@ ellisonImmortalityVerdictPinned = refl
 
 oracleBlueprintIsraelVerdictPinned :
   Verdict.verdict Claims.oracleWritesIsraeliSecurityBlueprint
-  ≡ Verdict.contradictedOrMateriallyCounterevidenced
+  ≡ Verdict.unsupported
 oracleBlueprintIsraelVerdictPinned = refl
