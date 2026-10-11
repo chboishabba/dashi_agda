@@ -1,7 +1,7 @@
 module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation where
 
 ------------------------------------------------------------------------
--- RED-FIRST validation for the recut Albert/F4 frontier.
+-- Validation surface for the exact exceptional max-cut.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -17,18 +17,38 @@ signedBasisG2SubgroupNowPaid :
   Cut.signedBasisG2SubgroupPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
 signedBasisG2SubgroupNowPaid = refl
 
-knownFiveGeneratorBijectivityPaid :
-  Cut.knownFiveAlbertGeneratorsBijectivePaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
-knownFiveGeneratorBijectivityPaid = refl
+knownGeneratorFamilyPaid :
+  Cut.knownAlbertGeneratorFamilyPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
+knownGeneratorFamilyPaid = refl
+
+typedLinearJordanAutomorphismCarrierPaid :
+  Cut.typedLinearJordanAutomorphismCarrierPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
+typedLinearJordanAutomorphismCarrierPaid = refl
 
 allInnerDerivationLawsSourceWritten :
   Cut.allInnerDerivationLawsSourceWritten Cut.canonicalExceptionalCurrentMaxCut ≡ true
 allInnerDerivationLawsSourceWritten = refl
 
-innerDerivation52DiagnosticNowPaid :
-  Cut.innerDerivationDimension52DiagnosticPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
-innerDerivation52DiagnosticNowPaid = refl
+innerDerivation52NowPaid :
+  Cut.exactInnerDerivationDimension52Paid Cut.canonicalExceptionalCurrentMaxCut ≡ true
+innerDerivation52NowPaid = refl
 
-fullF4StillOpen :
+trialitySplitNowPaid :
+  Cut.exactTrialityTwentyEightEightEightEightPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
+trialitySplitNowPaid = refl
+
+exactQIRootSpacesNowPaid :
+  Cut.exactQIRootSpacesFourPlusFortyEightPaid Cut.canonicalExceptionalCurrentMaxCut ≡ true
+exactQIRootSpacesNowPaid = refl
+
+allConcreteClassificationHypothesesOwned :
+  Cut.allConcreteClassificationHypothesesOwned Cut.canonicalExceptionalCurrentMaxCut ≡ true
+allConcreteClassificationHypothesesOwned = refl
+
+generalClassificationStillExternal :
+  Cut.generalExceptionalClassificationFormalizedInRepo Cut.canonicalExceptionalCurrentMaxCut ≡ false
+generalClassificationStillExternal = refl
+
+fullF4StillClassificationOpen :
   Cut.fullF4AutomorphismRecognitionPaid Cut.canonicalExceptionalCurrentMaxCut ≡ false
-fullF4StillOpen = refl
+fullF4StillClassificationOpen = refl
