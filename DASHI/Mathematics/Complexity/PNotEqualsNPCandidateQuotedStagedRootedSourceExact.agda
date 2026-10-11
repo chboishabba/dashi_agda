@@ -1,13 +1,10 @@
 module DASHI.Mathematics.Complexity.PNotEqualsNPCandidateQuotedStagedRootedSourceExact where
 
-------------------------------------------------------------------------
--- CANDIDATE-QUOTED ROOT -> TOTAL STAGED ROOTED SOURCE RESULT
-------------------------------------------------------------------------
-
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_; _<_)
 
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
@@ -33,7 +30,7 @@ module CandidateStagedSource
     Fixed.fixedWidthCandidateQuotedState code codec
 
   indexedRoot :
-    DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact.BooleanFormula
+    SAT.BooleanFormula
       (Bridge.formulaVariableBound
         (Q2.currentFormula candidateState))
   indexedRoot =
@@ -45,13 +42,9 @@ module CandidateStagedSource
     Q2.recursiveMeasure candidateState
 
   stagedSource :
-    Staged.RootedSourceStage
-      indexedRoot
-      candidateBudget
+    Staged.RootedSourceStage indexedRoot candidateBudget
   stagedSource =
-    Staged.stagedRootedSource
-      indexedRoot
-      candidateBudget
+    Staged.stagedRootedSource indexedRoot candidateBudget
 
   sourceWork : Nat
   sourceWork =
@@ -62,8 +55,7 @@ module CandidateStagedSource
     stagedSource
     ≡ Staged.sourceReady terminalKeys exact fits →
     sourceWork < candidateBudget
-  sourceReadyImpliesWorkFits {fits = fits} equality =
-    fits
+  sourceReadyImpliesWorkFits {fits = fits} equality = fits
 
   budgetExhaustedImpliesMeasureBelowSourceWork :
     ∀ {exhausted} →
@@ -72,15 +64,8 @@ module CandidateStagedSource
     candidateBudget ≤ sourceWork
   budgetExhaustedImpliesMeasureBelowSourceWork
       {exhausted = exhausted}
-      equality =
-    exhausted
+      equality = exhausted
 
   candidateBudgetIsRecursiveMeasure :
-    candidateBudget
-    ≡ Q2.recursiveMeasure candidateState
+    candidateBudget ≡ Q2.recursiveMeasure candidateState
   candidateBudgetIsRecursiveMeasure = refl
-
-------------------------------------------------------------------------
--- On the exact same-object candidate root, the exhaustive rooted source stage
--- is total and its stop reason is inspectable.
-------------------------------------------------------------------------
