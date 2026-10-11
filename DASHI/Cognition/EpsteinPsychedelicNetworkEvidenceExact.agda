@@ -13,7 +13,7 @@ import DASHI.Cognition.EpsteinPsychedelicSourceAtlasExact as Sources
 -- CASE-SPECIFIC NETWORK EDGES OVER THE EXISTING GENEALOGY CALCULUS.
 --
 -- We reuse EvidenceGrade and PathwayRelation but keep the released-document
--- references as exact case-local identifiers.  No parallel evidence ladder is
+-- references as exact case-local identifiers. No parallel evidence ladder is
 -- introduced.
 ------------------------------------------------------------------------
 
@@ -25,6 +25,7 @@ data NetworkNode : Set where
   maps : NetworkNode
   cubaConsciousnessEvent : NetworkNode
   psychedelicResearchMilieu : NetworkNode
+  specialAbilitySearch : NetworkNode
   ibogaineResearch : NetworkNode
   scopolamineInformation : NetworkNode
   trumpetPlants : NetworkNode
@@ -45,24 +46,53 @@ yuToEpsteinCorrespondence = network-edge
   ginoYu jeffreyEpstein
   Genealogy.personnelInstitutionalContinuity
   Genealogy.gradeA
-  (Sources.yuExperientialProposal20161017 ∷ Sources.yuUpdateCuba20170216 ∷ Sources.yuNetworkReport20171113 ∷ [])
-  "Direct correspondence documents an ongoing Yu-Epstein relationship around altered-state/consciousness research planning."
+  (Sources.yuExperientialProposal20161017 ∷ Sources.yuUpdateCuba20170216 ∷
+   Sources.yuBenefactorBrokerage20170221 ∷ Sources.yuPsychedelicAwakeningReport20171125 ∷ [])
+  "Direct correspondence documents an ongoing Yu-Epstein relationship around altered-state/consciousness research planning, funding and introductions."
 
 epsteinFundingCubaEvent : NetworkEdge
 epsteinFundingCubaEvent = network-edge
   jeffreyEpstein cubaConsciousnessEvent
   Genealogy.fundingOrganisationalLink
   Genealogy.gradeA
-  (Sources.yuUpdateCuba20170216 ∷ [])
-  "Yu requested a USD 25,000 transfer for the Cuba event and Epstein replied affirmatively in the preserved thread; payment execution remains a separate receipt if needed."
+  (Sources.yuUpdateCuba20170216 ∷ Sources.yuBenefactorBrokerage20170221 ∷
+   Sources.epsteinCubaSent25k20170315 ∷ Sources.yuPsychedelicAwakeningReport20171125 ∷ [])
+  "The primary correspondence progresses from a USD 25,000 request/approval and explicit sponsor identification to Epstein's later statement that he had sent USD 25,000 and Yu's later report that the event depended on Epstein sponsorship; bank settlement remains a distinct stronger receipt."
+
+record BrokerageAttributionReceipt : Set where
+  constructor brokerage-attribution-receipt
+  field
+    attributedBroker : NetworkNode
+    attributingSource : NetworkNode
+    targetEvent : NetworkNode
+    sourceDocument : Sources.SourceIdentity
+    fundTransferFacilitationAttributed : Bool
+    relationshipBringingAttributed : Bool
+    completedThirdPartyIntroductionPaid : Bool
+open BrokerageAttributionReceipt public
+
+yuAttributesEpsteinBrokerage : BrokerageAttributionReceipt
+yuAttributesEpsteinBrokerage = brokerage-attribution-receipt
+  jeffreyEpstein ginoYu cubaConsciousnessEvent
+  Sources.yuBenefactorBrokerage20170221
+  true true false
 
 yuToPsychedelicMilieu : NetworkEdge
 yuToPsychedelicMilieu = network-edge
   ginoYu psychedelicResearchMilieu
   Genealogy.directDocumentedTransfer
   Genealogy.gradeA
-  (Sources.yuExperientialProposal20161017 ∷ Sources.cubaConferenceAbstractPacket ∷ [])
-  "Yu's event/conference materials explicitly include ayahuasca and ibogaine/iboga within the altered-state programme."
+  (Sources.yuExperientialProposal20161017 ∷ Sources.cubaConferenceAbstractPacket ∷
+   Sources.yuPsychedelicAwakeningReport20171125 ∷ [])
+  "Yu's event/conference materials explicitly include ayahuasca and ibogaine/iboga; his later report to Epstein explicitly describes 'psychedelic awakening' groups and an attached account of recent psilocybin use."
+
+epsteinFundingSpecialAbilitySearch : NetworkEdge
+epsteinFundingSpecialAbilitySearch = network-edge
+  jeffreyEpstein specialAbilitySearch
+  Genealogy.fundingOrganisationalLink
+  Genealogy.gradeA
+  (Sources.epsteinSpecialAbilityFunding20180308 ∷ [])
+  "Epstein directly instructed his accountant to send Yu USD 25,000 from his foundation so Yu could find people with 'special ability'; execution of the bank transfer remains separately verifiable."
 
 bachToDoblinProposal : NetworkEdge
 bachToDoblinProposal = network-edge
@@ -78,7 +108,7 @@ mapsToIbogaineProgramme = network-edge
   Genealogy.directDocumentedTransfer
   Genealogy.gradeA
   (Sources.mapsHistoricalIbogaineProgramme ∷ [])
-  "MAPS' own published history records observational ibogaine studies."
+  "MAPS' own published history records observational ibogaine studies; this is an independently sourced institutional link, not an Epstein-to-MAPS edge."
 
 epsteinToScopolamineInformation : NetworkEdge
 epsteinToScopolamineInformation = network-edge
@@ -105,6 +135,8 @@ data ProposedInviteEstablishesMeeting : Set where
 data NetworkPathEstablishesDirectFunding : Set where
 data SameMilieuEstablishesCoordination : Set where
 data TrumpetPlantReferenceEstablishesScopolamineUse : Set where
+data BrokerageAttributionEstablishesCompletedIntroduction : Set where
+data TransferStatementEstablishesBankSettlement : Set where
 
 documentedInterestDoesNotEstablishAdministration :
   DocumentedInterestEstablishesAdministration → ⊥
@@ -123,6 +155,14 @@ trumpetReferenceDoesNotEstablishScopolamineUse :
   TrumpetPlantReferenceEstablishesScopolamineUse → ⊥
 trumpetReferenceDoesNotEstablishScopolamineUse ()
 
+brokerageAttributionDoesNotEstablishCompletedIntroduction :
+  BrokerageAttributionEstablishesCompletedIntroduction → ⊥
+brokerageAttributionDoesNotEstablishCompletedIntroduction ()
+
+transferStatementDoesNotEstablishBankSettlement :
+  TransferStatementEstablishesBankSettlement → ⊥
+transferStatementDoesNotEstablishBankSettlement ()
+
 -- Re-export the generic universal-network firewall as the exact donor theorem.
 oneStrongEdgeDoesNotEstablishUniversalNetwork :
   Genealogy.OneStrongEdgeEstablishesUniversalNetwork → ⊥
@@ -134,11 +174,14 @@ record EpsteinPsychedelicNetworkBoundary : Set where
   field
     directCorrespondenceIsStrongEdge : Bool
     explicitFundingRequestIsStrongEdge : Bool
+    senderStatementOfTransferIsFundingEvidence : Bool
+    explicitBrokerageAttributionRecorded : Bool
     proposedInviteIsStrongHistoricalEdge : Bool
     corpusAdjacencyCreatesCoordination : Bool
     networkPathCreatesDirectEpsteinMAPSFunding : Bool
     documentedInterestCreatesAdministrationClaim : Bool
+    transferStatementCreatesBankSettlement : Bool
 
 canonicalEpsteinPsychedelicNetworkBoundary : EpsteinPsychedelicNetworkBoundary
 canonicalEpsteinPsychedelicNetworkBoundary =
-  epstein-psychedelic-network-boundary true true false false false false
+  epstein-psychedelic-network-boundary true true true true false false false false false
