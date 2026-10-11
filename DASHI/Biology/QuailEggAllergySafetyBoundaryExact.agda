@@ -77,6 +77,8 @@ record QuailEggInterventionSafetyRequirement : Set where
         quailSpecificAllergyHistoryRequiredIsTrue : quailSpecificAllergyHistoryRequired ≡ true
         adverseEventSurveillanceRequired : Bool
         adverseEventSurveillanceRequiredIsTrue : adverseEventSurveillanceRequired ≡ true
+        stoppingCriteriaRequired : Bool
+        stoppingCriteriaRequiredIsTrue : stoppingCriteriaRequired ≡ true
         henEggToleranceCannotSubstituteForQuailAssessment : Bool
         henEggToleranceCannotSubstituteForQuailAssessmentIsTrue :
           henEggToleranceCannotSubstituteForQuailAssessment ≡ true
@@ -87,8 +89,8 @@ canonicalQuailEggInterventionSafetyRequirement = quail-egg-intervention-safety-r
   Snowball.experimentalDesign
   Design.sourcePopulationSlot Design.baselineMeasurementSlot Design.endpointMeasurementSlot
   Design.nuisanceControlSlot Design.practicalSignificanceSlot
-  true refl true refl true refl
-  "Any quail-egg intervention must retain quail-specific allergy history/risk, adverse-event monitoring and stopping criteria. Hen-egg tolerance is informative context but cannot be used as a proof of quail-egg safety."
+  true refl true refl true refl true refl
+  "Any quail-egg intervention must retain quail-specific allergy history/risk, adverse-event monitoring and explicit stopping criteria. Hen-egg tolerance is informative context but cannot be used as a proof of quail-egg safety."
 
 record QuailEggAllergySafetyBoundary : Set where
   constructor quail-egg-allergy-safety-boundary
