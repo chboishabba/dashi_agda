@@ -23,8 +23,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeExecutableCostBridge
 -- tape model.  That converse is the concrete interpreter/compiler frontier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_,_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -67,13 +65,15 @@ tapeCandidateExecutableDeciderCode tape = record
 
 tapeCandidateExecutablePolynomialWitness :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
-    {candidate : Direct.PolynomialSATDeciderCandidate cost} →
-  Tape.CandidateDeterministicTapeCode candidate →
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (tape : Tape.CandidateDeterministicTapeCode candidate) →
   Executable.ExecutablePolynomialTimeDecider
     cost
     (Direct.decide candidate)
-tapeCandidateExecutablePolynomialWitness tape =
-  Direct.polynomialDecision _
+tapeCandidateExecutablePolynomialWitness
+    {candidate = candidate}
+    tape =
+  Direct.polynomialDecision candidate
   ,
   tapeCandidateExecutableDeciderCode tape
 
@@ -84,19 +84,20 @@ tapeCandidateExecutablePolynomialWitness tape =
 liftTapeCandidateToExecutableCost :
   ∀ {base : PR.PolynomialCostModel Cook.BooleanFormula}
     (closure : Executable.ExecutableCodeClosure Cook.BooleanFormula)
-    {candidate : Direct.PolynomialSATDeciderCandidate base} →
-  Tape.CandidateDeterministicTapeCode candidate →
+    {candidate : Direct.PolynomialSATDeciderCandidate base}
+    (tape : Tape.CandidateDeterministicTapeCode candidate) →
   Direct.PolynomialSATDeciderCandidate
     (Executable.executablePolynomialCostModel base closure)
-liftTapeCandidateToExecutableCost closure tape =
+liftTapeCandidateToExecutableCost
+    closure
+    {candidate = candidate}
+    tape =
   Direct.polynomial-sat-decider-candidate
-    (Direct.decide _)
+    (Direct.decide candidate)
     (tapeCandidateExecutablePolynomialWitness tape)
 
 ------------------------------------------------------------------------
--- The generic executable code recovered from the refined witness is literally
--- the tape-backed code supplied above up to the fields used by the realization
--- lane.  No new decision semantics is introduced here.
+-- Converse lowering remains a separate same-model obligation.
 ------------------------------------------------------------------------
 
 record ConcreteTapeCodeLowering
