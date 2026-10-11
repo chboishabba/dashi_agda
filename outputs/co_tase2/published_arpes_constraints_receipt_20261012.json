@@ -1,0 +1,15 @@
+{
+  "input_sha256": "676f19feb9d02693c415d726d3b6a4e455f5d99a598fc2b7c49b182c03b0e068",
+  "source_doi": "10.1038/s41467-026-76784-x",
+  "temperature_ordering_low_lt_TN_lt_high": true,
+  "published_photon_conditions_pinned": true,
+  "published_directional_constraints_pinned": true,
+  "dft_crossing_separation_inverse_A": 0.01,
+  "voigt_fit_peak_separation_inverse_A": 0.09,
+  "instrumental_gaussian_width_inverse_A": 0.08,
+  "fit_separation_to_instrument_width_ratio": 1.125,
+  "raw_igor_payload_consumed": false,
+  "pixel_digitisation_used": false,
+  "material_hamiltonian_fit_closed": false,
+  "status": "publication-summary target paid; raw-data/material-H same-object fit remains open"
+}
