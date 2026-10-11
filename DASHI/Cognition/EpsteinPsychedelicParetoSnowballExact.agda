@@ -20,6 +20,8 @@ import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pare
 data AcquisitionRequirement : Set where
   GinoYuCorpus : AcquisitionRequirement
   DoblinMAPSIntersection : AcquisitionRequirement
+  DoblinPublicBenefitGovernance : AcquisitionRequirement
+  ChomskyLanguageAIDispute : AcquisitionRequirement
   ScopolamineTrumpetSameObject : AcquisitionRequirement
   HearstFundingIntersection : AcquisitionRequirement
   AdjacentBatesThreadRecovery : AcquisitionRequirement
@@ -34,6 +36,16 @@ doblinMAPSCell : Pareto.RequirementCandidate AcquisitionRequirement
 doblinMAPSCell = Pareto.requirement-candidate
   DoblinMAPSIntersection true true true true 2 7
   "Resolve every Doblin/MAPS occurrence and distinguish proposed invitation, meeting, correspondence, funding and later institutional overlap."
+
+doblinGovernanceCell : Pareto.RequirementCandidate AcquisitionRequirement
+doblinGovernanceCell = Pareto.requirement-candidate
+  DoblinPublicBenefitGovernance true true true true 1 4
+  "Acquire Doblin/MAPS public-benefit/private-profit governance claims with author-self-report attribution separated from independent verification."
+
+chomskyCell : Pareto.RequirementCandidate AcquisitionRequirement
+chomskyCell = Pareto.requirement-candidate
+  ChomskyLanguageAIDispute true true true true 3 4
+  "Resolve Chomsky corpus mention and cross-pollinate existing Manufacturing Consent prior art with AI-era evidence on poverty of stimulus and linguistic competence without promoting mention to relationship or model performance to human mechanism."
 
 scopolamineCell : Pareto.RequirementCandidate AcquisitionRequirement
 scopolamineCell = Pareto.requirement-candidate
@@ -57,8 +69,8 @@ broadMAPSCell = Pareto.requirement-candidate
 
 currentPortfolio : List (Pareto.RequirementCandidate AcquisitionRequirement)
 currentPortfolio =
-  ginoYuCell ∷ doblinMAPSCell ∷ scopolamineCell ∷ hearstCell ∷
-  adjacentBatesCell ∷ broadMAPSCell ∷ []
+  ginoYuCell ∷ doblinMAPSCell ∷ doblinGovernanceCell ∷ chomskyCell ∷
+  scopolamineCell ∷ hearstCell ∷ adjacentBatesCell ∷ broadMAPSCell ∷ []
 
 -- At the current calibration Gino Yu saturation dominates every other live
 -- acquisition cell. After that corpus is paid, recompute rather than assuming
@@ -81,8 +93,8 @@ record CurrentEpsteinPsychedelicRoute : Set where
 currentEpsteinPsychedelicRoute : CurrentEpsteinPsychedelicRoute
 currentEpsteinPsychedelicRoute = current-epstein-psychedelic-route
   "Saturate Gino Yu first: enumerate every Epstein/Yu email, participant, venue, substance, funding request, introduction and attachment; bind each claim to EFTA identity."
-  "Recompute frontier, then resolve Doblin/MAPS intersection and every proposed/actual contact edge without promoting invitation lists to meetings."
-  "Recompute again, then test scopolamine/trumpet same-object joins and Hearst/PSFC/MAPS chronology; keep administration and direct-funding claims open absent receipts."
+  "Recompute frontier, then resolve Doblin/MAPS intersection and every proposed/actual contact edge without promoting invitation lists to meetings; keep Doblin governance claims source-attributed."
+  "Recompute again, then test scopolamine/trumpet same-object joins, Hearst/PSFC/MAPS chronology and Chomsky corpus/language-AI intersections; keep administration, relationship and direct-funding claims open absent receipts."
   true true true true
 
 ------------------------------------------------------------------------
