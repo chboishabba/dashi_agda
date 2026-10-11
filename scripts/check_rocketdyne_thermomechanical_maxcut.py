@@ -13,6 +13,18 @@ EXPECT = {
     "DASHI/Physics/Propulsion/Rocketdyne1974IdentifiabilityCutExact.agda": [
         "twoThicknessesSameLoad", "geometryFreeStressNotUnique"
     ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974ThermalModelValidationExact.agda": [
+        "test052ThermalValidation", "steadyStateTimeSeconds", "sourceValidatedThermalModelExists",
+        "thermalModelDoesNotIdentifyNozzleStress"
+    ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974MaterialDependentThermalFalsifierExact.agda": [
+        "sameReportedEquilibriumTemperature", "wc103LongerExposureSurvived",
+        "materialBlindTemperatureOnlyModelRefuted", "materialIdentityIsNecessaryDiscriminator"
+    ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974TerminalPhysicalFrontierExact.agda": [
+        "currentTerminalFrontier", "archiveGeometryExhaustedForUniqueStress",
+        "sameModelCalibrationStillOpen", "empiricalMaterialDependencePaid"
+    ],
 }
 
 def main() -> int:
