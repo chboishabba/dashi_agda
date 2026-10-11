@@ -1,5 +1,7 @@
 module DASHI.Biology.NeuralPredictionAcquisitionParetoRegression where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
+
 import DASHI.Biology.NeuralPredictionAcquisitionParetoExact as P
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
 
@@ -12,8 +14,9 @@ videoViralityAcquisitionRegression = P.videoNeuroforecastAcquisition
 multimodalInterfaceRegression : P.MultimodalInterfaceBoundary
 multimodalInterfaceRegression = P.canonicalMultimodalInterfaceBoundary
 
-neuralinkIndependentReplicationRoute : Snowball.DiscoveryRoute
-neuralinkIndependentReplicationRoute = P.discoveryRoute P.neuralinkIndependentReplicationAcquisition
+neuralinkIndependentReplicationRoute :
+  P.discoveryRoute P.neuralinkIndependentReplicationAcquisition ≡ Snowball.experimentalDesign
+neuralinkIndependentReplicationRoute = refl
 
 canonicalPredictionParetoRegression : P.NeuralPredictionAcquisitionBoundary
 canonicalPredictionParetoRegression = P.canonicalNeuralPredictionAcquisitionBoundary
