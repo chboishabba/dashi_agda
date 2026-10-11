@@ -2,19 +2,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFixedConcreteTapeSemanticQuotati
 
 ------------------------------------------------------------------------
 -- ONE FIXED CONCRETE TAPE EXECUTION -> OPPOSITE SEMANTIC QUOTATION
---
--- FixedOppositeSemanticQuotationExact shows that the diagonal theorem needs
--- semantic correctness only for the canonical opposite fixed program.
--- Therefore the concrete realization can also be specialized to ONE literal
--- machine/input/clock tuple.
---
--- The quoted Cook formula is definitionally the existing guarded Cook--Levin
--- formula for that exact tuple.  Deterministic execution and endpoint
--- correctness derive SAT iff fixed abstract run returns true.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true)
-open import Agda.Builtin.Unit using (tt)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Maybe.Base using (just)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -30,12 +21,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
-import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Exact
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinCookFormulaExact as CookLevin
-
-------------------------------------------------------------------------
--- Finite concrete machine/input/clock data.
-------------------------------------------------------------------------
 
 record FixedConcreteOppositeMachine
     {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -55,11 +41,8 @@ record FixedConcreteOppositeMachine
     nonemptyRules :
       Selector.NonemptyRuleTable machine
 
-    input :
-      Input.InputWord machine
-
-    steps :
-      Agda.Builtin.Nat.Nat
+    input : Input.InputWord machine
+    steps : Nat
 
 open FixedConcreteOppositeMachine public
 
@@ -77,17 +60,12 @@ fixedCookFormula concrete =
     (input concrete)
     (steps concrete)
 
-------------------------------------------------------------------------
--- Deterministic same-object execution and endpoint semantics.
-------------------------------------------------------------------------
-
 record FixedConcreteOppositeRealization
     {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
     (code : Actual.CandidateCodeRealization candidate) : Set₂ where
   field
-    concrete :
-      FixedConcreteOppositeMachine code
+    concrete : FixedConcreteOppositeMachine code
 
     successor :
       Deterministic.DeterministicTapeSuccessor
@@ -98,8 +76,7 @@ record FixedConcreteOppositeRealization
         (machine concrete)
         successor
 
-    finish :
-      Local.TapeRow (machine concrete)
+    finish : Local.TapeRow (machine concrete)
 
     execution :
       Deterministic.DeterministicExecution
@@ -132,10 +109,6 @@ record FixedConcreteOppositeRealization
       ≡ just true
 
 open FixedConcreteOppositeRealization public
-
-------------------------------------------------------------------------
--- Compile to the fixed semantic quotation.
-------------------------------------------------------------------------
 
 fixedConcreteToSemanticQuotation :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -215,20 +188,3 @@ fixedConcreteProducerGivesUniversalFailure producer candidate =
   fixedConcreteRealizationGivesDecisionFailure
     (candidateCode producer candidate)
     (realization producer candidate)
-
-------------------------------------------------------------------------
--- FRONTIER CONSEQUENCE
---
--- Removed from the concrete wall:
---   * arbitrary program inputs;
---   * a universal finite-program interpreter;
---   * semantic correctness for all programs.
---
--- The surviving constructor is one fixed same-object machine tuple whose
--- behavior is:
---
---   accept  iff  not D(its own guarded Cook--Levin formula).
---
--- Constructing that finite machine/self-quotation with honest static size and
--- exact clock is now the singular execution frontier.
-------------------------------------------------------------------------
