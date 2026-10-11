@@ -1,5 +1,6 @@
 module DASHI.Mathematics.Algebra.RationalAlbertJordanIdentityExact where
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ)
@@ -61,3 +62,6 @@ jordanIdentity
       y10 ∷ y11 ∷ y12 ∷ y13 ∷ y14 ∷ y15 ∷ y16 ∷ y17 ∷
       y20 ∷ y21 ∷ y22 ∷ y23 ∷ y24 ∷ y25 ∷ y26 ∷ y27 ∷
       y30 ∷ y31 ∷ y32 ∷ y33 ∷ y34 ∷ y35 ∷ y36 ∷ y37 ∷ []
+
+jordanIdentitySourceWritten : Bool
+jordanIdentitySourceWritten = true
