@@ -13,11 +13,6 @@ import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snowball
 
 ------------------------------------------------------------------------
 -- MECHANISM-SELECTIVE PERTURBATIONS AS SYSTEM PROBES
---
--- Treatment response is useful evidence about a coupled system, but it is not
--- a unique inverse map from outcome to mechanism. Orthogonal perturbations are
--- retained as probes of different fibres while common symptom endpoints allow
--- comparison without collapsing mechanisms.
 ------------------------------------------------------------------------
 
 lee2026Source : Source.AttributedSource
@@ -44,11 +39,11 @@ fODMAPReintroduction2024Source = Source.mkDOISource
 
 colesevelam2020Source : Source.AttributedSource
 colesevelam2020Source = Source.mkDOISource
-  "Michael Camilleri et al."
+  "Priya Vijayvargiya et al."
   "Effects of Colesevelam on Bowel Symptoms, Biomarkers, and Colonic Mucosal Gene Expression in Patients With Bile Acid Diarrhea in a Randomized Trial"
   "Clinical Gastroenterology and Hepatology" "2020"
-  "10.1016/j.cgh.2020.02.021"
-  "https://doi.org/10.1016/j.cgh.2020.02.021"
+  "10.1016/j.cgh.2020.02.027"
+  "https://doi.org/10.1016/j.cgh.2020.02.027"
   Source.academicArticleSource
   "Randomized mechanistic bile-acid-sequestration probe in IBS-D participants selected for bile-acid diarrhoea evidence, with fecal bile acids, C4, FGF19, transit, permeability and mucosal gene-expression readouts. Biological target engagement did not automatically translate into broad symptom/transit differences in the small trial."
   Source.publicAttribution
