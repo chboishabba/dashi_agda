@@ -11,6 +11,7 @@ import DASHI.Economics.AIOpenWeightTrajectory20261012Exact as OpenTrajectory
 import DASHI.Economics.AIQualityNormalizedPriceSpread20261012Exact as QualityPrice
 import DASHI.Economics.AITwoSidedConcentrationPropagation20261012Exact as Concentration
 import DASHI.Economics.AICoreWeaveDebtCostBoundary20261012Exact as DebtCost
+import DASHI.Economics.AICoreWeaveCapitalSpreadSign20261012Exact as CapitalSign
 
 ------------------------------------------------------------------------
 -- FINAL OCTOBER-12 RECONCILIATION
@@ -62,6 +63,13 @@ coreWeaveDebtCostSurfacePaid = finalProducer
   "H1 contractual debt interest USD 1.075B, reported total debt interest USD 0.985B, future principal USD 35.551B; selected non-convertible effective/stated rates span 8.5 to 15 percent"
   false
 
+coreWeaveCapitalSpreadSignPaid : FinalProducer
+coreWeaveCapitalSpreadSignPaid = finalProducer
+  "CoreWeave ROIC-WACC sign under declared standard sign conditions" paid
+  "CoreWeave H1-2026 / sign-only capital-return model"
+  "source-paid operating loss plus positive debt principal/rates imply negative ROIC and positive WACC under positive-invested-capital/debt-weight/after-tax-debt-contribution and non-negative-equity-contribution conditions; therefore ROIC-WACC is negative"
+  false
+
 wholeComplexMarketDynamicsStillPartial : FinalProducer
 wholeComplexMarketDynamicsStillPartial = finalProducer
   "whole-complex market dynamics" partial "public equities + broad market/IPO/credit evidence"
@@ -87,10 +95,11 @@ terminalPayerStillOpen = finalProducer
   "independent terminal-payer provenance" open "global/entity"
   "two-sided concentration and role overlap refine dependency topology but do not identify complete independent terminal cash" false
 
-realisedROICWACCStillOpen : FinalProducer
-realisedROICWACCStillOpen = finalProducer
-  "realised ROIC-WACC" open "global/entity"
-  "debt cost is now source-paid for CoreWeave, but equity cost/capital weights and an admissible realised ROIC remain absent" false
+numericROICWACCStillOpen : FinalProducer
+numericROICWACCStillOpen = finalProducer
+  "numerical realised ROIC-WACC" open "CoreWeave/global"
+  "the sign-only CoreWeave spread is closed under declared conditions, but a numerical point still requires a fixed invested-capital convention, equity cost and capital weights"
+  false
 
 ------------------------------------------------------------------------
 -- Proof receipts and non-promotion.
@@ -126,10 +135,35 @@ coreWeaveDebtCostPaid = DebtCost.debtSurfaceIsPaid
 coreWeaveWACCStillOpen : DebtCost.waccClosed DebtCost.coreWeaveDebtCostBoundary ≡ false
 coreWeaveWACCStillOpen = DebtCost.waccStillOpen
 
+coreWeaveCapitalSpreadSignIsNegative :
+  CapitalSign.inferSpreadSign
+    (CapitalSign.inferROICSign
+      (CompanyNegative)
+      CapitalSign.standardWACCSignConditions)
+    (CapitalSign.inferWACCSign CapitalSign.standardWACCSignConditions)
+  ≡ CapitalSign.neg
+coreWeaveCapitalSpreadSignIsNegative = CapitalSign.coreWeaveCapitalSpreadSignNegative
+  where
+    CompanyNegative : Bool
+    CompanyNegative = true
+
+coreWeaveCapitalSpreadSignClosed :
+  CapitalSign.signClosedUnderDeclaredConditions CapitalSign.coreWeaveCapitalSpreadClosure ≡ true
+coreWeaveCapitalSpreadSignClosed = refl
+
+coreWeaveNumericROICStillOpen :
+  CapitalSign.numericROICClosed CapitalSign.coreWeaveCapitalSpreadClosure ≡ false
+coreWeaveNumericROICStillOpen = CapitalSign.numericROICStillOpen
+
+coreWeaveNumericWACCStillOpen :
+  CapitalSign.numericWACCClosed CapitalSign.coreWeaveCapitalSpreadClosure ≡ false
+coreWeaveNumericWACCStillOpen = CapitalSign.numericWACCStillOpen
+
 data ScopedPaymentImpliesGlobalClosurePermission : Set where
 data PriceNormalizationImpliesMarginPermission : Set where
 data ConcentrationTopologyImpliesTerminalPayerPermission : Set where
 data DebtCostImpliesWACCPermission : Set where
+data SignOnlySpreadImpliesNumericSpreadPermission : Set where
 
 scopedPaymentDoesNotAutoCloseGlobal : ScopedPaymentImpliesGlobalClosurePermission → ⊥
 scopedPaymentDoesNotAutoCloseGlobal ()
@@ -143,6 +177,9 @@ concentrationTopologyDoesNotAutoCreateTerminalPayer ()
 debtCostDoesNotAutoCreateWACC : DebtCostImpliesWACCPermission → ⊥
 debtCostDoesNotAutoCreateWACC ()
 
+signOnlySpreadDoesNotAutoCreateNumericSpread : SignOnlySpreadImpliesNumericSpreadPermission → ⊥
+signOnlySpreadDoesNotAutoCreateNumericSpread ()
+
 finalBoundary : String
 finalBoundary =
-  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, and CoreWeave debt-cost surface are paid. The remaining substantive frontier is independent terminal-payer provenance, realised ROIC-WACC (equity cost/capital weights plus realised return), same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, and measured regulatory burden/concentration response."
+  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, CoreWeave debt-cost surface and the sign of CoreWeave ROIC-WACC under declared standard sign conditions are paid. Numerical ROIC/WACC remains open. The remaining substantive frontier is independent terminal-payer provenance, numerical realised ROIC-WACC, same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, entity-specific replacement/obsolescence, and measured regulatory burden/concentration response."
