@@ -11,15 +11,16 @@ import DASHI.Economics.AICounterpartyRoleOverlap2026Exact as Counterparty
 import DASHI.Economics.AIInfrastructureCommitmentTrajectory2026Exact as Commitment
 import DASHI.Economics.AIRegulatoryBurdenConcentrationSensibLaw2026Exact as Regulatory
 import DASHI.Economics.AIAustraliaRegulatoryPolicyAcquisition20261012Exact as AustraliaPolicy
+import DASHI.Economics.AIMarketOpenWeightFreshAcquisition20261012Exact as Fresh
 import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Global
 
 ------------------------------------------------------------------------
 -- TERMINAL MAX-CUT RECONCILIATION, 2026-10-12
 --
--- New entity-scoped acquisitions have paid real leaves since the original
--- global residual board was created.  This owner reconciles those advances
--- without promoting entity/component closure into global capital-recovery
--- authority.
+-- Entity-scoped and current-market acquisitions have paid real leaves since
+-- the original global residual board was created. This owner reconciles those
+-- advances without promoting component/platform closure into global capital-
+-- recovery authority.
 ------------------------------------------------------------------------
 
 data ReconciledState : Set where
@@ -92,11 +93,18 @@ qualityAdjustedInferenceMarginStillOpen = reconciledProducer
   "token-price direction is observed; same-quality realised serving revenue minus marginal serving cost is not"
   false
 
+openWeightPlatformPointPaid : ReconciledProducer
+openWeightPlatformPointPaid = reconciledProducer
+  "current open-weight token-volume share"
+  paid "Vercel AI Gateway platform-local point"
+  "2026-10-10 leaderboard reports 61.3 percent open-weight versus 38.7 percent closed-weight token volume; global market share remains unproved"
+  false
+
 scarcityCapabilityCompressionStillPartial : ReconciledProducer
 scarcityCapabilityCompressionStillPartial = reconciledProducer
   "capability-normalised scarcity-rent compression"
   partial "platform/open-weight evidence"
-  "open-weight usage/spend divergence and falling price support direction/interval evidence, not a global same-quality scarcity-rent point"
+  "current 61.3 percent Vercel open-weight token-volume point strengthens substitution evidence; same-quality global scarcity-rent point remains absent"
   false
 
 replacementObsolescenceStillPartial : ReconciledProducer
@@ -106,11 +114,11 @@ replacementObsolescenceStillPartial = reconciledProducer
   "3-4 year lender GPU depreciation assumptions are acquired; entity-specific replacement capex remains open"
   false
 
-marketFlipVolStillOpen : ReconciledProducer
-marketFlipVolStillOpen = reconciledProducer
-  "fixed-basket market flip / volatility"
-  open "market-series producer"
-  "no declared comparable AI-linked basket and fixed-window market-series receipt is yet populated"
+marketEventEvidenceNowPartial : ReconciledProducer
+marketEventEvidenceNowPartial = reconciledProducer
+  "market flip / volatility evidence"
+  partial "broad-index event series plus AI financing-window event"
+  "Oct-8 Nasdaq/S&P decline followed by Oct-9 rebound and Firmus AI-infrastructure IPO withdrawal supply current stress/direction evidence; fixed-composition AI basket series and volatility remain open"
   false
 
 australiaPolicyTrajectoryPaid : ReconciledProducer
@@ -172,13 +180,17 @@ replacementPointStillOpen :
   Bounded.pointProducerClosed Bounded.gpuReplacementEvidence ≡ false
 replacementPointStillOpen = refl
 
-marketFlipEvidenceStillAbsent :
-  Bounded.stage Bounded.marketFlipEvidence ≡ Bounded.noEvidenceStage
-marketFlipEvidenceStillAbsent = refl
+currentOpenWeightPlatformPointIs6130bp :
+  Fresh.openWeightTokenShareBp Fresh.vercelOpenWeightSnapshot20261010 ≡ 6130
+currentOpenWeightPlatformPointIs6130bp = Fresh.openWeightPointIs6130bp
 
-marketVolEvidenceStillAbsent :
-  Bounded.stage Bounded.marketVolEvidence ≡ Bounded.noEvidenceStage
-marketVolEvidenceStillAbsent = refl
+currentOpenWeightPointStillNotGlobal :
+  Fresh.globalMarketShareClosed Fresh.vercelOpenWeightSnapshot20261010 ≡ false
+currentOpenWeightPointStillNotGlobal = Fresh.globalOpenWeightShareStillUnclosed
+
+fixedAIBasketStillOpenAfterBroadMarketEvents :
+  Fresh.fixedAIBasketSeriesClosed Fresh.currentMarketEventEvidence20261012 ≡ false
+fixedAIBasketStillOpenAfterBroadMarketEvents = Fresh.fixedBasketStillUnclosed
 
 australiaMandatoryProposalCurrentlyNotProceeding :
   AustraliaPolicy.mandatoryGuardrailsCurrentlyProceeding
@@ -216,6 +228,10 @@ data RoleOverlapImpliesNoTerminalDemandPermission : Set where
 data StructuralMoatImpliesMeasuredBurdenPermission : Set where
 data ProposalOutcomeImpliesGenericMoatFalsePermission : Set where
 
+data PlatformShareImpliesGlobalSharePermission : Set where
+
+data BroadMarketEventsImpliesFixedAIBasketPermission : Set where
+
 entityPaidDoesNotAutoCloseGlobal : EntityPaidImpliesGlobalPaidPermission → ⊥
 entityPaidDoesNotAutoCloseGlobal ()
 
@@ -233,8 +249,16 @@ structuralMoatDoesNotAutoCreateMeasuredBurden ()
 
 australianProposalOutcomeDoesNotRefuteGenericMoatMechanism :
   ProposalOutcomeImpliesGenericMoatFalsePermission → ⊥
-australianProposalOutcomeDoesNotRefuteGenericMoatMechanism ()
+australianProposalOutcomeDoesNotRefuteGenericMoatFalsePermission ()
+
+platformShareDoesNotAutoCreateGlobalShare :
+  PlatformShareImpliesGlobalSharePermission → ⊥
+platformShareDoesNotAutoCreateGlobalShare ()
+
+broadMarketEventsDoNotAutoCloseFixedAIBasket :
+  BroadMarketEventsImpliesFixedAIBasketPermission → ⊥
+broadMarketEventsDoNotAutoCloseFixedAIBasket ()
 
 terminalBoundary : String
 terminalBoundary =
-  "The October-2026 tranche has paid entity rollover, entity persistence, selected counterparty-role overlap, infrastructure-commitment trajectories and one concrete Australian policy trajectory. It has not paid independent terminal-payer provenance, realised ROIC-WACC, global comparable persistence/rollover, quality-adjusted inference margin, capability-normalised scarcity rent, fixed-basket market dynamics or measured policy compliance/concentration response."
+  "The October-2026 tranche has paid entity rollover, entity persistence, selected counterparty-role overlap, infrastructure-commitment trajectories, one concrete Australian policy trajectory and a current Vercel open-weight platform point. Broad-market/IPO stress evidence is now partial rather than absent. It has not paid independent terminal-payer provenance, realised ROIC-WACC, global comparable persistence/rollover, quality-adjusted inference margin, capability-normalised global scarcity rent, a fixed-composition AI market basket/volatility series or measured policy compliance/concentration response."
