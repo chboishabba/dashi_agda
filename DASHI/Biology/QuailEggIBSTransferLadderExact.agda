@@ -35,6 +35,8 @@ record TransferStageReceipt : Set where
         paidReading : String
         residual : String
 
+open TransferStageReceipt public
+
 biochemicalStageReceipt : TransferStageReceipt
 biochemicalStageReceipt = transfer-stage-receipt
   biochemicalStabilityStage paidBounded
@@ -53,7 +55,7 @@ oralGIAnimalStageReceipt : TransferStageReceipt
 oralGIAnimalStageReceipt = transfer-stage-receipt
   oralGIAnimalStage paidBounded
   "QuailEggOralGIAnimalBridgeExact.lianto2018EoEReceipt"
-  "daily oral whole-quail intervention has GI/allergic pathway effects in a peanut-sensitized EoE-like mouse model"
+  "oral whole-quail-egg homogenate has GI/allergic pathway effects in a peanut-sensitized EoE-like mouse model"
   "species and disease-model transfer to human IBS remain open"
 
 humanOralStageReceipt : TransferStageReceipt
@@ -88,6 +90,8 @@ record HumanIBSQuailTerminalReceipt : Set where
     mechanismAtlas : Routes.GutMastCellMechanismRouteAtlas
     acquisitionReference : String
 
+open HumanIBSQuailTerminalReceipt public
+
 canonicalHumanIBSQuailTerminalReceipt : HumanIBSQuailTerminalReceipt
 canonicalHumanIBSQuailTerminalReceipt = human-ibs-quail-terminal-receipt
   Snowball.experimentalDesign false refl
@@ -100,22 +104,56 @@ data AdjacentEvidenceClosesHumanIBSPermission : Set where
 adjacentEvidenceDoesNotCloseHumanIBS : AdjacentEvidenceClosesHumanIBSPermission → ⊥
 adjacentEvidenceDoesNotCloseHumanIBS ()
 
+------------------------------------------------------------------------
+-- Proof-relevant ladder: every stage is required explicitly and its status is
+-- pinned. The terminal stage cannot be marked paid while the terminal receipt
+-- remains open.
+------------------------------------------------------------------------
+
 record QuailEggIBSTransferLadder : Set where
   constructor quail-egg-ibs-transfer-ladder
   field
-    stages : List TransferStageReceipt
+    biochemicalStage : TransferStageReceipt
+    biochemicalStageIsCorrect : stage biochemicalStage ≡ biochemicalStabilityStage
+    biochemicalStatusIsPaid : status biochemicalStage ≡ paidBounded
+    mastCellStage : TransferStageReceipt
+    mastCellStageIsCorrect : stage mastCellStage ≡ cellMastCellStage
+    mastCellStatusIsPaid : status mastCellStage ≡ paidBounded
+    animalStage : TransferStageReceipt
+    animalStageIsCorrect : stage animalStage ≡ oralGIAnimalStage
+    animalStatusIsPaid : status animalStage ≡ paidBounded
+    humanOralStage : TransferStageReceipt
+    humanOralStageIsCorrect : stage humanOralStage ≡ humanOralNonIBSStage
+    humanOralStatusIsPaid : status humanOralStage ≡ paidBounded
+    ibsMechanismStage : TransferStageReceipt
+    ibsMechanismStageIsCorrect : stage ibsMechanismStage ≡ humanIBSMechanismStage
+    ibsMechanismStatusIsAdjacent : status ibsMechanismStage ≡ paidAdjacent
+    ibsQuailStage : TransferStageReceipt
+    ibsQuailStageIsCorrect : stage ibsQuailStage ≡ humanIBSQuailInterventionStage
+    ibsQuailStatusIsOpen : status ibsQuailStage ≡ openTerminal
     terminal : HumanIBSQuailTerminalReceipt
-    sourceRolesRetained : Bool
-    sourceRolesRetainedIsTrue : sourceRolesRetained ≡ true
-    adjacentEvidenceRetainedWithoutPromotion : Bool
-    adjacentEvidenceRetainedWithoutPromotionIsTrue : adjacentEvidenceRetainedWithoutPromotion ≡ true
+    terminalRemainsOpen : terminalClosed terminal ≡ false
+
+open QuailEggIBSTransferLadder public
 
 canonicalQuailEggIBSTransferLadder : QuailEggIBSTransferLadder
 canonicalQuailEggIBSTransferLadder = quail-egg-ibs-transfer-ladder
-  (biochemicalStageReceipt ∷ cellMastCellStageReceipt ∷ oralGIAnimalStageReceipt ∷
-   humanOralStageReceipt ∷ humanIBSMechanismStageReceipt ∷ humanIBSQuailStageReceipt ∷ [])
-  canonicalHumanIBSQuailTerminalReceipt
-  true refl true refl
+  biochemicalStageReceipt refl refl
+  cellMastCellStageReceipt refl refl
+  oralGIAnimalStageReceipt refl refl
+  humanOralStageReceipt refl refl
+  humanIBSMechanismStageReceipt refl refl
+  humanIBSQuailStageReceipt refl refl
+  canonicalHumanIBSQuailTerminalReceipt refl
+
+canonicalStageList : List TransferStageReceipt
+canonicalStageList =
+  biochemicalStage canonicalQuailEggIBSTransferLadder ∷
+  mastCellStage canonicalQuailEggIBSTransferLadder ∷
+  animalStage canonicalQuailEggIBSTransferLadder ∷
+  humanOralStage canonicalQuailEggIBSTransferLadder ∷
+  ibsMechanismStage canonicalQuailEggIBSTransferLadder ∷
+  ibsQuailStage canonicalQuailEggIBSTransferLadder ∷ []
 
 record QuailEggIBSTransferLadderBoundary : Set where
   constructor quail-egg-ibs-transfer-ladder-boundary
@@ -135,6 +173,8 @@ record QuailEggIBSTransferLadderBoundary : Set where
     furtherAdjacentLiteratureCannotSubstituteForTerminal : Bool
     furtherAdjacentLiteratureCannotSubstituteForTerminalIsTrue :
       furtherAdjacentLiteratureCannotSubstituteForTerminal ≡ true
+
+open QuailEggIBSTransferLadderBoundary public
 
 canonicalQuailEggIBSTransferLadderBoundary : QuailEggIBSTransferLadderBoundary
 canonicalQuailEggIBSTransferLadderBoundary = quail-egg-ibs-transfer-ladder-boundary
