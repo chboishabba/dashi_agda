@@ -23,7 +23,8 @@ EXPECT = {
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974TerminalPhysicalFrontierExact.agda": [
         "currentTerminalFrontier", "archiveGeometryExhaustedForUniqueStress",
-        "sameModelCalibrationStillOpen", "empiricalMaterialDependencePaid"
+        "sameModelCalibrationStillOpen", "empiricalMaterialDependencePaid",
+        "contemporaryComparatorReceipt"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974LatestSourceComparisonNote.agda": [
         "nasa2026NiobiumComparator", "canonicalContemporaryComparatorBoundary",
