@@ -1,12 +1,31 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-python3 scripts/co_tase2_bloch_symmetry.py
+python3 scripts/co_tase2_full_symmetry_receipt.py \
+  data/co_tase2/bns_194_268_magndata_operations.json \
+  --receipt /tmp/co_tase2_full_bns_bloch_receipt.json
+
 python3 -m py_compile \
   scripts/co_tase2_bloch_symmetry.py \
   scripts/co_tase2_bns_operation_audit.py \
+  scripts/co_tase2_full_symmetry_receipt.py \
   scripts/co_tase2_arpes_ibw_ingest.py \
-  scripts/co_tase2_arpes_peak_fit.py
+  scripts/co_tase2_arpes_peak_fit.py \
+  scripts/co_tase2_dataset_download_probe.py
+
+python3 - <<'PY'
+import json
+from pathlib import Path
+p = Path('data/co_tase2/published_material_dft_recipe_2026.json')
+d = json.loads(p.read_text())
+assert d['structure_source']['space_group_number'] == 194
+assert len(d['structure_source']['refined_fractional_sites']) == 5
+assert d['arpes_dft_source']['code'] == 'VASP'
+assert d['arpes_dft_source']['plane_wave_cutoff_ev'] == 600
+assert d['arpes_dft_source']['k_mesh'] == [9, 9, 4]
+assert d['reproducibility_boundary']['literal_material_hamiltonian_closed'] is False
+print('PUBLISHED-MATERIAL-PRODUCER-CONTRACT: PASS')
+PY
 
 if command -v agda >/dev/null 2>&1; then
   agda -i . -i /usr/share/agda-stdlib \
