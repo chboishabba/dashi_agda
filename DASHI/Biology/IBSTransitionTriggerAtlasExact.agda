@@ -15,8 +15,7 @@ lupu2023Source = Source.mkDOISource
   "Vasile Valeriu Lupu; Cristina Mihaela Ghiciuc; Gabriela Stefanescu; Cristina Maria Mihai; Alina Popp; Maria Oana Sasaran; Laura Bozomitu; Iuliana Magdalena Starcea; Anca Adam Raileanu; Ancuta Lupu"
   "Emerging role of the gut microbiome in post-infectious irritable bowel syndrome: A literature review"
   "World Journal of Gastroenterology 29(21):3241-3256" "2023"
-  "10.3748/wjg.v29.i21.3241"
-  "https://doi.org/10.3748/wjg.v29.i21.3241"
+  "10.3748/wjg.v29.i21.3241" "https://doi.org/10.3748/wjg.v29.i21.3241"
   Source.academicArticleSource
   "Review-level support for post-infectious IBS as persistent symptoms after an acute enteric infection, with candidate microbiome, barrier, immune, neuromuscular and visceral-sensitivity mechanisms. Infection is a natural perturbation, not a unique-mechanism identifier or attractor validation."
   Source.publicAttribution
@@ -26,8 +25,7 @@ fowler2025Source = Source.mkDOISource
   "Sophie Fowler; Laura R C Dowling; Nicole Simm; Nicholas J Talley; Grace L Burns; Simon Keely"
   "Sleep Disturbances, Fatigue and Immune Markers in the Irritable Bowel Syndrome and Inflammatory Bowel Disease, a Systematic Review"
   "Neurogastroenterology and Motility 37(11):e70133" "2025"
-  "10.1111/nmo.70133"
-  "https://doi.org/10.1111/nmo.70133"
+  "10.1111/nmo.70133" "https://doi.org/10.1111/nmo.70133"
   Source.academicArticleSource
   "Review-level support for sleep/fatigue disturbance and GI disease severity associations, with circadian and immune pathways discussed as plausible interacting mechanisms. It does not establish sleep disturbance as the unique driver of IBS transitions."
   Source.publicAttribution
@@ -37,8 +35,7 @@ veldman2026Source = Source.mkDOISource
   "Fleur Veldman; Michelle Bosman; Ali Rezaie; Sarvee Moosavi; Daniel Keszthelyi"
   "Wearable-Based Monitoring of Autonomic and Gastrointestinal Function in Disorders of Gut-Brain Interaction: A Systematic Review and Meta-Analyses"
   "Neurogastroenterology and Motility 38(1):e70232" "2026"
-  "10.1111/nmo.70232"
-  "https://doi.org/10.1111/nmo.70232"
+  "10.1111/nmo.70232" "https://doi.org/10.1111/nmo.70232"
   Source.academicArticleSource
   "Systematic-review/meta-analytic support for wearable HRV, sleep and gastric-myoelectric monitoring as candidate DGBI measurement surfaces; heterogeneity and incomplete clinical validation are retained. Wearable proxies do not identify the latent whole-system state."
   Source.publicAttribution
@@ -61,15 +58,14 @@ data TriggerEvidenceClass : Set where
 
 record TransitionTrigger : Set where
   constructor transition-trigger
-  field
-    kind : TriggerKind
-    evidenceClass : TriggerEvidenceClass
-    sourceReference : String
-    proximalFibres : String
-    downstreamFibres : String
-    persistenceReference : String
-    uniqueMechanismIdentified : Bool
-    latentStateTransitionProved : Bool
+  field kind : TriggerKind
+        evidenceClass : TriggerEvidenceClass
+        sourceReference : String
+        proximalFibres : String
+        downstreamFibres : String
+        persistenceReference : String
+        uniqueMechanismIdentified : Bool
+        latentStateTransitionProved : Bool
 open TransitionTrigger public
 
 postInfectiousTrigger : TransitionTrigger
@@ -90,18 +86,9 @@ sleepCircadianTrigger = transition-trigger
   "association and bidirectionality are discussed; intervention-defined transition thresholds are not paid"
   false false
 
-wearableObservationTrigger : TransitionTrigger
-wearableObservationTrigger = transition-trigger
-  psychosocialContextPerturbation intensiveObservational
-  "Veldman et al. 2026 DOI 10.1111/nmo.70232"
-  "wearable HRV/sleep/GI myoelectric proxies"
-  "candidate synchronized autonomic/GI trajectories"
-  "measurement feasibility/heterogeneity evidence only; wearable readout is not itself a perturbation or latent-state identifier"
-  false false
-
+-- Veldman 2026 is retained as a measurement donor below, not as a trigger.
 canonicalIBSTransitionTriggerAtlas : List TransitionTrigger
-canonicalIBSTransitionTriggerAtlas =
-  postInfectiousTrigger ∷ sleepCircadianTrigger ∷ wearableObservationTrigger ∷ []
+canonicalIBSTransitionTriggerAtlas = postInfectiousTrigger ∷ sleepCircadianTrigger ∷ []
 
 data NaturalTriggerIdentifiesUniqueMechanismPermission : Set where
 naturalTriggerDoesNotIdentifyUniqueMechanism : NaturalTriggerIdentifiesUniqueMechanismPermission → ⊥
@@ -117,13 +104,12 @@ postInfectiousPersistenceDoesNotValidateAttractor ()
 
 record TransitionTriggerParetoNode : Set where
   constructor transition-trigger-pareto-node
-  field
-    label : String
-    route : Snowball.DiscoveryRoute
-    paidReference : String
-    systemValue : String
-    nextAcquisition : String
-    attributionBoundary : String
+  field label : String
+        route : Snowball.DiscoveryRoute
+        paidReference : String
+        systemValue : String
+        nextAcquisition : String
+        attributionBoundary : String
 open TransitionTriggerParetoNode public
 
 postInfectiousNaturalProbeNode : TransitionTriggerParetoNode
@@ -142,7 +128,7 @@ wearableDenseSamplingNode = transition-trigger-pareto-node
   "Veldman 2026 review/meta-analysis supports candidate HRV/sleep/GI wearable surfaces with substantial heterogeneity"
   "raises temporal resolution between sparse lab visits and EMA, enabling alignment of autonomic/sleep context with symptom and stool/metabolome events"
   "prospective standardized wearable+EMA+stool/event-triggered protocol with device calibration and missingness ledger"
-  "wearable signals are proxies; validation and synchronization errors must remain explicit"
+  "measurement donor only: wearable signals are proxies, not perturbations or latent-state identifiers"
 
 sleepCircadianNode : TransitionTriggerParetoNode
 sleepCircadianNode = transition-trigger-pareto-node
@@ -168,14 +154,13 @@ canonicalTransitionTriggerParetoFrontier =
 
 record IBSTransitionTriggerBoundary : Set where
   constructor ibs-transition-trigger-boundary
-  field
-    naturalPerturbationsRetained : Bool
-    sleepCircadianContextRetained : Bool
-    wearablesMayIncreaseTemporalResolution : Bool
-    naturalTriggerEqualsUniqueMechanism : Bool
-    wearableProxyEqualsLatentState : Bool
-    persistentPostInfectiousPhenotypeEqualsAttractorProof : Bool
-    historyAwarePerturbationPreferredForHysteresisTest : Bool
+  field naturalPerturbationsRetained : Bool
+        sleepCircadianContextRetained : Bool
+        wearablesMayIncreaseTemporalResolution : Bool
+        naturalTriggerEqualsUniqueMechanism : Bool
+        wearableProxyEqualsLatentState : Bool
+        persistentPostInfectiousPhenotypeEqualsAttractorProof : Bool
+        historyAwarePerturbationPreferredForHysteresisTest : Bool
 
 canonicalIBSTransitionTriggerBoundary : IBSTransitionTriggerBoundary
 canonicalIBSTransitionTriggerBoundary = ibs-transition-trigger-boundary
