@@ -43,6 +43,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact as S3
 import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismLawsExact as S3Laws
 import DASHI.Mathematics.Algebra.RationalOctonionG2DerivationExact as G2
 import DASHI.Mathematics.Algebra.RationalAlbertF4DerivationExact as F4D
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact as Inner
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as InnerLaw
 
 record F4CrossKernelReceipt : Set where
@@ -64,6 +65,9 @@ canonicalF4CrossKernelReceipt =
 
 -- Re-export the actual generic law through the max-cut owner so downstream
 -- schedulers cannot accidentally treat it as an open basis-only diagnostic.
+arbitraryAlbertInnerDerivationLaw :
+  (left right : Cubic.RationalAlbert) ->
+  Inner.DerivationLaw (Inner.innerDerivation left right)
 arbitraryAlbertInnerDerivationLaw = InnerLaw.innerDerivationLaw
 
 record CurrentF4Boundary : Set where
