@@ -14,6 +14,9 @@ import DASHI.Cognition.EpsteinPsychedelicParetoSnowballExact
 import DASHI.Cognition.EpsteinPsychedelicNeuroforecastingCrossPollinationExact
 import DASHI.Cognition.DoblinMAPSPublicBenefitPrivateProfitExact
 import DASHI.Cognition.ChomskyLanguageAIDisputeExact
+import DASHI.Cognition.ChomskyEpsteinRelationshipExact
+import DASHI.Cognition.EpsteinSciencePatronageMicrocosmExact
+import DASHI.Cognition.EpsteinBrainITGeometryContextExact
 import DASHI.Cognition.EpsteinPsychedelicNetworkValidation
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
