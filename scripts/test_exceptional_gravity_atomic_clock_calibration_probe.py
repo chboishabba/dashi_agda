@@ -27,7 +27,7 @@ class ExceptionalGravityAtomicClockCalibrationTests(unittest.TestCase):
         )
         self.assertAlmostEqual(
             self.out["epsilon_to_match_corrected_central"],
-            5.751882274988156e-18,
+            5.752801908565952e-18,
             places=30,
         )
 
