@@ -7,10 +7,13 @@ module DASHI.Biology.SignedSSPWeaveMetadataAcquisitionFrontierExact where
 --   * legacy FRACTRAN prime transport preserves the 3/6/9 address;
 --   * successful legacy prime transport records fromPositive residual approach;
 --   * generic weave program/execution/normal-form lengths are mechanically
---     derived by SignedSSPWeaveDerivedLengthDynamicsExact.
+--     derived by SignedSSPWeaveDerivedLengthDynamicsExact;
+--   * every general weave instruction EXCEPT refineAt369 is now proved
+--     refinement-neutral by the executable WeaveEffect semantics, and therefore
+--     has the conservative identity action on an already supplied 3/6/9 address.
 --
--- What remains genuinely external is therefore only:
---   * the address update semantics of general weave instructions/refineAt369;
+-- What remains genuinely external is therefore narrower:
+--   * the address update semantics of refineAt369 itself;
 --   * the zero-residual-direction update semantics of general instructions;
 --   * residual-witness-length dynamics.
 -- No map between the legacy four-rule machine and the general weave language is
@@ -25,6 +28,7 @@ import DASHI.Biology.FRACTRANSSPTransitionExact as Legacy
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Hyper
 import DASHI.Biology.SignedSSPWeaveRichMetadataCompilerExact as Compiler
 import DASHI.Biology.SignedSSPWeaveDerivedLengthDynamicsExact as Derived
+import DASHI.Biology.SignedSSPWeaveAddressNeutralDynamicsExact as Neutral
 import DASHI.Biology.OrientedZeroWaveTransitionExact as Zero
 
 legacyCanonicalAddressTransportPaid :
@@ -63,6 +67,17 @@ fullMetadataDynamicsCompiler :
   Derived.ResidualMetadataDynamics → Compiler.RichMetadataDynamics
 fullMetadataDynamicsCompiler = Derived.compileRichMetadataDynamics
 
+-- The address problem is no longer a six-instruction acquisition problem.
+-- Five instructions are compiler-owned identity updates; only refineAt369 is
+-- left source-semantic.
+nonRefinementAddressDynamicsPaid : Bool
+nonRefinementAddressDynamicsPaid = true
+
+refineAt369AddressDynamicsStillOpen :
+  Neutral.refineAt369AddressDynamicsPaid Neutral.canonicalAddressDynamicsMaxCut
+  ≡ false
+refineAt369AddressDynamicsStillOpen = refl
+
 record SignedSSPWeaveMetadataAcquisitionBoundary : Set where
   constructor signed-ssp-weave-metadata-acquisition-boundary
   field
@@ -72,6 +87,7 @@ record SignedSSPWeaveMetadataAcquisitionBoundary : Set where
     genericProgramLengthDynamicsPaid : Bool
     genericExecutionLengthDynamicsPaid : Bool
     genericNormalFormLengthDynamicsPaid : Bool
+    nonRefinementInstructionAddressDynamicsPaid : Bool
     generalWeaveInstructionToLegacyRuleMapLocated : Bool
     refineAt369AddressDynamicsLocated : Bool
     generalZeroResidualDynamicsLocated : Bool
@@ -84,4 +100,5 @@ canonicalSignedSSPWeaveMetadataAcquisitionBoundary =
   signed-ssp-weave-metadata-acquisition-boundary
     true true true
     true true true
+    true
     false false false false false
