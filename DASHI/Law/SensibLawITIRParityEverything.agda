@@ -17,6 +17,7 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as Fr
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldExact as FriendlyjordiesGovernanceMaxCut
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesGovernanceMaxCutExact as FriendlyjordiesRootedMaxCut
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as FriendlyjordiesWorldEvidence
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -99,3 +100,8 @@ selectedFriendlyjordiesRootedGovernanceMaxCutBoundary :
   FriendlyjordiesRootedMaxCut.FriendlyjordiesGovernanceMaxCutBoundary
 selectedFriendlyjordiesRootedGovernanceMaxCutBoundary =
   FriendlyjordiesRootedMaxCut.canonicalFriendlyjordiesGovernanceMaxCutBoundary
+
+selectedFriendlyjordiesWorldEvidenceBoundary :
+  FriendlyjordiesWorldEvidence.FriendlyjordiesWorldEvidenceBoundary
+selectedFriendlyjordiesWorldEvidenceBoundary =
+  FriendlyjordiesWorldEvidence.canonicalFriendlyjordiesWorldEvidenceBoundary
