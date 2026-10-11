@@ -11,6 +11,7 @@ import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact
 import DASHI.Cognition.EpsteinPsychedelicSourceAtlasExact
 import DASHI.Cognition.EpsteinPsychedelicNetworkEvidenceExact
 import DASHI.Cognition.EpsteinPsychedelicParetoSnowballExact
+import DASHI.Cognition.EpsteinPsychedelicNeuroforecastingCrossPollinationExact
 import DASHI.Cognition.EpsteinPsychedelicNetworkValidation
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
