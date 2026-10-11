@@ -8,6 +8,16 @@ EXPECTED = {
         "powersBookSource",
         "mondelliReviewSource",
         "canonicalPowersSourceBoundary",
+        "chapter3ColonialSocietyAtTheTheatrePages",
+        "chapter6EscapeFromRealityPages",
+        "chapter7FinalePages",
+    ],
+    "DASHI/Culture/PowersPlantationParadiseHistoricalClaimReceiptsExact.agda": [
+        "colonialHierarchyClaimReceipt",
+        "colonialSocietyAtTheTheatreClaimReceipt",
+        "escapeFromRealityClaimReceipt",
+        "finaleRevolutionClaimReceipt",
+        "pageRangeDoesNotPromoteUninspectedPassage",
     ],
     "DASHI/Culture/ColonialPerformanceStatusNonfactorabilityExact.agda": [
         "performedRoleCannotRecoverSocialOccupancy",
@@ -52,6 +62,7 @@ else:
     text = rollup.read_text(encoding="utf-8")
     for module in [
         "PowersPlantationParadiseSourceAtlasExact",
+        "PowersPlantationParadiseHistoricalClaimReceiptsExact",
         "ColonialPerformanceStatusNonfactorabilityExact",
         "HistoricalArchiveAbsenceNonfactorabilityExact",
         "ColonialTheatreAccessAdapterExact",
@@ -60,6 +71,10 @@ else:
     ]:
         if module not in text:
             errors.append(f"Culture/Everything.agda missing import {module}")
+
+workflow = ROOT / ".github/workflows/plantation-paradise-agda.yml"
+if not workflow.exists():
+    errors.append("missing focused Plantation-to-Paradise Agda workflow")
 
 if errors:
     raise SystemExit("\n".join(errors))
