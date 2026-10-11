@@ -12,12 +12,10 @@ import DASHI.Economics.AIQualityNormalizedPriceSpread20261012Exact as QualityPri
 import DASHI.Economics.AITwoSidedConcentrationPropagation20261012Exact as Concentration
 import DASHI.Economics.AICoreWeaveDebtCostBoundary20261012Exact as DebtCost
 import DASHI.Economics.AICoreWeaveCapitalSpreadSign20261012Exact as CapitalSign
+import DASHI.Economics.AICoreWeaveCapitalReinvestmentCoverage20261012Exact as Reinvestment
 
 ------------------------------------------------------------------------
 -- FINAL OCTOBER-12 RECONCILIATION
---
--- Incremental max-cut beyond the prior October-12 reconciliation. Payments are
--- scoped; none manufactures the missing terminal/fundamental producers.
 ------------------------------------------------------------------------
 
 data FinalState : Set where
@@ -60,15 +58,23 @@ coreWeaveTwoSidedConcentrationPaid = finalProducer
 coreWeaveDebtCostSurfacePaid : FinalProducer
 coreWeaveDebtCostSurfacePaid = finalProducer
   "CoreWeave debt-cost surface" paid "CoreWeave H1/Q2-2026"
-  "H1 contractual debt interest USD 1.075B, reported total debt interest USD 0.985B, future principal USD 35.551B; selected non-convertible effective/stated rates span 8.5 to 15 percent"
-  false
+  "H1 contractual debt interest USD 1.075B, reported total debt interest USD 0.985B, future principal USD 35.551B; selected non-convertible effective/stated rates span 8.5 to 15 percent" false
 
 coreWeaveCapitalSpreadSignPaid : FinalProducer
 coreWeaveCapitalSpreadSignPaid = finalProducer
   "CoreWeave ROIC-WACC sign under declared standard sign conditions" paid
   "CoreWeave H1-2026 / sign-only capital-return model"
-  "source-paid operating loss plus positive debt principal/rates imply negative ROIC and positive WACC under positive-invested-capital/debt-weight/after-tax-debt-contribution and non-negative-equity-contribution conditions; therefore ROIC-WACC is negative"
-  false
+  "source-paid operating loss plus positive debt principal/rates imply negative ROIC and positive WACC under declared positive-invested-capital/debt-contribution and non-negative-equity-contribution conditions" false
+
+coreWeaveReinvestmentCoveragePaid : FinalProducer
+coreWeaveReinvestmentCoveragePaid = finalProducer
+  "CoreWeave same-period internal reinvestment coverage" paid "CoreWeave H1-2026"
+  "operating cash flow USD 3.663B versus capex USD 14.117B leaves an exact USD 10.454B same-period internal-cash shortfall" false
+
+replacementObsolescenceStillPartial : FinalProducer
+replacementObsolescenceStillPartial = finalProducer
+  "replacement / obsolescence burden" partial "CoreWeave H1-2026 + lender economic-life evidence"
+  "capex materially exceeds both CFO and D&A, but growth capex is not yet separated from maintenance/replacement capex and no entity-specific obsolescence schedule is paid" false
 
 wholeComplexMarketDynamicsStillPartial : FinalProducer
 wholeComplexMarketDynamicsStillPartial = finalProducer
@@ -98,8 +104,7 @@ terminalPayerStillOpen = finalProducer
 numericROICWACCStillOpen : FinalProducer
 numericROICWACCStillOpen = finalProducer
   "numerical realised ROIC-WACC" open "CoreWeave/global"
-  "the sign-only CoreWeave spread is closed under declared conditions, but a numerical point still requires a fixed invested-capital convention, equity cost and capital weights"
-  false
+  "the sign-only CoreWeave spread is closed under declared conditions, but a numerical point still requires a fixed invested-capital convention, equity cost and capital weights" false
 
 ------------------------------------------------------------------------
 -- Proof receipts and non-promotion.
@@ -135,18 +140,6 @@ coreWeaveDebtCostPaid = DebtCost.debtSurfaceIsPaid
 coreWeaveWACCStillOpen : DebtCost.waccClosed DebtCost.coreWeaveDebtCostBoundary ≡ false
 coreWeaveWACCStillOpen = DebtCost.waccStillOpen
 
-coreWeaveCapitalSpreadSignIsNegative :
-  CapitalSign.inferSpreadSign
-    (CapitalSign.inferROICSign
-      (CompanyNegative)
-      CapitalSign.standardWACCSignConditions)
-    (CapitalSign.inferWACCSign CapitalSign.standardWACCSignConditions)
-  ≡ CapitalSign.neg
-coreWeaveCapitalSpreadSignIsNegative = CapitalSign.coreWeaveCapitalSpreadSignNegative
-  where
-    CompanyNegative : Bool
-    CompanyNegative = true
-
 coreWeaveCapitalSpreadSignClosed :
   CapitalSign.signClosedUnderDeclaredConditions CapitalSign.coreWeaveCapitalSpreadClosure ≡ true
 coreWeaveCapitalSpreadSignClosed = refl
@@ -159,11 +152,20 @@ coreWeaveNumericWACCStillOpen :
   CapitalSign.numericWACCClosed CapitalSign.coreWeaveCapitalSpreadClosure ≡ false
 coreWeaveNumericWACCStillOpen = CapitalSign.numericWACCStillOpen
 
+coreWeaveCashFundingShortfallIs10454 :
+  Reinvestment.cashFundingShortfallMillionUSD Reinvestment.coreWeaveH12026ReinvestmentCoverage ≡ 10454
+coreWeaveCashFundingShortfallIs10454 = Reinvestment.coreWeaveCashFundingShortfallIs10454
+
+coreWeaveReplacementCapexStillOpen :
+  Reinvestment.replacementCapexIdentified Reinvestment.coreWeaveH12026ReinvestmentCoverage ≡ false
+coreWeaveReplacementCapexStillOpen = Reinvestment.coreWeaveReplacementCapexStillUnidentified
+
 data ScopedPaymentImpliesGlobalClosurePermission : Set where
 data PriceNormalizationImpliesMarginPermission : Set where
 data ConcentrationTopologyImpliesTerminalPayerPermission : Set where
 data DebtCostImpliesWACCPermission : Set where
 data SignOnlySpreadImpliesNumericSpreadPermission : Set where
+data CapexGapImpliesReplacementCapexPermission : Set where
 
 scopedPaymentDoesNotAutoCloseGlobal : ScopedPaymentImpliesGlobalClosurePermission → ⊥
 scopedPaymentDoesNotAutoCloseGlobal ()
@@ -180,6 +182,9 @@ debtCostDoesNotAutoCreateWACC ()
 signOnlySpreadDoesNotAutoCreateNumericSpread : SignOnlySpreadImpliesNumericSpreadPermission → ⊥
 signOnlySpreadDoesNotAutoCreateNumericSpread ()
 
+capexGapDoesNotAutoIdentifyReplacementCapex : CapexGapImpliesReplacementCapexPermission → ⊥
+capexGapDoesNotAutoIdentifyReplacementCapex ()
+
 finalBoundary : String
 finalBoundary =
-  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, CoreWeave debt-cost surface and the sign of CoreWeave ROIC-WACC under declared standard sign conditions are paid. Numerical ROIC/WACC remains open. The remaining substantive frontier is independent terminal-payer provenance, numerical realised ROIC-WACC, same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, entity-specific replacement/obsolescence, and measured regulatory burden/concentration response."
+  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, debt-cost surface, sign-only negative ROIC-WACC result under declared conditions, and exact H1 internal-cash/capex shortfall are paid. Numerical ROIC/WACC, replacement-capex decomposition and terminal capital recovery remain open. The surviving substantive frontier is independent terminal-payer provenance, numerical realised ROIC-WACC, same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, entity-specific replacement/obsolescence decomposition, and measured regulatory burden/concentration response."
