@@ -52,3 +52,6 @@ record ContemporaryComparatorBoundary : Set where
 canonicalContemporaryComparatorBoundary : ContemporaryComparatorBoundary
 canonicalContemporaryComparatorBoundary =
   contemporary-comparator-boundary true false false true
+
+contemporaryComparatorDoesNotPayHistoricalLaw : Bool
+contemporaryComparatorDoesNotPayHistoricalLaw = true
