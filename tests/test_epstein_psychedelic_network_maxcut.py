@@ -7,12 +7,17 @@ EXPECTED = {
         "EFTA02458524",
         "EFTA00814480",
         "EFTA01054265",
-        "EFTA00957006",
+        "EFTA00692098",
+        "EFTA01052096",
+        "EFTA00984125",
+        "EFTA00862301",
         "EFTA00984429",
         "EFTA00865569",
         "Rick Doblin",
         "ibogaine",
         "scopolamine",
+        "transferStatementEqualsBankSettlement",
+        "fundingInstructionEqualsCompletedPayment",
     ],
     "DASHI/Cognition/EpsteinPsychedelicNetworkEvidenceExact.agda": [
         "EvidenceGradedGenealogyCore",
@@ -20,6 +25,8 @@ EXPECTED = {
         "fundingOrganisationalLink",
         "oneStrongEdgeDoesNotEstablishUniversalNetwork",
         "documentedInterestDoesNotEstablishAdministration",
+        "yuAttributesEpsteinBrokerage",
+        "epsteinFundingSpecialAbilitySearch",
     ],
     "DASHI/Cognition/EpsteinPsychedelicParetoSnowballExact.agda": [
         "SensibLawFiniteRequirementParetoFrontierExact",
@@ -31,6 +38,7 @@ EXPECTED = {
     "DASHI/Cognition/EpsteinPsychedelicNetworkValidation.agda": [
         "canonicalEpsteinPsychedelicBoundary",
         "currentEpsteinPsychedelicRoute",
+        "fundingSettlementStillOpen",
     ],
 }
 
