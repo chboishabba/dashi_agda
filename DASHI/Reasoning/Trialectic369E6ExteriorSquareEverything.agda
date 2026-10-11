@@ -66,5 +66,11 @@ import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 
+-- External Monster-3B realization lane: certified source module plus exact
+-- repository-side symplectic/Heisenberg intertwiner compiler.
+import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
+import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
+import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
+
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
