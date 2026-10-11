@@ -46,9 +46,7 @@ def main() -> None:
     assert virtual["virtual_276_identity_has_same_solution"] is True
     assert virtual["integral_norm_exact_sequence_paid"] is False
 
-    # Runtime premises for the augmentation-filtration theorem.  These numeric
-    # facts do NOT themselves instantiate the proof-bearing first-nonzero-layer
-    # extraction on the actual Tate module.
+    # Runtime premises for the augmentation-filtration theorem.
     assert hom["natural_dimension"] == 24
     assert hom["large_simple_dimension"] == 274
     assert hom["tensor_dimension"] == 24 * 274
@@ -58,8 +56,7 @@ def main() -> None:
     assert hom["hom_24_tensor_274_to_274_dimension"] == 0
     assert hom["all_augmentation_adjacent_homs_vanish"] is True
 
-    # Residual 24 -> Sym2(24) rigidity premises.  This proves uniqueness of a
-    # nonzero equivariant map, not that the actual norm residual map is nonzero.
+    # Residual 24 -> Sym2(24) rigidity premises.
     assert frob["natural_dimension"] == 24
     assert frob["symmetric_square_dimension"] == 300
     assert frob["explicit_frobenius_rank"] == 24
@@ -69,20 +66,23 @@ def main() -> None:
     assert frob["actual_norm_residual_24_map_identified"] is False
     assert frob["common_98280_map_identified"] is False
 
-    # Actual 2-modular decomposition-matrix content of the centralizer pieces.
+    # Actual 2-modular decomposition matrix + CTBlocks separation.
     assert decomp["candidate_count"] > 0
     assert decomp["strong_candidate_count"] > 0
     assert decomp["rigid_support_candidate_count"] > 0
+    assert decomp["rigid_block_candidate_count"] > 0
     assert decomp["jh_common_98280_plus_residual24_pattern_found"] is True
     assert decomp["common_98280_support_separated_from_residual_lanes"] is True
+    assert decomp["common_98280_block_separated_from_residual_lanes"] is True
+    assert decomp["block_idempotent_split_available"] is True
     assert decomp["actual_norm_map_98280_isomorphism_paid"] is False
     assert decomp["actual_tate_exterior_square_weld_paid"] is False
 
     rigid_profile_match = False
-    for c in decomp["rigid_support_candidates"]:
-        sparse = c["residual_276_sparse"]
+    for c in decomp["rigid_block_candidates"]:
+        sparse = c["residual_276_sparse_with_block"]
         degree_mults: dict[int, int] = {}
-        for _, degree, mult in sparse:
+        for _, degree, mult, _block in sparse:
             degree_mults[degree] = degree_mults.get(degree, 0) + mult
         if degree_mults.get(1, 0) == 2 and degree_mults.get(274, 0) == 1 and sum(
             degree * mult for degree, mult in degree_mults.items()
@@ -102,12 +102,15 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- GENERATED RUNTIME RECEIPT: Co1 FACTOR-THROUGH / TATE-COKERNEL MAX-CUT
 --
--- This generated owner certifies finite/runtime PREMISES only.  In particular,
--- zero Hom dimensions do not by themselves prove that the normal 2^24 acts
--- trivially on the actual Tate head: that promotion must pass through the
--- proof-bearing augmentation-filtration theorem.  Likewise uniqueness of the
--- nonzero 24 -> Sym2(24) Hom identifies the actual residual norm map only after
--- rank rigidity proves that actual residual map is nonzero.
+-- The generated owner records finite/runtime premises.  In addition to
+-- Jordan--Hoelder support separation, CTBlocks now certifies that the common
+-- 98280 lane and residual 24/276 lanes lie in disjoint 2-blocks.  Therefore
+-- block idempotents provide canonical equivariant common/residual projections
+-- and cross-block extensions are impossible.
+--
+-- This still does not invent the source-native norm matrix or the final action
+-- intertwiner.  Those are consumed by the proof-bearing Lean norm-weld
+-- compilers rather than represented by a Boolean promotion.
 ------------------------------------------------------------------------
 
 wedgeReceiptSha256 : String
@@ -137,8 +140,14 @@ co1Factor274Count = {wedge['atlas_274_factor_count']}
 centralizerVirtualIdentityPassingPairCount : Nat
 centralizerVirtualIdentityPassingPairCount = {virtual['passing_pair_count']}
 
-centralizerDecompositionRigidCandidateCount : Nat
-centralizerDecompositionRigidCandidateCount = {decomp['rigid_support_candidate_count']}
+centralizerDecompositionRigidSupportCandidateCount : Nat
+centralizerDecompositionRigidSupportCandidateCount = {decomp['rigid_support_candidate_count']}
+
+centralizerDecompositionRigidBlockCandidateCount : Nat
+centralizerDecompositionRigidBlockCandidateCount = {decomp['rigid_block_candidate_count']}
+
+centralizerTwoBlockCount : Nat
+centralizerTwoBlockCount = {decomp['two_block_count']}
 
 hom24ToSym2Dimension : Nat
 hom24ToSym2Dimension = {frob['hom_24_to_sym2_dimension']}
@@ -181,6 +190,12 @@ actualNormResidual24MapForcedFrobenius = false
 
 common98280SupportSeparatedFromResidualLanes : Bool
 common98280SupportSeparatedFromResidualLanes = true
+
+common98280BlockSeparatedFromResidualLanes : Bool
+common98280BlockSeparatedFromResidualLanes = true
+
+blockIdempotentCommonResidualSplitAvailable : Bool
+blockIdempotentCommonResidualSplitAvailable = true
 
 -- Final map/extension firewalls.
 actualNormCommon98280IsomorphismPaid : Bool
