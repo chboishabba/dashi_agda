@@ -5,15 +5,6 @@ module DASHI.Mathematics.CrossPollination.MillenniumP9MaxCut20261012Validation w
 --
 -- Imports the current cumulative Millennium validation root plus the complete
 -- dependency-ordered P-vs-NP tranche developed from the live master frontier.
---
--- The tranche deliberately separates:
---   * finite terminal semantic admission;
---   * non-opaque staged Q1/DirectDP construction;
---   * present structural self-quotation progress;
---   * proof that present structural quotation is SAT-semantically inert;
---   * opposite semantic diagonal logic;
---   * concrete Cook--Levin realization target;
---   * literal full-formula self-input growth no-go.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationValidation
@@ -37,9 +28,30 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeSemanticQuotationBri
 import DASHI.Mathematics.Complexity.PNotEqualsNPLiteralCookQuotationSelfInputNoGoExact
 
 ------------------------------------------------------------------------
+-- Deterministic concrete-tape / fixed semantic quotation recut.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPDeterministicConcreteTapeExecutionExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateDeterministicTapeCodeExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeExecutableCostBridgeExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeFixedWidthQuotedRootExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPExecutableCodeSingletonNoGoExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedCandidateTapeExact
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPDeterministicOppositeTapeRealizationExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeSemanticQuotationExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedConcreteTapeSemanticQuotationExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeEndpointDecisionExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeFixedMaxCutClosureExact
+
+------------------------------------------------------------------------
 -- TRUST BOUNDARY
 --
--- Importing this root is intended to make every new dependency visible to the
--- Agda checker. It does not assert the final concrete opposite-interpreter
--- realization exists; that remains the explicit open constructor surface.
+-- Importing this root exposes every new dependency to the Agda checker.
+-- It does NOT inhabit the final open constructors:
+--   * ConcreteTapeCandidateCoverage;
+--   * FixedOppositeSelfQuotationCompiler.
+-- Nor does it identify the abstract extensional cost model with a concrete tape
+-- model: the singleton-code no-go proves that extra representation structure is
+-- required.
 ------------------------------------------------------------------------
