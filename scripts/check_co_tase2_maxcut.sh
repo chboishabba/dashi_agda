@@ -5,12 +5,17 @@ python3 scripts/co_tase2_full_symmetry_receipt.py \
   data/co_tase2/bns_194_268_magndata_operations.json \
   --receipt /tmp/co_tase2_full_bns_bloch_receipt.json
 
+python3 scripts/co_tase2_published_arpes_constraints.py \
+  data/co_tase2/published_arpes_constraints_2026.json \
+  --receipt /tmp/co_tase2_published_arpes_constraints_receipt.json
+
 python3 -m py_compile \
   scripts/co_tase2_bloch_symmetry.py \
   scripts/co_tase2_bns_operation_audit.py \
   scripts/co_tase2_full_symmetry_receipt.py \
   scripts/co_tase2_arpes_ibw_ingest.py \
   scripts/co_tase2_arpes_peak_fit.py \
+  scripts/co_tase2_published_arpes_constraints.py \
   scripts/co_tase2_dataset_download_probe.py
 
 python3 - <<'PY'
