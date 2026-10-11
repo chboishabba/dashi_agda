@@ -26,7 +26,7 @@ open import Data.Fin.Base using (Fin)
 open import Data.List.Base using (length)
 open import Data.Nat.Base using (_<_)
 import Data.Fin.Base as FinBase
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
@@ -175,7 +175,9 @@ referenceTreeForLayer :
       (Packed.packed tag
         (Indexed.indexRestrictionNode layer)))
 referenceTreeForLayer {remaining = zero}
-    layer
+    layer@(Width.layer-node
+      (Family.restriction-node .zero current derivation)
+      refl)
     FinBase.zero
     refl
     rewrite
@@ -185,17 +187,23 @@ referenceTreeForLayer {remaining = zero}
   Tree.terminalLeaf
     (Indexed.indexedTerminalLabelCorrect layer)
 referenceTreeForLayer {remaining = zero}
-    layer
+    (Width.layer-node
+      (Family.restriction-node .zero current derivation)
+      refl)
     (FinBase.suc tag)
     tagExact =
   ⊥-elim (zeroNotSuccessor (sym tagExact))
 referenceTreeForLayer {remaining = suc remaining}
-    layer
+    (Width.layer-node
+      (Family.restriction-node .(suc remaining) current derivation)
+      refl)
     FinBase.zero
     tagExact =
   ⊥-elim (zeroNotSuccessor tagExact)
 referenceTreeForLayer {remaining = suc remaining}
-    layer
+    layer@(Width.layer-node
+      (Family.restriction-node .(suc remaining) current derivation)
+      refl)
     (FinBase.suc tag)
     tagExact
     rewrite
