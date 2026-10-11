@@ -77,6 +77,14 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierExact.agda
       - name: Typecheck residual survivor frontier validation
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualSurvivorFrontierValidation.agda
+      - name: Typecheck uniform word descent certificates
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateExact.agda
+      - name: Typecheck uniform word descent certificate validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateValidation.agda
+      - name: Typecheck residual word-certificate frontier
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
+      - name: Typecheck residual word-certificate frontier validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierValidation.agda
       - name: Typecheck terminal parity max-cut
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
       - name: Typecheck terminal parity max-cut validation
