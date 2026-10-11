@@ -2,7 +2,7 @@ module DASHI.Economics.AIEntanglementEverything2026 where
 
 ------------------------------------------------------------------------
 -- Convenience aggregation surface for the October 2026 AI-capital / market-
--- structure tranche.  Individual owners retain theorem/source authority.
+-- structure tranche. Individual owners retain theorem/source authority.
 ------------------------------------------------------------------------
 
 import DASHI.Economics.AICapitalRecoveryEntanglement2026Exact
@@ -28,6 +28,7 @@ import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact
 import DASHI.Economics.AICompanyReturnRolloverTrajectory2026Exact
 import DASHI.Economics.AICompanyObservedTrajectory2026Exact
 import DASHI.Economics.AICounterpartyRoleOverlap2026Exact
+import DASHI.Economics.AITwoSidedConcentrationPropagation20261012Exact
 import DASHI.Economics.AIInfrastructureCommitmentTrajectory2026Exact
 import DASHI.Economics.AICapitalAcquisitionProgress20261008Exact
 import DASHI.Economics.AICapitalParetoAcquisitionSourceAtlas2026Exact
@@ -36,6 +37,8 @@ import DASHI.Economics.AICapitalResidualParetoAcquisition2026Exact
 import DASHI.Economics.AIRegulatoryBurdenConcentrationSensibLaw2026Exact
 import DASHI.Economics.AIAustraliaRegulatoryPolicyAcquisition20261012Exact
 import DASHI.Economics.AIMarketOpenWeightFreshAcquisition20261012Exact
+import DASHI.Economics.AIOpenWeightTrajectory20261012Exact
+import DASHI.Economics.AIQualityNormalizedPriceSpread20261012Exact
 import DASHI.Economics.AIFixedBasketMarketSeries20261012Exact
 import DASHI.Economics.AIMaxCutReconciliation20261012Exact
 import DASHI.Economics.AIEntanglementSourceWrittenChecks2026
