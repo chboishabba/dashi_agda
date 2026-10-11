@@ -40,7 +40,7 @@ data CalibrationAuthority : EvidenceClass → Set where
     CalibrationAuthority simulationToExperimentComparison
   theory-validation-target : CalibrationAuthority analyticOrKineticTheory
 
-record QuantitativeClaim (A : Set) : Set where
+record QuantitativeClaim (A : Set) : Set₁ where
   constructor quantitative-claim
   field
     value : A
