@@ -63,6 +63,20 @@ finite-hermitian-spectral-basis-source-written =
   Finite.FiniteHermitianSpectralBasisSourceWrittenIsTrue
     Finite.canonicalFiniteQuantumProducerStatus
 
+typed-selected-cpo-refinement-source-written :
+  Finite.TypedSelectedCPOFiniteHermitianRefinementSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+typed-selected-cpo-refinement-source-written =
+  Finite.TypedSelectedCPOFiniteHermitianRefinementSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+generic-admissibility-does-not-create-typed-symmetry :
+  Finite.GenericCPOAdmissibilityCreatesTypedSymmetry
+    Finite.canonicalFiniteQuantumProducerStatus ≡ false
+generic-admissibility-does-not-create-typed-symmetry =
+  Finite.GenericCPOAdmissibilityCreatesTypedSymmetryIsFalse
+    Finite.canonicalFiniteQuantumProducerStatus
+
 arbitrary-selected-cpo-eigenbasis-remains-open :
   Finite.ArbitrarySelectedCPOEigenbasisPaid
     Finite.canonicalFiniteQuantumProducerStatus ≡ false
