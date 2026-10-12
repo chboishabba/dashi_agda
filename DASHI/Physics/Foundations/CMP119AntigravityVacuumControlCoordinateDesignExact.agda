@@ -13,18 +13,19 @@ import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabili
 -- VACUUM COLLISION -> EXPERIMENTAL COORDINATE / CONTROL TARGET
 --
 -- The non-identifiability theorem says the current coupling+density+
--- background+fluctuation+E/R/B view cannot recover the projected vacuum
--- coordinate.  ExperimentalCoordinateDesignExact supplies the right next
--- question: which extra coordinate must be measured or deliberately varied?
+-- background+fluctuation+E/R/B view cannot recover the selected vacuum-
+-- constant coordinate.  ExperimentalCoordinateDesignExact supplies the right
+-- next question: which extra coordinate must be measured or deliberately
+-- varied?
 --
 -- This owner makes the answer literal without manufacturing an actuator:
 --
---   missing measured coordinate = selected projected-vacuum readout;
+--   missing measured coordinate = selected constant/remainder readout;
 --
 -- and an adequate selective control must
 --
 --   (1) preserve the declared current-source view at the selected scale;
---   (2) change the projected-vacuum coordinate at that same scale.
+--   (2) change the selected vacuum-constant coordinate at that same scale.
 --
 -- Such a control automatically gives a nonzero OFF/ON source pair for the
 -- differential lane.  Existence, safety, laboratory meaning and physical
@@ -62,11 +63,11 @@ module _
         λ _ source → NI.projectedVacuum source scale
     ; Coordinate.ExperimentalCoordinateDesign.applyControl = applyControl
     ; Coordinate.ExperimentalCoordinateDesign.coordinateReference =
-        λ _ → "CMP119 selected projected-vacuum coordinate"
+        λ _ → "CMP119 selected vacuum constant/remainder coordinate"
     ; Coordinate.ExperimentalCoordinateDesign.dimensionReference =
-        λ _ → "source-normalization / projected-vacuum coordinate; physical units require calibration"
+        λ _ → "source-normalization / vacuum-constant coordinate; physical units require calibration"
     ; Coordinate.ExperimentalCoordinateDesign.calibrationOrDerivationReference =
-        λ _ → "formal plaquette-projector source readout; physical same-object measurement calibration still required"
+        λ _ → "formal constant/remainder-coordinate readout; physical same-object measurement calibration still required"
     ; Coordinate.ExperimentalCoordinateDesign.controlReference = controlReference
     }
 
