@@ -56,6 +56,13 @@ standard-basis-projector-family-source-written =
   Finite.StandardBasisProjectorFamilySourceWrittenIsTrue
     Finite.canonicalFiniteQuantumProducerStatus
 
+finite-hermitian-spectral-basis-source-written :
+  Finite.FiniteHermitianSpectralBasisSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+finite-hermitian-spectral-basis-source-written =
+  Finite.FiniteHermitianSpectralBasisSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
 arbitrary-selected-cpo-eigenbasis-remains-open :
   Finite.ArbitrarySelectedCPOEigenbasisPaid
     Finite.canonicalFiniteQuantumProducerStatus ≡ false
