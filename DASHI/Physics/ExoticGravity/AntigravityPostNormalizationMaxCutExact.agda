@@ -8,6 +8,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityVacuumExperimentDiscriminatorE
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Firewall
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationToLorentzianStressExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as DifferentialFirewall
+import DASHI.Physics.Foundations.GRQFTVacuumLockInReversalEstimatorExact as LockIn
 import DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricCompilerExact as Differential
 
 ------------------------------------------------------------------------
@@ -64,6 +65,18 @@ differentialSameStateMetricResponseStillRequired : Bool
 differentialSameStateMetricResponseStillRequired =
   DifferentialFirewall.sameStateMetricResponseDifferenceRequired
 
+-- Exact odd/even lock-in algebra is now owned: if the target channel is really
+-- odd and a nuisance channel really even under a physical reversal, the odd
+-- half-difference recovers the differential vacuum signal and the even half-sum
+-- recovers the common nuisance.  Those parity identifications are still
+-- experiment receipts, not algebraic consequences of the source model.
+differentialReversalEstimatorAlgebraOwned : Bool
+differentialReversalEstimatorAlgebraOwned = true
+
+differentialReversalParityReceiptStillRequired : Bool
+differentialReversalParityReceiptStillRequired =
+  LockIn.reversalParityStillNeedsPhysicalReceipt
+
 differentialSpin2TTProducerStillRequired : Bool
 differentialSpin2TTProducerStillRequired = true
 
@@ -87,6 +100,8 @@ record PostNormalizationAntigravityFrontier : Set where
     differentialCommonAdditiveCountertermCancelledAtNormalizationLevel : Bool
     differentialCandidateKottlerAlgebraOwned : Bool
     differentialSameStateMetricResponseDifferenceStillRequired : Bool
+    differentialReversalEstimatorAlgebraConstructed : Bool
+    differentialReversalParityAndCommonBackgroundReceiptStillRequired : Bool
     differentialPropagatingSpin2TTProductionStillRequired : Bool
     differentialSICalibrationAndExperimentStillRequired : Bool
 
@@ -100,7 +115,7 @@ canonicalPostNormalizationAntigravityFrontier =
   post-normalization-antigravity-frontier
     true true true true true
     true true true true
-    true true true true true
+    true true true true true true true
     true true true
 
 staticVacuumAlgebraAfterPhysicalReceiptOwned : Bool
