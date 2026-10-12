@@ -7,25 +7,31 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Foundations.EntropicGravitySourceBoundaryExact as Sources
 
 ------------------------------------------------------------------------
--- JACOBSON COUPLING NORMALIZATION CROSS-KERNEL BOUNDARY
+-- JACOBSON COUPLING / CLAUSIUS NULL-ALGEBRA CROSS-KERNEL BOUNDARY
 --
--- Jacobson's 1995 derivation uses the local Unruh normalization
+-- Jacobson's 1995 derivation uses local Unruh temperature
 --
 --   T = hbar kappa / (2 pi)
 --
--- together with horizon entropy density eta = dS/dA.  At the null-contracted
--- algebraic stage the curvature/stress coefficient is
+-- horizon entropy density eta = dS/dA, heat-flux integrand
 --
---   2 pi / (hbar eta).
+--   -kappa T_ab k^a k^b,
 --
--- Native dashi_lean4 PR #68 now source-writes the exact field algebra showing
--- that substituting the Bekenstein-Hawking normalization
+-- and the linearised area-variation integrand
 --
---   eta = 1 / (4 hbar G)
+--   -R_ab k^a k^b.
 --
--- gives exactly 8 pi G.  This owner does not treat that arithmetic theorem as
--- an Agda proof term, and it does not manufacture the physical Unruh, area-law,
--- Raychaudhuri, or stress-energy receipts required by Jacobson's argument.
+-- Native dashi_lean4 PR #68 now source-writes two exact algebraic layers:
+--
+--   1. (2 pi)/(hbar eta) specializes to 8 pi G after
+--      eta = 1/(4 hbar G);
+--   2. once the same-object heat-flux, Unruh, entropy-area and Raychaudhuri
+--      integrands are supplied, Clausius equality cancels the common boost
+--      parameter and yields the null-contracted curvature/stress relation,
+--      with the Bekenstein-Hawking specialization giving 8 pi G.
+--
+-- These are coefficient/scalar theorems only.  This owner does not turn them
+-- into Agda proof terms or manufacture the physical QFT/geometry premises.
 ------------------------------------------------------------------------
 
 record JacobsonCouplingNormalizationBoundary : Set where
@@ -34,9 +40,11 @@ record JacobsonCouplingNormalizationBoundary : Set where
     jacobson1995SourceBoundaryOwned : Bool
     jacobsonCouplingAlgebraSourceWrittenInLean : Bool
     eightPiGSpecializationSourceWrittenInLean : Bool
+    clausiusNullAlgebraSourceWrittenInLean : Bool
     couplingAlgebraKernelReceiptStillRequired : Bool
     unruhNormalizationPhysicalReceiptStillRequired : Bool
     entropyAreaPhysicalReceiptStillRequired : Bool
+    geometricHeatFluxReceiptStillRequired : Bool
     raychaudhuriSameCarrierStillRequired : Bool
     stressEnergySameObjectStillRequired : Bool
 
@@ -44,7 +52,7 @@ canonicalJacobsonCouplingNormalizationBoundary :
   JacobsonCouplingNormalizationBoundary
 canonicalJacobsonCouplingNormalizationBoundary =
   jacobsonCouplingNormalizationBoundary
-    true true true true true true true true
+    true true true true true true true true true true
 
 jacobson1995SourceBoundaryOwned : Bool
 jacobson1995SourceBoundaryOwned = true
@@ -55,6 +63,9 @@ jacobsonCouplingAlgebraSourceWrittenInLean = true
 eightPiGSpecializationSourceWrittenInLean : Bool
 eightPiGSpecializationSourceWrittenInLean = true
 
+clausiusNullAlgebraSourceWrittenInLean : Bool
+clausiusNullAlgebraSourceWrittenInLean = true
+
 couplingAlgebraKernelReceiptStillRequired : Bool
 couplingAlgebraKernelReceiptStillRequired = true
 
@@ -64,6 +75,9 @@ unruhNormalizationPhysicalReceiptStillRequired = true
 entropyAreaPhysicalReceiptStillRequired : Bool
 entropyAreaPhysicalReceiptStillRequired = true
 
+geometricHeatFluxReceiptStillRequired : Bool
+geometricHeatFluxReceiptStillRequired = true
+
 raychaudhuriSameCarrierStillRequired : Bool
 raychaudhuriSameCarrierStillRequired = true
 
@@ -72,8 +86,8 @@ stressEnergySameObjectStillRequired = true
 
 normalizationStatement : String
 normalizationStatement =
-  "Native Lean source proves (2*pi)/(hbar*eta) = 8*pi*G after eta = 1/(4*hbar*G), under nonzero hbar and G. This is coefficient algebra only."
+  "Native Lean source proves (2*pi)/(hbar*eta) = 8*pi*G after eta = 1/(4*hbar*G), and separately proves that same-object Clausius equality reduces the supplied heat-flux/area-variation integrands to the corresponding null-contracted Einstein coefficient."
 
 physicalBoundary : String
 physicalBoundary =
-  "The 8*pi*G arithmetic does not prove the Unruh temperature law, the Bekenstein-Hawking area density on the selected local horizon, continuum Raychaudhuri focusing, or identification of heat flux with the same stress-energy tensor."
+  "The scalar cancellation does not prove the Unruh temperature law, the Bekenstein-Hawking area density on the selected local horizon, the geometric heat-flux identification, continuum Raychaudhuri focusing, or identification of heat flux with the same physical stress-energy tensor."
