@@ -9,6 +9,7 @@ import DASHI.Quantum.QuantumBirthmarkHolographicSameObjectWeldExact as SameObjec
 import DASHI.Quantum.QuantumBirthmarkHolographicResidualTransportExact as Transport
 import DASHI.Quantum.QuantumBirthmarkJacobsonLocalHorizonMaxCutExact as JacobsonCut
 import DASHI.Quantum.QuantumBirthmarkJacobsonNullConeRecoveryExact as NullCone
+import DASHI.Quantum.QuantumBirthmarkRelativeEntropyJacobsonSourceBridgeExact as RelativeEntropy
 import DASHI.Quantum.QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact as Jacobson
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as EntropyGravity
 
@@ -18,8 +19,8 @@ import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as Entropy
 -- The finite entropy algebra is closed on the corrected maximally-entangled
 -- cut model. Consumer-relative birthmark transport has an exact generic
 -- compiler. Jacobson's route has been recut against existing QFT/GR,
--- finite sourced-Einstein, continuum Einstein-matter, and now an explicit
--- all-null-directions -> tensor-modulo-metric compiler.
+-- finite sourced-Einstein, continuum Einstein-matter, an explicit all-null
+-- tensor-recovery compiler, and the 2026 modular relative-entropy horizon lane.
 ------------------------------------------------------------------------
 
 record ClosedFiniteLayer : Set where
@@ -33,10 +34,11 @@ record ClosedFiniteLayer : Set where
     birthmarkResidualTransportCompilerOwned : Bool
     jacobsonPaymentSurfaceRecutOwned : Bool
     nullDirectionTensorRecoveryCompilerOwned : Bool
+    relativeEntropyHorizonFluxAuthorityOwned : Bool
 
 canonicalClosedFiniteLayer : ClosedFiniteLayer
 canonicalClosedFiniteLayer =
-  closedFiniteLayer true true true true true true true true
+  closedFiniteLayer true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Physical / same-object leaves.
@@ -51,6 +53,7 @@ record TerminalPhysicalCutset : Set where
     localHorizonSameObjectWeld : Bool
     unruhRindlerKernelTheorem : Bool
     clausiusEntropyAreaSameObjectReceipt : Bool
+    relativeEntropyAreaSameObjectPhysicalReceiptStillRequired : Bool
     nullRaychaudhuriContinuumKernelTheorem : Bool
     sameObjectMatterStressEnergyReceipt : Bool
     nullConeRigidityTheoremStillRequired : Bool
@@ -61,7 +64,7 @@ record TerminalPhysicalCutset : Set where
 canonicalTerminalPhysicalCutset : TerminalPhysicalCutset
 canonicalTerminalPhysicalCutset =
   terminalPhysicalCutset
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true
 
 record TerminalPromotionFirewall : Set where
   constructor terminalPromotionFirewall
@@ -71,6 +74,8 @@ record TerminalPromotionFirewall : Set where
     birthmarkDoesNotImplyCurvature : Bool
     entropyDensityDoesNotImplyStressTensor : Bool
     entropyPerAreaDoesNotIdentifyBirthmark : Bool
+    relativeEntropyDoesNotIdentifyBirthmark : Bool
+    relativeEntropyDoesNotIdentifyRTEntropy : Bool
     pAdicBoundaryDoesNotImplyPhysicalSpacetime : Bool
     correctedStateDoesNotIdentifyUpstreamState : Bool
     observableTransportDoesNotImplyBulkReconstruction : Bool
@@ -79,11 +84,12 @@ record TerminalPromotionFirewall : Set where
 
 canonicalTerminalPromotionFirewall : TerminalPromotionFirewall
 canonicalTerminalPromotionFirewall =
-  terminalPromotionFirewall true true true true true true true true true true
+  terminalPromotionFirewall
+    true true true true true true true true true true true true
 
 statusStatement : String
 statusStatement =
-  "Corrected finite RT, generic consumer-relative birthmark transport, and the abstract all-null tensor-recovery compiler are structurally paid. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius payment, continuum Raychaudhuri, same-object sourced stress-energy, Lorentzian null-cone rigidity, Einstein equation-of-state derivation, continuum physical solution attachment, and empirical validation."
+  "Corrected finite RT, generic consumer-relative birthmark transport, abstract all-null tensor recovery, and the 2026 relative-entropy/horizon-flux authority lane are structurally recorded. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius payment, same-object relative-entropy/area attachment, continuum Raychaudhuri, same-object sourced stress-energy, Lorentzian null-cone rigidity, Einstein equation-of-state derivation, continuum physical solution attachment, and empirical validation."
 
 correctedFiniteRTEntropyClosed : Bool
 correctedFiniteRTEntropyClosed = RT.correctedRTSameObjectEntropy
@@ -113,6 +119,14 @@ unruhRindlerKernelTheorem = true
 clausiusEntropyAreaSameObjectReceipt : Bool
 clausiusEntropyAreaSameObjectReceipt = true
 
+relativeEntropyHorizonFluxAuthorityOwned : Bool
+relativeEntropyHorizonFluxAuthorityOwned =
+  RelativeEntropy.relativeEntropyHorizonFluxAuthorityOwned
+
+relativeEntropyAreaSameObjectPhysicalReceiptStillRequired : Bool
+relativeEntropyAreaSameObjectPhysicalReceiptStillRequired =
+  RelativeEntropy.relativeEntropyAreaSameObjectPhysicalReceiptStillRequired
+
 nullRaychaudhuriContinuumKernelTheorem : Bool
 nullRaychaudhuriContinuumKernelTheorem = true
 
@@ -122,7 +136,6 @@ sameObjectMatterStressEnergyReceipt = true
 nullDirectionTensorRecoveryCompilerOwned : Bool
 nullDirectionTensorRecoveryCompilerOwned = NullCone.tensorRecoveryCompilerOwned
 
--- Backwards-compatible broad status name retained for older consumers.
 allNullDirectionsTensorRecovery : Bool
 allNullDirectionsTensorRecovery = NullCone.nullConeRigidityStillRequired
 
@@ -153,6 +166,14 @@ birthmarkDoesNotImplyCurvature = true
 
 entropyDensityDoesNotImplyStressTensor : Bool
 entropyDensityDoesNotImplyStressTensor = true
+
+relativeEntropyDoesNotIdentifyBirthmark : Bool
+relativeEntropyDoesNotIdentifyBirthmark =
+  RelativeEntropy.relativeEntropyIsNotBirthmarkMemory
+
+relativeEntropyDoesNotIdentifyRTEntropy : Bool
+relativeEntropyDoesNotIdentifyRTEntropy =
+  RelativeEntropy.relativeEntropyIsNotRyuTakayanagiEntropy
 
 observableTransportDoesNotImplyBulkReconstruction : Bool
 observableTransportDoesNotImplyBulkReconstruction = true
