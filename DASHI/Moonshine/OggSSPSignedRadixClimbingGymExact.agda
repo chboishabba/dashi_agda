@@ -42,6 +42,7 @@ import DASHI.Biology.FRACTRANWreathControlledSymmetryExact as Wreath
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.RepresentationChartInvariant as Representation
+import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
 import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedPhase
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SignedBranch
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -145,7 +146,7 @@ wallOrientation state =
 wallSpectralPhase :
   ∀ {depth} →
   SignedRadixWallState depth →
-  _
+  Spectral.AxisFrequency
 wallSpectralPhase state =
   SignedPhase.signedSSPPhaseObserver (wallMultiplicity state)
 
