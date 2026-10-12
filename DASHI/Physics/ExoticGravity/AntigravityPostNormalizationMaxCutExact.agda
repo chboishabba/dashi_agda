@@ -142,7 +142,7 @@ sourceVacuumSequenceStillNotDerivableFromBetaERBProjection =
 
 normalizationDifferenceAloneIsNotPhysicalDeltaLambda : Bool
 normalizationDifferenceAloneIsNotPhysicalDeltaLambda =
-  false
+  true
 
 scalarKottlerResponseIsNotTTMode : Bool
 scalarKottlerResponseIsNotTTMode = true
