@@ -19,11 +19,13 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 -- 2026 information-design experiment, and the later 2026 ConvRML same-scene
 -- parallel lens/diffuser/RML comparator geometry.
 --
--- The source-H implementation now also has a synthetic-only offline verifier:
--- odd/even array shapes, literal FFT-vs-kernel-shift equality to floating-point
--- tolerance, and finite-support checks of the coherence/Gershgorin compiler.
--- This strengthens implementation confidence without promoting synthetic data
--- into a Berkeley conditioning receipt.
+-- The source-H implementation now also has two execution guards:
+--   * a synthetic-only offline verifier covering odd/even array shapes,
+--     literal FFT-vs-kernel-shift equality and finite-support checks of the
+--     coherence/Gershgorin compiler;
+--   * a dimension-only claim-scale memory planner that estimates the dense
+--     selected-H / normalized-H / Gram working set before real allocation.
+-- Neither guard is promoted into a Berkeley numerical receipt.
 --
 -- The information-design code additionally pays a common *analysis* photon
 -- normalization: each real dataset is divided by its own mean, rescaled to a
@@ -41,9 +43,9 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 -- Remaining numerical/physical leaves are now:
 --   A. execute/ingest the pinned binary PSF audit and retain its numerical
 --      depth + selected-grid same-H sparse certificate receipt;
---   B. select the lateral grid / sparsity class at the scale required by the
---      intended 3-D claim and populate the existing same-H kappa producer from
---      the measured coherence/Gershgorin lower bound;
+--   B. run the memory planner on the actual PSF dimensions, select the finite
+--      lateral grid / sparsity class required by the intended 3-D claim, and
+--      populate the same-H kappa producer from measured coherence/Gershgorin;
 --   C. recover the same-object capture/run provenance for the selected 100k PLD
 --      tranche, then obtain physical throughput / incident-or-detected-photon
 --      calibration for a genuinely matched-photon acquisition-risk comparison;
@@ -57,6 +59,7 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     publicBerkeleyCalibrationArtifactPinned : Bool
     publicBerkeleySourceOperatorPinned : Bool
     offlineSyntheticOperatorSelfTestExecutable : Bool
+    claimScaleMemoryPlannerExecutable : Bool
     sourceOperatorSelectedGridColumnCompilerPaid : Bool
     depthConditioningAuditExecutable : Bool
     translatedColumnRestrictedAuditExecutable : Bool
@@ -86,6 +89,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; publicBerkeleyCalibrationArtifactPinned = true
   ; publicBerkeleySourceOperatorPinned = true
   ; offlineSyntheticOperatorSelfTestExecutable = true
+  ; claimScaleMemoryPlannerExecutable = true
   ; sourceOperatorSelectedGridColumnCompilerPaid = true
   ; depthConditioningAuditExecutable = true
   ; translatedColumnRestrictedAuditExecutable = true
@@ -121,6 +125,9 @@ sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMateri
 
 offlineSyntheticSelfTestStatus : Bool
 offlineSyntheticSelfTestStatus = Conditioning.offlineSyntheticOperatorSelfTestExecutable
+
+claimScaleMemoryPlannerStatus : Bool
+claimScaleMemoryPlannerStatus = Conditioning.claimScaleMemoryPlannerExecutable
 
 sourceSelectedGridCompilerStatus : Bool
 sourceSelectedGridCompilerStatus = Conditioning.sourceOperatorSelectedGridColumnCompilerPaid
