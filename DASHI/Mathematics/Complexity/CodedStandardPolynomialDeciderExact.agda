@@ -5,21 +5,21 @@ module DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact where
 --
 -- IMPORTANT RESOURCE FIREWALL
 --
--- The execution clock is NOT an arbitrary Formula -> Nat field.  The guarded
+-- The execution clock is NOT an arbitrary Formula -> Nat field. The guarded
 -- finite simulation itself depends on T, so such a field could become an input
--- side-channel.  The concrete model instead runs for the canonical size-only
--- arithmetic clock
+-- side-channel. The concrete model instead runs for the canonical size-only
+-- arithmetic clock over the ACTUAL serialized input length:
 --
---   T(phi) = c * (1 + |phi|)^d.
+--   T(phi) = c * (1 + formulaBitCodeLength(phi))^d.
 --
--- Likewise the two symbols used by the binary formula input are required to be
--- distinct; otherwise the serialized formula could collapse before execution.
+-- The two input bit symbols are distinct and the symbol-list length is proved
+-- exactly equal to formulaBitCodeLength.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Empty using (⊥)
 import Data.Fin.Base as Fin
 
@@ -44,6 +44,18 @@ mapFormulaBits zeroSymbol oneSymbol (false ∷ bits) =
 mapFormulaBits zeroSymbol oneSymbol (true ∷ bits) =
   oneSymbol ∷ mapFormulaBits zeroSymbol oneSymbol bits
 
+mapFormulaBitsLength :
+  ∀ {n : Nat}
+    (zeroSymbol oneSymbol : Fin.Fin n)
+    (bits : List Bool) →
+  Binary.listLength (mapFormulaBits zeroSymbol oneSymbol bits)
+  ≡ Binary.listLength bits
+mapFormulaBitsLength zeroSymbol oneSymbol [] = refl
+mapFormulaBitsLength zeroSymbol oneSymbol (false ∷ bits)
+    rewrite mapFormulaBitsLength zeroSymbol oneSymbol bits = refl
+mapFormulaBitsLength zeroSymbol oneSymbol (true ∷ bits)
+    rewrite mapFormulaBitsLength zeroSymbol oneSymbol bits = refl
+
 formulaInput :
   (code : Coded.CodedFiniteStandardTM) →
   Fin.Fin (Coded.symbolCount code) →
@@ -53,6 +65,16 @@ formulaInput :
 formulaInput code zeroSymbol oneSymbol formula =
   mapFormulaBits zeroSymbol oneSymbol
     (Binary.encodeFormulaBits formula)
+
+formulaInputLengthExact :
+  (code : Coded.CodedFiniteStandardTM)
+  (zeroSymbol oneSymbol : Fin.Fin (Coded.symbolCount code))
+  (formula : Cook.BooleanFormula) →
+  Binary.listLength (formulaInput code zeroSymbol oneSymbol formula)
+  ≡ Binary.formulaBitCodeLength formula
+formulaInputLengthExact code zeroSymbol oneSymbol formula =
+  mapFormulaBitsLength
+    zeroSymbol oneSymbol (Binary.encodeFormulaBits formula)
 
 polynomialStepBudget :
   Nat → Nat → Cook.BooleanFormula → Nat
@@ -101,6 +123,7 @@ record CodedStandardPolynomialDeciderBoundary : Set where
   field
     finiteProgramCodeInSet : Bool
     faithfulBinaryInputSymbols : Bool
+    literalInputLengthCharged : Bool
     canonicalSizeOnlyPolynomialClock : Bool
     exactStandardRunCarried : Bool
     finalDecisionExact : Bool
@@ -112,12 +135,12 @@ canonicalCodedStandardPolynomialDeciderBoundary :
   CodedStandardPolynomialDeciderBoundary
 canonicalCodedStandardPolynomialDeciderBoundary =
   coded-standard-polynomial-decider-boundary
-    true true true true true false false false
+    true true true true true true false false false
 
 ------------------------------------------------------------------------
 -- FRONTIER
 --
--- `polynomialTimeDecider = CodedStandardPolynomialDecider` is now a genuine
--- machine-bearing Set-level predicate with a faithful canonical bit input and
--- a size-only polynomial clock.  No hidden extensional timing oracle remains.
+-- `polynomialTimeDecider = CodedStandardPolynomialDecider` is a machine-bearing
+-- Set-level predicate with faithful canonical input and a clock polynomial in
+-- the exact literal input length. No hidden extensional timing oracle remains.
 ------------------------------------------------------------------------
