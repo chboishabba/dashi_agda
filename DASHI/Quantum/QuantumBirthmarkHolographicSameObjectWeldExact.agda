@@ -14,21 +14,20 @@ import DASHI.Quantum.QuantumBirthmarkHolographicContractEntropyExact as Contract
 --   sneed-and-feed/adelic-spectral-zeta
 --   formalization/Formalization/Quantum/HolographicTensorNetwork.lean
 --
--- The upstream module genuinely defines
+-- The upstream module defines
 --   treeEntanglementEntropy k = k * log 2
--- and proves the corresponding minimal-cut area-law identity by rfl.
--- It also defines holographicContract, a boundary density matrix.
+-- and proves the corresponding minimal-cut area-law identity by rfl. It also
+-- defines holographicContract, a uniform diagonal boundary density matrix.
 --
--- The full-state gap is now sharpened/partly closed by
--- `QuantumBirthmarkHolographicContractEntropyExact`: the inspected contract is
--- uniform diagonal of dimension 2^n with eigenvalue 2^(-n), and the native
--- dashi_lean4 producer proves the corresponding spectral entropy n log 2.
--- Therefore the full-depth same-object weld is available from that producer.
+-- The native dashi_lean4 producer now closes two mathematical gaps:
+--   * full contract: S(rho_n) = n log 2;
+--   * explicit factorisation 2^(k+r)=2^k*2^r: the diagonal partial trace has
+--     eigenvalue 2^(-k), hence reduced entropy k log 2.
 --
--- What remains is the genuinely stronger RT subsystem theorem: upstream does
--- not define the reduced density matrix / partial trace for a depth-k subsystem
--- of a depth-n network.  We therefore keep that subsystem weld explicit and do
--- not promote the full-state theorem into the k <= n claim.
+-- Consequently the remaining RT seam is not the entropy algebra. It is the
+-- same-object carrier identification between upstream's `ZMod (2^n)` depth-k
+-- subtree and the explicit tensor-product/partial-trace factorisation used by
+-- the Lean producer. Upstream itself does not define that map.
 ------------------------------------------------------------------------
 
 upstreamRepository : String
@@ -53,16 +52,20 @@ record HolographicTensorNetworkClaimBoundary : Set where
     discreteExistentialEntropyTheoremOwned : Bool
 
     fullStateDensityMatrixEntropyWeldClosed : Bool
+    factorizedSubsystemEntropyWeldClosed : Bool
+
+    upstreamZModSubsystemFactorizationStillRequired : Bool
     subsystemReducedDensityMatrixWeldStillRequired : Bool
     upstreamSubsystemPartialTraceDefined : Bool
 
-    areaLawDoesNotByItselfComputeSubsystemVonNeumannEntropy : Bool
+    areaLawDoesNotByItselfComputeUpstreamSubsystemVonNeumannEntropy : Bool
 
 canonicalHolographicTensorNetworkClaimBoundary :
   HolographicTensorNetworkClaimBoundary
 canonicalHolographicTensorNetworkClaimBoundary =
   holographicTensorNetworkClaimBoundary
     true true true true
+    true true
     true true false
     true
 
@@ -90,33 +93,35 @@ sameObjectBoundaryEntropyCompiler :
 sameObjectBoundaryEntropyCompiler D = sameObjectEntropyWeld D
 
 ------------------------------------------------------------------------
--- Remaining analytic obligation: subsystem reduced state.
+-- Remaining same-object obligation: upstream subtree / tensor factorisation.
 ------------------------------------------------------------------------
 
-record SubsystemDensityMatrixEntropyObligation : Set₁ where
+record UpstreamSubsystemFactorisationObligation : Set₁ where
   field
-    FullDensityMatrix : Set
+    UpstreamBoundaryCarrier : Set
+    FactorizedBoundaryCarrier : Set
     ReducedDensityMatrix : Set
-    EntropyValue : Set
 
-    holographicContract : FullDensityMatrix
+    upstreamBoundaryCarrier : UpstreamBoundaryCarrier
+    factorizedBoundaryCarrier : FactorizedBoundaryCarrier
     reducedDensityMatrix : ReducedDensityMatrix
-    treeEntanglementEntropy : EntropyValue
-    vonNeumannEntropy : ReducedDensityMatrix → EntropyValue
 
-    partialTraceFromFullContract : Set
-    partialTraceFromFullContractProof : partialTraceFromFullContract
+    zModToTensorProductFactorisation : Set
+    zModToTensorProductFactorisationProof : zModToTensorProductFactorisation
 
-    reducedContractEntropyEqualsTreeEntropy : Set
-    reducedContractEntropyEqualsTreeEntropyProof :
-      reducedContractEntropyEqualsTreeEntropy
+    depthKSubtreeMatchesSelectedFactor : Set
+    depthKSubtreeMatchesSelectedFactorProof : depthKSubtreeMatchesSelectedFactor
+
+    upstreamPartialTraceMatchesFactorizedMarginal : Set
+    upstreamPartialTraceMatchesFactorizedMarginalProof :
+      upstreamPartialTraceMatchesFactorizedMarginal
 
 record SameObjectPromotionFirewall : Set where
   constructor sameObjectPromotionFirewall
   field
     fullStateEntropyIsNotAutomaticallySubsystemEntropy : Bool
-    reflexiveAreaLawIsNotSubsystemDensityMatrixSpectralCalculation : Bool
-    existentialEntropyWitnessDoesNotConstructReducedDensityMatrix : Bool
+    factorizedSubsystemEntropyIsNotAutomaticallyUpstreamSubtreeEntropy : Bool
+    reflexiveAreaLawIsNotCarrierIdentification : Bool
     tensorNetworkAreaLawDoesNotByItselfEstablishPhysicalAdSCFT : Bool
     birthmarkMemoryIsNotBoundaryEntanglementEntropyByDefinition : Bool
 
@@ -132,8 +137,17 @@ fullStateDensityMatrixEntropyWeldClosed : Bool
 fullStateDensityMatrixEntropyWeldClosed =
   ContractEntropy.fullStateEntropyMatchesTreeEntropyAtFullDepth
 
+factorizedSubsystemEntropyWeldClosed : Bool
+factorizedSubsystemEntropyWeldClosed =
+  ContractEntropy.factorizedSubsystemRTClosed
+
+upstreamZModSubsystemFactorizationStillRequired : Bool
+upstreamZModSubsystemFactorizationStillRequired =
+  ContractEntropy.upstreamZModSubsystemFactorizationStillRequired
+
 subsystemReducedDensityMatrixWeldStillRequired : Bool
-subsystemReducedDensityMatrixWeldStillRequired = true
+subsystemReducedDensityMatrixWeldStillRequired =
+  upstreamZModSubsystemFactorizationStillRequired
 
 ryuTakayanagiAreaLawShapeOwned : Bool
 ryuTakayanagiAreaLawShapeOwned = true
