@@ -48,10 +48,6 @@ staticNormalizationToGravityCalibrationStillRequired : Bool
 staticNormalizationToGravityCalibrationStillRequired =
   Firewall.normalizationToGravityCalibrationStillRequired
 
--- Once physical Lambda is actually calibrated as an inverse-area quantity, the
--- canonical safe fixture fixes the exact positive area target by
--- Lambda R^2 = 5/3.  The physical Lambda and final SI radius are not produced
--- by this compiler.
 dimensionedRadiusSquaredCompilerOwned : Bool
 dimensionedRadiusSquaredCompilerOwned = true
 
@@ -59,19 +55,12 @@ absoluteSIDecimalScaleStillRequired : Bool
 absoluteSIDecimalScaleStillRequired =
   Scale.absoluteSIDecimalScaleStillRequiresReceipt
 
--- The physical scalar metric response is NOT owned merely from Delta-V.  Only
--- the candidate Kottler algebra is owned before the same-state metric-response
--- receipt.
 differentialScalarMetricResponseOwned : Bool
 differentialScalarMetricResponseOwned = false
 
 differentialCandidateScalarMetricAlgebraOwned : Bool
 differentialCandidateScalarMetricAlgebraOwned = true
 
--- The differential response is no longer an independent theorem once BOTH
--- endpoint physical responses and one shared affine calibration / cosmological
--- renormalization convention are supplied.  Two arbitrary static receipts are
--- insufficient; the common affine pair is the least-privilege reuse package.
 staticPairToDifferentialCompilerOwned : Bool
 staticPairToDifferentialCompilerOwned =
   StaticPair.staticPairToDifferentialCompilerOwned
@@ -87,10 +76,6 @@ differentialSameStateMetricResponseStillRequiredBeforeStaticPair : Bool
 differentialSameStateMetricResponseStillRequiredBeforeStaticPair =
   DifferentialFirewall.sameStateMetricResponseDifferenceRequired
 
--- Exact odd/even lock-in algebra is owned twice: at the legacy normalization
--- level, and at the PHYSICAL Delta-Lambda level once a metric-response receipt
--- exists.  Reversal parity and common-background parity remain experimental
--- same-object receipts.
 differentialReversalEstimatorAlgebraOwned : Bool
 differentialReversalEstimatorAlgebraOwned = true
 
