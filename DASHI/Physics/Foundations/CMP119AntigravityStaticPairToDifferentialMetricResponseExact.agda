@@ -3,20 +3,26 @@ module DASHI.Physics.Foundations.CMP119AntigravityStaticPairToDifferentialMetric
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; _-_)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Data.Rational.Base using (ℚ; _+_; _*_)
 
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as Differential
 
 ------------------------------------------------------------------------
--- TWO STATIC SAME-STATE PROMOTIONS -> DIFFERENTIAL SAME-STATE PROMOTION
+-- TWO STATIC PROMOTIONS + ONE COMMON AFFINE CALIBRATION -> DIFFERENTIAL
 --
--- If the OFF and ON states have each already paid the physical static weld
--- from their source normalization coordinate to the renormalized gravitational
--- metric response, and both are declared under one common cosmological
--- renormalization convention, then no second source-difference identification
--- theorem is required.  Delta-Lambda is obtained by equality transport.
+-- Two endpoint static receipts alone do not identify Delta-Lambda.  The extra
+-- physical payment is one SHARED calibration/convention for the pair:
+--
+--   Lambda_off = a V_off + c
+--   Lambda_on  = a V_on  + c.
+--
+-- Once that shared affine relation and common cosmological renormalization
+-- convention are paid, the differential compiler derives
+--
+--   Delta Lambda = a (V_on - V_off)
+--
+-- and no second independent Delta-object theorem is needed.
 ------------------------------------------------------------------------
 
 record CommonRenormalizedVacuumPair : Set₁ where
@@ -27,8 +33,29 @@ record CommonRenormalizedVacuumPair : Set₁ where
     off : Static.VacuumNormalizationToGravityReceipt sourceOff
     on : Static.VacuumNormalizationToGravityReceipt sourceOn
 
+    normalizationToGravityScale : ℚ
+    commonAdditiveGravityRenormalization : ℚ
+
+    offAmplitudeUsesCommonAffineCalibration :
+      Static.renormalizedGravitationalAmplitude off
+      ≡ normalizationToGravityScale * sourceOff
+        + commonAdditiveGravityRenormalization
+
+    onAmplitudeUsesCommonAffineCalibration :
+      Static.renormalizedGravitationalAmplitude on
+      ≡ normalizationToGravityScale * sourceOn
+        + commonAdditiveGravityRenormalization
+
     CommonRenormalizationConvention : Set
     commonRenormalizationConvention : CommonRenormalizationConvention
+
+    OffUsesCommonRenormalizationConvention : Set
+    offUsesCommonRenormalizationConvention :
+      OffUsesCommonRenormalizationConvention
+
+    OnUsesCommonRenormalizationConvention : Set
+    onUsesCommonRenormalizationConvention :
+      OnUsesCommonRenormalizationConvention
 
 open CommonRenormalizedVacuumPair public
 
@@ -38,10 +65,18 @@ staticPairToDifferentialMetricResponse :
 staticPairToDifferentialMetricResponse pair = record
   { Differential.DifferentialMetricResponseReceipt.normalizationOff = sourceOff pair
   ; Differential.DifferentialMetricResponseReceipt.normalizationOn = sourceOn pair
+  ; Differential.DifferentialMetricResponseReceipt.normalizationToGravityScale =
+      normalizationToGravityScale pair
+  ; Differential.DifferentialMetricResponseReceipt.commonAdditiveGravityRenormalization =
+      commonAdditiveGravityRenormalization pair
   ; Differential.DifferentialMetricResponseReceipt.physicalLambdaOff =
       Static.renormalizedGravitationalAmplitude (off pair)
   ; Differential.DifferentialMetricResponseReceipt.physicalLambdaOn =
       Static.renormalizedGravitationalAmplitude (on pair)
+  ; Differential.DifferentialMetricResponseReceipt.offAffineCalibration =
+      offAmplitudeUsesCommonAffineCalibration pair
+  ; Differential.DifferentialMetricResponseReceipt.onAffineCalibration =
+      onAmplitudeUsesCommonAffineCalibration pair
   ; Differential.DifferentialMetricResponseReceipt.OffMetricResponseSameStateReceipt =
       Static.SameStateMetricVolumeReceipt (off pair)
   ; Differential.DifferentialMetricResponseReceipt.offMetricResponseSameStateReceipt =
@@ -54,24 +89,25 @@ staticPairToDifferentialMetricResponse pair = record
       CommonRenormalizationConvention pair
   ; Differential.DifferentialMetricResponseReceipt.commonCosmologicalRenormalizationConditionReceipt =
       commonRenormalizationConvention pair
-  ; Differential.DifferentialMetricResponseReceipt.normalizationDifferenceMatchesMetricResponseDifference =
-      cong₂ _-_
-        (Static.sourceNormalizationSameObjectAsRenormalizedAmplitude (on pair))
-        (Static.sourceNormalizationSameObjectAsRenormalizedAmplitude (off pair))
   }
 
 normalizationDifferenceMatchesMetricResponseDifference :
   (pair : CommonRenormalizedVacuumPair) →
-  sourceOn pair - sourceOff pair
-  ≡
-  Static.renormalizedGravitationalAmplitude (on pair)
-  - Static.renormalizedGravitationalAmplitude (off pair)
+  Differential.physicalDeltaLambda
+    (staticPairToDifferentialMetricResponse pair)
+  ≡ normalizationToGravityScale pair * (sourceOn pair - sourceOff pair)
 normalizationDifferenceMatchesMetricResponseDifference pair =
   Differential.normalizationDifferenceMatchesMetricResponseDifference
     (staticPairToDifferentialMetricResponse pair)
 
 independentDifferentialSameObjectTheoremRequiredAfterTwoStaticReceipts : Bool
-independentDifferentialSameObjectTheoremRequiredAfterTwoStaticReceipts = false
+independentDifferentialSameObjectTheoremRequiredAfterTwoStaticReceipts = true
+
+independentDifferentialSameObjectTheoremRequiredAfterCommonAffinePair : Bool
+independentDifferentialSameObjectTheoremRequiredAfterCommonAffinePair = false
+
+commonAffineCalibrationRequired : Bool
+commonAffineCalibrationRequired = true
 
 commonRenormalizationConventionRequired : Bool
 commonRenormalizationConventionRequired = true
