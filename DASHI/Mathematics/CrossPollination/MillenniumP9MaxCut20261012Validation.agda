@@ -3,8 +3,9 @@ module DASHI.Mathematics.CrossPollination.MillenniumP9MaxCut20261012Validation w
 ------------------------------------------------------------------------
 -- P9 MAX-CUT VALIDATION ROOT -- 2026-10-12
 --
--- Imports the current cumulative Millennium validation root plus the complete
--- dependency-ordered P-vs-NP tranche developed from the live master frontier.
+-- Imports the cumulative Millennium validation root plus the dependency-ordered
+-- P-vs-NP tranche from terminal DirectDP through the current conventional
+-- standard-machine / resource-closing frontier.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationValidation
@@ -28,7 +29,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeSemanticQuotationBri
 import DASHI.Mathematics.Complexity.PNotEqualsNPLiteralCookQuotationSelfInputNoGoExact
 
 ------------------------------------------------------------------------
--- Deterministic concrete-tape / fixed semantic quotation recut.
+-- Earlier deterministic-concrete recut retained for compatibility/firewalls.
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPDeterministicConcreteTapeExecutionExact
@@ -37,7 +38,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeExecutableCostBridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeFixedWidthQuotedRootExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPExecutableCodeSingletonNoGoExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedCandidateTapeExact
-
 import DASHI.Mathematics.Complexity.PNotEqualsNPDeterministicOppositeTapeRealizationExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeSemanticQuotationExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedConcreteTapeSemanticQuotationExact
@@ -45,13 +45,45 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeEndpointDecisionExa
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeFixedMaxCutClosureExact
 
 ------------------------------------------------------------------------
+-- Conventional finite-standard-machine recut.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact
+import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardReverseRunExact
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardClockExact
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact
+import DASHI.Mathematics.Complexity.PolynomialClockArithmeticExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact
+
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedStandardOppositeQuotationExact
+import DASHI.Mathematics.Complexity.StandardMachineSimulationExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedProgramStandardCompilerExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingStandardCompilerExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPStandardMachineMaxCutClosureExact
+
+------------------------------------------------------------------------
+-- Low-universe coded standard-machine cost-model recut.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact
+import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPCodedStandardCandidateBridgeExact
+import DASHI.Mathematics.Complexity.CodedStandardPolynomialCostModelExact
+
+------------------------------------------------------------------------
 -- TRUST BOUNDARY
 --
--- Importing this root exposes every new dependency to the Agda checker.
--- It does NOT inhabit the final open constructors:
---   * ConcreteTapeCandidateCoverage;
---   * FixedOppositeSelfQuotationCompiler.
--- Nor does it identify the abstract extensional cost model with a concrete tape
--- model: the singleton-code no-go proves that extra representation structure is
--- required.
+-- Importing this root does not prove P != NP.  In the concrete coded-standard
+-- model, candidate representation/coverage is now paid by projection.  The live
+-- Clay-critical constructor remains ResourceClosingCompiler: a finite standard
+-- target whose prefix arranges its own guarded Cook formula as the literal input
+-- to an explicit edge-for-edge simulation of D, followed by finite negation,
+-- with prefix + candidate + suffix closing to the SAME exact Cook budget T.
+--
+-- Ordinary cost-model map/precomposition/verifier/certificate closure and the
+-- established NP background must also be supplied for that same concrete model.
 ------------------------------------------------------------------------
