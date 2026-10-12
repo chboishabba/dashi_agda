@@ -16,7 +16,13 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 -- * unitary conjugation preserving density-matrix laws,
 -- * finite pointer-projector trace readouts,
 -- * linear and pointer entropy paths,
--- * derivative-backed t=0 entropy accelerations.
+-- * derivative-backed t=0 entropy accelerations,
+-- * a constructive finite coordinate-projector family with Hermitian,
+--   idempotent, pairwise-orthogonal, complete and diagonal spectral laws.
+--
+-- The last item pays only the mechanical projector algebra in a supplied
+-- diagonal chart.  It does not prove that an arbitrary selected CPO already
+-- comes with that chart/eigenbasis.
 --
 -- Agda records those as source-written/imported theorem authorities only until
 -- exact-head Lean kernel evidence is available.
@@ -102,6 +108,22 @@ record FiniteQuantumProducerStatus : Set where
     RealTimeDerivativeRestrictionSourceWrittenIsTrue :
       RealTimeDerivativeRestrictionSourceWritten ≡ true
 
+    StandardBasisProjectorFamilySourceWritten : Bool
+    StandardBasisProjectorFamilySourceWrittenIsTrue :
+      StandardBasisProjectorFamilySourceWritten ≡ true
+
+    DiagonalSpectralProjectorLawSourceWritten : Bool
+    DiagonalSpectralProjectorLawSourceWrittenIsTrue :
+      DiagonalSpectralProjectorLawSourceWritten ≡ true
+
+    ArbitrarySelectedCPOEigenbasisPaid : Bool
+    ArbitrarySelectedCPOEigenbasisPaidIsFalse :
+      ArbitrarySelectedCPOEigenbasisPaid ≡ false
+
+    SameObjectCPOChartAttachmentAutomatic : Bool
+    SameObjectCPOChartAttachmentAutomaticIsFalse :
+      SameObjectCPOChartAttachmentAutomatic ≡ false
+
     CPOEigenprojectorConstructionPaid : Bool
     CPOEigenprojectorConstructionPaidIsFalse :
       CPOEigenprojectorConstructionPaid ≡ false
@@ -128,6 +150,14 @@ canonicalFiniteQuantumProducerStatus = record
   ; ExponentialDerivativeSpineSourceWrittenIsTrue = refl
   ; RealTimeDerivativeRestrictionSourceWritten = true
   ; RealTimeDerivativeRestrictionSourceWrittenIsTrue = refl
+  ; StandardBasisProjectorFamilySourceWritten = true
+  ; StandardBasisProjectorFamilySourceWrittenIsTrue = refl
+  ; DiagonalSpectralProjectorLawSourceWritten = true
+  ; DiagonalSpectralProjectorLawSourceWrittenIsTrue = refl
+  ; ArbitrarySelectedCPOEigenbasisPaid = false
+  ; ArbitrarySelectedCPOEigenbasisPaidIsFalse = refl
+  ; SameObjectCPOChartAttachmentAutomatic = false
+  ; SameObjectCPOChartAttachmentAutomaticIsFalse = refl
   ; CPOEigenprojectorConstructionPaid = false
   ; CPOEigenprojectorConstructionPaidIsFalse = refl
   }
@@ -153,13 +183,19 @@ leanEntropyAccelerationSourceReceipt =
     "DASHI Lean: RequestProject.QuantumMereologyEntropyAcceleration"
     "Source-written entropy-path owner requiring actual HasDerivAt witnesses for both Carroll--Singh t=0 entropy accelerations. Source lineage only until exact-head Lean kernel evidence exists."
 
+leanStandardBasisProjectorSourceReceipt : Sources.AttributionReceipt
+leanStandardBasisProjectorSourceReceipt =
+  Sources.attribution-receipt
+    Sources.importedFormalTheoremSource
+    "DASHI Lean: RequestProject.QuantumMereologyStandardBasisProjector"
+    "Source-written finite coordinate rank-one projectors with Hermitian, idempotent, pairwise-orthogonal, complete and diagonal spectral laws. This pays projector algebra in a supplied diagonal chart only; arbitrary selected-CPO eigenbasis existence and same-object chart attachment remain open."
+
 dashiFiniteQuantumProducerCrossProverReceipt : Sources.AttributionReceipt
 dashiFiniteQuantumProducerCrossProverReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Aggregates only explicit Lean theorem-source authorities for the finite quantum producer and keeps Hamiltonian exponential generation, CPO eigenprojectors, physical authority, and exact-head kernel certification separate."
-
+    "Aggregates explicit Lean theorem-source authorities for the finite quantum producer. Coordinate projector algebra is now source-written, while arbitrary selected-CPO eigenbasis/chart attachment, physical authority, and exact-head kernel certification remain separate."
 
 leanHamiltonianExponentialSourceReceipt : Sources.AttributionReceipt
 leanHamiltonianExponentialSourceReceipt =
@@ -167,7 +203,6 @@ leanHamiltonianExponentialSourceReceipt =
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyHamiltonianExponential"
     "Source-written Hermitian-matrix to unitary exponential path using an explicitly pinned mathlib L2-operator C*-norm and exp_mem_unitary_of_mem_skewAdjoint. Source lineage only until exact-head Lean kernel evidence exists."
-
 
 leanExponentialDerivativeSourceReceipt : Sources.AttributionReceipt
 leanExponentialDerivativeSourceReceipt =
