@@ -11,6 +11,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalizedVacuumReadoutExact as
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumConstantBetaOrthogonalityExact as Orthogonality
 import DASHI.Physics.Foundations.CMP119LocalizedActionPlaquetteVacuumCoordinateBidiExact as Coordinates
 import DASHI.Physics.Foundations.CMP119AntigravityScalarVacuumSourceActionExact as ScalarVacuum
+import DASHI.Physics.Foundations.CMP119AntigravityPostScalarVacuumMaxCutExact as PostScalar
 import DASHI.Physics.Foundations.GRQFTSingleVacuumNormalizationScaleCovarianceExact as Scale
 import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
@@ -75,6 +76,22 @@ betaProjectionCannotRecoverPureVacuumConstant : Bool
 betaProjectionCannotRecoverPureVacuumConstant =
   Orthogonality.betaProjectionCannotRecoverVacuumConstant
 
+postScalarVacuumMetricDifferentiabilityStillOpen : Bool
+postScalarVacuumMetricDifferentiabilityStillOpen =
+  PostScalar.metricFamilyDifferentiabilityStillRequired
+
+postScalarVacuumSameStateMetricResponseStillOpen : Bool
+postScalarVacuumSameStateMetricResponseStillOpen =
+  PostScalar.renormalizedMetricResponseSameStateStillRequired
+
+postScalarVacuumCosmologicalRenormalizationStillOpen : Bool
+postScalarVacuumCosmologicalRenormalizationStillOpen =
+  PostScalar.cosmologicalRenormalizationConditionStillRequired
+
+postScalarVacuumEuclideanLorentzianContinuationStillOpen : Bool
+postScalarVacuumEuclideanLorentzianContinuationStillOpen =
+  PostScalar.sameStateEuclideanLorentzianContinuationStillRequired
+
 sourceSignAndControlMaxCutOwned : Bool
 sourceSignAndControlMaxCutOwned = true
 
@@ -102,10 +119,12 @@ record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
     sourceSignAndControlMaxCutOwned : Bool
 
     scalarVacuumRepresentationAloneIdentifiesPhysicalLambda : Bool
+    metricFamilyDifferentiabilityStillRequired : Bool
+    sameStateRenormalizedMetricResponseStillRequired : Bool
+    cosmologicalRenormalizationConventionStillRequired : Bool
+    sameStateEuclideanLorentzianContinuationStillRequired : Bool
     unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence : Bool
     unknownPositiveMultiplicativeMagnitudeBlocksAbsoluteDeviceSize : Bool
-    selectedSourceLorentzianVacuumContinuationStillOpen : Bool
-    additiveStaticVacuumRenormalizationStillOpen : Bool
     absoluteSIDeviceScaleStillOpen : Bool
     physicalControlToVacuumAmplitudeStillOpen : Bool
     dynamicTTModeProductionStillOpen : Bool
@@ -117,7 +136,7 @@ canonicalAntigravitySingleVacuumPhysicalPromotionFrontier =
   antigravity-single-vacuum-physical-promotion-frontier
     true true false true true false
     true false true true true true false true true
-    false false true true true true true true true
+    false true true true true false true true true true true
 
 -- Historical compatibility flags for the older all-LocalizedAction adapter.
 formalVacuumConstantCoordinateReadoutOwnedLegacy : Bool
