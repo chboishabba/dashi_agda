@@ -5,9 +5,11 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPStructuralPrefixConcreteWriteExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat.Base using (_≤_; s≤s)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -20,7 +22,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingBudgetNecessityEx
 
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
-import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
@@ -31,7 +32,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeSymbolWriteLocalityExact as Writ
 weakenHeadMarginTo :
   ∀ {State Symbol : Set}
     {small large : Nat}
-    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
+    {cells : List (Local.TapeCell State Symbol)} →
   small ≤ large →
   Margin.HeadMargin large cells →
   Margin.HeadMargin small cells
@@ -156,8 +157,6 @@ prefixConcreteWritesWithin structuralResource
   Writes.wellFormedRunErasesToWritesWithin
     (Reverse.concreteRun
       (reified (reifyStructuralPrefix structuralResource)))
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
 
 ------------------------------------------------------------------------
 -- RESOURCE CONSEQUENCE
