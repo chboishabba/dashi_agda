@@ -2,25 +2,24 @@
 """Exact finite audit of cubic-preserving monomial lifts of E6 simple reflections.
 
 Starts from the already-paid E8->E6 minuscule 27 / first-Tits M3^3 basis-label
-bridge.  The first-Tits cubic is
+bridge. The first-Tits cubic is N=det X+det Y+det Z-tr(XYZ).
 
-    N(X,Y,Z) = det X + det Y + det Z - tr(XYZ).
+For each true E6 simple reflection the transported permutation preserves the
+support of the 45 cubic monomials. We solve over F2 for signs epsilon_i such
+that e_i -> epsilon_i e_{p(i)} preserves every cubic coefficient exactly.
 
-For each true E6 simple reflection, the transported permutation of the 27 weight
-labels preserves the support of the 45 cubic monomials.  We solve over F2 for
-signs eps_i in {+1,-1} such that
+The selected lifts need not form a strict section of W(E6). Their square and
+Coxeter residuals are diagonal cubic-preserving 2-torsion. The residuals and
+their Weyl conjugates generate the full rank-6 diagonal sign symmetry group,
+so the resulting execution-grade monomial normalizer has order
 
-    e_i |-> eps_i e_{p(i)}
+    2^6 * |W(E6)| = 64 * 51840 = 3317760.
 
-preserves every cubic coefficient exactly.
-
-The resulting lifts are NOT asserted to give a strict section of W(E6).  Their
-squares / Coxeter words can close by diagonal cubic-preserving 2-torsion, which
-is the expected Weyl-normalizer / Tits-extension phenomenon.  The script emits
-those residual diagonal receipts explicitly rather than collapsing them.
+This is a Tits/Weyl-normalizer extension receipt, not an Agda-kernel proof of a
+split exact sequence or a full algebraic-group classification theorem.
 """
-from collections import Counter, defaultdict
-from itertools import permutations, product
+from collections import Counter, defaultdict, deque
+from itertools import permutations
 
 from check_e6_minuscule_first_tits_basis_bridge import (
     e6_side, first_tits_side, find_iso,
@@ -69,6 +68,20 @@ def solve_f2(masks, rhs, n):
     return x, n - len(pivots)
 
 
+def rank_masks(masks):
+    basis = {}
+    for value in masks:
+        x = value
+        while x:
+            pivot = x.bit_length() - 1
+            if pivot in basis:
+                x ^= basis[pivot]
+            else:
+                basis[pivot] = x
+                break
+    return len(basis)
+
+
 def sign_lift(permutation, terms):
     masks, rhs = [], []
     for mon, coeff in terms.items():
@@ -81,17 +94,13 @@ def sign_lift(permutation, terms):
         rhs.append(0 if target_coeff == coeff else 1)
     bits, nullity = solve_f2(masks, rhs, 27)
     assert bits is not None
-    signs = tuple(-1 if b else 1 for b in bits)
-    return signs, nullity
+    return tuple(-1 if b else 1 for b in bits), nullity
 
 
 def signed_compose(left, right):
     p, s = left
     q, t = right
-    return (
-        tuple(p[q[i]] for i in range(27)),
-        tuple(t[i] * s[q[i]] for i in range(27)),
-    )
+    return tuple(p[q[i]] for i in range(27)), tuple(t[i] * s[q[i]] for i in range(27))
 
 
 def signed_power(g, n):
@@ -131,29 +140,41 @@ def transform_terms(g, terms):
 
 
 def simple_e6_permutations():
-    weights, _, _ = e6_side()
-    target_weights, _, target_graph = first_tits_side()
-    source_weights, source_graph, _ = e6_side()
+    weights, source_graph, _ = e6_side()
+    _, _, target_graph = first_tits_side()
     iso = find_iso(source_graph, target_graph)
     inv = {v: k for k, v in iso.items()}
 
-    # Reconstruct the E6 root subsystem in the same doubled E8 coordinates.
     from check_e6_minuscule_first_tits_basis_bridge import e8_roots, reflect
     roots = e8_roots()
     e6 = [r for r in roots if r[5:] in ((-1,) * 3, (0,) * 3, (1,) * 3)]
     functional = (1, 7, 49, 343, 2401, 16807, 117649, 823543)
     positive = [r for r in e6 if sum(r[i] * functional[i] for i in range(8)) > 0]
     positive_set = set(positive)
-    simple = []
-    for root in positive:
-        if not any(tuple(root[i] - other[i] for i in range(8)) in positive_set for other in positive):
-            simple.append(root)
+    simple = [
+        root for root in positive
+        if not any(tuple(root[i] - other[i] for i in range(8)) in positive_set for other in positive)
+    ]
     assert len(simple) == 6
-
     index = {w: i for i, w in enumerate(weights)}
     source_perms = [tuple(index[reflect(w, r)] for w in weights) for r in simple]
-    transported = [tuple(iso[g[inv[t]]] for t in range(27)) for g in source_perms]
-    return transported
+    return [tuple(iso[g[inv[t]]] for t in range(27)) for g in source_perms]
+
+
+def sign_mask(signs):
+    out = 0
+    for i, s in enumerate(signs):
+        if s == -1:
+            out ^= 1 << i
+    return out
+
+
+def permute_mask(mask, permutation):
+    out = 0
+    for i in range(27):
+        if (mask >> i) & 1:
+            out ^= 1 << permutation[i]
+    return out
 
 
 def main():
@@ -163,7 +184,6 @@ def main():
     lifts = []
     solution_nullities = []
     for p in perms:
-        # Support is already the zero-weight triple relation.
         assert {tuple(sorted(p[i] for i in mon)) for mon in terms} == set(terms)
         signs, nullity = sign_lift(p, terms)
         g = (p, signs)
@@ -171,13 +191,25 @@ def main():
         lifts.append(g)
         solution_nullities.append(nullity)
 
+    # Full diagonal cubic-preserving sign group has rank 6.
+    diagonal_masks = []
+    for mon in terms:
+        mask = 0
+        for i in mon:
+            mask ^= 1 << i
+        diagonal_masks.append(mask)
+    _, diagonal_nullity = solve_f2(diagonal_masks, [0] * len(diagonal_masks), 27)
+    assert diagonal_nullity == 6
+
     pair_orders = [[perm_order(tuple(perms[i][perms[j][k]] for k in range(27))) for j in range(6)] for i in range(6)]
+    residual_masks = []
     square_residuals = []
     for g in lifts:
         sq = signed_power(g, 2)
         assert sq[0] == tuple(range(27))
         assert transform_terms(sq, terms) == terms
         square_residuals.append(Counter(sq[1]))
+        residual_masks.append(sign_mask(sq[1]))
 
     coxeter_residuals = []
     for i in range(6):
@@ -187,11 +219,26 @@ def main():
             assert word[0] == tuple(range(27))
             assert transform_terms(word, terms) == terms
             coxeter_residuals.append((i, j, m, Counter(word[1])))
+            residual_masks.append(sign_mask(word[1]))
 
     strict_section = all(r == Counter({1: 27}) for r in square_residuals) and all(
         r[3] == Counter({1: 27}) for r in coxeter_residuals
     )
     assert not strict_section
+
+    # Close residual kernel under Weyl conjugation. It exhausts the full
+    # rank-6 diagonal cubic-preserving sign symmetry group.
+    orbit = set(residual_masks)
+    queue = deque(residual_masks)
+    while queue:
+        mask = queue.popleft()
+        for p in perms:
+            image = permute_mask(mask, p)
+            if image not in orbit:
+                orbit.add(image)
+                queue.append(image)
+    assert rank_masks(orbit) == 6
+    assert len(orbit) == 64
 
     print('first_tits_cubic_monomials=45')
     print('simple_reflections=6')
@@ -199,12 +246,12 @@ def main():
     print('each_simple_reflection_has_signed_cubic_preserving_lift=true')
     print('sign_solution_affine_nullities=' + ','.join(map(str, solution_nullities)))
     print('strict_Weyl_section_from_selected_lifts=false')
-    print('diagonal_cubic_preserving_2_torsion_residuals=true')
-    print('interpretation=Tits/Weyl-normalizer extension; do not collapse to strict W(E6) linear section')
-    for i, residual in enumerate(square_residuals):
-        print(f'square_residual_{i}={dict(residual)}')
-    for i, j, m, residual in coxeter_residuals:
-        print(f'coxeter_residual_{i}_{j}_m{m}={dict(residual)}')
+    print('diagonal_cubic_preserving_2_torsion_rank=6')
+    print('diagonal_cubic_preserving_2_torsion_order=64')
+    print('residuals_generate_full_diagonal_kernel=true')
+    print('weyl_order=51840')
+    print('monomial_tits_extension_order=3317760')
+    print('interpretation=Tits/Weyl-normalizer extension; do not collapse to strict W(E6) section')
 
 
 if __name__ == '__main__':
