@@ -10,10 +10,12 @@ def text(path: str) -> str:
 def test_holography_bridge_reuses_existing_owners_and_keeps_firewalls():
     p = text("DASHI/Quantum/QuantumBirthmarkHolographyBridgeExact.agda")
     assert "HolographicBulkBoundaryReceipt" in p
+    assert "ClopenHolographicEffectiveFieldTheoryBoundary" in p
     assert "UVFinitenessHolographyTests" in p
     assert "AdelicSpectralClaimStrengthAuditExact" in p
     assert "EntanglementGeometryMereologyBridgeExact" in p
     assert "LargePosetContinuumLorentz31" in p
+    assert "clopenLowResidualTargetDoesNotIdentifyBirthmark" in p
     assert "bulkBoundaryDictionaryDoesNotImplyEntropicGravity" in p
     assert "areaBoundDoesNotIdentifyEntropyOfSameBoundaryState" in p
     assert "birthmarkDoesNotImplyRyuTakayanagi" in p
