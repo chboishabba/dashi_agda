@@ -88,12 +88,26 @@ def test_convrml_parallel_comparator_pays_hardware_capture_coordinates_and_prese
     assert "fresnelZonePlateArmPaid = false" in text
 
 
+def test_pld_exposure_provenance_collision_reuses_experimental_coordinate_design():
+    p = ROOT / "DASHI/Physics/Optics/BerkeleyPLDExposureProvenanceCoordinateExact.agda"
+    text = p.read_text()
+    assert "ExperimentalCoordinateDesignExact" in text
+    assert "paper100k" in text
+    assert "releasedCurrent100k" in text
+    assert "earlierAWB25k" in text
+    assert "paperVsReleasedCollision" in text
+    assert "paperAndAWBShareExposureProfile" in text
+    assert "exposureProfileDoesNotIdentifyDataset = true" in text
+    assert "exactDatasetExposureProvenancePaid = false" in text
+
+
 def test_optics_rollup_and_acquisition_maxcut_include_same_source_h_audit_and_capture_provenance_without_duplicate_source_owners():
     rollup = (ROOT / "DASHI/Physics/Optics/Everything.agda").read_text()
     assert "BerkeleyDiffuserCamPublicCalibrationExact" in rollup
     assert "BerkeleyDiffuserCamSourceOperatorExact" in rollup
     assert "BerkeleyDiffuserCamDepthConditioningExact" in rollup
     assert "BerkeleyConvRMLParallelComparatorExact" in rollup
+    assert "BerkeleyPLDExposureProvenanceCoordinateExact" in rollup
     assert "WallerDiffuserCamPublicArtifactExact" not in rollup
     assert "WallerDiffuserCamCodeForwardExact" not in rollup
 
@@ -107,6 +121,7 @@ def test_optics_rollup_and_acquisition_maxcut_include_same_source_h_audit_and_ca
     assert "parallelSensorIlluminationGeometryPinned = true" in maxcut
     assert "parallelExposureCalibrationPinned = true" in maxcut
     assert "releasedCaptureGainAndFormatPinned = true" in maxcut
+    assert "exposureProvenanceCollisionFormalised = true" in maxcut
     assert "parallelExposureProvenanceReconciled = false" in maxcut
     assert "berkeleyNumericPSFArrayIngested = false" in maxcut
     assert "translatedColumnNumericalReceiptCaptured = false" in maxcut
