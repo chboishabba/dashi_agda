@@ -7,6 +7,8 @@ import DASHI.Culture.PowersPlantationParadiseSynthesisExact as Synthesis
 import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performance
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
+import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as Cross
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 ------------------------------------------------------------------------
 -- Focused compile-time validation / regression surface.
@@ -41,6 +43,25 @@ _local-expansion-global-emancipation-gap-paid :
   INF.FactorsThrough Synthesis.localExpansion Synthesis.globalEmancipation → ⊥
 _local-expansion-global-emancipation-gap-paid =
   Synthesis.localExpansionDoesNotProveGlobalEmancipation
+
+_governed-standing-gap-paid :
+  INF.FactorsThrough Cross.culturalSurface Cross.standingCode → ⊥
+_governed-standing-gap-paid =
+  Cross.sameCulturalSurfaceCannotRecoverStanding
+
+_contestability-gap-paid :
+  INF.FactorsThrough Cross.culturalSurface Cross.contestabilityCode → ⊥
+_contestability-gap-paid =
+  Cross.sameCulturalSurfaceCannotRecoverContestability
+
+_material-cone-gap-paid :
+  INF.FactorsThrough Cross.culturalSurface Cross.materialConeCode → ⊥
+_material-cone-gap-paid =
+  Cross.sameCulturalSurfaceCannotRecoverMaterialCone
+
+_rooted-trace-paid :
+  Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
+_rooted-trace-paid = Cross.powersChapter5RootedTraceClaim
 
 _source-theorem-firewall-paid :
   Synthesis.powersSourceClaim ≡ Synthesis.dashiTheorem → ⊥
