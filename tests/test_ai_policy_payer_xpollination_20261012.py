@@ -34,11 +34,25 @@ def test_terminal_payer_consumer_sufficiency_surface() -> None:
     )
 
 
+def test_same_capability_scarcity_admission_surface() -> None:
+    require(
+        "DASHI/Economics/AISameCapabilityScarcityRentAdmission20261012Exact.agda",
+        [
+            "selectedPairPriceReceiptPaid",
+            "selectedPairCapabilityMatchedIsFalse",
+            "matchedScarcityRentAdmissionStillOpen",
+            "benchmarkNormalisationDoesNotCreateMatchedPair",
+            "scarcityRentAdmissionBoundary",
+        ],
+    )
+
+
 def test_rollup_wires_xpollinations() -> None:
     require(
         "DASHI/Economics/AIEntanglementEverything2026.agda",
         [
             "AIPolicyCausalAdmission20261012Exact",
             "AITerminalPayerConsumerSufficiency20261012Exact",
+            "AISameCapabilityScarcityRentAdmission20261012Exact",
         ],
     )
