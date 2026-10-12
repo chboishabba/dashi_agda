@@ -11,18 +11,22 @@ module DASHI.Moonshine.OggSSP2BCo1AugmentationTrivialityCriterionExact where
 --
 -- with J/J^2 ~= the natural 24-dimensional Co1 module.
 --
--- Therefore, if every composition factor of M|Co1 is in {1,274} and all four
--- relevant Hom spaces vanish
+-- Runtime status after the post-Brauer / CTBlocks tranche:
+--   * the actual Tate Co1 Jordan-Hoelder profile 1,274,1 is paid;
+--   * all four relevant Co1 Hom spaces vanish;
+--   * therefore the augmentation criterion is applicable to the actual Tate
+--     head.
 --
---   Hom(24,1), Hom(24,274), Hom(24 tensor 274,1),
---   Hom(24 tensor 274,274),
+-- What is NOT yet promoted is the generic finite-length extraction lemma:
+-- if the normal P action is nontrivial, choose the first nonzero augmentation
+-- layer and extract from it a nonzero Co1-equivariant arrow
 --
--- then every augmentation multiplication map is zero, hence JM=0 and P acts
--- trivially.  This is the exact theorem shape tested by the GAP Hom screen.
+--   24 tensor X -> Y,   X,Y in {1,274}.
 --
--- This Agda owner records the proof interface and fail-closed promotion state;
--- it does NOT replace the runtime Hom calculation or the separate proof that
--- the actual Tate head has Co1 composition profile 1,274,1.
+-- `OggSSP2BAugmentationArrowEliminationExact` already eliminates every such
+-- arrow once it is produced.  Thus this extraction lemma is the single
+-- remaining proof-theoretic seam on the augmentation route; no runtime premise
+-- is missing anymore.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -52,22 +56,55 @@ record Normal2Pow24TrivialityPromotion : Set where
     homReceiptRuntimePaid : Bool
     actualTateCo1ProfilePaid : Bool
     augmentationFiltrationCriterionApplicable : Bool
+    firstNonzeroLayerExtractionFormalized : Bool
     normal2Pow24ActionOnActualTateProvedTrivial : Bool
 
 canonicalPromotionBoundary : Normal2Pow24TrivialityPromotion
 canonicalPromotionBoundary =
   normal-2pow24-triviality-promotion
-    false false false false
+    true true true false false
+
+homReceiptRuntimeIsPaid :
+  Normal2Pow24TrivialityPromotion.homReceiptRuntimePaid
+    canonicalPromotionBoundary
+  ≡ true
+homReceiptRuntimeIsPaid = refl
+
+actualTateCo1ProfileIsPaid :
+  Normal2Pow24TrivialityPromotion.actualTateCo1ProfilePaid
+    canonicalPromotionBoundary
+  ≡ true
+actualTateCo1ProfileIsPaid = refl
+
+augmentationCriterionIsApplicable :
+  Normal2Pow24TrivialityPromotion.augmentationFiltrationCriterionApplicable
+    canonicalPromotionBoundary
+  ≡ true
+augmentationCriterionIsApplicable = refl
+
+firstNonzeroLayerExtractionStillOpen :
+  Normal2Pow24TrivialityPromotion.firstNonzeroLayerExtractionFormalized
+    canonicalPromotionBoundary
+  ≡ false
+firstNonzeroLayerExtractionStillOpen = refl
+
+normal2Pow24TrivialityStillOpen :
+  Normal2Pow24TrivialityPromotion.normal2Pow24ActionOnActualTateProvedTrivial
+    canonicalPromotionBoundary
+  ≡ false
+normal2Pow24TrivialityStillOpen = refl
 
 record CriterionStatus : Set where
   constructor criterion-status
   field
-    augmentationFiltrationArgumentFormalized : Bool
+    arrowEliminationFormalized : Bool
+    firstNonzeroLayerExtractionFormalized : Bool
     gapHomScreenImplemented : Bool
     co1Wedge276ProfileScreenImplemented : Bool
     centralizerBrauerProfileScreenImplemented : Bool
+    runtimePremisesPaid : Bool
     actualPromotionPaid : Bool
 
 canonicalCriterionStatus : CriterionStatus
 canonicalCriterionStatus =
-  criterion-status true true true true false
+  criterion-status true false true true true true false
