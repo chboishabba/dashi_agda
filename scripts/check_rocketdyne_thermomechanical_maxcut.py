@@ -43,11 +43,13 @@ EXPECT = {
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974ProgrammeChallengesAndRelatedWorkExact.agda": [
         "canonicalChallengeAtlas", "sandDustValveChallenge", "orificePluggingChallenge",
-        "lowThrottleOscillationChallenge", "vikingOperatingEnvelopeLineage", "interegenTradeoffReceipt"
+        "lowThrottleOscillationChallenge", "vikingOperatingEnvelopeLineage", "interegenTradeoffReceipt",
+        "valveSerialFailurePair", "sandAbradedTeflonSealMechanism"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974SiblingRCSComparisonExact.agda": [
         "bellNAS912996Comparator", "sameShuttleRequirementDifferentCoolingArchitecture",
-        "bellEnvironmentalCycleComparator", "siblingComparisonBoundary"
+        "bellEnvironmentalCycleComparator", "siblingComparisonBoundary", "valveContractOriginPaid",
+        "exactBellEngineValveAssignmentPaid"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974OperationalShuttleContextExact.agda": [
         "orbiterRCSChallengeSet", "operationalRCSArchitecture", "rocketdyneTechnologyNotFlightIdentity",
