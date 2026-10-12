@@ -11,11 +11,18 @@ import DASHI.Physics.Closure.SymbolicEinsteinHilbertModel as EH
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as VacuumStress
 import DASHI.Physics.Foundations.CMP119AntigravityLocalizedVacuumReadoutExact as Readout
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Firewall
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as Source
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 
 ------------------------------------------------------------------------
--- DIRECT SOURCE VACUUM -> COSMOLOGICAL STRESS
+-- SOURCE VACUUM READOUT -> CANDIDATE COSMOLOGICAL-STRESS SHAPE
+--
+-- The tensor algebra below is exact: any scalar amplitude can be placed on the
+-- already-owned vacuum-stress ray T = -lambda g.  It is deliberately NOT the
+-- physical promotion theorem saying that the CMP119 normalization/vacuum
+-- readout is itself the renormalized gravitational amplitude.  That promotion
+-- now passes through CMP119AntigravityVacuumNormalizationGravityFirewallExact.
 ------------------------------------------------------------------------
 
 symbolicVacuumVariationShape :
@@ -35,6 +42,9 @@ module _
     VacuumStress.vacuumStressAt
       (Readout.localizedVacuumValue source scale)
 
+  sourceVacuumStressAtScaleIsCandidateShape : Bool
+  sourceVacuumStressAtScaleIsCandidateShape = true
+
   sourceVacuumStressIsMinusLambdaMetric :
     ∀ scale (a b : Flat.Axis4) →
     sourceVacuumStressAtScale scale a b
@@ -49,6 +59,9 @@ record DirectSourceVacuumStressBoundary : Set where
   field
     actualSourceVacuumCoefficientFeedsStressDirectly : Bool
     symbolicVacuumVariationShapeAlreadyOwned : Bool
+    algebraicCandidateVacuumStressShapeOwned : Bool
+    metricVolumeSameObjectReceiptRequiredForPhysicalPromotion : Bool
+    cosmologicalRenormalizationReceiptRequiredForPhysicalPromotion : Bool
     fixedAmplitudeReceiptRequired : Bool
     pinnedNormalizedStressTensorRequired : Bool
     independentCosmologicalStressShapeRequired : Bool
@@ -57,4 +70,14 @@ record DirectSourceVacuumStressBoundary : Set where
 canonicalDirectSourceVacuumStressBoundary : DirectSourceVacuumStressBoundary
 canonicalDirectSourceVacuumStressBoundary =
   direct-source-vacuum-stress-boundary
-    true true false false false true
+    false true true true true true false false true
+
+actualSourceVacuumCoefficientFeedsStressDirectly : Bool
+actualSourceVacuumCoefficientFeedsStressDirectly =
+  Firewall.sourceVacuumReadoutAloneDeterminesPhysicalLambda
+
+metricVolumeSameObjectReceiptRequiredForPhysicalPromotion : Bool
+metricVolumeSameObjectReceiptRequiredForPhysicalPromotion = true
+
+cosmologicalRenormalizationReceiptRequiredForPhysicalPromotion : Bool
+cosmologicalRenormalizationReceiptRequiredForPhysicalPromotion = true
