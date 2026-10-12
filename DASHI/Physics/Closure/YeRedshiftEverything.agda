@@ -7,5 +7,6 @@ import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt
 import DASHI.Physics.Closure.BothwellYe2022PublishedGradientPayloadExact
 import DASHI.Physics.Closure.BothwellYe2022RedshiftComparisonExact
 import DASHI.Physics.Closure.BothwellYe2022GeodeticCalibrationExact
+import DASHI.Physics.Closure.BothwellYe2022ChronometricGeodesyBridgeExact
 import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatusExact
 import DASHI.Physics.Closure.WolfPrize2026UltracoldControlBridge
