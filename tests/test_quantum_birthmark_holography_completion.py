@@ -30,6 +30,17 @@ def test_area_capacity_reuses_all_existing_holography_owners():
     assert "areaCapacityDoesNotDetermineResidualInformationDensity" in p
 
 
+def test_holography_source_boundary_promotes_only_source_backed_claims():
+    p = text("DASHI/Quantum/QuantumBirthmarkHolographySourceBoundaryExact.agda")
+    assert "10.1103/PhysRevLett.96.181602" in p
+    assert "10.1007/s00220-016-2813-6" in p
+    assert "10.1007/JHEP04(2019)170" in p
+    assert "pAdicCFTTensorNetworkEquivalenceSourceBacked" in p
+    assert "pAdicAdSCFTAnalogueSourceBacked" in p
+    assert "physicalSpacetimeIsPAdic" in p
+    assert "birthmarkIsHolographicEntropy" in p
+
+
 def test_lorentz_horizon_bridge_keeps_jacobson_payment_explicit():
     p = text("DASHI/Quantum/QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact.agda")
     assert "LargePosetContinuumLorentz31Authority" in p
@@ -46,6 +57,7 @@ def test_lorentz_horizon_bridge_keeps_jacobson_payment_explicit():
 
 def test_quantum_rollup_registers_completion_owners():
     p = text("DASHI/Quantum/Everything.agda")
+    assert "import DASHI.Quantum.QuantumBirthmarkHolographySourceBoundaryExact" in p
     assert "import DASHI.Quantum.QuantumBirthmarkHolographicSameObjectWeldExact" in p
     assert "import DASHI.Quantum.QuantumBirthmarkHolographicCapacityExact" in p
     assert "import DASHI.Quantum.QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact" in p
