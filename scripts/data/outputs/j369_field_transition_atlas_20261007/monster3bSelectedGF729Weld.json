@@ -1,0 +1,52 @@
+{
+  "schema": "dashi.j369.monster3b.selected_gf729_weld.v1",
+  "source_producer": {
+    "pr": 1098,
+    "branch": "agent/e6-f3-exterior-square-maxcut-20261006",
+    "receipt_path": "outputs/monster3b_atlas_compression_field_selector_20261012.json",
+    "source_word": "g2 g1 g2^-1 g1 g2^-1"
+  },
+  "selected_modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
+  "compression_modulus_low_to_high": [1, 0, 1, 2, 0, 2, 1],
+  "affine_generator_change": "beta = 1 - alpha",
+  "beta_coordinates": [1, 2, 0, 0, 0, 0],
+  "polynomial_substitution_verified": true,
+  "compression_matrix": [
+    [0, 2, 1, 0, 2, 1],
+    [2, 0, 2, 1, 2, 2],
+    [0, 0, 0, 0, 1, 2],
+    [2, 0, 1, 2, 1, 2],
+    [2, 0, 2, 2, 0, 2],
+    [1, 0, 1, 0, 2, 2]
+  ],
+  "multiplication_by_beta_matrix": [
+    [1, 0, 0, 0, 0, 1],
+    [2, 1, 0, 0, 0, 0],
+    [0, 2, 1, 0, 0, 0],
+    [0, 0, 2, 1, 0, 0],
+    [0, 0, 0, 2, 1, 1],
+    [0, 0, 0, 0, 2, 2]
+  ],
+  "cyclic_rank_e0": 6,
+  "selected_beta_cyclic_rank_e0": 6,
+  "compression_krylov_determinant_mod3": 1,
+  "selected_beta_krylov_determinant_mod3": 2,
+  "intertwiner_Q": [
+    [1, 0, 0, 2, 1, 1],
+    [0, 0, 0, 2, 1, 2],
+    [0, 0, 2, 1, 0, 1],
+    [0, 0, 1, 1, 2, 0],
+    [0, 1, 1, 0, 1, 2],
+    [0, 2, 0, 1, 2, 2]
+  ],
+  "intertwiner_determinant_mod3": 2,
+  "intertwining_equation": "Q*T = M_beta*Q",
+  "intertwining_verified": true,
+  "swap01_witness": [1, 0, 0, 0, 0, 0],
+  "T_swap01_witness": [2, 0, 0, 0, 0, 0],
+  "swap01_T_witness": [2, 0, 0, 2, 2, 1],
+  "breaks_swap01_at_e0": true,
+  "selected_field_presentation_weld_paid": true,
+  "full_action_orbit_stabilizer_recognition_paid": false,
+  "boundary": "Exact finite computation identifies the source compression with multiplication by beta=1-alpha in the already-selected GF(729) presentation. Full downstream Monster action/orbit/stabilizer semantics and an Agda-kernel matrix proof remain separate."
+}
