@@ -25,7 +25,7 @@ EXPECT = {
         "currentTerminalFrontier", "archiveGeometryExhaustedForUniqueStress",
         "sameModelCalibrationStillOpen", "empiricalMaterialDependencePaid",
         "contemporaryComparatorReceipt", "experimentalCoordinateReceipt",
-        "qualificationFeedbackReceipt"
+        "qualificationFeedbackReceipt", "programmeChallengeReceipt", "siblingRCSComparisonReceipt"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974LatestSourceComparisonNote.agda": [
         "nasa2026NiobiumComparator", "canonicalContemporaryComparatorBoundary",
@@ -38,6 +38,14 @@ EXPECT = {
     "DASHI/Physics/Propulsion/Rocketdyne1974QualificationFeedbackWeldExact.agda": [
         "haynesAnomalyToRevisionCandidate", "wc103FollowupObservation", "formalApprovalStillUnpaid",
         "adaptiveQualificationBoundaryReceipt"
+    ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974ProgrammeChallengesAndRelatedWorkExact.agda": [
+        "canonicalChallengeAtlas", "sandDustValveChallenge", "orificePluggingChallenge",
+        "lowThrottleOscillationChallenge", "vikingOperatingEnvelopeLineage", "interegenTradeoffReceipt"
+    ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974SiblingRCSComparisonExact.agda": [
+        "bellNAS912996Comparator", "sameShuttleRequirementDifferentCoolingArchitecture",
+        "bellEnvironmentalCycleComparator", "siblingComparisonBoundary"
     ],
 }
 
