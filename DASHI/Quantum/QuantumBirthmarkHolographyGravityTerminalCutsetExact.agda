@@ -10,6 +10,8 @@ import DASHI.Quantum.QuantumBirthmarkHolographicResidualTransportExact as Transp
 import DASHI.Quantum.QuantumBirthmarkJacobsonLocalHorizonMaxCutExact as JacobsonCut
 import DASHI.Quantum.QuantumBirthmarkJacobsonNullConeRecoveryExact as NullCone
 import DASHI.Quantum.QuantumBirthmarkJacobsonFlat31RigidityBoundaryExact as FlatRigidity
+import DASHI.Quantum.QuantumBirthmarkJacobsonCouplingNormalizationBoundaryExact as Coupling
+import DASHI.Quantum.QuantumBirthmarkJacobsonEinsteinTensorBianchiBoundaryExact as EinsteinBianchi
 import DASHI.Quantum.QuantumBirthmarkRelativeEntropyJacobsonSourceBridgeExact as RelativeEntropy
 import DASHI.Quantum.QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact as Jacobson
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as EntropyGravity
@@ -17,10 +19,19 @@ import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as Entropy
 ------------------------------------------------------------------------
 -- TERMINAL CROSS-LANE CUTSET
 --
--- Finite RT entropy, consumer-relative birthmark transport, the abstract
--- all-null tensor-recovery compiler, concrete flat real 3+1 null-cone
--- rigidity, and a Lorentz-frame transport compiler are now separated from
--- the genuinely continuum/physical payments.
+-- Source-level algebraic/finite closure now includes:
+--   corrected finite RT;
+--   consumer-relative birthmark transport;
+--   null-direction tensor recovery;
+--   flat real 3+1 null-cone rigidity and Lorentz-frame transport;
+--   Jacobson coupling / 8*pi*G / Clausius null algebra;
+--   same-object flat 3+1 Ricci-stress metric-ambiguity composition;
+--   pointwise Einstein-tensor conversion;
+--   Bianchi + stress-conservation -> dLambda = 0 algebra;
+--   pinned Mathlib zero-fderiv -> constant theorem.
+--
+-- What remains is now same-object physical/QFT/continuum attachment and kernel
+-- verification, not another layer of untyped Einstein/entropy arithmetic.
 ------------------------------------------------------------------------
 
 record ClosedFiniteLayer : Set where
@@ -36,14 +47,23 @@ record ClosedFiniteLayer : Set where
     nullDirectionTensorRecoveryCompilerOwned : Bool
     flat31NullConeRigiditySourceWritten : Bool
     lorentzFrameTransportCompilerSourceWrittenInLean : Bool
+    jacobsonCouplingAlgebraSourceWrittenInLean : Bool
+    eightPiGSpecializationSourceWrittenInLean : Bool
+    clausiusNullAlgebraSourceWrittenInLean : Bool
+    flat31JacobsonEinsteinCompilerSourceWrittenInLean : Bool
+    einsteinTensorPointwiseAlgebraSourceWrittenInLean : Bool
+    bianchiLambdaGradientCompilerSourceWrittenInLean : Bool
+    mathlibZeroDerivativeConstancyOwned : Bool
     relativeEntropyHorizonFluxAuthorityOwned : Bool
 
 canonicalClosedFiniteLayer : ClosedFiniteLayer
 canonicalClosedFiniteLayer =
-  closedFiniteLayer true true true true true true true true true true true
+  closedFiniteLayer
+    true true true true true true true true true true
+    true true true true true true true true
 
 ------------------------------------------------------------------------
--- Physical / same-object leaves after the rigidity/transport max-cut.
+-- Physical / same-object leaves after algebraic max-cut.
 ------------------------------------------------------------------------
 
 record TerminalPhysicalCutset : Set where
@@ -56,19 +76,23 @@ record TerminalPhysicalCutset : Set where
     unruhRindlerKernelTheorem : Bool
     clausiusEntropyAreaSameObjectReceipt : Bool
     relativeEntropyAreaSameObjectPhysicalReceiptStillRequired : Bool
+    geometricHeatFluxReceiptStillRequired : Bool
     nullRaychaudhuriContinuumKernelTheorem : Bool
     sameObjectMatterStressEnergyReceipt : Bool
     flat31RigidityKernelReceiptStillRequired : Bool
+    couplingAlgebraKernelReceiptStillRequired : Bool
     physicalTangentFrameIdentificationStillRequired : Bool
     frameSmoothnessOrGlobalAssemblyStillRequired : Bool
-    einsteinEquationOfStateKernelDerivation : Bool
+    physicalLambdaFDerivZeroStillRequired : Bool
+    physicalOpenPreconnectedDomainStillRequired : Bool
     continuumPhysicalSolutionAttachment : Bool
     empiricalValidation : Bool
 
 canonicalTerminalPhysicalCutset : TerminalPhysicalCutset
 canonicalTerminalPhysicalCutset =
   terminalPhysicalCutset
-    true true true true true true true true true true true true true true true
+    true true true true true true true true true
+    true true true true true true true true true
 
 record TerminalPromotionFirewall : Set where
   constructor terminalPromotionFirewall
@@ -86,16 +110,19 @@ record TerminalPromotionFirewall : Set where
     finiteSourcedEinsteinDoesNotImplyContinuumJacobson : Bool
     flatRigidityDoesNotIdentifyPhysicalTangentFrame : Bool
     frameTransportDoesNotConstructPhysicalFrame : Bool
+    scalarClausiusAlgebraDoesNotProvePhysicalClausius : Bool
+    bianchiAlgebraDoesNotSupplyPhysicalStressEnergy : Bool
     nullContractedRelationDoesNotFixCosmologicalTerm : Bool
 
 canonicalTerminalPromotionFirewall : TerminalPromotionFirewall
 canonicalTerminalPromotionFirewall =
   terminalPromotionFirewall
-    true true true true true true true true true true true true true true
+    true true true true true true true true
+    true true true true true true true true
 
 statusStatement : String
 statusStatement =
-  "Corrected finite RT, consumer-relative birthmark transport, abstract all-null tensor recovery, flat real 3+1 null-cone rigidity, and Lorentz-frame transport are structurally/source paid. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius or relative-entropy/area payment, continuum Raychaudhuri, same-object sourced stress-energy, exact-head rigidity kernel receipt, construction/identification of the physical tangent frame and its smooth/global assembly, Einstein equation-of-state continuum derivation, physical solution attachment, and empirical validation."
+  "Finite RT, consumer-relative transport, flat null-cone rigidity/frame transport, Jacobson coupling and Clausius null algebra, flat 3+1 Ricci-stress composition, pointwise Einstein-tensor conversion, Bianchi dLambda algebra, and zero-fderiv constancy are source-paid. Live work is exact-head kernel verification plus same-object physical bulk/boundary and birthmark factorisation, local Rindler-Unruh and entropy-area/relative-entropy attachment, geometric heat flux, continuum Raychaudhuri, physical stress-energy, physical tangent-frame/smoothness, physical Lambda fderiv/domain identification, continuum solution attachment, and empirical validation."
 
 correctedFiniteRTEntropyClosed : Bool
 correctedFiniteRTEntropyClosed = RT.correctedRTSameObjectEntropy
@@ -133,11 +160,16 @@ relativeEntropyAreaSameObjectPhysicalReceiptStillRequired : Bool
 relativeEntropyAreaSameObjectPhysicalReceiptStillRequired =
   RelativeEntropy.relativeEntropyAreaSameObjectPhysicalReceiptStillRequired
 
+geometricHeatFluxReceiptStillRequired : Bool
+geometricHeatFluxReceiptStillRequired =
+  Coupling.geometricHeatFluxReceiptStillRequired
+
 nullRaychaudhuriContinuumKernelTheorem : Bool
 nullRaychaudhuriContinuumKernelTheorem = true
 
 sameObjectMatterStressEnergyReceipt : Bool
-sameObjectMatterStressEnergyReceipt = true
+sameObjectMatterStressEnergyReceipt =
+  EinsteinBianchi.sameObjectStressEnergyAuthorityStillRequired
 
 nullDirectionTensorRecoveryCompilerOwned : Bool
 nullDirectionTensorRecoveryCompilerOwned = NullCone.tensorRecoveryCompilerOwned
@@ -162,6 +194,46 @@ frameSmoothnessOrGlobalAssemblyStillRequired : Bool
 frameSmoothnessOrGlobalAssemblyStillRequired =
   FlatRigidity.frameSmoothnessOrGlobalAssemblyStillRequired
 
+jacobsonCouplingAlgebraSourceWrittenInLean : Bool
+jacobsonCouplingAlgebraSourceWrittenInLean =
+  Coupling.jacobsonCouplingAlgebraSourceWrittenInLean
+
+eightPiGSpecializationSourceWrittenInLean : Bool
+eightPiGSpecializationSourceWrittenInLean =
+  Coupling.eightPiGSpecializationSourceWrittenInLean
+
+clausiusNullAlgebraSourceWrittenInLean : Bool
+clausiusNullAlgebraSourceWrittenInLean =
+  Coupling.clausiusNullAlgebraSourceWrittenInLean
+
+couplingAlgebraKernelReceiptStillRequired : Bool
+couplingAlgebraKernelReceiptStillRequired =
+  Coupling.couplingAlgebraKernelReceiptStillRequired
+
+flat31JacobsonEinsteinCompilerSourceWrittenInLean : Bool
+flat31JacobsonEinsteinCompilerSourceWrittenInLean =
+  EinsteinBianchi.flat31JacobsonEinsteinCompilerSourceWrittenInLean
+
+einsteinTensorPointwiseAlgebraSourceWrittenInLean : Bool
+einsteinTensorPointwiseAlgebraSourceWrittenInLean =
+  EinsteinBianchi.einsteinTensorPointwiseAlgebraSourceWrittenInLean
+
+bianchiLambdaGradientCompilerSourceWrittenInLean : Bool
+bianchiLambdaGradientCompilerSourceWrittenInLean =
+  EinsteinBianchi.bianchiLambdaGradientCompilerSourceWrittenInLean
+
+mathlibZeroDerivativeConstancyOwned : Bool
+mathlibZeroDerivativeConstancyOwned =
+  EinsteinBianchi.mathlibZeroDerivativeConstancyOwned
+
+physicalLambdaFDerivZeroStillRequired : Bool
+physicalLambdaFDerivZeroStillRequired =
+  EinsteinBianchi.physicalLambdaFDerivZeroStillRequired
+
+physicalOpenPreconnectedDomainStillRequired : Bool
+physicalOpenPreconnectedDomainStillRequired =
+  EinsteinBianchi.physicalOpenPreconnectedDomainStillRequired
+
 -- Backwards-compatible broad status names retained for older consumers.
 continuumFibrewiseNullConeTransportStillRequired : Bool
 continuumFibrewiseNullConeTransportStillRequired =
@@ -173,6 +245,8 @@ nullConeRigidityTheoremStillRequired = true
 allNullDirectionsTensorRecovery : Bool
 allNullDirectionsTensorRecovery = nullConeRigidityTheoremStillRequired
 
+-- The finite/pointwise equation-of-state algebra is source-written; this broad
+-- legacy flag now denotes the remaining continuum same-object derivation.
 einsteinEquationOfStateKernelDerivation : Bool
 einsteinEquationOfStateKernelDerivation = true
 
@@ -181,7 +255,8 @@ jacobsonDifferentialGeometricDerivation =
   JacobsonCut.jacobsonPhysicalKernelDerivationStillRequired
 
 continuumPhysicalSolutionAttachment : Bool
-continuumPhysicalSolutionAttachment = true
+continuumPhysicalSolutionAttachment =
+  EinsteinBianchi.continuumEinsteinMatterSolutionAttachmentStillRequired
 
 empiricalValidation : Bool
 empiricalValidation = true
@@ -214,6 +289,12 @@ flatRigidityDoesNotIdentifyPhysicalTangentFrame = true
 
 frameTransportDoesNotConstructPhysicalFrame : Bool
 frameTransportDoesNotConstructPhysicalFrame = true
+
+scalarClausiusAlgebraDoesNotProvePhysicalClausius : Bool
+scalarClausiusAlgebraDoesNotProvePhysicalClausius = true
+
+bianchiAlgebraDoesNotSupplyPhysicalStressEnergy : Bool
+bianchiAlgebraDoesNotSupplyPhysicalStressEnergy = true
 
 nullContractedRelationDoesNotFixCosmologicalTerm : Bool
 nullContractedRelationDoesNotFixCosmologicalTerm =
