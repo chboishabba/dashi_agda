@@ -27,3 +27,8 @@ import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
+
+-- Terminal Nongin closure lives in Philosophy because it separates the
+-- historical/genealogical programme from optional later categorical research.
+import DASHI.Philosophy.NonginRoadmapClosureExact
+import DASHI.Philosophy.NonginRoadmapClosureValidation
