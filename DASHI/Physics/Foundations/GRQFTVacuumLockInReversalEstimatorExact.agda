@@ -8,22 +8,19 @@ open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Physics.Foundations.GRQFTVacuumAmplitudeDifferentialRenormalizationExact as Differential
+import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as Response
 
 ------------------------------------------------------------------------
 -- DIFFERENTIAL / REVERSAL LOCK-IN ALGEBRA
 --
--- If a physical reversal really sends the target signal S -> -S while leaving
--- one nuisance/background coordinate B unchanged, then the odd half-difference
--- exactly recovers S and the even half-sum exactly recovers B:
+-- Generic odd/even estimator algebra is exact.  Two signal levels are kept
+-- distinct:
 --
---   y+ =  S + B
---   y- = -S + B
---   (y+ - y-)/2 = S
---   (y+ + y-)/2 = B.
+--   1. the legacy/source-normalization modulation from the pre-gravity lane;
+--   2. the physical Delta-Lambda supplied by a same-state metric-response
+--      receipt.
 --
--- This is only the estimator algebra.  The experiment still owes same-object
--- receipts that the selected control produces the sign reversal and that the
--- nuisance term is common/even under that reversal.
+-- The former is not silently promoted into the latter.
 ------------------------------------------------------------------------
 
 half : ℚ
@@ -56,6 +53,10 @@ evenEstimatorRecoversCommonBackground :
     (negativeReadout signal background)
   ≡ background
 evenEstimatorRecoversCommonBackground = solve-∀
+
+------------------------------------------------------------------------
+-- LEGACY NORMALIZATION-LEVEL MODULATION
+------------------------------------------------------------------------
 
 vacuumPositiveReadout :
   Differential.CommonCountertermVacuumModulation → ℚ → ℚ
@@ -111,12 +112,72 @@ vacuumOddEstimatorIsCalibratedSourceDifference modulation background
     (Differential.sourceOn modulation)
     (Differential.sourceOff modulation)
 
+legacyPhysicalVacuumDifferenceNameIsNotYetGravitationalDeltaLambda : Bool
+legacyPhysicalVacuumDifferenceNameIsNotYetGravitationalDeltaLambda = true
+
+------------------------------------------------------------------------
+-- PHYSICAL METRIC-RESPONSE / DELTA-LAMBDA MODULATION
+------------------------------------------------------------------------
+
+metricResponsePositiveReadout :
+  Response.DifferentialMetricResponseReceipt → ℚ → ℚ
+metricResponsePositiveReadout receipt background =
+  positiveReadout (Response.physicalDeltaLambda receipt) background
+
+metricResponseNegativeReadout :
+  Response.DifferentialMetricResponseReceipt → ℚ → ℚ
+metricResponseNegativeReadout receipt background =
+  negativeReadout (Response.physicalDeltaLambda receipt) background
+
+metricResponseOddEstimator :
+  Response.DifferentialMetricResponseReceipt → ℚ → ℚ
+metricResponseOddEstimator receipt background =
+  oddEstimator
+    (metricResponsePositiveReadout receipt background)
+    (metricResponseNegativeReadout receipt background)
+
+metricResponseEvenEstimator :
+  Response.DifferentialMetricResponseReceipt → ℚ → ℚ
+metricResponseEvenEstimator receipt background =
+  evenEstimator
+    (metricResponsePositiveReadout receipt background)
+    (metricResponseNegativeReadout receipt background)
+
+metricResponseOddEstimatorRecoversPhysicalDeltaLambda :
+  ∀ receipt background →
+  metricResponseOddEstimator receipt background
+  ≡ Response.physicalDeltaLambda receipt
+metricResponseOddEstimatorRecoversPhysicalDeltaLambda receipt background =
+  oddEstimatorRecoversSignal
+    (Response.physicalDeltaLambda receipt)
+    background
+
+metricResponseEvenEstimatorRecoversCommonBackground :
+  ∀ receipt background →
+  metricResponseEvenEstimator receipt background ≡ background
+metricResponseEvenEstimatorRecoversCommonBackground receipt background =
+  evenEstimatorRecoversCommonBackground
+    (Response.physicalDeltaLambda receipt)
+    background
+
+metricResponseOddEstimatorIsScaledNormalizationDifference :
+  ∀ receipt background →
+  metricResponseOddEstimator receipt background
+  ≡ Response.normalizationToGravityScale receipt
+    * (Response.normalizationOn receipt - Response.normalizationOff receipt)
+metricResponseOddEstimatorIsScaledNormalizationDifference receipt background
+  rewrite metricResponseOddEstimatorRecoversPhysicalDeltaLambda receipt background
+        | Response.normalizationDifferenceMatchesMetricResponseDifference receipt =
+  solve-∀
+
 record VacuumLockInReversalBoundary : Set where
   constructor vacuum-lock-in-reversal-boundary
   field
     oddHalfDifferenceCancelsCommonEvenBackground : Bool
     evenHalfSumRecoversCommonBackground : Bool
-    differentialVacuumSignalFitsOddEstimatorAlgebra : Bool
+    normalizationLevelSignalFitsOddEstimatorAlgebra : Bool
+    physicalDeltaLambdaFitsOddEstimatorAfterMetricResponseReceipt : Bool
+    normalizationSignalAlreadyIsPhysicalDeltaLambda : Bool
     reversalParityStillNeedsPhysicalReceipt : Bool
     commonBackgroundParityStillNeedsPhysicalReceipt : Bool
     estimatorAlgebraAloneProvesPhysicalVacuumModulation : Bool
@@ -124,7 +185,7 @@ record VacuumLockInReversalBoundary : Set where
 canonicalVacuumLockInReversalBoundary : VacuumLockInReversalBoundary
 canonicalVacuumLockInReversalBoundary =
   vacuum-lock-in-reversal-boundary
-    true true true true true false
+    true true true true false true true false
 
 reversalParityStillNeedsPhysicalReceipt : Bool
 reversalParityStillNeedsPhysicalReceipt = true
