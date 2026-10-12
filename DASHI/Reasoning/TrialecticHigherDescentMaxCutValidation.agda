@@ -7,6 +7,8 @@ import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as Effective
 import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as Transport
 import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as Context
 import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
+import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
+import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact as C3Repair
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Ledger
 
 setBoundary : Effective.TrialecticSetEffectiveDescentBoundary
@@ -20,6 +22,12 @@ contextBoundary = Context.canonicalTrialecticGrothendieckContextFibrationBridgeB
 
 discreteBoundary : Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
 discreteBoundary = Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
+c3NoGoBoundary : C3NoGo.TrialecticC3GlobalNaturalityNoGoBoundary
+c3NoGoBoundary = C3NoGo.canonicalTrialecticC3GlobalNaturalityNoGoBoundary
+
+c3RepairBoundary : C3Repair.TrialecticC3EdgeResidualRepairBoundary
+c3RepairBoundary = C3Repair.canonicalTrialecticC3EdgeResidualRepairBoundary
 
 refinementBoundary : Ledger.TrialecticHigherDescentRefinementBoundary
 refinementBoundary = Ledger.canonicalTrialecticHigherDescentRefinementBoundary
@@ -57,6 +65,22 @@ equalityRestrictionFunctorsPaid = refl
 edgeCycleNotSiteRestriction :
   Discrete.edgeCycleIsSiteRestriction discreteBoundary ≡ false
 edgeCycleNotSiteRestriction = refl
+
+participantANotEnoughForGlobalC3 :
+  C3NoGo.participantANotSufficientForB c3NoGoBoundary ≡ true
+participantANotEnoughForGlobalC3 = refl
+
+naiveGlobalC3NaturalityNotPaid :
+  C3NoGo.naiveGlobalC3NaturalityPaid c3NoGoBoundary ≡ false
+naiveGlobalC3NaturalityNotPaid = refl
+
+selectedT6ResidualRepairsRotatedEdge :
+  C3Repair.selectedResidualReconstructsWholeRotatedEdge c3RepairBoundary ≡ true
+selectedT6ResidualRepairsRotatedEdge = refl
+
+fullOldT9RetentionNotRequiredForRotatedEdge :
+  C3Repair.oldFullT9EdgeRequiredForRotatedEdgeConsumer c3RepairBoundary ≡ false
+fullOldT9RetentionNotRequiredForRotatedEdge = refl
 
 transportEnrichedPresheafStillOpen :
   Ledger.transportEnrichedGroupoidPresheafReady refinementBoundary ≡ false
