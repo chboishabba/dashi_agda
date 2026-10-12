@@ -16,10 +16,13 @@ def test_final_reconciliation_surface() -> None:
             "selectedPublicEquityDynamicsPaid",
             "vercelOpenWeightTrajectoryPaid",
             "selectedBenchmarkPricePairPaid",
+            "sameModelSelfHostEngineeringCostPaid",
             "coreWeaveTwoSidedConcentrationPaid",
             "coreWeaveDebtCostSurfacePaid",
             "coreWeaveCapitalSpreadSignPaid",
             "coreWeaveReinvestmentCoveragePaid",
+            "coreWeaveCapexNonidentifiabilityPaid",
+            "coreWeaveAccountingLifePaid",
             "coreWeaveNamedPayerCapacityPaid",
             "terminalPayerConsumerIndexingPaid",
             "terminalPayerStillPartial",
@@ -28,7 +31,7 @@ def test_final_reconciliation_surface() -> None:
             "wholeComplexMarketDynamicsStillPartial",
             "globalOpenWeightTrajectoryStillOpen",
             "sameCapabilityScarcityRentStillOpen",
-            "providerServingMarginStillOpen",
+            "providerServingMarginStillPartial",
             "numericROICWACCStillOpen",
         ],
     )
@@ -64,6 +67,14 @@ def test_new_scoped_owners_exist() -> None:
         ["coreWeaveCashFundingShortfallIs10454", "coreWeaveReplacementCapexStillUnidentified"],
     )
     require(
+        "DASHI/Economics/AICoreWeaveCapexDecompositionNonidentifiability20261012Exact.agda",
+        ["aggregateCapexDoesNotDetermineReplacement", "replacementCoordinateSeparatesCollision"],
+    )
+    require(
+        "DASHI/Economics/AICoreWeaveAssetLifeObsolescenceBoundary20261012Exact.agda",
+        ["technologyEquipmentUsefulLifeMonthsIs72", "replacementScheduleStillOpen"],
+    )
+    require(
         "DASHI/Economics/AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact.agda",
         ["selectedNamedPayerCapacityIsPaid", "completeTerminalPayerProvenanceStillOpen"],
     )
@@ -79,6 +90,10 @@ def test_new_scoped_owners_exist() -> None:
         "DASHI/Economics/AISameCapabilityScarcityRentAdmission20261012Exact.agda",
         ["selectedPairCapabilityMatchedIsFalse", "matchedScarcityRentAdmissionStillOpen"],
     )
+    require(
+        "DASHI/Economics/AISameModelSelfHostCostBoundary20261012Exact.agda",
+        ["sameModelIdentityPaid", "engineeringCostDoesNotCreateProviderMargin"],
+    )
 
 
 def test_rollup_wires_final_reconciliation() -> None:
@@ -92,10 +107,13 @@ def test_rollup_wires_final_reconciliation() -> None:
             "AICoreWeaveDebtCostBoundary20261012Exact",
             "AICoreWeaveCapitalSpreadSign20261012Exact",
             "AICoreWeaveCapitalReinvestmentCoverage20261012Exact",
+            "AICoreWeaveCapexDecompositionNonidentifiability20261012Exact",
+            "AICoreWeaveAssetLifeObsolescenceBoundary20261012Exact",
             "AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact",
             "AITerminalPayerConsumerSufficiency20261012Exact",
             "AIPolicyCausalAdmission20261012Exact",
             "AISameCapabilityScarcityRentAdmission20261012Exact",
+            "AISameModelSelfHostCostBoundary20261012Exact",
             "AIMaxCutReconciliation20261012FinalExact",
         ],
     )
