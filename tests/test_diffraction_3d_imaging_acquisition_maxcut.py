@@ -17,6 +17,13 @@ REQUIRED = {
         "sourceUsesDepthFlipAndShift",
         "numericOperatorMatrixMaterialised",
     ],
+    "DASHI/Physics/Optics/BerkeleyDiffuserCamDepthConditioningExact.agda": [
+        "conditioningAuditScript",
+        "depthOnlySameLateralAuditExecutable",
+        "depthOnlyNumericalReceiptCaptured",
+        "translatedColumnRestrictedAuditPaid",
+        "globalSparseRestrictedKappaPaid",
+    ],
     "DASHI/Physics/Optics/BerkeleyLenslessInformationDesignSourceExact.agda": [
         "lenslessInfoDesignDOI",
         "lenslessInfoDesignCommit",
@@ -25,14 +32,25 @@ REQUIRED = {
         "photonCountCalibrationAvailable",
         "focusedLensFZPComparisonPaid",
     ],
+    "DASHI/Physics/Optics/BerkeleyConvRMLParallelComparatorExact.agda": [
+        "convRMLDOI",
+        "convRMLCommit",
+        "parallelLensDiffuserRMLAcquisitionPaid",
+        "sameSceneParallelAcquisitionPaid",
+        "matchedPhotonAcrossSystemsPaid",
+        "fresnelZonePlateArmPaid",
+    ],
     "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda": [
         "record Diffraction3DImagingAcquisitionMaxCut",
         "publicBerkeleyCalibrationArtifactPinned",
         "publicBerkeleySourceOperatorPinned",
+        "depthConditioningAuditExecutable",
         "berkeleyNumericPSFArrayIngested",
         "sameHRestrictedConditionNumberMeasured",
         "publishedInformationDesignExperimentPinned",
         "publishedRealRMLVsDiffuserCamComparisonPinned",
+        "parallelLensDiffuserRMLAcquisitionPinned",
+        "matchedPhotonAcrossParallelSystems",
         "focusedLensDiffuserFZPMatchedPhotonReceipt",
     ],
 }
@@ -62,15 +80,30 @@ def test_public_information_design_source_is_exactly_pinned():
     assert "f26873c2b58b82d84353bab2bf6edd478c5892a8" in text
 
 
-def test_acquisition_maxcut_keeps_irreducible_numeric_and_matched_optics_leaves_open():
+def test_convrml_same_scene_parallel_comparator_is_pinned_but_photon_and_fzp_claims_stay_open():
+    text = (ROOT / "DASHI/Physics/Optics/BerkeleyConvRMLParallelComparatorExact.agda").read_text(encoding="utf-8")
+    assert "10.1364/OE.608614" in text
+    assert "2602.04834" in text
+    assert "0a895cb372a3c7090904027ed7c82fc0a74133c5" in text
+    assert "parallelLensDiffuserRMLAcquisitionPaid = true" in text
+    assert "matchedPhotonAcrossSystemsPaid = false" in text
+    assert "fresnelZonePlateArmPaid = false" in text
+
+
+def test_acquisition_maxcut_keeps_only_numeric_calibration_and_stronger_matched_optics_leaves_open():
     text = (ROOT / "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda").read_text(encoding="utf-8")
     assert "berkeleyNumericPSFArrayIngested = false" in text
+    assert "depthOnlyNumericalReceiptCaptured = false" in text
+    assert "translatedColumnRestrictedAuditPaid = false" in text
     assert "sameHRestrictedConditionNumberMeasured = false" in text
+    assert "matchedPhotonAcrossParallelSystems = false" in text
     assert "focusedLensDiffuserFZPMatchedPhotonReceipt = false" in text
     assert "publicBerkeleyCalibrationArtifactPinned = true" in text
     assert "publicBerkeleySourceOperatorPinned = true" in text
+    assert "depthConditioningAuditExecutable = true" in text
     assert "publishedInformationDesignExperimentPinned = true" in text
     assert "publishedRealRMLVsDiffuserCamComparisonPinned = true" in text
+    assert "parallelLensDiffuserRMLAcquisitionPinned = true" in text
 
 
 def test_rollup_exports_acquisition_maxcut():
@@ -78,7 +111,9 @@ def test_rollup_exports_acquisition_maxcut():
     for owner in (
         "BerkeleyDiffuserCamPublicCalibrationExact",
         "BerkeleyDiffuserCamSourceOperatorExact",
+        "BerkeleyDiffuserCamDepthConditioningExact",
         "BerkeleyLenslessInformationDesignSourceExact",
+        "BerkeleyConvRMLParallelComparatorExact",
         "Diffraction3DImagingAcquisitionMaxCutExact",
     ):
         assert owner in text
