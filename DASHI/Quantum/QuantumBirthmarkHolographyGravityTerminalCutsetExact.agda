@@ -9,6 +9,7 @@ import DASHI.Quantum.QuantumBirthmarkHolographicSameObjectWeldExact as SameObjec
 import DASHI.Quantum.QuantumBirthmarkHolographicResidualTransportExact as Transport
 import DASHI.Quantum.QuantumBirthmarkJacobsonLocalHorizonMaxCutExact as JacobsonCut
 import DASHI.Quantum.QuantumBirthmarkJacobsonNullConeRecoveryExact as NullCone
+import DASHI.Quantum.QuantumBirthmarkJacobsonFlat31RigidityBoundaryExact as FlatRigidity
 import DASHI.Quantum.QuantumBirthmarkRelativeEntropyJacobsonSourceBridgeExact as RelativeEntropy
 import DASHI.Quantum.QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact as Jacobson
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as EntropyGravity
@@ -16,11 +17,11 @@ import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as Entropy
 ------------------------------------------------------------------------
 -- TERMINAL CROSS-LANE CUTSET
 --
--- The finite entropy algebra is closed on the corrected maximally-entangled
--- cut model. Consumer-relative birthmark transport has an exact generic
--- compiler. Jacobson's route has been recut against existing QFT/GR,
--- finite sourced-Einstein, continuum Einstein-matter, an explicit all-null
--- tensor-recovery compiler, and the 2026 modular relative-entropy horizon lane.
+-- Finite RT entropy, consumer-relative birthmark transport, the abstract
+-- all-null tensor-recovery compiler, and a concrete flat real 3+1 null-cone
+-- rigidity producer are now separated from the genuinely continuum/physical
+-- payments.  The flat rigidity theorem is source-written natively in Lean;
+-- this Agda owner keeps its kernel receipt and cross-carrier transport honest.
 ------------------------------------------------------------------------
 
 record ClosedFiniteLayer : Set where
@@ -34,14 +35,15 @@ record ClosedFiniteLayer : Set where
     birthmarkResidualTransportCompilerOwned : Bool
     jacobsonPaymentSurfaceRecutOwned : Bool
     nullDirectionTensorRecoveryCompilerOwned : Bool
+    flat31NullConeRigiditySourceWritten : Bool
     relativeEntropyHorizonFluxAuthorityOwned : Bool
 
 canonicalClosedFiniteLayer : ClosedFiniteLayer
 canonicalClosedFiniteLayer =
-  closedFiniteLayer true true true true true true true true true
+  closedFiniteLayer true true true true true true true true true true
 
 ------------------------------------------------------------------------
--- Physical / same-object leaves.
+-- Physical / same-object leaves after the flat 3+1 algebraic rigidity cut.
 ------------------------------------------------------------------------
 
 record TerminalPhysicalCutset : Set where
@@ -56,7 +58,9 @@ record TerminalPhysicalCutset : Set where
     relativeEntropyAreaSameObjectPhysicalReceiptStillRequired : Bool
     nullRaychaudhuriContinuumKernelTheorem : Bool
     sameObjectMatterStressEnergyReceipt : Bool
-    nullConeRigidityTheoremStillRequired : Bool
+    flat31RigidityKernelReceiptStillRequired : Bool
+    physicalTangentFrameIdentificationStillRequired : Bool
+    continuumFibrewiseNullConeTransportStillRequired : Bool
     einsteinEquationOfStateKernelDerivation : Bool
     continuumPhysicalSolutionAttachment : Bool
     empiricalValidation : Bool
@@ -64,7 +68,7 @@ record TerminalPhysicalCutset : Set where
 canonicalTerminalPhysicalCutset : TerminalPhysicalCutset
 canonicalTerminalPhysicalCutset =
   terminalPhysicalCutset
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true
 
 record TerminalPromotionFirewall : Set where
   constructor terminalPromotionFirewall
@@ -80,16 +84,17 @@ record TerminalPromotionFirewall : Set where
     correctedStateDoesNotIdentifyUpstreamState : Bool
     observableTransportDoesNotImplyBulkReconstruction : Bool
     finiteSourcedEinsteinDoesNotImplyContinuumJacobson : Bool
+    flatRigidityDoesNotIdentifyPhysicalTangentFrame : Bool
     nullContractedRelationDoesNotFixCosmologicalTerm : Bool
 
 canonicalTerminalPromotionFirewall : TerminalPromotionFirewall
 canonicalTerminalPromotionFirewall =
   terminalPromotionFirewall
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true
 
 statusStatement : String
 statusStatement =
-  "Corrected finite RT, generic consumer-relative birthmark transport, abstract all-null tensor recovery, and the 2026 relative-entropy/horizon-flux authority lane are structurally recorded. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius payment, same-object relative-entropy/area attachment, continuum Raychaudhuri, same-object sourced stress-energy, Lorentzian null-cone rigidity, Einstein equation-of-state derivation, continuum physical solution attachment, and empirical validation."
+  "Corrected finite RT, consumer-relative birthmark transport, abstract all-null tensor recovery, and flat real 3+1 null-cone rigidity are structurally/source paid. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius or relative-entropy/area payment, continuum Raychaudhuri, same-object sourced stress-energy, exact-head rigidity kernel receipt, physical tangent-frame identification and fibrewise transport, Einstein equation-of-state continuum derivation, physical solution attachment, and empirical validation."
 
 correctedFiniteRTEntropyClosed : Bool
 correctedFiniteRTEntropyClosed = RT.correctedRTSameObjectEntropy
@@ -136,11 +141,29 @@ sameObjectMatterStressEnergyReceipt = true
 nullDirectionTensorRecoveryCompilerOwned : Bool
 nullDirectionTensorRecoveryCompilerOwned = NullCone.tensorRecoveryCompilerOwned
 
-allNullDirectionsTensorRecovery : Bool
-allNullDirectionsTensorRecovery = NullCone.nullConeRigidityStillRequired
+flat31NullConeRigiditySourceWritten : Bool
+flat31NullConeRigiditySourceWritten =
+  FlatRigidity.finiteFlat31RigiditySourceWrittenInLean
 
+flat31RigidityKernelReceiptStillRequired : Bool
+flat31RigidityKernelReceiptStillRequired =
+  FlatRigidity.flat31RigidityKernelReceiptStillRequired
+
+physicalTangentFrameIdentificationStillRequired : Bool
+physicalTangentFrameIdentificationStillRequired =
+  FlatRigidity.physicalTangentFrameIdentificationStillRequired
+
+continuumFibrewiseNullConeTransportStillRequired : Bool
+continuumFibrewiseNullConeTransportStillRequired =
+  FlatRigidity.continuumFibrewiseNullConeTransportStillRequired
+
+-- Backwards-compatible broad status name retained for older consumers.  The
+-- old leaf has been split into kernel-receipt and continuum-transport pieces.
 nullConeRigidityTheoremStillRequired : Bool
-nullConeRigidityTheoremStillRequired = NullCone.nullConeRigidityStillRequired
+nullConeRigidityTheoremStillRequired = true
+
+allNullDirectionsTensorRecovery : Bool
+allNullDirectionsTensorRecovery = nullConeRigidityTheoremStillRequired
 
 einsteinEquationOfStateKernelDerivation : Bool
 einsteinEquationOfStateKernelDerivation = true
@@ -177,6 +200,9 @@ relativeEntropyDoesNotIdentifyRTEntropy =
 
 observableTransportDoesNotImplyBulkReconstruction : Bool
 observableTransportDoesNotImplyBulkReconstruction = true
+
+flatRigidityDoesNotIdentifyPhysicalTangentFrame : Bool
+flatRigidityDoesNotIdentifyPhysicalTangentFrame = true
 
 nullContractedRelationDoesNotFixCosmologicalTerm : Bool
 nullContractedRelationDoesNotFixCosmologicalTerm =
