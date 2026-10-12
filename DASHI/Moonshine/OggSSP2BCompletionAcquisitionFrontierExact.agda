@@ -3,12 +3,27 @@ module DASHI.Moonshine.OggSSP2BCompletionAcquisitionFrontierExact where
 ------------------------------------------------------------------------
 -- CANONICAL 2B COMPLETION ACQUISITION FRONTIER
 --
--- The programme is now a same-object extension problem, not a representation
--- discovery problem.  The finite target is much stronger than a Brauer/JH
--- fingerprint: we have an explicit stable-quotient screen, an exact whole-276
--- 2-singular Tate-defect target 12, a mod-4 integral C2 fingerprint, and now a
--- source-native plus/minus cokernel route reducing the literal Tate<->duad weld
--- to the actual norm-map placement inside the centralizer modules.
+-- The programme is now a same-object map problem, not a representation
+-- discovery problem.
+--
+-- PAID:
+--   * Tate/duad 2-regular Brauer ingress;
+--   * finite M22 10a/10b factors and M22:2 outer J2^5 source;
+--   * integral weight-two C2 decomposition and plus/minus Tate cokernel;
+--   * Co1 Sym2(24) -> wedge2(24) exact candidate;
+--   * actual Tate Co1 JH profile 1,274,1;
+--   * common/residual modular block-support separation;
+--   * unique residual degree-24 simple;
+--   * dim Hom_Co1(24,Sym2(24))=1 and explicit Frobenius spans that line.
+--
+-- SHARP SAME-OBJECT GATE:
+--   identify the actual rank-24 source central block projector and use the
+--   source-native norm's centralizer equivariance to obtain block naturality.
+--   Lean's support squeeze then forces residual rank 24, residual kernel 98280,
+--   and the common-lane equivalence automatically.  No independent common
+--   98280 map theorem remains.  The induced residual quotient map must then be
+--   recognized as Co1-equivariant; the already-paid unique Hom line forces it
+--   to be Frobenius, hence the Tate cokernel is wedge2(24)=duad276.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -36,30 +51,31 @@ record CompletionAcquisitionStatus : Set where
     finiteM22TenFactorsPaid : Bool
     finiteM22d2OuterJ2x5Paid : Bool
 
-    -- Preferred source-native Tate-cokernel route.
     integralWeightTwoC2DecompositionPaid : Bool
     tatePlusMinusCokernelStructurePaid : Bool
     co1Sym2ExteriorCandidateConstructed : Bool
-    co1AugmentationCriterionFormalized : Bool
-    frobenius24HomUniquenessScreenImplemented : Bool
+
+    actualTateCo1ProfilePaid : Bool
+    augmentationHomRuntimePaid : Bool
+    augmentationFirstNonzeroLayerExtractionPaid : Bool
+    normal2Pow24ActionTrivialityPaid : Bool
+
     frobenius24HomUniquenessRuntimePaid : Bool
-    centralizerMod2CancellationScreenImplemented : Bool
     centralizerMod2CancellationRuntimePaid : Bool
-    actualNormCommon98280IsomorphismPaid : Bool
+    residual24UniqueSimplePaid : Bool
+    common98280SupportSeparatedPaid : Bool
+
+    residualBlockProjectorSameObjectPaid : Bool
+    normCentralBlockNaturalityPaid : Bool
+    inducedResidualCo1EquivariancePaid : Bool
+    common98280NoLongerIndependentGate : Bool
     actualTateExteriorSquareWeldPaid : Bool
 
-    -- Independent/fallback extension tests.
     finiteDuadExplicitStableSubquotientScreenImplemented : Bool
-    finiteDuadExplicitStableSubquotientRuntimePaid : Bool
     exactDuadWhole276DefectTwelvePaid : Bool
     finiteDuadModFourFingerprintPaid : Bool
-    localOuterMonsterClassProbeImplemented : Bool
-    actualTateOuterDefectTwelvePaid : Bool
-    actualMoonshineModFourFingerprintPaid : Bool
     fi22NaturalTenSourceDonorPaid : Bool
-    fi22NaturalTenRuntimeIdentificationPaid : Bool
     monsterGF2RepresentationSourcePaid : Bool
-    monsterGF2ActionProgramsPresentInRepo : Bool
 
     actualTateStableTenSubquotientPaid : Bool
     actualOuterJ2x5OnSameTateQuotientPaid : Bool
@@ -73,19 +89,15 @@ canonicalCompletionAcquisitionStatus : CompletionAcquisitionStatus
 canonicalCompletionAcquisitionStatus =
   completion-acquisition-status
     true true true
-    true true true true
-    true false true false
-    false false
-    true false
     true true true
-    false false
-    true false
-    true false
-    true false
+    true true false false
+    true true true true
+    false false false true false
+    true true true true true
     false false
     2 false
     false false
-    "Preferred max-cut: execute the strengthened Co1/Tate-cokernel runtime tranche. It tests the actual centralizer decomposition matrix, the 1/274/1 Tate Jordan-Hoelder profile, augmentation-Hom triviality of the normal 2^24 action, uniqueness of the residual 24->Sym2(24) Frobenius map, and Brauer-support separation of the common 98280 lane. If those pass, the remaining vertical weld is one literal map theorem: identify the actual norm map on the common 98280 extension lane (injectivity then forces the nonzero residual 24 map, which uniqueness identifies with Frobenius). The Tate cokernel is then wedge^2(24)=duad276, and the existing stable-model transporter closes B'+C' on the actual Tate quotient. Keep the whole-276 defect-12, mod-4, Fi22 and explicit Monster-GF2 routes as independent falsifiers/fallbacks. Separately source the two remaining Mode5/2T orientation bits; 31/279 stay firewalled until the core closes."
+    "Preferred max-cut: instantiate the actual rank-24 central source-block projector for the source-native norm map. Centralizer-module linearity makes norm/block naturality formal; target residual projection is identity on the residual block. Lean's support squeeze then forces residual rank 24, kernel 98280 and common cancellation. Prove the induced residual quotient map is Co1-equivariant; the already-paid unique Hom_Co1(24,Sym2(24)) line forces Frobenius, so Tate276 = wedge2(24) = duad276. Existing stable-Q10/J2^5 and three-fibre compilers then close B'+C'. In parallel, the augmentation route has all runtime premises paid and only the generic first-nonzero-layer extraction lemma open. Keep the two Mode5/2T provenance bits separate; 31/279 remain firewalled until the core weld is same-object."
 
 postBrauerSemisimplifiedIngressAlreadyPaid :
   Brauer.semisimplifiedIngressPaid Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ true
@@ -105,6 +117,54 @@ co1ExteriorCandidateDimensionIs276 = refl
 frobeniusExteriorQuotientDimensionIs276 : Frob.exteriorQuotientDimension ≡ 276
 frobeniusExteriorQuotientDimensionIs276 = Frob.exteriorQuotientDimensionIs276
 
+actualTateCo1ProfileIsPaid :
+  Augmentation.Normal2Pow24TrivialityPromotion.actualTateCo1ProfilePaid
+    Augmentation.canonicalPromotionBoundary
+  ≡ true
+actualTateCo1ProfileIsPaid = Augmentation.actualTateCo1ProfileIsPaid
+
+augmentationHomRuntimeIsPaid :
+  Augmentation.Normal2Pow24TrivialityPromotion.homReceiptRuntimePaid
+    Augmentation.canonicalPromotionBoundary
+  ≡ true
+augmentationHomRuntimeIsPaid = Augmentation.homReceiptRuntimeIsPaid
+
+augmentationExtractionStillOpen :
+  Augmentation.Normal2Pow24TrivialityPromotion.firstNonzeroLayerExtractionFormalized
+    Augmentation.canonicalPromotionBoundary
+  ≡ false
+augmentationExtractionStillOpen = Augmentation.firstNonzeroLayerExtractionStillOpen
+
+frobeniusHomRuntimeIsPaid :
+  Frob.FrobeniusHomRigidityBoundary.homUniquenessRuntimePaid
+    Frob.canonicalFrobeniusHomRigidityBoundary
+  ≡ true
+frobeniusHomRuntimeIsPaid = Frob.homUniquenessRuntimeIsPaid
+
+centralizerRuntimeDecompositionIsPaid :
+  Cancel.CancellationRigidityBoundary.runtimeDecompositionPaid
+    Cancel.canonicalCancellationRigidityBoundary
+  ≡ true
+centralizerRuntimeDecompositionIsPaid = Cancel.runtimeDecompositionIsPaid
+
+residual24UniqueSimpleIsPaid :
+  Cancel.CancellationRigidityBoundary.residual24UniqueSimpleIdentified
+    Cancel.canonicalCancellationRigidityBoundary
+  ≡ true
+residual24UniqueSimpleIsPaid = Cancel.residual24UniqueSimpleIsPaid
+
+common98280NoLongerIndependentGate :
+  Cancel.CancellationRigidityBoundary.common98280SameObjectFollowsFromResidualBlock
+    Cancel.canonicalCancellationRigidityBoundary
+  ≡ true
+common98280NoLongerIndependentGate = Cancel.common98280NoLongerIndependentGate
+
+residualBlockProjectorStillOpen :
+  Cancel.CancellationRigidityBoundary.residualBlockProjectorSameObjectPaid
+    Cancel.canonicalCancellationRigidityBoundary
+  ≡ false
+residualBlockProjectorStillOpen = Cancel.residualBlockProjectorSameObjectStillOpen
+
 finiteWhole276DefectTargetIsTwelve : Defect12.iteratedTateDefectDimension ≡ 12
 finiteWhole276DefectTargetIsTwelve = Defect12.iteratedTateDefectIsTwelve
 
@@ -119,12 +179,6 @@ monsterGF2DimensionIs196882 = MonsterF2.monsterGF2DimensionExact
 
 remainingDefectSourceBitsIsTwo : DNoGo.remainingSourceDecisionCount ≡ 2
 remainingDefectSourceBitsIsTwo = DNoGo.remainingSourceDecisionCountIsTwo
-
-actualNormCommon98280StillOpen :
-  Cancel.CancellationRigidityBoundary.actualNormCommon98280IsomorphismPaid
-    Cancel.canonicalCancellationRigidityBoundary
-  ≡ false
-actualNormCommon98280StillOpen = Cancel.actualNormCommon98280StillOpen
 
 actualTateExteriorSquareWeldStillOpen :
   Cokernel.PlusMinusCokernelBoundary.actualTateIdentifiedWithWedge2_24
