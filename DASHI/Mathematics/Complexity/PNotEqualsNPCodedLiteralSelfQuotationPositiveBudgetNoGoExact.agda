@@ -3,27 +3,18 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralSelfQuotationPositiv
 ------------------------------------------------------------------------
 -- POSITIVE-BUDGET NO-GO FOR LITERAL OWN-COOK-FORMULA MATERIALISATION
 --
--- In the concrete coded-standard model, combine:
---
---   * actual Cook bitcode length >= guarded tableau width = I + 2*T;
---   * coded BooleanFormula input uses one NONBLANK symbol per bit;
---   * faithful structural simulation preserves nonblank count;
---   * the exact prefix can increase nonblank content by at most p;
---   * its guarded fixed seed starts with at most I nonblank symbols;
---   * p <= T from the exact phase decomposition.
---
--- Therefore
+-- In the concrete coded-standard model:
 --
 --   I + 2*T <= |ownCL| <= I + p <= I + T,
 --
--- forcing T = 0.  This rules out the current literal materialisation
--- architecture for every positive Cook budget.  It does NOT prove P != NP.
+-- so every structurally literal materialisation witness forces T = 0.
+-- This is a no-go for that proof architecture, NOT a proof of P != NP.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; s≤s)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
@@ -43,7 +34,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralPrefixEndpointContentE
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingBudgetNecessityExact as Budget
 
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
-import DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact as Structural
 import DASHI.Mathematics.Complexity.StructuralSimulationNonblankExact as StructuralNonblank
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
@@ -55,6 +45,7 @@ import DASHI.Mathematics.Complexity.CodedStandardFormulaInputNonblankExact as Co
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinBitCodeWidthLowerExact as CookWidth
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 import DASHI.Mathematics.Complexity.ConcreteTapeSymbolWriteLocalityExact as Writes
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardReverseRunExact as Reverse
 
 cancelLeftAddLe :
   ∀ (left a b : Nat) →
@@ -89,10 +80,18 @@ positiveDoubleStrictlyAboveSelf n doubleBelow =
     (suc n)
     (NatP.≤-trans strictGrowth doubleBelow)
   where
+    sumShape :
+      suc (suc n) + n ≡ suc n + suc n
+    sumShape
+      rewrite NatP.+-suc n n = refl
+
     strictGrowth :
       suc (suc n) ≤ suc n + suc n
     strictGrowth =
-      NatP.m≤m+n (suc (suc n)) n
+      subst
+        (λ rhs → suc (suc n) ≤ rhs)
+        sumShape
+        (NatP.m≤m+n (suc (suc n)) n)
 
 doubleLeSelfForcesZero :
   ∀ (n : Nat) →
@@ -106,10 +105,6 @@ doubleLeSelfForcesZero (suc n) proof =
         (λ doubled → doubled ≤ suc n)
         (twoTimesAsDouble (suc n))
         proof))
-
-------------------------------------------------------------------------
--- Specialize one polynomial candidate in the concrete coded-standard model.
-------------------------------------------------------------------------
 
 codedWitness :
   (closure : Cost.CodedStandardCostClosure)
@@ -130,10 +125,6 @@ codedClockedCandidate closure candidate =
   Bridge.codedWitnessToPolynomiallyClockedCandidate
     (codedWitness closure candidate)
 
-------------------------------------------------------------------------
--- Endpoint nonblank content is exactly the own Cook formula bit length.
-------------------------------------------------------------------------
-
 endpointNonblankExactOwnCookBits :
   (closure : Cost.CodedStandardCostClosure)
   (candidate :
@@ -150,7 +141,7 @@ endpointNonblankExactOwnCookBits :
       (Opposite.presentation
         (Resource.fixed (StructuralResource.resource structuralResource))))
     (Writes.eraseRow
-      (DASHI.Mathematics.Complexity.ConcreteTapeStandardReverseRunExact.finish
+      (Reverse.finish
         (PrefixWrite.reified
           (PrefixWrite.reifyStructuralPrefix structuralResource))))
   ≡
@@ -187,10 +178,6 @@ endpointNonblankExactOwnCookBits closure candidate structuralResource =
         (Guard.guardedInitialRow
           (Prefix.candidateOwnInput structuralResource)
           (Prefix.candidateOwnSteps structuralResource))
-
-------------------------------------------------------------------------
--- Upper: prefix writes can create at most p more nonblank target symbols.
-------------------------------------------------------------------------
 
 ownCookBitsUpperBySeedAndPrefix :
   (closure : Cost.CodedStandardCostClosure)
@@ -239,10 +226,6 @@ ownCookBitsUpperBySeedAndPrefix closure candidate structuralResource =
         startBound
         (NatP.≤-refl (Resource.prefixSteps base))
 
-------------------------------------------------------------------------
--- Lower: the actual Cook quotation contains at least I + 2*T bits.
-------------------------------------------------------------------------
-
 seedWidthBelowOwnCookBits :
   (closure : Cost.CodedStandardCostClosure)
   (candidate :
@@ -269,10 +252,6 @@ seedWidthBelowOwnCookBits closure candidate structuralResource =
   where
     base = StructuralResource.resource structuralResource
     fixed = Resource.fixed base
-
-------------------------------------------------------------------------
--- Main no-go: exact total Cook budget must be zero.
-------------------------------------------------------------------------
 
 literalStructuralSelfQuotationForcesZeroBudget :
   (closure : Cost.CodedStandardCostClosure)
@@ -341,10 +320,8 @@ literalStructuralSelfQuotationPositiveBudgetImpossible
 ------------------------------------------------------------------------
 -- ROADMAP CONSEQUENCE
 --
--- The former B constructor is overconstrained: explicit materialisation of the
--- full own Cook formula on the same single tape before simulating D cannot fit
--- any positive exact Cook budget.  Further work must therefore replace literal
--- materialisation with a resource-accounted virtual/streaming quotation or a
--- different same-semantics representation.  This is a no-go for one proof
--- architecture, not a lower bound for SAT and not a proof of P != NP.
+-- Explicit full own-Cook-formula materialisation on the same single tape before
+-- running D cannot fit any positive exact Cook budget. The next architecture
+-- must use resource-accounted virtual/streaming quotation, or another proved
+-- same-semantics representation. No SAT lower bound is inferred from this.
 ------------------------------------------------------------------------
