@@ -1,0 +1,15 @@
+module DASHI.Reasoning.NonginMaxCutEverything where
+
+-- Focused verification/import root for the Nongin semantic/depth/categorical
+-- max-cut.  Aggregate import only; it does not strengthen attribution.
+
+import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageExact
+import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageValidation
+import DASHI.Reasoning.NonginRecursiveObserverDepthTowerExact
+import DASHI.Reasoning.NonginRecursiveObserverDepthTowerValidation
+import DASHI.Reasoning.Trialectic369FullBoundaryNerveComparisonExact
+import DASHI.Reasoning.Trialectic369FullBoundaryNerveComparisonValidation
+import DASHI.Reasoning.TrialecticSetEffectiveDescentExact
+import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact
+import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
+import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
