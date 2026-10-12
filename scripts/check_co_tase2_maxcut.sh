@@ -13,6 +13,13 @@ python3 scripts/co_tase2_independent_theory_targets.py \
   data/co_tase2/independent_theory_targets_2026.json \
   --receipt /tmp/co_tase2_independent_theory_targets_receipt.json
 
+python3 scripts/co_tase2_sah_kagome_tb.py \
+  --receipt /tmp/co_tase2_sah_kagome_tb_receipt.json
+
+python3 scripts/co_tase2_spin_space_generator_bridge.py \
+  data/co_tase2/bns_194_268_magndata_operations.json \
+  --receipt /tmp/co_tase2_spin_space_generator_receipt.json
+
 python3 -m py_compile \
   scripts/co_tase2_bloch_symmetry.py \
   scripts/co_tase2_bns_operation_audit.py \
@@ -22,6 +29,8 @@ python3 -m py_compile \
   scripts/co_tase2_arpes_forward_fit.py \
   scripts/co_tase2_published_arpes_constraints.py \
   scripts/co_tase2_independent_theory_targets.py \
+  scripts/co_tase2_sah_kagome_tb.py \
+  scripts/co_tase2_spin_space_generator_bridge.py \
   scripts/co_tase2_dataset_download_probe.py
 
 python3 - <<'PY'
