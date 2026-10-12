@@ -2,15 +2,25 @@
 module DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Data.Rational.Base using (ℚ; _-_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 ------------------------------------------------------------------------
 -- DELTA NORMALIZATION != DELTA GRAVITATIONAL SOURCE
 --
--- Common additive normalization/counterterm pieces may cancel in a source
--- difference.  That is useful, but it does not by itself identify the
--- difference with a gravitational Delta-Lambda.  The physical lock-in source
--- is the SAME-STATE DIFFERENCE OF RENORMALIZED METRIC RESPONSES.
+-- The physical lock-in source is the SAME-STATE DIFFERENCE OF RENORMALIZED
+-- METRIC RESPONSES.  A shared affine normalization-to-gravity calibration
+--
+--   Lambda = a V + c
+--
+-- is sufficient for the common additive term c to cancel, leaving
+--
+--   Delta Lambda = a Delta V.
+--
+-- The scale a and the endpoint same-state metric-response receipts are physical
+-- inputs; they are not inferred from Delta V alone.
 ------------------------------------------------------------------------
 
 record DifferentialMetricResponseReceipt : Set₁ where
@@ -18,8 +28,21 @@ record DifferentialMetricResponseReceipt : Set₁ where
     normalizationOff : ℚ
     normalizationOn : ℚ
 
+    normalizationToGravityScale : ℚ
+    commonAdditiveGravityRenormalization : ℚ
+
     physicalLambdaOff : ℚ
     physicalLambdaOn : ℚ
+
+    offAffineCalibration :
+      physicalLambdaOff
+      ≡ normalizationToGravityScale * normalizationOff
+        + commonAdditiveGravityRenormalization
+
+    onAffineCalibration :
+      physicalLambdaOn
+      ≡ normalizationToGravityScale * normalizationOn
+        + commonAdditiveGravityRenormalization
 
     OffMetricResponseSameStateReceipt : Set
     offMetricResponseSameStateReceipt : OffMetricResponseSameStateReceipt
@@ -31,20 +54,35 @@ record DifferentialMetricResponseReceipt : Set₁ where
     commonCosmologicalRenormalizationConditionReceipt :
       CommonCosmologicalRenormalizationConditionReceipt
 
-    normalizationDifferenceMatchesMetricResponseDifference :
-      normalizationOn - normalizationOff
-      ≡ physicalLambdaOn - physicalLambdaOff
-
 open DifferentialMetricResponseReceipt public
 
 physicalDeltaLambda : DifferentialMetricResponseReceipt → ℚ
 physicalDeltaLambda receipt =
   physicalLambdaOn receipt - physicalLambdaOff receipt
 
+normalizationDifferenceMatchesMetricResponseDifference :
+  (receipt : DifferentialMetricResponseReceipt) →
+  physicalDeltaLambda receipt
+  ≡ normalizationToGravityScale receipt
+    * (normalizationOn receipt - normalizationOff receipt)
+normalizationDifferenceMatchesMetricResponseDifference receipt =
+  trans
+    (cong₂ _-_
+      (onAffineCalibration receipt)
+      (offAffineCalibration receipt))
+    (solve-∀
+      (normalizationToGravityScale receipt)
+      (normalizationOn receipt)
+      (normalizationOff receipt)
+      (commonAdditiveGravityRenormalization receipt))
+  where
+    open import Relation.Binary.PropositionalEquality using (cong₂)
+
 record DifferentialMetricResponseBoundary : Set where
   constructor differential-metric-response-boundary
   field
     normalizationDifferenceAloneDeterminesPhysicalDeltaLambda : Bool
+    sharedAffineCalibrationSufficesForAdditiveCancellation : Bool
     normalizationCountertermCancellationStillUseful : Bool
     sameStateMetricResponseDifferenceRequired : Bool
     commonCosmologicalRenormalizationConditionRequired : Bool
@@ -54,7 +92,7 @@ record DifferentialMetricResponseBoundary : Set where
 canonicalDifferentialMetricResponseBoundary : DifferentialMetricResponseBoundary
 canonicalDifferentialMetricResponseBoundary =
   differential-metric-response-boundary
-    false true true true true true
+    false true true true true true true
 
 normalizationDifferenceAloneDeterminesPhysicalDeltaLambda : Bool
 normalizationDifferenceAloneDeterminesPhysicalDeltaLambda = false
