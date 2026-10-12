@@ -3,37 +3,34 @@ module DASHI.Moonshine.OggSSPKernelFieldActionAcquisitionFrontierExact where
 ------------------------------------------------------------------------
 -- RICHER-ACTION ACQUISITION FRONTIER FOR CANONICAL GF(3^6) RECOGNITION
 --
--- The standard finite-Heisenberg/symplectic structure alone does not select
--- the chosen GF(729) multiplication: swap01 preserves that paid structure and
--- changes the selected product.
+-- The standard finite-Heisenberg/symplectic carrier alone does not select the
+-- chosen GF(729) product: swap01 preserves that paid structure and changes the
+-- selected multiplication.
 --
--- The external-acquisition wall is now materially closed by PR #1098.  Exact
--- ATLAS 2.Suz / 2.Suz:2 GF(3)^12 matrix bytes have been acquired, the unique
--- inner alternating form and same-basis normalization have been computed, and
--- a concrete source word
+-- The former EXTERNAL field-action acquisition seam is now closed at exact
+-- finite-runtime level by PR #1098 + this branch:
 --
---     g2 g1 g2^-1 g1 g2^-1
+-- * actual ATLAS 2.Suz / 2.Suz:2 GF(3)^12 bytes are vendored;
+-- * the inner source determines the unique alternating form and the same-basis
+--   normalization to repository X6 + X6*;
+-- * all short source words are screened by canonical compression pi_X g iota_X;
+-- * a strict-symplectic depth-eight word
 --
--- yields an X6 compression T with irreducible degree-six minimal polynomial,
--- cyclic rank six and an explicit swap01-breaking witness.
+--       g1 g2^-1 g1 g2 g1 g2^-1 g1 g2^-1
 --
--- Crucially the word does NOT stabilize X6.  The correct operator is the
--- compression pi_X g iota_X; Lagrangian stabilization was an unnecessary
--- stronger premise.
+--   has a degree-six, swap-breaking X6 compression;
+-- * in the already-selected GF(729) it is explicitly conjugate to
+--   multiplication by delta=(0,1,0,1,1,0), whose multiplicative order is 728;
+-- * therefore its powers give one 728-element orbit on the punctured field with
+--   trivial stabilizer;
+-- * because the source word has similitude multiplier 1, #1098 also supplies a
+--   center-preserving Heisenberg lift at executable exact-matrix level.
 --
--- This branch independently closes the selected-presentation gap:
---
---   selected f(alpha) = alpha^6 + alpha^5 + alpha^4 + 1,
---   beta = 1 - alpha,
---   f(1-x) = x^6 - x^5 - x^3 + x^2 + 1,
---
--- exactly the compression polynomial.  An explicit invertible matrix Q with
--- det(Q)=2 mod 3 satisfies Q T = M_beta Q.
---
--- Therefore the remaining field debt is no longer source acquisition or a
--- polynomial/cardinality coincidence.  The finite selected GF729 presentation
--- weld is paid by executable exact arithmetic.  What remains is Agda-kernel
--- certification and the stronger Monster action/orbit/stabilizer semantics.
+-- Thus the live residual is no longer "find a six-dimensional field operator".
+-- It is same-object Monster semantics: construct the actual phase-resolved
+-- zeta-sector state/action and identify the Fin-90 multiplicity action, then
+-- reuse the existing translation-descent compiler.  Concrete matrix identities
+-- also remain Agda-kernel-pending.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -161,10 +158,15 @@ record FieldActionAcquisitionBoundary : Set where
     compressionRouteRequiresLagrangianStabilizer : Bool
     actualDegreeSixCompressionPaid : Bool
     actualSwapBreakingPaid : Bool
-    selectedGF729AffineGeneratorWeldPaid : Bool
-    explicitSelectedGF729IntertwinerRuntimePaid : Bool
+    selectedGF729PresentationWeldPaid : Bool
+    selectedGF729PrimitiveMultiplicativeActionPaid : Bool
+    preferredPrimitiveSourceWordCenterPreserving : Bool
+    selectedPuncturedOrbit728Paid : Bool
+    selectedPuncturedStabilizerTrivialPaid : Bool
     agdaKernelMatrixIntertwinerPaid : Bool
-    fullMonsterActionOrbitStabilizerRecognitionPaid : Bool
+    actualPhaseResolvedMonsterSectorActionPaid : Bool
+    fin90MultiplicityActionIdentified : Bool
+    fullMonsterSemanticRecognitionPaid : Bool
     note : String
 open FieldActionAcquisitionBoundary public
 
@@ -172,14 +174,15 @@ canonicalFieldActionAcquisitionBoundary : FieldActionAcquisitionBoundary
 canonicalFieldActionAcquisitionBoundary =
   field-action-acquisition-boundary
     true true true true true
-    true
-    true
-    true
-    false
+    true true true false
     (Weld.degreeSixCompressionReceiptPaid Weld.canonicalBoundary)
     (Weld.swap01BrokenByCompression Weld.canonicalBoundary)
-    (Weld.affineBetaEqualsOneMinusAlphaLocated Weld.canonicalBoundary)
     (Weld.selectedGF729PresentationWeldPaid Weld.canonicalBoundary)
+    (Weld.selectedGF729MultiplicativeActionWeldPaid Weld.canonicalBoundary)
+    (Weld.centerPreservingPrimitiveActionWeldPaid Weld.canonicalBoundary)
+    (Weld.selectedGF729PuncturedOrbit728Paid Weld.canonicalBoundary)
+    (Weld.selectedGF729PuncturedStabilizerTrivialPaid Weld.canonicalBoundary)
     (Weld.agdaKernelIntertwinerProofPaid Weld.canonicalBoundary)
-    (Weld.fullActionOrbitStabilizerRecognitionPaid Weld.canonicalBoundary)
-    "The field-source acquisition seam is closed at the exact finite level: real ATLAS bytes -> same-basis 12D computation -> degree-six X6 compression -> beta=1-alpha -> explicit Q conjugacy to the selected GF(729) presentation. The surviving obligations are kernel certification and the stronger Monster action/orbit/stabilizer semantic recognition."
+    false false
+    (Weld.fullMonsterSemanticActionRecognitionPaid Weld.canonicalBoundary)
+    "Real ATLAS bytes and one strict-symplectic source word now pay the selected GF(729) presentation plus primitive 728-cycle/trivial-stabilizer action at exact finite runtime level. The field-acquisition problem is closed. Remaining work is the actual phase-resolved Monster zeta-sector/Fin-90 same-object action, Agda kernelization of concrete matrices, and downstream normalizer/multiplicity semantics."
