@@ -4,7 +4,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityVacuumExtensivityMetricRespons
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Closure.SymbolicEinsteinHilbertModel as EH
@@ -99,8 +99,7 @@ receiptVacuumVariation :
 receiptVacuumVariation receipt h =
   cong
     (λ coefficient → coefficient * volumeVariation (family receipt) h)
-    (Agda.Builtin.Equality.sym
-      (finiteScalarIsVacuumDensityCoefficient receipt))
+    (sym (finiteScalarIsVacuumDensityCoefficient receipt))
 
 record VacuumExtensivityMetricResponseBoundary : Set where
   constructor vacuum-extensivity-metric-response-boundary
