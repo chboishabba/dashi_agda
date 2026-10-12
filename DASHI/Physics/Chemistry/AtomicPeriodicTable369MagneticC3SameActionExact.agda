@@ -15,6 +15,8 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3SameActionExact w
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Vec using ([]; _∷_)
+open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
+  using (neg; zer; pos)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.TriadicFiniteQuotient as Quotient
@@ -29,9 +31,9 @@ translatePositive residue = Arithmetic.addResidue residue Characters.rPos
 translatePositiveOrderThree :
   (r : Quotient.Residue3Pow Quotient.one) ->
   translatePositive (translatePositive (translatePositive r)) ≡ r
-translatePositiveOrderThree (Triadic.negativeTrit ∷ []) = refl
-translatePositiveOrderThree (Triadic.zeroTrit ∷ []) = refl
-translatePositiveOrderThree (Triadic.positiveTrit ∷ []) = refl
+translatePositiveOrderThree (neg ∷ []) = refl
+translatePositiveOrderThree (zer ∷ []) = refl
+translatePositiveOrderThree (pos ∷ []) = refl
 
 ternaryStepIsPositiveTranslation :
   (x : C3.DepthOneKernel) ->
