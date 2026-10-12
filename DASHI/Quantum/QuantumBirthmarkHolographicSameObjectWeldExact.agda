@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Quantum.QuantumBirthmarkHolographicContractEntropyExact as ContractEntropy
+
 ------------------------------------------------------------------------
 -- SAME-OBJECT HOLOGRAPHIC ENTROPY WELD
 --
@@ -16,10 +18,17 @@ open import Agda.Builtin.String using (String)
 --   treeEntanglementEntropy k = k * log 2
 -- and proves the corresponding minimal-cut area-law identity by rfl.
 -- It also defines holographicContract, a boundary density matrix.
--- What it does NOT prove is that a von-Neumann entropy computed from that
--- holographicContract is treeEntanglementEntropy k.  This owner names exactly
--- that same-object residual and provides a typed compiler once such a proof is
--- supplied.  It does not manufacture the missing spectral/logarithmic proof.
+--
+-- The full-state gap is now sharpened/partly closed by
+-- `QuantumBirthmarkHolographicContractEntropyExact`: the inspected contract is
+-- uniform diagonal of dimension 2^n with eigenvalue 2^(-n), and the native
+-- dashi_lean4 producer proves the corresponding spectral entropy n log 2.
+-- Therefore the full-depth same-object weld is available from that producer.
+--
+-- What remains is the genuinely stronger RT subsystem theorem: upstream does
+-- not define the reduced density matrix / partial trace for a depth-k subsystem
+-- of a depth-n network.  We therefore keep that subsystem weld explicit and do
+-- not promote the full-state theorem into the k <= n claim.
 ------------------------------------------------------------------------
 
 upstreamRepository : String
@@ -42,22 +51,23 @@ record HolographicTensorNetworkClaimBoundary : Set where
     holographicContractDefined : Bool
     ryuTakayanagiAreaLawShapeOwned : Bool
     discreteExistentialEntropyTheoremOwned : Bool
-    densityMatrixEntropyWeldRequired : Bool
-    vonNeumannEntropyOfContractProvedUpstream : Bool
-    areaLawDoesNotComputeVonNeumannEntropyOfContract : Bool
+
+    fullStateDensityMatrixEntropyWeldClosed : Bool
+    subsystemReducedDensityMatrixWeldStillRequired : Bool
+    upstreamSubsystemPartialTraceDefined : Bool
+
+    areaLawDoesNotByItselfComputeSubsystemVonNeumannEntropy : Bool
 
 canonicalHolographicTensorNetworkClaimBoundary :
   HolographicTensorNetworkClaimBoundary
 canonicalHolographicTensorNetworkClaimBoundary =
   holographicTensorNetworkClaimBoundary
-    true true true true true false true
+    true true true true
+    true true false
+    true
 
 ------------------------------------------------------------------------
 -- Generic same-object compiler.
---
--- This closes the logical transport once a consumer supplies the actual
--- entropy evaluator and proves that it evaluates the constructed boundary
--- state to the cut entropy owned by the area-law lane.
 ------------------------------------------------------------------------
 
 record BoundaryEntropySameObjectData : Set₁ where
@@ -80,29 +90,33 @@ sameObjectBoundaryEntropyCompiler :
 sameObjectBoundaryEntropyCompiler D = sameObjectEntropyWeld D
 
 ------------------------------------------------------------------------
--- Remaining analytic obligation for the inspected tensor-network source.
+-- Remaining analytic obligation: subsystem reduced state.
 ------------------------------------------------------------------------
 
-record DensityMatrixEntropyObligation : Set₁ where
+record SubsystemDensityMatrixEntropyObligation : Set₁ where
   field
-    DensityMatrix : Set
+    FullDensityMatrix : Set
+    ReducedDensityMatrix : Set
     EntropyValue : Set
-    holographicContract : DensityMatrix
+
+    holographicContract : FullDensityMatrix
+    reducedDensityMatrix : ReducedDensityMatrix
     treeEntanglementEntropy : EntropyValue
-    vonNeumannEntropy : DensityMatrix → EntropyValue
+    vonNeumannEntropy : ReducedDensityMatrix → EntropyValue
 
-    densityMatrixEntropyWeld : Set
-    densityMatrixEntropyWeldProof : densityMatrixEntropyWeld
+    partialTraceFromFullContract : Set
+    partialTraceFromFullContractProof : partialTraceFromFullContract
 
-    contractEntropyEqualsTreeEntropy : Set
-    contractEntropyEqualsTreeEntropyProof : contractEntropyEqualsTreeEntropy
+    reducedContractEntropyEqualsTreeEntropy : Set
+    reducedContractEntropyEqualsTreeEntropyProof :
+      reducedContractEntropyEqualsTreeEntropy
 
 record SameObjectPromotionFirewall : Set where
   constructor sameObjectPromotionFirewall
   field
-    namedEntropyIsNotAutomaticallyEntropyOfNamedDensityMatrix : Bool
-    reflexiveAreaLawIsNotDensityMatrixSpectralCalculation : Bool
-    existentialEntropyWitnessDoesNotCloseSameObjectWeld : Bool
+    fullStateEntropyIsNotAutomaticallySubsystemEntropy : Bool
+    reflexiveAreaLawIsNotSubsystemDensityMatrixSpectralCalculation : Bool
+    existentialEntropyWitnessDoesNotConstructReducedDensityMatrix : Bool
     tensorNetworkAreaLawDoesNotByItselfEstablishPhysicalAdSCFT : Bool
     birthmarkMemoryIsNotBoundaryEntanglementEntropyByDefinition : Bool
 
@@ -110,11 +124,22 @@ canonicalSameObjectPromotionFirewall : SameObjectPromotionFirewall
 canonicalSameObjectPromotionFirewall =
   sameObjectPromotionFirewall true true true true true
 
-densityMatrixEntropyWeldRequired : Bool
-densityMatrixEntropyWeldRequired = true
+------------------------------------------------------------------------
+-- Compact status.
+------------------------------------------------------------------------
+
+fullStateDensityMatrixEntropyWeldClosed : Bool
+fullStateDensityMatrixEntropyWeldClosed =
+  ContractEntropy.fullStateEntropyMatchesTreeEntropyAtFullDepth
+
+subsystemReducedDensityMatrixWeldStillRequired : Bool
+subsystemReducedDensityMatrixWeldStillRequired = true
 
 ryuTakayanagiAreaLawShapeOwned : Bool
 ryuTakayanagiAreaLawShapeOwned = true
 
 areaLawDoesNotComputeVonNeumannEntropyOfContract : Bool
 areaLawDoesNotComputeVonNeumannEntropyOfContract = true
+
+densityMatrixEntropyWeldRequired : Bool
+densityMatrixEntropyWeldRequired = subsystemReducedDensityMatrixWeldStillRequired
