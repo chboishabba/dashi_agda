@@ -14,11 +14,13 @@ import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact as AlbertF4
 --   ternary27 <-> Heisenberg/Schlaefli 6+15+6;
 --   trinification SL3^3 inside the same first-Tits E6;
 --   selected exceptional gravity chart = explicit same-object E6 H3 patch;
---   intrinsic q-class Laplacian -> radical quotient -> atlas/descent target.
+--   intrinsic q-class Laplacian -> radical quotient -> atlas/descent target;
+--   Monster 3B selected word -> Heisenberg polarization transition / 729 lane.
 --
--- The earlier coordinate six-neighbour Laplacian is retained only as a failed
--- comparison arm: it preserves 8/144 q-isometries and its 3^-36 clock near-fit
--- disappears after restoring intrinsic quadratic symmetry.
+-- Superseded branches remain typed as failed comparison arms rather than being
+-- silently deleted: the coordinate six-neighbour gravity Laplacian and its
+-- 3^-36 near-fit, and the idea that a fixed 6+15+6 basis chart is invariant
+-- under the selected 3B normalizer word.
 ------------------------------------------------------------------------
 
 record Ternary27ExceptionalPhysicsMaxCut : Set where
@@ -69,7 +71,11 @@ record Ternary27ExceptionalPhysicsMaxCut : Set where
 
     -- Monster / Heisenberg normalizer.
     atlas3BSymplectic12SourceLocated : Bool
-    firstTitsMonsterSameBasisActionPaid : Bool
+    upstreamSelectedWordHeisenbergLiftPaid : Bool
+    selectedWordFixedSixFifteenSixChartInvariant : Bool
+    selectedWordPolarizationTransitionPaidLocally : Bool
+    schrodinger729SameActionPaid : Bool
+    monsterAlbertSameActionPaid : Bool
 
     nextAlgebraWall : String
     nextGaugeWall : String
@@ -85,12 +91,12 @@ currentTernary27ExceptionalPhysicsMaxCut =
     true true true false false
     true true true true false false true true true true false false true false false false false
     true true true false false
-    true false
+    true true false true false false
     "Kernelize the actual first-Tits product/cubic and rational 78/52 E6/F4 computations; instantiate the classical Albert group theorem in-kernel; construct the correct split-octonion/split-first-Tits same-object equivalence. The positive rational H3(O_Q) real form remains a distinct form by trace signature."
     "The explicit SL3^3 action is already inside the same first-Tits E6 and selects the standard hypercharge/SU2R Cartan directions. Remaining gauge work is dynamical SU2R breaking plus the genuinely separate AQFT/DHR complement-localisation-transport-statistics-tensor-category/DR reconstruction and same-action theorem."
-    "Use the intrinsic q(v)!=0 degree-24 Laplacian. The selected chart is now an explicit E6 H3 patch whose source factors through a 9-state radical quotient, so one patch cannot supply three independent spatial source directions. Two explicit distinct H3 patches have different radicals and pulled-back Grams summing to full-rank 2I3, but the Weyl/overlap co-registration that makes that aggregate geometric is still unpaid. Pay that atlas/descent theorem, then realize the exact local radiation+vacuum stress from same-state matter, derive the physical weak scale independently, prove conservation/Einstein equality, and test held-out clocks/gravity."
+    "Use the intrinsic q(v)!=0 degree-24 Laplacian. The selected chart is an explicit E6 H3 patch whose source factors through a 9-state radical quotient, so one patch cannot supply three independent spatial source directions. Two explicit distinct H3 patches have different radicals and pulled-back Grams summing to full-rank 2I3, but the Weyl/overlap co-registration that makes that aggregate geometric is still unpaid. Pay that atlas/descent theorem, then realize the exact local radiation+vacuum stress from same-state matter, derive the physical weak scale independently, prove conservation/Einstein equality, and test held-out clocks/gravity."
     "Propofol supplies intervention/state transition and Brain-IT supplies measured BOLD coordinates. Future exceptional-neural tests must predeclare a selected TPS/subsystem decomposition, scanner/preprocessing pipeline and exceptional feature, then compare held-out predictions against nuisance-matched alternatives. Post-hoc decoder coordinates do not count."
-    "PR #1098 supplies an authoritative ATLAS 12D GF3 symplectic 2.Suz:2 source and a typed Heisenberg lift compiler. Import literal matrices, solve the symplectic basis change/cocycle correction into X6+X6*, induce the action on the same 6+15+6/first-Tits basis, then directly test Jordan/cubic preservation or refutation."
+    "Upstream #1098 now pays literal ATLAS matrices and one selected-word Heisenberg central lift. Local block analysis shows that word has full-rank A,B,C,D blocks, sends X6 and X6* to transverse Lagrangians, and therefore does not preserve the fixed 6+15+6 role chart. Treat 27 as a polarization/A5 chart and move the genuine normalizer action to an atlas of polarizations and the 3^6=729 Heisenberg/Schrodinger-metaplectic carrier; then test whether any induced chart-transition structure intertwines with first-Tits/E6 data."
 
 existingAlbertF4Frontier : AlbertF4.AlbertF4Frontier
 existingAlbertF4Frontier = AlbertF4.currentAlbertF4Frontier
@@ -106,9 +112,10 @@ record MaxCutAttributionBoundary : Set where
     radiationStressShapeNotMatterDynamics : Bool
     trinificationNotDHRReconstruction : Bool
     measuredNeuralDonorsNotConsciousnessMechanism : Bool
+    fixedSixFifteenSixNotFullMonsterRepresentation : Bool
     atlasSymplecticSourceNotMonsterAlbertIdentity : Bool
 open MaxCutAttributionBoundary public
 
 canonicalMaxCutAttributionBoundary : MaxCutAttributionBoundary
 canonicalMaxCutAttributionBoundary =
-  max-cut-attribution-boundary true true true true true true true true true
+  max-cut-attribution-boundary true true true true true true true true true true
