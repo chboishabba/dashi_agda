@@ -26,7 +26,7 @@ EXPECT = {
         "sameModelCalibrationStillOpen", "empiricalMaterialDependencePaid",
         "contemporaryComparatorReceipt", "experimentalCoordinateReceipt",
         "qualificationFeedbackReceipt", "programmeChallengeReceipt", "siblingRCSComparisonReceipt",
-        "operationalShuttleContextReceipt"
+        "operationalShuttleContextReceipt", "flightC103ManufacturingLessonReceipt"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974LatestSourceComparisonNote.agda": [
         "nasa2026NiobiumComparator", "canonicalContemporaryComparatorBoundary",
@@ -54,6 +54,13 @@ EXPECT = {
     "DASHI/Physics/Propulsion/Rocketdyne1974OperationalShuttleContextExact.agda": [
         "orbiterRCSChallengeSet", "operationalRCSArchitecture", "rocketdyneTechnologyNotFlightIdentity",
         "operationalContextBoundary"
+    ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974FlightC103ManufacturingLessonExact.agda": [
+        "shuttleC103CrackingLesson", "manufacturingProcessIsIndependentCoordinate",
+        "historicalCauseDoesNotTransferToRocketdyne", "nescDocumentationLesson"
+    ],
+    "DASHI/Physics/Materials/RocketdyneMaterialSurvivabilityCrossPollinationExact.agda": [
+        "flightC103ManufacturingLesson", "manufacturingProcessCoordinateRequired"
     ],
 }
 
