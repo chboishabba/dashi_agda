@@ -141,3 +141,12 @@ publishedVacuumConstantEncodingStillRequired = true
 
 constantRemainderCoordinateIsPreferredVacuumReadout : Bool
 constantRemainderCoordinateIsPreferredVacuumReadout = true
+
+-- Compatibility exports for older static contracts.  Their values now reflect
+-- the corrected constant-coordinate semantics rather than the old projector
+-- interpretation.
+independentVacuumReadoutStillRequired : Bool
+independentVacuumReadoutStillRequired = false
+
+twoSourceAmplitudeEqualitiesStillRequired : Bool
+twoSourceAmplitudeEqualitiesStillRequired = true
