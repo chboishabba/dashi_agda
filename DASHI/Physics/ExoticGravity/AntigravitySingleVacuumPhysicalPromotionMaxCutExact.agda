@@ -9,6 +9,8 @@ import DASHI.Physics.Foundations.CMP119CosmologyVacuumContinuationCompilerExact 
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabilityExact as VacuumNI
 import DASHI.Physics.Foundations.CMP119AntigravityLocalizedVacuumReadoutExact as Readout
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumConstantBetaOrthogonalityExact as Orthogonality
+import DASHI.Physics.Foundations.CMP119LocalizedActionPlaquetteVacuumCoordinateBidiExact as Coordinates
+import DASHI.Physics.Foundations.CMP119AntigravityScalarVacuumSourceActionExact as ScalarVacuum
 import DASHI.Physics.Foundations.GRQFTSingleVacuumNormalizationScaleCovarianceExact as Scale
 import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
@@ -49,9 +51,25 @@ sourceVacuumSequenceRequiresIndependentPhysicalPayment =
 formalVacuumConstantCoordinateReadoutOwned : Bool
 formalVacuumConstantCoordinateReadoutOwned = true
 
-publishedVacuumConstantEncodingStillOpen : Bool
-publishedVacuumConstantEncodingStillOpen =
+legacyLocalizedActionVacuumEncodingStillOpen : Bool
+legacyLocalizedActionVacuumEncodingStillOpen =
   Readout.publishedVacuumConstantEncodingStillRequired
+
+preferredScalarVacuumSourceRepresentationOwned : Bool
+preferredScalarVacuumSourceRepresentationOwned =
+  ScalarVacuum.vacuumEnergyIsRationalByConstruction
+
+postHocVacuumEncodingRequiredOnPreferredScalarRoute : Bool
+postHocVacuumEncodingRequiredOnPreferredScalarRoute =
+  ScalarVacuum.postHocVacuumConstantEncodingReceiptRequiredOnPreferredRoute
+
+localizedActionCoordinatesJointlyComplete : Bool
+localizedActionCoordinatesJointlyComplete =
+  Coordinates.plaquetteAndConstantCoordinatesJointlyComplete
+
+betaAndNormalizationCoordinatesComplementary : Bool
+betaAndNormalizationCoordinatesComplementary =
+  Coordinates.betaAndNormalizationCoordinatesAreComplementary
 
 betaProjectionCannotRecoverPureVacuumConstant : Bool
 betaProjectionCannotRecoverPureVacuumConstant =
@@ -66,9 +84,13 @@ positiveSourceNormalizedGeometryCompilerOwned = true
 record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
   constructor antigravity-single-vacuum-physical-promotion-frontier
   field
-    formalVacuumConstantCoordinateReadoutOwned : Bool
-    publishedVacuumConstantEncodingStillRequired : Bool
+    preferredVacuumTypeIsIndependentScalar : Bool
+    preferredScalarVacuumEmbeddedAsConstantByConstruction : Bool
+    postHocEncodingReceiptRequiredOnPreferredRoute : Bool
+    localizedActionTwoCoordinatesJointlyComplete : Bool
+    betaAndNormalizationCoordinatesAreComplementary : Bool
     plaquetteBetaProjectionCanRecoverPureVacuumConstant : Bool
+
     singleSourceVacuumStaticCompilerOwned : Bool
     twoVacuumAmplitudesRequired : Bool
     positiveGAccelerationSignTheoremOwned : Bool
@@ -78,9 +100,8 @@ record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
     rationalSquareDensityTheoremRequiredForStaticNormalizedExistence : Bool
     commonAdditiveCountertermCancelsInDifferentialLane : Bool
     sourceSignAndControlMaxCutOwned : Bool
-    couplingAndERBHistoryDetermineVacuumSequence : Bool
-    sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 
+    scalarVacuumRepresentationAloneIdentifiesPhysicalLambda : Bool
     unknownPositiveMultiplicativeMagnitudeBlocksStaticExistence : Bool
     unknownPositiveMultiplicativeMagnitudeBlocksAbsoluteDeviceSize : Bool
     selectedSourceLorentzianVacuumContinuationStillOpen : Bool
@@ -94,12 +115,18 @@ canonicalAntigravitySingleVacuumPhysicalPromotionFrontier :
   AntigravitySingleVacuumPhysicalPromotionFrontier
 canonicalAntigravitySingleVacuumPhysicalPromotionFrontier =
   antigravity-single-vacuum-physical-promotion-frontier
-    true true false true false true true true true false true true false true
-    false true true true true true true true
+    true true false true true false
+    true false true true true true false true true
+    false false true true true true true true true
 
--- Historical compatibility flag.  "Source-native readout already owned" was
--- too strong: the formal constant coordinate is owned, but its identification
--- with the published CMP119 vacuum-energy/normalization term is not.
+-- Historical compatibility flags for the older all-LocalizedAction adapter.
+formalVacuumConstantCoordinateReadoutOwnedLegacy : Bool
+formalVacuumConstantCoordinateReadoutOwnedLegacy = true
+
+publishedVacuumConstantEncodingStillOpen : Bool
+publishedVacuumConstantEncodingStillOpen =
+  legacyLocalizedActionVacuumEncodingStillOpen
+
 sourceNativeVacuumReadoutAlreadyOwned : Bool
 sourceNativeVacuumReadoutAlreadyOwned = false
 
