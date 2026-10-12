@@ -11,6 +11,7 @@ module DASHI.Philosophy.NonginGenealogyOwnerWeldExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Core.Prelude using (⊥)
 
 import DASHI.Core.DialecticOriginSourceAtlasExact as Atlas
 import DASHI.Core.NonginOnePointOneArmyRefinementExact as OnePointOne
@@ -116,8 +117,7 @@ stateTensorMotifIsNotHistoricalStageIdentity = refl
 data GenealogicalInfluenceEqualsMathematicalIdentity : Set where
 
 genealogicalInfluenceDoesNotCreateIdentity :
-  GenealogicalInfluenceEqualsMathematicalIdentity →
-  DASHI.Core.Prelude.⊥
+  GenealogicalInfluenceEqualsMathematicalIdentity → ⊥
 genealogicalInfluenceDoesNotCreateIdentity ()
 
 record NonginGenealogyOwnerWeldBoundary : Set where
