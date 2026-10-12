@@ -49,15 +49,6 @@ toBoundaryAnchoredSecondOrderCellGluing {law} section = record
         (Groth.faceMediation section)
   }
 
-anchoredReceiptAB :
-  {law : Groth.FaceMediationLaw} →
-  (section : Groth.GrothendieckFaceMediatedSection law) →
-  edgeABMatches
-    (Cell.mediationReceipt
-      (toBoundaryAnchoredSecondOrderCellGluing section))
-  ≡ refl
-anchoredReceiptAB section = refl
-
 data BoundaryAnchoredAdapterAcceptsUnrelatedEdges : Set where
 
 unrelatedEdgesAreNotPromotedAsAnchored :
