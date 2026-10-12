@@ -102,9 +102,20 @@ record IdentifiedBoloCoordinationCausalBridge
       ≡ BoloCoordinationCausalEstimandDemand.causalQuestionReference demand
 
     estimandAndIdentificationReviewedTogether : Bool
+    estimandAndIdentificationReviewedTogetherIsTrue :
+      estimandAndIdentificationReviewedTogether ≡ true
+
     directOutcomeContrastAloneProvidesIdentification : Bool
+    directOutcomeContrastAloneProvidesIdentificationIsFalse :
+      directOutcomeContrastAloneProvidesIdentification ≡ false
+
     comparatorEvidenceAloneProvidesIdentification : Bool
+    comparatorEvidenceAloneProvidesIdentificationIsFalse :
+      comparatorEvidenceAloneProvidesIdentification ≡ false
+
     createsPoliticalLegitimacy : Bool
+    createsPoliticalLegitimacyIsFalse : createsPoliticalLegitimacy ≡ false
+
     bridgeReference : String
 
 open IdentifiedBoloCoordinationCausalBridge public
