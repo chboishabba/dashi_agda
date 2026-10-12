@@ -32,6 +32,7 @@ import DASHI.Quantum.QuantumBirthmarkFiniteRMTExact
 import DASHI.Quantum.QuantumBirthmarkSymmetrySectorExact
 import DASHI.Quantum.QuantumBirthmarkRevivalExact
 import DASHI.Quantum.QuantumBirthmarkStadiumReceiptExact
+import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact
 
 import DASHI.Quantum.QuantumMereologyOperatorLocalityAuthorityExact
 import DASHI.Quantum.QuantumMereologyHamiltonianTransportAuthorityExact
