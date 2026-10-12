@@ -40,6 +40,12 @@ pShellRotationCharacterRegression :
   × C3.rotationPhase C3.mPosOne ≡ C3.phasePositive
 pShellRotationCharacterRegression = refl , (refl , refl)
 
+rotationCharacterReusesExistingFourierRegression :
+  (m : C3.MagneticState) ->
+  C3.rotationPhaseViaExistingCharacter m ≡ C3.rotationPhase m
+rotationCharacterReusesExistingFourierRegression =
+  C3.rotationPhaseIsExistingPositiveCharacter
+
 pShellChargeStepOrderThreeRegression :
   C3.chargePositiveStep
     (C3.chargePositiveStep (C3.chargePositiveStep C3.mNegOne))
@@ -55,6 +61,12 @@ pShellRealizationIntertwinerRegression :
     (R.realize C3.pShellC3Realization x)
 pShellRealizationIntertwinerRegression =
   R.intertwines C3.pShellC3Realization
+
+residueSameObjectWeldRegression :
+  (x : C3.DepthOneKernel) ->
+  C3.sectorResidue (C3.magneticSector (C3.realizeMagneticState x))
+  ≡ C3.kernelResidue x
+residueSameObjectWeldRegression = C3.realizationPreservesC3Residue
 
 selectionRuleRegression :
   C3.transitionAllowed C3.sectorNegative C3.chargePositive C3.sectorZero
