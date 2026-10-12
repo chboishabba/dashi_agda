@@ -30,6 +30,11 @@ import DASHI.Physics.Optics.DiffuserRestrictedStabilityProducerExact as Stabilit
 -- the circular-kernel shift identity against literal FFT multiplication, and
 -- stress-checks the Gershgorin compiler on finite random supports. This pays an
 -- implementation-verification surface only; it is not a public-PSF receipt.
+--
+-- A separate claim-scale planner computes the dense selected-H / normalized-H /
+-- Gram working-set estimate from the PSF dimensions and declared lateral grid
+-- before the expensive audit is allocated. It is a resource-safety producer,
+-- not a stability theorem and not a measurement receipt.
 ------------------------------------------------------------------------
 
 conditioningAuditScript : String
@@ -38,11 +43,17 @@ conditioningAuditScript = "scripts/check_waller_diffusercam_conditioning.py"
 conditioningSelfTestScript : String
 conditioningSelfTestScript = "scripts/check_waller_diffusercam_conditioning_selftest.py"
 
+claimScalePlannerScript : String
+claimScalePlannerScript = "scripts/plan_waller_diffusercam_claim_scale.py"
+
 publishedPSFArtifactUsed : Bool
 publishedPSFArtifactUsed = true
 
 offlineSyntheticOperatorSelfTestExecutable : Bool
 offlineSyntheticOperatorSelfTestExecutable = true
+
+claimScaleMemoryPlannerExecutable : Bool
+claimScaleMemoryPlannerExecutable = true
 
 depthOnlySameLateralAuditExecutable : Bool
 depthOnlySameLateralAuditExecutable = true
@@ -72,6 +83,7 @@ record BerkeleyDiffuserCamDepthConditioningReceipt : Set where
     psfArtifactPinned : Bool
     sourceOperatorPinned : Bool
     executableSyntheticOperatorSelfTest : Bool
+    executableClaimScaleMemoryPlanner : Bool
     executableDepthAudit : Bool
     sourceHSelectedGridCompiler : Bool
     executableTranslatedColumnAudit : Bool
@@ -88,6 +100,7 @@ currentBerkeleyDiffuserCamDepthConditioningReceipt = record
   { psfArtifactPinned = Calibration.publicCalibrationArtifactPinned
   ; sourceOperatorPinned = SourceOperator.sourceForwardUsesFFTConvolution
   ; executableSyntheticOperatorSelfTest = offlineSyntheticOperatorSelfTestExecutable
+  ; executableClaimScaleMemoryPlanner = claimScaleMemoryPlannerExecutable
   ; executableDepthAudit = depthOnlySameLateralAuditExecutable
   ; sourceHSelectedGridCompiler = sourceOperatorSelectedGridColumnCompilerPaid
   ; executableTranslatedColumnAudit = translatedColumnRestrictedAuditExecutable
