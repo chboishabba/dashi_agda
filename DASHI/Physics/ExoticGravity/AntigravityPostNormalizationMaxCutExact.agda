@@ -4,6 +4,7 @@ module DASHI.Physics.ExoticGravity.AntigravityPostNormalizationMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabilityExact as VacuumNI
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumExperimentDiscriminatorExact as VacuumDisc
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Firewall
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationToLorentzianStressExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as DifferentialFirewall
@@ -35,6 +36,17 @@ differentialVacuumDifferenceAssumedPaid = true
 oldBetaERBVacuumNonidentifiabilityStillTrueButNoLongerTerminal : Bool
 oldBetaERBVacuumNonidentifiabilityStillTrueButNoLongerTerminal = true
 
+-- The non-identifiability witness now compiles into the generic discriminator
+-- language: the current source observer collapses a pair that the literal
+-- vacuum projector separates.  This is an information-design theorem only;
+-- the physical same-object measurement/calibration receipt is still open.
+vacuumDiscriminatorLanguageExtensionOwned : Bool
+vacuumDiscriminatorLanguageExtensionOwned = true
+
+vacuumDiscriminatorIsAlreadyPhysicalMeasurement : Bool
+vacuumDiscriminatorIsAlreadyPhysicalMeasurement =
+  VacuumDisc.formalBundleIsAlreadyPhysicalMeasurement
+
 staticMetricResponseRenormalizationWeldStillRequired : Bool
 staticMetricResponseRenormalizationWeldStillRequired =
   Firewall.renormalizedEffectiveActionMetricResponseRequired
@@ -64,6 +76,8 @@ record PostNormalizationAntigravityFrontier : Set where
     sourceNormalizationCoordinateRecovered : Bool
     sourceDifferenceRecoveredOrControlled : Bool
     betaERBProjectionStillInsufficientByItself : Bool
+    vacuumDiscriminatorLanguageExtensionConstructed : Bool
+    physicalVacuumMeasurementCalibrationStillRequired : Bool
 
     staticCandidateVacuumStressAlgebraOwned : Bool
     staticVacuumEquationOfStateCompilerOwnedAfterReceipt : Bool
@@ -84,7 +98,7 @@ canonicalPostNormalizationAntigravityFrontier :
   PostNormalizationAntigravityFrontier
 canonicalPostNormalizationAntigravityFrontier =
   post-normalization-antigravity-frontier
-    true true true
+    true true true true true
     true true true true
     true true true true true
     true true true
