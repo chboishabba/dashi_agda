@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabilityExact as VacuumNI
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumExperimentDiscriminatorExact as VacuumDisc
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumControlCoordinateDesignExact as VacuumControl
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Firewall
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationToLorentzianStressExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as DifferentialFirewall
@@ -23,6 +24,13 @@ import DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricComp
 -- still requires the same-state metric response of the renormalized effective
 -- action, normalization-to-gravity calibration, and a cosmological
 -- renormalization convention.
+--
+-- The vacuum non-identifiability collision is now also compiled into the
+-- repository-native experimental-coordinate language.  The missing coordinate
+-- is explicit, and the physical control target is correspondingly sharp:
+-- preserve the declared current source view while changing the calibrated
+-- projected-vacuum coordinate.  Existence of such a physical control remains
+-- an experimental/source payment.
 ------------------------------------------------------------------------
 
 vacuumNormalizationFlowAssumedPaid : Bool
@@ -40,6 +48,14 @@ vacuumDiscriminatorLanguageExtensionOwned = true
 vacuumDiscriminatorIsAlreadyPhysicalMeasurement : Bool
 vacuumDiscriminatorIsAlreadyPhysicalMeasurement =
   VacuumDisc.formalBundleIsAlreadyPhysicalMeasurement
+
+vacuumSelectiveControlTargetCompiled : Bool
+vacuumSelectiveControlTargetCompiled =
+  VacuumControl.vacuumSelectiveControlTargetCompiled
+
+physicalVacuumSelectiveControlStillRequired : Bool
+physicalVacuumSelectiveControlStillRequired =
+  VacuumControl.physicalVacuumSelectiveControlStillRequired
 
 staticMetricResponseRenormalizationWeldStillRequired : Bool
 staticMetricResponseRenormalizationWeldStillRequired =
@@ -134,6 +150,8 @@ record PostNormalizationAntigravityFrontier : Set where
     betaERBProjectionStillInsufficientByItself : Bool
     vacuumDiscriminatorLanguageExtensionConstructed : Bool
     physicalVacuumMeasurementCalibrationStillRequired : Bool
+    vacuumSelectiveControlTargetConstructed : Bool
+    physicalSelectiveControlStillRequired : Bool
 
     staticCandidateVacuumStressAlgebraOwned : Bool
     staticVacuumEquationOfStateCompilerOwnedAfterReceipt : Bool
@@ -165,7 +183,7 @@ canonicalPostNormalizationAntigravityFrontier :
   PostNormalizationAntigravityFrontier
 canonicalPostNormalizationAntigravityFrontier =
   post-normalization-antigravity-frontier
-    true true true true true
+    true true true true true true true
     true true true true true
     true true true false true true true true true
     true false true true true true false true true
