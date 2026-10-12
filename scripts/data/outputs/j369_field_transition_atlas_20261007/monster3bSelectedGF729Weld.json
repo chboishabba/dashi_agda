@@ -1,52 +1,65 @@
 {
-  "schema": "dashi.j369.monster3b.selected_gf729_weld.v1",
+  "schema": "dashi.j369.monster3b.selected_gf729_weld.v2",
   "source_producer": {
     "pr": 1098,
     "branch": "agent/e6-f3-exterior-square-maxcut-20261006",
-    "receipt_path": "outputs/monster3b_atlas_compression_field_selector_20261012.json",
-    "source_word": "g2 g1 g2^-1 g1 g2^-1"
+    "receipt_path": "outputs/monster3b_atlas_compression_field_selector_20261012.json"
   },
   "selected_modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
-  "compression_modulus_low_to_high": [1, 0, 1, 2, 0, 2, 1],
-  "affine_generator_change": "beta = 1 - alpha",
-  "beta_coordinates": [1, 2, 0, 0, 0, 0],
-  "polynomial_substitution_verified": true,
-  "compression_matrix": [
-    [0, 2, 1, 0, 2, 1],
-    [2, 0, 2, 1, 2, 2],
-    [0, 0, 0, 0, 1, 2],
-    [2, 0, 1, 2, 1, 2],
-    [2, 0, 2, 2, 0, 2],
-    [1, 0, 1, 0, 2, 2]
-  ],
-  "multiplication_by_beta_matrix": [
-    [1, 0, 0, 0, 0, 1],
-    [2, 1, 0, 0, 0, 0],
-    [0, 2, 1, 0, 0, 0],
-    [0, 0, 2, 1, 0, 0],
-    [0, 0, 0, 2, 1, 1],
-    [0, 0, 0, 0, 2, 2]
-  ],
-  "cyclic_rank_e0": 6,
-  "selected_beta_cyclic_rank_e0": 6,
-  "compression_krylov_determinant_mod3": 1,
-  "selected_beta_krylov_determinant_mod3": 2,
-  "intertwiner_Q": [
-    [1, 0, 0, 2, 1, 1],
-    [0, 0, 0, 2, 1, 2],
-    [0, 0, 2, 1, 0, 1],
-    [0, 0, 1, 1, 2, 0],
-    [0, 1, 1, 0, 1, 2],
-    [0, 2, 0, 1, 2, 2]
-  ],
-  "intertwiner_determinant_mod3": 2,
-  "intertwining_equation": "Q*T = M_beta*Q",
-  "intertwining_verified": true,
-  "swap01_witness": [1, 0, 0, 0, 0, 0],
-  "T_swap01_witness": [2, 0, 0, 0, 0, 0],
-  "swap01_T_witness": [2, 0, 0, 2, 2, 1],
-  "breaks_swap01_at_e0": true,
+  "earlier_beta_weld": {
+    "source_word": "g2 g1 g2^-1 g1 g2^-1",
+    "compression_modulus_low_to_high": [1, 0, 1, 2, 0, 2, 1],
+    "affine_generator_change": "beta = 1 - alpha",
+    "beta_coordinates": [1, 2, 0, 0, 0, 0],
+    "polynomial_substitution_verified": true,
+    "multiplicative_order": 364,
+    "intertwining_verified": true
+  },
+  "preferred_primitive_weld": {
+    "source_word": "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1",
+    "compression_modulus_low_to_high": [2, 0, 1, 2, 2, 2, 1],
+    "primitive_root_coordinates": [0, 2, 0, 1, 2, 0],
+    "primitive_root_is_root_of_compression_polynomial": true,
+    "primitive_root_multiplicative_order": 728,
+    "compression_matrix": [
+      [0, 0, 0, 2, 2, 2],
+      [2, 1, 0, 2, 0, 0],
+      [0, 2, 1, 0, 0, 2],
+      [1, 0, 1, 0, 2, 0],
+      [2, 0, 2, 2, 0, 1],
+      [0, 1, 1, 2, 0, 2]
+    ],
+    "multiplication_matrix": [
+      [0, 0, 1, 1, 1, 2],
+      [2, 0, 0, 1, 1, 1],
+      [0, 2, 0, 0, 1, 1],
+      [1, 0, 2, 0, 0, 1],
+      [2, 1, 1, 0, 1, 2],
+      [0, 2, 2, 2, 1, 0]
+    ],
+    "cyclic_rank_e0": 6,
+    "field_cyclic_rank_e0": 6,
+    "source_krylov_determinant_mod3": 2,
+    "field_krylov_determinant_mod3": 1,
+    "intertwiner_Q": [
+      [1, 1, 1, 0, 2, 0],
+      [0, 0, 1, 2, 0, 0],
+      [0, 1, 0, 2, 1, 1],
+      [0, 1, 1, 1, 2, 2],
+      [0, 0, 2, 2, 0, 0],
+      [0, 2, 1, 0, 1, 0]
+    ],
+    "intertwiner_determinant_mod3": 2,
+    "intertwining_equation": "Q*T = M_gamma*Q",
+    "intertwining_verified": true,
+    "T_swap01_witness": [0, 1, 2, 0, 0, 1],
+    "swap01_T_witness": [2, 0, 0, 1, 2, 0],
+    "breaks_swap01_at_e0": true,
+    "punctured_orbit_size": 728,
+    "punctured_stabilizer_size": 1
+  },
   "selected_field_presentation_weld_paid": true,
-  "full_action_orbit_stabilizer_recognition_paid": false,
-  "boundary": "Exact finite computation identifies the source compression with multiplication by beta=1-alpha in the already-selected GF(729) presentation. Full downstream Monster action/orbit/stabilizer semantics and an Agda-kernel matrix proof remain separate."
+  "selected_field_multiplicative_action_weld_paid": true,
+  "full_monster_semantic_action_recognition_paid": false,
+  "boundary": "The preferred source compression is explicitly conjugate to multiplication by a primitive element of the already-selected GF(729). Its powers give one 728-element orbit on the punctured field and trivial stabilizer. Broader Monster semantic-action identification and Agda-kernel matrix certification remain open."
 }
