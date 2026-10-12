@@ -131,8 +131,7 @@ sameRecognitionCannotRecoverAuthority =
   Recognition.collisionBlocksAuthorityFactorization recognitionCollision
 
 ------------------------------------------------------------------------
--- 3. Governed-observer consequence: preserving the cultural surface is not
---    sufficient for a bundle that includes standing/authority.
+-- 3. Governed-observer and consumer-relative consequences.
 ------------------------------------------------------------------------
 
 standingCollision :
@@ -140,6 +139,18 @@ standingCollision :
 standingCollision =
   Consumer.consumer-relevant-collision
     visibleRestricted visibleExpanded refl standingDiffers
+
+contestabilityCollision :
+  Consumer.ConsumerRelevantCollision culturalSurface contestabilityCode
+contestabilityCollision =
+  Consumer.consumer-relevant-collision
+    visibleRestricted visibleExpanded refl contestabilityDiffers
+
+materialConeCollision :
+  Consumer.ConsumerRelevantCollision culturalSurface materialConeCode
+materialConeCollision =
+  Consumer.consumer-relevant-collision
+    visibleRestricted visibleExpanded refl materialConeDiffers
 
 culturalSurfaceCannotPayGovernedStanding :
   ∀ {Value Provenance Epistemic Permission Obligation : Set}
@@ -152,6 +163,29 @@ culturalSurfaceCannotPayGovernedStanding :
     culturalSurface value provenance epistemic standingCode permission obligation → ⊥
 culturalSurfaceCannotPayGovernedStanding =
   Governed.authorityCollisionBlocksGovernedSufficiency standingCollision
+
+-- Stronger than non-factorability alone: every observer adequate for the
+-- declared consumer must distinguish the witnessed same-surface states.
+everyAdequateStandingObserverSeparates :
+  ∀ {Fine : Set} {fine : CulturalState → Fine} →
+  Consumer.ConsumerSufficient fine standingCode →
+  fine visibleRestricted ≡ fine visibleExpanded → ⊥
+everyAdequateStandingObserverSeparates =
+  Consumer.everySufficientObserverSeparatesRelevantCollision standingCollision
+
+everyAdequateContestabilityObserverSeparates :
+  ∀ {Fine : Set} {fine : CulturalState → Fine} →
+  Consumer.ConsumerSufficient fine contestabilityCode →
+  fine visibleRestricted ≡ fine visibleExpanded → ⊥
+everyAdequateContestabilityObserverSeparates =
+  Consumer.everySufficientObserverSeparatesRelevantCollision contestabilityCollision
+
+everyAdequateMaterialConeObserverSeparates :
+  ∀ {Fine : Set} {fine : CulturalState → Fine} →
+  Consumer.ConsumerSufficient fine materialConeCode →
+  fine visibleRestricted ≡ fine visibleExpanded → ⊥
+everyAdequateMaterialConeObserverSeparates =
+  Consumer.everySufficientObserverSeparatesRelevantCollision materialConeCollision
 
 ------------------------------------------------------------------------
 -- 4. Political contestability is proof-relevant rather than inferred from
