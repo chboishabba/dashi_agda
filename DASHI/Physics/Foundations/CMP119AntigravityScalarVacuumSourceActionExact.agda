@@ -8,14 +8,15 @@ open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as Source
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumConstantSourceBoundaryExact as SourceBoundary
 
 ------------------------------------------------------------------------
 -- SOURCE-FIRST CMP119 EQ.(2.23) WITH A SCALAR VACUUM CONSTANT
 --
 -- CMP119Section2SourceNativeState already gives the final Eq.(2.23) vacuum
--- summand its own type parameter `Vacuum`; the primary-source comment identifies
--- it as the vacuum-energy CONSTANT.  The preferred antigravity adapter therefore
--- instantiates
+-- summand its own type parameter `Vacuum`; the primary-source boundary pins
+-- Bałaban's description of the vacuum-energy counterterm as a normalization /
+-- constant term.  The preferred antigravity adapter therefore instantiates
 --
 --   Vacuum = ℚ
 --
@@ -24,10 +25,11 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 --
 --   V ↦ irrelevantAction V = localizedAction 0 V.
 --
--- This pays the representation/encoding problem by construction.  It does NOT
--- identify V with a physical cosmological constant: metric response,
--- gravitational renormalization/calibration, Lorentzian continuation and SI
--- authority remain separate downstream obligations.
+-- This pays the representation/encoding problem by construction and is
+-- source-supported at the semantic-role level.  It does NOT identify V with a
+-- physical cosmological constant: metric response, gravitational
+-- renormalization/calibration, Lorentzian continuation and SI authority remain
+-- separate downstream obligations.
 ------------------------------------------------------------------------
 
 scalarVacuumAssemble :
@@ -106,6 +108,10 @@ module _ {Density Background Fluctuation : Set} where
     rewrite actionAlgebraIsScalarVacuumAlgebra instantiation =
     Source.equation223 (source instantiation) scale
 
+preferredScalarVacuumRepresentationSourceSupported : Bool
+preferredScalarVacuumRepresentationSourceSupported =
+  SourceBoundary.preferredScalarVacuumRepresentationSourceSupported
+
 vacuumEnergyIsRationalByConstruction : Bool
 vacuumEnergyIsRationalByConstruction = true
 
@@ -121,9 +127,14 @@ postHocVacuumConstantEncodingReceiptRequiredOnPreferredRoute = false
 physicalLambdaIdentifiedByScalarVacuumRepresentationAlone : Bool
 physicalLambdaIdentifiedByScalarVacuumRepresentationAlone = false
 
+metricResponsePaidByPrimaryVacuumConstantSourceBoundary : Bool
+metricResponsePaidByPrimaryVacuumConstantSourceBoundary =
+  SourceBoundary.sourceProvesMetricResponseOfVacuumConstant
+
 record ScalarVacuumSourceActionBoundary : Set where
   constructor scalar-vacuum-source-action-boundary
   field
+    sourceSupportsScalarVacuumSemanticRole : Bool
     cmp119VacuumTypedAsIndependentScalar : Bool
     scalarEmbeddedAsConstantActionByConstruction : Bool
     plaquetteProjectorNeededToReadVacuumConstant : Bool
@@ -133,4 +144,4 @@ record ScalarVacuumSourceActionBoundary : Set where
 canonicalScalarVacuumSourceActionBoundary : ScalarVacuumSourceActionBoundary
 canonicalScalarVacuumSourceActionBoundary =
   scalar-vacuum-source-action-boundary
-    true true false false false
+    true true true false false false
