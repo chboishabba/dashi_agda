@@ -7,21 +7,6 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExact as Feedback
 import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
 
-------------------------------------------------------------------------
--- ROCKETDYNE QUALIFICATION-FEEDBACK WELD
---
--- The historical sequence has the shape
---   anomaly under an extreme Haynes-25 configuration
---       -> changed nozzle material/hardware
---       -> WC103 follow-up at a near-matched extreme condition.
---
--- That is exactly the engineering pattern consumed by the repository's
--- adaptive qualification-feedback lane.  The archive, however, does not by
--- itself prove that the change was a formally reviewed/approved qualification
--- revision in the generic Feedback sense.  We therefore expose a candidate
--- revision and subsequent observation while leaving review/approval false.
-------------------------------------------------------------------------
-
 record QualificationRevisionCandidate : Set where
   constructor qualification-revision-candidate
   field
@@ -50,7 +35,7 @@ wc103FollowupObservation : Disc.HistoricalRun
 wc103FollowupObservation = Disc.wc103FollowupSurvived
 
 formalApprovalStillUnpaid : Bool
-formalApprovalStillUnpaid = false
+formalApprovalStillUnpaid = true
 
 record HistoricalFeedbackReceipt : Set where
   constructor historical-feedback-receipt
