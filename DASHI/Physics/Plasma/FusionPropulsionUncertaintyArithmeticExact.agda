@@ -53,6 +53,56 @@ canonicalRootPoleArithmeticBoundary =
   root-pole-arithmetic-boundary false refl true refl
 
 ------------------------------------------------------------------------
+-- SPECIES-RESOLVED ENERGY-TRANSFER BOOKKEEPING
+--
+-- The exchange-conservation theorem shape is reusable.  Ideal-MHD triad
+-- dynamics are not imported into the kinetic IBW mechanism.
+------------------------------------------------------------------------
+
+record QuantisedSpeciesPowerTransfer : Set where
+  constructor quantised-species-power-transfer
+  field
+    fusionProductPowerLoss : Nat
+    coherentThermalIonPower : Nat
+    otherPower : Nat
+    conservation :
+      fusionProductPowerLoss ≡ coherentThermalIonPower + otherPower
+    source : MaxCut.SourceAttribution
+    sourceIsTheory :
+      MaxCut.evidenceClass source ≡ MaxCut.analyticOrKineticTheory
+
+open QuantisedSpeciesPowerTransfer public
+
+qinfischReportedPowerPartition : QuantisedSpeciesPowerTransfer
+qinfischReportedPowerPartition =
+  quantised-species-power-transfer
+    10000
+    9996
+    4
+    refl
+    MaxCut.qinfischRootPoleSource
+    refl
+
+record KineticExchangeCrossPollinationBoundary : Set where
+  constructor kinetic-exchange-cross-pollination-boundary
+  field
+    conservationBookkeepingShapeReusable : Bool
+    conservationBookkeepingShapeReusableIsTrue :
+      conservationBookkeepingShapeReusable ≡ true
+    idealMHDTriadCoefficientTransferred : Bool
+    idealMHDTriadCoefficientTransferredIsFalse :
+      idealMHDTriadCoefficientTransferred ≡ false
+    reportedPartitionIsExperimentalMeasurement : Bool
+    reportedPartitionIsExperimentalMeasurementIsFalse :
+      reportedPartitionIsExperimentalMeasurement ≡ false
+
+canonicalKineticExchangeCrossPollinationBoundary :
+  KineticExchangeCrossPollinationBoundary
+canonicalKineticExchangeCrossPollinationBoundary =
+  kinetic-exchange-cross-pollination-boundary
+    true refl false refl false refl
+
+------------------------------------------------------------------------
 -- P-B11 COMPETING-MODEL FAMILY
 ------------------------------------------------------------------------
 
