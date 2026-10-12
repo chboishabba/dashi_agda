@@ -9,6 +9,7 @@ import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedMaterialProducerEx
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedARPESConstraintsExact as PublishedARPES
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoIndependentTheoryCrossValidationExact as Independent
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESWitnessGateExact as ARPES
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESForwardObservationBoundaryExact as Forward
 
 record CoQuarterTaSeTwoMaxCutStatus : Set where
   constructor co-quarter-tase-two-max-cut-status
@@ -24,6 +25,7 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     independentSOCBandTargetsFixed : Bool
     independentKagomeMechanismFixed : Bool
     wannierProducerRouteFixed : Bool
+    forwardFitConsumerImplemented : Bool
     materialHamiltonianClosed : Bool
     rawARPESPayloadPresent : Bool
     exactSpectralObserverClosed : Bool
@@ -35,7 +37,7 @@ canonicalCoQuarterTaSeTwoMaxCutStatus =
   co-quarter-tase-two-max-cut-status
     true true true true true
     true true true
-    true true true
+    true true true true
     false false false false
     true
 
@@ -56,6 +58,9 @@ existingIndependentTheoryBoundary = Independent.canonicalCrossValidationPromotio
 
 existingARPESStatus : ARPES.CoARPESAcquisitionStatus
 existingARPESStatus = ARPES.canonicalCoARPESAcquisitionStatus
+
+existingForwardConsumerStatus : Forward.ExecutableConsumerStatus
+existingForwardConsumerStatus = Forward.canonicalExecutableConsumerStatus
 
 record IrreduciblePhysicalResidual : Set where
   constructor irreducible-physical-residual
