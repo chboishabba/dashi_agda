@@ -20,10 +20,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPOppositeSemanticProgramQuotation
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeSemanticQuotationBridgeExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPLiteralCookQuotationSelfInputNoGoExact
 
-------------------------------------------------------------------------
--- Earlier deterministic-concrete recut retained for compatibility/firewalls.
-------------------------------------------------------------------------
-
 import DASHI.Mathematics.Complexity.PNotEqualsNPDeterministicConcreteTapeExecutionExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateDeterministicTapeCodeExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeExecutableCostBridgeExact
@@ -35,10 +31,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeSemanticQuotationEx
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedConcreteTapeSemanticQuotationExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeEndpointDecisionExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeFixedMaxCutClosureExact
-
-------------------------------------------------------------------------
--- Conventional finite-standard-machine recut.
-------------------------------------------------------------------------
 
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact
@@ -65,10 +57,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingQuotationScaleExa
 import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralPrefixSpanNecessityExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPStandardMachineMaxCutClosureExact
 
-------------------------------------------------------------------------
--- Literal write/content accounting and old-route no-go.
-------------------------------------------------------------------------
-
 import DASHI.Mathematics.Complexity.ConcreteTapeSymbolWriteLocalityExact
 import DASHI.Mathematics.Complexity.ConcreteTapeNonblankWriteBoundExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGuardedNonblankExact
@@ -78,10 +66,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralPrefixEndpointContentE
 import DASHI.Mathematics.Complexity.StructuralSimulationNonblankExact
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinBitCodeWidthLowerExact
 
-------------------------------------------------------------------------
--- Low-universe coded standard-machine cost-model recut.
-------------------------------------------------------------------------
-
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact
 import DASHI.Mathematics.Complexity.CodedStandardFormulaInputFaithfulExact
@@ -90,10 +74,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCodedStandardCandidateBridgeExac
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialCostModelExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralSelfQuotationPositiveBudgetNoGoExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact
-
-------------------------------------------------------------------------
--- Active virtual / streaming quotation frontier.
-------------------------------------------------------------------------
 
 import DASHI.Mathematics.Complexity.VirtualFormulaBitSourceExact
 import DASHI.Mathematics.Complexity.VirtualFormulaQueryTraceExact
@@ -112,6 +92,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingTokenBis
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitExact
 import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualGeneratorOutputExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact
 
 ------------------------------------------------------------------------
 -- TRUST BOUNDARY / ACTIVE ROADMAP
@@ -119,64 +101,45 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 -- This root does NOT prove P != NP.
 --
 -- PAID / REDUCED IN THE CODED STANDARD MODEL:
---   * Set-level finite deterministic program code;
---   * faithful nonblank binary BooleanFormula input;
---   * exact standard-machine execution and literal input-length clocking;
---   * standard<->concrete exact run / acceptance / clock transport;
---   * finite self-specialization / partial behavioral fixed-point machinery;
---   * structural state/symbol/tape simulation with injective blank-preserving
---     symbol embedding and exact represented-span preservation;
---   * concrete one-symbol-write locality and T-step bounded write traces;
---   * exact canonical-projection symbol round trip;
---   * exact prefix endpoint = structurally mapped candidate-own-input content;
---   * nonblank information accounting through guarded rows and structural maps;
---   * actual guarded Cook bitcode length >= guarded tableau width I + 2*T.
+--   * finite deterministic candidate code and literal binary formula input;
+--   * exact standard/concrete execution and clock transport;
+--   * structural simulation with faithful symbols and exact tape span;
+--   * one-symbol-write / nonblank information accounting;
+--   * guarded Cook bitcode width >= I + 2*T;
+--   * therefore literal full-quotation materialisation is impossible for
+--     anchored positive-budget candidates (I + 2*T <= I + p <= I + T).
 --
--- CONSEQUENCE: the former literal three-phase self-quotation route is CLOSED.
--- For any such structural compilation, I + 2*T <= |ownCL| <= I + p and p <= T,
--- hence T = 0. In the coded model zero T forces zero polynomial clock
--- coefficient and therefore a constant candidate decision; the repo's known
--- satisfiable/unsatisfiable anchors rule that out for anchored candidates.
--- Candidates failing an anchor already carry an explicit SATDecisionFailure.
--- Thus no anchored candidate can inhabit the former literal resource compiler.
---
--- ACTIVE FRONTIER: SAME-TARGET VIRTUAL / STREAMING QUOTATION.
---   * semantic indexed lookup is canonical and exact; no virtual oracle witness;
---   * machine/input/T are separated from index by GuardedCookFormulaDescription;
---   * the fixed opposite target is itself low-universe CodedFiniteStandardTM;
---   * its decoded presentation and guarded Cook query description are the same
---     object by construction, not an assumed reverse coding theorem;
---   * actual global Cook--Levin clause selection streams transition -> initial ->
---     accepting with residual indices and no precomputed section lengths;
---   * transition selection streams `(time,column)` placed predicates and local
---     truth-table assignments; it constructs only the selected forbid-clause;
---   * direct CNF -> Cook prefix tokens are exactly the existing cnfToCook +
---     encodeCookFormula prefix stream, not an alternate formula representation;
---   * token and bit cursor bisimulations are source-written: streamedCookBit is
---     extensionally the canonical binary code lookup on the literal global CNF;
---   * GuardedCookStreamingBitExact specializes this to the exact answer-blind
---     `(coded machine,input,T,index)` query, without full quotation materialisation;
---   * all reads vary only index and run on that SAME target machine;
---   * setup ; generator ; resume calls compose to literal exact target runs;
---   * query chains, source-edge target segments and full virtual simulations
---     derive exact target runs with additive clocks.
+-- ACTIVE VIRTUAL / STREAMING QUOTATION PAYMENTS:
+--   * immutable `(coded machine,input,T)` description + varying index;
+--   * canonical exact semantic bit source, with no oracle witness;
+--   * same fixed opposite target born as low-universe coded syntax;
+--   * streamed actual global Cook--Levin clause selection across transition,
+--     initial and accepting sections, with no precomputed section lengths;
+--   * transition clauses stream placed `(time,column)` predicates and canonical
+--     truth-table rows, constructing only the selected forbid-clause;
+--   * exact direct CNF -> Cook prefix-token weld;
+--   * executable token/three-bit cursor + token and bit bisimulations;
+--   * GuardedCookStreamingBitExact: streamed query bit = canonical queryAnswer;
+--   * same-target setup/generator/resume calls, query chains, source-edge target
+--     segments and whole virtual simulations all derive literal exact runs;
+--   * FaithfulGeneratorOutput requires `nothing/false/true` to be represented by
+--     three distinct actual finite control states of that SAME target machine;
+--   * FaithfulVirtualSimulation carries that finite-state output property through
+--     every generator call actually used by the candidate simulation.
 --
 -- LIVE CONSTRUCTIVE WALL:
---   1. compile the proved streamed query evaluator into one coded fixed target
---      containing generator/candidate/opposite modes;
+--   1. compile the proved streamed evaluator into one CodedFiniteStandardTM with
+--      generator/candidate/opposite modes;
 --   2. prove its polynomial query clock in canonical query-code length;
---   3. replace/reset-style query invocation if necessary with an in-place call
---      frame preserving candidate continuation and canonical index semantics;
---   4. prove the virtual representation invariant: each source transition is
---      reproduced by target core execution with exact query calls at input reads;
---   5. close total target time to the SAME T in its own guarded Cook formula and
---      reuse already-paid Cook iff / opposite-decision SATFailure plumbing.
+--   3. replace reset-style query invocation with an in-place call frame if the
+--      canonical-reset representation cannot preserve candidate continuation;
+--   4. prove the source/target representation invariant for each candidate edge;
+--   5. close total target time to the SAME T used by its own Cook formula;
+--   6. reuse already-paid Cook iff/opposite SATDecisionFailure plumbing.
 --
 -- Ordinary polynomial-map/precomposition/verifier/certificate closure and the
--- established NP background must still be supplied for the SAME coded cost
--- model. Relating another abstract cost model to this one remains a separate
--- model-equivalence theorem.
+-- established NP background remain separate same-model obligations.
 --
--- Verification status for this tranche is source-written/static-audited only
--- until an exact-head Agda kernel or CI receipt exists.
+-- SOURCE STATUS: source-written/static-audited only. No exact-head Agda kernel
+-- or GitHub Actions run is attached; no Clay-level completion is claimed.
 ------------------------------------------------------------------------
