@@ -17,6 +17,7 @@ def test_xpollination_reconciliation_surface() -> None:
             "capitalBurdenRelocationPaid",
             "selectedInferenceCrackSpreadPaid",
             "cerebrasAccountingCloudMarginsPaid",
+            "accountingFinancingLifeGapPaid",
             "namedExternalCashEdgesPartial",
             "providerMarginStillOpen",
             "exhaustiveTerminalPayerStillOpen",
