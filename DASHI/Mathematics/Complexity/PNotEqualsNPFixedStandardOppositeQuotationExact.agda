@@ -186,6 +186,7 @@ fixedRunTrueGivesExactBudgetRun :
     (steps (fixed realization))
 fixedRunTrueGivesExactBudgetRun
     {candidate = candidate}
+    {code = code}
     realization
     fixedTrue
     with Language.guardedStandardToConcrete
@@ -207,7 +208,7 @@ fixedRunTrueGivesExactBudgetRun
     oppositeTrue =
       Candidate.justInjective
         (trans
-          (sym (Fixed.fixedRunExact _ ownFormula))
+          (sym (Fixed.fixedRunExact code ownFormula))
           fixedTrue)
 
     endpointTrue :
@@ -246,9 +247,10 @@ exactBudgetRunGivesFixedRunTrue :
   Fixed.fixedRun code (fixedCookFormula (fixed realization)) ≡ just true
 exactBudgetRunGivesFixedRunTrue
     {candidate = candidate}
+    {code = code}
     realization exact =
   trans
-    (Fixed.fixedRunExact _ ownFormula)
+    (Fixed.fixedRunExact code ownFormula)
     (cong just oppositeTrue)
   where
     ownFormula : Cook.BooleanFormula
