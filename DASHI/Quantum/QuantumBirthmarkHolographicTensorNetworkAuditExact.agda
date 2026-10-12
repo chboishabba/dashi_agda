@@ -18,6 +18,11 @@ open import Agda.Builtin.String using (String)
 --   * `holographicContract n T` is diagonal maximally mixed, also independent of T;
 --   * therefore the named contract is not the pure density matrix |psi><psi| of
 --     the named state (which would have nonzero off-diagonal entries);
+--   * sibling Lean PR #68 now source-writes this mismatch as an exact depth-one
+--     no-go: the pure-state 0-1 coherence is strictly positive while the named
+--     diagonal contract has exactly zero 0-1 coherence;
+--   * hence the upstream state/contract same-object weld is impossible as the
+--     definitions currently stand; one construction/identification must change;
 --   * `canonicalQubitTensor` proves one parent->two-child isometry only; the
 --     source does not prove the stronger all-bipartition perfect-tensor property
 --     usually used in holographic-code / RT constructions;
@@ -49,6 +54,9 @@ record HolographicTensorNetworkAudit : Set where
 
     holographicStateContractMismatch : Bool
     namedContractIsPureDensityMatrixOfNamedState : Bool
+    upstreamStateContractMismatchSourceWrittenInLean : Bool
+    upstreamStateContractSameObjectImpossibleAsWritten : Bool
+    upstreamDefinitionReplacementRequired : Bool
 
     canonicalQubitTensorParentChildIsometryProved : Bool
     canonicalQubitTensorIsometryIsNotStrongPerfectTensorReceipt : Bool
@@ -73,6 +81,9 @@ canonicalHolographicTensorNetworkAudit =
     true
     true
     true
+    true
+    true
+    true
     false
     true
     true
@@ -86,6 +97,15 @@ holographicStateContractMismatch = true
 
 contractIgnoresPerfectTensorArgument : Bool
 contractIgnoresPerfectTensorArgument = true
+
+upstreamStateContractMismatchSourceWrittenInLean : Bool
+upstreamStateContractMismatchSourceWrittenInLean = true
+
+upstreamStateContractSameObjectImpossibleAsWritten : Bool
+upstreamStateContractSameObjectImpossibleAsWritten = true
+
+upstreamDefinitionReplacementRequired : Bool
+upstreamDefinitionReplacementRequired = true
 
 canonicalQubitTensorIsometryIsNotStrongPerfectTensorReceipt : Bool
 canonicalQubitTensorIsometryIsNotStrongPerfectTensorReceipt = true
