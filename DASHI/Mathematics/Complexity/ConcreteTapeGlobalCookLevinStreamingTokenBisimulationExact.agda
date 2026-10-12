@@ -9,6 +9,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (_,_)
+open import Relation.Binary.PropositionalEquality using (sym)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -23,10 +24,6 @@ import DASHI.Mathematics.Complexity.CNFStreamingSeekExact as Seek
 import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact as Tokens
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
-
-------------------------------------------------------------------------
--- List suffix facts for the residual clause cursor.
-------------------------------------------------------------------------
 
 drop : ∀ {A : Set} → Nat → List A → List A
 drop zero xs = xs
@@ -57,10 +54,6 @@ seekExhaustedDrop zero (x ∷ xs) remaining ()
 seekExhaustedDrop (suc index) [] remaining refl = refl
 seekExhaustedDrop (suc index) (x ∷ xs) remaining proof =
   seekExhaustedDrop index remaining xs proof
-
-------------------------------------------------------------------------
--- Literal global CNF and suffix specification for every executable token state.
-------------------------------------------------------------------------
 
 globalFormula :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -130,10 +123,6 @@ stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget
 stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget
     Cursor.tokenDone = []
 
-------------------------------------------------------------------------
--- One token step is exactly head/tail decomposition of the canonical suffix.
-------------------------------------------------------------------------
-
 data TokenStateSpec
     {machine : Local.ConcreteTapeMachine}
     (stateCoverage : Canonical.EnumerationCoverage (Local.finiteState machine))
@@ -143,7 +132,6 @@ data TokenStateSpec
     (initialTarget : CNF.Bits (Decode.RowBitsWidth machine cols))
     (state : Cursor.TokenCursorState
       (Endpoint.ExtendedGlobalWidth machine steps cols)) : Set where
-
   specDone :
     Cursor.nextToken
       stateCoverage symbolCoverage nonempty steps cols initialTarget state
@@ -153,7 +141,6 @@ data TokenStateSpec
     ≡ [] →
     TokenStateSpec
       stateCoverage symbolCoverage nonempty steps cols initialTarget state
-
   specStep :
     ∀ {token next} →
     Cursor.nextToken
@@ -188,11 +175,10 @@ tokenStateSpec
 ... | Seek.found clause | exact =
   specStep refl
     (tokensFound
-      (seekFoundDrop clauseIndex formula clause exact))
+      (seekFoundDrop clauseIndex formula clause (sym exact)))
   where
     formula =
       globalFormula stateCoverage symbolCoverage nonempty steps cols initialTarget
-
     tokensFound :
       drop clauseIndex formula ≡ clause ∷ drop (suc clauseIndex) formula →
       Tokens.cnfTokens (drop clauseIndex formula)
@@ -203,11 +189,10 @@ tokenStateSpec
 ... | Seek.exhausted remaining | exact =
   specStep refl
     (tokensExhausted
-      (seekExhaustedDrop clauseIndex remaining formula exact))
+      (seekExhaustedDrop clauseIndex remaining formula (sym exact)))
   where
     formula =
       globalFormula stateCoverage symbolCoverage nonempty steps cols initialTarget
-
     tokensExhausted :
       drop clauseIndex formula ≡ [] →
       Tokens.cnfTokens (drop clauseIndex formula)
@@ -215,32 +200,23 @@ tokenStateSpec
     tokensExhausted refl = refl
 
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.clauseAt clauseIndex []) =
-  specStep refl refl
+    (Cursor.clauseAt clauseIndex []) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.clauseAt clauseIndex (CNF.positive index ∷ literals)) =
-  specStep refl refl
+    (Cursor.clauseAt clauseIndex (CNF.positive index ∷ literals)) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.clauseAt clauseIndex (CNF.negative index ∷ literals)) =
-  specStep refl refl
+    (Cursor.clauseAt clauseIndex (CNF.negative index ∷ literals)) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.positiveVariableAt clauseIndex index literals) =
-  specStep refl refl
+    (Cursor.positiveVariableAt clauseIndex index literals) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.negativeVariableAt clauseIndex index literals) =
-  specStep refl refl
+    (Cursor.negativeVariableAt clauseIndex index literals) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.negativeVariableBodyAt clauseIndex index literals) =
-  specStep refl refl
+    (Cursor.negativeVariableBodyAt clauseIndex index literals) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.natAt clauseIndex zero literals) =
-  specStep refl refl
+    (Cursor.natAt clauseIndex zero literals) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.natAt clauseIndex (suc n) literals) =
-  specStep refl refl
+    (Cursor.natAt clauseIndex (suc n) literals) = specStep refl refl
 tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
-    Cursor.tokenDone =
-  specDone refl refl
+    Cursor.tokenDone = specDone refl refl
 
 initialStateTokensExact :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -256,8 +232,3 @@ initialStateTokensExact :
     (Global.globalCookLevinCNF
       stateCoverage symbolCoverage nonempty steps cols initialTarget)
 initialStateTokensExact stateCoverage symbolCoverage nonempty steps cols initialTarget = refl
-
-------------------------------------------------------------------------
--- Token-level stream bisimulation is paid here.  The next owner lifts this
--- exact head/tail relation through the fixed three-bit token code.
-------------------------------------------------------------------------
