@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369FillingGraphExact as F
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369TernaryRealizationIntertwinerExact as R
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3PhysicalRealizationExact as C3
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3SameActionExact as Same
 
 fillingGraphPaidRegression :
   F.AtomicFillingGraphBoundary.directedStructuralFillingGraphPaid
@@ -67,6 +68,12 @@ residueSameObjectWeldRegression :
   C3.sectorResidue (C3.magneticSector (C3.realizeMagneticState x))
   ≡ C3.kernelResidue x
 residueSameObjectWeldRegression = C3.realizationPreservesC3Residue
+
+sameActionRecognitionRegression :
+  (x : C3.DepthOneKernel) ->
+  C3.kernelResidue (C3.ternaryChargePositiveStep x)
+  ≡ Same.translatePositive (C3.kernelResidue x)
+sameActionRecognitionRegression = Same.ternaryStepIsPositiveTranslation
 
 selectionRuleRegression :
   C3.transitionAllowed C3.sectorNegative C3.chargePositive C3.sectorZero
