@@ -4,19 +4,21 @@ module DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact whe
 -- STRUCTURAL SINGLE-TAPE SIMULATION
 --
 -- The generic StandardMachineSimulation permits an arbitrary configuration
--- embedding.  That is appropriate for semantic simulation, but too weak for
+-- embedding. That is appropriate for semantic simulation, but too weak for
 -- resource-closing compilation: an unconstrained meta-level embed could hide
 -- uncharged representation work.
 --
 -- This owner requires the embedding to be pointwise on the literal standard
--- tape representation:
+-- tape representation and faithful on tape symbols:
 --
 --   source state  -> target state
---   source symbol -> target symbol
+--   source symbol -> target symbol (injectively)
+--   source blank  -> target blank exactly
 --   left/right tape lists mapped elementwise
 --   scanned symbol mapped directly.
 --
--- Hence configuration shape and represented tape span are preserved exactly.
+-- Hence configuration shape and represented tape span are preserved exactly,
+-- and nonblank source data cannot collapse to target blank.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -96,6 +98,15 @@ record StructuralStandardMachineSimulation
     stateMap : SourceState → TargetState
     symbolMap : SourceSymbol → TargetSymbol
 
+    symbolMapInjective :
+      ∀ {left right} →
+      symbolMap left ≡ symbolMap right →
+      left ≡ right
+
+    blankExact :
+      symbolMap (Standard.blank source)
+      ≡ Standard.blank target
+
     stepExact :
       ∀ {before after} →
       Standard.standardNext source before ≡ just after →
@@ -134,11 +145,23 @@ structuralSimulationSpanExact structural =
     (stateMap structural)
     (symbolMap structural)
 
+sourceNonblankMapsToTargetNonblank :
+  ∀ {SourceState SourceSymbol TargetState TargetSymbol : Set}
+    {source : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
+    {target : Standard.StandardSingleTapeMachine TargetState TargetSymbol}
+    (structural : StructuralStandardMachineSimulation source target)
+    {symbol : SourceSymbol} →
+  symbol ≡ Standard.blank source →
+  StructuralStandardMachineSimulation.symbolMap structural symbol
+    ≡ Standard.blank target
+sourceNonblankMapsToTargetNonblank structural refl =
+  blankExact structural
+
 ------------------------------------------------------------------------
 -- RESOURCE FIREWALL
 --
--- This does not assert that every semantic simulation is structural.  It gives
+-- This does not assert that every semantic simulation is structural. It gives
 -- the stronger interface that the Clay-critical compiler must use when it
 -- claims to run a source single-tape machine inside a target single-tape
--- machine without hidden representation expansion.
+-- machine without hidden representation expansion or symbol collapse.
 ------------------------------------------------------------------------
