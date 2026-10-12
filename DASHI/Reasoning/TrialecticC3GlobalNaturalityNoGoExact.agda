@@ -79,11 +79,16 @@ sameParticipantA :
   ≡ participantAObserver sameASecondBoundary
 sameParticipantA = refl
 
+originNotPositiveCorner :
+  Fabric.origin ≡ Fabric.positiveCorner → ⊥
+originNotPositiveCorner equality with cong Fabric.x equality
+... | ()
+
 differentParticipantB :
   participantBConsumer sameAFirstBoundary
   ≡ participantBConsumer sameASecondBoundary →
   ⊥
-differentParticipantB ()
+differentParticipantB = originNotPositiveCorner
 
 participantANonDescentWitnessForB :
   Descent.ConsumerNonDescentWitness
