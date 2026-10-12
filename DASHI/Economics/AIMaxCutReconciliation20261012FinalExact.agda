@@ -16,7 +16,9 @@ import DASHI.Economics.AICoreWeaveCapitalReinvestmentCoverage20261012Exact as Re
 import DASHI.Economics.AICoreWeaveCapexDecompositionNonidentifiability20261012Exact as CapexDecomposition
 import DASHI.Economics.AICoreWeaveAssetLifeObsolescenceBoundary20261012Exact as AssetLife
 import DASHI.Economics.AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact as TerminalPayer
+import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as PayerSaturation
 import DASHI.Economics.AITerminalPayerConsumerSufficiency20261012Exact as PayerConsumer
+import DASHI.Economics.AICapitalObserverNonDescent20261012Exact as CapitalObserver
 import DASHI.Economics.AIPolicyCausalAdmission20261012Exact as PolicyCausal
 import DASHI.Economics.AISameModelSelfHostCostBoundary20261012Exact as SelfHostCost
 
@@ -61,6 +63,11 @@ sameModelSelfHostEngineeringCostPaid = finalProducer
   "MiniMax-M3; AMD MI355X; concurrency 512; 1k input; 30 percent sustained utilisation"
   "public engineering dataset estimates USD 0.93/M output tokens self-hosted versus USD 1.20/M hosted for the same model under the declared configuration; source conflict and configuration sensitivity are retained" false
 
+headlineObserverNonDescentPaid : FinalProducer
+headlineObserverNonDescentPaid = finalProducer
+  "headline-observer non-descent for capital recovery" paid "synthetic logical countermodel"
+  "identical revenue/usage/valuation/market-price headline surfaces can hide different terminal-payer or capital-spread coordinates and therefore different recovery outcomes; every sufficient refinement must separate the witnessed collision" false
+
 coreWeaveTwoSidedConcentrationPaid : FinalProducer
 coreWeaveTwoSidedConcentrationPaid = finalProducer
   "CoreWeave two-sided concentration topology" paid
@@ -98,15 +105,20 @@ coreWeaveNamedPayerCapacityPaid = finalProducer
   "selected CoreWeave named-payer external-cash capacity" paid "CoreWeave -> Microsoft"
   "CoreWeave discloses up to USD 43.8B of conditional Microsoft payments through 2033; Microsoft FY2026 independently reports USD 182.9B operating cash flow and USD 214.4B cloud revenue with increased customer cash receipts" false
 
+coreWeaveNamedPayerSaturationPaid : FinalProducer
+coreWeaveNamedPayerSaturationPaid = finalProducer
+  "CoreWeave named-payer edge saturation" paid "Microsoft + Meta + OpenAI named contractual edges"
+  "Microsoft and Meta have independently source-paid external-customer cash-generation capacity; OpenAI has a source-paid named contract edge but no equivalent public cash-provenance receipt here; realised Q2 top-three identities remain anonymised" false
+
 terminalPayerConsumerIndexingPaid : FinalProducer
 terminalPayerConsumerIndexingPaid = finalProducer
-  "consumer-relative terminal-payer sufficiency" paid "CoreWeave selected-payer vs exhaustive-independence questions"
-  "the Microsoft evidence pays the narrow selected external-cash-capacity consumer while exhaustive CoreWeave terminal independence remains a separate open consumer" false
+  "consumer-relative terminal-payer sufficiency" paid "selected-payer vs exhaustive-independence questions"
+  "named-payer external-cash evidence pays selected edge consumers while exhaustive CoreWeave terminal independence remains a separate open consumer" false
 
 terminalPayerStillPartial : FinalProducer
 terminalPayerStillPartial = finalProducer
   "complete independent terminal-payer provenance" partial "CoreWeave/entity/global"
-  "one named payer has independently source-paid external-customer cash capacity, but conditional contract realisation, other payers and all financing/counterparty loops are not exhaustively traced" false
+  "Microsoft and Meta external-cash edges are paid and OpenAI contract identity is paid, but contract realisation, OpenAI external cash, current anonymised top-customer identities and all remaining financing/counterparty loops are not exhaustively traced" false
 
 replacementObsolescenceStillPartial : FinalProducer
 replacementObsolescenceStillPartial = finalProducer
@@ -136,7 +148,7 @@ sameCapabilityScarcityRentStillOpen = finalProducer
 providerServingMarginStillPartial : FinalProducer
 providerServingMarginStillPartial = finalProducer
   "quality-adjusted provider serving margin" partial "provider economics"
-  "same-model engineering serving-cost substitution is now observed for one configuration, but the hosted provider's own marginal-cost ledger, matched SLA/cache/utilisation policy and quality-adjusted closed/open provider margin remain absent" false
+  "same-model engineering serving-cost substitution is observed for one configuration, but the hosted provider's own marginal-cost ledger, matched SLA/cache/utilisation policy and quality-adjusted closed/open provider margin remain absent" false
 
 numericROICWACCStillOpen : FinalProducer
 numericROICWACCStillOpen = finalProducer
@@ -172,6 +184,10 @@ sameModelEngineeringComparatorPaid = SelfHostCost.sameModelIdentityPaid
 sameModelProviderMarginStillOpen :
   SelfHostCost.directProviderMarginalCostObserved SelfHostCost.miniMaxM3EngineeringComparison ≡ false
 sameModelProviderMarginStillOpen = SelfHostCost.providerMarginalCostStillUnobserved
+
+headlineSurfaceStillInsufficient :
+  CapitalObserver.headlineSurfaceSufficientForRecovery CapitalObserver.canonicalCapitalObserverBoundary ≡ false
+headlineSurfaceStillInsufficient = CapitalObserver.headlineSurfaceSufficiencyRemainsFalse
 
 coreWeaveTwoSidedObserved : Concentration.twoSidedConcentrationObserved Concentration.coreWeaveTwoSidedConcentration ≡ true
 coreWeaveTwoSidedObserved = refl
@@ -220,6 +236,18 @@ coreWeaveMicrosoftExternalCashCapacityPaid :
   TerminalPayer.selectedNamedPayerExternalCashCapacity TerminalPayer.coreWeaveMicrosoftTerminalPayerBoundary ≡ true
 coreWeaveMicrosoftExternalCashCapacityPaid = TerminalPayer.selectedNamedPayerCapacityIsPaid
 
+coreWeaveMetaExternalCashCapacityPaid :
+  PayerSaturation.externalCustomerCashObserved PayerSaturation.metaEdge ≡ true
+coreWeaveMetaExternalCashCapacityPaid = PayerSaturation.metaExternalCashEdgePaid
+
+coreWeaveOpenAIExternalCashStillOpen :
+  PayerSaturation.externalCustomerCashObserved PayerSaturation.openAIEdge ≡ false
+coreWeaveOpenAIExternalCashStillOpen = PayerSaturation.openAIExternalCashStillOpen
+
+coreWeaveCurrentTopCustomerIdentityStillOpen :
+  PayerSaturation.currentTopThreeIdentitiesPaid PayerSaturation.coreWeavePayerSaturation ≡ false
+coreWeaveCurrentTopCustomerIdentityStillOpen = PayerSaturation.anonymousCurrentTopCustomerIdentityStillOpen
+
 coreWeaveCompleteTerminalPayerStillOpen :
   TerminalPayer.completeTerminalPayerProvenanceClosed TerminalPayer.coreWeaveMicrosoftTerminalPayerBoundary ≡ false
 coreWeaveCompleteTerminalPayerStillOpen = TerminalPayer.completeTerminalPayerProvenanceStillOpen
@@ -249,7 +277,7 @@ data SignOnlySpreadImpliesNumericSpreadPermission : Set where
 data CapexGapImpliesReplacementCapexPermission : Set where
 data AccountingLifeImpliesEconomicObsolescencePermission : Set where
 data EngineeringServingCostImpliesProviderMarginPermission : Set where
-data NamedPayerCapacityImpliesCompleteTerminalPayerPermission : Set where
+data NamedPayerEdgesImpliesCompleteTerminalPayerPermission : Set where
 data PolicyFactsImpliesCausalConcentrationPermission : Set where
 
 scopedPaymentDoesNotAutoCloseGlobal : ScopedPaymentImpliesGlobalClosurePermission → ⊥
@@ -276,9 +304,9 @@ accountingLifeDoesNotCreateEconomicObsolescence ()
 engineeringServingCostDoesNotCreateProviderMargin : EngineeringServingCostImpliesProviderMarginPermission → ⊥
 engineeringServingCostDoesNotCreateProviderMargin ()
 
-namedPayerCapacityDoesNotCloseCompleteTerminalProvenance :
-  NamedPayerCapacityImpliesCompleteTerminalPayerPermission → ⊥
-namedPayerCapacityDoesNotCloseCompleteTerminalProvenance ()
+namedPayerEdgesDoNotCloseCompleteTerminalProvenance :
+  NamedPayerEdgesImpliesCompleteTerminalPayerPermission → ⊥
+namedPayerEdgesDoNotCloseCompleteTerminalProvenance ()
 
 policyFactsDoNotCreateCausalConcentration :
   PolicyFactsImpliesCausalConcentrationPermission → ⊥
@@ -286,4 +314,4 @@ policyFactsDoNotCreateCausalConcentration ()
 
 finalBoundary : String
 finalBoundary =
-  "After the October-12 max-cut, selected public-equity dynamics, Vercel open-weight persistence, benchmark-normalised open/closed price evidence, a same-model hosted/self-host engineering-cost comparator, CoreWeave concentration/debt/sign-only capital spread/internal-cash shortfall, constructive capex-decomposition non-identifiability, six-year accounting-life evidence, and one Microsoft external-cash-capacity payer path are paid. Consumer-relative sufficiency makes explicit that the payer evidence closes only the selected-payer question. Replacement/obsolescence is now partially source-paid but still requires installed-age, refresh/retirement and economic-obsolescence coordinates. Provider serving margin is partial because an engineering substitution cost exists but provider-owned marginal cost remains absent. The Australian policy lane still requires same-basis realised compliance costs, observed market response and a reviewed causal bridge. Numerical ROIC/WACC and exhaustive terminal capital recovery remain open."
+  "After the October-12 max-cut, selected public-equity dynamics, Vercel open-weight persistence, benchmark-normalised open/closed price evidence, a same-model hosted/self-host engineering-cost comparator, and an exact headline-observer non-descent theorem are paid. CoreWeave now has paid concentration/debt/sign-only capital spread/internal-cash shortfall, constructive capex-decomposition non-identifiability, six-year accounting-life evidence, Microsoft and Meta external-cash payer edges, and an OpenAI named contractual edge with cash provenance still open. Consumer-relative sufficiency and edge-local provenance prevent those strong edges from becoming exhaustive terminal independence. Replacement/obsolescence remains partial at installed-age/refresh/economic-life coordinates. Provider serving margin remains partial because provider-owned marginal cost is absent. The Australian policy lane still requires same-basis realised compliance costs, observed market response and a reviewed causal bridge. Numerical ROIC/WACC and exhaustive terminal capital recovery remain open."
