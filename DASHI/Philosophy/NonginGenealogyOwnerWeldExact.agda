@@ -20,10 +20,6 @@ import DASHI.Core.ThresholdResidualTrajectoryGeometryExact as Threshold
 import DASHI.Core.RelationalEpistemicProcessSourceBridgeExact as Relational
 import DASHI.Core.DialecticStageMotifBridgeExact as StageMotif
 
-------------------------------------------------------------------------
--- Canonical phase entries.
-------------------------------------------------------------------------
-
 metaPositionEntry : Atlas.OriginSourceEntry
 metaPositionEntry = Atlas.entryForPhase Atlas.metaPositionPowerUp
 
@@ -67,10 +63,6 @@ operationalStateTensorEntryHasDeclaredPhase :
   Atlas.phase operationalStateTensorEntry ≡ Atlas.operationalStateTensor
 operationalStateTensorEntryHasDeclaredPhase = refl
 
-------------------------------------------------------------------------
--- Typed descendant boundaries.
-------------------------------------------------------------------------
-
 onePointOneBoundary : OnePointOne.NonginOnePointOneArmyBoundary
 onePointOneBoundary = OnePointOne.canonicalNonginOnePointOneArmyBoundary
 
@@ -110,10 +102,6 @@ stateTensorMotifIsNotHistoricalStageIdentity :
   StageMotif.stage10DefinitionIsMotifM10 stageMotifBoundary ≡ false
 stateTensorMotifIsNotHistoricalStageIdentity = refl
 
-------------------------------------------------------------------------
--- Promotion firewall.
-------------------------------------------------------------------------
-
 data GenealogicalInfluenceEqualsMathematicalIdentity : Set where
 
 genealogicalInfluenceDoesNotCreateIdentity :
@@ -123,6 +111,7 @@ genealogicalInfluenceDoesNotCreateIdentity ()
 record NonginGenealogyOwnerWeldBoundary : Set where
   constructor nongin-genealogy-owner-weld-boundary
   field
+    allTypedDescendantOwnersLinked : Bool
     metaPositionTypedOwnerLinked : Bool
     hierarchicalRefinementTypedOwnerLinked : Bool
     thresholdResidualTypedOwnerLinked : Bool
@@ -135,4 +124,4 @@ open NonginGenealogyOwnerWeldBoundary public
 canonicalNonginGenealogyOwnerWeldBoundary : NonginGenealogyOwnerWeldBoundary
 canonicalNonginGenealogyOwnerWeldBoundary =
   nongin-genealogy-owner-weld-boundary
-    true true true true true false
+    true true true true true true false
