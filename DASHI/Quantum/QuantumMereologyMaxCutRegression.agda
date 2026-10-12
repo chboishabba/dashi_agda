@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (false; true)
 
 import DASHI.Quantum.QuantumMereologyMaxCutExact as MaxCut
+import DASHI.Quantum.QuantumMereologyFiniteQuantumProducerAuthorityExact as Finite
 
 source-written-producer-does-not-create-selection :
   MaxCut.sourceWrittenProducerCreatesSelection
@@ -47,3 +48,17 @@ boundary-adequacy-is-consumer-relative :
 boundary-adequacy-is-consumer-relative =
   MaxCut.holographicBoundaryAdequacyIsConsumerRelativeIsTrue
     MaxCut.canonicalQuantumMereologyMaxCutBoundary
+
+standard-basis-projector-family-source-written :
+  Finite.StandardBasisProjectorFamilySourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+standard-basis-projector-family-source-written =
+  Finite.StandardBasisProjectorFamilySourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+arbitrary-selected-cpo-eigenbasis-remains-open :
+  Finite.ArbitrarySelectedCPOEigenbasisPaid
+    Finite.canonicalFiniteQuantumProducerStatus ≡ false
+arbitrary-selected-cpo-eigenbasis-remains-open =
+  Finite.ArbitrarySelectedCPOEigenbasisPaidIsFalse
+    Finite.canonicalFiniteQuantumProducerStatus
