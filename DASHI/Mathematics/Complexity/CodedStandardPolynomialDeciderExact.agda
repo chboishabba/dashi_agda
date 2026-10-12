@@ -2,24 +2,12 @@ module DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact where
 
 ------------------------------------------------------------------------
 -- SET-LEVEL CODED POLYNOMIAL DECIDER WITNESS
---
--- CodedFiniteStandardMachineExact pays a low-universe finite program carrier.
--- Here we add the SAT-facing data that can genuinely inhabit a
--- `polynomialTimeDecider : (Word -> Bool) -> Set` predicate:
---
---   * one coded finite deterministic standard TM;
---   * two literal tape symbols used for the canonical BooleanFormula bit code;
---   * exact T-step standard execution on that canonical input;
---   * final-control decision equality;
---   * explicit arithmetic polynomial bound on T.
---
--- All state/symbol carriers are `Fin n`, so this witness itself lives in Set.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
 import Data.Fin.Base as Fin
 
@@ -30,11 +18,7 @@ import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
-import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
-
-------------------------------------------------------------------------
--- Canonical formula bits -> the coded machine's chosen binary tape symbols.
-------------------------------------------------------------------------
+import DASHI.Mathematics.Complexity.PolynomialClockArithmeticExact as ClockArithmetic
 
 mapFormulaBits :
   ∀ {n : Nat} →
@@ -58,22 +42,9 @@ formulaInput code zeroSymbol oneSymbol formula =
   mapFormulaBits zeroSymbol oneSymbol
     (Binary.encodeFormulaBits formula)
 
-------------------------------------------------------------------------
--- Ordinary arithmetic polynomial clock shape.
-------------------------------------------------------------------------
-
-natPower : Nat → Nat → Nat
-natPower base zero = suc zero
-natPower base (suc exponent) = base * natPower base exponent
-
 polynomialStepBudget :
   Nat → Nat → Cook.BooleanFormula → Nat
-polynomialStepBudget coefficient degree formula =
-  coefficient * natPower (suc (Size.formulaNodeCount formula)) degree
-
-------------------------------------------------------------------------
--- Genuine Set-level machine-bearing decider witness.
-------------------------------------------------------------------------
+polynomialStepBudget = ClockArithmetic.formulaPolynomialBudget
 
 record CodedStandardPolynomialDecider
     (decider : Cook.BooleanFormula → Bool) : Set where
@@ -118,10 +89,6 @@ record CodedStandardPolynomialDecider
 
 open CodedStandardPolynomialDecider public
 
-------------------------------------------------------------------------
--- Boundary/status.
-------------------------------------------------------------------------
-
 record CodedStandardPolynomialDeciderBoundary : Set where
   constructor coded-standard-polynomial-decider-boundary
   field
@@ -145,8 +112,6 @@ canonicalCodedStandardPolynomialDeciderBoundary =
 -- The decider representation part of a concrete standard-machine cost model is
 -- now a literal Set-level predicate. A future PolynomialCostModel can set
 -- `polynomialTimeDecider = CodedStandardPolynomialDecider` without any
--- extensional-code extraction theorem.
---
--- The remaining cost-model engineering is closure, not representation:
--- provide equally coded polynomial maps/verifiers and compile precomposition.
+-- extensional-code extraction theorem. The remaining engineering is closure:
+-- coded maps/verifiers and precomposition.
 ------------------------------------------------------------------------
