@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 """Exact finite weld from Monster-3B source compressions to selected GF(729).
 
-PR #1098 derives the literal 6x6 compression matrices below from acquired ATLAS
+PR #1098 derives literal 6x6 X6-compression matrices from acquired ATLAS
 2.Suz / 2.Suz:2 GF(3)^12 matrices after the unique inner alternating-form
-normalization.  This consumer independently checks them against #1105's selected
-field
+normalization.  This consumer checks those source-derived operators against
+#1105's already-selected field
 
     GF(3)[alpha] / (alpha^6 + alpha^5 + alpha^4 + 1).
 
-Two stages are retained:
+Three receipts are deliberately kept separate:
 
-* depth 5: beta=1-alpha gives the first exact field-presentation weld, with
-  multiplicative order 364;
-* depth 7: a stronger source compression has a root gamma in the SAME selected
-  field of multiplicative order 728.  Its multiplication action is therefore
-  transitive on all 728 nonzero field elements with trivial stabilizer.
+* depth 5, multiplier 1: beta=1-alpha, order 364; this first paid the selected
+  field-presentation seam and has an exact selected-word Heisenberg lift;
+* depth 7, multiplier 2: primitive order 728; useful full-normalizer comparator
+  whose center-scaled lift exchanges the nontrivial central-character sectors;
+* depth 8, multiplier 1: primitive order 728; preferred same-phase target.  It
+  simultaneously supplies the full punctured GF(729) cyclic action and a
+  center-preserving Heisenberg lift.
 
-Both stages construct explicit invertible Q satisfying Q T = M Q.  The latter
-pays the selected finite-field multiplicative action/orbit/stabilizer weld, but
-not the broader Monster semantic-action identification or Agda-kernel matrix
-certification.
+Every selected-field weld constructs an explicit invertible Q with Q*T=M*Q.
+This closes the finite field/action presentation, not the larger same-object
+Monster phase-resolved state or Fin-90 multiplicity recognition.
 """
 from __future__ import annotations
 
@@ -29,12 +30,13 @@ from pathlib import Path
 
 MOD = 3
 DEGREE = 6
-SELECTED_MODULUS = (1, 0, 0, 0, 1, 1, 1)  # low -> high
+SELECTED_MODULUS = (1, 0, 0, 0, 1, 1, 1)
 ZERO = (0,) * DEGREE
 ONE = (1,) + (0,) * (DEGREE - 1)
 
+# Depth-five strict-symplectic field-algebra weld.
 BETA_MODULUS = (1, 0, 1, 2, 0, 2, 1)
-BETA = (1, 2, 0, 0, 0, 0)  # 1-alpha
+BETA = (1, 2, 0, 0, 0, 0)
 BETA_T = (
     (0, 2, 1, 0, 2, 1),
     (2, 0, 2, 1, 2, 2),
@@ -44,9 +46,10 @@ BETA_T = (
     (1, 0, 1, 0, 2, 2),
 )
 
-PRIMITIVE_MODULUS = (2, 0, 1, 2, 2, 2, 1)
-GAMMA = (0, 2, 0, 1, 2, 0)
-PRIMITIVE_T = (
+# Depth-seven primitive center-inverting comparator.
+INVERTER_MODULUS = (2, 0, 1, 2, 2, 2, 1)
+INVERTER_GAMMA = (0, 2, 0, 1, 2, 0)
+INVERTER_T = (
     (0, 0, 0, 2, 2, 2),
     (2, 1, 0, 2, 0, 0),
     (0, 2, 1, 0, 0, 2),
@@ -54,7 +57,20 @@ PRIMITIVE_T = (
     (2, 0, 2, 2, 0, 1),
     (0, 1, 1, 2, 0, 2),
 )
-PRIMITIVE_SOURCE_WORD = "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1"
+INVERTER_SOURCE_WORD = "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1"
+
+# Depth-eight primitive center-preserving preferred target.
+CENTER_MODULUS = (2, 2, 1, 0, 2, 0, 1)
+CENTER_GAMMA = (0, 1, 0, 1, 1, 0)
+CENTER_T = (
+    (2, 2, 0, 1, 1, 2),
+    (0, 0, 0, 1, 1, 2),
+    (2, 1, 0, 0, 0, 0),
+    (1, 2, 0, 2, 2, 2),
+    (0, 0, 1, 1, 1, 2),
+    (0, 0, 1, 2, 1, 1),
+)
+CENTER_SOURCE_WORD = "g1 g2^-1 g1 g2 g1 g2^-1 g1 g2^-1"
 
 
 def trim(poly):
@@ -67,8 +83,8 @@ def trim(poly):
 def poly_add(left, right):
     n = max(len(left), len(right))
     return trim([
-        ((left[i] if i < len(left) else 0) +
-         (right[i] if i < len(right) else 0)) % MOD
+        ((left[i] if i < len(left) else 0)
+         + (right[i] if i < len(right) else 0)) % MOD
         for i in range(n)
     ])
 
@@ -114,21 +130,11 @@ def mul(a, b):
         if coefficient:
             for j, modulus_coefficient in enumerate(lower):
                 coeffs[k - DEGREE + j] = (
-                    coeffs[k - DEGREE + j] - coefficient * modulus_coefficient
+                    coeffs[k - DEGREE + j]
+                    - coefficient * modulus_coefficient
                 ) % MOD
             coeffs[k] = 0
     return tuple(coeffs[:DEGREE])
-
-
-def power(a, exponent):
-    result = ONE
-    base = a
-    while exponent:
-        if exponent & 1:
-            result = mul(result, base)
-        base = mul(base, base)
-        exponent //= 2
-    return result
 
 
 def multiplicative_order(a):
@@ -153,11 +159,9 @@ def eval_poly(coefficients, a):
 
 
 def matrix_mul(left, right):
-    return [
-        [sum(left[i][k] * right[k][j] for k in range(len(right))) % MOD
-         for j in range(len(right[0]))]
-        for i in range(len(left))
-    ]
+    return [[sum(left[i][k] * right[k][j] for k in range(len(right))) % MOD
+             for j in range(len(right[0]))]
+            for i in range(len(left))]
 
 
 def matrix_vec(matrix, vector):
@@ -261,17 +265,52 @@ def weld(matrix, field_element):
     }
 
 
+def primitive_receipt(word, multiplier, modulus, field_element, matrix):
+    welded = weld(matrix, field_element)
+    order = multiplicative_order(field_element)
+    root_verified = eval_poly(modulus, field_element) == ZERO
+    return {
+        "source_word": word,
+        "similitude_multiplier": multiplier,
+        "compression_modulus_low_to_high": list(modulus),
+        "primitive_root_coordinates": list(field_element),
+        "primitive_root_is_root_of_compression_polynomial": root_verified,
+        "primitive_root_multiplicative_order": order,
+        "compression_matrix": [list(row) for row in matrix],
+        **welded,
+        "punctured_orbit_size": order,
+        "punctured_stabilizer_size": 1 if order == 728 else 0,
+    }
+
+
 def build_receipt():
     beta_weld = weld(BETA_T, BETA)
     beta_substitution = poly_compose_at_one_minus_x(SELECTED_MODULUS)
     beta_order = multiplicative_order(BETA)
 
-    primitive_weld = weld(PRIMITIVE_T, GAMMA)
-    gamma_order = multiplicative_order(GAMMA)
-    gamma_root_verified = eval_poly(PRIMITIVE_MODULUS, GAMMA) == ZERO
+    inverter = primitive_receipt(
+        INVERTER_SOURCE_WORD, 2, INVERTER_MODULUS, INVERTER_GAMMA, INVERTER_T
+    )
+    center = primitive_receipt(
+        CENTER_SOURCE_WORD, 1, CENTER_MODULUS, CENTER_GAMMA, CENTER_T
+    )
+
+    presentation_paid = (
+        beta_substitution == BETA_MODULUS
+        and beta_weld["intertwining_verified"]
+        and beta_weld["intertwiner_determinant_mod3"] != 0
+    )
+    multiplicative_paid = (
+        center["primitive_root_is_root_of_compression_polynomial"]
+        and center["primitive_root_multiplicative_order"] == 728
+        and center["intertwining_verified"]
+        and center["intertwiner_determinant_mod3"] != 0
+        and center["cyclic_rank_e0"] == 6
+        and center["breaks_swap01_at_e0"]
+    )
 
     return {
-        "schema": "dashi.j369.monster3b.selected_gf729_weld.v2",
+        "schema": "dashi.j369.monster3b.selected_gf729_weld.v3",
         "source_producer": {
             "pr": 1098,
             "branch": "agent/e6-f3-exterior-square-maxcut-20261006",
@@ -280,6 +319,7 @@ def build_receipt():
         "selected_modulus_low_to_high": list(SELECTED_MODULUS),
         "earlier_beta_weld": {
             "source_word": "g2 g1 g2^-1 g1 g2^-1",
+            "similitude_multiplier": 1,
             "compression_modulus_low_to_high": list(BETA_MODULUS),
             "affine_generator_change": "beta = 1 - alpha",
             "beta_coordinates": list(BETA),
@@ -287,37 +327,20 @@ def build_receipt():
             "multiplicative_order": beta_order,
             **beta_weld,
         },
-        "preferred_primitive_weld": {
-            "source_word": PRIMITIVE_SOURCE_WORD,
-            "compression_modulus_low_to_high": list(PRIMITIVE_MODULUS),
-            "primitive_root_coordinates": list(GAMMA),
-            "primitive_root_is_root_of_compression_polynomial": gamma_root_verified,
-            "primitive_root_multiplicative_order": gamma_order,
-            "compression_matrix": [list(row) for row in PRIMITIVE_T],
-            **primitive_weld,
-            "punctured_orbit_size": gamma_order,
-            "punctured_stabilizer_size": 1 if gamma_order == 728 else 0,
-        },
-        "selected_field_presentation_weld_paid": (
-            beta_substitution == BETA_MODULUS
-            and beta_weld["intertwining_verified"]
-            and beta_weld["intertwiner_determinant_mod3"] != 0
-        ),
-        "selected_field_multiplicative_action_weld_paid": (
-            gamma_root_verified
-            and gamma_order == 728
-            and primitive_weld["intertwining_verified"]
-            and primitive_weld["intertwiner_determinant_mod3"] != 0
-            and primitive_weld["cyclic_rank_e0"] == 6
-            and primitive_weld["breaks_swap01_at_e0"]
+        "primitive_inverter_comparator": inverter,
+        "preferred_center_preserving_primitive_weld": center,
+        "selected_field_presentation_weld_paid": presentation_paid,
+        "selected_field_multiplicative_action_weld_paid": multiplicative_paid,
+        "center_preserving_primitive_action_weld_paid": (
+            multiplicative_paid and center["similitude_multiplier"] == 1
         ),
         "full_monster_semantic_action_recognition_paid": False,
         "boundary": (
-            "The preferred source compression is explicitly conjugate to multiplication "
-            "by a primitive element of the already-selected GF(729). Hence its powers "
-            "give one 728-element orbit on the punctured field and trivial stabilizer. "
-            "This does not by itself identify the broader Monster semantic action or "
-            "constitute an Agda-kernel matrix proof."
+            "A strict-symplectic source word is explicitly conjugate to multiplication "
+            "by a primitive element of the already-selected GF(729), paying the full "
+            "728-element punctured cyclic action while remaining eligible for one fixed "
+            "central-character sector. The actual phase-resolved Monster state and "
+            "Fin-90 multiplicity same-object action remain separate."
         ),
     }
 
