@@ -38,6 +38,7 @@ jobs:
         run: |
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographicResidualTransportExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonNullConeRecoveryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonFlat31RigidityBoundaryExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkRelativeEntropyJacobsonSourceBridgeExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonLocalHorizonMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographyGravityTerminalCutsetExact.agda
