@@ -13,9 +13,10 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 -- ACQUISITION MAX-CUT
 --
 -- Public-source acquisition has paid the literal Berkeley artifacts, source
--- operator semantics, executable depth and finite translated-column sparse
--- certificate producers, the 2026 information-design experiment, and the later
--- 2026 ConvRML same-scene parallel lens/diffuser/RML comparator geometry.
+-- operator semantics, an exact selected-grid compiler for columns of the pinned
+-- discrete source H, executable depth / sparse conditioning diagnostics, the
+-- 2026 information-design experiment, and the later 2026 ConvRML same-scene
+-- parallel lens/diffuser/RML comparator geometry.
 --
 -- ConvRML further pays identical sensor model, common illumination / approximate
 -- magnification matching, publication exposure calibration, and released-code
@@ -24,10 +25,10 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 --
 -- Remaining numerical/physical leaves are now:
 --   A. execute/ingest the pinned binary PSF audit and retain its numerical
---      depth + finite translated-column certificate receipt;
---   B. choose/execute the declared lateral grid / sparsity class at the scale
---      needed for the intended 3-D claim and populate the existing same-H kappa
---      producer from the measured coherence/Gershgorin lower bound;
+--      depth + selected-grid same-H sparse certificate receipt;
+--   B. select the lateral grid / sparsity class at the scale required by the
+--      intended 3-D claim and populate the existing same-H kappa producer from
+--      the measured coherence/Gershgorin lower bound;
 --   C. reconcile exact-dataset exposure provenance, then obtain throughput /
 --      incident-or-detected-photon calibration sufficient for a genuinely
 --      matched-photon cross-system risk comparison;
@@ -40,6 +41,7 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     physicalInterfaceSpinePaid : Bool
     publicBerkeleyCalibrationArtifactPinned : Bool
     publicBerkeleySourceOperatorPinned : Bool
+    sourceOperatorSelectedGridColumnCompilerPaid : Bool
     depthConditioningAuditExecutable : Bool
     translatedColumnRestrictedAuditExecutable : Bool
     coherenceSparseLowerBoundCompilerPaid : Bool
@@ -64,6 +66,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   { physicalInterfaceSpinePaid = true
   ; publicBerkeleyCalibrationArtifactPinned = true
   ; publicBerkeleySourceOperatorPinned = true
+  ; sourceOperatorSelectedGridColumnCompilerPaid = true
   ; depthConditioningAuditExecutable = true
   ; translatedColumnRestrictedAuditExecutable = true
   ; coherenceSparseLowerBoundCompilerPaid = true
@@ -92,6 +95,9 @@ numericPSFSourceStatus = Calibration.numericPSFArrayIngested
 
 sourceOperatorMaterialisationStatus : Bool
 sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMaterialised
+
+sourceSelectedGridCompilerStatus : Bool
+sourceSelectedGridCompilerStatus = Conditioning.sourceOperatorSelectedGridColumnCompilerPaid
 
 depthAuditExecutableStatus : Bool
 depthAuditExecutableStatus = Conditioning.depthOnlySameLateralAuditExecutable
