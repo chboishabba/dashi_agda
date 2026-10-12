@@ -23,10 +23,12 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3PhysicalRealizati
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (Nat; suc; zero)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Vec using ([]; _∷_)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
+import DASHI.Foundations.TriadicFiniteQuotient as Quotient
+import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Algebra.TriadicDepthOneCharacters as Characters
 import DASHI.Physics.Foundations.AtomicFermionShellExact as Atomic
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
@@ -51,6 +53,11 @@ magneticSector mNegOne = sectorNegative
 magneticSector mZero = sectorZero
 magneticSector mPosOne = sectorPositive
 
+sectorResidue : MagneticSector -> Quotient.Residue3Pow Quotient.one
+sectorResidue sectorNegative = Characters.rNeg
+sectorResidue sectorZero = Characters.rZero
+sectorResidue sectorPositive = Characters.rPos
+
 ------------------------------------------------------------------------
 -- 2. Restriction of the magnetic basis to the C3 rotation subgroup.
 --
@@ -72,6 +79,17 @@ rotationPhase mNegOne = phaseNegative
 rotationPhase mZero = phaseNeutral
 rotationPhase mPosOne = phasePositive
 
+rotationPhaseViaExistingCharacter : MagneticState -> C3Phase
+rotationPhaseViaExistingCharacter m =
+  Characters.characterValue Characters.rPos (sectorResidue (magneticSector m))
+
+rotationPhaseIsExistingPositiveCharacter :
+  (m : MagneticState) ->
+  rotationPhaseViaExistingCharacter m ≡ rotationPhase m
+rotationPhaseIsExistingPositiveCharacter mNegOne = refl
+rotationPhaseIsExistingPositiveCharacter mZero = refl
+rotationPhaseIsExistingPositiveCharacter mPosOne = refl
+
 negativeAndPositiveRotationPhasesConjugate :
   Characters.conjugatePhase (rotationPhase mPosOne)
   ≡ rotationPhase mNegOne
@@ -92,6 +110,11 @@ data C3Charge : Set where
   chargeZero : C3Charge
   chargePositive : C3Charge
 
+chargeResidue : C3Charge -> Quotient.Residue3Pow Quotient.one
+chargeResidue chargeNegative = Characters.rNeg
+chargeResidue chargeZero = Characters.rZero
+chargeResidue chargePositive = Characters.rPos
+
 addSector : MagneticSector -> C3Charge -> MagneticSector
 addSector sectorZero chargeZero = sectorZero
 addSector sectorZero chargePositive = sectorPositive
@@ -102,6 +125,20 @@ addSector sectorPositive chargeNegative = sectorZero
 addSector sectorNegative chargeZero = sectorNegative
 addSector sectorNegative chargePositive = sectorZero
 addSector sectorNegative chargeNegative = sectorPositive
+
+sectorAdditionIsExistingC3Addition :
+  (sector : MagneticSector) (charge : C3Charge) ->
+  sectorResidue (addSector sector charge)
+  ≡ Arithmetic.addResidue (sectorResidue sector) (chargeResidue charge)
+sectorAdditionIsExistingC3Addition sectorNegative chargeNegative = refl
+sectorAdditionIsExistingC3Addition sectorNegative chargeZero = refl
+sectorAdditionIsExistingC3Addition sectorNegative chargePositive = refl
+sectorAdditionIsExistingC3Addition sectorZero chargeNegative = refl
+sectorAdditionIsExistingC3Addition sectorZero chargeZero = refl
+sectorAdditionIsExistingC3Addition sectorZero chargePositive = refl
+sectorAdditionIsExistingC3Addition sectorPositive chargeNegative = refl
+sectorAdditionIsExistingC3Addition sectorPositive chargeZero = refl
+sectorAdditionIsExistingC3Addition sectorPositive chargePositive = refl
 
 chargePositiveStep : MagneticState -> MagneticState
 chargePositiveStep mNegOne = mZero
@@ -164,6 +201,11 @@ kernelNegative = Triadic.negativeTrit ∷ []
 kernelZero = Triadic.zeroTrit ∷ []
 kernelPositive = Triadic.positiveTrit ∷ []
 
+kernelResidue : DepthOneKernel -> Quotient.Residue3Pow Quotient.one
+kernelResidue (Triadic.negativeTrit ∷ []) = Characters.rNeg
+kernelResidue (Triadic.zeroTrit ∷ []) = Characters.rZero
+kernelResidue (Triadic.positiveTrit ∷ []) = Characters.rPos
+
 ternaryChargePositiveStep : DepthOneKernel -> DepthOneKernel
 ternaryChargePositiveStep (Triadic.negativeTrit ∷ []) = kernelZero
 ternaryChargePositiveStep (Triadic.zeroTrit ∷ []) = kernelPositive
@@ -173,6 +215,13 @@ realizeMagneticState : DepthOneKernel -> MagneticState
 realizeMagneticState (Triadic.negativeTrit ∷ []) = mNegOne
 realizeMagneticState (Triadic.zeroTrit ∷ []) = mZero
 realizeMagneticState (Triadic.positiveTrit ∷ []) = mPosOne
+
+realizationPreservesC3Residue :
+  (x : DepthOneKernel) ->
+  sectorResidue (magneticSector (realizeMagneticState x)) ≡ kernelResidue x
+realizationPreservesC3Residue (Triadic.negativeTrit ∷ []) = refl
+realizationPreservesC3Residue (Triadic.zeroTrit ∷ []) = refl
+realizationPreservesC3Residue (Triadic.positiveTrit ∷ []) = refl
 
 realizationIntertwinesChargeStep :
   (x : DepthOneKernel) ->
@@ -228,8 +277,10 @@ record MagneticC3PhysicalBoundary : Set where
   field
     pShellMagneticTripletRepresented : Bool
     c3RotationCharacterAssigned : Bool
+    c3RotationCharacterReusesExistingFourierTable : Bool
     positiveChargeTransportIntertwinerPaid : Bool
     modThreeSelectionRulePaid : Bool
+    ternaryPhysicalResidueSameObjectWeldPaid : Bool
     magneticIndexCodeIdentifiedWithSignedM : Bool
     analyticSphericalHarmonicActionPaid : Bool
     dipoleMatrixElementAmplitudePaid : Bool
@@ -238,7 +289,7 @@ record MagneticC3PhysicalBoundary : Set where
 canonicalMagneticC3PhysicalBoundary : MagneticC3PhysicalBoundary
 canonicalMagneticC3PhysicalBoundary =
   magneticC3PhysicalBoundary
-    true true true true
+    true true true true true true
     false false false false
 
 magneticIndexCodeIdentifiedWithSignedMIsFalse :
