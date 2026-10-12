@@ -20,13 +20,15 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 -- 2026 information-design experiment, and the later 2026 ConvRML same-scene
 -- parallel lens/diffuser/RML comparator geometry.
 --
--- Local execution additionally pays two durable Git-blob-pinned receipts:
+-- Local execution additionally pays three durable Git-blob-pinned receipts:
 --   * a synthetic source-H implementation check covering odd/even shapes,
 --     FFT-vs-kernel-shift agreement and every support of orders 1--3 on the
 --     four declared fixtures (22,218 supports, zero violations);
---   * a synthetic claim-scale memory-plan execution over a declared geometry.
--- These are captured execution receipts, not merely executable code. They remain
--- deliberately separate from the still-unexecuted real Berkeley PSF receipt.
+--   * a synthetic claim-scale memory-plan execution over a declared geometry;
+--   * a focused local pytest of the receipt wiring (2 passed, 0 failed).
+-- The focused pytest is not promoted to full-repository pytest or Agda kernel
+-- certification. None of these local receipts is promoted into the still-
+-- unexecuted real Berkeley PSF receipt.
 --
 -- The information-design code additionally pays a common *analysis* photon
 -- normalization: each real dataset is divided by its own mean, rescaled to a
@@ -64,6 +66,9 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     localExhaustiveFiniteSupportReceiptCaptured : Bool
     claimScaleMemoryPlannerExecutable : Bool
     localClaimScalePlannerReceiptCaptured : Bool
+    localFocusedReceiptPytestCaptured : Bool
+    fullRepositoryPytestCaptured : Bool
+    agdaKernelReceiptCaptured : Bool
     sourceOperatorSelectedGridColumnCompilerPaid : Bool
     depthConditioningAuditExecutable : Bool
     translatedColumnRestrictedAuditExecutable : Bool
@@ -97,6 +102,9 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; localExhaustiveFiniteSupportReceiptCaptured = LocalExecution.exhaustiveFiniteSupportReceiptCaptured
   ; claimScaleMemoryPlannerExecutable = true
   ; localClaimScalePlannerReceiptCaptured = LocalExecution.claimScalePlannerReceiptCaptured
+  ; localFocusedReceiptPytestCaptured = LocalExecution.focusedReceiptContractPytestCaptured
+  ; fullRepositoryPytestCaptured = LocalExecution.fullRepositoryPytestCaptured
+  ; agdaKernelReceiptCaptured = LocalExecution.agdaKernelReceiptCaptured
   ; sourceOperatorSelectedGridColumnCompilerPaid = true
   ; depthConditioningAuditExecutable = true
   ; translatedColumnRestrictedAuditExecutable = true
@@ -144,6 +152,15 @@ claimScaleMemoryPlannerStatus = Conditioning.claimScaleMemoryPlannerExecutable
 
 localClaimScaleReceiptStatus : Bool
 localClaimScaleReceiptStatus = LocalExecution.claimScalePlannerReceiptCaptured
+
+localFocusedPytestReceiptStatus : Bool
+localFocusedPytestReceiptStatus = LocalExecution.focusedReceiptContractPytestCaptured
+
+fullRepositoryPytestReceiptStatus : Bool
+fullRepositoryPytestReceiptStatus = LocalExecution.fullRepositoryPytestCaptured
+
+agdaKernelReceiptStatus : Bool
+agdaKernelReceiptStatus = LocalExecution.agdaKernelReceiptCaptured
 
 sourceSelectedGridCompilerStatus : Bool
 sourceSelectedGridCompilerStatus = Conditioning.sourceOperatorSelectedGridColumnCompilerPaid
