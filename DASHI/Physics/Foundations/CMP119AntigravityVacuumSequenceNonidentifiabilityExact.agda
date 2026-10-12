@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabilityExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _<_)
 import Data.Rational.Properties as ℚP
@@ -13,14 +13,27 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 ------------------------------------------------------------------------
 -- VACUUM-SEQUENCE NON-IDENTIFIABILITY FROM THE CURRENT SOURCE VIEW
 --
--- CMP119NormalizedSectorSource stores the vacuum sector as an independent
--- scale-indexed LocalizedAction.  Coupling history, density/background/
--- fluctuation data and the E/R/B sectors therefore cannot determine its
--- plaquette projection without an additional source/physics theorem.
+-- IMPORTANT COORDINATE CORRECTION
 --
--- We prove this constructively: replace ONLY vacuumAt by either an irrelevant
--- action (projector 0) or the plaquette basis (projector 1).  Every other
--- source coordinate is definitionally unchanged.
+-- LocalizedAction has two rational coordinates:
+--
+--   plaquetteCoefficientField   -- Wilson/plaquette-relevant coefficient
+--   irrelevantCoefficientField  -- the non-plaquette remainder coordinate.
+--
+-- A source vacuum/normalization constant must not be identified with the
+-- plaquette coefficient merely because both inhabit LocalizedAction.  The
+-- canonical constant-action embedding is
+--
+--   irrelevantAction V = localizedAction 0 V.
+--
+-- Therefore the non-identifiability witness below varies only the remainder /
+-- constant coordinate: 0 versus 1.  Every coupling, density, background,
+-- fluctuation and E/R/B coordinate remains definitionally unchanged.
+--
+-- This proves that the declared current source view does not determine that
+-- constant coordinate.  A separate published-source theorem must still show
+-- that the selected CMP119 vacuum-energy/normalization term is encoded by this
+-- constant-action coordinate on the physical source.
 ------------------------------------------------------------------------
 
 replaceVacuum :
@@ -49,7 +62,7 @@ zeroVacuumSequence : Nat → T4.LocalizedAction
 zeroVacuumSequence _ = T4.irrelevantAction 0ℚ
 
 unitVacuumSequence : Nat → T4.LocalizedAction
-unitVacuumSequence _ = T4.plaquetteBasisAction
+unitVacuumSequence _ = T4.irrelevantAction 1ℚ
 
 zeroVacuumSource :
   ∀ {Density Background Fluctuation} →
@@ -63,12 +76,20 @@ unitVacuumSource :
   Canonical.CMP119NormalizedSectorSource Density Background Fluctuation
 unitVacuumSource source = replaceVacuum source unitVacuumSequence
 
+vacuumConstantProjection :
+  ∀ {Density Background Fluctuation} →
+  Canonical.CMP119NormalizedSectorSource Density Background Fluctuation →
+  Nat → ℚ
+vacuumConstantProjection source scale =
+  T4.irrelevantCoefficientField (Canonical.vacuumAt source scale)
+
+-- Compatibility name retained for downstream consumers.  "Projected vacuum"
+-- now means the constant/remainder coordinate, NOT the plaquette coefficient.
 projectedVacuum :
   ∀ {Density Background Fluctuation} →
   Canonical.CMP119NormalizedSectorSource Density Background Fluctuation →
   Nat → ℚ
-projectedVacuum source scale =
-  T4.plaquetteCoefficientProjector (Canonical.vacuumAt source scale)
+projectedVacuum = vacuumConstantProjection
 
 sameCouplingAfterVacuumReplacement :
   ∀ {Density Background Fluctuation}
@@ -138,7 +159,7 @@ unitVacuumProjectsOne :
     (source : Canonical.CMP119NormalizedSectorSource Density Background Fluctuation)
     scale →
   projectedVacuum (unitVacuumSource source) scale ≡ 1ℚ
-unitVacuumProjectsOne source scale = T4.plaquetteCoefficientOfPlaquetteBasis
+unitVacuumProjectsOne source scale = refl
 
 zeroBelowOne : 0ℚ < 1ℚ
 zeroBelowOne = ℚP.positive⁻¹ 1ℚ
@@ -197,6 +218,15 @@ couplingAndERBDoNotDetermineVacuum source =
     (λ _ → refl)
     (λ _ → refl)
     (projectedVacuumSequencesDiffer source)
+
+plaquetteProjectorIsVacuumConstantCoordinate : Bool
+plaquetteProjectorIsVacuumConstantCoordinate = false
+
+constantRemainderCoordinateUsedForVacuumCollision : Bool
+constantRemainderCoordinateUsedForVacuumCollision = true
+
+publishedVacuumConstantEncodingStillRequired : Bool
+publishedVacuumConstantEncodingStillRequired = true
 
 sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 sourceVacuumSequenceRequiresIndependentPhysicalPayment = true
