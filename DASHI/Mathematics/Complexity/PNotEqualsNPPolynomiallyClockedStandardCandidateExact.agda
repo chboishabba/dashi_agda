@@ -52,10 +52,10 @@ open PolynomiallyClockedStandardCandidate public
 
 candidateConcreteClockReceipt :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
-    {candidate : Direct.PolynomialSATDeciderCandidate cost} →
-  PolynomiallyClockedStandardCandidate candidate →
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (clocked : PolynomiallyClockedStandardCandidate candidate) →
   ClockBridge.ConcreteStandardClockReceipt
-    (StandardCandidate.candidateConcreteMachine (standard _))
+    (StandardCandidate.candidateConcreteMachine (standard clocked))
 candidateConcreteClockReceipt clocked =
   ClockBridge.concreteStandardClockReceipt
     (StandardCandidate.candidateConcreteMachine (standard clocked))
