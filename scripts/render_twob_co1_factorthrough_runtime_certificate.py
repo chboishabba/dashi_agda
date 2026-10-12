@@ -110,15 +110,22 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- GENERATED RUNTIME RECEIPT: Co1 FACTOR-THROUGH / TATE-COKERNEL MAX-CUT
 --
--- CTBlocks certifies block separation and the decomposition matrix certifies
--- that the residual rank-24 lane is exactly the unique degree-24 irreducible
--- Brauer constituent.  Consequently the 24-dimensional residual quotient has
--- no extension room once the source-native rank theorem is attached to the
--- actual map.
+-- Runtime pays the representation side:
+--   * actual Tate semisimplified Co1 profile 1,274,1;
+--   * all four augmentation-arrow Hom spaces vanish;
+--   * common/residual CTBlocks separation;
+--   * one unique residual degree-24 simple;
+--   * dim Hom_Co1(24,Sym2(24))=1 and explicit Frobenius spans it.
 --
--- The certificate still does not invent the source-native norm matrix, the
--- quotient chart, or the final action intertwiner; those remain proof-bearing
--- same-object data consumed by the Lean norm-weld compiler.
+-- The current proof graph no longer treats the common 98280 map as an
+-- independent acquisition.  Once the actual source residual central block
+-- projector is attached to the source-native norm, block naturality gives
+-- residual support <=24; paired norm injectivity forces residual rank 24,
+-- kernel 98280, and common cancellation automatically.
+--
+-- Firewalls remain: this generated receipt does NOT construct the actual block
+-- projector action, the induced residual Co1-equivariant quotient map, or the
+-- final Tate=wedge2(24) same-object identification.
 ------------------------------------------------------------------------
 
 wedgeReceiptSha256 : String
@@ -178,19 +185,23 @@ residual24HomLineUnique : Bool
 residual24HomLineUnique = true
 uniqueNonzero24ToSym2MapIsFrobenius : Bool
 uniqueNonzero24ToSym2MapIsFrobenius = true
-actualNormResidual24MapForcedFrobenius : Bool
-actualNormResidual24MapForcedFrobenius = false
 common98280SupportSeparatedFromResidualLanes : Bool
 common98280SupportSeparatedFromResidualLanes = true
 common98280BlockSeparatedFromResidualLanes : Bool
 common98280BlockSeparatedFromResidualLanes = true
 blockIdempotentCommonResidualSplitAvailable : Bool
 blockIdempotentCommonResidualSplitAvailable = true
+common98280NoLongerIndependentGate : Bool
+common98280NoLongerIndependentGate = true
+blockNaturalityCompilerImplemented : Bool
+blockNaturalityCompilerImplemented = true
 
-actualNormCommon98280IsomorphismPaid : Bool
-actualNormCommon98280IsomorphismPaid = false
-actualNormResidual24MapPaidNonzero : Bool
-actualNormResidual24MapPaidNonzero = false
+actualResidualBlockProjectorActionPaid : Bool
+actualResidualBlockProjectorActionPaid = false
+inducedResidualCo1EquivariancePaid : Bool
+inducedResidualCo1EquivariancePaid = false
+actualNormResidual24MapForcedFrobenius : Bool
+actualNormResidual24MapForcedFrobenius = false
 actualTateCo1ExtensionIdentifiedWithWedge2_24 : Bool
 actualTateCo1ExtensionIdentifiedWithWedge2_24 = false
 actualTateStableQ10Constructed : Bool
