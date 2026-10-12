@@ -9,9 +9,10 @@ open import Agda.Builtin.String using (String)
 --
 -- These receipts were produced by executing the branch's source-H numerical
 -- logic locally. They certify implementation identities, an exhaustive finite
--- support-order check on declared synthetic fixtures, and claim-scale memory
--- planning. They do NOT substitute for execution on Waller's pinned
--- `example_psfs.mat`, and they do not establish physical photon calibration.
+-- support-order check on declared synthetic fixtures, claim-scale memory
+-- planning, and a focused receipt-contract pytest. They do NOT substitute for
+-- execution on Waller's pinned `example_psfs.mat`, full-repository pytest, or
+-- Agda kernel checking, and they do not establish physical photon calibration.
 ------------------------------------------------------------------------
 
 syntheticReceiptPath : String
@@ -25,6 +26,12 @@ claimScaleReceiptPath = "receipts/optics/waller_diffusercam_claim_scale_receipt.
 
 claimScaleReceiptGitBlobSHA : String
 claimScaleReceiptGitBlobSHA = "52cecec7a7b61fc5577129e9b704ee53482f2c82"
+
+focusedPytestReceiptPath : String
+focusedPytestReceiptPath = "receipts/optics/waller_diffusercam_local_pytest_receipt.json"
+
+focusedPytestReceiptGitBlobSHA : String
+focusedPytestReceiptGitBlobSHA = "5be367654d6a6510a05cc81d83e4c84af89e465f"
 
 syntheticSeed : Nat
 syntheticSeed = 1729
@@ -53,6 +60,12 @@ claimScaleBudgetBytes = 200000000
 claimScaleLargestSafeSyntheticRadius : Nat
 claimScaleLargestSafeSyntheticRadius = 2
 
+focusedPytestTestsPassed : Nat
+focusedPytestTestsPassed = 2
+
+focusedPytestTestsFailed : Nat
+focusedPytestTestsFailed = 0
+
 syntheticOperatorReceiptCaptured : Bool
 syntheticOperatorReceiptCaptured = true
 
@@ -61,6 +74,15 @@ exhaustiveFiniteSupportReceiptCaptured = true
 
 claimScalePlannerReceiptCaptured : Bool
 claimScalePlannerReceiptCaptured = true
+
+focusedReceiptContractPytestCaptured : Bool
+focusedReceiptContractPytestCaptured = true
+
+fullRepositoryPytestCaptured : Bool
+fullRepositoryPytestCaptured = false
+
+agdaKernelReceiptCaptured : Bool
+agdaKernelReceiptCaptured = false
 
 realBerkeleyPSFReceiptCaptured : Bool
 realBerkeleyPSFReceiptCaptured = false
@@ -74,6 +96,8 @@ record DiffuserCamLocalExecutionReceipt : Set where
     operatorReceiptBlob : String
     plannerReceiptPath : String
     plannerReceiptBlob : String
+    pytestReceiptPath : String
+    pytestReceiptBlob : String
     shapesChecked : Nat
     exhaustiveOrderMaximum : Nat
     supportsChecked : Nat
@@ -82,9 +106,14 @@ record DiffuserCamLocalExecutionReceipt : Set where
     worstBoundMargin : String
     memoryBudgetBytes : Nat
     largestSafeSyntheticRadius : Nat
+    pytestPassed : Nat
+    pytestFailed : Nat
     syntheticOperatorReceipt : Bool
     exhaustiveSupportReceipt : Bool
     claimScalePlannerReceipt : Bool
+    focusedPytestReceipt : Bool
+    fullRepoPytestReceipt : Bool
+    kernelReceipt : Bool
     realPSFReceipt : Bool
     physicalPhotonReceipt : Bool
 
@@ -96,6 +125,8 @@ currentDiffuserCamLocalExecutionReceipt = record
   ; operatorReceiptBlob = syntheticReceiptGitBlobSHA
   ; plannerReceiptPath = claimScaleReceiptPath
   ; plannerReceiptBlob = claimScaleReceiptGitBlobSHA
+  ; pytestReceiptPath = focusedPytestReceiptPath
+  ; pytestReceiptBlob = focusedPytestReceiptGitBlobSHA
   ; shapesChecked = syntheticShapesChecked
   ; exhaustiveOrderMaximum = exhaustiveSupportOrderMaximum
   ; supportsChecked = gershgorinSupportsChecked
@@ -104,9 +135,14 @@ currentDiffuserCamLocalExecutionReceipt = record
   ; worstBoundMargin = worstObservedMinusBoundMargin
   ; memoryBudgetBytes = claimScaleBudgetBytes
   ; largestSafeSyntheticRadius = claimScaleLargestSafeSyntheticRadius
+  ; pytestPassed = focusedPytestTestsPassed
+  ; pytestFailed = focusedPytestTestsFailed
   ; syntheticOperatorReceipt = syntheticOperatorReceiptCaptured
   ; exhaustiveSupportReceipt = exhaustiveFiniteSupportReceiptCaptured
   ; claimScalePlannerReceipt = claimScalePlannerReceiptCaptured
+  ; focusedPytestReceipt = focusedReceiptContractPytestCaptured
+  ; fullRepoPytestReceipt = fullRepositoryPytestCaptured
+  ; kernelReceipt = agdaKernelReceiptCaptured
   ; realPSFReceipt = realBerkeleyPSFReceiptCaptured
   ; physicalPhotonReceipt = physicalPhotonCalibrationReceiptCaptured
   }
