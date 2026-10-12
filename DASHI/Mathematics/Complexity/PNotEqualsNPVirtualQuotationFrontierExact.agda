@@ -2,17 +2,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact wh
 
 ------------------------------------------------------------------------
 -- ACTIVE FRONTIER AFTER THE LITERAL-MATERIALISATION NO-GO
---
--- The former prefix wrote the complete own Cook formula before D started. The
--- coded/structural no-go closes that architecture for anchored candidates.
---
--- Replacement:
---
---   canonical answer-blind (machine,input,T,index) query code
---      -> ONE universal finite indexed Cook-bit generator
---      -> charged virtual reads
---      -> stepwise candidate simulation
---      -> finite opposite suffix.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
@@ -33,6 +22,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedStandardOppositeQuotationExact as Opposite
 import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralResourceClosingCompilerExact as StructuralResource
 import DASHI.Mathematics.Complexity.PolynomialClockArithmeticExact as Clock
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 
 import DASHI.Mathematics.Complexity.VirtualFormulaBitSourceExact as Virtual
 import DASHI.Mathematics.Complexity.VirtualFormulaQueryTraceExact as Trace
@@ -41,7 +31,6 @@ import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
-import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 
 literalAnchoredRouteClosed :
   (closure : Cost.CodedStandardCostClosure)
@@ -105,16 +94,14 @@ record UniversalGuardedCookBitGenerator : Set₃ where
       outputBit (finishConfiguration query) ≡ just bit →
       Virtual.BitAt
         (Query.index query)
-        (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.encodeFormulaBits
-          (Query.queryFormula query))
+        (Binary.encodeFormulaBits (Query.queryFormula query))
         bit
 
     outputComplete :
       ∀ {query bit} →
       Virtual.BitAt
         (Query.index query)
-        (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.encodeFormulaBits
-          (Query.queryFormula query))
+        (Binary.encodeFormulaBits (Query.queryFormula query))
         bit →
       outputBit (finishConfiguration query) ≡ just bit
 
@@ -201,7 +188,7 @@ data VirtualRunSimulation
       targetFinish
 
 ------------------------------------------------------------------------
--- One candidate-specific virtual compilation boundary.
+-- Candidate-specific virtual compilation boundary.
 ------------------------------------------------------------------------
 
 record VirtualSelfQuotationCompilation
@@ -218,29 +205,27 @@ record VirtualSelfQuotationCompilation
       Virtual.VirtualFormulaBitSource
         (Opposite.fixedCookFormula fixed)
 
-    queryForIndex : Nat → Query.GuardedCookBitQuery
+    -- One base description. All reads vary ONLY the index via Query.withIndex.
+    baseQuery : Query.GuardedCookBitQuery
 
-    queryFormulaExact :
-      (index : Nat) →
-      Query.queryFormula (queryForIndex index)
+    baseQueryFormulaExact :
+      Query.queryFormula baseQuery
       ≡ Opposite.fixedCookFormula fixed
-
-    queryIndexExact :
-      (index : Nat) →
-      Query.index (queryForIndex index) ≡ index
 
     universalGenerator : UniversalGuardedCookBitGenerator
 
     generatorAgreesWithSource :
       (index : Nat) →
       outputBit universalGenerator
-        (finishConfiguration universalGenerator (queryForIndex index))
+        (finishConfiguration universalGenerator
+          (Query.withIndex baseQuery index))
       ≡ Virtual.readBit virtualSource index
 
     sourceQueryWorkExact :
       (index : Nat) →
       Virtual.queryWork virtualSource index
-      ≡ queryCharge universalGenerator (queryForIndex index)
+      ≡ queryCharge universalGenerator
+          (Query.withIndex baseQuery index)
 
     candidateTargetStart :
       Standard.StandardConfiguration
@@ -266,14 +251,13 @@ open VirtualSelfQuotationCompilation public
 ------------------------------------------------------------------------
 -- EXACT NEW FRONTIER
 --
--- 1. Implement ONE `UniversalGuardedCookBitGenerator` on the canonical query
---    code, with its exact standard run and polynomial query clock.
--- 2. Produce `queryForIndex` from the fixed target's compact coded description,
---    not from the full formula bitstring, and pay query-code preparation.
--- 3. Build the stepwise `VirtualRunSimulation`, whose per-edge target segments
---    include all virtual-query charges.
+-- 1. Implement ONE `UniversalGuardedCookBitGenerator` on canonical query code.
+-- 2. Produce ONE compact `baseQuery` for the fixed target; every read is exactly
+--    `withIndex baseQuery i`, so machine/input/T cannot vary with the answer.
+-- 3. Build stepwise `VirtualRunSimulation`, paying query-code length + generator
+--    execution for every read inside actual target-machine time.
 -- 4. Reattach finite setup + negation suffix + exact total target clock and
---    reuse the already-paid Cook iff/opposite-decision failure plumbing.
+--    reuse the already-paid Cook iff/opposite-decision plumbing.
 --
 -- Literal full-formula materialisation is no longer an admissible frontier.
 ------------------------------------------------------------------------
