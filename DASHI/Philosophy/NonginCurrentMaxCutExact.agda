@@ -25,6 +25,7 @@ import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as Cont
 import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
 import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
 import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact as C3Repair
+import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact as Expansion
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Higher
 
 originBoundary : Origin.NonginSourceBoundary
@@ -68,6 +69,9 @@ c3NoGoBoundary = C3NoGo.canonicalTrialecticC3GlobalNaturalityNoGoBoundary
 
 c3RepairBoundary : C3Repair.TrialecticC3EdgeResidualRepairBoundary
 c3RepairBoundary = C3Repair.canonicalTrialecticC3EdgeResidualRepairBoundary
+
+expansionBoundary : Expansion.TrialecticCarryDepthExpansionPolicyBoundary
+expansionBoundary = Expansion.canonicalTrialecticCarryDepthExpansionPolicyBoundary
 
 higherBoundary : Higher.TrialecticHigherDescentPromotionBoundary
 higherBoundary = Higher.canonicalTrialecticHigherDescentPromotionBoundary
@@ -169,6 +173,18 @@ c3OldFullT9RetentionNotRequired :
   C3Repair.oldFullT9EdgeRequiredForRotatedEdgeConsumer c3RepairBoundary ≡ false
 c3OldFullT9RetentionNotRequired = refl
 
+carryExpansionPolicyReceipt :
+  Expansion.explicitExpansionPolicyConstructed expansionBoundary ≡ true
+carryExpansionPolicyReceipt = refl
+
+carrySeedUniquenessStillFalse :
+  Expansion.carrySeedUniquelyDeterminesNextStructuredState expansionBoundary ≡ false
+carrySeedUniquenessStillFalse = refl
+
+carryAllDepthCoherenceStillExplicit :
+  Expansion.allDepthCoherenceAutomatic expansionBoundary ≡ false
+carryAllDepthCoherenceStillExplicit = refl
+
 transportEnrichedGroupoidPresheafStillOpen :
   Higher.groupoidPresheafReady higherBoundary ≡ false
 transportEnrichedGroupoidPresheafStillOpen = refl
@@ -206,6 +222,9 @@ record NonginCurrentMaxCutBoundary : Set where
     c3RicherLocalContextRequired : Bool
     c3ResidualRepairPaid : Bool
     c3OldFullT9RetentionRequired : Bool
+    carryExpansionPolicyPaid : Bool
+    carrySeedUniqueNextStructuredState : Bool
+    carryAllDepthCoherenceAutomatic : Bool
     transportEnrichedGroupoidPresheafPaid : Bool
     empiricalTenPercentLawPromoted : Bool
     universalRicherRepresentationAdvantagePromoted : Bool
@@ -242,6 +261,9 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; c3RicherLocalContextRequired = true
   ; c3ResidualRepairPaid = true
   ; c3OldFullT9RetentionRequired = false
+  ; carryExpansionPolicyPaid = true
+  ; carrySeedUniqueNextStructuredState = false
+  ; carryAllDepthCoherenceAutomatic = false
   ; transportEnrichedGroupoidPresheafPaid = false
   ; empiricalTenPercentLawPromoted = false
   ; universalRicherRepresentationAdvantagePromoted = false
