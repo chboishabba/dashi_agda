@@ -2,10 +2,6 @@ module DASHI.Mathematics.Complexity.CodedStandardFormulaInputFaithfulExact where
 
 ------------------------------------------------------------------------
 -- FAITHFUL CANONICAL FORMULA INPUT FOR CODED STANDARD MACHINES
---
--- Distinct zero/one tape symbols make the bit-symbol map injective. Combined
--- with the existing binary BooleanFormula codec round trip, the literal tape
--- input is an injective representation of BooleanFormula.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -23,26 +19,23 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as B
 
 consHead :
   ∀ {A : Set} {x y : A} {xs ys : List A} →
-  x ∷ xs ≡ y ∷ ys →
-  x ≡ y
+  x ∷ xs ≡ y ∷ ys → x ≡ y
 consHead refl = refl
 
 consTail :
   ∀ {A : Set} {x y : A} {xs ys : List A} →
-  x ∷ xs ≡ y ∷ ys →
-  xs ≡ ys
+  x ∷ xs ≡ y ∷ ys → xs ≡ ys
 consTail refl = refl
 
 mapFormulaBitsInjective :
   ∀ {n : Nat}
     (zeroSymbol oneSymbol : Fin.Fin n) →
-  zeroSymbol ≡ oneSymbol → ⊥ →
+  (zeroSymbol ≡ oneSymbol → ⊥) →
   ∀ {left right : List Bool} →
   CodedDecider.mapFormulaBits zeroSymbol oneSymbol left
   ≡ CodedDecider.mapFormulaBits zeroSymbol oneSymbol right →
   left ≡ right
-mapFormulaBitsInjective zeroSymbol oneSymbol distinct {[]} {[]} equality =
-  refl
+mapFormulaBitsInjective zeroSymbol oneSymbol distinct {[]} {[]} equality = refl
 mapFormulaBitsInjective zeroSymbol oneSymbol distinct {[]} {false ∷ right} ()
 mapFormulaBitsInjective zeroSymbol oneSymbol distinct {[]} {true ∷ right} ()
 mapFormulaBitsInjective zeroSymbol oneSymbol distinct {false ∷ left} {[]} ()
@@ -79,8 +72,7 @@ formulaInputInjective
     (trans decodedEqual (Binary.decodeEncodeFormulaBits right))
   where
     encodedEqual :
-      Binary.encodeFormulaBits left
-      ≡ Binary.encodeFormulaBits right
+      Binary.encodeFormulaBits left ≡ Binary.encodeFormulaBits right
     encodedEqual =
       mapFormulaBitsInjective
         zeroSymbol oneSymbol distinct inputEqual
@@ -88,8 +80,7 @@ formulaInputInjective
     decodedEqual :
       Binary.decodeFormulaBits (Binary.encodeFormulaBits left)
       ≡ Binary.decodeFormulaBits (Binary.encodeFormulaBits right)
-    decodedEqual =
-      cong Binary.decodeFormulaBits encodedEqual
+    decodedEqual = cong Binary.decodeFormulaBits encodedEqual
 
 witnessFormulaInputInjective :
   ∀ {decider : Cook.BooleanFormula → Bool}
