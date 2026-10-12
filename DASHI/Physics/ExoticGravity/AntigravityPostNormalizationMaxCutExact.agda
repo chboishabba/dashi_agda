@@ -97,6 +97,8 @@ differentialSpin2TTProducerStillRequired = true
 -- The preferred route does NOT require exact finite-cutoff = R136 equality.
 -- It requires a pinned finite expectation = embed(D_Gamma), a concrete
 -- same-sequence completion/tail bound, and a strict finite+tail source margin.
+-- The lower B1 audit classifies the corresponding semantics/endpoint/attachment
+-- inputs as SOURCE THEOREMS, with zero remaining adapter construction debt.
 ------------------------------------------------------------------------
 
 continuumR136RouteRemainsIndependentAlternative : Bool
@@ -116,6 +118,13 @@ continuumPinnedFiniteAnchorAndTailBoundStillRequired = true
 continuumStrictFinitePlusTailMarginStillRequired : Bool
 continuumStrictFinitePlusTailMarginStillRequired =
   ConcreteR.strictFinitePlusTailMarginStillRequired
+
+continuumRemainingInputsAreSourceTheoremsNotAdapterDebt : Bool
+continuumRemainingInputsAreSourceTheoremsNotAdapterDebt = true
+
+continuumCurrentImportedSourceClosesThoseTheorems : Bool
+continuumCurrentImportedSourceClosesThoseTheorems =
+  ConcreteR.currentImportedPrimarySourceClosesAllIrreducibleCosmologyTheorems
 
 record PostNormalizationAntigravityFrontier : Set where
   constructor post-normalization-antigravity-frontier
@@ -147,6 +156,8 @@ record PostNormalizationAntigravityFrontier : Set where
     continuumPinnedFiniteExpectationEqualsDGammaRequired : Bool
     continuumConcreteSameSequenceTailBoundRequired : Bool
     continuumStrictFinitePlusTailMarginRequired : Bool
+    continuumRemainingB1InputsAreSourceTheoremsNotAdapters : Bool
+    continuumCurrentImportedSourceAlreadyClosesThoseInputs : Bool
     continuumSameStateEuclideanLorentzianStressStillRequired : Bool
     continuumRouteIsAlternativeNotPrerequisiteOfStaticOrDifferential : Bool
 
@@ -157,7 +168,7 @@ canonicalPostNormalizationAntigravityFrontier =
     true true true true true
     true true true true true
     true true true false true true true true true
-    true false true true true true true
+    true false true true true true false true true
 
 staticVacuumAlgebraAfterPhysicalReceiptOwned : Bool
 staticVacuumAlgebraAfterPhysicalReceiptOwned =
