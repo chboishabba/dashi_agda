@@ -18,7 +18,7 @@ module DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact where
 -- * the X6 compression is the previously selected degree-six receipt;
 -- * for the repository asymmetric Heisenberg cocycle matrix C,
 --     D = M^T C M - C
---   is symmetric;
+--   is symmetric and has rank 12;
 -- * over GF(3), q(x)=2 x^T D x has polarization D;
 -- * hence the central-correction identity
 --     q(x+y)+c(x,y)=q(x)+q(y)+c(Mx,My)
@@ -56,7 +56,7 @@ canonicalSelectedHeisenbergLiftReceipt =
   selected-heisenberg-lift-receipt
     "scripts/verify_monster3b_selected_heisenberg_lift.py"
     "g2 g1 g2^-1 g1 g2^-1"
-    12 6 6 1 6
+    12 6 6 1 12
     true true true true false
 
 record Boundary : Set where
