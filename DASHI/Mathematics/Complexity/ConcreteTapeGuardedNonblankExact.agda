@@ -11,7 +11,6 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -59,35 +58,6 @@ eraseCellsLength :
 eraseCellsLength [] = refl
 eraseCellsLength (cell ∷ cells)
   rewrite eraseCellsLength cells = refl
-
-eraseReplicateBlank :
-  ∀ {machine : Local.ConcreteTapeMachine}
-    (steps : Nat) →
-  Writes.eraseCells (Padding.replicateBlank {machine} steps)
-  ≡ replicateSymbol (Local.blank machine) steps
-  where
-    replicateSymbol : Local.Symbol machine → Nat → List (Local.Symbol machine)
-    replicateSymbol symbol zero = []
-    replicateSymbol symbol (suc n) = symbol ∷ replicateSymbol symbol n
-eraseReplicateBlank zero = refl
-eraseReplicateBlank (suc steps)
-  rewrite eraseReplicateBlank steps = refl
-
-blankListNonblankZero :
-  ∀ {Symbol : Set}
-    (enumeration : Local.FiniteEnumeration Symbol)
-    (blank : Symbol)
-    (steps : Nat) →
-  Nonblank.nonblankCount enumeration blank (replicateSymbol blank steps)
-  ≡ zero
-  where
-    replicateSymbol : Symbol → Nat → List Symbol
-    replicateSymbol symbol zero = []
-    replicateSymbol symbol (suc n) = symbol ∷ replicateSymbol symbol n
-blankListNonblankZero enumeration blank zero = refl
-blankListNonblankZero enumeration blank (suc steps)
-  rewrite Nonblank.blankBitZero enumeration blank
-        | blankListNonblankZero enumeration blank steps = refl
 
 replicateBlankNonblankZero :
   ∀ {machine : Local.ConcreteTapeMachine}
