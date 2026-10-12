@@ -14,7 +14,7 @@ import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as TrumpBannon
 -- AUSTRALIA / RINEHART / TRUMP / ONE NATION ACCESS-BROKERAGE BRIDGE
 --
 -- This owner deliberately sits adjacent to, not inside, the direct Epstein-
--- Australia graph.  Contemporary Rinehart -> Trump access -> One Nation donor
+-- Australia graph. Contemporary Rinehart -> Trump access -> One Nation donor
 -- redirection is independently relevant political-finance/access evidence, but
 -- it does not manufacture a Gina Rinehart <-> Jeffrey Epstein relationship.
 --
@@ -41,7 +41,7 @@ record AustraliaTrumpAccessReceipt : Set where
     relationEstablished : Bool
     sourceAttributedOrDisputed : Bool
     wrongdoingEstablishedByThisReceipt : Bool
-    epsteinRelationshipEstablishedByThisReceipt : Bool
+    directRinehartEpsteinRelationshipEstablishedByThisReceipt : Bool
 open AustraliaTrumpAccessReceipt public
 
 rinehartTrumpBrokerageReceipt : AustraliaTrumpAccessReceipt
@@ -84,7 +84,7 @@ bannonPalmerReceipt : AustraliaTrumpAccessReceipt
 bannonPalmerReceipt = australia-trump-access-receipt
   bannonPalmerInfluenceClaim
   "A DOJ-released 2019 text records Steve Bannon claiming to Epstein that he had Clive Palmer run AUD 60m anti-China and anti-climate-change advertising. Palmer denies Bannon directed the campaign and denies an Epstein relationship. This pays the existence of Bannon's claim, not its truth."
-  true true false true
+  true true false false
 
 rinehartEpsteinBoundaryReceipt : AustraliaTrumpAccessReceipt
 rinehartEpsteinBoundaryReceipt = australia-trump-access-receipt
@@ -146,7 +146,7 @@ data AssociateDonationImpliesRinehartSourceFunds : Set where
 data SharedTrumpAlignmentImpliesCoordination : Set where
 data BannonClaimImpliesPalmerDirection : Set where
 data TrumpAccessImpliesEpsteinRelationship : Set where
-\data HistoricalForeignSolicitationImpliesCurrentCoordination : Set where
+data HistoricalForeignSolicitationImpliesCurrentCoordination : Set where
 
 accessBrokerageDoesNotByItselfCreateBribery : AccessBrokerageImpliesBribery → ⊥
 accessBrokerageDoesNotByItselfCreateBribery ()
