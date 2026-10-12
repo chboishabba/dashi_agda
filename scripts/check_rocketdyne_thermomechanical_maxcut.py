@@ -34,7 +34,7 @@ EXPECT = {
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974ExperimentalCoordinateRefinementExact.agda": [
         "rocketdyneExperimentDesign", "temperatureCollision", "materialSeparatesTemperatureCollision",
-        "nextCoordinateAcquisitionFrontier"
+        "nextCoordinateAcquisitionFrontier", "manufacturingProcessCoordinateOpen"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974QualificationFeedbackWeldExact.agda": [
         "haynesAnomalyToRevisionCandidate", "wc103FollowupObservation", "formalApprovalStillUnpaid",
