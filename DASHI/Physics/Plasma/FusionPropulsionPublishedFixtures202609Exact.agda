@@ -28,7 +28,7 @@ record ReportedDecimal : Set where
     baseTenExponent : Nat
     unit : ReportedUnit
     approximate : Bool
-    source : MaxCut.SourceAttribution
+    reportedSource : MaxCut.SourceAttribution
 
 open ReportedDecimal public
 
@@ -62,7 +62,7 @@ record PB11PlannedResonanceTargets : Set where
   field
     lowerLaboratoryEnergyKeV : Nat
     upperLaboratoryEnergyKeV : Nat
-    source : MaxCut.SourceAttribution
+    plannedSource : MaxCut.SourceAttribution
     targetDevelopmentOnly : Bool
     targetDevelopmentOnlyIsTrue : targetDevelopmentOnly ≡ true
     newCrossSectionResultAvailable : Bool
