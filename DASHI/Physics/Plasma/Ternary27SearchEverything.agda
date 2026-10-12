@@ -18,6 +18,7 @@ import DASHI.Physics.Plasma.Phase243NumberRoleProvenanceExact
 import DASHI.Physics.Plasma.Phase243TorusReparameterizationExact
 import DASHI.Physics.Plasma.Phase243ConsumerDescentExact
 import DASHI.Physics.Plasma.Phase243PeriodicConsumerQuotientExact
+import DASHI.Physics.Plasma.Phase243ConsumerKernelCrossPollinationExact
 import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact
 import DASHI.Physics.Plasma.Phase243EquivariantFibreSearchExact
 import DASHI.Physics.Plasma.Phase243RookMaxCutExact
