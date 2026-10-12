@@ -21,6 +21,7 @@ import DASHI.Mathematics.Complexity.StandardMachineSpanGrowthExact as SpanGrowth
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardProjectionSpanExact as ProjectionSpan
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact as Structural
 
 candidateOwnFormula :
@@ -39,7 +40,7 @@ candidateOwnInput :
     {clocked : Clocked.PolynomiallyClockedStandardCandidate candidate}
     (structuralResource :
       StructuralResource.StructuralResourceClosingFixedProgramCompilation clocked) →
-  DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact.InputWord
+  Input.InputWord
     (Candidate.candidateConcreteMachine (Clocked.standard clocked))
 candidateOwnInput {clocked = clocked} structuralResource =
   Candidate.encodeFormula
@@ -132,7 +133,7 @@ structuralPrefixSpanNecessity structuralResource =
 --
 -- The target begins with a guarded seed row already padded by 2*T blanks.
 -- Therefore represented span alone need not obstruct self-quotation: the blank
--- reserve can be larger than the candidate's embedded input span.  The live
+-- reserve can be larger than the candidate's embedded input span. The live
 -- residual is information/content generation inside that span, not hidden tape
 -- expansion.
 ------------------------------------------------------------------------
