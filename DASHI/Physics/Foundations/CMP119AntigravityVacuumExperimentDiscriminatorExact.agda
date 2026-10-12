@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityVacuumExperimentDiscriminatorExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ)
@@ -165,10 +165,8 @@ canonicalVacuumExperimentDiscriminatorBoundary :
   VacuumExperimentDiscriminatorBoundary
 canonicalVacuumExperimentDiscriminatorBoundary =
   vacuum-experiment-discriminator-boundary
-    true true true true true
+    true true true true false
 
--- The final flag above means the QUESTION remains live; keep the explicit
--- promotion firewall below as the authoritative polarity used by schedulers.
 physicalVacuumMeasurementStillRequiresCalibration : Bool
 physicalVacuumMeasurementStillRequiresCalibration = true
 
