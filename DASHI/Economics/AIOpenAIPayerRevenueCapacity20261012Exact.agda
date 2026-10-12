@@ -8,17 +8,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
 
-------------------------------------------------------------------------
--- OPENAI PAYER REVENUE-CAPACITY PARTIAL BOUNDARY
---
--- CoreWeave names OpenAI as a future significant customer under a commitment
--- up to USD 6.5B through May 2031. Reuters subsequently reports OpenAI's
--- September-2026 annualised revenue near USD 50B.  This materially strengthens
--- scale/capacity evidence but annualised revenue is not operating cash flow or
--- audited external-customer cash provenance, and the contract is not realised
--- cash merely because the commitment exists.
-------------------------------------------------------------------------
-
 primaryFilingKind : Source.SourceKind
 primaryFilingKind = Source.namedSourceKind "primary SEC filing"
 
@@ -63,8 +52,7 @@ open OpenAIPayerCapacity public
 
 openAICoreWeaveCapacity : OpenAIPayerCapacity
 openAICoreWeaveCapacity = openai-payer-capacity
-  6500 50000
-  true true false false false false
+  6500 50000 true true false false false false
 
 coreWeaveOpenAICommitmentMillionUSDIs6500 :
   coreWeaveCommitmentMillionUSD openAICoreWeaveCapacity ≡ 6500
@@ -88,7 +76,7 @@ contractRealisationPaidIsFalse = refl
 
 data RevenueImpliesCashProvenancePermission : Set where
 data AnnualizedRevenueImpliesContractRealisationPermission : Set where
-\data ContractEdgeImpliesRealisedTopCustomerIdentityPermission : Set where
+data ContractEdgeImpliesRealisedTopCustomerIdentityPermission : Set where
 
 revenueDoesNotCreateCashProvenance : RevenueImpliesCashProvenancePermission → ⊥
 revenueDoesNotCreateCashProvenance ()
