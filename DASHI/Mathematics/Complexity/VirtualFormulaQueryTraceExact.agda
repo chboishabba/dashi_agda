@@ -4,14 +4,16 @@ module DASHI.Mathematics.Complexity.VirtualFormulaQueryTraceExact where
 -- FINITE QUERY TRACE FOR VIRTUAL FORMULA INPUT
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (just)
-open import Agda.Builtin.Nat using (Nat; zero; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base using (_≤_)
-import Data.Nat.Properties as NatP
+open import Data.Product using (Σ; _,_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 import DASHI.Mathematics.Complexity.VirtualFormulaBitSourceExact as Virtual
 
 record SuccessfulBitQuery
@@ -19,7 +21,7 @@ record SuccessfulBitQuery
     (source : Virtual.VirtualFormulaBitSource formula) : Set where
   field
     index : Nat
-    bit : Agda.Builtin.Bool.Bool
+    bit : Bool
     resultExact : Virtual.readBit source index ≡ just bit
 
 open SuccessfulBitQuery public
@@ -34,7 +36,7 @@ queryTraceLength :
     {source : Virtual.VirtualFormulaBitSource formula} →
   QueryTrace source → Nat
 queryTraceLength [] = zero
-queryTraceLength (_ ∷ rest) = Agda.Builtin.Nat.suc (queryTraceLength rest)
+queryTraceLength (_ ∷ rest) = suc (queryTraceLength rest)
 
 queryTraceWork :
   ∀ {formula : Cook.BooleanFormula}
@@ -50,25 +52,19 @@ queryTraceAllSound :
     {source : Virtual.VirtualFormulaBitSource formula}
     (trace : QueryTrace source) →
   List
-    (Agda.Builtin.Sigma.Σ Nat
+    (Σ Nat
       (λ index →
-        Agda.Builtin.Sigma.Σ Agda.Builtin.Bool.Bool
+        Σ Bool
           (λ bit →
             Virtual.BitAt index
-              (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.encodeFormulaBits formula)
+              (Binary.encodeFormulaBits formula)
               bit)))
 queryTraceAllSound [] = []
 queryTraceAllSound {source = source} (query ∷ rest) =
-  (index query Agda.Builtin.Sigma.,
-    (bit query Agda.Builtin.Sigma.,
+  (index query ,
+    (bit query ,
       Virtual.readSound source (resultExact query)))
   ∷ queryTraceAllSound rest
-
-------------------------------------------------------------------------
--- A simulation receipt must pay these reads inside its own target-machine
--- clock. This record keeps that budget explicit without presupposing a specific
--- virtual-input interpreter construction.
-------------------------------------------------------------------------
 
 record QueryTraceCostReceipt
     {formula : Cook.BooleanFormula}
@@ -82,6 +78,5 @@ open QueryTraceCostReceipt public
 
 ------------------------------------------------------------------------
 -- This does not yet bound query COUNT by simulated source steps or construct a
--- virtual-input TM. Those are downstream compiler obligations rather than an
--- implicit oracle assumption.
+-- virtual-input TM. Those are downstream compiler obligations.
 ------------------------------------------------------------------------
