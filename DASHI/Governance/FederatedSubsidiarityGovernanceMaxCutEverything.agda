@@ -6,3 +6,8 @@ import DASHI.Governance.FederatedSubsidiarityGovernanceEverything
 -- Current-master cross-pollination: scalar/role provenance plus role-indexed
 -- measurement typing for the capacity-aware paired experiment.
 import DASHI.Governance.BoloBoloGovernanceMetricProvenanceEverything
+
+-- Productive latest-PR cross-pollination using only generic owners already on
+-- master: explicit causal estimand + obligation-admissible identification gate
+-- for the same target flat-vs-nested longitudinal coordination question.
+import DASHI.Governance.BoloBoloCausalIdentificationEverything
