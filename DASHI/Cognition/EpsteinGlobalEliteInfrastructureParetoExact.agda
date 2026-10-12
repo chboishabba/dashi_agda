@@ -12,12 +12,14 @@ import DASHI.Cognition.EpsteinTechClaimVerificationExact as Tech
 import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact as TrumpEpstein
 import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as TrumpBridge
 import DASHI.Cognition.EpsteinAustraliaEliteNetworkAcquisitionExact as Australia
+import DASHI.Cognition.AustraliaRinehartTrumpOneNationAccessBridgeExact as AustraliaTrump
 
 ------------------------------------------------------------------------
 -- GLOBAL ELITE / INSTITUTIONAL INFRASTRUCTURE PARETO FRONT
 --
 -- This sits above the science-specific router. Recalibrated after banking,
--- board-network, tech, Trump/Mar-a-Lago/Bannon and Australian-source sweeps.
+-- board-network, tech, Trump/Mar-a-Lago/Bannon, direct Australian Epstein
+-- acquisition, and Australian Trump-access/political-finance source sweeps.
 -- Ranking is acquisition priority only; never culpability/truth/liability.
 ------------------------------------------------------------------------
 
@@ -27,10 +29,11 @@ data GlobalFrontLane : Set where
   trumpMarALagoBannonPoliticalAccess : GlobalFrontLane
   brockmanEdgeMITConvening : GlobalFrontLane
   thielValarBarakPalantir : GlobalFrontLane
+  australiaRinehartTrumpPoliticalFinance : GlobalFrontLane
   harvardPEDDonorBrokerage : GlobalFrontLane
   gatesPhilanthropy : GlobalFrontLane
   kraussOrigins : GlobalFrontLane
-  australiaEliteNetwork : GlobalFrontLane
+  australiaEpsteinEliteNetwork : GlobalFrontLane
   maxwellGhislainePublishingTerraMar : GlobalFrontLane
   directTechCorrespondence : GlobalFrontLane
   politicalPublicOffice : GlobalFrontLane
@@ -59,14 +62,16 @@ currentGlobalFront =
     "Audit scientist/tech brokerage and convening infrastructure, including Edge, MIT Media Lab and adjacent donor introductions."
   ∷ pareto-lane thielValarBarakPalantir 88 true true true
     "Decompose Epstein-Thiel contact, Valar investment, Barak introductions and Palantir political/lobbying surfaces; no coordination promotion."
+  ∷ pareto-lane australiaRinehartTrumpPoliticalFinance 87 true true true
+    "Resolve the independently paid Rinehart->Trump access->One Nation political-finance mechanism: donor redirection, exact donation records, Mar-a-Lago access, flights/aircraft/support, and the older One Nation US gun-lobby solicitation pattern. Keep this separate from the direct Epstein-Australia graph; test the Bannon-Palmer claim without promoting disputed operational control."
   ∷ pareto-lane harvardPEDDonorBrokerage 85 true true true
     "Expand PED/Nowak/Church money, visits, introduced donors and program governance."
   ∷ pareto-lane gatesPhilanthropy 82 true true true
     "Resolve Gates/Foundation meetings, DAF structure, IPI introduction and philanthropic brokerage."
   ∷ pareto-lane kraussOrigins 80 true true true
     "Resolve ASU Origins funding, events, donor acknowledgements and scientist/donor network."
-  ∷ pareto-lane australiaEliteNetwork 79 true true true
-    "Treat Australia as a distinct regional bridge: saturate Katherine Keating's direct correspondence/business-network role and the FBI/AFP Sydney evidence-recovery seam; separately resolve the disputed Fox/Packer 1995 cruise report and keep Rudd/Forrest/Palmer at attempted-introduction, mention or third-party-claim status unless stronger receipts emerge."
+  ∷ pareto-lane australiaEpsteinEliteNetwork 79 true true true
+    "Direct Epstein/Maxwell-Australia lane: saturate Katherine Keating's correspondence/business-network role and FBI/AFP Sydney evidence recovery; independently resolve the disputed Fox/Packer 1995 cruise and weak Rudd/Forrest/Palmer candidate edges."
   ∷ pareto-lane maxwellGhislainePublishingTerraMar 78 true true true
     "Keep Robert Maxwell conduct/publishing network, Ghislaine conviction, TerraMar funding and family lineage separately typed while testing network continuity/access claims."
   ∷ pareto-lane directTechCorrespondence 75 true true true
@@ -109,6 +114,21 @@ australiaRuddRelationshipNotPromoted :
   Australia.ruddDirectRelationshipPaid
     Australia.canonicalAustraliaAcquisitionBoundary ≡ false
 australiaRuddRelationshipNotPromoted = refl
+
+rinehartTrumpAccessBrokeragePaid :
+  AustraliaTrump.rinehartTrumpAccessBrokeragePaid
+    AustraliaTrump.canonicalAustraliaTrumpPoliticalFinanceBoundary ≡ true
+rinehartTrumpAccessBrokeragePaid = refl
+
+rinehartEpsteinRelationshipStillUnpaid :
+  AustraliaTrump.rinehartDirectEpsteinRelationshipPaid
+    AustraliaTrump.canonicalAustraliaTrumpPoliticalFinanceBoundary ≡ false
+rinehartEpsteinRelationshipStillUnpaid = refl
+
+palmerBannonOperationalInfluenceStillDisputed :
+  AustraliaTrump.palmerBannonOperationalInfluenceEstablished
+    AustraliaTrump.canonicalAustraliaTrumpPoliticalFinanceBoundary ≡ false
+palmerBannonOperationalInfluenceStillDisputed = refl
 
 record AcquisitionRoundProtocol : Set where
   constructor acquisition-round-protocol
