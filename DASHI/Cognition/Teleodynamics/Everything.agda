@@ -8,6 +8,8 @@ import DASHI.Cognition.Teleodynamics.LilaE8AttentionBiasExact
 import DASHI.Cognition.Teleodynamics.LilaE8Regression
 import DASHI.Cognition.Teleodynamics.MonsterLilaBoundaryExact
 import DASHI.Cognition.Teleodynamics.MonsterLilaRegression
+import DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact
+import DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffRegression
 import DASHI.Cognition.Teleodynamics.GeometricLearnerPriorExact
 import DASHI.Cognition.Teleodynamics.ExceptionalPriorFamilyExact
 import DASHI.Cognition.Teleodynamics.ExceptionalPriorRegression
