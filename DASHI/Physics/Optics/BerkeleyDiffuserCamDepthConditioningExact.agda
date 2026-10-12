@@ -25,13 +25,24 @@ import DASHI.Physics.Optics.DiffuserRestrictedStabilityProducerExact as Stabilit
 -- declared finite sparse scene family. It is not promoted to an all-resolution
 -- camera RIP theorem, and no numeric certificate is claimed until the pinned
 -- binary artifact is actually executed.
+--
+-- A separate synthetic-only self-test exercises odd/even array shapes, checks
+-- the circular-kernel shift identity against literal FFT multiplication, and
+-- stress-checks the Gershgorin compiler on finite random supports. This pays an
+-- implementation-verification surface only; it is not a public-PSF receipt.
 ------------------------------------------------------------------------
 
 conditioningAuditScript : String
 conditioningAuditScript = "scripts/check_waller_diffusercam_conditioning.py"
 
+conditioningSelfTestScript : String
+conditioningSelfTestScript = "scripts/check_waller_diffusercam_conditioning_selftest.py"
+
 publishedPSFArtifactUsed : Bool
 publishedPSFArtifactUsed = true
+
+offlineSyntheticOperatorSelfTestExecutable : Bool
+offlineSyntheticOperatorSelfTestExecutable = true
 
 depthOnlySameLateralAuditExecutable : Bool
 depthOnlySameLateralAuditExecutable = true
@@ -60,6 +71,7 @@ record BerkeleyDiffuserCamDepthConditioningReceipt : Set where
   field
     psfArtifactPinned : Bool
     sourceOperatorPinned : Bool
+    executableSyntheticOperatorSelfTest : Bool
     executableDepthAudit : Bool
     sourceHSelectedGridCompiler : Bool
     executableTranslatedColumnAudit : Bool
@@ -75,6 +87,7 @@ currentBerkeleyDiffuserCamDepthConditioningReceipt :
 currentBerkeleyDiffuserCamDepthConditioningReceipt = record
   { psfArtifactPinned = Calibration.publicCalibrationArtifactPinned
   ; sourceOperatorPinned = SourceOperator.sourceForwardUsesFFTConvolution
+  ; executableSyntheticOperatorSelfTest = offlineSyntheticOperatorSelfTestExecutable
   ; executableDepthAudit = depthOnlySameLateralAuditExecutable
   ; sourceHSelectedGridCompiler = sourceOperatorSelectedGridColumnCompilerPaid
   ; executableTranslatedColumnAudit = translatedColumnRestrictedAuditExecutable
