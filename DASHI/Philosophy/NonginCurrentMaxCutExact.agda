@@ -14,12 +14,15 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Philosophy.NonginOriginFormalizationExact as Origin
 import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageExact as Advantage
 import DASHI.Reasoning.NonginRecursiveObserverDepthTowerExact as Tower
+import DASHI.Reasoning.NonginRecursiveObserverFibreTowerBridgeExact as FibreTower
 import DASHI.Reasoning.Trialectic369PreRHTernaryLocalDescentCapstoneExact as Local
 import DASHI.Reasoning.Trialectic369CechModelSameObjectCapstoneExact as Cech
 import DASHI.Reasoning.Trialectic369FullBoundaryNerveComparisonExact as FullNerve
 import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as SetEffective
 import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as SiteTransport
 import DASHI.Reasoning.TrialecticGrothendieckBoundaryAnchoredMediationExact as Anchored
+import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as ContextBridge
+import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Higher
 
 originBoundary : Origin.NonginSourceBoundary
@@ -30,6 +33,9 @@ advantageBoundary = Advantage.canonicalNonginConsumerRelativeFrameAdvantageBound
 
 towerBoundary : Tower.NonginRecursiveObserverDepthTowerBoundary
 towerBoundary = Tower.canonicalNonginRecursiveObserverDepthTowerBoundary
+
+fibreTowerBoundary : FibreTower.NonginRecursiveObserverFibreTowerBridgeBoundary
+fibreTowerBoundary = FibreTower.canonicalNonginRecursiveObserverFibreTowerBridgeBoundary
 
 localBoundary : Local.Trialectic369PreRHTernaryLocalDescentCapstoneBoundary
 localBoundary = Local.canonicalTrialectic369PreRHTernaryLocalDescentCapstoneBoundary
@@ -49,8 +55,17 @@ siteTransportBoundary = SiteTransport.canonicalTrialecticRelationalSiteTransport
 anchoredMediationBoundary : Anchored.TrialecticGrothendieckBoundaryAnchoredMediationBoundary
 anchoredMediationBoundary = Anchored.canonicalTrialecticGrothendieckBoundaryAnchoredMediationBoundary
 
+contextFibrationBoundary : ContextBridge.TrialecticGrothendieckContextFibrationBridgeBoundary
+contextFibrationBoundary = ContextBridge.canonicalTrialecticGrothendieckContextFibrationBridgeBoundary
+
+discreteGroupoidBoundary : Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
+discreteGroupoidBoundary = Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
 higherBoundary : Higher.TrialecticHigherDescentPromotionBoundary
 higherBoundary = Higher.canonicalTrialecticHigherDescentPromotionBoundary
+
+higherRefinementBoundary : Higher.TrialecticHigherDescentRefinementBoundary
+higherRefinementBoundary = Higher.canonicalTrialecticHigherDescentRefinementBoundary
 
 consumerRelativeTheoremPaid :
   Advantage.consumerRelativeNonfactorabilityPaid advantageBoundary ≡ true
@@ -68,8 +83,16 @@ recursiveResidualReopeningPaid :
   Tower.residualReopeningPaid towerBoundary ≡ true
 recursiveResidualReopeningPaid = refl
 
+recursiveObserverFibreTowerPaid :
+  FibreTower.fibreTowerAdapterPaid fibreTowerBoundary ≡ true
+recursiveObserverFibreTowerPaid = refl
+
+observerStreamInverseLimitPaid :
+  FibreTower.inverseLimitFromObserverStreamPaid fibreTowerBoundary ≡ true
+observerStreamInverseLimitPaid = refl
+
 T9LocalComplementFactorizationPaid :
-  Local.localTimesComplementFactorization localBoundary ≡ true
+  Local.localTimesComplementFactorizationPaid localBoundary ≡ true
 T9LocalComplementFactorizationPaid = refl
 
 pointedRestrictionRepairPaid :
@@ -108,6 +131,24 @@ boundaryAnchoredFaceMediationPaid :
   Anchored.strongSecondOrderAdapterConstructed anchoredMediationBoundary ≡ true
 boundaryAnchoredFaceMediationPaid = refl
 
+contextIndexedFibrationBridgePaid :
+  ContextBridge.cellPresheafInstantiatesContextIndexedObservation
+    contextFibrationBoundary
+  ≡ true
+contextIndexedFibrationBridgePaid = refl
+
+fullSiteDiscreteGroupoidBaselinePaid :
+  Discrete.fullSiteDiscreteGroupoidBaselinePaid discreteGroupoidBoundary ≡ true
+fullSiteDiscreteGroupoidBaselinePaid = refl
+
+c3ExternalVsSiteRestrictionSeparated :
+  Discrete.edgeCycleIsSiteRestriction discreteGroupoidBoundary ≡ false
+c3ExternalVsSiteRestrictionSeparated = refl
+
+transportEnrichedGroupoidPresheafStillOpen :
+  Higher.groupoidPresheafReady higherBoundary ≡ false
+transportEnrichedGroupoidPresheafStillOpen = refl
+
 higherStackNotYetPaid :
   Higher.effectiveStackReady higherBoundary ≡ false
 higherStackNotYetPaid = refl
@@ -122,6 +163,8 @@ record NonginCurrentMaxCutBoundary : Set where
     consumerRelativeCorePaid : Bool
     exactConsumerRecoveryPaid : Bool
     recursiveObserverReopeningPaid : Bool
+    recursiveObserverFibreTowerPaid : Bool
+    observerStreamInverseLimitPaid : Bool
     matureTrialecticGrothendieckDescendantsPaid : Bool
     localComplementFactorizationPaid : Bool
     pointedRestrictionRepairPaid : Bool
@@ -132,6 +175,10 @@ record NonginCurrentMaxCutBoundary : Set where
     observationalGlobalUniquenessPaid : Bool
     siteTransportCoverageObstructionPaid : Bool
     boundaryAnchoredFaceMediationPaid : Bool
+    contextIndexedFibrationBridgePaid : Bool
+    fullSiteDiscreteGroupoidBaselinePaid : Bool
+    c3ExternalVsSiteRestrictionSeparated : Bool
+    transportEnrichedGroupoidPresheafPaid : Bool
     empiricalTenPercentLawPromoted : Bool
     universalRicherRepresentationAdvantagePromoted : Bool
     fullBoundaryNerveEquivalencePaid : Bool
@@ -148,6 +195,8 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; consumerRelativeCorePaid = true
   ; exactConsumerRecoveryPaid = true
   ; recursiveObserverReopeningPaid = true
+  ; recursiveObserverFibreTowerPaid = true
+  ; observerStreamInverseLimitPaid = true
   ; matureTrialecticGrothendieckDescendantsPaid = true
   ; localComplementFactorizationPaid = true
   ; pointedRestrictionRepairPaid = true
@@ -158,6 +207,10 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; observationalGlobalUniquenessPaid = true
   ; siteTransportCoverageObstructionPaid = true
   ; boundaryAnchoredFaceMediationPaid = true
+  ; contextIndexedFibrationBridgePaid = true
+  ; fullSiteDiscreteGroupoidBaselinePaid = true
+  ; c3ExternalVsSiteRestrictionSeparated = true
+  ; transportEnrichedGroupoidPresheafPaid = false
   ; empiricalTenPercentLawPromoted = false
   ; universalRicherRepresentationAdvantagePromoted = false
   ; fullBoundaryNerveEquivalencePaid = false
