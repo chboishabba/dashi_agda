@@ -12,22 +12,24 @@ import DASHI.Physics.Foundations.EntropyDensityExact as Density
 import DASHI.Physics.Foundations.EntropicGravitySourceBoundaryExact as Gravity
 import DASHI.Physics.Closure.HolographicBulkBoundaryReceipt as PAdicHolography
 import DASHI.Physics.Closure.BruhatTitsHolographicCoordinateBoundary as BTCoordinate
+import DASHI.Physics.Closure.ClopenHolographicEffectiveFieldTheoryBoundary as ClopenEFT
 import DASHI.Algebra.Quantum.UVFinitenessHolographyTests as UVHolography
 import DASHI.Analysis.AdelicSpectralClaimStrengthAuditExact as ClaimAudit
 
 ------------------------------------------------------------------------
 -- BIRTHMARK / ENTROPY-DENSITY / HOLOGRAPHY CROSS-LANE MAX-CUT
 --
--- Existing repo owners already separate six theorem shapes:
+-- Existing repo owners already separate seven theorem shapes:
 --
 --   (1) quantum birthmark: long-time history-sensitive residual memory;
 --   (2) entropy-density normalization: coarse entropy and residual-information
 --       density are distinct observables;
 --   (3) p-adic bulk/boundary dictionary: Bruhat-Tits tree -> P^1(Q_p);
---   (4) holographic area-law / UV-finiteness surfaces;
---   (5) tensor-factor relation -> distance -> spatial geometry, conditional on
+--   (4) clopen finite-depth EFT/boundary-observable targets;
+--   (5) holographic area-law / UV-finiteness surfaces;
+--   (6) tensor-factor relation -> distance -> spatial geometry, conditional on
 --       explicit weight/metric/realisation laws;
---   (6) a separately paid large-poset continuum 3+1 Lorentzian authority.
+--   (7) a separately paid large-poset continuum 3+1 Lorentzian authority.
 --
 -- This owner records the lawful cross-pollination and blocks all unpaid
 -- identifications.  No new physical AdS/CFT, RT, Jacobson or Verlinde theorem
@@ -39,6 +41,7 @@ record ExistingHolographyReuse : Set where
   field
     pAdicBulkBoundaryDictionaryReused : Bool
     bruhatTitsCoordinateBoundaryReused : Bool
+    clopenHolographicEFTBoundaryReused : Bool
     areaBoundUVFinitenessSurfaceReused : Bool
     discreteRyuTakayanagiShapeAudited : Bool
     sameObjectEntropyAuditReused : Bool
@@ -47,7 +50,7 @@ record ExistingHolographyReuse : Set where
 
 canonicalExistingHolographyReuse : ExistingHolographyReuse
 canonicalExistingHolographyReuse =
-  existingHolographyReuse true true true true true true true
+  existingHolographyReuse true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Structural synthesis.
@@ -55,6 +58,10 @@ canonicalExistingHolographyReuse =
 -- A boundary description can be consumer-sufficient while still collapsing
 -- bulk/fine histories.  Therefore a holographic dictionary and an exact
 -- fine-state reopening theorem are logically different obligations.
+--
+-- The clopen EFT owner adds a useful intermediate seam: low-residual finite-
+-- depth sections may define boundary-observable targets, but that target is
+-- not automatically the birthmark observable or a physical holographic code.
 ------------------------------------------------------------------------
 
 record HolographicResidualSynthesis : Set where
@@ -65,12 +72,14 @@ record HolographicResidualSynthesis : Set where
     residualCanRemainInsideBoundaryFibre : Bool
     birthmarkCanWitnessHistorySensitiveResidual : Bool
     highBoundaryEntropyCanCoexistWithResidual : Bool
+    clopenLowResidualBoundaryObservableTargetRecorded : Bool
+    clopenLowResidualTargetDoesNotIdentifyBirthmark : Bool
     holographicDictionaryDoesNotEraseBulkResidual : Bool
     boundarySufficiencyNeedsSameObjectWeld : Bool
 
 canonicalHolographicResidualSynthesis : HolographicResidualSynthesis
 canonicalHolographicResidualSynthesis =
-  holographicResidualSynthesis true true true true true true true
+  holographicResidualSynthesis true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Area / entropy / state identity.
@@ -127,6 +136,7 @@ record HolographyGravityPromotionFirewall : Set where
   field
     pAdicDictionaryIsNotFourDimensionalSpacetimeHolography : Bool
     finiteBruhatTitsCoordinateToyIsNotPhysicalOntology : Bool
+    clopenEFTBoundaryTargetIsNotPhysicalHolographyByItself : Bool
     bulkBoundaryDictionaryDoesNotImplyEntropicGravity : Bool
     areaBoundDoesNotImplyBekensteinHawkingCoefficient : Bool
     areaLawDoesNotImplyJacobsonClausiusRelation : Bool
@@ -141,7 +151,7 @@ canonicalHolographyGravityPromotionFirewall :
   HolographyGravityPromotionFirewall
 canonicalHolographyGravityPromotionFirewall =
   holographyGravityPromotionFirewall
-    true true true true true true true true true true true
+    true true true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- What a genuine cross-lane physical completion would have to pay.
@@ -219,6 +229,9 @@ holographicDictionaryDoesNotEraseBulkResidual = true
 
 boundarySufficiencyNeedsSameObjectWeld : Bool
 boundarySufficiencyNeedsSameObjectWeld = true
+
+clopenLowResidualTargetDoesNotIdentifyBirthmark : Bool
+clopenLowResidualTargetDoesNotIdentifyBirthmark = true
 
 entanglementGeometryDoesNotSupplyHolographicDictionary : Bool
 entanglementGeometryDoesNotSupplyHolographicDictionary = true
