@@ -3,16 +3,9 @@ module DASHI.Cognition.OracleEllisonSecurityTranscriptValidation where
 ------------------------------------------------------------------------
 -- RED validation owner.
 --
--- This file is intentionally committed before its production imports.
--- The case-specific max-cut is:
---
--- transcript claims
---   -> source-bounded payment / verdict
---   -> actor x institution x technology x deployment graph
---   -> L0..L4 promotion firewall
---   -> China / Israel comparative fibre
---   -> existing cognitive-warfare provenance/non-factorability weld
---   -> motive / controller / architectural-authorship non-promotion.
+-- This file was originally committed before its production imports.  The
+-- current continuation likewise adds regression pins before the new
+-- socio-technical-power weld is introduced.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true; false)
@@ -23,6 +16,7 @@ import DASHI.Cognition.OracleEllisonCapabilityPromotionExact as Promotion
 import DASHI.Cognition.OracleEllisonChinaIsraelComparativeFibreExact as Compare
 import DASHI.Cognition.OracleEllisonCognitiveWarfareWeldExact as Weld
 import DASHI.Cognition.OracleEllisonTranscriptVerdictExact as Verdict
+import DASHI.Cognition.OracleEllisonSocioTechnicalPowerWeldExact as PowerWeld
 import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Orthogonality
 
 ------------------------------------------------------------------------
@@ -80,3 +74,28 @@ oracleBlueprintIsraelVerdictPinned :
   Verdict.verdict Claims.oracleWritesIsraeliSecurityBlueprint
   ≡ Verdict.unsupported
 oracleBlueprintIsraelVerdictPinned = refl
+
+ellisonNetanyahuRelationshipPaid :
+  Verdict.verdict Claims.ellisonNetanyahuReportedRelationshipActivity
+  ≡ Verdict.supported
+ellisonNetanyahuRelationshipPaid = refl
+
+oracleDefensePosturePaid :
+  Verdict.verdict Claims.oracleDeclaredDefenseNationalSecurityOrientation
+  ≡ Verdict.supported
+oracleDefensePosturePaid = refl
+
+sameTechnologySurfaceDoesNotPayPowerTopology :
+  PowerWeld.technologyServiceSurfacePaysPowerTopology
+  ≡ false
+sameTechnologySurfaceDoesNotPayPowerTopology = refl
+
+relationshipDoesNotPayPolicyControl :
+  PowerWeld.reportedPersonalRelationshipPaysPolicyControl
+  ≡ false
+relationshipDoesNotPayPolicyControl = refl
+
+defensePostureDoesNotPaySovereignController :
+  PowerWeld.corporateDefenseOrientationPaysSovereignController
+  ≡ false
+defensePostureDoesNotPaySovereignController = refl
