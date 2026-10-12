@@ -6,23 +6,23 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Cognition.EpsteinPsychedelicParetoSnowballExact as Psychedelic
 import DASHI.Cognition.ChomskyEpsteinRelationshipExact as Chomsky
 import DASHI.Cognition.EpsteinSciencePatronageMicrocosmExact as Patronage
 import DASHI.Cognition.EpsteinNaturePublishingBoundaryExact as Publishing
+import DASHI.Cognition.EpsteinGlobalHighProfileWebReceiptsExact as Web
 
 ------------------------------------------------------------------------
 -- GLOBAL EPSTEIN SCIENCE / PATRONAGE ACQUISITION ROUTER
 --
--- This owner corrects the over-indexing risk of treating the local
--- psychedelic/consciousness router as if it were the global acquisition front.
--- The local Yu frontier remains valid inside that subproblem. Globally, we
--- retain an exploit/explore portfolio spanning distinct hub types.
+-- Corrects local-lane over-indexing. Several lanes are no longer speculative
+-- probes: Gates/Foundation, MIT and TerraMar now have concrete institutional or
+-- funding receipts. The router therefore allocates acquisition effort to
+-- saturating their functional role and one-hop topology, while keeping Yu as a
+-- bounded exploitation lane.
 --
--- Calibration below routes acquisition effort only. It is not a truth,
--- culpability, wrongdoing, scientific-authority, or relationship-strength
--- score.
+-- Shares below are search-allocation heuristics, not truth, culpability,
+-- wrongdoing, scientific-authority or relationship-strength scores.
 ------------------------------------------------------------------------
 
 data GlobalLane : Set where
@@ -31,75 +31,65 @@ data GlobalLane : Set where
   gatesFoundationPhilanthropy : GlobalLane
   harvardNowakSummersInstitutional : GlobalLane
   mitMediaLabInstitutional : GlobalLane
+  maxwellTerraMarNonprofit : GlobalLane
   maxwellPergamonElsevierPublishing : GlobalLane
   doblinMAPSInstitutionalisation : GlobalLane
   hearstPSFCFundingChronology : GlobalLane
-  broadSciencePatronageExploration : GlobalLane
 
 record GlobalLaneStatus : Set where
   constructor global-lane-status
   field
     lane : GlobalLane
-    directRelationshipAlreadyEstablished : Bool
-    institutionalOrCorporateLineageEstablished : Bool
+    directOrInstitutionalRelationEstablished : Bool
     primaryCorpusSaturationOpen : Bool
     crossDomainBridgePotential : Bool
-    requiresIndependentEdgeReceipt : Bool
+    requiresIndependentEdgeReceiptForNewClaims : Bool
     note : String
 open GlobalLaneStatus public
 
 yuStatus : GlobalLaneStatus
-yuStatus = global-lane-status
-  yuConsciousnessPsychedelics true false true true true
-  "Dense direct funding/brokerage/altered-state seam; remains local exploitation leader but does not define the global network."
+yuStatus = global-lane-status yuConsciousnessPsychedelics true true true true
+  "Dense direct funding/brokerage/altered-state seam; local exploitation leader, not global default."
 
 chomskyStatus : GlobalLaneStatus
-chomskyStatus = global-lane-status
-  chomskyLanguageBrokerage true false true true true
-  "Direct repeated relationship already paid in its own owner; acquisition target is functional role, adjacent introductions/projects and independent one-hop expansion."
+chomskyStatus = global-lane-status chomskyLanguageBrokerage true true true true
+  "Direct repeated relationship paid; acquire functional role, adjacent introductions/projects and independent one-hop expansion."
 
 gatesStatus : GlobalLaneStatus
-gatesStatus = global-lane-status
-  gatesFoundationPhilanthropy false false true true true
-  "2026 external reporting makes Gates/Foundation a high-value global probe; promote only direct meeting/funding/brokerage edges recovered from primary or independently verified records."
+gatesStatus = global-lane-status gatesFoundationPhilanthropy true true true true
+  "Foundation review establishes 2011-2014 engagement around a proposed public-health DAF and Epstein's IPI introduction; AP reports about 30 meetings. Saturate meeting-by-meeting and adjacent philanthropy topology."
 
 harvardStatus : GlobalLaneStatus
-harvardStatus = global-lane-status
-  harvardNowakSummersInstitutional false true true true true
-  "Institutional-science lane: recover donor, programme, researcher and governance edges independently; institutional connection does not imply individual wrongdoing."
+harvardStatus = global-lane-status harvardNowakSummersInstitutional true true true true
+  "Nature/Harvard reporting establishes substantial institutional consequence and Epstein science-funding context; recover project, funding, correspondence and governance edges separately."
 
 mitStatus : GlobalLaneStatus
-mitStatus = global-lane-status
-  mitMediaLabInstitutional false true true true true
-  "Institutional funding/governance lane; keep donation handling, researcher contact and governance response separately typed."
+mitStatus = global-lane-status mitMediaLabInstitutional true true true true
+  "MIT fact-finding establishes 10 Epstein gifts totaling USD 850k, nine campus visits, and post-conviction donation handling. Expand researcher/donor/broker topology rather than re-proving institutional contact."
+
+terramarStatus : GlobalLaneStatus
+terramarStatus = global-lane-status maxwellTerraMarNonprofit true true true true
+  "US v Maxwell exhibit establishes a USD 57k Epstein Interests Foundation donation to Ghislaine Maxwell-founded TerraMar. Expand nonprofit, donor, event and institutional edges separately from publishing genealogy."
 
 maxwellPublishingStatus : GlobalLaneStatus
-maxwellPublishingStatus = global-lane-status
-  maxwellPergamonElsevierPublishing false true true true true
-  "Historical Maxwell->Pergamon->Elsevier corporate genealogy is separate from any Epstein/Ghislaine-era publishing influence, which remains receipt-dependent."
+maxwellPublishingStatus = global-lane-status maxwellPergamonElsevierPublishing true true true true
+  "Robert Maxwell->Pergamon->Elsevier and Ghislaine family relation are historical facts; contemporaneous Epstein/Ghislaine-era publisher/editor influence still requires a separate receipt."
 
 doblinStatus : GlobalLaneStatus
-doblinStatus = global-lane-status
-  doblinMAPSInstitutionalisation false true true true true
-  "High-upside falsification/probe lane: resolve proposed invite versus actual correspondence, meeting, funding or institutional overlap."
+doblinStatus = global-lane-status doblinMAPSInstitutionalisation false true true true
+  "Resolve proposed invite versus actual correspondence, meeting, funding or institutional overlap."
 
 hearstStatus : GlobalLaneStatus
-hearstStatus = global-lane-status
-  hearstPSFCFundingChronology false true true true true
-  "Resolve primary Epstein/Hearst records against PSFC/MAPS chronology without turning temporal proximity into causation."
-
-broadStatus : GlobalLaneStatus
-broadStatus = global-lane-status
-  broadSciencePatronageExploration false false true true true
-  "Exploration reserve for independent hubs in mathematics, AI, genetics/evolution, physics, publishing and institutional science."
+hearstStatus = global-lane-status hearstPSFCFundingChronology false true true true
+  "Resolve Epstein/Hearst primary records against PSFC/MAPS chronology without importing causation from timing."
 
 ------------------------------------------------------------------------
--- Exploit/explore portfolio.
+-- Recalibrated exploit/explore portfolio after web verification.
 ------------------------------------------------------------------------
 
 data AcquisitionMode : Set where
   exploit : AcquisitionMode
-  explore : AcquisitionMode
+  expandPaidHub : AcquisitionMode
   falsificationProbe : AcquisitionMode
 
 record GlobalAcquisitionInstruction : Set where
@@ -115,18 +105,20 @@ open GlobalAcquisitionInstruction public
 
 currentGlobalAcquisitionPlan : List GlobalAcquisitionInstruction
 currentGlobalAcquisitionPlan =
-  global-acquisition-instruction yuConsciousnessPsychedelics exploit 35 true true
-    "Continue Yu whole-thread/attachment/entity saturation, but cap the lane so density cannot monopolise the global router."
-  ∷ global-acquisition-instruction chomskyLanguageBrokerage explore 15 true true
-    "Expand direct Chomsky relationship one hop through introductions, projects, payments, travel/social and adjacent academics; preserve edge typing."
-  ∷ global-acquisition-instruction gatesFoundationPhilanthropy explore 15 true true
-    "Acquire Gates/Foundation primary records for meetings, proposed funds, introductions and institutional interaction; external review is locator/context, not a substitute for primary edges."
-  ∷ global-acquisition-instruction harvardNowakSummersInstitutional explore 10 true true
-    "Recover Harvard/Nowak/Summers donor and governance records, including programme-level funding and independently sourced institutional chronology."
-  ∷ global-acquisition-instruction mitMediaLabInstitutional explore 10 true true
-    "Recover MIT/Media Lab donation, concealment/governance and researcher-contact edges as separate records."
+  global-acquisition-instruction yuConsciousnessPsychedelics exploit 25 true true
+    "Continue Yu whole-thread/attachment/entity saturation, capped so corpus density cannot monopolise acquisition."
+  ∷ global-acquisition-instruction gatesFoundationPhilanthropy expandPaidHub 15 true true
+    "Acquire meeting-by-meeting Gates/Foundation records, proposed DAF structure, IPI path and all adjacent brokers/donors introduced through Epstein."
+  ∷ global-acquisition-instruction mitMediaLabInstitutional expandPaidHub 15 true true
+    "Expand the already-paid MIT relationship through exact donation destinations, researcher contacts, claimed coordinated donations, visits and governance concealment/visibility handling."
+  ∷ global-acquisition-instruction chomskyLanguageBrokerage expandPaidHub 10 true true
+    "Expand Chomsky one hop through introductions, project administration, payments, travel/social contacts and adjacent academics."
+  ∷ global-acquisition-instruction harvardNowakSummersInstitutional expandPaidHub 10 true true
+    "Resolve Harvard/Nowak/Summers project funding, correspondence and donor-broker function, not merely institutional fallout."
+  ∷ global-acquisition-instruction maxwellTerraMarNonprofit expandPaidHub 10 true true
+    "Expand the paid Epstein Foundation->TerraMar edge through donors, events, institutional partners, ocean/science networks and contemporaneous Epstein correspondence."
   ∷ global-acquisition-instruction maxwellPergamonElsevierPublishing falsificationProbe 5 true true
-    "Lock the historical publishing genealogy, then search specifically for any contemporaneous Epstein/Ghislaine-era publisher/editor/journal bridge; absent receipt, retain separation."
+    "Search specifically for contemporaneous publisher/editor/journal bridges while keeping Robert Maxwell corporate genealogy distinct from Ghislaine/Epstein influence."
   ∷ global-acquisition-instruction doblinMAPSInstitutionalisation falsificationProbe 5 true true
     "Resolve every Doblin/MAPS occurrence into invite/contact/meeting/funding/institutional-overlap categories."
   ∷ global-acquisition-instruction hearstPSFCFundingChronology falsificationProbe 5 true true
@@ -143,12 +135,14 @@ data NetworkLayer : Set where
   moneyLayer : NetworkLayer
   introductionLayer : NetworkLayer
   publishingLayer : NetworkLayer
+  nonprofitLayer : NetworkLayer
   scienceTopicLayer : NetworkLayer
   governanceLayer : NetworkLayer
 
 data EdgeStatus : Set where
   locatorOnly : EdgeStatus
   sourceObserved : EdgeStatus
+  institutionalReviewEstablished : EdgeStatus
   independentlyCorroborated : EdgeStatus
   unresolvedSameObject : EdgeStatus
 
@@ -176,6 +170,18 @@ yuMicrocosmDoesNotRepresentWholeNetwork :
   Patronage.representsWholeScienceNetwork Patronage.yuPsychedelicMicrocosm ≡ false
 yuMicrocosmDoesNotRepresentWholeNetwork = refl
 
+gatesRepeatedEngagementAlreadyPaid :
+  Web.repeatedEngagementEstablished Web.canonicalGatesFoundationBoundary ≡ true
+gatesRepeatedEngagementAlreadyPaid = refl
+
+mitInstitutionalRelationAlreadyPaid :
+  Web.institutionalRelationshipEstablished Web.canonicalMITInstitutionalBoundary ≡ true
+mitInstitutionalRelationAlreadyPaid = refl
+
+terramarFundingEdgeAlreadyPaid :
+  Web.epsteinFoundationDonation57kEstablished Web.canonicalTerraMarBoundary ≡ true
+terramarFundingEdgeAlreadyPaid = refl
+
 localPsychedelicFrontierIsNotGlobalFrontier : Bool
 localPsychedelicFrontierIsNotGlobalFrontier = true
 
@@ -196,15 +202,13 @@ denseLaneDoesNotAutomaticallyCreateGlobalPriority ()
 highProfileNameDoesNotImplyWrongdoing : HighProfileNameImpliesWrongdoing → ⊥
 highProfileNameDoesNotImplyWrongdoing ()
 
-institutionalContactDoesNotImplyIndividualMisconduct :
-  InstitutionalContactImpliesIndividualMisconduct → ⊥
+institutionalContactDoesNotImplyIndividualMisconduct : InstitutionalContactImpliesIndividualMisconduct → ⊥
 institutionalContactDoesNotImplyIndividualMisconduct ()
 
 familyRelationDoesNotCreateCorporateControl : FamilyRelationImpliesCorporateControl → ⊥
 familyRelationDoesNotCreateCorporateControl ()
 
-historicalLineageDoesNotCreateEpsteinEraInfluence :
-  HistoricalCorporateLineageImpliesEpsteinEraInfluence → ⊥
+historicalLineageDoesNotCreateEpsteinEraInfluence : HistoricalCorporateLineageImpliesEpsteinEraInfluence → ⊥
 historicalLineageDoesNotCreateEpsteinEraInfluence ()
 
 networkPathDoesNotEstablishCoordination : NetworkPathImpliesCoordination → ⊥
