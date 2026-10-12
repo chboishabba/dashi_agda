@@ -10,31 +10,41 @@ module DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact where
 -- * the direct outer pair acts by symplectic similitudes with multipliers 2,1;
 -- * the same basis normalization to repository X6 + X6* is computed;
 -- * every source word has the canonical X6 compression pi_X g iota_X;
--- * depth-five search finds a concrete source word with irreducible degree-six
---   compression, cyclic rank six and an explicit swap01-breaking witness;
--- * PR #1105 identifies that compression with multiplication by beta=1-alpha
---   in its already-selected GF729 presentation by an explicit invertible Q;
--- * for the selected word `g2 g1 g2^-1 g1 g2^-1`, exact finite execution now
---   reconstructs the full 12x12 action in repository X6+X6* coordinates and
---   pays the asymmetric-Heisenberg central correction:
---       D=M^T C M-C is symmetric of rank 12,
---       q(x)=2 x^T D x,
---       q(x+y)+c(x,y)=q(x)+q(y)+c(Mx,My).
+-- * the older depth-five strict-symplectic word pays an exact selected-word
+--   Heisenberg lift and the first GF(729) field-presentation weld;
+-- * a depth-seven multiplier-2 primitive word pays a full-normalizer
+--   center-inverting comparator;
+-- * the strongest depth-eight source word
+--
+--       g1 g2^-1 g1 g2 g1 g2^-1 g1 g2^-1
+--
+--   is strict symplectic, has a primitive order-728 selected-GF729 compression,
+--   and carries an exact quadratic Heisenberg central correction.  Therefore
+--   one source word simultaneously pays the punctured-field 728-orbit/trivial-
+--   stabilizer action and a center-preserving Heisenberg lift at executable
+--   exact-matrix level.
+--
+-- The pre-existing central-character theorem says center-preserving inertia
+-- acts within a chosen zeta sector, while center inversion swaps zeta/zeta^2.
+-- Hence the depth-eight word is the correct preferred target for the existing
+-- phase-resolved single-zeta programme.
 --
 -- IMPORTANT NON-COLLAPSE:
--- the winning word does NOT stabilize the chosen X6 Lagrangian.  Compression is
--- still the lawful field-selector operator.  The new selected-word Heisenberg
--- lift pays one exact normalizer element, not the entire 2.Suz:2 normalizer,
--- Monster orbit/stabilizer semantics, output-translation equivariance, or any
--- physical realization.
+-- none of these words stabilizes the chosen X6 Lagrangian; compression remains
+-- the lawful field operator.  The finite quotient/Heisenberg realization still
+-- does NOT construct the actual Monster zeta-sector state carrier or identify
+-- its Fin-90 multiplicity action.  Those same-object producers are now the live
+-- representation seam.
 --
 -- REMAINING RECEIPTS:
--- 1. kernelize/import the concrete selected matrices/correction into Agda if
---    theorem authority rather than executable receipt is required;
--- 2. extend the central correction from the selected word to the normalizer
---    generators/full consumed source subgroup;
--- 3. close larger Monster action/orbit/stabilizer semantic recognition;
--- 4. instantiate output-translation equivariance downstream;
+-- 1. construct the actual phase-resolved Monster zeta-sector action on the same
+--    finite Heisenberg carrier and identify the Fin-90 multiplicity factor;
+-- 2. use that to instantiate existing output-translation/multiplicity-descent
+--    compilers;
+-- 3. extend selected-word lifts to whatever full normalizer subgroup is actually
+--    consumed downstream;
+-- 4. kernelize concrete matrices/corrections when Agda theorem authority is
+--    required;
 -- 5. physical normalizer realization remains separate.
 ------------------------------------------------------------------------
 
@@ -45,6 +55,7 @@ import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact as Source
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact as Weld
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact as Field
 import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact as SelectedLift
+import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftReceiptExact as PrimitiveInertia
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Reasoning.Trialectic369MultiplicityNormalizerTranslationDescentExact as Descent
 
@@ -67,12 +78,16 @@ record Monster3BAtlasNormalizerBoundary : Set where
     compressionFieldSelectorRoutePaid : Bool
     degreeSixCompressionCandidatePaid : Bool
     selectedGF729PresentationWeldRuntimePaid : Bool
-    selectedWordFullTwelveActionRuntimePaid : Bool
-    selectedWordQuadraticCentralCorrectionRuntimePaid : Bool
-    selectedWordHeisenbergLiftRuntimePaid : Bool
+    depthFiveSelectedWordHeisenbergLiftRuntimePaid : Bool
+    primitiveCenterPreservingFieldActionRuntimePaid : Bool
+    primitiveCenterPreservingHeisenbergLiftRuntimePaid : Bool
+    primitivePuncturedOrbit728RuntimePaid : Bool
+    primitivePuncturedStabilizerTrivialRuntimePaid : Bool
+    genericCentralCharacterInertiaTheoremReusable : Bool
+    actualPhaseResolvedMonsterSectorActionPaid : Bool
+    fin90MultiplicityActionIdentified : Bool
     sameBasisIntertwinerAgdaKernelPaid : Bool
     fullNormalizerHeisenbergActionPaid : Bool
-    fullMonsterActionOrbitStabilizerRecognitionPaid : Bool
     actualMonsterOutputTranslationEquivariancePaid : Bool
     physicalNormalizerRealizationPaid : Bool
     terminalNote : String
@@ -86,23 +101,24 @@ canonicalMonster3BAtlasNormalizerBoundary =
     Source.canonicalBoundary.sourceSymplectic12ActionExists
     Source.canonicalBoundary.sourceExplainsActionOnExtraspecialQuotient
     Source.canonicalDirectTwelveModuleReceipt.absolutelyIrreducible
-    true
-    true
-    true
+    true true true
     Source.canonicalBoundary.rawMatrixEntriesInRepo
     Field.canonicalCompressionFieldSelectionBoundary.innerAlternatingFormRuntimePaid
     Field.canonicalCompressionFieldSelectionBoundary.sameBasisSymplecticWeldRuntimePaid
     Field.canonicalCompressionFieldSelectionBoundary.outerSimilitudeMultiplierRuntimePaid
-    true
-    true
+    true true
     Field.canonicalCompressionFieldSelectionBoundary.actualDegreeSixCompressionCandidateFound
     Field.canonicalCompressionFieldSelectionBoundary.selectedGF729PresentationWeldRuntimePaid
-    SelectedLift.canonicalBoundary.selectedWordMatrixRuntimePaid
-    SelectedLift.canonicalBoundary.selectedWordQuadraticCentralCorrectionPaid
     SelectedLift.canonicalBoundary.selectedWordHeisenbergLiftRuntimePaid
-    SelectedLift.canonicalBoundary.selectedWordAgdaKernelMatrixProofPaid
+    PrimitiveInertia.canonicalBoundary.primitiveCompressionOrder728Paid
+    PrimitiveInertia.canonicalBoundary.selectedWordHeisenbergLiftRuntimePaid
+    PrimitiveInertia.canonicalBoundary.puncturedOrbit728Paid
+    PrimitiveInertia.canonicalBoundary.puncturedStabilizerTrivialPaid
+    PrimitiveInertia.canonicalBoundary.genericCentralCharacterInertiaTheoremReusable
+    PrimitiveInertia.canonicalBoundary.actualPhaseResolvedMonsterSectorActionPaid
+    PrimitiveInertia.canonicalBoundary.fin90MultiplicityActionIdentified
+    PrimitiveInertia.canonicalBoundary.agdaKernelConcreteMatrixProofPaid
     SelectedLift.canonicalBoundary.fullNormalizerHeisenbergActionPaid
     false
     false
-    false
-    "Source/matrix acquisition, symplectic normalization, the degree-six X6 field selector, its GF(729) weld, and one exact selected-word Heisenberg central lift are paid at executable-receipt level. Remaining work is full-normalizer lift/kernelization plus Monster orbit/stabilizer, output-equivariance and physical-realization semantics; no Lagrangian-stabilizer premise is reintroduced."
+    "Field acquisition is closed: a strict-symplectic source word is explicitly primitive on the selected GF(729), has punctured orbit 728/stabilizer 1, and has a center-preserving Heisenberg lift. The live same-object seam is now the actual phase-resolved Monster zeta-sector plus Fin-90 multiplicity action; after that the existing output-translation/descent compilers become consumable. Full-normalizer/kernel/physical realization remain separate." 
