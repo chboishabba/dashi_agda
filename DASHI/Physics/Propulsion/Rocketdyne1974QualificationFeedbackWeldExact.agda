@@ -8,6 +8,7 @@ import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExac
 import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
 import DASHI.Physics.Propulsion.Rocketdyne1974ProgrammeChallengesAndRelatedWorkExact as Challenges
 import DASHI.Physics.Propulsion.Rocketdyne1974SiblingRCSComparisonExact as Sibling
+import DASHI.Physics.Propulsion.Rocketdyne1974OperationalValveReliabilityLessonExact as OperationalValve
 
 record QualificationRevisionCandidate : Set where
   constructor qualification-revision-candidate
@@ -23,15 +24,13 @@ record QualificationRevisionCandidate : Set where
     formalApprovalReceiptRecovered : Bool
 
 haynesAnomalyToRevisionCandidate : QualificationRevisionCandidate
-haynesAnomalyToRevisionCandidate =
-  qualification-revision-candidate
-    Disc.haynesDamageObserved
-    Feedback.qualificationEnvelope
-    "Haynes-25 nozzle-extension extreme-condition configuration"
-    "WC103 columbium / silicide-coated follow-up configuration"
-    "material/hardware revision after high-temperature nozzle damage"
-    "NASA-CR-140308 R-9557 Test 870-2 / company-sponsored follow-up"
-    true false false
+haynesAnomalyToRevisionCandidate = qualification-revision-candidate
+  Disc.haynesDamageObserved Feedback.qualificationEnvelope
+  "Haynes-25 nozzle-extension extreme-condition configuration"
+  "WC103 columbium / silicide-coated follow-up configuration"
+  "material/hardware revision after high-temperature nozzle damage"
+  "NASA-CR-140308 R-9557 Test 870-2 / company-sponsored follow-up"
+  true false false
 
 wc103FollowupObservation : Disc.HistoricalRun
 wc103FollowupObservation = Disc.wc103FollowupSurvived
@@ -52,23 +51,12 @@ record HistoricalFeedbackReceipt : Set where
     sourceBoundary : String
 
 rocketdyneHistoricalFeedbackReceipt : HistoricalFeedbackReceipt
-rocketdyneHistoricalFeedbackReceipt =
-  historical-feedback-receipt
-    true true true true true false false
-    "R-9557 establishes the anomaly/change/follow-up sequence; formal review governance and population-level post-revision reliability are separate acquisitions."
+rocketdyneHistoricalFeedbackReceipt = historical-feedback-receipt
+  true true true true true false false
+  "R-9557 establishes the anomaly/change/follow-up sequence; formal review governance and population-level post-revision reliability are separate acquisitions."
 
 adaptiveQualificationBoundaryReceipt : Feedback.ReliabilityAdaptiveFeedbackBoundary
 adaptiveQualificationBoundaryReceipt = Feedback.canonicalReliabilityAdaptiveFeedbackBoundary
-
-------------------------------------------------------------------------
--- DIRECT OPERABILITY FEEDBACK FROM THE REPORT
---
--- Unlike the inferred Haynes->WC103 governance history, R-9557-1 explicitly
--- states an operational response to the sand/dust valve problem: unless a
--- non-degrading valve is developed, protect the engine from sand/dust and/or
--- purge it before each mission.  The recommendation is therefore source-paid;
--- formal adoption as an approved Shuttle procedure remains unpaid.
-------------------------------------------------------------------------
 
 record EnvironmentalProtectionFeedback : Set where
   constructor environmental-protection-feedback
@@ -81,23 +69,20 @@ record EnvironmentalProtectionFeedback : Set where
     boundary : String
 
 environmentalProtectionRecommendation : EnvironmentalProtectionFeedback
-environmentalProtectionRecommendation =
-  environmental-protection-feedback
-    Challenges.sandDustValveChallenge
-    Feedback.serviceabilityRule
-    "protect engine from sand and dust and/or purge before each mission unless a valve resistant to that environment is developed"
-    true false
-    "R-9557-1 pays the engineering recommendation, not a later approved operational procedure or fleet-wide reliability effect."
-
-------------------------------------------------------------------------
--- SIBLING PROGRAMME BOUNDARY
-------------------------------------------------------------------------
+environmentalProtectionRecommendation = environmental-protection-feedback
+  Challenges.sandDustValveChallenge Feedback.serviceabilityRule
+  "protect engine from sand and dust and/or purge before each mission unless a valve resistant to that environment is developed"
+  true false
+  "R-9557-1 pays the engineering recommendation, not a later approved operational procedure or fleet-wide reliability effect."
 
 siblingComparisonBoundaryReceipt : Sibling.SiblingComparisonBoundary
 siblingComparisonBoundaryReceipt = Sibling.siblingComparisonBoundary
 
 siblingComparisonDoesNotProveReliability : Bool
 siblingComparisonDoesNotProveReliability = true
+
+operationalValveReliabilityBoundary : OperationalValve.OperationalValveReliabilityBoundary
+operationalValveReliabilityBoundary = OperationalValve.operationalValveReliabilityBoundary
 
 record FeedbackAcquisitionFrontier : Set where
   constructor feedback-acquisition-frontier
@@ -111,7 +96,6 @@ record FeedbackAcquisitionFrontier : Set where
     preferredNextSource : String
 
 rocketdyneFeedbackFrontier : FeedbackAcquisitionFrontier
-rocketdyneFeedbackFrontier =
-  feedback-acquisition-frontier
-    true false false false false false
-    "Rocketdyne engineering change order, anomaly disposition, material-selection memorandum, Moog/NAS9-12996 valve failure analysis, qualification approval, purge/protection procedure, or later fleet/lot reliability comparison."
+rocketdyneFeedbackFrontier = feedback-acquisition-frontier
+  true false false false false false
+  "Rocketdyne engineering change order, anomaly disposition, material-selection memorandum, Moog/NAS9-12996 valve failure analysis, qualification approval, purge/protection procedure, or later fleet/lot reliability comparison. Later metal-nitrate valve operations are methodological feedback only and cannot substitute for the 1974 population."
