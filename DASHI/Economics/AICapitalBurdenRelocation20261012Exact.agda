@@ -82,8 +82,8 @@ customerFundingStillNotTerminalDemand :
 customerFundingStillNotTerminalDemand = refl
 
 data ProviderReliefImpliesSystemReliefPermission : Set where
+data CustomerFundingErasesSystemBurdenPermission : Set where
 data CustomerFundingImpliesTerminalDemandPermission : Set where
-
 data OracleScaleImpliesCounterfactualConservationPermission : Set where
 
 providerReliefDoesNotAutoCreateSystemRelief :
@@ -91,8 +91,12 @@ providerReliefDoesNotAutoCreateSystemRelief :
 providerReliefDoesNotAutoCreateSystemRelief ()
 
 customerFundingDoesNotEraseSystemBurden :
-  CustomerFundingImpliesTerminalDemandPermission → ⊥
+  CustomerFundingErasesSystemBurdenPermission → ⊥
 customerFundingDoesNotEraseSystemBurden ()
+
+customerFundingDoesNotAutoCreateTerminalDemand :
+  CustomerFundingImpliesTerminalDemandPermission → ⊥
+customerFundingDoesNotAutoCreateTerminalDemand ()
 
 oracleScaleDoesNotCreateCounterfactualConservation :
   OracleScaleImpliesCounterfactualConservationPermission → ⊥
