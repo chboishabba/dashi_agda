@@ -10,11 +10,12 @@ open import Agda.Builtin.String using (String)
 -- This owner deliberately separates several normalisations that are often
 -- conflated in prose.  It supplies a common typed interface, not a theorem
 -- identifying thermodynamic entropy, Shannon information, residual/reopening
--- information, or entropy production.
+-- information, horizon entropy, or entropy production.
 ------------------------------------------------------------------------
 
 data DensityNormalisation : Set where
   physicalVolume
+  surfaceArea
   spacetimeVolume
   siteCount
   supportMeasure
@@ -30,6 +31,7 @@ record EntropyDensitySurface : Set₁ where
     TimeAmount : Set
 
     entropyPerVolume : EntropyAmount → SupportAmount → DensityValue
+    entropyPerArea : EntropyAmount → SupportAmount → DensityValue
     entropyPerSite : EntropyAmount → SupportAmount → DensityValue
     entropyProductionDensity :
       EntropyAmount → TimeAmount → SupportAmount → DensityValue
@@ -39,6 +41,7 @@ record EntropyDensitySurface : Set₁ where
       residualInformation → SupportAmount → DensityValue
 
     thermodynamicEntropyDensityIsResidualInformationDensity : Bool
+    entropyPerVolumeIsEntropyPerArea : Bool
     entropyPerVolumeIsEntropyPerSite : Bool
     entropyDensityIsEntropyProductionDensity : Bool
 
@@ -51,9 +54,11 @@ record EntropyDensityAuthorityBoundary : Set where
   field
     normalisationMustBeDeclared : Bool
     supportMeasureMustBeDeclared : Bool
+    horizonSurfaceAreaNormalisationMustBeDeclared : Bool
     thermodynamicAndInformationEntropyNeedBridge : Bool
     residualInformationAndThermodynamicEntropyNeedBridge : Bool
     entropyDensityAndEntropyProductionNeedBridge : Bool
+    entropyPerAreaIsNotEntropyPerVolume : Bool
     coarseEntropyDoesNotByItselfProveFineStateErasure : Bool
     entropyDensityDoesNotByItselfSourceCurvature : Bool
     interpretation : String
@@ -68,7 +73,12 @@ canonicalEntropyDensityAuthorityBoundary =
     true
     true
     true
-    "Entropy per volume/site/support and entropy production per volume-time are distinct normalisations. Residual/reopening information density is a separate carrier until an explicit statistical or physical bridge identifies them."
+    true
+    true
+    "Entropy per volume, horizon/surface area, site or declared support are distinct normalisations. Entropy production per volume-time is another observable. Residual/reopening information density is a separate carrier until an explicit statistical or physical bridge identifies them."
+
+entropyPerAreaIsNotEntropyPerVolume : Bool
+entropyPerAreaIsNotEntropyPerVolume = true
 
 ------------------------------------------------------------------------
 -- Named projection used by cross-domain consumers.
