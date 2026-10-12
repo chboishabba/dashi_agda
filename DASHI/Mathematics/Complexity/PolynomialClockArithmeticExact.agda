@@ -3,17 +3,18 @@ module DASHI.Mathematics.Complexity.PolynomialClockArithmeticExact where
 ------------------------------------------------------------------------
 -- SHARED ARITHMETIC POLYNOMIAL CLOCK
 --
--- One owner for the concrete clock shape used by the standard/coded P lane:
+-- The size variable is the length of the repository's actual canonical binary
+-- formula serialization, not merely AST node count.  In particular variable
+-- indices are serialized through Nat prefix tokens, so their representation
+-- length is charged honestly.
 --
---   c * (1 + |formula|)^d.
---
--- This is deliberately separate from PolynomialCostModel's abstract predicates.
+--   T(phi) = c * (1 + bitCodeLength(phi))^d.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
-import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 
 natPower : Nat → Nat → Nat
 natPower base zero = suc zero
@@ -23,4 +24,4 @@ formulaPolynomialBudget :
   Nat → Nat → Cook.BooleanFormula → Nat
 formulaPolynomialBudget coefficient degree formula =
   coefficient
-  * natPower (suc (Size.formulaNodeCount formula)) degree
+  * natPower (suc (Binary.formulaBitCodeLength formula)) degree
