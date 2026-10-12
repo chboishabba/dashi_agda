@@ -7,6 +7,8 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _<_)
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumTraceActiveCollapseExact as VacuumSign
 import DASHI.Physics.Foundations.CMP119CosmologyVacuumContinuationCompilerExact as Continuation
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabilityExact as VacuumNI
+import DASHI.Physics.Foundations.CMP119AntigravityLocalizedVacuumReadoutExact as Readout
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumConstantBetaOrthogonalityExact as Orthogonality
 import DASHI.Physics.Foundations.GRQFTSingleVacuumNormalizationScaleCovarianceExact as Scale
 import DASHI.Physics.Foundations.GRQFTCMP119SingleSourceVacuumKottlerRouteExact as SingleSource
 import DASHI.Physics.Foundations.GRQFTSingleVacuumSafeBandExact as SafeBand
@@ -44,6 +46,17 @@ sourceVacuumSequenceRequiresIndependentPhysicalPayment : Bool
 sourceVacuumSequenceRequiresIndependentPhysicalPayment =
   VacuumNI.sourceVacuumSequenceRequiresIndependentPhysicalPayment
 
+formalVacuumConstantCoordinateReadoutOwned : Bool
+formalVacuumConstantCoordinateReadoutOwned = true
+
+publishedVacuumConstantEncodingStillOpen : Bool
+publishedVacuumConstantEncodingStillOpen =
+  Readout.publishedVacuumConstantEncodingStillRequired
+
+betaProjectionCannotRecoverPureVacuumConstant : Bool
+betaProjectionCannotRecoverPureVacuumConstant =
+  Orthogonality.betaProjectionCannotRecoverVacuumConstant
+
 sourceSignAndControlMaxCutOwned : Bool
 sourceSignAndControlMaxCutOwned = true
 
@@ -53,7 +66,9 @@ positiveSourceNormalizedGeometryCompilerOwned = true
 record AntigravitySingleVacuumPhysicalPromotionFrontier : Set where
   constructor antigravity-single-vacuum-physical-promotion-frontier
   field
-    sourceNativeVacuumReadoutAlreadyOwned : Bool
+    formalVacuumConstantCoordinateReadoutOwned : Bool
+    publishedVacuumConstantEncodingStillRequired : Bool
+    plaquetteBetaProjectionCanRecoverPureVacuumConstant : Bool
     singleSourceVacuumStaticCompilerOwned : Bool
     twoVacuumAmplitudesRequired : Bool
     positiveGAccelerationSignTheoremOwned : Bool
@@ -79,8 +94,14 @@ canonicalAntigravitySingleVacuumPhysicalPromotionFrontier :
   AntigravitySingleVacuumPhysicalPromotionFrontier
 canonicalAntigravitySingleVacuumPhysicalPromotionFrontier =
   antigravity-single-vacuum-physical-promotion-frontier
-    true true false true true true true false true true false true
+    true true false true false true true true true false true true false true
     false true true true true true true true
+
+-- Historical compatibility flag.  "Source-native readout already owned" was
+-- too strong: the formal constant coordinate is owned, but its identification
+-- with the published CMP119 vacuum-energy/normalization term is not.
+sourceNativeVacuumReadoutAlreadyOwned : Bool
+sourceNativeVacuumReadoutAlreadyOwned = false
 
 selectedCMP119VacuumContinuationWeldStillOpen : Bool
 selectedCMP119VacuumContinuationWeldStillOpen =
@@ -91,7 +112,7 @@ staticRouteNeedsPositivePromotedVacuumSign =
   SignCut.staticRouteNeedsPositivePromotedVacuumSign
 
 differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal : Bool
-differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal =
+ differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal =
   SignCut.differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal
 
 record AntigravitySingleVacuumPromotionBoundary : Set where
