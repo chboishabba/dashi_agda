@@ -1,9 +1,9 @@
 # Reproducible acquisition helper for the ATLAS 12-dimensional GF(3)
 # representation of 2.Suz:2 used by the Monster 3B normalizer construction.
 #
-# Requires GAP + AtlasRep.  This script intentionally only ACQUIRES and prints
-# the certified source matrices; the repository-side symplectic-form solve and
-# X6+X6* basis intertwiner are a separate exact step.
+# Requires GAP + AtlasRep.  This script ACQUIRES the certified source matrices
+# and emits machine-readable integer rows for the repository-side symplectic
+# form/basis/field-candidate analyzer.
 
 if LoadPackage("atlasrep", false) <> true then
   Error("AtlasRep package is required");
@@ -16,10 +16,14 @@ info := OneAtlasGeneratingSetInfo(
 );;
 
 if info = fail then
-  Error("ATLAS 12-dimensional GF(3) representation of 2.Suz.2 not found");
+  Error("ATLAS 12-dimensional GF(3) representation of 2.Suz:2 not found");
 fi;
 
 gens := AtlasGenerators(info).generators;;
+
+IntMatrix := function(m)
+  return List(m, row -> List(row, x -> IntFFE(x)));
+end;
 
 Print("group=2.Suz.2\n");
 Print("field=GF(3)\n");
@@ -28,8 +32,7 @@ Print("generator_count=", Length(gens), "\n");
 Print("representation_info=", info, "\n");
 
 for i in [1..Length(gens)] do
-  Print("generator_", i, "=\n");
-  Print(gens[i], "\n");
+  Print("generator_", i, "_int=", IntMatrix(gens[i]), "\n");
 od;
 
 # Independent Monster-normalizer source cross-check.  This is the representation
