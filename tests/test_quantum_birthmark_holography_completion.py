@@ -28,10 +28,13 @@ def test_area_bound_is_reused_as_actual_uv_finiteness_theorem():
 def test_lorentz_horizon_bridge_keeps_jacobson_payment_explicit():
     p = text("DASHI/Quantum/QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact.agda")
     assert "LargePosetContinuumLorentz31Authority" in p
+    assert "QuantumMereologySpacetimePromotionExact" in p
+    assert "SpacetimeSheafObligation" in p
     assert "timeDimensionIsOne" in p
     assert "localHorizonAttachment" in p
     assert "clausiusRelation" in p
     assert "entropyAreaVariationWeld" in p
+    assert "sameSpatialCarrier" in p
     assert "einsteinEquationNotDerivedByThisAdapter" in p
     assert "birthmarkDoesNotSupplyClausiusRelation" in p
 
