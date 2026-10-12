@@ -29,6 +29,7 @@ import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsGlobalE6F4RecognitionExact
 import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact
 import DASHI.Reasoning.E6MinusculeFirstTitsWeightBasisBridgeExact
+import DASHI.Reasoning.E6MinusculeFirstTitsTitsExtensionExact
 
 -- Physics-facing max-cut.
 import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
