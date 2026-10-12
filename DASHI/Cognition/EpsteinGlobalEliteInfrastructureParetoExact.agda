@@ -11,12 +11,13 @@ import DASHI.Cognition.EpsteinCorporateBoardNetworkAcquisitionExact as Boards
 import DASHI.Cognition.EpsteinTechClaimVerificationExact as Tech
 import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact as TrumpEpstein
 import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as TrumpBridge
+import DASHI.Cognition.EpsteinAustraliaEliteNetworkAcquisitionExact as Australia
 
 ------------------------------------------------------------------------
 -- GLOBAL ELITE / INSTITUTIONAL INFRASTRUCTURE PARETO FRONT
 --
 -- This sits above the science-specific router. Recalibrated after banking,
--- board-network, tech, Trump/Mar-a-Lago and Bannon source sweeps.
+-- board-network, tech, Trump/Mar-a-Lago/Bannon and Australian-source sweeps.
 -- Ranking is acquisition priority only; never culpability/truth/liability.
 ------------------------------------------------------------------------
 
@@ -29,6 +30,7 @@ data GlobalFrontLane : Set where
   harvardPEDDonorBrokerage : GlobalFrontLane
   gatesPhilanthropy : GlobalFrontLane
   kraussOrigins : GlobalFrontLane
+  australiaEliteNetwork : GlobalFrontLane
   maxwellGhislainePublishingTerraMar : GlobalFrontLane
   directTechCorrespondence : GlobalFrontLane
   politicalPublicOffice : GlobalFrontLane
@@ -63,6 +65,8 @@ currentGlobalFront =
     "Resolve Gates/Foundation meetings, DAF structure, IPI introduction and philanthropic brokerage."
   ∷ pareto-lane kraussOrigins 80 true true true
     "Resolve ASU Origins funding, events, donor acknowledgements and scientist/donor network."
+  ∷ pareto-lane australiaEliteNetwork 79 true true true
+    "Treat Australia as a distinct regional bridge: saturate Katherine Keating's direct correspondence/business-network role and the FBI/AFP Sydney evidence-recovery seam; separately resolve the disputed Fox/Packer 1995 cruise report and keep Rudd/Forrest/Palmer at attempted-introduction, mention or third-party-claim status unless stronger receipts emerge."
   ∷ pareto-lane maxwellGhislainePublishingTerraMar 78 true true true
     "Keep Robert Maxwell conduct/publishing network, Ghislaine conviction, TerraMar funding and family lineage separately typed while testing network continuity/access claims."
   ∷ pareto-lane directTechCorrespondence 75 true true true
@@ -95,6 +99,16 @@ trumpKnowledgeStillUnresolved :
   TrumpBridge.knowledgeOfEpsteinCrimesResolved
     TrumpBridge.canonicalTrumpParticipationLatticeBoundary ≡ false
 trumpKnowledgeStillUnresolved = refl
+
+australiaDirectKeatingRelationshipPaid :
+  Australia.katherineKeatingDirectRelationshipPaid
+    Australia.canonicalAustraliaAcquisitionBoundary ≡ true
+australiaDirectKeatingRelationshipPaid = refl
+
+australiaRuddRelationshipNotPromoted :
+  Australia.ruddDirectRelationshipPaid
+    Australia.canonicalAustraliaAcquisitionBoundary ≡ false
+australiaRuddRelationshipNotPromoted = refl
 
 record AcquisitionRoundProtocol : Set where
   constructor acquisition-round-protocol
