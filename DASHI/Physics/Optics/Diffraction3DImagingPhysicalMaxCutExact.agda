@@ -13,10 +13,11 @@ import DASHI.Physics.Optics.PhotonDetectorChannelExact
 import DASHI.Physics.Optics.DiffuserInformationDesignExact
 import DASHI.Physics.Optics.MatchedPhotonImagerComparatorExact
 
--- Exact status ledger.  "Paid" here means the proof-relevant interface/compiler
--- exists in-repo.  The final three empirical/numerical leaves remain false:
--- actual Berkeley/Waller calibration, a measured/derived restricted kappa on
--- that same H, and a matched-photon experimental comparison.
+-- Structural status ledger. "Paid" here means the proof-relevant generic
+-- interface/compiler exists in-repo. Empirical/source acquisition is tracked
+-- separately by Diffraction3DImagingAcquisitionMaxCutExact so this layer does
+-- not become stale as public Berkeley datasets and comparator experiments are
+-- acquired.
 record Diffraction3DImagingPhysicalMaxCut : Set where
   field
     propagationPaid : Bool
@@ -25,9 +26,6 @@ record Diffraction3DImagingPhysicalMaxCut : Set where
     detectorChannelPaid : Bool
     informationDesignPaid : Bool
     matchedPhotonComparatorPaid : Bool
-    berkeleyCalibrationPaid : Bool
-    measuredRestrictedKappaPaid : Bool
-    matchedPhotonExperimentPaid : Bool
 
 open Diffraction3DImagingPhysicalMaxCut public
 
@@ -39,13 +37,9 @@ currentDiffraction3DImagingPhysicalMaxCut = record
   ; detectorChannelPaid = true
   ; informationDesignPaid = true
   ; matchedPhotonComparatorPaid = true
-  ; berkeleyCalibrationPaid = false
-  ; measuredRestrictedKappaPaid = false
-  ; matchedPhotonExperimentPaid = false
   }
 
--- The remaining max-cut is intentionally physical, not representational:
---  1. populate the physical weld from actual depth-indexed calibrated PSFs;
---  2. populate RestrictedInverseBudget.restrictedStability for that same H;
---  3. populate the detector statistics and matched-photon comparator from
---     measured instrument parameters/data.
+-- Remaining work is therefore not another structural optics abstraction.
+-- Concrete acquisition/numerics live in Diffraction3DImagingAcquisitionMaxCutExact:
+-- public PSF materialisation, same-H translated-column stability, calibrated
+-- detector comparison, and any optional FZP arm.
