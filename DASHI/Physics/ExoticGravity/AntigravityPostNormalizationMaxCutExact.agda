@@ -16,18 +16,12 @@ import DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricComp
 ------------------------------------------------------------------------
 -- POST-NORMALIZATION MAX-CUT
 --
--- This scheduler starts AFTER the source-normalization / free-energy tranche:
---
---   * the absolute CMP119 normalization coordinate is assumed reconstructed;
---   * a controlled source difference / Delta-V compiler is assumed available.
---
--- The old beta/E/R/B non-identifiability theorem remains mathematically true,
--- but it is no longer the terminal obstruction once the normalization coordinate
--- itself has been retained.
---
--- Physical promotion still requires the metric derivative of the renormalized
--- effective action.  Neither V nor Delta-V is automatically Lambda or
--- Delta-Lambda.
+-- Starts AFTER the source-normalization/free-energy tranche.  Recovering V or
+-- Delta-V retires the old beta/E/R/B information impasse, but neither quantity
+-- is automatically a gravitational Lambda / Delta-Lambda.  Physical promotion
+-- still requires the same-state metric response of the renormalized effective
+-- action, normalization-to-gravity calibration, and a cosmological
+-- renormalization convention.
 ------------------------------------------------------------------------
 
 vacuumNormalizationFlowAssumedPaid : Bool
@@ -39,10 +33,6 @@ differentialVacuumDifferenceAssumedPaid = true
 oldBetaERBVacuumNonidentifiabilityStillTrueButNoLongerTerminal : Bool
 oldBetaERBVacuumNonidentifiabilityStillTrueButNoLongerTerminal = true
 
--- The non-identifiability witness now compiles into the generic discriminator
--- language: the current source observer collapses a pair that the literal
--- vacuum projector separates.  This is an information-design theorem only;
--- the physical same-object measurement/calibration receipt is still open.
 vacuumDiscriminatorLanguageExtensionOwned : Bool
 vacuumDiscriminatorLanguageExtensionOwned = true
 
@@ -54,11 +44,14 @@ staticMetricResponseRenormalizationWeldStillRequired : Bool
 staticMetricResponseRenormalizationWeldStillRequired =
   Firewall.renormalizedEffectiveActionMetricResponseRequired
 
+staticNormalizationToGravityCalibrationStillRequired : Bool
+staticNormalizationToGravityCalibrationStillRequired =
+  Firewall.normalizationToGravityCalibrationStillRequired
+
 -- Once physical Lambda is actually calibrated as an inverse-area quantity, the
--- canonical safe fixture no longer leaves device area algebraically opaque:
--- Lambda R^2 = 5/3 determines an exact positive R^2 target.  A square-root
--- theorem is not required at this stage.  Decimal/SI metrology for the supplied
--- Lambda and conversion to a physical radius remain external.
+-- canonical safe fixture fixes the exact positive area target by
+-- Lambda R^2 = 5/3.  The physical Lambda and final SI radius are not produced
+-- by this compiler.
 dimensionedRadiusSquaredCompilerOwned : Bool
 dimensionedRadiusSquaredCompilerOwned = true
 
@@ -66,9 +59,9 @@ absoluteSIDecimalScaleStillRequired : Bool
 absoluteSIDecimalScaleStillRequired =
   Scale.absoluteSIDecimalScaleStillRequiresReceipt
 
--- Compatibility surface: the physical scalar metric response is NOT owned
--- merely from Delta-V.  Only the candidate Kottler algebra is owned before the
--- same-state metric-response receipt.
+-- The physical scalar metric response is NOT owned merely from Delta-V.  Only
+-- the candidate Kottler algebra is owned before the same-state metric-response
+-- receipt.
 differentialScalarMetricResponseOwned : Bool
 differentialScalarMetricResponseOwned = false
 
@@ -76,11 +69,9 @@ differentialCandidateScalarMetricAlgebraOwned : Bool
 differentialCandidateScalarMetricAlgebraOwned = true
 
 -- The differential response is no longer an independent theorem once BOTH
--- physical static endpoint receipts and one shared affine calibration /
--- cosmological-renormalization convention are supplied.  The existing compiler
--- constructs the differential receipt and proves Delta Lambda = a Delta V.
--- Thus the remaining physical debt is the endpoint/common-calibration package,
--- not a second independently postulated Delta-object identity.
+-- endpoint physical responses and one shared affine calibration / cosmological
+-- renormalization convention are supplied.  Two arbitrary static receipts are
+-- insufficient; the common affine pair is the least-privilege reuse package.
 staticPairToDifferentialCompilerOwned : Bool
 staticPairToDifferentialCompilerOwned =
   StaticPair.staticPairToDifferentialCompilerOwned
@@ -92,19 +83,19 @@ independentDifferentialSameObjectTheoremRequiredAfterCommonStaticPair =
 differentialEndpointMetricResponseAndCommonCalibrationStillRequired : Bool
 differentialEndpointMetricResponseAndCommonCalibrationStillRequired = true
 
--- The generic firewall remains authoritative before those endpoint/common
--- receipts are supplied.
 differentialSameStateMetricResponseStillRequiredBeforeStaticPair : Bool
 differentialSameStateMetricResponseStillRequiredBeforeStaticPair =
   DifferentialFirewall.sameStateMetricResponseDifferenceRequired
 
--- Exact odd/even lock-in algebra is now owned: if the target channel is really
--- odd and a nuisance channel really even under a physical reversal, the odd
--- half-difference recovers the differential vacuum signal and the even half-sum
--- recovers the common nuisance.  Those parity identifications are still
--- experiment receipts, not algebraic consequences of the source model.
+-- Exact odd/even lock-in algebra is owned twice: at the legacy normalization
+-- level, and at the PHYSICAL Delta-Lambda level once a metric-response receipt
+-- exists.  Reversal parity and common-background parity remain experimental
+-- same-object receipts.
 differentialReversalEstimatorAlgebraOwned : Bool
 differentialReversalEstimatorAlgebraOwned = true
+
+differentialPhysicalDeltaLambdaLockInAlgebraOwnedAfterReceipt : Bool
+differentialPhysicalDeltaLambdaLockInAlgebraOwnedAfterReceipt = true
 
 differentialReversalParityReceiptStillRequired : Bool
 differentialReversalParityReceiptStillRequired =
@@ -163,8 +154,7 @@ sourceVacuumSequenceStillNotDerivableFromBetaERBProjection =
   VacuumNI.sourceVacuumSequenceRequiresIndependentPhysicalPayment
 
 normalizationDifferenceAloneIsNotPhysicalDeltaLambda : Bool
-normalizationDifferenceAloneIsNotPhysicalDeltaLambda =
-  true
+normalizationDifferenceAloneIsNotPhysicalDeltaLambda = true
 
 scalarKottlerResponseIsNotTTMode : Bool
 scalarKottlerResponseIsNotTTMode = true
