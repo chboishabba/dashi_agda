@@ -27,15 +27,11 @@ import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact as Presheaf
 open Cat.ProjectionCategory
 open Fibration.ContextIndexedObservation
 
-------------------------------------------------------------------------
--- 1. Exact category-interface adapter.
-------------------------------------------------------------------------
-
 relationalProjectionCategory : Cat.ProjectionCategory
 relationalProjectionCategory = record
   { Obj = Site.RelObj
   ; Hom = Site.RelHom
-  ; id = Site.idR _
+  ; id = λ {U} → Site.idR U
   ; _∘_ = Site.composeRel
   ; id-left = Site.composeRelIdLeft
   ; id-right = Site.composeRelIdRight
@@ -43,14 +39,6 @@ relationalProjectionCategory = record
   ; categoryReading =
       "Relational Stage-12 Grothendieck patch category viewed through ProjectionCategory"
   }
-
-------------------------------------------------------------------------
--- 2. The existing nonconstant cell presheaf is a context-indexed observation.
---
--- Fine and Surface are intentionally the same Section carrier here.  The
--- observation map is identity; the content is the typed context-dependent
--- restriction system and its already-proved functoriality.
-------------------------------------------------------------------------
 
 relationalCellIndexedObservation :
   Fibration.ContextIndexedObservation relationalProjectionCategory
@@ -87,10 +75,6 @@ indexedFineAtAIsT3 :
   indexedFineAt Site.vertexA ≡ Presheaf.Section Site.vertexA
 indexedFineAtAIsT3 = refl
 
-------------------------------------------------------------------------
--- 3. Reuse the generic split lift on every site restriction arrow.
-------------------------------------------------------------------------
-
 relationalCanonicalSplitLift :
   {U V : Site.RelObj} →
   (change : Site.RelHom U V) →
@@ -120,10 +104,6 @@ relationalObservationCommutesWithRestriction :
 relationalObservationCommutesWithRestriction =
   Fibration.observationCommutesWithSplitLift
     relationalCellIndexedObservation
-
-------------------------------------------------------------------------
--- 4. Promotion firewall.
-------------------------------------------------------------------------
 
 data ContextBridgeSuppliesFullBenabouUniqueness : Set where
 data ContextBridgeSuppliesGrothendieckPseudofunctorEquivalence : Set where
