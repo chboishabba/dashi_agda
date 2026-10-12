@@ -6,16 +6,19 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Geometry.LargePosetContinuumLorentz31 as Lorentz31
 import DASHI.Physics.Foundations.EntropicGravitySourceBoundaryExact as Gravity
+import DASHI.Physics.Closure.TemporalSheafProofObligations as Sheaf
 import DASHI.Quantum.QuantumBirthmarkHolographicSameObjectWeldExact as SameObject
+import DASHI.Quantum.QuantumMereologySpacetimePromotionExact as SpacetimePromotion
 
 ------------------------------------------------------------------------
--- HOLOGRAPHIC BOUNDARY -> 3+1 LOCAL HORIZON -> JACOBSON PAYMENT SURFACE
+-- HOLOGRAPHIC BOUNDARY -> QUANTUM SPATIAL GEOMETRY -> SPACETIME ->
+-- 3+1 LOCAL HORIZON -> JACOBSON PAYMENT SURFACE
 --
--- The large-poset owner supplies a typed 3+1 Lorentzian authority, including
--- one time direction and time orientability.  Jacobson's source boundary says
--- that an Einstein-equation equation-of-state derivation additionally requires
--- local-horizon thermodynamics.  This adapter records exactly those payments.
--- It does not derive Einstein's equation itself.
+-- The repo already owns an explicit promotion seam from entanglement-derived
+-- spatial geometry into a spacetime sheaf, and separately a large-poset 3+1
+-- Lorentzian authority.  Neither step is automatic.  Jacobson then requires
+-- additional local-horizon thermodynamics.  This adapter records all three
+-- payments without identifying them by prose.
 ------------------------------------------------------------------------
 
 lorentz31HasOneTimeDirection :
@@ -59,10 +62,11 @@ open LocalHorizonThermodynamicPackage public
 ------------------------------------------------------------------------
 -- Same-object holographic-to-horizon attachment.
 --
--- A boundary entropy theorem becomes relevant to Jacobson only after the
--- boundary state and local horizon section are explicitly identified on the
--- same physical carrier.  A p-adic or tensor-network boundary does not supply
--- that identification automatically.
+-- `QuantumMereologySpacetimePromotionExact` already makes the spatial->time
+-- seam explicit through `SpacetimeSheafObligation`: same spatial carrier,
+-- entanglement-distance agreement and spacetime gluing must be paid.  Here we
+-- require the holographic boundary to land on that same spacetime/horizon
+-- carrier before its entropy can participate in a Jacobson-style derivation.
 ------------------------------------------------------------------------
 
 record HolographicHorizonSameObjectWeld
@@ -76,6 +80,18 @@ record HolographicHorizonSameObjectWeld
 
     boundaryStateIsEntropyDataState : Set
     boundaryStateIsEntropyDataStateProof : boundaryStateIsEntropyDataState
+
+    spacetimeSheaf : Sheaf.SpacetimeSheafObligation
+
+    quantumMereologySpacetimePromotionReused : Set
+    quantumMereologySpacetimePromotionReusedProof :
+      quantumMereologySpacetimePromotionReused
+
+    sameSpatialCarrier : Set
+    sameSpatialCarrierProof : sameSpatialCarrier
+
+    sameTemporalCarrier : Set
+    sameTemporalCarrierProof : sameTemporalCarrier
 
     boundaryToHorizonSection : BoundaryState → HorizonSection thermo
 
@@ -96,9 +112,13 @@ open HolographicHorizonSameObjectWeld public
 record JacobsonCompositionBoundary : Set where
   constructor jacobsonCompositionBoundary
   field
+    quantumMereologySpacetimePromotionOwnerReused : Bool
+    spacetimeSheafObligationReused : Bool
     lorentz31SuppliesPhysicalSpacetimeCarrier : Bool
     oneTimeDirectionIsOwned : Bool
     holographicBoundaryIsNotAutomaticallyLocalRindlerHorizon : Bool
+    spatialGeometryDoesNotAutomaticallySupplyTime : Bool
+    spacetimeSheafDoesNotAutomaticallySupplyEinsteinDynamics : Bool
     areaLawDoesNotSupplyClausiusRelation : Bool
     birthmarkDoesNotSupplyClausiusRelation : Bool
     birthmarkDoesNotSupplyStressTensorHeatFluxWeld : Bool
@@ -108,7 +128,8 @@ record JacobsonCompositionBoundary : Set where
 
 canonicalJacobsonCompositionBoundary : JacobsonCompositionBoundary
 canonicalJacobsonCompositionBoundary =
-  jacobsonCompositionBoundary true true true true true true true true true
+  jacobsonCompositionBoundary
+    true true true true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Max-cut readiness surface.
