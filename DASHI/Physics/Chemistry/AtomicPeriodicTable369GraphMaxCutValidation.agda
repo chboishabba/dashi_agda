@@ -34,11 +34,17 @@ pShellC3SectorRegression :
   × C3.magneticSector C3.mPosOne ≡ C3.sectorPositive
 pShellC3SectorRegression = refl , (refl , refl)
 
-pShellRotationOrderThreeRegression :
-  C3.rotateMagneticState
-    (C3.rotateMagneticState (C3.rotateMagneticState C3.mNegOne))
+pShellRotationCharacterRegression :
+  C3.rotationPhase C3.mNegOne ≡ C3.phaseNegative
+  × C3.rotationPhase C3.mZero ≡ C3.phaseNeutral
+  × C3.rotationPhase C3.mPosOne ≡ C3.phasePositive
+pShellRotationCharacterRegression = refl , (refl , refl)
+
+pShellChargeStepOrderThreeRegression :
+  C3.chargePositiveStep
+    (C3.chargePositiveStep (C3.chargePositiveStep C3.mNegOne))
   ≡ C3.mNegOne
-pShellRotationOrderThreeRegression = C3.rotateMagneticStateOrderThree C3.mNegOne
+pShellChargeStepOrderThreeRegression = C3.chargePositiveStepOrderThree C3.mNegOne
 
 pShellRealizationIntertwinerRegression :
   (x : C3.DepthOneKernel) ->
