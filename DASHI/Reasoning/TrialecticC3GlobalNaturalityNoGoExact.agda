@@ -29,14 +29,10 @@ open import DASHI.Core.Prelude using (⊥; cong; sym; trans)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
+import DASHI.Core.RelationalTransportGroupoidActionExact as Groupoid
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact as Transport
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
-
-------------------------------------------------------------------------
--- 1. Participant-A observation and participant-B consumer on the same global
--- structured boundary.
-------------------------------------------------------------------------
 
 participantAObserver :
   Cell.CompatibleThreeCellTrialecticBoundary →
@@ -107,21 +103,12 @@ participantBCannotFactorThroughA =
   Descent.nonDescentWitnessBlocksFactorization
     participantANonDescentWitnessForB
 
-------------------------------------------------------------------------
--- 2. Exact repair: the full AB edge retains enough local context to recover B.
-------------------------------------------------------------------------
-
 participantBFactorsThroughABEdge :
   Descent.FactorsThrough Cell.edgeAB participantBConsumer
 participantBFactorsThroughABEdge =
   Factorized.factorizedRefinement
     Cell.rightCell
     (λ boundary → refl)
-
-------------------------------------------------------------------------
--- 3. The naive global naturality package implies the impossible A->B
--- factorisation.
-------------------------------------------------------------------------
 
 record NaiveGlobalC3Naturality : Set₁ where
   constructor naive-global-c3-naturality
@@ -169,19 +156,10 @@ naiveGlobalC3NaturalityImpossible candidate =
   participantBCannotFactorThroughA
     (naiveC3NaturalityImpliesBFactorsThroughA candidate)
 
-------------------------------------------------------------------------
--- 4. The canonical orbit remains valid; the no-go concerns universal
--- extension to arbitrary T^18 boundaries, not the existing fixture.
-------------------------------------------------------------------------
-
 canonicalABStillRotatesToBC :
-  Transport.Groupoid.forward Transport.transportABtoBC Cell.canonicalCellAB
+  Groupoid.forward Transport.transportABtoBC Cell.canonicalCellAB
   ≡ Cell.canonicalCellBC
 canonicalABStillRotatesToBC = Transport.canonicalABtoBC
-
-------------------------------------------------------------------------
--- 5. Boundary.
-------------------------------------------------------------------------
 
 record TrialecticC3GlobalNaturalityNoGoBoundary : Set where
   constructor trialectic-c3-global-naturality-no-go-boundary
