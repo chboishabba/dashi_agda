@@ -14,11 +14,20 @@ _ = refl
 _ : H.siblingRawMatrixBytesPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.siblingConcreteBasisIntertwinerPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ : H.siblingConcreteBasisIntertwinerPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.siblingCentralCorrectionPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ : H.siblingSelectedWordCentralCorrectionPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.actualMonsterLilaSameActionFitPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ : H.siblingSelectedWordHeisenbergLiftPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingFullNormalizerHeisenbergLiftPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.actualMonsterLilaSelectedWordFitPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.actualMonsterLilaFullNormalizerFitPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
