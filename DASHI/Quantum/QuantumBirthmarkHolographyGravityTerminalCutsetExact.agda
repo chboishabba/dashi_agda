@@ -16,8 +16,9 @@ import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as Entropy
 --
 -- The finite entropy algebra is closed on the corrected maximally-entangled
 -- cut model.  Consumer-relative birthmark transport now has an exact generic
--- compiler.  Jacobson's route has also been recut against existing QFT/GR
--- owners so that only genuine physical/kernel payments remain live.
+-- compiler.  Jacobson's route has also been recut against existing QFT/GR,
+-- finite sourced-Einstein, and continuum Einstein-matter solution owners so
+-- that only genuine physical/kernel payments remain live.
 ------------------------------------------------------------------------
 
 record ClosedFiniteLayer : Set where
@@ -57,12 +58,13 @@ record TerminalPhysicalCutset : Set where
     sameObjectMatterStressEnergyReceipt : Bool
     allNullDirectionsTensorRecovery : Bool
     einsteinEquationOfStateKernelDerivation : Bool
+    continuumPhysicalSolutionAttachment : Bool
     empiricalValidation : Bool
 
 canonicalTerminalPhysicalCutset : TerminalPhysicalCutset
 canonicalTerminalPhysicalCutset =
   terminalPhysicalCutset
-    true true true true true true true true true true true
+    true true true true true true true true true true true true
 
 record TerminalPromotionFirewall : Set where
   constructor terminalPromotionFirewall
@@ -75,14 +77,15 @@ record TerminalPromotionFirewall : Set where
     pAdicBoundaryDoesNotImplyPhysicalSpacetime : Bool
     correctedStateDoesNotIdentifyUpstreamState : Bool
     observableTransportDoesNotImplyBulkReconstruction : Bool
+    finiteSourcedEinsteinDoesNotImplyContinuumJacobson : Bool
 
 canonicalTerminalPromotionFirewall : TerminalPromotionFirewall
 canonicalTerminalPromotionFirewall =
-  terminalPromotionFirewall true true true true true true true true
+  terminalPromotionFirewall true true true true true true true true true
 
 statusStatement : String
 statusStatement =
-  "Corrected finite RT and generic consumer-relative birthmark transport are structurally paid. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius payment, continuum Raychaudhuri, sourced stress-energy, null-direction tensor recovery, Einstein equation-of-state derivation, and empirical validation."
+  "Corrected finite RT and generic consumer-relative birthmark transport are structurally paid. Existing finite sourced-Einstein and continuum solution-schema owners are reused but do not close Jacobson. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius payment, continuum Raychaudhuri, same-object sourced stress-energy, null-direction tensor recovery, Einstein equation-of-state derivation, continuum physical solution attachment, and empirical validation."
 
 correctedFiniteRTEntropyClosed : Bool
 correctedFiniteRTEntropyClosed = RT.correctedRTSameObjectEntropy
@@ -111,6 +114,9 @@ jacobsonDifferentialGeometricDerivation : Bool
 jacobsonDifferentialGeometricDerivation =
   JacobsonCut.jacobsonPhysicalKernelDerivationStillRequired
 
+continuumPhysicalSolutionAttachment : Bool
+continuumPhysicalSolutionAttachment = true
+
 empiricalValidation : Bool
 empiricalValidation = true
 
@@ -125,3 +131,6 @@ birthmarkDoesNotImplyCurvature = true
 
 entropyDensityDoesNotImplyStressTensor : Bool
 entropyDensityDoesNotImplyStressTensor = true
+
+observableTransportDoesNotImplyBulkReconstruction : Bool
+observableTransportDoesNotImplyBulkReconstruction = true
