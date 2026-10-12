@@ -9,6 +9,10 @@ python3 scripts/co_tase2_published_arpes_constraints.py \
   data/co_tase2/published_arpes_constraints_2026.json \
   --receipt /tmp/co_tase2_published_arpes_constraints_receipt.json
 
+python3 scripts/co_tase2_independent_theory_targets.py \
+  data/co_tase2/independent_theory_targets_2026.json \
+  --receipt /tmp/co_tase2_independent_theory_targets_receipt.json
+
 python3 -m py_compile \
   scripts/co_tase2_bloch_symmetry.py \
   scripts/co_tase2_bns_operation_audit.py \
@@ -16,6 +20,7 @@ python3 -m py_compile \
   scripts/co_tase2_arpes_ibw_ingest.py \
   scripts/co_tase2_arpes_peak_fit.py \
   scripts/co_tase2_published_arpes_constraints.py \
+  scripts/co_tase2_independent_theory_targets.py \
   scripts/co_tase2_dataset_download_probe.py
 
 python3 - <<'PY'
