@@ -8,6 +8,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityVacuumExperimentDiscriminatorE
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Firewall
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationToLorentzianStressExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as DifferentialFirewall
+import DASHI.Physics.Foundations.CMP119AntigravityStaticPairToDifferentialMetricResponseExact as StaticPair
 import DASHI.Physics.Foundations.GRQFTSingleVacuumCalibratedRadiusSquaredExact as Scale
 import DASHI.Physics.Foundations.GRQFTVacuumLockInReversalEstimatorExact as LockIn
 import DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricCompilerExact as Differential
@@ -74,8 +75,27 @@ differentialScalarMetricResponseOwned = false
 differentialCandidateScalarMetricAlgebraOwned : Bool
 differentialCandidateScalarMetricAlgebraOwned = true
 
-differentialSameStateMetricResponseStillRequired : Bool
-differentialSameStateMetricResponseStillRequired =
+-- The differential response is no longer an independent theorem once BOTH
+-- physical static endpoint receipts and one shared affine calibration /
+-- cosmological-renormalization convention are supplied.  The existing compiler
+-- constructs the differential receipt and proves Delta Lambda = a Delta V.
+-- Thus the remaining physical debt is the endpoint/common-calibration package,
+-- not a second independently postulated Delta-object identity.
+staticPairToDifferentialCompilerOwned : Bool
+staticPairToDifferentialCompilerOwned =
+  StaticPair.staticPairToDifferentialCompilerOwned
+
+independentDifferentialSameObjectTheoremRequiredAfterCommonStaticPair : Bool
+independentDifferentialSameObjectTheoremRequiredAfterCommonStaticPair =
+  StaticPair.independentDifferentialSameObjectTheoremRequiredAfterCommonAffinePair
+
+differentialEndpointMetricResponseAndCommonCalibrationStillRequired : Bool
+differentialEndpointMetricResponseAndCommonCalibrationStillRequired = true
+
+-- The generic firewall remains authoritative before those endpoint/common
+-- receipts are supplied.
+differentialSameStateMetricResponseStillRequiredBeforeStaticPair : Bool
+differentialSameStateMetricResponseStillRequiredBeforeStaticPair =
   DifferentialFirewall.sameStateMetricResponseDifferenceRequired
 
 -- Exact odd/even lock-in algebra is now owned: if the target channel is really
@@ -113,7 +133,9 @@ record PostNormalizationAntigravityFrontier : Set where
 
     differentialCommonAdditiveCountertermCancelledAtNormalizationLevel : Bool
     differentialCandidateKottlerAlgebraOwned : Bool
-    differentialSameStateMetricResponseDifferenceStillRequired : Bool
+    staticPairToDifferentialResponseCompilerOwned : Bool
+    independentDifferentialSameObjectTheoremRequiredAfterCommonStaticPair : Bool
+    endpointMetricResponsesAndCommonAffineRenormalizationStillRequired : Bool
     differentialReversalEstimatorAlgebraConstructed : Bool
     differentialReversalParityAndCommonBackgroundReceiptStillRequired : Bool
     differentialPropagatingSpin2TTProductionStillRequired : Bool
@@ -129,7 +151,7 @@ canonicalPostNormalizationAntigravityFrontier =
   post-normalization-antigravity-frontier
     true true true true true
     true true true true true
-    true true true true true true true
+    true true true false true true true true true
     true true true
 
 staticVacuumAlgebraAfterPhysicalReceiptOwned : Bool
