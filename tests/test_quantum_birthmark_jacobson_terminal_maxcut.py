@@ -20,6 +20,8 @@ def test_jacobson_maxcut_reuses_existing_qft_gr_owners():
     assert "ModularTheoryReceiptSurface" in p
     assert "EinsteinTensor" in p
     assert "StressEnergyCompatibility" in p
+    assert "ContinuumEinsteinMatterSolutionBoundary" in p
+    assert "EinsteinEquationBidiResidualExact" in p
     assert "surfaceEntropyDensity" in p
     assert "localRindlerHorizon" in p
     assert "unruhTemperatureNormalization" in p
@@ -28,6 +30,14 @@ def test_jacobson_maxcut_reuses_existing_qft_gr_owners():
     assert "heatFluxStressEnergy" in p
     assert "allNullDirections" in p
     assert "einsteinEquationOfStateTarget" in p
+
+
+def test_jacobson_reuses_finite_sourced_law_but_not_as_continuum_derivation():
+    p = text("DASHI/Quantum/QuantumBirthmarkJacobsonLocalHorizonMaxCutExact.agda")
+    assert "finiteSourcedEinsteinLawAlreadyOwned" in p
+    assert "continuumEinsteinMatterSolutionSchemaOwned" in p
+    assert "finiteSourcedEinsteinDoesNotPayContinuumJacobson" in p
+    assert "continuumSolutionSchemaDoesNotSupplyJacobsonDerivation" in p
 
 
 def test_jacobson_authority_boundary_is_fail_closed():
