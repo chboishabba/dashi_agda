@@ -18,6 +18,11 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 -- 2026 information-design experiment, and the later 2026 ConvRML same-scene
 -- parallel lens/diffuser/RML comparator geometry.
 --
+-- The information-design code additionally pays a common *analysis* photon
+-- normalization: each real dataset is divided by its own mean, rescaled to a
+-- synthetic mean count of 500, biased by 10 and evaluated with a Poisson noise
+-- model. This is not physical acquisition-photon calibration.
+--
 -- ConvRML further pays identical sensor model, common illumination / approximate
 -- magnification matching, publication exposure calibration, and released-code
 -- RGB8 + zero-gain controls. The publication and released capture script expose
@@ -29,9 +34,9 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 --   B. select the lateral grid / sparsity class at the scale required by the
 --      intended 3-D claim and populate the existing same-H kappa producer from
 --      the measured coherence/Gershgorin lower bound;
---   C. reconcile exact-dataset exposure provenance, then obtain throughput /
---      incident-or-detected-photon calibration sufficient for a genuinely
---      matched-photon cross-system risk comparison;
+--   C. reconcile exact-dataset exposure provenance, then obtain physical
+--      throughput / incident-or-detected-photon calibration sufficient for a
+--      genuinely matched-photon acquisition-risk comparison;
 --   D. add a Fresnel-zone-plate arm only if that optional stronger comparison
 --      remains scientifically useful.
 ------------------------------------------------------------------------
@@ -50,6 +55,8 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     translatedColumnNumericalReceiptCaptured : Bool
     sameHRestrictedConditionNumberMeasured : Bool
     publishedInformationDesignExperimentPinned : Bool
+    matchedAnalysisPhotonNormalizationPinned : Bool
+    physicalAcquisitionPhotonCalibrationPinned : Bool
     publishedRealRMLVsDiffuserCamComparisonPinned : Bool
     parallelLensDiffuserRMLAcquisitionPinned : Bool
     parallelSensorIlluminationGeometryPinned : Bool
@@ -75,6 +82,8 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; translatedColumnNumericalReceiptCaptured = false
   ; sameHRestrictedConditionNumberMeasured = false
   ; publishedInformationDesignExperimentPinned = true
+  ; matchedAnalysisPhotonNormalizationPinned = true
+  ; physicalAcquisitionPhotonCalibrationPinned = false
   ; publishedRealRMLVsDiffuserCamComparisonPinned = true
   ; parallelLensDiffuserRMLAcquisitionPinned = true
   ; parallelSensorIlluminationGeometryPinned = true
@@ -119,6 +128,12 @@ restrictedKappaStatus = Conditioning.globalSparseRestrictedKappaPaid
 
 informationExperimentSourceStatus : Bool
 informationExperimentSourceStatus = InfoSource.informationOptimalEncoderExperimentPinned
+
+analysisPhotonNormalizationStatus : Bool
+analysisPhotonNormalizationStatus = InfoSource.analysisPhotonNormalizationPaid
+
+physicalPhotonCalibrationStatus : Bool
+physicalPhotonCalibrationStatus = InfoSource.physicalAcquisitionPhotonCalibrationPaid
 
 parallelComparatorSourceStatus : Bool
 parallelComparatorSourceStatus = ConvRML.parallelLensDiffuserRMLAcquisitionPaid
