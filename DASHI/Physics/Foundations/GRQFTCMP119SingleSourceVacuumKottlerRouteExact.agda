@@ -15,6 +15,15 @@ import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as Geometry
 
+------------------------------------------------------------------------
+-- SINGLE-SOURCE VACUUM / KOTTLER CANDIDATE ROUTE
+--
+-- sourceAmplitude is the corrected constant/remainder coordinate of the
+-- selected vacuum-sector LocalizedAction.  The geometry below is exact algebra
+-- on that scalar, but remains a candidate until the published vacuum-constant
+-- encoding and normalization-to-gravity metric-response receipts are supplied.
+------------------------------------------------------------------------
+
 record SingleSourceVacuum
     {Density Background Fluctuation : Set}
     (source : Source.CMP119Section2SourceNativeState
@@ -72,7 +81,9 @@ record SingleSourceVacuumKottlerCandidate
 record SingleSourceVacuumKottlerBoundary : Set where
   constructor single-source-vacuum-kottler-boundary
   field
-    literalSourceVacuumReadoutUsed : Bool
+    constantRemainderCoordinateUsed : Bool
+    plaquetteProjectorUsedAsVacuumConstant : Bool
+    publishedVacuumConstantEncodingRequired : Bool
     oneLiteralSourceScaleFeedsBothVacuumRegions : Bool
     sameVacuumStressRayUsedOnBothSides : Bool
     denominatorClearedSameAmplitudeIdentityConstructed : Bool
@@ -84,4 +95,15 @@ record SingleSourceVacuumKottlerBoundary : Set where
 
 canonicalSingleSourceVacuumKottlerBoundary : SingleSourceVacuumKottlerBoundary
 canonicalSingleSourceVacuumKottlerBoundary =
-  single-source-vacuum-kottler-boundary true true true true false false true false true
+  single-source-vacuum-kottler-boundary
+    true false true true true true false false true false true
+
+literalSourceVacuumReadoutUsed : Bool
+literalSourceVacuumReadoutUsed = false
+
+formalConstantCoordinateReadoutUsed : Bool
+formalConstantCoordinateReadoutUsed = true
+
+publishedVacuumConstantEncodingRequired : Bool
+publishedVacuumConstantEncodingRequired =
+  Readout.publishedVacuumConstantEncodingStillRequired
