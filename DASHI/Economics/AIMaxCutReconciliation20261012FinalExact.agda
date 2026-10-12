@@ -14,6 +14,8 @@ import DASHI.Economics.AICoreWeaveDebtCostBoundary20261012Exact as DebtCost
 import DASHI.Economics.AICoreWeaveCapitalSpreadSign20261012Exact as CapitalSign
 import DASHI.Economics.AICoreWeaveCapitalReinvestmentCoverage20261012Exact as Reinvestment
 import DASHI.Economics.AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact as TerminalPayer
+import DASHI.Economics.AITerminalPayerConsumerSufficiency20261012Exact as PayerConsumer
+import DASHI.Economics.AIPolicyCausalAdmission20261012Exact as PolicyCausal
 
 ------------------------------------------------------------------------
 -- FINAL OCTOBER-12 RECONCILIATION
@@ -77,15 +79,25 @@ coreWeaveNamedPayerCapacityPaid = finalProducer
   "selected CoreWeave named-payer external-cash capacity" paid "CoreWeave -> Microsoft"
   "CoreWeave discloses up to USD 43.8B of conditional Microsoft payments through 2033; Microsoft FY2026 independently reports USD 182.9B operating cash flow and USD 214.4B cloud revenue with increased customer cash receipts" false
 
+terminalPayerConsumerIndexingPaid : FinalProducer
+terminalPayerConsumerIndexingPaid = finalProducer
+  "consumer-relative terminal-payer sufficiency" paid "CoreWeave selected-payer vs exhaustive-independence questions"
+  "the Microsoft evidence pays the narrow selected external-cash-capacity consumer while exhaustive CoreWeave terminal independence remains a separate open consumer" false
+
 terminalPayerStillPartial : FinalProducer
 terminalPayerStillPartial = finalProducer
   "complete independent terminal-payer provenance" partial "CoreWeave/entity/global"
-  "one named payer has an independently source-paid external-customer cash-generation surface, but conditional contract realisation, other payers and all financing/counterparty loops are not exhaustively traced" false
+  "one named payer has independently source-paid external-customer cash capacity, but conditional contract realisation, other payers and all financing/counterparty loops are not exhaustively traced" false
 
 replacementObsolescenceStillPartial : FinalProducer
 replacementObsolescenceStillPartial = finalProducer
   "replacement / obsolescence burden" partial "CoreWeave H1-2026 + lender economic-life evidence"
   "capex materially exceeds both CFO and D&A, but growth capex is not yet separated from maintenance/replacement capex and no entity-specific obsolescence schedule is paid" false
+
+policyCausalAdmissionStillPartial : FinalProducer
+policyCausalAdmissionStillPartial = finalProducer
+  "policy burden -> market-structure causal admission" partial "Australian AI policy lane"
+  "proposal/outcome/survey substrate is paid; realised same-basis compliance costs, observed entry/concentration response and a separately reviewed causal bridge remain open; intentional capture remains a distinct claim" false
 
 wholeComplexMarketDynamicsStillPartial : FinalProducer
 wholeComplexMarketDynamicsStillPartial = finalProducer
@@ -174,6 +186,23 @@ coreWeaveCompleteTerminalPayerStillOpen :
   TerminalPayer.completeTerminalPayerProvenanceClosed TerminalPayer.coreWeaveMicrosoftTerminalPayerBoundary ≡ false
 coreWeaveCompleteTerminalPayerStillOpen = TerminalPayer.completeTerminalPayerProvenanceStillOpen
 
+selectedPayerConsumerPaid :
+  PayerConsumer.consumerPaymentState PayerConsumer.selectedMicrosoftExternalCashCapacity ≡ PayerConsumer.paid
+selectedPayerConsumerPaid = PayerConsumer.selectedMicrosoftCapacityConsumerPaid
+
+exhaustivePayerConsumerStillOpen :
+  PayerConsumer.consumerPaymentState PayerConsumer.exhaustiveCoreWeaveTerminalIndependence ≡ PayerConsumer.open
+exhaustivePayerConsumerStillOpen = PayerConsumer.coreWeaveExhaustiveIndependenceConsumerOpen
+
+policySameBasisBurdenStillOpen : PolicyCausal.sameBasisBurdenMeasurementStillOpen ≡ true
+policySameBasisBurdenStillOpen = refl
+
+policyReviewedCausalBridgeStillOpen : PolicyCausal.reviewedCausalBridgeStillOpen ≡ true
+policyReviewedCausalBridgeStillOpen = refl
+
+policyIntentionalCaptureStillSeparate : PolicyCausal.intentionalCaptureStillSeparate ≡ true
+policyIntentionalCaptureStillSeparate = refl
+
 data ScopedPaymentImpliesGlobalClosurePermission : Set where
 data PriceNormalizationImpliesMarginPermission : Set where
 data ConcentrationTopologyImpliesTerminalPayerPermission : Set where
@@ -181,6 +210,7 @@ data DebtCostImpliesWACCPermission : Set where
 data SignOnlySpreadImpliesNumericSpreadPermission : Set where
 data CapexGapImpliesReplacementCapexPermission : Set where
 data NamedPayerCapacityImpliesCompleteTerminalPayerPermission : Set where
+data PolicyFactsImpliesCausalConcentrationPermission : Set where
 
 scopedPaymentDoesNotAutoCloseGlobal : ScopedPaymentImpliesGlobalClosurePermission → ⊥
 scopedPaymentDoesNotAutoCloseGlobal ()
@@ -204,6 +234,10 @@ namedPayerCapacityDoesNotCloseCompleteTerminalProvenance :
   NamedPayerCapacityImpliesCompleteTerminalPayerPermission → ⊥
 namedPayerCapacityDoesNotCloseCompleteTerminalProvenance ()
 
+policyFactsDoNotCreateCausalConcentration :
+  PolicyFactsImpliesCausalConcentrationPermission → ⊥
+policyFactsDoNotCreateCausalConcentration ()
+
 finalBoundary : String
 finalBoundary =
-  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, debt-cost surface, sign-only negative ROIC-WACC result under declared conditions, exact H1 internal-cash/capex shortfall, and one named Microsoft external-cash-capacity payer path are paid. Complete terminal-payer provenance is therefore partial rather than wholly absent, but numerical ROIC/WACC, replacement-capex decomposition and terminal capital recovery remain open. The surviving substantive frontier is exhaustive terminal-payer tracing, numerical realised ROIC-WACC, same-object marginal serving cost/quality-adjusted inference margin, global same-capability scarcity rent, whole-complex comparable market/state dynamics, entity-specific replacement/obsolescence decomposition, and measured regulatory burden/concentration response."
+  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, debt-cost surface, sign-only negative ROIC-WACC result under declared conditions, exact H1 internal-cash/capex shortfall, and one named Microsoft external-cash-capacity payer path are paid. Consumer-relative sufficiency now makes explicit that this pays a selected-payer question but not exhaustive terminal independence. The Australian policy lane has observed proposal/outcome/survey substrate but still lacks same-basis realised compliance costs, market-response measurement and a reviewed causal bridge. Numerical ROIC/WACC, replacement-capex decomposition and terminal capital recovery remain open."
