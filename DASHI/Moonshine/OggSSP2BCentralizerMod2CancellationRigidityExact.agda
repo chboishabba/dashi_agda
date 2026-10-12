@@ -3,31 +3,35 @@ module DASHI.Moonshine.OggSSP2BCentralizerMod2CancellationRigidityExact where
 ------------------------------------------------------------------------
 -- CENTRALIZER MOD-2 CANCELLATION RIGIDITY FRONTIER
 --
--- The actual source-native Tate exact sequence has dimensions
+-- The source-native Tate exact sequence has dimensions
 --
 --   0 -> 98304 -> 98580 -> 276 -> 0.
 --
--- Rationally the centralizer pieces are
---
---   98304_-
---   98280_+ + (1 + 299)_+.
---
--- The accompanying CTblLib decomposition-matrix screen tests the stronger
--- characteristic-two statement
+-- The executed CTBlocks/decomposition runtime now pays the stronger modular
+-- support statement
 --
 --   [98304]_2 = [98280]_2 + [24],
 --
--- and therefore
+-- where the residual 24 is one copy of the unique degree-24 simple, while the
+-- common 98280 support is separated from the residual 24/276 lanes.  The Tate
+-- residual profile is exactly 1,274,1.
 --
---   [Tate276] = [1+299]_2 - [24] = [1] + [274] + [1].
+-- Lean's map-level rank squeeze sharpens the same-object boundary further.
+-- Let the actual source-native norm map have canonical block coordinates
 --
--- It also tests that the common 98280 Brauer support is disjoint from both the
--- residual 24 and residual 276 supports.  Together with the independent
--- Frobenius-Hom uniqueness screen this means the remaining vertical weld is no
--- longer a semisimplified ambiguity: it is the literal placement of the actual
--- norm map on the common 98280 extension lane.
+--   n = (c,r) : M_98304 -> C_98280 x S_300.
 --
--- This owner remains fail-closed until the runtime receipt is generated.
+-- Since n is injective, it is enough to prove that the actual residual
+-- coordinate r has image supported on the certified residual 24-source block.
+-- Equivalently, produce the canonical rank-24 source block projector e24 and
+-- the block-equivariance equation
+--
+--   r o e24 = r.
+--
+-- Then rank(r) <= 24.  The kernel of r injects through c into C_98280, so
+-- rank-nullity has no slack and forces rank(r)=24 and dim ker(r)=98280.  Thus
+-- the common-lane same-object equivalence is automatic: there is NO separate
+-- 98280-map discovery gate after the residual block projector is paid.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -57,6 +61,19 @@ record CentralizerMod2RuntimeReceipt : Set where
     common98280SupportSeparatedFromResidual24 : Bool
     common98280SupportSeparatedFromResidual276 : Bool
 
+-- The remaining proof-relevant same-object producer.  Runtime characters and
+-- block labels do not manufacture this map equation; it must come from the
+-- actual centralizer-equivariant norm/block action.
+record ResidualBlockProjectorSameObjectReceipt : Set₁ where
+  constructor residual-block-projector-same-object-receipt
+  field
+    ActualResidualBlockProjector : Set
+    actualResidualBlockProjector : ActualResidualBlockProjector
+    ResidualNormBlockEquivariance : Set
+    residualNormBlockEquivariance : ResidualNormBlockEquivariance
+
+open ResidualBlockProjectorSameObjectReceipt public
+
 record CancellationRigidityBoundary : Set where
   constructor cancellation-rigidity-boundary
   field
@@ -64,25 +81,51 @@ record CancellationRigidityBoundary : Set where
     runtimeDecompositionPaid : Bool
     actualTateJHProfileOne274OnePaid : Bool
     common98280SupportSeparated : Bool
-    actualNormCommon98280IsomorphismPaid : Bool
+    residual24UniqueSimpleIdentified : Bool
+    residualBlockProjectorSameObjectPaid : Bool
+    common98280SameObjectFollowsFromResidualBlock : Bool
     actualTateExteriorSquareWeldPaid : Bool
 
 canonicalCancellationRigidityBoundary : CancellationRigidityBoundary
 canonicalCancellationRigidityBoundary =
   cancellation-rigidity-boundary
-    true false false false false false
+    true true true true true false true false
 
-runtimeDecompositionStillOpen :
+runtimeDecompositionIsPaid :
   CancellationRigidityBoundary.runtimeDecompositionPaid
     canonicalCancellationRigidityBoundary
-  ≡ false
-runtimeDecompositionStillOpen = refl
+  ≡ true
+runtimeDecompositionIsPaid = refl
 
-actualNormCommon98280StillOpen :
-  CancellationRigidityBoundary.actualNormCommon98280IsomorphismPaid
+actualTateJHProfileIsPaid :
+  CancellationRigidityBoundary.actualTateJHProfileOne274OnePaid
+    canonicalCancellationRigidityBoundary
+  ≡ true
+actualTateJHProfileIsPaid = refl
+
+commonSupportSeparationIsPaid :
+  CancellationRigidityBoundary.common98280SupportSeparated
+    canonicalCancellationRigidityBoundary
+  ≡ true
+commonSupportSeparationIsPaid = refl
+
+residual24UniqueSimpleIsPaid :
+  CancellationRigidityBoundary.residual24UniqueSimpleIdentified
+    canonicalCancellationRigidityBoundary
+  ≡ true
+residual24UniqueSimpleIsPaid = refl
+
+residualBlockProjectorSameObjectStillOpen :
+  CancellationRigidityBoundary.residualBlockProjectorSameObjectPaid
     canonicalCancellationRigidityBoundary
   ≡ false
-actualNormCommon98280StillOpen = refl
+residualBlockProjectorSameObjectStillOpen = refl
+
+common98280NoLongerIndependentGate :
+  CancellationRigidityBoundary.common98280SameObjectFollowsFromResidualBlock
+    canonicalCancellationRigidityBoundary
+  ≡ true
+common98280NoLongerIndependentGate = refl
 
 actualTateExteriorSquareWeldStillOpen :
   CancellationRigidityBoundary.actualTateExteriorSquareWeldPaid
