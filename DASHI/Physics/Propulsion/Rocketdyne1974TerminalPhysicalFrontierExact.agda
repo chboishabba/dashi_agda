@@ -13,6 +13,8 @@ import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierE
 import DASHI.Physics.Propulsion.Rocketdyne1974LatestSourceComparisonNote as Latest
 import DASHI.Physics.Propulsion.Rocketdyne1974ExperimentalCoordinateRefinementExact as CoordRef
 import DASHI.Physics.Propulsion.Rocketdyne1974QualificationFeedbackWeldExact as QualFeed
+import DASHI.Physics.Propulsion.Rocketdyne1974ProgrammeChallengesAndRelatedWorkExact as Challenges
+import DASHI.Physics.Propulsion.Rocketdyne1974SiblingRCSComparisonExact as Sibling
 
 archiveGeometryExhaustedForUniqueStress : Bool
 archiveGeometryExhaustedForUniqueStress = true
@@ -45,8 +47,8 @@ currentTerminalFrontier =
   terminal-physical-frontier
     true true true true true
     false false false false false false
-    "Recover exact nozzle wall-gauge/local contour and same-article temperature-dependent strength/creep/coating/boundary-condition data, or obtain an equivalent engineering drawing/test-analysis package."
-    "Until those coordinates are paid, retain the archive-level empirical discriminator plus constructive non-identifiability theorem; do not manufacture a unique stress or creep lifetime."
+    "Recover exact nozzle wall-gauge/local contour and same-article temperature-dependent strength/creep/coating/boundary-condition data, or obtain an equivalent engineering drawing/test-analysis package. In parallel, acquire valve/contamination and engineering-change documentation where it can close qualification-history leaves."
+    "Until those coordinates are paid, retain the archive-level empirical discriminator plus constructive non-identifiability theorem; do not manufacture a unique stress, creep lifetime, or formal qualification history."
 
 materialReceipt : Mat.MaterialDataBoundary
 materialReceipt = Mat.canonicalMaterialDataBoundary
@@ -74,3 +76,9 @@ qualificationFeedbackReceipt = QualFeed.rocketdyneHistoricalFeedbackReceipt
 
 qualificationGovernanceBoundaryReceipt : Feedback.ReliabilityAdaptiveFeedbackBoundary
 qualificationGovernanceBoundaryReceipt = QualFeed.adaptiveQualificationBoundaryReceipt
+
+programmeChallengeReceipt : Challenges.ChallengeAtlas
+programmeChallengeReceipt = Challenges.canonicalChallengeAtlas
+
+siblingRCSComparisonReceipt : Sibling.SiblingComparisonBoundary
+siblingRCSComparisonReceipt = Sibling.siblingComparisonBoundary
