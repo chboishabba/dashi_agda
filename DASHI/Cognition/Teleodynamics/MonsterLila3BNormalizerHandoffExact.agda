@@ -4,7 +4,7 @@ module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 -- MONSTER-LILA <-> CERTIFIED MONSTER-3B NORMALIZER HANDOFF
 --
 -- The inspected Monster-LILA PoC uses an engineering permutation after a
--- QR-generated orthogonal basis.  It does not identify that permutation with
+-- QR-generated orthogonal basis. It does not identify that permutation with
 -- a Conway/Monster/3B normalizer action.
 --
 -- Sibling exceptional PR #1098 now has a materially stronger, independently
@@ -19,7 +19,7 @@ module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 --   * concrete same-basis change, cocycle/central correction and literal
 --     Heisenberg conjugation remain unpaid in the compiler boundary.
 --
--- This file is a cross-branch empirical handoff only.  It does not import the
+-- This file is a cross-branch empirical handoff only. It does not import the
 -- sibling owners or promote their execution/source receipts to local Agda
 -- kernel evidence.
 ------------------------------------------------------------------------
@@ -27,6 +27,7 @@ module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Cognition.Teleodynamics.MonsterLilaBoundaryExact as ML
 
@@ -105,11 +106,7 @@ inductive CertifiedActionFitCreatesMonsterOntology : Set where
 heuristicPermutationDoesNotCreateCertified3BAction :
   HeuristicPermutationCreatesCertified3BAction → ⊥
 heuristicPermutationDoesNotCreateCertified3BAction ()
-  where
-    open import Data.Empty using (⊥)
 
 certifiedActionFitDoesNotCreateMonsterOntology :
   CertifiedActionFitCreatesMonsterOntology → ⊥
 certifiedActionFitDoesNotCreateMonsterOntology ()
-  where
-    open import Data.Empty using (⊥)
