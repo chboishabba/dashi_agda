@@ -50,6 +50,23 @@ nonblankBitAtMostOne enumeration blank symbol
 ... | true = NatP.z≤n
 ... | false = NatP.≤-refl _
 
+nonblankCountBelowLength :
+  ∀ {Symbol : Set}
+    (enumeration : Local.FiniteEnumeration Symbol)
+    (blank : Symbol)
+    (symbols : List Symbol) →
+  nonblankCount enumeration blank symbols
+  ≤ WritesLength symbols
+  where
+    WritesLength : List Symbol → Nat
+    WritesLength [] = zero
+    WritesLength (_ ∷ rest) = suc (WritesLength rest)
+nonblankCountBelowLength enumeration blank [] = NatP.≤-refl _
+nonblankCountBelowLength enumeration blank (symbol ∷ symbols) =
+  NatP.+-mono-≤
+    (nonblankBitAtMostOne enumeration blank symbol)
+    (nonblankCountBelowLength enumeration blank symbols)
+
 atMostOneWriteNonblankBound :
   ∀ {Symbol : Set}
     (enumeration : Local.FiniteEnumeration Symbol)
@@ -62,28 +79,29 @@ atMostOneWriteNonblankBound enumeration blank Writes.noWrite =
   NatP.n≤1+n _
 atMostOneWriteNonblankBound enumeration blank
     (Writes.writeHead {old = old} {new = new} {rest = rest}) =
+  NatP.+-mono-≤
+    (nonblankBitAtMostOne enumeration blank new)
+    (NatP.≤-refl (nonblankCount enumeration blank rest))
+atMostOneWriteNonblankBound enumeration blank
+    (Writes.keepHead {symbol = symbol} rewrite) =
   NatP.≤-trans
-    (NatP.+-monoˡ-≤
-      (nonblankCount enumeration blank rest)
-      (nonblankBitAtMostOne enumeration blank new))
+    (NatP.+-mono-≤
+      (NatP.≤-refl (nonblankBit enumeration blank symbol))
+      (atMostOneWriteNonblankBound enumeration blank rewrite))
     arithmetic
   where
     arithmetic :
-      suc zero + nonblankCount enumeration blank rest
+      nonblankBit enumeration blank symbol
+        + suc (nonblankCount enumeration blank _)
       ≤
       suc
-        (nonblankBit enumeration blank old
-          + nonblankCount enumeration blank rest)
-    arithmetic =
-      NatP.s≤s
-        (NatP.m≤n+m
-          (nonblankCount enumeration blank rest)
-          (nonblankBit enumeration blank old))
-atMostOneWriteNonblankBound enumeration blank
-    (Writes.keepHead {symbol = symbol} rewrite) =
-  NatP.+-monoʳ-≤
-    (nonblankBit enumeration blank symbol)
-    (atMostOneWriteNonblankBound enumeration blank rewrite)
+        (nonblankBit enumeration blank symbol
+          + nonblankCount enumeration blank _)
+    arithmetic
+      rewrite NatP.+-suc
+        (nonblankBit enumeration blank symbol)
+        (nonblankCount enumeration blank _) =
+      NatP.≤-refl _
 
 writesWithinNonblankBound :
   ∀ {Symbol : Set}
@@ -97,13 +115,14 @@ writesWithinNonblankBound :
 writesWithinNonblankBound enumeration blank Writes.writesDone =
   NatP.≤-refl _
 writesWithinNonblankBound enumeration blank
-    (Writes.writesStep {steps = steps} {start = start} {middle = middle}
-      rewrite rest) =
+    (Writes.writesStep {steps = steps} {start = start}
+      {middle = middle} rewrite rest) =
   NatP.≤-trans
     (writesWithinNonblankBound enumeration blank rest)
     (NatP.≤-trans
-      (NatP.+-monoʳ-≤ steps
-        (atMostOneWriteNonblankBound enumeration blank rewrite))
+      (NatP.+-mono-≤
+        (atMostOneWriteNonblankBound enumeration blank rewrite)
+        (NatP.≤-refl steps))
       arithmetic)
   where
     arithmetic :
