@@ -30,25 +30,29 @@ def test_existing_source_operator_owner_pins_literal_reconstruction_semantics():
         assert marker in text
 
 
-def test_conditioning_acquisition_script_is_exact_artifact_scoped():
+def test_conditioning_acquisition_script_is_exact_artifact_scoped_and_builds_global_sparse_certificate():
     p = ROOT / "scripts/check_waller_diffusercam_conditioning.py"
     text = p.read_text()
     assert "example_psfs.mat" in text
     assert "c8516cb8f482c2bb15e75ebebd91a74b88732c95" in text
     assert "psf_bias = 102.0" in text
     assert "depth_only_same_lateral" in text
+    assert "translated_column_mutual_coherence" in text
+    assert "gershgorin_sparse_lower_bound" in text
+    assert "max_scene_sparsity_for_positive_bound" in text
     assert "global_sparse_inverse_certificate" in text
-    assert "False" in text
 
 
-def test_conditioning_owner_keeps_executable_depth_audit_separate_from_numeric_receipt_and_global_kappa():
+def test_conditioning_owner_separates_executable_global_audit_from_unobserved_numeric_receipt():
     p = ROOT / "DASHI/Physics/Optics/BerkeleyDiffuserCamDepthConditioningExact.agda"
     text = p.read_text()
     assert "publishedPSFArtifactUsed = true" in text
     assert "depthOnlySameLateralAuditExecutable = true" in text
+    assert "translatedColumnRestrictedAuditExecutable = true" in text
+    assert "coherenceToSparseLowerBoundCompilerPaid = true" in text
     assert "depthOnlyNumericalReceiptCaptured = false" in text
+    assert "translatedColumnNumericalReceiptCaptured = false" in text
     assert "globalSparseRestrictedKappaPaid = false" in text
-    assert "translatedColumnRestrictedAuditPaid = false" in text
 
 
 def test_convrml_parallel_comparator_pays_same_scene_three_system_geometry_not_photon_matching_or_fzp():
@@ -64,7 +68,7 @@ def test_convrml_parallel_comparator_pays_same_scene_three_system_geometry_not_p
     assert "fresnelZonePlateArmPaid = false" in text
 
 
-def test_optics_rollup_and_acquisition_maxcut_include_conditioning_and_convrml_without_duplicate_source_owners():
+def test_optics_rollup_and_acquisition_maxcut_include_global_audit_and_convrml_without_duplicate_source_owners():
     rollup = (ROOT / "DASHI/Physics/Optics/Everything.agda").read_text()
     assert "BerkeleyDiffuserCamPublicCalibrationExact" in rollup
     assert "BerkeleyDiffuserCamSourceOperatorExact" in rollup
@@ -77,8 +81,10 @@ def test_optics_rollup_and_acquisition_maxcut_include_conditioning_and_convrml_w
     assert "publicBerkeleyCalibrationArtifactPinned = true" in maxcut
     assert "publicBerkeleySourceOperatorPinned = true" in maxcut
     assert "depthConditioningAuditExecutable = true" in maxcut
+    assert "translatedColumnRestrictedAuditExecutable = true" in maxcut
     assert "parallelLensDiffuserRMLAcquisitionPinned = true" in maxcut
     assert "berkeleyNumericPSFArrayIngested = false" in maxcut
+    assert "translatedColumnNumericalReceiptCaptured = false" in maxcut
     assert "sameHRestrictedConditionNumberMeasured = false" in maxcut
     assert "matchedPhotonAcrossParallelSystems = false" in maxcut
     assert "focusedLensDiffuserFZPMatchedPhotonReceipt = false" in maxcut
