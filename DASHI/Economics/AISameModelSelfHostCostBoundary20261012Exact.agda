@@ -9,13 +9,20 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 
 ------------------------------------------------------------------------
--- SAME-MODEL HOSTED-vs-SELF-HOST ENGINEERING COST BOUNDARY
+-- SAME-MODEL HOSTED-vs-RENTED-GPU SERVING COST BOUNDARY
 --
--- This is deliberately not a provider-margin theorem.  The public source is a
--- third-party engineering cost dataset with a disclosed commercial conflict.
--- It gives a useful same-model substitution receipt under one explicit serving
--- configuration, which is stronger than comparing different model families but
--- weaker than observing a provider's own marginal-cost ledger.
+-- The public source computes cost from an on-demand GPU rental tariff:
+--
+--   (GPU hourly rental rate * GPU count)
+--   / (output throughput * 3600 * utilisation) * 1,000,000.
+--
+-- It therefore pays a rented-capacity serving-cost comparison.  Any energy,
+-- asset depreciation and capital cost borne by the GPU lessor may be reflected
+-- economically in the rental tariff, but those components are not separately
+-- identified or auditable in the source.  It is NOT an owned-hardware TCO
+-- model: engineer time is explicitly excluded and owner-side depreciation,
+-- electricity/PUE, financing/opportunity cost, residual value, non-GPU host /
+-- network/storage cost, maintenance and refresh risk are not decomposed.
 ------------------------------------------------------------------------
 
 engineeringDatasetKind : Source.SourceKind
@@ -29,7 +36,7 @@ inferenceCostTruthSource = Source.mkNoDOISource
   "2026-07-31"
   "https://github.com/RightNow-AI/inference-cost-truth/tree/a61c501241da17f3403597d75a7a8847c53cb29e"
   engineeringDatasetKind
-  "source states that MiniMax-M3 on AMD MI355X at concurrency 512 and 30 percent sustained utilisation is estimated at USD 0.93 per million output tokens self-hosted versus USD 1.20 hosted; source explicitly discloses that the maintainer sells GPU-kernel optimisation"
+  "source computes same-model serving cost from published on-demand GPU rental rate, GPU count, measured output throughput and assumed utilisation; MiniMax-M3 on AMD MI355X at concurrency 512 and 30 percent sustained utilisation is estimated at USD 0.93 per million output tokens versus USD 1.20 hosted; engineer time is explicitly excluded"
   Source.publicAttribution
 
 record SameModelCostComparison : Set where
@@ -46,6 +53,14 @@ record SameModelCostComparison : Set where
     sameModelIdentity : Bool
     configurationSensitive : Bool
     sourceConflictDisclosed : Bool
+    gpuRentalTariffBasis : Bool
+    ownedHardwareTCO : Bool
+    separateDepreciationModelPaid : Bool
+    separateEnergyModelPaid : Bool
+    separateFinancingCostPaid : Bool
+    separateNonGPUInfrastructurePaid : Bool
+    separateResidualValuePaid : Bool
+    engineerTimePaid : Bool
     directProviderMarginalCostObserved : Bool
     frontierClosedModelComparator : Bool
     globalSelfHostAdvantageEstablished : Bool
@@ -66,6 +81,14 @@ miniMaxM3EngineeringComparison = same-model-cost-comparison
   true
   true
   true
+  true
+  false
+  false
+  false
+  false
+  false
+  false
+  false
   false
   false
   false
@@ -86,6 +109,30 @@ configurationSensitivityRetained :
   configurationSensitive miniMaxM3EngineeringComparison ≡ true
 configurationSensitivityRetained = refl
 
+gpuRentalTariffBasisPaid :
+  gpuRentalTariffBasis miniMaxM3EngineeringComparison ≡ true
+gpuRentalTariffBasisPaid = refl
+
+ownedHardwareTCOPaidIsFalse :
+  ownedHardwareTCO miniMaxM3EngineeringComparison ≡ false
+ownedHardwareTCOPaidIsFalse = refl
+
+separateDepreciationModelPaidIsFalse :
+  separateDepreciationModelPaid miniMaxM3EngineeringComparison ≡ false
+separateDepreciationModelPaidIsFalse = refl
+
+separateEnergyModelPaidIsFalse :
+  separateEnergyModelPaid miniMaxM3EngineeringComparison ≡ false
+separateEnergyModelPaidIsFalse = refl
+
+separateFinancingCostPaidIsFalse :
+  separateFinancingCostPaid miniMaxM3EngineeringComparison ≡ false
+separateFinancingCostPaidIsFalse = refl
+
+engineerTimePaidIsFalse :
+  engineerTimePaid miniMaxM3EngineeringComparison ≡ false
+engineerTimePaidIsFalse = refl
+
 providerMarginalCostStillUnobserved :
   directProviderMarginalCostObserved miniMaxM3EngineeringComparison ≡ false
 providerMarginalCostStillUnobserved = refl
@@ -93,6 +140,7 @@ providerMarginalCostStillUnobserved = refl
 data EngineeringCostImpliesProviderMarginPermission : Set where
 data OneFavourableConfigurationImpliesGlobalSelfHostAdvantagePermission : Set where
 data HostedOpenComparatorImpliesClosedModelScarcityRentPermission : Set where
+data RentalTariffImpliesOwnedHardwareTCOPermission : Set where
 
 engineeringCostDoesNotCreateProviderMargin :
   EngineeringCostImpliesProviderMarginPermission → ⊥
@@ -106,10 +154,15 @@ hostedOpenDoesNotCreateClosedModelScarcityRent :
   HostedOpenComparatorImpliesClosedModelScarcityRentPermission → ⊥
 hostedOpenDoesNotCreateClosedModelScarcityRent ()
 
+rentalTariffDoesNotCreateOwnedHardwareTCO :
+  RentalTariffImpliesOwnedHardwareTCOPermission → ⊥
+rentalTariffDoesNotCreateOwnedHardwareTCO ()
+
 record ServingCostResidual : Set where
   constructor serving-cost-residual
   field
-    sameModelEngineeringComparatorPaid : Bool
+    sameModelRentedGPUComparatorPaid : Bool
+    ownedHardwareTCOModelPaid : Bool
     providerOwnMarginalCostLedgerPaid : Bool
     matchedLatencySLAPaid : Bool
     matchedCachingPolicyPaid : Bool
@@ -120,8 +173,8 @@ open ServingCostResidual public
 
 currentServingCostResidual : ServingCostResidual
 currentServingCostResidual = serving-cost-residual
-  true false false false false false
+  true false false false false false false
 
 boundary : String
 boundary =
-  "The 2026-07-31 inference-cost-truth snapshot supplies a same-model MiniMax-M3 engineering comparison: under MI355X, concurrency 512, 1k input and 30 percent sustained utilisation, estimated self-host cost is USD 0.93/M output tokens versus USD 1.20/M hosted. This is a configuration-sensitive substitution receipt with a disclosed source conflict. It does not reveal the hosted provider's own marginal cost, establish global self-host advantage, or create a closed-vs-open scarcity-rent theorem."
+  "The 2026-07-31 inference-cost-truth snapshot supplies a same-model MiniMax-M3 RENTED-GPU comparison: under MI355X, concurrency 512, 1k input and 30 percent sustained utilisation, a published on-demand GPU tariff plus measured throughput gives USD 0.93/M output tokens versus USD 1.20/M hosted. The rental price may economically bundle costs borne by the lessor, but the source does not separately identify depreciation, energy/PUE, financing/opportunity cost, non-GPU infrastructure, residual value or refresh risk and explicitly excludes engineer time. Therefore this is not an owned-hardware TCO receipt, does not reveal the hosted provider's own marginal cost, does not establish global self-host advantage, and does not create a closed-vs-open scarcity-rent theorem."
