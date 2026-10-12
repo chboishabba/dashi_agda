@@ -128,6 +128,66 @@ breakingBarrierLocatorReceipt =
     false refl
 
 ------------------------------------------------------------------------
+-- Inspection/evidence coherence.
+--
+-- `passageInspected` is not allowed to drift independently of the evidence
+-- kind.  Inspected evidence is inhabited exactly when the associated locator
+-- carries `passageInspected = true`.
+------------------------------------------------------------------------
+
+InspectedEvidence : HistoricalEvidenceKind → Set
+InspectedEvidence publisherDescriptionEvidence = ⊥
+InspectedEvidence inspectedChapterExcerptEvidence = ⊤
+InspectedEvidence chapterLocatorOnlyEvidence = ⊥
+
+record InspectionEvidenceCoherent (receipt : BoundedHistoricalClaimReceipt) : Set where
+  constructor inspection-evidence-coherent
+  field
+    evidenceImpliesInspected :
+      InspectedEvidence (evidenceKind receipt) →
+      Atlas.passageInspected (locator receipt) ≡ true
+    inspectedImpliesEvidence :
+      Atlas.passageInspected (locator receipt) ≡ true →
+      InspectedEvidence (evidenceKind receipt)
+
+open InspectionEvidenceCoherent public
+
+colonialHierarchyInspectionCoherent :
+  InspectionEvidenceCoherent colonialHierarchyClaimReceipt
+colonialHierarchyInspectionCoherent =
+  inspection-evidence-coherent (λ ()) (λ ())
+
+colonialSocietyInspectionCoherent :
+  InspectionEvidenceCoherent colonialSocietyAtTheTheatreClaimReceipt
+colonialSocietyInspectionCoherent =
+  inspection-evidence-coherent (λ ()) (λ ())
+
+politicsAndPowerInspectionCoherent :
+  InspectionEvidenceCoherent politicsAndPowerClaimReceipt
+politicsAndPowerInspectionCoherent =
+  inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
+
+escapeFromRealityInspectionCoherent :
+  InspectionEvidenceCoherent escapeFromRealityClaimReceipt
+escapeFromRealityInspectionCoherent =
+  inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
+
+finaleRevolutionInspectionCoherent :
+  InspectionEvidenceCoherent finaleRevolutionClaimReceipt
+finaleRevolutionInspectionCoherent =
+  inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
+
+introducingStarsInspectionCoherent :
+  InspectionEvidenceCoherent introducingStarsLocatorReceipt
+introducingStarsInspectionCoherent =
+  inspection-evidence-coherent (λ ()) (λ ())
+
+breakingBarrierInspectionCoherent :
+  InspectionEvidenceCoherent breakingBarrierLocatorReceipt
+breakingBarrierInspectionCoherent =
+  inspection-evidence-coherent (λ ()) (λ ())
+
+------------------------------------------------------------------------
 -- Hard non-promotion boundary.
 ------------------------------------------------------------------------
 
