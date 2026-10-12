@@ -30,6 +30,14 @@ EXPECT = {
         "nasa2026NiobiumComparator", "canonicalContemporaryComparatorBoundary",
         "contemporaryComparatorDoesNotPayHistoricalLaw"
     ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974ExperimentalCoordinateRefinementExact.agda": [
+        "rocketdyneExperimentDesign", "temperatureCollision", "materialSeparatesTemperatureCollision",
+        "nextCoordinateAcquisitionFrontier"
+    ],
+    "DASHI/Physics/Propulsion/Rocketdyne1974QualificationFeedbackWeldExact.agda": [
+        "haynesAnomalyToRevisionCandidate", "wc103FollowupObservation", "formalApprovalStillUnpaid",
+        "adaptiveQualificationBoundaryReceipt"
+    ],
 }
 
 def main() -> int:
