@@ -11,26 +11,27 @@ module DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact wher
 --
 -- after the same-basis 12-dimensional weld.
 --
--- The exact ATLAS bytes are now acquired.  The inner 2.Suz pair determines a
+-- The exact ATLAS bytes are acquired.  The inner 2.Suz pair determines a
 -- unique nondegenerate alternating form; the direct outer generator has
 -- multiplier 2=-1, while the second outer generator equals the inner second
--- generator.  Searching the concrete outer source action through depth five
--- finds a source word
+-- generator.
 --
---     g2 g1 g2^-1 g1 g2^-1
+-- Depth-five already produced a degree-six field-algebra selector.  Continuing
+-- the exact same search through depth seven yields the stronger preferred word
 --
--- whose X6 compression has irreducible degree-six polynomial
+--     g2^-1 g1 g2^-1 g1 g2 g1 g2^-1
 --
---     x^6 - x^5 - x^3 + x^2 + 1,
+-- with compression polynomial
 --
--- cyclic rank six from e0, and breaks the repository swap01 symmetry.  It does
--- not stabilise X6, which is precisely why the compression recut is stronger
--- than the obsolete stabilizer-only search.
+--     x^6 - x^5 - x^4 - x^3 + x^2 - 1.
 --
--- PR #1105 independently welds this polynomial to its already-selected GF729
--- model by beta=1-alpha and an explicit invertible 6x6 conjugacy.  That pays a
--- finite field-presentation same-object weld, not the entire Monster
--- multiplicative action/orbit/stabilizer semantics and not an Agda matrix proof.
+-- It has cyclic rank six, breaks swap01, and again does NOT stabilize X6.
+-- PR #1105 locates a root gamma=(0,2,0,1,2,0) in the already-selected GF729,
+-- proves gamma has multiplicative order 728, and constructs an explicit
+-- invertible Q intertwining this compression with multiplication by gamma.
+-- Thus the selected punctured field action is a single 728-orbit with trivial
+-- stabilizer.  What remains open is the broader Monster semantic-action weld
+-- and Agda-kernel certification of the concrete matrices.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -59,16 +60,16 @@ compressionPreservesAdd action x y
   = refl
 
 selectedSourceWord : String
-selectedSourceWord = "g2 g1 g2^-1 g1 g2^-1"
+selectedSourceWord = "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1"
 
 selectedSourceWordLength : Nat
-selectedSourceWordLength = 5
+selectedSourceWordLength = 7
 
 selectedCompressionPolynomial : String
-selectedCompressionPolynomial = "x^6 - x^5 - x^3 + x^2 + 1"
+selectedCompressionPolynomial = "x^6 - x^5 - x^4 - x^3 + x^2 - 1"
 
-selectedGF729GeneratorChange : String
-selectedGF729GeneratorChange = "beta = 1 - alpha"
+selectedGF729PrimitiveRoot : String
+selectedGF729PrimitiveRoot = "gamma = (0,2,0,1,2,0), multiplicative order 728"
 
 record CompressionPolynomialReceipt : Set where
   constructor compression-polynomial-receipt
@@ -80,12 +81,14 @@ record CompressionPolynomialReceipt : Set where
     cyclicRankSix : Bool
     breaksRepositorySwap01 : Bool
     stabilisesTranslationLagrangian : Bool
+    selectedGF729RootLocated : Bool
+    selectedGF729RootPrimitive : Bool
     fieldGeneratorCandidate : Bool
 open CompressionPolynomialReceipt public
 
 canonicalCompressionPolynomialReceipt : CompressionPolynomialReceipt
 canonicalCompressionPolynomialReceipt =
-  compression-polynomial-receipt 5 true true true true true false true
+  compression-polynomial-receipt 7 true true true true true false true true true
 
 record CompressionFieldSelectionBoundary : Set where
   constructor compression-field-selection-boundary
@@ -104,6 +107,8 @@ record CompressionFieldSelectionBoundary : Set where
     actualCyclicRankSixPaid : Bool
     actualSwapBreakingPaid : Bool
     selectedGF729PresentationWeldRuntimePaid : Bool
+    selectedGF729PrimitiveMultiplicativeGeneratorPaid : Bool
+    selectedGF729PuncturedOrbit728Paid : Bool
     fullMonsterActionOrbitStabilizerRecognitionPaid : Bool
 open CompressionFieldSelectionBoundary public
 
@@ -119,6 +124,8 @@ canonicalCompressionFieldSelectionBoundary =
     true
     true
     false
+    true
+    true
     true
     true
     true
