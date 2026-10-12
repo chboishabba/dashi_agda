@@ -1,28 +1,20 @@
 module DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact where
 
 ------------------------------------------------------------------------
--- CURRENT EXCEPTIONAL E8 / ALBERT MAX-CUT
---
--- Fail-closed status surface spanning the source-native Agda rational Albert
--- algebra, companion Lean structured-E8 / Spin-D4 / F4 producers, and the
--- external Monster-3B realization lane.
+-- CURRENT EXCEPTIONAL E8 / ALBERT / MONSTER-3B MAX-CUT
 --
 -- Local exceptional discovery is paid through split-root-datum recognition:
 -- actual H_3(O_Q), arbitrary inner derivations, exact 52=28+8_v+8_s+8_c
 -- triality, Cartan/chirality, exact symbolic Q(i) 4+48 root spaces, exact root
 -- grading on all 1128 root pairs, and independent companion-Lean F4 root/Weyl
--- data.
+-- data.  The remaining Albert/F4 wall is FORM/GROUP classification over Q.
 --
--- The remaining Albert/F4 wall is FORM/GROUP classification over Q.
---
--- The independent Monster wall has also narrowed: ATLAS/CTblLib now supplies a
--- certified direct 12-dimensional GF(3) `2.Suz:2` module and a faithful
--- Monster-normalizer realization showing that this module is symplectic and
--- acts on the extraspecial `3_+^(1+12)`.  The repository owns a typed
--- symplectic-basis / Heisenberg-cocycle lift compiler.  What remains there is
--- import of the published matrices, a concrete basis change to `X6+X6*`, and
--- the central cocycle correction required by the repository's chosen
--- asymmetric Heisenberg multiplication.
+-- The independent Monster-3B lane now owns the vendored ATLAS 12-dimensional
+-- GF(3) source matrices, exact symplectic normalization into repository X6+X6*,
+-- a degree-six field-producing compression, its GF(729) presentation weld, and
+-- for the selected source word an exact asymmetric-Heisenberg quadratic central
+-- correction.  Full-normalizer extension/kernelization and downstream Monster
+-- orbit/stabilizer/output/physical semantics remain separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -90,7 +82,13 @@ record ExceptionalCurrentMaxCut : Set where
 
     monsterNormalizerCertifiedSourceDataLocated : Bool
     monsterSymplectic12IntertwinerCompilerTyped : Bool
+    monsterRawAtlasMatricesImported : Bool
+    monsterSelectedGF729CompressionWeldPaid : Bool
+    monsterSelectedWordHeisenbergCentralCorrectionPaid : Bool
+    monsterSelectedWordHeisenbergLiftRuntimePaid : Bool
+    monsterFullNormalizerHeisenbergActionPaid : Bool
     monsterNormalizerPhysicalRealizationPaid : Bool
+
     originalPuncturedT5SameObjectRecognitionPaid : Bool
     empiricalLilaInstantiationPaid : Bool
     boundaryNote : String
@@ -113,7 +111,12 @@ canonicalExceptionalCurrentMaxCut =
     Classification.canonicalBoundary.remainingClassificationIsQFormAndGroupLevel
     false false false false
     MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.certifiedMonsterNormalizerRepresentationLocated
-    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.symplecticBasisIntertwinerInterfacePaid
-    false
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.sourceToRepositoryActionInterfacePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.rawAtlasMatricesImported
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.selectedGF729PresentationWeldRuntimePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.selectedWordQuadraticCentralCorrectionRuntimePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.selectedWordHeisenbergLiftRuntimePaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.fullNormalizerHeisenbergActionPaid
+    MonsterAtlas.canonicalMonster3BAtlasNormalizerBoundary.physicalNormalizerRealizationPaid
     false false
-    "Structured E8 and the rational Albert discovery programme are paid through intrinsic E8, actual Jordan algebra, exact triality, exact Q(i) F4 root spaces and exact root grading; the split root datum is recognized as F4. The Albert formal seam is classification of the original Q-form/full groups. The Monster 3B source-data existence seam is now paid by certified ATLAS representations and a typed symplectic/Heisenberg lift compiler; remaining Monster work is concrete matrix import, symplectic basis normalization into X6+X6*, central cocycle correction, and instantiation of the existing translation-descent compiler. Genuinely new original-T5 recognition and LILA remain independent lanes."
+    "Structured E8 is paid through the intrinsic 240-root Coxeter datum. The rational Albert programme is paid through exact split-Q(i) F4 root grading; its formal seam is classification of the original Q-form and full groups. Monster 3B now has vendored ATLAS matrices, exact X6+X6* normalization, the selected degree-six GF(729) field weld and an exact selected-word Heisenberg quadratic central correction; remaining Monster work is extension/kernelization to the consumed full normalizer subgroup plus orbit/stabilizer, output-equivariance and physical-realization semantics. Original-T5 recognition and empirical LILA remain independent lanes."
