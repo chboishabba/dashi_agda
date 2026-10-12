@@ -17,6 +17,7 @@ def test_final_reconciliation_surface() -> None:
             "vercelOpenWeightTrajectoryPaid",
             "selectedBenchmarkPricePairPaid",
             "sameModelSelfHostEngineeringCostPaid",
+            "headlineObserverNonDescentPaid",
             "coreWeaveTwoSidedConcentrationPaid",
             "coreWeaveDebtCostSurfacePaid",
             "coreWeaveCapitalSpreadSignPaid",
@@ -24,6 +25,7 @@ def test_final_reconciliation_surface() -> None:
             "coreWeaveCapexNonidentifiabilityPaid",
             "coreWeaveAccountingLifePaid",
             "coreWeaveNamedPayerCapacityPaid",
+            "coreWeaveNamedPayerSaturationPaid",
             "terminalPayerConsumerIndexingPaid",
             "terminalPayerStillPartial",
             "replacementObsolescenceStillPartial",
@@ -79,8 +81,16 @@ def test_new_scoped_owners_exist() -> None:
         ["selectedNamedPayerCapacityIsPaid", "completeTerminalPayerProvenanceStillOpen"],
     )
     require(
+        "DASHI/Economics/AICoreWeaveNamedPayerSaturation20261012Exact.agda",
+        ["metaExternalCashEdgePaid", "openAIContractEdgePaidCashProvenanceOpen", "anonymousCurrentTopCustomerIdentityStillOpen"],
+    )
+    require(
         "DASHI/Economics/AITerminalPayerConsumerSufficiency20261012Exact.agda",
-        ["selectedMicrosoftCapacityConsumerPaid", "coreWeaveExhaustiveIndependenceConsumerOpen"],
+        ["selectedMicrosoftCapacityConsumerPaid", "selectedMetaCapacityConsumerPaid", "selectedOpenAICashConsumerOpen", "coreWeaveExhaustiveIndependenceConsumerOpen"],
+    )
+    require(
+        "DASHI/Economics/AICapitalObserverNonDescent20261012Exact.agda",
+        ["headlineSurfaceCannotDetermineCapitalRecovery", "everyTerminalPayerRepairMustSeparateWitness"],
     )
     require(
         "DASHI/Economics/AIPolicyCausalAdmission20261012Exact.agda",
@@ -110,7 +120,9 @@ def test_rollup_wires_final_reconciliation() -> None:
             "AICoreWeaveCapexDecompositionNonidentifiability20261012Exact",
             "AICoreWeaveAssetLifeObsolescenceBoundary20261012Exact",
             "AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact",
+            "AICoreWeaveNamedPayerSaturation20261012Exact",
             "AITerminalPayerConsumerSufficiency20261012Exact",
+            "AICapitalObserverNonDescent20261012Exact",
             "AIPolicyCausalAdmission20261012Exact",
             "AISameCapabilityScarcityRentAdmission20261012Exact",
             "AISameModelSelfHostCostBoundary20261012Exact",
