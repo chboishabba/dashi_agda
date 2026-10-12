@@ -8,23 +8,23 @@ open import Agda.Builtin.String using (String)
 -- LOCAL EXECUTION RECEIPTS — 2026-10-12
 --
 -- These receipts were produced by executing the branch's source-H numerical
--- logic locally. They certify implementation identities / finite randomized
--- checks and claim-scale memory planning only. They do NOT substitute for an
--- execution on Waller's pinned `example_psfs.mat`, and they do not establish
--- physical photon calibration.
+-- logic locally. They certify implementation identities, an exhaustive finite
+-- support-order check on declared synthetic fixtures, and claim-scale memory
+-- planning. They do NOT substitute for execution on Waller's pinned
+-- `example_psfs.mat`, and they do not establish physical photon calibration.
 ------------------------------------------------------------------------
 
 syntheticReceiptPath : String
 syntheticReceiptPath = "receipts/optics/waller_diffusercam_synthetic_receipt.json"
 
-syntheticReceiptSHA256 : String
-syntheticReceiptSHA256 = "420c774dd539760142378e4832823e339a6aed5dad50c269be94af7a857d1d17"
+syntheticReceiptGitBlobSHA : String
+syntheticReceiptGitBlobSHA = "128d24378b12a055282ffccb813744e626b846e1"
 
 claimScaleReceiptPath : String
 claimScaleReceiptPath = "receipts/optics/waller_diffusercam_claim_scale_receipt.json"
 
-claimScaleReceiptSHA256 : String
-claimScaleReceiptSHA256 = "37e6225ac91672578a6a8bb4c7bd29c8d54b76450f6b1a0209aa1b02e0570ebb"
+claimScaleReceiptGitBlobSHA : String
+claimScaleReceiptGitBlobSHA = "52cecec7a7b61fc5577129e9b704ee53482f2c82"
 
 syntheticSeed : Nat
 syntheticSeed = 1729
@@ -32,14 +32,17 @@ syntheticSeed = 1729
 syntheticShapesChecked : Nat
 syntheticShapesChecked = 4
 
+exhaustiveSupportOrderMaximum : Nat
+exhaustiveSupportOrderMaximum = 3
+
 gershgorinSupportsChecked : Nat
-gershgorinSupportsChecked = 500
+gershgorinSupportsChecked = 22218
 
 gershgorinBoundViolations : Nat
 gershgorinBoundViolations = 0
 
 maxFFTvsRollAbsError : String
-maxFFTvsRollAbsError = "1.1102230246251565e-16"
+maxFFTvsRollAbsError = "1.6653345369377348e-16"
 
 worstObservedMinusBoundMargin : String
 worstObservedMinusBoundMargin = "-4.440892098500626e-16"
@@ -53,6 +56,9 @@ claimScaleLargestSafeSyntheticRadius = 2
 syntheticOperatorReceiptCaptured : Bool
 syntheticOperatorReceiptCaptured = true
 
+exhaustiveFiniteSupportReceiptCaptured : Bool
+exhaustiveFiniteSupportReceiptCaptured = true
+
 claimScalePlannerReceiptCaptured : Bool
 claimScalePlannerReceiptCaptured = true
 
@@ -65,10 +71,11 @@ physicalPhotonCalibrationReceiptCaptured = false
 record DiffuserCamLocalExecutionReceipt : Set where
   field
     operatorReceiptPath : String
-    operatorReceiptHash : String
+    operatorReceiptBlob : String
     plannerReceiptPath : String
-    plannerReceiptHash : String
+    plannerReceiptBlob : String
     shapesChecked : Nat
+    exhaustiveOrderMaximum : Nat
     supportsChecked : Nat
     violations : Nat
     maxFFTError : String
@@ -76,6 +83,7 @@ record DiffuserCamLocalExecutionReceipt : Set where
     memoryBudgetBytes : Nat
     largestSafeSyntheticRadius : Nat
     syntheticOperatorReceipt : Bool
+    exhaustiveSupportReceipt : Bool
     claimScalePlannerReceipt : Bool
     realPSFReceipt : Bool
     physicalPhotonReceipt : Bool
@@ -85,10 +93,11 @@ open DiffuserCamLocalExecutionReceipt public
 currentDiffuserCamLocalExecutionReceipt : DiffuserCamLocalExecutionReceipt
 currentDiffuserCamLocalExecutionReceipt = record
   { operatorReceiptPath = syntheticReceiptPath
-  ; operatorReceiptHash = syntheticReceiptSHA256
+  ; operatorReceiptBlob = syntheticReceiptGitBlobSHA
   ; plannerReceiptPath = claimScaleReceiptPath
-  ; plannerReceiptHash = claimScaleReceiptSHA256
+  ; plannerReceiptBlob = claimScaleReceiptGitBlobSHA
   ; shapesChecked = syntheticShapesChecked
+  ; exhaustiveOrderMaximum = exhaustiveSupportOrderMaximum
   ; supportsChecked = gershgorinSupportsChecked
   ; violations = gershgorinBoundViolations
   ; maxFFTError = maxFFTvsRollAbsError
@@ -96,6 +105,7 @@ currentDiffuserCamLocalExecutionReceipt = record
   ; memoryBudgetBytes = claimScaleBudgetBytes
   ; largestSafeSyntheticRadius = claimScaleLargestSafeSyntheticRadius
   ; syntheticOperatorReceipt = syntheticOperatorReceiptCaptured
+  ; exhaustiveSupportReceipt = exhaustiveFiniteSupportReceiptCaptured
   ; claimScalePlannerReceipt = claimScalePlannerReceiptCaptured
   ; realPSFReceipt = realBerkeleyPSFReceiptCaptured
   ; physicalPhotonReceipt = physicalPhotonCalibrationReceiptCaptured
