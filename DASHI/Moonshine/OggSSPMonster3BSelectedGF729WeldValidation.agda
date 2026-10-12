@@ -13,6 +13,10 @@ degreeSixCompressionNowPaid :
   Weld.degreeSixCompressionReceiptPaid Weld.canonicalBoundary ≡ true
 degreeSixCompressionNowPaid = refl
 
+centerPreservingPrimitiveCompressionPaid :
+  Weld.centerPreservingPrimitiveCompressionPaid Weld.canonicalBoundary ≡ true
+centerPreservingPrimitiveCompressionPaid = refl
+
 primitiveRootNowPaid :
   Weld.selectedGF729PrimitiveOrder728Paid Weld.canonicalBoundary ≡ true
 primitiveRootNowPaid = refl
@@ -25,6 +29,10 @@ selectedFieldMultiplicativeActionNowWelded :
   Weld.selectedGF729MultiplicativeActionWeldPaid Weld.canonicalBoundary ≡ true
 selectedFieldMultiplicativeActionNowWelded = refl
 
+centerPreservingPrimitiveActionNowWelded :
+  Weld.centerPreservingPrimitiveActionWeldPaid Weld.canonicalBoundary ≡ true
+centerPreservingPrimitiveActionNowWelded = refl
+
 puncturedOrbit728NowPaid :
   Weld.selectedGF729PuncturedOrbit728Paid Weld.canonicalBoundary ≡ true
 puncturedOrbit728NowPaid = refl
@@ -33,7 +41,10 @@ puncturedStabilizerNowTrivial :
   Weld.selectedGF729PuncturedStabilizerTrivialPaid Weld.canonicalBoundary ≡ true
 puncturedStabilizerNowTrivial = refl
 
-primitiveOrderIs728 : Weld.selectedGammaMultiplicativeOrder ≡ 728
+preferredSourceMultiplierIsOne : Weld.sourceSimilitudeMultiplier ≡ 1
+preferredSourceMultiplierIsOne = refl
+
+primitiveOrderIs728 : Weld.selectedDeltaMultiplicativeOrder ≡ 728
 primitiveOrderIs728 = refl
 
 puncturedOrbitSizeIs728 : Weld.puncturedOrbitSize ≡ 728
@@ -47,7 +58,7 @@ agdaMatrixKernelProofStillOpen :
 agdaMatrixKernelProofStillOpen = refl
 
 fullMonsterSemanticActionRecognitionStillOpen :
-  Weld.fullActionOrbitStabilizerRecognitionPaid Weld.canonicalBoundary ≡ false
+  Weld.fullMonsterSemanticActionRecognitionPaid Weld.canonicalBoundary ≡ false
 fullMonsterSemanticActionRecognitionStillOpen = refl
 
 intertwinerDeterminantIsTwo : Weld.intertwinerDeterminantMod3 ≡ 2
