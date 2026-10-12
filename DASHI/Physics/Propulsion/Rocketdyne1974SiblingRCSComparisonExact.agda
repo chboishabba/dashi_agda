@@ -7,18 +7,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- CONTEMPORANEOUS SPACE-SHUTTLE RCS SIBLING COMPARATOR
---
--- Bell Aerospace contract NAS9-12996 pursued a different 600-lbf-class
--- hypergolic reusable Shuttle RCS engine at the same historical moment.
--- R-9557-1 states that NASA/JSC supplied the Rocketdyne Durability Engine's
--- Moog model 54X107A valve from NAS9-12996.  This gives a real programme-level
--- interface, but NOT identity of the Bell thrust chamber and Rocketdyne engine.
---
--- Primary comparator sources:
---   NASA-CR-134336 / Bell 8701-910041 (May 1974)
---   NASA-CR-136021 / Bell 8701-910013 (Aug 1973)
---   AIAA 73-1312 / NTRS 19740028558
---   NASA-CR-141450 / Bell 8701-910045 (coating durability, July 1974)
 ------------------------------------------------------------------------
 
 data CoolingArchitecture : Set where
@@ -53,10 +41,20 @@ bellNAS912996Comparator =
     fuelVortexCooledColumbium
     "100-mission reusable Shuttle RCS with minimum servicing"
     "reported ~295-s vacuum Isp; 9900 s operation including 6300 firing cycles without maintenance in the 1973 AIAA summary"
-    "contemporaneous competing/sibling Shuttle-RCS technology programme; NASA/JSC supplied Rocketdyne a Moog 54X107A valve from NAS9-12996"
+    "contemporaneous competing/sibling Shuttle-RCS technology programme; NASA/JSC supplied Rocketdyne Moog 54X107-series hardware originating under NAS9-12996"
     sameContractInterface
     false
-    "NASA-CR-134336; NASA-CR-136021; AIAA 73-1312 / NTRS 19740028558; R-9557-1 p.23"
+    "NASA-CR-134336; NASA-CR-136021; AIAA 73-1312 / NTRS 19740028558; R-9557/R-9557-1 valve sections"
+
+-- R-9557-1 identifies valve S/N 003 as residual NAS9-12996 hardware and R-9557
+-- says the 54X107 design was developed by Moog for that contract. This pays
+-- contract origin, but it does not by itself identify which Bell test article
+-- previously carried S/N 003 or reconstruct the full prior exposure history.
+valveContractOriginPaid : Bool
+valveContractOriginPaid = true
+
+exactBellEngineValveAssignmentPaid : Bool
+exactBellEngineValveAssignmentPaid = false
 
 record ArchitectureComparison : Set where
   constructor architecture-comparison
@@ -89,10 +87,6 @@ record EnvironmentalCycleComparator : Set where
     directCycleCountComparisonIsReliabilityLaw : Bool
     sourceReference : String
 
--- Bell's interim report says FT-2A completed ten environmental/hot-fire cycles
--- (salt water spray, sand/dust, vibration, humidity) with no change in steady
--- state or pulse performance. Rocketdyne reports six environmental cycles.
--- Protocol details differ, so 10 vs 6 is NOT a ranking of reliability.
 bellEnvironmentalCycleComparator : EnvironmentalCycleComparator
 bellEnvironmentalCycleComparator =
   environmental-cycle-comparator
@@ -140,7 +134,8 @@ siblingComparisonBoundary =
 record SiblingAcquisitionFrontier : Set where
   constructor sibling-acquisition-frontier
   field
-    exactMoogValveCrossIdentification : Bool
+    exactMoogValveContractOrigin : Bool
+    exactPriorBellArticleAssignment : Bool
     bellEnvironmentalProtocolRecovered : Bool
     bellValveFailureHistoryRecovered : Bool
     bellCoatingArticleDataRecovered : Bool
@@ -150,5 +145,5 @@ record SiblingAcquisitionFrontier : Set where
 siblingAcquisitionFrontier : SiblingAcquisitionFrontier
 siblingAcquisitionFrontier =
   sibling-acquisition-frontier
-    false false false false false
-    "Acquire NAS9-12996 Bell final/environmental reports and valve configuration records, then compare protocols component-by-component against R-9557 rather than comparing headline cycle counts."
+    true false false false false false
+    "Contract origin is paid. Next acquire NAS9-12996 serial-level valve/test records, Bell environmental protocols and coating data, then compare component-by-component against R-9557 rather than comparing headline cycle counts."
