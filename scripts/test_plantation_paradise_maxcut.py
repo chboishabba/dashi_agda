@@ -17,6 +17,12 @@ EXPECTED = {
         "colonialSocietyAtTheTheatreClaimReceipt",
         "escapeFromRealityClaimReceipt",
         "finaleRevolutionClaimReceipt",
+        "InspectionEvidenceCoherent",
+        "politicsAndPowerInspectionCoherent",
+        "escapeFromRealityInspectionCoherent",
+        "finaleRevolutionInspectionCoherent",
+        "introducingStarsInspectionCoherent",
+        "breakingBarrierInspectionCoherent",
         "pageRangeDoesNotPromoteUninspectedPassage",
     ],
     "DASHI/Culture/ColonialPerformanceStatusNonfactorabilityExact.agda": [
@@ -60,7 +66,7 @@ rollup = ROOT / "DASHI/Culture/Everything.agda"
 if not rollup.exists():
     errors.append("missing Culture/Everything.agda")
 else:
-    text = rollup.read_text(encoding="utf-8")
+    lines = set(rollup.read_text(encoding="utf-8").splitlines())
     for module in [
         "PowersPlantationParadiseSourceAtlasExact",
         "PowersPlantationParadiseHistoricalClaimReceiptsExact",
@@ -70,7 +76,8 @@ else:
         "PowersPlantationParadiseSynthesisExact",
         "PowersPlantationParadiseValidation",
     ]:
-        if module not in text:
+        import_line = f"import DASHI.Culture.{module}"
+        if import_line not in lines:
             errors.append(f"Culture/Everything.agda missing import {module}")
 
 workflow = ROOT / ".github/workflows/plantation-paradise-agda.yml"
