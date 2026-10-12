@@ -15,6 +15,7 @@ import DASHI.Culture.PowersPlantationParadiseHistoricalClaimReceiptsExact as Cla
 import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performance
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
+import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as GovernedCross
 
 ------------------------------------------------------------------------
 -- POWERS PLANTATION -> PARADISE? SYNTHESIS
@@ -162,6 +163,11 @@ participationBoundary = Fraser.canonicalParticipationAxesBoundary
 totalityBoundary : Totality.HistoricalTotalityCriticalTheoryBoundary
 totalityBoundary = Totality.canonicalHistoricalTotalityCriticalTheoryBoundary
 
+governedCrossPollinationBoundary :
+  GovernedCross.PowersGovernedCrossPollinationBoundary
+governedCrossPollinationBoundary =
+  GovernedCross.canonicalPowersGovernedCrossPollinationBoundary
+
 record PowersPlantationParadiseBoundary : Set where
   constructor powers-plantation-paradise-boundary
   field
@@ -183,10 +189,22 @@ record PowersPlantationParadiseBoundary : Set where
     performanceImpliesEndorsement : Bool
     performanceImpliesEndorsementIsFalse :
       performanceImpliesEndorsement ≡ false
+    culturalSurfaceImpliesSameStanding : Bool
+    culturalSurfaceImpliesSameStandingIsFalse :
+      culturalSurfaceImpliesSameStanding ≡ false
+    culturalSurfaceImpliesPoliticalContestability : Bool
+    culturalSurfaceImpliesPoliticalContestabilityIsFalse :
+      culturalSurfaceImpliesPoliticalContestability ≡ false
+    culturalSurfaceImpliesSameMaterialCone : Bool
+    culturalSurfaceImpliesSameMaterialConeIsFalse :
+      culturalSurfaceImpliesSameMaterialCone ≡ false
 
 canonicalPowersPlantationParadiseBoundary : PowersPlantationParadiseBoundary
 canonicalPowersPlantationParadiseBoundary =
   powers-plantation-paradise-boundary
+    false refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
