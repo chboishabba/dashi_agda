@@ -4,8 +4,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact w
 -- FAITHFUL MACHINE-STATE OUTPUT THROUGH THE ENTIRE VIRTUAL SIMULATION
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Maybe using (just)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -13,11 +13,10 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Dire
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact as Frontier
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualGeneratorOutputExact as Output
+import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
+import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
-
-------------------------------------------------------------------------
--- One embedded generator call really terminates in its declared bit state.
-------------------------------------------------------------------------
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 
 record FaithfulEmbeddedGeneratedQueryCall
     {description presentation generator before after}
@@ -29,13 +28,12 @@ record FaithfulEmbeddedGeneratedQueryCall
     finalGeneratorStateIsBit :
       Standard.state
         (Frontier.finishConfiguration generator
-          (DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact.atIndex
+          (Description.atIndex
             description
             (Frontier.index (Frontier.query call))))
       ≡
       Output.outputState faithful
-        (Agda.Builtin.Maybe.just
-          (Frontier.bit (Frontier.query call)))
+        (just (Frontier.bit (Frontier.query call)))
 
 open FaithfulEmbeddedGeneratedQueryCall public
 
@@ -46,22 +44,17 @@ faithfulCallGivesSemanticQuery :
     {call : Frontier.EmbeddedGeneratedQueryCall
       description {presentation} generator before after} →
   FaithfulEmbeddedGeneratedQueryCall faithful call →
-  DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact.queryAnswer
-    (DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact.atIndex
+  Semantics.queryAnswer
+    (Description.atIndex
       description
       (Frontier.index (Frontier.query call)))
-  ≡
-  Agda.Builtin.Maybe.just (Frontier.bit (Frontier.query call))
+  ≡ just (Frontier.bit (Frontier.query call))
 faithfulCallGivesSemanticQuery faithfulCall =
   Output.faithfulSuccessfulQueryAnswerExact
     record
       { Output.finalStateIsBit =
           finalGeneratorStateIsBit faithfulCall
       }
-
-------------------------------------------------------------------------
--- Recursively require the same property for every call in every query chain.
-------------------------------------------------------------------------
 
 data FaithfulGeneratedQueryChain
     {description presentation generator}
@@ -108,7 +101,7 @@ data FaithfulVirtualRun
     (faithful : Output.FaithfulGeneratorOutput
       {presentation = targetPresentation} generator) :
     ∀ {sourceSteps sourceStart sourceFinish targetStart targetFinish}
-      {sourceRun : DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact.StandardExactRun
+      {sourceRun : Run.StandardExactRun
         sourceMachine sourceSteps sourceStart sourceFinish} →
     Frontier.VirtualRunSimulation
       {SourceState} {SourceSymbol} {sourceMachine}
@@ -125,7 +118,7 @@ data FaithfulVirtualRun
 
   faithfulVirtualStep :
     ∀ {sourceSteps sourceCurrent sourceNext sourceFinish targetCurrent targetNext targetFinish}
-      {sourceRest : DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact.StandardExactRun
+      {sourceRest : Run.StandardExactRun
         sourceMachine sourceSteps sourceNext sourceFinish}
       {step : Frontier.VirtualStepSimulation
         description generator
@@ -136,11 +129,6 @@ data FaithfulVirtualRun
     FaithfulVirtualRun faithful rest →
     FaithfulVirtualRun faithful
       (Frontier.virtualRunStep step rest)
-
-------------------------------------------------------------------------
--- Clay-critical active wrapper: the base compilation plus faithful machine-state
--- outputs for every generator call actually used in candidateSimulation.
-------------------------------------------------------------------------
 
 record FaithfulVirtualSelfQuotationCompilation
     {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -159,12 +147,3 @@ record FaithfulVirtualSelfQuotationCompilation
         (Frontier.candidateSimulation base)
 
 open FaithfulVirtualSelfQuotationCompilation public
-
-------------------------------------------------------------------------
--- CONSEQUENCE
---
--- The active virtual route no longer depends on an unrestricted meta-level
--- observer to recover generated bits.  Every bit consumed by the simulated
--- candidate must be represented by the actual finite control state reached by
--- the same target machine's generator run.
-------------------------------------------------------------------------
