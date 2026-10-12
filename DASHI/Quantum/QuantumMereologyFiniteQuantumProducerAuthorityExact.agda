@@ -18,11 +18,15 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 -- * linear and pointer entropy paths,
 -- * derivative-backed t=0 entropy accelerations,
 -- * a constructive finite coordinate-projector family with Hermitian,
---   idempotent, pairwise-orthogonal, complete and diagonal spectral laws.
+--   idempotent, pairwise-orthogonal, complete and diagonal spectral laws,
+-- * the pinned mathlib v4.28 finite Hermitian spectral theorem: orthonormal
+--   eigenbasis, real eigenvalues and unitary diagonalisation for every concrete
+--   finite Hermitian complex matrix.
 --
--- The last item pays only the mechanical projector algebra in a supplied
--- diagonal chart.  It does not prove that an arbitrary selected CPO already
--- comes with that chart/eigenbasis.
+-- The remaining CPO seam is not finite spectral existence.  It is the
+-- same-object bridge from the generic selected CPO factor linear map to a
+-- concrete Hermitian matrix representative on which that spectral theorem is
+-- applied.
 --
 -- Agda records those as source-written/imported theorem authorities only until
 -- exact-head Lean kernel evidence is available.
@@ -116,6 +120,10 @@ record FiniteQuantumProducerStatus : Set where
     DiagonalSpectralProjectorLawSourceWrittenIsTrue :
       DiagonalSpectralProjectorLawSourceWritten ≡ true
 
+    FiniteHermitianSpectralBasisSourceWritten : Bool
+    FiniteHermitianSpectralBasisSourceWrittenIsTrue :
+      FiniteHermitianSpectralBasisSourceWritten ≡ true
+
     ArbitrarySelectedCPOEigenbasisPaid : Bool
     ArbitrarySelectedCPOEigenbasisPaidIsFalse :
       ArbitrarySelectedCPOEigenbasisPaid ≡ false
@@ -154,6 +162,8 @@ canonicalFiniteQuantumProducerStatus = record
   ; StandardBasisProjectorFamilySourceWrittenIsTrue = refl
   ; DiagonalSpectralProjectorLawSourceWritten = true
   ; DiagonalSpectralProjectorLawSourceWrittenIsTrue = refl
+  ; FiniteHermitianSpectralBasisSourceWritten = true
+  ; FiniteHermitianSpectralBasisSourceWrittenIsTrue = refl
   ; ArbitrarySelectedCPOEigenbasisPaid = false
   ; ArbitrarySelectedCPOEigenbasisPaidIsFalse = refl
   ; SameObjectCPOChartAttachmentAutomatic = false
@@ -188,14 +198,14 @@ leanStandardBasisProjectorSourceReceipt =
   Sources.attribution-receipt
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyStandardBasisProjector"
-    "Source-written finite coordinate rank-one projectors with Hermitian, idempotent, pairwise-orthogonal, complete and diagonal spectral laws. This pays projector algebra in a supplied diagonal chart only; arbitrary selected-CPO eigenbasis existence and same-object chart attachment remain open."
+    "Source-written finite coordinate rank-one projectors with Hermitian, idempotent, pairwise-orthogonal, complete and diagonal spectral laws, plus the pinned mathlib v4.28 finite-Hermitian orthonormal eigenbasis/unitary spectral theorem. The remaining selected-CPO obligation is the same-object bridge from the generic factor linear map to a concrete Hermitian matrix representative."
 
 dashiFiniteQuantumProducerCrossProverReceipt : Sources.AttributionReceipt
 dashiFiniteQuantumProducerCrossProverReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Aggregates explicit Lean theorem-source authorities for the finite quantum producer. Coordinate projector algebra is now source-written, while arbitrary selected-CPO eigenbasis/chart attachment, physical authority, and exact-head kernel certification remain separate."
+    "Aggregates explicit Lean theorem-source authorities for the finite quantum producer. Coordinate projector algebra and finite Hermitian spectral existence are source-written; selected-CPO same-object matrix attachment, physical authority, and exact-head kernel certification remain separate."
 
 leanHamiltonianExponentialSourceReceipt : Sources.AttributionReceipt
 leanHamiltonianExponentialSourceReceipt =
