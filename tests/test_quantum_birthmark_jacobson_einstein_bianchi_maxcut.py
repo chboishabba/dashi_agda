@@ -10,6 +10,7 @@ def text(path: str) -> str:
 def test_einstein_bianchi_boundary_tracks_native_lean_producers_and_repo_receipts():
     p = text("DASHI/Quantum/QuantumBirthmarkJacobsonEinsteinTensorBianchiBoundaryExact.agda")
     assert "ContractedBianchiMatterClosure" in p
+    assert "flat31JacobsonEinsteinCompilerSourceWrittenInLean" in p
     assert "einsteinTensorPointwiseAlgebraSourceWrittenInLean" in p
     assert "bianchiLambdaGradientCompilerSourceWrittenInLean" in p
     assert "mathlibZeroDerivativeConstancyOwned" in p
@@ -19,6 +20,7 @@ def test_einstein_bianchi_boundary_tracks_native_lean_producers_and_repo_receipt
 
 def test_terminal_cutset_marks_einstein_bianchi_algebra_paid():
     p = text("DASHI/Quantum/QuantumBirthmarkHolographyGravityTerminalCutsetExact.agda")
+    assert "flat31JacobsonEinsteinCompilerSourceWrittenInLean" in p
     assert "einsteinTensorPointwiseAlgebraSourceWrittenInLean" in p
     assert "bianchiLambdaGradientCompilerSourceWrittenInLean" in p
     assert "mathlibZeroDerivativeConstancyOwned" in p
