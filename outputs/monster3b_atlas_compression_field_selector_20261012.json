@@ -1,0 +1,77 @@
+{
+  "schema": "dashi.monster3b.atlas_compression_field_selector.v1",
+  "date": "2026-10-12",
+  "source_manifest": "data/atlas/monster3b_suz12_source_manifest_20261012.json",
+  "inner_form": {
+    "source": "2SuzG1-f3r12B0",
+    "invariant_alternating_form_space_dimension": 1,
+    "inner_symplectic_multipliers": [1, 1]
+  },
+  "outer_extension": {
+    "source": "2Suzd2G1-f3r12aB0",
+    "outer_similitude_multipliers": [2, 1],
+    "outer_generator_2_equals_inner_generator_2": true
+  },
+  "compression_search": {
+    "search_depth": 5,
+    "distinct_elements_visited": 68,
+    "irreducible_degree6_hit_count": 2,
+    "lagrangian_stabilising_irreducible_degree6_hit_count": 0,
+    "selected_word": "g2 g1 g2^-1 g1 g2^-1",
+    "selected_word_matrix_convention": "start at identity and left-multiply each listed letter in order",
+    "selected_word_is_symplectic_multiplier": 1,
+    "selected_word_stabilises_translation_lagrangian": false,
+    "compression_matrix": [
+      [0, 2, 1, 0, 2, 1],
+      [2, 0, 2, 1, 2, 2],
+      [0, 0, 0, 0, 1, 2],
+      [2, 0, 1, 2, 1, 2],
+      [2, 0, 2, 2, 0, 2],
+      [1, 0, 1, 0, 2, 2]
+    ],
+    "compression_characteristic_polynomial_low_to_high": [1, 0, 1, 2, 0, 2, 1],
+    "compression_characteristic_polynomial": "x^6 - x^5 - x^3 + x^2 + 1",
+    "compression_minimal_polynomial_degree": 6,
+    "compression_polynomial_irreducible_over_GF3": true,
+    "cyclic_vector": [1, 0, 0, 0, 0, 0],
+    "cyclic_span_rank": 6,
+    "swap01_witness": [1, 0, 0, 0, 0, 0],
+    "T_swap01_witness": [2, 0, 0, 0, 0, 0],
+    "swap01_T_witness": [2, 0, 0, 2, 2, 1],
+    "breaks_swap01": true
+  },
+  "selected_GF729_weld": {
+    "selected_modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
+    "selected_modulus": "f(a)=a^6+a^5+a^4+1",
+    "affine_generator_change": "beta = 1 - a",
+    "beta_coordinates_in_selected_polynomial_basis": [1, 2, 0, 0, 0, 0],
+    "exact_polynomial_identity": "f(1-x)=x^6-x^5-x^3+x^2+1 over GF(3)",
+    "multiplication_by_beta_matrix": [
+      [1, 0, 0, 0, 0, 1],
+      [2, 1, 0, 0, 0, 0],
+      [0, 2, 1, 0, 0, 0],
+      [0, 0, 2, 1, 0, 0],
+      [0, 0, 0, 2, 1, 1],
+      [0, 0, 0, 0, 2, 2]
+    ],
+    "compression_to_selected_basis_intertwiner_Q": [
+      [1, 0, 0, 2, 1, 1],
+      [0, 0, 0, 2, 1, 2],
+      [0, 0, 2, 1, 0, 1],
+      [0, 0, 1, 1, 2, 0],
+      [0, 1, 1, 0, 1, 2],
+      [0, 2, 0, 1, 2, 2]
+    ],
+    "intertwiner_determinant_mod3": 2,
+    "intertwiner_rank": 6,
+    "intertwining_equation": "Q*T = M_beta*Q",
+    "intertwining_equation_verified": true,
+    "same_selected_GF729_presentation_paid_numerically": true
+  },
+  "remaining_boundary": {
+    "agda_kernel_matrix_intertwiner_proved": false,
+    "full_action_orbit_stabilizer_recognition_paid": false,
+    "physical_Monster_3B_realization_paid": false,
+    "note": "This receipt closes the finite-field presentation gap numerically and by explicit invertible conjugacy. It does not by itself identify every downstream Monster action/orbit/stabilizer semantic with the selected field action."
+  }
+}
