@@ -66,6 +66,22 @@ c3ExternalVsSiteRestrictionSeparated :
   Nongin.c3ExternalVsSiteRestrictionSeparated boundary ≡ true
 c3ExternalVsSiteRestrictionSeparated = refl
 
+naiveGlobalC3NaturalityRejected :
+  Nongin.naiveGlobalC3NaturalityRejected boundary ≡ true
+naiveGlobalC3NaturalityRejected = refl
+
+c3RicherLocalContextRequired :
+  Nongin.c3RicherLocalContextRequired boundary ≡ true
+c3RicherLocalContextRequired = refl
+
+c3ResidualRepairPaid :
+  Nongin.c3ResidualRepairPaid boundary ≡ true
+c3ResidualRepairPaid = refl
+
+oldFullT9RetentionNotRequired :
+  Nongin.c3OldFullT9RetentionRequired boundary ≡ false
+oldFullT9RetentionNotRequired = refl
+
 transportEnrichedGroupoidPresheafStillFalse :
   Nongin.transportEnrichedGroupoidPresheafPaid boundary ≡ false
 transportEnrichedGroupoidPresheafStillFalse = refl
