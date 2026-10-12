@@ -42,7 +42,7 @@ truncateOne (depthStep observer prior) = prior
 observerDepthPresheaf :
   ∀ {Observer X : Set} →
   Depth.DepthPresheaf (ObserverDepthState Observer X)
-observerDepthPresheaf = record { truncate = λ depth → truncateOne }
+observerDepthPresheaf = record { truncate = λ depth state → truncateOne state }
 
 truncateToBase :
   ∀ {Observer X : Set} {depth : Nat} →
@@ -105,7 +105,7 @@ observerTermToDepthState (Origin.observes observer term) =
 
 observedHasDepthZero :
   ∀ {Observer X : Set} (x : X) →
-  observerTermDepth (Origin.observed {Observer = Observer} x) ≡ zero
+  observerTermDepth (Origin.observed x) ≡ zero
 observedHasDepthZero x = refl
 
 observesAddsOneDepth :
