@@ -8,12 +8,12 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact wh
 --   * its guarded Cook description and virtual source are canonical;
 --   * every read varies only the index of that immutable description;
 --   * the universal bit generator EXECUTES ON THAT SAME fixed target machine;
---   * read cost is canonical query-code length + actual generator execution.
+--   * setup ; generator ; resume ; core phases compose to literal exact runs.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Maybe using (Maybe; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥)
@@ -39,6 +39,7 @@ import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Descri
 import DASHI.Mathematics.Complexity.CanonicalGuardedCookVirtualSourceExact as CanonicalGuarded
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
+import DASHI.Mathematics.Complexity.StandardMachineSimulationExact as RunTools
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 
@@ -206,11 +207,27 @@ embeddedCallSteps :
   ∀ {description presentation generator before after} →
   EmbeddedGeneratedQueryCall
     description {presentation} generator before after → Nat
-embeddedCallSteps {generator = generator} call =
+embeddedCallSteps {description} {generator = generator} call =
   (setupSteps call
     + querySteps generator
-        (Description.atIndex _ (index (query call))))
+        (Description.atIndex description (index (query call))))
   + resumeSteps call
+
+embeddedGeneratedQueryCallRun :
+  ∀ {description presentation generator before after}
+    (call : EmbeddedGeneratedQueryCall
+      description {presentation} generator before after) →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine presentation)
+    (embeddedCallSteps call)
+    before after
+embeddedGeneratedQueryCallRun
+    {description} {generator = generator} call =
+  RunTools.appendThreeExactRuns
+    (setupRun call)
+    (execution generator
+      (Description.atIndex description (index (query call))))
+    (resumeRun call)
 
 ------------------------------------------------------------------------
 -- A chain is literal phase composition on the same target transition system.
@@ -233,15 +250,30 @@ data EmbeddedGeneratedQueryChain
       description generator zero configuration configuration
 
   generatedChainStep :
-    ∀ {callSteps restSteps start middle finish}
+    ∀ {restSteps start middle finish}
       (call :
         EmbeddedGeneratedQueryCall
           description generator start middle) →
-    embeddedCallSteps call ≡ callSteps →
     EmbeddedGeneratedQueryChain
       description generator restSteps middle finish →
     EmbeddedGeneratedQueryChain
-      description generator (callSteps + restSteps) start finish
+      description generator
+      (embeddedCallSteps call + restSteps)
+      start finish
+
+embeddedGeneratedQueryChainRun :
+  ∀ {description presentation generator steps start finish} →
+  EmbeddedGeneratedQueryChain
+    description {presentation} generator steps start finish →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine presentation)
+    steps start finish
+embeddedGeneratedQueryChainRun generatedChainDone =
+  Run.standardRunDone
+embeddedGeneratedQueryChainRun (generatedChainStep call rest) =
+  RunTools.appendExactRuns
+    (embeddedGeneratedQueryCallRun call)
+    (embeddedGeneratedQueryChainRun rest)
 
 ------------------------------------------------------------------------
 -- One source edge -> same-target query chain + actual core target run.
@@ -285,8 +317,23 @@ virtualStepTotal :
     {SourceState} {SourceSymbol} {sourceMachine}
     description {targetPresentation} generator
     sourceBefore sourceAfter targetBefore targetAfter → Nat
-virtualStepTotal step =
-  queryStepsTotal step + coreSteps step
+virtualStepTotal step = queryStepsTotal step + coreSteps step
+
+virtualStepRun :
+  ∀ {SourceState SourceSymbol sourceMachine description targetPresentation generator
+      sourceBefore sourceAfter targetBefore targetAfter}
+    (step : VirtualStepSimulation
+      {SourceState} {SourceSymbol} {sourceMachine}
+      description {targetPresentation} generator
+      sourceBefore sourceAfter targetBefore targetAfter) →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine targetPresentation)
+    (virtualStepTotal step)
+    targetBefore targetAfter
+virtualStepRun step =
+  RunTools.appendExactRuns
+    (embeddedGeneratedQueryChainRun (queryChain step))
+    (coreRun step)
 
 data VirtualRunSimulation
     {SourceState SourceSymbol : Set}
@@ -329,6 +376,39 @@ data VirtualRunSimulation
         (VirtualStepSimulation.sourceEdge step)
         sourceRest)
       targetCurrent targetFinish
+
+virtualRunTargetSteps :
+  ∀ {SourceState SourceSymbol sourceMachine description targetPresentation generator
+      sourceSteps sourceStart sourceFinish targetStart targetFinish}
+    {sourceRun : Run.StandardExactRun
+      sourceMachine sourceSteps sourceStart sourceFinish} →
+  VirtualRunSimulation
+    {SourceState} {SourceSymbol} {sourceMachine}
+    description {targetPresentation} generator
+    sourceRun targetStart targetFinish → Nat
+virtualRunTargetSteps virtualRunDone = zero
+virtualRunTargetSteps (virtualRunStep step rest) =
+  virtualStepTotal step + virtualRunTargetSteps rest
+
+virtualRunToTargetRun :
+  ∀ {SourceState SourceSymbol sourceMachine description targetPresentation generator
+      sourceSteps sourceStart sourceFinish targetStart targetFinish}
+    {sourceRun : Run.StandardExactRun
+      sourceMachine sourceSteps sourceStart sourceFinish}
+    (simulation : VirtualRunSimulation
+      {SourceState} {SourceSymbol} {sourceMachine}
+      description {targetPresentation} generator
+      sourceRun targetStart targetFinish) →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine targetPresentation)
+    (virtualRunTargetSteps simulation)
+    targetStart targetFinish
+virtualRunToTargetRun virtualRunDone =
+  Run.standardRunDone
+virtualRunToTargetRun (virtualRunStep step rest) =
+  RunTools.appendExactRuns
+    (virtualStepRun step)
+    (virtualRunToTargetRun rest)
 
 ------------------------------------------------------------------------
 -- Candidate-specific virtual compilation boundary.
@@ -404,14 +484,14 @@ virtualSourceOfCompilation compilation =
 --   * guarded Cook description and exact virtual source are canonical;
 --   * all reads vary only the index of one immutable description;
 --   * generator execution is on the SAME fixed target transition system;
---   * each query is an actual setup ; generator ; resume chain, not a number.
+--   * each query is an actual setup ; generator ; resume run;
+--   * per-edge and whole virtual simulations produce literal exact target runs.
 --
 -- LIVE constructive obligations:
 --   1. construct one coded target with generator + candidate/opposite modes;
 --   2. prove `UniversalGuardedCookBitGenerator` for its canonical query code;
 --   3. establish a representation invariant making each `coreRun` simulate the
 --      corresponding source edge, with query calls exactly at virtual reads;
---   4. concatenate the per-edge target runs, then finite setup + negation suffix,
---      and close the SAME exact Cook budget;
+--   4. close the total target clock to the SAME budget used by own Cook formula;
 --   5. reuse existing Cook iff / opposite-decision failure plumbing.
 ------------------------------------------------------------------------
