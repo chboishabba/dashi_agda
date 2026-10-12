@@ -33,9 +33,7 @@ targets=(
   DASHI/Moonshine/OggSSP2BNormWeldCompilerExact.agda
 )
 
-for target in "${targets[@]}"; do
-  test -f "$target"
-done
+for target in "${targets[@]}"; do test -f "$target"; done
 
 grep -q 'allBrauerRowsMatchIsTrue' "${targets[0]}"
 grep -q 'semisimplifiedIngressIsPaid' "${targets[0]}"
@@ -80,13 +78,22 @@ grep -q 'actualNormImagePlacementStillOpen' "${targets[12]}"
 
 grep -q 'sameObjectExteriorSquareStillOpen' "${targets[13]}"
 
-grep -q 'canonicalPromotionBoundary' "${targets[14]}"
+grep -q 'homReceiptRuntimeIsPaid' "${targets[14]}"
+grep -q 'actualTateCo1ProfileIsPaid' "${targets[14]}"
+grep -q 'augmentationCriterionIsApplicable' "${targets[14]}"
+grep -q 'firstNonzeroLayerExtractionStillOpen' "${targets[14]}"
 
-grep -q 'exteriorQuotientDimensionIs276' "${targets[15]}"
-grep -q 'common98280MapStillOpen' "${targets[15]}"
+grep -q 'homUniquenessRuntimeIsPaid' "${targets[15]}"
+grep -q 'residual24LaneIsRigid' "${targets[15]}"
+grep -q 'inducedActualResidualEquivarianceStillOpen' "${targets[15]}"
+grep -q 'common98280MapNoLongerIndependentGate' "${targets[15]}"
 
-grep -q 'commonPlusResidualIsMinus' "${targets[16]}"
-grep -q 'actualNormCommon98280StillOpen' "${targets[16]}"
+grep -q 'runtimeDecompositionIsPaid' "${targets[16]}"
+grep -q 'actualTateJHProfileIsPaid' "${targets[16]}"
+grep -q 'commonSupportSeparationIsPaid' "${targets[16]}"
+grep -q 'residual24UniqueSimpleIsPaid' "${targets[16]}"
+grep -q 'residualBlockProjectorSameObjectStillOpen' "${targets[16]}"
+grep -q 'common98280NoLongerIndependentGate' "${targets[16]}"
 
 grep -q 'rankRigidityClosure' "${targets[17]}"
 grep -q 'forcedRankNullityClosure' "${targets[17]}"
@@ -95,9 +102,14 @@ grep -q 'brauerAllRowsMatch' "${targets[18]}"
 grep -q 'actualOuterActionOnSameQStillOpen' "${targets[18]}"
 
 grep -q 'canonicalCompletionAcquisitionStatus' "${targets[19]}"
-grep -q 'integralWeightTwoRankClosurePaid' "${targets[19]}"
-grep -q 'frobeniusExteriorQuotientDimensionIs276' "${targets[19]}"
-grep -q 'actualNormCommon98280StillOpen' "${targets[19]}"
+grep -q 'actualTateCo1ProfileIsPaid' "${targets[19]}"
+grep -q 'augmentationHomRuntimeIsPaid' "${targets[19]}"
+grep -q 'augmentationExtractionStillOpen' "${targets[19]}"
+grep -q 'frobeniusHomRuntimeIsPaid' "${targets[19]}"
+grep -q 'centralizerRuntimeDecompositionIsPaid' "${targets[19]}"
+grep -q 'residual24UniqueSimpleIsPaid' "${targets[19]}"
+grep -q 'common98280NoLongerIndependentGate' "${targets[19]}"
+grep -q 'residualBlockProjectorStillOpen' "${targets[19]}"
 grep -q 'remainingDefectSourceBitsIsTwo' "${targets[19]}"
 
 grep -q 'record ActualTateQ10Recognition' "${targets[20]}"
@@ -114,9 +126,10 @@ grep -q 'zeroRelevantArrowsForceTrivialNormalAction' "${targets[24]}"
 
 grep -q 'residualRankForcedTwentyFour' "${targets[25]}"
 grep -q 'commonKernelForced98280' "${targets[25]}"
-grep -q 'residualMapForcedFrobenius' "${targets[25]}"
-grep -q 'tateCokernelForcedExteriorSquare' "${targets[25]}"
-grep -q 'onlyCommon98280MapRemains' "${targets[25]}"
+grep -q 'ResidualBlockNormSameObjectReceipt' "${targets[25]}"
+grep -q 'ResidualBlockNormWeldCompiler' "${targets[25]}"
+grep -q 'tateCokernelForcedExteriorSquareFromResidualBlock' "${targets[25]}"
+grep -q 'onlyResidualBlockMapRemains' "${targets[25]}"
 
 python3 scripts/test_twob_norm_weld_maxcut.py
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
