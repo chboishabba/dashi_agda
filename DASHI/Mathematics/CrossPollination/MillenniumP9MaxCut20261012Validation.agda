@@ -108,6 +108,9 @@ import DASHI.Mathematics.Complexity.CNFStreamingSeekExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseExact
 import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitFrontier
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingTokenBisimulationExact
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitExact
+import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 
 ------------------------------------------------------------------------
@@ -149,19 +152,19 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 --     truth-table assignments; it constructs only the selected forbid-clause;
 --   * direct CNF -> Cook prefix tokens are exactly the existing cnfToCook +
 --     encodeCookFormula prefix stream, not an alternate formula representation;
---   * an executable list-free token/three-bit cursor is source-written above
---     those exact clause selectors; its final stream-bisimulation is NOT yet paid;
+--   * token and bit cursor bisimulations are source-written: streamedCookBit is
+--     extensionally the canonical binary code lookup on the literal global CNF;
+--   * GuardedCookStreamingBitExact specializes this to the exact answer-blind
+--     `(coded machine,input,T,index)` query, without full quotation materialisation;
 --   * all reads vary only index and run on that SAME target machine;
 --   * setup ; generator ; resume calls compose to literal exact target runs;
 --   * query chains, source-edge target segments and full virtual simulations
 --     derive exact target runs with additive clocks.
 --
 -- LIVE CONSTRUCTIVE WALL:
---   1. prove the pure stream bisimulation:
---        streamedCookBit ... i
---          = lookupBit i (encodeFormulaBits (cnfToCook globalCNF ...));
---   2. compile the proved streaming evaluator into one coded fixed target with
---      generator/candidate/opposite modes and prove its polynomial query clock;
+--   1. compile the proved streamed query evaluator into one coded fixed target
+--      containing generator/candidate/opposite modes;
+--   2. prove its polynomial query clock in canonical query-code length;
 --   3. replace/reset-style query invocation if necessary with an in-place call
 --      frame preserving candidate continuation and canonical index semantics;
 --   4. prove the virtual representation invariant: each source transition is
