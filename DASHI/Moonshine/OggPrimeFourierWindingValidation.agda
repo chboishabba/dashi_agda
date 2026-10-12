@@ -1,10 +1,11 @@
 module DASHI.Moonshine.OggPrimeFourierWindingValidation where
 
-open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer using (ℤ; +_)
+open import Data.Integer using (+_)
 
+import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Moonshine.OggPrimeFourierWindingExact as Winding
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 
 ------------------------------------------------------------------------
 -- Regression contract for the Ogg-prime Fourier-winding layer.
@@ -20,9 +21,9 @@ contrastIsCenteredAtZeroFrequency :
 contrastIsCenteredAtZeroFrequency = Winding.contrastCoefficientsSumZero
 
 positiveAndNegativeWindingAreConjugateOnC3 :
-  (p : Winding.Lane.MonsterPrimeLane) →
+  (p : Lane.MonsterPrimeLane) →
   Winding.negativeC3Phase p
-  ≡ Winding.Fourier.inversePhase (Winding.positiveC3Phase p)
+  ≡ Fourier.inversePhase (Winding.positiveC3Phase p)
 positiveAndNegativeWindingAreConjugateOnC3 =
   Winding.negativeWindingIsConjugation
 
