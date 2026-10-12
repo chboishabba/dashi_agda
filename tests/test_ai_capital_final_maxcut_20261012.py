@@ -21,8 +21,10 @@ def test_final_reconciliation_surface() -> None:
             "coreWeaveCapitalSpreadSignPaid",
             "coreWeaveReinvestmentCoveragePaid",
             "coreWeaveNamedPayerCapacityPaid",
+            "terminalPayerConsumerIndexingPaid",
             "terminalPayerStillPartial",
             "replacementObsolescenceStillPartial",
+            "policyCausalAdmissionStillPartial",
             "wholeComplexMarketDynamicsStillPartial",
             "globalOpenWeightTrajectoryStillOpen",
             "sameCapabilityScarcityRentStillOpen",
@@ -65,6 +67,18 @@ def test_new_scoped_owners_exist() -> None:
         "DASHI/Economics/AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact.agda",
         ["selectedNamedPayerCapacityIsPaid", "completeTerminalPayerProvenanceStillOpen"],
     )
+    require(
+        "DASHI/Economics/AITerminalPayerConsumerSufficiency20261012Exact.agda",
+        ["selectedMicrosoftCapacityConsumerPaid", "coreWeaveExhaustiveIndependenceConsumerOpen"],
+    )
+    require(
+        "DASHI/Economics/AIPolicyCausalAdmission20261012Exact.agda",
+        ["sameBasisBurdenMeasurementStillOpen", "reviewedCausalBridgeStillOpen"],
+    )
+    require(
+        "DASHI/Economics/AISameCapabilityScarcityRentAdmission20261012Exact.agda",
+        ["selectedPairCapabilityMatchedIsFalse", "matchedScarcityRentAdmissionStillOpen"],
+    )
 
 
 def test_rollup_wires_final_reconciliation() -> None:
@@ -76,6 +90,12 @@ def test_rollup_wires_final_reconciliation() -> None:
             "AIQualityNormalizedPriceSpread20261012Exact",
             "AITwoSidedConcentrationPropagation20261012Exact",
             "AICoreWeaveDebtCostBoundary20261012Exact",
+            "AICoreWeaveCapitalSpreadSign20261012Exact",
+            "AICoreWeaveCapitalReinvestmentCoverage20261012Exact",
+            "AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact",
+            "AITerminalPayerConsumerSufficiency20261012Exact",
+            "AIPolicyCausalAdmission20261012Exact",
+            "AISameCapabilityScarcityRentAdmission20261012Exact",
             "AIMaxCutReconciliation20261012FinalExact",
         ],
     )
