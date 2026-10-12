@@ -1,5 +1,5 @@
 {
-  "schema": "dashi.monster3b.atlas_compression_field_selector.v2",
+  "schema": "dashi.monster3b.atlas_compression_field_selector.v3",
   "date": "2026-10-12",
   "source_manifest": "data/atlas/monster3b_suz12_source_manifest_20261012.json",
   "inner_form": {
@@ -24,56 +24,62 @@
     "preferred_word_similitude_multiplier": 2,
     "preferred_word_stabilises_translation_lagrangian": false,
     "preferred_compression_matrix": [
-      [0, 0, 0, 2, 2, 2],
-      [2, 1, 0, 2, 0, 0],
-      [0, 2, 1, 0, 0, 2],
-      [1, 0, 1, 0, 2, 0],
-      [2, 0, 2, 2, 0, 1],
-      [0, 1, 1, 2, 0, 2]
+      [0,0,0,2,2,2], [2,1,0,2,0,0], [0,2,1,0,0,2],
+      [1,0,1,0,2,0], [2,0,2,2,0,1], [0,1,1,2,0,2]
     ],
-    "preferred_compression_polynomial_low_to_high": [2, 0, 1, 2, 2, 2, 1],
+    "preferred_compression_polynomial_low_to_high": [2,0,1,2,2,2,1],
     "preferred_compression_polynomial": "x^6 - x^5 - x^4 - x^3 + x^2 - 1",
     "preferred_compression_minimal_polynomial_degree": 6,
     "preferred_compression_polynomial_irreducible_over_GF3": true,
-    "cyclic_vector": [1, 0, 0, 0, 0, 0],
     "cyclic_span_rank": 6,
-    "swap01_witness": [1, 0, 0, 0, 0, 0],
-    "T_swap01_witness": [0, 1, 2, 0, 0, 1],
-    "swap01_T_witness": [2, 0, 0, 1, 2, 0],
     "breaks_swap01": true
+  },
+  "preferred_heisenberg_similitude_lift": {
+    "similitude_multiplier_mod3": 2,
+    "lift_rule": "(x,z) -> (g x, 2*z + q(x))",
+    "cocycle_defect_definition": "B(x,y)=c(gx,gy)-2*c(x,y)",
+    "cocycle_defect_matrix_symmetric": true,
+    "cocycle_defect_rank": 11,
+    "cocycle_defect_matrix": [
+      [2,0,2,2,1,0,2,1,1,2,2,0],
+      [0,1,2,1,2,1,2,1,2,2,0,2],
+      [2,2,1,2,2,0,2,1,0,1,0,1],
+      [2,1,2,0,0,1,0,0,0,1,2,0],
+      [1,2,2,0,1,2,1,0,0,1,1,0],
+      [0,1,0,1,2,0,0,2,1,2,1,1],
+      [2,2,2,0,1,0,1,0,2,1,0,2],
+      [1,1,1,0,0,2,0,1,1,2,0,0],
+      [1,2,0,0,0,1,2,1,1,2,2,2],
+      [2,2,1,1,1,2,1,2,2,0,0,0],
+      [2,0,0,2,1,1,0,0,2,0,1,1],
+      [0,2,1,0,0,1,2,0,2,0,1,1]
+    ],
+    "quadratic_correction": "q(x)=2*x^T*B*x over GF(3)",
+    "quadratic_correction_diagonal_coefficients": [1,2,2,0,2,0,1,2,1,0,2,2],
+    "cocycle_coboundary_identity_paid_by_symmetric_polarization": true,
+    "concrete_center_correction_runtime_paid": true,
+    "agda_kernel_concrete_lift_paid": false
   },
   "earlier_depth5_field_algebra_weld": {
     "source_word": "g2 g1 g2^-1 g1 g2^-1",
-    "compression_polynomial_low_to_high": [1, 0, 1, 2, 0, 2, 1],
-    "compression_polynomial": "x^6 - x^5 - x^3 + x^2 + 1",
+    "compression_polynomial_low_to_high": [1,0,1,2,0,2,1],
     "selected_GF729_generator": "beta = 1 - alpha",
     "beta_multiplicative_order": 364,
-    "explicit_selected_basis_intertwiner_paid": true,
-    "role": "pays field-algebra/presentation weld but not the full punctured multiplicative orbit"
+    "explicit_selected_basis_intertwiner_paid": true
   },
   "preferred_selected_GF729_weld": {
-    "selected_modulus_low_to_high": [1, 0, 0, 0, 1, 1, 1],
-    "selected_modulus": "f(alpha)=alpha^6+alpha^5+alpha^4+1",
-    "primitive_root_coordinates": [0, 2, 0, 1, 2, 0],
+    "selected_modulus_low_to_high": [1,0,0,0,1,1,1],
+    "primitive_root_coordinates": [0,2,0,1,2,0],
     "primitive_root_multiplicative_order": 728,
     "multiplication_by_root_matrix": [
-      [0, 0, 1, 1, 1, 2],
-      [2, 0, 0, 1, 1, 1],
-      [0, 2, 0, 0, 1, 1],
-      [1, 0, 2, 0, 0, 1],
-      [2, 1, 1, 0, 1, 2],
-      [0, 2, 2, 2, 1, 0]
+      [0,0,1,1,1,2], [2,0,0,1,1,1], [0,2,0,0,1,1],
+      [1,0,2,0,0,1], [2,1,1,0,1,2], [0,2,2,2,1,0]
     ],
     "compression_to_selected_basis_intertwiner_Q": [
-      [1, 1, 1, 0, 2, 0],
-      [0, 0, 1, 2, 0, 0],
-      [0, 1, 0, 2, 1, 1],
-      [0, 1, 1, 1, 2, 2],
-      [0, 0, 2, 2, 0, 0],
-      [0, 2, 1, 0, 1, 0]
+      [1,1,1,0,2,0], [0,0,1,2,0,0], [0,1,0,2,1,1],
+      [0,1,1,1,2,2], [0,0,2,2,0,0], [0,2,1,0,1,0]
     ],
     "intertwiner_determinant_mod3": 2,
-    "intertwiner_rank": 6,
     "intertwining_equation": "Q*T = M_gamma*Q",
     "intertwining_equation_verified": true,
     "selected_nonzero_field_orbit_size": 728,
@@ -83,8 +89,9 @@
   },
   "remaining_boundary": {
     "agda_kernel_matrix_intertwiner_proved": false,
+    "agda_kernel_concrete_heisenberg_lift_proved": false,
     "full_Monster_semantic_action_recognition_paid": false,
     "physical_Monster_3B_realization_paid": false,
-    "note": "The source-derived compression is explicitly conjugate to multiplication by a primitive element of the already-selected GF(729), so the selected punctured field action has one 728-orbit and trivial stabilizer. Remaining debt is kernelization and identification of the broader Monster semantic action, not field presentation or multiplicative orbit structure."
+    "note": "Field presentation, punctured multiplicative orbit/stabilizer, and the center-scaled Heisenberg correction are now exact finite runtime receipts. Remaining debt is kernelization and the broader Monster semantic-action realization."
   }
 }
