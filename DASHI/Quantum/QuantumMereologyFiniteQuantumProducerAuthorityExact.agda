@@ -21,12 +21,15 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 --   idempotent, pairwise-orthogonal, complete and diagonal spectral laws,
 -- * the pinned mathlib v4.28 finite Hermitian spectral theorem: orthonormal
 --   eigenbasis, real eigenvalues and unitary diagonalisation for every concrete
---   finite Hermitian complex matrix.
+--   finite Hermitian complex matrix,
+-- * a selected-CPO-indexed finite-Hermitian refinement: supplied orthonormal
+--   factor bases plus literal LinearMap.IsSymmetric witnesses compile to
+--   Hermitian matrices and their spectral bases.
 --
--- The remaining CPO seam is not finite spectral existence.  It is the
--- same-object bridge from the generic selected CPO factor linear map to a
--- concrete Hermitian matrix representative on which that spectral theorem is
--- applied.
+-- The remaining CPO seam is therefore not finite spectral existence or matrix
+-- representation algebra.  It is the construction/justification of that
+-- stronger typed symmetry refinement from the generic source-facing CPO
+-- admissibility package, whose Hermitian fields are intentionally opaque Props.
 --
 -- Agda records those as source-written/imported theorem authorities only until
 -- exact-head Lean kernel evidence is available.
@@ -124,6 +127,14 @@ record FiniteQuantumProducerStatus : Set where
     FiniteHermitianSpectralBasisSourceWrittenIsTrue :
       FiniteHermitianSpectralBasisSourceWritten ≡ true
 
+    TypedSelectedCPOFiniteHermitianRefinementSourceWritten : Bool
+    TypedSelectedCPOFiniteHermitianRefinementSourceWrittenIsTrue :
+      TypedSelectedCPOFiniteHermitianRefinementSourceWritten ≡ true
+
+    GenericCPOAdmissibilityCreatesTypedSymmetry : Bool
+    GenericCPOAdmissibilityCreatesTypedSymmetryIsFalse :
+      GenericCPOAdmissibilityCreatesTypedSymmetry ≡ false
+
     ArbitrarySelectedCPOEigenbasisPaid : Bool
     ArbitrarySelectedCPOEigenbasisPaidIsFalse :
       ArbitrarySelectedCPOEigenbasisPaid ≡ false
@@ -164,6 +175,10 @@ canonicalFiniteQuantumProducerStatus = record
   ; DiagonalSpectralProjectorLawSourceWrittenIsTrue = refl
   ; FiniteHermitianSpectralBasisSourceWritten = true
   ; FiniteHermitianSpectralBasisSourceWrittenIsTrue = refl
+  ; TypedSelectedCPOFiniteHermitianRefinementSourceWritten = true
+  ; TypedSelectedCPOFiniteHermitianRefinementSourceWrittenIsTrue = refl
+  ; GenericCPOAdmissibilityCreatesTypedSymmetry = false
+  ; GenericCPOAdmissibilityCreatesTypedSymmetryIsFalse = refl
   ; ArbitrarySelectedCPOEigenbasisPaid = false
   ; ArbitrarySelectedCPOEigenbasisPaidIsFalse = refl
   ; SameObjectCPOChartAttachmentAutomatic = false
@@ -198,14 +213,21 @@ leanStandardBasisProjectorSourceReceipt =
   Sources.attribution-receipt
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyStandardBasisProjector"
-    "Source-written finite coordinate rank-one projectors with Hermitian, idempotent, pairwise-orthogonal, complete and diagonal spectral laws, plus the pinned mathlib v4.28 finite-Hermitian orthonormal eigenbasis/unitary spectral theorem. The remaining selected-CPO obligation is the same-object bridge from the generic factor linear map to a concrete Hermitian matrix representative."
+    "Source-written finite coordinate rank-one projectors with Hermitian, idempotent, pairwise-orthogonal, complete and diagonal spectral laws, plus the pinned mathlib v4.28 finite-Hermitian orthonormal eigenbasis/unitary spectral theorem."
+
+leanFiniteHermitianCPORefinementSourceReceipt : Sources.AttributionReceipt
+leanFiniteHermitianCPORefinementSourceReceipt =
+  Sources.attribution-receipt
+    Sources.importedFormalTheoremSource
+    "DASHI Lean: RequestProject.QuantumMereologyFiniteHermitianCPO"
+    "Source-written same-selected-CPO refinement carrying orthonormal factor bases and literal LinearMap.IsSymmetric witnesses. Pinned mathlib LinearMap.isHermitian_toMatrix_iff compiles those factor maps to Hermitian matrices, after which the finite matrix spectral theorem supplies eigenbases. Generic source-facing Hermitian labels do not automatically create this stronger refinement."
 
 dashiFiniteQuantumProducerCrossProverReceipt : Sources.AttributionReceipt
 dashiFiniteQuantumProducerCrossProverReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Aggregates explicit Lean theorem-source authorities for the finite quantum producer. Coordinate projector algebra and finite Hermitian spectral existence are source-written; selected-CPO same-object matrix attachment, physical authority, and exact-head kernel certification remain separate."
+    "Aggregates explicit Lean theorem-source authorities for the finite quantum producer. Projector algebra, finite Hermitian spectral existence, and the typed selected-CPO symmetry-to-matrix compiler are source-written; generic-admissibility-to-typed-symmetry construction, physical authority, and exact-head kernel certification remain separate."
 
 leanHamiltonianExponentialSourceReceipt : Sources.AttributionReceipt
 leanHamiltonianExponentialSourceReceipt =
