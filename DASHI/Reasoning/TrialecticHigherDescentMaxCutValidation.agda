@@ -9,6 +9,7 @@ import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as Cont
 import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
 import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
 import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact as C3Repair
+import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact as Expansion
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Ledger
 
 setBoundary : Effective.TrialecticSetEffectiveDescentBoundary
@@ -28,6 +29,9 @@ c3NoGoBoundary = C3NoGo.canonicalTrialecticC3GlobalNaturalityNoGoBoundary
 
 c3RepairBoundary : C3Repair.TrialecticC3EdgeResidualRepairBoundary
 c3RepairBoundary = C3Repair.canonicalTrialecticC3EdgeResidualRepairBoundary
+
+expansionBoundary : Expansion.TrialecticCarryDepthExpansionPolicyBoundary
+expansionBoundary = Expansion.canonicalTrialecticCarryDepthExpansionPolicyBoundary
 
 refinementBoundary : Ledger.TrialecticHigherDescentRefinementBoundary
 refinementBoundary = Ledger.canonicalTrialecticHigherDescentRefinementBoundary
@@ -81,6 +85,18 @@ selectedT6ResidualRepairsRotatedEdge = refl
 fullOldT9RetentionNotRequiredForRotatedEdge :
   C3Repair.oldFullT9EdgeRequiredForRotatedEdgeConsumer c3RepairBoundary ≡ false
 fullOldT9RetentionNotRequiredForRotatedEdge = refl
+
+carryExpansionPolicyPaid :
+  Expansion.explicitExpansionPolicyConstructed expansionBoundary ≡ true
+carryExpansionPolicyPaid = refl
+
+carrySeedDoesNotSelectUniqueT18PlusFace :
+  Expansion.carrySeedUniquelyDeterminesNextStructuredState expansionBoundary ≡ false
+carrySeedDoesNotSelectUniqueT18PlusFace = refl
+
+allDepthCoherenceStillNotAutomatic :
+  Expansion.allDepthCoherenceAutomatic expansionBoundary ≡ false
+allDepthCoherenceStillNotAutomatic = refl
 
 transportEnrichedPresheafStillOpen :
   Ledger.transportEnrichedGroupoidPresheafReady refinementBoundary ≡ false
