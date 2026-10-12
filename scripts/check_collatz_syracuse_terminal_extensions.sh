@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+files=(
+  DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateExact.agda
+  DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateExact.agda
+  DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateValidation.agda
+  DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
+  DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
+  DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardValidation.agda
+  DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+)
+
+for file in "${files[@]}"; do
+  [[ -f "$file" ]]
+  ! grep -q 'postulate' "$file"
+  ! grep -q '{!!}' "$file"
+  ! grep -q 'OPTIONS --allow-unsolved-metas' "$file"
+  ! grep -Eq '= *\?' "$file"
+done
+
+grep -q 'appendZeroCertificate' DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateExact.agda
+grep -q 'appendZerosCertificate' DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateExact.agda
+grep -q 'trailingZeroCompilerCreatesUniversalStopping : Nat' DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateExact.agda
+grep -q 'globallyBoundedFrontierCannotCoverHighResidual' DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
+grep -q 'wordCertificateFrontierCannotBeGloballyBounded' DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
+grep -q 'finiteCoverageCreatesUnboundedness : Nat' DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
+grep -q 'trailingZeroCertificatePaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'residualFrontierStrictnessGuardPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'strictnessGuardDoesNotCreateUnboundedness' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+
+echo 'collatz syracuse terminal extension static checks: PASS'
