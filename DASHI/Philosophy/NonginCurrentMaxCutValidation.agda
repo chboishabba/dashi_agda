@@ -15,6 +15,14 @@ recursiveObserverReopeningPaid :
   Nongin.recursiveObserverReopeningPaid boundary ≡ true
 recursiveObserverReopeningPaid = refl
 
+recursiveObserverFibreTowerPaid :
+  Nongin.recursiveObserverFibreTowerPaid boundary ≡ true
+recursiveObserverFibreTowerPaid = refl
+
+observerStreamInverseLimitPaid :
+  Nongin.observerStreamInverseLimitPaid boundary ≡ true
+observerStreamInverseLimitPaid = refl
+
 localComplementFactorizationPaid :
   Nongin.localComplementFactorizationPaid boundary ≡ true
 localComplementFactorizationPaid = refl
@@ -45,6 +53,22 @@ siteTransportCoverageObstructionPaid = refl
 boundaryAnchoredFaceMediationPaid :
   Nongin.boundaryAnchoredFaceMediationPaid boundary ≡ true
 boundaryAnchoredFaceMediationPaid = refl
+
+contextIndexedFibrationBridgePaid :
+  Nongin.contextIndexedFibrationBridgePaid boundary ≡ true
+contextIndexedFibrationBridgePaid = refl
+
+fullSiteDiscreteGroupoidBaselinePaid :
+  Nongin.fullSiteDiscreteGroupoidBaselinePaid boundary ≡ true
+fullSiteDiscreteGroupoidBaselinePaid = refl
+
+c3ExternalVsSiteRestrictionSeparated :
+  Nongin.c3ExternalVsSiteRestrictionSeparated boundary ≡ true
+c3ExternalVsSiteRestrictionSeparated = refl
+
+transportEnrichedGroupoidPresheafStillFalse :
+  Nongin.transportEnrichedGroupoidPresheafPaid boundary ≡ false
+transportEnrichedGroupoidPresheafStillFalse = refl
 
 empiricalTenPercentLawStillFalse :
   Nongin.empiricalTenPercentLawPromoted boundary ≡ false
