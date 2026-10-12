@@ -5,23 +5,17 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ; _*_)
 
-import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 
 ------------------------------------------------------------------------
 -- VACUUM NORMALIZATION != GRAVITATIONAL VACUUM STRESS
 --
--- Even after the CMP119 vacuum/normalization coordinate has been reconstructed
--- from the complete normalized RG density, that scalar is not automatically a
--- physical cosmological source.  Gravity couples to the metric/volume response
--- of the RENORMALIZED effective action.  An additive normalization constant can
--- be shifted by a renormalization convention until a gravitational convention
--- fixes which same-state amplitude is carried into T_{mu nu} / Lambda.
---
--- This module therefore keeps the algebraic vacuum-stress ray from
--- GRQFTVacuumStressLambdaCompilerExact, but makes the physical promotion an
--- explicit same-object receipt.
+-- Recovering the CMP119 normalization/vacuum coordinate does not numerically
+-- identify it with a physical cosmological amplitude.  Physical promotion is a
+-- same-state theorem about the metric/volume response of the RENORMALIZED
+-- effective action plus a cosmological renormalization convention and the
+-- required normalization/unit calibration.
 ------------------------------------------------------------------------
 
 record VacuumNormalizationToGravityReceipt
@@ -30,9 +24,9 @@ record VacuumNormalizationToGravityReceipt
     renormalizedGravitationalAmplitude : ℚ
     physicalVacuumStress : Stress.RationalTensor4
 
-    -- Same-state/source identification, not a numerical coincidence.
-    sourceNormalizationSameObjectAsRenormalizedAmplitude :
-      sourceNormalization ≡ renormalizedGravitationalAmplitude
+    NormalizationToGravitySameObjectReceipt : Set
+    normalizationToGravitySameObjectReceipt :
+      NormalizationToGravitySameObjectReceipt
 
     -- The selected renormalized effective action really has the vacuum metric
     -- variation on the physical state/metric carrier.
@@ -64,10 +58,12 @@ record VacuumNormalizationGravityBoundary : Set where
   field
     normalizationConstantAloneDeterminesGravitationalStress : Bool
     sourceVacuumReadoutAloneDeterminesPhysicalLambda : Bool
+    sourceNormalizationNumericallyEqualsPhysicalLambdaByDefinition : Bool
     algebraicVacuumStressRayAlreadyOwned : Bool
     renormalizedEffectiveActionMetricResponseRequired : Bool
     gravitationalCosmologicalRenormalizationConditionRequired : Bool
     sameStateMetricVolumeReceiptRequired : Bool
+    normalizationToGravityCalibrationStillRequired : Bool
     differentialCommonCountertermCancellationStillValid : Bool
     absoluteNormalizationCanBeShiftedBeforeGravityConvention : Bool
 
@@ -75,7 +71,7 @@ canonicalVacuumNormalizationGravityBoundary :
   VacuumNormalizationGravityBoundary
 canonicalVacuumNormalizationGravityBoundary =
   vacuum-normalization-gravity-boundary
-    false false true true true true true true
+    false false false true true true true true true true
 
 normalizationConstantAloneDeterminesGravitationalStress : Bool
 normalizationConstantAloneDeterminesGravitationalStress = false
@@ -83,11 +79,17 @@ normalizationConstantAloneDeterminesGravitationalStress = false
 sourceVacuumReadoutAloneDeterminesPhysicalLambda : Bool
 sourceVacuumReadoutAloneDeterminesPhysicalLambda = false
 
+sourceNormalizationNumericallyEqualsPhysicalLambdaByDefinition : Bool
+sourceNormalizationNumericallyEqualsPhysicalLambdaByDefinition = false
+
 renormalizedEffectiveActionMetricResponseRequired : Bool
 renormalizedEffectiveActionMetricResponseRequired = true
 
 gravitationalCosmologicalRenormalizationConditionRequired : Bool
 gravitationalCosmologicalRenormalizationConditionRequired = true
+
+normalizationToGravityCalibrationStillRequired : Bool
+normalizationToGravityCalibrationStillRequired = true
 
 differentialCommonCountertermCancellationStillValid : Bool
 differentialCommonCountertermCancellationStillValid = true
