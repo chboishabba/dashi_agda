@@ -20,7 +20,9 @@ REQUIRED = {
     "DASHI/Physics/Optics/BerkeleyDiffuserCamDepthConditioningExact.agda": [
         "conditioningAuditScript",
         "conditioningSelfTestScript",
+        "claimScalePlannerScript",
         "offlineSyntheticOperatorSelfTestExecutable",
+        "claimScaleMemoryPlannerExecutable",
         "sourceOperatorSelectedGridColumnCompilerPaid",
         "depthOnlySameLateralAuditExecutable",
         "translatedColumnRestrictedAuditExecutable",
@@ -67,6 +69,7 @@ REQUIRED = {
         "publicBerkeleyCalibrationArtifactPinned",
         "publicBerkeleySourceOperatorPinned",
         "offlineSyntheticOperatorSelfTestExecutable",
+        "claimScaleMemoryPlannerExecutable",
         "sourceOperatorSelectedGridColumnCompilerPaid",
         "depthConditioningAuditExecutable",
         "translatedColumnRestrictedAuditExecutable",
@@ -129,6 +132,7 @@ def test_convrml_same_scene_parallel_comparator_is_pinned_but_photon_and_fzp_cla
 def test_acquisition_maxcut_keeps_only_numerical_physical_and_optional_fzp_leaves_open():
     text = (ROOT / "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda").read_text(encoding="utf-8")
     assert "offlineSyntheticOperatorSelfTestExecutable = true" in text
+    assert "claimScaleMemoryPlannerExecutable = true" in text
     assert "berkeleyNumericPSFArrayIngested = false" in text
     assert "depthOnlyNumericalReceiptCaptured = false" in text
     assert "translatedColumnNumericalReceiptCaptured = false" in text
