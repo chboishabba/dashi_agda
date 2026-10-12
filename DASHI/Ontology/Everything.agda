@@ -7,4 +7,6 @@ import DASHI.Ontology.WikidataWorkingGroupFullProvenanceEverything
 import DASHI.Ontology.DeweyQidCoverageQualityExact
 import DASHI.Ontology.EducationViaOntologyExact
 import DASHI.Ontology.EducationViaOntologyValidation
+import DASHI.Ontology.EducationOntologyMappingSSSOMExact
+import DASHI.Ontology.EducationOntologyMappingValidation
 import Ontology.Hecke.Everything
