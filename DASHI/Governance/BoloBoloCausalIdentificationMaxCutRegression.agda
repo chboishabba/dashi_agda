@@ -1,0 +1,33 @@
+module DASHI.Governance.BoloBoloCausalIdentificationMaxCutRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloCausalIdentificationMaxCutExact as Causal
+
+explicitEstimandRequired :
+  Causal.explicitTargetEstimandRequired Causal.canonicalBoloCausalIdentificationBoundary ≡ true
+explicitEstimandRequired = refl
+
+identificationGateRequired :
+  Causal.admissibleIdentificationGateRequired Causal.canonicalBoloCausalIdentificationBoundary ≡ true
+identificationGateRequired = refl
+
+pairedDesignAloneNotIdentification :
+  Causal.pairedExperimentDesignAloneIdentifiesEffect Causal.canonicalBoloCausalIdentificationBoundary ≡ false
+pairedDesignAloneNotIdentification = refl
+
+historicalComparatorAloneNotIdentification :
+  Causal.historicalComparatorEvidenceAloneIdentifiesTargetEffect Causal.canonicalBoloCausalIdentificationBoundary ≡ false
+historicalComparatorAloneNotIdentification = refl
+
+estimandAndIdentificationSeparate :
+  Causal.identificationDeterminesEstimand Causal.canonicalBoloCausalIdentificationBoundary ≡ false
+estimandAndIdentificationSeparate = refl
+
+causalTargetStillUnpaid :
+  Causal.targetCausalEffectIdentified Causal.canonicalBoloCausalIdentificationBoundary ≡ false
+causalTargetStillUnpaid = refl
+
+longitudinalOrderAloneNotCausal :
+  Causal.longitudinalOrderAloneIdentifiesCause Causal.canonicalBoloCausalIdentificationBoundary ≡ false
+longitudinalOrderAloneNotCausal = refl
