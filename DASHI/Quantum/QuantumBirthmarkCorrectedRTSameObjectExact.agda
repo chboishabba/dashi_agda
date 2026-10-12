@@ -8,23 +8,31 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- CORRECTED SAME-OBJECT FINITE RT RECEIPT
 --
--- Native producer:
+-- Native producers:
 --   chboishabba/dashi_lean4
 --   Synthesis/HolographicMaxEntangledCutRT.lean
+--   Synthesis/HolographicZModCarrierFactorization.lean
+--   Synthesis/HolographicCorrectedZModRT.lean
+--   Synthesis/HolographicUnbalancedCorrectedRT.lean
+--   Synthesis/HolographicUpstreamStateContractNoGo.lean
 --
--- The producer constructs the corrected finite cut model on one object:
+-- The finite entropy theorem is closed on a corrected coherent Schmidt state:
+-- partial trace gives the uniform reduced density matrix and entropy k log 2.
+-- The binary upstream carrier itself is now factored exactly as
 --
---   rho_AB[(i,a),(j,b)] = 2^{-k} when i=a and j=b, else 0,
+--   ZMod(2^(k+r))  <->  Fin(2^k) x Fin(2^r),
 --
--- i.e. the standard maximally-entangled Schmidt density kernel.  Unlike the
--- inspected upstream diagonal `holographicContract`, this kernel retains the
--- off-diagonal coherences |i,i><j,j| required of the pure Schmidt state.
--- Tracing the B factor yields the uniform diagonal reduced state on A, and its
--- spectral entropy is exactly k log 2.  The geometric cut entropy is also
--- k log 2, so the finite corrected same-object entropy equality is closed.
+-- and corrected entangled kernels are pulled back onto that ZMod carrier.
+-- For r >= k, the larger-complement construction still reduces exactly to the
+-- uniform 2^-k state and hence k log 2 entropy.
 --
--- This is not yet a theorem identifying the upstream ZMod subtree/state with
--- this corrected carrier, nor a physical AdS/CFT or continuum-gravity theorem.
+-- Crucially, direct source inspection plus a native Lean depth-one no-go now
+-- proves that the CURRENT upstream `holographicState` and `holographicContract`
+-- cannot be the same state/density matrix: the pure-state off-diagonal
+-- coherence is positive while the named contract is diagonal.  Therefore the
+-- live source task is not to search for a proof of current state identity; the
+-- upstream state/contract/tree-contraction construction must be replaced or
+-- proved equivalent to a corrected coherent state.
 ------------------------------------------------------------------------
 
 leanProducerRepository : String
@@ -49,10 +57,15 @@ record CorrectedRTFiniteReceipt : Set where
     correctedRTSameObjectEntropy : Bool
     sameObjectEntropyAlgebraClosed : Bool
 
+    upstreamZModCarrierFactorizationSourceWritten : Bool
+    correctedEntangledStateOnUpstreamCarrierSourceWritten : Bool
+    correctedUnbalancedRTForAdequateComplementSourceWritten : Bool
+
 canonicalCorrectedRTFiniteReceipt : CorrectedRTFiniteReceipt
 canonicalCorrectedRTFiniteReceipt =
   correctedRTFiniteReceipt
     true true true true true true true true true
+    true true true
 
 ------------------------------------------------------------------------
 -- Remaining same-object and physical promotions.
@@ -64,7 +77,15 @@ record CorrectedRTAuthorityBoundary : Set where
     nativeLeanProducerPresent : Bool
     nativeLeanKernelReceiptAttachedHere : Bool
 
+    upstreamStateContractSameObjectImpossibleAsWritten : Bool
+    upstreamDefinitionReplacementRequired : Bool
+    upstreamTreeContractionReplacementOrEquivalenceStillRequired : Bool
+
+    -- Legacy broad flag retained for older consumers.  It now means the
+    -- corrected state must be established as the replacement/equivalent output,
+    -- not that equality with the current incompatible definitions is expected.
     upstreamStateIdentificationStillRequired : Bool
+
     minimalCutCarrierIdentificationStillRequired : Bool
     upstreamTensorNetworkDynamicsIdentificationStillRequired : Bool
     physicalBulkBoundaryDictionaryStillRequired : Bool
@@ -79,6 +100,9 @@ canonicalCorrectedRTAuthorityBoundary =
   correctedRTAuthorityBoundary
     true
     false
+    true
+    true
+    true
     true
     true
     true
@@ -103,6 +127,24 @@ reducedEntropy_eq_kLogTwo = true
 correctedRTSameObjectEntropy : Bool
 correctedRTSameObjectEntropy = true
 
+upstreamZModCarrierFactorizationSourceWritten : Bool
+upstreamZModCarrierFactorizationSourceWritten = true
+
+correctedEntangledStateOnUpstreamCarrierSourceWritten : Bool
+correctedEntangledStateOnUpstreamCarrierSourceWritten = true
+
+correctedUnbalancedRTForAdequateComplementSourceWritten : Bool
+correctedUnbalancedRTForAdequateComplementSourceWritten = true
+
+upstreamStateContractSameObjectImpossibleAsWritten : Bool
+upstreamStateContractSameObjectImpossibleAsWritten = true
+
+upstreamDefinitionReplacementRequired : Bool
+upstreamDefinitionReplacementRequired = true
+
+upstreamTreeContractionReplacementOrEquivalenceStillRequired : Bool
+upstreamTreeContractionReplacementOrEquivalenceStillRequired = true
+
 upstreamStateIdentificationStillRequired : Bool
 upstreamStateIdentificationStillRequired = true
 
@@ -119,6 +161,9 @@ correctedSameObjectEntropyClosed :
   correctedRTSameObjectEntropy ≡ true
 correctedSameObjectEntropyClosed = refl
 
+-- Legacy theorem name retained for downstream imports.  The live statement is
+-- now replacement/equivalence of the upstream state production, not carrier
+-- cardinality/factorisation.
 upstreamCarrierWeldRemainsLive :
   upstreamStateIdentificationStillRequired ≡ true
 upstreamCarrierWeldRemainsLive = refl
