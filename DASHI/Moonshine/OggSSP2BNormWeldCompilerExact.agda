@@ -10,16 +10,31 @@ module DASHI.Moonshine.OggSSP2BNormWeldCompilerExact where
 --   plus oscillator Sym2(24)                300
 --   final Tate / exterior-square quotient   276.
 --
--- Lean proves the rank squeeze generically.  Once runtime support separation
--- is paid, the residual norm projection has rank 24 and the complementary
--- kernel has dimension 98280.  The independent Hom screen then makes every
--- nonzero Co1-equivariant 24 -> Sym2(24) map the Frobenius-square embedding.
+-- The finite/runtime side now pays:
+--   * common/residual modular support separation;
+--   * one unique residual degree-24 simple;
+--   * dim Hom_Co1(24,Sym2(24)) = 1;
+--   * the explicit Frobenius rank-24 map spans that Hom line.
 --
--- Therefore the residual 24 map is not an independent same-object theorem.
--- After those finite/runtime facts are ingested, the literal vertical weld has
--- one genuine map-level producer left: identify the actual norm map on the
--- common 98280 extension lane.  The final quotient-isomorphism theorem is kept
--- separate until that same-object common-lane map is actually supplied.
+-- Lean sharpens the same-object theorem as follows.  Write the actual
+-- source-native norm map in canonical target block coordinates
+--
+--   n = (c,r) : M_98304 -> C_98280 x S_300.
+--
+-- It is enough to produce the canonical rank-24 source residual block
+-- projector e24 and prove the actual block-equivariance equation
+--
+--   r o e24 = r.
+--
+-- Then rank(r)<=24.  Norm injectivity embeds ker(r) through c into C_98280;
+-- rank-nullity has no slack, so rank(r)=24 and dim ker(r)=98280.  Thus the
+-- common 98280 lane is an automatic same-object equivalence rather than a
+-- separate map-discovery gate.  The induced nonzero equivariant map on the
+-- residual 24 quotient is then forced onto the already-paid Frobenius Hom line.
+--
+-- Hence the preferred terminal gate is ONE actual residual-block/equivariance
+-- receipt.  A legacy common-98280 receipt is retained below only as an audit
+-- compatibility surface; it is not the shortest proof path.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -52,8 +67,8 @@ exteriorSquareDimension = symmetricSquareDimension - frobeniusImageDimension
 exteriorSquareDimensionIs276 : exteriorSquareDimension ≡ 276
 exteriorSquareDimensionIs276 = refl
 
--- Proof-relevant finite/runtime promotion.  Generated runtime receipts or
--- kernel theorems must inhabit these coordinates; Boolean flags are not enough.
+-- Proof-relevant finite/runtime facts.  These are not substitutes for the
+-- actual norm-map equation.
 record FiniteNormRigidityReceipt : Set₁ where
   constructor finite-norm-rigidity-receipt
   field
@@ -61,13 +76,24 @@ record FiniteNormRigidityReceipt : Set₁ where
     supportSeparationPaid : SupportSeparationPaid
     UniqueNonzeroFrobeniusHomPaid : Set
     uniqueNonzeroFrobeniusHomPaid : UniqueNonzeroFrobeniusHomPaid
-    ResidualMapFrobeniusWitness : Set
-    residualMapFrobeniusWitness : ResidualMapFrobeniusWitness
 
 open FiniteNormRigidityReceipt public
 
--- The one same-object producer intentionally left uninhabited by finite
--- character/module calculations.
+-- Preferred one-piece same-object producer.
+record ResidualBlockNormSameObjectReceipt : Set₁ where
+  constructor residual-block-norm-same-object-receipt
+  field
+    ActualResidualBlockProjector : Set
+    actualResidualBlockProjector : ActualResidualBlockProjector
+    ResidualNormBlockEquivariance : Set
+    residualNormBlockEquivariance : ResidualNormBlockEquivariance
+    InducedResidualCo1Equivariance : Set
+    inducedResidualCo1Equivariance : InducedResidualCo1Equivariance
+
+open ResidualBlockNormSameObjectReceipt public
+
+-- Legacy audit surface.  Lean proves this common-lane datum follows from the
+-- preferred residual-block receipt and source-native norm injectivity.
 record Common98280NormSameObjectReceipt : Set₁ where
   constructor common-98280-norm-same-object-receipt
   field
@@ -76,10 +102,6 @@ record Common98280NormSameObjectReceipt : Set₁ where
 
 open Common98280NormSameObjectReceipt public
 
--- After finite rigidity is paid, this compiler exposes the exact two inputs to
--- the terminal quotient theorem: the actual common-lane identification and the
--- already-forced residual Frobenius map.  It deliberately does NOT claim that
--- the quotient is wedge2(24) until a separate quotient theorem consumes them.
 record NormWeldInputs : Set₁ where
   constructor norm-weld-inputs
   field
@@ -88,39 +110,63 @@ record NormWeldInputs : Set₁ where
     ResidualFrobeniusIdentification : Set
     residualFrobeniusIdentification : ResidualFrobeniusIdentification
 
-assembleNormWeldInputs :
-  FiniteNormRigidityReceipt →
-  Common98280NormSameObjectReceipt →
+-- Proof-bearing implementation of Lean's support-squeeze + Hom-line chain.
+-- Agda keeps the internal linear-algebra implementation abstract and requires
+-- the compiler itself to be inhabited rather than replacing it by booleans.
+record ResidualBlockNormWeldCompiler : Set₁ where
+  constructor residual-block-norm-weld-compiler
+  field
+    compile :
+      FiniteNormRigidityReceipt ->
+      ResidualBlockNormSameObjectReceipt ->
+      NormWeldInputs
+
+open ResidualBlockNormWeldCompiler public
+
+-- Legacy assembler retained for audit compatibility only.
+record LegacyFiniteNormRigidityReceipt : Set₁ where
+  constructor legacy-finite-norm-rigidity-receipt
+  field
+    LegacyResidualMapFrobeniusWitness : Set
+    legacyResidualMapFrobeniusWitness : LegacyResidualMapFrobeniusWitness
+
+assembleLegacyNormWeldInputs :
+  LegacyFiniteNormRigidityReceipt ->
+  Common98280NormSameObjectReceipt ->
   NormWeldInputs
-assembleNormWeldInputs finite common =
+assembleLegacyNormWeldInputs finite common =
   norm-weld-inputs
     (ActualCommonNormMapIdentification common)
     (actualCommonNormMapIdentification common)
-    (ResidualMapFrobeniusWitness finite)
-    (residualMapFrobeniusWitness finite)
+    (LegacyResidualMapFrobeniusWitness finite)
+    (legacyResidualMapFrobeniusWitness finite)
 
-residualMapForcedFrobenius :
-  (finite : FiniteNormRigidityReceipt) →
-  ResidualMapFrobeniusWitness finite
-residualMapForcedFrobenius = residualMapFrobeniusWitness
-
--- This is the desired terminal theorem name, but its proof remains explicitly
--- gated by a proof-relevant quotient-identification compiler rather than being
--- manufactured from dimension arithmetic.
 record ExteriorSquareQuotientCompiler : Set₁ where
   constructor exterior-square-quotient-compiler
   field
-    compile : NormWeldInputs → Set
+    compile : NormWeldInputs -> Set
 
-tateCokernelForcedExteriorSquare :
-  ExteriorSquareQuotientCompiler →
-  FiniteNormRigidityReceipt →
-  Common98280NormSameObjectReceipt →
+-- Preferred terminal theorem: no independent common-98280 receipt appears.
+tateCokernelForcedExteriorSquareFromResidualBlock :
+  ExteriorSquareQuotientCompiler ->
+  ResidualBlockNormWeldCompiler ->
+  FiniteNormRigidityReceipt ->
+  ResidualBlockNormSameObjectReceipt ->
   Set
-tateCokernelForcedExteriorSquare quotientCompiler finite common =
+tateCokernelForcedExteriorSquareFromResidualBlock quotientCompiler normCompiler finite residual =
   ExteriorSquareQuotientCompiler.compile quotientCompiler
-    (assembleNormWeldInputs finite common)
+    (ResidualBlockNormWeldCompiler.compile normCompiler finite residual)
 
-onlyCommon98280MapRemains :
-  Common98280NormSameObjectReceipt → Common98280NormSameObjectReceipt
-onlyCommon98280MapRemains common = common
+-- Legacy theorem retained for historical comparison only.
+tateCokernelForcedExteriorSquareLegacy :
+  ExteriorSquareQuotientCompiler ->
+  LegacyFiniteNormRigidityReceipt ->
+  Common98280NormSameObjectReceipt ->
+  Set
+tateCokernelForcedExteriorSquareLegacy quotientCompiler finite common =
+  ExteriorSquareQuotientCompiler.compile quotientCompiler
+    (assembleLegacyNormWeldInputs finite common)
+
+onlyResidualBlockMapRemains :
+  ResidualBlockNormSameObjectReceipt -> ResidualBlockNormSameObjectReceipt
+onlyResidualBlockMapRemains residual = residual
