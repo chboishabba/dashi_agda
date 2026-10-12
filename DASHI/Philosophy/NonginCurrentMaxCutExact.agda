@@ -19,6 +19,7 @@ import DASHI.Reasoning.Trialectic369CechModelSameObjectCapstoneExact as Cech
 import DASHI.Reasoning.Trialectic369FullBoundaryNerveComparisonExact as FullNerve
 import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as SetEffective
 import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as SiteTransport
+import DASHI.Reasoning.TrialecticGrothendieckBoundaryAnchoredMediationExact as Anchored
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Higher
 
 originBoundary : Origin.NonginSourceBoundary
@@ -44,6 +45,9 @@ setEffectiveBoundary = SetEffective.canonicalTrialecticSetEffectiveDescentBounda
 
 siteTransportBoundary : SiteTransport.TrialecticRelationalSiteTransportEnrichmentBoundary
 siteTransportBoundary = SiteTransport.canonicalTrialecticRelationalSiteTransportEnrichmentBoundary
+
+anchoredMediationBoundary : Anchored.TrialecticGrothendieckBoundaryAnchoredMediationBoundary
+anchoredMediationBoundary = Anchored.canonicalTrialecticGrothendieckBoundaryAnchoredMediationBoundary
 
 higherBoundary : Higher.TrialecticHigherDescentPromotionBoundary
 higherBoundary = Higher.canonicalTrialecticHigherDescentPromotionBoundary
@@ -100,6 +104,10 @@ siteTransportCoverageObstructionPaid :
   SiteTransport.newGlobalVertexFiberMorphismsRequired siteTransportBoundary ≡ true
 siteTransportCoverageObstructionPaid = refl
 
+boundaryAnchoredFaceMediationPaid :
+  Anchored.strongSecondOrderAdapterConstructed anchoredMediationBoundary ≡ true
+boundaryAnchoredFaceMediationPaid = refl
+
 higherStackNotYetPaid :
   Higher.effectiveStackReady higherBoundary ≡ false
 higherStackNotYetPaid = refl
@@ -123,6 +131,7 @@ record NonginCurrentMaxCutBoundary : Set where
     setLevelEffectiveDescentPaid : Bool
     observationalGlobalUniquenessPaid : Bool
     siteTransportCoverageObstructionPaid : Bool
+    boundaryAnchoredFaceMediationPaid : Bool
     empiricalTenPercentLawPromoted : Bool
     universalRicherRepresentationAdvantagePromoted : Bool
     fullBoundaryNerveEquivalencePaid : Bool
@@ -148,6 +157,7 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; setLevelEffectiveDescentPaid = true
   ; observationalGlobalUniquenessPaid = true
   ; siteTransportCoverageObstructionPaid = true
+  ; boundaryAnchoredFaceMediationPaid = true
   ; empiricalTenPercentLawPromoted = false
   ; universalRicherRepresentationAdvantagePromoted = false
   ; fullBoundaryNerveEquivalencePaid = false
