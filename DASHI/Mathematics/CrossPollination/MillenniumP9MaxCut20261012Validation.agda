@@ -97,7 +97,12 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralResourceCompilerAnch
 
 import DASHI.Mathematics.Complexity.VirtualFormulaBitSourceExact
 import DASHI.Mathematics.Complexity.VirtualFormulaQueryTraceExact
+import DASHI.Mathematics.Complexity.CanonicalVirtualFormulaBitSourceExact
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact
+import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact
+import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact
+import DASHI.Mathematics.Complexity.CanonicalGuardedCookVirtualSourceExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedStandardOppositeExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 
 ------------------------------------------------------------------------
@@ -127,16 +132,28 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 -- Candidates failing an anchor already carry an explicit SATDecisionFailure.
 -- Thus no anchored candidate can inhabit the former literal resource compiler.
 --
--- ACTIVE FRONTIER: VIRTUAL / STREAMING QUOTATION.
---   1. ONE universal finite `GuardedCookBitQuery` generator, on canonical
---      answer-blind machine/input/T/index code, computing a requested bit of the
---      ACTUAL guarded Cook formula with an exact polynomial query clock;
---   2. ONE compact base query for the fixed target; all reads are `withIndex`
---      of that same description, so machine/input/T never vary with the answer;
---   3. stepwise finite target simulation of the candidate's actual own-formula
---      run, exposing and charging every virtual bit query inside target time;
---   4. finite setup + opposite suffix + exact total target clock, followed by
---      the already-paid Cook iff / SATDecisionFailure plumbing.
+-- ACTIVE FRONTIER: SAME-TARGET VIRTUAL / STREAMING QUOTATION.
+--   * semantic indexed lookup is canonical and exact; no virtual oracle witness;
+--   * machine/input/T are separated from index by GuardedCookFormulaDescription;
+--   * the fixed opposite target is itself low-universe CodedFiniteStandardTM;
+--   * its decoded presentation and guarded Cook query description are the same
+--     object by construction, not an assumed reverse coding theorem;
+--   * all reads vary only index and are generated on that SAME target machine;
+--   * setup ; generator ; resume calls compose to literal exact target runs;
+--   * query chains, source-edge target segments and full virtual simulations
+--     therefore derive exact target runs with additive clocks.
+--
+-- LIVE CONSTRUCTIVE WALL:
+--   1. construct one coded fixed target containing generator/candidate/opposite
+--      modes and prove UniversalGuardedCookBitGenerator for canonical query code;
+--   2. compile an indexed bit of the structured global Cook--Levin CNF/Cook tree
+--      without first materialising the complete quotation;
+--   3. prove the virtual representation invariant: each source transition is
+--      reproduced by the target core, with generator calls exactly where source
+--      input symbols are demanded;
+--   4. close the resulting total target clock to the SAME T occurring in the
+--      target's own guarded Cook formula;
+--   5. reuse already-paid Cook iff / opposite-decision SATFailure plumbing.
 --
 -- Ordinary polynomial-map/precomposition/verifier/certificate closure and the
 -- established NP background must still be supplied for the SAME coded cost
