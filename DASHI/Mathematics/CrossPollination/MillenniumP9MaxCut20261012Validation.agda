@@ -103,6 +103,10 @@ import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact
 import DASHI.Mathematics.Complexity.CanonicalGuardedCookVirtualSourceExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedStandardOppositeExact
+import DASHI.Mathematics.Complexity.CNFStreamingClauseLookupExact
+import DASHI.Mathematics.Complexity.CNFStreamingSeekExact
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseExact
+import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 
 ------------------------------------------------------------------------
@@ -138,22 +142,30 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 --   * the fixed opposite target is itself low-universe CodedFiniteStandardTM;
 --   * its decoded presentation and guarded Cook query description are the same
 --     object by construction, not an assumed reverse coding theorem;
---   * all reads vary only index and are generated on that SAME target machine;
+--   * actual global Cook--Levin clause selection streams transition -> initial ->
+--     accepting with residual indices and no precomputed section lengths;
+--   * transition selection streams `(time,column)` placed predicates and local
+--     truth-table assignments; it constructs only the selected forbid-clause;
+--   * direct CNF -> Cook prefix tokens are exactly the existing cnfToCook +
+--     encodeCookFormula prefix stream, not an alternate formula representation;
+--   * all reads vary only index and run on that SAME target machine;
 --   * setup ; generator ; resume calls compose to literal exact target runs;
 --   * query chains, source-edge target segments and full virtual simulations
---     therefore derive exact target runs with additive clocks.
+--     derive exact target runs with additive clocks.
 --
 -- LIVE CONSTRUCTIVE WALL:
---   1. construct one coded fixed target containing generator/candidate/opposite
---      modes and prove UniversalGuardedCookBitGenerator for canonical query code;
---   2. compile an indexed bit of the structured global Cook--Levin CNF/Cook tree
---      without first materialising the complete quotation;
---   3. prove the virtual representation invariant: each source transition is
---      reproduced by the target core, with generator calls exactly where source
---      input symbols are demanded;
---   4. close the resulting total target clock to the SAME T occurring in the
---      target's own guarded Cook formula;
---   5. reuse already-paid Cook iff / opposite-decision SATFailure plumbing.
+--   1. finish bit-level streaming over the exact CNF prefix-token grammar
+--      (three bits/token) and prove equality to encodeFormulaBits without first
+--      constructing the full token stream;
+--   2. compile that streaming evaluator into one coded fixed target containing
+--      generator/candidate/opposite modes and prove its polynomial query clock;
+--   3. replace/reset-style query invocation if necessary with an in-place call
+--      frame that preserves the candidate continuation while exposing the same
+--      canonical description/index semantics;
+--   4. prove the virtual representation invariant: each source transition is
+--      reproduced by target core execution with exact query calls at input reads;
+--   5. close total target time to the SAME T in its own guarded Cook formula and
+--      reuse already-paid Cook iff / opposite-decision SATFailure plumbing.
 --
 -- Ordinary polynomial-map/precomposition/verifier/certificate closure and the
 -- established NP background must still be supplied for the SAME coded cost
