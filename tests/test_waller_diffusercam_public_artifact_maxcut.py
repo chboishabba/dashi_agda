@@ -51,11 +51,25 @@ def test_conditioning_owner_keeps_executable_depth_audit_separate_from_numeric_r
     assert "translatedColumnRestrictedAuditPaid = false" in text
 
 
-def test_optics_rollup_and_acquisition_maxcut_include_conditioning_tranche_without_duplicate_source_owners():
+def test_convrml_parallel_comparator_pays_same_scene_three_system_geometry_not_photon_matching_or_fzp():
+    p = ROOT / "DASHI/Physics/Optics/BerkeleyConvRMLParallelComparatorExact.agda"
+    text = p.read_text()
+    assert "10.1364/OE.608614" in text
+    assert "2602.04834" in text
+    assert "0a895cb372a3c7090904027ed7c82fc0a74133c5" in text
+    assert "parallelLensDiffuserRMLAcquisitionPaid = true" in text
+    assert "sameSceneParallelAcquisitionPaid = true" in text
+    assert "hundredThousandMeasurementsPerSystem = true" in text
+    assert "matchedPhotonAcrossSystemsPaid = false" in text
+    assert "fresnelZonePlateArmPaid = false" in text
+
+
+def test_optics_rollup_and_acquisition_maxcut_include_conditioning_and_convrml_without_duplicate_source_owners():
     rollup = (ROOT / "DASHI/Physics/Optics/Everything.agda").read_text()
     assert "BerkeleyDiffuserCamPublicCalibrationExact" in rollup
     assert "BerkeleyDiffuserCamSourceOperatorExact" in rollup
     assert "BerkeleyDiffuserCamDepthConditioningExact" in rollup
+    assert "BerkeleyConvRMLParallelComparatorExact" in rollup
     assert "WallerDiffuserCamPublicArtifactExact" not in rollup
     assert "WallerDiffuserCamCodeForwardExact" not in rollup
 
@@ -63,6 +77,8 @@ def test_optics_rollup_and_acquisition_maxcut_include_conditioning_tranche_witho
     assert "publicBerkeleyCalibrationArtifactPinned = true" in maxcut
     assert "publicBerkeleySourceOperatorPinned = true" in maxcut
     assert "depthConditioningAuditExecutable = true" in maxcut
+    assert "parallelLensDiffuserRMLAcquisitionPinned = true" in maxcut
     assert "berkeleyNumericPSFArrayIngested = false" in maxcut
     assert "sameHRestrictedConditionNumberMeasured = false" in maxcut
+    assert "matchedPhotonAcrossParallelSystems = false" in maxcut
     assert "focusedLensDiffuserFZPMatchedPhotonReceipt = false" in maxcut
