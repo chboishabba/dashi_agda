@@ -10,26 +10,29 @@ module DASHI.Moonshine.OggSSP2BCo1FrobeniusHomRigidityExact where
 --   dim 98304       dim 98580.
 --
 -- The ordinary branching and characteristic-two Co1 tests isolate the
--- candidate residual lane
+-- residual lane
 --
---   24  ---->  300 = Sym^2(24),
+--   24  ---->  300 = Sym^2(24).
 --
--- where the explicit Frobenius-square map x |-> x^2 has image dimension 24
--- and cokernel wedge^2(24) of dimension 276.
+-- The executed runtime certificate now pays
 --
--- The accompanying GAP screen computes
---   Hom_Co1(24, Sym^2(24)).
--- If that Hom space is one-dimensional, then over F2 there is a unique nonzero
--- Co1-equivariant 24 -> 300 map, necessarily the explicit Frobenius-square
--- embedding.  In that case the 24-dimensional part of the vertical weld is
--- rigid and the only remaining map-level seam is the common 98280 lane.
+--   dim Hom_Co1(24,Sym^2(24)) = 1,
 --
--- This owner is fail-closed until the runtime screen is executed and ingested.
+-- and verifies that the explicit Frobenius-square map has rank 24 and spans
+-- that unique nonzero equivariant Hom line.  Therefore there is no remaining
+-- finite representation-theoretic ambiguity on the residual map.
+--
+-- The remaining same-object statement is narrower: after the actual residual
+-- quotient is obtained from the source-native norm/block projector, prove that
+-- its induced map is Co1-equivariant.  Then uniqueness forces that map onto the
+-- already-paid Frobenius line.  The common 98280 lane is no longer an
+-- independent gate: Lean's support squeeze derives it from the residual block
+-- projector and norm injectivity.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _-_)
+open import Agda.Builtin.Nat using (Nat; _-_)
 
 naturalDimension : Nat
 naturalDimension = 24
@@ -61,25 +64,38 @@ record FrobeniusHomRigidityBoundary : Set where
     homUniquenessScreenImplemented : Bool
     homUniquenessRuntimePaid : Bool
     residual24LaneRigid : Bool
-    common98280MapIdentified : Bool
+    inducedActualResidualEquivariancePaid : Bool
+    common98280NoLongerIndependentGate : Bool
     actualTateExteriorSquareWeldPaid : Bool
 
 canonicalFrobeniusHomRigidityBoundary : FrobeniusHomRigidityBoundary
 canonicalFrobeniusHomRigidityBoundary =
   frobenius-hom-rigidity-boundary
-    true true false false false false
+    true true true true false true false
 
-homUniquenessRuntimeStillOpen :
+homUniquenessRuntimeIsPaid :
   FrobeniusHomRigidityBoundary.homUniquenessRuntimePaid
     canonicalFrobeniusHomRigidityBoundary
-  ≡ false
-homUniquenessRuntimeStillOpen = refl
+  ≡ true
+homUniquenessRuntimeIsPaid = refl
 
-common98280MapStillOpen :
-  FrobeniusHomRigidityBoundary.common98280MapIdentified
+residual24LaneIsRigid :
+  FrobeniusHomRigidityBoundary.residual24LaneRigid
+    canonicalFrobeniusHomRigidityBoundary
+  ≡ true
+residual24LaneIsRigid = refl
+
+inducedActualResidualEquivarianceStillOpen :
+  FrobeniusHomRigidityBoundary.inducedActualResidualEquivariancePaid
     canonicalFrobeniusHomRigidityBoundary
   ≡ false
-common98280MapStillOpen = refl
+inducedActualResidualEquivarianceStillOpen = refl
+
+common98280MapNoLongerIndependentGate :
+  FrobeniusHomRigidityBoundary.common98280NoLongerIndependentGate
+    canonicalFrobeniusHomRigidityBoundary
+  ≡ true
+common98280MapNoLongerIndependentGate = refl
 
 actualTateExteriorSquareWeldStillOpen :
   FrobeniusHomRigidityBoundary.actualTateExteriorSquareWeldPaid
