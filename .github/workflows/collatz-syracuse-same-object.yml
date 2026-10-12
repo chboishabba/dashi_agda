@@ -51,6 +51,8 @@ jobs:
         run: python3 scripts/check_collatz_syracuse_early_cylinders.py
       - name: Python generic word-certificate calibration
         run: python3 scripts/check_collatz_syracuse_word_certificates.py
+      - name: Python trailing-zero certificate calibration
+        run: python3 scripts/check_collatz_syracuse_trailing_zero.py
       - name: Static literal Syracuse audit
         run: bash scripts/check_collatz_syracuse_exact.sh
       - name: Typecheck exact affine terminal equivalence
@@ -83,10 +85,18 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateExact.agda
       - name: Typecheck uniform word descent certificate validation
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseUniformWordDescentCertificateValidation.agda
+      - name: Typecheck trailing-zero certificate compiler
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateExact.agda
+      - name: Typecheck trailing-zero certificate validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTrailingZeroCertificateValidation.agda
       - name: Typecheck residual word-certificate frontier
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
       - name: Typecheck residual word-certificate frontier validation
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierValidation.agda
+      - name: Typecheck residual frontier strictness guard
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
+      - name: Typecheck residual frontier strictness validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardValidation.agda
       - name: Typecheck terminal parity max-cut
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
       - name: Typecheck terminal parity max-cut validation
