@@ -15,7 +15,11 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install numerical dependencies
-        run: python -m pip install --disable-pip-version-check numpy scipy
+        run: python -m pip install --disable-pip-version-check numpy scipy pytest
+      - name: Run offline source-H numerical self-test
+        run: |
+          python scripts/check_waller_diffusercam_conditioning_selftest.py
+          python -m pytest -q tests/test_waller_diffusercam_conditioning_numeric.py
       - name: Run pinned public-PSF audit
         run: python scripts/check_waller_diffusercam_conditioning.py --json-out waller_diffusercam_conditioning.json
       - uses: actions/upload-artifact@v4
