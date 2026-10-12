@@ -8,6 +8,8 @@ import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact
 import DASHI.Foundations.E6F3ExteriorSquareRecognitionValidation
 import DASHI.Foundations.E6F3GeneratedGroupClosureExact
 import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
+import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelReceiptExact
+import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelValidation
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
@@ -66,10 +68,20 @@ import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 
--- External Monster-3B realization lane: certified source module plus exact
--- repository-side symplectic/Heisenberg intertwiner compiler.
+-- Monster-3B realization lane.  The certified source matrices are vendored,
+-- the preferred primitive X6 compression is welded to the selected GF(729)
+-- action, companion Lean source-writes the literal 6x6 same-action/primitive
+-- receipts, and the selected source word has an exact center-correction receipt
+-- for the repository Heisenberg cocycle.  Full normalizer/Monster semantics
+-- remain attribution-separated.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
+import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
+import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact
+import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact
+import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptValidation
+import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptExact
+import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
