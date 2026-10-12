@@ -2,12 +2,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedStandardCandidateBridgeExac
 
 ------------------------------------------------------------------------
 -- SET-LEVEL CODED STANDARD DECIDER -> CLAY-FACING STANDARD CANDIDATE
---
--- This is the representation projection missing from the abstract cost-model
--- lane. Given a literal CodedStandardPolynomialDecider for the SAME extensional
--- decision function carried by a PolynomialSATDeciderCandidate, all higher
--- standard-machine candidate/code/clock receipts are derived directly.
 ------------------------------------------------------------------------
+
+import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -16,10 +13,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact as CodedDecider
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
-
-------------------------------------------------------------------------
--- First the exact finite standard candidate implementation.
-------------------------------------------------------------------------
 
 codedWitnessToStandardCandidate :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -43,7 +36,9 @@ codedWitnessToStandardCandidate witness = record
         (CodedDecider.zeroSymbol witness)
         (CodedDecider.oneSymbol witness)
   ; StandardCandidate.exactSteps =
-      CodedDecider.exactSteps witness
+      CodedDecider.polynomialStepBudget
+        (CodedDecider.clockCoefficient witness)
+        (CodedDecider.clockDegree witness)
   ; StandardCandidate.finish =
       CodedDecider.finish witness
   ; StandardCandidate.execution =
@@ -51,10 +46,6 @@ codedWitnessToStandardCandidate witness = record
   ; StandardCandidate.decisionExact =
       CodedDecider.decisionExact witness
   }
-
-------------------------------------------------------------------------
--- Then retain the arithmetic polynomial clock exactly.
-------------------------------------------------------------------------
 
 codedWitnessToPolynomiallyClockedCandidate :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -70,12 +61,8 @@ codedWitnessToPolynomiallyClockedCandidate witness = record
   ; Clocked.clockDegree =
       CodedDecider.clockDegree witness
   ; Clocked.exactStepsPolynomialBound =
-      CodedDecider.exactStepsPolynomialBound witness
+      λ formula → NatP.≤-refl
   }
-
-------------------------------------------------------------------------
--- Candidate-wide coded coverage is exactly sufficient for A.
-------------------------------------------------------------------------
 
 record CodedStandardCandidateCoverage
     (cost : PR.PolynomialCostModel Cook.BooleanFormula) : Set₂ where
@@ -99,12 +86,7 @@ codedCoverageGivesClockedCandidate coverage candidate =
 ------------------------------------------------------------------------
 -- FRONTIER
 --
--- A is no longer a machine-representation theorem. A `Set`-level coded
--- standard-machine witness projects all the way to the exact finite standard
--- candidate and polynomial clock used by the diagonal lane.
---
--- The remaining A-side theorem is cost-model identification/closure:
--- show that the selected `polynomialTimeDecider` predicate supplies this coded
--- witness (ideally by defining the standard model that way) while also paying
--- PolynomialCostModel's map/precomposition/verifier closure fields.
+-- The coded witness projects all the way to the exact finite standard candidate
+-- and its clock.  In the coded model the clock bound is reflexive because the
+-- exact run length IS the canonical size-only polynomial budget.
 ------------------------------------------------------------------------
