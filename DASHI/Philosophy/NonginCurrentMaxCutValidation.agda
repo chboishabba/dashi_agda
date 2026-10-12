@@ -22,13 +22,33 @@ localComplementFactorizationPaid = refl
 selectedCornerStarPaid : Nongin.selectedCornerStarPaid boundary ≡ true
 selectedCornerStarPaid = refl
 
+fullBoundaryNerveObstructionPaid :
+  Nongin.fullBoundaryNerveObstructionPaid boundary ≡ true
+fullBoundaryNerveObstructionPaid = refl
+
+selectedProperBoundaryComparisonPaid :
+  Nongin.selectedProperBoundaryComparisonPaid boundary ≡ true
+selectedProperBoundaryComparisonPaid = refl
+
+setLevelEffectiveDescentPaid :
+  Nongin.setLevelEffectiveDescentPaid boundary ≡ true
+setLevelEffectiveDescentPaid = refl
+
+observationalGlobalUniquenessPaid :
+  Nongin.observationalGlobalUniquenessPaid boundary ≡ true
+observationalGlobalUniquenessPaid = refl
+
+siteTransportCoverageObstructionPaid :
+  Nongin.siteTransportCoverageObstructionPaid boundary ≡ true
+siteTransportCoverageObstructionPaid = refl
+
 empiricalTenPercentLawStillFalse :
   Nongin.empiricalTenPercentLawPromoted boundary ≡ false
 empiricalTenPercentLawStillFalse = refl
 
-fullBoundaryNerveStillOpen :
+fullBoundaryNerveStillFalse :
   Nongin.fullBoundaryNerveEquivalencePaid boundary ≡ false
-fullBoundaryNerveStillOpen = refl
+fullBoundaryNerveStillFalse = refl
 
 higherStackStillOpen : Nongin.certifiedHigherStackPaid boundary ≡ false
 higherStackStillOpen = refl
