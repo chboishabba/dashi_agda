@@ -27,6 +27,8 @@ def test_terminal_payer_consumer_sufficiency_surface() -> None:
         "DASHI/Economics/AITerminalPayerConsumerSufficiency20261012Exact.agda",
         [
             "selectedMicrosoftCapacityConsumerPaid",
+            "selectedMetaCapacityConsumerPaid",
+            "selectedOpenAICashConsumerOpen",
             "coreWeaveExhaustiveIndependenceConsumerOpen",
             "selectedPayerCapacityDoesNotCreateExhaustiveIndependence",
             "consumerRelativeTerminalBoundary",
