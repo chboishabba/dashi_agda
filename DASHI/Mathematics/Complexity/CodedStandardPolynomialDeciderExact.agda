@@ -12,8 +12,8 @@ module DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact where
 --
 --   T(phi) = c * (1 + formulaBitCodeLength(phi))^d.
 --
--- The two input bit symbols are distinct and the symbol-list length is proved
--- exactly equal to formulaBitCodeLength.
+-- The two input bit symbols are distinct from each other AND from blank, and
+-- the symbol-list length is proved exactly equal to formulaBitCodeLength.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -88,6 +88,8 @@ record CodedStandardPolynomialDecider
     zeroSymbol : Fin.Fin (Coded.symbolCount code)
     oneSymbol : Fin.Fin (Coded.symbolCount code)
     binarySymbolsDistinct : zeroSymbol ≡ oneSymbol → ⊥
+    zeroSymbolNotBlank : zeroSymbol ≡ Coded.blank code → ⊥
+    oneSymbolNotBlank : oneSymbol ≡ Coded.blank code → ⊥
 
     clockCoefficient : Nat
     clockDegree : Nat
@@ -123,6 +125,7 @@ record CodedStandardPolynomialDeciderBoundary : Set where
   field
     finiteProgramCodeInSet : Bool
     faithfulBinaryInputSymbols : Bool
+    binarySymbolsSeparatedFromBlank : Bool
     literalInputLengthCharged : Bool
     canonicalSizeOnlyPolynomialClock : Bool
     exactStandardRunCarried : Bool
@@ -135,12 +138,12 @@ canonicalCodedStandardPolynomialDeciderBoundary :
   CodedStandardPolynomialDeciderBoundary
 canonicalCodedStandardPolynomialDeciderBoundary =
   coded-standard-polynomial-decider-boundary
-    true true true true true true false false false
+    true true true true true true true false false false
 
 ------------------------------------------------------------------------
 -- FRONTIER
 --
 -- `polynomialTimeDecider = CodedStandardPolynomialDecider` is a machine-bearing
--- Set-level predicate with faithful canonical input and a clock polynomial in
--- the exact literal input length. No hidden extensional timing oracle remains.
+-- Set-level predicate with faithful nonblank binary input and a clock polynomial
+-- in the exact literal input length. No hidden extensional timing oracle remains.
 ------------------------------------------------------------------------
