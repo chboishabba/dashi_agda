@@ -112,7 +112,7 @@ staticRouteNeedsPositivePromotedVacuumSign =
   SignCut.staticRouteNeedsPositivePromotedVacuumSign
 
 differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal : Bool
- differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal =
+differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal =
   SignCut.differentialRouteNeedsNonzeroSourceDifferenceForNonzeroSignal
 
 record AntigravitySingleVacuumPromotionBoundary : Set where
