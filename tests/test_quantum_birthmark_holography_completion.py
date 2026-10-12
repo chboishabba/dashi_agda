@@ -17,10 +17,15 @@ def test_holographic_same_object_owner_names_exact_upstream_gap():
     assert "areaLawDoesNotComputeVonNeumannEntropyOfContract" in p
 
 
-def test_area_bound_is_reused_as_actual_uv_finiteness_theorem():
+def test_area_capacity_reuses_all_existing_holography_owners():
     p = text("DASHI/Quantum/QuantumBirthmarkHolographicCapacityExact.agda")
     assert "UVFinitenessTheorem" in p
     assert "areaBoundImpliesUVFinite" in p
+    assert "DASHI.Physics.Holography.AreaLaw" in p
+    assert "UVFinitenessHolographyInstance" in p
+    assert "areaLawUV" in p
+    assert "AgreementDepth-theorem" in p
+    assert "agreementDepthDoesNotWeldAreaBoundToUVBounded" in p
     assert "areaCapacityDoesNotDetermineBirthmarkValue" in p
     assert "areaCapacityDoesNotDetermineResidualInformationDensity" in p
 
