@@ -34,6 +34,9 @@ originBoundary = Origin.canonicalNonginSourceBoundary
 advantageBoundary : Advantage.NonginConsumerRelativeFrameAdvantageBoundary
 advantageBoundary = Advantage.canonicalNonginConsumerRelativeFrameAdvantageBoundary
 
+leastObserverBoundary : Advantage.NonginLeastSufficientObserverBoundary
+leastObserverBoundary = Advantage.canonicalNonginLeastSufficientObserverBoundary
+
 towerBoundary : Tower.NonginRecursiveObserverDepthTowerBoundary
 towerBoundary = Tower.canonicalNonginRecursiveObserverDepthTowerBoundary
 
@@ -86,6 +89,14 @@ consumerRelativeTheoremPaid = refl
 consumerRecoveryTheoremPaid :
   Advantage.exactConsumerRecoveryPaid advantageBoundary ≡ true
 consumerRecoveryTheoremPaid = refl
+
+leastSufficientHiddenOtherReceipt :
+  Advantage.hiddenOtherConsumerIsLeastSufficient leastObserverBoundary ≡ true
+leastSufficientHiddenOtherReceipt = refl
+
+everyAdequateObserverRefinesHiddenOtherReceipt :
+  Advantage.everyAdequateObserverRefinesHiddenOther leastObserverBoundary ≡ true
+everyAdequateObserverRefinesHiddenOtherReceipt = refl
 
 recursiveDepthPresheafPaid :
   Tower.depthPresheafPaid towerBoundary ≡ true
@@ -202,6 +213,8 @@ record NonginCurrentMaxCutBoundary : Set where
     historicalOriginFormalized : Bool
     consumerRelativeCorePaid : Bool
     exactConsumerRecoveryPaid : Bool
+    leastSufficientHiddenOtherObserverPaid : Bool
+    everyAdequateObserverRefinesHiddenOtherPaid : Bool
     recursiveObserverReopeningPaid : Bool
     recursiveObserverFibreTowerPaid : Bool
     observerStreamInverseLimitPaid : Bool
@@ -241,6 +254,8 @@ canonicalNonginCurrentMaxCutBoundary = record
   { historicalOriginFormalized = true
   ; consumerRelativeCorePaid = true
   ; exactConsumerRecoveryPaid = true
+  ; leastSufficientHiddenOtherObserverPaid = true
+  ; everyAdequateObserverRefinesHiddenOtherPaid = true
   ; recursiveObserverReopeningPaid = true
   ; recursiveObserverFibreTowerPaid = true
   ; observerStreamInverseLimitPaid = true
