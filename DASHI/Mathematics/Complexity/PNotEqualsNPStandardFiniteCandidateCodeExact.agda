@@ -12,8 +12,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact
 -- Therefore candidate coverage should be stated on the conventional finite
 -- standard machine, not by requiring a total successor on malformed concrete
 -- rows.  This owner binds one PolynomialSATDeciderCandidate to that finite
--- program, its guarded input encoder, exact clocked standard execution and
--- literal final-control decision bit.
+-- program, its genuine finite-enumeration coverage, guarded input encoder,
+-- exact clocked standard execution and literal final-control decision bit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
@@ -75,6 +75,17 @@ record StandardFiniteCandidateCode
   field
     presentation : Presented.FinitePresentedStandardTM
 
+    -- FiniteEnumeration.complete is intentionally weaker than actual list
+    -- membership in this repository.  Static bit quotation needs these exact
+    -- genuine-coverage witnesses.
+    stateCoverage :
+      Canonical.EnumerationCoverage
+        (Presented.finiteState presentation)
+
+    symbolCoverage :
+      Canonical.EnumerationCoverage
+        (Presented.finiteSymbol presentation)
+
     encodeFormula :
       Cook.BooleanFormula →
       Input.InputWord
@@ -123,8 +134,7 @@ candidateStateCoverage :
   Canonical.EnumerationCoverage
     (Local.finiteState (candidateConcreteMachine standard))
 candidateStateCoverage standard =
-  Canonical.coverageFromFiniteEnumeration
-    (Presented.finiteState (presentation standard))
+  stateCoverage standard
 
 candidateSymbolCoverage :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -133,8 +143,7 @@ candidateSymbolCoverage :
   Canonical.EnumerationCoverage
     (Local.finiteSymbol (candidateConcreteMachine standard))
 candidateSymbolCoverage standard =
-  Canonical.coverageFromFiniteEnumeration
-    (Presented.finiteSymbol (presentation standard))
+  symbolCoverage standard
 
 ------------------------------------------------------------------------
 -- Literal candidate code = fixed-width static bits of the SAME rule table.
