@@ -6,8 +6,11 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_local_execution_receipts_are_pinned_and_non_promoting():
     owner = ROOT / "DASHI/Physics/Optics/DiffuserCamLocalExecutionReceiptExact.agda"
     text = owner.read_text(encoding="utf-8")
-    assert "d7fa1547fadc1b052cb0e7dfe73fd94b6c2801579d225ba184b55290a8b8582c" in text
-    assert "a6b0557ac982e0b29c5411623ce49e22d9372ae2043ca6b80fab06ccd092ce19" in text
+    assert "128d24378b12a055282ffccb813744e626b846e1" in text
+    assert "52cecec7a7b61fc5577129e9b704ee53482f2c82" in text
+    assert "gershgorinSupportsChecked = 22218" in text
+    assert "gershgorinBoundViolations = 0" in text
+    assert "exhaustiveFiniteSupportReceiptCaptured = true" in text
     assert "syntheticOperatorReceiptCaptured = true" in text
     assert "claimScalePlannerReceiptCaptured = true" in text
     assert "realBerkeleyPSFReceiptCaptured = false" in text
