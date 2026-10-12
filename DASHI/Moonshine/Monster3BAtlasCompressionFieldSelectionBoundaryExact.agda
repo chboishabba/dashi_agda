@@ -1,29 +1,42 @@
 module DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact where
 
 ------------------------------------------------------------------------
--- MONSTER-3B ATLAS SYMPLECTIC COMPRESSION FIELD-SELECTION MAX-CUT
+-- MONSTER-3B ATLAS COMPRESSION FIELD-SELECTION MAX-CUT
 --
--- The direct 12-dimensional GF(3) 2.Suz:2 module is absolutely irreducible,
--- so the full normalizer does not preserve the repository translation half X6.
--- That fact blocks a GLOBAL X6 submodule interpretation, but it does not block
--- field-selection by a source-derived compression.
+-- The absolutely irreducible 12-dimensional GF(3) 2.Suz:2 source does not
+-- preserve the repository translation half X6 globally.  The correct source
+-- observable is therefore the canonical compression
 --
--- Once the ATLAS action is welded to the repository polarization
+--     A_g = pi_X o g o iota_X : X6 -> X6
 --
---     Symplectic12 = X6 + X6*,
+-- after the same-basis 12-dimensional weld.
 --
--- every same-basis linear source action g has the canonical translation block
+-- The exact ATLAS bytes are now acquired.  The inner 2.Suz pair determines a
+-- unique nondegenerate alternating form; the direct outer generator has
+-- multiplier 2=-1, while the second outer generator equals the inner second
+-- generator.  Searching the concrete outer source action through depth five
+-- finds a source word
 --
---     A_g = pi_X o g o iota_X : X6 -> X6.
+--     g2 g1 g2^-1 g1 g2^-1
 --
--- A_g is linear even when g mixes X6 and X6*.  Therefore requiring the source
--- word to stabilise X6 is unnecessary for the downstream K6 field-selector
--- experiment.  Stabilising words remain a stronger special case.
+-- whose X6 compression has irreducible degree-six polynomial
+--
+--     x^6 - x^5 - x^3 + x^2 + 1,
+--
+-- cyclic rank six from e0, and breaks the repository swap01 symmetry.  It does
+-- not stabilise X6, which is precisely why the compression recut is stronger
+-- than the obsolete stabilizer-only search.
+--
+-- PR #1105 independently welds this polynomial to its already-selected GF729
+-- model by beta=1-alpha and an explicit invertible 6x6 conjugacy.  That pays a
+-- finite field-presentation same-object weld, not the entire Monster
+-- multiplicative action/orbit/stabilizer semantics and not an Agda matrix proof.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
@@ -45,6 +58,18 @@ compressionPreservesAdd action x y
   rewrite Atlas.additive action (embedTranslation x) (embedTranslation y)
   = refl
 
+selectedSourceWord : String
+selectedSourceWord = "g2 g1 g2^-1 g1 g2^-1"
+
+selectedSourceWordLength : Nat
+selectedSourceWordLength = 5
+
+selectedCompressionPolynomial : String
+selectedCompressionPolynomial = "x^6 - x^5 - x^3 + x^2 + 1"
+
+selectedGF729GeneratorChange : String
+selectedGF729GeneratorChange = "beta = 1 - alpha"
+
 record CompressionPolynomialReceipt : Set where
   constructor compression-polynomial-receipt
   field
@@ -52,35 +77,51 @@ record CompressionPolynomialReceipt : Set where
     characteristicPolynomialComputed : Bool
     minimalPolynomialComputed : Bool
     degreeSixIrreducible : Bool
+    cyclicRankSix : Bool
     breaksRepositorySwap01 : Bool
+    stabilisesTranslationLagrangian : Bool
     fieldGeneratorCandidate : Bool
 open CompressionPolynomialReceipt public
+
+canonicalCompressionPolynomialReceipt : CompressionPolynomialReceipt
+canonicalCompressionPolynomialReceipt =
+  compression-polynomial-receipt 5 true true true true true false true
 
 record CompressionFieldSelectionBoundary : Set where
   constructor compression-field-selection-boundary
   field
     certifiedSymplecticTwelveSourceLocated : Bool
     concreteSourceMatricesImported : Bool
-    sameBasisSymplecticWeldPaid : Bool
+    innerAlternatingFormRuntimePaid : Bool
+    outerSimilitudeMultiplierRuntimePaid : Bool
+    sameBasisSymplecticWeldRuntimePaid : Bool
+    sameBasisSymplecticWeldKernelPaid : Bool
     everySameBasisActionHasCanonicalX6Compression : Bool
     compressionAdditivityPaidGenerically : Bool
     sourceWordMustStabiliseChosenX6 : Bool
-    stabilizerSearchStillUsefulAsSpecialCase : Bool
     allWordCompressionPolynomialSearchInstalled : Bool
     actualDegreeSixCompressionCandidateFound : Bool
-    downstreamGF729SameObjectRecognitionPaid : Bool
+    actualCyclicRankSixPaid : Bool
+    actualSwapBreakingPaid : Bool
+    selectedGF729PresentationWeldRuntimePaid : Bool
+    fullMonsterActionOrbitStabilizerRecognitionPaid : Bool
 open CompressionFieldSelectionBoundary public
 
 canonicalCompressionFieldSelectionBoundary : CompressionFieldSelectionBoundary
 canonicalCompressionFieldSelectionBoundary =
   compression-field-selection-boundary
     true
-    false
-    false
+    true
+    true
     true
     true
     false
     true
     true
     false
+    true
+    true
+    true
+    true
+    true
     false
