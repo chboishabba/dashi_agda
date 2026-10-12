@@ -20,7 +20,7 @@ module DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Foundations.RadixValuationStageBridge as Radix
@@ -28,10 +28,6 @@ import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SignedBran
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
-
-------------------------------------------------------------------------
--- 1. Replay contract constants.
-------------------------------------------------------------------------
 
 replayZeroCount : Nat
 replayZeroCount = 849
@@ -50,109 +46,70 @@ open ReplayedFigureRow public
 
 p2Replay : ReplayedFigureRow
 p2Replay = replayed-figure-row Gym.p2Exponent1 271 270
-
 p3Replay : ReplayedFigureRow
 p3Replay = replayed-figure-row Gym.p3Exponent1 644 581
-
 p5Replay : ReplayedFigureRow
 p5Replay = replayed-figure-row Gym.p5Exponent1 1571 820
-
 p7Replay : ReplayedFigureRow
 p7Replay = replayed-figure-row Gym.p7Exponent1 2660 845
-
 p11Replay : ReplayedFigureRow
 p11Replay = replayed-figure-row Gym.p11Exponent1 5151 849
-
 p2SquaredReplay : ReplayedFigureRow
 p2SquaredReplay = replayed-figure-row Gym.p2Exponent2 542 513
-
 p3SquaredReplay : ReplayedFigureRow
 p3SquaredReplay = replayed-figure-row Gym.p3Exponent2 1931 841
-
 p2CubedReplay : ReplayedFigureRow
 p2CubedReplay = replayed-figure-row Gym.p2Exponent3 1083 773
-
 p13Replay : ReplayedFigureRow
 p13Replay = replayed-figure-row Gym.p13Exponent1 6511 849
-
 p71Replay : ReplayedFigureRow
 p71Replay = replayed-figure-row Gym.p71Exponent1 59099 849
 
-------------------------------------------------------------------------
--- 2. Exact agreement with all supplied integer rows.
-------------------------------------------------------------------------
-
 p2ReplayHolesExact : replayedHoles p2Replay ≡ Figure.holes Figure.p2Exponent1Row
 p2ReplayHolesExact = refl
-
 p2ReplayMutualExact : replayedMutualPairs p2Replay ≡ Figure.mutualPairs Figure.p2Exponent1Row
 p2ReplayMutualExact = refl
-
 p3ReplayHolesExact : replayedHoles p3Replay ≡ Figure.holes Figure.p3Exponent1Row
 p3ReplayHolesExact = refl
-
 p3ReplayMutualExact : replayedMutualPairs p3Replay ≡ Figure.mutualPairs Figure.p3Exponent1Row
 p3ReplayMutualExact = refl
-
 p5ReplayHolesExact : replayedHoles p5Replay ≡ Figure.holes Figure.p5Exponent1Row
 p5ReplayHolesExact = refl
-
 p5ReplayMutualExact : replayedMutualPairs p5Replay ≡ Figure.mutualPairs Figure.p5Exponent1Row
 p5ReplayMutualExact = refl
-
 p7ReplayHolesExact : replayedHoles p7Replay ≡ Figure.holes Figure.p7Exponent1Row
 p7ReplayHolesExact = refl
-
 p7ReplayMutualExact : replayedMutualPairs p7Replay ≡ Figure.mutualPairs Figure.p7Exponent1Row
 p7ReplayMutualExact = refl
-
 p11ReplayHolesExact : replayedHoles p11Replay ≡ Figure.holes Figure.p11Exponent1Row
 p11ReplayHolesExact = refl
-
 p11ReplayMutualExact : replayedMutualPairs p11Replay ≡ Figure.mutualPairs Figure.p11Exponent1Row
 p11ReplayMutualExact = refl
-
 p2SquaredReplayHolesExact : replayedHoles p2SquaredReplay ≡ Figure.holes Figure.p2Exponent2Row
 p2SquaredReplayHolesExact = refl
-
 p2SquaredReplayMutualExact : replayedMutualPairs p2SquaredReplay ≡ Figure.mutualPairs Figure.p2Exponent2Row
 p2SquaredReplayMutualExact = refl
-
 p3SquaredReplayHolesExact : replayedHoles p3SquaredReplay ≡ Figure.holes Figure.p3Exponent2Row
 p3SquaredReplayHolesExact = refl
-
 p3SquaredReplayMutualExact : replayedMutualPairs p3SquaredReplay ≡ Figure.mutualPairs Figure.p3Exponent2Row
 p3SquaredReplayMutualExact = refl
-
 p2CubedReplayHolesExact : replayedHoles p2CubedReplay ≡ Figure.holes Figure.p2Exponent3Row
 p2CubedReplayHolesExact = refl
-
 p2CubedReplayMutualExact : replayedMutualPairs p2CubedReplay ≡ Figure.mutualPairs Figure.p2Exponent3Row
 p2CubedReplayMutualExact = refl
-
 p13ReplayHolesExact : replayedHoles p13Replay ≡ Figure.holes Figure.p13Exponent1Row
 p13ReplayHolesExact = refl
-
 p13ReplayMutualExact : replayedMutualPairs p13Replay ≡ Figure.mutualPairs Figure.p13Exponent1Row
 p13ReplayMutualExact = refl
-
 p71ReplayHolesExact : replayedHoles p71Replay ≡ Figure.holes Figure.p71Exponent1Row
 p71ReplayHolesExact = refl
-
 p71ReplayMutualExact : replayedMutualPairs p71Replay ≡ Figure.mutualPairs Figure.p71Exponent1Row
 p71ReplayMutualExact = refl
-
 p71ReplaySaturates : replayedMutualPairs p71Replay ≡ replayZeroCount
 p71ReplaySaturates = refl
 
 ------------------------------------------------------------------------
--- 3. The current empirical statistic is unsigned.
---
--- Two root states can have the same Ogg prime observation while carrying
--- opposite signed SSP orientation.  Consequently no decoder using only the
--- prime-only unsigned observation can recover signed orientation for all root
--- states.  This is the precise empirical obligation if signed FRACTRAN is to
--- become predictive rather than merely structural.
+-- Unsigned-observation obstruction.
 ------------------------------------------------------------------------
 
 negativeP2Root : Gym.SignedRadixWallState 0
@@ -202,7 +159,7 @@ noPrimeOnlyOrientationDecoder : PrimeOnlyOrientationDecoder → ⊥
 noPrimeOnlyOrientationDecoder decoder =
   inverseOrientationNotForward
     (trans
-      negativeRootOrientationInverse
+      (sym negativeRootOrientationInverse)
       (trans
         (sym (recoversOrientation decoder negativeP2Root))
         (trans
@@ -210,10 +167,6 @@ noPrimeOnlyOrientationDecoder decoder =
           (trans
             (recoversOrientation decoder positiveP2Root)
             positiveRootOrientationForward))))
-
-------------------------------------------------------------------------
--- 4. Claim boundary.
-------------------------------------------------------------------------
 
 record ClimbingGymReplayBoundary : Set where
   constructor climbing-gym-replay-boundary
