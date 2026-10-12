@@ -2,14 +2,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingBudgetNecessityEx
 
 ------------------------------------------------------------------------
 -- NECESSARY NUMERICAL CONDITIONS FOR RESOURCE-CLOSING SELF-QUOTATION
---
--- A ResourceClosingFixedProgramCompilation decomposes the exact Cook budget:
---
---   T = prefix + candidate(ownCookFormula) + suffix.
---
--- Therefore the candidate's exact execution on the self-generated Cook formula
--- must itself fit inside T.  This is a necessary condition on any proposed
--- diagonal constructor; it does not assert that such a constructor exists.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; _+_)
@@ -42,7 +34,7 @@ candidateOwnStepsFitCookBudget :
     (resource : Resource.ResourceClosingFixedProgramCompilation clocked) →
   candidateOwnSteps resource
   ≤ Opposite.steps (Resource.fixed resource)
-candidateOwnStepsFitCookBudget {clocked = clocked} resource =
+candidateOwnStepsFitCookBudget resource =
   subst
     (λ total → candidateOwnSteps resource ≤ total)
     (Resource.totalStepsExact resource)
@@ -52,21 +44,11 @@ candidateOwnStepsFitCookBudget {clocked = clocked} resource =
     middle = candidateOwnSteps resource
     suffix = Resource.suffixSteps resource
 
-    middleBelowPrefixMiddle : middle ≤ prefix + middle
-    middleBelowPrefixMiddle =
-      NatP.m≤n+m middle prefix
-
-    prefixMiddleBelowTotal :
-      prefix + middle ≤ (prefix + middle) + suffix
-    prefixMiddleBelowTotal =
-      NatP.m≤m+n (prefix + middle) suffix
-
-    beforeTransport :
-      middle ≤ (prefix + middle) + suffix
+    beforeTransport : middle ≤ (prefix + middle) + suffix
     beforeTransport =
       NatP.≤-trans
-        middleBelowPrefixMiddle
-        prefixMiddleBelowTotal
+        (NatP.m≤n+m middle prefix)
+        (NatP.m≤m+n (prefix + middle) suffix)
 
 prefixFitsCookBudget :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
@@ -75,23 +57,45 @@ prefixFitsCookBudget :
     (resource : Resource.ResourceClosingFixedProgramCompilation clocked) →
   Resource.prefixSteps resource
   ≤ Opposite.steps (Resource.fixed resource)
-prefixFitsCookBudget {clocked = clocked} resource =
+prefixFitsCookBudget resource =
   subst
     (λ total → Resource.prefixSteps resource ≤ total)
     (Resource.totalStepsExact resource)
-    (NatP.m≤m+n
-      (Resource.prefixSteps resource)
-      (candidateOwnSteps resource + Resource.suffixSteps resource))
+    beforeTransport
+  where
+    prefix = Resource.prefixSteps resource
+    middle = candidateOwnSteps resource
+    suffix = Resource.suffixSteps resource
+
+    beforeTransport : prefix ≤ (prefix + middle) + suffix
+    beforeTransport =
+      NatP.≤-trans
+        (NatP.m≤m+n prefix middle)
+        (NatP.m≤m+n (prefix + middle) suffix)
+
+suffixFitsCookBudget :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {clocked : Clocked.PolynomiallyClockedStandardCandidate candidate}
+    (resource : Resource.ResourceClosingFixedProgramCompilation clocked) →
+  Resource.suffixSteps resource
+  ≤ Opposite.steps (Resource.fixed resource)
+suffixFitsCookBudget resource =
+  subst
+    (λ total → Resource.suffixSteps resource ≤ total)
+    (Resource.totalStepsExact resource)
+    (NatP.m≤n+m
+      (Resource.suffixSteps resource)
+      (Resource.prefixSteps resource + candidateOwnSteps resource))
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
--- Any successful self-quotation construction must satisfy
+-- Every phase must fit the same exact Cook budget.  In particular:
 --
---   candidateSteps(own Cook formula) <= T
+--   candidateSteps(own Cook formula) <= T.
 --
--- while the own Cook formula itself grows with the exact tableau budget T.
--- This is the precise scale interface where the existing Cook-formula growth
--- theorems and the candidate's polynomial clock meet.  No reverse implication
--- is claimed: satisfying the inequality does not construct the prefix.
+-- The own Cook formula itself grows with T, so this theorem is the precise
+-- numeric interface between Cook-quotation growth and the candidate clock.
+-- It is only a necessary condition and never manufactures the prefix.
 ------------------------------------------------------------------------
