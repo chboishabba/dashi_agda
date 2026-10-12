@@ -106,7 +106,8 @@ selectedResidualSeparatesWitness :
   c3ABResidualObserver NoGo.sameAFirstBoundary
   ≡ c3ABResidualObserver NoGo.sameASecondBoundary →
   ⊥
-selectedResidualSeparatesWitness ()
+selectedResidualSeparatesWitness equality =
+  NoGo.differentParticipantB (cong participantB equality)
 
 participantBResidualObserver :
   Cell.CompatibleThreeCellTrialecticBoundary →
