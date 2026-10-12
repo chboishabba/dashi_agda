@@ -4,7 +4,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFixedProgramStandardCompilerExac
 -- PAID PARTIAL FIXED PROGRAM -> FINITE STANDARD-TM COMPILER BOUNDARY
 --
 -- FiniteSelfSpecializingCodeExact / PartialKleeneFixedPointExact already pay
--- the classical behavioral self-reference theorem.  FixedOppositeSemantic-
+-- the classical behavioral self-reference theorem. FixedOppositeSemantic-
 -- QuotationExact specializes that finite program so, for any supplied formula,
 -- its abstract run is definitionally:
 --
@@ -14,11 +14,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFixedProgramStandardCompilerExac
 -- It is a compiler/resource theorem: realize THAT fixed finite computation as
 -- one finite-presented conventional standard TM whose guarded Cook formula is
 -- fed back as the formula parameter, and prove exact terminating execution.
---
--- This owner states the compiler at the weakest useful semantic interface:
--- the standard machine's literal final-control bit equals the Boolean returned
--- by the already-paid abstract fixed program on its own guarded Cook formula.
--- Fixed.fixedRunExact then derives the opposite endpoint equation automatically.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
@@ -30,8 +25,10 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
+import DASHI.Mathematics.Complexity.PNotEqualsNPOppositeSemanticProgramQuotationExact as Opposite
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedOppositeSemanticQuotationExact as Fixed
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedStandardOppositeQuotationExact as StandardOpposite
+import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact as Candidate
 
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
@@ -65,9 +62,8 @@ record FixedProgramStandardCompilation
           (StandardOpposite.steps fixed))
         finish
 
-    -- The machine output is identified with the already-paid abstract fixed
-    -- computation.  Because the RHS is a Maybe Bool, this equation also pays
-    -- termination of the abstract/compiled fixed computation at this input.
+    -- This is the exact compiler-correctness equation. Since the left side is
+    -- `just`, it also pays termination of the compiled fixed computation.
     executionSemanticsExact :
       just
         (Local.decideEqual
@@ -115,15 +111,12 @@ compilationGivesOppositeEndpoint
         (Presented.acceptingState
           (StandardOpposite.presentation (fixed compilation)))
       ≡
-      DASHI.Mathematics.Complexity.PNotEqualsNPOppositeSemanticProgramQuotationExact.notBool
-        (Direct.decide candidate ownFormula)
+      Opposite.notBool (Direct.decide candidate ownFormula)
     endpointExact =
       Candidate.justInjective
         (trans
           (executionSemanticsExact compilation)
           (Fixed.fixedRunExact code ownFormula))
-      where
-        import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact as Candidate
 
 ------------------------------------------------------------------------
 -- Hence the compiler alone is sufficient for the SAT error theorem.
