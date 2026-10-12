@@ -61,7 +61,7 @@ colonialSocietyAtTheTheatreClaimReceipt =
     false refl
 
 ------------------------------------------------------------------------
--- Chapter 2 public excerpt: bounded to what the exposed chapter surface says.
+-- Public chapter excerpts: bounded to what the exposed chapter surfaces say.
 ------------------------------------------------------------------------
 
 politicsAndPowerClaimReceipt : BoundedHistoricalClaimReceipt
@@ -74,9 +74,25 @@ politicsAndPowerClaimReceipt =
     false refl
     false refl
 
-------------------------------------------------------------------------
--- Chapter 6 public excerpt: cultural spectacle as a governance instrument.
-------------------------------------------------------------------------
+introducingStarsClaimReceipt : BoundedHistoricalClaimReceipt
+introducingStarsClaimReceipt =
+  bounded-historical-claim-receipt
+    Atlas.chapter4IntroducingTheStarsPages
+    "The public Chapter 4 excerpt begins by locating enslaved labour across occupations that strengthened the colonial economy; this bounded observation does not identify the whole chapter's performer biographies or arguments."
+    inspectedChapterExcerptEvidence
+    "JSTOR Chapter 4 public excerpt, pp. 85-92"
+    false refl
+    false refl
+
+breakingBarrierClaimReceipt : BoundedHistoricalClaimReceipt
+breakingBarrierClaimReceipt =
+  bounded-historical-claim-receipt
+    Atlas.chapter5BreakingThroughBarrierPages
+    "The public Chapter 5 excerpt describes irregular early Port-au-Prince theatre activity, then a marked change under Francois Saint-Martin's directorship from 1777 until 1784, while signalling repertoire influence across the theatres he directed."
+    inspectedChapterExcerptEvidence
+    "JSTOR Chapter 5 public excerpt, pp. 93-104"
+    false refl
+    false refl
 
 escapeFromRealityClaimReceipt : BoundedHistoricalClaimReceipt
 escapeFromRealityClaimReceipt =
@@ -87,10 +103,6 @@ escapeFromRealityClaimReceipt =
     "JSTOR Chapter 6 public excerpt, pp. 105-112"
     false refl
     false refl
-
-------------------------------------------------------------------------
--- Chapter 7 public excerpt: bounded revolutionary-period observation.
-------------------------------------------------------------------------
 
 finaleRevolutionClaimReceipt : BoundedHistoricalClaimReceipt
 finaleRevolutionClaimReceipt =
@@ -103,35 +115,10 @@ finaleRevolutionClaimReceipt =
     false refl
 
 ------------------------------------------------------------------------
--- Locator-only receipts retain useful page acquisition without false passage
--- inspection. Chapters 4 and 5 remain routed, not silently paraphrased.
-------------------------------------------------------------------------
-
-introducingStarsLocatorReceipt : BoundedHistoricalClaimReceipt
-introducingStarsLocatorReceipt =
-  bounded-historical-claim-receipt
-    Atlas.chapter4IntroducingTheStarsPages
-    "Chapter 4 acquisition locator only; no uninspected passage-level proposition is promoted here."
-    chapterLocatorOnlyEvidence
-    "published table of contents / JSTOR chapter locator"
-    false refl
-    false refl
-
-breakingBarrierLocatorReceipt : BoundedHistoricalClaimReceipt
-breakingBarrierLocatorReceipt =
-  bounded-historical-claim-receipt
-    Atlas.chapter5BreakingThroughBarrierPages
-    "Chapter 5 acquisition locator only; no uninspected passage-level proposition is promoted here."
-    chapterLocatorOnlyEvidence
-    "published table of contents / JSTOR chapter locator"
-    false refl
-    false refl
-
-------------------------------------------------------------------------
 -- Inspection/evidence coherence.
 --
 -- `passageInspected` is not allowed to drift independently of the evidence
--- kind.  Inspected evidence is inhabited exactly when the associated locator
+-- kind. Inspected evidence is inhabited exactly when the associated locator
 -- carries `passageInspected = true`.
 ------------------------------------------------------------------------
 
@@ -167,6 +154,16 @@ politicsAndPowerInspectionCoherent :
 politicsAndPowerInspectionCoherent =
   inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
 
+introducingStarsInspectionCoherent :
+  InspectionEvidenceCoherent introducingStarsClaimReceipt
+introducingStarsInspectionCoherent =
+  inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
+
+breakingBarrierInspectionCoherent :
+  InspectionEvidenceCoherent breakingBarrierClaimReceipt
+breakingBarrierInspectionCoherent =
+  inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
+
 escapeFromRealityInspectionCoherent :
   InspectionEvidenceCoherent escapeFromRealityClaimReceipt
 escapeFromRealityInspectionCoherent =
@@ -176,16 +173,6 @@ finaleRevolutionInspectionCoherent :
   InspectionEvidenceCoherent finaleRevolutionClaimReceipt
 finaleRevolutionInspectionCoherent =
   inspection-evidence-coherent (λ _ → refl) (λ _ → tt)
-
-introducingStarsInspectionCoherent :
-  InspectionEvidenceCoherent introducingStarsLocatorReceipt
-introducingStarsInspectionCoherent =
-  inspection-evidence-coherent (λ ()) (λ ())
-
-breakingBarrierInspectionCoherent :
-  InspectionEvidenceCoherent breakingBarrierLocatorReceipt
-breakingBarrierInspectionCoherent =
-  inspection-evidence-coherent (λ ()) (λ ())
 
 ------------------------------------------------------------------------
 -- Hard non-promotion boundary.
