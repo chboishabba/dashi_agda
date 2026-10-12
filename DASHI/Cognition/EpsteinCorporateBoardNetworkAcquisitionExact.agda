@@ -31,9 +31,35 @@ record CorporateCorpusReceipt : Set where
     directContactDefinitionIncludesEmailOrExplicitMeeting : Bool
 open CorporateCorpusReceipt public
 
+-- March/April 2026 S&P500 specification.  Do not silently treat this as the
+-- July revised universe.
 canonicalCorporateCorpusReceipt : CorporateCorpusReceipt
 canonicalCorporateCorpusReceipt = corporate-corpus-receipt
   52266 1293753 117394 1179 841 841 602 true true
+
+------------------------------------------------------------------------
+-- JULY 2026 REVISED UNIVERSE / DEFINITION
+--
+-- The revised paper broadens the searched population from the earlier S&P500
+-- specification to CEOs/directors of U.S. public firms and changes the promoted
+-- contact construct to "frequent contact".  The 841 count belongs to this
+-- revised threshold/universe.  The early 1,179 direct-contact count and revised
+-- 841 frequent-contact count are therefore not alternative labels for one set.
+------------------------------------------------------------------------
+
+record RevisedCorporateCorpusReceipt : Set where
+  constructor revised-corporate-corpus-receipt
+  field
+    usPublicFirmPeopleSearched : Nat
+    revisedFrequentContactDirectors : Nat
+    revisedUniverseIsBroaderThanEarlySP500Universe : Bool
+    revisedFrequentContactIsSameThresholdAsEarlyDirectContact : Bool
+    personLevelPromotionStillRequiresUnderlyingDocument : Bool
+open RevisedCorporateCorpusReceipt public
+
+canonicalRevisedCorporateCorpusReceipt : RevisedCorporateCorpusReceipt
+canonicalRevisedCorporateCorpusReceipt =
+  revised-corporate-corpus-receipt 92698 841 true false true
 
 record CorporateNetworkResult : Set where
   constructor corporate-network-result
@@ -48,9 +74,26 @@ record CorporateNetworkResult : Set where
     causalMechanismUniversallyEstablished : Bool
 open CorporateNetworkResult public
 
+-- Retained from the earlier calibration.  Revised-paper mechanism findings
+-- below supersede any simplistic interpretation that density/centrality itself
+-- is the misconduct mechanism.
 canonicalCorporateNetworkResult : CorporateNetworkResult
 canonicalCorporateNetworkResult = corporate-network-result
   353 32 50 550 true true true false
+
+record RevisedMechanismBoundary : Set where
+  constructor revised-mechanism-boundary
+  field
+    ownNetworkCentralityGainPredictsMisconduct : Bool
+    sharedDirectorExposureToEpsteinConnectedBoardsPredictsMisconduct : Bool
+    negativeThreeDayMarketReactionMeasured : Bool
+    marketReactionPercentMagnitudeAbout37Tenths : Bool
+    mechanismTestEstablishesUniversalCausation : Bool
+open RevisedMechanismBoundary public
+
+canonicalRevisedMechanismBoundary : RevisedMechanismBoundary
+canonicalRevisedMechanismBoundary = revised-mechanism-boundary
+  false true true true false
 
 ------------------------------------------------------------------------
 -- Acquisition interpretation.
@@ -81,6 +124,9 @@ data BoardInterlockCreatesPersonalContact : Set where
 data NetworkCentralityCreatesWrongdoing : Set where
 data FirmAssociationCreatesIndividualCulpability : Set where
 data RevisedFrequentContactEqualsBroaderDirectContact : Set where
+data RevisedUniverseEqualsEarlySP500Universe : Set where
+data NetworkDensityCreatesIndividualBenefit : Set where
+data MarketReactionCreatesWrongdoing : Set where
 
 llmLabelDoesNotCreatePrimaryReceipt : LLMLabelCreatesPrimaryReceipt → ⊥
 llmLabelDoesNotCreatePrimaryReceipt ()
@@ -98,6 +144,16 @@ firmAssociationDoesNotCreateIndividualCulpability ()
 versionThresholdsMustNotBeCollapsed :
   RevisedFrequentContactEqualsBroaderDirectContact → ⊥
 versionThresholdsMustNotBeCollapsed ()
+
+versionUniversesMustNotBeCollapsed :
+  RevisedUniverseEqualsEarlySP500Universe → ⊥
+versionUniversesMustNotBeCollapsed ()
+
+networkDensityDoesNotCreateIndividualBenefit : NetworkDensityCreatesIndividualBenefit → ⊥
+networkDensityDoesNotCreateIndividualBenefit ()
+
+marketReactionDoesNotCreateWrongdoing : MarketReactionCreatesWrongdoing → ⊥
+marketReactionDoesNotCreateWrongdoing ()
 
 ------------------------------------------------------------------------
 -- Ellison / broad-tech boundary from current public-source round.
