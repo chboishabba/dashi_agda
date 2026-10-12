@@ -28,16 +28,32 @@ import DASHI.Mathematics.Algebra.Ternary27FirstTitsF4RootRecognitionExact
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsGlobalE6F4RecognitionExact
 import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact
+import DASHI.Reasoning.Ternary27FirstTitsMonster3BNormalizerFrontierExact
 import DASHI.Reasoning.E6MinusculeFirstTitsWeightBasisBridgeExact
 import DASHI.Reasoning.E6MinusculeFirstTitsTitsExtensionExact
 
--- Physics-facing max-cut.
+-- Trinification / Standard Model / DHR frontier.
 import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
 import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
+import DASHI.Physics.Closure.Ternary27TrinificationSU2RBreakingFrontierExact
+import DASHI.Physics.Closure.Ternary27TrinificationDHRMaxCutExact
+
+-- Gravity: historical coordinate-Laplacian diagnostics retained for comparison.
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
 import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact
 import DASHI.Physics.Closure.E6HyperformPositiveGaugeVacuumNoGoExact
 import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact
+import DASHI.Physics.Closure.E6HyperformTernary36GravityRefinementCandidateExact
+import DASHI.Physics.Closure.E6HyperformTernary36EntropyActionBoundaryExact
+
+-- Gravity: active intrinsic quadratic-class Laplacian / descent / matter target.
+import DASHI.Physics.Closure.E6HyperformIntrinsicQuadraticLaplacianExact
+import DASHI.Physics.Closure.E6HyperformMetricDescentFrontierExact
+import DASHI.Physics.Closure.E6HyperformIntrinsicRadiationVacuumStressExact
+
+-- Measured neural/consciousness acquisition and protocol boundaries.
 import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
 import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact
+import DASHI.Governance.ConsciousnessExceptionalSelectedTPSProtocolExact
+
 import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
