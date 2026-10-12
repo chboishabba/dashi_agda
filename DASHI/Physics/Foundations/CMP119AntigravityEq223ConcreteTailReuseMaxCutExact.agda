@@ -28,12 +28,13 @@ import DASHI.Physics.Foundations.CMP119CosmologyEq223ConcreteR109TailToR136Exact
 -- margin.
 ------------------------------------------------------------------------
 
-preferredConcreteTailRouteEliminatesExactFiniteContinuumEquality : Bool
-preferredConcreteTailRouteEliminatesExactFiniteContinuumEquality =
+preferredConcreteTailRouteNeedsExactFiniteContinuumEquality : Bool
+preferredConcreteTailRouteNeedsExactFiniteContinuumEquality =
   Concrete.preferredConcreteTailRouteNeedsFiniteEqualsContinuum
 
--- The imported flag is phrased "needs equality" and is false.  Export a
--- positive-polarity scheduler flag as well.
+preferredConcreteTailRouteEliminatesExactFiniteContinuumEquality : Bool
+preferredConcreteTailRouteEliminatesExactFiniteContinuumEquality = true
+
 exactFiniteContinuumEqualityRequiredOnPreferredConcreteTailRoute : Bool
 exactFiniteContinuumEqualityRequiredOnPreferredConcreteTailRoute = false
 
