@@ -46,8 +46,11 @@ import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact
 import DASHI.Physics.Closure.E6HyperformTernary36GravityRefinementCandidateExact
 import DASHI.Physics.Closure.E6HyperformTernary36EntropyActionBoundaryExact
 
--- Gravity: active intrinsic quadratic-class Laplacian / descent / matter target.
+-- Gravity: active intrinsic quadratic-class / H3 / atlas / matter programme.
 import DASHI.Physics.Closure.E6HyperformIntrinsicQuadraticLaplacianExact
+import DASHI.Physics.Closure.E6HyperformRadicalQuotientGravityBoundaryExact
+import DASHI.Physics.Closure.E6HyperformH3SameObjectEmbeddingExact
+import DASHI.Physics.Closure.E6HyperformTwoH3NondegenerateCandidateExact
 import DASHI.Physics.Closure.E6HyperformMetricDescentFrontierExact
 import DASHI.Physics.Closure.E6HyperformIntrinsicRadiationVacuumStressExact
 
