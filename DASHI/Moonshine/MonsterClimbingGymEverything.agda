@@ -7,4 +7,5 @@ module DASHI.Moonshine.MonsterClimbingGymEverything where
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact
 import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact
+import DASHI.Analysis.RiemannSSP15ProducerMarkedClimbingGymBridgeExact
 import DASHI.Moonshine.OggSSPClimbingGymMaxCutValidation
