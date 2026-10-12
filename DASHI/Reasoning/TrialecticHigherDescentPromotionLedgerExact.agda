@@ -219,6 +219,7 @@ setEffectiveDescentDoesNotCreateGroupoidDescent :
 setEffectiveDescentDoesNotCreateGroupoidDescent ()
 
 record TrialecticHigherDescentPromotionBoundary : Set where
+  constructor trialectic-higher-descent-promotion-boundary
   field
     grothendieckSiteReady : Bool
     sheafDescentReady : Bool
@@ -238,7 +239,7 @@ record TrialecticHigherDescentPromotionBoundary : Set where
     strictTransportGroupoidReady : Bool
     groupoidPresheafReady : Bool
     generalPseudofunctorCoherenceReady : Bool
-    generalCocycleTwoMorphismsReady : Bool
+    cocycleTwoMorphismsReady : Bool
     groupoidDescentMorphismsReady : Bool
     effectiveStackReady : Bool
     coherentAllDepthIterationReady : Bool
@@ -246,30 +247,14 @@ record TrialecticHigherDescentPromotionBoundary : Set where
 
 open TrialecticHigherDescentPromotionBoundary public
 
+-- Keep the historical constructor and `cocycleTwoMorphismsReady` field name
+-- stable for downstream imports; the field now denotes the still-unpaid
+-- *general* site-wide cocycle layer, while the concrete C3 cocycle remains
+-- separately recorded by `cyclicTransitionCocycleReady`.
 canonicalTrialecticHigherDescentPromotionBoundary :
   TrialecticHigherDescentPromotionBoundary
-canonicalTrialecticHigherDescentPromotionBoundary = record
-  { grothendieckSiteReady = true
-  ; sheafDescentReady = true
-  ; structuredCarrierReady = true
-  ; attachedTwoCellReady = true
-  ; faceMediationInterfaceReady = true
-  ; depthBidescentInterfaceReady = true
-  ; transportFamilyReady = true
-  ; extensionalTransportGroupoidActionReady = true
-  ; setValuedSitePresheafReady = true
-  ; cyclicRestrictionTransportCoherenceReady = true
-  ; actionTwoCellCalculusReady = true
-  ; cyclicTransitionCocycleReady = true
-  ; setLevelEffectiveDescentReady = true
-  ; observationalGlobalUniquenessReady = true
-  ; siteTransportCoverageObstructionReady = true
-  ; strictTransportGroupoidReady = false
-  ; groupoidPresheafReady = false
-  ; generalPseudofunctorCoherenceReady = false
-  ; generalCocycleTwoMorphismsReady = false
-  ; groupoidDescentMorphismsReady = false
-  ; effectiveStackReady = false
-  ; coherentAllDepthIterationReady = false
-  ; hypersheafReady = false
-  }
+canonicalTrialecticHigherDescentPromotionBoundary =
+  trialectic-higher-descent-promotion-boundary
+    true true true true true true true true true true true true
+    true true true
+    false false false false false false false false
