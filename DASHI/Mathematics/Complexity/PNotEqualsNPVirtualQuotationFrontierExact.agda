@@ -2,14 +2,23 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact wh
 
 ------------------------------------------------------------------------
 -- ACTIVE FRONTIER AFTER THE LITERAL-MATERIALISATION NO-GO
+--
+-- Same-object corrections in this recut:
+--   * the fixed opposite target is born as CodedFiniteStandardTM;
+--   * its guarded Cook description and virtual source are canonical;
+--   * every read varies only the index of that immutable description;
+--   * read cost is canonical query-code length + universal-generator execution,
+--     not the cheaper extensional List lookup used only for specification.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just)
-open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -20,13 +29,15 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralSelfQuotationPositiv
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
 import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedStandardOppositeQuotationExact as Opposite
+import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedStandardOppositeExact as CodedFixed
 import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralResourceClosingCompilerExact as StructuralResource
 import DASHI.Mathematics.Complexity.PolynomialClockArithmeticExact as Clock
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 
 import DASHI.Mathematics.Complexity.VirtualFormulaBitSourceExact as Virtual
-import DASHI.Mathematics.Complexity.VirtualFormulaQueryTraceExact as Trace
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
+import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
+import DASHI.Mathematics.Complexity.CanonicalGuardedCookVirtualSourceExact as CanonicalGuarded
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
@@ -120,15 +131,75 @@ queryCharge generator query =
   Query.queryBitLength query + querySteps generator query
 
 ------------------------------------------------------------------------
--- One source edge -> finite target segment + explicit charged virtual reads.
+-- Charged trace for ONE immutable Cook description.
+------------------------------------------------------------------------
+
+record SuccessfulGeneratedQuery
+    (description : Description.GuardedCookFormulaDescription)
+    (generator : UniversalGuardedCookBitGenerator) : Set where
+  field
+    index : Nat
+    bit : Bool
+    outputExact :
+      outputBit generator
+        (finishConfiguration generator
+          (Description.atIndex description index))
+      ≡ just bit
+
+open SuccessfulGeneratedQuery public
+
+GeneratedQueryTrace :
+  Description.GuardedCookFormulaDescription →
+  UniversalGuardedCookBitGenerator → Set
+GeneratedQueryTrace description generator =
+  List (SuccessfulGeneratedQuery description generator)
+
+generatedTraceWork :
+  ∀ {description generator} →
+  GeneratedQueryTrace description generator → Nat
+generatedTraceWork [] = zero
+generatedTraceWork {description} {generator} (query ∷ rest) =
+  queryCharge generator
+    (Description.atIndex description (index query))
+  + generatedTraceWork rest
+
+record GeneratedQueryCostReceipt
+    (description : Description.GuardedCookFormulaDescription)
+    (generator : UniversalGuardedCookBitGenerator)
+    (targetSteps : Nat) : Set where
+  field
+    trace : GeneratedQueryTrace description generator
+    generatedWorkFitsTarget :
+      generatedTraceWork trace ≤ targetSteps
+
+open GeneratedQueryCostReceipt public
+
+------------------------------------------------------------------------
+-- Every successful generated read is also an exact canonical-source read.
+------------------------------------------------------------------------
+
+generatedQuerySound :
+  ∀ {description generator}
+    (query : SuccessfulGeneratedQuery description generator) →
+  Virtual.BitAt
+    (index query)
+    (Binary.encodeFormulaBits (Description.formula description))
+    (bit query)
+generatedQuerySound {description} {generator} query
+  rewrite Description.atIndexFormulaExact
+    description (index query) =
+  outputSound generator (outputExact query)
+
+------------------------------------------------------------------------
+-- One source edge -> finite target segment + fully charged generated reads.
 ------------------------------------------------------------------------
 
 record VirtualStepSimulation
     {SourceState SourceSymbol TargetState TargetSymbol : Set}
     {sourceMachine : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
     {targetMachine : Standard.StandardSingleTapeMachine TargetState TargetSymbol}
-    {formula : Cook.BooleanFormula}
-    (bitSource : Virtual.VirtualFormulaBitSource formula)
+    (description : Description.GuardedCookFormulaDescription)
+    (generator : UniversalGuardedCookBitGenerator)
     (sourceBefore sourceAfter : Standard.StandardConfiguration sourceMachine)
     (targetBefore targetAfter : Standard.StandardConfiguration targetMachine) : Set₂ where
   field
@@ -141,7 +212,7 @@ record VirtualStepSimulation
         targetMachine targetSteps targetBefore targetAfter
 
     queryCost :
-      Trace.QueryTraceCostReceipt bitSource targetSteps
+      GeneratedQueryCostReceipt description generator targetSteps
 
 open VirtualStepSimulation public
 
@@ -149,8 +220,8 @@ data VirtualRunSimulation
     {SourceState SourceSymbol TargetState TargetSymbol : Set}
     {sourceMachine : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
     {targetMachine : Standard.StandardSingleTapeMachine TargetState TargetSymbol}
-    {formula : Cook.BooleanFormula}
-    (bitSource : Virtual.VirtualFormulaBitSource formula) :
+    (description : Description.GuardedCookFormulaDescription)
+    (generator : UniversalGuardedCookBitGenerator) :
     ∀ {sourceSteps sourceStart sourceFinish}
       (sourceRun :
         Run.StandardExactRun
@@ -162,7 +233,7 @@ data VirtualRunSimulation
   virtualRunDone :
     ∀ {sourceConfiguration targetConfiguration} →
     VirtualRunSimulation
-      bitSource
+      description generator
       (Run.standardRunDone {configuration = sourceConfiguration})
       targetConfiguration
       targetConfiguration
@@ -175,12 +246,13 @@ data VirtualRunSimulation
           sourceMachine sourceSteps sourceNext sourceFinish}
       (step :
         VirtualStepSimulation
-          bitSource
+          description generator
           sourceCurrent sourceNext
           targetCurrent targetNext) →
-    VirtualRunSimulation bitSource sourceRest targetNext targetFinish →
     VirtualRunSimulation
-      bitSource
+      description generator sourceRest targetNext targetFinish →
+    VirtualRunSimulation
+      description generator
       (Run.standardRunStep
         (VirtualStepSimulation.sourceEdge step)
         sourceRest)
@@ -196,68 +268,75 @@ record VirtualSelfQuotationCompilation
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
     (clocked : Clocked.PolynomiallyClockedStandardCandidate candidate) : Set₃ where
   field
-    fixed :
-      Opposite.FixedStandardOppositeMachine
+    codedFixed :
+      CodedFixed.CodedFixedStandardOppositeMachine
         (Candidate.standardCandidateToCodeRealization
           (Clocked.standard clocked))
 
-    virtualSource :
-      Virtual.VirtualFormulaBitSource
-        (Opposite.fixedCookFormula fixed)
-
-    -- One base description. All reads vary ONLY the index via Query.withIndex.
-    baseQuery : Query.GuardedCookBitQuery
-
-    baseQueryFormulaExact :
-      Query.queryFormula baseQuery
-      ≡ Opposite.fixedCookFormula fixed
-
     universalGenerator : UniversalGuardedCookBitGenerator
-
-    generatorAgreesWithSource :
-      (index : Nat) →
-      outputBit universalGenerator
-        (finishConfiguration universalGenerator
-          (Query.withIndex baseQuery index))
-      ≡ Virtual.readBit virtualSource index
-
-    sourceQueryWorkExact :
-      (index : Nat) →
-      Virtual.queryWork virtualSource index
-      ≡ queryCharge universalGenerator
-          (Query.withIndex baseQuery index)
 
     candidateTargetStart :
       Standard.StandardConfiguration
         (Presented.finitePresentedStandardMachine
-          (Opposite.presentation fixed))
+          (Opposite.presentation
+            (CodedFixed.forgetCodedFixed codedFixed)))
 
     candidateTargetFinish :
       Standard.StandardConfiguration
         (Presented.finitePresentedStandardMachine
-          (Opposite.presentation fixed))
+          (Opposite.presentation
+            (CodedFixed.forgetCodedFixed codedFixed)))
 
     candidateSimulation :
       VirtualRunSimulation
-        virtualSource
+        (CodedFixed.codedFixedDescription codedFixed)
+        universalGenerator
         (Candidate.execution
           (Clocked.standard clocked)
-          (Opposite.fixedCookFormula fixed))
+          (Opposite.fixedCookFormula
+            (CodedFixed.forgetCodedFixed codedFixed)))
         candidateTargetStart
         candidateTargetFinish
 
 open VirtualSelfQuotationCompilation public
 
+fixedOfVirtualCompilation :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {clocked : Clocked.PolynomiallyClockedStandardCandidate candidate} →
+  VirtualSelfQuotationCompilation clocked →
+  Opposite.FixedStandardOppositeMachine
+    (Candidate.standardCandidateToCodeRealization
+      (Clocked.standard clocked))
+fixedOfVirtualCompilation compilation =
+  CodedFixed.forgetCodedFixed (codedFixed compilation)
+
+virtualSourceOfCompilation :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {clocked : Clocked.PolynomiallyClockedStandardCandidate candidate}
+    (compilation : VirtualSelfQuotationCompilation clocked) →
+  Virtual.VirtualFormulaBitSource
+    (Opposite.fixedCookFormula (fixedOfVirtualCompilation compilation))
+virtualSourceOfCompilation compilation =
+  CanonicalGuarded.canonicalGuardedSource
+    (CodedFixed.codedFixedDescription (codedFixed compilation))
+
 ------------------------------------------------------------------------
 -- EXACT NEW FRONTIER
 --
--- 1. Implement ONE `UniversalGuardedCookBitGenerator` on canonical query code.
--- 2. Produce ONE compact `baseQuery` for the fixed target; every read is exactly
---    `withIndex baseQuery i`, so machine/input/T cannot vary with the answer.
--- 3. Build stepwise `VirtualRunSimulation`, paying query-code length + generator
---    execution for every read inside actual target-machine time.
--- 4. Reattach finite setup + negation suffix + exact total target clock and
---    reuse the already-paid Cook iff/opposite-decision plumbing.
+-- PAID structurally:
+--   * literal materialisation route closed for anchored candidates;
+--   * same fixed target is now low-universe coded syntax;
+--   * actual guarded Cook description derived definitionally from that code;
+--   * canonical exact virtual source derived with no oracle witness;
+--   * all reads vary only the index of one immutable description;
+--   * target-step receipts charge query serialization + generator execution.
 --
--- Literal full-formula materialisation is no longer an admissible frontier.
+-- LIVE constructive obligations:
+--   1. inhabit ONE `UniversalGuardedCookBitGenerator` for `queryAnswer`;
+--   2. build the stepwise target interpreter `VirtualRunSimulation` so its
+--      generated trace corresponds to the source machine's actual input reads;
+--   3. reattach finite setup + negation suffix + exact total target clock;
+--   4. reuse existing Cook iff / opposite-decision failure plumbing.
 ------------------------------------------------------------------------
