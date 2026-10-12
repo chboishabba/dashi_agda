@@ -2,19 +2,6 @@ module DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact where
 
 ------------------------------------------------------------------------
 -- EXECUTABLE EMPIRICAL REPLAY RECEIPTS
---
--- scripts/monster_climbing_gym_replay.py independently reconstructs the ten
--- integer rows in the supplied JMD Monster Climbing Gym panel from:
---
---   * the first 849 positive nontrivial zeta-zero ordinates;
---   * hole lattice h_m = 2*pi*m / (p^a*log p);
---   * the guarded interval [t_1 + 1, t_849 - 1];
---   * deterministic mutual-nearest zero <-> hole matching.
---
--- The checked-in numerical zero cache is diagnostic data generated from
--- mpmath.zetazero and rounded to 1e-4.  It is not a formal zero certificate.
--- The exact source random-shift list/seed used for the displayed control means
--- and standard deviations has not been recovered, so those remain separate.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -25,9 +12,16 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SignedBranch
+import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
+
+-- scripts/monster_climbing_gym_replay.py independently reconstructs the ten
+-- integer figure rows from the first 849 positive nontrivial zeta-zero
+-- ordinates, h_m = 2*pi*m/(p^a*log p), the guard interval
+-- [t_1 + 1, t_849 - 1], and deterministic mutual-nearest matching.
+-- The cache is mpmath-generated diagnostic data, not a formal zero certificate.
 
 replayZeroCount : Nat
 replayZeroCount = 849
@@ -109,6 +103,57 @@ p71ReplaySaturates : replayedMutualPairs p71Replay ≡ replayZeroCount
 p71ReplaySaturates = refl
 
 ------------------------------------------------------------------------
+-- Non-Ogg control replay.
+--
+-- Productive cross-pollination with the already-merged Ogg control matrix:
+-- applying the SAME numerical producer at exponent one to all five explicitly
+-- non-Ogg odd-prime controls under 72 also gives 849 mutual pairs.  Hence
+-- high-density saturation itself is not an Ogg-specific discriminator.
+------------------------------------------------------------------------
+
+record ControlReplayRow : Set where
+  constructor control-replay-row
+  field
+    controlPrime : Matrix.OddPrimeCandidateUnder72
+    controlHoles : Nat
+    controlMutualPairs : Nat
+
+open ControlReplayRow public
+
+p37ControlReplay : ControlReplayRow
+p37ControlReplay = control-replay-row Matrix.prime37 26090 849
+p43ControlReplay : ControlReplayRow
+p43ControlReplay = control-replay-row Matrix.prime43 31582 849
+p53ControlReplay : ControlReplayRow
+p53ControlReplay = control-replay-row Matrix.prime53 41091 849
+p61ControlReplay : ControlReplayRow
+p61ControlReplay = control-replay-row Matrix.prime61 48967 849
+p67ControlReplay : ControlReplayRow
+p67ControlReplay = control-replay-row Matrix.prime67 55012 849
+
+p37ControlIsNonOgg : Matrix.externalOggLabel (controlPrime p37ControlReplay) ≡ false
+p37ControlIsNonOgg = Matrix.prime37ExternallyNegative
+p43ControlIsNonOgg : Matrix.externalOggLabel (controlPrime p43ControlReplay) ≡ false
+p43ControlIsNonOgg = Matrix.prime43ExternallyNegative
+p53ControlIsNonOgg : Matrix.externalOggLabel (controlPrime p53ControlReplay) ≡ false
+p53ControlIsNonOgg = Matrix.prime53ExternallyNegative
+p61ControlIsNonOgg : Matrix.externalOggLabel (controlPrime p61ControlReplay) ≡ false
+p61ControlIsNonOgg = Matrix.prime61ExternallyNegative
+p67ControlIsNonOgg : Matrix.externalOggLabel (controlPrime p67ControlReplay) ≡ false
+p67ControlIsNonOgg = Matrix.prime67ExternallyNegative
+
+p37ControlSaturates : controlMutualPairs p37ControlReplay ≡ replayZeroCount
+p37ControlSaturates = refl
+p43ControlSaturates : controlMutualPairs p43ControlReplay ≡ replayZeroCount
+p43ControlSaturates = refl
+p53ControlSaturates : controlMutualPairs p53ControlReplay ≡ replayZeroCount
+p53ControlSaturates = refl
+p61ControlSaturates : controlMutualPairs p61ControlReplay ≡ replayZeroCount
+p61ControlSaturates = refl
+p67ControlSaturates : controlMutualPairs p67ControlReplay ≡ replayZeroCount
+p67ControlSaturates = refl
+
+------------------------------------------------------------------------
 -- Unsigned-observation obstruction.
 ------------------------------------------------------------------------
 
@@ -175,6 +220,7 @@ record ClimbingGymReplayBoundary : Set where
     oneUnitGuardReproducesAllTenHoleCounts : Bool
     mutualNearestReplayReproducesAllTenPairCounts : Bool
     p71ReplaySaturates849 : Bool
+    nonOggControlSaturationShowsSaturationNotOggSpecific : Bool
     unsignedStatisticCannotRecoverSignedOrientation : Bool
     shiftedLatticeControlImplemented : Bool
     reportedShiftControlSeedRecovered : Bool
@@ -186,4 +232,4 @@ open ClimbingGymReplayBoundary public
 canonicalClimbingGymReplayBoundary : ClimbingGymReplayBoundary
 canonicalClimbingGymReplayBoundary =
   climbing-gym-replay-boundary
-    true true true true true true false false false
+    true true true true true true true false false false
