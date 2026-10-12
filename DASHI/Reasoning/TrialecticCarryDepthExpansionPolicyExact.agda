@@ -23,16 +23,13 @@ module DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import DASHI.Core.Prelude using (⊥)
+open import DASHI.Core.Prelude using (⊥; cong)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
 import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact as CarryDepth
-
-------------------------------------------------------------------------
--- 1. Explicit expansion-policy interface.
-------------------------------------------------------------------------
+import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
 
 record NextStructuredExpansionPolicy : Set₁ where
   constructor next-structured-expansion-policy
@@ -88,12 +85,14 @@ originUnderdeterminedPolicy : NextStructuredExpansionPolicy
 originUnderdeterminedPolicy =
   policyWith Fabric.origin Face.underdeterminedFace
 
-------------------------------------------------------------------------
--- 2. One seed does not determine the remaining five boundary cells.
-------------------------------------------------------------------------
-
 selectedSeed : Cell.TrialecticBasis3Cell
 selectedSeed = Fabric.negativeCorner
+
+boundaryParticipantB :
+  Cell.CompatibleThreeCellTrialecticBoundary →
+  Cell.TrialecticBasis3Cell
+boundaryParticipantB boundary =
+  Cell.rightCell (Cell.edgeAB boundary)
 
 sameSeedDifferentBoundary :
   Cell.structuredBoundary (expand originReciprocalPolicy selectedSeed)
@@ -101,11 +100,9 @@ sameSeedDifferentBoundary :
   Cell.structuredBoundary (expand positiveBReciprocalPolicy selectedSeed)
   →
   ⊥
-sameSeedDifferentBoundary ()
-
-------------------------------------------------------------------------
--- 3. Even after fixing the boundary, the irreducible face remains additional.
-------------------------------------------------------------------------
+sameSeedDifferentBoundary equality =
+  C3NoGo.originNotPositiveCorner
+    (cong boundaryParticipantB equality)
 
 sameBoundaryAcrossFacePolicies :
   Cell.structuredBoundary (expand originReciprocalPolicy selectedSeed)
@@ -119,12 +116,9 @@ sameBoundaryDifferentStructuredState :
   expand originUnderdeterminedPolicy selectedSeed
   →
   ⊥
-sameBoundaryDifferentStructuredState ()
-
-------------------------------------------------------------------------
--- 4. Any conditional carry step can be continued once an explicit expansion
--- policy is supplied.  The policy, not the seed alone, owns the extra data.
-------------------------------------------------------------------------
+sameBoundaryDifferentStructuredState equality
+  with cong Cell.triadicFace equality
+... | ()
 
 expandCarryStep :
   {depth : Nat}
@@ -148,10 +142,6 @@ expandedCarryStepEmbedsSeed :
   ≡ CarryDepth.nextDepthCell step
 expandedCarryStepEmbedsSeed policy step =
   carriedSeedEmbeddedAtA policy (CarryDepth.nextDepthCell step)
-
-------------------------------------------------------------------------
--- 5. Promotion firewall.
-------------------------------------------------------------------------
 
 data CarrySeedForcesUniqueStructuredExpansion : Set where
 data OneExpansionPolicySuppliesAllDepthCoherence : Set where
