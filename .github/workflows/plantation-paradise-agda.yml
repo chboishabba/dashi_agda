@@ -8,6 +8,7 @@ on:
       - 'DASHI/Culture/ColonialPerformanceStatusNonfactorabilityExact.agda'
       - 'DASHI/Culture/HistoricalArchiveAbsenceNonfactorabilityExact.agda'
       - 'DASHI/Culture/ColonialTheatreAccessAdapterExact.agda'
+      - 'DASHI/Culture/PowersPlantationParadiseGovernedCrossPollinationExact.agda'
       - 'DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda'
       - 'DASHI/Culture/PowersPlantationParadiseValidation.agda'
       - 'DASHI/Culture/Everything.agda'
@@ -39,5 +40,7 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Culture/PowersPlantationParadiseSourceAtlasExact.agda
       - name: Typecheck historical claim receipts
         run: nix develop .# --command agda -i . DASHI/Culture/PowersPlantationParadiseHistoricalClaimReceiptsExact.agda
+      - name: Typecheck governed cross-pollination
+        run: nix develop .# --command agda -i . DASHI/Culture/PowersPlantationParadiseGovernedCrossPollinationExact.agda
       - name: Typecheck synthesis validation
         run: nix develop .# --command agda -i . DASHI/Culture/PowersPlantationParadiseValidation.agda
