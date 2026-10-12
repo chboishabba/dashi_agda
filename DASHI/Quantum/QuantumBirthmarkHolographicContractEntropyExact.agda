@@ -13,14 +13,20 @@ open import Agda.Builtin.String using (String)
 --   sneed-and-feed/adelic-spectral-zeta/
 --   formalization/Formalization/Quantum/HolographicTensorNetwork.lean
 -- shows that `holographicContract n` is diagonal with dimension 2^n and
--- constant diagonal entry 2^(-n).  Hence its spectrum is the uniform spectrum
--- with multiplicity 2^n and its full-state von-Neumann entropy is n log 2.
+-- constant diagonal entry 2^(-n). Hence its spectrum is uniform with
+-- multiplicity 2^n and its full-state von-Neumann entropy is n log 2.
 --
--- A native Mathlib producer for that spectral calculation is maintained in
--- dashi_lean4/Synthesis/HolographicContractEntropy.lean (PR #68).  This Agda
--- owner records the exact cross-repo theorem shape and, crucially, separates
--- the now-closed full-state calculation from the still-distinct depth-k
--- reduced-density-matrix / partial-trace theorem.
+-- The native Mathlib producer in
+--   dashi_lean4/Synthesis/HolographicContractEntropy.lean (PR #68)
+-- proves both:
+--   * full-state entropy n log 2; and
+--   * for an explicit factorisation 2^(k+r)=2^k*2^r, the diagonal partial
+--     trace has eigenvalue 2^(-k) and entropy k log 2.
+--
+-- The remaining same-object RT seam is therefore only the identification of
+-- upstream's `ZMod (2^n)` depth-k subtree with that explicit tensor-product
+-- factorisation / reduced state. Upstream itself supplies no such partial-trace
+-- construction, so that final identification stays fail-closed here.
 ------------------------------------------------------------------------
 
 upstreamRepository : String
@@ -50,12 +56,14 @@ record HolographicContractSpectrumReceipt : Set where
     uniformTraceNormalisation : Bool
     fullContractVonNeumannEntropyIsNLogTwo : Bool
     fullStateEntropyMatchesTreeEntropyAtFullDepth : Bool
+    factorizedMarginalEigenvalueIsInverseTwoToK : Bool
+    factorizedSubsystemRTClosed : Bool
 
 canonicalHolographicContractSpectrumReceipt :
   HolographicContractSpectrumReceipt
 canonicalHolographicContractSpectrumReceipt =
   holographicContractSpectrumReceipt
-    true true true true true true true true
+    true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Exact authority split.
@@ -66,15 +74,17 @@ record HolographicContractEntropyAuthorityBoundary : Set where
   field
     fullStateSpectralCalculationHasNativeLeanProducer : Bool
     fullDepthSameObjectEntropyWeldHasNativeLeanProducer : Bool
+    factorizedSubsystemEntropyHasNativeLeanProducer : Bool
     leanKernelReceiptAttachedHere : Bool
 
+    upstreamZModSubsystemFactorizationStillRequired : Bool
     subsystemReducedDensityMatrixStillRequired : Bool
     upstreamPartialTraceConstructionExists : Bool
     fullContractDoesNotByItselfProveDepthKSubsystemEntropy : Bool
 
     fullStateTheoremIsNotGenericPhysicalAdSCFT : Bool
+    factorizedSubsystemTheoremIsNotUpstreamSameObjectByDefinition : Bool
     fullStateTheoremDoesNotIdentifyBirthmarkWithEntropy : Bool
-    subsystemClaimMustNotBePromotedFromFullStateClaim : Bool
 
 canonicalHolographicContractEntropyAuthorityBoundary :
   HolographicContractEntropyAuthorityBoundary
@@ -82,7 +92,9 @@ canonicalHolographicContractEntropyAuthorityBoundary =
   holographicContractEntropyAuthorityBoundary
     true
     true
+    true
     false
+    true
     true
     false
     true
@@ -109,8 +121,15 @@ fullContractVonNeumannEntropyIsNLogTwo = true
 fullStateEntropyMatchesTreeEntropyAtFullDepth : Bool
 fullStateEntropyMatchesTreeEntropyAtFullDepth = true
 
+factorizedSubsystemRTClosed : Bool
+factorizedSubsystemRTClosed = true
+
+upstreamZModSubsystemFactorizationStillRequired : Bool
+upstreamZModSubsystemFactorizationStillRequired = true
+
 subsystemReducedDensityMatrixStillRequired : Bool
-subsystemReducedDensityMatrixStillRequired = true
+subsystemReducedDensityMatrixStillRequired =
+  upstreamZModSubsystemFactorizationStillRequired
 
 fullContractDoesNotByItselfProveDepthKSubsystemEntropy : Bool
 fullContractDoesNotByItselfProveDepthKSubsystemEntropy = true
@@ -119,6 +138,10 @@ fullStateEntropyReceiptRecorded :
   fullContractVonNeumannEntropyIsNLogTwo ≡ true
 fullStateEntropyReceiptRecorded = refl
 
-subsystemGapRemainsExplicit :
-  subsystemReducedDensityMatrixStillRequired ≡ true
-subsystemGapRemainsExplicit = refl
+factorizedSubsystemReceiptRecorded :
+  factorizedSubsystemRTClosed ≡ true
+factorizedSubsystemReceiptRecorded = refl
+
+upstreamSameObjectGapRemainsExplicit :
+  upstreamZModSubsystemFactorizationStillRequired ≡ true
+upstreamSameObjectGapRemainsExplicit = refl
