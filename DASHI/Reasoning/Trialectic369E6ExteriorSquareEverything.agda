@@ -73,8 +73,12 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- depth-5 strict lift / field-presentation seed, depth-7 primitive center
 -- inverter, and the preferred depth-8 primitive center-preserving inertia word.
 -- The last one pays the selected GF(729) punctured 728-cycle and an exact
--- center-preserving Heisenberg lift at executable receipt level.  The actual
--- phase-resolved Monster state and Fin-90 multiplicity action remain open.
+-- center-preserving Heisenberg lift at executable receipt level.  Barraclough-
+-- Wilson independently source-align the degree-729 extraspecial irreducibles,
+-- while a dedicated firewall prevents their Section-6 count of 90 additional
+-- characters from being confused with the repository's model Fin90 carrier.
+-- The actual phase-resolved Monster state and Fin-90 multiplicity action remain
+-- the live same-object representation seam.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
@@ -86,6 +90,8 @@ import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftReceiptExact
 import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftValidation
 import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptExact
 import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptValidation
+import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptExact
+import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
