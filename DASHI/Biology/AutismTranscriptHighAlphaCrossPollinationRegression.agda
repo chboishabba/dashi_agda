@@ -36,3 +36,11 @@ opioidModulationNotTruthAuthority = refl
 identitySupportCompatibilityRetained :
   X.identityAndSupportCanCoexist X.canonicalHighAlphaBoundary ≡ true
 identitySupportCompatibilityRetained = refl
+
+persuasionTransmissionRemainDistinct :
+  X.persuasionCollapsedWithTransmission X.canonicalHighAlphaBoundary ≡ false
+persuasionTransmissionRemainDistinct = refl
+
+positiveEmotionNotTruthAuthority :
+  X.positiveEmotionCreatesTruthAuthority X.canonicalHighAlphaBoundary ≡ false
+positiveEmotionNotTruthAuthority = refl
