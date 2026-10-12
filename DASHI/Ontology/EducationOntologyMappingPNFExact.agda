@@ -150,16 +150,16 @@ record MappingPNFCorrespondenceStatus : Set where
     mappingRowUsedAsEvidence : Bool
     signedPressureRequiresInterpretation : Bool
     provenanceAndScopePreserved : Bool
-    confidenceDoesNotDeterminePressure : Bool
-    predicateDoesNotDeterminePressure : Bool
+    confidencePressureSeparated : Bool
+    predicatePressureSeparated : Bool
     pressureDoesNotAssertType : Bool
     unresolvedReviewRemainsResidual : Bool
 
     mappingRowUsedAsEvidenceIsTrue : mappingRowUsedAsEvidence ≡ true
     signedPressureRequiresInterpretationIsTrue : signedPressureRequiresInterpretation ≡ true
     provenanceAndScopePreservedIsTrue : provenanceAndScopePreserved ≡ true
-    confidenceDoesNotDeterminePressureIsTrue : confidenceDoesNotDeterminePressure ≡ true
-    predicateDoesNotDeterminePressureIsTrue : predicateDoesNotDeterminePressure ≡ true
+    confidencePressureSeparatedIsTrue : confidencePressureSeparated ≡ true
+    predicatePressureSeparatedIsTrue : predicatePressureSeparated ≡ true
     pressureDoesNotAssertTypeIsTrue : pressureDoesNotAssertType ≡ true
     unresolvedReviewRemainsResidualIsTrue : unresolvedReviewRemainsResidual ≡ true
 
