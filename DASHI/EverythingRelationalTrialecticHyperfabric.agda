@@ -3,13 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.\n-- Verification root for Cech/Grothendieck comparison, attached two-cell, and recognition-functor tranche.
--- In particular:
---   * citations do not import proof or authority;
---   * a general relational architecture is not a trauma-causal theorem;
---   * 369/D4/C3/Monster arithmetic is not psychological semantics;
---   * tetralemma/sixfold qualification does not replace the relational carrier;
---   * three dyadic edge states do not determine the triadic face.
+-- Aggregate import only; it does not strengthen any source claim.
 ------------------------------------------------------------------------
 
 import DASHI.Core.RelationalTrialecticSourceAtlasExact
@@ -17,8 +11,13 @@ import DASHI.Core.RelationalTrialecticDisambiguationExact
 import DASHI.Core.RelationalSelfStalkExact
 import DASHI.Core.RelationalSelfDescentExact
 import DASHI.Core.RelationalTransportDescentSheafExact
+import DASHI.Core.RelationalTransportGroupoidActionExact
+import DASHI.Core.RelationalTransportActionTwoCellExact
 import DASHI.Core.IrigarayContactRelationalRechartExact
 
+import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageExact
+import DASHI.Reasoning.NonginRecursiveObserverDepthTowerExact
+import DASHI.Reasoning.NonginMaxCutEverything
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
 import DASHI.Reasoning.Trialectic369DescentNaturalityExact
 import DASHI.Reasoning.Trialectic369CechCornerStarRecognitionExact
@@ -34,6 +33,18 @@ import DASHI.Reasoning.TrialecticProductiveJoinDescentExact
 import DASHI.Reasoning.TrialecticLocalLogicQualificationExact
 import DASHI.Reasoning.RelationalPerspectiveSubjectExact
 import DASHI.Reasoning.RelationalPerspectiveIntegrationExact
+import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact
+import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact
+import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact
+import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact
+import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact
+import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact
+import DASHI.Reasoning.TrialecticGrothendieckTransitionCocycleExact
+import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact
+import DASHI.Reasoning.TrialecticSetEffectiveDescentExact
+import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact
+import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
+import DASHI.Reasoning.Trialectic369FullBoundaryNerveComparisonExact
 
 import DASHI.Foundations.RelationalStageTwelveSiteExact
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact
