@@ -12,6 +12,8 @@ def test_holography_bridge_reuses_existing_owners_and_keeps_firewalls():
     assert "HolographicBulkBoundaryReceipt" in p
     assert "UVFinitenessHolographyTests" in p
     assert "AdelicSpectralClaimStrengthAuditExact" in p
+    assert "EntanglementGeometryMereologyBridgeExact" in p
+    assert "LargePosetContinuumLorentz31" in p
     assert "bulkBoundaryDictionaryDoesNotImplyEntropicGravity" in p
     assert "areaBoundDoesNotIdentifyEntropyOfSameBoundaryState" in p
     assert "birthmarkDoesNotImplyRyuTakayanagi" in p
@@ -25,6 +27,9 @@ def test_cross_lane_status_names_the_real_residuals():
     assert "physicalBulkBoundaryDictionaryStillRequired" in p
     assert "entropyAreaGravityCompositionStillConditional" in p
     assert "pAdicDictionaryIsNotFourDimensionalSpacetimeHolography" in p
+    assert "entanglementGeometryDoesNotSupplyHolographicDictionary" in p
+    assert "spatialEntanglementGeometryDoesNotSupplyLorentzian31" in p
+    assert "lorentzian31DoesNotSupplyHolographicDictionary" in p
 
 
 def test_quantum_rollup_imports_holography_bridge():
