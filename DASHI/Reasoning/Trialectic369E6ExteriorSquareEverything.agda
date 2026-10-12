@@ -68,18 +68,22 @@ import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 
--- Monster-3B realization lane.  The certified source matrices are vendored,
--- the preferred primitive X6 compression is welded to the selected GF(729)
--- action, companion Lean source-writes the literal 6x6 same-action/primitive
--- receipts, and the selected source word has an exact center-correction receipt
--- for the repository Heisenberg cocycle.  Full normalizer/Monster semantics
--- remain attribution-separated.
+-- Monster-3B realization lane.  Certified source matrices are vendored and
+-- normalized into X6+X6*.  Three source-word roles are kept separate:
+-- depth-5 strict lift / field-presentation seed, depth-7 primitive center
+-- inverter, and the preferred depth-8 primitive center-preserving inertia word.
+-- The last one pays the selected GF(729) punctured 728-cycle and an exact
+-- center-preserving Heisenberg lift at executable receipt level.  The actual
+-- phase-resolved Monster state and Fin-90 multiplicity action remain open.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact
+import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftValidation
 import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptValidation
+import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftReceiptExact
+import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftValidation
 import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptExact
 import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
