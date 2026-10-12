@@ -10,20 +10,20 @@ import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banks
 import DASHI.Cognition.EpsteinCorporateBoardNetworkAcquisitionExact as Boards
 import DASHI.Cognition.EpsteinTechClaimVerificationExact as Tech
 import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact as TrumpEpstein
+import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as TrumpBridge
 
 ------------------------------------------------------------------------
 -- GLOBAL ELITE / INSTITUTIONAL INFRASTRUCTURE PARETO FRONT
 --
--- This sits above the science-specific router.  It is recalibrated after the
--- August-October 2026 banking, board-network, tech and political-source sweep.
--- Ranking is acquisition priority only; it is not culpability, truth or
--- criminal-liability scoring.
+-- This sits above the science-specific router. Recalibrated after banking,
+-- board-network, tech, Trump/Mar-a-Lago and Bannon source sweeps.
+-- Ranking is acquisition priority only; never culpability/truth/liability.
 ------------------------------------------------------------------------
 
 data GlobalFrontLane : Set where
   bankingTransactionsSARs : GlobalFrontLane
   corporateBoardAtlas : GlobalFrontLane
-  trumpEpsteinPoliticalEliteAccess : GlobalFrontLane
+  trumpMarALagoBannonPoliticalAccess : GlobalFrontLane
   brockmanEdgeMITConvening : GlobalFrontLane
   thielValarBarakPalantir : GlobalFrontLane
   harvardPEDDonorBrokerage : GlobalFrontLane
@@ -48,34 +48,30 @@ open ParetoLane public
 currentGlobalFront : List ParetoLane
 currentGlobalFront =
   pareto-lane bankingTransactionsSARs 100 true true true
-    "Highest current marginal value: resolve bank-by-bank, executive-by-executive, account/transaction, SAR/AML timing, regulator findings, settlements and FBI/DOJ interview records."
+    "Highest current marginal value: resolve bank/executive/account/transaction/SAR-AML timing/regulator/FBI-DOJ interview records."
   ∷ pareto-lane corporateBoardAtlas 95 true true true
-    "Use the S&P500 board-network study as a ranked candidate generator, then resolve high-centrality directors/firms back to DOJ or institutional records."
-  ∷ pareto-lane trumpEpsteinPoliticalEliteAccess 92 true true true
-    "Expand the already-paid Trump-Epstein historical social/travel relationship through exact flight manifests, Mar-a-Lago recruitment chronology, club-access records, social/business intermediaries, birthday-book provenance, and current records-governance disputes while keeping uncorroborated allegations and Trumpism interpretation separately typed."
+    "Use the S&P500 board-network study as ranked candidate generator, then resolve high-centrality people/firms to underlying records."
+  ∷ pareto-lane trumpMarALagoBannonPoliticalAccess 94 true true true
+    "Expand Trump-world topology through exact flight manifests, Mar-a-Lago recruitment/employment/subpoena records, club-access chronology, Trump-Epstein intermediaries, Bannon-Epstein political/media brokerage, birthday-book provenance and records-governance disputes. Keep knowledge/facilitation/criminal participation unresolved unless separately paid."
   ∷ pareto-lane brockmanEdgeMITConvening 90 true true true
     "Audit scientist/tech brokerage and convening infrastructure, including Edge, MIT Media Lab and adjacent donor introductions."
   ∷ pareto-lane thielValarBarakPalantir 88 true true true
-    "Decompose direct Epstein-Thiel contact, Valar investment, Barak introductions and later Palantir-related political/lobbying surfaces; no coordination promotion across distinct edges."
+    "Decompose Epstein-Thiel contact, Valar investment, Barak introductions and Palantir political/lobbying surfaces; no coordination promotion."
   ∷ pareto-lane harvardPEDDonorBrokerage 85 true true true
     "Expand PED/Nowak/Church money, visits, introduced donors and program governance."
   ∷ pareto-lane gatesPhilanthropy 82 true true true
-    "Resolve meeting-by-meeting Gates/Foundation records, DAF structure, IPI introduction and philanthropic brokerage."
+    "Resolve Gates/Foundation meetings, DAF structure, IPI introduction and philanthropic brokerage."
   ∷ pareto-lane kraussOrigins 80 true true true
-    "Resolve ASU Origins funding, events, donor acknowledgements and one-hop scientist/donor network."
+    "Resolve ASU Origins funding, events, donor acknowledgements and scientist/donor network."
   ∷ pareto-lane maxwellGhislainePublishingTerraMar 78 true true true
     "Keep Robert Maxwell conduct/publishing network, Ghislaine conviction, TerraMar funding and family lineage separately typed while testing network continuity/access claims."
   ∷ pareto-lane directTechCorrespondence 75 true true true
-    "Resolve Musk/Hoffman/Brin/Sinofsky/others by direct document, separating contact, attempted visit, completed visit, investment and wrongdoing."
+    "Resolve Musk/Hoffman/Brin/Sinofsky/others by direct document, separating contact, attempted/completed visit, investment and wrongdoing."
   ∷ pareto-lane politicalPublicOffice 72 true true true
-    "Resolve Andrew/Mandelson/other public-office, trade and lobbying allegations or investigations independently of social-contact evidence."
+    "Resolve Andrew/Mandelson/other public-office, trade and lobbying allegations/investigations independently of social contact."
   ∷ pareto-lane yuPsychedelicConsciousness 65 true true true
-    "Continue Yu saturation as a rich local seam, but below the broader transaction/brokerage fronts."
+    "Continue Yu saturation as a rich local seam below broader transaction/brokerage fronts."
   ∷ []
-
-------------------------------------------------------------------------
--- Cross-owner paid boundaries.
-------------------------------------------------------------------------
 
 bankingCurrentlyHighestGlobalAcquisitionValue :
   Banks.bankFrontCurrentlyHighestGlobalAcquisitionValue Banks.currentFinanceFrontStatus ≡ true
@@ -90,14 +86,15 @@ trumpHistoricalRelationshipAlreadyPaid :
     TrumpEpstein.canonicalTrumpEpsteinBoundary ≡ true
 trumpHistoricalRelationshipAlreadyPaid = refl
 
-trumpCriminalParticipationNotPromoted :
-  TrumpEpstein.criminalParticipationEstablished
-    TrumpEpstein.canonicalTrumpEpsteinBoundary ≡ false
-trumpCriminalParticipationNotPromoted = refl
+trumpSocialParticipationPaid :
+  TrumpBridge.socialParticipationEstablished
+    TrumpBridge.canonicalTrumpParticipationLatticeBoundary ≡ true
+trumpSocialParticipationPaid = refl
 
-------------------------------------------------------------------------
--- Round protocol.
-------------------------------------------------------------------------
+trumpKnowledgeStillUnresolved :
+  TrumpBridge.knowledgeOfEpsteinCrimesResolved
+    TrumpBridge.canonicalTrumpParticipationLatticeBoundary ≡ false
+trumpKnowledgeStillUnresolved = refl
 
 record AcquisitionRoundProtocol : Set where
   constructor acquisition-round-protocol
@@ -115,10 +112,6 @@ open AcquisitionRoundProtocol public
 canonicalAcquisitionRoundProtocol : AcquisitionRoundProtocol
 canonicalAcquisitionRoundProtocol = acquisition-round-protocol
   true true true true true true true true
-
-------------------------------------------------------------------------
--- Attribution firewalls.
-------------------------------------------------------------------------
 
 data PriorityImpliesCulpability : Set where
 data NameFrequencyImpliesRelationshipStrength : Set where
