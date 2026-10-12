@@ -18,25 +18,24 @@ OUTER = [
 ]
 
 
-def test_atlas_outer_pair_has_degree_six_x6_compression():
+def test_atlas_outer_pair_has_degree_six_x6_compressions():
     result = analyze_split_sources(
         [parse_meataxe_file(path) for path in INNER],
         [parse_meataxe_file(path) for path in OUTER],
-        depth=5,
+        depth=7,
     )
 
     assert result["invariant_alternating_form_space_dimension"] == 1
     assert result["outer_similitude_multipliers"] == [2, 1]
     assert result["outer_generator_2_equals_inner_generator_2"] is True
 
-    hit = next(
+    depth5 = next(
         row
         for row in result["irreducible_degree6_compression_hits"]
         if row["word"] == "g2 g1 g2^-1 g1 g2^-1"
     )
-
-    assert hit["compression_charpoly"] == "x**6 - x**5 - x**3 + x**2 + 1"
-    assert hit["compression_matrix"] == [
+    assert depth5["compression_charpoly"] == "x**6 - x**5 - x**3 + x**2 + 1"
+    assert depth5["compression_matrix"] == [
         [0, 2, 1, 0, 2, 1],
         [2, 0, 2, 1, 2, 2],
         [0, 0, 0, 0, 1, 2],
@@ -44,6 +43,24 @@ def test_atlas_outer_pair_has_degree_six_x6_compression():
         [2, 0, 2, 2, 0, 2],
         [1, 0, 1, 0, 2, 2],
     ]
-    assert hit["cyclic_rank_e0"] == 6
-    assert hit["breaks_swap01_at_e0"] is True
-    assert hit["stabilises_translation_lagrangian"] is False
+    assert depth5["cyclic_rank_e0"] == 6
+    assert depth5["breaks_swap01_at_e0"] is True
+    assert depth5["stabilises_translation_lagrangian"] is False
+
+    depth7 = next(
+        row
+        for row in result["irreducible_degree6_compression_hits"]
+        if row["word"] == "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1"
+    )
+    assert depth7["compression_charpoly"] == "x**6 - x**5 - x**4 - x**3 + x**2 - 1"
+    assert depth7["compression_matrix"] == [
+        [0, 0, 0, 2, 2, 2],
+        [2, 1, 0, 2, 0, 0],
+        [0, 2, 1, 0, 0, 2],
+        [1, 0, 1, 0, 2, 0],
+        [2, 0, 2, 2, 0, 1],
+        [0, 1, 1, 2, 0, 2],
+    ]
+    assert depth7["cyclic_rank_e0"] == 6
+    assert depth7["breaks_swap01_at_e0"] is True
+    assert depth7["stabilises_translation_lagrangian"] is False
