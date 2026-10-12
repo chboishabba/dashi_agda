@@ -12,9 +12,11 @@ import DASHI.Physics.Optics.DiffuserPhysicalForwardWeldExact as Weld
 --
 -- DiffuserCam_main.m loads the pinned PSF stack, subtracts the PSF bias,
 -- optionally averages lateral/axial blocks, resizes and normalises the camera
--- measurement, then calls ADMM3D_solver.m.  The solver flips/shifts the depth
--- stack, normalises it, computes its 3-D FFT, and applies convolution through
--- FFT multiplication.  These are source semantics, not a decoded matrix H.
+-- measurement, then calls ADMM3D_solver.m. The solver flips/shifts the depth
+-- stack, normalises it, computes its 3-D FFT, applies the forward/adjoint via
+-- FFT multiplication, enforces a nonnegative primal projection, and supports
+-- 3-D TV and native sparsity regularisation. These are source semantics, not a
+-- decoded matrix H or a proof of the optical propagation law.
 ------------------------------------------------------------------------
 
 sourceMainBlobSHA : String
@@ -35,6 +37,9 @@ imageBias = 100
 sourceForwardUsesFFTConvolution : Bool
 sourceForwardUsesFFTConvolution = true
 
+sourceAdjointUsesConjugateSpectrum : Bool
+sourceAdjointUsesConjugateSpectrum = true
+
 sourceUsesDepthFlipAndShift : Bool
 sourceUsesDepthFlipAndShift = true
 
@@ -43,6 +48,12 @@ sourceNormalisesPSFStack = true
 
 sourceUsesThreeDimensionalTV : Bool
 sourceUsesThreeDimensionalTV = true
+
+sourceUsesNonnegativeProjection : Bool
+sourceUsesNonnegativeProjection = true
+
+sourceSupportsNativeSparsity : Bool
+sourceSupportsNativeSparsity = true
 
 -- Exact numerical materialisation of the binary PSF stack is still required
 -- before singular values, coherence, or a same-H condition number can be
@@ -59,9 +70,12 @@ record BerkeleyDiffuserCamSourceOperatorReceipt : Set where
     psfSensorBias : Nat
     measurementSensorBias : Nat
     fftConvolution : Bool
+    conjugateSpectrumAdjoint : Bool
     depthFlipAndShift : Bool
     psfNormalisation : Bool
     threeDimensionalTV : Bool
+    nonnegativeProjection : Bool
+    nativeSparsity : Bool
     literalNumericHMaterialised : Bool
 
 open BerkeleyDiffuserCamSourceOperatorReceipt public
@@ -75,9 +89,12 @@ publicDiffuserCamSourceOperatorReceipt = record
   ; psfSensorBias = psfBias
   ; measurementSensorBias = imageBias
   ; fftConvolution = sourceForwardUsesFFTConvolution
+  ; conjugateSpectrumAdjoint = sourceAdjointUsesConjugateSpectrum
   ; depthFlipAndShift = sourceUsesDepthFlipAndShift
   ; psfNormalisation = sourceNormalisesPSFStack
   ; threeDimensionalTV = sourceUsesThreeDimensionalTV
+  ; nonnegativeProjection = sourceUsesNonnegativeProjection
+  ; nativeSparsity = sourceSupportsNativeSparsity
   ; literalNumericHMaterialised = numericOperatorMatrixMaterialised
   }
 
