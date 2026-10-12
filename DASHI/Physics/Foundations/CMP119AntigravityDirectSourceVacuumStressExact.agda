@@ -16,13 +16,18 @@ import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as So
 import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProducerExact as T4
 
 ------------------------------------------------------------------------
--- SOURCE VACUUM READOUT -> CANDIDATE COSMOLOGICAL-STRESS SHAPE
+-- SOURCE VACUUM CONSTANT COORDINATE -> CANDIDATE COSMOLOGICAL-STRESS SHAPE
 --
--- The tensor algebra below is exact: any scalar amplitude can be placed on the
--- already-owned vacuum-stress ray T = -lambda g.  It is deliberately NOT the
--- physical promotion theorem saying that the CMP119 normalization/vacuum
--- readout is itself the renormalized gravitational amplitude.  That promotion
--- now passes through CMP119AntigravityVacuumNormalizationGravityFirewallExact.
+-- The scalar used below is the LocalizedAction constant/remainder coordinate,
+-- not the plaquette coefficient.  The tensor algebra is exact: any scalar can
+-- be placed on the already-owned vacuum-stress ray T = -lambda g.
+--
+-- This remains a CANDIDATE shape until two distinct semantic payments are made:
+--
+--   1. published CMP119 vacuumEnergy is encoded as the selected pure constant
+--      action / normalization coordinate;
+--   2. the same renormalized effective action has the required metric response
+--      under an explicit cosmological renormalization convention/calibration.
 ------------------------------------------------------------------------
 
 symbolicVacuumVariationShape :
@@ -57,6 +62,9 @@ module _
 record DirectSourceVacuumStressBoundary : Set where
   constructor direct-source-vacuum-stress-boundary
   field
+    constantRemainderCoordinateUsed : Bool
+    plaquetteProjectorUsedAsVacuumConstant : Bool
+    publishedVacuumConstantEncodingRequired : Bool
     actualSourceVacuumCoefficientFeedsStressDirectly : Bool
     symbolicVacuumVariationShapeAlreadyOwned : Bool
     algebraicCandidateVacuumStressShapeOwned : Bool
@@ -70,11 +78,15 @@ record DirectSourceVacuumStressBoundary : Set where
 canonicalDirectSourceVacuumStressBoundary : DirectSourceVacuumStressBoundary
 canonicalDirectSourceVacuumStressBoundary =
   direct-source-vacuum-stress-boundary
-    false true true true true true false false true
+    true false true false true true true true true false false true
 
 actualSourceVacuumCoefficientFeedsStressDirectly : Bool
 actualSourceVacuumCoefficientFeedsStressDirectly =
   Firewall.sourceVacuumReadoutAloneDeterminesPhysicalLambda
+
+publishedVacuumConstantEncodingRequired : Bool
+publishedVacuumConstantEncodingRequired =
+  Readout.publishedVacuumConstantEncodingStillRequired
 
 metricVolumeSameObjectReceiptRequiredForPhysicalPromotion : Bool
 metricVolumeSameObjectReceiptRequiredForPhysicalPromotion = true
