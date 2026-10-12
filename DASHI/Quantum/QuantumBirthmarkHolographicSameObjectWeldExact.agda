@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Quantum.QuantumBirthmarkHolographicContractEntropyExact as ContractEntropy
+import DASHI.Quantum.QuantumBirthmarkCorrectedRTSameObjectExact as CorrectedRT
 
 ------------------------------------------------------------------------
 -- SAME-OBJECT HOLOGRAPHIC ENTROPY WELD
@@ -14,20 +15,18 @@ import DASHI.Quantum.QuantumBirthmarkHolographicContractEntropyExact as Contract
 --   sneed-and-feed/adelic-spectral-zeta
 --   formalization/Formalization/Quantum/HolographicTensorNetwork.lean
 --
--- The upstream module defines
---   treeEntanglementEntropy k = k * log 2
--- and proves the corresponding minimal-cut area-law identity by rfl. It also
--- defines holographicContract, a uniform diagonal boundary density matrix.
+-- The entropy algebra is no longer the RT residual. Native dashi_lean4
+-- producers establish:
 --
--- The native dashi_lean4 producer now closes two mathematical gaps:
---   * full contract: S(rho_n) = n log 2;
---   * explicit factorisation 2^(k+r)=2^k*2^r: the diagonal partial trace has
---     eigenvalue 2^(-k), hence reduced entropy k log 2.
+--   * the inspected uniform diagonal contract has S(rho_n) = n log 2;
+--   * an explicit product marginal has entropy k log 2;
+--   * a corrected maximally-entangled Schmidt density kernel, on one actual
+--     joint carrier, reduces by partial trace to the same uniform marginal and
+--     therefore satisfies S(rho_A) = k log 2 = corrected cut entropy.
 --
--- Consequently the remaining RT seam is not the entropy algebra. It is the
--- same-object carrier identification between upstream's `ZMod (2^n)` depth-k
--- subtree and the explicit tensor-product/partial-trace factorisation used by
--- the Lean producer. Upstream itself does not define that map.
+-- What remains is source/carrier identity: the inspected upstream named state,
+-- its ZMod subtree and its geometric cut have not been identified with that
+-- corrected tensor-product state.  That is a different theorem from entropy.
 ------------------------------------------------------------------------
 
 upstreamRepository : String
@@ -53,20 +52,22 @@ record HolographicTensorNetworkClaimBoundary : Set where
 
     fullStateDensityMatrixEntropyWeldClosed : Bool
     factorizedSubsystemEntropyWeldClosed : Bool
+    correctedFiniteRTEntropyWeldClosed : Bool
 
-    upstreamZModSubsystemFactorizationStillRequired : Bool
     subsystemReducedDensityMatrixWeldStillRequired : Bool
+    upstreamStateCarrierWeldStillRequired : Bool
+    upstreamZModSubsystemFactorizationStillRequired : Bool
     upstreamSubsystemPartialTraceDefined : Bool
 
-    areaLawDoesNotByItselfComputeUpstreamSubsystemVonNeumannEntropy : Bool
+    areaLawDoesNotByItselfIdentifyUpstreamStateWithCorrectedState : Bool
 
 canonicalHolographicTensorNetworkClaimBoundary :
   HolographicTensorNetworkClaimBoundary
 canonicalHolographicTensorNetworkClaimBoundary =
   holographicTensorNetworkClaimBoundary
     true true true true
-    true true
-    true true false
+    true true true
+    false true true false
     true
 
 ------------------------------------------------------------------------
@@ -93,18 +94,23 @@ sameObjectBoundaryEntropyCompiler :
 sameObjectBoundaryEntropyCompiler D = sameObjectEntropyWeld D
 
 ------------------------------------------------------------------------
--- Remaining same-object obligation: upstream subtree / tensor factorisation.
+-- Remaining source/carrier obligation.
 ------------------------------------------------------------------------
 
-record UpstreamSubsystemFactorisationObligation : Set₁ where
+record UpstreamCorrectedRTIdentificationObligation : Set₁ where
   field
-    UpstreamBoundaryCarrier : Set
-    FactorizedBoundaryCarrier : Set
-    ReducedDensityMatrix : Set
+    UpstreamBoundaryState : Set
+    CorrectedEntangledState : Set
+    GeometricCutCarrier : Set
+    SelectedTensorFactor : Set
 
-    upstreamBoundaryCarrier : UpstreamBoundaryCarrier
-    factorizedBoundaryCarrier : FactorizedBoundaryCarrier
-    reducedDensityMatrix : ReducedDensityMatrix
+    upstreamBoundaryState : UpstreamBoundaryState
+    correctedEntangledState : CorrectedEntangledState
+    geometricCutCarrier : GeometricCutCarrier
+    selectedTensorFactor : SelectedTensorFactor
+
+    upstreamStateEqualsCorrectedState : Set
+    upstreamStateEqualsCorrectedStateProof : upstreamStateEqualsCorrectedState
 
     zModToTensorProductFactorisation : Set
     zModToTensorProductFactorisationProof : zModToTensorProductFactorisation
@@ -112,16 +118,16 @@ record UpstreamSubsystemFactorisationObligation : Set₁ where
     depthKSubtreeMatchesSelectedFactor : Set
     depthKSubtreeMatchesSelectedFactorProof : depthKSubtreeMatchesSelectedFactor
 
-    upstreamPartialTraceMatchesFactorizedMarginal : Set
-    upstreamPartialTraceMatchesFactorizedMarginalProof :
-      upstreamPartialTraceMatchesFactorizedMarginal
+    geometricMinimalCutMatchesSelectedFactor : Set
+    geometricMinimalCutMatchesSelectedFactorProof :
+      geometricMinimalCutMatchesSelectedFactor
 
 record SameObjectPromotionFirewall : Set where
   constructor sameObjectPromotionFirewall
   field
-    fullStateEntropyIsNotAutomaticallySubsystemEntropy : Bool
+    entropyEqualityDoesNotIdentifyStates : Bool
     factorizedSubsystemEntropyIsNotAutomaticallyUpstreamSubtreeEntropy : Bool
-    reflexiveAreaLawIsNotCarrierIdentification : Bool
+    correctedFiniteRTIsNotAutomaticallyUpstreamRT : Bool
     tensorNetworkAreaLawDoesNotByItselfEstablishPhysicalAdSCFT : Bool
     birthmarkMemoryIsNotBoundaryEntanglementEntropyByDefinition : Bool
 
@@ -141,13 +147,18 @@ factorizedSubsystemEntropyWeldClosed : Bool
 factorizedSubsystemEntropyWeldClosed =
   ContractEntropy.factorizedSubsystemRTClosed
 
-upstreamZModSubsystemFactorizationStillRequired : Bool
-upstreamZModSubsystemFactorizationStillRequired =
-  ContractEntropy.upstreamZModSubsystemFactorizationStillRequired
+correctedFiniteRTEntropyWeldClosed : Bool
+correctedFiniteRTEntropyWeldClosed =
+  CorrectedRT.correctedRTSameObjectEntropy
 
 subsystemReducedDensityMatrixWeldStillRequired : Bool
-subsystemReducedDensityMatrixWeldStillRequired =
-  upstreamZModSubsystemFactorizationStillRequired
+subsystemReducedDensityMatrixWeldStillRequired = false
+
+upstreamStateCarrierWeldStillRequired : Bool
+upstreamStateCarrierWeldStillRequired = true
+
+upstreamZModSubsystemFactorizationStillRequired : Bool
+upstreamZModSubsystemFactorizationStillRequired = true
 
 ryuTakayanagiAreaLawShapeOwned : Bool
 ryuTakayanagiAreaLawShapeOwned = true
@@ -155,5 +166,7 @@ ryuTakayanagiAreaLawShapeOwned = true
 areaLawDoesNotComputeVonNeumannEntropyOfContract : Bool
 areaLawDoesNotComputeVonNeumannEntropyOfContract = true
 
+-- Legacy name retained for consumers. The corrected finite density-matrix
+-- entropy weld is closed; the live obligation is source/carrier identity.
 densityMatrixEntropyWeldRequired : Bool
-densityMatrixEntropyWeldRequired = subsystemReducedDensityMatrixWeldStillRequired
+densityMatrixEntropyWeldRequired = false
