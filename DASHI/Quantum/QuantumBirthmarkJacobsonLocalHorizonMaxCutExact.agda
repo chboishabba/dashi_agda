@@ -112,30 +112,6 @@ canonicalJacobsonPromotionFirewall : JacobsonPromotionFirewall
 canonicalJacobsonPromotionFirewall =
   jacobsonPromotionFirewall true true true true true true true true
 
-surfaceEntropyDensity : Bool
-surfaceEntropyDensity = true
-
-localRindlerHorizon : Bool
-localRindlerHorizon = true
-
-unruhTemperatureNormalization : Bool
-unruhTemperatureNormalization = true
-
-clausiusRelation : Bool
-clausiusRelation = true
-
-raychaudhuriAreaVariation : Bool
-raychaudhuriAreaVariation = true
-
-heatFluxStressEnergy : Bool
-heatFluxStressEnergy = true
-
-allNullDirections : Bool
-allNullDirections = true
-
-einsteinEquationOfStateTarget : Bool
-einsteinEquationOfStateTarget = true
-
 unruhStillTargetNotLocalTheorem : Bool
 unruhStillTargetNotLocalTheorem = true
 
