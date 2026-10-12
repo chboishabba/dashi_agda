@@ -8,6 +8,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityVacuumExperimentDiscriminatorE
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Firewall
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationToLorentzianStressExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as DifferentialFirewall
+import DASHI.Physics.Foundations.GRQFTSingleVacuumCalibratedRadiusSquaredExact as Scale
 import DASHI.Physics.Foundations.GRQFTVacuumLockInReversalEstimatorExact as LockIn
 import DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricCompilerExact as Differential
 
@@ -52,6 +53,18 @@ staticMetricResponseRenormalizationWeldStillRequired : Bool
 staticMetricResponseRenormalizationWeldStillRequired =
   Firewall.renormalizedEffectiveActionMetricResponseRequired
 
+-- Once physical Lambda is actually calibrated as an inverse-area quantity, the
+-- canonical safe fixture no longer leaves device area algebraically opaque:
+-- Lambda R^2 = 5/3 determines an exact positive R^2 target.  A square-root
+-- theorem is not required at this stage.  Decimal/SI metrology for the supplied
+-- Lambda and conversion to a physical radius remain external.
+dimensionedRadiusSquaredCompilerOwned : Bool
+dimensionedRadiusSquaredCompilerOwned = true
+
+absoluteSIDecimalScaleStillRequired : Bool
+absoluteSIDecimalScaleStillRequired =
+  Scale.absoluteSIDecimalScaleStillRequiresReceipt
+
 -- Compatibility surface: the physical scalar metric response is NOT owned
 -- merely from Delta-V.  Only the candidate Kottler algebra is owned before the
 -- same-state metric-response receipt.
@@ -95,7 +108,8 @@ record PostNormalizationAntigravityFrontier : Set where
     staticCandidateVacuumStressAlgebraOwned : Bool
     staticVacuumEquationOfStateCompilerOwnedAfterReceipt : Bool
     staticMetricResponseAndCosmologicalRenormalizationReceiptStillRequired : Bool
-    staticAbsoluteSICalibrationStillRequired : Bool
+    dimensionedRadiusSquaredTargetCompilerOwnedAfterPhysicalLambda : Bool
+    absoluteSIDecimalScaleAndRadiusMetrologyStillRequired : Bool
 
     differentialCommonAdditiveCountertermCancelledAtNormalizationLevel : Bool
     differentialCandidateKottlerAlgebraOwned : Bool
@@ -114,7 +128,7 @@ canonicalPostNormalizationAntigravityFrontier :
 canonicalPostNormalizationAntigravityFrontier =
   post-normalization-antigravity-frontier
     true true true true true
-    true true true true
+    true true true true true
     true true true true true true true
     true true true
 
