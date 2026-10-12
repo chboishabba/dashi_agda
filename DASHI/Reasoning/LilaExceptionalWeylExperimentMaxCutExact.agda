@@ -4,7 +4,7 @@ module DASHI.Reasoning.LilaExceptionalWeylExperimentMaxCutExact where
 -- LILA / TELEODYNAMICS EXCEPTIONAL-WEYL MAX-CUT
 --
 -- This branch already owns the model-facing semantic-action / LILA experiment
--- machinery.  Stronger sibling exceptional branches now own substantially more
+-- machinery. Stronger sibling exceptional branches now own substantially more
 -- finite and algebraic structure than an earlier "find a Weyl action" roadmap
 -- suggested:
 --
@@ -20,8 +20,9 @@ module DASHI.Reasoning.LilaExceptionalWeylExperimentMaxCutExact where
 --     * signed monomial E6 simple lifts and Tits-extension residuals;
 --     * native Albert / Spin-triality / derivation-F4 programme.
 --
---   PR #1124 / Lean #60:
---     * scoped deterministic validators and artifact future-sufficiency.
+--   PR #1124 / Lean #64 (superseding stale Lean #60):
+--     * scoped deterministic validators and artifact future-sufficiency;
+--     * consumer-relative verifier sufficiency / observer non-descent.
 --
 --   PR #1121:
 --     * Brain-IT fMRI observation/transfer donor with explicit lossy-observer
@@ -202,4 +203,4 @@ canonicalLilaExceptionalWeylMaxCut =
     false
     false false false false
     false false false
-    "The repo already owns the relevant finite Weyl/root/action machinery on the exceptional branches. The live frontier is no longer construction of W(E6), W(F4), or structured W(E8); it is same-model empirical intertwining: generator fit, Coxeter/Tits residuals, held-out Weyl words, decoder compatibility, future-consumer behaviour, and scoped validation on actual LILA/neural trajectories. Sibling-branch facts remain receipts until histories are reconciled or imports land on one branch."
+    "The repo already owns the relevant finite Weyl/root/action machinery on the exceptional branches. The live frontier is no longer construction of W(E6), W(F4), or structured W(E8); it is same-model empirical intertwining: generator fit, Coxeter/Tits residuals, held-out Weyl words, decoder compatibility, future-consumer behaviour, and consumer-relative scoped validation on actual LILA/neural trajectories. Sibling-branch facts remain receipts until histories are reconciled or imports land on one branch."
