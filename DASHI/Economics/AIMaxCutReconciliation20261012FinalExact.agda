@@ -13,9 +13,12 @@ import DASHI.Economics.AITwoSidedConcentrationPropagation20261012Exact as Concen
 import DASHI.Economics.AICoreWeaveDebtCostBoundary20261012Exact as DebtCost
 import DASHI.Economics.AICoreWeaveCapitalSpreadSign20261012Exact as CapitalSign
 import DASHI.Economics.AICoreWeaveCapitalReinvestmentCoverage20261012Exact as Reinvestment
+import DASHI.Economics.AICoreWeaveCapexDecompositionNonidentifiability20261012Exact as CapexDecomposition
+import DASHI.Economics.AICoreWeaveAssetLifeObsolescenceBoundary20261012Exact as AssetLife
 import DASHI.Economics.AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact as TerminalPayer
 import DASHI.Economics.AITerminalPayerConsumerSufficiency20261012Exact as PayerConsumer
 import DASHI.Economics.AIPolicyCausalAdmission20261012Exact as PolicyCausal
+import DASHI.Economics.AISameModelSelfHostCostBoundary20261012Exact as SelfHostCost
 
 ------------------------------------------------------------------------
 -- FINAL OCTOBER-12 RECONCILIATION
@@ -52,6 +55,12 @@ selectedBenchmarkPricePairPaid = finalProducer
   "Artificial Analysis Intelligence Index: MiMo-V2.6-Pro vs Claude Opus 5.5 Max"
   "reported cost per index task and score imply approximately 36.483x closed/open cost-per-index-point ratio for this selected pair" false
 
+sameModelSelfHostEngineeringCostPaid : FinalProducer
+sameModelSelfHostEngineeringCostPaid = finalProducer
+  "same-model hosted-vs-self-host engineering cost comparator" paid
+  "MiniMax-M3; AMD MI355X; concurrency 512; 1k input; 30 percent sustained utilisation"
+  "public engineering dataset estimates USD 0.93/M output tokens self-hosted versus USD 1.20/M hosted for the same model under the declared configuration; source conflict and configuration sensitivity are retained" false
+
 coreWeaveTwoSidedConcentrationPaid : FinalProducer
 coreWeaveTwoSidedConcentrationPaid = finalProducer
   "CoreWeave two-sided concentration topology" paid
@@ -74,6 +83,16 @@ coreWeaveReinvestmentCoveragePaid = finalProducer
   "CoreWeave same-period internal reinvestment coverage" paid "CoreWeave H1-2026"
   "operating cash flow USD 3.663B versus capex USD 14.117B leaves an exact USD 10.454B same-period internal-cash shortfall" false
 
+coreWeaveCapexNonidentifiabilityPaid : FinalProducer
+coreWeaveCapexNonidentifiabilityPaid = finalProducer
+  "aggregate-capex decomposition non-identifiability" paid "CoreWeave H1-2026 / generic accounting decomposition"
+  "two valid growth/maintenance/replacement decompositions have identical USD 14.117B aggregate capex but different replacement amounts; no function of aggregate capex alone can recover replacement capex for every valid decomposition" false
+
+coreWeaveAccountingLifePaid : FinalProducer
+coreWeaveAccountingLifePaid = finalProducer
+  "CoreWeave technology-equipment accounting-life coordinate" paid "CoreWeave 2025 Form 10-K"
+  "technology equipment has a six-year estimated accounting useful life after a 2023 five-to-six-year estimate change; ordinary maintenance/repairs not extending lives are expensed" false
+
 coreWeaveNamedPayerCapacityPaid : FinalProducer
 coreWeaveNamedPayerCapacityPaid = finalProducer
   "selected CoreWeave named-payer external-cash capacity" paid "CoreWeave -> Microsoft"
@@ -91,8 +110,8 @@ terminalPayerStillPartial = finalProducer
 
 replacementObsolescenceStillPartial : FinalProducer
 replacementObsolescenceStillPartial = finalProducer
-  "replacement / obsolescence burden" partial "CoreWeave H1-2026 + lender economic-life evidence"
-  "capex materially exceeds both CFO and D&A, but growth capex is not yet separated from maintenance/replacement capex and no entity-specific obsolescence schedule is paid" false
+  "replacement / obsolescence burden" partial "CoreWeave H1-2026 + 2025 Form 10-K"
+  "aggregate capex non-identifiability is now proved and six-year accounting life plus maintenance treatment are source-paid; installed-age distribution, retirement/refresh history, economic-obsolescence calibration and capitalised replacement amount remain open" false
 
 policyCausalAdmissionStillPartial : FinalProducer
 policyCausalAdmissionStillPartial = finalProducer
@@ -112,12 +131,12 @@ globalOpenWeightTrajectoryStillOpen = finalProducer
 sameCapabilityScarcityRentStillOpen : FinalProducer
 sameCapabilityScarcityRentStillOpen = finalProducer
   "same-capability open/closed scarcity rent" open "global model market"
-  "benchmark-normalised selected-pair pricing does not establish equal capability or a global scarcity-rent spread" false
+  "benchmark-normalised selected-pair pricing does not establish equal capability; the same-model engineering comparator is hosted-open versus self-hosted-open and therefore does not supply a closed/open scarcity-rent pair" false
 
-providerServingMarginStillOpen : FinalProducer
-providerServingMarginStillOpen = finalProducer
-  "quality-adjusted provider serving margin" open "provider economics"
-  "API price is observed but same-object marginal serving cost remains absent" false
+providerServingMarginStillPartial : FinalProducer
+providerServingMarginStillPartial = finalProducer
+  "quality-adjusted provider serving margin" partial "provider economics"
+  "same-model engineering serving-cost substitution is now observed for one configuration, but the hosted provider's own marginal-cost ledger, matched SLA/cache/utilisation policy and quality-adjusted closed/open provider margin remain absent" false
 
 numericROICWACCStillOpen : FinalProducer
 numericROICWACCStillOpen = finalProducer
@@ -145,6 +164,14 @@ qualityPricePairPaid = QualityPrice.selectedPairIsPaid
 
 qualityPricePairStillNotMargin : QualityPrice.providerMarginClosed QualityPrice.mimoVsOpusBenchmarkPricePair ≡ false
 qualityPricePairStillNotMargin = QualityPrice.providerMarginStillOpen
+
+sameModelEngineeringComparatorPaid :
+  SelfHostCost.sameModelIdentity SelfHostCost.miniMaxM3EngineeringComparison ≡ true
+sameModelEngineeringComparatorPaid = SelfHostCost.sameModelIdentityPaid
+
+sameModelProviderMarginStillOpen :
+  SelfHostCost.directProviderMarginalCostObserved SelfHostCost.miniMaxM3EngineeringComparison ≡ false
+sameModelProviderMarginStillOpen = SelfHostCost.providerMarginalCostStillUnobserved
 
 coreWeaveTwoSidedObserved : Concentration.twoSidedConcentrationObserved Concentration.coreWeaveTwoSidedConcentration ≡ true
 coreWeaveTwoSidedObserved = refl
@@ -178,6 +205,17 @@ coreWeaveReplacementCapexStillOpen :
   Reinvestment.replacementCapexIdentified Reinvestment.coreWeaveH12026ReinvestmentCoverage ≡ false
 coreWeaveReplacementCapexStillOpen = Reinvestment.coreWeaveReplacementCapexStillUnidentified
 
+coreWeaveCapexCollisionPaid : CapexDecomposition.aggregateCapexCollisionPaid ≡ true
+coreWeaveCapexCollisionPaid = refl
+
+coreWeaveAssetLifePaid :
+  AssetLife.currentUsefulLifeMonths AssetLife.coreWeaveTechnologyEquipmentLife ≡ 72
+coreWeaveAssetLifePaid = AssetLife.technologyEquipmentUsefulLifeMonthsIs72
+
+coreWeaveInstalledAgeStillOpen :
+  AssetLife.installedAgeDistributionIdentified AssetLife.coreWeaveTechnologyEquipmentLife ≡ false
+coreWeaveInstalledAgeStillOpen = AssetLife.installedAgeDistributionStillOpen
+
 coreWeaveMicrosoftExternalCashCapacityPaid :
   TerminalPayer.selectedNamedPayerExternalCashCapacity TerminalPayer.coreWeaveMicrosoftTerminalPayerBoundary ≡ true
 coreWeaveMicrosoftExternalCashCapacityPaid = TerminalPayer.selectedNamedPayerCapacityIsPaid
@@ -209,6 +247,8 @@ data ConcentrationTopologyImpliesTerminalPayerPermission : Set where
 data DebtCostImpliesWACCPermission : Set where
 data SignOnlySpreadImpliesNumericSpreadPermission : Set where
 data CapexGapImpliesReplacementCapexPermission : Set where
+data AccountingLifeImpliesEconomicObsolescencePermission : Set where
+data EngineeringServingCostImpliesProviderMarginPermission : Set where
 data NamedPayerCapacityImpliesCompleteTerminalPayerPermission : Set where
 data PolicyFactsImpliesCausalConcentrationPermission : Set where
 
@@ -230,6 +270,12 @@ signOnlySpreadDoesNotAutoCreateNumericSpread ()
 capexGapDoesNotAutoIdentifyReplacementCapex : CapexGapImpliesReplacementCapexPermission → ⊥
 capexGapDoesNotAutoIdentifyReplacementCapex ()
 
+accountingLifeDoesNotCreateEconomicObsolescence : AccountingLifeImpliesEconomicObsolescencePermission → ⊥
+accountingLifeDoesNotCreateEconomicObsolescence ()
+
+engineeringServingCostDoesNotCreateProviderMargin : EngineeringServingCostImpliesProviderMarginPermission → ⊥
+engineeringServingCostDoesNotCreateProviderMargin ()
+
 namedPayerCapacityDoesNotCloseCompleteTerminalProvenance :
   NamedPayerCapacityImpliesCompleteTerminalPayerPermission → ⊥
 namedPayerCapacityDoesNotCloseCompleteTerminalProvenance ()
@@ -240,4 +286,4 @@ policyFactsDoNotCreateCausalConcentration ()
 
 finalBoundary : String
 finalBoundary =
-  "After the October-12 max-cut, selected public-equity market dynamics, Vercel platform-local open-weight persistence, one benchmark-normalised open/closed API-price pair, CoreWeave two-sided concentration, debt-cost surface, sign-only negative ROIC-WACC result under declared conditions, exact H1 internal-cash/capex shortfall, and one named Microsoft external-cash-capacity payer path are paid. Consumer-relative sufficiency now makes explicit that this pays a selected-payer question but not exhaustive terminal independence. The Australian policy lane has observed proposal/outcome/survey substrate but still lacks same-basis realised compliance costs, market-response measurement and a reviewed causal bridge. Numerical ROIC/WACC, replacement-capex decomposition and terminal capital recovery remain open."
+  "After the October-12 max-cut, selected public-equity dynamics, Vercel open-weight persistence, benchmark-normalised open/closed price evidence, a same-model hosted/self-host engineering-cost comparator, CoreWeave concentration/debt/sign-only capital spread/internal-cash shortfall, constructive capex-decomposition non-identifiability, six-year accounting-life evidence, and one Microsoft external-cash-capacity payer path are paid. Consumer-relative sufficiency makes explicit that the payer evidence closes only the selected-payer question. Replacement/obsolescence is now partially source-paid but still requires installed-age, refresh/retirement and economic-obsolescence coordinates. Provider serving margin is partial because an engineering substitution cost exists but provider-owned marginal cost remains absent. The Australian policy lane still requires same-basis realised compliance costs, observed market response and a reviewed causal bridge. Numerical ROIC/WACC and exhaustive terminal capital recovery remain open."
