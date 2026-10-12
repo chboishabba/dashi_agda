@@ -8,6 +8,7 @@ open import Data.Rational.Base using (ℚ; _/_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Physics.Foundations.GRQFTVacuumAmplitudeDifferentialRenormalizationExact as Differential
+import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as Response
 
 -- Lambda-dependent part of g_tt = -f for Kottler
 -- f = 1 - 2M/r - Lambda r^2/3.
@@ -25,6 +26,13 @@ kottlerMetricTTDeltaIsRadiusSquaredThirdDeltaLambda :
   kottlerMetricTTDelta radius lambdaOff lambdaOn
   ≡ (radius * radius / (Int.+ 3 / 1)) * (lambdaOn - lambdaOff)
 kottlerMetricTTDeltaIsRadiusSquaredThirdDeltaLambda = solve-∀
+
+------------------------------------------------------------------------
+-- NORMALIZATION-DIFFERENCE CANDIDATE
+--
+-- Kept for the exact common-counterterm algebra, but no longer promoted to a
+-- physical Delta-Lambda without a same-state metric-response receipt.
+------------------------------------------------------------------------
 
 sourceModulationMetricTTDelta :
   ℚ → Differential.CommonCountertermVacuumModulation → ℚ
@@ -45,17 +53,47 @@ sourceModulationMetricTTDeltaIsCalibratedSourceDifference radius modulation
     (Differential.sourceOn modulation)
     (Differential.sourceOff modulation)
 
+sourceModulationMetricTTDeltaIsCandidateUntilMetricResponseWeld : Bool
+sourceModulationMetricTTDeltaIsCandidateUntilMetricResponseWeld = true
+
+------------------------------------------------------------------------
+-- PHYSICAL DIFFERENTIAL METRIC RESPONSE
+------------------------------------------------------------------------
+
+physicalMetricTTDelta :
+  ℚ → Response.DifferentialMetricResponseReceipt → ℚ
+physicalMetricTTDelta radius receipt =
+  (radius * radius / (Int.+ 3 / 1))
+  * Response.physicalDeltaLambda receipt
+
+physicalMetricTTDeltaUsesSameStateMetricResponseDifference :
+  ∀ radius receipt →
+  physicalMetricTTDelta radius receipt
+  ≡ (radius * radius / (Int.+ 3 / 1))
+    * (Response.physicalLambdaOn receipt - Response.physicalLambdaOff receipt)
+physicalMetricTTDeltaUsesSameStateMetricResponseDifference radius receipt = refl
+
 fixtureRadiusTwoMetricGain :
   ∀ deltaLambda →
   (Int.+ 2 / 1 * (Int.+ 2 / 1) / (Int.+ 3 / 1)) * deltaLambda
   ≡ (Int.+ 4 / 3) * deltaLambda
 fixtureRadiusTwoMetricGain = solve-∀
 
+normalizationDifferenceAloneDeterminesPhysicalDeltaLambda : Bool
+normalizationDifferenceAloneDeterminesPhysicalDeltaLambda =
+  Response.normalizationDifferenceAloneDeterminesPhysicalDeltaLambda
+
+sameStateMetricResponseDifferenceStillRequired : Bool
+sameStateMetricResponseDifferenceStillRequired =
+  Response.sameStateMetricResponseDifferenceRequired
+
 record DifferentialMetricCompilerBoundary : Set where
   constructor differential-metric-compiler-boundary
   field
-    commonAdditiveVacuumZeroRemovedFromMetricDifference : Bool
+    commonAdditiveVacuumZeroRemovedFromNormalizationDifference : Bool
+    normalizationDifferenceCandidateMetricResponseAlgebraOwned : Bool
     sourceDifferenceToScalarMetricResponseClosedModuloMultiplicativeCalibration : Bool
+    sameStateMetricResponseDifferenceStillRequired : Bool
     absoluteStaticLambdaNeededForLockInDifference : Bool
     physicalControlToSourceDifferenceStillOpen : Bool
     multiplicativeSICalibrationStillOpen : Bool
@@ -63,4 +101,5 @@ record DifferentialMetricCompilerBoundary : Set where
 
 canonicalDifferentialMetricCompilerBoundary : DifferentialMetricCompilerBoundary
 canonicalDifferentialMetricCompilerBoundary =
-  differential-metric-compiler-boundary true true false true true false
+  differential-metric-compiler-boundary
+    true true false true false true true false
