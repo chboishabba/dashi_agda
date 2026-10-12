@@ -8,6 +8,7 @@ import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact as SourceOper
 import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditioning
 import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact as InfoSource
 import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
+import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as ExposureProvenance
 
 ------------------------------------------------------------------------
 -- ACQUISITION MAX-CUT
@@ -18,6 +19,12 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 -- 2026 information-design experiment, and the later 2026 ConvRML same-scene
 -- parallel lens/diffuser/RML comparator geometry.
 --
+-- The source-H implementation now also has a synthetic-only offline verifier:
+-- odd/even array shapes, literal FFT-vs-kernel-shift equality to floating-point
+-- tolerance, and finite-support checks of the coherence/Gershgorin compiler.
+-- This strengthens implementation confidence without promoting synthetic data
+-- into a Berkeley conditioning receipt.
+--
 -- The information-design code additionally pays a common *analysis* photon
 -- normalization: each real dataset is divided by its own mean, rescaled to a
 -- synthetic mean count of 500, biased by 10 and evaluated with a Poisson noise
@@ -26,7 +33,10 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 -- ConvRML further pays identical sensor model, common illumination / approximate
 -- magnification matching, publication exposure calibration, and released-code
 -- RGB8 + zero-gain controls. The publication and released capture script expose
--- different exposure triples; that same-dataset provenance seam stays explicit.
+-- different exposure triples. ExperimentalCoordinateDesign is reused to prove
+-- that dataset-tranche provenance separates worlds collapsed by the generic
+-- PLD label, while the paper and older AWB worlds can share one exposure profile.
+-- Thus exposure equality alone cannot identify the selected dataset.
 --
 -- Remaining numerical/physical leaves are now:
 --   A. execute/ingest the pinned binary PSF audit and retain its numerical
@@ -34,9 +44,9 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 --   B. select the lateral grid / sparsity class at the scale required by the
 --      intended 3-D claim and populate the existing same-H kappa producer from
 --      the measured coherence/Gershgorin lower bound;
---   C. reconcile exact-dataset exposure provenance, then obtain physical
---      throughput / incident-or-detected-photon calibration sufficient for a
---      genuinely matched-photon acquisition-risk comparison;
+--   C. recover the same-object capture/run provenance for the selected 100k PLD
+--      tranche, then obtain physical throughput / incident-or-detected-photon
+--      calibration for a genuinely matched-photon acquisition-risk comparison;
 --   D. add a Fresnel-zone-plate arm only if that optional stronger comparison
 --      remains scientifically useful.
 ------------------------------------------------------------------------
@@ -46,6 +56,7 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     physicalInterfaceSpinePaid : Bool
     publicBerkeleyCalibrationArtifactPinned : Bool
     publicBerkeleySourceOperatorPinned : Bool
+    offlineSyntheticOperatorSelfTestExecutable : Bool
     sourceOperatorSelectedGridColumnCompilerPaid : Bool
     depthConditioningAuditExecutable : Bool
     translatedColumnRestrictedAuditExecutable : Bool
@@ -62,6 +73,7 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     parallelSensorIlluminationGeometryPinned : Bool
     parallelExposureCalibrationPinned : Bool
     releasedCaptureGainAndFormatPinned : Bool
+    exposureProvenanceCollisionFormalised : Bool
     parallelExposureProvenanceReconciled : Bool
     matchedPhotonAcrossParallelSystems : Bool
     focusedLensDiffuserFZPMatchedPhotonReceipt : Bool
@@ -73,6 +85,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   { physicalInterfaceSpinePaid = true
   ; publicBerkeleyCalibrationArtifactPinned = true
   ; publicBerkeleySourceOperatorPinned = true
+  ; offlineSyntheticOperatorSelfTestExecutable = true
   ; sourceOperatorSelectedGridColumnCompilerPaid = true
   ; depthConditioningAuditExecutable = true
   ; translatedColumnRestrictedAuditExecutable = true
@@ -89,6 +102,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; parallelSensorIlluminationGeometryPinned = true
   ; parallelExposureCalibrationPinned = true
   ; releasedCaptureGainAndFormatPinned = true
+  ; exposureProvenanceCollisionFormalised = true
   ; parallelExposureProvenanceReconciled = false
   ; matchedPhotonAcrossParallelSystems = false
   ; focusedLensDiffuserFZPMatchedPhotonReceipt = false
@@ -104,6 +118,9 @@ numericPSFSourceStatus = Calibration.numericPSFArrayIngested
 
 sourceOperatorMaterialisationStatus : Bool
 sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMaterialised
+
+offlineSyntheticSelfTestStatus : Bool
+offlineSyntheticSelfTestStatus = Conditioning.offlineSyntheticOperatorSelfTestExecutable
 
 sourceSelectedGridCompilerStatus : Bool
 sourceSelectedGridCompilerStatus = Conditioning.sourceOperatorSelectedGridColumnCompilerPaid
@@ -147,8 +164,11 @@ parallelExposureStatus = ConvRML.exposureCalibrationPaid
 releasedCaptureControlStatus : Bool
 releasedCaptureControlStatus = ConvRML.releasedCaptureGainZeroPaid
 
+exposureProvenanceCollisionStatus : Bool
+exposureProvenanceCollisionStatus = ExposureProvenance.exposureProvenanceCollisionFormalised
+
 exposureProvenanceStatus : Bool
-exposureProvenanceStatus = ConvRML.exactDatasetExposureIdentityReconciled
+exposureProvenanceStatus = ExposureProvenance.exactDatasetExposureProvenancePaid
 
 matchedPhotonParallelStatus : Bool
 matchedPhotonParallelStatus = ConvRML.matchedPhotonAcrossSystemsPaid
