@@ -5,12 +5,24 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as Effective
 import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as Transport
+import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as Context
+import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
+import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Ledger
 
 setBoundary : Effective.TrialecticSetEffectiveDescentBoundary
 setBoundary = Effective.canonicalTrialecticSetEffectiveDescentBoundary
 
 transportBoundary : Transport.TrialecticRelationalSiteTransportEnrichmentBoundary
 transportBoundary = Transport.canonicalTrialecticRelationalSiteTransportEnrichmentBoundary
+
+contextBoundary : Context.TrialecticGrothendieckContextFibrationBridgeBoundary
+contextBoundary = Context.canonicalTrialecticGrothendieckContextFibrationBridgeBoundary
+
+discreteBoundary : Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
+discreteBoundary = Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
+refinementBoundary : Ledger.TrialecticHigherDescentRefinementBoundary
+refinementBoundary = Ledger.canonicalTrialecticHigherDescentRefinementBoundary
 
 setLevelRealizationPaid : Effective.globalRealizationConstructed setBoundary ≡ true
 setLevelRealizationPaid = refl
@@ -27,8 +39,29 @@ edgeTransportCoveragePaid = refl
 fullSiteCoverageNotPaid : Transport.existingTransportCoversAllSiteObjects transportBoundary ≡ false
 fullSiteCoverageNotPaid = refl
 
-globalVertexFibresRequired : Transport.newGlobalVertexFiberMorphismsRequired transportBoundary ≡ true
-globalVertexFibresRequired = refl
+globalVertexTransportFibresRequired : Transport.newGlobalVertexFiberMorphismsRequired transportBoundary ≡ true
+globalVertexTransportFibresRequired = refl
 
-groupoidPresheafStillOpen : Transport.groupoidValuedPresheafConstructed transportBoundary ≡ false
-groupoidPresheafStillOpen = refl
+contextIndexedFibrationBridgePaid :
+  Context.cellPresheafInstantiatesContextIndexedObservation contextBoundary ≡ true
+contextIndexedFibrationBridgePaid = refl
+
+fullSiteDiscreteGroupoidBaselinePaid :
+  Discrete.fullSiteDiscreteGroupoidBaselinePaid discreteBoundary ≡ true
+fullSiteDiscreteGroupoidBaselinePaid = refl
+
+equalityRestrictionFunctorsPaid :
+  Discrete.restrictionFunctorOnEqualityMorphismsPaid discreteBoundary ≡ true
+equalityRestrictionFunctorsPaid = refl
+
+edgeCycleNotSiteRestriction :
+  Discrete.edgeCycleIsSiteRestriction discreteBoundary ≡ false
+edgeCycleNotSiteRestriction = refl
+
+transportEnrichedPresheafStillOpen :
+  Ledger.transportEnrichedGroupoidPresheafReady refinementBoundary ≡ false
+transportEnrichedPresheafStillOpen = refl
+
+baseEnlargementOrEquivariantLayerStillRequired :
+  Ledger.baseEnlargementOrEquivariantLayerStillRequired refinementBoundary ≡ true
+baseEnlargementOrEquivariantLayerStillRequired = refl
