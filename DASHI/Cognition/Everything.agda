@@ -17,6 +17,7 @@ import DASHI.Cognition.DoblinMAPSPublicBenefitPrivateProfitExact
 import DASHI.Cognition.ChomskyLanguageAIDisputeExact
 import DASHI.Cognition.ChomskyEpsteinRelationshipExact
 import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact
+import DASHI.Cognition.TrumpMarALagoBannonBridgeExact
 import DASHI.Cognition.EpsteinSciencePatronageMicrocosmExact
 import DASHI.Cognition.EpsteinBrainITGeometryContextExact
 import DASHI.Cognition.EpsteinNaturePublishingBoundaryExact
