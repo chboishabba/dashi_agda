@@ -10,29 +10,23 @@ import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Id
 import DASHI.Physics.Propulsion.Rocketdyne1974ThermalModelValidationExact as Therm
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as Fals
 import DASHI.Physics.Propulsion.Rocketdyne1974LatestSourceComparisonNote as Latest
+import DASHI.Physics.Propulsion.Rocketdyne1974ExperimentalCoordinateRefinementExact as CoordRef
+import DASHI.Physics.Propulsion.Rocketdyne1974QualificationFeedbackWeldExact as QualFeed
 
 ------------------------------------------------------------------------
 -- TERMINAL PUBLIC-SOURCE FRONTIER
 --
--- The acquired public report now pays:
---   * exact historical WC103 + VH-101 material/coating identity;
---   * nozzle extent/contour class and source-reported thermal-model validation;
---   * a near-matched 2300 F Haynes-damage / WC103-survival discriminator;
---   * proof that temperature-only and material-blind monotone-duration models
---     cannot fit both outcomes;
---   * proof that missing local wall thickness makes thin-shell stress
---     non-unique even at fixed pressure-radius load.
+-- The acquired public report pays material/coating identity, a source-tested
+-- thermal model, a near-matched material/outcome discriminator, and exact
+-- falsifiers for material-blind temperature-only model families.  The generic
+-- experimental-coordinate machinery now also certifies that material identity
+-- separates a collision left unresolved by equilibrium temperature alone.
 --
--- A 2026 NASA niobium-ODS stress-rupture result is retained only as a modern
--- comparator showing that oxidation/coating remain live survivability
--- coordinates. It does NOT pay the historical WC103/VH-101 constitutive law.
---
--- The remaining calibrated prediction is therefore an EXTERNAL producer problem,
--- not another abstract formalisation problem.
+-- The historical Haynes -> WC103 sequence inhabits a qualification-feedback
+-- candidate shape, but formal review/approval and population-level post-change
+-- reliability remain separate acquisitions.
 ------------------------------------------------------------------------
 
--- "Exhausted" is scoped to the currently acquired public R-9557/R-9557-1
--- report surface: the archive may contain further drawings or engineering data.
 archiveGeometryExhaustedForUniqueStress : Bool
 archiveGeometryExhaustedForUniqueStress = true
 
@@ -67,8 +61,6 @@ currentTerminalFrontier =
     "Recover exact nozzle wall-gauge/local contour and same-article temperature-dependent strength/creep/coating/boundary-condition data, or obtain an equivalent engineering drawing/test-analysis package."
     "Until those coordinates are paid, retain the archive-level empirical discriminator plus constructive non-identifiability theorem; do not manufacture a unique stress or creep lifetime."
 
--- Literal reuse receipts ensure this terminal owner stays attached to the
--- already-paid producers rather than restating them as prose-only claims.
 materialReceipt : Mat.MaterialDataBoundary
 materialReceipt = Mat.canonicalMaterialDataBoundary
 
@@ -86,3 +78,12 @@ materialDependenceReceipt = Fals.canonicalMaterialDependenceBoundary
 
 contemporaryComparatorReceipt : Latest.ContemporaryComparatorBoundary
 contemporaryComparatorReceipt = Latest.canonicalContemporaryComparatorBoundary
+
+experimentalCoordinateReceipt : CoordRef.CoordinateAcquisitionFrontier
+experimentalCoordinateReceipt = CoordRef.nextCoordinateAcquisitionFrontier
+
+qualificationFeedbackReceipt : QualFeed.HistoricalFeedbackReceipt
+qualificationFeedbackReceipt = QualFeed.rocketdyneHistoricalFeedbackReceipt
+
+qualificationGovernanceBoundaryReceipt : QualFeed.Feedback.ReliabilityAdaptiveFeedbackBoundary
+qualificationGovernanceBoundaryReceipt = QualFeed.adaptiveQualificationBoundaryReceipt
