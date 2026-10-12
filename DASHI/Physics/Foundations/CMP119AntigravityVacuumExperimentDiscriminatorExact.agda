@@ -17,18 +17,21 @@ import DASHI.Physics.YangMills.BalabanClayT4LocalizedPlaquetteCoefficientProduce
 --
 -- The non-identifiability owner constructs two normalized CMP119 source worlds
 -- which agree definitionally on the current coupling / density / background /
--- fluctuation / E / R / B view but differ in projected vacuum amplitude.
+-- fluctuation / E / R / B view but differ in the constant/remainder coordinate
+-- selected for vacuum-normalization semantics.
 --
 -- DiscriminatorSynthesisExact already gives the generic theorem-shape for this
 -- situation.  Here we instantiate it literally:
 --
---   current source view            collapses the two worlds;
---   projected vacuum readout       separates them;
---   joined observation language    therefore separates them.
+--   current source view              collapses the two worlds;
+--   projected vacuum-constant readout separates them;
+--   joined observation language      therefore separates them.
 --
 -- This is an information/experiment-design theorem.  It does NOT assert that a
 -- laboratory already has a calibrated physical observable equal to the formal
--- plaquette projector.  That same-object calibration remains a physical leaf.
+-- remainder coordinate, nor that the selected CMP119 vacuumEnergy term is a
+-- pure constant action.  Those source/measurement receipts remain physical
+-- leaves.
 ------------------------------------------------------------------------
 
 record CurrentSourceViewAtScale
@@ -82,8 +85,8 @@ vacuumReadoutBundleAtScale scale =
     ℚ
     (λ source → NI.projectedVacuum source scale)
     1
-    "CMP119 literal projected-vacuum coordinate at one selected scale"
-    "formal plaquette-projector readout only; physical same-object calibration required"
+    "CMP119 selected vacuum-constant/remainder coordinate at one scale"
+    "formal constant-coordinate readout only; published-source encoding and physical measurement calibration required"
 
 vacuumReadoutSeparatesCanonicalCollision :
   ∀ {Density Background Fluctuation}
@@ -129,7 +132,7 @@ joinedCurrentViewAndVacuumReadoutSeparates source scale =
 
 ------------------------------------------------------------------------
 -- Stronger consumer statement: there is no decoder from ONLY the current
--- source view that recovers the projected vacuum coordinate for every source.
+-- source view that recovers the selected constant coordinate for every source.
 ------------------------------------------------------------------------
 
 currentSourceViewCannotCloseVacuumConsumer :
@@ -158,6 +161,8 @@ record VacuumExperimentDiscriminatorBoundary : Set where
     currentSourceViewHasExplicitVacuumCollision : Bool
     formalVacuumReadoutSeparatesThatCollision : Bool
     currentSourceViewAloneCannotRecoverVacuumConsumer : Bool
+    selectedCoordinateIsConstantRemainderNotPlaquette : Bool
+    publishedVacuumConstantEncodingStillRequired : Bool
     physicalVacuumMeasurementStillRequiresCalibration : Bool
     experimentalBundleAutomaticallyProvesPhysicalVacuumObservable : Bool
 
@@ -165,7 +170,7 @@ canonicalVacuumExperimentDiscriminatorBoundary :
   VacuumExperimentDiscriminatorBoundary
 canonicalVacuumExperimentDiscriminatorBoundary =
   vacuum-experiment-discriminator-boundary
-    true true true true false
+    true true true true true true false
 
 physicalVacuumMeasurementStillRequiresCalibration : Bool
 physicalVacuumMeasurementStillRequiresCalibration = true
