@@ -8,33 +8,26 @@ import DASHI.Physics.Closure.E6HyperformIntrinsicQuadraticLaplacianExact as Intr
 ------------------------------------------------------------------------
 -- INTRINSIC-METRIC LOCAL RADIATION + VACUUM STRESS TARGET
 --
--- For the symmetry-repaired quadratic-class Laplacian, phi = rho/27.
--- At the chart origin phi=0 and grad phi=0.  Choosing epsilon=-alpha with
--- alpha>0 in Omega=1+epsilon*phi gives the exact local Einstein tensor shape
+-- For the symmetry-repaired quadratic-class Laplacian, phi=rho/27. At the
+-- chart origin phi=0 and grad phi=0. For epsilon=-alpha, alpha>0,
 --
---   G = (alpha/27) [[12,0,0,0],
---                   [0,-8,0,1],
---                   [0,0,-8,0],
---                   [0,1,0,-8]].
+-- G=(alpha/27)[[12,0,0,0],[0,-8,0,1],[0,0,-8,0],[0,1,0,-8]]
 --
--- This decomposes exactly as
+-- decomposes exactly as
 --
---   G = R_rad - (alpha/3) g,
+-- G = R_rad -(alpha/3) g,
 --
--- where
+-- R_rad=(alpha/27)[[3,0,0,0],[0,1,0,1],[0,0,1,0],[0,1,0,1]].
 --
---   R_rad = (alpha/27) [[3,0,0,0],
---                       [0,1,0,1],
---                       [0,0,1,0],
---                       [0,1,0,1]].
+-- R_rad is traceless, satisfies the local dominant-energy shape, and is the
+-- sum of two zero-net-momentum null-radiation pairs: alpha/27 along y and
+-- 2alpha/27 along (x+z)/sqrt(2).
 --
--- R_rad is traceless and is exactly the sum of two zero-net-momentum null
--- radiation pairs: intensity alpha/27 along y and intensity 2alpha/27 along
--- (x+z)/sqrt(2).  The second term has the standard cosmological/vacuum shape.
---
--- This is a local algebraic decomposition of the required stress SHAPE. It
--- does not prove that repository gauge fields or the CMP119 vacuum source
--- dynamically realize the amplitudes on this same state.
+-- The local executable also checks the Rainich algebraic condition: this
+-- radiation remainder is NOT the stress tensor of one classical Maxwell field.
+-- Its mixed square is not proportional to the identity.  Thus any gauge-field
+-- realization must be multi-mode / multi-internal-component (or more general),
+-- rather than a single abelian field configuration.
 ------------------------------------------------------------------------
 
 originEinsteinShape : String
@@ -63,8 +56,11 @@ record IntrinsicRadiationVacuumLocalReceipt : Set where
     exactEinsteinShapeComputed : Bool
     exactVacuumPlusRadiationDecompositionChecked : Bool
     radiationTraceZeroChecked : Bool
+    radiationDominantEnergyShapeChecked : Bool
     radiationEnergyDensityPositiveForAlphaPositive : Bool
     twoCounterpropagatingNullPairDecompositionChecked : Bool
+    singleMaxwellRainichConditionSatisfied : Bool
+    multiModeOrMultiInternalComponentRequired : Bool
     vacuumShapeMatchesCosmologicalTensorShape : Bool
     cmp119SameStateVacuumAmplitudePaid : Bool
     trinificationGaugeFieldSameStateRealizationPaid : Bool
@@ -77,8 +73,9 @@ canonicalIntrinsicRadiationVacuumLocalReceipt : IntrinsicRadiationVacuumLocalRec
 canonicalIntrinsicRadiationVacuumLocalReceipt =
   intrinsic-radiation-vacuum-local-receipt
     true true true true true true true true true
+    false true true
     false false false false
-    "After replacing the coordinate torus Laplacian by the intrinsic quadratic-class Laplacian, the origin Einstein tensor admits an exact positive null-radiation plus vacuum decomposition. This removes the old pure-gauge local no-go for the repaired metric and supplies a sharp matter target. It does not identify the radiation with the trinification gauge fields or the vacuum coefficient with CMP119 until same-state amplitude/dynamics/conservation receipts are paid."
+    "The intrinsic metric origin admits an exact positive null-radiation plus vacuum decomposition. The radiation remainder is traceless and dominant-energy compatible but fails the single-Maxwell Rainich condition, so a physical gauge realization must use multiple modes/internal components or a more general field. The shape does not identify trinification gauge dynamics or the CMP119 vacuum amplitude until same-state dynamics, conservation and calibration are paid."
 
 record IntrinsicMatterRealisationWeld : Set₁ where
   field
@@ -99,9 +96,15 @@ data StressShapeCreatesMatterDynamics : Set where
 
 data RadiationDecompositionCreatesGaugeIdentification : Set where
 
+data NullDustSumCreatesSingleMaxwellField : Set where
+
 stressShapeDoesNotCreateDynamics : StressShapeCreatesMatterDynamics → {A : Set} → A
 stressShapeDoesNotCreateDynamics ()
 
 radiationShapeDoesNotCreateGaugeIdentification :
   RadiationDecompositionCreatesGaugeIdentification → {A : Set} → A
 radiationShapeDoesNotCreateGaugeIdentification ()
+
+nullDustSumDoesNotCreateSingleMaxwellField :
+  NullDustSumCreatesSingleMaxwellField → {A : Set} → A
+nullDustSumDoesNotCreateSingleMaxwellField ()
