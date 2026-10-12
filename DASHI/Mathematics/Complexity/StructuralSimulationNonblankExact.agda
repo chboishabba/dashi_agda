@@ -7,8 +7,7 @@ module DASHI.Mathematics.Complexity.StructuralSimulationNonblankExact where
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥-elim)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
@@ -45,16 +44,16 @@ nonblankBitStructuralExact
     with Local.decideEqualSound sourceEnumeration refl
 ... | refl
     rewrite Structural.blankExact structural
-          | Local.decideEqualRefl targetEnumeration (Standard.blank target) =
-    refl
+    with Local.decideEqualRefl targetEnumeration (Standard.blank target)
+... | ()
 ... | false | true
     with Local.decideEqualSound targetEnumeration refl
 ... | mappedBlank
     with Structural.symbolMapInjective structural
       (trans mappedBlank (sym (Structural.blankExact structural)))
 ... | refl
-    rewrite Local.decideEqualRefl sourceEnumeration (Standard.blank source) =
-    refl
+    with Local.decideEqualRefl sourceEnumeration (Standard.blank source)
+... | ()
 
 structuralMapNonblankCountExact :
   ∀ {SourceState SourceSymbol TargetState TargetSymbol : Set}
