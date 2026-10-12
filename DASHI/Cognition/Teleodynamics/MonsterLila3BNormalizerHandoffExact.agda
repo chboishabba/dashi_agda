@@ -7,21 +7,21 @@ module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 -- QR-generated orthogonal basis. It does not identify that permutation with
 -- a Conway/Monster/3B normalizer action.
 --
--- Sibling exceptional PR #1098 now has a materially stronger, independently
--- sourced Monster-3B lane:
+-- Current sibling PR #1098 has now advanced substantially beyond source-only
+-- acquisition:
 --
---   * ATLAS/Breuer-Magaard-Wilson identify a 12-dimensional GF(3) module for
---     2.Suz:2 / the 3B normalizer quotient;
---   * raw matrix bytes and provenance are present in the sibling branch;
---   * the repo X6+X6* symplectic host and source-to-repository intertwiner
---     compiler are typed;
---   * the direct outer generator has a symplectic-similitude nuance over F3;
---   * concrete same-basis change, cocycle/central correction and literal
---     Heisenberg conjugation remain unpaid in the compiler boundary.
+--   * ATLAS/Breuer-Magaard-Wilson 12-dimensional GF(3) source module;
+--   * raw matrix bytes/provenance;
+--   * exact symplectic basis into the repository X6+X6* polarization;
+--   * selected irreducible source word
+--       g2 g1 g2^-1 g1 g2^-1;
+--   * exact normalized 12x12 action for that word;
+--   * exact cocycle defect D and quadratic correction q;
+--   * exact selected-word Heisenberg central lift.
 --
--- This file is a cross-branch empirical handoff only. It does not import the
--- sibling owners or promote their execution/source receipts to local Agda
--- kernel evidence.
+-- The FULL 2.Suz:2 normalizer central lift / Monster semantics remain open.
+-- This file is a cross-branch empirical handoff only and does not promote the
+-- sibling execution receipt to local Agda kernel evidence.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -43,14 +43,17 @@ record MonsterLila3BNormalizerHandoff : Set where
     siblingSymplecticOrSimilitudeRolePaid : Bool
     siblingRepositoryX6PlusDualCompilerTyped : Bool
     siblingConcreteBasisIntertwinerPaid : Bool
-    siblingCentralCorrectionPaid : Bool
-    siblingConcreteHeisenbergConjugationPaid : Bool
+    siblingSelectedWordCentralCorrectionPaid : Bool
+    siblingSelectedWordHeisenbergLiftPaid : Bool
+    siblingFullNormalizerCentralCorrectionsPaid : Bool
+    siblingFullNormalizerHeisenbergLiftPaid : Bool
 
     empiricalCandidateRequiresSourceMatrixAction : Bool
     empiricalCandidateRequiresSameBasisIntertwiner : Bool
-    empiricalCandidateRequiresCentralLiftReceipt : Bool
+    empiricalFullNormalizerRequiresCentralLiftReceipts : Bool
     empiricalCandidateRequiresHeldOutComposition : Bool
-    actualMonsterLilaSameActionFitPaid : Bool
+    actualMonsterLilaSelectedWordFitPaid : Bool
+    actualMonsterLilaFullNormalizerFitPaid : Bool
 
     sameActionFitWouldCreateMonsterRepresentationIdentity : Bool
     sameActionFitWouldCreatePhysicalMechanismIdentity : Bool
@@ -68,7 +71,9 @@ canonicalMonsterLila3BNormalizerHandoff =
     true
     true
     true
-    false
+    true
+    true
+    true
     false
     false
     true
@@ -79,7 +84,9 @@ canonicalMonsterLila3BNormalizerHandoff =
     false
     false
     false
-    "The Monster-LILA engineering permutation remains only a heuristic. A serious 3B/Monster action test must use the certified 12-dimensional source action, pay the source-to-X6+X6* basis intertwiner and Heisenberg central correction, then test held-out compositions on actual model trajectories. Sibling matrix/source progress does not retroactively identify the existing PoC permutation with the normalizer."
+    false
+    false
+    "The Monster-LILA engineering permutation remains only a heuristic. Sibling #1098 now pays the source-to-X6+X6* symplectic normalization and one exact selected-word Heisenberg lift, so that word is available as a serious empirical action candidate. The full 2.Suz:2 normalizer lift, Monster orbit/stabilizer semantics and actual Monster-LILA same-action fit remain open; selected-word success would not retroactively identify the original PoC permutation with the Monster normalizer."
 
 record MonsterLila3BEmpiricalAssay : Set where
   constructor monster-lila-3b-empirical-assay
@@ -87,9 +94,10 @@ record MonsterLila3BEmpiricalAssay : Set where
     useCertifiedAtlasGeneratorMatrices : Bool
     useRepositorySymplecticBasis : Bool
     includeSimilitudeMultiplierWhereRequired : Bool
-    includeHeisenbergCentralCorrection : Bool
+    includePaidSelectedWordCentralCorrection : Bool
     compareAgainstOriginalHeuristicPermutation : Bool
-    holdOutNormalizerWords : Bool
+    testPaidSelectedWordFirst : Bool
+    holdOutAdditionalNormalizerWords : Bool
     testDecoderCompatibility : Bool
     testFutureConsumerBehaviour : Bool
     matchedModelCheckpointRequired : Bool
@@ -98,7 +106,7 @@ open MonsterLila3BEmpiricalAssay public
 canonicalMonsterLila3BEmpiricalAssay : MonsterLila3BEmpiricalAssay
 canonicalMonsterLila3BEmpiricalAssay =
   monster-lila-3b-empirical-assay
-    true true true true true true true true true
+    true true true true true true true true true true
 
 inductive HeuristicPermutationCreatesCertified3BAction : Set where
 inductive CertifiedActionFitCreatesMonsterOntology : Set where
