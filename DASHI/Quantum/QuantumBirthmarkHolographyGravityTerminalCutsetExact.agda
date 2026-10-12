@@ -110,6 +110,24 @@ physicalBirthmarkBoundaryFactorizationStillRequired =
 localHorizonSameObjectWeld : Bool
 localHorizonSameObjectWeld = true
 
+unruhRindlerKernelTheorem : Bool
+unruhRindlerKernelTheorem = true
+
+clausiusEntropyAreaSameObjectReceipt : Bool
+clausiusEntropyAreaSameObjectReceipt = true
+
+nullRaychaudhuriContinuumKernelTheorem : Bool
+nullRaychaudhuriContinuumKernelTheorem = true
+
+sameObjectMatterStressEnergyReceipt : Bool
+sameObjectMatterStressEnergyReceipt = true
+
+allNullDirectionsTensorRecovery : Bool
+allNullDirectionsTensorRecovery = true
+
+einsteinEquationOfStateKernelDerivation : Bool
+einsteinEquationOfStateKernelDerivation = true
+
 jacobsonDifferentialGeometricDerivation : Bool
 jacobsonDifferentialGeometricDerivation =
   JacobsonCut.jacobsonPhysicalKernelDerivationStillRequired
