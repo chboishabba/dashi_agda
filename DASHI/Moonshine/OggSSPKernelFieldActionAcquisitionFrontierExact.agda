@@ -3,40 +3,43 @@ module DASHI.Moonshine.OggSSPKernelFieldActionAcquisitionFrontierExact where
 ------------------------------------------------------------------------
 -- RICHER-ACTION ACQUISITION FRONTIER FOR CANONICAL GF(3^6) RECOGNITION
 --
--- #1105 proves that the currently paid standard finite-Heisenberg/symplectic
--- carrier does not canonically select the chosen GF(3^6) multiplication.
+-- The standard finite-Heisenberg/symplectic structure alone does not select
+-- the chosen GF(729) multiplication: swap01 preserves that paid structure and
+-- changes the selected product.
 --
--- A later exceptional/Monster tranche (#1098) materially changes the positive
--- target: ATLAS/Breuer--Magaard--Wilson now supply a certified absolutely
--- irreducible 12-dimensional GF(3) symplectic module for 2.Suz:2 in the
--- Monster-3B normalizer.  Absolute irreducibility means the FULL normalizer
--- cannot preserve a nonzero six-dimensional X6 submodule globally.
+-- The external-acquisition wall is now materially closed by PR #1098.  Exact
+-- ATLAS 2.Suz / 2.Suz:2 GF(3)^12 matrix bytes have been acquired, the unique
+-- inner alternating form and same-basis normalization have been computed, and
+-- a concrete source word
 --
--- Therefore the correct field-selection experiment is not
+--     g2 g1 g2^-1 g1 g2^-1
 --
---     whole normalizer -> global X6 -> X6 operator.
+-- yields an X6 compression T with irreducible degree-six minimal polynomial,
+-- cyclic rank six and an explicit swap01-breaking witness.
 --
--- It is
+-- Crucially the word does NOT stabilize X6.  The correct operator is the
+-- compression pi_X g iota_X; Lagrangian stabilization was an unnecessary
+-- stronger premise.
 --
---     imported symplectic-12 action
---       -> same-basis weld to X6 + X6*
---       -> selected element/subgroup stabilising the chosen X6 Lagrangian
---       -> induced 6x6 GF(3) operator
---       -> characteristic/minimal polynomial
---       -> irreducible degree-six receipt, if one exists
---       -> separate GF(729) same-object/action recognition.
+-- This branch independently closes the selected-presentation gap:
 --
--- PR #1098 now owns an acquisition helper plus a matrix consumer implementing
--- the invariant alternating-form solve, symplectic normalization, Heisenberg
--- cocycle correction, Lagrangian-stabilizer word search, and 6x6 polynomial
--- factor test.  The actual ATLAS matrix entries remain external input.
+--   selected f(alpha) = alpha^6 + alpha^5 + alpha^4 + 1,
+--   beta = 1 - alpha,
+--   f(1-x) = x^6 - x^5 - x^3 + x^2 + 1,
+--
+-- exactly the compression polynomial.  An explicit invertible matrix Q with
+-- det(Q)=2 mod 3 satisfies Q T = M_beta Q.
+--
+-- Therefore the remaining field debt is no longer source acquisition or a
+-- polynomial/cardinality coincidence.  The finite selected GF729 presentation
+-- weld is paid by executable exact arithmetic.  What remains is Agda-kernel
+-- certification and the stronger Monster action/orbit/stabilizer semantics.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.OggSSPHeisenbergSymplecticFieldNoGoExact as NoGo
 import DASHI.Moonshine.OggSSPP2TernaryHeisenbergAxis0Exact as Axis0
 import DASHI.Moonshine.Base369Monster3BActualActionRecognitionBidiExact as Actual
@@ -45,6 +48,7 @@ import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as Shortes
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
+import DASHI.Moonshine.OggSSPMonster3BSelectedGF729WeldExact as Weld
 
 standardHeisenbergSymplecticSelectsFieldProduct : Bool
 standardHeisenbergSymplecticSelectsFieldProduct =
@@ -143,20 +147,6 @@ exceptionalMonsterAlbertSameActionPaidIsFalse :
   exceptionalMonsterAlbertSameActionPaid ≡ false
 exceptionalMonsterAlbertSameActionPaidIsFalse = refl
 
-------------------------------------------------------------------------
--- Correct post-ATLAS positive target.
-------------------------------------------------------------------------
-
-record SymplecticTwelveLagrangianFieldSelector : Set₁ where
-  field
-    SourceSymplecticTwelve : Set
-    sourceElementOrSubgroup : Set
-    preservesChosenLagrangian : Set
-    inducedOperator : H.X6 → H.X6
-    breaksCoordinateSwap : Set
-    degreeSixFieldGeneratorReceipt : Set
-open SymplecticTwelveLagrangianFieldSelector public
-
 record FieldActionAcquisitionBoundary : Set where
   constructor field-action-acquisition-boundary
   field
@@ -165,14 +155,16 @@ record FieldActionAcquisitionBoundary : Set where
     shortest3BCompilerChainLocated : Bool
     selected3BLargeLinearRouteNotAnX6Operator : Bool
     exceptionalF4E6LaneNeedsSameActionRecognition : Bool
-    certifiedExternalSymplectic12SourceLocatedOn1098 : Bool
-    sourceTwelveModuleAbsolutelyIrreducible : Bool
+    certifiedExternalTwelveDimensionalSourceLocated : Bool
+    actualAtlasMatricesImportedOn1098 : Bool
     fullNormalizerGlobalX6TargetRejected : Bool
-    lagrangianStabilizerFieldSelectorInterfaceTyped : Bool
-    invariantFormBasisCocyclePolynomialAnalyzerInstalledOn1098 : Bool
-    actualAtlasMatricesImported : Bool
-    actualDegreeSixFieldCandidatePaid : Bool
-    fullFieldRecognitionReady : Bool
+    compressionRouteRequiresLagrangianStabilizer : Bool
+    actualDegreeSixCompressionPaid : Bool
+    actualSwapBreakingPaid : Bool
+    selectedGF729AffineGeneratorWeldPaid : Bool
+    explicitSelectedGF729IntertwinerRuntimePaid : Bool
+    agdaKernelMatrixIntertwinerPaid : Bool
+    fullMonsterActionOrbitStabilizerRecognitionPaid : Bool
     note : String
 open FieldActionAcquisitionBoundary public
 
@@ -180,6 +172,14 @@ canonicalFieldActionAcquisitionBoundary : FieldActionAcquisitionBoundary
 canonicalFieldActionAcquisitionBoundary =
   field-action-acquisition-boundary
     true true true true true
-    true true true true true
-    false false false
-    "The field-recognition frontier has moved beyond a hypothetical global X6 endomorphism. PR #1098 locates the absolutely irreducible symplectic-12 Monster-3B normalizer source and installs the exact matrix consumer. The remaining external payment is the actual ATLAS generator entries; after import, field candidates must arise only from source elements/subgroups stabilising the chosen X6 Lagrangian, followed by an irreducible degree-six polynomial receipt and the separate GF(729) recognition contract."
+    true
+    true
+    true
+    false
+    (Weld.degreeSixCompressionReceiptPaid Weld.canonicalBoundary)
+    (Weld.swap01BrokenByCompression Weld.canonicalBoundary)
+    (Weld.affineBetaEqualsOneMinusAlphaLocated Weld.canonicalBoundary)
+    (Weld.selectedGF729PresentationWeldPaid Weld.canonicalBoundary)
+    (Weld.agdaKernelIntertwinerProofPaid Weld.canonicalBoundary)
+    (Weld.fullActionOrbitStabilizerRecognitionPaid Weld.canonicalBoundary)
+    "The field-source acquisition seam is closed at the exact finite level: real ATLAS bytes -> same-basis 12D computation -> degree-six X6 compression -> beta=1-alpha -> explicit Q conjugacy to the selected GF(729) presentation. The surviving obligations are kernel certification and the stronger Monster action/orbit/stabilizer semantic recognition."
