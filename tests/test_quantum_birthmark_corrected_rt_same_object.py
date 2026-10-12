@@ -14,11 +14,16 @@ def test_corrected_rt_owner_records_same_object_entangled_cut_theorem():
     assert "reducedEntropy_eq_kLogTwo" in p
     assert "correctedRTSameObjectEntropy" in p
     assert "sameObjectEntropyAlgebraClosed" in p
+    assert "upstreamZModCarrierFactorizationSourceWritten" in p
+    assert "correctedEntangledStateOnUpstreamCarrierSourceWritten" in p
+    assert "correctedUnbalancedRTForAdequateComplementSourceWritten" in p
 
 
-def test_rt_owner_keeps_only_real_identification_residuals():
+def test_rt_owner_recuts_upstream_state_seam_as_definition_replacement():
     p = text("DASHI/Quantum/QuantumBirthmarkCorrectedRTSameObjectExact.agda")
-    assert "upstreamStateIdentificationStillRequired" in p
+    assert "upstreamStateContractSameObjectImpossibleAsWritten" in p
+    assert "upstreamDefinitionReplacementRequired" in p
+    assert "upstreamTreeContractionReplacementOrEquivalenceStillRequired" in p
     assert "minimalCutCarrierIdentificationStillRequired" in p
     assert "physicalBulkBoundaryDictionaryStillRequired" in p
     assert "correctedFiniteModelIsNotPhysicalAdSCFT" in p
