@@ -23,6 +23,8 @@ import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact 
 import DASHI.Reasoning.TrialecticGrothendieckBoundaryAnchoredMediationExact as Anchored
 import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as ContextBridge
 import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
+import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
+import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact as C3Repair
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Higher
 
 originBoundary : Origin.NonginSourceBoundary
@@ -60,6 +62,12 @@ contextFibrationBoundary = ContextBridge.canonicalTrialecticGrothendieckContextF
 
 discreteGroupoidBoundary : Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
 discreteGroupoidBoundary = Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
+c3NoGoBoundary : C3NoGo.TrialecticC3GlobalNaturalityNoGoBoundary
+c3NoGoBoundary = C3NoGo.canonicalTrialecticC3GlobalNaturalityNoGoBoundary
+
+c3RepairBoundary : C3Repair.TrialecticC3EdgeResidualRepairBoundary
+c3RepairBoundary = C3Repair.canonicalTrialecticC3EdgeResidualRepairBoundary
 
 higherBoundary : Higher.TrialecticHigherDescentPromotionBoundary
 higherBoundary = Higher.canonicalTrialecticHigherDescentPromotionBoundary
@@ -145,6 +153,22 @@ c3ExternalVsSiteRestrictionSeparated :
   Discrete.edgeCycleIsSiteRestriction discreteGroupoidBoundary ≡ false
 c3ExternalVsSiteRestrictionSeparated = refl
 
+naiveGlobalC3NaturalityRejected :
+  C3NoGo.naiveGlobalC3NaturalityPaid c3NoGoBoundary ≡ false
+naiveGlobalC3NaturalityRejected = refl
+
+c3RicherLocalContextRequired :
+  C3NoGo.richerLocalContextRequired c3NoGoBoundary ≡ true
+c3RicherLocalContextRequired = refl
+
+c3ResidualRepairPaid :
+  C3Repair.selectedResidualReconstructsWholeRotatedEdge c3RepairBoundary ≡ true
+c3ResidualRepairPaid = refl
+
+c3OldFullT9RetentionNotRequired :
+  C3Repair.oldFullT9EdgeRequiredForRotatedEdgeConsumer c3RepairBoundary ≡ false
+c3OldFullT9RetentionNotRequired = refl
+
 transportEnrichedGroupoidPresheafStillOpen :
   Higher.groupoidPresheafReady higherBoundary ≡ false
 transportEnrichedGroupoidPresheafStillOpen = refl
@@ -178,6 +202,10 @@ record NonginCurrentMaxCutBoundary : Set where
     contextIndexedFibrationBridgePaid : Bool
     fullSiteDiscreteGroupoidBaselinePaid : Bool
     c3ExternalVsSiteRestrictionSeparated : Bool
+    naiveGlobalC3NaturalityRejected : Bool
+    c3RicherLocalContextRequired : Bool
+    c3ResidualRepairPaid : Bool
+    c3OldFullT9RetentionRequired : Bool
     transportEnrichedGroupoidPresheafPaid : Bool
     empiricalTenPercentLawPromoted : Bool
     universalRicherRepresentationAdvantagePromoted : Bool
@@ -210,6 +238,10 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; contextIndexedFibrationBridgePaid = true
   ; fullSiteDiscreteGroupoidBaselinePaid = true
   ; c3ExternalVsSiteRestrictionSeparated = true
+  ; naiveGlobalC3NaturalityRejected = true
+  ; c3RicherLocalContextRequired = true
+  ; c3ResidualRepairPaid = true
+  ; c3OldFullT9RetentionRequired = false
   ; transportEnrichedGroupoidPresheafPaid = false
   ; empiricalTenPercentLawPromoted = false
   ; universalRicherRepresentationAdvantagePromoted = false
