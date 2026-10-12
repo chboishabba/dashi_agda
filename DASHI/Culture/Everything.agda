@@ -62,6 +62,7 @@ import DASHI.Culture.PowersPlantationParadiseHistoricalClaimReceiptsExact
 import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact
 import DASHI.Culture.ColonialTheatreAccessAdapterExact
+import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact
 import DASHI.Culture.PowersPlantationParadiseSynthesisExact
 import DASHI.Culture.PowersPlantationParadiseValidation
 import DASHI.Culture.WittgensteinUsePracticeSourceBridgeExact
@@ -131,4 +132,3 @@ import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact
 module DASHI.Culture.Everything where
 
 -- Culture domain rollup.
-
