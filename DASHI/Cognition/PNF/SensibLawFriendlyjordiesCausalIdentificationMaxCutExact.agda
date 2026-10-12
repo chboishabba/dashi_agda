@@ -3,7 +3,7 @@ module DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExa
 ------------------------------------------------------------------------
 -- FRIENDLYJORDIES CAUSAL-IDENTIFICATION MAX-CUT
 --
--- The external-world owner pays narrow observed facts.  This owner reuses the
+-- The external-world owner pays narrow observed facts. This owner reuses the
 -- repository causal-estimand and identification-family stack to make the next
 -- promotion explicit:
 --
@@ -13,7 +13,7 @@ module DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExa
 --     != reviewed causal bridge
 --     != governance trajectory / party ranking.
 --
--- No canonical causal bridge is manufactured here.  The point of the weld is
+-- No canonical causal bridge is manufactured here. The point of the weld is
 -- to replace an unstructured "reviewed causal premise" with proof-relevant
 -- estimand + identification obligations before it may enter the existing
 -- governance transition compiler.
@@ -55,7 +55,7 @@ identifiedLocalEffectCreatesUniversalPartyRanking = false
 -- Case-indexed estimand demand.
 --
 -- The exact mathematical estimand is still supplied by the existing
--- CausalEffectEstimand owner.  These references pin the political-history
+-- CausalEffectEstimand owner. These references pin the political-history
 -- question before an estimand can be admitted, preventing an effect estimate
 -- for a different population/intervention/comparator/outcome/horizon from
 -- silently paying this case.
@@ -108,7 +108,8 @@ southAustraliaCausalEstimandDemand =
 -- Identification-paid causal bridge.
 --
 -- An inhabitant must carry BOTH an explicit repository CausalEffectEstimand and
--- one admissible family-specific identification gate.  Family choice remains
+-- one admissible family-specific identification gate. The estimand's own scope
+-- references must equal this case's demanded coordinates. Family choice remains
 -- obligation-relative: this module does not decree randomisation,
 -- observational adjustment, longitudinal analysis, or another family as the
 -- universally correct historical design.
@@ -120,15 +121,29 @@ record IdentifiedGovernanceCausalBridge
   constructor identified-governance-causal-bridge
   field
     estimand : Estimand.CausalEffectEstimand
+
+    estimandKindMatches :
+      Estimand.kind estimand
+      ≡ GovernanceCausalEstimandDemand.estimandKind demand
+    populationMatches :
+      Estimand.populationReference (Estimand.scope estimand)
+      ≡ GovernanceCausalEstimandDemand.populationReference demand
+    interventionMatches :
+      Estimand.interventionReference (Estimand.scope estimand)
+      ≡ GovernanceCausalEstimandDemand.interventionReference demand
+    comparatorMatches :
+      Estimand.comparatorReference (Estimand.scope estimand)
+      ≡ GovernanceCausalEstimandDemand.comparatorReference demand
+    outcomeMatches :
+      Estimand.outcomeReference (Estimand.scope estimand)
+      ≡ GovernanceCausalEstimandDemand.outcomeReference demand
+    horizonMatches :
+      Estimand.timeHorizonReference (Estimand.scope estimand)
+      ≡ GovernanceCausalEstimandDemand.horizonReference demand
+
     identificationFamily : Identification.CausalIdentificationFamily
     identificationGate :
       Identification.IdentificationEvidenceGate identificationFamily
-
-    populationMatchReference : String
-    interventionMatchReference : String
-    comparatorMatchReference : String
-    outcomeMatchReference : String
-    horizonMatchReference : String
 
     reviewRef : String
     sourceRefs : List String
@@ -152,7 +167,7 @@ open IdentifiedGovernanceCausalBridge public
 
 ------------------------------------------------------------------------
 -- Only an identification-paid bridge may discharge the older generic reviewed
--- bridge slot.  The older slot is retained for compatibility, but this is the
+-- bridge slot. The older slot is retained for compatibility, but this is the
 -- preferred compiler for the Friendlyjordies governance application.
 ------------------------------------------------------------------------
 
@@ -161,13 +176,13 @@ reviewedBridgeFromIdentification :
     {demand : GovernanceCausalEstimandDemand case} →
   IdentifiedGovernanceCausalBridge case demand →
   World.ReviewedCausalBridge case
-reviewedBridgeFromIdentification bridge =
+reviewedBridgeFromIdentification {case} bridge =
   World.reviewed-causal-bridge
     (sourceRefs bridge)
     (reviewRef bridge)
     (CausalPremise bridge)
     (causalPremiseWitness bridge)
-    _
+    case
     refl
     false
     false
@@ -194,7 +209,7 @@ cprsWorldTransitionEvidenceFromIdentifiedAdmission admission =
     (IdentifiedTransitionAdmission.legacyAdmission admission)
 
 ------------------------------------------------------------------------
--- South Australia remains doubly gated.  Causal identification does not repair
+-- South Australia remains doubly gated. Causal identification does not repair
 -- the still-missing pinned Friendlyjordies M12 source unit; source provenance
 -- and causal identification are orthogonal payments.
 ------------------------------------------------------------------------
@@ -246,7 +261,7 @@ data CPRSObservedVoteMeansCausalEffect : Set where
 data SAHighRenewableEpisodeMeansGovernanceEffect : Set where
 data SourceTraceMeansCausalIdentification : Set where
 data LocalIdentifiedEffectMeansUniversalPartyRanking : Set where
-\data IdentificationRepairsMissingSourceTrace : Set where
+data IdentificationRepairsMissingSourceTrace : Set where
 
 cprsObservedVoteDoesNotIdentifyCausalEffect :
   CPRSObservedVoteMeansCausalEffect → ⊥
