@@ -26,7 +26,8 @@ module DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import DASHI.Core.Prelude using (⊥)
+open import Data.Product using (_×_; proj₁; proj₂)
+open import DASHI.Core.Prelude using (⊥; cong)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as FibreRepair
@@ -35,10 +36,6 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as NoGo
 import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact as Transport
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
-
-------------------------------------------------------------------------
--- 1. Selected residual: the two T^3 coordinates absent from participant A.
-------------------------------------------------------------------------
 
 record C3ABResidual : Set where
   constructor c3-ab-residual
@@ -72,10 +69,6 @@ reconstructRotatedAB participantA residual =
     (synthesisAB residual)
     participantA
 
-------------------------------------------------------------------------
--- 2. Exact factorisation through A paired with the T^6 residual.
-------------------------------------------------------------------------
-
 participantAWithResidual :
   Cell.CompatibleThreeCellTrialecticBoundary →
   Cell.TrialecticBasis3Cell × C3ABResidual
@@ -92,11 +85,6 @@ rotatedABFactorsThroughAWithResidual =
   Factorized.factorizedRefinement
     (λ pair → reconstructRotatedAB (proj₁ pair) (proj₂ pair))
     (λ boundary → refl)
-
-------------------------------------------------------------------------
--- 3. The generic consumer-repair theorem makes separation necessary for every
--- globally sufficient residual refinement.
-------------------------------------------------------------------------
 
 anyRepairForBMustSeparateWitness :
   {Residual : Set} →
@@ -120,12 +108,6 @@ selectedResidualSeparatesWitness :
   ⊥
 selectedResidualSeparatesWitness ()
 
-------------------------------------------------------------------------
--- 4. A smaller endpoint-only repair is already sufficient for the B consumer.
--- This distinguishes the consumer-relative repair from the stronger rotated-
--- edge consumer above.
-------------------------------------------------------------------------
-
 participantBResidualObserver :
   Cell.CompatibleThreeCellTrialecticBoundary →
   Cell.TrialecticBasis3Cell
@@ -139,10 +121,6 @@ participantBRepairsParticipantBConsumer :
 participantBRepairsParticipantBConsumer
   left right samePair =
   cong proj₂ samePair
-
-------------------------------------------------------------------------
--- 5. Promotion firewall.
-------------------------------------------------------------------------
 
 data SelectedC3ResidualIsMinimalUnique : Set where
 data SelectedC3ResidualIsEmpiricalPsychologicalState : Set where
