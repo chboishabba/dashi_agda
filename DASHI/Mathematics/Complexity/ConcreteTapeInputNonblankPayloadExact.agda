@@ -6,11 +6,13 @@ module DASHI.Mathematics.Complexity.ConcreteTapeInputNonblankPayloadExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (zero)
+open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
+import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeSymbolWriteLocalityExact as Writes
 import DASHI.Mathematics.Complexity.ConcreteTapeNonblankWriteBoundExact as Nonblank
 import DASHI.Mathematics.Complexity.ConcreteTapeGuardedNonblankExact as GuardedNonblank
@@ -97,20 +99,18 @@ initialInputNonblankExactPayload {machine} (symbol ∷ next ∷ rest)
 guardedInputNonblankExactPayload :
   ∀ {machine : Local.ConcreteTapeMachine}
     (input : Input.InputWord machine)
-    (steps : Agda.Builtin.Nat.Nat) →
+    (steps : Nat) →
   Nonblank.nonblankCount
     (Local.finiteSymbol machine)
     (Local.blank machine)
-    (Writes.eraseRow
-      (DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact.guardedInitialRow
-        input steps))
+    (Writes.eraseRow (Guard.guardedInitialRow input steps))
   ≡
   Nonblank.nonblankCount
     (Local.finiteSymbol machine)
     (Local.blank machine)
     input
 guardedInputNonblankExactPayload input steps =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (GuardedNonblank.guardedRowNonblankExactInitial input steps)
     (initialInputNonblankExactPayload input)
 
