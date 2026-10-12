@@ -20,9 +20,10 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 -- 2026 information-design experiment, and the later 2026 ConvRML same-scene
 -- parallel lens/diffuser/RML comparator geometry.
 --
--- Local execution now additionally pays two durable, SHA-pinned receipts:
+-- Local execution additionally pays two durable Git-blob-pinned receipts:
 --   * a synthetic source-H implementation check covering odd/even shapes,
---     FFT-vs-kernel-shift agreement and 500 randomized Gershgorin support tests;
+--     FFT-vs-kernel-shift agreement and every support of orders 1--3 on the
+--     four declared fixtures (22,218 supports, zero violations);
 --   * a synthetic claim-scale memory-plan execution over a declared geometry.
 -- These are captured execution receipts, not merely executable code. They remain
 -- deliberately separate from the still-unexecuted real Berkeley PSF receipt.
@@ -60,6 +61,7 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     publicBerkeleySourceOperatorPinned : Bool
     offlineSyntheticOperatorSelfTestExecutable : Bool
     localSyntheticOperatorReceiptCaptured : Bool
+    localExhaustiveFiniteSupportReceiptCaptured : Bool
     claimScaleMemoryPlannerExecutable : Bool
     localClaimScalePlannerReceiptCaptured : Bool
     sourceOperatorSelectedGridColumnCompilerPaid : Bool
@@ -92,6 +94,7 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; publicBerkeleySourceOperatorPinned = true
   ; offlineSyntheticOperatorSelfTestExecutable = true
   ; localSyntheticOperatorReceiptCaptured = LocalExecution.syntheticOperatorReceiptCaptured
+  ; localExhaustiveFiniteSupportReceiptCaptured = LocalExecution.exhaustiveFiniteSupportReceiptCaptured
   ; claimScaleMemoryPlannerExecutable = true
   ; localClaimScalePlannerReceiptCaptured = LocalExecution.claimScalePlannerReceiptCaptured
   ; sourceOperatorSelectedGridColumnCompilerPaid = true
@@ -132,6 +135,9 @@ offlineSyntheticSelfTestStatus = Conditioning.offlineSyntheticOperatorSelfTestEx
 
 localSyntheticReceiptStatus : Bool
 localSyntheticReceiptStatus = LocalExecution.syntheticOperatorReceiptCaptured
+
+localExhaustiveSupportReceiptStatus : Bool
+localExhaustiveSupportReceiptStatus = LocalExecution.exhaustiveFiniteSupportReceiptCaptured
 
 claimScaleMemoryPlannerStatus : Bool
 claimScaleMemoryPlannerStatus = Conditioning.claimScaleMemoryPlannerExecutable
