@@ -2,20 +2,13 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCookLevinBitCodeWidthLowerExact 
 
 ------------------------------------------------------------------------
 -- GUARDED TABLEAU WIDTH <= ACTUAL COOK FORMULA BINARY CODE LENGTH
---
--- This is already latent in ConcreteTapeCookLevinQuotationGrowthExact:
---
---   guarded columns
---     <= encoded initial-row bits
---     <= global CNF clauses
---     <= Cook AST nodes
---     <= binary formula bits.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; _*_)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
@@ -34,7 +27,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as B
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinarySizeLowerBoundExact as BinaryLower
 
 cookNodeCountBelowBitCode :
-  (formula : DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary.BooleanFormula) →
+  (formula : Cook.BooleanFormula) →
   FormulaSize.formulaNodeCount formula
   ≤ Binary.formulaBitCodeLength formula
 cookNodeCountBelowBitCode formula =
@@ -97,7 +90,7 @@ guardedColsBelowCookFormulaBitCode
         stateCoverage symbolCoverage nonempty steps cols initialTarget
 
 ------------------------------------------------------------------------
--- Unlike the earlier strict payload-growth theorem, this lower bound does not
--- require a nonempty seed.  It charges the full guarded tableau width, including
--- the 2*T blank-margin columns, into the actual binary Cook quotation.
+-- This lower bound needs no nonempty-seed premise. It charges the full guarded
+-- tableau width, including the 2*T blank-margin columns, into the actual binary
+-- Cook quotation.
 ------------------------------------------------------------------------
