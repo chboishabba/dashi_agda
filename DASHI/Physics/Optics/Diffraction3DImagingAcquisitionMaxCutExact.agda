@@ -13,18 +13,19 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 -- ACQUISITION MAX-CUT
 --
 -- Public-source acquisition has paid the literal Berkeley artifacts, source
--- operator semantics, an executable same-artifact depth-conditioning audit,
--- the 2026 information-design experiment, and the later 2026 ConvRML
--- same-scene parallel lens/diffuser/RML comparator geometry.
+-- operator semantics, executable depth and finite translated-column sparse
+-- certificate producers, the 2026 information-design experiment, and the later
+-- 2026 ConvRML same-scene parallel lens/diffuser/RML comparator geometry.
 --
--- Remaining numerical/physical leaves are sharply separated:
---   A. execute/ingest the pinned binary PSF audit and retain its numeric receipt;
---   B. extend from same-lateral depth columns to translated 3-D columns and
---      prove/measure a support-uniform restricted bound for the declared scene
---      class, thereby populating the existing same-H kappa producer;
+-- Remaining numerical/physical leaves are now:
+--   A. execute/ingest the pinned binary PSF audit and retain its numerical
+--      depth + finite translated-column certificate receipt;
+--   B. choose/execute the declared lateral grid / sparsity class at the scale
+--      needed for the intended 3-D claim and populate the existing same-H kappa
+--      producer from the measured coherence/Gershgorin lower bound;
 --   C. establish photon/throughput/exposure matching for a quantitative
 --      cross-system claim rather than inferring it from parallel acquisition;
---   D. add a Fresnel-zone-plate arm only if the stronger three-way FZP claim
+--   D. add a Fresnel-zone-plate arm only if that optional stronger comparison
 --      remains scientifically useful.
 ------------------------------------------------------------------------
 
@@ -34,9 +35,11 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     publicBerkeleyCalibrationArtifactPinned : Bool
     publicBerkeleySourceOperatorPinned : Bool
     depthConditioningAuditExecutable : Bool
+    translatedColumnRestrictedAuditExecutable : Bool
+    coherenceSparseLowerBoundCompilerPaid : Bool
     berkeleyNumericPSFArrayIngested : Bool
     depthOnlyNumericalReceiptCaptured : Bool
-    translatedColumnRestrictedAuditPaid : Bool
+    translatedColumnNumericalReceiptCaptured : Bool
     sameHRestrictedConditionNumberMeasured : Bool
     publishedInformationDesignExperimentPinned : Bool
     publishedRealRMLVsDiffuserCamComparisonPinned : Bool
@@ -52,9 +55,11 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; publicBerkeleyCalibrationArtifactPinned = true
   ; publicBerkeleySourceOperatorPinned = true
   ; depthConditioningAuditExecutable = true
+  ; translatedColumnRestrictedAuditExecutable = true
+  ; coherenceSparseLowerBoundCompilerPaid = true
   ; berkeleyNumericPSFArrayIngested = false
   ; depthOnlyNumericalReceiptCaptured = false
-  ; translatedColumnRestrictedAuditPaid = false
+  ; translatedColumnNumericalReceiptCaptured = false
   ; sameHRestrictedConditionNumberMeasured = false
   ; publishedInformationDesignExperimentPinned = true
   ; publishedRealRMLVsDiffuserCamComparisonPinned = true
@@ -77,11 +82,17 @@ sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMateri
 depthAuditExecutableStatus : Bool
 depthAuditExecutableStatus = Conditioning.depthOnlySameLateralAuditExecutable
 
+translatedAuditExecutableStatus : Bool
+translatedAuditExecutableStatus = Conditioning.translatedColumnRestrictedAuditExecutable
+
+sparseLowerBoundCompilerStatus : Bool
+sparseLowerBoundCompilerStatus = Conditioning.coherenceToSparseLowerBoundCompilerPaid
+
 depthNumericReceiptStatus : Bool
 depthNumericReceiptStatus = Conditioning.depthOnlyNumericalReceiptCaptured
 
-translatedAuditStatus : Bool
-translatedAuditStatus = Conditioning.translatedColumnRestrictedAuditPaid
+translatedNumericReceiptStatus : Bool
+translatedNumericReceiptStatus = Conditioning.translatedColumnNumericalReceiptCaptured
 
 restrictedKappaStatus : Bool
 restrictedKappaStatus = Conditioning.globalSparseRestrictedKappaPaid
