@@ -13,6 +13,8 @@ module DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact where
 --   * mutual-nearest pairing is a partial matching once deterministic nearest
 --     maps are supplied;
 --   * several fine forms visibly saturate at the reported 849-zero sample;
+--   * saturation loses wall identity: the mutual-pair count alone cannot
+--     recover which canonical Ogg lane produced the row;
 --   * saturation is not promoted to a zeta-zero parametrisation or RH result;
 --   * the photorealistic poster's 37/43 labels are explicitly rejected using
 --     the repo's independently typed non-Ogg controls.
@@ -21,8 +23,9 @@ module DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong)
 
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
@@ -121,7 +124,7 @@ figureRows =
   ∷ []
 
 ------------------------------------------------------------------------
--- 2. Source-visible saturation receipts.
+-- 2. Source-visible saturation receipts and exact information loss.
 ------------------------------------------------------------------------
 
 p11ReportedMutualPairsSaturate :
@@ -135,6 +138,32 @@ p13ReportedMutualPairsSaturate = refl
 p71ReportedMutualPairsSaturate :
   mutualPairs p71Exponent1Row ≡ figureZeroCount
 p71ReportedMutualPairsSaturate = refl
+
+p11P13MutualCountCollision :
+  mutualPairs p11Exponent1Row ≡ mutualPairs p13Exponent1Row
+p11P13MutualCountCollision = refl
+
+p11P13LanesDistinct :
+  figureLane p11Exponent1Row ≡ figureLane p13Exponent1Row → ⊥
+p11P13LanesDistinct ()
+
+record MutualCountLaneDecoder : Set where
+  field
+    decodeLane : Nat → Lane.MonsterPrimeLane
+    recoversLane :
+      (row : ClimbingGymFigureRow) →
+      decodeLane (mutualPairs row) ≡ figureLane row
+
+open MutualCountLaneDecoder public
+
+noMutualCountLaneDecoder : MutualCountLaneDecoder → ⊥
+noMutualCountLaneDecoder decoder =
+  p11P13LanesDistinct
+    (trans
+      (sym (recoversLane decoder p11Exponent1Row))
+      (trans
+        (cong (decodeLane decoder) p11P13MutualCountCollision)
+        (recoversLane decoder p13Exponent1Row)))
 
 ------------------------------------------------------------------------
 -- 3. Generic deterministic mutual-nearest relation.
@@ -254,6 +283,7 @@ record ClimbingGymFigureObservationBoundary : Set where
     sourceReportedIntegerRowsRecorded : Bool
     rowsUseTypedCanonicalOggLane : Bool
     mutualNearestPartialMatchingTheoremPaid : Bool
+    saturatedCountCannotRecoverOggLane : Bool
     oneWayNearestAssignmentClaimedInjective : Bool
     fineFormSaturationVisibleInSuppliedRows : Bool
     shiftControlNumbersIndependentlyRecomputed : Bool
@@ -269,4 +299,4 @@ canonicalClimbingGymFigureObservationBoundary :
   ClimbingGymFigureObservationBoundary
 canonicalClimbingGymFigureObservationBoundary =
   climbing-gym-figure-observation-boundary
-    true true true false true false false false true false false
+    true true true true false true false false false true false false
