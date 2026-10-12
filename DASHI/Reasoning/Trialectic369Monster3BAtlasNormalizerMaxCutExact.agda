@@ -3,37 +3,32 @@ module DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact where
 ------------------------------------------------------------------------
 -- MONSTER 3B NORMALIZER / HEISENBERG REALIZATION CURRENT MAX-CUT
 --
--- PAID BY EXTERNAL CERTIFIED SOURCE RECEIPTS:
--- * ATLAS publishes an absolutely irreducible 12-dimensional GF(3) module for
---   2.Suz:2;
--- * Breuer--Magaard--Wilson identify the same 12-dimensional symplectic role
---   inside the Monster 3B normalizer and its extraspecial 3_+^(1+12);
--- * direct and 38-dimensional acquisition identifiers are known.
+-- PAID BY CERTIFIED SOURCE + EXACT FINITE EXECUTION:
+-- * ATLAS direct 2.Suz / 2.Suz:2 12-dimensional GF(3) matrices are now
+--   vendored byte-for-byte with provenance/hash manifest;
+-- * the inner 2.Suz pair determines a unique nondegenerate alternating form;
+-- * the direct outer pair acts by symplectic similitudes with multipliers 2,1;
+-- * the same basis normalization to repository X6 + X6* is computed;
+-- * every source word has the canonical X6 compression pi_X g iota_X;
+-- * depth-five search finds a concrete source word with irreducible degree-six
+--   compression, cyclic rank six and an explicit swap01-breaking witness;
+-- * PR #1105 identifies that compression with multiplication by beta=1-alpha
+--   in its already-selected GF729 presentation by an explicit invertible Q.
 --
--- PAID IN-REPO:
--- * standard quotient carrier X6 + X6* and alternating form;
--- * exact finite Heisenberg central extension;
--- * typed source-to-repository symplectic-action interface;
--- * exact cocycle-correction condition for the asymmetric Heisenberg product;
--- * GAP acquisition helper now emits integer matrices;
--- * Python matrix consumer solves invariant alternating form, constructs a
---   standard symplectic basis, checks the central correction by polarization,
---   and searches the chosen-Lagrangian stabilizer for degree-six field
---   candidates;
--- * the direct source module's absolute irreducibility recuts the field target:
---   the FULL normalizer is not promoted to a global X6 -> X6 action.  Any
---   GF(729) selector must come from a selected element/subgroup stabilising the
---   chosen X6 Lagrangian after the 12-dimensional basis weld.
+-- IMPORTANT NON-COLLAPSE:
+-- the winning word does NOT stabilize the chosen X6 Lagrangian.  Requiring
+-- stabilisation was an unnecessary stronger premise; compression is the lawful
+-- downstream operator.  Also, the direct outer generator's multiplier -1 is
+-- retained as a similitude/center-sensitive fact rather than silently called a
+-- strict symplectic matrix.
 --
--- EXACT REMAINING RECEIPTS:
--- 1. acquire/import the actual published 12x12 generator entries;
--- 2. execute the installed alternating-form / basis normalization consumer;
--- 3. instantiate concrete source-to-repository generator intertwiners;
--- 4. instantiate the computed central corrections and Heisenberg lifts;
--- 5. search source words/stabilizers and test induced 6x6 minimal polynomials;
--- 6. if a degree-six irreducible candidate exists, pay the separate GF(729)
---    same-object/action recognition contract;
--- 7. instantiate output-translation equivariance downstream.
+-- REMAINING RECEIPTS:
+-- 1. Agda-kernelize the concrete 12x12 basis/intertwiner and 6x6 Q identities;
+-- 2. instantiate the central correction / Heisenberg lift for selected source
+--    normalizer elements where actual central-extension action is consumed;
+-- 3. close the larger Monster action/orbit/stabilizer semantic recognition;
+-- 4. instantiate output-translation equivariance downstream;
+-- 5. physical normalizer realization remains separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -41,7 +36,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact as Source
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact as Weld
-import DASHI.Moonshine.Monster3BAtlasLagrangianFieldSelectionBoundaryExact as Field
+import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact as Field
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Reasoning.Trialectic369MultiplicityNormalizerTranslationDescentExact as Descent
 
@@ -50,21 +45,23 @@ record Monster3BAtlasNormalizerBoundary : Set where
   field
     certifiedDirectTwelveModuleLocated : Bool
     certifiedMonsterNormalizerRepresentationLocated : Bool
-    sourceSymplecticActionExists : Bool
-    sourceSp12ExtraspecialInterpretationPaid : Bool
+    sourceNormalizerQuotientActionExists : Bool
+    sourceExtraspecialInterpretationPaid : Bool
     sourceTwelveModuleAbsolutelyIrreducible : Bool
     repositoryHeisenbergCarrierPaid : Bool
-    symplecticBasisIntertwinerInterfacePaid : Bool
+    sourceToRepositoryActionInterfacePaid : Bool
     centralCorrectionConditionExposed : Bool
-    acquisitionScriptExportsIntegerMatrices : Bool
-    matrixAnalysisConsumerInstalled : Bool
-    globalNormalizerX6ActionRejected : Bool
-    lagrangianStabilizerFieldSearchTyped : Bool
     rawAtlasMatricesImported : Bool
-    concreteAlternatingFormComputed : Bool
-    concreteSymplecticBasisChangePaid : Bool
+    concreteAlternatingFormRuntimePaid : Bool
+    concreteBasisNormalizationRuntimePaid : Bool
+    outerSimilitudeMultiplierRuntimePaid : Bool
+    globalNormalizerX6SubmoduleTargetRejected : Bool
+    compressionFieldSelectorRoutePaid : Bool
+    degreeSixCompressionCandidatePaid : Bool
+    selectedGF729PresentationWeldRuntimePaid : Bool
+    sameBasisIntertwinerAgdaKernelPaid : Bool
     concreteHeisenbergCentralCorrectionPaid : Bool
-    degreeSixFieldCandidatePaid : Bool
+    fullMonsterActionOrbitStabilizerRecognitionPaid : Bool
     actualMonsterOutputTranslationEquivariancePaid : Bool
     physicalNormalizerRealizationPaid : Bool
     terminalNote : String
@@ -81,15 +78,17 @@ canonicalMonster3BAtlasNormalizerBoundary =
     true
     true
     true
+    Source.canonicalBoundary.rawMatrixEntriesInRepo
+    Field.canonicalCompressionFieldSelectionBoundary.innerAlternatingFormRuntimePaid
+    Field.canonicalCompressionFieldSelectionBoundary.sameBasisSymplecticWeldRuntimePaid
+    Field.canonicalCompressionFieldSelectionBoundary.outerSimilitudeMultiplierRuntimePaid
     true
-    Field.canonicalMonster3BFieldSelectionBoundary.matrixConsumerInstalled
-    Field.canonicalMonster3BFieldSelectionBoundary.globalNormalizerX6FieldActionTargetRejected
-    Field.canonicalMonster3BFieldSelectionBoundary.elementOrSubgroupLagrangianStabilizerSearchRequired
+    true
+    Field.canonicalCompressionFieldSelectionBoundary.actualDegreeSixCompressionCandidateFound
+    Field.canonicalCompressionFieldSelectionBoundary.selectedGF729PresentationWeldRuntimePaid
     false
     false
     false
     false
     false
-    false
-    false
-    "Source existence and the computational weld are now paid through an executable matrix consumer. The irreducible 12D source module rules out treating the whole normalizer as a preserved X6 module. Remaining external input is the actual ATLAS matrices; after import, the installed solver pays the invariant form/basis/cocycle computations and searches source elements or stabilizers for a genuine degree-six X6 field selector."
+    "The source-existence and matrix-acquisition walls are closed. Exact finite execution now yields a concrete degree-six X6 compression and an explicit cross-PR conjugacy to the selected GF(729) generator beta=1-alpha. Remaining work is kernelization plus actual central-extension/action semantics, not further field numerology or a Lagrangian-stabilizer search."
