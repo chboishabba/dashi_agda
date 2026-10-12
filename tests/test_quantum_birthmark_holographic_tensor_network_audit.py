@@ -15,6 +15,9 @@ def test_upstream_tensor_network_audit_blocks_false_same_object_rt_promotion():
     assert "rtTheoremIsDefinitionLevelAreaLaw" in p
     assert "upstreamRTNotDerivedFromConstructedBoundaryState" in p
     assert "correctedMaximallyEntangledCutModelRequired" in p
+    assert "upstreamStateContractMismatchSourceWrittenInLean" in p
+    assert "upstreamStateContractSameObjectImpossibleAsWritten" in p
+    assert "upstreamDefinitionReplacementRequired" in p
 
 
 def test_rollup_imports_tensor_network_audit():
