@@ -35,18 +35,18 @@ nonblankBitStructuralExact
     {source = source} {target = target}
     sourceEnumeration targetEnumeration structural symbol
     with Local.decideEqual sourceEnumeration symbol (Standard.blank source)
-       | Local.decideEqual targetEnumeration
-           (Structural.symbolMap structural symbol)
-           (Standard.blank target)
-... | true | true = refl
-... | false | false = refl
-... | true | false
+... | true
     with Local.decideEqualSound sourceEnumeration refl
 ... | refl
     rewrite Structural.blankExact structural
-    with Local.decideEqualRefl targetEnumeration (Standard.blank target)
-... | ()
-... | false | true
+          | Local.decideEqualRefl targetEnumeration (Standard.blank target) =
+    refl
+... | false
+    with Local.decideEqual targetEnumeration
+      (Structural.symbolMap structural symbol)
+      (Standard.blank target)
+... | false = refl
+... | true
     with Local.decideEqualSound targetEnumeration refl
 ... | mappedBlank
     with Structural.symbolMapInjective structural
