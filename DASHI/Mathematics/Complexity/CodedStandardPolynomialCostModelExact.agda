@@ -2,26 +2,13 @@ module DASHI.Mathematics.Complexity.CodedStandardPolynomialCostModelExact where
 
 ------------------------------------------------------------------------
 -- CONCRETE STANDARD-MACHINE POLYNOMIAL COST MODEL
---
--- The old PolynomialCostModel is intentionally parametric.  Rather than try to
--- extract finite programs from an arbitrary predicate, instantiate a model in
--- which polynomial decider evidence IS the Set-level coded standard-machine
--- witness constructed in CodedStandardPolynomialDeciderExact.
---
--- Only the generic closure infrastructure remains parameterized here:
---   * polynomial maps;
---   * map -> coded-decider precomposition compiler;
---   * polynomial verifiers;
---   * certificate bounds.
---
--- For this model, SAT-candidate standard-machine coverage follows by projection,
--- not by an additional representation axiom.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact as CodedDecider
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedStandardCandidateBridgeExact as CandidateBridge
@@ -65,18 +52,12 @@ codedStandardPolynomialCostModel :
   CodedStandardCostClosure →
   PR.PolynomialCostModel Cook.BooleanFormula
 codedStandardPolynomialCostModel closure = record
-  { PR.polynomialTimeMap =
-      polynomialTimeMap closure
-  ; PR.polynomialTimeDecider =
-      CodedDecider.CodedStandardPolynomialDecider
-  ; PR.polynomialTimeVerifier =
-      polynomialTimeVerifier closure
-  ; PR.polynomialCertificateBound =
-      polynomialCertificateBound closure
-  ; PR.identityMapPolynomial =
-      identityMapPolynomial closure
-  ; PR.deciderClosedUnderPrecomposition =
-      precomposeCodedDecider closure
+  { PR.polynomialTimeMap = polynomialTimeMap closure
+  ; PR.polynomialTimeDecider = CodedDecider.CodedStandardPolynomialDecider
+  ; PR.polynomialTimeVerifier = polynomialTimeVerifier closure
+  ; PR.polynomialCertificateBound = polynomialCertificateBound closure
+  ; PR.identityMapPolynomial = identityMapPolynomial closure
+  ; PR.deciderClosedUnderPrecomposition = precomposeCodedDecider closure
   }
 
 ------------------------------------------------------------------------
@@ -95,15 +76,42 @@ codedStandardCostCandidateCoverage closure = record
   }
 
 ------------------------------------------------------------------------
+-- Therefore, in this concrete model, only the resource-closing compiler remains
+-- on the SAT lower-bound path.
+------------------------------------------------------------------------
+
+codedStandardResourceCompilerGivesSATNotInP :
+  (closure : CodedStandardCostClosure) →
+  Closure.ResourceClosingCompiler
+    (codedStandardCostCandidateCoverage closure) →
+  Clay.SATNotInP (codedStandardPolynomialCostModel closure)
+codedStandardResourceCompilerGivesSATNotInP closure compiler =
+  Closure.standardMaxCutGivesSATNotInP
+    (codedStandardCostCandidateCoverage closure)
+    compiler
+
+codedStandardResourceCompilerGivesPNotEqualsNP :
+  (closure : CodedStandardCostClosure) →
+  Clay.PNotEqualsNPEstablishedBackground
+    (codedStandardPolynomialCostModel closure) →
+  Closure.ResourceClosingCompiler
+    (codedStandardCostCandidateCoverage closure) →
+  Clay.PNotEqualsNP (codedStandardPolynomialCostModel closure)
+codedStandardResourceCompilerGivesPNotEqualsNP
+    closure background compiler =
+  Closure.standardMaxCutGivesPNotEqualsNP
+    background
+    (codedStandardCostCandidateCoverage closure)
+    compiler
+
+------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
 --
--- MODEL IDENTIFICATION has now split cleanly:
+-- Inside this concrete standard-machine model, candidate coverage A is paid by
+-- projection. The Clay-critical residual is therefore the resource-closing
+-- compiler B, plus ordinary model infrastructure/background for this same cost
+-- model (maps/precomposition, verifiers/certificates, SAT-in-NP/NP-completeness).
 --
---   * inside this concrete standard-machine cost model, candidate coverage A is
---     definitionally/projectionally paid;
---   * relating some OTHER abstract PolynomialCostModel to this one is a model-
---     equivalence theorem and must not be assumed parametrically.
---
--- Remaining generic cost engineering is exactly the closure record above.  It
--- is ordinary complexity-model infrastructure, separate from the SAT diagonal.
+-- Relating some OTHER abstract PolynomialCostModel to this one remains a
+-- separate model-equivalence theorem and is never assumed parametrically.
 ------------------------------------------------------------------------
