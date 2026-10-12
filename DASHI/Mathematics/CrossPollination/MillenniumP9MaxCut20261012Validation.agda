@@ -64,6 +64,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPStandardMachineMaxCutClosureExac
 
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialDeciderExact
+import DASHI.Mathematics.Complexity.CodedStandardFormulaInputFaithfulExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedStandardCandidateBridgeExact
 import DASHI.Mathematics.Complexity.CodedStandardPolynomialCostModelExact
 
@@ -72,8 +73,14 @@ import DASHI.Mathematics.Complexity.CodedStandardPolynomialCostModelExact
 --
 -- This root does not prove P != NP.
 --
--- In the concrete coded-standard model, candidate program representation and a
--- faithful literal-input, size-only polynomial clock are now paid by projection.
+-- In the concrete coded-standard model, candidate representation now has:
+--   * finite Set-level program code;
+--   * injective canonical formula input;
+--   * exact literal input-length accounting;
+--   * a size-only polynomial clock over that literal input length;
+--   * exact standard-machine execution and final decision equality.
+-- Candidate coverage is projectional in that model, not an extraction axiom.
+--
 -- The live Clay-critical constructor is ResourceClosingCompiler. Its witness
 -- must expose a finite standard target with:
 --
@@ -81,7 +88,7 @@ import DASHI.Mathematics.Complexity.CodedStandardPolynomialCostModelExact
 --     ; edge-for-edge simulation of D on the target's own guarded Cook formula
 --     ; finite negation suffix,
 --
--- and close all three phases to the SAME exact Cook budget T.
+-- and close all phases to the SAME exact Cook budget T.
 --
 -- Necessary scale receipts are explicit: candidateSteps(ownCL) <= T, while any
 -- nonempty fixed seed is strictly shorter than bitCode(ownCL). Thus the missing
