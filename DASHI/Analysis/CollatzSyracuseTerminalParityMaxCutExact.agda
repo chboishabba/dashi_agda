@@ -13,7 +13,9 @@ module DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact where
 --   -> three residual literal prefix families 11011, 11101, 1111...
 --   -> a residual-only finite-frontier compiler
 --   -> generic fixed-word affine threshold certificates
---   -> residual word-certificate coverage -> strict-descent frontier.
+--   -> arbitrary trailing-even certificate extension
+--   -> residual word-certificate coverage -> strict-descent frontier
+--   -> strictness guard rejecting globally bounded pseudo-frontiers.
 --
 -- The residual producer is still theorem-strength.  Finite computation,
 -- density decay, spectral mixing, affine cocycles, or word surgery do not by
@@ -31,7 +33,9 @@ import DASHI.Analysis.CollatzSyracuseOddSurvivorFrontierExact as OddFrontier
 import DASHI.Analysis.CollatzSyracuseEarlyCylinderEliminationExact as Early
 import DASHI.Analysis.CollatzSyracuseResidualSurvivorFrontierExact as ResidualFrontier
 import DASHI.Analysis.CollatzSyracuseUniformWordDescentCertificateExact as WordCert
+import DASHI.Analysis.CollatzSyracuseTrailingZeroCertificateExact as ZeroCert
 import DASHI.Analysis.CollatzSyracuseResidualWordCertificateFrontierExact as WordFrontier
+import DASHI.Analysis.CollatzSyracuseResidualFrontierStrictnessGuardExact as Strictness
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionCocycleExact as Cocycle
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionSwapExact as Swap
 import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact as Universal
@@ -49,7 +53,9 @@ record TerminalParityMaxCutBoundary : Set where
     oddFrontierCompilerPaid : Nat
     residualFrontierCompilerPaid : Nat
     uniformWordDescentCertificatePaid : Nat
+    trailingZeroCertificateCompilerPaid : Nat
     residualWordCertificateFrontierPaid : Nat
+    residualFrontierStrictnessGuardPaid : Nat
     affineCorrectionCocyclePaid : Nat
     adjacentCorrectionSwapPaid : Nat
     universalStoppingCompilerPaid : Nat
@@ -68,7 +74,7 @@ record TerminalParityMaxCutBoundary : Set where
 canonicalTerminalParityMaxCutBoundary : TerminalParityMaxCutBoundary
 canonicalTerminalParityMaxCutBoundary =
   terminalParityMaxCutBoundary
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     0 0 0 0
     0 0 0 1
 
@@ -114,11 +120,23 @@ uniformWordCertificatePaid :
   ≡ 1
 uniformWordCertificatePaid = refl
 
+trailingZeroCertificatePaid :
+  ZeroCert.TrailingZeroCertificateBoundary.arbitraryTrailingZerosCompilerPaid
+    ZeroCert.canonicalTrailingZeroCertificateBoundary
+  ≡ 1
+trailingZeroCertificatePaid = refl
+
 residualWordCertificateFrontierPaid :
   WordFrontier.ResidualWordCertificateFrontierBoundary.finiteCertificateCoverageCompilerPaid
     WordFrontier.canonicalResidualWordCertificateFrontierBoundary
   ≡ 1
 residualWordCertificateFrontierPaid = refl
+
+residualFrontierStrictnessGuardPaid :
+  Strictness.ResidualFrontierStrictnessBoundary.globallyBoundedFrontierRejected
+    Strictness.canonicalResidualFrontierStrictnessBoundary
+  ≡ 1
+residualFrontierStrictnessGuardPaid = refl
 
 correctionCocyclePaid :
   Cocycle.AffineCorrectionCocycleBoundary.exactCorrectionCocycleOwned
@@ -161,3 +179,9 @@ certificateCoverageDoesNotCreateUnboundedness :
     WordFrontier.canonicalResidualWordCertificateFrontierBoundary
   ≡ 0
 certificateCoverageDoesNotCreateUnboundedness = refl
+
+strictnessGuardDoesNotCreateUnboundedness :
+  Strictness.ResidualFrontierStrictnessBoundary.finiteCoverageCreatesUnboundedness
+    Strictness.canonicalResidualFrontierStrictnessBoundary
+  ≡ 0
+strictnessGuardDoesNotCreateUnboundedness = refl
