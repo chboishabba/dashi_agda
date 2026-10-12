@@ -6,6 +6,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Quantum.QuantumBirthmarkCorrectedRTSameObjectExact as RT
 import DASHI.Quantum.QuantumBirthmarkHolographicSameObjectWeldExact as SameObject
+import DASHI.Quantum.QuantumBirthmarkHolographicResidualTransportExact as Transport
+import DASHI.Quantum.QuantumBirthmarkJacobsonLocalHorizonMaxCutExact as JacobsonCut
 import DASHI.Quantum.QuantumBirthmarkHolographicLorentz31JacobsonBridgeExact as Jacobson
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as EntropyGravity
 
@@ -13,9 +15,9 @@ import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as Entropy
 -- TERMINAL CROSS-LANE CUTSET
 --
 -- The finite entropy algebra is closed on the corrected maximally-entangled
--- cut model.  The remaining frontier is now entirely same-object/physical
--- promotion work.  This owner co-locates those live leaves without turning
--- any of them into assumptions or completed theorems.
+-- cut model.  Consumer-relative birthmark transport now has an exact generic
+-- compiler.  Jacobson's route has also been recut against existing QFT/GR
+-- owners so that only genuine physical/kernel payments remain live.
 ------------------------------------------------------------------------
 
 record ClosedFiniteLayer : Set where
@@ -26,24 +28,41 @@ record ClosedFiniteLayer : Set where
     factorizedReducedEntropyClosed : Bool
     entropyDensitySemanticsSeparated : Bool
     birthmarkResidualSemanticsSeparated : Bool
+    birthmarkResidualTransportCompilerOwned : Bool
+    jacobsonPaymentSurfaceRecutOwned : Bool
 
 canonicalClosedFiniteLayer : ClosedFiniteLayer
 canonicalClosedFiniteLayer =
-  closedFiniteLayer true true true true true
+  closedFiniteLayer true true true true true true true
+
+------------------------------------------------------------------------
+-- Physical / same-object leaves.
+--
+-- The old single `birthmarkResidualTransport` leaf is split: the abstract
+-- consumer-relative compiler is paid, while a physical factorisation through
+-- the chosen boundary map remains to be instantiated.  Likewise the old broad
+-- Jacobson leaf is split into the actual QFT/continuum/matter obligations.
+------------------------------------------------------------------------
 
 record TerminalPhysicalCutset : Set where
   constructor terminalPhysicalCutset
   field
     upstreamStateCarrierIdentification : Bool
     physicalBulkBoundaryDictionary : Bool
-    birthmarkResidualTransport : Bool
+    physicalBirthmarkBoundaryFactorizationStillRequired : Bool
     localHorizonSameObjectWeld : Bool
-    jacobsonDifferentialGeometricDerivation : Bool
+    unruhRindlerKernelTheorem : Bool
+    clausiusEntropyAreaSameObjectReceipt : Bool
+    nullRaychaudhuriContinuumKernelTheorem : Bool
+    sameObjectMatterStressEnergyReceipt : Bool
+    allNullDirectionsTensorRecovery : Bool
+    einsteinEquationOfStateKernelDerivation : Bool
     empiricalValidation : Bool
 
 canonicalTerminalPhysicalCutset : TerminalPhysicalCutset
 canonicalTerminalPhysicalCutset =
-  terminalPhysicalCutset true true true true true true
+  terminalPhysicalCutset
+    true true true true true true true true true true true
 
 record TerminalPromotionFirewall : Set where
   constructor terminalPromotionFirewall
@@ -52,16 +71,18 @@ record TerminalPromotionFirewall : Set where
     holographyDoesNotImplyJacobson : Bool
     birthmarkDoesNotImplyCurvature : Bool
     entropyDensityDoesNotImplyStressTensor : Bool
+    entropyPerAreaDoesNotIdentifyBirthmark : Bool
     pAdicBoundaryDoesNotImplyPhysicalSpacetime : Bool
     correctedStateDoesNotIdentifyUpstreamState : Bool
+    observableTransportDoesNotImplyBulkReconstruction : Bool
 
 canonicalTerminalPromotionFirewall : TerminalPromotionFirewall
 canonicalTerminalPromotionFirewall =
-  terminalPromotionFirewall true true true true true true
+  terminalPromotionFirewall true true true true true true true true
 
 statusStatement : String
 statusStatement =
-  "Finite RT entropy algebra is closed on a corrected maximally-entangled cut model. Live work is now source/carrier identification, physical bulk-boundary transport, local-horizon thermodynamics, Einstein-equation derivation, and empirical validation."
+  "Corrected finite RT and generic consumer-relative birthmark transport are structurally paid. Live work is upstream/physical carrier identification, physical birthmark factorisation, local Rindler-Unruh/Clausius payment, continuum Raychaudhuri, sourced stress-energy, null-direction tensor recovery, Einstein equation-of-state derivation, and empirical validation."
 
 correctedFiniteRTEntropyClosed : Bool
 correctedFiniteRTEntropyClosed = RT.correctedRTSameObjectEntropy
@@ -72,15 +93,23 @@ upstreamStateCarrierIdentification = SameObject.upstreamStateCarrierWeldStillReq
 physicalBulkBoundaryDictionary : Bool
 physicalBulkBoundaryDictionary = RT.physicalBulkBoundaryDictionaryStillRequired
 
+-- Backwards-compatible broad status name retained for older consumers.
 birthmarkResidualTransport : Bool
-birthmarkResidualTransport = true
+birthmarkResidualTransport = Transport.physicalBoundaryFactorizationStillRequired
+
+birthmarkResidualTransportCompilerOwned : Bool
+birthmarkResidualTransportCompilerOwned = Transport.birthmarkResidualTransportCompilerOwned
+
+physicalBirthmarkBoundaryFactorizationStillRequired : Bool
+physicalBirthmarkBoundaryFactorizationStillRequired =
+  Transport.physicalBoundaryFactorizationStillRequired
 
 localHorizonSameObjectWeld : Bool
 localHorizonSameObjectWeld = true
 
 jacobsonDifferentialGeometricDerivation : Bool
 jacobsonDifferentialGeometricDerivation =
-  Jacobson.einsteinEquationNotDerivedByThisAdapter
+  JacobsonCut.jacobsonPhysicalKernelDerivationStillRequired
 
 empiricalValidation : Bool
 empiricalValidation = true
