@@ -38,7 +38,8 @@ EXPECT = {
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974QualificationFeedbackWeldExact.agda": [
         "haynesAnomalyToRevisionCandidate", "wc103FollowupObservation", "formalApprovalStillUnpaid",
-        "adaptiveQualificationBoundaryReceipt"
+        "adaptiveQualificationBoundaryReceipt", "environmentalProtectionRecommendation",
+        "siblingComparisonDoesNotProveReliability"
     ],
     "DASHI/Physics/Propulsion/Rocketdyne1974ProgrammeChallengesAndRelatedWorkExact.agda": [
         "canonicalChallengeAtlas", "sandDustValveChallenge", "orificePluggingChallenge",
