@@ -19,12 +19,14 @@ def test_unruh_normalization_boundary_pins_bw_sources_and_scalar_payment():
     assert "modularKMSAnalyticStripStillRequired" in p
 
 
-def test_terminal_cutset_distinguishes_unruh_scalar_from_bw_qft_payment():
-    p = text("DASHI/Quantum/QuantumBirthmarkHolographyGravityTerminalCutsetExact.agda")
+def test_terminal_extension_distinguishes_unruh_scalar_from_bw_qft_payment():
+    p = text("DASHI/Quantum/QuantumBirthmarkHolographyGravityUnruhTerminalExtensionExact.agda")
     assert "unruhScalarNormalizationOwned" in p
     assert "physicalBisognanoWichmannStillRequired" in p
+    assert "priorTerminalPhysicalCutsetStillAvailable" in p
 
 
-def test_quantum_rollup_registers_unruh_normalization_boundary():
+def test_quantum_rollup_registers_unruh_normalization_boundary_and_terminal_extension():
     p = text("DASHI/Quantum/Everything.agda")
     assert "import DASHI.Quantum.QuantumBirthmarkJacobsonUnruhNormalizationBoundaryExact" in p
+    assert "import DASHI.Quantum.QuantumBirthmarkHolographyGravityUnruhTerminalExtensionExact" in p
