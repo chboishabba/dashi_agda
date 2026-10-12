@@ -130,7 +130,7 @@ queryCharge generator query =
   Query.queryBitLength query + querySteps generator query
 
 ------------------------------------------------------------------------
--- Charged trace for ONE immutable Cook description on ONE target machine.
+-- Successful generated query on one immutable Cook description.
 ------------------------------------------------------------------------
 
 record SuccessfulGeneratedQuery
@@ -148,35 +148,6 @@ record SuccessfulGeneratedQuery
 
 open SuccessfulGeneratedQuery public
 
-GeneratedQueryTrace :
-  (description : Description.GuardedCookFormulaDescription) →
-  ∀ {presentation} →
-  UniversalGuardedCookBitGenerator presentation → Set
-GeneratedQueryTrace description generator =
-  List (SuccessfulGeneratedQuery description generator)
-
-generatedTraceWork :
-  ∀ {description presentation}
-    {generator : UniversalGuardedCookBitGenerator presentation} →
-  GeneratedQueryTrace description generator → Nat
-generatedTraceWork [] = zero
-generatedTraceWork {description} {generator = generator} (query ∷ rest) =
-  queryCharge generator
-    (Description.atIndex description (index query))
-  + generatedTraceWork rest
-
-record GeneratedQueryCostReceipt
-    (description : Description.GuardedCookFormulaDescription)
-    {presentation : Presented.FinitePresentedStandardTM}
-    (generator : UniversalGuardedCookBitGenerator presentation)
-    (targetSteps : Nat) : Set where
-  field
-    trace : GeneratedQueryTrace description generator
-    generatedWorkFitsTarget :
-      generatedTraceWork trace ≤ targetSteps
-
-open GeneratedQueryCostReceipt public
-
 generatedQuerySound :
   ∀ {description presentation}
     {generator : UniversalGuardedCookBitGenerator presentation}
@@ -191,60 +162,154 @@ generatedQuerySound {description} {generator = generator} query
   outputSound generator (outputExact query)
 
 ------------------------------------------------------------------------
--- One source edge -> one same-target segment + charged same-target reads.
+-- An ACTUAL same-target generator call: setup ; generator ; resume.
+------------------------------------------------------------------------
+
+record EmbeddedGeneratedQueryCall
+    (description : Description.GuardedCookFormulaDescription)
+    {presentation : Presented.FinitePresentedStandardTM}
+    (generator : UniversalGuardedCookBitGenerator presentation)
+    (before after :
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine presentation)) : Set₂ where
+  field
+    query : SuccessfulGeneratedQuery description generator
+
+    setupSteps : Nat
+    resumeSteps : Nat
+
+    setupRun :
+      Run.StandardExactRun
+        (Presented.finitePresentedStandardMachine presentation)
+        setupSteps
+        before
+        (Language.guardedStandardStart
+          (Query.mapBoolSymbols
+            (zeroSymbol generator)
+            (oneSymbol generator)
+            (Query.queryBits
+              (Description.atIndex description (index query))))
+          (querySteps generator
+            (Description.atIndex description (index query))))
+
+    resumeRun :
+      Run.StandardExactRun
+        (Presented.finitePresentedStandardMachine presentation)
+        resumeSteps
+        (finishConfiguration generator
+          (Description.atIndex description (index query)))
+        after
+
+open EmbeddedGeneratedQueryCall public
+
+embeddedCallSteps :
+  ∀ {description presentation generator before after} →
+  EmbeddedGeneratedQueryCall
+    description {presentation} generator before after → Nat
+embeddedCallSteps {generator = generator} call =
+  (setupSteps call
+    + querySteps generator
+        (Description.atIndex _ (index (query call))))
+  + resumeSteps call
+
+------------------------------------------------------------------------
+-- A chain is literal phase composition on the same target transition system.
+------------------------------------------------------------------------
+
+data EmbeddedGeneratedQueryChain
+    (description : Description.GuardedCookFormulaDescription)
+    {presentation : Presented.FinitePresentedStandardTM}
+    (generator : UniversalGuardedCookBitGenerator presentation) :
+    Nat →
+    Standard.StandardConfiguration
+      (Presented.finitePresentedStandardMachine presentation) →
+    Standard.StandardConfiguration
+      (Presented.finitePresentedStandardMachine presentation) →
+    Set₂ where
+
+  generatedChainDone :
+    ∀ {configuration} →
+    EmbeddedGeneratedQueryChain
+      description generator zero configuration configuration
+
+  generatedChainStep :
+    ∀ {callSteps restSteps start middle finish}
+      (call :
+        EmbeddedGeneratedQueryCall
+          description generator start middle) →
+    embeddedCallSteps call ≡ callSteps →
+    EmbeddedGeneratedQueryChain
+      description generator restSteps middle finish →
+    EmbeddedGeneratedQueryChain
+      description generator (callSteps + restSteps) start finish
+
+------------------------------------------------------------------------
+-- One source edge -> same-target query chain + actual core target run.
 ------------------------------------------------------------------------
 
 record VirtualStepSimulation
-    {SourceState SourceSymbol TargetState TargetSymbol : Set}
+    {SourceState SourceSymbol : Set}
     {sourceMachine : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
-    {targetMachine : Standard.StandardSingleTapeMachine TargetState TargetSymbol}
     (description : Description.GuardedCookFormulaDescription)
     {targetPresentation : Presented.FinitePresentedStandardTM}
     (generator : UniversalGuardedCookBitGenerator targetPresentation)
-    (targetIsPresented :
-      targetMachine
-      ≡ Presented.finitePresentedStandardMachine targetPresentation)
     (sourceBefore sourceAfter : Standard.StandardConfiguration sourceMachine)
-    (targetBefore targetAfter : Standard.StandardConfiguration targetMachine) : Set₂ where
+    (targetBefore targetAfter :
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine targetPresentation)) : Set₂ where
   field
     sourceEdge :
       Standard.standardNext sourceMachine sourceBefore ≡ just sourceAfter
 
-    targetSteps : Nat
-    targetRun :
-      Run.StandardExactRun
-        targetMachine targetSteps targetBefore targetAfter
+    queryStepsTotal : Nat
+    afterQueries :
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine targetPresentation)
 
-    queryCost :
-      GeneratedQueryCostReceipt description generator targetSteps
+    queryChain :
+      EmbeddedGeneratedQueryChain
+        description generator queryStepsTotal targetBefore afterQueries
+
+    coreSteps : Nat
+    coreRun :
+      Run.StandardExactRun
+        (Presented.finitePresentedStandardMachine targetPresentation)
+        coreSteps afterQueries targetAfter
 
 open VirtualStepSimulation public
 
+virtualStepTotal :
+  ∀ {SourceState SourceSymbol sourceMachine description targetPresentation generator
+      sourceBefore sourceAfter targetBefore targetAfter} →
+  VirtualStepSimulation
+    {SourceState} {SourceSymbol} {sourceMachine}
+    description {targetPresentation} generator
+    sourceBefore sourceAfter targetBefore targetAfter → Nat
+virtualStepTotal step =
+  queryStepsTotal step + coreSteps step
+
 data VirtualRunSimulation
-    {SourceState SourceSymbol TargetState TargetSymbol : Set}
+    {SourceState SourceSymbol : Set}
     {sourceMachine : Standard.StandardSingleTapeMachine SourceState SourceSymbol}
-    {targetMachine : Standard.StandardSingleTapeMachine TargetState TargetSymbol}
     (description : Description.GuardedCookFormulaDescription)
     {targetPresentation : Presented.FinitePresentedStandardTM}
-    (generator : UniversalGuardedCookBitGenerator targetPresentation)
-    (targetIsPresented :
-      targetMachine
-      ≡ Presented.finitePresentedStandardMachine targetPresentation) :
+    (generator : UniversalGuardedCookBitGenerator targetPresentation) :
     ∀ {sourceSteps sourceStart sourceFinish}
       (sourceRun :
         Run.StandardExactRun
           sourceMachine sourceSteps sourceStart sourceFinish) →
-      Standard.StandardConfiguration targetMachine →
-      Standard.StandardConfiguration targetMachine →
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine targetPresentation) →
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine targetPresentation) →
       Set₂ where
 
   virtualRunDone :
     ∀ {sourceConfiguration targetConfiguration} →
     VirtualRunSimulation
-      description generator targetIsPresented
+      description generator
       (Run.standardRunDone {configuration = sourceConfiguration})
-      targetConfiguration
-      targetConfiguration
+      targetConfiguration targetConfiguration
 
   virtualRunStep :
     ∀ {sourceSteps sourceCurrent sourceNext sourceFinish}
@@ -254,13 +319,12 @@ data VirtualRunSimulation
           sourceMachine sourceSteps sourceNext sourceFinish}
       (step :
         VirtualStepSimulation
-          description generator targetIsPresented
+          description generator
           sourceCurrent sourceNext targetCurrent targetNext) →
     VirtualRunSimulation
-      description generator targetIsPresented
-      sourceRest targetNext targetFinish →
+      description generator sourceRest targetNext targetFinish →
     VirtualRunSimulation
-      description generator targetIsPresented
+      description generator
       (Run.standardRunStep
         (VirtualStepSimulation.sourceEdge step)
         sourceRest)
@@ -301,13 +365,11 @@ record VirtualSelfQuotationCompilation
       VirtualRunSimulation
         (CodedFixed.codedFixedDescription codedFixed)
         universalGenerator
-        refl
         (Candidate.execution
           (Clocked.standard clocked)
           (Opposite.fixedCookFormula
             (CodedFixed.forgetCodedFixed codedFixed)))
-        candidateTargetStart
-        candidateTargetFinish
+        candidateTargetStart candidateTargetFinish
 
 open VirtualSelfQuotationCompilation public
 
@@ -339,17 +401,17 @@ virtualSourceOfCompilation compilation =
 -- PAID structurally:
 --   * literal materialisation route closed for anchored candidates;
 --   * same fixed target is low-universe coded syntax;
---   * actual guarded Cook description and exact virtual source are canonical;
+--   * guarded Cook description and exact virtual source are canonical;
 --   * all reads vary only the index of one immutable description;
---   * the universal generator runs on the SAME fixed target transition system;
---   * target receipts charge query serialization + actual generator execution.
+--   * generator execution is on the SAME fixed target transition system;
+--   * each query is an actual setup ; generator ; resume chain, not a number.
 --
 -- LIVE constructive obligations:
---   1. construct a coded fixed target whose own transition table contains the
---      universal guarded-Cook bit generator and opposite/candidate modes;
---   2. prove `UniversalGuardedCookBitGenerator` for that target;
---   3. build `VirtualRunSimulation`, with query phases actually concatenated
---      inside each target segment (not merely numerically charged);
---   4. reattach finite setup + negation suffix + exact total target clock and
---      reuse existing Cook iff / opposite-decision failure plumbing.
+--   1. construct one coded target with generator + candidate/opposite modes;
+--   2. prove `UniversalGuardedCookBitGenerator` for its canonical query code;
+--   3. establish a representation invariant making each `coreRun` simulate the
+--      corresponding source edge, with query calls exactly at virtual reads;
+--   4. concatenate the per-edge target runs, then finite setup + negation suffix,
+--      and close the SAME exact Cook budget;
+--   5. reuse existing Cook iff / opposite-decision failure plumbing.
 ------------------------------------------------------------------------
