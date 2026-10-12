@@ -12,6 +12,10 @@ genealogyPhaseTotalityPaid :
   Closure.genealogyPhaseTotalityPaid boundary ≡ true
 genealogyPhaseTotalityPaid = refl
 
+typedGenealogyOwnersLinked :
+  Closure.typedGenealogyOwnersLinked boundary ≡ true
+typedGenealogyOwnersLinked = refl
+
 semanticRoadmapPaid :
   Closure.semanticRoadmapRequiredObligationsPaid boundary ≡ true
 semanticRoadmapPaid = refl
