@@ -6,6 +6,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Quantum.QuantumBirthmarkErgodicityExact as Birthmark
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityGravityBridgeExact as EntropyGravity
+import DASHI.Quantum.EntanglementGeometryMereologyBridgeExact as EntanglementGeometry
+import DASHI.Geometry.LargePosetContinuumLorentz31 as Lorentz31
 import DASHI.Physics.Foundations.EntropyDensityExact as Density
 import DASHI.Physics.Foundations.EntropicGravitySourceBoundaryExact as Gravity
 import DASHI.Physics.Closure.HolographicBulkBoundaryReceipt as PAdicHolography
@@ -16,17 +18,20 @@ import DASHI.Analysis.AdelicSpectralClaimStrengthAuditExact as ClaimAudit
 ------------------------------------------------------------------------
 -- BIRTHMARK / ENTROPY-DENSITY / HOLOGRAPHY CROSS-LANE MAX-CUT
 --
--- Existing repo owners already separate four theorem shapes:
+-- Existing repo owners already separate six theorem shapes:
 --
 --   (1) quantum birthmark: long-time history-sensitive residual memory;
 --   (2) entropy-density normalization: coarse entropy and residual-information
 --       density are distinct observables;
 --   (3) p-adic bulk/boundary dictionary: Bruhat-Tits tree -> P^1(Q_p);
---   (4) holographic area-law / UV-finiteness surfaces.
+--   (4) holographic area-law / UV-finiteness surfaces;
+--   (5) tensor-factor relation -> distance -> spatial geometry, conditional on
+--       explicit weight/metric/realisation laws;
+--   (6) a separately paid large-poset continuum 3+1 Lorentzian authority.
 --
--- This owner records the exact lawful cross-pollination and blocks the tempting
--- but unpaid identifications.  No new physical AdS/CFT, RT, Jacobson or
--- Verlinde theorem is asserted merely by composing names.
+-- This owner records the lawful cross-pollination and blocks all unpaid
+-- identifications.  No new physical AdS/CFT, RT, Jacobson or Verlinde theorem
+-- is asserted merely by composing names.
 ------------------------------------------------------------------------
 
 record ExistingHolographyReuse : Set where
@@ -37,10 +42,12 @@ record ExistingHolographyReuse : Set where
     areaBoundUVFinitenessSurfaceReused : Bool
     discreteRyuTakayanagiShapeAudited : Bool
     sameObjectEntropyAuditReused : Bool
+    entanglementGeometryBoundaryReused : Bool
+    lorentzian31AuthorityReused : Bool
 
 canonicalExistingHolographyReuse : ExistingHolographyReuse
 canonicalExistingHolographyReuse =
-  existingHolographyReuse true true true true true
+  existingHolographyReuse true true true true true true true
 
 ------------------------------------------------------------------------
 -- Structural synthesis.
@@ -85,6 +92,31 @@ record AreaEntropySameObjectBoundary : Set where
 canonicalAreaEntropySameObjectBoundary : AreaEntropySameObjectBoundary
 canonicalAreaEntropySameObjectBoundary =
   areaEntropySameObjectBoundary true true false true true
+
+------------------------------------------------------------------------
+-- Geometry composition boundary.
+--
+-- The entanglement-geometry owner requires a selected tensor-product structure,
+-- pair relation weights, a distance law and geometric realisation.  It is only
+-- spatial geometry.  The 3+1 owner separately requires causal refinement,
+-- dimension convergence, isotropy, finite propagation and time orientation.
+-- Neither is a holographic dictionary by itself.
+------------------------------------------------------------------------
+
+record HolographicGeometryCompositionBoundary : Set where
+  constructor holographicGeometryCompositionBoundary
+  field
+    entanglementGeometryDoesNotSupplyHolographicDictionary : Bool
+    spatialEntanglementGeometryDoesNotSupplyLorentzian31 : Bool
+    lorentzian31DoesNotSupplyHolographicDictionary : Bool
+    pAdicBoundaryDoesNotSupplyPhysicalTPS : Bool
+    holographicBoundaryDoesNotSelectPreferredTPS : Bool
+    sameObjectGeometryDictionaryWeldRequired : Bool
+
+canonicalHolographicGeometryCompositionBoundary :
+  HolographicGeometryCompositionBoundary
+canonicalHolographicGeometryCompositionBoundary =
+  holographicGeometryCompositionBoundary true true true true true true
 
 ------------------------------------------------------------------------
 -- Physical promotion cutset.
@@ -141,6 +173,16 @@ record HolographicBirthmarkPhysicalWeld : Set₁ where
     entropyAreaLawOnSameBoundaryState : Set
     entropyAreaLawOnSameBoundaryStateProof : entropyAreaLawOnSameBoundaryState
 
+    selectedTensorProductStructure : Set
+    selectedTensorProductStructureProof : selectedTensorProductStructure
+
+    pairRelationMetricWeld : Set
+    pairRelationMetricWeldProof : pairRelationMetricWeld
+
+    holographicDictionaryGeometrySameObjectWeld : Set
+    holographicDictionaryGeometrySameObjectWeldProof :
+      holographicDictionaryGeometrySameObjectWeld
+
     fourDimensionalLorentzianAttachment : Set
     fourDimensionalLorentzianAttachmentProof : fourDimensionalLorentzianAttachment
 
@@ -177,6 +219,15 @@ holographicDictionaryDoesNotEraseBulkResidual = true
 
 boundarySufficiencyNeedsSameObjectWeld : Bool
 boundarySufficiencyNeedsSameObjectWeld = true
+
+entanglementGeometryDoesNotSupplyHolographicDictionary : Bool
+entanglementGeometryDoesNotSupplyHolographicDictionary = true
+
+spatialEntanglementGeometryDoesNotSupplyLorentzian31 : Bool
+spatialEntanglementGeometryDoesNotSupplyLorentzian31 = true
+
+lorentzian31DoesNotSupplyHolographicDictionary : Bool
+lorentzian31DoesNotSupplyHolographicDictionary = true
 
 sameObjectWeldResidualIsLive :
   sameObjectBoundaryEntropyWeldStillRequired ≡ true
