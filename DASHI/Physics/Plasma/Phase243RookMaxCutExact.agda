@@ -7,6 +7,9 @@ import DASHI.Physics.Plasma.PhaseRook270Exact as Rook
 import DASHI.Physics.Plasma.PhaseCore243FiveTritExact as Bridge
 import DASHI.Physics.Plasma.Phase243ActionIntertwinerExact as Action
 import DASHI.Physics.Plasma.Phase243OrbitQuotientExact as Q54
+import DASHI.Physics.Plasma.Phase243TorusReparameterizationExact as Torus
+import DASHI.Physics.Plasma.Phase243ConsumerDescentExact as Descent
+import DASHI.Physics.Plasma.Phase243PeriodicConsumerQuotientExact as Periodic
 import DASHI.Physics.Plasma.Phase243EquivariantFibreSearchExact as Fibre
 import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact as Consumer
 
@@ -20,13 +23,24 @@ import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact as Consumer
 --   AxisBoundary27 <-> Ternary27Point total round-trip carrier recognition;
 --   exact C3 advance / inversion action transport through both bijections;
 --   exact Core243/(C3⋊C2) quotient to 54 incidence+relative-phase classes;
---   explicit equivariance gate before a physical consumer may use that quotient;
---   low-resolution hard-nonaxis 54-representative physical replay.
+--   canonical action-word normalization of every Core243 state to its Core54
+--     representative;
+--   all 27 rook incidences admit an explicit torus translation implementing
+--     simultaneous phase advance, while torus reflection implements inversion;
+--   phase-invariant consumers are proved fibre-constant on Core54 and therefore
+--     factor explicitly through the canonical sectioned quotient using the
+--     repo's ConsumerDescentMinimalObserver machinery;
+--   any periodic physical realization whose observer is invariant under those
+--     translations/reflection compiles to the same Core54 factorization;
+--   low-resolution hard-nonaxis 54-representative physical reconnaissance.
 --
 -- Open physical frontier:
---   replace the toy surface-field fibre by same-object coil+plasma free-boundary
---   equilibrium, then pay full orbit/FOW/EP consumers and same-chart best-known
---   comparison.  The numerical Core54 winner is reconnaissance, not acceptance.
+--   the quotient is consumer-relative.  Ideal whole-period observables can use
+--   it once their periodic realization receipt is supplied; arbitrary coil,
+--   divertor, blanket, port/support or other engineering observers may break
+--   the symmetry.  Surviving fibres still require same-object coil+plasma
+--   free-boundary equilibrium, full orbit/FOW/EP consumers and same-chart
+--   best-known comparison.
 ------------------------------------------------------------------------
 
 record Phase243MaxCutStatus : Set where
@@ -44,8 +58,16 @@ record Phase243MaxCutStatus : Set where
     phaseActionIntertwinerPaidIsTrue : phaseActionIntertwinerPaid ≡ true
     actionQuotient54Paid : Bool
     actionQuotient54PaidIsTrue : actionQuotient54Paid ≡ true
-    quotientConsumerEquivarianceGatePaid : Bool
-    quotientConsumerEquivarianceGatePaidIsTrue : quotientConsumerEquivarianceGatePaid ≡ true
+    incidenceIndexedTorusActionPaid : Bool
+    incidenceIndexedTorusActionPaidIsTrue : incidenceIndexedTorusActionPaid ≡ true
+    phaseInvariantConsumerDescentPaid : Bool
+    phaseInvariantConsumerDescentPaidIsTrue : phaseInvariantConsumerDescentPaid ≡ true
+    periodicObserverCore54FactorizationPaid : Bool
+    periodicObserverCore54FactorizationPaidIsTrue :
+      periodicObserverCore54FactorizationPaid ≡ true
+    quotientSafeForArbitraryEngineeringObserver : Bool
+    quotientSafeForArbitraryEngineeringObserverIsFalse :
+      quotientSafeForArbitraryEngineeringObserver ≡ false
     hardNonAxisymmetricNumericalFibreReplayPaid : Bool
     hardNonAxisymmetricNumericalFibreReplayPaidIsTrue :
       hardNonAxisymmetricNumericalFibreReplayPaid ≡ true
@@ -67,6 +89,9 @@ canonicalPhase243MaxCutStatus =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     true refl
     false refl
     false refl
@@ -95,9 +120,21 @@ quotientRepresentativeWitness :
   Q54.quotientCore (Q54.representativeCore x) ≡ x
 quotientRepresentativeWitness = Q54.quotientRepresentativeRoundTrip
 
+torusAdvanceWitness :
+  (x : Rook.Core243) →
+  Torus.pullbackCoreByCanonicalAdvance x ≡ Rook.advanceCore x
+torusAdvanceWitness = Torus.canonicalAdvancePullbackIntertwines
+
+phaseInvariantDescentBoundary : Descent.Phase243ConsumerDescentBoundary
+phaseInvariantDescentBoundary = Descent.canonicalPhase243ConsumerDescentBoundary
+
+periodicConsumerQuotientBoundary : Periodic.PeriodicPhase243ConsumerBoundary
+periodicConsumerQuotientBoundary =
+  Periodic.canonicalPeriodicPhase243ConsumerBoundary
+
 numericalReplayWitness : Fibre.Core54NumericalReplayReceipt
 numericalReplayWitness = Fibre.canonicalCore54NumericalReplayReceipt
 
 nextPhysicalFrontier : String
 nextPhysicalFrontier =
-  "Search only the 54 phase-action representatives for consumers with an explicit equivariance receipt; lift surviving hard-nonaxis fibres into the current-potential coil inverse, solve same-object coil+plasma free-boundary ABC equilibrium, then run guiding-centre/FOW/energetic-particle replay against the same best-known reference chart."
+  "Use Core54 only for observers with the explicit torus/reparameterization equivariance receipt.  Pareto-rank the surviving hard-nonaxis continuous fibres, run the current-potential coil inverse on that small set, replay the produced coil field, solve one same-object B_coil+B_plasma free-boundary finite-beta ABC equilibrium, then run zero-bounce/guiding-centre/FOW/energetic-particle consumers against the same best-known reference chart.  Reopen the 243 fibre wherever engineering geometry breaks the quotient symmetry."
