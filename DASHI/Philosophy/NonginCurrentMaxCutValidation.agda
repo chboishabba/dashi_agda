@@ -82,6 +82,18 @@ oldFullT9RetentionNotRequired :
   Nongin.c3OldFullT9RetentionRequired boundary ≡ false
 oldFullT9RetentionNotRequired = refl
 
+carryExpansionPolicyPaid :
+  Nongin.carryExpansionPolicyPaid boundary ≡ true
+carryExpansionPolicyPaid = refl
+
+carrySeedNotUniqueNextState :
+  Nongin.carrySeedUniqueNextStructuredState boundary ≡ false
+carrySeedNotUniqueNextState = refl
+
+carryAllDepthCoherenceNotAutomatic :
+  Nongin.carryAllDepthCoherenceAutomatic boundary ≡ false
+carryAllDepthCoherenceNotAutomatic = refl
+
 transportEnrichedGroupoidPresheafStillFalse :
   Nongin.transportEnrichedGroupoidPresheafPaid boundary ≡ false
 transportEnrichedGroupoidPresheafStillFalse = refl
