@@ -37,6 +37,16 @@ chinaOracleOperationalIntegrationPaid :
   ≡ Promotion.operationalIntegration
 chinaOracleOperationalIntegrationPaid = refl
 
+ellisonNetanyahuRelationshipStopsAtL0 :
+  Promotion.ellisonNetanyahuHighestPaidLevel
+  ≡ Promotion.relationshipObserved
+ellisonNetanyahuRelationshipStopsAtL0 = refl
+
+ellisonNetanyahuRelationshipDoesNotPayPolicyAuthorship :
+  Promotion.ellisonNetanyahuRelationshipPaysPolicyAuthorship
+  ≡ false
+ellisonNetanyahuRelationshipDoesNotPayPolicyAuthorship = refl
+
 sameVendorDoesNotCollapseStateObjective :
   Compare.sameVendorImpliesSameStateObjective
   ≡ false
