@@ -3,9 +3,8 @@ module DASHI.Cognition.OracleEllisonSecurityTranscriptValidation where
 ------------------------------------------------------------------------
 -- RED validation owner.
 --
--- This file was originally committed before its production imports.  The
--- current continuation likewise adds regression pins before the new
--- socio-technical-power weld is introduced.
+-- This file was originally committed before its production imports. The
+-- current continuations likewise add regression pins before new weld surfaces.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (true; false)
@@ -99,3 +98,13 @@ defensePostureDoesNotPaySovereignController :
   PowerWeld.corporateDefenseOrientationPaysSovereignController
   ≡ false
 defensePostureDoesNotPaySovereignController = refl
+
+multipleDocumentedLinksDoNotPayUniversalNetwork :
+  PowerWeld.documentedLinksPayUniversalCoordinatedNetwork
+  ≡ false
+multipleDocumentedLinksDoNotPayUniversalNetwork = refl
+
+historicalContinuityDoesNotPayCentralCommand :
+  PowerWeld.historicalContinuityPaysCentralCommand
+  ≡ false
+historicalContinuityDoesNotPayCentralCommand = refl
