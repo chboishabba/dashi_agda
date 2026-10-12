@@ -14,15 +14,16 @@ import DASHI.Quantum.QuantumBirthmarkJacobsonNullConeRecoveryExact as Recovery
 -- owner is a sign/connection model over TriTruth rather than the real vector
 -- space needed for the algebraic null-cone rigidity theorem.
 --
--- Native dashi_lean4 PR #68 now source-writes the missing real-algebra theorem:
--- for a symmetric 4x4 tensor T over R, if T_ab k^a k^b = 0 for every
--- Minkowski-null k, then T is a scalar multiple of diag(-1,1,1,1).  Its proof
--- uses coordinate null pairs and rational 3-4-5 null directions, then feeds
--- that result into the generic null-cone recovery compiler.
+-- Native dashi_lean4 PR #68 now source-writes:
+--   1. the real flat 3+1 rigidity theorem;
+--   2. the generic Jacobson null-cone compiler instantiated on that carrier;
+--   3. a Lorentz-frame transport compiler showing that any supplied
+--      same-object frame/tetrad equivalence preserving quadratic form, tensor
+--      contraction and metric multiples inherits the flat theorem.
 --
 -- This module records the exact cross-kernel boundary.  It does not pretend a
--- Lean source file is an Agda proof term, and it does not identify a physical
--- tangent fibre with the flat coordinate carrier without an explicit frame.
+-- Lean source file is an Agda proof term, and it does not manufacture the
+-- physical tangent frame or its smooth/global assembly.
 ------------------------------------------------------------------------
 
 record Flat31RigidityBoundary : Set where
@@ -31,10 +32,10 @@ record Flat31RigidityBoundary : Set where
     agdaFlat13SignatureCarrierOwned : Bool
     genericNullConeRecoveryCompilerOwned : Bool
     finiteFlat31RigiditySourceWrittenInLean : Bool
+    lorentzFrameTransportCompilerSourceWrittenInLean : Bool
     flat31RigidityKernelReceiptStillRequired : Bool
     physicalTangentFrameIdentificationStillRequired : Bool
-    continuumFibrewiseNullConeTransportStillRequired : Bool
-    smoothGlobalAssemblyStillRequired : Bool
+    frameSmoothnessOrGlobalAssemblyStillRequired : Bool
     stressEnergySameObjectStillRequired : Bool
 
 canonicalFlat31RigidityBoundary : Flat31RigidityBoundary
@@ -50,17 +51,22 @@ genericNullConeRecoveryCompilerOwned = Recovery.tensorRecoveryCompilerOwned
 finiteFlat31RigiditySourceWrittenInLean : Bool
 finiteFlat31RigiditySourceWrittenInLean = true
 
+lorentzFrameTransportCompilerSourceWrittenInLean : Bool
+lorentzFrameTransportCompilerSourceWrittenInLean = true
+
 flat31RigidityKernelReceiptStillRequired : Bool
 flat31RigidityKernelReceiptStillRequired = true
 
 physicalTangentFrameIdentificationStillRequired : Bool
 physicalTangentFrameIdentificationStillRequired = true
 
+frameSmoothnessOrGlobalAssemblyStillRequired : Bool
+frameSmoothnessOrGlobalAssemblyStillRequired = true
+
+-- Backwards-compatible broad name: the algebraic transport compiler is now
+-- source-written, so what remains is construction/identification of the frame.
 continuumFibrewiseNullConeTransportStillRequired : Bool
 continuumFibrewiseNullConeTransportStillRequired = true
-
-smoothGlobalAssemblyStillRequired : Bool
-smoothGlobalAssemblyStillRequired = true
 
 stressEnergySameObjectStillRequired : Bool
 stressEnergySameObjectStillRequired = true
@@ -71,8 +77,8 @@ flatCarrierScope =
 
 leanProducerScope : String
 leanProducerScope =
-  "dashi_lean4 Synthesis.JacobsonNullConeRigidity proves the flat real 3+1 symmetric-tensor null-cone rigidity statement at source level, and Synthesis.JacobsonFlat31RigidityAdapter instantiates the generic tensor-recovery compiler. Exact-head Lean kernel receipt remains separate."
+  "dashi_lean4 Synthesis.JacobsonNullConeRigidity proves flat real 3+1 symmetric-tensor null-cone rigidity at source level; Synthesis.JacobsonFlat31RigidityAdapter instantiates the generic tensor-recovery compiler; Synthesis.JacobsonNullConeRigidityTransport transports rigidity through a supplied Lorentz-frame equivalence. Exact-head Lean kernel receipt remains separate."
 
 continuumBoundary : String
 continuumBoundary =
-  "To use flat null-cone rigidity in Jacobson's continuum argument, one still needs a same-object Lorentz frame/tetrad identification of each physical tangent fibre with the flat carrier, transport of the null-contracted defect through that frame, and any smooth/global assembly required by the selected spacetime model."
+  "After the frame-transport compiler, the continuum rigidity residual is no longer a second null-cone theorem. The live payment is construction and same-object identification of a physical Lorentz frame/tetrad on each selected tangent fibre, compatibility with the field-equation tensor contraction, and any smooth/global assembly needed by the spacetime model."
