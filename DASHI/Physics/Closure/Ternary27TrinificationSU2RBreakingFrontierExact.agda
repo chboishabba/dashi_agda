@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact as Tri
-+import DASHI.Physics.QFT.ExactSMMatchToken as ExactSM
+import DASHI.Physics.QFT.ExactSMMatchToken as ExactSM
 
 ------------------------------------------------------------------------
 -- TRINIFICATION RIGHT-HANDED BREAKING FRONTIER
