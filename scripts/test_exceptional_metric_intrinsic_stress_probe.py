@@ -11,6 +11,7 @@ class IntrinsicMetricStressTests(unittest.TestCase):
     def test_exact_decomposition(self):
         self.assertTrue(self.out["exact_decomposition"])
         self.assertTrue(self.out["radiation_trace_zero"])
+        self.assertTrue(self.out["dominant_energy_shape"])
 
     def test_radiation_pair_intensities(self):
         self.assertEqual(str(self.out["radiation_pair_intensities"][0]), "1/27")
@@ -18,6 +19,10 @@ class IntrinsicMetricStressTests(unittest.TestCase):
 
     def test_vacuum_coefficient(self):
         self.assertEqual(str(self.out["vacuum_coefficient"]), "1/3")
+
+    def test_not_single_maxwell(self):
+        self.assertFalse(self.out["single_maxwell_rainich_condition"])
+        self.assertTrue(self.out["multi_mode_or_multi_internal_component_required"])
 
 
 if __name__ == "__main__":
