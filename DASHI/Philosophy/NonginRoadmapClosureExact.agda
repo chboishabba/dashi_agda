@@ -45,9 +45,9 @@ leastBoundary = Advantage.canonicalNonginLeastSufficientObserverBoundary
 -- 1. Genealogy is total over the declared phase type.
 ------------------------------------------------------------------------
 
-genealogyPhaseTotalityPaid :
+genealogyPhaseTotalityReceipt :
   Atlas.everyDeclaredOriginPhaseHasCanonicalEntry atlasBoundary ≡ true
-genealogyPhaseTotalityPaid = refl
+genealogyPhaseTotalityReceipt = refl
 
 canonicalEntryReturnsDeclaredPhase :
   (declared : Atlas.OriginPhase) →
@@ -118,9 +118,9 @@ allNonginRequiredObligationsPaid nextDepthExpansionUnderdetermination = refl
 -- 3. Strong receipts retained from the capstone.
 ------------------------------------------------------------------------
 
-leastSufficientInformationOrderPaid :
+leastSufficientInformationOrderReceipt :
   Advantage.hiddenOtherConsumerIsLeastSufficient leastBoundary ≡ true
-leastSufficientInformationOrderPaid = refl
+leastSufficientInformationOrderReceipt = refl
 
 everyAdequateObserverMustRefineConsumerPaid :
   Advantage.everyAdequateObserverRefinesHiddenOther leastBoundary ≡ true
