@@ -12,15 +12,17 @@ def test_flat31_rigidity_boundary_tracks_native_lean_producer():
     assert "FlatLorentzianModel" in p
     assert "finiteFlat31RigiditySourceWrittenInLean" in p
     assert "flat31RigidityKernelReceiptStillRequired" in p
-    assert "continuumFibrewiseNullConeTransportStillRequired" in p
+    assert "lorentzFrameTransportCompilerSourceWrittenInLean" in p
     assert "physicalTangentFrameIdentificationStillRequired" in p
+    assert "frameSmoothnessOrGlobalAssemblyStillRequired" in p
 
 
 def test_terminal_cutset_splits_rigidity_leaf_after_flat31_producer():
     p = text("DASHI/Quantum/QuantumBirthmarkHolographyGravityTerminalCutsetExact.agda")
     assert "flat31RigidityKernelReceiptStillRequired" in p
-    assert "continuumFibrewiseNullConeTransportStillRequired" in p
+    assert "lorentzFrameTransportCompilerSourceWrittenInLean" in p
     assert "physicalTangentFrameIdentificationStillRequired" in p
+    assert "frameSmoothnessOrGlobalAssemblyStillRequired" in p
 
 
 def test_quantum_rollup_registers_flat31_rigidity_boundary():
