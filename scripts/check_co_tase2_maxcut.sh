@@ -19,6 +19,7 @@ python3 -m py_compile \
   scripts/co_tase2_full_symmetry_receipt.py \
   scripts/co_tase2_arpes_ibw_ingest.py \
   scripts/co_tase2_arpes_peak_fit.py \
+  scripts/co_tase2_arpes_forward_fit.py \
   scripts/co_tase2_published_arpes_constraints.py \
   scripts/co_tase2_independent_theory_targets.py \
   scripts/co_tase2_dataset_download_probe.py
