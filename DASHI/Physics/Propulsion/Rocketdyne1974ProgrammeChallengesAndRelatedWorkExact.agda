@@ -7,19 +7,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- PROGRAMME CHALLENGES AND RELATED WORK
---
--- Primary historical anchors:
---   * NASA-CR-140308 / Rocketdyne R-9557 (1974)
---   * NASA-CR-140309 / Rocketdyne R-9557-1 executive summary (1974)
---   * AIAA 72-1131 Viking Orbiter '75 beryllium INTEREGEN engine
---   * NASA-SP-8124, Liquid Rocket Engine Self-Cooled Combustion Chambers
---
--- This owner separates:
---   (a) problems actually observed in the 1974 programme;
---   (b) design constraints/challenges reported by Rocketdyne;
---   (c) predecessor/sibling INTEREGEN experience;
---   (d) later state-of-practice design guidance.
--- Related work is not silently promoted into the same historical article.
 ------------------------------------------------------------------------
 
 data ChallengeDomain : Set where
@@ -42,8 +29,6 @@ record ProgrammeChallenge : Set where
     sourceReference : String
     same1974Programme : Bool
 
--- R-9557-1 p.36 explicitly identifies particle migration to the valve as a
--- potentially severe problem after wet sand/dust exposure and random vibration.
 sandDustValveChallenge : ProgrammeChallenge
 sandDustValveChallenge =
   programme-challenge
@@ -54,8 +39,6 @@ sandDustValveChallenge =
     "R-9557-1 p.36 ENGINE DESIGN UPDATE; valve hardware from NASA/JSC NAS9-12996"
     true
 
--- Plugging did not make the engine unsafe in the reported test, but it could
--- shift mixture ratio and therefore propellant consumption.
 orificePluggingChallenge : ProgrammeChallenge
 orificePluggingChallenge =
   programme-challenge
@@ -66,9 +49,6 @@ orificePluggingChallenge =
     "R-9557-1 p.36 ENGINE DESIGN UPDATE"
     true
 
--- The off-limits campaign found progressively stronger low-throttle pressure
--- oscillations. These are retained as an operating-envelope/stability challenge,
--- not promoted to a universal instability threshold.
 lowThrottleOscillationChallenge : ProgrammeChallenge
 lowThrottleOscillationChallenge =
   programme-challenge
@@ -110,6 +90,65 @@ weightReductionOpportunity =
     true
 
 ------------------------------------------------------------------------
+-- REPEATED VALVE FAILURE MECHANISM
+------------------------------------------------------------------------
+
+record ValveFailureObservation : Set where
+  constructor valve-failure-observation
+  field
+    serial : String
+    model : String
+    contractOrigin : String
+    priorExposure : String
+    observedFailure : String
+    inspectionFinding : String
+    attributedMechanism : String
+    sourceReference : String
+
+valveSN003Failure : ValveFailureObservation
+valveSN003Failure =
+  valve-failure-observation
+    "S/N 003"
+    "Moog 54X107A"
+    "NASA/JSC residual hardware from NAS9-12996"
+    "extensive hot-fire and environmental test programme before delivery to Rocketdyne"
+    "gross oxidizer leakage after Rocketdyne environmental testing"
+    "gross amounts of fine-textured sand found during Moog manifold inspection"
+    "sand/dust/salt introduced through the nozzle migrated through the injector during random vibration and abraded the oxidizer-side Teflon seal"
+    "R-9557-1 p.33 Propellant Valve Failures; R-9557 Table 22"
+
+valveSN005Failure : ValveFailureObservation
+valveSN005Failure =
+  valve-failure-observation
+    "S/N 005"
+    "Moog 54X107A"
+    "second programme-support valve"
+    "Rocketdyne environmental exposure sequence"
+    "leakage became progressively worse as environmental testing progressed"
+    "reported same failure mode as S/N 003"
+    "environmental contaminant migration / seal abrasion mechanism repeated"
+    "R-9557-1 p.33 Propellant Valve Failures"
+
+record RepeatedValveFailure : Set where
+  constructor repeated-valve-failure
+  field
+    first : ValveFailureObservation
+    second : ValveFailureObservation
+    sameValveModel : Bool
+    sameReportedFailureMode : Bool
+    repeatedMechanismStrengthensComponentAttribution : Bool
+    establishesFleetFailureRate : Bool
+
+valveSerialFailurePair : RepeatedValveFailure
+valveSerialFailurePair =
+  repeated-valve-failure
+    valveSN003Failure valveSN005Failure true true true false
+
+sandAbradedTeflonSealMechanism : String
+sandAbradedTeflonSealMechanism =
+  "wet environmental contaminants -> particle migration during vibration -> oxidizer-side Teflon seat/seal abrasion -> excessive leakage"
+
+------------------------------------------------------------------------
 -- PREDECESSOR / RELATED INTEREGEN WORK
 ------------------------------------------------------------------------
 
@@ -124,8 +163,6 @@ record RelatedProgramme : Set where
     sourceReference : String
     sameHardware : Bool
 
--- Viking provides a particularly useful lineage lesson: nominal long-duration
--- equilibrium can coexist with trouble at operating extremes.
 vikingOperatingEnvelopeLineage : RelatedProgramme
 vikingOperatingEnvelopeLineage =
   related-programme
@@ -147,15 +184,6 @@ marinerAndPBPSLineage =
     "engineering lineage and design prior art, not identical hardware"
     "R-9557-1 p.9; NASA-SP-8124 Table VI / Sec. 2.3.1"
     false
-
-------------------------------------------------------------------------
--- NASA-SP-8124 DESIGN TRADEOFF
---
--- A central INTEREGEN lesson is that film-coolant requirement and wall
--- thickness are coupled: film cooling is not a unique scalar requirement.
--- This directly supports our identifiability frontier; geometry and cooling
--- allocation must be acquired together.
-------------------------------------------------------------------------
 
 record InteregenTradeoff : Set where
   constructor interegen-tradeoff
@@ -183,6 +211,7 @@ record ChallengeAtlas : Set where
     structuralQualification : ProgrammeChallenge
     maintenance : ProgrammeChallenge
     massOpportunity : ProgrammeChallenge
+    repeatedValveMechanism : RepeatedValveFailure
     predecessorEnvelopeLesson : RelatedProgramme
     interegenDesignTradeoff : InteregenTradeoff
     dominant1974ObservedProblemsCoolingIntrinsic : Bool
@@ -197,6 +226,7 @@ canonicalChallengeAtlas =
     brazeJointChallenge
     maintainabilityChallenge
     weightReductionOpportunity
+    valveSerialFailurePair
     vikingOperatingEnvelopeLineage
     interegenTradeoffReceipt
     false
@@ -216,5 +246,5 @@ record ChallengeAcquisitionFrontier : Set where
 challengeAcquisitionFrontier : ChallengeAcquisitionFrontier
 challengeAcquisitionFrontier =
   challenge-acquisition-frontier
-    false false false false false false
-    "Acquire Moog/NAS9-12996 valve failure analysis, Rocketdyne contamination inspection/disposition, throttle dynamic records, braze process qualification and engineering-change documentation."
+    true false false false false false
+    "The executive summary pays the valve failure mechanism and repeated serial observations; next acquire detailed Moog/NAS9-12996 disassembly/test records, particle transport geometry, throttle dynamic records, braze process qualification and engineering-change documentation."
