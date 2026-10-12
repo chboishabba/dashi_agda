@@ -41,17 +41,34 @@ EXPECTED = {
         "sameProductionCannotRecoverVenueAccess",
         "historyQualifiedTheatreAccess",
     ],
+    "DASHI/Culture/PowersPlantationParadiseGovernedCrossPollinationExact.agda": [
+        "sameCulturalSurfaceCannotRecoverStanding",
+        "sameCulturalSurfaceCannotRecoverContestability",
+        "sameCulturalSurfaceCannotRecoverMaterialCone",
+        "powersChapter5RootedTraceClaim",
+        "governedObservationBoundary",
+        "recognitionConstitutionBoundary",
+        "politicalContestabilityBoundary",
+        "historyEcologyOptionConeBoundary",
+        "languageUseStandingBoundary",
+        "situatedFormalisationBoundary",
+    ],
     "DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda": [
         "paradiseObserverCannotRecoverMaterialAffordance",
         "recognitionCannotRecoverDistribution",
         "localExpansionDoesNotProveGlobalEmancipation",
         "sourceClaimDoesNotBecomeDASHITheorem",
         "historicalClaimBoundary",
+        "governedCrossPollinationBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
         "_paradise-material-gap-paid",
         "_performance-status-gap-paid",
         "_archive-absence-gap-paid",
+        "_governed-standing-gap-paid",
+        "_contestability-gap-paid",
+        "_material-cone-gap-paid",
+        "_rooted-trace-paid",
     ],
 }
 
@@ -77,6 +94,7 @@ else:
         "ColonialPerformanceStatusNonfactorabilityExact",
         "HistoricalArchiveAbsenceNonfactorabilityExact",
         "ColonialTheatreAccessAdapterExact",
+        "PowersPlantationParadiseGovernedCrossPollinationExact",
         "PowersPlantationParadiseSynthesisExact",
         "PowersPlantationParadiseValidation",
     ]:
