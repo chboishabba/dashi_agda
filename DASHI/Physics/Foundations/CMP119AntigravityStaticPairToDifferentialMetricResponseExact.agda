@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119AntigravityStaticPairToDifferentialMetric
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as Differential
