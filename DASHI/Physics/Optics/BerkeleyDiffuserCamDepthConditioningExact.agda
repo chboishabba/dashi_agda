@@ -11,14 +11,17 @@ import DASHI.Physics.Optics.DiffuserRestrictedStabilityProducerExact as Stabilit
 -- EXECUTABLE NUMERICAL ACQUISITION BOUNDARY
 --
 -- scripts/check_waller_diffusercam_conditioning.py is pinned to the exact
--- public PSF artifact and exact source preprocessing (PSF bias = 102). It
--- computes a same-lateral depth-code matrix by vectorising each depth PSF,
--- then reports rank, Gram coherence and singular values.
+-- public PSF artifact and source preprocessing. It now has two scopes:
 --
--- This is deliberately weaker than the global restricted inverse obligation:
--- the full 3-D camera operator contains lateral translations of all depth
--- codewords, and a k-sparse/TV scene class requires support-uniform bounds on
--- those translated columns. A depth-only SVD cannot pay that theorem.
+-- 1. same-lateral depth-code SVD / Gram diagnostics;
+-- 2. a declared finite lateral translation grid, using zero-fill shifted PSFs
+--    cropped back to the sensor rectangle, followed by normalized mutual
+--    coherence and a Gershgorin sparse lower-bound compiler.
+--
+-- The second route can produce a genuine restricted inverse certificate for
+-- exactly the finite translated-column scene family executed by the script.
+-- It is not promoted to an all-resolution camera RIP theorem, and no numeric
+-- certificate is claimed until the pinned binary artifact is actually run.
 ------------------------------------------------------------------------
 
 conditioningAuditScript : String
@@ -30,13 +33,19 @@ publishedPSFArtifactUsed = true
 depthOnlySameLateralAuditExecutable : Bool
 depthOnlySameLateralAuditExecutable = true
 
+translatedColumnRestrictedAuditExecutable : Bool
+translatedColumnRestrictedAuditExecutable = true
+
+coherenceToSparseLowerBoundCompilerPaid : Bool
+coherenceToSparseLowerBoundCompilerPaid = true
+
 -- The public binary is pinned, but no numerical run receipt was observed in
--- the current connector/runtime. Keep the result itself fail-closed.
+-- the current connector/runtime. Keep numerical promotions fail-closed.
 depthOnlyNumericalReceiptCaptured : Bool
 depthOnlyNumericalReceiptCaptured = false
 
-translatedColumnRestrictedAuditPaid : Bool
-translatedColumnRestrictedAuditPaid = false
+translatedColumnNumericalReceiptCaptured : Bool
+translatedColumnNumericalReceiptCaptured = false
 
 globalSparseRestrictedKappaPaid : Bool
 globalSparseRestrictedKappaPaid = false
@@ -46,8 +55,10 @@ record BerkeleyDiffuserCamDepthConditioningReceipt : Set where
     psfArtifactPinned : Bool
     sourceOperatorPinned : Bool
     executableDepthAudit : Bool
+    executableTranslatedColumnAudit : Bool
+    sparseLowerBoundCompiler : Bool
     numericalDepthReceipt : Bool
-    translatedColumnAudit : Bool
+    numericalTranslatedColumnReceipt : Bool
     globalRestrictedKappa : Bool
 
 open BerkeleyDiffuserCamDepthConditioningReceipt public
@@ -58,11 +69,14 @@ currentBerkeleyDiffuserCamDepthConditioningReceipt = record
   { psfArtifactPinned = Calibration.publicCalibrationArtifactPinned
   ; sourceOperatorPinned = SourceOperator.sourceForwardUsesFFTConvolution
   ; executableDepthAudit = depthOnlySameLateralAuditExecutable
+  ; executableTranslatedColumnAudit = translatedColumnRestrictedAuditExecutable
+  ; sparseLowerBoundCompiler = coherenceToSparseLowerBoundCompilerPaid
   ; numericalDepthReceipt = depthOnlyNumericalReceiptCaptured
-  ; translatedColumnAudit = translatedColumnRestrictedAuditPaid
+  ; numericalTranslatedColumnReceipt = translatedColumnNumericalReceiptCaptured
   ; globalRestrictedKappa = globalSparseRestrictedKappaPaid
   }
 
--- Importing Stability binds the numerical acquisition target to the existing
--- same-H restricted-stability producer. This module does not create a second
--- inverse theorem or substitute a depth-only condition number for kappa.
+-- Importing Stability binds a successful finite numerical certificate to the
+-- existing same-H restricted-stability producer. This module does not create a
+-- second inverse theorem or extrapolate a finite grid certificate beyond its
+-- declared admissible scene family.
