@@ -1,0 +1,24 @@
+name: Waller DiffuserCam conditioning audit
+
+on:
+  push:
+    branches:
+      - feature/diffraction-3d-imaging-physical-maxcut-20261008
+  workflow_dispatch:
+
+jobs:
+  conditioning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy scipy
+      - name: Run pinned public-PSF audit
+        run: python scripts/check_waller_diffusercam_conditioning.py --json-out waller_diffusercam_conditioning.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: waller-diffusercam-conditioning
+          path: waller_diffusercam_conditioning.json
