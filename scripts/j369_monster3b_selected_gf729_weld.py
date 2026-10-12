@@ -1,30 +1,25 @@
 #!/usr/bin/env python3
-"""Exact finite weld from the Monster-3B compression to selected GF(729).
+"""Exact finite weld from Monster-3B source compressions to selected GF(729).
 
-Producer provenance:
-  PR #1098 / Monster3B ATLAS compression receipt derives the 6x6 matrix below
-  from the acquired ATLAS 2.Suz / 2.Suz:2 GF(3)^12 matrices after the unique
-  inner alternating-form normalization.  Its source word is
-
-      g2 g1 g2^-1 g1 g2^-1.
-
-This consumer does not reassert the Monster source derivation.  It independently
-checks the remaining J369 finite-field presentation gap against #1105's selected
-model
+PR #1098 derives the literal 6x6 compression matrices below from acquired ATLAS
+2.Suz / 2.Suz:2 GF(3)^12 matrices after the unique inner alternating-form
+normalization.  This consumer independently checks them against #1105's selected
+field
 
     GF(3)[alpha] / (alpha^6 + alpha^5 + alpha^4 + 1).
 
-The compression polynomial is exactly obtained by beta = 1-alpha:
+Two stages are retained:
 
-    f(1-x) = x^6 - x^5 - x^3 + x^2 + 1  (mod 3).
+* depth 5: beta=1-alpha gives the first exact field-presentation weld, with
+  multiplicative order 364;
+* depth 7: a stronger source compression has a root gamma in the SAME selected
+  field of multiplicative order 728.  Its multiplication action is therefore
+  transitive on all 728 nonzero field elements with trivial stabilizer.
 
-We then construct multiplication-by-beta on the selected polynomial basis and
-an explicit invertible Q satisfying
-
-    Q T = M_beta Q.
-
-That pays the finite selected-field presentation weld.  It still does not pay
-the larger Monster action/orbit/stabilizer semantic recognition contract.
+Both stages construct explicit invertible Q satisfying Q T = M Q.  The latter
+pays the selected finite-field multiplicative action/orbit/stabilizer weld, but
+not the broader Monster semantic-action identification or Agda-kernel matrix
+certification.
 """
 from __future__ import annotations
 
@@ -34,12 +29,13 @@ from pathlib import Path
 
 MOD = 3
 DEGREE = 6
-
 SELECTED_MODULUS = (1, 0, 0, 0, 1, 1, 1)  # low -> high
-COMPRESSION_MODULUS = (1, 0, 1, 2, 0, 2, 1)
-BETA = (1, 2, 0, 0, 0, 0)  # 1 - alpha
+ZERO = (0,) * DEGREE
+ONE = (1,) + (0,) * (DEGREE - 1)
 
-COMPRESSION_MATRIX = (
+BETA_MODULUS = (1, 0, 1, 2, 0, 2, 1)
+BETA = (1, 2, 0, 0, 0, 0)  # 1-alpha
+BETA_T = (
     (0, 2, 1, 0, 2, 1),
     (2, 0, 2, 1, 2, 2),
     (0, 0, 0, 0, 1, 2),
@@ -47,6 +43,18 @@ COMPRESSION_MATRIX = (
     (2, 0, 2, 2, 0, 2),
     (1, 0, 1, 0, 2, 2),
 )
+
+PRIMITIVE_MODULUS = (2, 0, 1, 2, 2, 2, 1)
+GAMMA = (0, 2, 0, 1, 2, 0)
+PRIMITIVE_T = (
+    (0, 0, 0, 2, 2, 2),
+    (2, 1, 0, 2, 0, 0),
+    (0, 2, 1, 0, 0, 2),
+    (1, 0, 1, 0, 2, 0),
+    (2, 0, 2, 2, 0, 1),
+    (0, 1, 1, 2, 0, 2),
+)
+PRIMITIVE_SOURCE_WORD = "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1"
 
 
 def trim(poly):
@@ -58,11 +66,11 @@ def trim(poly):
 
 def poly_add(left, right):
     n = max(len(left), len(right))
-    out = [0] * n
-    for i in range(n):
-        out[i] = ((left[i] if i < len(left) else 0)
-                  + (right[i] if i < len(right) else 0)) % MOD
-    return trim(out)
+    return trim([
+        ((left[i] if i < len(left) else 0) +
+         (right[i] if i < len(right) else 0)) % MOD
+        for i in range(n)
+    ])
 
 
 def poly_mul(left, right):
@@ -78,7 +86,6 @@ def poly_scale(poly, scalar):
 
 
 def poly_compose_at_one_minus_x(poly):
-    """Return poly(1-x) over GF(3), coefficients low -> high."""
     one_minus_x = (1, 2)
     power = (1,)
     out = (0,)
@@ -92,6 +99,10 @@ def add(a, b):
     return tuple((x + y) % MOD for x, y in zip(a, b))
 
 
+def scale(a, scalar):
+    return tuple((scalar * x) % MOD for x in a)
+
+
 def mul(a, b):
     coeffs = [0] * (2 * DEGREE - 1)
     for i, x in enumerate(a):
@@ -103,11 +114,42 @@ def mul(a, b):
         if coefficient:
             for j, modulus_coefficient in enumerate(lower):
                 coeffs[k - DEGREE + j] = (
-                    coeffs[k - DEGREE + j]
-                    - coefficient * modulus_coefficient
+                    coeffs[k - DEGREE + j] - coefficient * modulus_coefficient
                 ) % MOD
             coeffs[k] = 0
     return tuple(coeffs[:DEGREE])
+
+
+def power(a, exponent):
+    result = ONE
+    base = a
+    while exponent:
+        if exponent & 1:
+            result = mul(result, base)
+        base = mul(base, base)
+        exponent //= 2
+    return result
+
+
+def multiplicative_order(a):
+    if a == ZERO:
+        return 0
+    current = ONE
+    for k in range(1, 3 ** DEGREE):
+        current = mul(current, a)
+        if current == ONE:
+            return k
+    raise AssertionError("finite multiplicative order missing")
+
+
+def eval_poly(coefficients, a):
+    result = ZERO
+    current = ONE
+    for coefficient in coefficients:
+        if coefficient:
+            result = add(result, scale(current, coefficient))
+        current = mul(current, a)
+    return result
 
 
 def matrix_mul(left, right):
@@ -128,10 +170,8 @@ def identity(n):
 
 def matrix_inverse(matrix):
     n = len(matrix)
-    augmented = [
-        [x % MOD for x in row] + identity(n)[i]
-        for i, row in enumerate(matrix)
-    ]
+    augmented = [[x % MOD for x in row] + identity(n)[i]
+                 for i, row in enumerate(matrix)]
     for column in range(n):
         pivot = next(i for i in range(column, n) if augmented[i][column])
         augmented[column], augmented[pivot] = augmented[pivot], augmented[column]
@@ -195,67 +235,89 @@ def swap01(vector):
     return out
 
 
-def build_receipt():
-    substituted = poly_compose_at_one_minus_x(SELECTED_MODULUS)
-    polynomial_substitution_verified = substituted == COMPRESSION_MODULUS
-
-    beta_matrix = multiplication_matrix(BETA)
+def weld(matrix, field_element):
+    field_matrix = multiplication_matrix(field_element)
     e0 = [1, 0, 0, 0, 0, 0]
-    compression_krylov = krylov_matrix(COMPRESSION_MATRIX, e0)
-    selected_krylov = krylov_matrix(beta_matrix, e0)
-    compression_krylov_det = determinant_mod3(compression_krylov)
-    selected_krylov_det = determinant_mod3(selected_krylov)
+    source_krylov = krylov_matrix(matrix, e0)
+    target_krylov = krylov_matrix(field_matrix, e0)
+    source_det = determinant_mod3(source_krylov)
+    target_det = determinant_mod3(target_krylov)
+    Q = matrix_mul(target_krylov, matrix_inverse(source_krylov))
+    left = matrix_vec(matrix, swap01(e0))
+    right = swap01(matrix_vec(matrix, e0))
+    return {
+        "multiplication_matrix": field_matrix,
+        "cyclic_rank_e0": DEGREE if source_det else 0,
+        "field_cyclic_rank_e0": DEGREE if target_det else 0,
+        "source_krylov_determinant_mod3": source_det,
+        "field_krylov_determinant_mod3": target_det,
+        "intertwiner_Q": Q,
+        "intertwiner_determinant_mod3": determinant_mod3(Q),
+        "intertwining_equation": "Q*T = M*Q",
+        "intertwining_verified": matrix_mul(Q, matrix) == matrix_mul(field_matrix, Q),
+        "T_swap01_witness": left,
+        "swap01_T_witness": right,
+        "breaks_swap01_at_e0": left != right,
+    }
 
-    Q = matrix_mul(selected_krylov, matrix_inverse(compression_krylov))
-    intertwining_verified = (
-        matrix_mul(Q, COMPRESSION_MATRIX)
-        == matrix_mul(beta_matrix, Q)
-    )
 
-    left = matrix_vec(COMPRESSION_MATRIX, swap01(e0))
-    right = swap01(matrix_vec(COMPRESSION_MATRIX, e0))
+def build_receipt():
+    beta_weld = weld(BETA_T, BETA)
+    beta_substitution = poly_compose_at_one_minus_x(SELECTED_MODULUS)
+    beta_order = multiplicative_order(BETA)
+
+    primitive_weld = weld(PRIMITIVE_T, GAMMA)
+    gamma_order = multiplicative_order(GAMMA)
+    gamma_root_verified = eval_poly(PRIMITIVE_MODULUS, GAMMA) == ZERO
 
     return {
-        "schema": "dashi.j369.monster3b.selected_gf729_weld.v1",
+        "schema": "dashi.j369.monster3b.selected_gf729_weld.v2",
         "source_producer": {
             "pr": 1098,
             "branch": "agent/e6-f3-exterior-square-maxcut-20261006",
             "receipt_path": "outputs/monster3b_atlas_compression_field_selector_20261012.json",
-            "source_word": "g2 g1 g2^-1 g1 g2^-1",
         },
         "selected_modulus_low_to_high": list(SELECTED_MODULUS),
-        "compression_modulus_low_to_high": list(COMPRESSION_MODULUS),
-        "affine_generator_change": "beta = 1 - alpha",
-        "beta_coordinates": list(BETA),
-        "polynomial_substitution_verified": polynomial_substitution_verified,
-        "compression_matrix": [list(row) for row in COMPRESSION_MATRIX],
-        "multiplication_by_beta_matrix": beta_matrix,
-        "cyclic_rank_e0": DEGREE if compression_krylov_det else 0,
-        "selected_beta_cyclic_rank_e0": DEGREE if selected_krylov_det else 0,
-        "compression_krylov_determinant_mod3": compression_krylov_det,
-        "selected_beta_krylov_determinant_mod3": selected_krylov_det,
-        "intertwiner_Q": Q,
-        "intertwiner_determinant_mod3": determinant_mod3(Q),
-        "intertwining_equation": "Q*T = M_beta*Q",
-        "intertwining_verified": intertwining_verified,
-        "swap01_witness": e0,
-        "T_swap01_witness": left,
-        "swap01_T_witness": right,
-        "breaks_swap01_at_e0": left != right,
+        "earlier_beta_weld": {
+            "source_word": "g2 g1 g2^-1 g1 g2^-1",
+            "compression_modulus_low_to_high": list(BETA_MODULUS),
+            "affine_generator_change": "beta = 1 - alpha",
+            "beta_coordinates": list(BETA),
+            "polynomial_substitution_verified": beta_substitution == BETA_MODULUS,
+            "multiplicative_order": beta_order,
+            **beta_weld,
+        },
+        "preferred_primitive_weld": {
+            "source_word": PRIMITIVE_SOURCE_WORD,
+            "compression_modulus_low_to_high": list(PRIMITIVE_MODULUS),
+            "primitive_root_coordinates": list(GAMMA),
+            "primitive_root_is_root_of_compression_polynomial": gamma_root_verified,
+            "primitive_root_multiplicative_order": gamma_order,
+            "compression_matrix": [list(row) for row in PRIMITIVE_T],
+            **primitive_weld,
+            "punctured_orbit_size": gamma_order,
+            "punctured_stabilizer_size": 1 if gamma_order == 728 else 0,
+        },
         "selected_field_presentation_weld_paid": (
-            polynomial_substitution_verified
-            and compression_krylov_det != 0
-            and selected_krylov_det != 0
-            and determinant_mod3(Q) != 0
-            and intertwining_verified
-            and left != right
+            beta_substitution == BETA_MODULUS
+            and beta_weld["intertwining_verified"]
+            and beta_weld["intertwiner_determinant_mod3"] != 0
         ),
-        "full_action_orbit_stabilizer_recognition_paid": False,
+        "selected_field_multiplicative_action_weld_paid": (
+            gamma_root_verified
+            and gamma_order == 728
+            and primitive_weld["intertwining_verified"]
+            and primitive_weld["intertwiner_determinant_mod3"] != 0
+            and primitive_weld["cyclic_rank_e0"] == 6
+            and primitive_weld["breaks_swap01_at_e0"]
+        ),
+        "full_monster_semantic_action_recognition_paid": False,
         "boundary": (
-            "This exact finite computation identifies the source compression with "
-            "multiplication by beta=1-alpha in the already-selected GF(729) presentation. "
-            "It does not by itself identify all downstream Monster action/orbit/stabilizer "
-            "semantics or constitute an Agda-kernel matrix proof."
+            "The preferred source compression is explicitly conjugate to multiplication "
+            "by a primitive element of the already-selected GF(729). Hence its powers "
+            "give one 728-element orbit on the punctured field and trivial stabilizer. "
+            "This does not by itself identify the broader Monster semantic action or "
+            "constitute an Agda-kernel matrix proof."
         ),
     }
 
