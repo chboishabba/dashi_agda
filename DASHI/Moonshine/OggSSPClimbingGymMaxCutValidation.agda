@@ -2,6 +2,10 @@ module DASHI.Moonshine.OggSSPClimbingGymMaxCutValidation where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Analysis.RiemannSSP15FilteredProvenanceCapstoneExact as Capstone
+import DASHI.Analysis.RiemannSSP15ProducerMarkedClimbingGymBridgeExact as RHGym
+import DASHI.Analysis.RiemannSSP15DepthFiveRoleCodecExact as RHCodec
+import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Foundations.RadixValuationStageBridge as Radix
 import DASHI.Foundations.StratifiedResolutionTowerExact as Tower
@@ -94,6 +98,36 @@ negatedHistoryRemainsCoherent :
 negatedHistoryRemainsCoherent history depth =
   Tower.coherent (Limit.negateHistory history) depth
 
+producerMarkedOriginRootIsInverse :
+  (certificate : Capstone.PrimitiveRowProducerRoleCertificate) →
+  Gym.wallOrientation
+    (RHGym.producerMarkedRootWall
+      (Capstone.canonicalProducerMarkedCode
+        certificate Quotient.mode18 RHCodec.originRole))
+  ≡ Signed.inverseOrientation
+producerMarkedOriginRootIsInverse =
+  RHGym.originRoleRootWallOrientationInverse
+
+producerMarkedJRootRetainsP11 :
+  (certificate : Capstone.PrimitiveRowProducerRoleCertificate) →
+  Gym.wallPrime
+    (RHGym.producerMarkedRootWall
+      (Capstone.canonicalProducerMarkedCode
+        certificate Quotient.mode18 RHCodec.jRole))
+  ≡ Lane.p11
+producerMarkedJRootRetainsP11 =
+  RHGym.jMode18RootWallPrimeIsEleven
+
+producerMarkedSRootIsForward :
+  (certificate : Capstone.PrimitiveRowProducerRoleCertificate) →
+  Gym.wallOrientation
+    (RHGym.producerMarkedRootWall
+      (Capstone.canonicalProducerMarkedCode
+        certificate Quotient.mode18 RHCodec.sRole))
+  ≡ Signed.forwardOrientation
+producerMarkedSRootIsForward =
+  RHGym.sRoleRootWallOrientationForward
+
 boundaryKeepsAddressAndSignedFlowDistinct :
   Gym.signedValuationIsRadixAddress
     Gym.canonicalOggSSPSignedRadixClimbingGymBoundary
@@ -111,3 +145,9 @@ boundaryKeepsInverseLimitFiniteStructural :
     Limit.canonicalSignedRadixInverseLimitBoundary
   ≡ false
 boundaryKeepsInverseLimitFiniteStructural = refl
+
+boundaryKeepsRHProducerSeparateFromHoleObservation :
+  RHGym.producerMarkedRootWallIdentifiesJMDHoleObservation
+    RHGym.canonicalRiemannSSP15ProducerMarkedClimbingGymBoundary
+  ≡ false
+boundaryKeepsRHProducerSeparateFromHoleObservation = refl
