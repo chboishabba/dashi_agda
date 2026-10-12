@@ -3,26 +3,10 @@ module DASHI.Philosophy.NonginRoadmapClosureExact where
 ------------------------------------------------------------------------
 -- NONGIN ROADMAP CLOSURE
 --
--- This is the terminal status theorem for the Nongin lineage itself.
---
--- The raw/later source genealogy now has one canonical provenance entry for
--- every declared OriginPhase.  The semantic programme required to reconstruct
--- the raw Nongin invariants is also paid by existing owners:
---
---   * coarse/fine collision and consumer-relative non-descent;
---   * exact richer-observer recovery;
---   * least-sufficient consumer observer / information-order theorem;
---   * recursive observer depth, truncation, residual reopening;
---   * generic recursive-fibre/inverse-limit bridge;
---   * mature trialectic/Grothendieck descendant integration;
---   * explicit finite-geometry and Set-descent boundaries;
---   * exact C3 local-context obstruction and residual repair;
---   * explicit next-depth expansion policy plus proof of underdetermination.
---
--- The later transport-enriched groupoid / 2-sheaf / higher-stack / hypersheaf
--- programme is valuable generalisation, but it is NOT a prerequisite for
--- closing the historical Nongin reconstruction.  Nor are exceptional-group or
--- physical-law realizations.
+-- Terminal status theorem for the Nongin lineage itself.  Historical source
+-- genealogy, semantic reconstruction, recursive observer/depth machinery and
+-- the mature trialectic descendant cut are required.  Later transport-enriched
+-- higher-stack/hypersheaf/physics programmes are explicit non-prerequisites.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -30,6 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.DialecticOriginSourceAtlasExact as Atlas
 import DASHI.Philosophy.NonginCurrentMaxCutExact as Current
+import DASHI.Philosophy.NonginGenealogyOwnerWeldExact as Weld
 import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageExact as Advantage
 
 atlasBoundary : Atlas.DialecticOriginSourceAtlasBoundary
@@ -41,9 +26,8 @@ currentBoundary = Current.canonicalNonginCurrentMaxCutBoundary
 leastBoundary : Advantage.NonginLeastSufficientObserverBoundary
 leastBoundary = Advantage.canonicalNonginLeastSufficientObserverBoundary
 
-------------------------------------------------------------------------
--- 1. Genealogy is total over the declared phase type.
-------------------------------------------------------------------------
+weldBoundary : Weld.NonginGenealogyOwnerWeldBoundary
+weldBoundary = Weld.canonicalNonginGenealogyOwnerWeldBoundary
 
 genealogyPhaseTotalityReceipt :
   Atlas.everyDeclaredOriginPhaseHasCanonicalEntry atlasBoundary ≡ true
@@ -54,12 +38,13 @@ canonicalEntryReturnsDeclaredPhase :
   Atlas.phase (Atlas.entryForPhase declared) ≡ declared
 canonicalEntryReturnsDeclaredPhase = Atlas.entryForPhaseIsExact
 
-------------------------------------------------------------------------
--- 2. Exact Nongin-required obligations.
-------------------------------------------------------------------------
+typedGenealogyOwnerWeldReceipt :
+  Weld.allTypedDescendantOwnersLinked weldBoundary ≡ true
+typedGenealogyOwnerWeldReceipt = refl
 
 data NonginRequiredObligation : Set where
   phaseTotalGenealogy : NonginRequiredObligation
+  typedGenealogyOwnerWeld : NonginRequiredObligation
   structuralOriginFormalisation : NonginRequiredObligation
   consumerRelativeNonDescent : NonginRequiredObligation
   exactConsumerRecovery : NonginRequiredObligation
@@ -75,6 +60,8 @@ data NonginRequiredObligation : Set where
 requiredObligationPaid : NonginRequiredObligation → Bool
 requiredObligationPaid phaseTotalGenealogy =
   Atlas.everyDeclaredOriginPhaseHasCanonicalEntry atlasBoundary
+requiredObligationPaid typedGenealogyOwnerWeld =
+  Weld.allTypedDescendantOwnersLinked weldBoundary
 requiredObligationPaid structuralOriginFormalisation =
   Current.historicalOriginFormalized currentBoundary
 requiredObligationPaid consumerRelativeNonDescent =
@@ -102,6 +89,7 @@ allNonginRequiredObligationsPaid :
   (obligation : NonginRequiredObligation) →
   requiredObligationPaid obligation ≡ true
 allNonginRequiredObligationsPaid phaseTotalGenealogy = refl
+allNonginRequiredObligationsPaid typedGenealogyOwnerWeld = refl
 allNonginRequiredObligationsPaid structuralOriginFormalisation = refl
 allNonginRequiredObligationsPaid consumerRelativeNonDescent = refl
 allNonginRequiredObligationsPaid exactConsumerRecovery = refl
@@ -113,10 +101,6 @@ allNonginRequiredObligationsPaid matureTrialecticDescendantIntegration = refl
 allNonginRequiredObligationsPaid setLevelDescentIntegration = refl
 allNonginRequiredObligationsPaid c3ContextObstructionAndRepair = refl
 allNonginRequiredObligationsPaid nextDepthExpansionUnderdetermination = refl
-
-------------------------------------------------------------------------
--- 3. Strong receipts retained from the capstone.
-------------------------------------------------------------------------
 
 leastSufficientInformationOrderReceipt :
   Advantage.hiddenOtherConsumerIsLeastSufficient leastBoundary ≡ true
@@ -137,10 +121,6 @@ carrySeedDoesNotDetermineUniqueNextState = refl
 carryAllDepthCoherenceIsNotAutomatic :
   Current.carryAllDepthCoherenceAutomatic currentBoundary ≡ false
 carryAllDepthCoherenceIsNotAutomatic = refl
-
-------------------------------------------------------------------------
--- 4. Downstream generalisations are explicitly outside Nongin closure.
-------------------------------------------------------------------------
 
 data OptionalDescendantProgramme : Set where
   transportEnrichedGroupoidPresheafProgramme : OptionalDescendantProgramme
@@ -177,15 +157,13 @@ hypersheafStillOpenButNonBlocking :
   Current.certifiedHypersheafPaid currentBoundary ≡ false
 hypersheafStillOpenButNonBlocking = refl
 
-------------------------------------------------------------------------
--- 5. Terminal closure receipt.
-------------------------------------------------------------------------
-
 record NonginRoadmapClosureReceipt : Set where
   constructor nongin-roadmap-closure-receipt
   field
     genealogyTotal :
       Atlas.everyDeclaredOriginPhaseHasCanonicalEntry atlasBoundary ≡ true
+    typedOwnersLinked :
+      Weld.allTypedDescendantOwnersLinked weldBoundary ≡ true
     allRequiredPaid :
       (obligation : NonginRequiredObligation) →
       requiredObligationPaid obligation ≡ true
@@ -208,6 +186,7 @@ canonicalNonginRoadmapClosureReceipt : NonginRoadmapClosureReceipt
 canonicalNonginRoadmapClosureReceipt =
   nongin-roadmap-closure-receipt
     refl
+    refl
     allNonginRequiredObligationsPaid
     refl
     refl
@@ -220,6 +199,7 @@ record NonginRoadmapClosureBoundary : Set where
   constructor nongin-roadmap-closure-boundary
   field
     genealogyPhaseTotalityPaid : Bool
+    typedGenealogyOwnersLinked : Bool
     semanticRoadmapRequiredObligationsPaid : Bool
     leastSufficientInformationOrderPaid : Bool
     recursiveObserverInverseLimitPaid : Bool
@@ -236,5 +216,5 @@ open NonginRoadmapClosureBoundary public
 canonicalNonginRoadmapClosureBoundary : NonginRoadmapClosureBoundary
 canonicalNonginRoadmapClosureBoundary =
   nongin-roadmap-closure-boundary
-    true true true true true true true true
+    true true true true true true true true true
     false false false
