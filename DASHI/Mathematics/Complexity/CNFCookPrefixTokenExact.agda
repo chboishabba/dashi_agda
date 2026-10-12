@@ -4,8 +4,10 @@ module DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact where
 -- DIRECT CNF -> COOK PREFIX TOKENS, EXACTLY THE EXISTING COMPOSED COMPILER
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; [])
+open import Agda.Builtin.List using (List; []; _∷_)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
@@ -19,14 +21,11 @@ literalTokensInto :
   List Prefix.CookSyntaxToken
 literalTokensInto (CNF.positive index) rest =
   Prefix.formulaVariableToken
-  Agda.Builtin.List.∷
-  Prefix.encodeNatInto (Data.Fin.Base.toℕ index) rest
+  ∷ Prefix.encodeNatInto (Fin.toℕ index) rest
 literalTokensInto (CNF.negative index) rest =
   Prefix.formulaNegateToken
-  Agda.Builtin.List.∷
-  Prefix.formulaVariableToken
-  Agda.Builtin.List.∷
-  Prefix.encodeNatInto (Data.Fin.Base.toℕ index) rest
+  ∷ Prefix.formulaVariableToken
+  ∷ Prefix.encodeNatInto (Fin.toℕ index) rest
 
 clauseTokensInto :
   ∀ {width} →
@@ -34,11 +33,10 @@ clauseTokensInto :
   List Prefix.CookSyntaxToken →
   List Prefix.CookSyntaxToken
 clauseTokensInto [] rest =
-  Prefix.formulaFalseToken Agda.Builtin.List.∷ rest
-clauseTokensInto (literal Agda.Builtin.List.∷ literals) rest =
+  Prefix.formulaFalseToken ∷ rest
+clauseTokensInto (literal ∷ literals) rest =
   Prefix.formulaOrToken
-  Agda.Builtin.List.∷
-  literalTokensInto literal
+  ∷ literalTokensInto literal
     (clauseTokensInto literals rest)
 
 cnfTokensInto :
@@ -47,11 +45,10 @@ cnfTokensInto :
   List Prefix.CookSyntaxToken →
   List Prefix.CookSyntaxToken
 cnfTokensInto [] rest =
-  Prefix.formulaTrueToken Agda.Builtin.List.∷ rest
-cnfTokensInto (clause Agda.Builtin.List.∷ clauses) rest =
+  Prefix.formulaTrueToken ∷ rest
+cnfTokensInto (clause ∷ clauses) rest =
   Prefix.formulaAndToken
-  Agda.Builtin.List.∷
-  clauseTokensInto clause
+  ∷ clauseTokensInto clause
     (cnfTokensInto clauses rest)
 
 literalTokensIntoExact :
@@ -72,7 +69,7 @@ clauseTokensIntoExact :
   ≡ Prefix.encodeCookFormulaInto
       (Bridge.clauseToCook clause) rest
 clauseTokensIntoExact [] rest = refl
-clauseTokensIntoExact (literal Agda.Builtin.List.∷ literals) rest
+clauseTokensIntoExact (literal ∷ literals) rest
   rewrite literalTokensIntoExact literal (clauseTokensInto literals rest)
         | clauseTokensIntoExact literals rest =
   refl
@@ -85,7 +82,7 @@ cnfTokensIntoExact :
   ≡ Prefix.encodeCookFormulaInto
       (Bridge.cnfToCook formula) rest
 cnfTokensIntoExact [] rest = refl
-cnfTokensIntoExact (clause Agda.Builtin.List.∷ clauses) rest
+cnfTokensIntoExact (clause ∷ clauses) rest
   rewrite clauseTokensIntoExact clause (cnfTokensInto clauses rest)
         | cnfTokensIntoExact clauses rest =
   refl
@@ -106,7 +103,7 @@ cnfTokensExact formula = cnfTokensIntoExact formula []
 cnfTokenBits :
   ∀ {width} →
   CNF.CNF width →
-  List Agda.Builtin.Bool.Bool
+  List Bool
 cnfTokenBits formula = Binary.encodeTokenStream (cnfTokens formula)
 
 cnfTokenBitsExact :
