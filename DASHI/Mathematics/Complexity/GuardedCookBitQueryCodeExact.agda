@@ -2,10 +2,6 @@ module DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact where
 
 ------------------------------------------------------------------------
 -- CANONICAL ANSWER-BLIND QUERY CODE FOR ONE GUARDED COOK FORMULA BIT
---
--- A universal indexed generator must receive only finite public description:
--- coded machine syntax, literal machine input, tableau budget T, bit index i.
--- The queried answer bit is NOT an input field.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -82,6 +78,38 @@ record GuardedCookBitQuery : Set₁ where
 
 open GuardedCookBitQuery public
 
+withIndex :
+  GuardedCookBitQuery → Nat → GuardedCookBitQuery
+withIndex query newIndex = record
+  { code = code query
+  ; nonemptyRules = nonemptyRules query
+  ; input = input query
+  ; steps = steps query
+  ; index = newIndex
+  }
+
+withIndexFormulaExact :
+  (query : GuardedCookBitQuery)
+  (newIndex : Nat) →
+  queryFormula (withIndex query newIndex)
+  ≡ queryFormula query
+withIndexFormulaExact query newIndex = refl
+  where
+    queryFormula : GuardedCookBitQuery → Cook.BooleanFormula
+    queryFormula q =
+      CookLevin.guardedCookFormula
+        (Coded.codedStateCoverage (code q))
+        (Coded.codedSymbolCoverage (code q))
+        (nonemptyRules q)
+        (input q)
+        (steps q)
+
+withIndexIndexExact :
+  (query : GuardedCookBitQuery)
+  (newIndex : Nat) →
+  index (withIndex query newIndex) ≡ newIndex
+withIndexIndexExact query newIndex = refl
+
 queryMachine :
   GuardedCookBitQuery → Local.ConcreteTapeMachine
 queryMachine query =
@@ -126,11 +154,6 @@ queryBits query =
 queryBitLength : GuardedCookBitQuery → Nat
 queryBitLength query = Canonical.listLength (queryBits query)
 
-------------------------------------------------------------------------
--- Generic mapping of a canonical Boolean query bitstream into a generator's
--- chosen binary tape alphabet.
-------------------------------------------------------------------------
-
 mapBoolSymbols :
   ∀ {Symbol : Set} →
   Symbol → Symbol → List Bool → List Symbol
@@ -143,7 +166,6 @@ mapBoolSymbols zeroSymbol oneSymbol (true ∷ bits) =
 ------------------------------------------------------------------------
 -- FIREWALL
 --
--- `queryBits` depends only on machine code, literal input, T and index. A future
--- universal bit generator cannot choose a custom per-formula input encoding or
--- place the requested output bit in its initial configuration.
+-- `withIndex` changes ONLY the requested position. Machine code, literal input
+-- and T are fixed across all reads of one described Cook formula.
 ------------------------------------------------------------------------
