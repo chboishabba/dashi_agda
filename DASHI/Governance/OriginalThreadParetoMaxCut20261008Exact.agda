@@ -12,26 +12,31 @@ import DASHI.Governance.IRISDenaHansardCorrectionAwareEvidenceExact as Hansard
 import DASHI.Governance.IRISDenaSameObjectAcquisitionMaxCutExact as IRIS
 import DASHI.Governance.AUKUSOnboardConductSovereigntyBoundaryExact as Sovereignty
 import DASHI.Governance.AUKUSEmbeddedAuthorityCommandNoncollapseExact as Authority
+import DASHI.Governance.AUKUSPersonnelExchangeMOUExistenceExact as MOU
 import DASHI.Governance.IRISDenaMinisterialBriefingFOIBoundaryExact as Briefing
+import DASHI.Governance.IRISDenaPublicRecordConsumerNonDescentExact as NonDescent
 import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as Iran
 
 ------------------------------------------------------------------------
--- 2026-10-08 ORIGINAL-THREAD PARETO RECOMPUTATION
+-- 2026-10-12 ORIGINAL-THREAD PARETO RECOMPUTATION
 --
 -- Prior paid cells remain paid in Previous. This owner recomputes only the
--- residual programme after discovering:
+-- residual programme after establishing that:
 --   * transcript ref. 29619 is published in full;
 --   * later Chief of Navy correction documents exist;
 --   * the correct primary hearing object is correction-aware;
+--   * official AUKUS/ASA sources pay existence and workforce purpose of the
+--     Australia-US personnel-exchange MOU;
 --   * leaked secondary reproductions narrow the 2024 embedded-authority
---     directive while leaving the directive/MOU primary documents unacquired;
+--     directive while leaving the directive/MOU operative text unacquired;
+--   * exact duty does not descend through the current public-record observer;
 --   * statutory coverage, direction authority, formal command, national-policy
 --     constraint and actual duty are separate sovereignty coordinates.
 ------------------------------------------------------------------------
 
 data LiveRequirement : Set where
   irisCorrectionAwareHansardContent : LiveRequirement
-  irisEmbeddingProtocolText : LiveRequirement
+  irisEmbeddingProtocolOperativeText : LiveRequirement
   irisExactOperationalRecord : LiveRequirement
   iranMarginalRepressionIncrement : LiveRequirement
   broadHistoricalExpansion : LiveRequirement
@@ -41,21 +46,21 @@ hansardContentCell = Pareto.requirement-candidate
   irisCorrectionAwareHansardContent
   true true true true
   1 5
-  "Read FADT transcript ref. 29619 pp. 49-52 together with any applicable Chief of Navy correction; promote/correct the defensive/platform-maintenance duty class only from that primary bundle."
+  "Read FADT transcript ref. 29619 pp. 49-52 together with any applicable Chief of Navy correction; promote/correct defensive/platform-maintenance duty classes only from that primary bundle."
 
 embeddingProtocolCell : Pareto.RequirementCandidate LiveRequirement
 embeddingProtocolCell = Pareto.requirement-candidate
-  irisEmbeddingProtocolText
+  irisEmbeddingProtocolOperativeText
   true true true true
   2 6
-  "Acquire the complete December 2024 Chief of Navy directive and September 2023 exchange-personnel MOU/operative annexes. Secondary reporting already attributes mandatory lawful/reasonable USN direction authority plus an explicit no-command clause, so the fibre is narrower but primary-document authority remains unpaid."
+  "Acquire the complete December 2024 Chief of Navy directive and the operative text/annexes of the Australia-US personnel-exchange MOU. Primary official sources already pay MOU existence and workforce purpose; secondary reporting attributes lawful/reasonable USN direction authority plus an explicit no-command clause. Only the operative authority/third-party-hostilities content remains unpaid."
 
 exactOperationalCell : Pareto.RequirementCandidate LiveRequirement
 exactOperationalCell = Pareto.requirement-candidate
   irisExactOperationalRecord
   true true true true
   5 8
-  "Acquire watchbill/duty assignment, action log, debrief or equivalent same-episode record identifying what the three Australians actually did during the IRIS Dena engagement."
+  "Acquire watchbill/duty assignment, action log, debrief or equivalent same-episode record identifying what the three Australians actually did during the IRIS Dena engagement. Canonical consumer non-descent now proves the existing public surface cannot by itself determine this outcome."
 
 iranMarginalCell : Pareto.RequirementCandidate LiveRequirement
 iranMarginalCell = Pareto.requirement-candidate
@@ -123,6 +128,18 @@ embeddedAuthorityBoundary = Authority.canonicalBoundary
 
 embeddedDirectiveResidual : Authority.PrimaryDocumentResidual
 embeddedDirectiveResidual = Authority.directiveResidual
+
+mouExistenceReceipt : MOU.MOUExistenceReceipt
+mouExistenceReceipt = MOU.canonicalMOUExistence
+
+mouOperativeResidual : MOU.RemainingMOUResidual
+mouOperativeResidual = MOU.operativeMOUResidual
+
+publicRecordNonDescent :
+  NonDescent.Descent.ConsumerNonDescentWitness
+    NonDescent.publicObserver
+    NonDescent.exactDutyConsumer
+publicRecordNonDescent = NonDescent.publicRecordNonDescent
 
 ministerialBriefingFOIBoundary : Briefing.MinisterialBriefingFOIReceipt
 ministerialBriefingFOIBoundary = Briefing.canonicalReceipt
