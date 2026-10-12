@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Quantum.QuantumBirthmarkHolographyBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
