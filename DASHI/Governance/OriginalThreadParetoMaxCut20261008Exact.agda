@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Governance.OriginalThreadParetoAcquisitionExact as Previous
 import DASHI.Governance.IRISDenaHansardCorrectionAwareEvidenceExact as Hansard
@@ -19,19 +20,6 @@ import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as Iran
 
 ------------------------------------------------------------------------
 -- 2026-10-12 ORIGINAL-THREAD PARETO RECOMPUTATION
---
--- Prior paid cells remain paid in Previous. This owner recomputes only the
--- residual programme after establishing that:
---   * transcript ref. 29619 is published in full;
---   * later Chief of Navy correction documents exist;
---   * the correct primary hearing object is correction-aware;
---   * official AUKUS/ASA sources pay existence and workforce purpose of the
---     Australia-US personnel-exchange MOU;
---   * leaked secondary reproductions narrow the 2024 embedded-authority
---     directive while leaving the directive/MOU operative text unacquired;
---   * exact duty does not descend through the current public-record observer;
---   * statutory coverage, direction authority, formal command, national-policy
---     constraint and actual duty are separate sovereignty coordinates.
 ------------------------------------------------------------------------
 
 data LiveRequirement : Set where
@@ -53,14 +41,14 @@ embeddingProtocolCell = Pareto.requirement-candidate
   irisEmbeddingProtocolOperativeText
   true true true true
   2 6
-  "Acquire the complete December 2024 Chief of Navy directive and the operative text/annexes of the Australia-US personnel-exchange MOU. Primary official sources already pay MOU existence and workforce purpose; secondary reporting attributes lawful/reasonable USN direction authority plus an explicit no-command clause. Only the operative authority/third-party-hostilities content remains unpaid."
+  "Acquire the complete December 2024 Chief of Navy directive and the operative text/annexes of the Australia-US personnel-exchange MOU. Primary official sources already pay MOU existence and workforce purpose; secondary reporting attributes lawful/reasonable USN direction authority plus an explicit no-command clause. Only operative authority/third-party-hostilities content remains unpaid."
 
 exactOperationalCell : Pareto.RequirementCandidate LiveRequirement
 exactOperationalCell = Pareto.requirement-candidate
   irisExactOperationalRecord
   true true true true
   5 8
-  "Acquire watchbill/duty assignment, action log, debrief or equivalent same-episode record identifying what the three Australians actually did during the IRIS Dena engagement. Canonical consumer non-descent now proves the existing public surface cannot by itself determine this outcome."
+  "Acquire watchbill/duty assignment, action log, debrief or equivalent same-episode record identifying what the three Australians actually did during the IRIS Dena engagement. Canonical consumer non-descent proves the existing public surface cannot by itself determine this outcome."
 
 iranMarginalCell : Pareto.RequirementCandidate LiveRequirement
 iranMarginalCell = Pareto.requirement-candidate
@@ -136,7 +124,7 @@ mouOperativeResidual : MOU.RemainingMOUResidual
 mouOperativeResidual = MOU.operativeMOUResidual
 
 publicRecordNonDescent :
-  NonDescent.Descent.ConsumerNonDescentWitness
+  Descent.ConsumerNonDescentWitness
     NonDescent.publicObserver
     NonDescent.exactDutyConsumer
 publicRecordNonDescent = NonDescent.publicRecordNonDescent
