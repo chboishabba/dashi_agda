@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
-"""Screen Monster-3B source words by X6 compression.
+"""Screen Monster-3B source words by X6 compression and Heisenberg lift data.
 
-The 2.Suz socle representation fixes the alternating form.  The 2.Suz:2
-extension contains an outer generator with symplectic multiplier -1 (=2 mod 3),
-so the outer generating pair must NOT be passed to the old strict
-``invariant_form`` solver.  Instead we:
+The inner 2.Suz pair fixes the alternating form.  The 2.Suz:2 extension may act
+by symplectic similitudes, so after the common basis normalization we retain the
+multiplier lambda for every source word.  Every word has an X6 compression
+A_g=pi_X g iota_X.  For any nonzero similitude multiplier we also compute the
+asymmetric-Heisenberg cocycle defect
 
-  1. solve the unique invariant alternating form from the inner 2.Suz pair;
-  2. normalize that form to the repository X6 + X6* standard polarization;
-  3. conjugate the 2.Suz:2 generators through the same basis change;
-  4. record their symplectic-similitude multipliers;
-  5. screen every short outer word through the canonical compression
+    B(x,y) = c(gx,gy) - lambda c(x,y).
 
-         A_g = pi_X g iota_X,
+The alternating part cancels by similitude covariance, so B is symmetric.  In
+characteristic three the quadratic correction
 
-     i.e. its upper-left 6x6 block.
+    q(x) = 2 B(x,x) = (1/2) B(x,x)
 
-The downstream K6 selector only needs a same-carrier F3-linear endomorphism,
-so Lagrangian stabilization is retained as a stronger optional property rather
-than a prerequisite.
+satisfies q(x+y)-q(x)-q(y)=B(x,y).  Hence
+
+    (x,z) -> (g x, lambda z + q(x))
+
+is the correct center-scaled Heisenberg lift candidate.  This is particularly
+important for the preferred primitive field-selector word, whose multiplier is
+2=-1 and therefore inverts/scales the center rather than fixing it.
 """
 from __future__ import annotations
 
@@ -28,26 +30,13 @@ from collections import deque
 from pathlib import Path
 
 from analyze_monster3b_symplectic_field_candidates import (
-    HALF,
-    MOD,
-    N,
-    block,
-    charpoly_info,
-    eye,
-    flatten,
-    invariant_form,
-    inverse_mod,
-    is_zero,
-    matmul,
-    matvec,
-    parse_dump,
-    rank_mod,
+    HALF, MOD, N, block, charpoly_info, eye, flatten, invariant_form,
+    inverse_mod, is_zero, matmul, matvec, parse_dump, rank_mod,
     symplectic_basis,
 )
 
 
 def parse_meataxe_file(path):
-    """Parse the small integer MeatAxe matrices used by the ATLAS files."""
     tokens = Path(path).read_text().split()
     if len(tokens) < 5:
         raise ValueError(f"invalid MeatAxe file: {path}")
@@ -59,10 +48,8 @@ def parse_meataxe_file(path):
     digits = "".join(tokens[4:])
     if len(digits) != rows * cols or any(ch not in "012" for ch in digits):
         raise ValueError(f"expected {rows * cols} GF(3) entries in {path}")
-    return [
-        [int(ch) for ch in digits[r * cols : (r + 1) * cols]]
-        for r in range(rows)
-    ]
+    return [[int(ch) for ch in digits[r * cols:(r + 1) * cols]]
+            for r in range(rows)]
 
 
 def scalar_matrix(matrix, scalar):
@@ -73,6 +60,11 @@ def transpose(matrix):
     return [list(row) for row in zip(*matrix)]
 
 
+def matrix_sub(left, right):
+    return [[(a - b) % MOD for a, b in zip(lrow, rrow)]
+            for lrow, rrow in zip(left, right)]
+
+
 def similitude_multiplier(matrix, standard_form):
     transported = matmul(matmul(transpose(matrix), standard_form), matrix)
     if transported == standard_form:
@@ -80,6 +72,28 @@ def similitude_multiplier(matrix, standard_form):
     if transported == scalar_matrix(standard_form, 2):
         return 2
     return 0
+
+
+def heisenberg_cocycle_matrix():
+    matrix = [[0] * N for _ in range(N)]
+    for i in range(HALF):
+        matrix[HALF + i][i] = 1
+    return matrix
+
+
+def heisenberg_cocycle_defect(matrix, multiplier):
+    cocycle = heisenberg_cocycle_matrix()
+    transported = matmul(matmul(transpose(matrix), cocycle), matrix)
+    return matrix_sub(transported, scalar_matrix(cocycle, multiplier))
+
+
+def quadratic_correction_basis_data(defect):
+    # q(x)=2*x^T B*x.  For symmetric B, diagonal coefficient is 2 B_ii
+    # and the i<j cross coefficient simplifies to B_ij in F3.
+    diagonal = [(2 * defect[i][i]) % MOD for i in range(N)]
+    cross = [[i, j, defect[i][j]] for i in range(N)
+             for j in range(i + 1, N) if defect[i][j] % MOD]
+    return diagonal, cross
 
 
 def cyclic_rank_e0(matrix):
@@ -103,12 +117,10 @@ def breaks_swap01_at_e0(matrix):
     return matvec(matrix, swap01(e0)) != swap01(matvec(matrix, e0))
 
 
-def search_compressions(generators, depth):
+def search_compressions(generators, standard_form, depth):
     letters = [(f"g{i+1}", matrix) for i, matrix in enumerate(generators)]
-    letters += [
-        (f"g{i+1}^-1", inverse_mod(matrix))
-        for i, matrix in enumerate(generators)
-    ]
+    letters += [(f"g{i+1}^-1", inverse_mod(matrix))
+                for i, matrix in enumerate(generators)]
 
     identity = eye(N)
     queue = deque([(identity, [])])
@@ -121,19 +133,30 @@ def search_compressions(generators, depth):
             upper_left = block(matrix, 0, HALF, 0, HALF)
             lower_left = block(matrix, HALF, N, 0, HALF)
             charpoly, factor_degrees, irreducible = charpoly_info(upper_left)
-            rows.append(
-                {
-                    "word": " ".join(word),
-                    "length": len(word),
-                    "stabilises_translation_lagrangian": is_zero(lower_left),
-                    "compression_matrix": upper_left,
-                    "compression_charpoly": charpoly,
-                    "compression_factor_degrees": factor_degrees,
-                    "compression_irreducible_degree6": irreducible,
-                    "cyclic_rank_e0": cyclic_rank_e0(upper_left),
-                    "breaks_swap01_at_e0": breaks_swap01_at_e0(upper_left),
-                }
+            multiplier = similitude_multiplier(matrix, standard_form)
+            defect = heisenberg_cocycle_defect(matrix, multiplier) if multiplier else None
+            defect_symmetric = bool(defect is not None and defect == transpose(defect))
+            correction_diagonal, correction_cross = (
+                quadratic_correction_basis_data(defect)
+                if defect_symmetric else ([], [])
             )
+            rows.append({
+                "word": " ".join(word),
+                "length": len(word),
+                "source_similitude_multiplier": multiplier,
+                "stabilises_translation_lagrangian": is_zero(lower_left),
+                "compression_matrix": upper_left,
+                "compression_charpoly": charpoly,
+                "compression_factor_degrees": factor_degrees,
+                "compression_irreducible_degree6": irreducible,
+                "cyclic_rank_e0": cyclic_rank_e0(upper_left),
+                "breaks_swap01_at_e0": breaks_swap01_at_e0(upper_left),
+                "heisenberg_cocycle_defect_symmetric": defect_symmetric,
+                "heisenberg_cocycle_defect_matrix": defect,
+                "heisenberg_center_correction_constructed": defect_symmetric,
+                "heisenberg_center_correction_diagonal": correction_diagonal,
+                "heisenberg_center_correction_cross_terms": correction_cross,
+            })
 
         if len(word) >= depth:
             continue
@@ -148,34 +171,25 @@ def search_compressions(generators, depth):
 
 
 def analyze_split_sources(inner_generators, outer_generators, depth):
-    """Use inner 2.Suz to fix the form; screen the 2.Suz:2 extension."""
     alternating_form, form_space_dimension = invariant_form(inner_generators)
     basis, standard_form = symplectic_basis(alternating_form)
     basis_inverse = inverse_mod(basis)
 
-    standard_inner = [
-        matmul(matmul(basis_inverse, generator), basis)
-        for generator in inner_generators
-    ]
-    standard_outer = [
-        matmul(matmul(basis_inverse, generator), basis)
-        for generator in outer_generators
-    ]
+    standard_inner = [matmul(matmul(basis_inverse, g), basis)
+                      for g in inner_generators]
+    standard_outer = [matmul(matmul(basis_inverse, g), basis)
+                      for g in outer_generators]
 
-    inner_multipliers = [
-        similitude_multiplier(matrix, standard_form) for matrix in standard_inner
-    ]
-    outer_multipliers = [
-        similitude_multiplier(matrix, standard_form) for matrix in standard_outer
-    ]
+    inner_multipliers = [similitude_multiplier(m, standard_form)
+                         for m in standard_inner]
+    outer_multipliers = [similitude_multiplier(m, standard_form)
+                         for m in standard_outer]
 
-    rows, visited = search_compressions(standard_outer, depth)
+    rows, visited = search_compressions(standard_outer, standard_form, depth)
     irreducible = [row for row in rows if row["compression_irreducible_degree6"]]
-    field_selector_hits = [
-        row
-        for row in irreducible
-        if row["cyclic_rank_e0"] == HALF and row["breaks_swap01_at_e0"]
-    ]
+    field_selector_hits = [row for row in irreducible
+                           if row["cyclic_rank_e0"] == HALF
+                           and row["breaks_swap01_at_e0"]]
 
     return {
         "field_order": MOD,
@@ -189,8 +203,7 @@ def analyze_split_sources(inner_generators, outer_generators, depth):
         "inner_symplectic_multipliers": inner_multipliers,
         "outer_similitude_multipliers": outer_multipliers,
         "outer_generator_2_equals_inner_generator_2": (
-            len(inner_generators) >= 2
-            and len(outer_generators) >= 2
+            len(inner_generators) >= 2 and len(outer_generators) >= 2
             and outer_generators[1] == inner_generators[1]
         ),
         "search_depth": depth,
@@ -199,18 +212,19 @@ def analyze_split_sources(inner_generators, outer_generators, depth):
         "irreducible_degree6_compression_hits": irreducible,
         "k6_field_selector_numeric_hits": field_selector_hits,
         "requires_lagrangian_stabilizer_for_compression_field_test": False,
+        "similitude_heisenberg_lift_rule": (
+            "(x,z) -> (g x, lambda*z + q(x)); "
+            "q(x)=2*(c(gx,gx)-lambda*c(x,x)) over GF(3)"
+        ),
         "interpretation": (
-            "The inner 2.Suz pair fixes the unique alternating form. The outer "
-            "2.Suz:2 generator may be anti-symplectic/similitude with multiplier 2; "
-            "after the same basis weld, every source word still gives an F3-linear "
-            "X6 compression. Degree-six/cyclic/swap-breaking hits pay the numerical "
-            "K6 selector conditions but not the final chosen-GF(729) action intertwiner."
+            "Real ATLAS source words now yield both the X6 compression and the "
+            "center-scaled Heisenberg correction data. Multiplier-2 outer words "
+            "are retained as similitudes rather than falsely forced into strict Sp."
         ),
     }
 
 
 def analyze(generators, depth):
-    """Legacy strict-symplectic path retained for existing callers."""
     return analyze_split_sources(generators, generators, depth)
 
 
@@ -220,10 +234,7 @@ def main():
     parser.add_argument("--inner-matrix", nargs=2)
     parser.add_argument("--outer-matrix", nargs=2)
     parser.add_argument("--search-depth", type=int, default=4)
-    parser.add_argument(
-        "--output",
-        default="monster3b_symplectic_compression_candidates.json",
-    )
+    parser.add_argument("--output", default="monster3b_symplectic_compression_candidates.json")
     args = parser.parse_args()
 
     if args.inner_matrix or args.outer_matrix:
@@ -240,16 +251,9 @@ def main():
         parser.error("supply --matrix-dump or both --inner-matrix and --outer-matrix")
 
     Path(args.output).write_text(json.dumps(result, indent=2) + "\n")
-
     print("visited=", result["distinct_words_or_elements_visited"])
-    print(
-        "compression_degree6_hits=",
-        len(result["irreducible_degree6_compression_hits"]),
-    )
-    print(
-        "k6_field_selector_numeric_hits=",
-        len(result["k6_field_selector_numeric_hits"]),
-    )
+    print("compression_degree6_hits=", len(result["irreducible_degree6_compression_hits"]))
+    print("k6_field_selector_numeric_hits=", len(result["k6_field_selector_numeric_hits"]))
 
 
 if __name__ == "__main__":
