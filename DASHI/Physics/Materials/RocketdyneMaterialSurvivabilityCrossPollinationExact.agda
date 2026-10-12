@@ -10,17 +10,19 @@ import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Cut
 import DASHI.Physics.Propulsion.Rocketdyne1974ThermalModelValidationExact as Therm
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as Fals
 import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as Terminal
+import DASHI.Physics.Propulsion.Rocketdyne1974FlightC103ManufacturingLessonExact as FlightC103
 import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact as FusionMat
 import DASHI.Physics.Materials.RezaBurnResistantAlloyBidiExact as Reza
 
 ------------------------------------------------------------------------
 -- MATERIAL-SURVIVABILITY CROSS-POLLINATION
 --
--- Rocketdyne's historical Haynes-25 -> coated WC103 comparison supplies a
--- source-indexed example of propulsion material substitution under severe
--- thermal service.  Reza/Mondaloy and fusion-propulsion material work share
--- the engineering grammar (environment -> material state -> qualified
--- survivability) but not the same chemistry, mechanism, or historical object.
+-- The transferable grammar is now intentionally richer than
+--   environment -> material -> temperature -> outcome.
+-- Later Shuttle C-103 flight experience independently demonstrates that
+-- process history, surface state, chemical exposure, residual/applied stress
+-- and inspection observability can be decisive coordinates.  That later root
+-- cause is NOT transferred back to the 1974 Rocketdyne article.
 ------------------------------------------------------------------------
 
 record SurvivabilityTransfer : Set where
@@ -36,19 +38,19 @@ record SurvivabilityTransfer : Set where
 
 rocketdyneToReza : SurvivabilityTransfer
 rocketdyneToReza = survivability-transfer
-  "1974 Haynes-25 / WC103 nozzle comparison"
+  "1974 Haynes-25 / WC103 nozzle comparison + later Shuttle C-103 process-history lesson"
   "Reza/Jacinto/Hardwick oxygen-rich chemical-rocket materials"
-  "keep operating envelope, material revision, damage observation and qualification evidence as separate coordinates"
+  "keep environment, material/coating, manufacturing history, geometry/load/exposure, inspection and observed outcome as separate coordinates"
   false false false
-  "pay oxygen compatibility, alloy microstructure, pressure/temperature history and same-object qualification separately"
+  "pay oxygen compatibility, alloy microstructure/process history, pressure/temperature history, inspection and same-object qualification separately"
 
 rocketdyneToFusion : SurvivabilityTransfer
 rocketdyneToFusion = survivability-transfer
-  "1974 radiation/insulation-cooled chemical-rocket nozzle"
+  "1974 chemical-rocket discriminator + later C-103 manufacturing/NDE lesson"
   "fusion-propulsion material survivability"
-  "reuse provenance, source-validated thermal-model, and same-model discrimination discipline"
+  "reuse provenance, source-validated thermal-model, same-model discrimination, process-history and inspection discipline"
   false false false
-  "plasma radiation, magnetic loading, neutron/ion damage and thermal environment are distinct producers"
+  "plasma radiation, magnetic loading, neutron/ion damage, thermal environment, fabrication route and inspection acceptance are distinct producers"
 
 existingFusionMaterialBoundary : FusionMat.FusionMaterialBoundary
 existingFusionMaterialBoundary = FusionMat.canonicalFusionMaterialBoundary
@@ -71,6 +73,12 @@ rocketdyneMaterialDependence = Fals.canonicalMaterialDependenceBoundary
 rocketdyneTerminalFrontier : Terminal.TerminalPhysicalFrontier
 rocketdyneTerminalFrontier = Terminal.currentTerminalFrontier
 
+flightC103ManufacturingLesson : FlightC103.FlightC103CrackingLesson
+flightC103ManufacturingLesson = FlightC103.shuttleC103CrackingLesson
+
+manufacturingProcessCoordinateRequired : Bool
+manufacturingProcessCoordinateRequired = true
+
 record CrossPollinationBoundary : Set where
   constructor cross-pollination-boundary
   field
@@ -79,8 +87,11 @@ record CrossPollinationBoundary : Set where
     sharedGrammarImpliesSameProgramme : Bool
     historicalDiscriminatorMayConstrainMethod : Bool
     temperatureOnlySurvivabilityModelIsAdequate : Bool
+    materialIdentityAloneIsAdequate : Bool
+    manufacturingProcessAndInspectionAreLiveCoordinates : Bool
+    laterFlightRootCauseTransfersTo1974 : Bool
     destinationStillNeedsOwnValidation : Bool
 
 canonicalCrossPollinationBoundary : CrossPollinationBoundary
 canonicalCrossPollinationBoundary =
-  cross-pollination-boundary true false false true false true
+  cross-pollination-boundary true false false true false false true false true
