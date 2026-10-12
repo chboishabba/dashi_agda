@@ -14,6 +14,10 @@ import Data.Nat.Properties as NatP
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeSymbolWriteLocalityExact as Writes
 
+listLength : ∀ {A : Set} → List A → Nat
+listLength [] = zero
+listLength (_ ∷ rest) = suc (listLength rest)
+
 nonblankBit :
   ∀ {Symbol : Set} →
   Local.FiniteEnumeration Symbol →
@@ -56,11 +60,7 @@ nonblankCountBelowLength :
     (blank : Symbol)
     (symbols : List Symbol) →
   nonblankCount enumeration blank symbols
-  ≤ WritesLength symbols
-  where
-    WritesLength : List Symbol → Nat
-    WritesLength [] = zero
-    WritesLength (_ ∷ rest) = suc (WritesLength rest)
+  ≤ listLength symbols
 nonblankCountBelowLength enumeration blank [] = NatP.≤-refl _
 nonblankCountBelowLength enumeration blank (symbol ∷ symbols) =
   NatP.+-mono-≤
@@ -83,7 +83,7 @@ atMostOneWriteNonblankBound enumeration blank
     (nonblankBitAtMostOne enumeration blank new)
     (NatP.≤-refl (nonblankCount enumeration blank rest))
 atMostOneWriteNonblankBound enumeration blank
-    (Writes.keepHead {symbol = symbol} rewrite) =
+    (Writes.keepHead {symbol = symbol} {before = before} {after = after} rewrite) =
   NatP.≤-trans
     (NatP.+-mono-≤
       (NatP.≤-refl (nonblankBit enumeration blank symbol))
@@ -92,15 +92,15 @@ atMostOneWriteNonblankBound enumeration blank
   where
     arithmetic :
       nonblankBit enumeration blank symbol
-        + suc (nonblankCount enumeration blank _)
+        + suc (nonblankCount enumeration blank before)
       ≤
       suc
         (nonblankBit enumeration blank symbol
-          + nonblankCount enumeration blank _)
+          + nonblankCount enumeration blank before)
     arithmetic
       rewrite NatP.+-suc
         (nonblankBit enumeration blank symbol)
-        (nonblankCount enumeration blank _) =
+        (nonblankCount enumeration blank before) =
       NatP.≤-refl _
 
 writesWithinNonblankBound :
