@@ -8,9 +8,9 @@ open import Agda.Builtin.String using (String)
 -- SOURCE / ARTIFACT RECEIPT
 --
 -- This owner pins the public Waller-Lab DiffuserCam demo calibration
--- artifact.  Pinning a repository object proves provenance/identity only;
--- it does not decode the MATLAB binary, prove its physical calibration, or
--- manufacture a quantitative inverse theorem.
+-- artifact. Pinning repository objects proves provenance/identity only; it
+-- does not decode the MATLAB binary, prove physical calibration, or manufacture
+-- a quantitative inverse theorem.
 ------------------------------------------------------------------------
 
 diffuserCamRepository : String
@@ -34,11 +34,20 @@ examplePSFVariable = "psf"
 exampleRawPath : String
 exampleRawPath = "example_data/example_raw.png"
 
+exampleRawBlobSHA : String
+exampleRawBlobSHA = "3b4c3b2ca674bbd21d925a1f0a1ea79a77efe5df"
+
+exampleRawBytes : Nat
+exampleRawBytes = 122698
+
 publicCalibrationArtifactPinned : Bool
 publicCalibrationArtifactPinned = true
 
+publicRawMeasurementArtifactPinned : Bool
+publicRawMeasurementArtifactPinned = true
+
 -- The connector can identify the binary artifact but does not expose its
--- MATLAB array payload as UTF-8.  Keep numerical ingestion fail-closed.
+-- MATLAB array payload as UTF-8. Keep numerical ingestion fail-closed.
 numericPSFArrayIngested : Bool
 numericPSFArrayIngested = false
 
@@ -51,7 +60,10 @@ record BerkeleyDiffuserCamPublicCalibrationReceipt : Set where
     psfBytes : Nat
     psfVariable : String
     rawMeasurementPath : String
+    rawMeasurementBlobSHA : String
+    rawMeasurementBytes : Nat
     artifactIdentityPaid : Bool
+    rawArtifactIdentityPaid : Bool
     decodedNumericPSFPaid : Bool
 
 open BerkeleyDiffuserCamPublicCalibrationReceipt public
@@ -65,6 +77,9 @@ publicDiffuserCamCalibrationReceipt = record
   ; psfBytes = examplePSFBytes
   ; psfVariable = examplePSFVariable
   ; rawMeasurementPath = exampleRawPath
+  ; rawMeasurementBlobSHA = exampleRawBlobSHA
+  ; rawMeasurementBytes = exampleRawBytes
   ; artifactIdentityPaid = publicCalibrationArtifactPinned
+  ; rawArtifactIdentityPaid = publicRawMeasurementArtifactPinned
   ; decodedNumericPSFPaid = numericPSFArrayIngested
   }
