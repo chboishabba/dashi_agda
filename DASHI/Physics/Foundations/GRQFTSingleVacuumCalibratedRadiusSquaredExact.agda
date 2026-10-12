@@ -7,7 +7,7 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _/_; _*_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as Ring
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as Geometry
 import DASHI.Physics.Units.MechanicalDimensionExact as Dim
@@ -47,8 +47,6 @@ canonicalFixtureQPositive =
     (λ q → 0ℚ < q)
     (sym canonicalFixtureQIsFiveThirds)
     (ℚP.positive⁻¹ (Int.+ 5 / 3))
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
 
 physicalLambdaQuantity : ℚ → Dim.Quantity ℚ Dim.inverseAreaDimension
 physicalLambdaQuantity = Dim.quantity
