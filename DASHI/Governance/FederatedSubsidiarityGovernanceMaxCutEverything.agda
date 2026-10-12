@@ -12,6 +12,8 @@ import DASHI.Governance.BoloBoloGovernanceMetricProvenanceEverything
 -- for the same target flat-vs-nested longitudinal coordination question.
 import DASHI.Governance.BoloBoloCausalIdentificationEverything
 
--- Repo-native experimental-coordinate design: an exact synthetic collision
--- proves duration (even duration+incidence) can hide capacity/backlog states.
-import DASHI.Governance.BoloBoloExperimentalCoordinateEverything
+-- Repo-native experimental-coordinate and consumer-descent machinery: exact
+-- synthetic collisions show duration/incidence can hide interface state, and
+-- the capacity/peak-demand/backlog consumer is the canonical least-sufficient
+-- observer for that declared capacity-sensitive question.
+import DASHI.Governance.BoloBoloCapacityConsumerSufficiencyEverything
