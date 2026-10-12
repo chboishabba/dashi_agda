@@ -7,6 +7,7 @@ import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBNS194268SameObjectExact as
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoBlochRepresentationBoundaryExact as Bloch
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedMaterialProducerExact as Material
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedARPESConstraintsExact as PublishedARPES
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoIndependentTheoryCrossValidationExact as Independent
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESWitnessGateExact as ARPES
 
 record CoQuarterTaSeTwoMaxCutStatus : Set where
@@ -20,6 +21,9 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     publishedCrystalBasisFixed : Bool
     publishedDFTRecipeFixed : Bool
     publishedARPESSummaryConstraintsFixed : Bool
+    independentSOCBandTargetsFixed : Bool
+    independentKagomeMechanismFixed : Bool
+    wannierProducerRouteFixed : Bool
     materialHamiltonianClosed : Bool
     rawARPESPayloadPresent : Bool
     exactSpectralObserverClosed : Bool
@@ -29,18 +33,10 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
 canonicalCoQuarterTaSeTwoMaxCutStatus : CoQuarterTaSeTwoMaxCutStatus
 canonicalCoQuarterTaSeTwoMaxCutStatus =
   co-quarter-tase-two-max-cut-status
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
+    true true true true true
+    true true true
+    true true true
+    false false false false
     true
 
 existingBNSStatus : BNS.OperationSameObjectStatus
@@ -54,6 +50,9 @@ existingMaterialProducerStatus = Material.canonicalMaterialHamiltonianProducerSt
 
 existingPublishedARPESStatus : PublishedARPES.PublishedTargetStatus
 existingPublishedARPESStatus = PublishedARPES.canonicalPublishedTargetStatus
+
+existingIndependentTheoryBoundary : Independent.CrossValidationPromotionBoundary
+existingIndependentTheoryBoundary = Independent.canonicalCrossValidationPromotionBoundary
 
 existingARPESStatus : ARPES.CoARPESAcquisitionStatus
 existingARPESStatus = ARPES.canonicalCoARPESAcquisitionStatus
