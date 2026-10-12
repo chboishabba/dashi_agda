@@ -4,6 +4,7 @@ module DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact wher
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExact as Feedback
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialIdentityAndConstitutiveDataExact as Mat
 import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
 import DASHI.Physics.Propulsion.Rocketdyne1974IdentifiabilityCutExact as Id
@@ -12,20 +13,6 @@ import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierE
 import DASHI.Physics.Propulsion.Rocketdyne1974LatestSourceComparisonNote as Latest
 import DASHI.Physics.Propulsion.Rocketdyne1974ExperimentalCoordinateRefinementExact as CoordRef
 import DASHI.Physics.Propulsion.Rocketdyne1974QualificationFeedbackWeldExact as QualFeed
-
-------------------------------------------------------------------------
--- TERMINAL PUBLIC-SOURCE FRONTIER
---
--- The acquired public report pays material/coating identity, a source-tested
--- thermal model, a near-matched material/outcome discriminator, and exact
--- falsifiers for material-blind temperature-only model families.  The generic
--- experimental-coordinate machinery now also certifies that material identity
--- separates a collision left unresolved by equilibrium temperature alone.
---
--- The historical Haynes -> WC103 sequence inhabits a qualification-feedback
--- candidate shape, but formal review/approval and population-level post-change
--- reliability remain separate acquisitions.
-------------------------------------------------------------------------
 
 archiveGeometryExhaustedForUniqueStress : Bool
 archiveGeometryExhaustedForUniqueStress = true
@@ -85,5 +72,5 @@ experimentalCoordinateReceipt = CoordRef.nextCoordinateAcquisitionFrontier
 qualificationFeedbackReceipt : QualFeed.HistoricalFeedbackReceipt
 qualificationFeedbackReceipt = QualFeed.rocketdyneHistoricalFeedbackReceipt
 
-qualificationGovernanceBoundaryReceipt : QualFeed.Feedback.ReliabilityAdaptiveFeedbackBoundary
+qualificationGovernanceBoundaryReceipt : Feedback.ReliabilityAdaptiveFeedbackBoundary
 qualificationGovernanceBoundaryReceipt = QualFeed.adaptiveQualificationBoundaryReceipt
