@@ -6,9 +6,9 @@ module DASHI.Mathematics.Complexity.StandardConfigurationFlattenExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardCanonicalProjectionExact as Canonical
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact as Structural
 
@@ -76,8 +76,7 @@ flattenAppendSymbolFarLeft :
     (symbol : Symbol)
     (configuration : Standard.StandardConfiguration machine) →
   flattenConfiguration
-    (DASHI.Mathematics.Complexity.ConcreteTapeStandardCanonicalProjectionExact.appendSymbolFarLeft
-      symbol configuration)
+    (Canonical.appendSymbolFarLeft symbol configuration)
   ≡ symbol ∷ flattenConfiguration configuration
 flattenAppendSymbolFarLeft symbol configuration
   rewrite reverseAppend (Standard.left configuration) (symbol ∷ []) =
@@ -104,7 +103,7 @@ flattenStructuralEmbed stateMap symbolMap configuration
   refl
 
 ------------------------------------------------------------------------
--- This owner is purely representational.  It lets downstream resource proofs
+-- This owner is purely representational. It lets downstream resource proofs
 -- compare the literal symbol content of concrete rows and structurally embedded
 -- standard configurations without collapsing head/control data into symbols.
 ------------------------------------------------------------------------
