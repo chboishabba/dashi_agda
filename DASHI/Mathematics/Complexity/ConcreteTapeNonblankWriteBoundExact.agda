@@ -79,9 +79,30 @@ atMostOneWriteNonblankBound enumeration blank Writes.noWrite =
   NatP.n≤1+n _
 atMostOneWriteNonblankBound enumeration blank
     (Writes.writeHead {old = old} {new = new} {rest = rest}) =
-  NatP.+-mono-≤
-    (nonblankBitAtMostOne enumeration blank new)
-    (NatP.≤-refl (nonblankCount enumeration blank rest))
+  NatP.≤-trans
+    (NatP.+-mono-≤
+      (nonblankBitAtMostOne enumeration blank new)
+      (NatP.≤-refl (nonblankCount enumeration blank rest)))
+    onePlusRestBelowTarget
+  where
+    restBelowOldPlusRest :
+      nonblankCount enumeration blank rest
+      ≤
+      nonblankBit enumeration blank old
+        + nonblankCount enumeration blank rest
+    restBelowOldPlusRest =
+      NatP.m≤n+m
+        (nonblankCount enumeration blank rest)
+        (nonblankBit enumeration blank old)
+
+    onePlusRestBelowTarget :
+      suc zero + nonblankCount enumeration blank rest
+      ≤
+      suc
+        (nonblankBit enumeration blank old
+          + nonblankCount enumeration blank rest)
+    onePlusRestBelowTarget =
+      s≤s restBelowOldPlusRest
 atMostOneWriteNonblankBound enumeration blank
     (Writes.keepHead {symbol = symbol} {before = before} {after = after} rewrite) =
   NatP.≤-trans
