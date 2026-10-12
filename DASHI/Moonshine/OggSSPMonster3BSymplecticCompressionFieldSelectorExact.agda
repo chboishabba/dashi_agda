@@ -34,7 +34,7 @@ module DASHI.Moonshine.OggSSPMonster3BSymplecticCompressionFieldSelectorExact wh
 -- and it does NOT claim that the compressed block is itself a group action.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
