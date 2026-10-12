@@ -9,6 +9,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFire
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationToLorentzianStressExact as Static
 import DASHI.Physics.Foundations.CMP119AntigravityDifferentialMetricResponseFirewallExact as DifferentialFirewall
 import DASHI.Physics.Foundations.CMP119AntigravityStaticPairToDifferentialMetricResponseExact as StaticPair
+import DASHI.Physics.Foundations.CMP119AntigravityEq223ConcreteTailReuseMaxCutExact as ConcreteR
 import DASHI.Physics.Foundations.GRQFTSingleVacuumCalibratedRadiusSquaredExact as Scale
 import DASHI.Physics.Foundations.GRQFTVacuumLockInReversalEstimatorExact as LockIn
 import DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricCompilerExact as Differential
@@ -89,8 +90,32 @@ differentialReversalParityReceiptStillRequired =
 differentialSpin2TTProducerStillRequired : Bool
 differentialSpin2TTProducerStillRequired = true
 
+------------------------------------------------------------------------
+-- CONTINUUM / R136 RECUT
+--
+-- Current master owns a cheaper concrete R109 same-sequence completion route.
+-- The preferred route does NOT require exact finite-cutoff = R136 equality.
+-- It requires a pinned finite expectation = embed(D_Gamma), a concrete
+-- same-sequence completion/tail bound, and a strict finite+tail source margin.
+------------------------------------------------------------------------
+
 continuumR136RouteRemainsIndependentAlternative : Bool
 continuumR136RouteRemainsIndependentAlternative = true
+
+continuumPreferredConcreteTailRouteOwned : Bool
+continuumPreferredConcreteTailRouteOwned =
+  ConcreteR.preferredR136RouteIsConcreteSameSequenceTailRoute
+
+continuumExactFiniteEqualsR136RequiredOnPreferredRoute : Bool
+continuumExactFiniteEqualsR136RequiredOnPreferredRoute =
+  ConcreteR.exactFiniteContinuumEqualityRequiredOnPreferredConcreteTailRoute
+
+continuumPinnedFiniteAnchorAndTailBoundStillRequired : Bool
+continuumPinnedFiniteAnchorAndTailBoundStillRequired = true
+
+continuumStrictFinitePlusTailMarginStillRequired : Bool
+continuumStrictFinitePlusTailMarginStillRequired =
+  ConcreteR.strictFinitePlusTailMarginStillRequired
 
 record PostNormalizationAntigravityFrontier : Set where
   constructor post-normalization-antigravity-frontier
@@ -117,7 +142,11 @@ record PostNormalizationAntigravityFrontier : Set where
     differentialPropagatingSpin2TTProductionStillRequired : Bool
     differentialSICalibrationAndExperimentStillRequired : Bool
 
-    continuumFiniteToR136SameObjectStillRequired : Bool
+    continuumConcreteR109TailRouteOwned : Bool
+    continuumExactFiniteEqualsR136Required : Bool
+    continuumPinnedFiniteExpectationEqualsDGammaRequired : Bool
+    continuumConcreteSameSequenceTailBoundRequired : Bool
+    continuumStrictFinitePlusTailMarginRequired : Bool
     continuumSameStateEuclideanLorentzianStressStillRequired : Bool
     continuumRouteIsAlternativeNotPrerequisiteOfStaticOrDifferential : Bool
 
@@ -128,7 +157,7 @@ canonicalPostNormalizationAntigravityFrontier =
     true true true true true
     true true true true true
     true true true false true true true true true
-    true true true
+    true false true true true true true
 
 staticVacuumAlgebraAfterPhysicalReceiptOwned : Bool
 staticVacuumAlgebraAfterPhysicalReceiptOwned =
