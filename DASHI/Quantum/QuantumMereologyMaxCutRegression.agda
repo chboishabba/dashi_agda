@@ -33,3 +33,17 @@ geometry-collision-forces-refinement :
 geometry-collision-forces-refinement =
   MaxCut.geometryCriterionCollisionCreatesRefinementObligationIsTrue
     MaxCut.canonicalQuantumMereologyMaxCutBoundary
+
+geometry-consumer-is-least-sufficient-observer :
+  MaxCut.geometryConsumerObserverIsLeastSufficient
+    MaxCut.canonicalQuantumMereologyMaxCutBoundary ≡ true
+geometry-consumer-is-least-sufficient-observer =
+  MaxCut.geometryConsumerObserverIsLeastSufficientIsTrue
+    MaxCut.canonicalQuantumMereologyMaxCutBoundary
+
+boundary-adequacy-is-consumer-relative :
+  MaxCut.holographicBoundaryAdequacyIsConsumerRelative
+    MaxCut.canonicalQuantumMereologyMaxCutBoundary ≡ true
+boundary-adequacy-is-consumer-relative =
+  MaxCut.holographicBoundaryAdequacyIsConsumerRelativeIsTrue
+    MaxCut.canonicalQuantumMereologyMaxCutBoundary
