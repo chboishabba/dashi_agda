@@ -10,7 +10,7 @@ on:
       - 'DASHI/Analysis/CollatzSyracuse*.agda'
       - 'DASHI/Core/BinaryWordIntegerChernoffExact.agda'
       - 'scripts/check_collatz_syracuse_*.py'
-      - 'scripts/check_collatz_syracuse_exact.sh'
+      - 'scripts/check_collatz_syracuse_*.sh'
       - '.github/workflows/collatz-syracuse-same-object.yml'
   workflow_dispatch:
 
@@ -55,6 +55,8 @@ jobs:
         run: python3 scripts/check_collatz_syracuse_trailing_zero.py
       - name: Static literal Syracuse audit
         run: bash scripts/check_collatz_syracuse_exact.sh
+      - name: Static terminal extension audit
+        run: bash scripts/check_collatz_syracuse_terminal_extensions.sh
       - name: Typecheck exact affine terminal equivalence
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseExactAffineTerminalExact.agda
       - name: Typecheck survivor-frontier compiler
