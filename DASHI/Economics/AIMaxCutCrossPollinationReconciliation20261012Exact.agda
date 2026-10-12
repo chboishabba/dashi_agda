@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Economics.AIMaxCutReconciliation20261012FinalExact as Prior
 import DASHI.Economics.AICapitalObserverNonDescent20261012Exact as NonDescent
 import DASHI.Economics.AICapitalBurdenRelocation20261012Exact as Relocation
@@ -17,7 +18,7 @@ import DASHI.Economics.AISameModelSelfHostCostBoundary20261012Exact as SameModel
 --
 -- Records the highest-alpha transfers from the repository's canonical
 -- consumer-descent/fibre-repair and accounting-flow disciplines into the
--- October-2026 AI-capital programme.  All payments remain scoped.
+-- October-2026 AI-capital programme. All payments remain scoped.
 ------------------------------------------------------------------------
 
 data XPState : Set where
@@ -87,7 +88,7 @@ exhaustiveTerminalPayerStillOpen = xp-producer
 ------------------------------------------------------------------------
 
 headlineNonDescentBlocksFactorization :
-  NonDescent.Descent.FactorsThrough
+  Descent.FactorsThrough
     NonDescent.headlineObserver
     NonDescent.capitalRecoveryConsumer → ⊥
 headlineNonDescentBlocksFactorization =
