@@ -16,6 +16,9 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 -- operator semantics, executable depth and finite translated-column sparse
 -- certificate producers, the 2026 information-design experiment, and the later
 -- 2026 ConvRML same-scene parallel lens/diffuser/RML comparator geometry.
+-- ConvRML further pays identical sensor model, same illumination / approximate
+-- magnification matching, and explicit exposure calibration; its unequal
+-- 80/50/4 ms exposures prevent any silent equal-exposure/photon promotion.
 --
 -- Remaining numerical/physical leaves are now:
 --   A. execute/ingest the pinned binary PSF audit and retain its numerical
@@ -23,8 +26,8 @@ import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 --   B. choose/execute the declared lateral grid / sparsity class at the scale
 --      needed for the intended 3-D claim and populate the existing same-H kappa
 --      producer from the measured coherence/Gershgorin lower bound;
---   C. establish photon/throughput/exposure matching for a quantitative
---      cross-system claim rather than inferring it from parallel acquisition;
+--   C. obtain throughput / incident-or-detected-photon calibration sufficient
+--      for a genuinely matched-photon cross-system risk comparison;
 --   D. add a Fresnel-zone-plate arm only if that optional stronger comparison
 --      remains scientifically useful.
 ------------------------------------------------------------------------
@@ -44,6 +47,8 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     publishedInformationDesignExperimentPinned : Bool
     publishedRealRMLVsDiffuserCamComparisonPinned : Bool
     parallelLensDiffuserRMLAcquisitionPinned : Bool
+    parallelSensorIlluminationGeometryPinned : Bool
+    parallelExposureCalibrationPinned : Bool
     matchedPhotonAcrossParallelSystems : Bool
     focusedLensDiffuserFZPMatchedPhotonReceipt : Bool
 
@@ -64,6 +69,8 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; publishedInformationDesignExperimentPinned = true
   ; publishedRealRMLVsDiffuserCamComparisonPinned = true
   ; parallelLensDiffuserRMLAcquisitionPinned = true
+  ; parallelSensorIlluminationGeometryPinned = true
+  ; parallelExposureCalibrationPinned = true
   ; matchedPhotonAcrossParallelSystems = false
   ; focusedLensDiffuserFZPMatchedPhotonReceipt = false
   }
@@ -102,6 +109,12 @@ informationExperimentSourceStatus = InfoSource.informationOptimalEncoderExperime
 
 parallelComparatorSourceStatus : Bool
 parallelComparatorSourceStatus = ConvRML.parallelLensDiffuserRMLAcquisitionPaid
+
+parallelSensorStatus : Bool
+parallelSensorStatus = ConvRML.identicalSensorModelPaid
+
+parallelExposureStatus : Bool
+parallelExposureStatus = ConvRML.exposureCalibrationPaid
 
 matchedPhotonParallelStatus : Bool
 matchedPhotonParallelStatus = ConvRML.matchedPhotonAcrossSystemsPaid
