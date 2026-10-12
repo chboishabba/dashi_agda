@@ -15,6 +15,9 @@ import DASHI.Physics.Plasma.PhaseCore243FiveTritExact
 import DASHI.Physics.Plasma.Phase243ActionIntertwinerExact
 import DASHI.Physics.Plasma.Phase243OrbitQuotientExact
 import DASHI.Physics.Plasma.Phase243NumberRoleProvenanceExact
+import DASHI.Physics.Plasma.Phase243TorusReparameterizationExact
+import DASHI.Physics.Plasma.Phase243ConsumerDescentExact
+import DASHI.Physics.Plasma.Phase243PeriodicConsumerQuotientExact
 import DASHI.Physics.Plasma.Phase243PlasmaConsumerExact
 import DASHI.Physics.Plasma.Phase243EquivariantFibreSearchExact
 import DASHI.Physics.Plasma.Phase243RookMaxCutExact
