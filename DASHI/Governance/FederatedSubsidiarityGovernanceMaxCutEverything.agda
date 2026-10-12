@@ -11,3 +11,7 @@ import DASHI.Governance.BoloBoloGovernanceMetricProvenanceEverything
 -- master: explicit causal estimand + obligation-admissible identification gate
 -- for the same target flat-vs-nested longitudinal coordination question.
 import DASHI.Governance.BoloBoloCausalIdentificationEverything
+
+-- Repo-native experimental-coordinate design: an exact synthetic collision
+-- proves duration (even duration+incidence) can hide capacity/backlog states.
+import DASHI.Governance.BoloBoloExperimentalCoordinateEverything
