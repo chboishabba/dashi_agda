@@ -16,6 +16,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeStandardCanonicalProjectionExact
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
+import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact as Structural
 
 appendLength :
@@ -38,23 +40,21 @@ plainCellsToSymbolsLength (WF.plainCons rest)
 
 appendSymbolFarLeftSpan :
   ∀ {State Symbol : Set}
-    {machine : DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact.StandardSingleTapeMachine State Symbol}
+    {machine : Standard.StandardSingleTapeMachine State Symbol}
     (symbol : Symbol)
-    (configuration : DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact.StandardConfiguration machine) →
+    (configuration : Standard.StandardConfiguration machine) →
   Structural.configurationSpan
     (Canonical.appendSymbolFarLeft symbol configuration)
   ≡ suc (Structural.configurationSpan configuration)
 appendSymbolFarLeftSpan symbol configuration
   rewrite appendLength
-    (DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact.left configuration)
+    (Standard.left configuration)
     (symbol ∷ [])
         | NatP.+-suc
-            (Structural.listLength
-              (DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact.left configuration))
+            (Structural.listLength (Standard.left configuration))
             zero
         | NatP.+-identityʳ
-            (Structural.listLength
-              (DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact.left configuration)) =
+            (Structural.listLength (Standard.left configuration)) =
   refl
 
 canonicalProjectionCellsSpanExact :
@@ -85,7 +85,7 @@ coordinateLengthExact (x ∷ xs)
 
 guardedStandardStartSpanExact :
   ∀ {machine : Local.ConcreteTapeMachine}
-    (input : DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact.InputWord machine)
+    (input : Input.InputWord machine)
     (steps : Nat) →
   Structural.configurationSpan
     (Language.guardedStandardStart input steps)
