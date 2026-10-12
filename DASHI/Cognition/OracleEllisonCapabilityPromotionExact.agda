@@ -32,6 +32,9 @@ data PromotionLevel : Set where
 ellisonFIDFHighestPaidLevel : PromotionLevel
 ellisonFIDFHighestPaidLevel = relationshipObserved
 
+ellisonNetanyahuHighestPaidLevel : PromotionLevel
+ellisonNetanyahuHighestPaidLevel = relationshipObserved
+
 oracleChinaHighestPaidLevel : PromotionLevel
 oracleChinaHighestPaidLevel = operationalIntegration
 
@@ -50,6 +53,15 @@ ellisonDonationPaysIsraeliPolicyAuthorship = false
 
 ellisonDonationPaysMotive : Bool
 ellisonDonationPaysMotive = false
+
+ellisonNetanyahuRelationshipPaysPolicyAuthorship : Bool
+ellisonNetanyahuRelationshipPaysPolicyAuthorship = false
+
+ellisonNetanyahuRelationshipPaysSecuritySystemControl : Bool
+ellisonNetanyahuRelationshipPaysSecuritySystemControl = false
+
+ellisonNetanyahuRelationshipPaysMotive : Bool
+ellisonNetanyahuRelationshipPaysMotive = false
 
 oracleChinaDeploymentPaysPRCPoliticalObjectiveAuthorship : Bool
 oracleChinaDeploymentPaysPRCPoliticalObjectiveAuthorship = false
@@ -94,9 +106,13 @@ canonicalPromotionFirewall =
 
 ------------------------------------------------------------------------
 -- Positive pins: the case does pay more than a merely commercial-contact
--- story in China and the RAFAEL integration, while stopping before sovereign
--- architecture/control and motive.
+-- story in China and the RAFAEL integration, while the Ellison-Netanyahu
+-- relationship reporting remains at L0 absent stronger claim-specific receipts.
 ------------------------------------------------------------------------
+
+ellisonNetanyahuAtRelationshipLevel :
+  ellisonNetanyahuHighestPaidLevel ≡ relationshipObserved
+ellisonNetanyahuAtRelationshipLevel = refl
 
 chinaAboveRelationship :
   oracleChinaHighestPaidLevel ≡ operationalIntegration
