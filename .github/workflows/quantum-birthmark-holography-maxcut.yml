@@ -36,13 +36,24 @@ jobs:
           pytest -q tests/test_quantum_birthmark_*.py tests/test_holographic_bulk_boundary_failclosed_regression.py
       - name: Typecheck terminal quantum owners
         run: |
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographicTensorNetworkAuditExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkCorrectedRTSameObjectExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographicZModCarrierFactorizationBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographicSameObjectWeldExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographicResidualTransportExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonNullConeRecoveryExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonFlat31RigidityBoundaryExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonCouplingNormalizationBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonUnruhNormalizationBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonRaychaudhuriEquilibriumBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonHorizonFluxAreaBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonFibrewiseFrameBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonLocalFrameFieldCompilerBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonLocalFrameEinsteinLambdaBoundaryExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonRecoveredLambdaConstancyBoundaryExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonEinsteinTensorBianchiBoundaryExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkRelativeEntropyJacobsonSourceBridgeExact.agda
-          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkJacobsonLocalHorizonMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographyGravityTerminalCutsetExact.agda
+          nix develop .# --command agda -i . DASHI/Quantum/QuantumBirthmarkHolographyGravityTerminalMaxCut20261012Exact.agda
           nix develop .# --command agda -i . DASHI/Physics/Closure/HolographicBulkBoundaryReceipt.agda
           nix develop .# --command agda -i . DASHI/Quantum/Everything.agda
