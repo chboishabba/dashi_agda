@@ -20,6 +20,9 @@ def test_reversal_estimator_cancels_common_background_and_recovers_signal():
         "evenEstimatorRecoversCommonBackground",
         "vacuumOddEstimatorRecoversPhysicalDifference",
         "vacuumOddEstimatorIsCalibratedSourceDifference",
+        "legacyPhysicalVacuumDifferenceNameIsNotYetGravitationalDeltaLambda",
+        "metricResponseOddEstimatorRecoversPhysicalDeltaLambda",
+        "metricResponseOddEstimatorIsScaledNormalizationDifference",
         "reversalParityStillNeedsPhysicalReceipt",
     ):
         assert token in text
@@ -31,3 +34,4 @@ def test_post_normalization_scheduler_imports_lockin_estimator():
     )
     assert "GRQFTVacuumLockInReversalEstimatorExact" in text
     assert "differentialReversalEstimatorAlgebraOwned" in text
+    assert "differentialPhysicalDeltaLambdaLockInAlgebraOwnedAfterReceipt" in text
