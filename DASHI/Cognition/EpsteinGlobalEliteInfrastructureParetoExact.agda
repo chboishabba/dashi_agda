@@ -9,19 +9,21 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.EpsteinBankingInfrastructureAcquisitionExact as Banks
 import DASHI.Cognition.EpsteinCorporateBoardNetworkAcquisitionExact as Boards
 import DASHI.Cognition.EpsteinTechClaimVerificationExact as Tech
+import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact as TrumpEpstein
 
 ------------------------------------------------------------------------
 -- GLOBAL ELITE / INSTITUTIONAL INFRASTRUCTURE PARETO FRONT
 --
 -- This sits above the science-specific router.  It is recalibrated after the
--- August-October 2026 banking, board-network and tech-source sweep.  Ranking is
--- acquisition priority only; it is not culpability, truth or criminal-liability
--- scoring.
+-- August-October 2026 banking, board-network, tech and political-source sweep.
+-- Ranking is acquisition priority only; it is not culpability, truth or
+-- criminal-liability scoring.
 ------------------------------------------------------------------------
 
 data GlobalFrontLane : Set where
   bankingTransactionsSARs : GlobalFrontLane
   corporateBoardAtlas : GlobalFrontLane
+  trumpEpsteinPoliticalEliteAccess : GlobalFrontLane
   brockmanEdgeMITConvening : GlobalFrontLane
   thielValarBarakPalantir : GlobalFrontLane
   harvardPEDDonorBrokerage : GlobalFrontLane
@@ -49,6 +51,8 @@ currentGlobalFront =
     "Highest current marginal value: resolve bank-by-bank, executive-by-executive, account/transaction, SAR/AML timing, regulator findings, settlements and FBI/DOJ interview records."
   ∷ pareto-lane corporateBoardAtlas 95 true true true
     "Use the S&P500 board-network study as a ranked candidate generator, then resolve high-centrality directors/firms back to DOJ or institutional records."
+  ∷ pareto-lane trumpEpsteinPoliticalEliteAccess 92 true true true
+    "Expand the already-paid Trump-Epstein historical social/travel relationship through exact flight manifests, Mar-a-Lago recruitment chronology, club-access records, social/business intermediaries, birthday-book provenance, and current records-governance disputes while keeping uncorroborated allegations and Trumpism interpretation separately typed."
   ∷ pareto-lane brockmanEdgeMITConvening 90 true true true
     "Audit scientist/tech brokerage and convening infrastructure, including Edge, MIT Media Lab and adjacent donor introductions."
   ∷ pareto-lane thielValarBarakPalantir 88 true true true
@@ -64,7 +68,7 @@ currentGlobalFront =
   ∷ pareto-lane directTechCorrespondence 75 true true true
     "Resolve Musk/Hoffman/Brin/Sinofsky/others by direct document, separating contact, attempted visit, completed visit, investment and wrongdoing."
   ∷ pareto-lane politicalPublicOffice 72 true true true
-    "Resolve public-office/trade/lobbying allegations and investigations independently of social-contact evidence."
+    "Resolve Andrew/Mandelson/other public-office, trade and lobbying allegations or investigations independently of social-contact evidence."
   ∷ pareto-lane yuPsychedelicConsciousness 65 true true true
     "Continue Yu saturation as a rich local seam, but below the broader transaction/brokerage fronts."
   ∷ []
@@ -81,6 +85,16 @@ ellisonStillLocatorOnly :
   Tech.edgePaid Tech.ellisonAddressBookCandidate ≡ false
 ellisonStillLocatorOnly = refl
 
+trumpHistoricalRelationshipAlreadyPaid :
+  TrumpEpstein.historicalSocialRelationshipEstablished
+    TrumpEpstein.canonicalTrumpEpsteinBoundary ≡ true
+trumpHistoricalRelationshipAlreadyPaid = refl
+
+trumpCriminalParticipationNotPromoted :
+  TrumpEpstein.criminalParticipationEstablished
+    TrumpEpstein.canonicalTrumpEpsteinBoundary ≡ false
+trumpCriminalParticipationNotPromoted = refl
+
 ------------------------------------------------------------------------
 -- Round protocol.
 ------------------------------------------------------------------------
@@ -95,11 +109,12 @@ record AcquisitionRoundProtocol : Set where
     recomputeAfterEachMaterialEdge : Bool
     stopDenseLaneMonopoly : Bool
     doNotUseNameFrequencyAsRelationshipStrength : Bool
+    separatePoliticalInterpretationFromHistoricalReceipt : Bool
 open AcquisitionRoundProtocol public
 
 canonicalAcquisitionRoundProtocol : AcquisitionRoundProtocol
 canonicalAcquisitionRoundProtocol = acquisition-round-protocol
-  true true true true true true true
+  true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Attribution firewalls.
@@ -111,6 +126,7 @@ data InvestigationImpliesConviction : Set where
 data CivilSettlementImpliesAdmission : Set where
 data DirectContactImpliesWrongdoing : Set where
 data SharedBusinessEcosystemImpliesCoordination : Set where
+data PoliticalInterpretationImpliesHistoricalFact : Set where
 
 aquisitionPriorityDoesNotCreateCulpability : PriorityImpliesCulpability → ⊥
 aquisitionPriorityDoesNotCreateCulpability ()
@@ -129,3 +145,7 @@ directContactDoesNotCreateWrongdoing ()
 
 sharedEcosystemDoesNotCreateCoordination : SharedBusinessEcosystemImpliesCoordination → ⊥
 sharedEcosystemDoesNotCreateCoordination ()
+
+politicalInterpretationDoesNotCreateHistoricalFact :
+  PoliticalInterpretationImpliesHistoricalFact → ⊥
+politicalInterpretationDoesNotCreateHistoricalFact ()
