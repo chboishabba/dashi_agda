@@ -6,6 +6,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Propulsion.ReliabilityAdaptiveQualificationFeedbackBidiExact as Feedback
 import DASHI.Physics.Propulsion.Rocketdyne1974TwoMaterialDiscriminatorExact as Disc
+import DASHI.Physics.Propulsion.Rocketdyne1974ProgrammeChallengesAndRelatedWorkExact as Challenges
+import DASHI.Physics.Propulsion.Rocketdyne1974SiblingRCSComparisonExact as Sibling
 
 record QualificationRevisionCandidate : Set where
   constructor qualification-revision-candidate
@@ -58,6 +60,45 @@ rocketdyneHistoricalFeedbackReceipt =
 adaptiveQualificationBoundaryReceipt : Feedback.ReliabilityAdaptiveFeedbackBoundary
 adaptiveQualificationBoundaryReceipt = Feedback.canonicalReliabilityAdaptiveFeedbackBoundary
 
+------------------------------------------------------------------------
+-- DIRECT OPERABILITY FEEDBACK FROM THE REPORT
+--
+-- Unlike the inferred Haynes->WC103 governance history, R-9557-1 explicitly
+-- states an operational response to the sand/dust valve problem: unless a
+-- non-degrading valve is developed, protect the engine from sand/dust and/or
+-- purge it before each mission.  The recommendation is therefore source-paid;
+-- formal adoption as an approved Shuttle procedure remains unpaid.
+------------------------------------------------------------------------
+
+record EnvironmentalProtectionFeedback : Set where
+  constructor environmental-protection-feedback
+  field
+    sourceProblem : Challenges.ProgrammeChallenge
+    target : Feedback.RevisionTarget
+    directRecommendation : String
+    recommendationRecovered : Bool
+    formalApprovedProcedureRecovered : Bool
+    boundary : String
+
+environmentalProtectionRecommendation : EnvironmentalProtectionFeedback
+environmentalProtectionRecommendation =
+  environmental-protection-feedback
+    Challenges.sandDustValveChallenge
+    Feedback.serviceabilityRule
+    "protect engine from sand and dust and/or purge before each mission unless a valve resistant to that environment is developed"
+    true false
+    "R-9557-1 pays the engineering recommendation, not a later approved operational procedure or fleet-wide reliability effect."
+
+------------------------------------------------------------------------
+-- SIBLING PROGRAMME BOUNDARY
+------------------------------------------------------------------------
+
+siblingComparisonBoundaryReceipt : Sibling.SiblingComparisonBoundary
+siblingComparisonBoundaryReceipt = Sibling.siblingComparisonBoundary
+
+siblingComparisonDoesNotProveReliability : Bool
+siblingComparisonDoesNotProveReliability = true
+
 record FeedbackAcquisitionFrontier : Set where
   constructor feedback-acquisition-frontier
   field
@@ -73,4 +114,4 @@ rocketdyneFeedbackFrontier : FeedbackAcquisitionFrontier
 rocketdyneFeedbackFrontier =
   feedback-acquisition-frontier
     true false false false false false
-    "Rocketdyne engineering change order, anomaly disposition, material-selection memorandum, qualification approval, or later fleet/lot reliability comparison."
+    "Rocketdyne engineering change order, anomaly disposition, material-selection memorandum, Moog/NAS9-12996 valve failure analysis, qualification approval, purge/protection procedure, or later fleet/lot reliability comparison."
