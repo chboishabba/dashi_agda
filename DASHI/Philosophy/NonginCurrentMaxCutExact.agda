@@ -91,13 +91,13 @@ recursiveResidualReopeningPaid :
   Tower.residualReopeningPaid towerBoundary ≡ true
 recursiveResidualReopeningPaid = refl
 
-recursiveObserverFibreTowerPaid :
+recursiveObserverFibreTowerReceipt :
   FibreTower.fibreTowerAdapterPaid fibreTowerBoundary ≡ true
-recursiveObserverFibreTowerPaid = refl
+recursiveObserverFibreTowerReceipt = refl
 
-observerStreamInverseLimitPaid :
+observerStreamInverseLimitReceipt :
   FibreTower.inverseLimitFromObserverStreamPaid fibreTowerBoundary ≡ true
-observerStreamInverseLimitPaid = refl
+observerStreamInverseLimitReceipt = refl
 
 T9LocalComplementFactorizationPaid :
   Local.localTimesComplementFactorizationPaid localBoundary ≡ true
@@ -123,47 +123,47 @@ fullBoundaryNerveEquivalenceStillFalse :
   FullNerve.rankPreservingFullEquivalencePaid fullNerveBoundary ≡ false
 fullBoundaryNerveEquivalenceStillFalse = refl
 
-setLevelEffectiveDescentPaid :
+setLevelEffectiveDescentReceipt :
   SetEffective.globalRealizationConstructed setEffectiveBoundary ≡ true
-setLevelEffectiveDescentPaid = refl
+setLevelEffectiveDescentReceipt = refl
 
-observationalGlobalUniquenessPaid :
+observationalGlobalUniquenessReceipt :
   SetEffective.observationalUniquenessPaid setEffectiveBoundary ≡ true
-observationalGlobalUniquenessPaid = refl
+observationalGlobalUniquenessReceipt = refl
 
-siteTransportCoverageObstructionPaid :
+siteTransportCoverageObstructionReceipt :
   SiteTransport.newGlobalVertexFiberMorphismsRequired siteTransportBoundary ≡ true
-siteTransportCoverageObstructionPaid = refl
+siteTransportCoverageObstructionReceipt = refl
 
-boundaryAnchoredFaceMediationPaid :
+boundaryAnchoredFaceMediationReceipt :
   Anchored.strongSecondOrderAdapterConstructed anchoredMediationBoundary ≡ true
-boundaryAnchoredFaceMediationPaid = refl
+boundaryAnchoredFaceMediationReceipt = refl
 
-contextIndexedFibrationBridgePaid :
+contextIndexedFibrationBridgeReceipt :
   ContextBridge.cellPresheafInstantiatesContextIndexedObservation
     contextFibrationBoundary
   ≡ true
-contextIndexedFibrationBridgePaid = refl
+contextIndexedFibrationBridgeReceipt = refl
 
-fullSiteDiscreteGroupoidBaselinePaid :
+fullSiteDiscreteGroupoidBaselineReceipt :
   Discrete.fullSiteDiscreteGroupoidBaselinePaid discreteGroupoidBoundary ≡ true
-fullSiteDiscreteGroupoidBaselinePaid = refl
+fullSiteDiscreteGroupoidBaselineReceipt = refl
 
-c3ExternalVsSiteRestrictionSeparated :
+c3ExternalVsSiteRestrictionReceipt :
   Discrete.edgeCycleIsSiteRestriction discreteGroupoidBoundary ≡ false
-c3ExternalVsSiteRestrictionSeparated = refl
+c3ExternalVsSiteRestrictionReceipt = refl
 
-naiveGlobalC3NaturalityRejected :
+naiveGlobalC3NaturalityRejectedReceipt :
   C3NoGo.naiveGlobalC3NaturalityPaid c3NoGoBoundary ≡ false
-naiveGlobalC3NaturalityRejected = refl
+naiveGlobalC3NaturalityRejectedReceipt = refl
 
-c3RicherLocalContextRequired :
+c3RicherLocalContextRequiredReceipt :
   C3NoGo.richerLocalContextRequired c3NoGoBoundary ≡ true
-c3RicherLocalContextRequired = refl
+c3RicherLocalContextRequiredReceipt = refl
 
-c3ResidualRepairPaid :
+c3ResidualRepairReceipt :
   C3Repair.selectedResidualReconstructsWholeRotatedEdge c3RepairBoundary ≡ true
-c3ResidualRepairPaid = refl
+c3ResidualRepairReceipt = refl
 
 c3OldFullT9RetentionNotRequired :
   C3Repair.oldFullT9EdgeRequiredForRotatedEdgeConsumer c3RepairBoundary ≡ false
