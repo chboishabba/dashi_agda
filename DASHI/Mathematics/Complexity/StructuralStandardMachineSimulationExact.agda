@@ -2,29 +2,14 @@ module DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact whe
 
 ------------------------------------------------------------------------
 -- STRUCTURAL SINGLE-TAPE SIMULATION
---
--- The generic StandardMachineSimulation permits an arbitrary configuration
--- embedding. That is appropriate for semantic simulation, but too weak for
--- resource-closing compilation: an unconstrained meta-level embed could hide
--- uncharged representation work.
---
--- This owner requires the embedding to be pointwise on the literal standard
--- tape representation and faithful on tape symbols:
---
---   source state  -> target state
---   source symbol -> target symbol (injectively)
---   source blank  -> target blank exactly
---   left/right tape lists mapped elementwise
---   scanned symbol mapped directly.
---
--- Hence configuration shape and represented tape span are preserved exactly,
--- and nonblank source data cannot collapse to target blank.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (just)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardMachineSimulationExact as Simulation
@@ -151,17 +136,18 @@ sourceNonblankMapsToTargetNonblank :
     {target : Standard.StandardSingleTapeMachine TargetState TargetSymbol}
     (structural : StructuralStandardMachineSimulation source target)
     {symbol : SourceSymbol} →
-  symbol ≡ Standard.blank source →
-  StructuralStandardMachineSimulation.symbolMap structural symbol
-    ≡ Standard.blank target
-sourceNonblankMapsToTargetNonblank structural refl =
-  blankExact structural
+  (symbol ≡ Standard.blank source → ⊥) →
+  symbolMap structural symbol ≡ Standard.blank target → ⊥
+sourceNonblankMapsToTargetNonblank
+    structural sourceNonblank mappedBlank =
+  sourceNonblank
+    (symbolMapInjective structural
+      (trans mappedBlank (sym (blankExact structural))))
 
 ------------------------------------------------------------------------
 -- RESOURCE FIREWALL
 --
--- This does not assert that every semantic simulation is structural. It gives
--- the stronger interface that the Clay-critical compiler must use when it
--- claims to run a source single-tape machine inside a target single-tape
--- machine without hidden representation expansion or symbol collapse.
+-- The Clay-critical compiler now uses a pointwise tape representation with no
+-- hidden configuration expansion and no collapse of nonblank source symbols to
+-- target blank.
 ------------------------------------------------------------------------
