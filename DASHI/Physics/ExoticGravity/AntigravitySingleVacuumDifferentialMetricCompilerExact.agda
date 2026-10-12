@@ -2,7 +2,7 @@
 module DASHI.Physics.ExoticGravity.AntigravitySingleVacuumDifferentialMetricCompilerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
@@ -55,6 +55,12 @@ sourceModulationMetricTTDeltaIsCalibratedSourceDifference radius modulation
 
 sourceModulationMetricTTDeltaIsCandidateUntilMetricResponseWeld : Bool
 sourceModulationMetricTTDeltaIsCandidateUntilMetricResponseWeld = true
+
+-- Compatibility name from the older scheduler.  It is deliberately false:
+-- cancellation in the normalization difference is not yet cancellation in a
+-- physical metric-response difference.
+commonAdditiveVacuumZeroRemovedFromMetricDifference : Bool
+commonAdditiveVacuumZeroRemovedFromMetricDifference = false
 
 ------------------------------------------------------------------------
 -- PHYSICAL DIFFERENTIAL METRIC RESPONSE
