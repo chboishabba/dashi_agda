@@ -55,7 +55,7 @@ def test_conditioning_owner_separates_executable_global_audit_from_unobserved_nu
     assert "globalSparseRestrictedKappaPaid = false" in text
 
 
-def test_convrml_parallel_comparator_pays_same_scene_three_system_geometry_not_photon_matching_or_fzp():
+def test_convrml_parallel_comparator_pays_hardware_and_exposure_coordinates_but_not_photon_matching_or_fzp():
     p = ROOT / "DASHI/Physics/Optics/BerkeleyConvRMLParallelComparatorExact.agda"
     text = p.read_text()
     assert "10.1364/OE.608614" in text
@@ -64,6 +64,14 @@ def test_convrml_parallel_comparator_pays_same_scene_three_system_geometry_not_p
     assert "parallelLensDiffuserRMLAcquisitionPaid = true" in text
     assert "sameSceneParallelAcquisitionPaid = true" in text
     assert "hundredThousandMeasurementsPerSystem = true" in text
+    assert "identicalSensorModelPaid = true" in text
+    assert "sameIlluminationPaid = true" in text
+    assert "sameMagnificationPaid = true" in text
+    assert "exposureCalibrationPaid = true" in text
+    assert "rmlExposureMilliseconds = 80" in text
+    assert "diffuserExposureMilliseconds = 50" in text
+    assert "lensExposureMilliseconds = 4" in text
+    assert "equalExposureAcrossSystemsPaid = false" in text
     assert "matchedPhotonAcrossSystemsPaid = false" in text
     assert "fresnelZonePlateArmPaid = false" in text
 
@@ -83,6 +91,8 @@ def test_optics_rollup_and_acquisition_maxcut_include_global_audit_and_convrml_w
     assert "depthConditioningAuditExecutable = true" in maxcut
     assert "translatedColumnRestrictedAuditExecutable = true" in maxcut
     assert "parallelLensDiffuserRMLAcquisitionPinned = true" in maxcut
+    assert "parallelSensorIlluminationGeometryPinned = true" in maxcut
+    assert "parallelExposureCalibrationPinned = true" in maxcut
     assert "berkeleyNumericPSFArrayIngested = false" in maxcut
     assert "translatedColumnNumericalReceiptCaptured = false" in maxcut
     assert "sameHRestrictedConditionNumberMeasured = false" in maxcut
