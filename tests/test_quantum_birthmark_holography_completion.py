@@ -15,6 +15,11 @@ def test_holographic_same_object_owner_names_exact_upstream_gap():
     assert "densityMatrixEntropyWeldRequired" in p
     assert "sameObjectBoundaryEntropyCompiler" in p
     assert "areaLawDoesNotComputeVonNeumannEntropyOfContract" in p
+    assert "upstreamZModSubsystemFactorizationStillRequired = false" in p
+    assert "upstreamCurrentStateContractWeldImpossibleAsWritten" in p
+    assert "upstreamDefinitionReplacementRequired" in p
+    assert "correctedZModCarrierStateAvailable" in p
+    assert "geometricSubtreeAndMinimalCutWeldStillRequired" in p
 
 
 def test_area_capacity_reuses_all_existing_holography_owners():
