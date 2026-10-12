@@ -14,6 +14,7 @@ import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Payer
 import DASHI.Economics.AISameModelSelfHostCostBoundary20261012Exact as SameModel
 import DASHI.Economics.AICerebrasCloudMarginObserverBoundary20261012Exact as CerebrasMargin
 import DASHI.Economics.AIAccountingFinancingLifeGap20261012Exact as LifeGap
+import DASHI.Economics.AIPolicyCausalEstimandIdentification20261012Exact as PolicyCausal
 
 ------------------------------------------------------------------------
 -- CROSS-POLLINATION RECONCILIATION
@@ -81,6 +82,12 @@ replacementCapexStillOpen = xp-producer
   "CoreWeave/lender asset-life evidence"
   "accounting-life and lender-horizon mismatch is paid, but installed asset ages, economic retirement history and capitalised replacement schedule remain unobserved" false
 
+policyCausalIdentificationStillOpen : XPProducer
+policyCausalIdentificationStillOpen = xp-producer
+  "policy burden -> market concentration causal identification" open
+  "Australian policy-economy lane"
+  "observed proposal/outcome chronology is paid, but a typed causal estimand plus obligation-relative identification-family gate, realised same-basis cost measurement and market response are not yet jointly paid" false
+
 exhaustiveTerminalPayerStillOpen : XPProducer
 exhaustiveTerminalPayerStillOpen = xp-producer
   "exhaustive terminal-payer provenance" open
@@ -119,6 +126,14 @@ assetLifeGapLowerIs24Months = LifeGap.selectedGapLowerMonthsIs24
 assetLifeGapUpperIs36Months : LifeGap.gapUpperMonths LifeGap.coreWeaveAccountingVsLenderGPUHorizon ≡ 36
 assetLifeGapUpperIs36Months = LifeGap.selectedGapUpperMonthsIs36
 
+policyEstimandStillOpen :
+  PolicyCausal.currentPolicyEstimandPaid PolicyCausal.currentAustralianPolicyCausalStatus ≡ false
+policyEstimandStillOpen = PolicyCausal.currentPolicyEstimandStillOpen
+
+policyIdentificationStillOpen :
+  PolicyCausal.currentPolicyIdentificationPaid PolicyCausal.currentAustralianPolicyCausalStatus ≡ false
+policyIdentificationStillOpen = PolicyCausal.currentPolicyIdentificationStillOpen
+
 sameModelStillNotProviderMargin : SameModel.directProviderMarginalCostObserved SameModel.miniMaxM3EngineeringComparison ≡ false
 sameModelStillNotProviderMargin = SameModel.providerMarginalCostStillUnobserved
 
@@ -130,6 +145,7 @@ data RelocationImpliesNoNewCapitalPermission : Set where
 data BuyerSpreadImpliesProviderMarginPermission : Set where
 data AccountingSegmentMarginImpliesMarginalServingMarginPermission : Set where
 data LifeGapImpliesImpairmentPermission : Set where
+data PolicyChronologyImpliesCausationPermission : Set where
 data NamedEdgesImpliesWholeGraphPermission : Set where
 
 nonDescentDoesNotCreateNamedFirmFailure : NonDescentImpliesNamedFirmFailurePermission → ⊥
@@ -147,9 +163,12 @@ accountingSegmentMarginDoesNotCreateMarginalServingMargin ()
 lifeGapDoesNotCreateImpairment : LifeGapImpliesImpairmentPermission → ⊥
 lifeGapDoesNotCreateImpairment ()
 
+policyChronologyDoesNotCreateCausation : PolicyChronologyImpliesCausationPermission → ⊥
+policyChronologyDoesNotCreateCausation ()
+
 namedEdgesDoNotCreateWholeGraph : NamedEdgesImpliesWholeGraphPermission → ⊥
 namedEdgesDoNotCreateWholeGraph ()
 
 boundary : String
 boundary =
-  "The latest cross-pollination cut proves headline-only AI observables are not consumer-sufficient for capital recovery, formalises capital-burden relocation, pays a selected 22.5-percent buyer-side same-model hosting spread, pays Cerebras cloud/services accounting-margin observers while preserving opposite GAAP/core directions, pays a 24-36 month accounting-vs-lender asset-life mismatch as obsolescence-pressure evidence, and narrows CoreWeave terminal-payer provenance. Pure inference provider marginal serving cost/margin, entity-specific replacement capex, exhaustive payer provenance and global capital-recovery authority remain open."
+  "The latest cross-pollination cut proves headline-only AI observables are not consumer-sufficient for capital recovery, formalises capital-burden relocation, pays a selected 22.5-percent buyer-side same-model hosting spread, pays Cerebras cloud/services accounting-margin observers while preserving opposite GAAP/core directions, pays a 24-36 month accounting-vs-lender asset-life mismatch as obsolescence-pressure evidence, narrows CoreWeave terminal-payer provenance, and requires typed causal estimand plus identification-family admission for policy-moat/capture promotion. Pure inference provider marginal serving cost/margin, entity-specific replacement capex, causal policy-market identification, exhaustive payer provenance and global capital-recovery authority remain open."
