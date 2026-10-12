@@ -14,9 +14,10 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3SameActionExact w
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Data.Vec using ([]; _∷_)
+open import Data.Vec using (Vec) renaming ([] to vnil; _∷_ to _vcons_)
 open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
-  using (neg; zer; pos)
+  using (Trit; neg; zer; pos; TritPrefix)
+  renaming ([] to bnil; _∷_ to _bcons_)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.TriadicFiniteQuotient as Quotient
@@ -31,17 +32,17 @@ translatePositive residue = Arithmetic.addResidue residue Characters.rPos
 translatePositiveOrderThree :
   (r : Quotient.Residue3Pow Quotient.one) ->
   translatePositive (translatePositive (translatePositive r)) ≡ r
-translatePositiveOrderThree (neg ∷ []) = refl
-translatePositiveOrderThree (zer ∷ []) = refl
-translatePositiveOrderThree (pos ∷ []) = refl
+translatePositiveOrderThree (neg bcons bnil) = refl
+translatePositiveOrderThree (zer bcons bnil) = refl
+translatePositiveOrderThree (pos bcons bnil) = refl
 
 ternaryStepIsPositiveTranslation :
   (x : C3.DepthOneKernel) ->
   C3.kernelResidue (C3.ternaryChargePositiveStep x)
   ≡ translatePositive (C3.kernelResidue x)
-ternaryStepIsPositiveTranslation (Triadic.negativeTrit ∷ []) = refl
-ternaryStepIsPositiveTranslation (Triadic.zeroTrit ∷ []) = refl
-ternaryStepIsPositiveTranslation (Triadic.positiveTrit ∷ []) = refl
+ternaryStepIsPositiveTranslation (Triadic.negativeTrit vcons vnil) = refl
+ternaryStepIsPositiveTranslation (Triadic.zeroTrit vcons vnil) = refl
+ternaryStepIsPositiveTranslation (Triadic.positiveTrit vcons vnil) = refl
 
 physicalStepIsPositiveTranslation :
   (m : C3.MagneticState) ->
@@ -57,9 +58,9 @@ sameActionRecognitionSquare :
     (C3.magneticSector
       (C3.realizeMagneticState (C3.ternaryChargePositiveStep x)))
   ≡ translatePositive (C3.kernelResidue x)
-sameActionRecognitionSquare (Triadic.negativeTrit ∷ []) = refl
-sameActionRecognitionSquare (Triadic.zeroTrit ∷ []) = refl
-sameActionRecognitionSquare (Triadic.positiveTrit ∷ []) = refl
+sameActionRecognitionSquare (Triadic.negativeTrit vcons vnil) = refl
+sameActionRecognitionSquare (Triadic.zeroTrit vcons vnil) = refl
+sameActionRecognitionSquare (Triadic.positiveTrit vcons vnil) = refl
 
 sameActionOnRealizedState :
   (x : C3.DepthOneKernel) ->
@@ -67,9 +68,9 @@ sameActionOnRealizedState :
     (C3.magneticSector
       (C3.chargePositiveStep (C3.realizeMagneticState x)))
   ≡ translatePositive (C3.kernelResidue x)
-sameActionOnRealizedState (Triadic.negativeTrit ∷ []) = refl
-sameActionOnRealizedState (Triadic.zeroTrit ∷ []) = refl
-sameActionOnRealizedState (Triadic.positiveTrit ∷ []) = refl
+sameActionOnRealizedState (Triadic.negativeTrit vcons vnil) = refl
+sameActionOnRealizedState (Triadic.zeroTrit vcons vnil) = refl
+sameActionOnRealizedState (Triadic.positiveTrit vcons vnil) = refl
 
 record MagneticC3SameActionBoundary : Set where
   constructor magneticC3SameActionBoundary
