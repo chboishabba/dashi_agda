@@ -3,7 +3,7 @@ module DASHI.Cognition.OracleEllisonTranscriptClaimAtlasExact where
 ------------------------------------------------------------------------
 -- ORACLE / ELLISON / CHINA / ISRAEL TRANSCRIPT CLAIM ATLAS
 --
--- Case-specific extraction only.  A transcript claim is not source payment.
+-- Case-specific extraction only. A transcript claim is not source payment.
 -- The carrier keeps literal claim identity separate from evidence status,
 -- interpretation, causal explanation, motive and controller identity.
 ------------------------------------------------------------------------
@@ -20,9 +20,11 @@ data TranscriptClaim : Set where
   netanyahuSayeretControlWorldview : TranscriptClaim
   netanyahuPermanentThreatMaintenanceMotive : TranscriptClaim
   ellisonFIDFDonation : TranscriptClaim
+  ellisonNetanyahuReportedRelationshipActivity : TranscriptClaim
   ellisonImmortalityMotive : TranscriptClaim
   oracleChinaPoliceGoldenShield : TranscriptClaim
   oracleRafaelDefenseIntegration : TranscriptClaim
+  oracleDeclaredDefenseNationalSecurityOrientation : TranscriptClaim
   oracleNimbusPrimeCloudProvider : TranscriptClaim
   oracleWritesIsraeliSecurityBlueprint : TranscriptClaim
   commonControllerFromSharedVendor : TranscriptClaim
@@ -36,12 +38,16 @@ claimLabel netanyahuPermanentThreatMaintenanceMotive =
   "Netanyahu intentionally maintains permanent security threats in order to remain in power"
 claimLabel ellisonFIDFDonation =
   "Larry Ellison made a major donation to Friends of the IDF"
+claimLabel ellisonNetanyahuReportedRelationshipActivity =
+  "Public reporting documents repeated Ellison-Netanyahu relationship activity, including trial-witness, Lanai and reported legal-intervention surfaces"
 claimLabel ellisonImmortalityMotive =
   "Larry Ellison is motivated by technological immortality / ghost-in-the-machine aspirations"
 claimLabel oracleChinaPoliceGoldenShield =
   "Oracle products were supplied into PRC police Golden Shield upgrade infrastructure"
 claimLabel oracleRafaelDefenseIntegration =
   "RAFAEL IMILITE and FIRE WEAVER are integrated with Oracle Cloud Infrastructure"
+claimLabel oracleDeclaredDefenseNationalSecurityOrientation =
+  "Oracle explicitly positions its cloud/AI business as supporting defense and allied national-security missions"
 claimLabel oracleNimbusPrimeCloudProvider =
   "Oracle is a winning prime cloud provider for Project Nimbus"
 claimLabel oracleWritesIsraeliSecurityBlueprint =
@@ -50,12 +56,13 @@ claimLabel commonControllerFromSharedVendor =
   "Use of the same vendor in two state systems establishes a common controller"
 
 ------------------------------------------------------------------------
--- Source roles.  These are provenance coordinates only.
+-- Source roles. These are provenance coordinates only.
 ------------------------------------------------------------------------
 
 data SourceRole : Set where
   officialBiography : SourceRole
   donorEventReporting : SourceRole
+  relationshipReporting : SourceRole
   corporatePrimaryAnnouncement : SourceRole
   governmentProcurementRecord : SourceRole
   courtTenderReporting : SourceRole
@@ -66,7 +73,9 @@ data SourceRole : Set where
 data SourceIdentity : Set where
   israelGovernmentNetanyahuBiography : SourceIdentity
   friendsIDFEllison2017Record : SourceIdentity
+  timesOfIsraelEllisonNetanyahuRelationshipReporting : SourceIdentity
   oracleRafael2024Announcement : SourceIdentity
+  oracleDefenseEcosystem2025Announcement : SourceIdentity
   israelNimbusProcurementRecord : SourceIdentity
   oracleNimbusTenderChallengeReporting : SourceIdentity
   associatedPressChinaSurveillance2025 : SourceIdentity
@@ -76,7 +85,9 @@ data SourceIdentity : Set where
 sourceRole : SourceIdentity → SourceRole
 sourceRole israelGovernmentNetanyahuBiography = officialBiography
 sourceRole friendsIDFEllison2017Record = donorEventReporting
+sourceRole timesOfIsraelEllisonNetanyahuRelationshipReporting = relationshipReporting
 sourceRole oracleRafael2024Announcement = corporatePrimaryAnnouncement
+sourceRole oracleDefenseEcosystem2025Announcement = corporatePrimaryAnnouncement
 sourceRole israelNimbusProcurementRecord = governmentProcurementRecord
 sourceRole oracleNimbusTenderChallengeReporting = courtTenderReporting
 sourceRole associatedPressChinaSurveillance2025 = investigativeReporting
@@ -88,8 +99,12 @@ sourceLocator israelGovernmentNetanyahuBiography =
   "Government of Israel / Benjamin Netanyahu biography; Sayeret Matkal service coordinate"
 sourceLocator friendsIDFEllison2017Record =
   "2017 Friends of the IDF gala reporting: Larry Ellison donation USD 16.6 million"
+sourceLocator timesOfIsraelEllisonNetanyahuRelationshipReporting =
+  "Times of Israel 2020-2021 reporting: Ellison as Netanyahu-trial witness; reported Milchan/Ben Tzur intervention; Netanyahu Lanai stay and reported dinner with Ellison"
 sourceLocator oracleRafael2024Announcement =
   "Oracle News, 2024-09-10: Oracle and RAFAEL to Provide Cloud-Based AI Solutions for Defense Missions"
+sourceLocator oracleDefenseEcosystem2025Announcement =
+  "Oracle News, 2025-06-17: Oracle Launches First-of-its-Kind Defense Ecosystem to Redefine National Security Innovation"
 sourceLocator israelNimbusProcurementRecord =
   "Government Procurement Administration, Project Nimbus: AWS and Google chosen cloud providers"
 sourceLocator oracleNimbusTenderChallengeReporting =
@@ -133,6 +148,13 @@ ellisonDonationEvidence = evidence-edge
   directSupport
   "Donation relationship is source-paid; downstream policy authorship and motive are not imported."
 
+ellisonNetanyahuRelationshipEvidence : EvidenceEdge
+ellisonNetanyahuRelationshipEvidence = evidence-edge
+  timesOfIsraelEllisonNetanyahuRelationshipReporting
+  ellisonNetanyahuReportedRelationshipActivity
+  directSupport
+  "The paid proposition is the existence of repeated public reporting about concrete relationship activity. It does not promote those reports into policy control, common ideology, or a psychological motive theorem."
+
 oracleChinaAPEvidence : EvidenceEdge
 oracleChinaAPEvidence = evidence-edge
   associatedPressChinaSurveillance2025
@@ -153,6 +175,13 @@ oracleRafaelEvidence = evidence-edge
   oracleRafaelDefenseIntegration
   directSupport
   "Oracle and RAFAEL state that IMILITE and FIRE WEAVER are available on OCI for defense missions."
+
+oracleDefenseOrientationEvidence : EvidenceEdge
+oracleDefenseOrientationEvidence = evidence-edge
+  oracleDefenseEcosystem2025Announcement
+  oracleDeclaredDefenseNationalSecurityOrientation
+  directSupport
+  "Oracle's own announcement explicitly describes a global Defense Ecosystem intended to strengthen U.S. and allied national security and route defense innovators through Oracle cloud/AI delivery channels. This pays declared corporate posture, not control of any particular sovereign security system."
 
 oracleNimbusSelectionCounterevidence : EvidenceEdge
 oracleNimbusSelectionCounterevidence = evidence-edge
@@ -194,7 +223,7 @@ ellisonImmortalityInterpretation = evidence-edge
   transcript20261002
   ellisonImmortalityMotive
   interpretationOnly
-  "Psychological/motive interpretation is not paid by donation, employment or technology-deployment facts."
+  "Psychological/motive interpretation is not paid by donation, relationship reporting, employment or technology-deployment facts."
 
 ------------------------------------------------------------------------
 -- Anti-collapse boundary.
@@ -206,6 +235,8 @@ record ClaimAtlasBoundary : Set where
     sourceIdentityImpliesClaimTruth : Bool
     serviceImpliesPoliticalPsychology : Bool
     donationImpliesPolicyAuthorship : Bool
+    reportedRelationshipImpliesPolicyControl : Bool
+    declaredCorporateDefensePostureImpliesSovereignControl : Bool
     vendorImpliesStateController : Bool
     deploymentImpliesMotive : Bool
     localCounterevidenceRefutesAllRelationships : Bool
@@ -213,4 +244,4 @@ record ClaimAtlasBoundary : Set where
 
 canonicalClaimAtlasBoundary : ClaimAtlasBoundary
 canonicalClaimAtlasBoundary =
-  claim-atlas-boundary false false false false false false false
+  claim-atlas-boundary false false false false false false false false false
