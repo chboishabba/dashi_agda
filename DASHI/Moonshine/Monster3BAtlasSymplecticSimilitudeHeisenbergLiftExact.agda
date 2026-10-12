@@ -21,18 +21,24 @@ module DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact whe
 --     q(x+y) + lambda*c(x,y)
 --       = q(x)+q(y)+c(Ax,Ay).
 --
--- This owner exposes that exact condition generically.  For the concrete
--- primitive source word, the finite analyzer can obtain q from the symmetric
--- bilinear difference
+-- For the preferred primitive source word the exact finite analyzer computes
 --
 --     B(x,y)=c(Ax,Ay)-lambda*c(x,y)
 --
--- via q(x)=1/2 B(x,x), with 1/2=2 in F3.  Runtime instantiation is kept
--- separate from the generic kernel interface.
+-- and verifies that its 12x12 matrix is symmetric.  In characteristic three
+-- the explicit quadratic correction
+--
+--     q(x)=2*B(x,x)=1/2 B(x,x)
+--
+-- therefore has polarization B and pays the concrete center correction at the
+-- runtime/exact-matrix level.  The Agda-kernel instantiation of that concrete
+-- 12x12 action/correction remains separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
 open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
@@ -91,6 +97,19 @@ record HeisenbergSimilitudeLiftRecognition
           (liftToHeisenbergSimilitude action phase right)
 open HeisenbergSimilitudeLiftRecognition public
 
+preferredPrimitiveSourceWord : String
+preferredPrimitiveSourceWord = "g2^-1 g1 g2^-1 g1 g2 g1 g2^-1"
+
+preferredPrimitiveSimilitudeMultiplierMod3 : Nat
+preferredPrimitiveSimilitudeMultiplierMod3 = 2
+
+preferredPrimitiveCocycleDefectRank : Nat
+preferredPrimitiveCocycleDefectRank = 11
+
+preferredPrimitiveRuntimeReceipt : String
+preferredPrimitiveRuntimeReceipt =
+  "outputs/monster3b_atlas_compression_field_selector_20261012.json"
+
 record Boundary : Set where
   constructor boundary
   field
@@ -98,9 +117,10 @@ record Boundary : Set where
     centerMultiplierLiftExposed : Bool
     similitudeCocycleCorrectionConditionExposed : Bool
     genericSimilitudeHeisenbergLiftTyped : Bool
+    preferredPrimitiveDefectMatrixSymmetricRuntimePaid : Bool
     preferredPrimitiveConcreteCorrectionRuntimePaid : Bool
     preferredPrimitiveConcreteLiftKernelPaid : Bool
 open Boundary public
 
 canonicalBoundary : Boundary
-canonicalBoundary = boundary true true true true false false
+canonicalBoundary = boundary true true true true true true false
