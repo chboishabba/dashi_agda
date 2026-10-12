@@ -17,7 +17,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPStandardMachineMaxCutClosureExac
 --      the three phases:
 --
 --        prefix/self-quotation setup
---          ; edge-for-edge simulation of D on its own Cook formula
+--          ; STRUCTURAL edge-for-edge simulation of D on its own Cook formula
 --          ; finite Boolean-negation suffix,
 --
 --      with exact additive closure to the Cook budget T.
@@ -29,6 +29,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPStandardFiniteCandidateCodeExact as StandardCandidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPPolynomiallyClockedStandardCandidateExact as Clocked
+import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralResourceClosingCompilerExact as StructuralResource
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingStandardCompilerExact as ResourceCompiler
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedProgramStandardCompilerExact as ProgramCompiler
 
@@ -54,7 +55,7 @@ candidateStandardCode coverage candidate =
   Clocked.standard (realize coverage candidate)
 
 ------------------------------------------------------------------------
--- B: resource-closing compiler with the candidate subrun made explicit.
+-- B: structurally resource-closing compiler.
 ------------------------------------------------------------------------
 
 record ResourceClosingCompiler
@@ -63,7 +64,7 @@ record ResourceClosingCompiler
   field
     compile :
       (candidate : Direct.PolynomialSATDeciderCandidate cost) →
-      ResourceCompiler.ResourceClosingFixedProgramCompilation
+      StructuralResource.StructuralResourceClosingFixedProgramCompilation
         (realize coverage candidate)
 
 open ResourceClosingCompiler public
@@ -80,7 +81,7 @@ resourceClosingCompilerToFixedProgramCompiler
     {coverage = coverage}
     compiler candidate =
   ResourceCompiler.resourceClosingToFixedProgramCompilation
-    (compile compiler candidate)
+    (StructuralResource.resource (compile compiler candidate))
 
 ------------------------------------------------------------------------
 -- A+B -> explicit SAT error for every admitted polynomial candidate.
@@ -138,26 +139,25 @@ standardMaxCutGivesPNotEqualsNP background coverage compiler =
 --   * Cook--Levin exact-budget iff;
 --   * finite partial Kleene/self-specialization machinery;
 --   * fixed abstract opposite-program equation;
---   * step-preserving standard-machine simulation;
+--   * structural state/symbol/tape simulation with exact tape-span preservation;
 --   * explicit candidate-own-formula middle run and inherited polynomial bound;
 --   * phase concatenation / exact total-time transport;
 --   * resource-closing compiler -> opposite endpoint -> SAT failure plumbing.
 --
 -- Remaining theorem families:
 --
---   A. MODEL IDENTIFICATION / CODING
---      justify StandardPolynomialCandidateCoverage for the selected definition
---      of polynomial time. The current abstract PolynomialCostModel cannot do
---      this parametrically because its decider predicate carries no finite
---      program. A fixed low-universe coded standard-machine/interpreter model
---      would make this identification canonical.
+--   A. MODEL CLOSURE / NP BACKGROUND
+--      in the concrete coded-standard cost model, candidate representation is
+--      already projectionally paid. Ordinary map/precomposition/verifier/
+--      certificate closure and the established NP background remain to be
+--      supplied for that same model.
 --
 --   B. SELF-QUOTATION PREFIX / RESOURCE CLOSURE
---      inhabit ResourceClosingCompiler. The candidate run itself is no longer
---      hidden: the residual is to construct the fixed finite target program and
---      its prefix so that the target's OWN guarded Cook formula is presented as
---      the literal candidate input, while prefix + candidate + suffix closes to
---      the same exact T used in that Cook formula.
+--      inhabit ResourceClosingCompiler. The candidate run and its representation
+--      are no longer hidden: the residual is to construct the fixed finite
+--      target program and its prefix so that the target's OWN guarded Cook
+--      formula is presented as the literal candidate input, while prefix +
+--      candidate + suffix closes to the same exact T used in that Cook formula.
 --
 -- Ordinary partial recursion/self-specialization does not pay B because it does
 -- not prove this terminating finite-resource closure.
