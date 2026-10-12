@@ -19,6 +19,7 @@ module DASHI.Reasoning.NonginRecursiveObserverFibreTowerBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import DASHI.Core.Prelude using (⊥)
 
 import DASHI.Cognition.RecursiveFibreTower as Fibre
 import DASHI.Philosophy.NonginOriginFormalizationExact as Origin
@@ -102,7 +103,7 @@ historicalObservedIsTowerBase :
   (x : X) →
   Depth.observerTermToDepthState
     (Origin.observed {Observer = Observer} x)
-  ≡ streamStateAt (λ _ → _) x zero
+  ≡ Depth.depthZero x
 historicalObservedIsTowerBase x = refl
 
 ------------------------------------------------------------------------
@@ -114,12 +115,12 @@ data FibreTowerBridgeImpliesMetricConvergence : Set where
 
 towerBridgeDoesNotCreatePAdicMetric :
   FibreTowerBridgeImpliesPAdicPsychologicalMetric →
-  Agda.Builtin.Unit.⊥
+  ⊥
 towerBridgeDoesNotCreatePAdicMetric ()
 
 towerBridgeDoesNotCreateMetricConvergence :
   FibreTowerBridgeImpliesMetricConvergence →
-  Agda.Builtin.Unit.⊥
+  ⊥
 towerBridgeDoesNotCreateMetricConvergence ()
 
 record NonginRecursiveObserverFibreTowerBridgeBoundary : Set where
