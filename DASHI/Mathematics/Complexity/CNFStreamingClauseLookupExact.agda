@@ -1,7 +1,7 @@
 module DASHI.Mathematics.Complexity.CNFStreamingClauseLookupExact where
 
 ------------------------------------------------------------------------
--- RANDOM-ACCESS LOOKUP THROUGH CNF CONCATENATION WITHOUT BUILDING THE APPEND
+-- RANDOM-ACCESS CNF LOOKUP WITHOUT MATERIALISING CONCATENATED GLOBAL TAILS
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -38,43 +38,63 @@ lookupAppendExact (x ∷ xs) right (suc index) =
   lookupAppendExact xs right index
 
 ------------------------------------------------------------------------
--- Stream through a list of already-local placed predicates.
---
--- `lookupPlacedAll` may evaluate local truth-table templates as needed, but it
--- never constructs the concatenated global CNF returned by compilePlacedAll.
+-- Continuation cursor through compilePlacedAll.
 ------------------------------------------------------------------------
 
-lookupPlacedAll :
-  ∀ {local global : Nat} →
-  List (Placed.PlacedPredicate local global) →
-  Nat →
-  Maybe (CNF.Clause global)
-lookupPlacedAll [] index = nothing
-lookupPlacedAll (placed ∷ rest) index =
-  lookupAppend
-    (Placed.compilePlaced placed)
-    (Placed.compilePlacedAll rest)
-    index
+mutual
+  lookupPlacedAll :
+    ∀ {local global : Nat} →
+    List (Placed.PlacedPredicate local global) →
+    Nat →
+    Maybe (CNF.Clause global)
+  lookupPlacedAll [] index = nothing
+  lookupPlacedAll (placed ∷ rest) index =
+    lookupPlacedChunk (Placed.compilePlaced placed) rest index
 
-lookupPlacedAllExact :
-  ∀ {local global : Nat}
-    (placed : List (Placed.PlacedPredicate local global))
-    (index : Nat) →
-  lookupPlacedAll placed index
-  ≡ lookupList index (Placed.compilePlacedAll placed)
-lookupPlacedAllExact [] index = refl
-lookupPlacedAllExact (placed ∷ rest) index =
-  lookupAppendExact
-    (Placed.compilePlaced placed)
-    (Placed.compilePlacedAll rest)
-    index
+  lookupPlacedChunk :
+    ∀ {local global : Nat} →
+    CNF.CNF global →
+    List (Placed.PlacedPredicate local global) →
+    Nat →
+    Maybe (CNF.Clause global)
+  lookupPlacedChunk [] rest index =
+    lookupPlacedAll rest index
+  lookupPlacedChunk (clause ∷ clauses) rest zero =
+    just clause
+  lookupPlacedChunk (clause ∷ clauses) rest (suc index) =
+    lookupPlacedChunk clauses rest index
+
+mutual
+  lookupPlacedAllExact :
+    ∀ {local global : Nat}
+      (placed : List (Placed.PlacedPredicate local global))
+      (index : Nat) →
+    lookupPlacedAll placed index
+    ≡ lookupList index (Placed.compilePlacedAll placed)
+  lookupPlacedAllExact [] index = refl
+  lookupPlacedAllExact (placed ∷ rest) index =
+    lookupPlacedChunkExact (Placed.compilePlaced placed) rest index
+
+  lookupPlacedChunkExact :
+    ∀ {local global : Nat}
+      (current : CNF.CNF global)
+      (rest : List (Placed.PlacedPredicate local global))
+      (index : Nat) →
+    lookupPlacedChunk current rest index
+    ≡
+    lookupList index
+      (Placed.append current (Placed.compilePlacedAll rest))
+  lookupPlacedChunkExact [] rest index =
+    lookupPlacedAllExact rest index
+  lookupPlacedChunkExact (clause ∷ clauses) rest zero = refl
+  lookupPlacedChunkExact (clause ∷ clauses) rest (suc index) =
+    lookupPlacedChunkExact clauses rest index
 
 ------------------------------------------------------------------------
--- NOTE
+-- CONSEQUENCE
 --
--- This pays exact random access through the OUTER concatenation only.  It does
--- not yet avoid constructing `compilePlacedAll rest` as a value argument in the
--- right branch.  The next refinement is a continuation lookup that recurses
--- directly into `rest` once the selected index has passed the current local
--- template.  No claim of machine-time efficiency is promoted here yet.
+-- Global transition-clause access can now consume the explicit finite list of
+-- placed `(time,column)` predicates and stream across their local CNF templates.
+-- The remaining materialisation seam is inside ONE local `compilePlaced`
+-- truth-table template, not the polynomial tableau-wide CNF.
 ------------------------------------------------------------------------
