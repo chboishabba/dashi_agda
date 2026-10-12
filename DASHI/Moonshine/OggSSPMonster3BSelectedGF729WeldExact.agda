@@ -165,6 +165,7 @@ record SelectedGF729WeldBoundary : Set where
     degreeSixCompressionReceiptPaid : Bool
     swap01BrokenByCompression : Bool
     cyclicRankSixPaid : Bool
+    affineBetaEqualsOneMinusAlphaLocated : Bool
     selectedGF729PrimitiveRootLocated : Bool
     selectedGF729PrimitiveOrder728Paid : Bool
     explicitIntertwinerQComputed : Bool
@@ -180,6 +181,7 @@ open SelectedGF729WeldBoundary public
 canonicalBoundary : SelectedGF729WeldBoundary
 canonicalBoundary =
   selected-gf729-weld-boundary
+    true
     true
     true
     true
