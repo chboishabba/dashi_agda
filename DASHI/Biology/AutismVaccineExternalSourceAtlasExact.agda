@@ -1,5 +1,6 @@
 module DASHI.Biology.AutismVaccineExternalSourceAtlasExact where
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 
