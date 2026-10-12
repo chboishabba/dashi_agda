@@ -13,6 +13,18 @@ leanExplicitInverseSourceWritten :
   Receipt.leanExplicitTwoSidedInverseSourceWritten Receipt.canonicalBoundary ≡ true
 leanExplicitInverseSourceWritten = refl
 
+leanPrimitiveOrderSourceWritten :
+  Receipt.leanPrimitiveOrder728SourceWritten Receipt.canonicalBoundary ≡ true
+leanPrimitiveOrderSourceWritten = refl
+
+leanPrimitiveOrbitSourceWritten :
+  Receipt.leanPuncturedOrbit728SourceWritten Receipt.canonicalBoundary ≡ true
+leanPrimitiveOrbitSourceWritten = refl
+
+leanPrimitiveStabilizerSourceWritten :
+  Receipt.leanPuncturedStabilizerTrivialSourceWritten Receipt.canonicalBoundary ≡ true
+leanPrimitiveStabilizerSourceWritten = refl
+
 leanKernelObservationStillPending :
   Receipt.leanExactHeadKernelReceiptObserved Receipt.canonicalBoundary ≡ false
 leanKernelObservationStillPending = refl
@@ -22,5 +34,5 @@ agdaKernelReplayStillPending :
 agdaKernelReplayStillPending = refl
 
 fullMonsterSemanticsStillOpen :
-  Receipt.fullMonsterActionOrbitStabilizerRecognitionPaid Receipt.canonicalBoundary ≡ false
+  Receipt.fullMonsterSemanticActionRecognitionPaid Receipt.canonicalBoundary ≡ false
 fullMonsterSemanticsStillOpen = refl
