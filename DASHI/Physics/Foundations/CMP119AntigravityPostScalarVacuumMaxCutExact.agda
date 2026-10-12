@@ -6,35 +6,33 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Physics.Foundations.CMP119AntigravityScalarVacuumSourceActionExact as Scalar
 import DASHI.Physics.Foundations.CMP119LocalizedActionPlaquetteVacuumCoordinateBidiExact as Coordinates
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumConstantBetaOrthogonalityExact as Orthogonality
+import DASHI.Physics.Foundations.CMP119AntigravityVacuumExtensivityMetricResponseExact as Extensivity
 import DASHI.Physics.Foundations.CMP119AntigravityVacuumNormalizationGravityFirewallExact as Gravity
 import DASHI.Physics.Foundations.CMP119AntigravityEq223ConcreteTailReuseMaxCutExact as ConcreteR
 
 ------------------------------------------------------------------------
 -- POST-SCALAR-VACUUM PHYSICAL MAX-CUT
 --
--- This scheduler starts AFTER the normalization/free-energy tranche requested
--- by the current research programme:
+-- Starts AFTER the normalization/free-energy tranche requested by the current
+-- programme:
 --
---   * the preferred CMP119 source uses Vacuum = ℚ;
+--   * preferred CMP119 source uses Vacuum = ℚ;
 --   * the scalar is embedded as the non-plaquette constant action by the action
 --     algebra itself;
---   * beta/plaquette and normalization coordinates are complementary and the
---     pure constant is structurally invisible to the beta projection;
+--   * beta/plaquette and normalization coordinates are complementary;
 --   * the selected V_k / controlled Delta-V recovery is assumed paid upstream.
 --
--- Therefore the next physical theorem is NOT another vacuum projector or
--- source-coordinate adapter.  It is the metric-family / renormalized-effective-
--- action promotion on the SAME state:
+-- The next physical chain is therefore:
 --
---   V_k / Gamma_ren[g]
---      -> d Gamma_ren / d g^{mu nu}
---      -> renormalized local stress
---      -> fixed cosmological/Wald convention
---      -> same-state Lorentzian stress.
+--   finite scalar V_k
+--     -> SAME extensive/local vacuum-density coefficient v * Vol[g]
+--     -> metric-family differentiability of the renormalized effective action
+--     -> SAME renormalized local stress
+--     -> fixed cosmological/Wald renormalization convention
+--     -> same-state Euclidean -> Lorentzian stress.
 --
--- The preferred R109/R136 route can pay continuum convergence without exact
--- finite-cutoff equality, but it does not manufacture metric differentiability,
--- the renormalization convention, or Euclidean->Lorentzian same-state physics.
+-- A metric-independent additive scalar has zero metric derivative; naming it
+-- "vacuum energy" cannot skip the extensivity/volume weld.
 ------------------------------------------------------------------------
 
 preferredScalarVacuumRepresentationPaid : Bool
@@ -62,6 +60,18 @@ vacuumValueRecoveryAssumedPaid = true
 
 controlledVacuumDifferenceAssumedPaid : Bool
 controlledVacuumDifferenceAssumedPaid = true
+
+finiteScalarAloneDeterminesCosmologicalStress : Bool
+finiteScalarAloneDeterminesCosmologicalStress =
+  Extensivity.finiteScalarAloneDeterminesCosmologicalStress
+
+extensivityVolumeWeldStillRequired : Bool
+extensivityVolumeWeldStillRequired =
+  Extensivity.extensivityVolumeWeldStillRequired
+
+latticeToPhysicalVolumeNormalizationStillRequired : Bool
+latticeToPhysicalVolumeNormalizationStillRequired =
+  Extensivity.latticeToPhysicalVolumeNormalizationStillRequired
 
 metricFamilyDifferentiabilityStillRequired : Bool
 metricFamilyDifferentiabilityStillRequired = true
@@ -100,6 +110,9 @@ record PostScalarVacuumPhysicalFrontier : Set where
     betaNormalizationCoordinateSplitUnderstood : Bool
     selectedVacuumValueRecoveryUpstream : Bool
 
+    finiteScalarAlreadyIsExtensiveVacuumDensity : Bool
+    extensivityAndMetricVolumeWeldOpen : Bool
+    latticeToPhysicalVolumeNormalizationOpen : Bool
     metricFamilyDifferentiabilityOpen : Bool
     sameStateRenormalizedMetricResponseOpen : Bool
     normalizationToGravityCalibrationOpen : Bool
@@ -115,6 +128,6 @@ canonicalPostScalarVacuumPhysicalFrontier : PostScalarVacuumPhysicalFrontier
 canonicalPostScalarVacuumPhysicalFrontier =
   post-scalar-vacuum-physical-frontier
     true true true true
-    true true true true
+    false true true true true true true
     true false true
     false
