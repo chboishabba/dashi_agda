@@ -1,17 +1,25 @@
 module DASHI.Biology.SignedSSPWeaveAddressNeutralDynamicsExact where
 
 ------------------------------------------------------------------------
--- ADDRESS-NEUTRAL SUBLANGUAGE OF THE SIGNED SSP WEAVE
+-- CONSERVATIVE ADDRESS POLICY FOR THE NON-REFINEMENT WEAVE SUBLANGUAGE
 --
 -- The executable WeaveEffect semantics has exactly one instruction which
--- changes the refinement counter: refineAt369.  The remaining five instruction
--- forms change carrier/token bookkeeping only.  This owner turns that fact into
--- a typed partial metadata dynamics instead of leaving "general instruction
--- address semantics" as one undifferentiated external debt.
+-- changes its explicit refinement counter: refineAt369.  The remaining five
+-- instruction forms leave that counter unchanged.
 --
--- We do NOT invent the missing refineAt369 address transition.  The theorem is
--- only that all non-refinement instructions admit the conservative identity
--- action on an already supplied 3/6/9 address.
+-- IMPORTANT BOUNDARY:
+-- address369 is richer metadata carried outside WeaveEffect.  Counter
+-- preservation alone does NOT prove that a source-owned address369 semantics
+-- must be identity for those five instructions.  What we can construct
+-- generically is the conservative identity extension below.  It is a typed
+-- compiler policy consistent with the executable effect, not recovered source
+-- semantics.
+--
+-- Thus this owner pays:
+--   * exact non-refinement counter preservation;
+--   * existence of a conservative identity address policy.
+-- It leaves source-owned address laws for ALL instruction forms external,
+-- including refineAt369.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -20,41 +28,43 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Geometry.SSP369Ultrametric as SSP
 
-data AddressNeutralInstruction : Set where
-  buildNeutral : AddressNeutralInstruction
-  removeInvariantNeutral : AddressNeutralInstruction
-  introducePrimeNeutral : Signed.SSPPrime -> AddressNeutralInstruction
-  introduceInversePrimeNeutral : Signed.SSPPrime -> AddressNeutralInstruction
-  introduceInvariantUnitNeutral : AddressNeutralInstruction
+data AddressCounterNeutralInstruction : Set where
+  buildCounterNeutral : AddressCounterNeutralInstruction
+  removeInvariantCounterNeutral : AddressCounterNeutralInstruction
+  introducePrimeCounterNeutral : Signed.SSPPrime -> AddressCounterNeutralInstruction
+  introduceInversePrimeCounterNeutral : Signed.SSPPrime -> AddressCounterNeutralInstruction
+  introduceInvariantUnitCounterNeutral : AddressCounterNeutralInstruction
 
-eraseNeutral : AddressNeutralInstruction -> Signed.WeaveInstruction
-eraseNeutral buildNeutral = Signed.buildSixByNineFibre
-eraseNeutral removeInvariantNeutral = Signed.removeInvariantMode
-eraseNeutral (introducePrimeNeutral prime) = Signed.introducePrime prime
-eraseNeutral (introduceInversePrimeNeutral prime) = Signed.introduceInversePrime prime
-eraseNeutral introduceInvariantUnitNeutral = Signed.introduceInvariantUnit
+eraseCounterNeutral : AddressCounterNeutralInstruction -> Signed.WeaveInstruction
+eraseCounterNeutral buildCounterNeutral = Signed.buildSixByNineFibre
+eraseCounterNeutral removeInvariantCounterNeutral = Signed.removeInvariantMode
+eraseCounterNeutral (introducePrimeCounterNeutral prime) = Signed.introducePrime prime
+eraseCounterNeutral (introduceInversePrimeCounterNeutral prime) = Signed.introduceInversePrime prime
+eraseCounterNeutral introduceInvariantUnitCounterNeutral = Signed.introduceInvariantUnit
 
-neutralInstructionPreservesRefinementSteps :
-  (instruction : AddressNeutralInstruction) ->
+counterNeutralInstructionPreservesRefinementSteps :
+  (instruction : AddressCounterNeutralInstruction) ->
   (effect : Signed.WeaveEffect) ->
   Signed.refinementSteps
-    (Signed.applyInstruction (eraseNeutral instruction) effect)
+    (Signed.applyInstruction (eraseCounterNeutral instruction) effect)
   ≡ Signed.refinementSteps effect
-neutralInstructionPreservesRefinementSteps buildNeutral effect = refl
-neutralInstructionPreservesRefinementSteps removeInvariantNeutral effect = refl
-neutralInstructionPreservesRefinementSteps (introducePrimeNeutral prime) effect = refl
-neutralInstructionPreservesRefinementSteps (introduceInversePrimeNeutral prime) effect = refl
-neutralInstructionPreservesRefinementSteps introduceInvariantUnitNeutral effect = refl
+counterNeutralInstructionPreservesRefinementSteps buildCounterNeutral effect = refl
+counterNeutralInstructionPreservesRefinementSteps removeInvariantCounterNeutral effect = refl
+counterNeutralInstructionPreservesRefinementSteps (introducePrimeCounterNeutral prime) effect = refl
+counterNeutralInstructionPreservesRefinementSteps (introduceInversePrimeCounterNeutral prime) effect = refl
+counterNeutralInstructionPreservesRefinementSteps introduceInvariantUnitCounterNeutral effect = refl
 
-neutralStepAddress :
-  AddressNeutralInstruction -> SSP.Address 3 -> SSP.Address 3
-neutralStepAddress instruction address = address
+-- Minimal conservative extension policy.  This is available to a downstream
+-- compiler if explicitly selected; it is not claimed as recovered source law.
+conservativeIdentityAddressStep :
+  AddressCounterNeutralInstruction -> SSP.Address 3 -> SSP.Address 3
+conservativeIdentityAddressStep instruction address = address
 
-neutralStepAddressIsIdentity :
-  (instruction : AddressNeutralInstruction) ->
+conservativeIdentityAddressStepIsIdentity :
+  (instruction : AddressCounterNeutralInstruction) ->
   (address : SSP.Address 3) ->
-  neutralStepAddress instruction address ≡ address
-neutralStepAddressIsIdentity instruction address = refl
+  conservativeIdentityAddressStep instruction address ≡ address
+conservativeIdentityAddressStepIsIdentity instruction address = refl
 
 ------------------------------------------------------------------------
 -- Exact max-cut consequence.
@@ -63,15 +73,22 @@ neutralStepAddressIsIdentity instruction address = refl
 record AddressDynamicsMaxCut : Set where
   constructor address-dynamics-max-cut
   field
-    buildAddressDynamicsPaid : Bool
-    removeInvariantAddressDynamicsPaid : Bool
-    introducePrimeAddressDynamicsPaid : Bool
-    introduceInversePrimeAddressDynamicsPaid : Bool
-    introduceInvariantUnitAddressDynamicsPaid : Bool
-    refineAt369AddressDynamicsPaid : Bool
+    nonRefinementCounterPreservationPaid : Bool
+    conservativeIdentityPolicyTyped : Bool
+    conservativeIdentityPolicyIsSourceSemantics : Bool
+    buildAddressSourceLawPaid : Bool
+    removeInvariantAddressSourceLawPaid : Bool
+    introducePrimeAddressSourceLawPaid : Bool
+    introduceInversePrimeAddressSourceLawPaid : Bool
+    introduceInvariantUnitAddressSourceLawPaid : Bool
+    refineAt369AddressSourceLawPaid : Bool
 
 open AddressDynamicsMaxCut public
 
 canonicalAddressDynamicsMaxCut : AddressDynamicsMaxCut
 canonicalAddressDynamicsMaxCut =
-  address-dynamics-max-cut true true true true true false
+  address-dynamics-max-cut
+    true
+    true
+    false
+    false false false false false false
