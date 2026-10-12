@@ -44,8 +44,8 @@ record QuantitativeClaim (A : Set) : Set₁ where
   constructor quantitative-claim
   field
     value : A
-    source : SourceAttribution
-    calibrationAuthority : CalibrationAuthority (evidenceClass source)
+    claimSource : SourceAttribution
+    calibrationAuthority : CalibrationAuthority (evidenceClass claimSource)
     uncertainty : Set
     uncertaintyReceipt : uncertainty
 
@@ -280,7 +280,7 @@ record SpeciesResolvedPowerTransfer : Set₁ where
     recipientSpecies : ThermalSpecies
     productPowerLoss coherentThermalResponsePower : Power
     powerPartitionReceipt : Set
-    source : SourceAttribution
+    transferSource : SourceAttribution
 
 open SpeciesResolvedPowerTransfer public
 
