@@ -9,13 +9,15 @@ def read(rel: str) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
-def test_two_static_receipts_compile_to_one_differential_receipt():
+def test_common_affine_static_pair_compiles_to_differential_receipt():
     text = read("DASHI/Physics/Foundations/CMP119AntigravityStaticPairToDifferentialMetricResponseExact.agda")
     for token in (
         "CommonRenormalizedVacuumPair",
         "staticPairToDifferentialMetricResponse",
         "normalizationDifferenceMatchesMetricResponseDifference",
         "independentDifferentialSameObjectTheoremRequiredAfterTwoStaticReceipts",
+        "independentDifferentialSameObjectTheoremRequiredAfterCommonAffinePair",
+        "commonAffineCalibrationRequired",
         "commonRenormalizationConventionRequired",
     ):
         assert token in text
