@@ -8,6 +8,8 @@ import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact
 import DASHI.Foundations.E6F3ExteriorSquareRecognitionValidation
 import DASHI.Foundations.E6F3GeneratedGroupClosureExact
 import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
+import DASHI.Foundations.AlbertJordanExternalDonorExact
+import DASHI.Foundations.FirstTitsAlbertE6F4ClassicalSourceExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
@@ -74,3 +76,47 @@ import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutExact
+import DASHI.Reasoning.AlbertF4FiniteWeylMaxCutValidation
+import DASHI.Reasoning.AlbertF4ExceptionalCapstoneExact
+import DASHI.Reasoning.AlbertF4ExceptionalCapstoneValidation
+
+-- Ternary basis / first-Tits / exceptional algebra recognition.
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsDerivationF4SignalExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsF4RootRecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsRationalE6F4RecognitionExact
+import DASHI.Mathematics.Algebra.Ternary27FirstTitsGlobalE6F4RecognitionExact
+import DASHI.Reasoning.Ternary27FirstTitsHeisenbergSchlafliBidiExact
+import DASHI.Reasoning.Ternary27FirstTitsMonster3BNormalizerFrontierExact
+import DASHI.Reasoning.E6MinusculeFirstTitsWeightBasisBridgeExact
+import DASHI.Reasoning.E6MinusculeFirstTitsTitsExtensionExact
+
+-- Trinification / Standard Model / DHR frontier.
+import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
+import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
+import DASHI.Physics.Closure.Ternary27TrinificationSU2RBreakingFrontierExact
+import DASHI.Physics.Closure.Ternary27TrinificationDHRMaxCutExact
+
+-- Gravity: historical coordinate-Laplacian diagnostics retained for comparison.
+import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
+import DASHI.Physics.Closure.E6HyperformMinimalScalarVacuumNoGoExact
+import DASHI.Physics.Closure.E6HyperformPositiveGaugeVacuumNoGoExact
+import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact
+import DASHI.Physics.Closure.E6HyperformTernary36GravityRefinementCandidateExact
+import DASHI.Physics.Closure.E6HyperformTernary36EntropyActionBoundaryExact
+
+-- Gravity: active intrinsic quadratic-class / H3 / atlas / matter programme.
+import DASHI.Physics.Closure.E6HyperformIntrinsicQuadraticLaplacianExact
+import DASHI.Physics.Closure.E6HyperformRadicalQuotientGravityBoundaryExact
+import DASHI.Physics.Closure.E6HyperformH3SameObjectEmbeddingExact
+import DASHI.Physics.Closure.E6HyperformTwoH3NondegenerateCandidateExact
+import DASHI.Physics.Closure.E6HyperformMetricDescentFrontierExact
+import DASHI.Physics.Closure.E6HyperformIntrinsicRadiationVacuumStressExact
+
+-- Measured neural/consciousness acquisition and protocol boundaries.
+import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
+import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact
+import DASHI.Governance.ConsciousnessExceptionalSelectedTPSProtocolExact
+
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
