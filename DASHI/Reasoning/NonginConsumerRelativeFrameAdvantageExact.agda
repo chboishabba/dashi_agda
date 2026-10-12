@@ -19,6 +19,7 @@ open import DASHI.Core.Prelude using (⊥)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Philosophy.NonginOriginFormalizationExact as Origin
 
 record ConsumerDistinguishesCollision
@@ -107,6 +108,14 @@ historicalCoarseFrameCannotServeOtherConsumer =
   consumerDistinctionBlocksCoarseFactorization
     historicalOtherCoordinateDistinguishesCollision
 
+historicalPublicFrameNotSufficientForOther :
+  Descent.ConsumerSufficient Origin.publicBinaryFrame hiddenOtherConsumer →
+  ⊥
+historicalPublicFrameNotSufficientForOther =
+  Descent.nonDescentWitnessBlocksSufficiency
+    (collisionToNonDescentWitness
+      historicalOtherCoordinateDistinguishesCollision)
+
 selectedCollisionDoesNotDistinguishVisibleSelf :
   visibleSelfConsumer
     (Origin.hiddenLeft Origin.debateHiddenStateWitness)
@@ -136,7 +145,33 @@ otherConsumerRecoversExactlyFromRichObserver =
     (λ state → refl)
 
 ------------------------------------------------------------------------
--- Promotion boundary.
+-- Information-order strengthening.
+--
+-- The generic consumer-descent core proves that a consumer's own observation
+-- is the canonical least-informative sufficient observer.  Specializing that
+-- theorem here strengthens the single collision witness into a universal
+-- refinement requirement for every observer that claims adequacy for the
+-- hidden-other consumer.
+------------------------------------------------------------------------
+
+historicalOtherConsumerIsLeast :
+  Descent.LeastSufficientConsumerObserver hiddenOtherConsumer
+historicalOtherConsumerIsLeast =
+  Descent.canonicalConsumerObserverIsLeast hiddenOtherConsumer
+
+everyOtherAdequateObserverRefinesHiddenOther :
+  ∀ {Surface : Set}
+    (observe : Origin.DebateState → Surface) →
+  Descent.ConsumerSufficient observe hiddenOtherConsumer →
+  Observer.Refines hiddenOtherConsumer observe
+everyOtherAdequateObserverRefinesHiddenOther observe sufficient =
+  Descent.belowEverySufficient
+    historicalOtherConsumerIsLeast
+    observe
+    sufficient
+
+------------------------------------------------------------------------
+-- Promotion boundaries.
 ------------------------------------------------------------------------
 
 record NonginConsumerRelativeFrameAdvantageBoundary : Set where
@@ -161,3 +196,20 @@ canonicalNonginConsumerRelativeFrameAdvantageBoundary =
     false
     false
     false
+
+record NonginLeastSufficientObserverBoundary : Set where
+  constructor nongin-least-sufficient-observer-boundary
+  field
+    hiddenOtherConsumerIsLeastSufficient : Bool
+    everyAdequateObserverRefinesHiddenOther : Bool
+    publicBinaryFrameAdequateForHiddenOther : Bool
+    leastSufficientMeansWorldComplete : Bool
+    oneObserverBestForEveryConsumer : Bool
+
+open NonginLeastSufficientObserverBoundary public
+
+canonicalNonginLeastSufficientObserverBoundary :
+  NonginLeastSufficientObserverBoundary
+canonicalNonginLeastSufficientObserverBoundary =
+  nongin-least-sufficient-observer-boundary
+    true true false false false
