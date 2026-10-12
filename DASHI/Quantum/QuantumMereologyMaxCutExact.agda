@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as Repair
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySelectionExact as Selection
 import DASHI.Quantum.QuantumMereologySchwingerObjectiveExact as Schwinger
@@ -31,6 +32,8 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 -- * a criterion collision that changes a geometry-sensitive consumer blocks
 --   descent/factorisation and forces every adequate refinement to separate the
 --   witnessed pair;
+-- * the geometry consumer itself is the canonical least-sufficient observer:
+--   every observer adequate for that consumer must refine it;
 -- * spacetime remains a separate promotion witness.
 ------------------------------------------------------------------------
 
@@ -175,6 +178,47 @@ geometryCriterionCollisionForcesSeparationInEveryRepair =
   Selection.criterionCollisionForcesSeparationInEveryRepair
 
 ------------------------------------------------------------------------
+-- LEAST-SUFFICIENT GEOMETRY OBSERVER
+--
+-- Productive cross-pollination from the repository's generic observer lattice:
+-- the geometry consumer itself is the canonical least-informative observer that
+-- is sufficient for that declared geometry outcome.  Hence any criterion,
+-- boundary encoding, compressed representation or holographic observation that
+-- claims adequacy for this geometry consumer must refine the consumer outcome.
+-- This is consumer-relative and makes no claim that one geometry outcome is a
+-- complete observer of the quantum world.
+------------------------------------------------------------------------
+
+geometryConsumerObserverIsLeast :
+  ∀ {W}
+    {D : Schwinger.SchwingerSearchData W} →
+  (G : GeometryCriterionConsumer D) →
+  Descent.LeastSufficientConsumerObserver
+    (geometryOutcome G)
+geometryConsumerObserverIsLeast G =
+  Descent.canonicalConsumerObserverIsLeast
+    (geometryOutcome G)
+
+everyGeometryAdequateObserverRefinesGeometryOutcome :
+  ∀ {W}
+    {D : Schwinger.SchwingerSearchData W}
+    {G : GeometryCriterionConsumer D}
+    {BoundarySurface : Set} →
+  (observeBoundary : Schwinger.Candidate D → BoundarySurface) →
+  Descent.ConsumerSufficient
+    observeBoundary
+    (geometryOutcome G) →
+  Observer.Refines
+    (geometryOutcome G)
+    observeBoundary
+everyGeometryAdequateObserverRefinesGeometryOutcome {G = G}
+    observeBoundary sufficient =
+  Descent.belowEverySufficient
+    (geometryConsumerObserverIsLeast G)
+    observeBoundary
+    sufficient
+
+------------------------------------------------------------------------
 -- SPACETIME REMAINS A SEPARATE PROMOTION
 ------------------------------------------------------------------------
 
@@ -231,6 +275,14 @@ record QuantumMereologyMaxCutBoundary : Set where
     geometryCriterionCollisionCreatesRefinementObligationIsTrue :
       geometryCriterionCollisionCreatesRefinementObligation ≡ true
 
+    geometryConsumerObserverIsLeastSufficient : Bool
+    geometryConsumerObserverIsLeastSufficientIsTrue :
+      geometryConsumerObserverIsLeastSufficient ≡ true
+
+    holographicBoundaryAdequacyIsConsumerRelative : Bool
+    holographicBoundaryAdequacyIsConsumerRelativeIsTrue :
+      holographicBoundaryAdequacyIsConsumerRelative ≡ true
+
 open QuantumMereologyMaxCutBoundary public
 
 canonicalQuantumMereologyMaxCutBoundary :
@@ -244,6 +296,10 @@ canonicalQuantumMereologyMaxCutBoundary = record
   ; spatialGeometryCreatesSpacetimeIsFalse = refl
   ; geometryCriterionCollisionCreatesRefinementObligation = true
   ; geometryCriterionCollisionCreatesRefinementObligationIsTrue = refl
+  ; geometryConsumerObserverIsLeastSufficient = true
+  ; geometryConsumerObserverIsLeastSufficientIsTrue = refl
+  ; holographicBoundaryAdequacyIsConsumerRelative = true
+  ; holographicBoundaryAdequacyIsConsumerRelativeIsTrue = refl
   }
 
 dashiQuantumMereologyMaxCutReceipt : Sources.AttributionReceipt
@@ -251,4 +307,4 @@ dashiQuantumMereologyMaxCutReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI"
-    "Composes the existing Carroll--Singh-shaped Schwinger selection, exact selected-TPS indexing, factor-relation geometry, consumer-descent/refinement no-go, and separately witnessed spacetime promotion. It creates no minimizer, CPO eigenprojector, pair-relation geometry, spacetime gluing, Einstein dynamics, or empirical authority."
+    "Composes the existing Carroll--Singh-shaped Schwinger selection, exact selected-TPS indexing, factor-relation geometry, consumer-descent/refinement no-go, canonical least-sufficient geometry observer, and separately witnessed spacetime promotion. Any criterion or boundary observer adequate for the declared geometry consumer must refine that consumer outcome. It creates no minimizer, CPO eigenprojector, pair-relation geometry, holographic dictionary, spacetime gluing, Einstein dynamics, or empirical authority."
