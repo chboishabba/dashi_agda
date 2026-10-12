@@ -31,11 +31,11 @@ def test_recommendation_rejects_unsafe_radius_and_keeps_safe_scales():
         100,
         100,
         20,
-        budget_bytes=250_000_000,
+        budget_bytes=200_000_000,
         radii=(0, 1, 2, 3),
         steps=(1,),
     )
-    assert plan["budget_bytes"] == 250_000_000
+    assert plan["budget_bytes"] == 200_000_000
     assert any(item["safe"] for item in plan["candidates"])
     assert any(not item["safe"] for item in plan["candidates"])
     assert plan["largest_safe_candidate"] is not None
