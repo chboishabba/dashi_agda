@@ -29,11 +29,22 @@ EXPECTED = {
 }
 
 
+def decode_cache(path: Path) -> list[float]:
+    payload = json.loads(path.read_text())
+    scale = int(payload["scale"])
+    encoded = [int(x) for x in payload["first_plus_deltas"]]
+    values = []
+    current = 0
+    for index, value in enumerate(encoded):
+        current = value if index == 0 else current + value
+        values.append(current / scale)
+    return values
+
+
 class MonsterClimbingGymReplayTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        payload = json.loads(ZERO_CACHE.read_text())
-        cls.zeros = [float(x) for x in payload["ordinates"]]
+        cls.zeros = decode_cache(ZERO_CACHE)
 
     def test_cache_contains_exactly_849_ordered_positive_ordinates(self) -> None:
         self.assertEqual(len(self.zeros), 849)
