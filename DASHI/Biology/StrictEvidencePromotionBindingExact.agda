@@ -6,10 +6,9 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- STRICT SAME-OBJECT / SAME-SCOPE PROMOTION BINDING
 --
--- This owner addresses the generic gap where a validation receipt and a causal
--- estimand can have compatible types yet belong to unrelated evidence.  A
--- strict binding is indexed by the exact claim/evidence/estimand values and
--- carries equality witnesses tying externally visible keys to those values.
+-- Key equalities preserve stable externally visible identifiers.  The actual
+-- promotion obligations are proof-relevant relations indexed by the exact
+-- claim/evidence/estimand objects; arbitrary narrative strings cannot pay them.
 ------------------------------------------------------------------------
 
 record StrictPromotionBinding
@@ -17,6 +16,8 @@ record StrictPromotionBinding
     (claimKey : Claim → String)
     (evidenceKey : Evidence → String)
     (estimandScopeKey : Estimand → String)
+    (evidencePaysClaim : Evidence → Claim → Set)
+    (evidenceMatchesEstimand : Evidence → Estimand → Set)
     (claim : Claim)
     (evidence : Evidence)
     (estimand : Estimand) : Set where
@@ -28,8 +29,8 @@ record StrictPromotionBinding
     boundEvidenceKeyMatches : boundEvidenceKey ≡ evidenceKey evidence
     boundEstimandScopeKey : String
     boundEstimandScopeKeyMatches : boundEstimandScopeKey ≡ estimandScopeKey estimand
-    evidencePaysClaimReference : String
-    estimandMatchesEvidenceScopeReference : String
+    evidencePaysClaimWitness : evidencePaysClaim evidence claim
+    evidenceMatchesEstimandWitness : evidenceMatchesEstimand evidence estimand
     identificationReference : String
 
 open StrictPromotionBinding public
@@ -38,6 +39,7 @@ record StrictPromotionPair
     {Claim Evidence : Set}
     (claimKey : Claim → String)
     (evidenceKey : Evidence → String)
+    (evidencePaysClaim : Evidence → Claim → Set)
     (claim : Claim)
     (evidence : Evidence) : Set where
   constructor strict-promotion-pair
@@ -46,7 +48,7 @@ record StrictPromotionPair
     pairClaimKeyMatches : pairClaimKey ≡ claimKey claim
     pairEvidenceKey : String
     pairEvidenceKeyMatches : pairEvidenceKey ≡ evidenceKey evidence
-    pairEvidencePaysClaimReference : String
+    pairEvidencePaysClaimWitness : evidencePaysClaim evidence claim
     pairSameObjectReference : String
 
 open StrictPromotionPair public
