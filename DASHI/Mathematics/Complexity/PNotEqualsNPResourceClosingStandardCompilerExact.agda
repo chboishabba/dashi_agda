@@ -3,7 +3,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingStandardCompilerE
 ------------------------------------------------------------------------
 -- RESOURCE-CLOSING STANDARD COMPILER WITH EXPLICIT CANDIDATE SUBRUN
 --
--- A bare endpoint equality can hide the hard theorem.  This owner strengthens
+-- A bare endpoint equality can hide the hard theorem. This owner strengthens
 -- the fixed-program compiler so the target machine must visibly contain:
 --
 --   prefix/setup
@@ -11,8 +11,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingStandardCompilerE
 --      ; finite negation suffix.
 --
 -- The candidate middle run is the exact run already stored in the conventional
--- finite standard candidate witness.  A StandardMachineSimulation maps every
--- one of its edges into the target fixed machine.  Total time is the literal
+-- finite standard candidate witness. A StandardMachineSimulation maps every
+-- one of its edges into the target fixed machine. Total time is the literal
 -- sum prefix + candidate + suffix, transported to the Cook budget T.
 ------------------------------------------------------------------------
 
@@ -98,14 +98,14 @@ record ResourceClosingFixedProgramCompilation
         finish
 
     totalStepsExact :
-      ((prefixSteps
+      (prefixSteps
         + Candidate.exactSteps
             (Clocked.standard clocked)
-            (StandardOpposite.fixedCookFormula fixed))
+            (StandardOpposite.fixedCookFormula fixed)
         + suffixSteps)
       ≡ StandardOpposite.steps fixed
 
-    -- The suffix performs only the final Boolean polarity change.  It is stated
+    -- The suffix performs only the final Boolean polarity change. It is stated
     -- against the literal finite-control observations of source and target.
     negationExact :
       Local.decideEqual
