@@ -4,6 +4,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralResourceCompilerAnch
 -- ANCHORED NO-GO FOR THE FORMER LITERAL RESOURCE-CLOSING COMPILER
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥)
@@ -25,6 +26,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingBudgetNecessityEx
 import DASHI.Mathematics.Complexity.PNotEqualsNPStructuralPrefixSpanNecessityExact as Prefix
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedLiteralSelfQuotationPositiveBudgetNoGoExact as LiteralNoGo
 import DASHI.Mathematics.Complexity.PolynomialClockArithmeticExact as Clock
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as Binary
 
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
@@ -32,7 +34,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
+import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
+import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Forward
 
 powerAtLeastOne :
   (base degree : Nat) →
@@ -100,17 +104,13 @@ zeroBudgetForcesClockCoefficientZero closure candidate structuralResource =
       coefficientBelowPolynomialBudget
         (Decider.clockCoefficient witness)
         (Decider.clockDegree witness)
-        (DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact.formulaBitCodeLength ownFormula)
+        (Binary.formulaBitCodeLength ownFormula)
 
     coefficientBelowZero :
       Decider.clockCoefficient witness ≤ zero
     coefficientBelowZero
       rewrite sym ownStepsZero =
       coefficientBelowOwn
-
-------------------------------------------------------------------------
--- Zero coefficient makes every exact candidate run a zero-step run.
-------------------------------------------------------------------------
 
 zeroRunFinishExact :
   ∀ {State Symbol : Set}
@@ -122,12 +122,12 @@ zeroRunFinishExact Run.standardRunDone = refl
 
 guardedStartStateInitial :
   ∀ {machine : Local.ConcreteTapeMachine}
-    (input : DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact.InputWord machine)
+    (input : Input.InputWord machine)
     (steps : Nat) →
   Standard.state (Language.guardedStandardStart input steps)
   ≡ Standard.initialState (Standard.standardControlOfConcrete machine)
-guardedStartStateInitial input steps =
-  DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact.concreteInitialProjectsToStandardInitial
+guardedStartStateInitial {machine} input steps =
+  Forward.concreteInitialProjectsToStandardInitial
     (Language.guardedInitialUnique input steps)
     initialEndpoint
   where
@@ -157,11 +157,9 @@ zeroCoefficientDecisionConstant closure candidate coefficientZero left right =
         (sym (endpointConstant right))
         (Candidate.decisionExact standard right)))
   where
-    witness = LiteralNoGo.codedWitness closure candidate
     clocked = LiteralNoGo.codedClockedCandidate closure candidate
     standard = Clocked.standard clocked
     presentation = Candidate.presentation standard
-    machine = Candidate.candidateConcreteMachine standard
 
     stepsZero :
       (formula : Cook.BooleanFormula) →
@@ -210,10 +208,6 @@ zeroCoefficientDecisionConstant closure candidate coefficientZero left right =
             (Presented.acceptingState presentation))
         (finishStateInitial formula)
 
-------------------------------------------------------------------------
--- Anchors rule out the literal compiler outright.
-------------------------------------------------------------------------
-
 anchoredLiteralStructuralResourceImpossible :
   (closure : Cost.CodedStandardCostClosure)
   (anchored :
@@ -249,8 +243,6 @@ anchoredLiteralStructuralResourceImpossible closure anchored structuralResource 
           (Direct.rejectsKnownUnsatisfiable anchored))
 
 ------------------------------------------------------------------------
--- This closes the old literal B route for the only candidates that matter to
--- SAT lower-bound proof search: candidates already wrong are done; candidates
--- not already wrong can be restricted to the anchored case. The replacement
--- must be virtual/streaming, not full same-tape quotation materialisation.
+-- The literal B route is closed for anchored coded candidates. The surviving
+-- architecture must be virtual/streaming and resource-accounted.
 ------------------------------------------------------------------------
