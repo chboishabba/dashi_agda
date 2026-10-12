@@ -4,12 +4,12 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingTokenBis
 -- TOKEN-CURSOR BISIMULATION AGAINST THE CANONICAL CNF -> COOK PREFIX STREAM
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Maybe using (Maybe; nothing; just)
+open import Agda.Builtin.Maybe using (nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_,_)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -113,7 +113,7 @@ stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget
 stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.negativeVariableBodyAt clauseIndex index literals) =
   Prefix.formulaVariableToken
-  ∷ Prefix.encodeNatInto (Data.Fin.Base.toℕ index)
+  ∷ Prefix.encodeNatInto (Fin.toℕ index)
       (Tokens.clauseTokensInto literals
         (Tokens.cnfTokens
           (drop (suc clauseIndex)
@@ -131,35 +131,10 @@ stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget
     Cursor.tokenDone = []
 
 ------------------------------------------------------------------------
--- One token step is exactly head/tail decomposition of the specification.
+-- One token step is exactly head/tail decomposition of the canonical suffix.
 ------------------------------------------------------------------------
 
-record TokenStepExact
-    {width : Nat}
-    (tokens : List Prefix.CookSyntaxToken)
-    (step : Maybe (Prefix.CookSyntaxToken × Cursor.TokenCursorState width)) : Set where
-  field
-    emptyExact : tokens ≡ [] → step ≡ nothing
-    emittedExact :
-      ∀ {token next} →
-      step ≡ just (token , next) →
-      ΣTail tokens token next
-  where
-    record ΣTail
-        (tokens : List Prefix.CookSyntaxToken)
-        (token : Prefix.CookSyntaxToken)
-        (next : Cursor.TokenCursorState width) : Set where
-      field
-        tail : List Prefix.CookSyntaxToken
-        tokensExact : tokens ≡ token ∷ tail
-
-open TokenStepExact public
-
-------------------------------------------------------------------------
--- A simpler state-relative receipt used by the proof and later bit lift.
-------------------------------------------------------------------------
-
-record TokenStateStepExact
+data TokenStateSpec
     {machine : Local.ConcreteTapeMachine}
     (stateCoverage : Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage : Canonical.EnumerationCoverage (Local.finiteSymbol machine))
@@ -168,27 +143,31 @@ record TokenStateStepExact
     (initialTarget : CNF.Bits (Decode.RowBitsWidth machine cols))
     (state : Cursor.TokenCursorState
       (Endpoint.ExtendedGlobalWidth machine steps cols)) : Set where
-  field
-    doneCase :
-      stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget state ≡ [] →
-      Cursor.nextToken stateCoverage symbolCoverage nonempty steps cols initialTarget state
-      ≡ nothing
 
-    stepCase :
-      ∀ {token next} →
-      Cursor.nextToken stateCoverage symbolCoverage nonempty steps cols initialTarget state
-      ≡ just (token , next) →
-      stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget state
-      ≡ token ∷
-        stateTokens stateCoverage symbolCoverage nonempty steps cols initialTarget next
+  specDone :
+    Cursor.nextToken
+      stateCoverage symbolCoverage nonempty steps cols initialTarget state
+    ≡ nothing →
+    stateTokens
+      stateCoverage symbolCoverage nonempty steps cols initialTarget state
+    ≡ [] →
+    TokenStateSpec
+      stateCoverage symbolCoverage nonempty steps cols initialTarget state
 
-open TokenStateStepExact public
+  specStep :
+    ∀ {token next} →
+    Cursor.nextToken
+      stateCoverage symbolCoverage nonempty steps cols initialTarget state
+    ≡ just (token , next) →
+    stateTokens
+      stateCoverage symbolCoverage nonempty steps cols initialTarget state
+    ≡ token ∷
+      stateTokens
+        stateCoverage symbolCoverage nonempty steps cols initialTarget next →
+    TokenStateSpec
+      stateCoverage symbolCoverage nonempty steps cols initialTarget state
 
-------------------------------------------------------------------------
--- Main one-step bisimulation.
-------------------------------------------------------------------------
-
-tokenStateStepExact :
+tokenStateSpec :
   ∀ {machine : Local.ConcreteTapeMachine}
     (stateCoverage : Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage : Canonical.EnumerationCoverage (Local.finiteSymbol machine))
@@ -197,104 +176,71 @@ tokenStateStepExact :
     (initialTarget : CNF.Bits (Decode.RowBitsWidth machine cols))
     (state : Cursor.TokenCursorState
       (Endpoint.ExtendedGlobalWidth machine steps cols)) →
-  TokenStateStepExact
+  TokenStateSpec
     stateCoverage symbolCoverage nonempty steps cols initialTarget state
-tokenStateStepExact
+tokenStateSpec
     stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.cnfAt clauseIndex)
     with StreamClause.globalClauseSeek
       stateCoverage symbolCoverage nonempty steps cols initialTarget clauseIndex
        | StreamClause.globalClauseSeekExact
           stateCoverage symbolCoverage nonempty steps cols initialTarget clauseIndex
-... | Seek.found clause | exact = record
-  { doneCase = λ impossible → contradiction impossible
-  ; stepCase = λ { refl →
-      congTokens
-        (seekFoundDrop clauseIndex formula clause exact) }
-  }
+... | Seek.found clause | exact =
+  specStep refl
+    (tokensFound
+      (seekFoundDrop clauseIndex formula clause exact))
   where
-    formula = globalFormula stateCoverage symbolCoverage nonempty steps cols initialTarget
+    formula =
+      globalFormula stateCoverage symbolCoverage nonempty steps cols initialTarget
 
-    contradiction :
-      Tokens.cnfTokens (drop clauseIndex formula) ≡ [] →
-      Cursor.nextToken stateCoverage symbolCoverage nonempty steps cols initialTarget
-        (Cursor.cnfAt clauseIndex) ≡ nothing
-    contradiction impossible
-      rewrite seekFoundDrop clauseIndex formula clause exact
-      with impossible
-    ... | ()
-
-    congTokens :
+    tokensFound :
       drop clauseIndex formula ≡ clause ∷ drop (suc clauseIndex) formula →
       Tokens.cnfTokens (drop clauseIndex formula)
       ≡ Prefix.formulaAndToken ∷
           Tokens.clauseTokensInto clause
             (Tokens.cnfTokens (drop (suc clauseIndex) formula))
-    congTokens refl = refl
-... | Seek.exhausted remaining | exact = record
-  { doneCase = λ empty → refl
-  ; stepCase = λ { refl →
-      congTrue
-        (seekExhaustedDrop clauseIndex remaining formula exact) }
-  }
+    tokensFound refl = refl
+... | Seek.exhausted remaining | exact =
+  specStep refl
+    (tokensExhausted
+      (seekExhaustedDrop clauseIndex remaining formula exact))
   where
-    formula = globalFormula stateCoverage symbolCoverage nonempty steps cols initialTarget
+    formula =
+      globalFormula stateCoverage symbolCoverage nonempty steps cols initialTarget
 
-    congTrue :
+    tokensExhausted :
       drop clauseIndex formula ≡ [] →
       Tokens.cnfTokens (drop clauseIndex formula)
       ≡ Prefix.formulaTrueToken ∷ []
-    congTrue refl = refl
+    tokensExhausted refl = refl
 
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.clauseAt clauseIndex []) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.clauseAt clauseIndex (CNF.positive index ∷ literals)) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.clauseAt clauseIndex (CNF.negative index ∷ literals)) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.positiveVariableAt clauseIndex index literals) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.negativeVariableAt clauseIndex index literals) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.negativeVariableBodyAt clauseIndex index literals) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.natAt clauseIndex zero literals) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    (Cursor.natAt clauseIndex (suc n) literals) = record
-  { doneCase = λ ()
-  ; stepCase = λ { refl → refl }
-  }
-tokenStateStepExact stateCoverage symbolCoverage nonempty steps cols initialTarget
-    Cursor.tokenDone = record
-  { doneCase = λ refl → refl
-  ; stepCase = λ ()
-  }
-
-------------------------------------------------------------------------
--- Initial state specification is exactly the canonical direct CNF token stream.
-------------------------------------------------------------------------
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.clauseAt clauseIndex []) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.clauseAt clauseIndex (CNF.positive index ∷ literals)) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.clauseAt clauseIndex (CNF.negative index ∷ literals)) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.positiveVariableAt clauseIndex index literals) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.negativeVariableAt clauseIndex index literals) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.negativeVariableBodyAt clauseIndex index literals) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.natAt clauseIndex zero literals) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    (Cursor.natAt clauseIndex (suc n) literals) =
+  specStep refl refl
+tokenStateSpec stateCoverage symbolCoverage nonempty steps cols initialTarget
+    Cursor.tokenDone =
+  specDone refl refl
 
 initialStateTokensExact :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -312,6 +258,6 @@ initialStateTokensExact :
 initialStateTokensExact stateCoverage symbolCoverage nonempty steps cols initialTarget = refl
 
 ------------------------------------------------------------------------
--- This pays the token-level stream bisimulation.  The next owner lifts it
--- through the fixed three-bit token code to `streamedCookBit`.
+-- Token-level stream bisimulation is paid here.  The next owner lifts this
+-- exact head/tail relation through the fixed three-bit token code.
 ------------------------------------------------------------------------
