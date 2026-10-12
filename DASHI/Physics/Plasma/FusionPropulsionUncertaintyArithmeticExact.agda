@@ -28,7 +28,7 @@ record SquareRootScalingWitness : Set where
     squaredGrowthIdentity :
       growthRateScale * growthRateScale ≡
       (growthCoefficient * growthCoefficient) * minorityDensityScale
-    source : MaxCut.SourceAttribution
+    scalingSource : MaxCut.SourceAttribution
 
 open SquareRootScalingWitness public
 
@@ -74,9 +74,9 @@ record PB11ReactivityFamily : Set₁ where
       PB11CrossSectionModel → Reactivity
     nuisance : MaxCut.CrossSectionNuisanceParameters
     propagationReceipt : Set
-    source : MaxCut.SourceAttribution
+    reactivitySource : MaxCut.SourceAttribution
     sourceIsPlannedMeasurement :
-      MaxCut.evidenceClass source ≡ MaxCut.plannedMeasurement
+      MaxCut.evidenceClass reactivitySource ≡ MaxCut.plannedMeasurement
 
 open PB11ReactivityFamily public
 
