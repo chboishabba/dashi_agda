@@ -9,4 +9,6 @@ import DASHI.Ontology.EducationViaOntologyExact
 import DASHI.Ontology.EducationViaOntologyValidation
 import DASHI.Ontology.EducationOntologyMappingSSSOMExact
 import DASHI.Ontology.EducationOntologyMappingValidation
+import DASHI.Ontology.EducationOntologyMappingPNFExact
+import DASHI.Ontology.EducationOntologyMappingPNFValidation
 import Ontology.Hecke.Everything
