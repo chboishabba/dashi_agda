@@ -1,23 +1,40 @@
 module DASHI.Moonshine.OggSSPKernelFieldActionAcquisitionFrontierExact where
 
 ------------------------------------------------------------------------
--- RICHER-ACTION ACQUISITION FRONTIER FOR CANONICAL GF(3^d) RECOGNITION
+-- RICHER-ACTION ACQUISITION FRONTIER FOR CANONICAL GF(3^6) RECOGNITION
 --
--- #1105 proves that the entire currently paid standard finite-Heisenberg/
--- symplectic carrier admits a coordinate symmetry which changes the selected
--- GF(3^6) multiplication.  This module audits the obvious richer action lanes
--- already present in the repository and records the first genuinely external
--- source seam in each lane.
+-- #1105 proves that the currently paid standard finite-Heisenberg/symplectic
+-- carrier does not canonically select the chosen GF(3^6) multiplication.
 --
--- The target is not another cardinality match.  We need an independently owned
--- F3-linear endomorphism of the SAME X6/Kernel6 carrier whose action breaks the
--- no-go symmetry and whose minimal polynomial can support a degree-six field
--- algebra.  Once such an operator is sourced, the selected presentation can be
--- compared rather than postulated.
+-- A later exceptional/Monster tranche (#1098) materially changes the positive
+-- target: ATLAS/Breuer--Magaard--Wilson now supply a certified absolutely
+-- irreducible 12-dimensional GF(3) symplectic module for 2.Suz:2 in the
+-- Monster-3B normalizer.  Absolute irreducibility means the FULL normalizer
+-- cannot preserve a nonzero six-dimensional X6 submodule globally.
+--
+-- Therefore the correct field-selection experiment is not
+--
+--     whole normalizer -> global X6 -> X6 operator.
+--
+-- It is
+--
+--     imported symplectic-12 action
+--       -> same-basis weld to X6 + X6*
+--       -> selected element/subgroup stabilising the chosen X6 Lagrangian
+--       -> induced 6x6 GF(3) operator
+--       -> characteristic/minimal polynomial
+--       -> irreducible degree-six receipt, if one exists
+--       -> separate GF(729) same-object/action recognition.
+--
+-- PR #1098 now owns an acquisition helper plus a matrix consumer implementing
+-- the invariant alternating-form solve, symplectic normalization, Heisenberg
+-- cocycle correction, Lagrangian-stabilizer word search, and 6x6 polynomial
+-- factor test.  The actual ATLAS matrix entries remain external input.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
 import DASHI.Moonshine.OggSSPHeisenbergSymplecticFieldNoGoExact as NoGo
@@ -28,10 +45,6 @@ import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as Shortes
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
 import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as Projected
 import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
-
-------------------------------------------------------------------------
--- Existing source statuses.
-------------------------------------------------------------------------
 
 standardHeisenbergSymplecticSelectsFieldProduct : Bool
 standardHeisenbergSymplecticSelectsFieldProduct =
@@ -58,9 +71,6 @@ rankOneActualWeilPairingTransportPaidIsFalse :
   rankOneActualWeilPairingTransportPaid ≡ false
 rankOneActualWeilPairingTransportPaidIsFalse = refl
 
--- ActualMonster3BActionRecognition is NOT an independent leaf: once a shortest
--- 3B source exists, Trialectic369Shortest3BActionSourceBridgeExact compiles it.
--- The genuinely external seam is one step earlier, at the Base369 candidate.
 base369ShortestCandidateInhabitedHere : Bool
 base369ShortestCandidateInhabitedHere =
   Candidate.base369CandidateInhabitedHere
@@ -79,12 +89,6 @@ shortestSourceWouldCompileActualMonsterActionIsTrue :
   shortestSourceWouldCompileActualMonsterAction ≡ true
 shortestSourceWouldCompileActualMonsterActionIsTrue = refl
 
--- The selected-3B *linear* route has also been audited.  It is a large
--- constituent/Hom-space action route, not an X6 endomorphism.  Its canonical
--- core and same-action equation are both still source obligations; the
--- projected route separately lacks the actual retraction and projected-action
--- equation.  Consequently this stack cannot currently be mined for a hidden
--- X6 -> X6 field generator.
 selected3BLinearCoreInhabitedHere : Bool
 selected3BLinearCoreInhabitedHere =
   LinearCore.canonicalCoreInhabitedHere
@@ -121,9 +125,6 @@ selected3BProjectedActionEquationInhabitedHereIsFalse :
   selected3BProjectedActionEquationInhabitedHere ≡ false
 selected3BProjectedActionEquationInhabitedHereIsFalse = refl
 
--- The older direct owner still correctly says it does not inhabit the source
--- locally; the compiler chain above explains how that Bool becomes irrelevant
--- once the Base369 candidate is actually supplied.
 actualMonsterActionRecognitionInhabitedLocally : Bool
 actualMonsterActionRecognitionInhabitedLocally =
   Actual.actualActionRecognitionInhabitedHere
@@ -143,21 +144,18 @@ exceptionalMonsterAlbertSameActionPaidIsFalse :
 exceptionalMonsterAlbertSameActionPaidIsFalse = refl
 
 ------------------------------------------------------------------------
--- Exact next positive target.
---
--- `breaksCoordinateSwap` is deliberately proof-relevant rather than a Bool:
--- the acquired operator must visibly distinguish the symmetry responsible for
--- the current no-go.  `degreeSixFieldGeneratorReceipt` stays abstract until
--- the repository owns an independently checked minimal-polynomial interface.
+-- Correct post-ATLAS positive target.
 ------------------------------------------------------------------------
 
-record RicherK6FieldSelectingAction : Set₁ where
+record SymplecticTwelveLagrangianFieldSelector : Set₁ where
   field
-    operator : H.X6 → H.X6
+    SourceSymplecticTwelve : Set
+    sourceElementOrSubgroup : Set
+    preservesChosenLagrangian : Set
+    inducedOperator : H.X6 → H.X6
     breaksCoordinateSwap : Set
     degreeSixFieldGeneratorReceipt : Set
-
-open RicherK6FieldSelectingAction public
+open SymplecticTwelveLagrangianFieldSelector public
 
 record FieldActionAcquisitionBoundary : Set where
   constructor field-action-acquisition-boundary
@@ -165,15 +163,23 @@ record FieldActionAcquisitionBoundary : Set where
     standardHeisenbergSymplecticLaneExhausted : Bool
     rankOneWeilLaneNeedsActualTorsionTransport : Bool
     shortest3BCompilerChainLocated : Bool
-    shortest3BLaneNeedsBase369CandidateSource : Bool
-    selected3BLinearLaneNeedsCanonicalCore : Bool
-    selected3BProjectedLaneNeedsRetractionAndEquation : Bool
+    selected3BLargeLinearRouteNotAnX6Operator : Bool
     exceptionalF4E6LaneNeedsSameActionRecognition : Bool
-    independentlyOwnedK6FieldSelectingOperatorLocated : Bool
+    certifiedExternalSymplectic12SourceLocatedOn1098 : Bool
+    sourceTwelveModuleAbsolutelyIrreducible : Bool
+    fullNormalizerGlobalX6TargetRejected : Bool
+    lagrangianStabilizerFieldSelectorInterfaceTyped : Bool
+    invariantFormBasisCocyclePolynomialAnalyzerInstalledOn1098 : Bool
+    actualAtlasMatricesImported : Bool
+    actualDegreeSixFieldCandidatePaid : Bool
     fullFieldRecognitionReady : Bool
+    note : String
+open FieldActionAcquisitionBoundary public
 
 canonicalFieldActionAcquisitionBoundary : FieldActionAcquisitionBoundary
 canonicalFieldActionAcquisitionBoundary =
   field-action-acquisition-boundary
-    true true true true true true true
-    false false
+    true true true true true
+    true true true true true
+    false false false
+    "The field-recognition frontier has moved beyond a hypothetical global X6 endomorphism. PR #1098 locates the absolutely irreducible symplectic-12 Monster-3B normalizer source and installs the exact matrix consumer. The remaining external payment is the actual ATLAS generator entries; after import, field candidates must arise only from source elements/subgroups stabilising the chosen X6 Lagrangian, followed by an irreducible degree-six polynomial receipt and the separate GF(729) recognition contract."
