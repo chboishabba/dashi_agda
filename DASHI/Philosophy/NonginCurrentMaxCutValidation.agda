@@ -11,6 +11,14 @@ boundary = Nongin.canonicalNonginCurrentMaxCutBoundary
 consumerRelativeCorePaid : Nongin.consumerRelativeCorePaid boundary ≡ true
 consumerRelativeCorePaid = refl
 
+leastSufficientHiddenOtherObserverPaid :
+  Nongin.leastSufficientHiddenOtherObserverPaid boundary ≡ true
+leastSufficientHiddenOtherObserverPaid = refl
+
+everyAdequateObserverRefinesHiddenOtherPaid :
+  Nongin.everyAdequateObserverRefinesHiddenOtherPaid boundary ≡ true
+everyAdequateObserverRefinesHiddenOtherPaid = refl
+
 recursiveObserverReopeningPaid :
   Nongin.recursiveObserverReopeningPaid boundary ≡ true
 recursiveObserverReopeningPaid = refl
