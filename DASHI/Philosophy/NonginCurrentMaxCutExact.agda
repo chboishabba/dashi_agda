@@ -103,9 +103,9 @@ T9LocalComplementFactorizationPaid :
   Local.localTimesComplementFactorizationPaid localBoundary ≡ true
 T9LocalComplementFactorizationPaid = refl
 
-pointedRestrictionRepairPaid :
+pointedRestrictionRepairReceipt :
   Local.pointedRestrictionRepairOwned localBoundary ≡ true
-pointedRestrictionRepairPaid = refl
+pointedRestrictionRepairReceipt = refl
 
 selectedCornerStarSameObjectPaid :
   Cech.selectedCornerStarModelSameObjectPromotionPaid cechBoundary ≡ true
