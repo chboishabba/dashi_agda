@@ -118,7 +118,7 @@ chapter4IntroducingTheStarsPages =
     "Chapter 4. Introducing the Stars"
     "85-92"
     "https://www.jstor.org/stable/10.14321/j.ctt7zt6t5.10"
-    false
+    true
 
 chapter5BreakingThroughBarrierPages : ChapterPageLocator
 chapter5BreakingThroughBarrierPages =
@@ -126,7 +126,7 @@ chapter5BreakingThroughBarrierPages =
     "Chapter 5. Breaking through the Barrier"
     "93-104"
     "https://www.jstor.org/stable/10.14321/j.ctt7zt6t5.11"
-    false
+    true
 
 chapter6EscapeFromRealityPages : ChapterPageLocator
 chapter6EscapeFromRealityPages =
