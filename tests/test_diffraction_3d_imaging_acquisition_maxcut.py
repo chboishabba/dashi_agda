@@ -19,6 +19,8 @@ REQUIRED = {
     ],
     "DASHI/Physics/Optics/BerkeleyDiffuserCamDepthConditioningExact.agda": [
         "conditioningAuditScript",
+        "conditioningSelfTestScript",
+        "offlineSyntheticOperatorSelfTestExecutable",
         "sourceOperatorSelectedGridColumnCompilerPaid",
         "depthOnlySameLateralAuditExecutable",
         "translatedColumnRestrictedAuditExecutable",
@@ -53,10 +55,18 @@ REQUIRED = {
         "matchedPhotonAcrossSystemsPaid",
         "fresnelZonePlateArmPaid",
     ],
+    "DASHI/Physics/Optics/BerkeleyPLDExposureProvenanceCoordinateExact.agda": [
+        "ExperimentalCoordinateDesignExact",
+        "paperVsReleasedCollision",
+        "paperAndAWBShareExposureProfile",
+        "exposureProvenanceCollisionFormalised = true",
+        "exactDatasetExposureProvenancePaid",
+    ],
     "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda": [
         "record Diffraction3DImagingAcquisitionMaxCut",
         "publicBerkeleyCalibrationArtifactPinned",
         "publicBerkeleySourceOperatorPinned",
+        "offlineSyntheticOperatorSelfTestExecutable",
         "sourceOperatorSelectedGridColumnCompilerPaid",
         "depthConditioningAuditExecutable",
         "translatedColumnRestrictedAuditExecutable",
@@ -68,6 +78,7 @@ REQUIRED = {
         "physicalAcquisitionPhotonCalibrationPinned",
         "publishedRealRMLVsDiffuserCamComparisonPinned",
         "parallelLensDiffuserRMLAcquisitionPinned",
+        "exposureProvenanceCollisionFormalised",
         "parallelExposureProvenanceReconciled",
         "matchedPhotonAcrossParallelSystems",
         "focusedLensDiffuserFZPMatchedPhotonReceipt",
@@ -117,12 +128,14 @@ def test_convrml_same_scene_parallel_comparator_is_pinned_but_photon_and_fzp_cla
 
 def test_acquisition_maxcut_keeps_only_numerical_physical_and_optional_fzp_leaves_open():
     text = (ROOT / "DASHI/Physics/Optics/Diffraction3DImagingAcquisitionMaxCutExact.agda").read_text(encoding="utf-8")
+    assert "offlineSyntheticOperatorSelfTestExecutable = true" in text
     assert "berkeleyNumericPSFArrayIngested = false" in text
     assert "depthOnlyNumericalReceiptCaptured = false" in text
     assert "translatedColumnNumericalReceiptCaptured = false" in text
     assert "sameHRestrictedConditionNumberMeasured = false" in text
     assert "matchedAnalysisPhotonNormalizationPinned = true" in text
     assert "physicalAcquisitionPhotonCalibrationPinned = false" in text
+    assert "exposureProvenanceCollisionFormalised = true" in text
     assert "parallelExposureProvenanceReconciled = false" in text
     assert "matchedPhotonAcrossParallelSystems = false" in text
     assert "focusedLensDiffuserFZPMatchedPhotonReceipt = false" in text
@@ -144,6 +157,7 @@ def test_rollup_exports_acquisition_maxcut():
         "BerkeleyDiffuserCamDepthConditioningExact",
         "BerkeleyLenslessInformationDesignSourceExact",
         "BerkeleyConvRMLParallelComparatorExact",
+        "BerkeleyPLDExposureProvenanceCoordinateExact",
         "Diffraction3DImagingAcquisitionMaxCutExact",
     ):
         assert owner in text
