@@ -1,6 +1,7 @@
 module DASHI.Governance.BoloBoloExperimentalCoordinateDiscriminatorExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 open import Data.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 
