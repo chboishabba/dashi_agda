@@ -1,38 +1,36 @@
 """Fail-closed Co1/4TaSe2 spectral-function -> ARPES forward-fit consumer.
 
-This module intentionally does NOT construct a material Hamiltonian or infer raw
-ARPES calibration.  It consumes two independently prepared NPZ artifacts:
+This module does NOT construct a material Hamiltonian or infer raw ARPES
+calibration.  It consumes two independently prepared NPZ artifacts.
 
-material_spectral.npz (required)
-  energy_ev         shape (Ne,), strictly increasing
-  momentum_inv_a    shape (Nk,), strictly increasing
-  spectral          shape (Ns, Nk, Ne), finite and >= 0
-  temperature_k     scalar
-  source_sha256     scalar string/bytes identifying the electronic artifact
-  soc_included      scalar bool
-  exchange_included scalar bool
+material_spectral.npz requires:
+  energy_ev, momentum_inv_a, spectral[Ns,Nk,Ne], temperature_k,
+  source_sha256, soc_included, exchange_included,
+  matrix_element_model, kz_broadening_model.
 
-calibrated_arpes.npz (required)
-  energy_ev         shape (Ne,), same physical coordinates as requested output
-  momentum_inv_a    shape (Nk,), same physical coordinates as requested output
-  intensity         shape (Ns, Nk, Ne), finite
-  sigma_intensity   same shape, finite and > 0
-  source_sha256     scalar string/bytes identifying raw-data/calibration artifact
-  photon_energy_ev  scalar
-  temperature_k     scalar
-  spin_channels_calibrated scalar bool
+calibrated_arpes.npz requires:
+  energy_ev, momentum_inv_a, intensity[Ns,Nk,Ne], sigma_intensity,
+  source_sha256, photon_energy_ev, temperature_k, spin_channels_calibrated,
+  polarimeter_response_model.
 
-Forward model:
-  A(k,w,s) * f_T(w) -> Gaussian energy/momentum instrument response
-                    -> nuisance scale_s * signal + background_s.
+Forward shape:
+  A(k,w,s) * f_T(w) -> declared instrument/model treatment
+                    -> Gaussian energy/momentum response
+                    -> scale_s * signal + constant background_s.
 
-Only per-spin non-negative scale and constant background are fitted, on a
-reproducible train/holdout split.  Matrix elements, kz broadening and spin
-polarimeter efficiency are NOT silently invented: the caller must either have
-absorbed them into the supplied spectral/calibration artifact or explicitly
-mark their absence in an external model receipt.  Therefore this script is a
-consumer/validator, not evidence that the present repository has paid the
-material-H or raw-ARPES leaves.
+Resolution widths are REQUIRED command-line inputs and explicitly interpreted
+as Gaussian FWHM.  This is deliberate: Sprague et al. report 20 meV energy and
+0.1 degree angular resolution, and separately an ~0.08 inverse-A instrumental
+Gaussian MDC peak width.  The script must not silently identify the latter with
+a momentum-resolution FWHM or convert angular resolution without the required
+photoelectron geometry/kinetic-energy calibration.
+
+Only per-channel non-negative scale and constant background are optimized on a
+reproducible train/holdout split.  Matrix elements, kz broadening and
+polarimeter response must be DECLARED; a caller may explicitly choose a named
+identity/no-correction model, but omission is rejected.  This is a
+consumer/validator, not evidence that the repository has paid the material-H
+or raw-ARPES leaves.
 """
 from __future__ import annotations
 
@@ -62,10 +60,24 @@ def _text_scalar(d, key):
     return str(x)
 
 
+def _declared_text(d, key):
+    value = _text_scalar(d, key).strip()
+    if not value:
+        raise ValueError(f"{key} must be explicitly declared")
+    return value
+
+
+def _valid_digest(value):
+    return len(value) == 64 and all(c in "0123456789abcdefABCDEF" for c in value)
+
+
 def _load_material(path: Path):
     with np.load(path, allow_pickle=False) as d:
-        required = {"energy_ev", "momentum_inv_a", "spectral", "temperature_k",
-                    "source_sha256", "soc_included", "exchange_included"}
+        required = {
+            "energy_ev", "momentum_inv_a", "spectral", "temperature_k",
+            "source_sha256", "soc_included", "exchange_included",
+            "matrix_element_model", "kz_broadening_model",
+        }
         missing = required - set(d.files)
         if missing:
             raise ValueError(f"material spectral artifact missing {sorted(missing)}")
@@ -76,6 +88,8 @@ def _load_material(path: Path):
         src = _text_scalar(d, "source_sha256")
         soc = bool(_scalar(d, "soc_included"))
         exch = bool(_scalar(d, "exchange_included"))
+        matrix_model = _declared_text(d, "matrix_element_model")
+        kz_model = _declared_text(d, "kz_broadening_model")
     if e.ndim != 1 or k.ndim != 1 or a.ndim != 3 or a.shape[1:] != (k.size, e.size):
         raise ValueError("material spectral coordinates/shapes inconsistent")
     if not (np.all(np.diff(e) > 0) and np.all(np.diff(k) > 0)):
@@ -84,16 +98,18 @@ def _load_material(path: Path):
         raise ValueError("invalid material spectral values/temperature")
     if not (soc and exch):
         raise ValueError("material artifact must explicitly include SOC and exchange")
-    if len(src) != 64:
-        raise ValueError("material source_sha256 must be a 64-character digest")
-    return e, k, a, t, src
+    if not _valid_digest(src):
+        raise ValueError("material source_sha256 must be a hexadecimal SHA256 digest")
+    return e, k, a, t, src, matrix_model, kz_model
 
 
 def _load_observed(path: Path):
     with np.load(path, allow_pickle=False) as d:
-        required = {"energy_ev", "momentum_inv_a", "intensity", "sigma_intensity",
-                    "source_sha256", "photon_energy_ev", "temperature_k",
-                    "spin_channels_calibrated"}
+        required = {
+            "energy_ev", "momentum_inv_a", "intensity", "sigma_intensity",
+            "source_sha256", "photon_energy_ev", "temperature_k",
+            "spin_channels_calibrated", "polarimeter_response_model",
+        }
         missing = required - set(d.files)
         if missing:
             raise ValueError(f"calibrated ARPES artifact missing {sorted(missing)}")
@@ -105,6 +121,7 @@ def _load_observed(path: Path):
         hv = float(_scalar(d, "photon_energy_ev"))
         t = float(_scalar(d, "temperature_k"))
         calibrated = bool(_scalar(d, "spin_channels_calibrated"))
+        polarimeter_model = _declared_text(d, "polarimeter_response_model")
     if e.ndim != 1 or k.ndim != 1 or y.ndim != 3 or y.shape[1:] != (k.size, e.size):
         raise ValueError("ARPES coordinates/shapes inconsistent")
     if s.shape != y.shape:
@@ -115,13 +132,12 @@ def _load_observed(path: Path):
         raise ValueError("invalid ARPES intensities/uncertainties")
     if not calibrated:
         raise ValueError("spin channels must be explicitly calibrated")
-    if len(src) != 64 or not np.isfinite(hv) or t <= 0:
+    if not _valid_digest(src) or not np.isfinite(hv) or t <= 0:
         raise ValueError("invalid ARPES provenance/photon-energy/temperature")
-    return e, k, y, s, hv, t, src
+    return e, k, y, s, hv, t, src, polarimeter_model
 
 
 def _interp_spectral(e_src, k_src, a_src, e_dst, k_dst):
-    # Separable deterministic linear interpolation: first energy, then momentum.
     tmp = np.empty((a_src.shape[0], k_src.size, e_dst.size), float)
     for c in range(a_src.shape[0]):
         for i in range(k_src.size):
@@ -133,30 +149,39 @@ def _interp_spectral(e_src, k_src, a_src, e_dst, k_dst):
     return out
 
 
-def forward_signal(e, k, spectral, temperature_k, energy_resolution_mev,
-                   momentum_resolution_inv_a):
-    fermi = 1.0 / (np.exp(np.clip(e / (KB_EV_PER_K * temperature_k), -100, 100)) + 1.0)
+def forward_signal(e, k, spectral, temperature_k,
+                   energy_resolution_mev_fwhm,
+                   momentum_resolution_inv_a_fwhm):
+    if energy_resolution_mev_fwhm <= 0 or momentum_resolution_inv_a_fwhm <= 0:
+        raise ValueError("explicit Gaussian FWHM resolutions must be positive")
+    fermi = 1.0 / (
+        np.exp(np.clip(e / (KB_EV_PER_K * temperature_k), -100, 100)) + 1.0
+    )
     signal = spectral * fermi[None, None, :]
     de = float(np.median(np.diff(e)))
     dk = float(np.median(np.diff(k)))
-    # Reported resolutions are treated as Gaussian FWHM, converted to sigma.
-    sigma_e_pix = (energy_resolution_mev / 1000.0) / (2.354820045 * de)
-    sigma_k_pix = momentum_resolution_inv_a / (2.354820045 * dk)
-    return gaussian_filter(signal, sigma=(0.0, sigma_k_pix, sigma_e_pix), mode="nearest")
+    sigma_e_pix = (energy_resolution_mev_fwhm / 1000.0) / (2.354820045 * de)
+    sigma_k_pix = momentum_resolution_inv_a_fwhm / (2.354820045 * dk)
+    return gaussian_filter(
+        signal, sigma=(0.0, sigma_k_pix, sigma_e_pix), mode="nearest"
+    )
 
 
-def fit(material_path, observed_path, energy_resolution_mev=20.0,
-        momentum_resolution_inv_a=0.08, seed=194268):
+def fit(material_path, observed_path, energy_resolution_mev_fwhm,
+        momentum_resolution_inv_a_fwhm, seed=194268):
     material_path, observed_path = Path(material_path), Path(observed_path)
-    em, km, a, tm, material_src = _load_material(material_path)
-    eo, ko, y, sigma, hv, to, arpes_src = _load_observed(observed_path)
+    em, km, a, tm, material_src, matrix_model, kz_model = _load_material(material_path)
+    eo, ko, y, sigma, hv, to, arpes_src, polarimeter_model = _load_observed(observed_path)
     if a.shape[0] != y.shape[0]:
         raise ValueError("material and ARPES spin-channel counts differ")
     if abs(tm - to) > 2.0:
         raise ValueError("material and ARPES temperatures differ by >2 K")
     a_on_obs = _interp_spectral(em, km, a, eo, ko)
-    pred0 = forward_signal(eo, ko, a_on_obs, to, energy_resolution_mev,
-                           momentum_resolution_inv_a)
+    pred0 = forward_signal(
+        eo, ko, a_on_obs, to,
+        energy_resolution_mev_fwhm,
+        momentum_resolution_inv_a_fwhm,
+    )
 
     nchan = y.shape[0]
     flat_n = y.size
@@ -171,8 +196,7 @@ def fit(material_path, observed_path, energy_resolution_mev=20.0,
         return scales[:, None, None] * pred0 + offsets[:, None, None]
 
     def resid(p, idx):
-        r = ((model(p) - y) / sigma).ravel()
-        return r[idx]
+        return (((model(p) - y) / sigma).ravel())[idx]
 
     x0 = np.concatenate([np.zeros(nchan), np.zeros(nchan)])
     opt = least_squares(lambda p: resid(p, train), x0)
@@ -188,10 +212,13 @@ def fit(material_path, observed_path, energy_resolution_mev=20.0,
         "material_source_sha256": material_src,
         "arpes_file_sha256": hashlib.sha256(observed_path.read_bytes()).hexdigest(),
         "arpes_source_sha256": arpes_src,
+        "matrix_element_model": matrix_model,
+        "kz_broadening_model": kz_model,
+        "polarimeter_response_model": polarimeter_model,
         "photon_energy_ev": hv,
         "temperature_k": to,
-        "energy_resolution_mev_fwhm": energy_resolution_mev,
-        "momentum_resolution_inv_a_fwhm": momentum_resolution_inv_a,
+        "energy_resolution_mev_fwhm": energy_resolution_mev_fwhm,
+        "momentum_resolution_inv_a_fwhm": momentum_resolution_inv_a_fwhm,
         "spin_channels": nchan,
         "train_points": int(len(train)),
         "holdout_points": int(len(test)),
@@ -200,8 +227,9 @@ def fit(material_path, observed_path, energy_resolution_mev=20.0,
         "train_weighted_rmse": wrmse(train),
         "holdout_weighted_rmse": wrmse(test),
         "epistemic_boundary": (
-            "fit consumes explicit material spectral and calibrated raw-ARPES artifacts; "
-            "matrix elements/kz broadening/polarimeter response are not inferred here"
+            "consumer requires explicit material spectral + calibrated raw-ARPES artifacts "
+            "and declared matrix-element/kz/polarimeter models; a successful fit is not "
+            "equivalent to unique microscopic identification"
         ),
     }
 
@@ -210,12 +238,16 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("material_spectral_npz")
     p.add_argument("calibrated_arpes_npz")
-    p.add_argument("--energy-resolution-mev", type=float, default=20.0)
-    p.add_argument("--momentum-resolution-inv-a", type=float, default=0.08)
+    p.add_argument("--energy-resolution-mev-fwhm", type=float, required=True)
+    p.add_argument("--momentum-resolution-inv-a-fwhm", type=float, required=True)
     p.add_argument("--receipt")
     a = p.parse_args()
-    out = fit(a.material_spectral_npz, a.calibrated_arpes_npz,
-              a.energy_resolution_mev, a.momentum_resolution_inv_a)
+    out = fit(
+        a.material_spectral_npz,
+        a.calibrated_arpes_npz,
+        a.energy_resolution_mev_fwhm,
+        a.momentum_resolution_inv_a_fwhm,
+    )
     if a.receipt:
         Path(a.receipt).write_text(json.dumps(out, indent=2) + "\n")
     print(json.dumps(out, indent=2))
