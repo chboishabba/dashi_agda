@@ -14,6 +14,8 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact as Limit
+import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
+import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
 
 ------------------------------------------------------------------------
 -- TDD regression contract.
@@ -127,6 +129,58 @@ producerMarkedSRootIsForward :
   ≡ Signed.forwardOrientation
 producerMarkedSRootIsForward =
   RHGym.sRoleRootWallOrientationForward
+
+------------------------------------------------------------------------
+-- Empirical replay regression: the executable producer independently
+-- reproduces every supplied hole/mutual row from 849 zeros and guard = 1.
+------------------------------------------------------------------------
+
+replayUses849Zeros : Replay.replayZeroCount ≡ 849
+replayUses849Zeros = refl
+
+replayUsesOneUnitGuard : Replay.replayGuardWholeUnits ≡ 1
+replayUsesOneUnitGuard = refl
+
+replayP2MatchesFigure :
+  Replay.replayedHoles Replay.p2Replay ≡ Figure.holes Figure.p2Exponent1Row
+replayP2MatchesFigure = refl
+
+replayP3MatchesFigure :
+  Replay.replayedMutualPairs Replay.p3Replay
+  ≡ Figure.mutualPairs Figure.p3Exponent1Row
+replayP3MatchesFigure = refl
+
+replayP71Saturates :
+  Replay.replayedMutualPairs Replay.p71Replay ≡ Replay.replayZeroCount
+replayP71Saturates = refl
+
+unsignedReplayCannotRecoverSignedOrientation :
+  Replay.PrimeOnlyOrientationDecoder → ⊥
+unsignedReplayCannotRecoverSignedOrientation =
+  Replay.noPrimeOnlyOrientationDecoder
+
+reportedShiftControlsRemainSeedUnrecovered :
+  Replay.reportedShiftControlSeedRecovered
+    Replay.canonicalClimbingGymReplayBoundary
+  ≡ false
+reportedShiftControlsRemainSeedUnrecovered = refl
+
+------------------------------------------------------------------------
+-- Analytic adapter regression: constructive log/pi are reused, while the
+-- missing real-to-finite quantisation authority remains explicit.
+------------------------------------------------------------------------
+
+analyticAdapterReusesConstructiveLog :
+  Analytic.analyticLogarithmReused
+    Analytic.canonicalAnalyticRadixAdapterBoundary
+  ≡ true
+analyticAdapterReusesConstructiveLog = refl
+
+analyticAdapterDoesNotFabricateFloor :
+  Analytic.floorQuantisationConstructedFromCurrentRealSpine
+    Analytic.canonicalAnalyticRadixAdapterBoundary
+  ≡ false
+analyticAdapterDoesNotFabricateFloor = refl
 
 boundaryKeepsAddressAndSignedFlowDistinct :
   Gym.signedValuationIsRadixAddress
