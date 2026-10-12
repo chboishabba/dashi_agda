@@ -15,14 +15,22 @@ module DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact where
 --   * Set-level global realization for every compatible local family;
 --   * observational uniqueness of those global realizations;
 --   * exact obstruction showing the existing three-edge transport index does
---     not cover globalABC or the three vertex objects of the seven-object site.
+--     not cover globalABC or the three vertex objects of the seven-object site;
+--   * exact adapter into the generic context-indexed split-fibration-shaped
+--     observation calculus;
+--   * a full-site equality/discrete-groupoid presheaf baseline, with every
+--     existing restriction arrow functorial on equality morphisms;
+--   * exact proof that the cyclic AB->BC->CA transition is NOT a restriction
+--     arrow of the present Grothendieck base category.
 --
--- The next wall is therefore not another edge C3 calculation.  A genuine
--- groupoid-valued presheaf requires new global/vertex fibre groupoids,
--- restriction functors and general pseudofunctor/cocycle coherence.  Groupoid
--- morphism descent, effective stack descent, typed-iso uniqueness and coherent
--- all-depth face mediation remain open.  Hence 2-sheaf/higher-stack/hypersheaf
--- promotion remains false.
+-- The next wall is therefore specifically TRANSPORT-ENRICHED groupoid descent,
+-- not mere groupoid-valued existence.  The equality-groupoid baseline is paid,
+-- but the existing C3 chart transition lives outside the site's arrow type.
+-- A nontrivial completion must either enlarge the base category with chart
+-- symmetries or add a separate equivariant/transport layer coherent with site
+-- restriction, then provide non-discrete global/vertex fibre morphisms and
+-- pseudofunctor/cocycle coherence.  Effective stack descent, typed-iso
+-- uniqueness and coherent all-depth face mediation remain open.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -41,6 +49,8 @@ import DASHI.Reasoning.TrialecticGrothendieckTransitionCocycleExact as Transitio
 import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact as TwoCell
 import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as SetEffective
 import DASHI.Reasoning.TrialecticRelationalSiteTransportEnrichmentFrontierExact as SiteTransport
+import DASHI.Reasoning.TrialecticGrothendieckContextFibrationBridgeExact as ContextBridge
+import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discrete
 
 data HigherDescentFeature : Set where
   finiteGrothendieckSite : HigherDescentFeature
@@ -169,11 +179,45 @@ setEffectiveDescentBoundary = SetEffective.canonicalTrialecticSetEffectiveDescen
 siteTransportEnrichmentBoundary : SiteTransport.TrialecticRelationalSiteTransportEnrichmentBoundary
 siteTransportEnrichmentBoundary = SiteTransport.canonicalTrialecticRelationalSiteTransportEnrichmentBoundary
 
+contextFibrationBridgeBoundary :
+  ContextBridge.TrialecticGrothendieckContextFibrationBridgeBoundary
+contextFibrationBridgeBoundary =
+  ContextBridge.canonicalTrialecticGrothendieckContextFibrationBridgeBoundary
+
+discreteGroupoidBaselineBoundary :
+  Discrete.TrialecticDiscreteGroupoidPresheafBaselineBoundary
+discreteGroupoidBaselineBoundary =
+  Discrete.canonicalTrialecticDiscreteGroupoidPresheafBaselineBoundary
+
+contextIndexedFibrationBridgeConstructed :
+  ContextBridge.cellPresheafInstantiatesContextIndexedObservation
+    contextFibrationBridgeBoundary
+  ≡ true
+contextIndexedFibrationBridgeConstructed = refl
+
+fullSiteDiscreteGroupoidBaselineConstructed :
+  Discrete.fullSiteDiscreteGroupoidBaselinePaid
+    discreteGroupoidBaselineBoundary
+  ≡ true
+fullSiteDiscreteGroupoidBaselineConstructed = refl
+
+cyclicEdgeTransportIsNotSiteRestriction :
+  Discrete.edgeCycleIsSiteRestriction
+    discreteGroupoidBaselineBoundary
+  ≡ false
+cyclicEdgeTransportIsNotSiteRestriction = refl
+
 existingStackPromotionObligation : Disambiguation.StackPromotionObligation
 existingStackPromotionObligation = Disambiguation.currentStackPromotionObligation
 
 ------------------------------------------------------------------------
 -- Exact next cut.
+--
+-- Compatibility note: the historical constructor names are retained.  In the
+-- refined ledger, `supplyGlobalVertexFiberGroupoids` means NON-DISCRETE /
+-- transport-enriched global+vertex fibres; the equality/discrete fibres are
+-- already paid.  `defineRestrictionFunctors` likewise means functors coherent
+-- with that transport enrichment, not the already-paid Set/equality maps.
 ------------------------------------------------------------------------
 
 data NextHigherDescentObligation : Set where
@@ -218,6 +262,12 @@ setEffectiveDescentDoesNotCreateGroupoidDescent :
   SetEffectiveDescentAutomaticallySuppliesGroupoidDescent → ⊥
 setEffectiveDescentDoesNotCreateGroupoidDescent ()
 
+------------------------------------------------------------------------
+-- Stable historical boundary surface.  Keep constructor and field names fixed
+-- for downstream imports.  `groupoidPresheafReady = false` continues to mean
+-- the desired TRANSPORT-ENRICHED presheaf, not the newly paid discrete baseline.
+------------------------------------------------------------------------
+
 record TrialecticHigherDescentPromotionBoundary : Set where
   constructor trialectic-higher-descent-promotion-boundary
   field
@@ -247,10 +297,6 @@ record TrialecticHigherDescentPromotionBoundary : Set where
 
 open TrialecticHigherDescentPromotionBoundary public
 
--- Keep the historical constructor and `cocycleTwoMorphismsReady` field name
--- stable for downstream imports; the field now denotes the still-unpaid
--- *general* site-wide cocycle layer, while the concrete C3 cocycle remains
--- separately recorded by `cyclicTransitionCocycleReady`.
 canonicalTrialecticHigherDescentPromotionBoundary :
   TrialecticHigherDescentPromotionBoundary
 canonicalTrialecticHigherDescentPromotionBoundary =
@@ -258,3 +304,28 @@ canonicalTrialecticHigherDescentPromotionBoundary =
     true true true true true true true true true true true true
     true true true
     false false false false false false false false
+
+------------------------------------------------------------------------
+-- Refined additive boundary.  This records the new paid baselines without
+-- changing the historical constructor surface above.
+------------------------------------------------------------------------
+
+record TrialecticHigherDescentRefinementBoundary : Set where
+  constructor trialectic-higher-descent-refinement-boundary
+  field
+    contextIndexedFibrationBridgeReady : Bool
+    fullSiteDiscreteGroupoidBaselineReady : Bool
+    equalityRestrictionFunctorsReady : Bool
+    cyclicEdgeTransportIsSiteRestriction : Bool
+    discreteBaselineCapturesC3Transport : Bool
+    transportEnrichedGroupoidPresheafReady : Bool
+    nonDiscreteGlobalVertexFibresStillRequired : Bool
+    baseEnlargementOrEquivariantLayerStillRequired : Bool
+
+open TrialecticHigherDescentRefinementBoundary public
+
+canonicalTrialecticHigherDescentRefinementBoundary :
+  TrialecticHigherDescentRefinementBoundary
+canonicalTrialecticHigherDescentRefinementBoundary =
+  trialectic-higher-descent-refinement-boundary
+    true true true false false false true true
