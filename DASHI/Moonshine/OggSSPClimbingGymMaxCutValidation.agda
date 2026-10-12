@@ -4,10 +4,12 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Foundations.RadixValuationStageBridge as Radix
+import DASHI.Foundations.StratifiedResolutionTowerExact as Tower
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SignedBranch
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
+import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact as Limit
 
 ------------------------------------------------------------------------
 -- TDD regression contract.
@@ -66,10 +68,31 @@ p71FigureSaturates :
   Figure.mutualPairs Figure.p71Exponent1Row ≡ Figure.figureZeroCount
 p71FigureSaturates = refl
 
+saturatedCountCannotRecoverOggLane :
+  Figure.MutualCountLaneDecoder → ⊥
+saturatedCountCannotRecoverOggLane =
+  Figure.noMutualCountLaneDecoder
+
 figurePrimeLaneIsTypedCanonical :
   (row : Figure.ClimbingGymFigureRow) →
   Lane.MonsterPrimeLane
 figurePrimeLaneIsTypedCanonical = Figure.figureLane
+
+signedRadixTowerCarrierAt :
+  (depth : Nat) →
+  Tower.Carrier Limit.signedRadixWallTower depth
+  ≡ Gym.SignedRadixWallState depth
+signedRadixTowerCarrierAt depth = refl
+
+negatedHistoryRemainsCoherent :
+  (history : Limit.SignedRadixHistory)
+  (depth : Nat) →
+  Tower.project Limit.signedRadixWallTower
+    (Tower.atResolution (Limit.negateHistory history) (suc depth))
+  ≡
+  Tower.atResolution (Limit.negateHistory history) depth
+negatedHistoryRemainsCoherent history depth =
+  Tower.coherent (Limit.negateHistory history) depth
 
 boundaryKeepsAddressAndSignedFlowDistinct :
   Gym.signedValuationIsRadixAddress
@@ -82,3 +105,9 @@ boundaryKeepsObservationOutOfRHPromotion :
     Figure.canonicalClimbingGymFigureObservationBoundary
   ≡ false
 boundaryKeepsObservationOutOfRHPromotion = refl
+
+boundaryKeepsInverseLimitFiniteStructural :
+  Limit.inverseLimitConstructsAnalyticPAdicCompletion
+    Limit.canonicalSignedRadixInverseLimitBoundary
+  ≡ false
+boundaryKeepsInverseLimitFiniteStructural = refl
