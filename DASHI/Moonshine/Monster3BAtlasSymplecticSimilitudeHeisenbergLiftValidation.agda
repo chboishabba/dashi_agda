@@ -17,6 +17,10 @@ quadraticCorrectionConditionExposed :
   Lift.similitudeCocycleCorrectionConditionExposed Lift.canonicalBoundary ≡ true
 quadraticCorrectionConditionExposed = refl
 
-primitiveConcreteCorrectionStillRuntimePending :
-  Lift.preferredPrimitiveConcreteCorrectionRuntimePaid Lift.canonicalBoundary ≡ false
-primitiveConcreteCorrectionStillRuntimePending = refl
+primitiveConcreteCorrectionRuntimePaid :
+  Lift.preferredPrimitiveConcreteCorrectionRuntimePaid Lift.canonicalBoundary ≡ true
+primitiveConcreteCorrectionRuntimePaid = refl
+
+primitiveConcreteLiftKernelStillOpen :
+  Lift.preferredPrimitiveConcreteLiftKernelPaid Lift.canonicalBoundary ≡ false
+primitiveConcreteLiftKernelStillOpen = refl
