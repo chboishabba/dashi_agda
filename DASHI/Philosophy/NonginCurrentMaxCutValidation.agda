@@ -42,6 +42,10 @@ siteTransportCoverageObstructionPaid :
   Nongin.siteTransportCoverageObstructionPaid boundary ≡ true
 siteTransportCoverageObstructionPaid = refl
 
+boundaryAnchoredFaceMediationPaid :
+  Nongin.boundaryAnchoredFaceMediationPaid boundary ≡ true
+boundaryAnchoredFaceMediationPaid = refl
+
 empiricalTenPercentLawStillFalse :
   Nongin.empiricalTenPercentLawPromoted boundary ≡ false
 empiricalTenPercentLawStillFalse = refl
