@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityStaticPairToDifferentialMetricResponseExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ; _-_)
 open import Relation.Binary.PropositionalEquality using (cong₂)
 
