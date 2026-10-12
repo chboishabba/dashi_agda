@@ -6,6 +6,7 @@ import DASHI.Physics.Optics.Diffraction3DImagingPhysicalMaxCutExact as Physical
 import DASHI.Physics.Optics.BerkeleyDiffuserCamPublicCalibrationExact as Calibration
 import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact as SourceOperator
 import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditioning
+import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact as LocalExecution
 import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact as InfoSource
 import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as ExposureProvenance
@@ -19,13 +20,12 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 -- 2026 information-design experiment, and the later 2026 ConvRML same-scene
 -- parallel lens/diffuser/RML comparator geometry.
 --
--- The source-H implementation now also has two execution guards:
---   * a synthetic-only offline verifier covering odd/even array shapes,
---     literal FFT-vs-kernel-shift equality and finite-support checks of the
---     coherence/Gershgorin compiler;
---   * a dimension-only claim-scale memory planner that estimates the dense
---     selected-H / normalized-H / Gram working set before real allocation.
--- Neither guard is promoted into a Berkeley numerical receipt.
+-- Local execution now additionally pays two durable, SHA-pinned receipts:
+--   * a synthetic source-H implementation check covering odd/even shapes,
+--     FFT-vs-kernel-shift agreement and 500 randomized Gershgorin support tests;
+--   * a synthetic claim-scale memory-plan execution over a declared geometry.
+-- These are captured execution receipts, not merely executable code. They remain
+-- deliberately separate from the still-unexecuted real Berkeley PSF receipt.
 --
 -- The information-design code additionally pays a common *analysis* photon
 -- normalization: each real dataset is divided by its own mean, rescaled to a
@@ -59,7 +59,9 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     publicBerkeleyCalibrationArtifactPinned : Bool
     publicBerkeleySourceOperatorPinned : Bool
     offlineSyntheticOperatorSelfTestExecutable : Bool
+    localSyntheticOperatorReceiptCaptured : Bool
     claimScaleMemoryPlannerExecutable : Bool
+    localClaimScalePlannerReceiptCaptured : Bool
     sourceOperatorSelectedGridColumnCompilerPaid : Bool
     depthConditioningAuditExecutable : Bool
     translatedColumnRestrictedAuditExecutable : Bool
@@ -89,7 +91,9 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; publicBerkeleyCalibrationArtifactPinned = true
   ; publicBerkeleySourceOperatorPinned = true
   ; offlineSyntheticOperatorSelfTestExecutable = true
+  ; localSyntheticOperatorReceiptCaptured = LocalExecution.syntheticOperatorReceiptCaptured
   ; claimScaleMemoryPlannerExecutable = true
+  ; localClaimScalePlannerReceiptCaptured = LocalExecution.claimScalePlannerReceiptCaptured
   ; sourceOperatorSelectedGridColumnCompilerPaid = true
   ; depthConditioningAuditExecutable = true
   ; translatedColumnRestrictedAuditExecutable = true
@@ -126,8 +130,14 @@ sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMateri
 offlineSyntheticSelfTestStatus : Bool
 offlineSyntheticSelfTestStatus = Conditioning.offlineSyntheticOperatorSelfTestExecutable
 
+localSyntheticReceiptStatus : Bool
+localSyntheticReceiptStatus = LocalExecution.syntheticOperatorReceiptCaptured
+
 claimScaleMemoryPlannerStatus : Bool
 claimScaleMemoryPlannerStatus = Conditioning.claimScaleMemoryPlannerExecutable
+
+localClaimScaleReceiptStatus : Bool
+localClaimScaleReceiptStatus = LocalExecution.claimScalePlannerReceiptCaptured
 
 sourceSelectedGridCompilerStatus : Bool
 sourceSelectedGridCompilerStatus = Conditioning.sourceOperatorSelectedGridColumnCompilerPaid
