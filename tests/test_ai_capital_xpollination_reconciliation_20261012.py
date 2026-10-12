@@ -20,6 +20,8 @@ def test_xpollination_reconciliation_surface() -> None:
             "accountingFinancingLifeGapPaid",
             "namedExternalCashEdgesPartial",
             "providerMarginStillOpen",
+            "replacementCapexStillOpen",
+            "policyCausalIdentificationStillOpen",
             "exhaustiveTerminalPayerStillOpen",
         ],
     )
