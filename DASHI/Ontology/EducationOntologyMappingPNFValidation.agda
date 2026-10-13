@@ -4,6 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ; +_)
 
+import DASHI.Cognition.PNF.TypePressure as PNFPressure
 open import DASHI.Ontology.EducationOntologyMappingPNFExact
 open import DASHI.Ontology.EducationOntologyMappingSSSOMExact
 
