@@ -52,7 +52,7 @@ unit3 = refl
 record QuadraticMaxCutBoundary : Set where
   constructor quadratic-max-cut-boundary
   field
-    sixfoldRotationNormLawOwned : Bool
+    oneStepRotationNormInvariantOwned : Bool
     coercivityDecompositionsOwned : Bool
     divisorRepresentationTheoremManufactured : Bool
 
