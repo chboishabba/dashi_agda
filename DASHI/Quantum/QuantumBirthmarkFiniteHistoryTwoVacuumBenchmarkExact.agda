@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Quantum.QuantumBirthmarkFiniteHistoryTwoVacuumBenchmarkExact where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
