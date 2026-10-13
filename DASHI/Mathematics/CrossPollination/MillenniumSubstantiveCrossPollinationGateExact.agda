@@ -20,6 +20,7 @@ open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Analysis.RiemannMaassMoonshineCrossPollinationExact
+import DASHI.Biology.EisensteinNineRingInterferenceExact as E
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact
@@ -270,10 +271,7 @@ eisensteinCubicCMEdge =
     proofBearingGenericTheorem
 
 ------------------------------------------------------------------------
--- Exact witness behind the Eisenstein observer edge:
---   * phase is sufficient for the chi_-3 consumer;
---   * phase is not sufficient for the identity consumer;
---   * phase + residual reopens the full integer exactly.
+-- Exact witness behind the Eisenstein observer edge.
 ------------------------------------------------------------------------
 
 eisensteinPhasePaysChiConsumer :
@@ -307,19 +305,13 @@ eisensteinPhaseResidualReopens =
 threeBodyCyclicModeOneIsOmegaEigen :
   (state : ThreeBodyC3.PlanarThreeBodyState) →
   ThreeBodyC3.mode1 (ThreeBodyC3.cyclicPermute state)
-  ≡
-  DASHI.Biology.EisensteinNineRingInterferenceExact.multiply
-    DASHI.Biology.EisensteinNineRingInterferenceExact.omega
-    (ThreeBodyC3.mode1 state)
+  ≡ E.multiply E.omega (ThreeBodyC3.mode1 state)
 threeBodyCyclicModeOneIsOmegaEigen = ThreeBodyC3.mode1CyclicEigen
 
 threeBodyCyclicModeTwoIsOmegaSquaredEigen :
   (state : ThreeBodyC3.PlanarThreeBodyState) →
   ThreeBodyC3.mode2 (ThreeBodyC3.cyclicPermute state)
-  ≡
-  DASHI.Biology.EisensteinNineRingInterferenceExact.multiply
-    DASHI.Biology.EisensteinNineRingInterferenceExact.omegaSquared
-    (ThreeBodyC3.mode2 state)
+  ≡ E.multiply E.omegaSquared (ThreeBodyC3.mode2 state)
 threeBodyCyclicModeTwoIsOmegaSquaredEigen = ThreeBodyC3.mode2CyclicEigen
 
 ------------------------------------------------------------------------
@@ -329,8 +321,7 @@ threeBodyCyclicModeTwoIsOmegaSquaredEigen = ThreeBodyC3.mode2CyclicEigen
 ------------------------------------------------------------------------
 
 eisensteinCubicActionAvailable :
-  (B : DASHI.Biology.EisensteinNineRingInterferenceExact.Eisenstein) →
-  EisensteinCubic.EisensteinCubicC3Action B
+  (B : E.Eisenstein) → EisensteinCubic.EisensteinCubicC3Action B
 eisensteinCubicActionAvailable = EisensteinCubic.omegaCubicC3Action
 
 completedStatusIsDistinctFromBoundary :
