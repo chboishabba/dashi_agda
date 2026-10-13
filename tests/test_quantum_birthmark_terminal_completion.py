@@ -19,6 +19,7 @@ def test_terminal_completion_includes_entropy_density_expansion_spine():
     text = OWNER.read_text()
     for token in [
         "entropyDensityExpansionCompilerOwned",
+        "preferredResidualEq223ExpansionCompilerOwned",
         "antigravityExpansionTerminalOwned",
         "positiveGRepulsionAndExpansionEndpointsOwned",
         "allExistingGravityExpansionPriorArtCrossPollinated",
