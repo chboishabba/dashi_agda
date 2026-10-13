@@ -95,10 +95,6 @@ hotspotPressureCannotAssertType = PNFPressure.pressureAloneCannotAssertType
 
 ------------------------------------------------------------------------
 -- REPAIR ROUTING
---
--- LLM-only evidence may prioritize or hold a case for review.  It cannot by
--- itself choose a destructive ontology mutation.  Stronger repair operations
--- require additional symbolic/domain/human evidence and the downstream gates.
 ------------------------------------------------------------------------
 
 llmOnlyRoute : HotspotSignal → Repair.RepairOperation
@@ -121,10 +117,6 @@ repairProposalStillCannotAssertTruth = Repair.repairProposalCannotAssertOntology
 
 ------------------------------------------------------------------------
 -- EXISTING ADMISSIBILITY + FACTORISATION SPINE
---
--- No new SafeFor relation is introduced.  A consumer use is governed only when
--- the candidate is hard-admissible, adequate for that consumer, and the
--- authorised query literally factors through the proposed projection.
 ------------------------------------------------------------------------
 
 record GovernedConsumerUse
@@ -144,6 +136,64 @@ record GovernedConsumerUse
 open GovernedConsumerUse public
 
 ------------------------------------------------------------------------
+-- FINITE FACTORISATION COUNTERMODEL
+--
+-- The same coarse mapping surface preserves the subclass answer but erases a
+-- distinction needed by the disjointness consumer.  This is the repo-native
+-- exact form of "safe for one inference language does not imply safe for all".
+------------------------------------------------------------------------
+
+data AlignmentState : Set where
+  leftAlignmentState : AlignmentState
+  rightAlignmentState : AlignmentState
+
+data AlignmentSurface : Set where
+  coarseAlignment : AlignmentSurface
+
+data AlignmentQuery : Set where
+  subclassQuery : AlignmentQuery
+  disjointnessQuery : AlignmentQuery
+
+data AlignmentAnswer : Set where
+  subclassKnown : AlignmentAnswer
+  disjointYes : AlignmentAnswer
+  disjointNo : AlignmentAnswer
+
+alignmentQuestions : Factor.InquiryQuestionFamily AlignmentState AlignmentQuery
+alignmentQuestions = Factor.inquiryQuestionFamily (λ query → AlignmentAnswer) askAlignment
+  where
+    askAlignment : (query : AlignmentQuery) → AlignmentState → AlignmentAnswer
+    askAlignment subclassQuery leftAlignmentState = subclassKnown
+    askAlignment subclassQuery rightAlignmentState = subclassKnown
+    askAlignment disjointnessQuery leftAlignmentState = disjointYes
+    askAlignment disjointnessQuery rightAlignmentState = disjointNo
+
+coarseAlignmentSurface : AlignmentState → AlignmentSurface
+coarseAlignmentSurface leftAlignmentState = coarseAlignment
+coarseAlignmentSurface rightAlignmentState = coarseAlignment
+
+subclassFactorsThrough :
+  Factor.FactorsThrough alignmentQuestions coarseAlignmentSurface subclassQuery
+subclassFactorsThrough = Factor.factorsThrough quotient proof
+  where
+    quotient : AlignmentSurface → AlignmentAnswer
+    quotient coarseAlignment = subclassKnown
+
+    proof :
+      (state : AlignmentState) →
+      Factor.ask alignmentQuestions subclassQuery state
+      ≡ quotient (coarseAlignmentSurface state)
+    proof leftAlignmentState = refl
+    proof rightAlignmentState = refl
+
+disjointnessCannotFactorThrough :
+  Factor.FactorsThrough alignmentQuestions coarseAlignmentSurface disjointnessQuery → ⊥
+disjointnessCannotFactorThrough receipt
+  with Factor.factorisation receipt leftAlignmentState
+     | Factor.factorisation receipt rightAlignmentState
+... | refl | ()
+
+------------------------------------------------------------------------
 -- GOVERNANCE STATUS
 ------------------------------------------------------------------------
 
@@ -154,6 +204,7 @@ record RepairUseBoundary : Set where
     pnfPressureAloneIsOntologyTruth : Bool
     admissibilityRequiredBeforeUse : Bool
     factorisationRequiredPerConsumerQuery : Bool
+    finiteConsumerCountermodelOwned : Bool
     repairProposalIsReviewOnly : Bool
 
     llmSignalAloneIsEditAuthorityIsFalse :
@@ -164,6 +215,7 @@ record RepairUseBoundary : Set where
       admissibilityRequiredBeforeUse ≡ true
     factorisationRequiredPerConsumerQueryIsTrue :
       factorisationRequiredPerConsumerQuery ≡ true
+    finiteConsumerCountermodelOwnedIsTrue : finiteConsumerCountermodelOwned ≡ true
     repairProposalIsReviewOnlyIsTrue : repairProposalIsReviewOnly ≡ true
 
 open RepairUseBoundary public
@@ -171,5 +223,5 @@ open RepairUseBoundary public
 canonicalRepairUseBoundary : RepairUseBoundary
 canonicalRepairUseBoundary =
   repairUseBoundary
-    false false true true true
-    refl refl refl refl refl
+    false false true true true true
+    refl refl refl refl refl refl
