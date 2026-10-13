@@ -1,19 +1,10 @@
 {-# OPTIONS --safe #-}
 module DASHI.Quantum.QuantumBirthmarkVacuumEnergyDiscrepancyBoundaryExact where
 
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-
-------------------------------------------------------------------------
--- VACUUM-ENERGY DISCREPANCY BOUNDARY
---
--- "10^120" is a conventional shorthand whose precise exponent depends on the
--- cutoff and quantity compared.  Using rough mass-density exponents,
--- Planck density ~10^96 kg m^-3 versus observed dark-energy density ~10^-27
--- kg m^-3 gives an exponent separation of about 123.
-------------------------------------------------------------------------
 
 planckDensityOrderExponent : Nat
 planckDensityOrderExponent = 96
