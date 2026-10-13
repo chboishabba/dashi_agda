@@ -17,8 +17,10 @@ module DASHI.Biology.IITPointedTernary27Origin26Exact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Sum.Base using (inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
+import DASHI.Foundations.ExceptionalAlbertFreudenthalResidualExact as Exceptional
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Origin26
 import DASHI.Biology.IITPointedTernary27FaceGluingExact as Pointed
@@ -51,12 +53,27 @@ canonicalActiveCubieIsOrigin = refl
 -- 2. The 26 constructors really exclude the distinguished active origin.
 ------------------------------------------------------------------------
 
+nonOriginBranchCannotEqualScalarBranch :
+  (q : NonActive26) →
+  inj₂ q ≡ inj₁ Exceptional.scalarLine →
+  ⊥
+nonOriginBranchCannotEqualScalarBranch q ()
+
 nonActiveCubieIsNotOrigin :
   (q : NonActive26) →
   nonActiveToCubie q ≡ Geometry.origin →
   ⊥
-nonActiveCubieIsNotOrigin q equality with cong Origin26.toAlbertShape equality
-... | ()
+nonActiveCubieIsNotOrigin q equality =
+  nonOriginBranchCannotEqualScalarBranch q branchEquality
+  where
+  branchEquality :
+    inj₂ q ≡ inj₁ Exceptional.scalarLine
+  branchEquality =
+    trans
+      (sym (Origin26.toAfterFrom (inj₂ q)))
+      (trans
+        (cong Origin26.toAlbertShape equality)
+        Origin26.originMapsToScalar)
 
 ------------------------------------------------------------------------
 -- 3. Re-export the exact two-sided 1+26 carrier chart.
@@ -81,10 +98,9 @@ originPlus26ToAfterFrom :
   toOriginPlus26 (fromOriginPlus26 shape) ≡ shape
 originPlus26ToAfterFrom = Origin26.toAfterFrom
 
-originIsDistinguishedSummand :
-  Origin26.toAlbertShape Geometry.origin
-  ≡ Origin26.toAlbertShape Geometry.origin
-originIsDistinguishedSummand = refl
+originMapsToDistinguishedScalar :
+  toOriginPlus26 Geometry.origin ≡ inj₁ Exceptional.scalarLine
+originMapsToDistinguishedScalar = Origin26.originMapsToScalar
 
 ------------------------------------------------------------------------
 -- 4. This exact origin-pointed decomposition is not an arbitrary-point
