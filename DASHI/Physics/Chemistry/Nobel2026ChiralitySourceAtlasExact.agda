@@ -4,12 +4,12 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_â‰¡_; refl)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.GenericReceipt as Receipt
 
 ------------------------------------------------------------------------
 -- ATTRIBUTED SOURCE ATLAS
---
 -- Source identity and source-role attribution are kept on the repository-wide
--- AttributedSource surface.  None of these citations imports proof authority.
+-- AttributedSource surface.  Citations do not import proof authority.
 ------------------------------------------------------------------------
 
 nobel2026Announcement : Source.AttributedSource
@@ -34,7 +34,7 @@ kagan1986 =
     "10.1021/ja00269a036"
     "https://doi.org/10.1021/ja00269a036"
     Source.academicArticleSource
-    "primary nonlinear-effect source; pays existence and source identity of asymmetric-catalysis NLE observations, not a universal response law"
+    "primary nonlinear-effect source; pays source identity of asymmetric-catalysis NLE observations, not a universal response law"
     Source.publicAttribution
 
 soai1995 : Source.AttributedSource
@@ -106,7 +106,7 @@ sourceCountIsSix : Source.sourceCount (Source.sources nobel2026ChiralityAtlas) â
 sourceCountIsSix = refl
 
 atlasDoesNotImportProof :
-  Source.GenericReceipt.promotesClaim
+  Receipt.promotesClaim
     (Source.attributedSourceAtlasReceipt
       nobel2026ChiralityAtlas
       "source atlas static receipt")
