@@ -5,11 +5,14 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Cognition.Project2025ImplementationIncidenceAtlasExact as Incidence
+
 ------------------------------------------------------------------------
 -- HERITAGE / PROJECT 2025 / TRUMP IMPLEMENTATION INFRASTRUCTURE
 --
 -- This owner separates policy design, personnel recruitment/training,
--- administration appointments, observed policy overlap, and causal claims.
+-- administration appointments, observed policy overlap, concrete
+-- chapter->author->office->action correspondences, and causal claims.
 -- Heritage/Project 2025 may be a high-value implementation infrastructure
 -- without every Trump action being caused by Project 2025.
 ------------------------------------------------------------------------
@@ -25,6 +28,7 @@ data Project2025EdgeKind : Set where
   russVoughtAdministrationAppointment : Project2025EdgeKind
   brendanCarrAdministrationAppointment : Project2025EdgeKind
   observedTrumpPolicyOverlap : Project2025EdgeKind
+  concreteAuthorRoleActionIncidence : Project2025EdgeKind
   trumpPolicyBeyondProject2025 : Project2025EdgeKind
   directEpsteinRelationshipUnpaid : Project2025EdgeKind
 
@@ -84,19 +88,25 @@ playbookReceipt = project2025-receipt
 voughtReceipt : Project2025Receipt
 voughtReceipt = project2025-receipt
   russVoughtAdministrationAppointment
-  "AP/Reuters 2025: Russ Vought, a key Project 2025 architect and contributor, was confirmed to lead OMB in the second Trump administration."
+  "Russ Vought authored Project 2025's Executive Office chapter and returned to lead OMB in the second Trump administration."
   true true false false
 
 carrReceipt : Project2025Receipt
 carrReceipt = project2025-receipt
   brendanCarrAdministrationAppointment
-  "AP 2024/2025: Brendan Carr, author of Project 2025's FCC chapter, was selected by Trump to lead the FCC."
+  "Brendan Carr authored Project 2025's FCC chapter and was selected by Trump to lead the FCC."
   true true false false
 
 policyOverlapReceipt : Project2025Receipt
 policyOverlapReceipt = project2025-receipt
   observedTrumpPolicyOverlap
   "Reuters 2025 found substantial overlap between early second-Trump-administration actions and Project 2025 goals across executive power, staffing, civil rights, immigration and agency restructuring."
+  true true false false
+
+concreteIncidenceReceipt : Project2025Receipt
+concreteIncidenceReceipt = project2025-receipt
+  concreteAuthorRoleActionIncidence
+  "Project2025ImplementationIncidenceAtlasExact resolves concrete author->office->action chains including Vought/civil-service control and Carr/FCC media-ownership deregulation, while retaining beneficiary/burden/voice/control incidence as separate consumers."
   true true false false
 
 beyondReceipt : Project2025Receipt
@@ -112,6 +122,23 @@ epsteinBoundaryReceipt = project2025-receipt
   false false false false
 
 ------------------------------------------------------------------------
+-- Concrete implementation/incidence cross-pollination.
+------------------------------------------------------------------------
+
+implementationIncidenceBoundary : Incidence.Project2025IncidenceBoundary
+implementationIncidenceBoundary = Incidence.canonicalProject2025IncidenceBoundary
+
+chapterAuthorRoleActionChainsPaid :
+  Incidence.chapterAuthorRoleActionChainsPaid
+    Incidence.canonicalProject2025IncidenceBoundary ≡ true
+chapterAuthorRoleActionChainsPaid = refl
+
+project2025CausationStillNotAutomatic :
+  Incidence.project2025CausedEveryMatchedAction
+    Incidence.canonicalProject2025IncidenceBoundary ≡ false
+project2025CausationStillNotAutomatic = refl
+
+------------------------------------------------------------------------
 -- Canonical boundary.
 ------------------------------------------------------------------------
 
@@ -124,6 +151,8 @@ record Project2025ImplementationBoundary : Set where
     voughtImplementationBridgePaid : Bool
     carrImplementationBridgePaid : Bool
     substantialTrumpPolicyOverlapPaid : Bool
+    concreteAuthorRoleActionIncidencePaid : Bool
+    secondAndThirdOrderIncidenceRequired : Bool
     everyTrumpActionCausedByProject2025 : Bool
     trumpAndProject2025AreIdentical : Bool
     directEpsteinRelationshipPaid : Bool
@@ -131,7 +160,7 @@ open Project2025ImplementationBoundary public
 
 canonicalProject2025ImplementationBoundary : Project2025ImplementationBoundary
 canonicalProject2025ImplementationBoundary = project2025-implementation-boundary
-  true true true true true true false false false
+  true true true true true true true true false false false
 
 ------------------------------------------------------------------------
 -- Attribution / promotion firewalls.
@@ -141,6 +170,7 @@ data PolicyOverlapImpliesCausation : Set where
 data AuthorAppointmentImpliesFullBlueprintAdoption : Set where
 data CoalitionMembershipImpliesUnifiedCommand : Set where
 data PersonnelPipelineImpliesEveryAppointmentCameFromProject2025 : Set where
+data BeneficiaryImpliesPolicySponsor : Set where
 data TrumpismInterpretationImpliesProject2025Receipt : Set where
 data HeritageProject2025ImpliesEpsteinRelationship : Set where
 
@@ -156,6 +186,9 @@ coalitionMembershipDoesNotCreateUnifiedCommand ()
 personnelPipelineDoesNotCreateUniversalAppointmentProvenance :
   PersonnelPipelineImpliesEveryAppointmentCameFromProject2025 → ⊥
 personnelPipelineDoesNotCreateUniversalAppointmentProvenance ()
+
+beneficiaryDoesNotCreatePolicySponsor : BeneficiaryImpliesPolicySponsor → ⊥
+beneficiaryDoesNotCreatePolicySponsor ()
 
 trumpismInterpretationDoesNotCreateProjectReceipt : TrumpismInterpretationImpliesProject2025Receipt → ⊥
 trumpismInterpretationDoesNotCreateProjectReceipt ()
