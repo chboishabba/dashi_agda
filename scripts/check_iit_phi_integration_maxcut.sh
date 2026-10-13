@@ -17,6 +17,7 @@ required_files=(
   DASHI/Biology/IIT369PantsGluingBridgeExact.agda
   DASHI/Biology/IITPointedTernary27FaceGluingExact.agda
   DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda
+  DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda
   DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda
   DASHI/Reasoning/IITBrainMaleCNSConsumerBoundaryExact.agda
   DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda
@@ -37,6 +38,15 @@ require() {
     echo "missing contract '$needle' in $file" >&2
     exit 1
   }
+}
+
+reject() {
+  local file="$1"
+  local needle="$2"
+  if grep -Fq "$needle" "$ROOT/$file"; then
+    echo "forbidden contract '$needle' in $file" >&2
+    exit 1
+  fi
 }
 
 require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'data CutDirection'
@@ -113,6 +123,12 @@ require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'sameSelect
 require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'selectedCubiesDoNotDetermineTriadicFace'
 require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'selectedCubiesDoNotSelfPromoteToGluingClass'
 
+require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'pointCell27RoundTrip'
+require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'cell27PointRoundTrip'
+require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'activeCharacterIndex'
+require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'activeCellRecoversSelectedCubie'
+require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'cyclicAndGeometricAdjacencyRemainDistinct'
+
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'vertexPartitionNotDefinitionallySectionPartition'
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'compatibleSection : Hyperfabric.GlobalSection fabric'
 
@@ -130,7 +146,11 @@ require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT369PantsGluingBridgeExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27FaceGluingExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27CyclotomicCellExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Analysis.IITZetaGeneratingBoundaryExact'
+reject DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPhiIntegrationMaxCutValidation'
+require DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
+require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationMaxCutValidation'
 
 echo 'IIT phi integration max-cut static contract: PASS'
