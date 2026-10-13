@@ -113,10 +113,7 @@ cell27PointRoundTrip cell
 ------------------------------------------------------------------------
 
 activeCell27 : Pointed.PointedTernary27Cube → Cube.CubeCell27
-activeCell27 pointed = Pointed.activeCubie pointed |> pointToCell27
-  where
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  x |> f = f x
+activeCell27 pointed = pointToCell27 (Pointed.activeCubie pointed)
 
 activeCharacterIndex :
   Pointed.PointedTernary27Cube → Cube.CharacterIndex
