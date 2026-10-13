@@ -44,6 +44,7 @@ import DASHI.Papers.NavierStokes.TheoremInterface as NS
 import DASHI.Physics.YangMills.YangMillsSubmissionExactCutset as YM
 import DASHI.Physics.YangMills.CompactLieProofLevel as YMLevel
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as EisensteinObserver
 
 ------------------------------------------------------------------------
@@ -262,12 +263,27 @@ eisensteinObserverEdge =
 -- These are theorem-level distinctions, not a status-table analogy.
 ------------------------------------------------------------------------
 
+eisensteinPhasePaysChiConsumer :
+  Descent.ConsumerSufficient
+    EisensteinObserver.phaseOfNat
+    EisensteinObserver.chiMinus3WeightOfNat
 eisensteinPhasePaysChiConsumer =
   EisensteinObserver.phaseIsSufficientForChiMinus3
 
+eisensteinPhaseDoesNotPayIdentityConsumer :
+  Descent.ConsumerSufficient
+    EisensteinObserver.phaseOfNat
+    EisensteinObserver.identityConsumer →
+  ⊥
 eisensteinPhaseDoesNotPayIdentityConsumer =
   EisensteinObserver.phaseCannotPayIdentityConsumer
 
+eisensteinPhaseResidualReopens :
+  (n : Nat) →
+  EisensteinObserver.reopen3
+    (EisensteinObserver.phaseOfNat n)
+    (EisensteinObserver.quotient3 n)
+  ≡ n
 eisensteinPhaseResidualReopens =
   EisensteinObserver.reopenPhaseQuotient
 
