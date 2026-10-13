@@ -1,0 +1,6 @@
+module DASHI.Cognition.SpringfieldValueCaptureEverything where
+
+import DASHI.Cognition.BlackRockMirvacSpringfieldCapitalOverlapExact
+import DASHI.Cognition.SpringfieldLayeredValueCaptureParetoExact
+import DASHI.Cognition.SpringfieldValueCaptureReceiptRound20261013Exact
+import DASHI.Cognition.SpringfieldStateInfrastructureValueCaptureExact
