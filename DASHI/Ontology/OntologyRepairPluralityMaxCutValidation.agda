@@ -19,6 +19,13 @@ disjointnessConflictRoutesToReview :
   suggestedOperation disjointnessConflict ≡ Repair.holdForReview
 disjointnessConflictRoutesToReview = refl
 
+compiledSuggestionPreservesRoutedOperation :
+  (target : Repair.RepairTarget) →
+  (evidence : Repair.RepairEvidence) →
+  Repair.operation (compileRepairSuggestion target predicateTooStrong evidence)
+  ≡ Repair.underspecifyType
+compiledSuggestionPreservesRoutedOperation target evidence = refl
+
 pluralPressureCannotAssertTruth :
   PluralPressureTruthPermission → ⊥
 pluralPressureCannotAssertTruth = pluralPressureCannotPromoteTruth
