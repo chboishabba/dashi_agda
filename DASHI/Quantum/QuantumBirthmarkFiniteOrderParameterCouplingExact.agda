@@ -2,7 +2,7 @@
 module DASHI.Quantum.QuantumBirthmarkFiniteOrderParameterCouplingExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_)
 
@@ -12,10 +12,6 @@ import DASHI.Quantum.QuantumBirthmarkTwoPhaseHistoryModelExact as Phase
 
 ------------------------------------------------------------------------
 -- FINITE BIRTHMARK -> HISTORY -> ORDER PARAMETER -> VACUUM ENERGY
---
--- This is the literal composition of existing finite carriers.  It closes a
--- constructive microscopic benchmark without promoting the toy BirthmarkClass
--- into the PRX continuous birthmark statistic or a cosmological field law.
 ------------------------------------------------------------------------
 
 birthmarkPhase : Birthmark.BirthmarkClass → Phase.HistoryPhase
@@ -32,19 +28,19 @@ birthmarkVacuumEnergy birthmark =
 
 lowBirthmarkOrderParameter :
   birthmarkOrderParameter Birthmark.lowBirthmark ≡ 0ℚ
-lowBirthmarkOrderParameter = HistoryPhase.historyABCSelectsLowVacuum
+lowBirthmarkOrderParameter = refl
 
 highBirthmarkOrderParameter :
   birthmarkOrderParameter Birthmark.highBirthmark ≡ 1ℚ
-highBirthmarkOrderParameter = HistoryPhase.historyACBSelectsHighVacuum
+highBirthmarkOrderParameter = refl
 
 lowBirthmarkVacuumEnergy :
   birthmarkVacuumEnergy Birthmark.lowBirthmark ≡ Int.+ 21 / 64
-lowBirthmarkVacuumEnergy = HistoryPhase.historyABCEnergy
+lowBirthmarkVacuumEnergy = Phase.lowHistoryEnergy
 
 highBirthmarkVacuumEnergy :
   birthmarkVacuumEnergy Birthmark.highBirthmark ≡ Int.+ 3 / 8
-highBirthmarkVacuumEnergy = HistoryPhase.historyACBEnergy
+highBirthmarkVacuumEnergy = Phase.highHistoryEnergy
 
 finiteBirthmarkToOrderParameterCouplingOwned : Bool
 finiteBirthmarkToOrderParameterCouplingOwned = true
