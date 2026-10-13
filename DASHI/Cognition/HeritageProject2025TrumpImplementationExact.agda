@@ -6,15 +6,17 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.Project2025ImplementationIncidenceAtlasExact as Incidence
+import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as PalantirIntersection
 
 ------------------------------------------------------------------------
 -- HERITAGE / PROJECT 2025 / TRUMP IMPLEMENTATION INFRASTRUCTURE
 --
 -- This owner separates policy design, personnel recruitment/training,
 -- administration appointments, observed policy overlap, concrete
--- chapter->author->office->action correspondences, and causal claims.
--- Heritage/Project 2025 may be a high-value implementation infrastructure
--- without every Trump action being caused by Project 2025.
+-- chapter->author->office->action correspondences, policy-capability/procurement
+-- intersections, and causal claims. Heritage/Project 2025 may be a high-value
+-- implementation infrastructure without every Trump action, vendor or contract
+-- being caused or selected by Project 2025.
 ------------------------------------------------------------------------
 
 data Project2025EdgeKind : Set where
@@ -29,6 +31,7 @@ data Project2025EdgeKind : Set where
   brendanCarrAdministrationAppointment : Project2025EdgeKind
   observedTrumpPolicyOverlap : Project2025EdgeKind
   concreteAuthorRoleActionIncidence : Project2025EdgeKind
+  immigrationDataPolicyCapabilityIntersection : Project2025EdgeKind
   trumpPolicyBeyondProject2025 : Project2025EdgeKind
   directEpsteinRelationshipUnpaid : Project2025EdgeKind
 
@@ -109,6 +112,12 @@ concreteIncidenceReceipt = project2025-receipt
   "Project2025ImplementationIncidenceAtlasExact resolves concrete author->office->action chains including Vought/civil-service control and Carr/FCC media-ownership deregulation, while retaining beneficiary/burden/voice/control incidence as separate consumers."
   true true false false
 
+immigrationDataIntersectionReceipt : Project2025Receipt
+immigrationDataIntersectionReceipt = project2025-receipt
+  immigrationDataPolicyCapabilityIntersection
+  "Project2025PalantirImmigrationDataIntersectionExact separately pays Project 2025 immigration/data-integration policy demand and current ICE/Palantir targeting/case-management procurement, then represents their same-domain intersection without asserting that Heritage or Project 2025 selected Palantir."
+  true true false false
+
 beyondReceipt : Project2025Receipt
 beyondReceipt = project2025-receipt
   trumpPolicyBeyondProject2025
@@ -128,6 +137,9 @@ epsteinBoundaryReceipt = project2025-receipt
 implementationIncidenceBoundary : Incidence.Project2025IncidenceBoundary
 implementationIncidenceBoundary = Incidence.canonicalProject2025IncidenceBoundary
 
+palantirIntersectionBoundary : PalantirIntersection.Project2025PalantirBoundary
+palantirIntersectionBoundary = PalantirIntersection.canonicalProject2025PalantirBoundary
+
 chapterAuthorRoleActionChainsPaid :
   Incidence.chapterAuthorRoleActionChainsPaid
     Incidence.canonicalProject2025IncidenceBoundary ≡ true
@@ -137,6 +149,21 @@ project2025CausationStillNotAutomatic :
   Incidence.project2025CausedEveryMatchedAction
     Incidence.canonicalProject2025IncidenceBoundary ≡ false
 project2025CausationStillNotAutomatic = refl
+
+immigrationDataIntegrationDemandPaid :
+  PalantirIntersection.project2025DataIntegrationDemandPaid
+    PalantirIntersection.canonicalProject2025PalantirBoundary ≡ true
+immigrationDataIntegrationDemandPaid = refl
+
+palantirICECapabilityPaid :
+  PalantirIntersection.palantirICECapabilityPaid
+    PalantirIntersection.canonicalProject2025PalantirBoundary ≡ true
+palantirICECapabilityPaid = refl
+
+project2025PalantirVendorSelectionStillUnpaid :
+  PalantirIntersection.project2025SelectedPalantir
+    PalantirIntersection.canonicalProject2025PalantirBoundary ≡ false
+project2025PalantirVendorSelectionStillUnpaid = refl
 
 ------------------------------------------------------------------------
 -- Canonical boundary.
@@ -152,6 +179,8 @@ record Project2025ImplementationBoundary : Set where
     carrImplementationBridgePaid : Bool
     substantialTrumpPolicyOverlapPaid : Bool
     concreteAuthorRoleActionIncidencePaid : Bool
+    immigrationDataPolicyCapabilityIntersectionPaid : Bool
+    project2025SelectedPalantirPaid : Bool
     secondAndThirdOrderIncidenceRequired : Bool
     everyTrumpActionCausedByProject2025 : Bool
     trumpAndProject2025AreIdentical : Bool
@@ -160,7 +189,7 @@ open Project2025ImplementationBoundary public
 
 canonicalProject2025ImplementationBoundary : Project2025ImplementationBoundary
 canonicalProject2025ImplementationBoundary = project2025-implementation-boundary
-  true true true true true true true true false false false
+  true true true true true true true true false true false false false
 
 ------------------------------------------------------------------------
 -- Attribution / promotion firewalls.
@@ -171,6 +200,7 @@ data AuthorAppointmentImpliesFullBlueprintAdoption : Set where
 data CoalitionMembershipImpliesUnifiedCommand : Set where
 data PersonnelPipelineImpliesEveryAppointmentCameFromProject2025 : Set where
 data BeneficiaryImpliesPolicySponsor : Set where
+data PolicyDemandImpliesVendorSelection : Set where
 data TrumpismInterpretationImpliesProject2025Receipt : Set where
 data HeritageProject2025ImpliesEpsteinRelationship : Set where
 
@@ -189,6 +219,9 @@ personnelPipelineDoesNotCreateUniversalAppointmentProvenance ()
 
 beneficiaryDoesNotCreatePolicySponsor : BeneficiaryImpliesPolicySponsor → ⊥
 beneficiaryDoesNotCreatePolicySponsor ()
+
+policyDemandDoesNotCreateVendorSelection : PolicyDemandImpliesVendorSelection → ⊥
+policyDemandDoesNotCreateVendorSelection ()
 
 trumpismInterpretationDoesNotCreateProjectReceipt : TrumpismInterpretationImpliesProject2025Receipt → ⊥
 trumpismInterpretationDoesNotCreateProjectReceipt ()
