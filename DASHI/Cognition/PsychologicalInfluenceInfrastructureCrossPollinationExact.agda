@@ -21,7 +21,7 @@ import DASHI.Cognition.StateInstitutionEpistemicNonPrivilegeExact as NonPrivileg
 -- PSYCHOLOGICAL / COGNITIVE INFLUENCE INFRASTRUCTURE CROSS-POLLINATION
 --
 -- Reuses the observer-relative cognitive-warfare theorem and the generic
--- institutional-technique-transfer distinction.  The live actors below are not
+-- institutional-technique-transfer distinction. The live actors below are not
 -- collapsed into one programme merely because each has documented interests in
 -- persuasion, targeting, narrative control, audience selection, policy
 -- implementation, surveillance or decision support.
@@ -91,10 +91,6 @@ canonicalProfiles =
     "Sibling PR #1112 source-writes an Oracle/Ellison surveillance-security cognitive-warfare weld. Because that PR is unmerged, this branch records the adjacency without importing it as theorem authority."
   ∷ []
 
-------------------------------------------------------------------------
--- Generic non-promotion boundary.
-------------------------------------------------------------------------
-
 record InfluenceInfrastructureBoundary : Set where
   constructor influence-infrastructure-boundary
   field
@@ -113,16 +109,6 @@ open InfluenceInfrastructureBoundary public
 canonicalInfluenceInfrastructureBoundary : InfluenceInfrastructureBoundary
 canonicalInfluenceInfrastructureBoundary = influence-infrastructure-boundary
   false false false false false false false false false true
-
--- Direct reuse of the cognitive-war observer result: a target-local visible
--- surface cannot determine hidden organic-vs-engineered provenance.
-targetSurfaceStillCannotDetermineOrigin :
-  Detection.Adequacy.AdmissibleAdequateNow
-    Detection.detectionProblem
-    Detection.originQuery →
-  ⊥
-targetSurfaceStillCannotDetermineOrigin =
-  Detection.targetSurfaceCannotDetermineOrigin
 
 data SharedInterestImpliesCoordination : Set where
 data SimilarTechniqueImpliesTransfer : Set where
