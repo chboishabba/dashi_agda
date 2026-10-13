@@ -11,24 +11,22 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 import DASHI.Physics.Foundations.FiniteHistoryFunctionalExact as History
 import DASHI.Quantum.QuantumBirthmarkCommonHistoryIdentityBenchmarkExact as Birthmark
 
-------------------------------------------------------------------------
--- NORMALIZED TWO-HISTORY PHENOMENOLOGICAL MODELS
---
--- This closes normalization on the finite benchmark and simultaneously proves
--- that persistence/context does not select a unique probability law.  The
--- biased model and symmetric model are both normalized on the same histories.
-------------------------------------------------------------------------
-
 biasedWeight : Birthmark.BirthmarkClass → History.History3 → ℚ
-biasedWeight Birthmark.lowBirthmark History.historyABC = Int.+ 3 / 4
-biasedWeight Birthmark.lowBirthmark History.historyACB = Int.+ 1 / 4
-biasedWeight Birthmark.highBirthmark History.historyABC = Int.+ 1 / 4
-biasedWeight Birthmark.highBirthmark History.historyACB = Int.+ 3 / 4
+biasedWeight Birthmark.lowBirthmark
+  (History.configurationA , (History.configurationB , History.configurationC)) = Int.+ 3 / 4
+biasedWeight Birthmark.lowBirthmark
+  (History.configurationA , (History.configurationC , History.configurationB)) = Int.+ 1 / 4
+biasedWeight Birthmark.highBirthmark
+  (History.configurationA , (History.configurationB , History.configurationC)) = Int.+ 1 / 4
+biasedWeight Birthmark.highBirthmark
+  (History.configurationA , (History.configurationC , History.configurationB)) = Int.+ 3 / 4
 biasedWeight birthmark history = Int.+ 0 / 1
 
 symmetricWeight : Birthmark.BirthmarkClass → History.History3 → ℚ
-symmetricWeight birthmark History.historyABC = Int.+ 1 / 2
-symmetricWeight birthmark History.historyACB = Int.+ 1 / 2
+symmetricWeight birthmark
+  (History.configurationA , (History.configurationB , History.configurationC)) = Int.+ 1 / 2
+symmetricWeight birthmark
+  (History.configurationA , (History.configurationC , History.configurationB)) = Int.+ 1 / 2
 symmetricWeight birthmark history = Int.+ 0 / 1
 
 lowBirthmarkWeightsNormalize :
