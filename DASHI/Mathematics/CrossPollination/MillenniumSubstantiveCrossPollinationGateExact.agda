@@ -3,14 +3,19 @@ module DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationG
 ------------------------------------------------------------------------
 -- DASHI CONTRIBUTION
 --
--- Replace the earlier relevance-only table with a finite audit of the
--- substantive modules now present on this branch.  Each problem receives an
--- exact local core, an explicit conjecture/theorem boundary, and named bridges
--- into existing repository owners.  The status constructors prevent a checked
+-- Central audit for the seven Clay Millennium problems plus the adjacent
+-- graded-VOA/Moonshine research lane.  Each problem receives an exact local
+-- core, an explicit conjecture/theorem boundary, and named bridges into
+-- existing repository owners.  The status constructors prevent a checked
 -- finite identity from being confused with a solved Millennium problem.
+--
+-- This file now includes Navier--Stokes and Yang--Mills explicitly rather than
+-- leaving those two deep standalone programmes outside the central index.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (false)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
@@ -35,13 +40,31 @@ import DASHI.Moonshine.TrivialRationalGradedVertexAlgebraExact
 import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary
 import DASHI.Moonshine.MonsterGradedVOABridgeExact
 
+import DASHI.Papers.NavierStokes.TheoremInterface as NS
+import DASHI.Physics.YangMills.YangMillsSubmissionExactCutset as YM
+import DASHI.Physics.YangMills.CompactLieProofLevel as YMLevel
+
+import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as EisensteinObserver
+
+------------------------------------------------------------------------
+-- The seven Clay lanes, with one explicitly adjacent non-Clay research lane.
+------------------------------------------------------------------------
+
 data ProblemLane : Set where
   riemannLane
   hodgeLane
   bsdLane
   pVersusNPLane
+  navierStokesLane
+  yangMillsLane
   poincareHistoricalLane
   gradedVOAMoonshineLane
+
+clayProblemLaneCount : Nat
+clayProblemLaneCount = 7
+
+openClayProblemLaneCount : Nat
+openClayProblemLaneCount = 6
 
 data LocalSurfaceKind : Set where
   exactFiniteCore
@@ -93,6 +116,22 @@ pVersusNPStatus = laneStatus
   proofBearingGenericTheorem
   analyticOrGeometricBoundary
 
+navierStokesStatus : LaneStatus
+navierStokesStatus = laneStatus
+  navierStokesLane
+  proofBearingGenericTheorem
+  analyticOrGeometricBoundary
+  proofBearingGenericTheorem
+  analyticOrGeometricBoundary
+
+yangMillsStatus : LaneStatus
+yangMillsStatus = laneStatus
+  yangMillsLane
+  proofBearingGenericTheorem
+  analyticOrGeometricBoundary
+  proofBearingGenericTheorem
+  analyticOrGeometricBoundary
+
 poincareHistoricalStatus : LaneStatus
 poincareHistoricalStatus = laneStatus
   poincareHistoricalLane
@@ -109,12 +148,27 @@ gradedVOAStatus = laneStatus
   proofBearingGenericTheorem
   analyticOrGeometricBoundary
 
+------------------------------------------------------------------------
+-- Backward-compatible four-lane theorem retained, then the complete six-open
+-- Clay theorem.
+------------------------------------------------------------------------
+
 allOpenLanesRemainUncompleted :
   finalClosureStatus riemannStatus ≡ analyticOrGeometricBoundary
   × finalClosureStatus hodgeStatus ≡ analyticOrGeometricBoundary
   × finalClosureStatus bsdStatus ≡ analyticOrGeometricBoundary
   × finalClosureStatus pVersusNPStatus ≡ analyticOrGeometricBoundary
 allOpenLanesRemainUncompleted = refl , refl , refl , refl
+
+allOpenClayLanesRemainUncompleted :
+  finalClosureStatus riemannStatus ≡ analyticOrGeometricBoundary
+  × finalClosureStatus hodgeStatus ≡ analyticOrGeometricBoundary
+  × finalClosureStatus bsdStatus ≡ analyticOrGeometricBoundary
+  × finalClosureStatus pVersusNPStatus ≡ analyticOrGeometricBoundary
+  × finalClosureStatus navierStokesStatus ≡ analyticOrGeometricBoundary
+  × finalClosureStatus yangMillsStatus ≡ analyticOrGeometricBoundary
+allOpenClayLanesRemainUncompleted =
+  refl , refl , refl , refl , refl , refl
 
 gradedVOANowHasExactFiniteCore :
   exactCorePresent gradedVOAStatus ≡ exactFiniteCore
@@ -124,6 +178,26 @@ poincareUsesExternalSolvedTheoremBoundary :
   finalClosureStatus poincareHistoricalStatus
   ≡ externalClassificationBoundary
 poincareUsesExternalSolvedTheoremBoundary = refl
+
+------------------------------------------------------------------------
+-- Same-object terminal guards imported from the mature standalone NS/YM lanes.
+------------------------------------------------------------------------
+
+navierStokesClayTerminalPromotionStillFalse :
+  NS.NSPaperTheoremStatus.clayTerminalPromotion
+    NS.canonicalNSPaperTheoremStatus
+  ≡ false
+navierStokesClayTerminalPromotionStillFalse =
+  NS.NSPaperTheoremStatus.clayTerminalPromotionIsFalse
+    NS.canonicalNSPaperTheoremStatus
+
+yangMillsFullCutsetInhabitantsRemainConditional :
+  YM.submissionFullCutsetInhabitantsLevel ≡ YMLevel.conditional
+yangMillsFullCutsetInhabitantsRemainConditional = refl
+
+------------------------------------------------------------------------
+-- Cross-pollination edges.
+------------------------------------------------------------------------
 
 data CrossPollinationEdge : Set where
   maassSpectrumToRiemannHilbertPolya
@@ -138,6 +212,7 @@ data CrossPollinationEdge : Set where
   kleinInvariantToGCTOrbitSeparation
   unitQuaternionsToRoundThreeSphere
   ricciGeometrizationToPoincare
+  eisensteinPhaseToConsumerDescent
 
 record ImplementedEdge : Set where
   constructor implementedEdge
@@ -173,6 +248,28 @@ poincareQuaternionEdge : ImplementedEdge
 poincareQuaternionEdge =
   implementedEdge unitQuaternionsToRoundThreeSphere
     proofBearingGenericTheorem
+
+eisensteinObserverEdge : ImplementedEdge
+eisensteinObserverEdge =
+  implementedEdge eisensteinPhaseToConsumerDescent
+    proofBearingGenericTheorem
+
+------------------------------------------------------------------------
+-- Exact witness behind the Eisenstein observer edge:
+--   * phase is sufficient for the chi_-3 consumer;
+--   * phase is not sufficient for the identity consumer;
+--   * phase + residual reopens the full integer exactly.
+-- These are theorem-level distinctions, not a status-table analogy.
+------------------------------------------------------------------------
+
+eisensteinPhasePaysChiConsumer =
+  EisensteinObserver.phaseIsSufficientForChiMinus3
+
+eisensteinPhaseDoesNotPayIdentityConsumer =
+  EisensteinObserver.phaseCannotPayIdentityConsumer
+
+eisensteinPhaseResidualReopens =
+  EisensteinObserver.reopenPhaseQuotient
 
 completedStatusIsDistinctFromBoundary :
   completedMillenniumProof ≡ analyticOrGeometricBoundary → ⊥
