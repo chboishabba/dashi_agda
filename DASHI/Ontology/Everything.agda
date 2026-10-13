@@ -11,4 +11,10 @@ import DASHI.Ontology.EducationOntologyMappingSSSOMExact
 import DASHI.Ontology.EducationOntologyMappingValidation
 import DASHI.Ontology.EducationOntologyMappingPNFExact
 import DASHI.Ontology.EducationOntologyMappingPNFValidation
+import DASHI.Ontology.RosarioConceptualDiagnosticsExact
+import DASHI.Ontology.RosarioConceptualDiagnosticsValidation
+import DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact
+import DASHI.Ontology.RosarioPNFAdmissibleFactorisationValidation
+import DASHI.Ontology.OCTFSensibLawHandoffExact
+import DASHI.Ontology.OCTFSensibLawHandoffValidation
 import Ontology.Hecke.Everything
