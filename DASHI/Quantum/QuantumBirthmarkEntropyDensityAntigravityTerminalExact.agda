@@ -21,6 +21,7 @@ module DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as ResidualExpansion
 import DASHI.Physics.Foundations.GRQFTLocalizedAntigravityMaxCutExact as Localized
@@ -70,8 +71,7 @@ finiteFLRWExpansionWitness =
   FLRW.canonicalFiniteRepulsiveExpansionWitness
 
 finiteFLRWExpansionIsPositive :
-  FLRW.finiteFLRWAccelerationOrientation
-    Agda.Builtin.Equality.≡ FLRW.expandingAcceleration
+  FLRW.finiteFLRWAccelerationOrientation ≡ FLRW.expandingAcceleration
 finiteFLRWExpansionIsPositive =
   FLRW.finiteFLRWAccelerationIsExpanding
 
