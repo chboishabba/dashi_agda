@@ -28,6 +28,7 @@ import DASHI.Mathematics.Arithmetic.EllipticCurveF5PointEnumerationExact
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact
 import DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary
 import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
+import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as EisensteinCubic
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary
@@ -43,6 +44,7 @@ import DASHI.Moonshine.MonsterGradedVOABridgeExact
 import DASHI.Papers.NavierStokes.TheoremInterface as NS
 import DASHI.Physics.YangMills.YangMillsSubmissionExactCutset as YM
 import DASHI.Physics.YangMills.CompactLieProofLevel as YMLevel
+import DASHI.Physics.ThreeBody.EisensteinC3FourierExact as ThreeBodyC3
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as EisensteinObserver
@@ -214,6 +216,8 @@ data CrossPollinationEdge : Set where
   unitQuaternionsToRoundThreeSphere
   ricciGeometrizationToPoincare
   eisensteinPhaseToConsumerDescent
+  threeBodyCyclicPermutationToC3Fourier
+  eisensteinCubicToCMArithmeticSandbox
 
 record ImplementedEdge : Set where
   constructor implementedEdge
@@ -255,12 +259,21 @@ eisensteinObserverEdge =
   implementedEdge eisensteinPhaseToConsumerDescent
     proofBearingGenericTheorem
 
+threeBodyC3FourierEdge : ImplementedEdge
+threeBodyC3FourierEdge =
+  implementedEdge threeBodyCyclicPermutationToC3Fourier
+    proofBearingGenericTheorem
+
+eisensteinCubicCMEdge : ImplementedEdge
+eisensteinCubicCMEdge =
+  implementedEdge eisensteinCubicToCMArithmeticSandbox
+    proofBearingGenericTheorem
+
 ------------------------------------------------------------------------
 -- Exact witness behind the Eisenstein observer edge:
 --   * phase is sufficient for the chi_-3 consumer;
 --   * phase is not sufficient for the identity consumer;
 --   * phase + residual reopens the full integer exactly.
--- These are theorem-level distinctions, not a status-table analogy.
 ------------------------------------------------------------------------
 
 eisensteinPhasePaysChiConsumer :
@@ -286,6 +299,39 @@ eisensteinPhaseResidualReopens :
   ≡ n
 eisensteinPhaseResidualReopens =
   EisensteinObserver.reopenPhaseQuotient
+
+------------------------------------------------------------------------
+-- Three-body edge is an exact action theorem, not merely a cardinality match.
+------------------------------------------------------------------------
+
+threeBodyCyclicModeOneIsOmegaEigen :
+  (state : ThreeBodyC3.PlanarThreeBodyState) →
+  ThreeBodyC3.mode1 (ThreeBodyC3.cyclicPermute state)
+  ≡
+  DASHI.Biology.EisensteinNineRingInterferenceExact.multiply
+    DASHI.Biology.EisensteinNineRingInterferenceExact.omega
+    (ThreeBodyC3.mode1 state)
+threeBodyCyclicModeOneIsOmegaEigen = ThreeBodyC3.mode1CyclicEigen
+
+threeBodyCyclicModeTwoIsOmegaSquaredEigen :
+  (state : ThreeBodyC3.PlanarThreeBodyState) →
+  ThreeBodyC3.mode2 (ThreeBodyC3.cyclicPermute state)
+  ≡
+  DASHI.Biology.EisensteinNineRingInterferenceExact.multiply
+    DASHI.Biology.EisensteinNineRingInterferenceExact.omegaSquared
+    (ThreeBodyC3.mode2 state)
+threeBodyCyclicModeTwoIsOmegaSquaredEigen = ThreeBodyC3.mode2CyclicEigen
+
+------------------------------------------------------------------------
+-- CM/BSD/Hodge donor is likewise a literal local algebraic action.  Global
+-- complex multiplication theory, Hecke characters, L-functions and the Clay
+-- conjectures remain outside this local theorem.
+------------------------------------------------------------------------
+
+eisensteinCubicActionAvailable :
+  (B : DASHI.Biology.EisensteinNineRingInterferenceExact.Eisenstein) →
+  EisensteinCubic.EisensteinCubicC3Action B
+eisensteinCubicActionAvailable = EisensteinCubic.omegaCubicC3Action
 
 completedStatusIsDistinctFromBoundary :
   completedMillenniumProof ≡ analyticOrGeometricBoundary → ⊥
