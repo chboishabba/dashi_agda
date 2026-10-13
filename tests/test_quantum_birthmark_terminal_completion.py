@@ -15,5 +15,16 @@ def test_terminal_completion_has_only_explicit_residual_classes():
     assert "noGenericWeldResidualCategory" in text
 
 
+def test_terminal_completion_includes_entropy_density_expansion_spine():
+    text = OWNER.read_text()
+    for token in [
+        "entropyDensityExpansionCompilerOwned",
+        "antigravityExpansionTerminalOwned",
+        "positiveGRepulsionAndExpansionEndpointsOwned",
+        "allExistingGravityExpansionPriorArtCrossPollinated",
+    ]:
+        assert token in text
+
+
 def test_terminal_completion_registered():
     assert "QuantumBirthmarkTerminalCompletionExact" in ROLLUP.read_text()
