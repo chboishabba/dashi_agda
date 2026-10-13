@@ -23,6 +23,8 @@ data ReceiptKind : Set where
   assetValuation : ReceiptKind
   substantialHolding : ReceiptKind
   lobbyingAccess : ReceiptKind
+  lobbyingSubject : ReceiptKind
+  politicalDonation : ReceiptKind
   gasInfrastructureAlliance : ReceiptKind
   longTermEnergyAlliance : ReceiptKind
 
@@ -85,12 +87,36 @@ springfieldSantoroCustomerServicesMeeting = receipt lobbyingAccess
   "Santo Santoro, Maha Sinnathamby, Raynuha Sinnathamby, Russell Luhrs and Jim Varghese attended a recorded 'Lobbyist Introductory Meeting'. Exact subject matter beyond the diary label remains unresolved."
   true
 
+springfieldSantoroFinanceMeeting : Receipt
+springfieldSantoroFinanceMeeting = receipt lobbyingAccess
+  "Springfield Land Corporation / Santo Santoro"
+  "Queensland Finance/Trade/Employment/Training Minister's office"
+  "Queensland ministerial diary, 12 February 2025"
+  "Maha Sinnathamby, Bob Sharpless, Richard Eden and registered lobbyist Santo Santoro attended a recorded Springfield Land Corporation meeting with the Finance/Trade/Employment/Training Minister's office. Exact asks remain unresolved."
+  true
+
+springfieldSantoroTAFESubject : Receipt
+springfieldSantoroTAFESubject = receipt lobbyingSubject
+  "Springfield City Group / Santo Santoro"
+  "Queensland Finance/Trade/Employment/Training office"
+  "Queensland Chief of Staff diary, 10 April 2025"
+  "A diary entry records Santo Santoro and Springfield City Group CEO Richard Eden in a meeting whose stated purpose was 'Discussion on TAFE premises, Springfield'. This pays one exact lobbying subject, not the desired outcome, decision, consideration or causal effect."
+  true
+
 springfieldSantoroPremierOfficeMeeting : Receipt
 springfieldSantoroPremierOfficeMeeting = receipt lobbyingAccess
   "Springfield Land Corporation / Santo Santoro"
   "Queensland Premier's office"
   "Queensland Chief of Staff diary, 16 April 2025"
   "The Premier's office diary records Santo Santoro, identified with Springfield Land Corporation and as lobbyist, and Springfield Health City chair Rob Stable in a meeting with Springfield City Group. Exact requests/outcomes remain unresolved."
+  true
+
+springfieldLnpDonation2019 : Receipt
+springfieldLnpDonation2019 = receipt politicalDonation
+  "Springfield Land Corporation"
+  "Liberal National Party of Queensland"
+  "Electoral Commission of Queensland Electronic Disclosure System"
+  "The ECQ ledger records a AUD 7,000 Springfield Land Corporation gift to the Liberal National Party of Queensland on 15 March 2019. Donation does not establish influence, quid pro quo or decision causation."
   true
 
 springfieldEnergexAlliance : Receipt
@@ -113,8 +139,9 @@ canonicalReceiptRound : List Receipt
 canonicalReceiptRound =
   cityWestSale ∷ springfieldVillageTenantStack ∷ orionOwnershipAndValue ∷
   blackRockMirvacGrowth ∷ springfieldSantoroHealthMeeting ∷
-  springfieldSantoroCustomerServicesMeeting ∷ springfieldSantoroPremierOfficeMeeting ∷
-  springfieldEnergexAlliance ∷ springfieldEngieAlliance ∷ []
+  springfieldSantoroCustomerServicesMeeting ∷ springfieldSantoroFinanceMeeting ∷
+  springfieldSantoroTAFESubject ∷ springfieldSantoroPremierOfficeMeeting ∷
+  springfieldLnpDonation2019 ∷ springfieldEnergexAlliance ∷ springfieldEngieAlliance ∷ []
 
 ------------------------------------------------------------------------
 -- Promotion boundaries.
@@ -122,6 +149,8 @@ canonicalReceiptRound =
 
 data TenantCommitmentImpliesExecutedLease : Set where
 data MultipleLobbyingMeetingsImpliesDecisionCausation : Set where
+data LobbyingSubjectImpliesDesiredOutcome : Set where
+data PoliticalDonationImpliesInfluence : Set where
 data SubstantialHoldingImpliesOperationalControl : Set where
 data GasAllianceImpliesCurrentAssetOwnership : Set where
 data EnergyAllianceImpliesCommonOwnership : Set where
@@ -131,6 +160,12 @@ tenantCommitmentDoesNotCreateExecutedLease ()
 
 lobbyingAccessDoesNotCreateDecisionCausation : MultipleLobbyingMeetingsImpliesDecisionCausation → ⊥
 lobbyingAccessDoesNotCreateDecisionCausation ()
+
+lobbyingSubjectDoesNotCreateDesiredOutcome : LobbyingSubjectImpliesDesiredOutcome → ⊥
+lobbyingSubjectDoesNotCreateDesiredOutcome ()
+
+politicalDonationDoesNotCreateInfluence : PoliticalDonationImpliesInfluence → ⊥
+politicalDonationDoesNotCreateInfluence ()
 
 substantialHoldingDoesNotCreateOperationalControl : SubstantialHoldingImpliesOperationalControl → ⊥
 substantialHoldingDoesNotCreateOperationalControl ()
@@ -147,7 +182,7 @@ energyAllianceDoesNotCreateCommonOwnership ()
 
 data ResidualCut : Set where
   cityWestSPVAndFinancing : ResidualCut
-  santoroExactAsksAndOutcomes : ResidualCut
+  santoroRemainingAsksAndOutcomes : ResidualCut
   originalEnergexAgreement : ResidualCut
   springfieldGasAssetTransferChain : ResidualCut
   orionOriginalCounterpartyAndRevenueRights : ResidualCut
@@ -168,12 +203,12 @@ canonicalResidualPriority : List ResidualPriority
 canonicalResidualPriority =
   residual-priority cityWestSPVAndFinancing 100
     "Resolve purchaser SPV/title, beneficial interests, lender/security documents, equity split and project guarantees for the AUD 50m City West acquisition."
-  ∷ residual-priority santoroExactAsksAndOutcomes 100
-    "Acquire briefing papers, correspondence, lobbyist register client-purpose records, RTI releases and decision chronology for the repeated Springfield/Santoro meetings."
   ∷ residual-priority originalEnergexAgreement 100
     "Acquire the original Energex-Springfield alliance instrument or board/project records fixing rights, obligations, capital contributions and network ownership."
   ∷ residual-priority springfieldGasAssetTransferChain 100
     "Trace same-object gas assets/easements through Energex/Allgas/APA/AGIG/Stonepeak and quantify connection/fixed/throughput revenue incidence."
+  ∷ residual-priority santoroRemainingAsksAndOutcomes 99
+    "TAFE-premises subject matter is now paid for one April meeting; acquire briefing papers, correspondence, lobbyist contact-log entries and decision chronology for that meeting and the remaining Health/Finance/Premier/customer-services meetings."
   ∷ residual-priority orionOriginalCounterpartyAndRevenueRights 98
     "Resolve Mirvac's August-2002 Orion acquisition/agreement counterparties, land consideration, adjoining-land rights and any Springfield City Group continuing revenue/option interests."
   ∷ residual-priority springfieldRetainedLandCadastre 98
