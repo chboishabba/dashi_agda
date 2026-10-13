@@ -4,13 +4,22 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Algebra.TriadicDepthOneCharacters as AtomicC3
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChiralMolecularSeparatingPairExact as Static
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Hyper
 import DASHI.Physics.Chemistry.AsymmetricChiralDynamicsExact as Dynamics
+import DASHI.Physics.Chemistry.CyclotomicChiralConjugationBridgeExact as ChiralC3
 import DASHI.Physics.Chemistry.Nobel2026SharedC3ActionWeldExact as SharedC3
+import DASHI.Physics.Chemistry.Nobel2026CyclotomicCarrierEquivalenceExact as Carrier
 
 ------------------------------------------------------------------------
 -- 369 / ATOMIC-CHEMISTRY CROSS-POLLINATION
+--
+-- Static molecular chirality, future-sensitive dynamics and the canonical
+-- atomic/Fourier C3 phase carrier are now joined on this branch.  This is an
+-- exact representation-level interoperability theorem.  It is intentionally
+-- weaker than importing the selected physical p-shell realization from open PR
+-- #1141 and does not equate a magnetic sector with molecular handedness.
 ------------------------------------------------------------------------
 
 data ChiralSeed : Set where
@@ -47,13 +56,39 @@ futurePredictiveNonDescent = Dynamics.futureBranchDoesNotFactorThroughCoarse
 sharedC3ActionBoundary : SharedC3.SharedC3ActionWeldBoundary
 sharedC3ActionBoundary = SharedC3.canonicalSharedC3ActionWeldBoundary
 
+------------------------------------------------------------------------
+-- Exact adapter into the same canonical symbolic C3 carrier used by the atomic
+-- depth-one character table and the selected p-shell work in PR #1141.
+------------------------------------------------------------------------
+
+atomicPhaseOfSeed : ChiralSeed → AtomicC3.C3Phase
+atomicPhaseOfSeed seed =
+  Carrier.chemToAtomic (ChiralC3.chiralPhase (dynamicSeed seed))
+
+leftSeedAtomicPhase : atomicPhaseOfSeed leftSeedWitness ≡ AtomicC3.phase1
+leftSeedAtomicPhase = refl
+
+rightSeedAtomicPhase : atomicPhaseOfSeed rightSeedWitness ≡ AtomicC3.phase2
+rightSeedAtomicPhase = refl
+
+seedMirrorAtomicPhasesAreConjugate :
+  AtomicC3.conjugatePhase (atomicPhaseOfSeed leftSeedWitness)
+  ≡ atomicPhaseOfSeed rightSeedWitness
+seedMirrorAtomicPhasesAreConjugate = refl
+
+atomicGeneratorActsAsChemistryAdvance :
+  (p : ChiralC3.C3.C3Phase) →
+  Carrier.chemToAtomic (ChiralC3.C3.phaseAdvance p)
+  ≡ AtomicC3.multiplyPhase AtomicC3.phase1 (Carrier.chemToAtomic p)
+atomicGeneratorActsAsChemistryAdvance = Carrier.chemAdvanceIsAtomicGeneratorAction
+
 hyperfibreReading : String
 hyperfibreReading =
-  "AtomicPeriodicTable369ChemistryHyperfibreBridgeExact already requires stereochemistry and reaction context downstream of atomic/valence identity. The Nobel chiral-dynamics layer inhabits that molecular/reaction residual fibre, while Nobel2026SharedC3ActionWeldExact supplies the common order-three action/reflection algebra used for representation-level cross-pollination."
+  "AtomicPeriodicTable369ChemistryHyperfibreBridgeExact already requires stereochemistry and reaction context downstream of atomic/valence identity. The Nobel chiral-dynamics layer inhabits that molecular/reaction residual fibre, while the explicit C3 carrier equivalence makes the shared symbolic action interoperable with the repository atomic/Fourier character table."
 
 atomicC3Reading : String
 atomicC3Reading =
-  "The common C3 action/reflection surface is owned on this branch now. Atomic PR #1141 independently supplies a selected p-shell physical realization of a C3 action; that physical realization is not required to prove the chemistry/cyclotomic action algebra and is not identified with molecular handedness."
+  "The abstract C3 phase/action carrier is fully interoperable here. Atomic PR #1141 independently supplies a selected physical p-shell realization and same-action recognition; that physical realization remains a separate domain inhabitant, not a missing chemistry theorem or an identification of magnetic C3 charge with molecular chirality."
 
 record Atomic369ChiralDynamicsBoundary : Set where
   constructor atomic369ChiralDynamicsBoundary
@@ -67,12 +102,20 @@ record Atomic369ChiralDynamicsBoundary : Set where
     sharedC3ActionSurfaceOwned : Bool
     sharedC3ActionSurfaceOwnedIsTrue : sharedC3ActionSurfaceOwned ≡ true
 
+    canonicalAtomicFourierPhaseAdapterPaid : Bool
+    canonicalAtomicFourierPhaseAdapterPaidIsTrue :
+      canonicalAtomicFourierPhaseAdapterPaid ≡ true
+
     racemicStateCoercedToAnEnantiomer : Bool
     racemicStateCoercedToAnEnantiomerIsFalse : racemicStateCoercedToAnEnantiomer ≡ false
 
     atomicValenceDeterminesChiralAutocatalyticDynamics : Bool
     atomicValenceDeterminesChiralAutocatalyticDynamicsIsFalse :
       atomicValenceDeterminesChiralAutocatalyticDynamics ≡ false
+
+    physicalPShellRealizationImportedAsChemistryAuthority : Bool
+    physicalPShellRealizationImportedAsChemistryAuthorityIsFalse :
+      physicalPShellRealizationImportedAsChemistryAuthority ≡ false
 
     c3MagneticSectorIsMolecularChirality : Bool
     c3MagneticSectorIsMolecularChiralityIsFalse : c3MagneticSectorIsMolecularChirality ≡ false
@@ -83,6 +126,8 @@ canonicalAtomic369ChiralDynamicsBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
