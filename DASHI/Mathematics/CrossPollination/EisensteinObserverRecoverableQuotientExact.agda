@@ -4,8 +4,9 @@ module DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientE
 -- EISENSTEIN / C3 OBSERVER AS AN EXACT RECOVERABLE QUOTIENT
 --
 -- This module is deliberately small.  It reuses the repository's existing
--- three-phase Eisenstein carrier and the generic efficient-recoverable-quotient
--- interface already used by the complexity/P-vs-NP programme.
+-- three-phase Eisenstein carrier, generic recoverable-quotient interface and
+-- generic consumer-relative descent machinery already used by the complexity
+-- and Millennium residual programmes.
 --
 -- The coarse observer is n mod 3, represented by the existing phases
 --   1, omega, omega^2.
@@ -31,6 +32,8 @@ open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Biology.EisensteinNineRingInterferenceExact as E
 import DASHI.Biology.EisensteinThreeSixSymmetryExact as ThreeSix
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 
 ------------------------------------------------------------------------
 -- 1. Exact mod-3 phase observer and explicit residual receipt.
@@ -119,6 +122,23 @@ phaseObserverIsNotInjective :
 phaseObserverIsNotInjective injective =
   zeroIsNotThree (injective 0 3 phaseZeroEqualsPhaseThree)
 
+identityConsumer : Nat → Nat
+identityConsumer n = n
+
+phaseIdentityNonDescent :
+  Descent.ConsumerNonDescentWitness phaseOfNat identityConsumer
+phaseIdentityNonDescent =
+  Descent.consumerNonDescentWitness
+    0
+    3
+    phaseZeroEqualsPhaseThree
+    zeroIsNotThree
+
+phaseCannotPayIdentityConsumer :
+  Descent.ConsumerSufficient phaseOfNat identityConsumer → ⊥
+phaseCannotPayIdentityConsumer =
+  Descent.nonDescentWitnessBlocksSufficiency phaseIdentityNonDescent
+
 ------------------------------------------------------------------------
 -- 4. Exact C3-DFT antisymmetric channel = chi_-3, division-free.
 ------------------------------------------------------------------------
@@ -169,8 +189,7 @@ antisymmetricCharacterFactorization ThreeSix.phaseOmegaSquared =
   eisensteinExt refl refl
 
 ------------------------------------------------------------------------
--- 5. Three-step periodicity ties the phase observer to the executable
--- chi_-3 residue convention without introducing a second ternary carrier.
+-- 5. The phase observer is exactly sufficient for the chi_-3 consumer.
 ------------------------------------------------------------------------
 
 chiMinus3WeightOfNat : Nat → ℚ
@@ -180,6 +199,19 @@ chiMinus3WeightThreePeriodic :
   (n : Nat) →
   chiMinus3WeightOfNat (suc (suc (suc n))) ≡ chiMinus3WeightOfNat n
 chiMinus3WeightThreePeriodic n = refl
+
+chiMinus3FactorsThroughPhase :
+  Descent.FactorsThrough phaseOfNat chiMinus3WeightOfNat
+chiMinus3FactorsThroughPhase =
+  Factorized.factorizedRefinement
+    chiMinus3PhaseWeight
+    (λ n → refl)
+
+phaseIsSufficientForChiMinus3 :
+  Descent.ConsumerSufficient phaseOfNat chiMinus3WeightOfNat
+phaseIsSufficientForChiMinus3 =
+  Descent.fibreConstantIsConsumerSufficient
+    (Descent.factorsThroughImpliesFibreConstant chiMinus3FactorsThroughPhase)
 
 ------------------------------------------------------------------------
 -- Boundary: exact finite observer mathematics is not automatic promotion to
