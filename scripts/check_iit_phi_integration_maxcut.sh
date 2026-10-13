@@ -14,6 +14,8 @@ required_files=(
   DASHI/Biology/IITXOREffectCutReceiptExact.agda
   DASHI/Biology/IITCyclotomicFourierObserverExact.agda
   DASHI/Biology/IITBalancedTernary369HierarchyExact.agda
+  DASHI/Biology/IIT369PantsGluingBridgeExact.agda
+  DASHI/Biology/IITPointedTernary27FaceGluingExact.agda
   DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda
   DASHI/Reasoning/IITBrainMaleCNSConsumerBoundaryExact.agda
   DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda
@@ -89,6 +91,22 @@ require DASHI/Biology/IITBalancedTernary369HierarchyExact.agda 'rank1OrbitCannot
 require DASHI/Biology/IITBalancedTernary369HierarchyExact.agda 'raw369Counts'
 require DASHI/Biology/IITBalancedTernary369HierarchyExact.agda 'stageFiveResidualSurvivesVisibleFallback'
 
+require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'canonicalPantsHasThreeOutputs'
+require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'nineSheetPantsRoundTrip'
+require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'voxel27PantsRoundTrip'
+require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'sameNineStatesDoNotForceSameAlgebra'
+
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'oneSelectedPlusTwentySixRemainingIsTwentySeven'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'canonicalNoncentralCountIsTwentySix'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'originNotOnOuterFace'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'outerFaceSheetIsOnePlusEight'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'record PairwiseActiveFaceGluing'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'selectedCornerCocycle'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'threeActiveCubieChoiceCountIsHyperformCount'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'recognizedZetaFaceGluing'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'pairwiseStructuredBoundaryDoesNotDetermineTriadicFace'
+require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'faceGluingDoesNotSelfPromoteToPhi'
+
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'vertexPartitionNotDefinitionallySectionPartition'
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'compatibleSection : Hyperfabric.GlobalSection fabric'
 
@@ -103,6 +121,8 @@ require DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda 'finitePackagingIsNot
 
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT4SymbolicScalarBackendExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITXOREffectCutReceiptExact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT369PantsGluingBridgeExact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27FaceGluingExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Analysis.IITZetaGeneratingBoundaryExact'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 
