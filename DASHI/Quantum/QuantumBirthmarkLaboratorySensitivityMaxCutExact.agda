@@ -2,6 +2,7 @@
 module DASHI.Quantum.QuantumBirthmarkLaboratorySensitivityMaxCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Quantum.QuantumBirthmarkLaboratoryBackreactionProtocolExact as Protocol
@@ -13,15 +14,6 @@ import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 
 ------------------------------------------------------------------------
 -- LABORATORY BACKREACTION MAX-CUT
---
--- Existing experiments establish instrument scales, not a history-sector
--- signal.  We therefore split the endpoint into:
---
---   (A) transfer sensitivity -- what epsilon_H * Newtonian signal would be
---       resolvable if the history-only protocol reached the cited noise scale;
---   (B) theory prediction -- the microscopic theory must derive epsilon_H;
---   (C) matched-history realization -- conventional stress must stay matched;
---   (D) measurement -- a held-out/pre-registered experiment must actually run.
 ------------------------------------------------------------------------
 
 record LaboratorySensitivityReceipt : Set where
@@ -96,6 +88,21 @@ recommendedExperimentalCut =
 -- EMPIRICAL GOVERNANCE CROSS-POLLINATION
 ------------------------------------------------------------------------
 
+genericBenchmarkReferences : Benchmark.ExistingBenchmarkReferences
+genericBenchmarkReferences = Benchmark.canonicalExistingBenchmarkReferences
+
+birthmarkLaboratoryPredictionRequest : Prediction.PredictionRequestPacket
+birthmarkLaboratoryPredictionRequest =
+  Prediction.prediction-request-packet
+    "DASHI.Quantum.QuantumBirthmarkLaboratoryBackreactionProtocolExact"
+    "DASHI.Quantum.QuantumBirthmarkHistoryDarkEnergyTerminalMaxCutExact"
+    "DASHI.Quantum.QuantumBirthmarkErgodicityExact"
+    "DASHI.Quantum.QuantumBirthmarkHistoryCommonActionVariationExact"
+    "DASHI.Empirical.GRQuantumBenchmarkProtocol"
+    false
+    refl
+    "Instrument transfer sensitivity is now quantitative, but the microscopic history coupling epsilon_H is not derived. A nonzero physical central value would therefore still be fabricated."
+
 benchmarkGovernanceAlreadyExists : Bool
 benchmarkGovernanceAlreadyExists = true
 
@@ -114,8 +121,8 @@ currentExperimentsDidNotTestHistoryConditioning =
   Source.currentExperimentsDidNotTestHistoryConditioning
 
 numericalSystematicsBudgetClosed : Bool
-numericalSystematicsBudgetClosed = Systematics.numericalSystematicsBudgetClosed
+numericalSystematicsBudgetClosed = Systematics.numericalSystematicsBudgetClosedCanonical
 
 statusStatement : String
 statusStatement =
-  "Item 4 max-cut: instrument-scale transfer sensitivity is now quantitative and source-backed; matched-history systematics are explicitly enumerated; existing GR/quantum benchmark and prediction governance is reused. The irreducible leaves are a microscopic epsilon_H prediction, a realized matched-history state switch with a closed numerical systematics budget, and an actual preregistered measurement."
+  "Item 4 max-cut: instrument-scale transfer sensitivity is quantitative and source-backed; matched-history systematics are explicitly enumerated; the experiment is routed into the existing GR/quantum matched-benchmark and quantitative-prediction governance. The irreducible leaves are a microscopic epsilon_H prediction, a realized matched-history state switch with a closed numerical systematics budget, and an actual preregistered measurement."
