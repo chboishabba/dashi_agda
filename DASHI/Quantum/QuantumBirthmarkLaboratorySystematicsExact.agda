@@ -6,12 +6,6 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- MATCHED-HISTORY SYSTEMATICS CUT
---
--- A history-only gravity test is stronger than an ordinary small-force test:
--- the operation used to change the history record can itself change thermal,
--- electromagnetic, mechanical, optical or mass-distribution stress.  Those
--- ordinary channels must be re-measured AFTER history preparation, not merely
--- assumed equal from the nominal apparatus design.
 ------------------------------------------------------------------------
 
 record MatchedHistorySystematicsCut : Set where
@@ -45,14 +39,17 @@ canonicalMatchedHistorySystematicsCut =
 systematicsCategoryListOwned : Bool
 systematicsCategoryListOwned = true
 
-numericalSystematicsBudgetClosed : Bool
-numericalSystematicsBudgetClosed = false
+numericalSystematicsBudgetClosedCanonical : Bool
+numericalSystematicsBudgetClosedCanonical =
+  numericalSystematicsBudgetClosed canonicalMatchedHistorySystematicsCut
 
-matchedHistoryPreparationDemonstrated : Bool
-matchedHistoryPreparationDemonstrated = false
+matchedHistoryPreparationDemonstratedCanonical : Bool
+matchedHistoryPreparationDemonstratedCanonical =
+  matchedHistoryPreparationDemonstrated canonicalMatchedHistorySystematicsCut
 
-synchronousHistoryModulationRequired : Bool
-synchronousHistoryModulationRequired = true
+synchronousHistoryModulationRequiredCanonical : Bool
+synchronousHistoryModulationRequiredCanonical =
+  synchronousHistoryModulationRequired canonicalMatchedHistorySystematicsCut
 
 systematicsReading : String
 systematicsReading =
