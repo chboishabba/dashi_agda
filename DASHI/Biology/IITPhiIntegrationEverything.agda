@@ -20,6 +20,7 @@ import DASHI.Biology.IIT369PantsGluingBridgeExact
 import DASHI.Biology.IITPointedTernary27FaceGluingExact
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact
 import DASHI.Biology.IITPointedTernary27CyclotomicCellExact
+import DASHI.Biology.IITPointedTernary27Origin26Exact
 import DASHI.Reasoning.IITHyperfabricPartitionBridgeExact
 import DASHI.Reasoning.IITBrainMaleCNSConsumerBoundaryExact
 import DASHI.Moonshine.IITMonsterInvariantBoundaryExact
