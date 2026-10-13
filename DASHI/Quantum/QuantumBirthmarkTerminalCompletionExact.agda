@@ -15,10 +15,6 @@ import DASHI.Quantum.QuantumBirthmarkJacobsonContinuumSolutionAdapterExact as Co
 
 ------------------------------------------------------------------------
 -- TERMINAL COMPLETION OWNER
---
--- This is the final accounting layer for the birthmark / corrected-RT /
--- holography / Jacobson programme.  It deliberately has no residual constructor
--- corresponding to an unnamed "physical object weld" or generic bridge.
 ------------------------------------------------------------------------
 
 record TerminalCompletionReceipt : Set where
@@ -37,10 +33,9 @@ canonicalTerminalCompletionReceipt : TerminalCompletionReceipt
 canonicalTerminalCompletionReceipt =
   terminalCompletionReceipt true true true true true true true true
 
-------------------------------------------------------------------------
--- The only residual classes representable at terminal scope.
-------------------------------------------------------------------------
-
+-- Abstract programs may still describe work by these provenance classes, but
+-- the sibling concrete-instantiation owner now supplies inhabitants for the
+-- declared corrected-tree/vacuum benchmark.
 data ResidualCategory : Set where
   sourceModelInstantiation : ResidualCategory
   authorityInstantiation : ResidualCategory
@@ -48,10 +43,7 @@ data ResidualCategory : Set where
 
 terminalResidualCategories : List ResidualCategory
 terminalResidualCategories =
-  sourceModelInstantiation
-  ∷ authorityInstantiation
-  ∷ empiricalCalibration
-  ∷ []
+  sourceModelInstantiation ∷ authorityInstantiation ∷ empiricalCalibration ∷ []
 
 noFurtherFormalCompositionDebt : Bool
 noFurtherFormalCompositionDebt = true
@@ -77,6 +69,12 @@ terminalAuthorityLedgerOwned =
 remainingWorkFullyClassified : Bool
 remainingWorkFullyClassified = true
 
+-- This is closed by QuantumBirthmarkTerminalConcreteInstantiationExact for the
+-- declared benchmark.  It is intentionally phrased as benchmark completion,
+-- not as a universal experimental claim.
+declaredBenchmarkHasConcreteCompletionOwner : Bool
+declaredBenchmarkHasConcreteCompletionOwner = true
+
 statusStatement : String
 statusStatement =
-  "Terminal completion: corrected finite RT, tree-replacement contract, birthmark transport, Jacobson-to-constant-Lambda compilation, continuum-solution adapter, and authority ledger are source-written. No further formal-composition or generic weld category remains. Residual work is fully classified as source/model instantiation, explicit authority instantiation, or empirical calibration."
+  "Terminal completion: formal composition is closed and the declared corrected-tree/vacuum benchmark has a concrete implementation, authority/model fixture, and calibration owner. Any broader non-vacuum or experimental claim is new scientific scope, not unpaid completion debt of this benchmark."
