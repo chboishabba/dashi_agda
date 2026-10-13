@@ -26,4 +26,6 @@ import DASHI.Ontology.OntologyRepairCompletionExact
 import DASHI.Ontology.OntologyRepairCompletionValidation
 import DASHI.Ontology.OntologyRepairEndToEndExact
 import DASHI.Ontology.OntologyRepairEndToEndValidation
+import DASHI.Ontology.OntologyCrosswalkStructuralExact
+import DASHI.Ontology.OntologyCrosswalkStructuralValidation
 import Ontology.Hecke.Everything
