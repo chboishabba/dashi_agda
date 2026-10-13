@@ -7,9 +7,10 @@ def test_quantum_birthmark_lab_sensitivity_maxcut_registered():
     script = ROOT / "scripts/quantum_birthmark_lab_sensitivity.py"
     source = ROOT / "DASHI/Quantum/QuantumBirthmarkLaboratorySensitivitySourceAtlasExact.agda"
     model = ROOT / "DASHI/Quantum/QuantumBirthmarkLaboratorySensitivityExact.agda"
+    systematics = ROOT / "DASHI/Quantum/QuantumBirthmarkLaboratorySystematicsExact.agda"
     terminal = ROOT / "DASHI/Quantum/QuantumBirthmarkLaboratorySensitivityMaxCutExact.agda"
 
-    for path in [script, source, model, terminal]:
+    for path in [script, source, model, systematics, terminal]:
         assert path.exists()
 
     script_text = script.read_text()
@@ -44,12 +45,24 @@ def test_quantum_birthmark_lab_sensitivity_maxcut_registered():
     ]:
         assert token in model_text
 
+    systematics_text = systematics.read_text()
+    for token in [
+        "MatchedHistorySystematicsCut",
+        "conventionalStressRematchingAfterHistoryPreparation",
+        "electrostaticPatchAndChargeControl",
+        "thermalAndMechanicalStateControl",
+        "synchronousHistoryModulationRequired",
+        "numericalSystematicsBudgetClosed",
+    ]:
+        assert token in systematics_text
+
     terminal_text = terminal.read_text()
     for token in [
         "classicalMilligramTransferBenchmarkOwned",
         "atomInterferometerTransferBenchmarkOwned",
         "quantumReadyOptomechanicalScalingOwned",
         "instrumentTransferSensitivityOwned",
+        "systematicsCutOwned",
         "historySignalMagnitudeStillRequiresMicroscopicCoupling",
         "matchedHistorySystematicsBudgetStillRequired",
         "actualHistoryConditionedMeasurementStillRequired",
@@ -60,6 +73,7 @@ def test_quantum_birthmark_lab_sensitivity_maxcut_registered():
     for name in [
         "QuantumBirthmarkLaboratorySensitivitySourceAtlasExact",
         "QuantumBirthmarkLaboratorySensitivityExact",
+        "QuantumBirthmarkLaboratorySystematicsExact",
         "QuantumBirthmarkLaboratorySensitivityMaxCutExact",
     ]:
         assert name in rollup
