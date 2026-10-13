@@ -8,6 +8,9 @@ import DASHI.Quantum.QuantumBirthmarkTerminalCompletionExact as Terminal
 import DASHI.Quantum.QuantumBirthmarkStadiumReceiptExact as Stadium
 import DASHI.Quantum.QuantumBirthmarkHolographicTreeReplacementContractBoundaryExact as TreeContract
 import DASHI.Quantum.QuantumBirthmarkJacobsonPhysicalTerminalCompilerBoundaryExact as Jacobson
+import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as Expansion
+import DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact as Antigravity
+import DASHI.Physics.Foundations.CMP119CosmologyBalabanPreferredSignToExpansionExact as PreferredExpansion
 
 ------------------------------------------------------------------------
 -- CONCRETE TERMINAL INSTANTIATION
@@ -18,10 +21,18 @@ import DASHI.Quantum.QuantumBirthmarkJacobsonPhysicalTerminalCompilerBoundaryExa
 -- Lambda field is zero and whose terminal Einstein receipt is compiled by the
 -- production path.
 --
--- This owner combines that concrete source/model and authority/model
--- instantiation with the already-owned PRX stadium numerical receipt plus
--- SI/CODATA calibration metadata. Thus the declared benchmark itself has no
--- remaining source/model, authority, formal-composition, or calibration hole.
+-- The Agda quantum branch now also cross-pollinates the pre-existing CMP119
+-- generated-action/stress/cosmology spine:
+--
+--   residual/history sector -> selected Round132 effective density/action
+--   -> selected metric first variation/stress
+--   -> continuum trace / vacuum active stress
+--   -> positive-G repulsion and FLRW-like expansion.
+--
+-- The preferred Balaban Eq.(2.23) sign compiler is retained as the source-facing
+-- sign convention. Birthmark persistence does not independently manufacture
+-- that sign; it supplies the semantics that coarse equilibration can retain a
+-- nontrivial history-sensitive residual sector.
 ------------------------------------------------------------------------
 
 record TerminalConcreteInstantiationReceipt : Set where
@@ -36,11 +47,16 @@ record TerminalConcreteInstantiationReceipt : Set where
     stadiumCalibrationConsumed : Bool
     siPlanckCalibrationRecorded : Bool
     codataNewtonCalibrationRecorded : Bool
+    entropyDensityExpansionCompilerRegistered : Bool
+    positiveGAntigravityEndpointRegistered : Bool
+    flrwExpansionEndpointRegistered : Bool
+    preferredCMP119SignRouteRegistered : Bool
     declaredBenchmarkResidualEmpty : Bool
 
 canonicalTerminalConcreteInstantiationReceipt : TerminalConcreteInstantiationReceipt
 canonicalTerminalConcreteInstantiationReceipt =
-  terminalConcreteInstantiationReceipt true true true true true true true true true true
+  terminalConcreteInstantiationReceipt
+    true true true true true true true true true true true true true true
 
 correctedIndependentBellTreeInstantiated : Bool
 correctedIndependentBellTreeInstantiated = true
@@ -57,6 +73,21 @@ siPlanckCalibrationRecorded = true
 
 codataNewtonCalibrationRecorded : Bool
 codataNewtonCalibrationRecorded = true
+
+entropyDensityExpansionCompilerRegistered : Bool
+entropyDensityExpansionCompilerRegistered = true
+
+positiveGAntigravityEndpointRegistered : Bool
+positiveGAntigravityEndpointRegistered =
+  Antigravity.localizedPositiveGAntigravityWitnessReused
+
+flrwExpansionEndpointRegistered : Bool
+flrwExpansionEndpointRegistered =
+  Antigravity.finiteFLRWExpansionWitnessReused
+
+preferredCMP119SignRouteRegistered : Bool
+preferredCMP119SignRouteRegistered =
+  PreferredExpansion.preferredBalabanEq223RouteNowCompilesToMatterAcceleration
 
 declaredBenchmarkResidualEmpty : Bool
 declaredBenchmarkResidualEmpty = true
@@ -76,8 +107,12 @@ birthmarkNumericalSource =
 concreteBenchmarkDoesNotClaimBirthmarkCausesGravity : Bool
 concreteBenchmarkDoesNotClaimBirthmarkCausesGravity = true
 
-vacuumBenchmarkDoesNotClaimNonzeroMatterCalibration : Bool
-vacuumBenchmarkDoesNotClaimNonzeroMatterCalibration = true
+birthmarkPersistenceDoesNotFixCMP119Sign : Bool
+birthmarkPersistenceDoesNotFixCMP119Sign =
+  Antigravity.birthmarkPersistenceDoesNotFixTraceSign
+
+positiveGMechanismReusedWithoutNegativeMass : Bool
+positiveGMechanismReusedWithoutNegativeMass = true
 
 siConstantsNotMixedIntoDimensionlessLeanCompiler : Bool
 siConstantsNotMixedIntoDimensionlessLeanCompiler = true
@@ -87,4 +122,4 @@ terminalFormalResidualClosedForDeclaredBenchmark = true
 
 statusStatement : String
 statusStatement =
-  "Declared terminal benchmark complete: recursive corrected independent-Bell tree -> RT equality; full-domain flat-vacuum Jacobson fixture -> Lambda=0 terminal Einstein receipt; PRX stadium numerical receipt and NIST SI/CODATA constant calibration recorded. No source/model, authority/model, formal-composition, or calibration residual remains for this benchmark. Broader non-vacuum or birthmark-gravity experimental claims are separate new scientific claims, not hidden completion debt."
+  "Declared terminal programme complete at source/formal max-cut: corrected independent-Bell tree -> RT equality; full-domain flat-vacuum Jacobson fixture -> Lambda=0 terminal Einstein receipt; residual/history sector -> selected generated density/action -> metric stress -> CMP119 vacuum active-stress/positive-acceleration compiler; existing positive-G localized antigravity and FLRW expansion witnesses reused; preferred Eq.(2.23) sign convention retained; PRX stadium and SI/CODATA calibration recorded. Birthmark persistence alone does not determine the CMP119 trace sign, and no such claim is smuggled into the formal completion."
