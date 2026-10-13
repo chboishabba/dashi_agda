@@ -11,6 +11,10 @@ def test_terminal_concrete_instantiation_registered():
         "stadiumCalibrationConsumed",
         "siPlanckCalibrationRecorded",
         "codataNewtonCalibrationRecorded",
+        "entropyDensityExpansionCompilerRegistered",
+        "positiveGAntigravityEndpointRegistered",
+        "flrwExpansionEndpointRegistered",
+        "preferredCMP119SignRouteRegistered",
         "declaredBenchmarkResidualEmpty",
     ]:
         assert token in owner
