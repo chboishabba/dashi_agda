@@ -7,22 +7,26 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.SystemicLeverageBeneficiaryIncidenceParetoExact as Incidence
+import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as Cambridge
+import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as PalantirIntersection
 
 ------------------------------------------------------------------------
--- SYSTEMIC LEVERAGE / BENEFICIARY RECEIPT ROUND — 2026-10-12
+-- SYSTEMIC LEVERAGE / BENEFICIARY RECEIPT ROUND — 2026-10-12/13
 --
--- Only source-backed beneficiary mechanisms are paid here.  A paid benefit
--- mechanism remains distinct from motive, knowledge, coordination, wrongdoing
--- or universal explanation.
+-- Only source-backed beneficiary/capability mechanisms are paid here. A paid
+-- benefit or capability mechanism remains distinct from motive, knowledge,
+-- coordination, wrongdoing, persuasion, policy authorship or universal cause.
 ------------------------------------------------------------------------
 
 data ReceiptLane : Set where
   bankingEliteClientAccess : ReceiptLane
   corporateNetworkConnectivity : ReceiptLane
   corporateMarketReaction : ReceiptLane
+  bannonTargetedInfluenceInfrastructure : ReceiptLane
   project2025PersonnelCapacity : ReceiptLane
   project2025RegulatoryRelief : ReceiptLane
   project2025CivilServiceSelection : ReceiptLane
+  project2025PalantirPolicyCapabilityIntersection : ReceiptLane
 
 record BeneficiaryReceipt : Set where
   constructor beneficiary-receipt
@@ -51,16 +55,24 @@ corporateConnectivityReceipt = beneficiary-receipt
   corporateNetworkConnectivity
   "Gertsberg, Pagel, Volkova, CESifo Working Paper 12580, 2026"
   "systematic working-paper network analysis"
-  "Authors report that adding Epstein-mediated ties makes the S&P500 board network denser and shortens path lengths; they interpret this as Epstein wiring corporate America into a more interconnected governance network. This pays a network-topology effect under their classification method, not an individual benefit or wrongdoing claim."
+  "Authors report a changed corporate-board network topology when Epstein-mediated ties are added. Revised mechanism tests do not make own centrality gain the misconduct mechanism. Topology/exposure is paid; individual benefit is not inferred."
   true true false false false
 
 corporateMarketReactionReceipt : BeneficiaryReceipt
 corporateMarketReactionReceipt = beneficiary-receipt
   corporateMarketReaction
-  "Gertsberg, Pagel, Volkova, CESifo Working Paper 12580, 2026"
+  "Gertsberg, Pagel, Volkova, CESifo Working Paper 12580, revised 2026"
   "event-study result"
-  "Authors report significantly negative cumulative abnormal returns, up to about -3.7% over a three-day window, for firms whose CEOs or directors appeared in Epstein-related news after the 2026-01-30 DOJ release. This pays a measured market-reaction channel, not causation for every firm or a welfare conclusion."
+  "Authors report significantly negative cumulative abnormal returns, up to about -3.7% over a three-day window, for firms whose CEOs or directors appeared in Epstein-related news after the 2026-01-30 DOJ release. This pays a measured market-reaction channel, not causation for every firm or a wrongdoing/welfare conclusion."
   true true false false false
+
+bannonInfluenceReceipt : BeneficiaryReceipt
+bannonInfluenceReceipt = beneficiary-receipt
+  bannonTargetedInfluenceInfrastructure
+  "UK Parliament DCMS reports + US FTC Cambridge Analytica order + FEC records"
+  "parliamentary/regulatory/campaign-finance receipts"
+  "Bannon/Cambridge Analytica/SCL/Mercer infrastructure, deceptive Facebook-data harvesting for voter profiling, substantial Trump-campaign vendor payments and cross-Atlantic political brokerage are source-paid. This pays targeting/narrative capability and brokerage; it does not pay universal psychographic efficacy, election causation, illegal common-vendor coordination, or later reuse in Bannon's Epstein media work."
+  true true true false false
 
 projectPersonnelCapacityReceipt : BeneficiaryReceipt
 projectPersonnelCapacityReceipt = beneficiary-receipt
@@ -73,17 +85,25 @@ projectPersonnelCapacityReceipt = beneficiary-receipt
 projectRegulatoryReliefReceipt : BeneficiaryReceipt
 projectRegulatoryReliefReceipt = beneficiary-receipt
   project2025RegulatoryRelief
-  "Reuters 2026 reporting on Trump EPA methane and climate-regulation rollbacks"
-  "current policy/reporting receipt"
-  "Reuters reports administration arguments that rescinding methane controls would reduce producer compliance costs, and that repeal of the greenhouse-gas endangerment finding was promoted as reducing costs and reviving fossil-fuel and auto industries. This pays an intended/claimed regulatory-relief channel; quantified savings and downstream welfare remain contested."
-  true true false false false
+  "Project 2025 chapter texts + 2026 administration/FCC/EPA implementation records and reporting"
+  "policy-to-action incidence receipts"
+  "Concrete author/office/action correspondences now include Vought/OMB and Carr/FCC. Some actions expand removal/control or deregulatory/consolidation option value. The recipient/beneficiary incidence is separately auditable; net welfare and Project-2025 causation are not inferred."
+  true true true false false
 
 projectCivilServiceSelectionReceipt : BeneficiaryReceipt
 projectCivilServiceSelectionReceipt = beneficiary-receipt
   project2025CivilServiceSelection
-  "Reuters investigation, 2025-08-07, American Accountability Foundation federal-worker watchlists"
-  "investigative reporting"
-  "Reuters reports a Heritage-funded pro-Trump group targeted 175 federal employees on public watchlists as part of an effort to identify and remove workers viewed as hostile to the administration agenda; reported consequences included harassment, fear and departures. This pays a personnel-selection/chilling-effect pathway, not Heritage control of every removal."
+  "Reuters investigation 2025-08-07 + 2026 civil-service implementation reporting"
+  "investigative/current implementation reporting"
+  "A Heritage-funded pro-Trump group targeted 175 federal employees on public watchlists, while later civil-service reforms increased political removal/control capacity over a much larger policy-influencing workforce. This pays a personnel-selection/state-capacity pathway, not Heritage control of every removal or illegality."
+  true true true false false
+
+projectPalantirReceipt : BeneficiaryReceipt
+projectPalantirReceipt = beneficiary-receipt
+  project2025PalantirPolicyCapabilityIntersection
+  "Project 2025 DHS chapter + ICE procurement justifications + USAspending 70CTD026FC0000012"
+  "primary policy/procurement intersection"
+  "Project 2025 independently demands stronger immigration-agency/data integration; ICE independently deploys Palantir ICM/ImmigrationOS targeting and case-management capability and awarded an approximately USD 86.27m ERO-related order in April 2026. This pays a policy-demand/capability/procurement intersection and downstream lock-in/exit questions; it does not pay Project 2025 vendor selection or abuse."
   true true true false false
 
 canonicalReceipts : List BeneficiaryReceipt
@@ -91,9 +111,11 @@ canonicalReceipts =
   bankEliteAccessReceipt
   ∷ corporateConnectivityReceipt
   ∷ corporateMarketReactionReceipt
+  ∷ bannonInfluenceReceipt
   ∷ projectPersonnelCapacityReceipt
   ∷ projectRegulatoryReliefReceipt
   ∷ projectCivilServiceSelectionReceipt
+  ∷ projectPalantirReceipt
   ∷ []
 
 ------------------------------------------------------------------------
@@ -127,25 +149,25 @@ bankProfile : FrontierProfile
 bankProfile = frontier-profile
   bankMoneyComplianceEliteAccess
   true true true true true true true
-  "Undominated: direct transaction evidence, executive/compliance decision chain, explicit elite-client-access benefit allegation, unreleased FBI 302s and high beneficiary/burden incidence debt."
+  "Undominated: direct transaction evidence, executive/compliance decision chain, explicit elite-client-access benefit allegation, BNY transaction/cash probe, unreleased banker FBI 302s and high beneficiary/burden incidence debt."
 
 boardProfile : FrontierProfile
 boardProfile = frontier-profile
   corporateBoardTopology
   true true true true true true true
-  "Undominated: systematic universe, network-topology effects and market reaction, but high person-level resolution debt."
+  "Undominated: revised systematic public-firm universe, network/exposure mechanism and market reaction, but high person-level primary-document and benefit-incidence resolution debt."
 
 project2025Profile : FrontierProfile
 project2025Profile = frontier-profile
   project2025PolicyPersonnelStateCapacity
   true true true true true true true
-  "Undominated: policy-to-personnel-to-state conversion plus second-order regulatory incidence and third-order capacity/selection effects."
+  "Undominated: chapter->author->office->action chains, policy-to-personnel state conversion, civil-service/media-ownership incidence, and a paid immigration data-demand x Palantir/ICE capability intersection with vendor-selection causation explicitly unpaid."
 
 trumpProfile : FrontierProfile
 trumpProfile = frontier-profile
   trumpMarALagoBannonAccessNarrative
   true true true true true true true
-  "Undominated: paid historical/social/access edges plus unresolved knowledge, recruitment-locus, media/narrative and records-governance effects."
+  "Undominated: paid historical/social/access and Mar-a-Lago recruitment-locus edges plus Bannon's source-paid Cambridge-Analytica/SCL/Mercer targeting/brokerage infrastructure and later Epstein media relationship. The high-value residual is same-technique transfer, knowledge and downstream narrative/disclosure effects—not presumed election causation."
 
 edgeProfile : FrontierProfile
 edgeProfile = frontier-profile
@@ -157,13 +179,13 @@ thielProfile : FrontierProfile
 thielProfile = frontier-profile
   thielPalantirInvestmentProcurement
   true true true true true true true
-  "Potentially undominated once direct investment/introduction/procurement bridges are document-resolved; current coordination debt remains high."
+  "Near-frontier: current Palantir state procurement/data capability is now strongly paid, but the distinct Epstein->Thiel/Valar/Barak and Project2025->vendor-selection bridges still require document-local resolution."
 
 rinehartProfile : FrontierProfile
 rinehartProfile = frontier-profile
   rinehartOneNationPoliticalCapacity
   true true true true true true true
-  "Potentially undominated regionally: money/logistics/access/policy-input/recruitment capacity plus Queensland resource-policy intersection, with direct Epstein edge still unpaid."
+  "Potentially undominated regionally: money/logistics/access/policy-input/recruitment capacity plus Queensland resource-policy intersection, with direct Epstein and Rinehart->Crisafulli brokerage edges still unpaid."
 
 currentUndominatedSystemicFrontier : List FrontierProfile
 currentUndominatedSystemicFrontier =
@@ -180,6 +202,12 @@ currentNearFrontier =
   ∷ edgeProfile
   ∷ []
 
+cambridgeSourceBoundary : Cambridge.BannonInfluenceInfrastructureBoundary
+cambridgeSourceBoundary = Cambridge.canonicalBannonInfluenceInfrastructureBoundary
+
+palantirIntersectionBoundary : PalantirIntersection.Project2025PalantirBoundary
+palantirIntersectionBoundary = PalantirIntersection.canonicalProject2025PalantirBoundary
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
@@ -189,7 +217,8 @@ data RegulatoryReliefImpliesNetSocialBenefit : Set where
 data NegativeMarketReactionImpliesWrongdoing : Set where
 data NetworkDensityImpliesCoordination : Set where
 data PersonnelSelectionImpliesIllegalPurge : Set where
-
+data TargetingCapabilityImpliesElectionCause : Set where
+data PolicyCapabilityIntersectionImpliesVendorSelection : Set where
 data ThirdOrderEffectImpliesIntent : Set where
 
 paidBenefitDoesNotCreateMotive : PaidBenefitMechanismImpliesMotive → ⊥
@@ -206,6 +235,12 @@ networkDensityDoesNotCreateCoordination ()
 
 personnelSelectionDoesNotCreateIllegality : PersonnelSelectionImpliesIllegalPurge → ⊥
 personnelSelectionDoesNotCreateIllegality ()
+
+targetingCapabilityDoesNotCreateElectionCause : TargetingCapabilityImpliesElectionCause → ⊥
+targetingCapabilityDoesNotCreateElectionCause ()
+
+policyCapabilityIntersectionDoesNotCreateVendorSelection : PolicyCapabilityIntersectionImpliesVendorSelection → ⊥
+policyCapabilityIntersectionDoesNotCreateVendorSelection ()
 
 thirdOrderDoesNotCreateIntent : ThirdOrderEffectImpliesIntent → ⊥
 thirdOrderDoesNotCreateIntent ()
