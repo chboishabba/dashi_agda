@@ -12,10 +12,6 @@ import DASHI.Quantum.QuantumBirthmarkLaboratorySystematicsExact as Systematics
 import DASHI.Empirical.GRQuantumBenchmarkProtocol as Benchmark
 import DASHI.Empirical.GRQuantumPredictionProtocol as Prediction
 
-------------------------------------------------------------------------
--- LABORATORY BACKREACTION MAX-CUT
-------------------------------------------------------------------------
-
 record LaboratorySensitivityReceipt : Set where
   constructor laboratory-sensitivity-receipt
   field
@@ -27,7 +23,6 @@ record LaboratorySensitivityReceipt : Set where
     systematicsCutOwned : Bool
     genericGRQuantumBenchmarkGovernanceReused : Bool
     genericQuantitativePredictionGovernanceReused : Bool
-
     historySignalMagnitudeStillRequiresMicroscopicCoupling : Bool
     matchedHistorySystematicsBudgetStillRequired : Bool
     matchedHistoryPreparationStillRequired : Bool
@@ -72,21 +67,13 @@ parameterFreePredictionStillRequired = true
 actualHistoryConditionedMeasurementStillRequired : Bool
 actualHistoryConditionedMeasurementStillRequired = true
 
-------------------------------------------------------------------------
--- QUANTITATIVE READINGS FROM THE LOCAL-PYTHON / SOURCE-BACKED AUDIT
-------------------------------------------------------------------------
-
 laboratorySensitivityReading : String
 laboratorySensitivityReading =
   "Transfer benchmark only: the 7.6 mg / 0.654 mm point-mass estimate is about 9013 aN, so the published 50 aN (2 sigma) force uncertainty corresponds to about 5.55e-3 of the Newtonian scale. The lattice-atom result corresponds to about 0.187 fractional uncertainty at 1 sigma. For the 2026 quantum-ready optomechanical design, a history-only signal epsilon_H times the full gravity signal costs epsilon_H^-2 in integration time under the same stationary-noise model. None is presently a history-sector bound."
 
 recommendedExperimentalCut : String
 recommendedExperimentalCut =
-  "Use the history preparation itself as a randomized synchronous modulation while holding source/probe geometry and conventional stress fixed. The first analysis target is a differential force/acceleration channel normalized to the independently calibrated Newtonian signal, epsilon_hat = Delta O / O_Newton. A publishable null result requires the matched-history systematics budget to be smaller than the target epsilon band."
-
-------------------------------------------------------------------------
--- EMPIRICAL GOVERNANCE CROSS-POLLINATION
-------------------------------------------------------------------------
+  "Use the history preparation itself as a randomized synchronous modulation while holding source/probe geometry and conventional stress fixed. Estimate epsilon_hat = Delta O / O_Newton against an independently calibrated Newtonian carrier. A publishable null result requires the matched-history systematic floor to be smaller than the target epsilon band."
 
 genericBenchmarkReferences : Benchmark.ExistingBenchmarkReferences
 genericBenchmarkReferences = Benchmark.canonicalExistingBenchmarkReferences
@@ -101,7 +88,7 @@ birthmarkLaboratoryPredictionRequest =
     "DASHI.Empirical.GRQuantumBenchmarkProtocol"
     false
     refl
-    "Instrument transfer sensitivity is now quantitative, but the microscopic history coupling epsilon_H is not derived. A nonzero physical central value would therefore still be fabricated."
+    "Instrument transfer sensitivity is quantitative, but the microscopic history coupling epsilon_H is not derived. A nonzero physical central value would therefore still be fabricated."
 
 benchmarkGovernanceAlreadyExists : Bool
 benchmarkGovernanceAlreadyExists = true
@@ -121,7 +108,8 @@ currentExperimentsDidNotTestHistoryConditioning =
   Source.currentExperimentsDidNotTestHistoryConditioning
 
 numericalSystematicsBudgetClosed : Bool
-numericalSystematicsBudgetClosed = Systematics.numericalSystematicsBudgetClosedCanonical
+numericalSystematicsBudgetClosed =
+  Systematics.numericalSystematicsBudgetClosedCanonical
 
 statusStatement : String
 statusStatement =
