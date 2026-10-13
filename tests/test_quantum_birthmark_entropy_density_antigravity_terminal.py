@@ -11,6 +11,9 @@ def test_entropy_density_antigravity_terminal_registered():
         "residualToCMP119ExpansionCompilerOwned",
         "localizedPositiveGAntigravityWitnessReused",
         "finiteFLRWExpansionWitnessReused",
+        "balancedDECRepulsiveShellFamilyRegistered",
+        "decRepulsiveExteriorBranchRegistered",
+        "nambuGotoRepulsiveBubbleBranchRegistered",
         "positiveGravityCouplingRetained",
         "negativeGravityConstantNotRequired",
         "negativeInertialMassNotRequired",
@@ -22,4 +25,7 @@ def test_entropy_density_antigravity_terminal_registered():
         assert token in owner
     assert "GRQFTLocalizedAntigravityMaxCutExact" in owner
     assert "GRQFTFiniteFLRWRepulsiveAccelerationExact" in owner
+    assert "GRQFTBalancedDECRepulsiveShellFamilyExact" in owner
+    assert "GRQFTDECRepulsiveExteriorMaxCutExact" in owner
+    assert "GRQFTNambuGotoRepulsiveBubbleMaxCutExact" in owner
     assert "QuantumBirthmarkEntropyDensityAntigravityTerminalExact" in rollup
