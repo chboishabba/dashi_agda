@@ -8,3 +8,4 @@ import DASHI.Physics.Chemistry.Nobel2026CyclotomicCarrierEquivalenceExact
 import DASHI.Physics.Chemistry.Nobel2026ChiralRecoverableObserverExact
 import DASHI.Physics.Chemistry.Nobel2026ChiralRealDescentObserverExact
 import DASHI.Physics.Chemistry.Nobel2026AdmissibleKineticTransitionExact
+import DASHI.Physics.Chemistry.Nobel2026LivePRCrossPollinationClosureExact
