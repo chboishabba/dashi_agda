@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 open import DASHI.Ontology.RosarioConceptualDiagnosticsExact
+open import DASHI.Ontology.RosarioReportedEmpiricsExact
 
 positiveAllYesIsAgreement :
   classifyCluster positiveEdge allYes ≡ consistentAgreement
