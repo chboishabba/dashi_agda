@@ -25,10 +25,6 @@ import DASHI.Biology.IITPointedTernary27CyclotomicCellExact as Chart
 import DASHI.Biology.IITPointedTernary27Origin26Exact as Origin26
 import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Shape26
 
-------------------------------------------------------------------------
--- 1. Exact additive inverse on C3.
-------------------------------------------------------------------------
-
 phaseNeg : Cube.Phase → Cube.Phase
 phaseNeg Wheel.phase-0 = Wheel.phase-0
 phaseNeg Wheel.phase-1 = Wheel.phase-2
@@ -71,10 +67,6 @@ phaseUncenterRoundTrip Wheel.phase-1 Wheel.phase-2 = refl
 phaseUncenterRoundTrip Wheel.phase-2 Wheel.phase-0 = refl
 phaseUncenterRoundTrip Wheel.phase-2 Wheel.phase-1 = refl
 phaseUncenterRoundTrip Wheel.phase-2 Wheel.phase-2 = refl
-
-------------------------------------------------------------------------
--- 2. Recentring permutation on C3^3 and on the geometric 27 carrier.
-------------------------------------------------------------------------
 
 cubeNeg : Cube.Cube3 → Cube.Cube3
 cubeNeg (Cube.cube3 x y z) =
@@ -148,10 +140,6 @@ recenterSelectedCubieIsOrigin :
 recenterSelectedCubieIsOrigin active
   rewrite recenterCubeSelfIsZero (Chart.pointToC3Cube active) = refl
 
-------------------------------------------------------------------------
--- 3. Transport the exact NonOrigin26 complement to any selected cubie.
-------------------------------------------------------------------------
-
 RecenteredNonActive26 : Set
 RecenteredNonActive26 = Origin26.NonActive26
 
@@ -190,7 +178,8 @@ nonActiveToCubieInjective :
 nonActiveToCubieInjective {left} {right} equality =
   inj₂Injective branchEquality
   where
-  branchEquality : inj₂ left ≡ inj₂ right
+  branchEquality :
+    (inj₂ left : Shape26.CubeAlbert27) ≡ inj₂ right
   branchEquality =
     trans
       (sym (Shape26.toAfterFrom (inj₂ left)))
@@ -215,10 +204,6 @@ recenteredNonActiveInjective active {left} {right} equality =
       (trans
         (cong (recenterPoint active) equality)
         (recenterUncenterPoint active (Origin26.nonActiveToCubie right)))
-
-------------------------------------------------------------------------
--- 4. Pointed package and boundary.
-------------------------------------------------------------------------
 
 record ArbitraryPointedComplement26 : Set where
   constructor arbitrary-pointed-complement26
