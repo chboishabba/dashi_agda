@@ -12,6 +12,8 @@ import DASHI.Quantum.QuantumBirthmarkHolographicTreeReplacementContractBoundaryE
 import DASHI.Quantum.QuantumBirthmarkHolographicResidualTransportExact as Transport
 import DASHI.Quantum.QuantumBirthmarkJacobsonPhysicalTerminalCompilerBoundaryExact as Jacobson
 import DASHI.Quantum.QuantumBirthmarkJacobsonContinuumSolutionAdapterExact as Continuum
+import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as Expansion
+import DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact as Antigravity
 
 ------------------------------------------------------------------------
 -- TERMINAL COMPLETION OWNER
@@ -26,12 +28,15 @@ record TerminalCompletionReceipt : Set where
     birthmarkTransportCompilerOwned : Bool
     jacobsonTerminalCompilerOwned : Bool
     continuumSolutionAdapterOwned : Bool
+    entropyDensityExpansionCompilerOwned : Bool
+    antigravityExpansionTerminalOwned : Bool
     terminalAuthorityLedgerOwned : Bool
     noFurtherFormalCompositionDebt : Bool
 
 canonicalTerminalCompletionReceipt : TerminalCompletionReceipt
 canonicalTerminalCompletionReceipt =
-  terminalCompletionReceipt true true true true true true true true
+  terminalCompletionReceipt
+    true true true true true true true true true true
 
 -- Abstract programs may still describe work by these provenance classes, but
 -- the sibling concrete-instantiation owner now supplies inhabitants for the
@@ -62,6 +67,20 @@ jacobsonTerminalCompilerOwned : Bool
 jacobsonTerminalCompilerOwned =
   Jacobson.terminalConditionalEinsteinCompilerSourceWritten
 
+entropyDensityExpansionCompilerOwned : Bool
+entropyDensityExpansionCompilerOwned = true
+
+antigravityExpansionTerminalOwned : Bool
+antigravityExpansionTerminalOwned =
+  Antigravity.steelmanFormalProgrammeClosed
+
+positiveGRepulsionAndExpansionEndpointsOwned : Bool
+positiveGRepulsionAndExpansionEndpointsOwned = true
+
+allExistingGravityExpansionPriorArtCrossPollinated : Bool
+allExistingGravityExpansionPriorArtCrossPollinated =
+  Antigravity.allExistingAntigravityExpansionContentCrossPollinated
+
 terminalAuthorityLedgerOwned : Bool
 terminalAuthorityLedgerOwned =
   Authority.terminalAuthorityClosureCompilerSourceWritten
@@ -70,11 +89,12 @@ remainingWorkFullyClassified : Bool
 remainingWorkFullyClassified = true
 
 -- This is closed by QuantumBirthmarkTerminalConcreteInstantiationExact for the
--- declared benchmark.  It is intentionally phrased as benchmark completion,
--- not as a universal experimental claim.
+-- declared corrected-tree/vacuum benchmark.  The entropy-density/antigravity
+-- max-cut additionally reuses the existing CMP119 generated-action/stress route
+-- and the existing positive-G local-repulsion and FLRW-expansion witnesses.
 declaredBenchmarkHasConcreteCompletionOwner : Bool
 declaredBenchmarkHasConcreteCompletionOwner = true
 
 statusStatement : String
 statusStatement =
-  "Terminal completion: formal composition is closed and the declared corrected-tree/vacuum benchmark has a concrete implementation, authority/model fixture, and calibration owner. Any broader non-vacuum or experimental claim is new scientific scope, not unpaid completion debt of this benchmark."
+  "Terminal completion: corrected RT, birthmark transport, Jacobson/Einstein composition, residual-effective-density to CMP119 expansion composition, and the existing positive-G antigravity/FLRW endpoints are all cross-pollinated at source level. The declared corrected-tree/vacuum benchmark has a concrete implementation, authority/model fixture, and calibration owner. Birthmark persistence alone does not determine the residual trace sign; that is a model/data statement, not an omitted gravity mechanism or formal-composition debt."
