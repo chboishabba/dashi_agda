@@ -29,7 +29,8 @@ module DASHI.Physics.ThreeBody.EisensteinC3FourierExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Relation.Binary.PropositionalEquality using (trans)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as E
@@ -128,12 +129,8 @@ mode2CyclicEigen
 -- Centre-of-mass / relative-mode split on the selected exact carrier.
 ------------------------------------------------------------------------
 
-Centered : PlanarThreeBodyState → Set
-Centered state = mode0 state ≡ E.eisenstein E.qMinusOne E.qMinusOne
-
--- Use a literal zero rather than smuggling it through a phase value.
 eisensteinZero : E.Eisenstein
-eisensteinZero = E.eisenstein (E.qOne - E.qOne) (E.qOne - E.qOne)
+eisensteinZero = E.eisenstein 0ℚ 0ℚ
 
 CenterOfMassZero : PlanarThreeBodyState → Set
 CenterOfMassZero state = mode0 state ≡ eisensteinZero
