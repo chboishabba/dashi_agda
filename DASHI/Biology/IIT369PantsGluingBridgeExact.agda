@@ -7,6 +7,7 @@ import DASHI.Foundations.Base369FiniteRingLaws as Ring369
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants369
+import DASHI.Reasoning.RelationalBranchCobordismGeometry as Cobordism
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as PantsGeometry
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 
@@ -32,15 +33,15 @@ import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 ------------------------------------------------------------------------
 
 canonicalPantsHasThreeOutputs :
-  PantsGeometry.Pants.outputCount PantsGeometry.Pants.composedOneToThree ≡ 3
+  Cobordism.outputCount Cobordism.composedOneToThree ≡ 3
 canonicalPantsHasThreeOutputs = PantsGeometry.canonicalPantsHasThreeOutputs
 
 canonicalPantsIsCapacityConservative :
-  PantsGeometry.Pants.CapacityConservative PantsGeometry.Pants.composedOneToThree
+  Cobordism.CapacityConservative Cobordism.composedOneToThree
 canonicalPantsIsCapacityConservative = PantsGeometry.canonicalPantsCapacityConservative
 
 canonicalPantsIsWaveConservative :
-  PantsGeometry.Pants.WaveConservative PantsGeometry.Pants.composedOneToThree
+  Cobordism.WaveConservative Cobordism.composedOneToThree
 canonicalPantsIsWaveConservative = PantsGeometry.canonicalPantsWaveConservative
 
 ------------------------------------------------------------------------
