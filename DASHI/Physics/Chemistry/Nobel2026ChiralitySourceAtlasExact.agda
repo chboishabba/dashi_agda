@@ -8,8 +8,6 @@ import DASHI.Core.GenericReceipt as Receipt
 
 ------------------------------------------------------------------------
 -- ATTRIBUTED SOURCE ATLAS
--- Source identity and source-role attribution are kept on the repository-wide
--- AttributedSource surface.  Citations do not import proof authority.
 ------------------------------------------------------------------------
 
 nobel2026Announcement : Source.AttributedSource
@@ -48,6 +46,19 @@ soai1995 =
     "https://doi.org/10.1038/378767a0"
     Source.academicArticleSource
     "primary asymmetric-autocatalysis source; product alcohol participates in its own asymmetric formation and amplifies ee"
+    Source.publicAttribution
+
+shibata1996 : Source.AttributedSource
+shibata1996 =
+  Source.mkDOISource
+    "Takanori Shibata; Kaori Choji; Tadakatsu Hayase; Yasuo Aizu; Kenso Soai"
+    "Asymmetric autocatalytic reaction of 3-quinolylalkanol with amplification of enantiomeric excess"
+    "Chemical Communications, 1235-1236"
+    "1996"
+    "10.1039/CC9960001235"
+    "https://doi.org/10.1039/CC9960001235"
+    Source.academicArticleSource
+    "primary numeric series-amplification source: ee increases from 8.9% to 88.1% through asymmetric autocatalytic alkylations"
     Source.publicAttribution
 
 sato2003 : Source.AttributedSource
@@ -94,22 +105,16 @@ nobel2026ChiralityAtlas =
   Source.mkSourceAtlas
     "2026 Nobel asymmetric synthesis / autocatalysis source atlas"
     "DASHI.Physics.Chemistry.Nobel2026ChiralitySourceAtlasExact"
-    (nobel2026Announcement ∷
-     kagan1986 ∷
-     soai1995 ∷
-     sato2003 ∷
-     buonoBlackmond2003 ∷
-     mohler2025 ∷ [])
-    "award attribution, primary nonlinear-effect/autocatalysis experiments, high-amplification experiment, aggregation kinetics, and modern same-reaction mechanistic profiling"
+    (nobel2026Announcement ∷ kagan1986 ∷ soai1995 ∷ shibata1996 ∷
+     sato2003 ∷ buonoBlackmond2003 ∷ mohler2025 ∷ [])
+    "award attribution, primary nonlinear-effect/autocatalysis experiments, direct numeric amplification experiments, aggregation kinetics, and modern same-reaction mechanistic profiling"
 
-sourceCountIsSix : Source.sourceCount (Source.sources nobel2026ChiralityAtlas) ≡ 6
-sourceCountIsSix = refl
+sourceCountIsSeven : Source.sourceCount (Source.sources nobel2026ChiralityAtlas) ≡ 7
+sourceCountIsSeven = refl
 
 atlasDoesNotImportProof :
   Receipt.promotesClaim
-    (Source.attributedSourceAtlasReceipt
-      nobel2026ChiralityAtlas
-      "source atlas static receipt")
+    (Source.attributedSourceAtlasReceipt nobel2026ChiralityAtlas "source atlas static receipt")
   ≡ false
 atlasDoesNotImportProof =
   Source.attributedSourceAtlasReceiptNonPromoting
