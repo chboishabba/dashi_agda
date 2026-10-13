@@ -21,6 +21,7 @@ import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as M
 import DASHI.Cognition.NickLandProvocationOverreactionPopulistTransferExact as Overreaction
 import DASHI.Cognition.EpsteinBannonAICapitalReflexivityCrossPollinationExact as AICapital
 import DASHI.Cognition.PrivateCapitalHousingAIInfrastructureCrossPollinationExact as PrivateCapital
+import DASHI.Cognition.PrivateCapitalHousingAIReceiptRound20261014Exact as PrivateCapitalReceipts
 import DASHI.Cognition.BlackRockMirvacSpringfieldCapitalOverlapExact as SpringfieldOverlap
 import DASHI.Cognition.SpringfieldLayeredValueCaptureParetoExact as SpringfieldValue
 import DASHI.Cognition.SpringfieldValueCaptureReceiptRound20261014Exact as SpringfieldReceipts
@@ -86,7 +87,7 @@ canonicalPowerFront =
   ∷ power-profile corporateBoardExposureTopology 97 true true true false true true
     "Systematic board/contact exposure and market incidence, with person/firm underlying-document debt."
   ∷ power-profile springfieldLayeredCapitalMicrocosm 97 true true true true true true
-    "Greater Springfield is now a high-resolution local incidence microcosm rather than a loose analogy. Paid layers include Springfield City Group parcel allocation; Mirvac's 100%-owned Orion asset; BlackRock's aggregate Mirvac substantial holding; Gordon/Mathieson City West acquisition vehicle; 2004 gas/electric buildout; network-level Allgas ownership transition; 2018 50-year ENGIE alliance; repeated Springfield/Santoro access; public rail/road capital; and exact Woogaroo environmental carrier routing. The remaining debts are instrument/cadastral/parcel joins, not broad relationship discovery."
+    "Greater Springfield is now a high-resolution local incidence microcosm rather than a loose analogy. Paid layers include Springfield City Group parcel allocation; Mirvac's 100%-owned Orion asset; BlackRock's aggregate Mirvac substantial holding; Gordon/Mathieson City West acquisition vehicle; 2004 gas/electric buildout; a 2005 Queensland parliamentary same-object Springfield-to-Allgas network receipt; network-level Allgas ownership transition; 2018 50-year ENGIE alliance; repeated Springfield/Santoro access with concrete project/TAFE subject labels; public rail/road capital; and exact Woogaroo environmental carrier routing. The remaining debts are instrument/cadastral/parcel joins, not broad relationship discovery."
   ∷ power-profile trumpBannonCAMediaInfluence 96 true true true true true true
     "Mar-a-Lago access/recruitment, Bannon/Epstein media work, Cambridge-Analytica influence infrastructure, TPUSA narrative pressure and Bannon's explicit flood-the-zone/opposition-media playbook form the strongest live psychological-influence acquisition lane. Same-technique reuse, common command and outcome causation remain separately unpaid."
   ∷ power-profile bondiSecurityMobilisationInstitutionalisation 96 true true true true true true
