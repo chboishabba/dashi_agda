@@ -54,6 +54,26 @@ def history_only_signal(reference_signal: float, epsilon_history: float) -> floa
     return reference_signal * epsilon_history
 
 
+def required_fractional_precision_improvement(
+    current_one_sigma_fraction: float,
+    epsilon_history: float,
+    target_snr: float = 5.0,
+) -> float:
+    if current_one_sigma_fraction <= 0:
+        raise ValueError("current_one_sigma_fraction must be positive")
+    if epsilon_history <= 0:
+        raise ValueError("epsilon_history must be positive")
+    if target_snr <= 0:
+        raise ValueError("target_snr must be positive")
+    return target_snr * current_one_sigma_fraction / epsilon_history
+
+
+def white_noise_time_multiplier(precision_improvement: float) -> float:
+    if precision_improvement <= 0:
+        raise ValueError("precision_improvement must be positive")
+    return precision_improvement**2
+
+
 def main() -> None:
     torsion = TorsionBenchmark()
     atom = AtomInterferometerBenchmark()
@@ -64,8 +84,14 @@ def main() -> None:
     print(f"atom_1sigma_fractional_transfer={atom.one_sigma_fractional_transfer:.9f}")
     print(f"atom_2sigma_fractional_transfer={atom.two_sigma_fractional_transfer:.9f}")
     for eps in (0.1, 0.01, 0.001):
+        print(f"torsion_history_signal_aN_eps_{eps:g}={history_only_signal(torsion.newton_force_N / 1e-18, eps):.9f}")
         print(f"opto_upper_hours_eps_{eps:g}_snr1={opto.required_hours(eps, 1):.6f}")
         print(f"opto_upper_hours_eps_{eps:g}_snr5={opto.required_hours(eps, 5):.6f}")
+        improvement = required_fractional_precision_improvement(
+            atom.one_sigma_fractional_transfer, eps, 5
+        )
+        print(f"atom_precision_improvement_eps_{eps:g}_snr5={improvement:.9f}")
+        print(f"atom_white_time_multiplier_eps_{eps:g}_snr5={white_noise_time_multiplier(improvement):.9f}")
 
 
 if __name__ == "__main__":
