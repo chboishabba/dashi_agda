@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Cognition.SpringfieldLayeredValueCaptureParetoExact as Prior
 import DASHI.Cognition.SpringfieldValueCaptureReceiptRound20261014Exact as Receipts
+import DASHI.Cognition.SpringfieldMaxCutWebPromotion20261014Exact as Promotion
 
 ------------------------------------------------------------------------
 -- CLOSURE RECEIPT FOR THE 2026-10-14 SPRINGFIELD MAX-CUT ROUND
@@ -62,15 +63,15 @@ canonicalClosureReceipts =
   ∷ closure-receipt cityWestCapitalStack beneficialOwnershipLevel false
     "Lender, secured party, unit-holder split, guarantees and development facility remain open."
   ∷ closure-receipt springfieldGasNetworkLineage networkLevel true
-    "The network-level chronology is paid: 2004 Energex/Springfield buildout locator -> 2006 Energex Allgas sale to APT/APA -> later GDI ownership -> 2026 Stonepeak/AGIG."
+    "The network-level chronology is strongly paid: 2004 Energex/Springfield gas-electric alliance; 2005 Queensland parliamentary same-object statement that Energex through Allgas planned to extend the natural-gas network to Springfield; 2006 Energex Allgas sale to APT/APA; later GDI ownership; 2026 Stonepeak/AGIG."
   ∷ closure-receipt springfieldExactGasAssets instrumentLevel false
-    "Exact Springfield easements, mains/service IDs and sale schedules remain open."
+    "Exact Springfield easements, mains/service IDs and asset/sale schedules remain open even though the Springfield-to-Allgas network identity is now paid."
   ∷ closure-receipt santoroSpringfieldSubject subjectCategoryLevel true
-    "Repeated 2025 Springfield/Santoro access is paid and one diary explicitly describes an update on the Springfield City Group Plan."
+    "Repeated 2025 Springfield/Santoro access is paid. Public diaries now identify a Springfield City Group Plan update, a project update in the Treasurer/Energy/Home Ownership portfolio and a specific discussion of TAFE premises in Springfield."
   ∷ closure-receipt santoroSpecificAskDecision instrumentLevel false
-    "Briefing papers, correspondence, requested decisions and gas/energy-specific asks remain open."
+    "At least one concrete lobbying subject is now identified, but briefing papers, correspondence, requested decisions, outcomes and any gas/energy-specific asks remain open."
   ∷ closure-receipt mirvacOrionChronology transactionLevel true
-    "Mirvac pays August 2002 acquisition/agreement chronology, 100% Orion ownership, development and current asset valuation/land coordinates."
+    "Mirvac pays August 2002 acquisition/agreement chronology, 100% Orion ownership, longitudinal Orion/Orion-land asset entries, development and current asset valuation/land coordinates."
   ∷ closure-receipt mirvacOriginalInstrument instrumentLevel false
     "Original 2002 contract, price, Springfield-side counterparty rights and revenue-sharing/covenants remain open."
   ∷ closure-receipt masterDeveloperParcelActivity transactionLevel true
@@ -96,6 +97,7 @@ record ClosureSummary : Set where
   field
     identityAndChronologySubstantiallyClosed : Bool
     networkOwnershipChronologySubstantiallyClosed : Bool
+    lobbyingSubjectCategoriesSubstantiallyClosed : Bool
     beneficialCapitalStackClosed : Bool
     lobbyingCausationClosed : Bool
     parcelIncidenceClosed : Bool
@@ -105,7 +107,7 @@ open ClosureSummary public
 
 canonicalClosureSummary : ClosureSummary
 canonicalClosureSummary = closure-summary
-  true true false false false false true
+  true true true false false false false true
 
 ------------------------------------------------------------------------
 -- Remaining Pareto is narrower: documents and joins, not broad web discovery.
@@ -135,9 +137,9 @@ canonicalClosureCuts =
   closure-cut cityWestFinanceDocuments 100 false
     "Title/mortgage/PPSR/company trust or lender disclosures identifying secured finance and beneficial/economic split."
   ∷ closure-cut gasAssetSchedules 100 false
-    "Original Energex-Springfield alliance and exact asset/easement/sale schedules tying Springfield works to the Allgas sale chain."
+    "Original Energex-Springfield alliance plus exact mains/easement/asset and 2006 sale schedules. The Springfield-to-Allgas network identity itself is now paid."
   ∷ closure-cut lobbyingBriefsCorrespondence 99 false
-    "Lobbyist-client register details plus briefing papers, correspondence, notes, asks and decision traces for 2025 Springfield/Santoro meetings."
+    "Lobbyist contact-log details plus briefing papers, correspondence, notes, asks and decision traces for 2025 Springfield/Santoro meetings. Public diary subject categories are now substantially paid."
   ∷ closure-cut orion2002ContractTitle 98 false
     "August 2002 Mirvac/Springfield sale-development instrument and historical title/covenant material."
   ∷ closure-cut currentSpringfieldRightsCadastre 98 false
