@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Quantum.QuantumBirthmarkCorrectedRTSameObjectExact as RT
+import DASHI.Quantum.QuantumBirthmarkCorrectedCutNetworkBoundaryExact as CutNetwork
 import DASHI.Quantum.QuantumBirthmarkHolographicZModCarrierFactorizationBoundaryExact as Carrier
 import DASHI.Quantum.QuantumBirthmarkHolographicTensorNetworkAuditExact as Audit
 import DASHI.Quantum.QuantumBirthmarkHolographicResidualTransportExact as Transport
@@ -14,16 +15,21 @@ import DASHI.Quantum.QuantumBirthmarkJacobsonHorizonFluxAreaBoundaryExact as Hor
 import DASHI.Quantum.QuantumBirthmarkJacobsonLocalFrameFieldCompilerBoundaryExact as Field
 import DASHI.Quantum.QuantumBirthmarkJacobsonLocalFrameEinsteinLambdaBoundaryExact as Einstein
 import DASHI.Quantum.QuantumBirthmarkJacobsonRecoveredLambdaConstancyBoundaryExact as Lambda
+import DASHI.Quantum.QuantumBirthmarkJacobsonPhysicalTerminalCompilerBoundaryExact as Terminal
 import DASHI.Quantum.QuantumBirthmarkRelativeEntropyJacobsonSourceBridgeExact as RelativeEntropy
 
 ------------------------------------------------------------------------
--- TERMINAL SOURCE MAX-CUT — 2026-10-12
+-- TERMINAL SOURCE MAX-CUT — 2026-10-13
 --
--- This owner is intentionally a terminal accounting surface rather than a new
--- physical theory.  It records the strongest source-written finite/algebraic
--- closure reached across the Agda and Lean branches and leaves only obligations
--- which require source replacement, physical same-object construction,
--- continuum/QFT mathematics, empirical realization, or kernel verification.
+-- This owner records the strongest finite/algebraic closure reached across the
+-- Agda and Lean branches.  Corrected finite RT is now closed on an explicit
+-- replacement network, including the same-object k-bond minimal cut.  The
+-- Jacobson chain is closed conditionally from a declared physical same-object
+-- package to a constant-Lambda Einstein equation on the same domain.
+--
+-- The live frontier therefore consists only of upstream source replacement or
+-- equivalence, real physical same-object construction/identification, and
+-- empirical realization.  Kernel/CI certification is operationally separate.
 ------------------------------------------------------------------------
 
 record PaidSourceLayer : Set where
@@ -36,6 +42,9 @@ record PaidSourceLayer : Set where
     zModCarrierFactorizationPaid : Bool
     correctedZModStatePaid : Bool
     correctedUnbalancedZModStatePaid : Bool
+    correctedKBondReplacementNetworkPaid : Bool
+    correctedMinimalCutIdentificationPaid : Bool
+    correctedNetworkSameObjectRTPaid : Bool
     upstreamStateContractNoGoPaid : Bool
 
     consumerRelativeBirthmarkTransportCompilerPaid : Bool
@@ -50,6 +59,8 @@ record PaidSourceLayer : Set where
     localFrameFieldCompilerPaid : Bool
     pointwiseEinsteinLambdaPaid : Bool
     sameObjectRecoveredLambdaConstancyCompilerPaid : Bool
+    terminalConditionalEinsteinCompilerPaid : Bool
+    noFurtherInternalJacobsonAlgebraDebt : Bool
 
     relativeEntropyHorizonFluxAuthorityLanePaid : Bool
 
@@ -57,30 +68,31 @@ canonicalPaidSourceLayer : PaidSourceLayer
 canonicalPaidSourceLayer =
   paidSourceLayer
     true true
-    true true true true true
+    true true true true true true true true
     true
     true true true true true true
-    true true true
+    true true true true true
     true
 
 ------------------------------------------------------------------------
--- Irreducible live frontier after source/algebraic max-cut.
+-- Irreducible external frontier after the source/algebraic max-cut.
 ------------------------------------------------------------------------
 
 record ExternalSameObjectFrontier : Set where
   constructor externalSameObjectFrontier
   field
-    -- RT / holography source replacement and geometry.
+    -- RT / holography source and physical promotion.
     upstreamTreeContractionReplacementOrEquivalenceStillRequired : Bool
-    geometricSubtreeMinimalCutIdentificationStillRequired : Bool
+    upstreamSubtreeToCorrectedCutEquivalenceStillRequired : Bool
     physicalBulkBoundaryDictionaryStillRequired : Bool
     physicalBirthmarkFactorizationStillRequired : Bool
 
     -- QFT / local horizon physics.
     physicalBisognanoWichmannKMSStillRequired : Bool
     physicalAccelerationProperTimeAttachmentStillRequired : Bool
-    physicalEntropyAreaReceiptStillRequired : Bool
-    physicalHorizonCongruenceStressReceiptStillRequired : Bool
+    physicalEntropyAreaOrRelativeEntropyAreaReceiptStillRequired : Bool
+    physicalBoostKillingAffineMeasureStressReceiptStillRequired : Bool
+    physicalNullCongruenceRaychaudhuriStillRequired : Bool
     continuumHigherOrderHorizonControlStillRequired : Bool
 
     -- Continuum Einstein attachment.
@@ -88,18 +100,17 @@ record ExternalSameObjectFrontier : Set where
     physicalBianchiStressConservationStillRequired : Bool
     recoveredLambdaDifferentiabilityAndZeroDerivativeStillRequired : Bool
     physicalOpenPreconnectedDomainStillRequired : Bool
-    continuumEinsteinMatterAttachmentStillRequired : Bool
 
+    -- Observation / reality checks.
     empiricalValidationStillRequired : Bool
-    exactHeadKernelReceiptsStillRequired : Bool
 
 canonicalExternalSameObjectFrontier : ExternalSameObjectFrontier
 canonicalExternalSameObjectFrontier =
   externalSameObjectFrontier
     true true true true
-    true true true true true
-    true true true true true
-    true true
+    true true true true true true
+    true true true true
+    true
 
 ------------------------------------------------------------------------
 -- Compact theorem/status aliases.
@@ -119,6 +130,18 @@ correctedZModStatePaid =
 correctedUnbalancedZModStatePaid : Bool
 correctedUnbalancedZModStatePaid =
   RT.correctedUnbalancedRTForAdequateComplementSourceWritten
+
+correctedKBondReplacementNetworkPaid : Bool
+correctedKBondReplacementNetworkPaid =
+  CutNetwork.correctedReplacementNetworkOwned
+
+correctedMinimalCutIdentificationPaid : Bool
+correctedMinimalCutIdentificationPaid =
+  CutNetwork.correctedMinimalCutIdentificationOwned
+
+correctedNetworkSameObjectRTPaid : Bool
+correctedNetworkSameObjectRTPaid =
+  CutNetwork.correctedNetworkSameObjectRTClosed
 
 upstreamStateContractNoGoPaid : Bool
 upstreamStateContractNoGoPaid =
@@ -147,12 +170,20 @@ sameObjectRecoveredLambdaConstancyCompilerPaid : Bool
 sameObjectRecoveredLambdaConstancyCompilerPaid =
   Lambda.recoveredLambdaSameObjectConstancySourceWritten
 
+terminalConditionalEinsteinCompilerPaid : Bool
+terminalConditionalEinsteinCompilerPaid =
+  Terminal.terminalConditionalEinsteinCompilerSourceWritten
+
+noFurtherInternalJacobsonAlgebraDebt : Bool
+noFurtherInternalJacobsonAlgebraDebt =
+  Terminal.noFurtherInternalJacobsonAlgebraDebt
+
 upstreamTreeContractionReplacementOrEquivalenceStillRequired : Bool
 upstreamTreeContractionReplacementOrEquivalenceStillRequired =
-  RT.upstreamTreeContractionReplacementOrEquivalenceStillRequired
+  CutNetwork.upstreamReplacementOrEquivalenceStillRequired
 
-geometricSubtreeMinimalCutIdentificationStillRequired : Bool
-geometricSubtreeMinimalCutIdentificationStillRequired = true
+upstreamSubtreeToCorrectedCutEquivalenceStillRequired : Bool
+upstreamSubtreeToCorrectedCutEquivalenceStillRequired = true
 
 physicalBulkBoundaryDictionaryStillRequired : Bool
 physicalBulkBoundaryDictionaryStillRequired =
@@ -166,40 +197,40 @@ physicalBisognanoWichmannKMSStillRequired : Bool
 physicalBisognanoWichmannKMSStillRequired =
   Unruh.physicalBisognanoWichmannStillRequired
 
-physicalEntropyAreaReceiptStillRequired : Bool
-physicalEntropyAreaReceiptStillRequired = true
+physicalEntropyAreaOrRelativeEntropyAreaReceiptStillRequired : Bool
+physicalEntropyAreaOrRelativeEntropyAreaReceiptStillRequired = true
 
-physicalHorizonCongruenceStressReceiptStillRequired : Bool
-physicalHorizonCongruenceStressReceiptStillRequired = true
+physicalBoostKillingAffineMeasureStressReceiptStillRequired : Bool
+physicalBoostKillingAffineMeasureStressReceiptStillRequired = true
+
+physicalNullCongruenceRaychaudhuriStillRequired : Bool
+physicalNullCongruenceRaychaudhuriStillRequired = true
 
 physicalBianchiStressConservationStillRequired : Bool
 physicalBianchiStressConservationStillRequired = true
 
-continuumEinsteinMatterAttachmentStillRequired : Bool
-continuumEinsteinMatterAttachmentStillRequired = true
-
 empiricalValidationStillRequired : Bool
 empiricalValidationStillRequired = true
 
-exactHeadKernelReceiptsStillRequired : Bool
-exactHeadKernelReceiptsStillRequired = true
+------------------------------------------------------------------------
+-- Source max-cut closure and promotion firewalls.
+------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Terminal promotion firewalls.
-------------------------------------------------------------------------
+sourceMaxCutClosedApartFromExternalSameObjectPayments : Bool
+sourceMaxCutClosedApartFromExternalSameObjectPayments = true
 
 record TerminalFirewall : Set where
   constructor terminalFirewall
   field
-    correctedStateOnSameCarrierDoesNotMeanUpstreamTreeProducedIt : Bool
+    correctedReplacementNetworkDoesNotMeanUpstreamTreeProducedIt : Bool
+    correctedMinimalCutDoesNotIdentifyUpstreamSubtree : Bool
     carrierEquivalenceDoesNotIdentifyGeometricSubtree : Bool
     rtEntropyDoesNotIdentifyBirthmarkMemory : Bool
     birthmarkMemoryDoesNotSourceCurvature : Bool
     unruhScalarAlgebraDoesNotProveBisognanoWichmann : Bool
     raychaudhuriScalarAlgebraDoesNotConstructNullCongruence : Bool
-    pointwiseEinsteinEquationDoesNotSupplyBianchiOrConservation : Bool
-    constantLambdaCompilerDoesNotConstructPhysicalSolution : Bool
-    sourceWrittenDoesNotMeanKernelChecked : Bool
+    terminalConditionalCompilerDoesNotConstructPhysicalInputs : Bool
+    sourceWrittenDoesNotMeanEmpiricallyRealized : Bool
 
 canonicalTerminalFirewall : TerminalFirewall
 canonicalTerminalFirewall =
@@ -207,4 +238,4 @@ canonicalTerminalFirewall =
 
 statusStatement : String
 statusStatement =
-  "Terminal source max-cut: corrected finite RT entropy, exact ZMod product factorisation, corrected coherent ZMod states (including adequate unbalanced complements), the no-go for the current upstream state/contract definitions, consumer-relative birthmark transport, Jacobson scalar/null-cone algebra, local-frame point-indexed Einstein/Lambda compilation, and same-object recovered-Lambda constancy specialization are source-written. Remaining work is actual upstream tree-contraction replacement/equivalence plus geometric cut semantics, physical bulk/boundary and birthmark factorisation, physical BW/KMS and horizon entropy/flux/congruence receipts, physical Bianchi/stress conservation and recovered-Lambda regularity/domain attachment, continuum Einstein-matter realization, empirical validation, and exact-head kernel receipts."
+  "Terminal source max-cut: corrected finite RT is same-object closed on an explicit k-independent-bond replacement network, including exact cut-bond count, subsystem/Schmidt rank alignment, reduced density matrix and k log 2 entropy. The inspected upstream copy-tree/state/contract remains a proved no-go for direct equality and therefore requires source replacement or a genuine equivalence, including upstream-subtree to corrected-cut semantics. Consumer-relative birthmark transport is compiled. The Jacobson chain is source-written through Unruh scalar normalization, equilibrium Raychaudhuri and horizon flux/area reductions, null-cone rigidity, local-frame Einstein/Lambda recovery, same-object Lambda constancy, and a terminal conditional compiler yielding a constant-Lambda Einstein equation on the same selected domain. No further internal Jacobson algebra debt is identified. Remaining work is external physical same-object construction/identification and empirical validation."
