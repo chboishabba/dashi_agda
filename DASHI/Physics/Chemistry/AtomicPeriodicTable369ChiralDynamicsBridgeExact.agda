@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Algebra.TriadicDepthOneCharacters as AtomicC3
+import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as ChemC3
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChiralMolecularSeparatingPairExact as Static
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Hyper
 import DASHI.Physics.Chemistry.AsymmetricChiralDynamicsExact as Dynamics
@@ -77,8 +78,8 @@ seedMirrorAtomicPhasesAreConjugate :
 seedMirrorAtomicPhasesAreConjugate = refl
 
 atomicGeneratorActsAsChemistryAdvance :
-  (p : ChiralC3.C3.C3Phase) →
-  Carrier.chemToAtomic (ChiralC3.C3.phaseAdvance p)
+  (p : ChemC3.C3Phase) →
+  Carrier.chemToAtomic (ChemC3.phaseAdvance p)
   ≡ AtomicC3.multiplyPhase AtomicC3.phase1 (Carrier.chemToAtomic p)
 atomicGeneratorActsAsChemistryAdvance = Carrier.chemAdvanceIsAtomicGeneratorAction
 
