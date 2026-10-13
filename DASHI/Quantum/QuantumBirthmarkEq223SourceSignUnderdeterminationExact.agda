@@ -4,17 +4,9 @@ module DASHI.Quantum.QuantumBirthmarkEq223SourceSignUnderdeterminationExact wher
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; -_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
-
-------------------------------------------------------------------------
--- EQ.(2.23) VACUUM-SIGN UNDERDETERMINATION IN THE CURRENT SOURCE TYPE
---
--- `Eq223SourceMetricVariationRealization.vacuumMetricVariation` has the shape
--- Vacuum -> SymmetricTensorComponent4 -> Q and carries no sign law.  The same
--- bare component-function carrier therefore admits opposite diagonal traces.
-------------------------------------------------------------------------
 
 VacuumMetricVariationToy : Set
 VacuumMetricVariationToy = K.SymmetricTensorComponent4 → ℚ
@@ -39,11 +31,11 @@ diagonalTrace variation =
   + (variation K.component22 + variation K.component33)
 
 positiveVacuumTraceIsFour :
-  diagonalTrace positiveVacuumVariation ≡ Int.+ 4
+  diagonalTrace positiveVacuumVariation ≡ Int.+ 4 / 1
 positiveVacuumTraceIsFour = refl
 
 negativeVacuumTraceIsMinusFour :
-  diagonalTrace negativeVacuumVariation ≡ - (Int.+ 4)
+  diagonalTrace negativeVacuumVariation ≡ - (Int.+ 4 / 1)
 negativeVacuumTraceIsMinusFour = refl
 
 sameBareVariationTypeAllowsOppositeVacuumSigns : Bool
