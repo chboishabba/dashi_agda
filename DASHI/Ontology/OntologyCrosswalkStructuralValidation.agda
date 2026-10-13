@@ -59,6 +59,22 @@ strongEquivalenceRelationCompilesToOwlEquivalence :
   compileRelationPredicate equivalent ≡ SSSOM.owlEquivalentClass
 strongEquivalenceRelationCompilesToOwlEquivalence = refl
 
+endurantEnvelopeRemainsReviewOnly :
+  SSSOM.reviewState (compileAssertionEnvelope gsoDolceEndurantCrosswalk)
+  ≡ SSSOM.mappingForReviewOnly
+endurantEnvelopeRemainsReviewOnly = refl
+
+endurantEnvelopeCarriesUnresolvedConflict :
+  SSSOM.finding (compileAssertionEnvelope gsoDolceEndurantCrosswalk)
+  ≡ SSSOM.unresolvedMappingConflict
+endurantEnvelopeCarriesUnresolvedConflict = refl
+
+endurantCompiledPredicateRemainsBridgeLike :
+  SSSOM.mappingPredicate
+    (SSSOM.candidateMapping (compileAssertionEnvelope gsoDolceEndurantCrosswalk))
+  ≡ SSSOM.localCorrespondence
+endurantCompiledPredicateRemainsBridgeLike = refl
+
 equivalenceIsLeftIdentity :
   composeRelation equivalent narrower ≡ narrower
 equivalenceIsLeftIdentity = refl
