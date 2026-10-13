@@ -22,6 +22,19 @@ nobel2026Announcement =
     "award identity and official motivation: Kagan and Soai; nonlinear effects and autocatalysis in asymmetric organic synthesis"
     Source.publicAttribution
 
+frank1953 : Source.AttributedSource
+frank1953 =
+  Source.mkDOISource
+    "F. C. Frank"
+    "On spontaneous asymmetric synthesis"
+    "Biochimica et Biophysica Acta 11, 459-463"
+    "1953"
+    "10.1016/0006-3002(53)90082-1"
+    "https://doi.org/10.1016/0006-3002(53)90082-1"
+    Source.academicArticleSource
+    "historical theoretical precedent for autocatalytic spontaneous asymmetry; not attributed with later Soai chemistry"
+    Source.publicAttribution
+
 kagan1986 : Source.AttributedSource
 kagan1986 =
   Source.mkDOISource
@@ -105,12 +118,12 @@ nobel2026ChiralityAtlas =
   Source.mkSourceAtlas
     "2026 Nobel asymmetric synthesis / autocatalysis source atlas"
     "DASHI.Physics.Chemistry.Nobel2026ChiralitySourceAtlasExact"
-    (nobel2026Announcement ∷ kagan1986 ∷ soai1995 ∷ shibata1996 ∷
+    (nobel2026Announcement ∷ frank1953 ∷ kagan1986 ∷ soai1995 ∷ shibata1996 ∷
      sato2003 ∷ buonoBlackmond2003 ∷ mohler2025 ∷ [])
-    "award attribution, primary nonlinear-effect/autocatalysis experiments, direct numeric amplification experiments, aggregation kinetics, and modern same-reaction mechanistic profiling"
+    "award attribution, historical asymmetry precedent, primary nonlinear-effect/autocatalysis experiments, direct numeric amplification, aggregation kinetics, and modern same-reaction mechanistic profiling"
 
-sourceCountIsSeven : Source.sourceCount (Source.sources nobel2026ChiralityAtlas) ≡ 7
-sourceCountIsSeven = refl
+sourceCountIsEight : Source.sourceCount (Source.sources nobel2026ChiralityAtlas) ≡ 8
+sourceCountIsEight = refl
 
 atlasDoesNotImportProof :
   Receipt.promotesClaim
