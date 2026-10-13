@@ -2,6 +2,8 @@ module DASHI.Ontology.OntologyCrosswalkStructuralExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -57,8 +59,19 @@ data OntologyId : Set where
   gum : OntologyId
   gso : OntologyId
 
+ontologyName : OntologyId → String
+ontologyName wikidata = "Wikidata"
+ontologyName bfo = "BFO"
+ontologyName dolce = "DOLCE"
+ontologyName gfo = "GFO"
+ontologyName ufo = "UFO"
+ontologyName gufO = "gUFO"
+ontologyName yamato = "YAMATO"
+ontologyName gum = "GUM"
+ontologyName gso = "GSO"
+
 -- Structural signatures deliberately encode only the distinctions paid by the
--- fixture.  They are not complete definitions of the external ontologies.
+-- fixture. They are not complete definitions of the external ontologies.
 data StructuralSignature : Set where
   genericEntityShape : StructuralSignature
   gsoEndurantContainsQualityAndAbstractShape : StructuralSignature
@@ -104,9 +117,9 @@ gsoDolceEndurantNotSameConcept ()
 ------------------------------------------------------------------------
 -- RELATION ALGEBRA
 --
--- Relations are intentionally richer than equality.  Composition is
+-- Relations are intentionally richer than equality. Composition is
 -- conservative: only identity-like equivalence and same-direction strict
--- refinement compose without loss.  Mixed or weak relations fall back to a
+-- refinement compose without loss. Mixed or weak relations fall back to a
 -- bridge rather than manufacturing equivalence.
 ------------------------------------------------------------------------
 
@@ -117,6 +130,15 @@ data CrosswalkRelation : Set where
   overlap : CrosswalkRelation
   disjoint : CrosswalkRelation
   bridge : CrosswalkRelation
+
+equivalentNotBridge : equivalent ≡ bridge → ⊥
+equivalentNotBridge ()
+
+narrowerNotBroader : narrower ≡ broader → ⊥
+narrowerNotBroader ()
+
+disjointNotEquivalent : disjoint ≡ equivalent → ⊥
+disjointNotEquivalent ()
 
 composeRelation : CrosswalkRelation → CrosswalkRelation → CrosswalkRelation
 composeRelation equivalent right = right
@@ -158,37 +180,47 @@ record CrosswalkAssertion : Set where
 open CrosswalkAssertion public
 
 ------------------------------------------------------------------------
--- STRONG EQUIVALENCE REQUIRES STRUCTURAL COMPATIBILITY
+-- STRUCTURAL COMPATIBILITY != STRONG EQUIVALENCE
+--
+-- Matching the bounded signatures is only a compatibility receipt. Strong
+-- equivalence additionally carries reviewed admission. This prevents the
+-- positive Quality/Quale fixtures from self-promoting merely because this local
+-- abstraction assigns them the same structural shape.
 ------------------------------------------------------------------------
+
+record StructuralCompatibility (left right : CrosswalkConcept) : Set where
+  constructor structuralCompatibility
+  field
+    sameSignature : signature left ≡ signature right
+
+open StructuralCompatibility public
 
 record StrongEquivalence (left right : CrosswalkConcept) : Set where
   constructor strongEquivalence
   field
-    structuralCompatibility : signature left ≡ signature right
+    compatibility : StructuralCompatibility left right
+    reviewedPermission : CrosswalkTruthPermission reviewedAdmission
 
 open StrongEquivalence public
 
-gsoDolceEndurantStrongEquivalenceImpossible :
-  StrongEquivalence gsoEndurant dolceEndurant → ⊥
-gsoDolceEndurantStrongEquivalenceImpossible receipt
-  with structuralCompatibility receipt
+gsoDolceEndurantStructuralCompatibilityImpossible :
+  StructuralCompatibility gsoEndurant dolceEndurant → ⊥
+gsoDolceEndurantStructuralCompatibilityImpossible receipt
+  with sameSignature receipt
 ... | ()
 
-qualityStructuralCompatibility : signature gsoQuality ≡ signature dolceQuality
-qualityStructuralCompatibility = refl
+gsoDolceEndurantStrongEquivalenceImpossible :
+  StrongEquivalence gsoEndurant dolceEndurant → ⊥
+gsoDolceEndurantStrongEquivalenceImpossible receipt =
+  gsoDolceEndurantStructuralCompatibilityImpossible (compatibility receipt)
 
-qualityValueQualeStructuralCompatibility :
-  signature gsoQualityValue ≡ signature dolceQuale
-qualityValueQualeStructuralCompatibility = refl
+gsoDolceQualityStructuralCompatibility :
+  StructuralCompatibility gsoQuality dolceQuality
+gsoDolceQualityStructuralCompatibility = structuralCompatibility refl
 
--- These are structural compatibility receipts for the deliberately bounded
--- fixture, not assertions that the external classes are globally OWL-equivalent.
-gsoDolceQualityStrongCompatibility : StrongEquivalence gsoQuality dolceQuality
-gsoDolceQualityStrongCompatibility = strongEquivalence refl
-
-gsoDolceQualityValueQualeStrongCompatibility :
-  StrongEquivalence gsoQualityValue dolceQuale
-gsoDolceQualityValueQualeStrongCompatibility = strongEquivalence refl
+gsoDolceQualityValueQualeStructuralCompatibility :
+  StructuralCompatibility gsoQualityValue dolceQuale
+gsoDolceQualityValueQualeStructuralCompatibility = structuralCompatibility refl
 
 ------------------------------------------------------------------------
 -- SOURCE-PAID FIXTURES + DASHI STRUCTURAL INTERPRETATION
@@ -226,9 +258,6 @@ gsoDolceEndurantCrosswalk =
 
 ------------------------------------------------------------------------
 -- CONSERVATIVE SSSOM COMPILATION
---
--- Only the relation tag is compiled here.  Provenance, authority and admission
--- remain separate obligations in the existing SSSOM/repair pipeline.
 ------------------------------------------------------------------------
 
 compileRelationPredicate : CrosswalkRelation → SSSOM.MappingPredicate
@@ -247,6 +276,49 @@ mixedRefinementDoesNotComposeToEquivalence :
   composeRelation narrower broader ≡ equivalent → ⊥
 mixedRefinementDoesNotComposeToEquivalence ()
 
+-- Full compilation preserves the source-side concept labels, ontology names,
+-- relation tag and evidence reading. It deliberately creates a review surface,
+-- not an admitted ontology assertion.
+compileAssertionMapping : CrosswalkAssertion → SSSOM.SSSOMMapping
+compileAssertionMapping assertion =
+  SSSOM.sssomMapping
+    (localName (leftConcept assertion))
+    (compileRelationPredicate (relation assertion))
+    (localName (rightConcept assertion))
+    SSSOM.importedSourceAssertion
+    "DASHI ontology crosswalk compiler"
+    ""
+    0
+    (ontologyName (ontology (leftConcept assertion)))
+    "source-version-unspecified"
+    (ontologyName (ontology (rightConcept assertion)))
+    "source-version-unspecified"
+    "2026-10-13"
+    (evidenceReading assertion)
+
+findingForRelation : CrosswalkRelation → SSSOM.MappingReviewFinding
+findingForRelation equivalent = SSSOM.noObservedMappingConflict
+findingForRelation narrower = SSSOM.noObservedMappingConflict
+findingForRelation broader = SSSOM.unresolvedMappingConflict
+findingForRelation overlap = SSSOM.unresolvedMappingConflict
+findingForRelation disjoint = SSSOM.unresolvedMappingConflict
+findingForRelation bridge = SSSOM.unresolvedMappingConflict
+
+compileAssertionEnvelope : CrosswalkAssertion → SSSOM.MappingReviewEnvelope
+compileAssertionEnvelope assertion =
+  SSSOM.mappingReviewEnvelope
+    (compileAssertionMapping assertion)
+    SSSOM.mappingForReviewOnly
+    (findingForRelation (relation assertion))
+    (evidenceLocator assertion ∷ evidenceReading assertion ∷ [])
+
+compiledEnvelopeCannotAssertTruth :
+  (assertion : CrosswalkAssertion) →
+  SSSOM.MappingTruthPermission
+    (SSSOM.reviewState (compileAssertionEnvelope assertion)) → ⊥
+compiledEnvelopeCannotAssertTruth assertion =
+  SSSOM.mappingCannotAssertOntologyTruth
+
 ------------------------------------------------------------------------
 -- MAX-CUT STATUS
 ------------------------------------------------------------------------
@@ -257,15 +329,19 @@ record OntologyCrosswalkStatus : Set where
     typedOntologyCarrierOwned : Bool
     relationKindsRemainDistinct : Bool
     lexicalIdentityNotConceptIdentity : Bool
+    structuralCompatibilitySeparatedFromEquivalence : Bool
     structuralMismatchBlocksStrongEquivalence : Bool
     sourceObservationSeparatedFromTruth : Bool
     conservativeRelationCompositionOwned : Bool
     conservativeSSSOMCompilationOwned : Bool
+    reviewOnlyEnvelopeCompilationOwned : Bool
     gsoDolceEndurantObstructionOwned : Bool
 
     typedOntologyCarrierOwnedIsTrue : typedOntologyCarrierOwned ≡ true
     relationKindsRemainDistinctIsTrue : relationKindsRemainDistinct ≡ true
     lexicalIdentityNotConceptIdentityIsTrue : lexicalIdentityNotConceptIdentity ≡ true
+    structuralCompatibilitySeparatedFromEquivalenceIsTrue :
+      structuralCompatibilitySeparatedFromEquivalence ≡ true
     structuralMismatchBlocksStrongEquivalenceIsTrue :
       structuralMismatchBlocksStrongEquivalence ≡ true
     sourceObservationSeparatedFromTruthIsTrue :
@@ -274,6 +350,8 @@ record OntologyCrosswalkStatus : Set where
       conservativeRelationCompositionOwned ≡ true
     conservativeSSSOMCompilationOwnedIsTrue :
       conservativeSSSOMCompilationOwned ≡ true
+    reviewOnlyEnvelopeCompilationOwnedIsTrue :
+      reviewOnlyEnvelopeCompilationOwned ≡ true
     gsoDolceEndurantObstructionOwnedIsTrue :
       gsoDolceEndurantObstructionOwned ≡ true
 
@@ -282,5 +360,5 @@ open OntologyCrosswalkStatus public
 canonicalOntologyCrosswalkStatus : OntologyCrosswalkStatus
 canonicalOntologyCrosswalkStatus =
   ontologyCrosswalkStatus
-    true true true true true true true true
-    refl refl refl refl refl refl refl refl
+    true true true true true true true true true true
+    refl refl refl refl refl refl refl refl refl refl
