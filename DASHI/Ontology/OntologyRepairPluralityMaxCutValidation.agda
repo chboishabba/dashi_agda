@@ -2,8 +2,9 @@ module DASHI.Ontology.OntologyRepairPluralityMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Integer using (+_; -[1+_])
 
+import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
+open import DASHI.Ontology.EducationOntologyMappingSSSOMExact
 open import DASHI.Ontology.OntologyRepairPluralityMaxCutExact
 
 predicateTooStrongRoutesToUnderspecification :
