@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 import DASHI.Reasoning.LocalFibreHyperfabricExact as Local
+import DASHI.Topology.ClopenNDimFibreBoundary as NDim
 
 ------------------------------------------------------------------------
 -- IIT / TYPED HYPERFABRIC PARTITION BRIDGE
@@ -49,15 +50,15 @@ restrictionPartitionNotDefinitionallyGraphPartition :
 restrictionPartitionNotDefinitionallyGraphPartition ()
 
 oneDimensionalTriadicRefinement :
-  Local.NDim.immediateChildCount 1 ≡ 3
+  NDim.immediateChildCount 1 ≡ 3
 oneDimensionalTriadicRefinement = Local.oneDimTriadicChildren
 
 twoDimensionalTriadicRefinement :
-  Local.NDim.immediateChildCount 2 ≡ 9
+  NDim.immediateChildCount 2 ≡ 9
 twoDimensionalTriadicRefinement = Local.twoDimTriadicChildren
 
 threeDimensionalTriadicRefinement :
-  Local.NDim.immediateChildCount 3 ≡ 27
+  NDim.immediateChildCount 3 ≡ 27
 threeDimensionalTriadicRefinement = Local.threeDimTriadicChildren
 
 record HyperfabricIITBoundary : Set where
