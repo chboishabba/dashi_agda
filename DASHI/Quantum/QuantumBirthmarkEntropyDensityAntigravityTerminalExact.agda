@@ -6,18 +6,20 @@ module DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact wher
 -- birthmark residual persistence + effective density/stress + antigravity /
 -- cosmological expansion.
 --
--- The preceding owner compiles an explicitly selected residual sector into the
--- existing CMP119 generated-action density and then reuses the existing
--- real-trace -> vacuum-active-stress -> positive-acceleration theorem.
+-- The preceding owners compile an explicitly selected residual sector into the
+-- existing CMP119 generated-action density and then reuse the existing
+-- source-facing Eq.(2.23)/R136/continuum-stress expansion chain.
 --
--- This terminal owner adds the already-existing concrete endpoint witnesses:
+-- This terminal owner also reuses the strongest already-formalized repulsive
+-- endpoints in the foundations spine:
 --   * positive-G localized antigravity / external-test-mass repulsion;
---   * positive comoving FLRW-like acceleration on the finite warped fixture.
+--   * positive comoving FLRW-like acceleration on the finite warped fixture;
+--   * an exact balanced DEC-compatible repulsive shell family;
+--   * the DEC-compatible CMP119 repulsive-exterior max-cut boundary;
+--   * the constructive Nambu-Goto positive-tension repulsive-bubble boundary.
 --
--- Therefore no extra gravitational mechanism is introduced by the birthmark
--- programme.  The role of birthmarks is the persistence theorem-shape for a
--- history-sensitive residual sector; the stress/curvature/defocusing machinery
--- remains the existing GR/QFT/CMP119 machinery.
+-- These are alternative endpoint realizations of negative-active-stress /
+-- vacuum-pressure defocusing.  They are not used to infer the birthmark sign.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -26,6 +28,9 @@ open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as ResidualExpansion
 import DASHI.Physics.Foundations.GRQFTLocalizedAntigravityMaxCutExact as Localized
 import DASHI.Physics.Foundations.GRQFTFiniteFLRWRepulsiveAccelerationExact as FLRW
+import DASHI.Physics.Foundations.GRQFTBalancedDECRepulsiveShellFamilyExact as Balanced
+import DASHI.Physics.Foundations.GRQFTDECRepulsiveExteriorMaxCutExact as DEC
+import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Nambu
 
 record EntropyDensityAntigravityTerminalReceipt : Set where
   constructor entropyDensityAntigravityTerminalReceipt
@@ -33,6 +38,9 @@ record EntropyDensityAntigravityTerminalReceipt : Set where
     residualToCMP119ExpansionCompilerOwned : Bool
     localizedPositiveGAntigravityWitnessReused : Bool
     finiteFLRWExpansionWitnessReused : Bool
+    balancedDECRepulsiveShellFamilyRegistered : Bool
+    decRepulsiveExteriorBranchRegistered : Bool
+    nambuGotoRepulsiveBubbleBranchRegistered : Bool
     positiveGravityCouplingRetained : Bool
     negativeGravityConstantRequired : Bool
     negativeInertialMassRequired : Bool
@@ -45,19 +53,10 @@ canonicalEntropyDensityAntigravityTerminalReceipt :
   EntropyDensityAntigravityTerminalReceipt
 canonicalEntropyDensityAntigravityTerminalReceipt =
   entropyDensityAntigravityTerminalReceipt
-    true
-    true
-    true
-    true
-    false
-    false
-    true
-    true
-    true
-    true
+    true true true true true true true false false true true true true
 
 ------------------------------------------------------------------------
--- Reuse the actual concrete endpoint witnesses, not merely status Booleans.
+-- Reuse actual endpoint witnesses / canonical boundaries.
 ------------------------------------------------------------------------
 
 localizedPositiveGAntigravityWitness :
@@ -75,6 +74,21 @@ finiteFLRWExpansionIsPositive :
 finiteFLRWExpansionIsPositive =
   FLRW.finiteFLRWAccelerationIsExpanding
 
+balancedDECRepulsiveShellWitness :
+  Balanced.BalancedDECRepulsiveShellFamilyWitness Balanced.fixtureRadius
+balancedDECRepulsiveShellWitness =
+  Balanced.balancedDECRepulsiveShellFamily Balanced.fixtureRadius
+
+decRepulsiveExteriorBoundary :
+  DEC.DECRepulsiveExteriorMaxCutBoundary
+decRepulsiveExteriorBoundary =
+  DEC.canonicalDECRepulsiveExteriorMaxCutBoundary
+
+nambuGotoRepulsiveBubbleBoundary :
+  Nambu.NambuGotoRepulsiveBubbleMaxCutBoundary
+nambuGotoRepulsiveBubbleBoundary =
+  Nambu.canonicalNambuGotoRepulsiveBubbleMaxCutBoundary
+
 ------------------------------------------------------------------------
 -- Terminal projections used by the quantum rollup.
 ------------------------------------------------------------------------
@@ -87,6 +101,15 @@ localizedPositiveGAntigravityWitnessReused = true
 
 finiteFLRWExpansionWitnessReused : Bool
 finiteFLRWExpansionWitnessReused = true
+
+balancedDECRepulsiveShellFamilyRegistered : Bool
+balancedDECRepulsiveShellFamilyRegistered = true
+
+decRepulsiveExteriorBranchRegistered : Bool
+decRepulsiveExteriorBranchRegistered = true
+
+nambuGotoRepulsiveBubbleBranchRegistered : Bool
+nambuGotoRepulsiveBubbleBranchRegistered = true
 
 positiveGravityCouplingRetained : Bool
 positiveGravityCouplingRetained = true
