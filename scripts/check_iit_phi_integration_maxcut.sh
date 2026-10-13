@@ -16,6 +16,7 @@ required_files=(
   DASHI/Biology/IITBalancedTernary369HierarchyExact.agda
   DASHI/Biology/IIT369PantsGluingBridgeExact.agda
   DASHI/Biology/IITPointedTernary27FaceGluingExact.agda
+  DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda
   DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda
   DASHI/Reasoning/IITBrainMaleCNSConsumerBoundaryExact.agda
   DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda
@@ -107,6 +108,11 @@ require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'recognizedZetaFac
 require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'pairwiseStructuredBoundaryDoesNotDetermineTriadicFace'
 require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'faceGluingDoesNotSelfPromoteToPhi'
 
+require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'record ThreeSelectedCubies'
+require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'sameSelectedCubies'
+require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'selectedCubiesDoNotDetermineTriadicFace'
+require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'selectedCubiesDoNotSelfPromoteToGluingClass'
+
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'vertexPartitionNotDefinitionallySectionPartition'
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'compatibleSection : Hyperfabric.GlobalSection fabric'
 
@@ -123,6 +129,7 @@ require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITXOREffectCutReceiptExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT369PantsGluingBridgeExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27FaceGluingExact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Analysis.IITZetaGeneratingBoundaryExact'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 
