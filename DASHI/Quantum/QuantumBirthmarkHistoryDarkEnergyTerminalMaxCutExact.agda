@@ -13,6 +13,9 @@ import DASHI.Quantum.QuantumBirthmarkCosmologyDiscriminatorExact as Discriminato
 import DASHI.Quantum.QuantumBirthmarkHistoryHorizonScalingExact as Horizon
 import DASHI.Quantum.QuantumBirthmarkHistoryOrderParameterPotentialExact as HistoryPotential
 import DASHI.Quantum.QuantumBirthmarkTwoPhaseHistoryModelExact as TwoPhase
+import DASHI.Quantum.QuantumBirthmarkHistoryWeightSelectionExact as HistoryWeight
+import DASHI.Quantum.QuantumBirthmarkHistoryCommonActionVariationExact as HistoryAction
+import DASHI.Quantum.QuantumBirthmarkWeightedCommonActionExact as WeightedAction
 import DASHI.Quantum.QuantumBirthmarkHistoryRepulsiveGeometryInstantiationExact as Repulsive
 import DASHI.Quantum.QuantumBirthmarkRaychaudhuriEnergyConditionFirewallExact as Raychaudhuri
 import DASHI.Quantum.QuantumBirthmarkDarkEnergyCPLExact as CPL
@@ -34,6 +37,10 @@ record HistoryDarkEnergyTerminalReceipt : Set where
     hubbleSquaredTrackingModelOwned : Bool
     historyScaledTwoVacuumPotentialOwned : Bool
     twoPhaseHistoryOrderParameterOwned : Bool
+    historyConditionedWeightCarrierOwned : Bool
+    finiteHistoryActionGenerationOwned : Bool
+    birthmarkSelectedHistoryToCommonActionCompilerOwned : Bool
+    commonMetricVariationStressCompilerOwned : Bool
     repulsiveGeometryInstantiationOwned : Bool
     cplDiscriminatorCarrierOwned : Bool
     raychaudhuriEnergyConditionFirewallOwned : Bool
@@ -52,7 +59,7 @@ open HistoryDarkEnergyTerminalReceipt public
 canonicalHistoryDarkEnergyTerminalReceipt : HistoryDarkEnergyTerminalReceipt
 canonicalHistoryDarkEnergyTerminalReceipt =
   history-dark-energy-terminal-receipt
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true
     false false false false false
     true
 
@@ -78,6 +85,21 @@ historyScaledTwoVacuumPotentialOwned = HistoryPotential.historyPotentialModelOwn
 
 twoPhaseHistoryOrderParameterOwned : Bool
 twoPhaseHistoryOrderParameterOwned = TwoPhase.twoPhaseHistoryOrderParameterModelOwned
+
+historyConditionedWeightCarrierOwned : Bool
+historyConditionedWeightCarrierOwned =
+  HistoryWeight.birthmarkCanConditionHistorySelectionWithoutErasingAdmissibility
+
+finiteHistoryActionGenerationOwned : Bool
+finiteHistoryActionGenerationOwned = HistoryAction.finiteHistoryActionGenerationOwned
+
+birthmarkSelectedHistoryToCommonActionCompilerOwned : Bool
+birthmarkSelectedHistoryToCommonActionCompilerOwned =
+  WeightedAction.birthmarkSelectedHistoryToCommonActionCompilerOwned
+
+commonMetricVariationStressCompilerOwned : Bool
+commonMetricVariationStressCompilerOwned =
+  HistoryAction.commonMetricVariationStressCompilerOwned
 
 repulsiveGeometryInstantiationOwned : Bool
 repulsiveGeometryInstantiationOwned = Repulsive.repulsiveGeometryCompilerAlreadyConstructed
@@ -106,16 +128,19 @@ singularityResolutionSolvedIsFalse = true
 ------------------------------------------------------------------------
 -- Max-cut residuals after cross-pollination.
 --
--- There is no generic "physical weld" category here.  The remaining producers
--- are specifically the microscopic/source-native maps, global solutions, or
--- calibration/measurement outputs that cannot be manufactured from the current
--- carriers.
+-- There is no generic "physical weld" category here.  Finite history action,
+-- birthmark-conditioned history selection carrier, common metric variation,
+-- and stress compilation are now all existing machinery.  The remaining
+-- producers are model-specific microscopic/source-native maps or observations.
 ------------------------------------------------------------------------
 
 record RemainingHistoryDarkEnergyProducers : Set where
   constructor remaining-history-dark-energy-producers
   field
     standardDifferentialD1AuthorityInstantiation : Bool
+    microscopicBirthmarkWeightLaw : Bool
+    birthmarkSelectedHistoryToCommonHistoryMap : Bool
+    physicalMetricDependentHistoryValuation : Bool
     sourceNativeResidualEq223SignDerivation : Bool
     microscopicBirthmarkToHistoryOrderParameter : Bool
     sourceNativeCMP119HistoryPotentialCoupling : Bool
@@ -131,11 +156,11 @@ record RemainingHistoryDarkEnergyProducers : Set where
 canonicalRemainingHistoryDarkEnergyProducers : RemainingHistoryDarkEnergyProducers
 canonicalRemainingHistoryDarkEnergyProducers =
   remaining-history-dark-energy-producers
-    false false false false false false false false false false false false
+    false false false false false false false false false false false false false false false
 
 remainingProducerInterpretation : String
 remainingProducerInterpretation =
-  "Remaining producers are now explicit: instantiate the standard D1 differential authority; derive the Eq.(2.23) sign and history-order parameter from microscopic source dynamics; derive the CMP119/history-potential coupling and continuum wall; derive H^2/CPL parameters and observed magnitude; prove global regular-black-hole or bounce solutions; and predict/measure laboratory backreaction. The two-vacuum potentials, H^2 tracking algebra, CPL carrier, repulsive geometry, energy-condition firewall, and endpoint compilers already exist."
+  "Finite history action and additivity, history conditioning, common effective-action variation, QFT/GR stress compilation, two-vacuum potentials, H^2 tracking algebra, CPL carrier, positive-G repulsive geometry, and energy-condition bookkeeping are already owned. Remaining work is the microscopic birthmark weighting/selection and metric valuation, source-native Eq.(2.23)/potential dynamics, quantitative H^2/CPL/magnitude production, continuum wall/global regularity or bounce, and direct laboratory/cosmological measurement."
 
 ------------------------------------------------------------------------
 -- Claim firewall for the supplied narrative.
@@ -176,4 +201,4 @@ pureLambdaNullDefocusingClaimed = false
 
 statusStatement : String
 statusStatement =
-  "History-sector dark-energy max-cut: birthmark persistence supplies residual-history semantics; selected residuals enter the existing metric-dependent effective-action/stress lane; the preferred Eq.(2.23)/R136 route supplies sign when its source hypotheses hold; H^2 tracking and CPL discriminator algebra are explicit; existing two-vacuum potentials instantiate DEC/Nambu repulsive geometry; positive-G timelike/FLRW defocusing is separated from null focusing; and regular-core/bounce claims are fail-closed at global-solution level. The remaining frontier is microscopic/source-native dynamics, quantitative parameter production, global regularity/bounce, SI magnitude calibration, and direct experimental measurement."
+  "History-sector dark-energy max-cut: birthmark persistence supplies residual-history semantics; birthmark-conditioned histories can feed the existing literal finite-history action and common QFT/GR metric-variation compiler; the preferred Eq.(2.23)/R136 route supplies sign when its source hypotheses hold; H^2 tracking and CPL discriminator algebra are explicit; existing two-vacuum potentials instantiate DEC/Nambu repulsive geometry; positive-G timelike/FLRW defocusing is separated from null focusing; and regular-core/bounce claims are fail-closed at global-solution level. The remaining frontier is microscopic weighting/selection and metric valuation, source-native sign/potential dynamics, quantitative parameter production, global regularity/bounce, SI magnitude calibration, and direct experimental measurement."
