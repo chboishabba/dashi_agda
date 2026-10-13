@@ -3,6 +3,7 @@ module DASHI.Biology.IITXORGridAdversarialExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.StateDependentMultiplexTransducer as XOR
+import DASHI.Biology.IIT4FiniteCausalStructureExact as IIT4
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.IntegrationConsumerDescentOrderExact as Integration
 
@@ -27,6 +28,99 @@ parityObservation state = XOR.xor (proj₁ state) (proj₂ state)
 
 leftBitConsumer : XState → Bool
 leftBitConsumer = proj₁
+
+------------------------------------------------------------------------
+-- Same-object weld into the finite IIT carrier.
+------------------------------------------------------------------------
+
+boolEnumerationComplete :
+  (x : Bool) → IIT4._ListedIn_ x (false ∷ true ∷ [])
+boolEnumerationComplete false = IIT4.listedHere
+boolEnumerationComplete true = IIT4.listedThere IIT4.listedHere
+
+boolCarrier : IIT4.FiniteCarrier
+boolCarrier =
+  IIT4.finiteCarrier
+    Bool
+    (false ∷ true ∷ [])
+    boolEnumerationComplete
+
+xStateEnumeration : List XState
+xStateEnumeration =
+  (false , false) ∷
+  (false , true) ∷
+  (true , false) ∷
+  (true , true) ∷ []
+
+xStateEnumerationComplete :
+  (state : XState) → IIT4._ListedIn_ state xStateEnumeration
+xStateEnumerationComplete (false , false) = IIT4.listedHere
+xStateEnumerationComplete (false , true) =
+  IIT4.listedThere IIT4.listedHere
+xStateEnumerationComplete (true , false) =
+  IIT4.listedThere (IIT4.listedThere IIT4.listedHere)
+xStateEnumerationComplete (true , true) =
+  IIT4.listedThere
+    (IIT4.listedThere
+      (IIT4.listedThere IIT4.listedHere))
+
+xStateCarrier : IIT4.FiniteCarrier
+xStateCarrier =
+  IIT4.finiteCarrier
+    XState
+    xStateEnumeration
+    xStateEnumerationComplete
+
+sameBool : Bool → Bool → Bool
+sameBool false false = true
+sameBool false true = false
+sameBool true false = false
+sameBool true true = true
+
+andBool : Bool → Bool → Bool
+andBool false _ = false
+andBool true x = x
+
+sameXState : XState → XState → Bool
+sameXState left right =
+  andBool
+    (sameBool (proj₁ left) (proj₁ right))
+    (sameBool (proj₂ left) (proj₂ right))
+
+xorSuccessor : XState → XState
+xorSuccessor state =
+  parityObservation state , leftBitConsumer state
+
+xorTransitionWeight : XState → XState → Nat
+xorTransitionWeight state candidate with
+  sameXState (xorSuccessor state) candidate
+... | true = 1
+... | false = 0
+
+xorTwoBitFiniteCausalSystem : IIT4.FiniteCausalSystem
+xorTwoBitFiniteCausalSystem =
+  IIT4.finiteCausalSystem
+    boolCarrier
+    xStateCarrier
+    (false , false)
+    xorTransitionWeight
+    "deterministic 0/1 transition weights; each source state has one successor"
+
+xorCurrentStateReceipt :
+  IIT4.currentState xorTwoBitFiniteCausalSystem ≡ (false , false)
+xorCurrentStateReceipt = refl
+
+xorDeterministicStepReceipt :
+  xorTransitionWeight (true , false) (true , true) ≡ 1
+xorDeterministicStepReceipt = refl
+
+xorWrongSuccessorHasZeroWeight :
+  xorTransitionWeight (true , false) (false , false) ≡ 0
+xorWrongSuccessorHasZeroWeight = refl
+
+------------------------------------------------------------------------
+-- Consumer-relative non-descent on the same Boolean state carrier.
+------------------------------------------------------------------------
 
 parityCollision :
   parityObservation (false , false) ≡
@@ -116,6 +210,7 @@ record HistoricalXORStressBoundary : Set where
   constructor historicalXORStressBoundary
   field
     reusesRepoNativeXor : Bool
+    xorFixtureInhabitsFiniteIITCarrier : Bool
     squareGridHasLargerToyMidCutThanLine : Bool
     graphCutCountEqualsIIT4SystemPhi : Bool
     historicalIITPhiEqualsIIT4BigPhi : Bool
@@ -127,7 +222,7 @@ open HistoricalXORStressBoundary public
 canonicalHistoricalXORStressBoundary : HistoricalXORStressBoundary
 canonicalHistoricalXORStressBoundary =
   historicalXORStressBoundary
-    true true false false false true
+    true true true false false false true
 
 graphCutIsNotSilentlyPromotedToIIT4 :
   graphCutCountEqualsIIT4SystemPhi canonicalHistoricalXORStressBoundary ≡ false
