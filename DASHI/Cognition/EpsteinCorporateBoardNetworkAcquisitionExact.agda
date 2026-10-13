@@ -31,20 +31,16 @@ record CorporateCorpusReceipt : Set where
     directContactDefinitionIncludesEmailOrExplicitMeeting : Bool
 open CorporateCorpusReceipt public
 
--- March/April 2026 S&P500 specification.  Do not silently treat this as the
--- July revised universe.
+-- Cross-version summary retained for compatibility with earlier consumers.
+-- 52,266 / 117,394 / 1,179 belong to the March/April S&P500 specification;
+-- 841 is the latest July frequent-contact figure and must not be read as if it
+-- were produced by the early threshold/universe.
 canonicalCorporateCorpusReceipt : CorporateCorpusReceipt
 canonicalCorporateCorpusReceipt = corporate-corpus-receipt
   52266 1293753 117394 1179 841 841 602 true true
 
 ------------------------------------------------------------------------
--- JULY 2026 REVISED UNIVERSE / DEFINITION
---
--- The revised paper broadens the searched population from the earlier S&P500
--- specification to CEOs/directors of U.S. public firms and changes the promoted
--- contact construct to "frequent contact".  The 841 count belongs to this
--- revised threshold/universe.  The early 1,179 direct-contact count and revised
--- 841 frequent-contact count are therefore not alternative labels for one set.
+-- REVISED UNIVERSE / DEFINITION AND VERSION LINEAGE
 ------------------------------------------------------------------------
 
 record RevisedCorporateCorpusReceipt : Set where
@@ -61,6 +57,25 @@ canonicalRevisedCorporateCorpusReceipt : RevisedCorporateCorpusReceipt
 canonicalRevisedCorporateCorpusReceipt =
   revised-corporate-corpus-receipt 92698 841 true false true
 
+record CorporateRevisionLineage : Set where
+  constructor corporate-revision-lineage
+  field
+    earlyMarchDirectContactCount : Nat
+    intermediateJuneFrequentContactCount : Nat
+    latestJulyFrequentContactCount : Nat
+    intermediateAndLatestUseSameFrozenDataset : Bool
+    latestSupersedesIntermediateForCurrentRouting : Bool
+    countsMayBeCollapsedWithoutDateDefinition : Bool
+open CorporateRevisionLineage public
+
+canonicalCorporateRevisionLineage : CorporateRevisionLineage
+canonicalCorporateRevisionLineage = corporate-revision-lineage
+  1179 825 841 false true false
+
+revisionLineageReading : String
+revisionLineageReading =
+  "March 2026 reported 1,179 direct-contact S&P500 CEOs/directors under an early universe/definition. A 17 June 2026 Bonn seminar abstract reported 825 frequent-contact directors over the expanded approximately 92,698-person U.S.-public-firm search universe. The 21 July revised paper/current author page reports 841 frequent-contact directors. Treat 825->841 as revision lineage, not as simultaneous contradictory counts for one frozen extract; use 841 for current routing and retain 825 as provenance."
+
 record CorporateNetworkResult : Set where
   constructor corporate-network-result
   field
@@ -74,7 +89,7 @@ record CorporateNetworkResult : Set where
     causalMechanismUniversallyEstablished : Bool
 open CorporateNetworkResult public
 
--- Retained from the earlier calibration.  Revised-paper mechanism findings
+-- Retained from the earlier calibration. Revised-paper mechanism findings
 -- below supersede any simplistic interpretation that density/centrality itself
 -- is the misconduct mechanism.
 canonicalCorporateNetworkResult : CorporateNetworkResult
@@ -107,13 +122,14 @@ record CorporateAcquisitionPolicy : Set where
     preserveMentionVsContactDistinction : Bool
     preserveContactVsWrongdoingDistinction : Bool
     preserveVersionSpecificThresholds : Bool
+    preserveIntermediateRevisionCounts : Bool
     searchFinanceAndTechnologyFirst : Bool
     useMediaCoverageAsCompleteAtlas : Bool
 open CorporateAcquisitionPolicy public
 
 canonicalCorporateAcquisitionPolicy : CorporateAcquisitionPolicy
 canonicalCorporateAcquisitionPolicy = corporate-acquisition-policy
-  true true true true true true false
+  true true true true true true true false
 
 ------------------------------------------------------------------------
 -- Attribution / promotion firewalls.
@@ -125,6 +141,7 @@ data NetworkCentralityCreatesWrongdoing : Set where
 data FirmAssociationCreatesIndividualCulpability : Set where
 data RevisedFrequentContactEqualsBroaderDirectContact : Set where
 data RevisedUniverseEqualsEarlySP500Universe : Set where
+data IntermediateCountEqualsLatestCount : Set where
 data NetworkDensityCreatesIndividualBenefit : Set where
 data MarketReactionCreatesWrongdoing : Set where
 
@@ -148,6 +165,9 @@ versionThresholdsMustNotBeCollapsed ()
 versionUniversesMustNotBeCollapsed :
   RevisedUniverseEqualsEarlySP500Universe → ⊥
 versionUniversesMustNotBeCollapsed ()
+
+intermediateAndLatestCountsMustNotBeCollapsed : IntermediateCountEqualsLatestCount → ⊥
+intermediateAndLatestCountsMustNotBeCollapsed ()
 
 networkDensityDoesNotCreateIndividualBenefit : NetworkDensityCreatesIndividualBenefit → ⊥
 networkDensityDoesNotCreateIndividualBenefit ()
