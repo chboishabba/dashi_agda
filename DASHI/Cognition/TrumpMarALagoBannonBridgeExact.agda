@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact as TrumpEpstein
 import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as Cambridge
+import DASHI.Cognition.BannonCambridgeAnalyticaSystemicLeverageBridgeExact as CambridgeSystemic
 
 ------------------------------------------------------------------------
 -- TRUMP / MAR-A-LAGO / BANNON BRIDGE
@@ -119,6 +120,9 @@ bannonInternationalStrategyReceipt = bridge-receipt
 bannonHistoricalInfluenceBoundary : Cambridge.BannonInfluenceInfrastructureBoundary
 bannonHistoricalInfluenceBoundary = Cambridge.canonicalBannonInfluenceInfrastructureBoundary
 
+bannonSystemicInfluenceBoundary : CambridgeSystemic.CambridgeAnalyticaSystemicBoundary
+bannonSystemicInfluenceBoundary = CambridgeSystemic.canonicalCambridgeAnalyticaSystemicBoundary
+
 bannonTargetedInfluenceCapabilityPaid :
   Cambridge.targetedPoliticalInfluenceCapabilityPaid
     Cambridge.canonicalBannonInfluenceInfrastructureBoundary ≡ true
@@ -133,6 +137,11 @@ bannonLaterEpsteinTechniqueReuseStillUnpaid :
   Cambridge.laterEpsteinMediaWorkProvesTechniqueReuse
     Cambridge.canonicalBannonInfluenceInfrastructureBoundary ≡ false
 bannonLaterEpsteinTechniqueReuseStillUnpaid = refl
+
+bannonThirdOrderSystemicAcquisitionStillOpen :
+  CambridgeSystemic.laterEpsteinTechniqueReuseResolved
+    CambridgeSystemic.canonicalCambridgeAnalyticaSystemicBoundary ≡ false
+bannonThirdOrderSystemicAcquisitionStillOpen = refl
 
 ------------------------------------------------------------------------
 -- Participation/status refinement.
