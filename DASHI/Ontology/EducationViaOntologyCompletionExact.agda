@@ -5,16 +5,7 @@ open import Agda.Builtin.Nat using (suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _++_)
 
-open import DASHI.Ontology.EducationViaOntologyExact
-
-------------------------------------------------------------------------
--- DASHI COMPLETION OF THE SOURCE'S "REUSE, UPDATE, EXPAND" COHORT SEMANTICS.
---
--- The earlier `CohortRevision` owner is a snapshot transition.  This owner
--- supplies the completion semantics used by the max-cut: accepted additions are
--- appended to the prior ontology and prior provenance is retained.  Removal or
--- replacement is deliberately not available without a separate reviewed owner.
-------------------------------------------------------------------------
+open import DASHI.Ontology.EducationViaOntologyExact public
 
 record CourseOntologyPatch (prior : CourseOntology) : Set where
   constructor courseOntologyPatch
