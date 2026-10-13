@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.InvestigationHoldingsRealityCompletenessBoundaryExact as Completeness
 import DASHI.Cognition.StateInstitutionEpistemicNonPrivilegeExact as NonPrivilege
+import DASHI.Cognition.USInstitutionalCaptureVerificationRisk20261013Exact as CaptureRisk
 import DASHI.Cognition.MavenPalantirIsraelPineGapSecurityInfrastructureExact as Security
 import DASHI.Cognition.MavenMinabPineGapTargetingChainExact as Targeting
 import DASHI.Cognition.WhitlamPineGapSovereigntyHistoricalBoundaryExact as Whitlam
@@ -27,7 +28,9 @@ import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as I
 -- Government/institutional sources are claim-local evidence, not privileged
 -- closure oracles.  Self-certification, classified scope and holdings review do
 -- not create a God's-eye view; distrust likewise does not invert every state
--- claim into falsehood.
+-- claim into falsehood.  Contemporary appointment/capture risk is therefore a
+-- reason to demand stronger independent/adversarial corroboration, not a proof
+-- that a particular finding is fabricated.
 ------------------------------------------------------------------------
 
 data PowerLane : Set where
