@@ -1,7 +1,9 @@
 module DASHI.Biology.IITPhiIntegrationEverything where
 
 ------------------------------------------------------------------------
--- Focused rollup for the IIT / phi integration max-cut.
+-- Focused production rollup for the IIT / phi integration max-cut.
+-- Validation imports this module; this module therefore remains acyclic and
+-- does not import the validation owner back.
 ------------------------------------------------------------------------
 
 import DASHI.Biology.IIT4FiniteCausalStructureExact
@@ -21,4 +23,3 @@ import DASHI.Reasoning.IITHyperfabricPartitionBridgeExact
 import DASHI.Reasoning.IITBrainMaleCNSConsumerBoundaryExact
 import DASHI.Moonshine.IITMonsterInvariantBoundaryExact
 import DASHI.Analysis.IITZetaGeneratingBoundaryExact
-import DASHI.Biology.IITPhiIntegrationMaxCutValidation
