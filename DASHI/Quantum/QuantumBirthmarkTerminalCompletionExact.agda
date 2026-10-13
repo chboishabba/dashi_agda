@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Quantum.QuantumBirthmarkTerminalCompletionExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
@@ -15,10 +15,7 @@ import DASHI.Quantum.QuantumBirthmarkJacobsonContinuumSolutionAdapterExact as Co
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as Expansion
 import DASHI.Quantum.QuantumBirthmarkResidualEq223ExpansionExact as PreferredResidual
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact as Antigravity
-
-------------------------------------------------------------------------
--- TERMINAL COMPLETION OWNER
-------------------------------------------------------------------------
+import DASHI.Quantum.QuantumBirthmarkHistoryDarkEnergyTerminalMaxCutExact as HistoryDarkEnergy
 
 record TerminalCompletionReceipt : Set where
   constructor terminalCompletionReceipt
@@ -32,17 +29,20 @@ record TerminalCompletionReceipt : Set where
     entropyDensityExpansionCompilerOwned : Bool
     preferredResidualEq223ExpansionCompilerOwned : Bool
     antigravityExpansionTerminalOwned : Bool
+    historyDarkEnergyMaxCutOwned : Bool
+    historyDarkEnergyMicroscopicDynamicsSolved : Bool
+    historyDarkEnergyGlobalContinuumSolved : Bool
+    historyDarkEnergyEmpiricallyEstablished : Bool
     terminalAuthorityLedgerOwned : Bool
-    noFurtherFormalCompositionDebt : Bool
+    noFurtherGenericFormalCompositionDebt : Bool
 
 canonicalTerminalCompletionReceipt : TerminalCompletionReceipt
 canonicalTerminalCompletionReceipt =
   terminalCompletionReceipt
-    true true true true true true true true true true true
+    true true true true true true true true true true
+    false false false
+    true true
 
--- Abstract programs may still describe work by these provenance classes, but
--- the sibling concrete-instantiation owner now supplies inhabitants for the
--- declared corrected-tree/vacuum benchmark.
 data ResidualCategory : Set where
   sourceModelInstantiation : ResidualCategory
   authorityInstantiation : ResidualCategory
@@ -80,6 +80,19 @@ antigravityExpansionTerminalOwned : Bool
 antigravityExpansionTerminalOwned =
   Antigravity.steelmanFormalProgrammeClosed
 
+historyDarkEnergyMaxCutOwned : Bool
+historyDarkEnergyMaxCutOwned =
+  HistoryDarkEnergy.historyDarkEnergySteelmanCrossPollinated
+
+historyDarkEnergyMicroscopicDynamicsSolved : Bool
+historyDarkEnergyMicroscopicDynamicsSolved = false
+
+historyDarkEnergyGlobalContinuumSolved : Bool
+historyDarkEnergyGlobalContinuumSolved = false
+
+historyDarkEnergyEmpiricallyEstablished : Bool
+historyDarkEnergyEmpiricallyEstablished = false
+
 positiveGRepulsionAndExpansionEndpointsOwned : Bool
 positiveGRepulsionAndExpansionEndpointsOwned = true
 
@@ -94,14 +107,9 @@ terminalAuthorityLedgerOwned =
 remainingWorkFullyClassified : Bool
 remainingWorkFullyClassified = true
 
--- This is closed by QuantumBirthmarkTerminalConcreteInstantiationExact for the
--- declared corrected-tree/vacuum benchmark.  The entropy-density/antigravity
--- max-cut additionally reuses the existing CMP119 generated-action/stress route,
--- the preferred source-facing Eq.(2.23) sign route, and the existing positive-G
--- repulsive/FLRW endpoint families.
 declaredBenchmarkHasConcreteCompletionOwner : Bool
 declaredBenchmarkHasConcreteCompletionOwner = true
 
 statusStatement : String
 statusStatement =
-  "Terminal completion: corrected RT, birthmark transport, Jacobson/Einstein composition, residual-effective-density to CMP119 expansion, preferred residual Eq.(2.23) sign composition, and the existing positive-G antigravity/FLRW/DEC/Nambu endpoints are cross-pollinated at source level. The declared corrected-tree/vacuum benchmark has a concrete implementation, authority/model fixture, and calibration owner. Birthmark persistence alone does not determine the residual trace or Eq.(2.23) sign; that is model/data content, not an omitted gravity mechanism or formal-composition debt."
+  "Terminal completion now includes the history-sector dark-energy max-cut: finite history/action carriers, common QFT/GR metric-variation compilers, residual-to-CMP119 and preferred Eq.(2.23) sign consumers, H^2/CPL phenomenology, observational calibration, two-vacuum/repulsive geometry fixtures, finite wall/bounce witnesses, local core regularity, and experiment-discriminator carriers are all represented. This does not promote the history-dark-energy hypothesis to a solved or observed theory: its remaining debt is explicit microscopic source dynamics, source sign inequalities, parameter-free magnitude/scaling, continuum/global regularity or bounce, and measurement—not another generic formal weld."
