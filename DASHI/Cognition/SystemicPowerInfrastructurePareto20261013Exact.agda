@@ -18,6 +18,7 @@ import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as St
 import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as Influence
 import DASHI.Cognition.PsychologicalInfluenceInfrastructureCrossPollinationExact as Psych
 import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as Mobilisation
+import DASHI.Cognition.NickLandProvocationOverreactionPopulistTransferExact as Overreaction
 
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN SYSTEMIC POWER INFRASTRUCTURE PARETO — 2026-10-13
@@ -38,6 +39,13 @@ import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as M
 -- Bannon's public flood-the-zone / opposition-media / administrative-state
 -- doctrines are therefore analysed as explicit playbooks, not inferred traits.
 --
+-- The acceleration/provocation weld adds the recursive form
+--   perturbation -> target response -> constraint erosion / capacity expansion
+--                -> path dependence -> changed future response.
+-- Terrorist provocation, Landian acceleration, populist attention strategy and
+-- security-state mobilisation may share this form without sharing ideology,
+-- authorship, command or personnel.
+--
 -- Government/institutional sources are claim-local evidence, not privileged
 -- closure oracles. Self-certification, classified scope and holdings review do
 -- not create a God's-eye view; distrust likewise does not invert every state
@@ -48,13 +56,16 @@ import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as M
 
 data PowerLane : Set where
   bankingComplianceEliteAccess : PowerLane
-  cbpBorderOperationalAccess : PowerLane
   militaryAIIntelligenceInfrastructure : PowerLane
+  cbpBorderOperationalAccess : PowerLane
+  provocationOverreactionInstitutionalLockIn : PowerLane
   corporateBoardExposureTopology : PowerLane
   trumpBannonCAMediaInfluence : PowerLane
   bondiSecurityMobilisationInstitutionalisation : PowerLane
   project2025PersonnelStateCapacity : PowerLane
   palantirStateDataProcurement : PowerLane
+  hansonDigitalPopulistPressure : PowerLane
+  lnpSecurityCrisisCapacity : PowerLane
   proIsraelAdvocacyElectionSpending : PowerLane
   australiaPineGapResourcePoliticalEconomy : PowerLane
 
@@ -80,16 +91,22 @@ canonicalPowerFront =
     "Project Maven origin -> Google participation/worker dissent -> Palantir Maven expansion -> 2026 core-program status -> Iran targeting use, alongside Pine Gap Middle-East SIGINT/targeting-chain participation. This shares an observer/classification/intervention grammar with influence systems but kinetic decision support is not thereby psychological warfare."
   ∷ power-profile cbpBorderOperationalAccess 98 true true true true true true
     "Border personnel and inspection discretion at an operational perimeter; officer-level access decisions require primary resolution. Agency self-investigation does not close trafficking-knowledge or broader-facilitation questions."
+  ∷ power-profile provocationOverreactionInstitutionalLockIn 98 true true true true true true
+    "Post-9/11 provocation scholarship and the War on Terror supply the canonical target-overreaction mechanism: an attacker can gain strategically from a target's costly, polarising or rights-eroding response without controlling that response. The same recursive form is a comparator for Bondi/security mobilisation and other crisis-to-capacity transitions, without identifying their causes."
   ∷ power-profile corporateBoardExposureTopology 97 true true true false true true
     "Systematic board/contact exposure and market incidence, with person/firm underlying-document debt."
   ∷ power-profile trumpBannonCAMediaInfluence 96 true true true true true true
     "Mar-a-Lago access/recruitment, Bannon/Epstein media work, Cambridge-Analytica influence infrastructure, TPUSA narrative pressure and Bannon's explicit flood-the-zone/opposition-media playbook form the strongest live psychological-influence acquisition lane. Same-technique reuse, common command and outcome causation remain separately unpaid."
   ∷ power-profile bondiSecurityMobilisationInstitutionalisation 96 true true true true true true
-    "The post-Bondi sequence supplies a concrete event-to-capacity mobilisation case: security/antisemitism framing, Herzog solidarity diplomacy, protest restrictions and policing, hate-speech policy activity, and a Royal Commission with media and intelligence/security hearing blocks. Later judicial invalidation of one protest-law expansion makes benefit/burden/reversibility analysis especially valuable."
+    "The post-Bondi sequence supplies a concrete genuine-event-to-capacity mobilisation case: security/antisemitism framing, Herzog solidarity diplomacy, protest restrictions and policing, hate-speech policy activity, and a Royal Commission with media and intelligence/security hearing blocks. Fomentation/amplification is separable from fabrication."
   ∷ power-profile project2025PersonnelStateCapacity 95 true true true true true true
     "Policy/personnel/training/playbook conversion into state roles and durable administrative capacity. Cross-pollination asks whether documented campaign/influence selection techniques transfer into personnel/training/state implementation; similarity alone does not pay transfer."
   ∷ power-profile palantirStateDataProcurement 94 true true true true true true
     "Current state procurement/data integration and enforcement systems are paid. Their trace->entity->relation->classification->intervention topology is formally comparable to influence infrastructure, but surveillance/legibility does not by itself become persuasion or psychological warfare."
+  ∷ power-profile hansonDigitalPopulistPressure 94 true true true false true true
+    "One Nation has a source-paid fragmented-media/attention ecology and reporting describes James Ashby's machine as borrowing aggressive US/Trump/Farage-style digital tactics. Communications-level emulation is stronger than analogy; a specific Bannon personnel/method-transfer chain remains to be resolved."
+  ∷ power-profile lnpSecurityCrisisCapacity 93 true true true false true true
+    "Queensland LNP youth-crime/security rhetoric has repeatedly been converted into expanded sentencing, monitoring, bail and policing capacity. This is a strong crisis-to-capacity structural comparator; direct Trump/Bannon method transfer is currently unpaid."
   ∷ power-profile proIsraelAdvocacyElectionSpending 90 true true true false true true
     "Named pro-Israel/Zionist political advocacy and electoral-spending organisations are valid political actors for incidence analysis. Spending/advocacy does not establish covert psychological warfare, secret command, procurement selection or identity-wide collective agency. Christian-Zionist political networks are likewise analysed as specific political organisations rather than Christianity as a whole."
   ∷ power-profile australiaPineGapResourcePoliticalEconomy 89 true true true true true true
@@ -109,6 +126,10 @@ record CanonicalPowerBoundary : Set where
     techniqueSimilarityIsTechniqueTransfer : Bool
     strategicMobilisationImpliesStagedEvent : Bool
     beneficiaryStatusImpliesEventAuthorship : Bool
+    sharedRecursiveFormIsSharedIdeology : Bool
+    attackerBenefitRequiresAttackerControlOfResponse : Bool
+    crisisFramingProvesCrisisFabrication : Bool
+    trumpStyleEmulationProvesBannonTransfer : Bool
     infrastructureIntersectionIsWorthInvestigating : Bool
     publicStatementsAreValidIdeologyReceipts : Bool
     independentAdversarialCoverageRequiredForStrongClosure : Bool
@@ -117,7 +138,7 @@ open CanonicalPowerBoundary public
 
 canonicalPowerBoundary : CanonicalPowerBoundary
 canonicalPowerBoundary = canonical-power-boundary
-  false false false false false false false false false false true true true true
+  false false false false false false false false false false false false false false true true true true
 
 data InfrastructureIntersectionImpliesConspiracy : Set where
 data LobbyingImpliesEveryPolicyOutcome : Set where
@@ -127,6 +148,10 @@ data SharedInfluenceInterestImpliesCommonOperation : Set where
 data SimilarInfluenceTechniqueImpliesTransfer : Set where
 data MobilisationImpliesStaging : Set where
 data BenefitImpliesEventAuthorship : Set where
+data RecursiveSimilarityImpliesSharedIdeology : Set where
+data StrategicBenefitImpliesResponseControl : Set where
+data CrisisFramingImpliesFabrication : Set where
+data TrumpStyleImpliesBannonTransfer : Set where
 
 intersectionDoesNotCreateConspiracy : InfrastructureIntersectionImpliesConspiracy → ⊥
 intersectionDoesNotCreateConspiracy ()
@@ -153,3 +178,15 @@ mobilisationDoesNotCreateStaging ()
 
 benefitDoesNotCreateEventAuthorship : BenefitImpliesEventAuthorship → ⊥
 benefitDoesNotCreateEventAuthorship ()
+
+recursiveSimilarityDoesNotCreateSharedIdeology : RecursiveSimilarityImpliesSharedIdeology → ⊥
+recursiveSimilarityDoesNotCreateSharedIdeology ()
+
+strategicBenefitDoesNotRequireResponseControl : StrategicBenefitImpliesResponseControl → ⊥
+strategicBenefitDoesNotRequireResponseControl ()
+
+crisisFramingDoesNotProveFabrication : CrisisFramingImpliesFabrication → ⊥
+crisisFramingDoesNotProveFabrication ()
+
+trumpStyleDoesNotCreateBannonTransfer : TrumpStyleImpliesBannonTransfer → ⊥
+trumpStyleDoesNotCreateBannonTransfer ()
