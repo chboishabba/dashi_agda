@@ -23,6 +23,13 @@ def test_birthmark_cosmology_round6_registered():
             "finitePotentialCouplingBenchmarkOwned",
             "sourceNativeCMP119CouplingStillRequired",
         ],
+        "DASHI/Quantum/QuantumBirthmarkSIStressCalibrationExact.agda": [
+            "criticalDensityReferenceEminus27",
+            "calibratedHistoryDensityEminus27",
+            "calibratedHistoryDensityIsReferenceFraction",
+            "siMagnitudeTransferOwned",
+            "sourceNativeMagnitudePredictionStillRequired",
+        ],
     }
     for rel, tokens in expected.items():
         path = ROOT / rel
@@ -36,5 +43,6 @@ def test_birthmark_cosmology_round6_registered():
         "h2EquationOfStateUnderdeterminationOwned",
         "omegaUnderdeterminationOwned",
         "finitePotentialCouplingBenchmarkOwned",
+        "siMagnitudeTransferOwned",
     ]:
         assert token in terminal
