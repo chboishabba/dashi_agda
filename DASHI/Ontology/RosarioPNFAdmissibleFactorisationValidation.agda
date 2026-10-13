@@ -6,6 +6,7 @@ open import Data.Integer using (+_)
 
 import DASHI.Cognition.PNF.TypePressure as PNFPressure
 import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
+import DASHI.Core.QueryFactorisationSufficiency as Factor
 open import DASHI.Ontology.RosarioConceptualDiagnosticsExact
 open import DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact
 
@@ -40,3 +41,11 @@ llmOnlyCannotClaimDestructiveRepairAuthority = llmOnlyCannotAuthorizeDestructive
 repairProposalStillCannotAssertOntologyTruth :
   Repair.RepairProposalTruthPermission Repair.proposalForReviewOnly → ⊥
 repairProposalStillCannotAssertOntologyTruth = Repair.repairProposalCannotAssertOntologyTruth
+
+subclassQueryFactorsThroughCoarseSurface :
+  Factor.FactorsThrough alignmentQuestions coarseAlignmentSurface subclassQuery
+subclassQueryFactorsThroughCoarseSurface = subclassFactorsThrough
+
+disjointnessQueryDoesNotFactorThroughSameSurface :
+  Factor.FactorsThrough alignmentQuestions coarseAlignmentSurface disjointnessQuery → ⊥
+disjointnessQueryDoesNotFactorThroughSameSurface = disjointnessCannotFactorThrough
