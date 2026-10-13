@@ -13,9 +13,9 @@ open import DASHI.Core.Prelude
 --
 -- This owner formalises the finite carrier and the separation of the named IIT
 -- quantities.  It deliberately does NOT fabricate a real/log probability
--- backend.  The source-faithful numerical equations for intrinsic information,
--- partitioned cause/effect probabilities and the IIT minimisation/maximisation
--- algorithm remain a backend obligation.
+-- backend.  The finite probability and system-phi input owners downstream pay
+-- the discrete repertoire / partition plumbing, leaving only the declared
+-- analytic scalar and full distinction/relation unfolding as separate layers.
 --
 -- In particular:
 --   phi_s  : system integrated information / partition irreducibility;
@@ -69,13 +69,32 @@ Mechanism = UnitMask
 Purview : FiniteCausalSystem → Set
 Purview = UnitMask
 
+------------------------------------------------------------------------
+-- Directional system partitions, IIT 4.0 equations 14--18.
+------------------------------------------------------------------------
+
+data CutDirection : Set where
+  cutInputs : CutDirection
+  cutOutputs : CutDirection
+  cutBoth : CutDirection
+
+record DirectedPart (system : FiniteCausalSystem) : Set where
+  constructor directedPart
+  field
+    member : UnitMask system
+    direction : CutDirection
+    partLabel : String
+
+open DirectedPart public
+
 record SystemPartition (system : FiniteCausalSystem) : Set where
   constructor systemPartition
   field
-    leftPart : UnitMask system
-    rightPart : UnitMask system
+    parts : List (DirectedPart system)
     partitionLabel : String
-    declaredNontrivial : Bool
+    affectedConnectionCount : Nat
+    nontrivialityReceipt : String
+    disjointCoverReceipt : String
 
 open SystemPartition public
 
@@ -135,6 +154,9 @@ record IIT4SourceBoundary : Set where
   constructor iit4SourceBoundary
   field
     substrateSpecifiedByTransitionProbabilityFunction : Bool
+    systemPartitionsAreDirectional : Bool
+    systemPartitionPartsRequireDisjointCoverReceipt : Bool
+    partitionNormalisationCountIsExplicit : Bool
     systemPhiUsesPartitionIrreducibility : Bool
     distinctionPhiAndRelationPhiAreSeparate : Bool
     bigPhiComposesDistinctionsAndRelations : Bool
@@ -148,7 +170,7 @@ open IIT4SourceBoundary public
 canonicalIIT4SourceBoundary : IIT4SourceBoundary
 canonicalIIT4SourceBoundary =
   iit4SourceBoundary
-    true true true true
+    true true true true true true true
     false false false false
 
 systemPhiAndBigPhiNotCollapsed :
