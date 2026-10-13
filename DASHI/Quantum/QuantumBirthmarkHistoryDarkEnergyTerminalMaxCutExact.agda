@@ -4,23 +4,21 @@ module DASHI.Quantum.QuantumBirthmarkHistoryDarkEnergyTerminalMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Quantum.QuantumBirthmarkHistorySectorDarkEnergyExact as History
-import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as Expansion
-import DASHI.Quantum.QuantumBirthmarkResidualEq223ExpansionExact as Eq223
-import DASHI.Quantum.QuantumBirthmarkEq223SignLeafExact as SignLeaf
 import DASHI.Quantum.QuantumBirthmarkEq223SharpThresholdBridgeExact as SharpSign
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact as Antigravity
-import DASHI.Quantum.QuantumBirthmarkRegularCoreBounceBoundaryExact as Regular
-import DASHI.Quantum.QuantumBirthmarkCosmologyDiscriminatorExact as Discriminator
 import DASHI.Quantum.QuantumBirthmarkHistoryHorizonScalingExact as Horizon
 import DASHI.Quantum.QuantumBirthmarkHorizonThermalCriticalScalingExact as HorizonThermal
 import DASHI.Quantum.QuantumBirthmarkDarkEnergyCalibrationExact as Calibration
 import DASHI.Quantum.QuantumBirthmarkHistoryOrderParameterPotentialExact as HistoryPotential
 import DASHI.Quantum.QuantumBirthmarkTwoPhaseHistoryModelExact as TwoPhase
 import DASHI.Quantum.QuantumBirthmarkFiniteHistoryTwoVacuumBenchmarkExact as FiniteHistory
-import DASHI.Quantum.QuantumBirthmarkHistoryWeightSelectionExact as HistoryWeight
 import DASHI.Quantum.QuantumBirthmarkFiniteHistoryWeightWitnessExact as FiniteWeight
+import DASHI.Quantum.QuantumBirthmarkNormalizedFiniteHistoryWeightExact as NormalizedWeight
 import DASHI.Quantum.QuantumBirthmarkCommonHistoryIdentityBenchmarkExact as CommonHistory
+import DASHI.Quantum.QuantumBirthmarkFiniteOrderParameterCouplingExact as OrderCoupling
+import DASHI.Quantum.QuantumBirthmarkFiniteHorizonFractionExact as FiniteFraction
+import DASHI.Quantum.QuantumBirthmarkPotentialCouplingBenchmarkExact as PotentialCoupling
+import DASHI.Quantum.QuantumBirthmarkD1UnderdeterminationExact as D1NoGo
 import DASHI.Quantum.QuantumBirthmarkHistoryCommonActionVariationExact as HistoryAction
 import DASHI.Quantum.QuantumBirthmarkWeightedCommonActionExact as WeightedAction
 import DASHI.Quantum.QuantumBirthmarkHistoryRepulsiveGeometryInstantiationExact as Repulsive
@@ -32,6 +30,8 @@ import DASHI.Quantum.QuantumBirthmarkDeSitterCoreCurvatureExact as CoreCurvature
 import DASHI.Quantum.QuantumBirthmarkKottlerHorizonBracketExact as Kottler
 import DASHI.Quantum.QuantumBirthmarkRaychaudhuriEnergyConditionFirewallExact as Raychaudhuri
 import DASHI.Quantum.QuantumBirthmarkDarkEnergyCPLExact as CPL
+import DASHI.Quantum.QuantumBirthmarkH2EquationOfStateUnderdeterminationExact as H2W
+import DASHI.Quantum.QuantumBirthmarkOmegaUnderdeterminationExact as OmegaNoGo
 import DASHI.Quantum.QuantumBirthmarkLaboratoryBackreactionProtocolExact as Lab
 import DASHI.Quantum.QuantumBirthmarkLaboratorySensitivityMaxCutExact as LabSensitivity
 import DASHI.Physics.Foundations.CMP119D1StandardDifferentialAuthorityExact as D1
@@ -39,7 +39,6 @@ import DASHI.Physics.Foundations.CMP119D1StandardDifferentialAuthorityExact as D
 record HistoryDarkEnergyTerminalReceipt : Set where
   field
     historySectorEffectiveActionLaneOwned : Bool
-    residualEq223PreferredSignLaneOwned : Bool
     sharpEq223ThresholdBridgeOwned : Bool
     positiveGRepulsiveGeometryLaneOwned : Bool
     localCoreRegularityOwned : Bool
@@ -47,12 +46,19 @@ record HistoryDarkEnergyTerminalReceipt : Set where
     kottlerHorizonBracketingOwned : Bool
     hubbleSquaredTrackingModelOwned : Bool
     horizonThermalHubbleScalingOwned : Bool
+    h2EquationOfStateUnderdeterminationOwned : Bool
+    omegaUnderdeterminationOwned : Bool
     observationalFractionCalibrationOwned : Bool
     historyScaledTwoVacuumPotentialOwned : Bool
     twoPhaseHistoryOrderParameterOwned : Bool
     finiteHistoryTwoVacuumBenchmarkOwned : Bool
     finiteBirthmarkWeightWitnessOwned : Bool
+    normalizedFiniteWeightModelOwned : Bool
     commonHistoryIdentityBenchmarkOwned : Bool
+    finiteBirthmarkToOrderParameterCouplingOwned : Bool
+    finiteHistoryFractionModelOwned : Bool
+    finitePotentialCouplingBenchmarkOwned : Bool
+    d1UnderdeterminationWitnessOwned : Bool
     finiteHistoryActionGenerationOwned : Bool
     birthmarkSelectedHistoryToCommonActionCompilerOwned : Bool
     commonMetricVariationStressCompilerOwned : Bool
@@ -80,7 +86,6 @@ open HistoryDarkEnergyTerminalReceipt public
 canonicalHistoryDarkEnergyTerminalReceipt : HistoryDarkEnergyTerminalReceipt
 canonicalHistoryDarkEnergyTerminalReceipt = record
   { historySectorEffectiveActionLaneOwned = true
-  ; residualEq223PreferredSignLaneOwned = true
   ; sharpEq223ThresholdBridgeOwned = true
   ; positiveGRepulsiveGeometryLaneOwned = true
   ; localCoreRegularityOwned = true
@@ -88,12 +93,19 @@ canonicalHistoryDarkEnergyTerminalReceipt = record
   ; kottlerHorizonBracketingOwned = true
   ; hubbleSquaredTrackingModelOwned = true
   ; horizonThermalHubbleScalingOwned = true
+  ; h2EquationOfStateUnderdeterminationOwned = true
+  ; omegaUnderdeterminationOwned = true
   ; observationalFractionCalibrationOwned = true
   ; historyScaledTwoVacuumPotentialOwned = true
   ; twoPhaseHistoryOrderParameterOwned = true
   ; finiteHistoryTwoVacuumBenchmarkOwned = true
   ; finiteBirthmarkWeightWitnessOwned = true
+  ; normalizedFiniteWeightModelOwned = true
   ; commonHistoryIdentityBenchmarkOwned = true
+  ; finiteBirthmarkToOrderParameterCouplingOwned = true
+  ; finiteHistoryFractionModelOwned = true
+  ; finitePotentialCouplingBenchmarkOwned = true
+  ; d1UnderdeterminationWitnessOwned = true
   ; finiteHistoryActionGenerationOwned = true
   ; birthmarkSelectedHistoryToCommonActionCompilerOwned = true
   ; commonMetricVariationStressCompilerOwned = true
@@ -129,8 +141,7 @@ localCoreRegularityOwned : Bool
 localCoreRegularityOwned = Core.localCoreLapseRegularityOwned
 
 boundedCoreCurvatureInvariantsOwned : Bool
-boundedCoreCurvatureInvariantsOwned =
-  CoreCurvature.boundedCoreCurvatureInvariantsOwned
+boundedCoreCurvatureInvariantsOwned = CoreCurvature.boundedCoreCurvatureInvariantsOwned
 
 kottlerHorizonBracketingOwned : Bool
 kottlerHorizonBracketingOwned = Kottler.positiveHorizonSignBracketsOwned
@@ -139,8 +150,13 @@ hubbleSquaredTrackingModelOwned : Bool
 hubbleSquaredTrackingModelOwned = Horizon.hubbleSquaredTrackingAlgebraOwned
 
 horizonThermalHubbleScalingOwned : Bool
-horizonThermalHubbleScalingOwned =
-  HorizonThermal.horizonThermalHubbleScalingOwned
+horizonThermalHubbleScalingOwned = HorizonThermal.horizonThermalHubbleScalingOwned
+
+h2EquationOfStateUnderdeterminationOwned : Bool
+h2EquationOfStateUnderdeterminationOwned = H2W.hubbleSquaredTrackingDoesNotFixEquationOfState
+
+omegaUnderdeterminationOwned : Bool
+omegaUnderdeterminationOwned = OmegaNoGo.omegaNotFixedByHorizonNormalization
 
 observationalFractionCalibrationOwned : Bool
 observationalFractionCalibrationOwned = Calibration.observationalFractionCalibrationOwned
@@ -157,15 +173,29 @@ finiteHistoryTwoVacuumBenchmarkOwned = FiniteHistory.finiteHistoryCanSelectDiffe
 finiteBirthmarkWeightWitnessOwned : Bool
 finiteBirthmarkWeightWitnessOwned = FiniteWeight.finiteMicroscopicWeightWitnessOwned
 
+normalizedFiniteWeightModelOwned : Bool
+normalizedFiniteWeightModelOwned = NormalizedWeight.normalizedFiniteWeightModelOwned
+
 commonHistoryIdentityBenchmarkOwned : Bool
 commonHistoryIdentityBenchmarkOwned = CommonHistory.commonHistoryMapBenchmarkOwned
+
+finiteBirthmarkToOrderParameterCouplingOwned : Bool
+finiteBirthmarkToOrderParameterCouplingOwned = OrderCoupling.finiteBirthmarkToOrderParameterCouplingOwned
+
+finiteHistoryFractionModelOwned : Bool
+finiteHistoryFractionModelOwned = FiniteFraction.finiteHistoryFractionModelOwned
+
+finitePotentialCouplingBenchmarkOwned : Bool
+finitePotentialCouplingBenchmarkOwned = PotentialCoupling.finitePotentialCouplingBenchmarkOwned
+
+d1UnderdeterminationWitnessOwned : Bool
+d1UnderdeterminationWitnessOwned = D1NoGo.bareFunctionDoesNotDetermineLinearityLaws
 
 finiteHistoryActionGenerationOwned : Bool
 finiteHistoryActionGenerationOwned = HistoryAction.finiteHistoryActionGenerationOwned
 
 birthmarkSelectedHistoryToCommonActionCompilerOwned : Bool
-birthmarkSelectedHistoryToCommonActionCompilerOwned =
-  WeightedAction.birthmarkSelectedHistoryToCommonActionCompilerOwned
+birthmarkSelectedHistoryToCommonActionCompilerOwned = WeightedAction.birthmarkSelectedHistoryToCommonActionCompilerOwned
 
 commonMetricVariationStressCompilerOwned : Bool
 commonMetricVariationStressCompilerOwned = HistoryAction.commonMetricVariationStressCompilerOwned
@@ -207,22 +237,22 @@ historyDarkEnergySteelmanCrossPollinated : Bool
 historyDarkEnergySteelmanCrossPollinated = true
 
 ------------------------------------------------------------------------
--- TRUE REMAINING PRODUCERS AFTER ROUND-4 MAX-CUT
+-- TRUE REMAINING PRODUCERS AFTER ROUND-6 MAX-CUT
 ------------------------------------------------------------------------
 
 record RemainingHistoryDarkEnergyProducers : Set where
   field
-    standardDifferentialD1AuthorityInstantiation : Bool
-    normalizedQuantumBirthmarkHistoryWeightLaw : Bool
+    strengthenedBC2DifferentialSourceOrD1Instantiation : Bool
+    physicalNormalizedQuantumBirthmarkWeightLaw : Bool
     physicalCMP119HistoryCarrierIdentification : Bool
     physicalMetricDependentHistoryValuation : Bool
     sourceNativePreferredSignDynamics : Bool
     sharpLiteralSignCrossIdentification : Bool
-    microscopicBirthmarkToHistoryOrderParameter : Bool
+    continuumPRXBirthmarkStatisticToHistoryOrderParameter : Bool
     sourceNativeCMP119HistoryPotentialCoupling : Bool
     movingOrCurvedBubbleDynamicsForTiltedVacua : Bool
     microscopicHistoryFractionOfHorizonThermalCarrier : Bool
-    historyToCPLParameters : Bool
+    microscopicExpansionHistoryForCPL : Bool
     parameterFreeOmegaPrediction : Bool
     sourceNativeSIStressMagnitudePrediction : Bool
     realHorizonRootExistenceAndMaximalExtension : Bool
@@ -237,17 +267,17 @@ open RemainingHistoryDarkEnergyProducers public
 
 canonicalRemainingHistoryDarkEnergyProducers : RemainingHistoryDarkEnergyProducers
 canonicalRemainingHistoryDarkEnergyProducers = record
-  { standardDifferentialD1AuthorityInstantiation = false
-  ; normalizedQuantumBirthmarkHistoryWeightLaw = false
+  { strengthenedBC2DifferentialSourceOrD1Instantiation = false
+  ; physicalNormalizedQuantumBirthmarkWeightLaw = false
   ; physicalCMP119HistoryCarrierIdentification = false
   ; physicalMetricDependentHistoryValuation = false
   ; sourceNativePreferredSignDynamics = false
   ; sharpLiteralSignCrossIdentification = false
-  ; microscopicBirthmarkToHistoryOrderParameter = false
+  ; continuumPRXBirthmarkStatisticToHistoryOrderParameter = false
   ; sourceNativeCMP119HistoryPotentialCoupling = false
   ; movingOrCurvedBubbleDynamicsForTiltedVacua = false
   ; microscopicHistoryFractionOfHorizonThermalCarrier = false
-  ; historyToCPLParameters = false
+  ; microscopicExpansionHistoryForCPL = false
   ; parameterFreeOmegaPrediction = false
   ; sourceNativeSIStressMagnitudePrediction = false
   ; realHorizonRootExistenceAndMaximalExtension = false
@@ -261,7 +291,7 @@ canonicalRemainingHistoryDarkEnergyProducers = record
 
 remainingProducerInterpretation : String
 remainingProducerInterpretation =
-  "Round-4 frontier: finite birthmark-conditioned weighting and same-carrier history-map benchmarks now exist; local de-Sitter curvature invariants are finite; Kottler positive horizons are rationally bracketed; a static planar wall is correctly excluded for the nondegenerate vacua; horizon thermodynamics fixes the H^2/critical-density coefficient up to one microscopic history fraction; and the closed-de-Sitter Friedmann phase curve contains an exact nonzero-radius bounce point. Remaining work is now source-specific: normalized quantum weighting, physical CMP119 history/metric valuation, literal sign and potential dynamics, moving/curved bubble dynamics, microscopic history fraction/CPL/Omega/SI magnitude, real/global horizon extension and geodesics, differential-time/source identification of the bounce, and matched-history laboratory realization/measurement."
+  "Round-6 frontier: normalized finite weights, finite birthmark->order-parameter coupling, finite history fractions, history->potential benchmarks, local curvature invariants, horizon-thermal H^2 normalization, closed-de-Sitter phase-curve bounce algebra, Kottler horizon brackets, and explicit H^2/Omega underdetermination are owned. The current BC2 bare-function type provably does not force D1 laws. Remaining work is genuinely source/dynamics specific: strengthen/instantiate D1; derive the physical normalized PRX birthmark weighting and CMP119 history/metric valuation; derive literal sign/potential dynamics; moving/curved bubble evolution; the microscopic horizon fraction and expansion history giving CPL/Omega/SI magnitude; real/global horizon extension/geodesic completeness; differential-time/source realization and history selection of the bounce; and matched-history laboratory coupling/preparation/measurement."
 
 landauerConversePromoted : Bool
 landauerConversePromoted = false
