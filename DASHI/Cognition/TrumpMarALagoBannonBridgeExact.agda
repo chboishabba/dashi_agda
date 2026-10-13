@@ -6,14 +6,18 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.TrumpEpsteinPoliticalRelationshipExact as TrumpEpstein
+import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as Cambridge
 
 ------------------------------------------------------------------------
 -- TRUMP / MAR-A-LAGO / BANNON BRIDGE
 --
--- This owner strengthens the Trump-world acquisition lane with two separately
--- typed infrastructures:
---   (1) Mar-a-Lago as an Epstein/Maxwell recruitment and records locus; and
---   (2) Steve Bannon as a later political/media brokerage bridge to Epstein.
+-- This owner strengthens the Trump-world acquisition lane with separately typed
+-- infrastructures:
+--   (1) Mar-a-Lago as an Epstein/Maxwell recruitment and records locus;
+--   (2) Steve Bannon as a later political/media brokerage bridge to Epstein;
+--   (3) Bannon's earlier Cambridge-Analytica/SCL/Mercer influence infrastructure.
+-- The historical Bannon continuity is acquisition-relevant but does not prove
+-- that Cambridge Analytica techniques were used in later Epstein media work.
 -- The 2022 classified-documents search remains a distinct investigation absent
 -- a document paying an Epstein-search purpose or seized-Epstein-material edge.
 ------------------------------------------------------------------------
@@ -25,6 +29,7 @@ data BridgeKind : Set where
   marALagoEmploymentRecordProduction : BridgeKind
   reinhartPriorEpsteinEmployeeRepresentation : BridgeKind
   classifiedDocumentsSearch : BridgeKind
+  bannonCambridgeAnalyticaInfluenceInfrastructure : BridgeKind
   bannonSustainedCorrespondence : BridgeKind
   bannonEpsteinMediaRehabilitation : BridgeKind
   epsteinBannonPoliticalMessaging : BridgeKind
@@ -77,6 +82,12 @@ classifiedSearchReceipt = bridge-receipt
   "The August 2022 Mar-a-Lago search concerned presidential/classified records and obstruction-related offences; available warrants/FOIA records do not establish an Epstein-search purpose."
   true true false false
 
+bannonCambridgeAnalyticaReceipt : BridgeReceipt
+bannonCambridgeAnalyticaReceipt = bridge-receipt
+  bannonCambridgeAnalyticaInfluenceInfrastructure
+  "UK Parliament, FTC and FEC records establish Bannon's Cambridge Analytica leadership/infrastructure context, deceptive Facebook-data harvesting for voter profiling/targeting, substantial Trump-campaign vendor payments and cross-Atlantic brokerage; election-outcome causation and illegal common-vendor coordination remain unestablished by the current receipt set."
+  true true false false
+
 bannonCorrespondenceReceipt : BridgeReceipt
 bannonCorrespondenceReceipt = bridge-receipt
   bannonSustainedCorrespondence
@@ -102,6 +113,28 @@ bannonInternationalStrategyReceipt = bridge-receipt
   true false false false
 
 ------------------------------------------------------------------------
+-- Bannon historical influence cross-pollination.
+------------------------------------------------------------------------
+
+bannonHistoricalInfluenceBoundary : Cambridge.BannonInfluenceInfrastructureBoundary
+bannonHistoricalInfluenceBoundary = Cambridge.canonicalBannonInfluenceInfrastructureBoundary
+
+bannonTargetedInfluenceCapabilityPaid :
+  Cambridge.targetedPoliticalInfluenceCapabilityPaid
+    Cambridge.canonicalBannonInfluenceInfrastructureBoundary ≡ true
+bannonTargetedInfluenceCapabilityPaid = refl
+
+bannonElectionOutcomeCausationStillUnpaid :
+  Cambridge.trumpVictoryCausedByCambridgeAnalytica
+    Cambridge.canonicalBannonInfluenceInfrastructureBoundary ≡ false
+bannonElectionOutcomeCausationStillUnpaid = refl
+
+bannonLaterEpsteinTechniqueReuseStillUnpaid :
+  Cambridge.laterEpsteinMediaWorkProvesTechniqueReuse
+    Cambridge.canonicalBannonInfluenceInfrastructureBoundary ≡ false
+bannonLaterEpsteinTechniqueReuseStillUnpaid = refl
+
+------------------------------------------------------------------------
 -- Participation/status refinement.
 ------------------------------------------------------------------------
 
@@ -111,6 +144,7 @@ record TrumpParticipationLatticeBoundary : Set where
     socialParticipationEstablished : Bool
     networkAccessParticipationEstablished : Bool
     marALagoRecruitmentLocusEstablished : Bool
+    bannonHistoricalInfluenceInfrastructureEstablished : Bool
     knowledgeOfEpsteinCrimesResolved : Bool
     facilitationOfEpsteinCrimesEstablished : Bool
     criminalParticipationEstablishedByCurrentReceiptSet : Bool
@@ -118,7 +152,7 @@ open TrumpParticipationLatticeBoundary public
 
 canonicalTrumpParticipationLatticeBoundary : TrumpParticipationLatticeBoundary
 canonicalTrumpParticipationLatticeBoundary =
-  trump-participation-lattice-boundary true true true false false false
+  trump-participation-lattice-boundary true true true true false false false
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
@@ -130,6 +164,7 @@ data SamePropertyImpliesSameInvestigation : Set where
 data BannonBridgeImpliesTrumpDirection : Set where
 data BannonEpsteinContactImpliesCriminalParticipation : Set where
 data VictimAccountImpliesEveryAdjacentActorKnowledge : Set where
+data PriorInfluenceInfrastructureImpliesLaterTechniqueReuse : Set where
 
 recruitmentLocusDoesNotCreateOwnerKnowledge : RecruitmentLocusImpliesOwnerKnowledge → ⊥
 recruitmentLocusDoesNotCreateOwnerKnowledge ()
@@ -148,3 +183,7 @@ bannonContactDoesNotCreateCriminalParticipation ()
 
 victimAccountDoesNotCreateAdjacentKnowledge : VictimAccountImpliesEveryAdjacentActorKnowledge → ⊥
 victimAccountDoesNotCreateAdjacentKnowledge ()
+
+priorInfluenceInfrastructureDoesNotCreateLaterTechniqueReuse :
+  PriorInfluenceInfrastructureImpliesLaterTechniqueReuse → ⊥
+priorInfluenceInfrastructureDoesNotCreateLaterTechniqueReuse ()
