@@ -1,9 +1,9 @@
 module DASHI.Ontology.OntologyRepairEndToEndExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Data.Integer using (+_; -[1+_])
+open import Data.Empty using (⊥)
+open import Data.Integer using (+_)
 
 import DASHI.Cognition.PNF.TypePressure as PNF
 import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
@@ -14,17 +14,19 @@ import DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact as RosarioGov
 
 ------------------------------------------------------------------------
 -- CANONICAL END-TO-END DEMONSTRATOR
---
--- External evidence is pinned separately from DASHI interpretation.  The case
--- combines mapping, LLM and human-review evidence in the existing PNF envelope,
--- compiles only a review proposal, and carries an actual consumer-specific
--- FactorsThrough receipt.  The same projection is proved insufficient for a
--- disjointness consumer by the already-owned finite countermodel.
 ------------------------------------------------------------------------
 
+questions :
+  Factor.InquiryQuestionFamily RosarioGov.AlignmentState RosarioGov.AlignmentQuery
 questions = RosarioGov.alignmentQuestions
+
+projection : RosarioGov.AlignmentState → RosarioGov.AlignmentSurface
 projection = RosarioGov.coarseAlignmentSurface
+
+query : RosarioGov.AlignmentQuery
 query = RosarioGov.subclassQuery
+
+disjointnessQuery : RosarioGov.AlignmentQuery
 disjointnessQuery = RosarioGov.disjointnessQuery
 
 mappingEvidence : Plural.PluralRepairEvidence
@@ -51,12 +53,18 @@ humanEvidence =
     "DASHI review receipt"
     "bounded ontology-review consumer"
 
+mappingPressure :
+  Plural.PluralPressureContribution "lgbtDB:Q5051" "Wikidata:Q220505"
 mappingPressure =
   Plural.mkPluralPressure "lgbtDB:Q5051" "Wikidata:Q220505" mappingEvidence (+ 1)
 
+llmPressure :
+  Plural.PluralPressureContribution "lgbtDB:Q5051" "Wikidata:Q220505"
 llmPressure =
   Plural.mkPluralPressure "lgbtDB:Q5051" "Wikidata:Q220505" llmEvidence (+ 0)
 
+humanPressure :
+  Plural.PluralPressureContribution "lgbtDB:Q5051" "Wikidata:Q220505"
 humanPressure =
   Plural.mkPluralPressure "lgbtDB:Q5051" "Wikidata:Q220505" humanEvidence (+ 1)
 
@@ -100,5 +108,5 @@ canonicalEndToEndCase =
     "external observations != PNF interpretation != admissibility != edit authority"
 
 disjointnessNonFactorisation :
-  Factor.FactorsThrough questions projection disjointnessQuery → Data.Empty.⊥
+  Factor.FactorsThrough questions projection disjointnessQuery → ⊥
 disjointnessNonFactorisation = RosarioGov.disjointnessCannotFactorThrough
