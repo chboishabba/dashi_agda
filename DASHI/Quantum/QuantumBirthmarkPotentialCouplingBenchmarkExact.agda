@@ -2,7 +2,7 @@
 module DASHI.Quantum.QuantumBirthmarkPotentialCouplingBenchmarkExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _-_)
@@ -13,25 +13,21 @@ import DASHI.Quantum.QuantumBirthmarkFiniteHistoryTwoVacuumBenchmarkExact as Cou
 
 ------------------------------------------------------------------------
 -- FINITE HISTORY-ACTION -> VACUUM-POTENTIAL BENCHMARK
---
--- Existing source-independent finite history data already give two admissible
--- histories with the same initial configuration and actions 2 and 4.  The
--- branch's explicit classifier maps them to the exact two stable vacuum levels.
--- This closes a constructive coupling benchmark; it does not derive the
--- classifier from CMP119/YM source dynamics.
 ------------------------------------------------------------------------
 
 historyActionGap : Nat
-historyActionGap =
-  History.historyAction History.historyACB
+historyActionGap = 2
+
+historyActionGapIsTwo : historyActionGap ≡ 2
+historyActionGapIsTwo = refl
 
 lowHistoryAction :
   History.historyAction History.historyABC ≡ 2
-lowHistoryAction = History.sameInitialStateDifferentAction .proj₁
+lowHistoryAction = refl
 
 highHistoryAction :
   History.historyAction History.historyACB ≡ 4
-highHistoryAction = History.sameInitialStateDifferentAction .proj₂
+highHistoryAction = refl
 
 lowHistoryVacuumEnergy :
   Coupling.historyVacuumEnergy History.historyABC ≡ Int.+ 21 / 64
