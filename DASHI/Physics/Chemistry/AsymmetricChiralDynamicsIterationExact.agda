@@ -2,7 +2,8 @@ module DASHI.Physics.Chemistry.AsymmetricChiralDynamicsIterationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Chemistry.AsymmetricChiralDynamicsExact as Dynamics
 
