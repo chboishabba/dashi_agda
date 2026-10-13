@@ -24,6 +24,10 @@ realFixturePinsWikidataTarget :
   realLgbtDBFilmFestivalObjectId ≡ "Q220505"
 realFixturePinsWikidataTarget = refl
 
+realFixtureDoesNotAssertTruth :
+  ExternalFixtureTruthPermission → ⊥
+realFixtureDoesNotAssertTruth = externalFixtureCannotAssertTruth
+
 climateAmbiguityAbstains :
   climateDisposition ambiguousStatementBundle ≡ abstainMigration
 climateAmbiguityAbstains = refl
