@@ -25,6 +25,7 @@ import DASHI.Quantum.QuantumBirthmarkDeSitterCoreLocalRegularityExact as Core
 import DASHI.Quantum.QuantumBirthmarkRaychaudhuriEnergyConditionFirewallExact as Raychaudhuri
 import DASHI.Quantum.QuantumBirthmarkDarkEnergyCPLExact as CPL
 import DASHI.Quantum.QuantumBirthmarkLaboratoryBackreactionProtocolExact as Lab
+import DASHI.Quantum.QuantumBirthmarkLaboratorySensitivityMaxCutExact as LabSensitivity
 import DASHI.Physics.Foundations.CMP119D1StandardDifferentialAuthorityExact as D1
 
 record HistoryDarkEnergyTerminalReceipt : Set where
@@ -53,6 +54,8 @@ record HistoryDarkEnergyTerminalReceipt : Set where
     cplDiscriminatorCarrierOwned : Bool
     raychaudhuriEnergyConditionFirewallOwned : Bool
     laboratoryProtocolCarrierOwned : Bool
+    laboratoryTransferSensitivityOwned : Bool
+    laboratorySystematicsCutOwned : Bool
     correctedD1MinimalAuthorityCutOwned : Bool
 
     cosmologicalConstantProblemSolved : Bool
@@ -66,12 +69,40 @@ record HistoryDarkEnergyTerminalReceipt : Set where
 open HistoryDarkEnergyTerminalReceipt public
 
 canonicalHistoryDarkEnergyTerminalReceipt : HistoryDarkEnergyTerminalReceipt
-canonicalHistoryDarkEnergyTerminalReceipt =
-  history-dark-energy-terminal-receipt
-    true true true true true true true true true true true true
-    true true true true true true true true true true true true
-    false false false false false
-    true
+canonicalHistoryDarkEnergyTerminalReceipt = record
+  { historySectorEffectiveActionLaneOwned = true
+  ; residualToGeneratedDensityLaneOwned = true
+  ; residualEq223PreferredSignLaneOwned = true
+  ; eq223SignReducedToTwoLiteralLeaves = true
+  ; positiveGRepulsiveGeometryLaneOwned = true
+  ; regularCoreCandidateLaneOwned = true
+  ; localCoreRegularityOwned = true
+  ; cosmologyDiscriminatorLaneOwned = true
+  ; hubbleSquaredTrackingModelOwned = true
+  ; observationalFractionCalibrationOwned = true
+  ; historyScaledTwoVacuumPotentialOwned = true
+  ; twoPhaseHistoryOrderParameterOwned = true
+  ; finiteHistoryTwoVacuumBenchmarkOwned = true
+  ; historyConditionedWeightCarrierOwned = true
+  ; finiteHistoryActionGenerationOwned = true
+  ; birthmarkSelectedHistoryToCommonActionCompilerOwned = true
+  ; commonMetricVariationStressCompilerOwned = true
+  ; repulsiveGeometryInstantiationOwned = true
+  ; finiteWallCarrierOwned = true
+  ; finiteBounceKinematicsOwned = true
+  ; cplDiscriminatorCarrierOwned = true
+  ; raychaudhuriEnergyConditionFirewallOwned = true
+  ; laboratoryProtocolCarrierOwned = true
+  ; laboratoryTransferSensitivityOwned = true
+  ; laboratorySystematicsCutOwned = true
+  ; correctedD1MinimalAuthorityCutOwned = true
+  ; cosmologicalConstantProblemSolved = false
+  ; coincidenceProblemSolved = false
+  ; singularityResolutionSolved = false
+  ; evolvingDarkEnergyEmpiricallyEstablished = false
+  ; laboratoryHistoryBackreactionMeasured = false
+  ; historyDarkEnergySteelmanCrossPollinated = true
+  }
 
 historySectorEffectiveActionLaneOwned : Bool
 historySectorEffectiveActionLaneOwned = true
@@ -138,6 +169,12 @@ raychaudhuriEnergyConditionFirewallOwned = true
 laboratoryProtocolCarrierOwned : Bool
 laboratoryProtocolCarrierOwned = Lab.laboratoryProtocolCarrierOwned
 
+laboratoryTransferSensitivityOwned : Bool
+laboratoryTransferSensitivityOwned = LabSensitivity.instrumentTransferSensitivityOwned
+
+laboratorySystematicsCutOwned : Bool
+laboratorySystematicsCutOwned = LabSensitivity.systematicsCutOwned
+
 correctedD1MinimalAuthorityCutOwned : Bool
 correctedD1MinimalAuthorityCutOwned = D1.minimalD1AuthorityCutOwned
 
@@ -176,18 +213,19 @@ record RemainingHistoryDarkEnergyProducers : Set where
     boundedCoreCurvatureInvariants : Bool
     globalRegularBlackHoleExtensionAndGeodesicCompleteness : Bool
     sourcedContinuumFriedmannBounce : Bool
-    laboratoryBackreactionMagnitudePrediction : Bool
+    microscopicHistoryCouplingToLaboratoryObservable : Bool
+    matchedHistoryPreparationAndNumericalSystematicsClosure : Bool
     laboratoryBackreactionMeasurement : Bool
 
 canonicalRemainingHistoryDarkEnergyProducers : RemainingHistoryDarkEnergyProducers
 canonicalRemainingHistoryDarkEnergyProducers =
   remaining-history-dark-energy-producers
-    false false false false false false false false false
+    false false false false false false false false false false
     false false false false false false false false false
 
 remainingProducerInterpretation : String
 remainingProducerInterpretation =
-  "Max-cut frontier: instantiate standard D1 differential laws; derive microscopic birthmark weighting/selection and metric valuation; prove the two literal Eq.(2.23) sign leaves N_V>0 and N_ERB>=0 from source dynamics; derive the birthmark/history order parameter and its CMP119 potential coupling; solve the continuum wall; derive H^2/CPL/Omega/magnitude rather than fitting them; prove bounded core curvature plus global geodesic/horizon regularity; construct a sourced continuum Friedmann bounce; and predict then measure a matched-stress laboratory backreaction signal. All intermediate action/stress/repulsive-geometry/calibration/discriminator plumbing is already represented."
+  "Max-cut frontier: instantiate standard D1 differential laws; derive microscopic birthmark weighting/selection and metric valuation; prove the two literal Eq.(2.23) sign leaves N_V>0 and N_ERB>=0 from source dynamics; derive the birthmark/history order parameter and its CMP119 potential coupling; solve the continuum wall; derive H^2/CPL/Omega/magnitude rather than fitting them; prove bounded core curvature plus global geodesic/horizon regularity; construct a sourced continuum Friedmann bounce; derive the microscopic laboratory coupling epsilon_H on the same action, realize a genuinely matched history switch with a closed numerical systematics budget, and then measure it. Instrument transfer sensitivity itself is now quantitative."
 
 landauerConversePromoted : Bool
 landauerConversePromoted = false
@@ -224,4 +262,4 @@ pureLambdaNullDefocusingClaimed = false
 
 statusStatement : String
 statusStatement =
-  "History-sector dark-energy max-cut now includes finite history/action selection, common QFT/GR metric variation, an exact two-leaf source-sign cut, H^2 tracking plus observational calibration, two-vacuum/order-parameter and repulsive-geometry instantiations, discrete finite wall and bounce witnesses, local de-Sitter-core lapse regularity, CPL/survey discriminators, and a matched-stress laboratory protocol. What remains is no longer generic composition: it is microscopic source dynamics, continuum/global solutions, parameter-free magnitude predictions, and measurement."
+  "History-sector dark-energy max-cut now includes finite history/action selection, common QFT/GR metric variation, an exact two-leaf source-sign cut, H^2 tracking plus observational calibration, two-vacuum/order-parameter and repulsive-geometry instantiations, discrete finite wall and bounce witnesses, local de-Sitter-core lapse regularity, CPL/survey discriminators, a matched-stress laboratory protocol, and quantitative transfer-sensitivity benchmarks against current milligram, atom-interferometric and quantum-ready optomechanical gravity experiments. What remains is microscopic source dynamics, continuum/global solutions, parameter-free coupling/magnitude predictions, matched-history realization with a closed numerical systematics budget, and measurement."
