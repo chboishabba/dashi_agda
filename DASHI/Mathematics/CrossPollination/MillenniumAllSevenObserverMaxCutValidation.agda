@@ -1,8 +1,6 @@
 module DASHI.Mathematics.CrossPollination.MillenniumAllSevenObserverMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Bool using (false)
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as Gate
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as E
@@ -28,12 +26,6 @@ poincareRemainsExternalSolvedBoundary :
   Gate.finalClosureStatus Gate.poincareHistoricalStatus
   ≡ Gate.externalClassificationBoundary
 poincareRemainsExternalSolvedBoundary = refl
-
-navierStokesTerminalPromotionStillFalse =
-  Gate.navierStokesClayTerminalPromotionStillFalse
-
-yangMillsFullCutsetStillConditional =
-  Gate.yangMillsFullCutsetInhabitantsRemainConditional
 
 phaseReopensTwentyThree :
   E.reopen3 (E.phaseOfNat 23) (E.quotient3 23) ≡ 23
