@@ -7,6 +7,8 @@ import DASHI.Ontology.WikidataWorkingGroupFullProvenanceEverything
 import DASHI.Ontology.DeweyQidCoverageQualityExact
 import DASHI.Ontology.EducationViaOntologyExact
 import DASHI.Ontology.EducationViaOntologyValidation
+import DASHI.Ontology.EducationViaOntologyCompletionExact
+import DASHI.Ontology.EducationViaOntologyCompletionValidation
 import DASHI.Ontology.EducationOntologyMappingSSSOMExact
 import DASHI.Ontology.EducationOntologyMappingValidation
 import DASHI.Ontology.EducationOntologyMappingPNFExact
@@ -20,4 +22,8 @@ import DASHI.Ontology.OCTFSensibLawHandoffExact
 import DASHI.Ontology.OCTFSensibLawHandoffValidation
 import DASHI.Ontology.OntologyRepairPluralityMaxCutExact
 import DASHI.Ontology.OntologyRepairPluralityMaxCutValidation
+import DASHI.Ontology.OntologyRepairCompletionExact
+import DASHI.Ontology.OntologyRepairCompletionValidation
+import DASHI.Ontology.OntologyRepairEndToEndExact
+import DASHI.Ontology.OntologyRepairEndToEndValidation
 import Ontology.Hecke.Everything
