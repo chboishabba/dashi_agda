@@ -9,11 +9,6 @@ import DASHI.Physics.Chemistry.Nobel2026ChiralitySourceAtlasExact as Atlas
 
 ------------------------------------------------------------------------
 -- SOURCE-PAID QUANTITATIVE EE SURFACE
---
--- Enantiomeric excess is stored as an exact rational coordinate relative to
--- full scale (1 = 100% ee), without importing a real-number implementation.
--- A source may report a lower/upper threshold instead of an exact endpoint;
--- that relation is retained rather than silently replaced by equality.
 ------------------------------------------------------------------------
 
 data EndpointRelation : Set where
@@ -43,11 +38,34 @@ record AmplificationObservation : Set where
 open AmplificationObservation public
 
 ------------------------------------------------------------------------
--- Sato/Urabe/Ishiguro/Shibata/Soai 2003.
---
--- 0.00005% ee as a fraction of full ee is 1 / 2,000,000.
--- 99.5% ee is 199 / 200.  The publication says the initial value is about the
--- former and the endpoint is greater than the latter after three cycles.
+-- Shibata et al. 1996: direct exact numeric source surface, 8.9% -> 88.1%.
+-- Relative to full-scale ee these are 89/1000 and 881/1000.
+------------------------------------------------------------------------
+
+shibata1996Initial : RationalEE
+shibata1996Initial = rationalEE 89 1000
+
+shibata1996Terminal : RationalEE
+shibata1996Terminal = rationalEE 881 1000
+
+shibata1996Amplification : AmplificationObservation
+shibata1996Amplification =
+  amplificationObservation
+    Atlas.shibata1996
+    shibata1996Initial exactEndpoint
+    shibata1996Terminal exactEndpoint
+    0
+    "the article abstract reports ee increasing from 8.9% to 88.1% by a series of asymmetric autocatalytic alkylations; no exact cycle count is encoded here"
+
+shibataInitialNumerator : numerator (initialEE shibata1996Amplification) ≡ 89
+shibataInitialNumerator = refl
+
+shibataTerminalNumerator : numerator (terminalEE shibata1996Amplification) ≡ 881
+shibataTerminalNumerator = refl
+
+------------------------------------------------------------------------
+-- Sato et al. 2003: about 0.00005% ee -> greater than 99.5% after 3 cycles.
+-- 0.00005% of full scale is 1/2,000,000; 99.5% is 199/200.
 ------------------------------------------------------------------------
 
 sato2003Initial : RationalEE
@@ -60,10 +78,8 @@ sato2003Amplification : AmplificationObservation
 sato2003Amplification =
   amplificationObservation
     Atlas.sato2003
-    sato2003Initial
-    approximatelyInitial
-    sato2003Threshold
-    greaterThanThreshold
+    sato2003Initial approximatelyInitial
+    sato2003Threshold greaterThanThreshold
     3
     "about 0.00005% ee is amplified to greater than 99.5% ee after three asymmetric-autocatalysis cycles"
 
@@ -82,26 +98,10 @@ sato2003ThresholdNumerator = refl
 sato2003ThresholdDenominator : denominator (terminalEE sato2003Amplification) ≡ 200
 sato2003ThresholdDenominator = refl
 
--- Cross-products are exposed explicitly for downstream ordered-rational owners.
--- No hidden floating-point conversion is required.
-satoInitialCrossProduct : Nat
-satoInitialCrossProduct =
-  numerator sato2003Initial * denominator sato2003Threshold
-
-satoThresholdCrossProduct : Nat
-satoThresholdCrossProduct =
-  numerator sato2003Threshold * denominator sato2003Initial
-
-satoInitialCrossProductValue : satoInitialCrossProduct ≡ 200
-satoInitialCrossProductValue = refl
-
-satoThresholdCrossProductValue : satoThresholdCrossProduct ≡ 398000000
-satoThresholdCrossProductValue = refl
-
 ------------------------------------------------------------------------
--- Kagan 1986 is welded at the level actually paid by the accessible primary
--- source: nonlinear effects in asymmetric synthesis are the subject of the
--- primary paper.  No exact ee graph point is fabricated from a secondary plot.
+-- Kagan 1986 source weld.  The accessible primary metadata/article surface pays
+-- the nonlinear-effect observation identity; no secondary plot is promoted to
+-- a primary exact graph point.
 ------------------------------------------------------------------------
 
 data NonlinearEffectKind : Set where
@@ -114,24 +114,19 @@ record KaganSourceWeld : Set where
   field
     source : Source.AttributedSource
     sourceOwnsNonlinearEffectObservation : Bool
-    sourceOwnsNonlinearEffectObservationIsTrue :
-      sourceOwnsNonlinearEffectObservation ≡ true
+    sourceOwnsNonlinearEffectObservationIsTrue : sourceOwnsNonlinearEffectObservation ≡ true
     exactNumericGraphPointImportedHere : Bool
-    exactNumericGraphPointImportedHereIsFalse :
-      exactNumericGraphPointImportedHere ≡ false
+    exactNumericGraphPointImportedHereIsFalse : exactNumericGraphPointImportedHere ≡ false
     retainedKind : NonlinearEffectKind
 
 kagan1986Weld : KaganSourceWeld
 kagan1986Weld =
-  kaganSourceWeld
-    Atlas.kagan1986
-    true refl
-    false refl
-    nonlinearEffectWithoutNumericPointHere
+  kaganSourceWeld Atlas.kagan1986 true refl false refl nonlinearEffectWithoutNumericPointHere
 
 record SourcePaidAmplificationBoundary : Set where
   constructor sourcePaidAmplificationBoundary
   field
+    direct1996NumericAmplificationPaid : Bool
     satoInitialEERationalisedExactly : Bool
     satoTerminalThresholdRationalisedExactly : Bool
     sourceThresholdRetainedAsThreshold : Bool
@@ -141,4 +136,4 @@ record SourcePaidAmplificationBoundary : Set where
 
 canonicalSourcePaidAmplificationBoundary : SourcePaidAmplificationBoundary
 canonicalSourcePaidAmplificationBoundary =
-  sourcePaidAmplificationBoundary true true true true true false
+  sourcePaidAmplificationBoundary true true true true true true false
