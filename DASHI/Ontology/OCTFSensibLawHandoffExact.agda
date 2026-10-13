@@ -8,19 +8,21 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- SOURCE OWNERS
 --
--- This owner keeps three provenance strata distinct:
---
--- 1. published research (Rosario et al. ACL 2025 and cited COLM 2024 prior art),
--- 2. Wikidata Ontology Cleaning Task Force meeting/course records,
--- 3. SensibLaw/ITIR handoff and climate/Nat execution-governance documents.
+-- Provenance strata remain distinct:
+--   * Rosario published research;
+--   * Ege Doğan / Peter Patel-Schneider published disjointness work;
+--   * OCTF meeting/course records;
+--   * SensibLaw/ITIR handoff and execution-governance documents;
+--   * DASHI formal reconstruction.
 --
 -- Meeting minutes are evidence of what participants reported/discussed, not a
--- publication-level theorem.  SensibLaw handoff documents govern repo posture;
--- they are not attributed back to Rosario, Ege, Peter, or the OCTF as a whole.
+-- publication-level theorem. SensibLaw's description of another author's work
+-- is a handoff/prior-art receipt, not a replacement for that publication.
 ------------------------------------------------------------------------
 
 data SourceOwner : Set where
   rosarioPublishedResearch : SourceOwner
+  peterEgePublishedResearch : SourceOwner
   octfMeetingMinutes : SourceOwner
   octfCourseMaterial : SourceOwner
   sensibLawHandoffDocs : SourceOwner
@@ -103,13 +105,14 @@ currentNatLiveDisposition : ReviewDisposition
 currentNatLiveDisposition = held
 
 ------------------------------------------------------------------------
--- ATTRIBUTION OWNER FOR EACH LANE CLAIM
+-- ATTRIBUTION OWNER FOR EACH LAYER
 ------------------------------------------------------------------------
 
 data HandoffLayer : Set where
   rosarioPaperMethodLayer : HandoffLayer
   rosarioMeetingContinuationLayer : HandoffLayer
-  peterEgeDisjointnessLayer : HandoffLayer
+  peterEgePublishedDisjointnessLayer : HandoffLayer
+  peterEgeSensibLawReviewHandoffLayer : HandoffLayer
   natAutomationPostureLayer : HandoffLayer
   climateMigrationProtocolLayer : HandoffLayer
   pnfAdmissibilityFactorisationLayer : HandoffLayer
@@ -117,7 +120,8 @@ data HandoffLayer : Set where
 ownerOfLayer : HandoffLayer → SourceOwner
 ownerOfLayer rosarioPaperMethodLayer = rosarioPublishedResearch
 ownerOfLayer rosarioMeetingContinuationLayer = octfMeetingMinutes
-ownerOfLayer peterEgeDisjointnessLayer = sensibLawHandoffDocs
+ownerOfLayer peterEgePublishedDisjointnessLayer = peterEgePublishedResearch
+ownerOfLayer peterEgeSensibLawReviewHandoffLayer = sensibLawHandoffDocs
 ownerOfLayer natAutomationPostureLayer = sensibLawHandoffDocs
 ownerOfLayer climateMigrationProtocolLayer = sensibLawHandoffDocs
 ownerOfLayer pnfAdmissibilityFactorisationLayer = dashiFormalReconstruction
@@ -134,6 +138,13 @@ record SourceReceipt : Set where
     reading : String
 
 open SourceReceipt public
+
+peterEgePublishedReceipt : SourceReceipt
+peterEgePublishedReceipt =
+  sourceReceipt
+    peterEgePublishedResearch
+    "Ege Doğan and Peter F. Patel-Schneider, Disjointness Violations in Wikidata; SensibLaw prior-art copy 2410.13707v2_ege.pdf"
+    "published prior art for Wikidata disjointness violations, pairwise disjoint-class extraction and culprit-oriented analysis; SensibLaw does not claim full method parity"
 
 rosarioMarch2026MeetingReceipt : SourceReceipt
 rosarioMarch2026MeetingReceipt =
@@ -211,12 +222,8 @@ promotableCannotAssertTruth ()
 ------------------------------------------------------------------------
 -- PARALLEL ASSIST-LANE CROSSWALK
 --
--- This is DASHI's local organizational crosswalk of the documented handoff:
--- Peter/Ege own disjointness-oriented prior work and review support; Rosario
--- owns the published/meeting hotspot diagnostic direction; Nat is the bounded
--- migration/automation proving lane; Johl/ITIR supplies the multi-source PNF /
--- residual / governance cross-pollination.  It is not a claim that these
--- collaborators endorsed this exact formal decomposition.
+-- This is DASHI's local organizational crosswalk of the documented handoff.
+-- It is not a claim that collaborators endorsed this exact decomposition.
 ------------------------------------------------------------------------
 
 data AssistContribution : Set where
@@ -243,6 +250,7 @@ record OCTFHandoffStatus : Set where
   field
     sourceOwnersRemainDistinct : Bool
     paperMeetingAndRepoClaimsSeparated : Bool
+    peterEgePublicationSeparatedFromHandoff : Bool
     reviewFirstBoundaryPreserved : Bool
     natMoonshotNotCurrentAuthority : Bool
     llmSignalsRemainCandidateEvidence : Bool
@@ -253,6 +261,8 @@ record OCTFHandoffStatus : Set where
     sourceOwnersRemainDistinctIsTrue : sourceOwnersRemainDistinct ≡ true
     paperMeetingAndRepoClaimsSeparatedIsTrue :
       paperMeetingAndRepoClaimsSeparated ≡ true
+    peterEgePublicationSeparatedFromHandoffIsTrue :
+      peterEgePublicationSeparatedFromHandoff ≡ true
     reviewFirstBoundaryPreservedIsTrue : reviewFirstBoundaryPreserved ≡ true
     natMoonshotNotCurrentAuthorityIsTrue : natMoonshotNotCurrentAuthority ≡ true
     llmSignalsRemainCandidateEvidenceIsTrue :
@@ -269,5 +279,5 @@ open OCTFHandoffStatus public
 canonicalOCTFHandoffStatus : OCTFHandoffStatus
 canonicalOCTFHandoffStatus =
   octfHandoffStatus
-    true true true true true true true true
-    refl refl refl refl refl refl refl refl
+    true true true true true true true true true
+    refl refl refl refl refl refl refl refl refl
