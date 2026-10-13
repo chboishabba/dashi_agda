@@ -5,28 +5,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-
-------------------------------------------------------------------------
--- MINIMAL QUANTITATIVE HISTORY/HORIZON SCALING MODEL
---
--- This is deliberately a model, not a microscopic derivation.  If a residual
--- history-sector density scales with H^2,
---
---   rho_H = alpha H^2,
---
--- while the critical-density carrier is represented as
---
---   rho_c = beta H^2,
---
--- then the cross-multiplied fractional-density relation is independent of H:
---
---   beta rho_H = alpha rho_c.
---
--- This is the exact algebraic content behind a coincidence/tracking proposal.
--- It does NOT derive alpha, beta, H^2 scaling, or observational Omega_DE.
-------------------------------------------------------------------------
 
 historyDensity : ℚ → ℚ → ℚ
 historyDensity alpha hubble = alpha * hubble * hubble
@@ -58,14 +38,6 @@ canonicalHorizonTrackingModel =
     1ℚ
     true true false
 
-------------------------------------------------------------------------
--- Simple equation-of-state parameterisation.
---
--- For a phenomenological density law rho(a) ∝ a^{-n}, continuity gives
--- w = -1 + n/3.  Here we encode only that algebraic parameter map; deriving the
--- continuity equation and n from the history sector remains separate.
-------------------------------------------------------------------------
-
 wFromScalingExponent : ℚ → ℚ
 wFromScalingExponent n = - 1ℚ + n / (Int.+ 3 / 1)
 
@@ -87,10 +59,6 @@ vacuumWActiveStressFactor = solve []
 minusTwoThirdsActiveStressFactor :
   activeStressFactor (- (Int.+ 2 / 3)) ≡ - 1ℚ
 minusTwoThirdsActiveStressFactor = solve []
-
-------------------------------------------------------------------------
--- Boundary.
-------------------------------------------------------------------------
 
 hubbleSquaredTrackingAlgebraOwned : Bool
 hubbleSquaredTrackingAlgebraOwned = true
