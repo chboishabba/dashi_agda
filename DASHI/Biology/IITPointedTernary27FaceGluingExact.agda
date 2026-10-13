@@ -25,6 +25,7 @@ open import Data.Fin.Base using (Fin)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369Ternary27HypervoxelStratificationExact as Strata
+import DASHI.Foundations.Base369Ternary27CornerEightExact as Corners
 import DASHI.Foundations.Base369Ternary27BoundaryNerveExact as Nerve
 import DASHI.Foundations.Base369FaceSheetPunctureIncidenceIdentityExact as FaceSheet
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -152,7 +153,7 @@ open PairwiseActiveFaceGluing public
 selectedCornerCocycle :
   {Actor : Set} →
   (gluing : Cech.FaceHypercubeCechGluing Actor) →
-  (corner : DASHI.Foundations.Base369Ternary27CornerEightExact.Corner3) →
+  (corner : Corners.Corner3) →
   (state : H.X6) →
   let edges = Nerve.cornerIncidentEdges corner
   in Cech.edgeTransport gluing (Nerve.incidentXZEdge edges) state
@@ -203,6 +204,13 @@ hyperformPointedThreeRoundTrip :
   pointedThreeToHyperform (hyperformToPointedThree fabric) ≡ fabric
 hyperformPointedThreeRoundTrip
   (Geometry.ternaryHyperformalPoint i a b) = refl
+
+threeActiveCubieChoiceCount : Nat
+threeActiveCubieChoiceCount = 27 * 27 * 27
+
+threeActiveCubieChoiceCountIsHyperformCount :
+  threeActiveCubieChoiceCount ≡ Geometry.hyperfabricStateCount
+threeActiveCubieChoiceCountIsHyperformCount = refl
 
 ------------------------------------------------------------------------
 -- 7. Cyclotomic / Monster-3B zeta recognition provides a concrete actual
