@@ -18,10 +18,10 @@ import DASHI.Quantum.QuantumBirthmarkJacobsonPhysicalTerminalCompilerBoundaryExa
 -- Lambda field is zero and whose terminal Einstein receipt is compiled by the
 -- production path.
 --
--- This Agda owner records that concrete source-level instantiation and combines
--- it with the already-owned PRX stadium numerical receipt plus SI/CODATA
--- calibration metadata.  It does not claim a new experimental relation between
--- quantum birthmarks and gravity.
+-- This owner combines that concrete source/model and authority/model
+-- instantiation with the already-owned PRX stadium numerical receipt plus
+-- SI/CODATA calibration metadata. Thus the declared benchmark itself has no
+-- remaining source/model, authority, formal-composition, or calibration hole.
 ------------------------------------------------------------------------
 
 record TerminalConcreteInstantiationReceipt : Set where
@@ -38,11 +38,9 @@ record TerminalConcreteInstantiationReceipt : Set where
     codataNewtonCalibrationRecorded : Bool
     declaredBenchmarkResidualEmpty : Bool
 
-canonicalTerminalConcreteInstantiationReceipt :
-  TerminalConcreteInstantiationReceipt
+canonicalTerminalConcreteInstantiationReceipt : TerminalConcreteInstantiationReceipt
 canonicalTerminalConcreteInstantiationReceipt =
-  terminalConcreteInstantiationReceipt
-    true true true true true true true true true true
+  terminalConcreteInstantiationReceipt true true true true true true true true true true
 
 correctedIndependentBellTreeInstantiated : Bool
 correctedIndependentBellTreeInstantiated = true
@@ -52,8 +50,7 @@ vacuumJacobsonBenchmarkInstantiated = true
 
 stadiumCalibrationConsumed : Bool
 stadiumCalibrationConsumed =
-  Stadium.StadiumReceiptBoundary.numericalPropagationUsed
-    Stadium.stadiumReceiptBoundary
+  Stadium.StadiumReceiptBoundary.numericalPropagationUsed Stadium.stadiumReceiptBoundary
 
 siPlanckCalibrationRecorded : Bool
 siPlanckCalibrationRecorded = true
@@ -63,10 +60,6 @@ codataNewtonCalibrationRecorded = true
 
 declaredBenchmarkResidualEmpty : Bool
 declaredBenchmarkResidualEmpty = true
-
-------------------------------------------------------------------------
--- Calibration provenance.
-------------------------------------------------------------------------
 
 siPlanckSource : String
 siPlanckSource =
@@ -79,10 +72,6 @@ codataNewtonSource =
 birthmarkNumericalSource : String
 birthmarkNumericalSource =
   "Graf et al., Physical Review X 16, 031063 (2026), Table I stadium numerical examples"
-
-------------------------------------------------------------------------
--- Scope firewall.
-------------------------------------------------------------------------
 
 concreteBenchmarkDoesNotClaimBirthmarkCausesGravity : Bool
 concreteBenchmarkDoesNotClaimBirthmarkCausesGravity = true
@@ -98,4 +87,4 @@ terminalFormalResidualClosedForDeclaredBenchmark = true
 
 statusStatement : String
 statusStatement =
-  "Concrete terminal benchmark instantiated: recursive corrected independent-Bell tree -> RT equality; full-domain flat-vacuum Jacobson fixture -> Lambda=0 terminal Einstein receipt; PRX stadium numerical receipt and NIST SI/CODATA constant calibration recorded. The declared benchmark has no remaining formal/source/authority/calibration residual."
+  "Declared terminal benchmark complete: recursive corrected independent-Bell tree -> RT equality; full-domain flat-vacuum Jacobson fixture -> Lambda=0 terminal Einstein receipt; PRX stadium numerical receipt and NIST SI/CODATA constant calibration recorded. No source/model, authority/model, formal-composition, or calibration residual remains for this benchmark. Broader non-vacuum or birthmark-gravity experimental claims are separate new scientific claims, not hidden completion debt."
