@@ -2,6 +2,9 @@ module DASHI.Ontology.Everything where
 
 -- Ontology domain rollup.
 
+import DASHI.Core.ConsumerRelativeRepresentationParityExact
+import DASHI.Core.ExpressiveComplexityNonAuthorityExact
+import DASHI.Core.SemanticPerturbationConsumerAdequacyExact
 import DASHI.Ontology.MereologyClassOrderNoConfusionExact
 import DASHI.Ontology.WikidataWorkingGroupFullProvenanceEverything
 import DASHI.Ontology.DeweyQidCoverageQualityExact
@@ -28,4 +31,5 @@ import DASHI.Ontology.OntologyRepairEndToEndExact
 import DASHI.Ontology.OntologyRepairEndToEndValidation
 import DASHI.Ontology.OntologyCrosswalkStructuralExact
 import DASHI.Ontology.OntologyCrosswalkStructuralValidation
+import DASHI.Ontology.ConsumerRelativeRepresentationParityValidation
 import Ontology.Hecke.Everything
