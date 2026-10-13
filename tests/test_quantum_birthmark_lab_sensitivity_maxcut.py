@@ -66,6 +66,8 @@ def test_quantum_birthmark_lab_sensitivity_maxcut_registered():
         "quantumReadyOptomechanicalScalingOwned",
         "instrumentTransferSensitivityOwned",
         "systematicsCutOwned",
+        "genericBenchmarkReferences",
+        "birthmarkLaboratoryPredictionRequest",
         "historySignalMagnitudeStillRequiresMicroscopicCoupling",
         "matchedHistorySystematicsBudgetStillRequired",
         "actualHistoryConditionedMeasurementStillRequired",
