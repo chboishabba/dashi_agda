@@ -20,27 +20,35 @@ import DASHI.Physics.Chemistry.AsymmetricChiralDynamicsExact as Dynamics
 -- residual fibre already required downstream of atomic identity.
 ------------------------------------------------------------------------
 
-staticStateOf : Dynamics.ChiralBiasState → Static.ChiralRichState
-staticStateOf Dynamics.leftAmplified = Static.leftHandedState
-staticStateOf Dynamics.leftSeed = Static.leftHandedState
-staticStateOf Dynamics.racemic = Static.leftHandedState
-staticStateOf Dynamics.rightSeed = Static.rightHandedState
-staticStateOf Dynamics.rightAmplified = Static.rightHandedState
+-- Only genuinely chiral seed branches are embedded into the older two-state
+-- separating-pair owner.  The racemic fixed point is intentionally NOT coerced
+-- to either enantiomer merely to make an adapter total.
+data ChiralSeed : Set where
+  leftSeedWitness : ChiralSeed
+  rightSeedWitness : ChiralSeed
 
-leftSeedStaticState : staticStateOf Dynamics.leftSeed ≡ Static.leftHandedState
+dynamicSeed : ChiralSeed → Dynamics.ChiralBiasState
+dynamicSeed leftSeedWitness = Dynamics.leftSeed
+dynamicSeed rightSeedWitness = Dynamics.rightSeed
+
+staticStateOf : ChiralSeed → Static.ChiralRichState
+staticStateOf leftSeedWitness = Static.leftHandedState
+staticStateOf rightSeedWitness = Static.rightHandedState
+
+leftSeedStaticState : staticStateOf leftSeedWitness ≡ Static.leftHandedState
 leftSeedStaticState = refl
 
-rightSeedStaticState : staticStateOf Dynamics.rightSeed ≡ Static.rightHandedState
+rightSeedStaticState : staticStateOf rightSeedWitness ≡ Static.rightHandedState
 rightSeedStaticState = refl
 
 staticSeedCoarseCollision :
-  Static.coarseChart (staticStateOf Dynamics.leftSeed)
-  ≡ Static.coarseChart (staticStateOf Dynamics.rightSeed)
+  Static.coarseChart (staticStateOf leftSeedWitness)
+  ≡ Static.coarseChart (staticStateOf rightSeedWitness)
 staticSeedCoarseCollision = Static.sameCoarsePair
 
 staticSeedResidualSeparation :
-  Static.chiralityResidual (staticStateOf Dynamics.leftSeed)
-  ≡ Static.chiralityResidual (staticStateOf Dynamics.rightSeed) → ⊥
+  Static.chiralityResidual (staticStateOf leftSeedWitness)
+  ≡ Static.chiralityResidual (staticStateOf rightSeedWitness) → ⊥
 staticSeedResidualSeparation = Static.residualsDiffer
 
 futurePredictiveNonDescent : Dynamics.FutureFactorsThroughCoarse → ⊥
@@ -65,6 +73,10 @@ record Atomic369ChiralDynamicsBoundary : Set where
     chiralResidualCanAffectFutureConsumerIsTrue :
       chiralResidualCanAffectFutureConsumer ≡ true
 
+    racemicStateCoercedToAnEnantiomer : Bool
+    racemicStateCoercedToAnEnantiomerIsFalse :
+      racemicStateCoercedToAnEnantiomer ≡ false
+
     atomicValenceDeterminesChiralAutocatalyticDynamics : Bool
     atomicValenceDeterminesChiralAutocatalyticDynamicsIsFalse :
       atomicValenceDeterminesChiralAutocatalyticDynamics ≡ false
@@ -78,5 +90,6 @@ canonicalAtomic369ChiralDynamicsBoundary =
   atomic369ChiralDynamicsBoundary
     true refl
     true refl
+    false refl
     false refl
     false refl
