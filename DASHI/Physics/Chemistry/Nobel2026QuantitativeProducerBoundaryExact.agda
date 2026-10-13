@@ -47,6 +47,7 @@ record SoaiQuantitativeProducer
     RateParameter : Set
 
     initialState : State
+    initialStateTime : Time
     stateAt : Time → State
     eeAt : State → EE M
     productConcentrationAt : Time → Concentration
@@ -60,7 +61,6 @@ record SoaiQuantitativeProducer
 
     initialEEIdentity : eeAt initialState ≡ eeAt (stateAt initialStateTime)
 
-    initialStateTime : Time
     sourceReference : String
     sourceManifestReference : String
     kineticModelReference : String
