@@ -17,6 +17,7 @@ import DASHI.Cognition.EpsteinGlobalSystemicPareto20261013Exact as EpsteinFront
 import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as StateData
 import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as Influence
 import DASHI.Cognition.PsychologicalInfluenceInfrastructureCrossPollinationExact as Psych
+import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as Mobilisation
 
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN SYSTEMIC POWER INFRASTRUCTURE PARETO — 2026-10-13
@@ -32,6 +33,11 @@ import DASHI.Cognition.PsychologicalInfluenceInfrastructureCrossPollinationExact
 -- interest in those stages does not establish common command or technique
 -- transfer; same-object personnel/method receipts are required.
 --
+-- Event ontology and mobilisation are separate coordinates. A real attack can
+-- be strategically exploited; strategic exploitation does not prove staging.
+-- Bannon's public flood-the-zone / opposition-media / administrative-state
+-- doctrines are therefore analysed as explicit playbooks, not inferred traits.
+--
 -- Government/institutional sources are claim-local evidence, not privileged
 -- closure oracles. Self-certification, classified scope and holdings review do
 -- not create a God's-eye view; distrust likewise does not invert every state
@@ -46,6 +52,7 @@ data PowerLane : Set where
   militaryAIIntelligenceInfrastructure : PowerLane
   corporateBoardExposureTopology : PowerLane
   trumpBannonCAMediaInfluence : PowerLane
+  bondiSecurityMobilisationInstitutionalisation : PowerLane
   project2025PersonnelStateCapacity : PowerLane
   palantirStateDataProcurement : PowerLane
   proIsraelAdvocacyElectionSpending : PowerLane
@@ -76,13 +83,15 @@ canonicalPowerFront =
   ∷ power-profile corporateBoardExposureTopology 97 true true true false true true
     "Systematic board/contact exposure and market incidence, with person/firm underlying-document debt."
   ∷ power-profile trumpBannonCAMediaInfluence 96 true true true true true true
-    "Mar-a-Lago access/recruitment, Bannon/Epstein media work, Cambridge-Analytica influence infrastructure and TPUSA narrative pressure form the strongest live psychological-influence acquisition lane. Same-technique reuse, common command and outcome causation remain separately unpaid."
+    "Mar-a-Lago access/recruitment, Bannon/Epstein media work, Cambridge-Analytica influence infrastructure, TPUSA narrative pressure and Bannon's explicit flood-the-zone/opposition-media playbook form the strongest live psychological-influence acquisition lane. Same-technique reuse, common command and outcome causation remain separately unpaid."
+  ∷ power-profile bondiSecurityMobilisationInstitutionalisation 96 true true true true true true
+    "The post-Bondi sequence supplies a concrete event-to-capacity mobilisation case: security/antisemitism framing, Herzog solidarity diplomacy, protest restrictions and policing, hate-speech policy activity, and a Royal Commission with media and intelligence/security hearing blocks. Later judicial invalidation of one protest-law expansion makes benefit/burden/reversibility analysis especially valuable."
   ∷ power-profile project2025PersonnelStateCapacity 95 true true true true true true
     "Policy/personnel/training/playbook conversion into state roles and durable administrative capacity. Cross-pollination asks whether documented campaign/influence selection techniques transfer into personnel/training/state implementation; similarity alone does not pay transfer."
   ∷ power-profile palantirStateDataProcurement 94 true true true true true true
     "Current state procurement/data integration and enforcement systems are paid. Their trace->entity->relation->classification->intervention topology is formally comparable to influence infrastructure, but surveillance/legibility does not by itself become persuasion or psychological warfare."
   ∷ power-profile proIsraelAdvocacyElectionSpending 90 true true true false true true
-    "AIPAC/UDP lobbying and electoral spending are public, source-paid political influence infrastructure. Spending/advocacy does not establish covert psychological warfare, secret command, procurement selection or identity-wide collective agency."
+    "Named pro-Israel/Zionist political advocacy and electoral-spending organisations are valid political actors for incidence analysis. Spending/advocacy does not establish covert psychological warfare, secret command, procurement selection or identity-wide collective agency. Christian-Zionist political networks are likewise analysed as specific political organisations rather than Christianity as a whole."
   ∷ power-profile australiaPineGapResourcePoliticalEconomy 89 true true true true true true
     "Pine Gap is a joint-global intelligence site whose data experts assess as feeding current US Middle-East targeting chains; exact datum-to-strike attribution remains unpaid. Whitlam-era sovereignty conflict provides historical precedent for institutional opacity and allied-intelligence tension without proving CIA causation of the 1975 dismissal."
   ∷ []
@@ -98,6 +107,8 @@ record CanonicalPowerBoundary : Set where
     contractorContinuityIsSingleCommand : Bool
     sharedInfluenceInterestIsCommonPsychologicalOperation : Bool
     techniqueSimilarityIsTechniqueTransfer : Bool
+    strategicMobilisationImpliesStagedEvent : Bool
+    beneficiaryStatusImpliesEventAuthorship : Bool
     infrastructureIntersectionIsWorthInvestigating : Bool
     publicStatementsAreValidIdeologyReceipts : Bool
     independentAdversarialCoverageRequiredForStrongClosure : Bool
@@ -106,15 +117,16 @@ open CanonicalPowerBoundary public
 
 canonicalPowerBoundary : CanonicalPowerBoundary
 canonicalPowerBoundary = canonical-power-boundary
-  false false false false false false false false true true true true
+  false false false false false false false false false false true true true true
 
 data InfrastructureIntersectionImpliesConspiracy : Set where
 data LobbyingImpliesEveryPolicyOutcome : Set where
 data PublicBeliefImpliesCriminalIntent : Set where
 data StateInvestigationImpliesQuestionClosed : Set where
 data SharedInfluenceInterestImpliesCommonOperation : Set where
-
 data SimilarInfluenceTechniqueImpliesTransfer : Set where
+data MobilisationImpliesStaging : Set where
+data BenefitImpliesEventAuthorship : Set where
 
 intersectionDoesNotCreateConspiracy : InfrastructureIntersectionImpliesConspiracy → ⊥
 intersectionDoesNotCreateConspiracy ()
@@ -135,3 +147,9 @@ sharedInfluenceInterestDoesNotCreateCommonOperation ()
 similarInfluenceTechniqueDoesNotCreateTransfer :
   SimilarInfluenceTechniqueImpliesTransfer → ⊥
 similarInfluenceTechniqueDoesNotCreateTransfer ()
+
+mobilisationDoesNotCreateStaging : MobilisationImpliesStaging → ⊥
+mobilisationDoesNotCreateStaging ()
+
+benefitDoesNotCreateEventAuthorship : BenefitImpliesEventAuthorship → ⊥
+benefitDoesNotCreateEventAuthorship ()
