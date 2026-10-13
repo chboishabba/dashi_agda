@@ -8,39 +8,16 @@ import DASHI.Biology.IIT4FiniteProbabilityRepertoireExact as Prob
 ------------------------------------------------------------------------
 -- IIT 4.0 SYSTEM-PHI INPUT SPINE
 --
--- Albantakis et al. IIT 4.0 equations 19--23 use directed partitions, compare
--- unpartitioned and partitioned probabilities on cause/effect sides, multiply
--- the positive logarithmic ratio by a selectivity probability, take the minimum
--- of cause/effect irreducibility, and choose a normalized minimum partition.
+-- Albantakis et al. IIT 4.0 equations 19--23 use directional partitions,
+-- compare unpartitioned and partitioned probabilities on cause/effect sides,
+-- multiply the positive logarithmic ratio by a selectivity probability, take
+-- the minimum of cause/effect irreducibility, and choose a normalized minimum
+-- partition.
 --
--- This module makes every finite/discrete input typed and exact.  The analytic
--- `log` and score order are deliberately supplied by a scalar backend rather
--- than fabricated from Nat fractions.
+-- The directional partition object is owned once, in the finite causal core.
+-- This module makes the scalar inputs and MIP obligation explicit without
+-- rebuilding that partition vocabulary.
 ------------------------------------------------------------------------
-
-data CutDirection : Set where
-  cutInputs : CutDirection
-  cutOutputs : CutDirection
-  cutBoth : CutDirection
-
-record DirectedPart (system : IIT4.FiniteCausalSystem) : Set where
-  constructor directedPart
-  field
-    member : IIT4.UnitOf system → Bool
-    direction : CutDirection
-    partLabel : String
-
-open DirectedPart public
-
-record DirectedPartition (system : IIT4.FiniteCausalSystem) : Set where
-  constructor directedPartition
-  field
-    parts : List (DirectedPart system)
-    partitionLabel : String
-    affectedConnectionCount : Nat
-    nontrivialityReceipt : String
-
-open DirectedPartition public
 
 -- Input data for equations of the form
 --   p * | log (p / p_partitioned) |_+.
@@ -84,7 +61,7 @@ record CauseEffectPartitionInput
     (system : IIT4.FiniteCausalSystem) : Set where
   constructor causeEffectPartitionInput
   field
-    directedCut : DirectedPartition system
+    directedCut : IIT4.SystemPartition system
     causeLoss : ProbabilityLossInput
     effectLoss : ProbabilityLossInput
     specifiedCauseState : IIT4.StateOf system
@@ -109,7 +86,7 @@ normalizedSystemPhiAtPartition :
 normalizedSystemPhiAtPartition backend input =
   normalizedPartitionScore backend
     (systemPhiAtPartition backend input)
-    (affectedConnectionCount (directedCut input))
+    (IIT4.affectedConnectionCount (directedCut input))
 
 record MinimumPartitionWitness
     (backend : IntrinsicInformationScalarBackend)
@@ -149,18 +126,19 @@ open SystemPhiEvaluation public
 -- Normalization ownership.
 -- IIT 4.0 uses the maximum possible number of affected pairwise interactions
 -- for a partition as the normalization factor.  We retain that count as an
--- explicit field, not as the final unnormalised phi_s value.
+-- explicit field on the canonical partition, not as the final unnormalised
+-- phi_s value.
 ------------------------------------------------------------------------
 
 record PartitionNormalizationReceipt
     {system : IIT4.FiniteCausalSystem}
-    (partition : DirectedPartition system) : Set where
+    (partition : IIT4.SystemPartition system) : Set where
   constructor partitionNormalizationReceipt
   field
     computedAffectedConnectionCount : Nat
     countMatchesPartition :
       computedAffectedConnectionCount ≡
-      affectedConnectionCount partition
+      IIT4.affectedConnectionCount partition
     normalizationIsNotUnnormalizedPhi : Bool
 
 open PartitionNormalizationReceipt public
@@ -168,7 +146,7 @@ open PartitionNormalizationReceipt public
 record IIT4SystemPhiBoundary : Set where
   constructor iit4SystemPhiBoundary
   field
-    directedPartsDistinguishInputOutputBothCuts : Bool
+    reusesCanonicalDirectionalPartition : Bool
     causeAndEffectLossesRemainSeparate : Bool
     systemPhiAtCutIsMinimumCauseEffect : Bool
     MIPUsesNormalizedComparison : Bool
