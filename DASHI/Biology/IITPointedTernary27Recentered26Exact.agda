@@ -14,7 +14,7 @@ module DASHI.Biology.IITPointedTernary27Recentered26Exact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Sum.Base using (inj₂)
+open import Data.Sum.Base using (_⊎_; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
@@ -177,6 +177,12 @@ recenteredNonActiveNeverHitsSelected active q equality =
         (cong (recenterPoint active) equality)
         (recenterSelectedCubieIsOrigin active))
 
+inj₂Injective :
+  ∀ {A B : Set} {x y : B} →
+  (inj₂ x : A ⊎ B) ≡ inj₂ y →
+  x ≡ y
+inj₂Injective refl = refl
+
 nonActiveToCubieInjective :
   {left right : RecenteredNonActive26} →
   Origin26.nonActiveToCubie left ≡ Origin26.nonActiveToCubie right →
@@ -191,12 +197,6 @@ nonActiveToCubieInjective {left} {right} equality =
       (trans
         (cong Shape26.toAlbertShape equality)
         (Shape26.toAfterFrom (inj₂ right)))
-
-  inj₂Injective :
-    ∀ {A B : Set} {x y : B} →
-    (Data.Sum.Base._⊎_.inj₂ {A = A} x ≡ Data.Sum.Base._⊎_.inj₂ {A = A} y) →
-    x ≡ y
-  inj₂Injective refl = refl
 
 recenteredNonActiveInjective :
   (active : Geometry.Ternary27Point) →
