@@ -21,6 +21,8 @@ def test_quantum_birthmark_lab_sensitivity_maxcut_registered():
         "two_sigma_fractional_transfer",
         "required_hours",
         "history_only_signal",
+        "required_fractional_precision_improvement",
+        "white_noise_time_multiplier",
     ]:
         assert token in script_text
 
@@ -40,6 +42,7 @@ def test_quantum_birthmark_lab_sensitivity_maxcut_registered():
         "atomOneSigmaFractionalTransferSquared",
         "optoTenPercentUnitSNRUpperHours",
         "optoOnePercentUnitSNRUpperHours",
+        "onePercentFiveSigmaTimePenalty",
         "transferSensitivityIsNotHistoryConstraint",
         "nonzeroHistoryCouplingStillNotPredicted",
     ]:
