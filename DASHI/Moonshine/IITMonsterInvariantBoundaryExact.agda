@@ -1,6 +1,7 @@
 module DASHI.Moonshine.IITMonsterInvariantBoundaryExact where
 
 open import DASHI.Core.Prelude
+open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BCyclotomicNormSeparationExact as NormSeparation
@@ -15,7 +16,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 -- detect zero while still being too coarse to recover phase/state identity.
 ------------------------------------------------------------------------
 
-normObserver : C3.Cyclotomic3 → Data.Rational.Base.ℚ
+normObserver : C3.Cyclotomic3 → ℚ
 normObserver = C3.norm
 
 phaseIdentityConsumer : C3.Cyclotomic3 → C3.Cyclotomic3
@@ -47,7 +48,7 @@ normCannotRecoverC3Phase =
 
 normZeroStillSeparatesZero :
   (value : C3.Cyclotomic3) →
-  C3.norm value ≡ Data.Rational.Base.0ℚ →
+  C3.norm value ≡ 0ℚ →
   value ≡ C3.zero
 normZeroStillSeparatesZero = NormSeparation.normZeroImpliesZero
 
