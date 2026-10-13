@@ -24,6 +24,29 @@ reportedEndurantRelationIsBridge :
   relation gsoDolceEndurantCrosswalk ≡ bridge
 reportedEndurantRelationIsBridge = refl
 
+qualityRowIsStillSourceObservedOnly :
+  authority gsoDolceQualityCrosswalk ≡ sourceObservedOnly
+qualityRowIsStillSourceObservedOnly = refl
+
+qualitySourceRowCannotAssertTruth :
+  CrosswalkTruthPermission (authority gsoDolceQualityCrosswalk) → ⊥
+qualitySourceRowCannotAssertTruth = sourceObservationIsNotOntologyTruth
+
+boundedQualityCompatibilityExists :
+  StructuralCompatibility gsoQuality dolceQuality
+boundedQualityCompatibilityExists = gsoDolceQualityStructuralCompatibility
+
+boundedQualityCompatibilityDoesNotSelfPromote :
+  StructuralCompatibility gsoQuality dolceQuality →
+  CrosswalkTruthPermission sourceObservedOnly → ⊥
+boundedQualityCompatibilityDoesNotSelfPromote _ = sourceObservationIsNotOntologyTruth
+
+strongEquivalenceCarriesReviewedAdmission :
+  {left right : CrosswalkConcept} →
+  StrongEquivalence left right →
+  CrosswalkTruthPermission reviewedAdmission
+strongEquivalenceCarriesReviewedAdmission = reviewedPermission
+
 bridgeCompilesConservatively :
   SSSOM.MappingPredicate
 bridgeCompilesConservatively = compileRelationPredicate bridge
@@ -32,9 +55,9 @@ bridgeCompilesToLocalCorrespondence :
   compileRelationPredicate bridge ≡ SSSOM.localCorrespondence
 bridgeCompilesToLocalCorrespondence = refl
 
-strongEquivalenceCompilesToOwlEquivalence :
+strongEquivalenceRelationCompilesToOwlEquivalence :
   compileRelationPredicate equivalent ≡ SSSOM.owlEquivalentClass
-strongEquivalenceCompilesToOwlEquivalence = refl
+strongEquivalenceRelationCompilesToOwlEquivalence = refl
 
 equivalenceIsLeftIdentity :
   composeRelation equivalent narrower ≡ narrower
@@ -51,6 +74,10 @@ mixedDirectionsDoNotManufactureEquivalence = refl
 weakBridgeRemainsWeakUnderComposition :
   composeRelation bridge equivalent ≡ bridge
 weakBridgeRemainsWeakUnderComposition = refl
+
+disjointDoesNotManufactureEquivalenceUnderComposition :
+  composeRelation disjoint equivalent ≡ disjoint
+disjointDoesNotManufactureEquivalenceUnderComposition = refl
 
 sourceObservationCannotAssertTruth :
   CrosswalkTruthPermission sourceObservedOnly → ⊥
