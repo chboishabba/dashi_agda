@@ -1,6 +1,6 @@
 module DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact where
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -112,8 +112,8 @@ llmOnlyCannotAuthorizeDestructiveRepair :
   LLMOnlyDestructiveRepairPermission → ⊥
 llmOnlyCannotAuthorizeDestructiveRepair ()
 
-repairProposalRemainsReviewOnly : Repair.RepairProposalAuthority
-repairProposalRemainsReviewOnly = Repair.proposalForReviewOnly
+repairProposalReviewAuthority : Repair.RepairProposalAuthority
+repairProposalReviewAuthority = Repair.proposalForReviewOnly
 
 repairProposalStillCannotAssertTruth :
   Repair.RepairProposalTruthPermission Repair.proposalForReviewOnly → ⊥
@@ -143,6 +143,10 @@ record GovernedConsumerUse
 
 open GovernedConsumerUse public
 
+------------------------------------------------------------------------
+-- GOVERNANCE STATUS
+------------------------------------------------------------------------
+
 record RepairUseBoundary : Set where
   constructor repairUseBoundary
   field
@@ -150,16 +154,22 @@ record RepairUseBoundary : Set where
     pnfPressureAloneIsOntologyTruth : Bool
     admissibilityRequiredBeforeUse : Bool
     factorisationRequiredPerConsumerQuery : Bool
-    repairProposalRemainsReviewOnly : Bool
+    repairProposalIsReviewOnly : Bool
 
-    llmSignalAloneIsEditAuthorityIsFalse : llmSignalAloneIsEditAuthority ≡ Bool.false
-    pnfPressureAloneIsOntologyTruthIsFalse : pnfPressureAloneIsOntologyTruth ≡ Bool.false
-    admissibilityRequiredBeforeUseIsTrue : admissibilityRequiredBeforeUse ≡ true
+    llmSignalAloneIsEditAuthorityIsFalse :
+      llmSignalAloneIsEditAuthority ≡ false
+    pnfPressureAloneIsOntologyTruthIsFalse :
+      pnfPressureAloneIsOntologyTruth ≡ false
+    admissibilityRequiredBeforeUseIsTrue :
+      admissibilityRequiredBeforeUse ≡ true
     factorisationRequiredPerConsumerQueryIsTrue :
       factorisationRequiredPerConsumerQuery ≡ true
-    repairProposalRemainsReviewOnlyIsTrue : repairProposalRemainsReviewOnly ≡ true
+    repairProposalIsReviewOnlyIsTrue : repairProposalIsReviewOnly ≡ true
 
-------------------------------------------------------------------------
--- The Bool module is imported with true only above; use a small local false
--- alias through the builtin constructor to keep the status explicit.
-------------------------------------------------------------------------
+open RepairUseBoundary public
+
+canonicalRepairUseBoundary : RepairUseBoundary
+canonicalRepairUseBoundary =
+  repairUseBoundary
+    false false true true true
+    refl refl refl refl refl
