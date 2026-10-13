@@ -12,10 +12,12 @@ def test_terminal_concrete_instantiation_registered():
         "siPlanckCalibrationRecorded",
         "codataNewtonCalibrationRecorded",
         "entropyDensityExpansionCompilerRegistered",
+        "preferredResidualEq223AdapterRegistered",
         "positiveGAntigravityEndpointRegistered",
         "flrwExpansionEndpointRegistered",
         "preferredCMP119SignRouteRegistered",
         "declaredBenchmarkResidualEmpty",
     ]:
         assert token in owner
+    assert "QuantumBirthmarkResidualEq223ExpansionExact" in owner
     assert "QuantumBirthmarkTerminalConcreteInstantiationExact" in rollup
