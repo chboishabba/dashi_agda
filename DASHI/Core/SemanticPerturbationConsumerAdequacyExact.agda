@@ -34,8 +34,9 @@ SemanticPreserving :
     {questions : Factor.InquiryQuestionFamily State Query}
     {query : Query} →
   ConsumerPerturbation questions query → Set
-SemanticPreserving perturbation =
-  (answer : Factor.Answer _ _) → actAnswer perturbation answer ≡ answer
+SemanticPreserving {questions = questions} {query = query} perturbation =
+  (answer : Factor.Answer questions query) →
+  actAnswer perturbation answer ≡ answer
 
 semanticPreservingLeavesConsumerInvariant :
   ∀ {State Query}
@@ -46,10 +47,12 @@ semanticPreservingLeavesConsumerInvariant :
   (state : State) →
   Factor.ask questions query (actState perturbation state)
   ≡ Factor.ask questions query state
-semanticPreservingLeavesConsumerInvariant perturbation preserving state =
+semanticPreservingLeavesConsumerInvariant
+    {questions = questions} {query = query}
+    perturbation preserving state =
   trans
     (commutes perturbation state)
-    (preserving (Factor.ask _ _ state))
+    (preserving (Factor.ask questions query state))
 
 ------------------------------------------------------------------------
 -- Representation-level commuting square.
@@ -87,17 +90,18 @@ representationSquareImpliesConsumerPerturbation :
   (state : State) →
   Factor.ask questions query (actState perturbation state)
   ≡ actAnswer perturbation (Factor.ask questions query state)
-representationSquareImpliesConsumerPerturbation witness state =
+representationSquareImpliesConsumerPerturbation
+    {project = project} {perturbation = perturbation} witness state =
   trans
     (Factor.factorisation (factorisationReceipt witness)
-      (actState _ state))
+      (actState perturbation state))
     (trans
       (cong
         (Factor.quotientAnswer (factorisationReceipt witness))
         (representationCommutes witness state))
       (trans
         (quotientCommutes witness (project state))
-        (cong (actAnswer _)
+        (cong (actAnswer perturbation)
           (sym (Factor.factorisation (factorisationReceipt witness) state)))))
 
 record SemanticPerturbationBoundary : Set where
