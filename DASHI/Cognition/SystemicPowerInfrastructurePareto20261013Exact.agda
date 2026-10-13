@@ -20,6 +20,8 @@ import DASHI.Cognition.PsychologicalInfluenceInfrastructureCrossPollinationExact
 import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as Mobilisation
 import DASHI.Cognition.NickLandProvocationOverreactionPopulistTransferExact as Overreaction
 import DASHI.Cognition.EpsteinBannonAICapitalReflexivityCrossPollinationExact as AICapital
+import DASHI.Cognition.BlackRockMirvacSpringfieldCapitalOverlapExact as SpringfieldOverlap
+import DASHI.Cognition.SpringfieldLayeredValueCaptureParetoExact as SpringfieldValue
 
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN SYSTEMIC POWER INFRASTRUCTURE PARETO — 2026-10-13
@@ -29,9 +31,11 @@ data PowerLane : Set where
   bankingComplianceEliteAccess : PowerLane
   militaryAIIntelligenceInfrastructure : PowerLane
   epsteinAICapitalReflexivity : PowerLane
+  housingPrivateCapitalConcentration : PowerLane
   cbpBorderOperationalAccess : PowerLane
   provocationOverreactionInstitutionalLockIn : PowerLane
   corporateBoardExposureTopology : PowerLane
+  springfieldLayeredCapitalMicrocosm : PowerLane
   trumpBannonCAMediaInfluence : PowerLane
   bondiSecurityMobilisationInstitutionalisation : PowerLane
   project2025PersonnelStateCapacity : PowerLane
@@ -58,17 +62,21 @@ open PowerProfile public
 canonicalPowerFront : List PowerProfile
 canonicalPowerFront =
   power-profile bankingComplianceEliteAccess 100 true true true true true true
-    "Transactions, compliance exceptions, client retention and elite-access benefits remain the highest direct-evidence/beneficiary-incidence seam. Government/regulator descriptions remain claim-local rather than terminal closure."
+    "Transactions, compliance exceptions, client retention and elite-access benefits remain the highest direct-evidence/beneficiary-incidence seam. Leon Black/Apollo is a paid Epstein-finance bridge; adjacent private-capital firms must be resolved separately rather than inferred from sector proximity."
   ∷ power-profile militaryAIIntelligenceInfrastructure 99 true true true true true true
     "Project Maven origin -> Google participation/worker dissent -> Palantir Maven expansion -> 2026 core-program status -> Iran targeting use, alongside Pine Gap Middle-East SIGINT/targeting-chain participation. This shares an observer/classification/intervention grammar with influence systems but kinetic decision support is not thereby psychological warfare."
   ∷ power-profile epsteinAICapitalReflexivity 99 true true true true true true
-    "Epstein's documented/self-described AI patronage and Thiel/Valar/Palantir adjacency are cross-read with the current AI financing/reflexivity system. BlackRock is strongly paid as a current AI-infrastructure capital allocator but a direct Epstein-BlackRock institutional relationship remains unresolved; Leon Black/Apollo is a separate paid Epstein-finance lane and must not be conflated with BlackRock."
+    "Epstein's documented/self-described AI patronage and Thiel/Valar/Palantir adjacency are cross-read with the current AI financing/reflexivity system. BlackRock, Apollo, Blackstone, Brookfield, KKR and others are current AI/infrastructure capital allocators; sectoral intersection does not establish a single coordinated command."
+  ∷ power-profile housingPrivateCapitalConcentration 99 true true true true true true
+    "Housing is a first-class rentier-capital lane rather than a Woogaroo side analogy: large private-capital/asset-management actors capture value through mortgages, rental platforms, build-to-rent, listed property, debt and securitised/contracted housing cashflows. Direct asset ownership, financing, portfolio exposure and operational control must remain distinct."
   ∷ power-profile cbpBorderOperationalAccess 98 true true true true true true
     "Border personnel and inspection discretion at an operational perimeter; officer-level access decisions require primary resolution. Agency self-investigation does not close trafficking-knowledge or broader-facilitation questions."
   ∷ power-profile provocationOverreactionInstitutionalLockIn 98 true true true true true true
     "Post-9/11 provocation scholarship and the War on Terror supply the canonical target-overreaction mechanism: an attacker can gain strategically from a target's costly, polarising or rights-eroding response without controlling that response. The same recursive form is a comparator for Bondi/security mobilisation and other crisis-to-capacity transitions, without identifying their causes."
   ∷ power-profile corporateBoardExposureTopology 97 true true true false true true
     "Systematic board/contact exposure and market incidence, with person/firm underlying-document debt."
+  ∷ power-profile springfieldLayeredCapitalMicrocosm 97 true true true true true true
+    "Greater Springfield is now a high-resolution local incidence microcosm: Springfield City Group master-developer land allocation; Mirvac's 100%-owned Orion retail/land asset; BlackRock's substantial Mirvac equity exposure; Gordon Corp/Mathieson family's AUD 50m City West parcel acquisition; historical Springfield gas/electric alliance; registered lobbying; Azure/LNP donation and project links; nearby datacentre pressure. These are layered value-capture edges, not proof of common control."
   ∷ power-profile trumpBannonCAMediaInfluence 96 true true true true true true
     "Mar-a-Lago access/recruitment, Bannon/Epstein media work, Cambridge-Analytica influence infrastructure, TPUSA narrative pressure and Bannon's explicit flood-the-zone/opposition-media playbook form the strongest live psychological-influence acquisition lane. Same-technique reuse, common command and outcome causation remain separately unpaid."
   ∷ power-profile bondiSecurityMobilisationInstitutionalisation 96 true true true true true true
@@ -106,6 +114,9 @@ record CanonicalPowerBoundary : Set where
     trumpStyleEmulationProvesBannonTransfer : Bool
     aiCapitalIntersectionImpliesEpsteinControl : Bool
     leonBlackRelationshipImpliesBlackRockRelationship : Bool
+    listedEquityExposureImpliesOperationalControl : Bool
+    parcelOwnershipImpliesMasterDeveloperControl : Bool
+    layeredValueCaptureImpliesCommonCommand : Bool
     infrastructureIntersectionIsWorthInvestigating : Bool
     publicStatementsAreValidIdeologyReceipts : Bool
     independentAdversarialCoverageRequiredForStrongClosure : Bool
@@ -114,7 +125,7 @@ open CanonicalPowerBoundary public
 
 canonicalPowerBoundary : CanonicalPowerBoundary
 canonicalPowerBoundary = canonical-power-boundary
-  false false false false false false false false false false false false false false false false true true true true
+  false false false false false false false false false false false false false false false false false false false true true true true
 
 data InfrastructureIntersectionImpliesConspiracy : Set where
 data LobbyingImpliesEveryPolicyOutcome : Set where
@@ -130,6 +141,9 @@ data CrisisFramingImpliesFabrication : Set where
 data TrumpStyleImpliesBannonTransfer : Set where
 data AICapitalIntersectionImpliesEpsteinControl : Set where
 data LeonBlackImpliesBlackRock : Set where
+data ListedEquityImpliesOperationalControl : Set where
+data ParcelOwnershipImpliesMasterControl : Set where
+data LayeredCaptureImpliesCommonCommand : Set where
 
 intersectionDoesNotCreateConspiracy : InfrastructureIntersectionImpliesConspiracy → ⊥
 intersectionDoesNotCreateConspiracy ()
@@ -172,3 +186,12 @@ aiCapitalIntersectionDoesNotCreateEpsteinControl ()
 
 leonBlackDoesNotCreateBlackRock : LeonBlackImpliesBlackRock → ⊥
 leonBlackDoesNotCreateBlackRock ()
+
+listedEquityDoesNotCreateOperationalControl : ListedEquityImpliesOperationalControl → ⊥
+listedEquityDoesNotCreateOperationalControl ()
+
+parcelOwnershipDoesNotCreateMasterControl : ParcelOwnershipImpliesMasterControl → ⊥
+parcelOwnershipDoesNotCreateMasterControl ()
+
+layeredCaptureDoesNotCreateCommonCommand : LayeredCaptureImpliesCommonCommand → ⊥
+layeredCaptureDoesNotCreateCommonCommand ()
