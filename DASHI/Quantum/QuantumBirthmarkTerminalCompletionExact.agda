@@ -16,6 +16,7 @@ import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as Expan
 import DASHI.Quantum.QuantumBirthmarkResidualEq223ExpansionExact as PreferredResidual
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact as Antigravity
 import DASHI.Quantum.QuantumBirthmarkHistoryDarkEnergyTerminalMaxCutExact as HistoryDarkEnergy
+import DASHI.Quantum.QuantumBirthmarkLaboratorySensitivityMaxCutExact as LabSensitivity
 
 record TerminalCompletionReceipt : Set where
   constructor terminalCompletionReceipt
@@ -30,8 +31,10 @@ record TerminalCompletionReceipt : Set where
     preferredResidualEq223ExpansionCompilerOwned : Bool
     antigravityExpansionTerminalOwned : Bool
     historyDarkEnergyMaxCutOwned : Bool
+    laboratoryTransferSensitivityOwned : Bool
     historyDarkEnergyMicroscopicDynamicsSolved : Bool
     historyDarkEnergyGlobalContinuumSolved : Bool
+    matchedHistoryMeasurementCompleted : Bool
     historyDarkEnergyEmpiricallyEstablished : Bool
     terminalAuthorityLedgerOwned : Bool
     noFurtherGenericFormalCompositionDebt : Bool
@@ -39,8 +42,8 @@ record TerminalCompletionReceipt : Set where
 canonicalTerminalCompletionReceipt : TerminalCompletionReceipt
 canonicalTerminalCompletionReceipt =
   terminalCompletionReceipt
-    true true true true true true true true true true
-    false false false
+    true true true true true true true true true true true
+    false false false false
     true true
 
 data ResidualCategory : Set where
@@ -84,11 +87,18 @@ historyDarkEnergyMaxCutOwned : Bool
 historyDarkEnergyMaxCutOwned =
   HistoryDarkEnergy.historyDarkEnergySteelmanCrossPollinated
 
+laboratoryTransferSensitivityOwned : Bool
+laboratoryTransferSensitivityOwned =
+  LabSensitivity.instrumentTransferSensitivityOwned
+
 historyDarkEnergyMicroscopicDynamicsSolved : Bool
 historyDarkEnergyMicroscopicDynamicsSolved = false
 
 historyDarkEnergyGlobalContinuumSolved : Bool
 historyDarkEnergyGlobalContinuumSolved = false
+
+matchedHistoryMeasurementCompleted : Bool
+matchedHistoryMeasurementCompleted = false
 
 historyDarkEnergyEmpiricallyEstablished : Bool
 historyDarkEnergyEmpiricallyEstablished = false
@@ -112,4 +122,4 @@ declaredBenchmarkHasConcreteCompletionOwner = true
 
 statusStatement : String
 statusStatement =
-  "Terminal completion now includes the history-sector dark-energy max-cut: finite history/action carriers, common QFT/GR metric-variation compilers, residual-to-CMP119 and preferred Eq.(2.23) sign consumers, H^2/CPL phenomenology, observational calibration, two-vacuum/repulsive geometry fixtures, finite wall/bounce witnesses, local core regularity, and experiment-discriminator carriers are all represented. This does not promote the history-dark-energy hypothesis to a solved or observed theory: its remaining debt is explicit microscopic source dynamics, source sign inequalities, parameter-free magnitude/scaling, continuum/global regularity or bounce, and measurement—not another generic formal weld."
+  "Terminal completion includes the history-sector dark-energy max-cut and the item-4 laboratory transfer-sensitivity cut. Finite history/action carriers, common QFT/GR metric variation, residual-to-CMP119 and preferred Eq.(2.23) sign consumers, H^2/CPL phenomenology, observational calibration, two-vacuum/repulsive geometry fixtures, finite wall/bounce witnesses, local core regularity, matched-history experiment design, current milligram/atom/optomechanical transfer benchmarks, and sensitivity scaling are represented. The remaining debt is microscopic source dynamics including the laboratory epsilon_H coupling, continuum/global solutions, parameter-free magnitude/scaling, a realized matched-history preparation with closed numerical systematics, and actual measurement."
