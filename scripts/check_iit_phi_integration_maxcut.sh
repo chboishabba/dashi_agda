@@ -6,7 +6,10 @@ ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 required_files=(
   DASHI/Core/IntegrationConsumerDescentOrderExact.agda
   DASHI/Biology/IIT4FiniteCausalStructureExact.agda
+  DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda
+  DASHI/Biology/IIT4SystemPhiInputExact.agda
   DASHI/Biology/IITXORGridAdversarialExact.agda
+  DASHI/Biology/IITXORProbabilityReceiptExact.agda
   DASHI/Biology/IITCyclotomicFourierObserverExact.agda
   DASHI/Biology/IITBalancedTernary369HierarchyExact.agda
   DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda
@@ -37,6 +40,19 @@ require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'phiRelation : CausalR
 require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'bigPhi :'
 require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'historicalCounterexampleVersionBoundary'
 
+require DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda 'effectConditionalFraction'
+require DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda 'unconstrainedEffectFraction'
+require DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda 'FiniteCauseRepertoire'
+require DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda 'PartitionedProbability'
+require DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda 'finiteFractionsDoNotManufactureLogs'
+
+require DASHI/Biology/IIT4SystemPhiInputExact.agda 'data CutDirection'
+require DASHI/Biology/IIT4SystemPhiInputExact.agda 'integratedSideScore'
+require DASHI/Biology/IIT4SystemPhiInputExact.agda 'systemPhiAtPartition'
+require DASHI/Biology/IIT4SystemPhiInputExact.agda 'normalizedSystemPhiAtPartition'
+require DASHI/Biology/IIT4SystemPhiInputExact.agda 'MinimumPartitionWitness'
+require DASHI/Biology/IIT4SystemPhiInputExact.agda 'normalizerIsNotPhiByDefinition'
+
 require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'orderFailureBlocksPreservation'
 require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'nonDescentBlocksScoreFactorization'
 require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'structuralScoreDoesNotSelfPromote'
@@ -46,6 +62,11 @@ require DASHI/Biology/IITXORGridAdversarialExact.agda 'xorDeterministicStepRecei
 require DASHI/Biology/IITXORGridAdversarialExact.agda 'parityCannotFactorLeftBit'
 require DASHI/Biology/IITXORGridAdversarialExact.agda 'lineAndSquareCutCountsDiffer'
 require DASHI/Biology/IITXORGridAdversarialExact.agda 'graphCutIsNotSilentlyPromotedToIIT4'
+
+require DASHI/Biology/IITXORProbabilityReceiptExact.agda 'totalTransitionWeightIsFour'
+require DASHI/Biology/IITXORProbabilityReceiptExact.agda 'conditional10to11IsCertain'
+require DASHI/Biology/IITXORProbabilityReceiptExact.agda 'unconstrained11IsOneQuarter'
+require DASHI/Biology/IITXORProbabilityReceiptExact.agda 'unpartitionedProbabilitiesDoNotManufacturePhi'
 
 require DASHI/Biology/IITCyclotomicFourierObserverExact.agda 'fourier27IdentitySufficient'
 require DASHI/Biology/IITCyclotomicFourierObserverExact.agda 'firstCoefficientCannotRecoverTail'
@@ -66,6 +87,8 @@ require DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda 'normZeroStillSepa
 require DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda 'singleCoefficientCannotRecoverNextCoefficient'
 require DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda 'finitePackagingIsNotAnalyticContinuation'
 
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT4FiniteProbabilityRepertoireExact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IIT4SystemPhiInputExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Analysis.IITZetaGeneratingBoundaryExact'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 
