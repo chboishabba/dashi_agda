@@ -7,16 +7,13 @@ import Data.Integer.Base as Int
 open import Data.Rational.Base using (_/_; -_)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
+import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 import DASHI.Quantum.QuantumBirthmarkCommonHistoryIdentityBenchmarkExact as Birthmark
 import DASHI.Quantum.QuantumBirthmarkFiniteOrderParameterCouplingExact as Coupling
 
-------------------------------------------------------------------------
--- FINITE BIRTHMARK -> VACUUM-STRESS RAY
-------------------------------------------------------------------------
-
 birthmarkVacuumStress :
-  Birthmark.BirthmarkClass → Vacuum.Stress.RationalTensor4
+  Birthmark.BirthmarkClass → Stress.RationalTensor4
 birthmarkVacuumStress birthmark =
   Vacuum.vacuumStressAt (Coupling.birthmarkVacuumEnergy birthmark)
 
