@@ -8,6 +8,8 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants369
 import DASHI.Reasoning.RelationalBranchCobordismGeometry as Cobordism
+import DASHI.Reasoning.TernaryPantsSynthesisS3BridgeExact as PantsS3
+import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact as Trialectic
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as PantsGeometry
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 
@@ -20,7 +22,9 @@ import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 --   * nine-sheet/product coordinates,
 --   * a canonical finite 1 -> 3 pants junction,
 --   * arbitrary-depth ternary pants paths,
---   * exact nine-sheet <-> depth-2 and 27-voxel <-> depth-3 pants charts.
+--   * exact nine-sheet <-> depth-2 and 27-voxel <-> depth-3 pants charts,
+--   * recursive three-child synthesis cells with invertible S3 action,
+--   * conditional second-order trialectic face gluing with retained history.
 --
 -- This module does not identify any of those objects with IIT integrated
 -- information.  It exposes them as independent causal-mechanism coordinates so
@@ -85,7 +89,32 @@ allFiniteDepthTernaryPantsCharts :
 allFiniteDepthTernaryPantsCharts = Frontier.canonicalFrontierEquivalence
 
 ------------------------------------------------------------------------
--- 3. Local algebra and composition geometry are independent coordinates.
+-- 3. Existing higher-order three-way synthesis surfaces.
+------------------------------------------------------------------------
+
+recursivePantsS3Boundary : PantsS3.TernaryPantsSynthesisS3Boundary
+recursivePantsS3Boundary = PantsS3.canonicalTernaryPantsSynthesisS3Boundary
+
+trialecticCarryDepthBoundary : Trialectic.TrialecticThreeCellCarryDepthBoundary
+trialecticCarryDepthBoundary = Trialectic.canonicalTrialecticThreeCellCarryDepthBoundary
+
+recursivePantsSupportsLocal27AtEveryParent :
+  PantsS3.TernaryPantsSynthesisS3Boundary.local27CellAttachedAtEveryParent
+    recursivePantsS3Boundary ≡ true
+recursivePantsSupportsLocal27AtEveryParent = refl
+
+trialecticPromotionKeepsLowerStructuredState :
+  Trialectic.TrialecticThreeCellCarryDepthBoundary.lowerStructuredTrialecticRetained
+    trialecticCarryDepthBoundary ≡ true
+trialecticPromotionKeepsLowerStructuredState = refl
+
+trialecticFaceMediationIsNotAutomatic :
+  Trialectic.TrialecticThreeCellCarryDepthBoundary.concreteFaceMediationDerivedAutomatically
+    trialecticCarryDepthBoundary ≡ false
+trialecticFaceMediationIsNotAutomatic = refl
+
+------------------------------------------------------------------------
+-- 4. Local algebra and composition geometry are independent coordinates.
 ------------------------------------------------------------------------
 
 data LocalAlgebraKind : Set where
@@ -99,6 +128,7 @@ data CompositionGeometryKind : Set where
   ternaryOneToThreePantsComposition : CompositionGeometryKind
   ternaryDepthTwoPantsComposition : CompositionGeometryKind
   ternaryDepthThreePantsComposition : CompositionGeometryKind
+  trialecticSecondOrderFaceComposition : CompositionGeometryKind
 
 record MatchedMechanismFamily : Set where
   constructor matchedMechanismFamily
@@ -137,8 +167,15 @@ phaseProductPantsFamily =
     ternaryDepthTwoPantsComposition
     "F3^2 phase-product law on the same nine-state pants depth"
 
+triTruthTrialecticFaceFamily : MatchedMechanismFamily
+triTruthTrialecticFaceFamily =
+  matchedMechanismFamily
+    triTruthFieldAlgebra
+    trialecticSecondOrderFaceComposition
+    "F3 local algebra with explicit second-order three-edge face mediation"
+
 ------------------------------------------------------------------------
--- 4. Exact algebra receipts reused rather than reconstructed.
+-- 5. Exact algebra receipts reused rather than reconstructed.
 ------------------------------------------------------------------------
 
 triTruthFieldReceipt : Ring369.TriTruthIsField
@@ -155,7 +192,7 @@ nonaryHasZeroDivisors :
 nonaryHasZeroDivisors = Ring369.nonaryZeroDivisorWitness-3-3
 
 ------------------------------------------------------------------------
--- 5. Separation firewalls for IIT use.
+-- 6. Separation firewalls for IIT use.
 ------------------------------------------------------------------------
 
 data CompositionVsAlgebraAxis : Set where
@@ -172,9 +209,12 @@ record IIT369PantsBoundary : Set where
     nineSheetDepthTwoRoundTripExists : Bool
     voxel27DepthThreeRoundTripExists : Bool
     arbitraryFiniteDepthPantsChartExists : Bool
+    recursiveThreeChildSynthesisExists : Bool
+    secondOrderTrialecticFaceGluingTyped : Bool
     triTruthFieldLawOwned : Bool
     nonaryRingLawOwned : Bool
     localAlgebraEqualsCompositionGeometryByDefinition : Bool
+    pairwiseCompatibilityDeterminesTriadicFaceByDefinition : Bool
     threeWayPantsGluingEqualsIITPhiByDefinition : Bool
     depthThreePantsPathEqualsConsciousnessByDefinition : Bool
     sameNineStateCardinalityForcesSameAlgebra : Bool
@@ -185,12 +225,16 @@ open IIT369PantsBoundary public
 canonicalIIT369PantsBoundary : IIT369PantsBoundary
 canonicalIIT369PantsBoundary =
   iit369PantsBoundary
-    true true true true true true
-    false false false false true
+    true true true true true true true true
+    false false false false false true
 
 pantsGluingDoesNotSelfPromoteToPhi :
   threeWayPantsGluingEqualsIITPhiByDefinition canonicalIIT369PantsBoundary ≡ false
 pantsGluingDoesNotSelfPromoteToPhi = refl
+
+pairwiseCompatibilityDoesNotManufactureTriadicFace :
+  pairwiseCompatibilityDeterminesTriadicFaceByDefinition canonicalIIT369PantsBoundary ≡ false
+pairwiseCompatibilityDoesNotManufactureTriadicFace = refl
 
 algebraAndGeometryRemainIndependent :
   localAlgebraEqualsCompositionGeometryByDefinition canonicalIIT369PantsBoundary ≡ false
