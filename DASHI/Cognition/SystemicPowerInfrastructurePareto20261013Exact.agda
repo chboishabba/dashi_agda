@@ -19,44 +19,16 @@ import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as I
 import DASHI.Cognition.PsychologicalInfluenceInfrastructureCrossPollinationExact as Psych
 import DASHI.Cognition.BannonPlaybookBondiMobilisationCrossPollinationExact as Mobilisation
 import DASHI.Cognition.NickLandProvocationOverreactionPopulistTransferExact as Overreaction
+import DASHI.Cognition.EpsteinBannonAICapitalReflexivityCrossPollinationExact as AICapital
 
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN SYSTEMIC POWER INFRASTRUCTURE PARETO — 2026-10-13
---
--- This frontier is broader than the Epstein graph. It asks where money,
--- access, information, targeting, personnel, procurement and intelligence
--- infrastructure create durable second/third-order capacity. It does not infer
--- one hidden command network from intersecting public infrastructures.
---
--- The psychological/cognitive-influence weld treats audience data, inference,
--- segmentation, framing, distribution, feedback, measurement, gatekeeping,
--- institutionalisation and operational decision as separable stages. Shared
--- interest in those stages does not establish common command or technique
--- transfer; same-object personnel/method receipts are required.
---
--- Event ontology and mobilisation are separate coordinates. A real attack can
--- be strategically exploited; strategic exploitation does not prove staging.
--- Bannon's public flood-the-zone / opposition-media / administrative-state
--- doctrines are therefore analysed as explicit playbooks, not inferred traits.
---
--- The acceleration/provocation weld adds the recursive form
---   perturbation -> target response -> constraint erosion / capacity expansion
---                -> path dependence -> changed future response.
--- Terrorist provocation, Landian acceleration, populist attention strategy and
--- security-state mobilisation may share this form without sharing ideology,
--- authorship, command or personnel.
---
--- Government/institutional sources are claim-local evidence, not privileged
--- closure oracles. Self-certification, classified scope and holdings review do
--- not create a God's-eye view; distrust likewise does not invert every state
--- claim into falsehood. Contemporary appointment/capture risk is therefore a
--- reason to demand stronger independent/adversarial corroboration, not a proof
--- that a particular finding is fabricated.
 ------------------------------------------------------------------------
 
 data PowerLane : Set where
   bankingComplianceEliteAccess : PowerLane
   militaryAIIntelligenceInfrastructure : PowerLane
+  epsteinAICapitalReflexivity : PowerLane
   cbpBorderOperationalAccess : PowerLane
   provocationOverreactionInstitutionalLockIn : PowerLane
   corporateBoardExposureTopology : PowerLane
@@ -89,6 +61,8 @@ canonicalPowerFront =
     "Transactions, compliance exceptions, client retention and elite-access benefits remain the highest direct-evidence/beneficiary-incidence seam. Government/regulator descriptions remain claim-local rather than terminal closure."
   ∷ power-profile militaryAIIntelligenceInfrastructure 99 true true true true true true
     "Project Maven origin -> Google participation/worker dissent -> Palantir Maven expansion -> 2026 core-program status -> Iran targeting use, alongside Pine Gap Middle-East SIGINT/targeting-chain participation. This shares an observer/classification/intervention grammar with influence systems but kinetic decision support is not thereby psychological warfare."
+  ∷ power-profile epsteinAICapitalReflexivity 99 true true true true true true
+    "Epstein's documented/self-described AI patronage and Thiel/Valar/Palantir adjacency are cross-read with the current AI financing/reflexivity system. BlackRock is strongly paid as a current AI-infrastructure capital allocator but a direct Epstein-BlackRock institutional relationship remains unresolved; Leon Black/Apollo is a separate paid Epstein-finance lane and must not be conflated with BlackRock."
   ∷ power-profile cbpBorderOperationalAccess 98 true true true true true true
     "Border personnel and inspection discretion at an operational perimeter; officer-level access decisions require primary resolution. Agency self-investigation does not close trafficking-knowledge or broader-facilitation questions."
   ∷ power-profile provocationOverreactionInstitutionalLockIn 98 true true true true true true
@@ -130,6 +104,8 @@ record CanonicalPowerBoundary : Set where
     attackerBenefitRequiresAttackerControlOfResponse : Bool
     crisisFramingProvesCrisisFabrication : Bool
     trumpStyleEmulationProvesBannonTransfer : Bool
+    aiCapitalIntersectionImpliesEpsteinControl : Bool
+    leonBlackRelationshipImpliesBlackRockRelationship : Bool
     infrastructureIntersectionIsWorthInvestigating : Bool
     publicStatementsAreValidIdeologyReceipts : Bool
     independentAdversarialCoverageRequiredForStrongClosure : Bool
@@ -138,7 +114,7 @@ open CanonicalPowerBoundary public
 
 canonicalPowerBoundary : CanonicalPowerBoundary
 canonicalPowerBoundary = canonical-power-boundary
-  false false false false false false false false false false false false false false true true true true
+  false false false false false false false false false false false false false false false false true true true true
 
 data InfrastructureIntersectionImpliesConspiracy : Set where
 data LobbyingImpliesEveryPolicyOutcome : Set where
@@ -152,6 +128,8 @@ data RecursiveSimilarityImpliesSharedIdeology : Set where
 data StrategicBenefitImpliesResponseControl : Set where
 data CrisisFramingImpliesFabrication : Set where
 data TrumpStyleImpliesBannonTransfer : Set where
+data AICapitalIntersectionImpliesEpsteinControl : Set where
+data LeonBlackImpliesBlackRock : Set where
 
 intersectionDoesNotCreateConspiracy : InfrastructureIntersectionImpliesConspiracy → ⊥
 intersectionDoesNotCreateConspiracy ()
@@ -165,12 +143,10 @@ publicBeliefDoesNotCreateCriminalIntent ()
 stateInvestigationDoesNotCreateClosure : StateInvestigationImpliesQuestionClosed → ⊥
 stateInvestigationDoesNotCreateClosure ()
 
-sharedInfluenceInterestDoesNotCreateCommonOperation :
-  SharedInfluenceInterestImpliesCommonOperation → ⊥
+sharedInfluenceInterestDoesNotCreateCommonOperation : SharedInfluenceInterestImpliesCommonOperation → ⊥
 sharedInfluenceInterestDoesNotCreateCommonOperation ()
 
-similarInfluenceTechniqueDoesNotCreateTransfer :
-  SimilarInfluenceTechniqueImpliesTransfer → ⊥
+similarInfluenceTechniqueDoesNotCreateTransfer : SimilarInfluenceTechniqueImpliesTransfer → ⊥
 similarInfluenceTechniqueDoesNotCreateTransfer ()
 
 mobilisationDoesNotCreateStaging : MobilisationImpliesStaging → ⊥
@@ -190,3 +166,9 @@ crisisFramingDoesNotProveFabrication ()
 
 trumpStyleDoesNotCreateBannonTransfer : TrumpStyleImpliesBannonTransfer → ⊥
 trumpStyleDoesNotCreateBannonTransfer ()
+
+aiCapitalIntersectionDoesNotCreateEpsteinControl : AICapitalIntersectionImpliesEpsteinControl → ⊥
+aiCapitalIntersectionDoesNotCreateEpsteinControl ()
+
+leonBlackDoesNotCreateBlackRock : LeonBlackImpliesBlackRock → ⊥
+leonBlackDoesNotCreateBlackRock ()
