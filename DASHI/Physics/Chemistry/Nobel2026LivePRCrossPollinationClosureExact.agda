@@ -4,6 +4,9 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Physics.Chemistry.AsymmetricChiralDynamicsExact as Dynamics
+import DASHI.Physics.Chemistry.CyclotomicChiralConjugationBridgeExact as ChiralC3
 import DASHI.Physics.Chemistry.Nobel2026CyclotomicCarrierEquivalenceExact as Carrier
 import DASHI.Physics.Chemistry.Nobel2026ChiralRecoverableObserverExact as Recoverable
 import DASHI.Physics.Chemistry.Nobel2026ChiralRealDescentObserverExact as RealDescent
@@ -82,11 +85,6 @@ altermagnet1115 = siblingPRReading 1115
   "literal magnetic-space-group/Bloch sewing shows how physical symmetry authority must be paid on the same object; molecular C3 interoperability does not import that material representation"
   false refl
 
-------------------------------------------------------------------------
--- Composition object: the relevant cross-pollinations are now concrete owners,
--- not roadmap prose.
-------------------------------------------------------------------------
-
 record Nobel2026LivePRCrossPollinationClosure : Set₁ where
   constructor nobel2026LivePRCrossPollinationClosure
   field
@@ -97,7 +95,7 @@ record Nobel2026LivePRCrossPollinationClosure : Set₁ where
     sharedC3Action : SharedC3.SharedC3ActionWeldBoundary
     atomic369Bridge : Atomic369.Atomic369ChiralDynamicsBoundary
     quantumFirewall : Quantum.QuantumChiralSymmetryBoundary
-    originsFirewall : Origins.Nobel2026OriginsAutocatalysisBoundary
+    originsFirewall : Origins.Nobel2026OriginsBridgeBoundary
 
     canonicalFactorisationSpineConsumed : Bool
     canonicalFactorisationSpineConsumedIsTrue :
@@ -124,7 +122,7 @@ canonicalLivePRCrossPollinationClosure =
     SharedC3.canonicalSharedC3ActionWeldBoundary
     Atomic369.canonicalAtomic369ChiralDynamicsBoundary
     Quantum.canonicalQuantumChiralSymmetryBoundary
-    Origins.canonicalNobel2026OriginsAutocatalysisBoundary
+    Origins.canonicalNobel2026OriginsBridgeBoundary
     true refl
     true refl
     false refl
@@ -135,33 +133,34 @@ canonicalLivePRCrossPollinationClosure =
 ------------------------------------------------------------------------
 
 phasePlusMagnitudeReopensEveryFiniteChiralState :
-  (x : Recoverable.Dynamics.ChiralBiasState) →
+  (x : Dynamics.ChiralBiasState) →
   Recoverable.reopenChiralState
-    (Recoverable.ChiralC3.chiralPhase x)
-    (Recoverable.Dynamics.biasMagnitudeCode x)
+    (ChiralC3.chiralPhase x)
+    (Dynamics.biasMagnitudeCode x)
   ≡ x
 phasePlusMagnitudeReopensEveryFiniteChiralState =
   Recoverable.phaseMagnitudeReopensState
 
 realifiedObserverCannotPayHandedFuture :
-  RealDescent.Descent.ConsumerSufficient
+  Descent.ConsumerSufficient
     RealDescent.realifiedChiralObserver
-    RealDescent.Dynamics.futureBranch
+    Dynamics.futureBranch
   → ⊥
 realifiedObserverCannotPayHandedFuture =
   RealDescent.realifiedCannotPayHandedFutureBranch
 
 phaseObserverPaysHandedFuture :
-  Recoverable.Descent.ConsumerSufficient
-    Recoverable.ChiralC3.chiralPhase
-    Recoverable.Dynamics.futureBranch
+  Descent.ConsumerSufficient
+    ChiralC3.chiralPhase
+    Dynamics.futureBranch
 phaseObserverPaysHandedFuture =
   Recoverable.phaseIsSufficientForFutureBranch
 
 coarseChemistryStillCannotPayFutureBranch :
-  Factorisation.Descent.FactorsThrough
-    Factorisation.Dynamics.coarseChemicalChart
-    Factorisation.Dynamics.futureAfterStep
+  Descent.FactorsThrough
+    Dynamics.coarseChemicalChart
+    Dynamics.futureAfterStep
   → ⊥
 coarseChemistryStillCannotPayFutureBranch =
-  Factorisation.canonicalFutureNonDescentBlocksFactorisation
+  Descent.nonDescentWitnessBlocksFactorization
+    Factorisation.futureConsumerNonDescent
