@@ -4,6 +4,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Integer using (+_)
 
+import DASHI.Cognition.PNF.TypePressure as PNFPressure
+import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
 open import DASHI.Ontology.RosarioConceptualDiagnosticsExact
 open import DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact
 
