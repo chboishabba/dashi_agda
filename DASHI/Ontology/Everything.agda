@@ -17,4 +17,6 @@ import DASHI.Ontology.RosarioPNFAdmissibleFactorisationExact
 import DASHI.Ontology.RosarioPNFAdmissibleFactorisationValidation
 import DASHI.Ontology.OCTFSensibLawHandoffExact
 import DASHI.Ontology.OCTFSensibLawHandoffValidation
+import DASHI.Ontology.OntologyRepairPluralityMaxCutExact
+import DASHI.Ontology.OntologyRepairPluralityMaxCutValidation
 import Ontology.Hecke.Everything
