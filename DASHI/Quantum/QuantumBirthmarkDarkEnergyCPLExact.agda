@@ -4,18 +4,8 @@ module DASHI.Quantum.QuantumBirthmarkDarkEnergyCPLExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
-import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-
-------------------------------------------------------------------------
--- CPL DARK-ENERGY DISCRIMINATOR CARRIER
---
--- w(a) = w0 + wa (1-a).
--- LambdaCDM is the exact null w0=-1, wa=0.  A history-sector model must derive
--- its own parameters or a more general w(a); an observed nonzero wa would not
--- uniquely identify the history-sector mechanism.
-------------------------------------------------------------------------
 
 cplW : ℚ → ℚ → ℚ → ℚ
 cplW w0 wa scaleFactor =
