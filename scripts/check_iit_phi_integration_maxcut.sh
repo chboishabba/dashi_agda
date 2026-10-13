@@ -41,6 +41,8 @@ require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'orderFailureBlocks
 require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'nonDescentBlocksScoreFactorization'
 require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'structuralScoreDoesNotSelfPromote'
 
+require DASHI/Biology/IITXORGridAdversarialExact.agda 'xorTwoBitFiniteCausalSystem : IIT4.FiniteCausalSystem'
+require DASHI/Biology/IITXORGridAdversarialExact.agda 'xorDeterministicStepReceipt'
 require DASHI/Biology/IITXORGridAdversarialExact.agda 'parityCannotFactorLeftBit'
 require DASHI/Biology/IITXORGridAdversarialExact.agda 'lineAndSquareCutCountsDiffer'
 require DASHI/Biology/IITXORGridAdversarialExact.agda 'graphCutIsNotSilentlyPromotedToIIT4'
