@@ -7,23 +7,25 @@ open import Agda.Builtin.String using (String)
 import DASHI.Quantum.QuantumBirthmarkHistorySectorDarkEnergyExact as History
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityExpansionMaxCutExact as Expansion
 import DASHI.Quantum.QuantumBirthmarkResidualEq223ExpansionExact as Eq223
+import DASHI.Quantum.QuantumBirthmarkEq223SignLeafExact as SignLeaf
 import DASHI.Quantum.QuantumBirthmarkEntropyDensityAntigravityTerminalExact as Antigravity
 import DASHI.Quantum.QuantumBirthmarkRegularCoreBounceBoundaryExact as Regular
 import DASHI.Quantum.QuantumBirthmarkCosmologyDiscriminatorExact as Discriminator
 import DASHI.Quantum.QuantumBirthmarkHistoryHorizonScalingExact as Horizon
+import DASHI.Quantum.QuantumBirthmarkDarkEnergyCalibrationExact as Calibration
 import DASHI.Quantum.QuantumBirthmarkHistoryOrderParameterPotentialExact as HistoryPotential
 import DASHI.Quantum.QuantumBirthmarkTwoPhaseHistoryModelExact as TwoPhase
+import DASHI.Quantum.QuantumBirthmarkFiniteHistoryTwoVacuumBenchmarkExact as FiniteHistory
 import DASHI.Quantum.QuantumBirthmarkHistoryWeightSelectionExact as HistoryWeight
 import DASHI.Quantum.QuantumBirthmarkHistoryCommonActionVariationExact as HistoryAction
 import DASHI.Quantum.QuantumBirthmarkWeightedCommonActionExact as WeightedAction
 import DASHI.Quantum.QuantumBirthmarkHistoryRepulsiveGeometryInstantiationExact as Repulsive
+import DASHI.Quantum.QuantumBirthmarkFiniteWallBounceExact as FiniteWallBounce
+import DASHI.Quantum.QuantumBirthmarkDeSitterCoreLocalRegularityExact as Core
 import DASHI.Quantum.QuantumBirthmarkRaychaudhuriEnergyConditionFirewallExact as Raychaudhuri
 import DASHI.Quantum.QuantumBirthmarkDarkEnergyCPLExact as CPL
+import DASHI.Quantum.QuantumBirthmarkLaboratoryBackreactionProtocolExact as Lab
 import DASHI.Physics.Foundations.CMP119D1StandardDifferentialAuthorityExact as D1
-
-------------------------------------------------------------------------
--- HISTORY-SECTOR DARK-ENERGY TERMINAL MAX-CUT
-------------------------------------------------------------------------
 
 record HistoryDarkEnergyTerminalReceipt : Set where
   constructor history-dark-energy-terminal-receipt
@@ -31,19 +33,26 @@ record HistoryDarkEnergyTerminalReceipt : Set where
     historySectorEffectiveActionLaneOwned : Bool
     residualToGeneratedDensityLaneOwned : Bool
     residualEq223PreferredSignLaneOwned : Bool
+    eq223SignReducedToTwoLiteralLeaves : Bool
     positiveGRepulsiveGeometryLaneOwned : Bool
     regularCoreCandidateLaneOwned : Bool
+    localCoreRegularityOwned : Bool
     cosmologyDiscriminatorLaneOwned : Bool
     hubbleSquaredTrackingModelOwned : Bool
+    observationalFractionCalibrationOwned : Bool
     historyScaledTwoVacuumPotentialOwned : Bool
     twoPhaseHistoryOrderParameterOwned : Bool
+    finiteHistoryTwoVacuumBenchmarkOwned : Bool
     historyConditionedWeightCarrierOwned : Bool
     finiteHistoryActionGenerationOwned : Bool
     birthmarkSelectedHistoryToCommonActionCompilerOwned : Bool
     commonMetricVariationStressCompilerOwned : Bool
     repulsiveGeometryInstantiationOwned : Bool
+    finiteWallCarrierOwned : Bool
+    finiteBounceKinematicsOwned : Bool
     cplDiscriminatorCarrierOwned : Bool
     raychaudhuriEnergyConditionFirewallOwned : Bool
+    laboratoryProtocolCarrierOwned : Bool
     correctedD1MinimalAuthorityCutOwned : Bool
 
     cosmologicalConstantProblemSolved : Bool
@@ -59,20 +68,25 @@ open HistoryDarkEnergyTerminalReceipt public
 canonicalHistoryDarkEnergyTerminalReceipt : HistoryDarkEnergyTerminalReceipt
 canonicalHistoryDarkEnergyTerminalReceipt =
   history-dark-energy-terminal-receipt
-    true true true true true true true true true true true true true true true true true
+    true true true true true true true true true true true true
+    true true true true true true true true true true true true
     false false false false false
     true
 
 historySectorEffectiveActionLaneOwned : Bool
 historySectorEffectiveActionLaneOwned = true
 
+eq223SignReducedToTwoLiteralLeaves : Bool
+eq223SignReducedToTwoLiteralLeaves = SignLeaf.preferredSignReducedToTwoLiteralInequalities
+
 positiveGRepulsiveGeometryLaneOwned : Bool
-positiveGRepulsiveGeometryLaneOwned =
-  Antigravity.steelmanFormalProgrammeClosed
+positiveGRepulsiveGeometryLaneOwned = Antigravity.steelmanFormalProgrammeClosed
 
 regularCoreCandidateLaneOwned : Bool
-regularCoreCandidateLaneOwned =
-  Regular.regularCoreCandidateConstructed
+regularCoreCandidateLaneOwned = Regular.regularCoreCandidateConstructed
+
+localCoreRegularityOwned : Bool
+localCoreRegularityOwned = Core.localCoreLapseRegularityOwned
 
 cosmologyDiscriminatorLaneOwned : Bool
 cosmologyDiscriminatorLaneOwned = true
@@ -80,11 +94,17 @@ cosmologyDiscriminatorLaneOwned = true
 hubbleSquaredTrackingModelOwned : Bool
 hubbleSquaredTrackingModelOwned = Horizon.hubbleSquaredTrackingAlgebraOwned
 
+observationalFractionCalibrationOwned : Bool
+observationalFractionCalibrationOwned = Calibration.observationalFractionCalibrationOwned
+
 historyScaledTwoVacuumPotentialOwned : Bool
 historyScaledTwoVacuumPotentialOwned = HistoryPotential.historyPotentialModelOwned
 
 twoPhaseHistoryOrderParameterOwned : Bool
 twoPhaseHistoryOrderParameterOwned = TwoPhase.twoPhaseHistoryOrderParameterModelOwned
+
+finiteHistoryTwoVacuumBenchmarkOwned : Bool
+finiteHistoryTwoVacuumBenchmarkOwned = FiniteHistory.finiteHistoryCanSelectDifferentVacuumPhase
 
 historyConditionedWeightCarrierOwned : Bool
 historyConditionedWeightCarrierOwned =
@@ -98,17 +118,25 @@ birthmarkSelectedHistoryToCommonActionCompilerOwned =
   WeightedAction.birthmarkSelectedHistoryToCommonActionCompilerOwned
 
 commonMetricVariationStressCompilerOwned : Bool
-commonMetricVariationStressCompilerOwned =
-  HistoryAction.commonMetricVariationStressCompilerOwned
+commonMetricVariationStressCompilerOwned = HistoryAction.commonMetricVariationStressCompilerOwned
 
 repulsiveGeometryInstantiationOwned : Bool
 repulsiveGeometryInstantiationOwned = Repulsive.repulsiveGeometryCompilerAlreadyConstructed
+
+finiteWallCarrierOwned : Bool
+finiteWallCarrierOwned = FiniteWallBounce.finiteWallCarrierConstructed
+
+finiteBounceKinematicsOwned : Bool
+finiteBounceKinematicsOwned = FiniteWallBounce.finiteBounceKinematicsConstructed
 
 cplDiscriminatorCarrierOwned : Bool
 cplDiscriminatorCarrierOwned = CPL.historyCPLCarrierOwned
 
 raychaudhuriEnergyConditionFirewallOwned : Bool
 raychaudhuriEnergyConditionFirewallOwned = true
+
+laboratoryProtocolCarrierOwned : Bool
+laboratoryProtocolCarrierOwned = Lab.laboratoryProtocolCarrierOwned
 
 correctedD1MinimalAuthorityCutOwned : Bool
 correctedD1MinimalAuthorityCutOwned = D1.minimalD1AuthorityCutOwned
@@ -126,12 +154,7 @@ singularityResolutionSolvedIsFalse : Bool
 singularityResolutionSolvedIsFalse = true
 
 ------------------------------------------------------------------------
--- Max-cut residuals after cross-pollination.
---
--- There is no generic "physical weld" category here.  Finite history action,
--- birthmark-conditioned history selection carrier, common metric variation,
--- and stress compilation are now all existing machinery.  The remaining
--- producers are model-specific microscopic/source-native maps or observations.
+-- TRUE REMAINING PRODUCERS AFTER MAX-CUT
 ------------------------------------------------------------------------
 
 record RemainingHistoryDarkEnergyProducers : Set where
@@ -141,30 +164,30 @@ record RemainingHistoryDarkEnergyProducers : Set where
     microscopicBirthmarkWeightLaw : Bool
     birthmarkSelectedHistoryToCommonHistoryMap : Bool
     physicalMetricDependentHistoryValuation : Bool
-    sourceNativeResidualEq223SignDerivation : Bool
+    sourceNativeVacuumCoefficientPositivity : Bool
+    sourceNativeERBNonnegativity : Bool
     microscopicBirthmarkToHistoryOrderParameter : Bool
     sourceNativeCMP119HistoryPotentialCoupling : Bool
-    continuumFiniteThicknessWallSolution : Bool
+    continuumEulerLagrangeWallSolution : Bool
     microscopicHistoryHubbleSquaredScaling : Bool
     historyToCPLParameters : Bool
-    observedDarkEnergyFractionFromModel : Bool
-    SIStressMagnitudeCalibration : Bool
-    globalRegularBlackHoleProof : Bool
-    globalCosmologicalBounceProof : Bool
+    parameterFreeOmegaPrediction : Bool
+    sourceNativeSIStressMagnitudePrediction : Bool
+    boundedCoreCurvatureInvariants : Bool
+    globalRegularBlackHoleExtensionAndGeodesicCompleteness : Bool
+    sourcedContinuumFriedmannBounce : Bool
     laboratoryBackreactionMagnitudePrediction : Bool
+    laboratoryBackreactionMeasurement : Bool
 
 canonicalRemainingHistoryDarkEnergyProducers : RemainingHistoryDarkEnergyProducers
 canonicalRemainingHistoryDarkEnergyProducers =
   remaining-history-dark-energy-producers
-    false false false false false false false false false false false false false false false
+    false false false false false false false false false
+    false false false false false false false false false
 
 remainingProducerInterpretation : String
 remainingProducerInterpretation =
-  "Finite history action and additivity, history conditioning, common effective-action variation, QFT/GR stress compilation, two-vacuum potentials, H^2 tracking algebra, CPL carrier, positive-G repulsive geometry, and energy-condition bookkeeping are already owned. Remaining work is the microscopic birthmark weighting/selection and metric valuation, source-native Eq.(2.23)/potential dynamics, quantitative H^2/CPL/magnitude production, continuum wall/global regularity or bounce, and direct laboratory/cosmological measurement."
-
-------------------------------------------------------------------------
--- Claim firewall for the supplied narrative.
-------------------------------------------------------------------------
+  "Max-cut frontier: instantiate standard D1 differential laws; derive microscopic birthmark weighting/selection and metric valuation; prove the two literal Eq.(2.23) sign leaves N_V>0 and N_ERB>=0 from source dynamics; derive the birthmark/history order parameter and its CMP119 potential coupling; solve the continuum wall; derive H^2/CPL/Omega/magnitude rather than fitting them; prove bounded core curvature plus global geodesic/horizon regularity; construct a sourced continuum Friedmann bounce; and predict then measure a matched-stress laboratory backreaction signal. All intermediate action/stress/repulsive-geometry/calibration/discriminator plumbing is already represented."
 
 landauerConversePromoted : Bool
 landauerConversePromoted = false
@@ -201,4 +224,4 @@ pureLambdaNullDefocusingClaimed = false
 
 statusStatement : String
 statusStatement =
-  "History-sector dark-energy max-cut: birthmark persistence supplies residual-history semantics; birthmark-conditioned histories can feed the existing literal finite-history action and common QFT/GR metric-variation compiler; the preferred Eq.(2.23)/R136 route supplies sign when its source hypotheses hold; H^2 tracking and CPL discriminator algebra are explicit; existing two-vacuum potentials instantiate DEC/Nambu repulsive geometry; positive-G timelike/FLRW defocusing is separated from null focusing; and regular-core/bounce claims are fail-closed at global-solution level. The remaining frontier is microscopic weighting/selection and metric valuation, source-native sign/potential dynamics, quantitative parameter production, global regularity/bounce, SI magnitude calibration, and direct experimental measurement."
+  "History-sector dark-energy max-cut now includes finite history/action selection, common QFT/GR metric variation, an exact two-leaf source-sign cut, H^2 tracking plus observational calibration, two-vacuum/order-parameter and repulsive-geometry instantiations, discrete finite wall and bounce witnesses, local de-Sitter-core lapse regularity, CPL/survey discriminators, and a matched-stress laboratory protocol. What remains is no longer generic composition: it is microscopic source dynamics, continuum/global solutions, parameter-free magnitude predictions, and measurement."
