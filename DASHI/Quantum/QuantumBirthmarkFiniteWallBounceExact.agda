@@ -5,17 +5,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Foundations.GRQFTNambuGotoTwoVacuumPotentialExact as Potential
-
-------------------------------------------------------------------------
--- EXACT FINITE WALL WITNESS
---
--- Three sites sample the two stable vacua and the separating stationary barrier.
--- This is a finite-thickness discrete carrier, not a continuum kink solution.
-------------------------------------------------------------------------
 
 data WallSite3 : Set where
   wallInterior : WallSite3
@@ -62,14 +55,6 @@ finiteWallCarrierConstructed = true
 
 continuumEulerLagrangeWallSolved : Bool
 continuumEulerLagrangeWallSolved = false
-
-------------------------------------------------------------------------
--- EXACT THREE-TIME BOUNCE KINEMATICS
---
--- a(t)=a0+t^2 on t=-1,0,+1 has contraction into the minimum, expansion out
--- of it, and positive second difference.  This is a finite kinematic bounce
--- witness; it is NOT yet a sourced continuum Friedmann/Einstein solution.
-------------------------------------------------------------------------
 
 bounceScaleFactor : ℚ → ℚ → ℚ
 bounceScaleFactor a0 time = a0 + time * time
