@@ -29,15 +29,6 @@ zeroHistoryCouplingGivesZeroSignal referenceSignal = refl
 
 ------------------------------------------------------------------------
 -- 2026 MILLIGRAM TORSION-BALANCE TRANSFER BENCHMARK
---
--- Source inputs: m = 7.6 mg for each body, closest separation 0.654 mm,
--- maximum quoted uncertainty 50 aN (2 sigma).
---
--- Local Python using CODATA G and a point-mass approximation gives
---   F_N = 9013.166867... aN.
--- We store the rounded 0.001 aN value below.  The actual silicon-wafer
--- experiment uses its physical geometry; this point-mass number is therefore a
--- sensitivity-transfer estimate, not a re-analysis of its fitted G.
 ------------------------------------------------------------------------
 
 torsionPointMassNewtonianForceAttoNewtonRounded : ℚ
@@ -55,15 +46,6 @@ torsionTwoSigmaFractionalTransferDefinition = refl
 
 ------------------------------------------------------------------------
 -- 2024 LATTICE ATOM-INTERFEROMETER TRANSFER BENCHMARK
---
--- a = 33.3 +/- 5.6_stat +/- 2.7_syst nm s^-2.
--- The exact squared one-sigma fractional uncertainty is
---
---   (5.6^2 + 2.7^2) / 33.3^2
--- = (56^2 + 27^2) / 333^2
--- = 3865 / 110889.
---
--- Local Python gives sqrt(...) = 0.186694..., hence about 0.373388 at 2 sigma.
 ------------------------------------------------------------------------
 
 atomOneSigmaFractionalTransferSquared : ℚ
@@ -74,13 +56,38 @@ atomOneSigmaFractionalTransferSquaredDefinition :
 atomOneSigmaFractionalTransferSquaredDefinition = refl
 
 ------------------------------------------------------------------------
+-- EXACT SIGNAL-TO-NOISE / WHITE-NOISE PENALTIES
+--
+-- If signal amplitude is epsilon_H times the full-gravity signal and stationary
+-- white noise is unchanged, integration time scales as SNR^2 / epsilon_H^2.
+------------------------------------------------------------------------
+
+tenPercentUnitSNRTimePenalty : Nat
+tenPercentUnitSNRTimePenalty = 100
+
+onePercentUnitSNRTimePenalty : Nat
+onePercentUnitSNRTimePenalty = 10000
+
+onePermilleUnitSNRTimePenalty : Nat
+onePermilleUnitSNRTimePenalty = 1000000
+
+tenPercentFiveSigmaTimePenalty : Nat
+tenPercentFiveSigmaTimePenalty = 2500
+
+onePercentFiveSigmaTimePenalty : Nat
+onePercentFiveSigmaTimePenalty = 250000
+
+onePermilleFiveSigmaTimePenalty : Nat
+onePermilleFiveSigmaTimePenalty = 25000000
+
+onePercentFiveSigmaTimePenaltyIs250000 :
+  onePercentFiveSigmaTimePenalty ≡ 250000
+onePercentFiveSigmaTimePenaltyIs250000 = refl
+
+------------------------------------------------------------------------
 -- 2026 QUANTUM-READY OPTOMECHANICAL SCALING
 --
--- The source paper reports unit-SNR detection of the FULL Newtonian gravity
--- signal in a range from minutes to approximately 15 hours depending on source
--- drive.  If a history-only signal is epsilon_H times that full signal while
--- the same stationary noise dominates, required integration time scales as
--- epsilon_H^-2.  We use the conservative 15 h endpoint below.
+-- Source upper endpoint: about 15 h for unit SNR on the FULL gravity signal.
 ------------------------------------------------------------------------
 
 optoFullGravityUnitSNRUpperHours : Nat
