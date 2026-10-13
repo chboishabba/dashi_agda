@@ -22,6 +22,18 @@ mixedResponsesRemainConceptuallyInconsistent :
   classifyCluster positiveEdge mixedYesNo ≡ conceptuallyInconsistent
 mixedResponsesRemainConceptuallyInconsistent = refl
 
+musicGenresClusterCountPinned :
+  domainClusterCount musicGenres ≡ 1990
+musicGenresClusterCountPinned = refl
+
+reportedInconsistencyApproximationPinned :
+  reportedInconsistentPercent ≡ 10
+reportedInconsistencyApproximationPinned = refl
+
+reportedConsistentDisagreementApproximationPinned :
+  reportedConsistentDisagreementPercent ≡ 2
+reportedConsistentDisagreementApproximationPinned = refl
+
 kgIsNotAutomaticallyGroundTruth :
   KGGroundTruthPromotionPermission → ⊥
 kgIsNotAutomaticallyGroundTruth = kgCannotPromoteItselfToGroundTruth
