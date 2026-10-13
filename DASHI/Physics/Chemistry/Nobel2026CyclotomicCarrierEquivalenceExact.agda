@@ -6,16 +6,19 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Biology.CyclotomicPhaseAmplitudeBoundaryExact as ChemistryPhase
 import DASHI.Algebra.TriadicDepthOneCharacters as AtomicPhase
 import DASHI.Biology.EisensteinThreeSixSymmetryExact as EisensteinPhase
+import DASHI.Moonshine.C3FourierConjugationExact as Fourier
+import DASHI.Moonshine.C3CyclotomicRealDescentExact as RealDescent
+import DASHI.Moonshine.Monster3BPhaseTransportExact as Monster
 
 ------------------------------------------------------------------------
 -- EXACT C3 CARRIER EQUIVALENCE
 --
--- The live PR audit exposed three independently developed exact three-phase
--- carriers used by chemistry, atomic/369 Fourier characters, and Eisenstein
--- arithmetic.  This owner pays their literal finite equivalence and action
--- compatibility.  It transfers representation structure only; it does not
--- identify molecular chirality, magnetic quantum number, or Eisenstein number
--- theory as one physical object.
+-- The live PR audit exposed independently developed exact three-phase carriers
+-- used by chemistry, atomic/369 Fourier characters, Eisenstein arithmetic and
+-- Moonshine/Monster transport.  This owner pays their literal finite
+-- interoperability and action compatibility.  Only representation structure
+-- transfers: molecular chirality, magnetic quantum number, Eisenstein
+-- arithmetic and Monster sectors remain different semantics.
 ------------------------------------------------------------------------
 
 chemToAtomic : ChemistryPhase.C3Phase → AtomicPhase.C3Phase
@@ -40,8 +43,8 @@ atomicChemRoundTrip AtomicPhase.phase0 = refl
 atomicChemRoundTrip AtomicPhase.phase1 = refl
 atomicChemRoundTrip AtomicPhase.phase2 = refl
 
--- Chemistry's +1 phase advance is exactly multiplication by the atomic
--- character generator phase1.
+-- Chemistry's +1 phase advance is exactly multiplication by the canonical
+-- atomic/Fourier generator phase1.
 chemAdvanceIsAtomicGeneratorAction :
   (p : ChemistryPhase.C3Phase) →
   chemToAtomic (ChemistryPhase.phaseAdvance p)
@@ -57,6 +60,18 @@ chemConjugationIsAtomicConjugation :
 chemConjugationIsAtomicConjugation ChemistryPhase.phaseOne = refl
 chemConjugationIsAtomicConjugation ChemistryPhase.phaseZeta = refl
 chemConjugationIsAtomicConjugation ChemistryPhase.phaseZetaSquared = refl
+
+chemConjugationIsFourierInverse :
+  (p : ChemistryPhase.C3Phase) →
+  chemToAtomic (ChemistryPhase.conjugatePhase p)
+  ≡ Fourier.inversePhase (chemToAtomic p)
+chemConjugationIsFourierInverse ChemistryPhase.phaseOne = refl
+chemConjugationIsFourierInverse ChemistryPhase.phaseZeta = refl
+chemConjugationIsFourierInverse ChemistryPhase.phaseZetaSquared = refl
+
+------------------------------------------------------------------------
+-- Eisenstein phase carrier equivalence.
+------------------------------------------------------------------------
 
 chemToEisenstein : ChemistryPhase.C3Phase → EisensteinPhase.TernaryPhase
 chemToEisenstein ChemistryPhase.phaseOne = EisensteinPhase.phaseOne
@@ -89,7 +104,7 @@ chemAdvanceIsEisensteinNext ChemistryPhase.phaseZeta = refl
 chemAdvanceIsEisensteinNext ChemistryPhase.phaseZetaSquared = refl
 
 -- EisensteinThreeSixSymmetryExact did not need a named conjugation map, so the
--- exact reflection is supplied locally and welded to the other two carriers.
+-- exact reflection is supplied locally and welded to the other carriers.
 eisensteinConjugate : EisensteinPhase.TernaryPhase → EisensteinPhase.TernaryPhase
 eisensteinConjugate EisensteinPhase.phaseOne = EisensteinPhase.phaseOne
 eisensteinConjugate EisensteinPhase.phaseOmega = EisensteinPhase.phaseOmegaSquared
@@ -110,6 +125,51 @@ atomicAndEisensteinAgreeThroughChemistry ChemistryPhase.phaseOne = refl
 atomicAndEisensteinAgreeThroughChemistry ChemistryPhase.phaseZeta = refl
 atomicAndEisensteinAgreeThroughChemistry ChemistryPhase.phaseZetaSquared = refl
 
+------------------------------------------------------------------------
+-- Moonshine/Monster C3 conjugation and real-descent interoperability.
+-- This consumes already-merged exact C3 owners also used by Ogg/SSP work.
+------------------------------------------------------------------------
+
+chemToMonster : ChemistryPhase.C3Phase → Monster.C3Phase
+chemToMonster p = Fourier.phaseToMonster (chemToAtomic p)
+
+chemConjugationIsMonsterInversion :
+  (p : ChemistryPhase.C3Phase) →
+  chemToMonster (ChemistryPhase.conjugatePhase p)
+  ≡ Monster.transportPhase Monster.invertsGenerator (chemToMonster p)
+chemConjugationIsMonsterInversion ChemistryPhase.phaseOne = refl
+chemConjugationIsMonsterInversion ChemistryPhase.phaseZeta = refl
+chemConjugationIsMonsterInversion ChemistryPhase.phaseZetaSquared = refl
+
+chemConjugationOrbit : ChemistryPhase.C3Phase → RealDescent.C3ConjugationOrbit
+chemConjugationOrbit p = RealDescent.conjugationOrbit (chemToAtomic p)
+
+chemRealifiedSector : ChemistryPhase.C3Phase → RealDescent.RealifiedC3Sector
+chemRealifiedSector p = RealDescent.realifiedSector (chemConjugationOrbit p)
+
+chemFixedPhaseDescendsToRealAxis :
+  chemRealifiedSector ChemistryPhase.phaseOne ≡ RealDescent.fixedRealAxis
+chemFixedPhaseDescendsToRealAxis = refl
+
+chemZetaPairDescendsToTransversePlane :
+  chemRealifiedSector ChemistryPhase.phaseZeta
+  ≡ RealDescent.transverseConjugatePlane
+chemZetaPairDescendsToTransversePlane = refl
+
+chemZetaSquaredPairDescendsToTransversePlane :
+  chemRealifiedSector ChemistryPhase.phaseZetaSquared
+  ≡ RealDescent.transverseConjugatePlane
+chemZetaSquaredPairDescendsToTransversePlane = refl
+
+chemTraceIsConjugationInvariant :
+  (p : ChemistryPhase.C3Phase) →
+  RealDescent.cyclotomicTrace
+    (chemToAtomic (ChemistryPhase.conjugatePhase p))
+  ≡ RealDescent.cyclotomicTrace (chemToAtomic p)
+chemTraceIsConjugationInvariant ChemistryPhase.phaseOne = refl
+chemTraceIsConjugationInvariant ChemistryPhase.phaseZeta = refl
+chemTraceIsConjugationInvariant ChemistryPhase.phaseZetaSquared = refl
+
 record CyclotomicCarrierEquivalenceBoundary : Set where
   constructor cyclotomicCarrierEquivalenceBoundary
   field
@@ -117,11 +177,14 @@ record CyclotomicCarrierEquivalenceBoundary : Set where
     chemistryEisensteinCarrierBijectionPaid : Bool
     generatorActionIntertwinerPaid : Bool
     conjugationIntertwinerPaid : Bool
+    moonshineMonsterConjugationIntertwinerPaid : Bool
+    fixedPlusConjugatePairDescentPaid : Bool
     carrierEquivalenceIdentifiesPhysicalSemantics : Bool
     molecularChiralityIsMagneticQuantumNumber : Bool
     molecularChiralityIsEisensteinArithmeticObject : Bool
+    molecularChiralityIsMonsterSector : Bool
 
 canonicalCyclotomicCarrierEquivalenceBoundary : CyclotomicCarrierEquivalenceBoundary
 canonicalCyclotomicCarrierEquivalenceBoundary =
   cyclotomicCarrierEquivalenceBoundary
-    true true true true false false false
+    true true true true true true false false false false
