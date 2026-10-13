@@ -7,28 +7,17 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_)
 
 import DASHI.Physics.YangMills.BalabanCMP119SourceNativeRawStateActiveBoundsExact as Raw
 
-------------------------------------------------------------------------
--- THE RAW CMP119 ACTION ALGEBRA DOES NOT FIX HOW ITS VACUUM CARRIER ENTERS
---
--- `CMP119RawActionAlgebra.assemble` is supplied data.  On exactly the same
--- carrier types, one legal algebra can ignore the vacuum slot while another can
--- include it.  Therefore a history/order-parameter -> vacuum-potential coupling
--- cannot be derived from the raw record type alone.
-------------------------------------------------------------------------
-
 ignoreVacuumAlgebra :
   Raw.CMP119RawActionAlgebra ℚ ℚ ℚ ℚ ℚ ℚ
 ignoreVacuumAlgebra = record
-  { Raw.CMP119RawActionAlgebra.assemble =
-      λ coefficient wilson regular r boundary vacuum → coefficient
-  }
+  { assemble = λ coefficient wilson regular r boundary vacuum → coefficient }
+  where open Raw.CMP119RawActionAlgebra
 
 includeVacuumAlgebra :
   Raw.CMP119RawActionAlgebra ℚ ℚ ℚ ℚ ℚ ℚ
 includeVacuumAlgebra = record
-  { Raw.CMP119RawActionAlgebra.assemble =
-      λ coefficient wilson regular r boundary vacuum → coefficient + vacuum
-  }
+  { assemble = λ coefficient wilson regular r boundary vacuum → coefficient + vacuum }
+  where open Raw.CMP119RawActionAlgebra
 
 ignoreVacuumAtUnit :
   Raw.CMP119RawActionAlgebra.assemble ignoreVacuumAlgebra
