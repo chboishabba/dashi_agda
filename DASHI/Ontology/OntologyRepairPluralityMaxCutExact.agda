@@ -104,6 +104,22 @@ suggestedOperation hierarchyConflict = Repair.removeBadSuperclass
 suggestedOperation disjointnessConflict = Repair.holdForReview
 suggestedOperation unresolvedMappingConflict = Repair.holdForReview
 
+compileRepairSuggestion :
+  Repair.RepairTarget →
+  MappingReviewFinding →
+  Repair.RepairEvidence →
+  Repair.RepairProposal
+compileRepairSuggestion target finding evidence =
+  Repair.repairProposal target (suggestedOperation finding) evidence
+
+compiledSuggestionPreservesOperation :
+  (target : Repair.RepairTarget) →
+  (finding : MappingReviewFinding) →
+  (evidence : Repair.RepairEvidence) →
+  Repair.operation (compileRepairSuggestion target finding evidence)
+  ≡ suggestedOperation finding
+compiledSuggestionPreservesOperation target finding evidence = refl
+
 data SuggestedRepairMutationPermission : Set where
 
 suggestionCannotAuthorizeMutation : SuggestedRepairMutationPermission → ⊥
@@ -233,6 +249,7 @@ record OntologyRepairPluralityStatus : Set where
   field
     heterogeneousEvidenceUsesExistingPNFEnvelope : Bool
     pluralityDoesNotPromoteTruth : Bool
+    repairRoutingCompilesToExistingProposal : Bool
     repairRoutingIsSuggestionOnly : Bool
     versionDriftReopensWithoutRefutation : Bool
     localSSSOMCarrierRoundTrips : Bool
@@ -241,6 +258,8 @@ record OntologyRepairPluralityStatus : Set where
     heterogeneousEvidenceUsesExistingPNFEnvelopeIsTrue :
       heterogeneousEvidenceUsesExistingPNFEnvelope ≡ true
     pluralityDoesNotPromoteTruthIsTrue : pluralityDoesNotPromoteTruth ≡ true
+    repairRoutingCompilesToExistingProposalIsTrue :
+      repairRoutingCompilesToExistingProposal ≡ true
     repairRoutingIsSuggestionOnlyIsTrue : repairRoutingIsSuggestionOnly ≡ true
     versionDriftReopensWithoutRefutationIsTrue :
       versionDriftReopensWithoutRefutation ≡ true
@@ -253,5 +272,5 @@ open OntologyRepairPluralityStatus public
 canonicalOntologyRepairPluralityStatus : OntologyRepairPluralityStatus
 canonicalOntologyRepairPluralityStatus =
   ontologyRepairPluralityStatus
-    true true true true true true
-    refl refl refl refl refl refl
+    true true true true true true true
+    refl refl refl refl refl refl refl
