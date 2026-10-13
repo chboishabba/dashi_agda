@@ -9,7 +9,6 @@ open import Data.Empty using (⊥)
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact as Detection
 import DASHI.Biology.TrumpBannonConsentAttractorBridge as TrumpBannon
 import DASHI.Governance.InstitutionalTechniqueTransferCore as Transfer
-import DASHI.Cognition.TrumpMarALagoBannonBridgeExact as EpsteinBannon
 
 ------------------------------------------------------------------------
 -- BANNON / CAMBRIDGE ANALYTICA / SCL / MERCER INFLUENCE INFRASTRUCTURE
@@ -29,6 +28,9 @@ data InfluenceEdgeKind : Set where
   facebookDataHarvesting : InfluenceEdgeKind
   voterProfilingAndTargeting : InfluenceEdgeKind
   trumpCampaignVendorRelation : InfluenceEdgeKind
+  trumpCampaignPayments : InfluenceEdgeKind
+  makeAmericaNumber1VendorOverlap : InfluenceEdgeKind
+  fecCoordinationAllegationDisposition : InfluenceEdgeKind
   bannonLeaveEUIntroduction : InfluenceEdgeKind
   aiqSclCambridgeAnalyticaWorkingRelation : InfluenceEdgeKind
   breitbartDataConfigIntersection : InfluenceEdgeKind
@@ -92,9 +94,33 @@ voterProfilingReceipt = influence-receipt
 trumpCampaignReceipt : InfluenceReceipt
 trumpCampaignReceipt = influence-receipt
   trumpCampaignVendorRelation
-  "UK House of Commons DCMS Committee + contemporaneous campaign reporting"
-  "parliamentary inquiry / high-quality reporting"
+  "UK House of Commons DCMS Committee + FEC records"
+  "parliamentary inquiry / official campaign-finance records"
   "Cambridge Analytica worked for Donald Trump's 2016 presidential campaign. Vendor participation is paid; decisive electoral effect is not."
+  true false false false
+
+trumpPaymentsReceipt : InfluenceReceipt
+trumpPaymentsReceipt = influence-receipt
+  trumpCampaignPayments
+  "Federal Election Commission MUR 7351 / Commission records"
+  "official campaign-finance record"
+  "FEC records identify approximately USD 5.9125 million in 2016-cycle Trump-campaign disbursements to Cambridge Analytica. Payment establishes a substantial vendor relation, not effectiveness or outcome causation."
+  true false false false
+
+man1VendorOverlapReceipt : InfluenceReceipt
+man1VendorOverlapReceipt = influence-receipt
+  makeAmericaNumber1VendorOverlap
+  "Federal Election Commission MUR 7147 materials"
+  "official enforcement record"
+  "FEC materials record Cambridge Analytica serving both the Trump campaign and Mercer-backed Make America Number 1 for campaign/communications-related services. This pays common-vendor topology."
+  true false false false
+
+fecDispositionReceipt : InfluenceReceipt
+fecDispositionReceipt = influence-receipt
+  fecCoordinationAllegationDisposition
+  "Federal Election Commission MUR 7147"
+  "official enforcement disposition"
+  "The FEC investigated common-vendor and coordination allegations but ultimately closed the file; allegations concerning Bannon services were dismissed and the record does not establish illegal Cambridge-Analytica-mediated coordination as an adjudicated fact."
   true false false false
 
 leaveEUIntroductionReceipt : InfluenceReceipt
@@ -139,7 +165,7 @@ electionOutcomeBoundaryReceipt = influence-receipt
 laterEpsteinMediaReceipt : InfluenceReceipt
 laterEpsteinMediaReceipt = influence-receipt
   laterBannonEpsteinMediaWork
-  "2026 released Epstein/Bannon correspondence and video reporting; formalised in TrumpMarALagoBannonBridgeExact"
+  "2026 released Epstein/Bannon correspondence and video reporting; separately formalised in TrumpMarALagoBannonBridgeExact"
   "later historical relation"
   "Bannon later advised Epstein on media presentation and political/media strategy. Temporal/personnel continuity makes technique-reuse a valid acquisition question, but this receipt does not establish Cambridge Analytica/SCL methods were used for Epstein."
   true false false false
@@ -152,6 +178,9 @@ canonicalInfluenceReceipts =
   ∷ facebookHarvestReceipt
   ∷ voterProfilingReceipt
   ∷ trumpCampaignReceipt
+  ∷ trumpPaymentsReceipt
+  ∷ man1VendorOverlapReceipt
+  ∷ fecDispositionReceipt
   ∷ leaveEUIntroductionReceipt
   ∷ aiqWorkingRelationReceipt
   ∷ breitbartConfigReceipt
@@ -194,9 +223,6 @@ trumpBannonPriorArt = TrumpBannon.canonicalTrumpBannonConsentAttractorReceipt
 techniqueTransferBoundary : Transfer.InstitutionalTechniqueTransferBoundary
 techniqueTransferBoundary = Transfer.canonicalInstitutionalTechniqueTransferBoundary
 
-bannonEpsteinBoundary : EpsteinBannon.TrumpParticipationLatticeBoundary
-bannonEpsteinBoundary = EpsteinBannon.canonicalTrumpParticipationLatticeBoundary
-
 record BannonInfluenceInfrastructureBoundary : Set where
   constructor bannon-influence-infrastructure-boundary
   field
@@ -205,6 +231,9 @@ record BannonInfluenceInfrastructureBoundary : Set where
     deceptiveFacebookDataHarvestingPaid : Bool
     crossAtlanticBrokeragePaid : Bool
     militaryToPoliticalTechniqueLineagePaid : Bool
+    trumpCAMajorVendorPaymentsPaid : Bool
+    campaignSuperPACCommonVendorTopologyPaid : Bool
+    illegalCoordinationAdjudicated : Bool
     psychographicEfficacyUniversallyEstablished : Bool
     trumpVictoryCausedByCambridgeAnalytica : Bool
     brexitCausedByCambridgeAnalytica : Bool
@@ -214,7 +243,7 @@ open BannonInfluenceInfrastructureBoundary public
 
 canonicalBannonInfluenceInfrastructureBoundary : BannonInfluenceInfrastructureBoundary
 canonicalBannonInfluenceInfrastructureBoundary = bannon-influence-infrastructure-boundary
-  true true true true true false false false false false
+  true true true true true true true false false false false false false
 
 ------------------------------------------------------------------------
 -- Attribution / causal firewalls.
@@ -225,6 +254,7 @@ data CampaignVendorImpliesElectionCause : Set where
 data MilitaryLineageImpliesMilitaryOperation : Set where
 data DataHarvestImpliesEveryTargetWasManipulated : Set where
 data BreitbartConfigImpliesUnifiedCommand : Set where
+data CommonVendorImpliesIllegalCoordination : Set where
 data BannonContinuityImpliesTechniqueReuse : Set where
 data CambridgeAnalyticaImpliesEpsteinCoordination : Set where
 
@@ -242,6 +272,9 @@ dataHarvestDoesNotCreateUniversalManipulation ()
 
 configIntersectionDoesNotCreateUnifiedCommand : BreitbartConfigImpliesUnifiedCommand → ⊥
 configIntersectionDoesNotCreateUnifiedCommand ()
+
+commonVendorDoesNotCreateIllegalCoordination : CommonVendorImpliesIllegalCoordination → ⊥
+commonVendorDoesNotCreateIllegalCoordination ()
 
 bannonContinuityDoesNotCreateTechniqueReuse : BannonContinuityImpliesTechniqueReuse → ⊥
 bannonContinuityDoesNotCreateTechniqueReuse ()
