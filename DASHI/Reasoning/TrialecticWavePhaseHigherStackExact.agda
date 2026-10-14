@@ -22,15 +22,6 @@ import DASHI.Reasoning.TrialecticWavePhaseTwoCellCocycleExact as Two
 import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact as Depth
 import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact as Attached
 
-------------------------------------------------------------------------
--- 1. Proof-witness setoid for parallel phase 2-cells.
---
--- Two witnesses proving the same phase equality need not be definitionally
--- equal in intensional Agda.  For categorical use their evidence identity is
--- irrelevant once source, target and phase endpoints are fixed, so we quotient
--- them extensionally by a single inhabited 3-cell relation.
-------------------------------------------------------------------------
-
 Phase3Cell :
   ∀ {U x y}
     {f g : Groupoid.FibreHom {U} x y} →
@@ -62,10 +53,6 @@ phase3CellTrans :
   Phase3Cell alpha gamma
 phase3CellTrans left right = tt
 
-------------------------------------------------------------------------
--- 2. Structural donor boundaries.
-------------------------------------------------------------------------
-
 groupoidBoundary : Groupoid.TrialecticWavePhaseGroupoidPresheafBoundary
 groupoidBoundary = Groupoid.canonicalTrialecticWavePhaseGroupoidPresheafBoundary
 
@@ -83,10 +70,6 @@ depthBoundary = Depth.canonicalTrialecticPolicyIndexedAllDepthBoundary
 
 attachedBoundary : Attached.TrialecticGrothendieckAttachedTwoCellBoundary
 attachedBoundary = Attached.canonicalTrialecticGrothendieckAttachedTwoCellBoundary
-
-------------------------------------------------------------------------
--- 3. Exact receipts.
-------------------------------------------------------------------------
 
 fullSiteGroupoidPresheafPaid :
   Groupoid.fullSiteNonDiscreteGroupoidPresheafPaid groupoidBoundary ≡ true
@@ -113,16 +96,8 @@ allDepthPolicyIterationPaid :
 allDepthPolicyIterationPaid = refl
 
 attachedRelationalTwoCellPaid :
-  Attached.attachedRelationalTwoCellRetained attachedBoundary ≡ true
+  Attached.attachedFaceIsAdditionalTwoCellCoordinate attachedBoundary ≡ true
 attachedRelationalTwoCellPaid = refl
-
-------------------------------------------------------------------------
--- 4. Promotion boundary.
---
--- `certifiedHigherStackOnTriadicSite` means the concrete finite triadic site,
--- with 1-morphism and 2-cell evidence interpreted through the explicit phase
--- setoids above.  It is not a theorem of arbitrary infinity-topos hyperdescent.
-------------------------------------------------------------------------
 
 record TrialecticWavePhaseHigherStackBoundary : Set where
   constructor trialectic-wave-phase-higher-stack-boundary
