@@ -46,6 +46,8 @@ jobs:
           scripts/co_tase2_bns_operation_audit.py
           scripts/co_tase2_full_symmetry_receipt.py
           scripts/co_tase2_arpes_ibw_ingest.py
+          scripts/co_tase2_arpes_observer_from_ibw.py
+          scripts/co_tase2_arpes_observer_selftest.py
           scripts/co_tase2_arpes_peak_fit.py
           scripts/co_tase2_arpes_forward_fit.py
           scripts/co_tase2_published_arpes_constraints.py
@@ -97,6 +99,9 @@ jobs:
 
       - name: Verify ARPES kz calibration arithmetic
         run: python scripts/co_tase2_kz_final_state_calibration_selftest.py
+
+      - name: Verify calibrated ARPES observer assembly
+        run: python scripts/co_tase2_arpes_observer_selftest.py
 
       - name: Check published material producer contract
         run: |
