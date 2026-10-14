@@ -3,7 +3,8 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from . import discovery_catalog
-from . import query_discovery
+from .repo_index_bridge import RepoIndexReader
+from .unified_discovery import UnifiedDiscovery
 
 
 def install_source_index_semantic_extension(source_index_cls: type) -> None:
@@ -17,40 +18,60 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
         discovery_catalog.ensure_catalog_schema(self.connection)
         self.connection.commit()
 
+    def _unified(self) -> UnifiedDiscovery:
+        return UnifiedDiscovery(self.root, self, RepoIndexReader(self.root))
+
     def refresh_semantic_catalog(self) -> int:
         return discovery_catalog.refresh_catalog(self.connection)
 
     def search_symbols(self, query: str, *, include_history: bool = False, limit: int = 50) -> list[dict]:
-        return discovery_catalog.search_symbols(
-            self.connection,
-            query,
-            include_history=include_history,
-            limit=limit,
-        )
+        discovery = _unified(self)
+        try:
+            return discovery.search_symbols(
+                query,
+                include_history=include_history,
+                limit=limit,
+            )
+        finally:
+            discovery.repo_index.close()
 
     def related_symbols(self, symbol: str, *, include_history: bool = False, limit: int = 50) -> dict:
-        return discovery_catalog.related_symbols(
-            self.connection,
-            symbol,
-            include_history=include_history,
-            limit=limit,
-        )
+        discovery = _unified(self)
+        try:
+            return discovery.related_symbols(
+                symbol,
+                include_history=include_history,
+                limit=limit,
+            )
+        finally:
+            discovery.repo_index.close()
 
     def discovery_receipt(self, query: str, *, limit: int = 50) -> dict:
-        return query_discovery.discovery_receipt(
-            self.connection,
-            query,
-            limit=limit,
-            root=self.root,
-        )
+        discovery = _unified(self)
+        try:
+            return discovery.discovery_receipt(query, limit=limit)
+        finally:
+            discovery.repo_index.close()
+
+    def object_detail(self, symbol_id: str) -> dict:
+        discovery = _unified(self)
+        try:
+            return discovery.object_detail(symbol_id)
+        finally:
+            discovery.repo_index.close()
 
     def round_lineage(self, prefix: Optional[str] = None) -> dict:
-        return discovery_catalog.round_lineage(self.connection, prefix=prefix)
+        discovery = _unified(self)
+        try:
+            return discovery.round_lineage(prefix=prefix)
+        finally:
+            discovery.repo_index.close()
 
     source_index_cls.__init__ = __init__
     source_index_cls.refresh_semantic_catalog = refresh_semantic_catalog
     source_index_cls.search_symbols = search_symbols
     source_index_cls.related_symbols = related_symbols
     source_index_cls.discovery_receipt = discovery_receipt
+    source_index_cls.object_detail = object_detail
     source_index_cls.round_lineage = round_lineage
     source_index_cls._semantic_discovery_installed = True
