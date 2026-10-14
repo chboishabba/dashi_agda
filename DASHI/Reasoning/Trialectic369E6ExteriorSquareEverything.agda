@@ -38,6 +38,9 @@ import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
 import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
 import DASHI.Physics.Closure.Ternary27TrinificationSU2RBreakingFrontierExact
 import DASHI.Physics.Closure.Ternary27TrinificationDHRMaxCutExact
+import DASHI.Physics.Closure.Ternary27TrinificationTwoNeutralVEVBreakingExact
+import DASHI.Physics.Closure.Ternary27TrinificationTwoVEVMassSpectrumExact
+import DASHI.Physics.Closure.Ternary27TrinificationInvariantTwoVEVPotentialExact
 
 -- Gravity: historical coordinate-Laplacian diagnostics retained for comparison.
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
@@ -47,17 +50,29 @@ import DASHI.Physics.Closure.E6HyperformAtomicClockCalibrationNoGoExact
 import DASHI.Physics.Closure.E6HyperformTernary36GravityRefinementCandidateExact
 import DASHI.Physics.Closure.E6HyperformTernary36EntropyActionBoundaryExact
 
--- Gravity: active intrinsic quadratic-class / H3 / atlas / matter programme.
+-- Gravity: active intrinsic quadratic-class / H3-H2 incidence-bundle programme.
 import DASHI.Physics.Closure.E6HyperformIntrinsicQuadraticLaplacianExact
 import DASHI.Physics.Closure.E6HyperformRadicalQuotientGravityBoundaryExact
 import DASHI.Physics.Closure.E6HyperformH3SameObjectEmbeddingExact
 import DASHI.Physics.Closure.E6HyperformTwoH3NondegenerateCandidateExact
 import DASHI.Physics.Closure.E6HyperformMetricDescentFrontierExact
 import DASHI.Physics.Closure.E6HyperformIntrinsicRadiationVacuumStressExact
+import DASHI.Physics.Closure.E6HyperformH3PhaseMetricLiftExact
+import DASHI.Physics.Closure.E6HyperformH3ResidualReopeningMetricExact
+import DASHI.Physics.Closure.E6HyperformH3PhaseOrderParameterExact
+import DASHI.Physics.Closure.E6HyperformH3H2PhaseIncidenceExact
+import DASHI.Physics.Closure.E6HyperformH3H2NineSheetChartExact
+import DASHI.Physics.Closure.E6HyperformH3H2OrderParameterGeometryExact
+import DASHI.Physics.Closure.E6HyperformH3H2OrderParameterDynamicsExact
+import DASHI.Physics.Closure.E6HyperformH3H2NoEquivariantSectionExact
+import DASHI.Physics.Closure.E6HyperformH3BaseGraphSpectrumExact
+import DASHI.Physics.Closure.E6HyperformH3H2FiniteBundleDynamicsExact
 
 -- Measured neural/consciousness acquisition and protocol boundaries.
 import DASHI.Governance.ConsciousnessPhysioNetPropofolDiscriminatorExact
 import DASHI.Governance.ConsciousnessBrainITExceptionalNeuralFrontierExact
 import DASHI.Governance.ConsciousnessExceptionalSelectedTPSProtocolExact
+import DASHI.Governance.ConsciousnessExceptionalResidualIITBoundaryExact
 
 import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct14MaxCutExact
