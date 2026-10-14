@@ -120,7 +120,8 @@ fundValueDoesNotCreateRealisedCash : FundValueImpliesRealisedCash → ⊥
 fundValueDoesNotCreateRealisedCash ()
 
 ------------------------------------------------------------------------
--- Estate-level deployment snapshot.
+-- Estate-level deployment snapshot: exact total allocation and fresh call.
+-- Exact January carrying values of Valar II/III are deliberately left open.
 ------------------------------------------------------------------------
 
 record SouthernTrust201901Snapshot : Set where
@@ -133,9 +134,8 @@ record SouthernTrust201901Snapshot : Set where
     hedgeFundsUSD : Nat
     investmentsUSD : Nat
     totalAssetsUSD : Nat
-    valarIIValueUSD : Nat
-    valarIIIValueUSD : Nat
     valarIIIFreshCallUSD : Nat
+    exactJanuaryValarLineValuesPaid : Bool
     source : String
 open SouthernTrust201901Snapshot public
 
@@ -143,8 +143,8 @@ january2019Snapshot : SouthernTrust201901Snapshot
 january2019Snapshot = southern-trust-201901-snapshot
   "2019-01-31"
   64386774 48504739 115692726 105853201 56643626 416190539
-  0 0 2500000
-  "EFTA00811948 — Southern Trust valuation report; Valar values remain carried in investment schedules but exact January line values require schedule-level extraction"
+  2500000 false
+  "EFTA00811948 — Southern Trust valuation report; pays total asset allocation and January Valar III capital call, while exact January Valar line carrying values require schedule-level extraction"
 
 ------------------------------------------------------------------------
 -- Next Pareto.
@@ -157,6 +157,7 @@ data PortfolioDebt : Set where
   distributionsAndExitLedger : PortfolioDebt
   sideLettersCoInvestmentRights : PortfolioDebt
   portfolioCompanyBoardInformationRights : PortfolioDebt
+  january2019ValarLineValues : PortfolioDebt
 
 record PortfolioAcquisition : Set where
   constructor portfolio-acquisition
@@ -178,6 +179,8 @@ canonicalPortfolioAcquisition =
     "Recover the full Fund II June 2018 schedule including rows preceding the visible Vend/Stash segment so the portfolio atlas is exhaustive." ∷
   portfolio-acquisition southernTrustProRataAllocation 98
     "Resolve allocation methodology/ownership percentage over time before assigning exact Southern Trust dollar exposure to individual portfolio companies." ∷
+  portfolio-acquisition january2019ValarLineValues 98
+    "Extract exact Valar II/III carrying values from the January 2019 schedule instead of encoding absence of a located figure as zero." ∷
   portfolio-acquisition portfolioCompanyBoardInformationRights 97
     "Map Valar/GP board and information rights at portfolio companies separately from Southern Trust LP rights." ∷
   []
