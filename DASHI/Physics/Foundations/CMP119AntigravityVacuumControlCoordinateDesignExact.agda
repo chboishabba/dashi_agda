@@ -30,6 +30,10 @@ import DASHI.Physics.Foundations.CMP119AntigravityVacuumSequenceNonidentifiabili
 -- Such a control automatically gives a nonzero OFF/ON source pair for the
 -- differential lane.  Existence, safety, laboratory meaning and physical
 -- calibration of such a control remain external/source payments.
+--
+-- Historical `projected...` names are retained only as compatibility aliases.
+-- They refer to the corrected constant/remainder coordinate, not the plaquette
+-- coefficient projector.
 ------------------------------------------------------------------------
 
 data VacuumExperimentCoordinate : Set where
@@ -37,6 +41,12 @@ data VacuumExperimentCoordinate : Set where
 
 data VacuumExperimentDimension : Set where
   projectedVacuumSourceDimension : VacuumExperimentDimension
+
+constantVacuumCoordinate : VacuumExperimentCoordinate
+constantVacuumCoordinate = projectedVacuumCoordinate
+
+constantVacuumSourceDimension : VacuumExperimentDimension
+constantVacuumSourceDimension = projectedVacuumSourceDimension
 
 module _
   {Density Background Fluctuation Control : Set}
@@ -58,7 +68,7 @@ module _
     ; Coordinate.ExperimentalCoordinateDesign.role =
         λ _ → Coordinate.measuredObservable
     ; Coordinate.ExperimentalCoordinateDesign.dimension =
-        λ _ → projectedVacuumSourceDimension
+        λ _ → constantVacuumSourceDimension
     ; Coordinate.ExperimentalCoordinateDesign.read =
         λ _ source → NI.projectedVacuum source scale
     ; Coordinate.ExperimentalCoordinateDesign.applyControl = applyControl
@@ -71,19 +81,28 @@ module _
     ; Coordinate.ExperimentalCoordinateDesign.controlReference = controlReference
     }
 
+  constantVacuumCoordinateSeparatesCanonicalCollision :
+    (source : Canonical.CMP119NormalizedSectorSource
+      Density Background Fluctuation) →
+    Coordinate.CoordinateSeparatesCollision
+      vacuumExperimentDesign
+      (λ candidate → VacuumDisc.currentSourceViewAtScale candidate scale)
+  constantVacuumCoordinateSeparatesCanonicalCollision source =
+    Coordinate.coordinateSeparatesCollision
+      constantVacuumCoordinate
+      (NI.zeroVacuumSource source)
+      (NI.unitVacuumSource source)
+      refl
+      (NI.projectedVacuumSequencesDiffer source scale)
+
   projectedVacuumCoordinateSeparatesCanonicalCollision :
     (source : Canonical.CMP119NormalizedSectorSource
       Density Background Fluctuation) →
     Coordinate.CoordinateSeparatesCollision
       vacuumExperimentDesign
       (λ candidate → VacuumDisc.currentSourceViewAtScale candidate scale)
-  projectedVacuumCoordinateSeparatesCanonicalCollision source =
-    Coordinate.coordinateSeparatesCollision
-      projectedVacuumCoordinate
-      (NI.zeroVacuumSource source)
-      (NI.unitVacuumSource source)
-      refl
-      (NI.projectedVacuumSequencesDiffer source scale)
+  projectedVacuumCoordinateSeparatesCanonicalCollision =
+    constantVacuumCoordinateSeparatesCanonicalCollision
 
   record VacuumSelectiveControl : Set₁ where
     constructor vacuum-selective-control
@@ -112,16 +131,24 @@ module _
 
   open VacuumSelectiveControl public
 
+  selectiveControlChangesConstantVacuum :
+    (selective : VacuumSelectiveControl) →
+    NI.projectedVacuum
+      (applyControl (control selective) (world selective)) scale
+    ≡ NI.projectedVacuum (world selective) scale → ⊥
+  selectiveControlChangesConstantVacuum selective =
+    selectiveControlChangesProjectedVacuum selective
+
   selectiveControlMakesVacuumCoordinateModifiable :
     VacuumSelectiveControl →
     Coordinate.CoordinateModifiableBy
       vacuumExperimentDesign
-      projectedVacuumCoordinate
+      constantVacuumCoordinate
   selectiveControlMakesVacuumCoordinateModifiable selective = record
     { Coordinate.CoordinateModifiableBy.control = control selective
     ; Coordinate.CoordinateModifiableBy.world = world selective
     ; Coordinate.CoordinateModifiableBy.changesCoordinate =
-        selectiveControlChangesProjectedVacuum selective
+        selectiveControlChangesConstantVacuum selective
     }
 
   record VacuumSourceDifferenceWitness : Set where
@@ -142,7 +169,7 @@ module _
         NI.projectedVacuum
           (applyControl (control selective) (world selective)) scale
     ; VacuumSourceDifferenceWitness.nonzeroSourceDifference =
-        λ same → selectiveControlChangesProjectedVacuum selective (sym same)
+        λ same → selectiveControlChangesConstantVacuum selective (sym same)
     }
 
 ------------------------------------------------------------------------
@@ -170,5 +197,9 @@ vacuumSelectiveControlTargetCompiled = true
 physicalVacuumSelectiveControlStillRequired : Bool
 physicalVacuumSelectiveControlStillRequired = true
 
+formalConstantVacuumAlreadyCalibratedPhysicalObservable : Bool
+formalConstantVacuumAlreadyCalibratedPhysicalObservable = false
+
 formalProjectedVacuumAlreadyCalibratedPhysicalObservable : Bool
-formalProjectedVacuumAlreadyCalibratedPhysicalObservable = false
+formalProjectedVacuumAlreadyCalibratedPhysicalObservable =
+  formalConstantVacuumAlreadyCalibratedPhysicalObservable
