@@ -38,10 +38,93 @@ def ensure_catalog_schema(connection: sqlite3.Connection) -> None:
     )
 
 
+def _symbol(
+    module_name: str,
+    *,
+    name: str,
+    kind: str,
+    signature: str = "",
+    body: str = "",
+    refs: Iterable[str] = (),
+) -> dict:
+    qualified_name = name if "." in name else f"{module_name}.{name}"
+    fingerprint = make_fingerprint(signature, body)
+    return {
+        "name": name.rsplit(".", 1)[-1],
+        "qualified_name": qualified_name,
+        "kind": kind,
+        "signature": signature,
+        "normalized_signature": fingerprint.normalized_signature,
+        "signature_sha256": fingerprint.signature_sha256,
+        "body_sha256": fingerprint.body_sha256,
+        "refs": [str(item) for item in refs],
+    }
+
+
 def _iter_interface_symbols(module_name: str, interface: dict) -> Iterable[dict]:
+    """Yield symbols from persisted ModuleInterface JSON plus legacy test shapes."""
+
+    # Current preflight ModuleInterface payload.
+    for item in interface.get("signatures", ()):
+        if not isinstance(item, dict) or not item.get("name"):
+            continue
+        yield _symbol(
+            module_name,
+            name=str(item["name"]),
+            kind="signature",
+            signature=str(item.get("type_text") or ""),
+            refs=(item.get("terminal_head"),) if item.get("terminal_head") else (),
+        )
+
+    for record in interface.get("records", ()):
+        if not isinstance(record, dict) or not record.get("name"):
+            continue
+        record_name = str(record["name"])
+        yield _symbol(module_name, name=record_name, kind="record")
+        constructor = record.get("constructor")
+        if constructor:
+            yield _symbol(module_name, name=str(constructor), kind="constructor", refs=(record_name,))
+        for field in record.get("fields", ()):
+            if not isinstance(field, dict) or not field.get("name"):
+                continue
+            refs = [record_name]
+            if field.get("terminal_head"):
+                refs.append(str(field["terminal_head"]))
+            yield _symbol(
+                module_name,
+                name=str(field["name"]),
+                kind="field",
+                signature=str(field.get("type_text") or ""),
+                refs=refs,
+            )
+
+    for data_item in interface.get("data_constructors", ()):
+        if not isinstance(data_item, (list, tuple)) or len(data_item) != 2:
+            continue
+        datatype, constructors = data_item
+        datatype = str(datatype)
+        yield _symbol(module_name, name=datatype, kind="data")
+        for constructor in constructors or ():
+            yield _symbol(module_name, name=str(constructor), kind="constructor", refs=(datatype,))
+
+    for nested in interface.get("nested_modules", ()):
+        yield _symbol(module_name, name=str(nested), kind="module")
+
+    local_names = set()
+    for item in interface.get("signatures", ()):
+        if isinstance(item, dict) and item.get("name"):
+            local_names.add(str(item["name"]))
+    for record in interface.get("records", ()):
+        if isinstance(record, dict) and record.get("name"):
+            local_names.add(str(record["name"]))
+    for exported in interface.get("resolved_exports", ()):
+        exported = str(exported)
+        if exported and exported not in local_names:
+            yield _symbol(module_name, name=exported, kind="reexport")
+
+    # Compatibility with lightweight/older fixtures and hand-seeded DBs.
     collection_kinds = {
         "functions": "function",
-        "records": "record",
         "data": "data",
         "datatypes": "data",
         "constructors": "constructor",
@@ -53,41 +136,25 @@ def _iter_interface_symbols(module_name: str, interface: dict) -> Iterable[dict]
         values = interface.get(key, ())
         if isinstance(values, dict):
             values = values.values()
-        if not isinstance(values, (list, tuple, dict_values_type())):
+        if not isinstance(values, (list, tuple)) and type(values).__name__ != "dict_values":
             continue
         for value in values:
             if isinstance(value, str):
-                name = value
-                signature = ""
-                body = ""
-                refs: list[str] = []
+                yield _symbol(module_name, name=value, kind=kind)
             elif isinstance(value, dict):
                 name = str(value.get("name") or value.get("field") or value.get("constructor") or "")
-                signature = str(
-                    value.get("type")
-                    or value.get("signature")
-                    or value.get("type_text")
-                    or ""
-                )
-                body = str(value.get("body") or value.get("definition") or "")
+                if not name:
+                    continue
                 raw_refs = value.get("refs") or value.get("references") or ()
-                refs = [str(item) for item in raw_refs] if isinstance(raw_refs, (list, tuple)) else []
-            else:
-                continue
-            if not name:
-                continue
-            qualified_name = name if "." in name else f"{module_name}.{name}"
-            fingerprint = make_fingerprint(signature, body)
-            yield {
-                "name": name.rsplit(".", 1)[-1],
-                "qualified_name": qualified_name,
-                "kind": kind,
-                "signature": signature,
-                "normalized_signature": fingerprint.normalized_signature,
-                "signature_sha256": fingerprint.signature_sha256,
-                "body_sha256": fingerprint.body_sha256,
-                "refs": refs,
-            }
+                refs = raw_refs if isinstance(raw_refs, (list, tuple)) else ()
+                yield _symbol(
+                    module_name,
+                    name=name,
+                    kind=kind,
+                    signature=str(value.get("type") or value.get("signature") or value.get("type_text") or ""),
+                    body=str(value.get("body") or value.get("definition") or ""),
+                    refs=refs,
+                )
 
     exports = interface.get("exports", ())
     if isinstance(exports, dict):
@@ -98,22 +165,7 @@ def _iter_interface_symbols(module_name: str, interface: dict) -> Iterable[dict]
             else:
                 signature = ""
                 kind = "export"
-            fingerprint = make_fingerprint(signature)
-            qualified_name = str(name) if "." in str(name) else f"{module_name}.{name}"
-            yield {
-                "name": str(name).rsplit(".", 1)[-1],
-                "qualified_name": qualified_name,
-                "kind": kind,
-                "signature": signature,
-                "normalized_signature": fingerprint.normalized_signature,
-                "signature_sha256": fingerprint.signature_sha256,
-                "body_sha256": "",
-                "refs": [],
-            }
-
-
-def dict_values_type():
-    return type({}.values())
+            yield _symbol(module_name, name=str(name), kind=kind, signature=signature)
 
 
 def refresh_catalog(connection: sqlite3.Connection) -> int:
@@ -218,7 +270,7 @@ def related_symbols(
     signature_equivalent = [
         item for item in candidates
         if item["qualified_name"] != target["qualified_name"]
-        and target["signature_sha256"]
+        and target["signature"]
         and item["signature_sha256"] == target["signature_sha256"]
     ]
     body_equivalent = [
