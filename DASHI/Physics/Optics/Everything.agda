@@ -17,6 +17,8 @@ open import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact public
 open import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact public
 open import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact public
 open import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact public
+open import DASHI.Physics.Optics.BerkeleyPhotonTransferCalibrationExact public
 open import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact public
 open import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact public
+open import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact public
 open import DASHI.Physics.Optics.Diffraction3DImagingAcquisitionMaxCutExact public
