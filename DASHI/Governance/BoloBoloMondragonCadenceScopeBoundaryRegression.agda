@@ -1,0 +1,21 @@
+module DASHI.Governance.BoloBoloMondragonCadenceScopeBoundaryRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloMondragonCadenceScopeBoundaryExact as Scope
+
+cooperativeMonthlyReportingPaid :
+  Scope.cooperativeManagementReportsToGoverningAtLeastMonthly Scope.canonicalMondragonCadenceScope ≡ true
+cooperativeMonthlyReportingPaid = refl
+
+universityRepresentativeMonthlyPaid :
+  Scope.universityFacultyRepresentativeMeetsRepresentedMonthly Scope.canonicalMondragonCadenceScope ≡ true
+universityRepresentativeMonthlyPaid = refl
+
+universityCadenceNotCorporationWide :
+  Scope.universityFacultyCadenceGeneralisesToAllMondragonCooperatives Scope.canonicalMondragonCadenceBoundary ≡ false
+universityCadenceNotCorporationWide = refl
+
+chapterMonthlyReportingNotUniversitySpecific :
+  Scope.cooperativeChapterMonthlyReportingEqualsUniversityFacultyCadence Scope.canonicalMondragonCadenceBoundary ≡ false
+chapterMonthlyReportingNotUniversitySpecific = refl
