@@ -21,10 +21,30 @@ fay2026Source =
     "Four controlled experiments (combined N=4,607) found messages created with truthful intent were more persuasive and more likely to be shared than messages created to be false. Perceived truth was the main driver of persuasion, while transmission was primarily associated with positive emotion and social engagement. Generalization beyond the controlled setting remains bounded."
     Source.publicAttribution
 
+------------------------------------------------------------------------
+-- ATTRIBUTION / OUTCOME BINDING
+--
+-- The source record is provenance.  An outcome receipt additionally needs a
+-- family-specific admission witness.  This witness does not import truth or
+-- causal authority; it only prevents unrelated/design-only sources from being
+-- substituted for the completed controlled-experiment result family.
+------------------------------------------------------------------------
+
+data PersuasionOutcomeFamily : Set where
+  fay2026ControlledExperimentOutcome : PersuasionOutcomeFamily
+  unadmittedPersuasionOutcome : PersuasionOutcomeFamily
+
+data AdmittedPersuasionSource :
+  PersuasionOutcomeFamily → Source.AttributedSource → Set where
+  fay2026PaysControlledExperimentOutcome :
+    AdmittedPersuasionSource fay2026ControlledExperimentOutcome fay2026Source
+
 record PersuasionTransmissionReceipt : Set where
   constructor persuasion-transmission-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission :
+      AdmittedPersuasionSource fay2026ControlledExperimentOutcome source
     combinedSampleReference : String
     truthfulIntentPersuasionAdvantage : Bool
     truthfulIntentPersuasionAdvantageIsTrue : truthfulIntentPersuasionAdvantage ≡ true
@@ -47,7 +67,7 @@ record PersuasionTransmissionReceipt : Set where
 canonicalPersuasionTransmissionReceipt : PersuasionTransmissionReceipt
 canonicalPersuasionTransmissionReceipt =
   persuasion-transmission-receipt
-    fay2026Source
+    fay2026Source fay2026PaysControlledExperimentOutcome
     "four experiments; combined N=4,607"
     true refl true refl true refl true refl false refl false refl false refl
 
