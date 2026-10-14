@@ -15,6 +15,8 @@ def test_primary_and_inspection_roles_remain_distinct():
         "liTorrPRD1991PrimaryAPS",
         "liTorrPRB1992PrimaryAPS",
         "liTorrPRB1992InspectedReproduction",
+        "liTorrFOPL1993PublicationIdentity",
+        "liTorrFOPL1993InspectedReproduction",
         "kowitt1994PrimaryAPS",
         "reproductionCreatesPublicationAuthority = false",
         "citationImportsScientificProof = false",
@@ -35,10 +37,22 @@ def test_1991_and_1992_bounded_claims_have_exact_locators():
         assert needle in s
 
 
-def test_1993_full_carrier_remains_open_and_critique_is_not_theory_identity():
+def test_1993_microscopic_claims_have_bounded_page_locators():
     s = text()
     for needle in (
-        "fopl1993MicroscopicCarrierStillOpen = true",
+        "fopl1993MicroscopicNarrativeAcquired",
+        "Found. Phys. Lett. 6, 371",
+        "Found. Phys. Lett. 6, 375",
+        "Found. Phys. Lett. 6, 381, Eq. (3.7)",
+        "fopl1993MicroscopicCarrierStillOpen = false",
+        "fopl1993ExactLocatorStillOpen = false",
+    ):
+        assert needle in s
+
+
+def test_critique_is_role_distinct_and_historical_claims_are_not_established_physics():
+    s = text()
+    for needle in (
         "kowittCritiqueDoesNotRewriteLiTorrSource = true",
         "historicalEquationShapeEstablishedPhysics = false",
     ):
