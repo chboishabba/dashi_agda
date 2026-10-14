@@ -64,9 +64,11 @@ projectSurvivorPrefix prefix =
 
 survivorTower :
   (x : Syracuse.PositiveNat) →
-  Tower.ResolutionTower (SurvivorPrefix x)
+  Tower.ResolutionTower
 survivorTower x = record
-  { project = projectSurvivorPrefix }
+  { Carrier = SurvivorPrefix x
+  ; project = projectSurvivorPrefix
+  }
 
 ------------------------------------------------------------------------
 -- All-horizon survival <-> one coherent inverse-limit history.
