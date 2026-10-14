@@ -8,33 +8,39 @@ module DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact where
 -- recognition must not be stated as a bijection between every literal vector
 -- and the 65,610 finite basis labels.
 --
--- Existing owners now pay FOUR substantial ingredients:
+-- The live cut is now representation-native on BOTH factors:
 --
---   * the selected literal 3B element is welded to the certified central-zeta
---     kernel class, whose restricted character is ninety copies of the
---     degree-729 Heisenberg character;
---   * the repository owns an explicit 729-dimensional Schrodinger linear
---     carrier with the full finite-Heisenberg action law;
---   * constructive 3^6 search now proves the explicit Schrodinger module is
---     irreducible in the ordinary invariant-subspace sense;
---   * the canonical linear route identifies the multiplicity OBJECT as
---       S_zeta = Hom_E(H_zeta,W_zeta),
---     with H_zeta x S_zeta <-> W_zeta typed as the actual linear target.
+--   H_zeta : explicit 729-dimensional finite-Heisenberg Schrodinger module;
+--   S_zeta : Hom_E(H_zeta,W_zeta), with source-native 6.Suz multiplicity
+--            structure and candidate degree split 12 + 78 = 90.
 --
--- What remains is therefore more precise than the previous roadmap:
+-- Existing owners pay:
 --
---   (1) prove fixed-nontrivial-central-character Stone--von Neumann uniqueness
---       and use it with the certified source restriction to recognize the
---       explicit Schrodinger representation as the actual H_zeta constituent;
---   (2) instantiate the actual Hom-space/evaluation inverse on the SAME
+--   * selected literal 3B / certified central-zeta kernel same-element data;
+--   * explicit Schrodinger carrier and full finite-Heisenberg action;
+--   * constructive 3^6 search and unconditional Schrodinger irreducibility;
+--   * fixed-phase nonlinear CHARACTER-SIGNATURE uniqueness;
+--   * a source-written companion-Lean theorem that equal characters determine
+--     simple finite-group representations without algebraic closure;
+--   * the canonical linear multiplicity target S_zeta = Hom_E(H_zeta,W_zeta);
+--   * Barraclough--Wilson's source-native extension/tensor/induction route for
+--     a 6.Suz multiplicity representation, with candidate families 12a/b and
+--     78a/b and pair-level Monster-occurrence matchers already written.
+--
+-- What remains is correspondingly narrow:
+--
+--   (1) kernel-observe/transport the generic Lean character theorem to the
+--       concrete DASHI finite-Heisenberg FDRep and actual restricted H_zeta;
+--   (2) execute the existing GAP/CTblLib candidate + main/quotient matchers,
+--       then orient the individual zeta member of the 12a/b and 78a/b pairs;
+--   (3) instantiate H_zeta x S_zeta -> W_zeta evaluation/recovery on the SAME
 --       literal W_zeta vector carrier;
---   (3) choose/recognize a genuine basis of S_zeta indexed by Fin 90 and prove
---       that the tensor basis is the representation-native W_zeta basis on
---       which the six translation/modulation observers act.
+--   (4) only for coordinate consumers, choose a genuine basis of S_zeta and
+--       identify it with Fin 90, then prove tensor-basis translation/modulation
+--       compatibility.
 --
--- Ninety-fold character isotypy constrains (2)/(3), but it does not choose the
--- Hom-space basis.  Likewise the finite X6 x Fin90 model does not identify all
--- W_zeta vectors with basis labels.
+-- Thus Fin 90 is no longer the primary multiplicity object: it is a possible
+-- basis coordinate on the actual 6.Suz-structured Hom-space representation.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -49,8 +55,11 @@ import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as Co
 import DASHI.Moonshine.Monster3BFiniteProjectorModelExact as Model
 import DASHI.Moonshine.Monster3BFiniteSchrodingerHilbertLiftExact as Schrodinger
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact as Irreducibility
+import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact as CharacterLean
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
+import DASHI.Wikimedia.IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact as Suzuki
+import DASHI.Wikimedia.IbrahimMonster3BSuzukiMainQuotientSameObjectSnowballExact as SuzukiSame
 
 ------------------------------------------------------------------------
 -- 1. Corrected source package.  This is deliberately NOT an inhabitant here.
@@ -95,8 +104,17 @@ schrodingerBoundary = Schrodinger.canonicalSchrodingerHilbertLiftBoundary
 irreducibilityBoundary : Irreducibility.Boundary
 irreducibilityBoundary = Irreducibility.canonicalBoundary
 
+characterLeanBoundary : CharacterLean.Boundary
+characterLeanBoundary = CharacterLean.canonicalBoundary
+
 linearHomFrontier : Hom.LinearMultiplicityHomFrontier
 linearHomFrontier = Hom.currentLinearMultiplicityHomFrontier
+
+suzukiMultiplicityFrontier : Suzuki.SuzukiMultiplicityFrontier
+suzukiMultiplicityFrontier = Suzuki.currentSuzukiMultiplicityFrontier
+
+suzukiSameObjectFrontier : SuzukiSame.SuzukiMainSameObjectFrontier
+suzukiSameObjectFrontier = SuzukiSame.currentSuzukiMainSameObjectFrontier
 
 ------------------------------------------------------------------------
 -- 3. Attribution / WrongType firewalls for the recut.
@@ -105,6 +123,8 @@ linearHomFrontier = Hom.currentLinearMultiplicityHomFrontier
 data NinetyIsotypyCreatesMultiplicityBasis : Set where
 data Degree729CreatesActualHZetaSameObject : Set where
 data IrreducibilityCreatesActualHZetaSameObject : Set where
+data TwelvePlusSeventyEightCreatesMonsterOccurrence : Set where
+data SuzukiCharacterPairCreatesIndividualZetaOrientation : Set where
 data FiniteModelBasisCreatesLinearEvaluation : Set where
 data HomDimensionCreatesNormalizerAction : Set where
 
@@ -120,6 +140,14 @@ irreducibilityDoesNotCreateActualHZetaSameObject :
   IrreducibilityCreatesActualHZetaSameObject → ⊥
 irreducibilityDoesNotCreateActualHZetaSameObject ()
 
+twelvePlusSeventyEightDoesNotCreateMonsterOccurrence :
+  TwelvePlusSeventyEightCreatesMonsterOccurrence → ⊥
+twelvePlusSeventyEightDoesNotCreateMonsterOccurrence ()
+
+suzukiPairDoesNotCreateIndividualZetaOrientation :
+  SuzukiCharacterPairCreatesIndividualZetaOrientation → ⊥
+suzukiPairDoesNotCreateIndividualZetaOrientation ()
+
 finiteModelDoesNotCreateLinearEvaluation :
   FiniteModelBasisCreatesLinearEvaluation → ⊥
 finiteModelDoesNotCreateLinearEvaluation ()
@@ -134,7 +162,7 @@ homDimensionDoesNotCreateNormalizerAction ()
 
 nextResidual : String
 nextResidual =
-  "Schrodinger irreducibility is now closed by constructive 729-state witness extraction. The next mathematical leaf is fixed-nontrivial-central-character Stone-von Neumann uniqueness, followed by the actual source-action intertwiner identifying the certified degree-729 H_zeta constituent with the explicit Schrodinger representation. After that, instantiate S_zeta = Hom_E(H_zeta,W_zeta) and its evaluation/recovery on the same literal VOA W_zeta vector carrier; finally choose a representation-native basis of S_zeta indexed by Fin 90 and prove basis-tensor compatibility with the finite X6 x Fin90 translation/modulation model. Ninety-fold character isotypy and 65610=729*90 constrain these payments but do not choose the basis."
+  "Schrodinger irreducibility is closed. Generic equal-character simple-representation isomorphism is source-written in companion Lean without algebraic closure, but exact-head kernel observation and the concrete Monster FDRep/class-character transport remain open. On multiplicity, stop treating Fin90 as the primary object: execute the existing CTblLib 6.Suz candidate producer and Suzuki-main-quotient matcher to pay the source-native 12a/b + 78a/b pair representation and actual Monster occurrence, then orient the individual zeta members. Instantiate S_zeta = Hom_E(H_zeta,W_zeta) and its evaluation/recovery on the same literal VOA W_zeta vector carrier. Only then, if a coordinate consumer requires it, choose a representation-native basis of S_zeta indexed by Fin90 and prove tensor-basis translation/modulation compatibility."
 
 record CorrectedWZetaMaxCutBoundary : Set where
   constructor corrected-w-zeta-maxcut-boundary
@@ -146,9 +174,19 @@ record CorrectedWZetaMaxCutBoundary : Set where
     explicitSchrodingerHeisenbergActionPaid : Bool
     arbitraryNonzeroCoordinateExtractionPaid : Bool
     explicitSchrodingerIrreducibilityPaid : Bool
-    fixedCentralCharacterUniquenessPaid : Bool
+    fixedPhaseCharacterSignatureUniquenessPaid : Bool
+    genericEqualCharacterSimpleIsoLeanSourceWritten : Bool
+    genericEqualCharacterSimpleIsoKernelObserved : Bool
+    monsterFDRepCharacterTransportPaid : Bool
     homSpaceMultiplicityTargetReused : Bool
+    suzukiMultiplicityRepresentationRouteSourcePaid : Bool
+    suzukiTwelvePlusSeventyEightCandidateShapePaid : Bool
+    suzukiCandidateProducerWritten : Bool
+    suzukiCandidateProducerExecuted : Bool
+    suzukiPairMonsterOccurrencePaid : Bool
+    individualZetaMultiplicityOrientationPaid : Bool
     finiteX6Fin90BasisModelPaid : Bool
+    fin90IsPrimaryMultiplicityObject : Bool
     wholeWZetaVectorCarrierBijectionToFiniteBasisRequired : Bool
     actualHZetaSameObjectRecognitionPaid : Bool
     actualHomEvaluationSameObjectPaid : Bool
@@ -169,9 +207,19 @@ canonicalBoundary =
     (Schrodinger.fullHeisenbergLinearActionPackaged Schrodinger.canonicalSchrodingerHilbertLiftBoundary)
     (Irreducibility.arbitraryNonzeroVectorYieldsSelectedNonzeroCoordinate Irreducibility.canonicalBoundary)
     (Irreducibility.schrodingerIrreducibilityPaid Irreducibility.canonicalBoundary)
-    (Irreducibility.fixedCentralCharacterUniquenessPaid Irreducibility.canonicalBoundary)
     true
+    (CharacterLean.leanEqualCharacterSimpleIsoSourceWritten CharacterLean.canonicalBoundary)
+    (CharacterLean.leanExactHeadKernelReceiptObserved CharacterLean.canonicalBoundary)
+    false
     true
+    (Suzuki.primaryTensorInductionFormulaPaid Suzuki.currentSuzukiMultiplicityFrontier)
+    (Suzuki.faithfulTwelveSeventyEightPairShapeSourcePaid Suzuki.currentSuzukiMultiplicityFrontier)
+    (Suzuki.faithfulTwelveSeventyEightCandidateProducerWritten Suzuki.currentSuzukiMultiplicityFrontier)
+    (Suzuki.candidateProducerExecuted Suzuki.currentSuzukiMultiplicityFrontier)
+    (SuzukiSame.actualRestrictedMonsterOccurrencePaid SuzukiSame.currentSuzukiMainSameObjectFrontier)
+    (SuzukiSame.individualZetaAtlasLabelOrientationPaid SuzukiSame.currentSuzukiMainSameObjectFrontier)
+    true
+    false
     false
     false
     false
