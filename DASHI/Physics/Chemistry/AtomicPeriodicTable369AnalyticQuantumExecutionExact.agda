@@ -86,18 +86,19 @@ record AnalyticQuantumExecutionBoundary : Set where
     analyticHydrogenicWavefunctionsExecuted : Bool
     spatialC3RotationResidualExecuted : Bool
     weightedHydrogenicE1GraphExecuted : Bool
+    lithiumBerylliumMinimalBasisSCFExecuted : Bool
     spatialRotationEqualsChargeTransport : Bool
     finiteC3RecognitionEqualsFullAtomic369Identity : Bool
     hydrogenicExecutionEqualsManyElectronRecovery : Bool
     E1SelectionRuleEqualsMeasuredTransitionIntensity : Bool
-    lithiumBerylliumMultiOrbitalSCFRecovered : Bool
+    lithiumBerylliumCompleteBasisRecoveryPaid : Bool
 
 open AnalyticQuantumExecutionBoundary public
 
 canonicalAnalyticQuantumExecutionBoundary : AnalyticQuantumExecutionBoundary
 canonicalAnalyticQuantumExecutionBoundary =
   analyticQuantumExecutionBoundary
-    true true true true
+    true true true true true
     false false false false false
 
 spatialRotationEqualsChargeTransportIsFalse :
@@ -108,6 +109,10 @@ finiteC3RecognitionEqualsFullAtomic369IdentityIsFalse :
   finiteC3RecognitionEqualsFullAtomic369Identity canonicalAnalyticQuantumExecutionBoundary ≡ false
 finiteC3RecognitionEqualsFullAtomic369IdentityIsFalse = refl
 
-lithiumBerylliumMultiOrbitalSCFRecoveredIsFalse :
-  lithiumBerylliumMultiOrbitalSCFRecovered canonicalAnalyticQuantumExecutionBoundary ≡ false
-lithiumBerylliumMultiOrbitalSCFRecoveredIsFalse = refl
+lithiumBerylliumMinimalBasisSCFExecutedIsTrue :
+  lithiumBerylliumMinimalBasisSCFExecuted canonicalAnalyticQuantumExecutionBoundary ≡ true
+lithiumBerylliumMinimalBasisSCFExecutedIsTrue = refl
+
+lithiumBerylliumCompleteBasisRecoveryPaidIsFalse :
+  lithiumBerylliumCompleteBasisRecoveryPaid canonicalAnalyticQuantumExecutionBoundary ≡ false
+lithiumBerylliumCompleteBasisRecoveryPaidIsFalse = refl
