@@ -1,6 +1,7 @@
 module DASHI.Culture.PowersPlantationParadiseValidation where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
@@ -11,6 +12,7 @@ import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as Cross
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
+import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as EmpiricalPareto
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 ------------------------------------------------------------------------
@@ -88,6 +90,15 @@ _empirical-causal-firewall-paid :
   Empirical.ObservationalEvidenceIdentifiesCausalEffect → ⊥
 _empirical-causal-firewall-paid =
   Empirical.observationalEvidenceDoesNotIdentifyCausalEffect
+
+_empirical-acquisition-frontier-paid :
+  EmpiricalPareto.empiricalAcquisitionFrontier
+  ≡ EmpiricalPareto.primaryCorpusCell
+    ∷ EmpiricalPareto.compensationLedgerCell
+    ∷ EmpiricalPareto.distributionalIncidenceCell
+    ∷ []
+_empirical-acquisition-frontier-paid =
+  EmpiricalPareto.currentFrontierIsCorpusCompensationDistribution
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
