@@ -9,14 +9,18 @@ def read(rel: str) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
-def test_si_calibration_is_reduced_to_authority_and_stress_length_product():
+def test_si_calibration_is_reduced_to_one_source_scale_payment():
     text = read("DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda")
-    for token in (
+    required = (
         "vendoredCODATAEinsteinCouplingCandidateAvailable",
         "exactSpeedOfLightIsNotCalibrationBlocker",
-        "acceptedMeasuredGAuthorityStillRequired",
-        "sourceStressLengthSquaredScaleStillRequired",
-        "separateStressAndLengthIdentificationRequired",
-        "newEinsteinCouplingConventionRequired",
-    ):
+        "acceptedMeasuredGAuthorityPaid = true",
+        "acceptedMeasuredGAuthorityStillRequired = false",
+        "acceptedPhysicalEinsteinCouplingAvailable = true",
+        "sourceStressLengthSquaredScaleStillRequired = true",
+        "separateStressAndLengthIdentificationRequired = false",
+        "newEinsteinCouplingConventionRequired = false",
+        "remainingSICalibrationPhysicalPackageCount = 1",
+    )
+    for token in required:
         assert token in text
