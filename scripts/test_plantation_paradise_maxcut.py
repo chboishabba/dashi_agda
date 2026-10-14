@@ -26,16 +26,12 @@ EXPECTED = {
         "sameProductionCannotRecoverVenueAccess", "historyQualifiedTheatreAccess",
     ],
     "DASHI/Culture/PowersPlantationParadiseGovernedCrossPollinationExact.agda": [
-        "sameCulturalSurfaceCannotRecoverStanding",
-        "sameCulturalSurfaceCannotRecoverContestability",
-        "sameCulturalSurfaceCannotRecoverMaterialCone",
-        "everyAdequateStandingObserverSeparates",
-        "everyAdequateContestabilityObserverSeparates",
-        "everyAdequateMaterialConeObserverSeparates",
+        "sameCulturalSurfaceCannotRecoverStanding", "sameCulturalSurfaceCannotRecoverContestability",
+        "sameCulturalSurfaceCannotRecoverMaterialCone", "everyAdequateStandingObserverSeparates",
+        "everyAdequateContestabilityObserverSeparates", "everyAdequateMaterialConeObserverSeparates",
         "standingContestabilityJoint", "governedSocialPositionJoint",
-        "sameCulturalSurfaceCannotRetainGovernedSocialPosition",
-        "powersLegibilityChannel", "powersExactInstitutionalViewDecoderImpossible",
-        "powersChapter5RootedTraceClaim",
+        "sameCulturalSurfaceCannotRetainGovernedSocialPosition", "powersLegibilityChannel",
+        "powersExactInstitutionalViewDecoderImpossible", "powersChapter5RootedTraceClaim",
     ],
     "DASHI/Culture/PowersPlantationParadiseMinetteMicrohistoryExact.agda": [
         "prestMinetteMarsanSource", "camierMinetteLifeSource",
@@ -44,8 +40,8 @@ EXPECTED = {
         "minette1789LegalDisputeReceipt", "MinetteSalaryNonpaymentReceipt",
         "minette1784SalaryNonpaymentReceipt", "contractAndNonpaymentDoNotProveSettlement",
         "prestLegalNoticeDateReceipt", "lamecaLegalNoticeDateReceipt",
-        "secondaryDateDisagreementNeedsPrimaryInspection",
-        "benefitPerformanceDoesNotProveSettlement", "canonicalMinetteMicrohistoryBoundary",
+        "secondaryDateDisagreementNeedsPrimaryInspection", "benefitPerformanceDoesNotProveSettlement",
+        "canonicalMinetteMicrohistoryBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseMinetteChronologyContestationExact.agda": [
         "minette1790NoticeRoot", "prest1790ClaimLeaf", "lameca1790ClaimLeaf",
@@ -71,38 +67,36 @@ EXPECTED = {
     "DASHI/Culture/PowersPlantationParadiseEmpiricalProgrammeExact.agda": [
         "minetteCareerStatusReceipt", "portAuPrinceSeatingGeometryReceipt",
         "portAuPrinceFloorplanReceipt", "portAuPrinceBusinessReceipt",
-        "theatreCorpusProvenanceReceipt", "benefitBurdenBoundary",
-        "responsibilityBurdenBoundary", "namedPerformerStatusLeaf",
-        "venueSeatingAccessLeaf", "venueEconomyLeaf", "distributionalIncidenceLeaf",
-        "causalMobilityLeaf", "primaryCorpusSaturationLeaf", "compensationPaymentLeaf",
-        "legalStatusSeatingRuleLeaf", "theatreParticipationMobilityCausalDemand",
-        "observationalEvidenceDoesNotIdentifyCausalEffect",
+        "theatreCorpusProvenanceReceipt", "benefitBurdenBoundary", "responsibilityBurdenBoundary",
+        "namedPerformerStatusLeaf", "venueSeatingAccessLeaf", "venueEconomyLeaf",
+        "distributionalIncidenceLeaf", "causalMobilityLeaf", "primaryCorpusSaturationLeaf",
+        "compensationPaymentLeaf", "legalStatusSeatingRuleLeaf",
+        "theatreParticipationMobilityCausalDemand", "observationalEvidenceDoesNotIdentifyCausalEffect",
         "canonicalPowersEmpiricalProgrammeBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseEmpiricalAcquisitionParetoExact.agda": [
         "primaryCorpusCell", "compensationLedgerCell", "distributionalIncidenceCell",
         "causalIdentificationCell", "empiricalAcquisitionFrontier",
-        "currentFrontierIsCorpusCompensationDistribution",
+        "currentFrontierIsCorpusDistribution", "compensationLedgerOffCurrentFrontier",
         "canonicalPowersEmpiricalAcquisitionParetoBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda": [
-        "paradiseObserverCannotRecoverMaterialAffordance",
-        "recognitionCannotRecoverDistribution", "localExpansionDoesNotProveGlobalEmancipation",
-        "sourceClaimDoesNotBecomeDASHITheorem", "historicalClaimBoundary",
-        "governedCrossPollinationBoundary", "empiricalProgrammeBoundary",
-        "empiricalAcquisitionParetoBoundary",
+        "paradiseObserverCannotRecoverMaterialAffordance", "recognitionCannotRecoverDistribution",
+        "localExpansionDoesNotProveGlobalEmancipation", "sourceClaimDoesNotBecomeDASHITheorem",
+        "historicalClaimBoundary", "governedCrossPollinationBoundary",
+        "empiricalProgrammeBoundary", "empiricalAcquisitionParetoBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
-        "_paradise-material-gap-paid", "_performance-status-gap-paid",
-        "_archive-absence-gap-paid", "_governed-standing-gap-paid",
-        "_contestability-gap-paid", "_material-cone-gap-paid",
+        "_paradise-material-gap-paid", "_performance-status-gap-paid", "_archive-absence-gap-paid",
+        "_governed-standing-gap-paid", "_contestability-gap-paid", "_material-cone-gap-paid",
         "_joint-required-axes-gap-paid", "_governed-social-position-gap-paid",
         "_legibility-decoder-gap-paid", "_empirical-minette-receipt-paid",
         "_empirical-seating-receipt-paid", "_empirical-causal-firewall-paid",
         "_empirical-acquisition-frontier-paid", "_minette-salary-nonpayment-paid",
         "_minette-date-contestation-paid", "_enslaved-distribution-category-evidence-paid",
         "_julien-contribution-burden-paid", "_lise-saint-marc-event-paid",
-        "_sibling-comparison-not-causal-control-paid", "_rooted-trace-paid",
+        "_sibling-comparison-not-causal-control-paid", "_martinique-comparative-seating-paid",
+        "_martinique-not-saint-domingue-rule-paid", "_rooted-trace-paid",
     ],
 }
 
@@ -123,12 +117,9 @@ if not rollup.exists():
 else:
     lines = set(rollup.read_text(encoding="utf-8").splitlines())
     for module in [
-        "PowersPlantationParadiseSourceAtlasExact",
-        "PowersPlantationParadiseHistoricalClaimReceiptsExact",
-        "ColonialPerformanceStatusNonfactorabilityExact",
-        "HistoricalArchiveAbsenceNonfactorabilityExact",
-        "ColonialTheatreAccessAdapterExact",
-        "PowersPlantationParadiseGovernedCrossPollinationExact",
+        "PowersPlantationParadiseSourceAtlasExact", "PowersPlantationParadiseHistoricalClaimReceiptsExact",
+        "ColonialPerformanceStatusNonfactorabilityExact", "HistoricalArchiveAbsenceNonfactorabilityExact",
+        "ColonialTheatreAccessAdapterExact", "PowersPlantationParadiseGovernedCrossPollinationExact",
         "PowersPlantationParadiseMinetteMicrohistoryExact",
         "PowersPlantationParadiseMinetteChronologyContestationExact",
         "PowersPlantationParadiseEnslavedDistributionEvidenceExact",
@@ -136,11 +127,9 @@ else:
         "PowersPlantationParadiseComparativeVenueEvidenceExact",
         "PowersPlantationParadiseEmpiricalProgrammeExact",
         "PowersPlantationParadiseEmpiricalAcquisitionParetoExact",
-        "PowersPlantationParadiseSynthesisExact",
-        "PowersPlantationParadiseValidation",
+        "PowersPlantationParadiseSynthesisExact", "PowersPlantationParadiseValidation",
     ]:
-        import_line = f"import DASHI.Culture.{module}"
-        if import_line not in lines:
+        if f"import DASHI.Culture.{module}" not in lines:
             errors.append(f"Culture/Everything.agda missing import {module}")
 
 if errors:
