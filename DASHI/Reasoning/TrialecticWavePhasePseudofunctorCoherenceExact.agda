@@ -17,6 +17,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Foundations.Base369TriTruthField as Tri
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact as Presheaf
+import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
+import DASHI.Reasoning.TrialecticSetEffectiveDescentExact as SetEffective
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact as Phase
 
 ------------------------------------------------------------------------
@@ -31,6 +33,25 @@ unitIso :
     x
 unitIso x = Phase.identityHom x
 
+zeroPhaseFromEquality :
+  ∀ {U : Site.RelObj}
+    {left right : Presheaf.Section U} →
+  left ≡ right →
+  Phase.FibreHom left right
+zeroPhaseFromEquality {Site.globalABC} eq =
+  Phase.global-phase-hom
+    (SetEffective.boundary-observational-equivalence
+      (cong Cell.edgeAB eq)
+      (cong Cell.edgeBC eq)
+      (cong Cell.edgeCA eq))
+    Tri.triZero
+zeroPhaseFromEquality {Site.edgeAB} eq = Phase.phase-equality-hom eq Tri.triZero
+zeroPhaseFromEquality {Site.edgeBC} eq = Phase.phase-equality-hom eq Tri.triZero
+zeroPhaseFromEquality {Site.edgeCA} eq = Phase.phase-equality-hom eq Tri.triZero
+zeroPhaseFromEquality {Site.vertexA} eq = Phase.phase-equality-hom eq Tri.triZero
+zeroPhaseFromEquality {Site.vertexB} eq = Phase.phase-equality-hom eq Tri.triZero
+zeroPhaseFromEquality {Site.vertexC} eq = Phase.phase-equality-hom eq Tri.triZero
+
 compositorIso :
   ∀ {U V W : Site.RelObj}
     (g : Site.RelHom V W)
@@ -41,25 +62,6 @@ compositorIso :
     (Presheaf.restrict f (Presheaf.restrict g x))
 compositorIso g f x =
   zeroPhaseFromEquality (Presheaf.restrictComposition g f x)
-  where
-    zeroPhaseFromEquality :
-      ∀ {U' : Site.RelObj}
-        {left right : Presheaf.Section U'} →
-      left ≡ right →
-      Phase.FibreHom left right
-    zeroPhaseFromEquality {Site.globalABC} eq =
-      Phase.global-phase-hom
-        (DASHI.Reasoning.TrialecticSetEffectiveDescentExact.boundary-observational-equivalence
-          (cong DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact.edgeAB eq)
-          (cong DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact.edgeBC eq)
-          (cong DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact.edgeCA eq))
-        Tri.triZero
-    zeroPhaseFromEquality {Site.edgeAB} eq = Phase.phase-equality-hom eq Tri.triZero
-    zeroPhaseFromEquality {Site.edgeBC} eq = Phase.phase-equality-hom eq Tri.triZero
-    zeroPhaseFromEquality {Site.edgeCA} eq = Phase.phase-equality-hom eq Tri.triZero
-    zeroPhaseFromEquality {Site.vertexA} eq = Phase.phase-equality-hom eq Tri.triZero
-    zeroPhaseFromEquality {Site.vertexB} eq = Phase.phase-equality-hom eq Tri.triZero
-    zeroPhaseFromEquality {Site.vertexC} eq = Phase.phase-equality-hom eq Tri.triZero
 
 ------------------------------------------------------------------------
 -- 2. Coherence is phase-trivial: every structural comparison has zero phase.
