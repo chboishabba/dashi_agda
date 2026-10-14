@@ -29,16 +29,14 @@ import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Prese
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
+import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
+import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryLengthExact as QueryLength
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
 import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact as Stream
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitCostedExact as CostedBit
-
-------------------------------------------------------------------------
--- Fixed machine/tableau parameters.
-------------------------------------------------------------------------
 
 descriptionMachine :
   Description.GuardedCookFormulaDescription →
@@ -56,8 +54,8 @@ descriptionCols description =
 
 descriptionInitialTarget :
   (description : Description.GuardedCookFormulaDescription) →
-  DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact.Bits
-    (DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact.RowBitsWidth
+  CNF.Bits
+    (Decode.RowBitsWidth
       (descriptionMachine description)
       (descriptionCols description))
 descriptionInitialTarget description =
@@ -74,10 +72,6 @@ fixedDescriptionBitStepConstant description =
     (descriptionMachine description)
     (Description.steps description)
     (descriptionCols description)
-
-------------------------------------------------------------------------
--- The exact costed evaluator specialized to D and index i.
-------------------------------------------------------------------------
 
 streamedQueryBitCosted :
   (description : Description.GuardedCookFormulaDescription) →
@@ -118,10 +112,6 @@ streamedQueryBitCostedSemanticExact description index =
     (streamedQueryBitCostedResultExact description index)
     (Stream.streamedQueryBitExact (Description.atIndex description index))
 
-------------------------------------------------------------------------
--- Exact evaluator work bound.
-------------------------------------------------------------------------
-
 fixedDescriptionBitWork :
   Description.GuardedCookFormulaDescription → Nat → Nat
 fixedDescriptionBitWork description index =
@@ -146,10 +136,6 @@ fixedDescriptionBitWorkByIndex description index =
     (descriptionCols description)
     (descriptionInitialTarget description)
     index
-
-------------------------------------------------------------------------
--- Degree-one polynomial envelope in literal canonical query input size.
-------------------------------------------------------------------------
 
 fixedDescriptionLinearCoefficient :
   Description.GuardedCookFormulaDescription → Nat
