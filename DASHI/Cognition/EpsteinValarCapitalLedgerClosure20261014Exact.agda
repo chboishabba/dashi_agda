@@ -137,8 +137,10 @@ valarDoesNotCreatePalantirInvestment : ValarInvestmentImpliesPalantirInvestment 
 valarDoesNotCreatePalantirInvestment ()
 
 ------------------------------------------------------------------------
--- Remaining Valar acquisition now moves from existence/amount to rights,
--- underlying portfolio, distributions and ultimate disposition.
+-- Remaining Valar acquisition moves from existence/amount to rights,
+-- underlying portfolio, distributions, ultimate disposition and fungible
+-- capital capacity. Source-specific tracing is not needed for the systemic
+-- balance-sheet claim unless a stronger earmarking proposition is sought.
 ------------------------------------------------------------------------
 
 data ValarClosureDebt : Set where
@@ -148,7 +150,7 @@ data ValarClosureDebt : Set where
   portfolioLookThrough : ValarClosureDebt
   distributionsAndFees : ValarClosureDebt
   estateExitDisposition : ValarClosureDebt
-  sourceSpecificInflowTracing : ValarClosureDebt
+  capitalPoolCapacityChronology : ValarClosureDebt
 
 record ValarClosureAcquisition : Set where
   constructor valar-closure-acquisition
@@ -173,6 +175,6 @@ canonicalValarClosureAcquisition =
     "Acquire executed subscription agreements and complete LP rights/governance terms for both funds."
   ∷ valar-closure-acquisition fundIIFullCallLedger 97 true
     "Reconstruct Fund II calls 6 onward to reconcile the entire USD15m commitment rather than relying on aggregate LP-statement totals."
-  ∷ valar-closure-acquisition sourceSpecificInflowTracing 96 true
-    "Only with daily bank-balance and settlement data test whether any Black/Rothschild inflow can be source-traced to Valar calls; entity continuity alone remains insufficient."
+  ∷ valar-closure-acquisition capitalPoolCapacityChronology 96 true
+    "Reconstruct Southern Trust's aggregate liquidity/capital-capacity timeline around the Valar calls. Major Black/Rothschild inflows can contribute to a fungible pool without being treated as earmarked for Valar."
   ∷ []
