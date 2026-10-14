@@ -20,6 +20,7 @@ EXPECT = {
     "DASHI/Physics/Propulsion/Rocketdyne1974OperationalValveReliabilityLessonExact.agda": ["shuttleMetalNitrateValveLesson", "sharedValveReliabilityCoordinate", "differentFailureMechanismFromRocketdyneSand", "operationalValveReliabilityBoundary"],
     "DASHI/Physics/Propulsion/Rocketdyne1974HotSectionQualificationFrontierExact.agda": ["rocketdyneQualificationReverseFrontier", "processRouteObligation", "geometryRevisionObligation", "inspectionObligation", "lifeReliabilityObligation", "fullQualificationPaymentStillOpen"],
     "DASHI/Physics/Materials/RocketdyneMaterialSurvivabilityCrossPollinationExact.agda": ["flightC103ManufacturingLesson", "manufacturingProcessCoordinateRequired"],
+    "DASHI/Physics/Materials/FusionPropulsionMaterialSurvivabilityCrossPollinationExact.agda": ["rocketdyneQualificationReverseFrontier", "canonicalHotSectionQualificationBoundary", "fusionQualificationNeedsOwnSameObjectPayment"],
 }
 
 def main() -> int:
