@@ -19,6 +19,7 @@ import DASHI.Mathematics.Complexity.CodedFiniteStandardSingletonLinkExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardModeTransitionEmbeddingExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkTransitionPreservationExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedStructuralSimulationExact
+import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedRunSimulationExact
 
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionPredicateCodeExact
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptancePredicateCodeExact
@@ -69,7 +70,10 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 --    * `CodedFiniteStandardLinkedStructuralSimulationExact` inhabits the
 --      EXISTING `StructuralStandardMachineSimulation` interface with
 --      stateMap = disjoint Fin injection and symbolMap = identity;
---    * whole `standardNext` steps commute.
+--    * whole `standardNext` steps commute;
+--    * `CodedFiniteStandardLinkedRunSimulationExact` lifts this pointwise result
+--      to exact whole runs with IDENTICAL step count and specializes it to the
+--      actual `CodedStandardPolynomialDecider.execution` witness.
 --
 -- 5. STREAMED COOK EVALUATOR DEFUNCTIONALISATION
 --    * transition placed predicates are finite `(time,column)` codes;
@@ -99,8 +103,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 -- B. assemble that fragment with the ACTUAL coded polynomial candidate via the
 --    proved mode-sum + safe-link machinery and add the finite opposite suffix;
 --
--- C. construct concrete generator call/return runs and lift the local
---    materialisation/bisimulation lemmas to the complete exact candidate run;
+-- C. construct concrete generator call/return runs around the now-paid exact
+--    linked candidate middle run, and lift the local materialisation/bisimulation
+--    lemmas across those generator calls;
 --
 -- D. close prefix + candidate + suffix target time to the SAME exact T used in
 --    the target's own guarded Cook formula;
