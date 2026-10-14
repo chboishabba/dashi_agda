@@ -44,6 +44,12 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Governance/IRISDenaBunkClaimRevisionConflictExact.agda
 
+      - name: Type-check correction-aware exact review gate
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaCorrectionAwareReviewGateExact.agda
+
       - name: Type-check observer hierarchy non-descent
         run: >-
           nix develop .# --command
