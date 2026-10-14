@@ -18,6 +18,7 @@ module DASHI.Moonshine.OggSSP2BUniqueRangeNormWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Moonshine.OggSSP2BUniqueInvariant24RangeExact
 
 record ExteriorFromFrobeniusRangeCompiler
