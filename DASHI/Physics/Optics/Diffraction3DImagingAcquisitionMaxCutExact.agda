@@ -8,8 +8,10 @@ import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact as SourceOper
 import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditioning
 import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact as LocalExecution
 import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact as InfoSource
+import DASHI.Physics.Optics.BerkeleyPhotonTransferCalibrationExact as PhotonTransfer
 import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as ExposureProvenance
+import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
 
 ------------------------------------------------------------------------
 -- ACQUISITION MAX-CUT
@@ -30,18 +32,22 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 -- certification. None of these local receipts is promoted into the still-
 -- unexecuted real Berkeley PSF receipt.
 --
--- The information-design code additionally pays a common *analysis* photon
--- normalization: each real dataset is divided by its own mean, rescaled to a
--- synthetic mean count of 500, biased by 10 and evaluated with a Poisson noise
--- model. This is not physical acquisition-photon calibration.
+-- Photon transfer is now paid at a sharper level. The published executed
+-- calibration notebook loads the simultaneous RML/Diffuser/lensed grayscale
+-- sweep, fits variance against mean in a shot-noise regime, and applies
+--   clip((image - intercept) / slope, 0, infinity)
+-- to estimate detected photon counts. Recoverable displayed fits are
+-- RML 0.02x+1.46, Diffuser 0.03x+0.36, Lens 0.05x+0.01. This pays a source-
+-- executed detected-photon conversion surface, but not optical throughput,
+-- incident-photon equality, or the hidden full-precision fit arrays.
 --
--- ConvRML further pays identical sensor model, common illumination / approximate
--- magnification matching, publication exposure calibration, and released-code
--- RGB8 + zero-gain controls. The publication and released capture script expose
--- different exposure triples. ExperimentalCoordinateDesign is reused to prove
--- that dataset-tranche provenance separates worlds collapsed by the generic
--- PLD label, while the paper and older AWB worlds can share one exposure profile.
--- Thus exposure equality alone cannot identify the selected dataset.
+-- The selected 100k PLD is also source-separated from the AWB 100k and AWB 25k
+-- datasets in the public Drive. Its full-resolution RML branch is explicitly
+-- partitioned 0--25k, 25--50k, 50--75k and 75--100k. Release-lineage capture
+-- code from June through September pins RGB8, gain=0 and 25/80/18 ms in
+-- diffuser/RML/ground-truth order. No per-archive run log was observed that
+-- welds those code defaults to the exact archive bytes, so same-run exposure
+-- identity remains fail-closed.
 --
 -- Remaining numerical/physical leaves are now:
 --   A. execute/ingest the pinned binary PSF audit and retain its numerical
@@ -49,10 +55,11 @@ import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as Expo
 --   B. run the memory planner on the actual PSF dimensions, select the finite
 --      lateral grid / sparsity class required by the intended 3-D claim, and
 --      populate the same-H kappa producer from measured coherence/Gershgorin;
---   C. recover the same-object capture/run provenance for the selected 100k PLD
---      tranche, then obtain physical throughput / incident-or-detected-photon
---      calibration for a genuinely matched-photon acquisition-risk comparison;
---   D. add a Fresnel-zone-plate arm only if that optional stronger comparison
+--   C. recover a per-run/per-archive acquisition log if exact same-run exposure
+--      identity is required beyond the now-paid release lineage;
+--   D. obtain optical-throughput / incident-photon calibration if the target is
+--      a genuinely matched incident-photon acquisition-risk comparison;
+--   E. add a Fresnel-zone-plate arm only if that optional stronger comparison
 --      remains scientifically useful.
 ------------------------------------------------------------------------
 
@@ -79,6 +86,10 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     sameHRestrictedConditionNumberMeasured : Bool
     publishedInformationDesignExperimentPinned : Bool
     matchedAnalysisPhotonNormalizationPinned : Bool
+    sourceExecutedPhotonTransferCalibrationPinned : Bool
+    detectedPhotonCountConversionPinned : Bool
+    fullPrecisionPhotonTransferCoefficientsRecovered : Bool
+    opticalThroughputCalibrationPinned : Bool
     physicalAcquisitionPhotonCalibrationPinned : Bool
     publishedRealRMLVsDiffuserCamComparisonPinned : Bool
     parallelLensDiffuserRMLAcquisitionPinned : Bool
@@ -86,6 +97,9 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     parallelExposureCalibrationPinned : Bool
     releasedCaptureGainAndFormatPinned : Bool
     exposureProvenanceCollisionFormalised : Bool
+    main100kArchiveIdentityPinned : Bool
+    releaseLineageCaptureParametersPinned : Bool
+    exactArchiveExposureSameRunPaid : Bool
     parallelExposureProvenanceReconciled : Bool
     matchedPhotonAcrossParallelSystems : Bool
     focusedLensDiffuserFZPMatchedPhotonReceipt : Bool
@@ -115,14 +129,21 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; sameHRestrictedConditionNumberMeasured = false
   ; publishedInformationDesignExperimentPinned = true
   ; matchedAnalysisPhotonNormalizationPinned = true
-  ; physicalAcquisitionPhotonCalibrationPinned = false
+  ; sourceExecutedPhotonTransferCalibrationPinned = PhotonTransfer.sourceExecutedPhotonTransferCalibrationPaid
+  ; detectedPhotonCountConversionPinned = PhotonTransfer.detectedPhotonCountConversionPinned
+  ; fullPrecisionPhotonTransferCoefficientsRecovered = PhotonTransfer.fullPrecisionFitCoefficientsRecovered
+  ; opticalThroughputCalibrationPinned = PhotonTransfer.opticalThroughputCalibrationPaid
+  ; physicalAcquisitionPhotonCalibrationPinned = InfoSource.physicalAcquisitionPhotonCalibrationPaid
   ; publishedRealRMLVsDiffuserCamComparisonPinned = true
   ; parallelLensDiffuserRMLAcquisitionPinned = true
   ; parallelSensorIlluminationGeometryPinned = true
   ; parallelExposureCalibrationPinned = true
   ; releasedCaptureGainAndFormatPinned = true
   ; exposureProvenanceCollisionFormalised = true
-  ; parallelExposureProvenanceReconciled = false
+  ; main100kArchiveIdentityPinned = Release100k.main100kArchiveIdentityPinned
+  ; releaseLineageCaptureParametersPinned = Release100k.releaseLineageCaptureParametersPinned
+  ; exactArchiveExposureSameRunPaid = Release100k.exactArchiveExposureSameRunPaid
+  ; parallelExposureProvenanceReconciled = ExposureProvenance.exactDatasetExposureProvenancePaid
   ; matchedPhotonAcrossParallelSystems = false
   ; focusedLensDiffuserFZPMatchedPhotonReceipt = false
   }
@@ -189,8 +210,14 @@ informationExperimentSourceStatus = InfoSource.informationOptimalEncoderExperime
 analysisPhotonNormalizationStatus : Bool
 analysisPhotonNormalizationStatus = InfoSource.analysisPhotonNormalizationPaid
 
-physicalPhotonCalibrationStatus : Bool
-physicalPhotonCalibrationStatus = InfoSource.physicalAcquisitionPhotonCalibrationPaid
+sourceExecutedPhotonTransferStatus : Bool
+sourceExecutedPhotonTransferStatus = PhotonTransfer.sourceExecutedPhotonTransferCalibrationPaid
+
+detectedPhotonConversionStatus : Bool
+detectedPhotonConversionStatus = PhotonTransfer.detectedPhotonCountConversionPinned
+
+opticalThroughputCalibrationStatus : Bool
+opticalThroughputCalibrationStatus = PhotonTransfer.opticalThroughputCalibrationPaid
 
 parallelComparatorSourceStatus : Bool
 parallelComparatorSourceStatus = ConvRML.parallelLensDiffuserRMLAcquisitionPaid
@@ -206,6 +233,15 @@ releasedCaptureControlStatus = ConvRML.releasedCaptureGainZeroPaid
 
 exposureProvenanceCollisionStatus : Bool
 exposureProvenanceCollisionStatus = ExposureProvenance.exposureProvenanceCollisionFormalised
+
+main100kArchiveStatus : Bool
+main100kArchiveStatus = Release100k.main100kArchiveIdentityPinned
+
+releaseCaptureLineageStatus : Bool
+releaseCaptureLineageStatus = Release100k.releaseLineageCaptureParametersPinned
+
+archiveSameRunExposureStatus : Bool
+archiveSameRunExposureStatus = Release100k.exactArchiveExposureSameRunPaid
 
 exposureProvenanceStatus : Bool
 exposureProvenanceStatus = ExposureProvenance.exactDatasetExposureProvenancePaid
