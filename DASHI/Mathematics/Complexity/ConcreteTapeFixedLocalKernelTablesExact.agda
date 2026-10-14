@@ -5,6 +5,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -21,8 +22,7 @@ transitionKernelTable :
   Canonical.EnumerationCoverage (Local.finiteState machine) →
   Canonical.EnumerationCoverage (Local.finiteSymbol machine) →
   Selector.NonemptyRuleTable machine →
-  Agda.Builtin.List.List
-    (Frozen.DecisionRow (Selected.TransitionLocalWidth machine))
+  List (Frozen.DecisionRow (Selected.TransitionLocalWidth machine))
 transitionKernelTable stateCoverage symbolCoverage nonempty =
   Frozen.freezePredicate
     (Selected.selectedRuleWindowPredicateWithCoverage
@@ -32,8 +32,7 @@ acceptanceKernelTable :
   ∀ {machine : Local.ConcreteTapeMachine} →
   Canonical.EnumerationCoverage (Local.finiteState machine) →
   Canonical.EnumerationCoverage (Local.finiteSymbol machine) →
-  Agda.Builtin.List.List
-    (Frozen.DecisionRow (Endpoint.AcceptanceLocalWidth machine))
+  List (Frozen.DecisionRow (Endpoint.AcceptanceLocalWidth machine))
 acceptanceKernelTable stateCoverage symbolCoverage =
   Frozen.freezePredicate
     (Endpoint.witnessAcceptingPredicate stateCoverage symbolCoverage)
