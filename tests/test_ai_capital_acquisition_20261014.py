@@ -32,10 +32,20 @@ def test_landlord_yield_boundary():
         "landlordYieldDoesNotCreateCoreWeaveROIC", "contractedYieldDoesNotCreateRealisedCash"
     ])
 
+def test_oct14_roadmap_owner():
+    require("DASHI/Economics/AICapitalRoadmapMaxCut20261014Exact.agda", [
+        "capitalReturnMagnitudeBounded", "ownedNodeTCOPartial",
+        "providerMarginalServingCostEmpirical", "terminalPayerGraphPartial",
+        "replacementEconomicsEmpirical", "regulatoryBurdenEmpirical",
+        "financingConditionsHeterogeneous", "landlordLayerReturnPaid",
+        "additionalGenericAbstractionScheduledIsFalse"
+    ])
+
 def test_rollup_imports_oct14_acquisitions():
     require("DASHI/Economics/AIEntanglementEverything2026.agda", [
         "AIFinancingConditionsPanel20261014Exact",
         "AIAustraliaRegulatoryCostMeasurementBoundary20261014Exact",
         "AICoreWeaveAssetLevelContractFinance20261014Exact",
-        "AIGalaxyHeliosLandlordEconomics20261014Exact"
+        "AIGalaxyHeliosLandlordEconomics20261014Exact",
+        "AICapitalRoadmapMaxCut20261014Exact"
     ])
