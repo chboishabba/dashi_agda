@@ -21,6 +21,22 @@ crossKernelAuthorityNotTransferred :
   C.normUnitRigidityAgdaAuthorityPaid C.canonicalBoundary ≡ false
 crossKernelAuthorityNotTransferred = refl
 
+exactRealPlaceTraceDiagnosticPaid :
+  C.exactPositiveTraceFormRealPlaceDiagnosticPaid C.canonicalBoundary ≡ true
+exactRealPlaceTraceDiagnosticPaid = refl
+
+compactRealPlaceSuggested :
+  C.compactRealPlaceSuggested C.canonicalBoundary ≡ true
+compactRealPlaceSuggested = refl
+
+compactRealPlaceNotYetClassified :
+  C.compactRealPlaceClassificationPaid C.canonicalBoundary ≡ false
+compactRealPlaceNotYetClassified = refl
+
+realPlaceDoesNotClassifyGlobalQForm :
+  C.realPlaceDiagnosticClassifiesOriginalQForm C.canonicalBoundary ≡ false
+realPlaceDoesNotClassifyGlobalQForm = refl
+
 originalQFormClassificationStillOpen :
   C.actualQFormGroupInstantiationInhabited C.canonicalBoundary ≡ false
 originalQFormClassificationStillOpen = refl
