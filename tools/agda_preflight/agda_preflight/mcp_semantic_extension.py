@@ -13,6 +13,9 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     def related_symbols(self, symbol: str, include_history: bool = False, limit: int = 50):
         return self.service.related_symbols(symbol, include_history=include_history, limit=limit)
 
+    def object_detail(self, symbol_id: str):
+        return self.service.object_detail(symbol_id)
+
     def discover(self, query: str, limit: int = 50):
         return self.service.discover(query, limit=limit)
 
@@ -21,6 +24,7 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
 
     adapter_cls.symbol_search = symbol_search
     adapter_cls.related_symbols = related_symbols
+    adapter_cls.object_detail = object_detail
     adapter_cls.discover = discover
     adapter_cls.round_lineage = round_lineage
     adapter_cls._semantic_discovery_installed = True
@@ -36,17 +40,22 @@ def install_mcp_server_semantic_extension(module) -> None:
 
         @server.tool()
         async def symbol_search(query: str, include_history: bool = False, limit: int = 50):
-            """Search indexed Agda symbols; historical RoundNNN snapshots are hidden by default."""
+            """Search repo-wide Agda symbols; historical RoundNNN snapshots are hidden by default."""
             return tools.symbol_search(query, include_history=include_history, limit=limit)
 
         @server.tool()
         async def related_symbols(symbol: str, include_history: bool = False, limit: int = 50):
-            """Return exact, signature-equivalent, body-equivalent and structurally similar symbols."""
+            """Return exact, signature-equivalent and structurally similar symbols."""
             return tools.related_symbols(symbol, include_history=include_history, limit=limit)
 
         @server.tool()
+        async def object_detail(symbol_id: str):
+            """Return one indexed object with source/status/requirements and typed references."""
+            return tools.object_detail(symbol_id)
+
+        @server.tool()
         async def discover(query: str, limit: int = 50):
-            """Return a repository discovery receipt and whether an absence claim is justified."""
+            """Return a discovery receipt; absence is fail-closed on stale/incomplete repo-index coverage."""
             return tools.discover(query, limit=limit)
 
         @server.tool()
