@@ -16,51 +16,31 @@ import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
 ------------------------------------------------------------------------
 -- ACQUISITION MAX-CUT
 --
--- Public-source acquisition has paid the literal Berkeley artifacts, source
--- operator semantics, an exact selected-grid compiler for columns of the pinned
--- discrete source H, executable depth / sparse conditioning diagnostics, the
--- 2026 information-design experiment, and the later 2026 ConvRML same-scene
--- parallel lens/diffuser/RML comparator geometry.
+-- Public-source acquisition pays the literal Berkeley artifacts/source operator,
+-- the 2026 information-design experiment, the ConvRML parallel comparator, and
+-- an executed photon-transfer notebook for RML/Diffuser/lensed detector counts.
+-- Local execution separately pays synthetic source-H, finite-support, memory-
+-- planner and focused receipt-wiring receipts. None is promoted into the still-
+-- unavailable real `example_psfs.mat` execution receipt.
 --
--- Local execution additionally pays three durable Git-blob-pinned receipts:
---   * a synthetic source-H implementation check covering odd/even shapes,
---     FFT-vs-kernel-shift agreement and every support of orders 1--3 on the
---     four declared fixtures (22,218 supports, zero violations);
---   * a synthetic claim-scale memory-plan execution over a declared geometry;
---   * a focused local pytest of the receipt wiring (2 passed, 0 failed).
--- The focused pytest is not promoted to full-repository pytest or Agda kernel
--- certification. None of these local receipts is promoted into the still-
--- unexecuted real Berkeley PSF receipt.
+-- Photon transfer is now deliberately split into distinct claims:
+--   * source-executed DN -> estimated detected-photon calibration: PAID;
+--   * local re-execution of the multi-GB raw grayscale sweep: UNPAID;
+--   * incident-photon optical throughput / matched input flux: UNPAID.
 --
--- Photon transfer is now paid at a sharper level. The published executed
--- calibration notebook loads the simultaneous RML/Diffuser/lensed grayscale
--- sweep, fits variance against mean in a shot-noise regime, and applies
---   clip((image - intercept) / slope, 0, infinity)
--- to estimate detected photon counts. Recoverable displayed fits are
--- RML 0.02x+1.46, Diffuser 0.03x+0.36, Lens 0.05x+0.01. This pays a source-
--- executed detected-photon conversion surface, but not optical throughput,
--- incident-photon equality, or the hidden full-precision fit arrays.
+-- The selected 100k PLD is source-separated from the AWB datasets. Release-
+-- lineage capture code from June through September pins RGB8, gain=0 and
+-- 25/80/18 ms in diffuser/RML/ground-truth order. A per-archive same-run log
+-- has not been recovered, so exact archive exposure identity stays fail-closed.
 --
--- The selected 100k PLD is also source-separated from the AWB 100k and AWB 25k
--- datasets in the public Drive. Its full-resolution RML branch is explicitly
--- partitioned 0--25k, 25--50k, 50--75k and 75--100k. Release-lineage capture
--- code from June through September pins RGB8, gain=0 and 25/80/18 ms in
--- diffuser/RML/ground-truth order. No per-archive run log was observed that
--- welds those code defaults to the exact archive bytes, so same-run exposure
--- identity remains fail-closed.
---
--- Remaining numerical/physical leaves are now:
---   A. execute/ingest the pinned binary PSF audit and retain its numerical
---      depth + selected-grid same-H sparse certificate receipt;
---   B. run the memory planner on the actual PSF dimensions, select the finite
---      lateral grid / sparsity class required by the intended 3-D claim, and
---      populate the same-H kappa producer from measured coherence/Gershgorin;
---   C. recover a per-run/per-archive acquisition log if exact same-run exposure
---      identity is required beyond the now-paid release lineage;
---   D. obtain optical-throughput / incident-photon calibration if the target is
---      a genuinely matched incident-photon acquisition-risk comparison;
---   E. add a Fresnel-zone-plate arm only if that optional stronger comparison
---      remains scientifically useful.
+-- Remaining physical/execution leaves:
+--   A. execute the pinned 10.8 MB PSF binary and retain real same-H diagnostics;
+--   B. run the memory planner on the actual PSF shape and selected scene class;
+--   C. recover same-run archive/capture provenance if stronger than release
+--      lineage is required;
+--   D. obtain optical-throughput / incident-photon calibration for a genuinely
+--      matched physical input-photon comparison;
+--   E. optional FZP arm only if the stronger three-way comparison is retained.
 ------------------------------------------------------------------------
 
 record Diffraction3DImagingAcquisitionMaxCut : Set where
@@ -87,8 +67,11 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     publishedInformationDesignExperimentPinned : Bool
     matchedAnalysisPhotonNormalizationPinned : Bool
     sourceExecutedPhotonTransferCalibrationPinned : Bool
+    sourceDigitalToEstimatedPhotonConversionPinned : Bool
     detectedPhotonCountConversionPinned : Bool
+    localRawPhotonCalibrationReexecuted : Bool
     fullPrecisionPhotonTransferCoefficientsRecovered : Bool
+    incidentPhotonThroughputCalibrationPinned : Bool
     opticalThroughputCalibrationPinned : Bool
     physicalAcquisitionPhotonCalibrationPinned : Bool
     publishedRealRMLVsDiffuserCamComparisonPinned : Bool
@@ -129,9 +112,12 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; sameHRestrictedConditionNumberMeasured = false
   ; publishedInformationDesignExperimentPinned = true
   ; matchedAnalysisPhotonNormalizationPinned = true
-  ; sourceExecutedPhotonTransferCalibrationPinned = PhotonTransfer.sourceExecutedPhotonTransferCalibrationPaid
+  ; sourceExecutedPhotonTransferCalibrationPinned = true
+  ; sourceDigitalToEstimatedPhotonConversionPinned = true
   ; detectedPhotonCountConversionPinned = PhotonTransfer.detectedPhotonCountConversionPinned
+  ; localRawPhotonCalibrationReexecuted = false
   ; fullPrecisionPhotonTransferCoefficientsRecovered = PhotonTransfer.fullPrecisionFitCoefficientsRecovered
+  ; incidentPhotonThroughputCalibrationPinned = false
   ; opticalThroughputCalibrationPinned = PhotonTransfer.opticalThroughputCalibrationPaid
   ; physicalAcquisitionPhotonCalibrationPinned = InfoSource.physicalAcquisitionPhotonCalibrationPaid
   ; publishedRealRMLVsDiffuserCamComparisonPinned = true
@@ -148,106 +134,73 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; focusedLensDiffuserFZPMatchedPhotonReceipt = false
   }
 
--- Non-collapse sanity aliases bind the ledger to source owners rather than
--- free-floating booleans.
 calibrationArtifactSourceStatus : Bool
 calibrationArtifactSourceStatus = Calibration.publicCalibrationArtifactPinned
-
 numericPSFSourceStatus : Bool
 numericPSFSourceStatus = Calibration.numericPSFArrayIngested
-
 sourceOperatorMaterialisationStatus : Bool
 sourceOperatorMaterialisationStatus = SourceOperator.numericOperatorMatrixMaterialised
-
 offlineSyntheticSelfTestStatus : Bool
 offlineSyntheticSelfTestStatus = Conditioning.offlineSyntheticOperatorSelfTestExecutable
-
 localSyntheticReceiptStatus : Bool
 localSyntheticReceiptStatus = LocalExecution.syntheticOperatorReceiptCaptured
-
 localExhaustiveSupportReceiptStatus : Bool
 localExhaustiveSupportReceiptStatus = LocalExecution.exhaustiveFiniteSupportReceiptCaptured
-
 claimScaleMemoryPlannerStatus : Bool
 claimScaleMemoryPlannerStatus = Conditioning.claimScaleMemoryPlannerExecutable
-
 localClaimScaleReceiptStatus : Bool
 localClaimScaleReceiptStatus = LocalExecution.claimScalePlannerReceiptCaptured
-
 localFocusedPytestReceiptStatus : Bool
 localFocusedPytestReceiptStatus = LocalExecution.focusedReceiptContractPytestCaptured
-
 fullRepositoryPytestReceiptStatus : Bool
 fullRepositoryPytestReceiptStatus = LocalExecution.fullRepositoryPytestCaptured
-
 agdaKernelReceiptStatus : Bool
 agdaKernelReceiptStatus = LocalExecution.agdaKernelReceiptCaptured
-
 sourceSelectedGridCompilerStatus : Bool
 sourceSelectedGridCompilerStatus = Conditioning.sourceOperatorSelectedGridColumnCompilerPaid
-
 depthAuditExecutableStatus : Bool
 depthAuditExecutableStatus = Conditioning.depthOnlySameLateralAuditExecutable
-
 translatedAuditExecutableStatus : Bool
 translatedAuditExecutableStatus = Conditioning.translatedColumnRestrictedAuditExecutable
-
 sparseLowerBoundCompilerStatus : Bool
 sparseLowerBoundCompilerStatus = Conditioning.coherenceToSparseLowerBoundCompilerPaid
-
 depthNumericReceiptStatus : Bool
 depthNumericReceiptStatus = Conditioning.depthOnlyNumericalReceiptCaptured
-
 translatedNumericReceiptStatus : Bool
 translatedNumericReceiptStatus = Conditioning.translatedColumnNumericalReceiptCaptured
-
 restrictedKappaStatus : Bool
 restrictedKappaStatus = Conditioning.globalSparseRestrictedKappaPaid
-
 informationExperimentSourceStatus : Bool
 informationExperimentSourceStatus = InfoSource.informationOptimalEncoderExperimentPinned
-
 analysisPhotonNormalizationStatus : Bool
 analysisPhotonNormalizationStatus = InfoSource.analysisPhotonNormalizationPaid
-
 sourceExecutedPhotonTransferStatus : Bool
 sourceExecutedPhotonTransferStatus = PhotonTransfer.sourceExecutedPhotonTransferCalibrationPaid
-
-detectedPhotonConversionStatus : Bool
-detectedPhotonConversionStatus = PhotonTransfer.detectedPhotonCountConversionPinned
-
-opticalThroughputCalibrationStatus : Bool
-opticalThroughputCalibrationStatus = PhotonTransfer.opticalThroughputCalibrationPaid
-
+sourceDigitalPhotonConversionStatus : Bool
+sourceDigitalPhotonConversionStatus = PhotonTransfer.sourceDigitalToEstimatedPhotonConversionPaid
+localRawPhotonCalibrationStatus : Bool
+localRawPhotonCalibrationStatus = PhotonTransfer.localRawCalibrationSweepReexecuted
+incidentPhotonThroughputStatus : Bool
+incidentPhotonThroughputStatus = PhotonTransfer.incidentPhotonThroughputCalibrationPaid
 parallelComparatorSourceStatus : Bool
 parallelComparatorSourceStatus = ConvRML.parallelLensDiffuserRMLAcquisitionPaid
-
 parallelSensorStatus : Bool
 parallelSensorStatus = ConvRML.identicalSensorModelPaid
-
 parallelExposureStatus : Bool
 parallelExposureStatus = ConvRML.exposureCalibrationPaid
-
 releasedCaptureControlStatus : Bool
 releasedCaptureControlStatus = ConvRML.releasedCaptureGainZeroPaid
-
 exposureProvenanceCollisionStatus : Bool
 exposureProvenanceCollisionStatus = ExposureProvenance.exposureProvenanceCollisionFormalised
-
 main100kArchiveStatus : Bool
 main100kArchiveStatus = Release100k.main100kArchiveIdentityPinned
-
 releaseCaptureLineageStatus : Bool
 releaseCaptureLineageStatus = Release100k.releaseLineageCaptureParametersPinned
-
 archiveSameRunExposureStatus : Bool
 archiveSameRunExposureStatus = Release100k.exactArchiveExposureSameRunPaid
-
 exposureProvenanceStatus : Bool
 exposureProvenanceStatus = ExposureProvenance.exactDatasetExposureProvenancePaid
-
 matchedPhotonParallelStatus : Bool
 matchedPhotonParallelStatus = ConvRML.matchedPhotonAcrossSystemsPaid
-
 focusedThreeWaySourceStatus : Bool
 focusedThreeWaySourceStatus = ConvRML.fresnelZonePlateArmPaid
