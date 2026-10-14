@@ -1,35 +1,31 @@
 module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 
 ------------------------------------------------------------------------
--- MONSTER-LILA <-> CERTIFIED MONSTER-3B NORMALIZER HANDOFF
+-- MONSTER-LILA <-> CERTIFIED MONSTER-3B / W_ZETA HANDOFF
 --
--- The inspected Monster-LILA PoC uses an engineering permutation after a
--- QR-generated orthogonal basis. It does not identify that permutation with
--- a Conway/Monster/3B normalizer action.
+-- Monster-LILA's inspected engineering permutation remains a heuristic.  The
+-- current sibling #1098 frontier is much stronger and more precise:
 --
--- Current sibling PR #1098 has advanced beyond the earlier selected-word
--- frontier:
+--   * ATLAS 12D GF(3) source matrices and X6+X6* normalization;
+--   * preferred multiplier-1 same-phase word of order 728;
+--   * full punctured 728-orbit, trivial stabilizer and center-preserving
+--     Heisenberg lift;
+--   * unconditional finite Schrodinger irreducibility on the explicit module;
+--   * a generic Lean equal-character/simple-representation -> isomorphism
+--     theorem reported cross-kernel;
+--   * corrected W_zeta target:
+--         S_zeta = Hom_E(H_zeta , W_zeta)
+--         H_zeta tensor S_zeta -> W_zeta
+--     rather than the coarse set-level phrase W_zeta <-> X6 x Fin 90;
+--   * source-native 6.Suz multiplicity structure with current 12+78=90
+--     candidate families and GAP/CTblLib matchers written but not yet executed
+--     in the present environment.
 --
---   * ATLAS/Breuer-Magaard-Wilson 12-dimensional GF(3) source module;
---   * raw matrix bytes/provenance;
---   * exact symplectic basis into the repository X6+X6* polarization;
---   * a preferred multiplier-1 / same-central-phase source word
---       g1 g2^-1 g1 g2 g1 g2^-1 g1 g2^-1;
---   * irreducible degree-six X6 compression
---       x^6 - x^4 + x^2 - x - 1;
---   * same selected GF(729) presentation with a primitive delta of order 728;
---   * exact conjugating Q, one punctured orbit of size 728, trivial stabilizer;
---   * exact cocycle defect and quadratic central correction;
---   * exact center-preserving Heisenberg lift for that word.
+-- Fin 90 may be chosen later as a basis coordinate for S_zeta after the
+-- representation-native same-object payment.  It is not the primary object.
 --
--- The live representation wall has therefore moved.  The missing same-object
--- datum is the literal Monster 3B phase-resolved W_zeta sector and its
--- identification with the repository model X6 x Fin 90, including translation,
--- modulation-exponent and multiplicity action.  Full normalizer relation
--- descent and physical/phenomenal realization remain separate.
---
--- This file is a cross-branch empirical handoff only and does not promote the
--- sibling execution/source receipts to local Agda kernel evidence.
+-- This is a cross-branch receipt/experiment handoff only.  It imports no
+-- sibling Agda or Lean theorem authority into this branch.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -56,12 +52,26 @@ record MonsterLila3BNormalizerHandoff : Set where
     siblingPreferredSamePhaseOrder728Paid : Bool
     siblingPreferredSamePhaseOrbit728Paid : Bool
     siblingPreferredSamePhaseTrivialStabilizerPaid : Bool
-    siblingActualWZetaFin90SameObjectPaid : Bool
+
+    siblingFiniteSchrodingerIrreducibilityPaid : Bool
+    siblingGenericEqualCharacterSimpleIsoReported : Bool
+    siblingConcreteHZetaFDRepTransportPaid : Bool
+
+    siblingSuzukiMultiplicityHomSpaceTargetReported : Bool
+    siblingSuzuki12Plus78CandidateReported : Bool
+    siblingSuzukiMatcherWritten : Bool
+    siblingSuzukiMatcherExecuted : Bool
+    siblingPhaseResolvedSuzukiOrientationPaid : Bool
+    siblingFullWZetaTensorRecoveryPaid : Bool
+    fin90IsPrimaryRepresentationObject : Bool
+
     siblingFullNormalizerCentralCorrectionsPaid : Bool
     siblingFullNormalizerHeisenbergLiftPaid : Bool
 
     empiricalCandidateRequiresSourceMatrixAction : Bool
     empiricalCandidateRequiresSameBasisIntertwiner : Bool
+    empiricalCandidateRequiresHZetaFDRepTransport : Bool
+    empiricalCandidateRequiresMultiplicityRepresentation : Bool
     empiricalFullNormalizerRequiresCentralLiftReceipts : Bool
     empiricalCandidateRequiresHeldOutComposition : Bool
     actualMonsterLilaSelectedWordFitPaid : Bool
@@ -79,29 +89,14 @@ canonicalMonsterLila3BNormalizerHandoff =
     (ML.literalComputationalHeuristicsRecorded ML.canonicalMonsterLilaBoundary)
     false
     1098
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    true
-    true
-    true
-    true
-    false
-    false
-    false
-    false
-    false
-    "Monster-LILA's engineering permutation remains only a heuristic. Sibling #1098 now pays a preferred center-preserving primitive GF(729) source word of order 728, its full 728-state punctured orbit with trivial stabilizer, and its exact Heisenberg central lift. That word is now the strongest finite empirical comparator. The live same-object Monster wall is instead literal W_zeta <-> X6 x Fin 90 recognition (including translation, modulation exponent and multiplicity action), followed by full-normalizer relation descent. Neither selected-word success nor eventual same-action fit retroactively identifies the original PoC permutation with the Monster representation or creates a physical/phenomenal mechanism."
+    true true true true true true true true true true
+    true true false
+    true true true false false false false
+    false false
+    true true true true true true
+    false false
+    false false false
+    "Monster-LILA's engineering permutation remains only a heuristic. Sibling #1098 now pays the strongest finite 3B comparator, closes finite Schrodinger irreducibility, and reports a generic equal-character simple-representation isomorphism theorem. The corrected same-object target is representation-native: package the actual H_zeta and Schrodinger actions as compatible FDReps, transport class-character equality, identify S_zeta = Hom_E(H_zeta,W_zeta) as the source-native 6.Suz multiplicity representation, execute/orient the current 12+78 candidate matcher, and only then choose a Fin90 basis if a consumer needs coordinates. Selected-word success, degree 90 arithmetic, or basis labels do not create Monster representation identity or physical/phenomenal mechanism."
 
 record MonsterLila3BEmpiricalAssay : Set where
   constructor monster-lila-3b-empirical-assay
@@ -114,7 +109,9 @@ record MonsterLila3BEmpiricalAssay : Set where
     testPreferredSamePhasePrimitiveWordFirst : Bool
     testFull728OrbitWhereTrajectoryCoverageAllows : Bool
     holdOutAdditionalNormalizerWords : Bool
-    requireLiteralWZetaFin90BridgeForMonsterSemanticPromotion : Bool
+    requireConcreteHZetaFDRepTransportForSemanticPromotion : Bool
+    requireSuzukiMultiplicityRepresentationForFullWZetaPromotion : Bool
+    rejectFin90AsPrimaryRepresentationSubstitute : Bool
     testDecoderCompatibility : Bool
     testFutureConsumerBehaviour : Bool
     matchedModelCheckpointRequired : Bool
@@ -123,19 +120,24 @@ open MonsterLila3BEmpiricalAssay public
 canonicalMonsterLila3BEmpiricalAssay : MonsterLila3BEmpiricalAssay
 canonicalMonsterLila3BEmpiricalAssay =
   monster-lila-3b-empirical-assay
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true true
 
 inductive HeuristicPermutationCreatesCertified3BAction : Set where
-inductive SelectedWordFitCreatesActualWZetaRecognition : Set where
+inductive SelectedWordFitCreatesHZetaFDRepRecognition : Set where
+inductive Fin90BasisCreatesSuzukiRepresentation : Set where
 inductive CertifiedActionFitCreatesMonsterOntology : Set where
 
 heuristicPermutationDoesNotCreateCertified3BAction :
   HeuristicPermutationCreatesCertified3BAction → ⊥
 heuristicPermutationDoesNotCreateCertified3BAction ()
 
-selectedWordFitDoesNotCreateActualWZetaRecognition :
-  SelectedWordFitCreatesActualWZetaRecognition → ⊥
-selectedWordFitDoesNotCreateActualWZetaRecognition ()
+selectedWordFitDoesNotCreateHZetaFDRepRecognition :
+  SelectedWordFitCreatesHZetaFDRepRecognition → ⊥
+selectedWordFitDoesNotCreateHZetaFDRepRecognition ()
+
+fin90BasisDoesNotCreateSuzukiRepresentation :
+  Fin90BasisCreatesSuzukiRepresentation → ⊥
+fin90BasisDoesNotCreateSuzukiRepresentation ()
 
 certifiedActionFitDoesNotCreateMonsterOntology :
   CertifiedActionFitCreatesMonsterOntology → ⊥
