@@ -4,12 +4,12 @@ module DASHI.Cognition.OracleEllisonAuthorityChainMaxCutExact where
 -- SAME-OBJECT AUTHORITY / CONTROL-ALLOCATION MAX-CUT
 --
 -- Primary product evidence pays a stronger proposition than mere deployment:
--- FIRE WEAVER has an explicit human control-allocation architecture.  The
+-- FIRE WEAVER has an explicit human control-allocation architecture. The
 -- Attack Officer configures autonomy/safety/time limits and can approve,
 -- decline or re-program a system-selected fire solution.
 --
 -- Oracle's primary announcement separately pays that the same named product is
--- available on OCI.  The composition is product-identity level only: it does
+-- available on OCI. The composition is product-identity level only: it does
 -- not prove that a particular Israeli sovereign FIRE WEAVER deployment runs on
 -- OCI, that Oracle occupies the Attack Officer role, or that Oracle authors
 -- Israeli rules of engagement / sovereign policy.
@@ -17,6 +17,8 @@ module DASHI.Cognition.OracleEllisonAuthorityChainMaxCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+
+import DASHI.Cognition.OracleEllisonCapabilityPromotionExact as Promotion
 
 ------------------------------------------------------------------------
 -- Source coordinates.
@@ -116,6 +118,20 @@ fireWeaverSystemSelectsCandidateFireSolution = true
 
 fireWeaverSameNamedProductAvailableOnOCI : Bool
 fireWeaverSameNamedProductAvailableOnOCI = true
+
+------------------------------------------------------------------------
+-- Claim-relative promotion lattice weld.
+--
+-- L3 is paid for the FIRE WEAVER PRODUCT ARCHITECTURE / control allocation.
+-- Oracle's relation to the product remains L2 because the source only pays OCI
+-- integration, not operator authority or sovereign system control.
+------------------------------------------------------------------------
+
+fireWeaverProductArchitectureHighestPaidLevel : Promotion.PromotionLevel
+fireWeaverProductArchitectureHighestPaidLevel = Promotion.systemArchitectureControl
+
+oracleRafaelRelationshipHighestPaidLevel : Promotion.PromotionLevel
+oracleRafaelRelationshipHighestPaidLevel = Promotion.operationalIntegration
 
 ------------------------------------------------------------------------
 -- Non-promotions.
