@@ -1,36 +1,43 @@
 module DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact where
 
 ------------------------------------------------------------------------
--- FIXED-DESCRIPTION POLYNOMIAL ENVELOPE FOR STREAMED COOK-BIT ACCESS
+-- EXACT COSTED STREAMED COOK-BIT ACCESS FOR ONE FIXED DESCRIPTION
 --
 -- The current Cook cursor uses one-hot local codecs, so its 2^w truth-table
 -- factor is not uniform-polynomial when the queried machine itself varies.
--- Self-quotation does not require that stronger statement: machine/input/T are
--- immutable and only the bit index varies.
+-- Self-quotation fixes machine/input/T and varies only the requested bit index.
 --
--- For one fixed GuardedCookFormulaDescription, the entire clause-seek budget is
--- therefore a constant C_D.  A conservative bit cursor may perform at most one
--- clause seek per consumed bit, hence
+-- The path-exact costed cursor now gives the SAME returned bit and work count as
+-- the actual streamed evaluator.  For one fixed description D:
 --
---   W_D(i) = C_D * (i + 1)
---          <= C_D * (queryBitLength(D,i) + 1).
+--   work_D(i) <= (i + 1) * B_D
+--             <= B_D * (queryBitLength(D,i) + 1),
+--
+-- where B_D is a machine/description constant.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Maybe using (Maybe)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_; s≤s)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
+import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryLengthExact as QueryLength
-import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostExact as ClauseCost
+import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
+import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact as Stream
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitCostedExact as CostedBit
 
 ------------------------------------------------------------------------
--- Same fixed concrete machine / guarded width for every query index.
+-- Fixed machine/tableau parameters.
 ------------------------------------------------------------------------
 
 descriptionMachine :
@@ -47,30 +54,111 @@ descriptionCols description =
     (Description.input description)
     (Description.steps description)
 
-fixedClauseSeekConstant :
-  Description.GuardedCookFormulaDescription → Nat
-fixedClauseSeekConstant description =
-  suc
-    (ClauseCost.globalClauseSeekWorkBudget
+descriptionInitialTarget :
+  (description : Description.GuardedCookFormulaDescription) →
+  DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact.Bits
+    (DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact.RowBitsWidth
       (descriptionMachine description)
-      (Description.steps description)
       (descriptionCols description))
+descriptionInitialTarget description =
+  Sound.guardedInitialBits
+    (Coded.codedStateCoverage (Description.code description))
+    (Coded.codedSymbolCoverage (Description.code description))
+    (Description.input description)
+    (Description.steps description)
+
+fixedDescriptionBitStepConstant :
+  Description.GuardedCookFormulaDescription → Nat
+fixedDescriptionBitStepConstant description =
+  CostedBit.bitStepBudget
+    (descriptionMachine description)
+    (Description.steps description)
+    (descriptionCols description)
 
 ------------------------------------------------------------------------
--- Conservative streamed-bit work.  The `suc` protects the zero-work cases and
--- absorbs token/cursor bookkeeping at this semantic cost layer.
+-- The exact costed evaluator specialized to D and index i.
+------------------------------------------------------------------------
+
+streamedQueryBitCosted :
+  (description : Description.GuardedCookFormulaDescription) →
+  Nat →
+  CostedBit.Costed (Maybe Bool)
+streamedQueryBitCosted description index =
+  CostedBit.streamedCookBitCosted
+    (Coded.codedStateCoverage (Description.code description))
+    (Coded.codedSymbolCoverage (Description.code description))
+    (Description.nonemptyRules description)
+    (Description.steps description)
+    (descriptionCols description)
+    (descriptionInitialTarget description)
+    index
+
+streamedQueryBitCostedResultExact :
+  (description : Description.GuardedCookFormulaDescription)
+  (index : Nat) →
+  CostedBit.result (streamedQueryBitCosted description index)
+  ≡ Stream.streamedQueryBit (Description.atIndex description index)
+streamedQueryBitCostedResultExact description index =
+  CostedBit.streamedCookBitCostedResultExact
+    (Coded.codedStateCoverage (Description.code description))
+    (Coded.codedSymbolCoverage (Description.code description))
+    (Description.nonemptyRules description)
+    (Description.steps description)
+    (descriptionCols description)
+    (descriptionInitialTarget description)
+    index
+
+streamedQueryBitCostedSemanticExact :
+  (description : Description.GuardedCookFormulaDescription)
+  (index : Nat) →
+  CostedBit.result (streamedQueryBitCosted description index)
+  ≡ Semantics.queryAnswer (Description.atIndex description index)
+streamedQueryBitCostedSemanticExact description index =
+  trans
+    (streamedQueryBitCostedResultExact description index)
+    (Stream.streamedQueryBitExact (Description.atIndex description index))
+
+------------------------------------------------------------------------
+-- Exact evaluator work bound.
 ------------------------------------------------------------------------
 
 fixedDescriptionBitWork :
   Description.GuardedCookFormulaDescription → Nat → Nat
 fixedDescriptionBitWork description index =
-  fixedClauseSeekConstant description * suc index
+  CostedBit.work (streamedQueryBitCosted description index)
 
-fixedDescriptionQueryWork :
-  (description : Description.GuardedCookFormulaDescription) → Nat → Nat
-fixedDescriptionQueryWork description index =
-  fixedClauseSeekConstant description
-  * suc (Query.queryBitLength (Description.atIndex description index))
+fixedDescriptionIndexBudget :
+  Description.GuardedCookFormulaDescription → Nat → Nat
+fixedDescriptionIndexBudget description index =
+  suc index * fixedDescriptionBitStepConstant description
+
+fixedDescriptionBitWorkByIndex :
+  (description : Description.GuardedCookFormulaDescription)
+  (index : Nat) →
+  fixedDescriptionBitWork description index
+  ≤ fixedDescriptionIndexBudget description index
+fixedDescriptionBitWorkByIndex description index =
+  CostedBit.streamedCookBitCostedWorkBound
+    (Coded.codedStateCoverage (Description.code description))
+    (Coded.codedSymbolCoverage (Description.code description))
+    (Description.nonemptyRules description)
+    (Description.steps description)
+    (descriptionCols description)
+    (descriptionInitialTarget description)
+    index
+
+------------------------------------------------------------------------
+-- Degree-one polynomial envelope in literal canonical query input size.
+------------------------------------------------------------------------
+
+fixedDescriptionLinearCoefficient :
+  Description.GuardedCookFormulaDescription → Nat
+fixedDescriptionLinearCoefficient = fixedDescriptionBitStepConstant
+
+fixedDescriptionLinearBudget :
+  Description.GuardedCookFormulaDescription → Nat → Nat
+fixedDescriptionLinearBudget description queryLength =
+  fixedDescriptionLinearCoefficient description * suc queryLength
 
 indexSuccessorBelowQuerySuccessor :
   (description : Description.GuardedCookFormulaDescription)
@@ -82,28 +170,22 @@ indexSuccessorBelowQuerySuccessor description index =
     (QueryLength.indexBelowQueryBitLength
       (Description.atIndex description index))
 
-fixedDescriptionBitWorkPolynomial :
+indexBudgetBelowCanonicalLinearBudget :
   (description : Description.GuardedCookFormulaDescription)
   (index : Nat) →
-  fixedDescriptionBitWork description index
-  ≤ fixedDescriptionQueryWork description index
-fixedDescriptionBitWorkPolynomial description index =
-  NatP.*-monoˡ-≤
-    (fixedClauseSeekConstant description)
-    (indexSuccessorBelowQuerySuccessor description index)
-
-------------------------------------------------------------------------
--- Degree-one polynomial presentation in the exact canonical query-code length.
-------------------------------------------------------------------------
-
-fixedDescriptionLinearCoefficient :
-  Description.GuardedCookFormulaDescription → Nat
-fixedDescriptionLinearCoefficient = fixedClauseSeekConstant
-
-fixedDescriptionLinearBudget :
-  Description.GuardedCookFormulaDescription → Nat → Nat
-fixedDescriptionLinearBudget description queryLength =
-  fixedDescriptionLinearCoefficient description * suc queryLength
+  fixedDescriptionIndexBudget description index
+  ≤ fixedDescriptionLinearBudget
+      description
+      (Query.queryBitLength (Description.atIndex description index))
+indexBudgetBelowCanonicalLinearBudget description index =
+  NatP.≤-trans
+    (NatP.≤-reflexive
+      (NatP.*-comm
+        (suc index)
+        (fixedDescriptionBitStepConstant description)))
+    (NatP.*-monoˡ-≤
+      (fixedDescriptionBitStepConstant description)
+      (indexSuccessorBelowQuerySuccessor description index))
 
 fixedDescriptionBitWorkLinearInCanonicalInput :
   (description : Description.GuardedCookFormulaDescription)
@@ -112,15 +194,18 @@ fixedDescriptionBitWorkLinearInCanonicalInput :
   ≤ fixedDescriptionLinearBudget
       description
       (Query.queryBitLength (Description.atIndex description index))
-fixedDescriptionBitWorkLinearInCanonicalInput =
-  fixedDescriptionBitWorkPolynomial
+fixedDescriptionBitWorkLinearInCanonicalInput description index =
+  NatP.≤-trans
+    (fixedDescriptionBitWorkByIndex description index)
+    (indexBudgetBelowCanonicalLinearBudget description index)
 
 ------------------------------------------------------------------------
 -- FIREWALL
 --
 -- This theorem does NOT claim a uniform polynomial in a varying machine code.
--- With the current one-hot truth-table Cook constructor, `2^w_local` depends on
+-- With the current one-hot truth-table Cook constructor, 2^w_local depends on
 -- machine cardinalities.  What is paid here is exactly the fixed-program case
 -- needed by self-quotation: one immutable coded target, input and T, with only
--- the requested bit index varying.
+-- the requested bit index varying.  The returned bit and charged work are now
+-- produced by the same streamed recursion.
 ------------------------------------------------------------------------
