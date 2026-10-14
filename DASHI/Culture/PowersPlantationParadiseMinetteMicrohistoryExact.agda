@@ -9,10 +9,10 @@ import DASHI.Culture.PowersPlantationParadiseSourceAtlasExact as Atlas
 ------------------------------------------------------------------------
 -- MINETTE SAME-OBJECT MICROHISTORY
 --
--- This owner pays finer chronology, benefit-performance and legal-record
--- coordinates without promoting them into compensation settlement or causal
--- mobility.  Apparent date disagreement is retained until the underlying
--- newspaper issue/image is inspected.
+-- This owner pays finer chronology, benefit-performance, compensation and
+-- legal-record coordinates without promoting them into completed settlement or
+-- causal mobility. Apparent date disagreement remains explicit until the
+-- underlying newspaper issue/image is inspected.
 ------------------------------------------------------------------------
 
 prestMinetteMarsanSource : Source.AttributedSource
@@ -25,7 +25,7 @@ prestMinetteMarsanSource =
     "10.1080/20563035.2019.1592813"
     "https://research-repository.st-andrews.ac.uk/handle/10023/20801"
     Source.academicArticleSource
-    "peer-reviewed same-object performance chronology and benefit-performance evidence for Minette; local-newspaper references remain distinct from direct inspection of each newspaper image"
+    "peer-reviewed same-object performance chronology, benefit-performance and contracted-salary evidence for Minette; cited newspaper/notarial coordinates remain distinct from direct inspection of each original"
     Source.publicAttribution
 
 camierMinetteLifeSource : Source.AttributedSource
@@ -54,9 +54,7 @@ colonialNetworksMinetteSource =
     Source.publicAttribution
 
 ------------------------------------------------------------------------
--- Event-type distinction.  'First public appearance', 'first theatrical debut'
--- and 'first full theatrical benefit performance' are not interchangeable
--- predicates, so the source surfaces need not be flattened into one date.
+-- Event-type distinction.
 ------------------------------------------------------------------------
 
 data CareerEventKind : Set where
@@ -148,6 +146,54 @@ minette1789LegalDisputeReceipt =
     false refl
 
 ------------------------------------------------------------------------
+-- Contracted salary / nonpayment same-object receipt.
+------------------------------------------------------------------------
+
+record MinetteSalaryNonpaymentReceipt : Set where
+  constructor minette-salary-nonpayment-receipt
+  field
+    contractDateReference : String
+    contractTermReference : String
+    annualSalaryReference : String
+    nonpaymentReference : String
+    archivalCoordinate : String
+    source : Source.AttributedSource
+    primaryOriginalInspectedHere : Bool
+    primaryOriginalInspectedHereIsFalse :
+      primaryOriginalInspectedHere ≡ false
+    contractAmountSameObjectPaid : Bool
+    contractAmountSameObjectPaidIsTrue :
+      contractAmountSameObjectPaid ≡ true
+    nonpaymentSameObjectPaid : Bool
+    nonpaymentSameObjectPaidIsTrue :
+      nonpaymentSameObjectPaid ≡ true
+    actualSettlementSameObjectPaid : Bool
+    actualSettlementSameObjectPaidIsFalse :
+      actualSettlementSameObjectPaid ≡ false
+
+open MinetteSalaryNonpaymentReceipt public
+
+minette1784SalaryNonpaymentReceipt : MinetteSalaryNonpaymentReceipt
+minette1784SalaryNonpaymentReceipt =
+  minette-salary-nonpayment-receipt
+    "9 June 1784"
+    "private contract for three years"
+    "8000 livres per year"
+    "Prest 2019 reports that Saint-Martin's will revealed the contracted salary had never been paid"
+    "ANOM, DPPC, Notaire Michel, minutes of 9 June 1784, Testament du Sr Saint-Martin"
+    prestMinetteMarsanSource
+    false refl
+    true refl
+    true refl
+    false refl
+
+data ContractAndNonpaymentProveSettlement : Set where
+
+contractAndNonpaymentDoNotProveSettlement :
+  ContractAndNonpaymentProveSettlement → ⊥
+contractAndNonpaymentDoNotProveSettlement ()
+
+------------------------------------------------------------------------
 -- A secondary-source date discrepancy is retained rather than silently chosen.
 ------------------------------------------------------------------------
 
@@ -200,6 +246,15 @@ record MinetteMicrohistoryBoundary : Set where
     benefitMechanismSameObjectEvidencePaid : Bool
     benefitMechanismSameObjectEvidencePaidIsTrue :
       benefitMechanismSameObjectEvidencePaid ≡ true
+    contractedSalaryAmountSameObjectEvidencePaid : Bool
+    contractedSalaryAmountSameObjectEvidencePaidIsTrue :
+      contractedSalaryAmountSameObjectEvidencePaid ≡ true
+    documentedSalaryNonpaymentSameObjectEvidencePaid : Bool
+    documentedSalaryNonpaymentSameObjectEvidencePaidIsTrue :
+      documentedSalaryNonpaymentSameObjectEvidencePaid ≡ true
+    actualSalarySettlementSameObjectEvidencePaid : Bool
+    actualSalarySettlementSameObjectEvidencePaidIsFalse :
+      actualSalarySettlementSameObjectEvidencePaid ≡ false
     benefitPerformanceProvesNetSettlement : Bool
     benefitPerformanceProvesNetSettlementIsFalse :
       benefitPerformanceProvesNetSettlement ≡ false
@@ -215,6 +270,9 @@ canonicalMinetteMicrohistoryBoundary =
   minette-microhistory-boundary
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
