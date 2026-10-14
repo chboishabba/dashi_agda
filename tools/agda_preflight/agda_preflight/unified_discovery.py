@@ -3,19 +3,20 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Optional
 
-from .discovery import round_family, similarity_score
+from . import discovery_catalog
+from .discovery import round_family
 from .lineage import compute_round_lineage
 from .query_discovery import _query_score
 from .repo_index_bridge import RepoIndexReader
 
 
 class UnifiedDiscovery:
-    """Join the repo-wide inventory with preflight's incremental type surface.
+    """Join repo-wide identity with preflight's incremental type surface.
 
-    The repo index owns identity, source spans, refs, requirements, explicit
-    status and whole-repository completeness. Preflight contributes persisted
-    interface signatures/fingerprints and structural similarity. Neither layer
-    is a substitute for Agda typechecking.
+    Repo-index owns identity, source spans, refs, requirements, explicit status
+    and repository completeness. Preflight contributes persisted interface
+    signatures/fingerprints and structural similarity. Neither layer replaces
+    Agda typechecking.
     """
 
     def __init__(self, root, source_index, repo_index: RepoIndexReader) -> None:
@@ -24,8 +25,6 @@ class UnifiedDiscovery:
         self.repo_index = repo_index
 
     def _overlay_map(self, include_history: bool = True) -> dict[str, dict]:
-        from . import discovery_catalog
-
         discovery_catalog.ensure_catalog_fresh(self.source_index.connection)
         if include_history:
             rows = self.source_index.connection.execute(
@@ -38,7 +37,6 @@ class UnifiedDiscovery:
         result = {}
         for row in rows:
             item = discovery_catalog._row_dict(row)
-            # Prefer a declaration-bearing row over a reexport duplicate.
             prior = result.get(item["qualified_name"])
             if prior is None or prior.get("kind") == "reexport":
                 result[item["qualified_name"]] = item
@@ -72,9 +70,11 @@ class UnifiedDiscovery:
                 query, include_history=include_history, limit=limit
             )
             return [self._merge(item, overlay.get(item["qualified_name"])) for item in matches]
-        # Fail-soft fallback for worktrees that have not built repo-index yet.
-        return self.source_index.search_symbols(
-            query, include_history=include_history, limit=limit
+        return discovery_catalog.search_symbols(
+            self.source_index.connection,
+            query,
+            include_history=include_history,
+            limit=limit,
         )
 
     def _repo_fuzzy(
@@ -125,7 +125,8 @@ class UnifiedDiscovery:
                 ) if self.repo_index.available else [],
             }
         target = exact[0]
-        overlay_report = self.source_index.related_symbols(
+        overlay_report = discovery_catalog.related_symbols(
+            self.source_index.connection,
             target["qualified_name"],
             include_history=include_history,
             limit=limit,
@@ -152,25 +153,21 @@ class UnifiedDiscovery:
 
         signature_equivalent = enrich(overlay_report.get("signature_equivalent", ()))
         body_equivalent = enrich(overlay_report.get("body_equivalent", ()))
-        seen = {
-            target["qualified_name"],
-            *[item["qualified_name"] for item in signature_equivalent],
-            *[item["qualified_name"] for item in body_equivalent],
-        }
+        seen = {target["qualified_name"]}
+        seen.update(item["qualified_name"] for item in signature_equivalent)
+        seen.update(item["qualified_name"] for item in body_equivalent)
         similar = enrich(overlay_report.get("similar", ()))
-        for item in self._repo_fuzzy(
-            target["name"], include_history=include_history, limit=max(limit * 2, 50)
-        ):
-            if item["qualified_name"] in seen:
-                continue
-            if item["qualified_name"] == target["qualified_name"]:
-                continue
-            score = item.pop("query_similarity", 0.0)
-            # Name-only repo-index similarity is deliberately weaker than a
-            # preflight signature-aware candidate.
-            item["similarity"] = min(0.69, score)
-            similar.append(item)
-            seen.add(item["qualified_name"])
+        seen.update(item["qualified_name"] for item in similar)
+        if self.repo_index.available:
+            for item in self._repo_fuzzy(
+                target["name"], include_history=include_history, limit=max(limit * 2, 50)
+            ):
+                if item["qualified_name"] in seen or item["qualified_name"] == target["qualified_name"]:
+                    continue
+                score = item.pop("query_similarity", 0.0)
+                item["similarity"] = min(0.69, score)
+                similar.append(item)
+                seen.add(item["qualified_name"])
         similar.sort(key=lambda item: (-float(item.get("similarity", 0.0)), item["qualified_name"]))
         return {
             "query_symbol": target,
@@ -256,7 +253,7 @@ class UnifiedDiscovery:
 
     def round_lineage(self, prefix: Optional[str] = None) -> dict:
         if not self.repo_index.available:
-            return self.source_index.round_lineage(prefix=prefix)
+            return discovery_catalog.round_lineage(self.source_index.connection, prefix=prefix)
         overlay = self._overlay_map(include_history=True)
         grouped = defaultdict(list)
         for item in self.repo_index.all_agda_symbols(include_history=True):
@@ -286,8 +283,6 @@ class UnifiedDiscovery:
             modules.append({"module_name": module, "symbols": symbols})
         report = compute_round_lineage(modules)
         report["inventory_source"] = "repo-index"
-        report["signature_change_detection"] = (
-            "preflight-signature where indexed; otherwise kind-level only"
-        )
+        report["signature_change_detection"] = "preflight-signature where indexed; otherwise kind-level only"
         report["coverage"] = self.repo_index.coverage_status()
         return report
