@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
+import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
 import DASHI.Culture.PowersPlantationParadiseSynthesisExact as Synthesis
 import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performance
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
@@ -70,6 +71,11 @@ _governed-social-position-gap-paid :
   INF.FactorsThrough Cross.culturalSurface Cross.governedSocialPositionJoint → ⊥
 _governed-social-position-gap-paid =
   Cross.sameCulturalSurfaceCannotRetainGovernedSocialPosition
+
+_legibility-decoder-gap-paid :
+  Legibility.ExactInstitutionalViewDecoder Cross.powersLegibilityChannel → ⊥
+_legibility-decoder-gap-paid =
+  Cross.powersExactInstitutionalViewDecoderImpossible
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
