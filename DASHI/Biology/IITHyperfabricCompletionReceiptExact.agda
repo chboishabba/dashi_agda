@@ -16,11 +16,6 @@ import DASHI.Biology.IITIIT4ConsumerDescentExact as Consumer
 
 ------------------------------------------------------------------------
 -- TERMINAL COMPLETION LEDGER
---
--- The ledger separates source completion from executable verification and
--- Agda-kernel verification.  A `true` source bit means the corresponding owner
--- exists and is imported here; it is not a claim that every external numerical
--- backend was executed in this environment.
 ------------------------------------------------------------------------
 
 data VerificationLevel : Set where
@@ -75,8 +70,13 @@ allTenSourceTasksPresent :
   × task7DistinctionRelationStructureSource currentCompletionLedger ≡ true
   × task8Xor369StressSource currentCompletionLedger ≡ true
   × task9ConsumerDescentSource currentCompletionLedger ≡ true
+  × task10ReceiptLoopSource currentCompletionLedger ≡ true
 allTenSourceTasksPresent =
-  refl , refl , refl , refl , refl , refl , refl , refl , refl
+  refl , refl , refl , refl , refl , refl , refl , refl , refl , refl
+
+fullStructureAdapterPresent :
+  task7PyPhiFullStructureAdapterPresent currentCompletionLedger ≡ true
+fullStructureAdapterPresent = refl
 
 noFakeKernelPromotion :
   agdaKernelExecutedInThisEnvironment currentCompletionLedger ≡ false
