@@ -16,6 +16,7 @@ def test_reuse_rollup_imports_new_r136_tt_and_si_frontiers():
         "CMP119AntigravityPostScalarR136ReuseMaxCutExact",
         "CMP119AntigravityR136ToStaticVacuumPromotionExact",
         "CMP119AntigravityR136StaticPairToDifferentialExact",
+        "CMP119AntigravityPinnedLocalCTerminalToStaticExact",
         "AntigravityDifferentialTTDonorMaxCutExact",
         "AntigravitySICalibrationDonorMaxCutExact",
     ):
