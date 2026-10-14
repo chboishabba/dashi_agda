@@ -10,39 +10,24 @@ import DASHI.Physics.Closure.Ternary27TrinificationSU2RBreakingFrontierExact as 
 ------------------------------------------------------------------------
 -- TWO-NEUTRAL-VEV TRINIFICATION BREAKING CANDIDATE
 --
--- Work on the same (1,3,bar3) lepton/Higgs 3x3 matrix block used by the
--- trinification representation.  Under the already-owned hypercharge
--- generator
+-- Work on the same (1,3,bar3) matrix block after selecting the trinification
+-- subgroup. Under the already-owned hypercharge generator
 --
 --   Y = -(1/6) X_L -(1/6) X_R -(1/2) T3_R,
 --
--- the matrix units E_32 and E_33 are both neutral.
+-- E_32 and E_33 are both neutral.  Inside su(3)_L + su(3)_R:
 --
--- The local exact compact-Lie stabilizer calculation gives:
+--   one VEV E_33 leaves dimension 7;
+--   two VEVs E_32,E_33 leave dimension 4,
 --
---   one neutral VEV E_33:
---       dim Stab_{su3_L + su3_R} = 7;
+-- with kernel su(2)_L plus X_L + 3 T3_R + X_R, whose -1/6 multiple is the
+-- same U(1)_Y generator. SU(3)_C is untouched, so AFTER the trinification stage
+-- the surviving compact algebra is the SM gauge algebra.
 --
---   two independent neutral VEVs E_32 and E_33:
---       dim Stab_{su3_L + su3_R} = 4,
---
--- with an explicit kernel basis consisting of the three su(2)_L generators
--- plus
---
---   X_L + 3 T3_R + X_R.
---
--- Multiplication of the final generator by -1/6 is exactly the same U(1)_Y
--- generator used by the existing charge calculation.  SU(3)_C acts on the
--- separate colour factor and is untouched. Hence the compact stabilizer at Lie
--- algebra level is
---
---   su(3)_C + su(2)_L + u(1)_Y.
---
--- The positive gauge-boson mass quadratic form induced by these two VEV
--- directions has rank 12 on su3_L + su3_R, with the above 4-dimensional
--- kernel.  This is conditional algebraic mass/decoupling structure: the Higgs
--- potential, existence of two physical scalar 27 copies, VEV scale, couplings
--- and numerical masses remain separate physical receipts.
+-- Important correction: imposing only E_32,E_33 directly on the full literal
+-- 78-dimensional first-Tits cubic-symmetry algebra leaves a 49-dimensional
+-- infinitesimal stabilizer.  Therefore the two VEVs do NOT by themselves prove
+-- E6 -> SM.  A prior E6 -> SU(3)^3 selection/breaking stage is required.
 ------------------------------------------------------------------------
 
 oneNeutralVEVLRStabilizerDimension : Nat
@@ -54,8 +39,11 @@ twoNeutralVEVLRStabilizerDimension = 4
 brokenLRGeneratorCount : Nat
 brokenLRGeneratorCount = 12
 
-fullLowEnergyGaugeLieDimension : Nat
-fullLowEnergyGaugeLieDimension = 12
+fullLowEnergyGaugeLieDimensionAfterTrinification : Nat
+fullLowEnergyGaugeLieDimensionAfterTrinification = 12
+
+directTwoVEVFullE6StabilizerDimension : Nat
+directTwoVEVFullE6StabilizerDimension = 49
 
 neutralVEVDirections : String
 neutralVEVDirections = "E_32 and E_33 in the (1,3,bar3) matrix block"
@@ -76,9 +64,13 @@ record TrinificationTwoNeutralVEVLocalReceipt : Set where
     fourthKernelGeneratorEqualsHyperchargeUpToScale : Bool
     exactLRKernelIsSU2LPlusU1Y : Bool
     colourSU3Untouched : Bool
-    fullCompactLowEnergyLieAlgebraMatchesSMGaugeAlgebra : Bool
+    fullCompactLowEnergyLieAlgebraMatchesSMGaugeAlgebraAfterTrinification : Bool
     brokenLRGeneratorCountTwelve : Bool
     conditionalGaugeMassQuadraticRankTwelve : Bool
+    calculationRestrictedToSelectedTrinificationStage : Bool
+    directFullE6TwoVEVStabilizerDimension49PaidLocally : Bool
+    directFullE6TwoVEVStabilizerEqualsSMGaugeAlgebra : Bool
+    priorE6ToTrinificationStageRequired : Bool
     twoPhysicalScalar27CopiesSupplied : Bool
     higgsPotentialSelectsTheseDirections : Bool
     physicalVEVScalePaid : Bool
@@ -93,8 +85,9 @@ canonicalTrinificationTwoNeutralVEVLocalReceipt : TrinificationTwoNeutralVEVLoca
 canonicalTrinificationTwoNeutralVEVLocalReceipt =
   trinification-two-neutral-vev-local-receipt
     true true true true true true true true true true true true true
+    true true false true
     false false false false false false false false
-    "Two independent hypercharge-neutral lepton-block VEV directions reduce the compact SU(3)_L x SU(3)_R stabilizer exactly to SU(2)_L x U(1)_Y at Lie-algebra level while leaving SU(3)_C untouched. The conditional gauge mass operator has rank 12 on the broken L/R directions. This pays an explicit algebraic order-parameter/stabilizer pattern, but not the physical existence of two scalar 27s, their potential, scale, couplings, numerical spectrum, DHR same-action theorem or experimental breaking evidence."
+    "Within the already-selected trinification subgroup, E_32,E_33 reduce SU(3)_L x SU(3)_R exactly to SU(2)_L x U(1)_Y and leave colour untouched. The full first-Tits E6 test instead leaves a 49-dimensional stabilizer, so the two VEVs are not a direct E6->SM mechanism. They constitute the second stage E6 -> trinification -> SM. Physical scalar content, potential choice, scale, couplings, DHR same-action and empirical breaking remain separate."
 
 oldBreakingFrontier : Frontier.TrinificationSU2RBreakingFrontierReceipt
 oldBreakingFrontier = Frontier.canonicalTrinificationSU2RBreakingFrontierReceipt
@@ -103,6 +96,7 @@ record PhysicalTwoVEVBreakingProducer : Set₁ where
   field
     ScalarFieldCopy : Set
     first27 second27 : ScalarFieldCopy
+    priorE6ToTrinificationReceipt : Set
     potential : Set
     minimumReceipt : Set
     neutralVEVDirectionReceipt : Set
@@ -116,6 +110,12 @@ open PhysicalTwoVEVBreakingProducer public
 
 data AlgebraicStabilizerCreatesPhysicalHiggsMechanism : Set where
 
+data TrinificationStabilizerCreatesDirectE6Breaking : Set where
+
 algebraicStabilizerDoesNotCreatePhysicalHiggsMechanism :
   AlgebraicStabilizerCreatesPhysicalHiggsMechanism → {A : Set} → A
 algebraicStabilizerDoesNotCreatePhysicalHiggsMechanism ()
+
+trinificationResultDoesNotCreateDirectE6Breaking :
+  TrinificationStabilizerCreatesDirectE6Breaking → {A : Set} → A
+trinificationResultDoesNotCreateDirectE6Breaking ()
