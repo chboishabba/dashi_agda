@@ -21,6 +21,18 @@ legacyConstituentAttachmentStoresTypeOnly :
   Hardening.legacyConstituentAttachmentIsProofRelevant Hardening.canonicalBoundary ≡ false
 legacyConstituentAttachmentStoresTypeOnly = refl
 
+legacyZetaBasisRecognitionStoresTypeOnly :
+  Hardening.legacyZetaBasisRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyZetaBasisRecognitionStoresTypeOnly = refl
+
+legacyMultiplicityBasisStoresTypeOnly :
+  Hardening.legacyMultiplicityBasisRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyMultiplicityBasisStoresTypeOnly = refl
+
+legacyBasisVectorCompatibilityStoresTypeOnly :
+  Hardening.legacyWZetaBasisVectorRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyBasisVectorCompatibilityStoresTypeOnly = refl
+
 paidHZetaWrapperRequiresWitnesses :
   Hardening.paidHZetaRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
 paidHZetaWrapperRequiresWitnesses = refl
@@ -36,6 +48,18 @@ paidConstituentWrapperRequiresWitnesses = refl
 paidHomWrapperRequiresWitnesses :
   Hardening.paidHomIntertwinerWrapperAvailable Hardening.canonicalBoundary ≡ true
 paidHomWrapperRequiresWitnesses = refl
+
+paidZetaBasisWrapperRequiresWitnesses :
+  Hardening.paidZetaBasisRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidZetaBasisWrapperRequiresWitnesses = refl
+
+paidMultiplicityBasisWrapperRequiresWitnesses :
+  Hardening.paidMultiplicityBasisRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidMultiplicityBasisWrapperRequiresWitnesses = refl
+
+paidBasisVectorWrapperRequiresWitnesses :
+  Hardening.paidWZetaBasisVectorRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidBasisVectorWrapperRequiresWitnesses = refl
 
 noPromotionFromTypedObligationAlone :
   Hardening.typedObligationAlonePaysRecognition Hardening.canonicalBoundary ≡ false
