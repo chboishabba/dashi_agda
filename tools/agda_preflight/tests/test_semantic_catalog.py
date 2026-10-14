@@ -65,7 +65,7 @@ def test_related_symbols_stratifies_signature_equivalence_and_similarity(tmp_pat
     assert all("similarity" in item for item in report["similar"])
 
 
-def test_discovery_receipt_only_permits_absence_after_all_strata_are_empty(tmp_path: Path):
+def test_discovery_without_repo_index_never_authorizes_absence(tmp_path: Path):
     db = tmp_path / "index.sqlite3"
     with SourceIndex(tmp_path, db) as index:
         _seed_module(
@@ -83,13 +83,12 @@ def test_discovery_receipt_only_permits_absence_after_all_strata_are_empty(tmp_p
     assert known["live_matches"]
     assert fuzzy["absence_claim_permitted"] is False
     assert any(item["name"] == "knownThing" for item in fuzzy["query_similar"])
-    assert missing["absence_claim_permitted"] is True
-    assert missing["live_matches"] == []
-    assert missing["historical_matches"] == []
-    assert missing["query_similar"] == []
+    assert missing["absence_claim_permitted"] is False
+    assert missing["absence_status"] == "search_incomplete"
+    assert missing["coverage"]["repo_index"]["state"] == "missing"
 
 
-def test_absence_is_forbidden_when_repository_index_is_incomplete(tmp_path: Path):
+def test_absence_is_forbidden_when_repo_index_is_missing_even_if_preflight_db_has_no_match(tmp_path: Path):
     unindexed = tmp_path / "DASHI" / "Hidden.agda"
     unindexed.parent.mkdir(parents=True)
     unindexed.write_text("module DASHI.Hidden where\n", encoding="utf-8")
@@ -99,5 +98,4 @@ def test_absence_is_forbidden_when_repository_index_is_incomplete(tmp_path: Path
 
     assert receipt["absence_claim_permitted"] is False
     assert receipt["absence_status"] == "search_incomplete"
-    assert receipt["coverage"]["repository_index_complete"] is False
-    assert "DASHI/Hidden.agda" in receipt["coverage"]["missing_indexed_files"]
+    assert receipt["coverage"]["repo_index"]["complete"] is False
