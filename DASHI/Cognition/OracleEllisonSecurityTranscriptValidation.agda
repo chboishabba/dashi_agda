@@ -156,6 +156,16 @@ fireWeaverAttackOfficerOverridePaid :
   Authority.fireWeaverAttackOfficerOverridePaid ≡ true
 fireWeaverAttackOfficerOverridePaid = refl
 
+fireWeaverProductArchitectureReachesL3 :
+  Authority.fireWeaverProductArchitectureHighestPaidLevel
+  ≡ Promotion.systemArchitectureControl
+fireWeaverProductArchitectureReachesL3 = refl
+
+oracleRafaelRelationshipRemainsL2 :
+  Authority.oracleRafaelRelationshipHighestPaidLevel
+  ≡ Promotion.operationalIntegration
+oracleRafaelRelationshipRemainsL2 = refl
+
 oracleDoesNotBecomeAttackOfficer :
   Authority.oracleControlsFireWeaverAttackOfficer ≡ false
 oracleDoesNotBecomeAttackOfficer = refl
@@ -171,6 +181,11 @@ fullAuthorityChainStillOpen = refl
 ellisonFIDFDeclaredSupportMotivePaid :
   Motive.ellisonFIDFSupportMotivePaid ≡ true
 ellisonFIDFDeclaredSupportMotivePaid = refl
+
+ellisonFIDFDeclaredSupportReachesL4 :
+  Motive.ellisonFIDFDeclaredSupportHighestPaidLevel
+  ≡ Promotion.intentMotive
+ellisonFIDFDeclaredSupportReachesL4 = refl
 
 oracleLeadershipIsraelCommitmentDeclared :
   Motive.oracleLeadershipIsraelSupportCommitmentPaid ≡ true
