@@ -16,6 +16,7 @@ import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performan
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as GovernedCross
+import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 
 ------------------------------------------------------------------------
 -- POWERS PLANTATION -> PARADISE? SYNTHESIS
@@ -59,19 +60,10 @@ paradiseObserverCannotRecoverMaterialAffordance =
       refl
       materialAffordanceDiffers)
 
-------------------------------------------------------------------------
--- Existing critical-social-ecology donor theorem: inclusive/liberatory reading
--- is already known not to determine realised material affordance.
-------------------------------------------------------------------------
-
 existingObserverAffordanceDonor :
   INF.FactorsThrough Ecology.nominalLiberatoryObserver Ecology.realizedRemain → ⊥
 existingObserverAffordanceDonor =
   Ecology.nominalLiberatoryLabelCannotRecoverRealizedAffordance
-
-------------------------------------------------------------------------
--- Fraser axes remain independent under this synthesis.
-------------------------------------------------------------------------
 
 recognitionCannotRecoverDistribution :
   INF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
@@ -81,10 +73,6 @@ distributionCannotRecoverRepresentation :
   INF.FactorsThrough Fraser.distribution Fraser.representation → ⊥
 distributionCannotRecoverRepresentation =
   Fraser.distributionCannotRecoverRepresentation
-
-------------------------------------------------------------------------
--- Local option expansion is not global emancipation.
-------------------------------------------------------------------------
 
 data ExpansionState : Set where
   localExpandedGloballyRestricted : ExpansionState
@@ -119,22 +107,12 @@ localExpansionDoesNotProveGlobalEmancipation =
       refl
       globalEmancipationDiffers)
 
-------------------------------------------------------------------------
--- Source / theorem firewall.
-------------------------------------------------------------------------
-
 data EpistemicLayer : Set where
   powersSourceClaim : EpistemicLayer
   dashiTheorem : EpistemicLayer
 
 sourceClaimDoesNotBecomeDASHITheorem : powersSourceClaim ≡ dashiTheorem → ⊥
 sourceClaimDoesNotBecomeDASHITheorem ()
-
-------------------------------------------------------------------------
--- Cross-pollination receipts: these values expose the imported boundaries so
--- downstream consumers can see exactly which generic and historical owners are
--- being reused.
-------------------------------------------------------------------------
 
 sourceBoundary : Sources.PowersSourceBoundary
 sourceBoundary = Sources.canonicalPowersSourceBoundary
@@ -167,6 +145,9 @@ governedCrossPollinationBoundary :
   GovernedCross.PowersGovernedCrossPollinationBoundary
 governedCrossPollinationBoundary =
   GovernedCross.canonicalPowersGovernedCrossPollinationBoundary
+
+empiricalProgrammeBoundary : Empirical.PowersEmpiricalProgrammeBoundary
+empiricalProgrammeBoundary = Empirical.canonicalPowersEmpiricalProgrammeBoundary
 
 record PowersPlantationParadiseBoundary : Set where
   constructor powers-plantation-paradise-boundary
