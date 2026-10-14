@@ -6,15 +6,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Biology.IIT369MatchedAlgebraControlExact as Algebra
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact as Triadic
-import DASHI.Biology.IITBrainMaleCNSConsumerBoundaryExact as Brain
+import DASHI.Reasoning.IITBrainMaleCNSConsumerBoundaryExact as Brain
 
 ------------------------------------------------------------------------
 -- IIT OBSERVABLES ARE CONSUMER-RELATIVE OBSERVERS
---
--- A scalar or finite cause-effect structure is useful for a declared consumer
--- only after the relevant consumer factors through that observation.  This
--- file supplies exact non-descent examples and a typed boundary for numerical
--- collisions discovered by the executable scans.
 ------------------------------------------------------------------------
 
 data AlgebraVariant : Set where
@@ -50,21 +45,12 @@ cardinalityCannotFactorGroupLaw :
 cardinalityCannotFactorGroupLaw =
   Descent.nonDescentWitnessBlocksFactorization cardinalityLosesGroupLaw
 
-------------------------------------------------------------------------
--- Existing exact higher-order non-descent: selected 27-cubies do not recover
--- the irreducible triadic face.
-------------------------------------------------------------------------
-
 selectedCubieObservationCannotRecoverTriadicFace :
   Descent.FactorsThrough
     Triadic.selectedCubiesObserver
     Triadic.triadicFaceConsumer → ⊥
 selectedCubieObservationCannotRecoverTriadicFace =
   Triadic.selectedCubiesDoNotDetermineTriadicFace
-
-------------------------------------------------------------------------
--- Observation levels for IIT consumers.
-------------------------------------------------------------------------
 
 data IITObservationLevel : Set where
   systemPhiOnly : IITObservationLevel
@@ -109,5 +95,5 @@ consumerPaymentCannotBeSkipped = refl
 algebraControlBoundary : Algebra.IIT369AlgebraControlBoundary
 algebraControlBoundary = Algebra.canonicalIIT369AlgebraControlBoundary
 
-brainConsumerBoundary : Brain.IITBrainMaleCNSBoundary
-brainConsumerBoundary = Brain.canonicalIITBrainMaleCNSBoundary
+brainConsumerBoundary : Brain.BrainMaleCNSIITBoundary
+brainConsumerBoundary = Brain.canonicalBrainMaleCNSIITBoundary
