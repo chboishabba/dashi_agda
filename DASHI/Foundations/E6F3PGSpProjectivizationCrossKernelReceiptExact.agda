@@ -23,6 +23,11 @@ module DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelReceiptExact where
 -- exterior-square five-space image and the repository E6 Weyl image are the
 -- SAME finite matrix subset of the SAME five-space endomorphism carrier.
 --
+-- It now goes one step further and inhabits the pre-existing
+-- PGSpWeylRecognition interface at this concrete matrix-image level: the two
+-- actor carriers are the equal matrix images, the actor maps are two-sided,
+-- and both actors act by the same 5x5 matrix on the same F3^5 carrier.
+--
 -- AUTHORITY / PROMOTION BOUNDARY:
 -- This is a CROSS-PROVER receipt only.  Lean source does not become Agda kernel
 -- authority.  Literal same-matrix-image recognition is recorded separately
@@ -73,6 +78,7 @@ record Boundary : Set where
     repoE6FiveSpaceImageOrder51840LeanSourceWritten : Bool
     literalFiveSpaceMatrixImageEqualityLeanSourceWritten : Bool
     sameActionMatrixImageRecognitionLeanSourceWritten : Bool
+    pgspWeylRecognitionInterfaceInhabitedAtMatrixImageLeanSourceWritten : Bool
     leanExactHeadKernelReceiptObserved : Bool
     agdaFourSpaceClosureKernelReplayPaid : Bool
     agdaLiteralFiveSpaceImageReplayPaid : Bool
@@ -83,5 +89,5 @@ canonicalBoundary : Boundary
 canonicalBoundary =
   boundary
     true true true true true true
-    true true true true
+    true true true true true
     false false false false
