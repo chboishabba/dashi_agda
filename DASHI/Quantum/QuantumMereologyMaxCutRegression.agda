@@ -70,6 +70,13 @@ typed-selected-cpo-refinement-source-written =
   Finite.TypedSelectedCPOFiniteHermitianRefinementSourceWrittenIsTrue
     Finite.canonicalFiniteQuantumProducerStatus
 
+typed-selected-product-cpo-eigenbasis-source-written :
+  Finite.TypedSelectedCPOProductEigenbasisSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+typed-selected-product-cpo-eigenbasis-source-written =
+  Finite.TypedSelectedCPOProductEigenbasisSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
 generic-admissibility-does-not-create-typed-symmetry :
   Finite.GenericCPOAdmissibilityCreatesTypedSymmetry
     Finite.canonicalFiniteQuantumProducerStatus ≡ false
