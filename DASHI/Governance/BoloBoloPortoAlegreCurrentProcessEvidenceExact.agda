@@ -20,9 +20,15 @@ import DASHI.Governance.BoloBoloComparatorInstitutionalVersioningExact as Versio
 -- three hours while government representatives and councillors discussed the
 -- budget and demands of the 17 regions and six thematic streams.
 --
--- The article does NOT establish that all 92 councillors attended that meeting.
--- Therefore DASHI records a 180-minute meeting observation but does not multiply
--- 92 * 180 into an observed person-minute workload.
+-- Source layer 3: City of Porto Alegre 2025-cycle summary, published
+-- 2025-08-13. It reports 18,055 participants across the 23 assemblies in the
+-- cycle.  This is retained as the source-reported cycle participation count;
+-- DASHI does not infer that every count corresponds to a unique individual
+-- across assemblies.
+--
+-- The meeting-duration article does NOT establish that all 92 councillors
+-- attended that meeting. Therefore DASHI records a 180-minute meeting
+-- observation but does not multiply 92 * 180 into observed person-minutes.
 ------------------------------------------------------------------------
 
 portoCurrentArchitectureSource : Registry.SourceReference
@@ -45,6 +51,16 @@ portoFirstOrdinary2025MeetingSource = Registry.source-reference
   "official municipal event report"
   "source for the reported three-hour duration of the 2025-02-04 first ordinary COP meeting and its budget/demand agenda; not an attendance roster or total workload audit"
 
+porto2025CycleParticipationSource : Registry.SourceReference
+porto2025CycleParticipationSource = Registry.source-reference
+  "Prefeitura de Porto Alegre / Secretaria Municipal de Governança Cidadã e Desenvolvimento Rural"
+  "Orçamento Participativo de 2025 mobilizou 18 mil pessoas"
+  "official municipal cycle summary, 2025-08-13"
+  2025
+  "https://prefeitura.poa.br/smgov/noticias/orcamento-participativo-de-2025-mobilizou-18-mil-pessoas"
+  "official municipal participation summary"
+  "source for the reported 18,055 participants across 23 OP assemblies in the 2025 cycle; does not establish cross-assembly unique-person identity, person-hours or target-bolo scaling"
+
 record PortoCurrentProcessEvidence : Set where
   constructor porto-current-process-evidence
   field
@@ -58,6 +74,7 @@ record PortoCurrentProcessEvidence : Set where
     observedMeetingDateMonth : Nat
     observedMeetingDateDay : Nat
     currentCOPMeetingDurationMinutes : Nat
+    reported2025AssemblyParticipationCount : Nat
 
 open PortoCurrentProcessEvidence public
 
@@ -68,6 +85,7 @@ canonicalPortoCurrentProcessEvidence =
     true true
     2025 2 4
     180
+    18055
 
 currentStructureAgreesWithVersionOwner :
   currentCouncilMemberCount canonicalPortoCurrentProcessEvidence ≡
@@ -84,9 +102,12 @@ record PortoCurrentProcessBoundary : Set where
   field
     officialCurrentArchitecturePaid : Bool
     officialThreeHourMeetingObservationPaid : Bool
+    official2025CycleParticipationCountPaid : Bool
     all92CouncillorsAttendedObservedMeeting : Bool
     currentMeetingDurationTimesCouncilSizeIsObservedWorkload : Bool
     threeHourMeetingIsTotalParticipationWorkload : Bool
+    reportedCycleParticipationEstablishesUniquePersonsAcrossAssemblies : Bool
+    reportedCycleParticipationIsPersonHours : Bool
     oneMeetingIdentifiesLongRunCouncilBurden : Bool
     currentPortoObservationTransfersToHistorical44MemberVersion : Bool
     officialMunicipalObservationIsBoloTargetEvidence : Bool
@@ -97,6 +118,6 @@ open PortoCurrentProcessBoundary public
 canonicalPortoCurrentProcessBoundary : PortoCurrentProcessBoundary
 canonicalPortoCurrentProcessBoundary =
   porto-current-process-boundary
-    true true
-    false false false false false false
+    true true true
+    false false false false false false false false
     true
