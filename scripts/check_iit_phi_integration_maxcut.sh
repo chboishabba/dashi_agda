@@ -10,6 +10,7 @@ required_files=(
   DASHI/Biology/IIT4SystemPhiInputExact.agda
   DASHI/Biology/IIT4SymbolicScalarBackendExact.agda
   DASHI/Biology/IITXORGridAdversarialExact.agda
+  DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda
   DASHI/Biology/IITXORProbabilityReceiptExact.agda
   DASHI/Biology/IITXOREffectCutReceiptExact.agda
   DASHI/Biology/IITCyclotomicFourierObserverExact.agda
@@ -51,6 +52,14 @@ require DASHI/Biology/IITXORGridAdversarialExact.agda 'xorTwoBitFiniteCausalSyst
 require DASHI/Biology/IITXORProbabilityReceiptExact.agda 'unconstrained11IsOneQuarter'
 require DASHI/Biology/IITXOREffectCutReceiptExact.agda 'partitionedEffect10to11IsHalf'
 require DASHI/Biology/IITXOREffectCutReceiptExact.agda 'symbolicIntegratedEffect10to11IsExactEquationTree'
+
+# XOR-grid recurrence is explicitly the dependency/gluing graph, not XOR itself.
+require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'data GridCausalEdge'
+require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'northWestLocalXor'
+require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'northWestNorthEastCircuit'
+require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'northWestSouthWestCircuit'
+require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'gridCircuitIsNotLocalGate'
+require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'circuitAloneDoesNotDeterminePhi'
 
 # Generic observer/descent and cyclotomic/369 surfaces.
 require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'nonDescentBlocksScoreFactorization'
@@ -128,10 +137,11 @@ require DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda 'normLosesC3Phase'
 require DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda 'finitePackagingIsNotAnalyticContinuation'
 
 # Rollup must be acyclic and validation must sit outside production.
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITXORGridFibreCircuitBridgeExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITCausalPantsFibreGluingExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITCausalPantsOrientationBoundaryExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27Origin26Exact'
-require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27Recentered26Exact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology/IITPointedTernary27Recentered26Exact'
 reject DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPhiIntegrationMaxCutValidation'
 require DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
