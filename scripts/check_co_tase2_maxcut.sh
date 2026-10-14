@@ -21,6 +21,7 @@ python3 scripts/co_tase2_spin_space_generator_bridge.py \
   --receipt /tmp/co_tase2_spin_space_generator_receipt.json
 
 python3 scripts/co_tase2_wannier90_spectral_selftest.py
+python3 scripts/co_tase2_kz_final_state_calibration_selftest.py
 
 python3 -m py_compile \
   scripts/co_tase2_bloch_symmetry.py \
@@ -36,6 +37,7 @@ python3 -m py_compile \
   scripts/co_tase2_wannier90_spectral.py \
   scripts/co_tase2_wannier90_spectral_selftest.py \
   scripts/co_tase2_kz_final_state_calibration.py \
+  scripts/co_tase2_kz_final_state_calibration_selftest.py \
   scripts/co_tase2_dataset_download_probe.py
 
 python3 - <<'PY'
