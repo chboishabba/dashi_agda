@@ -9,6 +9,7 @@ module DASHI.Mathematics.Complexity.VirtualStandardTapeCostExact where
 -- mutable-overlay lookup cost is at most k; it cannot hide super-polynomial work.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
@@ -35,8 +36,8 @@ latestWriteWork :
 latestWriteWork requested [] = zero
 latestWriteWork requested (entry ∷ rest)
   with Overlay.natEqual requested (Overlay.address entry)
-... | Agda.Builtin.Bool.true = suc zero
-... | Agda.Builtin.Bool.false = suc (latestWriteWork requested rest)
+... | true = suc zero
+... | false = suc (latestWriteWork requested rest)
 
 latestWriteWorkBound :
   ∀ {Cell : Set}
@@ -46,8 +47,8 @@ latestWriteWorkBound :
 latestWriteWorkBound requested [] = NatP.≤-refl _
 latestWriteWorkBound requested (entry ∷ rest)
   with Overlay.natEqual requested (Overlay.address entry)
-... | Agda.Builtin.Bool.true = NatP.s≤s NatP.z≤n
-... | Agda.Builtin.Bool.false =
+... | true = NatP.s≤s NatP.z≤n
+... | false =
   NatP.s≤s (latestWriteWorkBound requested rest)
 
 writeResidualDepthExact :
@@ -106,13 +107,12 @@ virtualRunResidualDepthExact :
   VirtualExactRun steps start finish →
   residualDepth (Virtual.residual finish)
   ≡ residualDepth (Virtual.residual start) + steps
-virtualRunResidualDepthExact virtualRunDone
-  rewrite NatP.+-identityʳ _ = refl
+virtualRunResidualDepthExact virtualRunDone = refl
 virtualRunResidualDepthExact
-    (virtualRunStep {steps = steps} edge rest)
+    (virtualRunStep {steps = steps} {start = start} edge rest)
   rewrite virtualRunResidualDepthExact rest
         | virtualEdgeResidualDepth edge
-        | NatP.+-suc (residualDepth (Virtual.residual _)) steps =
+        | NatP.+-suc (residualDepth (Virtual.residual start)) steps =
   refl
 
 ------------------------------------------------------------------------
@@ -146,15 +146,17 @@ finishLookupWorkBoundByRun :
   VirtualExactRun steps start finish →
   (requested : Nat) →
   latestWriteWork requested (Virtual.residual finish) ≤ steps
-finishLookupWorkBoundByRun startEmpty run requested =
+finishLookupWorkBoundByRun
+    {steps = steps} {finish = finish}
+    startEmpty run requested =
   NatP.≤-trans
-    (latestWriteWorkBound requested (Virtual.residual _))
+    (latestWriteWorkBound requested (Virtual.residual finish))
     equalityAsBound
   where
-    depthExact : residualDepth (Virtual.residual _) ≡ steps
+    depthExact : residualDepth (Virtual.residual finish) ≡ steps
     depthExact = emptyStartRunResidualDepth startEmpty run
 
-    equalityAsBound : residualDepth (Virtual.residual _) ≤ steps
+    equalityAsBound : residualDepth (Virtual.residual finish) ≤ steps
     equalityAsBound = NatP.≤-reflexive depthExact
 
 ------------------------------------------------------------------------
