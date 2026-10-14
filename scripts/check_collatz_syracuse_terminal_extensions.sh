@@ -8,6 +8,8 @@ files=(
   DASHI/Analysis/CollatzSyracuseResidualWordCertificateFrontierExact.agda
   DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
   DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardValidation.agda
+  DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+  DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionValidation.agda
   DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 )
 
@@ -25,8 +27,15 @@ grep -q 'trailingZeroCompilerCreatesUniversalStopping : Nat' DASHI/Analysis/Coll
 grep -q 'globallyBoundedFrontierCannotCoverHighResidual' DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
 grep -q 'wordCertificateFrontierCannotBeGloballyBounded' DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
 grep -q 'finiteCoverageCreatesUnboundedness : Nat' DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
+grep -q 'inversePointFromAllHorizon' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+grep -q 'allHorizonFromInversePoint' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+grep -q 'infiniteSurvivorRefutesStrictDescent' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+grep -q 'universalStoppingExcludesInfiniteSurvivor' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+grep -q 'noInverseLimitAutomaticallyConstructsDescent : Nat' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
 grep -q 'trailingZeroCertificatePaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'residualFrontierStrictnessGuardPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'residualInverseLimitObstructionPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'strictnessGuardDoesNotCreateUnboundedness' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'inverseLimitAbsenceDoesNotConstructDescent' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 
 echo 'collatz syracuse terminal extension static checks: PASS'
