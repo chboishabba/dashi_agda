@@ -15,6 +15,7 @@ import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirica
 import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as EmpiricalPareto
 import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
 import DASHI.Culture.PowersPlantationParadiseMinetteChronologyContestationExact as MinetteChronology
+import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact as EnslavedEvidence
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 ------------------------------------------------------------------------
@@ -116,6 +117,11 @@ _minette-date-contestation-paid :
   MinetteChronology.minette1790NoticeContestationRelation
   ≡ MinetteChronology.minette1790NoticeContestationRelation
 _minette-date-contestation-paid = refl
+
+_enslaved-distribution-category-evidence-paid :
+  EnslavedEvidence.EnslavedTheatreDistributionEvidence
+_enslaved-distribution-category-evidence-paid =
+  EnslavedEvidence.prest2023DistributionEvidence
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
