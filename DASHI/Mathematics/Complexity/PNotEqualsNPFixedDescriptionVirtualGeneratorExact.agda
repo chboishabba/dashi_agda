@@ -14,9 +14,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFixedDescriptionVirtualGenerator
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (Maybe; just)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
@@ -50,6 +51,7 @@ record FixedDescriptionGuardedCookBitGenerator
         (Presented.finitePresentedStandardMachine presentation)
         (querySteps index)
         (Language.guardedStandardStart
+          {machine = Presented.finitePresentedStandardToConcrete presentation}
           (Query.mapBoolSymbols
             zeroSymbol oneSymbol
             (Query.queryBits (Description.atIndex description index)))
@@ -87,7 +89,7 @@ fixedGeneratorSuccessfulBitExact :
   Semantics.queryAnswer (Description.atIndex description index) ≡ just bit →
   outputBit generator (finishConfiguration generator index) ≡ just bit
 fixedGeneratorSuccessfulBitExact generator index bit semantic =
-  Agda.Builtin.Equality.trans
+  trans
     (outputExact generator index)
     semantic
 
