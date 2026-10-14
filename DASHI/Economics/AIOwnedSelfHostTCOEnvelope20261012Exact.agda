@@ -16,6 +16,11 @@ import DASHI.Core.AttributedSourceCore as Source
 -- hourly/annual cost must an owner beat?  We then pay only one independently
 -- observed TCO component: reference-system electricity at a public benchmark
 -- industrial electricity price.
+--
+-- The selected rental tariff is also not a bare-GPU silicon price: Vultr's
+-- published eight-GPU MI355X configuration includes host CPU/RAM/storage and
+-- bandwidth.  Therefore an ownership comparison must be a matched node/service
+-- envelope, not simply GPU purchase price versus cloud GPU-hour price.
 ------------------------------------------------------------------------
 
 primaryVendorKind : Source.SourceKind
@@ -26,6 +31,9 @@ officialEnergyKind = Source.namedSourceKind "official electricity price statisti
 
 engineeringDatasetKind : Source.SourceKind
 engineeringDatasetKind = Source.namedSourceKind "public engineering cost dataset"
+
+primaryProviderPricingKind : Source.SourceKind
+primaryProviderPricingKind = Source.namedSourceKind "primary cloud-provider pricing page"
 
 amdReferenceDesignSource : Source.AttributedSource
 amdReferenceDesignSource = Source.mkNoDOISource
@@ -57,7 +65,18 @@ rentalComparatorSource = Source.mkNoDOISource
   "2026-07-31"
   "https://github.com/RightNow-AI/inference-cost-truth/tree/a61c501241da17f3403597d75a7a8847c53cb29e"
   engineeringDatasetKind
-  "selected MI355X self-host comparison uses USD 2.59 per GPU-hour on-demand rental price"
+  "selected MI355X comparison uses USD 2.59 per GPU-hour rental price and explicitly excludes engineer time"
+  Source.publicAttribution
+
+vultrNodePricingSource : Source.AttributedSource
+vultrNodePricingSource = Source.mkNoDOISource
+  "Vultr"
+  "AMD MI355X Cloud GPU / Bare Metal pricing"
+  "provider pricing page"
+  "2026-10-14"
+  "https://www.vultr.com/pricing/"
+  primaryProviderPricingKind
+  "published MI355X configuration: eight GPUs, 2304GB aggregate GPU RAM, 252 vCPUs, 2872GB RAM, 14.34TB storage, 15TB bandwidth, price starting at USD 2.590 per GPU-hour"
   Source.publicAttribution
 
 record OwnedTCOEnvelope : Set where
@@ -67,6 +86,12 @@ record OwnedTCOEnvelope : Set where
     referenceSystemWattsPerGPU : Nat
     industrialElectricityHundredthCentPerKWh : Nat
     rentalTariffCentsPerGPUHour : Nat
+    rentalNodeGPUCount : Nat
+    rentalNodeVCPUCount : Nat
+    rentalNodeRAMGiB : Nat
+    rentalNodeStorageHundredthTB : Nat
+    rentalNodeBandwidthTB : Nat
+    rentalNodeIncludesHostResources : Bool
     benchmarkElectricityHundredthCentPerGPUHour : Nat
     annualRentalBudgetCentsPerGPU : Nat
     annualNonElectricHeadroomCentsPerGPU : Nat
@@ -74,7 +99,7 @@ record OwnedTCOEnvelope : Set where
     ownerFinancingCostPaid : Bool
     facilityPUEPaid : Bool
     operationsLabourPaid : Bool
-    networkStorageHostCapexPaid : Bool
+    matchedOwnerHostInfrastructurePaid : Bool
     residualValuePaid : Bool
     refreshFailureRiskPaid : Bool
     ownedTCOPaid : Bool
@@ -87,6 +112,12 @@ mi355xOwnedEnvelope = owned-tco-envelope
   1750
   917
   259
+  8
+  252
+  2872
+  1434
+  15
+  true
   1605
   2268840
   2128264
@@ -104,9 +135,19 @@ rentalTariffCentsPerGPUHourIs259 :
   rentalTariffCentsPerGPUHour mi355xOwnedEnvelope ≡ 259
 rentalTariffCentsPerGPUHourIs259 = refl
 
+rentalNodeGPUCountIs8 : rentalNodeGPUCount mi355xOwnedEnvelope ≡ 8
+rentalNodeGPUCountIs8 = refl
+
+rentalNodeVCPUCountIs252 : rentalNodeVCPUCount mi355xOwnedEnvelope ≡ 252
+rentalNodeVCPUCountIs252 = refl
+
+rentalNodeRAMGiBIs2872 : rentalNodeRAMGiB mi355xOwnedEnvelope ≡ 2872
+rentalNodeRAMGiBIs2872 = refl
+
+rentalNodeIncludesHostResourcesPaid : rentalNodeIncludesHostResources mi355xOwnedEnvelope ≡ true
+rentalNodeIncludesHostResourcesPaid = refl
+
 -- Exact raw multiplication behind 1.75kW * 9.17 cents/kWh:
--- 1750W * 917 hundredth-cent/kWh = 1,604,750 in the unnormalised
--- watt*hundredth-cent basis, i.e. 1,604.75 hundredth cents = 16.0475 cents/h.
 benchmarkElectricityRawProduct : 1750 * 917 ≡ 1604750
 benchmarkElectricityRawProduct = refl
 
@@ -114,15 +155,10 @@ benchmarkElectricityCostAbout1605HundredthCentPerGPUHour :
   benchmarkElectricityHundredthCentPerGPUHour mi355xOwnedEnvelope ≡ 1605
 benchmarkElectricityCostAbout1605HundredthCentPerGPUHour = refl
 
--- $2.59 * 8,760h = $22,688.40 = 2,268,840 cents.
 annualRentalBudgetPerGPUIs2268840Cents :
   annualRentalBudgetCentsPerGPU mi355xOwnedEnvelope ≡ 2268840
 annualRentalBudgetPerGPUIs2268840Cents = refl
 
--- Benchmark electricity is about $1,405.76/GPU-year, leaving about
--- $21,282.64/GPU-year for purchase depreciation/financing + facility/PUE +
--- operations + host/network/storage + maintenance/residual/refresh risk before
--- owned capacity reaches the selected rental tariff.
 annualNonElectricHeadroomAbout2128264Cents :
   annualNonElectricHeadroomCentsPerGPU mi355xOwnedEnvelope ≡ 2128264
 annualNonElectricHeadroomAbout2128264Cents = refl
@@ -135,6 +171,7 @@ ownedTCOStillOpen = refl
 
 data ElectricityBenchmarkImpliesFullTCOPermission : Set where
 data RentalBreakEvenImpliesOwnershipAdvantagePermission : Set where
+data BundledRentalNodeImpliesMatchedOwnedNodePermission : Set where
 
 electricityBenchmarkDoesNotCreateFullTCO : ElectricityBenchmarkImpliesFullTCOPermission → ⊥
 electricityBenchmarkDoesNotCreateFullTCO ()
@@ -142,6 +179,9 @@ electricityBenchmarkDoesNotCreateFullTCO ()
 rentalBreakEvenDoesNotCreateOwnershipAdvantage : RentalBreakEvenImpliesOwnershipAdvantagePermission → ⊥
 rentalBreakEvenDoesNotCreateOwnershipAdvantage ()
 
+bundledRentalDoesNotCreateMatchedOwnerNode : BundledRentalNodeImpliesMatchedOwnedNodePermission → ⊥
+bundledRentalDoesNotCreateMatchedOwnerNode ()
+
 boundary : String
 boundary =
-  "For the selected MI355X comparison, USD 2.59/GPU-hour implies an annual rental budget of USD 22,688.40 per continuously provisioned GPU. AMD's reference design implies about 1.75kW average system power per GPU-equivalent; at the EIA June-2026 US industrial average 9.17c/kWh, benchmark hardware electricity is about USD 1,405.76/GPU-year, leaving about USD 21,282.64/GPU-year for every other ownership cost before reaching the rental tariff. Purchase price, financing/opportunity cost, facility PUE, labour, network/storage/host capex, residual value and refresh risk remain unpaid, so owned-hardware TCO and ownership advantage remain open."
+  "For the selected MI355X comparison, USD 2.59/GPU-hour implies an annual rental budget of USD 22,688.40 per continuously provisioned GPU. The current Vultr listing shows that this tariff belongs to an eight-GPU node that also includes 252 vCPUs, 2872GB RAM, 14.34TB storage and 15TB bandwidth: it is a bundled service/node tariff rather than bare-silicon cost. AMD's reference design implies about 1.75kW average system power per GPU-equivalent; at the EIA June-2026 US industrial average 9.17c/kWh, benchmark hardware electricity is about USD 1,405.76/GPU-year, leaving about USD 21,282.64/GPU-year for every other matched ownership cost before reaching the rental tariff. Purchase price/depreciation, financing/opportunity cost, facility PUE, labour, matched owner-side host/network/storage, residual value and refresh risk remain unpaid, so owned-hardware TCO and ownership advantage remain open."
