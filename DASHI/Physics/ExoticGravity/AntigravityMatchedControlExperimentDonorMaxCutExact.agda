@@ -4,6 +4,8 @@ module DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCu
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Physics.ExoticGravity.LiTorrStaticNullBoundBidiExact as StaticNull
+
 ------------------------------------------------------------------------
 -- MATCHED-CONTROL EXPERIMENT DONOR MAX-CUT
 --
@@ -18,6 +20,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 --     explicitly controlled;
 --   * null preparation, calibration signal and preregistration are required;
 --   * the numerical systematic floor must be closed below the target signal.
+--
+-- Existing-master cross-pollination: Li et al. 1997 supplies a source-backed
+-- STATIC YBCO null-bound receipt.  Any candidate claiming a generic static
+-- response in that regime must respect it.  The historical experiment does NOT
+-- pay the same-apparatus identity, geometry, phase state, driven source switch,
+-- or numerical systematics budget of a new experiment.
 ------------------------------------------------------------------------
 
 sourceStateSwitchIsSynchronousModulationChannel : Bool
@@ -56,6 +64,22 @@ empiricalReplicationStillRequired = true
 birthmarkHistoryIdentifiedWithCMP119VacuumCoordinate : Bool
 birthmarkHistoryIdentifiedWithCMP119VacuumCoordinate = false
 
+historicalStaticYBCONullConstraintAvailable : Bool
+historicalStaticYBCONullConstraintAvailable = true
+
+candidateMustRespectHistoricalStaticYBCOBound : Bool
+candidateMustRespectHistoricalStaticYBCOBound =
+  StaticNull.StaticNullBoundary.staticNullConstrainsGenericStaticModels
+    StaticNull.canonicalStaticNullBoundary
+
+historicalStaticNullPaysNewSameApparatusReceipt : Bool
+historicalStaticNullPaysNewSameApparatusReceipt =
+  StaticNull.StaticNullBoundary.historicalNullMayPayNewSameApparatusReceipt
+    StaticNull.canonicalStaticNullBoundary
+
+exactHistoricalGeometryMayReplaceNewDeviceGeometry : Bool
+exactHistoricalGeometryMayReplaceNewDeviceGeometry = false
+
 record MatchedControlExperimentFrontier : Set where
   constructor matched-control-experiment-frontier
   field
@@ -67,6 +91,9 @@ record MatchedControlExperimentFrontier : Set where
     nullPreparation : Bool
     calibrationChannel : Bool
     preregistration : Bool
+    historicalStaticConstraintAvailable : Bool
+    historicalStaticNullPaysNewSameApparatus : Bool
+    historicalGeometryReplacesNewGeometry : Bool
     numericalSystematicsBudgetOpen : Bool
     physicalMatchedSwitchOpen : Bool
     replicationOpen : Bool
@@ -75,7 +102,17 @@ record MatchedControlExperimentFrontier : Set where
 canonicalMatchedControlExperimentFrontier : MatchedControlExperimentFrontier
 canonicalMatchedControlExperimentFrontier =
   matched-control-experiment-frontier
-    true true true true true true true true true true true false
+    true true true true true true true true
+    true false false
+    true true true false
+
+historicalStaticNullPaysNewSameApparatusReceiptIsFalse :
+  historicalStaticNullPaysNewSameApparatusReceipt ≡ false
+historicalStaticNullPaysNewSameApparatusReceiptIsFalse = refl
+
+exactHistoricalGeometryMayReplaceNewDeviceGeometryIsFalse :
+  exactHistoricalGeometryMayReplaceNewDeviceGeometry ≡ false
+exactHistoricalGeometryMayReplaceNewDeviceGeometryIsFalse = refl
 
 birthmarkHistoryIdentifiedWithCMP119VacuumCoordinateIsFalse :
   birthmarkHistoryIdentifiedWithCMP119VacuumCoordinate ≡ false
