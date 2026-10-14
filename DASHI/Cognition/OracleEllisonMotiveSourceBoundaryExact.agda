@@ -4,7 +4,7 @@ module DASHI.Cognition.OracleEllisonMotiveSourceBoundaryExact where
 -- DIRECT-MOTIVE SOURCE BOUNDARY
 --
 -- A quoted declaration can pay the motive actually stated, but cannot be
--- expanded into a different psychological theory.  Ellison's 2017 FIDF
+-- expanded into a different psychological theory. Ellison's 2017 FIDF
 -- statement directly pays a bounded support/solidarity motive for that gift.
 -- Safra Catz's 2021 public statement pays an Oracle-leadership commitment to
 -- supporting Israel. Neither pays technological immortality, Oracle authorship
@@ -13,6 +13,8 @@ module DASHI.Cognition.OracleEllisonMotiveSourceBoundaryExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+
+import DASHI.Cognition.OracleEllisonCapabilityPromotionExact as Promotion
 
 ------------------------------------------------------------------------
 -- Source coordinates.
@@ -119,6 +121,17 @@ netanyahuThreatMaintenanceMotivePaid = false
 
 supportForIsraelImpliesAllCorporateActsServeIsraeliPolicy : Bool
 supportForIsraelImpliesAllCorporateActsServeIsraeliPolicy = false
+
+------------------------------------------------------------------------
+-- Claim-relative promotion lattice weld.
+--
+-- This is a genuine L4 payment only for the narrow declared reason attached to
+-- the FIDF-support act. It does not upgrade the immortality or policy-control
+-- motive claims.
+------------------------------------------------------------------------
+
+ellisonFIDFDeclaredSupportHighestPaidLevel : Promotion.PromotionLevel
+ellisonFIDFDeclaredSupportHighestPaidLevel = Promotion.intentMotive
 
 ------------------------------------------------------------------------
 -- Boundary receipt.
