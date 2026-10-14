@@ -26,10 +26,6 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseEx
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostExact as Budget
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
-------------------------------------------------------------------------
--- Generic costed global result.
-------------------------------------------------------------------------
-
 record CostedGlobalClause
     {machine : Local.ConcreteTapeMachine}
     (steps cols : Nat) : Set₁ where
@@ -41,10 +37,6 @@ record CostedGlobalClause
     work : Nat
 
 open CostedGlobalClause public
-
-------------------------------------------------------------------------
--- Transition section: exact mapped costed placed seek.
-------------------------------------------------------------------------
 
 transitionCosted :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -104,7 +96,8 @@ transitionCostedWorkBound
 ... | CostSeek.costed-seek found work | bound = bound
 
 ------------------------------------------------------------------------
--- Initial section with exact result and literal visited-cell work.
+-- Initial section.  Result stays on the original global width; the visit count
+-- is the already-defined exact recursive `initialSeekWork`.
 ------------------------------------------------------------------------
 
 initialCosted :
@@ -112,59 +105,27 @@ initialCosted :
   CNF.Bits (Decode.RowBitsWidth machine cols) →
   Nat →
   CostedGlobalClause {machine} steps cols
-initialCosted {steps = steps} {cols = cols} CNF.[]ᵇ index =
-  costed-global-clause (Seek.exhausted index) zero
-initialCosted {steps = steps} {cols = cols}
-    (bit CNF.∷ᵇ bits) zero =
+initialCosted {steps = steps} bits index =
   costed-global-clause
-    (Seek.found
-      (Endpoint.unitClauseForBit
-        (Endpoint.initialRowExtendedRename Fin.zero)
-        bit))
-    (suc zero)
-  where
-    import Data.Fin.Base as Fin
-initialCosted {steps = steps} {cols = cols}
-    (bit CNF.∷ᵇ bits) (suc index)
-  with initialCosted
-    {steps = steps} {cols = cols}
-    bits index
-... | costed-global-clause found work =
-  -- The result needs the shifted rename.  Rather than reusing the recursive
-  -- result at the wrong index type, delegate exact result to the canonical
-  -- initial seeker below; only the work recursion is relevant here.
-  costed-global-clause
-    (Stream.initialClauseSeek
-      {steps = steps} {cols = cols}
-      (bit CNF.∷ᵇ bits) (suc index))
-    (suc work)
+    (Stream.initialClauseSeek {steps = steps} bits index)
+    (Budget.initialSeekWork bits index)
 
 initialCostedResultExact :
   ∀ {machine : Local.ConcreteTapeMachine} {steps cols : Nat}
     (bits : CNF.Bits (Decode.RowBitsWidth machine cols))
     (index : Nat) →
-  result (initialCosted {steps = steps} {cols = cols} bits index)
+  result (initialCosted {steps = steps} bits index)
   ≡ Stream.initialClauseSeek {steps = steps} bits index
-initialCostedResultExact CNF.[]ᵇ index = refl
-initialCostedResultExact (bit CNF.∷ᵇ bits) zero = refl
-initialCostedResultExact (bit CNF.∷ᵇ bits) (suc index) = refl
+initialCostedResultExact bits index = refl
 
 initialCostedWorkBound :
   ∀ {machine : Local.ConcreteTapeMachine} {steps cols : Nat}
     (bits : CNF.Bits (Decode.RowBitsWidth machine cols))
     (index : Nat) →
-  work (initialCosted {steps = steps} {cols = cols} bits index)
+  work (initialCosted {steps = steps} bits index)
   ≤ Decode.RowBitsWidth machine cols
-initialCostedWorkBound CNF.[]ᵇ index = NatP.≤-refl _
-initialCostedWorkBound (bit CNF.∷ᵇ bits) zero = NatP.s≤s NatP.z≤n
-initialCostedWorkBound (bit CNF.∷ᵇ bits) (suc index)
-  with initialCosted bits index
-     | initialCostedWorkBound bits index
-... | costed-global-clause found work | bound = NatP.s≤s bound
-
-------------------------------------------------------------------------
--- Accepting section.
-------------------------------------------------------------------------
+initialCostedWorkBound bits index =
+  Budget.initialSeekWorkBound bits index
 
 acceptingCosted :
   ∀ {machine : Local.ConcreteTapeMachine} {steps cols : Nat}
@@ -231,10 +192,6 @@ acceptingCostedWorkBound {steps = steps} {cols = cols}
         stateCoverage symbolCoverage (suc index)
 ... | CostSeek.costed-seek found work | bound = bound
 
-------------------------------------------------------------------------
--- Exact global residual composition.
-------------------------------------------------------------------------
-
 globalClauseSeekCosted :
   ∀ {machine : Local.ConcreteTapeMachine}
     (stateCoverage : Canonical.EnumerationCoverage (Local.finiteState machine))
@@ -250,7 +207,7 @@ globalClauseSeekCosted
 ... | costed-global-clause (Seek.found clause) transitionWork =
   costed-global-clause (Seek.found clause) transitionWork
 ... | costed-global-clause (Seek.exhausted remaining) transitionWork
-  with initialCosted {steps = steps} {cols = cols} initialTarget remaining
+  with initialCosted {steps = steps} initialTarget remaining
 ... | costed-global-clause (Seek.found clause) initialWork =
   costed-global-clause (Seek.found clause) (transitionWork + initialWork)
 ... | costed-global-clause (Seek.exhausted afterInitial) initialWork
@@ -282,13 +239,9 @@ globalClauseSeekCostedResultExact
   rewrite transitionExact = refl
 ... | costed-global-clause (Seek.exhausted remaining) transitionWork | transitionExact
   rewrite transitionExact
-  with initialCosted {steps = steps} {cols = cols} initialTarget remaining
-     | initialCostedResultExact
-        {steps = steps} {cols = cols} initialTarget remaining
-... | costed-global-clause (Seek.found clause) initialWork | initialExact
-  rewrite initialExact = refl
-... | costed-global-clause (Seek.exhausted afterInitial) initialWork | initialExact
-  rewrite initialExact
+  with initialCosted {steps = steps} initialTarget remaining
+... | costed-global-clause (Seek.found clause) initialWork = refl
+... | costed-global-clause (Seek.exhausted afterInitial) initialWork
   with acceptingCosted {steps = steps} {cols = cols}
       stateCoverage symbolCoverage afterInitial
      | acceptingCostedResultExact
@@ -296,10 +249,6 @@ globalClauseSeekCostedResultExact
         stateCoverage symbolCoverage afterInitial
 ... | costed-global-clause acceptingResult acceptingWork | acceptingExact
   rewrite acceptingExact = refl
-
-------------------------------------------------------------------------
--- Path work is bounded by the closed sum of section maxima.
-------------------------------------------------------------------------
 
 globalClauseSeekCostedWorkBound :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -325,9 +274,9 @@ globalClauseSeekCostedWorkBound
       (Decode.RowBitsWidth machine cols
         + Budget.acceptingPredicateBudget machine cols))
 ... | costed-global-clause (Seek.exhausted remaining) transitionWork | transitionBound
-  with initialCosted {steps = steps} {cols = cols} initialTarget remaining
+  with initialCosted {steps = steps} initialTarget remaining
      | initialCostedWorkBound
-        {steps = steps} {cols = cols} initialTarget remaining
+        {steps = steps} initialTarget remaining
 ... | costed-global-clause (Seek.found clause) initialWork | initialBound =
   NatP.≤-trans
     (NatP.+-mono-≤ transitionBound initialBound)
