@@ -1,10 +1,10 @@
 import json
 
-from agda_preflight import cli
+from agda_preflight import interactive_cli
 
 
 def test_cli_registers_semantic_discovery_commands():
-    parser = cli.build_parser()
+    parser = interactive_cli.build_semantic_parser()
     for argv in (
         ["symbol", "target"],
         ["related", "target"],
