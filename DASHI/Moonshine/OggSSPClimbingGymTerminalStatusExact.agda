@@ -15,6 +15,8 @@ import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
 import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
 import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact as Phase
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
+import DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPClimbingGymConsumerDescentExact as Consumer
 import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
 import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact as Limit
 
@@ -29,16 +31,20 @@ record ClimbingGymTerminalStatus : Set where
     signedObservationNoGoClosed : Bool
     phaseControlMaxCutClosed : Bool
     analyticFormulaAdapterClosed : Bool
+    acquiredSourceAttributionClosed : Bool
+    canonicalConsumerDescentWeldClosed : Bool
 
     constructiveRealToFiniteRadixQuantiserClosed : Bool
     sourceRandomShiftSeedRecovered : Bool
     roundedShiftSummaryUniquelyIdentifiesSeed : Bool
     numericalZeroCacheFormallyCertified : Bool
+    cacheWideIndependentLMFDBEqualityEstablished : Bool
     exactHeadAgdaKernelGreen : Bool
 
     empiricalMonsterSpecificityPromoted : Bool
     zetaParametrisationPromoted : Bool
     riemannHypothesisPromoted : Bool
+    unmergedSiblingTheoremAuthorityImported : Bool
 
 open ClimbingGymTerminalStatus public
 
@@ -53,14 +59,18 @@ canonicalClimbingGymTerminalStatus =
     true   -- unsigned observation cannot recover signed orientation
     true   -- exhaustive C(20,5) phase-sensitive control implemented
     true   -- log/pi/hole/phase same-carrier adapter surface constructed
+    true   -- supplied figure, mpmath docs and LMFDB reference typed separately
+    true   -- local collisions inhabit canonical ConsumerNonDescentWitness
     false  -- current constructive-real spine still lacks concrete floor/frac -> Fin
     false  -- source finite random shift list / RNG seed not supplied or recovered
     false  -- rounded mean/SD summaries cannot uniquely determine that sample
     false  -- mpmath cache is diagnostic numerical data, not formal zero proof
+    false  -- LMFDB is an independent reference, not a cache-wide equality receipt
     false  -- no exact-head Agda compiler receipt in this execution environment
     false  -- controls do not justify Monster-specific empirical promotion
     false  -- no compatible history / matching receipt is a zeta parametrisation
     false  -- no climbing-gym result promotes RH
+    false  -- live sibling PRs are design donors only unless merged
 
 ------------------------------------------------------------------------
 -- Cross-owner consistency spot checks: the terminal booleans agree with the
@@ -102,3 +112,15 @@ terminalKeepsSignedValuationDistinctFromRadixAddress :
     Gym.canonicalOggSSPSignedRadixClimbingGymBoundary
   ≡ false
 terminalKeepsSignedValuationDistinctFromRadixAddress = refl
+
+terminalKeepsLMFDBAsReferenceOnly :
+  Attribution.cacheValuesImportedFromLMFDB
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ false
+terminalKeepsLMFDBAsReferenceOnly = refl
+
+terminalDoesNotImportSiblingAuthority :
+  Attribution.unmergedSiblingTheoremAuthorityImported
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ false
+terminalDoesNotImportSiblingAuthority = refl
