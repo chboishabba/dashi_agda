@@ -14,7 +14,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityPinnedLocalCTerminalToStaticExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityLocalCWightmanTerminalToStaticExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda'
+      - 'tests/test_antigravity_local_c_wightman_static_reuse.py'
       - 'tests/test_antigravity_terminal_physical_package_frontier.py'
       - 'tests/test_antigravity_r136_static_differential_reuse.py'
       - 'tests/test_antigravity_pinned_local_c_static_promotion.py'
@@ -43,6 +45,7 @@ jobs:
         run: |
           python -m pip install pytest
           pytest -q \
+            tests/test_antigravity_local_c_wightman_static_reuse.py \
             tests/test_antigravity_terminal_physical_package_frontier.py \
             tests/test_antigravity_r136_static_differential_reuse.py \
             tests/test_antigravity_pinned_local_c_static_promotion.py \
@@ -57,6 +60,7 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPinnedLocalCTerminalToStaticExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityLocalCWightmanTerminalToStaticExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityTerminalPhysicalPackageFrontierExact.agda
