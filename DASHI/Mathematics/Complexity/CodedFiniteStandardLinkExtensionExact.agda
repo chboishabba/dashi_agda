@@ -2,16 +2,13 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardLinkExtensionExact where
 
 ------------------------------------------------------------------------
 -- SAFE CROSS-MODE LINK RULES FOR ONE CODED FINITE STANDARD MACHINE
---
--- Disjoint mode sums pay internal rule-table composition.  Actual calls/returns
--- need rules that may jump between those regions.  Such links are safe exactly
--- when their dispatch keys `(sourceState, readSymbol)` do not collide with the
--- resident rule table and are deterministic among themselves.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥; ⊥-elim)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact as Mode
@@ -88,18 +85,14 @@ appendDispatchUnique left right leftUnique rightUnique disjoint
     sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
     sym refl = refl
 
-------------------------------------------------------------------------
--- Proof-bearing safe link extension of one already-composed fragment.
-------------------------------------------------------------------------
-
-record SafeLinkExtension {symbols : Agda.Builtin.Nat.Nat}
+record SafeLinkExtension {symbols : Nat}
     (fragment : Mode.CodedModeFragment symbols) : Set where
   field
     links :
       List
         (Local.TapeRule
-          (Data.Fin.Base.Fin (Mode.stateCount fragment))
-          (Data.Fin.Base.Fin symbols))
+          (Fin.Fin (Mode.stateCount fragment))
+          (Fin.Fin symbols))
 
     linksUnique : RuleTableUnique links
 
