@@ -10,6 +10,7 @@ import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performan
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as Cross
+import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 ------------------------------------------------------------------------
@@ -76,6 +77,17 @@ _legibility-decoder-gap-paid :
   Legibility.ExactInstitutionalViewDecoder Cross.powersLegibilityChannel → ⊥
 _legibility-decoder-gap-paid =
   Cross.powersExactInstitutionalViewDecoderImpossible
+
+_empirical-minette-receipt-paid : Empirical.SameObjectEmpiricalReceipt
+_empirical-minette-receipt-paid = Empirical.minetteCareerStatusReceipt
+
+_empirical-seating-receipt-paid : Empirical.SameObjectEmpiricalReceipt
+_empirical-seating-receipt-paid = Empirical.portAuPrinceSeatingGeometryReceipt
+
+_empirical-causal-firewall-paid :
+  Empirical.ObservationalEvidenceIdentifiesCausalEffect → ⊥
+_empirical-causal-firewall-paid =
+  Empirical.observationalEvidenceDoesNotIdentifyCausalEffect
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
