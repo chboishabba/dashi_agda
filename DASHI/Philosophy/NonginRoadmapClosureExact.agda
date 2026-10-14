@@ -1,12 +1,12 @@
 module DASHI.Philosophy.NonginRoadmapClosureExact where
 
 ------------------------------------------------------------------------
--- NONGIN ROADMAP CLOSURE
+-- NONGIN CORE ROADMAP CLOSURE
 --
--- Terminal status theorem for the Nongin lineage itself.  Historical source
--- genealogy, semantic reconstruction, recursive observer/depth machinery and
--- the mature trialectic descendant cut are required.  Later transport-enriched
--- higher-stack/hypersheaf/physics programmes are explicit non-prerequisites.
+-- The historical/semantic Nongin core is closed.  Attached descendant research
+-- continues in NonginExtendedRoadmapExact; several categorical descendants now
+-- advance beyond the conservative status that existed when this core closure
+-- owner was first written.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -122,6 +122,12 @@ carryAllDepthCoherenceIsNotAutomatic :
   Current.carryAllDepthCoherenceAutomatic currentBoundary ≡ false
 carryAllDepthCoherenceIsNotAutomatic = refl
 
+------------------------------------------------------------------------
+-- Core closure does not require descendant completion.  This is a dependency
+-- statement, not a detachment statement; NonginExtendedRoadmapExact keeps all
+-- descendant programmes attached to the same research lineage.
+------------------------------------------------------------------------
+
 data OptionalDescendantProgramme : Set where
   transportEnrichedGroupoidPresheafProgramme : OptionalDescendantProgramme
   effectiveHigherStackProgramme : OptionalDescendantProgramme
@@ -145,17 +151,17 @@ noOptionalDescendantIsRequired certifiedHypersheafProgramme = refl
 noOptionalDescendantIsRequired exceptionalGroupRealisationProgramme = refl
 noOptionalDescendantIsRequired physicalLawPromotionProgramme = refl
 
-transportEnrichmentStillOpenButNonBlocking :
-  Current.transportEnrichedGroupoidPresheafPaid currentBoundary ≡ false
-transportEnrichmentStillOpenButNonBlocking = refl
+transportEnrichmentAdvancedAfterCoreClosure :
+  Current.transportEnrichedGroupoidPresheafPaid currentBoundary ≡ true
+transportEnrichmentAdvancedAfterCoreClosure = refl
 
-higherStackStillOpenButNonBlocking :
-  Current.certifiedHigherStackPaid currentBoundary ≡ false
-higherStackStillOpenButNonBlocking = refl
+higherStackAdvancedAfterCoreClosure :
+  Current.certifiedHigherStackPaid currentBoundary ≡ true
+higherStackAdvancedAfterCoreClosure = refl
 
-hypersheafStillOpenButNonBlocking :
+hypersheafStillAtHypercoverFrontier :
   Current.certifiedHypersheafPaid currentBoundary ≡ false
-hypersheafStillOpenButNonBlocking = refl
+hypersheafStillAtHypercoverFrontier = refl
 
 record NonginRoadmapClosureReceipt : Set where
   constructor nongin-roadmap-closure-receipt
