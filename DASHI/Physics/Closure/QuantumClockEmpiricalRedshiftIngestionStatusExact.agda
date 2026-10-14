@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.BothwellYe2022RedshiftComparisonExact as Compare
 import DASHI.Physics.Closure.BothwellYe2022GeodeticCalibrationExact as Geodetic
 import DASHI.Physics.Closure.BothwellYe2022ChronometricGeodesyBridgeExact as Chronometric
 import DASHI.Physics.Closure.BothwellYe2022PublicArtifactLocatorExact as Artifact
+import DASHI.Physics.Closure.BothwellYe2022ExternalAcquisitionMaxCut as Acquisition
 import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest as Request
 import DASHI.Promotion.SIMetrologyPayloadDependencyDAG as SIDAG
 
@@ -19,11 +20,12 @@ import DASHI.Promotion.SIMetrologyPayloadDependencyDAG as SIDAG
 --
 -- The publication identity/access-date, published summary numbers, geodetic
 -- calibration and a same-scale theory/observation comparison are present.
--- The NOAA calibration artifact is checksum-backed.  The experiment paper has
+-- The NOAA calibration artifact is checksum-backed. The experiment paper has
 -- a stable NIST public locator and explicit access date, but its byte digest is
--- still not materialised here.  Raw arrays, analysis code and full covariance
--- remain external.  A height-equivalent clock sensitivity is derived without
--- promoting it to surveyed elevation accuracy or terminal SI status.
+-- still not materialised here. Raw arrays, analysis code and full covariance
+-- remain external. The remaining external evidence is now also represented by
+-- an explicit author-acquisition packet; constructing that packet is not the
+-- same as sending it or receiving evidence.
 ------------------------------------------------------------------------
 
 record EmpiricalRedshiftIngestionStatus : Set where
@@ -44,6 +46,9 @@ record EmpiricalRedshiftIngestionStatus : Set where
     experimentArtifactLocator : Artifact.PublicExperimentArtifactLocator
     experimentArtifactLocatorIsCanonical :
       experimentArtifactLocator ≡ Artifact.canonicalBothwellYe2022PublicArtifactLocator
+    externalAcquisition : Acquisition.BothwellYe2022ExternalAcquisitionMaxCut
+    externalAcquisitionIsCanonical :
+      externalAcquisition ≡ Acquisition.canonicalBothwellYe2022ExternalAcquisitionMaxCut
     genericRequest : Request.QuantumClockEmpiricalRedshiftReceiptRequest
     genericRequestIsCanonical : genericRequest ≡ Request.canonicalQuantumClockEmpiricalRedshiftReceiptRequest
 
@@ -69,6 +74,11 @@ record EmpiricalRedshiftIngestionStatus : Set where
     chronometricGeodesyBridgeConstructedIsTrue : chronometricGeodesyBridgeConstructed ≡ true
     heightEquivalentScaleConstructed : Bool
     heightEquivalentScaleConstructedIsTrue : heightEquivalentScaleConstructed ≡ true
+    externalAcquisitionPacketConstructed : Bool
+    externalAcquisitionPacketConstructedIsTrue :
+      externalAcquisitionPacketConstructed ≡ true
+    externalAuthorRequestSent : Bool
+    externalAuthorRequestSentIsFalse : externalAuthorRequestSent ≡ false
 
     publicRawDataIngested : Bool
     publicRawDataIngestedIsFalse : publicRawDataIngested ≡ false
@@ -114,6 +124,8 @@ canonicalBothwellYe2022IngestionStatus = record
   ; chronometricGeodesyBridgeIsCanonical = refl
   ; experimentArtifactLocator = Artifact.canonicalBothwellYe2022PublicArtifactLocator
   ; experimentArtifactLocatorIsCanonical = refl
+  ; externalAcquisition = Acquisition.canonicalBothwellYe2022ExternalAcquisitionMaxCut
+  ; externalAcquisitionIsCanonical = refl
   ; genericRequest = Request.canonicalQuantumClockEmpiricalRedshiftReceiptRequest
   ; genericRequestIsCanonical = refl
   ; experimentIdentified = true
@@ -138,6 +150,10 @@ canonicalBothwellYe2022IngestionStatus = record
   ; chronometricGeodesyBridgeConstructedIsTrue = refl
   ; heightEquivalentScaleConstructed = true
   ; heightEquivalentScaleConstructedIsTrue = refl
+  ; externalAcquisitionPacketConstructed = true
+  ; externalAcquisitionPacketConstructedIsTrue = refl
+  ; externalAuthorRequestSent = false
+  ; externalAuthorRequestSentIsFalse = refl
   ; publicRawDataIngested = false
   ; publicRawDataIngestedIsFalse = refl
   ; artifactChecksumIngested = false
@@ -161,19 +177,21 @@ canonicalBothwellYe2022IngestionStatus = record
   ; terminalSIMetrologyPromotionAllowed = false
   ; terminalSIMetrologyPromotionAllowedIsFalse = refl
   ; acquisitionResidual =
-      "materialise and checksum the exact experiment publication byte stream selected for terminal ingestion"
+      "send the typed evidence request to a listed corresponding author; request construction alone is not evidence acquisition"
+      ∷ "materialise and checksum the exact experiment/data artifact byte stream selected for terminal ingestion"
       ∷ "obtain the experimental arrays underlying the fourteen fitted gradients or an authoritative exported data product"
-      ∷ "obtain the analysis code or a reproducible equivalent sufficient to replay the fitted-gradient pipeline"
+      ∷ "obtain the analysis code and exact revision/environment sufficient to replay the fitted-gradient pipeline"
       ∷ "materialise the full covariance/independence treatment rather than only the published total systematic budget"
       ∷ "for geodetic-accuracy promotion, also pay survey transfer/geopotential modelling rather than identifying a height-equivalent sensitivity with elevation accuracy"
       ∷ "construct the generic EmpiricalRedshiftReceiptAcceptanceToken only after those experiment-evidence rows are actually satisfied"
       ∷ []
   ; reading =
-      "The experiment publication is now identified by DOI plus a stable NIST record/local-PDF locator with explicit access date; byte checksum remains separate."
+      "The experiment publication is identified by DOI plus a stable NIST record/local-PDF locator with explicit access date; byte checksum remains separate."
       ∷ "Published numbers, source-reported systematics and a same-scale gh/c^2 comparison are ingested."
       ∷ "The geodetic calibration is independently source-closed at the public-artifact level: NOAA NOS NGS 77 is DOI-pinned, checksum-backed, and its JILA S1B60H gravity value rounds to the paper's 9.796 m s^-2 input."
       ∷ "The clock uncertainty, surveyed gravity and exact SI metre/c route produce a 69-to-70 micrometre local height-equivalent scale without promoting that scale to surveyed elevation accuracy."
-      ∷ "Publication artifact identity does not manufacture raw experimental arrays, analysis code, covariance evidence or a generic acceptance token."
+      ∷ "The remaining author-supplied evidence is now represented by a typed request packet that separates requested bytes/data/code from repository-owned checksum/replay/consumer-ingestion work."
+      ∷ "Constructing that packet does not mean it has been sent and does not manufacture raw experimental arrays, analysis code, covariance evidence or a generic acceptance token."
       ∷ []
   }
 
@@ -194,6 +212,12 @@ canonicalGeodeticCalibrationChecksumIngested = refl
 
 canonicalChronometricGeodesyBridgeConstructed : chronometricGeodesyBridgeConstructed canonicalBothwellYe2022IngestionStatus ≡ true
 canonicalChronometricGeodesyBridgeConstructed = refl
+
+canonicalExternalAcquisitionPacketConstructed : externalAcquisitionPacketConstructed canonicalBothwellYe2022IngestionStatus ≡ true
+canonicalExternalAcquisitionPacketConstructed = refl
+
+canonicalExternalAuthorRequestNotSent : externalAuthorRequestSent canonicalBothwellYe2022IngestionStatus ≡ false
+canonicalExternalAuthorRequestNotSent = refl
 
 canonicalChronometricGeodesyPromotionStillClosed : chronometricGeodesyPromotionAllowed canonicalBothwellYe2022IngestionStatus ≡ false
 canonicalChronometricGeodesyPromotionStillClosed = refl
