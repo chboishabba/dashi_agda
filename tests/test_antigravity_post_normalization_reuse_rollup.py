@@ -9,7 +9,7 @@ def read(rel: str) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
-def test_reuse_rollup_imports_new_r136_tt_and_si_frontiers():
+def test_reuse_rollup_imports_new_r136_tt_si_and_experiment_frontiers():
     text = read("DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseEverything.agda")
     for token in (
         "AntigravityPostNormalizationReuseMaxCutExact",
@@ -19,5 +19,6 @@ def test_reuse_rollup_imports_new_r136_tt_and_si_frontiers():
         "CMP119AntigravityPinnedLocalCTerminalToStaticExact",
         "AntigravityDifferentialTTDonorMaxCutExact",
         "AntigravitySICalibrationDonorMaxCutExact",
+        "AntigravityMatchedControlExperimentDonorMaxCutExact",
     ):
         assert token in text
