@@ -8,13 +8,15 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFixedDescriptionVirtualGenerator
 -- justify a uniform polynomial clock in that varying-machine code.
 --
 -- Self-quotation needs only one fixed description D = (machine,input,T), while
--- requested index i varies.  This owner states exactly that contract.
+-- requested index i varies.  The semantic streamed evaluator is already proved
+-- degree-one in canonical query size.  A literal standard-TM compiler may add a
+-- fixed simulation factor, so that overhead is explicit rather than assumed 1.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (Maybe; just)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_)
 open import Relation.Binary.PropositionalEquality using (trans)
@@ -22,7 +24,6 @@ open import Relation.Binary.PropositionalEquality using (trans)
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
-import DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact as Cost
 import DASHI.Mathematics.Complexity.StandardFiniteTapePresentationExact as Presented
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
@@ -39,6 +40,7 @@ record FixedDescriptionGuardedCookBitGenerator
     oneNotBlank : oneSymbol ≡ Presented.blank presentation → ⊥
 
     querySteps : Nat → Nat
+    compilerCoefficient : Nat
 
     finishConfiguration :
       (index : Nat) →
@@ -71,15 +73,10 @@ record FixedDescriptionGuardedCookBitGenerator
     queryStepsLinear :
       (index : Nat) →
       querySteps index
-      ≤ Cost.fixedDescriptionLinearBudget
-          description
-          (Query.queryBitLength (Description.atIndex description index))
+      ≤ compilerCoefficient
+        * suc (Query.queryBitLength (Description.atIndex description index))
 
 open FixedDescriptionGuardedCookBitGenerator public
-
-------------------------------------------------------------------------
--- Successful in-range reads are therefore exactly the canonical Cook bit.
-------------------------------------------------------------------------
 
 fixedGeneratorSuccessfulBitExact :
   ∀ {description presentation}
@@ -96,9 +93,11 @@ fixedGeneratorSuccessfulBitExact generator index bit semantic =
 ------------------------------------------------------------------------
 -- TRUST BOUNDARY
 --
--- This is still an interface, not an inhabitant.  What has now been paid below
--- it is the exact streamed semantic evaluator and a fixed-description linear
--- semantic-work envelope.  Remaining implementation is a compiler from that
--- evaluator into a finite coded standard machine with an exact run/clock that
--- inhabits this record.
+-- This is still an interface, not an inhabitant.  Paid below it:
+--   * exact same-recursion streamed semantic evaluator;
+--   * exact path work and fixed-description degree-one semantic bound.
+--
+-- Remaining implementation must compile that evaluator into a finite coded
+-- standard machine and supply `compilerCoefficient`; no unit-overhead compiler
+-- is assumed.
 ------------------------------------------------------------------------
