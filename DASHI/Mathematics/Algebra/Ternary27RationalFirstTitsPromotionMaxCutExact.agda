@@ -12,20 +12,6 @@ import DASHI.Foundations.RationalAlbertLeanRigidityAuthorityExact as LeanAuthori
 
 ------------------------------------------------------------------------
 -- RATIONAL FIRST-TITS PROMOTION MAX-CUT
---
--- The ternary cube now serves only as a 27-element basis index for the literal
--- characteristic-zero carrier J_Q = M3(Q)^3.  The Agda branch now owns the
--- carrier, matrix arithmetic, first-Tits Jordan product, unit and cubic norm.
---
--- What remains is genuinely proof-relevant:
---   1. inhabit the exact rational law propositions;
---   2. prove this literal product/cubic satisfy the standard first-Tits / Albert
---      hypotheses consumed by the classical theorem;
---   3. apply the global F4/E6 classification in-kernel.
---
--- Python 52/78-root diagnostics, classical source provenance and Lean #52's
--- norm+unit/Jordan rigidity are strong independent evidence/donors, but none is
--- a substitute for those Agda inhabitants.
 ------------------------------------------------------------------------
 
 record RationalFirstTitsPromotionMaxCut : Set where
@@ -85,8 +71,8 @@ hardeningBoundary = Hardening.canonicalBoundary
 localE6F4Receipt : LocalE6F4.RationalFirstTitsE6F4LocalReceipt
 localE6F4Receipt = LocalE6F4.canonicalRationalFirstTitsE6F4LocalReceipt
 
-classicalSourceBoundary : Classical.FirstTitsClassicalSourceBoundary
-classicalSourceBoundary = Classical.canonicalFirstTitsClassicalSourceBoundary
+classicalSourceReceipt : Classical.ClassicalAlbertGroupSourceReceipt
+classicalSourceReceipt = Classical.canonicalClassicalAlbertGroupSourceReceipt
 
 leanAuthority : LeanAuthority.RationalAlbertLeanRigidityAuthority
 leanAuthority = LeanAuthority.canonicalRationalAlbertLeanRigidityAuthority
