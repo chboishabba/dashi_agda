@@ -2,19 +2,14 @@ module DASHI.Reasoning.TrialecticWavePhaseHigherStackExact where
 
 ------------------------------------------------------------------------
 -- SETOID-TRUNCATED HIGHER-STACK PROMOTION ON THE TRIADIC SITE
---
--- This owner consolidates the post-ledger max-cut.  The value over every site
--- object is a non-discrete C3 phase groupoid; restrictions form a contravariant
--- pseudofunctor; objects and morphisms descend effectively; global objects are
--- unique up to typed phase-groupoid isomorphism; and phase 2-cells carry the
--- general triadic cocycle.  Equality proofs of 2-cells are intentionally
--- quotiented by a proof-witness setoid rather than forced equal as Agda records.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
+import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact as Presheaf
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact as Groupoid
 import DASHI.Reasoning.TrialecticWavePhasePseudofunctorCoherenceExact as Pseudo
 import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact as Stack
@@ -23,30 +18,34 @@ import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact as Depth
 import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact as Attached
 
 Phase3Cell :
-  ∀ {U x y}
-    {f g : Groupoid.FibreHom {U} x y} →
+  ∀ {U : Site.RelObj}
+    {x y : Presheaf.Section U}
+    {f g : Groupoid.FibreHom x y} →
   Two.Phase2Cell f g →
   Two.Phase2Cell f g →
   Set
 Phase3Cell alpha beta = ⊤
 
 phase3CellRefl :
-  ∀ {U x y}
-    {f g : Groupoid.FibreHom {U} x y}
+  ∀ {U : Site.RelObj}
+    {x y : Presheaf.Section U}
+    {f g : Groupoid.FibreHom x y}
     (alpha : Two.Phase2Cell f g) →
   Phase3Cell alpha alpha
 phase3CellRefl alpha = tt
 
 phase3CellSym :
-  ∀ {U x y}
-    {f g : Groupoid.FibreHom {U} x y}
+  ∀ {U : Site.RelObj}
+    {x y : Presheaf.Section U}
+    {f g : Groupoid.FibreHom x y}
     {alpha beta : Two.Phase2Cell f g} →
   Phase3Cell alpha beta → Phase3Cell beta alpha
 phase3CellSym cell = tt
 
 phase3CellTrans :
-  ∀ {U x y}
-    {f g : Groupoid.FibreHom {U} x y}
+  ∀ {U : Site.RelObj}
+    {x y : Presheaf.Section U}
+    {f g : Groupoid.FibreHom x y}
     {alpha beta gamma : Two.Phase2Cell f g} →
   Phase3Cell alpha beta →
   Phase3Cell beta gamma →
