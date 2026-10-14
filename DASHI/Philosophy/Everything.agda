@@ -41,6 +41,8 @@ import DASHI.Philosophy.NonginCurrentMaxCutExact
 import DASHI.Philosophy.NonginCurrentMaxCutValidation
 import DASHI.Philosophy.NonginGenealogyOwnerWeldExact
 import DASHI.Philosophy.NonginGenealogyOwnerWeldValidation
+import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact
+import DASHI.Philosophy.NonginAttachedDescendantProgrammesValidation
 import DASHI.Philosophy.NonginRoadmapClosureExact
 import DASHI.Philosophy.NonginRoadmapClosureValidation
 import DASHI.Philosophy.RelationalAtlas
