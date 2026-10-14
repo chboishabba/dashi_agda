@@ -3,6 +3,7 @@ module DASHI.Quantum.Everything where
 -- Quantum domain rollup.
 
 import DASHI.Quantum.QuantumMereologySourceAtlasExact
+import DASHI.Quantum.QuantumMereologySOTA2026Exact
 import DASHI.Quantum.QuantumMereologyExact
 import DASHI.Quantum.QuantumMereologySelectionExact
 import DASHI.Quantum.QuantumMereologySelectionRegression
