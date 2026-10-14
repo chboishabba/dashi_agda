@@ -1,5 +1,6 @@
 module DASHI.Moonshine.OggSSP2BEquivariantResidualQuotientValidation where
 
+open import Agda.Builtin.Bool using (Bool)
 open import DASHI.Moonshine.OggSSP2BEquivariantResidualQuotientExact
 
 -- RED-first regression surface: the production owner must expose the theorem
