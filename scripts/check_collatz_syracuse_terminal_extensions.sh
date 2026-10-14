@@ -37,6 +37,9 @@ grep -q 'universalStoppingExcludesInfiniteSurvivor' DASHI/Analysis/CollatzSyracu
 grep -q 'noInverseLimitAutomaticallyConstructsDescent : Nat' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
 grep -q 'finiteBarrierExtractsDescent' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'finiteBarrierToLiteralStrictDescentSource' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'literalStrictDescentToFiniteBarrierSource' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'record FiniteBarrierStrictDescentEquivalence' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'finiteBarrierStrictDescentEquivalencePaid : Nat' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'noInfiniteSurvivorGivesDoubleNegatedDescent' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'record NatSearchMarkov' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'natSearchMarkovOwnedUnconditionally : Nat' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
