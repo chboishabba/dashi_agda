@@ -12,6 +12,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -94,11 +95,6 @@ transitionCostedWorkBound
      | Budget.transitionPredicateWorkBound
         stateCoverage symbolCoverage nonempty steps cols index
 ... | CostSeek.costed-seek found work | bound = bound
-
-------------------------------------------------------------------------
--- Initial section.  Result stays on the original global width; the visit count
--- is the already-defined exact recursive `initialSeekWork`.
-------------------------------------------------------------------------
 
 initialCosted :
   ∀ {machine : Local.ConcreteTapeMachine} {steps cols : Nat} →
@@ -236,9 +232,9 @@ globalClauseSeekCostedResultExact
      | transitionCostedResultExact
         stateCoverage symbolCoverage nonempty steps cols index
 ... | costed-global-clause (Seek.found clause) transitionWork | transitionExact
-  rewrite transitionExact = refl
+  rewrite sym transitionExact = refl
 ... | costed-global-clause (Seek.exhausted remaining) transitionWork | transitionExact
-  rewrite transitionExact
+  rewrite sym transitionExact
   with initialCosted {steps = steps} initialTarget remaining
 ... | costed-global-clause (Seek.found clause) initialWork = refl
 ... | costed-global-clause (Seek.exhausted afterInitial) initialWork
@@ -248,7 +244,7 @@ globalClauseSeekCostedResultExact
         {steps = steps} {cols = cols}
         stateCoverage symbolCoverage afterInitial
 ... | costed-global-clause acceptingResult acceptingWork | acceptingExact
-  rewrite acceptingExact = refl
+  rewrite sym acceptingExact = refl
 
 globalClauseSeekCostedWorkBound :
   ∀ {machine : Local.ConcreteTapeMachine}
