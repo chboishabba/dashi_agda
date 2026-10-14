@@ -2,10 +2,6 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitCoste
 
 ------------------------------------------------------------------------
 -- COSTED EXECUTION OF THE ACTUAL TOKEN / THREE-BIT COOK CURSOR
---
--- This owner charges the same cursor used by `streamedCookBit`.  Global clause
--- lookup is the path-exact costed evaluator from the previous owner; all token
--- and bit bookkeeping is charged by one additional unit per cursor step.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
@@ -17,6 +13,7 @@ open import Data.Nat.Base using (_≤_)
 open import Data.Product using (_×_; _,_)
 import Data.Fin.Base as Fin
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -120,9 +117,9 @@ nextTokenCostedResultExact
      | CostedClause.globalClauseSeekCostedResultExact
         stateCoverage symbolCoverage nonempty steps cols initialTarget clauseIndex
 ... | CostedClause.costed-global-clause (Seek.found clause) clauseWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 ... | CostedClause.costed-global-clause (Seek.exhausted remaining) clauseWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 nextTokenCostedResultExact stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.clauseAt clauseIndex []) = refl
 nextTokenCostedResultExact stateCoverage symbolCoverage nonempty steps cols initialTarget
@@ -222,9 +219,9 @@ nextBitCostedResultExact stateCoverage symbolCoverage nonempty steps cols initia
      | nextTokenCostedResultExact
         stateCoverage symbolCoverage nonempty steps cols initialTarget tokenState
 ... | costed nothing tokenWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 ... | costed (just (token , nextState)) tokenWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 nextBitCostedResultExact stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.needSecond token nextState) = refl
 nextBitCostedResultExact stateCoverage symbolCoverage nonempty steps cols initialTarget
@@ -298,23 +295,23 @@ bitAtCostedResultExact stateCoverage symbolCoverage nonempty steps cols initialT
      | nextBitCostedResultExact
         stateCoverage symbolCoverage nonempty steps cols initialTarget state
 ... | costed nothing stepWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 ... | costed (just (bit , nextState)) stepWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 bitAtCostedResultExact stateCoverage symbolCoverage nonempty steps cols initialTarget
     (suc index) state
   with nextBitCosted stateCoverage symbolCoverage nonempty steps cols initialTarget state
      | nextBitCostedResultExact
         stateCoverage symbolCoverage nonempty steps cols initialTarget state
 ... | costed nothing stepWork | exact
-  rewrite exact = refl
+  rewrite sym exact = refl
 ... | costed (just (bit , nextState)) stepWork | exact
-  rewrite exact
+  rewrite sym exact
   with bitAtCosted stateCoverage symbolCoverage nonempty steps cols initialTarget index nextState
      | bitAtCostedResultExact
         stateCoverage symbolCoverage nonempty steps cols initialTarget index nextState
 ... | costed found restWork | restExact
-  rewrite restExact = refl
+  rewrite sym restExact = refl
 
 bitAtWorkBudget :
   (machine : Local.ConcreteTapeMachine) → Nat → Nat → Nat → Nat
@@ -405,8 +402,5 @@ streamedCookBitCostedWorkBound
     (Cursor.needToken (Cursor.cnfAt zero))
 
 ------------------------------------------------------------------------
--- This removes the last semantic cost disconnect in the streamed evaluator:
--- its returned bit and its charged work now come from the SAME recursion.  The
--- remaining step is compilation of these finite recursive states/arithmetic into
--- a literal CodedFiniteStandardTM and constant/polynomial simulation overhead.
+-- Returned bit and charged work now come from the SAME streamed recursion.
 ------------------------------------------------------------------------
