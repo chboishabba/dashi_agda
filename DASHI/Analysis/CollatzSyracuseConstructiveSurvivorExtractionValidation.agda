@@ -1,0 +1,29 @@
+module DASHI.Analysis.CollatzSyracuseConstructiveSurvivorExtractionValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Analysis.CollatzSyracuseConstructiveSurvivorExtractionExact as Extract
+
+finiteBarrierExtractionPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.finiteBarrierExtractionPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+finiteBarrierExtractionPaid = refl
+
+noInfiniteGivesDoubleNegatedDescentPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.noInfiniteGivesDoubleNegatedDescentPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+noInfiniteGivesDoubleNegatedDescentPaid = refl
+
+markovNotSilentlyOwned :
+  Extract.ConstructiveSurvivorExtractionBoundary.natSearchMarkovOwnedUnconditionally
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 0
+markovNotSilentlyOwned = refl
+
+mereNoInfiniteDoesNotConstructDescent :
+  Extract.ConstructiveSurvivorExtractionBoundary.noInfiniteAutomaticallyConstructsDescent
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 0
+mereNoInfiniteDoesNotConstructDescent = refl
