@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional
+
 
 def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     if getattr(adapter_cls, "_semantic_discovery_installed", False):
@@ -14,7 +16,7 @@ def install_mcp_adapter_semantic_extension(adapter_cls: type) -> None:
     def discover(self, query: str, limit: int = 50):
         return self.service.discover(query, limit=limit)
 
-    def round_lineage(self, prefix: str | None = None):
+    def round_lineage(self, prefix: Optional[str] = None):
         return self.service.round_lineage(prefix=prefix)
 
     adapter_cls.symbol_search = symbol_search
@@ -48,7 +50,7 @@ def install_mcp_server_semantic_extension(module) -> None:
             return tools.discover(query, limit=limit)
 
         @server.tool()
-        async def round_lineage(prefix: str | None = None):
+        async def round_lineage(prefix: Optional[str] = None):
             """Report read-only RoundNNN lineage, novelty and snapshot-noise ratios."""
             return tools.round_lineage(prefix=prefix)
 
