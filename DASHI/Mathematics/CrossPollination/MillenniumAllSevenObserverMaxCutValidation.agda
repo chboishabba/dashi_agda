@@ -17,6 +17,8 @@ import DASHI.Mathematics.Arithmetic.EisensteinAZeroEllipticScalarExtensionExact 
 import DASHI.Mathematics.Arithmetic.EisensteinAZeroEllipticScalarExtensionValidation
 import DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantExact as JInvariant
 import DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantValidation
+import DASHI.Mathematics.Arithmetic.EisensteinAZeroConcreteCurveExact as ConcreteAZero
+import DASHI.Mathematics.Arithmetic.EisensteinAZeroConcreteCurveValidation
 
 sevenClayProblemsIndexed : Gate.clayProblemLaneCount ≡ 7
 sevenClayProblemsIndexed = refl
@@ -86,10 +88,18 @@ aZeroShortJExpressionPaid :
   JInvariant.aZeroJExpressionZeroPaid JInvariant.canonicalBoundary ≡ true
 aZeroShortJExpressionPaid = refl
 
+concreteAZeroCurvePaid :
+  ConcreteAZero.concreteNonsingularAZeroCurvePaid ConcreteAZero.canonicalBoundary ≡ true
+concreteAZeroCurvePaid = refl
+
+concreteAZeroCurveHasJExpressionZero :
+  ConcreteAZero.concreteJExpressionZeroPaid ConcreteAZero.canonicalBoundary ≡ true
+concreteAZeroCurveHasJExpressionZero = refl
+
 cmAuthorityStillSeparate :
-  JInvariant.fullCMEndomorphismRingPaid JInvariant.canonicalBoundary ≡ false
+  ConcreteAZero.fullCMEndomorphismRingPaid ConcreteAZero.canonicalBoundary ≡ false
 cmAuthorityStillSeparate = refl
 
 heckeAuthorityStillSeparate :
-  JInvariant.heckeCharacterPaid JInvariant.canonicalBoundary ≡ false
+  ConcreteAZero.heckeCharacterPaid ConcreteAZero.canonicalBoundary ≡ false
 heckeAuthorityStillSeparate = refl
