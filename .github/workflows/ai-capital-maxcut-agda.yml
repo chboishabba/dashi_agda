@@ -32,5 +32,6 @@ jobs:
             DASHI/Economics/AIPolicyReviewedCausalAttribution20261014Exact.agda \
             DASHI/Economics/AIMI355XAcquisitionDepreciationEnvelope20261014Exact.agda \
             DASHI/Economics/AICreditSpreadDifferential20261014Exact.agda \
+            DASHI/Economics/AICerebrasProviderCostComposition20261014Exact.agda \
             DASHI/Economics/AICapitalRoadmapMaxCut20261014Exact.agda \
             DASHI/Economics/AIEntanglementEverything2026.agda
