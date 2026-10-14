@@ -7,6 +7,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369TernaryRealizationIntertwin
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3PhysicalRealizationExact as C3
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3SameActionExact as Same
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AnalyticQuantumExecutionExact as AQ
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369LiBeMinimalBasisHFExecutionExact as LiBe
 
 fillingGraphPaidRegression :
   F.AtomicFillingGraphBoundary.directedStructuralFillingGraphPaid
@@ -99,11 +100,25 @@ analyticExecutionBoundaryRegression :
     AQ.canonicalAnalyticQuantumExecutionBoundary
   ≡ true
   ×
-  AQ.AnalyticQuantumExecutionBoundary.finiteC3RecognitionEqualsFullAtomic369Identity
+  AQ.AnalyticQuantumExecutionBoundary.lithiumBerylliumMinimalBasisSCFExecuted
     AQ.canonicalAnalyticQuantumExecutionBoundary
-  ≡ false
+  ≡ true
   ×
-  AQ.AnalyticQuantumExecutionBoundary.lithiumBerylliumMultiOrbitalSCFRecovered
+  AQ.AnalyticQuantumExecutionBoundary.lithiumBerylliumCompleteBasisRecoveryPaid
     AQ.canonicalAnalyticQuantumExecutionBoundary
   ≡ false
 analyticExecutionBoundaryRegression = refl , (refl , (refl , refl))
+
+liBeExecutionBoundaryRegression :
+  LiBe.LiBeMinimalBasisExecutionBoundary.lithiumOneSAndTwoSTrackedSimultaneously
+    LiBe.canonicalLiBeMinimalBasisExecutionBoundary
+  ≡ true
+  ×
+  LiBe.LiBeMinimalBasisExecutionBoundary.berylliumOneSAndTwoSTrackedSimultaneously
+    LiBe.canonicalLiBeMinimalBasisExecutionBoundary
+  ≡ true
+  ×
+  LiBe.LiBeMinimalBasisExecutionBoundary.completeBasisLimitPaid
+    LiBe.canonicalLiBeMinimalBasisExecutionBoundary
+  ≡ false
+liBeExecutionBoundaryRegression = refl , (refl , refl)
