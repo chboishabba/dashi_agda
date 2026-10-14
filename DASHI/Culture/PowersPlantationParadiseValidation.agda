@@ -13,6 +13,7 @@ import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as Cross
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as EmpiricalPareto
+import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 ------------------------------------------------------------------------
@@ -99,6 +100,16 @@ _empirical-acquisition-frontier-paid :
     ∷ []
 _empirical-acquisition-frontier-paid =
   EmpiricalPareto.currentFrontierIsCorpusCompensationDistribution
+
+_benefit-does-not-prove-settlement-paid :
+  Minette.BenefitPerformancePaysSettlement → ⊥
+_benefit-does-not-prove-settlement-paid =
+  Minette.benefitPerformanceDoesNotProveSettlement
+
+_secondary-date-disagreement-needs-primary-paid :
+  Minette.SecondaryDateDisagreementResolvedWithoutPrimaryInspection → ⊥
+_secondary-date-disagreement-needs-primary-paid =
+  Minette.secondaryDateDisagreementNeedsPrimaryInspection
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
