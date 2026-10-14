@@ -129,6 +129,43 @@ canonicalHighAlphaSources =
   loseth2024Source ∷ linares2026Source ∷ []
 
 ------------------------------------------------------------------------
+-- SOURCE / OUTCOME ADMISSION
+--
+-- Attribution is not result authority.  These inhabitants witness only that a
+-- specific source is admitted to populate one specific outcome family.  They
+-- do not import truth, causation, diagnosis, clinical authority, or agreement.
+------------------------------------------------------------------------
+
+data HighAlphaOutcomeFamily : Set where
+  normMediationOutcome : HighAlphaOutcomeFamily
+  platformInterventionOutcome : HighAlphaOutcomeFamily
+  pronounAssociationOutcome : HighAlphaOutcomeFamily
+  languageModelMetaOutcome : HighAlphaOutcomeFamily
+  fmtTrialOutcome : HighAlphaOutcomeFamily
+  fmtProtocolDesignOutcome : HighAlphaOutcomeFamily
+  muOpioidSocialOutcome : HighAlphaOutcomeFamily
+  neurodiversityQoLOutcome : HighAlphaOutcomeFamily
+
+data AdmittedHighAlphaSource :
+  HighAlphaOutcomeFamily → Source.AttributedSource → Set where
+  shankerVlaevPaysNormMediationOutcome :
+    AdmittedHighAlphaSource normMediationOutcome shankerVlaev2026Source
+  cornelsonPaysPlatformInterventionOutcome :
+    AdmittedHighAlphaSource platformInterventionOutcome cornelson2026Source
+  tuckZhuThompsonPaysPronounAssociationOutcome :
+    AdmittedHighAlphaSource pronounAssociationOutcome tuckZhuThompson2026Source
+  fisherPaysLanguageModelMetaOutcome :
+    AdmittedHighAlphaSource languageModelMetaOutcome fisher2026Source
+  wan2024PaysFMTTrialOutcome :
+    AdmittedHighAlphaSource fmtTrialOutcome wan2024FMTSource
+  zou2026PaysFMTProtocolDesign :
+    AdmittedHighAlphaSource fmtProtocolDesignOutcome zou2026FMTProtocolSource
+  losethPaysMuOpioidSocialOutcome :
+    AdmittedHighAlphaSource muOpioidSocialOutcome loseth2024Source
+  linaresPaysNeurodiversityQoLOutcome :
+    AdmittedHighAlphaSource neurodiversityQoLOutcome linares2026Source
+
+------------------------------------------------------------------------
 -- 1. MEDIATED PROPAGATION: exposure -> norm perception -> intention.
 ------------------------------------------------------------------------
 
@@ -141,6 +178,7 @@ record NormMediationReceipt : Set where
   constructor norm-mediation-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource normMediationOutcome source
     upstream : MediationCoordinate
     mediator : MediationCoordinate
     downstream : MediationCoordinate
@@ -154,7 +192,7 @@ record NormMediationReceipt : Set where
 canonicalNormMediationReceipt : NormMediationReceipt
 canonicalNormMediationReceipt =
   norm-mediation-receipt
-    shankerVlaev2026Source
+    shankerVlaev2026Source shankerVlaevPaysNormMediationOutcome
     misinformationExposure perceivedPeerSupport vaccinationIntent
     true refl false refl
     "The 2026 experiment supplies a concrete mediator candidate inside the existing exposure -> belief/norm -> intent chain. Its reported mediation does not make perceived norms the unique mechanism, and the descriptive-norm add-on did not beat debunking alone on average intention change."
@@ -175,6 +213,7 @@ record PlatformInterventionReceipt : Set where
   constructor platform-intervention-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource platformInterventionOutcome source
     commentsReduced : Bool
     commentsReducedIsTrue : commentsReduced ≡ true
     someAffectiveResponseReduced : Bool
@@ -189,17 +228,18 @@ record PlatformInterventionReceipt : Set where
 canonicalPlatformInterventionReceipt : PlatformInterventionReceipt
 canonicalPlatformInterventionReceipt =
   platform-intervention-receipt
-    cornelson2026Source
+    cornelson2026Source cornelsonPaysPlatformInterventionOutcome
     true refl true refl false refl false refl false refl
 
 ------------------------------------------------------------------------
 -- 3. LANGUAGE FEATURE -> DEPRESSION IS CALIBRATION, NOT DIAGNOSIS.
 ------------------------------------------------------------------------
 
-record LanguageMentalStateReceipt : Set where
+record LanguageMentalStateReceipt (family : HighAlphaOutcomeFamily) : Set where
   constructor language-mental-state-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource family source
     featureReference : String
     contextReference : String
     groupAssociationPaid : Bool
@@ -210,18 +250,18 @@ record LanguageMentalStateReceipt : Set where
     clinicalDeploymentAuthorityPaid : Bool
     clinicalDeploymentAuthorityPaidIsFalse : clinicalDeploymentAuthorityPaid ≡ false
 
-pronounContextReceipt : LanguageMentalStateReceipt
+pronounContextReceipt : LanguageMentalStateReceipt pronounAssociationOutcome
 pronounContextReceipt =
   language-mental-state-receipt
-    tuckZhuThompson2026Source
+    tuckZhuThompson2026Source tuckZhuThompsonPaysPronounAssociationOutcome
     "first-person pronoun frequency / self-focus"
     "negative autobiographical narrative in undergraduate sample; association absent in positive autobiographical condition"
     true refl false refl false refl
 
-languageMLMetaReceipt : LanguageMentalStateReceipt
+languageMLMetaReceipt : LanguageMentalStateReceipt languageModelMetaOutcome
 languageMLMetaReceipt =
   language-mental-state-receipt
-    fisher2026Source
+    fisher2026Source fisherPaysLanguageModelMetaOutcome
     "multi-feature language-only machine-learning models"
     "heterogeneous datasets, text sources, languages, feature classes and model families"
     true refl false refl false refl
@@ -234,6 +274,7 @@ record AutismFMTTrialReceipt : Set where
   constructor autism-fmt-trial-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource fmtTrialOutcome source
     randomizedDoubleBlindPlaceboControlled : Bool
     randomizedDoubleBlindPlaceboControlledIsTrue :
       randomizedDoubleBlindPlaceboControlled ≡ true
@@ -250,13 +291,14 @@ record AutismFMTTrialReceipt : Set where
 canonicalAutismFMTTrialReceipt : AutismFMTTrialReceipt
 canonicalAutismFMTTrialReceipt =
   autism-fmt-trial-receipt
-    wan2024FMTSource
+    wan2024FMTSource wan2024PaysFMTTrialOutcome
     true refl false refl true refl false refl true refl
 
 record AutismFMTProtocolReceipt : Set where
   constructor autism-fmt-protocol-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource fmtProtocolDesignOutcome source
     randomizedTripleBlindDesignPlanned : Bool
     randomizedTripleBlindDesignPlannedIsTrue : randomizedTripleBlindDesignPlanned ≡ true
     efficacyResultAlreadyPaid : Bool
@@ -264,7 +306,9 @@ record AutismFMTProtocolReceipt : Set where
 
 canonicalAutismFMTProtocolReceipt : AutismFMTProtocolReceipt
 canonicalAutismFMTProtocolReceipt =
-  autism-fmt-protocol-receipt zou2026FMTProtocolSource true refl false refl
+  autism-fmt-protocol-receipt
+    zou2026FMTProtocolSource zou2026PaysFMTProtocolDesign
+    true refl false refl
 
 ------------------------------------------------------------------------
 -- 5. MU-OPIOID SOCIAL MODULATION != TRUTH / ATTACHMENT / AUTISM MECHANISM.
@@ -274,6 +318,7 @@ record MuOpioidSocialReceipt : Set where
   constructor mu-opioid-social-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource muOpioidSocialOutcome source
     socialConnectionModulationPaid : Bool
     socialConnectionModulationPaidIsTrue : socialConnectionModulationPaid ≡ true
     socialConnectionRequiresIntactMuOpioidSignalling : Bool
@@ -286,7 +331,8 @@ record MuOpioidSocialReceipt : Set where
 
 canonicalMuOpioidSocialReceipt : MuOpioidSocialReceipt
 canonicalMuOpioidSocialReceipt =
-  mu-opioid-social-receipt loseth2024Source
+  mu-opioid-social-receipt
+    loseth2024Source losethPaysMuOpioidSocialOutcome
     true refl false refl false refl false refl
 
 ------------------------------------------------------------------------
@@ -297,6 +343,7 @@ record NeurodiversityQoLReceipt : Set where
   constructor neurodiversity-qol-receipt
   field
     source : Source.AttributedSource
+    sourceAdmission : AdmittedHighAlphaSource neurodiversityQoLOutcome source
     selfAcceptanceRetained : Bool
     selfAcceptanceRetainedIsTrue : selfAcceptanceRetained ≡ true
     supportQualityRetained : Bool
@@ -308,7 +355,8 @@ record NeurodiversityQoLReceipt : Set where
 
 canonicalNeurodiversityQoLReceipt : NeurodiversityQoLReceipt
 canonicalNeurodiversityQoLReceipt =
-  neurodiversity-qol-receipt linares2026Source
+  neurodiversity-qol-receipt
+    linares2026Source linaresPaysNeurodiversityQoLOutcome
     true refl true refl false refl false refl
 
 ------------------------------------------------------------------------
@@ -346,8 +394,8 @@ record HighAlphaCrossPollination : Set where
     existingPropagationOwner : String
     normMediation : NormMediationReceipt
     platformIntervention : PlatformInterventionReceipt
-    pronounContext : LanguageMentalStateReceipt
-    languageMeta : LanguageMentalStateReceipt
+    pronounContext : LanguageMentalStateReceipt pronounAssociationOutcome
+    languageMeta : LanguageMentalStateReceipt languageModelMetaOutcome
     fmtTrial : AutismFMTTrialReceipt
     fmtProtocol : AutismFMTProtocolReceipt
     opioidSocial : MuOpioidSocialReceipt
@@ -366,7 +414,7 @@ canonicalHighAlphaCrossPollination =
     canonicalAutismFMTProtocolReceipt
     canonicalMuOpioidSocialReceipt
     canonicalNeurodiversityQoLReceipt
-    "The new evidence sharpens already-declared edges rather than replacing them: norm perception becomes an empirically measured mediator candidate; platform engagement outcomes remain non-collapsed; language markers require contextual/calibrated inference; randomized FMT evidence separates null primary from positive secondary outcomes; mu-opioids modulate social connection without truth authority; identity and support remain compatible coordinates."
+    "The new evidence sharpens already-declared edges rather than replacing them: norm perception becomes an empirically measured mediator candidate; platform engagement outcomes remain non-collapsed; language markers require contextual/calibrated inference; randomized FMT evidence separates null primary from positive secondary outcomes; mu-opioids modulate social connection without truth authority; identity and support remain compatible coordinates. Source identity is retained as provenance and each result family additionally requires an explicit source/outcome admission witness."
 
 record HighAlphaBoundary : Set where
   constructor high-alpha-boundary
