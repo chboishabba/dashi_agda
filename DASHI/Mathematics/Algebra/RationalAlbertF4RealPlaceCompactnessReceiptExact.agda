@@ -18,9 +18,11 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessReceiptExac
 -- * the only diagonal values occurring are 3/2 and 6;
 -- * the exact center of the represented derivation algebra has dimension 0.
 --
--- This is strong evidence/diagnostic for the compact real completion of the
--- represented Lie algebra.  It is NOT, by itself, a formal classification of
--- the original Q-form, and does not manufacture Aut(J)=F4 or Isom(N)=E6.
+-- This is an exact finite-dimensional diagnostic consistent with the compact
+-- real completion of the represented Lie algebra.  It is NOT, by itself, a
+-- formal classification of the real form or of the original Q-form, and does
+-- not manufacture Aut(J)=F4 or Isom(N)=E6.
+--
 -- The regular-element centralizer dimension 4 in the companion script is a
 -- floating numerical diagnostic and is intentionally recorded separately.
 ------------------------------------------------------------------------
@@ -62,20 +64,10 @@ record Boundary : Set where
     compactRealPlaceClassificationFormalized : Bool
     originalQFormClassifiedFromRealPlaceAlone : Bool
     globalF4GroupClassificationPaid : Bool
+    realPlaceDiagnosticCreatesGlobalQFormClassification : Bool
 open Boundary public
 
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
   true true true
-  false false false
-
--- Promotion firewall: one archimedean/trace-form diagnostic does not determine
--- a global rational form without the relevant classification/local invariants.
-data RealPlaceCompactnessCreatesGlobalQFormClassification : Set where
-
-globalQFormNotCreatedByRealPlaceDiagnostic :
-  RealPlaceCompactnessCreatesGlobalQFormClassification → ⊥
-globalQFormNotCreatedByRealPlaceDiagnostic ()
-  where
-    open import Agda.Builtin.Unit using (⊤)
-    data ⊥ : Set where
+  false false false false
