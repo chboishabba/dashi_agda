@@ -46,13 +46,7 @@ def _alpha_normalize_explicit_binders(text: str) -> str:
 
 
 def normalized_signature(signature: str) -> str:
-    """Return a deterministic shallow signature form for discovery only.
-
-    This intentionally does not claim Agda definitional equality. It removes
-    comments/spacing noise and alpha-normalizes ordinary named binders so that
-    discovery can group obvious signature equivalents.
-    """
-
+    """Return a deterministic shallow signature form for discovery only."""
     text = re.sub(r"--[^\n]*", " ", signature)
     text = _alpha_normalize_explicit_binders(text)
     return _SPACE_RE.sub("", text).strip()
@@ -103,8 +97,6 @@ def _token_set(value: str) -> set[str]:
 def _jaccard(left: Iterable[str], right: Iterable[str]) -> float:
     a = set(left)
     b = set(right)
-    if not a and not b:
-        return 1.0
     if not a or not b:
         return 0.0
     return len(a & b) / len(a | b)
@@ -119,16 +111,10 @@ def similarity_score(
     signature_b: str,
     refs_b: Iterable[str] = (),
 ) -> float:
-    """Return a deterministic discovery score in [0, 1].
-
-    The score is heuristic and must never be interpreted as proof equivalence.
-    Signature structure dominates, with smaller contributions from referenced
-    symbols and declaration-name similarity.
-    """
-
+    """Return a heuristic discovery score in [0, 1], never proof equivalence."""
     sig_a = normalized_signature(signature_a)
     sig_b = normalized_signature(signature_b)
-    sig_ratio = SequenceMatcher(None, sig_a, sig_b).ratio()
+    sig_ratio = SequenceMatcher(None, sig_a, sig_b).ratio() if sig_a and sig_b else 0.0
     sig_tokens = _jaccard(_token_set(sig_a), _token_set(sig_b))
     ref_ratio = _jaccard((item.lower() for item in refs_a), (item.lower() for item in refs_b))
     name_ratio = SequenceMatcher(None, name_a.lower(), name_b.lower()).ratio()
