@@ -13,9 +13,12 @@ on:
       - 'DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda'
       - 'DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda'
       - 'DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BNormWeldLastLeafExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BPostSocleMaxCutExact.agda'
       - 'DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda'
       - 'DASHI/Moonshine/OggSSP2BDefectProvenanceSearchNoGoExact.agda'
       - 'scripts/check_twob_post_brauer_final_max_cut.sh'
+      - 'scripts/check_twob_norm_weld_last_leaf.sh'
       - '.github/workflows/twob-post-brauer-final-max-cut.yml'
   pull_request:
     paths:
@@ -26,9 +29,12 @@ on:
       - 'DASHI/Moonshine/OggSSP2BPostBrauerOuterActionBlindSpotExact.agda'
       - 'DASHI/Moonshine/OggSSP2BPostBrauerSameObjectFrontierExact.agda'
       - 'DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BNormWeldLastLeafExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BPostSocleMaxCutExact.agda'
       - 'DASHI/Moonshine/OggSSP2BDefectTwoBitProvenanceSelectorExact.agda'
       - 'DASHI/Moonshine/OggSSP2BDefectProvenanceSearchNoGoExact.agda'
       - 'scripts/check_twob_post_brauer_final_max_cut.sh'
+      - 'scripts/check_twob_norm_weld_last_leaf.sh'
       - '.github/workflows/twob-post-brauer-final-max-cut.yml'
 
 permissions:
@@ -42,3 +48,5 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v17
       - name: Run focused post-Brauer checker
         run: bash scripts/check_twob_post_brauer_final_max_cut.sh
+      - name: Run terminal norm-weld last-leaf checker
+        run: bash scripts/check_twob_norm_weld_last_leaf.sh
