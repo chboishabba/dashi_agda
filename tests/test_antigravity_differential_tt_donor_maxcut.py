@@ -15,11 +15,15 @@ def test_tt_route_is_reduced_to_literal_same_object_welds():
         "newMaxwellTheoryRequired",
         "newMetricDependentHodgeTheoryRequired",
         "newR144FirstVariationFrameworkRequired",
+        "canonicalMetricStressPairingTheoremAlreadyOwned",
         "sameGWMetricTangentStillRequired",
         "sameEMHilbertStressInsertionStillRequired",
         "sameFirstVariationPairingStillRequired",
+        "sameFirstVariationPairingFollowsAfterMetricDomainAndStressIdentification",
         "sameLocalizedInteractionStillRequired",
         "scalarKottlerDeltaGttAloneConstructsTTMode",
         "schutzhold1099IsDonorNotImportedAuthority",
     ):
         assert token in text
+    assert "sameFirstVariationPairingStillRequired = false" in text
+    assert "sameFirstVariationPairingFollowsAfterMetricDomainAndStressIdentification = true" in text
