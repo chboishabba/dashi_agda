@@ -9,10 +9,13 @@ import DASHI.Economics.AICoreWeaveNumericalCapitalBounds20261012Exact as Capital
 import DASHI.Economics.AIOwnedSelfHostTCOEnvelope20261012Exact as TCO
 import DASHI.Economics.AICerebrasCloudMarginObserverBoundary20261012Exact as Margin
 import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Payer
+import DASHI.Economics.AICoreWeaveAggregateCustomerCashRealisation20261014Exact as Cash
 import DASHI.Economics.AICoreWeaveCapexDecompositionNonidentifiability20261012Exact as Replacement
 import DASHI.Economics.AIAustraliaRegulatoryCostMeasurementBoundary20261014Exact as Regulation
+import DASHI.Economics.AIPolicyReviewedCausalAttribution20261014Exact as Review
 import DASHI.Economics.AIFinancingConditionsPanel20261014Exact as Financing
 import DASHI.Economics.AIGalaxyHeliosLandlordEconomics20261014Exact as Landlord
+import DASHI.Economics.AIInfrastructureStackReturnNonCollapse20261014Exact as Stack
 
 ------------------------------------------------------------------------
 -- OCTOBER 14 TERMINAL MAX-CUT BOARD
@@ -60,8 +63,8 @@ terminalPayerGraphPartial : RoadmapLane
 terminalPayerGraphPartial = roadmap-lane
   "terminal payer graph"
   partial
-  "Microsoft and Meta external-cash-capacity edges, OpenAI contract and revenue-scale edge, CoreWeave contract-finance mechanism"
-  "OpenAI external/operating cash provenance, realised contract flows, anonymous current top-customer identities and residual financing/counterparty edges"
+  "aggregate customer-cash collection is now source-paid; Microsoft and Meta external-cash-capacity edges, OpenAI contract/revenue-scale edge and CoreWeave contract-finance mechanism remain separately typed"
+  "named-payer cash attribution, OpenAI external/operating cash provenance, realised named contract flows, anonymous current top-customer identities and residual financing/counterparty edges"
   false
 
 replacementEconomicsEmpirical : RoadmapLane
@@ -76,8 +79,8 @@ regulatoryBurdenEmpirical : RoadmapLane
 regulatoryBurdenEmpirical = roadmap-lane
   "AI regulatory burden and concentration causality"
   empirical
-  "policy chronology, primary government business-impact survey instrument, published submission index, typed causal-estimand/identification gate"
-  "harmonised realised actor-class compliance costs, observed entry/open-weight/concentration response, comparator/control design and reviewed identification receipt"
+  "policy chronology, primary government business-impact survey instrument, typed causal-estimand/identification gate and exact SensibLaw human-review binding gate"
+  "harmonised realised actor-class compliance costs, observed entry/open-weight/concentration response, comparator/control design, identification evidence and exact reviewed same-object causal bridge"
   false
 
 financingConditionsHeterogeneous : RoadmapLane
@@ -94,6 +97,14 @@ landlordLayerReturnPaid = roadmap-lane
   paid
   "Galaxy Helios Phase-II 13.7 percent starting gross yield-on-cost and 90-percent-plus lease-level NOI-margin target plus Q2 Phase-I recognised lease/operator revenue"
   "cash collection and Phase-II target realisation remain separate; this paid lane is not tenant/provider ROIC or terminal-demand authority"
+  false
+
+stackLayerNonCollapsePaid : RoadmapLane
+stackLayerNonCollapsePaid = roadmap-lane
+  "infrastructure-stack return non-collapse"
+  paid
+  "realised Galaxy landlord revenue and a bounded negative CoreWeave tenant capital spread coexist on the same stack"
+  "terminal-customer economics and cash independence remain separate consumers"
   false
 
 kernelReceiptIntegration : RoadmapLane
@@ -115,12 +126,20 @@ providerMarginalCostStillOpen :
   Margin.marginalInferenceServingMarginPaid Margin.cerebrasGaapCloudMargin ≡ false
 providerMarginalCostStillOpen = Margin.marginalInferenceServingMarginStillOpen
 
+aggregateCustomerCashNowPaid :
+  Cash.aggregateCustomerCashReceiptPaid Cash.coreWeaveAggregateCustomerCash ≡ true
+aggregateCustomerCashNowPaid = Cash.aggregateCustomerCashReceiptObserved
+
 payerGraphStillNotExhaustive : Payer.exhaustiveTerminalGraphClosed Payer.coreWeavePayerSaturation ≡ false
 payerGraphStillNotExhaustive = refl
 
 regulatoryCostVectorStillOpen :
   Regulation.harmonisedRealisedCostVectorPaid Regulation.currentRegulatoryCostMeasurementStatus ≡ false
 regulatoryCostVectorStillOpen = Regulation.harmonisedRealisedCostVectorPaidIsFalse
+
+reviewedPolicyBridgeStillOpen :
+  Review.reviewedSameObjectBridgePaid Review.currentAustralianReviewedPolicyStatus ≡ false
+reviewedPolicyBridgeStillOpen = Review.reviewedSameObjectBridgeStillOpen
 
 financingMarketNotUniversallyClosed :
   Financing.universalCapitalMarketClosure Financing.currentFinancingConditionsPanel ≡ false
@@ -134,6 +153,11 @@ landlordCashCollectionStillOpen :
   Landlord.realisedLeaseCashCollectionPaid Landlord.heliosPhaseIILandlordEconomics ≡ false
 landlordCashCollectionStillOpen = Landlord.cashCollectionStillOpen
 
+stackLayerCoexistencePaid :
+  (Landlord.realisedLeaseRevenuePaid Landlord.heliosPhaseIILandlordEconomics ≡ true) ×
+  (Capital.capitalSpreadDeficitAtLeast578Bp ≡ true)
+stackLayerCoexistencePaid = Stack.landlordRecognisedRevenueAndTenantNegativeSpreadCoexist
+
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. Capital-return magnitude is bounded; owned-node TCO, terminal payer provenance and financing conditions are partial; provider marginal serving cost, replacement economics and regulatory burden causality are external empirical acquisition lanes. Galaxy/Helios supplies both contracted landlord-return targets and early recognised Phase-I lease/operator revenue while cash collection and tenant/provider returns remain separate. The remaining formal task is exact-head kernel/runtime certification."
+  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave aggregate customer-cash collection is source-paid while named-payer/terminal independence remains partial. Capital-return magnitude is bounded; owned-node TCO and financing conditions are partial; provider marginal serving cost, replacement economics and realised regulatory-burden causality are external empirical acquisition lanes. SensibLaw exact human review is now an explicit final gate after causal identification. Galaxy/Helios supplies contracted and recognised landlord coordinates while the same stack can simultaneously carry a negative CoreWeave tenant capital spread. The remaining formal task is exact-head kernel/runtime certification."
