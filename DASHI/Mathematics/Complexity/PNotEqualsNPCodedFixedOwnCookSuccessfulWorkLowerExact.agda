@@ -9,15 +9,17 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (just)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (trans; sym)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
+import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedStandardOppositeExact as CodedFixed
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedOwnCookStreamingCostExact as Own
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
+import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
 import DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact as Cost
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitCostedExact as CostedBit
@@ -36,8 +38,15 @@ ownCookSuccessfulWorkLower :
   suc index ≤ CostedBit.work (Own.ownCookBitCosted coded index)
 ownCookSuccessfulWorkLower coded index bit semantic =
   Lower.streamedCookBitSuccessfulWorkLower
-    _ _ _ _ _ _ index bit
-    exactResult
+    (Coded.codedStateCoverage
+      (Description.code (Own.ownDescription coded)))
+    (Coded.codedSymbolCoverage
+      (Description.code (Own.ownDescription coded)))
+    (Description.nonemptyRules (Own.ownDescription coded))
+    (Description.steps (Own.ownDescription coded))
+    (Cost.descriptionCols (Own.ownDescription coded))
+    (Cost.descriptionInitialTarget (Own.ownDescription coded))
+    index bit exactResult
   where
     exactResult :
       CostedBit.result (Own.ownCookBitCosted coded index) ≡ just bit
@@ -55,7 +64,7 @@ ownCookSuccessfulWorkUpper :
   CostedBit.work (Own.ownCookBitCosted coded index)
   ≤ Cost.fixedDescriptionLinearBudget
       (Own.ownDescription coded)
-      (DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact.queryBitLength
+      (Query.queryBitLength
         (Description.atIndex (Own.ownDescription coded) index))
 ownCookSuccessfulWorkUpper =
   Own.ownCookBitCostedWorkLinear
