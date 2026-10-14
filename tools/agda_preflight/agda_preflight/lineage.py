@@ -9,7 +9,7 @@ from .discovery import round_family
 def _symbol_map(module: dict) -> dict[str, str]:
     result: dict[str, str] = {}
     for symbol in module.get("symbols", ()):
-        name = symbol.get("qualified_name") or symbol.get("name")
+        name = symbol.get("name") or symbol.get("qualified_name")
         if not name:
             continue
         result[str(name)] = str(symbol.get("signature_sha256", ""))
