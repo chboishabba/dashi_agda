@@ -36,6 +36,8 @@ import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact
 import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionValidation
+import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact
+import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierValidation
 
 -- Historical compatibility/status surfaces remain imported; the additive
 -- post-ledger max-cut above records which old false flags are superseded.
