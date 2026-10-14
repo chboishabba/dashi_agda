@@ -29,6 +29,8 @@ def test_contract_finance_matching_boundary():
 def test_landlord_yield_boundary():
     require("DASHI/Economics/AIGalaxyHeliosLandlordEconomics20261014Exact.agda", [
         "startingGrossYieldBpIs1370", "leaseLevelMarginLowerBpIs9000",
+        "phaseILeaseRevenueMillionUSDIs18", "phaseIOperatorRevenueMillionUSDIs5",
+        "realisedLeaseRevenueObserved", "cashCollectionStillOpen",
         "landlordYieldDoesNotCreateCoreWeaveROIC", "contractedYieldDoesNotCreateRealisedCash"
     ])
 
