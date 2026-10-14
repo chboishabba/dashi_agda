@@ -99,6 +99,10 @@ jobs:
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardExact.agda
       - name: Typecheck residual frontier strictness validation
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardValidation.agda
+      - name: Typecheck residual inverse-limit obstruction
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+      - name: Typecheck residual inverse-limit validation
+        run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionValidation.agda
       - name: Typecheck terminal parity max-cut
         run: nix develop .# --command agda -i . DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
       - name: Typecheck terminal parity max-cut validation
