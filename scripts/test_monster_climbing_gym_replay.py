@@ -22,6 +22,13 @@ CONTROL_EXPECTED = {
     61: (48967, 849), 67: (55012, 849),
 }
 
+SOURCE_SHIFT_SUMMARIES = {
+    (2, 1): (270.3, 0.9), (3, 1): (594.0, 8.4), (5, 1): (825.4, 3.2),
+    (7, 1): (845.7, 0.9), (11, 1): (848.5, 0.6), (2, 2): (519.3, 4.3),
+    (3, 2): (837.4, 2.5), (2, 3): (771.3, 3.9), (13, 1): (848.7, 0.5),
+    (71, 1): (849.0, 0.0),
+}
+
 
 def decode_cache(path: Path) -> list[float]:
     payload = json.loads(path.read_text())
@@ -62,6 +69,23 @@ class MonsterClimbingGymReplayTest(unittest.TestCase):
         for shift in (-1.0, -0.7, 0.0, 0.4, 1.0):
             row = replay.replay_wall(self.zeros, prime=71, exponent=1, guard=1.0, lattice_shift=shift)
             self.assertEqual(row["mutual_pairs"], 849)
+
+    def test_deterministic_phase_grid_is_consistent_with_reported_shift_null(self) -> None:
+        # The source gives only rounded mean/SD summaries, not the sampled shifts
+        # or RNG seed.  A deterministic full-period phase grid should reproduce
+        # the same null family within finite-sample/rounding tolerance, but must
+        # not be claimed as the exact source random sample.
+        for wall, (source_mean, source_sd) in SOURCE_SHIFT_SUMMARIES.items():
+            summary = replay.phase_grid_control_summary(
+                self.zeros, prime=wall[0], exponent=wall[1], steps=720, guard=1.0
+            )
+            self.assertLessEqual(abs(summary["mean"] - source_mean), 1.1)
+            self.assertLessEqual(abs(summary["population_sd"] - source_sd), 0.8)
+        p71 = replay.phase_grid_control_summary(
+            self.zeros, prime=71, exponent=1, steps=720, guard=1.0
+        )
+        self.assertEqual(p71["minimum"], 849)
+        self.assertEqual(p71["maximum"], 849)
 
 
 if __name__ == "__main__":
