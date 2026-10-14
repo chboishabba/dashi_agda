@@ -76,10 +76,14 @@ def test_discovery_receipt_only_permits_absence_after_all_strata_are_empty(tmp_p
         )
         index.refresh_semantic_catalog()
         known = index.discovery_receipt("knownThing")
+        fuzzy = index.discovery_receipt("known thing")
         missing = index.discovery_receipt("certainlyMissingSymbolXYZ")
 
     assert known["absence_claim_permitted"] is False
     assert known["live_matches"]
+    assert fuzzy["absence_claim_permitted"] is False
+    assert any(item["name"] == "knownThing" for item in fuzzy["query_similar"])
     assert missing["absence_claim_permitted"] is True
     assert missing["live_matches"] == []
     assert missing["historical_matches"] == []
+    assert missing["query_similar"] == []
