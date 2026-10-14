@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
 
 from . import discovery_catalog
 from . import query_discovery
@@ -39,7 +39,7 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
     def discovery_receipt(self, query: str, *, limit: int = 50) -> dict:
         return query_discovery.discovery_receipt(self.connection, query, limit=limit)
 
-    def round_lineage(self, prefix: str | None = None) -> dict:
+    def round_lineage(self, prefix: Optional[str] = None) -> dict:
         return discovery_catalog.round_lineage(self.connection, prefix=prefix)
 
     source_index_cls.__init__ = __init__
