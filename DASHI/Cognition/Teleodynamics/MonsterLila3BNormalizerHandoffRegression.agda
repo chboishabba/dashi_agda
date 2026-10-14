@@ -11,31 +11,37 @@ _ = refl
 _ : H.siblingAtlas12ModuleSourcePaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.siblingRawMatrixBytesPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
-_ = refl
-
 _ : H.siblingConcreteBasisIntertwinerPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
-_ = refl
-
-_ : H.siblingSelectedWordCentralCorrectionPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
-_ = refl
-
-_ : H.siblingSelectedWordHeisenbergLiftPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
 _ : H.siblingPreferredSamePhaseOrder728Paid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.siblingPreferredSamePhaseOrbit728Paid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ : H.siblingFiniteSchrodingerIrreducibilityPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.siblingPreferredSamePhaseTrivialStabilizerPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ : H.siblingGenericEqualCharacterSimpleIsoReported H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
-_ : H.siblingActualWZetaFin90SameObjectPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ : H.siblingConcreteHZetaFDRepTransportPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
 
-_ : H.siblingFullNormalizerHeisenbergLiftPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ : H.siblingSuzukiMultiplicityHomSpaceTargetReported H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingSuzuki12Plus78CandidateReported H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingSuzukiMatcherExecuted H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.siblingPhaseResolvedSuzukiOrientationPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.siblingFullWZetaTensorRecoveryPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.fin90IsPrimaryRepresentationObject H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
 
 _ : H.actualMonsterLilaSelectedWordFitPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
