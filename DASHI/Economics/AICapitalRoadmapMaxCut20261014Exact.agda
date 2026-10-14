@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICoreWeaveNumericalCapitalBounds20261012Exact as Capital
 import DASHI.Economics.AIOwnedSelfHostTCOEnvelope20261012Exact as TCO
+import DASHI.Economics.AIMI355XAcquisitionDepreciationEnvelope20261014Exact as Quote
 import DASHI.Economics.AICerebrasCloudMarginObserverBoundary20261012Exact as Margin
 import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Payer
 import DASHI.Economics.AICoreWeaveAggregateCustomerCashRealisation20261014Exact as Cash
@@ -47,8 +48,8 @@ ownedNodeTCOPartial : RoadmapLane
 ownedNodeTCOPartial = roadmap-lane
   "owned-vs-rented inference node TCO"
   partial
-  "same-model rented-node price, eight-GPU bundled host-resource envelope, AMD reference power and benchmark electricity envelope"
-  "matched acquisition/depreciation or lease terms, financing/opportunity cost, facility PUE, labour, owner host/network/storage cost, residual value and refresh risk"
+  "same-model rented-node price, eight-GPU bundled host-resource envelope, AMD reference power, benchmark electricity, current 8xMI355X commercial acquisition quote range and explicit five-/six-year depreciation coordinates"
+  "resource-matched acquisition or lease terms, actual buyer financing/opportunity cost, facility PUE, labour, matched owner host/network/storage cost, residual value, maintenance and refresh risk"
   false
 
 providerMarginalServingCostEmpirical : RoadmapLane
@@ -111,8 +112,8 @@ kernelReceiptIntegration : RoadmapLane
 kernelReceiptIntegration = roadmap-lane
   "formal verification receipt"
   integration
-  "source-written owners, RED-first/static regression surfaces and base-current branch topology"
-  "exact-head Agda kernel/typecheck and runtime-suite receipt"
+  "source-written owners, RED-first/static regression surfaces, base-current branch topology and dedicated focused workflows"
+  "successful exact-head Agda kernel/typecheck and runtime-suite receipts"
   false
 
 additionalGenericAbstractionScheduledIsFalse :
@@ -121,6 +122,14 @@ additionalGenericAbstractionScheduledIsFalse = refl
 
 ownedTCOStillOpen : TCO.ownedTCOPaid TCO.mi355xOwnedEnvelope ≡ false
 ownedTCOStillOpen = TCO.ownedTCOStillOpen
+
+purchaseQuoteRangeNowPaid :
+  Quote.purchaseQuoteRangeObserved Quote.mi355xAcquisitionDepreciationEnvelope ≡ true
+purchaseQuoteRangeNowPaid = Quote.purchaseQuoteRangePaid
+
+matchedRentalNodePurchasePriceStillOpen :
+  Quote.matchedRentalNodePurchasePricePaid Quote.mi355xAcquisitionDepreciationEnvelope ≡ false
+matchedRentalNodePurchasePriceStillOpen = Quote.matchedRentalNodePurchasePriceStillOpen
 
 providerMarginalCostStillOpen :
   Margin.marginalInferenceServingMarginPaid Margin.cerebrasGaapCloudMargin ≡ false
@@ -160,4 +169,4 @@ stackLayerCoexistencePaid = Stack.landlordRecognisedRevenueAndTenantNegativeSpre
 
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave aggregate customer-cash collection is source-paid while named-payer/terminal independence remains partial. Capital-return magnitude is bounded; owned-node TCO and financing conditions are partial; provider marginal serving cost, replacement economics and realised regulatory-burden causality are external empirical acquisition lanes. SensibLaw exact human review is now an explicit final gate after causal identification. Galaxy/Helios supplies contracted and recognised landlord coordinates while the same stack can simultaneously carry a negative CoreWeave tenant capital spread. The remaining formal task is exact-head kernel/runtime certification."
+  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave aggregate customer-cash collection is source-paid while named-payer/terminal independence remains partial. Capital-return magnitude is bounded. Owned-node TCO is materially narrower: current 8xMI355X reseller quotes pay an acquisition-price/depreciation envelope, but resource-matched acquisition, financing, PUE, labour, residual and refresh economics remain partial. Provider marginal serving cost, replacement economics and realised regulatory-burden causality remain external empirical lanes. SensibLaw exact human review is now an explicit final gate after causal identification. Galaxy/Helios supplies contracted and recognised landlord coordinates while the same stack can simultaneously carry a negative CoreWeave tenant capital spread. Dedicated exact-head workflows now exist; successful kernel/runtime receipts remain the integration target."
