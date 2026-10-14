@@ -89,18 +89,20 @@ import DASHI.Mathematics.Complexity.CNFStreamingSeekExact
 import DASHI.Mathematics.Complexity.CNFStreamingSeekCostExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostExact
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostedExact
 import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitFrontier
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingTokenBisimulationExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitExact
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitCostedExact
 import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact
 import DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedOwnCookStreamingCostExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedDescriptionVirtualGeneratorExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualGeneratorOutputExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact
 
--- Persistent virtual-tape recut: immutable streamed base + exact sparse residual.
 import DASHI.Mathematics.Complexity.VirtualTapeSparseOverlayExact
 import DASHI.Mathematics.Complexity.GuardedCookVirtualTapeBaseExact
 import DASHI.Mathematics.Complexity.VirtualStandardTapeExecutionExact
@@ -118,8 +120,8 @@ import DASHI.Mathematics.Complexity.GuardedCookVirtualStandardInitialExact
 --   * structural simulation with faithful symbols and exact tape span;
 --   * one-symbol-write / nonblank information accounting;
 --   * guarded Cook bitcode width >= I + 2*T;
---   * therefore literal full-quotation materialisation is impossible for
---     anchored positive-budget candidates (I + 2*T <= I + p <= I + T).
+--   * literal full-quotation materialisation is impossible for anchored
+--     positive-budget candidates (I + 2*T <= I + p <= I + T).
 --
 -- ACTIVE VIRTUAL / STREAMING QUOTATION PAYMENTS:
 --   * immutable `(coded machine,input,T)` description + varying index;
@@ -145,37 +147,48 @@ import DASHI.Mathematics.Complexity.GuardedCookVirtualStandardInitialExact
 --     residual across reads and applies the SAME Standard.transition function;
 --   * one residual entry is added per source edge and residual lookup after k
 --     edges costs at most k scans;
---   * the canonical query code explicitly pays unary T and index: T,index are
---     each bounded by the literal query-bit length;
+--   * canonical query code explicitly pays unary T and index: T,index are each
+--     bounded by literal query-bit length;
 --   * streamed placed-predicate search is costed by #predicates * 2^localWidth;
---   * existing closed Cook size theorems give the actual global clause-seek
---     work shape T*(cols-2)*2^w_trans + rowBits + cols*2^w_accept;
---   * for one immutable self-quotation description those machine-dependent
---     factors are constants, yielding a degree-one streamed-bit work envelope
---     in canonical query-code length;
---   * the active generator contract is therefore now fixed-description.  The
---     older varying-machine UniversalGuardedCookBitGenerator is a strictly
---     stronger optional interface not justified by the current one-hot
---     truth-table implementation.
+--   * existing closed Cook size theorems give global clause-seek shape
+--       T*(cols-2)*2^w_trans + rowBits + cols*2^w_accept;
+--   * global transition->initial->accepting seek is now path-exact COSTED:
+--     returned SeekResult and charged work come from the same residual route;
+--   * token cursor, three-bit cursor and indexed bit recursion are likewise
+--     path-exact COSTED and return exactly the ordinary `streamedCookBit` result;
+--   * actual streamed-bit work is bounded by (i+1)*B_D for fixed description D;
+--   * because unary i is literally present in queryBits, this gives a degree-one
+--     work bound in canonical query-code length;
+--   * the exact costed specialization is welded to the SAME coded opposite
+--     target's own Cook formula via `codedFixedDescription`/`fixedCookFormula`;
+--   * the active finite generator contract is fixed-description and exposes a
+--     separate compilerCoefficient; unit-overhead compilation is NOT assumed;
+--   * older varying-machine UniversalGuardedCookBitGenerator remains a stronger
+--     optional interface not justified by the current one-hot truth-table path;
 --   * canonical virtual candidate start = initial control, absolute head T+1,
---     empty residual; the first untouched scanned bit is exact and the T+1
---     guard prevents left-of-zero underflow across a T-edge virtual run.
+--     empty residual; first untouched scanned bit is exact and the T+1 guard
+--     prevents left-of-zero underflow across a T-edge virtual run.
 --
 -- LIVE CONSTRUCTIVE WALL:
---   1. compile the proved streamed evaluator + persistent virtual execution into
---      one CodedFiniteStandardTM with generator/candidate/opposite modes;
---   2. prove a source/materialized-run <-> persistent-virtual-run bisimulation
---      over the T+1 guarded tape (the storage semantics and head safety are paid);
---   3. turn semantic predicate-evaluation / residual-scan work into literal
---      standard-TM step counts, including arithmetic/index decoding and finite
---      call-frame constants, thereby inhabiting the fixed-description generator;
+--   1. compile the proved path-exact streamed evaluator + persistent virtual
+--      execution into one CodedFiniteStandardTM with generator/candidate/opposite
+--      modes and an explicit finite compiler coefficient;
+--   2. prove materialized-source-run <-> persistent-virtual-run bisimulation over
+--      the T+1 guarded tape (storage semantics, first read and head safety paid);
+--   3. compile Nat/list arithmetic, residual scan and cursor control to literal
+--      standard-TM steps and inhabit FixedDescriptionGuardedCookBitGenerator;
 --   4. close total target time to the SAME T used by its own Cook formula;
 --   5. reuse already-paid Cook iff/opposite SATDecisionFailure plumbing.
 --
+-- FiniteSelfSpecializingCode/Q2 interpreter machinery was checked as a possible
+-- compiler donor.  It is not enough here: primitive semantics can call an
+-- Agda-level total function extensionally and therefore does not pay standard-TM
+-- resource compilation of this evaluator.
+--
 -- Productive sibling-PR cross-pollination is methodological only: the
--- consumer-relative recoverability principle from the ontology/Eisenstein lanes
--- appears here concretely as immutable base + residual reopening.  No unmerged
--- sibling theorem is imported as authority.
+-- consumer-relative recoverability principle from ontology/Eisenstein appears
+-- concretely as immutable base + sparse residual reopening.  No unmerged sibling
+-- theorem is imported as authority.
 --
 -- Ordinary polynomial-map/precomposition/verifier/certificate closure and the
 -- established NP background remain separate same-model obligations.
