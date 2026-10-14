@@ -91,7 +91,6 @@ def _signature_text(root: Path, item: dict) -> str:
             collected.append(line.strip())
         return " ".join(part for part in collected if part)
     first = block[0].strip()
-    # For declaration-level similarity the local declaration name is noise.
     if kind in {"data", "record"}:
         first = re.sub(
             r"^{}\s+{}\b".format(kind, re.escape(str(item["name"]))),
@@ -114,21 +113,37 @@ def sync_repo_signatures(
 ) -> dict:
     """Persist shallow type signatures for repo-index symbols into preflight.
 
-    This overlay is derived from source locations already owned by repo-index;
-    it adds type-shape searchability without duplicating repo identity/status.
+    Source locations from repo-index are trusted for this enrichment only when
+    its indexed file surface is complete and fresh. The overlay adds type-shape
+    searchability; repo-index remains the identity/status/reference authority.
     """
 
     discovery_catalog.ensure_catalog_schema(connection)
+    if not reader.available:
+        return {
+            "updated": False,
+            "symbols_with_signatures": 0,
+            "stamp": None,
+            "state": "repo-index-missing",
+        }
+
+    coverage = reader.coverage_status()
+    if not coverage.get("complete"):
+        return {
+            "updated": False,
+            "symbols_with_signatures": _overlay_count(connection),
+            "stamp": _repo_stamp(reader),
+            "state": "repo-index-stale-or-incomplete",
+        }
+
     stamp = _repo_stamp(reader)
     if not force and stamp is not None and overlay_is_fresh(reader, connection):
         return {
             "updated": False,
             "symbols_with_signatures": _overlay_count(connection),
             "stamp": stamp,
+            "state": "fresh",
         }
-
-    if not reader.available:
-        return {"updated": False, "symbols_with_signatures": 0, "stamp": None}
 
     connection.execute("DELETE FROM semantic_symbols WHERE kind = 'repo-signature'")
     by_file = defaultdict(list)
@@ -171,4 +186,9 @@ def sync_repo_signatures(
         (_COUNT_KEY, str(inserted)),
     )
     connection.commit()
-    return {"updated": True, "symbols_with_signatures": inserted, "stamp": stamp}
+    return {
+        "updated": True,
+        "symbols_with_signatures": inserted,
+        "stamp": stamp,
+        "state": "rebuilt",
+    }
