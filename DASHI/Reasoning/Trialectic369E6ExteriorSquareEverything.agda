@@ -83,14 +83,15 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- Wilson independently source-align the degree-729 extraspecial irreducibles.
 --
 -- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
--- surface. Constructive 729-state witness extraction now closes the explicit
+-- surface. Constructive 729-state witness extraction closes the explicit
 -- Schrodinger irreducibility leaf. Companion Lean source-writes the generic
--- equal-character-simple-representation isomorphism theorem; concrete Monster
--- representation transport remains open.
+-- equal-character-simple-representation isomorphism theorem.
 --
--- Promotion is now proof-relevant: legacy Set-valued fields name proposition
--- types but do not count as proofs.  H_zeta recognition, constituent attachment,
--- Hom evaluation and optional Fin90 basis promotion require inhabitants.
+-- Promotion is proof-relevant: legacy Set-valued fields name proposition types
+-- but do not count as proofs. The fixed-phase character compiler now shows that
+-- once the explicit Schrodinger rep and one actual selected constituent are
+-- transported into the same representation theory, the equivariant H_zeta iso
+-- fills both recognition and action-intertwiner witnesses automatically.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
@@ -112,6 +113,8 @@ import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
