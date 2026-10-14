@@ -18,6 +18,7 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPCandidateActualSelfInstantiationBoundaryExact as Actual
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedStandardOppositeQuotationExact as Fixed
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedStandardOppositeExact as CodedFixed
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
@@ -61,7 +62,7 @@ ownCookBitCostedWorkLinear :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
     {candidateCode : Actual.CandidateCodeRealization candidate}
-    (coded : CodedFixed.CodedFixedStandardOppositeMachine candidateCode)
+    (coded : CodedFixed.CodedStandardOppositeMachine candidateCode)
     (index : Nat) →
   CostedBit.work (ownCookBitCosted coded index)
   ≤ Cost.fixedDescriptionLinearBudget
@@ -79,9 +80,7 @@ ownCookFormulaSameObject :
     {candidateCode : Actual.CandidateCodeRealization candidate}
     (coded : CodedFixed.CodedFixedStandardOppositeMachine candidateCode) →
   Description.formula (ownDescription coded)
-  ≡
-  DASHI.Mathematics.Complexity.PNotEqualsNPFixedStandardOppositeQuotationExact.fixedCookFormula
-    (CodedFixed.forgetCodedFixed coded)
+  ≡ Fixed.fixedCookFormula (CodedFixed.forgetCodedFixed coded)
 ownCookFormulaSameObject =
   CodedFixed.codedFixedCookFormulaExact
 
