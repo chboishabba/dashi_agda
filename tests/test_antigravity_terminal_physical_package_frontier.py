@@ -7,6 +7,8 @@ def test_terminal_frontier_counts_packages_not_adapter_debt():
     text = MODULE.read_text()
     required = [
         "typedLocalCTerminalPhysicalPackageStillRequired = true",
+        "preferredSharedWightmanTerminalAvailable = true",
+        "independentPinnedBoostTraceSplitRequired = false",
         "commonGravityCalibrationPackageStillRequired = true",
         "matchedExperimentPackageStillRequired = true",
         "ttDevicePackageRequiredForStaticOrScalarDifferentialRoute = false",
