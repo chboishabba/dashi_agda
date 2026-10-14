@@ -10,6 +10,7 @@ import DASHI.Economics.AICoreWeaveOSINTCapacityVintage20261014Exact as Capacity
 import DASHI.Economics.AICoreWeaveCapacityHardwareAgeNonDescent20261014Exact as NonDescent
 import DASHI.Economics.AICoreWeaveGPUGenerationCadence20261014Exact as Generation
 import DASHI.Economics.AICoreWeaveBookStockYouth20261014Exact as Book
+import DASHI.Economics.AICoreWeaveVintageWall20261014Exact as Wall
 
 record FleetAgeOSINTStatus : Set where
   constructor fleet-age-osint-status
@@ -20,6 +21,7 @@ record FleetAgeOSINTStatus : Set where
     bookStockYouthProxyPaid : Bool
     frontierGenerationCadencePaid : Bool
     capacityToHardwareNonDescentPaid : Bool
+    selected36To48MonthVintageWallPaid : Bool
     exactSerialHardwareAgeDistributionPaid : Bool
     actualRefreshRetirementHistoryPaid : Bool
     growthVsReplacementCapitalisationPaid : Bool
@@ -29,7 +31,7 @@ open FleetAgeOSINTStatus public
 
 coreWeaveFleetAgeOSINTStatus : FleetAgeOSINTStatus
 coreWeaveFleetAgeOSINTStatus = fleet-age-osint-status
-  true true true true true true
+  true true true true true true true
   false false false false
 
 capacityVintageIsNowPaid :
@@ -70,6 +72,10 @@ bookStockProxyDoesNotCloseHardwareAge :
   Book.identifiesHardwareAge Book.coreWeaveBookStockYouth ≡ false
 bookStockProxyDoesNotCloseHardwareAge = refl
 
+selectedVintageWallShareIs5666Bp :
+  Wall.selectedCumulativeShareBp Wall.coreWeaveSelectedVintageWall ≡ 5666
+selectedVintageWallShareIs5666Bp = Wall.selectedShareBpIs5666
+
 boundary : String
 boundary =
-  "The CoreWeave installed-age residual is materially reduced rather than simply unknown. Public power disclosures pay a capacity-vintage distribution with a selected June-2026 median in the 6-12 month band and an interval-weighted mean of about 7.48-14.70 months. Filing book-stock growth independently indicates a rapidly expanding/young capital base, while public H100/H200/GB200/GB300/Rubin milestones pay a frontier-generation cadence much shorter than the 72-month accounting life. Canonical non-descent proves these observers still cannot recover exact hardware age when in-place refresh is possible. Serial-level age, actual retirements/refreshes, replacement-vs-growth capitalisation and realised economic-obsolescence cash burden remain empirical."
+  "The CoreWeave installed-age residual is materially reduced rather than simply unknown. Public power disclosures pay a capacity-vintage distribution with a selected June-2026 median in the 6-12 month band and an interval-weighted mean of about 7.48-14.70 months. Filing book-stock growth independently indicates a rapidly expanding/young capital base, while public H100/H200/GB200/GB300/Rubin milestones pay a frontier-generation cadence much shorter than the 72-month accounting life. Composing the capacity vintages with the separately sourced 36-48 month lender horizon yields a dated exposure wall: 56.66 percent of the selected 1.5GW floor has entered the 36-month window by end-2028, and the same share has entered the 48-month window by end-2029. Canonical non-descent still blocks exact hardware-age recovery when in-place refresh is possible. Serial-level age, actual retirements/refreshes, replacement-vs-growth capitalisation and realised economic-obsolescence cash burden remain empirical."
