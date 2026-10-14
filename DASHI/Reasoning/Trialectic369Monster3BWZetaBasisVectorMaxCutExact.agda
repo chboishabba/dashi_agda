@@ -3,53 +3,38 @@ module DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact where
 ------------------------------------------------------------------------
 -- MONSTER 3B W_zeta: CORRECTED BASIS/VECTOR SAME-OBJECT MAX-CUT
 --
--- The finite 729 x 90 model is a BASIS-LABEL model.  The literal Moonshine-VOA
--- zeta eigenspace is a state/vector carrier.  Therefore the remaining Monster
--- recognition must not be stated as a bijection between every literal vector
--- and the 65,610 finite basis labels.
---
--- The live cut is representation-native on BOTH factors:
+-- The finite 729 x 90 model is a BASIS-LABEL model. The literal Moonshine-VOA
+-- zeta eigenspace is a state/vector carrier. The live cut is representation-
+-- native on both factors:
 --
 --   H_zeta : explicit 729-dimensional finite-Heisenberg Schrodinger module;
 --   S_zeta : Hom_E(H_zeta,W_zeta), with source-native 6.Suz multiplicity
 --            structure and candidate degree split 12 + 78 = 90.
 --
--- Existing owners pay:
---
---   * selected literal 3B / certified central-zeta kernel same-element data;
---   * explicit Schrodinger carrier and full finite-Heisenberg action;
---   * constructive 3^6 search and unconditional Schrodinger irreducibility;
---   * fixed-phase nonlinear CHARACTER-SIGNATURE uniqueness;
---   * a source-written companion-Lean theorem that equal characters determine
---     simple finite-group representations without algebraic closure;
---   * the canonical linear multiplicity target S_zeta = Hom_E(H_zeta,W_zeta);
---   * Barraclough--Wilson's source-native extension/tensor/induction route for
---     a 6.Suz multiplicity representation, with candidate families 12a/b and
---     78a/b and pair-level Monster-occurrence matchers already written.
+-- Existing owners pay the selected literal 3B/kernel same-element data,
+-- explicit Schrodinger action, unconditional Schrodinger irreducibility,
+-- fixed-phase nonlinear character-signature uniqueness, a source-written Lean
+-- equal-character/simple-representation theorem, the canonical Hom-space target
+-- and the Barraclough--Wilson 6.Suz extension/tensor/induction route.
 --
 -- Proof-relevance correction:
+-- historical fields of type `Set` name proposition TYPES, not proofs. The
+-- hardening owner adds explicit inhabitants. The H_zeta character-transport
+-- compiler then shows that once one actual selected constituent and the literal
+-- Schrodinger model are packaged in the same representation theory with the
+-- same fixed phase/character data, the equivariant isomorphism supplies both
+-- recognition and action-intertwiner witnesses.
 --
--- Several historical recognition records used fields of type `Set` to name
--- outstanding obligations.  Such fields store proposition TYPES, not proofs
--- inhabiting those propositions.  The new hardening owner wraps those records
--- with explicit inhabitants.  Consequently no terminal same-object promotion
--- may count a typed obligation as paid recognition.
+-- Remaining work is therefore proof-relevant same-object input:
 --
--- What remains is correspondingly narrow:
---
---   (1) construct the proof-relevant SAME W_zeta|E irreducible constituent
---       attachment, then transport one selected constituent and the explicit
---       Schrodinger action through the finite-character theorem;
---   (2) execute the existing GAP/CTblLib candidate + main/quotient matchers,
---       then orient the individual zeta member of the 12a/b and 78a/b pairs;
---   (3) instantiate H_zeta x S_zeta -> W_zeta evaluation/recovery on the SAME
---       literal W_zeta vector carrier with an inhabited linear intertwiner;
---   (4) only for coordinate consumers, choose a genuine basis of S_zeta and
---       identify it with Fin 90, then prove tensor-basis translation/modulation
---       compatibility with proof-relevant witnesses.
---
--- Thus Fin 90 is no longer the primary multiplicity object: it is a possible
--- basis coordinate on the actual 6.Suz-structured Hom-space representation.
+--   (1) SAME W_zeta|E irreducible constituent decomposition;
+--   (2) concrete Schrodinger/actual-constituent representation + character
+--       transport into the common theory consumed by the compiler;
+--   (3) execute the existing GAP/CTblLib 12a/b + 78a/b pair matchers and orient
+--       the individual zeta members;
+--   (4) instantiate H_zeta x S_zeta -> W_zeta evaluation/recovery with an
+--       inhabited linear intertwiner;
+--   (5) only for coordinate consumers, choose a proof-relevant Fin90 basis.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -66,22 +51,20 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerHilbertLiftExact as Schrodinger
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact as Irreducibility
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact as CharacterLean
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZetaCompiler
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 import DASHI.Wikimedia.IbrahimMonster3BSuzukiMultiplicityCharacterSnowballExact as Suzuki
 import DASHI.Wikimedia.IbrahimMonster3BSuzukiMainQuotientSameObjectSnowballExact as SuzukiSame
 
 ------------------------------------------------------------------------
--- 1. Corrected source package.  This still names the historical objects; the
---    paid wrapper below is the terminal promotion gate.
+-- 1. Corrected historical source package plus proof-relevant terminal wrapper.
 ------------------------------------------------------------------------
 
 record CorrectedWZetaRecognitionSource (Monster K : Set) : Setω where
   field
     kernelAttachment : Kernel.Actual3BKernelSameElementAttachment Monster K
-
     schrodingerIsActualHZeta : HZeta.SchrodingerIsActualHZeta
-
     multiplicityHomSpace : Hom.ActualLinearMultiplicityHomSpace
 
     literalWZetaIsHomChosenCarrier :
@@ -101,14 +84,6 @@ record CorrectedWZetaRecognitionSource (Monster K : Set) : Setω where
         multiplicityHomSpace
 
 open CorrectedWZetaRecognitionSource public
-
-------------------------------------------------------------------------
--- 1a. Proof-relevant terminal wrapper.
---
--- This is intentionally stronger than merely inhabiting the historical source
--- record: every Set-valued promotion obligation needed downstream must itself
--- have an inhabitant.
-------------------------------------------------------------------------
 
 record PaidCorrectedWZetaRecognitionSource
     (Monster K : Set)
@@ -137,7 +112,7 @@ record PaidCorrectedWZetaRecognitionSource
 open PaidCorrectedWZetaRecognitionSource public
 
 ------------------------------------------------------------------------
--- 2. Paid donors are exposed without promoting them to the missing source.
+-- 2. Paid donors / compilers exposed without promotion.
 ------------------------------------------------------------------------
 
 barracloughWilsonBoundary : BW.Boundary
@@ -155,6 +130,9 @@ characterLeanBoundary = CharacterLean.canonicalBoundary
 hardeningBoundary : Hardening.Boundary
 hardeningBoundary = Hardening.canonicalBoundary
 
+hZetaCompilerBoundary : HZetaCompiler.Boundary
+hZetaCompilerBoundary = HZetaCompiler.canonicalBoundary
+
 linearHomFrontier : Hom.LinearMultiplicityHomFrontier
 linearHomFrontier = Hom.currentLinearMultiplicityHomFrontier
 
@@ -165,7 +143,7 @@ suzukiSameObjectFrontier : SuzukiSame.SuzukiMainSameObjectFrontier
 suzukiSameObjectFrontier = SuzukiSame.currentSuzukiMainSameObjectFrontier
 
 ------------------------------------------------------------------------
--- 3. Attribution / WrongType firewalls for the recut.
+-- 3. WrongType / attribution firewalls.
 ------------------------------------------------------------------------
 
 data NinetyIsotypyCreatesMultiplicityBasis : Set where
@@ -215,7 +193,7 @@ homDimensionDoesNotCreateNormalizerAction ()
 
 nextResidual : String
 nextResidual =
-  "Schrodinger irreducibility is closed and generic equal-character simple-representation isomorphism is source-written in companion Lean. The live mathematical input is now proof-relevant same-object data, not another theorem name: construct the SAME W_zeta|E irreducible constituent decomposition with selected phase and per-constituent character witnesses; package one actual constituent and the explicit Schrodinger module in the common representation layer; then obtain the H_zeta equivariant isomorphism. On multiplicity, execute the existing CTblLib 6.Suz candidate and Suzuki-main-quotient matchers, orient the individual zeta members, instantiate S_zeta = Hom_E(H_zeta,W_zeta) with an inhabited linear evaluation intertwiner, and only then choose a proof-relevant Fin90 basis if a coordinate consumer requires it. A Set-valued obligation type is not a paid witness."
+  "Schrodinger irreducibility is closed. The fixed-phase H_zeta character-transport compiler is now source-written and turns concrete common-theory representation/character bindings directly into a proof-relevant equivariant H_zeta recognition. Therefore the dominant Monster input is the SAME W_zeta|E irreducible constituent decomposition plus concrete Schrodinger/actual-constituent representation transport; do not add another abstract uniqueness theorem. On multiplicity, execute the existing CTblLib 6.Suz candidate and Suzuki-main-quotient matchers, orient the individual zeta members, instantiate S_zeta = Hom_E(H_zeta,W_zeta) with an inhabited linear evaluation intertwiner, and only then choose a proof-relevant Fin90 basis if a coordinate consumer requires it. A Set-valued obligation type is not a paid witness."
 
 record CorrectedWZetaMaxCutBoundary : Set where
   constructor corrected-w-zeta-maxcut-boundary
@@ -231,6 +209,8 @@ record CorrectedWZetaMaxCutBoundary : Set where
     genericEqualCharacterSimpleIsoLeanSourceWritten : Bool
     genericEqualCharacterSimpleIsoKernelObserved : Bool
     monsterFDRepCharacterTransportPaid : Bool
+    hZetaCharacterTransportCompilerAvailable : Bool
+    concreteHZetaCharacterTransportPaid : Bool
     proofRelevantRecognitionGateAvailable : Bool
     legacyTypedObligationCountsAsPaidRecognition : Bool
     proofRelevantHZetaWitnessPaid : Bool
@@ -270,6 +250,8 @@ canonicalBoundary =
     true
     (CharacterLean.leanEqualCharacterSimpleIsoSourceWritten CharacterLean.canonicalBoundary)
     (CharacterLean.leanExactHeadKernelReceiptObserved CharacterLean.canonicalBoundary)
+    false
+    (HZetaCompiler.paidHZetaRecognitionCompilerAvailable HZetaCompiler.canonicalBoundary)
     false
     true
     false
