@@ -17,6 +17,7 @@ module DASHI.Moonshine.OggSSP2BUniqueInvariant24RangeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 
 record UniqueInvariant24TargetReceipt : Set₁ where
   constructor unique-invariant-24-target-receipt
