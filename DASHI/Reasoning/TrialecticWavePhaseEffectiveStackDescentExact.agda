@@ -13,6 +13,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Foundations.Base369TriTruthField as Tri
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
@@ -197,7 +198,7 @@ realizationsUniqueUpToTypedIso left right =
     forwardHom =
       Phase.global-phase-hom
         (SetEffective.realizationsObservationallyUnique left right)
-        DASHI.Foundations.Base369TriTruthField.triZero
+        Tri.triZero
 
 ------------------------------------------------------------------------
 -- 5. Promotion boundary for the distinguished triadic cover.
