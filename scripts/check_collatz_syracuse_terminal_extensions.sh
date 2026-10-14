@@ -10,7 +10,10 @@ files=(
   DASHI/Analysis/CollatzSyracuseResidualFrontierStrictnessGuardValidation.agda
   DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
   DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionValidation.agda
+  DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+  DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionValidation.agda
   DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+  DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutValidation.agda
 )
 
 for file in "${files[@]}"; do
@@ -32,10 +35,18 @@ grep -q 'allHorizonFromInversePoint' DASHI/Analysis/CollatzSyracuseResidualInver
 grep -q 'infiniteSurvivorRefutesStrictDescent' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
 grep -q 'universalStoppingExcludesInfiniteSurvivor' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
 grep -q 'noInverseLimitAutomaticallyConstructsDescent : Nat' DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionExact.agda
+grep -q 'finiteBarrierExtractsDescent' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'finiteBarrierToLiteralStrictDescentSource' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'noInfiniteSurvivorGivesDoubleNegatedDescent' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'record NatSearchMarkov' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'natSearchMarkovOwnedUnconditionally : Nat' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'trailingZeroCertificatePaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'residualFrontierStrictnessGuardPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'residualInverseLimitObstructionPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'finiteSurvivorBarrierExtractionPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'noInfiniteSurvivorDoubleNegationPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'strictnessGuardDoesNotCreateUnboundedness' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'inverseLimitAbsenceDoesNotConstructDescent' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'markovNotSilentlyOwned' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 
 echo 'collatz syracuse terminal extension static checks: PASS'
