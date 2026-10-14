@@ -2,6 +2,7 @@ module DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantValidation where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Data.Rational.Base using (0ℚ)
 
 import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
@@ -21,7 +22,7 @@ aZeroForcesJExpressionZero = J.aZeroShortJExpressionIsZero
 jExpressionDenominatorCertifiedNonzero :
   (curve : Elliptic.ShortWeierstrassCurve) →
   J.shortJDenominator curve ≡ 0ℚ →
-  Data.Empty.⊥
+  ⊥
 jExpressionDenominatorCertifiedNonzero = J.shortJDenominatorNonzero
 
 noCMTheoryManufactured :
