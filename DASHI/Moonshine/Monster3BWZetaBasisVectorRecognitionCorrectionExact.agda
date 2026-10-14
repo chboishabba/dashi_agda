@@ -32,7 +32,8 @@ module DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Data.Product using (proj₁)
+open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin)
 open import DASHI.Algebra.Trit using (Trit)
 
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -146,7 +147,6 @@ open WZetaBasisVectorRecognition public
 data FiniteBasisLabelsAreAllVOAStates : Set where
 data NinetyFoldIsotypyChoosesFin90Basis : Set where
 data LinearHomEvaluationChoosesFiniteBasis : Set where
-
 data Cardinality65610CreatesLiteralSectorBijection : Set where
 
 finiteBasisLabelsDoNotBecomeAllVOAStates :
