@@ -11,8 +11,10 @@ on:
       - 'DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityPinnedLocalCTerminalToStaticExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda'
       - 'tests/test_antigravity_r136_static_differential_reuse.py'
+      - 'tests/test_antigravity_pinned_local_c_static_promotion.py'
       - 'tests/test_antigravity_differential_tt_donor_maxcut.py'
       - 'tests/test_antigravity_si_calibration_donor_maxcut.py'
       - 'tests/test_antigravity_post_normalization_reuse_rollup.py'
@@ -38,6 +40,7 @@ jobs:
           python -m pip install pytest
           pytest -q \
             tests/test_antigravity_r136_static_differential_reuse.py \
+            tests/test_antigravity_pinned_local_c_static_promotion.py \
             tests/test_antigravity_differential_tt_donor_maxcut.py \
             tests/test_antigravity_si_calibration_donor_maxcut.py \
             tests/test_antigravity_post_normalization_reuse_rollup.py \
@@ -47,6 +50,7 @@ jobs:
         run: |
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPinnedLocalCTerminalToStaticExact.agda
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda
