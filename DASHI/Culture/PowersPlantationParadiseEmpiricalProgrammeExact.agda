@@ -9,14 +9,10 @@ import DASHI.Core.BenefitBurdenExternalityDistributionExact as Distribution
 import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact as Responsibility
 import DASHI.Biology.CausalEffectEstimandExact as Causal
 import DASHI.Culture.PowersPlantationParadiseSourceAtlasExact as Atlas
+import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
 
 ------------------------------------------------------------------------
 -- POWERS EMPIRICAL PROGRAMME
---
--- This owner turns the remaining empirical frontier into typed same-object
--- acquisition obligations.  It distinguishes what is already supported by a
--- named source surface from what still needs primary-record, distributional or
--- causal-identification payment.
 ------------------------------------------------------------------------
 
 data EmpiricalEvidenceClass : Set where
@@ -51,12 +47,15 @@ minetteCareerStatusReceipt =
   same-object-empirical-receipt
     "Minette, named performer of colour in Saint-Domingue theatre history"
     "Port-au-Prince public theatre and documented Saint-Domingue performance circuit"
-    "first public-stage appearance reported for 13 February 1781; career evidence in the 1780s"
-    "Prest's peer-reviewed reconstruction documents Minette in solo stage roles and treats her theatre success as permitting some social mobility while not insulating her from racial prejudice; the receipt preserves Prest's source-mediated claim and does not manufacture a population law or causal treatment effect"
+    "late-1780 concert appearance; retrospective 13 February 1781 theatre debut; full theatrical benefit performance 6 March 1781; career evidence through the 1780s"
+    "Prest's peer-reviewed reconstruction documents Minette in solo stage roles and treats her theatre success as permitting some social mobility while not insulating her from racial prejudice; finer chronology is retained in the Minette microhistory owner rather than collapsing distinct public-appearance predicates"
     Atlas.prestRacialScaleSource
     peerReviewedSecondaryEvidence
     false refl
     false refl
+
+minetteMicrohistoryBoundary : Minette.MinetteMicrohistoryBoundary
+minetteMicrohistoryBoundary = Minette.canonicalMinetteMicrohistoryBoundary
 
 ------------------------------------------------------------------------
 -- 2. Racialised venue geometry.
@@ -119,8 +118,7 @@ theatreCorpusProvenanceReceipt =
     false refl
 
 ------------------------------------------------------------------------
--- 5. Reuse the generic distribution and responsibility boundaries rather than
---    deriving who benefited or bore burden from theatre success alone.
+-- 5. Reuse the generic distribution and responsibility boundaries.
 ------------------------------------------------------------------------
 
 benefitBurdenBoundary : Distribution.BenefitBurdenExternalityBoundary
@@ -161,8 +159,8 @@ primaryCorpusSaturationLeaf =
     "Primary performance-corpus saturation"
     "Which exact performance events, venues, participants, advertisements and status terms can be recovered from surviving Saint-Domingue announcements?"
     sourceSurfaceLocated
-    "St Andrews identifies the local-newspaper announcement corpus and exposes a performance database route; BnF identifies Affiches Americaines as a primary archival corpus"
-    "extract and root exact event-level rows against issue/date/page or archival image coordinates, beginning with Minette, Lise, Saint-Martin, Port-au-Prince seating/venue notices and named performers of colour"
+    "St Andrews identifies the local-newspaper announcement corpus and exposes a performance database route; BnF identifies Affiches Americaines as a primary archival corpus; the Minette microhistory now carries several issue/date/archive coordinates"
+    "extract and root exact event-level rows against issue/date/page or archival image coordinates, beginning with the benefit performances, Lise, Saint-Martin, Port-au-Prince seating/venue notices and named performers of colour"
     zero
 
 namedPerformerStatusLeaf : EmpiricalProgrammeLeaf
@@ -171,8 +169,8 @@ namedPerformerStatusLeaf =
     "Named performer status trajectory"
     "How did documented stage participation, public naming, economic opportunity, legal status and social treatment co-vary for named performers such as Minette?"
     partialSameObjectPaid
-    "peer-reviewed same-object evidence pays a named career and a bounded social-mobility/prejudice contrast"
-    "recover the exact Affiches Americaines notices, Moreau de Saint-Mery passages, litigation record and any surviving contracts/payment records on the same performer"
+    "peer-reviewed career/status evidence plus exact benefit-performance, legal-dispute and archival-coordinate surfaces now exist for Minette"
+    "inspect the underlying Affiches, Moreau, ANOM parish/civil and court records directly and construct comparable same-object trajectories for Lise and other identified performers"
     (suc zero)
 
 venueSeatingAccessLeaf : EmpiricalProgrammeLeaf
@@ -211,7 +209,7 @@ causalMobilityLeaf =
     "Causal theatre-to-status trajectory"
     "What causal effect, if any, did professional theatrical participation have on a performer's social, legal or economic standing trajectory?"
     causalIdentificationRequired
-    "chronology and same-object career evidence establish association and sequence only"
+    "chronology, career, benefit-performance and legal same-object evidence establish association, mechanism surfaces and sequence only"
     "declare population/intervention/comparator/outcome/horizon, select an admissible identification family, and obtain same-object comparison evidence before estimating any causal effect"
     (suc (suc (suc (suc zero))))
 
@@ -230,9 +228,9 @@ compensationPaymentLeaf =
   empirical-programme-leaf
     "Performer compensation and payment completion"
     "What compensation was promised, earned and actually paid to named performers of different legal/racial status?"
-    unpaidSameObject
-    "current public evidence establishes careers and commercial production but does not yet pay a same-object promised-versus-settled compensation ledger"
-    "recover contracts, benefit-night receipts, payroll/account-book fragments, litigation and creditor notices; keep promised amount distinct from settlement proof"
+    partialSameObjectPaid
+    "Minette is documented in self-organised benefit performances, establishing a performer-specific revenue mechanism; this does not pay contractual entitlement, gross receipts, expenses, net proceeds or settlement"
+    "recover contracts, benefit-night account/box-office receipts, payroll/account-book fragments, litigation and creditor records; keep benefit performance, promised amount, net proceeds and actual settlement distinct"
     (suc (suc zero))
 
 ------------------------------------------------------------------------
@@ -261,7 +259,7 @@ theatreParticipationMobilityCausalDemand =
     "an explicitly justified counterfactual or matched lower-exposure trajectory"
     "social, legal and economic standing over time"
     "declared 1780s career horizon with source-matched observation points"
-    "requires a case-specific identification design; observed success, chronology and public naming are insufficient"
+    "requires a case-specific identification design; observed success, chronology, benefit mechanism and public naming are insufficient"
 
 data ObservationalEvidenceIdentifiesCausalEffect : Set where
 
@@ -285,6 +283,9 @@ record PowersEmpiricalProgrammeBoundary : Set where
     venueBusinessSameObjectEvidencePartiallyPaid : Bool
     venueBusinessSameObjectEvidencePartiallyPaidIsTrue :
       venueBusinessSameObjectEvidencePartiallyPaid ≡ true
+    performerBenefitMechanismPartiallyPaid : Bool
+    performerBenefitMechanismPartiallyPaidIsTrue :
+      performerBenefitMechanismPartiallyPaid ≡ true
     primaryCorpusAcquisitionRouteIdentified : Bool
     primaryCorpusAcquisitionRouteIdentifiedIsTrue :
       primaryCorpusAcquisitionRouteIdentified ≡ true
@@ -304,6 +305,7 @@ record PowersEmpiricalProgrammeBoundary : Set where
 canonicalPowersEmpiricalProgrammeBoundary : PowersEmpiricalProgrammeBoundary
 canonicalPowersEmpiricalProgrammeBoundary =
   powers-empirical-programme-boundary
+    true refl
     true refl
     true refl
     true refl
