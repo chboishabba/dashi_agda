@@ -2,6 +2,7 @@ module DASHI.Biology.PersuasionTransmissionTruthBoundaryRegression where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Core.Prelude using (⊥)
 
 import DASHI.Biology.PersuasionTransmissionTruthBoundaryExact as X
 
@@ -20,3 +21,12 @@ truthIntentRepresented = refl
 realWorldUniversalizationBlocked :
   X.controlledExperimentUniversalizesToPlatforms X.canonicalTruthTransmissionBoundary ≡ false
 realWorldUniversalizationBlocked = refl
+
+fayOutcomeSourceBound :
+  X.AdmittedPersuasionSource X.fay2026ControlledExperimentOutcome X.fay2026Source
+fayOutcomeSourceBound = X.fay2026PaysControlledExperimentOutcome
+
+unadmittedSourceCannotPayFayOutcome :
+  {source : X.Source.AttributedSource} →
+  X.AdmittedPersuasionSource X.unadmittedPersuasionOutcome source → ⊥
+unadmittedSourceCannotPayFayOutcome ()
