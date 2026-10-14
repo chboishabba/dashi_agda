@@ -5,7 +5,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact as Hot
-import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as Terminal
 
 ------------------------------------------------------------------------
 -- CANONICAL QUALIFICATION REVERSE-PAYMENT WELD
@@ -77,7 +76,6 @@ lifeReliabilityObligation =
 record RocketdyneQualificationReverseFrontier : Set where
   constructor rocketdyne-qualification-reverse-frontier
   field
-    sourcePhysicalFrontier : Terminal.TerminalPhysicalFrontier
     processRoute : Hot.QualificationReverseObligation
     thermalHistory : Hot.QualificationReverseObligation
     geometryRevision : Hot.QualificationReverseObligation
@@ -92,7 +90,6 @@ record RocketdyneQualificationReverseFrontier : Set where
 rocketdyneQualificationReverseFrontier : RocketdyneQualificationReverseFrontier
 rocketdyneQualificationReverseFrontier =
   rocketdyne-qualification-reverse-frontier
-    Terminal.currentTerminalFrontier
     processRouteObligation
     thermalHistoryObligation
     geometryRevisionObligation
