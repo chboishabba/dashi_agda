@@ -51,7 +51,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismClosureExact
 import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismClosureValidation
 import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismFixesUnitExact
 
--- Albert derivation/F4 lane.
+-- Albert derivation/F4 lane and terminal form diagnostics.
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact
 import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawValidation
@@ -63,12 +63,15 @@ import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceipt
 import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact
 import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact
 import DASHI.Mathematics.Algebra.RationalAlbertF4RootDecompositionDiagnosticExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessValidation
 import DASHI.Mathematics.Algebra.RationalAlbertF4CurrentMaxCutExact
 
 -- Same-carrier exceptional-group targets and sourced classification boundary.
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact
 import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryValidation
 import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
