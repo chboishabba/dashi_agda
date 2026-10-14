@@ -19,6 +19,9 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldE
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesGovernanceMaxCutExact as FriendlyjordiesRootedMaxCut
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as FriendlyjordiesWorldEvidence
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExact as FriendlyjordiesCausalIdentification
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as FriendlyjordiesReviewedWorldEvidence
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewBindingExact as FriendlyjordiesReviewBinding
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedCausalIdentificationExact as FriendlyjordiesReviewedCausalIdentification
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -111,3 +114,18 @@ selectedFriendlyjordiesCausalIdentificationBoundary :
   FriendlyjordiesCausalIdentification.FriendlyjordiesCausalIdentificationBoundary
 selectedFriendlyjordiesCausalIdentificationBoundary =
   FriendlyjordiesCausalIdentification.canonicalFriendlyjordiesCausalIdentificationBoundary
+
+selectedFriendlyjordiesReviewedWorldEvidenceBoundary :
+  FriendlyjordiesReviewedWorldEvidence.FriendlyjordiesReviewedWorldEvidenceBoundary
+selectedFriendlyjordiesReviewedWorldEvidenceBoundary =
+  FriendlyjordiesReviewedWorldEvidence.canonicalFriendlyjordiesReviewedWorldEvidenceBoundary
+
+selectedFriendlyjordiesReviewBindingBoundary :
+  FriendlyjordiesReviewBinding.FriendlyjordiesReviewBindingBoundary
+selectedFriendlyjordiesReviewBindingBoundary =
+  FriendlyjordiesReviewBinding.canonicalFriendlyjordiesReviewBindingBoundary
+
+selectedFriendlyjordiesReviewedCausalIdentificationBoundary :
+  FriendlyjordiesReviewedCausalIdentification.FriendlyjordiesReviewedCausalIdentificationBoundary
+selectedFriendlyjordiesReviewedCausalIdentificationBoundary =
+  FriendlyjordiesReviewedCausalIdentification.canonicalFriendlyjordiesReviewedCausalIdentificationBoundary
