@@ -11,6 +11,7 @@ import DASHI.Economics.AIFinancingReflexivityExact as AIReflexive
 import DASHI.Economics.NvidiaCoreWeaveReflexiveInvestment2026Exact as Nvidia
 import DASHI.Cognition.EpsteinFinanceTechParetoRoundExact as EpsteinFinance
 import DASHI.Cognition.EpsteinTechClaimVerificationExact as EpsteinTech
+import DASHI.Cognition.EpsteinSouthernTrustInvestmentFlowAtlas20261014Exact as ValarFlow
 import DASHI.Cognition.BannonFaragePalmerAutomatedInfluenceReceiptsExact as BannonPalmer
 import DASHI.Cognition.NickLandProvocationOverreactionPopulistTransferExact as Acceleration
 import DASHI.Law.SensibLawAzureSpringfieldInducedGasDemandExact as WoogarooGas
@@ -21,6 +22,12 @@ import DASHI.Law.SensibLawWoogarooSwanbankDataCentreDevelopmentPressureExact as 
 --
 -- Primary object: the Epstein/Bannon/Trump-world finance/influence/technology
 -- graph and its intersections with current AI infrastructure capital.
+--
+-- 2026-10-14 promotion: Southern Trust is now directly paid as an LP in Valar
+-- Global Funds II and III by LP statements/capital calls/bank wires.  The old
+-- "PPM present but investment unpaid" state is superseded.  Valar remains
+-- distinct from Palantir: Peter Thiel's role in both does not make a Valar LP
+-- interest an investment in or control of Palantir.
 --
 -- Woogaroo/Springfield is imported only as a local comparator for induced
 -- demand, infrastructure lock-in and externalised development pressure. It is
@@ -57,11 +64,18 @@ epsteinAIPromotionalReceipt = ai-historical-receipt
   "Released Epstein-file material claims Epstein support for Marvin Minsky, Seth Lloyd, Ben Goertzel, Hanson Robotics/Joscha Bach and AI organisations including OpenCog Foundation and Humanity+. This is evidence that Epstein represented himself as an AI patron/network broker; each named support relationship still requires independent payment where not otherwise sourced."
   false true
 
-valarThielPalantirReceipt : AIHistoricalReceipt
-valarThielPalantirReceipt = ai-historical-receipt
+valarDirectInvestmentReceipt : AIHistoricalReceipt
+valarDirectInvestmentReceipt = ai-historical-receipt
   valar
-  "Valar Global Fund III private placement memorandum present in released Epstein corpus"
-  "The memorandum identifies Peter Thiel as a Valar founding partner, notes his status as Palantir co-founder/chairman, preserves advisory/veto/economic rights, and describes Valar's technology-investment strategy. Possession of this memorandum in the Epstein corpus does not by itself prove an Epstein investment in the fund; investment/payment must be sourced separately."
+  "DOJ EFTA Valar LP statements/capital calls and Deutsche Bank wire records"
+  "Southern Trust Company is directly documented as limited partner in Valar Global Fund II and III. Primary fund records identify USD 15m and USD 25m commitments respectively (USD 40m combined); by 30 June 2018 Fund II showed USD 14.55m paid-in and Fund III USD 21m paid-in. A Deutsche Bank record supplies a USD 2.5m 4 April 2017 Fund III capital-call wire omitted from the selected 2019 transaction chart, and later calls close Fund III to its USD 25m commitment. This pays a real Epstein-controlled-entity -> Valar investment edge."
+  true true
+
+valarThielPalantirContextReceipt : AIHistoricalReceipt
+valarThielPalantirContextReceipt = ai-historical-receipt
+  valar
+  "Valar Global Fund III PPM plus direct LP records"
+  "The Valar PPM identifies Peter Thiel as a Valar founding partner and notes his Palantir co-founder/chairman role. Combined with the now-paid Southern Trust LP position this establishes Epstein-controlled capital invested in a Thiel-co-founded technology fund. It does not establish that Southern Trust invested in Palantir, obtained Palantir governance rights, or controlled Thiel."
   true true
 
 blackRockDirectEpsteinResidual : AIHistoricalReceipt
@@ -74,8 +88,8 @@ blackRockDirectEpsteinResidual = ai-historical-receipt
 leonBlackApolloDistinctReceipt : AIHistoricalReceipt
 leonBlackApolloDistinctReceipt = ai-historical-receipt
   leonBlackApollo
-  "Apollo independent investigation / congressional and released-file record"
-  "Leon Black/Apollo is a separately evidenced Epstein-finance relationship and must not be conflated with BlackRock because of the surname/brand similarity."
+  "Apollo Dechert report / congressional and released-file record"
+  "Leon Black's paid personal advisory relationship with Epstein is directly evidenced. Separately, Epstein-controlled Financial Trust bought Apollo public shares in the 2011 IPO and Epstein invested passively in non-Apollo side vehicles formed by Apollo executives. Apollo says it did not retain Epstein and he did not invest in Apollo-managed funds. Those scopes remain distinct."
   true true
 
 ------------------------------------------------------------------------
@@ -118,18 +132,22 @@ record ReflexiveSystemBoundary : Set where
     circularFinancingImpliesFraud : Bool
     sharedAIExposureImpliesCoordination : Bool
     historicalEpsteinAIInterestImpliesControlOfModernAIBoom : Bool
+    valarInvestmentImpliesPalantirInvestment : Bool
+    valarInvestmentImpliesThielControl : Bool
     blackRockAIInvestmentImpliesEpsteinRelationship : Bool
     leonBlackRelationshipImpliesBlackRockRelationship : Bool
 open ReflexiveSystemBoundary public
 
 canonicalReflexiveSystemBoundary : ReflexiveSystemBoundary
 canonicalReflexiveSystemBoundary = reflexive-system-boundary
-  true true true true false false false false false false
+  true true true true false false false false false false false false
 
 data InstalledCapacityImpliesTerminalDemand : Set where
 data CircularityImpliesFraud : Set where
 data SharedAIExposureImpliesCoordination : Set where
 data EpsteinAIHistoryImpliesModernControl : Set where
+data ValarImpliesPalantirInvestment : Set where
+data ValarImpliesThielControl : Set where
 data BlackRockAICapitalImpliesEpsteinTie : Set where
 data LeonBlackImpliesBlackRock : Set where
 
@@ -144,6 +162,12 @@ sharedAIExposureDoesNotCreateCoordination ()
 
 epsteinAIHistoryDoesNotCreateModernControl : EpsteinAIHistoryImpliesModernControl → ⊥
 epsteinAIHistoryDoesNotCreateModernControl ()
+
+valarDoesNotCreatePalantirInvestment : ValarImpliesPalantirInvestment → ⊥
+valarDoesNotCreatePalantirInvestment ()
+
+valarDoesNotCreateThielControl : ValarImpliesThielControl → ⊥
+valarDoesNotCreateThielControl ()
 
 blackRockAICapitalDoesNotCreateEpsteinTie : BlackRockAICapitalImpliesEpsteinTie → ⊥
 blackRockAICapitalDoesNotCreateEpsteinTie ()
@@ -187,14 +211,14 @@ canonicalLocalComparatorBoundary : LocalComparatorBoundary
 canonicalLocalComparatorBoundary = local-comparator-boundary true true true false false
 
 ------------------------------------------------------------------------
--- Pareto acquisition cuts.
+-- Pareto acquisition cuts after direct Valar investment closure.
 ------------------------------------------------------------------------
 
 data AICapitalDebt : Set where
   directEpsteinBlackRockReceipt : AICapitalDebt
   epsteinAIInvestmentPaymentMap : AICapitalDebt
-  valarEpsteinInvestmentReceipt : AICapitalDebt
   thielPalantirEpsteinSameObjectMap : AICapitalDebt
+  valarLPTermsAndExit : AICapitalDebt
   blackRockAIExposureMap : AICapitalDebt
   aiCircularFinanceCounterpartyGraph : AICapitalDebt
   bannonCrisisCapitalBeneficiaryMap : AICapitalDebt
@@ -211,18 +235,18 @@ open AICapitalAcquisition public
 
 canonicalAICapitalAcquisition : List AICapitalAcquisition
 canonicalAICapitalAcquisition =
-  ai-capital-acquisition epsteinAIInvestmentPaymentMap 100 true
+  ai-capital-acquisition thielPalantirEpsteinSameObjectMap 100 true
+    "Now that Southern Trust->Valar is paid, resolve the next actual objects: Valar portfolio companies, Thiel/Epstein direct correspondence and introductions, any Palantir-specific investment/proposal, and governance rights. Do not use Thiel as a transitive identity edge."
+  ∷ ai-capital-acquisition epsteinAIInvestmentPaymentMap 100 true
     "Resolve Epstein's claimed AI patronage project-by-project into payment, introduction, board/advisory, meeting and downstream institutional effects; distinguish Epstein promotional copy from independent receipts."
-  ∷ ai-capital-acquisition thielPalantirEpsteinSameObjectMap 100 true
-    "Resolve Epstein-Thiel-Valar-Palantir edges separately: direct meetings/correspondence, investments, introductions, fund interests and any operational consequences."
+  ∷ ai-capital-acquisition valarLPTermsAndExit 100 true
+    "Acquire Southern Trust's Valar II/III subscription agreements, side letters, complete capital-call ledger, distributions, governance/LP rights and estate disposition. Separate commitments, paid capital, capital-account valuation and realised proceeds."
   ∷ ai-capital-acquisition aiCircularFinanceCounterpartyGraph 99 true
     "Map current AI capital loops counterparty-by-counterparty: equity, debt, leases, guarantees, vendor financing, purchase commitments and revenue recognition; identify who captures first-, second- and third-order gains if terminal demand underperforms."
   ∷ ai-capital-acquisition blackRockAIExposureMap 98 true
     "Map BlackRock's current AI-infrastructure exposures across Nvidia financing platforms, hyperscaler/datacentre joint ventures, debt vehicles and portfolio holdings without treating ordinary index ownership as operational control."
   ∷ ai-capital-acquisition directEpsteinBlackRockReceipt 96 true
     "Search for a direct Epstein-BlackRock/Larry Fink same-object relationship: meetings, correspondence, money, introductions or mandates. Do not promote corpus mentions or market-news clipping into relationship."
-  ∷ ai-capital-acquisition valarEpsteinInvestmentReceipt 96 true
-    "Determine whether Epstein actually invested in Valar vehicles represented in the released corpus; possession of a PPM is not payment."
   ∷ ai-capital-acquisition bannonCrisisCapitalBeneficiaryMap 95 true
     "Cross Bannon/Epstein crisis-restructuring discussion with concrete positions, counterparties, political actions and later beneficiaries; crisis preference or rhetoric does not prove crisis creation."
   ∷ ai-capital-acquisition woogarooComparatorReuseOnly 70 false
