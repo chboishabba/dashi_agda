@@ -72,4 +72,5 @@ import DASHI.Economics.AIMaxCutReconciliation20261012Exact
 import DASHI.Economics.AIMaxCutReconciliation20261012FinalExact
 import DASHI.Economics.AIMaxCutCrossPollinationReconciliation20261012Exact
 import DASHI.Economics.AICapitalRoadmapMaxCut20261012Exact
+import DASHI.Economics.AICapitalRoadmapMaxCut20261014Exact
 import DASHI.Economics.AIEntanglementSourceWrittenChecks2026
