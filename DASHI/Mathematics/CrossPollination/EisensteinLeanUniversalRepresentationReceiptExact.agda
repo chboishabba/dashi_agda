@@ -18,7 +18,7 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationR
 --
 -- and the re(s)>1 analytic factorisation
 --
---   eisensteinGeometricLSeries_eq_zeta_mul_chi
+--   eisensteinGeometricLSeries_factorization
 --
 -- on dashi_lean4 PR #69.  Agda may retain this as a typed provenance/donor
 -- receipt while continuing to require an independent Agda proof object before
@@ -56,7 +56,7 @@ leanEisensteinUniversalReceipt =
     "Integration/EisensteinGeometricRepresentationFormulaExact.lean"
     "geometricNormShell_eq_signedDivisorShell"
     "Integration/EisensteinDirichletSeriesExact.lean"
-    "eisensteinGeometricLSeries_eq_zeta_mul_chi"
+    "eisensteinGeometricLSeries_factorization"
     "SOURCE-WRITTEN / MATHLIB-API-AUDITED / KERNEL-PENDING"
     Attribution.leanFormalReconstruction
 
