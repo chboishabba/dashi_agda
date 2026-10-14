@@ -2,11 +2,6 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardModeSumExact where
 
 ------------------------------------------------------------------------
 -- DISJOINT FINITE-MODE COMPOSITION FOR CODED STANDARD MACHINES
---
--- The final self-quoting target needs generator/candidate/opposite control modes
--- inside one literal CodedFiniteStandardTM.  This owner supplies the reusable
--- finite-program plumbing: fragments sharing one symbol alphabet can be summed
--- into disjoint Fin state regions while preserving dispatch uniqueness.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -20,10 +15,6 @@ import Data.Fin.Base as Fin
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 
-------------------------------------------------------------------------
--- Canonical disjoint embeddings Fin m -> Fin (m+n), Fin n -> Fin (m+n).
-------------------------------------------------------------------------
-
 embedLeft : ∀ {m n : Nat} → Fin.Fin m → Fin.Fin (m + n)
 embedLeft {zero} ()
 embedLeft {suc m} {n} Fin.zero = Fin.zero
@@ -33,28 +24,26 @@ embedRight : ∀ {m n : Nat} → Fin.Fin n → Fin.Fin (m + n)
 embedRight {zero} {n} x = x
 embedRight {suc m} {n} x = Fin.suc (embedRight {m} {n} x)
 
+finSucInjective : ∀ {n} {a b : Fin.Fin n} → Fin.suc a ≡ Fin.suc b → a ≡ b
+finSucInjective refl = refl
+
 embedLeftInjective :
   ∀ {m n : Nat} {x y : Fin.Fin m} →
   embedLeft {m} {n} x ≡ embedLeft y → x ≡ y
+embedLeftInjective {zero} {x = ()}
 embedLeftInjective {suc m} {n} {Fin.zero} {Fin.zero} equality = refl
 embedLeftInjective {suc m} {n} {Fin.zero} {Fin.suc y} ()
 embedLeftInjective {suc m} {n} {Fin.suc x} {Fin.zero} ()
 embedLeftInjective {suc m} {n} {Fin.suc x} {Fin.suc y} equality
-  with embedLeftInjective {m} {n} {x} {y} (sucInjective equality)
+  with embedLeftInjective {m} {n} {x} {y} (finSucInjective equality)
 ... | refl = refl
-  where
-    sucInjective : ∀ {a b} → Fin.suc a ≡ Fin.suc b → a ≡ b
-    sucInjective refl = refl
 
 embedRightInjective :
   ∀ {m n : Nat} {x y : Fin.Fin n} →
   embedRight {m} {n} x ≡ embedRight y → x ≡ y
 embedRightInjective {zero} equality = equality
 embedRightInjective {suc m} {n} equality =
-  embedRightInjective {m} {n} (sucInjective equality)
-  where
-    sucInjective : ∀ {a b} → Fin.suc a ≡ Fin.suc b → a ≡ b
-    sucInjective refl = refl
+  embedRightInjective {m} {n} (finSucInjective equality)
 
 embedLeftRightDisjoint :
   ∀ {m n : Nat}
@@ -64,10 +53,7 @@ embedLeftRightDisjoint :
 embedLeftRightDisjoint {zero} () y equality
 embedLeftRightDisjoint {suc m} {n} Fin.zero y ()
 embedLeftRightDisjoint {suc m} {n} (Fin.suc x) y equality =
-  embedLeftRightDisjoint {m} {n} x y (sucInjective equality)
-  where
-    sucInjective : ∀ {a b} → Fin.suc a ≡ Fin.suc b → a ≡ b
-    sucInjective refl = refl
+  embedLeftRightDisjoint {m} {n} x y (finSucInjective equality)
 
 ------------------------------------------------------------------------
 -- State-only reindexing of literal tape rules.
@@ -115,6 +101,7 @@ mappedRulePreimage :
   Σ (Local.TapeRule (Fin.Fin m) (Fin.Fin symbols)) λ original →
     Σ (Local.RuleOccurs original rules) λ _ →
       wanted ≡ mapStateRule stateMap original
+mappedRulePreimage stateMap {rules = []} ()
 mappedRulePreimage stateMap {rules = rule ∷ rest} Local.ruleHere =
   rule , Local.ruleHere , refl
 mappedRulePreimage stateMap {rules = rule ∷ rest} (Local.ruleThere occurs)
@@ -123,17 +110,22 @@ mappedRulePreimage stateMap {rules = rule ∷ rest} (Local.ruleThere occurs)
   original , Local.ruleThere originalOccurs , exact
 
 ------------------------------------------------------------------------
--- Append-membership view.
+-- Append-membership view specialized to tape rules.
 ------------------------------------------------------------------------
 
 append : ∀ {A : Set} → List A → List A → List A
 append [] right = right
 append (x ∷ left) right = x ∷ append left right
 
-data AppendOccurrence {A : Set} (x : A)
-    (left right : List A) : Set where
-  occursLeft : Local.RuleOccurs x left → AppendOccurrence x left right
-  occursRight : Local.RuleOccurs x right → AppendOccurrence x left right
+data AppendOccurrence {State Symbol : Set}
+    (rule : Local.TapeRule State Symbol)
+    (left right : List (Local.TapeRule State Symbol)) : Set where
+  occursLeft :
+    Local.RuleOccurs rule left →
+    AppendOccurrence rule left right
+  occursRight :
+    Local.RuleOccurs rule right →
+    AppendOccurrence rule left right
 
 splitAppendOccurrence :
   ∀ {State Symbol : Set}
@@ -191,12 +183,8 @@ sumFragments {symbols} left right = record
   { stateCount = stateCount left + stateCount right
   ; rules =
       append
-        (mapRules
-          (embedLeft {stateCount left} {stateCount right})
-          (rules left))
-        (mapRules
-          (embedRight {stateCount left} {stateCount right})
-          (rules right))
+        (mapRules leftMap (rules left))
+        (mapRules rightMap (rules right))
   ; dispatchUnique = combinedUnique
   }
   where
@@ -289,6 +277,6 @@ closeFragment {symbols} fragment blank initial accepting = record
 -- CONSEQUENCE
 --
 -- Generator/candidate/opposite control can now be assembled as genuine disjoint
--- finite rule-table regions before adding the explicit call/return bridge rules.
--- No Agda-level semantic primitive is introduced by this composition step.
+-- finite rule-table regions before adding explicit call/return bridge rules.  No
+-- Agda-level semantic primitive is introduced by this composition step.
 ------------------------------------------------------------------------
