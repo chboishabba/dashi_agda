@@ -10,7 +10,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Foundations.Base369TriTruthField as Tri
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
+import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
 import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact as Presheaf
+import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
 import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact as Phase
 import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact as Stack
 
@@ -81,10 +83,6 @@ horizontalCompose :
     (Phase.composeHom k g)
 horizontalCompose beta alpha = cong₂ Tri.triAdd beta alpha
 
-------------------------------------------------------------------------
--- Restriction preserves every phase 2-cell.
-------------------------------------------------------------------------
-
 restrict2Cell :
   ∀ {U V : Site.RelObj}
     (arrow : Site.RelHom U V)
@@ -92,17 +90,13 @@ restrict2Cell :
     {f g : Phase.FibreHom x y} →
   Phase2Cell f g →
   Phase2Cell (Phase.restrictHom arrow f) (Phase.restrictHom arrow g)
-restrict2Cell arrow alpha =
+restrict2Cell arrow {f = f} {g = g} alpha =
   trans
-    (Phase.restrictHomPreservesPhase arrow _)
-    (trans alpha (sym (Phase.restrictHomPreservesPhase arrow _)))
-
-------------------------------------------------------------------------
--- General triadic phase cocycle from arbitrary compatible local morphisms.
-------------------------------------------------------------------------
+    (Phase.restrictHomPreservesPhase arrow f)
+    (trans alpha (sym (Phase.restrictHomPreservesPhase arrow g)))
 
 phaseBCequalsCA :
-  ∀ {source target}
+  ∀ {source target : RelSheaf.TriadicLocals Cell.CellDialectic}
     (morphisms : Stack.TriadicPhaseMorphisms source target) →
   Phase.equalityPhase (Stack.morphismBC morphisms)
   ≡
@@ -113,7 +107,7 @@ phaseBCequalsCA morphisms =
     (Stack.phaseABequalsCA morphisms)
 
 triadicPhaseCycleCloses :
-  ∀ {source target}
+  ∀ {source target : RelSheaf.TriadicLocals Cell.CellDialectic}
     (morphisms : Stack.TriadicPhaseMorphisms source target) →
   Tri.triAdd
     (Phase.equalityPhase (Stack.morphismAB morphisms))
