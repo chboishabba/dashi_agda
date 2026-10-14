@@ -15,12 +15,14 @@ module DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact where
 --   -> generic fixed-word affine threshold certificates
 --   -> arbitrary trailing-even certificate extension
 --   -> residual word-certificate coverage -> strict-descent frontier
---   -> strictness guard rejecting globally bounded pseudo-frontiers.
+--   -> strictness guard rejecting globally bounded pseudo-frontiers
+--   -> coherent all-horizon survivor histories as inverse-limit obstructions.
 --
 -- The residual producer is still theorem-strength.  Finite computation,
--- density decay, spectral mixing, affine cocycles, or word surgery do not by
--- themselves inhabit it.  They may only feed a same-object residual/frontier
--- producer whose unboundedness is proved separately.
+-- density decay, spectral mixing, affine cocycles, word surgery, or merely
+-- negating an inverse-limit history do not by themselves inhabit it.  They may
+-- only feed a same-object residual/frontier producer whose unboundedness and
+-- constructive descent extraction are proved separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -36,6 +38,7 @@ import DASHI.Analysis.CollatzSyracuseUniformWordDescentCertificateExact as WordC
 import DASHI.Analysis.CollatzSyracuseTrailingZeroCertificateExact as ZeroCert
 import DASHI.Analysis.CollatzSyracuseResidualWordCertificateFrontierExact as WordFrontier
 import DASHI.Analysis.CollatzSyracuseResidualFrontierStrictnessGuardExact as Strictness
+import DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact as Inverse
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionCocycleExact as Cocycle
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionSwapExact as Swap
 import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact as Universal
@@ -138,6 +141,12 @@ residualFrontierStrictnessGuardPaid :
   ≡ 1
 residualFrontierStrictnessGuardPaid = refl
 
+residualInverseLimitObstructionPaid :
+  Inverse.ResidualInverseLimitBoundary.infiniteHistoryRefutesStrictDescentPaid
+    Inverse.canonicalResidualInverseLimitBoundary
+  ≡ 1
+residualInverseLimitObstructionPaid = refl
+
 correctionCocyclePaid :
   Cocycle.AffineCorrectionCocycleBoundary.exactCorrectionCocycleOwned
     Cocycle.canonicalAffineCorrectionCocycleBoundary
@@ -185,3 +194,9 @@ strictnessGuardDoesNotCreateUnboundedness :
     Strictness.canonicalResidualFrontierStrictnessBoundary
   ≡ 0
 strictnessGuardDoesNotCreateUnboundedness = refl
+
+inverseLimitAbsenceDoesNotConstructDescent :
+  Inverse.ResidualInverseLimitBoundary.noInverseLimitAutomaticallyConstructsDescent
+    Inverse.canonicalResidualInverseLimitBoundary
+  ≡ 0
+inverseLimitAbsenceDoesNotConstructDescent = refl
