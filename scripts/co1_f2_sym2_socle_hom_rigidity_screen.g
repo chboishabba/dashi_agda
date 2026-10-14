@@ -27,14 +27,16 @@ if G24=fail or G274=fail or Size(G24)<>expectedCo1Order or Size(G274)<>expectedC
   Error("failed to construct Co1 24/274 modules");
 fi;
 
-# Align the 274 module with the same abstract Co1 generator pair as the 24
-# module before using module-Hom computations.
-iso274:=IsomorphismGroups(G24,G274);
-if iso274=fail then Error("could not align Co1 24 and 274 representations"); fi;
+# AtlasRep standard modules use the same standard-generator convention.  Do
+# NOT call IsomorphismGroups on faithful Co1 matrix groups here: that search is
+# unnecessary and can dominate the runtime.
 gens24:=GeneratorsOfGroup(G24);
-mat274:=List(gens24,g -> Image(iso274,g));
+gens274:=GeneratorsOfGroup(G274);
+if Length(gens24)<>Length(gens274) then
+  Error("Co1 standard modules expose different generator counts");
+fi;
 M24:=GModuleByMats(gens24,F);
-M274:=GModuleByMats(mat274,F);
+M274:=GModuleByMats(gens274,F);
 
 # Trivial module on the same generator count.
 trivMats:=List(gens24,g -> ImmutableMatrix(F,[[One(F)]]));
