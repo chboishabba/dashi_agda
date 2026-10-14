@@ -19,10 +19,15 @@ import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
 -- not money, person-hours, probabilities, evidence strength, effect sizes, or
 -- source-author claims.
 --
--- This calibration was recomputed after acquiring the official current Porto
--- Alegre three-hour COP meeting observation.  That acquisition narrows the
--- comparator-duration gap but leaves attendance, interface capacity, delegate /
--- representative reportback burden and richer Mondragon workload unresolved.
+-- This calibration was recomputed after acquiring:
+--   * an official current Porto Alegre three-hour COP meeting observation;
+--   * an official current Porto cycle participation-scale observation;
+--   * official MONDRAGON corporation-wide Congress/governing-body/training and
+--     monthly-governance coordinates;
+--   * a provenance split between corporation/cooperative governance and the
+--     separate Mondragon University faculty Social Council cadence.
+-- Remaining comparator gain is therefore concentrated in attendance/duration,
+-- boundary-demand, interface-capacity/backlog, and matched reportback workload.
 ------------------------------------------------------------------------
 
 data AcquisitionRequirement : Set where
@@ -46,8 +51,8 @@ comparatorWorkloadCell =
   Pareto.requirement-candidate
     enrichComparatorInterfaceWorkload
     true true true true
-    3 7
-    "after paying one current Porto three-hour meeting observation, acquire remaining Porto/Mondragon attendance, boundary, reportback, capacity and workload observations with institutional-version provenance"
+    3 6
+    "after current Porto and MONDRAGON source gains, acquire remaining attendance/duration, boundary-demand, interface-capacity/backlog and matched reportback workload with institutional-version provenance"
 
 secondaryExpansionCell : Pareto.RequirementCandidate AcquisitionRequirement
 secondaryExpansionCell =
@@ -59,7 +64,7 @@ secondaryExpansionCell =
 
 -- The holdout remains important for prospective validation but is not required
 -- for the CURRENT acquisition consumer because the development gate has not
--- earned its use.  Exclusion here is protocol preservation, not a claim that
+-- earned its use. Exclusion here is protocol preservation, not a claim that
 -- the held-out source lacks authority.
 protectedHoldoutCell : Pareto.RequirementCandidate AcquisitionRequirement
 protectedHoldoutCell =
@@ -70,7 +75,7 @@ protectedHoldoutCell =
     "prospective GA holdout: retained but excluded from current acquisition frontier until the development/promotion gate earns access"
 
 -- Target-pilot outcomes belong to a later direct-study route rather than the
--- present historical/comparator SOURCE-acquisition consumer.  Their acquisition
+-- present historical/comparator SOURCE-acquisition consumer. Their acquisition
 -- also requires independently paid participant/admissibility receipts.
 targetPilotDataCell : Pareto.RequirementCandidate AcquisitionRequirement
 targetPilotDataCell =
