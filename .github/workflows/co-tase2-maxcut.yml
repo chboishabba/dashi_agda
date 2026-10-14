@@ -55,6 +55,7 @@ jobs:
           scripts/co_tase2_wannier90_spectral.py
           scripts/co_tase2_wannier90_spectral_selftest.py
           scripts/co_tase2_kz_final_state_calibration.py
+          scripts/co_tase2_kz_final_state_calibration_selftest.py
           scripts/co_tase2_dataset_download_probe.py
 
       - name: Verify literal BNS and Bloch sewing receipt
@@ -88,6 +89,9 @@ jobs:
 
       - name: Verify Wannier90 spectral producer format
         run: python scripts/co_tase2_wannier90_spectral_selftest.py
+
+      - name: Verify ARPES kz calibration arithmetic
+        run: python scripts/co_tase2_kz_final_state_calibration_selftest.py
 
       - name: Check published material producer contract
         run: |
