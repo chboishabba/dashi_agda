@@ -21,6 +21,8 @@ import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkTransitionPreservatio
 import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedStructuralSimulationExact
 open import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedRunSimulationExact
   using (simulateLinkedExactRun; simulateCodedCandidateExecution; appendLinkedCandidatePhase)
+open import DASHI.Mathematics.Complexity.CodedFiniteStandardReturnLinkFreshnessExact
+  using (residentCandidateRuleBlocksReturnLink)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionPredicateCodeExact
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptancePredicateCodeExact
@@ -76,7 +78,11 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 --      to exact whole runs with IDENTICAL step count and specializes it to the
 --      actual `CodedStandardPolynomialDecider.execution` witness;
 --    * exact prefix ; candidate ; suffix runs compose with the literal additive
---      phase clock, so the candidate middle phase is no longer a separate C-wall.
+--      phase clock, so the candidate middle phase is no longer a separate C-wall;
+--    * safe return links CANNOT share a dispatch key with a resident candidate
+--      rule.  Hence a T-step `finish` that still has an outgoing resident rule
+--      cannot be used as a direct return boundary without a clock/phase wrapper
+--      or a halting-normal-form transformation.
 --
 -- 5. STREAMED COOK EVALUATOR DEFUNCTIONALISATION
 --    * transition placed predicates are finite `(time,column)` codes;
@@ -89,35 +95,26 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 --    * actual transition and acceptance kernels are specialized to those fixed
 --      tables.
 --
--- Generator runtime semantics are therefore reducible to:
---
---   unary index payload
---   + finite coordinate code
---   + fixed finite row/Bool tables
---   + Nat/index/cursor arithmetic
---   + finite clause/token output state.
---
 -- LIVE CONSTRUCTIVE WALL AFTER THIS CUT:
 --
 -- A. build a literal CodedFiniteStandardTM generator fragment implementing the
 --    remaining first-order unary-index/table-scan/cursor operations, with exact
 --    simulation and explicit compiler coefficient;
 --
--- B. assemble that fragment with the ACTUAL coded polynomial candidate via the
---    proved mode-sum + safe-link machinery and add the finite opposite suffix;
+-- B. assemble that fragment with the ACTUAL coded polynomial candidate and a
+--    finite opposite suffix using the paid mode-sum/link machinery;
 --
--- C. construct only the concrete generator call/return and suffix runs; the
---    linked candidate middle run and three-phase run composition are now paid;
+-- C. provide a genuine phase boundary after exactly the candidate's T steps.
+--    The candidate middle run/composition are paid, but StandardFiniteCandidateCode
+--    does NOT assert that `finish` is halting.  Direct safe return is therefore
+--    available only at a fresh dispatch key; otherwise use a clock/phase wrapper
+--    or normalize the candidate to an exact-T quiescent endpoint;
 --
--- D. close prefix + candidate + suffix target time to the SAME exact T used in
---    the target's own guarded Cook formula;
+-- D. construct generator call/return and suffix runs and close their total time
+--    with the candidate run to the SAME exact T used in the own Cook formula;
 --
 -- E. only then reuse the already-paid Cook iff / opposite endpoint path to
 --    obtain SATDecisionFailure under the hypothesised polynomial SAT candidate.
---
--- Finite self-specialising/Kleene syntax remains useful for syntax-level
--- self-reference only.  Client-supplied primitive semantics is not a substitute
--- for A and is not used to launder this compiler obligation.
 --
 -- SOURCE STATUS: source-written/static-audited only.  No exact-head Agda kernel
 -- receipt is asserted here, and no Clay-level completion is claimed.
