@@ -25,6 +25,14 @@ genericCharacterIsoLeanKernelPending :
   Cut.genericEqualCharacterSimpleIsoKernelObserved Cut.canonicalBoundary ≡ false
 genericCharacterIsoLeanKernelPending = refl
 
+hZetaCharacterTransportCompilerNowAvailable :
+  Cut.hZetaCharacterTransportCompilerAvailable Cut.canonicalBoundary ≡ true
+hZetaCharacterTransportCompilerNowAvailable = refl
+
+concreteHZetaCharacterTransportStillOpen :
+  Cut.concreteHZetaCharacterTransportPaid Cut.canonicalBoundary ≡ false
+concreteHZetaCharacterTransportStillOpen = refl
+
 proofRelevantRecognitionGateAvailable :
   Cut.proofRelevantRecognitionGateAvailable Cut.canonicalBoundary ≡ true
 proofRelevantRecognitionGateAvailable = refl
