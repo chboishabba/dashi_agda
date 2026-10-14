@@ -77,6 +77,55 @@ generic-admissibility-does-not-create-typed-symmetry =
   Finite.GenericCPOAdmissibilityCreatesTypedSymmetryIsFalse
     Finite.canonicalFiniteQuantumProducerStatus
 
+coordinate-born-nonnegative-source-written :
+  Finite.CoordinateBornProbabilityNonnegativeSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+coordinate-born-nonnegative-source-written =
+  Finite.CoordinateBornProbabilityNonnegativeSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+coordinate-born-normalized-source-written :
+  Finite.CoordinateBornProbabilityNormalizedSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+coordinate-born-normalized-source-written =
+  Finite.CoordinateBornProbabilityNormalizedSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+finite-von-neumann-entropy-source-written :
+  Finite.FiniteVonNeumannEntropySourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+finite-von-neumann-entropy-source-written =
+  Finite.FiniteVonNeumannEntropySourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+bipartite-mutual-information-source-written :
+  Finite.BipartiteMutualInformationSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+bipartite-mutual-information-source-written =
+  Finite.BipartiteMutualInformationSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+ccm-distance-ansatz-does-not-create-metric :
+  Finite.CCMDistanceAnsatzCreatesMetric
+    Finite.canonicalFiniteQuantumProducerStatus ≡ false
+ccm-distance-ansatz-does-not-create-metric =
+  Finite.CCMDistanceAnsatzCreatesMetricIsFalse
+    Finite.canonicalFiniteQuantumProducerStatus
+
+finite-schwinger-minimizer-source-written :
+  Finite.FiniteNonemptySchwingerMinimizerSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+finite-schwinger-minimizer-source-written =
+  Finite.FiniteNonemptySchwingerMinimizerSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+finite-minimizer-does-not-create-uniqueness :
+  Finite.FiniteSchwingerMinimizerCreatesUniqueness
+    Finite.canonicalFiniteQuantumProducerStatus ≡ false
+finite-minimizer-does-not-create-uniqueness =
+  Finite.FiniteSchwingerMinimizerCreatesUniquenessIsFalse
+    Finite.canonicalFiniteQuantumProducerStatus
+
 arbitrary-selected-cpo-eigenbasis-remains-open :
   Finite.ArbitrarySelectedCPOEigenbasisPaid
     Finite.canonicalFiniteQuantumProducerStatus ≡ false
