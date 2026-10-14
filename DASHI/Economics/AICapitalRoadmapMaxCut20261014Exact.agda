@@ -13,6 +13,9 @@ import DASHI.Economics.AICerebrasProviderCostComposition20261014Exact as Cost
 import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Payer
 import DASHI.Economics.AICoreWeaveAggregateCustomerCashRealisation20261014Exact as Cash
 import DASHI.Economics.AICoreWeaveCapexDecompositionNonidentifiability20261012Exact as Replacement
+import DASHI.Economics.AICoreWeaveFleetAgeOSINTMaxCut20261014Exact as Fleet
+import DASHI.Economics.AICoreWeaveThreeClockCapitalRecovery20261014Exact as ThreeClock
+import DASHI.Economics.AICoreWeaveNamedFacilityDelivery20261014Exact as Facility
 import DASHI.Economics.AIAustraliaRegulatoryCostMeasurementBoundary20261014Exact as Regulation
 import DASHI.Economics.AIPolicyReviewedCausalAttribution20261014Exact as Review
 import DASHI.Economics.AIFinancingConditionsPanel20261014Exact as Financing
@@ -55,14 +58,20 @@ providerMarginalServingCostEmpirical = roadmap-lane
 terminalPayerGraphPartial : RoadmapLane
 terminalPayerGraphPartial = roadmap-lane
   "terminal payer graph" partial
-  "aggregate customer-cash collection is now source-paid; Microsoft and Meta external-cash-capacity edges, OpenAI contract/revenue-scale edge and CoreWeave contract-finance mechanism remain separately typed"
+  "aggregate customer-cash collection is source-paid; Microsoft and Meta external-cash-capacity edges, OpenAI contract/revenue-scale edge and CoreWeave contract-finance mechanism remain separately typed"
   "named-payer cash attribution, OpenAI external/operating cash provenance, realised named contract flows, anonymous current top-customer identities and residual financing/counterparty edges" false
 
 replacementEconomicsEmpirical : RoadmapLane
 replacementEconomicsEmpirical = roadmap-lane
   "replacement and economic-obsolescence burden" empirical
-  "aggregate-capex non-identifiability theorem, accounting life and lender-horizon mismatch"
-  "installed asset ages, acquisition vintages, actual retirements/refreshes, economic-life calibration, residual values and growth-vs-replacement capitalisation" false
+  "aggregate-capex non-identifiability; 72-month accounting life vs 36-48 month generic lender horizon; public capacity-vintage distribution with June-2026 median 6-12 months and mean interval about 7.48-14.70 months; book-stock youth proxy; H100/H200/GB200/GB300/Rubin frontier cadence; selected 36/48-month vintage exposure wall; named Core Scientific delivery layer"
+  "serial-level GPU ages/generation shares, actual in-place refresh and retirement history, same-object economic-life/residual calibration, and growth-vs-replacement capitalisation" false
+
+threeClockCapitalRecoveryPartial : RoadmapLane
+threeClockCapitalRecoveryPartial = roadmap-lane
+  "asset/contract/financing clock alignment" partial
+  "selected ordering: generic lender GPU collateral horizon 36-48 months < CoreWeave weighted-average committed-contract duration about 60 months < 72-month accounting useful life; through-2028 calendar also contains 42.23 percent of June-2026 debt principal and 56.66 percent of selected capacity in the 36-month vintage window"
+  "same-asset mapping among debt facilities, customer contracts and hardware cohorts; realised contract cash; actual refinance/refresh decisions and economic retirement dates" false
 
 regulatoryBurdenEmpirical : RoadmapLane
 regulatoryBurdenEmpirical = roadmap-lane
@@ -118,6 +127,20 @@ aggregateCustomerCashNowPaid = Cash.aggregateCustomerCashReceiptObserved
 payerGraphStillNotExhaustive : Payer.exhaustiveTerminalGraphClosed Payer.coreWeavePayerSaturation ≡ false
 payerGraphStillNotExhaustive = refl
 
+capacityVintageDistributionNowPaid : Fleet.capacityVintageDistributionPaid Fleet.coreWeaveFleetAgeOSINTStatus ≡ true
+capacityVintageDistributionNowPaid = Fleet.capacityVintageIsNowPaid
+
+serialHardwareAgeStillOpen : Fleet.exactSerialHardwareAgeDistributionPaid Fleet.coreWeaveFleetAgeOSINTStatus ≡ false
+serialHardwareAgeStillOpen = Fleet.exactHardwareAgeStillOpen
+
+threeClockOrderingPaid :
+  (ThreeClock.lenderBelowContract ThreeClock.coreWeaveThreeClockWedge ≡ true) ×
+  (ThreeClock.contractBelowBook ThreeClock.coreWeaveThreeClockWedge ≡ true)
+threeClockOrderingPaid = ThreeClock.selectedClockOrderingPaid
+
+namedFacilityBillingFloorPaid : Facility.namedBillingFloorMW Facility.coreScientificCoreWeaveDelivery ≡ 430
+namedFacilityBillingFloorPaid = Facility.namedBillingFloorMWIs430
+
 regulatoryCostVectorStillOpen : Regulation.harmonisedRealisedCostVectorPaid Regulation.currentRegulatoryCostMeasurementStatus ≡ false
 regulatoryCostVectorStillOpen = Regulation.harmonisedRealisedCostVectorPaidIsFalse
 
@@ -143,4 +166,4 @@ stackLayerCoexistencePaid = Stack.landlordRecognisedRevenueAndTenantNegativeSpre
 
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. Aggregate CoreWeave customer-cash collection is paid while named-payer independence remains partial. Owned-node TCO now includes quote-basis acquisition/depreciation coordinates but still lacks resource-matched financing/PUE/operations/residual/refresh data. Provider-side economics now includes actual Cerebras segment cost of revenue, data-center/depreciation/pass-through cost drivers and utilization sensitivity, leaving pure-inference workload allocation and marginal token cost as the irreducible serving-cost residual. Financing conditions include heterogeneous issuance events and a 37 bp reported AI-linked versus broader-IG cross-sectional spread premium, without causal/default/bubble promotion. Replacement economics and realised regulatory-burden causality remain empirical. SensibLaw exact review follows causal identification. Dedicated exact-head workflows exist; successful receipts remain the integration target."
+  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave fleet-age OSINT now pays capacity-vintage intervals, independent book-stock youth and frontier-generation cadence, plus a selected 36/48-month exposure calendar; canonical non-descent retains exact hardware age/refresh as a separate residual. A three-clock wedge now separates lender collateral horizon, customer-contract duration and accounting life, and records their calendar overlap with the debt maturity wall without identifying the same financed assets. Aggregate customer cash is paid while named-payer independence remains partial. Provider-side economics includes actual Cerebras segment costs but pure-inference marginal cost remains open. Replacement cash burden, same-asset clock mapping and realised regulatory-burden causality remain empirical."
