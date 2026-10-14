@@ -17,6 +17,8 @@ on:
       - 'DASHI/Philosophy/Everything.agda'
       - 'DASHI/Foundations/Relational*.agda'
       - 'DASHI/Foundations/Trialectic*.agda'
+      - 'DASHI/Foundations/ExceptionalAlbertFreudenthalResidualExact.agda'
+      - 'DASHI/Promotion/ClassicalFieldObligations.agda'
       - 'DASHI/Metric/AgreementUltrametric.agda'
       - 'DASHI/Combinatorics/TextileBraidRewriteGroupoidExact.agda'
       - 'DASHI/Cognition/RecursiveFibreTower.agda'
@@ -49,6 +51,8 @@ on:
       - 'DASHI/Philosophy/Everything.agda'
       - 'DASHI/Foundations/Relational*.agda'
       - 'DASHI/Foundations/Trialectic*.agda'
+      - 'DASHI/Foundations/ExceptionalAlbertFreudenthalResidualExact.agda'
+      - 'DASHI/Promotion/ClassicalFieldObligations.agda'
       - 'DASHI/Metric/AgreementUltrametric.agda'
       - 'DASHI/Combinatorics/TextileBraidRewriteGroupoidExact.agda'
       - 'DASHI/Cognition/RecursiveFibreTower.agda'
@@ -105,6 +109,7 @@ jobs:
             targets=(
               DASHI/EverythingRelationalTrialecticHyperfabric.agda
               DASHI/Philosophy/NonginRoadmapClosureValidation.agda
+              DASHI/Philosophy/NonginExtendedRoadmapValidation.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-relational-trialectic-check.log 2>&1
