@@ -74,11 +74,13 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- inverter, and the preferred depth-8 primitive center-preserving inertia word.
 -- The last one pays the selected GF(729) punctured 728-cycle and an exact
 -- center-preserving Heisenberg lift at executable receipt level.  Barraclough-
--- Wilson independently source-align the degree-729 extraspecial irreducibles,
--- while a dedicated firewall prevents their Section-6 count of 90 additional
--- characters from being confused with the repository's model Fin90 carrier.
--- The actual phase-resolved Monster state and Fin-90 multiplicity action remain
--- the live same-object representation seam.
+-- Wilson independently source-align the degree-729 extraspecial irreducibles.
+--
+-- The newest correction keeps the literal VOA W_zeta VECTOR carrier distinct
+-- from its finite X6 x Fin90 BASIS-LABEL surface.  The remaining same-object
+-- seam is therefore factorized into actual H_zeta recognition, actual
+-- H_zeta x Hom_E(H_zeta,W_zeta) evaluation, and a representation-native Fin90
+-- basis of the Hom space; ninety-fold isotypy does not choose that basis.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
@@ -92,7 +94,11 @@ import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptExact
 import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptValidation
 import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptExact
 import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptValidation
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
+import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
+import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
 
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
 import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation
