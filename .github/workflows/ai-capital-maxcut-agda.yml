@@ -30,5 +30,6 @@ jobs:
             DASHI/Economics/AICoreWeaveAggregateCustomerCashRealisation20261014Exact.agda \
             DASHI/Economics/AIInfrastructureStackReturnNonCollapse20261014Exact.agda \
             DASHI/Economics/AIPolicyReviewedCausalAttribution20261014Exact.agda \
+            DASHI/Economics/AIMI355XAcquisitionDepreciationEnvelope20261014Exact.agda \
             DASHI/Economics/AICapitalRoadmapMaxCut20261014Exact.agda \
             DASHI/Economics/AIEntanglementEverything2026.agda
