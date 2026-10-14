@@ -34,6 +34,7 @@ open import Relation.Nullary using (¬_)
 open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 import Data.Nat.Properties as NatP
 
+import DASHI.Foundations.StratifiedResolutionTowerExact as Tower
 import DASHI.NumberTheory.Collatz.SyracuseExact as Syracuse
 import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact as Stop
 import DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact as Inverse
@@ -237,6 +238,17 @@ NoInfiniteSurvivor : Syracuse.PositiveNat → Set
 NoInfiniteSurvivor x =
   ¬ Inverse.AllHorizonSurvivor x
 
+NoInverseSurvivorPoint : Syracuse.PositiveNat → Set₁
+NoInverseSurvivorPoint x =
+  ¬ Tower.InverseLimitPoint (Inverse.survivorTower x)
+
+noInversePointToNoInfiniteSurvivor :
+  {x : Syracuse.PositiveNat} →
+  NoInverseSurvivorPoint x →
+  NoInfiniteSurvivor x
+noInversePointToNoInfiniteSurvivor noPoint allHorizon =
+  noPoint (Inverse.inversePointFromAllHorizon allHorizon)
+
 noInfiniteSurvivorGivesDoubleNegatedDescent :
   {x : Syracuse.PositiveNat} →
   NoInfiniteSurvivor x →
@@ -245,6 +257,14 @@ noInfiniteSurvivorGivesDoubleNegatedDescent noInfinite noDescent =
   noInfinite
     (λ m descent →
       noDescent (m , descent))
+
+noInversePointGivesDoubleNegatedDescent :
+  {x : Syracuse.PositiveNat} →
+  NoInverseSurvivorPoint x →
+  ¬ (¬ Stop.StrictDescentWithin x)
+noInversePointGivesDoubleNegatedDescent noPoint =
+  noInfiniteSurvivorGivesDoubleNegatedDescent
+    (noInversePointToNoInfiniteSurvivor noPoint)
 
 ------------------------------------------------------------------------
 -- Exact logical extraction socket.
@@ -273,6 +293,17 @@ strictDescentFromNoInfiniteWithMarkov markov {x} noInfinite =
     markov
     (decDescentAt x)
     (noInfiniteSurvivorGivesDoubleNegatedDescent noInfinite)
+
+strictDescentFromNoInversePointWithMarkov :
+  NatSearchMarkov →
+  {x : Syracuse.PositiveNat} →
+  NoInverseSurvivorPoint x →
+  Stop.StrictDescentWithin x
+strictDescentFromNoInversePointWithMarkov markov {x} noPoint =
+  extract
+    markov
+    (decDescentAt x)
+    (noInversePointGivesDoubleNegatedDescent noPoint)
 
 record NoInfiniteSurvivorSource : Set₁ where
   field
@@ -309,6 +340,7 @@ record ConstructiveSurvivorExtractionBoundary : Set where
     strictDescentBuildsFiniteBarrierPaid : Nat
     finiteBarrierStrictDescentEquivalencePaid : Nat
     noInfiniteGivesDoubleNegatedDescentPaid : Nat
+    noInversePointGivesDoubleNegatedDescentPaid : Nat
     explicitNatSearchMarkovSocketPaid : Nat
     markovConditionalExtractionCompilerPaid : Nat
 
@@ -321,5 +353,5 @@ canonicalConstructiveSurvivorExtractionBoundary :
   ConstructiveSurvivorExtractionBoundary
 canonicalConstructiveSurvivorExtractionBoundary =
   constructiveSurvivorExtractionBoundary
-    1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1
     0 0 0 0
