@@ -11,6 +11,8 @@ import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact 
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Physics.Propulsion.Rocketdyne1974MaterialDependentThermalFalsifierExact as RocketFals
 import DASHI.Physics.Propulsion.Rocketdyne1974TerminalPhysicalFrontierExact as RocketTerminal
+import DASHI.Physics.Propulsion.Rocketdyne1974HotSectionQualificationFrontierExact as RocketQual
+import DASHI.Physics.Propulsion.QualifiedHotSectionManufacturingBidiExact as Hot
 
 ------------------------------------------------------------------------
 -- FUSION PROPULSION x MATERIAL SURVIVABILITY
@@ -138,6 +140,15 @@ rocketdyneMaterialDependenceBoundary = RocketFals.canonicalMaterialDependenceBou
 rocketdyneTerminalFrontier : RocketTerminal.TerminalPhysicalFrontier
 rocketdyneTerminalFrontier = RocketTerminal.currentTerminalFrontier
 
+rocketdyneQualificationReverseFrontier : RocketQual.RocketdyneQualificationReverseFrontier
+rocketdyneQualificationReverseFrontier = RocketQual.rocketdyneQualificationReverseFrontier
+
+canonicalHotSectionQualificationBoundary : Hot.CanonicalQualificationBoundary
+canonicalHotSectionQualificationBoundary = Hot.canonicalQualificationBoundary
+
+fusionQualificationNeedsOwnSameObjectPayment : Bool
+fusionQualificationNeedsOwnSameObjectPayment = true
+
 record MaterialDiscriminatorTransferBoundary : Set where
   constructor material-discriminator-transfer-boundary
   field
@@ -145,10 +156,12 @@ record MaterialDiscriminatorTransferBoundary : Set where
     materialIdentityMustRemainExplicitWhenTestingMaterialEffect : Bool
     rocketdyneOutcomeTransfersNumericallyToFusionPlasma : Bool
     matchedEnvironmentGeometryAndConstitutiveDataStillRequired : Bool
+    canonicalQualificationGrammarReusable : Bool
+    rocketdyneQualificationReceiptPaysFusionQualification : Bool
 
 canonicalMaterialDiscriminatorTransferBoundary : MaterialDiscriminatorTransferBoundary
 canonicalMaterialDiscriminatorTransferBoundary =
-  material-discriminator-transfer-boundary true true false true
+  material-discriminator-transfer-boundary true true false true true false
 
 ------------------------------------------------------------------------
 -- Named firewalls.
