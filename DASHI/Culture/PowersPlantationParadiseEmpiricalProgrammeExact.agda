@@ -10,6 +10,7 @@ import DASHI.Core.ResponsibilityBurdenNonfactorabilityExact as Responsibility
 import DASHI.Biology.CausalEffectEstimandExact as Causal
 import DASHI.Culture.PowersPlantationParadiseSourceAtlasExact as Atlas
 import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
+import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact as EnslavedEvidence
 
 ------------------------------------------------------------------------
 -- POWERS EMPIRICAL PROGRAMME
@@ -130,6 +131,11 @@ responsibilityBurdenBoundary = Responsibility.canonicalResponsibilityBurdenBound
 causalEstimandBoundary : Causal.CausalEffectEstimandBoundary
 causalEstimandBoundary = Causal.canonicalCausalEffectEstimandBoundary
 
+enslavedDistributionBoundary :
+  EnslavedEvidence.PowersEnslavedDistributionEvidenceBoundary
+enslavedDistributionBoundary =
+  EnslavedEvidence.canonicalPowersEnslavedDistributionEvidenceBoundary
+
 ------------------------------------------------------------------------
 -- 6. Explicit empirical programme leaves.
 ------------------------------------------------------------------------
@@ -198,9 +204,9 @@ distributionalIncidenceLeaf =
   empirical-programme-leaf
     "Contribution / benefit / burden / voice incidence"
     "For the same theatre actors and institutions, who contributed labour/capital/knowledge, who received income/status/pleasure, who bore coercion/risk/exclusion, and who had effective voice?"
-    unpaidSameObject
-    "generic DASHI distribution geometry shows aggregate theatrical success cannot recover these coordinates; present Powers-facing receipts do not yet pay them on the same historical objects"
-    "join exact performer compensation, ownership/surplus, audience pricing, labour-status, disciplinary/coercive and governance records at actor/venue/time resolution"
+    partialSameObjectPaid
+    "Prest 2023 pays category-level same-domain evidence for enslaved spectatorship, theatre-maker slave ownership and concealed enslaved participation in theatre-making; generic DASHI distribution geometry still blocks promotion from those categories to complete actor-level incidence"
+    "join exact named-person labour/contribution, ownership/surplus, audience access/pricing, enslavement/coercion and governance/voice records at actor/venue/time resolution"
     (suc (suc (suc zero)))
 
 causalMobilityLeaf : EmpiricalProgrammeLeaf
@@ -286,6 +292,9 @@ record PowersEmpiricalProgrammeBoundary : Set where
     performerBenefitMechanismPartiallyPaid : Bool
     performerBenefitMechanismPartiallyPaidIsTrue :
       performerBenefitMechanismPartiallyPaid ≡ true
+    categoryLevelDistributionEvidencePartiallyPaid : Bool
+    categoryLevelDistributionEvidencePartiallyPaidIsTrue :
+      categoryLevelDistributionEvidencePartiallyPaid ≡ true
     primaryCorpusAcquisitionRouteIdentified : Bool
     primaryCorpusAcquisitionRouteIdentifiedIsTrue :
       primaryCorpusAcquisitionRouteIdentified ≡ true
@@ -305,6 +314,7 @@ record PowersEmpiricalProgrammeBoundary : Set where
 canonicalPowersEmpiricalProgrammeBoundary : PowersEmpiricalProgrammeBoundary
 canonicalPowersEmpiricalProgrammeBoundary =
   powers-empirical-programme-boundary
+    true refl
     true refl
     true refl
     true refl
