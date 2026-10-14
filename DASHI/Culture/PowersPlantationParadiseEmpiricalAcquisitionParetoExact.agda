@@ -10,10 +10,9 @@ import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirica
 ------------------------------------------------------------------------
 -- POWERS EMPIRICAL ACQUISITION PARETO ROUTER
 --
--- Cost/gain coordinates are acquisition-routing calibration only.  They are
--- not truth probabilities, historical importance scores, culpability weights,
--- welfare weights or causal-effect magnitudes.  Frontier membership does not
--- pay the requirement.
+-- Calibration is recomputed after evidence acquisition.  Cost/gain values are
+-- routing coordinates only, never truth, importance, culpability, welfare or
+-- causal-effect scores.  Off-frontier requirements remain live requirements.
 ------------------------------------------------------------------------
 
 data AcquisitionRequirement : Set where
@@ -30,23 +29,29 @@ primaryCorpusCell =
     primaryCorpusSaturation
     true true true true
     2 8
-    "St Andrews performance database + Affiches Americaines issue-level saturation"
+    "root exact Affiches/DLOC/ANOM event rows; resolves multiple performer, chronology, payment and access fibres"
 
+-- After recovering Minette's exact contracted amount and documented nonpayment,
+-- compensation's remaining leaf is narrower: estate settlement and actual
+-- benefit-night proceeds.  It is still required, but no longer Pareto-frontier
+-- optimal against the broader corpus route.
 compensationLedgerCell : Pareto.RequirementCandidate AcquisitionRequirement
 compensationLedgerCell =
   Pareto.requirement-candidate
     compensationLedgerRecovery
     true true true true
-    3 9
-    "contracts, benefit-night receipts, payroll/account fragments and settlement evidence"
+    4 6
+    "Saint-Martin estate/executor settlement plus benefit-night net-receipt evidence"
 
+-- Actor-level distribution remains broader than the currently paid category and
+-- contribution x burden joins because benefit, surplus and voice are still open.
 distributionalIncidenceCell : Pareto.RequirementCandidate AcquisitionRequirement
 distributionalIncidenceCell =
   Pareto.requirement-candidate
     distributionalIncidenceRecovery
     true true true true
     5 10
-    "same-object contribution/benefit/burden/voice join across performer, venue and time"
+    "same-object contribution/benefit/burden/voice join across named actor, venue and time"
 
 causalIdentificationCell : Pareto.RequirementCandidate AcquisitionRequirement
 causalIdentificationCell =
@@ -54,7 +59,7 @@ causalIdentificationCell =
     causalIdentificationRecovery
     true true true true
     8 7
-    "case-specific counterfactual/identification design after richer observational fibres exist"
+    "case-specific counterfactual/identification design after richer descriptive trajectories exist"
 
 seatingPrimaryCell : Pareto.RequirementCandidate AcquisitionRequirement
 seatingPrimaryCell =
@@ -62,18 +67,17 @@ seatingPrimaryCell =
     seatingPrimaryRecordRecovery
     true true true true
     3 5
-    "ANOM theatre-plan original plus applicable seating/admission regulations"
+    "ANOM theatre-plan original plus Saint-Domingue-specific seating/admission rules"
 
 performerPrimaryCell : Pareto.RequirementCandidate AcquisitionRequirement
 performerPrimaryCell =
   Pareto.requirement-candidate
     performerPrimaryRecordRecovery
     true true true true
-    4 7
-    "exact Affiches/Moreau/litigation rows for named performers such as Minette and Lise"
+    4 6
+    "exact primary rows for Minette, Lise and other named performers after current secondary-coordinate recovery"
 
-acquisitionPortfolio :
-  List (Pareto.RequirementCandidate AcquisitionRequirement)
+acquisitionPortfolio : List (Pareto.RequirementCandidate AcquisitionRequirement)
 acquisitionPortfolio =
   primaryCorpusCell
   ∷ compensationLedgerCell
@@ -83,17 +87,16 @@ acquisitionPortfolio =
   ∷ performerPrimaryCell
   ∷ []
 
-empiricalAcquisitionFrontier :
-  List (Pareto.RequirementCandidate AcquisitionRequirement)
+empiricalAcquisitionFrontier : List (Pareto.RequirementCandidate AcquisitionRequirement)
 empiricalAcquisitionFrontier = Pareto.paretoFrontier acquisitionPortfolio
 
 primaryCorpusOnCurrentFrontier :
   Pareto.onParetoFrontier? acquisitionPortfolio primaryCorpusCell ≡ true
 primaryCorpusOnCurrentFrontier = refl
 
-compensationLedgerOnCurrentFrontier :
-  Pareto.onParetoFrontier? acquisitionPortfolio compensationLedgerCell ≡ true
-compensationLedgerOnCurrentFrontier = refl
+compensationLedgerOffCurrentFrontier :
+  Pareto.onParetoFrontier? acquisitionPortfolio compensationLedgerCell ≡ false
+compensationLedgerOffCurrentFrontier = refl
 
 distributionalIncidenceOnCurrentFrontier :
   Pareto.onParetoFrontier? acquisitionPortfolio distributionalIncidenceCell ≡ true
@@ -111,14 +114,10 @@ performerPrimaryOffCurrentFrontier :
   Pareto.onParetoFrontier? acquisitionPortfolio performerPrimaryCell ≡ false
 performerPrimaryOffCurrentFrontier = refl
 
-currentFrontierIsCorpusCompensationDistribution :
+currentFrontierIsCorpusDistribution :
   empiricalAcquisitionFrontier
-  ≡ primaryCorpusCell ∷ compensationLedgerCell ∷ distributionalIncidenceCell ∷ []
-currentFrontierIsCorpusCompensationDistribution = refl
-
-------------------------------------------------------------------------
--- Link routing cells back to the typed empirical programme leaves.
-------------------------------------------------------------------------
+  ≡ primaryCorpusCell ∷ distributionalIncidenceCell ∷ []
+currentFrontierIsCorpusDistribution = refl
 
 primaryCorpusLeaf : Empirical.EmpiricalProgrammeLeaf
 primaryCorpusLeaf = Empirical.primaryCorpusSaturationLeaf
@@ -145,25 +144,22 @@ record PowersEmpiricalAcquisitionParetoBoundary : Set where
   constructor powers-empirical-acquisition-pareto-boundary
   field
     currentFrontierHasMultipleRoutes : Bool
-    currentFrontierHasMultipleRoutesIsTrue :
-      currentFrontierHasMultipleRoutes ≡ true
+    currentFrontierHasMultipleRoutesIsTrue : currentFrontierHasMultipleRoutes ≡ true
+    compensationStillRequiredOffFrontier : Bool
+    compensationStillRequiredOffFrontierIsTrue : compensationStillRequiredOffFrontier ≡ true
     frontierMembershipPaysHistoricalClaim : Bool
-    frontierMembershipPaysHistoricalClaimIsFalse :
-      frontierMembershipPaysHistoricalClaim ≡ false
+    frontierMembershipPaysHistoricalClaimIsFalse : frontierMembershipPaysHistoricalClaim ≡ false
     offFrontierDeletesRequirement : Bool
-    offFrontierDeletesRequirementIsFalse :
-      offFrontierDeletesRequirement ≡ false
+    offFrontierDeletesRequirementIsFalse : offFrontierDeletesRequirement ≡ false
     costGainCalibrationIsTruthScore : Bool
-    costGainCalibrationIsTruthScoreIsFalse :
-      costGainCalibrationIsTruthScore ≡ false
+    costGainCalibrationIsTruthScoreIsFalse : costGainCalibrationIsTruthScore ≡ false
     causalIdentificationStillRequired : Bool
-    causalIdentificationStillRequiredIsTrue :
-      causalIdentificationStillRequired ≡ true
+    causalIdentificationStillRequiredIsTrue : causalIdentificationStillRequired ≡ true
 
-canonicalPowersEmpiricalAcquisitionParetoBoundary :
-  PowersEmpiricalAcquisitionParetoBoundary
+canonicalPowersEmpiricalAcquisitionParetoBoundary : PowersEmpiricalAcquisitionParetoBoundary
 canonicalPowersEmpiricalAcquisitionParetoBoundary =
   powers-empirical-acquisition-pareto-boundary
+    true refl
     true refl
     false refl
     false refl
