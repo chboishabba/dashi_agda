@@ -87,3 +87,17 @@ def test_discovery_receipt_only_permits_absence_after_all_strata_are_empty(tmp_p
     assert missing["live_matches"] == []
     assert missing["historical_matches"] == []
     assert missing["query_similar"] == []
+
+
+def test_absence_is_forbidden_when_repository_index_is_incomplete(tmp_path: Path):
+    unindexed = tmp_path / "DASHI" / "Hidden.agda"
+    unindexed.parent.mkdir(parents=True)
+    unindexed.write_text("module DASHI.Hidden where\n", encoding="utf-8")
+    db = tmp_path / "index.sqlite3"
+    with SourceIndex(tmp_path, db) as index:
+        receipt = index.discovery_receipt("missingObject")
+
+    assert receipt["absence_claim_permitted"] is False
+    assert receipt["absence_status"] == "search_incomplete"
+    assert receipt["coverage"]["repository_index_complete"] is False
+    assert "DASHI/Hidden.agda" in receipt["coverage"]["missing_indexed_files"]
