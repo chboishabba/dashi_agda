@@ -77,7 +77,7 @@ class UnifiedDiscovery:
             limit=limit,
         )
 
-    def _repo_fuzzy(
+    def _fuzzy(
         self,
         query: str,
         *,
@@ -86,20 +86,28 @@ class UnifiedDiscovery:
         threshold: float = 0.34,
     ) -> list[dict]:
         overlay = self._overlay_map(include_history=True)
-        candidates = self.repo_index.all_agda_symbols(include_history=include_history)
+        if self.repo_index.available:
+            candidates = self.repo_index.all_agda_symbols(include_history=include_history)
+        else:
+            candidates = list(overlay.values())
+            if not include_history:
+                candidates = [
+                    item for item in candidates
+                    if item.get("surface_role") != "historical_snapshot"
+                ]
         ranked = []
         for base in candidates:
-            if base["kind"] == "module":
+            if base.get("kind") == "module":
                 continue
             score = _query_score(query, base)
             if score < threshold:
                 continue
-            item = self._merge(base, overlay.get(base["qualified_name"]))
+            item = self._merge(base, overlay.get(base["qualified_name"])) if self.repo_index.available else dict(base)
             item["query_similarity"] = score
             ranked.append(item)
         ranked.sort(
             key=lambda item: (
-                item["surface_role"] == "historical_snapshot",
+                item.get("surface_role") == "historical_snapshot",
                 -item["query_similarity"],
                 item["qualified_name"],
             )
@@ -120,9 +128,9 @@ class UnifiedDiscovery:
                 "exact": [],
                 "signature_equivalent": [],
                 "body_equivalent": [],
-                "similar": self._repo_fuzzy(
+                "similar": self._fuzzy(
                     symbol, include_history=include_history, limit=limit
-                ) if self.repo_index.available else [],
+                ),
             }
         target = exact[0]
         overlay_report = discovery_catalog.related_symbols(
@@ -158,16 +166,15 @@ class UnifiedDiscovery:
         seen.update(item["qualified_name"] for item in body_equivalent)
         similar = enrich(overlay_report.get("similar", ()))
         seen.update(item["qualified_name"] for item in similar)
-        if self.repo_index.available:
-            for item in self._repo_fuzzy(
-                target["name"], include_history=include_history, limit=max(limit * 2, 50)
-            ):
-                if item["qualified_name"] in seen or item["qualified_name"] == target["qualified_name"]:
-                    continue
-                score = item.pop("query_similarity", 0.0)
-                item["similarity"] = min(0.69, score)
-                similar.append(item)
-                seen.add(item["qualified_name"])
+        for item in self._fuzzy(
+            target["name"], include_history=include_history, limit=max(limit * 2, 50)
+        ):
+            if item["qualified_name"] in seen or item["qualified_name"] == target["qualified_name"]:
+                continue
+            score = item.pop("query_similarity", 0.0)
+            item["similarity"] = min(0.69, score)
+            similar.append(item)
+            seen.add(item["qualified_name"])
         similar.sort(key=lambda item: (-float(item.get("similarity", 0.0)), item["qualified_name"]))
         return {
             "query_symbol": target,
@@ -205,7 +212,7 @@ class UnifiedDiscovery:
         all_exact = self.search_symbols(query, include_history=True, limit=limit * 2)
         historical = [item for item in all_exact if item.get("surface_role") == "historical_snapshot"]
         related = self.related_symbols(query, include_history=True, limit=limit)
-        fuzzy = self._repo_fuzzy(query, include_history=True, limit=limit) if self.repo_index.available else []
+        fuzzy = self._fuzzy(query, include_history=True, limit=limit)
         exact_ids = {item["qualified_name"] for item in all_exact}
         fuzzy = [item for item in fuzzy if item["qualified_name"] not in exact_ids]
         candidate_exists = bool(
