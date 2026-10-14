@@ -11,21 +11,24 @@ import DASHI.Physics.Optics.PhotonDetectorChannelExact as Detector
 --
 -- Kabuli et al., Optica 13(2), 227--235 (2026), DOI 10.1364/OPTICA.570334.
 -- Code commit: f26873c2b58b82d84353bab2bf6edd478c5892a8.
--- Executed notebook blob:
+-- Executed notebook:
 --   experimental_eval/2025_03_29_sec5_experimental_MI_photon_conversion.ipynb
+-- Git blob:
 --   f8707b84dc696fc9218f6493467f0cda45193d3f
 --
--- The notebook loads a simultaneous grayscale sweep for RML, DiffuserCam and
--- the lensed ground-truth camera, estimates per-level spatial means/standard
--- deviations, regresses variance against mean in the shot-noise regime, and
--- converts recorded intensity by
+-- The executed notebook loads a simultaneous grayscale sweep for RML,
+-- DiffuserCam and the lensed ground-truth camera, measures mean/std on declared
+-- system-specific ROIs, regresses variance against mean in selected shot-noise
+-- fit windows, stores slope/intercept, and converts recorded intensity by
 --
---   photons = clip((image - intercept) / slope, 0, infinity).
+--   photons = (image - intercept) / slope
+--   then clips the result below at zero.
 --
--- The source notebook stores full-precision slope/intercept arrays, but the
--- presently recoverable executed stdout exposes only two-decimal display
--- coefficients. We therefore pin those displayed results and do not silently
--- promote them to the hidden full-precision arrays.
+-- The source stdout displays rounded two-decimal coefficients. We pin exactly
+-- those displayed values and do not pretend they are the hidden full-precision
+-- scipy regression values. This receipt pays the source-executed detected-count
+-- calibration surface. It does not pay incident-photon throughput or matched
+-- incident photon budgets across distinct optical encoders.
 ------------------------------------------------------------------------
 
 informationDesignDOI : String
@@ -33,6 +36,9 @@ informationDesignDOI = "10.1364/OPTICA.570334"
 
 informationDesignCommit : String
 informationDesignCommit = "f26873c2b58b82d84353bab2bf6edd478c5892a8"
+
+photonConversionNotebookPath : String
+photonConversionNotebookPath = "experimental_eval/2025_03_29_sec5_experimental_MI_photon_conversion.ipynb"
 
 photonConversionNotebookBlob : String
 photonConversionNotebookBlob = "f8707b84dc696fc9218f6493467f0cda45193d3f"
@@ -46,44 +52,76 @@ filteredSweepArchive = "1MhhUYO253RHEwmnujCmmovEVTD4z8RY8"
 fullSweepArchive : String
 fullSweepArchive = "1xd78nNMvNTSPJOviwL6pJ1wFwOABV7ap"
 
-rmlDisplayedSlope : String
-rmlDisplayedSlope = "0.02"
+------------------------------------------------------------------------
+-- Exact source ROIs from the executed notebook.
+------------------------------------------------------------------------
 
-rmlDisplayedIntercept : String
-rmlDisplayedIntercept = "1.46"
+rmlROIStartY : Nat
+rmlROIStartY = 500
+rmlROIEndY : Nat
+rmlROIEndY = 740
+rmlROIStartX : Nat
+rmlROIStartX = 1095
+rmlROIEndX : Nat
+rmlROIEndX = 1210
 
-diffuserDisplayedSlope : String
-diffuserDisplayedSlope = "0.03"
+diffuserROIStartY : Nat
+diffuserROIStartY = 410
+diffuserROIEndY : Nat
+diffuserROIEndY = 590
+diffuserROIStartX : Nat
+diffuserROIStartX = 1100
+diffuserROIEndX : Nat
+diffuserROIEndX = 1210
 
-diffuserDisplayedIntercept : String
-diffuserDisplayedIntercept = "0.36"
+lensedROIStartY : Nat
+lensedROIStartY = 500
+lensedROIEndY : Nat
+lensedROIEndY = 700
+lensedROIStartX : Nat
+lensedROIStartX = 1100
+lensedROIEndX : Nat
+lensedROIEndX = 1210
 
-lensDisplayedSlope : String
-lensDisplayedSlope = "0.05"
-
-lensDisplayedIntercept : String
-lensDisplayedIntercept = "0.01"
+------------------------------------------------------------------------
+-- Source-selected fit windows and displayed executed outputs.
+------------------------------------------------------------------------
 
 rmlFitStartIndex : Nat
 rmlFitStartIndex = 150
-
 rmlFitEndExclusive : Nat
 rmlFitEndExclusive = 250
 
 diffuserFitStartIndex : Nat
 diffuserFitStartIndex = 150
-
 diffuserFitEndExclusive : Nat
 diffuserFitEndExclusive = 250
 
 lensFitStartIndex : Nat
 lensFitStartIndex = 175
-
 lensFitEndExclusive : Nat
 lensFitEndExclusive = 250
 
+rmlDisplayedSlope : String
+rmlDisplayedSlope = "0.02"
+rmlDisplayedIntercept : String
+rmlDisplayedIntercept = "1.46"
+
+diffuserDisplayedSlope : String
+diffuserDisplayedSlope = "0.03"
+diffuserDisplayedIntercept : String
+diffuserDisplayedIntercept = "0.36"
+
+lensDisplayedSlope : String
+lensDisplayedSlope = "0.05"
+lensDisplayedIntercept : String
+lensDisplayedIntercept = "0.01"
+
+digitalToPhotonFormula : String
+digitalToPhotonFormula = "(image - intercept) / slope"
+
 photonConversionFormula : String
-photonConversionFormula = "clip((image - intercept) / slope, 0, infinity)"
+photonConversionFormula = digitalToPhotonFormula
 
 simultaneousThreeCameraSweepPinned : Bool
 simultaneousThreeCameraSweepPinned = true
@@ -91,22 +129,38 @@ simultaneousThreeCameraSweepPinned = true
 sourceExecutedPhotonTransferCalibrationPaid : Bool
 sourceExecutedPhotonTransferCalibrationPaid = true
 
+sourceDigitalToEstimatedPhotonConversionPaid : Bool
+sourceDigitalToEstimatedPhotonConversionPaid = true
+
 detectedPhotonCountConversionPinned : Bool
-detectedPhotonCountConversionPinned = true
+detectedPhotonCountConversionPinned = sourceDigitalToEstimatedPhotonConversionPaid
 
 fullPrecisionFitCoefficientsRecovered : Bool
 fullPrecisionFitCoefficientsRecovered = false
 
-opticalThroughputCalibrationPaid : Bool
-opticalThroughputCalibrationPaid = false
+-- The raw multi-gigabyte grayscale sweep was not re-executed in the current
+-- runtime; source execution and local raw-data re-execution are distinct.
+localRawCalibrationSweepReexecuted : Bool
+localRawCalibrationSweepReexecuted = false
 
+-- A detector DN->estimated detected-photon calibration is not an optical
+-- incident-photon throughput calibration. Encoder transmission / collection /
+-- QE system accounting remains independently required for matched input flux.
+incidentPhotonThroughputCalibrationPaid : Bool
+incidentPhotonThroughputCalibrationPaid = false
+opticalThroughputCalibrationPaid : Bool
+opticalThroughputCalibrationPaid = incidentPhotonThroughputCalibrationPaid
+
+matchedPhysicalPhotonBudgetPaid : Bool
+matchedPhysicalPhotonBudgetPaid = false
 matchedIncidentPhotonBudgetPaid : Bool
-matchedIncidentPhotonBudgetPaid = false
+matchedIncidentPhotonBudgetPaid = matchedPhysicalPhotonBudgetPaid
 
 record BerkeleyPhotonTransferCalibrationReceipt : Set where
   field
     doi : String
     sourceCommit : String
+    notebookPath : String
     notebookBlob : String
     calibrationDriveFolder : String
     filteredCalibrationArchive : String
@@ -121,9 +175,10 @@ record BerkeleyPhotonTransferCalibrationReceipt : Set where
     simultaneousSweep : Bool
     sourceExecutedCalibration : Bool
     detectedPhotonConversion : Bool
+    localRawSweepReexecuted : Bool
     fullPrecisionCoefficients : Bool
-    opticalThroughputCalibration : Bool
-    matchedIncidentPhotonBudget : Bool
+    incidentPhotonThroughputCalibration : Bool
+    matchedPhysicalPhotonBudget : Bool
 
 open BerkeleyPhotonTransferCalibrationReceipt public
 
@@ -131,6 +186,7 @@ berkeleyPhotonTransferCalibrationReceipt : BerkeleyPhotonTransferCalibrationRece
 berkeleyPhotonTransferCalibrationReceipt = record
   { doi = informationDesignDOI
   ; sourceCommit = informationDesignCommit
+  ; notebookPath = photonConversionNotebookPath
   ; notebookBlob = photonConversionNotebookBlob
   ; calibrationDriveFolder = photonCountCalibrationDriveFolder
   ; filteredCalibrationArchive = filteredSweepArchive
@@ -141,17 +197,18 @@ berkeleyPhotonTransferCalibrationReceipt = record
   ; diffuserInterceptDisplayed = diffuserDisplayedIntercept
   ; lensSlopeDisplayed = lensDisplayedSlope
   ; lensInterceptDisplayed = lensDisplayedIntercept
-  ; conversion = photonConversionFormula
+  ; conversion = digitalToPhotonFormula
   ; simultaneousSweep = simultaneousThreeCameraSweepPinned
   ; sourceExecutedCalibration = sourceExecutedPhotonTransferCalibrationPaid
-  ; detectedPhotonConversion = detectedPhotonCountConversionPinned
+  ; detectedPhotonConversion = sourceDigitalToEstimatedPhotonConversionPaid
+  ; localRawSweepReexecuted = localRawCalibrationSweepReexecuted
   ; fullPrecisionCoefficients = fullPrecisionFitCoefficientsRecovered
-  ; opticalThroughputCalibration = opticalThroughputCalibrationPaid
-  ; matchedIncidentPhotonBudget = matchedIncidentPhotonBudgetPaid
+  ; incidentPhotonThroughputCalibration = incidentPhotonThroughputCalibrationPaid
+  ; matchedPhysicalPhotonBudget = matchedPhysicalPhotonBudgetPaid
   }
 
 -- Reuse the generic detector-channel owner rather than treating a fitted
--- photon-transfer curve as a second detector ontology. This receipt pays the
--- empirical digital-count -> estimated detected-photon conversion surface; it
--- does not pay incident-photon throughput, quantum efficiency, or equality of
--- physical photon budgets across optical encoders.
+-- photon-transfer curve as a second detector ontology. The source calibration
+-- pays an empirical digital-count -> estimated detected-photon observation
+-- transform. It does not identify incident photons before the encoder or prove
+-- equal photon budgets across distinct optical systems.
