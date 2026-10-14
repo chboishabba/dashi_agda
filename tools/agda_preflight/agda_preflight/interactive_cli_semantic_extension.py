@@ -19,7 +19,7 @@ def build_semantic_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="dashi-agda")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    symbol = sub.add_parser("symbol", help="search exact indexed Agda symbols")
+    symbol = sub.add_parser("symbol", help="search repo-wide Agda symbols")
     symbol.add_argument("query")
     symbol.add_argument("--include-history", action="store_true")
     symbol.add_argument("--limit", type=int, default=50)
@@ -31,7 +31,11 @@ def build_semantic_parser() -> argparse.ArgumentParser:
     related.add_argument("--limit", type=int, default=50)
     _common(related)
 
-    discover = sub.add_parser("discover", help="produce a repository discovery/absence receipt")
+    obj = sub.add_parser("object", help="show an indexed object with status, requirements and references")
+    obj.add_argument("symbol_id")
+    _common(obj)
+
+    discover = sub.add_parser("discover", help="produce a fail-closed repository discovery/absence receipt")
     discover.add_argument("query")
     discover.add_argument("--limit", type=int, default=50)
     _common(discover)
@@ -48,7 +52,10 @@ def _print_payload(payload: dict, *, as_json: bool) -> None:
         return
     if "results" in payload:
         for item in payload["results"]:
-            print(f"{item['qualified_name']} [{item['kind']}; {item['surface_role']}]")
+            location = ""
+            if item.get("file") and item.get("line_start"):
+                location = f" {item['file']}:{item['line_start']}"
+            print(f"{item['qualified_name']} [{item['kind']}; {item['surface_role']}]{location}")
         if not payload["results"]:
             print("dashi-agda: no matching symbols")
         return
@@ -72,6 +79,8 @@ def run_semantic_command(argv) -> int:
                 include_history=args.include_history,
                 limit=args.limit,
             )
+        elif args.command == "object":
+            payload = service.object_detail(args.symbol_id)
         elif args.command == "discover":
             payload = service.discover(args.query, limit=args.limit)
         elif args.command == "lineage":
@@ -86,7 +95,7 @@ def install_interactive_cli_semantic_extension(module) -> None:
     if getattr(module, "_semantic_discovery_installed", False):
         return
     original = module.main
-    semantic_commands = {"symbol", "related", "discover", "lineage"}
+    semantic_commands = {"symbol", "related", "object", "discover", "lineage"}
 
     def main(argv=None) -> int:
         import sys
