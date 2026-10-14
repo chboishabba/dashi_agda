@@ -9,16 +9,26 @@ on:
       - 'scripts/co1_f2_sym2_unique_minimal24_submodule_screen.g'
       - 'scripts/check_co1_f2_sym2_unique_minimal24_submodule_screen.sh'
       - 'scripts/render_twob_co1_unique24_runtime_certificate.py'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientValidation.agda'
       - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeExact.agda'
       - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda'
       - '.github/workflows/twob-co1-unique24-screen.yml'
   pull_request:
     paths:
       - 'scripts/co1_f2_sym2_unique_minimal24_submodule_screen.g'
       - 'scripts/check_co1_f2_sym2_unique_minimal24_submodule_screen.sh'
       - 'scripts/render_twob_co1_unique24_runtime_certificate.py'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientValidation.agda'
       - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeExact.agda'
       - 'DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldValidation.agda'
+      - 'DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda'
       - '.github/workflows/twob-co1-unique24-screen.yml'
 
 permissions:
@@ -46,8 +56,13 @@ jobs:
       - name: Typecheck exact owners and generated certificate
         run: |
           scripts/run_agda29_parallel_check.sh \
+            DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientExact.agda \
+            DASHI/Moonshine/OggSSP2BEquivariantResidualQuotientValidation.agda \
             DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeExact.agda \
             DASHI/Moonshine/OggSSP2BUniqueInvariant24RangeValidation.agda \
+            DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldExact.agda \
+            DASHI/Moonshine/OggSSP2BUniqueRangeNormWeldValidation.agda \
+            DASHI/Moonshine/OggSSP2BCompletionAcquisitionFrontierExact.agda \
             DASHI/Moonshine/Generated/TwoBCo1Unique24RuntimeCertificate.agda
       - name: Upload unique-24 runtime receipt
         uses: actions/upload-artifact@v4
