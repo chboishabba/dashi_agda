@@ -18,6 +18,7 @@ import DASHI.Physics.Propulsion.Rocketdyne1974SiblingRCSComparisonExact as Sibli
 import DASHI.Physics.Propulsion.Rocketdyne1974OperationalShuttleContextExact as Shuttle
 import DASHI.Physics.Propulsion.Rocketdyne1974FlightC103ManufacturingLessonExact as FlightC103
 import DASHI.Physics.Propulsion.Rocketdyne1974OperationalValveReliabilityLessonExact as OperationalValve
+import DASHI.Physics.Propulsion.Rocketdyne1974HotSectionQualificationFrontierExact as HotFrontier
 
 archiveGeometryExhaustedForUniqueStress : Bool
 archiveGeometryExhaustedForUniqueStress = true
@@ -95,3 +96,6 @@ flightC103ManufacturingLessonReceipt = FlightC103.canonicalManufacturingCoordina
 
 operationalValveReliabilityReceipt : OperationalValve.OperationalValveReliabilityBoundary
 operationalValveReliabilityReceipt = OperationalValve.operationalValveReliabilityBoundary
+
+hotSectionQualificationFrontierReceipt : HotFrontier.RocketdyneQualificationReverseFrontier
+hotSectionQualificationFrontierReceipt = HotFrontier.rocketdyneQualificationReverseFrontier
