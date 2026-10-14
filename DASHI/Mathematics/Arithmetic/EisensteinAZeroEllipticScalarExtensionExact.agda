@@ -216,8 +216,8 @@ rotateEmbeddedOneIsOmega :
   Cubic.rotateX (embedQ E.qOne) ≡ E.omega
 rotateEmbeddedOneIsOmega =
   Cubic.ext
-    (ℚRing.solve-∀ E.qOne)
-    (ℚRing.solve-∀ E.qOne)
+    (ℚRing.solve [])
+    (ℚRing.solve [])
 
 rotateEmbeddedOneNotEmbedded :
   (q : ℚ) →
