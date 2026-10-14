@@ -2,17 +2,11 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedRunSimulationExact 
 
 ------------------------------------------------------------------------
 -- EXACT WHOLE-RUN LIFT INTO A SUMMED + SAFELY LINKED CODED TARGET
---
--- The linked structural owner already proves one-step commutation for the
--- actual resident source rule table.  The generic simulation owner already
--- proves that step preservation lifts to exact runs with IDENTICAL step count.
--- This module composes those two paid facts and then specializes them to the
--- literal execution witness carried by CodedStandardPolynomialDecider.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
@@ -27,10 +21,6 @@ import DASHI.Mathematics.Complexity.StructuralStandardMachineSimulationExact as 
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardRunExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeStandardLanguageEquivalenceExact as Language
 
-------------------------------------------------------------------------
--- The linked one-step simulation viewed through the generic exact-run API.
-------------------------------------------------------------------------
-
 linkedStandardSimulation :
   ∀ {source : Coded.CodedFiniteStandardTM}
     {right : Mode.CodedModeFragment (Coded.symbolCount source)} →
@@ -44,11 +34,6 @@ linkedStandardSimulation :
 linkedStandardSimulation extension =
   Structural.structuralToSimulation
     (Linked.linkedStructuralSimulation extension)
-
-------------------------------------------------------------------------
--- Exact whole-run preservation.  There is no extra transition factor here:
--- every source edge is one target edge inside the resident candidate mode.
-------------------------------------------------------------------------
 
 simulateLinkedExactRun :
   ∀ {source : Coded.CodedFiniteStandardTM}
@@ -80,10 +65,6 @@ simulateLinkedExactRun extension run =
   Simulation.simulateExactRun
     (linkedStandardSimulation extension)
     run
-
-------------------------------------------------------------------------
--- Specialization to the ACTUAL polynomial candidate execution witness.
-------------------------------------------------------------------------
 
 simulateCodedCandidateExecution :
   ∀ {decider : Cook.BooleanFormula → Bool}
@@ -124,10 +105,60 @@ simulateCodedCandidateExecution witness right extension formula =
     (CodedDecider.execution witness formula)
 
 ------------------------------------------------------------------------
--- Endpoint control is definitionally the disjoint left-mode injection of the
--- source candidate's endpoint control.  Downstream opposite-suffix code can use
--- this equality when wiring a return link without reopening candidate semantics.
+-- Prefix ; source candidate ; suffix composition on the SAME linked target.
+-- The middle run is generated automatically from the source run, so callers
+-- supply only the surrounding target-mode runs.
 ------------------------------------------------------------------------
+
+appendLinkedCandidatePhase :
+  ∀ {source : Coded.CodedFiniteStandardTM}
+    {right : Mode.CodedModeFragment (Coded.symbolCount source)}
+    (extension : Link.SafeLinkExtension (Linked.baseCombined source right))
+    {prefixSteps candidateSteps suffixSteps : Nat}
+    {sourceStart sourceFinish :
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine
+          (Coded.decodeCodedStandardTM source))}
+    {targetStart targetFinish :
+      Standard.StandardConfiguration
+        (Presented.finitePresentedStandardMachine
+          (Coded.decodeCodedStandardTM
+            (Linked.linkedTargetCode source right extension)))} →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine
+      (Coded.decodeCodedStandardTM
+        (Linked.linkedTargetCode source right extension)))
+    prefixSteps
+    targetStart
+    (Structural.structuralEmbed
+      (Linked.sourceStateMap source right)
+      (λ symbol → symbol)
+      sourceStart) →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine
+      (Coded.decodeCodedStandardTM source))
+    candidateSteps sourceStart sourceFinish →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine
+      (Coded.decodeCodedStandardTM
+        (Linked.linkedTargetCode source right extension)))
+    suffixSteps
+    (Structural.structuralEmbed
+      (Linked.sourceStateMap source right)
+      (λ symbol → symbol)
+      sourceFinish)
+    targetFinish →
+  Run.StandardExactRun
+    (Presented.finitePresentedStandardMachine
+      (Coded.decodeCodedStandardTM
+        (Linked.linkedTargetCode source right extension)))
+    ((prefixSteps + candidateSteps) + suffixSteps)
+    targetStart targetFinish
+appendLinkedCandidatePhase extension prefix candidate suffix =
+  Simulation.appendThreeExactRuns
+    prefix
+    (simulateLinkedExactRun extension candidate)
+    suffix
 
 linkedCandidateFinishStateExact :
   ∀ {decider : Cook.BooleanFormula → Bool}
@@ -150,10 +181,10 @@ linkedCandidateFinishStateExact witness right formula = refl
 ------------------------------------------------------------------------
 -- MAX-CUT CONSEQUENCE
 --
--- Wall C no longer contains the candidate middle run itself.  Once generator
--- call/return links place the target in the embedded candidate start state, the
--- ACTUAL polynomial candidate run transports edge-for-edge through the linked
--- target with exactly the original polynomial step count.  Remaining C-work is
--- generator call/return execution plus composition with this paid middle run;
--- candidate simulation and its clock are not separate obligations anymore.
+-- Wall C no longer contains either the candidate middle run OR phase
+-- composition.  Once a generator/call prefix reaches the embedded candidate
+-- start and a return/opposite suffix starts at the embedded candidate finish,
+-- `appendLinkedCandidatePhase` produces the complete exact target run with the
+-- literal additive clock.  Remaining C-work is therefore construction of those
+-- surrounding runs and their boundary configurations only.
 ------------------------------------------------------------------------
