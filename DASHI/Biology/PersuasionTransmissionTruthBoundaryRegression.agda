@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Core.Prelude using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Biology.PersuasionTransmissionTruthBoundaryExact as X
 
 persuasionTransmissionDistinct :
@@ -26,7 +27,7 @@ fayOutcomeSourceBound :
   X.AdmittedPersuasionSource X.fay2026ControlledExperimentOutcome X.fay2026Source
 fayOutcomeSourceBound = X.fay2026PaysControlledExperimentOutcome
 
-unadmittedSourceCannotPayFayOutcome :
-  {source : X.Source.AttributedSource} →
+unadmittedSourceCannotPayOutcome :
+  {source : Source.AttributedSource} →
   X.AdmittedPersuasionSource X.unadmittedPersuasionOutcome source → ⊥
-unadmittedSourceCannotPayFayOutcome ()
+unadmittedSourceCannotPayOutcome ()
