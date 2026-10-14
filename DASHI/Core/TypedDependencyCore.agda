@@ -2,7 +2,7 @@ module DASHI.Core.TypedDependencyCore where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Level)
+open import Agda.Primitive using (Level; lsuc)
 
 ------------------------------------------------------------------------
 -- Typed dependency core.
@@ -67,9 +67,17 @@ open FamilyWitness public
 ------------------------------------------------------------------------
 -- Actions are not made admissible merely because an action constructor is
 -- inhabited.  Preconditions and postconditions are indexed by state/action.
+--
+-- The state universe is explicit.  The action carrier remains Set₀ because all
+-- existing consumers use ordinary finite/symbolic action types; the record
+-- itself lives one level above the state carrier so its Set-valued predicate
+-- families are well-sorted for arbitrary state level.
 ------------------------------------------------------------------------
 
-record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
+record DependentActionSystem
+    {ℓ : Level}
+    {State : Set ℓ}
+    (Action : Set) : Set (lsuc ℓ) where
   field
     Precondition : State → Action → Set
     Postcondition : State → Action → State → Set
@@ -78,6 +86,7 @@ record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
 open DependentActionSystem public
 
 record AdmissibleAction
+    {ℓ : Level}
     {State : Set ℓ}
     {Action : Set}
     (system : DependentActionSystem {State = State} Action)
