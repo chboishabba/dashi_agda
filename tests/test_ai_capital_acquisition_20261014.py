@@ -10,7 +10,8 @@ def require(path: str, markers: list[str]) -> None:
 def test_financing_panel_owner():
     require("DASHI/Economics/AIFinancingConditionsPanel20261014Exact.agda", [
         "firmusWithdrawalObserved", "imfAISlowdownLeverageWarningObserved",
-        "goldmanFinancingPressureObserved", "panelDoesNotCreateSectorBubble"
+        "goldmanFinancingPressureObserved", "tencentDebtAccessObserved",
+        "panelDoesNotCreateSectorBubble", "stressDoesNotCreateUniversalClosure"
     ])
 
 def test_regulatory_cost_measurement_boundary():
@@ -25,9 +26,16 @@ def test_contract_finance_matching_boundary():
         "investmentGradeCustomerLookthroughObserved", "financingStructureDoesNotCreateTerminalDemand"
     ])
 
+def test_landlord_yield_boundary():
+    require("DASHI/Economics/AIGalaxyHeliosLandlordEconomics20261014Exact.agda", [
+        "startingGrossYieldBpIs1370", "leaseLevelMarginLowerBpIs9000",
+        "landlordYieldDoesNotCreateCoreWeaveROIC", "contractedYieldDoesNotCreateRealisedCash"
+    ])
+
 def test_rollup_imports_oct14_acquisitions():
     require("DASHI/Economics/AIEntanglementEverything2026.agda", [
         "AIFinancingConditionsPanel20261014Exact",
         "AIAustraliaRegulatoryCostMeasurementBoundary20261014Exact",
-        "AICoreWeaveAssetLevelContractFinance20261014Exact"
+        "AICoreWeaveAssetLevelContractFinance20261014Exact",
+        "AIGalaxyHeliosLandlordEconomics20261014Exact"
     ])
