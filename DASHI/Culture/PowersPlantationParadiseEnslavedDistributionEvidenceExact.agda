@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.BenefitBurdenExternalityDistributionExact as Distribution
+import DASHI.Culture.PowersPlantationParadiseSourceAtlasExact as Atlas
 
 ------------------------------------------------------------------------
 -- ENSLAVED THEATRE DISTRIBUTION EVIDENCE
@@ -12,7 +13,8 @@ import DASHI.Core.BenefitBurdenExternalityDistributionExact as Distribution
 -- Julia Prest's 2023 monograph is used here at the bounded level exposed by
 -- the publisher/author metadata and chapter structure: enslaved spectatorship,
 -- theatre-maker slave ownership, and enslaved participation in theatre-making
--- are explicit study objects.  That pays category-level same-object evidence,
+-- are explicit study objects.  Laméca additionally preserves exact newspaper
+-- coordinates for enslaved musicians tied to theatre work.  These payments do
 -- not complete actor-by-actor contribution/benefit/burden/voice incidence.
 ------------------------------------------------------------------------
 
@@ -93,6 +95,74 @@ enslavedVoiceCategoryReceipt =
     categoryLevel
     false refl
 
+------------------------------------------------------------------------
+-- Named / actor-level contribution x coercive-status joins preserved by the
+-- Laméca dossier from exact Affiches Américaines coordinates.  The original
+-- newspaper images are not claimed inspected here.
+------------------------------------------------------------------------
+
+record EnslavedMusicianContributionBurdenReceipt : Set where
+  constructor enslaved-musician-contribution-burden-receipt
+  field
+    personReference : String
+    dateReference : String
+    venueReference : String
+    contributionReference : String
+    burdenReference : String
+    primaryCoordinate : String
+    source : Source.AttributedSource
+    primaryOriginalInspectedHere : Bool
+    primaryOriginalInspectedHereIsFalse :
+      primaryOriginalInspectedHere ≡ false
+    contributionPaid : Bool
+    contributionPaidIsTrue : contributionPaid ≡ true
+    burdenPaid : Bool
+    burdenPaidIsTrue : burdenPaid ≡ true
+    benefitPaid : Bool
+    benefitPaidIsFalse : benefitPaid ≡ false
+    voicePaid : Bool
+    voicePaidIsFalse : voicePaid ≡ false
+
+open EnslavedMusicianContributionBurdenReceipt public
+
+capViolinists1764ContributionBurdenReceipt :
+  EnslavedMusicianContributionBurdenReceipt
+capViolinists1764ContributionBurdenReceipt =
+  enslaved-musician-contribution-burden-receipt
+    "three young enslaved men offered for sale; two described as violinists able to read music"
+    "15 February 1764"
+    "Cap-Français theatre/opera circuit"
+    "the two older musicians are reported as having accompanied different operas performed at Le Cap during the preceding two years"
+    "the same advertisement presents the young men as saleable enslaved property"
+    "Affiches Américaines, Le Cap, 15 February 1764"
+    Atlas.lamecaSaintDomingueOperaSource
+    false refl
+    true refl
+    true refl
+    false refl
+    false refl
+
+julien1781ContributionBurdenReceipt :
+  EnslavedMusicianContributionBurdenReceipt
+julien1781ContributionBurdenReceipt =
+  enslaved-musician-contribution-burden-receipt
+    "Julien, described in the source with the colonial racial term 'jeune griffe', age about 17-18"
+    "13 November 1781"
+    "Comédie du Cap"
+    "viola player reported as engaged at the Cap theatre until Easter"
+    "the same source coordinate is a sale notice, joining theatre labour to enslaved sale status on the same person"
+    "Affiches Américaines, Le Cap, 13 November 1781"
+    Atlas.lamecaSaintDomingueOperaSource
+    false refl
+    true refl
+    true refl
+    false refl
+    false refl
+
+------------------------------------------------------------------------
+-- Aggregate/category packet.
+------------------------------------------------------------------------
+
 record EnslavedTheatreDistributionEvidence : Set where
   constructor enslaved-theatre-distribution-evidence
   field
@@ -122,6 +192,12 @@ categoryEvidenceDoesNotCompleteDistributionalIncidence :
   CategoryEvidenceCompletesDistributionalIncidence → ⊥
 categoryEvidenceDoesNotCompleteDistributionalIncidence ()
 
+data ContributionBurdenJoinCompletesBenefitVoice : Set where
+
+contributionBurdenJoinDoesNotCompleteBenefitVoice :
+  ContributionBurdenJoinCompletesBenefitVoice → ⊥
+contributionBurdenJoinDoesNotCompleteBenefitVoice ()
+
 record PowersEnslavedDistributionEvidenceBoundary : Set where
   constructor powers-enslaved-distribution-evidence-boundary
   field
@@ -134,6 +210,9 @@ record PowersEnslavedDistributionEvidenceBoundary : Set where
     enslavedSpectatorshipCategoryPaid : Bool
     enslavedSpectatorshipCategoryPaidIsTrue :
       enslavedSpectatorshipCategoryPaid ≡ true
+    namedContributionBurdenJoinPartiallyPaid : Bool
+    namedContributionBurdenJoinPartiallyPaidIsTrue :
+      namedContributionBurdenJoinPartiallyPaid ≡ true
     actorLevelBenefitBurdenVoiceIncidenceComplete : Bool
     actorLevelBenefitBurdenVoiceIncidenceCompleteIsFalse :
       actorLevelBenefitBurdenVoiceIncidenceComplete ≡ false
@@ -145,6 +224,7 @@ canonicalPowersEnslavedDistributionEvidenceBoundary :
   PowersEnslavedDistributionEvidenceBoundary
 canonicalPowersEnslavedDistributionEvidenceBoundary =
   powers-enslaved-distribution-evidence-boundary
+    true refl
     true refl
     true refl
     true refl
