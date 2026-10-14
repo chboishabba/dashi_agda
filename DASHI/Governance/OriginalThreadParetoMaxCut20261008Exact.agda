@@ -4,7 +4,6 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
@@ -14,12 +13,23 @@ import DASHI.Governance.IRISDenaSameObjectAcquisitionMaxCutExact as IRIS
 import DASHI.Governance.AUKUSOnboardConductSovereigntyBoundaryExact as Sovereignty
 import DASHI.Governance.AUKUSEmbeddedAuthorityCommandNoncollapseExact as Authority
 import DASHI.Governance.AUKUSPersonnelExchangeMOUExistenceExact as MOU
+import DASHI.Governance.AUKUSUSPersonnelExchangeAuthorityEnvelopeExact as USPEP
 import DASHI.Governance.IRISDenaMinisterialBriefingFOIBoundaryExact as Briefing
+import DASHI.Governance.IRISDenaBunkClaimRevisionConflictExact as Bunks
 import DASHI.Governance.IRISDenaPublicRecordConsumerNonDescentExact as NonDescent
 import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as Iran
 
 ------------------------------------------------------------------------
--- 2026-10-12 ORIGINAL-THREAD PARETO RECOMPUTATION
+-- 2026-10-14 ORIGINAL-THREAD PARETO RECOMPUTATION
+--
+-- Newly paid beneath the live frontier:
+--   * generic U.S. PEP statutory/program envelope, including Australia as a
+--     partner and the fully-integrated host-service program model;
+--   * the earlier secondary "ordered to bunks" proposition is superseded for
+--     claim evaluation by a later named primary Chief-of-Navy denial.
+--
+-- Neither result substitutes for correction-aware hearing content, bilateral
+-- operative authority text, or the same-episode exact-duty record.
 ------------------------------------------------------------------------
 
 data LiveRequirement : Set where
@@ -41,14 +51,14 @@ embeddingProtocolCell = Pareto.requirement-candidate
   irisEmbeddingProtocolOperativeText
   true true true true
   2 6
-  "Acquire the complete December 2024 Chief of Navy directive and the operative text/annexes of the Australia-US personnel-exchange MOU. Primary official sources already pay MOU existence and workforce purpose; secondary reporting attributes lawful/reasonable USN direction authority plus an explicit no-command clause. Only operative authority/third-party-hostilities content remains unpaid."
+  "Acquire the complete December 2024 Chief of Navy directive and operative bilateral MOU text/annexes. Generic U.S. PEP statutory/program authority, Australia-partner status, MOU existence/purpose, and secondary-reproduced direction/no-command clauses are already paid at their proper source roles; only the bilateral operative authority/third-party-hostilities fibre remains unpaid."
 
 exactOperationalCell : Pareto.RequirementCandidate LiveRequirement
 exactOperationalCell = Pareto.requirement-candidate
   irisExactOperationalRecord
   true true true true
   5 8
-  "Acquire watchbill/duty assignment, action log, debrief or equivalent same-episode record identifying what the three Australians actually did during the IRIS Dena engagement. Canonical consumer non-descent proves the existing public surface cannot by itself determine this outcome."
+  "Acquire watchbill/duty assignment, action log, debrief or equivalent same-episode record identifying what the three Australians actually did during the IRIS Dena engagement. Public, duty-class and protocol observers are formally insufficient for this exact-task consumer."
 
 iranMarginalCell : Pareto.RequirementCandidate LiveRequirement
 iranMarginalCell = Pareto.requirement-candidate
@@ -62,7 +72,7 @@ broadExpansionCell = Pareto.requirement-candidate
   broadHistoricalExpansion
   false true true false
   5 2
-  "More countries/actors/theories are deferred until the live same-object IRIS acquisition cells are paid or shown acquisition-blocked."
+  "More countries/actors/theories remain deferred until the live same-object IRIS acquisition cells are paid or shown acquisition-blocked."
 
 livePortfolio : List (Pareto.RequirementCandidate LiveRequirement)
 livePortfolio =
@@ -99,7 +109,7 @@ frontierExactlyIRISThreeStage :
 frontierExactlyIRISThreeStage = refl
 
 ------------------------------------------------------------------------
--- Source/authority payloads remain separate from routing scores.
+-- Paid source/authority payloads remain distinct from routing scores.
 ------------------------------------------------------------------------
 
 correctionAwarePrimaryBundle : Hansard.CorrectionAwarePrimaryBundle
@@ -122,6 +132,12 @@ mouExistenceReceipt = MOU.canonicalMOUExistence
 
 mouOperativeResidual : MOU.RemainingMOUResidual
 mouOperativeResidual = MOU.operativeMOUResidual
+
+usPEPAuthorityEnvelope : USPEP.USPEPAuthorityEnvelopeReceipt
+usPEPAuthorityEnvelope = USPEP.canonicalEnvelope
+
+bunkClaimRevision : Bunks.BunkClaimRevisionReceipt
+bunkClaimRevision = Bunks.canonicalRevision
 
 publicRecordNonDescent :
   Descent.ConsumerNonDescentWitness
