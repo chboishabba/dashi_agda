@@ -123,6 +123,11 @@ _enslaved-distribution-category-evidence-paid :
 _enslaved-distribution-category-evidence-paid =
   EnslavedEvidence.prest2023DistributionEvidence
 
+_julien-contribution-burden-paid :
+  EnslavedEvidence.EnslavedMusicianContributionBurdenReceipt
+_julien-contribution-burden-paid =
+  EnslavedEvidence.julien1781ContributionBurdenReceipt
+
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
 _rooted-trace-paid = Cross.powersChapter5RootedTraceClaim
