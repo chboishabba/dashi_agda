@@ -13,6 +13,7 @@ import DASHI.Cognition.OracleEllisonCapabilityPromotionExact
 import DASHI.Cognition.OracleEllisonChinaIsraelComparativeFibreExact
 import DASHI.Cognition.OracleEllisonCognitiveWarfareWeldExact
 import DASHI.Cognition.OracleEllisonSocioTechnicalPowerWeldExact
+import DASHI.Cognition.OracleEllisonCausalIdentificationWeldExact
 import DASHI.Cognition.OracleEllisonTranscriptVerdictExact
 import DASHI.Cognition.OracleEllisonSecurityTranscriptValidation
 
