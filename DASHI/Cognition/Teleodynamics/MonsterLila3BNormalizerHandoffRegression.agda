@@ -23,6 +23,18 @@ _ = refl
 _ : H.siblingSelectedWordHeisenbergLiftPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
+_ : H.siblingPreferredSamePhaseOrder728Paid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingPreferredSamePhaseOrbit728Paid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingPreferredSamePhaseTrivialStabilizerPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingActualWZetaFin90SameObjectPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
 _ : H.siblingFullNormalizerHeisenbergLiftPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
 
