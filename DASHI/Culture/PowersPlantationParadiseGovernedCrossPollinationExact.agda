@@ -13,6 +13,7 @@ import DASHI.Core.PoliticalContestabilityExact as Political
 import DASHI.Core.SituatedFormalisationBoundaryExact as Situated
 import DASHI.Governance.OptionConeCoercionExact as OptionCone
 import DASHI.Governance.HistoryConditionedSocialEcologyOptionConeExact as HistoryCone
+import DASHI.Governance.AsymmetricLegibilityContestabilityExact as Legibility
 import DASHI.Culture.LanguageUseGovernedStandingBidiExact as Language
 import DASHI.Culture.PowersPlantationParadiseHistoricalClaimReceiptsExact as Claims
 import DASHI.Cognition.PNF.SensibLawPersistentStatementObservationEventSpineExact as Trace
@@ -26,8 +27,9 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact 
 -- the Powers-specific historical surface to already-merged generic owners for
 -- governed provenance, recognition/constitution, political contestability,
 -- consumer-relative residual refinement, required observer-axis joins,
--- history-conditioned option cones, governed language/use standing, situated
--- formalisation and exact rooted source traces.
+-- asymmetric legibility/contestability, history-conditioned option cones,
+-- governed language/use standing, situated formalisation and exact rooted
+-- source traces.
 --
 -- The finite same-object witness is a DASHI construction.  It is not attributed
 -- to Powers and is not an empirical population law.
@@ -128,12 +130,6 @@ sameCulturalSurfaceCannotRecoverMaterialCone =
 ------------------------------------------------------------------------
 -- 2. Required-axis join: standing, contestability and material accessibility
 --    are jointly required coordinates when that consumer is declared.
---
--- This is a nested use of the existing RequiredObserverAxisJoinAdequacy owner,
--- not a new three-axis calculus.  A candidate retaining each component factors
--- the canonical nested pair.  Losing standing already blocks a claim to retain
--- standing+contestability, and the shared cultural surface also fails to retain
--- the whole nested social-position consumer.
 ------------------------------------------------------------------------
 
 standingContestabilityJoint :
@@ -184,7 +180,67 @@ sameCulturalSurfaceCannotRetainGovernedSocialPosition =
     governedSocialPositionNonFactorabilityWitness
 
 ------------------------------------------------------------------------
--- 3. Recognition != constitution/authority on the same carrier.
+-- 3. Asymmetric institutional legibility on the same carrier.
+--
+-- The institutional view retains the full governed-position joint while the
+-- disclosed/public cultural surface collapses the selected pair.  Therefore an
+-- exact decoder from the public surface back to institutional classification is
+-- impossible.  This finite construction does not assert that a named colonial
+-- theatre actually implemented such a classifier; it owns the theorem shape.
+------------------------------------------------------------------------
+
+powersLegibilityChannel : Legibility.LegibilityChannel
+powersLegibilityChannel =
+  Legibility.legibilityChannel
+    CulturalState
+    ((StandingCode × ContestabilityCode) × MaterialConeCode)
+    CulturalSurface
+    governedSocialPositionJoint
+    (λ position → sameCulturalSurface)
+
+powersAsymmetricLegibilityGap :
+  Legibility.AsymmetricLegibilityWitness powersLegibilityChannel
+powersAsymmetricLegibilityGap =
+  Legibility.asymmetricLegibilityWitness
+    visibleRestricted
+    visibleExpanded
+    governedSocialPositionDiffers
+    refl
+
+powersExactInstitutionalViewDecoderImpossible :
+  Legibility.ExactInstitutionalViewDecoder powersLegibilityChannel → ⊥
+powersExactInstitutionalViewDecoderImpossible =
+  Legibility.asymmetricGapBlocksExactSubjectRecovery
+    powersAsymmetricLegibilityGap
+
+data ExplanationAvailable : CulturalState → Set where
+  expandedExplanation : ExplanationAvailable visibleExpanded
+
+data AppealAvailable : CulturalState → Set where
+  expandedAppeal : AppealAvailable visibleExpanded
+
+data CorrectionAvailable : CulturalState → Set where
+  expandedCorrection : CorrectionAvailable visibleExpanded
+
+powersContestabilityInterface :
+  Legibility.ContestabilityInterface powersLegibilityChannel
+powersContestabilityInterface =
+  Legibility.contestabilityInterface
+    ExplanationAvailable
+    AppealAvailable
+    CorrectionAvailable
+
+expandedInstitutionalContestabilityReceipt :
+  Legibility.ContestabilityReceipt
+    powersContestabilityInterface visibleExpanded
+expandedInstitutionalContestabilityReceipt =
+  Legibility.contestabilityReceipt
+    expandedExplanation
+    expandedAppeal
+    expandedCorrection
+
+------------------------------------------------------------------------
+-- 4. Recognition != constitution/authority on the same carrier.
 ------------------------------------------------------------------------
 
 recognitionSystem :
@@ -203,7 +259,7 @@ sameRecognitionCannotRecoverAuthority =
   Recognition.collisionBlocksAuthorityFactorization recognitionCollision
 
 ------------------------------------------------------------------------
--- 4. Governed-observer and consumer-relative consequences.
+-- 5. Governed-observer and consumer-relative consequences.
 ------------------------------------------------------------------------
 
 standingCollision :
@@ -236,8 +292,6 @@ culturalSurfaceCannotPayGovernedStanding :
 culturalSurfaceCannotPayGovernedStanding =
   Governed.authorityCollisionBlocksGovernedSufficiency standingCollision
 
--- Stronger than non-factorability alone: every observer adequate for the
--- declared consumer must distinguish the witnessed same-surface states.
 everyAdequateStandingObserverSeparates :
   ∀ {Fine : Set} {fine : CulturalState → Fine} →
   Consumer.ConsumerSufficient fine standingCode →
@@ -260,7 +314,7 @@ everyAdequateMaterialConeObserverSeparates =
   Consumer.everySufficientObserverSeparatesRelevantCollision materialConeCollision
 
 ------------------------------------------------------------------------
--- 5. Political contestability is proof-relevant rather than inferred from
+-- 6. Political contestability is proof-relevant rather than inferred from
 --    cultural participation or public visibility.
 ------------------------------------------------------------------------
 
@@ -296,8 +350,7 @@ expandedContestabilityReceipt =
     expandedCanDeliberate
 
 ------------------------------------------------------------------------
--- 6. Material option cone on the same state carrier.  Same public/cultural
---    surface does not imply the same reachable action set.
+-- 7. Material option cone on the same state carrier.
 ------------------------------------------------------------------------
 
 data CulturalOption : Set where
@@ -331,9 +384,6 @@ strictMaterialConeContraction =
     expandedExit
     (λ ())
 
--- Direct reuse of the merged history-conditioned donor: changing retained
--- history at fixed ecology can change realised accessibility without deleting
--- the underlying world possibility.
 historyConditionedOptionConeDonor :
   OptionCone.StrictSafeReachabilityContraction
     HistoryCone.socialReachability
@@ -342,8 +392,7 @@ historyConditionedOptionConeDonor :
 historyConditionedOptionConeDonor = HistoryCone.historyConditionedContraction
 
 ------------------------------------------------------------------------
--- 7. Governed performance/use donor.  Same words and same use already fail to
---    recover standing in the merged culture machinery.
+-- 8. Governed performance/use donor.
 ------------------------------------------------------------------------
 
 sameWordsAndUseStillCannotRecoverStanding :
@@ -357,7 +406,7 @@ sameWordsAndUseStillCannotRecoverPermission =
   Language.sameWordsAndUseCannotRecoverPermission
 
 ------------------------------------------------------------------------
--- 8. Exact rooted source-trace payment for the bounded Chapter 5 public-excerpt
+-- 9. Exact rooted source-trace payment for the bounded Chapter 5 public-excerpt
 --    claim.  Rooted trace pays provenance/coordinates, not historical truth.
 ------------------------------------------------------------------------
 
@@ -435,11 +484,14 @@ powersChapter5ReverseTrace : Trace.ReverseTraceReceipt powersChapter5Trace
 powersChapter5ReverseTrace = Trace.canonicalReverseTrace powersChapter5Trace
 
 ------------------------------------------------------------------------
--- 9. Reused canonical boundaries.
+-- 10. Reused canonical boundaries.
 ------------------------------------------------------------------------
 
 requiredObserverAxisJoinBoundary : Join.RequiredObserverAxisJoinBoundary
 requiredObserverAxisJoinBoundary = Join.canonicalRequiredObserverAxisJoinBoundary
+
+asymmetricLegibilityBoundary : Legibility.AsymmetricLegibilityBoundary
+asymmetricLegibilityBoundary = Legibility.canonicalAsymmetricLegibilityBoundary
 
 governedObservationBoundary : Governed.GovernedObservationProvenanceBoundary
 governedObservationBoundary = Governed.canonicalGovernedObservationProvenanceBoundary
@@ -474,6 +526,9 @@ record PowersGovernedCrossPollinationBoundary : Set where
     oneStrongAxisCompensatesForMissingRequiredAxis : Bool
     oneStrongAxisCompensatesForMissingRequiredAxisIsFalse :
       oneStrongAxisCompensatesForMissingRequiredAxis ≡ false
+    publicSurfaceReconstructsInstitutionalClassification : Bool
+    publicSurfaceReconstructsInstitutionalClassificationIsFalse :
+      publicSurfaceReconstructsInstitutionalClassification ≡ false
     rootedSourceTraceCreatesHistoricalTruth : Bool
     rootedSourceTraceCreatesHistoricalTruthIsFalse :
       rootedSourceTraceCreatesHistoricalTruth ≡ false
@@ -485,6 +540,7 @@ canonicalPowersGovernedCrossPollinationBoundary :
   PowersGovernedCrossPollinationBoundary
 canonicalPowersGovernedCrossPollinationBoundary =
   powers-governed-cross-pollination-boundary
+    false refl
     false refl
     false refl
     false refl
