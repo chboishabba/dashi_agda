@@ -62,7 +62,7 @@ ownCookBitCostedWorkLinear :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
     {candidate : Direct.PolynomialSATDeciderCandidate cost}
     {candidateCode : Actual.CandidateCodeRealization candidate}
-    (coded : CodedFixed.CodedStandardOppositeMachine candidateCode)
+    (coded : CodedFixed.CodedFixedStandardOppositeMachine candidateCode)
     (index : Nat) →
   CostedBit.work (ownCookBitCosted coded index)
   ≤ Cost.fixedDescriptionLinearBudget
