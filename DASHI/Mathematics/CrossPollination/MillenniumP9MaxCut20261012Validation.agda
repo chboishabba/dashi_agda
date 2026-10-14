@@ -79,19 +79,24 @@ import DASHI.Mathematics.Complexity.VirtualFormulaBitSourceExact
 import DASHI.Mathematics.Complexity.VirtualFormulaQueryTraceExact
 import DASHI.Mathematics.Complexity.CanonicalVirtualFormulaBitSourceExact
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact
+import DASHI.Mathematics.Complexity.GuardedCookBitQueryLengthExact
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact
 import DASHI.Mathematics.Complexity.CanonicalGuardedCookVirtualSourceExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPCodedFixedStandardOppositeExact
 import DASHI.Mathematics.Complexity.CNFStreamingClauseLookupExact
 import DASHI.Mathematics.Complexity.CNFStreamingSeekExact
+import DASHI.Mathematics.Complexity.CNFStreamingSeekCostExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseExact
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostExact
 import DASHI.Mathematics.Complexity.CNFCookPrefixTokenExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitFrontier
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingTokenBisimulationExact
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitExact
 import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact
+import DASHI.Mathematics.Complexity.GuardedCookFixedDescriptionStreamingCostExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPFixedDescriptionVirtualGeneratorExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualGeneratorOutputExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact
 
@@ -99,6 +104,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact
 import DASHI.Mathematics.Complexity.VirtualTapeSparseOverlayExact
 import DASHI.Mathematics.Complexity.GuardedCookVirtualTapeBaseExact
 import DASHI.Mathematics.Complexity.VirtualStandardTapeExecutionExact
+import DASHI.Mathematics.Complexity.VirtualStandardTapeCostExact
+import DASHI.Mathematics.Complexity.GuardedCookVirtualStandardInitialExact
 
 ------------------------------------------------------------------------
 -- TRUST BOUNDARY / ACTIVE ROADMAP
@@ -135,17 +142,33 @@ import DASHI.Mathematics.Complexity.VirtualStandardTapeExecutionExact
 --   * the guarded Cook payload is an executable virtual base with bit i at
 --     absolute address T+1+i and canonical streamed-read correctness;
 --   * persistent VirtualStandardConfiguration keeps candidate control/head/write
---     residual across reads and applies the SAME Standard.transition function,
---     eliminating semantic dependence on reset-style full-tape reconstruction.
+--     residual across reads and applies the SAME Standard.transition function;
+--   * one residual entry is added per source edge and residual lookup after k
+--     edges costs at most k scans;
+--   * the canonical query code explicitly pays unary T and index: T,index are
+--     each bounded by the literal query-bit length;
+--   * streamed placed-predicate search is costed by #predicates * 2^localWidth;
+--   * existing closed Cook size theorems give the actual global clause-seek
+--     work shape T*(cols-2)*2^w_trans + rowBits + cols*2^w_accept;
+--   * for one immutable self-quotation description those machine-dependent
+--     factors are constants, yielding a degree-one streamed-bit work envelope
+--     in canonical query-code length;
+--   * the active generator contract is therefore now fixed-description.  The
+--     older varying-machine UniversalGuardedCookBitGenerator is a strictly
+--     stronger optional interface not justified by the current one-hot
+--     truth-table implementation.
+--   * canonical virtual candidate start = initial control, absolute head T+1,
+--     empty residual; the first untouched scanned bit is exact and the T+1
+--     guard prevents left-of-zero underflow across a T-edge virtual run.
 --
 -- LIVE CONSTRUCTIVE WALL:
 --   1. compile the proved streamed evaluator + persistent virtual execution into
 --      one CodedFiniteStandardTM with generator/candidate/opposite modes;
 --   2. prove a source/materialized-run <-> persistent-virtual-run bisimulation
---      over the T+1 guarded margin (this is now a representation theorem, not a
---      missing tape model);
---   3. expose cost of clause seek/token cursor/residual lookup and prove the
---      generator/query/interpreter clock polynomial in canonical query-code size;
+--      over the T+1 guarded tape (the storage semantics and head safety are paid);
+--   3. turn semantic predicate-evaluation / residual-scan work into literal
+--      standard-TM step counts, including arithmetic/index decoding and finite
+--      call-frame constants, thereby inhabiting the fixed-description generator;
 --   4. close total target time to the SAME T used by its own Cook formula;
 --   5. reuse already-paid Cook iff/opposite SATDecisionFailure plumbing.
 --
