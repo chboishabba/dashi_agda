@@ -9,6 +9,7 @@ import DASHI.Physics.Optics.BerkeleyDiffuserCamDepthConditioningExact as Conditi
 import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact as LocalExecution
 import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact as InfoSource
 import DASHI.Physics.Optics.BerkeleyPhotonTransferCalibrationExact as PhotonTransfer
+import DASHI.Physics.Optics.BerkeleyPhotonTransferLocalExecutionReceiptExact as PhotonTransferLocal
 import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as ExposureProvenance
 import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
@@ -20,11 +21,13 @@ import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
 -- the 2026 information-design experiment, the ConvRML parallel comparator, and
 -- an executed photon-transfer notebook for RML/Diffuser/lensed detector counts.
 -- Local execution separately pays synthetic source-H, finite-support, memory-
--- planner and focused receipt-wiring receipts. None is promoted into the still-
--- unavailable real `example_psfs.mat` execution receipt.
+-- planner, focused receipt-wiring, and photon-transfer compiler receipts. None
+-- is promoted into the still-unavailable real `example_psfs.mat` execution or
+-- the multi-GB Berkeley raw grayscale sweep.
 --
--- Photon transfer is now deliberately split into distinct claims:
+-- Photon transfer is split into distinct claims:
 --   * source-executed DN -> estimated detected-photon calibration: PAID;
+--   * locally executed synthetic photon-transfer compiler check: PAID;
 --   * local re-execution of the multi-GB raw grayscale sweep: UNPAID;
 --   * incident-photon optical throughput / matched input flux: UNPAID.
 --
@@ -32,15 +35,6 @@ import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
 -- lineage capture code from June through September pins RGB8, gain=0 and
 -- 25/80/18 ms in diffuser/RML/ground-truth order. A per-archive same-run log
 -- has not been recovered, so exact archive exposure identity stays fail-closed.
---
--- Remaining physical/execution leaves:
---   A. execute the pinned 10.8 MB PSF binary and retain real same-H diagnostics;
---   B. run the memory planner on the actual PSF shape and selected scene class;
---   C. recover same-run archive/capture provenance if stronger than release
---      lineage is required;
---   D. obtain optical-throughput / incident-photon calibration for a genuinely
---      matched physical input-photon comparison;
---   E. optional FZP arm only if the stronger three-way comparison is retained.
 ------------------------------------------------------------------------
 
 record Diffraction3DImagingAcquisitionMaxCut : Set where
@@ -68,6 +62,7 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     matchedAnalysisPhotonNormalizationPinned : Bool
     sourceExecutedPhotonTransferCalibrationPinned : Bool
     sourceDigitalToEstimatedPhotonConversionPinned : Bool
+    localSyntheticPhotonTransferReceiptCaptured : Bool
     detectedPhotonCountConversionPinned : Bool
     localRawPhotonCalibrationReexecuted : Bool
     fullPrecisionPhotonTransferCoefficientsRecovered : Bool
@@ -114,10 +109,11 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; matchedAnalysisPhotonNormalizationPinned = true
   ; sourceExecutedPhotonTransferCalibrationPinned = true
   ; sourceDigitalToEstimatedPhotonConversionPinned = true
+  ; localSyntheticPhotonTransferReceiptCaptured = PhotonTransferLocal.localSyntheticPhotonTransferReceiptCaptured
   ; detectedPhotonCountConversionPinned = PhotonTransfer.detectedPhotonCountConversionPinned
-  ; localRawPhotonCalibrationReexecuted = false
+  ; localRawPhotonCalibrationReexecuted = PhotonTransfer.localRawCalibrationSweepReexecuted
   ; fullPrecisionPhotonTransferCoefficientsRecovered = PhotonTransfer.fullPrecisionFitCoefficientsRecovered
-  ; incidentPhotonThroughputCalibrationPinned = false
+  ; incidentPhotonThroughputCalibrationPinned = PhotonTransfer.incidentPhotonThroughputCalibrationPaid
   ; opticalThroughputCalibrationPinned = PhotonTransfer.opticalThroughputCalibrationPaid
   ; physicalAcquisitionPhotonCalibrationPinned = InfoSource.physicalAcquisitionPhotonCalibrationPaid
   ; publishedRealRMLVsDiffuserCamComparisonPinned = true
@@ -178,6 +174,8 @@ sourceExecutedPhotonTransferStatus : Bool
 sourceExecutedPhotonTransferStatus = PhotonTransfer.sourceExecutedPhotonTransferCalibrationPaid
 sourceDigitalPhotonConversionStatus : Bool
 sourceDigitalPhotonConversionStatus = PhotonTransfer.sourceDigitalToEstimatedPhotonConversionPaid
+localSyntheticPhotonTransferStatus : Bool
+localSyntheticPhotonTransferStatus = PhotonTransferLocal.localSyntheticPhotonTransferReceiptCaptured
 localRawPhotonCalibrationStatus : Bool
 localRawPhotonCalibrationStatus = PhotonTransfer.localRawCalibrationSweepReexecuted
 incidentPhotonThroughputStatus : Bool
