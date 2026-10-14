@@ -108,6 +108,11 @@ _benefit-does-not-prove-settlement-paid :
 _benefit-does-not-prove-settlement-paid =
   Minette.benefitPerformanceDoesNotProveSettlement
 
+_minette-salary-nonpayment-paid :
+  Minette.MinetteSalaryNonpaymentReceipt
+_minette-salary-nonpayment-paid =
+  Minette.minette1784SalaryNonpaymentReceipt
+
 _secondary-date-disagreement-needs-primary-paid :
   Minette.SecondaryDateDisagreementResolvedWithoutPrimaryInspection → ⊥
 _secondary-date-disagreement-needs-primary-paid =
