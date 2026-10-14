@@ -19,6 +19,7 @@ import DASHI.Physics.Propulsion.Rocketdyne1974OperationalShuttleContextExact as 
 import DASHI.Physics.Propulsion.Rocketdyne1974FlightC103ManufacturingLessonExact as FlightC103
 import DASHI.Physics.Propulsion.Rocketdyne1974OperationalValveReliabilityLessonExact as OperationalValve
 import DASHI.Physics.Propulsion.Rocketdyne1974HotSectionQualificationFrontierExact as HotFrontier
+import DASHI.Physics.Propulsion.Rocketdyne1974OperationsReliabilityFrontierExact as OpsRel
 
 archiveGeometryExhaustedForUniqueStress : Bool
 archiveGeometryExhaustedForUniqueStress = true
@@ -52,8 +53,8 @@ currentTerminalFrontier : TerminalPhysicalFrontier
 currentTerminalFrontier = terminal-physical-frontier
   true true true true true
   false false false false false false false false
-  "Recover exact nozzle wall-gauge/local contour, 1974 article manufacturing/process/coating history, same-article temperature-dependent strength/creep law, inspection history and boundary-condition data, or obtain an equivalent engineering drawing/test-analysis/fabrication package. In parallel, acquire valve/contamination, engineering-change and source-selection documentation where it can close qualification-history leaves."
-  "Until those coordinates are paid, retain the archive-level empirical discriminator plus constructive non-identifiability theorem; do not manufacture a unique stress, creep lifetime, later-C103 root cause for the 1974 article, later metal-nitrate mechanism/rate for the 1974 valves, formal qualification history, or flight-hardware identity."
+  "Recover exact nozzle wall-gauge/local contour, 1974 article manufacturing/process/coating history, same-article temperature-dependent strength/creep law, inspection history and boundary-condition data, or obtain an equivalent engineering drawing/test-analysis/fabrication package. In parallel, acquire exact maintenance/teardown/anomaly-disposition records, valve/injector/nozzle revision and lot lineage, installed-configuration/serviceability history, defined population counts, and source-selection documentation where these can close qualification/reliability/history leaves."
+  "Until those coordinates are paid, retain the archive-level empirical discriminator plus constructive non-identifiability theorem; do not manufacture a unique stress, creep lifetime, later-C103 root cause for the 1974 article, later metal-nitrate mechanism/rate for the 1974 valves, fleet reliability rate, formal qualification history, or flight-hardware identity."
 
 materialReceipt : Mat.MaterialDataBoundary
 materialReceipt = Mat.canonicalMaterialDataBoundary
@@ -99,3 +100,6 @@ operationalValveReliabilityReceipt = OperationalValve.operationalValveReliabilit
 
 hotSectionQualificationFrontierReceipt : HotFrontier.RocketdyneQualificationReverseFrontier
 hotSectionQualificationFrontierReceipt = HotFrontier.rocketdyneQualificationReverseFrontier
+
+operationsReliabilityFrontierReceipt : OpsRel.RocketdyneOperationsReliabilityFrontier
+operationsReliabilityFrontierReceipt = OpsRel.rocketdyneOperationsReliabilityFrontier
