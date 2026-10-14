@@ -12,6 +12,7 @@ import DASHI.Biology.IIT4SystemPhiInputExact
 import DASHI.Biology.IIT4SymbolicScalarBackendExact
 import DASHI.Core.IntegrationConsumerDescentOrderExact
 import DASHI.Biology.IITXORGridAdversarialExact
+import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORProbabilityReceiptExact
 import DASHI.Biology.IITXOREffectCutReceiptExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
