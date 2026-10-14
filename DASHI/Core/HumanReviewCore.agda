@@ -7,12 +7,12 @@ module DASHI.Core.HumanReviewCore where
 --
 -- A review receipt records who reviewed which item under which observation.
 -- An exact-item binding ties that review to the concrete source manifestation,
--- candidate batch/factor, and declared consumer.  Neither object creates truth,
+-- candidate batch/factor, and declared consumer. Neither object creates truth,
 -- applicability, causal identification, legal authority, or domain authority.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 record GenericHumanReviewReceipt : Set where
