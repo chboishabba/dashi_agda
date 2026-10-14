@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional
+
 
 def install_service_semantic_extension(service_cls: type) -> None:
     if getattr(service_cls, "_semantic_discovery_installed", False):
@@ -30,7 +32,7 @@ def install_service_semantic_extension(service_cls: type) -> None:
     def discover(self, query: str, *, limit: int = 50) -> dict:
         return self.index.discovery_receipt(query, limit=limit)
 
-    def round_lineage(self, prefix: str | None = None) -> dict:
+    def round_lineage(self, prefix: Optional[str] = None) -> dict:
         return self.index.round_lineage(prefix=prefix)
 
     service_cls.refresh_semantic_catalog = refresh_semantic_catalog
