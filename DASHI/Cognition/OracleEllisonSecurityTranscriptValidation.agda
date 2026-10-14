@@ -16,6 +16,7 @@ import DASHI.Cognition.OracleEllisonChinaIsraelComparativeFibreExact as Compare
 import DASHI.Cognition.OracleEllisonCognitiveWarfareWeldExact as Weld
 import DASHI.Cognition.OracleEllisonTranscriptVerdictExact as Verdict
 import DASHI.Cognition.OracleEllisonSocioTechnicalPowerWeldExact as PowerWeld
+import DASHI.Cognition.OracleEllisonCausalIdentificationWeldExact as CausalWeld
 import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Orthogonality
 
 ------------------------------------------------------------------------
@@ -118,3 +119,23 @@ historicalContinuityDoesNotPayCentralCommand :
   PowerWeld.historicalContinuityPaysCentralCommand
   ≡ false
 historicalContinuityDoesNotPayCentralCommand = refl
+
+relationshipEvidenceDoesNotPayCausalPolicyInfluence :
+  CausalWeld.relationshipEvidencePaysCausalPolicyInfluence
+  ≡ false
+relationshipEvidenceDoesNotPayCausalPolicyInfluence = refl
+
+deploymentEvidenceDoesNotPayCausalSovereignControl :
+  CausalWeld.deploymentEvidencePaysCausalSovereignControl
+  ≡ false
+deploymentEvidenceDoesNotPayCausalSovereignControl = refl
+
+chronologyDoesNotPayThreatMaintenanceCausation :
+  CausalWeld.chronologyPaysThreatMaintenancePoliticalSurvivalCausation
+  ≡ false
+chronologyDoesNotPayThreatMaintenanceCausation = refl
+
+causalPromotionRequiresEstimandAndIdentification :
+  CausalWeld.causalPromotionRequiresExplicitEstimandAndIdentification
+  ≡ true
+causalPromotionRequiresEstimandAndIdentification = refl
