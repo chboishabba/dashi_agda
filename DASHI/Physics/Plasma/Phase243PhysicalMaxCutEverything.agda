@@ -1,0 +1,13 @@
+module DASHI.Physics.Plasma.Phase243PhysicalMaxCutEverything where
+
+-- Focused Phase243 -> physical-magnet max-cut rollup.
+
+import DASHI.Physics.Plasma.Ternary27SearchEverything
+import DASHI.Physics.Plasma.Phase243OrbitQuotientExact
+import DASHI.Physics.Plasma.Phase243EquivariantFibreSearchExact
+import DASHI.Physics.Plasma.Phase243TorusReparameterizationExact
+import DASHI.Physics.Plasma.Phase243ConsumerDescentExact
+import DASHI.Physics.Plasma.Phase243PeriodicConsumerQuotientExact
+import DASHI.Physics.Plasma.Phase243ConsumerKernelCrossPollinationExact
+import DASHI.Physics.Plasma.Phase243Core54ParetoCoilExact
+import DASHI.Physics.Plasma.Phase243CoilPlasmaFreeBoundaryMaxCutExact
