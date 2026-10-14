@@ -7,20 +7,6 @@ import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
 import DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact as PantsSeam
 import DASHI.Reasoning.IITHyperfabricPartitionBridgeExact as Partition
 
-------------------------------------------------------------------------
--- PATH-INDEXED CAUSAL CELL NETWORK
---
--- A hyperfabric experiment has three separate levels:
---   1. local causal synthesis cell (A,B) -> C,
---   2. output-to-input gluing edges indexed by path/step,
---   3. optional stalk/global-section compatibility carried by TypedHyperfabric.
---
--- IIT's numerical scanner currently evaluates level (2) as a causal-connection
--- partition.  Existing stalk-restriction and global-section partition semantics
--- remain separate theorem surfaces; they are not silently identified with an
--- IIT directional system partition.
-------------------------------------------------------------------------
-
 record IndexedCausalFabric (Path : Set) : Set₁ where
   constructor indexedCausalFabric
   field
@@ -32,7 +18,6 @@ record IndexedCausalFabric (Path : Set) : Set₁ where
     gluing : (edge : Edge) →
       Causal.OutputInputGluing fibres (source edge) (target edge)
     fabricReceipt : String
-
 open IndexedCausalFabric public
 
 record ClosedPathWitness
@@ -43,13 +28,7 @@ record ClosedPathWitness
     start : Path
     edgePath : List (Edge fabric)
     closureReceipt : String
-
 open ClosedPathWitness public
-
-------------------------------------------------------------------------
--- Existing typed pants seam: compatibility is proof-relevant and does not
--- automatically rewrite incidence.
-------------------------------------------------------------------------
 
 typedPantsSeamBoundary : PantsSeam.TypedHyperfabricPantsGluingBoundary
 typedPantsSeamBoundary = PantsSeam.canonicalTypedHyperfabricPantsGluingBoundary
@@ -58,15 +37,10 @@ pantsSeamDoesNotRewriteIncidence :
   PantsSeam.interfaceMatchAutomaticallyRewritesIncidence
     typedPantsSeamBoundary ≡ false
 pantsSeamDoesNotRewriteIncidence =
-  PantsSeam.interfaceMatchAutomaticallyRewritesIncidenceIsFalse
-    typedPantsSeamBoundary
+  PantsSeam.interfaceMatchAutomaticallyRewritesIncidenceIsFalse typedPantsSeamBoundary
 
 canonicalExistingSeam : PantsSeam.HyperfabricPantsGluing PantsSeam.seamSection
 canonicalExistingSeam = PantsSeam.canonicalPantsGluing
-
-------------------------------------------------------------------------
--- Partition-semantics separation already established by the IIT bridge.
-------------------------------------------------------------------------
 
 data ExperimentPartitionSemantics : Set where
   causalGraphConnectionPartition : ExperimentPartitionSemantics
@@ -81,12 +55,8 @@ stalkNotGlobalSectionPartition :
   stalkRestrictionPartition ≡ globalSectionPartition → ⊥
 stalkNotGlobalSectionPartition ()
 
-existingPartitionBoundary : Partition.HyperfabricPartitionBoundary
-existingPartitionBoundary = Partition.canonicalHyperfabricPartitionBoundary
-
-------------------------------------------------------------------------
--- Executable finite fixture receipt.
-------------------------------------------------------------------------
+existingPartitionBoundary : Partition.HyperfabricIITBoundary
+existingPartitionBoundary = Partition.canonicalHyperfabricIITBoundary
 
 record HyperfabricFixtureReceipt : Set where
   constructor hyperfabricFixtureReceipt
@@ -97,7 +67,6 @@ record HyperfabricFixtureReceipt : Set where
     closedTriXorCycle2023 : String
     deterministic2026Receipt : String
     scanner : String
-
 open HyperfabricFixtureReceipt public
 
 currentHyperfabricFixtureReceipt : HyperfabricFixtureReceipt
@@ -121,7 +90,6 @@ record IITHyperfabricCausalBoundary : Set where
     numericScannerCurrentlyEvaluatesCausalGraphCuts : Bool
     globalSectionRequiresCompatibilityWitness : Bool
     numericReceiptEqualsKernelProof : Bool
-
 open IITHyperfabricCausalBoundary public
 
 canonicalIITHyperfabricCausalBoundary : IITHyperfabricCausalBoundary
