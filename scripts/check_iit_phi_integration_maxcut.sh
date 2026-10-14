@@ -15,6 +15,8 @@ required_files=(
   DASHI/Biology/IITCyclotomicFourierObserverExact.agda
   DASHI/Biology/IITBalancedTernary369HierarchyExact.agda
   DASHI/Biology/IIT369PantsGluingBridgeExact.agda
+  DASHI/Biology/IITCausalPantsFibreGluingExact.agda
+  DASHI/Biology/IITCausalPantsOrientationBoundaryExact.agda
   DASHI/Biology/IITPointedTernary27FaceGluingExact.agda
   DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda
   DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda
@@ -27,6 +29,8 @@ required_files=(
   DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda
   DASHI/Biology/IITPhiIntegrationEverything.agda
   DASHI/EverythingIITPhiIntegrationMaxCut.agda
+  scripts/iit_pants_fabric_matched_gate_scan.py
+  scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json
 )
 for path in "${required_files[@]}"; do
   [[ -f "$ROOT/$path" ]] || { echo "missing IIT max-cut file: $path" >&2; exit 1; }
@@ -57,6 +61,30 @@ require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'canonicalPantsHasThreeO
 require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'nineSheetPantsRoundTrip'
 require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'voxel27PantsRoundTrip'
 require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'sameNineStatesDoNotForceSameAlgebra'
+
+# Causal pants: gluing/transport and local algebra are independent coordinates.
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record LocalSynthesisCell'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record OutputInputGluing'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record TwoSourceInputGluing'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'evaluateGluedCell'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'sameFabricDifferentLocalAlgebraChangesOutput'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'triXorOnSameFabric'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record ClosedTwoStepCircuit'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'gluingIsNotGate'
+require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'partitionDoesNotRewriteGate'
+require DASHI/Biology/IITCausalPantsOrientationBoundaryExact.agda 'branchingDoesNotManufactureSynthesisOrientation'
+require DASHI/Biology/IITCausalPantsOrientationBoundaryExact.agda 'causalCellStillOwnsTwoInputs'
+
+# Matched fixed-fabric scanner/receipt.
+require scripts/iit_pants_fabric_matched_gate_scan.py 'A[t+1] = C[t]'
+require scripts/iit_pants_fabric_matched_gate_scan.py 'C[t+1] = mu(A[t], B[t])'
+require scripts/iit_pants_fabric_matched_gate_scan.py 'binary XOR'
+require scripts/iit_pants_fabric_matched_gate_scan.py 'binary OR'
+require scripts/iit_pants_fabric_matched_gate_scan.py 'binary AND'
+require scripts/iit_pants_fabric_matched_gate_scan.py 'ternary triXor'
+require scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json '"zero_phi_states": 6'
+require scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json '"min_phi_s_bits": 3.169925001442312'
+require scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json 'fixed recurrent gluing topology is not sufficient to determine system phi_s'
 
 # Pointed 27 = selected cubie + complement / compatible face gluing.
 require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'oneSelectedPlusTwentySixRemainingIsTwentySeven'
@@ -100,6 +128,8 @@ require DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda 'normLosesC3Phase'
 require DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda 'finitePackagingIsNotAnalyticContinuation'
 
 # Rollup must be acyclic and validation must sit outside production.
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITCausalPantsFibreGluingExact'
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITCausalPantsOrientationBoundaryExact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27Origin26Exact'
 require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27Recentered26Exact'
 reject DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPhiIntegrationMaxCutValidation'
