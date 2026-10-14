@@ -21,6 +21,10 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 -- integer figure rows from the first 849 positive nontrivial zeta-zero
 -- ordinates, h_m = 2*pi*m/(p^a*log p), the guard interval
 -- [t_1 + 1, t_849 - 1], and deterministic mutual-nearest matching.
+-- The same producer now also evaluates a deterministic midpoint grid over one
+-- complete lattice-shift period.  That grid is consistent with every rounded
+-- source mean/SD within the declared numerical tolerance, but the rounded
+-- summaries do not identify the source's finite random sample or RNG seed.
 -- The cache is mpmath-generated diagnostic data, not a formal zero certificate.
 
 replayZeroCount : Nat
@@ -28,6 +32,9 @@ replayZeroCount = 849
 
 replayGuardWholeUnits : Nat
 replayGuardWholeUnits = 1
+
+phaseGridSteps : Nat
+phaseGridSteps = 720
 
 record ReplayedFigureRow : Set where
   constructor replayed-figure-row
@@ -104,11 +111,6 @@ p71ReplaySaturates = refl
 
 ------------------------------------------------------------------------
 -- Non-Ogg control replay.
---
--- Productive cross-pollination with the already-merged Ogg control matrix:
--- applying the SAME numerical producer at exponent one to all five explicitly
--- non-Ogg odd-prime controls under 72 also gives 849 mutual pairs.  Hence
--- high-density saturation itself is not an Ogg-specific discriminator.
 ------------------------------------------------------------------------
 
 record ControlReplayRow : Set where
@@ -213,6 +215,10 @@ noPrimeOnlyOrientationDecoder decoder =
             (recoversOrientation decoder positiveP2Root)
             positiveRootOrientationForward))))
 
+------------------------------------------------------------------------
+-- Claim boundary.
+------------------------------------------------------------------------
+
 record ClimbingGymReplayBoundary : Set where
   constructor climbing-gym-replay-boundary
   field
@@ -223,7 +229,10 @@ record ClimbingGymReplayBoundary : Set where
     nonOggControlSaturationShowsSaturationNotOggSpecific : Bool
     unsignedStatisticCannotRecoverSignedOrientation : Bool
     shiftedLatticeControlImplemented : Bool
+    deterministicUniformPhaseGridNullImplemented : Bool
+    sourceRoundedShiftSummariesCompatibleWithUniformPhaseNull : Bool
     reportedShiftControlSeedRecovered : Bool
+    roundedSummariesIdentifyUniqueFiniteShiftSample : Bool
     numericalZeroCacheIsFormalZeroCertificate : Bool
     replayProvesRiemannHypothesis : Bool
 
@@ -232,4 +241,4 @@ open ClimbingGymReplayBoundary public
 canonicalClimbingGymReplayBoundary : ClimbingGymReplayBoundary
 canonicalClimbingGymReplayBoundary =
   climbing-gym-replay-boundary
-    true true true true true true true false false false
+    true true true true true true true true true false false false false
