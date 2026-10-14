@@ -1,0 +1,6 @@
+module DASHI.Governance.BoloBoloEmpiricalAcquisitionEverything where
+
+import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact
+import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasRegression
+import DASHI.Governance.BoloBoloEmpiricalAcquisitionParetoExact
+import DASHI.Governance.BoloBoloEmpiricalAcquisitionParetoRegression
