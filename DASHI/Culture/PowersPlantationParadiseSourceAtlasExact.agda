@@ -9,8 +9,9 @@ import DASHI.Core.GenericReceipt as Receipt
 -- POWERS / PLANTATION TO PARADISE SOURCE ATLAS
 --
 -- Source propositions remain source-bound. Publisher summaries, scholarly
--- reviews, later edited collections, chapter locators, inspected public
--- excerpts and DASHI finite countermodels occupy different epistemic layers.
+-- reviews, later edited collections, archival catalogues, institutional
+-- research databases, inspected public excerpts and DASHI finite countermodels
+-- occupy different epistemic layers.
 ------------------------------------------------------------------------
 
 powersBookSource : Source.AttributedSource
@@ -50,9 +51,92 @@ leichmanBenacGirouxSource =
     "later comparative research programme linking theatre history, performance studies, slavery, racialisation and trans-Atlantic colonial identity; used only for cross-pollination and not retroactively attributed to Powers"
     Source.publicAttribution
 
+prestRacialScaleSource : Source.AttributedSource
+prestRacialScaleSource =
+  Source.mkNoDOISource
+    "Julia Tamsin Prest"
+    "Performing the racial scale: from colonial Saint-Domingue to contemporary Hollywood"
+    "Insights 10, article 7; peer-reviewed accepted manuscript in University of St Andrews Research Repository"
+    "2017"
+    "https://research-repository.st-andrews.ac.uk/handle/10023/12607"
+    Source.academicArticleSource
+    "peer-reviewed same-object secondary evidence for Minette, segregated theatre seating, public-stage inclusion, press naming/status language and the limits of theatrical social mobility; citations to Moreau de Saint-Mery and Affiches Americaines remain source-local"
+    Source.publicAttribution
+
+prestIphigenieSource : Source.AttributedSource
+prestIphigenieSource =
+  Source.mkDOISource
+    "Julia Tamsin Prest"
+    "Iphigenie en Haiti: performing Gluck's Paris operas in the French colonial Caribbean"
+    "Eighteenth-Century Music 14(1):13-29"
+    "2017"
+    "10.1017/S1478570616000282"
+    "https://doi.org/10.1017/S1478570616000282"
+    Source.academicArticleSource
+    "peer-reviewed source for mixed but segregated Saint-Domingue audiences, local performance conditions, and documented performers of colour in the Gluck repertoire; later scholarship, not a Powers proposition"
+    Source.publicAttribution
+
+clayStagestruckSource : Source.AttributedSource
+clayStagestruckSource =
+  Source.mkDOISource
+    "Lauren R. Clay"
+    "The Production of Theater in the Colonies"
+    "Stagestruck: The Business of Theater in Eighteenth-Century France and Its Colonies, chapter 7, pp. 195-224"
+    "2013"
+    "10.7591/cornell/9780801450389.003.0007"
+    "https://doi.org/10.7591/cornell/9780801450389.003.0007"
+    Source.academicChapterSource
+    "scholarly business-history source for colonial theatre operations, capacity, staffing, commercial pressure, participation by free people of colour and the Port-au-Prince theatre economy; does not by itself identify distribution of surplus or burden"
+    Source.publicAttribution
+
+theatreSaintDomingueProjectSource : Source.AttributedSource
+theatreSaintDomingueProjectSource =
+  Source.mkNoDOISource
+    "Julia Prest and Theatre in Saint-Domingue project"
+    "Theatre in Saint-Domingue, 1764-1791"
+    "University of St Andrews School of Modern Languages research project and performance database"
+    "2020s"
+    "https://www.st-andrews.ac.uk/modern-languages/research/projects/theatre-in-saint-domingue/"
+    Source.institutionalSource
+    "institutional research database built from local newspaper announcements between 1764 and 1791; source-acquisition surface for performance-level chronology, venues, repertoire and named participants where records survive"
+    Source.publicAttribution
+
+affichesAmericanesArchiveSource : Source.AttributedSource
+affichesAmericanesArchiveSource =
+  Source.mkNoDOISource
+    "Imprimerie royale, Saint-Domingue"
+    "Affiches americaines and Supplement aux Affiches americaines"
+    "Colonial Saint-Domingue newspaper series, 1766-1790; BnF catalogue FRBNF32683014 and related digitised holdings"
+    "1766-1790"
+    "https://catalogue.bnf.fr/ark:/12148/cb32683014r"
+    Source.archivalSource
+    "primary newspaper corpus for performance announcements, public naming, advertisements and other contemporaneous notices; catalogue identity does not prove the content of any uninspected issue"
+    Source.publicAttribution
+
+lamecaSaintDomingueOperaSource : Source.AttributedSource
+lamecaSaintDomingueOperaSource =
+  Source.mkNoDOISource
+    "Mediatheque Caraibe / Laméca"
+    "Saint-Domingue et l'opera-comique"
+    "La musique coloniale des Antilles francaises au 18eme siecle"
+    "undated public digital dossier"
+    "https://www.lameca.org/publications-numeriques/dossiers-et-articles/la-musique-coloniale-des-antilles-francaises-au-18eme-siecle/iii-saint-domingue-et-lopera-comique/"
+    Source.institutionalSource
+    "institutional secondary presentation preserving the 1782 Port-au-Prince theatre-plan archival locator ANOM FM F3 296 E 75 and contemporaneous-source quotations; useful for venue geometry, not a substitute for inspecting the archive original"
+    Source.publicAttribution
+
 allPowersSources : List Source.AttributedSource
 allPowersSources =
-  powersBookSource ∷ mondelliReviewSource ∷ leichmanBenacGirouxSource ∷ []
+  powersBookSource
+  ∷ mondelliReviewSource
+  ∷ leichmanBenacGirouxSource
+  ∷ prestRacialScaleSource
+  ∷ prestIphigenieSource
+  ∷ clayStagestruckSource
+  ∷ theatreSaintDomingueProjectSource
+  ∷ affichesAmericanesArchiveSource
+  ∷ lamecaSaintDomingueOperaSource
+  ∷ []
 
 powersSourceAtlas : Source.AttributedSourceAtlas
 powersSourceAtlas =
@@ -60,7 +144,7 @@ powersSourceAtlas =
     "Powers Plantation to Paradise source atlas"
     "DASHI.Culture.PowersPlantationParadiseSourceAtlasExact"
     allPowersSources
-    "bounded attribution for Powers 2014, Mondelli 2016 review commentary, and Leichman/Benac-Giroux 2021 comparative theatre/slavery scholarship"
+    "bounded attribution for Powers 2014, Mondelli 2016, later theatre/slavery scholarship, Prest's peer-reviewed same-object Saint-Domingue work, Clay's theatre-business history, the St Andrews performance database, Affiches Americaines archival corpus identity and the Laméca/ANOM theatre-plan locator"
 
 powersSourceAtlasReceipt : Receipt.GenericReceipt
 powersSourceAtlasReceipt =
