@@ -25,10 +25,24 @@ import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact
 import DASHI.Reasoning.TrialecticC3EdgeResidualRepairValidation
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
+
+-- 369-wave cross-pollination closes the stale groupoid/pseudofunctor/stack
+-- frontier while retaining chart rotation as a separate equivariant symmetry.
+import DASHI.Reasoning.TrialecticWavePhaseGroupoidPresheafExact
+import DASHI.Reasoning.TrialecticWavePhaseEffectiveStackDescentExact
+import DASHI.Reasoning.TrialecticWavePhasePseudofunctorCoherenceExact
+import DASHI.Reasoning.TrialecticWavePhaseTwoCellCocycleExact
+import DASHI.Reasoning.TrialecticPolicyIndexedAllDepthIterationExact
+import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact
+import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact
+import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionValidation
+
+-- Historical compatibility/status surfaces remain imported; the additive
+-- post-ledger max-cut above records which old false flags are superseded.
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 
--- Core Nongin closure remains paid, while existing higher-stack/hyperfabric,
+-- Core Nongin closure remains paid, while higher-stack/hyperfabric,
 -- exceptional and physical-promotion programmes remain attached descendants.
 import DASHI.Philosophy.NonginRoadmapClosureExact
 import DASHI.Philosophy.NonginRoadmapClosureValidation
