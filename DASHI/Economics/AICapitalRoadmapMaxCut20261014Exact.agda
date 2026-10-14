@@ -9,6 +9,7 @@ import DASHI.Economics.AICoreWeaveNumericalCapitalBounds20261012Exact as Capital
 import DASHI.Economics.AIOwnedSelfHostTCOEnvelope20261012Exact as TCO
 import DASHI.Economics.AIMI355XAcquisitionDepreciationEnvelope20261014Exact as Quote
 import DASHI.Economics.AICerebrasCloudMarginObserverBoundary20261012Exact as Margin
+import DASHI.Economics.AICerebrasProviderCostComposition20261014Exact as Cost
 import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Payer
 import DASHI.Economics.AICoreWeaveAggregateCustomerCashRealisation20261014Exact as Cash
 import DASHI.Economics.AICoreWeaveCapexDecompositionNonidentifiability20261012Exact as Replacement
@@ -48,8 +49,8 @@ ownedNodeTCOPartial = roadmap-lane
 providerMarginalServingCostEmpirical : RoadmapLane
 providerMarginalServingCostEmpirical = roadmap-lane
   "provider marginal inference economics" empirical
-  "buyer-side same-model rented-node spread plus provider segment accounting margins and expected contract contribution-margin observations"
-  "provider-owned realised marginal serving-cost ledger on matched model/configuration/SLA/cache/utilisation basis" false
+  "buyer-side same-model rented-node spread, provider accounting margins, primary-filed segment cost-of-revenue and data-center/depreciation/pass-through cost drivers, plus expected contract contribution-margin observations"
+  "pure-inference workload allocation and provider-owned realised marginal serving cost on matched model/configuration/SLA/cache/utilisation/token basis" false
 
 terminalPayerGraphPartial : RoadmapLane
 terminalPayerGraphPartial = roadmap-lane
@@ -105,6 +106,9 @@ purchaseQuoteRangeNowPaid = Quote.purchaseQuoteRangePaid
 matchedRentalNodePurchasePriceStillOpen : Quote.matchedRentalNodePurchasePricePaid Quote.mi355xAcquisitionDepreciationEnvelope ≡ false
 matchedRentalNodePurchasePriceStillOpen = Quote.matchedRentalNodePurchasePriceStillOpen
 
+providerSegmentCostCompositionNowPaid : Cost.providerSegmentCostCompositionObserved Cost.cerebrasProviderCostComposition ≡ true
+providerSegmentCostCompositionNowPaid = Cost.providerSegmentCostCompositionPaid
+
 providerMarginalCostStillOpen : Margin.marginalInferenceServingMarginPaid Margin.cerebrasGaapCloudMargin ≡ false
 providerMarginalCostStillOpen = Margin.marginalInferenceServingMarginStillOpen
 
@@ -139,4 +143,4 @@ stackLayerCoexistencePaid = Stack.landlordRecognisedRevenueAndTenantNegativeSpre
 
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. Aggregate CoreWeave customer-cash collection is paid while named-payer independence remains partial. Owned-node TCO now includes quote-basis acquisition/depreciation coordinates but still lacks resource-matched financing/PUE/operations/residual/refresh data. Financing conditions now include both heterogeneous issuance events and a 37 bp reported AI-linked versus broader-IG cross-sectional spread premium, without causal/default/bubble promotion. Provider marginal serving cost, replacement economics and realised regulatory-burden causality remain empirical. SensibLaw exact review follows causal identification. Dedicated exact-head workflows exist; successful receipts remain the integration target."
+  "The October-14 AI-capital programme is no longer missing a generic theory layer. Aggregate CoreWeave customer-cash collection is paid while named-payer independence remains partial. Owned-node TCO now includes quote-basis acquisition/depreciation coordinates but still lacks resource-matched financing/PUE/operations/residual/refresh data. Provider-side economics now includes actual Cerebras segment cost of revenue, data-center/depreciation/pass-through cost drivers and utilization sensitivity, leaving pure-inference workload allocation and marginal token cost as the irreducible serving-cost residual. Financing conditions include heterogeneous issuance events and a 37 bp reported AI-linked versus broader-IG cross-sectional spread premium, without causal/default/bubble promotion. Replacement economics and realised regulatory-burden causality remain empirical. SensibLaw exact review follows causal identification. Dedicated exact-head workflows exist; successful receipts remain the integration target."
