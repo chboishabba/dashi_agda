@@ -25,6 +25,34 @@ genericCharacterIsoLeanKernelPending :
   Cut.genericEqualCharacterSimpleIsoKernelObserved Cut.canonicalBoundary ≡ false
 genericCharacterIsoLeanKernelPending = refl
 
+proofRelevantRecognitionGateAvailable :
+  Cut.proofRelevantRecognitionGateAvailable Cut.canonicalBoundary ≡ true
+proofRelevantRecognitionGateAvailable = refl
+
+legacyTypedObligationDoesNotCountAsPaid :
+  Cut.legacyTypedObligationCountsAsPaidRecognition Cut.canonicalBoundary ≡ false
+legacyTypedObligationDoesNotCountAsPaid = refl
+
+proofRelevantHZetaWitnessStillOpen :
+  Cut.proofRelevantHZetaWitnessPaid Cut.canonicalBoundary ≡ false
+proofRelevantHZetaWitnessStillOpen = refl
+
+proofRelevantConstituentAttachmentStillOpen :
+  Cut.proofRelevantConstituentAttachmentPaid Cut.canonicalBoundary ≡ false
+proofRelevantConstituentAttachmentStillOpen = refl
+
+proofRelevantHomIntertwinerStillOpen :
+  Cut.proofRelevantHomIntertwinerPaid Cut.canonicalBoundary ≡ false
+proofRelevantHomIntertwinerStillOpen = refl
+
+proofRelevantMultiplicityBasisStillOpen :
+  Cut.proofRelevantMultiplicityBasisPaid Cut.canonicalBoundary ≡ false
+proofRelevantMultiplicityBasisStillOpen = refl
+
+proofRelevantTerminalSourceStillOpen :
+  Cut.proofRelevantCorrectedRecognitionSourcePaid Cut.canonicalBoundary ≡ false
+proofRelevantTerminalSourceStillOpen = refl
+
 suzukiMultiplicityRouteSourcePaid :
   Cut.suzukiMultiplicityRepresentationRouteSourcePaid Cut.canonicalBoundary ≡ true
 suzukiMultiplicityRouteSourcePaid = refl
