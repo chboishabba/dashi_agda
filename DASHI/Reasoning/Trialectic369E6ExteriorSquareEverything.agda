@@ -87,3 +87,4 @@ import DASHI.Governance.ConsciousnessExceptionalResidualIITBoundaryExact
 
 import DASHI.Reasoning.Ternary27ExceptionalPhysicsMaxCutExact
 import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct14MaxCutExact
+import DASHI.Reasoning.Ternary27ExceptionalPhysicsOct14TerminalMaxCutExact
