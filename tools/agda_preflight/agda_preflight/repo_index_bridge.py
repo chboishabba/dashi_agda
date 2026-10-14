@@ -107,7 +107,7 @@ class RepoIndexReader:
         if self.connection is None or not query.strip():
             return []
         q = query.strip()
-        history_clause = "" if include_history else "AND module NOT LIKE '%Round%'"
+        history_clause = "" if include_history else "AND module NOT GLOB '*Round[0-9]*'"
         try:
             rows = self.connection.execute(
                 """
@@ -130,7 +130,7 @@ class RepoIndexReader:
     def all_agda_symbols(self, *, include_history: bool = True) -> list[dict]:
         if self.connection is None:
             return []
-        clause = "" if include_history else "AND module NOT LIKE '%Round%'"
+        clause = "" if include_history else "AND module NOT GLOB '*Round[0-9]*'"
         try:
             rows = self.connection.execute(
                 "SELECT * FROM symbols WHERE language='agda' {} ORDER BY symbol_id".format(clause)
@@ -142,19 +142,25 @@ class RepoIndexReader:
     def object_detail(self, symbol_id: str) -> dict:
         if self.connection is None:
             return {"symbol": None, "refs": []}
-        row = self.connection.execute(
-            "SELECT * FROM symbols WHERE symbol_id = ? LIMIT 1", (symbol_id,)
-        ).fetchone()
+        try:
+            row = self.connection.execute(
+                "SELECT * FROM symbols WHERE symbol_id = ? LIMIT 1", (symbol_id,)
+            ).fetchone()
+        except sqlite3.DatabaseError:
+            return {"symbol": None, "refs": []}
         if row is None:
             return {"symbol": None, "refs": []}
-        refs = self.connection.execute(
-            """
-            SELECT from_symbol, to_symbol, ref_kind, file, line, snippet
-            FROM refs WHERE to_symbol = ? OR from_symbol = ?
-            ORDER BY file, line LIMIT 200
-            """,
-            (symbol_id, symbol_id),
-        ).fetchall()
+        try:
+            refs = self.connection.execute(
+                """
+                SELECT from_symbol, to_symbol, ref_kind, file, line, snippet
+                FROM refs WHERE to_symbol = ? OR from_symbol = ?
+                ORDER BY file, line LIMIT 200
+                """,
+                (symbol_id, symbol_id),
+            ).fetchall()
+        except sqlite3.DatabaseError:
+            refs = []
         return {"symbol": self._row(row), "refs": [dict(item) for item in refs]}
 
     def coverage_status(self) -> dict:
