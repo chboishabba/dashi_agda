@@ -62,6 +62,12 @@ jobs:
           bash scripts/run_agda29_parallel_check.sh
           DASHI/Governance/OriginalThreadParetoMaxCut20261008Exact.agda
 
+      - name: Type-check certification regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Governance/IRISDenaMaxCutCertificationRegression.agda
+
       - name: Type-check focused IRIS rollup
         run: >-
           nix develop .# --command
