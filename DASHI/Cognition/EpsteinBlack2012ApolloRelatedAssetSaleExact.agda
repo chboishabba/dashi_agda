@@ -10,12 +10,13 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- 2012 BLACK FAMILY PARTNERS / FINANCIAL TRUST ASSET-SALE BRIDGE
 --
--- The November 2012 USD5.5m-class wire is not silently classified as an
--- advisory fee. Released inventory, draft closing materials and the receiving
--- bank record instead support an asset-sale package containing ESWW shares and
--- membership interests in AP SHL Investors and AP Technology Partners.
--- Black-family records classify AP SHL/AP Technology as Apollo-related
--- entities, while distinguishing them from Apollo funds/co-invest entities.
+-- Primary records now distinguish three stages:
+--   * an early unsigned draft carrying an approximately USD18m package price;
+--   * a late-November closing sequence repriced to USD5.5m;
+--   * a Nov-28 final allocation email: ESWW USD5m, AP SHL USD250k,
+--     AP Technology USD250k, followed by a Nov-30 USD5,500,030 bank credit.
+--
+-- Repricing is a paid chronology; its reason is not yet paid.
 ------------------------------------------------------------------------
 
 data SaleAsset : Set where
@@ -25,7 +26,8 @@ data SaleAsset : Set where
 
 data SaleEvidenceClass : Set where
   fileInventory : SaleEvidenceClass
-  draftAgreement : SaleEvidenceClass
+  earlyDraftAgreement : SaleEvidenceClass
+  finalAllocationEmail : SaleEvidenceClass
   transferInstrument : SaleEvidenceClass
   processedBankCredit : SaleEvidenceClass
   laterBuyerAccounting : SaleEvidenceClass
@@ -48,53 +50,97 @@ closingInventoryReceipt = sale-receipt
   "Financial Trust closing-file inventory"
   "EFTA00299927 / EFTA00299930 inventory family"
   fileInventory
-  "The released Financial Trust records inventory a 'Purchase & Sale by Black Family Partners, LP from Financial Trust Company, Inc.' of interests in Environmental Solutions Worldwide, AP SHL Investors LLC and AP Technology Partners LLC, with purchase/sale agreement, allocation schedule, consents, assignments, ESWW stock powers and wire instructions. Inventory proves the closing document family existed, not that every listed draft/instrument was fully executed."
+  "The released records inventory a Black Family Partners purchase from Financial Trust of ESWW, AP SHL Investors and AP Technology Partners, with purchase/sale agreement, allocations, consents, assignments, stock powers and wire instructions."
   0 false false false
+
+early18mDraft : SaleReceipt
+early18mDraft = sale-receipt
+  "Early November USD18m draft package"
+  "EFTA00586106"
+  earlyDraftAgreement
+  "An unsigned early-November draft assigns an aggregate purchase price around USD18m across ESWW, AP SHL and AP Technology. It is a draft state only and is superseded by the later closing-price/allocation evidence."
+  18000000 false false false
+
+finalAllocationNov28 : SaleReceipt
+finalAllocationNov28 = sale-receipt
+  "28 November USD5.5m final allocation email"
+  "EFTA00693690..93"
+  finalAllocationEmail
+  "Darren Indyke forwarded an allocation received from Eileen Alexanderson stating: USD5m ESWW shares, USD250k AP SHL interest and USD250k AP Technology interest, explicitly described as allocation of the USD5.5m purchase price. A 2014 basis inquiry independently refers back to these amounts as the sale prices used."
+  5500000 true true false
 
 processed5500030Credit : SaleReceipt
 processed5500030Credit = sale-receipt
   "30 November 2012 BFP -> Financial Trust bank credit"
   "EFTA01510783 / duplicate EFTA01510763"
   processedBankCredit
-  "Financial Trust's JPMorgan record shows a USD5,500,030 CHIPS credit from Black Family Partners LP, sent from Bank of America originator account ending 0135, in the targeted closing window. The latest located sale-package drafts state an aggregate USD5.5m purchase price. The extra USD30 remains unexplained and is not labelled a fee."
-  5500030 true false false
+  "Financial Trust's JPMorgan record shows a USD5,500,030 CHIPS credit from Black Family Partners LP from Bank of America in the closing window. The USD30 excess over the documented USD5.5m allocation remains unexplained and is not relabelled as a fee."
+  5500030 true true false
 
 eswwTransferMechanics : SaleReceipt
 eswwTransferMechanics = sale-receipt
   "ESWW stock-transfer mechanics"
-  "EFTA00585846 and related closing-file instruments"
+  "EFTA00585846 and related closing instruments"
   transferInstrument
-  "The closing materials include a stock power for 13,198,711 ESWW shares and a separate transfer instruction for 151,494 broker-held shares, together matching Financial Trust's 13,350,205-share block. This materially supports intended full-position transfer while leaving final transfer-agent completion to the shareholder/register record."
+  "Closing materials include a stock power for 13,198,711 ESWW shares and a separate transfer instruction for 151,494 broker-held shares, together matching Financial Trust's 13,350,205-share block."
   0 false false false
 
 blackFamilyApolloRelatedClassification : SaleReceipt
 blackFamilyApolloRelatedClassification = sale-receipt
   "Black-family AP SHL/AP Technology classification"
-  "EFTA00590400 / EFTA00602764 Black Family Group investment materials"
+  "EFTA00590400 / EFTA00602764"
   laterBuyerAccounting
-  "Black-family investment materials explicitly classify AP Technology Partners LLC and AP SHL Investors LLC as 'Apollo Related Entities' and separately classify Apollo funds/co-invest vehicles as Apollo entities. Later Black-family look-through records carry AP Technology/AP SHL positions. This pays Apollo adjacency/classification, not an Apollo corporate purchase or Apollo-managed-fund transfer."
+  "Black-family investment materials classify AP Technology Partners and AP SHL Investors as 'Apollo Related Entities' while separately identifying Apollo funds/co-invest vehicles. This pays Apollo adjacency, not an Apollo corporate purchase or Apollo-managed-fund transfer."
   0 true false false
+
+record SaleRepricing : Set where
+  constructor sale-repricing
+  field
+    earlyDraftUSD : Nat
+    closingAllocationUSD : Nat
+    processedCreditUSD : Nat
+    repricingPaid : Bool
+    repricingReasonPaid : Bool
+    priceChangeImpliesImpropriety : Bool
+open SaleRepricing public
+
+canonicalSaleRepricing : SaleRepricing
+canonicalSaleRepricing = sale-repricing 18000000 5500000 5500030 true false false
+
+record FinalAllocation : Set where
+  constructor final-allocation
+  field
+    eswwUSD : Nat
+    apSHLUSD : Nat
+    apTechnologyUSD : Nat
+    aggregateUSD : Nat
+open FinalAllocation public
+
+canonicalFinalAllocation : FinalAllocation
+canonicalFinalAllocation = final-allocation 5000000 250000 250000 5500000
 
 record SaleBoundary : Set where
   constructor sale-boundary
   field
     bfpPaidFinancialTrust5500030 : Bool
     assetPackageDocumentFamilyExists : Bool
+    finalAllocationPaid : Bool
     apSHLAndAPTechnologyApolloRelated : Bool
     apSHLAndAPTechnologyApolloManagedFunds : Bool
-    finalExecutedAgreementLocated : Bool
-    exactFinalAssetAllocationLocated : Bool
+    fullySignedFinalAgreementLocated : Bool
     saleWasApolloCorporateTransaction : Bool
     2012WireWasAdvisoryFee : Bool
+    repricingReasonPaid : Bool
 open SaleBoundary public
 
 canonicalSaleBoundary : SaleBoundary
 canonicalSaleBoundary = sale-boundary
-  true true true false false false false false
+  true true true true false false false false false
 
 data ApolloRelatedImpliesApolloFund : Set where
 data BFPBuyerImpliesApolloBuyer : Set where
-data ProcessedWireImpliesEveryDraftTermFinal : Set where
+data DraftPriceImpliesClosingPrice : Set where
+data RepricingImpliesImpropriety : Set where
 data SalePaymentImpliesAdvisoryFee : Set where
 
 apolloRelatedDoesNotCreateApolloFund : ApolloRelatedImpliesApolloFund → ⊥
@@ -103,15 +149,14 @@ apolloRelatedDoesNotCreateApolloFund ()
 bfpBuyerDoesNotCreateApolloBuyer : BFPBuyerImpliesApolloBuyer → ⊥
 bfpBuyerDoesNotCreateApolloBuyer ()
 
-processedWireDoesNotFinalizeEveryDraft : ProcessedWireImpliesEveryDraftTermFinal → ⊥
-processedWireDoesNotFinalizeEveryDraft ()
+draftPriceDoesNotCreateClosingPrice : DraftPriceImpliesClosingPrice → ⊥
+draftPriceDoesNotCreateClosingPrice ()
+
+repricingDoesNotCreateImpropriety : RepricingImpliesImpropriety → ⊥
+repricingDoesNotCreateImpropriety ()
 
 salePaymentDoesNotCreateAdvisoryFee : SalePaymentImpliesAdvisoryFee → ⊥
 salePaymentDoesNotCreateAdvisoryFee ()
-
-------------------------------------------------------------------------
--- Reconciliation significance.
-------------------------------------------------------------------------
 
 record PaymentClassificationCorrection : Set where
   constructor payment-classification-correction
@@ -123,16 +168,11 @@ record PaymentClassificationCorrection : Set where
 open PaymentClassificationCorrection public
 
 canonicalPaymentClassificationCorrection : PaymentClassificationCorrection
-canonicalPaymentClassificationCorrection = payment-classification-correction
-  true true false false
-
-------------------------------------------------------------------------
--- Remaining acquisition.
-------------------------------------------------------------------------
+canonicalPaymentClassificationCorrection = payment-classification-correction true true false false
 
 data SaleDebt : Set where
   executedSaleAgreement : SaleDebt
-  finalAllocationSchedule : SaleDebt
+  repricingRationale : SaleDebt
   bofaDebitAdvice : SaleDebt
   eswwTransferAgentCompletion : SaleDebt
   apSHLConsentAndPostSaleRights : SaleDebt
@@ -149,18 +189,18 @@ open SaleAcquisition public
 
 canonicalSaleAcquisition : List SaleAcquisition
 canonicalSaleAcquisition =
-  sale-acquisition executedSaleAgreement 100
-    "Acquire the final signed purchase-and-sale agreement rather than treating draft agreement versions as operative."
-  ∷ sale-acquisition finalAllocationSchedule 100
-    "Resolve the final USD5.5m allocation among ESWW, AP SHL and AP Technology; draft allocations changed materially and cannot be promoted."
+  sale-acquisition repricingRationale 100
+    "Explain the change from the early USD18m draft to the USD5.5m closing allocation through valuation workpapers, negotiations, tax/accounting advice or contemporaneous correspondence; chronology alone does not explain motive."
+  ∷ sale-acquisition executedSaleAgreement 100
+    "Acquire the final fully executed purchase-and-sale agreement and compare its terms with the Nov-28 allocation email and Nov-30 settlement."
   ∷ sale-acquisition bofaDebitAdvice 99
-    "Acquire the 30 November 2012 Bank of America debit advice for Black Family Partners account ending 0135 and explain the USD30 excess over the draft purchase price."
+    "Acquire the Bank of America debit advice and explain the USD30 excess over the documented purchase allocation."
   ∷ sale-acquisition eswwTransferAgentCompletion 99
-    "Resolve ESWW shareholder-register/transfer-agent completion and subsequent reverse-split ownership to close legal title transfer."
+    "Resolve ESWW shareholder-register/transfer-agent completion and subsequent ownership."
   ∷ sale-acquisition apSHLConsentAndPostSaleRights 98
     "Acquire final AP SHL assignment/member consent and trace rights/value after Black Family Partners became holder."
   ∷ sale-acquisition apTechnologyConsentAndPostSaleRights 98
     "Acquire final AP Technology assignment/member consent and trace rights/value after transfer."
   ∷ sale-acquisition economicGainLossReconstruction 97
-    "Reconstruct Financial Trust's original cost, interim distributions and sale proceeds asset-by-asset before calling the USD5.5m package a gain or loss."
+    "Reconstruct Financial Trust's original cost, distributions and sale proceeds asset-by-asset before computing gain or loss."
   ∷ []
