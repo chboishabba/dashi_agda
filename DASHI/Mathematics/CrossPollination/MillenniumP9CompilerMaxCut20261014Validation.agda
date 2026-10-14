@@ -19,7 +19,8 @@ import DASHI.Mathematics.Complexity.CodedFiniteStandardSingletonLinkExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardModeTransitionEmbeddingExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkTransitionPreservationExact
 import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedStructuralSimulationExact
-import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedRunSimulationExact
+open import DASHI.Mathematics.Complexity.CodedFiniteStandardLinkedRunSimulationExact
+  using (simulateLinkedExactRun; simulateCodedCandidateExecution; appendLinkedCandidatePhase)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionPredicateCodeExact
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptancePredicateCodeExact
@@ -73,7 +74,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 --    * whole `standardNext` steps commute;
 --    * `CodedFiniteStandardLinkedRunSimulationExact` lifts this pointwise result
 --      to exact whole runs with IDENTICAL step count and specializes it to the
---      actual `CodedStandardPolynomialDecider.execution` witness.
+--      actual `CodedStandardPolynomialDecider.execution` witness;
+--    * exact prefix ; candidate ; suffix runs compose with the literal additive
+--      phase clock, so the candidate middle phase is no longer a separate C-wall.
 --
 -- 5. STREAMED COOK EVALUATOR DEFUNCTIONALISATION
 --    * transition placed predicates are finite `(time,column)` codes;
@@ -103,9 +106,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedLocalKernelTablesExact
 -- B. assemble that fragment with the ACTUAL coded polynomial candidate via the
 --    proved mode-sum + safe-link machinery and add the finite opposite suffix;
 --
--- C. construct concrete generator call/return runs around the now-paid exact
---    linked candidate middle run, and lift the local materialisation/bisimulation
---    lemmas across those generator calls;
+-- C. construct only the concrete generator call/return and suffix runs; the
+--    linked candidate middle run and three-phase run composition are now paid;
 --
 -- D. close prefix + candidate + suffix target time to the SAME exact T used in
 --    the target's own guarded Cook formula;
