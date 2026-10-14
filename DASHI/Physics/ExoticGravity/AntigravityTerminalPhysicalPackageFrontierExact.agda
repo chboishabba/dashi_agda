@@ -25,8 +25,13 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --        covariance and E->L trace continuation);
 --
 --   P2. one common gravitational calibration/renormalization package
---       (affine source->rho map, cosmological convention, accepted kappa/G,
---        consumer-relevant stress*length^2 scale);
+--       (affine source->rho map, cosmological convention, and the
+--        consumer-relevant source/device stress*length^2 scale).
+--
+--       Accepted measured G is no longer an open subleaf for this consumer:
+--       the attributed NIST/CODATA 2022 authority admission now instantiates
+--       the existing accepted physical Einstein-coupling ABI while retaining
+--       G's quoted uncertainty and the non-exactness firewall.
 --
 --   P3. one matched experimental package
 --       (real controlled source switch, systematics budget, null/calibration,
@@ -40,6 +45,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 --
 -- What is NOT independently recharged after these packages are supplied:
 --   * a split pinned boost-record + trace-record representation;
+--   * accepted G authority already paid by the source-attributed admission;
 --   * another static metric-response theorem;
 --   * another Delta same-object theorem for a common calibrated pair;
 --   * R109 finite-tail sign machinery merely to consume an already-produced
@@ -94,9 +100,22 @@ representationOnlyAdapterDebtRemains =
 typedTerminalInternallyNeedsBoostAndTraceContinuation : Bool
 typedTerminalInternallyNeedsBoostAndTraceContinuation = true
 
-gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared : Bool
-gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared =
+acceptedMeasuredGAuthorityStillOpen : Bool
+acceptedMeasuredGAuthorityStillOpen =
   SI.acceptedMeasuredGAuthorityStillRequired
+
+acceptedMeasuredGAuthorityPaid : Bool
+acceptedMeasuredGAuthorityPaid = true
+
+stressLengthSquaredScaleStillOpen : Bool
+stressLengthSquaredScaleStillOpen =
+  SI.sourceStressLengthSquaredScaleStillRequired
+
+-- Compatibility export for the older combined wording.  The conjunction is no
+-- longer open because its accepted-G component has been paid; the stress-length
+-- product remains separately visible above.
+gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared : Bool
+gravityCalibrationInternallyNeedsAcceptedGAndStressLengthSquared = false
 
 matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics : Bool
 matchedExperimentInternallyNeedsPhysicalSwitchAndSystematics =
@@ -108,6 +127,9 @@ ttPackageInternallyNeedsThreeSameObjectWelds =
 
 ------------------------------------------------------------------------
 -- Package counts for the three preferred consumer modes.
+--
+-- Paying one subleaf inside P2 does not remove P2 itself: the affine/common
+-- renormalization and source-native stress*length^2 identification remain.
 ------------------------------------------------------------------------
 
 mandatoryStaticResponsePhysicalPackageCount : Nat
@@ -125,6 +147,8 @@ record TerminalPhysicalPackageFrontier : Set where
     typedLocalCTerminalOpen : Bool
     sharedWightmanTerminalPreferred : Bool
     splitBoostTraceRepresentationOpen : Bool
+    acceptedMeasuredGOpen : Bool
+    stressLengthSquaredProductOpen : Bool
     commonGravityCalibrationOpen : Bool
     matchedExperimentOpen : Bool
     ttPackageOpenForScalarRoute : Bool
@@ -140,8 +164,13 @@ record TerminalPhysicalPackageFrontier : Set where
 canonicalTerminalPhysicalPackageFrontier : TerminalPhysicalPackageFrontier
 canonicalTerminalPhysicalPackageFrontier =
   terminal-physical-package-frontier
-    true true false true true false true false false false false
+    true true false false true true true false true false false false false
     3 3 4
+
+acceptedMeasuredGAuthorityStillOpenIsFalse :
+  acceptedMeasuredGAuthorityStillOpen ≡ false
+acceptedMeasuredGAuthorityStillOpenIsFalse =
+  SI.acceptedMeasuredGAuthorityStillRequiredIsFalse
 
 independentPinnedBoostTraceSplitRequiredIsFalse :
   independentPinnedBoostTraceSplitRequired ≡ false
