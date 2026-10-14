@@ -10,6 +10,7 @@ import DASHI.Physics.Optics.DiffuserCamLocalExecutionReceiptExact as LocalExecut
 import DASHI.Physics.Optics.BerkeleyLenslessInformationDesignSourceExact as InfoSource
 import DASHI.Physics.Optics.BerkeleyPhotonTransferCalibrationExact as PhotonTransfer
 import DASHI.Physics.Optics.BerkeleyPhotonTransferLocalExecutionReceiptExact as PhotonTransferLocal
+import DASHI.Physics.Optics.BerkeleySystemCharacterizationDetectedPhotonExact as SystemCharacterization
 import DASHI.Physics.Optics.BerkeleyConvRMLParallelComparatorExact as ConvRML
 import DASHI.Physics.Optics.BerkeleyPLDExposureProvenanceCoordinateExact as ExposureProvenance
 import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
@@ -18,16 +19,18 @@ import DASHI.Physics.Optics.BerkeleyPLD100kReleaseProvenanceExact as Release100k
 -- ACQUISITION MAX-CUT
 --
 -- Public-source acquisition pays the Berkeley artifacts/source operator, the
--- information-design experiment, the ConvRML comparator, the source-executed
+-- information-design experiment, the ConvRML comparator, source-executed
 -- detector photon-transfer calibration, and publication-level provenance for
--- the named synchronized 100k PLD acquisition. Local execution separately pays
--- synthetic source-H / finite-support / memory-planner / photon-transfer
--- compiler receipts. None is promoted into unavailable raw-data execution.
+-- the synchronized 100k PLD. Local execution pays synthetic source-H / finite-
+-- support / memory-planner / photon-transfer compiler receipts plus a real-data
+-- execution over 15 matched RML/diffuser characterization TIFF positions.
 --
 -- Important non-collapse boundaries:
 --   * published 100k acquisition exposure identity: PAID (80/50/4 ms);
 --   * exact released-archive run-log identity: UNPAID;
 --   * detected DN -> photon-count calibration: PAID;
+--   * real measured characterization in detected-photon units: PAID;
+--   * characterization exposure-normalized response: UNPAID;
 --   * incident-photon optical throughput / matched input flux: UNPAID;
 --   * real Waller example_psfs.mat same-H numerical receipt: UNPAID.
 ------------------------------------------------------------------------
@@ -58,9 +61,11 @@ record Diffraction3DImagingAcquisitionMaxCut : Set where
     sourceExecutedPhotonTransferCalibrationPinned : Bool
     sourceDigitalToEstimatedPhotonConversionPinned : Bool
     localSyntheticPhotonTransferReceiptCaptured : Bool
+    realSystemCharacterizationDetectedPhotonReceiptCaptured : Bool
     detectedPhotonCountConversionPinned : Bool
     localRawPhotonCalibrationReexecuted : Bool
     fullPrecisionPhotonTransferCoefficientsRecovered : Bool
+    characterizationExposureNormalizedResponsePaid : Bool
     incidentPhotonThroughputCalibrationPinned : Bool
     opticalThroughputCalibrationPinned : Bool
     physicalAcquisitionPhotonCalibrationPinned : Bool
@@ -107,9 +112,11 @@ currentDiffraction3DImagingAcquisitionMaxCut = record
   ; sourceExecutedPhotonTransferCalibrationPinned = true
   ; sourceDigitalToEstimatedPhotonConversionPinned = true
   ; localSyntheticPhotonTransferReceiptCaptured = PhotonTransferLocal.localSyntheticPhotonTransferReceiptCaptured
+  ; realSystemCharacterizationDetectedPhotonReceiptCaptured = SystemCharacterization.detectedPhotonCharacterizationPaid
   ; detectedPhotonCountConversionPinned = PhotonTransfer.detectedPhotonCountConversionPinned
   ; localRawPhotonCalibrationReexecuted = PhotonTransfer.localRawCalibrationSweepReexecuted
   ; fullPrecisionPhotonTransferCoefficientsRecovered = PhotonTransfer.fullPrecisionFitCoefficientsRecovered
+  ; characterizationExposureNormalizedResponsePaid = SystemCharacterization.exposureNormalizedResponsePaid
   ; incidentPhotonThroughputCalibrationPinned = PhotonTransfer.incidentPhotonThroughputCalibrationPaid
   ; opticalThroughputCalibrationPinned = PhotonTransfer.opticalThroughputCalibrationPaid
   ; physicalAcquisitionPhotonCalibrationPinned = InfoSource.physicalAcquisitionPhotonCalibrationPaid
@@ -175,6 +182,10 @@ sourceDigitalPhotonConversionStatus : Bool
 sourceDigitalPhotonConversionStatus = PhotonTransfer.sourceDigitalToEstimatedPhotonConversionPaid
 localSyntheticPhotonTransferStatus : Bool
 localSyntheticPhotonTransferStatus = PhotonTransferLocal.localSyntheticPhotonTransferReceiptCaptured
+realCharacterizationDetectedPhotonStatus : Bool
+realCharacterizationDetectedPhotonStatus = SystemCharacterization.detectedPhotonCharacterizationPaid
+characterizationExposureNormalizedStatus : Bool
+characterizationExposureNormalizedStatus = SystemCharacterization.exposureNormalizedResponsePaid
 localRawPhotonCalibrationStatus : Bool
 localRawPhotonCalibrationStatus = PhotonTransfer.localRawCalibrationSweepReexecuted
 incidentPhotonThroughputStatus : Bool
