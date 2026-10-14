@@ -8,31 +8,6 @@ import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact as SameE6
 
 ------------------------------------------------------------------------
 -- ORDER-THREE FIRST-TITS GRADING: E6 -> TRINIFICATION CENTRALIZER
---
--- On the same three 3x3 blocks carrying the first-Tits cubic
---
---   N(X,Y,Z)=det X + det Y + det Z - tr(XYZ),
---
--- define over a carrier containing a primitive cube root zeta
---
---   sigma_zeta(X,Y,Z) = (X, zeta Y, zeta^2 Z).
---
--- Since zeta^3=1, each determinant and the XYZ trace term are unchanged, so
--- sigma_zeta preserves N and has order three.  Its three sector eigenvalues are
--- distinct; an infinitesimal norm symmetry commutes with sigma_zeta iff it is
--- block-preserving with respect to X+Y+Z.
---
--- The executable first-Tits cubic rank audit gives
---
---   dim Lie Isom(N) = 78,
---   dim Cent(sigma_zeta) = 24.
---
--- The already-owned explicit trinification action supplies an included
--- 24-dimensional sl3+sl3+sl3 subalgebra, so inclusion plus equal dimension
--- identifies the centralizer with the same trinification Lie action.
---
--- This is an algebraic/cyclotomic subgroup-selection theorem candidate.  It is
--- not yet a physical order parameter, holonomy, scalar condensate or DHR group.
 ------------------------------------------------------------------------
 
 fullE6NormSymmetryLieDimension : Nat
@@ -81,10 +56,10 @@ canonicalE6ZetaTrinificationCentralizerLocalReceipt =
   e6-zeta-trinification-centralizer-local-receipt
     true true true true true true true true true true true true
     false true false false false
-    "The same first-Tits cubic has an order-three cyclotomic grading whose infinitesimal E6 centralizer is exactly the already-owned 24-dimensional trinification action. The direct two-neutral-VEV full-E6 stabilizer is instead dimension 49, so the honest algebraic chain is E6 -> Cent(sigma_zeta)=SL3^3 -> SM. A physical mechanism selecting sigma_zeta, the compact global-group centralizer and DHR same-action remain separate obligations."
+    "On the same first-Tits cubic, the order-three sector grading has a 24-dimensional infinitesimal norm-symmetry centralizer. The already-owned 24-dimensional SL3^3 action is included in that centralizer, so inclusion plus equal dimension identifies the same trinification Lie algebra. The direct two-neutral-VEV full-E6 stabilizer is dimension 49, hence the honest algebraic chain is E6 -> Cent(sigma_zeta)=SL3^3 -> SM. Physical selection of the grading, global compact-group centralizer and DHR same-action remain open."
 
-sameE6Boundary : SameE6.TrinificationE6SameActionBoundary
-sameE6Boundary = SameE6.canonicalTrinificationE6SameActionBoundary
+sameE6Receipt : SameE6.TrinificationE6SameActionLocalReceipt
+sameE6Receipt = SameE6.canonicalTrinificationE6SameActionLocalReceipt
 
 data CyclotomicCentralizerCreatesPhysicalBreaking : Set where
 
