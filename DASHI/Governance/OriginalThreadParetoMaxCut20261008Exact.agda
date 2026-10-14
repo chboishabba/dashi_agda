@@ -9,6 +9,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Governance.OriginalThreadParetoAcquisitionExact as Previous
 import DASHI.Governance.IRISDenaHansardCorrectionAwareEvidenceExact as Hansard
+import DASHI.Governance.IRISDenaCorrectionAwareReviewGateExact as HansardReview
 import DASHI.Governance.IRISDenaSameObjectAcquisitionMaxCutExact as IRIS
 import DASHI.Governance.AUKUSOnboardConductSovereigntyBoundaryExact as Sovereignty
 import DASHI.Governance.AUKUSEmbeddedAuthorityCommandNoncollapseExact as Authority
@@ -26,10 +27,16 @@ import DASHI.Governance.IranThreatRepressionCaseNarrowingExact as Iran
 --   * generic U.S. PEP statutory/program envelope, including Australia as a
 --     partner and the fully-integrated host-service program model;
 --   * the earlier secondary "ordered to bunks" proposition is superseded for
---     claim evaluation by a later named primary Chief-of-Navy denial.
+--     claim evaluation by a later named primary Chief-of-Navy denial;
+--   * the Hansard leaf now has an exact review contract reusing the generic
+--     REAL-MATTER human-review + exact-item-binding machinery on master.
 --
--- Neither result substitutes for correction-aware hearing content, bilateral
--- operative authority text, or the same-episode exact-duty record.
+-- The review contract does not pay the empirical leaf: transcript/correction
+-- content still has to be acquired, correction applicability resolved, and an
+-- exact review receipt bound to the same duty-class proposition.
+--
+-- None of these results substitutes for correction-aware hearing content,
+-- bilateral operative authority text, or the same-episode exact-duty record.
 ------------------------------------------------------------------------
 
 data LiveRequirement : Set where
@@ -44,7 +51,7 @@ hansardContentCell = Pareto.requirement-candidate
   irisCorrectionAwareHansardContent
   true true true true
   1 5
-  "Read FADT transcript ref. 29619 pp. 49-52 together with any applicable Chief of Navy correction; promote/correct defensive/platform-maintenance duty classes only from that primary bundle."
+  "Acquire FADT transcript ref. 29619 pp. 49-52 and any applicable Chief of Navy correction, resolve correction applicability, and bind an exact human-review receipt to the same duty-class proposition before promotion. Acquisition or review alone does not create primary authority or historical truth."
 
 embeddingProtocolCell : Pareto.RequirementCandidate LiveRequirement
 embeddingProtocolCell = Pareto.requirement-candidate
@@ -114,6 +121,9 @@ frontierExactlyIRISThreeStage = refl
 
 correctionAwarePrimaryBundle : Hansard.CorrectionAwarePrimaryBundle
 correctionAwarePrimaryBundle = Hansard.canonicalPrimaryBundle
+
+correctionAwareReviewDemand : HansardReview.CorrectionAwareReviewDemand
+correctionAwareReviewDemand = HansardReview.canonicalReviewDemand
 
 irisMinCut : IRIS.RemainingMinCut
 irisMinCut = IRIS.currentMinCut
