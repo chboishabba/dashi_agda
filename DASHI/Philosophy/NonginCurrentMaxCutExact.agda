@@ -26,7 +26,9 @@ import DASHI.Reasoning.TrialecticDiscreteGroupoidPresheafBaselineExact as Discre
 import DASHI.Reasoning.TrialecticC3GlobalNaturalityNoGoExact as C3NoGo
 import DASHI.Reasoning.TrialecticC3EdgeResidualRepairExact as C3Repair
 import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyExact as Expansion
-import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as Higher
+import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact as HistoricalHigher
+import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact as Higher
+import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact as Hypercover
 
 originBoundary : Origin.NonginSourceBoundary
 originBoundary = Origin.canonicalNonginSourceBoundary
@@ -76,11 +78,14 @@ c3RepairBoundary = C3Repair.canonicalTrialecticC3EdgeResidualRepairBoundary
 expansionBoundary : Expansion.TrialecticCarryDepthExpansionPolicyBoundary
 expansionBoundary = Expansion.canonicalTrialecticCarryDepthExpansionPolicyBoundary
 
-higherBoundary : Higher.TrialecticHigherDescentPromotionBoundary
-higherBoundary = Higher.canonicalTrialecticHigherDescentPromotionBoundary
+historicalHigherBoundary : HistoricalHigher.TrialecticHigherDescentPromotionBoundary
+historicalHigherBoundary = HistoricalHigher.canonicalTrialecticHigherDescentPromotionBoundary
 
-higherRefinementBoundary : Higher.TrialecticHigherDescentRefinementBoundary
-higherRefinementBoundary = Higher.canonicalTrialecticHigherDescentRefinementBoundary
+higherBoundary : Higher.TrialecticHigherDescentMaxCutBoundary
+higherBoundary = Higher.canonicalTrialecticHigherDescentMaxCutBoundary
+
+hypercoverBoundary : Hypercover.TrialecticHypersheafHypercoverFrontierBoundary
+hypercoverBoundary = Hypercover.canonicalTrialecticHypersheafHypercoverFrontierBoundary
 
 consumerRelativeTheoremPaid :
   Advantage.consumerRelativeNonfactorabilityPaid advantageBoundary ≡ true
@@ -146,6 +151,10 @@ observationalGlobalUniquenessReceipt :
   SetEffective.observationalUniquenessPaid setEffectiveBoundary ≡ true
 observationalGlobalUniquenessReceipt = refl
 
+-- Historical obstruction: the old RelationalPatch-indexed family alone did not
+-- cover global/vertex site objects.  The wave-phase lift solves that mismatch
+-- by indexing exact section payloads over RelObj and retaining C3 phase in the
+-- morphism fibre; the obstruction remains true of the old construction.
 siteTransportCoverageObstructionReceipt :
   SiteTransport.newGlobalVertexFiberMorphismsRequired siteTransportBoundary ≡ true
 siteTransportCoverageObstructionReceipt = refl
@@ -192,21 +201,25 @@ carrySeedUniquenessStillFalse :
   Expansion.carrySeedUniquelyDeterminesNextStructuredState expansionBoundary ≡ false
 carrySeedUniquenessStillFalse = refl
 
-carryAllDepthCoherenceStillExplicit :
+carryAllDepthCoherenceStillNotAutomatic :
   Expansion.allDepthCoherenceAutomatic expansionBoundary ≡ false
-carryAllDepthCoherenceStillExplicit = refl
+carryAllDepthCoherenceStillNotAutomatic = refl
 
-transportEnrichedGroupoidPresheafStillOpen :
-  Higher.groupoidPresheafReady higherBoundary ≡ false
-transportEnrichedGroupoidPresheafStillOpen = refl
+historicalGroupoidFlagSuperseded :
+  HistoricalHigher.groupoidPresheafReady historicalHigherBoundary ≡ false
+historicalGroupoidFlagSuperseded = refl
 
-higherStackNotYetPaid :
-  Higher.effectiveStackReady higherBoundary ≡ false
-higherStackNotYetPaid = refl
+transportEnrichedGroupoidPresheafNowPaid :
+  Higher.fullSiteNonDiscreteGroupoidPresheafPaid higherBoundary ≡ true
+transportEnrichedGroupoidPresheafNowPaid = refl
 
-hypersheafNotYetPaid :
-  Higher.hypersheafReady higherBoundary ≡ false
-hypersheafNotYetPaid = refl
+higherStackNowPaid :
+  Higher.certifiedHigherStackPaid higherBoundary ≡ true
+higherStackNowPaid = refl
+
+hypersheafStillAtHypercoverFrontier :
+  Hypercover.hypersheafPromotionNowHasSingleTypedFrontier hypercoverBoundary ≡ true
+hypersheafStillAtHypercoverFrontier = refl
 
 record NonginCurrentMaxCutBoundary : Set where
   field
@@ -279,11 +292,11 @@ canonicalNonginCurrentMaxCutBoundary = record
   ; carryExpansionPolicyPaid = true
   ; carrySeedUniqueNextStructuredState = false
   ; carryAllDepthCoherenceAutomatic = false
-  ; transportEnrichedGroupoidPresheafPaid = false
+  ; transportEnrichedGroupoidPresheafPaid = true
   ; empiricalTenPercentLawPromoted = false
   ; universalRicherRepresentationAdvantagePromoted = false
   ; fullBoundaryNerveEquivalencePaid = false
-  ; certifiedHigherStackPaid = false
+  ; certifiedHigherStackPaid = true
   ; certifiedHypersheafPaid = false
   ; exceptionalGroupRealizationRequiredForNongin = false
   ; physicalLawPromotionPaid = false
