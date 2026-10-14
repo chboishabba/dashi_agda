@@ -22,3 +22,17 @@ def test_reuse_rollup_imports_new_r136_tt_si_and_experiment_frontiers():
         "AntigravityMatchedControlExperimentDonorMaxCutExact",
     ):
         assert token in text
+
+
+def test_static_response_reuse_does_not_recharge_r109_sign_tail():
+    text = read("DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseMaxCutExact.agda")
+    for token in (
+        "typedPinnedLocalCTerminalStillRequiredForStaticReuse",
+        "r136FiniteAnchorTailRequiredForStaticResponseReuse",
+        "r136StrictFinitePlusTailMarginRequiredForStaticResponseReuse",
+        "r136FiniteAnchorTailStillRequiredForIndependentSignRoute",
+        "r136StrictFinitePlusTailMarginStillRequiredForIndependentSignRoute",
+    ):
+        assert token in text
+    assert "r136FiniteAnchorTailRequiredForStaticResponseReuse = false" in text
+    assert "r136StrictFinitePlusTailMarginRequiredForStaticResponseReuse = false" in text
