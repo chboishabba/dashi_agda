@@ -14,6 +14,7 @@ import DASHI.Biology.IITXOREffectCutReceiptExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
+import DASHI.Biology.IITCausalPantsFibreGluingExact
 import DASHI.Biology.IITPointedTernary27FaceGluingExact
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact
 import DASHI.Biology.IITPointedTernary27CyclotomicCellExact
