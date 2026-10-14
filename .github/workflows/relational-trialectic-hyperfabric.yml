@@ -17,6 +17,9 @@ on:
       - 'DASHI/Philosophy/Everything.agda'
       - 'DASHI/Foundations/Relational*.agda'
       - 'DASHI/Foundations/Trialectic*.agda'
+      - 'DASHI/Foundations/Base369Wave*.agda'
+      - 'DASHI/Foundations/Base369TriTruthField.agda'
+      - 'DASHI/Foundations/SSPTritCarrier.agda'
       - 'DASHI/Foundations/ExceptionalAlbertFreudenthalResidualExact.agda'
       - 'DASHI/Promotion/ClassicalFieldObligations.agda'
       - 'DASHI/Metric/AgreementUltrametric.agda'
@@ -51,6 +54,9 @@ on:
       - 'DASHI/Philosophy/Everything.agda'
       - 'DASHI/Foundations/Relational*.agda'
       - 'DASHI/Foundations/Trialectic*.agda'
+      - 'DASHI/Foundations/Base369Wave*.agda'
+      - 'DASHI/Foundations/Base369TriTruthField.agda'
+      - 'DASHI/Foundations/SSPTritCarrier.agda'
       - 'DASHI/Foundations/ExceptionalAlbertFreudenthalResidualExact.agda'
       - 'DASHI/Promotion/ClassicalFieldObligations.agda'
       - 'DASHI/Metric/AgreementUltrametric.agda'
@@ -108,6 +114,8 @@ jobs:
             export AGDA_JOBS=2
             targets=(
               DASHI/EverythingRelationalTrialecticHyperfabric.agda
+              DASHI/Reasoning/NonginMaxCutEverything.agda
+              DASHI/Reasoning/TrialecticHigherDescentMaxCutPromotionValidation.agda
               DASHI/Philosophy/NonginRoadmapClosureValidation.agda
               DASHI/Philosophy/NonginExtendedRoadmapValidation.agda
             )
