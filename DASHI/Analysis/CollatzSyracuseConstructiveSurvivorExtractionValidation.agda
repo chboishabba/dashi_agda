@@ -10,6 +10,18 @@ finiteBarrierExtractionPaid :
   ≡ 1
 finiteBarrierExtractionPaid = refl
 
+strictDescentBuildsFiniteBarrierPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.strictDescentBuildsFiniteBarrierPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+strictDescentBuildsFiniteBarrierPaid = refl
+
+finiteBarrierStrictDescentEquivalencePaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.finiteBarrierStrictDescentEquivalencePaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+finiteBarrierStrictDescentEquivalencePaid = refl
+
 noInfiniteGivesDoubleNegatedDescentPaid :
   Extract.ConstructiveSurvivorExtractionBoundary.noInfiniteGivesDoubleNegatedDescentPaid
     Extract.canonicalConstructiveSurvivorExtractionBoundary
