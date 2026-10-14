@@ -43,15 +43,29 @@ goldmanSource = Source.mkNoDOISource
   "reports Goldman Sachs CEO comments that large AI/data-centre financing needs and higher interest rates can pressure project returns and long-term viability"
   Source.publicAttribution
 
+tencentSource : Source.AttributedSource
+tencentSource = Source.mkNoDOISource
+  "Reuters"
+  "Tencent raises $5.7 billion in debt sale as demand defies AI scrutiny"
+  "current financial reporting"
+  "2026-10-13"
+  "https://www.reuters.com/world/asia-pacific/tencent-markets-us-dollar-dim-sum-bonds-four-tranches-2026-10-13/"
+  secondaryCurrentReporting
+  "reports approximately USD 5.7B dual-currency Tencent debt issuance with more than USD 23B investor orders while AI investment scrutiny remains elevated"
+  Source.publicAttribution
+
 record FinancingConditionsPanel : Set where
   constructor financing-conditions-panel
   field
     firmusIPOWithdrawal : Bool
     imfAISlowdownLeverageWarning : Bool
     goldmanFinancingPressure : Bool
+    tencentSuccessfulDebtAccess : Bool
+    tencentOrderbookExceedsIssue : Bool
     issuerDefaultObserved : Bool
     sectorDefaultRatePaid : Bool
     harmonisedCreditSpreadPanelPaid : Bool
+    universalCapitalMarketClosure : Bool
     systemicBankFailureEstablished : Bool
     sectorBubbleEstablished : Bool
 
@@ -59,7 +73,7 @@ open FinancingConditionsPanel public
 
 currentFinancingConditionsPanel : FinancingConditionsPanel
 currentFinancingConditionsPanel = financing-conditions-panel
-  true true true false false false false false
+  true true true true true false false false false false false
 
 firmusWithdrawalObserved : firmusIPOWithdrawal currentFinancingConditionsPanel ≡ true
 firmusWithdrawalObserved = refl
@@ -70,8 +84,14 @@ imfAISlowdownLeverageWarningObserved = refl
 goldmanFinancingPressureObserved : goldmanFinancingPressure currentFinancingConditionsPanel ≡ true
 goldmanFinancingPressureObserved = refl
 
+tencentDebtAccessObserved : tencentSuccessfulDebtAccess currentFinancingConditionsPanel ≡ true
+tencentDebtAccessObserved = refl
+
 data FinancingStressPanelImpliesSectorBubblePermission : Set where
 data WarningImpliesDefaultPermission : Set where
+data StressImpliesUniversalCapitalMarketClosurePermission : Set where
+
+data SuccessfulDebtIssueImpliesNoStressPermission : Set where
 
 panelDoesNotCreateSectorBubble : FinancingStressPanelImpliesSectorBubblePermission → ⊥
 panelDoesNotCreateSectorBubble ()
@@ -79,6 +99,13 @@ panelDoesNotCreateSectorBubble ()
 warningDoesNotCreateDefault : WarningImpliesDefaultPermission → ⊥
 warningDoesNotCreateDefault ()
 
+stressDoesNotCreateUniversalClosure :
+  StressImpliesUniversalCapitalMarketClosurePermission → ⊥
+stressDoesNotCreateUniversalClosure ()
+
+successfulIssueDoesNotEraseStress : SuccessfulDebtIssueImpliesNoStressPermission → ⊥
+successfulIssueDoesNotEraseStress ()
+
 boundary : String
 boundary =
-  "By 2026-10-13 the financing-stress surface is broader than a single failed IPO: Firmus withdrawal, an IMF AI-slowdown/leverage risk warning, and Goldman commentary on financing/rate pressure are independently observed secondary-current-reporting coordinates. They do not supply issuer defaults, a harmonised AI-credit-spread/default panel, systemic bank failure, or a sector-bubble theorem."
+  "The 2026-10-13 financing surface is heterogeneous: Firmus withdrawal, IMF leverage/downside warnings and Goldman financing/rate-pressure commentary coexist with Tencent successfully raising about USD 5.7B of debt against more than USD 23B of orders. This supports selective/repriced capital rather than universal market closure. It does not supply issuer defaults, a harmonised AI credit-spread/default panel, systemic bank failure, or a sector-bubble theorem; conversely one successful debt sale does not erase stress elsewhere."
