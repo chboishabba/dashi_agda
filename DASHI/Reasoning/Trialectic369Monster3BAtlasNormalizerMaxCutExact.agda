@@ -29,23 +29,35 @@ module DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact where
 -- Hence the depth-eight word is the correct preferred target for the existing
 -- phase-resolved single-zeta programme.
 --
--- IMPORTANT NON-COLLAPSE:
--- none of these words stabilizes the chosen X6 Lagrangian; compression remains
--- the lawful field operator.  The finite quotient/Heisenberg realization still
--- does NOT construct the actual Monster zeta-sector state carrier or identify
--- its Fin-90 multiplicity action.  Those same-object producers are now the live
--- representation seam.
+-- BASIS/VECTOR CORRECTION:
+-- the literal VOA W_zeta carrier is a linear state carrier (it owns zero,
+-- addition and scalar multiplication).  X6 x Fin90 is a finite BASIS-LABEL
+-- carrier.  The previous direct whole-W_zeta <-> X6 x Fin90 target is therefore
+-- retired as an overstrong/wrong-level recognition target.
+--
+-- The live representation seam is instead factorized as:
+--   1. recognize the explicit Schrodinger 729-module as the actual H_zeta;
+--   2. instantiate S_zeta = Hom_E(H_zeta,W_zeta) and the actual linear
+--      evaluation/recovery H_zeta x S_zeta <-> W_zeta;
+--   3. choose/recognize a genuine representation-native basis of S_zeta
+--      indexed by Fin90 and identify the resulting tensor basis with the
+--      finite X6 x Fin90 translation/modulation model.
+--
+-- The certified ninety-fold Heisenberg character isotypy strongly constrains
+-- this decomposition but does NOT choose the Fin90 basis or supply the actual
+-- same-object intertwiners.
 --
 -- REMAINING RECEIPTS:
--- 1. construct the actual phase-resolved Monster zeta-sector action on the same
---    finite Heisenberg carrier and identify the Fin-90 multiplicity factor;
--- 2. use that to instantiate existing output-translation/multiplicity-descent
---    compilers;
--- 3. extend selected-word lifts to whatever full normalizer subgroup is actually
+-- 1. actual H_zeta same-object/action recognition;
+-- 2. actual Hom-space evaluation/recovery on the same literal W_zeta;
+-- 3. representation-native Fin90 multiplicity basis + basis action receipts;
+-- 4. instantiate existing output-translation/multiplicity-descent compilers on
+--    that corrected basis/linear recognition;
+-- 5. extend selected-word lifts only to the normalizer subgroup actually
 --    consumed downstream;
--- 4. kernelize concrete matrices/corrections when Agda theorem authority is
+-- 6. kernelize concrete matrices/corrections when Agda theorem authority is
 --    required;
--- 5. physical normalizer realization remains separate.
+-- 7. physical normalizer realization remains separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -56,6 +68,8 @@ import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact as 
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact as Field
 import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact as SelectedLift
 import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftReceiptExact as PrimitiveInertia
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as WZetaCorrection
+import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact as WZetaMaxCut
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Reasoning.Trialectic369MultiplicityNormalizerTranslationDescentExact as Descent
 
@@ -84,8 +98,11 @@ record Monster3BAtlasNormalizerBoundary : Set where
     primitivePuncturedOrbit728RuntimePaid : Bool
     primitivePuncturedStabilizerTrivialRuntimePaid : Bool
     genericCentralCharacterInertiaTheoremReusable : Bool
-    actualPhaseResolvedMonsterSectorActionPaid : Bool
-    fin90MultiplicityActionIdentified : Bool
+    wholeWZetaVectorToFiniteBasisBijectionRetired : Bool
+    actualHZetaSameObjectPaid : Bool
+    actualHomEvaluationSameObjectPaid : Bool
+    actualFin90MultiplicityBasisPaid : Bool
+    representationNativeWZetaBasisActionPaid : Bool
     sameBasisIntertwinerAgdaKernelPaid : Bool
     fullNormalizerHeisenbergActionPaid : Bool
     actualMonsterOutputTranslationEquivariancePaid : Bool
@@ -115,10 +132,13 @@ canonicalMonster3BAtlasNormalizerBoundary =
     PrimitiveInertia.canonicalBoundary.puncturedOrbit728Paid
     PrimitiveInertia.canonicalBoundary.puncturedStabilizerTrivialPaid
     PrimitiveInertia.canonicalBoundary.genericCentralCharacterInertiaTheoremReusable
-    PrimitiveInertia.canonicalBoundary.actualPhaseResolvedMonsterSectorActionPaid
-    PrimitiveInertia.canonicalBoundary.fin90MultiplicityActionIdentified
+    true
+    WZetaMaxCut.canonicalBoundary.actualHZetaSameObjectRecognitionPaid
+    WZetaMaxCut.canonicalBoundary.actualHomEvaluationSameObjectPaid
+    WZetaMaxCut.canonicalBoundary.actualMultiplicityFin90BasisPaid
+    WZetaMaxCut.canonicalBoundary.representationNativeWZetaBasisActionPaid
     PrimitiveInertia.canonicalBoundary.agdaKernelConcreteMatrixProofPaid
     SelectedLift.canonicalBoundary.fullNormalizerHeisenbergActionPaid
     false
     false
-    "Field acquisition is closed: a strict-symplectic source word is explicitly primitive on the selected GF(729), has punctured orbit 728/stabilizer 1, and has a center-preserving Heisenberg lift. The live same-object seam is now the actual phase-resolved Monster zeta-sector plus Fin-90 multiplicity action; after that the existing output-translation/descent compilers become consumable. Full-normalizer/kernel/physical realization remain separate." 
+    "Field/Heisenberg acquisition is closed at exact finite runtime level. The previous whole literal W_zeta vector-carrier <-> X6 x Fin90 basis-label bijection is retired. The live same-object seam is now correctly split into actual Schrodinger H_zeta recognition, actual Hom-space evaluation H_zeta x S_zeta <-> W_zeta, and a representation-native Fin90 basis/action on S_zeta. Full-normalizer/kernel/physical realization remain separate."
