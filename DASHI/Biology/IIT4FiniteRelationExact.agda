@@ -7,11 +7,6 @@ import DASHI.Biology.IIT4FiniteDistinctionExact as Distinction
 
 ------------------------------------------------------------------------
 -- IIT-4 FINITE RELATION SURFACE
---
--- Relations bind congruently overlapping distinction faces.  Their phi_r is
--- not a system-partition score and not another phi_d.  The numerical backend
--- supplies overlap cardinalities/densities; this owner records the typed face,
--- relatum, overlap and relation-phi receipts.
 ------------------------------------------------------------------------
 
 record RelationFace
@@ -19,7 +14,7 @@ record RelationFace
     (Score : Set) : Set₁ where
   constructor relationFace
   field
-    relata : List (Distinction.FiniteDistinction system Score)
+    faceRelata : List (Distinction.FiniteDistinction system Score)
     overlapPurview : IIT4.Purview system
     overlapState : IIT4.StateOf system
     congruentOverlapReceipt : String
@@ -33,7 +28,7 @@ record FiniteRelation
   constructor finiteRelation
   field
     structuralRelation : IIT4.CausalRelation system
-    relata : List (Distinction.FiniteDistinction system Score)
+    relationRelata : List (Distinction.FiniteDistinction system Score)
     faces : List (RelationFace system Score)
     relationPhi : Score
     weakestDensityReceipt : String
