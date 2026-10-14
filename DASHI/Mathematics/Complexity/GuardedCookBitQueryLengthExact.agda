@@ -10,9 +10,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.GuardedCookBitQueryCodeExact as Query
 
 ------------------------------------------------------------------------
@@ -28,15 +30,15 @@ appendLength [] right = refl
 appendLength (x ∷ left) right
   rewrite appendLength left right = refl
 
+sumSectionLengths : List (List Bool) → Nat
+sumSectionLengths [] = zero
+sumSectionLengths (section ∷ rest) =
+  Canonical.listLength section + sumSectionLengths rest
+
 appendManyLength :
   (sections : List (List Bool)) →
   Canonical.listLength (Query.appendMany sections)
   ≡ sumSectionLengths sections
-  where
-    sumSectionLengths : List (List Bool) → Nat
-    sumSectionLengths [] = zero
-    sumSectionLengths (section ∷ rest) =
-      Canonical.listLength section + sumSectionLengths rest
 appendManyLength [] = refl
 appendManyLength (section ∷ rest)
   rewrite appendLength section (Query.appendMany rest)
@@ -84,29 +86,32 @@ sectionLengthBelowAppendMany
       (Canonical.listLength head))
 
 ------------------------------------------------------------------------
--- Concrete membership witnesses for the final two query-code sections.
+-- The exact section list used by queryBits.
 ------------------------------------------------------------------------
+
+querySections : Query.GuardedCookBitQuery → List (List Bool)
+querySections query =
+    Query.unaryNat (Coded.stateCount (Query.code query))
+  ∷ Query.unaryNat (Coded.symbolCount (Query.code query))
+  ∷ Query.unaryNat
+      (Canonical.listLength (Coded.rules (Query.code query)))
+  ∷ Query.queryProgramBits query
+  ∷ Query.unaryNat (Canonical.listLength (Query.input query))
+  ∷ Query.encodeInputSymbols (Query.code query) (Query.input query)
+  ∷ Query.unaryNat (Query.steps query)
+  ∷ Query.unaryNat (Query.index query)
+  ∷ []
+
+queryBitsAsSections :
+  (query : Query.GuardedCookBitQuery) →
+  Query.queryBits query ≡ Query.appendMany (querySections query)
+queryBitsAsSections query = refl
 
 stepsSectionMember :
   (query : Query.GuardedCookBitQuery) →
   SectionMember
     (Query.unaryNat (Query.steps query))
-    ( Query.unaryNat
-        (DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.stateCount
-          (Query.code query))
-    ∷ Query.unaryNat
-        (DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.symbolCount
-          (Query.code query))
-    ∷ Query.unaryNat
-        (Canonical.listLength
-          (DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.rules
-            (Query.code query)))
-    ∷ Query.queryProgramBits query
-    ∷ Query.unaryNat (Canonical.listLength (Query.input query))
-    ∷ Query.encodeInputSymbols (Query.code query) (Query.input query)
-    ∷ Query.unaryNat (Query.steps query)
-    ∷ Query.unaryNat (Query.index query)
-    ∷ [] )
+    (querySections query)
 stepsSectionMember query =
   sectionThere
     (sectionThere
@@ -119,22 +124,7 @@ indexSectionMember :
   (query : Query.GuardedCookBitQuery) →
   SectionMember
     (Query.unaryNat (Query.index query))
-    ( Query.unaryNat
-        (DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.stateCount
-          (Query.code query))
-    ∷ Query.unaryNat
-        (DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.symbolCount
-          (Query.code query))
-    ∷ Query.unaryNat
-        (Canonical.listLength
-          (DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact.rules
-            (Query.code query)))
-    ∷ Query.queryProgramBits query
-    ∷ Query.unaryNat (Canonical.listLength (Query.input query))
-    ∷ Query.encodeInputSymbols (Query.code query) (Query.input query)
-    ∷ Query.unaryNat (Query.steps query)
-    ∷ Query.unaryNat (Query.index query)
-    ∷ [] )
+    (querySections query)
 indexSectionMember query =
   sectionThere
     (sectionThere
@@ -144,22 +134,37 @@ indexSectionMember query =
             (sectionThere
               (sectionThere sectionHere))))))
 
+unarySectionBelowQueryLength :
+  ∀ (query : Query.GuardedCookBitQuery)
+    (n : Nat)
+    {section : List Bool} →
+  section ≡ Query.unaryNat n →
+  SectionMember section (querySections query) →
+  suc n ≤ Query.queryBitLength query
+unarySectionBelowQueryLength query n {section} refl member =
+  NatP.≤-trans
+    (NatP.≤-reflexive
+      (sym (unaryNatLength n)))
+    sectionBound
+  where
+    sectionBound :
+      Canonical.listLength (Query.unaryNat n)
+      ≤ Query.queryBitLength query
+    sectionBound
+      rewrite queryBitsAsSections query =
+      sectionLengthBelowAppendMany member
+
 stepsBelowQueryBitLength :
   (query : Query.GuardedCookBitQuery) →
   Query.steps query ≤ Query.queryBitLength query
 stepsBelowQueryBitLength query =
   NatP.≤-trans
     (NatP.n≤1+n (Query.steps query))
-    (substLength
-      (unaryNatLength (Query.steps query))
-      (sectionLengthBelowAppendMany (stepsSectionMember query)))
-  where
-    substLength :
-      ∀ {a b c : Nat} →
-      a ≡ b →
-      b ≤ c →
-      a ≤ c
-    substLength refl proof = proof
+    (unarySectionBelowQueryLength
+      query
+      (Query.steps query)
+      refl
+      (stepsSectionMember query))
 
 indexBelowQueryBitLength :
   (query : Query.GuardedCookBitQuery) →
@@ -167,16 +172,11 @@ indexBelowQueryBitLength :
 indexBelowQueryBitLength query =
   NatP.≤-trans
     (NatP.n≤1+n (Query.index query))
-    (substLength
-      (unaryNatLength (Query.index query))
-      (sectionLengthBelowAppendMany (indexSectionMember query)))
-  where
-    substLength :
-      ∀ {a b c : Nat} →
-      a ≡ b →
-      b ≤ c →
-      a ≤ c
-    substLength refl proof = proof
+    (unarySectionBelowQueryLength
+      query
+      (Query.index query)
+      refl
+      (indexSectionMember query))
 
 ------------------------------------------------------------------------
 -- These are deliberately lower bounds only.  They certify that charging work
