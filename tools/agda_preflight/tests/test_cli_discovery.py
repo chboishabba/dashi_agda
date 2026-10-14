@@ -8,6 +8,7 @@ def test_cli_registers_semantic_discovery_commands():
     for argv in (
         ["symbol", "target"],
         ["related", "target"],
+        ["object", "DASHI.Core.Foo.target"],
         ["discover", "target"],
         ["lineage"],
     ):
