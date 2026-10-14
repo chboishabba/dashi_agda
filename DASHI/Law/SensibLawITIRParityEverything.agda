@@ -20,6 +20,7 @@ import DASHI.Cognition.PNF.SensibLawFriendlyjordiesGovernanceMaxCutExact as Frie
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as FriendlyjordiesWorldEvidence
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExact as FriendlyjordiesCausalIdentification
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as FriendlyjordiesReviewedWorldEvidence
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewBindingExact as FriendlyjordiesReviewBinding
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedCausalIdentificationExact as FriendlyjordiesReviewedCausalIdentification
 
 ------------------------------------------------------------------------
@@ -118,6 +119,11 @@ selectedFriendlyjordiesReviewedWorldEvidenceBoundary :
   FriendlyjordiesReviewedWorldEvidence.FriendlyjordiesReviewedWorldEvidenceBoundary
 selectedFriendlyjordiesReviewedWorldEvidenceBoundary =
   FriendlyjordiesReviewedWorldEvidence.canonicalFriendlyjordiesReviewedWorldEvidenceBoundary
+
+selectedFriendlyjordiesReviewBindingBoundary :
+  FriendlyjordiesReviewBinding.FriendlyjordiesReviewBindingBoundary
+selectedFriendlyjordiesReviewBindingBoundary =
+  FriendlyjordiesReviewBinding.canonicalFriendlyjordiesReviewBindingBoundary
 
 selectedFriendlyjordiesReviewedCausalIdentificationBoundary :
   FriendlyjordiesReviewedCausalIdentification.FriendlyjordiesReviewedCausalIdentificationBoundary
