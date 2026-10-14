@@ -29,6 +29,20 @@ physicalAttached = refl
 lineageContinues : Roadmap.attachedLineageContinuesAfterCoreClosure boundary ≡ true
 lineageContinues = refl
 
+fullSiteGroupoidPresheafPaid :
+  Roadmap.fullSiteNonDiscreteGroupoidPresheafPaid boundary ≡ true
+fullSiteGroupoidPresheafPaid = refl
+
+effectiveStackPaid : Roadmap.effectiveStackPaid boundary ≡ true
+effectiveStackPaid = refl
+
+higherStackPaid : Roadmap.higherStackPaid boundary ≡ true
+higherStackPaid = refl
+
+hypersheafFrontierIsHypercover :
+  Roadmap.hypersheafReducedToArbitraryHypercoverFrontier boundary ≡ true
+hypersheafFrontierIsHypercover = refl
+
 certificationBoundariesPreserved :
   Roadmap.descendantCertificationBoundariesPreserved boundary ≡ true
 certificationBoundariesPreserved = refl
