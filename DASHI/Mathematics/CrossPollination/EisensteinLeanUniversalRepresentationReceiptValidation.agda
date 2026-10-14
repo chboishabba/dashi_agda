@@ -3,7 +3,9 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationR
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as Observer
 import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptExact as Receipt
 
 leanOwnerIsFormalReconstruction :
@@ -39,3 +41,14 @@ noExternalSourceAcquiredByCrossProverReceipt :
   Receipt.externalScientificSourceAcquiredByThisReceipt
   ≡ false
 noExternalSourceAcquiredByCrossProverReceipt = refl
+
+observerDonorCarriesLocalChiSufficiency :
+  Descent.ConsumerSufficient Observer.phaseOfNat Observer.chiMinus3WeightOfNat
+observerDonorCarriesLocalChiSufficiency =
+  Receipt.phaseSufficiency Receipt.canonicalObserverLeanDonorBundle
+
+donorBundleStillDoesNotImportCoefficientTheorem :
+  Receipt.coefficientTheoremImported
+    Receipt.canonicalObserverLeanDonorBundle
+  ≡ false
+donorBundleStillDoesNotImportCoefficientTheorem = refl
