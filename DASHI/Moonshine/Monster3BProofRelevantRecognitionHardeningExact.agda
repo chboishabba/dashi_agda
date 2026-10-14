@@ -24,9 +24,11 @@ module DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact where
 
 open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Actual
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneMultiplicity
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 import DASHI.Wikimedia.IbrahimMonster3BConstituentAttachmentSnowballExact as Constituent
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as Multiplicity
@@ -81,7 +83,9 @@ paidAttachmentMultiplicityIsNinety :
   {promotion : Actual.ActualKernelCharacterPromotion} →
   (attachment : Constituent.ActualZetaConstituentAttachment promotion) →
   PaidActualZetaConstituentAttachment attachment →
-  _
+  StoneMultiplicity.constituentCount
+    (StoneMultiplicity.constituents (Constituent.decomposition attachment))
+    ≡ 90
 paidAttachmentMultiplicityIsNinety attachment paid =
   Constituent.attachedMultiplicityIsNinety attachment
 
