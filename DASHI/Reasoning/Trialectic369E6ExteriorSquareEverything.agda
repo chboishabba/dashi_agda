@@ -85,12 +85,12 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
 -- surface. Constructive 729-state witness extraction now closes the explicit
 -- Schrodinger irreducibility leaf. Companion Lean source-writes the generic
--- equal-character-simple-representation isomorphism theorem; exact-head kernel
--- observation and concrete Monster FDRep/character transport remain open.
+-- equal-character-simple-representation isomorphism theorem; concrete Monster
+-- representation transport remains open.
 --
--- On multiplicity, S_zeta = Hom_E(H_zeta,W_zeta) is primary. The source-native
--- Barraclough-Wilson/6.Suz route targets an actual 12+78 representation; Fin90
--- is only a later basis coordinate if required by a downstream consumer.
+-- Promotion is now proof-relevant: legacy Set-valued fields name proposition
+-- types but do not count as proofs.  H_zeta recognition, constituent attachment,
+-- Hom evaluation and optional Fin90 basis promotion require inhabitants.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
@@ -110,6 +110,8 @@ import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureValidation
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
 import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
