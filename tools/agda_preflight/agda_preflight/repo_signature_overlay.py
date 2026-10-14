@@ -81,15 +81,24 @@ def _signature_text(root: Path, item: dict) -> str:
         started = False
         for line in block:
             if not started:
-                if re.match(r"^\s*{}\s*:".format(name), line):
+                match = re.match(r"^\s*{}\s*:\s*(.*)$".format(name), line)
+                if match:
                     started = True
-                    collected.append(line.strip())
+                    collected.append(match.group(1).strip())
                 continue
             if line and not line[0].isspace():
                 break
             collected.append(line.strip())
         return " ".join(part for part in collected if part)
-    return block[0].strip()
+    first = block[0].strip()
+    # For declaration-level similarity the local declaration name is noise.
+    if kind in {"data", "record"}:
+        first = re.sub(
+            r"^{}\s+{}\b".format(kind, re.escape(str(item["name"]))),
+            kind + " _",
+            first,
+        )
+    return first
 
 
 def _refs(signature: str, own_name: str) -> list[str]:
