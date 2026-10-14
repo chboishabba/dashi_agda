@@ -14,6 +14,7 @@ import DASHI.Cognition.MavenPalantirIsraelPineGapSecurityInfrastructureExact as 
 import DASHI.Cognition.MavenMinabPineGapTargetingChainExact as Targeting
 import DASHI.Cognition.WhitlamPineGapSovereigntyHistoricalBoundaryExact as Whitlam
 import DASHI.Cognition.EpsteinGlobalSystemicPareto20261013Exact as EpsteinFront
+import DASHI.Cognition.EpsteinFinancialInfrastructureEverything20261014 as FinanceInfrastructure
 import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as StateData
 import DASHI.Cognition.BannonCambridgeAnalyticaInfluenceInfrastructureExact as Influence
 import DASHI.Cognition.PsychologicalInfluenceInfrastructureCrossPollinationExact as Psych
@@ -30,16 +31,17 @@ import DASHI.Cognition.SpringfieldLayeredValueCaptureClosureExact as Springfield
 ------------------------------------------------------------------------
 -- CROSS-DOMAIN SYSTEMIC POWER INFRASTRUCTURE PARETO — 2026-10-14
 --
--- The frontier now distinguishes three related but non-identical objects:
---   1. paid historical person/institution edges (e.g. Epstein <-> Leon Black),
---   2. contemporary sector-level private-capital co-financing/assetisation,
---   3. local layered value-capture systems such as Greater Springfield.
---
--- Intersection motivates acquisition; it does not manufacture common command.
+-- The newest acquisition round promotes transaction-level financial routing:
+-- Black/Apollo-related assets, Rothschild/Southern Trust consulting, direct
+-- Thiel->Epstein Valar solicitation followed by USD40m LP commitments, and the
+-- Highbridge/JPMorgan brokerage-fee path.  These are typed edges, not a theorem
+-- that all counterparties share command, purpose or responsibility.
 ------------------------------------------------------------------------
 
 data PowerLane : Set where
   bankingComplianceEliteAccess : PowerLane
+  southernTrustCapitalRouting : PowerLane
+  eliteBrokerageTransactionInfrastructure : PowerLane
   privateCapitalHousingAIAssetisation : PowerLane
   militaryAIIntelligenceInfrastructure : PowerLane
   epsteinAICapitalReflexivity : PowerLane
@@ -73,13 +75,17 @@ open PowerProfile public
 canonicalPowerFront : List PowerProfile
 canonicalPowerFront =
   power-profile bankingComplianceEliteAccess 100 true true true true true true
-    "Transactions, compliance exceptions, client retention and elite-access benefits remain a top direct-evidence seam. Leon Black/Apollo is a paid Epstein-finance bridge; adjacent private-capital firms must be resolved through actual transactions, holdings and co-investments rather than inferred from sector proximity."
+    "The financial lane is now transaction-resolved well beyond generic proximity: Dechert's USD158m Black professional-services ledger; Senate/Treasury's broader USD169.8m 18-wire ledger; exact 2012 Black Family Partners asset-sale payment; Apollo IPO equity held by an Epstein entity; Apollo-related side-vehicle transfers; and delayed bank scrutiny. Fee, asset-sale, loan, investment and bank-wire scopes remain separately typed."
+  ∷ power-profile southernTrustCapitalRouting 100 true true true true true true
+    "Southern Trust/Financial Trust function as observable advisory, receipt and investment-routing entities across multiple paid counterparties. Black-account inflows, Rothschild consulting/wires, and downstream Valar/Honeycomb/other fund investments are paid at entity level. Fungible-account continuity does not source-trace one client's dollars into a later investment without bank-balance/settlement evidence."
+  ∷ power-profile eliteBrokerageTransactionInfrastructure 100 true true true true true true
+    "Highbridge is now an exact brokerage/transaction case: Financial Trust invoiced and received USD15m for M&A advice around JPMorgan's acquisition; Epstein's sworn deposition says he approached Staley for financing, introduced Dubin and was offered an introduction fee; later litigation and email exhibits provide separately graded corroborating context. Direct brokerage evidence does not establish sole transaction causation or formal JPMorgan retention."
   ∷ power-profile privateCapitalHousingAIAssetisation 100 true true true true true true
     "Housing, mortgages, AI compute, data centres, power and infrastructure are increasingly financed as recurring cashflow-bearing institutional assets. Apollo, Blackstone, BlackRock, KKR, Brookfield and others have paid contemporary housing and/or AI-infrastructure exposure and several paid co-financing edges. The high-value question is instrument-level value capture and incidence, not an unsupported theorem of common political command."
+  ∷ power-profile epsteinAICapitalReflexivity 100 true true true true true true
+    "The Thiel/Valar seam is no longer adjacency: primary emails pay direct Thiel solicitation and introduction to the Valar team, followed by Southern Trust commitments of USD15m to Fund II and USD25m to Fund III. Fund/accounting records pay real LP positions and capital calls. This remains distinct from a Palantir investment or Thiel control over Southern Trust."
   ∷ power-profile militaryAIIntelligenceInfrastructure 99 true true true true true true
     "Project Maven origin -> Google participation/worker dissent -> Palantir Maven expansion -> 2026 core-program status -> Iran targeting use, alongside Pine Gap Middle-East SIGINT/targeting-chain participation. This shares an observer/classification/intervention grammar with influence systems but kinetic decision support is not thereby psychological warfare."
-  ∷ power-profile epsteinAICapitalReflexivity 99 true true true true true true
-    "Epstein's documented/self-described AI patronage and Thiel/Valar/Palantir adjacency are cross-read with the current AI financing/reflexivity system. The historical Epstein-Leon Black/Apollo relationship is direct; modern Apollo/Blackstone/BlackRock/KKR/Brookfield AI financing is a contemporary capital topology whose causal lineage must be separately paid."
   ∷ power-profile cbpBorderOperationalAccess 98 true true true true true true
     "Border personnel and inspection discretion at an operational perimeter; officer-level access decisions require primary resolution. Agency self-investigation does not close trafficking-knowledge or broader-facilitation questions."
   ∷ power-profile provocationOverreactionInstitutionalLockIn 98 true true true true true true
@@ -87,7 +93,7 @@ canonicalPowerFront =
   ∷ power-profile corporateBoardExposureTopology 97 true true true false true true
     "Systematic board/contact exposure and market incidence, with person/firm underlying-document debt."
   ∷ power-profile springfieldLayeredCapitalMicrocosm 97 true true true true true true
-    "Greater Springfield is now a high-resolution local incidence microcosm rather than a loose analogy. Paid layers include Springfield City Group parcel allocation; Mirvac's 100%-owned Orion asset; BlackRock's aggregate Mirvac substantial holding; Gordon/Mathieson City West acquisition vehicle; 2004 gas/electric buildout; a 2005 Queensland parliamentary same-object Springfield-to-Allgas network receipt; network-level Allgas ownership transition; 2018 50-year ENGIE alliance; repeated Springfield/Santoro access with concrete project/TAFE subject labels; public rail/road capital; and exact Woogaroo environmental carrier routing. The remaining debts are instrument/cadastral/parcel joins, not broad relationship discovery."
+    "Greater Springfield remains a high-resolution local incidence microcosm: Springfield City Group parcel allocation; Mirvac/Orion; BlackRock's Mirvac exposure; Gordon/Mathieson City West; gas/electric network buildout and ownership lineage; ENGIE alliance; lobbying/project access; public infrastructure; and Woogaroo ecological carriers. It is a comparator for layered value capture, not a causal bridge to the Epstein network."
   ∷ power-profile trumpBannonCAMediaInfluence 96 true true true true true true
     "Mar-a-Lago access/recruitment, Bannon/Epstein media work, Cambridge-Analytica influence infrastructure, TPUSA narrative pressure and Bannon's explicit flood-the-zone/opposition-media playbook form the strongest live psychological-influence acquisition lane. Same-technique reuse, common command and outcome causation remain separately unpaid."
   ∷ power-profile bondiSecurityMobilisationInstitutionalisation 96 true true true true true true
@@ -131,6 +137,11 @@ record CanonicalPowerBoundary : Set where
     sectorCoInvestmentImpliesPoliticalCoordination : Bool
     historicalRelationshipImpliesCurrentInstitutionalStrategy : Bool
     housingExposureImpliesBulkIndividualHomePurchase : Bool
+    commonRecipientImpliesCommonPurpose : Bool
+    fungibleAccountPathImpliesSourceSpecificFunding : Bool
+    valarInvestmentImpliesPalantirInvestment : Bool
+    firstPersonBrokerageClaimImpliesSoleCausation : Bool
+    bankWireTotalImpliesServiceFeeTotal : Bool
     infrastructureIntersectionIsWorthInvestigating : Bool
     publicStatementsAreValidIdeologyReceipts : Bool
     independentAdversarialCoverageRequiredForStrongClosure : Bool
@@ -139,7 +150,7 @@ open CanonicalPowerBoundary public
 
 canonicalPowerBoundary : CanonicalPowerBoundary
 canonicalPowerBoundary = canonical-power-boundary
-  false false false false false false false false false false false false false false false false false false false false false false true true true true
+  false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true
 
 data InfrastructureIntersectionImpliesConspiracy : Set where
 data LobbyingImpliesEveryPolicyOutcome : Set where
@@ -161,6 +172,11 @@ data LayeredCaptureImpliesCommonCommand : Set where
 data SectorCoInvestmentImpliesPoliticalCoordination : Set where
 data HistoricalRelationshipImpliesCurrentInstitutionalStrategy : Set where
 data HousingExposureImpliesBulkIndividualHomePurchase : Set where
+data CommonRecipientImpliesCommonPurpose : Set where
+data FungibleAccountPathImpliesSourceSpecificFunding : Set where
+data ValarInvestmentImpliesPalantirInvestment : Set where
+data FirstPersonBrokerageClaimImpliesSoleCausation : Set where
+data BankWireTotalImpliesServiceFeeTotal : Set where
 
 intersectionDoesNotCreateConspiracy : InfrastructureIntersectionImpliesConspiracy → ⊥
 intersectionDoesNotCreateConspiracy ()
@@ -221,3 +237,18 @@ historicalRelationshipDoesNotCreateCurrentInstitutionalStrategy ()
 
 housingExposureDoesNotCreateBulkIndividualHomePurchase : HousingExposureImpliesBulkIndividualHomePurchase → ⊥
 housingExposureDoesNotCreateBulkIndividualHomePurchase ()
+
+commonRecipientDoesNotCreateCommonPurpose : CommonRecipientImpliesCommonPurpose → ⊥
+commonRecipientDoesNotCreateCommonPurpose ()
+
+fungibleAccountPathDoesNotCreateSourceSpecificFunding : FungibleAccountPathImpliesSourceSpecificFunding → ⊥
+fungibleAccountPathDoesNotCreateSourceSpecificFunding ()
+
+valarInvestmentDoesNotCreatePalantirInvestment : ValarInvestmentImpliesPalantirInvestment → ⊥
+valarInvestmentDoesNotCreatePalantirInvestment ()
+
+firstPersonBrokerageClaimDoesNotCreateSoleCausation : FirstPersonBrokerageClaimImpliesSoleCausation → ⊥
+firstPersonBrokerageClaimDoesNotCreateSoleCausation ()
+
+bankWireTotalDoesNotCreateServiceFeeTotal : BankWireTotalImpliesServiceFeeTotal → ⊥
+bankWireTotalDoesNotCreateServiceFeeTotal ()
