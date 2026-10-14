@@ -16,12 +16,6 @@ import DASHI.Economics.AIGalaxyHeliosLandlordEconomics20261014Exact as Landlord
 
 ------------------------------------------------------------------------
 -- OCTOBER 14 TERMINAL MAX-CUT BOARD
---
--- Status values are about the declared consumer/question, not global truth.
--- `bounded` means a one-sided/range statement is paid without a unique point.
--- `partial` means useful same-object coordinates are paid but the consumer is
--- not yet sufficient. `empirical` means the remaining obligation is external
--- acquisition rather than another generic formal layer.
 ------------------------------------------------------------------------
 
 data CutState : Set where
@@ -50,7 +44,7 @@ ownedNodeTCOPartial : RoadmapLane
 ownedNodeTCOPartial = roadmap-lane
   "owned-vs-rented inference node TCO"
   partial
-  "same-model rented-node price, eight-GPU host-resource envelope, AMD reference power and benchmark electricity envelope"
+  "same-model rented-node price, eight-GPU bundled host-resource envelope, AMD reference power and benchmark electricity envelope"
   "matched acquisition/depreciation or lease terms, financing/opportunity cost, facility PUE, labour, owner host/network/storage cost, residual value and refresh risk"
   false
 
@@ -96,10 +90,10 @@ financingConditionsHeterogeneous = roadmap-lane
 
 landlordLayerReturnPaid : RoadmapLane
 landlordLayerReturnPaid = roadmap-lane
-  "contracted data-centre landlord economics"
+  "data-centre landlord/project economics"
   paid
-  "Galaxy Helios Phase-II 13.7 percent starting gross yield-on-cost and 90-percent-plus lease-level NOI-margin target under 15-year CoreWeave lease"
-  "realised lease cash remains observationally separate; this paid lane is not tenant/provider ROIC or terminal-demand authority"
+  "Galaxy Helios Phase-II 13.7 percent starting gross yield-on-cost and 90-percent-plus lease-level NOI-margin target plus Q2 Phase-I recognised lease/operator revenue"
+  "cash collection and Phase-II target realisation remain separate; this paid lane is not tenant/provider ROIC or terminal-demand authority"
   false
 
 kernelReceiptIntegration : RoadmapLane
@@ -114,8 +108,6 @@ additionalGenericAbstractionScheduledIsFalse :
   additionalGenericAbstractionScheduled capitalReturnMagnitudeBounded ≡ false
 additionalGenericAbstractionScheduledIsFalse = refl
 
--- Direct pins to upstream boundaries: these ensure the roadmap does not silently
--- convert partial observations into stronger authority.
 ownedTCOStillOpen : TCO.ownedTCOPaid TCO.mi355xOwnedEnvelope ≡ false
 ownedTCOStillOpen = TCO.ownedTCOStillOpen
 
@@ -134,10 +126,14 @@ financingMarketNotUniversallyClosed :
   Financing.universalCapitalMarketClosure Financing.currentFinancingConditionsPanel ≡ false
 financingMarketNotUniversallyClosed = refl
 
-landlordRealisedCashStillOpen :
-  Landlord.realisedLeaseCashPaid Landlord.heliosPhaseIILandlordEconomics ≡ false
-landlordRealisedCashStillOpen = refl
+landlordRecognisedRevenuePaid :
+  Landlord.realisedLeaseRevenuePaid Landlord.heliosPhaseIILandlordEconomics ≡ true
+landlordRecognisedRevenuePaid = Landlord.realisedLeaseRevenueObserved
+
+landlordCashCollectionStillOpen :
+  Landlord.realisedLeaseCashCollectionPaid Landlord.heliosPhaseIILandlordEconomics ≡ false
+landlordCashCollectionStillOpen = Landlord.cashCollectionStillOpen
 
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. Capital-return magnitude is bounded; owned-node TCO, terminal payer provenance and financing conditions are partial; provider marginal serving cost, replacement economics and regulatory burden causality are external empirical acquisition lanes; Galaxy/Helios supplies a paid contracted-landlord-return coordinate without promoting it to tenant ROIC or realised cash. The remaining formal task is exact-head kernel/runtime certification."
+  "The October-14 AI-capital programme is no longer missing a generic theory layer. Capital-return magnitude is bounded; owned-node TCO, terminal payer provenance and financing conditions are partial; provider marginal serving cost, replacement economics and regulatory burden causality are external empirical acquisition lanes. Galaxy/Helios supplies both contracted landlord-return targets and early recognised Phase-I lease/operator revenue while cash collection and tenant/provider returns remain separate. The remaining formal task is exact-head kernel/runtime certification."
