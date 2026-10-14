@@ -17,7 +17,7 @@ module DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
 open import Data.Product using (Σ; _,_)
