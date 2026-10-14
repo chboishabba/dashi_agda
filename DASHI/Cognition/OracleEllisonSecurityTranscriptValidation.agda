@@ -20,6 +20,7 @@ import DASHI.Cognition.OracleEllisonCausalIdentificationWeldExact as CausalWeld
 import DASHI.Cognition.OracleEllisonAuthorityChainMaxCutExact as Authority
 import DASHI.Cognition.OracleEllisonMotiveSourceBoundaryExact as Motive
 import DASHI.Cognition.OracleEllisonCausalElectoralEvidenceExact as CausalEvidence
+import DASHI.Cognition.OracleEllisonExactReviewPromotionGateExact as ReviewGate
 import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Orthogonality
 
 ------------------------------------------------------------------------
@@ -144,8 +145,7 @@ causalPromotionRequiresEstimandAndIdentification :
 causalPromotionRequiresEstimandAndIdentification = refl
 
 ------------------------------------------------------------------------
--- Current continuation: same-object authority/control, direct motive and
--- instrumental-natural-experiment causal evidence.
+-- Source-paid authority/control, motive and causal evidence.
 ------------------------------------------------------------------------
 
 fireWeaverHumanControlAllocationPaid :
@@ -166,6 +166,43 @@ oracleRafaelRelationshipRemainsL2 :
   ≡ Promotion.operationalIntegration
 oracleRafaelRelationshipRemainsL2 = refl
 
+------------------------------------------------------------------------
+-- Current continuation: IDF/IMOD operational-authority fork.
+------------------------------------------------------------------------
+
+idfFireWeaverAcquisitionPaid :
+  Authority.idfFireWeaverAcquisitionPaid ≡ true
+idfFireWeaverAcquisitionPaid = refl
+
+idfGroundForcesJointDevelopmentPaid :
+  Authority.idfGroundForcesJointDevelopmentPaid ≡ true
+idfGroundForcesJointDevelopmentPaid = refl
+
+idfGroundForcesOperationalAuthorityPaid :
+  Authority.idfGroundForcesOperationalAuthorityPaid ≡ true
+idfGroundForcesOperationalAuthorityPaid = refl
+
+idfBattalionCommandApprovalPaid :
+  Authority.idfBattalionCommandPostEngagementApprovalPaid ≡ true
+idfBattalionCommandApprovalPaid = refl
+
+idfDualCustodyApprovalPaid :
+  Authority.idfDualCustodyEngagementApprovalPaid ≡ true
+idfDualCustodyApprovalPaid = refl
+
+idfFireWeaverOperationalSurfaceReachesL3 :
+  Authority.idfFireWeaverOperationalAuthorityHighestPaidLevel
+  ≡ Promotion.systemArchitectureControl
+idfFireWeaverOperationalSurfaceReachesL3 = refl
+
+idfDeploymentIsNotSilentlyOCIInstance :
+  Authority.idfDeploymentIsOCIHostedSameInstancePaid ≡ false
+idfDeploymentIsNotSilentlyOCIInstance = refl
+
+sharedProductIdentityDoesNotJoinDeploymentBranches :
+  Authority.sharedProductIdentityClosesDeploymentInstanceJoin ≡ false
+sharedProductIdentityDoesNotJoinDeploymentBranches = refl
+
 oracleDoesNotBecomeAttackOfficer :
   Authority.oracleControlsFireWeaverAttackOfficer ≡ false
 oracleDoesNotBecomeAttackOfficer = refl
@@ -173,6 +210,10 @@ oracleDoesNotBecomeAttackOfficer = refl
 ociProductWeldDoesNotPayIsraeliSovereignInstance :
   Authority.israeliSovereignOCIInstanceControlPaid ≡ false
 ociProductWeldDoesNotPayIsraeliSovereignInstance = refl
+
+policyAuthorshipStillOpen :
+  Authority.fireWeaverPolicyAuthorshipPaid ≡ false
+policyAuthorshipStillOpen = refl
 
 fullAuthorityChainStillOpen :
   Authority.authorityChainClosedToSovereignControl ≡ false
@@ -210,3 +251,27 @@ terrorExposureElectoralPreferenceCausalSurfacePaid = refl
 adjacentCausalSurfaceDoesNotPayThreatMaintenance :
   CausalEvidence.netanyahuThreatMaintenancePoliticalSurvivalPaid ≡ false
 adjacentCausalSurfaceDoesNotPayThreatMaintenance = refl
+
+------------------------------------------------------------------------
+-- Exact human-review cross-pollination.
+------------------------------------------------------------------------
+
+sourceAcquisitionDoesNotAutomaticallyPayReview :
+  ReviewGate.sourceAcquisitionAutomaticallyPaysExactReview ≡ false
+sourceAcquisitionDoesNotAutomaticallyPayReview = refl
+
+reviewDoesNotAutomaticallyPayClaimTruth :
+  ReviewGate.exactReviewAutomaticallyPaysClaimTruth ≡ false
+reviewDoesNotAutomaticallyPayClaimTruth = refl
+
+reviewDoesNotAutomaticallyPayAuthorityPromotion :
+  ReviewGate.exactReviewAutomaticallyPaysAuthorityPromotion ≡ false
+reviewDoesNotAutomaticallyPayAuthorityPromotion = refl
+
+currentFireWeaverAuthorityReviewStillOpen :
+  ReviewGate.fireWeaverAuthorityExactReviewPaid ≡ false
+currentFireWeaverAuthorityReviewStillOpen = refl
+
+currentElectoralCausalReviewStillOpen :
+  ReviewGate.berrebiKlorCausalExactReviewPaid ≡ false
+currentElectoralCausalReviewStillOpen = refl
