@@ -13,6 +13,7 @@ import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoKzCalibrationCrossPollinati
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoIndependentTheoryCrossValidationExact as Independent
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoSpinSpaceGeneratorBridgeExact as SpinSpace
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESWitnessGateExact as ARPES
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESObserverManifestExact as Observer
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoARPESForwardObservationBoundaryExact as Forward
 
 record CoQuarterTaSeTwoMaxCutStatus : Set where
@@ -31,6 +32,7 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     materialBasisBNSCovarianceConsumerImplemented : Bool
     publishedARPESSummaryConstraintsFixed : Bool
     kzCalibrationRouteFixed : Bool
+    rawIgorObserverConsumerImplemented : Bool
     independentSOCBandTargetsFixed : Bool
     independentKagomeMechanismFixed : Bool
     sourcedKagomeTBExecutionFixed : Bool
@@ -47,7 +49,7 @@ canonicalCoQuarterTaSeTwoMaxCutStatus =
   co-quarter-tase-two-max-cut-status
     true true true true true true
     true true true true true
-    true true
+    true true true
     true true true true
     false false false false false
     true
@@ -73,6 +75,9 @@ existingPublishedARPESStatus = PublishedARPES.canonicalPublishedTargetStatus
 existingKzCalibrationBoundary : Kz.KzCrossPollinationBoundary
 existingKzCalibrationBoundary = Kz.canonicalKzCrossPollinationBoundary
 
+existingObserverManifestStatus : Observer.ObserverManifestStatus
+existingObserverManifestStatus = Observer.canonicalObserverManifestStatus
+
 existingIndependentTheoryBoundary : Independent.CrossValidationPromotionBoundary
 existingIndependentTheoryBoundary = Independent.canonicalCrossValidationPromotionBoundary
 
@@ -92,10 +97,11 @@ record IrreduciblePhysicalResidual : Set where
     sameBasisMaterialSewingArtifactNeeded : Bool
     materialSOCExchangeHamiltonianNeeded : Bool
     rawSpinARPESPayloadNeeded : Bool
+    rawARPESCalibrationManifestNeeded : Bool
     calibratedSpectralObserverNeeded : Bool
     quantitativeForwardFitNeeded : Bool
     furtherAbstractToyLayerNeeded : Bool
 
 canonicalIrreduciblePhysicalResidual : IrreduciblePhysicalResidual
 canonicalIrreduciblePhysicalResidual =
-  irreducible-physical-residual true true true true true true false
+  irreducible-physical-residual true true true true true true true false
