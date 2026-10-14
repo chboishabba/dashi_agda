@@ -1,0 +1,8 @@
+module DASHI.Physics.Thermodynamics.Everything where
+
+import DASHI.Physics.Thermodynamics.MagnetocaloricMaterial
+import DASHI.Physics.Thermodynamics.CaloricRegenerator
+import DASHI.Physics.Thermodynamics.ActiveMagneticRegenerator
+import DASHI.Physics.Thermodynamics.ProtectedMagnetocaloricSystem
+import DASHI.Physics.Thermodynamics.MagnothermSourceBoundary
+import DASHI.Physics.Thermodynamics.MagnetocaloricAMRReceipt
