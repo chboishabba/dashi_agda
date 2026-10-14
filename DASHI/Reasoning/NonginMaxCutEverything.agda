@@ -1,7 +1,7 @@
 module DASHI.Reasoning.NonginMaxCutEverything where
 
 -- Focused verification/import root for the Nongin semantic/depth/categorical
--- max-cut.  Aggregate import only; it does not strengthen attribution.
+-- max-cut and its attached descendant research programmes.
 
 import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageExact
 import DASHI.Reasoning.NonginConsumerRelativeFrameAdvantageValidation
@@ -28,7 +28,11 @@ import DASHI.Reasoning.TrialecticCarryDepthExpansionPolicyValidation
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 
--- Terminal Nongin closure lives in Philosophy because it separates the
--- historical/genealogical programme from optional later categorical research.
+-- Core Nongin closure remains paid, while existing higher-stack/hyperfabric,
+-- exceptional and physical-promotion programmes remain attached descendants.
 import DASHI.Philosophy.NonginRoadmapClosureExact
 import DASHI.Philosophy.NonginRoadmapClosureValidation
+import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact
+import DASHI.Philosophy.NonginAttachedDescendantProgrammesValidation
+import DASHI.Philosophy.NonginExtendedRoadmapExact
+import DASHI.Philosophy.NonginExtendedRoadmapValidation
