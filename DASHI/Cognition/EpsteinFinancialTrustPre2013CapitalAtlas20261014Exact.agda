@@ -12,8 +12,8 @@ open import Data.Empty using (⊥)
 --
 -- Financial Trust is treated as a mixed financial vehicle: advisory/management
 -- income, proprietary investment capital, partnership positions, trading,
--- credit facilities and inter-entity transfers.  Managed/client assets,
--- Epstein personal wealth and FTC corporate assets are not collapsed.
+-- credit facilities and inter-entity transfers. Managed/client assets, Epstein
+-- personal wealth and FTC corporate assets are not collapsed.
 ------------------------------------------------------------------------
 
 data FTCSurface : Set where
@@ -26,6 +26,7 @@ data FTCSurface : Set where
   creditFacility : FTCSurface
   charitableAssetTransfer : FTCSurface
   advisoryFeeIncome : FTCSurface
+  investmentIncome : FTCSurface
   clientAssetManagement : FTCSurface
 
 record FTCReceipt : Set where
@@ -49,6 +50,36 @@ jpmRelatedAccountReceipt = ftc-receipt
   "JPMorgan described Financial Trust Company as Epstein's personal investment/trading vehicle and as general partner of Family Interest LP, for which Leslie Wexner's children's trust was a limited partner. This pays the bank's relationship classification and GP/LP structure as recorded by JPMorgan, not beneficial ownership of the children's trust assets."
   (personalInvestmentVehicle ∷ generalPartner ∷ [])
   0 true false
+
+record FTCAnnualStatement : Set where
+  constructor ftc-annual-statement
+  field
+    year : Nat
+    cashUSD : Nat
+    investmentsUSD : Nat
+    totalAssetsUSD : Nat
+    totalLiabilitiesUSD : Nat
+    feeIncomeUSD : Nat
+    investmentIncomeUSD : Nat
+    netIncomeUSD : Nat
+    distributionsUSD : Nat
+    source : String
+    primaryCourtExhibitPaid : Bool
+open FTCAnnualStatement public
+
+ftc2003 : FTCAnnualStatement
+ftc2003 = ftc-annual-statement
+  2003 60042683 335070706 395646418 563395
+  58954853 34282912 89951336 0
+  "USVI v JPMorgan, Document 268-52 / 194-22, VI-JPM-000013542"
+  true
+
+ftc2006 : FTCAnnualStatement
+ftc2006 = ftc-annual-statement
+  2006 55700201 303000394 487207276 11231303
+  65984969 8051002 70744165 70500000
+  "USVI v JPMorgan, Document 268-52, VI-JPM-000013514"
+  true
 
 balanceSheet2004 : FTCReceipt
 balanceSheet2004 = ftc-receipt
@@ -98,7 +129,10 @@ ftcPaidInCapitalLocator2002 = ftc-receipt
 record FTCPre2013Boundary : Set where
   constructor ftc-pre2013-boundary
   field
+    primary2003FinancialStatementPaid : Bool
+    primary2006FinancialStatementPaid : Bool
     largeCorporateAssetBasePaid : Bool
+    feeAndInvestmentIncomeSeparatelyPaid : Bool
     diversifiedInvestmentBookPaid : Bool
     zwirnLPInvestmentPaid : Bool
     familyInterestGPLPStructureRecordedByJPM : Bool
@@ -111,7 +145,7 @@ open FTCPre2013Boundary public
 
 canonicalFTCPre2013Boundary : FTCPre2013Boundary
 canonicalFTCPre2013Boundary = ftc-pre2013-boundary
-  true true true true false false false false false
+  true true true true true true true false false false false false
 
 data CompanyAssetsImpliesPersonalNetWorth : Set where
 data GPImpliesBeneficialOwnership : Set where
@@ -135,7 +169,7 @@ wexnerReviewDoesNotCreateAdjudication ()
 ------------------------------------------------------------------------
 
 data FTCPre2013Debt : Set where
-  primary2000to2006FinancialStatements : FTCPre2013Debt
+  missingPrimaryAnnualStatements : FTCPre2013Debt
   familyInterestPartnershipAgreement : FTCPre2013Debt
   wexnerChildrenTrustCapitalLedger : FTCPre2013Debt
   feeClientAllocation : FTCPre2013Debt
@@ -154,12 +188,12 @@ open FTCPre2013Acquisition public
 
 canonicalFTCPre2013Acquisition : List FTCPre2013Acquisition
 canonicalFTCPre2013Acquisition =
-  ftc-pre2013-acquisition primary2000to2006FinancialStatements 100
-    "Acquire the full Financial Trust annual financial statements/tax schedules for 2000-2006 and reconcile fee income, investment income, assets, liabilities, capital and taxes year by year."
-  ∷ ftc-pre2013-acquisition familyInterestPartnershipAgreement 100
+  ftc-pre2013-acquisition familyInterestPartnershipAgreement 100
     "Acquire Family Interest LP's partnership agreement, cap table and account statements to resolve FTC GP rights and the Wexner children's trust LP economics."
   ∷ ftc-pre2013-acquisition feeClientAllocation 100
-    "Resolve Financial Trust fee/advisory revenue payer-by-payer rather than treating aggregate reported revenue as a client ledger."
+    "Resolve Financial Trust fee/advisory revenue payer-by-payer rather than treating aggregate reported revenue as a client ledger; 2003 and 2006 primary statements now separate fee from investment income."
+  ∷ ftc-pre2013-acquisition missingPrimaryAnnualStatements 99
+    "Complete the annual primary-statement spine for 1999-2002, 2005 and 2007-2012; 2003, 2004 and 2006 are now primary-paid at balance-sheet/income-statement level."
   ∷ ftc-pre2013-acquisition wexnerChildrenTrustCapitalLedger 99
     "Trace contributions/distributions between the Wexner children's trust, Family Interest LP and Financial Trust with same-object partnership/bank records."
   ∷ ftc-pre2013-acquisition zwirnRealisedDistributionLedger 99
