@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Economics.AICoreWeaveOSINTCapacityVintage20261014Exact as Capacity
 import DASHI.Economics.AICoreWeaveCapacityHardwareAgeNonDescent20261014Exact as NonDescent
 import DASHI.Economics.AICoreWeaveGPUGenerationCadence20261014Exact as Generation
@@ -58,7 +59,7 @@ selectedCapacityMeanIs748To1470HundredthsMonths =
   Capacity.weightedMeanAgeUpperHundredthsIs1470
 
 capacityCannotRecoverHardwareAge :
-  NonDescent.Descent.FactorsThrough NonDescent.capacityObserver NonDescent.hardwareAgeConsumer → ⊥
+  Descent.FactorsThrough NonDescent.capacityObserver NonDescent.hardwareAgeConsumer → ⊥
 capacityCannotRecoverHardwareAge = NonDescent.capacityVintageCannotFactorHardwareAge
 
 frontierCadencePressurePaid :
