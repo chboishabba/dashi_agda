@@ -21,14 +21,15 @@ module DASHI.Analysis.CollatzSyracuseConstructiveSurvivorExtractionExact where
 --      principle converts that double negation into the witness.  The repo does
 --      not silently own that principle.
 --
--- No finite-density, spectral, affine, or inverse-limit statement is promoted
--- to either producer without the exact hypotheses below.
+-- The finite-barrier route is proved equivalent to the existing literal
+-- strict-descent producer.  It is therefore an extraction normal form, not a
+-- weaker substitute for the remaining Collatz-strength mathematics.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Nat using (_<_)
-open import Data.Product using (Σ; _×_; _,_)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Nullary using (¬_)
 open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 import Data.Nat.Properties as NatP
@@ -128,7 +129,7 @@ descentByToStrictDescent (descentAtZero descent) =
   zero , descent
 descentByToStrictDescent (descentEarlier earlier) =
   descentByToStrictDescent earlier
-descentByToStrictDescent {h = suc h} (descentAtLast descent) =
+descentByToStrictDescent (descentAtLast {h = h} descent) =
   suc h , descent
 
 ------------------------------------------------------------------------
@@ -178,6 +179,55 @@ finiteBarrierToUniversalStopping :
 finiteBarrierToUniversalStopping source =
   Stop.universalStoppingFromStrictDescent
     (finiteBarrierToLiteralStrictDescentSource source)
+
+------------------------------------------------------------------------
+-- Reverse compiler: a literal strict-descent witness itself supplies a finite
+-- barrier at its witnessed horizon.  Thus the finite-barrier normal form does
+-- not weaken the theorem-strength terminal obligation.
+------------------------------------------------------------------------
+
+descentAtBlocksSurvival :
+  {x : Syracuse.PositiveNat} →
+  (m : Nat) →
+  DescentAt x m →
+  ¬ SurvivesThrough x m
+descentAtBlocksSurvival zero descent survival =
+  survival descent
+descentAtBlocksSurvival (suc m) descent survival =
+  proj₂ survival descent
+
+literalStrictDescentToFiniteBarrierSource :
+  Stop.LiteralStrictDescentSource →
+  FiniteSurvivorBarrierSource
+literalStrictDescentToFiniteBarrierSource source = record
+  { barrierHorizon = λ x nontrivial →
+      proj₁ (Stop.descend source x nontrivial)
+  ; blocksCompleteSurvival = λ x nontrivial →
+      let witness = Stop.descend source x nontrivial
+      in descentAtBlocksSurvival
+           (proj₁ witness)
+           (proj₂ witness)
+  }
+
+record FiniteBarrierStrictDescentEquivalence : Set₁ where
+  constructor finiteBarrierStrictDescentEquivalence
+  field
+    barrierToDescent :
+      FiniteSurvivorBarrierSource →
+      Stop.LiteralStrictDescentSource
+
+    descentToBarrier :
+      Stop.LiteralStrictDescentSource →
+      FiniteSurvivorBarrierSource
+
+open FiniteBarrierStrictDescentEquivalence public
+
+canonicalFiniteBarrierStrictDescentEquivalence :
+  FiniteBarrierStrictDescentEquivalence
+canonicalFiniteBarrierStrictDescentEquivalence =
+  finiteBarrierStrictDescentEquivalence
+    finiteBarrierToLiteralStrictDescentSource
+    literalStrictDescentToFiniteBarrierSource
 
 ------------------------------------------------------------------------
 -- UNBOUNDED NEGATION ROUTE: constructive result stops at double negation.
@@ -256,6 +306,8 @@ record ConstructiveSurvivorExtractionBoundary : Set where
     finiteBarrierExtractionPaid : Nat
     finiteBarrierToLiteralSourcePaid : Nat
     finiteBarrierToUniversalStoppingPaid : Nat
+    strictDescentBuildsFiniteBarrierPaid : Nat
+    finiteBarrierStrictDescentEquivalencePaid : Nat
     noInfiniteGivesDoubleNegatedDescentPaid : Nat
     explicitNatSearchMarkovSocketPaid : Nat
     markovConditionalExtractionCompilerPaid : Nat
@@ -269,5 +321,5 @@ canonicalConstructiveSurvivorExtractionBoundary :
   ConstructiveSurvivorExtractionBoundary
 canonicalConstructiveSurvivorExtractionBoundary =
   constructiveSurvivorExtractionBoundary
-    1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1
     0 0 0 0
