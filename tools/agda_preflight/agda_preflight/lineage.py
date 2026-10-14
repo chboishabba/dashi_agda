@@ -8,11 +8,16 @@ from .discovery import round_family
 
 def _symbol_map(module: dict) -> dict[str, str]:
     result: dict[str, str] = {}
+    module_name = str(module.get("module_name", ""))
+    prefix = module_name + "." if module_name else ""
     for symbol in module.get("symbols", ()):
         name = symbol.get("name") or symbol.get("qualified_name")
         if not name:
             continue
-        result[str(name)] = str(symbol.get("signature_sha256", ""))
+        name = str(name)
+        if prefix and name.startswith(prefix):
+            name = name[len(prefix):]
+        result[name] = str(symbol.get("signature_sha256", ""))
     return result
 
 
