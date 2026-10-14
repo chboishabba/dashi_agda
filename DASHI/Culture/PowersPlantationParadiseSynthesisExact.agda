@@ -18,26 +18,20 @@ import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as GovernedCross
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as EmpiricalPareto
+import DASHI.Culture.PowersPlantationParadisePerformerComparisonExact as PerformerComparison
+import DASHI.Culture.PowersPlantationParadiseComparativeVenueEvidenceExact as ComparativeVenue
+import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact as EnslavedEvidence
 
 ------------------------------------------------------------------------
 -- POWERS PLANTATION -> PARADISE? SYNTHESIS
---
--- The question mark is formalised as a projection disagreement, not as a
--- literal claim that a plantation state monotonically transforms into a
--- paradise state. Cultural visibility, material affordance, redistribution,
--- representation, access and global emancipation remain independent axes.
 ------------------------------------------------------------------------
 
 data PowersHistoricalState : Set where
   paradiseSurfaceRestrictedMaterial : PowersHistoricalState
   paradiseSurfaceExpandedMaterial : PowersHistoricalState
 
-data ParadiseObserverReading : Set where
-  paradiseSurface : ParadiseObserverReading
-
-data MaterialAffordance : Set where
-  materiallyRestricted : MaterialAffordance
-  materiallyExpanded : MaterialAffordance
+data ParadiseObserverReading : Set where paradiseSurface : ParadiseObserverReading
+data MaterialAffordance : Set where materiallyRestricted materiallyExpanded : MaterialAffordance
 
 paradiseObserver : PowersHistoricalState → ParadiseObserverReading
 paradiseObserver _ = paradiseSurface
@@ -47,44 +41,28 @@ materialAffordance paradiseSurfaceRestrictedMaterial = materiallyRestricted
 materialAffordance paradiseSurfaceExpandedMaterial = materiallyExpanded
 
 materialAffordanceDiffers :
-  materialAffordance paradiseSurfaceRestrictedMaterial
-  ≡ materialAffordance paradiseSurfaceExpandedMaterial → ⊥
+  materialAffordance paradiseSurfaceRestrictedMaterial ≡ materialAffordance paradiseSurfaceExpandedMaterial → ⊥
 materialAffordanceDiffers ()
 
 paradiseObserverCannotRecoverMaterialAffordance :
   INF.FactorsThrough paradiseObserver materialAffordance → ⊥
 paradiseObserverCannotRecoverMaterialAffordance =
   INF.witnessRulesOutEveryFlatFactorisation
-    (INF.nonFactorabilityWitness
-      paradiseSurfaceRestrictedMaterial
-      paradiseSurfaceExpandedMaterial
-      refl
-      materialAffordanceDiffers)
+    (INF.nonFactorabilityWitness paradiseSurfaceRestrictedMaterial paradiseSurfaceExpandedMaterial refl materialAffordanceDiffers)
 
 existingObserverAffordanceDonor :
   INF.FactorsThrough Ecology.nominalLiberatoryObserver Ecology.realizedRemain → ⊥
-existingObserverAffordanceDonor =
-  Ecology.nominalLiberatoryLabelCannotRecoverRealizedAffordance
+existingObserverAffordanceDonor = Ecology.nominalLiberatoryLabelCannotRecoverRealizedAffordance
 
-recognitionCannotRecoverDistribution :
-  INF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
+recognitionCannotRecoverDistribution : INF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
 recognitionCannotRecoverDistribution = Fraser.recognitionCannotRecoverDistribution
 
-distributionCannotRecoverRepresentation :
-  INF.FactorsThrough Fraser.distribution Fraser.representation → ⊥
-distributionCannotRecoverRepresentation =
-  Fraser.distributionCannotRecoverRepresentation
+distributionCannotRecoverRepresentation : INF.FactorsThrough Fraser.distribution Fraser.representation → ⊥
+distributionCannotRecoverRepresentation = Fraser.distributionCannotRecoverRepresentation
 
-data ExpansionState : Set where
-  localExpandedGloballyRestricted : ExpansionState
-  localExpandedGloballyOpen : ExpansionState
-
-data LocalExpansion : Set where
-  localOptionExpanded : LocalExpansion
-
-data GlobalEmancipation : Set where
-  globalRestrictionRemains : GlobalEmancipation
-  globalRestrictionRemoved : GlobalEmancipation
+data ExpansionState : Set where localExpandedGloballyRestricted localExpandedGloballyOpen : ExpansionState
+data LocalExpansion : Set where localOptionExpanded : LocalExpansion
+data GlobalEmancipation : Set where globalRestrictionRemains globalRestrictionRemoved : GlobalEmancipation
 
 localExpansion : ExpansionState → LocalExpansion
 localExpansion _ = localOptionExpanded
@@ -94,23 +72,15 @@ globalEmancipation localExpandedGloballyRestricted = globalRestrictionRemains
 globalEmancipation localExpandedGloballyOpen = globalRestrictionRemoved
 
 globalEmancipationDiffers :
-  globalEmancipation localExpandedGloballyRestricted
-  ≡ globalEmancipation localExpandedGloballyOpen → ⊥
+  globalEmancipation localExpandedGloballyRestricted ≡ globalEmancipation localExpandedGloballyOpen → ⊥
 globalEmancipationDiffers ()
 
-localExpansionDoesNotProveGlobalEmancipation :
-  INF.FactorsThrough localExpansion globalEmancipation → ⊥
+localExpansionDoesNotProveGlobalEmancipation : INF.FactorsThrough localExpansion globalEmancipation → ⊥
 localExpansionDoesNotProveGlobalEmancipation =
   INF.witnessRulesOutEveryFlatFactorisation
-    (INF.nonFactorabilityWitness
-      localExpandedGloballyRestricted
-      localExpandedGloballyOpen
-      refl
-      globalEmancipationDiffers)
+    (INF.nonFactorabilityWitness localExpandedGloballyRestricted localExpandedGloballyOpen refl globalEmancipationDiffers)
 
-data EpistemicLayer : Set where
-  powersSourceClaim : EpistemicLayer
-  dashiTheorem : EpistemicLayer
+data EpistemicLayer : Set where powersSourceClaim dashiTheorem : EpistemicLayer
 
 sourceClaimDoesNotBecomeDASHITheorem : powersSourceClaim ≡ dashiTheorem → ⊥
 sourceClaimDoesNotBecomeDASHITheorem ()
@@ -142,59 +112,47 @@ participationBoundary = Fraser.canonicalParticipationAxesBoundary
 totalityBoundary : Totality.HistoricalTotalityCriticalTheoryBoundary
 totalityBoundary = Totality.canonicalHistoricalTotalityCriticalTheoryBoundary
 
-governedCrossPollinationBoundary :
-  GovernedCross.PowersGovernedCrossPollinationBoundary
-governedCrossPollinationBoundary =
-  GovernedCross.canonicalPowersGovernedCrossPollinationBoundary
+governedCrossPollinationBoundary : GovernedCross.PowersGovernedCrossPollinationBoundary
+governedCrossPollinationBoundary = GovernedCross.canonicalPowersGovernedCrossPollinationBoundary
 
 empiricalProgrammeBoundary : Empirical.PowersEmpiricalProgrammeBoundary
 empiricalProgrammeBoundary = Empirical.canonicalPowersEmpiricalProgrammeBoundary
 
-empiricalAcquisitionParetoBoundary :
-  EmpiricalPareto.PowersEmpiricalAcquisitionParetoBoundary
-empiricalAcquisitionParetoBoundary =
-  EmpiricalPareto.canonicalPowersEmpiricalAcquisitionParetoBoundary
+empiricalAcquisitionParetoBoundary : EmpiricalPareto.PowersEmpiricalAcquisitionParetoBoundary
+empiricalAcquisitionParetoBoundary = EmpiricalPareto.canonicalPowersEmpiricalAcquisitionParetoBoundary
+
+performerComparisonBoundary : PerformerComparison.PowersPerformerComparisonBoundary
+performerComparisonBoundary = PerformerComparison.canonicalPowersPerformerComparisonBoundary
+
+comparativeVenueEvidenceBoundary : ComparativeVenue.PowersComparativeVenueEvidenceBoundary
+comparativeVenueEvidenceBoundary = ComparativeVenue.canonicalPowersComparativeVenueEvidenceBoundary
+
+enslavedDistributionEvidenceBoundary : EnslavedEvidence.PowersEnslavedDistributionEvidenceBoundary
+enslavedDistributionEvidenceBoundary = EnslavedEvidence.canonicalPowersEnslavedDistributionEvidenceBoundary
 
 record PowersPlantationParadiseBoundary : Set where
   constructor powers-plantation-paradise-boundary
   field
     paradiseProjectionEqualsHistoricalCarrier : Bool
-    paradiseProjectionEqualsHistoricalCarrierIsFalse :
-      paradiseProjectionEqualsHistoricalCarrier ≡ false
+    paradiseProjectionEqualsHistoricalCarrierIsFalse : paradiseProjectionEqualsHistoricalCarrier ≡ false
     culturalVisibilityImpliesMaterialFreedom : Bool
-    culturalVisibilityImpliesMaterialFreedomIsFalse :
-      culturalVisibilityImpliesMaterialFreedom ≡ false
+    culturalVisibilityImpliesMaterialFreedomIsFalse : culturalVisibilityImpliesMaterialFreedom ≡ false
     localOptionExpansionImpliesGlobalEmancipation : Bool
-    localOptionExpansionImpliesGlobalEmancipationIsFalse :
-      localOptionExpansionImpliesGlobalEmancipation ≡ false
+    localOptionExpansionImpliesGlobalEmancipationIsFalse : localOptionExpansionImpliesGlobalEmancipation ≡ false
     archiveSilenceImpliesHistoricalAbsence : Bool
-    archiveSilenceImpliesHistoricalAbsenceIsFalse :
-      archiveSilenceImpliesHistoricalAbsence ≡ false
+    archiveSilenceImpliesHistoricalAbsenceIsFalse : archiveSilenceImpliesHistoricalAbsence ≡ false
     performanceImpliesSocialOccupancy : Bool
-    performanceImpliesSocialOccupancyIsFalse :
-      performanceImpliesSocialOccupancy ≡ false
+    performanceImpliesSocialOccupancyIsFalse : performanceImpliesSocialOccupancy ≡ false
     performanceImpliesEndorsement : Bool
-    performanceImpliesEndorsementIsFalse :
-      performanceImpliesEndorsement ≡ false
+    performanceImpliesEndorsementIsFalse : performanceImpliesEndorsement ≡ false
     culturalSurfaceImpliesSameStanding : Bool
-    culturalSurfaceImpliesSameStandingIsFalse :
-      culturalSurfaceImpliesSameStanding ≡ false
+    culturalSurfaceImpliesSameStandingIsFalse : culturalSurfaceImpliesSameStanding ≡ false
     culturalSurfaceImpliesPoliticalContestability : Bool
-    culturalSurfaceImpliesPoliticalContestabilityIsFalse :
-      culturalSurfaceImpliesPoliticalContestability ≡ false
+    culturalSurfaceImpliesPoliticalContestabilityIsFalse : culturalSurfaceImpliesPoliticalContestability ≡ false
     culturalSurfaceImpliesSameMaterialCone : Bool
-    culturalSurfaceImpliesSameMaterialConeIsFalse :
-      culturalSurfaceImpliesSameMaterialCone ≡ false
+    culturalSurfaceImpliesSameMaterialConeIsFalse : culturalSurfaceImpliesSameMaterialCone ≡ false
 
 canonicalPowersPlantationParadiseBoundary : PowersPlantationParadiseBoundary
 canonicalPowersPlantationParadiseBoundary =
   powers-plantation-paradise-boundary
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
+    false refl false refl false refl false refl false refl false refl false refl false refl false refl
