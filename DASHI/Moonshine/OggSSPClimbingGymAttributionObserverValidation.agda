@@ -23,6 +23,18 @@ citationCannotPromoteProof :
   Source.citationImportsProof Attribution.mpmathZetaZeroDocumentation ≡ false
 citationCannotPromoteProof = refl
 
+mpmathDocumentationReleaseIs130 :
+  Attribution.mpmathDocumentationReleaseIs130
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ true
+mpmathDocumentationReleaseIs130 = refl
+
+runtimeVersionNotManufacturedByCitation :
+  Attribution.exactRuntimePackageVersionIndependentlyReceipted
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ false
+runtimeVersionNotManufacturedByCitation = refl
+
 lmfdbIsReferenceNotImportedCache :
   Attribution.cacheValuesImportedFromLMFDB
     Attribution.canonicalClimbingGymSourceAttributionBoundary
