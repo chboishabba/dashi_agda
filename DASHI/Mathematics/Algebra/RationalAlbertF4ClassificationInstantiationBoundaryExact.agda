@@ -9,23 +9,24 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoun
 -- triality decomposition, Q(i) 4+48 root spaces, full root grading and split-F4
 -- root-datum recognition.
 --
--- Companion Lean #52 further source-writes, on this literal rational Albert
--- carrier, cubic/adjoint recovery, nondegenerate trace pairing and norm+unit
--- rigidity: a Q-linear bijection preserving the same cubic norm and unit is a
--- Jordan automorphism.  Agda records that development only as a cross-prover
--- receipt; no Lean proof authority is silently transferred here.
+-- Companion Lean #52 source-writes cubic/adjoint recovery, nondegenerate trace
+-- pairing and norm+unit rigidity on the same literal rational carrier.  Agda
+-- records this only as a cross-prover receipt: no Lean proof authority is
+-- silently transferred.
 --
--- Consequently the *mathematical structure* of
+-- A new exact rational producer also evaluates the represented derivation
+-- algebra at the real place: G_ij = -tr_27(D_i D_j) has rank 52 with exact
+-- positive LDL diagonal and the represented center has dimension zero.  This
+-- strongly selects the compact real completion as the correct target, but the
+-- receipt deliberately does NOT classify the real form or the global Q-form.
 --
---   Stab_{Isom(N)}(1) = Aut(J)
---
--- is no longer a separate discovery problem: norm+unit rigidity reduces it.
--- The remaining terminal theorem is genuinely Q-form/algebraic-group
--- classification: Der(J) is the appropriate F4 form, Aut(J) is type F4 and the
--- full cubic norm-isometry group is type E6.  An Agda instantiation still needs
--- proof authority for every consumed classification statement, including the
--- unit-stabilizer consequence until the local rigidity theorem is replayed or
--- transported in-kernel.
+-- Consequently:
+--   * Stab_{Isom(N)}(1)=Aut(J) is structurally reduced by norm+unit rigidity;
+--   * the real-place target is sharply constrained by exact invariant-form
+--     diagnostics;
+--   * the remaining terminal theorem is still original-Q-form/algebraic-group
+--     classification: Der(J), Aut(J) and Isom(N) as the appropriate F4/E6
+--     forms, instantiated proof-relevantly on this same object.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -38,6 +39,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact as Inner
 import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact as Weights
 import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact as Grading
 import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact as SplitF4
+import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessReceiptExact as RealPlace
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact as Linear
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact as Sources
 import DASHI.Reasoning.AlbertF4LeanCubicNormRigidityReceiptExact as Rigidity
@@ -107,6 +109,10 @@ record Boundary : Set where
     normUnitRigiditySourceWrittenCrossKernel : Bool
     unitStabilizerJordanEqualityStructurallyReduced : Bool
     normUnitRigidityAgdaAuthorityPaid : Bool
+    exactPositiveTraceFormRealPlaceDiagnosticPaid : Bool
+    compactRealPlaceSuggested : Bool
+    compactRealPlaceClassificationPaid : Bool
+    realPlaceDiagnosticClassifiesOriginalQForm : Bool
     generalClassificationTheoremFormalizedInRepo : Bool
     actualQFormGroupInstantiationInhabited : Bool
 open Boundary public
@@ -123,9 +129,13 @@ canonicalBoundary =
     Rigidity.canonicalBoundary.normUnitRigiditySourceWritten
     Rigidity.canonicalBoundary.unitStabilizerJordanEqualityStructurallyReduced
     Rigidity.canonicalBoundary.crossKernelProofAuthorityTransferred
+    RealPlace.canonicalBoundary.exactPositiveInvariantTraceFormDiagnosticPaid
+    RealPlace.canonicalBoundary.compactRealPlaceSuggestedByDiagnostic
+    RealPlace.canonicalBoundary.compactRealPlaceClassificationFormalized
+    RealPlace.canonicalBoundary.originalQFormClassifiedFromRealPlaceAlone
     false
     false
 
 classificationSourceNote : String
 classificationSourceNote =
-  "Chevalley-Schafer / Petersson / Springer-Veldkamp provide characteristic-zero Albert/F4/E6 classification provenance. Companion Lean locally reduces unit-fixing cubic symmetry to Jordan automorphism on the native rational carrier, but that source-written proof is not Agda theorem authority. The still-unpaid formal endpoint is original-Q-form/full algebraic-group classification and its proof-relevant instantiation on this same object."
+  "Chevalley-Schafer / Petersson / Springer-Veldkamp provide characteristic-zero Albert/F4/E6 classification provenance. Companion Lean locally reduces unit-fixing cubic symmetry to Jordan automorphism on the native rational carrier. Exact rational trace-form diagnostics strongly select the compact real completion, but neither the Lean source nor the real-place computation is Agda/global-Q classification authority. The unpaid endpoint is the original-Q-form/full algebraic-group classification and its proof-relevant instantiation on this same object."
