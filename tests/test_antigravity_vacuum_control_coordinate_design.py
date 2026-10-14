@@ -15,10 +15,14 @@ def test_vacuum_collision_is_recast_as_experimental_coordinate_design():
         "CMP119AntigravityVacuumControlCoordinateDesignExact.agda"
     )
     for token in (
-        "vacuumExperimentDesign",
+        "constantVacuumCoordinate",
+        "constantVacuumSourceDimension",
+        "constantVacuumCoordinateSeparatesCanonicalCollision",
+        "projectedVacuumCoordinate",
         "projectedVacuumCoordinateSeparatesCanonicalCollision",
         "VacuumSelectiveControl",
         "selectiveControlPreservesCurrentSourceView",
+        "selectiveControlChangesConstantVacuum",
         "selectiveControlChangesProjectedVacuum",
         "selectiveControlMakesVacuumCoordinateModifiable",
         "VacuumSourceDifferenceWitness",
