@@ -13,3 +13,5 @@ import DASHI.Biology.PersuasionTransmissionTruthBoundaryExact
 import DASHI.Biology.PersuasionTransmissionTruthBoundaryRegression
 import DASHI.Biology.AttributionConsumerNonDescentExact
 import DASHI.Biology.AttributionConsumerNonDescentRegression
+import DASHI.Biology.SourceCueTruthNoncollapseExact
+import DASHI.Biology.SourceCueTruthNoncollapseRegression
