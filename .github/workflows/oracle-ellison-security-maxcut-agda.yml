@@ -1,0 +1,70 @@
+name: Oracle Ellison security max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/CausalIdentificationFamiliesExact.agda'
+      - 'DASHI/Cognition/OracleEllison*.agda'
+      - 'DASHI/Cognition/Everything.agda'
+      - 'DASHI/Law/SensibLawRealMatterReviewDecisionExact.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/oracle-ellison-security-maxcut-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: oracle-ellison-security-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check generic causal identification families
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Biology/CausalIdentificationFamiliesExact.agda
+
+      - name: Type-check authority fork
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/OracleEllisonAuthorityChainMaxCutExact.agda
+
+      - name: Type-check exact human-review gate
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/OracleEllisonExactReviewPromotionGateExact.agda
+
+      - name: Type-check causal electoral evidence
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/OracleEllisonCausalElectoralEvidenceExact.agda
+
+      - name: Type-check direct motive boundary
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/OracleEllisonMotiveSourceBoundaryExact.agda
+
+      - name: Type-check terminal transcript validation
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/OracleEllisonSecurityTranscriptValidation.agda
