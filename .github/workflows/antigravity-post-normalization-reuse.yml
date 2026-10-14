@@ -8,11 +8,13 @@ on:
     paths:
       - 'DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuse*.agda'
       - 'DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda'
       - 'DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda'
       - 'tests/test_antigravity_r136_static_differential_reuse.py'
       - 'tests/test_antigravity_differential_tt_donor_maxcut.py'
+      - 'tests/test_antigravity_si_calibration_donor_maxcut.py'
       - 'tests/test_antigravity_post_normalization_reuse_rollup.py'
       - '.github/workflows/antigravity-post-normalization-reuse.yml'
   workflow_dispatch:
@@ -37,6 +39,7 @@ jobs:
           pytest -q \
             tests/test_antigravity_r136_static_differential_reuse.py \
             tests/test_antigravity_differential_tt_donor_maxcut.py \
+            tests/test_antigravity_si_calibration_donor_maxcut.py \
             tests/test_antigravity_post_normalization_reuse_rollup.py \
             tests/test_antigravity_static_pair_to_differential.py \
             tests/test_antigravity_post_normalization_maxcut.py
@@ -47,4 +50,5 @@ jobs:
           nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda
           nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseEverything.agda
