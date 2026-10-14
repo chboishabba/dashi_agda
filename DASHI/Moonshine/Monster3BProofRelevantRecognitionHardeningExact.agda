@@ -6,25 +6,19 @@ module DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact where
 -- Several older Monster interfaces correctly NAME their remaining obligations
 -- but encode those obligations as fields whose values are themselves `Set`s.
 -- Such a field records a proposition/type to be paid; it does not carry an
--- inhabitant of that proposition.  This distinction matters at the current
--- max-cut because source-written theorem types, character signatures and
--- same-object sockets must not be mistaken for completed recognition proofs.
---
--- This owner is deliberately backwards-compatible.  It does not rewrite the
--- historical interfaces.  Instead it wraps the exact existing objects with
--- proof-relevant witness records.  Downstream promotion code can therefore
--- demand the hardened wrapper while older diagnostic/frontier code can retain
--- its existing type surface.
+-- inhabitant of that proposition. This owner keeps the legacy APIs intact and
+-- adds wrappers whose fields are inhabitants of those exact proposition types.
 --
 -- Repo-native cross-pollination: newer exact-review / causal-identification
 -- owners use the same discipline -- typed obligation plus an inhabitant bound
--- to the same reviewed/identified object.  No external source is needed for
--- this hardening; it is a DASHI interface correction.
+-- to the same reviewed/identified object. No external source is needed for this
+-- hardening; it is a DASHI interface correction.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Actual
@@ -36,17 +30,14 @@ import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectio
 import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 
 ------------------------------------------------------------------------
--- 1. H_zeta same-object recognition: the legacy object names two Set-valued
---    obligations.  The hardened object additionally carries inhabitants.
+-- 1. H_zeta same-object recognition.
 ------------------------------------------------------------------------
 
 record PaidSchrodingerIsActualHZeta
     (legacy : HZeta.SchrodingerIsActualHZeta) : Set₁ where
   field
-    actualHZetaRecognitionWitness :
-      HZeta.actualHZetaRecognition legacy
-    actualHZetaActionIntertwinerWitness :
-      HZeta.actualHZetaActionIntertwiner legacy
+    actualHZetaRecognitionWitness : HZeta.actualHZetaRecognition legacy
+    actualHZetaActionIntertwinerWitness : HZeta.actualHZetaActionIntertwiner legacy
 
 open PaidSchrodingerIsActualHZeta public
 
@@ -57,9 +48,37 @@ forgetPaidSchrodingerIsActualHZeta :
 forgetPaidSchrodingerIsActualHZeta legacy paid = legacy
 
 ------------------------------------------------------------------------
--- 2. Actual W_zeta|E constituent attachment.  The decomposition data itself
---    is concrete, but the five SAME-object/irreducibility/character fields in
---    the historical attachment are Set-valued obligations.  Require witnesses.
+-- 2. Stone--von Neumann constituent elements and lists.
+--
+-- `ZetaHeisenbergIrreducible` historically stores the TYPES
+-- `selectedCentralCharacter` and `irreducible`.  A paid constituent must carry
+-- inhabitants.  `AllPaidZetaHeisenbergIrreducibles` ties that payment to every
+-- literal element of the decomposition list rather than to an unindexed global
+-- proposition name.
+------------------------------------------------------------------------
+
+record PaidZetaHeisenbergIrreducible
+    (constituent : StoneMultiplicity.ZetaHeisenbergIrreducible) : Set₁ where
+  field
+    selectedCentralCharacterWitness :
+      StoneMultiplicity.selectedCentralCharacter constituent
+    irreducibleWitness :
+      StoneMultiplicity.irreducible constituent
+
+open PaidZetaHeisenbergIrreducible public
+
+data AllPaidZetaHeisenbergIrreducibles :
+    List StoneMultiplicity.ZetaHeisenbergIrreducible → Set₁ where
+  allPaidNil : AllPaidZetaHeisenbergIrreducibles []
+  allPaidCons :
+    {constituent : StoneMultiplicity.ZetaHeisenbergIrreducible} →
+    {rest : List StoneMultiplicity.ZetaHeisenbergIrreducible} →
+    PaidZetaHeisenbergIrreducible constituent →
+    AllPaidZetaHeisenbergIrreducibles rest →
+    AllPaidZetaHeisenbergIrreducibles (constituent ∷ rest)
+
+------------------------------------------------------------------------
+-- 3. Actual W_zeta|E constituent attachment.
 ------------------------------------------------------------------------
 
 record PaidActualZetaConstituentAttachment
@@ -67,6 +86,10 @@ record PaidActualZetaConstituentAttachment
     (attachment : Constituent.ActualZetaConstituentAttachment promotion)
     : Set₁ where
   field
+    constituentsPaid :
+      AllPaidZetaHeisenbergIrreducibles
+        (StoneMultiplicity.constituents (Constituent.decomposition attachment))
+
     sameActualRestrictedSectorWitness :
       Constituent.SameActualRestrictedSector attachment
     directSumRealisationWitness :
@@ -91,8 +114,7 @@ paidAttachmentMultiplicityIsNinety attachment paid =
   Constituent.attachedMultiplicityIsNinety attachment
 
 ------------------------------------------------------------------------
--- 3. Linear multiplicity representation.  Ninety-dimensionality is an actual
---    promotion premise, not something supplied by the existence of Fin 90.
+-- 4. Linear multiplicity representation and canonical route.
 ------------------------------------------------------------------------
 
 record PaidLinearMultiplicityRepresentation
@@ -119,9 +141,7 @@ record PaidCanonicalLinearMultiplicityRoute
 open PaidCanonicalLinearMultiplicityRoute public
 
 ------------------------------------------------------------------------
--- 4. Actual Hom-space/evaluation surface.  Its round-trip equations are
---    already proof-bearing equalities.  The remaining source-character and
---    linear-intertwiner fields are Set-valued and therefore get witnesses here.
+-- 5. Actual Hom-space/evaluation surface.
 ------------------------------------------------------------------------
 
 record PaidActualLinearMultiplicityHomSpace
@@ -138,10 +158,7 @@ record PaidActualLinearMultiplicityHomSpace
 open PaidActualLinearMultiplicityHomSpace public
 
 ------------------------------------------------------------------------
--- 5. Corrected finite-basis recognition also contains Set-valued obligations.
---    The maps, inverse laws and translation/modulation equalities remain useful
---    exact data; these wrappers require inhabitants for the representation-
---    native / linear-basis / extension obligations before promotion.
+-- 6. Corrected finite-basis recognition.
 ------------------------------------------------------------------------
 
 record PaidActualZetaBasisRecognition
@@ -169,18 +186,15 @@ open PaidActualMultiplicityBasisRecognition public
 record PaidWZetaBasisVectorRecognition
     {LiteralZetaSector : Set}
     {homSpace : Hom.ActualLinearMultiplicityHomSpace}
-    (recognition :
-      Correction.WZetaBasisVectorRecognition LiteralZetaSector homSpace)
+    (recognition : Correction.WZetaBasisVectorRecognition LiteralZetaSector homSpace)
     : Set₁ where
   field
     zetaBasisRecognitionPaid :
-      PaidActualZetaBasisRecognition
-        (Correction.basisRecognition recognition)
+      PaidActualZetaBasisRecognition (Correction.basisRecognition recognition)
     multiplicityBasisRecognitionPaid :
       PaidActualMultiplicityBasisRecognition
         (Correction.multiplicityBasisRecognition recognition)
-    schrodingerBasisToX6Witness :
-      Correction.schrodingerBasisToX6Paid recognition
+    schrodingerBasisToX6Witness : Correction.schrodingerBasisToX6Paid recognition
     evaluationOfBasisTensorMatchesIncludedBasisWitness :
       Correction.evaluationOfBasisTensorMatchesIncludedBasis recognition
     translationActionExtendsLinearlyFromBasisWitness :
@@ -191,7 +205,7 @@ record PaidWZetaBasisVectorRecognition
 open PaidWZetaBasisVectorRecognition public
 
 ------------------------------------------------------------------------
--- 6. WrongType firewalls.
+-- 7. WrongType firewalls.
 ------------------------------------------------------------------------
 
 data TypedObligationAloneCreatesRecognitionWitness : Set where
@@ -216,7 +230,7 @@ sameObjectTypeDoesNotCreateSameObjectWitness :
 sameObjectTypeDoesNotCreateSameObjectWitness ()
 
 ------------------------------------------------------------------------
--- 7. Machine-readable audit boundary.
+-- 8. Machine-readable audit boundary.
 ------------------------------------------------------------------------
 
 record Boundary : Set where
@@ -225,12 +239,15 @@ record Boundary : Set where
     legacyHZetaRecognitionIsProofRelevant : Bool
     legacyMultiplicityDimensionIsProofRelevant : Bool
     legacyHomIntertwinerIsProofRelevant : Bool
+    legacyConstituentElementIsProofRelevant : Bool
     legacyConstituentAttachmentIsProofRelevant : Bool
     legacyZetaBasisRecognitionIsProofRelevant : Bool
     legacyMultiplicityBasisRecognitionIsProofRelevant : Bool
     legacyWZetaBasisVectorRecognitionIsProofRelevant : Bool
     paidHZetaRecognitionWrapperAvailable : Bool
     paidMultiplicityRouteWrapperAvailable : Bool
+    paidConstituentElementWrapperAvailable : Bool
+    paidConstituentListWrapperAvailable : Bool
     paidConstituentAttachmentWrapperAvailable : Bool
     paidHomIntertwinerWrapperAvailable : Bool
     paidZetaBasisRecognitionWrapperAvailable : Bool
@@ -241,6 +258,6 @@ open Boundary public
 
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
-  false false false false false false false
-  true true true true true true true
+  false false false false false false false false
+  true true true true true true true true true
   false
