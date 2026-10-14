@@ -1,6 +1,6 @@
 # Semantic discovery
 
-`dashi-agda` now joins the existing repo-wide `.repo-index/index.sqlite3` inventory with preflight's persistent source/interface cache.
+`dashi-agda` joins the existing repo-wide `.repo-index/index.sqlite3` inventory with preflight's persistent source/interface cache.
 
 Authority split:
 
@@ -13,9 +13,9 @@ Normal symbol search demotes numbered `RoundNNN` modules. Historical matches rem
 ## Bootstrap/update repo-index
 
 ```bash
-python scripts/repo_index.py build --root .
+python scripts/repo_index.py --root . build
 # later
-python scripts/repo_index.py update --root .
+python scripts/repo_index.py --root . update
 ```
 
 ## Commands
