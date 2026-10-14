@@ -9,15 +9,23 @@ required_files=(
   DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda
   DASHI/Biology/IIT4SystemPhiInputExact.agda
   DASHI/Biology/IIT4SymbolicScalarBackendExact.agda
+  DASHI/Biology/IIT4FiniteExecutableKernelExact.agda
+  DASHI/Biology/IIT4FiniteDistinctionExact.agda
+  DASHI/Biology/IIT4FiniteRelationExact.agda
+  DASHI/Biology/IIT4FiniteCauseEffectStructureExact.agda
   DASHI/Biology/IITXORGridAdversarialExact.agda
   DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda
-  DASHI/Biology/IITXORProbabilityReceiptExact.agda
-  DASHI/Biology/IITXOREffectCutReceiptExact.agda
-  DASHI/Biology/IITCyclotomicFourierObserverExact.agda
-  DASHI/Biology/IITBalancedTernary369HierarchyExact.agda
-  DASHI/Biology/IIT369PantsGluingBridgeExact.agda
+  DASHI/Biology/IITXORGridFibreCalibrationExact.agda
+  DASHI/Biology/IITMatchedFabricGateExperimentExact.agda
+  DASHI/Biology/IIT369MatchedAlgebraControlExact.agda
+  DASHI/Biology/IITHyperfabricCausalCellNetworkExact.agda
+  DASHI/Biology/IITPointed27HyperformExperimentExact.agda
+  DASHI/Biology/IITXOR369StressFamilyExact.agda
+  DASHI/Biology/IITIIT4ConsumerDescentExact.agda
+  DASHI/Biology/IITHyperfabricCompletionReceiptExact.agda
   DASHI/Biology/IITCausalPantsFibreGluingExact.agda
   DASHI/Biology/IITCausalPantsOrientationBoundaryExact.agda
+  DASHI/Biology/IIT369PantsGluingBridgeExact.agda
   DASHI/Biology/IITPointedTernary27FaceGluingExact.agda
   DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda
   DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda
@@ -25,126 +33,136 @@ required_files=(
   DASHI/Biology/IITPointedTernary27Recentered26Exact.agda
   DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda
   DASHI/Reasoning/IITBrainMaleCNSConsumerBoundaryExact.agda
-  DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda
-  DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda
-  DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda
   DASHI/Biology/IITPhiIntegrationEverything.agda
+  DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda
   DASHI/EverythingIITPhiIntegrationMaxCut.agda
-  scripts/iit_pants_fabric_matched_gate_scan.py
-  scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json
+  docs/superpowers/specs/2026-10-14-iit-hyperfabric-completion-design.md
+  docs/superpowers/plans/2026-10-14-iit-hyperfabric-completion.md
+  scripts/iit4_finite_reference.py
+  scripts/check_iit4_finite_reference.py
+  scripts/iit_xor_grid_calibration.py
+  scripts/check_iit_xor_grid_calibration.py
+  scripts/iit_matched_fabric_gate_sweep.py
+  scripts/check_iit_matched_fabric_gate_sweep.py
+  scripts/iit_369_algebra_scan.py
+  scripts/check_iit_369_algebra_scan.py
+  scripts/iit_hyperfabric_fixture_scan.py
+  scripts/check_iit_hyperfabric_fixture_scan.py
+  scripts/iit_pointed27_gluing_scan.py
+  scripts/check_iit_pointed27_gluing_scan.py
+  scripts/iit4_structure_reference.py
+  scripts/check_iit4_structure_reference.py
+  scripts/iit4_pyphi_oracle.py
+  scripts/iit_xor_369_stress_scan.py
+  scripts/check_iit_xor_369_stress_scan.py
+  scripts/iit_consumer_descent_receipt.py
+  scripts/check_iit_hyperfabric_completion.py
 )
+
 for path in "${required_files[@]}"; do
-  [[ -f "$ROOT/$path" ]] || { echo "missing IIT max-cut file: $path" >&2; exit 1; }
+  [[ -f "$ROOT/$path" ]] || { echo "missing IIT completion file: $path" >&2; exit 1; }
 done
 
 require() { grep -Fq "$2" "$ROOT/$1" || { echo "missing contract '$2' in $1" >&2; exit 1; }; }
 reject() { ! grep -Fq "$2" "$ROOT/$1" || { echo "forbidden contract '$2' in $1" >&2; exit 1; }; }
 
-# IIT 4 finite spine and exact XOR fixture.
-require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'phiSystem : SystemPartition system → Score'
-require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'phiDistinction : CausalDistinction system → Score'
-require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'phiRelation : CausalRelation system → Score'
-require DASHI/Biology/IIT4FiniteCausalStructureExact.agda 'bigPhi :'
-require DASHI/Biology/IIT4FiniteProbabilityRepertoireExact.agda 'effectConditionalFraction'
-require DASHI/Biology/IIT4SystemPhiInputExact.agda 'MinimumPartitionWitness'
-require DASHI/Biology/IIT4SymbolicScalarBackendExact.agda 'symbolicSystemPhiAtPartition'
-require DASHI/Biology/IITXORGridAdversarialExact.agda 'xorTwoBitFiniteCausalSystem : IIT4.FiniteCausalSystem'
-require DASHI/Biology/IITXORProbabilityReceiptExact.agda 'unconstrained11IsOneQuarter'
-require DASHI/Biology/IITXOREffectCutReceiptExact.agda 'partitionedEffect10to11IsHalf'
-require DASHI/Biology/IITXOREffectCutReceiptExact.agda 'symbolicIntegratedEffect10to11IsExactEquationTree'
+# Task 1: versioned executable system kernel.
+require DASHI/Biology/IIT4FiniteExecutableKernelExact.agda 'data IIT4FormalismVersion'
+require DASHI/Biology/IIT4FiniteExecutableKernelExact.agda 'iit4-2023'
+require DASHI/Biology/IIT4FiniteExecutableKernelExact.agda 'iit4-2026'
+require DASHI/Biology/IIT4FiniteExecutableKernelExact.agda 'record PositiveDenominatorFraction'
+require DASHI/Biology/IIT4FiniteExecutableKernelExact.agda 'zeroDenominatorCannotInhabitPositiveFraction'
+require DASHI/Biology/IIT4FiniteExecutableKernelExact.agda 'pythonReceiptIsNotKernelProof'
+require scripts/iit4_finite_reference.py 'IIT_4_0_2023'
+require scripts/iit4_finite_reference.py 'IIT_4_0_2026'
+require scripts/iit4_finite_reference.py 'directional_partitions'
+require scripts/iit4_finite_reference.py 'partitioned_effect_probability'
+require scripts/iit4_finite_reference.py 'intrinsic_information'
 
-# XOR-grid recurrence is explicitly the dependency/gluing graph, not XOR itself.
-require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'data GridCausalEdge'
-require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'northWestLocalXor'
+# Task 2: XOR-grid calibration.
 require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'northWestNorthEastCircuit'
-require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'northWestSouthWestCircuit'
-require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'gridCircuitIsNotLocalGate'
-require DASHI/Biology/IITXORGridFibreCircuitBridgeExact.agda 'circuitAloneDoesNotDeterminePhi'
+require DASHI/Biology/IITXORGridFibreCalibrationExact.agda 'currentXORGridCalibrationReceipt'
+require DASHI/Biology/IITXORGridFibreCalibrationExact.agda 'graphCutStillNotPhi'
+require scripts/iit_xor_grid_calibration.py 'grid2x2_step'
+require scripts/check_iit_xor_grid_calibration.py 'distinct_phi_s'
 
-# Generic observer/descent and cyclotomic/369 surfaces.
-require DASHI/Core/IntegrationConsumerDescentOrderExact.agda 'nonDescentBlocksScoreFactorization'
-require DASHI/Biology/IITCyclotomicFourierObserverExact.agda 'fourier27IdentitySufficient'
-require DASHI/Biology/IITCyclotomicFourierObserverExact.agda 'firstCoefficientCannotRecoverTail'
-require DASHI/Biology/IITBalancedTernary369HierarchyExact.agda 'rank1OrbitCannotRecoverSignedIdentity'
-require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'canonicalPantsHasThreeOutputs'
-require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'nineSheetPantsRoundTrip'
-require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'voxel27PantsRoundTrip'
-require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'sameNineStatesDoNotForceSameAlgebra'
-
-# Causal pants: gluing/transport and local algebra are independent coordinates.
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record LocalSynthesisCell'
+# Task 3: matched H/mu sweeps.
 require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record OutputInputGluing'
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record TwoSourceInputGluing'
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'evaluateGluedCell'
 require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'sameFabricDifferentLocalAlgebraChangesOutput'
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'triXorOnSameFabric'
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'record ClosedTwoStepCircuit'
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'gluingIsNotGate'
-require DASHI/Biology/IITCausalPantsFibreGluingExact.agda 'partitionDoesNotRewriteGate'
+require DASHI/Biology/IITMatchedFabricGateExperimentExact.agda 'data FabricKind'
+require DASHI/Biology/IITMatchedFabricGateExperimentExact.agda 'data GateKind'
+require DASHI/Biology/IITMatchedFabricGateExperimentExact.agda 'fabricDoesNotDefinitionallyDeterminePhi'
+require scripts/iit_matched_fabric_gate_sweep.py 'fixed_recurrent_fabric_vary_gate'
+require scripts/iit_matched_fabric_gate_sweep.py 'fixed_binary_xor_vary_fabric'
+
+# Task 4: exact same-cardinality 369 algebra control.
+require DASHI/Biology/IIT369MatchedAlgebraControlExact.agda 'q9NonaryGroupIsomorphismImpossible'
+require DASHI/Biology/IIT369MatchedAlgebraControlExact.agda 'phiProfileDoesNotIdentifyAlgebra'
+require scripts/iit_369_algebra_scan.py 'z9_add'
+require scripts/iit_369_algebra_scan.py 'f3_squared_add'
+require scripts/iit_369_algebra_scan.py 'system_phi_profile_identifies_group_law'
+
+# Task 5: path-indexed hyperfabric fixture semantics.
+require DASHI/Biology/IITHyperfabricCausalCellNetworkExact.agda 'record IndexedCausalFabric'
+require DASHI/Biology/IITHyperfabricCausalCellNetworkExact.agda 'causalGraphConnectionPartition'
+require DASHI/Biology/IITHyperfabricCausalCellNetworkExact.agda 'partitionSemanticsRemainSeparate'
+require scripts/iit_hyperfabric_fixture_scan.py 'global_section_partition'
+require scripts/iit_hyperfabric_fixture_scan.py 'numeric_scan_currently_evaluates_causal_graph_partition_only'
+
+# Task 6: pointed 27 / compatible gluing envelope.
+require DASHI/Biology/IITPointed27HyperformExperimentExact.agda 'originPlusTwentySixRoundTrip'
+require DASHI/Biology/IITPointed27HyperformExperimentExact.agda 'selectedCubiesStillDoNotDetermineTriadicFace'
+require DASHI/Biology/IITPointed27HyperformExperimentExact.agda 'geometryDoesNotManufactureTPM'
+require scripts/iit_pointed27_gluing_scan.py 'pairwise_face_overlaps'
+require scripts/iit_pointed27_gluing_scan.py 'corner_face_triples'
+require scripts/iit_pointed27_gluing_scan.py 'three_selected_cubie_choices'
+
+# Task 7: distinctions, relations, CES and full-structure oracle adapter.
+require DASHI/Biology/IIT4FiniteDistinctionExact.agda 'record FiniteDistinction'
+require DASHI/Biology/IIT4FiniteDistinctionExact.agda 'systemPhiNotDistinctionPhi'
+require DASHI/Biology/IIT4FiniteRelationExact.agda 'record FiniteRelation'
+require DASHI/Biology/IIT4FiniteRelationExact.agda 'relationNeedsCongruentOverlap'
+require DASHI/Biology/IIT4FiniteCauseEffectStructureExact.agda 'record FiniteCauseEffectStructure'
+require DASHI/Biology/IIT4FiniteCauseEffectStructureExact.agda 'systemPhiIsNotBigPhi'
+require scripts/iit4_structure_reference.py 'relation_phi_from_overlap'
+require scripts/iit4_structure_reference.py 'big_phi'
+require scripts/iit4_pyphi_oracle.py 'IIT_4_0_2023'
+require scripts/iit4_pyphi_oracle.py 'sum_phi_distinctions'
+require scripts/iit4_pyphi_oracle.py 'sum_phi_relations'
+
+# Task 8: versioned XOR/369 stress family.
+require DASHI/Biology/IITXOR369StressFamilyExact.agda 'record StressFamilyReceipt'
+require DASHI/Biology/IITXOR369StressFamilyExact.agda 'stressRankingDoesNotSelfPromote'
+require scripts/iit_xor_369_stress_scan.py 'system_phi_ranking_is_consciousness_ranking'
+
+# Task 9: consumer descent.
+require DASHI/Biology/IITIIT4ConsumerDescentExact.agda 'cardinalityLosesGroupLaw'
+require DASHI/Biology/IITIIT4ConsumerDescentExact.agda 'cardinalityCannotFactorGroupLaw'
+require DASHI/Biology/IITIIT4ConsumerDescentExact.agda 'selectedCubieObservationCannotRecoverTriadicFace'
+require scripts/iit_consumer_descent_receipt.py 'consumer_factorization_must_be_paid_per_consumer'
+
+# Task 10: completion ledger and verification provenance.
+require DASHI/Biology/IITHyperfabricCompletionReceiptExact.agda 'record CompletionLedger'
+require DASHI/Biology/IITHyperfabricCompletionReceiptExact.agda 'allTenSourceTasksPresent'
+require DASHI/Biology/IITHyperfabricCompletionReceiptExact.agda 'noFakeKernelPromotion'
+require DASHI/Biology/IITHyperfabricCompletionReceiptExact.agda 'noFakePyPhiExecutionClaim'
+require scripts/check_iit_hyperfabric_completion.py 'source_complete_tasks'
+require scripts/check_iit_hyperfabric_completion.py 'PENDING_EXTERNAL_AGDA_OR_CI_RECEIPT'
+
+# Existing cross-domain firewalls remain live.
+require DASHI/Biology/IIT369PantsGluingBridgeExact.agda 'sameNineStatesDoNotForceSameAlgebra'
 require DASHI/Biology/IITCausalPantsOrientationBoundaryExact.agda 'branchingDoesNotManufactureSynthesisOrientation'
-require DASHI/Biology/IITCausalPantsOrientationBoundaryExact.agda 'causalCellStillOwnsTwoInputs'
-
-# Matched fixed-fabric scanner/receipt.
-require scripts/iit_pants_fabric_matched_gate_scan.py 'A[t+1] = C[t]'
-require scripts/iit_pants_fabric_matched_gate_scan.py 'C[t+1] = mu(A[t], B[t])'
-require scripts/iit_pants_fabric_matched_gate_scan.py 'binary XOR'
-require scripts/iit_pants_fabric_matched_gate_scan.py 'binary OR'
-require scripts/iit_pants_fabric_matched_gate_scan.py 'binary AND'
-require scripts/iit_pants_fabric_matched_gate_scan.py 'ternary triXor'
-require scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json '"zero_phi_states": 6'
-require scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json '"min_phi_s_bits": 3.169925001442312'
-require scripts/data/outputs/iit_pants_fabric_matched_gate_scan_20261014.json 'fixed recurrent gluing topology is not sufficient to determine system phi_s'
-
-# Pointed 27 = selected cubie + complement / compatible face gluing.
-require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'oneSelectedPlusTwentySixRemainingIsTwentySeven'
-require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'originNotOnOuterFace'
-require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'outerFaceSheetIsOnePlusEight'
-require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'record PairwiseActiveFaceGluing'
 require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'selectedCornerCocycle'
-require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'recognizedZetaFaceGluing'
-require DASHI/Biology/IITPointedTernary27FaceGluingExact.agda 'faceGluingDoesNotSelfPromoteToPhi'
-
-# Three selected cubies still do not determine the irreducible triadic face.
-require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'sameSelectedCubies'
 require DASHI/Biology/IITPointedTernary27TriadicNonDescentExact.agda 'selectedCubiesDoNotDetermineTriadicFace'
-
-# Exact signed 27 <-> C3^3 <-> explicit Fourier cell/character index.
-require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'pointCell27RoundTrip'
-require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'cell27PointRoundTrip'
-require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'activeCharacterIndex'
-require DASHI/Biology/IITPointedTernary27CyclotomicCellExact.agda 'cyclicAndGeometricAdjacencyRemainDistinct'
-
-# Exact SAME-CARRIER 27 = origin + explicit NonOrigin26 decomposition.
-require DASHI/Biology/IITPointedTernary27Origin26Exact.agda 'nonActiveConstructorCountIsTwentySix'
-require DASHI/Biology/IITPointedTernary27Origin26Exact.agda 'nonActiveCubieIsNotOrigin'
-require DASHI/Biology/IITPointedTernary27Origin26Exact.agda 'originPlus26FromAfterTo'
-require DASHI/Biology/IITPointedTernary27Origin26Exact.agda 'originPlus26ToAfterFrom'
-require DASHI/Biology/IITPointedTernary27Origin26Exact.agda 'originMapsToDistinguishedScalar'
-require DASHI/Biology/IITPointedTernary27Origin26Exact.agda 'origin26DoesNotSelfPromoteToPhi'
-
-# Transport that 26-complement to every arbitrary selected cubie through C3^3.
-require DASHI/Biology/IITPointedTernary27Recentered26Exact.agda 'recenterSelectedCubieIsOrigin'
-require DASHI/Biology/IITPointedTernary27Recentered26Exact.agda 'recenteredNonActiveNeverHitsSelected'
-require DASHI/Biology/IITPointedTernary27Recentered26Exact.agda 'recenteredNonActiveInjective'
-require DASHI/Biology/IITPointedTernary27Recentered26Exact.agda 'canonicalArbitraryPointedComplement26'
 require DASHI/Biology/IITPointedTernary27Recentered26Exact.agda 'recentringDoesNotManufactureGeometricSymmetry'
-require DASHI/Biology/IITPointedTernary27Recentered26Exact.agda 'recentringDoesNotManufactureFaceSymmetry'
-
-# Remaining cross-domain firewalls.
 require DASHI/Reasoning/IITHyperfabricPartitionBridgeExact.agda 'vertexPartitionNotDefinitionallySectionPartition'
 require DASHI/Reasoning/IITBrainMaleCNSConsumerBoundaryExact.agda 'integrationScoreDoesNotCreateBiologicalIdentity'
-require DASHI/Moonshine/IITMonsterInvariantBoundaryExact.agda 'normLosesC3Phase'
-require DASHI/Analysis/IITZetaGeneratingBoundaryExact.agda 'finitePackagingIsNotAnalyticContinuation'
 
-# Rollup must be acyclic and validation must sit outside production.
-require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITXORGridFibreCircuitBridgeExact'
-require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITCausalPantsFibreGluingExact'
-require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITCausalPantsOrientationBoundaryExact'
-require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPointedTernary27Origin26Exact'
-require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology/IITPointedTernary27Recentered26Exact'
+# Production aggregate remains acyclic; validation sits outside it.
+require DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITHyperfabricCompletionReceiptExact'
 reject DASHI/Biology/IITPhiIntegrationEverything.agda 'import DASHI.Biology.IITPhiIntegrationMaxCutValidation'
 require DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationEverything'
 require DASHI/EverythingIITPhiIntegrationMaxCut.agda 'import DASHI.Biology.IITPhiIntegrationMaxCutValidation'
 
-echo 'IIT phi integration max-cut static contract: PASS'
+echo 'IIT hyperfabric tasks 1-10 static contract: PASS'
