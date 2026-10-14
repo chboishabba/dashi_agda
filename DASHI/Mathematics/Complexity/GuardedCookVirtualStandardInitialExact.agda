@@ -8,15 +8,17 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.StandardSingleTapeMachineExact as Standard
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookBitQuerySemanticsExact as Semantics
 import DASHI.Mathematics.Complexity.GuardedCookVirtualTapeBaseExact as Base
 import DASHI.Mathematics.Complexity.VirtualTapeSparseOverlayExact as Overlay
 import DASHI.Mathematics.Complexity.VirtualStandardTapeExecutionExact as Virtual
+import DASHI.Mathematics.Complexity.VirtualStandardTapeCostExact as Cost
 
 ------------------------------------------------------------------------
 -- Empty residual and exact absolute head position T+1.
@@ -99,21 +101,17 @@ virtualMoveConsumesLeftMargin :
     (k : Nat) →
   suc k ≤ Virtual.headAddress before →
   k ≤ Virtual.headAddress after
-virtualMoveConsumesLeftMargin edge k margin
-  rewrite Virtual.afterExact edge
+virtualMoveConsumesLeftMargin {before = before} edge k margin
   with Standard.direction (Virtual.selected edge)
-     | Virtual.headAddress _
+     | Virtual.headAddress before
      | Virtual.moveExact edge
-... | DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.moveLeft
-    | zero | ()
-... | DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.moveLeft
-    | suc address | refl =
+     | Virtual.afterExact edge
+... | Local.moveLeft | zero | () | afterExact
+... | Local.moveLeft | suc address | refl | refl =
   NatP.≤-pred margin
-... | DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.stayPut
-    | address | refl =
+... | Local.stayPut | address | refl | refl =
   NatP.≤-trans (NatP.n≤1+n k) margin
-... | DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.moveRight
-    | address | refl =
+... | Local.moveRight | address | refl | refl =
   NatP.≤-trans
     (NatP.n≤1+n k)
     (NatP.≤-trans margin (NatP.n≤1+n address))
@@ -129,16 +127,13 @@ virtualRunPreservesRemainingLeftMargin :
     {base : Overlay.VirtualTapeBase Symbol}
     {steps : Nat}
     {start finish : Virtual.VirtualStandardConfiguration machine base} →
-  DASHI.Mathematics.Complexity.VirtualStandardTapeCostExact.VirtualExactRun
-    steps start finish →
+  Cost.VirtualExactRun steps start finish →
   suc steps ≤ Virtual.headAddress start →
   suc zero ≤ Virtual.headAddress finish
-virtualRunPreservesRemainingLeftMargin
-    DASHI.Mathematics.Complexity.VirtualStandardTapeCostExact.virtualRunDone margin =
+virtualRunPreservesRemainingLeftMargin Cost.virtualRunDone margin =
   margin
 virtualRunPreservesRemainingLeftMargin
-    (DASHI.Mathematics.Complexity.VirtualStandardTapeCostExact.virtualRunStep
-      {steps = steps} edge rest)
+    (Cost.virtualRunStep {steps = steps} edge rest)
     margin =
   virtualRunPreservesRemainingLeftMargin
     rest
