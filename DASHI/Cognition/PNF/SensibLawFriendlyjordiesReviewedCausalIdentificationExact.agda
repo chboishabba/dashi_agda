@@ -4,28 +4,21 @@ module DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedCausalIdentificationE
 -- REVIEWED CAUSAL-IDENTIFICATION MAX-CUT
 --
 -- CausalIdentificationMaxCut already requires an explicit estimand and
--- identification-family evidence gate. ReviewedWorldEvidenceExact already
--- requires an exact human-review receipt/binding plus a separately supplied
--- causal premise. This owner joins those objects without weakening either.
---
--- Preferred chain:
---   observed facts
---     -> causal estimand
---     -> identification-family gate
---     -> exact human-review binding
---     -> same causal premise
---     -> governance transition evidence.
+-- identification-family evidence gate. ReviewedWorldEvidenceExact requires an
+-- exact human-review receipt/binding plus a separately supplied causal premise.
+-- ReviewBindingExact additionally proves that the generic review observation,
+-- exact bound factor and reviewed proposition are the same proposition, and
+-- that the bound source manifestation is the reviewed bundle.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.FriendlyjordiesGovernanceQuestionExact as March
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExact as Causal
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as Reviewed
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as World
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewBindingExact as Binding
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldExact as Governance
 import DASHI.Law.SensibLawRealMatterReviewDecisionExact as Review
 
@@ -38,6 +31,9 @@ reviewReceiptRequiredAfterIdentification = true
 
 exactReviewBindingRequired : Bool
 exactReviewBindingRequired = true
+
+samePropositionReviewBindingRequired : Bool
+samePropositionReviewBindingRequired = true
 
 reviewReceiptReplacesIdentificationGate : Bool
 reviewReceiptReplacesIdentificationGate = false
@@ -60,22 +56,25 @@ record ReviewedIdentifiedGovernanceCausalBridge
     identifiedBridge :
       Causal.IdentifiedGovernanceCausalBridge case demand
 
-    reviewDecision :
-      Reviewed.ReviewedWorldEvidenceDecision
+    boundReview :
+      Binding.SamePropositionReviewedWorldEvidenceDecision
         case
         (Causal.GovernanceCausalEstimandDemand.observedBundle demand)
 
     causalPremiseMatches :
-      Reviewed.ReviewedWorldEvidenceDecision.CausalPremise reviewDecision
+      Reviewed.ReviewedWorldEvidenceDecision.CausalPremise
+        (Binding.SamePropositionReviewedWorldEvidenceDecision.decision boundReview)
       ≡ Causal.IdentifiedGovernanceCausalBridge.CausalPremise identifiedBridge
 
     sourceRefsMatch :
-      Reviewed.ReviewedWorldEvidenceDecision.sourceRefs reviewDecision
+      Reviewed.ReviewedWorldEvidenceDecision.sourceRefs
+        (Binding.SamePropositionReviewedWorldEvidenceDecision.decision boundReview)
       ≡ Causal.IdentifiedGovernanceCausalBridge.sourceRefs identifiedBridge
 
     reviewReceiptMatches :
       Review.GenericHumanReviewReceipt.reviewReceiptRef
-        (Reviewed.ReviewedWorldEvidenceDecision.genericReview reviewDecision)
+        (Reviewed.ReviewedWorldEvidenceDecision.genericReview
+          (Binding.SamePropositionReviewedWorldEvidenceDecision.decision boundReview))
       ≡ Causal.IdentifiedGovernanceCausalBridge.reviewRef identifiedBridge
 
     reviewDoesNotReplaceIdentification : Bool
@@ -94,14 +93,14 @@ reviewedIdentificationRetainsAcceptedOrQualified :
     (bridge : ReviewedIdentifiedGovernanceCausalBridge case demand) →
   Review.ExactReviewItemBinding.acceptedOrQualified
     (Reviewed.ReviewedWorldEvidenceDecision.exactReviewBinding
-      (reviewDecision bridge)) ≡ true
+      (Binding.SamePropositionReviewedWorldEvidenceDecision.decision
+        (boundReview bridge))) ≡ true
 reviewedIdentificationRetainsAcceptedOrQualified bridge =
-  Reviewed.reviewedDecisionRetainsAcceptedOrQualified
-    (reviewDecision bridge)
+  Binding.acceptedOrQualifiedStillRequired (boundReview bridge)
 
 ------------------------------------------------------------------------
 -- The preferred transition admission carries both the identification-paid
--- object and the exact review wrapper for that same object.
+-- object and the exact same-proposition review wrapper for that same object.
 ------------------------------------------------------------------------
 
 record ReviewedIdentifiedTransitionAdmission
@@ -186,6 +185,9 @@ record FriendlyjordiesReviewedCausalIdentificationBoundary : Set where
     identificationGateStillRequiredIsTrue : identificationGateStillRequired ≡ true
     exactReviewBindingNowRequired : Bool
     exactReviewBindingNowRequiredIsTrue : exactReviewBindingNowRequired ≡ true
+    samePropositionReviewBindingRequired : Bool
+    samePropositionReviewBindingRequiredIsTrue :
+      samePropositionReviewBindingRequired ≡ true
     causalPremiseSameObjectChecked : Bool
     causalPremiseSameObjectCheckedIsTrue : causalPremiseSameObjectChecked ≡ true
     southAustraliaSourceStillIndependent : Bool
@@ -201,6 +203,7 @@ canonicalFriendlyjordiesReviewedCausalIdentificationBoundary :
   FriendlyjordiesReviewedCausalIdentificationBoundary
 canonicalFriendlyjordiesReviewedCausalIdentificationBoundary =
   friendlyjordies-reviewed-causal-identification-boundary
+    true refl
     true refl
     true refl
     true refl
