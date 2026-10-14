@@ -9,7 +9,10 @@ def test_coreweave_fleet_age_osint_capstone():
         "capacityVintageIsNowPaid",
         "selectedCapacityMedianIs6To12Months",
         "capacityCannotRecoverHardwareAge",
+        "multiGenerationCommercialCoexistenceIsPaid",
+        "currentA100CommercialPriceCoordinatePaid",
         "selectedVintageWallShareIs5666Bp",
+        "longitudinalPriceDecayStillOpen",
         "exactHardwareAgeStillOpen",
         "refreshHistoryStillOpen",
     ]:
