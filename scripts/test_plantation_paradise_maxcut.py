@@ -88,8 +88,20 @@ EXPECTED = {
         "distributionalIncidenceLeaf",
         "causalMobilityLeaf",
         "primaryCorpusSaturationLeaf",
+        "compensationPaymentLeaf",
+        "legalStatusSeatingRuleLeaf",
+        "theatreParticipationMobilityCausalDemand",
         "observationalEvidenceDoesNotIdentifyCausalEffect",
         "canonicalPowersEmpiricalProgrammeBoundary",
+    ],
+    "DASHI/Culture/PowersPlantationParadiseEmpiricalAcquisitionParetoExact.agda": [
+        "primaryCorpusCell",
+        "compensationLedgerCell",
+        "distributionalIncidenceCell",
+        "causalIdentificationCell",
+        "empiricalAcquisitionFrontier",
+        "currentFrontierIsCorpusCompensationDistribution",
+        "canonicalPowersEmpiricalAcquisitionParetoBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseSynthesisExact.agda": [
         "paradiseObserverCannotRecoverMaterialAffordance",
@@ -99,6 +111,7 @@ EXPECTED = {
         "historicalClaimBoundary",
         "governedCrossPollinationBoundary",
         "empiricalProgrammeBoundary",
+        "empiricalAcquisitionParetoBoundary",
     ],
     "DASHI/Culture/PowersPlantationParadiseValidation.agda": [
         "_paradise-material-gap-paid",
@@ -113,6 +126,7 @@ EXPECTED = {
         "_empirical-minette-receipt-paid",
         "_empirical-seating-receipt-paid",
         "_empirical-causal-firewall-paid",
+        "_empirical-acquisition-frontier-paid",
         "_rooted-trace-paid",
     ],
 }
