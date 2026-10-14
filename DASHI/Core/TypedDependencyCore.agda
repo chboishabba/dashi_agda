@@ -68,15 +68,15 @@ open FamilyWitness public
 -- Actions are not made admissible merely because an action constructor is
 -- inhabited.  Preconditions and postconditions are indexed by state/action.
 --
--- The state universe is explicit.  The action carrier remains Set₀ because all
--- existing consumers use ordinary finite/symbolic action types; the record
--- itself lives one level above the state carrier so its Set-valued predicate
--- families are well-sorted for arbitrary state level.
+-- Preserve the original public API: State and Action are both explicit
+-- parameters.  Only the state carrier is universe-polymorphic; Action remains
+-- Set₀ because the existing repository consumers use ordinary symbolic action
+-- types.  The record itself lives one level above State.
 ------------------------------------------------------------------------
 
 record DependentActionSystem
     {ℓ : Level}
-    {State : Set ℓ}
+    (State : Set ℓ)
     (Action : Set) : Set (lsuc ℓ) where
   field
     Precondition : State → Action → Set
@@ -89,7 +89,7 @@ record AdmissibleAction
     {ℓ : Level}
     {State : Set ℓ}
     {Action : Set}
-    (system : DependentActionSystem {State = State} Action)
+    (system : DependentActionSystem State Action)
     (before : State)
     (action : Action) : Set ℓ where
   field
