@@ -28,7 +28,9 @@ module DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationR
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Attribution
+import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as Observer
 
 record LeanEisensteinFormalSourceReceipt : Set where
   constructor lean-eisenstein-formal-source-receipt
@@ -87,6 +89,34 @@ crossProverReplayObserved = false
 
 externalScientificSourceAcquiredByThisReceipt : Bool
 externalScientificSourceAcquiredByThisReceipt = false
+
+------------------------------------------------------------------------
+-- Typed donor bundle.
+--
+-- This is the lawful cross-pollination edge: Agda contributes its own exact
+-- proof that the mod-3 phase observer is sufficient for the chi_-3 consumer;
+-- the Lean theorem source is carried beside it as provenance.  Neither side is
+-- silently re-labelled as proof authority for the other prover.
+------------------------------------------------------------------------
+
+record EisensteinObserverLeanDonorBundle : Set where
+  constructor eisenstein-observer-lean-donor-bundle
+  field
+    phaseSufficiency :
+      Descent.ConsumerSufficient Observer.phaseOfNat Observer.chiMinus3WeightOfNat
+    leanFormalSource : LeanEisensteinFormalSourceReceipt
+    coefficientTheoremImported : Bool
+    analyticTheoremImported : Bool
+
+open EisensteinObserverLeanDonorBundle public
+
+canonicalObserverLeanDonorBundle : EisensteinObserverLeanDonorBundle
+canonicalObserverLeanDonorBundle =
+  eisenstein-observer-lean-donor-bundle
+    Observer.phaseIsSufficientForChiMinus3
+    leanEisensteinUniversalReceipt
+    false
+    false
 
 ------------------------------------------------------------------------
 -- Cross-pollination boundary.
