@@ -16,6 +16,10 @@ reusesExactReviewItemBinding :
   Reviewed.exactReviewItemBindingReused ≡ true
 reusesExactReviewItemBinding = refl
 
+reviewReceiptAndBindingSameProposition :
+  Reviewed.reviewReceiptAndBindingSameProposition ≡ true
+reviewReceiptAndBindingSameProposition = refl
+
 legalEvidenceDecisionRequired :
   Reviewed.legalEvidenceDecisionRequiredForHistoricalReview ≡ false
 legalEvidenceDecisionRequired = refl
