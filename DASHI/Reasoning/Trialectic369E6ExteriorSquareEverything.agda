@@ -41,9 +41,12 @@ import DASHI.Physics.Closure.Ternary27TrinificationSMBridgeExact
 import DASHI.Physics.Closure.Ternary27TrinificationE6SameActionExact
 import DASHI.Physics.Closure.Ternary27TrinificationSU2RBreakingFrontierExact
 import DASHI.Physics.Closure.Ternary27TrinificationDHRMaxCutExact
+import DASHI.Physics.Closure.Ternary27E6ZetaTrinificationCentralizerExact
+import DASHI.Physics.Closure.Ternary27E6ZetaHolonomyBreakingFrontierExact
 import DASHI.Physics.Closure.Ternary27TrinificationTwoNeutralVEVBreakingExact
 import DASHI.Physics.Closure.Ternary27TrinificationTwoVEVMassSpectrumExact
 import DASHI.Physics.Closure.Ternary27TrinificationInvariantTwoVEVPotentialExact
+import DASHI.Physics.Closure.Ternary27TwoStageE6ToSMBreakingExact
 
 -- Gravity: historical coordinate-Laplacian diagnostics retained for comparison.
 import DASHI.Physics.Closure.E6HyperformPoissonLorentzMetricExact
