@@ -23,6 +23,16 @@ phaseControlCutClosed :
   ≡ true
 phaseControlCutClosed = refl
 
+attributionCutClosed :
+  Status.acquiredSourceAttributionClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+attributionCutClosed = refl
+
+canonicalConsumerDescentCutClosed :
+  Status.canonicalConsumerDescentWeldClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+canonicalConsumerDescentCutClosed = refl
+
 analyticQuantiserStillOpen :
   Status.constructiveRealToFiniteRadixQuantiserClosed
     Status.canonicalClimbingGymTerminalStatus
@@ -34,6 +44,12 @@ sourceSeedNotPretendedRecovered :
   ≡ false
 sourceSeedNotPretendedRecovered = refl
 
+independentReferenceNotPretendedCacheCertificate :
+  Status.cacheWideIndependentLMFDBEqualityEstablished
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ false
+independentReferenceNotPretendedCacheCertificate = refl
+
 kernelReceiptStillOpen :
   Status.exactHeadAgdaKernelGreen Status.canonicalClimbingGymTerminalStatus
   ≡ false
@@ -43,3 +59,9 @@ noMonsterPromotion :
   Status.empiricalMonsterSpecificityPromoted Status.canonicalClimbingGymTerminalStatus
   ≡ false
 noMonsterPromotion = refl
+
+noSiblingAuthorityPromotion :
+  Status.unmergedSiblingTheoremAuthorityImported
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ false
+noSiblingAuthorityPromotion = refl
