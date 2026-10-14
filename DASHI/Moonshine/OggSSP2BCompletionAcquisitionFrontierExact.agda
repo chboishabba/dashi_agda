@@ -14,16 +14,22 @@ module DASHI.Moonshine.OggSSP2BCompletionAcquisitionFrontierExact where
 --   * actual Tate Co1 JH profile 1,274,1;
 --   * common/residual modular block-support separation;
 --   * unique residual degree-24 simple;
---   * dim Hom_Co1(24,Sym2(24))=1 and explicit Frobenius spans that line.
+--   * dim Hom_Co1(24,Sym2(24))=1 and explicit Frobenius spans that line;
+--   * common 98280 is no longer an independent gate once the residual block is
+--     attached to the actual norm;
+--   * quotient-map equivariance descends formally from a surjective equivariant
+--     quotient presentation, so it is not an independent same-object theorem.
 --
--- SHARP SAME-OBJECT GATE:
---   identify the actual rank-24 source central block projector and use the
---   source-native norm's centralizer equivariance to obtain block naturality.
---   Lean's support squeeze then forces residual rank 24, residual kernel 98280,
---   and the common-lane equivalence automatically.  No independent common
---   98280 map theorem remains.  The induced residual quotient map must then be
---   recognized as Co1-equivariant; the already-paid unique Hom line forces it
---   to be Frobenius, hence the Tate cokernel is wedge2(24)=duad276.
+-- PREFERRED NEW MAX-CUT:
+--   runtime-test whether Sym2(24) has a unique invariant/minimal 24-submodule,
+--   namely the Frobenius-square image.  If so, the actual source-native
+--   residual norm image need only be shown Co1-stable and rank 24.  Its rank is
+--   already forced by the block-support squeeze once the actual residual block
+--   is attached.  Target uniqueness then forces the residual image to equal
+--   Frobenius literally, bypassing the quotient-source chart and Hom-line
+--   descent in the preferred path.  The Tate cokernel is then
+--   wedge2(24)=duad276 and the existing stable-Q10/J2^5 + three-fibre compilers
+--   close B'+C'.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -43,6 +49,9 @@ import DASHI.Moonshine.OggSSP2BCo1ExteriorSquareTateCandidateExact as Exterior
 import DASHI.Moonshine.OggSSP2BCo1AugmentationTrivialityCriterionExact as Augmentation
 import DASHI.Moonshine.OggSSP2BCo1FrobeniusHomRigidityExact as Frob
 import DASHI.Moonshine.OggSSP2BCentralizerMod2CancellationRigidityExact as Cancel
+import DASHI.Moonshine.OggSSP2BEquivariantResidualQuotientExact as EqDesc
+import DASHI.Moonshine.OggSSP2BUniqueInvariant24RangeExact as Unique24
+import DASHI.Moonshine.OggSSP2BUniqueRangeNormWeldExact as UniqueWeld
 
 record CompletionAcquisitionStatus : Set where
   constructor completion-acquisition-status
@@ -64,11 +73,16 @@ record CompletionAcquisitionStatus : Set where
     centralizerMod2CancellationRuntimePaid : Bool
     residual24UniqueSimplePaid : Bool
     common98280SupportSeparatedPaid : Bool
+    common98280NoLongerIndependentGate : Bool
+
+    quotientEquivarianceDescentCompilerPaid : Bool
+    uniqueInvariant24TargetScreenImplemented : Bool
+    uniqueInvariant24TargetRuntimePaid : Bool
+    uniqueRangeNormWeldCompilerPaid : Bool
 
     residualBlockProjectorSameObjectPaid : Bool
     normCentralBlockNaturalityPaid : Bool
-    inducedResidualCo1EquivariancePaid : Bool
-    common98280NoLongerIndependentGate : Bool
+    actualResidualRangeInvariantPaid : Bool
     actualTateExteriorSquareWeldPaid : Bool
 
     finiteDuadExplicitStableSubquotientScreenImplemented : Bool
@@ -91,13 +105,14 @@ canonicalCompletionAcquisitionStatus =
     true true true
     true true true
     true true false false
-    true true true true
-    false false false true false
+    true true true true true
+    true true false true
+    false false false false
     true true true true true
     false false
     2 false
     false false
-    "Preferred max-cut: instantiate the actual rank-24 central source-block projector for the source-native norm map. Centralizer-module linearity makes norm/block naturality formal; target residual projection is identity on the residual block. Lean's support squeeze then forces residual rank 24, kernel 98280 and common cancellation. Prove the induced residual quotient map is Co1-equivariant; the already-paid unique Hom_Co1(24,Sym2(24)) line forces Frobenius, so Tate276 = wedge2(24) = duad276. Existing stable-Q10/J2^5 and three-fibre compilers then close B'+C'. In parallel, the augmentation route has all runtime premises paid and only the generic first-nonzero-layer extraction lemma open. Keep the two Mode5/2T provenance bits separate; 31/279 remain firewalled until the core weld is same-object."
+    "Preferred max-cut: execute the isolated Co1 Sym2(24) minimal-submodule/socle screen. If the unique 24-dimensional invariant/minimal submodule is exactly the Frobenius-square image, attach the actual residual central block of the source-native norm. Centralizer-module linearity makes norm/block naturality formal; the existing support squeeze forces actual residual rank 24 and common-kernel rank 98280. Co1-stability of the actual residual image plus target uniqueness then forces that image to be Frobenius directly, so no quotient-source chart or induced-map equivariance receipt is needed in the preferred path. The existing norm-cokernel/exterior, stable-Q10/J2^5, and three-fibre compilers then close B'+C'. Keep the two Mode5/2T provenance bits separate; 31/279 remain firewalled until the core same-object weld is complete."
 
 postBrauerSemisimplifiedIngressAlreadyPaid :
   Brauer.semisimplifiedIngressPaid Brauer.canonicalTate276M24BrauerRuntimeReceipt ≡ true
@@ -158,6 +173,24 @@ common98280NoLongerIndependentGate :
     Cancel.canonicalCancellationRigidityBoundary
   ≡ true
 common98280NoLongerIndependentGate = Cancel.common98280NoLongerIndependentGate
+
+quotientEquivarianceCompilerIsPaid :
+  EqDesc.equivariantDescentCompilerPaid ≡ true
+quotientEquivarianceCompilerIsPaid = refl
+
+uniqueInvariant24RangeCompilerIsPaid :
+  Unique24.uniqueInvariant24RangeCompilerPaid ≡ true
+uniqueInvariant24RangeCompilerIsPaid = refl
+
+uniqueRangeNormWeldCompilerIsPaid :
+  UniqueWeld.uniqueRangeNormWeldCompilerPaid ≡ true
+uniqueRangeNormWeldCompilerIsPaid = refl
+
+uniqueInvariant24TargetRuntimeStillOpen :
+  Unique24.UniqueInvariant24RuntimeBoundary.uniqueMinimal24RuntimePaid
+    Unique24.canonicalUniqueInvariant24RuntimeBoundary
+  ≡ false
+uniqueInvariant24TargetRuntimeStillOpen = refl
 
 residualBlockProjectorStillOpen :
   Cancel.CancellationRigidityBoundary.residualBlockProjectorSameObjectPaid
