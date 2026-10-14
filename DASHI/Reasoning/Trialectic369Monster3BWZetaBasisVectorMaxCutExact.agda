@@ -35,8 +35,10 @@ module DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as Kernel
 import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptExact as BW
@@ -50,7 +52,7 @@ import DASHI.Wikimedia.IbrahimMonster3BLinearMultiplicityHomSpaceExact as Hom
 -- 1. Corrected source package.  This is deliberately NOT an inhabitant here.
 ------------------------------------------------------------------------
 
-record CorrectedWZetaRecognitionSource (Monster K : Set) : Set₁ where
+record CorrectedWZetaRecognitionSource (Monster K : Set) : Setω where
   field
     kernelAttachment : Kernel.Actual3BKernelSameElementAttachment Monster K
 
@@ -147,9 +149,9 @@ canonicalBoundary =
   corrected-w-zeta-maxcut-boundary
     true
     true
-    BW.canonicalBoundary.repoSchrodingerDimension729SourceAligned
-    Schrodinger.canonicalSchrodingerHilbertLiftBoundary.hilbertLiftPackaged
-    Schrodinger.canonicalSchrodingerHilbertLiftBoundary.fullHeisenbergLinearActionPackaged
+    (BW.repoSchrodingerDimension729SourceAligned BW.canonicalBoundary)
+    (Schrodinger.hilbertLiftPackaged Schrodinger.canonicalSchrodingerHilbertLiftBoundary)
+    (Schrodinger.fullHeisenbergLinearActionPackaged Schrodinger.canonicalSchrodingerHilbertLiftBoundary)
     true
     true
     false
