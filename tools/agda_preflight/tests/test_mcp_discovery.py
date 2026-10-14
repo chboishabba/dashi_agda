@@ -19,5 +19,5 @@ class FakeService:
 def test_mcp_registers_semantic_discovery_tools():
     server = FakeServer()
     register_mcp_tools(server, FakeService())
-    for name in ("symbol_search", "related_symbols", "discover", "round_lineage"):
+    for name in ("symbol_search", "related_symbols", "object_detail", "discover", "round_lineage"):
         assert name in server.names
