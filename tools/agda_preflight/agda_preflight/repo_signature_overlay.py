@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import json
 from pathlib import Path
 import re
 import sqlite3
@@ -12,6 +13,7 @@ from .repo_index_bridge import RepoIndexReader
 
 
 _STAMP_KEY = "semantic_repo_signature_overlay_stamp"
+_COUNT_KEY = "semantic_repo_signature_overlay_count"
 _IDENT_RE = re.compile(r"[A-Za-z][A-Za-z0-9']*")
 
 
@@ -32,14 +34,31 @@ def _repo_stamp(reader: RepoIndexReader) -> Optional[str]:
     return "{}:{}".format(schema, generated or "unknown")
 
 
+def _overlay_count(connection: sqlite3.Connection) -> int:
+    row = connection.execute(
+        "SELECT count(*) FROM semantic_symbols WHERE kind = 'repo-signature'"
+    ).fetchone()
+    return int(row[0])
+
+
 def overlay_is_fresh(reader: RepoIndexReader, connection: sqlite3.Connection) -> bool:
     stamp = _repo_stamp(reader)
     if stamp is None:
         return False
-    row = connection.execute(
-        "SELECT value FROM meta WHERE key = ?", (_STAMP_KEY,)
-    ).fetchone()
-    return row is not None and row["value"] == stamp
+    rows = connection.execute(
+        "SELECT key, value FROM meta WHERE key IN (?, ?)",
+        (_STAMP_KEY, _COUNT_KEY),
+    ).fetchall()
+    values = {row["key"]: row["value"] for row in rows}
+    try:
+        expected_count = int(values.get(_COUNT_KEY, "-1"))
+    except ValueError:
+        expected_count = -1
+    return (
+        values.get(_STAMP_KEY) == stamp
+        and expected_count >= 0
+        and _overlay_count(connection) == expected_count
+    )
 
 
 def _signature_text(root: Path, item: dict) -> str:
@@ -93,14 +112,16 @@ def sync_repo_signatures(
     discovery_catalog.ensure_catalog_schema(connection)
     stamp = _repo_stamp(reader)
     if not force and stamp is not None and overlay_is_fresh(reader, connection):
-        count = connection.execute(
-            "SELECT count(*) FROM semantic_symbols WHERE refs_json LIKE '%repo-signature-overlay%'"
-        ).fetchone()[0]
-        return {"updated": False, "symbols_with_signatures": int(count), "stamp": stamp}
+        return {
+            "updated": False,
+            "symbols_with_signatures": _overlay_count(connection),
+            "stamp": stamp,
+        }
 
     if not reader.available:
         return {"updated": False, "symbols_with_signatures": 0, "stamp": None}
 
+    connection.execute("DELETE FROM semantic_symbols WHERE kind = 'repo-signature'")
     by_file = defaultdict(list)
     for item in reader.all_agda_symbols(include_history=True):
         if item.get("kind") in {"function", "data", "record", "postulate"}:
@@ -114,13 +135,6 @@ def sync_repo_signatures(
                 continue
             fingerprint = make_fingerprint(signature)
             refs = _refs(signature, item["name"])
-            refs.append("repo-signature-overlay")
-            # Remove only the overlay-kind row. ModuleInterface-derived rows
-            # remain untouched and are preferred when they contain richer data.
-            connection.execute(
-                "DELETE FROM semantic_symbols WHERE module_name = ? AND qualified_name = ? AND kind = 'repo-signature'",
-                (item["module_name"], item["qualified_name"]),
-            )
             connection.execute(
                 """
                 INSERT INTO semantic_symbols(
@@ -133,8 +147,7 @@ def sync_repo_signatures(
                     item["module_name"], item["file"], item["name"],
                     item["qualified_name"], signature,
                     fingerprint.normalized_signature, fingerprint.signature_sha256,
-                    __import__("json").dumps(refs),
-                    classify_surface_role(item["module_name"]),
+                    json.dumps(refs), classify_surface_role(item["module_name"]),
                 ),
             )
             inserted += 1
@@ -144,5 +157,9 @@ def sync_repo_signatures(
             "INSERT INTO meta(key, value) VALUES(?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",
             (_STAMP_KEY, stamp),
         )
+    connection.execute(
+        "INSERT INTO meta(key, value) VALUES(?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",
+        (_COUNT_KEY, str(inserted)),
+    )
     connection.commit()
     return {"updated": True, "symbols_with_signatures": inserted, "stamp": stamp}
