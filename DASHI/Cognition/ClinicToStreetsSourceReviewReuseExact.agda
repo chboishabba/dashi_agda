@@ -7,11 +7,11 @@ module DASHI.Cognition.ClinicToStreetsSourceReviewReuseExact where
 -- source or review ontology:
 --
 --   1. publisher/book metadata is represented with AttributedSourceCore;
---   2. any future human review must use the already-landed REAL-MATTER generic
---      review receipt and exact-item provenance binding.
+--   2. any future human review uses the domain-neutral HumanReviewCore exact
+--      review receipt and item-provenance binding.
 --
 -- The supplied reel transcript remains the immediate source for the two
--- transcript-facing claims in ClinicToStreetsCausalProvenanceExact.  The book
+-- transcript-facing claims in ClinicToStreetsCausalProvenanceExact. The book
 -- citation records the attributed upstream work; it does not prove that the
 -- transcript paraphrase is textually exact, that the theoretical claim is true,
 -- or that any empirical causal edge is identified.
@@ -24,8 +24,8 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.HumanReviewCore as Review
 import DASHI.Cognition.ClinicToStreetsCausalProvenanceExact as Clinic
-import DASHI.Law.SensibLawRealMatterReviewDecisionExact as Review
 
 ------------------------------------------------------------------------
 -- 1. Primary publisher metadata on the canonical attributed-source carrier.
@@ -85,10 +85,10 @@ claimReference therapyCounterinsurgencyClaimId =
   "clinic-reel-2026-10-05#29-38-therapy-counterinsurgency"
 
 ------------------------------------------------------------------------
--- 3. Review demand over the generic REAL-MATTER review carrier.
+-- 3. Review demand over HumanReviewCore.
 --
--- We deliberately do not fabricate a GenericHumanReviewReceipt.  Current
--- demands are unpaid.  A future reviewed claim must bind the exact source
+-- We deliberately do not fabricate a GenericHumanReviewReceipt. Current
+-- demands are unpaid. A future reviewed claim must bind the exact source
 -- manifestation, candidate claim, and declared consumer and must carry an
 -- accepted/qualified exact-item binding.
 ------------------------------------------------------------------------
@@ -219,7 +219,7 @@ record ClinicSourceReviewBoundary : Set where
   constructor clinic-source-review-boundary
   field
     attributedSourceCoreReused : Bool
-    realMatterGenericReviewCarrierReused : Bool
+    humanReviewCoreReused : Bool
     exactReviewItemBindingRequired : Bool
     currentFamilyActivationReviewPaid : Bool
     currentTherapyCounterinsurgencyReviewPaid : Bool
