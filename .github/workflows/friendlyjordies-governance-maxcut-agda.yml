@@ -1,0 +1,64 @@
+name: Friendlyjordies governance max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/TypedDependencyCore.agda'
+      - 'DASHI/Core/TypedDependencyCoreUniverseRegression.agda'
+      - 'DASHI/Cognition/PNF/SensibLawFriendlyjordies*.agda'
+      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/friendlyjordies-governance-maxcut-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: friendlyjordies-governance-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check TypedDependencyCore universe regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/TypedDependencyCoreUniverseRegression.agda
+
+      - name: Type-check Friendlyjordies world-evidence regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFriendlyjordiesWorldEvidenceRegression.agda
+
+      - name: Type-check Friendlyjordies reviewed-world regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFriendlyjordiesReviewedWorldEvidenceRegression.agda
+
+      - name: Type-check Friendlyjordies rooted governance regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/PNF/SensibLawFriendlyjordiesGovernanceMaxCutRegression.agda
+
+      - name: Type-check terminal SensibLaw/ITIR parity rollup
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Law/SensibLawITIRParityEverything.agda
