@@ -16,13 +16,15 @@ module DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact where
 --   -> arbitrary trailing-even certificate extension
 --   -> residual word-certificate coverage -> strict-descent frontier
 --   -> strictness guard rejecting globally bounded pseudo-frontiers
---   -> coherent all-horizon survivor histories as inverse-limit obstructions.
+--   -> coherent all-horizon survivor histories as inverse-limit obstructions
+--   -> constructive finite-barrier search / explicit Markov extraction seam.
 --
 -- The residual producer is still theorem-strength.  Finite computation,
 -- density decay, spectral mixing, affine cocycles, word surgery, or merely
--- negating an inverse-limit history do not by themselves inhabit it.  They may
--- only feed a same-object residual/frontier producer whose unboundedness and
--- constructive descent extraction are proved separately.
+-- negating an inverse-limit history do not by themselves inhabit it.  A
+-- supplied finite same-object survivor barrier DOES now compile constructively
+-- to literal strict descent; global no-infinite-survivor yields only double
+-- negation unless the explicit Nat-search Markov socket is separately paid.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -39,6 +41,7 @@ import DASHI.Analysis.CollatzSyracuseTrailingZeroCertificateExact as ZeroCert
 import DASHI.Analysis.CollatzSyracuseResidualWordCertificateFrontierExact as WordFrontier
 import DASHI.Analysis.CollatzSyracuseResidualFrontierStrictnessGuardExact as Strictness
 import DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact as Inverse
+import DASHI.Analysis.CollatzSyracuseConstructiveSurvivorExtractionExact as Extract
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionCocycleExact as Cocycle
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionSwapExact as Swap
 import DASHI.Analysis.CollatzSyracuseUniversalStoppingCompilerExact as Universal
@@ -64,22 +67,29 @@ record TerminalParityMaxCutBoundary : Set where
     universalStoppingCompilerPaid : Nat
     terminalCompilersPaid : Nat
 
+    finiteSurvivorBarrierExtractionPaid : Nat
+    noInfiniteSurvivorDoubleNegationPaid : Nat
+    explicitNatSearchMarkovSocketPaid : Nat
+
     finiteSearchPromotesUniversalStopping : Nat
     densityPromotesUniversalStopping : Nat
     oldSpectralRelationPromotesUniversalStopping : Nat
     affineWordSurgeryPromotesUniversalStoppingAlone : Nat
+    natSearchMarkovUnconditionallyPaid : Nat
 
     unboundedResidualProducerPaid : Nat
     unboundedOddFrontierProducerPaid : Nat
     unboundedResidualFrontierProducerPaid : Nat
+    allStartsFiniteBarrierProducerPaid : Nat
     onlyCriticalOpenLeafIsLiteralResidualElimination : Nat
 
 canonicalTerminalParityMaxCutBoundary : TerminalParityMaxCutBoundary
 canonicalTerminalParityMaxCutBoundary =
   terminalParityMaxCutBoundary
     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    0 0 0 0
-    0 0 0 1
+    1 1 1
+    0 0 0 0 0
+    0 0 0 0 1
 
 finiteBasePaid :
   BaseTail.StrictDescentBaseTailBoundary.literalSmallBasePaid
@@ -147,6 +157,24 @@ residualInverseLimitObstructionPaid :
   ≡ 1
 residualInverseLimitObstructionPaid = refl
 
+finiteSurvivorBarrierExtractionPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.finiteBarrierExtractionPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+finiteSurvivorBarrierExtractionPaid = refl
+
+noInfiniteSurvivorDoubleNegationPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.noInfiniteGivesDoubleNegatedDescentPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+noInfiniteSurvivorDoubleNegationPaid = refl
+
+explicitNatSearchMarkovSocketPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.explicitNatSearchMarkovSocketPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+explicitNatSearchMarkovSocketPaid = refl
+
 correctionCocyclePaid :
   Cocycle.AffineCorrectionCocycleBoundary.exactCorrectionCocycleOwned
     Cocycle.canonicalAffineCorrectionCocycleBoundary
@@ -200,3 +228,15 @@ inverseLimitAbsenceDoesNotConstructDescent :
     Inverse.canonicalResidualInverseLimitBoundary
   ≡ 0
 inverseLimitAbsenceDoesNotConstructDescent = refl
+
+markovNotSilentlyOwned :
+  Extract.ConstructiveSurvivorExtractionBoundary.natSearchMarkovOwnedUnconditionally
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 0
+markovNotSilentlyOwned = refl
+
+finiteBarrierProducerStillOpen :
+  TerminalParityMaxCutBoundary.allStartsFiniteBarrierProducerPaid
+    canonicalTerminalParityMaxCutBoundary
+  ≡ 0
+finiteBarrierProducerStillOpen = refl
