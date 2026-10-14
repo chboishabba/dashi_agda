@@ -28,6 +28,12 @@ noInfiniteGivesDoubleNegatedDescentPaid :
   ≡ 1
 noInfiniteGivesDoubleNegatedDescentPaid = refl
 
+noInversePointGivesDoubleNegatedDescentPaid :
+  Extract.ConstructiveSurvivorExtractionBoundary.noInversePointGivesDoubleNegatedDescentPaid
+    Extract.canonicalConstructiveSurvivorExtractionBoundary
+  ≡ 1
+noInversePointGivesDoubleNegatedDescentPaid = refl
+
 markovNotSilentlyOwned :
   Extract.ConstructiveSurvivorExtractionBoundary.natSearchMarkovOwnedUnconditionally
     Extract.canonicalConstructiveSurvivorExtractionBoundary
