@@ -116,6 +116,16 @@ record ReviewedWorldEvidenceDecision
 
 open ReviewedWorldEvidenceDecision public
 
+reviewedDecisionRetainsAcceptedOrQualified :
+  ∀ {case : March.MarchCase}
+    {bundle : World.ExternalWorldFactBundle case}
+    (decision : ReviewedWorldEvidenceDecision case bundle) →
+  Review.ExactReviewItemBinding.acceptedOrQualified
+    (exactReviewBinding decision) ≡ true
+reviewedDecisionRetainsAcceptedOrQualified decision =
+  Review.ExactReviewItemBinding.acceptedOrQualifiedIsTrue
+    (exactReviewBinding decision)
+
 ------------------------------------------------------------------------
 -- Compile a proof-relevant review decision into the existing causal bridge.
 -- The premise witness is transported; it is not manufactured by the review
