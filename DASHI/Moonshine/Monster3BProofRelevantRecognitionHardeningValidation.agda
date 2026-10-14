@@ -17,6 +17,10 @@ legacyHomIntertwinerStoresTypeOnly :
   Hardening.legacyHomIntertwinerIsProofRelevant Hardening.canonicalBoundary ≡ false
 legacyHomIntertwinerStoresTypeOnly = refl
 
+legacyConstituentElementStoresTypeOnly :
+  Hardening.legacyConstituentElementIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyConstituentElementStoresTypeOnly = refl
+
 legacyConstituentAttachmentStoresTypeOnly :
   Hardening.legacyConstituentAttachmentIsProofRelevant Hardening.canonicalBoundary ≡ false
 legacyConstituentAttachmentStoresTypeOnly = refl
@@ -40,6 +44,14 @@ paidHZetaWrapperRequiresWitnesses = refl
 paidMultiplicityWrapperRequiresWitnesses :
   Hardening.paidMultiplicityRouteWrapperAvailable Hardening.canonicalBoundary ≡ true
 paidMultiplicityWrapperRequiresWitnesses = refl
+
+paidConstituentElementWrapperRequiresWitnesses :
+  Hardening.paidConstituentElementWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidConstituentElementWrapperRequiresWitnesses = refl
+
+paidConstituentListWrapperRequiresWitnesses :
+  Hardening.paidConstituentListWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidConstituentListWrapperRequiresWitnesses = refl
 
 paidConstituentWrapperRequiresWitnesses :
   Hardening.paidConstituentAttachmentWrapperAvailable Hardening.canonicalBoundary ≡ true
