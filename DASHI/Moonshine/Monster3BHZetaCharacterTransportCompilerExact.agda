@@ -25,6 +25,7 @@ module DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact where
 
 open import Agda.Primitive using (Set₁; Set₂)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
