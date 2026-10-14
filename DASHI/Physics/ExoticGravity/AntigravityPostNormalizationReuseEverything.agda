@@ -1,0 +1,8 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.ExoticGravity.AntigravityPostNormalizationReuseEverything where
+
+import DASHI.Physics.ExoticGravity.AntigravityPostNormalizationReuseMaxCutExact
+import DASHI.Physics.ExoticGravity.AntigravityDifferentialTTDonorMaxCutExact
+import DASHI.Physics.Foundations.CMP119AntigravityPostScalarR136ReuseMaxCutExact
+import DASHI.Physics.Foundations.CMP119AntigravityR136ToStaticVacuumPromotionExact
+import DASHI.Physics.Foundations.CMP119AntigravityR136StaticPairToDifferentialExact
