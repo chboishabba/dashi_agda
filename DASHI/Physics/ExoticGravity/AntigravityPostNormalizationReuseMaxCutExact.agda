@@ -11,17 +11,22 @@ import DASHI.Physics.Foundations.CMP119AntigravityR136StaticPairToDifferentialEx
 ------------------------------------------------------------------------
 -- POST-NORMALIZATION REUSE MAX-CUT
 --
--- The old S/D/R fork remains useful at source acquisition, but the physical
--- promotion stages are not independent once the R136/Local-C route has paid
--- same-state Lorentzian vacuum response.
+-- The old S/D/R fork remains useful at source acquisition, but two logically
+-- different uses of R136 must not be conflated:
 --
--- One R136 endpoint + affine V->rho calibration -> static receipt.
--- Two R136 endpoints + one shared affine calibration/common renormalization
--- convention -> differential receipt.
+--   SIGN ROUTE
+--     finite R109 anchor/tail + strict margin -> signed R136 response;
 --
--- Thus R is an OPTIONAL producer for S/D promotion; it is not a prerequisite
--- for acquiring the source normalization coordinate, and S/D do not require an
--- independent metric-response theorem after the corresponding R receipt exists.
+--   PHYSICAL-RESPONSE REUSE ROUTE
+--     actual pinned Local-C terminal producers + affine V->rho calibration
+--       -> static receipt;
+--     two such endpoints + shared affine calibration/common renormalization
+--       -> differential receipt.
+--
+-- The R109 finite-tail machinery is therefore NOT a prerequisite for consuming
+-- an already-produced pinned Local-C terminal as a static/differential physical
+-- response.  It remains a real payment only when the consumer additionally
+-- needs the independent R136 sign theorem.
 ------------------------------------------------------------------------
 
 sourceAcquisitionRoutesRemainAlternative : Bool
@@ -49,14 +54,40 @@ sharedAffineNormalizationToGravityCalibrationStillRequired = true
 commonCosmologicalRenormalizationConventionStillRequired : Bool
 commonCosmologicalRenormalizationConventionStillRequired = true
 
-r136PinnedFiniteAnchorAndTailStillRequiredBeforeReuse : Bool
-r136PinnedFiniteAnchorAndTailStillRequiredBeforeReuse =
+------------------------------------------------------------------------
+-- RESPONSE REUSE VS SIGN-PROOF SEPARATION
+------------------------------------------------------------------------
+
+typedPinnedLocalCTerminalStillRequiredForStaticReuse : Bool
+typedPinnedLocalCTerminalStillRequiredForStaticReuse = true
+
+r136FiniteAnchorTailRequiredForStaticResponseReuse : Bool
+r136FiniteAnchorTailRequiredForStaticResponseReuse = false
+
+r136StrictFinitePlusTailMarginRequiredForStaticResponseReuse : Bool
+r136StrictFinitePlusTailMarginRequiredForStaticResponseReuse = false
+
+r136FiniteAnchorTailStillRequiredForIndependentSignRoute : Bool
+r136FiniteAnchorTailStillRequiredForIndependentSignRoute =
   Prior.continuumPinnedFiniteAnchorAndTailBoundStillRequired
 
-r136StrictFinitePlusTailMarginStillRequiredBeforeReuse : Bool
-r136StrictFinitePlusTailMarginStillRequiredBeforeReuse =
+r136StrictFinitePlusTailMarginStillRequiredForIndependentSignRoute : Bool
+r136StrictFinitePlusTailMarginStillRequiredForIndependentSignRoute =
   Prior.continuumStrictFinitePlusTailMarginStillRequired
 
+-- Compatibility surfaces from the older scheduler.  "Before reuse" used to
+-- conflate response reuse with the independent sign route.  On the preferred
+-- typed Local-C response-reuse route these are now correctly false.
+r136PinnedFiniteAnchorAndTailStillRequiredBeforeReuse : Bool
+r136PinnedFiniteAnchorAndTailStillRequiredBeforeReuse = false
+
+r136StrictFinitePlusTailMarginStillRequiredBeforeReuse : Bool
+r136StrictFinitePlusTailMarginStillRequiredBeforeReuse = false
+
+-- The typed terminal itself still contains the two genuine same-object physical
+-- producers: boost covariance on the selected Local-C stress and E->L trace
+-- continuation of that same object.  This is not recharged after the terminal
+-- package is supplied.
 r136SameStateEuclideanLorentzianStressStillRequiredBeforeReuse : Bool
 r136SameStateEuclideanLorentzianStressStillRequiredBeforeReuse = true
 
@@ -73,14 +104,20 @@ record PostNormalizationReuseFrontier : Set where
     separateDeltaSameObjectTheoremAfterR136Pair : Bool
     sharedAffineCalibrationStillPhysical : Bool
     sharedRenormalizationConventionStillPhysical : Bool
-    r136FiniteAnchorTailStillPhysical : Bool
+
+    typedPinnedLocalCTerminalStillPhysical : Bool
+    r109FiniteAnchorTailRechargedForStaticResponseReuse : Bool
+    strictFiniteTailMarginRechargedForStaticResponseReuse : Bool
+    r109FiniteAnchorTailStillPhysicalForIndependentSignRoute : Bool
+    strictFiniteTailMarginStillPhysicalForIndependentSignRoute : Bool
     r136LorentzianContinuationStillPhysical : Bool
     ttProducerStillIndependent : Bool
 
 canonicalPostNormalizationReuseFrontier : PostNormalizationReuseFrontier
 canonicalPostNormalizationReuseFrontier =
   post-normalization-reuse-frontier
-    true true false true false true true true true true
+    true true false true false true true
+    true false false true true true true
 
 representationOnlyPromotionDebtRemainsAfterR136Reuse : Bool
 representationOnlyPromotionDebtRemainsAfterR136Reuse = false
