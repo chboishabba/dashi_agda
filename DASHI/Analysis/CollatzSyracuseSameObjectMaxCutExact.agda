@@ -47,6 +47,9 @@ import DASHI.Analysis.CollatzSyracuseGeometricSurvivalExact
 import DASHI.Analysis.CollatzSyracuseCylinderCorrelationExact
 import DASHI.Analysis.CollatzSyracuseMixingConcentrationCompilerExact
 import DASHI.Analysis.CollatzSyracuseStoppingConcentrationExact
+import DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact
+import DASHI.Analysis.CollatzSyracuseConstructiveSurvivorExtractionExact
+import DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact
 
 data MaxCutStatus : Set where
   proved : MaxCutStatus
@@ -91,6 +94,10 @@ data CollatzCut : Set where
   C13c-rationalAlignedBlockFiniteTail : CollatzCut
   C13-universalStoppingCompiler : CollatzCut
   C13d-allStartsStrictDescentProducer : CollatzCut
+  C13e-residualInverseLimitObstruction : CollatzCut
+  C13f-finiteSurvivorBarrierExtraction : CollatzCut
+  C13g-noInfiniteDoubleNegation : CollatzCut
+  C13h-natSearchMarkovSocket : CollatzCut
   C14-promotionFirewall : CollatzCut
   oldUnitPrefactorRoute : CollatzCut
   oldFiniteEqualsIntegerRoute : CollatzCut
@@ -131,6 +138,10 @@ cutStatus C13b-alignedBlockFiniteTail = proved
 cutStatus C13c-rationalAlignedBlockFiniteTail = proved
 cutStatus C13-universalStoppingCompiler = compiledFromRepo
 cutStatus C13d-allStartsStrictDescentProducer = sourceSpecificOpen
+cutStatus C13e-residualInverseLimitObstruction = compiledFromRepo
+cutStatus C13f-finiteSurvivorBarrierExtraction = proved
+cutStatus C13g-noInfiniteDoubleNegation = proved
+cutStatus C13h-natSearchMarkovSocket = proved
 cutStatus C14-promotionFirewall = proved
 cutStatus oldUnitPrefactorRoute = refutedRoute
 cutStatus oldFiniteEqualsIntegerRoute = refutedRoute
@@ -215,6 +226,22 @@ strictDescentTerminalWallVisible :
   cutStatus C13d-allStartsStrictDescentProducer ≡ sourceSpecificOpen
 strictDescentTerminalWallVisible = refl
 
+residualInverseLimitObstructionPaid :
+  cutStatus C13e-residualInverseLimitObstruction ≡ compiledFromRepo
+residualInverseLimitObstructionPaid = refl
+
+finiteSurvivorBarrierExtractionPaid :
+  cutStatus C13f-finiteSurvivorBarrierExtraction ≡ proved
+finiteSurvivorBarrierExtractionPaid = refl
+
+noInfiniteDoubleNegationPaid :
+  cutStatus C13g-noInfiniteDoubleNegation ≡ proved
+noInfiniteDoubleNegationPaid = refl
+
+natSearchMarkovSocketPaid :
+  cutStatus C13h-natSearchMarkovSocket ≡ proved
+natSearchMarkovSocketPaid = refl
+
 stoppedLogRouteOptional :
   cutStatus C7a-stoppedLogRemainder ≡ nonCriticalOptional
 stoppedLogRouteOptional = refl
@@ -250,8 +277,15 @@ record MaxCutBoundary : Set where
     unalignedBoundaryCompilerPaidHere : Nat
     universalStoppingCompilerPaidHere : Nat
     strictDescentEquivalentToStopping : Nat
+    residualInverseLimitObstructionPaidHere : Nat
+    finiteBarrierExtractionPaidHere : Nat
+    noInfiniteDoubleNegationPaidHere : Nat
+    natSearchMarkovOwnedUnconditionally : Nat
     optionalParallelRoutesDoNotBlockMaxCut : Nat
 
 canonicalMaxCutBoundary : MaxCutBoundary
 canonicalMaxCutBoundary =
-  maxCutBoundary 0 0 0 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1
+  maxCutBoundary
+    0 0 0 1 0 1 1 1 1 1
+    0 1 1 1 1 1 1 1 1 1
+    1 1 1 0 1
