@@ -19,6 +19,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
 -- Tiny decidable natural equality used by the finite residual map.
@@ -44,7 +45,7 @@ natEqualSound {suc left} {suc right} proof
 
 natEqualFalseFromApart :
   ∀ {left right} →
-  (left ≡ right → Agda.Builtin.Equality._≡_ false true) →
+  (left ≡ right → ⊥) →
   natEqual left right ≡ false
 natEqualFalseFromApart {zero} {zero} apart
   with apart refl
@@ -104,7 +105,7 @@ latestWriteSame requested cell residual
 latestWriteDifferent :
   ∀ {Cell : Set}
     {read write : Nat}
-    (apart : read ≡ write → Agda.Builtin.Equality._≡_ false true)
+    (apart : read ≡ write → ⊥)
     (cell : Cell)
     (residual : WriteResidual Cell) →
   latestWrite read (writeResidual write cell residual)
@@ -157,7 +158,7 @@ overlayReadOtherWrite :
   ∀ {Cell : Set}
     (base : VirtualTapeBase Cell)
     {read write : Nat}
-    (apart : read ≡ write → Agda.Builtin.Equality._≡_ false true)
+    (apart : read ≡ write → ⊥)
     (cell : Cell)
     (residual : WriteResidual Cell) →
   overlayRead base (writeResidual write cell residual) read
