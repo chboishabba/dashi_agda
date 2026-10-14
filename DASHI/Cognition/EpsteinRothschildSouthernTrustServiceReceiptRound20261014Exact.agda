@@ -12,10 +12,11 @@ import DASHI.Cognition.EpsteinBlackRothschildTransactionAtlas20261014Exact as Wi
 ------------------------------------------------------------------------
 -- ROTHSCHILD / SOUTHERN TRUST SERVICE-AGREEMENT RECEIPTS — 2026-10-14
 --
--- This round closes the prior "wire purpose unknown" state only at the level
--- actually paid by the released agreements/invoices.  Agreement -> invoice ->
--- near-matching payment chronology is a strong candidate join, but payer and
--- amount mismatches are preserved rather than repaired by narrative.
+-- Agreement -> invoice -> near-matching payment chronology supplies contractual
+-- context, but payer/version mismatches are preserved.  Downstream use is read
+-- through a fungible capital-pool model: paid inflows increase Southern Trust's
+-- deployment capacity; they need not be source-traced dollar-by-dollar unless
+-- a stronger earmarking or payer-instruction claim is made.
 ------------------------------------------------------------------------
 
 data RothschildServiceSurface : Set where
@@ -88,7 +89,7 @@ arianeInvoice15m = service-receipt
   "Ariane de Rothschild"
   15000000
   (invoice ∷ [])
-  "Southern Trust invoiced Ariane de Rothschild USD15m 'pursuant to Agreement dated 3 November 2015' with Deutsche Bank Trust Company Americas wire instructions. Invoice establishes demand for payment, not payment itself."
+  "Southern Trust invoiced Ariane de Rothschild USD15m pursuant to the 3 November 2015 agreement with Deutsche Bank Trust Company Americas wire instructions. Invoice establishes demand for payment, not payment itself."
   true false false
 
 edmondSuisse10mWire : ServiceReceipt
@@ -125,6 +126,7 @@ record ServiceJoinBoundary : Set where
     usDOJMatterPaidAsStatedScope : Bool
     invoicePaid : Bool
     decemberWiresPaid : Bool
+    fungibleCapitalContributionPaid : Bool
     benjaminWireEqualsArianeInvoicePayment : Bool
     edmondWireEqualsSpecificOctoberAgreementPayment : Bool
     statedScopeProvesQualityOrValueOfWork : Bool
@@ -133,12 +135,13 @@ open ServiceJoinBoundary public
 
 canonicalServiceJoinBoundary : ServiceJoinBoundary
 canonicalServiceJoinBoundary = service-join-boundary
-  true true true true true true true false false false false
+  true true true true true true true true false false false false
 
 data NearAmountImpliesInvoiceSatisfaction : Set where
 data TemporalSequenceImpliesContractPerformance : Set where
 data ConsultingImpliesImproperInfluence : Set where
 data ScopeDescriptionImpliesDeliveredWorkProduct : Set where
+data CapitalContributionImpliesEarmarking : Set where
 
 nearAmountDoesNotCreateInvoiceSatisfaction : NearAmountImpliesInvoiceSatisfaction → ⊥
 nearAmountDoesNotCreateInvoiceSatisfaction ()
@@ -152,8 +155,11 @@ consultingDoesNotCreateImproperInfluence ()
 scopeDoesNotCreateDeliveredWorkProduct : ScopeDescriptionImpliesDeliveredWorkProduct → ⊥
 scopeDoesNotCreateDeliveredWorkProduct ()
 
+capitalContributionDoesNotCreateEarmarking : CapitalContributionImpliesEarmarking → ⊥
+capitalContributionDoesNotCreateEarmarking ()
+
 ------------------------------------------------------------------------
--- Pareto after consulting relationship closure.
+-- Pareto after consulting-relationship closure.
 ------------------------------------------------------------------------
 
 data RothschildDebt : Set where
@@ -163,7 +169,7 @@ data RothschildDebt : Set where
   dojSettlementInterventionChain : RothschildDebt
   algorithmicWorkObject : RothschildDebt
   upstreamPaymentInstructions : RothschildDebt
-  downstreamSouthernTrustUse : RothschildDebt
+  southernTrustCapitalPoolDeployment : RothschildDebt
 
 record RothschildAcquisition : Set where
   constructor rothschild-acquisition
@@ -186,8 +192,8 @@ canonicalRothschildAcquisition =
     "Acquire any algorithm/model/work product covered by the risk-analysis agreements; the contractual phrase alone does not identify a system, method or delivered result."
   ∷ rothschild-acquisition workProductAndDeliverables 99 true
     "Recover memoranda, models, estate structures, drafts, correspondence and professional counterparties showing what Southern Trust actually delivered."
-  ∷ rothschild-acquisition downstreamSouthernTrustUse 98 true
-    "Trace post-payment Southern Trust cash uses at entity level while preserving fungibility: a later investment does not identify which source funded it absent account-level tracing."
+  ∷ rothschild-acquisition southernTrustCapitalPoolDeployment 98 true
+    "Place the December inflows into Southern Trust's aggregate capitalization/deployment chronology and measure subsequent investment capacity. Do not require source-specific tracing unless making an earmarking claim."
   ∷ rothschild-acquisition upstreamPaymentInstructions 97 true
     "Resolve originating accounts, signatories and payment instructions for the December wires without expanding named entities into family-wide agency."
   ∷ []
