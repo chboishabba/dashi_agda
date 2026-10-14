@@ -7,6 +7,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Cognition.EpsteinFinancialTrustAnnualStatementSpine20261014Exact as Annual
+
 ------------------------------------------------------------------------
 -- FINANCIAL TRUST COMPANY PRE-2013 CAPITAL / INVESTMENT ATLAS
 --
@@ -86,7 +88,7 @@ balanceSheet2004 = ftc-receipt
   "Financial Trust 2004 balance sheet"
   "EFTA01720157..166"
   "released company accounting record"
-  "Financial Trust's 31 Dec 2004 cash-basis balance sheet reports approximately USD537.0m total assets and approximately USD202.2m investment in partnerships, alongside cash, reverse-repo, securities and other positions."
+  "Financial Trust's 31 Dec 2004 internal cash-basis balance sheet reports approximately USD537.0m total assets and approximately USD202.2m investment in partnerships, alongside cash, reverse-repo, securities and other positions. The separately filed 2004 statement reports approximately USD563.2m total assets; the accounting-view discrepancy is preserved in the annual-spine owner."
   (securitiesTrading ∷ repoAndDerivatives ∷ partnershipPortfolio ∷ [])
   537033867 true false
 
@@ -117,20 +119,19 @@ ylkAppleTransfer2008 = ftc-receipt
   (charitableAssetTransfer ∷ [])
   34280154 true false
 
-ftcPaidInCapitalLocator2002 : FTCReceipt
-ftcPaidInCapitalLocator2002 = ftc-receipt
-  "2002 paid-in-capital locator"
-  "released media/court-filing lineage preserved in EFTA00064799"
-  "secondary locator to underlying 2002 financial statement"
-  "Reporting based on a court-filed 2002 Financial Trust financial statement states approximately USD88m paid-in capital from shareholders. The underlying statement remains the preferred promotion carrier, so this receipt pays acquisition routing rather than final shareholder allocation."
-  (personalInvestmentVehicle ∷ [])
-  88000000 false false
+ftc2002PrimaryState : FTCReceipt
+ftc2002PrimaryState = ftc-receipt
+  "2002 primary Financial Trust statement"
+  "USVI v JPMorgan Document 194-22 / 268-52, VI-JPM-000013554"
+  "primary court-filed company accounting record"
+  "The 2002 Financial Trust statement reports USD386,707,529 total assets, USD77,680,429 fee income, USD44,720,327 investment income and USD118,191,544 net income. The annual-spine owner now pays the complete filed statement rather than relying on a secondary paid-in-capital locator."
+  (personalInvestmentVehicle ∷ advisoryFeeIncome ∷ investmentIncome ∷ [])
+  386707529 true false
 
 record FTCPre2013Boundary : Set where
   constructor ftc-pre2013-boundary
   field
-    primary2003FinancialStatementPaid : Bool
-    primary2006FinancialStatementPaid : Bool
+    primaryAnnualSpine1999to2012Paid : Bool
     largeCorporateAssetBasePaid : Bool
     feeAndInvestmentIncomeSeparatelyPaid : Bool
     diversifiedInvestmentBookPaid : Bool
@@ -145,7 +146,7 @@ open FTCPre2013Boundary public
 
 canonicalFTCPre2013Boundary : FTCPre2013Boundary
 canonicalFTCPre2013Boundary = ftc-pre2013-boundary
-  true true true true true true true false false false false false
+  true true true true true true false false false false false
 
 data CompanyAssetsImpliesPersonalNetWorth : Set where
 data GPImpliesBeneficialOwnership : Set where
@@ -165,17 +166,17 @@ wexnerReviewDoesNotCreateAdjudication : WexnerReviewImpliesAdjudicatedMisappropr
 wexnerReviewDoesNotCreateAdjudication ()
 
 ------------------------------------------------------------------------
--- Pre-2013 Pareto frontier.
+-- Pre-2013 Pareto frontier after annual-statement closure.
 ------------------------------------------------------------------------
 
 data FTCPre2013Debt : Set where
-  missingPrimaryAnnualStatements : FTCPre2013Debt
   familyInterestPartnershipAgreement : FTCPre2013Debt
   wexnerChildrenTrustCapitalLedger : FTCPre2013Debt
   feeClientAllocation : FTCPre2013Debt
   zwirnRealisedDistributionLedger : FTCPre2013Debt
   shareholderCapitalSource : FTCPre2013Debt
   full2004PortfolioLookThrough : FTCPre2013Debt
+  crisisLossDecomposition : FTCPre2013Debt
   interEntityTransferLedger : FTCPre2013Debt
 
 record FTCPre2013Acquisition : Set where
@@ -191,15 +192,15 @@ canonicalFTCPre2013Acquisition =
   ftc-pre2013-acquisition familyInterestPartnershipAgreement 100
     "Acquire Family Interest LP's partnership agreement, cap table and account statements to resolve FTC GP rights and the Wexner children's trust LP economics."
   ∷ ftc-pre2013-acquisition feeClientAllocation 100
-    "Resolve Financial Trust fee/advisory revenue payer-by-payer rather than treating aggregate reported revenue as a client ledger; 2003 and 2006 primary statements now separate fee from investment income."
-  ∷ ftc-pre2013-acquisition missingPrimaryAnnualStatements 99
-    "Complete the annual primary-statement spine for 1999-2002, 2005 and 2007-2012; 2003, 2004 and 2006 are now primary-paid at balance-sheet/income-statement level."
+    "Resolve Financial Trust fee/advisory revenue payer-by-payer; the primary 1999-2012 annual spine is now closed, but annual fee totals are not a client ledger."
   ∷ ftc-pre2013-acquisition wexnerChildrenTrustCapitalLedger 99
     "Trace contributions/distributions between the Wexner children's trust, Family Interest LP and Financial Trust with same-object partnership/bank records."
+  ∷ ftc-pre2013-acquisition crisisLossDecomposition 99
+    "Decompose 2008-2012 negative related-investment results into realised losses, unrealised marks, write-downs and cash-flow effects."
   ∷ ftc-pre2013-acquisition zwirnRealisedDistributionLedger 99
     "Reconstruct Zwirn/Fortress contributions, valuations, redemptions, settlement and realised cash return; do not equate 2006 NAV with realised profit."
   ∷ ftc-pre2013-acquisition shareholderCapitalSource 98
-    "Acquire the underlying 2002 shareholder/capital statement and identify shareholder contributions behind the approximately USD88m paid-in-capital locator."
+    "Resolve shareholder contributions and equity changes behind the 2002/earlier corporate capital accounts using the primary statement and stockholder records."
   ∷ ftc-pre2013-acquisition full2004PortfolioLookThrough 98
     "Map Financial Trust's 2004 partnership/securities positions to managers, underlying assets, fees and counterparties while distinguishing direct from indirect exposure."
   ∷ ftc-pre2013-acquisition interEntityTransferLedger 97
