@@ -10,6 +10,10 @@ import DASHI.Foundations.E6F3GeneratedGroupClosureExact
 import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
 import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelReceiptExact
 import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelValidation
+import DASHI.Foundations.E6F3ProjectiveIncidenceCrossKernelReceiptExact
+import DASHI.Foundations.E6F3ProjectiveIncidenceCrossKernelValidation
+import DASHI.Foundations.E6F3RootLineSRGCrossKernelReceiptExact
+import DASHI.Foundations.E6F3RootLineSRGCrossKernelValidation
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
 import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
 import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
@@ -19,6 +23,8 @@ import DASHI.Reasoning.Ternary27HeisenbergThirteenSchlafliBridgeValidation
 import DASHI.Reasoning.Ternary27A5SixFaceReorganisationReceiptExact
 import DASHI.Reasoning.E6Ternary27FullSameActionReceiptExact
 import DASHI.Reasoning.Ternary27AlbertShapeFullE6BoundaryExact
+import DASHI.Reasoning.Ternary27ArbitraryPointed26TransportExact
+import DASHI.Reasoning.Ternary27ArbitraryPointed26TransportValidation
 import DASHI.Reasoning.E8StructuredTernary240E6A2ReceiptExact
 import DASHI.Reasoning.E8StructuredFullWeylReceiptExact
 
@@ -68,21 +74,21 @@ import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
 import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
 import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 
--- Monster-3B realization lane.  Certified source matrices are vendored and
--- normalized into X6+X6*.  Three source-word roles are kept separate:
+-- Monster-3B realization lane. Certified source matrices are vendored and
+-- normalized into X6+X6*. Three source-word roles are kept separate:
 -- depth-5 strict lift / field-presentation seed, depth-7 primitive center
 -- inverter, and the preferred depth-8 primitive center-preserving inertia word.
 -- The last one pays the selected GF(729) punctured 728-cycle and an exact
--- center-preserving Heisenberg lift at executable receipt level.  Barraclough-
+-- center-preserving Heisenberg lift at executable receipt level. Barraclough-
 -- Wilson independently source-align the degree-729 extraspecial irreducibles.
 --
 -- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
--- surface.  Constructive 729-state witness extraction now closes the explicit
--- Schrodinger irreducibility leaf.  Companion Lean source-writes the generic
+-- surface. Constructive 729-state witness extraction now closes the explicit
+-- Schrodinger irreducibility leaf. Companion Lean source-writes the generic
 -- equal-character-simple-representation isomorphism theorem; exact-head kernel
 -- observation and concrete Monster FDRep/character transport remain open.
 --
--- On multiplicity, S_zeta = Hom_E(H_zeta,W_zeta) is primary.  The source-native
+-- On multiplicity, S_zeta = Hom_E(H_zeta,W_zeta) is primary. The source-native
 -- Barraclough-Wilson/6.Suz route targets an actual 12+78 representation; Fin90
 -- is only a later basis coordinate if required by a downstream consumer.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
