@@ -8,6 +8,11 @@ from .discovery import classify_surface_role, make_fingerprint, similarity_score
 from .lineage import compute_round_lineage
 
 
+_CATALOG_VERSION = "1"
+_CATALOG_STAMP_KEY = "semantic_discovery_catalog_stamp"
+_CATALOG_VERSION_KEY = "semantic_discovery_catalog_version"
+
+
 def ensure_catalog_schema(connection: sqlite3.Connection) -> None:
     connection.executescript(
         """
@@ -38,6 +43,39 @@ def ensure_catalog_schema(connection: sqlite3.Connection) -> None:
     )
 
 
+def _module_stamp(connection: sqlite3.Connection) -> str:
+    row = connection.execute(
+        """
+        SELECT count(*) AS n,
+               coalesce(max(updated_ns), 0) AS updated,
+               coalesce(sum(length(interface_json)), 0) AS bytes
+        FROM modules
+        """
+    ).fetchone()
+    return f"{int(row['n'])}:{int(row['updated'])}:{int(row['bytes'])}"
+
+
+def catalog_is_fresh(connection: sqlite3.Connection) -> bool:
+    ensure_catalog_schema(connection)
+    rows = connection.execute(
+        "SELECT key, value FROM meta WHERE key IN (?, ?)",
+        (_CATALOG_STAMP_KEY, _CATALOG_VERSION_KEY),
+    ).fetchall()
+    values = {row["key"]: row["value"] for row in rows}
+    return (
+        values.get(_CATALOG_VERSION_KEY) == _CATALOG_VERSION
+        and values.get(_CATALOG_STAMP_KEY) == _module_stamp(connection)
+    )
+
+
+def ensure_catalog_fresh(connection: sqlite3.Connection) -> bool:
+    """Ensure catalog reflects persisted interfaces; return True if rebuilt."""
+    if catalog_is_fresh(connection):
+        return False
+    refresh_catalog(connection)
+    return True
+
+
 def _symbol(
     module_name: str,
     *,
@@ -64,7 +102,6 @@ def _symbol(
 def _iter_interface_symbols(module_name: str, interface: dict) -> Iterable[dict]:
     """Yield symbols from persisted ModuleInterface JSON plus legacy test shapes."""
 
-    # Current preflight ModuleInterface payload.
     for item in interface.get("signatures", ()):
         if not isinstance(item, dict) or not item.get("name"):
             continue
@@ -122,7 +159,6 @@ def _iter_interface_symbols(module_name: str, interface: dict) -> Iterable[dict]
         if exported and exported not in local_names:
             yield _symbol(module_name, name=exported, kind="reexport")
 
-    # Compatibility with lightweight/older fixtures and hand-seeded DBs.
     collection_kinds = {
         "functions": "function",
         "data": "data",
@@ -205,6 +241,15 @@ def refresh_catalog(connection: sqlite3.Connection) -> int:
                 ),
             )
             inserted += 1
+    stamp = _module_stamp(connection)
+    connection.execute(
+        "INSERT INTO meta(key, value) VALUES(?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",
+        (_CATALOG_VERSION_KEY, _CATALOG_VERSION),
+    )
+    connection.execute(
+        "INSERT INTO meta(key, value) VALUES(?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value",
+        (_CATALOG_STAMP_KEY, stamp),
+    )
     connection.commit()
     return inserted
 
@@ -225,7 +270,7 @@ def search_symbols(
     include_history: bool = False,
     limit: int = 50,
 ) -> list[dict]:
-    ensure_catalog_schema(connection)
+    ensure_catalog_fresh(connection)
     query = query.strip()
     if not query:
         return []
@@ -257,6 +302,7 @@ def related_symbols(
     include_history: bool = False,
     limit: int = 50,
 ) -> dict:
+    ensure_catalog_fresh(connection)
     matches = search_symbols(connection, symbol, include_history=include_history, limit=limit)
     if not matches:
         return {"query_symbol": None, "exact": [], "signature_equivalent": [], "body_equivalent": [], "similar": []}
@@ -309,6 +355,7 @@ def related_symbols(
 
 
 def discovery_receipt(connection: sqlite3.Connection, query: str, *, limit: int = 50) -> dict:
+    ensure_catalog_fresh(connection)
     live = search_symbols(connection, query, include_history=False, limit=limit)
     all_matches = search_symbols(connection, query, include_history=True, limit=limit * 2)
     historical = [item for item in all_matches if item["surface_role"] == "historical_snapshot"]
@@ -332,7 +379,7 @@ def discovery_receipt(connection: sqlite3.Connection, query: str, *, limit: int 
 
 
 def round_lineage(connection: sqlite3.Connection, prefix: str | None = None) -> dict:
-    ensure_catalog_schema(connection)
+    ensure_catalog_fresh(connection)
     if prefix:
         module_rows = connection.execute(
             "SELECT DISTINCT module_name FROM semantic_symbols WHERE module_name LIKE ? ORDER BY module_name",
