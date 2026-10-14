@@ -8,11 +8,18 @@ module DASHI.Reasoning.LilaExceptionalWeylExperimentMaxCutExact where
 -- finite and algebraic structure than an earlier "find a Weyl action" roadmap
 -- suggested:
 --
---   PR #1098 / Lean #47:
+--   PR #1098 / Lean #47 / Lean #58:
 --     * same-action W(E6) / minuscule-27 / Schlaefli geometry;
+--     * literal six-lift four-space closure order 103680;
+--     * primitive exterior-square kernel {+I,-I}, order 2;
+--     * projective quotient order 51840, with the existing five-space word
+--       action agreeing with the repo E6 action;
 --     * folded W(F4), exact F4 root datum;
 --     * intrinsic structured E8 Cartan/Coxeter/root datum;
 --     * original punctured T5 natural-E6 recognition obstruction.
+--
+--   The projectivization receipt is stronger than an order coincidence but is
+--   deliberately NOT recorded as an abstract PGSp4(3) ~= W(E6) theorem.
 --
 --   PR #1106 / Lean #52:
 --     * literal first-Tits M3^3 27-dimensional carrier and cubic;
@@ -74,6 +81,11 @@ record ExceptionalCandidateInventory : Set where
   field
     e6WeightCount : Nat
     e6FiniteWeylOrder : Nat
+    e6FourSpaceClosureOrder : Nat
+    e6ExteriorSquareKernelOrder : Nat
+    e6ProjectiveQuotientOrder : Nat
+    e6PGSpProjectivizationDonorReported : Bool
+    abstractPGSp4IsomorphicWE6Paid : Bool
     f4RootCount : Nat
     f4FiniteWeylOrder : Nat
     structuredE8RootCount : Nat
@@ -92,6 +104,7 @@ canonicalExceptionalCandidateInventory : ExceptionalCandidateInventory
 canonicalExceptionalCandidateInventory =
   exceptional-candidate-inventory
     27 51840
+    103680 2 51840 true false
     48 1152
     240 696729600
     (Tits.diagonalTitsKernelOrder Tits.canonicalLilaExceptionalActionEvidenceGrades)
@@ -203,4 +216,4 @@ canonicalLilaExceptionalWeylMaxCut =
     false
     false false false false
     false false false
-    "The repo already owns the relevant finite Weyl/root/action machinery on the exceptional branches. The live frontier is no longer construction of W(E6), W(F4), or structured W(E8); it is same-model empirical intertwining: generator fit, Coxeter/Tits residuals, held-out Weyl words, decoder compatibility, future-consumer behaviour, and consumer-relative scoped validation on actual LILA/neural trajectories. Sibling-branch facts remain receipts until histories are reconciled or imports land on one branch."
+    "The repo already owns the relevant finite Weyl/root/action machinery on the exceptional branches, now including the literal four-space closure 103680, exterior-square kernel {+I,-I}, and projective quotient 51840 on Lean #58. That projectivization strengthens the same-action provenance without manufacturing an abstract PGSp4(3) ~= W(E6) theorem. The live frontier is same-model empirical intertwining: generator fit, Coxeter/Tits residuals, held-out Weyl words, decoder compatibility, future-consumer behaviour, and consumer-relative scoped validation on actual LILA/neural trajectories. Sibling-branch facts remain receipts until histories are reconciled or imports land on one branch."
