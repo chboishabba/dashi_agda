@@ -7,6 +7,7 @@ import DASHI.Biology.IIT4FiniteCausalStructureExact
 import DASHI.Biology.IIT4FiniteProbabilityRepertoireExact
 import DASHI.Biology.IIT4SystemPhiInputExact
 import DASHI.Biology.IIT4SymbolicScalarBackendExact
+import DASHI.Biology.IIT4FiniteExecutableKernelExact
 import DASHI.Core.IntegrationConsumerDescentOrderExact
 import DASHI.Biology.IITXORGridAdversarialExact
 import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
