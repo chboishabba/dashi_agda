@@ -10,11 +10,35 @@ terminalInfrastructurePaid :
   ≡ 1
 terminalInfrastructurePaid = refl
 
+finiteBarrierExtractionPaid :
+  Terminal.TerminalParityMaxCutBoundary.finiteSurvivorBarrierExtractionPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+finiteBarrierExtractionPaid = refl
+
+noInfiniteDoubleNegationPaid :
+  Terminal.TerminalParityMaxCutBoundary.noInfiniteSurvivorDoubleNegationPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+noInfiniteDoubleNegationPaid = refl
+
+markovStillExplicit :
+  Terminal.TerminalParityMaxCutBoundary.natSearchMarkovUnconditionallyPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 0
+markovStillExplicit = refl
+
 residualProducerOpen :
   Terminal.TerminalParityMaxCutBoundary.unboundedResidualProducerPaid
     Terminal.canonicalTerminalParityMaxCutBoundary
   ≡ 0
 residualProducerOpen = refl
+
+finiteBarrierProducerOpen :
+  Terminal.TerminalParityMaxCutBoundary.allStartsFiniteBarrierProducerPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 0
+finiteBarrierProducerOpen = refl
 
 noFinitePromotion :
   Terminal.TerminalParityMaxCutBoundary.finiteSearchPromotesUniversalStopping
