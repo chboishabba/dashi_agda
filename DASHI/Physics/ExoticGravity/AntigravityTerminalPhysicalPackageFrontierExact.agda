@@ -9,6 +9,7 @@ import DASHI.Physics.ExoticGravity.AntigravityPostNormalizationReuseMaxCutExact 
 import DASHI.Physics.ExoticGravity.AntigravityDifferentialTTDonorMaxCutExact as TT
 import DASHI.Physics.ExoticGravity.AntigravitySICalibrationDonorMaxCutExact as SI
 import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCutExact as Experiment
+import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStaticExact as Wightman
 
 ------------------------------------------------------------------------
 -- TERMINAL PHYSICAL-PACKAGE FRONTIER
@@ -19,8 +20,9 @@ import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCu
 --
 -- Mandatory for static and scalar differential response:
 --
---   P1. one typed pinned Local-C terminal package
---       (same selected stress/vacuum, boost covariance, E->L trace);
+--   P1. one typed Local-C/Wightman terminal package
+--       (one continued selected operator on one reconstructed vacuum carrying
+--        covariance and E->L trace continuation);
 --
 --   P2. one common gravitational calibration/renormalization package
 --       (affine source->rho map, cosmological convention, accepted kappa/G,
@@ -37,6 +39,7 @@ import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCu
 --        plus physical reversal/conservation receipts).
 --
 -- What is NOT independently recharged after these packages are supplied:
+--   * a split pinned boost-record + trace-record representation;
 --   * another static metric-response theorem;
 --   * another Delta same-object theorem for a common calibrated pair;
 --   * R109 finite-tail sign machinery merely to consume an already-produced
@@ -47,6 +50,14 @@ import DASHI.Physics.ExoticGravity.AntigravityMatchedControlExperimentDonorMaxCu
 typedLocalCTerminalPhysicalPackageStillRequired : Bool
 typedLocalCTerminalPhysicalPackageStillRequired =
   Reuse.typedPinnedLocalCTerminalStillRequiredForStaticReuse
+
+preferredSharedWightmanTerminalAvailable : Bool
+preferredSharedWightmanTerminalAvailable =
+  Wightman.selectedOperatorContinuationPackageAlreadyShared
+
+independentPinnedBoostTraceSplitRequired : Bool
+independentPinnedBoostTraceSplitRequired =
+  Wightman.independentPinnedBoostTraceSplitRequired
 
 commonGravityCalibrationPackageStillRequired : Bool
 commonGravityCalibrationPackageStillRequired = true
@@ -112,6 +123,8 @@ record TerminalPhysicalPackageFrontier : Set where
   constructor terminal-physical-package-frontier
   field
     typedLocalCTerminalOpen : Bool
+    sharedWightmanTerminalPreferred : Bool
+    splitBoostTraceRepresentationOpen : Bool
     commonGravityCalibrationOpen : Bool
     matchedExperimentOpen : Bool
     ttPackageOpenForScalarRoute : Bool
@@ -127,8 +140,12 @@ record TerminalPhysicalPackageFrontier : Set where
 canonicalTerminalPhysicalPackageFrontier : TerminalPhysicalPackageFrontier
 canonicalTerminalPhysicalPackageFrontier =
   terminal-physical-package-frontier
-    true true true false true false false false false
+    true true false true true false true false false false false
     3 3 4
+
+independentPinnedBoostTraceSplitRequiredIsFalse :
+  independentPinnedBoostTraceSplitRequired ≡ false
+independentPinnedBoostTraceSplitRequiredIsFalse = refl
 
 independentStaticMetricResponseTheoremStillRequiredIsFalse :
   independentStaticMetricResponseTheoremStillRequired ≡ false
