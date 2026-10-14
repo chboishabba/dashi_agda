@@ -21,6 +21,12 @@ module DASHI.Moonshine.OggRepresentationReductionEverything where
 -- spinor boundary rather than being forced through the odd SO(3) lane.
 -- Cyclic C2/C3 elliptic stabilisers are embedded as proper subgroups of the
 -- existing ternary S3 permutation carrier rather than conflated with S3.
+--
+-- The Jack Daniels actual-support capstone is deliberately later in the
+-- dependency chain: it compares the already-constructed representation/
+-- Fricke closure predicate with literal divisibility of the actual published
+-- Monster order on the complete twenty-prime control universe.  It does not
+-- read the external Ogg label or MonsterPrimeLane/SSP15 selector to do so.
 ------------------------------------------------------------------------
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact
@@ -82,6 +88,8 @@ import DASHI.Moonshine.PrimeRepresentationFrickeCouplingExact
 import DASHI.Moonshine.PrimeRepresentationFrickeOrbitSaturationExact
 import DASHI.Moonshine.PrimeRepresentationSupersingularOrbitCouplingExact
 import DASHI.Moonshine.AllPrimeRepresentationFrickeClosureExact
+import DASHI.Moonshine.JackDanielsActualMonsterSupportMaxCutExact
+import DASHI.Moonshine.JackDanielsActualMonsterSupportMaxCutValidation
 import DASHI.Moonshine.SSPRepresentationHeckeIntertwinerBoundaryExact
 import DASHI.Moonshine.TernarySevenOggSSPComparisonExact
 import DASHI.Moonshine.OggPhaseFrickeSynthesisRegression
