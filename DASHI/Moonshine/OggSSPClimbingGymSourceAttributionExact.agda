@@ -43,7 +43,7 @@ mpmathZetaZeroDocumentation =
     "2023"
     "https://mpmath.org/doc/current/mpmath.pdf"
     (Source.namedSourceKind "software documentation")
-    "documents the numerical zetazero(n) generator used to construct the diagnostic first-849-zero cache; does not certify this cache, prove zero completeness, or prove RH"
+    "documents the zetazero(n) numerical generator and Release 1.3.0 API used as the declared producer class for the diagnostic first-849-zero cache; does not certify this cache, prove zero completeness, or prove RH"
     Source.publicAttribution
 
 lmfdbZetaZeroReference : Source.AttributedSource
@@ -67,7 +67,7 @@ climbingGymSourceAtlas =
       ∷ mpmathZetaZeroDocumentation
       ∷ lmfdbZetaZeroReference
       ∷ [])
-    "bounded provenance for the supplied figure, the numerical zero generator, and one independent external zero-data reference"
+    "bounded provenance for the supplied figure, the numerical zero generator documentation, and one independent external zero-data reference"
 
 record ClimbingGymSourceAttributionBoundary : Set where
   constructor climbing-gym-source-attribution-boundary
@@ -75,8 +75,9 @@ record ClimbingGymSourceAttributionBoundary : Set where
     suppliedFigureTypedAsSource : Bool
     mpmathGeneratorDocumentationTypedAsSource : Bool
     lmfdbReferenceTypedAsSource : Bool
-    mpmathReleaseObservedInReplayEnvironmentIs130 : Bool
+    mpmathDocumentationReleaseIs130 : Bool
 
+    exactRuntimePackageVersionIndependentlyReceipted : Bool
     cacheValuesImportedFromLMFDB : Bool
     cacheWideEqualityAgainstLMFDBEstablished : Bool
     mpmathCacheIsFormalZeroCertificate : Bool
@@ -94,7 +95,8 @@ canonicalClimbingGymSourceAttributionBoundary =
     true   -- supplied figure is explicitly attributed
     true   -- mpmath docs are explicitly attributed
     true   -- LMFDB external reference is explicitly attributed
-    true   -- replay environment reports mpmath 1.3.0
+    true   -- the cited official documentation is Release 1.3.0
+    false  -- this source owner does not manufacture a runtime environment receipt
     false  -- cache was generated with mpmath, not copied from LMFDB
     false  -- no complete cache-wide LMFDB equality check is claimed
     false  -- numerical generation is not a formal zero certificate
