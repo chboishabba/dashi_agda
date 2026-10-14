@@ -81,8 +81,8 @@ canonicalTwoVEVMassSpectrumLocalReceipt =
     false false false false
     "The two-neutral-27 breaking pattern gives a rank-12 positive gauge-mass quadratic form and leaves exactly su(2)_L plus the same hypercharge direction in the L/R sector, with color untouched. Under equal unit couplings/VEVs its dimensionless positive spectrum is (1/4)^4,(1/2)^7,(5/6)^1. This is a conditional representation-theoretic spectrum, not a physical mass prediction without a scalar potential, VEV scale and gauge couplings."
 
-breakingReceipt : Breaking.TwoNeutralVEVBreakingLocalReceipt
-breakingReceipt = Breaking.canonicalTwoNeutralVEVBreakingLocalReceipt
+breakingReceipt : Breaking.TrinificationTwoNeutralVEVLocalReceipt
+breakingReceipt = Breaking.canonicalTrinificationTwoNeutralVEVLocalReceipt
 
 data ConditionalGaugeSpectrumCreatesObservedMasses : Set where
 
