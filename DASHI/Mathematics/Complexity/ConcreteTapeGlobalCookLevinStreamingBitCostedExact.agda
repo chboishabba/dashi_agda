@@ -10,10 +10,12 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitCoste
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Nat.Base using (_≤_)
 open import Data.Product using (_×_; _,_)
+import Data.Fin.Base as Fin
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -21,17 +23,12 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canoni
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
-import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
 import DASHI.Mathematics.Complexity.CNFStreamingSeekExact as Seek
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostExact as ClauseBudget
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingClauseCostedExact as CostedClause
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinStreamingBitFrontier as Cursor
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
-
-------------------------------------------------------------------------
--- Generic costed wrapper.
-------------------------------------------------------------------------
 
 record Costed (A : Set) : Set where
   constructor costed
@@ -40,10 +37,6 @@ record Costed (A : Set) : Set where
     work : Nat
 
 open Costed public
-
-------------------------------------------------------------------------
--- Costed next-token.  Only cnfAt performs a global clause seek.
-------------------------------------------------------------------------
 
 nextTokenCosted :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -86,10 +79,8 @@ nextTokenCosted stateCoverage symbolCoverage nonempty steps cols initialTarget
 nextTokenCosted stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.positiveVariableAt clauseIndex index literals) =
   costed
-    (just (Prefix.formulaVariableToken , Cursor.natAt clauseIndex (Data.Fin.Base.toℕ index) literals))
+    (just (Prefix.formulaVariableToken , Cursor.natAt clauseIndex (Fin.toℕ index) literals))
     (suc zero)
-  where
-    import Data.Fin.Base
 nextTokenCosted stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.negativeVariableAt clauseIndex index literals) =
   costed
@@ -98,10 +89,8 @@ nextTokenCosted stateCoverage symbolCoverage nonempty steps cols initialTarget
 nextTokenCosted stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.negativeVariableBodyAt clauseIndex index literals) =
   costed
-    (just (Prefix.formulaVariableToken , Cursor.natAt clauseIndex (Data.Fin.Base.toℕ index) literals))
+    (just (Prefix.formulaVariableToken , Cursor.natAt clauseIndex (Fin.toℕ index) literals))
     (suc zero)
-  where
-    import Data.Fin.Base
 nextTokenCosted stateCoverage symbolCoverage nonempty steps cols initialTarget
     (Cursor.natAt clauseIndex zero literals) =
   costed (just (Prefix.natZeroToken , Cursor.clauseAt clauseIndex literals)) (suc zero)
@@ -178,10 +167,6 @@ nextTokenCostedWorkBound {machine}
 ... | CostedClause.costed-global-clause found clauseWork | bound = NatP.s≤s bound
 nextTokenCostedWorkBound {machine} stateCoverage symbolCoverage nonempty steps cols initialTarget state =
   NatP.s≤s NatP.z≤n
-
-------------------------------------------------------------------------
--- Costed next-bit.
-------------------------------------------------------------------------
 
 nextBitCosted :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -272,10 +257,6 @@ nextBitCostedWorkBound {machine}
 ... | costed tokenResult tokenWork | bound = NatP.s≤s bound
 nextBitCostedWorkBound {machine} stateCoverage symbolCoverage nonempty steps cols initialTarget state =
   NatP.s≤s NatP.z≤n
-
-------------------------------------------------------------------------
--- Costed bit-at recursion.
-------------------------------------------------------------------------
 
 bitAtCosted :
   ∀ {machine : Local.ConcreteTapeMachine}
@@ -373,10 +354,6 @@ bitAtCostedWorkBound {machine}
         stateCoverage symbolCoverage nonempty steps cols initialTarget index nextState
 ... | costed found restWork | restBound =
   NatP.+-mono-≤ stepBound restBound
-
-------------------------------------------------------------------------
--- Initial-state specialization = actual streamedCookBit.
-------------------------------------------------------------------------
 
 streamedCookBitCosted :
   ∀ {machine : Local.ConcreteTapeMachine}
