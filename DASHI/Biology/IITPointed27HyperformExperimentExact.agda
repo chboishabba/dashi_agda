@@ -8,6 +8,7 @@ import DASHI.Biology.IITPointedTernary27CyclotomicCellExact as Cyclotomic
 import DASHI.Biology.IITPointedTernary27Recentered26Exact as Recenter
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact as Triadic
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 ------------------------------------------------------------------------
 -- POINTED-27 EXPERIMENT ENVELOPE
@@ -36,7 +37,7 @@ threeSelectedChoiceCount : Face.threeActiveCubieChoiceCount ≡ Geometry.hyperfa
 threeSelectedChoiceCount = Face.threeActiveCubieChoiceCountIsHyperformCount
 
 selectedCubiesStillDoNotDetermineTriadicFace :
-  Triadic.SelectedCubiesFactorThroughTriadicFace → ⊥
+  Descent.FactorsThrough Triadic.selectedCubiesObserver Triadic.triadicFaceConsumer → ⊥
 selectedCubiesStillDoNotDetermineTriadicFace =
   Triadic.selectedCubiesDoNotDetermineTriadicFace
 
