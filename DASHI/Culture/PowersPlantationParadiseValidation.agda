@@ -3,6 +3,7 @@ module DASHI.Culture.PowersPlantationParadiseValidation where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.RequiredObserverAxisJoinAdequacyExact as Join
 import DASHI.Culture.PowersPlantationParadiseSynthesisExact as Synthesis
 import DASHI.Culture.ColonialPerformanceStatusNonfactorabilityExact as Performance
 import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
@@ -58,6 +59,17 @@ _material-cone-gap-paid :
   INF.FactorsThrough Cross.culturalSurface Cross.materialConeCode → ⊥
 _material-cone-gap-paid =
   Cross.sameCulturalSurfaceCannotRecoverMaterialCone
+
+_joint-required-axes-gap-paid :
+  Join.RetainsBothRequiredAxes
+    Cross.culturalSurface Cross.standingCode Cross.contestabilityCode → ⊥
+_joint-required-axes-gap-paid =
+  Cross.sameCulturalSurfaceCannotRetainStandingAndContestability
+
+_governed-social-position-gap-paid :
+  INF.FactorsThrough Cross.culturalSurface Cross.governedSocialPositionJoint → ⊥
+_governed-social-position-gap-paid =
+  Cross.sameCulturalSurfaceCannotRetainGovernedSocialPosition
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
