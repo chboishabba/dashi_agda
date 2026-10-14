@@ -12,16 +12,17 @@ import DASHI.Cognition.EpsteinBlackRothschildTransactionAtlas20261014Exact as In
 ------------------------------------------------------------------------
 -- SOUTHERN TRUST / SOUTHERN FINANCIAL DOWNSTREAM INVESTMENT-FLOW ATLAS
 --
--- Source spine: Deutsche Bank production charts reproduced in DOJ/FBI EFTA
--- materials (EFTA00080250..252 / duplicate lineage including EFTA00027019),
--- plus Valar limited-partner statements and capital-call records.
+-- Economic object: fungible-capital capacity, not dollar-by-dollar earmarking.
 --
--- Critical non-collapse rules:
---   * the transaction chart is a highlighted/selected chart, not exhaustive;
---   * entity-level inflow and later entity-level outflow do not establish
---     source-specific tracing through a fungible account;
---   * commitment, contributed capital, capital-account value and later
---     valuation are different quantities and must not be added together.
+-- If an entity receives large inflows and independently makes investments,
+-- those inflows contribute to the entity's fungible capital pool and therefore
+-- to its deployment capacity.  This is enough for balance-sheet/systemic
+-- incidence analysis.  It does NOT establish that any particular payer
+-- instructed, earmarked or specifically financed any particular downstream
+-- investment.
+--
+-- Commitment, contributed capital, capital-account value, distributions and
+-- realised exit proceeds remain separate quantities.
 ------------------------------------------------------------------------
 
 data InvestmentEntity : Set where
@@ -180,8 +181,26 @@ canonicalBoothbayAggregate : BoothbayAggregate
 canonicalBoothbayAggregate = boothbay-aggregate 38250000
 
 ------------------------------------------------------------------------
--- Exact cross-pollination significance.
+-- Fungible capital-pool model.
 ------------------------------------------------------------------------
+
+record CapitalPoolState : Set where
+  constructor capital-pool-state
+  field
+    blackInflowsPaid : Bool
+    rothschildInflowsPaid : Bool
+    otherInflowsPossible : Bool
+    valarDeploymentsPaid : Bool
+    honeycombDeploymentsPaid : Bool
+    boothbayDeploymentsPaid : Bool
+    inflowsIncreaseFungibleCapacity : Bool
+    specificPayerEarmarkedSpecificInvestment : Bool
+    payerControlledDownstreamInvestment : Bool
+open CapitalPoolState public
+
+canonicalCapitalPoolState : CapitalPoolState
+canonicalCapitalPoolState = capital-pool-state
+  true true true true true true true false false
 
 record SouthernTrustFlowBoundary : Set where
   constructor southern-trust-flow-boundary
@@ -190,25 +209,26 @@ record SouthernTrustFlowBoundary : Set where
     rothschildInflowReceiptsExist : Bool
     valarOutflowReceiptsExist : Bool
     southernTrustIsValarLimitedPartner : Bool
-    sameEntityTemporalPathExists : Bool
-    blackSpecificDollarsToValarPaid : Bool
-    rothschildSpecificDollarsToValarPaid : Bool
-    temporalAdjacencyCreatesSourceTracing : Bool
+    sameEntityCapitalPoolPathExists : Bool
+    inflowContributionToPoolPaid : Bool
+    downstreamDeploymentFromPoolPaid : Bool
+    blackEarmarkedValarFundingPaid : Bool
+    rothschildEarmarkedValarFundingPaid : Bool
     commonRecipientCreatesCommonPurpose : Bool
 open SouthernTrustFlowBoundary public
 
 canonicalSouthernTrustFlowBoundary : SouthernTrustFlowBoundary
 canonicalSouthernTrustFlowBoundary = southern-trust-flow-boundary
-  true true true true true false false false false
+  true true true true true true true false false false
 
-data FungibleAccountPathImpliesSourceSpecificFunding : Set where
+data FungiblePoolContributionImpliesEarmarking : Set where
 data CommonRecipientImpliesCommonPurpose : Set where
 data FundInvestmentImpliesOperationalControl : Set where
 data CommitmentImpliesPaidCapital : Set where
 data CapitalAccountValueImpliesRealisedCash : Set where
 
-temporalAccountPathDoesNotCreateSourceTracing : FungibleAccountPathImpliesSourceSpecificFunding → ⊥
-temporalAccountPathDoesNotCreateSourceTracing ()
+fungibleContributionDoesNotCreateEarmarking : FungiblePoolContributionImpliesEarmarking → ⊥
+fungibleContributionDoesNotCreateEarmarking ()
 
 commonRecipientDoesNotCreateCommonPurpose : CommonRecipientImpliesCommonPurpose → ⊥
 commonRecipientDoesNotCreateCommonPurpose ()
@@ -223,16 +243,16 @@ capitalAccountDoesNotCreateRealisedCash : CapitalAccountValueImpliesRealisedCash
 capitalAccountDoesNotCreateRealisedCash ()
 
 ------------------------------------------------------------------------
--- Acquisition is now fund-document/account tracing rather than generic search.
+-- Acquisition is now economic-capacity and fund-rights reconstruction.
 ------------------------------------------------------------------------
 
 data FlowDebt : Set where
-  southernTrustDailyBalanceLedger : FlowDebt
+  southernTrustCapitalizationTimeline : FlowDebt
   valarFundIICompleteCallLedger : FlowDebt
   valarFundIIICompleteCallLedger : FlowDebt
   valarLimitedPartnerTerms : FlowDebt
   valarDistributionExitHistory : FlowDebt
-  sourceSpecificTracingModel : FlowDebt
+  capitalPoolDeploymentChronology : FlowDebt
   honeycombUnderlyingPortfolio : FlowDebt
   boothbayUnderlyingPortfolio : FlowDebt
 
@@ -247,18 +267,18 @@ open FlowAcquisition public
 
 canonicalFlowAcquisition : List FlowAcquisition
 canonicalFlowAcquisition =
-  flow-acquisition southernTrustDailyBalanceLedger 100 true
-    "Acquire Southern Trust bank statements/daily balances and same-day settlement records sufficient to test source-specific tracing rather than treating fungible inflows as earmarked."
+  flow-acquisition southernTrustCapitalizationTimeline 100 true
+    "Reconstruct Southern Trust's capitalization and liquidity timeline from major inflows, revenues, distributions and investment calls. The object is fungible deployment capacity, not earmarked-dollar tracing."
   ∷ flow-acquisition valarFundIIICompleteCallLedger 100 true
-    "Reconstruct every Fund III capital call/wire, including rows omitted from the highlighted Deutsche Bank chart, and reconcile exactly to the USD 25m commitment."
+    "Reconstruct every Fund III capital call/wire and reconcile to the USD 25m commitment and paid-in capital."
   ∷ flow-acquisition valarFundIICompleteCallLedger 99 true
-    "Reconstruct calls six onward for Fund II and reconcile the transaction record to USD 14.55m paid by June 2018 and the USD 15m total commitment."
+    "Reconstruct the complete Fund II call ledger and reconcile the transaction record to the USD 15m commitment and paid-in capital."
   ∷ flow-acquisition valarLimitedPartnerTerms 99 true
     "Resolve subscription agreements, LP rights, side letters, governance, fee terms and any special arrangements for Southern Trust's Valar II/III interests."
   ∷ flow-acquisition valarDistributionExitHistory 99 true
     "Separate unrealised partner-capital/valuation gains from actual distributions and trace the ultimate estate disposition/expiry of the Valar interests."
-  ∷ flow-acquisition sourceSpecificTracingModel 98 true
-    "Only after bank-balance acquisition, test FIFO/LIFO/same-day or legally appropriate tracing rules; do not infer Black/Rothschild-funded Valar from entity continuity alone."
+  ∷ flow-acquisition capitalPoolDeploymentChronology 98 true
+    "Join major inflow periods to aggregate deployment intensity across Valar, Honeycomb, Boothbay and other vehicles without assigning fungible dollars to specific payers absent earmarking evidence."
   ∷ flow-acquisition honeycombUnderlyingPortfolio 95 true
     "Resolve Honeycomb Partners/Ventures investment objects and Epstein/Southern Trust governance rights."
   ∷ flow-acquisition boothbayUnderlyingPortfolio 94 true
