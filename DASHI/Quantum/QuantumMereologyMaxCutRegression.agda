@@ -112,6 +112,27 @@ bipartite-mutual-information-source-written =
   Finite.BipartiteMutualInformationSourceWrittenIsTrue
     Finite.canonicalFiniteQuantumProducerStatus
 
+tripartite-same-global-state-atlas-source-written :
+  Finite.TripartiteSameGlobalStateMarginalAtlasSourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+tripartite-same-global-state-atlas-source-written =
+  Finite.TripartiteSameGlobalStateMarginalAtlasSourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+tripartite-overlap-consistency-source-written :
+  Finite.TripartiteOverlapConsistencySourceWritten
+    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+tripartite-overlap-consistency-source-written =
+  Finite.TripartiteOverlapConsistencySourceWrittenIsTrue
+    Finite.canonicalFiniteQuantumProducerStatus
+
+tripartite-atlas-does-not-create-general-n-factor-atlas :
+  Finite.TripartiteAtlasCreatesGeneralNFactorAtlas
+    Finite.canonicalFiniteQuantumProducerStatus ≡ false
+tripartite-atlas-does-not-create-general-n-factor-atlas =
+  Finite.TripartiteAtlasCreatesGeneralNFactorAtlasIsFalse
+    Finite.canonicalFiniteQuantumProducerStatus
+
 ccm-distance-ansatz-does-not-create-metric :
   Finite.CCMDistanceAnsatzCreatesMetric
     Finite.canonicalFiniteQuantumProducerStatus ≡ false
