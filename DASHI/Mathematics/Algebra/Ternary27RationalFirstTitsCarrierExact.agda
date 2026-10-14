@@ -2,28 +2,20 @@ module DASHI.Mathematics.Algebra.Ternary27RationalFirstTitsCarrierExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import Data.Integer.Base using (+_)
+open import Data.Rational using (_/_)
 
 open import DASHI.Core.Q using
-  ( ℚ ; _+ℚ_ ; _-ℚ_ ; _*ℚ_ ; _/_ ; zeroℚ ; oneℚ ; twoℚ )
+  ( ℚ ; _+ℚ_ ; _-ℚ_ ; _*ℚ_ ; zeroℚ ; oneℚ )
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Mathematics.Algebra.Ternary27FirstTitsAlbertExact as Ternary
 
 ------------------------------------------------------------------------
 -- LITERAL RATIONAL FIRST-TITS CARRIER ON THE TERNARY-27 BASIS
---
--- The finite ternary cube is used only as the 27-element BASIS INDEX SET.
--- The algebraic carrier is characteristic zero:
---
---   J_Q = M3(Q) + M3(Q) + M3(Q).
---
--- This is the standard split first-Tits coordinate shape used by the rational
--- executable E6/F4 probe.  Unlike the older F3-valued function carrier, this
--- object is suitable for the classical characteristic-zero Albert theorem once
--- its algebra laws and same-form hypotheses are actually proved in-kernel.
 ------------------------------------------------------------------------
 
 halfℚ : ℚ
-halfℚ = oneℚ / twoℚ
+halfℚ = + 1 / 2
 
 record QMatrix3 : Set where
   constructor qmatrix3
