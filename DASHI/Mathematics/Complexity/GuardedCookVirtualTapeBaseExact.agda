@@ -16,6 +16,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
 import DASHI.Mathematics.Complexity.GuardedCookStreamingBitExact as Stream
@@ -37,6 +38,13 @@ dropPrefixAtOffset :
 dropPrefixAtOffset zero index = refl
 dropPrefixAtOffset (suc prefix) index =
   dropPrefixAtOffset prefix index
+
+dropPrefixBeforeBoundary :
+  (prefix : Nat) →
+  dropPrefix (suc prefix) prefix ≡ nothing
+dropPrefixBeforeBoundary zero = refl
+dropPrefixBeforeBoundary (suc prefix) =
+  dropPrefixBeforeBoundary prefix
 
 payloadStart : Description.GuardedCookFormulaDescription → Nat
 payloadStart description = suc (Description.steps description)
@@ -123,7 +131,7 @@ guardedCookSemanticPayloadRead
       Stream.streamedQueryBit (Description.atIndex description index)
       ≡ just bit
     streamed =
-      Agda.Builtin.Equality.trans
+      trans
         (Stream.streamedQueryBitExact
           (Description.atIndex description index))
         semantic
@@ -143,7 +151,7 @@ guardedCookSemanticPayloadRead
 -- Initial left guard/boundary reads are blank by construction.
 ------------------------------------------------------------------------
 
-payloadStartIsBlank :
+payloadBoundaryIsBlank :
   ∀ {Symbol : Set}
     (blank zeroSymbol oneSymbol : Symbol)
     (description : Description.GuardedCookFormulaDescription) →
@@ -151,10 +159,9 @@ payloadStartIsBlank :
       (guardedCookVirtualBase blank zeroSymbol oneSymbol description)
       (Description.steps description)
   ≡ just blank
-payloadStartIsBlank blank zeroSymbol oneSymbol description
-  with Description.steps description
-... | zero = refl
-... | suc steps = refl
+payloadBoundaryIsBlank blank zeroSymbol oneSymbol description
+  rewrite dropPrefixBeforeBoundary (Description.steps description) =
+  refl
 
 ------------------------------------------------------------------------
 -- The mutable layer is deliberately separate: downstream candidate simulation
