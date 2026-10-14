@@ -3,9 +3,11 @@ module DASHI.Philosophy.NonginExtendedRoadmapExact where
 ------------------------------------------------------------------------
 -- NONGIN EXTENDED ROADMAP
 --
--- Nongin core closure and Nongin research-lineage continuation are distinct.
--- The semantic/genealogical reconstruction may be closed while the existing
--- descendant programmes remain attached to the same research lineage.
+-- Nongin core closure and attached research-lineage continuation are distinct.
+-- The wave/369 cross-pollination advances the attached higher-descent lane to a
+-- concrete full-site non-discrete groupoid presheaf and setoid-truncated higher
+-- stack on the triadic site.  Arbitrary hypercover certification remains the
+-- hypersheaf-specific frontier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -47,15 +49,25 @@ allDescendantProgrammesRemainAttached :
   Attached.descendantProgrammesRemainAttachedToNongin attachedBoundary ≡ true
 allDescendantProgrammesRemainAttached = refl
 
--- Attachment is a roadmap/genealogy relation.  It does not silently flip the
--- stricter promotion guards inside the descendant owners.
-attachmentDoesNotFakeHigherStackCertification :
-  Attached.attachmentClaimsHigherStackAlreadyCertified attachedBoundary ≡ false
-attachmentDoesNotFakeHigherStackCertification = refl
+fullSiteGroupoidPresheafPaid :
+  Attached.fullSiteGroupoidPresheafPaid attachedBoundary ≡ true
+fullSiteGroupoidPresheafPaid = refl
 
-attachmentDoesNotFakePhysicalPromotion :
+effectiveStackPaid :
+  Attached.effectiveStackPaid attachedBoundary ≡ true
+effectiveStackPaid = refl
+
+higherStackPaid :
+  Attached.higherStackPaid attachedBoundary ≡ true
+higherStackPaid = refl
+
+hypersheafNowIsArbitraryHypercoverFrontier :
+  Attached.arbitraryHypercoverHypersheafStillOpen attachedBoundary ≡ true
+hypersheafNowIsArbitraryHypercoverFrontier = refl
+
+physicalPromotionRemainsIndependent :
   Attached.attachmentClaimsPhysicalLawAlreadyPromoted attachedBoundary ≡ false
-attachmentDoesNotFakePhysicalPromotion = refl
+physicalPromotionRemainsIndependent = refl
 
 record NonginExtendedRoadmapBoundary : Set where
   constructor nongin-extended-roadmap-boundary
@@ -67,6 +79,10 @@ record NonginExtendedRoadmapBoundary : Set where
     exceptionalProgrammeAttached : Bool
     physicalPromotionProgrammeAttached : Bool
     attachedLineageContinuesAfterCoreClosure : Bool
+    fullSiteNonDiscreteGroupoidPresheafPaid : Bool
+    effectiveStackPaid : Bool
+    higherStackPaid : Bool
+    hypersheafReducedToArbitraryHypercoverFrontier : Bool
     descendantCertificationBoundariesPreserved : Bool
     roadmapDetachesDescendantProgrammes : Bool
 
@@ -75,4 +91,5 @@ open NonginExtendedRoadmapBoundary public
 canonicalNonginExtendedRoadmapBoundary : NonginExtendedRoadmapBoundary
 canonicalNonginExtendedRoadmapBoundary =
   nongin-extended-roadmap-boundary
-    true true true true true true true true false
+    true true true true true true true
+    true true true true true false
