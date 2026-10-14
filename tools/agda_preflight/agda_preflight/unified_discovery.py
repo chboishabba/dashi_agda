@@ -8,6 +8,7 @@ from .discovery import round_family
 from .lineage import compute_round_lineage
 from .query_discovery import _query_score
 from .repo_index_bridge import RepoIndexReader
+from .repo_signature_overlay import sync_repo_signatures
 
 
 class UnifiedDiscovery:
@@ -24,21 +25,43 @@ class UnifiedDiscovery:
         self.source_index = source_index
         self.repo_index = repo_index
 
-    def _overlay_map(self, include_history: bool = True) -> dict[str, dict]:
+    def _overlay_map(
+        self,
+        include_history: bool = True,
+        *,
+        sync_repo: bool = False,
+    ) -> dict[str, dict]:
         discovery_catalog.ensure_catalog_fresh(self.source_index.connection)
+        if sync_repo and self.repo_index.available:
+            sync_repo_signatures(
+                self.root,
+                self.repo_index,
+                self.source_index.connection,
+            )
         if include_history:
             rows = self.source_index.connection.execute(
-                "SELECT * FROM semantic_symbols ORDER BY qualified_name"
+                "SELECT * FROM semantic_symbols ORDER BY qualified_name, kind"
             ).fetchall()
         else:
             rows = self.source_index.connection.execute(
-                "SELECT * FROM semantic_symbols WHERE surface_role != 'historical_snapshot' ORDER BY qualified_name"
+                "SELECT * FROM semantic_symbols WHERE surface_role != 'historical_snapshot' ORDER BY qualified_name, kind"
             ).fetchall()
         result = {}
         for row in rows:
             item = discovery_catalog._row_dict(row)
             prior = result.get(item["qualified_name"])
-            if prior is None or prior.get("kind") == "reexport":
+            if prior is None:
+                result[item["qualified_name"]] = item
+                continue
+            # Prefer the richest type-bearing row. ModuleInterface signatures
+            # outrank source-derived repo signatures, which outrank reexports.
+            rank = {"signature": 3, "repo-signature": 2, "reexport": 0}
+            prior_rank = rank.get(prior.get("kind"), 1)
+            item_rank = rank.get(item.get("kind"), 1)
+            if item_rank > prior_rank or (
+                item_rank == prior_rank
+                and len(item.get("signature", "")) > len(prior.get("signature", ""))
+            ):
                 result[item["qualified_name"]] = item
         return result
 
@@ -52,9 +75,15 @@ class UnifiedDiscovery:
             ):
                 if overlay.get(key):
                     merged[key] = overlay[key]
-            merged["preflight_indexed"] = True
+            merged["preflight_indexed"] = overlay.get("kind") != "repo-signature"
+            merged["signature_source"] = (
+                "repo-source-span"
+                if overlay.get("kind") == "repo-signature"
+                else "preflight-interface"
+            )
         else:
             merged["preflight_indexed"] = False
+            merged["signature_source"] = "unavailable"
         return merged
 
     def search_symbols(
@@ -64,7 +93,8 @@ class UnifiedDiscovery:
         include_history: bool = False,
         limit: int = 50,
     ) -> list[dict]:
-        overlay = self._overlay_map(include_history=True)
+        # Exact lookup remains cheap: no whole-repo signature overlay build.
+        overlay = self._overlay_map(include_history=True, sync_repo=False)
         if self.repo_index.available:
             matches = self.repo_index.search_symbols(
                 query, include_history=include_history, limit=limit
@@ -84,8 +114,12 @@ class UnifiedDiscovery:
         include_history: bool = True,
         limit: int = 50,
         threshold: float = 0.34,
+        sync_repo_signatures_first: bool = True,
     ) -> list[dict]:
-        overlay = self._overlay_map(include_history=True)
+        overlay = self._overlay_map(
+            include_history=True,
+            sync_repo=sync_repo_signatures_first,
+        )
         if self.repo_index.available:
             candidates = self.repo_index.all_agda_symbols(include_history=include_history)
         else:
@@ -99,12 +133,12 @@ class UnifiedDiscovery:
         for base in candidates:
             if base.get("kind") == "module":
                 continue
-            score = _query_score(query, base)
+            enriched = self._merge(base, overlay.get(base["qualified_name"])) if self.repo_index.available else dict(base)
+            score = _query_score(query, enriched)
             if score < threshold:
                 continue
-            item = self._merge(base, overlay.get(base["qualified_name"])) if self.repo_index.available else dict(base)
-            item["query_similarity"] = score
-            ranked.append(item)
+            enriched["query_similarity"] = score
+            ranked.append(enriched)
         ranked.sort(
             key=lambda item: (
                 item.get("surface_role") == "historical_snapshot",
@@ -122,6 +156,9 @@ class UnifiedDiscovery:
         limit: int = 50,
     ) -> dict:
         exact = self.search_symbols(symbol, include_history=include_history, limit=limit)
+        # Related search requests the repo-wide signature overlay once, then
+        # reuses it while the repo-index generation remains unchanged.
+        overlay = self._overlay_map(include_history=True, sync_repo=True)
         if not exact:
             return {
                 "query_symbol": None,
@@ -129,10 +166,13 @@ class UnifiedDiscovery:
                 "signature_equivalent": [],
                 "body_equivalent": [],
                 "similar": self._fuzzy(
-                    symbol, include_history=include_history, limit=limit
+                    symbol,
+                    include_history=include_history,
+                    limit=limit,
+                    sync_repo_signatures_first=False,
                 ),
             }
-        target = exact[0]
+        target = self._merge(exact[0], overlay.get(exact[0]["qualified_name"]))
         overlay_report = discovery_catalog.related_symbols(
             self.source_index.connection,
             target["qualified_name"],
@@ -153,7 +193,7 @@ class UnifiedDiscovery:
                 else:
                     merged = dict(item)
                     merged.setdefault("inventory_source", "preflight-overlay")
-                    merged["preflight_indexed"] = True
+                    merged["preflight_indexed"] = item.get("kind") != "repo-signature"
                 if "similarity" in item:
                     merged["similarity"] = item["similarity"]
                 out.append(merged)
@@ -167,7 +207,10 @@ class UnifiedDiscovery:
         similar = enrich(overlay_report.get("similar", ()))
         seen.update(item["qualified_name"] for item in similar)
         for item in self._fuzzy(
-            target["name"], include_history=include_history, limit=max(limit * 2, 50)
+            target["name"],
+            include_history=include_history,
+            limit=max(limit * 2, 50),
+            sync_repo_signatures_first=False,
         ):
             if item["qualified_name"] in seen or item["qualified_name"] == target["qualified_name"]:
                 continue
@@ -178,7 +221,7 @@ class UnifiedDiscovery:
         similar.sort(key=lambda item: (-float(item.get("similarity", 0.0)), item["qualified_name"]))
         return {
             "query_symbol": target,
-            "exact": exact,
+            "exact": [target] + [item for item in exact[1:]],
             "signature_equivalent": signature_equivalent[:limit],
             "body_equivalent": body_equivalent[:limit],
             "similar": similar[:limit],
@@ -212,7 +255,12 @@ class UnifiedDiscovery:
         all_exact = self.search_symbols(query, include_history=True, limit=limit * 2)
         historical = [item for item in all_exact if item.get("surface_role") == "historical_snapshot"]
         related = self.related_symbols(query, include_history=True, limit=limit)
-        fuzzy = self._fuzzy(query, include_history=True, limit=limit)
+        fuzzy = self._fuzzy(
+            query,
+            include_history=True,
+            limit=limit,
+            sync_repo_signatures_first=False,
+        )
         exact_ids = {item["qualified_name"] for item in all_exact}
         fuzzy = [item for item in fuzzy if item["qualified_name"] not in exact_ids]
         candidate_exists = bool(
@@ -254,14 +302,14 @@ class UnifiedDiscovery:
         if base.get("symbol") is None:
             matches = self.search_symbols(symbol_id, include_history=True, limit=1)
             return {"symbol": matches[0] if matches else None, "refs": []}
-        overlay = self._overlay_map(include_history=True).get(symbol_id)
+        overlay = self._overlay_map(include_history=True, sync_repo=False).get(symbol_id)
         base["symbol"] = self._merge(base["symbol"], overlay)
         return base
 
     def round_lineage(self, prefix: Optional[str] = None) -> dict:
         if not self.repo_index.available:
             return discovery_catalog.round_lineage(self.source_index.connection, prefix=prefix)
-        overlay = self._overlay_map(include_history=True)
+        overlay = self._overlay_map(include_history=True, sync_repo=True)
         grouped = defaultdict(list)
         for item in self.repo_index.all_agda_symbols(include_history=True):
             module = item.get("module_name") or ""
@@ -290,6 +338,6 @@ class UnifiedDiscovery:
             modules.append({"module_name": module, "symbols": symbols})
         report = compute_round_lineage(modules)
         report["inventory_source"] = "repo-index"
-        report["signature_change_detection"] = "preflight-signature where indexed; otherwise kind-level only"
+        report["signature_change_detection"] = "repo-source signature overlay, with preflight interfaces preferred where available"
         report["coverage"] = self.repo_index.coverage_status()
         return report
