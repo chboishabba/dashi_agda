@@ -6,6 +6,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369FillingGraphExact as F
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369TernaryRealizationIntertwinerExact as R
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3PhysicalRealizationExact as C3
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3SameActionExact as Same
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AnalyticQuantumExecutionExact as AQ
 
 fillingGraphPaidRegression :
   F.AtomicFillingGraphBoundary.directedStructuralFillingGraphPaid
@@ -82,3 +83,27 @@ selectionRuleRegression :
   C3.transitionAllowed C3.sectorNegative C3.chargeZero C3.sectorZero
   ≡ false
 selectionRuleRegression = refl , refl
+
+analyticSpatialChargeNoncollapseRegression :
+  AQ.basisStateAction AQ.spatialRotation120 C3.mZero ≡ C3.mZero
+  ×
+  AQ.basisStateAction AQ.positiveChargeTransport C3.mZero ≡ C3.mPosOne
+analyticSpatialChargeNoncollapseRegression = refl , refl
+
+analyticExecutionBoundaryRegression :
+  AQ.AnalyticQuantumExecutionBoundary.analyticHydrogenicWavefunctionsExecuted
+    AQ.canonicalAnalyticQuantumExecutionBoundary
+  ≡ true
+  ×
+  AQ.AnalyticQuantumExecutionBoundary.weightedHydrogenicE1GraphExecuted
+    AQ.canonicalAnalyticQuantumExecutionBoundary
+  ≡ true
+  ×
+  AQ.AnalyticQuantumExecutionBoundary.finiteC3RecognitionEqualsFullAtomic369Identity
+    AQ.canonicalAnalyticQuantumExecutionBoundary
+  ≡ false
+  ×
+  AQ.AnalyticQuantumExecutionBoundary.lithiumBerylliumMultiOrbitalSCFRecovered
+    AQ.canonicalAnalyticQuantumExecutionBoundary
+  ≡ false
+analyticExecutionBoundaryRegression = refl , (refl , (refl , refl))
