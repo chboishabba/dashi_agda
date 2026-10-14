@@ -6,6 +6,7 @@ open import Agda.Builtin.Bool using (false; true)
 
 import DASHI.Quantum.QuantumMereologyMaxCutExact as MaxCut
 import DASHI.Quantum.QuantumMereologyFiniteQuantumProducerAuthorityExact as Finite
+import DASHI.Quantum.QuantumMereologyTripartiteInformationAtlasAuthorityExact as Tripartite
 
 source-written-producer-does-not-create-selection :
   MaxCut.sourceWrittenProducerCreatesSelection
@@ -113,25 +114,25 @@ bipartite-mutual-information-source-written =
     Finite.canonicalFiniteQuantumProducerStatus
 
 tripartite-same-global-state-atlas-source-written :
-  Finite.TripartiteSameGlobalStateMarginalAtlasSourceWritten
-    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+  Tripartite.SameGlobalStateThreePairMarginalsSourceWritten
+    Tripartite.canonicalTripartiteInformationAtlasStatus ≡ true
 tripartite-same-global-state-atlas-source-written =
-  Finite.TripartiteSameGlobalStateMarginalAtlasSourceWrittenIsTrue
-    Finite.canonicalFiniteQuantumProducerStatus
+  Tripartite.SameGlobalStateThreePairMarginalsSourceWrittenIsTrue
+    Tripartite.canonicalTripartiteInformationAtlasStatus
 
 tripartite-overlap-consistency-source-written :
-  Finite.TripartiteOverlapConsistencySourceWritten
-    Finite.canonicalFiniteQuantumProducerStatus ≡ true
+  Tripartite.OverlappingOneFactorMarginalsAgreeSourceWritten
+    Tripartite.canonicalTripartiteInformationAtlasStatus ≡ true
 tripartite-overlap-consistency-source-written =
-  Finite.TripartiteOverlapConsistencySourceWrittenIsTrue
-    Finite.canonicalFiniteQuantumProducerStatus
+  Tripartite.OverlappingOneFactorMarginalsAgreeSourceWrittenIsTrue
+    Tripartite.canonicalTripartiteInformationAtlasStatus
 
 tripartite-atlas-does-not-create-general-n-factor-atlas :
-  Finite.TripartiteAtlasCreatesGeneralNFactorAtlas
-    Finite.canonicalFiniteQuantumProducerStatus ≡ false
+  Tripartite.TripartiteAtlasCreatesGeneralNFactorAtlas
+    Tripartite.canonicalTripartiteInformationAtlasStatus ≡ false
 tripartite-atlas-does-not-create-general-n-factor-atlas =
-  Finite.TripartiteAtlasCreatesGeneralNFactorAtlasIsFalse
-    Finite.canonicalFiniteQuantumProducerStatus
+  Tripartite.TripartiteAtlasCreatesGeneralNFactorAtlasIsFalse
+    Tripartite.canonicalTripartiteInformationAtlasStatus
 
 ccm-distance-ansatz-does-not-create-metric :
   Finite.CCMDistanceAnsatzCreatesMetric
