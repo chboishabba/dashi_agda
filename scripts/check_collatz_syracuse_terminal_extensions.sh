@@ -41,6 +41,8 @@ grep -q 'literalStrictDescentToFiniteBarrierSource' DASHI/Analysis/CollatzSyracu
 grep -q 'record FiniteBarrierStrictDescentEquivalence' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'finiteBarrierStrictDescentEquivalencePaid : Nat' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'noInfiniteSurvivorGivesDoubleNegatedDescent' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'noInversePointGivesDoubleNegatedDescent' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+grep -q 'strictDescentFromNoInversePointWithMarkov' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'record NatSearchMarkov' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'natSearchMarkovOwnedUnconditionally : Nat' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'trailingZeroCertificatePaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
