@@ -1,0 +1,104 @@
+module DASHI.Moonshine.OggSSPClimbingGymTerminalStatusExact where
+
+------------------------------------------------------------------------
+-- TERMINAL STATUS OWNER FOR THE JMD MONSTER CLIMBING-GYM MAX-CUT
+--
+-- This file does not add another mathematical layer.  It records which seams
+-- are now paid by the focused owners and which genuinely external/kernel
+-- obligations remain open.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; true; false)
+
+import DASHI.Moonshine.OggSSPClimbingGymAnalyticRadixAdapterExact as Analytic
+import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
+import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact as Phase
+import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
+import DASHI.Moonshine.OggSSPSignedRadixClimbingGymExact as Gym
+import DASHI.Moonshine.OggSSPSignedRadixInverseLimitExact as Limit
+
+record ClimbingGymTerminalStatus : Set where
+  constructor climbing-gym-terminal-status
+  field
+    finiteStructuralMaxCutClosed : Bool
+    inverseLimitStructuralCutClosed : Bool
+    empiricalReplayMaxCutClosed : Bool
+    nonOggSaturationControlClosed : Bool
+    deterministicShiftNullClosed : Bool
+    signedObservationNoGoClosed : Bool
+    phaseControlMaxCutClosed : Bool
+    analyticFormulaAdapterClosed : Bool
+
+    constructiveRealToFiniteRadixQuantiserClosed : Bool
+    sourceRandomShiftSeedRecovered : Bool
+    roundedShiftSummaryUniquelyIdentifiesSeed : Bool
+    numericalZeroCacheFormallyCertified : Bool
+    exactHeadAgdaKernelGreen : Bool
+
+    empiricalMonsterSpecificityPromoted : Bool
+    zetaParametrisationPromoted : Bool
+    riemannHypothesisPromoted : Bool
+
+open ClimbingGymTerminalStatus public
+
+canonicalClimbingGymTerminalStatus : ClimbingGymTerminalStatus
+canonicalClimbingGymTerminalStatus =
+  climbing-gym-terminal-status
+    true   -- finite signed/radix wall + coarsening + firewalls
+    true   -- repository inverse-limit history over the finite tower
+    true   -- ten source integer rows replayed by executable producer
+    true   -- all five independent non-Ogg controls replayed and saturate
+    true   -- deterministic one-period phase-grid shift null implemented
+    true   -- unsigned observation cannot recover signed orientation
+    true   -- exhaustive C(20,5) phase-sensitive control implemented
+    true   -- log/pi/hole/phase same-carrier adapter surface constructed
+    false  -- current constructive-real spine still lacks concrete floor/frac -> Fin
+    false  -- source finite random shift list / RNG seed not supplied or recovered
+    false  -- rounded mean/SD summaries cannot uniquely determine that sample
+    false  -- mpmath cache is diagnostic numerical data, not formal zero proof
+    false  -- no exact-head Agda compiler receipt in this execution environment
+    false  -- controls do not justify Monster-specific empirical promotion
+    false  -- no compatible history / matching receipt is a zeta parametrisation
+    false  -- no climbing-gym result promotes RH
+
+------------------------------------------------------------------------
+-- Cross-owner consistency spot checks: the terminal booleans agree with the
+-- source owners rather than silently upgrading their boundaries.
+------------------------------------------------------------------------
+
+terminalDoesNotCloseMissingQuantiser :
+  Analytic.floorQuantisationConstructedFromCurrentRealSpine
+    Analytic.canonicalAnalyticRadixAdapterBoundary
+  ≡ false
+terminalDoesNotCloseMissingQuantiser = refl
+
+terminalDoesNotRecoverSourceSeed :
+  Replay.reportedShiftControlSeedRecovered
+    Replay.canonicalClimbingGymReplayBoundary
+  ≡ false
+terminalDoesNotRecoverSourceSeed = refl
+
+terminalDoesNotPromotePhaseTail :
+  Phase.meanVectorCoherencePromotedConfirmatory
+    Phase.canonicalClimbingGymPhaseControlBoundary
+  ≡ false
+terminalDoesNotPromotePhaseTail = refl
+
+terminalDoesNotPromoteFigureToRH :
+  Figure.figureObservationProvesRiemannHypothesis
+    Figure.canonicalClimbingGymFigureObservationBoundary
+  ≡ false
+terminalDoesNotPromoteFigureToRH = refl
+
+terminalDoesNotPromoteFiniteInverseLimitToAnalyticPAdicCompletion :
+  Limit.inverseLimitConstructsAnalyticPAdicCompletion
+    Limit.canonicalSignedRadixInverseLimitBoundary
+  ≡ false
+terminalDoesNotPromoteFiniteInverseLimitToAnalyticPAdicCompletion = refl
+
+terminalKeepsSignedValuationDistinctFromRadixAddress :
+  Gym.signedValuationIsRadixAddress
+    Gym.canonicalOggSSPSignedRadixClimbingGymBoundary
+  ≡ false
+terminalKeepsSignedValuationDistinctFromRadixAddress = refl
