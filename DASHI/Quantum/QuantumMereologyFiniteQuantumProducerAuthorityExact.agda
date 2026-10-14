@@ -20,15 +20,19 @@ import DASHI.Quantum.QuantumMereologySourceAtlasExact as Sources
 -- * pinned mathlib finite-Hermitian spectral bases/unitary diagonalisation,
 -- * a same-selected-CPO finite-Hermitian refinement from supplied literal
 --   LinearMap.IsSymmetric factor witnesses,
+-- * under that refinement, native factor eigenbases tensor to an orthonormal
+--   eigenbasis of the exact selected product CPO with product eigenvalues,
 -- * finite spectral von Neumann entropy and both bipartite reduced density
 --   matrices, hence same-object bipartite mutual information,
 -- * finite nonempty Schwinger-search minimizer existence.
 --
--- The physics/source firewalls remain explicit.  Coordinate Born closure does
+-- The physics/source firewalls remain explicit. Coordinate Born closure does
 -- not identify the coordinate basis with the physical selected-CPO pointer
--- basis.  The generic CPO Hermitian labels do not create literal symmetry.
+-- basis. The generic CPO Hermitian labels do not create literal symmetry.
+-- The typed product-CPO eigenbasis is conditional on that stronger symmetry
+-- refinement and is not promoted to an empirically validated pointer basis.
 -- Bipartite mutual information does not by itself produce an N-factor graph,
--- metric, MDS embedding, curvature or spacetime.  Finite minimizer existence
+-- metric, MDS embedding, curvature or spacetime. Finite minimizer existence
 -- does not establish that the source search is finite/nonempty, unique, or the
 -- unrestricted physical global optimum.
 --
@@ -132,6 +136,10 @@ record FiniteQuantumProducerStatus : Set where
     TypedSelectedCPOFiniteHermitianRefinementSourceWrittenIsTrue :
       TypedSelectedCPOFiniteHermitianRefinementSourceWritten ≡ true
 
+    TypedSelectedCPOProductEigenbasisSourceWritten : Bool
+    TypedSelectedCPOProductEigenbasisSourceWrittenIsTrue :
+      TypedSelectedCPOProductEigenbasisSourceWritten ≡ true
+
     GenericCPOAdmissibilityCreatesTypedSymmetry : Bool
     GenericCPOAdmissibilityCreatesTypedSymmetryIsFalse :
       GenericCPOAdmissibilityCreatesTypedSymmetry ≡ false
@@ -222,6 +230,8 @@ canonicalFiniteQuantumProducerStatus = record
   ; FiniteHermitianSpectralBasisSourceWrittenIsTrue = refl
   ; TypedSelectedCPOFiniteHermitianRefinementSourceWritten = true
   ; TypedSelectedCPOFiniteHermitianRefinementSourceWrittenIsTrue = refl
+  ; TypedSelectedCPOProductEigenbasisSourceWritten = true
+  ; TypedSelectedCPOProductEigenbasisSourceWrittenIsTrue = refl
   ; GenericCPOAdmissibilityCreatesTypedSymmetry = false
   ; GenericCPOAdmissibilityCreatesTypedSymmetryIsFalse = refl
   ; CoordinateBornProbabilityNonnegativeSourceWritten = true
@@ -287,7 +297,7 @@ leanFiniteHermitianCPORefinementSourceReceipt =
   Sources.attribution-receipt
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyFiniteHermitianCPO"
-    "Source-written same-selected-CPO refinement carrying orthonormal factor bases and literal LinearMap.IsSymmetric witnesses. Pinned mathlib LinearMap.isHermitian_toMatrix_iff compiles those factor maps to Hermitian matrices, after which the finite matrix spectral theorem supplies eigenbases. Generic source-facing Hermitian labels do not automatically create this stronger refinement."
+    "Source-written same-selected-CPO refinement carrying finite orthonormal factor bases and literal LinearMap.IsSymmetric witnesses. Pinned mathlib compiles those maps to Hermitian matrices and native factor eigenbases; OrthonormalBasis.tensorProduct then yields an orthonormal eigenbasis of the exact selected product CPO with product eigenvalues. Generic source-facing Hermitian labels do not automatically create this stronger refinement, and the mathematical basis is not promoted to an empirically validated pointer basis."
 
 leanBornProbabilitySourceReceipt : Sources.AttributionReceipt
 leanBornProbabilitySourceReceipt =
@@ -301,7 +311,7 @@ leanVonNeumannInformationSourceReceipt =
   Sources.attribution-receipt
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyVonNeumannInformation"
-    "Source-written finite spectral von Neumann entropy, explicit left/right bipartite partial traces returning density matrices, and same-object bipartite mutual information. Cao--Carroll--Michalakis supply only the separately attributed external mutual-information graph/distance claim; the Lean finite matrix implementation is DASHI-owned."
+    "Source-written finite spectral von Neumann entropy, density-spectrum probability/nonnegative entropy laws, explicit left/right bipartite partial traces returning density matrices, same-object bipartite mutual information, and nonnegative CCM present-edge length on its declared normalized domain. Cao--Carroll--Michalakis supply only the separately attributed external mutual-information graph/distance claim; the Lean finite matrix implementation is DASHI-owned."
 
 caoCarrollMichalakisDistanceClaim : Sources.AttributionReceipt
 caoCarrollMichalakisDistanceClaim =
@@ -322,7 +332,7 @@ dashiFiniteQuantumProducerCrossProverReceipt =
   Sources.attribution-receipt
     Sources.crossModuleInference
     "DASHI Agda"
-    "Aggregates explicit Lean theorem-source authorities for finite quantum mereology. Born closure, finite Hermitian spectral structure, finite von Neumann/mutual-information production, and finite-search minimizer existence are source-written. Generic-CPO-to-typed-symmetry, full selected-product pointer identification, N-factor information-graph consistency, metric/spatial realization, physical global preference, and exact-head kernel certification remain separate."
+    "Aggregates explicit Lean theorem-source authorities for finite quantum mereology. Born closure, finite Hermitian and selected-product CPO spectral structure under typed symmetry, finite von Neumann/mutual-information production, and finite-search minimizer existence are source-written. Generic-CPO-to-typed-symmetry, empirical pointer-basis authority, N-factor information-graph consistency, metric/spatial realization, physical global preference, and exact-head kernel certification remain separate."
 
 leanHamiltonianExponentialSourceReceipt : Sources.AttributionReceipt
 leanHamiltonianExponentialSourceReceipt =
@@ -336,4 +346,4 @@ leanExponentialDerivativeSourceReceipt =
   Sources.attribution-receipt
     Sources.importedFormalTheoremSource
     "DASHI Lean: RequestProject.QuantumMereologyExponentialDerivative"
-    "Source-written first/second exponential derivative spine using mathlib hasDerivAt_exp_smul_const plus explicit complex-to-real Fréchet restriction. Source lineage only until exact-head Lean kernel evidence exists."
+    "Source-written first/second exponential derivative spine using mathlib hasDerivAt_exp_smul_const plus explicit complex-to-real Frechet restriction. Source lineage only until exact-head Lean kernel evidence exists."
