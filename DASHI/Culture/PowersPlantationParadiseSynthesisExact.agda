@@ -17,6 +17,7 @@ import DASHI.Culture.HistoricalArchiveAbsenceNonfactorabilityExact as Archive
 import DASHI.Culture.ColonialTheatreAccessAdapterExact as Access
 import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as GovernedCross
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
+import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as EmpiricalPareto
 
 ------------------------------------------------------------------------
 -- POWERS PLANTATION -> PARADISE? SYNTHESIS
@@ -148,6 +149,11 @@ governedCrossPollinationBoundary =
 
 empiricalProgrammeBoundary : Empirical.PowersEmpiricalProgrammeBoundary
 empiricalProgrammeBoundary = Empirical.canonicalPowersEmpiricalProgrammeBoundary
+
+empiricalAcquisitionParetoBoundary :
+  EmpiricalPareto.PowersEmpiricalAcquisitionParetoBoundary
+empiricalAcquisitionParetoBoundary =
+  EmpiricalPareto.canonicalPowersEmpiricalAcquisitionParetoBoundary
 
 record PowersPlantationParadiseBoundary : Set where
   constructor powers-plantation-paradise-boundary
