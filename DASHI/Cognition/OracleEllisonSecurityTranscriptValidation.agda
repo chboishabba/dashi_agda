@@ -17,6 +17,9 @@ import DASHI.Cognition.OracleEllisonCognitiveWarfareWeldExact as Weld
 import DASHI.Cognition.OracleEllisonTranscriptVerdictExact as Verdict
 import DASHI.Cognition.OracleEllisonSocioTechnicalPowerWeldExact as PowerWeld
 import DASHI.Cognition.OracleEllisonCausalIdentificationWeldExact as CausalWeld
+import DASHI.Cognition.OracleEllisonAuthorityChainMaxCutExact as Authority
+import DASHI.Cognition.OracleEllisonMotiveSourceBoundaryExact as Motive
+import DASHI.Cognition.OracleEllisonCausalElectoralEvidenceExact as CausalEvidence
 import DASHI.Cognition.PNF.SensibLawProvenanceSemanticStatusOrthogonalityExact as Orthogonality
 
 ------------------------------------------------------------------------
@@ -139,3 +142,56 @@ causalPromotionRequiresEstimandAndIdentification :
   CausalWeld.causalPromotionRequiresExplicitEstimandAndIdentification
   ≡ true
 causalPromotionRequiresEstimandAndIdentification = refl
+
+------------------------------------------------------------------------
+-- Current continuation: same-object authority/control, direct motive and
+-- instrumental-natural-experiment causal evidence.
+------------------------------------------------------------------------
+
+fireWeaverHumanControlAllocationPaid :
+  Authority.fireWeaverHumanControlAllocationPaid ≡ true
+fireWeaverHumanControlAllocationPaid = refl
+
+fireWeaverAttackOfficerOverridePaid :
+  Authority.fireWeaverAttackOfficerOverridePaid ≡ true
+fireWeaverAttackOfficerOverridePaid = refl
+
+oracleDoesNotBecomeAttackOfficer :
+  Authority.oracleControlsFireWeaverAttackOfficer ≡ false
+oracleDoesNotBecomeAttackOfficer = refl
+
+ociProductWeldDoesNotPayIsraeliSovereignInstance :
+  Authority.israeliSovereignOCIInstanceControlPaid ≡ false
+ociProductWeldDoesNotPayIsraeliSovereignInstance = refl
+
+fullAuthorityChainStillOpen :
+  Authority.authorityChainClosedToSovereignControl ≡ false
+fullAuthorityChainStillOpen = refl
+
+ellisonFIDFDeclaredSupportMotivePaid :
+  Motive.ellisonFIDFSupportMotivePaid ≡ true
+ellisonFIDFDeclaredSupportMotivePaid = refl
+
+oracleLeadershipIsraelCommitmentDeclared :
+  Motive.oracleLeadershipIsraelSupportCommitmentPaid ≡ true
+oracleLeadershipIsraelCommitmentDeclared = refl
+
+ellisonImmortalityStillUnpaid :
+  Motive.ellisonImmortalityMotivePaid ≡ false
+ellisonImmortalityStillUnpaid = refl
+
+threatMaintenanceMotiveStillUnpaid :
+  Motive.netanyahuThreatMaintenanceMotivePaid ≡ false
+threatMaintenanceMotiveStillUnpaid = refl
+
+instrumentalNaturalExperimentFamilyAvailable :
+  CausalEvidence.instrumentalNaturalExperimentFamilyAvailable ≡ true
+instrumentalNaturalExperimentFamilyAvailable = refl
+
+terrorExposureElectoralPreferenceCausalSurfacePaid :
+  CausalEvidence.terrorExposureElectoralPreferenceCausalSurfacePaid ≡ true
+terrorExposureElectoralPreferenceCausalSurfacePaid = refl
+
+adjacentCausalSurfaceDoesNotPayThreatMaintenance :
+  CausalEvidence.netanyahuThreatMaintenancePoliticalSurvivalPaid ≡ false
+adjacentCausalSurfaceDoesNotPayThreatMaintenance = refl
