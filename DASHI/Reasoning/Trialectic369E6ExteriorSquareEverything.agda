@@ -76,11 +76,15 @@ import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
 -- center-preserving Heisenberg lift at executable receipt level.  Barraclough-
 -- Wilson independently source-align the degree-729 extraspecial irreducibles.
 --
--- The newest correction keeps the literal VOA W_zeta VECTOR carrier distinct
--- from its finite X6 x Fin90 BASIS-LABEL surface.  The remaining same-object
--- seam is therefore factorized into actual H_zeta recognition, actual
--- H_zeta x Hom_E(H_zeta,W_zeta) evaluation, and a representation-native Fin90
--- basis of the Hom space; ninety-fold isotypy does not choose that basis.
+-- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
+-- surface.  Constructive 729-state witness extraction now closes the explicit
+-- Schrodinger irreducibility leaf.  Companion Lean source-writes the generic
+-- equal-character-simple-representation isomorphism theorem; exact-head kernel
+-- observation and concrete Monster FDRep/character transport remain open.
+--
+-- On multiplicity, S_zeta = Hom_E(H_zeta,W_zeta) is primary.  The source-native
+-- Barraclough-Wilson/6.Suz route targets an actual 12+78 representation; Fin90
+-- is only a later basis coordinate if required by a downstream consumer.
 import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
 import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
 import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
@@ -96,6 +100,10 @@ import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptExact
 import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptValidation
 import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact
 import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionValidation
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureValidation
+import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
+import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
 import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
