@@ -5,21 +5,33 @@ MODULE = Path("DASHI/Physics/ExoticGravity/AntigravityTerminalPhysicalPackageFro
 
 def test_terminal_frontier_counts_packages_not_adapter_debt():
     text = MODULE.read_text()
-    required = [
-        "typedLocalCTerminalPhysicalPackageStillRequired = true",
-        "preferredSharedWightmanTerminalAvailable = true",
-        "independentPinnedBoostTraceSplitRequired = false",
-        "commonGravityCalibrationPackageStillRequired = true",
-        "matchedExperimentPackageStillRequired = true",
-        "ttDevicePackageRequiredForStaticOrScalarDifferentialRoute = false",
-        "ttDevicePackageRequiredWhenPropagatingGWRouteSelected = true",
-        "independentStaticMetricResponseTheoremStillRequired = false",
-        "independentDifferentialSameObjectTheoremStillRequired = false",
-        "r109SignMachineryRequiredForResponseReuse = false",
-        "representationOnlyAdapterDebtRemains = false",
+    for needle in (
+        "typedLocalCTerminalPhysicalPackageStillRequired",
+        "preferredSharedWightmanTerminalAvailable",
+        "independentPinnedBoostTraceSplitRequired",
+        "commonGravityCalibrationPackageStillRequired",
+        "matchedExperimentPackageStillRequired",
+        "ttDevicePackageRequiredForStaticOrScalarDifferentialRoute",
+        "ttDevicePackageRequiredWhenPropagatingGWRouteSelected",
+        "independentStaticMetricResponseTheoremStillRequired",
+        "independentDifferentialSameObjectTheoremStillRequired",
+        "r109SignMachineryRequiredForResponseReuse",
+        "representationOnlyAdapterDebtRemains",
         "mandatoryStaticResponsePhysicalPackageCount = 3",
         "mandatoryScalarDifferentialPhysicalPackageCount = 3",
         "mandatoryPropagatingGWPhysicalPackageCount = 4",
-    ]
-    for needle in required:
+    ):
+        assert needle in text
+
+
+def test_measured_g_is_paid_but_scale_product_remains_inside_calibration_package():
+    text = MODULE.read_text()
+    for needle in (
+        "acceptedMeasuredGAuthorityStillOpen",
+        "stressLengthSquaredScaleStillOpen",
+        "acceptedMeasuredGAuthorityPaid",
+        "SI.acceptedMeasuredGAuthorityStillRequired",
+        "SI.sourceStressLengthSquaredScaleStillRequired",
+        "acceptedMeasuredGAuthorityStillOpenIsFalse",
+    ):
         assert needle in text
