@@ -8,34 +8,38 @@ import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact as Attached
 boundary : Attached.NonginAttachedDescendantProgrammesBoundary
 boundary = Attached.canonicalNonginAttachedDescendantProgrammesBoundary
 
-transportStackLikeOwnerAttached :
-  Attached.transportStackLikeOwnerAttached boundary ≡ true
+transportStackLikeOwnerAttached : Attached.transportStackLikeOwnerAttached boundary ≡ true
 transportStackLikeOwnerAttached = refl
 
-hyperfabricOwnerAttached :
-  Attached.hyperfabricOwnerAttached boundary ≡ true
+hyperfabricOwnerAttached : Attached.hyperfabricOwnerAttached boundary ≡ true
 hyperfabricOwnerAttached = refl
 
-higherDescentOwnerAttached :
-  Attached.higherDescentOwnerAttached boundary ≡ true
+higherDescentOwnerAttached : Attached.higherDescentOwnerAttached boundary ≡ true
 higherDescentOwnerAttached = refl
 
-exceptionalProgrammeAttached :
-  Attached.exceptionalProgrammeAttached boundary ≡ true
+exceptionalProgrammeAttached : Attached.exceptionalProgrammeAttached boundary ≡ true
 exceptionalProgrammeAttached = refl
 
-physicalPromotionProgrammeAttached :
-  Attached.physicalPromotionProgrammeAttached boundary ≡ true
+physicalPromotionProgrammeAttached : Attached.physicalPromotionProgrammeAttached boundary ≡ true
 physicalPromotionProgrammeAttached = refl
 
-descendantsRemainAttached :
-  Attached.descendantProgrammesRemainAttachedToNongin boundary ≡ true
+descendantsRemainAttached : Attached.descendantProgrammesRemainAttachedToNongin boundary ≡ true
 descendantsRemainAttached = refl
 
-attachmentDoesNotFakeHigherStackCertification :
-  Attached.attachmentClaimsHigherStackAlreadyCertified boundary ≡ false
-attachmentDoesNotFakeHigherStackCertification = refl
+fullSiteGroupoidPresheafPaid : Attached.fullSiteGroupoidPresheafPaid boundary ≡ true
+fullSiteGroupoidPresheafPaid = refl
 
-attachmentDoesNotFakePhysicalPromotion :
-  Attached.attachmentClaimsPhysicalLawAlreadyPromoted boundary ≡ false
-attachmentDoesNotFakePhysicalPromotion = refl
+effectiveStackPaid : Attached.effectiveStackPaid boundary ≡ true
+effectiveStackPaid = refl
+
+higherStackPaid : Attached.higherStackPaid boundary ≡ true
+higherStackPaid = refl
+
+arbitraryHypercoverHypersheafStillOpen : Attached.arbitraryHypercoverHypersheafStillOpen boundary ≡ true
+arbitraryHypercoverHypersheafStillOpen = refl
+
+physicalPromotionRemainsSeparate : Attached.attachmentClaimsPhysicalLawAlreadyPromoted boundary ≡ false
+physicalPromotionRemainsSeparate = refl
+
+independentOwnersPreserved : Attached.attachmentCollapsesIndependentTheoremOwnership boundary ≡ false
+independentOwnersPreserved = refl
