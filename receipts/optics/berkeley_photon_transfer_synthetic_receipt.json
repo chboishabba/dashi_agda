@@ -1,0 +1,39 @@
+{
+  "compiler_formula": "(digital - intercept) / slope",
+  "incident_throughput_calibrated": false,
+  "matched_physical_photon_budget": false,
+  "raw_berkeley_sweep_reexecuted": false,
+  "receipt_kind": "synthetic_photon_transfer_compiler_validation",
+  "seed": 1729,
+  "source_executed_notebook_reproduced_from_raw_data": false,
+  "synthetic_only": true,
+  "systems": {
+    "diffuser": {
+      "fit_intercept": -0.05069031722286832,
+      "fit_r2": 0.9788824748988413,
+      "fit_slope": 0.03081412628239992,
+      "max_inverse_abs_error": 1.1368683772161603e-13,
+      "relative_slope_error": 0.027137542746664044,
+      "source_display_intercept": 0.36,
+      "source_display_slope": 0.03
+    },
+    "lensed": {
+      "fit_intercept": -0.12347018115993258,
+      "fit_r2": 0.9606447242632571,
+      "fit_slope": 0.05145730875283487,
+      "max_inverse_abs_error": 1.1368683772161603e-13,
+      "relative_slope_error": 0.029146175056697365,
+      "source_display_intercept": 0.01,
+      "source_display_slope": 0.05
+    },
+    "rml": {
+      "fit_intercept": -0.03716165970258889,
+      "fit_r2": 0.9784290186078263,
+      "fit_slope": 0.020283732448944863,
+      "max_inverse_abs_error": 1.1368683772161603e-13,
+      "relative_slope_error": 0.014186622447243113,
+      "source_display_intercept": 1.46,
+      "source_display_slope": 0.02
+    }
+  }
+}
