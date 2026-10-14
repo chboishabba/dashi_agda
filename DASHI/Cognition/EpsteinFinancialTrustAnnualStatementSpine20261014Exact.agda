@@ -14,6 +14,10 @@ open import Data.Empty using (⊥)
 -- differ because of accounting basis, timing, consolidation and classification.
 -- The discrepancy is an acquisition target; figures are not averaged or silently
 -- selected to fit a preferred narrative.
+--
+-- Positive-income years use `AnnualStatement`.  Crisis/post-crisis years with
+-- signed investment results use `LossYearStatement` so a negative value is not
+-- silently coerced to zero merely because Agda Nat is unsigned.
 ------------------------------------------------------------------------
 
 data AccountingView : Set where
@@ -92,9 +96,94 @@ ftc2006 = annual-statement
   "USVI v JPMorgan Document 268-52, VI-JPM-000013514"
   true
 
-primaryFiledSpine : List AnnualStatement
-primaryFiledSpine =
-  ftc1999 ∷ ftc2000 ∷ ftc2001 ∷ ftc2003 ∷ ftc2004Filed ∷ ftc2005 ∷ ftc2006 ∷ []
+ftc2007 : AnnualStatement
+ftc2007 = annual-statement
+  2007 filedYearEndStatement 4732504 278443231 476580206 79
+  3965864 47053611 49333154 48729000
+  "USVI v JPMorgan Document 194-22 / 268-52, VI-JPM-000013506"
+  true
+
+primaryPositiveFiledSpine : List AnnualStatement
+primaryPositiveFiledSpine =
+  ftc1999 ∷ ftc2000 ∷ ftc2001 ∷ ftc2003 ∷ ftc2004Filed ∷ ftc2005 ∷ ftc2006 ∷ ftc2007 ∷ []
+
+------------------------------------------------------------------------
+-- Signed/loss years. Monetary magnitudes stay Nat; sign/classification is typed.
+------------------------------------------------------------------------
+
+data SignedResultClass : Set where
+  positiveResult : SignedResultClass
+  negativeResult : SignedResultClass
+  zeroResult : SignedResultClass
+
+record LossYearStatement : Set where
+  constructor loss-year-statement
+  field
+    year : Nat
+    cashUSD : Nat
+    investmentsUSD : Nat
+    totalAssetsUSD : Nat
+    totalLiabilitiesUSD : Nat
+    feeIncomeUSD : Nat
+    investmentResultMagnitudeUSD : Nat
+    investmentResultClass : SignedResultClass
+    netResultMagnitudeUSD : Nat
+    netResultClass : SignedResultClass
+    distributionsUSD : Nat
+    source : String
+    primaryCourtCarrier : Bool
+open LossYearStatement public
+
+ftc2008 : LossYearStatement
+ftc2008 = loss-year-statement
+  2008 145493041 57717468 364220131 8972 500000
+  95546771 negativeResult 100868968 negativeResult 11500000
+  "USVI v JPMorgan Document 268-52, VI-JPM-000013509; total revenue includes USD9,680,688 related investment income and USD105,227,459 other related losses, net negative USD95,546,771"
+  true
+
+ftc2009 : LossYearStatement
+ftc2009 = loss-year-statement
+  2009 134328728 53631852 334234043 23400 500000
+  11014238 negativeResult 12688515 negativeResult 17312000
+  "USVI v JPMorgan Document 194-22 / 268-52, VI-JPM-000013550"
+  true
+
+ftc2010 : LossYearStatement
+ftc2010 = loss-year-statement
+  2010 28173322 126843024 275155539 920845 100000
+  18008043 negativeResult 25397830 negativeResult 34578120
+  "USVI v JPMorgan Document 268-52, VI-JPM-000013498"
+  true
+
+ftc2011 : LossYearStatement
+ftc2011 = loss-year-statement
+  2011 29608037 109811863 244674225 459626 100000
+  9228140 negativeResult 12570094 negativeResult 17450000
+  "USVI v JPMorgan Document 268-52, VI-JPM-000013497"
+  true
+
+ftc2012 : LossYearStatement
+ftc2012 = loss-year-statement
+  2012 29428408 105787562 211789480 1264456 0
+  12277257 negativeResult 13994055 negativeResult 19695520
+  "USVI v JPMorgan Document 268-52, VI-JPM-000013496"
+  true
+
+primaryLossYearSpine : List LossYearStatement
+primaryLossYearSpine = ftc2008 ∷ ftc2009 ∷ ftc2010 ∷ ftc2011 ∷ ftc2012 ∷ []
+
+record AnnualSpineClosure : Set where
+  constructor annual-spine-closure
+  field
+    years1999to2001Paid : Bool
+    year2002FullStatementPaid : Bool
+    years2003to2012Paid : Bool
+    crisisLossSignsPreserved : Bool
+    annualStatementsEqualClientLedger : Bool
+open AnnualSpineClosure public
+
+canonicalAnnualSpineClosure : AnnualSpineClosure
+canonicalAnnualSpineClosure = annual-spine-closure true false true true false
 
 record AccountingBasisBoundary : Set where
   constructor accounting-basis-boundary
@@ -114,6 +203,7 @@ canonicalAccountingBasisBoundary = accounting-basis-boundary
 data DifferentAccountingViewsImpliesFraud : Set where
 data AccountingViewsMayBeAveraged : Set where
 data EpsteinPersonalPlusFTCMayBeAdded : Set where
+data AnnualRevenueImpliesNamedClient : Set where
 
 differentViewsDoNotCreateFraud : DifferentAccountingViewsImpliesFraud → ⊥
 differentViewsDoNotCreateFraud ()
@@ -124,20 +214,18 @@ viewsCannotBeBlindlyAveraged ()
 personalAndCompanyCannotBeBlindlyAdded : EpsteinPersonalPlusFTCMayBeAdded → ⊥
 personalAndCompanyCannotBeBlindlyAdded ()
 
+annualRevenueDoesNotCreateNamedClient : AnnualRevenueImpliesNamedClient → ⊥
+annualRevenueDoesNotCreateNamedClient ()
+
 ------------------------------------------------------------------------
--- Max-cut after filling most of the early filed-statement spine.
+-- Max-cut after closing the primary year-end spine except full 2002 statement.
 ------------------------------------------------------------------------
 
 data AnnualSpineDebt : Set where
   primary2002Statement : AnnualSpineDebt
-  primary2007Statement : AnnualSpineDebt
-  primary2008Statement : AnnualSpineDebt
-  primary2009Statement : AnnualSpineDebt
-  primary2010Statement : AnnualSpineDebt
-  primary2011Statement : AnnualSpineDebt
-  primary2012Statement : AnnualSpineDebt
   accountingBasisReconciliation2004 : AnnualSpineDebt
   annualFeePayerAllocation : AnnualSpineDebt
+  crisisLossRealisedUnrealisedSplit : AnnualSpineDebt
 
 record AnnualSpineAcquisition : Set where
   constructor annual-spine-acquisition
@@ -152,13 +240,9 @@ canonicalAnnualSpineAcquisition =
   annual-spine-acquisition annualFeePayerAllocation 100
     "Resolve fee income payer-by-payer for each filed year; annual fee totals are not a client list." ∷
   annual-spine-acquisition primary2002Statement 100
-    "Acquire the primary 2002 FTC balance sheet/income statement and reconcile the approximately USD88m capital locator." ∷
+    "Acquire the full primary 2002 FTC balance sheet/income statement; the franchise-tax capital report pays only paid-in capital, not the whole annual statement." ∷
   annual-spine-acquisition accountingBasisReconciliation2004 99
     "Reconcile the filed 2004 USD563.215m asset statement against the internal cash-basis USD537.034m books by line item, consolidation and accounting basis." ∷
-  annual-spine-acquisition primary2007Statement 99 "Acquire primary 2007 filed/cash-basis statements." ∷
-  annual-spine-acquisition primary2008Statement 99 "Acquire primary 2008 filed/cash-basis statements and isolate crisis-period realised/unrealised losses." ∷
-  annual-spine-acquisition primary2009Statement 98 "Acquire primary 2009 statements." ∷
-  annual-spine-acquisition primary2010Statement 98 "Acquire primary 2010 statements." ∷
-  annual-spine-acquisition primary2011Statement 97 "Acquire primary 2011 statements." ∷
-  annual-spine-acquisition primary2012Statement 97 "Acquire primary 2012 wind-down/termination statements before Southern Trust becomes the main operating vehicle." ∷
+  annual-spine-acquisition crisisLossRealisedUnrealisedSplit 99
+    "Decompose 2008-2012 related-investment losses into realised loss, unrealised mark, write-down, subsidiary result and cash-flow effects before using them in crisis-incidence analysis." ∷
   []
