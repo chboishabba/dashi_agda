@@ -23,12 +23,15 @@ python3 scripts/co_tase2_spin_space_generator_bridge.py \
 python3 scripts/co_tase2_wannier90_spectral_selftest.py
 python3 scripts/co_tase2_wannier_bns_covariance_selftest.py
 python3 scripts/co_tase2_kz_final_state_calibration_selftest.py
+python3 scripts/co_tase2_arpes_observer_selftest.py
 
 python3 -m py_compile \
   scripts/co_tase2_bloch_symmetry.py \
   scripts/co_tase2_bns_operation_audit.py \
   scripts/co_tase2_full_symmetry_receipt.py \
   scripts/co_tase2_arpes_ibw_ingest.py \
+  scripts/co_tase2_arpes_observer_from_ibw.py \
+  scripts/co_tase2_arpes_observer_selftest.py \
   scripts/co_tase2_arpes_peak_fit.py \
   scripts/co_tase2_arpes_forward_fit.py \
   scripts/co_tase2_published_arpes_constraints.py \
