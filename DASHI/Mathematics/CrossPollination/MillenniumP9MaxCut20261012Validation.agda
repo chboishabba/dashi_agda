@@ -95,6 +95,11 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPVirtualQuotationFrontierExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualGeneratorOutputExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact
 
+-- Persistent virtual-tape recut: immutable streamed base + exact sparse residual.
+import DASHI.Mathematics.Complexity.VirtualTapeSparseOverlayExact
+import DASHI.Mathematics.Complexity.GuardedCookVirtualTapeBaseExact
+import DASHI.Mathematics.Complexity.VirtualStandardTapeExecutionExact
+
 ------------------------------------------------------------------------
 -- TRUST BOUNDARY / ACTIVE ROADMAP
 --
@@ -125,17 +130,29 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPFaithfulVirtualSimulationExact
 --   * FaithfulGeneratorOutput requires `nothing/false/true` to be represented by
 --     three distinct actual finite control states of that SAME target machine;
 --   * FaithfulVirtualSimulation carries that finite-state output property through
---     every generator call actually used by the candidate simulation.
+--     every generator call actually used by the candidate simulation;
+--   * sparse latest-write residual overlays an immutable virtual base exactly;
+--   * the guarded Cook payload is an executable virtual base with bit i at
+--     absolute address T+1+i and canonical streamed-read correctness;
+--   * persistent VirtualStandardConfiguration keeps candidate control/head/write
+--     residual across reads and applies the SAME Standard.transition function,
+--     eliminating semantic dependence on reset-style full-tape reconstruction.
 --
 -- LIVE CONSTRUCTIVE WALL:
---   1. compile the proved streamed evaluator into one CodedFiniteStandardTM with
---      generator/candidate/opposite modes;
---   2. prove its polynomial query clock in canonical query-code length;
---   3. replace reset-style query invocation with an in-place call frame if the
---      canonical-reset representation cannot preserve candidate continuation;
---   4. prove the source/target representation invariant for each candidate edge;
---   5. close total target time to the SAME T used by its own Cook formula;
---   6. reuse already-paid Cook iff/opposite SATDecisionFailure plumbing.
+--   1. compile the proved streamed evaluator + persistent virtual execution into
+--      one CodedFiniteStandardTM with generator/candidate/opposite modes;
+--   2. prove a source/materialized-run <-> persistent-virtual-run bisimulation
+--      over the T+1 guarded margin (this is now a representation theorem, not a
+--      missing tape model);
+--   3. expose cost of clause seek/token cursor/residual lookup and prove the
+--      generator/query/interpreter clock polynomial in canonical query-code size;
+--   4. close total target time to the SAME T used by its own Cook formula;
+--   5. reuse already-paid Cook iff/opposite SATDecisionFailure plumbing.
+--
+-- Productive sibling-PR cross-pollination is methodological only: the
+-- consumer-relative recoverability principle from the ontology/Eisenstein lanes
+-- appears here concretely as immutable base + residual reopening.  No unmerged
+-- sibling theorem is imported as authority.
 --
 -- Ordinary polynomial-map/precomposition/verifier/certificate closure and the
 -- established NP background remain separate same-model obligations.
