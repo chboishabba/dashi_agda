@@ -12,8 +12,8 @@ import DASHI.Economics.AICerebrasCloudMarginObserverBoundary20261012Exact as Mar
 import DASHI.Economics.AICerebrasProviderCostComposition20261014Exact as Cost
 import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Payer
 import DASHI.Economics.AICoreWeaveAggregateCustomerCashRealisation20261014Exact as Cash
-import DASHI.Economics.AICoreWeaveCapexDecompositionNonidentifiability20261012Exact as Replacement
 import DASHI.Economics.AICoreWeaveFleetAgeOSINTMaxCut20261014Exact as Fleet
+import DASHI.Economics.AICoreWeaveGenerationPriceLadder20261014Exact as Price
 import DASHI.Economics.AICoreWeaveThreeClockCapitalRecovery20261014Exact as ThreeClock
 import DASHI.Economics.AICoreWeaveNamedFacilityDelivery20261014Exact as Facility
 import DASHI.Economics.AIAustraliaRegulatoryCostMeasurementBoundary20261014Exact as Regulation
@@ -64,8 +64,8 @@ terminalPayerGraphPartial = roadmap-lane
 replacementEconomicsEmpirical : RoadmapLane
 replacementEconomicsEmpirical = roadmap-lane
   "replacement and economic-obsolescence burden" empirical
-  "aggregate-capex non-identifiability; 72-month accounting life vs 36-48 month generic lender horizon; public capacity-vintage distribution with June-2026 median 6-12 months and mean interval about 7.48-14.70 months; book-stock youth proxy; H100/H200/GB200/GB300/Rubin frontier cadence; selected 36/48-month vintage exposure wall; named Core Scientific delivery layer"
-  "serial-level GPU ages/generation shares, actual in-place refresh and retirement history, same-object economic-life/residual calibration, and growth-vs-replacement capitalisation" false
+  "aggregate-capex non-identifiability; 72-month accounting life vs 36-48 month generic lender horizon; public capacity-vintage distribution with June-2026 median 6-12 months and mean interval about 7.48-14.70 months; book-stock youth proxy; H100/H200/GB200/GB300/Rubin frontier cadence; current multi-generation commercial coexistence; selected current A100/H100/H200/B200/GB200 per-GPU listed-price ladder; 36/48-month vintage exposure wall; named Core Scientific delivery layer"
+  "serial-level GPU ages/generation shares, actual in-place refresh and retirement history, longitudinal same-generation utilisation/ASP/price decay, same-object residual-value/economic-life calibration, and growth-vs-replacement capitalisation" false
 
 threeClockCapitalRecoveryPartial : RoadmapLane
 threeClockCapitalRecoveryPartial = roadmap-lane
@@ -112,9 +112,6 @@ ownedTCOStillOpen = TCO.ownedTCOStillOpen
 purchaseQuoteRangeNowPaid : Quote.purchaseQuoteRangeObserved Quote.mi355xAcquisitionDepreciationEnvelope ≡ true
 purchaseQuoteRangeNowPaid = Quote.purchaseQuoteRangePaid
 
-matchedRentalNodePurchasePriceStillOpen : Quote.matchedRentalNodePurchasePricePaid Quote.mi355xAcquisitionDepreciationEnvelope ≡ false
-matchedRentalNodePurchasePriceStillOpen = Quote.matchedRentalNodePurchasePriceStillOpen
-
 providerSegmentCostCompositionNowPaid : Cost.providerSegmentCostCompositionObserved Cost.cerebrasProviderCostComposition ≡ true
 providerSegmentCostCompositionNowPaid = Cost.providerSegmentCostCompositionPaid
 
@@ -132,6 +129,12 @@ capacityVintageDistributionNowPaid = Fleet.capacityVintageIsNowPaid
 
 serialHardwareAgeStillOpen : Fleet.exactSerialHardwareAgeDistributionPaid Fleet.coreWeaveFleetAgeOSINTStatus ≡ false
 serialHardwareAgeStillOpen = Fleet.exactHardwareAgeStillOpen
+
+currentA100PriceCoordinatePaid : Price.a100PerGPUHourMills Price.coreWeaveCurrentGenerationPriceLadder ≡ 2700
+currentA100PriceCoordinatePaid = Price.a100PerGPUHourMillsIs2700
+
+longitudinalGenerationPriceDecayStillOpen : Fleet.longitudinalGenerationPriceDecayPaid Fleet.coreWeaveFleetAgeOSINTStatus ≡ false
+longitudinalGenerationPriceDecayStillOpen = Fleet.longitudinalPriceDecayStillOpen
 
 threeClockOrderingPaid :
   (ThreeClock.lenderBelowContract ThreeClock.coreWeaveThreeClockWedge ≡ true) ×
@@ -166,4 +169,4 @@ stackLayerCoexistencePaid = Stack.landlordRecognisedRevenueAndTenantNegativeSpre
 
 boundary : String
 boundary =
-  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave fleet-age OSINT now pays capacity-vintage intervals, independent book-stock youth and frontier-generation cadence, plus a selected 36/48-month exposure calendar; canonical non-descent retains exact hardware age/refresh as a separate residual. A three-clock wedge now separates lender collateral horizon, customer-contract duration and accounting life, and records their calendar overlap with the debt maturity wall without identifying the same financed assets. Aggregate customer cash is paid while named-payer independence remains partial. Provider-side economics includes actual Cerebras segment costs but pure-inference marginal cost remains open. Replacement cash burden, same-asset clock mapping and realised regulatory-burden causality remain empirical."
+  "The October-14 AI-capital programme is no longer missing a generic theory layer. CoreWeave fleet-age OSINT now pays capacity-vintage intervals, independent book-stock youth, frontier-generation cadence, multi-generation commercial coexistence, a selected current generation price ladder, and a selected 36/48-month exposure calendar; canonical non-descent retains exact hardware age/refresh as a separate residual. A three-clock wedge separates lender collateral horizon, customer-contract duration and accounting life, and records their calendar overlap with the debt maturity wall without identifying the same financed assets. Current price coexistence supports a tiered commercial-value model rather than a hard retirement cliff, but longitudinal price decay/utilisation and realised residual values remain empirical. Aggregate customer cash is paid while named-payer independence remains partial. Provider-side economics includes actual Cerebras segment costs but pure-inference marginal cost remains open. Replacement cash burden, same-asset clock mapping and realised regulatory-burden causality remain empirical."
