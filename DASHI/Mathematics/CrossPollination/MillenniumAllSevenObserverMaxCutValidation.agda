@@ -13,6 +13,8 @@ import DASHI.Physics.ThreeBody.EisensteinC3FourierExact as ThreeBody
 import DASHI.Physics.ThreeBody.EisensteinC3FourierValidation
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as Cubic
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryValidation
+import DASHI.Mathematics.Arithmetic.EisensteinAZeroEllipticScalarExtensionExact as AZero
+import DASHI.Mathematics.Arithmetic.EisensteinAZeroEllipticScalarExtensionValidation
 
 sevenClayProblemsIndexed : Gate.clayProblemLaneCount ≡ 7
 sevenClayProblemsIndexed = refl
@@ -69,3 +71,15 @@ crossProverReceiptDoesNotImportLeanKernelAuthority = refl
 crossProverReceiptDoesNotManufactureAgdaUniversalFormula :
   LeanReceipt.agdaUniversalCoefficientTheoremInhabitedFromReceipt ≡ false
 crossProverReceiptDoesNotManufactureAgdaUniversalFormula = refl
+
+aZeroScalarExtensionPaid :
+  AZero.aZeroPointSameObjectBridgePaid AZero.canonicalBoundary ≡ true
+aZeroScalarExtensionPaid = refl
+
+c3DoesNotAutomaticallyRestrictToRationalPoints :
+  AZero.c3ActionRestrictsToRationalEmbedding AZero.canonicalBoundary ≡ false
+c3DoesNotAutomaticallyRestrictToRationalPoints = refl
+
+cmAuthorityStillSeparate :
+  AZero.fullCMEndomorphismRingPaid AZero.canonicalBoundary ≡ false
+cmAuthorityStillSeparate = refl
