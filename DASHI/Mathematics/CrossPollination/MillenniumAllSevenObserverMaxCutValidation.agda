@@ -15,6 +15,8 @@ import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as Cubic
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryValidation
 import DASHI.Mathematics.Arithmetic.EisensteinAZeroEllipticScalarExtensionExact as AZero
 import DASHI.Mathematics.Arithmetic.EisensteinAZeroEllipticScalarExtensionValidation
+import DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantExact as JInvariant
+import DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantValidation
 
 sevenClayProblemsIndexed : Gate.clayProblemLaneCount ≡ 7
 sevenClayProblemsIndexed = refl
@@ -80,6 +82,14 @@ c3DoesNotAutomaticallyRestrictToRationalPoints :
   AZero.c3ActionRestrictsToRationalEmbedding AZero.canonicalBoundary ≡ false
 c3DoesNotAutomaticallyRestrictToRationalPoints = refl
 
+aZeroShortJExpressionPaid :
+  JInvariant.aZeroJExpressionZeroPaid JInvariant.canonicalBoundary ≡ true
+aZeroShortJExpressionPaid = refl
+
 cmAuthorityStillSeparate :
-  AZero.fullCMEndomorphismRingPaid AZero.canonicalBoundary ≡ false
+  JInvariant.fullCMEndomorphismRingPaid JInvariant.canonicalBoundary ≡ false
 cmAuthorityStillSeparate = refl
+
+heckeAuthorityStillSeparate :
+  JInvariant.heckeCharacterPaid JInvariant.canonicalBoundary ≡ false
+heckeAuthorityStillSeparate = refl
