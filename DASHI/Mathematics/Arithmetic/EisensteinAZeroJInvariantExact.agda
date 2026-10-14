@@ -21,9 +21,9 @@ module DASHI.Mathematics.Arithmetic.EisensteinAZeroJInvariantExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Integer.Base using (ℤ; +0; +[1+_]; -[1+_]; +_)
+open import Data.Integer.Base using (+0; +[1+_]; -[1+_])
 open import Data.Nat.Coprimality as Coprime using ()
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_; -_; mkℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_; mkℚ)
 import Data.Rational.Tactic.RingSolver as ℚRing
 import Relation.Binary.PropositionalEquality as Eq
 
@@ -47,7 +47,11 @@ p ÷q q = p * invℚ q
 ------------------------------------------------------------------------
 
 oneSevenTwoEight : ℚ
-oneSevenTwoEight = + 1728 ℚ./ 1
+oneSevenTwoEight = Elliptic.sixtyFour * Elliptic.twentySeven
+
+oneSevenTwoEightIsSixtyFourTimesTwentySeven :
+  oneSevenTwoEight ≡ Elliptic.sixtyFour * Elliptic.twentySeven
+oneSevenTwoEightIsSixtyFourTimesTwentySeven = refl
 
 shortJDenominator : Elliptic.ShortWeierstrassCurve → ℚ
 shortJDenominator curve =
