@@ -17,3 +17,9 @@ import DASHI.Governance.BoloBoloCausalIdentificationEverything
 -- the capacity/peak-demand/backlog consumer is the canonical least-sufficient
 -- observer for that declared capacity-sensitive question.
 import DASHI.Governance.BoloBoloCapacityConsumerSufficiencyEverything
+
+-- Attribution-safe evidence acquisition: Holmes' bibliography pays archival
+-- locator identity only, never primary minute content; the Pareto layer ranks
+-- current acquisition routes using DASHI scheduling values without upgrading
+-- source authority, truth or causal status.
+import DASHI.Governance.BoloBoloEmpiricalAcquisitionEverything
