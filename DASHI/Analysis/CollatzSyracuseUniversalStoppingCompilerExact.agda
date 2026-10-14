@@ -47,14 +47,20 @@ ReachesOne : Syracuse.PositiveNat → Set
 ReachesOne x =
   Σ Nat (λ k → Syracuse.syracuseIterate k x ≡ Syracuse.one)
 
+-- Canonical one-start witness consumed throughout the terminal Collatz lane.
+-- Naming it avoids parallel inline Sigma types at inverse-limit/frontier seams.
+StrictDescentWithin : Syracuse.PositiveNat → Set
+StrictDescentWithin x =
+  Σ Nat (λ m →
+    Syracuse.toNat (Syracuse.syracuseIterate m x)
+    < Syracuse.toNat x)
+
 record LiteralStrictDescentSource : Set₁ where
   field
     descend :
       (x : Syracuse.PositiveNat) →
       1 < Syracuse.toNat x →
-      Σ Nat (λ m →
-        Syracuse.toNat (Syracuse.syracuseIterate m x)
-        < Syracuse.toNat x)
+      StrictDescentWithin x
 
 open LiteralStrictDescentSource public
 
