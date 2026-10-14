@@ -2,27 +2,17 @@ module DASHI.Biology.IIT369MatchedAlgebraControlExact where
 
 open import DASHI.Core.Prelude
 
+import Base369 as Base
+import DASHI.Foundations.TernaryEndomorphismPhaseQuotientExact as Phase
 import DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact as Separation
 import DASHI.Biology.IIT4FiniteExecutableKernelExact as Kernel
 
 ------------------------------------------------------------------------
 -- SAME CARDINALITY DOES NOT MEAN SAME ALGEBRA, AND SYSTEM-PHI NEED NOT SEE IT.
---
--- Existing repo theorem:
---   Q9 = C3 x C3 and NonaryTruth = C9 have an exact nine-state carrier chart,
---   but no group isomorphism can preserve their respective additions.
---
--- The matched Python experiment puts both laws on the same two-cell recurrent
--- fabric A'=B; B'=mu(A,B).  Under the 2023 system measure both produce the
--- same statewise phi_s profile: log2(81) on all 81 states.  Under the 2026
--- intrinsic-information requirement both deterministic systems have phi_s=0.
---
--- This is numerical non-identifiability of the group law by that system-phi
--- observation on this fixture, not an Agda proof of the logarithmic values.
 ------------------------------------------------------------------------
 
 sameCarrierChart :
-  (pair : Separation.Phase.PhaseQuotient9) →
+  (pair : Phase.PhaseQuotient9) →
   Separation.nonaryToPhasePair (Separation.phasePairToNonary pair) ≡ pair
 sameCarrierChart = Separation.phaseNonaryRoundTrip
 
@@ -34,14 +24,12 @@ sameCardinalityStillNotGroupIsomorphic =
 naturalCarrierChartDoesNotPreserveAddition :
   Separation.phasePairToNonary
     (Separation.q9Add
-      (Separation.Base.tri-low , Separation.Base.tri-mid)
-      (Separation.Base.tri-low , Separation.Base.tri-high))
+      (Base.tri-low , Base.tri-mid)
+      (Base.tri-low , Base.tri-high))
   ≡
-  Separation.Base.nonaryXor
-    (Separation.phasePairToNonary
-      (Separation.Base.tri-low , Separation.Base.tri-mid))
-    (Separation.phasePairToNonary
-      (Separation.Base.tri-low , Separation.Base.tri-high))
+  Base.nonaryXor
+    (Separation.phasePairToNonary (Base.tri-low , Base.tri-mid))
+    (Separation.phasePairToNonary (Base.tri-low , Base.tri-high))
   → ⊥
 naturalCarrierChartDoesNotPreserveAddition =
   Separation.naturalChartDoesNotPreserveAddition
