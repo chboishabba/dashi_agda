@@ -29,6 +29,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.Monster3BActualKernelCharacterPromotionExact as Actual
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneMultiplicity
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as Correction
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZeta
 import DASHI.Wikimedia.IbrahimMonster3BConstituentAttachmentSnowballExact as Constituent
 import DASHI.Wikimedia.IbrahimMonster3BMultiplicityBasisLinearWrongTypeCorrectionExact as Multiplicity
@@ -137,7 +138,60 @@ record PaidActualLinearMultiplicityHomSpace
 open PaidActualLinearMultiplicityHomSpace public
 
 ------------------------------------------------------------------------
--- 5. WrongType firewalls.
+-- 5. Corrected finite-basis recognition also contains Set-valued obligations.
+--    The maps, inverse laws and translation/modulation equalities remain useful
+--    exact data; these wrappers require inhabitants for the representation-
+--    native / linear-basis / extension obligations before promotion.
+------------------------------------------------------------------------
+
+record PaidActualZetaBasisRecognition
+    {LiteralZetaSector : Set}
+    (basis : Correction.ActualZetaBasisRecognition LiteralZetaSector)
+    : Set₁ where
+  field
+    basisInclusionIsRepresentationNativeWitness :
+      Correction.basisInclusionIsRepresentationNative basis
+
+open PaidActualZetaBasisRecognition public
+
+record PaidActualMultiplicityBasisRecognition
+    {homSpace : Hom.ActualLinearMultiplicityHomSpace}
+    (basis : Correction.ActualMultiplicityBasisRecognition homSpace)
+    : Set₁ where
+  field
+    multiplicityBasisIsLinearBasisOfHomSpaceWitness :
+      Correction.multiplicityBasisIsLinearBasisOfHomSpace basis
+    normalizerActionOnMultiplicityBasisWitness :
+      Correction.normalizerActionOnMultiplicityBasisPaid basis
+
+open PaidActualMultiplicityBasisRecognition public
+
+record PaidWZetaBasisVectorRecognition
+    {LiteralZetaSector : Set}
+    {homSpace : Hom.ActualLinearMultiplicityHomSpace}
+    (recognition :
+      Correction.WZetaBasisVectorRecognition LiteralZetaSector homSpace)
+    : Set₁ where
+  field
+    zetaBasisRecognitionPaid :
+      PaidActualZetaBasisRecognition
+        (Correction.basisRecognition recognition)
+    multiplicityBasisRecognitionPaid :
+      PaidActualMultiplicityBasisRecognition
+        (Correction.multiplicityBasisRecognition recognition)
+    schrodingerBasisToX6Witness :
+      Correction.schrodingerBasisToX6Paid recognition
+    evaluationOfBasisTensorMatchesIncludedBasisWitness :
+      Correction.evaluationOfBasisTensorMatchesIncludedBasis recognition
+    translationActionExtendsLinearlyFromBasisWitness :
+      Correction.translationActionExtendsLinearlyFromBasis recognition
+    modulationActionExtendsLinearlyFromBasisWitness :
+      Correction.modulationActionExtendsLinearlyFromBasis recognition
+
+open PaidWZetaBasisVectorRecognition public
+
+------------------------------------------------------------------------
+-- 6. WrongType firewalls.
 ------------------------------------------------------------------------
 
 data TypedObligationAloneCreatesRecognitionWitness : Set where
@@ -162,7 +216,7 @@ sameObjectTypeDoesNotCreateSameObjectWitness :
 sameObjectTypeDoesNotCreateSameObjectWitness ()
 
 ------------------------------------------------------------------------
--- 6. Machine-readable audit boundary.
+-- 7. Machine-readable audit boundary.
 ------------------------------------------------------------------------
 
 record Boundary : Set where
@@ -172,15 +226,21 @@ record Boundary : Set where
     legacyMultiplicityDimensionIsProofRelevant : Bool
     legacyHomIntertwinerIsProofRelevant : Bool
     legacyConstituentAttachmentIsProofRelevant : Bool
+    legacyZetaBasisRecognitionIsProofRelevant : Bool
+    legacyMultiplicityBasisRecognitionIsProofRelevant : Bool
+    legacyWZetaBasisVectorRecognitionIsProofRelevant : Bool
     paidHZetaRecognitionWrapperAvailable : Bool
     paidMultiplicityRouteWrapperAvailable : Bool
     paidConstituentAttachmentWrapperAvailable : Bool
     paidHomIntertwinerWrapperAvailable : Bool
+    paidZetaBasisRecognitionWrapperAvailable : Bool
+    paidMultiplicityBasisRecognitionWrapperAvailable : Bool
+    paidWZetaBasisVectorRecognitionWrapperAvailable : Bool
     typedObligationAlonePaysRecognition : Bool
 open Boundary public
 
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
-  false false false false
-  true true true true
+  false false false false false false false
+  true true true true true true true
   false
