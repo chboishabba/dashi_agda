@@ -45,6 +45,8 @@ import DASHI.Philosophy.NonginAttachedDescendantProgrammesExact
 import DASHI.Philosophy.NonginAttachedDescendantProgrammesValidation
 import DASHI.Philosophy.NonginRoadmapClosureExact
 import DASHI.Philosophy.NonginRoadmapClosureValidation
+import DASHI.Philosophy.NonginExtendedRoadmapExact
+import DASHI.Philosophy.NonginExtendedRoadmapValidation
 import DASHI.Philosophy.RelationalAtlas
 import DASHI.Philosophy.RelationalEncounter
 import DASHI.Philosophy.RelationalProtocol
