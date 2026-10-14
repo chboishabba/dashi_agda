@@ -34,8 +34,7 @@ aZeroBOneDiscriminant :
     (Elliptic.four * 0ℚ * 0ℚ * 0ℚ
       + Elliptic.twentySeven * E.qOne * E.qOne)
   ≡ - (Elliptic.sixteen * Elliptic.twentySeven)
-aZeroBOneDiscriminant =
-  ℚRing.solve-∀ Elliptic.sixteen Elliptic.four Elliptic.twentySeven E.qOne
+aZeroBOneDiscriminant = ℚRing.solve []
 
 minusSixteenTimesTwentySevenNonzero :
   - (Elliptic.sixteen * Elliptic.twentySeven) ≡ 0ℚ → ⊥
@@ -74,8 +73,7 @@ concreteJExpressionZero =
 
 zeroOnePoint :
   Scalar.OnShortWeierstrass curveY2EqualsX3PlusOne 0ℚ E.qOne
-zeroOnePoint =
-  ℚRing.solve-∀ E.qOne
+zeroOnePoint = ℚRing.solve []
 
 embeddedZeroOnePoint :
   Cubic.OnJZeroCubic
