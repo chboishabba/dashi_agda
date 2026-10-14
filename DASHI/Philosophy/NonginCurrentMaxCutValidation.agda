@@ -54,9 +54,9 @@ observationalGlobalUniquenessPaid :
   Nongin.observationalGlobalUniquenessPaid boundary ≡ true
 observationalGlobalUniquenessPaid = refl
 
-siteTransportCoverageObstructionPaid :
+historicalPatchCoverageObstructionRetained :
   Nongin.siteTransportCoverageObstructionPaid boundary ≡ true
-siteTransportCoverageObstructionPaid = refl
+historicalPatchCoverageObstructionRetained = refl
 
 boundaryAnchoredFaceMediationPaid :
   Nongin.boundaryAnchoredFaceMediationPaid boundary ≡ true
@@ -102,9 +102,9 @@ carryAllDepthCoherenceNotAutomatic :
   Nongin.carryAllDepthCoherenceAutomatic boundary ≡ false
 carryAllDepthCoherenceNotAutomatic = refl
 
-transportEnrichedGroupoidPresheafStillFalse :
-  Nongin.transportEnrichedGroupoidPresheafPaid boundary ≡ false
-transportEnrichedGroupoidPresheafStillFalse = refl
+transportEnrichedGroupoidPresheafPaid :
+  Nongin.transportEnrichedGroupoidPresheafPaid boundary ≡ true
+transportEnrichedGroupoidPresheafPaid = refl
 
 empiricalTenPercentLawStillFalse :
   Nongin.empiricalTenPercentLawPromoted boundary ≡ false
@@ -114,8 +114,9 @@ fullBoundaryNerveStillFalse :
   Nongin.fullBoundaryNerveEquivalencePaid boundary ≡ false
 fullBoundaryNerveStillFalse = refl
 
-higherStackStillOpen : Nongin.certifiedHigherStackPaid boundary ≡ false
-higherStackStillOpen = refl
+higherStackPaid : Nongin.certifiedHigherStackPaid boundary ≡ true
+higherStackPaid = refl
 
-hypersheafStillOpen : Nongin.certifiedHypersheafPaid boundary ≡ false
-hypersheafStillOpen = refl
+hypersheafStillAtHypercoverFrontier :
+  Nongin.certifiedHypersheafPaid boundary ≡ false
+hypersheafStillAtHypercoverFrontier = refl
