@@ -4,27 +4,28 @@ module DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoun
 -- TERMINAL FORMAL CLASSIFICATION INTERFACE FOR THE ACTUAL RATIONAL ALBERT
 -- ALGEBRA
 --
--- All discovery-specific hypotheses are now represented on concrete in-repo
--- objects or exact executable certificates:
+-- The local algebra/root-data lane owns the literal H_3(O_Q) Jordan algebra,
+-- cubic norm, arbitrary inner derivations, exact dimension-52 derivation span,
+-- triality decomposition, Q(i) 4+48 root spaces, full root grading and split-F4
+-- root-datum recognition.
 --
--- * exact rational alternative composition octonions;
--- * literal H_3(O_Q) Jordan algebra with unit, product, cubic norm and Jordan
---   identity;
--- * generic inner-derivation theorem for arbitrary Albert elements;
--- * exact executable 52-dimensional derivation span;
--- * exact 28+8_v+8_s+8_c triality bracket decomposition;
--- * exact Q(i) root-space decomposition 4 + 48 with one-dimensional roots;
--- * exact Q(i) root-grading bracket law on all C(48,2)=1128 root pairs;
--- * exact split-root-datum recognition as the standard F4 root set;
--- * independent standard F4 root/Coxeter datum on companion Lean;
--- * actual same-carrier linear Jordan automorphism type with explicit elements.
+-- Companion Lean #52 further source-writes, on this literal rational Albert
+-- carrier, cubic/adjoint recovery, nondegenerate trace pairing and norm+unit
+-- rigidity: a Q-linear bijection preserving the same cubic norm and unit is a
+-- Jordan automorphism.  Agda records that development only as a cross-prover
+-- receipt; no Lean proof authority is silently transferred here.
 --
--- This closes the LOCAL Lie/root-data recognition after the splitting-field
--- extension: Der(J) over Q(i) carries the split F4 root datum by exact producer.
--- What remains is the stronger FORM/GROUP classification theorem: identify the
--- original Q-form and the full algebraic groups Aut(J), cubic symmetry E6, and
--- the F4 unit stabilizer.  That characteristic-zero classification is located
--- in classical sources but is not formalized generally in this repo.
+-- Consequently the *mathematical structure* of
+--
+--   Stab_{Isom(N)}(1) = Aut(J)
+--
+-- is no longer a separate discovery problem: norm+unit rigidity reduces it.
+-- The remaining terminal theorem is genuinely Q-form/algebraic-group
+-- classification: Der(J) is the appropriate F4 form, Aut(J) is type F4 and the
+-- full cubic norm-isometry group is type E6.  An Agda instantiation still needs
+-- proof authority for every consumed classification statement, including the
+-- unit-stabilizer consequence until the local rigidity theorem is replayed or
+-- transported in-kernel.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -39,6 +40,7 @@ import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact as
 import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact as SplitF4
 import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact as Linear
 import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact as Sources
+import DASHI.Reasoning.AlbertF4LeanCubicNormRigidityReceiptExact as Rigidity
 
 record ConcreteClassificationHypotheses : Set where
   constructor concrete-classification-hypotheses
@@ -72,7 +74,7 @@ canonicalConcreteClassificationHypotheses =
     true
 
 ------------------------------------------------------------------------
--- One imported theorem premise is enough to finish the Q-form/group layer.
+-- Proof-relevant imported theorem/application interface.
 ------------------------------------------------------------------------
 
 record CharacteristicZeroAlbertClassificationTheorem : Set₁ where
@@ -102,6 +104,9 @@ record Boundary : Set where
     splitQIRootDatumTypeF4Recognized : Bool
     literatureClassificationSourceLocated : Bool
     remainingClassificationIsQFormAndGroupLevel : Bool
+    normUnitRigiditySourceWrittenCrossKernel : Bool
+    unitStabilizerJordanEqualityStructurallyReduced : Bool
+    normUnitRigidityAgdaAuthorityPaid : Bool
     generalClassificationTheoremFormalizedInRepo : Bool
     actualQFormGroupInstantiationInhabited : Bool
 open Boundary public
@@ -115,9 +120,12 @@ canonicalBoundary =
     SplitF4.canonicalBoundary.splitLieRootDatumTypeF4Recognized
     Sources.canonicalClassicalExceptionalSourceReceipt.peterssonDerivationTheoremLocated
     true
+    Rigidity.canonicalBoundary.normUnitRigiditySourceWritten
+    Rigidity.canonicalBoundary.unitStabilizerJordanEqualityStructurallyReduced
+    Rigidity.canonicalBoundary.crossKernelProofAuthorityTransferred
     false
     false
 
 classificationSourceNote : String
 classificationSourceNote =
-  "Chevalley-Schafer / Petersson / Springer-Veldkamp: the characteristic-zero Albert derivation algebra is a form of F4; Aut(Albert) is type F4; cubic determinant symmetry is type E6."
+  "Chevalley-Schafer / Petersson / Springer-Veldkamp provide characteristic-zero Albert/F4/E6 classification provenance. Companion Lean locally reduces unit-fixing cubic symmetry to Jordan automorphism on the native rational carrier, but that source-written proof is not Agda theorem authority. The still-unpaid formal endpoint is original-Q-form/full algebraic-group classification and its proof-relevant instantiation on this same object."
