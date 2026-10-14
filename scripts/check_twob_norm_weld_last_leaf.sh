@@ -4,16 +4,22 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-target=DASHI/Moonshine/OggSSP2BNormWeldLastLeafExact.agda
-test -f "$target"
+leaf=DASHI/Moonshine/OggSSP2BNormWeldLastLeafExact.agda
+frontier=DASHI/Moonshine/OggSSP2BPostSocleMaxCutExact.agda
+for target in "$leaf" "$frontier"; do test -f "$target"; done
 
-grep -q 'targetSocleFrobeniusRuntimePaid' "$target"
-grep -q 'blockProjectorExistenceSourced' "$target"
-grep -q 'blockNaturalityIsCompilerConsequence' "$target"
-grep -q 'normEquivarianceIsCompilerConsequence' "$target"
-grep -q 'actualCentralizerActionInstantiationPaid' "$target"
-grep -q 'actualResidualBlockActionInstantiationPaid' "$target"
-grep -q 'actualTateExteriorSquareWeldPaid' "$target"
-grep -q 'remainingSameObjectLeafCountIsOne' "$target"
+grep -q 'targetSocleFrobeniusRuntimePaid' "$leaf"
+grep -q 'blockProjectorExistenceSourced' "$leaf"
+grep -q 'blockNaturalityIsCompilerConsequence' "$leaf"
+grep -q 'normEquivarianceIsCompilerConsequence' "$leaf"
+grep -q 'actualCentralizerActionInstantiationPaid' "$leaf"
+grep -q 'actualResidualBlockActionInstantiationPaid' "$leaf"
+grep -q 'actualTateExteriorSquareWeldPaid' "$leaf"
+grep -q 'remainingSameObjectLeafCountIsOne' "$leaf"
 
-scripts/run_agda29_parallel_check.sh "$target"
+grep -q 'remainingNormWeldSameObjectLeavesIsOne' "$frontier"
+grep -q 'remainingDefectSourceBitsIsTwo' "$frontier"
+grep -q 'actualCentralizerBlockActionStillOpen' "$frontier"
+grep -q 'actualTateExteriorSquareWeldStillOpen' "$frontier"
+
+scripts/run_agda29_parallel_check.sh "$leaf" "$frontier"
