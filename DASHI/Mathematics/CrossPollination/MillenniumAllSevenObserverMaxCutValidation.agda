@@ -1,11 +1,14 @@
 module DASHI.Mathematics.CrossPollination.MillenniumAllSevenObserverMaxCutValidation where
 
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as ECarrier
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as Gate
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientExact as E
 import DASHI.Mathematics.CrossPollination.EisensteinObserverRecoverableQuotientValidation
+import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptExact as LeanReceipt
+import DASHI.Mathematics.CrossPollination.EisensteinLeanUniversalRepresentationReceiptValidation
 import DASHI.Physics.ThreeBody.EisensteinC3FourierExact as ThreeBody
 import DASHI.Physics.ThreeBody.EisensteinC3FourierValidation
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as Cubic
@@ -50,3 +53,19 @@ threeBodyEdgeIsExactOmegaEigenAction =
 jZeroCubicEdgeHasOrderThreeAction :
   (B : ECarrier.Eisenstein) → Cubic.EisensteinCubicC3Action B
 jZeroCubicEdgeHasOrderThreeAction = Gate.eisensteinCubicActionAvailable
+
+leanUniversalCoefficientDonorRecorded :
+  LeanReceipt.leanUniversalCoefficientSourceObserved ≡ true
+leanUniversalCoefficientDonorRecorded = refl
+
+leanAnalyticDonorRecorded :
+  LeanReceipt.leanDirichletSeriesSourceObserved ≡ true
+leanAnalyticDonorRecorded = refl
+
+crossProverReceiptDoesNotImportLeanKernelAuthority :
+  LeanReceipt.leanProofObjectImportedIntoAgda ≡ false
+crossProverReceiptDoesNotImportLeanKernelAuthority = refl
+
+crossProverReceiptDoesNotManufactureAgdaUniversalFormula :
+  LeanReceipt.agdaUniversalCoefficientTheoremInhabitedFromReceipt ≡ false
+crossProverReceiptDoesNotManufactureAgdaUniversalFormula = refl
