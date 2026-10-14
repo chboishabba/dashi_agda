@@ -18,6 +18,11 @@ import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
 -- The Nat cost/gain values below are DASHI scheduling values only.  They are
 -- not money, person-hours, probabilities, evidence strength, effect sizes, or
 -- source-author claims.
+--
+-- This calibration was recomputed after acquiring the official current Porto
+-- Alegre three-hour COP meeting observation.  That acquisition narrows the
+-- comparator-duration gap but leaves attendance, interface capacity, delegate /
+-- representative reportback burden and richer Mondragon workload unresolved.
 ------------------------------------------------------------------------
 
 data AcquisitionRequirement : Set where
@@ -41,8 +46,8 @@ comparatorWorkloadCell =
   Pareto.requirement-candidate
     enrichComparatorInterfaceWorkload
     true true true true
-    3 8
-    "acquire richer Porto Alegre / Mondragon boundary, reportback, capacity and workload observations with institutional-version provenance"
+    3 7
+    "after paying one current Porto three-hour meeting observation, acquire remaining Porto/Mondragon attendance, boundary, reportback, capacity and workload observations with institutional-version provenance"
 
 secondaryExpansionCell : Pareto.RequirementCandidate AcquisitionRequirement
 secondaryExpansionCell =
