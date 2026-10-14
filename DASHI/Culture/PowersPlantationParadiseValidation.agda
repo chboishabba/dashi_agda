@@ -14,6 +14,7 @@ import DASHI.Culture.PowersPlantationParadiseGovernedCrossPollinationExact as Cr
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 import DASHI.Culture.PowersPlantationParadiseEmpiricalAcquisitionParetoExact as EmpiricalPareto
 import DASHI.Culture.PowersPlantationParadiseMinetteMicrohistoryExact as Minette
+import DASHI.Culture.PowersPlantationParadiseMinetteChronologyContestationExact as MinetteChronology
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 ------------------------------------------------------------------------
@@ -110,6 +111,11 @@ _secondary-date-disagreement-needs-primary-paid :
   Minette.SecondaryDateDisagreementResolvedWithoutPrimaryInspection → ⊥
 _secondary-date-disagreement-needs-primary-paid =
   Minette.secondaryDateDisagreementNeedsPrimaryInspection
+
+_minette-date-contestation-paid :
+  MinetteChronology.minette1790NoticeContestationRelation
+  ≡ MinetteChronology.minette1790NoticeContestationRelation
+_minette-date-contestation-paid = refl
 
 _rooted-trace-paid :
   Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
