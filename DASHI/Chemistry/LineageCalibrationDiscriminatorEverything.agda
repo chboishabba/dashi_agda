@@ -20,6 +20,7 @@ import DASHI.Chemistry.LineageSourceManifestationGuardExact
 -- broader generic unpaid cells.
 import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact
+import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact
 
 -- Numeric calibration is fail-closed: locator, units, context, method and
 -- uncertainty are independent obligations; an unpaid coordinate is not zero.
