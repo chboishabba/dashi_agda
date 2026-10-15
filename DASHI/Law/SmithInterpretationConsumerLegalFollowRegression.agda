@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Law.SmithInterpretationConsumerLegalFollowExact as S
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as INV
 import DASHI.Law.SensibLawLegalFollowProofSearchBridgeExact as LegalFollow
 import DASHI.Reasoning.JusticeLeeSensibLawAdversarialProofGraphBidiExact as Lee
@@ -42,7 +43,7 @@ regressionSimpleStrictlyDominatesElaborate =
 ------------------------------------------------------------------------
 
 regressionCoarseLabelCannotRecoverOperativeDecision :
-  S.NF.FactorsThrough S.coarseARTProjection S.operativeARTDecision → ⊥
+  NF.FactorsThrough S.coarseARTProjection S.operativeARTDecision → ⊥
 regressionCoarseLabelCannotRecoverOperativeDecision =
   S.coarseARTLabelCannotRecoverOperativeDecision
 
