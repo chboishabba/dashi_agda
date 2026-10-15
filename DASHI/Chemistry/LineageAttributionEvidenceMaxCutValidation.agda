@@ -9,10 +9,16 @@ import DASHI.Chemistry.LineageAttributionEvidencePaymentExact as Payment
 import DASHI.Chemistry.AttributedGoldReactionReplayExact as Replay
 import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact as Calibration
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Pareto
+import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact as AcquiredSources
+import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
 
 sourceAtlasDoesNotCreateAuthority :
   Sources.atlasCreatesAuthority Sources.canonicalLineageCalibrationSourceAtlas ≡ false
 sourceAtlasDoesNotCreateAuthority = refl
+
+acquiredSourceAtlasDoesNotCreateAuthority :
+  AcquiredSources.atlasCreatesAuthority AcquiredSources.canonicalAcquiredPrimarySourceAtlas ≡ false
+acquiredSourceAtlasDoesNotCreateAuthority = refl
 
 externalAndDASHISynthesisRemainDistinct :
   Payment.externalResultEqualsDASHISynthesis Payment.canonicalLineageAttributionBoundary ≡ false
@@ -44,6 +50,30 @@ numericPromotionNeedsExactLocatorAndContext = refl , refl
 unpaidNumericCellsAreNotZeroes :
   Calibration.unpaidCoordinateInterpretedAsZero Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
 unpaidNumericCellsAreNotZeroes = refl
+
+partialAcquiredAtomMapStaysPartial :
+  Acquired.partialAtomMapPromotedToCompleteAtomMap Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+partialAcquiredAtomMapStaysPartial = refl
+
+inVitroKineticsDoNotBecomeInVivoFlux :
+  Acquired.inVitroKineticsPromotedToInVivoFlux Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+inVitroKineticsDoNotBecomeInVivoFlux = refl
+
+pbCaTargetPaymentDoesNotBecomeUniversal :
+  Acquired.oneTargetPbCaResultPromotedToUniversalSubstitution Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+pbCaTargetPaymentDoesNotBecomeUniversal = refl
+
+siliconBiocatalysisDoesNotProveSiliconLife :
+  Acquired.biologicalCSiBondFormationProvesSiliconLifeViability Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+siliconBiocatalysisDoesNotProveSiliconLife = refl
+
+publicArtifactLinkIsNotAuthenticatedContent :
+  Acquired.publicArtifactLinkCountsAsAuthenticatedContents Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+publicArtifactLinkIsNotAuthenticatedContent = refl
+
+acquiredEvidenceDoesNotCreatePriority :
+  Acquired.acquiredPaymentCreatesPriority Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+acquiredEvidenceDoesNotCreatePriority = refl
 
 paretoAcquisitionIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
