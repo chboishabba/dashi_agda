@@ -11,11 +11,6 @@ import DASHI.Chemistry.LineageAttributionAcquisitionParetoExact as Pareto
 
 ------------------------------------------------------------------------
 -- CONTACT/EXPOSURE PROVENANCE EXTENSION OVER THE CANONICAL SCIENTIFIC PARETO
---
--- The existing Pareto owner remains authoritative for scientific/calibration
--- acquisition. This module adds only the genuinely orthogonal Kitzerow
--- contact/exposure provenance queue and keeps it separate from scientific
--- support, derivation and plagiarism/legal conclusions.
 ------------------------------------------------------------------------
 
 data ProvenanceAcquisitionKind : Set where
@@ -119,6 +114,8 @@ record UnifiedLineageAttributionAcquisitionFrontier : Set where
     frontierRankIsTruthRankIsFalse : frontierRankIsTruthRank ≡ false
     unpaidCoordinateRetainsAttribution : Bool
     unpaidCoordinateRetainsAttributionIsTrue : unpaidCoordinateRetainsAttribution ≡ true
+    acquisitionCreatesAuthority : Bool
+    acquisitionCreatesAuthorityIsFalse : acquisitionCreatesAuthority ≡ false
 
 open UnifiedLineageAttributionAcquisitionFrontier public
 
@@ -134,3 +131,4 @@ canonicalLineageAttributionAcquisitionFrontier =
     false refl
     false refl
     true refl
+    false refl
