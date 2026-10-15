@@ -19,9 +19,9 @@ import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Legibility
 --   adoption -> later migration/exit difficulty evidence -> large umbrella BPA
 --   with concrete component calls.
 --
--- Persistence/installed base is not automatically unlawful lock-in, abuse,
--- monopoly, policy authorship or subject-level asymmetry.  Those remain
--- deployment-specific propositions.
+-- It also retains counterevidence: interoperability initiatives and examples of
+-- contested/blocked procurement. Persistence therefore remains an empirical,
+-- deployment-specific question rather than a universal lock-in theorem.
 ------------------------------------------------------------------------
 
 data PersistenceSurface : Set where
@@ -32,6 +32,8 @@ data PersistenceSurface : Set where
   componentTaskOrder : PersistenceSurface
   limitedSourceCall : PersistenceSurface
   userAuditControlDevelopment : PersistenceSurface
+  interoperabilityInitiative : PersistenceSurface
+  contestedProcurement : PersistenceSurface
 
 record PersistenceReceipt : Set where
   constructor persistence-receipt
@@ -51,7 +53,7 @@ earlyCIAFeedback = persistence-receipt
   "2000s"
   "Wired, 'Palantir Technologies spots patterns to solve crimes and track terrorists' (2012)"
   userFeedbackDevelopment
-  "Wired reports In-Q-Tel investment gave Palantir access to frontline intelligence analysts; Karp estimated more than 300 meetings with likely users, with repeated product changes based on analyst feedback before and during early government adoption. This pays iterative customer-product adaptation, not TIA succession or government ownership of the product."
+  "Wired reports In-Q-Tel investment gave Palantir access to frontline intelligence analysts; Karp estimated more than 300 meetings with likely users, with repeated product changes based on feedback before and during early government adoption. This pays iterative customer-product adaptation, not TIA succession or government ownership of the product."
   true false
 
 earlyAgencyPropagation : PersistenceReceipt
@@ -108,6 +110,24 @@ iceAuditControls2026 = persistence-receipt
   "Reporting describes Palantir building customer-facing user auditing/session-log controls for ICE/DHS-related deployments amid internal concern. This pays a capability/oversight response surface; it does not prove that affected subjects receive notice, access, correction or appeal rights."
   true false
 
+armyRightToIntegrate2026 : PersistenceReceipt
+armyRightToIntegrate2026 = persistence-receipt
+  "Army Right to Integrate interoperability sprint"
+  "2026-05-06"
+  "Palantir first-party press release: Palantir Joins U.S. Army and Industry Partners for 'Right to Integrate' Hackathon Sprint"
+  interoperabilityInitiative
+  "Palantir publicly describes participation with the U.S. Army and industry partners in a Right to Integrate effort aimed at defense-wide interoperability. This is counterevidence against assuming the vendor's objective or every deployment is closed-system dependence. It does not independently prove practical data/configuration portability, low switching cost or compliance with specific exit clauses."
+  true false
+
+londonPoliceBlockedContract2026 : PersistenceReceipt
+londonPoliceBlockedContract2026 = persistence-receipt
+  "London police Palantir procurement blocked/challenged"
+  "2026-10-14"
+  "Reuters reporting on Palantir/MOPAC settlement over proposed Metropolitan Police contract"
+  contestedProcurement
+  "Reuters reports that a proposed roughly GBP50m Metropolitan Police Palantir contract was blocked by London's mayoral policing office, litigated and later settled with both sides withdrawing allegations. This pays a concrete example that procurement can be contested/blocked; it neither proves the procurement process was substantively optimal nor negates switching costs in already-installed systems."
+  true false
+
 record PersistenceBoundary : Set where
   constructor persistence-boundary
   field
@@ -116,21 +136,25 @@ record PersistenceBoundary : Set where
     historicalMigrationDifficultyPaid : Bool
     dhsUmbrellaVehiclePaid : Bool
     multipleComponentCallsPaid : Bool
+    interoperabilityCounterevidencePaid : Bool
+    contestedProcurementCounterexamplePaid : Bool
     allDeploymentsLockedIn : Bool
     lockInUnlawful : Bool
     procurementVehicleEqualsPolicyAuthorship : Bool
     userAuditLogsEqualSubjectContestability : Bool
     commonBPAEqualsCommonOperationalPurpose : Bool
+    interoperabilityClaimImpliesEasyMigration : Bool
 open PersistenceBoundary public
 
 canonicalPersistenceBoundary : PersistenceBoundary
 canonicalPersistenceBoundary = persistence-boundary
-  true true true true true false false false false false
+  true true true true true true true false false false false false false
 
 data RepeatedAdoptionImpliesUniversalLockIn : Set where
 data UmbrellaVehicleImpliesPolicyAuthorship : Set where
 data AuditLogsImpliesSubjectRemedy : Set where
 data SameBPAImpliesSameOperationalPurpose : Set where
+data InteroperabilityInitiativeImpliesEasyExit : Set where
 
 repeatedAdoptionDoesNotCreateUniversalLockIn : RepeatedAdoptionImpliesUniversalLockIn → ⊥
 repeatedAdoptionDoesNotCreateUniversalLockIn ()
@@ -143,6 +167,9 @@ auditLogsDoNotCreateSubjectRemedy ()
 
 sameBPADoesNotCreateOperationalPurpose : SameBPAImpliesSameOperationalPurpose → ⊥
 sameBPADoesNotCreateOperationalPurpose ()
+
+interoperabilityInitiativeDoesNotCreateEasyExit : InteroperabilityInitiativeImpliesEasyExit → ⊥
+interoperabilityInitiativeDoesNotCreateEasyExit ()
 
 ------------------------------------------------------------------------
 -- Persistence/lock-in is now quantifiable rather than purely conceptual.
@@ -175,9 +202,9 @@ canonicalPersistenceAcquisition =
   persistence-acquisition schemaConfigurationOwnership 100
     "Resolve who owns deployment ontologies, schemas, configurations, derived models and integration code on concrete ICE/CISA/Maven systems." ∷
   persistence-acquisition exportMigrationRights 100
-    "Acquire export formats, migration/transition services and contractual data/configuration portability rights; legal portability and practical migration cost are distinct." ∷
+    "Acquire export formats, migration/transition services and contractual data/configuration portability rights; legal portability and practical migration cost are distinct, and Right-to-Integrate participation does not settle either." ∷
   persistence-acquisition actualMigrationAttempts 99
-    "Find attempted replacements, terminated deployments or migration projects and measure time, cost, data loss and operational disruption as direct exit-cost evidence." ∷
+    "Find attempted replacements, terminated deployments or migration projects and measure time, cost, data loss and operational disruption as direct exit-cost evidence; include successful migration counterexamples rather than sampling only failures." ∷
   persistence-acquisition limitedSourceJustificationReasoning 99
     "Read the full DHS limited-sources justification and component-call competition records to identify the stated technical/continuity reasons for Palantir specificity rather than inferring motive from the procurement code." ∷
   persistence-acquisition componentRevenueAndBacklog 98
