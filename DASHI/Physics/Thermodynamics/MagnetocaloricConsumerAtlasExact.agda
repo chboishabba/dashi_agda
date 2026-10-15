@@ -9,6 +9,7 @@ import DASHI.Physics.CondensedMatter.MagnetocaloricCrystalQuantumConsumerExact a
 import DASHI.Physics.Chemistry.MagnetocaloricAtomicChemistryConsumerExact as Chem
 import DASHI.Physics.Quantum.MagnetocaloricQuantumStatMechConsumerExact as Quantum
 import DASHI.Physics.Thermodynamics.MagnetocaloricContinuumConsumerExact as Fluid
+import DASHI.Physics.Thermodynamics.MagnetocaloricMagnetostructuralConsumerExact as Mech
 
 ------------------------------------------------------------------------
 -- Reachability/status atlas for the magnetocaloric vertical slice.
@@ -19,6 +20,11 @@ data ReuseRole : Set where
   structuralPrecedentOnly : ReuseRole
   explicitlyNotAConsumer : ReuseRole
 
+data ConsumerDecision : Set where
+  populated : ConsumerDecision
+  coveredByExistingOwner : ConsumerDecision
+  rejectedAsUnsoundCoupling : ConsumerDecision
+
 record MagnetocaloricConsumerAtlas : Set where
   constructor magnetocaloric-consumer-atlas
   field
@@ -28,16 +34,25 @@ record MagnetocaloricConsumerAtlas : Set where
     atomicChemistryPopulated : Bool
     quantumStatMechPopulated : Bool
     continuumTransportPopulated : Bool
+    magnetostructuralPopulated : Bool
+    protectionChemistryPopulated : Bool
 
     navierStokesRole : ReuseRole
     yangMillsRole : ReuseRole
 
+    rotationalWorkDecision : ConsumerDecision
+    heatExchangerDecision : ConsumerDecision
+    genericControllerDecision : ConsumerDecision
+
 canonicalMagnetocaloricConsumerAtlas : MagnetocaloricConsumerAtlas
 canonicalMagnetocaloricConsumerAtlas =
   magnetocaloric-consumer-atlas
-    true true true true true true
+    true true true true true true true true
     structuralPrecedentOnly
     structuralPrecedentOnly
+    coveredByExistingOwner
+    coveredByExistingOwner
+    rejectedAsUnsoundCoupling
 
 record MagnetocaloricCrossDomainPromotionBoundary : Set where
   constructor magnetocaloric-cross-domain-promotion-boundary
@@ -46,15 +61,18 @@ record MagnetocaloricCrossDomainPromotionBoundary : Set where
     u1FieldSocketIsNotMaterialLaw : Bool
     crystalSymmetryIsNotCaloricMagnitude : Bool
     atomicStructureIsNotBulkResponse : Bool
+    protectionChemistryDoesNotProveLifetime : Bool
     quantumHamiltonianIsNotBulkThermodynamics : Bool
     continuumInterfaceIsNotClayRegularity : Bool
+    elasticityDoesNotSupplyMagnetostriction : Bool
     nonAbelianYMIsNotApplicationMagnetism : Bool
+    biologyControlCoreIsNotImportedAsEngineeringController : Bool
 
 canonicalMagnetocaloricCrossDomainPromotionBoundary :
   MagnetocaloricCrossDomainPromotionBoundary
 canonicalMagnetocaloricCrossDomainPromotionBoundary =
   magnetocaloric-cross-domain-promotion-boundary
-    true true true true true true true
+    true true true true true true true true true true
 
 navierStokesIsStructuralOnly :
   MagnetocaloricConsumerAtlas.navierStokesRole canonicalMagnetocaloricConsumerAtlas
