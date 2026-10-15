@@ -9,30 +9,25 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Chemistry.GoldReactionReplaySuiteExact as Gold
+import DASHI.Chemistry.LineageAttributionEvidenceSourceAtlasExact as Atlas
 import DASHI.Biology.KitzerowBH4ReactionSourceAtlasExact as BH4Sources
 import DASHI.Biology.IonicMimicrySourceAtlasExact as IonicSources
 
 ------------------------------------------------------------------------
 -- ATTRIBUTION ENVELOPES FOR LINEAGE / CALIBRATION REPLAYS
 --
--- External sources own the empirical/source facts explicitly attributed to
--- them. DASHI owns the cross-source composition, lineage hyperfabric,
--- discriminator synthesis, formal non-promotion boundaries and any theorem
--- proved by those constructions. Citation never transfers ownership of DASHI
--- synthesis to the cited source, nor imports proof or numeric calibration.
+-- Canonical source identities are reused from the cross-tranche source atlas
+-- whenever they already exist. New rows are added only for genuinely missing
+-- source objects. External sources own their source-bounded observations;
+-- DASHI owns the cross-source composition, lineage hyperfabric, discriminator
+-- synthesis and formal non-promotion theorems.
 ------------------------------------------------------------------------
 
-chlorAlkaliEuroChlor2022 : Source.AttributedSource
-chlorAlkaliEuroChlor2022 =
-  Source.mkNoDOISource
-    "Euro Chlor / Cefic"
-    "Eco-profile and Environmental Product Declaration: Chlorine (The Chlor-Alkali Process)"
-    "Euro Chlor eco-profile"
-    "2022"
-    "https://www.eurochlor.org/wp-content/uploads/2022/09/Eco_profile-study-update-September-2022.pdf"
-    Source.institutionalSource
-    "source for standard industrial chlor-alkali process and electrode-reaction context; does not pay DASHI atom lineage, microkinetics or interfacial electron density"
-    Source.publicAttribution
+chlorAlkaliTechnicalSource : Source.AttributedSource
+chlorAlkaliTechnicalSource = Atlas.chlorAlkaliBREF2014
+
+astrobiologyPrimerSource : Source.AttributedSource
+astrobiologyPrimerSource = Atlas.astrobiologyPrimer2016
 
 dhprBrenda2026 : Source.AttributedSource
 dhprBrenda2026 =
@@ -44,19 +39,6 @@ dhprBrenda2026 =
     "https://www.brenda-enzymes.org/enzyme.php?ecno=1.5.1.34"
     Source.institutionalSource
     "reaction-identity source for DHPR-mediated pterin reduction; does not pay assay-specific kinetics, flux allocation or autism causation"
-    Source.publicAttribution
-
-astrobiologyPrimer2016 : Source.AttributedSource
-astrobiologyPrimer2016 =
-  Source.mkDOISource
-    "Shawn D. Domagal-Goldman; Katherine E. Wright; et al."
-    "The Astrobiology Primer v2.0"
-    "Astrobiology 16(8):561-653"
-    "2016"
-    "10.1089/ast.2015.1460"
-    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5008114/"
-    Source.academicArticleSource
-    "broad source for carbon-rich terrestrial biochemistry and staged prebiotic-chemistry context; does not prove carbon uniqueness, abiogenesis or DASHI reachable-chemistry constructions"
     Source.publicAttribution
 
 pahMechanismSource : Source.AttributedSource
@@ -94,14 +76,14 @@ chlorEnvelope : ReplayAttributionEnvelope
 chlorEnvelope =
   replayAttributionEnvelope
     Gold.chlorAlkaliReplay
-    chlorAlkaliEuroChlor2022
-    (Snowball.canonicalSourceRoleSnowballReceipt chlorAlkaliEuroChlor2022)
-    "process description / electrode-reaction section"
-    "standard chloride electrolysis and co-product process context"
+    chlorAlkaliTechnicalSource
+    (Snowball.canonicalSourceRoleSnowballReceipt chlorAlkaliTechnicalSource)
+    "JRC91156 / EUR 26844 EN chlor-alkali process description; exact equation/page locator separately payable"
+    "standard brine electrolysis and chlor-alkali process context"
     "DASHI composes existing transition owners with typed lineage/electron/bond audit"
     mixedPaidUnpaid
     "exact plant conditions, potentials, current density, microkinetics and interfacial structure"
-    "public Euro Chlor report; exact page/figure locator remains acquisition coordinate where needed"
+    "canonical attributed JRC/BREF source object reused; exact numeric manifestation remains acquisition coordinate"
     false refl false refl
 
 pahEnvelope : ReplayAttributionEnvelope
@@ -150,14 +132,14 @@ carbonEnvelope : ReplayAttributionEnvelope
 carbonEnvelope =
   replayAttributionEnvelope
     Gold.carbonBondReplay
-    astrobiologyPrimer2016
-    (Snowball.canonicalSourceRoleSnowballReceipt astrobiologyPrimer2016)
+    astrobiologyPrimerSource
+    (Snowball.canonicalSourceRoleSnowballReceipt astrobiologyPrimerSource)
     "prebiotic chemistry stages / carbon-rich terrestrial biochemistry context"
     "broad environmental and prebiotic context"
     "DASHI owns carbon-vs-alternative reachable-chemistry benchmark and BIDI discriminator"
     sourceIdentityOnly
     "specific reaction identity, atom map, yield, kinetics, competing products and matched silicon comparison"
-    "PMCID/DOI article manifestation identified; no specific reaction is promoted from the overview"
+    "canonical attributed Astrobiology Primer source reused; no specific reaction is promoted from the overview"
     false refl false refl
 
 canonicalReplayAttributionEnvelopes : List ReplayAttributionEnvelope
@@ -167,6 +149,9 @@ canonicalReplayAttributionEnvelopes =
 record LineageCalibrationAttributionBoundary : Set where
   constructor lineageCalibrationAttributionBoundary
   field
+    canonicalSourceAtlasReusedWhereAvailable : Bool
+    canonicalSourceAtlasReusedWhereAvailableIsTrue :
+      canonicalSourceAtlasReusedWhereAvailable ≡ true
     everyReplayCarriesAttributedSource : Bool
     everyReplayCarriesAttributedSourceIsTrue : everyReplayCarriesAttributedSource ≡ true
     sourceRoleSnowballs : Bool
@@ -187,4 +172,4 @@ open LineageCalibrationAttributionBoundary public
 canonicalLineageCalibrationAttributionBoundary : LineageCalibrationAttributionBoundary
 canonicalLineageCalibrationAttributionBoundary =
   lineageCalibrationAttributionBoundary
-    true refl true refl true refl false refl false refl false refl false refl
+    true refl true refl true refl true refl false refl false refl false refl false refl
