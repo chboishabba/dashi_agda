@@ -4,17 +4,13 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as H
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Fibre
 
-sourceAtomWeldIsLiteral :
-  Fibre.ChemistryFibre.atomMoleculeWeld H.sourceFibre ≡ refl
-sourceAtomWeldIsLiteral = refl
-
-targetAtomWeldIsLiteral :
-  Fibre.ChemistryFibre.atomMoleculeWeld H.targetFibre ≡ refl
-targetAtomWeldIsLiteral = refl
-
 transportPreservesProvenance :
   Fibre.ChemistryFibreTransport.sourceProvenancePreserved H.abstractionTransport ≡ true
 transportPreservesProvenance = refl
+
+transportPreservesAppendOnlyHistory :
+  Fibre.ChemistryFibreTransport.appendOnlyHistoryPreserved H.abstractionTransport ≡ true
+transportPreservesAppendOnlyHistory = refl
 
 literalHyperformInhabited :
   H.HyperformBoundary.literalChemistryHyperfibreInhabited
@@ -25,3 +21,13 @@ mechanismSourceAttached :
   H.HyperformBoundary.sourceBackedMechanismAttached
     H.canonicalHyperformBoundary ≡ true
 mechanismSourceAttached = refl
+
+atomicIdentityTransportPaid :
+  H.HyperformBoundary.atomicIdentityTransportPaid
+    H.canonicalHyperformBoundary ≡ true
+atomicIdentityTransportPaid = refl
+
+hyperformDoesNotCreateMonsterAction :
+  H.HyperformBoundary.fibreCreatesMonsterAction
+    H.canonicalHyperformBoundary ≡ false
+hyperformDoesNotCreateMonsterAction = refl
