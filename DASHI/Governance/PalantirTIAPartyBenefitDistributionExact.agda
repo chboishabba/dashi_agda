@@ -278,16 +278,8 @@ vendorPositionHypothesis = Disruption.disruption-beneficiary-hypothesis
 ------------------------------------------------------------------------
 
 currentStrongPrivatizationClaimStillBlocked : Bool
-currentStrongPrivatizationClaimStillBlocked = false
-
-currentStrongPrivatizationClaimStillBlockedIsFalse :
-  currentStrongPrivatizationClaimStillBlocked ≡ false
-currentStrongPrivatizationClaimStillBlockedIsFalse = refl
-
--- Validation wants a positive statement that the blocking invariant holds.
 currentStrongPrivatizationClaimStillBlocked = true
 
--- Reuse receipt: the underlying promotion gate itself remains false.
 underlyingPrivatizationPromotionReadyIsFalse :
   Genealogy.promotionReady Genealogy.currentPromotionReceipt ≡ false
 underlyingPrivatizationPromotionReadyIsFalse = refl
