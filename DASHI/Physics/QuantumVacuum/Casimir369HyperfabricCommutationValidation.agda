@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.Casimir369HyperfabricCommutationValidation wh
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.Casimir369HyperfabricCommutationExact as Bridge
+import DASHI.Physics.QuantumVacuum.CasimirSO3StressContractionMaxCutExact as Stress
 import DASHI.Physics.QuantumVacuum.ParallelPlatePhysicalModeClassExact as Class
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as Hyper
 import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque
@@ -75,44 +76,44 @@ liftedOperatorContractionRegression output input polarity = refl
 
 plateDirectionRoundTripRegression :
   ∀ direction →
-  Bridge.axisToPlateDirection (Bridge.plateDirectionToAxis direction)
+  Stress.axisToPlateDirection (Stress.plateDirectionToAxis direction)
   ≡ direction
-plateDirectionRoundTripRegression = Bridge.plateDirectionAxisRoundTrip
+plateDirectionRoundTripRegression = Stress.plateDirectionAxisRoundTrip
 
 normalTractionRegression :
   ∀ {Value : Set} →
-  (stress : Bridge.SpatialStressSheet Value) →
+  (stress : Stress.SpatialStressSheet Value) →
   (output : Hyper.SU2Axis) →
-  Bridge.tractionAgainstPlateNormal stress output
-  ≡ stress (output , Bridge.plateNormalAxis)
+  Stress.tractionAgainstPlateNormal stress output
+  ≡ stress (output , Stress.plateNormalAxis)
 normalTractionRegression stress output = refl
 
 normalPressureRegression :
   ∀ {Value : Set} →
-  (stress : Bridge.SpatialStressSheet Value) →
-  Bridge.normalPressure stress
-  ≡ stress (Bridge.plateNormalAxis , Bridge.plateNormalAxis)
+  (stress : Stress.SpatialStressSheet Value) →
+  Stress.normalPressure stress
+  ≡ stress (Stress.plateNormalAxis , Stress.plateNormalAxis)
 normalPressureRegression stress = refl
 
 normalPressureViaTractionRegression :
   ∀ {Value : Set} →
-  (stress : Bridge.SpatialStressSheet Value) →
-  Bridge.normalPressure stress
-  ≡ Bridge.tractionAgainstPlateNormal stress Bridge.plateNormalAxis
-normalPressureViaTractionRegression = Bridge.normalPressureViaTraction
+  (stress : Stress.SpatialStressSheet Value) →
+  Stress.normalPressure stress
+  ≡ Stress.tractionAgainstPlateNormal stress Stress.plateNormalAxis
+normalPressureViaTractionRegression = Stress.normalPressureViaTraction
 
 stressTorqueOperatorCarrierRegression :
   ∀ output input →
-  Torque.torqueOperatorSlot (Bridge.stressSlotAsTorqueBracket output input)
+  Torque.torqueOperatorSlot (Stress.stressSlotAsTorqueBracket output input)
   ≡ (output , input)
 stressTorqueOperatorCarrierRegression output input = refl
 
 modeFamilySpatialAxisNonCollapseRegression :
-  Bridge.ModeFamilyAxisIsPhysicalSpatialAxisByDefinition → ⊥
+  Stress.ModeFamilyAxisIsPhysicalSpatialAxisByDefinition → ⊥
 modeFamilySpatialAxisNonCollapseRegression =
-  Bridge.modeFamilyAxisDoesNotBecomeSpatialAxisByDefinition
+  Stress.modeFamilyAxisDoesNotBecomeSpatialAxisByDefinition
 
 operatorCardinalityDoesNotCauseDerivativeRegression :
-  Bridge.OperatorSheetCardinalityAutomaticallyCausesCasimirDerivative → ⊥
+  Stress.OperatorSheetCardinalityAutomaticallyCausesCasimirDerivative → ⊥
 operatorCardinalityDoesNotCauseDerivativeRegression =
-  Bridge.operatorSheetCardinalityDoesNotCauseDerivative
+  Stress.operatorSheetCardinalityDoesNotCauseDerivative
