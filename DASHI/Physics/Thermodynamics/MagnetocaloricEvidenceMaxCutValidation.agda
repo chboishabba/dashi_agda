@@ -3,6 +3,10 @@ module DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutValidation where
 open import DASHI.Core.Prelude
 import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact as MaxCut
 
+sameStudyCompositionPaid :
+  MaxCut.PaymentRow.status MaxCut.sameStudyCompositionRow ≡ MaxCut.peerReviewedPaid
+sameStudyCompositionPaid = refl
+
 sixWeekAgingPaid :
   MaxCut.PaymentRow.status MaxCut.sixWeekAgingRow ≡ MaxCut.peerReviewedPaid
 sixWeekAgingPaid = refl
