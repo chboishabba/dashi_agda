@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.FieldGeometryMatterKernelValidation where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
@@ -11,6 +12,12 @@ import DASHI.Physics.Foundations.PhysicalResidualPromotionExact as Promotion
 
 intervalIsSameObject : Ledger.SameObjectInterval
 intervalIsSameObject = Ledger.canonicalSameObjectInterval
+
+sameObjectIdentityIsProved :
+  Ledger.startApparatusId Ledger.canonicalSameObjectInterval
+    ≡ Ledger.endApparatusId Ledger.canonicalSameObjectInterval
+sameObjectIdentityIsProved =
+  Ledger.sameApparatusIdentity Ledger.canonicalSameObjectInterval
 
 energyLedgerIsSeparate : Ledger.EnergyLedger
 energyLedgerIsSeparate = Ledger.canonicalEnergyLedger
@@ -23,6 +30,16 @@ entropyLedgerIsSeparate = Ledger.canonicalEntropyLedger
 
 chargeLedgerIsSeparate : Ledger.ChargeLedger
 chargeLedgerIsSeparate = Ledger.canonicalChargeLedger
+
+coarseResidualIsFour : Ledger.coarseFiniteResidual ≡ 4
+coarseResidualIsFour = Ledger.coarseFiniteResidualIsFour
+
+refinedResidualIsOne : Ledger.refinedFiniteResidual ≡ 1
+refinedResidualIsOne = Ledger.refinedFiniteResidualIsOne
+
+addingAdmittedChannelChangesResidual :
+  Ledger.coarseFiniteResidual ≡ Ledger.refinedFiniteResidual → ⊥
+addingAdmittedChannelChangesResidual = Ledger.finiteResidualRefinementDistinguishes
 
 coarseObserverMissesNuisance :
   Ledger.coarseObserved Ledger.thermalWorld
