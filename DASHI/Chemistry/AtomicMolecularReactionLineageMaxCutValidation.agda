@@ -13,6 +13,13 @@ import DASHI.Biology.LeadCalciumAtomicLineageRegressionExact as PbCa
 import DASHI.Biology.KitzerowBH4LineageRegressionExact as BH4
 import DASHI.Biology.PrebioticCarbonAtomicLineageRegressionExact as Carbon
 
+nativeHyperformWeldsAreExplicit :
+  Lineage.usesNativeCoarseFineHyperfabric
+    Lineage.canonicalAtomicMolecularReactionLineageBoundary ≡ true
+  × Lineage.usesNativeAdmissibleTransitionHyperfabric
+    Lineage.canonicalAtomicMolecularReactionLineageBoundary ≡ true
+nativeHyperformWeldsAreExplicit = refl , refl
+
 atomMappingIsTyped369Lineage :
   Lineage.everyAtomicCarrierUses369AtomicIndex
     Lineage.canonicalAtomicMolecularReactionLineageBoundary ≡ true
