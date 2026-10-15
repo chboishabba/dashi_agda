@@ -3,6 +3,7 @@ module DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact where
 open import DASHI.Core.Prelude
 import DASHI.Physics.Thermodynamics.MagnothermAttributedEvidenceExact as Evidence
 import DASHI.Physics.Thermodynamics.MagnetocaloricFamilyEvidenceExact as Family
+import DASHI.Physics.Thermodynamics.MagnothermPolarisEvidenceExact as Polaris
 
 ------------------------------------------------------------------------
 -- Terminal evidence-payment atlas for the current magnetocaloric max-cut.
@@ -82,6 +83,10 @@ agingTestOperatingPointRow =
     "load-free aging used media near Curie temperature (~288 K), 2 Hz magnetisation and a reported ~0.8 T field; this pays a bounded test condition, not a spatial/temporal field map, full AMR phase timing, loaded capacity or COP"
     "same-device synchronized field/flow traces, field map, loaded thermal duty and controller-error envelope"
 
+------------------------------------------------------------------------
+-- Cross-object La-Fe-(Mn)-Si-H family evidence.
+------------------------------------------------------------------------
+
 familyCrystalStructureRow : PaymentRow
 familyCrystalStructureRow =
   paymentRow
@@ -118,14 +123,45 @@ familyThermalTransportRow =
     "family literature measures thermal transport and shows hydrogen-controlled transition/MCE behavior; material thermal conductivity is not a same-device solid-fluid heat-transfer coefficient or contact-resistance closure"
     "acquire exact-regenerator thermal conductivity/contact/interface and same-device heat-transfer calibration"
 
+------------------------------------------------------------------------
+-- Same-platform POLARIS evidence with different optimized working material.
+------------------------------------------------------------------------
+
+polarisSystemPerformanceRow : PaymentRow
+polarisSystemPerformanceRow =
+  paymentRow
+    "peer-reviewed POLARIS plug-in performance campaign"
+    "Liang et al. 2026, DOI 10.1016/j.applthermaleng.2025.129144"
+    peerReviewedPaid directObservation false
+    "the optimized reported POLARIS configuration pays real system-level cooling/COP performance for Gd/GdEr: 131 W/kg specific cooling capacity, plug-in COP 1.0 and 5.4% second-law efficiency at 15 K, plus a 28.5 K maximum span; it does not pay LaFeSi same-material COP or STELLAR performance"
+    "for LaFeSi closure, acquire same-material loaded-device cooling/work accounting on the LaFeSi regenerator stack"
+
+polarisHydraulicCampaignRow : PaymentRow
+polarisHydraulicCampaignRow =
+  paymentRow
+    "peer-reviewed POLARIS hydraulic/system optimization campaign"
+    "Liang et al. 2026, measurement campaign and hydraulic test stand"
+    peerReviewedPaid directObservation false
+    "POLARIS has measured energetic/hydraulic/acoustic/material characterization and utilization-factor optimization; working-material/device configuration differs from the LaFeSi aging object"
+    "weld equivalent pressure/flow/utilization traces to the exact LaFeSi regenerator and its pore geometry"
+
+polarisCommercialDeploymentRow : PaymentRow
+polarisCommercialDeploymentRow =
+  paymentRow
+    "POLARIS commercial deployment / TRL evidence"
+    "Liang et al. 2026"
+    peerReviewedPaid directObservation false
+    "43 units and months-long supermarket deployment with stable 6 C cooling are reported for POLARIS; this is platform commercialization evidence, not LaFeSi coating lifetime or STELLAR validation"
+    "retain deployment as platform evidence while independently qualifying each working-material/device stack"
+
 longTermLifetimeRow : PaymentRow
 longTermLifetimeRow =
   paymentRow
-    "months-to-years service-life evidence"
+    "months-to-years service-life evidence for the LaFeSi protection stack"
     "Weiß et al. 2025 future-work statement"
     openSameObjectAcquisition plannedOnly true
-    "the paper explicitly describes months-to-years experiments as future work"
-    "completed longitudinal same-object aging/performance data approaching product-life timescales"
+    "the LaFeSi paper explicitly describes months-to-years experiments as future work; POLARIS commercial deployment with another working material does not close this"
+    "completed longitudinal same-LaFeSi-object aging/performance data approaching product-life timescales"
 
 protectionChemistryRow : PaymentRow
 protectionChemistryRow =
@@ -142,8 +178,8 @@ vendorThirtyPercentRow =
     "up-to-30% cycle-efficiency increase from rotational work recovery"
     "MAGNOTHERM Technology page"
     vendorSourceOnly vendorClaimOnly true
-    "primary for what MAGNOTHERM currently claims, not independent device calibration"
-    "same-device cooling energy, gross input work, recovered work and uncertainty accounting"
+    "primary for what MAGNOTHERM currently claims, not independent device calibration; the POLARIS paper pays measured plug-in COP but does not by itself isolate the claimed 30% recovery contribution"
+    "same-device recovered-work decomposition and uncertainty accounting for the claimed mechanism"
 
 stellarFiveTeslaRow : PaymentRow
 stellarFiveTeslaRow =
@@ -160,8 +196,8 @@ stellarCapacityRow =
     "125 kW+ modules and depicted 250 kW+ two-module STELLAR configuration"
     "MAGNOTHERM STELLAR page"
     vendorSourceOnly vendorClaimOnly true
-    "vendor vision/design depiction; no promotion to achieved capacity"
-    "same-device calorimetric capacity measurement over declared operating conditions"
+    "vendor vision/design depiction; POLARIS device measurements do not promote to STELLAR achieved capacity"
+    "same-device STELLAR calorimetric capacity measurement over declared operating conditions"
 
 materialConstitutiveRow : PaymentRow
 materialConstitutiveRow =
@@ -193,56 +229,56 @@ quantumFreeEnergyRow =
 fieldMapRow : PaymentRow
 fieldMapRow =
   paymentRow
-    "same-device electromagnetic B/H field map"
+    "same-LaFeSi-device electromagnetic B/H field map"
     "U(1) electromagnetic consumer interface"
     structurallyTyped typedButUncalibrated true
-    "the aging experiment reports an approximate 0.8 T operating field but not a full spatial/temporal field map; tesla-valued B and A/m-valued H remain separately typed"
-    "measured or validated simulated field map with B-H convention, geometry and operating-current/magnet state"
+    "the LaFeSi aging experiment reports ~0.8 T; the newer POLARIS paper reports a system field for another material configuration, but neither supplies the required exact LaFeSi spatial/temporal B-H map"
+    "measured or validated simulated LaFeSi-device field map with B-H convention, geometry and operating state"
 
 hydraulicsRow : PaymentRow
 hydraulicsRow =
   paymentRow
-    "porous-regenerator pressure drop and flow calibration"
+    "same-LaFeSi-regenerator pressure drop and flow calibration"
     "continuum/regenerator consumer interface"
-    structurallyTyped noSameObjectData true
-    "the paper identifies test fluids and flushing context, but no acquired source pays exact pressure-drop/flow closure for this regenerator"
-    "same-regenerator delta-p versus flow data and calibrated porous closure"
+    structurallyTyped typedButUncalibrated true
+    "POLARIS system hydraulics are peer-reviewed and measured, but the acquired source does not identify them as closure for the exact LaFeSi corrosion-study regenerator"
+    "same-LaFeSi-regenerator delta-p versus flow data and calibrated porous closure"
 
 heatTransferRow : PaymentRow
 heatTransferRow =
   paymentRow
-    "solid-fluid heat-transfer calibration"
+    "same-LaFeSi solid-fluid heat-transfer calibration"
     "continuum/regenerator consumer + family thermal-transport evidence"
     structurallyTyped typedButUncalibrated true
-    "material/composite thermal conductivity and heat-flow studies pay family-level priors, but not exact same-device h, contact resistance or interfacial area closure"
-    "same-regenerator dynamic thermal response/transfer calibration across the operating envelope"
+    "material/composite thermal conductivity and heat-flow studies plus POLARIS system optimization pay strong priors, but not exact LaFeSi same-device h/contact/interfacial-area closure"
+    "same-LaFeSi-regenerator dynamic thermal response/transfer calibration across the operating envelope"
 
 cycleTimingRow : PaymentRow
 cycleTimingRow =
   paymentRow
-    "field/flow cycle timing and controller calibration"
+    "same-LaFeSi field/flow cycle timing and controller calibration"
     "ActiveMagneticRegenerator synchronisation interface"
     structurallyTyped typedButUncalibrated true
-    "the aging test pays a 2 Hz magnetisation frequency only; it does not supply the complete field/flow phase relation, valve/pump timing or control-error envelope"
-    "same-device timing traces, valve/pump/magnet phase relation and control-error envelope"
+    "the aging test pays 2 Hz magnetisation and POLARIS validates optimization of a related platform, but exact LaFeSi field/flow phase relation and controller-error envelope remain unwelded"
+    "same-LaFeSi-device timing traces, valve/pump/magnet phase relation and control-error envelope"
 
 sameDeviceCOPRow : PaymentRow
 sameDeviceCOPRow =
   paymentRow
-    "same-device COP validation"
+    "same-LaFeSi-device COP validation"
     "ProtectedMagnetocaloricSystem energy accounting"
     openSameObjectAcquisition noSameObjectData true
-    "vendor or component claims cannot replace same-object first-law work/cooling accounting; the paper's aging test was load-free"
-    "simultaneous same-device cooling energy, field/motor/pump input, recovered work, parasitics and uncertainty"
+    "POLARIS plug-in COP is peer-reviewed for an optimized Gd/GdEr configuration; it cannot substitute for loaded same-LaFeSi-object first-law work/cooling accounting, while the LaFeSi aging test was load-free"
+    "simultaneous same-LaFeSi-device cooling energy, field/motor/pump input, recovered work, parasitics and uncertainty"
 
 sameDeviceCapacityRow : PaymentRow
 sameDeviceCapacityRow =
   paymentRow
-    "same-device cooling-capacity validation"
+    "same-LaFeSi-device cooling-capacity validation"
     "ProtectedMagnetocaloricSystem + regenerator thermal accounting"
     openSameObjectAcquisition noSameObjectData true
-    "platform vision and material response do not establish delivered cooling capacity; the acquired aging experiment is explicitly load-free"
-    "same-device calorimetric capacity over declared hot/cold temperatures, span, flow and field cycle"
+    "POLARIS has measured cooling capacity for another working-material configuration, while the acquired LaFeSi aging experiment is load-free"
+    "same-LaFeSi-device calorimetric capacity over declared hot/cold temperatures, span, flow and field cycle"
 
 navierStokesRow : PaymentRow
 navierStokesRow =
@@ -273,6 +309,9 @@ allPaymentRows =
   ∷ familyHydrogenationCompositionRow
   ∷ familySpecificHeatEntropyRow
   ∷ familyThermalTransportRow
+  ∷ polarisSystemPerformanceRow
+  ∷ polarisHydraulicCampaignRow
+  ∷ polarisCommercialDeploymentRow
   ∷ longTermLifetimeRow
   ∷ protectionChemistryRow
   ∷ vendorThirtyPercentRow
@@ -302,13 +341,16 @@ record MagnetocaloricMaxCutReceipt : Set where
     agingOperatingPointPartiallyPaid : Bool
     familyCrystalThermoTransportEvidenceAcquired : Bool
     familyEvidenceKeptCrossObject : Bool
+    polarisSystemPerformanceEvidenceAcquired : Bool
+    polarisHydraulicEvidenceAcquired : Bool
+    polarisEvidenceKeptSeparateFromLaFeSi : Bool
     vendorClaimsRemainVendorClaims : Bool
     structuralConsumersPopulated : Bool
     nsAndYMRemainStructuralOnly : Bool
     noFabricatedSameDeviceCalibration : Bool
-    hardFrontierIsEmpiricalAcquisition : Bool
+    hardFrontierIsExactMaterialSameDeviceAcquisition : Bool
 
 canonicalMagnetocaloricMaxCutReceipt : MagnetocaloricMaxCutReceipt
 canonicalMagnetocaloricMaxCutReceipt =
   magnetocaloric-max-cut-receipt
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true
