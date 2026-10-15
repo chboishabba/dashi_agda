@@ -6,6 +6,7 @@ open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.KitzerowBH4CascadeExact as Cascade
 import DASHI.Biology.KitzerowBH4RepoIntegrationExact as Integration
+import DASHI.Biology.KitzerowBH4ReactionChemistryExact as ReactionChem
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -26,6 +27,21 @@ repoIntegrationKeepsPromotionBlocked :
   Integration.promotesClinicalAuthority Integration.canonicalKitzerowBH4RepoIntegration ≡ false
   × Integration.promotesBrainStateRecovery Integration.canonicalKitzerowBH4RepoIntegration ≡ false
 repoIntegrationKeepsPromotionBlocked = refl , refl
+
+reactionChemistryIsNotPathwayLabelOnly :
+  ReactionChem.pathwayLabelAloneCountsAsReaction ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
+  × ReactionChem.speciesAndStoichiometryExplicit ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ true
+reactionChemistryIsNotPathwayLabelOnly = refl , refl
+
+reactionChemistryKeepsQuantitativePromotionClosed :
+  ReactionChem.quantitativeKineticsPromoted ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
+  × ReactionChem.exactElementChargeBalancePromotedForEveryTransition ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
+  × ReactionChem.wetLabValidationPromoted ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
+reactionChemistryKeepsQuantitativePromotionClosed = refl , (refl , refl)
+
+atomic369DoesNotDetermineBH4ReactionPath :
+  ReactionChem.atomic369DeterminesReactionPath ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
+atomic369DoesNotDetermineBH4ReactionPath = refl
 
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
