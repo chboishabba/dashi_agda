@@ -26,7 +26,7 @@ stableOperationArticle =
     "10.1021/acsaenm.4c00747"
     "https://pubs.acs.org/doi/10.1021/acsaenm.4c00747"
     Source.academicArticleSource
-    "primary peer-reviewed source for the paper's reported material preparation, protection strategy, in-device aging observations, bounded six-week result, preliminary three-month microchannel result, and stated future-work plan; not device-COP authority"
+    "primary peer-reviewed source for the paper's reported material preparation, protection strategy, magnetocaloric characterization, in-device aging observations, bounded six-week result, preliminary three-month microchannel result, and stated future-work plan; not device-COP authority"
     Source.publicAttribution
 
 magnothermTechnologyPage : Source.AttributedSource
@@ -155,10 +155,7 @@ sixWeekContinuedOperationPayment =
     "Results and Discussion: paragraph beginning 'After 6 weeks of continued operation'"
     peerReviewedObservation
     sameSourceObject
-    true
-    false
-    true
-    false
+    true false true false
     "bounded six-week in-device aging observation for the studied protected regenerators; not product lifetime and not device COP"
 
 threeMonthMicrochannelPayment : ClaimPayment
@@ -169,11 +166,30 @@ threeMonthMicrochannelPayment =
     "Results and Discussion; Supporting Information Figure SI9"
     peerReviewedObservation
     sameSourceObject
-    true
-    true
-    true
-    false
+    true true true false
     "preliminary three-month microchannel observation; does not establish multi-year service life, full performance retention, or commercial-device lifetime"
+
+oneTeslaAdiabaticCharacterizationPayment : ClaimPayment
+oneTeslaAdiabaticCharacterizationPayment =
+  claimPayment
+    "coated and pristine microchannel regenerators were characterized by adiabatic temperature change under a 1 T field and plating did not deteriorate the reported magnetocaloric function"
+    stableOperationArticle
+    "Figure 4(c); Assessment of Magnetocaloric Function"
+    peerReviewedObservation
+    sameSourceObject
+    true false true false
+    "bounded 1 T delta-T_ad characterization/function check for the studied regenerators; not a complete M(T,H), S(T,H), c_H(T,H) constitutive surface and not device COP"
+
+agingTestOperatingPointPayment : ClaimPayment
+agingTestOperatingPointPayment =
+  claimPayment
+    "modified POLARIS load-free in-device aging operated media near the Curie temperature (~288 K), at 2 Hz magnetisation and a reported ~0.8 T field"
+    stableOperationArticle
+    "In-Device Testing"
+    peerReviewedMethod
+    sameSourceObject
+    true false true false
+    "bounded same-study aging-test operating point; not a spatial/temporal B-H field map, complete field/flow phase timing, loaded cooling capacity, or COP calibration"
 
 longTermExperimentPlanPayment : ClaimPayment
 longTermExperimentPlanPayment =
@@ -183,10 +199,7 @@ longTermExperimentPlanPayment =
     "Results and Discussion: paragraph following the preliminary three-month result"
     plannedFutureExperiment
     sameSourceObject
-    true
-    false
-    false
-    false
+    true false false false
     "prospective experiment plan only; cannot be used as evidence that months-to-years performance has already been observed"
 
 vendorThirtyPercentWorkRecoveryPayment : ClaimPayment
@@ -197,10 +210,7 @@ vendorThirtyPercentWorkRecoveryPayment =
     "Technology: 'How is this process more efficient?'"
     vendorTechnologyClaim
     sameDeviceNotEstablished
-    true
-    false
-    false
-    false
+    true false false false
     "MAGNOTHERM vendor technology claim; requires same-device energy accounting and independent/calibrated validation before COP or efficiency promotion"
 
 stellarFiveTeslaTargetPayment : ClaimPayment
@@ -211,10 +221,7 @@ stellarFiveTeslaTargetPayment =
     "STELLAR: FAQ 'What logic is behind the 100x power gain from 1T to 5T?'"
     vendorDevelopmentVision
     sameDeviceNotEstablished
-    true
-    false
-    false
-    false
+    true false false false
     "development target reported by MAGNOTHERM; not a measured production-device field map"
 
 stellar125kWModuleVisionPayment : ClaimPayment
@@ -225,10 +232,7 @@ stellar125kWModuleVisionPayment =
     "STELLAR: The Vision"
     vendorDevelopmentVision
     sameDeviceNotEstablished
-    true
-    false
-    false
-    false
+    true false false false
     "vendor module vision; not measured cooling capacity of a same-object calibrated device"
 
 stellar250kWDepictionPayment : ClaimPayment
@@ -239,11 +243,21 @@ stellar250kWDepictionPayment =
     "STELLAR: The Vision, two-module depiction"
     vendorDevelopmentVision
     sameDeviceNotEstablished
-    true
-    false
-    false
-    false
+    true false false false
     "vendor design depiction/vision; not independently observed 250 kW device performance"
+
+currentClaimPayments : List ClaimPayment
+currentClaimPayments =
+  sixWeekContinuedOperationPayment
+  ∷ threeMonthMicrochannelPayment
+  ∷ oneTeslaAdiabaticCharacterizationPayment
+  ∷ agingTestOperatingPointPayment
+  ∷ longTermExperimentPlanPayment
+  ∷ vendorThirtyPercentWorkRecoveryPayment
+  ∷ stellarFiveTeslaTargetPayment
+  ∷ stellar125kWModuleVisionPayment
+  ∷ stellar250kWDepictionPayment
+  ∷ []
 
 ------------------------------------------------------------------------
 -- Attribution firewall / source ceiling.
