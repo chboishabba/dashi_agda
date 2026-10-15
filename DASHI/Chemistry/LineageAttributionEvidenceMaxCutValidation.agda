@@ -6,6 +6,8 @@ open import Data.Product using (_×_; _,_)
 
 import DASHI.Chemistry.LineageAttributionEvidenceSourceAtlasExact as Sources
 import DASHI.Chemistry.LineageAttributionEvidencePaymentExact as Payment
+import DASHI.Chemistry.AttributedGoldReactionReplayExact as Replay
+import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact as Calibration
 import DASHI.Chemistry.LineageAttributionAcquisitionParetoExact as Pareto
 
 sourceAtlasDoesNotCreateAuthority :
@@ -28,6 +30,20 @@ primarySecondaryAndDatabaseRolesStayTyped = refl
 unpaidCoordinatesRemainUnpaid :
   Payment.missingCoordinatePromotedByNearbyCitation Payment.canonicalLineageAttributionBoundary ≡ false
 unpaidCoordinatesRemainUnpaid = refl
+
+attributedReplayKeepsExternalAndDASHIOwnershipSeparate :
+  Replay.sourceOwnsReplayComposition Replay.canonicalAttributedGoldReplayBoundary ≡ false
+  × Replay.replayCompositionErasesSourceIdentity Replay.canonicalAttributedGoldReplayBoundary ≡ false
+attributedReplayKeepsExternalAndDASHIOwnershipSeparate = refl , refl
+
+numericPromotionNeedsExactLocatorAndContext :
+  Calibration.numberWithoutExactLocatorPromoted Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
+  × Calibration.numberWithoutContextPromoted Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
+numericPromotionNeedsExactLocatorAndContext = refl , refl
+
+unpaidNumericCellsAreNotZeroes :
+  Calibration.unpaidCoordinateInterpretedAsZero Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
+unpaidNumericCellsAreNotZeroes = refl
 
 paretoAcquisitionIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
