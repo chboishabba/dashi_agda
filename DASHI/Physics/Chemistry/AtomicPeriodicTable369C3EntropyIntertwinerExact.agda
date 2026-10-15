@@ -17,6 +17,21 @@ import DASHI.Moonshine.C3FourierConjugationExact as C3Fourier
 data C3Sector : Set where
   sector0 sector1 sector2 : C3Sector
 
+sectorFourierRow : C3Sector → C3Fourier.FourierRow
+sectorFourierRow sector0 = C3Fourier.chi0
+sectorFourierRow sector1 = C3Fourier.chi1
+sectorFourierRow sector2 = C3Fourier.chi2
+
+sector1ConjugateIsSector2 :
+  C3Fourier.conjugateRow (sectorFourierRow sector1)
+  ≡ sectorFourierRow sector2
+sector1ConjugateIsSector2 = C3Fourier.chi1ConjugateIsChi2
+
+sector2ConjugateIsSector1 :
+  C3Fourier.conjugateRow (sectorFourierRow sector2)
+  ≡ sectorFourierRow sector1
+sector2ConjugateIsSector1 = C3Fourier.chi2ConjugateIsChi1
+
 record PhysicalMolecularC3Action
   (S : Chemistry369.ChemistryHyperfibreSystem) : Set₁ where
   constructor physicalMolecularC3Action
@@ -50,9 +65,12 @@ record ChemistryC3SectorDecomposition
     sector1Weight : Nat
     sector2Weight : Nat
     weightsMatch :
-      SectorWeight sector0 ≡ sector0Weight
-      × SectorWeight sector1 ≡ sector1Weight
-      × SectorWeight sector2 ≡ sector2Weight
+      (SectorWeight sector0 ≡ sector0Weight)
+      × ((SectorWeight sector1 ≡ sector1Weight)
+      × (SectorWeight sector2 ≡ sector2Weight))
+    fourierRowOf : C3Sector → C3Fourier.FourierRow
+    fourierRowsCanonical :
+      (sector : C3Sector) → fourierRowOf sector ≡ sectorFourierRow sector
     c3FourierEquivariance : Set
     phaseConventionReference : String
 
@@ -123,6 +141,9 @@ record ChemistryC3MonsterBoundary : Set where
     explicitC3ActionRequired : Bool
     explicitC3ActionRequiredIsTrue : explicitC3ActionRequired ≡ true
 
+    exactFourierCarrierRequired : Bool
+    exactFourierCarrierRequiredIsTrue : exactFourierCarrierRequired ≡ true
+
     explicitMonsterIntertwinerRequired : Bool
     explicitMonsterIntertwinerRequiredIsTrue :
       explicitMonsterIntertwinerRequired ≡ true
@@ -136,6 +157,7 @@ canonicalChemistryC3MonsterBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
     true refl
 
@@ -161,6 +183,8 @@ record ChemistryC3MaxCutStatus : Set where
     atomicToReactionFibreExistsIsTrue : atomicToReactionFibreExists ≡ true
     c3ConsumerInterfaceExists : Bool
     c3ConsumerInterfaceExistsIsTrue : c3ConsumerInterfaceExists ≡ true
+    exactC3FourierCarrierConsumed : Bool
+    exactC3FourierCarrierConsumedIsTrue : exactC3FourierCarrierConsumed ≡ true
     concreteSameObjectC3MoleculeInstantiated : Bool
     concreteSameObjectC3MoleculeInstantiatedIsFalse :
       concreteSameObjectC3MoleculeInstantiated ≡ false
@@ -171,6 +195,7 @@ record ChemistryC3MaxCutStatus : Set where
 canonicalChemistryC3MaxCutStatus : ChemistryC3MaxCutStatus
 canonicalChemistryC3MaxCutStatus =
   chemistryC3MaxCutStatus
+    true refl
     true refl
     true refl
     false refl
