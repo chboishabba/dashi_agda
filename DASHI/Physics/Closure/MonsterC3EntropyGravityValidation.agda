@@ -10,20 +10,19 @@ import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as Hamiltonian
+import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as FCI
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as GroundC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as MonsterProbe
-import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
+import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
 
 fineMonsterStatesRemainPresent :
-  StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
-    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 196883
+  StateCount.MonsterC3StateCountingReceipt.identityVisibleStates StateCount.canonicalMonsterC3StateCountingReceipt ≡ 196883
 fineMonsterStatesRemainPresent = refl
 
 nontrivialPhaseSeesResidual53 :
-  StateCount.MonsterC3StateCountingReceipt.nontrivialPhaseVisibleStates
-    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 53
+  StateCount.MonsterC3StateCountingReceipt.nontrivialPhaseVisibleStates StateCount.canonicalMonsterC3StateCountingReceipt ≡ 53
 nontrivialPhaseSeesResidual53 = refl
 
 literalThreePhasesAlreadyShareOneAction :
@@ -37,8 +36,7 @@ singleLiteralProducerStillUninhabited :
 singleLiteralProducerStillUninhabited = refl
 
 ammoniaGroundStateIs1A1 :
-  NH3Electronic.NeutralElectronicReceipt.groundStateLabel
-    NH3Electronic.canonicalNeutralElectronicReceipt ≡ "1A1"
+  NH3Electronic.NeutralElectronicReceipt.groundStateLabel NH3Electronic.canonicalNeutralElectronicReceipt ≡ "1A1"
 ammoniaGroundStateIs1A1 = refl
 
 sameObjectHamiltonianSkeletonPaid :
@@ -47,18 +45,23 @@ sameObjectHamiltonianSkeletonPaid :
 sameObjectHamiltonianSkeletonPaid = refl
 
 literalOccupationStateHasTenElectrons :
-  Hamiltonian.NH3OccupationState.occupiedSpinOrbitalCount
-    Hamiltonian.canonicalNH3OccupationState ≡ 10
+  Hamiltonian.NH3OccupationState.occupiedSpinOrbitalCount Hamiltonian.canonicalNH3OccupationState ≡ 10
 literalOccupationStateHasTenElectrons = refl
 
-realSpaceWavefunctionCoefficientsStillUnpaid :
-  Hamiltonian.HamiltonianWavefunctionBoundary.numericRealSpaceWavefunctionCoefficientsPaid
-    Hamiltonian.canonicalHamiltonianWavefunctionBoundary ≡ false
-realSpaceWavefunctionCoefficientsStillUnpaid = refl
+sto3gFCIDiagonalizationPaid :
+  FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid FCI.canonicalSTO3GFCIBoundary ≡ true
+sto3gFCIDiagonalizationPaid = refl
+
+sto3gFCIEnergyMagnitudeIs555245 :
+  FCI.NH3STO3GFCIReceipt.fciEnergyTenThousandthHartree FCI.canonicalNH3STO3GFCIReceipt ≡ 555245
+sto3gFCIEnergyMagnitudeIs555245 = refl
+
+fciCoefficientsStillNotImported :
+  FCI.STO3GFCIBoundary.literalFCIEigenvectorCoefficientsImported FCI.canonicalSTO3GFCIBoundary ≡ false
+fciCoefficientsStillNotImported = refl
 
 groundConfigurationC3ActionPaid :
-  GroundC3.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
-    GroundC3.canonicalGroundStateC3Boundary ≡ true
+  GroundC3.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid GroundC3.canonicalGroundStateC3Boundary ≡ true
 groundConfigurationC3ActionPaid = refl
 
 groundDeterminantPhaseIsInvariant :
@@ -66,73 +69,63 @@ groundDeterminantPhaseIsInvariant :
 groundDeterminantPhaseIsInvariant = refl
 
 ammoniaMonsterPhaseCoordinateMapPaid :
-  MonsterProbe.AmmoniaMonsterProbeBoundary.c3PhaseCoordinateMapPaid
-    MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ true
+  MonsterProbe.AmmoniaMonsterProbeBoundary.c3PhaseCoordinateMapPaid MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ true
 ammoniaMonsterPhaseCoordinateMapPaid = refl
 
-trivialAnyGroupActionExistsButIsNonDiagnostic :
-  MonsterProbe.AmmoniaMonsterProbeBoundary.formalTrivialMonsterActionHasPhysicalContent
-    MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
-trivialAnyGroupActionExistsButIsNonDiagnostic = refl
-
 nontrivialMonsterActionStillUnpaid :
-  MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
-    MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
+  MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillUnpaid = refl
 
-h3AmmoniaKineticsPaid :
-  H3Transfer.H3AmmoniaBoundary.sameReactionQuantitativeKineticsPaid
-    H3Transfer.canonicalH3AmmoniaBoundary ≡ true
-h3AmmoniaKineticsPaid = refl
+proofRelevantC3ResolvedReactionPaid :
+  H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
+    H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
+proofRelevantC3ResolvedReactionPaid = refl
+
+sameReactionThermochemicalDifferencePaid :
+  H3C3.C3ResolvedH3AmmoniaBoundary.sameReactionThermochemicalDifferencePaid
+    H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
+sameReactionThermochemicalDifferencePaid = refl
+
+protonTransferExothermicityMagnitudeIs4313Tenths :
+  H3C3.reactionExothermicityMagnitudeTenthsKJPerMol ≡ 4313
+protonTransferExothermicityMagnitudeIs4313Tenths = refl
 
 abstractionAnalyticalPESPaid :
-  Abstraction.AbstractionBoundary.sourceBackedAnalyticalPESPaid
-    Abstraction.canonicalAbstractionBoundary ≡ true
+  Abstraction.AbstractionBoundary.sourceBackedAnalyticalPESPaid Abstraction.canonicalAbstractionBoundary ≡ true
 abstractionAnalyticalPESPaid = refl
 
-abstractionReactionPathPaid :
-  Abstraction.AbstractionBoundary.sourceBackedReactionPathTopologyPaid
-    Abstraction.canonicalAbstractionBoundary ≡ true
-abstractionReactionPathPaid = refl
-
 abstractionWavepacketDynamicsPaid :
-  Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid
-    Abstraction.canonicalAbstractionBoundary ≡ true
+  Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid Abstraction.canonicalAbstractionBoundary ≡ true
 abstractionWavepacketDynamicsPaid = refl
 
 literal369ReactionHyperformPaid :
-  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited
-    Abstraction369.canonicalHyperformBoundary ≡ true
+  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited Abstraction369.canonicalHyperformBoundary ≡ true
 literal369ReactionHyperformPaid = refl
 
-hyperformStillDoesNotCreateMonsterAction :
-  Abstraction369.HyperformBoundary.fibreCreatesMonsterAction
-    Abstraction369.canonicalHyperformBoundary ≡ false
-hyperformStillDoesNotCreateMonsterAction = refl
+boundedGroundC3InterfacePaid :
+  Chemistry.ChemistryC3InterfaceStatus.boundedGroundConfigurationElectronicC3ActionPaid
+    Chemistry.canonicalChemistryC3InterfaceStatus ≡ true
+boundedGroundC3InterfacePaid = refl
 
-fullC3ResolvedReactionTransportStillUnpaid :
-  Chemistry.ChemistryC3MaxCutStatus.fullC3ResolvedReactionTransportInstantiated
-    Chemistry.canonicalChemistryC3MaxCutStatus ≡ false
-fullC3ResolvedReactionTransportStillUnpaid = refl
+fullRealSpaceElectronicC3StillUnpaid :
+  Chemistry.ChemistryC3InterfaceStatus.fullRealSpaceElectronicC3ActionInstantiated
+    Chemistry.canonicalChemistryC3InterfaceStatus ≡ false
+fullRealSpaceElectronicC3StillUnpaid = refl
 
 normalizedFiniteCountingWeightsPaid :
-  Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid
-    Uniform.canonicalCountingEnsembleBoundary ≡ true
+  Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid Uniform.canonicalCountingEnsembleBoundary ≡ true
 normalizedFiniteCountingWeightsPaid = refl
 
 uniformCountingStillNotPhysicalThermalEnsemble :
-  Uniform.CountingEnsembleBoundary.uniformCountingMeasureIsPhysicalThermalEnsemble
-    Uniform.canonicalCountingEnsembleBoundary ≡ false
+  Uniform.CountingEnsembleBoundary.uniformCountingMeasureIsPhysicalThermalEnsemble Uniform.canonicalCountingEnsembleBoundary ≡ false
 uniformCountingStillNotPhysicalThermalEnsemble = refl
 
 scalarEntropyDensityIsNotStressTensor :
-  Gravity.EntropyGravityPromotionBoundary.scalarEntropyDensityDeterminesStressTensor
-    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
+  Gravity.EntropyGravityPromotionBoundary.scalarEntropyDensityDeterminesStressTensor Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 scalarEntropyDensityIsNotStressTensor = refl
 
 entropyAloneDoesNotPromoteEinstein :
-  Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics
-    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
+  Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 entropyAloneDoesNotPromoteEinstein = refl
 
 wittenRouteIsThreeDimensional :
