@@ -19,6 +19,7 @@ import DASHI.Biology.IITXORProbabilityReceiptExact
 import DASHI.Biology.IITXOREffectCutReceiptExact
 import DASHI.Biology.IITBooleanParityMinimalSufficiencyExact
 import DASHI.Biology.IITParityTorqueGluingBoundaryExact
+import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
