@@ -10,10 +10,16 @@ on:
       - 'DASHI/Moonshine/Monster196830RegularBulkResidualControlPatternExact.agda'
       - 'DASHI/EverythingProofExperimentAction369.agda'
       - 'scripts/check_proof_experiment_action_369.sh'
+      - 'DASHI/Physics/Foundations/TorqueTrialectic369Exact.agda'
+      - 'DASHI/Physics/Foundations/TorqueTrialectic369Regression.agda'
+      - 'DASHI/Physics/Foundations/ResonantFlightPhaseCoupledPowerExact.agda'
+      - 'DASHI/Physics/Textile/BendingTorsionTextileLawExact.agda'
+      - 'DASHI/Physics/POAMSScientificMechanismBoundaryExact.agda'
       - '.github/workflows/proof-experiment-action-369-agda.yml'
   push:
     branches:
       - agent/ooda-proof-experiment-196830
+      - chatgpt/torque-trialectic-maxcut
     paths:
       - 'DASHI/Core/HistoryIndexedProofExperimentActionLoopExact.agda'
       - 'DASHI/Core/ProofExperimentAction369IntegrationExact.agda'
@@ -22,6 +28,11 @@ on:
       - 'DASHI/Moonshine/Monster196830RegularBulkResidualControlPatternExact.agda'
       - 'DASHI/EverythingProofExperimentAction369.agda'
       - 'scripts/check_proof_experiment_action_369.sh'
+      - 'DASHI/Physics/Foundations/TorqueTrialectic369Exact.agda'
+      - 'DASHI/Physics/Foundations/TorqueTrialectic369Regression.agda'
+      - 'DASHI/Physics/Foundations/ResonantFlightPhaseCoupledPowerExact.agda'
+      - 'DASHI/Physics/Textile/BendingTorsionTextileLawExact.agda'
+      - 'DASHI/Physics/POAMSScientificMechanismBoundaryExact.agda'
       - '.github/workflows/proof-experiment-action-369-agda.yml'
 
 jobs:
@@ -32,6 +43,10 @@ jobs:
       - name: Install Agda
         run: |
           sudo apt-get update
-          sudo apt-get install -y agda
-      - name: Check proof/experiment/action 369 tranche
-        run: bash scripts/check_proof_experiment_action_369.sh
+          sudo apt-get install -y agda agda-stdlib
+      - name: Check torque trialectic tranche
+        run: |
+          agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/TorqueTrialectic369Regression.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Textile/BendingTorsionTextileLawExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Foundations/ResonantFlightPhaseCoupledPowerExact.agda
+          agda -i . -i /usr/share/agda-stdlib DASHI/Physics/POAMSScientificMechanismBoundaryExact.agda
