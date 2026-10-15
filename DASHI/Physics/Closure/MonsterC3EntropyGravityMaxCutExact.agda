@@ -6,6 +6,7 @@ import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact as Arithmetic
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Monster3B
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
+import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authority
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
@@ -16,10 +17,12 @@ import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physica
 -- What is exact:
 --   * 53 / 71 neighbouring ternary arithmetic identities;
 --   * certified Monster 3B residual + balanced regular C3 decomposition;
+--   * exact same-object 1+zeta+zeta^2 cancellation at multiplicity 65610;
 --   * tracked p=71 Monster/Ogg prime-lane role;
 --   * finite fine/coarse state-count observations.
 --
 -- What is typed but unpromoted:
+--   * literal same-action residual/regular subspace lift / selected 3B VOA;
 --   * physical molecular C3 actions and reaction-sector transport;
 --   * probability/entropy/density adapters;
 --   * entropy-to-geometry routes;
@@ -67,6 +70,15 @@ monster3BC3Row =
     "DASHI.Moonshine.Monster3BBalancedRegularFibreExact"
     "53 + 3*65610 = 196883 with regular C3 cancellation under nontrivial phase evaluation"
     "construct a genuine Monster-module/VOA intertwiner for any new physical carrier"
+
+zetaSameObjectRow : MaxCutRow
+zetaSameObjectRow =
+  maxCutRow
+    "exact cyclotomic zeta/C3 same-object evaluation"
+    exactPaid
+    "DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact"
+    "1+zeta+zeta^2=0 and the 65610-scaled regular C3 cycle cancels exactly; residual 53 and conformal 196884/54 are paid on the existing representation/evaluation seam"
+    "lift character-level regular/residual split to literal same-action subspaces and pay selected actual 3B VOA receipts; no quantum-gravity promotion from the integer/cyclotomic weld"
 
 chemistryC3Row : MaxCutRow
 chemistryC3Row =
@@ -118,6 +130,7 @@ canonicalMaxCutRows =
   ternary53Row
   ∷ ternary71Row
   ∷ monster3BC3Row
+  ∷ zetaSameObjectRow
   ∷ chemistryC3Row
   ∷ stateCountingEntropyRow
   ∷ entropyGravityRow
@@ -134,6 +147,9 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
     ternary71ExactIsTrue : ternary71Exact ≡ true
     monster3BC3Exact : Bool
     monster3BC3ExactIsTrue : monster3BC3Exact ≡ true
+    zetaSameObjectCancellationExact : Bool
+    zetaSameObjectCancellationExactIsTrue :
+      zetaSameObjectCancellationExact ≡ true
     chemistryC3InterfacePaid : Bool
     chemistryC3InterfacePaidIsTrue : chemistryC3InterfacePaid ≡ true
     entropyInterfacePaid : Bool
@@ -150,6 +166,7 @@ canonicalMonsterC3EntropyGravityMaxCutReceipt :
   MonsterC3EntropyGravityMaxCutReceipt
 canonicalMonsterC3EntropyGravityMaxCutReceipt =
   monsterC3EntropyGravityMaxCutReceipt
+    true refl
     true refl
     true refl
     true refl
@@ -174,6 +191,12 @@ identity196883Agreement :
   ≡ StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
       StateCount.canonicalMonsterC3StateCountingReceipt
 identity196883Agreement = refl
+
+zetaSameObjectCancellationAlreadyPaid :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.exact65610ZetaCancellationPaid
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt
+  ≡ true
+zetaSameObjectCancellationAlreadyPaid = refl
 
 physicalThreePlusOneStillBlocked :
   Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe
