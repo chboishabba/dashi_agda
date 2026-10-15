@@ -5,8 +5,12 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Chemistry369
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
+import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as NH3GroundC3
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as NH3Protonation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
+import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as MonsterEntropy
 import DASHI.Moonshine.C3FourierConjugationExact as C3Fourier
 
@@ -58,12 +62,10 @@ record ChemistryC3SectorDecomposition
     sector1Weight : Nat
     sector2Weight : Nat
     weightsMatch :
-      (SectorWeight sector0 ≡ sector0Weight)
-      × ((SectorWeight sector1 ≡ sector1Weight)
-      × (SectorWeight sector2 ≡ sector2Weight))
+      (SectorWeight sector0 ≡ sector0Weight) ×
+      ((SectorWeight sector1 ≡ sector1Weight) × (SectorWeight sector2 ≡ sector2Weight))
     fourierRowOf : C3Sector → C3Fourier.FourierRow
-    fourierRowsCanonical :
-      (sector : C3Sector) → fourierRowOf sector ≡ sectorFourierRow sector
+    fourierRowsCanonical : (sector : C3Sector) → fourierRowOf sector ≡ sectorFourierRow sector
     c3FourierEquivariance : Set
     phaseConventionReference : String
 
@@ -108,36 +110,28 @@ record ChemistryC3MonsterBoundary : Set where
   constructor chemistryC3MonsterBoundary
   field
     global369TernaryEncodingImpliesMolecularC3Symmetry : Bool
-    global369TernaryEncodingImpliesMolecularC3SymmetryIsFalse :
-      global369TernaryEncodingImpliesMolecularC3Symmetry ≡ false
+    global369TernaryEncodingImpliesMolecularC3SymmetryIsFalse : global369TernaryEncodingImpliesMolecularC3Symmetry ≡ false
     c3MolecularSectorImpliesMonsterModule : Bool
-    c3MolecularSectorImpliesMonsterModuleIsFalse :
-      c3MolecularSectorImpliesMonsterModule ≡ false
+    c3MolecularSectorImpliesMonsterModuleIsFalse : c3MolecularSectorImpliesMonsterModule ≡ false
     equalSectorDimensionImpliesRepresentationIntertwiner : Bool
-    equalSectorDimensionImpliesRepresentationIntertwinerIsFalse :
-      equalSectorDimensionImpliesRepresentationIntertwiner ≡ false
+    equalSectorDimensionImpliesRepresentationIntertwinerIsFalse : equalSectorDimensionImpliesRepresentationIntertwiner ≡ false
     molecularStateCountIsThermodynamicEntropyWithoutAdapter : Bool
-    molecularStateCountIsThermodynamicEntropyWithoutAdapterIsFalse :
-      molecularStateCountIsThermodynamicEntropyWithoutAdapter ≡ false
+    molecularStateCountIsThermodynamicEntropyWithoutAdapterIsFalse : molecularStateCountIsThermodynamicEntropyWithoutAdapter ≡ false
     molecularEntropyImpliesPhysicalGravity : Bool
-    molecularEntropyImpliesPhysicalGravityIsFalse :
-      molecularEntropyImpliesPhysicalGravity ≡ false
+    molecularEntropyImpliesPhysicalGravityIsFalse : molecularEntropyImpliesPhysicalGravity ≡ false
     reactionSectorLabelDeterminesReactionPath : Bool
-    reactionSectorLabelDeterminesReactionPathIsFalse :
-      reactionSectorLabelDeterminesReactionPath ≡ false
+    reactionSectorLabelDeterminesReactionPathIsFalse : reactionSectorLabelDeterminesReactionPath ≡ false
     explicitC3ActionRequired : Bool
     explicitC3ActionRequiredIsTrue : explicitC3ActionRequired ≡ true
     exactFourierCarrierRequired : Bool
     exactFourierCarrierRequiredIsTrue : exactFourierCarrierRequired ≡ true
     explicitMonsterIntertwinerRequired : Bool
-    explicitMonsterIntertwinerRequiredIsTrue :
-      explicitMonsterIntertwinerRequired ≡ true
+    explicitMonsterIntertwinerRequiredIsTrue : explicitMonsterIntertwinerRequired ≡ true
 
 canonicalChemistryC3MonsterBoundary : ChemistryC3MonsterBoundary
 canonicalChemistryC3MonsterBoundary =
   chemistryC3MonsterBoundary
-    false refl false refl false refl false refl false refl false refl
-    true refl true refl true refl
+    false refl false refl false refl false refl false refl false refl true refl true refl true refl
 
 existingChemistryPromotionBoundary : Chemistry369.AtomicChemistryCrossPollinationBoundary
 existingChemistryPromotionBoundary = Chemistry369.canonicalAtomicChemistryCrossPollinationBoundary
@@ -151,14 +145,20 @@ ammoniaC3GeometryFixture = NH3.canonicalAmmoniaC3Fixture
 ammoniaElectronicSymmetryReceipt : NH3Electronic.NeutralElectronicReceipt
 ammoniaElectronicSymmetryReceipt = NH3Electronic.canonicalNeutralElectronicReceipt
 
-ammoniaProtonationStoichiometry : NH3Protonation.ProtonationStoichiometry
-ammoniaProtonationStoichiometry = NH3Protonation.canonicalProtonationStoichiometry
+ammoniaGroundStateC3Action : NH3GroundC3.GroundStateC3Action
+ammoniaGroundStateC3Action = NH3GroundC3.canonicalGroundStateC3Action
 
 ammoniaProtonationThermochemistry : NH3Protonation.ProtonationThermochemistry
 ammoniaProtonationThermochemistry = NH3Protonation.canonicalProtonationThermochemistry
 
 h3AmmoniaMeasuredKinetics : H3Transfer.H3AmmoniaKineticReceipt
 h3AmmoniaMeasuredKinetics = H3Transfer.canonicalH3AmmoniaKineticReceipt
+
+h3AmmoniaC3ResolvedTransition : H3C3.PaidC3ResolvedTransition
+h3AmmoniaC3ResolvedTransition = H3C3.canonicalPaidC3ResolvedTransition
+
+hydrogenAbstractionMechanism : Abstraction.AbstractionMechanism
+hydrogenAbstractionMechanism = Abstraction.canonicalAbstractionMechanism
 
 record ChemistryC3MaxCutStatus : Set where
   constructor chemistryC3MaxCutStatus
@@ -170,49 +170,32 @@ record ChemistryC3MaxCutStatus : Set where
     exactC3FourierCarrierConsumed : Bool
     exactC3FourierCarrierConsumedIsTrue : exactC3FourierCarrierConsumed ≡ true
     sourceBackedSameObjectC3GeometryFixturePaid : Bool
-    sourceBackedSameObjectC3GeometryFixturePaidIsTrue :
-      sourceBackedSameObjectC3GeometryFixturePaid ≡ true
+    sourceBackedSameObjectC3GeometryFixturePaidIsTrue : sourceBackedSameObjectC3GeometryFixturePaid ≡ true
     sourceBackedElectronicIrrepCoordinatesPaid : Bool
-    sourceBackedElectronicIrrepCoordinatesPaidIsTrue :
-      sourceBackedElectronicIrrepCoordinatesPaid ≡ true
-    sourceBackedProtonationStoichiometryPaid : Bool
-    sourceBackedProtonationStoichiometryPaidIsTrue :
-      sourceBackedProtonationStoichiometryPaid ≡ true
-    sourceBackedProtonationThermochemistryPaid : Bool
-    sourceBackedProtonationThermochemistryPaidIsTrue :
-      sourceBackedProtonationThermochemistryPaid ≡ true
+    sourceBackedElectronicIrrepCoordinatesPaidIsTrue : sourceBackedElectronicIrrepCoordinatesPaid ≡ true
+    boundedGroundConfigurationElectronicC3ActionPaid : Bool
+    boundedGroundConfigurationElectronicC3ActionPaidIsTrue : boundedGroundConfigurationElectronicC3ActionPaid ≡ true
     productsByproductsReactionFixturePaid : Bool
-    productsByproductsReactionFixturePaidIsTrue :
-      productsByproductsReactionFixturePaid ≡ true
+    productsByproductsReactionFixturePaidIsTrue : productsByproductsReactionFixturePaid ≡ true
     sameReactionQuantitativeKineticsPaid : Bool
-    sameReactionQuantitativeKineticsPaidIsTrue :
-      sameReactionQuantitativeKineticsPaid ≡ true
-    fullElectronicMolecularC3ActionInstantiated : Bool
-    fullElectronicMolecularC3ActionInstantiatedIsFalse :
-      fullElectronicMolecularC3ActionInstantiated ≡ false
-    fullC3ResolvedReactionTransportInstantiated : Bool
-    fullC3ResolvedReactionTransportInstantiatedIsFalse :
-      fullC3ResolvedReactionTransportInstantiated ≡ false
-    microscopicTransitionPathPaid : Bool
-    microscopicTransitionPathPaidIsFalse :
-      microscopicTransitionPathPaid ≡ false
-    electronResolvedReactionEnergeticsUniversal : Bool
-    electronResolvedReactionEnergeticsUniversalIsFalse :
-      electronResolvedReactionEnergeticsUniversal ≡ false
+    sameReactionQuantitativeKineticsPaidIsTrue : sameReactionQuantitativeKineticsPaid ≡ true
+    proofRelevantC3ResolvedReactionTransportInstantiated : Bool
+    proofRelevantC3ResolvedReactionTransportInstantiatedIsTrue : proofRelevantC3ResolvedReactionTransportInstantiated ≡ true
+    literal369ReactionHyperformInstantiated : Bool
+    literal369ReactionHyperformInstantiatedIsTrue : literal369ReactionHyperformInstantiated ≡ true
+    sourceBackedReactionPathAndWavepacketPaid : Bool
+    sourceBackedReactionPathAndWavepacketPaidIsTrue : sourceBackedReactionPathAndWavepacketPaid ≡ true
+    fullRealSpaceElectronicC3ActionInstantiated : Bool
+    fullRealSpaceElectronicC3ActionInstantiatedIsFalse : fullRealSpaceElectronicC3ActionInstantiated ≡ false
+    universalElectronResolvedReactionEnergetics : Bool
+    universalElectronResolvedReactionEnergeticsIsFalse : universalElectronResolvedReactionEnergetics ≡ false
 
 canonicalChemistryC3MaxCutStatus : ChemistryC3MaxCutStatus
 canonicalChemistryC3MaxCutStatus =
   chemistryC3MaxCutStatus
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
+    true refl true refl true refl true refl true refl true refl true refl true refl
+    true refl true refl true refl false refl false refl
+
+literal369HyperformWitness :
+  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited Abstraction369.canonicalHyperformBoundary ≡ true
+literal369HyperformWitness = refl
