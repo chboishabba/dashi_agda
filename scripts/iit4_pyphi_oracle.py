@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
-"""Full IIT-4 oracle adapter using current PyPhi when installed.
+"""Full IIT-4 numerical oracle adapter using PyPhi when installed.
 
-DASHI's local finite reference owns the small system-phi fixtures.  This adapter
+DASHI's local finite reference owns the small system-phi fixtures. This adapter
 is the source-faithful execution route for mechanism/purview distinctions,
-relations, and big-Phi.  It intentionally imports PyPhi lazily so the rest of
+relations, and big-Phi. It intentionally imports PyPhi lazily so the rest of
 the repository remains usable where PyPhi is unavailable.
 
 The default command reproduces the Albantakis et al. (2023) Fig. 1A worked
-example under the explicit IIT_4_0_2023 preset.  ``--input`` accepts a JSON
-binary state-by-node TPM plus a state for additional finite fixtures.
+example under the explicit IIT_4_0_2023 preset. ``--input`` accepts a JSON
+binary state-by-node TPM or factored multi-valued marginals plus a state.
+
+Provenance note: ``CALIBRATED_PYPHI_REFERENCE_COMMIT`` records the public PyPhi
+source revision against which this adapter was reviewed. It is not claimed to
+be the commit of the PyPhi package installed at execution time; each receipt
+also records the installed PyPhi version separately.
 """
 from __future__ import annotations
 
@@ -17,7 +22,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-PYPIHI_REFERENCE_COMMIT = "4ebee8686d703e68e602f74236b8a600b55247f8"
+CALIBRATED_PYPHI_REFERENCE_COMMIT = "4ebee8686d703e68e602f74236b8a600b55247f8"
 
 
 def _load_pyphi():
@@ -27,10 +32,18 @@ def _load_pyphi():
         from pyphi.conf import presets
     except ImportError as exc:
         raise RuntimeError(
-            "PyPhi oracle unavailable. Install current PyPhi and rerun; "
-            "do not substitute DASHI's source calibration constants for a fresh CES run."
+            "PyPhi oracle unavailable. Install a compatible current PyPhi and rerun; "
+            "do not substitute DASHI's stored calibration constants for a fresh CES run."
         ) from exc
     return np, pyphi, presets
+
+
+def _runtime_provenance(pyphi: Any) -> dict:
+    return {
+        "pyphi_installed_version": getattr(pyphi, "__version__", "unknown"),
+        "pyphi_calibration_reference_commit": CALIBRATED_PYPHI_REFERENCE_COMMIT,
+        "runtime_commit_equals_calibration_commit": "not_asserted_without_runtime_commit_metadata",
+    }
 
 
 def _analysis_receipt(analysis: Any) -> dict:
@@ -72,7 +85,7 @@ def worked_example_receipt() -> dict:
         "contract": "iit4_pyphi_oracle",
         "formalism": "IIT_4_0_2023",
         "source_fixture": "Albantakis et al. 2023 Fig.1A, subset aB, state aBC",
-        "pyphi_reference_commit": PYPIHI_REFERENCE_COMMIT,
+        **_runtime_provenance(pyphi),
         **_analysis_receipt(analysis),
     }
 
@@ -92,6 +105,8 @@ def json_fixture_receipt(path: Path) -> dict:
     state = tuple(payload["state"])
     labels = tuple(payload.get("node_labels", [f"u{i}" for i in range(len(state))]))
     if "marginals" in payload:
+        if "state_space" not in payload:
+            raise ValueError("multi-valued marginals require explicit state_space")
         substrate = pyphi.Substrate(
             marginals=[np.asarray(factor, dtype=float) for factor in payload["marginals"]],
             state_space=tuple(tuple(values) for values in payload["state_space"]),
@@ -106,15 +121,17 @@ def json_fixture_receipt(path: Path) -> dict:
         "contract": "iit4_pyphi_oracle",
         "formalism": formalism,
         "source_fixture": str(path),
-        "pyphi_reference_commit": PYPIHI_REFERENCE_COMMIT,
+        **_runtime_provenance(pyphi),
         **_analysis_receipt(analysis),
     }
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input", type=Path)
-    parser.add_argument("--output", type=Path)
+    parser = argparse.ArgumentParser(
+        description="Run a full IIT-4 PyPhi CES oracle and emit a JSON receipt."
+    )
+    parser.add_argument("--input", type=Path, help="JSON TPM/marginal fixture; default is the IIT-4 worked example")
+    parser.add_argument("--output", type=Path, help="optional receipt output path")
     args = parser.parse_args()
     receipt = json_fixture_receipt(args.input) if args.input else worked_example_receipt()
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
