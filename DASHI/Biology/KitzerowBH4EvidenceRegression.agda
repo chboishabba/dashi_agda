@@ -1,6 +1,6 @@
 module DASHI.Biology.KitzerowBH4EvidenceRegression where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Biology.KitzerowBH4EvidenceAtlasExact as Atlas
