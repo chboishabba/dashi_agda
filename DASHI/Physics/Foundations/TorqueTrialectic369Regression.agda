@@ -12,15 +12,15 @@ import DASHI.Moonshine.C3FourierConjugationExact as C3
 -- Regression surface for the physical torque specialization.
 ------------------------------------------------------------------------
 
-positiveXYZ : SO3.BracketVoxel
+positiveXYZ : Torque.BracketVoxel
 positiveXYZ =
   SO3.axis₁ , (SO3.axis₂ , SO3.axis₃)
 
-negativeXZY : SO3.BracketVoxel
+negativeXZY : Torque.BracketVoxel
 negativeXZY =
   SO3.axis₁ , (SO3.axis₃ , SO3.axis₂)
 
-degenerateXXY : SO3.BracketVoxel
+degenerateXXY : Torque.BracketVoxel
 degenerateXXY =
   SO3.axis₁ , (SO3.axis₁ , SO3.axis₂)
 
@@ -37,19 +37,19 @@ degenerateOrientationIsZero :
 degenerateOrientationIsZero = refl
 
 swapNegatesOrientation :
-  (voxel : SO3.BracketVoxel) →
+  (voxel : Torque.BracketVoxel) →
   Torque.torqueOrientation (Torque.swapTorqueInputs voxel)
   ≡ BT.negate (Torque.torqueOrientation voxel)
 swapNegatesOrientation = Torque.swapTorqueInputsNegatesOrientation
 
 swapConjugatesC3Phase :
-  (voxel : SO3.BracketVoxel) →
+  (voxel : Torque.BracketVoxel) →
   Torque.torquePhase (Torque.swapTorqueInputs voxel)
   ≡ C3.inversePhase (Torque.torquePhase voxel)
 swapConjugatesC3Phase = Torque.swapTorqueInputsConjugatesPhase
 
 pantsFaceRetainsOriginalComparison :
-  (voxel : SO3.BracketVoxel) →
+  (voxel : Torque.BracketVoxel) →
   Cells.originalComparisonEdge (Torque.torqueSynthesisTwoCell voxel)
   ≡ Cells.comparisonOneCell (Torque.torqueComparison voxel)
 pantsFaceRetainsOriginalComparison = Torque.torqueFaceRetainsComparison
