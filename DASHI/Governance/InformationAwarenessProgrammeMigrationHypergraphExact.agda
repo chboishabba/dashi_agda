@@ -10,14 +10,10 @@ import DASHI.Governance.TIAComponentDispositionAtlasExact as Disposition
 import DASHI.Governance.WadeRoleChronologyExact as Wade
 import DASHI.Governance.PalantirEarlyIntelDevelopmentChronologyExact as Early
 import DASHI.Governance.PalantirTIAHistoricalGenealogyExact as Genealogy
+import DASHI.Biology.CausalIdentificationFamiliesExact as Causal
 
 ------------------------------------------------------------------------
 -- INFORMATION-AWARENESS PROGRAMME MIGRATION HYPERGRAPH
---
--- This owner is the terminal synthesis for the current tranche.  It models
--- typed continuity dimensions without collapsing network reachability into
--- direct programme succession.  A capability-migration hypothesis can remain
--- live while a stronger reconstitution/privatisation promotion stays blocked.
 ------------------------------------------------------------------------
 
 data NodeKind : Set where
@@ -64,92 +60,65 @@ publicTIAtoNFIPTools : MigrationEdge
 publicTIAtoNFIPTools = migration-edge
   "DARPA TIA public umbrella"
   "NFIP processing/analysis/collaboration tools exception"
-  statutoryContinuation
-  strongPaid
+  statutoryContinuation strongPaid
   "TIAComponentDispositionAtlasExact"
   false
   "Congress pays a continuation category under a statutory exception, but the classified-annex programme/component identity is not public in the acquired record."
 
 inQTelToPalantir : MigrationEdge
 inQTelToPalantir = migration-edge
-  "In-Q-Tel"
-  "Palantir"
-  capitalAccess
-  strongPaid
+  "In-Q-Tel" "Palantir" capitalAccess strongPaid
   "PalantirTIAHistoricalGenealogyExact / PalantirEarlyIntelDevelopmentChronologyExact"
   true
   "investment/portfolio and intelligence-community entry are supported; this does not pay TIA programme identity."
 
 ciaAnalystsToPalantir : MigrationEdge
 ciaAnalystsToPalantir = migration-edge
-  "CIA/intelligence analysts"
-  "Palantir early product"
-  technicalFeedback
-  strongPaid
+  "CIA/intelligence analysts" "Palantir early product" technicalFeedback strongPaid
   "PalantirTIAHistoricalGenealogyExact / PalantirEarlyIntelDevelopmentChronologyExact"
   true
   "iterative analyst feedback/refinement is supported by independent histories; no TIA asset/code transfer follows."
 
 palantirToNCTCCandidate : MigrationEdge
 palantirToNCTCCandidate = migration-edge
-  "Palantir prototype"
-  "NCTC live databases"
-  customerAccess
-  boundedSecondary
+  "Palantir prototype" "NCTC live databases" customerAccess boundedSecondary
   "PalantirEarlyIntelDevelopmentChronologyExact"
   true
   "RAND secondary chronology reports a live-database beta; exact primary beta artefact and authorization remain acquisition targets."
 
 wadeToTIAcandidate : MigrationEdge
 wadeToTIAcandidate = migration-edge
-  "Alan Wade"
-  "TIA/IAO participation"
-  personnelContinuity
-  hypothesisOnly
+  "Alan Wade" "TIA/IAO participation" personnelContinuity hypothesisOnly
   "WadeRoleChronologyExact"
   false
   "official CIA/IC CIO role is paid, but the same-person TIA assignment remains secondary-claim only."
 
 tiaToPalantirAssetTransfer : MigrationEdge
 tiaToPalantirAssetTransfer = migration-edge
-  "TIA/IAO assets or code"
-  "Palantir"
-  exactAssetTransfer
-  unpaidRequired
+  "TIA/IAO assets or code" "Palantir" exactAssetTransfer unpaidRequired
   "PrivatizedTIAPromotionReceipt"
   false
   "no same-object asset/code transfer receipt acquired."
 
 tiaToPalantirRequirementTransfer : MigrationEdge
 tiaToPalantirRequirementTransfer = migration-edge
-  "TIA/IAO programme requirements"
-  "Palantir"
-  exactRequirementTransfer
-  unpaidRequired
+  "TIA/IAO programme requirements" "Palantir" exactRequirementTransfer unpaidRequired
   "terminal acquisition frontier"
   false
   "functional resemblance and customer feedback do not identify transferred requirements."
 
 palantirContractContinuity : MigrationEdge
 palantirContractContinuity = migration-edge
-  "TIA/NFIP programme contract scope"
-  "Palantir government contract scope"
-  exactContractContinuity
-  unpaidRequired
+  "TIA/NFIP programme contract scope" "Palantir government contract scope" exactContractContinuity unpaidRequired
   "terminal acquisition frontier"
   false
   "same-object procurement continuity remains unpaid."
 
 migrationEdges : List MigrationEdge
 migrationEdges =
-  publicTIAtoNFIPTools ∷
-  inQTelToPalantir ∷
-  ciaAnalystsToPalantir ∷
-  palantirToNCTCCandidate ∷
-  wadeToTIAcandidate ∷
-  tiaToPalantirAssetTransfer ∷
-  tiaToPalantirRequirementTransfer ∷
-  palantirContractContinuity ∷ []
+  publicTIAtoNFIPTools ∷ inQTelToPalantir ∷ ciaAnalystsToPalantir ∷
+  palantirToNCTCCandidate ∷ wadeToTIAcandidate ∷ tiaToPalantirAssetTransfer ∷
+  tiaToPalantirRequirementTransfer ∷ palantirContractContinuity ∷ []
 
 ------------------------------------------------------------------------
 -- Multi-dimensional promotion lattice.
@@ -190,6 +159,19 @@ allFivePrivatizationCoordinatesRemainUnpaid :
 allFivePrivatizationCoordinatesRemainUnpaid = refl
 
 ------------------------------------------------------------------------
+-- Causal-identification cross-pollination.
+------------------------------------------------------------------------
+
+causalIdentificationFamilyAvailable : Set
+causalIdentificationFamilyAvailable = Causal.CausalIdentificationFamily
+
+causalEffectPromotedFromChronology : Bool
+causalEffectPromotedFromChronology = false
+
+causalEffectPromotedFromNetworkReachability : Bool
+causalEffectPromotedFromNetworkReachability = false
+
+------------------------------------------------------------------------
 -- Honest terminal boundary for this evidence tranche.
 ------------------------------------------------------------------------
 
@@ -201,6 +183,7 @@ record MigrationBoundary : Set where
     wadeICCIOProvesTIAParticipation : Bool
     multiHopReachabilityProvesDirectTransfer : Bool
     capabilityMigrationMayRemainLiveWithoutSuccession : Bool
+    chronologyCreatesCausalIdentification : Bool
 
 canonicalMigrationBoundary : MigrationBoundary
-canonicalMigrationBoundary = migration-boundary false false false false true
+canonicalMigrationBoundary = migration-boundary false false false false true false
