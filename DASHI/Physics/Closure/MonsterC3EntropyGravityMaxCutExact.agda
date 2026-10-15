@@ -6,9 +6,11 @@ import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact as Arithmetic
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Monster3B
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as NH3Hamiltonian
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as NH3FCI
+import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as NH3C3Action
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as NH3MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
+import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
@@ -62,8 +64,14 @@ ammoniaHamiltonianRow = maxCutRow "NH3 Hamiltonian / configuration-state / C3 ac
 ammoniaFCIRow : MaxCutRow
 ammoniaFCIRow = maxCutRow "NH3 STO-3G finite Hamiltonian diagonalization" empiricalFixturePaid
   "AmmoniaSTO3GFCIExact"
-  "Yoffe-Entin-Natan-Makmal report NH3 STO-3G with 10 electrons/16 spin-orbitals, HF -55.4554 Ha and classically diagonalized FCI -55.5245 Ha"
-  "import the literal FCI matrix/eigenvector coefficients or recompute them locally before claiming an in-repo numerical wavefunction; STO-3G FCI is not the exact continuum molecule"
+  "the published Yoffe-Entin-Natan-Makmal benchmark reports NH3 STO-3G with 10 electrons/16 spin-orbitals, HF -55.4554 Ha and classically diagonalized FCI -55.5245 Ha"
+  "do not identify that published benchmark with the numerically different author-released computational artifact"
+
+authorReleasedCIRow : MaxCutRow
+authorReleasedCIRow = maxCutRow "author-released NH3 selected-CI matrix artifact" empiricalFixturePaid
+  "AmmoniaSCIReleasedArtifactExact"
+  "the paper-linked SCI_VQE repository exposes a concrete 64x64 selected-CI matrix at blob 07541705a0305e75dab1de5bc1b8324d66fee778 and released run metadata; repository provenance is an author-released data carrier, not independent authority"
+  "vendor/import the exact matrix bytes and independently diagonalize them before claiming an in-DASHI numerical eigenvector; keep paper benchmark, released FCI run and 64-config selected-CI run distinct"
 
 ammoniaMonsterProbeRow : MaxCutRow
 ammoniaMonsterProbeRow = maxCutRow "NH3 C3 -> Monster-3B action probe" interfacePaid
@@ -77,6 +85,12 @@ h3AmmoniaKineticsRow = maxCutRow "H3+ + NH3 -> NH4+ + H2 measured reaction" empi
   "primary literature pays the 297 K flowing-afterglow family; the York lab table separately carries the specific 4.2e-9 numeric row"
   "microscopic path is not inferred from the rate"
 
+h3C3ResolvedRow : MaxCutRow
+h3C3ResolvedRow = maxCutRow "proof-relevant selected-C3 proton-transfer transport" exactPaid
+  "AmmoniaH3PlusC3ResolvedReactionExact"
+  "a selected C3 cycles the three original NH3 hydrogens before and after reaction; on NH4+ it is the Td subgroup fixing the transferred proton. Literal 369 atom identity, charge/electron/bond bookkeeping, the 431.3 kJ/mol proton-affinity difference, 297 K and measured rate are inhabited as witnesses"
+  "the selected C3 is a subgroup transport, not equality of the full reactant/product point groups and not a unique microscopic proton trajectory"
+
 hydrogenAbstractionMechanismRow : MaxCutRow
 hydrogenAbstractionMechanismRow = maxCutRow "NH3 + H -> NH2 + H2 PES/mechanism/dynamics" empiricalFixturePaid
   "AmmoniaHydrogenAbstractionMechanismExact"
@@ -87,7 +101,7 @@ literal369ReactionHyperformRow : MaxCutRow
 literal369ReactionHyperformRow = maxCutRow "literal 369 atom->molecule->reaction hyperfibre" exactPaid
   "AmmoniaHydrogenAbstraction369HyperfibreExact"
   "source/product fibres are inhabited with AtomicPeriodicTable369 AtomicIndex values for 14N and four 1H atoms and an append-only source-backed transport"
-  "a C3-preserving reaction consumer needs an appropriate source/target symmetry action; NH2+H2 does not retain NH3 C3v"
+  "the hyperfibre itself does not create an exact quantum trajectory or Monster action"
 
 normalizedCountingEnsembleRow : MaxCutRow
 normalizedCountingEnsembleRow = maxCutRow "Monster C3 count -> normalized finite probability" exactPaid
@@ -116,8 +130,8 @@ monster3Plus1Row = maxCutRow "Monster symmetry of observed 3+1D universe" openPh
 canonicalMaxCutRows : List MaxCutRow
 canonicalMaxCutRows =
   ternary53Row ∷ ternary71Row ∷ monster3BC3Row ∷ zetaLiteralActionRow ∷
-  ammoniaHamiltonianRow ∷ ammoniaFCIRow ∷ ammoniaMonsterProbeRow ∷
-  h3AmmoniaKineticsRow ∷ hydrogenAbstractionMechanismRow ∷ literal369ReactionHyperformRow ∷
+  ammoniaHamiltonianRow ∷ ammoniaFCIRow ∷ authorReleasedCIRow ∷ ammoniaMonsterProbeRow ∷
+  h3AmmoniaKineticsRow ∷ h3C3ResolvedRow ∷ hydrogenAbstractionMechanismRow ∷ literal369ReactionHyperformRow ∷
   normalizedCountingEnsembleRow ∷ physicalEntropyRow ∷ entropyGravityRow ∷ monster3Plus1Row ∷ []
 
 record MonsterC3EntropyGravityMaxCutReceipt : Set where
@@ -137,6 +151,10 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
     ammoniaOccupationWavefunctionCarrierPaidIsTrue : ammoniaOccupationWavefunctionCarrierPaid ≡ true
     ammoniaSTO3GFCIDiagonalizationPaid : Bool
     ammoniaSTO3GFCIDiagonalizationPaidIsTrue : ammoniaSTO3GFCIDiagonalizationPaid ≡ true
+    authorReleasedSelectedCIMatrixIdentityPaid : Bool
+    authorReleasedSelectedCIMatrixIdentityPaidIsTrue : authorReleasedSelectedCIMatrixIdentityPaid ≡ true
+    authorReleasedMatrixRediagonalizedByDASHI : Bool
+    authorReleasedMatrixRediagonalizedByDASHIIsFalse : authorReleasedMatrixRediagonalizedByDASHI ≡ false
     ammoniaGroundStateC3ActionPaid : Bool
     ammoniaGroundStateC3ActionPaidIsTrue : ammoniaGroundStateC3ActionPaid ≡ true
     ammoniaMonsterC3CoordinateIntertwinerPaid : Bool
@@ -145,6 +163,8 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
     nontrivialMonsterActionOnAmmoniaPaidIsFalse : nontrivialMonsterActionOnAmmoniaPaid ≡ false
     h3AmmoniaProductsByproductsKineticsPaid : Bool
     h3AmmoniaProductsByproductsKineticsPaidIsTrue : h3AmmoniaProductsByproductsKineticsPaid ≡ true
+    h3AmmoniaProofRelevantC3ResolvedTransitionPaid : Bool
+    h3AmmoniaProofRelevantC3ResolvedTransitionPaidIsTrue : h3AmmoniaProofRelevantC3ResolvedTransitionPaid ≡ true
     hydrogenAbstractionMechanismPaid : Bool
     hydrogenAbstractionMechanismPaidIsTrue : hydrogenAbstractionMechanismPaid ≡ true
     literal369ReactionHyperformPaid : Bool
@@ -164,8 +184,9 @@ canonicalMonsterC3EntropyGravityMaxCutReceipt : MonsterC3EntropyGravityMaxCutRec
 canonicalMonsterC3EntropyGravityMaxCutReceipt =
   monsterC3EntropyGravityMaxCutReceipt
     true refl true refl true refl true refl
-    true refl true refl true refl true refl true refl false refl
-    true refl true refl true refl true refl false refl true refl false refl
+    true refl true refl true refl true refl false refl
+    true refl true refl false refl true refl true refl
+    true refl true refl true refl false refl true refl false refl
     canonicalMaxCutRows refl
 
 residual53Agreement :
@@ -182,6 +203,16 @@ sto3gFCIDiagonalizationAlreadyPaid :
   NH3FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid NH3FCI.canonicalSTO3GFCIBoundary ≡ true
 sto3gFCIDiagonalizationAlreadyPaid = refl
 
+authorReleasedMatrixIdentityAlreadyPaid :
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+authorReleasedMatrixIdentityAlreadyPaid = refl
+
+authorReleasedMatrixStillNotRediagonalizedHere :
+  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
+authorReleasedMatrixStillNotRediagonalizedHere = refl
+
 groundStateC3ActionAlreadyPaid :
   NH3C3Action.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
     NH3C3Action.canonicalGroundStateC3Boundary ≡ true
@@ -191,6 +222,11 @@ nontrivialMonsterActionStillBlocked :
   NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
     NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillBlocked = refl
+
+h3C3ResolvedTransitionAlreadyPaid :
+  H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
+    H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
+h3C3ResolvedTransitionAlreadyPaid = refl
 
 abstractionMechanismAlreadyPaid :
   Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid
