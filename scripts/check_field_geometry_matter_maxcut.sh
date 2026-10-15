@@ -17,6 +17,7 @@ files=(
   DASHI/Physics/Foundations/CausalTransportFTLValidation.agda
   DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
   DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
+  DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
   DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
 )
 
@@ -35,6 +36,7 @@ grep -q 'quantumInequalityAdmissible' DASHI/Physics/Foundations/QuantumStressEne
 grep -q 'CausalSuperluminalTransportPromotion' DASHI/Physics/Foundations/CausalTransportFTLObligationsExact.agda
 grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
 grep -q 'moreGenericAbstractionCountsAsPhysicalClosure' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
+grep -q 'monolithicFoundationsEverythingIntegration' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
