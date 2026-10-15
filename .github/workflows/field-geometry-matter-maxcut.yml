@@ -1,0 +1,31 @@
+name: Field geometry matter max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Foundations/SameObjectConservationLedgerExact.agda'
+      - 'DASHI/Physics/Foundations/ControlledPhysicalTransitionExact.agda'
+      - 'DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda'
+      - 'DASHI/Physics/Foundations/FieldGeometryMatter*.agda'
+      - 'DASHI/Physics/Foundations/QuantumStressEnergyEngineering*.agda'
+      - 'DASHI/Physics/Foundations/CausalTransportFTL*.agda'
+      - 'scripts/check_field_geometry_matter_maxcut.sh'
+      - '.github/workflows/field-geometry-matter-maxcut.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check conservation, promotion, quantum-stress and causal-transport boundaries
+        run: nix develop --command bash scripts/check_field_geometry_matter_maxcut.sh
