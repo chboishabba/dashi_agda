@@ -16,11 +16,22 @@ import DASHI.Biology.IITIIT4ConsumerDescentExact as Consumer
 
 ------------------------------------------------------------------------
 -- TERMINAL COMPLETION LEDGER
+--
+-- Verification authorities are deliberately separated:
+--
+--   * Agda imports + kernel checking establish the formal theorem surface.
+--   * Python is used only for executable numerical / finite-combinatorial
+--     verification of IIT fixtures and reference calculations.
+--   * PyPhi is an external numerical oracle for full distinction/relation/CES
+--     calculations; its results are not Agda proofs.
+--
+-- In particular there is no Python or grep-based source checker here.
 ------------------------------------------------------------------------
 
 data VerificationLevel : Set where
   sourceWritten : VerificationLevel
-  pythonReferenceVerified : VerificationLevel
+  numericVerificationProgramPresent : VerificationLevel
+  numericVerificationExecuted : VerificationLevel
   externalOracleAdapterPresent : VerificationLevel
   agdaKernelVerified : VerificationLevel
 
@@ -39,12 +50,13 @@ record CompletionLedger : Set where
     task9ConsumerDescentSource : Bool
     task10ReceiptLoopSource : Bool
 
-    localPythonReferenceChecksExecutable : Bool
+    numericVerificationProgramExists : Bool
+    numericVerificationExecutedInThisEnvironment : Bool
     fullPyPhiOracleExecutedInThisEnvironment : Bool
     agdaKernelExecutedInThisEnvironment : Bool
 
-    sourceCompletionReceipt : String
-    pythonCompletionChecker : String
+    formalVerificationAuthority : String
+    numericVerificationProgram : String
     externalOracleAdapter : String
     kernelVerificationReceipt : String
 
@@ -54,10 +66,10 @@ currentCompletionLedger : CompletionLedger
 currentCompletionLedger =
   completionLedger
     true true true true true true true true true true true
-    true false false
-    "tasks 1-10 source surfaces imported by IITHyperfabricCompletionReceiptExact"
-    "scripts/check_iit_hyperfabric_completion.py"
-    "scripts/iit4_pyphi_oracle.py; requires an installed PyPhi runtime"
+    true false false false
+    "agda DASHI/EverythingIITPhiIntegrationMaxCut.agda"
+    "scripts/iit_numeric_verification.py; numeric and finite-combinatorial verification only"
+    "scripts/iit4_pyphi_oracle.py; full CES numerical oracle when PyPhi is installed"
     "PENDING: no Agda executable or CI kernel receipt available in this execution environment"
 
 allTenSourceTasksPresent :
@@ -77,6 +89,14 @@ allTenSourceTasksPresent =
 fullStructureAdapterPresent :
   task7PyPhiFullStructureAdapterPresent currentCompletionLedger ≡ true
 fullStructureAdapterPresent = refl
+
+numericProgramPresent :
+  numericVerificationProgramExists currentCompletionLedger ≡ true
+numericProgramPresent = refl
+
+noFakeNumericExecutionClaim :
+  numericVerificationExecutedInThisEnvironment currentCompletionLedger ≡ false
+noFakeNumericExecutionClaim = refl
 
 noFakeKernelPromotion :
   agdaKernelExecutedInThisEnvironment currentCompletionLedger ≡ false
