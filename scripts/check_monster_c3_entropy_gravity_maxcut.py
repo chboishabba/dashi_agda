@@ -30,12 +30,12 @@ def main() -> None:
     assert 1 + monster_from_c3 == 196884
     assert 1 + residual53 == 54
 
-    # NH3 / reaction bookkeeping fixtures.
-    assert 6 + 4 == 10                 # A1 + E occupied electrons
-    assert 8536 - 4223 == 4313         # NH3 minus H2 proton affinities, tenths kJ/mol
-    assert 42 / 10 == 4.2              # kinetic mantissa
-    assert 555245 - 554554 == 691      # published STO-3G FCI-HF difference, 1e-4 Ha
-    assert 64 == 8 * 8                 # released selected-CI matrix dimension
+    assert 6 + 4 == 10
+    assert 8536 - 4223 == 4313
+    assert 42 / 10 == 4.2
+    assert 555245 - 554554 == 691
+    assert 64 == 8 * 8
+    assert 55517555010 / 1_000_000_000 == 55.51755501
 
     require(
         "DASHI/Moonshine/MonsterC3ResidualTernaryArithmeticExact.agda",
@@ -70,7 +70,7 @@ def main() -> None:
         "DASHI/Physics/Chemistry/AmmoniaSCIReleasedArtifactExact.agda",
         "07541705a0305e75dab1de5bc1b8324d66fee778",
         "64",
-        "55517555",
+        "55517555010",
         "paperBenchmarkAndArtifactAreSameNumericalObject",
         "matrixIndependentlyRediagonalizedByDASHI",
     )
