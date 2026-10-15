@@ -5,6 +5,7 @@ import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authority
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
+import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
 
 fineMonsterStatesRemainPresent :
@@ -24,6 +25,18 @@ balancedRegularFibreCancelsCoarsely :
     StateCount.canonicalMonsterC3StateCountingReceipt
   ≡ 0
 balancedRegularFibreCancelsCoarsely = refl
+
+sameObjectZetaCancellationAlreadyPaid :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.exact65610ZetaCancellationPaid
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt
+  ≡ true
+sameObjectZetaCancellationAlreadyPaid = refl
+
+zetaWeldStillDoesNotCreateQuantumGravity :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.zetaWeldCreatesQuantumGravity
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt
+  ≡ false
+zetaWeldStillDoesNotCreateQuantumGravity = refl
 
 stateCountIsNotProbabilityEntropy :
   StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution
