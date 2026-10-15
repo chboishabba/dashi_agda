@@ -34,7 +34,10 @@ def main() -> None:
     assert 6 + 4 == 10
     assert 3 + 1 == 4
     assert 8 == 8
+    assert 3 + 3 == 4 + 2
+    assert 2 + 10 == 10 + 2
     assert 8536 / 10 == 853.6
+    assert 42 / 10 == 4.2
 
     require(
         "DASHI/Moonshine/MonsterC3ResidualTernaryArithmeticExact.agda",
@@ -76,13 +79,28 @@ def main() -> None:
         "protonAffinityDeterminesMicroscopicReactionPath",
     )
     require(
+        "DASHI/Physics/Chemistry/AmmoniaH3PlusProtonTransferExact.agda",
+        "10.1016/0009-2614(74)89061-5",
+        "H3+ + NH3 -> NH4+ + H2",
+        "rateMantissaTenths",
+        "42",
+        "297",
+        "20",
+        "productsAndByproductsPaid",
+        "sameReactionQuantitativeKineticsPaid",
+        "numericLabTablePromotedToPrimaryPaperLocator",
+        "microscopicTransitionPathPaid",
+    )
+    require(
         "DASHI/Physics/Chemistry/AtomicPeriodicTable369C3EntropyIntertwinerExact.agda",
         "sourceBackedSameObjectC3GeometryFixturePaid",
         "sourceBackedElectronicIrrepCoordinatesPaid",
         "sourceBackedProtonationStoichiometryPaid",
         "sourceBackedProtonationThermochemistryPaid",
-        "fullC3ResolvedReactionTransportInstantiated",
+        "productsByproductsReactionFixturePaid",
         "sameReactionQuantitativeKineticsPaid",
+        "fullC3ResolvedReactionTransportInstantiated",
+        "microscopicTransitionPathPaid",
         "molecularEntropyImpliesPhysicalGravity",
     )
     require(
@@ -128,7 +146,8 @@ def main() -> None:
     print(f"Monster degree via C3: {monster_degree_from_c3}")
     print(f"Monster degree via Ogg factors: {monster_degree_from_ogg}")
     print("NH3 electronic count: 6 A1 + 4 E = 10 electrons")
-    print("NH3 protonation: H inventory 3+1=4; proton affinity 853.6 kJ/mol")
+    print("NH3 + H+ protonation: H inventory 3+1=4; proton affinity 853.6 kJ/mol")
+    print("H3+ + NH3: products NH4+ + H2; k=4.2e-9 at 297 K, +/-20% compilation row")
     print("uniform counting weights: 1/196883 and 1/53 normalize arithmetically")
 
 
