@@ -12,8 +12,8 @@ import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact as MaxCut
 -- Terminal receipt for the reusable magnetocaloric / AMR lane.
 --
 -- Structural formalisation and the current source-payment atlas are explicit.
--- The remaining frontier is same-object physical acquisition/calibration, not
--- another ungrounded abstraction layer.
+-- The remaining frontier is exact-material / same-device physical acquisition,
+-- not another ungrounded abstraction layer.
 ------------------------------------------------------------------------
 
 record MagnetocaloricAMRStructuralReceipt : Set₁ where
@@ -48,6 +48,14 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
     preliminaryThreeMonthPaymentQualified           : Set
     plannedLongTermExperimentNotPromoted            : Set
 
+    crossObjectFamilyEvidenceAtlasPopulated         : Set
+    naZn13FamilyCrystalPriorAcquired                : Set
+    mnSiHydrogenationResponsePriorAcquired          : Set
+    fieldSpecificHeatEntropyPriorAcquired           : Set
+    magnetoelasticFamilyPriorAcquired               : Set
+    familyThermalTransportPriorAcquired             : Set
+    familyEvidenceNotPromotedToExactMaterial        : Set
+
     magneticBAndHRemainDistinct                    : Set
     sharedMaterialCarrierDoesNotCollapseObservables : Set
     coatingAndSubstrateRemainDistinctMaterials      : Set
@@ -58,8 +66,8 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
 
 record MagnetocaloricAMRRemainingFrontier : Set₁ where
   field
-    materialSpecificConstitutiveData : Set
-    measuredFieldTemperatureResponse : Set
+    exactMaterialConstitutiveData : Set
+    exactMaterialFieldTemperatureResponse : Set
     measuredPorousHydraulics         : Set
     measuredHeatTransfer             : Set
     cycleTimingAndControlCalibration : Set
@@ -70,11 +78,11 @@ record MagnetocaloricAMRRemainingFrontier : Set₁ where
     completedLongDurationSameObjectAging : Set
     deviceLevelCOPValidation         : Set
 
-    materialSpecificCrystalIdentification : Set
-    materialSpecificMagneticSymmetry       : Set
+    exactMaterialCrystalIdentification : Set
+    exactMaterialMagneticSymmetry       : Set
     validatedHamiltonianOrElectronicModel  : Set
     ensembleAndFreeEnergyCalibration       : Set
-    compositionSubstitutionHydrogenationResponse : Set
+    exactCompositionSubstitutionHydrogenationResponse : Set
     coatingInhibitorFluidCorrosionCalibration : Set
     transitionStrainAndFatigueCalibration : Set
     electromagneticFieldMapAndBHCalibration : Set
@@ -87,6 +95,7 @@ record MagnetocaloricAMRPromotionGate : Set₁ where
     EvidenceMaxCutReceipt : MaxCut.MagnetocaloricMaxCutReceipt
     noStructuralShortcutToCalibratedPerformance : Set
     noSourceShortcutToTheoremAuthority           : Set
+    noFamilyShortcutToExactMaterialIdentity      : Set
     noMicroscopicShortcutToBulkResponse           : Set
     noMechanicalShortcutToQualifiedLifetime       : Set
     noVendorShortcutToSameDevicePerformance       : Set
