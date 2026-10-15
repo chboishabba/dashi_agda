@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import Base369 as Base
 import DASHI.Foundations.Base369FiniteRingLaws as Ring369
 import DASHI.Foundations.HexTruthS3CarrierBridgeExact as HexS3
+import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants369
@@ -215,10 +216,7 @@ hexS3CarrierRoundTrip = HexS3.hexRoundTrip
 hexS3ProductsRemainDistinct :
   ((left right : Base.HexTruth) →
     HexS3.hexToPermutation (Base.hexXor left right)
-    ≡
-    DASHI.Foundations.TernaryPermutationS3LawsExact._∙_
-      (HexS3.hexToPermutation left)
-      (HexS3.hexToPermutation right)) →
+    ≡ S3._∙_ (HexS3.hexToPermutation left) (HexS3.hexToPermutation right)) →
   ⊥
 hexS3ProductsRemainDistinct = HexS3.hexCarrierChartCannotPreserveBothProducts
 
