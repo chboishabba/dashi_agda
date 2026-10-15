@@ -33,11 +33,11 @@ entropyHighDegeneracy : Nat
 entropyHighDegeneracy =
   MATBG.highTemperatureDegeneracy MATBG.zhang2026EntropyObservation
 
-entropyDegeneracyPair :
-  entropyLowDegeneracy ≡ 4
-  → entropyHighDegeneracy ≡ 8
-  → Set
-entropyDegeneracyPair _ _ = Set
+entropyLowDegeneracyIsFour : entropyLowDegeneracy ≡ 4
+entropyLowDegeneracyIsFour = refl
+
+entropyHighDegeneracyIsEight : entropyHighDegeneracy ≡ 8
+entropyHighDegeneracyIsEight = refl
 
 qtmAndEntropySameSampleNotClaimed :
   MATBG.sameSampleQTMEntropyPaid MATBG.canonicalMATBG2026VerticalSlice ≡ false
