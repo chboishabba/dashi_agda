@@ -46,6 +46,14 @@ familyThermalTransportDoesNotCloseDeviceHeatTransfer :
   ≡ MaxCut.peerReviewedPartial
 familyThermalTransportDoesNotCloseDeviceHeatTransfer = refl
 
+polarisSystemPerformancePaid :
+  MaxCut.PaymentRow.status MaxCut.polarisSystemPerformanceRow ≡ MaxCut.peerReviewedPaid
+polarisSystemPerformancePaid = refl
+
+polarisHydraulicsPaidForPlatform :
+  MaxCut.PaymentRow.status MaxCut.polarisHydraulicCampaignRow ≡ MaxCut.peerReviewedPaid
+polarisHydraulicsPaidForPlatform = refl
+
 exactCrystalIdentityStillOpen :
   MaxCut.PaymentRow.status MaxCut.crystalMagneticIdentificationRow
   ≡ MaxCut.structurallyTyped
@@ -71,9 +79,9 @@ stellarFieldNotMeasuredDevice :
   MaxCut.PaymentRow.status MaxCut.stellarFiveTeslaRow ≡ MaxCut.vendorSourceOnly
 stellarFieldNotMeasuredDevice = refl
 
-sameDeviceCOPOpen :
+sameLaFeSiDeviceCOPOpen :
   MaxCut.PaymentRow.status MaxCut.sameDeviceCOPRow ≡ MaxCut.openSameObjectAcquisition
-sameDeviceCOPOpen = refl
+sameLaFeSiDeviceCOPOpen = refl
 
 nsNotEmpiricalPayment :
   MaxCut.PaymentRow.status MaxCut.navierStokesRow ≡ MaxCut.structuralPrecedentOnly
