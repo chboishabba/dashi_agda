@@ -5,10 +5,13 @@ import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as E
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as W
 
 phaseMul : E.ElectronicC3Phase → E.ElectronicC3Phase → E.ElectronicC3Phase
-phaseMul E.invariant x = x
-phaseMul x E.invariant = x
+phaseMul E.invariant E.invariant = E.invariant
+phaseMul E.invariant E.zeta = E.zeta
+phaseMul E.invariant E.zetaSquared = E.zetaSquared
+phaseMul E.zeta E.invariant = E.zeta
 phaseMul E.zeta E.zeta = E.zetaSquared
 phaseMul E.zeta E.zetaSquared = E.invariant
+phaseMul E.zetaSquared E.invariant = E.zetaSquared
 phaseMul E.zetaSquared E.zeta = E.invariant
 phaseMul E.zetaSquared E.zetaSquared = E.zeta
 
