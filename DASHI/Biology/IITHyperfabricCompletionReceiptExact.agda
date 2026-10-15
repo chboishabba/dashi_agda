@@ -8,8 +8,6 @@ import DASHI.Biology.IITMatchedFabricGateExperimentExact as Matched
 import DASHI.Biology.IIT369MatchedAlgebraControlExact as Algebra
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact as Fabric
 import DASHI.Biology.IITPointed27HyperformExperimentExact as Pointed
-import DASHI.Biology.IIT4FiniteDistinctionExact as Distinction
-import DASHI.Biology.IIT4FiniteRelationExact as Relation
 import DASHI.Biology.IIT4FiniteCauseEffectStructureExact as Structure
 import DASHI.Biology.IITXOR369StressFamilyExact as Stress
 import DASHI.Biology.IITIIT4ConsumerDescentExact as Consumer
@@ -25,7 +23,7 @@ import DASHI.Biology.IITIIT4ConsumerDescentExact as Consumer
 --   * PyPhi is an external numerical oracle for full distinction/relation/CES
 --     calculations; its results are not Agda proofs.
 --
--- In particular there is no Python or grep-based source checker here.
+-- No Python or grep-based source checker is part of this authority chain.
 ------------------------------------------------------------------------
 
 data VerificationLevel : Set where
@@ -66,11 +64,11 @@ currentCompletionLedger : CompletionLedger
 currentCompletionLedger =
   completionLedger
     true true true true true true true true true true true
-    true false false false
+    true true false false
     "agda DASHI/EverythingIITPhiIntegrationMaxCut.agda"
-    "scripts/iit_numeric_verification.py; numeric and finite-combinatorial verification only"
+    "scripts/iit_numeric_verification.py; numerical and finite-combinatorial verification only"
     "scripts/iit4_pyphi_oracle.py; full CES numerical oracle when PyPhi is installed"
-    "PENDING: no Agda executable or CI kernel receipt available in this execution environment"
+    "PENDING: Agda kernel has not been executed in this execution environment"
 
 allTenSourceTasksPresent :
   task1VersionedSystemKernelSource currentCompletionLedger ≡ true
@@ -94,9 +92,9 @@ numericProgramPresent :
   numericVerificationProgramExists currentCompletionLedger ≡ true
 numericProgramPresent = refl
 
-noFakeNumericExecutionClaim :
-  numericVerificationExecutedInThisEnvironment currentCompletionLedger ≡ false
-noFakeNumericExecutionClaim = refl
+numericVerificationWasExecuted :
+  numericVerificationExecutedInThisEnvironment currentCompletionLedger ≡ true
+numericVerificationWasExecuted = refl
 
 noFakeKernelPromotion :
   agdaKernelExecutedInThisEnvironment currentCompletionLedger ≡ false
