@@ -1,6 +1,7 @@
 module DASHI.Physics.Units.MagnetocaloricSIConsumerExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Int using (pos)
 
 import DASHI.Physics.Units.SI as SI
 
@@ -17,10 +18,10 @@ MagneticFieldStrength Entropy HeatCapacity SpecificHeatCapacity ThermalConductiv
 MagneticFieldStrength =
   SI.dim SI.minusOne SI.zeroI SI.zeroI SI.one SI.zeroI SI.zeroI SI.zeroI
 Entropy =
-  SI.dim (Agda.Builtin.Int.pos 2) SI.one SI.minusTwo SI.zeroI SI.minusOne SI.zeroI SI.zeroI
+  SI.dim (pos 2) SI.one SI.minusTwo SI.zeroI SI.minusOne SI.zeroI SI.zeroI
 HeatCapacity = Entropy
 SpecificHeatCapacity =
-  SI.dim (Agda.Builtin.Int.pos 2) SI.zeroI SI.minusTwo SI.zeroI SI.minusOne SI.zeroI SI.zeroI
+  SI.dim (pos 2) SI.zeroI SI.minusTwo SI.zeroI SI.minusOne SI.zeroI SI.zeroI
 ThermalConductivity =
   SI.dim SI.one SI.one SI.minusThree SI.zeroI SI.minusOne SI.zeroI SI.zeroI
 
