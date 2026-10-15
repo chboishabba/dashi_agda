@@ -7,6 +7,7 @@ import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Monster3B
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as NH3Protonation
+import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
@@ -75,21 +76,28 @@ ammoniaElectronicRow = maxCutRow
   "NH3 electronic symmetry coordinates -> exact C3 phase restriction" empiricalFixturePaid
   "AmmoniaC3ElectronicSymmetryExact"
   "NIST/Yin et al. pay 1A1, C3v and (1a1)^2(2a1)^2(1e)^4(3a1)^2 source coordinates; DASHI restricts A1 trivially and E to zeta + zeta^2 on the exact Fourier carrier"
-  "construct a literal same-object many-electron Hamiltonian/wavefunction action if that stronger consumer is required"
+  "construct a literal same-object many-electron Hamiltonian/wavefunction action only if that stronger consumer is required"
 
 ammoniaProtonationRow : MaxCutRow
 ammoniaProtonationRow = maxCutRow
   "NH3 + H+ -> NH4+ reaction bookkeeping and thermochemistry" empiricalFixturePaid
   "AmmoniaProtonationReactionExact"
   "atom, charge, valence-electron and Lewis bond/lone-pair bookkeeping are exact; Hunter-Lias/NIST pay the evaluated 853.6 kJ/mol gas-phase proton affinity"
-  "acquire same-reaction quantitative kinetics/transition-state data and instantiate the full ChemistryHyperfibre C3ResolvedReactionTransition"
+  "thermochemical scalar does not determine transition path or kinetics"
+
+h3AmmoniaKineticsRow : MaxCutRow
+h3AmmoniaKineticsRow = maxCutRow
+  "H3+ + NH3 -> NH4+ + H2 products/byproduct + kinetics" empiricalFixturePaid
+  "AmmoniaH3PlusProtonTransferExact"
+  "Hemsworth-Payzant-Schiff-Bohme 1974 pays the measured 297 K flowing-afterglow reaction family including X=H2; York's laboratory table is retained separately as numeric carrier for k=4.2e-9 cm^3 molecule^-1 s^-1, ±20%, product distribution 1"
+  "bind this measured reaction to literal 369 molecular/electronic source and target fibres; acquire/construct transition-state or microscopic-path evidence only for consumers that require it"
 
 chemistryReactionTransportRow : MaxCutRow
 chemistryReactionTransportRow = maxCutRow
   "369 hyperfibre -> full C3-resolved reaction transport" interfacePaid
   "AtomicPeriodicTable369ChemistryHyperfibreBridgeExact + AtomicPeriodicTable369C3EntropyIntertwinerExact"
-  "the generic transport requires source/target C3 actions plus element/charge/electron/bond/mechanism/energy/kinetic/environment receipts; protonation pays a bounded subset, not the full hyperfibre inhabitant"
-  "bind NH3/NH4+ species to the literal 369 molecular/electronic carrier and pay kinetics/environment/transition-state witnesses"
+  "element/charge/electron bookkeeping, products/byproducts, thermochemistry and one same-reaction kinetic datum are now paid on bounded fixtures; the generic transport still requires literal source/target C3 actions, hyperfibre binding, mechanism and environment witnesses"
+  "bind NH3/H3+/NH4+/H2 to the literal 369 carrier and construct the source/target action and transition witnesses without manufacturing a microscopic trajectory"
 
 normalizedCountingEnsembleRow : MaxCutRow
 normalizedCountingEnsembleRow = maxCutRow
@@ -123,8 +131,9 @@ canonicalMaxCutRows : List MaxCutRow
 canonicalMaxCutRows =
   ternary53Row ∷ ternary71Row ∷ monster3BC3Row ∷ zetaLiteralActionRow
   ∷ ammoniaC3GeometryRow ∷ ammoniaElectronicRow ∷ ammoniaProtonationRow
-  ∷ chemistryReactionTransportRow ∷ normalizedCountingEnsembleRow
-  ∷ physicalEntropyRow ∷ entropyGravityRow ∷ monster3Plus1Row ∷ []
+  ∷ h3AmmoniaKineticsRow ∷ chemistryReactionTransportRow
+  ∷ normalizedCountingEnsembleRow ∷ physicalEntropyRow ∷ entropyGravityRow
+  ∷ monster3Plus1Row ∷ []
 
 record MonsterC3EntropyGravityMaxCutReceipt : Set where
   constructor monsterC3EntropyGravityMaxCutReceipt
@@ -145,6 +154,9 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
     ammoniaProtonationStoichiometryThermochemistryPaid : Bool
     ammoniaProtonationStoichiometryThermochemistryPaidIsTrue :
       ammoniaProtonationStoichiometryThermochemistryPaid ≡ true
+    h3AmmoniaProductsByproductsKineticsPaid : Bool
+    h3AmmoniaProductsByproductsKineticsPaidIsTrue :
+      h3AmmoniaProductsByproductsKineticsPaid ≡ true
     fullC3ResolvedReactionTransportPaid : Bool
     fullC3ResolvedReactionTransportPaidIsFalse :
       fullC3ResolvedReactionTransportPaid ≡ false
@@ -166,7 +178,8 @@ canonicalMonsterC3EntropyGravityMaxCutReceipt : MonsterC3EntropyGravityMaxCutRec
 canonicalMonsterC3EntropyGravityMaxCutReceipt =
   monsterC3EntropyGravityMaxCutReceipt
     true refl true refl true refl true refl true refl true refl true refl
-    false refl true refl false refl true refl false refl canonicalMaxCutRows refl
+    true refl false refl true refl false refl true refl false refl
+    canonicalMaxCutRows refl
 
 residual53Agreement :
   Arithmetic.certifiedMonster3BResidual ≡
@@ -194,6 +207,11 @@ ammoniaProtonationThermochemistryAlreadyPaid :
   NH3Protonation.ProtonationBoundary.sourceBackedProtonAffinityPaid
     NH3Protonation.canonicalProtonationBoundary ≡ true
 ammoniaProtonationThermochemistryAlreadyPaid = refl
+
+h3AmmoniaKineticsAlreadyPaid :
+  H3Transfer.H3AmmoniaBoundary.sameReactionQuantitativeKineticsPaid
+    H3Transfer.canonicalH3AmmoniaBoundary ≡ true
+h3AmmoniaKineticsAlreadyPaid = refl
 
 normalizedCountingWeightsAlreadyPaid :
   Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid
