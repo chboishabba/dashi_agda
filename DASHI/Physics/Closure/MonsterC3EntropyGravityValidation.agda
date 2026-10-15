@@ -58,13 +58,17 @@ sto3gFCIEnergyMagnitudeIs555245 :
 sto3gFCIEnergyMagnitudeIs555245 = refl
 
 authorReleasedMatrixIdentityPaid :
-  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
-    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
 authorReleasedMatrixIdentityPaid = refl
 
 authorReleasedMatrixDimension64 :
   SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension SCIArtifact.nh3SelectedCI64Artifact ≡ 64
 authorReleasedMatrixDimension64 = refl
+
+authorReleasedSelectedEnergyNanoHartree :
+  SCIArtifact.ReleasedSelectedCIArtifact.selectedGroundEnergyNanoHartreeMagnitude
+    SCIArtifact.nh3SelectedCI64Artifact ≡ 55517555010
+authorReleasedSelectedEnergyNanoHartree = refl
 
 paperBenchmarkAndReleasedArtifactRemainDistinct :
   SCIArtifact.ReleasedArtifactBoundary.paperBenchmarkAndArtifactAreSameNumericalObject
