@@ -8,6 +8,7 @@ open import Data.Integer using (+_; -[1+_])
 import DASHI.Physics.Units.MechanicalDimensionExact as Dim
 import DASHI.Physics.Textile.TextileMechanicalDimensionExact as TextileDim
 import DASHI.Physics.Textile.TextileMechanicalFibreExact as Mechanics
+import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque369
 
 ------------------------------------------------------------------------
 -- PROVENANCE / SCOPE
@@ -82,6 +83,49 @@ torsionLawDimensionallyTyped :
   TextileDim.torsionalRigidityDimension Dim.⊗ᴰ twistRateDimension
   ≡ momentDimension
 torsionLawDimensionallyTyped = refl
+
+------------------------------------------------------------------------
+-- Shared torque geometry.
+--
+-- The constitutive scalar law remains exactly T = G J phi'.  A caller that
+-- knows the local output/lever/force axes may attach the same torque value to
+-- the canonical 369 / pants / C3 torque carrier without changing its units or
+-- magnitude semantics.
+------------------------------------------------------------------------
+
+textileOrientedTorque :
+  ∀ {Scalar : Set}
+    {state : Mechanics.YarnConstitutiveState Scalar} →
+  Torque369.BracketVoxel →
+  BendingTorsionConstitutiveReceipt Scalar state →
+  Torque369.OrientedTorque (Moment Scalar)
+textileOrientedTorque voxel receipt =
+  Torque369.oriented-torque voxel (torque receipt)
+
+textileTorqueMagnitudeWitness :
+  ∀ {Scalar : Set}
+    {state : Mechanics.YarnConstitutiveState Scalar}
+    (voxel : Torque369.BracketVoxel)
+    (receipt : BendingTorsionConstitutiveReceipt Scalar state) →
+  Torque369.TorqueMagnitudeWitness
+    Scalar
+    (Moment Scalar)
+    (textileOrientedTorque voxel receipt)
+textileTorqueMagnitudeWitness voxel receipt =
+  Torque369.torque-magnitude-witness
+    Dim.magnitude
+    (Dim.magnitude (torque receipt))
+    refl
+
+textileTorqueOrientation :
+  ∀ {Scalar : Set}
+    {state : Mechanics.YarnConstitutiveState Scalar} →
+  (voxel : Torque369.BracketVoxel) →
+  (receipt : BendingTorsionConstitutiveReceipt Scalar state) →
+  DASHI.Algebra.BalancedTernary.Trit
+textileTorqueOrientation voxel receipt =
+  Torque369.orientedTorqueOrientation
+    (textileOrientedTorque voxel receipt)
 
 ------------------------------------------------------------------------
 -- Non-promotion boundaries.
