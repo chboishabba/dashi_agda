@@ -99,4 +99,4 @@
 - [x] Import all sound consumer bridges into the thermodynamics rollup.
 - [x] Record populated consumers and rejected/covered candidate consumers in the atlas.
 - [x] Record the remaining physical/calibration frontier in the terminal receipt.
-- [ ] Inspect branch diff/status; do not claim Agda typechecking without a compiler/status check.
+- [x] Inspect branch diff/status. Branch is current with `master`; CodeRabbit status is successful. No Agda compiler/status check is available, so no typecheck-success claim is made.
