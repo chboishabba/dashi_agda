@@ -59,6 +59,24 @@ controlDoesNotImplyEquilibrium =
 residualCandidateExists : Promotion.AnomalousMomentumCandidate
 residualCandidateExists = Promotion.canonicalAnomalousMomentumCandidate
 
+strongPromotionNeedsClosedNuisance :
+  (evidence : Promotion.StrongResidualPromotionEvidence) →
+  Promotion.strongNuisanceStatus evidence ≡ Promotion.nuisanceClosedByReceipt
+strongPromotionNeedsClosedNuisance evidence =
+  Promotion.strongNuisanceClosed evidence
+
+strongPromotionNeedsRepetition :
+  (evidence : Promotion.StrongResidualPromotionEvidence) →
+  Promotion.strongRepeated evidence ≡ true
+strongPromotionNeedsRepetition evidence =
+  Promotion.strongRepeatedIsTrue evidence
+
+strongPromotionNeedsIndependentReplication :
+  (evidence : Promotion.StrongResidualPromotionEvidence) →
+  Promotion.strongIndependentReplication evidence ≡ true
+strongPromotionNeedsIndependentReplication evidence =
+  Promotion.strongIndependentReplicationIsTrue evidence
+
 residualDoesNotPromoteToAntigravity : Bool
 residualDoesNotPromoteToAntigravity =
   Promotion.residualDoesNotDirectlyPromoteToAntigravity
