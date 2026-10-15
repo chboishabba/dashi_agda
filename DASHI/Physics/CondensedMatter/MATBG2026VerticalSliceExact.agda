@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.List.Base using ([]; _∷_)
 
 import DASHI.Algebra.TriadicDepthOneCharacters as C3
 import DASHI.Core.AttributedSourceCore as Attribution
