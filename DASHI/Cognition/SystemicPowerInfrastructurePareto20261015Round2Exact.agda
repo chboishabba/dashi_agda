@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Cognition.SystemicPowerInfrastructurePareto20261013Exact as Prior
 import DASHI.Cognition.PalantirTIAFinanceStateCapacityCrossPollination20261015Exact as PalantirTIA
+import DASHI.Cognition.PalantirInstalledBaseProcurementPersistence20261015Exact as Persistence
 import DASHI.Cognition.EpsteinPalantirInvestmentInterest20261015Exact as PalantirInterest
 import DASHI.Cognition.EpsteinHoneycombPalantirOpportunityBridge20261015Exact as HoneycombPalantir
 import DASHI.Cognition.EpsteinBarakPalantirFoundersFundBrokerage20261015Exact as Brokerage
@@ -22,8 +23,9 @@ import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as Im
 -- are now source-paid and typed together: historical TIA disposition; early
 -- In-Q-Tel/CIA capital/customer access; generic platform capabilities; modern
 -- ICE and Maven procurement; policy-capability intersection; direct Epstein-side
--- Palantir investment inquiry/opportunity/diligence; and Barak/Founders Fund
--- brokerage.  Promotion is investigative priority, not a continuity theorem.
+-- Palantir investment inquiry/opportunity/diligence; Barak/Founders Fund
+-- brokerage; and a bounded installed-base/persistence mechanism.
+-- Promotion is investigative priority, not a continuity theorem.
 ------------------------------------------------------------------------
 
 data Lane2 : Set where
@@ -51,10 +53,10 @@ canonicalSystemicFront2 =
     "TIA's public programme/disposition, Poindexter-Karp-Thiel context, In-Q-Tel/CIA capital/customer access, Palantir's object/link/action/permission/audit capabilities and modern ICE/Maven deployments now form a stage-preserving genealogy. It is high-value because it permits direct tests of capability accumulation and durable state capacity while explicitly leaving same-program identity, code/asset transfer and authority continuity unpaid." ∷
   profile2 palantirEpsteinInvestmentExecution 99 true true true true
     "Direct Thiel advice on Palantir, a later Fiszel secondary-share opportunity routed to Epstein, and 2018 valuation/IPO diligence are paid. Execution/custody is still open. A completed position would create a direct capital edge; absent that receipt, interest/opportunity remains distinct from ownership." ∷
+  profile2 palantirInstalledBaseContestability 99 true true true true
+    "Installed-base persistence is now partly paid rather than purely hypothetical: early intelligence-user feedback and repeated adoption; historical public-record evidence of migration/data-exit difficulty; a 2026 DHS-wide single-award Palantir BPA with USD1bn ceiling/five-year horizon; and concrete ICE/CISA calls under the vehicle. Universal or unlawful lock-in, schema ownership and subject remedy remain separately unpaid." ∷
   profile2 palantirBrokerageDefenseTech 98 true true true true
     "Epstein proposed a Palantir board route for Barak, later facilitated/attempted Thiel contact, and separately sat in the forwarding path around Carbyne's introduction to Founders Fund/Trae Stephens. These are real brokerage surfaces across distinct objects; proposal is not appointment and introduction is not investment causation." ∷
-  profile2 palantirInstalledBaseContestability 98 true true true true
-    "Repeated ICE/Maven procurement plus generic platform capability makes installed-base, switching-cost, schema/configuration ownership, export/migration and subject-contestability evidence a high-value second/third-order cut. Repeated procurement alone does not prove lock-in or abuse." ∷
   profile2 priorSystemicFront 100 true true true true
     "The prior systemic front remains live: banking/elite access, private-capital housing-AI-power assetisation, military AI/intelligence, Epstein/AI-capital reflexivity and other 98-100 lanes are not displaced by this Palantir-specific promotion."
   ∷ []
@@ -100,7 +102,7 @@ data Debt2 : Set where
   tiaSuccessorComponentAndAuthorityTransfer : Debt2
   epsteinPalantirExecutionOrExplicitDecline : Debt2
   fiszelPalantirSellerVehicle : Debt2
-  palantirRenewalRevenueMigration : Debt2
+  palantirBPADataMigrationTerms : Debt2
   sameDeploymentSubjectContestability : Debt2
   barakPalantirAndCarbyneDecisionJoin : Debt2
 
@@ -122,8 +124,8 @@ canonicalAcquisition2 =
     "Resolve the 2014/2016 Palantir investment-interest path to an executed trade/custody record or explicit decline/expiry." ∷
   acquisition2 fiszelPalantirSellerVehicle 100
     "Identify the holder/vehicle behind Fiszel's USD5-per-share access and determine whether Honeycomb was principal, intermediary or unrelated vehicle before claiming a fund-level Palantir investment." ∷
-  acquisition2 palantirRenewalRevenueMigration 99
-    "Measure installed-base persistence from renewal/limited-source history, contract revenue, schema/configuration ownership, export rights, migration attempts and replacement cost." ∷
+  acquisition2 palantirBPADataMigrationTerms 100
+    "Acquire the full DHS BPA/limited-sources justification and predecessor-award chain, then resolve schema/configuration ownership, data export, transition assistance, migration rights and actual replacement attempts before promoting lock-in." ∷
   acquisition2 sameDeploymentSubjectContestability 99
     "Pay one deployment's exact subject data, classification/decision use, notice, correction/appeal, audit and remedy chain on the same object; generic Foundry capability is insufficient." ∷
   acquisition2 barakPalantirAndCarbyneDecisionJoin 98
