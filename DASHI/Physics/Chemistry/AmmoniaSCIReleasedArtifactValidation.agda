@@ -13,9 +13,14 @@ matrixBlobRecorded :
 matrixBlobRecorded = refl
 
 selectedEnergyReceiptRecorded :
-  A.ReleasedSelectedCIArtifact.selectedGroundEnergyMicroHartreeMagnitude
-    A.nh3SelectedCI64Artifact ≡ 55517555
+  A.ReleasedSelectedCIArtifact.selectedGroundEnergyNanoHartreeMagnitude
+    A.nh3SelectedCI64Artifact ≡ 55517555010
 selectedEnergyReceiptRecorded = refl
+
+releasedFCIEnergyReceiptRecorded :
+  A.ReleasedFCIRunMetadata.groundEnergyNanoHartreeMagnitude
+    A.nh3ReleasedFCIRunMetadata ≡ 55519414318
+releasedFCIEnergyReceiptRecorded = refl
 
 paperAndArtifactNotCollapsed :
   A.ReleasedArtifactBoundary.paperBenchmarkAndArtifactAreSameNumericalObject
