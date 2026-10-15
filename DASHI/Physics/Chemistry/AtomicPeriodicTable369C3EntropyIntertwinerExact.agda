@@ -6,9 +6,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeEx
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as NH3GroundC3
-import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as NH3Protonation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
-import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as MonsterEntropy
@@ -130,8 +128,7 @@ record ChemistryC3MonsterBoundary : Set where
 
 canonicalChemistryC3MonsterBoundary : ChemistryC3MonsterBoundary
 canonicalChemistryC3MonsterBoundary =
-  chemistryC3MonsterBoundary
-    false refl false refl false refl false refl false refl false refl true refl true refl true refl
+  chemistryC3MonsterBoundary false refl false refl false refl false refl false refl false refl true refl true refl true refl
 
 existingChemistryPromotionBoundary : Chemistry369.AtomicChemistryCrossPollinationBoundary
 existingChemistryPromotionBoundary = Chemistry369.canonicalAtomicChemistryCrossPollinationBoundary
@@ -139,29 +136,8 @@ existingChemistryPromotionBoundary = Chemistry369.canonicalAtomicChemistryCrossP
 existingMonsterStateCountingBoundary : MonsterEntropy.StateCountingEntropyBoundary
 existingMonsterStateCountingBoundary = MonsterEntropy.canonicalStateCountingEntropyBoundary
 
-ammoniaC3GeometryFixture : NH3.AmmoniaC3Fixture
-ammoniaC3GeometryFixture = NH3.canonicalAmmoniaC3Fixture
-
-ammoniaElectronicSymmetryReceipt : NH3Electronic.NeutralElectronicReceipt
-ammoniaElectronicSymmetryReceipt = NH3Electronic.canonicalNeutralElectronicReceipt
-
-ammoniaGroundStateC3Action : NH3GroundC3.GroundStateC3Action
-ammoniaGroundStateC3Action = NH3GroundC3.canonicalGroundStateC3Action
-
-ammoniaProtonationThermochemistry : NH3Protonation.ProtonationThermochemistry
-ammoniaProtonationThermochemistry = NH3Protonation.canonicalProtonationThermochemistry
-
-h3AmmoniaMeasuredKinetics : H3Transfer.H3AmmoniaKineticReceipt
-h3AmmoniaMeasuredKinetics = H3Transfer.canonicalH3AmmoniaKineticReceipt
-
-h3AmmoniaC3ResolvedTransition : H3C3.PaidC3ResolvedTransition
-h3AmmoniaC3ResolvedTransition = H3C3.canonicalPaidC3ResolvedTransition
-
-hydrogenAbstractionMechanism : Abstraction.AbstractionMechanism
-hydrogenAbstractionMechanism = Abstraction.canonicalAbstractionMechanism
-
-record ChemistryC3MaxCutStatus : Set where
-  constructor chemistryC3MaxCutStatus
+record ChemistryC3InterfaceStatus : Set where
+  constructor chemistryC3InterfaceStatus
   field
     atomicToReactionFibreExists : Bool
     atomicToReactionFibreExistsIsTrue : atomicToReactionFibreExists ≡ true
@@ -179,8 +155,6 @@ record ChemistryC3MaxCutStatus : Set where
     productsByproductsReactionFixturePaidIsTrue : productsByproductsReactionFixturePaid ≡ true
     sameReactionQuantitativeKineticsPaid : Bool
     sameReactionQuantitativeKineticsPaidIsTrue : sameReactionQuantitativeKineticsPaid ≡ true
-    proofRelevantC3ResolvedReactionTransportInstantiated : Bool
-    proofRelevantC3ResolvedReactionTransportInstantiatedIsTrue : proofRelevantC3ResolvedReactionTransportInstantiated ≡ true
     literal369ReactionHyperformInstantiated : Bool
     literal369ReactionHyperformInstantiatedIsTrue : literal369ReactionHyperformInstantiated ≡ true
     sourceBackedReactionPathAndWavepacketPaid : Bool
@@ -190,11 +164,25 @@ record ChemistryC3MaxCutStatus : Set where
     universalElectronResolvedReactionEnergetics : Bool
     universalElectronResolvedReactionEnergeticsIsFalse : universalElectronResolvedReactionEnergetics ≡ false
 
-canonicalChemistryC3MaxCutStatus : ChemistryC3MaxCutStatus
-canonicalChemistryC3MaxCutStatus =
-  chemistryC3MaxCutStatus
-    true refl true refl true refl true refl true refl true refl true refl true refl
-    true refl true refl true refl false refl false refl
+canonicalChemistryC3InterfaceStatus : ChemistryC3InterfaceStatus
+canonicalChemistryC3InterfaceStatus =
+  chemistryC3InterfaceStatus
+    true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl false refl false refl
+
+ammoniaC3GeometryFixture : NH3.AmmoniaC3Fixture
+ammoniaC3GeometryFixture = NH3.canonicalAmmoniaC3Fixture
+
+ammoniaElectronicSymmetryReceipt : NH3Electronic.NeutralElectronicReceipt
+ammoniaElectronicSymmetryReceipt = NH3Electronic.canonicalNeutralElectronicReceipt
+
+ammoniaGroundStateC3Action : NH3GroundC3.GroundStateC3Action
+ammoniaGroundStateC3Action = NH3GroundC3.canonicalGroundStateC3Action
+
+h3AmmoniaMeasuredKinetics : H3Transfer.H3AmmoniaKineticReceipt
+h3AmmoniaMeasuredKinetics = H3Transfer.canonicalH3AmmoniaKineticReceipt
+
+hydrogenAbstractionMechanism : Abstraction.AbstractionMechanism
+hydrogenAbstractionMechanism = Abstraction.canonicalAbstractionMechanism
 
 literal369HyperformWitness :
   Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited Abstraction369.canonicalHyperformBoundary ≡ true
