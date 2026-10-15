@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Int using (pos)
 
 import DASHI.Physics.Units.SI as SI
+import DASHI.Physics.Thermodynamics.MagnetocaloricMaterial as MCE
 
 ------------------------------------------------------------------------
 -- Magnetocaloric / AMR SI consumer.
@@ -55,6 +56,26 @@ record AMRMeasurementBundle : Set₁ where
     coolingEnergy : SI.Measurement SI.Energy energyScale
     coolingPower : SI.Measurement SI.Power powerScale
     inputPower : SI.Measurement SI.Power powerScale
+
+record MagnetocaloricSIMaterialCrosswalk
+  (M : MCE.MagnetocaloricMaterial)
+  (B : AMRMeasurementBundle) : Set₁ where
+  open MCE.MagnetocaloricMaterial M
+  field
+    TemperatureIdentification : Set
+    MaterialFieldConvention : Set
+    EntropyIdentification : Set
+    HeatCapacityIdentification : Set
+    ConductivityIdentification : Set
+
+    temperatureIdentification : TemperatureIdentification
+    materialFieldConvention : MaterialFieldConvention
+    entropyIdentification : EntropyIdentification
+    heatCapacityIdentification : HeatCapacityIdentification
+    conductivityIdentification : ConductivityIdentification
+
+    CalibrationTraceable : Set
+    calibrationTraceable : CalibrationTraceable
 
 record MagnetocaloricSIMetrologyBoundary : Set where
   constructor magnetocaloric-si-metrology-boundary
