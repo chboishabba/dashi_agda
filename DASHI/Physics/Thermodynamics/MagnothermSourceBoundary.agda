@@ -1,6 +1,9 @@
 module DASHI.Physics.Thermodynamics.MagnothermSourceBoundary where
 
-open import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude
+import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Physics.Thermodynamics.MagnothermAttributedEvidenceExact as Attribution
+
 open import DASHI.Physics.Thermodynamics.MagnetocaloricMaterial
 open import DASHI.Physics.Thermodynamics.CaloricRegenerator
 open import DASHI.Physics.Thermodynamics.ActiveMagneticRegenerator
@@ -9,44 +12,24 @@ open import DASHI.Physics.Thermodynamics.ProtectedMagnetocaloricSystem
 ------------------------------------------------------------------------
 -- MAGNOTHERM acquisition / attribution boundary.
 --
--- This module records what the external sources say and how strongly the
--- repository may use those statements.  It intentionally does not turn
--- source text into a proof of calibrated system performance.
+-- Canonical attribution is owned by MagnothermAttributedEvidenceExact using
+-- DASHI.Core.AttributedSourceCore.  This module owns the domain-facing claim
+-- ceiling and generic-model crosswalk.  Source identity, access carrier,
+-- scientific authority, same-object status and DASHI reconstruction remain
+-- distinct throughout.
 ------------------------------------------------------------------------
 
-data SourceClass : Set where
-  peerReviewedOpenAccess : SourceClass
-  vendorTechnologyPage   : SourceClass
-  vendorDevelopmentPage  : SourceClass
+stableOperationSource : Source.AttributedSource
+stableOperationSource = Attribution.stableOperationArticle
 
-record SourceRef : Set where
-  constructor sourceRef
-  field
-    title      : String
-    locator    : String
-    accessed   : String
-    sourceClass : SourceClass
+magnothermTechnologySource : Source.AttributedSource
+magnothermTechnologySource = Attribution.magnothermTechnologyPage
 
-stableOperationSource : SourceRef
-stableOperationSource = sourceRef
-  "Stable Operation of Copper-Protected La(FeMnSi)13Hy Regenerators in a Magnetic Cooling Unit"
-  "doi:10.1021/acsaenm.4c00747; PMCID:PMC11773641"
-  "2026-10-14"
-  peerReviewedOpenAccess
+magnothermStellarSource : Source.AttributedSource
+magnothermStellarSource = Attribution.magnothermStellarPage
 
-magnothermTechnologySource : SourceRef
-magnothermTechnologySource = sourceRef
-  "MAGNOTHERM Technology"
-  "https://www.magnotherm.com/technology"
-  "2026-10-14"
-  vendorTechnologyPage
-
-magnothermStellarSource : SourceRef
-magnothermStellarSource = sourceRef
-  "MAGNOTHERM STELLAR"
-  "https://www.magnotherm.com/stellar"
-  "2026-10-14"
-  vendorDevelopmentPage
+magnothermSourceAtlas : Source.AttributedSourceAtlas
+magnothermSourceAtlas = Attribution.magnothermAttributedSourceAtlas
 
 record PeerReviewedMagnothermObservations : Set₁ where
   field
@@ -60,6 +43,13 @@ record PeerReviewedMagnothermObservations : Set₁ where
     protectedSurfacePreserved       : Set
     coatingAccommodatesBreathing    : Set
     oneTeslaAdiabaticChangeMeasured : Set
+
+    -- Claim-relative aging payments from the 2025 paper.
+    sixWeekContinuedOperationObserved : Set
+    threeMonthMicrochannelPreliminaryObserved : Set
+    monthsToYearsLongTermExperimentCompleted : Bool
+    monthsToYearsLongTermExperimentCompletedIsFalse :
+      monthsToYearsLongTermExperimentCompleted ≡ false
 
 record VendorTechnologyObservations : Set₁ where
   field
@@ -76,6 +66,7 @@ record StellarDevelopmentObservations : Set₁ where
     superconductingFieldArchitecture : Set
     targetFieldFiveTesla              : Set
     moduleVisionAtLeast125kW           : Set
+    twoModule250kWDepictionClaimed     : Set
     notYetCommerciallyAvailable       : Set
 
 ------------------------------------------------------------------------
@@ -96,9 +87,17 @@ record MagnothermPromotionBoundary : Set₁ where
     sameDeviceCalibrationRequiredForCOP : Set
     sameDeviceCalibrationRequiredForCapacity : Set
     qualifiedAgingIntervalIsNotLifetime : Set
+    preliminaryThreeMonthObservationIsNotLifetime : Set
+    plannedLongTermExperimentIsNotCompletedEvidence : Set
     vendorEfficiencyClaimNotPromoted    : Set
+    stellarFieldTargetNotPromoted       : Set
     stellarCapacityVisionNotPromoted    : Set
     sourceObservationDoesNotInstantiateValidSystem : Set
+
+    canonicalAttributedSourceRequired : Set
+    primarynessIsClaimRelative : Set
+    accessCarrierDoesNotCreateAuthorshipOrAuthority : Set
+    sourceClaimDoesNotTransferAuthorshipToDASHI : Set
 
 ------------------------------------------------------------------------
 -- Crosswalk: an acquired observation may constrain a generic model, but
@@ -113,6 +112,11 @@ record MagnothermModelCrosswalk
     MaterialIdentification : Set
     GeometryIdentification : Set
     MediumIdentification   : Set
+    SameObjectEvidence     : Set
+    ClaimRoleCompatible    : Set
+
     materialIdentification : MaterialIdentification
     geometryIdentification : GeometryIdentification
     mediumIdentification   : MediumIdentification
+    sameObjectEvidence     : SameObjectEvidence
+    claimRoleCompatible    : ClaimRoleCompatible
