@@ -11,6 +11,8 @@ import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as Im
 import DASHI.Cognition.MavenMinabPineGapTargetingChainExact as Maven
 import DASHI.Cognition.EpsteinThielValarDirectSolicitation20261014Exact as ThielValar
 import DASHI.Cognition.SystemicLeverageBeneficiaryIncidenceParetoExact as Incidence
+import DASHI.Governance.PalantirPlatformCapabilityEvidenceExact as Capability
+import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Procurement
 
 ------------------------------------------------------------------------
 -- PALANTIR TIA x FINANCE x STATE-CAPACITY CROSS-POLLINATION — 2026-10-15
@@ -102,6 +104,43 @@ project2025IntersectionReceipt = stage-receipt
   true false false
 
 ------------------------------------------------------------------------
+-- Repo-native capability / legibility grammar.
+------------------------------------------------------------------------
+
+record OperationalGrammarBoundary : Set where
+  constructor operational-grammar-boundary
+  field
+    objectPropertyLinkGraphPaid : Bool
+    operationalActionLayerPaid : Bool
+    granularPermissioningPaid : Bool
+    auditLoggingPaid : Bool
+    procurementEvidencePaid : Bool
+    deploymentSubjectDataReceiptPaid : Bool
+    deploymentDecisionUseReceiptPaid : Bool
+    subjectInspectionCorrectionAppealPaid : Bool
+    genericCapabilityCreatesDeploymentAsymmetry : Bool
+    procurementCreatesLegibilityWitness : Bool
+    historicalGenealogyCreatesDeploymentReceipt : Bool
+open OperationalGrammarBoundary public
+
+canonicalOperationalGrammarBoundary : OperationalGrammarBoundary
+canonicalOperationalGrammarBoundary = operational-grammar-boundary
+  true true true true true false false false false false false
+
+data HistoricalGenealogyImpliesDeploymentReceipt : Set where
+data GenericCapabilityImpliesSubjectAsymmetry : Set where
+data ProcurementImpliesSubjectContestability : Set where
+
+historicalGenealogyDoesNotCreateDeploymentReceipt : HistoricalGenealogyImpliesDeploymentReceipt → ⊥
+historicalGenealogyDoesNotCreateDeploymentReceipt ()
+
+genericCapabilityDoesNotCreateSubjectAsymmetry : GenericCapabilityImpliesSubjectAsymmetry → ⊥
+genericCapabilityDoesNotCreateSubjectAsymmetry ()
+
+procurementDoesNotCreateSubjectContestability : ProcurementImpliesSubjectContestability → ⊥
+procurementDoesNotCreateSubjectContestability ()
+
+------------------------------------------------------------------------
 -- Shared-Thiel cross-pollination into the Epstein/Valar financial graph.
 ------------------------------------------------------------------------
 
@@ -147,6 +186,7 @@ record StateCapacityChain : Set where
     historicalProgrammePaid : Bool
     historicalDispositionPaid : Bool
     earlyCapitalCustomerAccessPaid : Bool
+    genericPlatformCapabilityPaid : Bool
     modernOperationalProcurementPaid : Bool
     policyCapabilityIntersectionPaid : Bool
     sameProgrammeIdentityPaid : Bool
@@ -160,7 +200,7 @@ open StateCapacityChain public
 
 canonicalStateCapacityChain : StateCapacityChain
 canonicalStateCapacityChain = state-capacity-chain
-  true true true true true
+  true true true true true true
   false false false false false
   true false
 
