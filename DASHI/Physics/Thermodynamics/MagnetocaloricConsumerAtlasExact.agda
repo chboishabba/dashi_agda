@@ -11,6 +11,7 @@ import DASHI.Physics.Quantum.MagnetocaloricQuantumStatMechConsumerExact as Quant
 import DASHI.Physics.Thermodynamics.MagnetocaloricContinuumConsumerExact as Fluid
 import DASHI.Physics.Thermodynamics.MagnetocaloricMagnetostructuralConsumerExact as Mech
 import DASHI.Physics.Thermodynamics.MagnothermAttributedEvidenceExact as Evidence
+import DASHI.Physics.Thermodynamics.MagnetocaloricFamilyEvidenceExact as Family
 import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact as MaxCut
 
 ------------------------------------------------------------------------
@@ -39,6 +40,7 @@ record MagnetocaloricConsumerAtlas : Set where
     magnetostructuralPopulated : Bool
     protectionChemistryPopulated : Bool
     attributedEvidencePopulated : Bool
+    familyEvidencePopulated : Bool
     empiricalMaxCutAtlasPopulated : Bool
 
     navierStokesRole : ReuseRole
@@ -51,7 +53,7 @@ record MagnetocaloricConsumerAtlas : Set where
 canonicalMagnetocaloricConsumerAtlas : MagnetocaloricConsumerAtlas
 canonicalMagnetocaloricConsumerAtlas =
   magnetocaloric-consumer-atlas
-    true true true true true true true true true true
+    true true true true true true true true true true true
     structuralPrecedentOnly
     structuralPrecedentOnly
     coveredByExistingOwner
@@ -74,12 +76,15 @@ record MagnetocaloricCrossDomainPromotionBoundary : Set where
     citationDoesNotImportScientificAuthority : Bool
     vendorClaimDoesNotPaySameDeviceCalibration : Bool
     plannedExperimentDoesNotPayObservedLifetime : Bool
+    familyCrystalEvidenceDoesNotIdentifyExactMaterial : Bool
+    familyThermalTransportDoesNotSupplyDeviceHeatTransfer : Bool
+    phenomenologicalMagnetoelasticModelDoesNotValidateMicroscopicHamiltonian : Bool
 
 canonicalMagnetocaloricCrossDomainPromotionBoundary :
   MagnetocaloricCrossDomainPromotionBoundary
 canonicalMagnetocaloricCrossDomainPromotionBoundary =
   magnetocaloric-cross-domain-promotion-boundary
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true
 
 navierStokesIsStructuralOnly :
   MagnetocaloricConsumerAtlas.navierStokesRole canonicalMagnetocaloricConsumerAtlas
