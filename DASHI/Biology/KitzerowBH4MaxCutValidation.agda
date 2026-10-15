@@ -2,10 +2,10 @@ module DASHI.Biology.KitzerowBH4MaxCutValidation where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Biology.KitzerowBH4CascadeExact as Cascade
 import DASHI.Biology.KitzerowBH4RepoIntegrationExact as Integration
-import DASHI.Biology.KitzerowBH4SourceAtlasExact as Sources
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -20,7 +20,7 @@ repoIntegrationConsumesBiologyBrainChemistry :
   Integration.consumesBiologyCore Integration.canonicalKitzerowBH4RepoIntegration ≡ true
   × Integration.consumesBrainNeurochemicalCore Integration.canonicalKitzerowBH4RepoIntegration ≡ true
   × Integration.consumesChemistryBiologyInterop Integration.canonicalKitzerowBH4RepoIntegration ≡ true
-repoIntegrationConsumesBiologyBrainChemistry = refl , refl , refl
+repoIntegrationConsumesBiologyBrainChemistry = refl , (refl , refl)
 
 repoIntegrationKeepsPromotionBlocked :
   Integration.promotesClinicalAuthority Integration.canonicalKitzerowBH4RepoIntegration ≡ false
