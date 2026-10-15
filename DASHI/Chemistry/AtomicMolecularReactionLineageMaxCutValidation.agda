@@ -6,11 +6,19 @@ open import Data.Product using (_×_; _,_)
 
 import DASHI.Chemistry.AtomicMolecularReactionLineageHyperfabricExact as Lineage
 import DASHI.Chemistry.ElectronBondTransportExact as Electron
+import DASHI.Chemistry.AtomicLineageBidiDiscriminatorExact as Bidi
 import DASHI.Biology.AtomicMolecularBiologicalIncorporationHyperfabricExact as Bio
 import DASHI.Biology.AtomicLineageTargetRecognitionBridgeExact as Recognition
 import DASHI.Biology.LeadCalciumAtomicLineageRegressionExact as PbCa
 import DASHI.Biology.KitzerowBH4LineageRegressionExact as BH4
 import DASHI.Biology.PrebioticCarbonAtomicLineageRegressionExact as Carbon
+
+atomMappingIsTyped369Lineage :
+  Lineage.everyAtomicCarrierUses369AtomicIndex
+    Lineage.canonicalAtomicMolecularReactionLineageBoundary ≡ true
+  × Lineage.reactionAtomMappingIsTypedLineageNotString
+    Lineage.canonicalAtomicMolecularReactionLineageBoundary ≡ true
+atomMappingIsTyped369Lineage = refl , refl
 
 lineageSeparatesNuclearAndElectronTransport :
   Lineage.nuclearIdentityTransportIsDistinctFromElectronTransport
@@ -51,6 +59,15 @@ targetOverlapDoesNotCollapseFineLineage :
   × Recognition.newSeparatingCoordinateReopensDownstreamConsumers
     Recognition.canonicalAtomicLineageTargetRecognitionBoundary ≡ true
 targetOverlapDoesNotCollapseFineLineage = refl , refl
+
+bidiCandidateDoesNotCreateTruth :
+  Bidi.candidatePerturbationCreatesWorldTruth
+    Bidi.canonicalAtomicLineageBidiDiscriminatorBoundary ≡ false
+  × Bidi.observedFineDifferenceReopensOnlyAffectedConsumers
+    Bidi.canonicalAtomicLineageBidiDiscriminatorBoundary ≡ true
+  × Bidi.interventionAuthorityIsIndependentObligation
+    Bidi.canonicalAtomicLineageBidiDiscriminatorBoundary ≡ true
+bidiCandidateDoesNotCreateTruth = refl , (refl , refl)
 
 pbCaMimicryDoesNotCollapseAtomicIdentity :
   PbCa.leadCalciumAtomicIdentityCollapsed
