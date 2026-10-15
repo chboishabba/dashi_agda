@@ -46,15 +46,15 @@ trustCreation1998 = tenure-receipt
 secSignature2002 : TenureReceipt
 secSignature2002 = tenure-receipt
   "2002-06-12" secSchedule13DSignature
-  "Limited Brands Schedule 13D/A signature page, public issuer filing"
+  "Limited Brands Schedule 13D/A signature page, issuer-hosted SEC filing copy"
   "The reporting-person signature page lists THE WEXNER CHILDREN'S TRUST II and is signed by Jeffrey E. Epstein expressly as Trustee. This independently pays trustee status as of June 2002."
   true true
 
-laterSecTrusteeSignature : TenureReceipt
-laterSecTrusteeSignature = tenure-receipt
-  "2003" secSchedule13DSignature
-  "Limited Brands reporting-person filing / issuer-hosted SEC filing copy"
-  "A subsequent Limited Brands beneficial-ownership filing again lists THE WEXNER CHILDREN'S TRUST II with Jeffrey E. Epstein signing as Trustee. This extends the primary public-disclosure lower bound beyond the 2002 filing; it does not establish a terminal date."
+secSignature2003 : TenureReceipt
+secSignature2003 = tenure-receipt
+  "2003-08-29" secSchedule13DSignature
+  "Limited Brands beneficial-ownership filing, issuer-hosted SEC filing copy"
+  "The August 29 2003 signature page again lists THE WEXNER CHILDREN'S TRUST II and is signed by Jeffrey E. Epstein expressly as Trustee. This is the latest neutral public trustee signature paid in the current sweep; it does not establish a terminal date."
   true true
 
 bearTrusteeAssertion2006 : TenureReceipt
@@ -76,7 +76,7 @@ record TenureBoundary : Set where
   field
     trusteeAtCreationPaid : Bool
     trusteeIn2002SECRecordPaid : Bool
-    laterPrimarySECTrusteeSignaturePaid : Bool
+    trusteeIn2003SECRecordPaid : Bool
     bearAssertsTrusteeCapacity2006And2007 : Bool
     exactRemovalOrSuccessorDatePaid : Bool
     absenceOfLaterSignatureImpliesRemoval : Bool
@@ -126,7 +126,7 @@ canonicalTenureAcquisition =
   tenure-acquisition allTrustAmendments 100
     "Acquire the complete amendment/restatement chain between the 1998 trust and the terminal successor/removal instrument." ∷
   tenure-acquisition trusteeCertificates2004to2008 99
-    "Acquire dated bank/broker/SEC trustee certificates or signature pages during 2004-2008 to tighten the positive tenure interval." ∷
+    "Acquire dated bank/broker/SEC trustee certificates or signature pages during 2004-2008 to tighten the positive tenure interval beyond the neutral August 2003 signature and independently test the later Bear pleading assertions." ∷
   tenure-acquisition neutralBearAccountAuthorityRecord 99
     "Acquire Bear account/subscription records showing who was recognized as trustee/signatory at the dates of the 2006/07 investments."
   ∷ []
