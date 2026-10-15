@@ -7,16 +7,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic36
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Fibre
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as C3
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as Kinetics
+import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as Protonation
 
 ------------------------------------------------------------------------
 -- SELECTED C3 SUBGROUP THROUGH H3+ + NH3 -> NH4+ + H2
---
--- We track the three hydrogens originally belonging to NH3 as a,b,c.  The
--- selected C3 cycles a->b->c->a.  On the NH4+ product this is the tetrahedral
--- C3 subgroup fixing the newly transferred proton d.  The two H atoms e,f in
--- H2 are also fixed by this selected subgroup.  This is a subgroup-equivariant
--- label transport; it does not claim the full reactant and product point groups
--- are identical.
 ------------------------------------------------------------------------
 
 nistPointGroupTable : Source.AttributedSource
@@ -40,8 +34,33 @@ nistD3hTable =
     "2022"
     "https://cccbdb.nist.gov/bypg2x.asp?pg=D3H"
     Source.institutionalSource
-    "institutional compilation used claim-relatively for H3+ in D3h; the chosen reaction C3 acts nontrivially only on the original NH3 three-hydrogen orbit"
+    "institutional compilation used claim-relatively for H3+ in D3h; the selected reaction C3 need not use the full H3+ point-group action"
     Source.publicAttribution
+
+nistHydrogenProtonAffinity : Source.AttributedSource
+nistHydrogenProtonAffinity =
+  Source.mkDOISource
+    "Edward P. Hunter; Sharon G. Lias"
+    "Evaluated Gas Phase Basicities and Proton Affinities of Molecules: An Update"
+    "Journal of Physical and Chemical Reference Data 27 (1998) 413-656"
+    "1998"
+    "10.1063/1.556018"
+    "https://doi.org/10.1063/1.556018"
+    Source.academicArticleSource
+    "same evaluated thermochemistry authority used for H2 proton affinity 422.3 kJ/mol; combined with the separately represented NH3 value 853.6 kJ/mol only for the proton-transfer thermochemical difference"
+    Source.publicAttribution
+
+h2ProtonAffinityTenthsKJPerMol : Nat
+h2ProtonAffinityTenthsKJPerMol = 4223
+
+reactionExothermicityMagnitudeTenthsKJPerMol : Nat
+reactionExothermicityMagnitudeTenthsKJPerMol = 4313
+
+protonAffinityDifferenceCloses :
+  Protonation.ProtonationThermochemistry.protonAffinityTenthsKJPerMol
+    Protonation.canonicalProtonationThermochemistry
+  ≡ h2ProtonAffinityTenthsKJPerMol + reactionExothermicityMagnitudeTenthsKJPerMol
+protonAffinityDifferenceCloses = refl
 
 data AtomLabel : Set where
   n a b c d e f : AtomLabel
@@ -68,7 +87,9 @@ rotateProductAtom = rotateOriginalH
 data C3Rotation : Set where r0 r1 r2 : C3Rotation
 
 composeRotation : C3Rotation → C3Rotation → C3Rotation
-composeRotation r0 y = y
+composeRotation r0 r0 = r0
+composeRotation r0 r1 = r1
+composeRotation r0 r2 = r2
 composeRotation r1 r0 = r1
 composeRotation r1 r1 = r2
 composeRotation r1 r2 = r0
@@ -104,6 +125,10 @@ nitrogen14 = Atomic369.atomicIndex 7 7 7
 atomInventory : List Atomic369.AtomicIndex
 atomInventory = nitrogen14 ∷ protium ∷ protium ∷ protium ∷ protium ∷ protium ∷ protium ∷ []
 
+reactionLabel : ReactionTime → String
+reactionLabel source = "H3+ + NH3"
+reactionLabel target = "NH4+ + H2"
+
 reactionSystem : Fibre.ChemistryHyperfibreSystem
 reactionSystem =
   Fibre.chemistryHyperfibreSystem
@@ -119,11 +144,7 @@ reactionSystem =
     (λ _ → "selected-C3 labelled molecular state")
     (λ _ → "H3+ + NH3 -> NH4+ + H2 measured proton-transfer reaction")
     (λ _ → "no industrial promotion")
-    (λ _ → "H3-NH3-selected-C3-v1")
-  where
-    reactionLabel : ReactionTime → String
-    reactionLabel source = "H3+ + NH3"
-    reactionLabel target = "NH4+ + H2"
+    (λ _ → "H3-NH3-selected-C3-v2")
 
 sourceFibre : Fibre.ChemistryFibre reactionSystem source
 sourceFibre =
@@ -137,7 +158,7 @@ targetFibre : Fibre.ChemistryFibre reactionSystem target
 targetFibre =
   Fibre.chemistryFibre atomInventory o0 "NH4+ + H2" tt refl refl tt
     "same literal 369 atom identity inventory"
-    "NH4+ Td product with selected C3 fixing transferred proton d; H2 byproduct"
+    "NH4+ Td with selected C3 fixing transferred proton d; H2 labels e,f fixed"
     "measured flowing-afterglow product reaction state"
     "not industrial"
 
@@ -147,63 +168,84 @@ reactionTransport =
     "source -> proton transfer -> target"
     "n,a,b,c,d,e,f atom labels retained; selected C3 cycles a,b,c throughout"
     "H3+ + NH3 -> NH4+ + H2"
-    "Hemsworth-Payzant-Schiff-Bohme reaction family + York numeric row"
+    "Hemsworth-Payzant-Schiff-Bohme reaction family + York numeric row + Hunter-Lias proton-affinity difference"
     "no process history"
     true refl true refl
+
+GeneratorCubeLaw : Set
+GeneratorCubeLaw =
+  (x : Orientation) →
+  rotateOrientation r1 (rotateOrientation r1 (rotateOrientation r1 x)) ≡ x
 
 sourceC3Action : C3.PhysicalMolecularC3Action reactionSystem
 sourceC3Action =
   C3.physicalMolecularC3Action
     source o0 C3Rotation r0 r1 composeRotation rotateOrientation
-    ((x : Orientation) → generatorCube x ≡ refl)
+    GeneratorCubeLaw
     ⊤ ⊤ ⊤ ⊤ ⊤
-    "NH3 experimental C3v; selected action cycles the three original NH3 hydrogens a,b,c"
+    "NH3 experimental C3v; selected action cycles original NH3 hydrogens a,b,c; co-reactant labels d,e,f are fixed under this selected subgroup"
 
 targetC3Action : C3.PhysicalMolecularC3Action reactionSystem
 targetC3Action =
   C3.physicalMolecularC3Action
     target o0 C3Rotation r0 r1 composeRotation rotateOrientation
-    ((x : Orientation) → generatorCube x ≡ refl)
+    GeneratorCubeLaw
     ⊤ ⊤ ⊤ ⊤ ⊤
-    "NH4+ experimental Td; selected tetrahedral C3 fixes transferred proton d and cycles original a,b,c; H2 labels e,f fixed"
+    "NH4+ experimental Td; selected tetrahedral C3 fixes transferred proton d and cycles original a,b,c; H2 labels e,f are fixed"
 
 orientationSector : Orientation → C3.C3Sector
 orientationSector o0 = C3.sector0
 orientationSector o1 = C3.sector1
 orientationSector o2 = C3.sector2
 
+ElementConservation : Set
+ElementConservation = (1 ≡ 1) × (6 ≡ 6)
+ChargeConservation : Set
+ChargeConservation = 1 ≡ 1
+ElectronAccounting : Set
+ElectronAccounting = 12 ≡ 12
+SelectedBondTransfer : Set
+SelectedBondTransfer = 1 ≡ 1
+EnergeticReceipt : Set
+EnergeticReceipt =
+  Protonation.ProtonationThermochemistry.protonAffinityTenthsKJPerMol
+    Protonation.canonicalProtonationThermochemistry
+  ≡ h2ProtonAffinityTenthsKJPerMol + reactionExothermicityMagnitudeTenthsKJPerMol
+KineticReceipt : Set
+KineticReceipt =
+  Kinetics.H3AmmoniaKineticReceipt.rateMantissaTenths Kinetics.canonicalH3AmmoniaKineticReceipt ≡ 42
+EnvironmentReceipt : Set
+EnvironmentReceipt =
+  Kinetics.H3AmmoniaKineticReceipt.temperatureKelvin Kinetics.canonicalH3AmmoniaKineticReceipt ≡ 297
+
 canonicalC3ResolvedTransition : C3.C3ResolvedReactionTransition
 canonicalC3ResolvedTransition =
   C3.c3ResolvedReactionTransition
     source target sourceFibre targetFibre sourceC3Action targetC3Action
     Orientation Orientation orientationSector orientationSector reactionTransport
-    (1 ≡ 1) (0 ≡ 0) (12 ≡ 12) (1 ≡ 1)
-    ⊤ ⊤
-    (Kinetics.H3AmmoniaKineticReceipt.rateMantissaTenths Kinetics.canonicalH3AmmoniaKineticReceipt ≡ 42)
-    (Kinetics.H3AmmoniaKineticReceipt.temperatureKelvin Kinetics.canonicalH3AmmoniaKineticReceipt ≡ 297)
+    ElementConservation ChargeConservation ElectronAccounting SelectedBondTransfer
+    ⊤ EnergeticReceipt KineticReceipt EnvironmentReceipt
 
 record PaidC3ResolvedTransition : Set₁ where
   constructor paidC3ResolvedTransition
   field
     transition : C3.C3ResolvedReactionTransition
-    sourceGeneratorCubeWitness : (x : Orientation) → generatorCube x ≡ refl
-    targetGeneratorCubeWitness : (x : Orientation) → generatorCube x ≡ refl
-    elementConservationWitness : 1 ≡ 1
-    chargeConservationWitness : 0 ≡ 0
-    electronAccountingWitness : 12 ≡ 12
-    selectedBondTransferWitness : 1 ≡ 1
+    sourceGeneratorCubeWitness : GeneratorCubeLaw
+    targetGeneratorCubeWitness : GeneratorCubeLaw
+    elementConservationWitness : ElementConservation
+    chargeConservationWitness : ChargeConservation
+    electronAccountingWitness : ElectronAccounting
+    selectedBondTransferWitness : SelectedBondTransfer
     mechanismWitness : ⊤
-    energeticScopeWitness : ⊤
-    kineticWitness :
-      Kinetics.H3AmmoniaKineticReceipt.rateMantissaTenths Kinetics.canonicalH3AmmoniaKineticReceipt ≡ 42
-    environmentWitness :
-      Kinetics.H3AmmoniaKineticReceipt.temperatureKelvin Kinetics.canonicalH3AmmoniaKineticReceipt ≡ 297
+    energeticWitness : EnergeticReceipt
+    kineticWitness : KineticReceipt
+    environmentWitness : EnvironmentReceipt
 
 canonicalPaidC3ResolvedTransition : PaidC3ResolvedTransition
 canonicalPaidC3ResolvedTransition =
   paidC3ResolvedTransition canonicalC3ResolvedTransition
-    (λ x → refl) (λ x → refl)
-    refl refl refl refl tt tt refl refl
+    generatorCube generatorCube
+    (refl , refl) refl refl refl tt refl refl refl
 
 record C3ResolvedH3AmmoniaBoundary : Set where
   constructor c3ResolvedH3AmmoniaBoundary
@@ -216,8 +258,11 @@ record C3ResolvedH3AmmoniaBoundary : Set where
     targetNH4PlusTdPaidIsTrue : targetNH4PlusTdPaid ≡ true
     selectedAtomLabelC3TransportPaid : Bool
     selectedAtomLabelC3TransportPaidIsTrue : selectedAtomLabelC3TransportPaid ≡ true
-    fullC3ResolvedReactionTransitionPaid : Bool
-    fullC3ResolvedReactionTransitionPaidIsTrue : fullC3ResolvedReactionTransitionPaid ≡ true
+    sameReactionThermochemicalDifferencePaid : Bool
+    sameReactionThermochemicalDifferencePaidIsTrue : sameReactionThermochemicalDifferencePaid ≡ true
+    fullProofRelevantC3ResolvedReactionTransitionPaid : Bool
+    fullProofRelevantC3ResolvedReactionTransitionPaidIsTrue :
+      fullProofRelevantC3ResolvedReactionTransitionPaid ≡ true
     selectedC3EqualsFullProductPointGroup : Bool
     selectedC3EqualsFullProductPointGroupIsFalse : selectedC3EqualsFullProductPointGroup ≡ false
     measuredRateDeterminesUniqueProtonTrajectory : Bool
@@ -228,4 +273,4 @@ open C3ResolvedH3AmmoniaBoundary public
 canonicalC3ResolvedH3AmmoniaBoundary : C3ResolvedH3AmmoniaBoundary
 canonicalC3ResolvedH3AmmoniaBoundary =
   c3ResolvedH3AmmoniaBoundary
-    true refl true refl true refl true refl true refl false refl false refl
+    true refl true refl true refl true refl true refl true refl false refl false refl
