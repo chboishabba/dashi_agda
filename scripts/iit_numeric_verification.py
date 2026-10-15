@@ -115,20 +115,35 @@ def verify_numeric_results() -> dict:
     assert topology["recurrent_three_cell"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
     assert topology["grid_2x2"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0, 0.5]
 
-    # 369 same-cardinality algebra control: compare computed profiles only.
+    # 369 same-cardinality algebra controls. Python computes the IIT profiles;
+    # the algebra-separation theorems themselves remain Agda-owned.
     algebra = algebra_summary()
+    expected6 = round(math.log2(36), 12)
     expected9 = round(math.log2(81), 12)
+    z6 = algebra["z6_cyclic"]
+    s3 = algebra["s3_permutation"]
     z9 = algebra["z9_cyclic"]
     f3sq = algebra["f3_squared"]
+
+    assert z6["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
+    assert s3["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
+    assert z6["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
+    assert s3["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
+    same_6_profile = (
+        z6["iit_4_0_2023"]["distinct_phi_s"]
+        == s3["iit_4_0_2023"]["distinct_phi_s"]
+    )
+    assert same_6_profile
+
     assert z9["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
     assert f3sq["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
     assert z9["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
     assert f3sq["iit_4_0_2026"]["distinct_phi_s"] == [0.0]
-    same_369_profile = (
+    same_9_profile = (
         z9["iit_4_0_2023"]["distinct_phi_s"]
         == f3sq["iit_4_0_2023"]["distinct_phi_s"]
     )
-    assert same_369_profile
+    assert same_9_profile
 
     # Hyperform/hyperfabric finite fixtures: numerical IIT outputs only.
     fixtures = fixture_summary()["fixtures"]
@@ -169,6 +184,8 @@ def verify_numeric_results() -> dict:
     assert stress["ternary_recurrent_trixor"]["iit_4_0_2023"]["distinct_phi_s"] == [
         round(math.log2(9), 12)
     ]
+    assert stress["z6_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
+    assert stress["s3_recurrent_composition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected6]
     assert stress["z9_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
     assert stress["f3_squared_recurrent_addition"]["iit_4_0_2023"]["distinct_phi_s"] == [expected9]
 
@@ -182,9 +199,12 @@ def verify_numeric_results() -> dict:
         "xor_grid": grid,
         "matched_controls": matched,
         "algebra_369": {
+            "z6_2023_phi_s": z6["iit_4_0_2023"]["distinct_phi_s"],
+            "s3_2023_phi_s": s3["iit_4_0_2023"]["distinct_phi_s"],
+            "same_six_state_profile_observed": same_6_profile,
             "z9_2023_phi_s": z9["iit_4_0_2023"]["distinct_phi_s"],
             "f3_squared_2023_phi_s": f3sq["iit_4_0_2023"]["distinct_phi_s"],
-            "same_profile_observed": same_369_profile,
+            "same_nine_state_profile_observed": same_9_profile,
         },
         "hyperfabric_fixtures": fixtures,
         "pointed27_counts": {
