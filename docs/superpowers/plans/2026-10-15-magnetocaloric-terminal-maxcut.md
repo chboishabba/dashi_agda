@@ -37,10 +37,11 @@ The remaining max-cut is physical same-object identification/calibration, not mi
 
 ## Verification state
 
-- [x] Branch comparison is ahead-only of `master` at the verification pass.
-- [x] CodeRabbit status was successful on the pre-record head.
-- [x] No pull-request-triggered GitHub Actions workflow exists for the checked head.
+- [x] Fresh branch comparison after the acquisition pass: feature branch is 68 commits ahead and 0 behind `master`, with 32 changed files (+2844/-0).
+- [x] CodeRabbit reports success on head `07651f339f46d7da00abaf02de4115cdc8fc3f12`.
+- [x] No pull-request-triggered GitHub Actions workflow exists for the checked implementation head.
 - [x] No Agda compiler is available in this execution environment; no Agda typecheck-success claim is made.
+- [x] GitHub mergeability was still reporting false on head `07651f339f46d7da00abaf02de4115cdc8fc3f12` at the final status read; no merge-ready claim is made from branch-ahead or CodeRabbit status alone.
 - [x] Validation modules were committed before their corresponding implementation owners where new evidence lanes were introduced; executable RED/GREEN verification remains compiler-bound.
 
 This record is a non-promoting implementation ledger. It does not convert cited literature, vendor statements, static review, or source acquisition into theorem authority or same-device calibration.
