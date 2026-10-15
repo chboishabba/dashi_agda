@@ -62,6 +62,28 @@ threeMonthMicrochannelRow =
     "reported as a preliminary ongoing result; channel appearance is not full lifetime or COP"
     "acquire completed long-duration same-object performance and degradation series"
 
+oneTeslaAdiabaticCharacterizationRow : PaymentRow
+oneTeslaAdiabaticCharacterizationRow =
+  paymentRow
+    "coated versus pristine microchannel regenerator magnetocaloric function under 1 T characterization"
+    "Weiß et al. 2025, Figure 4(c) and Assessment of Magnetocaloric Function"
+    peerReviewedPaid
+    directObservation
+    true
+    "the paper reports adiabatic temperature-change characterization at 1 T and states that magnetocaloric function did not deteriorate during plating; this is not a full constitutive M/S/c_H surface"
+    "digitized/calibrated delta-T_ad(T,B) and entropy/heat-capacity surfaces with composition, uncertainty and B/H convention"
+
+agingTestOperatingPointRow : PaymentRow
+agingTestOperatingPointRow =
+  paymentRow
+    "in-device aging-test operating point on modified POLARIS hardware"
+    "Weiß et al. 2025, In-Device Testing"
+    peerReviewedPartial
+    directObservation
+    true
+    "load-free aging used media near Curie temperature (~288 K), 2 Hz magnetisation and a reported ~0.8 T field; this pays a bounded test condition, not a spatial/temporal field map, full AMR phase timing, loaded capacity or COP"
+    "same-device synchronized field/flow traces, field map, loaded thermal duty and controller-error envelope"
+
 longTermLifetimeRow : PaymentRow
 longTermLifetimeRow =
   paymentRow
@@ -125,7 +147,7 @@ materialConstitutiveRow =
     structurallyTyped
     typedButUncalibrated
     true
-    "generic response laws are typed; a concrete LaFeSi constitutive surface is not supplied by structure alone"
+    "generic response laws are typed and one 1 T delta-T_ad characterization is source-paid; a full calibrated LaFeSi constitutive surface is not supplied by either fact alone"
     "acquire calibrated material tables/curves with composition, temperature, field convention and uncertainty"
 
 crystalMagneticIdentificationRow : PaymentRow
@@ -158,7 +180,7 @@ fieldMapRow =
     structurallyTyped
     typedButUncalibrated
     true
-    "tesla-valued B and A/m-valued H are typed separately; constitutive relation and geometry remain empirical"
+    "the aging experiment reports an approximate 0.8 T operating field but not a full spatial/temporal field map; tesla-valued B and A/m-valued H remain separately typed"
     "measured or validated simulated field map with B-H convention, geometry and operating-current/magnet state"
 
 hydraulicsRow : PaymentRow
@@ -169,7 +191,7 @@ hydraulicsRow =
     structurallyTyped
     noSameObjectData
     true
-    "mass/momentum/energy balances are relevant but do not manufacture hydraulic coefficients"
+    "the paper identifies the test fluids and flushing context, but mass/momentum/energy balances do not manufacture hydraulic coefficients"
     "same-regenerator delta-p versus flow data and calibrated porous closure"
 
 heatTransferRow : PaymentRow
@@ -180,7 +202,7 @@ heatTransferRow =
     structurallyTyped
     noSameObjectData
     true
-    "Fourier/energy-balance structure is present; transfer coefficients and contact resistances remain physical inputs"
+    "the aging test reports media near ~288 K, but Fourier/energy-balance structure and an operating temperature do not supply transfer coefficients/contact resistances"
     "same-regenerator thermal response/transfer calibration across the operating envelope"
 
 cycleTimingRow : PaymentRow
@@ -189,9 +211,9 @@ cycleTimingRow =
     "field/flow cycle timing and controller calibration"
     "ActiveMagneticRegenerator synchronisation interface"
     structurallyTyped
-    noSameObjectData
+    typedButUncalibrated
     true
-    "four-phase synchronisation is explicit but not numerically calibrated"
+    "the aging test pays a 2 Hz magnetisation frequency only; it does not supply the complete field/flow phase relation, valve/pump timing or control-error envelope"
     "same-device timing traces, valve/pump/magnet phase relation and control-error envelope"
 
 sameDeviceCOPRow : PaymentRow
@@ -202,7 +224,7 @@ sameDeviceCOPRow =
     openSameObjectAcquisition
     noSameObjectData
     true
-    "vendor or component claims cannot replace same-object first-law work/cooling accounting"
+    "vendor or component claims cannot replace same-object first-law work/cooling accounting; the paper's aging test was load-free"
     "simultaneous same-device cooling energy, field/motor/pump input, recovered work, parasitics and uncertainty"
 
 sameDeviceCapacityRow : PaymentRow
@@ -213,7 +235,7 @@ sameDeviceCapacityRow =
     openSameObjectAcquisition
     noSameObjectData
     true
-    "platform vision and material response do not establish delivered cooling capacity"
+    "platform vision and material response do not establish delivered cooling capacity; the acquired aging experiment is explicitly load-free"
     "same-device calorimetric capacity over declared hot/cold temperatures, span, flow and field cycle"
 
 navierStokesRow : PaymentRow
@@ -242,6 +264,8 @@ allPaymentRows : List PaymentRow
 allPaymentRows =
   sixWeekAgingRow
   ∷ threeMonthMicrochannelRow
+  ∷ oneTeslaAdiabaticCharacterizationRow
+  ∷ agingTestOperatingPointRow
   ∷ longTermLifetimeRow
   ∷ protectionChemistryRow
   ∷ vendorThirtyPercentRow
@@ -266,6 +290,8 @@ record MagnetocaloricMaxCutReceipt : Set where
     canonicalAttributionFirewallPresent : Bool
     peerReviewedAgingWindowPaid : Bool
     preliminaryThreeMonthProperlyQualified : Bool
+    oneTeslaMaterialFunctionCheckPaid : Bool
+    agingOperatingPointPartiallyPaid : Bool
     vendorClaimsRemainVendorClaims : Bool
     structuralConsumersPopulated : Bool
     nsAndYMRemainStructuralOnly : Bool
@@ -275,4 +301,4 @@ record MagnetocaloricMaxCutReceipt : Set where
 canonicalMagnetocaloricMaxCutReceipt : MagnetocaloricMaxCutReceipt
 canonicalMagnetocaloricMaxCutReceipt =
   magnetocaloric-max-cut-receipt
-    true true true true true true true true
+    true true true true true true true true true true
