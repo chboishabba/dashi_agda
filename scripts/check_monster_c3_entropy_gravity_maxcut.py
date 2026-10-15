@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 """Executable structural audit for the Monster/C3/entropy/gravity max-cut.
 
-This is deliberately not an Agda proof or physical validation.  It checks the
-exact arithmetic fixture and fail-closed source markers expected by the new
-formal surfaces.  Agda typechecking remains a separate receipt.
+This is deliberately not an Agda proof or physical validation. It checks exact
+arithmetic and fail-closed source markers. Agda typechecking is separate.
 """
-
-from __future__ import annotations
 
 from pathlib import Path
 
@@ -41,6 +38,13 @@ def main() -> None:
         "arithmeticIdentityProvesGravity",
     )
     require(
+        "DASHI/Physics/Closure/MonsterC3ZetaEntropyGravityCrossPollinationExact.agda",
+        "literalThreePhaseFibresUseOneCentralAction",
+        "actualSingleProducerInhabited",
+        "fixedRegularResidualSameActionSplitPaid",
+        "zetaWeldCreatesQuantumGravity",
+    )
+    require(
         "DASHI/Physics/Closure/MonsterC3EntropyStateCountingExact.agda",
         "degeneracyDeterminesProbabilityDistribution",
         "balancedCharacterCancellationMeansFineStatesAbsent",
@@ -62,18 +66,25 @@ def main() -> None:
         "https://arxiv.org/abs/1012.0119",
     )
     require(
+        "DASHI/Physics/Chemistry/AmmoniaC3MolecularFixtureExact.agda",
+        "C3v",
+        "rotateHThreeTimes",
+        "experimentalC3GeometryPaid",
+        "ammoniaInversionIsProductsByproductsReaction",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AtomicPeriodicTable369C3EntropyIntertwinerExact.agda",
+        "sourceBackedSameObjectC3GeometryFixturePaid",
+        "fullElectronicMolecularC3ActionInstantiated",
+        "productsByproductsReactionFixturePaid",
+        "molecularEntropyImpliesPhysicalGravity",
+    )
+    require(
         "DASHI/Physics/Closure/Monster3Plus1PhysicalSymmetryTargetExact.agda",
         "monsterIsSymmetryOfObserved3Plus1Universe",
         "statusMeansUnpaidNotImpossible",
         "missingNovelQuantitativePrediction",
         "missingIndependentEmpiricalValidation",
-    )
-    require(
-        "DASHI/Physics/Chemistry/AtomicPeriodicTable369C3EntropyIntertwinerExact.agda",
-        "global369TernaryEncodingImpliesMolecularC3Symmetry",
-        "c3MolecularSectorImpliesMonsterModule",
-        "molecularEntropyImpliesPhysicalGravity",
-        "concreteSameObjectC3MoleculeInstantiated",
     )
 
     print("monster/C3/entropy/gravity max-cut structural audit: ok")
