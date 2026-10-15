@@ -8,19 +8,18 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Governance.IranContraCovertFlowHistoricalMechanismExact as IranContra
 import DASHI.Governance.PalantirPlatformCapabilityEvidenceExact as Palantir
 
 ------------------------------------------------------------------------
 -- PALANTIR / TOTAL INFORMATION AWARENESS HISTORICAL GENEALOGY
 --
--- Purpose: separate documented programme/contact/capital/capability edges from
--- the stronger interpretive claim that Palantir was literally a privatised or
--- successor implementation of TIA.
---
--- Existing owners remain authoritative for:
---   * Iran/Contra covert-routing topology and its non-analogy boundaries;
---   * generic Palantir platform capability and deployment-specific gaps.
+-- This owner is an attributed, evidence-graded specialisation of the existing
+-- EvidenceGradedGenealogyCore.  It does not create a parallel genealogy
+-- calculus.  A/B remain the repository's strong historical grades; C/D/E do
+-- not become strong edges merely because a speaker, article or analogy names
+-- them.
 ------------------------------------------------------------------------
 
 govInfoTIA : Source.AttributedSource
@@ -53,7 +52,7 @@ wiredPoindexter = Source.mkNoDOISource
   "2004"
   "https://www.wired.com/2004/05/poindexter/"
   Source.newsSource
-  "contemporaneous interview identifying Poindexter as former head of DARPA's Information Awareness Office after Congress forced his departure"
+  "contemporaneous interview identifying Poindexter as former head of DARPA's Information Awareness Office after congressional termination pressure"
   Source.publicAttribution
 
 bloombergWade : Source.AttributedSource
@@ -75,7 +74,7 @@ maxwellISGAP = Source.mkNoDOISource
   "2021"
   "https://isgap.org/wp-content/uploads/2021/09/Summer-Institute-2021-Digital-Program.pdf"
   Source.institutionalSource
-  "Christine Maxwell self-biographical programme entry: co-founded Chiliad; describes Bayesian/natural-language software for analysis across clouds, defence agencies, departments and other stovepipes"
+  "Christine Maxwell biography: co-founded Chiliad; describes Bayesian/natural-language software for analysis across clouds, defence agencies, departments and other stovepipes"
   Source.publicAttribution
 
 mccormackWebb : Source.AttributedSource
@@ -86,7 +85,7 @@ mccormackWebb = Source.mkNoDOISource
   "2025-09-25"
   "https://www.petermccormack.com/episodes/110-whitney-webb-epstein-intelligence-and-the-global-network-of-power"
   Source.practitionerSource
-  "source object for Webb's Palantir/TIA/Wade/Chiliad claims; interview attribution does not independently prove those historical propositions"
+  "source object for Webb's Palantir/TIA/Wade/Chiliad assertions; interview attribution does not independently prove those historical propositions"
   Source.publicAttribution
 
 sourceAtlas : Source.AttributedSourceAtlas
@@ -94,94 +93,99 @@ sourceAtlas = Source.mkSourceAtlas
   "Palantir/TIA historical genealogy source atlas"
   "DASHI.Governance.PalantirTIAHistoricalGenealogyExact"
   (govInfoTIA ∷ wiredJoiningDots ∷ wiredPoindexter ∷ bloombergWade ∷ maxwellISGAP ∷ mccormackWebb ∷ [])
-  "programme existence/governance; direct contact; capital/development; Chiliad identities/capability; interview-attributed stronger claims"
-
-data GenealogyEdgeKind : Set where
-  programmeGovernanceEdge : GenealogyEdgeKind
-  interpersonalContactEdge : GenealogyEdgeKind
-  investmentAccessEdge : GenealogyEdgeKind
-  engineeringFeedbackEdge : GenealogyEdgeKind
-  personnelRoleEdge : GenealogyEdgeKind
-  productCapabilityEdge : GenealogyEdgeKind
-  institutionalSuccessionEdge : GenealogyEdgeKind
-
-record HistoricalGenealogyEdge : Set where
-  constructor historical-genealogy-edge
-  field
-    edgeKind : GenealogyEdgeKind
-    fromNode : String
-    toNode : String
-    source : Source.AttributedSource
-    boundedReading : String
-    documented : Bool
-
-open HistoricalGenealogyEdge public
-
-tiaCongressionalEdge : HistoricalGenealogyEdge
-tiaCongressionalEdge = historical-genealogy-edge
-  programmeGovernanceEdge
-  "DARPA Information Awareness Office / Total Information Awareness"
-  "Congressional oversight / successor-component restrictions"
-  govInfoTIA
-  "Congress documented and regulated TIA and expressly contemplated related, successor and transferred programme components."
-  true
-
-perleMeetingEdge : HistoricalGenealogyEdge
-perleMeetingEdge = historical-genealogy-edge
-  interpersonalContactEdge
-  "Alex Karp + Peter Thiel"
-  "John Poindexter"
-  wiredJoiningDots
-  "Wired reports Poindexter's own account that Karp and Thiel met him at Richard Perle's home shortly after Palantir was formed."
-  true
-
-inQTelEdge : HistoricalGenealogyEdge
-inQTelEdge = historical-genealogy-edge
-  investmentAccessEdge
-  "In-Q-Tel"
-  "Palantir"
-  wiredJoiningDots
-  "Wired records In-Q-Tel investment and CIA-facing access during Palantir's early development."
-  true
-
-ciaFeedbackEdge : HistoricalGenealogyEdge
-ciaFeedbackEdge = historical-genealogy-edge
-  engineeringFeedbackEdge
-  "CIA analysts"
-  "Palantir early product development"
-  wiredJoiningDots
-  "Wired records iterative CIA analyst testing/feedback as part of Palantir's early development history."
-  true
-
-wadeChiliadEdge : HistoricalGenealogyEdge
-wadeChiliadEdge = historical-genealogy-edge
-  personnelRoleEdge
-  "Alan C. Wade"
-  "Chiliad Inc."
-  bloombergWade
-  "Bloomberg identifies Wade as Chairman/Founder of Chiliad Inc.; this receipt does not establish a TIA role."
-  true
-
-maxwellChiliadEdge : HistoricalGenealogyEdge
-maxwellChiliadEdge = historical-genealogy-edge
-  personnelRoleEdge
-  "Christine Maxwell"
-  "Chiliad Inc."
-  maxwellISGAP
-  "Maxwell's institutional biography identifies her as a Chiliad co-founder."
-  true
-
-chiliadCapabilityEdge : HistoricalGenealogyEdge
-chiliadCapabilityEdge = historical-genealogy-edge
-  productCapabilityEdge
-  "Chiliad"
-  "cross-stovepipe data analysis"
-  maxwellISGAP
-  "Institutional biography describes Bayesian/natural-language analysis across clouds, defence agencies, departments and other stovepipes."
-  true
+  "programme governance; direct contact; capital/development; Chiliad identity/capability; interview-attributed stronger claims"
 
 ------------------------------------------------------------------------
--- Same-capability comparison: structural similarity is not genealogy.
+-- Attributed edge wrapper: reuse Genealogy grade/relation types while keeping
+-- the repository-wide AttributedSourceCore provenance object.
+------------------------------------------------------------------------
+
+record AttributedGenealogyEdge : Set where
+  constructor attributed-genealogy-edge
+  field
+    fromNode : String
+    toNode : String
+    relation : Genealogy.PathwayRelation
+    grade : Genealogy.EvidenceGrade
+    source : Source.AttributedSource
+    boundedClaim : String
+
+open AttributedGenealogyEdge public
+
+tiaCongressionalEdge : AttributedGenealogyEdge
+tiaCongressionalEdge = attributed-genealogy-edge
+  "DARPA Information Awareness Office / TIA"
+  "Congressional oversight / successor-component restriction"
+  Genealogy.directDocumentedTransfer
+  Genealogy.gradeA
+  govInfoTIA
+  "Congress documented/regimented TIA and expressly contemplated related, successor and transferred programme components."
+
+perleMeetingEdge : AttributedGenealogyEdge
+perleMeetingEdge = attributed-genealogy-edge
+  "Alex Karp + Peter Thiel"
+  "John Poindexter, meeting at Richard Perle's home"
+  Genealogy.personnelInstitutionalContinuity
+  Genealogy.gradeB
+  wiredJoiningDots
+  "Wired records Poindexter's own account of the meeting shortly after Palantir was formed."
+
+inQTelEdge : AttributedGenealogyEdge
+inQTelEdge = attributed-genealogy-edge
+  "In-Q-Tel"
+  "Palantir"
+  Genealogy.fundingOrganisationalLink
+  Genealogy.gradeB
+  wiredJoiningDots
+  "Wired records In-Q-Tel investment and intelligence-community access during Palantir's early development."
+
+ciaFeedbackEdge : AttributedGenealogyEdge
+ciaFeedbackEdge = attributed-genealogy-edge
+  "CIA analysts"
+  "Palantir early product development"
+  Genealogy.personnelInstitutionalContinuity
+  Genealogy.gradeB
+  wiredJoiningDots
+  "Wired records iterative CIA analyst testing/feedback during Palantir's early development."
+
+wadeChiliadEdge : AttributedGenealogyEdge
+wadeChiliadEdge = attributed-genealogy-edge
+  "Alan C. Wade"
+  "Chiliad Inc."
+  Genealogy.personnelInstitutionalContinuity
+  Genealogy.gradeB
+  bloombergWade
+  "Bloomberg identifies Wade as Chairman/Founder of Chiliad; this receipt does not establish a TIA role."
+
+maxwellChiliadEdge : AttributedGenealogyEdge
+maxwellChiliadEdge = attributed-genealogy-edge
+  "Christine Maxwell"
+  "Chiliad Inc."
+  Genealogy.personnelInstitutionalContinuity
+  Genealogy.gradeB
+  maxwellISGAP
+  "Maxwell's institutional biography identifies her as a Chiliad co-founder."
+
+chiliadCapabilityEdge : AttributedGenealogyEdge
+chiliadCapabilityEdge = attributed-genealogy-edge
+  "Chiliad"
+  "cross-stovepipe data analysis"
+  Genealogy.sharedMethodOnly
+  Genealogy.gradeD
+  maxwellISGAP
+  "Institutional biography describes Bayesian/natural-language analysis across clouds, defence agencies, departments and other stovepipes."
+
+webbWadeTIACandidateEdge : AttributedGenealogyEdge
+webbWadeTIACandidateEdge = attributed-genealogy-edge
+  "Alan C. Wade"
+  "Total Information Awareness intelligence-community participation"
+  Genealogy.audienceContentAdjacency
+  Genealogy.gradeC
+  mccormackWebb
+  "Webb attributes an intimate TIA role to Wade; a primary/official same-person TIA-role receipt remains unpaid here."
+
+------------------------------------------------------------------------
+-- Capability observation: evidence of similarity is not programme identity.
 ------------------------------------------------------------------------
 
 record CapabilityContinuityObservation : Set where
@@ -226,30 +230,18 @@ record TIAPalantirGenealogy : Set where
     sameObjectContractScopeContinuationReceiptInstalled : Bool
     palantirIsPrivatizedTIAPromoted : Bool
 
-    -- Existing historical analogy does not create this genealogy.
+    -- Iran/Contra is a reusable routing precedent, not evidence for this edge.
     iranContraAnalogyCreatesGenealogy : Bool
 
 open TIAPalantirGenealogy public
 
 canonicalTIAGenealogy : TIAPalantirGenealogy
 canonicalTIAGenealogy = tia-palantir-genealogy
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  true
-  false
-  false
-  false
-  false
-  false
-  false
+  true true true true true true true true
+  false false false false false false
 
 ------------------------------------------------------------------------
--- Strong-claim promotion requires same-object receipts rather than topology.
+-- Promotion contract: strong rhetoric requires same-object continuity payment.
 ------------------------------------------------------------------------
 
 record PrivatizedTIAPromotionReceipt : Set where
@@ -284,12 +276,10 @@ similarCapabilityDoesNotCreateProgrammeIdentity :
   SimilarCapabilityMeansSameProgramme → ⊥
 similarCapabilityDoesNotCreateProgrammeIdentity ()
 
-meetingDoesNotCreateTransfer :
-  PerleMeetingMeansProgrammeTransfer → ⊥
+meetingDoesNotCreateTransfer : PerleMeetingMeansProgrammeTransfer → ⊥
 meetingDoesNotCreateTransfer ()
 
-investmentDoesNotCreatePrivatization :
-  InQTelInvestmentMeansPrivatizedTIA → ⊥
+investmentDoesNotCreatePrivatization : InQTelInvestmentMeansPrivatizedTIA → ⊥
 investmentDoesNotCreatePrivatization ()
 
 chiliadFounderReceiptDoesNotCreateTIARole :
@@ -301,13 +291,19 @@ iranContraDoesNotCreateThisGenealogy :
 iranContraDoesNotCreateThisGenealogy ()
 
 ------------------------------------------------------------------------
--- Explicit cross-pollination receipts to existing owners.
+-- Cross-pollination receipts to prior art.
 ------------------------------------------------------------------------
+
+genealogyBoundaryReused :
+  Genealogy.gradeAorBRequiredForStrongHistoricalEdge
+    Genealogy.canonicalEvidenceGradedGenealogyBoundary
+  ≡ true
+genealogyBoundaryReused = refl
 
 palantirCapabilityBoundaryReused :
   Palantir.genericCapabilityEqualsAbuse Palantir.canonicalPalantirCapabilityBoundary ≡ false
 palantirCapabilityBoundaryReused = refl
 
-iranContraNonAnalogyBoundaryReused :
+iranContraRoutingPrecedentReused :
   IranContra.publicPolicyAndOperationalPracticeDiverged IranContra.iranContraTopology ≡ true
-iranContraNonAnalogyBoundaryReused = refl
+iranContraRoutingPrecedentReused = refl
