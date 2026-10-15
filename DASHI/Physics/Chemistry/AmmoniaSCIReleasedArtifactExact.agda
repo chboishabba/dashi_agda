@@ -6,16 +6,13 @@ import DASHI.Core.AttributedSourceCore as Source
 ------------------------------------------------------------------------
 -- AUTHOR-RELEASED NH3 COMPUTATIONAL ARTIFACT
 --
--- The associated paper explicitly points to github.com/danieli4444/SCI_VQE as
--- its open data/code repository.  The repository contains a concrete 64x64 NH3
--- selected-CI matrix plus run JSON.  These are stronger than a prose-only
--- citation, but they are still an external research artifact: this module
--- records their exact identity and claim scope rather than silently copying
--- authorship or pretending the bytes were recomputed inside DASHI.
+-- The associated paper points to github.com/danieli4444/SCI_VQE as its open
+-- data/code repository. The repository contains a concrete 64x64 NH3
+-- selected-CI matrix plus run JSON. These are an author-released data carrier,
+-- not independent scientific authority and not DASHI authorship.
 --
--- Important same-object boundary: the released CI_result geometry/energy and
--- the final paper's tabulated benchmark are numerically different.  They are
--- therefore kept as distinct computational objects.
+-- The released CI_result geometry/energy and the final paper's tabulated
+-- benchmark are numerically different, so they remain distinct objects.
 ------------------------------------------------------------------------
 
 authorReleasedSCIVQERepository : Source.AttributedSource
@@ -40,7 +37,7 @@ record ReleasedSelectedCIArtifact : Set where
     byteSize : Nat
     matrixDimension : Nat
     selectedGroundEnergySign : String
-    selectedGroundEnergyMicroHartreeMagnitude : Nat
+    selectedGroundEnergyNanoHartreeMagnitude : Nat
     energySourcePath : String
     energySourceBlobSHA : String
     repositorySource : Source.AttributedSource
@@ -58,11 +55,11 @@ nh3SelectedCI64Artifact =
     103176
     64
     "negative Hartree total-energy value"
-    55517555
+    55517555010
     "NH3/NH3_Fri Sep 30 02:42:39 2022.json"
     "b5560bfc019289512fcf1498b12d9f07a57e1972"
     authorReleasedSCIVQERepository
-    "the JSON exact_energy_list entry at 64 configurations is -55.517555009641335 Ha; the matrix file is the corresponding released 64x64 selected-CI Hamiltonian artifact"
+    "the JSON exact_energy_list entry at 64 configurations is -55.517555009641335 Ha; stored integer is rounded |E| in nanoHartree units (55.517555010 Ha); the matrix file is the corresponding released 64x64 selected-CI Hamiltonian artifact"
 
 record ReleasedFCIRunMetadata : Set where
   constructor releasedFCIRunMetadata
@@ -72,8 +69,8 @@ record ReleasedFCIRunMetadata : Set where
     basis : String
     configurationCount : Nat
     groundEnergySign : String
-    groundEnergyMicroHartreeMagnitude : Nat
-    nuclearRepulsionMicroHartree : Nat
+    groundEnergyNanoHartreeMagnitude : Nat
+    nuclearRepulsionNanoHartree : Nat
     geometry : String
     repositorySource : Source.AttributedSource
 
@@ -87,8 +84,8 @@ nh3ReleasedFCIRunMetadata =
     "STO-3G"
     3136
     "negative Hartree total-energy value"
-    55519414
-    11939959
+    55519414318
+    11939959419
     "N (0,0,0.2851841); H (-0.4697490,0.8136292,-0.0950614); H (-0.4697490,-0.8136292,-0.0950614); H (0.9394980,0,-0.0950614); symmetry c1"
     authorReleasedSCIVQERepository
 
@@ -104,21 +101,16 @@ record ReleasedArtifactBoundary : Set where
     authorReleasedFCIRunEnergyPaid : Bool
     authorReleasedFCIRunEnergyPaidIsTrue : authorReleasedFCIRunEnergyPaid ≡ true
     paperBenchmarkAndArtifactAreSameNumericalObject : Bool
-    paperBenchmarkAndArtifactAreSameNumericalObjectIsFalse :
-      paperBenchmarkAndArtifactAreSameNumericalObject ≡ false
+    paperBenchmarkAndArtifactAreSameNumericalObjectIsFalse : paperBenchmarkAndArtifactAreSameNumericalObject ≡ false
     matrixBytesVendoredIntoDASHI : Bool
     matrixBytesVendoredIntoDASHIIsFalse : matrixBytesVendoredIntoDASHI ≡ false
     matrixIndependentlyRediagonalizedByDASHI : Bool
-    matrixIndependentlyRediagonalizedByDASHIIsFalse :
-      matrixIndependentlyRediagonalizedByDASHI ≡ false
+    matrixIndependentlyRediagonalizedByDASHIIsFalse : matrixIndependentlyRediagonalizedByDASHI ≡ false
     releasedRepositoryCreatesIndependentAuthority : Bool
-    releasedRepositoryCreatesIndependentAuthorityIsFalse :
-      releasedRepositoryCreatesIndependentAuthority ≡ false
+    releasedRepositoryCreatesIndependentAuthorityIsFalse : releasedRepositoryCreatesIndependentAuthority ≡ false
 
 open ReleasedArtifactBoundary public
 
 canonicalReleasedArtifactBoundary : ReleasedArtifactBoundary
 canonicalReleasedArtifactBoundary =
-  releasedArtifactBoundary
-    true refl true refl true refl true refl
-    false refl false refl false refl false refl
+  releasedArtifactBoundary true refl true refl true refl true refl false refl false refl false refl false refl
