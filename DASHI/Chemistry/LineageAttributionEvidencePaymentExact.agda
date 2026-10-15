@@ -46,13 +46,13 @@ open SourceCoordinatePayment public
 
 chlorAlkaliTechnicalPayment : SourceCoordinatePayment
 chlorAlkaliTechnicalPayment =
-  sourceCoordinatePayment Atlas.chlorAlkaliBREF2014 technicalReference
-    "gold-R1 industrial brine-electrolysis/process identity"
-    "JRC91156 / EUR 26844 EN; process-scope description"
-    "Chlorine, hydrogen and caustic production by brine electrolysis is within the source scope."
+  sourceCoordinatePayment Atlas.chlorAlkaliEuroChlor2022 technicalReference
+    "gold-R1 industrial chlor-alkali process identity"
+    "Euro Chlor/Cefic 2022 eco-profile process description; exact page/equation locator remains separately payable for any promoted coordinate"
+    "Industrial chlor-alkali process context and standard electrolysis description only."
     "GoldReactionReplaySuiteExact.chlorAlkaliReplay + canonical half-reaction owner"
     identityPaid
-    "electrode potential/material/current density/rate constants/interfacial geometry/microscopic mechanism"
+    "exact half-reaction source locator, electrode potential/material/current density/rate constants/interfacial geometry/microscopic mechanism"
     false refl false refl
 
 pahMechanismPayment : SourceCoordinatePayment
@@ -71,7 +71,7 @@ sprReactionPayment =
   sourceCoordinatePayment BH4.bRENDAspr curatedReactionDatabase
     "SPR BH4-forming reaction identity"
     "BRENDA EC 1.1.1.153"
-    "Curated reaction identity for sepiapterin reductase and NADPH-dependent BH4-forming reduction."
+    "Curated enzyme/reaction identity for sepiapterin reductase and NADPH-dependent BH4-forming reduction."
     "KitzerowBH4SynthesisRegenerationExact.sprReaction"
     identityPaid
     "organism/isoform kinetics, concentrations, exact atom/electron-density map and in-vivo flux"
@@ -79,7 +79,7 @@ sprReactionPayment =
 
 dhprReactionPayment : SourceCoordinatePayment
 dhprReactionPayment =
-  sourceCoordinatePayment Atlas.dhprBRENDA curatedReactionDatabase
+  sourceCoordinatePayment Atlas.dhprBRENDA2026 curatedReactionDatabase
     "gold-R3 DHPR pterin-regeneration reaction identity"
     "BRENDA/IUBMB EC 1.5.1.34"
     "Curated reaction identity for 6,7-dihydropteridine reductase and NAD(P)H-linked pterin redox conversion."
