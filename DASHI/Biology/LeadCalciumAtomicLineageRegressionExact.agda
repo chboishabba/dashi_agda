@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic369
 import DASHI.Chemistry.AtomicMolecularReactionLineageHyperfabricExact as Lineage
+import DASHI.Chemistry.AtomicLineageBidiDiscriminatorExact as Bidi
 import DASHI.Biology.AtomicMolecularBiologicalIncorporationHyperfabricExact as Bio
 import DASHI.Biology.IonicMimicryGeometryExact as Mimicry
 import DASHI.Biology.TargetRelativeRecognitionFibreExact as Recognition
@@ -14,11 +15,6 @@ import DASHI.Biology.AtomicLineageTargetRecognitionBridgeExact as Probe
 
 ------------------------------------------------------------------------
 -- Pb2+ / Ca2+ lineage regression.
---
--- Same formal charge and partial target-relative recognition are coarse
--- collisions, not atomic identity.  The regression starts from distinct 369
--- AtomicIndex values and carries the distinction into coordination/protein
--- geometry even when a local biological target admits substitution.
 ------------------------------------------------------------------------
 
 calciumAtomicLineage : Lineage.AtomicLineage
@@ -63,6 +59,26 @@ canonicalPbCaAtomicSubstitutionProbe =
     false refl
     false refl
 
+canonicalPbCaBidiCandidate : Bidi.LineageDiscriminatorCandidate
+canonicalPbCaBidiCandidate =
+  Bidi.lineageDiscriminatorCandidate
+    "Pb-for-Ca target-relative substitution discriminator"
+    Bidi.ionicSubstitutionPerturbation
+    "H0: target response depends only on coarse Ca-like recognition coordinates; H1: hidden Pb/Ca lineage coordinates alter geometry/function"
+    "Ca2+ and Pb2+ collide on formal +2 and some donor/size coordinates"
+    "source/assay-specific controlled Pb2+ substitution for Ca2+ at a declared calcium-binding target"
+    "independent protocol/safety/assay authority required; no organism-level intervention implied"
+    "isotope/element-specific atom identity or validated metal identity readout"
+    "coordination/electronic-state readout; persistent individual electron labels are not assumed"
+    "coordination number/geometry and target conformational readout"
+    "bound/unbound species and competing-ion products"
+    "target activation/inhibition/conformation output"
+    "declared protein/function consumer"
+    "Ca/Pb concentration, competing ions, pH, target rigidity, hydration and assay context"
+    "metal identity + structural/functional assay calibration"
+    "separation if matched coarse occupancy produces different coordination or function"
+    "IonicMimicrySourceAtlasExact + target-specific experimental provenance"
+
 record LeadCalciumAtomicLineageRegression : Set where
   constructor leadCalciumAtomicLineageRegression
   field
@@ -70,6 +86,7 @@ record LeadCalciumAtomicLineageRegression : Set where
     mimicAtomicLineage : Lineage.AtomicLineage
     targetRelativeMimicry : Mimicry.TargetRelativeMimicry
     substitutionProbe : Probe.AtomicSubstitutionProbe
+    bidiCandidate : Bidi.LineageDiscriminatorCandidate
     coarseObserverReference : String
     sameFormalChargeCollision : Bool
     sameFormalChargeCollisionIsTrue : sameFormalChargeCollision ≡ true
@@ -97,6 +114,7 @@ canonicalLeadCalciumAtomicLineageRegression =
     leadAtomicLineage
     pbCaTargetRelativeMimicry
     canonicalPbCaAtomicSubstitutionProbe
+    canonicalPbCaBidiCandidate
     "formal charge / local calcium-binding-site observer"
     true refl
     true refl
