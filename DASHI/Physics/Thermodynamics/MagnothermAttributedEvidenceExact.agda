@@ -26,7 +26,7 @@ stableOperationArticle =
     "10.1021/acsaenm.4c00747"
     "https://pubs.acs.org/doi/10.1021/acsaenm.4c00747"
     Source.academicArticleSource
-    "primary peer-reviewed source for the paper's reported material preparation, protection strategy, magnetocaloric characterization, in-device aging observations, bounded six-week result, preliminary three-month microchannel result, and stated future-work plan; not device-COP authority"
+    "primary peer-reviewed source for the paper's reported material identity, protection strategy, magnetocaloric characterization, in-device aging observations, bounded six-week result, preliminary three-month microchannel result, and stated future-work plan; not device-COP authority"
     Source.publicAttribution
 
 magnothermTechnologyPage : Source.AttributedSource
@@ -147,6 +147,17 @@ record ClaimPayment : Set where
     calibratedDeviceEvidence : Bool
     claimCeiling : String
 
+inDeviceCompositionPayment : ClaimPayment
+inDeviceCompositionPayment =
+  claimPayment
+    "the in-device microchannel regenerators were purchased from VACUUMSCHMELZE and identified within an approximate Mn-substituted, fully hydrogenated La-Fe-Si composition envelope"
+    stableOperationArticle
+    "Materials and Methods: hydrogenated and Mn-substituted LaFeSi microchannel regenerators purchased for in-device testing; Introduction/Abbreviations give the approximate composition envelope"
+    peerReviewedMethod
+    sameSourceObject
+    true false true false
+    "same-study material identity and bounded composition envelope; not exact batch stoichiometry, phase fractions, magnetic symmetry, constitutive response or calibrated device performance"
+
 sixWeekContinuedOperationPayment : ClaimPayment
 sixWeekContinuedOperationPayment =
   claimPayment
@@ -248,7 +259,8 @@ stellar250kWDepictionPayment =
 
 currentClaimPayments : List ClaimPayment
 currentClaimPayments =
-  sixWeekContinuedOperationPayment
+  inDeviceCompositionPayment
+  ∷ sixWeekContinuedOperationPayment
   ∷ threeMonthMicrochannelPayment
   ∷ oneTeslaAdiabaticCharacterizationPayment
   ∷ agingTestOperatingPointPayment
