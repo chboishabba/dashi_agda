@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Biology.SelfIndexingHyperfabricTetrationExact as Tower
+import DASHI.Biology.NaturalSystemsHyperfabricExact as Natural
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 
 ------------------------------------------------------------------------
@@ -69,6 +70,20 @@ faceConfigurationsAreNotSelfIndexedLevelTwo :
   faceConfigurationCount ≡ selfIndexedLevelTwoCount → ⊥
 faceConfigurationsAreNotSelfIndexedLevelTwo ()
 
+------------------------------------------------------------------------
+-- WOLFRAM / MULTIWAY BOUNDARY
+--
+-- Equal visible endpoints can retain distinct path residuals.  Hence state
+-- count or visible endpoint count cannot by itself specify the causal/path
+-- object presented to an IIT consumer.
+------------------------------------------------------------------------
+
+wolframMultiwayResidualReceipt :
+  Natural.pathResidual (Natural.executeMultiway Natural.leftThenRight) ≡ 1
+  ×
+  Natural.pathResidual (Natural.executeMultiway Natural.rightThenLeft) ≡ 2
+wolframMultiwayResidualReceipt = Natural.multiwayPathsRetainDifferentResiduals
+
 record TernaryLatticeStateSpaceScalingBoundary : Set where
   constructor ternaryLatticeStateSpaceScalingBoundary
   field
@@ -79,6 +94,7 @@ record TernaryLatticeStateSpaceScalingBoundary : Set where
     equal19683CardinalityIdentifiesFactorisation : Bool
     ordinaryConfigurationGrowthIsTetration : Bool
     selfIndexingTowerIsOrdinaryProductGrowth : Bool
+    equalVisibleEndpointErasesWolframPathResidual : Bool
     carrierCardinalityAloneDefinesIITDynamics : Bool
 
 open TernaryLatticeStateSpaceScalingBoundary public
@@ -88,7 +104,7 @@ canonicalTernaryLatticeStateSpaceScalingBoundary :
 canonicalTernaryLatticeStateSpaceScalingBoundary =
   ternaryLatticeStateSpaceScalingBoundary
     true true true true
-    false false false false
+    false false false false false
 
 sameCardinalityDoesNotIdentifyFactorisation :
   equal19683CardinalityIdentifiesFactorisation
@@ -99,3 +115,8 @@ ordinaryStateSpaceGrowthIsNotSelfIndexingTetration :
   ordinaryConfigurationGrowthIsTetration
     canonicalTernaryLatticeStateSpaceScalingBoundary ≡ false
 ordinaryStateSpaceGrowthIsNotSelfIndexingTetration = refl
+
+visibleEndpointDoesNotErasePathResidual :
+  equalVisibleEndpointErasesWolframPathResidual
+    canonicalTernaryLatticeStateSpaceScalingBoundary ≡ false
+visibleEndpointDoesNotErasePathResidual = refl
