@@ -2,11 +2,19 @@
 module DASHI.Physics.Foundations.QuantumStressEnergyEngineeringValidation where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as Bridge
 
-stageChainExists : Bridge.QuantumStressEngineeringChain
-stageChainExists = Bridge.canonicalQuantumStressEngineeringChain
+stageRouteExists : Bridge.QuantumStressEngineeringChain
+stageRouteExists = Bridge.canonicalQuantumStressEngineeringChain
+
+paymentLedgerExists : Bridge.QuantumStressPaymentLedger
+paymentLedgerExists = Bridge.canonicalQuantumStressPaymentLedger
+
+canonicalWarpPaymentRemainsFalse :
+  Bridge.warpOrWormholePayment Bridge.canonicalQuantumStressPaymentLedger ≡ false
+canonicalWarpPaymentRemainsFalse = Bridge.canonicalWarpOrWormholePaymentIsFalse
 
 casimirBackreactionObligationExists : Bridge.CasimirBackreactionObligation
 casimirBackreactionObligationExists = Bridge.canonicalCasimirBackreactionObligation
@@ -19,6 +27,11 @@ energyConditionViolationNotAutomaticImpossibility =
 energyConditionViolationNotEngineeringReceipt : Bool
 energyConditionViolationNotEngineeringReceipt =
   Bridge.energyConditionViolationDoesNotMeanEngineeringRealizable
+    Bridge.canonicalQuantumStressBoundary
+
+routeDoesNotPayStages : Bool
+routeDoesNotPayStages =
+  Bridge.allowedRouteDoesNotCreatePhysicalPayment
     Bridge.canonicalQuantumStressBoundary
 
 metricBackreactionNotWarpPromotion : Bool
