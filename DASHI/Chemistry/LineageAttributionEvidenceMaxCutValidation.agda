@@ -11,6 +11,7 @@ import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact as Calibration
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Pareto
 import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact as AcquiredSources
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
+import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact as Status
 
 sourceAtlasDoesNotCreateAuthority :
   Sources.atlasCreatesAuthority Sources.canonicalLineageCalibrationSourceAtlas ≡ false
@@ -74,6 +75,18 @@ publicArtifactLinkIsNotAuthenticatedContent = refl
 acquiredEvidenceDoesNotCreatePriority :
   Acquired.acquiredPaymentCreatesPriority Acquired.canonicalAcquiredEvidenceBoundary ≡ false
 acquiredEvidenceDoesNotCreatePriority = refl
+
+partialPaymentDoesNotCloseWholeAcquisitionTarget :
+  Status.partialPaymentClosesWholeTarget Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+partialPaymentDoesNotCloseWholeAcquisitionTarget = refl
+
+publicLinkStillDoesNotEqualAuthenticatedArtifact :
+  Status.publicLinkEqualsAuthenticatedArtifact Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+publicLinkStillDoesNotEqualAuthenticatedArtifact = refl
+
+nearbyMechanismDoesNotSubstituteForBH4Flux :
+  Status.nearbyEvidenceSubstitutesForSameObjectFlux Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+nearbyMechanismDoesNotSubstituteForBH4Flux = refl
 
 paretoAcquisitionIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
