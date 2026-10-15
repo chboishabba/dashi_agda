@@ -6,6 +6,7 @@ import DASHI.Physics.Foundations.ResonantFlightPowerSignExact as Sign
 import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque369
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Algebra.TriadicDepthOneCharacters as C3
+import DASHI.Reasoning.TernarySynthesisCellComplexExact as Cells
 
 ------------------------------------------------------------------------
 -- Phase-coupled power: torque and velocity are retained as separate
@@ -83,7 +84,7 @@ phaseTorqueFace :
   (power : PhaseCoupledPower) →
   (geometry : Phase power → Torque369.BracketVoxel) →
   (phase : Phase power) →
-  DASHI.Reasoning.TernarySynthesisCellComplexExact.LocalSynthesisTwoCell
+  Cells.LocalSynthesisTwoCell
 phaseTorqueFace power geometry phase =
   Torque369.orientedTorqueFace
     (phaseOrientedTorque power geometry phase)
