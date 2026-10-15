@@ -27,6 +27,7 @@ import DASHI.Biology.IITCausalPantsFibreGluingExact
 import DASHI.Biology.IITCausalPantsOrientationBoundaryExact
 import DASHI.Biology.IITMatchedFabricGateExperimentExact
 import DASHI.Biology.IIT369MatchedAlgebraControlExact
+import DASHI.Biology.IITTernaryLatticeStateSpaceScalingExact
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact
 import DASHI.Biology.IITPointedTernary27FaceGluingExact
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact
