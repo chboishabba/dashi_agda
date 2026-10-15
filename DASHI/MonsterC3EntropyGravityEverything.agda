@@ -26,6 +26,8 @@ import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionValidation
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIValidation
+import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact
+import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactValidation
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionValidation
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact
