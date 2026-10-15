@@ -11,18 +11,20 @@ import DASHI.Cognition.EpsteinWexnerTrustInstrumentAuthority20261015Exact as Ins
 import DASHI.Cognition.EpsteinWexnerTrustBearInvestmentAuthority20261015Exact as BearAuthority
 
 ------------------------------------------------------------------------
--- WEXNER CHILDREN'S TRUST II — TRUSTEE TENURE LOWER BOUND
+-- WEXNER CHILDREN'S TRUST II — TRUSTEE TENURE BOUNDS
 --
--- This owner records positive dated evidence only.  An observed trustee
--- signature gives a lower bound on tenure; absence of a later indexed signature
--- is not a removal date.  The Bear 2006/07 respondent assertions are kept in a
--- different source class from the executed trust and SEC signature pages.
+-- Positive neutral records pay creation/SEC trustee dates. Bear's FINRA answer
+-- supplies later attributed trustee-capacity and removal assertions, but the
+-- removal footnote cites a Reuters report rather than an attached removal deed.
+-- Therefore 2008 is an attributed endpoint, not the exact legal termination
+-- date/instrument.
 ------------------------------------------------------------------------
 
 data TenureSource : Set where
   executedTrustAgreement : TenureSource
   secSchedule13DSignature : TenureSource
   adversarialBearPleading : TenureSource
+  adversarialPleadingCitingMedia : TenureSource
   successorOrRemovalInstrument : TenureSource
 
 record TenureReceipt : Set where
@@ -60,8 +62,8 @@ secSignature2003 = tenure-receipt
 bearTrusteeAssertion2006 : TenureReceipt
 bearTrusteeAssertion2006 = tenure-receipt
   "2006-11" adversarialBearPleading
-  "EFTA00294815..EFTA00294822 — Bear Stearns Respondents' FINRA Statement of Answer"
-  "Bear respondents state that Epstein acted in his capacity as trustee of Wexner Children's Trust II for a USD20m ABS-fund investment. This is later-period source evidence of asserted trustee capacity, but it remains a party pleading rather than the successor/removal instrument or a neutral trustee certificate."
+  "EFTA00294820 — Bear Stearns Respondents' FINRA Statement of Answer"
+  "Bear respondents state that Epstein acted in his capacity as trustee of Wexner Children's Trust II for an additional USD20m ABS-fund investment. This pays the attributed assertion and its timing/capacity, not a neutral subscription or trustee certificate."
   true false
 
 bearTrusteeAssertion2007 : TenureReceipt
@@ -71,6 +73,13 @@ bearTrusteeAssertion2007 = tenure-receipt
   "Bear respondents separately state that Epstein acted in trustee capacity for a USD10m Europe Long/Short investment in 2007. This extends the attributed litigation chronology but is not promoted to the same evidentiary class as the trust agreement/SEC signatures."
   true false
 
+bearRemovalAssertion2008 : TenureReceipt
+bearRemovalAssertion2008 = tenure-receipt
+  "2008" adversarialPleadingCitingMedia
+  "EFTA00294820 footnote 4 — Bear Stearns Respondents' FINRA Statement of Answer, citing Jessica Hall/Reuters DealZone, 11 Feb 2008"
+  "In the same footnote describing the USD20m trust investment, Bear respondents state that Epstein 'was removed as trustee of the trust in 2008.' The footnote cites contemporaneous Reuters reporting rather than attaching the removal/resignation instrument. This pays an attributed 2008 endpoint claim, not the exact legal removal date or successor identity."
+  false false
+
 record TenureBoundary : Set where
   constructor tenure-boundary
   field
@@ -78,7 +87,9 @@ record TenureBoundary : Set where
     trusteeIn2002SECRecordPaid : Bool
     trusteeIn2003SECRecordPaid : Bool
     bearAssertsTrusteeCapacity2006And2007 : Bool
+    bearAssertsRemovalIn2008 : Bool
     exactRemovalOrSuccessorDatePaid : Bool
+    exactRemovalInstrumentPaid : Bool
     absenceOfLaterSignatureImpliesRemoval : Bool
     pleadingTrusteeLabelEqualsRemovalInstrument : Bool
     tenureThrough2007AdjudicatedByTheseRecords : Bool
@@ -86,10 +97,11 @@ open TenureBoundary public
 
 canonicalTenureBoundary : TenureBoundary
 canonicalTenureBoundary = tenure-boundary
-  true true true true false false false false
+  true true true true true false false false false false
 
 data MissingLaterSignatureImpliesRemoval : Set where
 data PleadingImpliesNeutralTenureCertificate : Set where
+data RemovalAssertionImpliesRemovalInstrument : Set where
 data EarlierTrusteeStatusImpliesIndefiniteAuthority : Set where
 
 missingSignatureDoesNotCreateRemoval : MissingLaterSignatureImpliesRemoval → ⊥
@@ -98,11 +110,14 @@ missingSignatureDoesNotCreateRemoval ()
 pleadingDoesNotCreateNeutralCertificate : PleadingImpliesNeutralTenureCertificate → ⊥
 pleadingDoesNotCreateNeutralCertificate ()
 
+removalAssertionDoesNotCreateInstrument : RemovalAssertionImpliesRemovalInstrument → ⊥
+removalAssertionDoesNotCreateInstrument ()
+
 earlierStatusDoesNotCreateIndefiniteAuthority : EarlierTrusteeStatusImpliesIndefiniteAuthority → ⊥
 earlierStatusDoesNotCreateIndefiniteAuthority ()
 
 ------------------------------------------------------------------------
--- Pareto: terminal tenure is now the only authority chronology debt.
+-- Pareto: terminal legal transition is now the authority chronology debt.
 ------------------------------------------------------------------------
 
 data TenureDebt : Set where
@@ -110,6 +125,7 @@ data TenureDebt : Set where
   allTrustAmendments : TenureDebt
   trusteeCertificates2004to2008 : TenureDebt
   neutralBearAccountAuthorityRecord : TenureDebt
+  contemporaneousReutersUnderlyingSources : TenureDebt
 
 record TenureAcquisition : Set where
   constructor tenure-acquisition
@@ -122,11 +138,13 @@ open TenureAcquisition public
 canonicalTenureAcquisition : List TenureAcquisition
 canonicalTenureAcquisition =
   tenure-acquisition successorRemovalInstrument 100
-    "Acquire the instrument that removes/replaces Epstein or otherwise terminates his Wexner Children’s Trust II trusteeship; do not derive an end date from silence." ∷
+    "Acquire the signed resignation/removal/successor-trustee instrument that gives the exact legal terminal date and successor; the 2008 Bear/Reuters statement is not that instrument." ∷
   tenure-acquisition allTrustAmendments 100
     "Acquire the complete amendment/restatement chain between the 1998 trust and the terminal successor/removal instrument." ∷
   tenure-acquisition trusteeCertificates2004to2008 99
-    "Acquire dated bank/broker/SEC trustee certificates or signature pages during 2004-2008 to tighten the positive tenure interval beyond the neutral August 2003 signature and independently test the later Bear pleading assertions." ∷
+    "Acquire dated bank/broker/SEC trustee certificates or signature pages during 2004-2008 to tighten the neutral positive tenure interval beyond the August 2003 SEC signature." ∷
   tenure-acquisition neutralBearAccountAuthorityRecord 99
-    "Acquire Bear account/subscription records showing who was recognized as trustee/signatory at the dates of the 2006/07 investments."
+    "Acquire Bear account/subscription records showing who was recognized as trustee/signatory at the dates of the 2006/07 investments." ∷
+  tenure-acquisition contemporaneousReutersUnderlyingSources 95
+    "Recover the February 2008 Reuters report and any primary source on which it relied; media citation can nominate but not replace the legal transition instrument."
   ∷ []
