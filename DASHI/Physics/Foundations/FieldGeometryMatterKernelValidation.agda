@@ -3,7 +3,6 @@ module DASHI.Physics.Foundations.FieldGeometryMatterKernelValidation where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
@@ -60,22 +59,32 @@ residualCandidateExists : Promotion.AnomalousMomentumCandidate
 residualCandidateExists = Promotion.canonicalAnomalousMomentumCandidate
 
 strongPromotionNeedsClosedNuisance :
-  (evidence : Promotion.StrongResidualPromotionEvidence) →
-  Promotion.strongNuisanceStatus evidence ≡ Promotion.nuisanceClosedByReceipt
+  {candidate : Promotion.AnomalousMomentumCandidate} →
+  (evidence : Promotion.StrongResidualPromotionEvidence candidate) →
+  Promotion.nuisanceStatus candidate ≡ Promotion.nuisanceClosedByReceipt
 strongPromotionNeedsClosedNuisance evidence =
-  Promotion.strongNuisanceClosed evidence
+  Promotion.candidateNuisanceClosed evidence
 
 strongPromotionNeedsRepetition :
-  (evidence : Promotion.StrongResidualPromotionEvidence) →
-  Promotion.strongRepeated evidence ≡ true
+  {candidate : Promotion.AnomalousMomentumCandidate} →
+  (evidence : Promotion.StrongResidualPromotionEvidence candidate) →
+  Promotion.repeatedOnSameApparatus (Promotion.replication candidate) ≡ true
 strongPromotionNeedsRepetition evidence =
-  Promotion.strongRepeatedIsTrue evidence
+  Promotion.candidateRepeatedIsTrue evidence
 
 strongPromotionNeedsIndependentReplication :
-  (evidence : Promotion.StrongResidualPromotionEvidence) →
-  Promotion.strongIndependentReplication evidence ≡ true
+  {candidate : Promotion.AnomalousMomentumCandidate} →
+  (evidence : Promotion.StrongResidualPromotionEvidence candidate) →
+  Promotion.independentlyReplicated (Promotion.replication candidate) ≡ true
 strongPromotionNeedsIndependentReplication evidence =
-  Promotion.strongIndependentReplicationIsTrue evidence
+  Promotion.candidateIndependentReplicationIsTrue evidence
+
+strongPromotionRemainsMechanismNeutral :
+  {candidate : Promotion.AnomalousMomentumCandidate} →
+  (evidence : Promotion.StrongResidualPromotionEvidence candidate) →
+  Promotion.remainsMechanismNeutral candidate ≡ true
+strongPromotionRemainsMechanismNeutral evidence =
+  Promotion.candidateRemainsMechanismNeutral evidence
 
 residualDoesNotPromoteToAntigravity : Bool
 residualDoesNotPromoteToAntigravity =
