@@ -28,7 +28,7 @@ for needle in ["chlorAlkaliReplay", "pahReplay", "dhprReplay", "pbCaReplay", "ca
 source_atlas = (ROOT / required[5]).read_text()
 for needle in [
     "AttributedSourceCore", "LineageCalibrationAttributionEnvelopeExact",
-    "chlorAlkaliBREF2014", "dhprBRENDA", "astrobiologyPrimer2016",
+    "chlorAlkaliEuroChlor2022", "dhprBRENDA2026", "astrobiologyPrimer2016",
     "canonicalLineageCalibrationSourceAtlas", "canonicalAtlasNonPromoting",
 ]:
     assert needle in source_atlas, f"source atlas missing {needle}"
@@ -36,7 +36,8 @@ for needle in [
 payment = (ROOT / required[6]).read_text()
 for needle in [
     "SourceCoordinatePayment", "EvidenceRole", "PaymentGrade",
-    "dhprReactionPayment", "sourceOwnsDASHISynthesis", "citationCreatesProof",
+    "chlorAlkaliTechnicalPayment", "dhprReactionPayment",
+    "sourceOwnsDASHISynthesis", "citationCreatesProof",
     "citationAlonePaysCalibration", "missingCoordinatePromotedByNearbyCitation",
     "reviewCountsAsPrimaryExperimentByDefault", "databaseReactionIdentityCountsAsInVivoFlux",
     "exactLocatorRequiredForNumericPromotion",
