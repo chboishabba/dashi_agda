@@ -11,25 +11,25 @@ import DASHI.Biology.IonicMimicrySourceAtlasExact as Ionic
 ------------------------------------------------------------------------
 -- CROSS-TRANCHE ATTRIBUTED SOURCE ATLAS
 --
--- This is an aggregation layer, not a second identity registry. Sources that
--- already have canonical attributed owners are reused definitionally.
+-- Aggregation only, not a second identity registry. Existing attributed source
+-- objects are reused definitionally; aliases describe the actual source object.
 ------------------------------------------------------------------------
 
-chlorAlkaliBREF2014 : Source.AttributedSource
-chlorAlkaliBREF2014 = Existing.chlorAlkaliEuroChlor2022
+chlorAlkaliEuroChlor2022 : Source.AttributedSource
+chlorAlkaliEuroChlor2022 = Existing.chlorAlkaliEuroChlor2022
 
-dhprBRENDA : Source.AttributedSource
-dhprBRENDA = Existing.dhprBrenda2026
+dhprBRENDA2026 : Source.AttributedSource
+dhprBRENDA2026 = Existing.dhprBrenda2026
 
 astrobiologyPrimer2016 : Source.AttributedSource
 astrobiologyPrimer2016 = Existing.astrobiologyPrimer2016
 
 canonicalLineageCalibrationSources : List Source.AttributedSource
 canonicalLineageCalibrationSources =
-  chlorAlkaliBREF2014
+  chlorAlkaliEuroChlor2022
   ∷ BH4.aromaticHydroxylaseReview
   ∷ BH4.bRENDAspr
-  ∷ dhprBRENDA
+  ∷ dhprBRENDA2026
   ∷ BH4.nosReview
   ∷ BH4.agmoReview
   ∷ Ionic.habermannEtAl1983
