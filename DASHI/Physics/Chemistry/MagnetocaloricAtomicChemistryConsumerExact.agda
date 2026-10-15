@@ -80,6 +80,57 @@ record CompositionToMagnetocaloricCalibration
     hydrogenationResponseEvidence : HydrogenationResponseEvidence
     phaseIdentificationEvidence : PhaseIdentificationEvidence
 
+------------------------------------------------------------------------
+-- Protection chemistry is a second material identity, not a footnote to the
+-- magnetic alloy.  Coating, inhibitor and heat-transfer-fluid chemistry are
+-- therefore explicit inputs to corrosion and interface-integrity evidence.
+------------------------------------------------------------------------
+
+record MagnetocaloricProtectionChemistry : Set₁ where
+  field
+    Substrate Coating Inhibitor TransferFluid : Set
+    CorrosionState InterfaceState : Set
+
+    substrate : Substrate
+    coating : Coating
+    inhibitor : Inhibitor
+    transferFluid : TransferFluid
+
+    initialCorrosionState : CorrosionState
+    initialInterfaceState : InterfaceState
+
+    CorrosionCompatibility : Set
+    CoatingAdhesionEvidence : Set
+    FluidCompatibilityEvidence : Set
+    InhibitorEffectEvidence : Set
+
+    corrosionCompatibility : CorrosionCompatibility
+    coatingAdhesionEvidence : CoatingAdhesionEvidence
+    fluidCompatibilityEvidence : FluidCompatibilityEvidence
+    inhibitorEffectEvidence : InhibitorEffectEvidence
+
+record ProtectionChemistryDegradationBridge
+  (P : MagnetocaloricProtectionChemistry) : Set₁ where
+  open MagnetocaloricProtectionChemistry P
+  field
+    Time : Set
+    corrosionState : Time → CorrosionState
+    interfaceState : Time → InterfaceState
+
+    QualifiedInterval : Time → Set
+    ChannelBlockingRisk : Time → Set
+    MagneticMaterialLossRisk : Time → Set
+    ThermalContactRisk : Time → Set
+
+    corrosionQualified :
+      (t : Time) → QualifiedInterval t → Set
+    channelBlockingControlled :
+      (t : Time) → QualifiedInterval t → ChannelBlockingRisk t → Set
+    magneticMaterialLossControlled :
+      (t : Time) → QualifiedInterval t → MagneticMaterialLossRisk t → Set
+    thermalContactControlled :
+      (t : Time) → QualifiedInterval t → ThermalContactRisk t → Set
+
 record MagnetocaloricAtomicChemistryBoundary : Set where
   constructor magnetocaloric-atomic-chemistry-boundary
   field
@@ -91,8 +142,10 @@ record MagnetocaloricAtomicChemistryBoundary : Set where
     hydrogenationRequiresResponseCalibration : Bool
     schurReductionMaySupplyElectronicStability : Bool
     schurReductionDoesNotSupplyMagnetocaloricResponse : Bool
+    coatingIdentityIsSeparateFromSubstrateIdentity : Bool
+    corrosionProtectionRequiresQualifiedEvidence : Bool
 
 canonicalMagnetocaloricAtomicChemistryBoundary : MagnetocaloricAtomicChemistryBoundary
 canonicalMagnetocaloricAtomicChemistryBoundary =
   magnetocaloric-atomic-chemistry-boundary
-    true true true true true true true true
+    true true true true true true true true true true
