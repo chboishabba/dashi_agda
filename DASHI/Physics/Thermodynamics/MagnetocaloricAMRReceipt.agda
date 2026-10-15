@@ -44,6 +44,7 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
     canonicalAttributedSourceCoreUsed              : Set
     claimRelativePrimarynessEncoded                : Set
     accessCarrierSeparateFromAuthorship             : Set
+    sameStudyMaterialIdentityPaid                  : Set
     sixWeekPeerReviewedAgingPaymentEncoded          : Set
     preliminaryThreeMonthPaymentQualified           : Set
     plannedLongTermExperimentNotPromoted            : Set
@@ -56,6 +57,11 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
     familyThermalTransportPriorAcquired             : Set
     familyEvidenceNotPromotedToExactMaterial        : Set
 
+    polarisSystemPerformanceEvidenceAcquired        : Set
+    polarisHydraulicCampaignEvidenceAcquired        : Set
+    polarisCommercialDeploymentEvidenceAcquired     : Set
+    polarisWorkingMaterialSeparatedFromLaFeSi       : Set
+
     magneticBAndHRemainDistinct                    : Set
     sharedMaterialCarrierDoesNotCollapseObservables : Set
     coatingAndSubstrateRemainDistinctMaterials      : Set
@@ -66,26 +72,29 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
 
 record MagnetocaloricAMRRemainingFrontier : Set₁ where
   field
-    exactMaterialConstitutiveData : Set
-    exactMaterialFieldTemperatureResponse : Set
-    measuredPorousHydraulics         : Set
-    measuredHeatTransfer             : Set
-    cycleTimingAndControlCalibration : Set
-    sameDeviceCoolingEnergy          : Set
-    sameDeviceInputWork              : Set
-    sameDeviceRecoveredWork          : Set
-    degradationTimeSeries            : Set
-    completedLongDurationSameObjectAging : Set
-    deviceLevelCOPValidation         : Set
+    exactLaFeSiMaterialConstitutiveData : Set
+    exactLaFeSiFieldTemperatureResponse : Set
+    exactLaFeSiPorousHydraulics         : Set
+    exactLaFeSiHeatTransfer             : Set
+    exactLaFeSiCycleTimingAndControlCalibration : Set
+    exactLaFeSiSameDeviceCoolingEnergy          : Set
+    exactLaFeSiSameDeviceInputWork              : Set
+    exactLaFeSiSameDeviceRecoveredWork          : Set
+    exactLaFeSiDegradationTimeSeries            : Set
+    completedLongDurationSameLaFeSiAging        : Set
+    exactLaFeSiDeviceCOPValidation              : Set
 
-    exactMaterialCrystalIdentification : Set
-    exactMaterialMagneticSymmetry       : Set
+    exactLaFeSiCrystalIdentification : Set
+    exactLaFeSiMagneticSymmetry       : Set
     validatedHamiltonianOrElectronicModel  : Set
     ensembleAndFreeEnergyCalibration       : Set
     exactCompositionSubstitutionHydrogenationResponse : Set
     coatingInhibitorFluidCorrosionCalibration : Set
     transitionStrainAndFatigueCalibration : Set
-    electromagneticFieldMapAndBHCalibration : Set
+    exactLaFeSiElectromagneticFieldMapAndBHCalibration : Set
+
+    stellarMeasuredFieldAndCapacity : Set
+    isolatedRotationalWorkRecoveryContribution : Set
 
 record MagnetocaloricAMRPromotionGate : Set₁ where
   field
@@ -96,6 +105,7 @@ record MagnetocaloricAMRPromotionGate : Set₁ where
     noStructuralShortcutToCalibratedPerformance : Set
     noSourceShortcutToTheoremAuthority           : Set
     noFamilyShortcutToExactMaterialIdentity      : Set
+    noPlatformShortcutAcrossWorkingMaterials     : Set
     noMicroscopicShortcutToBulkResponse           : Set
     noMechanicalShortcutToQualifiedLifetime       : Set
     noVendorShortcutToSameDevicePerformance       : Set
