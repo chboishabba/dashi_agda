@@ -4,6 +4,8 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Chemistry369
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
+import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
+import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as NH3Protonation
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as MonsterEntropy
 import DASHI.Moonshine.C3FourierConjugationExact as C3Fourier
 
@@ -145,6 +147,15 @@ existingMonsterStateCountingBoundary = MonsterEntropy.canonicalStateCountingEntr
 ammoniaC3GeometryFixture : NH3.AmmoniaC3Fixture
 ammoniaC3GeometryFixture = NH3.canonicalAmmoniaC3Fixture
 
+ammoniaElectronicSymmetryReceipt : NH3Electronic.NeutralElectronicReceipt
+ammoniaElectronicSymmetryReceipt = NH3Electronic.canonicalNeutralElectronicReceipt
+
+ammoniaProtonationStoichiometry : NH3Protonation.ProtonationStoichiometry
+ammoniaProtonationStoichiometry = NH3Protonation.canonicalProtonationStoichiometry
+
+ammoniaProtonationThermochemistry : NH3Protonation.ProtonationThermochemistry
+ammoniaProtonationThermochemistry = NH3Protonation.canonicalProtonationThermochemistry
+
 record ChemistryC3MaxCutStatus : Set where
   constructor chemistryC3MaxCutStatus
   field
@@ -157,12 +168,24 @@ record ChemistryC3MaxCutStatus : Set where
     sourceBackedSameObjectC3GeometryFixturePaid : Bool
     sourceBackedSameObjectC3GeometryFixturePaidIsTrue :
       sourceBackedSameObjectC3GeometryFixturePaid ≡ true
+    sourceBackedElectronicIrrepCoordinatesPaid : Bool
+    sourceBackedElectronicIrrepCoordinatesPaidIsTrue :
+      sourceBackedElectronicIrrepCoordinatesPaid ≡ true
+    sourceBackedProtonationStoichiometryPaid : Bool
+    sourceBackedProtonationStoichiometryPaidIsTrue :
+      sourceBackedProtonationStoichiometryPaid ≡ true
+    sourceBackedProtonationThermochemistryPaid : Bool
+    sourceBackedProtonationThermochemistryPaidIsTrue :
+      sourceBackedProtonationThermochemistryPaid ≡ true
     fullElectronicMolecularC3ActionInstantiated : Bool
     fullElectronicMolecularC3ActionInstantiatedIsFalse :
       fullElectronicMolecularC3ActionInstantiated ≡ false
-    productsByproductsReactionFixturePaid : Bool
-    productsByproductsReactionFixturePaidIsFalse :
-      productsByproductsReactionFixturePaid ≡ false
+    fullC3ResolvedReactionTransportInstantiated : Bool
+    fullC3ResolvedReactionTransportInstantiatedIsFalse :
+      fullC3ResolvedReactionTransportInstantiated ≡ false
+    sameReactionQuantitativeKineticsPaid : Bool
+    sameReactionQuantitativeKineticsPaidIsFalse :
+      sameReactionQuantitativeKineticsPaid ≡ false
     electronResolvedReactionEnergeticsUniversal : Bool
     electronResolvedReactionEnergeticsUniversalIsFalse :
       electronResolvedReactionEnergeticsUniversal ≡ false
@@ -174,6 +197,10 @@ canonicalChemistryC3MaxCutStatus =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
