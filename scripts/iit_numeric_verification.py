@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Numerical/combinatorial verification for the IIT / 369 max-cut.
 
-This file is deliberately *not* a source/build checker.  It never inspects
-Agda text, imports, filenames, or theorem names.  Formal completeness belongs
-to the Agda aggregate and the Agda compiler.
+This file is deliberately *not* a source/build checker. It never inspects Agda
+text, imports, filenames, or theorem names. Formal completeness belongs to the
+Agda aggregate and the Agda compiler.
 
 The only authority here is executable finite mathematics: enumerate states and
-partitions, evaluate the reference IIT quantities, and check numerical or
-finite-combinatorial regression targets.  A JSON receipt is emitted so the
-results can be compared across environments.
+partitions, evaluate the finite IIT reference quantities, and check numerical
+or finite-combinatorial regression targets. Full distinction/relation/CES
+verification is delegated to ``iit4_pyphi_oracle.py`` when PyPhi is available;
+this verifier does not pretend that stored literature calibration constants are
+fresh numerical evidence.
 """
 
 from __future__ import annotations
@@ -30,7 +32,6 @@ from iit4_structure_reference import (
     big_phi,
     nonempty_relation_candidates,
     relation_phi_from_overlap,
-    worked_example_calibration,
 )
 from iit_369_algebra_scan import algebra_summary
 from iit_hyperfabric_fixture_scan import fixture_summary
@@ -114,7 +115,7 @@ def verify_numeric_results() -> dict:
     assert topology["recurrent_three_cell"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
     assert topology["grid_2x2"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0, 0.5]
 
-    # 369 same-cardinality algebra control: compare only computed profiles here.
+    # 369 same-cardinality algebra control: compare computed profiles only.
     algebra = algebra_summary()
     expected9 = round(math.log2(81), 12)
     z9 = algebra["z9_cyclic"]
@@ -129,7 +130,7 @@ def verify_numeric_results() -> dict:
     )
     assert same_369_profile
 
-    # Hyperform/hyperfabric finite fixtures: numeric IIT outputs only.
+    # Hyperform/hyperfabric finite fixtures: numerical IIT outputs only.
     fixtures = fixture_summary()["fixtures"]
     assert fixtures["open_xor_path"]["iit_4_0_2023"]["distinct_phi_s"] == [0.0]
     assert fixtures["closed_xor_cycle"]["iit_4_0_2023"]["distinct_phi_s"] == [2.0]
@@ -152,19 +153,14 @@ def verify_numeric_results() -> dict:
     assert pointed["each_corner_triple_intersection_size"] == 1
     assert pointed["three_selected_cubie_choices"] == 19683
 
-    # IIT composition arithmetic regression / published worked-example oracle.
-    relation_candidates = len(nonempty_relation_candidates(("a", "B", "aB")))
-    relation_overlap_phi = relation_phi_from_overlap(0.07, 2, 1)
-    composed_big_phi = big_phi([0.33, 0.32, 0.07], [0.84])
-    calibration = worked_example_calibration()
+    # Composition-layer arithmetic only. Fresh mechanism/purview/CES values
+    # belong to the PyPhi oracle, not to hard-coded calibration constants here.
+    relation_candidates = len(nonempty_relation_candidates(("d1", "d2", "d3")))
+    relation_overlap_phi = relation_phi_from_overlap(0.12, 3, 2)
+    composed_big_phi = big_phi([0.1, 0.2, 0.3], [0.05, 0.15])
     assert relation_candidates == 7
-    assert abs(relation_overlap_phi - 0.035) < 1e-12
-    assert abs(composed_big_phi - 1.56) < 1e-12
-    assert calibration["distinction_count"] == 3
-    assert calibration["relation_count"] == 7
-    assert calibration["phi_d_rounded"] == [0.33, 0.32, 0.07]
-    assert calibration["big_phi_rounded"] == 1.56
-    assert calibration["system_phi_s_rounded"] == 0.17
+    assert abs(relation_overlap_phi - 0.08) < 1e-12
+    assert abs(composed_big_phi - 0.8) < 1e-12
 
     # Cross-alphabet stress values, again as numerical observations only.
     stress = stress_summary()
@@ -180,6 +176,8 @@ def verify_numeric_results() -> dict:
         "contract": "iit_numeric_verification",
         "scope": "numeric_and_finite_combinatorial_only",
         "formal_source_or_agda_checks_performed": False,
+        "full_ces_values_verified_here": False,
+        "full_ces_oracle": "scripts/iit4_pyphi_oracle.py",
         "core": core,
         "xor_grid": grid,
         "matched_controls": matched,
@@ -206,10 +204,9 @@ def verify_numeric_results() -> dict:
             )
         },
         "structure_arithmetic": {
-            "relation_candidate_count": relation_candidates,
-            "relation_overlap_phi": relation_overlap_phi,
-            "composed_big_phi": composed_big_phi,
-            "worked_example": calibration,
+            "relation_candidate_count_for_three_distinctions": relation_candidates,
+            "synthetic_relation_overlap_phi": relation_overlap_phi,
+            "synthetic_composed_big_phi": composed_big_phi,
         },
         "stress": stress,
     }
