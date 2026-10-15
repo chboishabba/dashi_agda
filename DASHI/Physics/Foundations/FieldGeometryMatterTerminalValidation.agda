@@ -48,9 +48,10 @@ experimentPortfolioIsStructurallyPaid :
     ≡ Terminal.structurallyPaid
 experimentPortfolioIsStructurallyPaid = refl
 
-monolithicRollupIntegrationIsExplicit : Terminal.FrontierStatus
-monolithicRollupIntegrationIsExplicit =
+monolithicRollupIntegrationIsPaid :
   Terminal.monolithicFoundationsEverythingIntegration Terminal.currentTerminalFrontier
+    ≡ Terminal.structurallyPaid
+monolithicRollupIntegrationIsPaid = refl
 
 exactHeadKernelReceiptIsExplicit : Terminal.FrontierStatus
 exactHeadKernelReceiptIsExplicit =
