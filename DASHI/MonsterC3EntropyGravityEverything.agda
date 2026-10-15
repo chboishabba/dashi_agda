@@ -7,15 +7,21 @@ import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
 
--- Strongest existing same-object zeta / regular-character / 3B / VOA seam.
+-- Strongest existing same-object zeta / regular-character / 3B / VOA seam,
+-- plus the newer literal one/zeta/zeta^2 same-central-action frontier.
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact
+import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 
 -- Existing Ogg / Monster-prime authority and finite lane carriers.
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
--- 369 atomics -> molecule -> reaction hyperfibre and C3/entropy consumer.
+-- 369 atomics -> molecule -> reaction hyperfibre, source-backed NH3 C3 fixture,
+-- and the C3/entropy consumer.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
+import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact
+import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
 
 -- Explicit finite state-count / entropy boundaries and zeta cross-pollination.
