@@ -35,7 +35,6 @@ record AttributionAssessment : Set where
     exposure : ExposureEvidence
     derivation : DerivationStatus
     directContactVerified : Bool
-    directContactVerifiedIsFalseWhenReportedOnly : directContactVerified ≡ false
     legalInfringementConcluded : Bool
     legalInfringementConcludedIsFalse : legalInfringementConcluded ≡ false
     reading : String
@@ -49,7 +48,7 @@ canonicalNomuraAttribution =
     comparisonClearlyEarlier
     noExposureEvidenceFound
     independentDerivationSupported
-    false refl
+    false
     false refl
     "reported 2022 preprint chronology predates the relevant Kitzerow articulation; bounded convergence is therefore treated as an independence-supporting control"
 
@@ -60,7 +59,7 @@ canonicalStanfordAttribution =
     kitzerowClearlyEarlier
     originatorReportedContact
     derivationUndetermined
-    false refl
+    false
     false refl
     "Kitzerow publicly reports direct Stanford Neurodiversity Project contact on 2023-11-27; underlying correspondence has not yet been independently acquired in this tranche"
 
@@ -74,7 +73,7 @@ canonicalBrazilReviewAttribution =
     kitzerowClearlyEarlier
     originatorReportedContact
     derivationUndetermined
-    false refl
+    false
     false refl
     "post-publication author/journal contact is originator-reported here; chronology, exposure and derivation remain separate"
 
@@ -85,7 +84,7 @@ canonicalItalyAttribution =
     kitzerowClearlyEarlier
     publicAvailabilityOnly
     derivationUndetermined
-    false refl
+    false
     false refl
     "structural convergence plus public availability does not establish access or derivation"
 
@@ -96,7 +95,7 @@ canonicalMelilloAttribution =
     kitzerowClearlyEarlier
     publicAvailabilityOnly
     derivationUndetermined
-    false refl
+    false
     false refl
     "model-to-model structural similarity is retained without inferring use of Kitzerow's work"
 
@@ -107,14 +106,9 @@ canonicalIACCAttribution =
     kitzerowClearlyEarlier
     originatorReportedContact
     derivationUndetermined
-    false refl
+    false
     false refl
     "reported MedMaps/IACC exposure chain is not upgraded without the underlying contact/acknowledgement artifact"
-
-------------------------------------------------------------------------
--- Non-implication firewalls.  These are explicit proposition carriers rather
--- than scalar plagiarism scoring.
-------------------------------------------------------------------------
 
 record AttributionFirewall : Set where
   constructor attributionFirewall
@@ -134,9 +128,3 @@ open AttributionFirewall public
 canonicalAttributionFirewall : AttributionFirewall
 canonicalAttributionFirewall =
   attributionFirewall true true true true true true true true true
-
-contactDoesNotProveUse : Bool
-contactDoesNotProveUse = AttributionFirewall.contactDoesNotProveUse canonicalAttributionFirewall
-
-citationAbsenceDoesNotProvePlagiarism : Bool
-citationAbsenceDoesNotProvePlagiarism = AttributionFirewall.citationAbsenceDoesNotProvePlagiarism canonicalAttributionFirewall
