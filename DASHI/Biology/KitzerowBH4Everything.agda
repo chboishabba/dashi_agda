@@ -7,6 +7,7 @@ import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact
 import DASHI.Biology.KitzerowBH4ReactionSourceAtlasExact
 import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact
 import DASHI.Biology.KitzerowBH4LineageRegressionExact
+import DASHI.Biology.KitzerowBH4FluxCausalModelsExact
 import DASHI.Biology.KitzerowBH4SourceAtlasExact
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact
 import DASHI.Biology.KitzerowPriorityAttributionExact
