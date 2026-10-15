@@ -15,6 +15,12 @@ import DASHI.Chemistry.LineageAttributionEvidencePaymentExact
 import DASHI.Chemistry.AttributedGoldReactionReplayExact
 import DASHI.Chemistry.LineageSourceManifestationGuardExact
 
+-- Newly acquired primary/direct evidence is kept in its own attributed atlas
+-- and bounded payment layer so local payments cannot silently upgrade the
+-- broader generic unpaid cells.
+import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact
+import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact
+
 -- Numeric calibration is fail-closed: locator, units, context, method and
 -- uncertainty are independent obligations; an unpaid coordinate is not zero.
 import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact
