@@ -7,201 +7,130 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
-import DASHI.Chemistry.LineageCalibrationAttributionEnvelopeExact as Attribution
-import DASHI.Chemistry.LineageSourceManifestationGuardExact as Manifestation
+import DASHI.Chemistry.LineageAttributionAcquisitionParetoExact as Pareto
 
 ------------------------------------------------------------------------
--- PARETO ACQUISITION FRONTIER FOR ATTRIBUTION / CALIBRATION PAYMENT
+-- CONTACT/EXPOSURE PROVENANCE EXTENSION OVER THE CANONICAL SCIENTIFIC PARETO
 --
--- Rank is investigative utility only. It never ranks truth or scientific
--- correctness. Unpaid coordinates keep their source identity and role.
--- Scientific support and priority/contact provenance remain separate axes.
+-- The existing Pareto owner remains authoritative for scientific/calibration
+-- acquisition. This module adds only the genuinely orthogonal Kitzerow
+-- contact/exposure provenance queue and keeps it separate from scientific
+-- support, derivation and plagiarism/legal conclusions.
 ------------------------------------------------------------------------
 
-data AcquisitionKind : Set where
-  exactPrimaryLocator : AcquisitionKind
-  numericCalibration : AcquisitionKind
-  atomMappingDataset : AcquisitionKind
-  isotopeTracerDataset : AcquisitionKind
-  kineticDataset : AcquisitionKind
-  fluxDataset : AcquisitionKind
-  structuralManifestation : AcquisitionKind
-  matchedAlternativeChemistryDataset : AcquisitionKind
-  provenanceContactArtifact : AcquisitionKind
+data ProvenanceAcquisitionKind : Set where
+  contactMessageArtifact : ProvenanceAcquisitionKind
+  correspondenceThreadArtifact : ProvenanceAcquisitionKind
+  manuscriptHistoryArtifact : ProvenanceAcquisitionKind
+  institutionalRoleTimeline : ProvenanceAcquisitionKind
 
-data EvidenceIndependence : Set where
-  sameSourceRefinement : EvidenceIndependence
-  independentPrimaryMeasurement : EvidenceIndependence
-  independentReplication : EvidenceIndependence
-  independenceUndetermined : EvidenceIndependence
+data ProvenanceStatus : Set where
+  originatorReportedOnly : ProvenanceStatus
+  artifactAcquiredUnverified : ProvenanceStatus
+  artifactAuthenticated : ProvenanceStatus
+  directUseDocumented : ProvenanceStatus
 
-record AcquisitionItem : Set where
-  constructor acquisitionItem
+record ProvenanceAcquisitionItem : Set where
+  constructor provenanceAcquisitionItem
   field
     itemKey : String
-    kind : AcquisitionKind
-    targetReplayReference : String
-    targetCoordinateReference : String
-    desiredSourceRole : String
-    exactManifestationNeed : String
-    expectedDischarge : String
-    independence : EvidenceIndependence
+    kind : ProvenanceAcquisitionKind
+    targetAttributionReference : String
+    claimedEventReference : String
+    exactArtifactNeed : String
+    authenticationNeed : String
+    expectedUpgrade : String
+    currentStatus : ProvenanceStatus
     acquisitionCostRank : Nat
-    reuseValueRank : Nat
-    causalValueRank : Nat
     attributionValueRank : Nat
+    causalScientificValueRank : Nat
     truthRank : Nat
     truthRankIsSentinelOnly : Bool
     truthRankIsSentinelOnlyIsTrue : truthRankIsSentinelOnly ≡ true
 
-open AcquisitionItem public
+open ProvenanceAcquisitionItem public
 
-bh4FluxDataset : AcquisitionItem
-bh4FluxDataset =
-  acquisitionItem
-    "A1 BH4 same-system flux discriminator dataset"
-    fluxDataset
-    "Kitzerow BH4 flux causal models"
-    "BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO under controlled perturbation"
-    "primary experimental dataset with exact methods and sample context"
-    "dataset/table/supplement locator plus assay calibration"
-    "separates symbolic pool balance from measured branch allocation and helps discriminate H1/H2/H3/H4"
-    independentPrimaryMeasurement
-    5 10 10 8 0 true refl
-
-pahAtomMap : AcquisitionItem
-pahAtomMap =
-  acquisitionItem
-    "A2 PAH isotope/atom-map replay"
-    isotopeTracerDataset
-    "gold-R2 PAH BH4 hydroxylation"
-    "oxygen/phenylalanine/pterin atom mapping through hydroxylation"
-    "primary isotope-tracing or mechanistic experiment"
-    "exact figure/table/scheme/method locator"
-    "pays typed nuclear-lineage mapping and distinguishes mechanism-family support from same-object atom map"
-    independentPrimaryMeasurement
-    4 8 7 7 0 true refl
-
-chlorLocator : AcquisitionItem
-chlorLocator =
-  acquisitionItem
-    "A3 chlor-alkali exact half-reaction locator"
-    exactPrimaryLocator
-    "gold-R1 chlor-alkali"
-    "anode/cathode reaction identity and electron multiplicity"
-    "institutional or primary electrochemistry source"
-    "exact page/equation/figure locator on the same manifestation"
-    "upgrades section-level attribution to exact locator without manufacturing kinetics"
-    sameSourceRefinement
-    2 7 3 8 0 true refl
-
-pbCaTargetDataset : AcquisitionItem
-pbCaTargetDataset =
-  acquisitionItem
-    "A4 Pb/Ca same-target structural-functional replay"
-    structuralManifestation
-    "Pb/Ca end-to-end replay"
-    "same target: ion occupancy -> coordination geometry -> conformational/function readout"
-    "primary same-object structural/functional study"
-    "exact target/structure/assay locator"
-    "reduces cross-study composition and pays a stronger end-to-end same-object replay"
-    independentPrimaryMeasurement
-    6 9 9 9 0 true refl
-
-carbonSiliconMatchedDataset : AcquisitionItem
-carbonSiliconMatchedDataset =
-  acquisitionItem
-    "A5 matched carbon-vs-silicon reachable chemistry"
-    matchedAlternativeChemistryDataset
-    "carbon/silicon reachable-chemistry benchmark"
-    "matched solvent/T/P/redox/catalyst reaction reachability and stability/reactivity coordinates"
-    "primary comparative experimental or validated computational dataset"
-    "same protocol/model and explicit environment across both backbones"
-    "turns overview-level carbon context into a direct comparative discriminator"
-    independentPrimaryMeasurement
-    9 10 8 8 0 true refl
-
-stanfordContactArtifact : AcquisitionItem
+stanfordContactArtifact : ProvenanceAcquisitionItem
 stanfordContactArtifact =
-  acquisitionItem
+  provenanceAcquisitionItem
     "P1 Stanford contact provenance"
-    provenanceContactArtifact
+    contactMessageArtifact
     "Kitzerow priority/attribution: Stanford"
     "claimed 27 Nov 2023 Stanford Neurodiversity Project contact requesting model information"
-    "underlying email/message artifact with sender/recipient/date/content provenance"
-    "original message/export/screenshot plus sufficient metadata to authenticate context"
-    "upgrades originator-reported contact only; does not establish manuscript use, derivation or plagiarism"
-    independenceUndetermined
-    3 6 0 10 0 true refl
+    "underlying email/message export with sender, recipient, timestamp and substantive content"
+    "message metadata/context sufficient to authenticate communication and chronology"
+    "may upgrade originator-reported contact to inspected/authenticated exposure evidence only"
+    originatorReportedOnly
+    3 10 0 0 true refl
 
-brazilCorrespondenceArtifact : AcquisitionItem
+brazilCorrespondenceArtifact : ProvenanceAcquisitionItem
 brazilCorrespondenceArtifact =
-  acquisitionItem
+  provenanceAcquisitionItem
     "P2 Brazil/MDPI correspondence provenance"
-    provenanceContactArtifact
+    correspondenceThreadArtifact
     "Kitzerow priority/attribution: BH4 systematic review"
     "claimed MDPI/Latini correspondence after attribution concern"
-    "underlying correspondence and manuscript-history records"
-    "message/export plus publication timeline/manuscript version where obtainable"
-    "resolves who communicated what and when; does not by itself establish derivation or copying"
-    independenceUndetermined
-    4 5 0 10 0 true refl
+    "underlying correspondence plus manuscript/publication timeline records"
+    "message/export authenticity and chronology against manuscript versions"
+    "may resolve who communicated what and when; does not by itself establish derivation/copying"
+    originatorReportedOnly
+    4 10 0 0 true refl
 
-iaccMedMapsContactArtifact : AcquisitionItem
+iaccMedMapsContactArtifact : ProvenanceAcquisitionItem
 iaccMedMapsContactArtifact =
-  acquisitionItem
+  provenanceAcquisitionItem
     "P3 IACC/MedMaps contact provenance"
-    provenanceContactArtifact
+    contactMessageArtifact
     "Kitzerow priority/attribution: IACC developmental-systems framework"
     "claimed 2024 MedMaps/Honey Rinicella awareness/contact before later IACC role"
-    "underlying email/message artifact with date, participants and substantive content"
-    "original correspondence/export plus institutional-role chronology"
-    "upgrades awareness/exposure evidence only; scientific convergence and derivation remain separate"
-    independenceUndetermined
-    4 6 0 10 0 true refl
+    "underlying message/export with date, participants and substantive content"
+    "communication metadata plus institutional-role chronology"
+    "may upgrade awareness/exposure evidence; scientific convergence and derivation remain separate"
+    originatorReportedOnly
+    4 10 0 0 true refl
 
-canonicalAcquisitionItems : List AcquisitionItem
-canonicalAcquisitionItems =
-  bh4FluxDataset
-  ∷ pahAtomMap
-  ∷ chlorLocator
-  ∷ pbCaTargetDataset
-  ∷ carbonSiliconMatchedDataset
-  ∷ stanfordContactArtifact
-  ∷ brazilCorrespondenceArtifact
-  ∷ iaccMedMapsContactArtifact
-  ∷ []
+canonicalContactProvenanceItems : List ProvenanceAcquisitionItem
+canonicalContactProvenanceItems =
+  stanfordContactArtifact ∷ brazilCorrespondenceArtifact ∷ iaccMedMapsContactArtifact ∷ []
 
-record LineageAttributionAcquisitionFrontier : Set where
-  constructor lineageAttributionAcquisitionFrontier
+scientificAcquisitionFrontier : Pareto.LineageAttributionAcquisitionFrontier
+scientificAcquisitionFrontier = Pareto.canonicalLineageAttributionAcquisitionFrontier
+
+record UnifiedLineageAttributionAcquisitionFrontier : Set where
+  constructor unifiedLineageAttributionAcquisitionFrontier
   field
-    items : List AcquisitionItem
-    sourcePrimacyAxisExplicit : Bool
-    sourcePrimacyAxisExplicitIsTrue : sourcePrimacyAxisExplicit ≡ true
-    manifestationAxisExplicit : Bool
-    manifestationAxisExplicitIsTrue : manifestationAxisExplicit ≡ true
-    sameObjectAxisExplicit : Bool
-    sameObjectAxisExplicitIsTrue : sameObjectAxisExplicit ≡ true
-    causalValueSeparateFromAttributionValue : Bool
-    causalValueSeparateFromAttributionValueIsTrue :
-      causalValueSeparateFromAttributionValue ≡ true
+    scientificFrontier : Pareto.LineageAttributionAcquisitionFrontier
+    contactProvenanceItems : List ProvenanceAcquisitionItem
+    canonicalScientificParetoReused : Bool
+    canonicalScientificParetoReusedIsTrue : canonicalScientificParetoReused ≡ true
     scientificSupportSeparateFromContactProvenance : Bool
     scientificSupportSeparateFromContactProvenanceIsTrue :
       scientificSupportSeparateFromContactProvenance ≡ true
     contactEvidenceAutomaticallyProvesDerivation : Bool
     contactEvidenceAutomaticallyProvesDerivationIsFalse :
       contactEvidenceAutomaticallyProvesDerivation ≡ false
+    contactEvidenceAutomaticallyProvesPlagiarism : Bool
+    contactEvidenceAutomaticallyProvesPlagiarismIsFalse :
+      contactEvidenceAutomaticallyProvesPlagiarism ≡ false
+    scientificSupportAutomaticallyProvesPriority : Bool
+    scientificSupportAutomaticallyProvesPriorityIsFalse :
+      scientificSupportAutomaticallyProvesPriority ≡ false
     frontierRankIsTruthRank : Bool
     frontierRankIsTruthRankIsFalse : frontierRankIsTruthRank ≡ false
     unpaidCoordinateRetainsAttribution : Bool
     unpaidCoordinateRetainsAttributionIsTrue : unpaidCoordinateRetainsAttribution ≡ true
-    acquisitionCreatesAuthority : Bool
-    acquisitionCreatesAuthorityIsFalse : acquisitionCreatesAuthority ≡ false
 
-open LineageAttributionAcquisitionFrontier public
+open UnifiedLineageAttributionAcquisitionFrontier public
 
-canonicalLineageAttributionAcquisitionFrontier : LineageAttributionAcquisitionFrontier
+canonicalLineageAttributionAcquisitionFrontier : UnifiedLineageAttributionAcquisitionFrontier
 canonicalLineageAttributionAcquisitionFrontier =
-  lineageAttributionAcquisitionFrontier
-    canonicalAcquisitionItems
-    true refl true refl true refl true refl true refl false refl false refl true refl false refl
+  unifiedLineageAttributionAcquisitionFrontier
+    scientificAcquisitionFrontier
+    canonicalContactProvenanceItems
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
