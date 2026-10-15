@@ -7,6 +7,9 @@ import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
 
+-- Strongest existing same-object zeta / regular-character / 3B / VOA seam.
+import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact
+
 -- Existing Ogg / Monster-prime authority and finite lane carriers.
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
@@ -15,8 +18,12 @@ import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
 
--- Explicit finite state-count / entropy boundaries.
+-- Explicit finite state-count / entropy boundaries and zeta cross-pollination.
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact
+import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact
+
+-- Existing unified finite-carrier -> quantum / GR theorem-dependency graph.
+import DASHI.Unified.GRQuantumCrossPollinationBridge
 
 -- Existing GR emergence boundary plus scoped entropy-gravity routes.
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations
