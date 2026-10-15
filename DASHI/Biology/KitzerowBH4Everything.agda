@@ -3,6 +3,9 @@ module DASHI.Biology.KitzerowBH4Everything where
 import DASHI.Biology.KitzerowBH4CascadeExact
 import DASHI.Biology.KitzerowBH4RepoIntegrationExact
 import DASHI.Biology.KitzerowBH4ReactionChemistryExact
+import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact
+import DASHI.Biology.KitzerowBH4ReactionSourceAtlasExact
+import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact
 import DASHI.Biology.KitzerowBH4SourceAtlasExact
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact
 import DASHI.Biology.KitzerowPriorityAttributionExact
