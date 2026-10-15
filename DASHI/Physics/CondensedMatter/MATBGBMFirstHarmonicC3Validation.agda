@@ -30,6 +30,22 @@ c3RotationAdvancesUpperByValleyCharacter :
         (BM.upperOffDiagonalPhase v h)
 c3RotationAdvancesUpperByValleyCharacter = BM.upperPhaseRotationLaw
 
+timeReversalConjugatesWholeTunnellingMatrix :
+  (v : BM.Valley) (h : BM.MoireHarmonic) →
+  BM.tunnellingMatrix (BM.timeReverseValley v) h
+    ≡ BM.conjugateSymbolicMatrix (BM.tunnellingMatrix v h)
+timeReversalConjugatesWholeTunnellingMatrix = BM.tunnellingMatrixTimeReversal
+
+c3RotationCovariantAtWholeMatrixLevel :
+  (v : BM.Valley) (h : BM.MoireHarmonic) →
+  BM.tunnellingMatrix v (BM.rotateHarmonic h)
+    ≡ BM.advanceTunnellingMatrix v (BM.tunnellingMatrix v h)
+c3RotationCovariantAtWholeMatrixLevel = BM.tunnellingMatrixC3Covariance
+
+symbolicMatrixBackendIsPaid :
+  BM.symbolicTwoByTwoMatrixBackendPaid BM.canonicalBMFirstHarmonicBoundary ≡ true
+symbolicMatrixBackendIsPaid = refl
+
 firstHarmonicModelDoesNotPayInteractingSelfEnergy :
   BM.interactingSelfEnergyPaid BM.canonicalBMFirstHarmonicBoundary ≡ false
 firstHarmonicModelDoesNotPayInteractingSelfEnergy = refl
