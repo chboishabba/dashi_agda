@@ -13,16 +13,19 @@ import DASHI.Biology.Molecular.MolecularAssemblyBoundary as Molecular
 import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge as Geometry
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Chemistry.AdmissibleReactionTransitionBridgeExact as Reaction
+import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
+import DASHI.Core.AdmissibleTransitionHyperfabricExact as HyperTransition
 import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact as Coarse
 
 ------------------------------------------------------------------------
 -- ATOMIC -> MOLECULAR -> REACTION LINEAGE HYPERFABRIC
 --
 -- Existing owners already provide the atomic generator, molecular assembly,
--- constrained geometry and typed reaction kernel.  This owner contributes the
--- missing proof-relevant lineage seam: persistent nuclear/atomic identity,
--- electron-equivalent/redox transport, molecule membership, reaction
--- product/byproduct ancestry and observer-relative residuals are distinct.
+-- constrained geometry, admissible-transition hyperfabric and typed chemistry
+-- kernel.  This owner contributes the missing proof-relevant lineage seam:
+-- persistent nuclear/atomic identity, electron-equivalent/redox transport,
+-- molecule membership, reaction product/byproduct ancestry and observer-
+-- relative residuals are distinct coordinates.
 --
 -- Electrons are indistinguishable fermions. ElectronLineage is therefore an
 -- operational carrier for electron equivalents, occupation/redox change or
@@ -173,7 +176,7 @@ record LineageObserverReceipt : Set where
 open LineageObserverReceipt public
 
 ------------------------------------------------------------------------
--- Existing-owner anchors. These are reused, not reimplemented.
+-- Existing-owner / native-hyperfabric anchors.
 ------------------------------------------------------------------------
 
 atomicChemistryBoundary : Chemistry369.AtomicChemistryCrossPollinationBoundary
@@ -185,8 +188,17 @@ reactionBoundary = Reaction.canonicalReactionMDLBoundary
 coarseBoundary : Coarse.ConsumerRelativeCoarseGrainingBoundary
 coarseBoundary = Coarse.canonicalConsumerRelativeCoarseGrainingBoundary
 
+admissibleTransitionBoundary : HyperTransition.AdmissibleTransitionBoundary
+admissibleTransitionBoundary = HyperTransition.canonicalAdmissibleTransitionBoundary
+
 molecularAssemblySurface : Set₁
 molecularAssemblySurface = Molecular.MolecularAssemblySystem
+
+lineageCoarseFineSurface : Set → Set₁
+lineageCoarseFineSurface = Fibre.CoarseFineReopening
+
+lineageAdmissibleTransitionSurface : Set₁
+lineageAdmissibleTransitionSurface = HyperTransition.AdmissibleTransitionSystem
 
 ------------------------------------------------------------------------
 -- Max-cut non-collapse boundary.
@@ -198,6 +210,14 @@ record AtomicMolecularReactionLineageBoundary : Set where
     everyAtomicCarrierUses369AtomicIndex : Bool
     everyAtomicCarrierUses369AtomicIndexIsTrue :
       everyAtomicCarrierUses369AtomicIndex ≡ true
+
+    usesNativeCoarseFineHyperfabric : Bool
+    usesNativeCoarseFineHyperfabricIsTrue :
+      usesNativeCoarseFineHyperfabric ≡ true
+
+    usesNativeAdmissibleTransitionHyperfabric : Bool
+    usesNativeAdmissibleTransitionHyperfabricIsTrue :
+      usesNativeAdmissibleTransitionHyperfabric ≡ true
 
     reactionAtomMappingIsTypedLineageNotString : Bool
     reactionAtomMappingIsTypedLineageNotStringIsTrue :
@@ -261,6 +281,8 @@ canonicalAtomicMolecularReactionLineageBoundary :
   AtomicMolecularReactionLineageBoundary
 canonicalAtomicMolecularReactionLineageBoundary =
   atomicMolecularReactionLineageBoundary
+    true refl
+    true refl
     true refl
     true refl
     true refl
