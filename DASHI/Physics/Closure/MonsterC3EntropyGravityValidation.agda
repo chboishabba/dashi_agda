@@ -11,6 +11,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact a
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as Protonation
+import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
 
 fineMonsterStatesRemainPresent :
   StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
@@ -76,6 +77,31 @@ protonAffinityIs8536Tenths :
     Protonation.canonicalProtonationThermochemistry ≡ 8536
 protonAffinityIs8536Tenths = refl
 
+productsByproductsReactionFixturePaid :
+  Chemistry.ChemistryC3MaxCutStatus.productsByproductsReactionFixturePaid
+    Chemistry.canonicalChemistryC3MaxCutStatus ≡ true
+productsByproductsReactionFixturePaid = refl
+
+sameReactionKineticsPaid :
+  Chemistry.ChemistryC3MaxCutStatus.sameReactionQuantitativeKineticsPaid
+    Chemistry.canonicalChemistryC3MaxCutStatus ≡ true
+sameReactionKineticsPaid = refl
+
+h3AmmoniaRateMantissaTenthsIs42 :
+  H3Transfer.H3AmmoniaKineticReceipt.rateMantissaTenths
+    H3Transfer.canonicalH3AmmoniaKineticReceipt ≡ 42
+h3AmmoniaRateMantissaTenthsIs42 = refl
+
+h3AmmoniaTemperatureIs297 :
+  H3Transfer.H3AmmoniaKineticReceipt.temperatureKelvin
+    H3Transfer.canonicalH3AmmoniaKineticReceipt ≡ 297
+h3AmmoniaTemperatureIs297 = refl
+
+numericCompilationNotPromotedToPaperLocator :
+  H3Transfer.H3AmmoniaBoundary.numericLabTablePromotedToPrimaryPaperLocator
+    H3Transfer.canonicalH3AmmoniaBoundary ≡ false
+numericCompilationNotPromotedToPaperLocator = refl
+
 fullElectronicMolecularC3ActionStillUnpaid :
   Chemistry.ChemistryC3MaxCutStatus.fullElectronicMolecularC3ActionInstantiated
     Chemistry.canonicalChemistryC3MaxCutStatus ≡ false
@@ -86,10 +112,10 @@ fullC3ResolvedReactionTransportStillUnpaid :
     Chemistry.canonicalChemistryC3MaxCutStatus ≡ false
 fullC3ResolvedReactionTransportStillUnpaid = refl
 
-sameReactionKineticsStillUnpaid :
-  Chemistry.ChemistryC3MaxCutStatus.sameReactionQuantitativeKineticsPaid
+microscopicReactionPathStillUnpaid :
+  Chemistry.ChemistryC3MaxCutStatus.microscopicTransitionPathPaid
     Chemistry.canonicalChemistryC3MaxCutStatus ≡ false
-sameReactionKineticsStillUnpaid = refl
+microscopicReactionPathStillUnpaid = refl
 
 normalizedFiniteCountingWeightsPaid :
   Uniform.CountingEnsembleBoundary.normalizedFiniteCountingWeightsPaid
