@@ -6,19 +6,18 @@ import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact as Arithmetic
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as Monster3B
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
+import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as NH3Hamiltonian
+import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as NH3C3Action
+import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as NH3MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as NH3Protonation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
-
-------------------------------------------------------------------------
--- Terminal cross-pollination owner for the current max-cut.
--- Every row distinguishes exact mathematics, source-backed empirical/evaluated
--- fixtures, typed interfaces, and genuinely open same-object physical claims.
-------------------------------------------------------------------------
 
 data MaxCutPaymentState : Set where
   exactPaid : MaxCutPaymentState
@@ -40,98 +39,113 @@ ternary53Row : MaxCutRow
 ternary53Row = maxCutRow
   "53 neighbouring ternary arithmetic" exactPaid
   "MonsterC3ResidualTernaryArithmeticExact"
-  "53=(3+3)*3^2-1 is exact; its Monster 3B residual role comes from the certified restriction owner"
-  "no arithmetic payment remains; stronger meaning still requires its own action/intertwiner"
+  "53=(3+3)*3^2-1 is exact; its Monster 3B residual role comes separately from the certified representation owner"
+  "no arithmetic payment remains"
 
 ternary71Row : MaxCutRow
 ternary71Row = maxCutRow
-  "71 extended ternary neighbour / tracked Ogg lane" exactPaid
+  "71 extended ternary neighbour / Ogg lane" exactPaid
   "MonsterC3ResidualTernaryArithmeticExact + MoonshinePrimeLaneReceiptSurface"
-  "71=(3+3+(3-1))*3^2-1 and p71 is a tracked Ogg/Monster lane; the shared integer does not derive Ogg classification"
-  "only a stronger arithmetic/action recognition theorem could promote the coincidence"
+  "71=(3+3+(3-1))*3^2-1 and p71 is independently an Ogg/Monster prime lane; equality does not derive the classification"
+  "any stronger relation requires an explicit arithmetic/action recognition theorem"
 
 monster3BC3Row : MaxCutRow
 monster3BC3Row = maxCutRow
   "Monster 3B residual + regular C3 fibre" exactPaid
   "Monster3BBalancedRegularFibreExact"
-  "53+3*65610=196883; regular C3 fibres cancel under nontrivial character evaluation while remaining present at fine level"
+  "53+3*65610=196883 with regular-C3 cancellation under nontrivial character evaluation while fine states remain present"
   "no count-level payment remains"
 
 zetaLiteralActionRow : MaxCutRow
 zetaLiteralActionRow = maxCutRow
   "exact zeta/C3 evaluation + literal same-central-action phase fibres" exactPaid
   "IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact + Monster3BLiteralThreePhaseRegularResidualBidiExact + Base369Monster3BSingleActionProducerBidiExact"
-  "exact cyclotomic cancellation, literal one/zeta/zeta^2 eigenspaces of one central action, and phase-resolution compiler are already paid"
-  "inhabit the literal single-action producer and action-stable fixed 65610 + residual-53 split; pay zeta-squared recognition/transport"
-
-ammoniaC3GeometryRow : MaxCutRow
-ammoniaC3GeometryRow = maxCutRow
-  "same-object molecular C3 geometry fixture" empiricalFixturePaid
-  "AmmoniaC3MolecularFixtureExact"
-  "NIST records NH3 C3v/symmetry number 3; DASHI constructs the literal three-hydrogen cycle and exact C3 Fourier attachment"
-  "none at geometry/permutation level"
+  "cyclotomic cancellation, literal 1/zeta/zeta^2 eigenspaces of one central action and phase-resolution compilation are paid"
+  "inhabit the literal target producer; construct action-stable fixed 65610 plus residual-53 subspaces and zeta-squared recognition/transport"
 
 ammoniaElectronicRow : MaxCutRow
 ammoniaElectronicRow = maxCutRow
-  "NH3 electronic symmetry coordinates -> exact C3 phase restriction" empiricalFixturePaid
+  "NH3 source-backed electronic symmetry coordinates" empiricalFixturePaid
   "AmmoniaC3ElectronicSymmetryExact"
-  "NIST/Yin et al. pay 1A1, C3v and (1a1)^2(2a1)^2(1e)^4(3a1)^2 source coordinates; DASHI restricts A1 trivially and E to zeta + zeta^2 on the exact Fourier carrier"
-  "construct a literal same-object many-electron Hamiltonian/wavefunction action only if that stronger consumer is required"
+  "NIST/Yin et al. pay 1A1, C3v and the published occupied-orbital configuration; DASHI owns E|C3 = zeta + zeta^2"
+  "no source-coordinate payment remains"
+
+ammoniaHamiltonianWavefunctionRow : MaxCutRow
+ammoniaHamiltonianWavefunctionRow = maxCutRow
+  "NH3 Hamiltonian + literal closed-shell configuration state" empiricalFixturePaid
+  "AmmoniaHamiltonianWavefunctionExact + AmmoniaGroundStateC3ActionExact"
+  "Meyer supplies molecular-Hamiltonian authority; Rashev-Moule supply an NH3 6D vibrational Hamiltonian; Marquardt et al. supply a full-dimensional ground-state PES; DASHI constructs the same-object symbolic Hamiltonian skeleton and a literal ten-spin-orbital closed-shell state whose phase-adapted determinant is C3 invariant"
+  "import numerical spatial orbitals/coefficients or solve/diagonalize the selected Hamiltonian before claiming an ab-initio real-space wavefunction or spectrum"
+
+ammoniaMonsterProbeRow : MaxCutRow
+ammoniaMonsterProbeRow = maxCutRow
+  "NH3 C3 -> Monster-3B action probe" interfacePaid
+  "AmmoniaMonster3BActionProbeExact"
+  "the NH3 electronic C3 phase coordinate and Monster-3B central phase coordinate are exactly two-sided identified; a trivial action of any group on the singleton ground carrier is also formally available but carries no Monster-specific physical information"
+  "a nontrivial Monster claim still requires an NH3 electronic/vibronic state-space map into a literal Monster representation plus Monster-equivariance and physical authority"
 
 ammoniaProtonationRow : MaxCutRow
 ammoniaProtonationRow = maxCutRow
-  "NH3 + H+ -> NH4+ reaction bookkeeping and thermochemistry" empiricalFixturePaid
+  "NH3 + H+ -> NH4+ bookkeeping/thermochemistry" empiricalFixturePaid
   "AmmoniaProtonationReactionExact"
-  "atom, charge, valence-electron and Lewis bond/lone-pair bookkeeping are exact; Hunter-Lias/NIST pay the evaluated 853.6 kJ/mol gas-phase proton affinity"
-  "thermochemical scalar does not determine transition path or kinetics"
+  "atom, charge, valence-electron and Lewis bond/lone-pair bookkeeping are exact; Hunter-Lias/NIST pay 853.6 kJ/mol gas-phase proton affinity"
+  "the thermochemical scalar alone does not determine a microscopic path"
 
 h3AmmoniaKineticsRow : MaxCutRow
 h3AmmoniaKineticsRow = maxCutRow
   "H3+ + NH3 -> NH4+ + H2 products/byproduct + kinetics" empiricalFixturePaid
   "AmmoniaH3PlusProtonTransferExact"
-  "Hemsworth-Payzant-Schiff-Bohme 1974 pays the measured 297 K flowing-afterglow reaction family including X=H2; York's laboratory table is retained separately as numeric carrier for k=4.2e-9 cm^3 molecule^-1 s^-1, ±20%, product distribution 1"
-  "bind this measured reaction to literal 369 molecular/electronic source and target fibres; acquire/construct transition-state or microscopic-path evidence only for consumers that require it"
+  "Hemsworth-Payzant-Schiff-Bohme pay the measured 297 K flowing-afterglow family including X=H2; York is separately retained as the numeric compilation carrier for the specific 4.2e-9 row"
+  "microscopic transition-state/path data remain distinct from the measured rate"
 
-chemistryReactionTransportRow : MaxCutRow
-chemistryReactionTransportRow = maxCutRow
-  "369 hyperfibre -> full C3-resolved reaction transport" interfacePaid
-  "AtomicPeriodicTable369ChemistryHyperfibreBridgeExact + AtomicPeriodicTable369C3EntropyIntertwinerExact"
-  "element/charge/electron bookkeeping, products/byproducts, thermochemistry and one same-reaction kinetic datum are now paid on bounded fixtures; the generic transport still requires literal source/target C3 actions, hyperfibre binding, mechanism and environment witnesses"
-  "bind NH3/H3+/NH4+/H2 to the literal 369 carrier and construct the source/target action and transition witnesses without manufacturing a microscopic trajectory"
+hydrogenAbstractionMechanismRow : MaxCutRow
+hydrogenAbstractionMechanismRow = maxCutRow
+  "14NH3 + 1H -> 14NH2 + 1H2 mechanism/dynamics" empiricalFixturePaid
+  "AmmoniaHydrogenAbstractionMechanismExact"
+  "Espinosa-Garcia/Corchado pay the analytical PES, high-level stationary points and reaction-path topology; Corchado/Espinosa-Garcia/Yang pay full-dimensional initial-state-selected time-dependent wave-packet dynamics plus VTST/QCT comparison"
+  "source numerical wavepacket coefficient arrays are not imported and no unique microscopic classical trajectory is asserted"
+
+literal369ReactionHyperformRow : MaxCutRow
+literal369ReactionHyperformRow = maxCutRow
+  "literal 369 atom -> molecule -> reaction hyperfibre inhabitant" exactPaid
+  "AmmoniaHydrogenAbstraction369HyperfibreExact"
+  "source and product fibres are now literally inhabited using AtomicPeriodicTable369 AtomicIndex values for 14N and four 1H sites, with exact atom-identity transport and source-backed molecular/reaction identity welds"
+  "for a C3-resolved chemistry consumer, add a symmetry-changing action interface or a source/target pair that both carry the required C3 action; the abstraction product NH2+H2 does not preserve the original NH3 C3v state"
 
 normalizedCountingEnsembleRow : MaxCutRow
 normalizedCountingEnsembleRow = maxCutRow
   "Monster C3 count -> normalized finite probability model" exactPaid
   "MonsterC3UniformCountingEnsembleExact"
-  "Fin 196883 and Fin 53 carry exact uniform weights 1/196883 and 1/53 with normalization witnesses and StatisticalEnsemble adapters"
-  "identify a literal Monster/physical microstate carrier, physical measure or density matrix, Hamiltonian and entropy functional before thermodynamic promotion"
+  "Fin 196883 and Fin 53 carry exact uniform weights with normalization witnesses and StatisticalEnsemble adapters"
+  "identify a literal physical/Monster state carrier, physical measure/density matrix, Hamiltonian and entropy functional before thermodynamic promotion"
 
 physicalEntropyRow : MaxCutRow
 physicalEntropyRow = maxCutRow
   "normalized counting model -> physical entropy observable" openPhysicalPayment
   "MonsterC3EntropyStateCountingExact + ThermodynamicStatisticalLaws"
-  "mathematical normalized weights do not establish equiprobability, thermodynamic entropy, von Neumann entropy, entropy density, temperature or a physical region"
+  "normalization does not establish physical equiprobability, thermodynamic/von-Neumann entropy, entropy density, temperature or region measure"
   "same-object physical ensemble/density matrix + entropy functional + region/area/volume measure + regime/limit control"
 
 entropyGravityRow : MaxCutRow
 entropyGravityRow = maxCutRow
   "entropy observable -> physical spacetime geometry" authorityPaidTargetUnproved
   "EntropyGravityIntertwinerBoundaryExact + KernelGeometryEmergenceObligations"
-  "scalar entropy density alone does not determine stress-energy or Einstein dynamics; named literature routes retain their own hypotheses"
-  "pay causal/area/tensor/Lorentzian/Bianchi/conservation/Einstein-limit/correction and same-object empirical obligations"
+  "scalar entropy density alone does not determine stress-energy or Einstein dynamics; named Jacobson/Padmanabhan routes retain their own causal/tensor/geometric hypotheses"
+  "pay Lorentzian metric, tensor source, Bianchi/conservation, equivalence/geodesic/radiation, Einstein-limit, corrections and same-object empirical validation"
 
 monster3Plus1Row : MaxCutRow
 monster3Plus1Row = maxCutRow
   "Monster symmetry of observed 3+1D universe" openPhysicalPayment
   "Monster3Plus1PhysicalSymmetryTargetExact"
-  "AdS3/Monster and high-dimensional Monstrous-M-theory routes do not identify observed 3+1D physics"
-  "physical state -> Monster action -> controlled 4D EFT -> GR/QFT observables -> locked novel prediction -> independent validation"
+  "AdS3/Monster and high-dimensional Monstrous-M-theory authority do not identify observed 3+1D physics; the trivial singleton action is also physically non-diagnostic"
+  "physical state -> nontrivial Monster action/module -> controlled 4D EFT -> GR/QFT observable -> locked novel prediction -> independent validation"
 
 canonicalMaxCutRows : List MaxCutRow
 canonicalMaxCutRows =
   ternary53Row ∷ ternary71Row ∷ monster3BC3Row ∷ zetaLiteralActionRow
-  ∷ ammoniaC3GeometryRow ∷ ammoniaElectronicRow ∷ ammoniaProtonationRow
-  ∷ h3AmmoniaKineticsRow ∷ chemistryReactionTransportRow
+  ∷ ammoniaElectronicRow ∷ ammoniaHamiltonianWavefunctionRow
+  ∷ ammoniaMonsterProbeRow ∷ ammoniaProtonationRow ∷ h3AmmoniaKineticsRow
+  ∷ hydrogenAbstractionMechanismRow ∷ literal369ReactionHyperformRow
   ∷ normalizedCountingEnsembleRow ∷ physicalEntropyRow ∷ entropyGravityRow
   ∷ monster3Plus1Row ∷ []
 
@@ -146,20 +160,27 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
     monster3BC3ExactIsTrue : monster3BC3Exact ≡ true
     zetaAndLiteralPhaseActionExact : Bool
     zetaAndLiteralPhaseActionExactIsTrue : zetaAndLiteralPhaseActionExact ≡ true
-    ammoniaSameObjectC3GeometryPaid : Bool
-    ammoniaSameObjectC3GeometryPaidIsTrue : ammoniaSameObjectC3GeometryPaid ≡ true
-    ammoniaElectronicIrrepCoordinatesPaid : Bool
-    ammoniaElectronicIrrepCoordinatesPaidIsTrue :
-      ammoniaElectronicIrrepCoordinatesPaid ≡ true
-    ammoniaProtonationStoichiometryThermochemistryPaid : Bool
-    ammoniaProtonationStoichiometryThermochemistryPaidIsTrue :
-      ammoniaProtonationStoichiometryThermochemistryPaid ≡ true
+    ammoniaElectronicCoordinatesPaid : Bool
+    ammoniaElectronicCoordinatesPaidIsTrue : ammoniaElectronicCoordinatesPaid ≡ true
+    ammoniaHamiltonianSkeletonPaid : Bool
+    ammoniaHamiltonianSkeletonPaidIsTrue : ammoniaHamiltonianSkeletonPaid ≡ true
+    ammoniaOccupationWavefunctionCarrierPaid : Bool
+    ammoniaOccupationWavefunctionCarrierPaidIsTrue : ammoniaOccupationWavefunctionCarrierPaid ≡ true
+    ammoniaGroundStateC3ActionPaid : Bool
+    ammoniaGroundStateC3ActionPaidIsTrue : ammoniaGroundStateC3ActionPaid ≡ true
+    ammoniaMonsterC3CoordinateIntertwinerPaid : Bool
+    ammoniaMonsterC3CoordinateIntertwinerPaidIsTrue :
+      ammoniaMonsterC3CoordinateIntertwinerPaid ≡ true
+    nontrivialMonsterActionOnAmmoniaPaid : Bool
+    nontrivialMonsterActionOnAmmoniaPaidIsFalse :
+      nontrivialMonsterActionOnAmmoniaPaid ≡ false
     h3AmmoniaProductsByproductsKineticsPaid : Bool
     h3AmmoniaProductsByproductsKineticsPaidIsTrue :
       h3AmmoniaProductsByproductsKineticsPaid ≡ true
-    fullC3ResolvedReactionTransportPaid : Bool
-    fullC3ResolvedReactionTransportPaidIsFalse :
-      fullC3ResolvedReactionTransportPaid ≡ false
+    hydrogenAbstractionMechanismPaid : Bool
+    hydrogenAbstractionMechanismPaidIsTrue : hydrogenAbstractionMechanismPaid ≡ true
+    literal369ReactionHyperformPaid : Bool
+    literal369ReactionHyperformPaidIsTrue : literal369ReactionHyperformPaid ≡ true
     normalizedFiniteCountingProbabilityPaid : Bool
     normalizedFiniteCountingProbabilityPaidIsTrue :
       normalizedFiniteCountingProbabilityPaid ≡ true
@@ -177,8 +198,9 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
 canonicalMonsterC3EntropyGravityMaxCutReceipt : MonsterC3EntropyGravityMaxCutReceipt
 canonicalMonsterC3EntropyGravityMaxCutReceipt =
   monsterC3EntropyGravityMaxCutReceipt
-    true refl true refl true refl true refl true refl true refl true refl
-    true refl false refl true refl false refl true refl false refl
+    true refl true refl true refl true refl true refl
+    true refl true refl true refl true refl false refl
+    true refl true refl true refl true refl false refl true refl false refl
     canonicalMaxCutRows refl
 
 residual53Agreement :
@@ -187,26 +209,30 @@ residual53Agreement :
     StateCount.canonicalMonsterC3StateCountingReceipt
 residual53Agreement = refl
 
-identity196883Agreement :
-  Monster3B.identityEvaluation Monster3B.monster3BResidualRegularCarrier ≡
-  StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
-    StateCount.canonicalMonsterC3StateCountingReceipt
-identity196883Agreement = refl
+hamiltonianSkeletonAlreadyPaid :
+  NH3Hamiltonian.HamiltonianWavefunctionBoundary.sameObjectMolecularHamiltonianSkeletonPaid
+    NH3Hamiltonian.canonicalHamiltonianWavefunctionBoundary ≡ true
+hamiltonianSkeletonAlreadyPaid = refl
 
-literalThreePhaseActionAlreadyPaid :
-  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.literalThreePhaseFibresUseOneCentralAction
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
-literalThreePhaseActionAlreadyPaid = refl
+groundStateC3ActionAlreadyPaid :
+  NH3C3Action.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
+    NH3C3Action.canonicalGroundStateC3Boundary ≡ true
+groundStateC3ActionAlreadyPaid = refl
 
-ammoniaElectronicCoordinatesAlreadyPaid :
-  NH3Electronic.ElectronicSymmetryBoundary.sourceBackedOrbitalSymmetryCoordinatesPaid
-    NH3Electronic.canonicalElectronicSymmetryBoundary ≡ true
-ammoniaElectronicCoordinatesAlreadyPaid = refl
+nontrivialMonsterActionStillBlocked :
+  NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
+    NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
+nontrivialMonsterActionStillBlocked = refl
 
-ammoniaProtonationThermochemistryAlreadyPaid :
-  NH3Protonation.ProtonationBoundary.sourceBackedProtonAffinityPaid
-    NH3Protonation.canonicalProtonationBoundary ≡ true
-ammoniaProtonationThermochemistryAlreadyPaid = refl
+abstractionMechanismAlreadyPaid :
+  Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid
+    Abstraction.canonicalAbstractionBoundary ≡ true
+abstractionMechanismAlreadyPaid = refl
+
+literal369HyperformAlreadyPaid :
+  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited
+    Abstraction369.canonicalHyperformBoundary ≡ true
+literal369HyperformAlreadyPaid = refl
 
 h3AmmoniaKineticsAlreadyPaid :
   H3Transfer.H3AmmoniaBoundary.sameReactionQuantitativeKineticsPaid
