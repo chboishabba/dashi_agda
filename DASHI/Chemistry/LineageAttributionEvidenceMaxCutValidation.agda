@@ -8,7 +8,7 @@ import DASHI.Chemistry.LineageAttributionEvidenceSourceAtlasExact as Sources
 import DASHI.Chemistry.LineageAttributionEvidencePaymentExact as Payment
 import DASHI.Chemistry.AttributedGoldReactionReplayExact as Replay
 import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact as Calibration
-import DASHI.Chemistry.LineageAttributionAcquisitionParetoExact as Pareto
+import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Pareto
 
 sourceAtlasDoesNotCreateAuthority :
   Sources.atlasCreatesAuthority Sources.canonicalLineageCalibrationSourceAtlas ≡ false
@@ -47,5 +47,5 @@ unpaidNumericCellsAreNotZeroes = refl
 
 paretoAcquisitionIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
-  × Pareto.selectionCreatesEvidence Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
+  × Pareto.acquisitionCreatesAuthority Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
 paretoAcquisitionIsNotTruthRanking = refl , refl
