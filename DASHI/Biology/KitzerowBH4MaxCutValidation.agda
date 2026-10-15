@@ -9,6 +9,7 @@ import DASHI.Biology.KitzerowBH4RepoIntegrationExact as Integration
 import DASHI.Biology.KitzerowBH4ReactionChemistryExact as ReactionChem
 import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact as Cycle
 import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact as ReactionBridge
+import DASHI.Biology.KitzerowBH4LineageRegressionExact as Lineage
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -56,6 +57,12 @@ coarseBranchesAreNowReactionBackedWithoutCausalPromotion :
   × ReactionBridge.sharedBH4SpeciesProvesFluxReallocation ReactionBridge.canonicalReactionCascadeBridgeBoundary ≡ false
   × ReactionBridge.reactionNetworkProvesAutismCausation ReactionBridge.canonicalReactionCascadeBridgeBoundary ≡ false
 coarseBranchesAreNowReactionBackedWithoutCausalPromotion = refl , (refl , refl)
+
+redoxLineageIsExplicitWithoutFluxPromotion :
+  Lineage.electronRedoxLineageRetained Lineage.canonicalKitzerowBH4LineageRegression ≡ true
+  × Lineage.sharedBH4SpeciesProvesFluxReallocation Lineage.canonicalKitzerowBH4LineageRegression ≡ false
+  × Lineage.formalElectronBookkeepingProvesMeasuredBranchFlux Lineage.canonicalKitzerowBH4LineageRegression ≡ false
+redoxLineageIsExplicitWithoutFluxPromotion = refl , (refl , refl)
 
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
