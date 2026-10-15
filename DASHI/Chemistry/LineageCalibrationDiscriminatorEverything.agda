@@ -5,4 +5,12 @@ import DASHI.Biology.LeadCalciumEndToEndReplayExact
 import DASHI.Biology.KitzerowBH4FluxCausalModelsExact
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact
+
+-- Attribution/provenance hardening: external observations retain source
+-- ownership and role; DASHI synthesis remains separately attributed; numeric
+-- and same-object promotion require manifestation/locator-specific payment.
+import DASHI.Chemistry.LineageCalibrationAttributionEnvelopeExact
+import DASHI.Chemistry.LineageSourceManifestationGuardExact
+import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact
+
 import DASHI.Chemistry.LineageCalibrationDiscriminatorMaxCutValidation
