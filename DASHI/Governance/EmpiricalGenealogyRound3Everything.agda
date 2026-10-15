@@ -22,6 +22,8 @@ import DASHI.Governance.JohnPaperClaimPromotionAuditExact
 import DASHI.Governance.JohnPaperClaimManifestV2Exact
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact
 import DASHI.Governance.PalantirPlatformCapabilityEvidenceExact
+import DASHI.Governance.PalantirTIAHistoricalGenealogyExact
+import DASHI.Governance.PalantirTIAHistoricalGenealogyValidation
 import DASHI.Governance.MinimalSufficientObservationGovernanceExact
 import DASHI.Governance.MultidimensionalContestabilityAccessExact
 
