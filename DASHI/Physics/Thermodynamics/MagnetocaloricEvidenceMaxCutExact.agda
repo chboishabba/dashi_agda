@@ -2,6 +2,7 @@ module DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact where
 
 open import DASHI.Core.Prelude
 import DASHI.Physics.Thermodynamics.MagnothermAttributedEvidenceExact as Evidence
+import DASHI.Physics.Thermodynamics.MagnetocaloricFamilyEvidenceExact as Family
 
 ------------------------------------------------------------------------
 -- Terminal evidence-payment atlas for the current magnetocaloric max-cut.
@@ -45,9 +46,7 @@ sixWeekAgingRow =
   paymentRow
     "protected LaFeSi regenerator aging under continued in-device operation"
     "Weiß et al. 2025, DOI 10.1021/acsaenm.4c00747"
-    peerReviewedPaid
-    boundedAgingOnly
-    true
+    peerReviewedPaid boundedAgingOnly true
     "paper supports the studied protected regenerators for the reported six-week window; it does not establish product lifetime"
     "extend with same-object longer-duration chemical/mechanical/functional time series"
 
@@ -56,9 +55,7 @@ threeMonthMicrochannelRow =
   paymentRow
     "microchannel preservation after three months"
     "Weiß et al. 2025, Supporting Information Figure SI9"
-    peerReviewedPaid
-    preliminaryOnly
-    true
+    peerReviewedPaid preliminaryOnly true
     "reported as a preliminary ongoing result; channel appearance is not full lifetime or COP"
     "acquire completed long-duration same-object performance and degradation series"
 
@@ -67,9 +64,7 @@ oneTeslaAdiabaticCharacterizationRow =
   paymentRow
     "coated versus pristine microchannel regenerator magnetocaloric function under 1 T characterization"
     "Weiß et al. 2025, Figure 4(c) and Assessment of Magnetocaloric Function"
-    peerReviewedPaid
-    directObservation
-    true
+    peerReviewedPaid directObservation true
     "the paper reports adiabatic temperature-change characterization at 1 T and states that magnetocaloric function did not deteriorate during plating; this is not a full constitutive M/S/c_H surface"
     "digitized/calibrated delta-T_ad(T,B) and entropy/heat-capacity surfaces with composition, uncertainty and B/H convention"
 
@@ -78,20 +73,56 @@ agingTestOperatingPointRow =
   paymentRow
     "in-device aging-test operating point on modified POLARIS hardware"
     "Weiß et al. 2025, In-Device Testing"
-    peerReviewedPartial
-    directObservation
-    true
+    peerReviewedPartial directObservation true
     "load-free aging used media near Curie temperature (~288 K), 2 Hz magnetisation and a reported ~0.8 T field; this pays a bounded test condition, not a spatial/temporal field map, full AMR phase timing, loaded capacity or COP"
     "same-device synchronized field/flow traces, field map, loaded thermal duty and controller-error envelope"
+
+------------------------------------------------------------------------
+-- Cross-object La-Fe-(Mn)-Si-H family evidence.
+------------------------------------------------------------------------
+
+familyCrystalStructureRow : PaymentRow
+familyCrystalStructureRow =
+  paymentRow
+    "La-Fe-Mn-Si-H family crystal/transition prior"
+    "Radulov et al. 2017, DOI 10.1016/j.actamat.2017.01.054"
+    peerReviewedPartial directObservation true
+    "LaFe11.38Mn0.32Si1.30Hx is reported with a main cubic NaZn13 phase, a = 11.568 +/- 0.002 Å, transition near 297 K and secondary phases; this is cross-object family evidence, not identity of the MAGNOTHERM alloy or its magnetic space group"
+    "weld source-backed crystallography and magnetic-order identification to the exact studied MAGNOTHERM composition/batch"
+
+familyHydrogenationCompositionRow : PaymentRow
+familyHydrogenationCompositionRow =
+  paymentRow
+    "Mn/Si/hydrogenation dependence of La-Fe-Mn-Si-H transition and magnetocaloric response"
+    "Krautz et al. 2014, DOI 10.1016/j.jallcom.2014.02.015"
+    peerReviewedPartial directObservation true
+    "systematic before/after-hydrogenation composition series pays a family-level response prior and stability distinction for fully hydrogenated material; it does not calibrate the exact MAGNOTHERM batch"
+    "identify exact Mn/Si/H content and acquire same-material transition/MCE response with uncertainty"
+
+familySpecificHeatEntropyRow : PaymentRow
+familySpecificHeatEntropyRow =
+  paymentRow
+    "field-dependent specific heat / entropy and magnetoelastic first-order-transition prior"
+    "Piazzi et al. 2016, DOI 10.1016/j.jmmm.2015.07.055"
+    peerReviewedPartial typedButUncalibrated true
+    "measured specific heat is combined with a Bean-Rodbell magnetoelastic model; useful for the thermodynamic/mechanical bridge but model agreement does not validate a microscopic Hamiltonian or exact-material free-energy surface"
+    "acquire exact-material c_H(T,H), entropy and strain/volume response; validate any microscopic-to-free-energy model separately"
+
+familyThermalTransportRow : PaymentRow
+familyThermalTransportRow =
+  paymentRow
+    "La-Fe-Si-H family hydrogen tuning and thermal-conductivity prior"
+    "Fukamichi, Fujita & Fujieda 2006, DOI 10.1016/j.jallcom.2005.04.022; Radulov et al. 2017"
+    peerReviewedPartial directObservation true
+    "family literature measures thermal transport and shows hydrogen-controlled transition/MCE behavior; material thermal conductivity is not a same-device solid-fluid heat-transfer coefficient or contact-resistance closure"
+    "acquire exact-regenerator thermal conductivity/contact/interface and same-device heat-transfer calibration"
 
 longTermLifetimeRow : PaymentRow
 longTermLifetimeRow =
   paymentRow
     "months-to-years service-life evidence"
     "Weiß et al. 2025 future-work statement"
-    openSameObjectAcquisition
-    plannedOnly
-    true
+    openSameObjectAcquisition plannedOnly true
     "the paper explicitly describes months-to-years experiments as future work"
     "completed longitudinal same-object aging/performance data approaching product-life timescales"
 
@@ -100,9 +131,7 @@ protectionChemistryRow =
   paymentRow
     "Cu coating + inhibitor protection mechanism under application-relevant operation"
     "Weiß et al. 2025"
-    peerReviewedPartial
-    directObservation
-    true
+    peerReviewedPartial directObservation true
     "paper supports the reported protection strategy and bounded aging observations; full lifetime transfer across fluids/coating thicknesses remains open"
     "material-specific corrosion kinetics, coating/interface fatigue and fluid-specific qualification over the intended lifetime"
 
@@ -111,9 +140,7 @@ vendorThirtyPercentRow =
   paymentRow
     "up-to-30% cycle-efficiency increase from rotational work recovery"
     "MAGNOTHERM Technology page"
-    vendorSourceOnly
-    vendorClaimOnly
-    true
+    vendorSourceOnly vendorClaimOnly true
     "primary for what MAGNOTHERM currently claims, not independent device calibration"
     "same-device cooling energy, gross input work, recovered work and uncertainty accounting"
 
@@ -122,9 +149,7 @@ stellarFiveTeslaRow =
   paymentRow
     "5 T STELLAR target field"
     "MAGNOTHERM STELLAR page"
-    vendorSourceOnly
-    vendorClaimOnly
-    true
+    vendorSourceOnly vendorClaimOnly true
     "development target, not an independently measured production-device field map"
     "same-object spatial/temporal B-H field map and magnet operating envelope"
 
@@ -133,9 +158,7 @@ stellarCapacityRow =
   paymentRow
     "125 kW+ modules and depicted 250 kW+ two-module STELLAR configuration"
     "MAGNOTHERM STELLAR page"
-    vendorSourceOnly
-    vendorClaimOnly
-    true
+    vendorSourceOnly vendorClaimOnly true
     "vendor vision/design depiction; no promotion to achieved capacity"
     "same-device calorimetric capacity measurement over declared operating conditions"
 
@@ -143,43 +166,35 @@ materialConstitutiveRow : PaymentRow
 materialConstitutiveRow =
   paymentRow
     "material-specific M(T,H), S(T,H), c_H(T,H), delta-S and delta-T_ad surfaces"
-    "magnetocaloric material consumer interface"
-    structurallyTyped
-    typedButUncalibrated
-    true
-    "generic response laws are typed and one 1 T delta-T_ad characterization is source-paid; a full calibrated LaFeSi constitutive surface is not supplied by either fact alone"
-    "acquire calibrated material tables/curves with composition, temperature, field convention and uncertainty"
+    "magnetocaloric material consumer + same-study/family evidence"
+    structurallyTyped typedButUncalibrated true
+    "one same-study 1 T delta-T_ad characterization and multiple family-level response papers are source-paid, but they do not form a calibrated constitutive surface for the exact MAGNOTHERM material"
+    "acquire exact-composition material tables/curves with temperature, B/H convention, cycling history and uncertainty"
 
 crystalMagneticIdentificationRow : PaymentRow
 crystalMagneticIdentificationRow =
   paymentRow
     "same-material crystal phase and magnetic symmetry identification"
-    "condensed-matter consumer interface"
-    structurallyTyped
-    typedButUncalibrated
-    true
-    "group-action and observable-fibre machinery is reusable, but does not identify the actual material phase"
-    "source-backed crystallography/magnetic-order object welded to the studied composition and operating regime"
+    "condensed-matter consumer + Radulov family crystal evidence"
+    structurallyTyped typedButUncalibrated true
+    "NaZn13-type family crystal structure is empirically paid for a related LaFe11.38Mn0.32Si1.30Hx precursor, but exact MAGNOTHERM phase fractions and magnetic symmetry/order are not identified"
+    "source-backed crystallography/magnetic-order object welded to the exact studied composition and operating regime"
 
 quantumFreeEnergyRow : PaymentRow
 quantumFreeEnergyRow =
   paymentRow
     "validated Hamiltonian -> ensemble -> free-energy -> M/S/C chain"
-    "quantum/statistical consumer interface"
-    structurallyTyped
-    typedButUncalibrated
-    true
-    "finite or model Hamiltonian does not establish bulk thermodynamics"
-    "validated electronic model plus ensemble/thermodynamic-limit and material-response calibration"
+    "quantum/statistical consumer + Piazzi magnetoelastic thermodynamic model"
+    structurallyTyped typedButUncalibrated true
+    "family magnetoelastic modeling constrains a phenomenological free-energy route but does not validate a microscopic Hamiltonian or bulk quantum derivation"
+    "validated electronic model plus ensemble/thermodynamic-limit and exact-material response calibration"
 
 fieldMapRow : PaymentRow
 fieldMapRow =
   paymentRow
     "same-device electromagnetic B/H field map"
     "U(1) electromagnetic consumer interface"
-    structurallyTyped
-    typedButUncalibrated
-    true
+    structurallyTyped typedButUncalibrated true
     "the aging experiment reports an approximate 0.8 T operating field but not a full spatial/temporal field map; tesla-valued B and A/m-valued H remain separately typed"
     "measured or validated simulated field map with B-H convention, geometry and operating-current/magnet state"
 
@@ -188,31 +203,25 @@ hydraulicsRow =
   paymentRow
     "porous-regenerator pressure drop and flow calibration"
     "continuum/regenerator consumer interface"
-    structurallyTyped
-    noSameObjectData
-    true
-    "the paper identifies the test fluids and flushing context, but mass/momentum/energy balances do not manufacture hydraulic coefficients"
+    structurallyTyped noSameObjectData true
+    "the paper identifies test fluids and flushing context, but no acquired source pays exact pressure-drop/flow closure for this regenerator"
     "same-regenerator delta-p versus flow data and calibrated porous closure"
 
 heatTransferRow : PaymentRow
 heatTransferRow =
   paymentRow
     "solid-fluid heat-transfer calibration"
-    "continuum/regenerator consumer interface"
-    structurallyTyped
-    noSameObjectData
-    true
-    "the aging test reports media near ~288 K, but Fourier/energy-balance structure and an operating temperature do not supply transfer coefficients/contact resistances"
-    "same-regenerator thermal response/transfer calibration across the operating envelope"
+    "continuum/regenerator consumer + family thermal-transport evidence"
+    structurallyTyped typedButUncalibrated true
+    "material/composite thermal conductivity and heat-flow studies pay family-level priors, but not exact same-device h, contact resistance or interfacial area closure"
+    "same-regenerator dynamic thermal response/transfer calibration across the operating envelope"
 
 cycleTimingRow : PaymentRow
 cycleTimingRow =
   paymentRow
     "field/flow cycle timing and controller calibration"
     "ActiveMagneticRegenerator synchronisation interface"
-    structurallyTyped
-    typedButUncalibrated
-    true
+    structurallyTyped typedButUncalibrated true
     "the aging test pays a 2 Hz magnetisation frequency only; it does not supply the complete field/flow phase relation, valve/pump timing or control-error envelope"
     "same-device timing traces, valve/pump/magnet phase relation and control-error envelope"
 
@@ -221,9 +230,7 @@ sameDeviceCOPRow =
   paymentRow
     "same-device COP validation"
     "ProtectedMagnetocaloricSystem energy accounting"
-    openSameObjectAcquisition
-    noSameObjectData
-    true
+    openSameObjectAcquisition noSameObjectData true
     "vendor or component claims cannot replace same-object first-law work/cooling accounting; the paper's aging test was load-free"
     "simultaneous same-device cooling energy, field/motor/pump input, recovered work, parasitics and uncertainty"
 
@@ -232,9 +239,7 @@ sameDeviceCapacityRow =
   paymentRow
     "same-device cooling-capacity validation"
     "ProtectedMagnetocaloricSystem + regenerator thermal accounting"
-    openSameObjectAcquisition
-    noSameObjectData
-    true
+    openSameObjectAcquisition noSameObjectData true
     "platform vision and material response do not establish delivered cooling capacity; the acquired aging experiment is explicitly load-free"
     "same-device calorimetric capacity over declared hot/cold temperatures, span, flow and field cycle"
 
@@ -243,9 +248,7 @@ navierStokesRow =
   paymentRow
     "Navier-Stokes contribution to MAGNOTHERM lane"
     "DASHI continuum/NS machinery"
-    structuralPrecedentOnly
-    reusableMathematicsOnly
-    false
+    structuralPrecedentOnly reusableMathematicsOnly false
     "generic balance/reduction machinery may be reused; Clay regularity is not AMR empirical payment"
     "none unless a concrete fluid reduction needs a reusable mathematical lemma"
 
@@ -254,9 +257,7 @@ yangMillsRow =
   paymentRow
     "Yang-Mills contribution to MAGNOTHERM lane"
     "DASHI YM-derived generic operator/symmetry machinery"
-    structuralPrecedentOnly
-    reusableMathematicsOnly
-    false
+    structuralPrecedentOnly reusableMathematicsOnly false
     "non-abelian Clay YM is not application magnetism; only already-factored generic mathematics is reusable"
     "none unless a domain-neutral theorem is consumed through an explicit adapter"
 
@@ -266,6 +267,10 @@ allPaymentRows =
   ∷ threeMonthMicrochannelRow
   ∷ oneTeslaAdiabaticCharacterizationRow
   ∷ agingTestOperatingPointRow
+  ∷ familyCrystalStructureRow
+  ∷ familyHydrogenationCompositionRow
+  ∷ familySpecificHeatEntropyRow
+  ∷ familyThermalTransportRow
   ∷ longTermLifetimeRow
   ∷ protectionChemistryRow
   ∷ vendorThirtyPercentRow
@@ -292,6 +297,8 @@ record MagnetocaloricMaxCutReceipt : Set where
     preliminaryThreeMonthProperlyQualified : Bool
     oneTeslaMaterialFunctionCheckPaid : Bool
     agingOperatingPointPartiallyPaid : Bool
+    familyCrystalThermoTransportEvidenceAcquired : Bool
+    familyEvidenceKeptCrossObject : Bool
     vendorClaimsRemainVendorClaims : Bool
     structuralConsumersPopulated : Bool
     nsAndYMRemainStructuralOnly : Bool
@@ -301,4 +308,4 @@ record MagnetocaloricMaxCutReceipt : Set where
 canonicalMagnetocaloricMaxCutReceipt : MagnetocaloricMaxCutReceipt
 canonicalMagnetocaloricMaxCutReceipt =
   magnetocaloric-max-cut-receipt
-    true true true true true true true true true true
+    true true true true true true true true true true true true
