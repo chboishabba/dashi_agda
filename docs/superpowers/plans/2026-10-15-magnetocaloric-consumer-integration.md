@@ -28,97 +28,68 @@
 - A quantum Hamiltonian must not imply a calibrated partition/free-energy map without an ensemble witness.
 - Continuum/NS reuse must stop at application-specific balance/transport interfaces and never promote Clay regularity.
 - Source identity, access transport, source claim, DASHI reconstruction and theorem/device authority must remain separate.
+- Cross-object family evidence and same-platform/different-material device evidence must not be promoted to exact LaFeSi same-object closure.
 
 ---
 
-### Task 1: SI magnetocaloric quantities
+### Tasks 1-8: consumer and structural integration
 
-**Files:** create `DASHI/Physics/Units/MagnetocaloricSIConsumerExact.agda`; modify `DASHI/Physics/Units/Everything.agda`.
+- [x] SI/metrology consumer with B/H separation and traceability.
+- [x] U(1) electromagnetic consumer with field-geometry/B-H/validation obligations.
+- [x] Condensed-matter crystal/magnetic consumer with separate observable projections.
+- [x] Atomic/protection chemistry consumer with composition/coating/fluid separation.
+- [x] Quantum/statistical consumer with Hamiltonian -> ensemble -> free-energy evidence chain.
+- [x] Continuum/NS boundary consumer without Clay regularity promotion.
+- [x] Magnetostructural mechanics consumer with calibration-bound magnetostriction/fatigue.
+- [x] Consumer atlas / terminal receipt / thermodynamics reachability.
 
-**Ruling:** Derived AMR-specific dimensions remain in the consumer rather than modifying canonical BIPM `SI.agda`; this preserves the source-owned SI core while still using its `Dimension`, `Unit`, `Quantity`, and `Measurement` carriers.
+### Task 9: Attribution firewall and same-study empirical payments
 
-- [x] Add exact coherent dimensions and named units for H, entropy, heat capacity, specific heat and thermal conductivity.
-- [x] Add a typed AMR calibration measurement bundle distinguishing H from B.
-- [x] Bind measurements to the magnetocaloric material carrier through explicit identification/traceability obligations.
-- [x] Wire the consumer into the Units rollup.
+- [x] Replace thin local source abstraction with `DASHI.Core.AttributedSourceCore`.
+- [x] Separate ACS/PMC/Aalto access carriers from authorship and authority.
+- [x] Encode same-study in-device VACUUMSCHMELZE LaFeSi composition envelope.
+- [x] Encode six-week aging, preliminary three-month microchannels, 1 T delta-T_ad function check and load-free ~288 K / 2 Hz / ~0.8 T operating point.
+- [x] Keep months-to-years aging as future work.
+- [x] Keep 30%, STELLAR 5 T, 125 kW+ and 250 kW+ statements vendor/development-only.
 
-### Task 2: Electromagnetic field consumer
+### Task 10: Cross-object La-Fe-(Mn)-Si-H family acquisition
 
-**Files:** create `DASHI/Physics/Electromagnetism/MagnetocaloricFieldConsumerExact.agda`; modify `DASHI/Physics/Electromagnetism/Everything.agda`.
+- [x] Attribute Radulov et al. 2017, DOI `10.1016/j.actamat.2017.01.054`.
+- [x] Pay family NaZn13 crystal/transition prior and magnetovolume/thermal-mechanical coupling without exact-material promotion.
+- [x] Attribute Krautz et al. 2014, DOI `10.1016/j.jallcom.2014.02.015`.
+- [x] Pay Mn/Si/hydrogenation response/stability prior without exact-batch promotion.
+- [x] Attribute Piazzi et al. 2016, DOI `10.1016/j.jmmm.2015.07.055`.
+- [x] Pay field-specific-heat/entropy + phenomenological magnetoelastic prior without microscopic-Hamiltonian promotion.
+- [x] Attribute Fukamichi/Fujita/Fujieda 2006, DOI `10.1016/j.jallcom.2005.04.022`.
+- [x] Pay hydrogen-tuning / MCE / thermal-transport family prior without same-device heat-transfer promotion.
 
-- [x] Reuse the existing application-facing U(1) field socket.
-- [x] Require B/H constitutive convention, geometry, field-work and validation evidence.
-- [x] Preserve the existing non-abelian-YM/application-electromagnetism separation.
+### Task 11: Peer-reviewed POLARIS system acquisition
 
-### Task 3: Condensed-matter crystal/magnetic consumer
+- [x] Attribute Liang et al. 2026, DOI `10.1016/j.applthermaleng.2025.129144`.
+- [x] Encode 131 W/kg specific cooling capacity, plug-in COP 1.0 and 5.4% second-law efficiency at 15 K, plus reported 28.5 K maximum span.
+- [x] Encode energetic/hydraulic/acoustic/material measurement campaign and utilization-factor optimization.
+- [x] Encode 43-unit commercial deployment / months-long supermarket operation as platform evidence.
+- [x] Keep optimized Gd/GdEr working material explicit and block promotion to same-LaFeSi COP/capacity/hydraulic/lifetime closure.
 
-**Files:** create `DASHI/Physics/CondensedMatter/MagnetocaloricCrystalQuantumConsumerExact.agda`; modify `DASHI/Physics/CondensedMatter/Everything.agda`.
+### Task 12: Terminal max-cut and verification
 
-- [x] Reuse observable-fibre and native `GroupAction` crystal-symmetry precedent.
-- [x] Keep crystal phase, magnetic order, band energy and thermodynamic response as distinct projections.
-- [x] Add explicit physical-identification and promotion boundaries.
+- [x] Record exact remaining same-LaFeSi / STELLAR empirical frontier in `2026-10-15-magnetocaloric-terminal-maxcut.md`.
+- [x] Branch is ahead-only of `master` at fresh comparison.
+- [x] No pull-request-triggered GitHub Actions workflow exists for the checked head.
+- [x] CodeRabbit reached success on the pre-ledger implementation head; re-check final ledger head before any merge claim.
+- [x] No Agda compiler is available in this execution environment; no Agda typecheck-success claim is made.
+- [x] Validation modules were committed before corresponding evidence owners for newly introduced evidence lanes; executable RED/GREEN remains compiler-bound.
 
-### Task 4: Chemistry/atomic/protection consumer
+## Terminal hard frontier
 
-**Files:** create `DASHI/Physics/Chemistry/MagnetocaloricAtomicChemistryConsumerExact.agda`.
-
-- [x] Reuse `AtomicShellRecurrence`, force-sector separation and Schur closed-shell precedent.
-- [x] Type composition/substitution/hydrogenation and material identity separately from response calibration.
-- [x] Type coating/inhibitor/transfer-fluid chemistry and qualified corrosion/interface evidence.
-
-### Task 5: Quantum/statistical consumer
-
-**Files:** create `DASHI/Physics/Quantum/MagnetocaloricQuantumStatMechConsumerExact.agda`.
-
-- [x] Expose Hamiltonian -> ensemble -> free energy -> M/S/C chain as evidence-bearing interfaces.
-- [x] Prevent model-Hamiltonian-to-device and finite-model-to-bulk promotion.
-
-### Task 6: Continuum / NS boundary consumer
-
-**Files:** create `DASHI/Physics/Thermodynamics/MagnetocaloricContinuumConsumerExact.agda`.
-
-- [x] Connect regenerator fields to `ContinuumBalanceSystem`, `FluidDynamicsLaw`, and `DiffusionTransportLaw`.
-- [x] State explicitly that Clay NS regularity is not a dependency.
-
-### Task 7: Magnetostructural mechanics consumer
-
-**Files:** create `DASHI/Physics/Thermodynamics/MagnetocaloricMagnetostructuralConsumerExact.agda`.
-
-- [x] Reuse `ElasticityLaw` for deformation/strain/stress/stored-energy structure.
-- [x] Keep magnetostriction and coating-interface mechanics calibration explicit.
-- [x] Feed cyclic strain only into qualified degradation/integrity projections, never lifetime claims.
-
-### Task 8: Reachability and terminal receipt
-
-**Files:** create `DASHI/Physics/Thermodynamics/MagnetocaloricConsumerAtlasExact.agda`; modify `DASHI/Physics/Thermodynamics/Everything.agda`; modify `DASHI/Physics/Thermodynamics/MagnetocaloricAMRReceipt.agda`.
-
-**Rulings:**
-- Existing protected-system energy accounting already owns rotational/recovered work; no duplicate mechanical-work consumer was introduced.
-- Existing continuum/Fourier surfaces already own heat transport; no duplicate heat-exchanger abstraction was introduced.
-- Search found biology-specific control cores but no generic engineering-control owner suitable for AMR; importing an agency/biology controller would be an unsound coupling, so cycle synchronisation remains owned by the AMR lane.
-- NS and YM are structural precedents only: NS via generic continuum/reduction machinery; YM via generic operator-reduction/symmetry factoring and the existing U(1) separation boundary.
-
-- [x] Import all sound consumer bridges into the thermodynamics rollup.
-- [x] Record populated consumers and rejected/covered candidate consumers in the atlas.
-- [x] Record the remaining physical/calibration frontier in the terminal receipt.
-- [x] Inspect branch diff/status. Branch is current with `master`; CodeRabbit status is successful. No Agda compiler/status check is available, so no typecheck-success claim is made.
-
-### Task 9: Attribution firewall and empirical payment max-cut
-
-**Files:** create `DASHI/Physics/Thermodynamics/MagnothermAttributedEvidenceExact.agda`, `MagnothermAttributionValidation.agda`, `MagnetocaloricEvidenceMaxCutExact.agda`, `MagnetocaloricEvidenceMaxCutValidation.agda`; modify `MagnothermSourceBoundary.agda`, `MagnetocaloricConsumerAtlasExact.agda`, `MagnetocaloricAMRReceipt.agda`, and `Everything.agda`.
-
-**Rulings:**
-- Replace the thin local source abstraction at the domain boundary with canonical `DASHI.Core.AttributedSourceCore` ownership rather than maintaining parallel attribution semantics.
-- Treat ACS/PMC/Aalto access locations as transport/provenance carriers for the same paper, not new authors or independent scientific authority.
-- The peer-reviewed six-week continued-operation result is a paid bounded aging observation. The paper's three-month microchannel result is paid only as preliminary. Its months-to-years experiment is explicitly future work and remains unpaid as lifetime evidence.
-- Current MAGNOTHERM 30% work-recovery, STELLAR 5 T target, 125 kW+ module, and 250 kW+ two-module statements are primary for what the vendor claims, but remain vendor/development evidence only.
-- Same-device COP/capacity, constitutive M/S/c_H response, field map, hydraulics, heat transfer, timing/control and long-duration aging remain hard acquisition/calibration frontiers.
-- TDD regression modules were committed before their implementation owners. This session has no Agda compiler, so the RED/GREEN code ordering is recorded but executable typecheck payment remains explicitly unavailable.
-
-- [x] Reuse `AttributedSourceCore` with full author/title/publication/DOI/source-kind/formalisation metadata.
-- [x] Separate publisher/repository/index access carriers from authorship and authority.
-- [x] Encode claim-relative primaryness, same-object status, preliminary/planned/vendor roles and claim ceilings.
-- [x] Encode six-week, preliminary three-month, long-term-plan, 30%, 5 T, 125 kW+ and 250 kW+ payment rows.
-- [x] Build a terminal empirical max-cut atlas covering material, quantum, field, hydraulic, thermal, timing, COP/capacity, NS and YM obligations.
-- [x] Wire attribution/max-cut validation and receipts into the thermodynamics spine.
-- [ ] Re-run current branch/PR/status verification after these commits; do not claim Agda typechecking without a compiler receipt.
+1. exact LaFeSi batch chemistry, phase fractions, crystal identity and magnetic symmetry/order;
+2. exact-batch M(T,H), S(T,H), c_H(T,H), delta-S and delta-T_ad surfaces;
+3. exact LaFeSi B/H field map;
+4. exact LaFeSi hydraulic closure;
+5. exact LaFeSi heat-transfer/contact/interfacial calibration;
+6. exact LaFeSi field/flow/controller timing;
+7. completed long-duration same-LaFeSi aging;
+8. loaded same-LaFeSi cooling capacity and COP/work decomposition;
+9. isolated measured rotational-work-recovery contribution;
+10. measured STELLAR field/capacity realization;
+11. microscopic Hamiltonian -> bulk free-energy validation if promoted beyond phenomenology.
