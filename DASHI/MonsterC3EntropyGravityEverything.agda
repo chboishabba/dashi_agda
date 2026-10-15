@@ -17,6 +17,8 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
 -- 369 atomics -> molecule -> Hamiltonian/wavefunction -> reactions.
+-- Published benchmarks and author-released research artifacts remain separate
+-- attribution objects even when they concern the same named molecule/model.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureValidation
