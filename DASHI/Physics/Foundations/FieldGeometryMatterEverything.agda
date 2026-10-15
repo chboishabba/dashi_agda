@@ -16,6 +16,8 @@ import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceExact
 import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceValidation
 import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Exact
 import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Validation
+import DASHI.Physics.CondensedMatter.MATBGBMEisensteinMatrixExact
+import DASHI.Physics.CondensedMatter.MATBGBMEisensteinMatrixValidation
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleValidation
 
