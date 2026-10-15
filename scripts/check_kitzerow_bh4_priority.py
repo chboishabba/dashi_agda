@@ -50,8 +50,15 @@ for token in [
     "plagiarismProvenIsFalse",
     "stanfordContactEvidence",
     "princetonAssessment",
+    "PublicationReferenceStatus",
+    "publicationReferenceStatus",
+    "kitzerowNotFoundInArticleText",
+    "creatorReportsUncited",
+    "stanford2025ReferenceEvidence",
+    "ojha2026ReferenceEvidence",
+    "brazil2025ReferenceEvidence",
 ]:
-    assert token in priority_text, f"missing priority token: {token}"
+    assert token in priority_text, f"missing priority/reference token: {token}"
 
 for token in [
     "supportDoesNotImplyPriority",
@@ -60,6 +67,7 @@ for token in [
     "nodeSupportDoesNotConfirmWholeGraph",
     "stanfordContactRemainsUnverifiedPrimary",
     "priorArtSubtractionIsRequired",
+    "contactDoesNotImplyArticleCitation",
 ]:
     assert token in regression_text, f"missing regression token: {token}"
 
@@ -84,5 +92,6 @@ for token in [
 
 assert "explicitContactClaim" in acquisition_text
 assert "not" in acquisition_text.lower() and "verifiedPrimaryContact" in acquisition_text
+assert "uncited" in acquisition_text.lower()
 
 print("kitzerow BH4 priority max-cut regression: ok")
