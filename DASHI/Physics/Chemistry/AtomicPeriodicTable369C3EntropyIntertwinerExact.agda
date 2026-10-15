@@ -6,6 +6,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeEx
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact as NH3Protonation
+import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as MonsterEntropy
 import DASHI.Moonshine.C3FourierConjugationExact as C3Fourier
 
@@ -156,6 +157,9 @@ ammoniaProtonationStoichiometry = NH3Protonation.canonicalProtonationStoichiomet
 ammoniaProtonationThermochemistry : NH3Protonation.ProtonationThermochemistry
 ammoniaProtonationThermochemistry = NH3Protonation.canonicalProtonationThermochemistry
 
+h3AmmoniaMeasuredKinetics : H3Transfer.H3AmmoniaKineticReceipt
+h3AmmoniaMeasuredKinetics = H3Transfer.canonicalH3AmmoniaKineticReceipt
+
 record ChemistryC3MaxCutStatus : Set where
   constructor chemistryC3MaxCutStatus
   field
@@ -177,15 +181,21 @@ record ChemistryC3MaxCutStatus : Set where
     sourceBackedProtonationThermochemistryPaid : Bool
     sourceBackedProtonationThermochemistryPaidIsTrue :
       sourceBackedProtonationThermochemistryPaid ≡ true
+    productsByproductsReactionFixturePaid : Bool
+    productsByproductsReactionFixturePaidIsTrue :
+      productsByproductsReactionFixturePaid ≡ true
+    sameReactionQuantitativeKineticsPaid : Bool
+    sameReactionQuantitativeKineticsPaidIsTrue :
+      sameReactionQuantitativeKineticsPaid ≡ true
     fullElectronicMolecularC3ActionInstantiated : Bool
     fullElectronicMolecularC3ActionInstantiatedIsFalse :
       fullElectronicMolecularC3ActionInstantiated ≡ false
     fullC3ResolvedReactionTransportInstantiated : Bool
     fullC3ResolvedReactionTransportInstantiatedIsFalse :
       fullC3ResolvedReactionTransportInstantiated ≡ false
-    sameReactionQuantitativeKineticsPaid : Bool
-    sameReactionQuantitativeKineticsPaidIsFalse :
-      sameReactionQuantitativeKineticsPaid ≡ false
+    microscopicTransitionPathPaid : Bool
+    microscopicTransitionPathPaidIsFalse :
+      microscopicTransitionPathPaid ≡ false
     electronResolvedReactionEnergeticsUniversal : Bool
     electronResolvedReactionEnergeticsUniversalIsFalse :
       electronResolvedReactionEnergeticsUniversal ≡ false
@@ -193,6 +203,8 @@ record ChemistryC3MaxCutStatus : Set where
 canonicalChemistryC3MaxCutStatus : ChemistryC3MaxCutStatus
 canonicalChemistryC3MaxCutStatus =
   chemistryC3MaxCutStatus
+    true refl
+    true refl
     true refl
     true refl
     true refl
