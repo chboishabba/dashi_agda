@@ -1,24 +1,18 @@
 module DASHI.MonsterC3EntropyGravityEverything where
 
--- Exact Monster / C3 / 369 arithmetic and representation owners.
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact
 import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
 import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
-
--- Strongest existing same-object zeta / regular-character / 3B / VOA seam.
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
-
--- Existing Ogg / Monster-prime authority and finite lane carriers.
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
--- 369 atomics -> molecule -> Hamiltonian/wavefunction -> reactions.
--- Published benchmarks and author-released research artifacts remain separate
--- attribution objects even when they concern the same named molecule/model.
+-- Published chemistry sources, author-released artifacts, and DASHI
+-- reconstructions remain distinct attribution objects.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureValidation
@@ -46,27 +40,18 @@ import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismValidation
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreValidation
 
--- Statistical authority plus exact count-level probability adapters.
 import DASHI.Physics.Laws.ThermodynamicStatisticalLaws
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleValidation
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact
-
--- Existing unified finite-carrier -> quantum / GR theorem-dependency graph.
 import DASHI.Unified.GRQuantumCrossPollinationBridge
-
--- Existing GR emergence boundary plus scoped entropy-gravity routes.
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations
 import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact
 import DASHI.Physics.Closure.InformationParadoxCrossGateObstruction
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact
-
--- Monster/VOA/4D target and primary-source dimensional audit.
 import DASHI.Physics.QFT.VOAMoonshineBridgeReceiptSurface
 import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact
-
--- Terminal cross-domain receipt and regression surface.
 import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityValidation
