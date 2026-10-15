@@ -8,7 +8,7 @@ import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
 
 -- Strongest existing same-object zeta / regular-character / 3B / VOA seam,
--- plus the newer literal one/zeta/zeta^2 same-central-action frontier.
+-- plus the literal one/zeta/zeta^2 same-central-action frontier.
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
@@ -17,15 +17,21 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
--- 369 atomics -> molecule -> reaction hyperfibre, source-backed NH3 C3 fixture,
--- and the C3/entropy consumer.
+-- 369 atomics -> molecule -> reaction hyperfibre and source-backed NH3 stack.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureValidation
+import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact
+import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryValidation
+import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact
+import DASHI.Physics.Chemistry.AmmoniaProtonationReactionValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
 
--- Explicit finite state-count / entropy boundaries and zeta cross-pollination.
+-- Statistical authority plus exact count-level probability adapters.
+import DASHI.Physics.Laws.ThermodynamicStatisticalLaws
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact
+import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact
+import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleValidation
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact
 
 -- Existing unified finite-carrier -> quantum / GR theorem-dependency graph.
