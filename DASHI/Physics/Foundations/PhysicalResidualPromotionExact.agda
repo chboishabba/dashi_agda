@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.PhysicalResidualPromotionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
@@ -67,11 +68,21 @@ data ResidualDirectNewPhysicsPermission : Set where
 record StrongResidualPromotionEvidence : Set where
   constructor strong-residual-promotion-evidence
   field
-    nuisanceStatus : NuisanceClosureStatus
-    repeated : Bool
-    scaling : Bool
-    apparatusChange : Bool
-    independentReplication : Bool
+    strongNuisanceStatus : NuisanceClosureStatus
+    strongNuisanceClosed : strongNuisanceStatus ≡ nuisanceClosedByReceipt
+
+    strongRepeated : Bool
+    strongRepeatedIsTrue : strongRepeated ≡ true
+
+    strongScaling : Bool
+    strongScalingIsTrue : strongScaling ≡ true
+
+    strongApparatusChange : Bool
+    strongApparatusChangeIsTrue : strongApparatusChange ≡ true
+
+    strongIndependentReplication : Bool
+    strongIndependentReplicationIsTrue : strongIndependentReplication ≡ true
+
     sameObjectCalibrationReference : String
 
 open StrongResidualPromotionEvidence public
@@ -85,9 +96,10 @@ record ResidualPromotionBoundary : Set where
     missingNuisanceChannelBlocksClosure : Bool
     gravityNeedsIndependentMetricOrGravityConsumer : Bool
     mechanismPromotionNeedsSeparateEvidence : Bool
+    strongPromotionRequiresProofCarryingReplication : Bool
 
 open ResidualPromotionBoundary public
 
 canonicalResidualPromotionBoundary : ResidualPromotionBoundary
 canonicalResidualPromotionBoundary =
-  residual-promotion-boundary true true true true true true
+  residual-promotion-boundary true true true true true true true
