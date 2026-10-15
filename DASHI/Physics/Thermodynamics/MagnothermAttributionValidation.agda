@@ -33,6 +33,18 @@ threeMonthEvidenceIsPreliminary :
   Evidence.ClaimPayment.preliminary Evidence.threeMonthMicrochannelPayment ≡ true
 threeMonthEvidenceIsPreliminary = refl
 
+oneTeslaCharacterizationIsEmpirical :
+  Evidence.ClaimPayment.empiricalPayment Evidence.oneTeslaAdiabaticCharacterizationPayment ≡ true
+oneTeslaCharacterizationIsEmpirical = refl
+
+agingOperatingPointIsEmpiricalButNotCalibration :
+  Evidence.ClaimPayment.empiricalPayment Evidence.agingTestOperatingPointPayment ≡ true
+agingOperatingPointIsEmpiricalButNotCalibration = refl
+
+agingOperatingPointIsNotCalibratedDeviceEvidence :
+  Evidence.ClaimPayment.calibratedDeviceEvidence Evidence.agingTestOperatingPointPayment ≡ false
+agingOperatingPointIsNotCalibratedDeviceEvidence = refl
+
 longTermPlanIsNotEmpiricalPayment :
   Evidence.ClaimPayment.empiricalPayment Evidence.longTermExperimentPlanPayment ≡ false
 longTermPlanIsNotEmpiricalPayment = refl
