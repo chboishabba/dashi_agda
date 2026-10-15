@@ -10,6 +10,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic369
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Chemistry369
 import DASHI.Biology.Molecular.MolecularAssemblyBoundary as Molecular
+import DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge as Geometry
 import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Chemistry.AdmissibleReactionTransitionBridgeExact as Reaction
 import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact as Coarse
@@ -17,11 +18,17 @@ import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact as Coarse
 ------------------------------------------------------------------------
 -- ATOMIC -> MOLECULAR -> REACTION LINEAGE HYPERFABRIC
 --
--- Existing owners already provide the atomic generator, molecular assembly
--- obligations and typed reaction kernel.  This owner contributes the missing
--- proof-relevant lineage seam: persistent nuclear/atomic identity, electron
--- transport, molecule membership, reaction product/byproduct ancestry and
--- observer-relative residuals are distinct coordinates.
+-- Existing owners already provide the atomic generator, molecular assembly,
+-- constrained geometry and typed reaction kernel.  This owner contributes the
+-- missing proof-relevant lineage seam: persistent nuclear/atomic identity,
+-- electron-equivalent/redox transport, molecule membership, reaction
+-- product/byproduct ancestry and observer-relative residuals are distinct.
+--
+-- Important physics boundary: electrons are indistinguishable fermions.  An
+-- ElectronLineage below is therefore an operational carrier for electron
+-- equivalents, occupation/redox change or calculated density flow.  It is not
+-- a claim that an experimentally meaningful named individual electron persists
+-- through arbitrary many-body states.
 ------------------------------------------------------------------------
 
 record AtomicLineage : Set where
@@ -52,9 +59,7 @@ record NuclearIdentityTransport
 open NuclearIdentityTransport public
 
 ------------------------------------------------------------------------
--- Electron lineage is deliberately not reducible to the atomic/nuclear map.
--- Electron state may be delocalised, transferred between species or exchanged
--- with a cofactor/electrode/solvent while nuclei retain identity.
+-- Electron-equivalent / occupation lineage.
 ------------------------------------------------------------------------
 
 record ElectronLineage : Set where
@@ -72,8 +77,8 @@ record ElectronLineage : Set where
 open ElectronLineage public
 
 ------------------------------------------------------------------------
--- A molecular lineage state carries upstream atom/electron identities in
--- addition to the usual molecule/bond/geometry/stereo/environment coordinates.
+-- A molecular lineage state carries upstream atom/electronic identities in
+-- addition to molecule/bond/geometry/stereo/environment coordinates.
 ------------------------------------------------------------------------
 
 record MolecularLineageState : Set where
@@ -92,10 +97,24 @@ record MolecularLineageState : Set where
 
 open MolecularLineageState public
 
+record MolecularGeometryLineageReceipt : Set where
+  constructor molecularGeometryLineageReceipt
+  field
+    moleculeReference : String
+    atomicInventoryReference : String
+    valenceReference : String
+    admissibleBondReference : String
+    constrainedMinimizerReference : String
+    geometryReference : String
+    stereochemistryReference : String
+    environmentReference : String
+    geometryValidationReference : String
+
+open MolecularGeometryLineageReceipt public
+
 ------------------------------------------------------------------------
 -- Reaction transport: products and byproducts are separate molecular lineage
--- states, not a single output label.  Atom and electron transport are separate
--- proof obligations.
+-- states.  Atom and electron-equivalent transport are separate obligations.
 ------------------------------------------------------------------------
 
 record ReactionLineageTransport : Set₁ where
@@ -120,9 +139,7 @@ record ReactionLineageTransport : Set₁ where
 open ReactionLineageTransport public
 
 ------------------------------------------------------------------------
--- Cross-scale observer receipt.  A downstream observer may preserve exactly
--- what one consumer needs while identifying fine states that another consumer
--- needs to distinguish.  Fine residual lineage therefore remains reopenable.
+-- Cross-scale observer receipt.
 ------------------------------------------------------------------------
 
 record LineageObserverReceipt : Set where
@@ -170,6 +187,14 @@ record AtomicMolecularReactionLineageBoundary : Set where
     nuclearIdentityTransportIsDistinctFromElectronTransportIsTrue :
       nuclearIdentityTransportIsDistinctFromElectronTransport ≡ true
 
+    electronLineageMeansPersistentIndividualFermionIdentity : Bool
+    electronLineageMeansPersistentIndividualFermionIdentityIsFalse :
+      electronLineageMeansPersistentIndividualFermionIdentity ≡ false
+
+    electronEquivalentOrDensityTransportIsTrackable : Bool
+    electronEquivalentOrDensityTransportIsTrackableIsTrue :
+      electronEquivalentOrDensityTransportIsTrackable ≡ true
+
     atomConservationProvesElectronTransport : Bool
     atomConservationProvesElectronTransportIsFalse :
       atomConservationProvesElectronTransport ≡ false
@@ -177,6 +202,10 @@ record AtomicMolecularReactionLineageBoundary : Set where
     molecularFormulaDeterminesBondGeometry : Bool
     molecularFormulaDeterminesBondGeometryIsFalse :
       molecularFormulaDeterminesBondGeometry ≡ false
+
+    geometryRequiresIndependentAssemblyOrMinimizerWitness : Bool
+    geometryRequiresIndependentAssemblyOrMinimizerWitnessIsTrue :
+      geometryRequiresIndependentAssemblyOrMinimizerWitness ≡ true
 
     sameMoleculeLabelDeterminesSameLineage : Bool
     sameMoleculeLabelDeterminesSameLineageIsFalse :
@@ -215,7 +244,10 @@ canonicalAtomicMolecularReactionLineageBoundary =
     true refl
     true refl
     false refl
+    true refl
     false refl
+    false refl
+    true refl
     false refl
     false refl
     true refl
