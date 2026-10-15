@@ -18,6 +18,10 @@ priorityDoesNotImplyContact :
   Priority.contactCoordinate Priority.priorityWithoutContact ≡ Atlas.noContactEvidenceAcquired
 priorityDoesNotImplyContact = refl
 
+contactDoesNotImplyArticleCitation :
+  Priority.GenealogyBoundary.contactImpliesArticleCitation Priority.canonicalGenealogyBoundary ≡ false
+contactDoesNotImplyArticleCitation = refl
+
 contactDoesNotImplyPlagiarism :
   Priority.AttributionAssessment.plagiarismProven Priority.stanfordAssessment ≡ false
 contactDoesNotImplyPlagiarism = refl
@@ -29,6 +33,10 @@ nodeSupportDoesNotConfirmWholeGraph = refl
 stanfordContactRemainsUnverifiedPrimary :
   Priority.verifiedPrimaryContact Priority.stanfordContactEvidence ≡ false
 stanfordContactRemainsUnverifiedPrimary = refl
+
+stanfordArticleRemainsUncitedInAcquiredText :
+  Priority.publicationReferenceStatus Priority.stanford2025ReferenceEvidence ≡ Priority.kitzerowNotFoundInArticleText
+stanfordArticleRemainsUncitedInAcquiredText = refl
 
 brazilReviewDoesNotConfirmWholeGraph :
   Atlas.wholeModelConfirmed Atlas.brazilBH4Review ≡ false
