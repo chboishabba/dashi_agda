@@ -28,7 +28,7 @@ xiao2026QTMSource =
     "10.1038/s41586-026-10378-x"
     "https://doi.org/10.1038/s41586-026-10378-x"
     Attribution.academicArticleSource
-    "source for QTM momentum/energy-resolved MATBG bands, the reported 1.10 degree local twist, time-reversal-related K/K' spectral superposition in the reported setup, interaction-driven magic-angle band reconstruction, and light/heavy momentum sectors; does not establish a DASHI C3 codec or an entropy experiment on the same sample"
+    "source for QTM momentum/energy-resolved MATBG bands, the reported 1.10 degree local twist, time-reversal-related K/K' spectral superposition in the reported setup, interaction-driven magic-angle band reconstruction, light/heavy momentum sectors, and the reported best-fit BM wavefunction matrix-element ratio w0/w1 = 0.6; does not establish a DASHI C3 codec or an entropy experiment on the same sample"
     Attribution.publicAttribution
 
 zhang2026EntropySource : Attribution.AttributedSource
@@ -39,7 +39,7 @@ zhang2026EntropySource =
     "Nature Communications 17, 9785"
     "2026"
     "10.1038/s41467-026-76179-y"
-    "https://doi.org/10.1038/s41467-026-76179-y"
+    "https://doi.org/10.1038/s41486-026-76179-y"
     Attribution.academicArticleSource
     "source for planar-tunnelling inverse-compressibility/entropy spectroscopy, 4-fold and 8-fold plateau degeneracies, mass renormalization, and the source interpretation that the 8-to-4 reduction is consistent with strain-mediated symmetry breaking; not the QTM sample"
     Attribution.publicAttribution
@@ -66,7 +66,7 @@ matbg2026SourceAtlas =
      xiao2026QTMSource ∷
      zhang2026EntropySource ∷
      carrasco2026TwistrainSource ∷ [])
-    "Bistritzer-MacDonald supplies the continuum-model theory role; Xiao et al. supply QTM band-imaging facts; Zhang et al. supply entropy/compressibility facts; Carrasco et al. supply controlled twist-strain geometry facts. DASHI owns the typed composition and non-collapse boundaries."
+    "Bistritzer-MacDonald supplies the continuum-model theory role; Xiao et al. supply QTM band-imaging and matrix-element-comparison facts; Zhang et al. supply entropy/compressibility facts; Carrasco et al. supply controlled twist-strain geometry facts. DASHI owns the typed composition and non-collapse boundaries."
 
 ------------------------------------------------------------------------
 -- Literal internal carrier.
@@ -105,10 +105,6 @@ timeReverseValleyInvolutive KPrime = refl
 
 ------------------------------------------------------------------------
 -- Candidate valley-only C3 chart.
---
--- This is useful for testing conjugation transport, but it is NOT the full
--- layer/sublattice/BM C3 representation.  The physical same-object theorem is
--- retained as an explicit payment below.
 ------------------------------------------------------------------------
 
 candidateValleyPhase : Valley → C3.C3Phase
@@ -149,6 +145,7 @@ record QTMObservation : Set where
   field
     qtmMagicAngleHundredths : Nat
     qtmMagicAngleUncertaintyHundredths : Nat
+    qtmBestFitW0W1Hundredths : Nat
     interactionReshapedMagicAngleBands : Bool
     lightAndHeavyMomentumSectors : Bool
     singleParticleAgreementAwayFromMagicAngle : Bool
@@ -163,12 +160,13 @@ xiao2026QTMObservation =
   qtm-observation
     110
     2
+    60
     true
     true
     true
     true
     true
-    "Xiao et al. Nature 653 (2026), DOI 10.1038/s41586-026-10378-x; local QTM region reported at 1.10 +/- 0.02 degrees"
+    "Xiao et al. Nature 653 (2026), DOI 10.1038/s41586-026-10378-x; local QTM region reported at 1.10 +/- 0.02 degrees and wavefunction matrix-element comparison reported best agreement for w0/w1 = 0.6"
 
 record EntropyObservation : Set where
   constructor entropy-observation
@@ -255,6 +253,7 @@ record MATBG2026VerticalBoundary : Set where
     sourceClassCompositionDoesNotCreateSameSample : Bool
     qtmValleySuperpositionDoesNotEraseLiteralValleyCarrier : Bool
     interactingQTMDoesNotRetroactivelyUpgradeBM2011 : Bool
+    w0W1RatioFitDoesNotPayAbsoluteTunnellingScale : Bool
     entropyPlateauDoesNotByItselfProveRefrigeration : Bool
     strainInterpretationDoesNotIdentifyAllMicroscopicMechanisms : Bool
     squareMoireSourceDoesNotBecomeMATBGSameSampleEvidence : Bool
@@ -263,4 +262,4 @@ open MATBG2026VerticalBoundary public
 
 canonicalMATBG2026VerticalBoundary : MATBG2026VerticalBoundary
 canonicalMATBG2026VerticalBoundary =
-  matbg-2026-vertical-boundary true true true true true true
+  matbg-2026-vertical-boundary true true true true true true true
