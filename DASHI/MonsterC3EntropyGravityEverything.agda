@@ -25,6 +25,8 @@ import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryValidation
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionValidation
+import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact
+import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
 
 -- Statistical authority plus exact count-level probability adapters.
