@@ -2,19 +2,12 @@
 module DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel as Casimir
 import DASHI.Physics.Foundations.GRQFTIsraelShellEnergyConditionExact as EnergyConditions
 import DASHI.Promotion.ClassicalFieldObligations as ClassicalField
-
-------------------------------------------------------------------------
--- QUANTUM STRESS-ENERGY ENGINEERING BRIDGE
---
--- The imported owners supply existing Casimir / GR energy-condition /
--- classical-field obligation machinery.  This module owns only the staged
--- cross-domain promotion grammar below.
-------------------------------------------------------------------------
 
 data QuantumStressStage : Set where
   mathematicalExoticStress : QuantumStressStage
@@ -55,19 +48,39 @@ open QuantumStressEngineeringChain public
 canonicalQuantumStressEngineeringChain : QuantumStressEngineeringChain
 canonicalQuantumStressEngineeringChain =
   quantum-stress-engineering-chain
-    "mathematical T_mu_nu candidate"
-    "renormalized <T_mu_nu> model requires source/theorem"
-    "QEI/averaged-condition obligation remains explicit"
+    "mathematical stress-energy candidate"
+    "renormalized expectation model requires source or theorem"
+    "quantum-inequality obligation remains explicit"
     "same-object producibility receipt required"
-    "shape/duration/control receipt required"
-    "GR backreaction/magnitude receipt required"
-    "warp/wormhole capability unpaid"
+    "shape duration and control receipt required"
+    "gravitational backreaction and magnitude receipt required"
+    "terminal geometry capability unpaid"
     theoryToQFT
     qftToQuantumAdmissible
     quantumAdmissibleToExperiment
     experimentToControl
     controlToGravity
     gravityToWarpWormhole
+
+record QuantumStressPaymentLedger : Set where
+  constructor quantum-stress-payment-ledger
+  field
+    qftExpectationPayment : Bool
+    quantumInequalityPayment : Bool
+    experimentalProductionPayment : Bool
+    controlledShapeMaintenancePayment : Bool
+    gravitationalSignificancePayment : Bool
+    warpOrWormholePayment : Bool
+
+open QuantumStressPaymentLedger public
+
+canonicalQuantumStressPaymentLedger : QuantumStressPaymentLedger
+canonicalQuantumStressPaymentLedger =
+  quantum-stress-payment-ledger false false false false false false
+
+canonicalWarpOrWormholePaymentIsFalse :
+  warpOrWormholePayment canonicalQuantumStressPaymentLedger ≡ false
+canonicalWarpOrWormholePaymentIsFalse = refl
 
 data EnergyConditionStatus : Set where
   conditionSatisfied : EnergyConditionStatus
@@ -111,10 +124,10 @@ canonicalCasimirBackreactionObligation : CasimirBackreactionObligation
 canonicalCasimirBackreactionObligation =
   casimir-backreaction-obligation
     "DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel"
-    "source-backed Casimir geometry/force configuration required"
-    "renormalized <T_mu_nu> must be supplied separately"
-    "existing GR/W4 stress-energy interface"
-    "solve/estimate metric perturbation from same stress object"
+    "source-backed Casimir configuration required"
+    "renormalized stress model supplied separately"
+    "existing GR stress-energy interface"
+    "metric perturbation must be solved from the same stress object"
     true false false
 
 record QuantumStressEngineeringBoundary : Set where
@@ -127,9 +140,10 @@ record QuantumStressEngineeringBoundary : Set where
     macroscopicScalingDoesNotPayWarpSource : Bool
     metricPerturbationDoesNotPromoteWarpCapability : Bool
     importedEnergyConditionOwnerDoesNotBecomeUniversalAxiom : Bool
+    allowedRouteDoesNotCreatePhysicalPayment : Bool
 
 open QuantumStressEngineeringBoundary public
 
 canonicalQuantumStressBoundary : QuantumStressEngineeringBoundary
 canonicalQuantumStressBoundary =
-  quantum-stress-engineering-boundary true true true true true true true
+  quantum-stress-engineering-boundary true true true true true true true true
