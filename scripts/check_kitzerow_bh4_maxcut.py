@@ -13,6 +13,7 @@ required = [
     "DASHI/Biology/KitzerowBH4ExperimentalDiscriminatorExact.agda",
     "DASHI/Biology/KitzerowBH4ParetoAcquisitionExact.agda",
     "DASHI/Biology/KitzerowBH4Everything.agda",
+    "DASHI/Biology/KitzerowBH4EverythingFull.agda",
     "DASHI/Biology/KitzerowBH4MaxCutValidation.agda",
 ]
 for rel in required:
@@ -44,7 +45,8 @@ evidence = (ROOT / "DASHI/Biology/KitzerowBH4ConvergentEvidenceExact.agda").read
 assert "wholeModelConfirmed" in evidence
 assert "allCanonicalEvidenceReceiptsRejectWholeModelConfirmation" in evidence
 
-rollup = (ROOT / "DASHI/Biology/Everything.agda").read_text()
-assert "import DASHI.Biology.KitzerowBH4Everything" in rollup
+full = (ROOT / "DASHI/Biology/KitzerowBH4EverythingFull.agda").read_text()
+assert "import DASHI.Biology.Everything" in full
+assert "import DASHI.Biology.KitzerowBH4Everything" in full
 
 print("kitzerow-bh4 max-cut static contract: PASS")
