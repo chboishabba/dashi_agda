@@ -8,6 +8,7 @@ import DASHI.Physics.Foundations.PhysicalResidualPromotionExact as Residual
 import DASHI.Physics.Foundations.FieldGeometryMatterConsumersExact as Consumers
 import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceExact as MATBG
 import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Exact as BM
+import DASHI.Physics.CondensedMatter.MATBGBMEisensteinMatrixExact as BMEisenstein
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact as Caloric
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact as QuantumStressSource
@@ -47,7 +48,8 @@ record FieldGeometryMatterTerminalFrontier : Set where
     matbgTwistStrainGeometrySourceVertical : FrontierStatus
     literalMATBGValleyC3Weld : FrontierStatus
     bmFirstHarmonicSymbolicMatrixC3 : FrontierStatus
-    bmConcreteComplexMatrixEvaluation : FrontierStatus
+    bmExactEisensteinMatrixEvaluation : FrontierStatus
+    bmSampleW0W1Calibration : FrontierStatus
     bmContinuumMomentumLatticeExecution : FrontierStatus
     literalBMToQTMInteractingReplay : FrontierStatus
     sameSampleQTMEntropyReplay : FrontierStatus
@@ -88,6 +90,8 @@ record FieldGeometryMatterTerminalFrontier : Set where
     sourceCitationCountsAsSameObjectPayment : Bool
     sameMaterialClassCountsAsSameSample : Bool
     symbolicBMMatrixCountsAsCalibratedComplexHamiltonian : Bool
+    exactEisensteinEvaluationCountsAsSampleCalibration : Bool
+    biologyEisensteinCarrierTransfersBiologyMechanism : Bool
     simulationCountsAsPhysicalRealization : Bool
     residualCountsAsAntigravity : Bool
     energyConditionViolationCountsAsWarpCapability : Bool
@@ -112,7 +116,8 @@ currentTerminalFrontier =
     sourcePaid
     sourcePaid
     structurallyPaid
-    openIntegrationReceipt
+    structurallyPaid
+    openCalibrationOrExecution
     openCalibrationOrExecution
     externalOnly
     externalOnly
@@ -149,7 +154,7 @@ currentTerminalFrontier =
     structurallyPaid
     openCalibrationOrExecution
 
-    false false false false false false false false
+    false false false false false false false false false false
 
 record MaxCutPaidSurface : Set where
   constructor max-cut-paid-surface
@@ -160,6 +165,7 @@ record MaxCutPaidSurface : Set where
     consumerBoundary : Consumers.ConsumerCrossDomainBoundary
     matbgBoundary : MATBG.MATBG2026VerticalBoundary
     bmBoundary : BM.BMFirstHarmonicBoundary
+    bmEisensteinBoundary : BMEisenstein.BMEisensteinBoundary
     caloricBoundary : Caloric.GeneralizedCaloricBoundary
     quantumStressBoundary : QuantumStress.QuantumStressEngineeringBoundary
     quantumStressSourceBoundary : QuantumStressSource.QuantumStressSourceBoundary
@@ -179,6 +185,7 @@ canonicalMaxCutPaidSurface =
     Consumers.canonicalConsumerBoundary
     MATBG.canonicalMATBG2026VerticalBoundary
     BM.canonicalBMFirstHarmonicBoundary
+    BMEisenstein.canonicalBMEisensteinBoundary
     Caloric.canonicalGeneralizedCaloricBoundary
     QuantumStress.canonicalQuantumStressBoundary
     QuantumStressSource.canonicalQuantumStressSourceBoundary
@@ -200,6 +207,8 @@ record MaxCutStoppingRule : Set where
     unmergedSiblingMayBeImportedOnlyAfterLandingOrExplicitRetarget : Bool
     sourcePaidTheoryDoesNotCreateMeasuredPhysicalPayment : Bool
     symbolicBMMatrixDoesNotCreateSampleCalibration : Bool
+    exactEisensteinEvaluationDoesNotCreateSampleCalibration : Bool
+    mathematicalCarrierCrossPollinationDoesNotTransferDomainMechanism : Bool
     experimentPriorityDoesNotCreateTruthOrAuthority : Bool
     monolithicExportPaidTransitivelyThroughRound5Root : Bool
     exactHeadKernelReceiptMustBeObservedNotAssumed : Bool
@@ -209,4 +218,4 @@ open MaxCutStoppingRule public
 canonicalStoppingRule : MaxCutStoppingRule
 canonicalStoppingRule =
   max-cut-stopping-rule
-    true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true
