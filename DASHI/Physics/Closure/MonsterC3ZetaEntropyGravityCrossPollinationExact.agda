@@ -3,22 +3,25 @@ module DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact wh
 open import DASHI.Core.Prelude
 
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact as Existing
+import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as Single
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as StateCount
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
 
 ------------------------------------------------------------------------
--- Reuse the existing strongest zeta/C3 same-object owner rather than
--- reconstructing it.  That owner already pays:
+-- Reuse the strongest existing zeta/C3/3B owners rather than reconstructing
+-- them.  Current master pays more than the older zeta frontier alone:
 --
---   1 + zeta + zeta^2 = 0,
---   65610 * (1 + zeta + zeta^2) = 0,
---   residual trace 53,
---   dimension 196883,
---   conformal dimension / trace 196884 / 54,
---   and a same-carrier phase adapter into the 3B/VOA lane.
+--   * exact cyclotomic 1 + zeta + zeta^2 cancellation;
+--   * exact 65610-scaled regular-C3 cancellation and residual trace 53;
+--   * literal one/zeta/zeta^2 eigenspaces of ONE central action;
+--   * zeta-sector recognition as an existing leaf;
+--   * phase-resolution compilation from a single literal action producer.
 --
--- This cross-pollination adds only the new entropy/gravity consumer reading.
+-- Still unpaid is an inhabited single producer on the target physical object,
+-- plus the fixed-sector 65610 regular block and complementary 53 residual as
+-- stable same-action subspaces.  Entropy and gravity remain downstream.
 ------------------------------------------------------------------------
 
 record ZetaEntropyGravityCrossPollinationReceipt : Set where
@@ -44,13 +47,29 @@ record ZetaEntropyGravityCrossPollinationReceipt : Set where
     sameCarrierVOAPhaseAdapterExistsIsTrue :
       sameCarrierVOAPhaseAdapterExists ≡ true
 
-    selectedActualThreeBVOAReceiptsPaid : Bool
-    selectedActualThreeBVOAReceiptsPaidIsFalse :
-      selectedActualThreeBVOAReceiptsPaid ≡ false
+    literalThreePhaseFibresUseOneCentralAction : Bool
+    literalThreePhaseFibresUseOneCentralActionIsTrue :
+      literalThreePhaseFibresUseOneCentralAction ≡ true
 
-    literalRegularResidualSubspaceLiftPaid : Bool
-    literalRegularResidualSubspaceLiftPaidIsFalse :
-      literalRegularResidualSubspaceLiftPaid ≡ false
+    literalZetaRecognitionExistsAsLeaf : Bool
+    literalZetaRecognitionExistsAsLeafIsTrue :
+      literalZetaRecognitionExistsAsLeaf ≡ true
+
+    phaseResolutionCompilerFromSingleProducerPaid : Bool
+    phaseResolutionCompilerFromSingleProducerPaidIsTrue :
+      phaseResolutionCompilerFromSingleProducerPaid ≡ true
+
+    actualSingleProducerInhabited : Bool
+    actualSingleProducerInhabitedIsFalse :
+      actualSingleProducerInhabited ≡ false
+
+    fixedRegularResidualSameActionSplitPaid : Bool
+    fixedRegularResidualSameActionSplitPaidIsFalse :
+      fixedRegularResidualSameActionSplitPaid ≡ false
+
+    zetaSquaredRecognitionOrTransportPaid : Bool
+    zetaSquaredRecognitionOrTransportPaidIsFalse :
+      zetaSquaredRecognitionOrTransportPaid ≡ false
 
     fineStateCountEntropyAdapterPaid : Bool
     fineStateCountEntropyAdapterPaidIsTrue :
@@ -85,6 +104,10 @@ canonicalZetaEntropyGravityCrossPollinationReceipt =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     true refl
@@ -92,10 +115,10 @@ canonicalZetaEntropyGravityCrossPollinationReceipt =
     false refl
     false refl
     false refl
-    "lift the certified character-level 53 plus regular-C3 split onto literal same-action subspaces / selected 3B VOA receipts; then supply a physical probability/density-matrix entropy identification and an entropy-to-Lorentzian-gravity same-object adapter before any 3+1D claim"
+    "inhabit the one remaining ActualMonster3BSingleActionProducer on the literal target eigenspace, construct the action-stable fixed-sector 65610 regular block plus residual-53 complement and zeta-squared recognition/transport; then attach physical entropy and Lorentzian-gravity adapters before any 3+1D promotion"
 
 ------------------------------------------------------------------------
--- Direct reuse witnesses from the prior-art frontier.
+-- Direct reuse witnesses from the older zeta frontier.
 ------------------------------------------------------------------------
 
 existingZetaFrontier : Existing.ZetaBidiFrontier
@@ -121,25 +144,41 @@ priorOwnerPaysConformal196884And54 :
   ≡ true
 priorOwnerPaysConformal196884And54 = refl
 
-priorOwnerHasVOASameCarrierPhaseAdapter :
-  Existing.voaSameCarrierPhaseAdapterExists Existing.currentZetaBidiFrontier
+------------------------------------------------------------------------
+-- Newer literal-action frontier: these facts supersede the older wording that
+-- the literal phase carrier itself was missing.
+------------------------------------------------------------------------
+
+literalThreePhaseBoundary : Literal.LiteralThreePhaseResidualBoundary
+literalThreePhaseBoundary = Literal.canonicalLiteralThreePhaseResidualBoundary
+
+literalThreePhaseSameCentralActionPaid :
+  Literal.allThreeLiteralPhaseFibresUseSameCentralAction literalThreePhaseBoundary
   ≡ true
-priorOwnerHasVOASameCarrierPhaseAdapter = refl
+literalThreePhaseSameCentralActionPaid = refl
 
-priorOwnerDoesNotPaySelectedThreeBVOAReceipts :
-  Existing.selectedActualThreeBVOAReceiptsPaidHere Existing.currentZetaBidiFrontier
-  ≡ false
-priorOwnerDoesNotPaySelectedThreeBVOAReceipts = refl
+literalZetaRecognitionAlreadyExistingLeaf :
+  Literal.zetaRecognitionAlreadyExistingLeaf literalThreePhaseBoundary ≡ true
+literalZetaRecognitionAlreadyExistingLeaf = refl
 
-priorOwnerDoesNotPayLiteralRegularResidualSubspaceLift :
-  Existing.literalRegularResidualSubspaceLiftPaidHere Existing.currentZetaBidiFrontier
-  ≡ false
-priorOwnerDoesNotPayLiteralRegularResidualSubspaceLift = refl
+fixedRegularRecognitionStillLive :
+  Literal.fixedRegular729Times90RecognitionIsLive literalThreePhaseBoundary ≡ true
+fixedRegularRecognitionStillLive = refl
 
-priorOwnerBlocksShared196884QuantumGravityPromotion :
-  Existing.shared196884CreatesQuantumGravity Existing.currentZetaBidiFrontier
-  ≡ false
-priorOwnerBlocksShared196884QuantumGravityPromotion = refl
+fixedResidual53ComplementStillLive :
+  Literal.fixedResidual53ComplementIsLive literalThreePhaseBoundary ≡ true
+fixedResidual53ComplementStillLive = refl
+
+singleActionProducerBoundary : Single.SingleActionProducerBoundary
+singleActionProducerBoundary = Single.canonicalSingleActionProducerBoundary
+
+phaseResolutionIsCompilerOutput :
+  Single.phaseResolvedRecordIsCompilerOutput singleActionProducerBoundary ≡ true
+phaseResolutionIsCompilerOutput = refl
+
+actualSingleProducerNotInhabitedHere :
+  Single.actualSingleProducerInhabitedHere singleActionProducerBoundary ≡ false
+actualSingleProducerNotInhabitedHere = refl
 
 stateCountBoundaryStillNonPromoting :
   StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution
