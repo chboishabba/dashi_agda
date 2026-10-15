@@ -17,6 +17,10 @@ import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Exact as BM
 -- The imported Eisenstein carrier is used ONLY as exact mathematics:
 -- rational coordinates for 1, omega and omega^2 with conjugation.  No biology
 -- mechanism or authority is transferred into the condensed-matter consumer.
+--
+-- The source-reported QTM matrix-element fit w0/w1 = 0.6 is represented in a
+-- dimensionless normalized convention w1 = 1 and w0 = 3/5.  This pays a ratio
+-- coordinate only; no absolute tunnelling-energy scale is inferred.
 ------------------------------------------------------------------------
 
 phaseToEisenstein : C3.C3Phase → E.Eisenstein
@@ -32,12 +36,13 @@ phaseEvaluationConjugates C3.phase0 = refl
 phaseEvaluationConjugates C3.phase1 = refl
 phaseEvaluationConjugates C3.phase2 = refl
 
-qOne : ℚ
+qOne qThreeFifths : ℚ
 qOne = + 1 / 1
+qThreeFifths = + 3 / 5
 
-fixtureW0 fixtureW1 : ℚ
-fixtureW0 = qOne
-fixtureW1 = qOne
+qtmNormalizedW0 qtmNormalizedW1 : ℚ
+qtmNormalizedW0 = qThreeFifths
+qtmNormalizedW1 = qOne
 
 scaledPhase : ℚ → C3.C3Phase → E.Eisenstein
 scaledPhase amplitude C3.phase0 = E.eisenstein amplitude 0ℚ
@@ -85,6 +90,11 @@ evaluateTunnellingMatrix w0 w1 (BM.bm-symbolic-matrix2 aa ab ba bb) =
     (evaluateSymbolicScalar w0 w1 ba)
     (evaluateSymbolicScalar w0 w1 bb)
 
+qtmNormalizedTunnellingMatrix : BM.Valley → BM.MoireHarmonic → EisensteinMatrix2
+qtmNormalizedTunnellingMatrix v h =
+  evaluateTunnellingMatrix qtmNormalizedW0 qtmNormalizedW1
+    (BM.tunnellingMatrix v h)
+
 conjugateEisensteinMatrix : EisensteinMatrix2 → EisensteinMatrix2
 conjugateEisensteinMatrix (eisenstein-matrix2 aa ab ba bb) =
   eisenstein-matrix2
@@ -95,12 +105,9 @@ conjugateEisensteinMatrix (eisenstein-matrix2 aa ab ba bb) =
 
 evaluatedMatrixTimeReversal :
   (v : BM.Valley) (h : BM.MoireHarmonic) →
-  evaluateTunnellingMatrix fixtureW0 fixtureW1
-    (BM.tunnellingMatrix (BM.timeReverseValley v) h)
+  qtmNormalizedTunnellingMatrix (BM.timeReverseValley v) h
     ≡
-  conjugateEisensteinMatrix
-    (evaluateTunnellingMatrix fixtureW0 fixtureW1
-      (BM.tunnellingMatrix v h))
+  conjugateEisensteinMatrix (qtmNormalizedTunnellingMatrix v h)
 evaluatedMatrixTimeReversal BM.K BM.harmonic0 = refl
 evaluatedMatrixTimeReversal BM.K BM.harmonic1 = refl
 evaluatedMatrixTimeReversal BM.K BM.harmonic2 = refl
@@ -115,8 +122,9 @@ record BMEisensteinBoundary : Set where
     exactRationalAmplitudeEvaluationPaid : Bool
     exactEisensteinMatrixBackendPaid : Bool
     evaluatedTimeReversalConjugationPaid : Bool
+    sourceNormalizedW0W1RatioPaid : Bool
     biologyMechanismTransferred : Bool
-    sampleW0W1CalibrationPaid : Bool
+    absoluteTunnellingEnergyScalePaid : Bool
     continuumMomentumLatticePaid : Bool
     interactingSelfEnergyPaid : Bool
     qtmDataReplayPaid : Bool
@@ -126,4 +134,4 @@ open BMEisensteinBoundary public
 canonicalBMEisensteinBoundary : BMEisensteinBoundary
 canonicalBMEisensteinBoundary =
   bm-eisenstein-boundary
-    true true true true false false false false false
+    true true true true true false false false false false
