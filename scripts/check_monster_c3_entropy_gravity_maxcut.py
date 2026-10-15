@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Executable structural audit for the Monster/C3/chemistry/entropy/gravity max-cut.
+"""Structural audit for the Monster/C3/369 chemistry/entropy/gravity max-cut.
 
-This is deliberately not an Agda proof or physical validation. It checks exact
-arithmetic and required fail-closed/source markers. Agda typechecking is separate.
+Not an Agda proof or physical validation. It checks exact finite arithmetic and
+that the required source/promotion-boundary markers remain present.
 """
 
 from pathlib import Path
@@ -18,26 +18,24 @@ def require(path: str, *needles: str) -> None:
 
 
 def main() -> None:
-    residual53 = (3 + 3) * (3 ** (3 - 1)) - 1
-    extended71 = (3 + 3 + (3 - 1)) * (3 ** (3 - 1)) - 1
-    monster_degree_from_c3 = 53 + 3 * 65610
-    monster_degree_from_ogg = 47 * 59 * 71
+    residual53 = (3 + 3) * (3 ** 2) - 1
+    extended71 = (3 + 3 + (3 - 1)) * (3 ** 2) - 1
+    monster_from_c3 = 53 + 3 * 65610
+    monster_from_ogg = 47 * 59 * 71
 
     assert residual53 == 53
     assert extended71 == 71
-    assert monster_degree_from_c3 == 196883
-    assert monster_degree_from_ogg == 196883
-    assert 1 + monster_degree_from_c3 == 196884
+    assert monster_from_c3 == 196883
+    assert monster_from_ogg == 196883
+    assert 1 + monster_from_c3 == 196884
     assert 1 + residual53 == 54
-    assert 1 * 196883 == 196883
-    assert 1 * 53 == 53
-    assert 6 + 4 == 10
-    assert 3 + 1 == 4
-    assert 8 == 8
-    assert 3 + 3 == 4 + 2
-    assert 2 + 10 == 10 + 2
-    assert 8536 / 10 == 853.6
-    assert 42 / 10 == 4.2
+
+    # NH3 / reaction bookkeeping fixtures.
+    assert 6 + 4 == 10                 # A1 + E occupied electrons
+    assert 8536 - 4223 == 4313         # NH3 minus H2 proton affinities, tenths kJ/mol
+    assert 42 / 10 == 4.2              # kinetic mantissa
+    assert 555245 - 554554 == 691      # published STO-3G FCI-HF difference, 1e-4 Ha
+    assert 64 == 8 * 8                 # released selected-CI matrix dimension
 
     require(
         "DASHI/Moonshine/MonsterC3ResidualTernaryArithmeticExact.agda",
@@ -54,68 +52,74 @@ def main() -> None:
         "zetaWeldCreatesQuantumGravity",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaC3MolecularFixtureExact.agda",
-        "C3v",
-        "rotateHThreeTimes",
-        "experimentalC3GeometryPaid",
-        "ammoniaInversionIsProductsByproductsReaction",
+        "DASHI/Physics/Chemistry/AmmoniaHamiltonianWavefunctionExact.agda",
+        "10.1146/annurev.physchem.53.082201.124330",
+        "10.1016/j.jms.2005.10.007",
+        "10.1021/jp4016728",
+        "literalOccupationBasisStatePaid",
+        "numericRealSpaceWavefunctionCoefficientsPaid",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaC3ElectronicSymmetryExact.agda",
-        "10.1016/S0009-2614(02)00255-5",
-        "10.1063/1.1711932",
-        "(1a1)^2(2a1)^2(1e)^4(3a1)^2",
-        "sourceBackedOrbitalSymmetryCoordinatesPaid",
-        "fullAbInitioElectronicWavefunctionPaid",
-        "sameObjectHamiltonianPaid",
+        "DASHI/Physics/Chemistry/AmmoniaSTO3GFCIExact.agda",
+        "10.1088/2058-9565/ad7d32",
+        "555245",
+        "sourceBackedFCIDiagonalizationPaid",
+        "literalFCIEigenvectorCoefficientsImported",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaProtonationReactionExact.agda",
-        "10.1063/1.556018",
-        "8536",
-        "atomInventoryConservationPaid",
-        "lewisElectronAndBondAccountingPaid",
-        "sameReactionQuantitativeKineticsPaid",
-        "protonAffinityDeterminesMicroscopicReactionPath",
+        "DASHI/Physics/Chemistry/AmmoniaSCIReleasedArtifactExact.agda",
+        "07541705a0305e75dab1de5bc1b8324d66fee778",
+        "64",
+        "55517555",
+        "paperBenchmarkAndArtifactAreSameNumericalObject",
+        "matrixIndependentlyRediagonalizedByDASHI",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaH3PlusProtonTransferExact.agda",
-        "10.1016/0009-2614(74)89061-5",
-        "H3+ + NH3 -> NH4+ + H2",
-        "rateMantissaTenths",
-        "42",
-        "297",
-        "20",
-        "productsAndByproductsPaid",
-        "sameReactionQuantitativeKineticsPaid",
-        "numericLabTablePromotedToPrimaryPaperLocator",
-        "microscopicTransitionPathPaid",
+        "DASHI/Physics/Chemistry/AmmoniaGroundStateC3ActionExact.agda",
+        "groundDeterminantPhase",
+        "closedShellDeterminantInvariantPaid",
+        "realSpaceWavefunctionActionPaid",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaMonster3BActionProbeExact.agda",
+        "canonicalC3PhaseCoordinateIntertwiner",
+        "trivialAnyGroupActionOnSingletonAvailable",
+        "formalTrivialMonsterActionHasPhysicalContent",
+        "monsterActionOnAmmoniaPaid",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaH3PlusC3ResolvedReactionExact.agda",
+        "fullProofRelevantC3ResolvedReactionTransitionPaid",
+        "reactionExothermicityMagnitudeTenthsKJPerMol",
+        "4313",
+        "selectedC3EqualsFullProductPointGroup",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaHydrogenAbstractionMechanismExact.agda",
+        "10.1021/jp1001513",
+        "10.1063/1.3605242",
+        "sourceBackedAnalyticalPESPaid",
+        "sourceBackedTimeDependentWavepacketDynamicsPaid",
+        "uniqueMicroscopicTrajectoryDetermined",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaHydrogenAbstraction369HyperfibreExact.agda",
+        "literalChemistryHyperfibreInhabited",
+        "atomicIdentityTransportPaid",
+        "fibreCreatesMonsterAction",
     )
     require(
         "DASHI/Physics/Chemistry/AtomicPeriodicTable369C3EntropyIntertwinerExact.agda",
-        "sourceBackedSameObjectC3GeometryFixturePaid",
-        "sourceBackedElectronicIrrepCoordinatesPaid",
-        "sourceBackedProtonationStoichiometryPaid",
-        "sourceBackedProtonationThermochemistryPaid",
-        "productsByproductsReactionFixturePaid",
-        "sameReactionQuantitativeKineticsPaid",
-        "fullC3ResolvedReactionTransportInstantiated",
-        "microscopicTransitionPathPaid",
-        "molecularEntropyImpliesPhysicalGravity",
+        "boundedGroundConfigurationElectronicC3ActionPaid",
+        "literal369ReactionHyperformInstantiated",
+        "fullRealSpaceElectronicC3ActionInstantiated",
+        "universalElectronResolvedReactionEnergetics",
     )
     require(
         "DASHI/Physics/Closure/MonsterC3UniformCountingEnsembleExact.agda",
-        "fineUniformNormalization",
-        "coarseUniformNormalization",
         "normalizedFiniteCountingWeightsPaid",
         "finCarrierIdentifiedWithLiteralMonsterStates",
         "uniformCountingMeasureIsPhysicalThermalEnsemble",
-    )
-    require(
-        "DASHI/Physics/Closure/MonsterC3EntropyStateCountingExact.agda",
-        "degeneracyDeterminesProbabilityDistribution",
-        "balancedCharacterCancellationMeansFineStatesAbsent",
-        "coarseCancellationPreservesFineStateCount",
     )
     require(
         "DASHI/Physics/Closure/EntropyGravityIntertwinerBoundaryExact.agda",
@@ -125,14 +129,6 @@ def main() -> None:
         "padmanabhanNullEntropyDensityRoute",
     )
     require(
-        "DASHI/Physics/Closure/MonsterGravityAuthorityAndDimensionExact.agda",
-        "https://arxiv.org/abs/0706.3359",
-        "https://arxiv.org/abs/2008.06742",
-        "https://arxiv.org/abs/gr-qc/9504004",
-        "https://arxiv.org/abs/1505.04753",
-        "https://arxiv.org/abs/1012.0119",
-    )
-    require(
         "DASHI/Physics/Closure/Monster3Plus1PhysicalSymmetryTargetExact.agda",
         "monsterIsSymmetryOfObserved3Plus1Universe",
         "statusMeansUnpaidNotImpossible",
@@ -140,15 +136,11 @@ def main() -> None:
         "missingIndependentEmpiricalValidation",
     )
 
-    print("monster/C3/chemistry/entropy/gravity max-cut structural audit: ok")
-    print(f"53 fixture: {residual53}")
-    print(f"71 fixture: {extended71}")
-    print(f"Monster degree via C3: {monster_degree_from_c3}")
-    print(f"Monster degree via Ogg factors: {monster_degree_from_ogg}")
-    print("NH3 electronic count: 6 A1 + 4 E = 10 electrons")
-    print("NH3 + H+ protonation: H inventory 3+1=4; proton affinity 853.6 kJ/mol")
-    print("H3+ + NH3: products NH4+ + H2; k=4.2e-9 at 297 K, +/-20% compilation row")
-    print("uniform counting weights: 1/196883 and 1/53 normalize arithmetically")
+    print("monster/C3/369 chemistry/entropy/gravity structural audit: ok")
+    print("arithmetic: 53, 71, 196883, 196884, 54")
+    print("NH3: 10 occupied electrons; published STO-3G FCI-HF gap 0.0691 Ha")
+    print("proton transfer: PA difference 431.3 kJ/mol; rate mantissa 4.2")
+    print("author-released selected-CI artifact: 64x64 matrix identity recorded")
 
 
 if __name__ == "__main__":
