@@ -5,6 +5,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Integer using (+_; -[1+_])
 
+import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Physics.Units.MechanicalDimensionExact as Dim
 import DASHI.Physics.Textile.TextileMechanicalDimensionExact as TextileDim
 import DASHI.Physics.Textile.TextileMechanicalFibreExact as Mechanics
@@ -122,7 +123,7 @@ textileTorqueOrientation :
     {state : Mechanics.YarnConstitutiveState Scalar} →
   (voxel : Torque369.BracketVoxel) →
   (receipt : BendingTorsionConstitutiveReceipt Scalar state) →
-  DASHI.Algebra.BalancedTernary.Trit
+  BT.Trit
 textileTorqueOrientation voxel receipt =
   Torque369.orientedTorqueOrientation
     (textileOrientedTorque voxel receipt)
@@ -139,8 +140,7 @@ everyYarnStateIsNotDeclaredEulerBernoulli ()
 
 data EveryYarnStateObeysSaintVenantTorsion : Set where
 
-everyYarnStateIsNotDeclaredSaintVenantTorsion :
-  EveryYarnStateObeysSaintVenantTorsion → ⊥
+everyYarnStateIsNotDeclaredSaintVenantTorsion → ⊥
 everyYarnStateIsNotDeclaredSaintVenantTorsion ()
 
 data BendingTorsionReceiptDeterminesFailureEvolution : Set where
