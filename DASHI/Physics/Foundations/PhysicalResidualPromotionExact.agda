@@ -13,7 +13,7 @@ import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
 -- A non-zero residual is an observation relative to an admitted-channel set.
 -- It is not a mechanism label.  Stronger promotion classes require explicit
 -- nuisance closure, repeatability, scaling, apparatus-change and independent
--- replication receipts.
+-- replication receipts tied to the exact candidate being promoted.
 ------------------------------------------------------------------------
 
 data NuisanceClosureStatus : Set where
@@ -65,23 +65,27 @@ data ResidualDirectAntigravityPermission : Set where
 data ResidualDirectReactionlessPermission : Set where
 data ResidualDirectNewPhysicsPermission : Set where
 
-record StrongResidualPromotionEvidence : Set where
+record StrongResidualPromotionEvidence
+    (candidate : AnomalousMomentumCandidate) : Set where
   constructor strong-residual-promotion-evidence
   field
-    strongNuisanceStatus : NuisanceClosureStatus
-    strongNuisanceClosed : strongNuisanceStatus ≡ nuisanceClosedByReceipt
+    candidateNuisanceClosed :
+      nuisanceStatus candidate ≡ nuisanceClosedByReceipt
 
-    strongRepeated : Bool
-    strongRepeatedIsTrue : strongRepeated ≡ true
+    candidateRepeatedIsTrue :
+      repeatedOnSameApparatus (replication candidate) ≡ true
 
-    strongScaling : Bool
-    strongScalingIsTrue : strongScaling ≡ true
+    candidateScalingIsTrue :
+      predictiveScalingObserved (replication candidate) ≡ true
 
-    strongApparatusChange : Bool
-    strongApparatusChangeIsTrue : strongApparatusChange ≡ true
+    candidateApparatusChangeIsTrue :
+      survivesApparatusChange (replication candidate) ≡ true
 
-    strongIndependentReplication : Bool
-    strongIndependentReplicationIsTrue : strongIndependentReplication ≡ true
+    candidateIndependentReplicationIsTrue :
+      independentlyReplicated (replication candidate) ≡ true
+
+    candidateRemainsMechanismNeutral :
+      remainsMechanismNeutral candidate ≡ true
 
     sameObjectCalibrationReference : String
 
@@ -97,9 +101,10 @@ record ResidualPromotionBoundary : Set where
     gravityNeedsIndependentMetricOrGravityConsumer : Bool
     mechanismPromotionNeedsSeparateEvidence : Bool
     strongPromotionRequiresProofCarryingReplication : Bool
+    strongEvidenceMustReferToExactCandidate : Bool
 
 open ResidualPromotionBoundary public
 
 canonicalResidualPromotionBoundary : ResidualPromotionBoundary
 canonicalResidualPromotionBoundary =
-  residual-promotion-boundary true true true true true true true
+  residual-promotion-boundary true true true true true true true true
