@@ -13,6 +13,16 @@ sharedC3CharacterCoordinatePaid :
     Probe.canonicalAmmoniaMonsterProbeBoundary ≡ true
 sharedC3CharacterCoordinatePaid = refl
 
+trivialAnyGroupActionExists :
+  Probe.AmmoniaMonsterProbeBoundary.trivialAnyGroupActionOnSingletonAvailable
+    Probe.canonicalAmmoniaMonsterProbeBoundary ≡ true
+trivialAnyGroupActionExists = refl
+
+trivialActionHasNoPhysicalMonsterContent :
+  Probe.AmmoniaMonsterProbeBoundary.formalTrivialMonsterActionHasPhysicalContent
+    Probe.canonicalAmmoniaMonsterProbeBoundary ≡ false
+trivialActionHasNoPhysicalMonsterContent = refl
+
 monsterActionStillUnpaid :
   Probe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
     Probe.canonicalAmmoniaMonsterProbeBoundary ≡ false
