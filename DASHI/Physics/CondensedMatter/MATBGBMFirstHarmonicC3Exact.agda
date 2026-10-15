@@ -15,14 +15,15 @@ open MATBG public using (Valley; K; KPrime; timeReverseValley)
 --
 -- Source role: Bistritzer & MacDonald (2011), already attributed by the
 -- Twistronics owner, supplies the continuum-model / three first-harmonic
--- interlayer-coupling architecture.  This DASHI owner formalizes only the
--- exact symbolic phase skeleton in a declared convention:
+-- interlayer-coupling architecture.  This DASHI owner formalizes the exact
+-- symbolic phase and 2x2 tunnelling-matrix skeleton in a declared convention:
 --
 --   T_j(v) = [ w0, w1 * u(v,j) ; w1 * conjugate(u(v,j)), w0 ]
 --
 -- with j in three C3-related moire harmonics and the two valleys related by
--- complex conjugation.  C3Phase is a symbolic third-root carrier; no claim is
--- made that it is a calibrated complex-number matrix or a fitted sample H.
+-- complex conjugation.  C3Phase is a symbolic third-root carrier; this owner
+-- does not claim a calibrated complex-number Hamiltonian, continuum momentum
+-- truncation, interacting self-energy, or fitted sample parameters.
 ------------------------------------------------------------------------
 
 data MoireHarmonic : Set where
@@ -42,9 +43,6 @@ rotateHarmonicCubed harmonic2 = refl
 
 ------------------------------------------------------------------------
 -- Convention-explicit off-diagonal phase table.
---
--- For K, advancing the harmonic multiplies the upper off-diagonal phase by
--- zeta^{-1}=phase2.  K' is its time-reversed conjugate and advances by zeta.
 ------------------------------------------------------------------------
 
 upperOffDiagonalPhase : Valley → MoireHarmonic → C3.C3Phase
@@ -93,8 +91,89 @@ timeReversalConjugatesUpper KPrime harmonic1 = refl
 timeReversalConjugatesUpper KPrime harmonic2 = refl
 
 ------------------------------------------------------------------------
--- Typed BM block architecture.  Values remain symbolic until a calibrated
--- scalar/matrix backend is supplied.
+-- Exact symbolic 2x2 tunnelling matrices.
+------------------------------------------------------------------------
+
+data BMSymbolicScalar : Set where
+  w0Term : BMSymbolicScalar
+  w1PhaseTerm : C3.C3Phase → BMSymbolicScalar
+
+conjugateSymbolicScalar : BMSymbolicScalar → BMSymbolicScalar
+conjugateSymbolicScalar w0Term = w0Term
+conjugateSymbolicScalar (w1PhaseTerm p) =
+  w1PhaseTerm (C3.conjugatePhase p)
+
+record BMSymbolicMatrix2 : Set where
+  constructor bm-symbolic-matrix2
+  field
+    entryAA : BMSymbolicScalar
+    entryAB : BMSymbolicScalar
+    entryBA : BMSymbolicScalar
+    entryBB : BMSymbolicScalar
+
+open BMSymbolicMatrix2 public
+
+tunnellingMatrix : Valley → MoireHarmonic → BMSymbolicMatrix2
+tunnellingMatrix v h =
+  bm-symbolic-matrix2
+    w0Term
+    (w1PhaseTerm (upperOffDiagonalPhase v h))
+    (w1PhaseTerm (lowerOffDiagonalPhase v h))
+    w0Term
+
+conjugateSymbolicMatrix : BMSymbolicMatrix2 → BMSymbolicMatrix2
+conjugateSymbolicMatrix (bm-symbolic-matrix2 aa ab ba bb) =
+  bm-symbolic-matrix2
+    (conjugateSymbolicScalar aa)
+    (conjugateSymbolicScalar ab)
+    (conjugateSymbolicScalar ba)
+    (conjugateSymbolicScalar bb)
+
+advanceUpperScalar : Valley → BMSymbolicScalar → BMSymbolicScalar
+advanceUpperScalar v w0Term = w0Term
+advanceUpperScalar v (w1PhaseTerm p) =
+  w1PhaseTerm (C3.multiplyPhase (valleyRotationCharacter v) p)
+
+advanceLowerScalar : Valley → BMSymbolicScalar → BMSymbolicScalar
+advanceLowerScalar v w0Term = w0Term
+advanceLowerScalar v (w1PhaseTerm p) =
+  w1PhaseTerm
+    (C3.multiplyPhase
+      (C3.conjugatePhase (valleyRotationCharacter v))
+      p)
+
+advanceTunnellingMatrix : Valley → BMSymbolicMatrix2 → BMSymbolicMatrix2
+advanceTunnellingMatrix v (bm-symbolic-matrix2 aa ab ba bb) =
+  bm-symbolic-matrix2
+    aa
+    (advanceUpperScalar v ab)
+    (advanceLowerScalar v ba)
+    bb
+
+tunnellingMatrixTimeReversal :
+  (v : Valley) (h : MoireHarmonic) →
+  tunnellingMatrix (timeReverseValley v) h
+    ≡ conjugateSymbolicMatrix (tunnellingMatrix v h)
+tunnellingMatrixTimeReversal K harmonic0 = refl
+tunnellingMatrixTimeReversal K harmonic1 = refl
+tunnellingMatrixTimeReversal K harmonic2 = refl
+tunnellingMatrixTimeReversal KPrime harmonic0 = refl
+tunnellingMatrixTimeReversal KPrime harmonic1 = refl
+tunnellingMatrixTimeReversal KPrime harmonic2 = refl
+
+tunnellingMatrixC3Covariance :
+  (v : Valley) (h : MoireHarmonic) →
+  tunnellingMatrix v (rotateHarmonic h)
+    ≡ advanceTunnellingMatrix v (tunnellingMatrix v h)
+tunnellingMatrixC3Covariance K harmonic0 = refl
+tunnellingMatrixC3Covariance K harmonic1 = refl
+tunnellingMatrixC3Covariance K harmonic2 = refl
+tunnellingMatrixC3Covariance KPrime harmonic0 = refl
+tunnellingMatrixC3Covariance KPrime harmonic1 = refl
+tunnellingMatrixC3Covariance KPrime harmonic2 = refl
+
+------------------------------------------------------------------------
+-- Typed BM block architecture.
 ------------------------------------------------------------------------
 
 record BMTunnellingBlock : Set where
@@ -104,22 +183,14 @@ record BMTunnellingBlock : Set where
     harmonic : MoireHarmonic
     aaLikeAmplitudeReference : String
     abLikeAmplitudeReference : String
-    upperPhase : C3.C3Phase
-    lowerPhase : C3.C3Phase
-    upperPhaseMatchesConvention :
-      upperPhase ≡ upperOffDiagonalPhase valley harmonic
-    lowerPhaseMatchesConvention :
-      lowerPhase ≡ lowerOffDiagonalPhase valley harmonic
+    matrix : BMSymbolicMatrix2
+    matrixMatchesConvention : matrix ≡ tunnellingMatrix valley harmonic
 
 open BMTunnellingBlock public
 
 canonicalTunnellingBlock : Valley → MoireHarmonic → BMTunnellingBlock
 canonicalTunnellingBlock v h =
-  bm-tunnelling-block
-    v h "w0" "w1"
-    (upperOffDiagonalPhase v h)
-    (lowerOffDiagonalPhase v h)
-    refl refl
+  bm-tunnelling-block v h "w0" "w1" (tunnellingMatrix v h) refl
 
 record BMFirstHarmonicHamiltonianContract : Set where
   constructor bm-first-harmonic-hamiltonian-contract
@@ -135,7 +206,8 @@ record BMFirstHarmonicHamiltonianContract : Set where
     valleyResolved : Bool
     layerResolved : Bool
     sublatticeResolved : Bool
-    scalarMatrixBackendPaid : Bool
+    symbolicMatrixBackendPaid : Bool
+    concreteComplexMatrixBackendPaid : Bool
     sampleParametersPaid : Bool
 
 open BMFirstHarmonicHamiltonianContract public
@@ -150,7 +222,7 @@ canonicalKValleyBMContract =
     (canonicalTunnellingBlock K harmonic0)
     (canonicalTunnellingBlock K harmonic1)
     (canonicalTunnellingBlock K harmonic2)
-    true true true true false false
+    true true true true true false false
 
 record BMFirstHarmonicBoundary : Set where
   constructor bm-first-harmonic-boundary
@@ -159,20 +231,24 @@ record BMFirstHarmonicBoundary : Set where
     exactThreeHarmonicC3PhaseSkeletonPaid : Bool
     exactValleyConjugationPaid : Bool
     exactHarmonicRotationClosurePaid : Bool
+    symbolicTwoByTwoMatrixBackendPaid : Bool
+    matrixLevelTimeReversalPaid : Bool
+    matrixLevelC3CovariancePaid : Bool
     scalarComplexMatrixBackendPaid : Bool
     continuumMomentumLatticePaid : Bool
     sampleParameterCalibrationPaid : Bool
     interactingSelfEnergyPaid : Bool
     qtmForwardModelPaid : Bool
     qtmDataReplayPaid : Bool
-    symbolicPhaseSkeletonIsMeasuredHamiltonian : Bool
+    symbolicMatrixIsMeasuredHamiltonian : Bool
 
 open BMFirstHarmonicBoundary public
 
 canonicalBMFirstHarmonicBoundary : BMFirstHarmonicBoundary
 canonicalBMFirstHarmonicBoundary =
   bm-first-harmonic-boundary
-    true true true true false false false false false false false
+    true true true true true true true
+    false false false false false false false
 
 record BMFirstHarmonicAttributionBoundary : Set where
   constructor bm-first-harmonic-attribution-boundary
