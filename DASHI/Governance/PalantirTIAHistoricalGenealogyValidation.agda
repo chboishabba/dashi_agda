@@ -7,6 +7,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Governance.PalantirTIAHistoricalGenealogyExact as G
 import DASHI.Governance.PalantirTIAPartyBenefitDistributionExact as Distribution
 import DASHI.Governance.PalantirTIAInvestigativeParetoSnowballExact as Pareto
+import DASHI.Governance.TIAComponentDispositionAtlasExact as Disposition
+import DASHI.Governance.WadeRoleChronologyExact as Wade
+import DASHI.Governance.PalantirEarlyIntelDevelopmentChronologyExact as Early
+import DASHI.Governance.InformationAwarenessProgrammeMigrationHypergraphExact as Migration
 
 validation :
   G.tiaProgrammeDocumented G.canonicalTIAGenealogy ≡ true
@@ -20,9 +24,6 @@ validation :
   × G.iranContraAnalogyCreatesGenealogy G.canonicalTIAGenealogy ≡ false
 validation = refl , refl , refl , refl , refl , refl , refl , refl , refl
 
--- Distributional max-cut: first-/second-/third-order consequence is a path
--- coordinate, not a truth or intent score.  Aggregate national-security value
--- cannot recover party benefit, burden, voice, or authority/control.
 distributionValidation :
   Distribution.firstOrderBenefitDoesNotEstablishIntent ≡ true
   × Distribution.secondOrderBenefitDoesNotEstablishControl ≡ true
@@ -31,8 +32,6 @@ distributionValidation :
   × Distribution.currentStrongPrivatizationClaimStillBlocked ≡ true
 distributionValidation = refl , refl , refl , refl , refl
 
--- Acquisition max-cut: exact source/object payment and live-fibre splitting
--- dominate broad keyword sweeping; a route priority never pays truth/authority.
 paretoValidation :
   Pareto.officialWadeTIARoleOnFrontier ≡ true
   × Pareto.tiaDispositionOnFrontier ≡ true
@@ -41,3 +40,20 @@ paretoValidation :
   × Pareto.paretoPriorityCreatesHistoricalTruth ≡ false
   × Pareto.offFrontierDeletesRequirement ≡ false
 paretoValidation = refl , refl , refl , refl , refl , refl
+
+terminalMaxCutValidation :
+  Disposition.publicTerminationReceiptPaid ≡ true
+  × Disposition.nfipContinuationExceptionPaid ≡ true
+  × Disposition.namedSuccessorComponentIdentityPaid ≡ false
+  × Wade.dualCIAAndICCIOReceiptPaid ≡ true
+  × Wade.primaryWadeTIARoleReceiptPaid ≡ false
+  × Wade.secondaryWadeTIAClaimRetained ≡ true
+  × Early.inQTel2005InvestmentChronologyPaid ≡ true
+  × Early.ciaAnalystRefinement2005To2008Paid ≡ true
+  × Early.nctcLiveDatabaseBetaSecondaryReceiptPaid ≡ true
+  × Early.tiaAssetOrCodeTransferPaid ≡ false
+  × Migration.programmeReconstitutionPromoted ≡ false
+  × Migration.capabilityMigrationHypothesisLive ≡ true
+  × Migration.networkPathCreatesDirectTransfer ≡ false
+terminalMaxCutValidation =
+  refl , refl , refl , refl , refl , refl , refl , refl , refl , refl , refl , refl , refl
