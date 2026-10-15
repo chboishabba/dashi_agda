@@ -3,6 +3,7 @@ module DASHI.Physics.CondensedMatter.MagnetocaloricCrystalQuantumConsumerExact w
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
+import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact as Symmetry
 import DASHI.Physics.CondensedMatter.FlatBandObservableFibreExact as Fibre
 import DASHI.Physics.Thermodynamics.MagnetocaloricMaterial as MCE
 
@@ -10,7 +11,8 @@ import DASHI.Physics.Thermodynamics.MagnetocaloricMaterial as MCE
 -- Condensed-matter consumer for the magnetocaloric lane.
 --
 -- Existing DASHI crystal/altermagnet work keeps site, momentum, spin and
--- measurement channels separate.  This bridge applies the same rule to a
+-- measurement channels separate and already factors crystal actions through
+-- the reusable GroupAction surface.  This bridge applies the same rule to a
 -- magnetocaloric material: crystal phase, magnetic order, electronic state,
 -- band energy and thermodynamic response are projections of a shared carrier,
 -- not definitionally identical observables.
@@ -22,7 +24,6 @@ record MagnetocaloricCrystalConsumer
   field
     Momentum ElectronicEnergy ElectronicState : Set
     CrystalPhase MagneticOrder : Set
-    CrystalSymmetry MagneticSymmetry : Set
 
     band : Fibre.BandSystem Momentum ElectronicEnergy
     momentumOf : MaterialState → Momentum
@@ -30,8 +31,12 @@ record MagnetocaloricCrystalConsumer
     crystalPhase : MaterialState → CrystalPhase
     magneticOrder : MaterialState → MagneticOrder
 
-    crystalSymmetry : MaterialState → CrystalSymmetry
-    magneticSymmetry : MaterialState → MagneticSymmetry
+    crystalAction : Symmetry.GroupAction
+    magneticAction : Symmetry.GroupAction
+    CrystalActionIdentification : Set
+    MagneticActionIdentification : Set
+    crystalActionIdentification : CrystalActionIdentification
+    magneticActionIdentification : MagneticActionIdentification
 
     CrystalIdentificationAdmissible : MaterialState → Set
     MagneticIdentificationAdmissible : MaterialState → Set
@@ -79,6 +84,8 @@ record MagnetocaloricCondensedMatterBoundary : Set where
   constructor magnetocaloric-condensed-matter-boundary
   field
     sharedCarrierDoesNotIdentifyObservables : Bool
+    crystalActionRequiresPhysicalIdentification : Bool
+    magneticActionRequiresPhysicalIdentification : Bool
     crystalSymmetryDoesNotDetermineCaloricMagnitude : Bool
     bandEnergyDoesNotDetermineMagneticOrder : Bool
     magneticOrderDoesNotDetermineEntropyChangeWithoutModel : Bool
@@ -87,4 +94,5 @@ record MagnetocaloricCondensedMatterBoundary : Set where
 
 canonicalMagnetocaloricCondensedMatterBoundary : MagnetocaloricCondensedMatterBoundary
 canonicalMagnetocaloricCondensedMatterBoundary =
-  magnetocaloric-condensed-matter-boundary true true true true true true
+  magnetocaloric-condensed-matter-boundary
+    true true true true true true true true
