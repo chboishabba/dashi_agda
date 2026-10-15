@@ -17,6 +17,8 @@ import DASHI.Biology.IITXORGridFibreCircuitBridgeExact
 import DASHI.Biology.IITXORGridFibreCalibrationExact
 import DASHI.Biology.IITXORProbabilityReceiptExact
 import DASHI.Biology.IITXOREffectCutReceiptExact
+import DASHI.Biology.IITBooleanParityMinimalSufficiencyExact
+import DASHI.Biology.IITParityTorqueGluingBoundaryExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
@@ -25,6 +27,7 @@ import DASHI.Biology.IITCausalPantsOrientationBoundaryExact
 import DASHI.Biology.IITMatchedFabricGateExperimentExact
 import DASHI.Biology.IIT369MatchedAlgebraControlExact
 import DASHI.Biology.IITTernaryLatticeStateSpaceScalingExact
+import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact
 import DASHI.Biology.IITPointedTernary27FaceGluingExact
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact
