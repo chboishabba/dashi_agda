@@ -23,6 +23,7 @@ open import DASHI.Core.Prelude
 import DASHI.Algebra.BalancedTernary as BT
 import DASHI.Algebra.TriadicDepthOneCharacters as C3Base
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
+import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SO3
 import DASHI.Physics.Foundations.TorqueTrialectic369Exact as Torque
 import DASHI.Reasoning.TernarySynthesisCellComplexExact as Cells
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
@@ -31,13 +32,13 @@ import DASHI.Moonshine.C3FourierConjugationExact as C3
 BracketVoxel : Set
 BracketVoxel = Torque.BracketVoxel
 
-outputAxis : BracketVoxel → DASHI.Physics.Closure.SU2SO3369HypervoxelBridge.SU2Axis
+outputAxis : BracketVoxel → SO3.SU2Axis
 outputAxis = Torque.outputAxis
 
-leftAxis : BracketVoxel → DASHI.Physics.Closure.SU2SO3369HypervoxelBridge.SU2Axis
+leftAxis : BracketVoxel → SO3.SU2Axis
 leftAxis = Torque.leverAxis
 
-rightAxis : BracketVoxel → DASHI.Physics.Closure.SU2SO3369HypervoxelBridge.SU2Axis
+rightAxis : BracketVoxel → SO3.SU2Axis
 rightAxis = Torque.forceAxis
 
 bracketOrientation : BracketVoxel → BT.Trit
@@ -88,7 +89,7 @@ bracketPantsPath = Torque.torquePantsPath
 -- axis-low/mid/high are only an exact three-axis coordinate chart here.
 ------------------------------------------------------------------------
 
-xAxis yAxis zAxis : DASHI.Physics.Closure.SU2SO3369HypervoxelBridge.SU2Axis
+xAxis yAxis zAxis : SO3.SU2Axis
 xAxis = Hyper.axis-low
 yAxis = Hyper.axis-mid
 zAxis = Hyper.axis-high
