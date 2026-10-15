@@ -10,13 +10,14 @@ open import Data.Product using (_×_; _,_)
 import DASHI.Biology.KitzerowBH4EvidenceAtlasExact as Atlas
 
 ------------------------------------------------------------------------
--- PRIORITY / CONTACT / ATTRIBUTION GENEALOGY
+-- PRIORITY / CONTACT / REFERENCE / ATTRIBUTION GENEALOGY
 --
--- Four independent questions are carried explicitly:
---   A. Was a proposition public before a later work?       (priority)
---   B. Was the later actor plausibly or demonstrably exposed? (contact/access)
---   C. How specific is the scientific/structural overlap?  (scientific relation)
---   D. Is there sufficient evidence for an attribution breach? (attribution)
+-- Five independent questions are carried explicitly:
+--   A. Was a proposition public before a later work?          (priority)
+--   B. Was the later actor plausibly/demonstrably exposed?    (contact/access)
+--   C. Does the later publication itself cite/reference it?   (publication reference)
+--   D. How specific is the scientific/structural overlap?     (scientific relation)
+--   E. Is there sufficient evidence for an attribution breach? (attribution)
 --
 -- No projection between these coordinates is available by definition.
 ------------------------------------------------------------------------
@@ -44,6 +45,26 @@ data NoveltyClass : Set where
   distinctiveMechanismClaim : NoveltyClass
   laterIndependentFinding : NoveltyClass
   noveltyUnresolved : NoveltyClass
+
+data PublicationReferenceStatus : Set where
+  explicitKitzerowCitation : PublicationReferenceStatus
+  explicitKitzerowAcknowledgment : PublicationReferenceStatus
+  kitzerowNotFoundInArticleText : PublicationReferenceStatus
+  creatorReportsUncited : PublicationReferenceStatus
+  publicationReferenceUnresolved : PublicationReferenceStatus
+
+record PublicationReferenceEvidence : Set where
+  constructor publicationReferenceEvidence
+  field
+    referenceLabel : String
+    publicationReferenceStatus : PublicationReferenceStatus
+    verification : VerificationLevel
+    sourceLocator : String
+    searchOrEvidence : String
+    articleAuthorContactEstablished : Bool
+    boundedReading : String
+
+open PublicationReferenceEvidence public
 
 record GenealogyNode : Set where
   constructor genealogyNode
@@ -123,7 +144,7 @@ stanfordContactClaim2023 =
     creatorTimelineClaim
     noveltyUnresolved
     "Kitzerow documented timeline links an email screenshot"
-    "Acquired public evidence establishes that Kitzerow claims a dated outreach and supplies a linked screenshot. Until the underlying correspondence is independently inspected and participants tied to the later study, encode this as explicitContactClaim rather than verifiedPrimaryContact."
+    "Acquired public evidence establishes that Kitzerow claims a dated outreach and supplies a linked screenshot. The linked Adobe artifact could not be fetched in this acquisition environment. Until the underlying correspondence is independently inspected and participants tied to the later study, encode this as explicitContactClaim rather than verifiedPrimaryContact."
 
 princetonComplaint2025 : GenealogyNode
 princetonComplaint2025 =
@@ -137,6 +158,57 @@ princetonComplaint2025 =
     noveltyUnresolved
     "Kitzerow documented timeline"
     "Post-publication complaint establishes neither pre-publication exposure nor wrongdoing. The same timeline reports a December 2025 Princeton response finding no evidence of wrongdoing in its internal review."
+
+------------------------------------------------------------------------
+-- Publication-reference evidence is deliberately separate from contact.
+-- Current primary/public full-text acquisition does NOT establish that the
+-- later papers themselves cite Kitzerow.  In fact, Kitzerow's Nov 2025 public
+-- statement describes the Japan/Brazil/Stanford/Princeton results as uncited.
+------------------------------------------------------------------------
+
+stanford2025ReferenceEvidence : PublicationReferenceEvidence
+stanford2025ReferenceEvidence =
+  publicationReferenceEvidence
+    "Jang/Takahashi/Huguenard 2025 Science Advances reference check"
+    kitzerowNotFoundInArticleText
+    primaryDocumentInspected
+    "PMC12366697 / DOI 10.1126/sciadv.adw4682"
+    "Full-text search acquired no match for 'Kitzerow'; separate creator timeline claims Stanford-affiliated outreach in 2023."
+    false
+    "No article citation was found. This does not negate the separate contact claim; it means contact and article attribution are different coordinates."
+
+ojha2026ReferenceEvidence : PublicationReferenceEvidence
+ojha2026ReferenceEvidence =
+  publicationReferenceEvidence
+    "Ojha et al. 2026 Molecular Psychiatry reference check"
+    kitzerowNotFoundInArticleText
+    primaryDocumentInspected
+    "DOI 10.1038/s41380-026-03514-6"
+    "Nature full-text search acquired no match for 'Kitzerow'."
+    false
+    "The NO-TSC2-mTOR result may supply strong bounded mechanistic convergence without being a citation of Kitzerow."
+
+brazil2025ReferenceEvidence : PublicationReferenceEvidence
+brazil2025ReferenceEvidence =
+  publicationReferenceEvidence
+    "Colpani Filho et al. 2025 Brain Sciences reference check"
+    creatorReportsUncited
+    primaryDocumentInspected
+    "DOI 10.3390/brainsci15020151; Kitzerow Nov 15 2025 public statement"
+    "MDPI full text contains the review's source corpus and 1967-2021 search window; no Kitzerow reference was located in this pass. Kitzerow publicly describes this and the Japan/Stanford/Princeton studies as uncited."
+    false
+    "The review's submission/publication chronology and conceptual overlap are provenance questions separate from article citation and from the age of its underlying evidence corpus."
+
+creatorUncitedFour2025 : PublicationReferenceEvidence
+creatorUncitedFour2025 =
+  publicationReferenceEvidence
+    "Kitzerow public statement that four convergent 2025 pillars remained uncited"
+    creatorReportsUncited
+    publicTimestampRecord
+    "Change.org update dated 2025-11-15"
+    "Kitzerow names Japan, Brazil, Stanford and Princeton and says none cited her work."
+    false
+    "This is primary evidence for what Kitzerow herself claimed about citation status, not independent proof of access or attribution breach."
 
 record ContactEvidence : Set where
   constructor contactEvidence
@@ -157,7 +229,7 @@ stanfordContactEvidence =
     "Stanford 2023 outreach claimed in Kitzerow timeline"
     Atlas.explicitContactClaim
     creatorTimelineClaim
-    "timeline entry 2023-11-27; linked Adobe email screenshot"
+    "timeline entry 2023-11-27; linked Adobe email screenshot (not fetchable in current acquisition environment)"
     false
     false
     false
@@ -188,14 +260,14 @@ stanfordAssessment =
   mkOpenAssessment
     "K-A-STANFORD"
     true true false false true Atlas.attributionConcern
-    "Temporal priority and bounded circuit-level structural overlap coexist with a claimed 2023 Stanford-affiliated contact. The acquired record does not yet tie that contact to the later paper authors or establish transfer/use of the relevant mechanism."
+    "Temporal priority and bounded circuit-level structural overlap coexist with a claimed 2023 Stanford-affiliated contact. The later paper itself does not contain a Kitzerow citation in the acquired full text. The acquired record does not yet tie the 2023 contact to the later paper authors or establish transfer/use of the relevant mechanism."
 
 brazilAssessment : AttributionAssessment
 brazilAssessment =
   mkOpenAssessment
     "K-A-BRAZIL"
     true true false false true Atlas.attributionConcern
-    "The 2025 BH4 autism systematic review is later than Kitzerow's 2023-24 public synthesis, but its evidentiary corpus largely predates that synthesis. Similarity therefore raises a chronology question without establishing derivation."
+    "The 2025 BH4 autism systematic review is later than Kitzerow's 2023-24 public synthesis, but its evidentiary corpus covers 1967-2021 and its analysis was conducted 2020-2021. Similarity therefore raises a synthesis-chronology question without establishing derivation."
 
 princetonAssessment : AttributionAssessment
 princetonAssessment =
@@ -253,6 +325,8 @@ record GenealogyBoundary : Set where
     priorityImpliesNovelty : Bool
     noveltyImpliesAccess : Bool
     accessImpliesUse : Bool
+    contactImpliesArticleCitation : Bool
+    articleCitationImpliesDerivation : Bool
     useImpliesMisconduct : Bool
     structuralOverlapImpliesCopying : Bool
     plagiarismProven : Bool
@@ -260,7 +334,7 @@ record GenealogyBoundary : Set where
 
 canonicalGenealogyBoundary : GenealogyBoundary
 canonicalGenealogyBoundary =
-  genealogyBoundary false false false false false false refl
+  genealogyBoundary false false false false false false false false refl
 
 nodes : List GenealogyNode
 nodes =
@@ -270,6 +344,14 @@ nodes =
   ∷ allostaticPreprint2024
   ∷ stanfordContactClaim2023
   ∷ princetonComplaint2025
+  ∷ []
+
+referenceEvidence : List PublicationReferenceEvidence
+referenceEvidence =
+  stanford2025ReferenceEvidence
+  ∷ ojha2026ReferenceEvidence
+  ∷ brazil2025ReferenceEvidence
+  ∷ creatorUncitedFour2025
   ∷ []
 
 assessments : List AttributionAssessment
