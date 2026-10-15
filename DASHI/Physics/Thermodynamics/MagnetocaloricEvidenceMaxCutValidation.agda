@@ -12,6 +12,24 @@ threeMonthStillPreliminary :
   ≡ MaxCut.preliminaryOnly
 threeMonthStillPreliminary = refl
 
+oneTeslaFunctionCheckPaid :
+  MaxCut.PaymentRow.status MaxCut.oneTeslaAdiabaticCharacterizationRow
+  ≡ MaxCut.peerReviewedPaid
+oneTeslaFunctionCheckPaid = refl
+
+agingOperatingPointIsPartial :
+  MaxCut.PaymentRow.status MaxCut.agingTestOperatingPointRow
+  ≡ MaxCut.peerReviewedPartial
+agingOperatingPointIsPartial = refl
+
+agingOperatingPointDoesNotCloseFieldMap :
+  MaxCut.PaymentRow.status MaxCut.fieldMapRow ≡ MaxCut.structurallyTyped
+agingOperatingPointDoesNotCloseFieldMap = refl
+
+agingOperatingPointDoesNotCloseCycleControl :
+  MaxCut.PaymentRow.status MaxCut.cycleTimingRow ≡ MaxCut.structurallyTyped
+agingOperatingPointDoesNotCloseCycleControl = refl
+
 longTermLifetimeOpen :
   MaxCut.PaymentRow.status MaxCut.longTermLifetimeRow ≡ MaxCut.openSameObjectAcquisition
 longTermLifetimeOpen = refl
