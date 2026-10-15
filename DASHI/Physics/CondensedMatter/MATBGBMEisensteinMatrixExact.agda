@@ -3,7 +3,8 @@ module DASHI.Physics.CondensedMatter.MATBGBMEisensteinMatrixExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_ ; _/_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import DASHI.Algebra.TriadicDepthOneCharacters as C3
@@ -48,14 +49,18 @@ scaledPhaseEvaluationConjugates :
   (amplitude : ℚ) (p : C3.C3Phase) →
   scaledPhase amplitude (C3.conjugatePhase p)
     ≡ E.conjugate (scaledPhase amplitude p)
-scaledPhaseEvaluationConjugates amplitude C3.phase0 = refl
-scaledPhaseEvaluationConjugates amplitude C3.phase1 = refl
+scaledPhaseEvaluationConjugates amplitude C3.phase0 =
+  cong₂ E.eisenstein
+    (ℚRing.solve-∀ amplitude)
+    (ℚRing.solve-∀ amplitude)
+scaledPhaseEvaluationConjugates amplitude C3.phase1 =
+  cong₂ E.eisenstein
+    (ℚRing.solve-∀ amplitude)
+    (ℚRing.solve-∀ amplitude)
 scaledPhaseEvaluationConjugates amplitude C3.phase2 =
   cong₂ E.eisenstein
     (ℚRing.solve-∀ amplitude)
     (ℚRing.solve-∀ amplitude)
-  where
-    open import Relation.Binary.PropositionalEquality using (cong₂)
 
 record EisensteinMatrix2 : Set where
   constructor eisenstein-matrix2
