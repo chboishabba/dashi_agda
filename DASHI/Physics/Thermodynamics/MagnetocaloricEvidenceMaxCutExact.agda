@@ -6,10 +6,6 @@ import DASHI.Physics.Thermodynamics.MagnetocaloricFamilyEvidenceExact as Family
 
 ------------------------------------------------------------------------
 -- Terminal evidence-payment atlas for the current magnetocaloric max-cut.
---
--- This module does not turn a source into a theorem.  It records which
--- obligations have actually been paid, by what source role, and which hard
--- frontier still requires same-object empirical acquisition/calibration.
 ------------------------------------------------------------------------
 
 data PaymentStatus : Set where
@@ -40,6 +36,15 @@ record PaymentRow : Set where
     sameObjectRequired : Bool
     authorityBoundary : String
     nextPayment : String
+
+sameStudyCompositionRow : PaymentRow
+sameStudyCompositionRow =
+  paymentRow
+    "same-study in-device regenerator material identity and bounded composition envelope"
+    "Weiß et al. 2025, Materials and Methods / Introduction / Abbreviations"
+    peerReviewedPaid directObservation true
+    "the microchannel regenerators used for in-device testing are identified as VACUUMSCHMELZE Mn-substituted, fully hydrogenated LaFeSi within an approximate composition range; exact batch stoichiometry, phase fractions, magnetic symmetry and response surfaces are not supplied"
+    "obtain exact batch chemistry/phase analysis and weld it to the measured response and in-device receipt"
 
 sixWeekAgingRow : PaymentRow
 sixWeekAgingRow =
@@ -76,10 +81,6 @@ agingTestOperatingPointRow =
     peerReviewedPartial directObservation true
     "load-free aging used media near Curie temperature (~288 K), 2 Hz magnetisation and a reported ~0.8 T field; this pays a bounded test condition, not a spatial/temporal field map, full AMR phase timing, loaded capacity or COP"
     "same-device synchronized field/flow traces, field map, loaded thermal duty and controller-error envelope"
-
-------------------------------------------------------------------------
--- Cross-object La-Fe-(Mn)-Si-H family evidence.
-------------------------------------------------------------------------
 
 familyCrystalStructureRow : PaymentRow
 familyCrystalStructureRow =
@@ -168,17 +169,17 @@ materialConstitutiveRow =
     "material-specific M(T,H), S(T,H), c_H(T,H), delta-S and delta-T_ad surfaces"
     "magnetocaloric material consumer + same-study/family evidence"
     structurallyTyped typedButUncalibrated true
-    "one same-study 1 T delta-T_ad characterization and multiple family-level response papers are source-paid, but they do not form a calibrated constitutive surface for the exact MAGNOTHERM material"
-    "acquire exact-composition material tables/curves with temperature, B/H convention, cycling history and uncertainty"
+    "same-study composition identity and a 1 T delta-T_ad function check plus family-level response literature are paid, but a calibrated constitutive surface for the exact batch is not"
+    "acquire exact-batch material tables/curves with temperature, B/H convention, cycling history and uncertainty"
 
 crystalMagneticIdentificationRow : PaymentRow
 crystalMagneticIdentificationRow =
   paymentRow
     "same-material crystal phase and magnetic symmetry identification"
-    "condensed-matter consumer + Radulov family crystal evidence"
+    "condensed-matter consumer + same-study composition + Radulov family crystal evidence"
     structurallyTyped typedButUncalibrated true
-    "NaZn13-type family crystal structure is empirically paid for a related LaFe11.38Mn0.32Si1.30Hx precursor, but exact MAGNOTHERM phase fractions and magnetic symmetry/order are not identified"
-    "source-backed crystallography/magnetic-order object welded to the exact studied composition and operating regime"
+    "the in-device composition envelope is known and NaZn13 family structure is empirically paid cross-object, but exact batch phase fractions/crystallography and magnetic symmetry/order remain unidentified"
+    "source-backed exact-batch crystallography and magnetic-order object welded to the in-device material identity"
 
 quantumFreeEnergyRow : PaymentRow
 quantumFreeEnergyRow =
@@ -263,7 +264,8 @@ yangMillsRow =
 
 allPaymentRows : List PaymentRow
 allPaymentRows =
-  sixWeekAgingRow
+  sameStudyCompositionRow
+  ∷ sixWeekAgingRow
   ∷ threeMonthMicrochannelRow
   ∷ oneTeslaAdiabaticCharacterizationRow
   ∷ agingTestOperatingPointRow
@@ -293,6 +295,7 @@ record MagnetocaloricMaxCutReceipt : Set where
   constructor magnetocaloric-max-cut-receipt
   field
     canonicalAttributionFirewallPresent : Bool
+    sameStudyCompositionIdentityPaid : Bool
     peerReviewedAgingWindowPaid : Bool
     preliminaryThreeMonthProperlyQualified : Bool
     oneTeslaMaterialFunctionCheckPaid : Bool
@@ -308,4 +311,4 @@ record MagnetocaloricMaxCutReceipt : Set where
 canonicalMagnetocaloricMaxCutReceipt : MagnetocaloricMaxCutReceipt
 canonicalMagnetocaloricMaxCutReceipt =
   magnetocaloric-max-cut-receipt
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true
