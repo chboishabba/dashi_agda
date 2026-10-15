@@ -4,5 +4,15 @@ import DASHI.Physics.Thermodynamics.MagnetocaloricMaterial
 import DASHI.Physics.Thermodynamics.CaloricRegenerator
 import DASHI.Physics.Thermodynamics.ActiveMagneticRegenerator
 import DASHI.Physics.Thermodynamics.ProtectedMagnetocaloricSystem
+import DASHI.Physics.Thermodynamics.MagnetocaloricContinuumConsumerExact
 import DASHI.Physics.Thermodynamics.MagnothermSourceBoundary
+import DASHI.Physics.Thermodynamics.MagnetocaloricConsumerAtlasExact
 import DASHI.Physics.Thermodynamics.MagnetocaloricAMRReceipt
+
+-- Cross-domain consumers are reachable through the atlas without flattening
+-- their ownership into the thermodynamics namespace.
+import DASHI.Physics.Units.MagnetocaloricSIConsumerExact
+import DASHI.Physics.Electromagnetism.MagnetocaloricFieldConsumerExact
+import DASHI.Physics.CondensedMatter.MagnetocaloricCrystalQuantumConsumerExact
+import DASHI.Physics.Chemistry.MagnetocaloricAtomicChemistryConsumerExact
+import DASHI.Physics.Quantum.MagnetocaloricQuantumStatMechConsumerExact
