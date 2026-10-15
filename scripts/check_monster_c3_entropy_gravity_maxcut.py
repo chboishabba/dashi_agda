@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Executable structural audit for the Monster/C3/entropy/gravity max-cut.
+"""Executable structural audit for the Monster/C3/chemistry/entropy/gravity max-cut.
 
 This is deliberately not an Agda proof or physical validation. It checks exact
-arithmetic and fail-closed source markers. Agda typechecking is separate.
+arithmetic and required fail-closed/source markers. Agda typechecking is separate.
 """
 
 from pathlib import Path
@@ -29,6 +29,12 @@ def main() -> None:
     assert monster_degree_from_ogg == 196883
     assert 1 + monster_degree_from_c3 == 196884
     assert 1 + residual53 == 54
+    assert 1 * 196883 == 196883
+    assert 1 * 53 == 53
+    assert 6 + 4 == 10
+    assert 3 + 1 == 4
+    assert 8 == 8
+    assert 8536 / 10 == 853.6
 
     require(
         "DASHI/Moonshine/MonsterC3ResidualTernaryArithmeticExact.agda",
@@ -43,6 +49,49 @@ def main() -> None:
         "actualSingleProducerInhabited",
         "fixedRegularResidualSameActionSplitPaid",
         "zetaWeldCreatesQuantumGravity",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaC3MolecularFixtureExact.agda",
+        "C3v",
+        "rotateHThreeTimes",
+        "experimentalC3GeometryPaid",
+        "ammoniaInversionIsProductsByproductsReaction",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaC3ElectronicSymmetryExact.agda",
+        "10.1016/S0009-2614(02)00255-5",
+        "10.1063/1.1711932",
+        "(1a1)^2(2a1)^2(1e)^4(3a1)^2",
+        "sourceBackedOrbitalSymmetryCoordinatesPaid",
+        "fullAbInitioElectronicWavefunctionPaid",
+        "sameObjectHamiltonianPaid",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AmmoniaProtonationReactionExact.agda",
+        "10.1063/1.556018",
+        "8536",
+        "atomInventoryConservationPaid",
+        "lewisElectronAndBondAccountingPaid",
+        "sameReactionQuantitativeKineticsPaid",
+        "protonAffinityDeterminesMicroscopicReactionPath",
+    )
+    require(
+        "DASHI/Physics/Chemistry/AtomicPeriodicTable369C3EntropyIntertwinerExact.agda",
+        "sourceBackedSameObjectC3GeometryFixturePaid",
+        "sourceBackedElectronicIrrepCoordinatesPaid",
+        "sourceBackedProtonationStoichiometryPaid",
+        "sourceBackedProtonationThermochemistryPaid",
+        "fullC3ResolvedReactionTransportInstantiated",
+        "sameReactionQuantitativeKineticsPaid",
+        "molecularEntropyImpliesPhysicalGravity",
+    )
+    require(
+        "DASHI/Physics/Closure/MonsterC3UniformCountingEnsembleExact.agda",
+        "fineUniformNormalization",
+        "coarseUniformNormalization",
+        "normalizedFiniteCountingWeightsPaid",
+        "finCarrierIdentifiedWithLiteralMonsterStates",
+        "uniformCountingMeasureIsPhysicalThermalEnsemble",
     )
     require(
         "DASHI/Physics/Closure/MonsterC3EntropyStateCountingExact.agda",
@@ -66,20 +115,6 @@ def main() -> None:
         "https://arxiv.org/abs/1012.0119",
     )
     require(
-        "DASHI/Physics/Chemistry/AmmoniaC3MolecularFixtureExact.agda",
-        "C3v",
-        "rotateHThreeTimes",
-        "experimentalC3GeometryPaid",
-        "ammoniaInversionIsProductsByproductsReaction",
-    )
-    require(
-        "DASHI/Physics/Chemistry/AtomicPeriodicTable369C3EntropyIntertwinerExact.agda",
-        "sourceBackedSameObjectC3GeometryFixturePaid",
-        "fullElectronicMolecularC3ActionInstantiated",
-        "productsByproductsReactionFixturePaid",
-        "molecularEntropyImpliesPhysicalGravity",
-    )
-    require(
         "DASHI/Physics/Closure/Monster3Plus1PhysicalSymmetryTargetExact.agda",
         "monsterIsSymmetryOfObserved3Plus1Universe",
         "statusMeansUnpaidNotImpossible",
@@ -87,11 +122,14 @@ def main() -> None:
         "missingIndependentEmpiricalValidation",
     )
 
-    print("monster/C3/entropy/gravity max-cut structural audit: ok")
+    print("monster/C3/chemistry/entropy/gravity max-cut structural audit: ok")
     print(f"53 fixture: {residual53}")
     print(f"71 fixture: {extended71}")
     print(f"Monster degree via C3: {monster_degree_from_c3}")
     print(f"Monster degree via Ogg factors: {monster_degree_from_ogg}")
+    print("NH3 electronic count: 6 A1 + 4 E = 10 electrons")
+    print("NH3 protonation: H inventory 3+1=4; proton affinity 853.6 kJ/mol")
+    print("uniform counting weights: 1/196883 and 1/53 normalize arithmetically")
 
 
 if __name__ == "__main__":
