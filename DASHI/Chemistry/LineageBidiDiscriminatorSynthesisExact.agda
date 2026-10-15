@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.String using (_++_)
 
 import DASHI.Chemistry.AtomicLineageBidiDiscriminatorExact as Bidi
 import DASHI.Biology.KitzerowBH4FluxCausalModelsExact as BH4
