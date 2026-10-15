@@ -14,6 +14,8 @@ files=(
 
   DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
   DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
+  DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Validation.agda
   DASHI/Physics/Foundations/GeneralizedCaloricCycleExact.agda
   DASHI/Physics/Foundations/GeneralizedCaloricCycleValidation.agda
 
@@ -49,6 +51,8 @@ grep -q 'sameBodyForceFormDoesNotIdentifyMechanism' DASHI/Physics/Foundations/Fi
 
 grep -q 'timeReversalConjugatesCandidateValleyPhase' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
 grep -q 'sameSampleQTMEntropyPaid' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
+grep -q 'upperPhaseRotationLaw' DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
+grep -q 'timeReversalConjugatesUpper' DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
 grep -q 'PhysicalGeneralizedCaloricWitness' DASHI/Physics/Foundations/GeneralizedCaloricCycleExact.agda
 
 grep -q 'quantumInequalityAdmissible' DASHI/Physics/Foundations/QuantumStressEnergyEngineeringBridgeExact.agda
