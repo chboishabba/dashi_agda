@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CausalTransportFTLObligationsExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
@@ -131,6 +132,12 @@ canonicalTraversableWormholeObligations =
     "causal/chronology status required"
     false false
 
+------------------------------------------------------------------------
+-- Strongest target: an obligation record can be present while unpaid.  Actual
+-- promotion requires a separate proof-carrying witness that every required
+-- receipt in the candidate is true.
+------------------------------------------------------------------------
+
 record CausalSuperluminalTransportPromotion : Set where
   constructor causal-superluminal-transport-promotion
   field
@@ -152,6 +159,29 @@ canonicalCausalSuperluminalTransportPromotion =
   causal-superluminal-transport-promotion
     "endpoint-A" "endpoint-B"
     false false false false false false false false
+
+record CausalSuperluminalTransportWitness
+    (candidate : CausalSuperluminalTransportPromotion) : Set where
+  constructor causal-superluminal-transport-witness
+  field
+    transportReceiptIsTrue :
+      controllableInformationOrMatterTransport candidate ≡ true
+    spacelikeReceiptIsTrue :
+      spacelikeSeparationReceipt candidate ≡ true
+    endpointClockReceiptIsTrue :
+      independentEndpointClockReceipt candidate ≡ true
+    causalReceiptIsTrue :
+      signalFrontOrCausalReceipt candidate ≡ true
+    metricCausalReceiptIsTrue :
+      metricOrCausalStructureReceipt candidate ≡ true
+    sourceReceiptIfClaimedIsTrue :
+      sourceStressEnergyReceiptIfMetricClaimed candidate ≡ true
+    chronologyReceiptIsTrue :
+      chronologyStatusResolved candidate ≡ true
+    replicationReceiptIsTrue :
+      independentReplication candidate ≡ true
+
+open CausalSuperluminalTransportWitness public
 
 ------------------------------------------------------------------------
 -- SCI-FI CONSUMER GENERATOR
@@ -195,9 +225,10 @@ record CausalTransportHierarchyBoundary : Set where
     warpMetricNotPhysicalSource : Bool
     subluminalWarpLikeGeometryNotFTL : Bool
     exoticStressDoesNotSkipQuantumStressLadder : Bool
+    causalFTLPromotionRequiresProofCarryingReceipts : Bool
 
 open CausalTransportHierarchyBoundary public
 
 canonicalCausalTransportHierarchyBoundary : CausalTransportHierarchyBoundary
 canonicalCausalTransportHierarchyBoundary =
-  causal-transport-hierarchy-boundary true true true true true true true
+  causal-transport-hierarchy-boundary true true true true true true true true
