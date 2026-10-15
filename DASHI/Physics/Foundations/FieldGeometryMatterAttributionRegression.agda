@@ -2,9 +2,11 @@
 module DASHI.Physics.Foundations.FieldGeometryMatterAttributionRegression where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attribution
+import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Physics.Foundations.PhysicalResidualPromotionExact as Residual
 import DASHI.Physics.Foundations.CausalTransportFTLObligationsExact as FTL
 
@@ -83,8 +85,11 @@ canonicalAttributionRegressionBoundary =
   attribution-regression-boundary
     true true true true true true true true true true true
 
-attributedSourceCoreStillNonPromoting : Bool
-attributedSourceCoreStillNonPromoting = false
+attributedSourceCoreReceiptStillNonPromoting :
+  GenericReceipt.promotesClaim Attribution.canonicalAttributedSourceCoreReceipt
+    ≡ false
+attributedSourceCoreReceiptStillNonPromoting =
+  Attribution.canonicalAttributedSourceCoreReceiptNonPromoting
 
 residualPromotionBoundaryReused : Residual.ResidualPromotionBoundary
 residualPromotionBoundaryReused = Residual.canonicalResidualPromotionBoundary
