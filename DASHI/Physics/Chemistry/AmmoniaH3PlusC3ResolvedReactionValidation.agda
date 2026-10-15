@@ -15,8 +15,17 @@ targetCyclesOriginalHydrogens :
   R.rotateProductAtom R.a ≡ R.b
 targetCyclesOriginalHydrogens = refl
 
+protonAffinityDifferenceIs4313Tenths :
+  R.reactionExothermicityMagnitudeTenthsKJPerMol ≡ 4313
+protonAffinityDifferenceIs4313Tenths = refl
+
+sameReactionThermochemistryPaid :
+  R.C3ResolvedH3AmmoniaBoundary.sameReactionThermochemicalDifferencePaid
+    R.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
+sameReactionThermochemistryPaid = refl
+
 resolvedTransitionPaid :
-  R.C3ResolvedH3AmmoniaBoundary.fullC3ResolvedReactionTransitionPaid
+  R.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
     R.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
 resolvedTransitionPaid = refl
 
