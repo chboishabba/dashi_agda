@@ -7,6 +7,7 @@ import DASHI.Physics.Foundations.ControlledPhysicalTransitionExact as Control
 import DASHI.Physics.Foundations.PhysicalResidualPromotionExact as Residual
 import DASHI.Physics.Foundations.FieldGeometryMatterConsumersExact as Consumers
 import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceExact as MATBG
+import DASHI.Physics.CondensedMatter.MATBGBMFirstHarmonicC3Exact as BM
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact as Caloric
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact as QuantumStressSource
@@ -17,11 +18,6 @@ import DASHI.Physics.Foundations.FieldGeometryMatterAttributionRegression as Att
 
 ------------------------------------------------------------------------
 -- TERMINAL MAX-CUT
---
--- Status distinguishes repository structure, source-bounded payment and
--- genuinely external same-object payment.  This prevents a literature source,
--- a theorem shape or another abstraction layer from masquerading as an
--- experiment, calibration, replication or engineering realization.
 ------------------------------------------------------------------------
 
 data FrontierStatus : Set where
@@ -50,6 +46,9 @@ record FieldGeometryMatterTerminalFrontier : Set where
     matbg2026EntropySourceVertical : FrontierStatus
     matbgTwistStrainGeometrySourceVertical : FrontierStatus
     literalMATBGValleyC3Weld : FrontierStatus
+    bmFirstHarmonicSymbolicMatrixC3 : FrontierStatus
+    bmConcreteComplexMatrixEvaluation : FrontierStatus
+    bmContinuumMomentumLatticeExecution : FrontierStatus
     literalBMToQTMInteractingReplay : FrontierStatus
     sameSampleQTMEntropyReplay : FrontierStatus
     matbgQuantumMetricSameObjectWeld : FrontierStatus
@@ -88,6 +87,7 @@ record FieldGeometryMatterTerminalFrontier : Set where
     moreGenericAbstractionCountsAsPhysicalClosure : Bool
     sourceCitationCountsAsSameObjectPayment : Bool
     sameMaterialClassCountsAsSameSample : Bool
+    symbolicBMMatrixCountsAsCalibratedComplexHamiltonian : Bool
     simulationCountsAsPhysicalRealization : Bool
     residualCountsAsAntigravity : Bool
     energyConditionViolationCountsAsWarpCapability : Bool
@@ -110,8 +110,11 @@ currentTerminalFrontier =
     sourcePaid
     sourcePaid
     sourcePaid
-    openSameObjectPayment
-    openSameObjectPayment
+    sourcePaid
+    structurallyPaid
+    openIntegrationReceipt
+    openCalibrationOrExecution
+    externalOnly
     externalOnly
     openSameObjectPayment
 
@@ -146,7 +149,7 @@ currentTerminalFrontier =
     structurallyPaid
     openCalibrationOrExecution
 
-    false false false false false false false
+    false false false false false false false false
 
 record MaxCutPaidSurface : Set where
   constructor max-cut-paid-surface
@@ -156,6 +159,7 @@ record MaxCutPaidSurface : Set where
     residualBoundary : Residual.ResidualPromotionBoundary
     consumerBoundary : Consumers.ConsumerCrossDomainBoundary
     matbgBoundary : MATBG.MATBG2026VerticalBoundary
+    bmBoundary : BM.BMFirstHarmonicBoundary
     caloricBoundary : Caloric.GeneralizedCaloricBoundary
     quantumStressBoundary : QuantumStress.QuantumStressEngineeringBoundary
     quantumStressSourceBoundary : QuantumStressSource.QuantumStressSourceBoundary
@@ -174,6 +178,7 @@ canonicalMaxCutPaidSurface =
     Residual.canonicalResidualPromotionBoundary
     Consumers.canonicalConsumerBoundary
     MATBG.canonicalMATBG2026VerticalBoundary
+    BM.canonicalBMFirstHarmonicBoundary
     Caloric.canonicalGeneralizedCaloricBoundary
     QuantumStress.canonicalQuantumStressBoundary
     QuantumStressSource.canonicalQuantumStressSourceBoundary
@@ -194,6 +199,7 @@ record MaxCutStoppingRule : Set where
     sourceClassCompositionDoesNotCreateSameSample : Bool
     unmergedSiblingMayBeImportedOnlyAfterLandingOrExplicitRetarget : Bool
     sourcePaidTheoryDoesNotCreateMeasuredPhysicalPayment : Bool
+    symbolicBMMatrixDoesNotCreateSampleCalibration : Bool
     experimentPriorityDoesNotCreateTruthOrAuthority : Bool
     monolithicExportPaidTransitivelyThroughRound5Root : Bool
     exactHeadKernelReceiptMustBeObservedNotAssumed : Bool
@@ -203,4 +209,4 @@ open MaxCutStoppingRule public
 canonicalStoppingRule : MaxCutStoppingRule
 canonicalStoppingRule =
   max-cut-stopping-rule
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true
