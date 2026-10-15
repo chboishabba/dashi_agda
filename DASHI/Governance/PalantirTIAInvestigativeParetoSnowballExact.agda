@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
 import DASHI.Governance.PalantirTIAHistoricalGenealogyExact as Genealogy
 
@@ -16,6 +17,50 @@ import DASHI.Governance.PalantirTIAHistoricalGenealogyExact as Genealogy
 -- does not create evidence, truth, authority, intent, culpability or causal
 -- closure.  Snowball hops must expose an explicit named next object.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Newly acquired official source anchors.
+------------------------------------------------------------------------
+
+publicLaw10887 : Source.AttributedSource
+publicLaw10887 = Source.mkNoDOISource
+  "United States Congress"
+  "Department of Defense Appropriations Act, 2004, Public Law 108-87, section 8131"
+  "United States Statutes at Large / GovInfo"
+  "2003"
+  "https://www.govinfo.gov/content/pkg/PLAW-108publ87/html/PLAW-108publ87.htm"
+  Source.governmentSource
+  "primary statutory disposition: bars TIA funding while excepting expressly funded NFIP processing, analysis and collaboration tools for counterterrorism foreign intelligence; defines TIA to include successors and individual components"
+  Source.publicAttribution
+
+senateIntelligence2003 : Source.AttributedSource
+senateIntelligence2003 = Source.mkNoDOISource
+  "United States Senate Select Committee on Intelligence"
+  "Conference Report on H.R. 2417, Intelligence Authorization Act for Fiscal Year 2004"
+  "Senate Select Committee on Intelligence"
+  "2003-11-19"
+  "https://www.intelligence.senate.gov/2003/11/19/publications-conference-report-hr-2417-intelligence-authorization-act-fiscal-year-2004-november-19/"
+  Source.governmentSource
+  "primary congressional interpretation: DARPA TIA was terminated; requested funds were expressly provided to the National Foreign Intelligence Program to develop processing, analysis and collaboration tools for counterterrorism foreign intelligence"
+  Source.publicAttribution
+
+iqtPalantirPortfolio : Source.AttributedSource
+iqtPalantirPortfolio = Source.mkNoDOISource
+  "In-Q-Tel"
+  "Portfolio snapshot: Palantir"
+  "In-Q-Tel"
+  "current portfolio page accessed 2026"
+  "https://www.iqt.org/portfolio?company-name=palantir"
+  Source.institutionalSource
+  "first-party portfolio surface confirming Palantir appears in the In-Q-Tel investment portfolio; this page alone does not pay original investment date, amount, contract scope, Alan Wade participation or TIA continuity"
+  Source.publicAttribution
+
+acquisitionSourceAtlas : Source.AttributedSourceAtlas
+acquisitionSourceAtlas = Source.mkSourceAtlas
+  "Palantir/TIA Pareto acquisition source atlas"
+  "DASHI.Governance.PalantirTIAInvestigativeParetoSnowballExact"
+  (publicLaw10887 ∷ senateIntelligence2003 ∷ iqtPalantirPortfolio ∷ [])
+  "official TIA disposition; congressional interpretation; first-party In-Q-Tel portfolio identity"
 
 data Requirement : Set where
   officialWadeTIARole : Requirement
@@ -140,7 +185,7 @@ tiaDispositionHop = snowball-hop
 
 earlyPalantirHop : SnowballHop
 earlyPalantirHop = snowball-hop
-  "Wired Poindexter/Karp/Thiel + In-Q-Tel/CIA development history"
+  "Wired Poindexter/Karp/Thiel + In-Q-Tel/CIA development history + current first-party IQT portfolio identity"
   "contemporaneous In-Q-Tel investment agreement/portfolio record, CIA customer/development contract or named early deployment object"
   corporateOrInvestmentRecord
   "investment date/scope, customer authority, product object, participants, contract/development boundary"
