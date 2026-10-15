@@ -7,6 +7,8 @@ open import Data.Product using (_×_; _,_)
 import DASHI.Biology.KitzerowBH4CascadeExact as Cascade
 import DASHI.Biology.KitzerowBH4RepoIntegrationExact as Integration
 import DASHI.Biology.KitzerowBH4ReactionChemistryExact as ReactionChem
+import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact as Cycle
+import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact as ReactionBridge
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -42,6 +44,18 @@ reactionChemistryKeepsQuantitativePromotionClosed = refl , (refl , refl)
 atomic369DoesNotDetermineBH4ReactionPath :
   ReactionChem.atomic369DeterminesReactionPath ReactionChem.canonicalBH4ReactionChemistryBoundary ≡ false
 atomic369DoesNotDetermineBH4ReactionPath = refl
+
+sharedBH4PoolIsLiteralButFluxClaimRemainsOpen :
+  Cycle.synthesisProducesSameBH4SpeciesConsumedDownstream Cycle.canonicalSharedBH4PoolBoundary ≡ true
+  × Cycle.regenerationProducesSameBH4SpeciesConsumedDownstream Cycle.canonicalSharedBH4PoolBoundary ≡ true
+  × Cycle.fluxCompetitionQuantified Cycle.canonicalSharedBH4PoolBoundary ≡ false
+sharedBH4PoolIsLiteralButFluxClaimRemainsOpen = refl , (refl , refl)
+
+coarseBranchesAreNowReactionBackedWithoutCausalPromotion :
+  ReactionBridge.branchReactionIdentityNowExplicit ReactionBridge.canonicalReactionCascadeBridgeBoundary ≡ true
+  × ReactionBridge.sharedBH4SpeciesProvesFluxReallocation ReactionBridge.canonicalReactionCascadeBridgeBoundary ≡ false
+  × ReactionBridge.reactionNetworkProvesAutismCausation ReactionBridge.canonicalReactionCascadeBridgeBoundary ≡ false
+coarseBranchesAreNowReactionBackedWithoutCausalPromotion = refl , (refl , refl)
 
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
