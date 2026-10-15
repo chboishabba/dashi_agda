@@ -24,11 +24,9 @@ import DASHI.Core.ConsumerRelativeCoarseGrainingBidiExact as Coarse
 -- electron-equivalent/redox transport, molecule membership, reaction
 -- product/byproduct ancestry and observer-relative residuals are distinct.
 --
--- Important physics boundary: electrons are indistinguishable fermions.  An
--- ElectronLineage below is therefore an operational carrier for electron
--- equivalents, occupation/redox change or calculated density flow.  It is not
--- a claim that an experimentally meaningful named individual electron persists
--- through arbitrary many-body states.
+-- Electrons are indistinguishable fermions. ElectronLineage is therefore an
+-- operational carrier for electron equivalents, occupation/redox change or
+-- calculated density/current flow, not a persistent named individual particle.
 ------------------------------------------------------------------------
 
 record AtomicLineage : Set where
@@ -58,6 +56,25 @@ record NuclearIdentityTransport
 
 open NuclearIdentityTransport public
 
+-- Heterogeneous list-friendly wrapper used by reaction atom maps.
+record NuclearLineageReceipt : Set where
+  constructor nuclearLineageReceipt
+  field
+    sourceAtom : AtomicLineage
+    targetAtom : AtomicLineage
+    sameProtonNumber :
+      Atomic369.protonNumber (atomicIndex sourceAtom)
+      ≡ Atomic369.protonNumber (atomicIndex targetAtom)
+    sameNeutronNumber :
+      Atomic369.neutronNumber (atomicIndex sourceAtom)
+      ≡ Atomic369.neutronNumber (atomicIndex targetAtom)
+    sourceMoleculeReference : String
+    targetMoleculeReference : String
+    reactionReference : String
+    mappingEvidenceReference : String
+
+open NuclearLineageReceipt public
+
 ------------------------------------------------------------------------
 -- Electron-equivalent / occupation lineage.
 ------------------------------------------------------------------------
@@ -77,8 +94,7 @@ record ElectronLineage : Set where
 open ElectronLineage public
 
 ------------------------------------------------------------------------
--- A molecular lineage state carries upstream atom/electronic identities in
--- addition to molecule/bond/geometry/stereo/environment coordinates.
+-- Molecular lineage and geometry.
 ------------------------------------------------------------------------
 
 record MolecularLineageState : Set where
@@ -114,7 +130,7 @@ open MolecularGeometryLineageReceipt public
 
 ------------------------------------------------------------------------
 -- Reaction transport: products and byproducts are separate molecular lineage
--- states.  Atom and electron-equivalent transport are separate obligations.
+-- states. Atom/nuclear and electron-equivalent transport are separately typed.
 ------------------------------------------------------------------------
 
 record ReactionLineageTransport : Set₁ where
@@ -124,7 +140,7 @@ record ReactionLineageTransport : Set₁ where
     reactantStates : List MolecularLineageState
     productStates : List MolecularLineageState
     byproductStates : List MolecularLineageState
-    nuclearTransports : List String
+    nuclearTransports : List NuclearLineageReceipt
     electronTransports : List ElectronLineage
     bondChangeReference : String
     geometryChangeReference : String
@@ -157,7 +173,7 @@ record LineageObserverReceipt : Set where
 open LineageObserverReceipt public
 
 ------------------------------------------------------------------------
--- Existing-owner anchors.  These are reused, not reimplemented.
+-- Existing-owner anchors. These are reused, not reimplemented.
 ------------------------------------------------------------------------
 
 atomicChemistryBoundary : Chemistry369.AtomicChemistryCrossPollinationBoundary
@@ -182,6 +198,10 @@ record AtomicMolecularReactionLineageBoundary : Set where
     everyAtomicCarrierUses369AtomicIndex : Bool
     everyAtomicCarrierUses369AtomicIndexIsTrue :
       everyAtomicCarrierUses369AtomicIndex ≡ true
+
+    reactionAtomMappingIsTypedLineageNotString : Bool
+    reactionAtomMappingIsTypedLineageNotStringIsTrue :
+      reactionAtomMappingIsTypedLineageNotString ≡ true
 
     nuclearIdentityTransportIsDistinctFromElectronTransport : Bool
     nuclearIdentityTransportIsDistinctFromElectronTransportIsTrue :
@@ -241,6 +261,7 @@ canonicalAtomicMolecularReactionLineageBoundary :
   AtomicMolecularReactionLineageBoundary
 canonicalAtomicMolecularReactionLineageBoundary =
   atomicMolecularReactionLineageBoundary
+    true refl
     true refl
     true refl
     false refl
