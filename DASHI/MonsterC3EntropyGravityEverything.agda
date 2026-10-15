@@ -34,11 +34,13 @@ import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionValidation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferValidation
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
+import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact
+import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionValidation
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismValidation
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreValidation
-import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
 
 -- Statistical authority plus exact count-level probability adapters.
 import DASHI.Physics.Laws.ThermodynamicStatisticalLaws
