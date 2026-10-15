@@ -3,16 +3,9 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact w
 open import DASHI.Core.Prelude
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Chemistry369
+import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
 import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact as MonsterEntropy
 import DASHI.Moonshine.C3FourierConjugationExact as C3Fourier
-
-------------------------------------------------------------------------
--- 369 chemistry -> physically identified C3 sector -> entropy consumer.
---
--- This is intentionally a consumer of the existing chemistry hyperfibre.
--- A molecular C3 label requires an actual group-action/equivariance witness;
--- the global ternary encoding does not manufacture molecular symmetry.
-------------------------------------------------------------------------
 
 data C3Sector : Set where
   sector0 sector1 sector2 : C3Sector
@@ -23,13 +16,11 @@ sectorFourierRow sector1 = C3Fourier.chi1
 sectorFourierRow sector2 = C3Fourier.chi2
 
 sector1ConjugateIsSector2 :
-  C3Fourier.conjugateRow (sectorFourierRow sector1)
-  ≡ sectorFourierRow sector2
+  C3Fourier.conjugateRow (sectorFourierRow sector1) ≡ sectorFourierRow sector2
 sector1ConjugateIsSector2 = C3Fourier.chi1ConjugateIsChi2
 
 sector2ConjugateIsSector1 :
-  C3Fourier.conjugateRow (sectorFourierRow sector2)
-  ≡ sectorFourierRow sector1
+  C3Fourier.conjugateRow (sectorFourierRow sector2) ≡ sectorFourierRow sector1
 sector2ConjugateIsSector1 = C3Fourier.chi2ConjugateIsChi1
 
 record PhysicalMolecularC3Action
@@ -43,7 +34,6 @@ record PhysicalMolecularC3Action
     generatorRotation : Rotation
     compose : Rotation → Rotation → Rotation
     act : Rotation → Chemistry369.MolecularStateAt S time → Chemistry369.MolecularStateAt S time
-
     generatorCubedIsIdentity : Set
     molecularGeometryPreserved : Set
     bondStructurePreserved : Set
@@ -117,33 +107,25 @@ record ChemistryC3MonsterBoundary : Set where
     global369TernaryEncodingImpliesMolecularC3Symmetry : Bool
     global369TernaryEncodingImpliesMolecularC3SymmetryIsFalse :
       global369TernaryEncodingImpliesMolecularC3Symmetry ≡ false
-
     c3MolecularSectorImpliesMonsterModule : Bool
     c3MolecularSectorImpliesMonsterModuleIsFalse :
       c3MolecularSectorImpliesMonsterModule ≡ false
-
     equalSectorDimensionImpliesRepresentationIntertwiner : Bool
     equalSectorDimensionImpliesRepresentationIntertwinerIsFalse :
       equalSectorDimensionImpliesRepresentationIntertwiner ≡ false
-
     molecularStateCountIsThermodynamicEntropyWithoutAdapter : Bool
     molecularStateCountIsThermodynamicEntropyWithoutAdapterIsFalse :
       molecularStateCountIsThermodynamicEntropyWithoutAdapter ≡ false
-
     molecularEntropyImpliesPhysicalGravity : Bool
     molecularEntropyImpliesPhysicalGravityIsFalse :
       molecularEntropyImpliesPhysicalGravity ≡ false
-
     reactionSectorLabelDeterminesReactionPath : Bool
     reactionSectorLabelDeterminesReactionPathIsFalse :
       reactionSectorLabelDeterminesReactionPath ≡ false
-
     explicitC3ActionRequired : Bool
     explicitC3ActionRequiredIsTrue : explicitC3ActionRequired ≡ true
-
     exactFourierCarrierRequired : Bool
     exactFourierCarrierRequiredIsTrue : exactFourierCarrierRequired ≡ true
-
     explicitMonsterIntertwinerRequired : Bool
     explicitMonsterIntertwinerRequiredIsTrue :
       explicitMonsterIntertwinerRequired ≡ true
@@ -151,30 +133,17 @@ record ChemistryC3MonsterBoundary : Set where
 canonicalChemistryC3MonsterBoundary : ChemistryC3MonsterBoundary
 canonicalChemistryC3MonsterBoundary =
   chemistryC3MonsterBoundary
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    true refl
-    true refl
-    true refl
+    false refl false refl false refl false refl false refl false refl
+    true refl true refl true refl
 
-------------------------------------------------------------------------
--- Cross-pollination witnesses: consume existing owners without identifying
--- their domains.
-------------------------------------------------------------------------
+existingChemistryPromotionBoundary : Chemistry369.AtomicChemistryCrossPollinationBoundary
+existingChemistryPromotionBoundary = Chemistry369.canonicalAtomicChemistryCrossPollinationBoundary
 
-existingChemistryPromotionBoundary :
-  Chemistry369.AtomicChemistryCrossPollinationBoundary
-existingChemistryPromotionBoundary =
-  Chemistry369.canonicalAtomicChemistryCrossPollinationBoundary
+existingMonsterStateCountingBoundary : MonsterEntropy.StateCountingEntropyBoundary
+existingMonsterStateCountingBoundary = MonsterEntropy.canonicalStateCountingEntropyBoundary
 
-existingMonsterStateCountingBoundary :
-  MonsterEntropy.StateCountingEntropyBoundary
-existingMonsterStateCountingBoundary =
-  MonsterEntropy.canonicalStateCountingEntropyBoundary
+ammoniaC3GeometryFixture : NH3.AmmoniaC3Fixture
+ammoniaC3GeometryFixture = NH3.canonicalAmmoniaC3Fixture
 
 record ChemistryC3MaxCutStatus : Set where
   constructor chemistryC3MaxCutStatus
@@ -185,9 +154,15 @@ record ChemistryC3MaxCutStatus : Set where
     c3ConsumerInterfaceExistsIsTrue : c3ConsumerInterfaceExists ≡ true
     exactC3FourierCarrierConsumed : Bool
     exactC3FourierCarrierConsumedIsTrue : exactC3FourierCarrierConsumed ≡ true
-    concreteSameObjectC3MoleculeInstantiated : Bool
-    concreteSameObjectC3MoleculeInstantiatedIsFalse :
-      concreteSameObjectC3MoleculeInstantiated ≡ false
+    sourceBackedSameObjectC3GeometryFixturePaid : Bool
+    sourceBackedSameObjectC3GeometryFixturePaidIsTrue :
+      sourceBackedSameObjectC3GeometryFixturePaid ≡ true
+    fullElectronicMolecularC3ActionInstantiated : Bool
+    fullElectronicMolecularC3ActionInstantiatedIsFalse :
+      fullElectronicMolecularC3ActionInstantiated ≡ false
+    productsByproductsReactionFixturePaid : Bool
+    productsByproductsReactionFixturePaidIsFalse :
+      productsByproductsReactionFixturePaid ≡ false
     electronResolvedReactionEnergeticsUniversal : Bool
     electronResolvedReactionEnergeticsUniversalIsFalse :
       electronResolvedReactionEnergeticsUniversal ≡ false
@@ -198,5 +173,7 @@ canonicalChemistryC3MaxCutStatus =
     true refl
     true refl
     true refl
+    true refl
+    false refl
     false refl
     false refl
