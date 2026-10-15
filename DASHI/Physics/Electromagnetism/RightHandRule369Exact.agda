@@ -21,6 +21,7 @@ module DASHI.Physics.Electromagnetism.RightHandRule369Exact where
 open import DASHI.Core.Prelude
 
 import DASHI.Algebra.BalancedTernary as BT
+import DASHI.Algebra.TriadicDepthOneCharacters as C3
 import DASHI.Physics.Foundations.OrientedThreeAxisBracket369Exact as Bracket369
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as U1
 
@@ -95,6 +96,10 @@ rightHandSwapNegatesOrientation :
 rightHandSwapNegatesOrientation =
   Bracket369.swapBracketInputsNegatesOrientation
 
+rightHandSwapConjugatesPhase :
+  (voxel : Bracket369.BracketVoxel) →
+  Bracket369.bracketPhase (Bracket369.swapBracketInputs voxel)
+  ≡ C3.conjugatePhase (Bracket369.bracketPhase voxel)
 rightHandSwapConjugatesPhase =
   Bracket369.swapBracketInputsConjugatesPhase
 
