@@ -50,3 +50,8 @@ acquisitionFrontierIsNotTruthRanking :
   Acquisition.frontierRankIsTruthRank Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
   × Acquisition.unpaidCoordinateRetainsAttribution Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ true
 acquisitionFrontierIsNotTruthRanking = refl , refl
+
+contactProvenanceDoesNotCollapseIntoScientificOrDerivationEvidence :
+  Acquisition.scientificSupportSeparateFromContactProvenance Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ true
+  × Acquisition.contactEvidenceAutomaticallyProvesDerivation Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
+contactProvenanceDoesNotCollapseIntoScientificOrDerivationEvidence = refl , refl
