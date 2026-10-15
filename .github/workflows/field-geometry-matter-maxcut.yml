@@ -7,8 +7,11 @@ on:
       - 'DASHI/Physics/Foundations/ControlledPhysicalTransitionExact.agda'
       - 'DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda'
       - 'DASHI/Physics/Foundations/FieldGeometryMatter*.agda'
-      - 'DASHI/Physics/Foundations/QuantumStressEnergyEngineering*.agda'
+      - 'DASHI/Physics/Foundations/GeneralizedCaloricCycle*.agda'
+      - 'DASHI/Physics/Foundations/PrecisionThrustClosure*.agda'
+      - 'DASHI/Physics/Foundations/QuantumStressEnergy*.agda'
       - 'DASHI/Physics/Foundations/CausalTransportFTL*.agda'
+      - 'DASHI/Physics/CondensedMatter/MATBG2026VerticalSlice*.agda'
       - 'scripts/check_field_geometry_matter_maxcut.sh'
       - '.github/workflows/field-geometry-matter-maxcut.yml'
   workflow_dispatch:
@@ -27,5 +30,5 @@ jobs:
           submodules: recursive
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
-      - name: Check conservation, promotion, quantum-stress and causal-transport boundaries
+      - name: Check field-geometry-matter conservation, materials, thermodynamic, quantum-stress and causal boundaries
         run: nix develop --command bash scripts/check_field_geometry_matter_maxcut.sh
