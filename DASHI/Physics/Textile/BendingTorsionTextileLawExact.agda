@@ -140,7 +140,8 @@ everyYarnStateIsNotDeclaredEulerBernoulli ()
 
 data EveryYarnStateObeysSaintVenantTorsion : Set where
 
-everyYarnStateIsNotDeclaredSaintVenantTorsion → ⊥
+everyYarnStateIsNotDeclaredSaintVenantTorsion :
+  EveryYarnStateObeysSaintVenantTorsion → ⊥
 everyYarnStateIsNotDeclaredSaintVenantTorsion ()
 
 data BendingTorsionReceiptDeterminesFailureEvolution : Set where
