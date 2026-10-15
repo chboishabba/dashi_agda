@@ -35,13 +35,18 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
     electromagneticConsumerPopulated               : Set
     condensedMatterConsumerPopulated               : Set
     atomicChemistryConsumerPopulated               : Set
+    protectionChemistryConsumerPopulated           : Set
     quantumStatisticalConsumerPopulated            : Set
     continuumTransportConsumerPopulated            : Set
+    magnetostructuralConsumerPopulated              : Set
 
     magneticBAndHRemainDistinct                    : Set
     sharedMaterialCarrierDoesNotCollapseObservables : Set
-    clayNSNotRequiredForDeviceTransport            : Set
-    nonAbelianYMNotApplicationMagnetism            : Set
+    coatingAndSubstrateRemainDistinctMaterials      : Set
+    magnetostrictionIsCalibrationBound              : Set
+    clayNSNotRequiredForDeviceTransport             : Set
+    nonAbelianYMNotApplicationMagnetism             : Set
+    biologicalAgencyControlNotImportedAsDeviceControl : Set
 
 record MagnetocaloricAMRRemainingFrontier : Set₁ where
   field
@@ -61,6 +66,8 @@ record MagnetocaloricAMRRemainingFrontier : Set₁ where
     validatedHamiltonianOrElectronicModel  : Set
     ensembleAndFreeEnergyCalibration       : Set
     compositionSubstitutionHydrogenationResponse : Set
+    coatingInhibitorFluidCorrosionCalibration : Set
+    transitionStrainAndFatigueCalibration : Set
     electromagneticFieldMapAndBHCalibration : Set
 
 record MagnetocaloricAMRPromotionGate : Set₁ where
@@ -71,4 +78,5 @@ record MagnetocaloricAMRPromotionGate : Set₁ where
     noStructuralShortcutToCalibratedPerformance : Set
     noSourceShortcutToTheoremAuthority           : Set
     noMicroscopicShortcutToBulkResponse           : Set
+    noMechanicalShortcutToQualifiedLifetime       : Set
     noClayShortcutToDevicePhysics                 : Set
