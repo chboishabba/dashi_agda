@@ -39,7 +39,7 @@ zhang2026EntropySource =
     "Nature Communications 17, 9785"
     "2026"
     "10.1038/s41467-026-76179-y"
-    "https://doi.org/10.1038/s41486-026-76179-y"
+    "https://doi.org/10.1038/s41467-026-76179-y"
     Attribution.academicArticleSource
     "source for planar-tunnelling inverse-compressibility/entropy spectroscopy, 4-fold and 8-fold plateau degeneracies, mass renormalization, and the source interpretation that the 8-to-4 reduction is consistent with strain-mediated symmetry breaking; not the QTM sample"
     Attribution.publicAttribution
