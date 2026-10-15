@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Chemistry.AtomicMolecularReactionLineageHyperfabricExact as Lineage
 import DASHI.Chemistry.ElectronBondTransportExact as Electron
+import DASHI.Chemistry.AtomicLineageBidiDiscriminatorExact as Bidi
 import DASHI.Biology.AtomicMolecularBiologicalIncorporationHyperfabricExact as Bio
 import DASHI.Biology.KitzerowBH4ReactionChemistryExact as ReactionChem
 import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact as Cycle
@@ -15,11 +16,6 @@ import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact as CascadeBridge
 
 ------------------------------------------------------------------------
 -- BH4 / redox lineage regression.
---
--- The same explicit BH4 species is produced/recycled and consumed by multiple
--- reactions.  Electron/redox carriers are retained independently.  This pays
--- the material/electronic lineage seam without promoting the unmeasured claim
--- that stress reallocates flux among AAAH/NOS/AGMO branches.
 ------------------------------------------------------------------------
 
 nadphToNadpElectronLineage : Lineage.ElectronLineage
@@ -83,6 +79,26 @@ dhprElectronTransfer =
 canonicalBH4ElectronTransfers : List Electron.ElectronTransferReceipt
 canonicalBH4ElectronTransfers = sprElectronTransfer ∷ dhprElectronTransfer ∷ []
 
+canonicalBH4AllocationBidiCandidate : Bidi.LineageDiscriminatorCandidate
+canonicalBH4AllocationBidiCandidate =
+  Bidi.lineageDiscriminatorCandidate
+    "BH4 shared-pool allocation discriminator"
+    Bidi.redoxPerturbation
+    "H0: BH4 changes are downstream/parallel/subgroup-specific; H1: controlled allostatic/redox perturbation reallocates shared BH4-dependent reaction capacity"
+    "the same literal BH4 species feeds synthesis/recycling and AAAH/NOS/AGMO branches, which alone does not identify flux allocation"
+    "controlled perturbation of GCH1/BH4/redox state with matched genotype/cell-type/developmental context"
+    "protocol, model-system and intervention authority required independently"
+    "isotope-resolved atom mapping where informative; BH4/BH2 molecular identity retained"
+    "NAD(P)H redox, electron-equivalent/oxidation-state and optional density/current readouts"
+    "pterin/cofactor geometry and enzyme-state readouts where mechanism requires them"
+    "BH4/BH2, amino-acid hydroxylase products, NO/superoxide, ether-lipid products and byproducts"
+    "cell-type metabolic/proteome/circuit readouts through existing biology/brain adapters"
+    "consumer: discriminate upstream BH4-allocation architecture from downstream/parallel alternatives"
+    "substrate/cofactor availability, compartment, pH, oxygen, isoform, developmental time, sex/genotype and assay calibration"
+    "quantitative BH4/BH2, redox and branch-flux calibration"
+    "support H1 only if intervention on upstream BH4 supply/redox changes branch-specific flux in predicted directions and mediation/alternative discrimination is paid"
+    "Kitzerow source atlas + BH4 reaction source atlas + acquired intervention/flux measurements"
+
 record KitzerowBH4LineageRegression : Set where
   constructor kitzerowBH4LineageRegression
   field
@@ -90,6 +106,7 @@ record KitzerowBH4LineageRegression : Set where
     supplyAndRecycleReference : String
     consumerBranchReference : String
     electronTransfers : List Electron.ElectronTransferReceipt
+    bidiCandidate : Bidi.LineageDiscriminatorCandidate
     electronRedoxLineageRetained : Bool
     electronRedoxLineageRetainedIsTrue : electronRedoxLineageRetained ≡ true
     sameBH4SpeciesAcrossSupplyRecycleConsumers : Bool
@@ -115,6 +132,7 @@ canonicalKitzerowBH4LineageRegression =
     "Cycle.canonicalBH4SupplyAndRecycleTransitions"
     "CascadeBridge AAAH/NOS/AGMO reaction-backed branches"
     canonicalBH4ElectronTransfers
+    canonicalBH4AllocationBidiCandidate
     true refl
     true refl
     false refl
