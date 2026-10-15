@@ -143,7 +143,7 @@ currentTerminalFrontier =
 
     structurallyPaid
     openSameObjectPayment
-    openIntegrationReceipt
+    structurallyPaid
     openCalibrationOrExecution
 
     false false false false false false false
@@ -195,7 +195,7 @@ record MaxCutStoppingRule : Set where
     unmergedSiblingMayBeImportedOnlyAfterLandingOrExplicitRetarget : Bool
     sourcePaidTheoryDoesNotCreateMeasuredPhysicalPayment : Bool
     experimentPriorityDoesNotCreateTruthOrAuthority : Bool
-    focusedRollupIsNotMonolithicExportReceipt : Bool
+    monolithicExportPaidTransitivelyThroughRound5Root : Bool
     exactHeadKernelReceiptMustBeObservedNotAssumed : Bool
 
 open MaxCutStoppingRule public
