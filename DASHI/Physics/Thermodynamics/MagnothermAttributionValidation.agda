@@ -25,6 +25,19 @@ plannedFutureWorkIsNotCompletedObservation :
   Evidence.plannedFutureExperiment ≡ Evidence.peerReviewedObservation → ⊥
 plannedFutureWorkIsNotCompletedObservation ()
 
+inDeviceCompositionIsSameStudyObject :
+  Evidence.ClaimPayment.sameObjectStatus Evidence.inDeviceCompositionPayment
+  ≡ Evidence.sameSourceObject
+inDeviceCompositionIsSameStudyObject = refl
+
+inDeviceCompositionIsEmpirical :
+  Evidence.ClaimPayment.empiricalPayment Evidence.inDeviceCompositionPayment ≡ true
+inDeviceCompositionIsEmpirical = refl
+
+inDeviceCompositionIsNotDeviceCalibration :
+  Evidence.ClaimPayment.calibratedDeviceEvidence Evidence.inDeviceCompositionPayment ≡ false
+inDeviceCompositionIsNotDeviceCalibration = refl
+
 sixWeekEvidenceIsPrimaryForItsBoundedClaim :
   Evidence.ClaimPayment.primaryForClaim Evidence.sixWeekContinuedOperationPayment ≡ true
 sixWeekEvidenceIsPrimaryForItsBoundedClaim = refl
