@@ -15,31 +15,18 @@ import DASHI.Biology.IonicMimicrySourceAtlasExact as IonicSources
 
 ------------------------------------------------------------------------
 -- ATTRIBUTION ENVELOPES FOR LINEAGE / CALIBRATION REPLAYS
---
--- Canonical source identities are reused from the cross-tranche source atlas
--- whenever they already exist. New rows are added only for genuinely missing
--- source objects. External sources own their source-bounded observations;
--- DASHI owns the cross-source composition, lineage hyperfabric, discriminator
--- synthesis and formal non-promotion theorems.
+-- Canonical source identities come from their source-atlas owners; this module
+-- attaches those identities to DASHI replay consumers without re-authoring them.
 ------------------------------------------------------------------------
 
 chlorAlkaliTechnicalSource : Source.AttributedSource
-chlorAlkaliTechnicalSource = Atlas.chlorAlkaliBREF2014
+chlorAlkaliTechnicalSource = Atlas.chlorAlkaliEuroChlor2022
 
 astrobiologyPrimerSource : Source.AttributedSource
 astrobiologyPrimerSource = Atlas.astrobiologyPrimer2016
 
 dhprBrenda2026 : Source.AttributedSource
-dhprBrenda2026 =
-  Source.mkNoDOISource
-    "BRENDA Enzyme Database"
-    "EC 1.5.1.34 6,7-dihydropteridine reductase"
-    "BRENDA release 2026.1"
-    "2026"
-    "https://www.brenda-enzymes.org/enzyme.php?ecno=1.5.1.34"
-    Source.institutionalSource
-    "reaction-identity source for DHPR-mediated pterin reduction; does not pay assay-specific kinetics, flux allocation or autism causation"
-    Source.publicAttribution
+dhprBrenda2026 = Atlas.dhprBRENDA2026
 
 pahMechanismSource : Source.AttributedSource
 pahMechanismSource = BH4Sources.aromaticHydroxylaseReview
@@ -78,12 +65,12 @@ chlorEnvelope =
     Gold.chlorAlkaliReplay
     chlorAlkaliTechnicalSource
     (Snowball.canonicalSourceRoleSnowballReceipt chlorAlkaliTechnicalSource)
-    "JRC91156 / EUR 26844 EN chlor-alkali process description; exact equation/page locator separately payable"
-    "standard brine electrolysis and chlor-alkali process context"
+    "Euro Chlor September-2022 final-report update; process/product description level only"
+    "European chlor-alkali electrolysis/product context"
     "DASHI composes existing transition owners with typed lineage/electron/bond audit"
     mixedPaidUnpaid
-    "exact plant conditions, potentials, current density, microkinetics and interfacial structure"
-    "canonical attributed JRC/BREF source object reused; exact numeric manifestation remains acquisition coordinate"
+    "exact half-reaction source locator, plant conditions, electrode potentials/current density, microkinetics and interfacial structure"
+    "canonical Euro Chlor source object reused; exact numeric manifestation remains an acquisition coordinate"
     false refl false refl
 
 pahEnvelope : ReplayAttributionEnvelope
@@ -92,12 +79,12 @@ pahEnvelope =
     Gold.pahReplay
     pahMechanismSource
     (Snowball.canonicalSourceRoleSnowballReceipt pahMechanismSource)
-    "aromatic amino-acid hydroxylase mechanism review"
+    "aromatic amino-acid hydroxylase mechanism review; DOI 10.1002/iub.1144"
     "BH4/O2/non-heme-iron hydroxylation mechanism family"
     "DASHI instantiates PAH as a lineage replay and keeps atom-map/kinetic residuals explicit"
     mixedPaidUnpaid
-    "site-specific isotope map, catalytic intermediates and assay kinetics"
-    "PMCID/DOI article manifestation identified; replay-specific exact locator remains separable"
+    "PAH-specific isotope map, catalytic intermediates and assay kinetics"
+    "DOI/PMCID manifestation identified; replay-specific exact locator remains separately payable"
     false refl false refl
 
 dhprEnvelope : ReplayAttributionEnvelope
@@ -106,12 +93,12 @@ dhprEnvelope =
     Gold.dhprReplay
     dhprBrenda2026
     (Snowball.canonicalSourceRoleSnowballReceipt dhprBrenda2026)
-    "EC 1.5.1.34 reaction identity"
-    "DHPR pterin reduction identity"
+    "BRENDA/IUBMB EC 1.5.1.34 reaction identity"
+    "DHPR pterin redox reaction identity"
     "DASHI retains NADH electron-equivalent lineage and flux-model boundary"
     mixedPaidUnpaid
-    "exact isotope map, redox potential and assay-specific kinetic constants"
-    "BRENDA enzyme record; numeric assay manifestation must be separately located"
+    "exact quinonoid-species instantiation, isotope map, redox potential, assay-specific kinetics and in-vivo flux"
+    "canonical BRENDA source object reused; numeric primary-assay manifestation must be separately located"
     false refl false refl
 
 pbCaEnvelope : ReplayAttributionEnvelope
@@ -120,11 +107,11 @@ pbCaEnvelope =
     Gold.pbCaReplay
     pbCaGeometrySource
     (Snowball.canonicalSourceRoleSnowballReceipt pbCaGeometrySource)
-    "protein Pb2+/Ca2+ coordination-site structural comparison"
-    "shared donor usage plus distinct coordination-number/geometry evidence"
+    "Kirberger/Yang 2008; DOI 10.1016/j.jinorgbio.2008.06.014"
+    "source-conditioned Pb2+/Ca2+ protein coordination-site comparison"
     "DASHI generalises the source-bounded comparison into a target-relative lineage discriminator"
     mixedPaidUnpaid
-    "target-specific affinity, occupancy, kinetics and whole-organism dose-response"
+    "same-target affinity, occupancy, kinetics, functional coupling and whole-organism dose-response"
     "DOI article identified; individual structural observations retain source-specific context"
     false refl false refl
 
@@ -134,12 +121,12 @@ carbonEnvelope =
     Gold.carbonBondReplay
     astrobiologyPrimerSource
     (Snowball.canonicalSourceRoleSnowballReceipt astrobiologyPrimerSource)
-    "prebiotic chemistry stages / carbon-rich terrestrial biochemistry context"
-    "broad environmental and prebiotic context"
+    "Astrobiology 16(8):561-653; DOI 10.1089/ast.2015.1460"
+    "broad carbon-rich terrestrial biochemistry and prebiotic-context review"
     "DASHI owns carbon-vs-alternative reachable-chemistry benchmark and BIDI discriminator"
     sourceIdentityOnly
     "specific reaction identity, atom map, yield, kinetics, competing products and matched silicon comparison"
-    "canonical attributed Astrobiology Primer source reused; no specific reaction is promoted from the overview"
+    "canonical Astrobiology Primer source reused; no specific reaction is promoted from the overview"
     false refl false refl
 
 canonicalReplayAttributionEnvelopes : List ReplayAttributionEnvelope
@@ -150,8 +137,7 @@ record LineageCalibrationAttributionBoundary : Set where
   constructor lineageCalibrationAttributionBoundary
   field
     canonicalSourceAtlasReusedWhereAvailable : Bool
-    canonicalSourceAtlasReusedWhereAvailableIsTrue :
-      canonicalSourceAtlasReusedWhereAvailable ≡ true
+    canonicalSourceAtlasReusedWhereAvailableIsTrue : canonicalSourceAtlasReusedWhereAvailable ≡ true
     everyReplayCarriesAttributedSource : Bool
     everyReplayCarriesAttributedSourceIsTrue : everyReplayCarriesAttributedSource ≡ true
     sourceRoleSnowballs : Bool
