@@ -1,0 +1,34 @@
+module DASHI.MonsterC3EntropyGravityEverything where
+
+-- Exact Monster / C3 / 369 arithmetic and representation owners.
+import DASHI.Moonshine.Monster3BBalancedRegularFibreExact
+import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
+import DASHI.Moonshine.C3FourierConjugationExact
+import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact
+import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
+
+-- Existing Ogg / Monster-prime authority and finite lane carriers.
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
+import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
+
+-- 369 atomics -> molecule -> reaction hyperfibre and C3/entropy consumer.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
+
+-- Explicit finite state-count / entropy boundaries.
+import DASHI.Physics.Closure.MonsterC3EntropyStateCountingExact
+
+-- Existing GR emergence boundary plus scoped entropy-gravity routes.
+import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations
+import DASHI.Physics.Gravity.IntrinsicSpacetimeCurvatureInterpretationExact
+import DASHI.Physics.Closure.InformationParadoxCrossGateObstruction
+import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact
+
+-- Monster/VOA/4D target and primary-source dimensional audit.
+import DASHI.Physics.QFT.VOAMoonshineBridgeReceiptSurface
+import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact
+import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact
+
+-- Terminal cross-domain receipt and regression surface.
+import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact
+import DASHI.Physics.Closure.MonsterC3EntropyGravityValidation
