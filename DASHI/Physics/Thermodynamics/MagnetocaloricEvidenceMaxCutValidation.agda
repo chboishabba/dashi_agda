@@ -22,6 +22,31 @@ agingOperatingPointIsPartial :
   ≡ MaxCut.peerReviewedPartial
 agingOperatingPointIsPartial = refl
 
+familyCrystalStructurePartiallyPaysCrystalFrontier :
+  MaxCut.PaymentRow.status MaxCut.familyCrystalStructureRow
+  ≡ MaxCut.peerReviewedPartial
+familyCrystalStructurePartiallyPaysCrystalFrontier = refl
+
+familyHydrogenationPaysCompositionResponsePrior :
+  MaxCut.PaymentRow.status MaxCut.familyHydrogenationCompositionRow
+  ≡ MaxCut.peerReviewedPartial
+familyHydrogenationPaysCompositionResponsePrior = refl
+
+familySpecificHeatPaysThermodynamicPrior :
+  MaxCut.PaymentRow.status MaxCut.familySpecificHeatEntropyRow
+  ≡ MaxCut.peerReviewedPartial
+familySpecificHeatPaysThermodynamicPrior = refl
+
+familyThermalTransportDoesNotCloseDeviceHeatTransfer :
+  MaxCut.PaymentRow.status MaxCut.familyThermalTransportRow
+  ≡ MaxCut.peerReviewedPartial
+familyThermalTransportDoesNotCloseDeviceHeatTransfer = refl
+
+exactCrystalIdentityStillOpen :
+  MaxCut.PaymentRow.status MaxCut.crystalMagneticIdentificationRow
+  ≡ MaxCut.structurallyTyped
+exactCrystalIdentityStillOpen = refl
+
 agingOperatingPointDoesNotCloseFieldMap :
   MaxCut.PaymentRow.status MaxCut.fieldMapRow ≡ MaxCut.structurallyTyped
 agingOperatingPointDoesNotCloseFieldMap = refl
