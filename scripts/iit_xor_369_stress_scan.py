@@ -17,6 +17,8 @@ def stress_summary() -> dict:
         "binary_recurrent_xor": fixed["binary_xor"],
         "binary_xor_grid_2x2": topology["grid_2x2"],
         "ternary_recurrent_trixor": fixed["ternary_trixor"],
+        "z6_recurrent_addition": algebra["z6_cyclic"],
+        "s3_recurrent_composition": algebra["s3_permutation"],
         "z9_recurrent_addition": algebra["z9_cyclic"],
         "f3_squared_recurrent_addition": algebra["f3_squared"],
         "boundary": {
