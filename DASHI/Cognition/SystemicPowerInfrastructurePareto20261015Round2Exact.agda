@@ -1,0 +1,131 @@
+module DASHI.Cognition.SystemicPowerInfrastructurePareto20261015Round2Exact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Cognition.SystemicPowerInfrastructurePareto20261013Exact as Prior
+import DASHI.Cognition.PalantirTIAFinanceStateCapacityCrossPollination20261015Exact as PalantirTIA
+import DASHI.Cognition.EpsteinPalantirInvestmentInterest20261015Exact as PalantirInterest
+import DASHI.Cognition.EpsteinHoneycombPalantirOpportunityBridge20261015Exact as HoneycombPalantir
+import DASHI.Cognition.EpsteinBarakPalantirFoundersFundBrokerage20261015Exact as Brokerage
+import DASHI.Cognition.MavenMinabPineGapTargetingChainExact as Maven
+import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as Immigration
+
+------------------------------------------------------------------------
+-- SYSTEMIC POWER INFRASTRUCTURE PARETO — ROUND 2, 2026-10-15
+--
+-- The Palantir lane is promoted because several previously independent surfaces
+-- are now source-paid and typed together: historical TIA disposition; early
+-- In-Q-Tel/CIA capital/customer access; generic platform capabilities; modern
+-- ICE and Maven procurement; policy-capability intersection; direct Epstein-side
+-- Palantir investment inquiry/opportunity/diligence; and Barak/Founders Fund
+-- brokerage.  Promotion is investigative priority, not a continuity theorem.
+------------------------------------------------------------------------
+
+data Lane2 : Set where
+  palantirHistoricalCapitalCapabilityStateCapacity : Lane2
+  palantirEpsteinInvestmentExecution : Lane2
+  palantirBrokerageDefenseTech : Lane2
+  palantirInstalledBaseContestability : Lane2
+  priorSystemicFront : Lane2
+
+record Profile2 : Set where
+  constructor profile2
+  field
+    lane : Lane2
+    priority : Nat
+    directEvidenceHigh : Bool
+    secondOrderLeverageHigh : Bool
+    thirdOrderLeverageHigh : Bool
+    sourceResolutionDebtHigh : Bool
+    reading : String
+open Profile2 public
+
+canonicalSystemicFront2 : List Profile2
+canonicalSystemicFront2 =
+  profile2 palantirHistoricalCapitalCapabilityStateCapacity 99 true true true true
+    "TIA's public programme/disposition, Poindexter-Karp-Thiel context, In-Q-Tel/CIA capital/customer access, Palantir's object/link/action/permission/audit capabilities and modern ICE/Maven deployments now form a stage-preserving genealogy. It is high-value because it permits direct tests of capability accumulation and durable state capacity while explicitly leaving same-program identity, code/asset transfer and authority continuity unpaid." ∷
+  profile2 palantirEpsteinInvestmentExecution 99 true true true true
+    "Direct Thiel advice on Palantir, a later Fiszel secondary-share opportunity routed to Epstein, and 2018 valuation/IPO diligence are paid. Execution/custody is still open. A completed position would create a direct capital edge; absent that receipt, interest/opportunity remains distinct from ownership." ∷
+  profile2 palantirBrokerageDefenseTech 98 true true true true
+    "Epstein proposed a Palantir board route for Barak, later facilitated/attempted Thiel contact, and separately sat in the forwarding path around Carbyne's introduction to Founders Fund/Trae Stephens. These are real brokerage surfaces across distinct objects; proposal is not appointment and introduction is not investment causation." ∷
+  profile2 palantirInstalledBaseContestability 98 true true true true
+    "Repeated ICE/Maven procurement plus generic platform capability makes installed-base, switching-cost, schema/configuration ownership, export/migration and subject-contestability evidence a high-value second/third-order cut. Repeated procurement alone does not prove lock-in or abuse." ∷
+  profile2 priorSystemicFront 100 true true true true
+    "The prior systemic front remains live: banking/elite access, private-capital housing-AI-power assetisation, military AI/intelligence, Epstein/AI-capital reflexivity and other 98-100 lanes are not displaced by this Palantir-specific promotion."
+  ∷ []
+
+record Boundary2 : Set where
+  constructor boundary2
+  field
+    genealogyEqualsProgrammeSuccession : Bool
+    investmentInterestEqualsOwnership : Bool
+    brokerageEqualsDecisionCausation : Bool
+    genericCapabilityEqualsSpecificDeploymentUse : Bool
+    repeatedProcurementEqualsLockIn : Bool
+    sharedThielEqualsSharedCapitalOrCommand : Bool
+    intelligenceCustomerAccessEqualsSovereignControl : Bool
+open Boundary2 public
+
+canonicalBoundary2 : Boundary2
+canonicalBoundary2 = boundary2 false false false false false false false
+
+data GenealogyImpliesProgrammeIdentity : Set where
+data InterestImpliesOwnership : Set where
+data BrokerageImpliesDecisionCausation : Set where
+data ProcurementImpliesLockIn : Set where
+
+genealogyDoesNotCreateProgrammeIdentity : GenealogyImpliesProgrammeIdentity → ⊥
+genealogyDoesNotCreateProgrammeIdentity ()
+
+interestDoesNotCreateOwnership : InterestImpliesOwnership → ⊥
+interestDoesNotCreateOwnership ()
+
+brokerageDoesNotCreateDecisionCausation : BrokerageImpliesDecisionCausation → ⊥
+brokerageDoesNotCreateDecisionCausation ()
+
+procurementDoesNotCreateLockIn : ProcurementImpliesLockIn → ⊥
+procurementDoesNotCreateLockIn ()
+
+------------------------------------------------------------------------
+-- Cross-domain max-cut after today's Palantir donor PR.
+------------------------------------------------------------------------
+
+data Debt2 : Set where
+  earlyIQTDealAndCIAProductFeedback : Debt2
+  tiaSuccessorComponentAndAuthorityTransfer : Debt2
+  epsteinPalantirExecutionOrExplicitDecline : Debt2
+  fiszelPalantirSellerVehicle : Debt2
+  palantirRenewalRevenueMigration : Debt2
+  sameDeploymentSubjectContestability : Debt2
+  barakPalantirAndCarbyneDecisionJoin : Debt2
+
+record Acquisition2 : Set where
+  constructor acquisition2
+  field
+    debt : Debt2
+    priority : Nat
+    instruction : String
+open Acquisition2 public
+
+canonicalAcquisition2 : List Acquisition2
+canonicalAcquisition2 =
+  acquisition2 earlyIQTDealAndCIAProductFeedback 100
+    "Acquire the original In-Q-Tel financing terms and early CIA-facing product/customer/feedback records, preserving investment, customer feedback, procurement and authority as separate edges." ∷
+  acquisition2 tiaSuccessorComponentAndAuthorityTransfer 100
+    "Resolve TIA/IAO successor/transferred component names, custodians, funding, personnel authority, requirements and any code/asset transfer; do not infer Palantir succession from functional similarity." ∷
+  acquisition2 epsteinPalantirExecutionOrExplicitDecline 100
+    "Resolve the 2014/2016 Palantir investment-interest path to an executed trade/custody record or explicit decline/expiry." ∷
+  acquisition2 fiszelPalantirSellerVehicle 100
+    "Identify the holder/vehicle behind Fiszel's USD5-per-share access and determine whether Honeycomb was principal, intermediary or unrelated vehicle before claiming a fund-level Palantir investment." ∷
+  acquisition2 palantirRenewalRevenueMigration 99
+    "Measure installed-base persistence from renewal/limited-source history, contract revenue, schema/configuration ownership, export rights, migration attempts and replacement cost." ∷
+  acquisition2 sameDeploymentSubjectContestability 99
+    "Pay one deployment's exact subject data, classification/decision use, notice, correction/appeal, audit and remedy chain on the same object; generic Foundry capability is insufficient." ∷
+  acquisition2 barakPalantirAndCarbyneDecisionJoin 98
+    "Resolve Palantir's internal response to the Barak board proposal and Founders Fund's Carbyne diligence/decision separately, then measure Epstein's actual brokerage contribution rather than merging the two episodes."
+  ∷ []
