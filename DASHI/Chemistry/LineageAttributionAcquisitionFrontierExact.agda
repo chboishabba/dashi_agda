@@ -15,6 +15,7 @@ import DASHI.Chemistry.LineageSourceManifestationGuardExact as Manifestation
 --
 -- Rank is investigative utility only. It never ranks truth or scientific
 -- correctness. Unpaid coordinates keep their source identity and role.
+-- Scientific support and priority/contact provenance remain separate axes.
 ------------------------------------------------------------------------
 
 data AcquisitionKind : Set where
@@ -120,9 +121,56 @@ carbonSiliconMatchedDataset =
     independentPrimaryMeasurement
     9 10 8 8 0 true refl
 
+stanfordContactArtifact : AcquisitionItem
+stanfordContactArtifact =
+  acquisitionItem
+    "P1 Stanford contact provenance"
+    provenanceContactArtifact
+    "Kitzerow priority/attribution: Stanford"
+    "claimed 27 Nov 2023 Stanford Neurodiversity Project contact requesting model information"
+    "underlying email/message artifact with sender/recipient/date/content provenance"
+    "original message/export/screenshot plus sufficient metadata to authenticate context"
+    "upgrades originator-reported contact only; does not establish manuscript use, derivation or plagiarism"
+    independenceUndetermined
+    3 6 0 10 0 true refl
+
+brazilCorrespondenceArtifact : AcquisitionItem
+brazilCorrespondenceArtifact =
+  acquisitionItem
+    "P2 Brazil/MDPI correspondence provenance"
+    provenanceContactArtifact
+    "Kitzerow priority/attribution: BH4 systematic review"
+    "claimed MDPI/Latini correspondence after attribution concern"
+    "underlying correspondence and manuscript-history records"
+    "message/export plus publication timeline/manuscript version where obtainable"
+    "resolves who communicated what and when; does not by itself establish derivation or copying"
+    independenceUndetermined
+    4 5 0 10 0 true refl
+
+iaccMedMapsContactArtifact : AcquisitionItem
+iaccMedMapsContactArtifact =
+  acquisitionItem
+    "P3 IACC/MedMaps contact provenance"
+    provenanceContactArtifact
+    "Kitzerow priority/attribution: IACC developmental-systems framework"
+    "claimed 2024 MedMaps/Honey Rinicella awareness/contact before later IACC role"
+    "underlying email/message artifact with date, participants and substantive content"
+    "original correspondence/export plus institutional-role chronology"
+    "upgrades awareness/exposure evidence only; scientific convergence and derivation remain separate"
+    independenceUndetermined
+    4 6 0 10 0 true refl
+
 canonicalAcquisitionItems : List AcquisitionItem
 canonicalAcquisitionItems =
-  bh4FluxDataset ∷ pahAtomMap ∷ chlorLocator ∷ pbCaTargetDataset ∷ carbonSiliconMatchedDataset ∷ []
+  bh4FluxDataset
+  ∷ pahAtomMap
+  ∷ chlorLocator
+  ∷ pbCaTargetDataset
+  ∷ carbonSiliconMatchedDataset
+  ∷ stanfordContactArtifact
+  ∷ brazilCorrespondenceArtifact
+  ∷ iaccMedMapsContactArtifact
+  ∷ []
 
 record LineageAttributionAcquisitionFrontier : Set where
   constructor lineageAttributionAcquisitionFrontier
@@ -137,6 +185,12 @@ record LineageAttributionAcquisitionFrontier : Set where
     causalValueSeparateFromAttributionValue : Bool
     causalValueSeparateFromAttributionValueIsTrue :
       causalValueSeparateFromAttributionValue ≡ true
+    scientificSupportSeparateFromContactProvenance : Bool
+    scientificSupportSeparateFromContactProvenanceIsTrue :
+      scientificSupportSeparateFromContactProvenance ≡ true
+    contactEvidenceAutomaticallyProvesDerivation : Bool
+    contactEvidenceAutomaticallyProvesDerivationIsFalse :
+      contactEvidenceAutomaticallyProvesDerivation ≡ false
     frontierRankIsTruthRank : Bool
     frontierRankIsTruthRankIsFalse : frontierRankIsTruthRank ≡ false
     unpaidCoordinateRetainsAttribution : Bool
@@ -150,4 +204,4 @@ canonicalLineageAttributionAcquisitionFrontier : LineageAttributionAcquisitionFr
 canonicalLineageAttributionAcquisitionFrontier =
   lineageAttributionAcquisitionFrontier
     canonicalAcquisitionItems
-    true refl true refl true refl true refl false refl true refl false refl
+    true refl true refl true refl true refl true refl false refl false refl true refl false refl
