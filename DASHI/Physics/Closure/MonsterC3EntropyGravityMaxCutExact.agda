@@ -9,7 +9,6 @@ import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as NH3FCI
 import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as NH3C3Action
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as NH3MonsterProbe
-import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact as H3Transfer
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Abstraction
 import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact as Abstraction369
@@ -79,17 +78,11 @@ ammoniaMonsterProbeRow = maxCutRow "NH3 C3 -> Monster-3B action probe" interface
   "NH3 and Monster-3B C3 phase coordinates are exactly two-sided identified; a trivial any-group singleton action exists but is physically non-diagnostic"
   "nontrivial same-object NH3-to-Monster state map plus Monster equivariance and physical authority"
 
-h3AmmoniaKineticsRow : MaxCutRow
-h3AmmoniaKineticsRow = maxCutRow "H3+ + NH3 -> NH4+ + H2 measured reaction" empiricalFixturePaid
-  "AmmoniaH3PlusProtonTransferExact"
-  "primary literature pays the 297 K flowing-afterglow family; the York lab table separately carries the specific 4.2e-9 numeric row"
-  "microscopic path is not inferred from the rate"
-
 h3C3ResolvedRow : MaxCutRow
 h3C3ResolvedRow = maxCutRow "proof-relevant selected-C3 proton-transfer transport" exactPaid
   "AmmoniaH3PlusC3ResolvedReactionExact"
-  "a selected C3 cycles the three original NH3 hydrogens before and after reaction; on NH4+ it is the Td subgroup fixing the transferred proton. Literal 369 atom identity, charge/electron/bond bookkeeping, the 431.3 kJ/mol proton-affinity difference, 297 K and measured rate are inhabited as witnesses"
-  "the selected C3 is a subgroup transport, not equality of the full reactant/product point groups and not a unique microscopic proton trajectory"
+  "for H3+ + NH3 -> NH4+ + H2, a selected C3 cycles the three original NH3 hydrogens before and after reaction; on NH4+ it is the Td subgroup fixing the transferred proton. Literal 369 identity, charge/electron/bond bookkeeping, 431.3 kJ/mol proton-affinity difference, measured rate and 297 K environment are inhabited as witnesses"
+  "the selected C3 is a subgroup transport, not equality of full reactant/product point groups and not a unique proton trajectory"
 
 hydrogenAbstractionMechanismRow : MaxCutRow
 hydrogenAbstractionMechanismRow = maxCutRow "NH3 + H -> NH2 + H2 PES/mechanism/dynamics" empiricalFixturePaid
@@ -131,7 +124,7 @@ canonicalMaxCutRows : List MaxCutRow
 canonicalMaxCutRows =
   ternary53Row ∷ ternary71Row ∷ monster3BC3Row ∷ zetaLiteralActionRow ∷
   ammoniaHamiltonianRow ∷ ammoniaFCIRow ∷ authorReleasedCIRow ∷ ammoniaMonsterProbeRow ∷
-  h3AmmoniaKineticsRow ∷ h3C3ResolvedRow ∷ hydrogenAbstractionMechanismRow ∷ literal369ReactionHyperformRow ∷
+  h3C3ResolvedRow ∷ hydrogenAbstractionMechanismRow ∷ literal369ReactionHyperformRow ∷
   normalizedCountingEnsembleRow ∷ physicalEntropyRow ∷ entropyGravityRow ∷ monster3Plus1Row ∷ []
 
 record MonsterC3EntropyGravityMaxCutReceipt : Set where
@@ -161,8 +154,6 @@ record MonsterC3EntropyGravityMaxCutReceipt : Set where
     ammoniaMonsterC3CoordinateIntertwinerPaidIsTrue : ammoniaMonsterC3CoordinateIntertwinerPaid ≡ true
     nontrivialMonsterActionOnAmmoniaPaid : Bool
     nontrivialMonsterActionOnAmmoniaPaidIsFalse : nontrivialMonsterActionOnAmmoniaPaid ≡ false
-    h3AmmoniaProductsByproductsKineticsPaid : Bool
-    h3AmmoniaProductsByproductsKineticsPaidIsTrue : h3AmmoniaProductsByproductsKineticsPaid ≡ true
     h3AmmoniaProofRelevantC3ResolvedTransitionPaid : Bool
     h3AmmoniaProofRelevantC3ResolvedTransitionPaidIsTrue : h3AmmoniaProofRelevantC3ResolvedTransitionPaid ≡ true
     hydrogenAbstractionMechanismPaid : Bool
@@ -185,9 +176,8 @@ canonicalMonsterC3EntropyGravityMaxCutReceipt =
   monsterC3EntropyGravityMaxCutReceipt
     true refl true refl true refl true refl
     true refl true refl true refl true refl false refl
-    true refl true refl false refl true refl true refl
-    true refl true refl true refl false refl true refl false refl
-    canonicalMaxCutRows refl
+    true refl true refl false refl true refl true refl true refl true refl
+    false refl true refl false refl canonicalMaxCutRows refl
 
 residual53Agreement :
   Arithmetic.certifiedMonster3BResidual ≡
@@ -204,38 +194,31 @@ sto3gFCIDiagonalizationAlreadyPaid :
 sto3gFCIDiagonalizationAlreadyPaid = refl
 
 authorReleasedMatrixIdentityAlreadyPaid :
-  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
-    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
 authorReleasedMatrixIdentityAlreadyPaid = refl
 
 authorReleasedMatrixStillNotRediagonalizedHere :
-  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
-    SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
+  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
 authorReleasedMatrixStillNotRediagonalizedHere = refl
 
 groundStateC3ActionAlreadyPaid :
-  NH3C3Action.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
-    NH3C3Action.canonicalGroundStateC3Boundary ≡ true
+  NH3C3Action.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid NH3C3Action.canonicalGroundStateC3Boundary ≡ true
 groundStateC3ActionAlreadyPaid = refl
 
 nontrivialMonsterActionStillBlocked :
-  NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
-    NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
+  NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillBlocked = refl
 
 h3C3ResolvedTransitionAlreadyPaid :
-  H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
-    H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
+  H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
 h3C3ResolvedTransitionAlreadyPaid = refl
 
 abstractionMechanismAlreadyPaid :
-  Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid
-    Abstraction.canonicalAbstractionBoundary ≡ true
+  Abstraction.AbstractionBoundary.sourceBackedTimeDependentWavepacketDynamicsPaid Abstraction.canonicalAbstractionBoundary ≡ true
 abstractionMechanismAlreadyPaid = refl
 
 literal369HyperformAlreadyPaid :
-  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited
-    Abstraction369.canonicalHyperformBoundary ≡ true
+  Abstraction369.HyperformBoundary.literalChemistryHyperfibreInhabited Abstraction369.canonicalHyperformBoundary ≡ true
 literal369HyperformAlreadyPaid = refl
 
 normalizedCountingWeightsAlreadyPaid :
