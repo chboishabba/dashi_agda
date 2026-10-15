@@ -18,6 +18,7 @@
 - Do not infer Clay NS or YM results from AMR engineering.
 - No numerical material/device claim without calibration evidence.
 - Keep BIPM-owned canonical `SI.agda` unchanged when a domain-specific derived dimension can live in the consumer.
+- Preserve canonical DASHI attribution: author/title/publication/DOI/source kind/formalisation relationship; primaryness is claim-relative; access carrier != authorship/authority; citation != proof; vendor/planned evidence cannot pay independent same-device calibration.
 
 ## Review Focus
 
@@ -26,6 +27,7 @@
 - Atomic-shell stability must not imply magnetocaloric response without a material-identification bridge.
 - A quantum Hamiltonian must not imply a calibrated partition/free-energy map without an ensemble witness.
 - Continuum/NS reuse must stop at application-specific balance/transport interfaces and never promote Clay regularity.
+- Source identity, access transport, source claim, DASHI reconstruction and theorem/device authority must remain separate.
 
 ---
 
@@ -100,3 +102,23 @@
 - [x] Record populated consumers and rejected/covered candidate consumers in the atlas.
 - [x] Record the remaining physical/calibration frontier in the terminal receipt.
 - [x] Inspect branch diff/status. Branch is current with `master`; CodeRabbit status is successful. No Agda compiler/status check is available, so no typecheck-success claim is made.
+
+### Task 9: Attribution firewall and empirical payment max-cut
+
+**Files:** create `DASHI/Physics/Thermodynamics/MagnothermAttributedEvidenceExact.agda`, `MagnothermAttributionValidation.agda`, `MagnetocaloricEvidenceMaxCutExact.agda`, `MagnetocaloricEvidenceMaxCutValidation.agda`; modify `MagnothermSourceBoundary.agda`, `MagnetocaloricConsumerAtlasExact.agda`, `MagnetocaloricAMRReceipt.agda`, and `Everything.agda`.
+
+**Rulings:**
+- Replace the thin local source abstraction at the domain boundary with canonical `DASHI.Core.AttributedSourceCore` ownership rather than maintaining parallel attribution semantics.
+- Treat ACS/PMC/Aalto access locations as transport/provenance carriers for the same paper, not new authors or independent scientific authority.
+- The peer-reviewed six-week continued-operation result is a paid bounded aging observation. The paper's three-month microchannel result is paid only as preliminary. Its months-to-years experiment is explicitly future work and remains unpaid as lifetime evidence.
+- Current MAGNOTHERM 30% work-recovery, STELLAR 5 T target, 125 kW+ module, and 250 kW+ two-module statements are primary for what the vendor claims, but remain vendor/development evidence only.
+- Same-device COP/capacity, constitutive M/S/c_H response, field map, hydraulics, heat transfer, timing/control and long-duration aging remain hard acquisition/calibration frontiers.
+- TDD regression modules were committed before their implementation owners. This session has no Agda compiler, so the RED/GREEN code ordering is recorded but executable typecheck payment remains explicitly unavailable.
+
+- [x] Reuse `AttributedSourceCore` with full author/title/publication/DOI/source-kind/formalisation metadata.
+- [x] Separate publisher/repository/index access carriers from authorship and authority.
+- [x] Encode claim-relative primaryness, same-object status, preliminary/planned/vendor roles and claim ceilings.
+- [x] Encode six-week, preliminary three-month, long-term-plan, 30%, 5 T, 125 kW+ and 250 kW+ payment rows.
+- [x] Build a terminal empirical max-cut atlas covering material, quantum, field, hydraulic, thermal, timing, COP/capacity, NS and YM obligations.
+- [x] Wire attribution/max-cut validation and receipts into the thermodynamics spine.
+- [ ] Re-run current branch/PR/status verification after these commits; do not claim Agda typechecking without a compiler receipt.
