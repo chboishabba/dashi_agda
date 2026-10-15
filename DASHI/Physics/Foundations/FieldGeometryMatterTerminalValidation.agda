@@ -28,10 +28,15 @@ bmSymbolicMatrixC3IsStructurallyPaid :
     ≡ Terminal.structurallyPaid
 bmSymbolicMatrixC3IsStructurallyPaid = refl
 
-bmConcreteComplexEvaluationStillNeedsIntegration :
-  Terminal.bmConcreteComplexMatrixEvaluation Terminal.currentTerminalFrontier
-    ≡ Terminal.openIntegrationReceipt
-bmConcreteComplexEvaluationStillNeedsIntegration = refl
+bmExactEisensteinEvaluationIsStructurallyPaid :
+  Terminal.bmExactEisensteinMatrixEvaluation Terminal.currentTerminalFrontier
+    ≡ Terminal.structurallyPaid
+bmExactEisensteinEvaluationIsStructurallyPaid = refl
+
+bmSampleCalibrationStillOpen :
+  Terminal.bmSampleW0W1Calibration Terminal.currentTerminalFrontier
+    ≡ Terminal.openCalibrationOrExecution
+bmSampleCalibrationStillOpen = refl
 
 bmContinuumExecutionStillNeedsCalibration :
   Terminal.bmContinuumMomentumLatticeExecution Terminal.currentTerminalFrontier
@@ -91,6 +96,16 @@ symbolicBMMatrixDoesNotBecomeCalibratedHamiltonian :
   Terminal.symbolicBMMatrixCountsAsCalibratedComplexHamiltonian
     Terminal.currentTerminalFrontier ≡ false
 symbolicBMMatrixDoesNotBecomeCalibratedHamiltonian = refl
+
+exactEisensteinEvaluationDoesNotBecomeSampleCalibration :
+  Terminal.exactEisensteinEvaluationCountsAsSampleCalibration
+    Terminal.currentTerminalFrontier ≡ false
+exactEisensteinEvaluationDoesNotBecomeSampleCalibration = refl
+
+crossPollinatedEisensteinCarrierDoesNotTransferBiologyMechanism :
+  Terminal.biologyEisensteinCarrierTransfersBiologyMechanism
+    Terminal.currentTerminalFrontier ≡ false
+crossPollinatedEisensteinCarrierDoesNotTransferBiologyMechanism = refl
 
 residualDoesNotBecomeAntigravity :
   Terminal.residualCountsAsAntigravity Terminal.currentTerminalFrontier ≡ false
