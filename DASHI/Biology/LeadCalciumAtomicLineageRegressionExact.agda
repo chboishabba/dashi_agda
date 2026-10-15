@@ -9,6 +9,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic36
 import DASHI.Chemistry.AtomicMolecularReactionLineageHyperfabricExact as Lineage
 import DASHI.Biology.AtomicMolecularBiologicalIncorporationHyperfabricExact as Bio
 import DASHI.Biology.IonicMimicryGeometryExact as Mimicry
+import DASHI.Biology.TargetRelativeRecognitionFibreExact as Recognition
+import DASHI.Biology.AtomicLineageTargetRecognitionBridgeExact as Probe
 
 ------------------------------------------------------------------------
 -- Pb2+ / Ca2+ lineage regression.
@@ -42,12 +44,32 @@ leadAtomicLineage =
 pbCaTargetRelativeMimicry : Mimicry.TargetRelativeMimicry
 pbCaTargetRelativeMimicry = Mimicry.canonicalPbCaTargetRelativeMimicry
 
+pbCaRecognitionFibre : Recognition.TargetRelativeRecognitionFibre
+pbCaRecognitionFibre = Recognition.canonicalPbCaRecognitionFibre
+
+canonicalPbCaAtomicSubstitutionProbe : Probe.AtomicSubstitutionProbe
+canonicalPbCaAtomicSubstitutionProbe =
+  Probe.atomicSubstitutionProbe
+    calciumAtomicLineage
+    leadAtomicLineage
+    pbCaRecognitionFibre
+    "distinct 369 AtomicIndex: Ca Z=20 vs Pb Z=82"
+    "formal +2 charge / donor / partial size-shape overlap at calcium-binding targets"
+    "coordination geometry, hydration and target-flexibility coordinates separate the ions"
+    "protein conformational/function consumers must be re-audited after substitution"
+    "refine from charge/site occupancy to atom/electronic/coordination lineage"
+    true refl
+    true refl
+    false refl
+    false refl
+
 record LeadCalciumAtomicLineageRegression : Set where
   constructor leadCalciumAtomicLineageRegression
   field
     nativeAtomicLineage : Lineage.AtomicLineage
     mimicAtomicLineage : Lineage.AtomicLineage
     targetRelativeMimicry : Mimicry.TargetRelativeMimicry
+    substitutionProbe : Probe.AtomicSubstitutionProbe
     coarseObserverReference : String
     sameFormalChargeCollision : Bool
     sameFormalChargeCollisionIsTrue : sameFormalChargeCollision ≡ true
@@ -74,6 +96,7 @@ canonicalLeadCalciumAtomicLineageRegression =
     calciumAtomicLineage
     leadAtomicLineage
     pbCaTargetRelativeMimicry
+    canonicalPbCaAtomicSubstitutionProbe
     "formal charge / local calcium-binding-site observer"
     true refl
     true refl
