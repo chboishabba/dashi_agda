@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.SameObjectConservationLedgerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -19,16 +20,18 @@ import DASHI.Core.ReopenableConsumerInterventionKernelExact as Core
 record SameObjectInterval : Set where
   constructor same-object-interval
   field
-    apparatusId : String
+    startApparatusId : String
+    endApparatusId : String
     startStateId : String
     endStateId : String
-    sameApparatusReceipt : Bool
+    sameApparatusIdentity : startApparatusId ≡ endApparatusId
 
 open SameObjectInterval public
 
 canonicalSameObjectInterval : SameObjectInterval
 canonicalSameObjectInterval =
-  same-object-interval "fixture-apparatus" "t0" "t1" true
+  same-object-interval
+    "fixture-apparatus" "fixture-apparatus" "t0" "t1" refl
 
 data ChannelStatus : Set where
   admitted : ChannelStatus
@@ -150,6 +153,48 @@ canonicalResidualLedger =
     "observed" "accounted" "residual" true true
 
 ------------------------------------------------------------------------
+-- FINITE EXACT BOOKKEEPING FIXTURE
+--
+-- A newly admitted nuisance channel changes the residual rather than being
+-- silently treated as zero.  Natural-number magnitudes are sufficient for the
+-- finite bookkeeping witness; no physical sign convention is inferred.
+------------------------------------------------------------------------
+
+finiteObserved : Nat
+finiteObserved = 10
+
+finiteCoarseAccounted : Nat
+finiteCoarseAccounted = 6
+
+finiteAddedNuisance : Nat
+finiteAddedNuisance = 3
+
+coarseFiniteResidual : Nat
+coarseFiniteResidual = 4
+
+refinedFiniteResidual : Nat
+refinedFiniteResidual = 1
+
+coarseFiniteLedgerCloses :
+  finiteObserved ≡ finiteCoarseAccounted + coarseFiniteResidual
+coarseFiniteLedgerCloses = refl
+
+refinedFiniteLedgerCloses :
+  finiteObserved
+    ≡ (finiteCoarseAccounted + finiteAddedNuisance) + refinedFiniteResidual
+refinedFiniteLedgerCloses = refl
+
+coarseFiniteResidualIsFour : coarseFiniteResidual ≡ 4
+coarseFiniteResidualIsFour = refl
+
+refinedFiniteResidualIsOne : refinedFiniteResidual ≡ 1
+refinedFiniteResidualIsOne = refl
+
+finiteResidualRefinementDistinguishes :
+  coarseFiniteResidual ≡ refinedFiniteResidual → ⊥
+finiteResidualRefinementDistinguishes ()
+
+------------------------------------------------------------------------
 -- CONSUMER-RELATIVE COLLISION
 --
 -- Same coarse readout, different nuisance/consumer state.  This is a DASHI
@@ -190,7 +235,11 @@ record ConservationLedgerBoundary : Set where
     unresolvedChannelsAreNotZeroByDefault : Bool
     domainLawMustBeSuppliedByAdapter : Bool
     coarseObservationNeedNotDetermineConsumer : Bool
+    sameObjectIdentityNeedsEqualityReceipt : Bool
+    admittedNuisanceCanChangeResidual : Bool
+
+open ConservationLedgerBoundary public
 
 canonicalConservationLedgerBoundary : ConservationLedgerBoundary
 canonicalConservationLedgerBoundary =
-  conservation-ledger-boundary true true true true true
+  conservation-ledger-boundary true true true true true true true
