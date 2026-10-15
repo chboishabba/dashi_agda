@@ -12,7 +12,6 @@ required = [
     "DASHI/Chemistry/LineageAttributionEvidencePaymentExact.agda",
     "DASHI/Chemistry/AttributedGoldReactionReplayExact.agda",
     "DASHI/Chemistry/LineageQuantitativeCalibrationLedgerExact.agda",
-    "DASHI/Chemistry/LineageAttributionAcquisitionParetoExact.agda",
     "DASHI/Chemistry/LineageAttributionEvidenceMaxCutValidation.agda",
     "DASHI/Chemistry/LineageCalibrationAttributionEnvelopeExact.agda",
     "DASHI/Chemistry/LineageSourceManifestationGuardExact.agda",
@@ -28,15 +27,18 @@ for needle in ["chlorAlkaliReplay", "pahReplay", "dhprReplay", "pbCaReplay", "ca
 
 source_atlas = (ROOT / required[5]).read_text()
 for needle in [
-    "AttributedSourceCore", "chlorAlkaliBREF2014", "astrobiologyPrimer2016",
+    "AttributedSourceCore", "LineageCalibrationAttributionEnvelopeExact",
+    "chlorAlkaliBREF2014", "dhprBRENDA", "astrobiologyPrimer2016",
     "canonicalLineageCalibrationSourceAtlas", "canonicalAtlasNonPromoting",
 ]:
-    assert needle in source_atlas, f"canonical source atlas missing {needle}"
+    assert needle in source_atlas, f"source atlas missing {needle}"
 
 payment = (ROOT / required[6]).read_text()
 for needle in [
-    "SourceCoordinatePayment", "sourceOwnsDASHISynthesis", "citationCreatesProof",
+    "SourceCoordinatePayment", "EvidenceRole", "PaymentGrade",
+    "dhprReactionPayment", "sourceOwnsDASHISynthesis", "citationCreatesProof",
     "citationAlonePaysCalibration", "missingCoordinatePromotedByNearbyCitation",
+    "reviewCountsAsPrimaryExperimentByDefault", "databaseReactionIdentityCountsAsInVivoFlux",
     "exactLocatorRequiredForNumericPromotion",
 ]:
     assert needle in payment, f"evidence payment owner missing {needle}"
@@ -45,6 +47,7 @@ replay = (ROOT / required[7]).read_text()
 for needle in [
     "AttributedGoldReplay", "canonicalAttributedGoldReplays", "sourceOwnsReplayComposition",
     "replayCompositionErasesSourceIdentity", "unpaidCoordinatesRemainAttributed",
+    "dashiAndExternalOwnershipRemainDistinct",
 ]:
     assert needle in replay, f"attributed replay owner missing {needle}"
 
@@ -53,27 +56,20 @@ for needle in [
     "QuantitativeCalibrationCell", "bh4BranchFluxCell", "pahKineticCell", "chlorElectrodeCell",
     "pbCaAffinityCell", "carbonSiliconYieldCell", "numberWithoutExactLocatorPromoted",
     "numberWithoutContextPromoted", "unpaidCoordinateInterpretedAsZero",
+    "exactUnitsAndUncertaintyRemainRequired",
 ]:
     assert needle in calibration, f"quantitative calibration ledger missing {needle}"
 
-pareto = (ROOT / required[9]).read_text()
+attribution = (ROOT / required[10]).read_text()
 for needle in [
-    "bh4SameObjectFluxDataset", "isotopeAtomMapBenchmarks", "pbCaTargetCalibration",
-    "carbonSiliconMatchedDataset", "frontierRankIsTruthRank", "selectionCreatesEvidence",
-]:
-    assert needle in pareto, f"canonical scientific acquisition Pareto missing {needle}"
-
-attribution = (ROOT / required[11]).read_text()
-for needle in [
-    "LineageAttributionEvidenceSourceAtlasExact", "ReplayAttributionEnvelope",
-    "chlorAlkaliTechnicalSource", "pahMechanismSource", "dhprBrenda2026", "pbCaGeometrySource",
-    "astrobiologyPrimerSource", "canonicalSourceAtlasReusedWhereAvailable",
+    "ReplayAttributionEnvelope", "chlorAlkaliEuroChlor2022", "pahMechanismSource",
+    "dhprBrenda2026", "pbCaGeometrySource", "astrobiologyPrimer2016",
     "citationCreatesNumericPayment", "dashiSynthesisAttributedToExternalSource",
     "sourceObservationAttributedToDashi",
 ]:
     assert needle in attribution, f"attribution envelope missing {needle}"
 
-manifestation = (ROOT / required[12]).read_text()
+manifestation = (ROOT / required[11]).read_text()
 for needle in [
     "SourceCoordinateGuard", "ManifestationStatus", "LocatorStatus", "CoordinateRole",
     "sameObjectAndLocatorRequiredForNumericPayment", "nearbyCitationPaysCoordinate",
@@ -81,33 +77,43 @@ for needle in [
 ]:
     assert needle in manifestation, f"manifestation guard missing {needle}"
 
-acquisition = (ROOT / required[13]).read_text()
+acquisition = (ROOT / required[12]).read_text()
 for needle in [
-    "LineageAttributionAcquisitionParetoExact", "scientificAcquisitionFrontier",
+    "ScientificAcquisitionItem", "ProvenanceAcquisitionItem",
+    "bh4FluxDataset", "pahAtomMap", "bh4KineticSet", "chlorLocator",
+    "pbCaTargetDataset", "carbonSiliconMatchedDataset",
     "stanfordContactArtifact", "brazilCorrespondenceArtifact", "iaccMedMapsContactArtifact",
-    "canonicalScientificParetoReused", "scientificSupportSeparateFromContactProvenance",
+    "scientificSupportSeparateFromContactProvenance",
     "contactEvidenceAutomaticallyProvesDerivation", "contactEvidenceAutomaticallyProvesPlagiarism",
-    "scientificSupportAutomaticallyProvesPriority", "frontierRankIsTruthRank",
+    "scientificSupportAutomaticallyProvesPriority", "priorityAutomaticallyProvesCorrectness",
+    "frontierRankIsTruthRank", "unpaidCoordinateRetainsAttribution", "acquisitionCreatesAuthority",
 ]:
-    assert needle in acquisition, f"contact provenance extension missing {needle}"
+    assert needle in acquisition, f"unified acquisition frontier missing {needle}"
 
-rollup = (ROOT / required[14]).read_text()
+rollup = (ROOT / required[13]).read_text()
 for needle in [
-    "LineageAttributionEvidenceSourceAtlasExact", "LineageAttributionEvidencePaymentExact",
-    "AttributedGoldReactionReplayExact", "LineageQuantitativeCalibrationLedgerExact",
-    "LineageAttributionAcquisitionParetoExact", "LineageAttributionEvidenceMaxCutValidation",
-    "LineageCalibrationAttributionEnvelopeExact", "LineageSourceManifestationGuardExact",
-    "LineageAttributionAcquisitionFrontierExact",
+    "LineageCalibrationAttributionEnvelopeExact", "LineageAttributionEvidenceSourceAtlasExact",
+    "LineageAttributionEvidencePaymentExact", "AttributedGoldReactionReplayExact",
+    "LineageSourceManifestationGuardExact", "LineageQuantitativeCalibrationLedgerExact",
+    "LineageAttributionAcquisitionFrontierExact", "LineageAttributionEvidenceMaxCutValidation",
 ]:
     assert needle in rollup, f"rollup missing {needle}"
 
-validation = (ROOT / required[15]).read_text()
+validation = (ROOT / required[14]).read_text()
 for needle in [
     "attributionEnvelopeRetainsSourceRoleWithoutPromotion",
     "manifestationGuardBlocksNearbySourcePromotion",
     "contactProvenanceDoesNotCollapseIntoScientificOrDerivationEvidence",
 ]:
     assert needle in validation, f"validation missing {needle}"
+
+evidence_validation = (ROOT / required[9]).read_text()
+for needle in [
+    "externalAndDASHISynthesisRemainDistinct", "primarySecondaryAndDatabaseRolesStayTyped",
+    "numericPromotionNeedsExactLocatorAndContext", "unpaidNumericCellsAreNotZeroes",
+    "paretoAcquisitionIsNotTruthRanking",
+]:
+    assert needle in evidence_validation, f"evidence validation missing {needle}"
 
 full = (ROOT / "DASHI/Chemistry/EverythingFull.agda").read_text()
 assert "LineageCalibrationDiscriminatorEverything" in full
