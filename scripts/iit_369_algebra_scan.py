@@ -1,10 +1,48 @@
 #!/usr/bin/env python3
+"""Matched 3/6/9 algebra controls for the finite IIT reference.
+
+The same recurrent two-cell fabric ``A'=B; B'=mu(A,B)`` is used throughout.
+The local operation changes while carrier size is held fixed within each
+control pair:
+
+* six states: cyclic Z/6Z-like ``hexXor`` versus noncommutative S3 composition;
+* nine states: cyclic Z/9Z-like ``nonaryXor`` versus componentwise F3^2.
+
+The algebraic non-isomorphism/separation claims are owned by Agda.  This module
+only computes the corresponding finite IIT system-phi profiles.
+"""
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
 from iit4_finite_reference import IIT4_2023, IIT4_2026, deterministic_model, system_phi
+
+
+def z6_add(a: int, b: int) -> int:
+    return (a + b) % 6
+
+
+# Carrier order matches HexTruthS3CarrierBridgeExact:
+# id, rotate, rotate^2, swap(low,mid), swap(low,high), swap(mid,high).
+S3_PERMUTATIONS = (
+    (0, 1, 2),
+    (1, 2, 0),
+    (2, 0, 1),
+    (1, 0, 2),
+    (2, 1, 0),
+    (0, 2, 1),
+)
+S3_INDEX = {permutation: index for index, permutation in enumerate(S3_PERMUTATIONS)}
+
+
+def _compose_permutations(left: tuple[int, ...], right: tuple[int, ...]) -> tuple[int, ...]:
+    """Return left after right."""
+    return tuple(left[right[index]] for index in range(3))
+
+
+def s3_compose(a: int, b: int) -> int:
+    return S3_INDEX[_compose_permutations(S3_PERMUTATIONS[a], S3_PERMUTATIONS[b])]
 
 
 def z9_add(a: int, b: int) -> int:
@@ -33,8 +71,13 @@ def recurrent_two_cell_step(operation):
     return step
 
 
-def _scan(operation, label: str) -> dict:
-    model = deterministic_model(9, 2, recurrent_two_cell_step(operation), label=label)
+def _scan(alphabet_size: int, operation, label: str) -> dict:
+    model = deterministic_model(
+        alphabet_size,
+        2,
+        recurrent_two_cell_step(operation),
+        label=label,
+    )
     result = {}
     for formalism in (IIT4_2023, IIT4_2026):
         receipts = [system_phi(model, state, formalism=formalism) for state in model.states]
@@ -55,14 +98,31 @@ def _scan(operation, label: str) -> dict:
 
 
 def algebra_summary() -> dict:
-    z9 = _scan(z9_add, "Z9 cyclic addition")
-    f3sq = _scan(f3_squared_add, "F3 squared componentwise addition")
+    z6 = _scan(6, z6_add, "Z6 cyclic addition / HexTruth hexXor chart")
+    s3 = _scan(6, s3_compose, "S3 permutation composition on the six-state chart")
+    z9 = _scan(9, z9_add, "Z9 cyclic addition")
+    f3sq = _scan(9, f3_squared_add, "F3 squared componentwise addition")
     return {
         "contract": "iit_369_matched_algebra_scan",
         "fabric": "two-cell recurrent fabric A'=B; B'=mu(A,B)",
+        "z6_cyclic": z6,
+        "s3_permutation": s3,
         "z9_cyclic": z9,
         "f3_squared": f3sq,
-        "comparison": {
+        "six_state_comparison": {
+            "same_six_state_cardinality": True,
+            "same_group_law": False,
+            "same_2023_system_phi_profile": (
+                z6[IIT4_2023.lower()]["distinct_phi_s"]
+                == s3[IIT4_2023.lower()]["distinct_phi_s"]
+            ),
+            "system_phi_profile_identifies_group_law": False,
+            "formal_separation_owner": (
+                "DASHI.Foundations.HexTruthS3CarrierBridgeExact."
+                "hexCarrierChartCannotPreserveBothProducts"
+            ),
+        },
+        "nine_state_comparison": {
             "same_nine_state_cardinality": True,
             "same_group_law": False,
             "same_2023_system_phi_profile": (
@@ -70,7 +130,10 @@ def algebra_summary() -> dict:
                 == f3sq[IIT4_2023.lower()]["distinct_phi_s"]
             ),
             "system_phi_profile_identifies_group_law": False,
-            "formal_group_nonisomorphism_owner": "DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact.q9NonaryGroupIsomorphismImpossible",
+            "formal_separation_owner": (
+                "DASHI.Foundations.PhaseQuotientNonaryGroupSeparationExact."
+                "q9NonaryGroupIsomorphismImpossible"
+            ),
         },
         "boundary": {
             "same_phi_profile_implies_same_algebra": False,
