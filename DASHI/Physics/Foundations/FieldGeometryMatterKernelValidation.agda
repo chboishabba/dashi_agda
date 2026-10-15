@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.FieldGeometryMatterKernelValidation where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
 import DASHI.Physics.Foundations.ControlledPhysicalTransitionExact as Control
@@ -30,7 +31,7 @@ coarseObserverMissesNuisance = refl
 consumerStillSeparatesWorlds :
   Ledger.consumerRelevant Ledger.thermalWorld
     ≡ Ledger.consumerRelevant Ledger.forceWorld →
-  Ledger.⊥
+  ⊥
 consumerStillSeparatesWorlds = Ledger.consumerDistinguishesFixture
 
 controlDoesNotImplyEquilibrium : Bool
