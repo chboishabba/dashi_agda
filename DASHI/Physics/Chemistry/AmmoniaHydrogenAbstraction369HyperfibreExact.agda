@@ -8,11 +8,6 @@ import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact as Mecha
 
 ------------------------------------------------------------------------
 -- CONCRETE 369 HYPERFIBRE FOR 14NH3 + 1H -> 14NH2 + 1H2
---
--- Unlike the generic bridge, this module actually inhabits the fibre at a
--- source and target time.  The atomic carrier is literally the existing
--- Atomic369.AtomicIndex inventory.  Molecular/reaction identity is then welded
--- separately, preserving the repo's no-collapse rule.
 ------------------------------------------------------------------------
 
 data ReactionTime : Set where
@@ -30,6 +25,18 @@ expectedReactionStage : ReactionTime → Mechanism.AbstractionStage
 expectedReactionStage beforeCollision = Mechanism.separatedReactants
 expectedReactionStage afterReaction = Mechanism.separatedProducts
 
+atomicSourceRef : ReactionTime → String
+atomicSourceRef beforeCollision = "AtomicPeriodicTable369GenerativeExact source 14N + four 1H AtomicIndex inventory"
+atomicSourceRef afterReaction = "AtomicPeriodicTable369GenerativeExact target 14N + four 1H AtomicIndex inventory"
+
+molecularSourceRef : ReactionTime → String
+molecularSourceRef beforeCollision = "source-backed NH3 + H molecular identity"
+molecularSourceRef afterReaction = "source-backed NH2 + H2 molecular identity"
+
+reactionSourceRef : ReactionTime → String
+reactionSourceRef beforeCollision = "Espinosa-Garcia/Corchado 2010 PES source-side abstraction state"
+reactionSourceRef afterReaction = "Corchado/Espinosa-Garcia/Yang 2011 product-side quantum-dynamics reaction state"
+
 ammoniaAbstraction369System : Fibre.ChemistryHyperfibreSystem
 ammoniaAbstraction369System =
   Fibre.chemistryHyperfibreSystem
@@ -42,15 +49,11 @@ ammoniaAbstraction369System =
     (λ t molecule stage →
       (molecule ≡ expectedMolecule t) × (stage ≡ expectedReactionStage t))
     (λ t stage _ → stage ≡ expectedReactionStage t)
-    (λ t → "AtomicPeriodicTable369GenerativeExact literal AtomicIndex inventory at " ++ timeLabel t)
-    (λ t → "source-backed molecular identity at " ++ timeLabel t)
-    (λ t → "Espinosa-Garcia/Corchado 2010 + Corchado/Espinosa-Garcia/Yang 2011 reaction identity/mechanism at " ++ timeLabel t)
+    atomicSourceRef
+    molecularSourceRef
+    reactionSourceRef
     (λ _ → "no industrial promotion in this microscopic fixture")
     (λ _ → "NH3-H-abstraction-369-hyperfibre-v1")
-  where
-    timeLabel : ReactionTime → String
-    timeLabel beforeCollision = "beforeCollision"
-    timeLabel afterReaction = "afterReaction"
 
 sourceFibre : Fibre.ChemistryFibre ammoniaAbstraction369System beforeCollision
 sourceFibre =
