@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
 import DASHI.Physics.Foundations.ControlledPhysicalTransitionExact as Control
+import DASHI.Physics.Foundations.PhysicalResidualPromotionExact as Promotion
 
 intervalIsSameObject : Ledger.SameObjectInterval
 intervalIsSameObject = Ledger.canonicalSameObjectInterval
@@ -37,3 +38,21 @@ consumerStillSeparatesWorlds = Ledger.consumerDistinguishesFixture
 controlDoesNotImplyEquilibrium : Bool
 controlDoesNotImplyEquilibrium =
   Control.controlPathDoesNotImplyEquilibrium Control.canonicalControlBoundary
+
+residualCandidateExists : Promotion.AnomalousMomentumCandidate
+residualCandidateExists = Promotion.canonicalAnomalousMomentumCandidate
+
+residualDoesNotPromoteToAntigravity : Bool
+residualDoesNotPromoteToAntigravity =
+  Promotion.residualDoesNotDirectlyPromoteToAntigravity
+    Promotion.canonicalResidualPromotionBoundary
+
+residualDoesNotPromoteToReactionless : Bool
+residualDoesNotPromoteToReactionless =
+  Promotion.residualDoesNotDirectlyPromoteToReactionless
+    Promotion.canonicalResidualPromotionBoundary
+
+residualDoesNotPromoteToNewPhysics : Bool
+residualDoesNotPromoteToNewPhysics =
+  Promotion.residualDoesNotDirectlyPromoteToNewPhysics
+    Promotion.canonicalResidualPromotionBoundary
