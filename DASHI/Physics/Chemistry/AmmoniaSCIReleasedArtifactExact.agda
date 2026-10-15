@@ -12,7 +12,8 @@ import DASHI.Core.AttributedSourceCore as Source
 -- not independent scientific authority and not DASHI authorship.
 --
 -- The released CI_result geometry/energy and the final paper's tabulated
--- benchmark are numerically different, so they remain distinct objects.
+-- benchmark are numerically different, so they remain distinct computational
+-- objects under the repo's same-object attribution rule.
 ------------------------------------------------------------------------
 
 authorReleasedSCIVQERepository : Source.AttributedSource
