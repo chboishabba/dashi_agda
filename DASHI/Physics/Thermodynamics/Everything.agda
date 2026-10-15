@@ -6,7 +6,11 @@ import DASHI.Physics.Thermodynamics.ActiveMagneticRegenerator
 import DASHI.Physics.Thermodynamics.ProtectedMagnetocaloricSystem
 import DASHI.Physics.Thermodynamics.MagnetocaloricContinuumConsumerExact
 import DASHI.Physics.Thermodynamics.MagnetocaloricMagnetostructuralConsumerExact
+import DASHI.Physics.Thermodynamics.MagnothermAttributedEvidenceExact
 import DASHI.Physics.Thermodynamics.MagnothermSourceBoundary
+import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact
+import DASHI.Physics.Thermodynamics.MagnothermAttributionValidation
+import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutValidation
 import DASHI.Physics.Thermodynamics.MagnetocaloricConsumerAtlasExact
 import DASHI.Physics.Thermodynamics.MagnetocaloricAMRReceipt
 
