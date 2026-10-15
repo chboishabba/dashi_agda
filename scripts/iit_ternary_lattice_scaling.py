@@ -7,11 +7,9 @@ The 2D seed rule is the repo's 2x2 XOR fixture generalized to an n x n torus:
 
     x'_(i,j) = x_(i+1,j) + x_(i,j+1) mod q.
 
-For the 3D 3x3x3 lattice we compare two rules:
-
-* x+y control: independent stacked faces;
-* x+y+z: genuine third-axis coupling, equivalently associative iteration of
-  the same additive synthesis law.
+For 3D we compare genuine x+y+z coupling.  The additive rule is associative,
+so the local three-input update can be read as an iterated pair of the same
+2->1 synthesis cells used by the causal-pants layer.
 
 For each finite linear system we compute rank over F_q, kernel dimension,
 reachable-state count, and a geometric slab-cut effect penalty.  The cut
@@ -67,8 +65,8 @@ def rank_mod(matrix: list[list[int]], q: int) -> int:
         work[rank], work[pivot] = work[pivot], work[rank]
         inverse = pow(work[rank][column] % q, -1, q)
         work[rank] = [(x * inverse) % q for x in work[rank]]
-        for row in range(len(work)):
-            if row != rank and work[row][column] % q:
+        for row in range(rank + 1, len(work)):
+            if work[row][column] % q:
                 factor = work[row][column] % q
                 work[row] = [
                     (a - factor * b) % q
@@ -101,9 +99,12 @@ def geometric_slab_cut(
                 affected_targets.add(target)
 
     affected = len(affected_targets)
+    expected_surface_targets = 2 * (n ** (dim - 1)) if cut_axis in active_axes else 0
     return {
         "crossing_edges": crossing_edges,
         "affected_targets": affected,
+        "expected_toroidal_surface_targets": expected_surface_targets,
+        "surface_scaling_matches": affected == expected_surface_targets,
         "effect_cut_penalty_bits": affected * log2(q),
     }
 
@@ -135,15 +136,16 @@ def experiment_row(
 def lattice_scaling_summary() -> dict:
     experiments = []
     for q in (2, 3):
-        for n in (2, 3, 4):
+        for n in range(2, 11):
             experiments.append(
                 experiment_row(q, n, 2, (0, 1), "2D east+south face")
             )
+        for n in range(2, 6):
+            experiments.append(
+                experiment_row(q, n, 3, (0, 1, 2), "3D x+y+z coupled cube")
+            )
         experiments.append(
             experiment_row(q, 3, 3, (0, 1), "3D x+y stacked-face control")
-        )
-        experiments.append(
-            experiment_row(q, 3, 3, (0, 1, 2), "3D x+y+z coupled cube")
         )
 
     return {
@@ -162,6 +164,7 @@ def lattice_scaling_summary() -> dict:
             "three_27_state_factors_equal_nine_ternary_site_cardinality": True,
             "ordinary_site_configuration_growth_is_tetration": False,
             "slab_cut_penalty_is_full_iit_mip": False,
+            "state_space_size_alone_determines_linear_rank": False,
         },
     }
 
