@@ -28,6 +28,18 @@ chlorAlkaliBREF2014 =
     "External technical authority that chlor-alkali production uses brine electrolysis and produces chlorine/hydrogen/caustic streams. DASHI owns the typed half-reaction composition and lineage adapters; this source does not pay cell-specific kinetics or interfacial electron-density trajectories."
     Source.publicAttribution
 
+dhprBRENDA : Source.AttributedSource
+dhprBRENDA =
+  Source.mkNoDOISource
+    "BRENDA Enzyme Database / IUBMB enzyme nomenclature"
+    "EC 1.5.1.34 6,7-dihydropteridine reductase"
+    "BRENDA enzyme entry; EC 1.5.1.34"
+    "2026"
+    "https://www.brenda-enzymes.org/enzyme.php?ecno=1.5.1.34"
+    Source.institutionalSource
+    "Curated DHPR reaction identity and NAD(P)H-linked tetrahydropteridine/dihydropteridine redox relation. This database row does not pay organism-specific kinetics, in-vivo BH4 flux, or exact electron-density trajectories."
+    Source.publicAttribution
+
 astrobiologyPrimer2016 : Source.AttributedSource
 astrobiologyPrimer2016 =
   Source.mkDOISource
@@ -46,6 +58,7 @@ canonicalLineageCalibrationSources =
   chlorAlkaliBREF2014
   ∷ BH4.aromaticHydroxylaseReview
   ∷ BH4.bRENDAspr
+  ∷ dhprBRENDA
   ∷ BH4.nosReview
   ∷ BH4.agmoReview
   ∷ Ionic.habermannEtAl1983
