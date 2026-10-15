@@ -8,10 +8,6 @@ module DASHI.Governance.EmpiricalGenealogyRound3Everything where
 -- correction/material-persistence separation, platform capability evidence,
 -- intervention-bundle reconstruction, minimal future-safe observation and
 -- multidimensional contestability access.
---
--- Source manifests used by the typed worked cases are retained under:
---   Docs/support/reference/climate_genealogy_typed_edges.csv
---   Docs/support/reference/john_paper_claim_manifest_v2_merged.csv
 ------------------------------------------------------------------------
 
 import DASHI.Governance.EvidenceGradedGenealogyCore
@@ -25,6 +21,10 @@ import DASHI.Governance.PalantirPlatformCapabilityEvidenceExact
 import DASHI.Governance.PalantirTIAHistoricalGenealogyExact
 import DASHI.Governance.PalantirTIAPartyBenefitDistributionExact
 import DASHI.Governance.PalantirTIAInvestigativeParetoSnowballExact
+import DASHI.Governance.TIAComponentDispositionAtlasExact
+import DASHI.Governance.WadeRoleChronologyExact
+import DASHI.Governance.PalantirEarlyIntelDevelopmentChronologyExact
+import DASHI.Governance.InformationAwarenessProgrammeMigrationHypergraphExact
 import DASHI.Governance.PalantirTIAHistoricalGenealogyValidation
 import DASHI.Governance.MinimalSufficientObservationGovernanceExact
 import DASHI.Governance.MultidimensionalContestabilityAccessExact
