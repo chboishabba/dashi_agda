@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.FieldGeometryMatterTerminalMaxCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -7,25 +6,32 @@ import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
 import DASHI.Physics.Foundations.ControlledPhysicalTransitionExact as Control
 import DASHI.Physics.Foundations.PhysicalResidualPromotionExact as Residual
 import DASHI.Physics.Foundations.FieldGeometryMatterConsumersExact as Consumers
+import DASHI.Physics.CondensedMatter.MATBG2026VerticalSliceExact as MATBG
+import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact as Caloric
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
+import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact as QuantumStressSource
+import DASHI.Physics.Foundations.PrecisionThrustClosureExact as Precision
+import DASHI.Physics.Foundations.FieldGeometryMatterExperimentParetoExact as Pareto
 import DASHI.Physics.Foundations.CausalTransportFTLObligationsExact as FTL
 import DASHI.Physics.Foundations.FieldGeometryMatterAttributionRegression as Attribution
 
 ------------------------------------------------------------------------
 -- TERMINAL MAX-CUT
 --
--- Generic cross-domain structure is paid at source level in this tranche.
--- The remaining frontier is same-object physical identification, calibration,
--- execution, replication and engineering performance.  Another generic
--- abstraction does not pay any of the open leaves below.
+-- Status distinguishes repository structure, source-bounded payment and
+-- genuinely external same-object payment.  This prevents a literature source,
+-- a theorem shape or another abstraction layer from masquerading as an
+-- experiment, calibration, replication or engineering realization.
 ------------------------------------------------------------------------
 
 data FrontierStatus : Set where
   structurallyPaid : FrontierStatus
+  sourcePaid : FrontierStatus
   openSameObjectPayment : FrontierStatus
   openCalibrationOrExecution : FrontierStatus
   blockedByUnmergedSibling : FrontierStatus
   requiresIndependentExperiment : FrontierStatus
+  externalOnly : FrontierStatus
   openIntegrationReceipt : FrontierStatus
 
 record FieldGeometryMatterTerminalFrontier : Set where
@@ -39,26 +45,49 @@ record FieldGeometryMatterTerminalFrontier : Set where
     causalTransportHierarchy : FrontierStatus
     attributionRegression : FrontierStatus
 
+    matbgLiteralValleyLayerSublatticeSpinCarrier : FrontierStatus
+    matbg2026QTMSourceVertical : FrontierStatus
+    matbg2026EntropySourceVertical : FrontierStatus
+    matbgTwistStrainGeometrySourceVertical : FrontierStatus
     literalMATBGValleyC3Weld : FrontierStatus
-    literalBMToQTMToEntropyReplay : FrontierStatus
+    literalBMToQTMInteractingReplay : FrontierStatus
+    sameSampleQTMEntropyReplay : FrontierStatus
+    matbgQuantumMetricSameObjectWeld : FrontierStatus
+
+    generalizedCaloricFiniteContract : FrontierStatus
     generalizedCaloricUsefulCycle : FrontierStatus
+    geometryCaloricPhysicalCycle : FrontierStatus
+
     fusionNozzleHypersonicSameRunMomentumClosure : FrontierStatus
     fusionEngineeringQCalibration : FrontierStatus
+    fusionSiblingDirectIntegration : FrontierStatus
+    magnetocaloricSiblingDirectIntegration : FrontierStatus
     rocketdyneQualificationDirectSiblingIntegration : FrontierStatus
+
+    precisionThrustClosureGrammar : FrontierStatus
     precisionThrustNuisanceClosure : FrontierStatus
     precisionThrustIndependentReplication : FrontierStatus
-    casimirRenormalizedStressSameObjectWeld : FrontierStatus
+    precisionThrustGravityInterpretation : FrontierStatus
+
+    brownMaclayRenormalizedStressTheory : FrontierStatus
+    quantumInequalityLiteratureBoundary : FrontierStatus
+    casimirRenormalizedStressSameObjectMeasurement : FrontierStatus
     quantumStressMacroscopicScaling : FrontierStatus
     quantumStressMeasuredGRBackreaction : FrontierStatus
+
     warpPhysicalStressEnergySource : FrontierStatus
     wormholePhysicalStressEnergySource : FrontierStatus
     warpWormholeStabilityBackreaction : FrontierStatus
     causalSuperluminalTransportExperiment : FrontierStatus
+
+    fiveDomainExperimentPortfolio : FrontierStatus
     scientistFrontierPrimaryAcquisition : FrontierStatus
     monolithicFoundationsEverythingIntegration : FrontierStatus
+    exactHeadAgdaKernelReceipt : FrontierStatus
 
     moreGenericAbstractionCountsAsPhysicalClosure : Bool
     sourceCitationCountsAsSameObjectPayment : Bool
+    sameMaterialClassCountsAsSameSample : Bool
     simulationCountsAsPhysicalRealization : Bool
     residualCountsAsAntigravity : Bool
     energyConditionViolationCountsAsWarpCapability : Bool
@@ -77,25 +106,47 @@ currentTerminalFrontier =
     structurallyPaid
     structurallyPaid
 
+    structurallyPaid
+    sourcePaid
+    sourcePaid
+    sourcePaid
     openSameObjectPayment
     openSameObjectPayment
-    openCalibrationOrExecution
-    openCalibrationOrExecution
-    openCalibrationOrExecution
+    externalOnly
+    openSameObjectPayment
+
+    structurallyPaid
+    externalOnly
+    externalOnly
+
+    externalOnly
+    externalOnly
     blockedByUnmergedSibling
-    openCalibrationOrExecution
+    blockedByUnmergedSibling
+    blockedByUnmergedSibling
+
+    structurallyPaid
+    externalOnly
     requiresIndependentExperiment
-    openSameObjectPayment
-    openCalibrationOrExecution
+    externalOnly
+
+    sourcePaid
+    sourcePaid
+    externalOnly
+    externalOnly
     requiresIndependentExperiment
-    openSameObjectPayment
-    openSameObjectPayment
-    openCalibrationOrExecution
+
+    externalOnly
+    externalOnly
+    externalOnly
     requiresIndependentExperiment
+
+    structurallyPaid
     openSameObjectPayment
     openIntegrationReceipt
+    openCalibrationOrExecution
 
-    false false false false false false
+    false false false false false false false
 
 record MaxCutPaidSurface : Set where
   constructor max-cut-paid-surface
@@ -104,7 +155,12 @@ record MaxCutPaidSurface : Set where
     controlBoundary : Control.ControlledPhysicalPathBoundary
     residualBoundary : Residual.ResidualPromotionBoundary
     consumerBoundary : Consumers.ConsumerCrossDomainBoundary
+    matbgBoundary : MATBG.MATBG2026VerticalBoundary
+    caloricBoundary : Caloric.GeneralizedCaloricBoundary
     quantumStressBoundary : QuantumStress.QuantumStressEngineeringBoundary
+    quantumStressSourceBoundary : QuantumStressSource.QuantumStressSourceBoundary
+    precisionBoundary : Precision.PrecisionThrustBoundary
+    experimentParetoBoundary : Pareto.ExperimentParetoBoundary
     causalTransportBoundary : FTL.CausalTransportHierarchyBoundary
     attributionBoundary : Attribution.AttributionRegressionBoundary
 
@@ -117,7 +173,12 @@ canonicalMaxCutPaidSurface =
     Control.canonicalControlBoundary
     Residual.canonicalResidualPromotionBoundary
     Consumers.canonicalConsumerBoundary
+    MATBG.canonicalMATBG2026VerticalBoundary
+    Caloric.canonicalGeneralizedCaloricBoundary
     QuantumStress.canonicalQuantumStressBoundary
+    QuantumStressSource.canonicalQuantumStressSourceBoundary
+    Precision.canonicalPrecisionThrustBoundary
+    Pareto.canonicalExperimentParetoBoundary
     FTL.canonicalCausalTransportHierarchyBoundary
     Attribution.canonicalAttributionRegressionBoundary
 
@@ -130,11 +191,16 @@ record MaxCutStoppingRule : Set where
     independentReplicationBeatsMechanismNarrative : Bool
     physicalSourceConstructionBeatsWarpVocabulary : Bool
     causalEndpointMeasurementBeatsFTLAnalogy : Bool
+    sourceClassCompositionDoesNotCreateSameSample : Bool
     unmergedSiblingMayBeImportedOnlyAfterLandingOrExplicitRetarget : Bool
+    sourcePaidTheoryDoesNotCreateMeasuredPhysicalPayment : Bool
+    experimentPriorityDoesNotCreateTruthOrAuthority : Bool
     focusedRollupIsNotMonolithicExportReceipt : Bool
+    exactHeadKernelReceiptMustBeObservedNotAssumed : Bool
 
 open MaxCutStoppingRule public
 
 canonicalStoppingRule : MaxCutStoppingRule
 canonicalStoppingRule =
-  max-cut-stopping-rule true true true true true true true true
+  max-cut-stopping-rule
+    true true true true true true true true true true true true
