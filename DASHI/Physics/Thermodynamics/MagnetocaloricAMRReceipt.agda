@@ -5,12 +5,14 @@ open import DASHI.Physics.Thermodynamics.CaloricRegenerator
 open import DASHI.Physics.Thermodynamics.ActiveMagneticRegenerator
 open import DASHI.Physics.Thermodynamics.ProtectedMagnetocaloricSystem
 open import DASHI.Physics.Thermodynamics.MagnothermSourceBoundary
+open import DASHI.Physics.Thermodynamics.MagnetocaloricConsumerAtlasExact
 
 ------------------------------------------------------------------------
 -- Terminal receipt for the reusable magnetocaloric / AMR lane.
 --
 -- The structural formalisation is complete at the generic interface level.
--- The remaining frontier is deliberately physical/calibration-bound.
+-- Cross-domain consumers are populated through explicit bridges.  The
+-- remaining frontier is deliberately physical/calibration-bound.
 ------------------------------------------------------------------------
 
 record MagnetocaloricAMRStructuralReceipt : Set₁ where
@@ -29,6 +31,18 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
     magnothermEvidenceAttributionSeparated          : Set
     vendorClaimsBlockedFromPromotion               : Set
 
+    siMetrologyConsumerPopulated                   : Set
+    electromagneticConsumerPopulated               : Set
+    condensedMatterConsumerPopulated               : Set
+    atomicChemistryConsumerPopulated               : Set
+    quantumStatisticalConsumerPopulated            : Set
+    continuumTransportConsumerPopulated            : Set
+
+    magneticBAndHRemainDistinct                    : Set
+    sharedMaterialCarrierDoesNotCollapseObservables : Set
+    clayNSNotRequiredForDeviceTransport            : Set
+    nonAbelianYMNotApplicationMagnetism            : Set
+
 record MagnetocaloricAMRRemainingFrontier : Set₁ where
   field
     materialSpecificConstitutiveData : Set
@@ -42,9 +56,19 @@ record MagnetocaloricAMRRemainingFrontier : Set₁ where
     degradationTimeSeries            : Set
     deviceLevelCOPValidation         : Set
 
+    materialSpecificCrystalIdentification : Set
+    materialSpecificMagneticSymmetry       : Set
+    validatedHamiltonianOrElectronicModel  : Set
+    ensembleAndFreeEnergyCalibration       : Set
+    compositionSubstitutionHydrogenationResponse : Set
+    electromagneticFieldMapAndBHCalibration : Set
+
 record MagnetocaloricAMRPromotionGate : Set₁ where
   field
     StructuralReceipt : MagnetocaloricAMRStructuralReceipt
     RemainingFrontier : MagnetocaloricAMRRemainingFrontier
+    ConsumerAtlas : MagnetocaloricConsumerAtlas
     noStructuralShortcutToCalibratedPerformance : Set
     noSourceShortcutToTheoremAuthority           : Set
+    noMicroscopicShortcutToBulkResponse           : Set
+    noClayShortcutToDevicePhysics                 : Set
