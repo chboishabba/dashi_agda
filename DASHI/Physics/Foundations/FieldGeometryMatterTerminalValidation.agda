@@ -18,6 +18,26 @@ matbgEntropySourceIsPaid :
     ≡ Terminal.sourcePaid
 matbgEntropySourceIsPaid = refl
 
+matbgValleyC3SourceRoleIsPaid :
+  Terminal.literalMATBGValleyC3Weld Terminal.currentTerminalFrontier
+    ≡ Terminal.sourcePaid
+matbgValleyC3SourceRoleIsPaid = refl
+
+bmSymbolicMatrixC3IsStructurallyPaid :
+  Terminal.bmFirstHarmonicSymbolicMatrixC3 Terminal.currentTerminalFrontier
+    ≡ Terminal.structurallyPaid
+bmSymbolicMatrixC3IsStructurallyPaid = refl
+
+bmConcreteComplexEvaluationStillNeedsIntegration :
+  Terminal.bmConcreteComplexMatrixEvaluation Terminal.currentTerminalFrontier
+    ≡ Terminal.openIntegrationReceipt
+bmConcreteComplexEvaluationStillNeedsIntegration = refl
+
+bmContinuumExecutionStillNeedsCalibration :
+  Terminal.bmContinuumMomentumLatticeExecution Terminal.currentTerminalFrontier
+    ≡ Terminal.openCalibrationOrExecution
+bmContinuumExecutionStillNeedsCalibration = refl
+
 sameSampleQTMEntropyRemainsExternal :
   Terminal.sameSampleQTMEntropyReplay Terminal.currentTerminalFrontier
     ≡ Terminal.externalOnly
@@ -66,6 +86,11 @@ sameMaterialClassDoesNotBecomeSameSample :
   Terminal.sameMaterialClassCountsAsSameSample Terminal.currentTerminalFrontier
     ≡ false
 sameMaterialClassDoesNotBecomeSameSample = refl
+
+symbolicBMMatrixDoesNotBecomeCalibratedHamiltonian :
+  Terminal.symbolicBMMatrixCountsAsCalibratedComplexHamiltonian
+    Terminal.currentTerminalFrontier ≡ false
+symbolicBMMatrixDoesNotBecomeCalibratedHamiltonian = refl
 
 residualDoesNotBecomeAntigravity :
   Terminal.residualCountsAsAntigravity Terminal.currentTerminalFrontier ≡ false
