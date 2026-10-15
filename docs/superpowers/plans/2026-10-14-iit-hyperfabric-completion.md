@@ -21,7 +21,8 @@ There are deliberately no Python source-presence checkers and no grep-based shel
 - Do not identify historical IIT/XOR values with IIT-4 structure `Phi`.
 - Do not identify 1->3 topological pants with 2->1 causal synthesis without an explicit reversal witness.
 - Do not treat `C3^3` recentering as a canonical symmetry of the non-periodic ternary cube.
-- Equal cardinality never licenses algebra identification (`C9` versus `C3 x C3`).
+- Treat “369” as the repo's **3/6/9 algebra family plus ternary 27/composition geometry**, not merely the cardinality sequence `3^n`.
+- Equal cardinality never licenses algebra identification (`Z6` versus `S3`, or `C9` versus `C3 x C3`).
 - Never promote a Python numerical receipt to an Agda proof.
 - Never claim Agda-green without an actual Agda/CI receipt.
 
@@ -58,14 +59,21 @@ One shared numerical kernel evaluates both controlled axes:
 
 No second bespoke IIT evaluator is retained.
 
-## Task 4 — 369 same-cardinality algebra control
+## Task 4 — 369 matched-algebra controls
 
 **Owners:**
 - `DASHI/Biology/IIT369MatchedAlgebraControlExact.agda`
+- `DASHI/Biology/IIT369PantsGluingBridgeExact.agda`
+- `DASHI/Foundations/HexTruthS3CarrierBridgeExact.agda`
 - `DASHI/Foundations/PhaseQuotientNonaryGroupSeparationExact.agda`
 - `scripts/iit_369_algebra_scan.py`
 
-The formal layer proves the nine-state `C9` and `C3 x C3` additive laws are not group-isomorphic. The numerical layer independently evaluates the matched recurrent fabric and observes the same 2023 system-phi profile `log2(81)` for both. The numerical collision is not the proof of non-isomorphism.
+This is deliberately not just a `3^n` test. Two same-cardinality controls are first-class:
+
+- **Six states:** `HexTruth`/cyclic `Z6`-like addition versus the noncommutative `S3` permutation product. The repo owns an exact six-state carrier chart and proves that it cannot preserve both products. The matched recurrent numerical fixture observes the same IIT-4 (2023) system-phi profile `log2(36)` for both.
+- **Nine states:** cyclic `C9`/NonaryTruth addition versus `C3 x C3` / `F3^2` componentwise addition. The repo proves the group laws are not isomorphic; the matched recurrent numerical fixture observes the same 2023 system-phi profile `log2(81)` for both.
+
+These are consumer/non-identifiability results for the tested IIT observation. The numerical collisions are not the algebraic separation proofs.
 
 ## Task 5 — Path-indexed pants / hyperfabric fixtures
 
@@ -94,7 +102,7 @@ The numerical/combinatorial layer checks the exact finite incidence envelope: 27
 - `scripts/iit4_structure_reference.py`
 - `scripts/iit4_pyphi_oracle.py`
 
-`phi_s`, `phi_d`, `phi_r`, and structure `Phi` remain separate typed quantities. The lightweight Python structure reference verifies arithmetic/combinatorics only; the version-pinned PyPhi adapter is the source-faithful external full-CES numerical route.
+`phi_s`, `phi_d`, `phi_r`, and structure `Phi` remain separate typed quantities. The lightweight Python structure reference verifies arithmetic/combinatorics only; the PyPhi adapter is the external source-faithful full-CES numerical route and records runtime package provenance separately from the calibration source revision.
 
 ## Task 8 — XOR / 369 stress family
 
@@ -102,13 +110,13 @@ The numerical/combinatorial layer checks the exact finite incidence envelope: 27
 - `DASHI/Biology/IITXOR369StressFamilyExact.agda`
 - `scripts/iit_xor_369_stress_scan.py`
 
-Stress comparisons are versioned and alphabet-aware. System-phi ordering is never promoted to a consciousness ordering or silently identified with big-Phi.
+Stress comparisons are versioned and alphabet-aware and include binary XOR, ternary triXor, six-state `Z6/S3`, and nine-state `C9/F3^2` controls. System-phi ordering is never promoted to a consciousness ordering or silently identified with big-Phi.
 
 ## Task 9 — Consumer descent
 
 **Owner:** `DASHI/Biology/IITIIT4ConsumerDescentExact.agda` plus existing consumer-descent / brain / MaleCNS owners.
 
-This task is formal, not a Python truth table. Exact non-descent witnesses include nine-state cardinality losing algebra identity and selected ternary-27 cubies losing the irreducible triadic face. The numerical verifier may report observed IIT collisions, but consumer factorisation claims are owned by Agda.
+This task is formal, not a Python truth table. Exact non-descent witnesses include same-cardinality observations losing algebra identity and selected ternary-27 cubies losing the irreducible triadic face. The numerical verifier may report observed IIT collisions, but consumer factorisation claims are owned by Agda.
 
 ## Task 10 — Aggregate and verification loop
 
@@ -118,8 +126,9 @@ This task is formal, not a Python truth table. Exact non-descent witnesses inclu
 - `DASHI/Biology/IITPhiIntegrationMaxCutValidation.agda`
 - `DASHI/EverythingIITPhiIntegrationMaxCut.agda`
 - `scripts/iit_numeric_verification.py`
+- `.github/workflows/iit-phi-integration-maxcut.yml`
 
-The completion ledger separates source presence, numerical-program presence/execution, PyPhi-oracle execution, and Agda-kernel execution. It does not let one authority substitute for another.
+The completion ledger separates source presence, numerical-program presence/execution, PyPhi-oracle execution, and Agda-kernel execution. It does not let one authority substitute for another. The workflow has separate numeric and Agda jobs and contains no source-grep pseudo-proof.
 
 ## Acceptance sequence
 
@@ -128,7 +137,7 @@ Run in a suitable checkout:
 ```bash
 python scripts/iit_numeric_verification.py
 python scripts/iit4_pyphi_oracle.py --help   # then run selected full-CES fixtures with installed PyPhi
-agda DASHI/EverythingIITPhiIntegrationMaxCut.agda
+agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/EverythingIITPhiIntegrationMaxCut.agda
 ```
 
-The first command establishes the finite numerical regression targets only. The final command (or equivalent CI kernel evidence) establishes formal Agda validity.
+The first command establishes finite numerical/combinatorial regression targets only. A fresh PyPhi oracle run establishes full-CES numerical values for selected fixtures. The final command (or equivalent CI kernel evidence) establishes formal Agda validity.
