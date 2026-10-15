@@ -177,12 +177,6 @@ data CandidateConstruction : Set where
   directAssistanceConstruction : CandidateConstruction
   unresolvedAlternativeConstruction : CandidateConstruction
 
-widePurposeConnectedConstruction : CandidateConstruction
-widePurposeConnectedConstruction = CandidateConstruction.widePurposeConnectedConstruction
-
-directAssistanceConstruction : CandidateConstruction
-directAssistanceConstruction = CandidateConstruction.directAssistanceConstruction
-
 record CandidateInterpretation : Set where
   constructor candidateInterpretation
   field
@@ -195,8 +189,6 @@ record CandidateInterpretation : Set where
     candidateOnlyIsTrue : candidateOnly ≡ true
     createsLegalAuthority : Bool
     createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
-
-open CandidateInterpretation public
 
 smithWideCandidate : CandidateInterpretation
 smithWideCandidate = candidateInterpretation
@@ -227,20 +219,11 @@ data InterpretiveConsumer : Set where
   smithMeaningConsumer : InterpretiveConsumer
   exactQuotationConsumer : InterpretiveConsumer
 
-smithMeaningConsumer : InterpretiveConsumer
-smithMeaningConsumer = InterpretiveConsumer.smithMeaningConsumer
-
 data RepresentationSurface : Set where
   simpleAccessibleSurface : RepresentationSurface
   fullTechnicalSurface : RepresentationSurface
   elaborateAmbiguousSurface : RepresentationSurface
   multilingualPeerSurface : RepresentationSurface
-
-simpleAccessibleSurface : RepresentationSurface
-simpleAccessibleSurface = RepresentationSurface.simpleAccessibleSurface
-
-elaborateAmbiguousSurface : RepresentationSurface
-elaborateAmbiguousSurface = RepresentationSurface.elaborateAmbiguousSurface
 
 data MeaningDistinction : Set where
   preservationVsDirectAssistance : MeaningDistinction
@@ -322,8 +305,6 @@ record StrictlyMoreInformative
     leftPreservesSeparator : Preserves consumer left separatingDistinction
     rightCannotPreserveSeparator : Preserves consumer right separatingDistinction → ⊥
 
-open StrictlyMoreInformative public
-
 simpleAtLeastElaborateForMeaning :
   AtLeastAsInformative smithMeaningConsumer simpleAccessibleSurface elaborateAmbiguousSurface
 simpleAtLeastElaborateForMeaning purposeConnectedVsCapableByItself elaboratePreservesPurpose = simplePreservesPurpose
@@ -364,11 +345,9 @@ record InterpretationCounterexample
     candidateOutcome : ConsumerOutcome
     discriminatingOutcome : ConsumerOutcome
     outcomesDiffer : candidateOutcome ≡ discriminatingOutcome → ⊥
-    sourceAttribution : SourceAttribution
+    counterexampleSourceAttribution : SourceAttribution
     createsCorrectInterpretation : Bool
     createsCorrectInterpretationIsFalse : createsCorrectInterpretation ≡ false
-
-open InterpretationCounterexample public
 
 smithWideConstructionCounterexample :
   InterpretationCounterexample widePurposeConnectedConstruction
@@ -383,27 +362,21 @@ smithWideConstructionCounterexample =
 
 ------------------------------------------------------------------------
 -- 5. Experimental-design handoff.
---
--- The existing robust-experiment owner is reused as the authority for the
--- design boundary.  A proposed discriminator targets an unresolved coordinate;
--- it does not establish source truth or statutory meaning.
 ------------------------------------------------------------------------
 
 record DiscriminatorDesignHandoff : Set where
   constructor discriminatorDesignHandoff
   field
-    residualReference : String
+    discriminatorResidualReference : String
     targetDistinctionReference : String
     experimentDesignReference : String
     genericExperimentBoundary : Experiment.RobustExperimentFrontierBoundary
     proposalOnly : Bool
     proposalOnlyIsTrue : proposalOnly ≡ true
-    createsClaimTruth : Bool
-    createsClaimTruthIsFalse : createsClaimTruth ≡ false
-    createsLegalAuthority : Bool
-    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
-
-open DiscriminatorDesignHandoff public
+    discriminatorCreatesClaimTruth : Bool
+    discriminatorCreatesClaimTruthIsFalse : discriminatorCreatesClaimTruth ≡ false
+    discriminatorCreatesLegalAuthority : Bool
+    discriminatorCreatesLegalAuthorityIsFalse : discriminatorCreatesLegalAuthority ≡ false
 
 smithDiscriminatorDesignHandoff : DiscriminatorDesignHandoff
 smithDiscriminatorDesignHandoff = discriminatorDesignHandoff
@@ -435,16 +408,14 @@ record AcquisitionParetoHandoff : Set where
   field
     selectedCandidate : INV.InvestigationCandidate
     directParetoView : INV.DirectMixedParetoView
-    scalarScoreUsed : Bool
-    scalarScoreUsedIsFalse : scalarScoreUsed ≡ false
-    createsSourceTruth : Bool
-    createsSourceTruthIsFalse : createsSourceTruth ≡ false
-    createsAccessAuthority : Bool
-    createsAccessAuthorityIsFalse : createsAccessAuthority ≡ false
-    createsLegalAuthority : Bool
-    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
-
-open AcquisitionParetoHandoff public
+    paretoScalarScoreUsed : Bool
+    paretoScalarScoreUsedIsFalse : paretoScalarScoreUsed ≡ false
+    paretoCreatesSourceTruth : Bool
+    paretoCreatesSourceTruthIsFalse : paretoCreatesSourceTruth ≡ false
+    paretoCreatesAccessAuthority : Bool
+    paretoCreatesAccessAuthorityIsFalse : paretoCreatesAccessAuthority ≡ false
+    paretoCreatesLegalAuthority : Bool
+    paretoCreatesLegalAuthorityIsFalse : paretoCreatesLegalAuthority ≡ false
 
 smithParetoAcquisitionHandoff : AcquisitionParetoHandoff
 smithParetoAcquisitionHandoff = acquisitionParetoHandoff
@@ -460,10 +431,10 @@ smithParetoAcquisitionHandoff = acquisitionParetoHandoff
 ------------------------------------------------------------------------
 
 record SmithLegalFollowHandoff : Set where
-  constructor smithLegalFollowHandoff
+  constructor smithLegalFollowHandoffRecord
   field
-    residualReference : String
-    operativeConstellation : OperativeConstellation
+    legalResidualReference : String
+    constellation : OperativeConstellation
     proofSearchBoundary : LegalFollow.LegalFollowProofSearchBoundary
     jurisdictionConstraintReference : String
     sourceRoleConstraintReference : String
@@ -472,10 +443,8 @@ record SmithLegalFollowHandoff : Set where
     acquisitionPaysResidual : Bool
     acquisitionPaysResidualIsFalse : acquisitionPaysResidual ≡ false
 
-open SmithLegalFollowHandoff public
-
-smithLegalFollowHandoff : SmithLegalFollowHandoff
-smithLegalFollowHandoff = smithLegalFollowHandoff
+canonicalSmithLegalFollowHandoff : SmithLegalFollowHandoff
+canonicalSmithLegalFollowHandoff = smithLegalFollowHandoffRecord
   "smith:residual:wide-vs-direct"
   smithOperativeConstellation
   LegalFollow.canonicalLegalFollowProofSearchBoundary
@@ -531,10 +500,6 @@ legalFollowBoundary = LegalFollow.canonicalLegalFollowProofSearchBoundary
 
 investigationBoundary : INV.InvestigationAcquisitionBoundary
 investigationBoundary = INV.canonicalInvestigationAcquisitionBoundary
-
--- The imported Two-Eyed / plural-admissibility owners remain distinct source
--- surfaces.  These references make reuse explicit without pretending that
--- Indigenous or feminist source authority is a legal holding in Smith.
 
 twoEyedReuseReference : String
 twoEyedReuseReference =
