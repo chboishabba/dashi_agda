@@ -8,6 +8,12 @@ required = [
     "DASHI/Biology/KitzerowBH4FluxCausalModelsExact.agda",
     "DASHI/Chemistry/LineageBidiDiscriminatorSynthesisExact.agda",
     "DASHI/Biology/CarbonSiliconReachableChemistryBenchmarkExact.agda",
+    "DASHI/Chemistry/LineageAttributionEvidenceSourceAtlasExact.agda",
+    "DASHI/Chemistry/LineageAttributionEvidencePaymentExact.agda",
+    "DASHI/Chemistry/AttributedGoldReactionReplayExact.agda",
+    "DASHI/Chemistry/LineageQuantitativeCalibrationLedgerExact.agda",
+    "DASHI/Chemistry/LineageAttributionAcquisitionParetoExact.agda",
+    "DASHI/Chemistry/LineageAttributionEvidenceMaxCutValidation.agda",
     "DASHI/Chemistry/LineageCalibrationAttributionEnvelopeExact.agda",
     "DASHI/Chemistry/LineageSourceManifestationGuardExact.agda",
     "DASHI/Chemistry/LineageAttributionAcquisitionFrontierExact.agda",
@@ -20,16 +26,54 @@ for rel in required:
 for needle in ["chlorAlkaliReplay", "pahReplay", "dhprReplay", "pbCaReplay", "carbonBondReplay"]:
     assert needle in (ROOT / required[0]).read_text(), f"gold replay suite missing {needle}"
 
-attribution = (ROOT / required[5]).read_text()
+source_atlas = (ROOT / required[5]).read_text()
 for needle in [
-    "AttributedSourceCore", "SnowballAttributionProvenanceInvariantExact", "ReplayAttributionEnvelope",
-    "chlorAlkaliEuroChlor2022", "pahMechanismSource", "dhprBrenda2026", "pbCaGeometrySource",
-    "astrobiologyPrimer2016", "sourceOwnsDashiComposition", "citationCreatesNumericPayment",
-    "dashiSynthesisAttributedToExternalSource", "sourceObservationAttributedToDashi",
+    "AttributedSourceCore", "chlorAlkaliBREF2014", "astrobiologyPrimer2016",
+    "canonicalLineageCalibrationSourceAtlas", "canonicalAtlasNonPromoting",
+]:
+    assert needle in source_atlas, f"canonical source atlas missing {needle}"
+
+payment = (ROOT / required[6]).read_text()
+for needle in [
+    "SourceCoordinatePayment", "sourceOwnsDASHISynthesis", "citationCreatesProof",
+    "citationAlonePaysCalibration", "missingCoordinatePromotedByNearbyCitation",
+    "exactLocatorRequiredForNumericPromotion",
+]:
+    assert needle in payment, f"evidence payment owner missing {needle}"
+
+replay = (ROOT / required[7]).read_text()
+for needle in [
+    "AttributedGoldReplay", "canonicalAttributedGoldReplays", "sourceOwnsReplayComposition",
+    "replayCompositionErasesSourceIdentity", "unpaidCoordinatesRemainAttributed",
+]:
+    assert needle in replay, f"attributed replay owner missing {needle}"
+
+calibration = (ROOT / required[8]).read_text()
+for needle in [
+    "QuantitativeCalibrationCell", "bh4BranchFluxCell", "pahKineticCell", "chlorElectrodeCell",
+    "pbCaAffinityCell", "carbonSiliconYieldCell", "numberWithoutExactLocatorPromoted",
+    "numberWithoutContextPromoted", "unpaidCoordinateInterpretedAsZero",
+]:
+    assert needle in calibration, f"quantitative calibration ledger missing {needle}"
+
+pareto = (ROOT / required[9]).read_text()
+for needle in [
+    "bh4SameObjectFluxDataset", "isotopeAtomMapBenchmarks", "pbCaTargetCalibration",
+    "carbonSiliconMatchedDataset", "frontierRankIsTruthRank", "selectionCreatesEvidence",
+]:
+    assert needle in pareto, f"canonical scientific acquisition Pareto missing {needle}"
+
+attribution = (ROOT / required[11]).read_text()
+for needle in [
+    "LineageAttributionEvidenceSourceAtlasExact", "ReplayAttributionEnvelope",
+    "chlorAlkaliTechnicalSource", "pahMechanismSource", "dhprBrenda2026", "pbCaGeometrySource",
+    "astrobiologyPrimerSource", "canonicalSourceAtlasReusedWhereAvailable",
+    "citationCreatesNumericPayment", "dashiSynthesisAttributedToExternalSource",
+    "sourceObservationAttributedToDashi",
 ]:
     assert needle in attribution, f"attribution envelope missing {needle}"
 
-manifestation = (ROOT / required[6]).read_text()
+manifestation = (ROOT / required[12]).read_text()
 for needle in [
     "SourceCoordinateGuard", "ManifestationStatus", "LocatorStatus", "CoordinateRole",
     "sameObjectAndLocatorRequiredForNumericPayment", "nearbyCitationPaysCoordinate",
@@ -37,23 +81,27 @@ for needle in [
 ]:
     assert needle in manifestation, f"manifestation guard missing {needle}"
 
-acquisition = (ROOT / required[7]).read_text()
+acquisition = (ROOT / required[13]).read_text()
 for needle in [
-    "bh4FluxDataset", "pahAtomMap", "chlorLocator", "pbCaTargetDataset", "carbonSiliconMatchedDataset",
+    "LineageAttributionAcquisitionParetoExact", "scientificAcquisitionFrontier",
     "stanfordContactArtifact", "brazilCorrespondenceArtifact", "iaccMedMapsContactArtifact",
-    "scientificSupportSeparateFromContactProvenance", "contactEvidenceAutomaticallyProvesDerivation",
-    "frontierRankIsTruthRank", "unpaidCoordinateRetainsAttribution", "causalValueSeparateFromAttributionValue",
+    "canonicalScientificParetoReused", "scientificSupportSeparateFromContactProvenance",
+    "contactEvidenceAutomaticallyProvesDerivation", "contactEvidenceAutomaticallyProvesPlagiarism",
+    "scientificSupportAutomaticallyProvesPriority", "frontierRankIsTruthRank",
 ]:
-    assert needle in acquisition, f"attribution acquisition frontier missing {needle}"
+    assert needle in acquisition, f"contact provenance extension missing {needle}"
 
-rollup = (ROOT / required[8]).read_text()
+rollup = (ROOT / required[14]).read_text()
 for needle in [
+    "LineageAttributionEvidenceSourceAtlasExact", "LineageAttributionEvidencePaymentExact",
+    "AttributedGoldReactionReplayExact", "LineageQuantitativeCalibrationLedgerExact",
+    "LineageAttributionAcquisitionParetoExact", "LineageAttributionEvidenceMaxCutValidation",
     "LineageCalibrationAttributionEnvelopeExact", "LineageSourceManifestationGuardExact",
     "LineageAttributionAcquisitionFrontierExact",
 ]:
     assert needle in rollup, f"rollup missing {needle}"
 
-validation = (ROOT / required[9]).read_text()
+validation = (ROOT / required[15]).read_text()
 for needle in [
     "attributionEnvelopeRetainsSourceRoleWithoutPromotion",
     "manifestationGuardBlocksNearbySourcePromotion",
@@ -66,4 +114,4 @@ assert "LineageCalibrationDiscriminatorEverything" in full
 kit = (ROOT / "DASHI/Biology/KitzerowBH4Everything.agda").read_text()
 assert "KitzerowBH4FluxCausalModelsExact" in kit
 
-print("lineage calibration discriminator + attribution max-cut static contract: PASS")
+print("lineage calibration/discriminator + unified attribution/evidence max-cut static contract: PASS")
