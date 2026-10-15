@@ -12,10 +12,11 @@ so the local three-input update can be read as an iterated pair of the same
 2->1 synthesis cells used by the causal-pants layer.
 
 For each finite linear system we compute rank over F_q, kernel dimension,
-reachable-state count, and a geometric slab-cut effect penalty.  The cut
-penalty is not claimed to be a full IIT MIP; it is the exact effect-side
-penalty for this declared cut under independent uniform noising of crossing
-inputs.
+reachable-state count, and a geometric slab-cut IIT receipt.  The declared
+slab cut is not claimed to be the global MIP.  Its effect side follows from
+independent uniform noising of crossing inputs.  At the zero state, the cause
+selectivity is q^(-kernel_dimension), so the cause-side cut value is the effect
+penalty multiplied by that selectivity.
 """
 
 from __future__ import annotations
@@ -119,6 +120,18 @@ def experiment_row(
     sites = n**dim
     matrix = torus_linear_matrix(n, dim, q, active_axes)
     rank = rank_mod(matrix, q)
+    kernel_dimension = sites - rank
+    slab = geometric_slab_cut(n, dim, q, active_axes)
+    cause_selectivity = q ** (-kernel_dimension)
+    slab_cause = cause_selectivity * slab["effect_cut_penalty_bits"]
+    slab_system = min(slab["effect_cut_penalty_bits"], slab_cause)
+    slab.update(
+        {
+            "zero_state_cause_selectivity": cause_selectivity,
+            "zero_state_cause_cut_phi_bits": slab_cause,
+            "zero_state_declared_cut_phi_s_bits": slab_system,
+        }
+    )
     return {
         "q": q,
         "label": label,
@@ -127,9 +140,9 @@ def experiment_row(
         "causal_sites": sites,
         "global_configurations": q**sites,
         "linear_rank": rank,
-        "kernel_dimension": sites - rank,
+        "kernel_dimension": kernel_dimension,
         "reachable_states": q**rank,
-        "slab_cut": geometric_slab_cut(n, dim, q, active_axes),
+        "slab_cut": slab,
     }
 
 
@@ -163,7 +176,7 @@ def lattice_scaling_summary() -> dict:
             "27_cubed_is_27_ternary_sites": False,
             "three_27_state_factors_equal_nine_ternary_site_cardinality": True,
             "ordinary_site_configuration_growth_is_tetration": False,
-            "slab_cut_penalty_is_full_iit_mip": False,
+            "declared_slab_cut_is_global_iit_mip": False,
             "state_space_size_alone_determines_linear_rank": False,
         },
     }
