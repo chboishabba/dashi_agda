@@ -31,3 +31,8 @@ literalMatrixBytesNotVendored :
   A.ReleasedArtifactBoundary.matrixBytesVendoredIntoDASHI
     A.canonicalReleasedArtifactBoundary ≡ false
 literalMatrixBytesNotVendored = refl
+
+matrixNotIndependentlyRediagonalized :
+  A.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
+    A.canonicalReleasedArtifactBoundary ≡ false
+matrixNotIndependentlyRediagonalized = refl
