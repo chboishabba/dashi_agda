@@ -49,9 +49,22 @@ manifestationGuardBlocksNearbySourcePromotion = refl , refl
 acquisitionFrontierIsNotTruthRanking :
   Acquisition.frontierRankIsTruthRank Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
   × Acquisition.unpaidCoordinateRetainsAttribution Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ true
-acquisitionFrontierIsNotTruthRanking = refl , refl
+  × Acquisition.acquisitionCreatesAuthority Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
+acquisitionFrontierIsNotTruthRanking = refl , (refl , refl)
 
 contactProvenanceDoesNotCollapseIntoScientificOrDerivationEvidence :
   Acquisition.scientificSupportSeparateFromContactProvenance Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ true
   × Acquisition.contactEvidenceAutomaticallyProvesDerivation Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
 contactProvenanceDoesNotCollapseIntoScientificOrDerivationEvidence = refl , refl
+
+contactDoesNotProvePlagiarism :
+  Acquisition.contactEvidenceAutomaticallyProvesPlagiarism Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
+contactDoesNotProvePlagiarism = refl
+
+scientificSupportDoesNotProvePriority :
+  Acquisition.scientificSupportAutomaticallyProvesPriority Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
+scientificSupportDoesNotProvePriority = refl
+
+priorityDoesNotProveCorrectness :
+  Acquisition.priorityAutomaticallyProvesCorrectness Acquisition.canonicalLineageAttributionAcquisitionFrontier ≡ false
+priorityDoesNotProveCorrectness = refl
