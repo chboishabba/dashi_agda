@@ -5,14 +5,20 @@ root = Path(__file__).resolve().parents[1]
 atlas = root / "DASHI/Biology/KitzerowBH4EvidenceAtlasExact.agda"
 priority = root / "DASHI/Biology/KitzerowPriorityGenealogyExact.agda"
 regression = root / "DASHI/Biology/KitzerowBH4EvidenceRegression.agda"
+registry = root / "DASHI/Biology/KitzerowBH4SourceRegistry.agda"
+maxcut = root / "DASHI/Biology/KitzerowBH4EvidenceMaxCut.agda"
+focused = root / "DASHI/Biology/KitzerowBH4EvidenceEverything.agda"
+acquisition = root / "docs/biology/KitzerowBH4PriorityAcquisition.md"
 
-assert atlas.exists(), "missing KitzerowBH4EvidenceAtlasExact.agda"
-assert priority.exists(), "missing KitzerowPriorityGenealogyExact.agda"
-assert regression.exists(), "missing KitzerowBH4EvidenceRegression.agda"
+for path in [atlas, priority, regression, registry, maxcut, focused, acquisition]:
+    assert path.exists(), f"missing Kitzerow max-cut file: {path.relative_to(root)}"
 
 atlas_text = atlas.read_text()
 priority_text = priority.read_text()
 regression_text = regression.read_text()
+registry_text = registry.read_text()
+maxcut_text = maxcut.read_text()
+acquisition_text = acquisition.read_text()
 
 for token in [
     "scientificSupport",
@@ -28,6 +34,7 @@ for token in [
     "naviauxThreeHit",
     "melilloNeuroimmuneCascade",
     "iaccDevelopmentalSystems",
+    "bh4CytoprotectionPriorArt",
 ]:
     assert token in atlas_text, f"missing atlas token: {token}"
 
@@ -41,6 +48,8 @@ for token in [
     "attributionConcern",
     "plagiarismProven",
     "plagiarismProvenIsFalse",
+    "stanfordContactEvidence",
+    "princetonAssessment",
 ]:
     assert token in priority_text, f"missing priority token: {token}"
 
@@ -49,7 +58,31 @@ for token in [
     "priorityDoesNotImplyContact",
     "contactDoesNotImplyPlagiarism",
     "nodeSupportDoesNotConfirmWholeGraph",
+    "stanfordContactRemainsUnverifiedPrimary",
+    "priorArtSubtractionIsRequired",
 ]:
     assert token in regression_text, f"missing regression token: {token}"
 
-print("kitzerow BH4 priority regression: ok")
+for token in [
+    "SourceRecord",
+    "kitzerow2024BH4",
+    "kitzerow2024Allostatic",
+    "kitzerowTimeline",
+    "eichwald2023BH4",
+    "ojha2026",
+    "stanford2025",
+]:
+    assert token in registry_text, f"missing registry token: {token}"
+
+for token in [
+    "KitzerowBH4SourceRegistry",
+    "KitzerowBH4EvidenceAtlasExact",
+    "KitzerowPriorityGenealogyExact",
+    "KitzerowBH4EvidenceRegression",
+]:
+    assert token in maxcut_text, f"missing max-cut import: {token}"
+
+assert "explicitContactClaim" in acquisition_text
+assert "not" in acquisition_text.lower() and "verifiedPrimaryContact" in acquisition_text
+
+print("kitzerow BH4 priority max-cut regression: ok")
