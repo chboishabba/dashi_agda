@@ -11,6 +11,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact a
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as NH3Electronic
 import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact as Hamiltonian
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as FCI
+import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as GroundC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
@@ -56,9 +57,24 @@ sto3gFCIEnergyMagnitudeIs555245 :
   FCI.NH3STO3GFCIReceipt.fciEnergyTenThousandthHartree FCI.canonicalNH3STO3GFCIReceipt ≡ 555245
 sto3gFCIEnergyMagnitudeIs555245 = refl
 
-fciCoefficientsStillNotImported :
-  FCI.STO3GFCIBoundary.literalFCIEigenvectorCoefficientsImported FCI.canonicalSTO3GFCIBoundary ≡ false
-fciCoefficientsStillNotImported = refl
+authorReleasedMatrixIdentityPaid :
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+authorReleasedMatrixIdentityPaid = refl
+
+authorReleasedMatrixDimension64 :
+  SCIArtifact.ReleasedSelectedCIArtifact.matrixDimension SCIArtifact.nh3SelectedCI64Artifact ≡ 64
+authorReleasedMatrixDimension64 = refl
+
+paperBenchmarkAndReleasedArtifactRemainDistinct :
+  SCIArtifact.ReleasedArtifactBoundary.paperBenchmarkAndArtifactAreSameNumericalObject
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
+paperBenchmarkAndReleasedArtifactRemainDistinct = refl
+
+authorMatrixStillNotRediagonalizedByDASHI :
+  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
+authorMatrixStillNotRediagonalizedByDASHI = refl
 
 groundConfigurationC3ActionPaid :
   GroundC3.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid GroundC3.canonicalGroundStateC3Boundary ≡ true
