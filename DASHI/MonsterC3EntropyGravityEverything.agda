@@ -7,8 +7,7 @@ import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticExact
 import DASHI.Moonshine.MonsterC3ResidualTernaryArithmeticValidation
 
--- Strongest existing same-object zeta / regular-character / 3B / VOA seam,
--- plus the literal one/zeta/zeta^2 same-central-action frontier.
+-- Strongest existing same-object zeta / regular-character / 3B / VOA seam.
 import DASHI.Wikimedia.IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact
 import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
@@ -17,16 +16,26 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
--- 369 atomics -> molecule -> reaction hyperfibre and source-backed NH3 stack.
+-- 369 atomics -> molecule -> Hamiltonian/wavefunction -> reactions.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact
 import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureValidation
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryValidation
+import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionExact
+import DASHI.Physics.Chemistry.AmmoniaHamiltonianWavefunctionValidation
+import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact
+import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionValidation
+import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact
+import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeValidation
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionExact
 import DASHI.Physics.Chemistry.AmmoniaProtonationReactionValidation
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferExact
 import DASHI.Physics.Chemistry.AmmoniaH3PlusProtonTransferValidation
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismExact
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstractionMechanismValidation
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreExact
+import DASHI.Physics.Chemistry.AmmoniaHydrogenAbstraction369HyperfibreValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact
 
 -- Statistical authority plus exact count-level probability adapters.
