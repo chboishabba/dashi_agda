@@ -13,6 +13,7 @@ required = [
     "DASHI/Biology/KitzerowBH4LineageRegressionExact.agda",
     "DASHI/Biology/PrebioticCarbonAtomicLineageRegressionExact.agda",
     "DASHI/Chemistry/AtomicMolecularReactionLineageEverything.agda",
+    "DASHI/Chemistry/EverythingFull.agda",
     "DASHI/Chemistry/AtomicMolecularReactionLineageMaxCutValidation.agda",
 ]
 for rel in required:
@@ -25,7 +26,13 @@ for needle in [
     "MolecularAssemblyBoundary",
     "MolecularConstrainedMinimizerBridge",
     "TransitionKernel",
+    "CoarseFineRelativeFibreExact",
+    "AdmissibleTransitionHyperfabricExact",
     "ConsumerRelativeCoarseGrainingBidiExact",
+    "lineageCoarseFineSurface",
+    "lineageAdmissibleTransitionSurface",
+    "usesNativeCoarseFineHyperfabric",
+    "usesNativeAdmissibleTransitionHyperfabric",
     "AtomicLineage",
     "NuclearLineageReceipt",
     "ElectronLineage",
@@ -132,5 +139,9 @@ for needle in [
     "PrebioticCarbonAtomicLineageRegressionExact",
 ]:
     assert needle in rollup, f"rollup missing {needle}"
+
+full = (ROOT / required[9]).read_text()
+assert "import DASHI.Chemistry.Everything" in full
+assert "import DASHI.Chemistry.AtomicMolecularReactionLineageEverything" in full
 
 print("atomic-molecular-reaction lineage max-cut static contract: PASS")
