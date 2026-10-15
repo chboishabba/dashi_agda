@@ -24,18 +24,24 @@ phaseConjugationCommutesWithEvaluation = Exact.phaseEvaluationConjugates
 
 matrixTimeReversalSurvivesExactEvaluation :
   (v : BM.Valley) (h : BM.MoireHarmonic) →
-  Exact.evaluateTunnellingMatrix Exact.fixtureW0 Exact.fixtureW1
-    (BM.tunnellingMatrix (BM.timeReverseValley v) h)
+  Exact.qtmNormalizedTunnellingMatrix (BM.timeReverseValley v) h
     ≡
   Exact.conjugateEisensteinMatrix
-    (Exact.evaluateTunnellingMatrix Exact.fixtureW0 Exact.fixtureW1
-      (BM.tunnellingMatrix v h))
+    (Exact.qtmNormalizedTunnellingMatrix v h)
 matrixTimeReversalSurvivesExactEvaluation = Exact.evaluatedMatrixTimeReversal
 
 exactEisensteinBackendIsPaid :
   Exact.exactEisensteinMatrixBackendPaid Exact.canonicalBMEisensteinBoundary ≡ true
 exactEisensteinBackendIsPaid = refl
 
-sampleCalibrationStillUnpaid :
-  Exact.sampleW0W1CalibrationPaid Exact.canonicalBMEisensteinBoundary ≡ false
-sampleCalibrationStillUnpaid = refl
+sourceNormalizedRatioIsPaid :
+  Exact.sourceNormalizedW0W1RatioPaid Exact.canonicalBMEisensteinBoundary ≡ true
+sourceNormalizedRatioIsPaid = refl
+
+absoluteTunnellingScaleStillUnpaid :
+  Exact.absoluteTunnellingEnergyScalePaid Exact.canonicalBMEisensteinBoundary ≡ false
+absoluteTunnellingScaleStillUnpaid = refl
+
+biologyMechanismDoesNotTransfer :
+  Exact.biologyMechanismTransferred Exact.canonicalBMEisensteinBoundary ≡ false
+biologyMechanismDoesNotTransfer = refl
