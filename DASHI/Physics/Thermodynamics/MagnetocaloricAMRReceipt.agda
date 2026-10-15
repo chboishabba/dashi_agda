@@ -6,13 +6,14 @@ open import DASHI.Physics.Thermodynamics.ActiveMagneticRegenerator
 open import DASHI.Physics.Thermodynamics.ProtectedMagnetocaloricSystem
 open import DASHI.Physics.Thermodynamics.MagnothermSourceBoundary
 open import DASHI.Physics.Thermodynamics.MagnetocaloricConsumerAtlasExact
+import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact as MaxCut
 
 ------------------------------------------------------------------------
 -- Terminal receipt for the reusable magnetocaloric / AMR lane.
 --
--- The structural formalisation is complete at the generic interface level.
--- Cross-domain consumers are populated through explicit bridges.  The
--- remaining frontier is deliberately physical/calibration-bound.
+-- Structural formalisation and the current source-payment atlas are explicit.
+-- The remaining frontier is same-object physical acquisition/calibration, not
+-- another ungrounded abstraction layer.
 ------------------------------------------------------------------------
 
 record MagnetocaloricAMRStructuralReceipt : Set₁ where
@@ -40,6 +41,13 @@ record MagnetocaloricAMRStructuralReceipt : Set₁ where
     continuumTransportConsumerPopulated            : Set
     magnetostructuralConsumerPopulated              : Set
 
+    canonicalAttributedSourceCoreUsed              : Set
+    claimRelativePrimarynessEncoded                : Set
+    accessCarrierSeparateFromAuthorship             : Set
+    sixWeekPeerReviewedAgingPaymentEncoded          : Set
+    preliminaryThreeMonthPaymentQualified           : Set
+    plannedLongTermExperimentNotPromoted            : Set
+
     magneticBAndHRemainDistinct                    : Set
     sharedMaterialCarrierDoesNotCollapseObservables : Set
     coatingAndSubstrateRemainDistinctMaterials      : Set
@@ -59,6 +67,7 @@ record MagnetocaloricAMRRemainingFrontier : Set₁ where
     sameDeviceInputWork              : Set
     sameDeviceRecoveredWork          : Set
     degradationTimeSeries            : Set
+    completedLongDurationSameObjectAging : Set
     deviceLevelCOPValidation         : Set
 
     materialSpecificCrystalIdentification : Set
@@ -75,8 +84,11 @@ record MagnetocaloricAMRPromotionGate : Set₁ where
     StructuralReceipt : MagnetocaloricAMRStructuralReceipt
     RemainingFrontier : MagnetocaloricAMRRemainingFrontier
     ConsumerAtlas : MagnetocaloricConsumerAtlas
+    EvidenceMaxCutReceipt : MaxCut.MagnetocaloricMaxCutReceipt
     noStructuralShortcutToCalibratedPerformance : Set
     noSourceShortcutToTheoremAuthority           : Set
     noMicroscopicShortcutToBulkResponse           : Set
     noMechanicalShortcutToQualifiedLifetime       : Set
+    noVendorShortcutToSameDevicePerformance       : Set
+    noPlannedExperimentShortcutToObservedLifetime : Set
     noClayShortcutToDevicePhysics                 : Set
