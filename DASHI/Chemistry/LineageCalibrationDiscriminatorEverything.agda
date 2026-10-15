@@ -6,9 +6,16 @@ import DASHI.Biology.KitzerowBH4FluxCausalModelsExact
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact
 
--- Attribution/provenance hardening: external observations retain source
--- ownership and role; DASHI synthesis remains separately attributed; numeric
--- and same-object promotion require manifestation/locator-specific payment.
+-- Canonical attributed evidence/payment stack.
+import DASHI.Chemistry.LineageAttributionEvidenceSourceAtlasExact
+import DASHI.Chemistry.LineageAttributionEvidencePaymentExact
+import DASHI.Chemistry.AttributedGoldReactionReplayExact
+import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact
+import DASHI.Chemistry.LineageAttributionAcquisitionParetoExact
+import DASHI.Chemistry.LineageAttributionEvidenceMaxCutValidation
+
+-- Attribution/provenance hardening extensions: source-role snowballing,
+-- manifestation/locator guards, and Kitzerow contact/exposure acquisition.
 import DASHI.Chemistry.LineageCalibrationAttributionEnvelopeExact
 import DASHI.Chemistry.LineageSourceManifestationGuardExact
 import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact
