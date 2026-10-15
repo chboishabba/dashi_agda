@@ -27,8 +27,8 @@ module DASHI.Physics.Foundations.TorqueTrialectic369Exact where
 open import DASHI.Core.Prelude
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
-import Base369 as Base
 import DASHI.Algebra.BalancedTernary as BT
+import DASHI.Algebra.TriadicDepthOneCharacters as C3Base
 import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369MobiusTransport as Mobius
@@ -38,6 +38,7 @@ import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 import DASHI.Reasoning.TernarySynthesisCellComplexExact as Cells
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants369
 import DASHI.Moonshine.C3FourierConjugationExact as C3
+import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 
 ------------------------------------------------------------------------
 -- 1. Existing SO(3) 9 / 18 / 27 geometry, now with a typed bracket voxel.
@@ -177,12 +178,12 @@ swapTorqueInputsNegatesOrientation
 -- 3. Exact C3 / zeta phase chart for the three orientation sectors.
 ------------------------------------------------------------------------
 
-orientationToPhase : BT.Trit → C3.C3.C3Phase
+orientationToPhase : BT.Trit → C3Base.C3Phase
 orientationToPhase BT.neg = C3.zetaSquared
 orientationToPhase BT.zero = C3.one
 orientationToPhase BT.pos = C3.zeta
 
-torquePhase : BracketVoxel → C3.C3.C3Phase
+torquePhase : BracketVoxel → C3Base.C3Phase
 torquePhase voxel = orientationToPhase (torqueOrientation voxel)
 
 orientationNegationConjugatesPhase :
@@ -243,9 +244,7 @@ torqueVoxelPoint voxel =
     (axisToSSP (forceAxis voxel))
     (axisToSSP (outputAxis voxel))
 
-torquePantsPath :
-  BracketVoxel →
-  DASHI.Topology.TernaryPantsFrontierExact.PantsPath 3
+torquePantsPath : BracketVoxel → Frontier.PantsPath 3
 torquePantsPath voxel =
   Pants369.voxel27ToPants3 (torqueVoxelPoint voxel)
 
@@ -273,7 +272,7 @@ orientedTorqueOrientation :
 orientedTorqueOrientation torque = torqueOrientation (geometry torque)
 
 orientedTorquePhase :
-  ∀ {TorqueValue} → OrientedTorque TorqueValue → C3.C3.C3Phase
+  ∀ {TorqueValue} → OrientedTorque TorqueValue → C3Base.C3Phase
 orientedTorquePhase torque = torquePhase (geometry torque)
 
 orientedTorqueFace :
