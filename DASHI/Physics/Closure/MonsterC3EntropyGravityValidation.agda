@@ -7,81 +7,96 @@ import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Authori
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
 import DASHI.Physics.Closure.MonsterC3ZetaEntropyGravityCrossPollinationExact as ZetaCross
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369C3EntropyIntertwinerExact as Chemistry
+import DASHI.Physics.Chemistry.AmmoniaC3MolecularFixtureExact as NH3
 
 fineMonsterStatesRemainPresent :
   StateCount.MonsterC3StateCountingReceipt.identityVisibleStates
-    StateCount.canonicalMonsterC3StateCountingReceipt
-  ≡ 196883
+    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 196883
 fineMonsterStatesRemainPresent = refl
 
 nontrivialPhaseSeesResidual53 :
   StateCount.MonsterC3StateCountingReceipt.nontrivialPhaseVisibleStates
-    StateCount.canonicalMonsterC3StateCountingReceipt
-  ≡ 53
+    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 53
 nontrivialPhaseSeesResidual53 = refl
 
 balancedRegularFibreCancelsCoarsely :
   StateCount.MonsterC3StateCountingReceipt.regularFibreNontrivialContribution
-    StateCount.canonicalMonsterC3StateCountingReceipt
-  ≡ 0
+    StateCount.canonicalMonsterC3StateCountingReceipt ≡ 0
 balancedRegularFibreCancelsCoarsely = refl
 
 sameObjectZetaCancellationAlreadyPaid :
   ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.exact65610ZetaCancellationPaid
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt
-  ≡ true
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
 sameObjectZetaCancellationAlreadyPaid = refl
+
+literalThreePhasesAlreadyShareOneAction :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.literalThreePhaseFibresUseOneCentralAction
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ true
+literalThreePhasesAlreadyShareOneAction = refl
+
+singleLiteralProducerStillUninhabited :
+  ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.actualSingleProducerInhabited
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
+singleLiteralProducerStillUninhabited = refl
 
 zetaWeldStillDoesNotCreateQuantumGravity :
   ZetaCross.ZetaEntropyGravityCrossPollinationReceipt.zetaWeldCreatesQuantumGravity
-    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt
-  ≡ false
+    ZetaCross.canonicalZetaEntropyGravityCrossPollinationReceipt ≡ false
 zetaWeldStillDoesNotCreateQuantumGravity = refl
 
 stateCountIsNotProbabilityEntropy :
   StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution
-    StateCount.canonicalStateCountingEntropyBoundary
-  ≡ false
+    StateCount.canonicalStateCountingEntropyBoundary ≡ false
 stateCountIsNotProbabilityEntropy = refl
 
 scalarEntropyDensityIsNotStressTensor :
   Gravity.EntropyGravityPromotionBoundary.scalarEntropyDensityDeterminesStressTensor
-    Gravity.canonicalEntropyGravityPromotionBoundary
-  ≡ false
+    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 scalarEntropyDensityIsNotStressTensor = refl
 
 entropyAloneDoesNotPromoteEinstein :
   Gravity.EntropyGravityPromotionBoundary.entropyObservableAloneDerivesEinsteinDynamics
-    Gravity.canonicalEntropyGravityPromotionBoundary
-  ≡ false
+    Gravity.canonicalEntropyGravityPromotionBoundary ≡ false
 entropyAloneDoesNotPromoteEinstein = refl
 
 wittenRouteIsThreeDimensional :
-  Authority.GravityRouteDescriptor.spacetimeDimension
-    Authority.wittenAdS3MonsterRoute
-  ≡ 3
+  Authority.GravityRouteDescriptor.spacetimeDimension Authority.wittenAdS3MonsterRoute ≡ 3
 wittenRouteIsThreeDimensional = refl
 
 monstrousMTheoryStartsTwentySevenDimensional :
-  Authority.GravityRouteDescriptor.spacetimeDimension
-    Authority.monstrousMTheoryRoute
-  ≡ 27
+  Authority.GravityRouteDescriptor.spacetimeDimension Authority.monstrousMTheoryRoute ≡ 27
 monstrousMTheoryStartsTwentySevenDimensional = refl
 
 observedFourDimensionalMonsterStillUnpaid :
   Physical.Monster3Plus1PhysicalSymmetryReceipt.monsterIsSymmetryOfObserved3Plus1Universe
-    Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt
-  ≡ false
+    Physical.canonicalMonster3Plus1PhysicalSymmetryReceipt ≡ false
 observedFourDimensionalMonsterStillUnpaid = refl
+
+sourceBackedAmmoniaC3GeometryPaid :
+  Chemistry.ChemistryC3MaxCutStatus.sourceBackedSameObjectC3GeometryFixturePaid
+    Chemistry.canonicalChemistryC3MaxCutStatus ≡ true
+sourceBackedAmmoniaC3GeometryPaid = refl
+
+ammoniaC3CycleIsLiteral :
+  NH3.rotateH (NH3.rotateH (NH3.rotateH NH3.h1)) ≡ NH3.h1
+ammoniaC3CycleIsLiteral = refl
+
+fullElectronicMolecularC3ActionStillUnpaid :
+  Chemistry.ChemistryC3MaxCutStatus.fullElectronicMolecularC3ActionInstantiated
+    Chemistry.canonicalChemistryC3MaxCutStatus ≡ false
+fullElectronicMolecularC3ActionStillUnpaid = refl
+
+productsByproductsReactionStillUnpaid :
+  Chemistry.ChemistryC3MaxCutStatus.productsByproductsReactionFixturePaid
+    Chemistry.canonicalChemistryC3MaxCutStatus ≡ false
+productsByproductsReactionStillUnpaid = refl
 
 c3ChemistryDoesNotPromoteMonster :
   Chemistry.ChemistryC3MonsterBoundary.c3MolecularSectorImpliesMonsterModule
-    Chemistry.canonicalChemistryC3MonsterBoundary
-  ≡ false
+    Chemistry.canonicalChemistryC3MonsterBoundary ≡ false
 c3ChemistryDoesNotPromoteMonster = refl
 
 chemistryEntropyDoesNotPromoteGravity :
   Chemistry.ChemistryC3MonsterBoundary.molecularEntropyImpliesPhysicalGravity
-    Chemistry.canonicalChemistryC3MonsterBoundary
-  ≡ false
+    Chemistry.canonicalChemistryC3MonsterBoundary ≡ false
 chemistryEntropyDoesNotPromoteGravity = refl
