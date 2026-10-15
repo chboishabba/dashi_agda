@@ -27,11 +27,13 @@ for needle in ["chlorAlkaliReplay", "pahReplay", "dhprReplay", "pbCaReplay", "ca
 
 source_atlas = (ROOT / required[5]).read_text()
 for needle in [
-    "AttributedSourceCore", "LineageCalibrationAttributionEnvelopeExact",
-    "chlorAlkaliEuroChlor2022", "dhprBRENDA2026", "astrobiologyPrimer2016",
+    "AttributedSourceCore", "KitzerowBH4ReactionSourceAtlasExact", "IonicMimicrySourceAtlasExact",
+    "chlorAlkaliEuroChlor2022", "Euro Chlor / Cefic", "September 2022",
+    "dhprBRENDA2026", "astrobiologyPrimer2016", "10.1089/ast.2015.1460",
     "canonicalLineageCalibrationSourceAtlas", "canonicalAtlasNonPromoting",
 ]:
     assert needle in source_atlas, f"source atlas missing {needle}"
+assert "LineageCalibrationAttributionEnvelopeExact" not in source_atlas, "source atlas must not import downstream attribution envelope"
 
 payment = (ROOT / required[6]).read_text()
 for needle in [
@@ -63,8 +65,9 @@ for needle in [
 
 attribution = (ROOT / required[10]).read_text()
 for needle in [
-    "ReplayAttributionEnvelope", "chlorAlkaliEuroChlor2022", "pahMechanismSource",
-    "dhprBrenda2026", "pbCaGeometrySource", "astrobiologyPrimer2016",
+    "LineageAttributionEvidenceSourceAtlasExact", "ReplayAttributionEnvelope",
+    "chlorAlkaliTechnicalSource", "pahMechanismSource", "dhprBrenda2026",
+    "pbCaGeometrySource", "astrobiologyPrimerSource", "canonicalSourceAtlasReusedWhereAvailable",
     "citationCreatesNumericPayment", "dashiSynthesisAttributedToExternalSource",
     "sourceObservationAttributedToDashi",
 ]:
@@ -90,6 +93,7 @@ for needle in [
     "frontierRankIsTruthRank", "unpaidCoordinateRetainsAttribution", "acquisitionCreatesAuthority",
 ]:
     assert needle in acquisition, f"unified acquisition frontier missing {needle}"
+assert "LineageAttributionAcquisitionParetoExact" not in acquisition, "canonical acquisition frontier must be standalone"
 
 rollup = (ROOT / required[13]).read_text()
 for needle in [
@@ -99,6 +103,7 @@ for needle in [
     "LineageAttributionAcquisitionFrontierExact", "LineageAttributionEvidenceMaxCutValidation",
 ]:
     assert needle in rollup, f"rollup missing {needle}"
+assert "LineageAttributionAcquisitionParetoExact" not in rollup, "rollup must not import deleted parallel frontier"
 
 validation = (ROOT / required[14]).read_text()
 for needle in [
