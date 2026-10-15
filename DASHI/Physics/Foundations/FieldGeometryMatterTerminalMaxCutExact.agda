@@ -2,7 +2,6 @@
 module DASHI.Physics.Foundations.FieldGeometryMatterTerminalMaxCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact as Ledger
 import DASHI.Physics.Foundations.ControlledPhysicalTransitionExact as Control
@@ -27,6 +26,7 @@ data FrontierStatus : Set where
   openCalibrationOrExecution : FrontierStatus
   blockedByUnmergedSibling : FrontierStatus
   requiresIndependentExperiment : FrontierStatus
+  openIntegrationReceipt : FrontierStatus
 
 record FieldGeometryMatterTerminalFrontier : Set where
   constructor field-geometry-matter-terminal-frontier
@@ -55,6 +55,7 @@ record FieldGeometryMatterTerminalFrontier : Set where
     warpWormholeStabilityBackreaction : FrontierStatus
     causalSuperluminalTransportExperiment : FrontierStatus
     scientistFrontierPrimaryAcquisition : FrontierStatus
+    monolithicFoundationsEverythingIntegration : FrontierStatus
 
     moreGenericAbstractionCountsAsPhysicalClosure : Bool
     sourceCitationCountsAsSameObjectPayment : Bool
@@ -92,6 +93,7 @@ currentTerminalFrontier =
     openCalibrationOrExecution
     requiresIndependentExperiment
     openSameObjectPayment
+    openIntegrationReceipt
 
     false false false false false false
 
@@ -129,9 +131,10 @@ record MaxCutStoppingRule : Set where
     physicalSourceConstructionBeatsWarpVocabulary : Bool
     causalEndpointMeasurementBeatsFTLAnalogy : Bool
     unmergedSiblingMayBeImportedOnlyAfterLandingOrExplicitRetarget : Bool
+    focusedRollupIsNotMonolithicExportReceipt : Bool
 
 open MaxCutStoppingRule public
 
 canonicalStoppingRule : MaxCutStoppingRule
 canonicalStoppingRule =
-  max-cut-stopping-rule true true true true true true true
+  max-cut-stopping-rule true true true true true true true true
