@@ -13,9 +13,11 @@ import DASHI.Chemistry.AtomicMolecularReactionLineageHyperfabricExact as Lineage
 ------------------------------------------------------------------------
 -- ELECTRON / BOND TRANSPORT
 --
--- Charge balance, electron transfer and bond rearrangement are related but
--- nonidentical proof obligations.  This owner makes the missing electronic and
--- bond-change layer explicit over the repo-native chemistry Transition object.
+-- Charge balance, electron-equivalent transfer and bond rearrangement are
+-- related but nonidentical obligations.  Because electrons are indistinguish-
+-- able fermions, these receipts track reducing equivalents, occupations,
+-- density/current or source->sink carrier changes, not persistent named
+-- individual particles through arbitrary many-body states.
 ------------------------------------------------------------------------
 
 data ElectronTransferKind : Set where
@@ -99,6 +101,14 @@ record ElectronBondTransportBoundary : Set where
     chargeBalanceDeterminesBondChangeIsFalse :
       chargeBalanceDeterminesBondChange ≡ false
 
+    persistentIndividualElectronIdentityTracked : Bool
+    persistentIndividualElectronIdentityTrackedIsFalse :
+      persistentIndividualElectronIdentityTracked ≡ false
+
+    electronEquivalentOrDensityFlowTrackable : Bool
+    electronEquivalentOrDensityFlowTrackableIsTrue :
+      electronEquivalentOrDensityFlowTrackable ≡ true
+
     oxidationStateBookkeepingEqualsLiteralElectronTrajectory : Bool
     oxidationStateBookkeepingEqualsLiteralElectronTrajectoryIsFalse :
       oxidationStateBookkeepingEqualsLiteralElectronTrajectory ≡ false
@@ -126,6 +136,8 @@ canonicalElectronBondTransportBoundary =
   electronBondTransportBoundary
     false refl
     false refl
+    false refl
+    true refl
     false refl
     true refl
     true refl
