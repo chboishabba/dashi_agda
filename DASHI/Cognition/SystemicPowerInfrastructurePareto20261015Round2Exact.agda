@@ -11,6 +11,7 @@ import DASHI.Cognition.SystemicPowerInfrastructurePareto20261013Exact as Prior
 import DASHI.Cognition.PalantirTIAFinanceStateCapacityCrossPollination20261015Exact as PalantirTIA
 import DASHI.Cognition.PalantirEarlyIntelligenceProductAcquisition20261015Exact as EarlyPalantir
 import DASHI.Cognition.PalantirInstalledBaseProcurementPersistence20261015Exact as Persistence
+import DASHI.Cognition.PalantirMissionExpansionContestability20261015Exact as Mission
 import DASHI.Cognition.EpsteinPalantirInvestmentInterest20261015Exact as PalantirInterest
 import DASHI.Cognition.EpsteinHoneycombPalantirOpportunityBridge20261015Exact as HoneycombPalantir
 import DASHI.Cognition.EpsteinBarakPalantirFoundersFundBrokerage20261015Exact as Brokerage
@@ -24,14 +25,15 @@ import DASHI.Cognition.Project2025PalantirImmigrationDataIntersectionExact as Im
 -- are now source-paid and typed together: historical TIA disposition; early
 -- In-Q-Tel financing/intelligence-community product development; generic
 -- platform capabilities; modern ICE and Maven procurement; policy-capability
--- intersection; direct Epstein-side Palantir investment inquiry/opportunity/
--- diligence; Barak/Founders Fund brokerage; and a bounded installed-base/
--- persistence mechanism. Promotion is investigative priority, not a continuity
--- theorem.
+-- intersection; bounded installed-base persistence; concrete mission-expansion
+-- test objects; direct Epstein-side Palantir investment inquiry/opportunity/
+-- diligence; and Barak/Founders Fund brokerage.
+-- Promotion is investigative priority, not a continuity theorem.
 ------------------------------------------------------------------------
 
 data Lane2 : Set where
   palantirHistoricalCapitalCapabilityStateCapacity : Lane2
+  palantirMissionExpansionContestability : Lane2
   palantirEpsteinInvestmentExecution : Lane2
   palantirBrokerageDefenseTech : Lane2
   palantirInstalledBaseContestability : Lane2
@@ -51,15 +53,17 @@ open Profile2 public
 
 canonicalSystemicFront2 : List Profile2
 canonicalSystemicFront2 =
-  profile2 palantirHistoricalCapitalCapabilityStateCapacity 99 true true true true
-    "TIA's public programme/disposition and Poindexter-Karp-Thiel context now sit beside a more concrete early Palantir acquisition spine: a bounded USD2m September-2005 In-Q-Tel investment receipt, 2005-08 intelligence-analyst co-development, an NCTC live-database prototype beta, a CIA counterterrorism-centre audition and early JIEDDO operational use. Combined with modern ICE/Maven procurement, this supports tests of capability accumulation and durable state capacity while same-program identity, code/asset transfer and authority continuity remain unpaid." ∷
-  profile2 palantirEpsteinInvestmentExecution 99 true true true true
-    "Direct Thiel advice on Palantir, a later Fiszel secondary-share opportunity routed to Epstein, and 2018 valuation/IPO diligence are paid. Execution/custody is still open. A completed position would create a direct capital edge; absent that receipt, interest/opportunity remains distinct from ownership." ∷
-  profile2 palantirInstalledBaseContestability 99 true true true true
-    "Installed-base persistence is now partly paid rather than purely hypothetical: early intelligence-user feedback and repeated adoption; historical public-record evidence of migration/data-exit difficulty; a 2026 DHS-wide single-award Palantir BPA with USD1bn ceiling/five-year horizon; and concrete ICE/CISA calls under the vehicle. Universal or unlawful lock-in, schema ownership and subject remedy remain separately unpaid." ∷
-  profile2 palantirBrokerageDefenseTech 98 true true true true
-    "Epstein proposed a Palantir board route for Barak, later facilitated/attempted Thiel contact, and separately sat in the forwarding path around Carbyne's introduction to Founders Fund/Trae Stephens. These are real brokerage surfaces across distinct objects; proposal is not appointment and introduction is not investment causation." ∷
-  profile2 priorSystemicFront 100 true true true true
+  profile2 palantirMissionExpansionContestability 100 true true true true
+    "The durable-state-capacity hypothesis now has concrete mission-expansion tests: ICE/HSI FOIA records pay bulk voter-data processing, internal planning to ingest processed voter-roll data into ELITE and a later 'pending Palantir entry' state, while Palantir publicly denies completed voter-roll integration. Separately, Hilton litigation alleges observer photos/plates and related records were entered into Palantir-built ICM and propagated into enforcement/border consequences. Planning, ingestion, litigation allegation and adjudicated fact remain distinct."
+  ∷ profile2 palantirHistoricalCapitalCapabilityStateCapacity 99 true true true true
+    "TIA's public programme/disposition and Poindexter-Karp-Thiel context now sit beside a more concrete early Palantir acquisition spine: a bounded USD2m September-2005 In-Q-Tel investment receipt, 2005-08 intelligence-analyst co-development, an NCTC live-database prototype beta, a CIA counterterrorism-centre audition and early JIEDDO operational use. Combined with modern ICE/Maven procurement, this supports tests of capability accumulation while same-program identity, code/asset transfer and authority continuity remain unpaid."
+  ∷ profile2 palantirEpsteinInvestmentExecution 99 true true true true
+    "Direct Thiel advice on Palantir, a later Fiszel secondary-share opportunity routed to Epstein, and 2018 valuation/IPO diligence are paid. Execution/custody is still open. A completed position would create a direct capital edge; absent that receipt, interest/opportunity remains distinct from ownership."
+  ∷ profile2 palantirInstalledBaseContestability 99 true true true true
+    "Installed-base persistence is partly paid: early intelligence-user feedback and repeated adoption; historical public-record evidence of migration/data-exit difficulty; a 2026 DHS-wide single-award Palantir BPA with USD1bn ceiling/five-year horizon; and concrete ICE/CISA calls under the vehicle. Universal or unlawful lock-in, schema ownership and subject remedy remain separately unpaid."
+  ∷ profile2 palantirBrokerageDefenseTech 98 true true true true
+    "Epstein proposed a Palantir board route for Barak, later facilitated/attempted Thiel contact, and separately sat in the forwarding path around Carbyne's introduction to Founders Fund/Trae Stephens. These are real brokerage surfaces across distinct objects; proposal is not appointment and introduction is not investment causation."
+  ∷ profile2 priorSystemicFront 100 true true true true
     "The prior systemic front remains live: banking/elite access, private-capital housing-AI-power assetisation, military AI/intelligence, Epstein/AI-capital reflexivity and other 98-100 lanes are not displaced by this Palantir-specific promotion."
   ∷ []
 
@@ -71,17 +75,23 @@ record Boundary2 : Set where
     brokerageEqualsDecisionCausation : Bool
     genericCapabilityEqualsSpecificDeploymentUse : Bool
     repeatedProcurementEqualsLockIn : Bool
+    plannedMissionExpansionEqualsDeployment : Bool
+    pendingEntryEqualsCompletedIngestion : Bool
+    litigationAllegationEqualsAdjudicatedFact : Bool
     sharedThielEqualsSharedCapitalOrCommand : Bool
     intelligenceCustomerAccessEqualsSovereignControl : Bool
 open Boundary2 public
 
 canonicalBoundary2 : Boundary2
-canonicalBoundary2 = boundary2 false false false false false false false
+canonicalBoundary2 = boundary2 false false false false false false false false false false
 
 data GenealogyImpliesProgrammeIdentity : Set where
 data InterestImpliesOwnership : Set where
 data BrokerageImpliesDecisionCausation : Set where
 data ProcurementImpliesLockIn : Set where
+data PlannedMissionImpliesDeployment : Set where
+data PendingEntryImpliesIngestion : Set where
+\data LitigationAllegationImpliesFact : Set where
 
 genealogyDoesNotCreateProgrammeIdentity : GenealogyImpliesProgrammeIdentity → ⊥
 genealogyDoesNotCreateProgrammeIdentity ()
@@ -95,11 +105,22 @@ brokerageDoesNotCreateDecisionCausation ()
 procurementDoesNotCreateLockIn : ProcurementImpliesLockIn → ⊥
 procurementDoesNotCreateLockIn ()
 
+plannedMissionDoesNotCreateDeployment : PlannedMissionImpliesDeployment → ⊥
+plannedMissionDoesNotCreateDeployment ()
+
+pendingEntryDoesNotCreateIngestion : PendingEntryImpliesIngestion → ⊥
+pendingEntryDoesNotCreateIngestion ()
+
+litigationAllegationDoesNotCreateFact : LitigationAllegationImpliesFact → ⊥
+litigationAllegationDoesNotCreateFact ()
+
 ------------------------------------------------------------------------
 -- Cross-domain max-cut after today's Palantir donor PR and acquisition pass.
 ------------------------------------------------------------------------
 
 data Debt2 : Set where
+  eliteFOIAExactPageAndIngestionOutcome : Debt2
+  hiltonOperationalExhibitsAndPropagation : Debt2
   earlyIQTInstrumentAndCapTable : Debt2
   earlyIntelligenceTechnicalRecords : Debt2
   tiaSuccessorComponentAndAuthorityTransfer : Debt2
@@ -120,8 +141,12 @@ open Acquisition2 public
 
 canonicalAcquisition2 : List Acquisition2
 canonicalAcquisition2 =
+  acquisition2 eliteFOIAExactPageAndIngestionOutcome 100
+    "Index the complete ICE/HSI FOIA production to exact page IDs and resolve 'pending Palantir entry' to completed voter-data ingestion, rejection, cancellation or technical deferral; preserve Palantir's contrary no-integration statement until the same object is resolved." ∷
+  acquisition2 hiltonOperationalExhibitsAndPropagation 100
+    "Acquire the unsealed Hilton government exhibits/ICM records and same-person event logs to resolve observer-data entry, labels, facial-recognition use, TECS/border propagation and available correction/deletion/remedy from primary carriers." ∷
   acquisition2 earlyIQTInstrumentAndCapTable 100
-    "The investment amount/date and concrete product-development objects are now substantially paid. Acquire the original In-Q-Tel security/investment agreement and 2005 cap table to resolve security class, economic ownership, information/board rights and any contractual development/customer-access terms." ∷
+    "The investment amount/date and concrete product-development objects are substantially paid. Acquire the original In-Q-Tel security/investment agreement and 2005 cap table to resolve security class, economic ownership, information/board rights and contractual development/customer-access terms." ∷
   acquisition2 tiaSuccessorComponentAndAuthorityTransfer 100
     "Resolve TIA/IAO successor/transferred component names, custodians, funding, personnel authority, requirements and any code/asset transfer; do not infer Palantir succession from functional similarity." ∷
   acquisition2 epsteinPalantirExecutionOrExplicitDecline 100
@@ -133,7 +158,7 @@ canonicalAcquisition2 =
   acquisition2 earlyIntelligenceTechnicalRecords 99
     "Recover the NCTC beta, CIA audition and JIEDDO technical/contract records to pay exact datasets, prototype versions, evaluation criteria, requirements and transition into paid operational use from primary government/project carriers." ∷
   acquisition2 sameDeploymentSubjectContestability 99
-    "Pay one deployment's exact subject data, classification/decision use, notice, correction/appeal, audit and remedy chain on the same object; generic Foundry capability is insufficient." ∷
+    "Use ELITE/Hilton as concrete test objects to pay exact subject data, classification/decision use, notice, correction/appeal, audit and remedy chains; generic Foundry capability or user-audit tooling is insufficient." ∷
   acquisition2 valarIIIAndurilPrimaryPortfolioRow 99
     "Secondary researchers point to DOJ-hosted Valar III schedules as containing an early Anduril Series Seed position. Acquire and directly inspect the exact primary schedule row before promoting Southern Trust's indirect Valar->Anduril economic exposure." ∷
   acquisition2 barakPalantirAndCarbyneDecisionJoin 98
