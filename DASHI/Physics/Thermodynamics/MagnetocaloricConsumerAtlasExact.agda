@@ -10,6 +10,8 @@ import DASHI.Physics.Chemistry.MagnetocaloricAtomicChemistryConsumerExact as Che
 import DASHI.Physics.Quantum.MagnetocaloricQuantumStatMechConsumerExact as Quantum
 import DASHI.Physics.Thermodynamics.MagnetocaloricContinuumConsumerExact as Fluid
 import DASHI.Physics.Thermodynamics.MagnetocaloricMagnetostructuralConsumerExact as Mech
+import DASHI.Physics.Thermodynamics.MagnothermAttributedEvidenceExact as Evidence
+import DASHI.Physics.Thermodynamics.MagnetocaloricEvidenceMaxCutExact as MaxCut
 
 ------------------------------------------------------------------------
 -- Reachability/status atlas for the magnetocaloric vertical slice.
@@ -36,6 +38,8 @@ record MagnetocaloricConsumerAtlas : Set where
     continuumTransportPopulated : Bool
     magnetostructuralPopulated : Bool
     protectionChemistryPopulated : Bool
+    attributedEvidencePopulated : Bool
+    empiricalMaxCutAtlasPopulated : Bool
 
     navierStokesRole : ReuseRole
     yangMillsRole : ReuseRole
@@ -47,7 +51,7 @@ record MagnetocaloricConsumerAtlas : Set where
 canonicalMagnetocaloricConsumerAtlas : MagnetocaloricConsumerAtlas
 canonicalMagnetocaloricConsumerAtlas =
   magnetocaloric-consumer-atlas
-    true true true true true true true true
+    true true true true true true true true true true
     structuralPrecedentOnly
     structuralPrecedentOnly
     coveredByExistingOwner
@@ -67,12 +71,15 @@ record MagnetocaloricCrossDomainPromotionBoundary : Set where
     elasticityDoesNotSupplyMagnetostriction : Bool
     nonAbelianYMIsNotApplicationMagnetism : Bool
     biologyControlCoreIsNotImportedAsEngineeringController : Bool
+    citationDoesNotImportScientificAuthority : Bool
+    vendorClaimDoesNotPaySameDeviceCalibration : Bool
+    plannedExperimentDoesNotPayObservedLifetime : Bool
 
 canonicalMagnetocaloricCrossDomainPromotionBoundary :
   MagnetocaloricCrossDomainPromotionBoundary
 canonicalMagnetocaloricCrossDomainPromotionBoundary =
   magnetocaloric-cross-domain-promotion-boundary
-    true true true true true true true true true true
+    true true true true true true true true true true true true true
 
 navierStokesIsStructuralOnly :
   MagnetocaloricConsumerAtlas.navierStokesRole canonicalMagnetocaloricConsumerAtlas
