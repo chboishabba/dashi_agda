@@ -91,7 +91,7 @@ data BrokerageImpliesDecisionCausation : Set where
 data ProcurementImpliesLockIn : Set where
 data PlannedMissionImpliesDeployment : Set where
 data PendingEntryImpliesIngestion : Set where
-\data LitigationAllegationImpliesFact : Set where
+data LitigationAllegationImpliesFact : Set where
 
 genealogyDoesNotCreateProgrammeIdentity : GenealogyImpliesProgrammeIdentity → ⊥
 genealogyDoesNotCreateProgrammeIdentity ()
