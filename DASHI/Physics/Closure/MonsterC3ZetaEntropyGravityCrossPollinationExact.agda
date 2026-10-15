@@ -95,29 +95,51 @@ canonicalZetaEntropyGravityCrossPollinationReceipt =
     "lift the certified character-level 53 plus regular-C3 split onto literal same-action subspaces / selected 3B VOA receipts; then supply a physical probability/density-matrix entropy identification and an entropy-to-Lorentzian-gravity same-object adapter before any 3+1D claim"
 
 ------------------------------------------------------------------------
--- Direct reuse witnesses from the prior-art owner.
+-- Direct reuse witnesses from the prior-art frontier.
 ------------------------------------------------------------------------
 
 existingZetaFrontier : Existing.ZetaBidiFrontier
 existingZetaFrontier = Existing.currentZetaBidiFrontier
 
-existingRegularC3CancellationAt65610 = Existing.regularC3CancellationAt65610
+priorOwnerPaysOnePlusZetaPlusZetaSquaredZero :
+  Existing.exactOnePlusZetaPlusZetaSquaredZeroPaid Existing.currentZetaBidiFrontier
+  ≡ true
+priorOwnerPaysOnePlusZetaPlusZetaSquaredZero = refl
 
-existingRepresentationResidualIs53 :
-  Existing.Rep.residualMultiplicity Existing.Rep.monster3BCharacter ≡ 53
-existingRepresentationResidualIs53 = Existing.representationResidualIs53
+priorOwnerPaysExact65610Cancellation :
+  Existing.exact65610RegularCycleCancellationPaid Existing.currentZetaBidiFrontier
+  ≡ true
+priorOwnerPaysExact65610Cancellation = refl
 
-existingRepresentationDimensionIs196883 :
-  Existing.Rep.augmentation Existing.Rep.monster3BCharacter ≡ 196883
-existingRepresentationDimensionIs196883 = Existing.representationDimensionIs196883
+priorOwnerPaysResidual53 :
+  Existing.generatorResidual53Paid Existing.currentZetaBidiFrontier
+  ≡ true
+priorOwnerPaysResidual53 = refl
 
-existingConformalDimensionIs196884 :
-  Existing.Rep.moonshineV2Dimension ≡ 196884
-existingConformalDimensionIs196884 = Existing.weightTwoDimensionIs196884
+priorOwnerPaysConformal196884And54 :
+  Existing.conformal196884And54Paid Existing.currentZetaBidiFrontier
+  ≡ true
+priorOwnerPaysConformal196884And54 = refl
 
-existingConformalTraceIs54 :
-  Existing.Rep.moonshineV2TraceAt3B ≡ 54
-existingConformalTraceIs54 = Existing.weightTwoTraceIs54
+priorOwnerHasVOASameCarrierPhaseAdapter :
+  Existing.voaSameCarrierPhaseAdapterExists Existing.currentZetaBidiFrontier
+  ≡ true
+priorOwnerHasVOASameCarrierPhaseAdapter = refl
+
+priorOwnerDoesNotPaySelectedThreeBVOAReceipts :
+  Existing.selectedActualThreeBVOAReceiptsPaidHere Existing.currentZetaBidiFrontier
+  ≡ false
+priorOwnerDoesNotPaySelectedThreeBVOAReceipts = refl
+
+priorOwnerDoesNotPayLiteralRegularResidualSubspaceLift :
+  Existing.literalRegularResidualSubspaceLiftPaidHere Existing.currentZetaBidiFrontier
+  ≡ false
+priorOwnerDoesNotPayLiteralRegularResidualSubspaceLift = refl
+
+priorOwnerBlocksShared196884QuantumGravityPromotion :
+  Existing.shared196884CreatesQuantumGravity Existing.currentZetaBidiFrontier
+  ≡ false
+priorOwnerBlocksShared196884QuantumGravityPromotion = refl
 
 stateCountBoundaryStillNonPromoting :
   StateCount.StateCountingEntropyBoundary.degeneracyDeterminesProbabilityDistribution
