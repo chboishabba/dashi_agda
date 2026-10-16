@@ -10,6 +10,7 @@ import DASHI.Biology.KitzerowBH4ReactionChemistryExact as ReactionChem
 import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact as Cycle
 import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact as ReactionBridge
 import DASHI.Biology.KitzerowBH4LineageRegressionExact as Lineage
+import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -64,6 +65,12 @@ redoxLineageIsExplicitWithoutFluxPromotion :
   × Lineage.formalElectronBookkeepingProvesMeasuredBranchFlux Lineage.canonicalKitzerowBH4LineageRegression ≡ false
 redoxLineageIsExplicitWithoutFluxPromotion = refl , (refl , refl)
 
+hepaticDirectDiscriminatorConstrainsButDoesNotUniversalize :
+  Hepatic.sameSystemPAHAndINOSMeasured Hepatic.canonicalHepaticCompetitionBoundary ≡ true
+  × Hepatic.conditionalCompetitionWhenBH4SynthesisBlocked Hepatic.canonicalHepaticCompetitionBoundary ≡ true
+  × Hepatic.hepaticTwoBranchResultProvesWholeBH4AllocatorModel Hepatic.canonicalHepaticCompetitionBoundary ≡ false
+hepaticDirectDiscriminatorConstrainsButDoesNotUniversalize = refl , (refl , refl)
+
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
@@ -82,8 +89,12 @@ priorArtPartitionSeparatesInheritedBiology = refl
 
 centralBH4AllocationRemainsExperimentallyOpen :
   Experiment.centralBH4AllocationClosed Experiment.canonicalCentralBH4Discriminator ≡ false
-centralBH4AllocationRemainsExperimentallyOpen = refl
+  × Experiment.historicalTwoBranchConstraintPaid ≡ true
+  × Experiment.historicalConstraintClosesCentralEdge ≡ false
+centralBH4AllocationRemainsExperimentallyOpen = refl , (refl , refl)
 
 paretoFrontierIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalKitzerowAcquisitionFrontier ≡ false
-paretoFrontierIsNotTruthRanking = refl
+  × Pareto.historicalDirectDiscriminatorChangesTargetDefinition Pareto.canonicalKitzerowAcquisitionFrontier ≡ true
+  × Pareto.historicalDirectDiscriminatorClosesWholeTarget Pareto.canonicalKitzerowAcquisitionFrontier ≡ false
+paretoFrontierIsNotTruthRanking = refl , (refl , refl)
