@@ -8,17 +8,18 @@ import DASHI.Physics.Closure.MaxwellGaugeFieldEquationScope as Maxwell
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2Lie
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
+import DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionExact as Pairing
 
 ------------------------------------------------------------------------
 -- CASIMIR U(1) ACTION / METRIC-VARIATION MAX-CUT
 --
--- The existing Cartan-field image receipt already compiles the non-abelian
--- bracket to zero.  That is necessary but does not by itself identify the
--- action, its normalization, or its metric variation with Maxwell theory.
+-- The existing Cartan-field image receipt compiles the non-abelian bracket to
+-- zero.  The live Ad-invariant SU(2) pairing also restricts exactly to ordinary
+-- multiplication on that same Cartan axis.  Therefore neither bracket-zero nor
+-- an additional Killing-form decomposition is an independent payment here.
 --
--- The live Maxwell scope already isolates exactly those missing semantics.
--- This owner recuts the Casimir restriction leaf into the smallest reusable
--- same-object payments without manufacturing a physical action theorem.
+-- The first remaining normalization payment is physical: the electromagnetic
+-- charge/gauge-coupling convention and action prefactor on the SAME field.
 ------------------------------------------------------------------------
 
 record CasimirRestrictedActionNormalizationPayment : Set₁ where
@@ -29,8 +30,8 @@ record CasimirRestrictedActionNormalizationPayment : Set₁ where
     fieldImage :
       U1Stress.CanonicalCartanU1FieldImageReceipt SelectedField selectedLieValue
 
-    KillingNormalizationCarrier : Set
-    killingFormAndChargeNormalization : KillingNormalizationCarrier
+    PhysicalChargeCouplingNormalization : Set
+    physicalChargeCouplingNormalization : PhysicalChargeCouplingNormalization
 
     FieldStrengthCarrier : Set
     restrictedFieldStrength : SelectedField → FieldStrengthCarrier
@@ -57,6 +58,9 @@ restrictedFieldBracketZeroFromActionPayment :
   ≡ SU2Lie.lieZero
 restrictedFieldBracketZeroFromActionPayment payment =
   U1Stress.restrictedFieldBracketZero (fieldImage payment)
+
+invariantPairingRestrictionWitness : Pairing.CasimirU1InvariantPairingBoundary
+invariantPairingRestrictionWitness = Pairing.canonicalCasimirU1InvariantPairingBoundary
 
 record CasimirRestrictedMetricVariationPayment
     (actionPayment : CasimirRestrictedActionNormalizationPayment) : Set₁ where
@@ -90,11 +94,6 @@ open CasimirRestrictedMetricVariationPayment public
 
 ------------------------------------------------------------------------
 -- Maxwell-scope cross-pollination.
---
--- The G2 Maxwell scope is not instantiated here: it is a separate global
--- closure lane.  Its sector-restriction vocabulary is reused only to justify
--- the decomposition into normalization, field-strength preservation, action
--- restriction, and sector-variation equality.
 ------------------------------------------------------------------------
 
 maxwellScopeNamesSectorRestriction : Bool
@@ -110,13 +109,13 @@ zeroProbeActionDoesNotPayPhysicalRestriction :
 zeroProbeActionDoesNotPayPhysicalRestriction ()
 
 data RemainingCasimirU1ActionRestrictionBlocker : Set where
-  missingKillingFormAndChargeNormalization : RemainingCasimirU1ActionRestrictionBlocker
+  missingPhysicalChargeCouplingNormalization : RemainingCasimirU1ActionRestrictionBlocker
   missingSameRestrictedFieldStrengthIdentification : RemainingCasimirU1ActionRestrictionBlocker
   missingRestrictedYMMaxwellActionEquality : RemainingCasimirU1ActionRestrictionBlocker
   missingMetricVariationRestrictionCommutation : RemainingCasimirU1ActionRestrictionBlocker
 
 firstActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
-firstActionRestrictionBlocker = missingKillingFormAndChargeNormalization
+firstActionRestrictionBlocker = missingPhysicalChargeCouplingNormalization
 
 secondActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
 secondActionRestrictionBlocker = missingSameRestrictedFieldStrengthIdentification
@@ -132,7 +131,9 @@ record CasimirU1ActionVariationBoundary : Set where
   field
     cartesianU1FieldImageAndBracketCompilerConsumed : Bool
     maxwellSectorRestrictionScopeReused : Bool
-    killingNormalizationSeparated : Bool
+    invariantPairingRestrictionConsumed : Bool
+    independentKillingDecompositionRequired : Bool
+    physicalChargeCouplingNormalizationSeparated : Bool
     fieldStrengthRestrictionSeparated : Bool
     actionEqualitySeparated : Bool
     metricVariationCommutationSeparated : Bool
@@ -142,8 +143,9 @@ open CasimirU1ActionVariationBoundary public
 
 canonicalCasimirU1ActionVariationBoundary : CasimirU1ActionVariationBoundary
 canonicalCasimirU1ActionVariationBoundary =
-  casimir-u1-action-variation-boundary true true true true true true false
+  casimir-u1-action-variation-boundary
+    true true true false true true true true false
 
 casimirU1ActionVariationReading : String
 casimirU1ActionVariationReading =
-  "After the selected field is attached to the canonical Cartan-U(1) image, bracket-zero is compiled by the existing U1 theorem and is no longer an independent payment. The remaining physical action/stress seam is split into four application-owned leaves: Killing-form/charge normalization, equality of the same restricted field strength with Maxwell field strength, equality of the restricted Yang-Mills and Maxwell actions, and commutation of the restriction with metric variation/stress construction. MaxwellGaugeFieldEquationScope already exposes the corresponding sector-restriction grammar. The repository's old zero-probe Yang-Mills action surfaces do not pay these physical leaves."
+  "After the selected field is attached to the canonical Cartan-U(1) image, bracket-zero is compiled by the existing U1 theorem. The live SU(2) Ad-invariant pairing is also proved to restrict as <embed a,embed b>=a*b, so no second Killing/trace decomposition is required. The remaining action/stress seam is: physical electromagnetic charge/gauge-coupling normalization and action prefactor; equality of the same restricted field strength with Maxwell field strength; equality of restricted Yang-Mills and Maxwell actions; and commutation with metric variation/stress construction. MaxwellGaugeFieldEquationScope supplies the matching sector-restriction grammar. Zero-probe action surfaces do not pay these physical leaves."
