@@ -19,6 +19,7 @@ import DASHI.Moonshine.OggSSPClimbingGymEmpiricalReplayExact as Replay
 import DASHI.Moonshine.OggSSPClimbingGymExactHoleAnalyticBridge as HoleBridge
 import DASHI.Moonshine.OggSSPClimbingGymExactHoleRadixCodec as Hole
 import DASHI.Moonshine.OggSSPClimbingGymPhaseControlExact as Phase
+import DASHI.Moonshine.OggSSPClimbingGymDirichletPhaseExact as Dirichlet
 import DASHI.Moonshine.OggSSPClimbingGymFigureObservationExact as Figure
 import DASHI.Moonshine.OggSSPClimbingGymSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPClimbingGymRigorousSourceAttributionExact as RigorousSource
@@ -36,6 +37,14 @@ record ClimbingGymTerminalStatus : Set where
     deterministicShiftNullClosed : Bool
     signedObservationNoGoClosed : Bool
     phaseControlMaxCutClosed : Bool
+
+    -- Multiplicative p^(i gamma) continuation.  These flags record the
+    -- numerically executable decomposition/control cut, not Monster authority.
+    dirichletPhaseMomentKernelClosed : Bool
+    landauResidualDiagnosticClosed : Bool
+    heldOutWindowControlClosed : Bool
+    heldOutNoReplicationClosed : Bool
+    odlyzkoHeldOutAnchorClosed : Bool
 
     -- The older adapter is an abstract same-carrier formula surface over the
     -- propositional-equality ConstructiveRealSpine.  It is not by itself a
@@ -94,6 +103,12 @@ canonicalClimbingGymTerminalStatus =
     true   -- unsigned observation cannot recover signed orientation
     true   -- exhaustive C(20,5) phase-sensitive control implemented
 
+    true   -- twenty means + full 20x20 multiplicative phase pair kernel emitted
+    true   -- leading fixed-X Landau prime term subtracted as diagnostic residual
+    true   -- disjoint zeros 850..1698 evaluated with the locked statistic
+    true   -- held-out raw and residual coherence fail to replicate discovery tail
+    true   -- held-out endpoints independently anchored to Odlyzko zeros1
+
     true   -- abstract log/pi/hole/phase same-carrier adapter surface constructed
     true   -- supplied figure, mpmath docs and LMFDB reference typed separately
     true   -- exact cache path/blob metadata + fail-closed loader contract
@@ -123,7 +138,7 @@ canonicalClimbingGymTerminalStatus =
     false  -- mpmath cache is diagnostic numerical data, not formal zero proof
     false  -- LMFDB is an independent reference, not a cache-wide equality receipt
     false  -- no exact-head Agda compiler receipt in this execution environment
-    false  -- controls do not justify Monster-specific empirical promotion
+    false  -- held-out controls specifically block Monster-specific promotion
     false  -- no compatible history / matching receipt is a zeta parametrisation
     false  -- no climbing-gym result promotes RH
     false  -- live sibling PRs are design donors only unless merged
@@ -204,6 +219,24 @@ terminalDoesNotPromotePhaseTail :
     Phase.canonicalClimbingGymPhaseControlBoundary
   ≡ false
 terminalDoesNotPromotePhaseTail = refl
+
+terminalDirichletLandauResidualIsDiagnosticOnly :
+  Dirichlet.landauMainTermClaimedExactFiniteFormula
+    Dirichlet.canonicalDirichletPhaseBoundary
+  ≡ false
+terminalDirichletLandauResidualIsDiagnosticOnly = refl
+
+terminalDirichletHeldOutDoesNotReplicateMonsterSpecificTail :
+  Dirichlet.heldOutReplicatedMonsterSpecificAnomaly
+    Dirichlet.canonicalDirichletPhaseBoundary
+  ≡ false
+terminalDirichletHeldOutDoesNotReplicateMonsterSpecificTail = refl
+
+terminalDirichletExhaustiveRankIsNotExactPValue :
+  Dirichlet.exhaustiveRankPromotedToExactPValue
+    Dirichlet.canonicalDirichletPhaseBoundary
+  ≡ false
+terminalDirichletExhaustiveRankIsNotExactPValue = refl
 
 terminalDoesNotPromoteFigureToRH :
   Figure.figureObservationProvesRiemannHypothesis
