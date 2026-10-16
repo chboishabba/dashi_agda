@@ -1,16 +1,12 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.PNFHyperfabric369 as Hyperfabric
 open import DASHI.Unified.TOESectorRealizationExact
-
-------------------------------------------------------------------------
--- Canonical C3 appearances of the single candidate universal orientation.
 
 data C3Node : Set where
   universal369Phase : C3Node
@@ -50,13 +46,12 @@ record C3Edge : Set where
     grade : ValidationGrade
     unpaid : List RealizationObligation
     sourceReceipt : String
-    physicalPromotion : Agda.Builtin.Bool.Bool
+    physicalPromotion : Bool
     physicalPromotionIsFalse : physicalPromotion ≡ false
 
 open C3Edge public
 
-edge :
-  C3Node → C3Node → RealizationKind → ValidationGrade →
+edge : C3Node → C3Node → RealizationKind → ValidationGrade →
   List RealizationObligation → String → C3Edge
 edge source target kind grade unpaid receipt =
   record
@@ -70,7 +65,6 @@ edge source target kind grade unpaid receipt =
     ; physicalPromotionIsFalse = refl
     }
 
--- Source-backed representation equivalence from the current Monster/NH3 max-cut.
 nh3MonsterRepresentation : C3Edge
 nh3MonsterRepresentation =
   edge nh3ElectronicC3 monsterCentralPhase equivalenceIsomorphism
@@ -78,8 +72,6 @@ nh3MonsterRepresentation =
     (dynamicsEquivariance ∷ actionHamiltonianAgreement ∷ empiricalSameObjectAttachment ∷ [])
     "Agda PR #1162 records the exact two-sided NH3 electronic phase <-> selected Monster 3B central phase C3 representation isomorphism. This edge imports that scope only; physical Monster action on NH3 remains unpaid."
 
--- Arithmetic C3 is treated as a genuine representation/character realization,
--- but the universal-physical identification still needs dynamics/action transport.
 eisensteinUniversalCharacter : C3Edge
 eisensteinUniversalCharacter =
   edge universal369Phase eisensteinOmega representationIntertwinerKind
@@ -96,22 +88,19 @@ spatialToGaugeCandidate =
 
 universalToSpatialCandidate : C3Edge
 universalToSpatialCandidate =
-  edge universal369Phase spatialXYZC3 conjecturalPhysicalRealization
-    sharedCarrier
+  edge universal369Phase spatialXYZC3 conjecturalPhysicalRealization sharedCarrier
     (representationActionAgreement ∷ dynamicsEquivariance ∷ actionHamiltonianAgreement ∷ empiricalSameObjectAttachment ∷ [])
     "HAM candidate: the 369 orientation and physical spatial C3 are two realizations of one universal orientation action."
 
 universalToMonsterCandidate : C3Edge
 universalToMonsterCandidate =
-  edge universal369Phase monsterCentralPhase conjecturalPhysicalRealization
-    sharedCarrier
+  edge universal369Phase monsterCentralPhase conjecturalPhysicalRealization sharedCarrier
     (representationActionAgreement ∷ dynamicsEquivariance ∷ actionHamiltonianAgreement ∷ empiricalSameObjectAttachment ∷ [])
     "HAM candidate: the selected Monster central phase is a representation of the same universal C3 orientation carried by the 369 substrate."
 
 universalToMATBGCandidate : C3Edge
 universalToMATBGCandidate =
-  edge universal369Phase matbgThreeHarmonicC3 conjecturalPhysicalRealization
-    sharedCarrier
+  edge universal369Phase matbgThreeHarmonicC3 conjecturalPhysicalRealization sharedCarrier
     (representationActionAgreement ∷ dynamicsEquivariance ∷ actionHamiltonianAgreement ∷ empiricalSameObjectAttachment ∷ [])
     "HAM candidate: MATBG three-harmonic C3 is a material Hamiltonian realization of universal orientation."
 
