@@ -16,6 +16,12 @@ required = [
     "DASHI/Chemistry/LineageCalibrationAttributionEnvelopeExact.agda",
     "DASHI/Chemistry/LineageSourceManifestationGuardExact.agda",
     "DASHI/Chemistry/LineageAttributionAcquisitionFrontierExact.agda",
+    "DASHI/Chemistry/LineageAcquiredPrimaryEvidenceExact.agda",
+    "DASHI/Chemistry/LineageAcquiredQuantitativePaymentsExact.agda",
+    "DASHI/Chemistry/LineageEvidenceAcquisitionStatusExact.agda",
+    "DASHI/Chemistry/MolecularMechanisticPromotionLadderExact.agda",
+    "DASHI/Chemistry/PAHMechanismStatePromotionExact.agda",
+    "DASHI/Chemistry/LineageMechanisticPromotionMaxCutValidation.agda",
     "DASHI/Chemistry/LineageCalibrationDiscriminatorEverything.agda",
     "DASHI/Chemistry/LineageCalibrationDiscriminatorMaxCutValidation.agda",
 ]
@@ -28,8 +34,7 @@ for needle in ["chlorAlkaliReplay", "pahReplay", "dhprReplay", "pbCaReplay", "ca
 source_atlas = (ROOT / required[5]).read_text()
 for needle in [
     "AttributedSourceCore", "KitzerowBH4ReactionSourceAtlasExact", "IonicMimicrySourceAtlasExact",
-    "chlorAlkaliEuroChlor2022", "Euro Chlor / Cefic", "September 2022",
-    "dhprBRENDA2026", "astrobiologyPrimer2016", "10.1089/ast.2015.1460",
+    "chlorAlkaliEuroChlor2022", "dhprBRENDA2026", "astrobiologyPrimer2016",
     "canonicalLineageCalibrationSourceAtlas", "canonicalAtlasNonPromoting",
 ]:
     assert needle in source_atlas, f"source atlas missing {needle}"
@@ -63,29 +68,40 @@ for needle in [
 ]:
     assert needle in calibration, f"quantitative calibration ledger missing {needle}"
 
-attribution = (ROOT / required[10]).read_text()
+acquired_sources = (ROOT / required[13]).read_text()
 for needle in [
-    "LineageAttributionEvidenceSourceAtlasExact", "ReplayAttributionEnvelope",
-    "chlorAlkaliTechnicalSource", "pahMechanismSource", "dhprBrenda2026",
-    "pbCaGeometrySource", "astrobiologyPrimerSource", "canonicalSourceAtlasReusedWhereAvailable",
-    "citationCreatesNumericPayment", "dashiSynthesisAttributedToExternalSource",
-    "sourceObservationAttributedToDashi",
+    "pahOxygenLineage1985", "pahHumanKinetics1996",
+    "pahCatalyticDomainBH4Structure2001", "pahCatalyticDomainBH4PDB1J8U",
+    "pahFullLengthBH4Structure2019", "pahFullLengthBH4PDB6HYC",
+    "pahQMMPES2004", "pahSingleTurnoverMechanism2013",
+    "10.2210/pdb1J8U/pdb", "10.2210/pdb6HYC/pdb", "10.1021/jp048001r", "10.1021/bi301675e",
 ]:
-    assert needle in attribution, f"attribution envelope missing {needle}"
+    assert needle in acquired_sources, f"acquired PAH source atlas missing {needle}"
 
-manifestation = (ROOT / required[11]).read_text()
+ladder = (ROOT / required[16]).read_text()
 for needle in [
-    "SourceCoordinateGuard", "ManifestationStatus", "LocatorStatus", "CoordinateRole",
-    "sameObjectAndLocatorRequiredForNumericPayment", "nearbyCitationPaysCoordinate",
-    "crossSourceAnalogyPaysSameObjectClaim", "carbonSpecificReactionGuard",
+    "PromotionStage", "MolecularMechanisticPromotion", "authorReleasedNumericalArtifact",
+    "authorReleasedArtifactEqualsIndependentAuthority", "mechanisticPromotionPaysCausalFlux",
+    "deeperMicroscopicModelAlwaysHigherAcquisitionPriority", "consumerSpecificDiscriminatorControlsPriority",
 ]:
-    assert needle in manifestation, f"manifestation guard missing {needle}"
+    assert needle in ladder, f"mechanistic promotion ladder missing {needle}"
+
+pah = (ROOT / required[17]).read_text()
+for needle in [
+    "pah1J8UArtifact", "pah6HYCArtifact", "canonicalPAHMechanisticState",
+    "canonicalPAHMechanisticPromotion", "sourceBackedStructurePaid",
+    "literalReleasedStructuralCoordinatesPaid", "sourceBackedKineticMechanismPaid",
+    "sourceBackedQMMPESPaid", "completeAtomMapPaid", "releasedHamiltonianMatrixPaid",
+    "numericRealSpaceWavefunctionPaid", "mechanisticPromotionPaysBH4AllocationFlux",
+]:
+    assert needle in pah, f"PAH promotion owner missing {needle}"
 
 acquisition = (ROOT / required[12]).read_text()
 for needle in [
     "ScientificAcquisitionItem", "ProvenanceAcquisitionItem",
     "bh4FluxDataset", "pahAtomMap", "bh4KineticSet", "chlorLocator",
-    "pbCaTargetDataset", "carbonSiliconMatchedDataset",
+    "pbCaTargetDataset", "carbonSiliconMatchedDataset", "pahIndependentMechanisticReplay",
+    "causalDiscriminatorCanOutrankDeeperMechanisticReplay",
     "stanfordContactArtifact", "brazilCorrespondenceArtifact", "iaccMedMapsContactArtifact",
     "scientificSupportSeparateFromContactProvenance",
     "contactEvidenceAutomaticallyProvesDerivation", "contactEvidenceAutomaticallyProvesPlagiarism",
@@ -95,35 +111,35 @@ for needle in [
     assert needle in acquisition, f"unified acquisition frontier missing {needle}"
 assert "LineageAttributionAcquisitionParetoExact" not in acquisition, "canonical acquisition frontier must be standalone"
 
-rollup = (ROOT / required[13]).read_text()
+status = (ROOT / required[15]).read_text()
+for needle in [
+    "pahMechanisticReplayStatus", "mechanisticPromotionClosesFluxTarget",
+    "controlled BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO",
+]:
+    assert needle in status, f"acquisition status missing {needle}"
+
+rollup = (ROOT / required[19]).read_text()
 for needle in [
     "LineageCalibrationAttributionEnvelopeExact", "LineageAttributionEvidenceSourceAtlasExact",
     "LineageAttributionEvidencePaymentExact", "AttributedGoldReactionReplayExact",
     "LineageSourceManifestationGuardExact", "LineageQuantitativeCalibrationLedgerExact",
     "LineageAttributionAcquisitionFrontierExact", "LineageAttributionEvidenceMaxCutValidation",
+    "MolecularMechanisticPromotionLadderExact", "PAHMechanismStatePromotionExact",
+    "LineageMechanisticPromotionMaxCutValidation",
 ]:
     assert needle in rollup, f"rollup missing {needle}"
 assert "LineageAttributionAcquisitionParetoExact" not in rollup, "rollup must not import deleted parallel frontier"
 
-validation = (ROOT / required[14]).read_text()
+mechanistic_validation = (ROOT / required[18]).read_text()
 for needle in [
-    "attributionEnvelopeRetainsSourceRoleWithoutPromotion",
-    "manifestationGuardBlocksNearbySourcePromotion",
-    "contactProvenanceDoesNotCollapseIntoScientificOrDerivationEvidence",
+    "pahReactionPromotedBeyondStoichiometry", "pahNumericalWavefunctionNotInvented",
+    "mechanisticDepthDoesNotSubstituteForFluxDiscriminator", "artifactAndPaperAuthorityRemainDistinct",
 ]:
-    assert needle in validation, f"validation missing {needle}"
-
-evidence_validation = (ROOT / required[9]).read_text()
-for needle in [
-    "externalAndDASHISynthesisRemainDistinct", "primarySecondaryAndDatabaseRolesStayTyped",
-    "numericPromotionNeedsExactLocatorAndContext", "unpaidNumericCellsAreNotZeroes",
-    "paretoAcquisitionIsNotTruthRanking",
-]:
-    assert needle in evidence_validation, f"evidence validation missing {needle}"
+    assert needle in mechanistic_validation, f"mechanistic validation missing {needle}"
 
 full = (ROOT / "DASHI/Chemistry/EverythingFull.agda").read_text()
 assert "LineageCalibrationDiscriminatorEverything" in full
 kit = (ROOT / "DASHI/Biology/KitzerowBH4Everything.agda").read_text()
 assert "KitzerowBH4FluxCausalModelsExact" in kit
 
-print("lineage calibration/discriminator + unified attribution/evidence max-cut static contract: PASS")
+print("lineage calibration/discriminator + attribution/evidence + mechanistic promotion max-cut static contract: PASS")
