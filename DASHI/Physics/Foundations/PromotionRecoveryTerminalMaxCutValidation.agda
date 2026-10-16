@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1Group
 import DASHI.Physics.Foundations.R3HodgeCrossExact as Hodge3
 import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R144C3
+import DASHI.Physics.Foundations.BalabanA1InvariantPathSourceReductionExact as A1Cut
 import DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact as BalabanTransport
 
 ------------------------------------------------------------------------
@@ -52,3 +53,15 @@ fullAmbientR140ActionNotInvented = refl
 r144TensorActionUsesNoNewAmbientCarrier :
   R144C3.r144SpatialC3NeedsNoNewAmbientCarrier ≡ true
 r144TensorActionUsesNoNewAmbientCarrier = refl
+
+p1InvariantPathCompilesSignedB4Covariance :
+  A1Cut.p1InvariantPathPaysSignedTensorCovariance ≡ true
+p1InvariantPathCompilesSignedB4Covariance = refl
+
+genericFirstVariationNaturalityIsNotTerminalA1 :
+  A1Cut.generalFirstVariationNaturalityIsNotMinimalA1Leaf ≡ true
+genericFirstVariationNaturalityIsNotTerminalA1 = refl
+
+rationalR144ReadoutStillNeedsSameObjectPathDerivativeIdentification :
+  A1Cut.rationalFiniteD1ToRealPathDerivativeIdentificationStillSeparate ≡ true
+rationalR144ReadoutStillNeedsSameObjectPathDerivativeIdentification = refl
