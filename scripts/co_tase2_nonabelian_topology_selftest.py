@@ -64,10 +64,15 @@ phases = topo.wilson_loop_phases(frames)
 assert phases.shape == (1,)
 assert abs(abs(phases[0]) - np.pi) < 2e-3, phases
 
-# An explicitly k-dependent phase gauge must leave the Wilson spectrum unchanged.
+# An explicitly k-dependent phase gauge may choose +pi instead of -pi, so compare
+# Wilson eigenvalues on U(1), not principal-angle representatives on R.
 frames_g = [f * np.exp(1j * (0.37 * i + 0.013 * i * i))
             for i, f in enumerate(frames)]
 phases_g = topo.wilson_loop_phases(frames_g)
-assert np.allclose(np.sort(phases_g), np.sort(phases), atol=1e-10), (phases_g, phases)
+assert np.allclose(
+    np.sort_complex(np.exp(1j * phases_g)),
+    np.sort_complex(np.exp(1j * phases)),
+    atol=1e-10,
+), (phases_g, phases)
 
 print("NONABELIAN-TOPOLOGY-SELFTEST: PASS", omega.tolist(), omega2.tolist(), phases.tolist())
