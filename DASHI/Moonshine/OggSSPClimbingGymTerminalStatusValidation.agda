@@ -61,6 +61,12 @@ certifiedBishopCellCompilerClosed :
   ≡ true
 certifiedBishopCellCompilerClosed = refl
 
+certifiedBishopWallPhaseCompilerClosed :
+  Status.certifiedBishopWallPhaseToRadixClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+certifiedBishopWallPhaseCompilerClosed = refl
+
 concreteBishopCarrierAvailable :
   Status.concreteBishopSetoidCarrierAvailable
     Status.canonicalClimbingGymTerminalStatus
@@ -78,6 +84,12 @@ concreteBishopGlobalPhaseStillOpen :
     Status.canonicalClimbingGymTerminalStatus
   ≡ false
 concreteBishopGlobalPhaseStillOpen = refl
+
+actualZeroPhaseCellsStillOpen :
+  Status.actualZeroPhaseCellCertificatesClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ false
+actualZeroPhaseCellsStillOpen = refl
 
 bishopSetoidNotCollapsedToPropositionalEquality :
   Status.bishopSetoidEqualityCollapsedToPropositionalEquality
