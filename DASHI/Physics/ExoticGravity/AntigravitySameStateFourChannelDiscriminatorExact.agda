@@ -41,6 +41,41 @@ record SameStateFourChannelPrediction : Set₁ where
 
 open SameStateFourChannelPrediction public
 
+------------------------------------------------------------------------
+-- SOURCE -> STRESS -> METRIC PROVENANCE CHAIN
+--
+-- The four-channel prediction is not allowed to float free of the source-side
+-- object.  One selected source is compiled into one selected stress and then
+-- one selected metric, and the metric stored in the four-channel prediction
+-- must be literally that stress-derived metric.
+------------------------------------------------------------------------
+
+record SameStateStressMetricFourChannelChain : Set₁ where
+  constructor same-state-stress-metric-four-channel-chain
+  field
+    SourceState StressState MetricState : Set
+    selectedSource : SourceState
+    sourceToStress : SourceState → StressState
+    stressToMetric : StressState → MetricState
+
+    selectedPrediction : SameStateFourChannelPrediction
+    predictionMetricTypeIsSame :
+      SameStateFourChannelPrediction.MetricState selectedPrediction ≡ MetricState
+    predictionMetricIsSameStressDerivedMetric :
+      SameStateFourChannelPrediction.metricState selectedPrediction
+      ≡ stressToMetric (sourceToStress selectedSource)
+
+open SameStateStressMetricFourChannelChain public
+
+sameSourceStressMetricChainRequired : Bool
+sameSourceStressMetricChainRequired = true
+
+-- Cross-pollinated lesson from the repo's consumer-relative stress machinery:
+-- agreement after one projection (trace, active stress, one component, etc.)
+-- cannot identify the complete stress object.
+sharedProjectionDoesNotIdentifyFullStress : Bool
+sharedProjectionDoesNotIdentifyFullStress = true
+
 weightOnlyCannotPromoteMetricClaim : Bool
 weightOnlyCannotPromoteMetricClaim = true
 
