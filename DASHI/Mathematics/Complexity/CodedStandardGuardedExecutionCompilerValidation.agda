@@ -4,10 +4,15 @@ module DASHI.Mathematics.Complexity.CodedStandardGuardedExecutionCompilerValidat
 -- RED-FIRST VALIDATION: actual-halting run -> guarded Cook representation.
 ------------------------------------------------------------------------
 
-open import DASHI.Mathematics.Complexity.CodedStandardGuardedExecutionCompilerExact
+open import DASHI.Mathematics.Complexity.GuardedStandardStartBlankTailExact
   using
     ( canonicalProjectionOfInterior
     ; guardedStandardStartBlankTailEq
-    ; guardedExecutionReceiptOfHaltingWitness
+    ; canonicalGuardedStartBlankTailBoundary
+    )
+
+open import DASHI.Mathematics.Complexity.CodedStandardGuardedExecutionCompilerExact
+  using
+    ( guardedExecutionReceiptOfHaltingWitness
     ; canonicalGuardedExecutionCompilerBoundary
     )
