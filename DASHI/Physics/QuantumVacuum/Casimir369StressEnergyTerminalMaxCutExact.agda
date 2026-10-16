@@ -114,7 +114,6 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     selectedQFTStressCoordinateSymmetryPaid : Bool
     brownMaclayTenIndependentComponentValuesPaid : Bool
 
-    -- Compatibility summaries retained for downstream readers.
     casimirSelectedQFTGroupHostsCanonicalU1Paid : Bool
     casimirSelectedQFTSectorBrownMaclayEqualityPaid : Bool
     casimirSelectedRecoveredQFTSectorStressAttachmentPaid : Bool
@@ -141,7 +140,7 @@ canonicalTerminalBoundary =
     false false false false
     false false false false false
     false false false
-    false false false false false false false false false false false false
+    false false false false false false false false false false false
 
 ------------------------------------------------------------------------
 -- Existing owners witness paid compiler/interface surfaces.
