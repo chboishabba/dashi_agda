@@ -1,0 +1,121 @@
+module DASHI.Biology.IITCubeDiagonalStabilizerExact where
+
+------------------------------------------------------------------------
+-- DIAGONAL STABILIZER OF THE CONCRETE CUBE IMAGE
+--
+-- The full trinification action does not preserve the selected causal graph;
+-- IITCubeTrinificationSymmetryBreakingExact already supplies an explicit shear
+-- counterexample.  The productive remaining question is therefore the exact
+-- stabilizer of the graph under one and the same linear face map on all three
+-- layers.
+--
+-- For additive/zero-preserving face maps T, graph preservation is equivalent
+-- to commuting with the concrete face operator B = bop.  Thus the diagonal
+-- stabilizer is the centralizer of B, not the whole exceptional action.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+
+import DASHI.Biology.IITCubeConcreteTorusImageExact as Cube
+
+record FaceLinearEndo : Set where
+  constructor face-linear-endo
+  field
+    map : Cube.Face9 → Cube.Face9
+    mapZero : map Cube.zeroFace ≡ Cube.zeroFace
+    mapSub : (x y : Cube.Face9) →
+      map (Cube.subFace x y) ≡ Cube.subFace (map x) (map y)
+open FaceLinearEndo public
+
+CommutesWithB : FaceLinearEndo → Set
+CommutesWithB T = (f : Cube.Face9) → map T (Cube.bop f) ≡ Cube.bop (map T f)
+
+mapCube : FaceLinearEndo → Cube.CubeFaces → Cube.CubeFaces
+mapCube T c = Cube.cube-faces
+  (map T (Cube.face0 c))
+  (map T (Cube.face1 c))
+  (map T (Cube.face2 c))
+
+PreservesGraph : FaceLinearEndo → Set
+PreservesGraph T = (c : Cube.CubeFaces) → Cube.GraphLaw c → Cube.GraphLaw (mapCube T c)
+
+bop2Zero : Cube.bop2 Cube.zeroFace ≡ Cube.zeroFace
+bop2Zero = trans (cong Cube.bop Cube.bopZero) Cube.bopZero
+
+negZeroFace : Cube.negFace Cube.zeroFace ≡ Cube.zeroFace
+negZeroFace = refl
+
+subZeroRFace : (f : Cube.Face9) → Cube.subFace f Cube.zeroFace ≡ f
+subZeroRFace f =
+  trans
+    (cong (Cube.addFace f) negZeroFace)
+    (Cube.addZeroRFace f)
+
+commuteB2 : (T : FaceLinearEndo) → CommutesWithB T →
+  (f : Cube.Face9) → map T (Cube.bop2 f) ≡ Cube.bop2 (map T f)
+commuteB2 T commutes f =
+  trans
+    (commutes (Cube.bop f))
+    (cong Cube.bop (commutes f))
+
+centralizerPreservesGraph :
+  (T : FaceLinearEndo) → CommutesWithB T → PreservesGraph T
+centralizerPreservesGraph T commutes c graph =
+  trans
+    (cong (map T) graph)
+    (trans
+      (mapSub T (Cube.bop (Cube.face1 c)) (Cube.bop2 (Cube.face0 c)))
+      (trans
+        (cong
+          (λ x → Cube.subFace x (map T (Cube.bop2 (Cube.face0 c))))
+          (commutes (Cube.face1 c)))
+        (cong
+          (Cube.subFace (Cube.bop (map T (Cube.face1 c))))
+          (commuteB2 T commutes (Cube.face0 c)))))
+
+probeCube : Cube.Face9 → Cube.CubeFaces
+probeCube f = Cube.cube-faces Cube.zeroFace f (Cube.bop f)
+
+probeGraphLaw : (f : Cube.Face9) → Cube.GraphLaw (probeCube f)
+probeGraphLaw f =
+  sym
+    (trans
+      (cong (Cube.subFace (Cube.bop f)) bop2Zero)
+      (subZeroRFace (Cube.bop f)))
+
+preservesGraphForcesCentralizer :
+  (T : FaceLinearEndo) → PreservesGraph T → CommutesWithB T
+preservesGraphForcesCentralizer T preserves f =
+  trans
+    (preserves (probeCube f) (probeGraphLaw f))
+    (trans
+      (cong
+        (Cube.subFace (Cube.bop (map T f)))
+        (trans (cong Cube.bop2 (mapZero T)) bop2Zero))
+      (subZeroRFace (Cube.bop (map T f))))
+
+record DiagonalGraphStabilizerCharacterization (T : FaceLinearEndo) : Set where
+  constructor diagonal-graph-stabilizer-characterization
+  field
+    centralizerImpliesGraphPreservation : CommutesWithB T → PreservesGraph T
+    graphPreservationImpliesCentralizer : PreservesGraph T → CommutesWithB T
+open DiagonalGraphStabilizerCharacterization public
+
+diagonalStabilizerIffCentralizer :
+  (T : FaceLinearEndo) → DiagonalGraphStabilizerCharacterization T
+diagonalStabilizerIffCentralizer T =
+  diagonal-graph-stabilizer-characterization
+    (centralizerPreservesGraph T)
+    (preservesGraphForcesCentralizer T)
+
+identityFaceEndo : FaceLinearEndo
+identityFaceEndo = face-linear-endo
+  (λ x → x)
+  refl
+  (λ x y → refl)
+
+identityCommutesWithB : CommutesWithB identityFaceEndo
+identityCommutesWithB f = refl
+
+identityPreservesGraph : PreservesGraph identityFaceEndo
+identityPreservesGraph = centralizerPreservesGraph identityFaceEndo identityCommutesWithB
