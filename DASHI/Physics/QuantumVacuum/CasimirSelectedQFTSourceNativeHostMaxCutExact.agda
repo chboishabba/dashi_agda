@@ -20,7 +20,7 @@ import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 -- The selected-QFT host previously exposed compact simplicity as a separate
 -- application payment.  The live source-native recovery stack is stronger:
 --
--- * PinnedYangMillsConstruction already owns `compactSimple : forall G`;
+-- * PinnedYangMillsConstruction already owns `compactSimple : ∀ G`;
 -- * source-native selection compiles the pinned/recovered-QFT attachment;
 -- * QFTRecoveryReceipt then identifies that recovered construction with the
 --   selected qftTarget after coarse graining.
@@ -49,33 +49,33 @@ record SourceNativePinnedHostSelection
 open SourceNativePinnedHostSelection public
 
 compiledPinnedRecoveredAttachment :
-  forall {U : Weld.UnifiedCandidate}
+  ∀ {U : Weld.UnifiedCandidate}
     {pinned :
       Pinned.PinnedYangMillsConstruction
         {C = Weld.qftCarriers U}
-        (Weld.qftSemantics U)} ->
-  SourceNativePinnedHostSelection U pinned ->
+        (Weld.qftSemantics U)} →
+  SourceNativePinnedHostSelection U pinned →
   Attach.PinnedYangMillsRecoveredQFTAttachment U pinned
 compiledPinnedRecoveredAttachment selection =
   Recovery.sourceNativeSelectionBuildsPinnedRecoveredAttachment
     (pinnedSelection selection)
 
 qftRecoveryFromCasimirHandoff :
-  forall {U : Weld.UnifiedCandidate} ->
-  GRQFT.CasimirSameCandidateGRQFTHandoff U ->
+  ∀ {U : Weld.UnifiedCandidate} →
+  GRQFT.CasimirSameCandidateGRQFTHandoff U →
   Weld.QFTRecoveryReceipt U
 qftRecoveryFromCasimirHandoff handoff = GRQFT.qftRecovery handoff
 
 sourceNativePinnedConstructionIsSelectedQFTTarget :
-  forall {U : Weld.UnifiedCandidate}
+  ∀ {U : Weld.UnifiedCandidate}
     {pinned :
       Pinned.PinnedYangMillsConstruction
         {C = Weld.qftCarriers U}
-        (Weld.qftSemantics U)} ->
-  (selection : SourceNativePinnedHostSelection U pinned) ->
-  Weld.QFTRecoveryReceipt U ->
-  forall candidate regime ->
-  Weld.qftRegime U regime ->
+        (Weld.qftSemantics U)} →
+  (selection : SourceNativePinnedHostSelection U pinned) →
+  Weld.QFTRecoveryReceipt U →
+  ∀ candidate regime →
+  Weld.qftRegime U regime →
   Pinned.asLiteralYangMillsConstruction pinned
   ≡ Weld.qftTarget U (Weld.coarseGrain U candidate regime)
 sourceNativePinnedConstructionIsSelectedQFTTarget selection qftRecovery =
@@ -84,17 +84,17 @@ sourceNativePinnedConstructionIsSelectedQFTTarget selection qftRecovery =
     qftRecovery
 
 sourceNativeSelectionBuildsSelectedSU2Host :
-  forall {U : Weld.UnifiedCandidate}
+  ∀ {U : Weld.UnifiedCandidate}
     {pinned :
       Pinned.PinnedYangMillsConstruction
         {C = Weld.qftCarriers U}
-        (Weld.qftSemantics U)} ->
-  SourceNativePinnedHostSelection U pinned ->
-  (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) ->
+        (Weld.qftSemantics U)} →
+  SourceNativePinnedHostSelection U pinned →
+  (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
   (interpretation :
-    QFT.CompactSimpleGroup (Weld.qftCarriers U) -> Gauge.GroupStructure) ->
-  interpretation group ≡ SU2.su2QuaternionGroup ->
-  String ->
+    QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
+  interpretation group ≡ SU2.su2QuaternionGroup →
+  String →
   Host.CasimirSelectedQFTSU2Host U group
 sourceNativeSelectionBuildsSelectedSU2Host
     {pinned = pinned} selection group interpretation interpreted reading =
@@ -102,13 +102,13 @@ sourceNativeSelectionBuildsSelectedSU2Host
     pinned group interpretation interpreted reading
 
 sourceNativeSelectionSuppliesSelectedCompactSimple :
-  forall {U : Weld.UnifiedCandidate}
+  ∀ {U : Weld.UnifiedCandidate}
     {pinned :
       Pinned.PinnedYangMillsConstruction
         {C = Weld.qftCarriers U}
-        (Weld.qftSemantics U)} ->
-  SourceNativePinnedHostSelection U pinned ->
-  (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) ->
+        (Weld.qftSemantics U)} →
+  SourceNativePinnedHostSelection U pinned →
+  (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
   QFT.IsCompactSimple (Weld.qftSemantics U) group
 sourceNativeSelectionSuppliesSelectedCompactSimple
     {pinned = pinned} selection group =
@@ -123,11 +123,11 @@ data SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 : Set where
 data CompactSimpleProofRequiresSecondSelectedQFTTheoremAfterPinnedSelection : Set where
 
 sourceNativeRecoveryDoesNotChooseQuaternionSU2 :
-  SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 -> ⊥
+  SourceNativeRecoveryAutomaticallyChoosesQuaternionSU2 → ⊥
 sourceNativeRecoveryDoesNotChooseQuaternionSU2 ()
 
 noSecondCompactSimpleTheoremAfterPinnedSelection :
-  CompactSimpleProofRequiresSecondSelectedQFTTheoremAfterPinnedSelection -> ⊥
+  CompactSimpleProofRequiresSecondSelectedQFTTheoremAfterPinnedSelection → ⊥
 noSecondCompactSimpleTheoremAfterPinnedSelection ()
 
 data RemainingSourceNativeHostBlocker : Set where
