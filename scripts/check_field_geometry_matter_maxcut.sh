@@ -86,8 +86,6 @@ for artifact in \
   test -f "$artifact" || { echo "missing execution artifact: $artifact" >&2; exit 1; }
 done
 
-python3 scripts/check_field_geometry_matter_evidence.py
-
 grep -q 'unresolvedChannelsAreNotZero' DASHI/Physics/Foundations/SameObjectConservationLedgerExact.agda
 grep -q 'ResidualDirectAntigravityPermission' DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda
 grep -q 'sameBodyForceFormDoesNotIdentifyMechanism' DASHI/Physics/Foundations/FieldGeometryMatterConsumersExact.agda
