@@ -275,22 +275,10 @@ oddExtendedGapPositive :
 oddExtendedGapPositive word coefficient safe =
   NatP.m<n⇒0<n∸m safe
 
-oddGapReassociation :
-  (multiplier gap : Nat) →
-  3 * multiplier + (2 * gap ∸ multiplier)
-  ≡ 2 * multiplier + (multiplier + (2 * gap ∸ multiplier))
-oddGapReassociation =
-  solve 2
-    (λ multiplier gap →
-      (con 3 :* multiplier) :+ ((con 2 :* gap) :* con 1)
-      :=
-      (con 2 :* multiplier)
-        :+ (multiplier :+ ((con 2 :* gap) :* con 1)))
-    refl
-
--- The solver language does not model truncated subtraction.  The actual proof
--- below therefore uses only reassociation around the subtraction term and the
--- stdlib identity multiplier + (2g - multiplier) = 2g under multiplier <= 2g.
+-- The solver language does not model truncated subtraction.  The proof below
+-- therefore treats the subtraction result as an opaque `difference` and uses
+-- the stdlib identity multiplier + (2g - multiplier) = 2g under
+-- multiplier <= 2g.
 oddExtendedDenominatorSplit :
   {m : Nat} →
   (word : Binary.BinaryWord m) →
