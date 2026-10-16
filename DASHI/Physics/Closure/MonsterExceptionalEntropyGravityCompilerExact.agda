@@ -3,9 +3,9 @@ module DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact where
 ------------------------------------------------------------------------
 -- MONSTER -> EXCEPTIONAL GEOMETRY -> STATE/ENTROPY -> GR COMPILER
 --
--- The physical state branch is actor-scoped.  The selected native-369 state is
+-- The physical state branch is actor-scoped. The selected native-369 state is
 -- a C3/3B construction, so the 53/Albert route consumed here must be the
--- central-C3 or explicitly named conformal-fixed-line route.  The independent
+-- central-C3 or explicitly named conformal-fixed-line route. The independent
 -- full-normalizer exceptional lane is 90 -> 12+78 -> E6 -> F4+26 and is not
 -- permitted to smuggle a normalizer-stable 53 summand into this compiler.
 ------------------------------------------------------------------------
@@ -21,6 +21,7 @@ import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as EntropyGR
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as AlbertWeld
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact as ActorScoped
+import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Ninety
 import DASHI.Physics.Foundations.CMP119CosmologyLocalCWightmanTerminalMaxCutExact as Wightman
 import DASHI.Physics.Foundations.CMP119CosmologyRealTraceToExpansionMaxCutExact as Expansion
 
@@ -61,11 +62,6 @@ open Native369PhysicalEnsemblePayment public
 
 ------------------------------------------------------------------------
 -- 2. Same-object exceptional/state weld.
---
--- The exceptional input is actor-scoped: it already carries a proof that the
--- selected residual actor is central C3 or the named conformal-fixed-line
--- restriction, and its strict F4 recognition contains the unique actual 54/53
--- action used by the carrier weld.
 ------------------------------------------------------------------------
 
 record MonsterAlbertStateIntertwiner : Set₁ where
@@ -183,17 +179,18 @@ record MonsterExceptionalCosmologyRecognition : Set₁ where
 
 ------------------------------------------------------------------------
 -- 6. Full-normalizer exceptional cross-check remains separately typed.
+--
+-- Unlike the physical central-residual lane, this object is parameterized by
+-- the literal Fin90/12+78 attachment and therefore cannot be inhabited by an
+-- unrelated exceptional carrier of matching dimension.
 ------------------------------------------------------------------------
 
-record NormalizerExceptionalCrossCheck : Set₁ where
+record NormalizerExceptionalCrossCheck {source}
+  (attachment : Ninety.ActualMultiplicityTwelveSeventyEightAttachment source)
+  : Set₁ where
   constructor normalizer-exceptional-cross-check
   field
-    NormalizerSource : Set
-    Attachment : Set
-    E6F4Recognition : Set
-
-    SourceAttachmentWitness : Set
-    sourceAttachmentPaid : SourceAttachmentWitness
+    e6F4Recognition : ActorScoped.NormalizerE6F4Recognition attachment
 
     SameMonsterObjectWitness : Set
     sameMonsterObjectAsCentralPhysicalLane : SameMonsterObjectWitness
@@ -240,6 +237,7 @@ record MonsterExceptionalEntropyGravityBoundary : Set where
     proofRelevantAlbertCarrierDeletionPaid : Bool
     exceptionalActorScopingPaid : Bool
     centralPhysicalLaneRejectsNormalizer53Shortcut : Bool
+    normalizerCrossCheckUsesActualFin90AttachmentType : Bool
     actualMonsterActionToAlbertTransportCompilerPaid : Bool
     entropyGravityPhysicalContractAvailable : Bool
     entropyGravityLegacyContractHardenedProofRelevant : Bool
@@ -259,9 +257,9 @@ canonicalMonsterExceptionalEntropyGravityBoundary :
   MonsterExceptionalEntropyGravityBoundary
 canonicalMonsterExceptionalEntropyGravityBoundary =
   monster-exceptional-entropy-gravity-boundary
-    true true true true true true true true true true
+    true true true true true true true true true true true
     false false false false false false false
-    "The physical Monster->exceptional->gravity lane is now explicitly central-C3/conformal scoped. The normalizer 90->12+78->E6->F4+26 lane is retained as an independent same-Monster-object cross-check and cannot manufacture a normalizer-stable residual 53. Remaining payments are the central actual Monster<->F4 action, physical density state, same selected stress, exact Local-C/Wightman identification, trace->expansion, parameter-free observable and held-out validation."
+    "The physical Monster->exceptional->gravity lane is explicitly central-C3/conformal scoped. The normalizer 90->12+78->E6->F4+26 cross-check is typed on the actual Fin90 attachment and cannot manufacture a normalizer-stable residual 53. Remaining payments are the central actual Monster<->F4 action, physical density state, same selected stress, exact Local-C/Wightman identification, trace->expansion, parameter-free observable and held-out validation."
 
 ------------------------------------------------------------------------
 -- 9. Donor objects reached explicitly.
