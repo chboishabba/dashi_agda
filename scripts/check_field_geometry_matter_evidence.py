@@ -29,6 +29,7 @@ PAIRS = [
     ("scripts/matbg_entropy_combinatorial_replay.py", "Docs/evidence/matbg_entropy_combinatorial_replay_2026-10-16.json"),
     ("scripts/matbg_entropy_maxwell_replay_contract.py", "Docs/evidence/matbg_entropy_maxwell_replay_contract_2026-10-16.json"),
     ("scripts/casimir_finite_disk_gravity_proxy.py", "Docs/evidence/casimir_finite_disk_gravity_proxy_2026-10-16.json"),
+    ("scripts/casimir_ideal_sheet_scaling_ceiling.py", "Docs/evidence/casimir_ideal_sheet_scaling_ceiling_2026-10-16.json"),
 ]
 
 def assert_generated_matches_evidence(generated: Any, evidence: Any, path: str = "$") -> None:
