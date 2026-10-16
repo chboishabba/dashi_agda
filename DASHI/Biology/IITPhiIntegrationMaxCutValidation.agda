@@ -18,8 +18,10 @@ import DASHI.Biology.IITXORGridFibreCalibrationExact
 import DASHI.Biology.IITXORProbabilityReceiptExact
 import DASHI.Biology.IITXOREffectCutReceiptExact
 import DASHI.Biology.IITBooleanParityMinimalSufficiencyExact
+import DASHI.Biology.IITTernaryAffineMinimalSufficiencyExact
 import DASHI.Biology.IITParityTorqueGluingBoundaryExact
 import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact
+import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
@@ -29,6 +31,7 @@ import DASHI.Biology.IITMatchedFabricGateExperimentExact
 import DASHI.Biology.IIT369MatchedAlgebraControlExact
 import DASHI.Biology.IITTernaryLatticeStateSpaceScalingExact
 import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact
+import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact
 import DASHI.Biology.IITPointedTernary27FaceGluingExact
 import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact
@@ -44,3 +47,4 @@ import DASHI.Reasoning.IITBrainMaleCNSConsumerBoundaryExact
 import DASHI.Moonshine.IITMonsterInvariantBoundaryExact
 import DASHI.Analysis.IITZetaGeneratingBoundaryExact
 import DASHI.Biology.IITPhiIntegrationEverything
+import DASHI.Biology.IITParityCubeTorqueMaxCutValidation
