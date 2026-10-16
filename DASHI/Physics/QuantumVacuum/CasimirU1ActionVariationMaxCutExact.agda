@@ -6,26 +6,29 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.Closure.MaxwellGaugeFieldEquationScope as Maxwell
+import DASHI.Physics.Foundations.CMP119CosmologyP1InvariantPathDerivativeCovarianceExact as PathDerivative
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2Lie
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionExact as Pairing
 import DASHI.Physics.QuantumVacuum.CasimirU1CurvatureRestrictionExact as Curvature
 import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityExact as Density
+import DASHI.Physics.QuantumVacuum.CasimirU1MetricVariationTransportExact as MetricTransport
 
 ------------------------------------------------------------------------
 -- CASIMIR U(1) ACTION / METRIC-VARIATION MAX-CUT
 --
--- The theorem-bearing Cartan reductions are already compiler-owned:
+-- The theorem-bearing Cartan reductions are compiler-owned:
 --
 --   [A,A] = 0
 --   <embed a,embed b>_SU2 = a*b
 --   F=dA+[A,A] => F=dA
---   common-prefactor <F,F> => common-prefactor F_U1^2.
+--   common-prefactor <F,F> => common-prefactor F_U1^2
+--   same density functional => S_YM|U1 = S_Maxwell
+--   same action along same metric path => delta S_YM = delta S_Maxwell.
 --
--- A proof-relevant action-density functional then lifts the final pointwise
--- equality to action equality.  Consequently restricted YM=Maxwell action is
--- not an independent theorem after those same-object inputs are attached.
+-- Thus neither action equality nor first-variation equality is an independent
+-- theorem after the genuine same-object producer/calibration inputs are paid.
 ------------------------------------------------------------------------
 
 record CasimirRestrictedActionNormalizationPayment : Set₁ where
@@ -111,42 +114,52 @@ curvatureRestrictionWitness = Curvature.canonicalCasimirU1CurvatureRestrictionBo
 quadraticDensityRestrictionWitness : Density.CasimirU1QuadraticDensityBoundary
 quadraticDensityRestrictionWitness = Density.canonicalU1QuadraticDensityBoundary
 
+metricVariationTransportWitness : MetricTransport.CasimirU1MetricVariationTransportBoundary
+metricVariationTransportWitness = MetricTransport.canonicalU1MetricVariationTransportBoundary
+
 ------------------------------------------------------------------------
--- Metric variation remains a separate same-path payment.  Action equality at
--- one selected metric does not by itself identify derivatives under metric
--- perturbation.  The next max-cut is to reuse the repository's common tangent/
--- first-variation machinery rather than postulate a second stress equality.
+-- SAME-PATH METRIC VARIATION / COMMON STRESS READOUT
 ------------------------------------------------------------------------
 
-record CasimirRestrictedMetricVariationPayment
-    (actionPayment : CasimirRestrictedActionNormalizationPayment) : Set₁ where
+record CasimirRestrictedMetricVariationPayment : Set₁ where
   field
-    MetricPerturbation : Set
-    VariationValue : Set
-
-    restrictedYMMetricVariation :
-      SelectedField actionPayment → MetricPerturbation → VariationValue
-    maxwellMetricVariation :
-      SelectedField actionPayment → MetricPerturbation → VariationValue
-
-    restrictionCommutesWithMetricVariation :
-      ∀ field perturbation →
-      restrictedYMMetricVariation field perturbation
-      ≡ maxwellMetricVariation field perturbation
-
-    StressCarrier : Set
-    stressFromRestrictedVariation :
-      (SelectedField actionPayment → MetricPerturbation → VariationValue) → StressCarrier
-    stressFromMaxwellVariation :
-      (SelectedField actionPayment → MetricPerturbation → VariationValue) → StressCarrier
-
-    restrictedVariationStressEqualsMaxwellStress :
-      stressFromRestrictedVariation restrictedYMMetricVariation
-      ≡ stressFromMaxwellVariation maxwellMetricVariation
-
+    derivativeLaws : PathDerivative.SignedPathDerivativeLaws
+    metricActionFamily : MetricTransport.SameMetricPathActionFamily
+    commonStressReadout : MetricTransport.CommonStressReadout
     reading : String
 
 open CasimirRestrictedMetricVariationPayment public
+
+restrictedMetricVariationEqualsMaxwell :
+  (payment : CasimirRestrictedMetricVariationPayment) →
+  ∀ background perturbation →
+  MetricTransport.restrictedYMMetricFirstVariation
+    (derivativeLaws payment) (metricActionFamily payment)
+    background perturbation
+  ≡ MetricTransport.maxwellMetricFirstVariation
+      (derivativeLaws payment) (metricActionFamily payment)
+      background perturbation
+restrictedMetricVariationEqualsMaxwell payment =
+  MetricTransport.sameMetricPathActionEqualityImpliesVariationEquality
+    (derivativeLaws payment)
+    (metricActionFamily payment)
+
+restrictedVariationCommonStressEqualsMaxwell :
+  (payment : CasimirRestrictedMetricVariationPayment) →
+  ∀ background perturbation →
+  MetricTransport.stressFromFirstVariation (commonStressReadout payment)
+    (MetricTransport.restrictedYMMetricFirstVariation
+      (derivativeLaws payment) (metricActionFamily payment)
+      background perturbation)
+  ≡
+  MetricTransport.stressFromFirstVariation (commonStressReadout payment)
+    (MetricTransport.maxwellMetricFirstVariation
+      (derivativeLaws payment) (metricActionFamily payment)
+      background perturbation)
+restrictedVariationCommonStressEqualsMaxwell payment background perturbation =
+  MetricTransport.sameVariationImpliesSameCommonStressReadout
+    (commonStressReadout payment)
+    (restrictedMetricVariationEqualsMaxwell payment background perturbation)
 
 maxwellScopeNamesSectorRestriction : Bool
 maxwellScopeNamesSectorRestriction = true
@@ -165,7 +178,8 @@ data RemainingCasimirU1ActionRestrictionBlocker : Set where
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingCasimirU1ActionRestrictionBlocker
   missingExteriorFieldStrengthCartanImage : RemainingCasimirU1ActionRestrictionBlocker
   missingSameObjectActionDensityFunctional : RemainingCasimirU1ActionRestrictionBlocker
-  missingMetricVariationRestrictionCommutation : RemainingCasimirU1ActionRestrictionBlocker
+  missingSameMetricPathActionFamily : RemainingCasimirU1ActionRestrictionBlocker
+  missingMetricVariationStressReadout : RemainingCasimirU1ActionRestrictionBlocker
 
 firstActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
 firstActionRestrictionBlocker = missingPhysicalChargeCouplingNormalization
@@ -180,7 +194,10 @@ fourthActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
 fourthActionRestrictionBlocker = missingSameObjectActionDensityFunctional
 
 fifthActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
-fifthActionRestrictionBlocker = missingMetricVariationRestrictionCommutation
+fifthActionRestrictionBlocker = missingSameMetricPathActionFamily
+
+sixthActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
+sixthActionRestrictionBlocker = missingMetricVariationStressReadout
 
 record CasimirU1ActionVariationBoundary : Set where
   constructor casimir-u1-action-variation-boundary
@@ -191,13 +208,16 @@ record CasimirU1ActionVariationBoundary : Set where
     independentKillingDecompositionRequired : Bool
     cartesianCurvatureReductionCompilerConsumed : Bool
     quadraticActionDensityCompilerConsumed : Bool
+    metricVariationTransportCompilerConsumed : Bool
     secondAbelianBracketProofRequired : Bool
     independentRestrictedYMMaxwellActionEqualityRequiredAfterInputs : Bool
+    independentMetricVariationEqualityRequiredAfterSamePathActionEquality : Bool
     physicalChargeCouplingNormalizationSeparated : Bool
     nondegenerateCurvatureAttachmentSeparated : Bool
     exteriorFieldStrengthCartanImageSeparated : Bool
     sameObjectActionFunctionalSeparated : Bool
-    metricVariationCommutationSeparated : Bool
+    sameMetricPathActionFamilySeparated : Bool
+    metricVariationStressReadoutSeparated : Bool
     zeroProbeActionSurfacePaysPhysicalRestriction : Bool
 
 open CasimirU1ActionVariationBoundary public
@@ -205,9 +225,9 @@ open CasimirU1ActionVariationBoundary public
 canonicalCasimirU1ActionVariationBoundary : CasimirU1ActionVariationBoundary
 canonicalCasimirU1ActionVariationBoundary =
   casimir-u1-action-variation-boundary
-    true true true false true true false false
-    true true true true true false
+    true true true false true true true false false false
+    true true true true true true false
 
 casimirU1ActionVariationReading : String
 casimirU1ActionVariationReading =
-  "The Cartan-U(1) action algebra is compiler-saturated. Bracket-zero follows from the field image; the live SU(2) invariant pairing restricts as <embed a,embed b>=a*b; same-object F=dA+[A,A] reduces to F=dA; and the quadratic YM density therefore equals the Maxwell square for any common prefactor. A proof-relevant same-object density functional lifts that pointwise result to full restricted-YM=Maxwell action equality, so no additional equality theorem remains after the inputs are attached. The genuine inputs are now: physical electromagnetic coupling/action-prefactor normalization; the selected nondegenerate curvature formula; Cartan image of its exterior field strength; the real action integration/measure functional; then common metric-path/variation transport. MaxwellGaugeFieldEquationScope remains an obligation grammar only, and zero-curvature probe actions do not count as physical payment."
+  "The Cartan-U(1) action/variation algebra is compiler-saturated. Bracket-zero follows from the field image; the live SU(2) invariant pairing restricts as <embed a,embed b>=a*b; same-object F=dA+[A,A] reduces to F=dA; and the quadratic YM density equals the Maxwell square for any common prefactor. A proof-relevant common density functional lifts that to restricted-YM=Maxwell action equality. CMP119 derivative congruence then lifts equality along the SAME metric path to equality of first metric variations, and a common stress readout transports that equality by congruence. The genuine remaining inputs are physical electromagnetic coupling/action-prefactor normalization; selected nondegenerate curvature; Cartan image of its exterior field strength; real action integration/measure; a same metric-path action family; and the physical variation-to-stress readout/normalization. MaxwellGaugeFieldEquationScope remains obligation grammar only; zero-curvature probes do not count as payment."
