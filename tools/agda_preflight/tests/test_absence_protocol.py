@@ -2,6 +2,7 @@ import json
 import sqlite3
 from pathlib import Path
 
+from agda_preflight.repository_store import replace_narrative_events
 from agda_preflight.source_index import SourceIndex
 
 
@@ -53,12 +54,33 @@ def _repo_index(root: Path, *, include_round: bool = False) -> None:
     conn.close()
 
 
-def test_complete_repo_index_can_authorize_true_indexed_absence(tmp_path: Path):
+def _complete_narrative(index: SourceIndex) -> None:
+    replace_narrative_events(
+        index.connection,
+        events=[],
+        source_status={
+            "git_commits": 1,
+            "commit_history_complete": True,
+            "semantic_history_linked": True,
+        },
+    )
+
+
+def test_complete_repo_and_narrative_indexes_can_authorize_true_indexed_absence(tmp_path: Path):
     _repo_index(tmp_path)
     with SourceIndex(tmp_path, tmp_path / "preflight.sqlite3") as index:
+        _complete_narrative(index)
         receipt = index.discovery_receipt("certainlyMissingXYZ")
     assert receipt["absence_status"] == "confirmed_no_indexed_candidate"
     assert receipt["absence_claim_permitted"] is True
+
+
+def test_complete_repo_index_without_narrative_remains_search_incomplete(tmp_path: Path):
+    _repo_index(tmp_path)
+    with SourceIndex(tmp_path, tmp_path / "preflight.sqlite3") as index:
+        receipt = index.discovery_receipt("certainlyMissingXYZ")
+    assert receipt["absence_status"] == "search_incomplete"
+    assert receipt["absence_claim_permitted"] is False
 
 
 def test_historical_only_match_blocks_absence_but_is_hidden_from_live_search(tmp_path: Path):
