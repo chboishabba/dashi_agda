@@ -28,10 +28,12 @@ import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 
 record CanonicalSetoidScalePayment : Set₁ where
   field
-    model : Setoid.CasimirSetoidScalarModel
+    authority : Setoid.BishopCasimirSetoidAuthority
     separation : Q.Length
-    scaleWitness : Stress4.CasimirSetoidScaleWitness model separation
-    canonicalAnalyticObject : Set
+    scaleWitness :
+      Stress4.CasimirSetoidScaleWitness
+        (Setoid.model authority)
+        separation
     reading : String
 
 open CanonicalSetoidScalePayment public
@@ -148,7 +150,7 @@ theoryStressIsNotGravityMeasurement ()
 ------------------------------------------------------------------------
 
 data RemainingCasimirStressEnergyBlocker : Set where
-  missingConcreteCanonicalSetoidScaleWitness : RemainingCasimirStressEnergyBlocker
+  missingConcreteCanonicalSetoidAuthorityAndScaleWitness : RemainingCasimirStressEnergyBlocker
   missingOptionalLegacyQuotient : RemainingCasimirStressEnergyBlocker
   missingSpecifiedQISamplingApplication : RemainingCasimirStressEnergyBlocker
   missingSpecifiedANECApplication : RemainingCasimirStressEnergyBlocker
@@ -157,7 +159,8 @@ data RemainingCasimirStressEnergyBlocker : Set where
   missingExactHeadKernelReceipt : RemainingCasimirStressEnergyBlocker
 
 firstMathematicalSameObjectBlocker : RemainingCasimirStressEnergyBlocker
-firstMathematicalSameObjectBlocker = missingConcreteCanonicalSetoidScaleWitness
+firstMathematicalSameObjectBlocker =
+  missingConcreteCanonicalSetoidAuthorityAndScaleWitness
 
 firstAveragedConditionBlocker : RemainingCasimirStressEnergyBlocker
 firstAveragedConditionBlocker = missingSpecifiedQISamplingApplication
@@ -170,4 +173,4 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The internal finite 369/SO3 carrier work, spatial 9->3->1 stress contraction, Brown-Maclay normalized 4x4 stress fingerprint, arbitrary-direction pointwise NEC formula, local WEC/SEC/DEC verdicts, setoid-native full-stress interface, Ford-Roman QI provenance and GR NEC/null-convergence firewall are paid. The first remaining mathematical same-object payment is a concrete positive Casimir scale witness on the actual setoid analytic model at one separation. QI/ANEC then require explicit averaging prescriptions; GR requires a same-object semiclassical Einstein/conservation/curvature solution; experiment requires direct stress/gravity measurement. Further 3/6/9/18/27 factorisation is not payment."
+  "The internal finite 369/SO3 carrier work, spatial 9->3->1 stress contraction, Brown-Maclay normalized 4x4 stress fingerprint, arbitrary-direction pointwise NEC formula, local WEC/SEC/DEC verdicts, setoid-native full-stress interface, Ford-Roman QI provenance and GR NEC/null-convergence firewall are paid. The first remaining mathematical same-object payment is an inhabited BishopCasimirSetoidAuthority together with a positive Casimir scale witness on that authority's model at one separation. QI/ANEC then require explicit averaging prescriptions; GR requires a same-object semiclassical Einstein/conservation/curvature solution; experiment requires direct stress/gravity measurement. Further 3/6/9/18/27 factorisation is not payment."
