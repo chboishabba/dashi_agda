@@ -13,6 +13,8 @@ files=(
   DASHI/Physics/Foundations/FieldGeometryMatterConsumersValidation.agda
   DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
   DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceValidation.agda
+  DASHI/Physics/CondensedMatter/MATBG2026SourceDataAvailabilityExact.agda
+  DASHI/Physics/CondensedMatter/MATBG2026SourceDataAvailabilityValidation.agda
   DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
   DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Validation.agda
   DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
@@ -33,8 +35,12 @@ files=(
   DASHI/Physics/CondensedMatter/MATBGTHFCoupledGreenReplayValidation.agda
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyObstructionReceiptExact.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyObstructionValidation.agda
   DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
   DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMElectrostaticsReplayReceiptExact.agda
+  DASHI/Physics/CondensedMatter/MATBGQTMElectrostaticsReplayValidation.agda
   DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
   DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Validation.agda
   DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorialReplayReceiptExact.agda
@@ -60,6 +66,8 @@ files=(
   DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
   DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
   DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
+  DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
+  DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumValidation.agda
   DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
 )
 
@@ -84,6 +92,8 @@ for artifact in \
   Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json \
   scripts/matbg_thf_coupled_green_reference.py \
   Docs/evidence/matbg_thf_coupled_green_reference_2026-10-16.json \
+  scripts/matbg_thf_self_consistency_obstruction.py \
+  Docs/evidence/matbg_thf_self_consistency_obstruction_2026-10-16.json \
   scripts/matbg_entropy_combinatorial_replay.py \
   Docs/evidence/matbg_entropy_combinatorial_replay_2026-10-16.json \
   scripts/matbg_geometry_caloric_upper_bound.py \
@@ -100,6 +110,7 @@ grep -q 'unresolvedChannelsAreNotZero' DASHI/Physics/Foundations/SameObjectConse
 grep -q 'ResidualDirectAntigravityPermission' DASHI/Physics/Foundations/PhysicalResidualPromotionExact.agda
 grep -q 'sameBodyForceFormDoesNotIdentifyMechanism' DASHI/Physics/Foundations/FieldGeometryMatterConsumersExact.agda
 grep -q 'qtmBestFitW0W1Hundredths' DASHI/Physics/CondensedMatter/MATBG2026VerticalSliceExact.agda
+grep -q 'publisherVisibleWorkbookCount' DASHI/Physics/CondensedMatter/MATBG2026SourceDataAvailabilityExact.agda
 grep -q 'tunnellingMatrixC3Covariance' DASHI/Physics/CondensedMatter/MATBGBMFirstHarmonicC3Exact.agda
 grep -q 'qtmNormalizedTunnellingMatrix' DASHI/Physics/CondensedMatter/MATBGBMEisensteinMatrixExact.agda
 grep -q 'firstShellNumericalExecutionPaid' DASHI/Physics/CondensedMatter/MATBGBMFirstShellReplayReceiptExact.agda
@@ -110,6 +121,7 @@ grep -q 'hcKPrime' DASHI/Physics/CondensedMatter/MATBGInteractingTHFLiteralMatri
 grep -q 'atomicReferenceExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayReceiptExact.agda
 grep -q 'coupledGreenBlockExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFCoupledGreenReplayReceiptExact.agda
 grep -q 'selfConsistencyEquationsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
+grep -q 'unresolvedCutoffSensitivityExposed' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyObstructionReceiptExact.agda
 grep -q 'qtmElectrostaticsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
 grep -q 'wavefunctionObserverExecutionPaid' DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
 grep -q 'highTemperatureMicrostates' DASHI/Physics/CondensedMatter/MATBGEntropyCombinatorics2026Exact.agda
@@ -125,6 +137,7 @@ grep -q 'CausalSuperluminalTransportPromotion' DASHI/Physics/Foundations/CausalT
 grep -q 'metricClaimed' DASHI/Physics/Foundations/CausalTransportFTLObligationsExact.agda
 grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/FieldGeometryMatterAttributionRegression.agda
 grep -q 'numericallyExecuted' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
+grep -q 'thfBZNormalizationAndCutoffProducer' DASHI/Physics/Foundations/FieldGeometryMatterTerminalExecutionAddendumExact.agda
 grep -q 'numericalBMDoesNotBecomeExperiment' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
 
 scripts/run_agda29_parallel_check.sh DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
