@@ -49,6 +49,7 @@ import DASHI.Physics.Plasma.ToroidalZeroBounceContinuationExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceGeometryParetoExact
 import DASHI.Physics.Plasma.ToroidalZeroBounceAdmissibleSearchMaxCutExact
 import DASHI.Physics.Plasma.Ternary27SearchEverything
+import DASHI.Physics.Plasma.Phase243PhysicalMaxCutEverything
 import DASHI.Physics.Plasma.MHDInvariantFibreBidiExact
 import DASHI.Physics.Plasma.ElsasserMHDChartExact
 import DASHI.Physics.Plasma.ElsasserCounterpropagatingInteractionBidiExact
