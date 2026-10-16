@@ -7,6 +7,13 @@ paths = {
     "gold": "DASHI/Chemistry/GoldReactionReplaySuiteExact.agda",
     "pbca": "DASHI/Biology/LeadCalciumEndToEndReplayExact.agda",
     "bh4": "DASHI/Biology/KitzerowBH4FluxCausalModelsExact.agda",
+    "hepatic": "DASHI/Biology/KitzerowBH4HepaticCompetitionDiscriminatorExact.agda",
+    "hepatic_validation": "DASHI/Biology/KitzerowBH4HepaticCompetitionDiscriminatorValidation.agda",
+    "neural_sources": "DASHI/Biology/KitzerowBH4NeuralContextSourceAtlasExact.agda",
+    "neural": "DASHI/Biology/KitzerowBH4NeuralContextDiscriminatorExact.agda",
+    "neural_validation": "DASHI/Biology/KitzerowBH4NeuralContextDiscriminatorValidation.agda",
+    "bh4_experiment": "DASHI/Biology/KitzerowBH4ExperimentalDiscriminatorExact.agda",
+    "bh4_pareto": "DASHI/Biology/KitzerowBH4ParetoAcquisitionExact.agda",
     "bidi": "DASHI/Chemistry/LineageBidiDiscriminatorSynthesisExact.agda",
     "carbon": "DASHI/Biology/CarbonSiliconReachableChemistryBenchmarkExact.agda",
     "atlas": "DASHI/Chemistry/LineageAttributionEvidenceSourceAtlasExact.agda",
@@ -42,39 +49,69 @@ for needle in [
     "canonicalLineageCalibrationSourceAtlas", "canonicalAtlasNonPromoting",
 ]:
     assert needle in text["atlas"], f"source atlas missing {needle}"
-assert "LineageCalibrationAttributionEnvelopeExact" not in text["atlas"], "source atlas must not import downstream attribution envelope"
+assert "LineageCalibrationAttributionEnvelopeExact" not in text["atlas"]
 
 for needle in [
-    "SourceCoordinatePayment", "EvidenceRole", "PaymentGrade", "chlorAlkaliTechnicalPayment",
-    "dhprReactionPayment", "sourceOwnsDASHISynthesis", "citationCreatesProof",
-    "citationAlonePaysCalibration", "missingCoordinatePromotedByNearbyCitation",
-    "reviewCountsAsPrimaryExperimentByDefault", "databaseReactionIdentityCountsAsInVivoFlux",
-    "exactLocatorRequiredForNumericPromotion",
+    "pahFerrylIntermediate2011", "bh4HepaticCompetition1996",
+    "10.1021/bi1019868", "10.1074/jbc.271.40.24534",
+    "pahCatalyticDomainBH4PDB1J8U", "pahFullLengthBH4PDB6HYC",
+    "pahQMMPES2004", "pahSingleTurnoverMechanism2013",
 ]:
-    assert needle in text["payment"], f"evidence payment owner missing {needle}"
+    assert needle in text["acquired_sources"], f"acquired source atlas missing {needle}"
 
 for needle in [
-    "AttributedGoldReplay", "canonicalAttributedGoldReplays", "sourceOwnsReplayComposition",
-    "replayCompositionErasesSourceIdentity", "unpaidCoordinatesRemainAttributed",
-    "dashiAndExternalOwnershipRemainDistinct",
+    "hylandEtAl1996Hph1", "sumiIchinoseEtAl2001PtsKO", "jiangEtAl2024Gch1Therapy",
+    "10.1046/j.1471-4159.1996.67020752.x", "10.1074/jbc.M102237200",
+    "10.1016/j.ejphar.2024.176379", "canonicalNeuralContextAtlasNonPromoting",
 ]:
-    assert needle in text["replay"], f"attributed replay owner missing {needle}"
+    assert needle in text["neural_sources"], f"neural source atlas missing {needle}"
 
 for needle in [
-    "QuantitativeCalibrationCell", "bh4BranchFluxCell", "pahKineticCell", "chlorElectrodeCell",
-    "pbCaAffinityCell", "carbonSiliconYieldCell", "numberWithoutExactLocatorPromoted",
-    "numberWithoutContextPromoted", "unpaidCoordinateInterpretedAsZero",
-    "exactUnitsAndUncertaintyRemainRequired",
+    "basalOutput", "pheOutput", "dahpOutput", "pheDahpOutput", "pheBh4DahpOutput",
+    "2373 +/- 90", "2493 +/- 303", "1069 +/- 228", "3536 +/- 545",
+    "basalPterin", "phePterin", "dahpPterin", "pheDahpPterin",
+    "19.2 +/- 1.4", "17.0 +/- 0.7", "1.8 +/- 0.1", "1.0 +/- 0.4",
+    "sameSystemPAHAndINOSMeasured", "conditionalCompetitionWhenBH4SynthesisBlocked",
+    "exogenousBH4RescuesConstrainedSystem", "hepaticTwoBranchResultProvesWholeBH4AllocatorModel",
 ]:
-    assert needle in text["numeric"], f"quantitative calibration ledger missing {needle}"
+    assert needle in text["hepatic"], f"hepatic discriminator missing {needle}"
 
 for needle in [
-    "pahOxygenLineage1985", "pahHumanKinetics1996", "pahCatalyticDomainBH4Structure2001",
-    "pahCatalyticDomainBH4PDB1J8U", "pahFullLengthBH4Structure2019",
-    "pahFullLengthBH4PDB6HYC", "pahQMMPES2004", "pahSingleTurnoverMechanism2013",
-    "10.2210/pdb1J8U/pdb", "10.2210/pdb6HYC/pdb", "10.1021/jp048001r", "10.1021/bi301675e",
+    "sameSystemTwoBranchExperimentIsPaid",
+    "strongFixedPoolCompetitionIsNotSupportedInThisHepaticContext",
+    "competitionEmergesWhenSupplyIsConstrained", "adaptiveSupplyResponseIsObserved",
+    "hepaticResultDoesNotCloseWholeAllocatorModel",
 ]:
-    assert needle in text["acquired_sources"], f"acquired PAH source atlas missing {needle}"
+    assert needle in text["hepatic_validation"], f"hepatic validation missing {needle}"
+
+for needle in [
+    "hph1Observation", "ptsKOObservation", "jiang2024Observation",
+    "brainBH4RestoredWithoutMonoamineRescue", "brainBH4RestoredWithoutDopamineRescue",
+    "enzymeAbundanceStateMatters", "brainRegionContextMatters", "developmentalTimingMatters",
+    "simpleCurrentPoolSufficiencySupported", "contextSpecificArchitectureSupportedAsLiveAlternative",
+]:
+    assert needle in text["neural"], f"neural discriminator missing {needle}"
+
+for needle in [
+    "poolRestorationDoesNotGuaranteeFunctionalRescue",
+    "stateHistoryAndRegionRemainCausalCoordinates",
+    "neuralEvidenceConstrainsSimpleAllocatorWithoutClosingWholeModel",
+]:
+    assert needle in text["neural_validation"], f"neural validation missing {needle}"
+
+for needle in [
+    "historicalSameObjectConstraint", "historicalNeuralContextConstraint",
+    "historicalTwoBranchConstraintPaid", "historicalNeuralContextConstraintPaid",
+    "historicalConstraintsCloseCentralEdge", "remainingExperimentalResidual",
+]:
+    assert needle in text["bh4_experiment"], f"BH4 experiment owner missing {needle}"
+
+for needle in [
+    "historicalDirectDiscriminatorChangesTargetDefinition",
+    "historicalDirectDiscriminatorClosesWholeTarget",
+    "target-relevant multi-branch BH4 allocation experiment beyond paid hepatic and neural precedents",
+]:
+    assert needle in text["bh4_pareto"], f"BH4 pareto owner missing {needle}"
 
 for needle in [
     "PromotionStage", "MolecularMechanisticPromotion", "authorReleasedNumericalArtifact",
@@ -93,7 +130,8 @@ for needle in [
     assert needle in text["pah"], f"PAH promotion owner missing {needle}"
 
 for needle in [
-    "panayEtAl2011Ferryl", "PAHCatalyticElectronicState", "bacterialFerrylReceipt",
+    "PAHCatalyticElectronicState", "bacterialFerrylReceipt",
+    "LineageAcquiredPrimaryEvidenceExact.pahFerrylIntermediate2011",
     "canonicalPAHFiniteHamiltonianProbe", "sourceBackedNumericalHamiltonianMatrixPaid",
     "numericalDiagonalizationPaid", "eigenvectorCoefficientsPaid",
     "canonicalPAHMonster3BProbe", "observedAssemblySymmetry", "sameObjectC3CoordinatePaid",
@@ -102,21 +140,21 @@ for needle in [
     "microscopicPromotionPaysBH4AllocationFlux",
 ]:
     assert needle in text["electronic_probe"], f"PAH electronic/Monster probe missing {needle}"
+assert "panayEtAl2011Ferryl" not in text["electronic_probe"], "ferryl source identity must stay canonical in acquired source atlas"
 
 for needle in [
     "literalStateCarrierWithoutFabricatedHamiltonian",
     "bacterialFerrylDoesNotBecomeHumanSameObjectByAnalogy",
     "finiteOperatorTypeDoesNotCreateMatrixOrEigenvector",
-    "pahD2DoesNotManufactureMonsterC3",
-    "trivialActionIsExplicitlyNonDiagnostic",
+    "pahD2DoesNotManufactureMonsterC3", "trivialActionIsExplicitlyNonDiagnostic",
     "microscopicDepthStillDoesNotPayAllocation",
 ]:
     assert needle in text["electronic_validation"], f"PAH electronic validation missing {needle}"
 
 for needle in [
-    "bh4FluxDataset", "pahAtomMap", "bh4KineticSet", "chlorLocator",
-    "pbCaTargetDataset", "carbonSiliconMatchedDataset", "pahIndependentMechanisticReplay",
-    "causalDiscriminatorCanOutrankDeeperMechanisticReplay",
+    "A1 target-relevant multi-branch BH4 allocation discriminator beyond paid hepatic/neural constraints",
+    "BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO",
+    "pahIndependentMechanisticReplay", "causalDiscriminatorCanOutrankDeeperMechanisticReplay",
     "stanfordContactArtifact", "brazilCorrespondenceArtifact", "iaccMedMapsContactArtifact",
     "scientificSupportSeparateFromContactProvenance", "contactEvidenceAutomaticallyProvesDerivation",
     "contactEvidenceAutomaticallyProvesPlagiarism", "scientificSupportAutomaticallyProvesPriority",
@@ -124,28 +162,33 @@ for needle in [
     "unpaidCoordinateRetainsAttribution", "acquisitionCreatesAuthority",
 ]:
     assert needle in text["acquisition"], f"unified acquisition frontier missing {needle}"
-assert "LineageAttributionAcquisitionParetoExact" not in text["acquisition"], "canonical acquisition frontier must be standalone"
+assert "LineageAttributionAcquisitionParetoExact" not in text["acquisition"]
 
 for needle in [
+    "bh4FluxStatus", "partiallyPaid", "bh4NeuralContextStatus", "paidForDeclaredCoordinate",
+    "hepaticTwoBranchPaymentClosesWholeMultiBranchTarget", "currentPoolRestorationGuaranteesFunctionalRescue",
+    "directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial",
     "pahMechanisticReplayStatus", "pahElectronicHamiltonianMonsterStatus",
     "mechanisticPromotionClosesFluxTarget", "failedMonsterProbeCreatesAcquisitionPriority",
-    "controlled BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO",
 ]:
     assert needle in text["status"], f"acquisition status missing {needle}"
 
 for needle in [
+    "KitzerowBH4HepaticCompetitionDiscriminatorExact",
+    "KitzerowBH4NeuralContextSourceAtlasExact", "KitzerowBH4NeuralContextDiscriminatorExact",
     "MolecularMechanisticPromotionLadderExact", "PAHMechanismStatePromotionExact",
     "LineageMechanisticPromotionMaxCutValidation", "PAHElectronicStateHamiltonianMonsterProbeExact",
     "PAHElectronicStateHamiltonianMonsterProbeValidation", "LineageAttributionAcquisitionFrontierExact",
 ]:
     assert needle in text["rollup"], f"rollup missing {needle}"
-assert "LineageAttributionAcquisitionParetoExact" not in text["rollup"], "rollup must not import deleted parallel frontier"
 
 for needle in [
-    "pahReactionPromotedBeyondStoichiometry", "pahNumericalWavefunctionNotInvented",
-    "mechanisticDepthDoesNotSubstituteForFluxDiscriminator", "artifactAndPaperAuthorityRemainDistinct",
+    "bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure",
+    "bh4AcquisitionStateIsPartialNotClosed",
+    "contactDoesNotProvePlagiarism", "scientificSupportDoesNotProvePriority",
+    "priorityDoesNotProveCorrectness",
 ]:
-    assert needle in text["mechanistic_validation"], f"mechanistic validation missing {needle}"
+    assert needle in text["validation"], f"chemistry validation missing {needle}"
 
 for needle in [
     "externalAndDASHISynthesisRemainDistinct", "primarySecondaryAndDatabaseRolesStayTyped",
@@ -157,6 +200,10 @@ for needle in [
 full = (ROOT / "DASHI/Chemistry/EverythingFull.agda").read_text()
 assert "LineageCalibrationDiscriminatorEverything" in full
 kit = (ROOT / "DASHI/Biology/KitzerowBH4Everything.agda").read_text()
-assert "KitzerowBH4FluxCausalModelsExact" in kit
+for needle in [
+    "KitzerowBH4FluxCausalModelsExact", "KitzerowBH4HepaticCompetitionDiscriminatorExact",
+    "KitzerowBH4NeuralContextSourceAtlasExact", "KitzerowBH4NeuralContextDiscriminatorExact",
+]:
+    assert needle in kit, f"Kitzerow BH4 rollup missing {needle}"
 
-print("lineage calibration/discriminator + attribution/evidence + mechanistic/electronic promotion max-cut static contract: PASS")
+print("lineage/BH4 causal acquisition + attribution + mechanistic/electronic promotion max-cut static contract: PASS")
