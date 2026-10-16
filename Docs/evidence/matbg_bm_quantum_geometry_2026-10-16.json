@@ -1,7 +1,7 @@
 {
   "script": "scripts/matbg_bm_quantum_geometry.py",
-  "script_sha256": "4f7971e380611633f963218da0bd4239c09fa4d9f31ec4ae0ea0345935e62c85",
-  "execution_environment": "ChatGPT analysis Python runtime, numpy.linalg.eigh",
+  "script_sha256": "6538c8628f3bcffe0adb19cc55ebd1e355b85e168200a6f4663061d6dd72c6dc",
+  "execution_environment": "Python with numpy.linalg.eigh",
   "model": "rank-two central-band projector geometry on BM plane-wave model",
   "source_model": "10.1073/pnas.1108174108",
   "sota_inspiration_not_same_object": "10.1038/s41467-026-74848-6",
