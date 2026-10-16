@@ -121,7 +121,12 @@ NavigationAdequateThroughSkeleton =
 
 maboNavigationAdequateThroughSkeleton : NavigationAdequateThroughSkeleton
 maboNavigationAdequateThroughSkeleton =
-  Query.factorsForQuery (λ observation → navigationAnswer) (λ state → refl)
+  Query.factorsForQuery
+    {project = skeletonProjection}
+    {semantics = materialisationSemantics}
+    {query = navigationQuery}
+    (λ observation → navigationAnswer)
+    (λ state → refl)
 
 QuotationSkeletonDefect : Set₁
 QuotationSkeletonDefect =
@@ -130,6 +135,9 @@ QuotationSkeletonDefect =
 maboQuotationSkeletonDefect : QuotationSkeletonDefect
 maboQuotationSkeletonDefect =
   Query.queryAdequacyDefect
+    {project = skeletonProjection}
+    {semantics = materialisationSemantics}
+    {query = exactQuotationQuery}
     skeletonOnlyWorld
     fullSourceWorld
     refl
@@ -142,6 +150,9 @@ PrimaryPaymentDiscoveryDefect =
 maboPrimaryPaymentDiscoveryDefect : PrimaryPaymentDiscoveryDefect
 maboPrimaryPaymentDiscoveryDefect =
   Query.queryAdequacyDefect
+    {project = discoveryProjection}
+    {semantics = materialisationSemantics}
+    {query = strictPrimaryPaymentQuery}
     skeletonOnlyWorld
     fullSourceWorld
     refl
@@ -150,12 +161,20 @@ maboPrimaryPaymentDiscoveryDefect =
 maboSkeletonCannotPayExactQuotation :
   Query.AdequateFor skeletonProjection materialisationSemantics exactQuotationQuery → ⊥
 maboSkeletonCannotPayExactQuotation =
-  Query.queryAdequacyDefectBlocksFactorisation maboQuotationSkeletonDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = skeletonProjection}
+    {semantics = materialisationSemantics}
+    {query = exactQuotationQuery}
+    maboQuotationSkeletonDefect
 
 maboDiscoveryObjectCannotPayStrictPrimaryAuthority :
   Query.AdequateFor discoveryProjection materialisationSemantics strictPrimaryPaymentQuery → ⊥
 maboDiscoveryObjectCannotPayStrictPrimaryAuthority =
-  Query.queryAdequacyDefectBlocksFactorisation maboPrimaryPaymentDiscoveryDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = discoveryProjection}
+    {semantics = materialisationSemantics}
+    {query = strictPrimaryPaymentQuery}
+    maboPrimaryPaymentDiscoveryDefect
 
 ------------------------------------------------------------------------
 -- Existing Australian/federated lanes pinned as parents.
