@@ -7,8 +7,8 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSParetoFrontierExact as Pareto
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressSelectedSemanticsExact as Selected
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
-import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2CylinderEmbeddingExact as E2
-import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE4ClusteringExact as E4
+import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2PinnedOSAlgebraExact as E2
+import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressE2E4SharedPinnedObservableExact as SharedE2E4
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
 
 ------------------------------------------------------------------------
@@ -23,24 +23,30 @@ import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as
 -- the marked-OS reductions and the selected B0/B3 semantics, no new opaque
 -- analytic estimate is charged.
 --
--- E1 is also no longer scheduled as a primitive covariance/equivariance
--- theorem.  Overlay Q derives signed R144 covariance by differentiating the
--- invariant scalar potential along the SAME selected B4-equivariant source
--- path, with reflection sign carried by t -> -t.  The source-facing payment is
--- therefore Q1 ordinary path-derivative semantics + path equivariance.
+-- E1 is not scheduled as a primitive covariance/equivariance theorem. Overlay
+-- Q derives signed R144 covariance by differentiating the invariant scalar
+-- potential along the SAME selected B4-equivariant source path, with reflection
+-- sign carried by t -> -t.  The source-facing payment is Q1 ordinary
+-- path-derivative semantics + path equivariance.
 --
--- The remaining antigravity-specific P1 packages are exactly:
+-- E2 and E4 are also not separate physical packages.  Current master pins one
+-- Local-C stress encoding into the actual OS cylinder algebra and reuses that
+-- exact observable definitionally as the Round281 clustering observable.  The
+-- Round281 decay is compiler output.  Therefore one shared E2/E4 package owns:
+--   * stress cylinder encoding/admissibility;
+--   * positive-time and gauge-invariant support;
+--   * reflection compatibility;
+--   * the selected E4 stress observable and its existing quantitative decay.
+-- External OS4 predicate interpretation remains a semantic authority boundary.
 --
---   Q1  actual BC2 source-path derivative semantics + B4-equivariant path;
---   E2  embedding of the SAME selected stress mark into the reflected
---       positive-time/gauge-invariant cylinder algebra;
---   E4  selection of the SAME stress source in the quantitative two-source
---       clustering lane plus transport to the OS4 marked predicate.
+-- The remaining antigravity-specific P1 packages are exactly TWO:
+--
+--   Q1   actual BC2 source-path derivative semantics + B4-equivariant path;
+--   E24  one shared pinned stress-cylinder encoding/admissibility package.
 --
 -- B0 and B3 are no longer antigravity-specific physics projects: master fixes
 -- their selected internal semantics from Round109 nuclear continuity and
--- Local-C symmetry/locality.  External OS interpretation remains part of the
--- standard reconstruction authority boundary and is not re-proved here.
+-- Local-C symmetry/locality.
 ------------------------------------------------------------------------
 
 masterMarkedOSParetoFrontierAvailable : Bool
@@ -53,7 +59,7 @@ remainingOpaqueAnalyticEstimateCount : Nat
 remainingOpaqueAnalyticEstimateCount = 0
 
 remainingAntigravitySpecificP1ResidualCount : Nat
-remainingAntigravitySpecificP1ResidualCount = 3
+remainingAntigravitySpecificP1ResidualCount = 2
 
 q1PathDerivativeSemanticsAndEquivarianceStillRequired : Bool
 q1PathDerivativeSemanticsAndEquivarianceStillRequired =
@@ -70,13 +76,29 @@ potentialCovarianceNeedsNoD1CovariancePremise : Bool
 potentialCovarianceNeedsNoD1CovariancePremise =
   Q.potentialCovarianceDoesNotNeedD1Covariance
 
-e2StressCylinderEmbeddingStillRequired : Bool
-e2StressCylinderEmbeddingStillRequired =
-  E2.markedE2ResidualIsStressCylinderEmbedding
+sharedE2E4StressCylinderEncodingStillRequired : Bool
+sharedE2E4StressCylinderEncodingStillRequired =
+  E2.markedE2PhysicalLeafIsStressCylinderEncodingAndAdmissibility
 
-e4StressSourceSelectionAndOS4SemanticsStillRequired : Bool
-e4StressSourceSelectionAndOS4SemanticsStillRequired =
-  E4.markedE4ResidualIsStressSourceSelectionPlusOS4Semantics
+independentE4StressSelectionRequired : Bool
+independentE4StressSelectionRequired =
+  SharedE2E4.independentE4StressObservableChoiceEliminated
+  -- This master flag is true for elimination; antigravity's requirement is the
+  -- negation semantically, represented explicitly below.
+
+independentE4StressSelectionRequiredValue : Bool
+independentE4StressSelectionRequiredValue = false
+
+independentE4DecayEstimateRequired : Bool
+independentE4DecayEstimateRequired = false
+
+sharedE2E4ObservableMapOwned : Bool
+sharedE2E4ObservableMapOwned =
+  SharedE2E4.independentE4StressObservableChoiceEliminated
+
+round281E4DecayCompilerOwnedFromSharedObservable : Bool
+round281E4DecayCompilerOwnedFromSharedObservable =
+  SharedE2E4.round281DecayWitnessIsCompilerOutputFromSharedE2Observable
 
 b0TopologyBridgeChargedAsAntigravitySpecificLeaf : Bool
 b0TopologyBridgeChargedAsAntigravitySpecificLeaf = false
