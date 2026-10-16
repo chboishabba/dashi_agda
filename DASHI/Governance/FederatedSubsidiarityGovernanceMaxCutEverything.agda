@@ -7,9 +7,8 @@ import DASHI.Governance.FederatedSubsidiarityGovernanceEverything
 -- measurement typing for the capacity-aware paired experiment.
 import DASHI.Governance.BoloBoloGovernanceMetricProvenanceEverything
 
--- Productive latest-PR cross-pollination using only generic owners already on
--- master: explicit causal estimand + obligation-admissible identification gate
--- for the same target flat-vs-nested longitudinal coordination question.
+-- Explicit target causal estimand + admissible identification gate for the
+-- flat-vs-nested longitudinal coordination question.
 import DASHI.Governance.BoloBoloCausalIdentificationEverything
 
 -- Repo-native experimental-coordinate and consumer-descent machinery.
@@ -58,3 +57,9 @@ import DASHI.Governance.BoloBoloLongitudinalNonDominationEverything
 -- reopening control; every adequate realised-control observer must refine the
 -- declared control consumer.
 import DASHI.Governance.BoloBoloNonDominationObserverSufficiencyEverything
+
+-- Strongest causal promotion seam: repeated validated association is not a
+-- causal effect. Coordination and realised non-domination use distinct
+-- estimands/identification receipts and are only conjoined after same-target
+-- binding and outcome-specific effect-direction payment.
+import DASHI.Governance.BoloBoloCausalJointPromotionEverything
