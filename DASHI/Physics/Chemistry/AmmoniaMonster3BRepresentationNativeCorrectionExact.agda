@@ -75,8 +75,8 @@ open Native369ActualBasisChart public
 
 basisChartToNative :
   ∀ {LiteralZetaSector : Set} →
-  Native369ActualBasisChart LiteralZetaSector →
-  Basis.ActualBasisLabel (recognition _) →
+  (chart : Native369ActualBasisChart LiteralZetaSector) →
+  Basis.ActualBasisLabel (recognition chart) →
   Native369.Native369ZetaCoordinate
 basisChartToNative chart = actualBasisToNative369 (recognition chart)
 
