@@ -113,6 +113,11 @@ data Debt4 : Set where
   publicPrivateCapabilityConcentration : Debt4
   blackRockBGICausalBoundary : Debt4
 
+data IncidenceOrder : Set where
+  E1 : IncidenceOrder
+  E2 : IncidenceOrder
+  E3 : IncidenceOrder
+
 record Acquisition4 : Set where
   constructor acquisition4
   field
@@ -121,11 +126,6 @@ record Acquisition4 : Set where
     effectOrder : IncidenceOrder
     instruction : String
 open Acquisition4 public
-
-data IncidenceOrder : Set where
-  E1 : IncidenceOrder
-  E2 : IncidenceOrder
-  E3 : IncidenceOrder
 
 canonicalAcquisition4 : List Acquisition4
 canonicalAcquisition4 =
