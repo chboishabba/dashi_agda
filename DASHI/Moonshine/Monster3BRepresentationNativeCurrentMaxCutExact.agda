@@ -11,18 +11,19 @@ module DASHI.Moonshine.Monster3BRepresentationNativeCurrentMaxCutExact where
 --
 -- (2) ZETA-RESTRICTED representation recognition:
 --       proof-relevant literal linear zeta restriction
---       -> actual simple-type classifier against explicit H_zeta
---       -> generic semisimple/isotypic assembly
+--       -> instantiate the already-written simple-subobject classifier
+--       -> consume the already-written semisimple/isotypic assembly
 --       -> post-recognition copy count n=90
 --       -> S_zeta = Hom_E(H_zeta,W_zeta) evaluation/recovery + normalizer action.
 --
--- Generic isotypic assembly and the fixed-phase H_zeta equivariant-iso compiler
--- are already source/theorem machinery.  They are not remaining discoveries.
+-- Generic fixed-phase H_zeta recognition, simple-source classification,
+-- isotypic assembly and copy-count logic are already source/theorem machinery.
 -- Finite X6 x Fin90 coordinates remain basis-label data only.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.Monster3BSimpleSubobjectClassificationLeanReceiptExact as Classifier
 import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as Isotypic
 import DASHI.Moonshine.Monster3BLinearActionProofRelevantHardeningExact as LinearHardening
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZeta
@@ -32,6 +33,7 @@ import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightW
 record Boundary : Set where
   constructor boundary
   field
+    genericSimpleSubobjectClassifierSourceWritten : Bool
     genericIsotypicAssemblySourceWritten : Bool
     postRecognitionCopyCountCompilerSourceWritten : Bool
     proofRelevantWeightTwoWrapperAvailable : Bool
@@ -44,7 +46,7 @@ record Boundary : Set where
 
     actualPaidWeightTwoLinearBridge : Bool
     actualPaidLinearZetaRestriction : Bool
-    actualSimpleTypeClassifier : Bool
+    actualSimpleTypeClassifierInstantiation : Bool
     actualWholeSectorIsotypicEquivalence : Bool
     actualCopyCountNinetyAfterRecognition : Bool
     actualMultiplicityHomEvaluation : Bool
@@ -58,6 +60,7 @@ open Boundary public
 
 canonicalBoundary : Boundary
 canonicalBoundary = boundary
+  (Classifier.nonzeroSimpleSourceClassificationWritten Classifier.canonicalBoundary)
   (Isotypic.classifierToIsotypicAssemblySourceWritten Isotypic.canonicalBoundary)
   (Isotypic.postRecognitionCopyCountCompilerSourceWritten Isotypic.canonicalBoundary)
   (LinearHardening.paidWeightTwoWrapperAvailable LinearHardening.canonicalBoundary)
@@ -70,4 +73,4 @@ canonicalBoundary = boundary
     Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary)
   false false false false false false false false false
   false
-  "The generic fixed-phase H_zeta isomorphism compiler, semisimple/isotypic assembly, post-recognition copy-count compiler and selected-phase 12+78 character-family degree data are already available. The actual representation payments are now sharply separated: inhabit the proof-relevant weight-two bridge and same literal zeta linear restriction; prove the actual simple-type classifier; consume generic assembly to obtain W_zeta|E ~= H_zeta^n; only then derive n=90; construct S_zeta=Hom_E(H_zeta,W_zeta) evaluation/recovery and the actual normalizer action. Independently, global selected-196883 completion still requires the genuine linear constituent retraction plus the projected-same-full-grade action equation. Finite X6 x Fin90/native-369 charts are basis-label coordinates and cannot pay any of these vector-space same-object obligations."
+  "The generic fixed-phase H_zeta isomorphism compiler, nonzero-simple-source classifier, semisimple/isotypic assembly, post-recognition copy-count compiler and selected-phase 12+78 character-family degree data are already available. The actual representation payments are now same-object instantiations: inhabit the proof-relevant full weight-two bridge and same literal zeta linear restriction; supply the actual whole-character/simple/nonzero-inclusion inputs needed by the generic classifier; consume generic isotypic assembly to obtain W_zeta|E ~= H_zeta^n; only then derive n=90; construct S_zeta=Hom_E(H_zeta,W_zeta) evaluation/recovery and the actual normalizer action. Independently, global selected-196883 completion still requires the genuine linear constituent retraction plus the intrinsic projected-same-full-grade action equation. Finite X6 x Fin90/native-369 charts are basis-label coordinates and cannot pay any of these vector-space same-object obligations."
