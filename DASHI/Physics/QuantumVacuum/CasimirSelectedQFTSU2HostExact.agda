@@ -17,11 +17,15 @@ import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable as Tabl
 ------------------------------------------------------------------------
 -- SELECTED-QFT SU(2) HOST
 --
--- For the Casimir U(1) handoff, the load-bearing group statement is literal:
--- the selected compact-simple group is interpreted as the existing concrete
--- unit-quaternion SU(2) GroupStructure.  Dynkin-A1 / Sprint105 classification
--- is useful consistency metadata, but is not required to transport the
--- already-proved U(1) torus inclusion into the selected carrier.
+-- The compatibility host below still exposes the historical all-group
+-- interpretation function.  The physical max-cut no longer charges that whole
+-- function: downstream Casimir/U(1) consumers use only the selected group.
+--
+-- A proof-relevant SelectedGroupStructureRealization therefore carries exactly
+-- the load-bearing statement: one concrete GroupStructure really is the
+-- structure of THIS selected compact-simple index, and that same structure is
+-- the repository's unit-quaternion SU(2).  A bare quaternionic group law is not
+-- by itself such an identification.
 ------------------------------------------------------------------------
 
 record CasimirSelectedQFTSU2Host
@@ -41,8 +45,24 @@ record CasimirSelectedQFTSU2Host
 
 open CasimirSelectedQFTSU2Host public
 
+record SelectedGroupStructureRealization
+    (U : Weld.UnifiedCandidate)
+    (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) : Set₁ where
+  field
+    realizedGroupStructure : Gauge.GroupStructure
+
+    SameSelectedGroupStructure : Set
+    sameSelectedGroupStructure : SameSelectedGroupStructure
+
+    realizedStructureIsQuaternionSU2 :
+      realizedGroupStructure ≡ SU2.su2QuaternionGroup
+
+    realizationReading : String
+
+open SelectedGroupStructureRealization public
+
 -- Optional classification receipt.  This is deliberately downstream of the
--- literal host because the group-structure equality already suffices for U(1).
+-- literal host because the selected-structure equality already suffices for U(1).
 record CasimirSelectedQFTSU2DynkinConsistency
     {U : Weld.UnifiedCandidate}
     {group : QFT.CompactSimpleGroup (Weld.qftCarriers U)}
@@ -82,6 +102,56 @@ compactSimpleFromLiteralClayStructuralBase :
   QFT.IsCompactSimple (Weld.qftSemantics U) group
 compactSimpleFromLiteralClayStructuralBase candidate structural group =
   Five.compactSimple structural group
+
+------------------------------------------------------------------------
+-- Selected-only compilers.  The constant compatibility interpretation exists
+-- solely to inhabit the legacy host shape; its physical authority comes from
+-- the indexed SelectedGroupStructureRealization payment, not from constancy.
+------------------------------------------------------------------------
+
+hostFromPinnedSelectedStructure :
+  ∀ {U : Weld.UnifiedCandidate}
+    (pinned :
+      Pinned.PinnedYangMillsConstruction
+        {C = Weld.qftCarriers U}
+        (Weld.qftSemantics U))
+    (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
+  SelectedGroupStructureRealization U group →
+  String →
+  CasimirSelectedQFTSU2Host U group
+hostFromPinnedSelectedStructure pinned group realization reading = record
+  { selectedGroupIsCompactSimple =
+      compactSimpleFromPinnedYMConstruction pinned group
+  ; groupStructureInterpretation =
+      λ _ → realizedGroupStructure realization
+  ; selectedGroupStructureIsQuaternionSU2 =
+      realizedStructureIsQuaternionSU2 realization
+  ; reading = reading
+  }
+
+hostFromStructuralBaseSelectedStructure :
+  ∀ {U : Weld.UnifiedCandidate}
+    (candidate : Weld.Candidate U)
+    (structural : Five.LiteralClayStructuralBase (Weld.qftTarget U candidate))
+    (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) →
+  SelectedGroupStructureRealization U group →
+  String →
+  CasimirSelectedQFTSU2Host U group
+hostFromStructuralBaseSelectedStructure
+    candidate structural group realization reading = record
+  { selectedGroupIsCompactSimple =
+      compactSimpleFromLiteralClayStructuralBase candidate structural group
+  ; groupStructureInterpretation =
+      λ _ → realizedGroupStructure realization
+  ; selectedGroupStructureIsQuaternionSU2 =
+      realizedStructureIsQuaternionSU2 realization
+  ; reading = reading
+  }
+
+------------------------------------------------------------------------
+-- Compatibility constructors retained for existing callers.  They do not
+-- replace the selected-index same-object realization in the current max-cut.
+------------------------------------------------------------------------
 
 hostFromPinnedYMConstruction :
   ∀ {U : Weld.UnifiedCandidate}
@@ -156,6 +226,7 @@ canonicalSU2ParameterRow = Table.su2ParameterRow
 
 data Sprint105SU2EntryAutomaticallyIdentifiesUnifiedCandidateGroup : Set where
 data QuaternionSU2AutomaticallyChoosesUnifiedCandidateGroup : Set where
+data BareQuaternionStructureAutomaticallyRealizesSelectedGroup : Set where
 data SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress : Set where
 
 tableEntryDoesNotChooseCandidateGroup :
@@ -165,6 +236,10 @@ tableEntryDoesNotChooseCandidateGroup ()
 quaternionSU2DoesNotChooseCandidateGroup :
   QuaternionSU2AutomaticallyChoosesUnifiedCandidateGroup → ⊥
 quaternionSU2DoesNotChooseCandidateGroup ()
+
+bareQuaternionStructureDoesNotRealizeSelectedGroup :
+  BareQuaternionStructureAutomaticallyRealizesSelectedGroup → ⊥
+bareQuaternionStructureDoesNotRealizeSelectedGroup ()
 
 selectedSU2HostDoesNotIdentifyBrownMaclayStress :
   SelectedSU2HostAutomaticallyIdentifiesBrownMaclayStress → ⊥
@@ -177,6 +252,9 @@ record CasimirSelectedQFTSU2HostBoundary : Set where
     sprint105SU2EntryOwned : Bool
     compactSimpleYMDataInterfaceReused : Bool
     selectedQFTSU2HostInterfaceOwned : Bool
+    selectedGroupStructureRealizationInterfaceOwned : Bool
+    allGroupsStructureInterpretationRequiredForHost : Bool
+    selectedStructureRealizationBuildsHostCompilerOwned : Bool
     literalU1InclusionCompilerOwnedAfterHost : Bool
     pinnedYMConstructionSuppliesCompactSimpleCompiler : Bool
     literalClayStructuralBaseSuppliesCompactSimpleCompiler : Bool
@@ -195,9 +273,9 @@ canonicalCasimirSelectedQFTSU2HostBoundary :
   CasimirSelectedQFTSU2HostBoundary
 canonicalCasimirSelectedQFTSU2HostBoundary =
   casimir-selected-qft-su2-host-boundary
-    true true true true true true true true false false
+    true true true true true false true true true true true false false
     false false false false
 
 casimirSelectedQFTSU2HostReading : String
 casimirSelectedQFTSU2HostReading =
-  "The load-bearing host is now only same-target compact simplicity plus literal interpretation as the existing quaternionic SU(2) GroupStructure. That equality is sufficient to transport the canonical U(1) torus inclusion into the selected carrier. Dynkin-A1 and Sprint105 SU2 labels remain optional consistency metadata, not independent Casimir host blockers. Compact simplicity itself needs no new mathematics once either an existing pinned physical YM construction on the same qftCarriers/qftSemantics or a same-object LiteralClayStructuralBase for the selected qftTarget is attached. None of this identifies Brown-Maclay stress."
+  "The current selected-QFT host no longer charges an arbitrary all-compact-simple-group interpretation function as physical input. A SelectedGroupStructureRealization indexed by the chosen compact-simple token carries the genuine same-object payment that one GroupStructure realizes THIS selected group and that the same structure is the existing unit-quaternion SU(2). That indexed realization plus existing compact-simplicity evidence compiles the compatibility host and literal U(1) inclusion. A bare quaternionic group law, Sprint105 SU2 row, or Dynkin-A1 label does not identify the selected group. Brown-Maclay stress remains separate."
