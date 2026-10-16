@@ -7,6 +7,7 @@ open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSParetoFrontierExact as Pareto
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressSelectedSemanticsExact as Selected
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q
+import DASHI.Physics.Foundations.CMP119CosmologyR109LiteralStressCylinderMaxCutExact as LiteralCylinder
 import DASHI.Physics.Foundations.CMP119CosmologySelectedLocalCStressCylinderExact as SelectedCylinder
 import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as Root
 
@@ -23,23 +24,26 @@ import DASHI.Physics.Foundations.CMP119CosmologyMarkedStressOSMaxCutRootExact as
 --   derivative-equivariance project is not separately scheduled.
 --
 -- E2 / E4:
---   the marked reconstruction consumes only ONE selected Local-C stress
---   cylinder observable, not an encoding of every stress tensor.  Once that
---   selected observable is identified with the selected Local-C stress and is
---   positive-time/gauge-invariant, existing continuum OS2 proves its reflected
---   positivity and existing Round279/281 proves its geometric clustering.
---   The OS cylinder algebra owns reflection; no all-stress reflection map or
---   independent E4 observable/decay theorem is needed.
+--   the terminal presentation is the literal selected R109 stress insertion.
+--   Its identity is definitionally pinned, so no arbitrary meaning predicate,
+--   global pair evaluator, all-stress encoding family, independent E4 source
+--   selection, or new clustering estimate is a physical premise.  The only
+--   novel finite-presentation data are:
+--     * one real cylinder observable presenting that selected insertion;
+--     * positive-time admissibility;
+--     * gauge invariance.
+--   From that selected observable, existing OS2 and Round279/281 supply the
+--   reflected positivity and quantitative clustering used downstream.
 --
 -- B0/B3 selected semantics are compiled from Round109 nuclear continuity and
 -- Local-C symmetry/locality.  External OS interpretation stays at the standard
 -- reconstruction authority boundary.
 --
--- Therefore P1 now has exactly TWO antigravity-specific source packages:
+-- Therefore P1 has exactly TWO antigravity-specific source packages:
 --
 --   Q1   actual BC2 path-derivative semantics + B4-equivariant source path;
---   E24  one selected Local-C stress cylinder observable + same-object meaning
---        + positive-time/gauge-invariant admissibility.
+--   E24  one literal selected R109 cylinder observable + its two admissibility
+--        proofs (positive time and gauge invariance).
 ------------------------------------------------------------------------
 
 masterMarkedOSParetoFrontierAvailable : Bool
@@ -69,9 +73,16 @@ potentialCovarianceNeedsNoD1CovariancePremise : Bool
 potentialCovarianceNeedsNoD1CovariancePremise =
   Q.potentialCovarianceDoesNotNeedD1Covariance
 
-selectedStressCylinderObservableAndAdmissibilityStillRequired : Bool
-selectedStressCylinderObservableAndAdmissibilityStillRequired =
-  SelectedCylinder.remainingSharedPhysicalLeafIsOneSelectedObservableAndAdmissibility
+e24NovelDataAreOneObservableAndTwoAdmissibilityProofs : Bool
+e24NovelDataAreOneObservableAndTwoAdmissibilityProofs =
+  LiteralCylinder.remainingNovelE2E4DataAreObservableAndTwoAdmissibilityProofs
+
+e24ArbitraryMeaningPredicateRequired : Bool
+e24ArbitraryMeaningPredicateRequired = false
+
+e24R109InsertionIdentityDefinitionallyPinned : Bool
+e24R109InsertionIdentityDefinitionallyPinned =
+  LiteralCylinder.r109InsertionIdentityIsDefinitionallyPinned
 
 allStressCylinderEncodingRequired : Bool
 allStressCylinderEncodingRequired = false
