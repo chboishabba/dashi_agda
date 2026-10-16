@@ -12,16 +12,13 @@ module DASHI.Physics.Foundations.ContinuousSO3Torque369BridgeExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Foundations.RecursiveRadixHypervoxel as Hyper
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as SO3
 import DASHI.Physics.Foundations.OrientedThreeAxisBracket369Exact as Finite
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as V3
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Lie
 import DASHI.Physics.YangMills.BalabanP33SU2EuclideanGeometryExact as Euclidean
 import DASHI.Physics.Laws.GaugeInteractionLaws as GaugeLaws
-
-------------------------------------------------------------------------
--- 1. Existing continuous carrier and exact antisymmetric product.
-------------------------------------------------------------------------
 
 ContinuousVector3 : Set
 ContinuousVector3 = V3.SU2LieAlgebra
@@ -35,12 +32,6 @@ twiceAngularMomentum position momentum = twiceCross position momentum
 
 twiceTorque : ContinuousVector3 → ContinuousVector3 → ContinuousVector3
 twiceTorque position force = twiceCross position force
-
-------------------------------------------------------------------------
--- 2. Dynamics socket.  The derivative operator remains supplied by the
--- concrete mechanics consumer; this owner fixes the same-object relation it
--- must prove rather than manufacturing a derivative from a finite C3 chart.
-------------------------------------------------------------------------
 
 record AngularMomentumTorqueDynamics : Set₁ where
   constructor angular-momentum-torque-dynamics
@@ -60,10 +51,6 @@ record AngularMomentumTorqueDynamics : Set₁ where
 
 open AngularMomentumTorqueDynamics public
 
-------------------------------------------------------------------------
--- 3. Existing SO(3) continuous chart convention is reused directly.
-------------------------------------------------------------------------
-
 continuousSO3RightJacobianConvention : SO3.SO3RightJacobianConvention
 continuousSO3RightJacobianConvention = SO3.canonicalSO3RightJacobianConvention
 
@@ -76,15 +63,10 @@ continuousThreeCoordinateLieCarrierReused = true
 continuousEuclideanGramGeometryReused : Bool
 continuousEuclideanGramGeometryReused = true
 
-------------------------------------------------------------------------
--- 4. Finite 369 supplies an orientation/address chart only.  A concrete
--- embedding of a finite axis label into a continuous vector basis is explicit.
-------------------------------------------------------------------------
-
 axisBasisVector : SO3.SU2Axis → ContinuousVector3
-axisBasisVector SO3.axis₁ = Euclidean.basisX
-axisBasisVector SO3.axis₂ = Euclidean.basisY
-axisBasisVector SO3.axis₃ = Euclidean.basisZ
+axisBasisVector Hyper.axis-low = Euclidean.basisX
+axisBasisVector Hyper.axis-mid = Euclidean.basisY
+axisBasisVector Hyper.axis-high = Euclidean.basisZ
 
 finiteBracketContinuousInputs :
   Finite.BracketVoxel → ContinuousVector3 × ContinuousVector3
@@ -106,12 +88,10 @@ finiteC3PhaseIsSO3GroupElement = false
 finiteAxisChartEmbedsIntoContinuousBasis : Bool
 finiteAxisChartEmbedsIntoContinuousBasis = true
 
-------------------------------------------------------------------------
--- 5. Exterior/Hodge infrastructure already exists generically in the repo via
--- MaxwellFieldLaw (TwoForm + hodgeStar).  This module records reuse availability
--- without claiming a completed R^3 bivector/Hodge-star identification theorem.
-------------------------------------------------------------------------
-
+-- GaugeInteractionLaws already supplies continuous differential-form/Hodge
+-- interfaces (Maxwell OneForm/TwoForm/ThreeForm and hodgeStar).  We record that
+-- existing infrastructure without pretending this file proves the dedicated
+-- R^3 bivector-Hodge-cross isomorphism.
 repoHasContinuousHodgeLawInterface : Bool
 repoHasContinuousHodgeLawInterface = true
 
