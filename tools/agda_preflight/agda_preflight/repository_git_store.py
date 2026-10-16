@@ -99,6 +99,8 @@ def replace_git_history(
     conn: sqlite3.Connection,
     repo: Path,
     events: Iterable[NarrativeEvent],
+    *,
+    complete: bool = True,
 ) -> dict[str, Any]:
     """Persist commit DAG, refs and touched paths from harvested Git events."""
 
@@ -139,7 +141,7 @@ def replace_git_history(
     conn.execute(
         "INSERT INTO repository_meta(key, value) VALUES('git_history_complete', ?) "
         "ON CONFLICT(key) DO UPDATE SET value=excluded.value",
-        ("true",),
+        ("true" if complete else "false",),
     )
     conn.commit()
     return {
@@ -147,6 +149,7 @@ def replace_git_history(
         "parent_edges": sum(len(value) for value in parents.values()),
         "refs": len(refs),
         "commit_paths": sum(len(event.touched_paths) for event in commits),
+        "complete": complete,
     }
 
 
