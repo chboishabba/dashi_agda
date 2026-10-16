@@ -6,12 +6,12 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterFidelityVal
 
 open import DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterFidelityExact
   using
-    ( natEqualFinToNat
-    ; rawRuleKeyMatchesTyped
-    ; rawFetchActualRules
-    ; rawApplyActualRule
-    ; rawNextActualCode
-    ; rawIterateActualCode
-    ; runSelfDelimitedActualCodeFidelity
-    ; canonicalRawInterpreterFidelityBoundary
+    ( finEqualToNatEqual
+    ; rawRuleKeyMatchExact
+    ; scanRawRulesExact
+    ; fetchRawActualExact
+    ; rawApplyRuleExact
+    ; rawNextExact
+    ; rawIterateFollowsStandardRun
+    ; selfDelimitedInterpreterFollowsStandardRun
     )
