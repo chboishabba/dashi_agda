@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Q
 import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1YM
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact as CasimirGRQFT
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as SU2Host
+import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionExact as Reduction
 
 ------------------------------------------------------------------------
 -- CASIMIR U(1) -> ACTUAL RECOVERED-QFT SELECTED-SECTOR STRESS ATTACHMENT
@@ -27,9 +28,8 @@ record CasimirU1RecoveredQFTStressAttachment
 
     selectedGroup : QFT.CompactSimpleGroup (Weld.qftCarriers U)
 
-    -- The group-host obligation is no longer an opaque Set.  It must identify
-    -- the selected abstract QFT-group token with the repository's concrete
-    -- unit-quaternion SU(2), while also classifying that token as Sprint105 SU2.
+    -- Concrete host receipt: the selected abstract group token must classify as
+    -- Sprint105 SU2 and interpret to the literal unit-quaternion SU(2) group.
     selectedSU2Host :
       SU2Host.CasimirSelectedQFTSU2Host U selectedGroup
 
@@ -37,14 +37,15 @@ record CasimirU1RecoveredQFTStressAttachment
       Cut.CMP119RationalStressComponentEvaluator
         (QFT.StressTensor (Weld.qftCarriers U))
 
-    actualSelectedStressMatchesBrownMaclay :
-      ∀ a b →
-      Cut.component stressEvaluator
+    -- The physical stress equality is paid on the same actual selected QFT
+    -- stress object.  Coordinate symmetry reduces the independent equations
+    -- from sixteen to ten; the lower triangle is compiler output.
+    symmetricBrownMaclayPayment :
+      Reduction.CasimirBrownMaclaySymmetricTenComponentPayment
+        stressEvaluator
         (Weld.actualQFTStressTensor U
           (Weld.coarseGrain U candidate regime)
           selectedGroup)
-        a b
-      ≡ CasimirGRQFT.casimirNormalizedRationalTensor4 a b
 
     sameElectromagneticBoundaryObject : Set
     sameRenormalizedStressConvention : Set
@@ -110,7 +111,8 @@ actualSelectedQFTStressComponentIsBrownMaclay :
   actualSelectedQFTStressComponent attachment a b
   ≡ CasimirGRQFT.casimirNormalizedRationalTensor4 a b
 actualSelectedQFTStressComponentIsBrownMaclay attachment =
-  actualSelectedStressMatchesBrownMaclay attachment
+  Reduction.casimirTenComponentsCompileToTensorEquality
+    (symmetricBrownMaclayPayment attachment)
 
 actualSelectedQFTSectorShared :
   ∀ {U : Weld.UnifiedCandidate} →
@@ -174,7 +176,9 @@ record CasimirU1RecoveredQFTStressAttachmentBoundary : Set where
     selectedQFTSectorStressAttachmentInterfaceOwned : Bool
     recoveredQFTCommutationConsumed : Bool
     concreteSU2HostReceiptRequired : Bool
+    symmetricTenComponentBrownMaclayCompilerConsumed : Bool
     componentwiseBrownMaclayEqualityTargetOwned : Bool
+    sixteenIndependentBrownMaclayComponentsRequired : Bool
     actualSelectedSectorSharedTransportAlreadyExists : Bool
 
     concreteSelectedGroupHostsCanonicalU1Paid : Bool
@@ -189,9 +193,9 @@ canonicalCasimirU1RecoveredQFTStressAttachmentBoundary :
   CasimirU1RecoveredQFTStressAttachmentBoundary
 canonicalCasimirU1RecoveredQFTStressAttachmentBoundary =
   casimir-u1-recovered-qft-stress-attachment-boundary
-    true true true true true true
+    true true true true true true false true
     false false false false false
 
 casimirU1RecoveredQFTStressAttachmentReading : String
 casimirU1RecoveredQFTStressAttachmentReading =
-  "The first Casimir GR/QFT unification stress attachment is now explicit and non-opaque. On an already-declared QFT overlap regime, QFT recovery commutes to the selected target; the selected compact-simple group must carry a CasimirSelectedQFTSU2Host receipt identifying its group interpretation with the repository's concrete unit-quaternion SU(2) and classifying it as Sprint105 SU2. Then a rational evaluator for the actual selected QFT stress must prove every Axis4 component equals the normalized Brown-Maclay tensor on the same boundary/renormalization object. Existing qftSectorStressToShared handles selected-sector transport after that. The attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
+  "The first Casimir GR/QFT unification stress attachment is now explicit and minimized. On an already-declared QFT overlap regime, QFT recovery commutes to the selected target; the selected compact-simple group must carry a CasimirSelectedQFTSU2Host receipt identifying its group interpretation with the repository's concrete unit-quaternion SU(2) and classifying it as Sprint105 SU2. A rational evaluator for the same actual selected QFT stress then supplies the Brown-Maclay equality through the symmetric ten-component receipt 00,01,02,03,11,12,13,22,23,33; the six lower-triangular equations are compiler output from coordinate symmetry. Existing qftSectorStressToShared handles selected-sector transport after that. The attachment does not pay all-sector aggregation, common-action variation, GR stress equality, backreaction, or unified-QG promotion."
