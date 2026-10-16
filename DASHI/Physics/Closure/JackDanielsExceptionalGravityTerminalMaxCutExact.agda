@@ -4,9 +4,9 @@ module DASHI.Physics.Closure.JackDanielsExceptionalGravityTerminalMaxCutExact wh
 -- TERMINAL DELIVERABLE LEDGER
 --
 -- Each false stage names the first proof-relevant payment that would actually
--- advance the programme.  Actor scoping is now explicit: the 53 residual lane
--- is central-C3 / conformal-fixed-line scoped, while the full-normalizer lane
--- proceeds through the source-native 90 = 12 + 78 decomposition.
+-- advance the programme. Actor scoping and jCoarse/jFine information-loss
+-- discipline are explicit: neither finite cardinality nor coarse observation
+-- is allowed to manufacture a Monster recognition theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -14,6 +14,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact as JD
+import DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact as JCF
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as Albert
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact as ActorScoped
@@ -50,7 +51,19 @@ J3 : ResearchDeliverable
 J3 = research-deliverable
   "J3" false
   "DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact.SupersingularMonsterRecognition"
-  "construct the same-p supersingular/modular -> Monster/McKay-Thompson correspondence with exceptional j-values and action structure explicit"
+  "construct the same-p supersingular -> modular datum -> Monster correspondence with exceptional j-values and action structure explicit"
+
+JCF0 : ResearchDeliverable
+JCF0 = research-deliverable
+  "JCF0" true
+  "DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact"
+  "jCoarse/jFine is integrated as a Fricke-equivariant lossy observer with explicit fibres; finite observation is not promoted to a literal modular point"
+
+JCF1 : ResearchDeliverable
+JCF1 = research-deliverable
+  "JCF1" false
+  "DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact.JCoarseFineMonsterFactorization"
+  "after J3 is inhabited, identify its ModularDatum two-sidedly with the literal FinePoint and prove whether the Monster consumer factors through the finite jCoarse/jFine observation; coarse-only selection remains forbidden"
 
 E0 : ResearchDeliverable
 E0 = research-deliverable
@@ -108,13 +121,15 @@ X1 = research-deliverable
 
 allDeliverables : List ResearchDeliverable
 allDeliverables =
-  J0 ∷ J1 ∷ J2 ∷ J3 ∷ E0 ∷ EA ∷ E1C3 ∷ E1N ∷
+  J0 ∷ J1 ∷ J2 ∷ J3 ∷ JCF0 ∷ JCF1 ∷ E0 ∷ EA ∷ E1C3 ∷ E1N ∷
   S1 ∷ G1 ∷ G2 ∷ C1 ∷ X1 ∷ []
 
 record TerminalMaxCutBoundary : Set where
   constructor terminal-max-cut-boundary
   field
     finiteJackDanielsSupportPaid : Bool
+    jCoarseFineObserverIntegrationPaid : Bool
+    jCoarseFineMonsterFactorizationStillLive : Bool
     proofRelevantAlbertCarrierPaid : Bool
     exceptionalActorScopingPaid : Bool
     furtherFiniteCardinalityWorkCountsAsPayment : Bool
@@ -129,4 +144,4 @@ record TerminalMaxCutBoundary : Set where
 
 canonicalTerminalMaxCutBoundary : TerminalMaxCutBoundary
 canonicalTerminalMaxCutBoundary = terminal-max-cut-boundary
-  true true true false true true true true true true true true
+  true true true true true false true true true true true true true true
