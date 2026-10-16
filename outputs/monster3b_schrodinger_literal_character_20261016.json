@@ -1,0 +1,18 @@
+{
+  "all_1594323_group_coordinates_classified": true,
+  "all_729_modulation_character_sums_verified": true,
+  "authority": "exact executable finite audit of repository action convention; not actual-Monster same-object authority",
+  "basis_degree": 729,
+  "central_zeta_count": 1,
+  "central_zeta_squared_count": 1,
+  "central_zeta_squared_trace": [-729, -729],
+  "central_zeta_trace": [0, 729],
+  "heisenberg_order": 1594323,
+  "identity_count": 1,
+  "identity_trace": [729, 0],
+  "literal_character_equals_canonical_heisenberg_signature": true,
+  "noncentral_count": 1594320,
+  "noncentral_trace": [0, 0],
+  "nonzero_translation_count": 1592136,
+  "pure_nonzero_modulation_count": 2184
+}
