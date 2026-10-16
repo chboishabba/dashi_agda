@@ -39,6 +39,26 @@ actualSHomStillOpen :
     Terminal.canonicalReceipt ≡ false
 actualSHomStillOpen = refl
 
+literalPhaseOneSplitStillOpen :
+  Terminal.Receipt.literalPhaseOneRegularResidualSplitPaid
+    Terminal.canonicalReceipt ≡ false
+literalPhaseOneSplitStillOpen = refl
+
+zetaSquaredTransportStillOpen :
+  Terminal.Receipt.zetaSquaredLiteralRecognitionTransportPaid
+    Terminal.canonicalReceipt ≡ false
+zetaSquaredTransportStillOpen = refl
+
+releasedCIMatrixIdentityPaid :
+  Terminal.Receipt.authorReleasedSelectedCIMatrixIdentityPaid
+    Terminal.canonicalReceipt ≡ true
+releasedCIMatrixIdentityPaid = refl
+
+releasedCIRediagonalizationStillOpen :
+  Terminal.Receipt.authorReleasedSelectedCIMatrixRediagonalizedByDASHI
+    Terminal.canonicalReceipt ≡ false
+releasedCIRediagonalizationStillOpen = refl
+
 countingIsBasisLabelCounting :
   Terminal.Receipt.count65610IsFiniteBasisLabelCount
     Terminal.canonicalReceipt ≡ true
