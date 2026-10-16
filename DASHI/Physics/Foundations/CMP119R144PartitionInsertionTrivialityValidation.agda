@@ -1,0 +1,21 @@
+module DASHI.Physics.Foundations.CMP119R144PartitionInsertionTrivialityValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.CMP119R144PartitionInsertionTrivialityExact as Cut
+
+partitionObservableAlreadyFixedToOne :
+  Cut.partitionResponseInsertionObservableRequiresIndependentSelection ≡ false
+partitionObservableAlreadyFixedToOne = refl
+
+partitionInsertionVariationAlreadyFixedToZero :
+  Cut.partitionResponseInsertionVariationRequiresIndependentSelection ≡ false
+partitionInsertionVariationAlreadyFixedToZero = refl
+
+partitionStressDoesNotNeedObservableDO :
+  Cut.partitionStressRouteNeedsInsertedObservableMetricVariation ≡ false
+partitionStressDoesNotNeedObservableDO = refl
+
+insertedObservableRouteStillSeparate :
+  Cut.insertedObservableConnectedNumeratorRouteStillSeparate ≡ true
+insertedObservableRouteStillSeparate = refl
