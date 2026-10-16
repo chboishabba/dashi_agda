@@ -32,18 +32,20 @@ def test_packet_targets_real_corresponding_authors_and_external_rows() -> None:
         assert marker in text
 
 
-def test_packet_separates_author_evidence_from_internal_ingestion_work() -> None:
+def test_provider_backed_send_receipt_does_not_promote_reply_or_evidence() -> None:
     text = read(MODULE)
     for marker in (
-        "requestPacketConstructed = true",
-        "authorRequestSent = false",
+        "providerVerifiedSent = true",
+        "sendProvider = \"Gmail sent mailbox\"",
+        "sentLocalTimestamp = \"2026-10-16T12:30:17+10:00\"",
+        "authorRequestSent = true",
         "authorReplyReceived = false",
+        "requestPacketIsEvidence = false",
         "rawExperimentArraysAcquired = false",
         "analysisCodeAcquired = false",
         "byteChecksumComputedAfterAcquisition = false",
         "analysisReplayCompleted = false",
         "genericAcceptanceTokenConstructed = false",
-        "consumerIngestionIsInternalPostAcquisition = true",
     ):
         assert marker in text
 
@@ -60,11 +62,12 @@ def test_packet_does_not_re_request_already_paid_public_coordinates() -> None:
         assert marker in text
 
 
-def test_status_and_rollup_expose_acquisition_packet_without_promotion() -> None:
+def test_status_and_rollup_expose_sent_acquisition_without_promotion() -> None:
     status = read(STATUS)
     for marker in (
         "externalAcquisitionPacketConstructed = true",
-        "externalAuthorRequestSent = false",
+        "externalAuthorRequestSent = true",
+        "externalAuthorReplyReceived = false",
         "genericAcceptanceTokenConstructed = false",
         "terminalSIMetrologyPromotionAllowed = false",
     ):
