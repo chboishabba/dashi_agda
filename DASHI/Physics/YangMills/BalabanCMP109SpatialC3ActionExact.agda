@@ -19,10 +19,6 @@ import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanClayT4HypercubicGeneratedActionExact as Action
 import DASHI.Physics.YangMills.BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact as Source
 
-------------------------------------------------------------------------
--- 1. Literal spatial three-cycle on the same generated grid carrier.
-------------------------------------------------------------------------
-
 spatialCycle012 : Grid.GridCell4 → Grid.GridCell4
 spatialCycle012 cell =
   Action.act Action.swap01 (Action.act Action.swap12 cell)
@@ -42,12 +38,6 @@ cmp109SpatialC3Action = record
   ; rotateCubed = spatialCycle012Cubed
   }
 
-------------------------------------------------------------------------
--- 2. Eq. (5.6) pays invariance/equivariance of the scalar projection under
--- this C3 subgroup whenever the already-defined CMP109 source symmetry is
--- instantiated for that same contribution.
-------------------------------------------------------------------------
-
 cycleInvariant : ∀ {contribution}
   (symmetry : Source.CMP109ScalarEuclideanSymmetry contribution)
   (cell : Grid.GridCell4) →
@@ -64,18 +54,31 @@ identityRationalC3Action = record
   ; rotateCubed = λ value → refl
   }
 
+identityGridC3Equivariant :
+  C3.EquivariantMap cmp109SpatialC3Action cmp109SpatialC3Action (λ cell → cell)
+identityGridC3Equivariant = record
+  { intertwines = λ cell → refl }
+
 cmp109ContributionC3Equivariant : ∀ {contribution}
   (symmetry : Source.CMP109ScalarEuclideanSymmetry contribution) →
   C3.EquivariantMap cmp109SpatialC3Action identityRationalC3Action contribution
 cmp109ContributionC3Equivariant symmetry = record
   { intertwines = λ cell → sym (cycleInvariant symmetry cell) }
 
-------------------------------------------------------------------------
--- 3. Recovery status.  This closes the old categorical statement that Balaban
--- had no source-exact C3 action at all.  The broader R132--R144 unified
--- density/action/stress/Schwinger recovery compiler still needs explicit
--- transport of this spatial action across each same-object seam.
-------------------------------------------------------------------------
+cmp109ThreeChannelC3Weld : ∀ {contribution}
+  (symmetry : Source.CMP109ScalarEuclideanSymmetry contribution) →
+  C3.ThreeChannelC3Weld Grid.GridCell4 Grid.GridCell4 ℚ
+cmp109ThreeChannelC3Weld symmetry = record
+  { inputAction = cmp109SpatialC3Action
+  ; midAction = cmp109SpatialC3Action
+  ; outputAction = identityRationalC3Action
+  ; forward = λ cell → cell
+  ; consumer = _
+  ; forwardEquivariant = identityGridC3Equivariant
+  ; consumerEquivariant = cmp109ContributionC3Equivariant symmetry
+  }
+  where
+  contribution = Source.CMP109ScalarEuclideanSymmetry.contribution symmetry
 
 cmp109LiteralSpatialC3Recovered : Bool
 cmp109LiteralSpatialC3Recovered = true
@@ -89,6 +92,9 @@ cmp109C3ActsOnLiteralGeneratedGrid = true
 cmp109ScalarProjectionEquivarianceAvailable : Bool
 cmp109ScalarProjectionEquivarianceAvailable = true
 
+cmp109ThreeChannelWeldClosed : Bool
+cmp109ThreeChannelWeldClosed = true
+
 unifiedRecoveryC3TransportClosed : Bool
 unifiedRecoveryC3TransportClosed = false
 
@@ -101,9 +107,10 @@ record BalabanCMP109C3Boundary : Set where
     sourceCoordinatePermutationCovarianceUsed : Bool
     literalOrderThreeSpatialActionConstructed : Bool
     sameGridScalarEquivarianceConstructed : Bool
+    threeChannelC3WeldConstructed : Bool
     actionManufacturedFrom369Analogy : Bool
     unifiedSchwingerRecoveryIntertwinerClosed : Bool
 
 canonicalBalabanCMP109C3Boundary : BalabanCMP109C3Boundary
 canonicalBalabanCMP109C3Boundary =
-  balaban-cmp109-c3-boundary true true true false false
+  balaban-cmp109-c3-boundary true true true true false false
