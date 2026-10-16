@@ -9,13 +9,13 @@ import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
 ------------------------------------------------------------------------
 -- EMPIRICAL ACQUISITION PARETO FRONTIER
 --
--- DASHI routing only.  This owner does not grade truth, politics, source
--- credibility, or causal effect.  It asks a narrower operational question:
+-- DASHI routing only. This owner does not grade truth, politics, source
+-- credibility, or causal effect. It asks a narrower operational question:
 -- among currently admissible acquisitions for the declared historical /
 -- comparator calibration consumer, which cells are non-dominated in a small
 -- cost-versus-certified-information-gain routing calibration?
 --
--- The Nat cost/gain values below are DASHI scheduling values only.  They are
+-- The Nat cost/gain values below are DASHI scheduling values only. They are
 -- not money, person-hours, probabilities, evidence strength, effect sizes, or
 -- source-author claims.
 --
@@ -25,9 +25,15 @@ import DASHI.Governance.BoloBoloOWSSpokesPrimaryLocatorAtlasExact as Spokes
 --   * official MONDRAGON corporation-wide Congress/governing-body/training and
 --     monthly-governance coordinates;
 --   * a provenance split between corporation/cooperative governance and the
---     separate Mondragon University faculty Social Council cadence.
+--     separate Mondragon University faculty Social Council cadence;
+--   * the anarchist/horizontal leadership-tension SOTA atlas, which sharpens
+--     the PRIMARY OWS minute consumer: recover not only duration/incidence but
+--     facilitation, role rotation, delegation, blocking/advancement, reportback,
+--     repeated influence and tacit coordination where the primary record pays
+--     those coordinates.
 -- Remaining comparator gain is therefore concentrated in attendance/duration,
--- boundary-demand, interface-capacity/backlog, and matched reportback workload.
+-- boundary-demand, interface-capacity/backlog, matched reportback workload and
+-- observable authority/coordination-role structure.
 ------------------------------------------------------------------------
 
 data AcquisitionRequirement : Set where
@@ -43,8 +49,8 @@ primarySpokesMinutesCell =
   Pareto.requirement-candidate
     recoverPrimarySpokesMinutes
     true true true true
-    1 5
-    "recover the primary NYCGA Spokes minutes at the known archival locators; locator identity is already paid but minute content is not"
+    1 8
+    "recover the primary NYCGA Spokes minutes at the known archival locators and code any source-paid facilitation, role-rotation, delegation, blocking/advancement, reportback, repeated-influence and coordination-role coordinates; locator identity alone pays none of that content"
 
 comparatorWorkloadCell : Pareto.RequirementCandidate AcquisitionRequirement
 comparatorWorkloadCell =
@@ -52,7 +58,7 @@ comparatorWorkloadCell =
     enrichComparatorInterfaceWorkload
     true true true true
     3 6
-    "after current Porto and MONDRAGON source gains, acquire remaining attendance/duration, boundary-demand, interface-capacity/backlog and matched reportback workload with institutional-version provenance"
+    "after current Porto and MONDRAGON source gains, acquire remaining attendance/duration, boundary-demand, interface-capacity/backlog, matched reportback workload and observable authority/role-rotation coordinates with institutional-version provenance"
 
 secondaryExpansionCell : Pareto.RequirementCandidate AcquisitionRequirement
 secondaryExpansionCell =
