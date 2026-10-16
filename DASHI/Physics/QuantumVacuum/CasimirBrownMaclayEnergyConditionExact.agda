@@ -232,14 +232,14 @@ record BrownMaclayKernelPressureWeld
     (kernel : Kernel.CasimirScalarModel)
     (d : Q.Length) : Set₁ where
   field
-    scaleMap : ℚ → Kernel.CasimirScalarModel.Scalar kernel
+    scaleMap : ℚ → Kernel.Scalar kernel
 
     SameIdealPlateSystem : Set
     sameIdealPlateSystem : SameIdealPlateSystem
 
     normalizedNormalPressureAgreesWithKernel :
       scaleMap (Stress.normalPressure brownMaclayNormalizedSpatialStress)
-      ≡ Kernel.CasimirScalarModel.pressure kernel d
+      ≡ Kernel.pressure kernel d
 
     normalizedEnergyDensityHasSamePositiveScale : Set
     normalizedEnergyDensityHasSamePositiveScaleEvidence :
