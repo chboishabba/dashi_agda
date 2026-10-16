@@ -53,3 +53,19 @@ def test_p1_is_two_source_packages_not_terminal_laws():
         "p1IndependentTerminalLawProjectsRequired = false",
     ):
         assert needle in text
+
+
+def test_p3_compiler_structure_is_paid_but_physical_experiment_remains_open():
+    text = MODULE.read_text()
+    for needle in (
+        "AntigravitySameStateFourChannelDiscriminatorExact as FourChannel",
+        "sameStateFourChannelCompilerConstructed",
+        "mechanismSignatureTemplatesConstructed",
+        "candidateBoundNuisanceClosureContractConstructed",
+        "preferredSingleVacuumFixtureFeedsDiscriminator",
+        "physicalMatchedSourceSwitchStillOpen",
+        "numericalSystematicsBudgetStillOpen",
+        "empiricalReplicationStillOpen",
+        "fourChannelStructureDoesNotPayExperiment",
+    ):
+        assert needle in text
