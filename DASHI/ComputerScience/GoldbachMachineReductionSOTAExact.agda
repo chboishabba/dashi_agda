@@ -71,10 +71,10 @@ record GoldbachMachineReductionSOTABoundary : Set where
     externalHaltingEquivalenceExists : Bool
     externalConjectureSemanticsExists : Bool
     externalReducedMachineCanRunLonger : Bool
-    staticCompressionCanIncreaseRuntimeHasIndependentPrecedent : Bool
+    staticCompressionCanIncreaseRuntimeHasIndependentPrecedentFlag : Bool
     sameConjectureMeansSameMachine : Bool
     turingStateReductionEqualsFractranFractionReduction : Bool
-    deepMindResultProvesDashiFractranReduction : Bool
+    deepMindResultProvesDashiFractranReductionFlag : Bool
 
 open GoldbachMachineReductionSOTABoundary public
 
