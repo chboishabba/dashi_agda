@@ -6,7 +6,6 @@ open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Core.RobustExperimentInferenceFrontierExact as Robust
 import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
-import DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact as Methodology
 
 ------------------------------------------------------------------------
 -- RESEARCH-THROUGH-PERFORMANCE AS A DISCRIMINATOR / AFFORDANCE PROBE
@@ -94,9 +93,6 @@ powersPerformanceProbeDesign =
 
 sensoryAccessDemand : Sensory.SensoryAccessCoordinateDemand
 sensoryAccessDemand = Sensory.canonicalSensoryAccessCoordinateDemand
-
-prestMethodologySource = Methodology.prest2023MethodologySource
-prestResponseSource = Methodology.prest2024ResponseSource
 
 data ReconstructionCreatesHistoricalOccurrence : Set where
 
