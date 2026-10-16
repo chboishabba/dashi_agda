@@ -19,6 +19,7 @@ import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 -- Jack Daniel's natural-recognition / exceptional-geometry tranche.
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact
+import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact
