@@ -30,6 +30,11 @@ import DASHI.Biology.IITXORGridOrientationLiftExact
 -- must remain a chosen orientation chart, not an automatic physical torque.
 import DASHI.Biology.IITXORGridLoopHolonomyExact
 
+-- The torque donor uses the same symbolic C3 phase carrier.  A proof-relevant
+-- handoff compiler must reduce physical same-phase promotion to the donor's
+-- exact positive/negative/swap receipts rather than prose correspondence.
+import DASHI.Biology.IITGridTorqueC3HolonomyHandoffExact
+
 -- The matched face-aware pair must also be recognized as three ordinary binary
 -- XOR synthesis cells versus the same fabric plus one genuine ABC interior term.
 import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact
