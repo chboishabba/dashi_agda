@@ -13,18 +13,18 @@ import DASHI.Physics.CondensedMatter.MATBGBMFirstShellReplayReceiptExact as Firs
 import DASHI.Physics.CondensedMatter.MATBGBMPlaneWaveReplayReceiptExact as PlaneWave
 import DASHI.Physics.CondensedMatter.MATBGQuantumGeometryReplayReceiptExact as QuantumGeometry
 import DASHI.Physics.CondensedMatter.MATBGInteractingTHF2026SourceExact as THF
+import DASHI.Physics.CondensedMatter.MATBGInteractingTHFLiteralMatricesExact as THFMatrix
+import DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayReceiptExact as THFAtomic
 import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorics2026Exact as Entropy
+import DASHI.Physics.CondensedMatter.MATBGEntropyCombinatorialReplayReceiptExact as EntropyReplay
 import DASHI.Physics.Foundations.GeneralizedCaloricCycleExact as Caloric
 import DASHI.Physics.Foundations.QuantumStressEnergyEngineeringBridgeExact as QuantumStress
 import DASHI.Physics.Foundations.QuantumStressEnergySourceWeldExact as QuantumStressSource
+import DASHI.Physics.Foundations.CasimirFiniteDiskGravityProxyReceiptExact as CasimirFinite
 import DASHI.Physics.Foundations.PrecisionThrustClosureExact as Precision
 import DASHI.Physics.Foundations.FieldGeometryMatterExperimentParetoExact as Pareto
 import DASHI.Physics.Foundations.CausalTransportFTLObligationsExact as FTL
 import DASHI.Physics.Foundations.FieldGeometryMatterAttributionRegression as Attribution
-
-------------------------------------------------------------------------
--- TERMINAL MAX-CUT
-------------------------------------------------------------------------
 
 data FrontierStatus : Set where
   structurallyPaid : FrontierStatus
@@ -68,6 +68,9 @@ record FieldGeometryMatterTerminalFrontier : Set where
     sameSampleQTMEntropyReplay : FrontierStatus
     matbgQuantumGeometryNumericalReplay : FrontierStatus
     matbgQuantumMetricExperimentalCalibration : FrontierStatus
+    thfLiteralHcHcfMatrices : FrontierStatus
+    thfHubbardIAtomicReplay : FrontierStatus
+    entropyCombinatorialNumericalReplay : FrontierStatus
 
     generalizedCaloricFiniteContract : FrontierStatus
     generalizedCaloricUsefulCycle : FrontierStatus
@@ -88,6 +91,7 @@ record FieldGeometryMatterTerminalFrontier : Set where
     quantumInequalityLiteratureBoundary : FrontierStatus
     casimirRenormalizedStressSameObjectMeasurement : FrontierStatus
     quantumStressMacroscopicScaling : FrontierStatus
+    casimirFiniteDiskWeakFieldProxy : FrontierStatus
     quantumStressMeasuredGRBackreaction : FrontierStatus
 
     warpPhysicalStressEnergySource : FrontierStatus
@@ -131,6 +135,7 @@ currentTerminalFrontier =
     sourcePaid openCalibrationOrExecution openSameObjectPayment
     structurallyPaid sourcePaid openSameObjectPayment externalOnly
     numericallyExecuted openSameObjectPayment
+    structurallyPaid numericallyExecuted numericallyExecuted
 
     structurallyPaid externalOnly externalOnly
 
@@ -139,7 +144,7 @@ currentTerminalFrontier =
 
     structurallyPaid externalOnly requiresIndependentExperiment externalOnly
 
-    sourcePaid sourcePaid externalOnly externalOnly requiresIndependentExperiment
+    sourcePaid sourcePaid externalOnly externalOnly numericallyExecuted requiresIndependentExperiment
 
     externalOnly externalOnly externalOnly requiresIndependentExperiment
 
@@ -161,10 +166,14 @@ record MaxCutPaidSurface : Set where
     planeWaveBoundary : PlaneWave.PlaneWaveReplayBoundary
     quantumGeometryBoundary : QuantumGeometry.QuantumGeometryBoundary
     thfBoundary : THF.MATBGInteractingTHF2026Boundary
+    thfLiteralMatrixBoundary : THFMatrix.THFLiteralMatrixBoundary
+    thfAtomicReplayBoundary : THFAtomic.THFHubbardIAtomicReplayBoundary
     entropyBoundary : Entropy.EntropyCombinatoricsBoundary
+    entropyReplayBoundary : EntropyReplay.EntropyCombinatorialReplayBoundary
     caloricBoundary : Caloric.GeneralizedCaloricBoundary
     quantumStressBoundary : QuantumStress.QuantumStressEngineeringBoundary
     quantumStressSourceBoundary : QuantumStressSource.QuantumStressSourceBoundary
+    casimirFiniteDiskBoundary : CasimirFinite.CasimirFiniteDiskGravityProxyBoundary
     precisionBoundary : Precision.PrecisionThrustBoundary
     experimentParetoBoundary : Pareto.ExperimentParetoBoundary
     causalTransportBoundary : FTL.CausalTransportHierarchyBoundary
@@ -186,10 +195,14 @@ canonicalMaxCutPaidSurface =
     PlaneWave.canonicalPlaneWaveReplayBoundary
     QuantumGeometry.canonicalQuantumGeometryBoundary
     THF.canonicalTHF2026Boundary
+    THFMatrix.canonicalTHFLiteralMatrixBoundary
+    THFAtomic.canonicalTHFHubbardIAtomicReplayBoundary
     Entropy.canonicalEntropyCombinatoricsBoundary
+    EntropyReplay.canonicalEntropyCombinatorialReplayBoundary
     Caloric.canonicalGeneralizedCaloricBoundary
     QuantumStress.canonicalQuantumStressBoundary
     QuantumStressSource.canonicalQuantumStressSourceBoundary
+    CasimirFinite.canonicalCasimirFiniteDiskGravityProxyBoundary
     Precision.canonicalPrecisionThrustBoundary
     Pareto.canonicalExperimentParetoBoundary
     FTL.canonicalCausalTransportHierarchyBoundary
