@@ -17,18 +17,23 @@ module DASHI.Analysis.CollatzSyracuseAffinePrefixTransitionExact where
 --
 --   3^s ? 2 g.
 --
--- In particular 3^s < 2g implies the odd extension remains contracting.
+-- If 3^s < 2g, the appended odd word remains contracting with exact new gap
+--
+--   g' = 2g - 3^s.
+--
 -- No floating logarithm is required for this regime classification.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Data.Nat using (_<_; _≤_)
+open import Data.Nat using (_<_; _≤_; _∸_)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:*_; con; _:=_)
 open import Relation.Binary.Definitions using (tri<; tri≈; tri>)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
+open import Relation.Binary.PropositionalEquality using
+  (cong; subst; sym; module ≡-Reasoning)
+open ≡-Reasoning
 
 import DASHI.Core.BinaryBranchOutcomeEnumerationExact as Binary
 import DASHI.NumberTheory.Collatz.SyracuseAffineIterateExact as Affine
@@ -251,6 +256,103 @@ oddSafeGapKeepsContracting {m} word coefficient safe =
     (sym (denominatorAppendOne m))
     actualMultiplierBelow
 
+oddExtendedGap :
+  {m : Nat} →
+  (word : Binary.BinaryWord m) →
+  Paradox.ContractingCoefficientGap word →
+  Nat
+oddExtendedGap word coefficient =
+  2 * Paradox.gap coefficient
+  ∸ Affine.powNat 3 (Affine.parityCount word)
+
+oddExtendedGapPositive :
+  {m : Nat} →
+  (word : Binary.BinaryWord m) →
+  (coefficient : Paradox.ContractingCoefficientGap word) →
+  Affine.powNat 3 (Affine.parityCount word)
+    < 2 * Paradox.gap coefficient →
+  zero < oddExtendedGap word coefficient
+oddExtendedGapPositive word coefficient safe =
+  NatP.m<n⇒0<n∸m safe
+
+oddGapReassociation :
+  (multiplier gap : Nat) →
+  3 * multiplier + (2 * gap ∸ multiplier)
+  ≡ 2 * multiplier + (multiplier + (2 * gap ∸ multiplier))
+oddGapReassociation =
+  solve 2
+    (λ multiplier gap →
+      (con 3 :* multiplier) :+ ((con 2 :* gap) :* con 1)
+      :=
+      (con 2 :* multiplier)
+        :+ (multiplier :+ ((con 2 :* gap) :* con 1)))
+    refl
+
+-- The solver language does not model truncated subtraction.  The actual proof
+-- below therefore uses only reassociation around the subtraction term and the
+-- stdlib identity multiplier + (2g - multiplier) = 2g under multiplier <= 2g.
+oddExtendedDenominatorSplit :
+  {m : Nat} →
+  (word : Binary.BinaryWord m) →
+  (coefficient : Paradox.ContractingCoefficientGap word) →
+  (safe :
+    Affine.powNat 3 (Affine.parityCount word)
+      < 2 * Paradox.gap coefficient) →
+  Affine.powNat 2 (suc m)
+  ≡
+  Affine.powNat 3 (Affine.parityCount (appendOne word))
+  + oddExtendedGap word coefficient
+oddExtendedDenominatorSplit {m} word coefficient safe =
+  let
+    multiplier = Affine.powNat 3 (Affine.parityCount word)
+    gap = Paradox.gap coefficient
+    difference = 2 * gap ∸ multiplier
+
+    balance : multiplier + difference ≡ 2 * gap
+    balance = NatP.m+[n∸m]≡n (NatP.<⇒≤ safe)
+
+    reassociate :
+      3 * multiplier + difference
+      ≡ 2 * multiplier + (multiplier + difference)
+    reassociate =
+      solve 3
+        (λ multiplier gap difference →
+          (con 3 :* multiplier) :+ difference
+          :=
+          (con 2 :* multiplier) :+ (multiplier :+ difference))
+        refl
+  in
+  begin
+    Affine.powNat 2 (suc m)
+      ≡⟨ denominatorAppendOne m ⟩
+    2 * Affine.powNat 2 m
+      ≡⟨ cong (2 *_) (Paradox.denominatorSplit coefficient) ⟩
+    2 * (multiplier + gap)
+      ≡⟨ sym (doubleSplitNormalize multiplier gap) ⟩
+    2 * multiplier + 2 * gap
+      ≡⟨ cong (2 * multiplier +_) (sym balance) ⟩
+    2 * multiplier + (multiplier + difference)
+      ≡⟨ sym reassociate ⟩
+    3 * multiplier + difference
+      ≡⟨ cong (_+ difference) (sym (multiplierAppendOne word)) ⟩
+    Affine.powNat 3 (Affine.parityCount (appendOne word)) + difference
+      ∎
+
+appendOneContractingCoefficient :
+  {m : Nat} →
+  (word : Binary.BinaryWord m) →
+  (coefficient : Paradox.ContractingCoefficientGap word) →
+  (safe :
+    Affine.powNat 3 (Affine.parityCount word)
+      < 2 * Paradox.gap coefficient) →
+  Paradox.ContractingCoefficientGap (appendOne word)
+appendOneContractingCoefficient word coefficient safe = record
+  { Paradox.gap = oddExtendedGap word coefficient
+  ; Paradox.gapPositive = oddExtendedGapPositive word coefficient safe
+  ; Paradox.denominatorSplit =
+      oddExtendedDenominatorSplit word coefficient safe
+  }
+
 ------------------------------------------------------------------------
 -- Promotion boundary.
 ------------------------------------------------------------------------
@@ -262,6 +364,7 @@ record AffinePrefixTransitionBoundary : Set where
     trailingOddTransitionPaid : Nat
     exactOddGapRegimeClassifierPaid : Nat
     safeOddConditionImpliesContractingPaid : Nat
+    safeOddConditionBuildsNewGapPaid : Nat
     correctionCoordinateRetained : Nat
 
     floatingLogRequiredForRegimeClassification : Nat
@@ -271,5 +374,5 @@ record AffinePrefixTransitionBoundary : Set where
 canonicalAffinePrefixTransitionBoundary : AffinePrefixTransitionBoundary
 canonicalAffinePrefixTransitionBoundary =
   affinePrefixTransitionBoundary
-    1 1 1 1 1
+    1 1 1 1 1 1
     0 0 0
