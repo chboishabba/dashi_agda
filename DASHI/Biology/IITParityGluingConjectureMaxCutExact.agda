@@ -29,6 +29,7 @@ import DASHI.Biology.IITFaceAwareTriadicGridSynthesisWeldExact as FaceWeld
 import DASHI.Biology.IITXORGridSynthesisFabricExact as GridFabric
 import DASHI.Biology.IITXORGridOrientationLiftExact as GridOrientation
 import DASHI.Biology.IITXORGridLoopHolonomyExact as GridHolonomy
+import DASHI.Moonshine.C3FourierConjugationExact as Fourier
 import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact as Lila
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
@@ -133,8 +134,7 @@ gridLoopHolonomyBoundary = GridHolonomy.canonicalGridLoopHolonomyBoundary
 gridSocketSwapConjugatesHolonomy :
   (path : GridHolonomy.SocketPath) →
   GridHolonomy.phaseHolonomy (GridHolonomy.swapSocketPath path)
-  ≡ DASHI.Moonshine.C3FourierConjugationExact.inversePhase
-      (GridHolonomy.phaseHolonomy path)
+  ≡ Fourier.inversePhase (GridHolonomy.phaseHolonomy path)
 gridSocketSwapConjugatesHolonomy = GridHolonomy.swapPathConjugatesHolonomy
 
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
