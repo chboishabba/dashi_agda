@@ -46,8 +46,6 @@ class Symbol:
         scope: str | None = None,
         fingerprint: str | None = None,
     ) -> "Symbol":
-        # Scope participates in semantic identity so local binders with the same
-        # name in different declarations remain distinct nodes.
         symbol_id = stable_hash(
             {
                 "module": module,
@@ -160,7 +158,6 @@ class CommitRecord:
     parents: tuple[str, ...]
     refs: tuple[str, ...] = ()
     subject: str = ""
-    body: str = ""
 
     @property
     def shape(self) -> str:
