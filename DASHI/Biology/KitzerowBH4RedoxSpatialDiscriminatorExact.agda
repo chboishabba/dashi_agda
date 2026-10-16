@@ -275,3 +275,44 @@ canonicalRedoxSpatialBoundary =
     false refl
     true refl
     false refl
+
+------------------------------------------------------------------------
+-- TOPOLOGY-RESOLVED POOL BALANCE
+--
+-- The scalar balance remains a useful coarse projection, but the paid evidence
+-- above requires a state space that retains node identity, transport route and
+-- redox/consumer coupling. Numerical edge fluxes remain explicit acquisition
+-- debt rather than being inferred from localization, uptake or coculture data.
+------------------------------------------------------------------------
+
+record TopologyResolvedPoolBalance : Set where
+  constructor topologyResolvedPoolBalance
+  field
+    scalarProjection : Flux.BH4PoolBalance
+    stateNodes : List BH4PoolNode
+    transportAndCouplingEdges : List BH4PoolEdge
+    localBalanceReference : String
+    projectionReference : String
+    topologyResolvedStateRequired : Bool
+    topologyResolvedStateRequiredIsTrue : topologyResolvedStateRequired ≡ true
+    scalarProjectionIsLossy : Bool
+    scalarProjectionIsLossyIsTrue : scalarProjectionIsLossy ≡ true
+    numericEdgeFluxesPaid : Bool
+    numericEdgeFluxesPaidIsFalse : numericEdgeFluxesPaid ≡ false
+    directTransferFluxPaid : Bool
+    directTransferFluxPaidIsFalse : directTransferFluxPaid ≡ false
+
+open TopologyResolvedPoolBalance public
+
+canonicalTopologyResolvedPoolBalance : TopologyResolvedPoolBalance
+canonicalTopologyResolvedPoolBalance =
+  topologyResolvedPoolBalance
+    Flux.canonicalBH4PoolBalance
+    canonicalBH4PoolTopologyNodes
+    canonicalBH4PoolTopologyEdges
+    "for each node v: d[BH4_v]/dt = local synthesis_v + local recycle_v + sum incoming transfer/redox terms - local consumer sinks_v - sum outgoing transfer/loss terms"
+    "summing node-local balances yields the legacy scalar pool equation only after forgetting route, compartment, cell/region identity, bound/free state and transfer topology"
+    true refl
+    true refl
+    false refl
+    false refl
