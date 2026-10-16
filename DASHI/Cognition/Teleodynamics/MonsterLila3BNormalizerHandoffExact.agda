@@ -14,19 +14,20 @@ module DASHI.Cognition.Teleodynamics.MonsterLila3BNormalizerHandoffExact where
 --   * a generic Lean equal-character/simple-representation -> isomorphism
 --     theorem reported cross-kernel.
 --
--- Current master has now sharpened the multiplicity target beyond the older
--- degree/permutation search.  It owns
+-- Current master has sharpened the multiplicity target beyond the older
+-- degree/permutation search.  The selected-phase 12+78 character-family
+-- occurrence is already source-paid there; no further degree/occurrence search
+-- counts as progress.  The canonical representation-native target is
 --
 --     S_zeta = Hom_E(H_zeta , W_zeta)
 --
--- as the canonical representation-native target and requires a proof-bearing
--- linear evaluation/recovery
+-- with a proof-bearing linear evaluation/recovery
 --
 --     H_zeta x S_zeta  <->  W_zeta.
 --
--- It also explicitly refutes the pure Fin-90 permutation route as the actual
--- multiplicity representation.  Fin 90 may be chosen later as a basis
--- coordinate only after the linear Hom-space representation has been paid.
+-- Current master also explicitly refutes the pure Fin-90 permutation route as
+-- the actual multiplicity representation.  Fin 90 may be chosen later as a
+-- basis coordinate only after the linear Hom-space representation is paid.
 --
 -- This is a cross-branch/current-master receipt and experiment handoff only.
 -- It imports no external theorem authority into this branch.
@@ -62,11 +63,12 @@ record MonsterLila3BNormalizerHandoff : Set where
     siblingConcreteHZetaFDRepTransportPaid : Bool
 
     siblingSuzukiMultiplicityHomSpaceTargetReported : Bool
-    siblingSuzuki12Plus78CandidateReported : Bool
-    siblingSuzukiMatcherWritten : Bool
-    siblingSuzukiMatcherExecuted : Bool
-    siblingPhaseResolvedSuzukiOrientationPaid : Bool
-    siblingFullWZetaTensorRecoveryPaid : Bool
+    siblingSuzuki12Plus78CharacterOccurrencePaid : Bool
+    siblingPureFin90PermutationRouteRefuted : Bool
+    siblingActualEquivariantHomCarrierConstructed : Bool
+    siblingActualLinearEvaluationInverseConstructed : Bool
+    siblingActualCocycleLiftInstantiated : Bool
+    siblingActualLinearMultiplicityRepresentationPaid : Bool
     fin90IsPrimaryRepresentationObject : Bool
 
     siblingFullNormalizerCentralCorrectionsPaid : Bool
@@ -85,15 +87,6 @@ record MonsterLila3BNormalizerHandoff : Set where
     sameActionFitWouldCreatePhysicalMechanismIdentity : Bool
     sameActionFitWouldCreatePhenomenalIdentity : Bool
 
-    -- Current-master representation-native multiplicity frontier.
-    currentMasterLinearHomSpaceOwnerPresent : Bool
-    currentMasterPureFin90PermutationRouteRefuted : Bool
-    currentMasterSourcePaidCharacterAvailable : Bool
-    currentMasterActualEquivariantHomCarrierConstructed : Bool
-    currentMasterActualLinearEvaluationInverseConstructed : Bool
-    currentMasterActualCocycleLiftInstantiated : Bool
-    currentMasterActualLinearMultiplicityRepresentationPaid : Bool
-
     note : String
 open MonsterLila3BNormalizerHandoff public
 
@@ -105,13 +98,12 @@ canonicalMonsterLila3BNormalizerHandoff =
     1098
     true true true true true true true true true true
     true true false
-    true true true false false false false
+    true true true false false false false false
     false false
     true true true true true true
     false false
     false false false
-    true true true false false false false
-    "Monster-LILA's engineering permutation remains only a heuristic. The finite source/action comparator and Schrodinger irreducibility are paid far beyond the PoC. Current master has already moved past the pure Fin90/permutation route: the canonical next object is the actual linear multiplicity Hom space S_zeta = Hom_E(H_zeta,W_zeta), with proof-bearing evaluation/recovery H_zeta x S_zeta <-> W_zeta and an instantiated projective-cocycle cancellation action on those same carriers. The source-paid character and 12+78 decomposition are inputs, not substitutes for the literal Hom carrier, evaluation inverse or inertia representation. Fin90 is at most a later basis coordinate."
+    "Monster-LILA's engineering permutation remains only a heuristic. The finite source/action comparator, Schrodinger irreducibility, and selected-phase 12+78 character-family occurrence are already paid beyond the PoC. Current master has refuted the pure Fin90 permutation route. The live representation theorem is the actual linear multiplicity Hom space S_zeta = Hom_E(H_zeta,W_zeta), with proof-bearing evaluation/recovery H_zeta x S_zeta <-> W_zeta and the existing projective-cocycle cancellation instantiated on those same carriers. Character occurrence, degree 90 arithmetic and Fin90 basis labels cannot create that linear representation or its action."
 
 record MonsterLila3BEmpiricalAssay : Set where
   constructor monster-lila-3b-empirical-assay
