@@ -10,7 +10,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragmentValid
 --     -> literal three-rule fragment
 --     -> width+1 exact work bound
 --     -> arbitrary-word StandardExactRun + quiescent endpoint
---     -> explicit Pareto comparison with the exact-T phase-lift compiler.
+--     -> explicit Pareto comparison with the exact-T phase-lift compiler
+--     -> behavioural-specializer frontier rollup.
 ------------------------------------------------------------------------
 
 open import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragmentExact
@@ -26,3 +27,4 @@ open import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragment
 import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownCostValidation
 import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownExactRunValidation
 import DASHI.Mathematics.Complexity.PNotEqualsNPPhaseCounterParetoValidation
+import DASHI.Mathematics.Complexity.PNotEqualsNPBehavioralSpecializerFrontierValidation
