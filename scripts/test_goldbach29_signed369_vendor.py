@@ -7,6 +7,7 @@ BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeEx
 MACRO = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29SuccessMacroExact.agda"
 RECEIPT = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29ReductionReceiptExact.agda"
 SEMANTICS = ROOT / "DASHI" / "ComputerScience" / "Goldbach29ExternalHaltingSemanticsExact.agda"
+AUDIT30 = ROOT / "DASHI" / "ComputerScience" / "Goldbach30HaltingSourceAuditExact.agda"
 HALTING = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29HaltingConsumerCompilerExact.agda"
 SOTA = ROOT / "DASHI" / "ComputerScience" / "GoldbachMachineReductionSOTAExact.agda"
 VIS = ROOT / "DASHI" / "ComputerScience" / "Goldbach30To29VisualizationConsumerExact.agda"
@@ -22,6 +23,8 @@ def test_vendor_pin_and_attribution():
     assert "1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach30/Program.lean" in text
     assert "428e2366045cb0b728115777df8bef14318a3bcf" in text
     assert "d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Main.lean" in text
+    assert "7added5000a75226a834ba7aab08a7380f0c70b3" in text
+    assert "Goldbach30/Main.lean" in text
     assert "AGPL-3.0" in text
     assert "Goldbach29" in text and "Goldbach30" in text
     assert "fstep_enc" in text
@@ -67,6 +70,16 @@ def test_external_halting_semantics_is_cross_prover_only():
     assert "externalGoldbach29HaltingSemanticsSourcePaid" in text
     assert "agdaGoldbach29HaltingSemanticsPaid = false" in text
     assert "goldbachConjectureProvedByUpstreamTheorem = false" in text
+
+
+def test_goldbach30_commit_claim_is_not_promoted_without_source_file():
+    text = AUDIT30.read_text()
+    assert "7added5000a75226a834ba7aab08a7380f0c70b3" in text
+    assert "goldbachProg_halts_iff" in text
+    assert "developmentNarrativeClaim" in text
+    assert "goldbach30NarrativeHaltingClaimFound = true" in text
+    assert "goldbach30FormalHaltingSourceFound = false" in text
+    assert "goldbach30MainFilePresentInAuditedTree = false" in text
 
 
 def test_halting_compiler_reduces_final_leaf_to_goldbach30_attachment():
@@ -125,6 +138,7 @@ def test_aggregate_and_workflow_own_the_new_surface():
     assert "Goldbach30To29SuccessMacroExact" in aggregate
     assert "Goldbach30To29ReductionReceiptExact" in aggregate
     assert "Goldbach29ExternalHaltingSemanticsExact" in aggregate
+    assert "Goldbach30HaltingSourceAuditExact" in aggregate
     assert "Goldbach30To29HaltingConsumerCompilerExact" in aggregate
     assert "GoldbachMachineReductionSOTAExact" in aggregate
     assert "Goldbach30To29VisualizationConsumerExact" in aggregate
