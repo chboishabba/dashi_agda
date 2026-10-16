@@ -12,8 +12,10 @@ def test_vendor_pin_and_attribution():
     text = PIN.read_text()
     assert "meta-introspector/aok" in text
     assert "c168223e96f7acc6179044f2a365a92db2e350c3" in text
+    assert "1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach29/Program.lean" in text
     assert "AGPL-3.0" in text
     assert "Goldbach29" in text
+    assert "fstep_enc" in text
     assert "Mike Dupont" in text or "meta-introspector" in text
 
 
