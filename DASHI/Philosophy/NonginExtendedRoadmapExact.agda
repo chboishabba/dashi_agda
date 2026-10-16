@@ -5,9 +5,10 @@ module DASHI.Philosophy.NonginExtendedRoadmapExact where
 --
 -- Nongin core closure and attached research-lineage continuation are distinct.
 -- The wave/369 cross-pollination advances the attached higher-descent lane to a
--- concrete full-site non-discrete groupoid presheaf and setoid-truncated higher
--- stack on the triadic site.  Arbitrary hypercover certification remains the
--- hypersheaf-specific frontier.
+-- concrete full-site non-discrete groupoid presheaf, effective stack, setoid-
+-- truncated higher stack, and finite one-truncated hypersheaf on the exact
+-- triadic topology.  Arbitrary infinity-hypercover certification remains a
+-- strictly stronger external frontier.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -61,9 +62,13 @@ higherStackPaid :
   Attached.higherStackPaid attachedBoundary ≡ true
 higherStackPaid = refl
 
-hypersheafNowIsArbitraryHypercoverFrontier :
-  Attached.arbitraryHypercoverHypersheafStillOpen attachedBoundary ≡ true
-hypersheafNowIsArbitraryHypercoverFrontier = refl
+finiteTriadicHypersheafPaid :
+  Attached.finiteTriadicHypersheafPaid attachedBoundary ≡ true
+finiteTriadicHypersheafPaid = refl
+
+arbitraryInfinityHypersheafStillOpen :
+  Attached.arbitraryInfinityHypersheafStillOpen attachedBoundary ≡ true
+arbitraryInfinityHypersheafStillOpen = refl
 
 physicalPromotionRemainsIndependent :
   Attached.attachmentClaimsPhysicalLawAlreadyPromoted attachedBoundary ≡ false
@@ -82,7 +87,8 @@ record NonginExtendedRoadmapBoundary : Set where
     fullSiteNonDiscreteGroupoidPresheafPaid : Bool
     effectiveStackPaid : Bool
     higherStackPaid : Bool
-    hypersheafReducedToArbitraryHypercoverFrontier : Bool
+    finiteTriadicHypersheafPaid : Bool
+    arbitraryInfinityHypersheafStillOpen : Bool
     descendantCertificationBoundariesPreserved : Bool
     roadmapDetachesDescendantProgrammes : Bool
 
@@ -92,4 +98,4 @@ canonicalNonginExtendedRoadmapBoundary : NonginExtendedRoadmapBoundary
 canonicalNonginExtendedRoadmapBoundary =
   nongin-extended-roadmap-boundary
     true true true true true true true
-    true true true true true false
+    true true true true true true false
