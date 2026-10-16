@@ -142,6 +142,10 @@ leanCanonicalCubeFibreCertificateNowRecorded :
   LeanSplit.canonicalCubeFibreCertificateObserved ≡ true
 leanCanonicalCubeFibreCertificateNowRecorded = refl
 
+leanArbitraryOrderThreeKernelNowRecorded :
+  LeanSplit.arbitraryOrderThreeKernelEqualsCubesObserved ≡ true
+leanArbitraryOrderThreeKernelNowRecorded = refl
+
 leanSplitJacobiNormPrimeNowRecorded :
   LeanSplit.splitJacobiNormPrimeObserved ≡ true
 leanSplitJacobiNormPrimeNowRecorded = refl
@@ -166,13 +170,25 @@ leanAllGoodPrimeLocalClassificationRecorded :
   LeanSplit.allGoodPrimeLocalClassificationObserved ≡ true
 leanAllGoodPrimeLocalClassificationRecorded = refl
 
-leanBadPrimeLiteralReductionRecorded :
-  LeanSplit.badPrimeThreeLiteralReductionObserved ≡ true
-leanBadPrimeLiteralReductionRecorded = refl
+leanBadPrimeTwoLiteralReductionRecorded :
+  LeanSplit.badPrimeTwoLiteralReductionObserved ≡ true
+leanBadPrimeTwoLiteralReductionRecorded = refl
 
-leanBadPrimeLocalFactorStillSeparate :
-  LeanSplit.badPrimeThreeEllipticLocalFactorObserved ≡ false
-leanBadPrimeLocalFactorStillSeparate = refl
+leanBadPrimeThreeLiteralReductionRecorded :
+  LeanSplit.badPrimeThreeLiteralReductionObserved ≡ true
+leanBadPrimeThreeLiteralReductionRecorded = refl
+
+leanBadPrimeLocalFactorsStillSeparate :
+  LeanSplit.badPrimeEllipticLocalFactorsObserved ≡ false
+leanBadPrimeLocalFactorsStillSeparate = refl
+
+leanExternal36a1ProvenanceRecorded :
+  LeanSplit.external36a1ProvenanceReceiptObserved ≡ true
+leanExternal36a1ProvenanceRecorded = refl
+
+leanExternalMetadataNotPromotedToProofAuthority :
+  LeanSplit.externalMetadataPromotedToProofAuthority ≡ false
+leanExternalMetadataNotPromotedToProofAuthority = refl
 
 leanSplitReceiptDoesNotImportKernelAuthority :
   LeanSplit.leanProofObjectImportedIntoAgda ≡ false
@@ -181,10 +197,6 @@ leanSplitReceiptDoesNotImportKernelAuthority = refl
 leanSplitReceiptDoesNotManufactureAgdaTheorem :
   LeanSplit.agdaSplitPrimeTheoremInhabitedFromReceipt ≡ false
 leanSplitReceiptDoesNotManufactureAgdaTheorem = refl
-
-leanSplitReceiptDoesNotManufactureExternalAuthority :
-  LeanSplit.externalScientificSourceAcquiredByThisReceipt ≡ false
-leanSplitReceiptDoesNotManufactureExternalAuthority = refl
 
 cmFaithfulnessStillSeparate :
   LeanCM.leanFaithfulGeometricCMEmbeddingObserved ≡ false
