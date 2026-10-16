@@ -1,0 +1,3 @@
+module DASHI.EverythingGoldbach29Signed369VendorExact where
+
+import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact
