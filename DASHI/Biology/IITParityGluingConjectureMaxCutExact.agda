@@ -26,6 +26,7 @@ import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact as Broken
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact as FullFace
 import DASHI.Biology.IITFaceAwareTriadicCausalPairExact as FaceAware
 import DASHI.Biology.IITXORGridSynthesisFabricExact as GridFabric
+import DASHI.Biology.IITXORGridOrientationLiftExact as GridOrientation
 import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact as Lila
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
@@ -100,6 +101,16 @@ gridWideXorIgnoresInputSwap :
   ≡ GridFabric.xorFabricStep fabric state target
 gridWideXorIgnoresInputSwap = GridFabric.xorStepIgnoresLocalInputOrder
 
+gridWideTernaryDifferenceConsumesInputOrder :
+  {Site : Set} →
+  (fabric : GridFabric.TwoInputFabric Site) →
+  (state : GridOrientation.TriField Site) →
+  (target : Site) →
+  GridOrientation.triDiffFabricStep (GridFabric.swapFabricInputs fabric) state target
+  ≡ Lift.triNeg (GridOrientation.triDiffFabricStep fabric state target)
+gridWideTernaryDifferenceConsumesInputOrder =
+  GridOrientation.triDiffStepSwapNegatesPointwise
+
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
 
@@ -116,6 +127,8 @@ record ParityGluingConjectureStatus : Set where
     binaryGridGlobalStepFactorsThroughLocalSynthesisKernelPaid : Bool
     binaryGridNamedInputOrderingRetainedByFabricKernelPaid : Bool
     binaryXorQuotientsInputOrderingKernelPaid : Bool
+    sameGridFabricSupportsOrientationSensitiveTernaryChannelKernelPaid : Bool
+    ternaryDifferenceGridSwapNegatesKernelPaid : Bool
     higherOrderGridOrganizationRequiresHigherArityLocalGate : Bool
 
     ternaryAffineEssentialClassifiedTwelve : Bool
@@ -151,7 +164,7 @@ canonicalParityGluingConjectureStatus : ParityGluingConjectureStatus
 canonicalParityGluingConjectureStatus =
   parity-gluing-conjecture-status
     true true false
-    true true true true false
+    true true true true true true false
     true true true true false
     true true true true true false true false
     true true true
@@ -162,6 +175,7 @@ record ParityGluingMaxCutFrontier : Set where
   field
     remainingBooleanWorkIsMoreTruthTableEnumeration : Bool
     remainingBinaryGridWorkIsMoreLocalCellEnumeration : Bool
+    remainingBinaryTernaryGridWorkIsMoreSocketRecharting : Bool
     remainingTernaryWorkIsMoreAffineEnumeration : Bool
     remainingCubeWorkIsConcreteSameObjectOperatorProof : Bool
     remainingIITWorkIsFullCESMatchedHigherGluingEvaluation : Bool
@@ -171,4 +185,4 @@ record ParityGluingMaxCutFrontier : Set where
 canonicalParityGluingMaxCutFrontier : ParityGluingMaxCutFrontier
 canonicalParityGluingMaxCutFrontier =
   parity-gluing-max-cut-frontier
-    false false false false true false true
+    false false false false false true false true
