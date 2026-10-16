@@ -13,6 +13,8 @@ import DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceip
 import DASHI.Mathematics.CrossPollination.EisensteinLeanJZeroCMOrderActionReceiptValidation
 import DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorReceiptExact as LeanInert
 import DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorReceiptValidation
+import DASHI.Mathematics.CrossPollination.EisensteinLeanSplitPrimeLocalClosureReceiptExact as LeanSplit
+import DASHI.Mathematics.CrossPollination.EisensteinLeanSplitPrimeLocalClosureReceiptValidation
 import DASHI.Physics.ThreeBody.EisensteinC3FourierExact as ThreeBody
 import DASHI.Physics.ThreeBody.EisensteinC3FourierValidation
 import DASHI.Mathematics.Arithmetic.EisensteinJZeroCubicSymmetryExact as Cubic
@@ -63,6 +65,10 @@ threeBodyEdgeIsExactOmegaEigenAction =
 jZeroCubicEdgeHasOrderThreeAction :
   (B : ECarrier.Eisenstein) → Cubic.EisensteinCubicC3Action B
 jZeroCubicEdgeHasOrderThreeAction = Gate.eisensteinCubicActionAvailable
+
+------------------------------------------------------------------------
+-- Original arithmetic and same-carrier CM receipts.
+------------------------------------------------------------------------
 
 leanUniversalCoefficientDonorRecorded :
   LeanReceipt.leanUniversalCoefficientSourceObserved ≡ true
@@ -116,6 +122,10 @@ leanCMReceiptDoesNotImportKernelAuthority :
   LeanCM.leanProofObjectImportedIntoAgda ≡ false
 leanCMReceiptDoesNotImportKernelAuthority = refl
 
+------------------------------------------------------------------------
+-- Historical inert receipt plus the newer split/local closure receipt.
+------------------------------------------------------------------------
+
 leanInertSamePrimeWeldRecorded :
   LeanInert.samePrimeWeldObserved ≡ true
 leanInertSamePrimeWeldRecorded = refl
@@ -128,38 +138,82 @@ leanInertLocalEulerShapeRecorded :
   LeanInert.inertLocalEulerShapeObserved ≡ true
 leanInertLocalEulerShapeRecorded = refl
 
-leanCubicJacobiCompilerRecorded :
-  LeanInert.genericCubicJacobiCompilerObserved ≡ true
-leanCubicJacobiCompilerRecorded = refl
-
-leanOrderThreeMulCharExistenceRecorded :
-  LeanInert.mathlibOrderThreeMulCharExistenceObserved ≡ true
-leanOrderThreeMulCharExistenceRecorded = refl
-
-cubeFibreCertificateStillSeparate :
+-- The older inert receipt correctly records what was not yet paid at its own
+-- observed commit.  The newer receipt below records the subsequent closure.
+oldInertReceiptHadNoCubeFibreCertificate :
   LeanInert.canonicalCubeFibreCharacterCertificateObserved ≡ false
-cubeFibreCertificateStillSeparate = refl
+oldInertReceiptHadNoCubeFibreCertificate = refl
 
-jacobiEisensteinEvaluationStillSeparate :
-  LeanInert.jacobiSumEisensteinPrimeEvaluationObserved ≡ false
-jacobiEisensteinEvaluationStillSeparate = refl
+oldInertReceiptHadNoSplitTrace :
+  LeanInert.splitPrimeTraceObserved ≡ false
+oldInertReceiptHadNoSplitTrace = refl
 
-leanInertReceiptDoesNotCollapseLocalFactors :
-  LeanInert.dirichletLocalFactorIdentifiedWithEllipticEulerFactor ≡ false
-leanInertReceiptDoesNotCollapseLocalFactors = refl
+leanCanonicalCubeFibreCertificateNowRecorded :
+  LeanSplit.canonicalCubeFibreCertificateObserved ≡ true
+leanCanonicalCubeFibreCertificateNowRecorded = refl
+
+leanSplitJacobiNormPrimeNowRecorded :
+  LeanSplit.splitJacobiNormPrimeObserved ≡ true
+leanSplitJacobiNormPrimeNowRecorded = refl
+
+leanLiteralEisensteinQAPullbackNowRecorded :
+  LeanSplit.literalEisensteinQAPullbackObserved ≡ true
+leanLiteralEisensteinQAPullbackNowRecorded = refl
+
+leanSplitPrimeTraceNowRecorded :
+  LeanSplit.splitPrimeTraceObserved ≡ true
+leanSplitPrimeTraceNowRecorded = refl
+
+leanSplitPrimeEulerNowRecorded :
+  LeanSplit.splitPrimeLocalEulerObserved ≡ true
+leanSplitPrimeEulerNowRecorded = refl
+
+leanSixUnitNormalizationNowRecorded :
+  LeanSplit.sixUnitNormalizationObserved ≡ true
+leanSixUnitNormalizationNowRecorded = refl
+
+leanAllGoodPrimeLocalClassificationRecorded :
+  LeanSplit.allGoodPrimeLocalClassificationObserved ≡ true
+leanAllGoodPrimeLocalClassificationRecorded = refl
+
+leanBadPrimeLiteralReductionRecorded :
+  LeanSplit.badPrimeThreeLiteralReductionObserved ≡ true
+leanBadPrimeLiteralReductionRecorded = refl
+
+leanBadPrimeLocalFactorStillSeparate :
+  LeanSplit.badPrimeThreeEllipticLocalFactorObserved ≡ false
+leanBadPrimeLocalFactorStillSeparate = refl
+
+leanSplitReceiptDoesNotImportKernelAuthority :
+  LeanSplit.leanProofObjectImportedIntoAgda ≡ false
+leanSplitReceiptDoesNotImportKernelAuthority = refl
+
+leanSplitReceiptDoesNotManufactureAgdaTheorem :
+  LeanSplit.agdaSplitPrimeTheoremInhabitedFromReceipt ≡ false
+leanSplitReceiptDoesNotManufactureAgdaTheorem = refl
+
+leanSplitReceiptDoesNotManufactureExternalAuthority :
+  LeanSplit.externalScientificSourceAcquiredByThisReceipt ≡ false
+leanSplitReceiptDoesNotManufactureExternalAuthority = refl
+
+------------------------------------------------------------------------
+-- Remaining genuine boundaries.
+------------------------------------------------------------------------
 
 cmFaithfulnessStillSeparate :
   LeanCM.leanFaithfulGeometricCMEmbeddingObserved ≡ false
 cmFaithfulnessStillSeparate = refl
 
-splitPrimeTraceStillSeparate :
-  LeanInert.splitPrimeTraceObserved ≡ false
-splitPrimeTraceStillSeparate = refl
+geometricDegreeStillSeparate :
+  LeanSplit.geometricEndomorphismDegreeNormObserved ≡ false
+geometricDegreeStillSeparate = refl
 
-heckeAuthorityStillSeparate :
-  LeanCM.leanHeckeCharacterObserved ≡ false
-heckeAuthorityStillSeparate = refl
+groessencharacterStillSeparate :
+  LeanSplit.groessencharacterObserved ≡ false
+groessencharacterStillSeparate = refl
 
-ellipticLSeriesAuthorityStillSeparate :
-  LeanCM.leanEllipticLSeriesAgreementObserved ≡ false
-ellipticLSeriesAuthorityStillSeparate = refl
+globalEllipticLSeriesAuthorityStillSeparate :
+  LeanSplit.globalEllipticLSeriesAgreementObserved ≡ false
+globalEllipticLSeriesAuthorityStillSeparate = refl
+
+end
