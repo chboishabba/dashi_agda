@@ -26,6 +26,7 @@ import DASHI.Biology.IITParityTorqueGluingBoundaryExact
 import DASHI.Biology.IITBinaryTernaryParityTorqueLiftExact
 import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
 import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
+import DASHI.Biology.IITFaceAwareTriadicCausalPairExact
 import DASHI.Biology.IITCyclotomicFourierObserverExact
 import DASHI.Biology.IITBalancedTernary369HierarchyExact
 import DASHI.Biology.IIT369PantsGluingBridgeExact
@@ -37,6 +38,7 @@ import DASHI.Biology.IITTernaryLatticeStateSpaceScalingExact
 import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact
 import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact
 import DASHI.Biology.IITCubeConcreteTorusImageExact
+import DASHI.Biology.IITCubeDiagonalStabilizerExact
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact
 import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
 import DASHI.Biology.IITHyperfabricCausalCellNetworkExact
@@ -52,5 +54,6 @@ import DASHI.Biology.IITHyperfabricCompletionReceiptExact
 import DASHI.Biology.IITParityGluingConjectureMaxCutExact
 import DASHI.Reasoning.IITHyperfabricPartitionBridgeExact
 import DASHI.Reasoning.IITBrainMaleCNSConsumerBoundaryExact
+import DASHI.Reasoning.LILACubeEmpiricalSameObjectReceiptExact
 import DASHI.Moonshine.IITMonsterInvariantBoundaryExact
 import DASHI.Analysis.IITZetaGeneratingBoundaryExact
