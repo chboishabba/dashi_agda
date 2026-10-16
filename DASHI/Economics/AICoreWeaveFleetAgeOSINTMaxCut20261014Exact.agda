@@ -13,6 +13,7 @@ import DASHI.Economics.AICoreWeaveBookStockYouth20261014Exact as Book
 import DASHI.Economics.AICoreWeaveVintageWall20261014Exact as Wall
 import DASHI.Economics.AICoreWeaveMultiGenerationCommercialCoexistence20261014Exact as Coexistence
 import DASHI.Economics.AICoreWeaveGenerationPriceLadder20261014Exact as Price
+import DASHI.Economics.AICoreWeaveSameObjectFinancingClock20261016Exact as FinanceClock
 
 record FleetAgeOSINTStatus : Set where
   constructor fleet-age-osint-status
@@ -26,6 +27,7 @@ record FleetAgeOSINTStatus : Set where
     commercialGenerationPriceCrossSectionPaid : Bool
     capacityToHardwareNonDescentPaid : Bool
     selected36To48MonthVintageWallPaid : Bool
+    sameObjectFinancingClockCorrectionPaid : Bool
     exactSerialHardwareAgeDistributionPaid : Bool
     actualRefreshRetirementHistoryPaid : Bool
     growthVsReplacementCapitalisationPaid : Bool
@@ -36,63 +38,55 @@ open FleetAgeOSINTStatus public
 
 coreWeaveFleetAgeOSINTStatus : FleetAgeOSINTStatus
 coreWeaveFleetAgeOSINTStatus = fleet-age-osint-status
-  true true true true true true true true true
+  true true true true true true true true true true
   false false false false false
 
-capacityVintageIsNowPaid :
-  capacityVintageDistributionPaid coreWeaveFleetAgeOSINTStatus ≡ true
+capacityVintageIsNowPaid : capacityVintageDistributionPaid coreWeaveFleetAgeOSINTStatus ≡ true
 capacityVintageIsNowPaid = refl
 
-exactHardwareAgeStillOpen :
-  exactSerialHardwareAgeDistributionPaid coreWeaveFleetAgeOSINTStatus ≡ false
+exactHardwareAgeStillOpen : exactSerialHardwareAgeDistributionPaid coreWeaveFleetAgeOSINTStatus ≡ false
 exactHardwareAgeStillOpen = refl
 
-refreshHistoryStillOpen :
-  actualRefreshRetirementHistoryPaid coreWeaveFleetAgeOSINTStatus ≡ false
+refreshHistoryStillOpen : actualRefreshRetirementHistoryPaid coreWeaveFleetAgeOSINTStatus ≡ false
 refreshHistoryStillOpen = refl
 
 selectedCapacityMedianIs6To12Months :
   (Capacity.medianCapacityVintageAgeLowerMonths Capacity.coreWeaveJune2026CapacityVintage ≡ 6) ×
   (Capacity.medianCapacityVintageAgeUpperMonths Capacity.coreWeaveJune2026CapacityVintage ≡ 12)
-selectedCapacityMedianIs6To12Months =
-  Capacity.medianCapacityVintageAgeLowerMonthsIs6 ,
-  Capacity.medianCapacityVintageAgeUpperMonthsIs12
+selectedCapacityMedianIs6To12Months = Capacity.medianCapacityVintageAgeLowerMonthsIs6 , Capacity.medianCapacityVintageAgeUpperMonthsIs12
 
 selectedCapacityMeanIs748To1470HundredthsMonths :
   (Capacity.weightedMeanAgeLowerHundredthsMonths Capacity.coreWeaveJune2026CapacityVintage ≡ 748) ×
   (Capacity.weightedMeanAgeUpperHundredthsMonths Capacity.coreWeaveJune2026CapacityVintage ≡ 1470)
-selectedCapacityMeanIs748To1470HundredthsMonths =
-  Capacity.weightedMeanAgeLowerHundredthsIs748 ,
-  Capacity.weightedMeanAgeUpperHundredthsIs1470
+selectedCapacityMeanIs748To1470HundredthsMonths = Capacity.weightedMeanAgeLowerHundredthsIs748 , Capacity.weightedMeanAgeUpperHundredthsIs1470
 
-capacityCannotRecoverHardwareAge :
-  Descent.FactorsThrough NonDescent.capacityObserver NonDescent.hardwareAgeConsumer → ⊥
+capacityCannotRecoverHardwareAge : Descent.FactorsThrough NonDescent.capacityObserver NonDescent.hardwareAgeConsumer → ⊥
 capacityCannotRecoverHardwareAge = NonDescent.capacityVintageCannotFactorHardwareAge
 
-frontierCadencePressurePaid :
-  Generation.frontierSuccessorArrivesBeforeBookLife Generation.coreWeaveSelectedFrontierCadence ≡ true
+frontierCadencePressurePaid : Generation.frontierSuccessorArrivesBeforeBookLife Generation.coreWeaveSelectedFrontierCadence ≡ true
 frontierCadencePressurePaid = Generation.frontierCadenceShorterThanBookLife
 
-multiGenerationCommercialCoexistenceIsPaid :
-  Coexistence.h100StillOffered Coexistence.coreWeaveCurrentCommercialCoexistence ≡ true
+multiGenerationCommercialCoexistenceIsPaid : Coexistence.h100StillOffered Coexistence.coreWeaveCurrentCommercialCoexistence ≡ true
 multiGenerationCommercialCoexistenceIsPaid = Coexistence.h100StillOfferedReceipt
 
-currentA100CommercialPriceCoordinatePaid :
-  Price.a100PerGPUHourMills Price.coreWeaveCurrentGenerationPriceLadder ≡ 2700
+currentA100CommercialPriceCoordinatePaid : Price.a100PerGPUHourMills Price.coreWeaveCurrentGenerationPriceLadder ≡ 2700
 currentA100CommercialPriceCoordinatePaid = Price.a100PerGPUHourMillsIs2700
 
-bookStockProxyDoesNotCloseHardwareAge :
-  Book.identifiesHardwareAge Book.coreWeaveBookStockYouth ≡ false
+bookStockProxyDoesNotCloseHardwareAge : Book.identifiesHardwareAge Book.coreWeaveBookStockYouth ≡ false
 bookStockProxyDoesNotCloseHardwareAge = refl
 
-selectedVintageWallShareIs5666Bp :
-  Wall.selectedCumulativeShareBp Wall.coreWeaveSelectedVintageWall ≡ 5666
+selectedVintageWallShareIs5666Bp : Wall.selectedCumulativeShareBp Wall.coreWeaveSelectedVintageWall ≡ 5666
 selectedVintageWallShareIs5666Bp = Wall.selectedShareBpIs5666
 
-longitudinalPriceDecayStillOpen :
-  longitudinalGenerationPriceDecayPaid coreWeaveFleetAgeOSINTStatus ≡ false
+sameObjectFinancingClockCorrectionIsPaid : sameObjectFinancingClockCorrectionPaid coreWeaveFleetAgeOSINTStatus ≡ true
+sameObjectFinancingClockCorrectionIsPaid = refl
+
+sameObjectSixYearClockPaid : FinanceClock.commonObservedContractualGPUUsefulLifeMonths FinanceClock.coreWeaveSameObjectFinancingClock ≡ 72
+sameObjectSixYearClockPaid = FinanceClock.sameObjectSixYearDepreciationPaid
+
+longitudinalPriceDecayStillOpen : longitudinalGenerationPriceDecayPaid coreWeaveFleetAgeOSINTStatus ≡ false
 longitudinalPriceDecayStillOpen = refl
 
 boundary : String
 boundary =
-  "The CoreWeave installed-age residual is materially reduced rather than simply unknown. Public power disclosures pay a capacity-vintage distribution with a selected June-2026 median in the 6-12 month band and an interval-weighted mean of about 7.48-14.70 months. Filing book-stock growth independently indicates a rapidly expanding/young capital base, while public H100/H200/GB200/GB300/Rubin milestones pay a frontier-generation cadence much shorter than the 72-month accounting life. Current commercial listings simultaneously show A100/H100/H200 and Blackwell generations remaining offered after Rubin production began, and supply a same-date selected per-GPU listed-price ladder from A100 USD2.70/h through GB200 USD10.50/h. This blocks a hard successor-arrival retirement cliff and supports a tiered commercial-value interpretation, but the cross-section is not a longitudinal depreciation or realised-ASP curve. Composing capacity vintages with the separately sourced 36-48 month lender horizon yields a dated exposure wall: 56.66 percent of the selected 1.5GW floor has entered the 36-month window by end-2028, and the same share has entered the 48-month window by end-2029. Canonical non-descent still blocks exact hardware-age recovery when in-place refresh is possible. Serial-level age/generation shares, actual retirements/refreshes, replacement-vs-growth capitalisation, longitudinal generation-specific utilisation/price decay and realised economic-obsolescence cash burden remain empirical."
+  "The CoreWeave installed-age residual is materially reduced rather than simply unknown. Public power disclosures pay a capacity-vintage distribution with a selected June-2026 median in the 6-12 month band and an interval-weighted mean of about 7.48-14.70 months. Filing book-stock growth independently indicates a rapidly expanding/young capital base, while public H100/H200/GB200/GB300/Rubin milestones pay a frontier-generation cadence much shorter than the 72-month accounting life. Current commercial listings simultaneously show older and Blackwell generations and supply a same-date selected per-GPU listed-price ladder, blocking a hard successor-arrival retirement cliff. The selected 36/48-month vintage wall is retained only as a generic market-horizon stress scenario: primary CoreWeave GPU-backed credit agreements now pay same-object contractual depreciation bases of roughly 66-78 months, commonly six years, so the earlier 24-36 month CoreWeave accounting-versus-financing mismatch is not promotable. Canonical non-descent still blocks exact hardware-age recovery when in-place refresh is possible. Serial-level age/generation shares, actual retirements/refreshes, replacement-vs-growth capitalisation, longitudinal realised utilisation/ASP/resale and economic-obsolescence cash burden remain empirical."
