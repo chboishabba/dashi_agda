@@ -10,6 +10,7 @@ from typing import Optional
 from . import discovery_catalog
 from .discovery import classify_surface_role, make_fingerprint
 from .repo_index_bridge import RepoIndexReader
+from .repository_inventory import ensure_inventory_schema
 
 
 _STAMP_KEY = "semantic_repo_signature_overlay_stamp"
@@ -22,23 +23,31 @@ def _repo_stamp(reader: RepoIndexReader) -> Optional[str]:
         return None
     try:
         rows = reader.connection.execute(
-            "SELECT key, value FROM meta WHERE key IN ('schema_version', 'generated_at')"
+            """
+            SELECT key, value FROM repository_meta
+            WHERE key IN (
+                'legacy_repo_index_schema',
+                'legacy_repo_index_generated_at',
+                'inventory_updated_ns'
+            )
+            """
         ).fetchall()
     except sqlite3.DatabaseError:
         return None
-    values = {row["key"]: row["value"] for row in rows}
-    schema = values.get("schema_version")
-    generated = values.get("generated_at")
-    if schema is None:
-        return None
+    values = {str(row[0]): str(row[1]) for row in rows}
+    schema = values.get("legacy_repo_index_schema", "native")
+    generated = values.get("inventory_updated_ns") or values.get("legacy_repo_index_generated_at")
     return "{}:{}".format(schema, generated or "unknown")
 
 
 def _overlay_count(connection: sqlite3.Connection) -> int:
-    row = connection.execute(
-        "SELECT count(*) FROM semantic_symbols WHERE kind = 'repo-signature'"
-    ).fetchone()
-    return int(row[0])
+    try:
+        row = connection.execute(
+            "SELECT count(*) FROM semantic_symbols WHERE kind = 'repo-signature'"
+        ).fetchone()
+    except sqlite3.DatabaseError:
+        return 0
+    return int(row[0]) if row is not None else 0
 
 
 def overlay_is_fresh(reader: RepoIndexReader, connection: sqlite3.Connection) -> bool:
@@ -63,7 +72,7 @@ def overlay_is_fresh(reader: RepoIndexReader, connection: sqlite3.Connection) ->
 
 def _signature_text(root: Path, item: dict) -> str:
     kind = item.get("kind")
-    if kind not in {"function", "data", "record", "postulate"}:
+    if kind not in {"function", "signature", "data", "record", "postulate"}:
         return ""
     path = root / item["file"]
     try:
@@ -75,7 +84,7 @@ def _signature_text(root: Path, item: dict) -> str:
     block = lines[start:end]
     if not block:
         return ""
-    if kind == "function":
+    if kind in {"function", "signature"}:
         name = re.escape(str(item["name"]))
         collected = []
         started = False
@@ -111,14 +120,16 @@ def sync_repo_signatures(
     *,
     force: bool = False,
 ) -> dict:
-    """Persist shallow type signatures for repo-index symbols into preflight.
+    """Compatibility enrichment for legacy repo-index callers.
 
-    Source locations from repo-index are trusted for this enrichment only when
-    its indexed file surface is complete and fresh. The overlay adds type-shape
-    searchability; repo-index remains the identity/status/reference authority.
+    The canonical producer is `dashi-repo index`. This helper retains its old
+    overlay result for regression compatibility while also writing the same
+    signature fingerprints into normalized `repo_symbol_signatures`, which is
+    the production discovery surface.
     """
 
     discovery_catalog.ensure_catalog_schema(connection)
+    ensure_inventory_schema(connection)
     if not reader.available:
         return {
             "updated": False,
@@ -148,7 +159,7 @@ def sync_repo_signatures(
     connection.execute("DELETE FROM semantic_symbols WHERE kind = 'repo-signature'")
     by_file = defaultdict(list)
     for item in reader.all_agda_symbols(include_history=True):
-        if item.get("kind") in {"function", "data", "record", "postulate"}:
+        if item.get("kind") in {"function", "signature", "data", "record", "postulate"}:
             by_file[item["file"]].append(item)
 
     inserted = 0
@@ -174,6 +185,25 @@ def sync_repo_signatures(
                     json.dumps(refs), classify_surface_role(item["module_name"]),
                 ),
             )
+            # Production path: normalized relational signature row.
+            if connection.execute(
+                "SELECT 1 FROM repo_symbols WHERE symbol_id=?",
+                (item["qualified_name"],),
+            ).fetchone() is not None:
+                connection.execute(
+                    """
+                    INSERT OR REPLACE INTO repo_symbol_signatures(
+                        symbol_id, signature, normalized_signature,
+                        signature_sha256, body_sha256
+                    ) VALUES(?, ?, ?, ?, '')
+                    """,
+                    (
+                        item["qualified_name"],
+                        signature,
+                        fingerprint.normalized_signature,
+                        fingerprint.signature_sha256,
+                    ),
+                )
             inserted += 1
 
     if stamp is not None:
