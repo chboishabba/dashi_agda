@@ -1,0 +1,102 @@
+module DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalExact as T
+import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValidation
+import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeValidation
+import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutValidation
+import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentValidation
+import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentValidation
+
+sourceNativeHostCompilerPaidRegression :
+  T.sourceNativeHostCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
+sourceNativeHostCompilerPaidRegression = refl
+
+compactSimpleNotIndependentRegression :
+  T.independentCompactSimplePaymentRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+compactSimpleNotIndependentRegression = refl
+
+quaternionGroupLawBridgePaidRegression :
+  T.quaternionSU2GroupLawBridgePaid T.canonicalSourceNativeTerminalBoundary ≡ true
+quaternionGroupLawBridgePaidRegression = refl
+
+actionEqualityNotIndependentRegression :
+  T.independentRestrictedYMMaxwellActionEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+actionEqualityNotIndependentRegression = refl
+
+metricVariationEqualityNotIndependentRegression :
+  T.independentMetricVariationEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+metricVariationEqualityNotIndependentRegression = refl
+
+stressEqualityNotIndependentRegression :
+  T.independentRestrictedQuantumStressMaxwellEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+stressEqualityNotIndependentRegression = refl
+
+secondBoundaryNotRequiredRegression :
+  T.secondConductingPlateBoundaryRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+secondBoundaryNotRequiredRegression = refl
+
+secondRenormalizationNotRequiredRegression :
+  T.secondRenormalizationPrescriptionRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+secondRenormalizationNotRequiredRegression = refl
+
+firstBlockerRegression :
+  T.firstUnificationBlocker ≡ T.missingLegacyQFTRecoveryProjectionCompatibility
+firstBlockerRegression = refl
+
+secondBlockerRegression :
+  T.secondUnificationBlocker ≡ T.missingPinnedSourceNativeRecoverySelection
+secondBlockerRegression = refl
+
+thirdBlockerRegression :
+  T.thirdUnificationBlocker ≡ T.missingSelectedStructuralGroupQuaternionSU2Identification
+thirdBlockerRegression = refl
+
+fourthBlockerRegression :
+  T.fourthUnificationBlocker ≡ T.missingCanonicalCartanU1FieldRestriction
+fourthBlockerRegression = refl
+
+fifthBlockerRegression :
+  T.fifthUnificationBlocker ≡ T.missingPhysicalChargeCouplingNormalization
+fifthBlockerRegression = refl
+
+sixthBlockerRegression :
+  T.sixthUnificationBlocker ≡ T.missingSameObjectNondegenerateCurvatureFormulaAttachment
+sixthBlockerRegression = refl
+
+seventhBlockerRegression :
+  T.seventhUnificationBlocker ≡ T.missingExteriorFieldStrengthCartanImage
+seventhBlockerRegression = refl
+
+eighthBlockerRegression :
+  T.eighthUnificationBlocker ≡ T.missingSameObjectActionDensityFunctional
+eighthBlockerRegression = refl
+
+ninthBlockerRegression :
+  T.ninthUnificationBlocker ≡ T.missingSameMetricPathActionFamily
+ninthBlockerRegression = refl
+
+tenthBlockerRegression :
+  T.tenthUnificationBlocker ≡ T.missingMetricVariationStressReadout
+tenthBlockerRegression = refl
+
+eleventhBlockerRegression :
+  T.eleventhUnificationBlocker ≡ T.missingSelectedQFTStressMetricVariationReadoutAttachment
+eleventhBlockerRegression = refl
+
+twelfthBlockerRegression :
+  T.twelfthUnificationBlocker ≡ T.missingMaxwellReadoutSameRenormalizedModeStressAttachment
+twelfthBlockerRegression = refl
+
+thirteenthBlockerRegression :
+  T.thirteenthUnificationBlocker ≡ T.missingU1RestrictedQFTStressCoordinateSymmetry
+thirteenthBlockerRegression = refl
+
+fourteenthBlockerRegression :
+  T.fourteenthUnificationBlocker ≡ T.missingBrownMaclayTenIndependentComponentValues
+fourteenthBlockerRegression = refl
+
+fifteenthBlockerRegression :
+  T.fifteenthUnificationBlocker ≡ T.missingRound131AllSectorAssembly
+fifteenthBlockerRegression = refl
