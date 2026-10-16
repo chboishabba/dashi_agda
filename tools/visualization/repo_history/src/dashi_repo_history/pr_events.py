@@ -26,6 +26,22 @@ class PullRequestEvent:
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
 
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "PullRequestEvent":
+        return cls(
+            number=int(value["number"]),
+            title=str(value.get("title", "")),
+            head_ref=str(value.get("head_ref", "")),
+            base_ref=str(value.get("base_ref", "")),
+            created_at=(int(value["created_at"]) if value.get("created_at") is not None else None),
+            merged_at=(int(value["merged_at"]) if value.get("merged_at") is not None else None),
+            closed_at=(int(value["closed_at"]) if value.get("closed_at") is not None else None),
+            merge_commit=(str(value["merge_commit"]) if value.get("merge_commit") else None),
+            url=(str(value["url"]) if value.get("url") else None),
+            body=str(value.get("body", "") or ""),
+            commits=tuple(str(item) for item in value.get("commits", ())),
+        )
+
     def to_narrative_event(self) -> NarrativeEvent:
         timestamp = self.merged_at or self.closed_at or self.created_at or 0
         return NarrativeEvent(
