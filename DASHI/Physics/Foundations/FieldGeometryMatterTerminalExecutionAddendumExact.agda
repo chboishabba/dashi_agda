@@ -8,6 +8,7 @@ import DASHI.Physics.CondensedMatter.MATBGTHFSourceFaithfulDiscretizationObligat
 import DASHI.Physics.CondensedMatter.MATBG2026SourceDataAvailabilityExact as SourceData
 import DASHI.Physics.CondensedMatter.MATBG2026PublicAcquisitionRouteExact as PublicAcquisition
 import DASHI.Physics.CondensedMatter.MATBGQTMInstrumentCalibration2026Exact as QTMCalibration
+import DASHI.Physics.CondensedMatter.MATBGQTMResolutionAwareForwardObserverReceiptExact as QTMForward
 import DASHI.Physics.CondensedMatter.MATBGEntropyMaxwellReplayContractExact as EntropyMaxwell
 import DASHI.Physics.Foundations.ScientistFrontierSiblingHandoffExact as ScientistHandoff
 import DASHI.Physics.Foundations.FieldGeometryMatterSiblingAuthorityHandoffExact as SiblingHandoff
@@ -22,6 +23,7 @@ record TerminalExecutionAddendum : Set where
     thfVYNotationResolution : Terminal.FrontierStatus
     qtmSourceDataAvailability : Terminal.FrontierStatus
     qtmInstrumentSampleCalibration : Terminal.FrontierStatus
+    qtmResolutionAwareForwardObserver : Terminal.FrontierStatus
     entropySourceDataAvailability : Terminal.FrontierStatus
     qtmPublicAcquisitionRoutes : Terminal.FrontierStatus
     entropyPublicAcquisitionRoutes : Terminal.FrontierStatus
@@ -38,6 +40,7 @@ record TerminalExecutionAddendum : Set where
     continuousMeasureCountsAsDiscreteProducer : Bool
     sourceDataAvailabilityCountsAsReplay : Bool
     qtmInstrumentCalibrationCountsAsIntensityReplay : Bool
+    qtmSyntheticForwardObserverCountsAsExperimentalFit : Bool
     acquisitionRouteCountsAsByteAcquisition : Bool
     entropyMaxwellSyntheticFixtureCountsAsMeasuredReplay : Bool
     scientistTechnicalAdjacencyCountsAsTargeting : Bool
@@ -55,6 +58,7 @@ currentTerminalExecutionAddendum =
     Terminal.openSameObjectPayment
     Terminal.sourcePaid
     Terminal.sourcePaid
+    Terminal.numericallyExecuted
     Terminal.sourcePaid
     Terminal.sourcePaid
     Terminal.sourcePaid
@@ -67,7 +71,7 @@ currentTerminalExecutionAddendum =
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
     Terminal.blockedByUnmergedSibling
-    false false false false false false false false
+    false false false false false false false false false
 
 record TerminalExecutionAddendumBoundary : Set where
   constructor terminal-execution-addendum-boundary
@@ -77,6 +81,7 @@ record TerminalExecutionAddendumBoundary : Set where
     sourceDataBoundaryImported : SourceData.MATBGSourceDataAvailabilityBoundary
     publicAcquisitionBoundaryImported : PublicAcquisition.MATBGPublicAcquisitionBoundary
     qtmCalibrationBoundaryImported : QTMCalibration.QTMInstrumentCalibrationBoundary
+    qtmForwardObserverBoundaryImported : QTMForward.QTMResolutionAwareForwardObserverBoundary
     entropyMaxwellBoundaryImported : EntropyMaxwell.EntropyMaxwellReplayBoundary
     scientistHandoffBoundaryImported : ScientistHandoff.ScientistFrontierHandoffBoundary
     siblingAuthorityHandoffBoundaryImported : SiblingHandoff.SiblingAuthorityHandoffBoundary
@@ -92,6 +97,7 @@ canonicalTerminalExecutionAddendumBoundary =
     SourceData.canonicalMATBGSourceDataAvailabilityBoundary
     PublicAcquisition.canonicalMATBGPublicAcquisitionBoundary
     QTMCalibration.canonicalQTMInstrumentCalibrationBoundary
+    QTMForward.canonicalQTMResolutionAwareForwardObserverBoundary
     EntropyMaxwell.canonicalEntropyMaxwellReplayBoundary
     ScientistHandoff.canonicalScientistFrontierHandoffBoundary
     SiblingHandoff.canonicalSiblingAuthorityHandoffBoundary
