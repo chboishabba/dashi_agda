@@ -70,14 +70,16 @@ def classify_surface_role(module_name: str) -> str:
     if _ROUND_RE.search(module_name):
         return "historical_snapshot"
     lowered = module_name.lower()
+    # Canonical Core ownership is structural and outranks incidental words such
+    # as Receipt/Candidate in a declaration or module name.
+    if ".core." in lowered or module_name.startswith("DASHI.Core."):
+        return "canonical"
     if "validation" in lowered:
         return "validation"
     if "receipt" in lowered:
         return "receipt"
     if "candidate" in lowered:
         return "candidate"
-    if ".core." in lowered or module_name.startswith("DASHI.Core."):
-        return "canonical"
     return "current"
 
 
