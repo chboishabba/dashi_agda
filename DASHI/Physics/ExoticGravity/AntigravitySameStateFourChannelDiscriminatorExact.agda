@@ -5,11 +5,12 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_; -_)
-open import Data.Rational.Tactic.RingSolver using (solve-∀)
+open import Data.Rational.Tactic.RingSolver using (solve; solve-∀)
 
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Bubble
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveShellFamilyExact as Shell
 import DASHI.Physics.Foundations.GRQFTDeSitterKottlerJunctionExact as Junction
+import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as SingleVacuum
 
 ------------------------------------------------------------------------
 -- SAME-STATE FOUR-CHANNEL DISCRIMINATOR
@@ -47,10 +48,11 @@ anomalyAloneIsNotGeometry : Bool
 anomalyAloneIsNotGeometry = true
 
 ------------------------------------------------------------------------
--- EXACT NORMALIZED NAMBU/KOTTLER FIXTURE REUSED FROM MASTER.
+-- OLDER EXACT NAMBU/KOTTLER FIXTURE, RETAINED AS A REGRESSION/DONOR EXAMPLE.
 --
--- These are normalized geometry predictions only.  They are not SI device
--- forecasts until P2 supplies the physical source scale/calibration.
+-- #1120's preferred source route is now the single-vacuum normalized fixture
+-- below.  Keeping these exact values prevents accidental loss of the earlier
+-- A->E geometry while avoiding promotion of the older two-vacuum source path.
 ------------------------------------------------------------------------
 
 fixtureOutwardFreeFall : ℚ
@@ -78,6 +80,58 @@ fixtureInteriorLapseRootIsThreeQuarters :
   fixtureInteriorLapseRoot ≡ Int.+ 3 / 4
 fixtureInteriorLapseRootIsThreeQuarters = refl
 
+olderNambuFixtureIsRegressionNotPreferredSourceRoute : Bool
+olderNambuFixtureIsRegressionNotPreferredSourceRoute = true
+
+------------------------------------------------------------------------
+-- PREFERRED SINGLE-VACUUM NORMALIZED FIXTURE.
+--
+-- This consumes #1120's current static source route: one vacuum amplitude on
+-- both sides, positive metric mass, positive shell energy, DEC compatibility,
+-- SEC violation, and outward Kottler acceleration.
+------------------------------------------------------------------------
+
+preferredSingleVacuumFixtureRadius : ℚ
+preferredSingleVacuumFixtureRadius = SingleVacuum.fixtureRadius
+
+preferredSingleVacuumFixtureLambda : ℚ
+preferredSingleVacuumFixtureLambda = SingleVacuum.fixtureLambda
+
+preferredSingleVacuumInteriorLapseRoot : ℚ
+preferredSingleVacuumInteriorLapseRoot = SingleVacuum.fixtureX
+
+preferredSingleVacuumExteriorLapseRoot : ℚ
+preferredSingleVacuumExteriorLapseRoot = SingleVacuum.fixtureY
+
+preferredSingleVacuumOutwardScaled : ℚ
+preferredSingleVacuumOutwardScaled =
+  SingleVacuum.sameVacuumOutwardScaled
+    SingleVacuum.fixtureRadius
+    SingleVacuum.fixtureX
+    SingleVacuum.fixtureY
+
+preferredSingleVacuumOutwardScaledIsSeventySevenSeventyFifths :
+  preferredSingleVacuumOutwardScaled ≡ Int.+ 77 / 75
+preferredSingleVacuumOutwardScaledIsSeventySevenSeventyFifths =
+  SingleVacuum.fixtureOutwardScaledIsSeventySevenSeventyFifths
+
+preferredSingleVacuumOutwardFreeFall : ℚ
+preferredSingleVacuumOutwardFreeFall =
+  preferredSingleVacuumOutwardScaled
+    / (preferredSingleVacuumFixtureRadius * preferredSingleVacuumFixtureRadius)
+
+preferredSingleVacuumOutwardFreeFallIsSeventySevenThreeHundredths :
+  preferredSingleVacuumOutwardFreeFall ≡ Int.+ 77 / 300
+preferredSingleVacuumOutwardFreeFallIsSeventySevenThreeHundredths = solve []
+
+preferredSingleVacuumSupportWeightChange : ℚ → ℚ
+preferredSingleVacuumSupportWeightChange passiveMass =
+  - (passiveMass * preferredSingleVacuumOutwardFreeFall)
+
+------------------------------------------------------------------------
+-- KOTTLER SCALAR METRIC RESPONSE.
+------------------------------------------------------------------------
+
 kottlerLapseDelta : ℚ → ℚ → ℚ → ℚ → ℚ
 kottlerLapseDelta radius mass lambda deltaLambda =
   Junction.fExterior radius mass (lambda + deltaLambda)
@@ -102,6 +156,20 @@ fixtureMetricDeltaIsFourThirdsDeltaLambda :
   ∀ deltaLambda →
   fixtureMetricDelta deltaLambda ≡ (Int.+ 4 / 3) * deltaLambda
 fixtureMetricDeltaIsFourThirdsDeltaLambda = solve-∀
+
+preferredSingleVacuumMetricDelta : ℚ → ℚ
+preferredSingleVacuumMetricDelta deltaLambda =
+  - (kottlerLapseDelta
+      SingleVacuum.fixtureRadius
+      SingleVacuum.fixtureMass
+      SingleVacuum.fixtureLambda
+      deltaLambda)
+
+preferredSingleVacuumMetricDeltaIsFourThirdsDeltaLambda :
+  ∀ deltaLambda →
+  preferredSingleVacuumMetricDelta deltaLambda
+    ≡ (Int.+ 4 / 3) * deltaLambda
+preferredSingleVacuumMetricDeltaIsFourThirdsDeltaLambda = solve-∀
 
 scalarMetricPerturbationIsNotTTMode : Bool
 scalarMetricPerturbationIsNotTTMode = true
