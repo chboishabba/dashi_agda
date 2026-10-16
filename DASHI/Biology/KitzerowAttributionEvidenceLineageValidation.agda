@@ -18,6 +18,11 @@ contactChronologyDoesNotCollapseIntoDerivation :
   × Lineage.authenticatedPrePublicationExposureAloneProvesDerivation Lineage.canonicalKitzerowAttributionLineageBoundary ≡ false
 contactChronologyDoesNotCollapseIntoDerivation = refl , (refl , refl)
 
+laterReplyCreatesNewProvenanceWithoutRewritingEarlierHistory :
+  Lineage.laterResponseRewritesEarlierProvenance Lineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × Lineage.responseCreatesNewProvenanceWithoutRewritingEarlierManifestation Lineage.canonicalBrazilDirectionalProvenance ≡ true
+laterReplyCreatesNewProvenanceWithoutRewritingEarlierHistory = refl , refl
+
 plagiarismEvidenceKindsRemainDistinct :
   Lineage.citationAbsenceAloneProvesPlagiarism Lineage.canonicalKitzerowAttributionLineageBoundary ≡ false
   × Lineage.structuralSimilarityAloneProvesPlagiarism Lineage.canonicalKitzerowAttributionLineageBoundary ≡ false
