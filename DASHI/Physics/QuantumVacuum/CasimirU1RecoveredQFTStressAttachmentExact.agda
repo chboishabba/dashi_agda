@@ -8,15 +8,12 @@ open import Data.Rational.Base using (ℚ)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
+import DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionExact as Sym
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as QFT
 import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1YM
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact as CasimirGRQFT
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as SU2Host
 import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionExact as Reduction
-
-------------------------------------------------------------------------
--- CASIMIR U(1) -> ACTUAL RECOVERED-QFT SELECTED-SECTOR STRESS ATTACHMENT
-------------------------------------------------------------------------
 
 record CasimirU1RecoveredQFTStressAttachment
     (U : Weld.UnifiedCandidate) : Set₁ where
@@ -85,7 +82,7 @@ selectedQFTStressSymmetryReceipt :
             (regime attachment))
           (selectedGroup attachment)
   in
-  DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionExact.PairingComponentSymmetry
+  Sym.PairingComponentSymmetry
     (stressEvaluator attachment) stress
 selectedQFTStressSymmetryReceipt attachment =
   Reduction.symmetry (symmetricBrownMaclayPayment attachment)
