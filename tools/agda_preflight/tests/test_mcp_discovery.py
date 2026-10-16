@@ -1,4 +1,4 @@
-from agda_preflight.mcp_server import register_mcp_tools
+from agda_preflight.mcp_server import register_repository_mcp_tools
 
 
 class FakeServer:
@@ -16,14 +16,18 @@ class FakeService:
     pass
 
 
-def test_mcp_registers_semantic_discovery_tools():
+def test_repository_mcp_registers_semantic_and_history_tools():
     server = FakeServer()
-    register_mcp_tools(server, FakeService())
+    register_repository_mcp_tools(server, FakeService())
     for name in (
         "symbol_search",
         "related_symbols",
         "object_detail",
         "narrative_archaeology",
+        "narrative_history",
+        "narrative_frontier",
+        "narrative_stale",
+        "narrative_explain",
         "discover",
         "round_lineage",
     ):
