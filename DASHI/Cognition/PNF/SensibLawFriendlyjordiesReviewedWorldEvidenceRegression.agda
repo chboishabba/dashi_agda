@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceRegressi
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.HumanReviewCore as Review
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as Reviewed
 
 reusesGenericHumanReviewReceipt :
@@ -22,9 +23,13 @@ reviewedCausalBridgeCreatesPartyRanking :
 reviewedCausalBridgeCreatesPartyRanking = refl
 
 humanReviewDoesNotCreateClaimTruth :
-  Reviewed.humanReviewCoreDoesNotCreateClaimTruth ≡ refl
-humanReviewDoesNotCreateClaimTruth = refl
+  Review.HumanReviewCoreBoundary.reviewCreatesClaimTruth
+    Review.canonicalHumanReviewCoreBoundary ≡ false
+humanReviewDoesNotCreateClaimTruth =
+  Reviewed.humanReviewCoreDoesNotCreateClaimTruth
 
 humanReviewDoesNotIdentifyCause :
-  Reviewed.humanReviewCoreDoesNotCreateCausalIdentification ≡ refl
-humanReviewDoesNotIdentifyCause = refl
+  Review.HumanReviewCoreBoundary.reviewCreatesCausalIdentification
+    Review.canonicalHumanReviewCoreBoundary ≡ false
+humanReviewDoesNotIdentifyCause =
+  Reviewed.humanReviewCoreDoesNotCreateCausalIdentification
