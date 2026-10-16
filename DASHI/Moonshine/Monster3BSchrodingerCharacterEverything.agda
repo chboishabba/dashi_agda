@@ -25,3 +25,4 @@ import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
 -- W_zeta|E constituent in one common representation/character theory.
 import DASHI.Moonshine.Monster3BCommonRepresentationTransportExact
 import DASHI.Moonshine.Monster3BCommonRepresentationTransportValidation
+import DASHI.Moonshine.Monster3BPostCharacterTransportMaxCutExact
