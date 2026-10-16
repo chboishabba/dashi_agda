@@ -39,9 +39,13 @@ effectiveStackPaid = refl
 higherStackPaid : Roadmap.higherStackPaid boundary ≡ true
 higherStackPaid = refl
 
-hypersheafFrontierIsHypercover :
-  Roadmap.hypersheafReducedToArbitraryHypercoverFrontier boundary ≡ true
-hypersheafFrontierIsHypercover = refl
+finiteTriadicHypersheafPaid :
+  Roadmap.finiteTriadicHypersheafPaid boundary ≡ true
+finiteTriadicHypersheafPaid = refl
+
+arbitraryInfinityHypersheafStillOpen :
+  Roadmap.arbitraryInfinityHypersheafStillOpen boundary ≡ true
+arbitraryInfinityHypersheafStillOpen = refl
 
 certificationBoundariesPreserved :
   Roadmap.descendantCertificationBoundariesPreserved boundary ≡ true
