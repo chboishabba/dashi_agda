@@ -105,12 +105,12 @@ def main() -> None:
     )
     require(
         "DASHI/Physics/Chemistry/AmmoniaMonster3BRepresentationNativeCorrectionExact.agda",
-        "Native369ActualBasisChart",
-        "PhysicalNH3MonsterBasisAttachment",
+        "Native369BasisCoordinate",
+        "PhysicalNH3ToMonsterLinearState",
         "actualBasisToNative369",
         "native369ToActualBasis",
-        "finiteChartDoesNotCreateWholeVOAStateBijection",
-        "phaseBijectionDoesNotCreatePhysicalAttachment",
+        "native369BasisChartDoesNotCreateWholeVOAStateBijection",
+        "c3PhaseDoesNotCreatePhysicalMonsterStateMap",
         "physicalNH3ToMonsterLinearStatePaid",
     )
     require(
