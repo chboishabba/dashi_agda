@@ -12,6 +12,7 @@ import DASHI.Cognition.SpatialIntelligenceAgentCrossPollinationExact as Agent
 import DASHI.Cognition.OpenCivilianSpatialDefenseRFObservationExact as RFDefense
 import DASHI.Cognition.OpenCivilianSpatialDefenseRobotHumanRightsExact as HumanRights
 import DASHI.Cognition.OpenCivilianSpatialDefenseBostonDynamicsControlExact as Boston
+import DASHI.Cognition.OpenCivilianSpatialDefenseConsumerSufficiencyExact as Sufficiency
 
 gevObservationDoesNotCreateProtectiveAuthority :
   Core.observationCreatesProtectiveAuthority ≡ false
@@ -124,3 +125,11 @@ BostonDynamicsVendorPolicyIsNotUniversalLaw = refl
 BostonDynamicsGeneralPurposeRobotIsBenignControlEligible :
   Boston.generalPurposeNonWeaponizedControlEligible ≡ true
 BostonDynamicsGeneralPurposeRobotIsBenignControlEligible = refl
+
+singleBearingConsumerNonDescentIsPaid :
+  Sufficiency.singleBearingExactWorldNonDescentPaid ≡ true
+singleBearingConsumerNonDescentIsPaid = refl
+
+consumerRelativeMinimalityCoreIsReused :
+  Sufficiency.consumerDescentMinimalObserverCoreReused ≡ true
+consumerRelativeMinimalityCoreIsReused = refl
