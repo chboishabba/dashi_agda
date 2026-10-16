@@ -37,7 +37,7 @@ centralBH4AllocationEdge =
     Cascade.chronicAllostasis
     Cascade.gch1RedoxBH4Allocation
     Cascade.unpaid
-    "live central edge requiring a same-object intervention that distinguishes adaptive BH4 allocation from downstream/parallel stress responses after accounting for supply buffering, redox regeneration, intracellular/extracellular route, spatial pool topology, developmental history, enzyme abundance and region/cell context"
+    "live central edge requiring a same-object intervention that distinguishes adaptive BH4 allocation from downstream/parallel stress responses after accounting for supply buffering, redox regeneration, cellular uptake, intracellular/extracellular route, donor-recipient transfer, spatial pool topology, developmental history, enzyme abundance and region/cell context"
 
 canonicalCentralBH4Discriminator : ExperimentalDiscriminator
 canonicalCentralBH4Discriminator =
@@ -50,18 +50,14 @@ canonicalCentralBH4Discriminator =
       ∷ Cone.causalIdentificationSlot
       ∷ Cone.mechanismIdentificationSlot
       ∷ [])
-    "extend the paid hepatic, neural and redox/spatial precedents: perturb GCH1/BH4 availability or redox-dependent BH4 allocation with temporally controlled intervention while independently manipulating intracellular supply, extracellular exposure and reductive-regeneration context where feasible"
-    "matched stress/allostasis condition with BH4 allocation held or rescued independently; preserve hepatic phenylalanine/DAHP/BH4 logic, neural developmental/region stratification, and route-specific intracellular versus extracellular controls with orthogonal downstream/redox perturbations"
-    "same-object BH4/BH2/GCH1 and NAD(P)H state, NOS-bound BH4 redox/coupling, PAH/TH/TPH/NOS/AGMO flux, TH/TPH/NOS/AGMO abundance/localization, intracellular/extracellular BH4 route, compartment/cell-type/region topology, redox state, mTOR/TSC2 and circuit readouts with calibrated timing"
-    "test whether conditional supply-limited competition, pool-restoration failures and route-specific effects are mediated by adaptive synthesis/recycling, NAD(P)H-dependent regeneration, enzyme abundance, compartment, region, cell type, developmental history or parallel redox state; identify temporal order and mediation rather than scalar-pool correlation"
-    "explicitly compare adaptive spatial allocator, downstream marker, parallel redox response and subgroup/state-history models; reject a naive fixed/well-mixed/current-pool-sufficiency model where existing data already show adaptive supply buffering, failed functional rescue, spatial separation and route-specific effects"
-    "central edge closes only if new target-relevant same-object intervention plus mediation/temporal evidence extends beyond the paid hepatic PAH-iNOS, mouse neural and rat-striatal/NOS-redox constraints and discriminates the declared whole-model alternatives with compartment/route topology resolved"
+    "extend the paid hepatic, neural and redox/spatial precedents: perturb GCH1/BH4 availability or redox-dependent BH4 allocation with temporally controlled intervention while independently manipulating intracellular supply, extracellular exposure and reductive-regeneration context; where possible isotope-label BH4 to measure donor-to-recipient transfer rather than only uptake/function"
+    "matched stress/allostasis condition with BH4 allocation held or rescued independently; preserve hepatic phenylalanine/DAHP/BH4 logic, neural developmental/region stratification, route-specific intracellular versus extracellular controls and measured-uptake/coculture precedents with orthogonal downstream/redox perturbations"
+    "same-object BH4/BH2/GCH1 and NAD(P)H state, NOS-bound BH4 redox/coupling, PAH/TH/TPH/NOS/AGMO flux, TH/TPH/NOS/AGMO abundance/localization, intracellular/extracellular BH4 route, quantitative donor-to-recipient BH4 transfer, compartment/cell-type/region topology, redox state, mTOR/TSC2 and circuit readouts with calibrated timing"
+    "test whether conditional supply-limited competition, pool-restoration failures and route-specific effects are mediated by adaptive synthesis/recycling, NAD(P)H-dependent regeneration, enzyme abundance, quantitative transfer, compartment, region, cell type, developmental history or parallel redox state; identify temporal order and mediation rather than scalar-pool correlation"
+    "explicitly compare adaptive spatial allocator, downstream marker, parallel redox response and subgroup/state-history models; reject naive fixed/well-mixed/current-pool-sufficiency where existing data already show adaptive supply buffering, failed functional rescue, spatial separation, cellular uptake and route-specific effects"
+    "central edge closes only if new target-relevant same-object intervention plus mediation/temporal evidence extends beyond paid hepatic PAH-iNOS, mouse neural, uptake/coculture, rat-striatal and NOS-redox constraints and discriminates declared whole-model alternatives with transfer/compartment/route topology resolved"
     false refl
     false refl
-
-------------------------------------------------------------------------
--- Historical discriminator payments consumed by the forward design.
-------------------------------------------------------------------------
 
 historicalSameObjectConstraint : Hepatic.HepaticCompetitionDiscriminator
 historicalSameObjectConstraint = Hepatic.canonicalHepaticCompetitionDiscriminator
@@ -74,37 +70,31 @@ historicalRedoxSpatialConstraint = RedoxSpatial.canonicalRedoxSpatialDiscriminat
 
 historicalTwoBranchConstraintPaid : Bool
 historicalTwoBranchConstraintPaid = true
-
 historicalTwoBranchConstraintPaidIsTrue : historicalTwoBranchConstraintPaid ≡ true
 historicalTwoBranchConstraintPaidIsTrue = refl
 
 historicalNeuralContextConstraintPaid : Bool
 historicalNeuralContextConstraintPaid = true
-
 historicalNeuralContextConstraintPaidIsTrue : historicalNeuralContextConstraintPaid ≡ true
 historicalNeuralContextConstraintPaidIsTrue = refl
 
 historicalRedoxSpatialConstraintPaid : Bool
 historicalRedoxSpatialConstraintPaid = true
-
 historicalRedoxSpatialConstraintPaidIsTrue : historicalRedoxSpatialConstraintPaid ≡ true
 historicalRedoxSpatialConstraintPaidIsTrue = refl
 
 historicalConstraintsCloseCentralEdge : Bool
 historicalConstraintsCloseCentralEdge = false
-
 historicalConstraintsCloseCentralEdgeIsFalse : historicalConstraintsCloseCentralEdge ≡ false
 historicalConstraintsCloseCentralEdgeIsFalse = refl
 
 remainingExperimentalResidual : String
 remainingExperimentalResidual =
-  "target-relevant human/neural same-object multi-branch perturbation measuring BH4/BH2, NAD(P)H, NOS-bound BH4 redox/coupling, PAH/TH/TPH/NOS/AGMO flux, enzyme abundance/localization, intracellular versus extracellular route and transfer/supply topology by compartment/region/cell type/time; existing hepatic, mouse-neural, rat-striatal and NOS-bound redox results already rule out naive fixed/well-mixed/current-pool-sufficiency models but do not close the full architecture"
+  "target-relevant human/neural same-object multi-branch perturbation measuring BH4/BH2, NAD(P)H, NOS-bound BH4 redox/coupling, PAH/TH/TPH/NOS/AGMO flux, enzyme abundance/localization, intracellular versus extracellular route and quantitative donor-to-recipient BH4 transfer rate/direction by compartment/region/cell type/time; cellular uptake and functional coculture crosstalk are already paid, but physiological transfer flux and simultaneous whole-network mediation remain unpaid"
 
 backpropBoundaryConsumed : Backprop.BlockedImplicationBackpropBoundary
 backpropBoundaryConsumed = Backprop.canonicalBlockedImplicationBackpropBoundary
 
 experimentalSelectionDoesNotPromoteClaim :
-  Backprop.cheapestSelectedExperimentAutomaticallySupportsClaim
-    backpropBoundaryConsumed
-  ≡ false
+  Backprop.cheapestSelectedExperimentAutomaticallySupportsClaim backpropBoundaryConsumed ≡ false
 experimentalSelectionDoesNotPromoteClaim = refl
