@@ -148,64 +148,74 @@ module _
     R144E1.finiteD1ReadoutAtComponent presentData attachment
       background component
 
-  spatialC3ReadoutCovariant covariance background K.component00 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component00 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component00)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component00)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component00)
 
-  spatialC3ReadoutCovariant covariance background K.component01 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component01 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component01)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component01)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component01)
 
-  spatialC3ReadoutCovariant covariance background K.component02 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component02 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component03)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component03)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component02)
 
-  spatialC3ReadoutCovariant covariance background K.component03 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component03 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component02)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component02)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component03)
 
-  spatialC3ReadoutCovariant covariance background K.component11 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component11 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component11)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component11)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component11)
 
-  spatialC3ReadoutCovariant covariance background K.component12 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component12 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component13)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component13)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component12)
 
-  spatialC3ReadoutCovariant covariance background K.component13 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component13 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component12)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component12)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component13)
 
-  spatialC3ReadoutCovariant covariance background K.component22 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component22 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component33)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component33)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component22)
 
-  spatialC3ReadoutCovariant covariance background K.component23 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component23 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component23)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component23)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component23)
 
-  spatialC3ReadoutCovariant covariance background K.component33 =
+  spatialC3ReadoutCovariant {wholeLattice = wholeLattice}
+      covariance background K.component33 =
     trans
       (A1.signedReadoutCovariant covariance Hyper.swap12
-        (Euclidean.actConfiguration _ Hyper.swap23 background) K.component22)
+        (Euclidean.actConfiguration wholeLattice Hyper.swap23 background) K.component22)
       (A1.signedReadoutCovariant covariance Hyper.swap23 background K.component33)
 
 spatialC3CovarianceCompilesFromCanonicalB4 : Bool
