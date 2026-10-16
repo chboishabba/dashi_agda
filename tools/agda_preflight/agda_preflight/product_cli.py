@@ -5,6 +5,10 @@ from pathlib import Path
 import sqlite3
 import sys
 
+from .repository_annotations import (
+    capture_repository_annotations,
+    restore_repository_annotations,
+)
 from .repository_cli import main as repository_main
 from .repository_inventory import refresh_repository_inventory
 from .repository_store import DEFAULT_REPOSITORY_DB, ensure_repository_schema
@@ -33,10 +37,22 @@ def _index(argv) -> int:
     args = parser.parse_args(argv)
     root = args.root.resolve()
     with _connect(root, args.database) as conn:
+        annotations = capture_repository_annotations(conn)
         result = refresh_repository_inventory(root, conn)
+        result["annotations_restored"] = restore_repository_annotations(
+            conn,
+            annotations,
+        )
     database = args.database if args.database.is_absolute() else root / args.database
     print(f"database\t{database}")
-    for key in ("files", "symbols", "imports", "parse_errors", "elapsed_ms"):
+    for key in (
+        "files",
+        "symbols",
+        "imports",
+        "parse_errors",
+        "annotations_restored",
+        "elapsed_ms",
+    ):
         print(f"{key}\t{result[key]}")
     for error in result["errors"]:
         print(f"parse_error\t{error['path']}\t{error['error']}")
