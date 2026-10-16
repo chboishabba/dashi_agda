@@ -54,6 +54,14 @@ bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux :
   × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
 bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux = refl , refl
 
+bh4TopologyResolvedBalanceRetainsNumericalAcquisitionDebt :
+  RedoxSpatial.topologyResolvedStateRequired RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
+  × RedoxSpatial.scalarProjectionIsLossy RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
+  × RedoxSpatial.numericEdgeFluxesPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
+  × RedoxSpatial.directTransferFluxPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
+bh4TopologyResolvedBalanceRetainsNumericalAcquisitionDebt =
+  refl , (refl , (refl , refl))
+
 bh4AcquisitionStateIsPartialNotClosed :
   Status.directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial Status.canonicalEvidenceAcquisitionStatusBoundary ≡ true
   × Status.hepaticTwoBranchPaymentClosesWholeMultiBranchTarget Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
