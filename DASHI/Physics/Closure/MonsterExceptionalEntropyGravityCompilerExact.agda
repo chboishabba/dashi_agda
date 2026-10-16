@@ -3,23 +3,11 @@ module DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact where
 ------------------------------------------------------------------------
 -- MONSTER -> EXCEPTIONAL GEOMETRY -> STATE/ENTROPY -> GR COMPILER
 --
--- This owner deliberately drags the Albert/F4 and cosmology machinery into the
--- same proof graph, but only through explicit same-object gates.
---
--- Paid inputs already available in the repository:
---   * exact native-369 zeta microstate carrier and normalized 65610 counting
---     ensemble;
---   * exact Base/Zeta/Albert 54->53 carrier/deletion weld;
---   * a compiler transporting any subsequently paid actual Monster 54/53
---     action onto that exact Albert-shaped carrier;
---   * the generic entropy->gravity physical-payment contract;
---   * the CMP119 Local-C/Wightman terminal stress consumer and trace->expansion
---     infrastructure.
---
--- All new scientific obligations below are proof-relevant: whenever the
--- repository lacks a concrete proposition vocabulary, the record carries both
--- a witness TYPE and an inhabitant of that type rather than merely a Set-valued
--- label.
+-- The physical state branch is actor-scoped.  The selected native-369 state is
+-- a C3/3B construction, so the 53/Albert route consumed here must be the
+-- central-C3 or explicitly named conformal-fixed-line route.  The independent
+-- full-normalizer exceptional lane is 90 -> 12+78 -> E6 -> F4+26 and is not
+-- permitted to smuggle a normalizer-stable 53 summand into this compiler.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -32,6 +20,7 @@ import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as Coun
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as EntropyGR
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as AlbertWeld
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
+import DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact as ActorScoped
 import DASHI.Physics.Foundations.CMP119CosmologyLocalCWightmanTerminalMaxCutExact as Wightman
 import DASHI.Physics.Foundations.CMP119CosmologyRealTraceToExpansionMaxCutExact as Expansion
 
@@ -72,12 +61,18 @@ open Native369PhysicalEnsemblePayment public
 
 ------------------------------------------------------------------------
 -- 2. Same-object exceptional/state weld.
+--
+-- The exceptional input is actor-scoped: it already carries a proof that the
+-- selected residual actor is central C3 or the named conformal-fixed-line
+-- restriction, and its strict F4 recognition contains the unique actual 54/53
+-- action used by the carrier weld.
 ------------------------------------------------------------------------
 
 record MonsterAlbertStateIntertwiner : Set₁ where
   constructor monster-albert-state-intertwiner
   field
-    exceptionalRecognition : F4.ProofRelevantMonsterAlbertF4Recognition
+    exceptionalRecognition :
+      ActorScoped.CentralResidualExceptionalRecognition
     physicalEnsemble : Native369PhysicalEnsemblePayment
 
     ExceptionalState : Set
@@ -95,6 +90,12 @@ record MonsterAlbertStateIntertwiner : Set₁ where
       ExceptionalObservableDensityFactorWitness
 
 open MonsterAlbertStateIntertwiner public
+
+strictF4RecognitionFromStateIntertwiner :
+  MonsterAlbertStateIntertwiner → F4.ProofRelevantMonsterAlbertF4Recognition
+strictF4RecognitionFromStateIntertwiner state =
+  ActorScoped.strictAlbertF4Recognition
+    (exceptionalRecognition state)
 
 ------------------------------------------------------------------------
 -- 3. Make the older entropy->GR terminal contract genuinely proof-relevant.
@@ -154,9 +155,7 @@ record MonsterExceptionalStressHandoff : Set₁ where
 open MonsterExceptionalStressHandoff public
 
 ------------------------------------------------------------------------
--- 5. Full pipeline target.  Existing Wightman/Expansion modules are imported
---    as downstream consumers, not evidence that the Monster source is already
---    their selected stress object.
+-- 5. Full pipeline target.
 ------------------------------------------------------------------------
 
 record MonsterExceptionalCosmologyRecognition : Set₁ where
@@ -183,13 +182,34 @@ record MonsterExceptionalCosmologyRecognition : Set₁ where
     heldOutEmpiricalValidation : HeldOutEmpiricalValidationWitness
 
 ------------------------------------------------------------------------
--- 6. Explicit wrong-type exclusions.
+-- 6. Full-normalizer exceptional cross-check remains separately typed.
+------------------------------------------------------------------------
+
+record NormalizerExceptionalCrossCheck : Set₁ where
+  constructor normalizer-exceptional-cross-check
+  field
+    NormalizerSource : Set
+    Attachment : Set
+    E6F4Recognition : Set
+
+    SourceAttachmentWitness : Set
+    sourceAttachmentPaid : SourceAttachmentWitness
+
+    SameMonsterObjectWitness : Set
+    sameMonsterObjectAsCentralPhysicalLane : SameMonsterObjectWitness
+
+    DoesNotCreateNormalizerStable53Witness : Set
+    doesNotCreateNormalizerStable53 : DoesNotCreateNormalizerStable53Witness
+
+------------------------------------------------------------------------
+-- 7. Explicit wrong-type exclusions.
 ------------------------------------------------------------------------
 
 data CountingMeasureCreatesPhysicalDensityMatrix : Set where
 data AlbertCarrierCreatesStressTensor : Set where
 data F4ActionCreatesEinsteinDynamics : Set where
 data CMP119ConsumerCreatesMonsterSource : Set where
+data NormalizerE6CreatesPhysicalResidual53 : Set where
 
 countingDoesNotCreateDensityMatrix :
   CountingMeasureCreatesPhysicalDensityMatrix → ⊥
@@ -204,8 +224,12 @@ f4DoesNotCreateEinsteinDynamics ()
 cmp119ConsumerDoesNotCreateMonsterSource : CMP119ConsumerCreatesMonsterSource → ⊥
 cmp119ConsumerDoesNotCreateMonsterSource ()
 
+normalizerE6DoesNotCreatePhysical53 :
+  NormalizerE6CreatesPhysicalResidual53 → ⊥
+normalizerE6DoesNotCreatePhysical53 ()
+
 ------------------------------------------------------------------------
--- 7. Current terminal status.
+-- 8. Current terminal status.
 ------------------------------------------------------------------------
 
 record MonsterExceptionalEntropyGravityBoundary : Set where
@@ -214,13 +238,15 @@ record MonsterExceptionalEntropyGravityBoundary : Set where
     native369MicrostateCarrierPaid : Bool
     normalized65610CountingPaid : Bool
     proofRelevantAlbertCarrierDeletionPaid : Bool
+    exceptionalActorScopingPaid : Bool
+    centralPhysicalLaneRejectsNormalizer53Shortcut : Bool
     actualMonsterActionToAlbertTransportCompilerPaid : Bool
     entropyGravityPhysicalContractAvailable : Bool
     entropyGravityLegacyContractHardenedProofRelevant : Bool
     cmp119LocalCWightmanConsumerAvailable : Bool
     cmp119TraceToExpansionConsumerAvailable : Bool
 
-    actualMonsterF4SameActionPaid : Bool
+    actualCentralMonsterF4SameActionPaid : Bool
     physicalDensityMatrixPaid : Bool
     densityStateToSameStressPaid : Bool
     sameStateLocalCWightmanPaid : Bool
@@ -233,17 +259,18 @@ canonicalMonsterExceptionalEntropyGravityBoundary :
   MonsterExceptionalEntropyGravityBoundary
 canonicalMonsterExceptionalEntropyGravityBoundary =
   monster-exceptional-entropy-gravity-boundary
-    true true true true true true true true
+    true true true true true true true true true true
     false false false false false false false
-    "The proof graph now runs continuously from the native Monster-zeta microstate carrier through the proof-relevant Albert 54->53 geometry into proof-relevant entropy/GR payment and the existing CMP119 Local-C/Wightman/expansion consumers. The remaining payments are same-object action/physics payments: actual Monster<->F4 action, physical density state, density->selected stress, the exact Local-C/Wightman stress identification, trace->expansion on that same state, then a parameter-free observable and held-out validation."
+    "The physical Monster->exceptional->gravity lane is now explicitly central-C3/conformal scoped. The normalizer 90->12+78->E6->F4+26 lane is retained as an independent same-Monster-object cross-check and cannot manufacture a normalizer-stable residual 53. Remaining payments are the central actual Monster<->F4 action, physical density state, same selected stress, exact Local-C/Wightman identification, trace->expansion, parameter-free observable and held-out validation."
 
 ------------------------------------------------------------------------
--- 8. Donor objects are reached explicitly so future refactors cannot replace
---    this with a prose-only cross-pollination.
+-- 9. Donor objects reached explicitly.
 ------------------------------------------------------------------------
 
 nativeCountingEnsemble = Counting.native369ZetaCountingEnsemble
 proofRelevantAlbertDeletion =
   AlbertWeld.canonicalProofRelevantBaseZetaAlbertDeletionWeld
 proofRelevantF4Boundary = F4.canonicalProofRelevantMonsterAlbertF4Boundary
+actorScopedExceptionalBoundary =
+  ActorScoped.canonicalActorScopedExceptionalBoundary
 entropyGravityBoundary = EntropyGR.canonicalEntropyGravityPromotionBoundary
