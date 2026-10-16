@@ -44,6 +44,12 @@ triangleFabric = Grid.two-input-fabric sourceA sourceB
     sourceB siteB = siteC
     sourceB siteC = siteB
 
+-- A and B already form a literal two-edge recurrent dependency cycle.
+triangleHasABRecurrence :
+  Grid.inputASource triangleFabric siteA ≡ siteB
+  × Grid.inputASource triangleFabric siteB ≡ siteA
+triangleHasABRecurrence = refl , refl
+
 tripleField : Face.BitTriple → Grid.BoolField TriSite
 tripleField state siteA = Face.bitA state
 tripleField state siteB = Face.bitB state
@@ -122,7 +128,7 @@ record EmergentVsPrimitiveHigherOrderBoundary : Set where
   constructor emergent-vs-primitive-higher-order-boundary
   field
     pairwiseModelUsesOnlyBinarySynthesisCells : Bool
-    pairwiseModelStillHasGlobalRecurrentSystemStructure : Bool
+    pairwiseModelHasExplicitRecurrentDependencyCycle : Bool
     matchedTriadicModelUsesSameBinaryFabric : Bool
     matchedTriadicModelAddsPureABCInteriorTerm : Bool
     pureABCTermVanishesOnCoordinateFaces : Bool
