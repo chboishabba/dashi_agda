@@ -1,7 +1,7 @@
 {
   "script": "scripts/matbg_bm_plane_wave_replay.py",
-  "script_sha256": "71d2894a3135eea3e4ec114b00316c3e1d08c567e78325f1a6ef8ec3ebab57fe",
-  "execution_environment": "ChatGPT analysis Python runtime, numpy.linalg.eigvalsh",
+  "script_sha256": "8558c6e9c048acbe4142524dbd824648815cd3251692bc1756c071d4e8f5259a",
+  "execution_environment": "Python with numpy.linalg.eigvalsh",
   "model": "independent BM reciprocal-lattice plane-wave reconstruction",
   "sources": {
     "bm2011": "10.1073/pnas.1108174108",
