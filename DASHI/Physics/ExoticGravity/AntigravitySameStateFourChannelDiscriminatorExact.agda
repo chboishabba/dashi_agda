@@ -1,0 +1,211 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.ExoticGravity.AntigravitySameStateFourChannelDiscriminatorExact where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_; -_)
+open import Data.Rational.Tactic.RingSolver using (solve-∀)
+
+import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact as Bubble
+import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveShellFamilyExact as Shell
+import DASHI.Physics.Foundations.GRQFTDeSitterKottlerJunctionExact as Junction
+
+------------------------------------------------------------------------
+-- SAME-STATE FOUR-CHANNEL DISCRIMINATOR
+--
+-- This is repository-owned experimental/compiler structure.  It does not
+-- attribute the four-channel protocol to any external source and it does not
+-- promote an observed anomaly into a metric claim.  The central requirement is
+-- stronger: one selected metric state must feed weight/support, free-fall,
+-- clock and optical consumers on the same candidate/apparatus.
+------------------------------------------------------------------------
+
+record SameStateFourChannelPrediction : Set₁ where
+  constructor same-state-four-channel-prediction
+  field
+    MetricState : Set
+    metricState : MetricState
+
+    WeightObservation FreeFallObservation ClockObservation OpticalObservation : Set
+
+    weightFromSameMetric : MetricState → WeightObservation
+    freeFallFromSameMetric : MetricState → FreeFallObservation
+    clockFromSameMetric : MetricState → ClockObservation
+    opticalFromSameMetric : MetricState → OpticalObservation
+
+    sameMetricFeedsAllFourChannels : Bool
+    sameMetricFeedsAllFourChannelsIsTrue :
+      sameMetricFeedsAllFourChannels ≡ true
+
+open SameStateFourChannelPrediction public
+
+weightOnlyCannotPromoteMetricClaim : Bool
+weightOnlyCannotPromoteMetricClaim = true
+
+anomalyAloneIsNotGeometry : Bool
+anomalyAloneIsNotGeometry = true
+
+------------------------------------------------------------------------
+-- EXACT NORMALIZED NAMBU/KOTTLER FIXTURE REUSED FROM MASTER.
+--
+-- These are normalized geometry predictions only.  They are not SI device
+-- forecasts until P2 supplies the physical source scale/calibration.
+------------------------------------------------------------------------
+
+fixtureOutwardFreeFall : ℚ
+fixtureOutwardFreeFall = Bubble.fixtureOutwardAcceleration
+
+fixtureOutwardFreeFallIsFiveTwentyFourths :
+  fixtureOutwardFreeFall ≡ Int.+ 5 / 24
+fixtureOutwardFreeFallIsFiveTwentyFourths = refl
+
+fixtureSupportWeightChange : ℚ → ℚ
+fixtureSupportWeightChange passiveMass =
+  - (passiveMass * fixtureOutwardFreeFall)
+
+fixtureExteriorLapseRoot : ℚ
+fixtureExteriorLapseRoot = Shell.y
+
+fixtureInteriorLapseRoot : ℚ
+fixtureInteriorLapseRoot = Shell.x
+
+fixtureExteriorLapseRootIsHalf :
+  fixtureExteriorLapseRoot ≡ Int.+ 1 / 2
+fixtureExteriorLapseRootIsHalf = refl
+
+fixtureInteriorLapseRootIsThreeQuarters :
+  fixtureInteriorLapseRoot ≡ Int.+ 3 / 4
+fixtureInteriorLapseRootIsThreeQuarters = refl
+
+kottlerLapseDelta : ℚ → ℚ → ℚ → ℚ → ℚ
+kottlerLapseDelta radius mass lambda deltaLambda =
+  Junction.fExterior radius mass (lambda + deltaLambda)
+  - Junction.fExterior radius mass lambda
+
+kottlerLapseDeltaLinear :
+  ∀ radius mass lambda deltaLambda →
+  kottlerLapseDelta radius mass lambda deltaLambda
+  ≡ - (deltaLambda * radius * radius / (Int.+ 3 / 1))
+kottlerLapseDeltaLinear = solve-∀
+
+-- Signature convention of the selected static ansatz: g_tt = -f.
+fixtureMetricDelta : ℚ → ℚ
+fixtureMetricDelta deltaLambda =
+  - (kottlerLapseDelta
+      Bubble.fixtureRadius
+      Bubble.fixtureMass
+      Bubble.fixtureExteriorLambda
+      deltaLambda)
+
+fixtureMetricDeltaIsFourThirdsDeltaLambda :
+  ∀ deltaLambda →
+  fixtureMetricDelta deltaLambda ≡ (Int.+ 4 / 3) * deltaLambda
+fixtureMetricDeltaIsFourThirdsDeltaLambda = solve-∀
+
+scalarMetricPerturbationIsNotTTMode : Bool
+scalarMetricPerturbationIsNotTTMode = true
+
+------------------------------------------------------------------------
+-- MECHANISM-SIGNATURE TEMPLATES
+--
+-- These are DASHI-authored hypothesis templates for discriminator design, not
+-- source-entitled statements that any real device has these signatures.
+------------------------------------------------------------------------
+
+data MechanismClass : Set where
+  ordinaryForceConfounder : MechanismClass
+  inertiaOnlyCandidate : MechanismClass
+  scalarMetricCandidate : MechanismClass
+  propagatingTTCandidate : MechanismClass
+
+record MechanismSignature : Set where
+  constructor mechanism-signature
+  field
+    supportWeightChannel : Bool
+    freeFallMetricChannel : Bool
+    clockMetricChannel : Bool
+    opticalMetricChannel : Bool
+    propagatingTTChannel : Bool
+
+open MechanismSignature public
+
+signature : MechanismClass → MechanismSignature
+signature ordinaryForceConfounder =
+  mechanism-signature true false false false false
+signature inertiaOnlyCandidate =
+  mechanism-signature true false false false false
+signature scalarMetricCandidate =
+  mechanism-signature true true true true false
+signature propagatingTTCandidate =
+  mechanism-signature true true true true true
+
+ordinaryForceHasNoIndependentMetricChannels : Bool
+ordinaryForceHasNoIndependentMetricChannels = true
+
+scalarMetricHasClockAndOpticalMetricChannels : Bool
+scalarMetricHasClockAndOpticalMetricChannels = true
+
+ttRequiresAdditionalWaveSectorReceipt : Bool
+ttRequiresAdditionalWaveSectorReceipt = true
+
+------------------------------------------------------------------------
+-- CANDIDATE-BOUND EXPERIMENT CONTRACT
+--
+-- Cross-pollinates only the generic discipline of the newer field/geometry/
+-- matter and precision-closure work: candidate identity, nuisance closure,
+-- matched channels and replication are proof-relevant on the same experiment.
+-- No sibling-PR theorem authority is imported here.
+------------------------------------------------------------------------
+
+record CandidateBoundFourChannelExperiment : Set₁ where
+  constructor candidate-bound-four-channel-experiment
+  field
+    Candidate : Set
+    candidate : Candidate
+
+    prediction : SameStateFourChannelPrediction
+
+    sameCandidateAcrossAllChannels : Bool
+    sameCandidateAcrossAllChannelsIsTrue :
+      sameCandidateAcrossAllChannels ≡ true
+
+    ordinaryMomentumClosed : Bool
+    ordinaryMomentumClosedIsTrue : ordinaryMomentumClosed ≡ true
+
+    electromagneticBackgroundClosed : Bool
+    electromagneticBackgroundClosedIsTrue :
+      electromagneticBackgroundClosed ≡ true
+
+    thermalMechanicalBackgroundClosed : Bool
+    thermalMechanicalBackgroundClosedIsTrue :
+      thermalMechanicalBackgroundClosed ≡ true
+
+    crossChannelMetricConsistency : Bool
+    crossChannelMetricConsistencyIsTrue :
+      crossChannelMetricConsistency ≡ true
+
+    nullAndCalibrationChannelsPresent : Bool
+    nullAndCalibrationChannelsPresentIsTrue :
+      nullAndCalibrationChannelsPresent ≡ true
+
+    replicationRequired : Bool
+    replicationRequiredIsTrue : replicationRequired ≡ true
+
+open CandidateBoundFourChannelExperiment public
+
+record FourChannelPromotionBoundary : Set where
+  constructor four-channel-promotion-boundary
+  field
+    weightOnlyPromotesMetric : Bool
+    supportForceAnomalyPromotesFreeFall : Bool
+    scalarMetricPromotesTT : Bool
+    sameMetricAcrossChannelsRequired : Bool
+    nuisanceClosureRequired : Bool
+    crossChannelConsistencyRequired : Bool
+    replicationStillRequired : Bool
+
+canonicalFourChannelPromotionBoundary : FourChannelPromotionBoundary
+canonicalFourChannelPromotionBoundary =
+  four-channel-promotion-boundary
+    false false false true true true true
