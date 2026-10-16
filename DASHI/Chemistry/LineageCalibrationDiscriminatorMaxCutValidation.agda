@@ -10,6 +10,8 @@ import DASHI.Biology.KitzerowBH4FluxCausalModelsExact as BH4
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
 import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
 import DASHI.Biology.KitzerowBH4RedoxSpatialDiscriminatorExact as RedoxSpatial
+import DASHI.Biology.KitzerowBH4TransportCarrierProbeExact as TransportProbe
+import DASHI.Biology.KitzerowBH4TransportAcquisitionStatusExact as TransportStatus
 import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact as Status
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact as Disc
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact as Carbon
@@ -49,10 +51,20 @@ bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer :
 bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer =
   refl , (refl , (refl , (refl , refl)))
 
-bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux :
-  RedoxSpatial.specificMembraneCarrierRequiredByUptakeStudy RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
-  × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
-bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux = refl , refl
+bh4CarrierMechanismIsContextSpecific :
+  TransportProbe.specificTransportersExistInSomeContexts TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.singleUniversalNeuralBH4CarrierEstablished TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportProbe.neuralPassiveDiffusionResultUniversalizesToAllTissues TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportProbe.transporterDependenceIsTissueSpeciesSubstrateSpecific TransportProbe.canonicalTransportCarrierBoundary ≡ true
+bh4CarrierMechanismIsContextSpecific = refl , (refl , (refl , refl))
+
+bh4QuantitativeTransportPaymentStopsBeforeTargetNeuralTransfer :
+  TransportProbe.quantitativeTranscellularBH4RatePaid TransportProbe.canonicalTransportCarrierBoundary ≡ true
+  × TransportProbe.quantitativeNeuralDonorRecipientFluxPaid TransportProbe.canonicalTransportCarrierBoundary ≡ false
+  × TransportStatus.nonNeuralTranscellularRatePaid TransportStatus.canonicalTransportAcquisitionStatus ≡ true
+  × TransportStatus.neuralDonorRecipientRatePaid TransportStatus.canonicalTransportAcquisitionStatus ≡ false
+bh4QuantitativeTransportPaymentStopsBeforeTargetNeuralTransfer =
+  refl , (refl , (refl , refl))
 
 bh4TopologyResolvedBalanceRetainsNumericalAcquisitionDebt :
   RedoxSpatial.topologyResolvedStateRequired RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
