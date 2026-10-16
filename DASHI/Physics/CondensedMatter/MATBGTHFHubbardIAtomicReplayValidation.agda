@@ -1,6 +1,6 @@
 module DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayValidation where
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.CondensedMatter.MATBGTHFHubbardIAtomicReplayReceiptExact as Replay
