@@ -9,9 +9,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPBehavioralSpecializerFrontierVal
 --   actual coded machine
 --     -> self-delimiting quote
 --     -> executable raw parse/dispatch/tape semantics
+--     -> typed-standard fidelity on every actual exact run
 --     -> abstract specialization/diagonal fixed-point theorem
 --     -> explicit timing Pareto (phase expansion vs compact XOR counter)
---     -> still-unpaid typed fidelity + literal specializer compiler
+--     -> still-unpaid literal specializer/interpreter compiler
 --     -> still-unpaid final same-object resource fixed point.
 --
 -- Attribution boundary: the XOR/IIT sibling motivates one implementation
@@ -26,6 +27,13 @@ open import DASHI.Mathematics.Complexity.CodedFiniteStandardSelfDelimitingCodeEx
 
 open import DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterExact
   using (runSelfDelimitedCode; runActualCodeReducesToRawView)
+
+open import DASHI.Mathematics.Complexity.CodedFiniteStandardRawInterpreterFidelityExact
+  using
+    ( rawNextExact
+    ; rawIterateFollowsStandardRun
+    ; selfDelimitedInterpreterFollowsStandardRun
+    )
 
 open import DASHI.Mathematics.Complexity.PNotEqualsNPKleeneSpecializationFixedPointExact
   using (fixedPointProgram; fixedPointProgramCorrect; fixedPointProgramSizeBound)
@@ -47,9 +55,9 @@ record BehavioralSpecializerFrontierBoundary : Set where
   field
     selfDelimitingQuotePaid : Bool
     rawInterpreterPaid : Bool
+    typedRawToStandardFidelityPaid : Bool
     abstractBehavioralFixedPointPaid : Bool
     timingResourceParetoPaid : Bool
-    typedRawToStandardFidelityStillRequired : Bool
     literalCodedSpecializerCompilerStillRequired : Bool
     quotedCodeMustActuallyBeConsumed : Bool
     finalSameObjectResourceFixedPointStillRequired : Bool
@@ -62,6 +70,6 @@ canonicalBehavioralSpecializerFrontierBoundary :
   BehavioralSpecializerFrontierBoundary
 canonicalBehavioralSpecializerFrontierBoundary =
   behavioral-specializer-frontier-boundary
-    true true true true
-    true true true true
+    true true true true true
+    true true true
     false false
