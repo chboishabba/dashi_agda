@@ -44,6 +44,18 @@ quotedMachinePayload (Code.specialized program static) =
 quotedMachinePayload (Code.diagonalized program) =
   quotedMachinePayload program
 
+------------------------------------------------------------------------
+-- Every program tree has a leftmost primitive machine.  The Kleene fixed point
+-- generated from one primitive body recovers that exact body machine.
+------------------------------------------------------------------------
+
+headMachine :
+  Code.Program Coded.CodedFiniteStandardTM →
+  Coded.CodedFiniteStandardTM
+headMachine (Code.primitive machine) = machine
+headMachine (Code.specialized program static) = headMachine program
+headMachine (Code.diagonalized program) = headMachine program
+
 record CodedQuoteObservation : Set where
   constructor coded-quote-observation
   field
@@ -62,10 +74,6 @@ observeQuotedProgram quoted =
     (quotedMachinePayloadWidth quoted)
     (quotedMachinePayload quoted)
 
-------------------------------------------------------------------------
--- Quote-sensitive primitive semantics.
-------------------------------------------------------------------------
-
 codedQuoteSensitiveSemantics :
   Code.PrimitiveSemantics
     Coded.CodedFiniteStandardTM
@@ -83,6 +91,11 @@ codedQuoteSensitiveFixedPoint :
 codedQuoteSensitiveFixedPoint machine =
   Code.primitiveBodyFixedPoint machine
 
+codedFixedPointHeadMachineExact :
+  (machine : Coded.CodedFiniteStandardTM) →
+  headMachine (codedQuoteSensitiveFixedPoint machine) ≡ machine
+codedFixedPointHeadMachineExact machine = refl
+
 codedFixedPointObservesOwnQuotation :
   (machine : Coded.CodedFiniteStandardTM) →
   Code.run1
@@ -94,11 +107,6 @@ codedFixedPointObservesOwnQuotation :
     (observeQuotedProgram
       (codedQuoteSensitiveFixedPoint machine))
 codedFixedPointObservesOwnQuotation machine = refl
-
-------------------------------------------------------------------------
--- Exact feedback: the fixed syntax contains two diagonalized copies of the
--- primitive body.  Both the width and the literal Boolean payload duplicate.
-------------------------------------------------------------------------
 
 codedFixedPointPayloadWidthExact :
   (machine : Coded.CodedFiniteStandardTM) →
@@ -132,10 +140,7 @@ codedFixedPointSyntaxNodesExact machine =
 --
 -- Behavioural self-reference with genuine quote consumption is inhabited on a
 -- finite syntax whose primitive leaves are actual CodedFiniteStandardTM data.
--- The observation now contains the literal static-program Boolean payload, not
--- merely its size.  Thus old-Q2 quote erasure is not intrinsic to Kleene syntax.
---
--- Still unpaid: literal standard-TM execution of this quote-sensitive body and
--- replacement of the diagnostic observation by streamed guarded-Cook behaviour
--- for the exact quoted code.
+-- The fixed-point quotation also recovers the exact primitive machine by
+-- definition.  The remaining Clay-critical step is to use that recovered same
+-- machine to drive guarded-Cook streaming in an ordinary finite TM execution.
 ------------------------------------------------------------------------
