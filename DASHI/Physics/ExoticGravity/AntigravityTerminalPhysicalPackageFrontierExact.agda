@@ -15,36 +15,31 @@ import DASHI.Physics.Foundations.CMP119AntigravityLocalCWightmanTerminalToStatic
 ------------------------------------------------------------------------
 -- TERMINAL PHYSICAL-PACKAGE FRONTIER
 --
--- After the normalization-flow / Delta-V tranche and the current R136 reuse
--- compilers, the preferred source->response path is scheduled by PHYSICAL
--- PACKAGES rather than by every field inside each package.
---
 -- Mandatory for static and scalar differential response:
 --
---   P1. one typed Local-C/Wightman terminal package.
---       Current master Pareto-reduces this package to TWO source-facing
---       packages:
---         Q1  actual BC2 path-derivative semantics + B4-equivariant path;
---         E24 one shared pinned stress-cylinder encoding/admissibility package
---             reused definitionally for Round281 E4 clustering.
---       B0/B3 selected semantics, E4 stress selection/decay, primitive E1
---       covariance, and the downstream rest/boost/trace laws are not
---       separately recharged.
+--   P1. one typed Local-C/Wightman terminal package.  Current master reduces
+--       its antigravity-specific source content to TWO subpackages:
+--
+--       Q1  actual BC2 path-derivative semantics + B4-equivariant path;
+--       E24 one literal selected R109 real cylinder observable together with
+--           positive-time and gauge-invariance proofs.
+--
+--       The selected R109 insertion identity is definitionally pinned.  No
+--       arbitrary meaning predicate, all-stress encoding family, separate E4
+--       observable/decay theorem, primitive E1 covariance project, B0/B3
+--       antigravity-specific bridge, or downstream rest/boost/trace law is
+--       independently scheduled.
 --
 --   P2. one common gravitational calibration/renormalization package
 --       (affine source->rho map, cosmological convention, and the
---        consumer-relevant source/device stress*length^2 scale).
---
---       Accepted measured G is no longer an open subleaf for this consumer:
---       the attributed NIST/CODATA 2022 authority admission instantiates the
---       accepted physical Einstein-coupling ABI while retaining G's quoted
---       uncertainty and the non-exactness firewall.
+--        consumer-relevant source/device stress*length^2 scale).  Accepted
+--       measured G is already paid by the attributed CODATA-2022 admission.
 --
 --   P3. one matched experimental package
 --       (real controlled source switch, systematics budget, null/calibration,
 --        preregistration and replication).
 --
--- Optional only when a propagating Schuetzhold/GW claim is selected:
+-- Optional only for a propagating Schuetzhold/GW claim:
 --
 --   P4. one TT/device package
 --       (GW tangent identity, EM Hilbert-stress identity, localized interaction,
@@ -82,9 +77,15 @@ p1Q1PathDerivativeSemanticsAndEquivarianceStillRequired =
 p1PrimitiveE1DerivativeEquivarianceProjectRequired : Bool
 p1PrimitiveE1DerivativeEquivarianceProjectRequired = false
 
-p1SharedE2E4StressCylinderEncodingStillRequired : Bool
-p1SharedE2E4StressCylinderEncodingStillRequired =
-  P1.sharedE2E4StressCylinderEncodingStillRequired
+p1E24ObservableAndTwoAdmissibilityProofsStillRequired : Bool
+p1E24ObservableAndTwoAdmissibilityProofsStillRequired =
+  P1.e24NovelDataAreOneObservableAndTwoAdmissibilityProofs
+
+p1E24ArbitraryMeaningPredicateRequired : Bool
+p1E24ArbitraryMeaningPredicateRequired = false
+
+p1AllStressCylinderEncodingRequired : Bool
+p1AllStressCylinderEncodingRequired = false
 
 p1IndependentE4StressSelectionRequired : Bool
 p1IndependentE4StressSelectionRequired = false
@@ -153,11 +154,7 @@ ttPackageInternallyNeedsThreeSameObjectWelds =
   TT.sameGWMetricTangentStillRequired
 
 ------------------------------------------------------------------------
--- Package counts for the three preferred consumer modes.
---
--- P1 now contains two source-facing subpackages internally, but it remains one
--- terminal physical package at this consumer boundary.  Paying a P2 subleaf
--- likewise does not remove P2 itself.
+-- Package counts for preferred consumer modes.
 ------------------------------------------------------------------------
 
 mandatoryStaticResponsePhysicalPackageCount : Nat
