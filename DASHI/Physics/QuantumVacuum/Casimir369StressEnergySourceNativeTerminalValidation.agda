@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergySourceNativeTerminalExact as T
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSourceNativeHostMaxCutValidation
+import DASHI.Physics.QuantumVacuum.CasimirRound131PinnedRecoveryCompilerValidation
 import DASHI.Physics.QuantumVacuum.CasimirQuaternionSU2GroupLawBridgeValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1SelectedStressReadoutAttachmentValidation
@@ -21,6 +22,10 @@ quaternionGroupLawBridgePaidRegression : T.quaternionSU2GroupLawBridgePaid T.can
 quaternionGroupLawBridgePaidRegression = refl
 r457EqualityCompilerPaidRegression : T.r457RecoveryEqualityCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
 r457EqualityCompilerPaidRegression = refl
+pinnedSelectionCompilerPaidRegression : T.pinnedSourceNativeSelectionCompilerPaid T.canonicalSourceNativeTerminalBoundary ≡ true
+pinnedSelectionCompilerPaidRegression = refl
+independentPinnedSelectionNotRequiredRegression : T.independentPinnedSourceNativeSelectionRequired T.canonicalSourceNativeTerminalBoundary ≡ false
+independentPinnedSelectionNotRequiredRegression = refl
 actionEqualityNotIndependentRegression : T.independentRestrictedYMMaxwellActionEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
 actionEqualityNotIndependentRegression = refl
 metricVariationEqualityNotIndependentRegression : T.independentMetricVariationEqualityRequired T.canonicalSourceNativeTerminalBoundary ≡ false
@@ -34,10 +39,12 @@ secondRenormalizationNotRequiredRegression = refl
 
 round131RecoveredAttachmentStillOpenRegression : T.round131RecoveredQFTAttachmentForR457Paid T.canonicalSourceNativeTerminalBoundary ≡ false
 round131RecoveredAttachmentStillOpenRegression = refl
+r457PinnedIdentityStillOpenRegression : T.r457LiteralPinnedConstructionIdentityPaid T.canonicalSourceNativeTerminalBoundary ≡ false
+r457PinnedIdentityStillOpenRegression = refl
 
 firstBlockerRegression : T.firstUnificationBlocker ≡ T.missingRound131RecoveredQFTAttachmentForR457
 firstBlockerRegression = refl
-secondBlockerRegression : T.secondUnificationBlocker ≡ T.missingPinnedSourceNativeRecoverySelection
+secondBlockerRegression : T.secondUnificationBlocker ≡ T.missingR457LiteralPinnedConstructionIdentity
 secondBlockerRegression = refl
 thirdBlockerRegression : T.thirdUnificationBlocker ≡ T.missingSelectedStructuralGroupQuaternionSU2Identification
 thirdBlockerRegression = refl
