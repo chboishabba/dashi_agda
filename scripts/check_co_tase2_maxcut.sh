@@ -22,6 +22,7 @@ python3 scripts/co_tase2_spin_space_generator_bridge.py \
 
 python3 scripts/co_tase2_wannier90_spectral_selftest.py
 python3 scripts/co_tase2_wannier_bns_covariance_selftest.py
+python3 scripts/co_tase2_wannier3d_diagnostics_selftest.py
 python3 scripts/co_tase2_kz_final_state_calibration_selftest.py
 python3 scripts/co_tase2_arpes_observer_selftest.py
 
@@ -42,6 +43,8 @@ python3 -m py_compile \
   scripts/co_tase2_wannier90_spectral_selftest.py \
   scripts/co_tase2_wannier_bns_covariance_audit.py \
   scripts/co_tase2_wannier_bns_covariance_selftest.py \
+  scripts/co_tase2_wannier3d_diagnostics.py \
+  scripts/co_tase2_wannier3d_diagnostics_selftest.py \
   scripts/co_tase2_kz_final_state_calibration.py \
   scripts/co_tase2_kz_final_state_calibration_selftest.py \
   scripts/co_tase2_dataset_download_probe.py
