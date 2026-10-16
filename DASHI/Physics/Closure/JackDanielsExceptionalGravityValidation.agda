@@ -8,3 +8,4 @@ module DASHI.Physics.Closure.JackDanielsExceptionalGravityValidation where
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact
 import DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact
+import DASHI.Physics.Closure.JackDanielsExceptionalGravityTerminalMaxCutExact
