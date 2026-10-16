@@ -1,0 +1,14 @@
+{
+  "assertions_passed": true,
+  "fillings": [
+    {"delta_S_over_kB": 4.248495242049359, "high_temperature_S_over_kB": 4.248495242049359, "high_temperature_microstates": 70, "low_temperature_S_over_kB": 0.0, "low_temperature_microstates": 1, "nu": 0},
+    {"delta_S_over_kB": 2.639057329615259, "high_temperature_S_over_kB": 4.02535169073515, "high_temperature_microstates": 56, "low_temperature_S_over_kB": 1.3862943611198906, "low_temperature_microstates": 4, "nu": 1},
+    {"delta_S_over_kB": 1.5404450409471488, "high_temperature_S_over_kB": 3.332204510175204, "high_temperature_microstates": 28, "low_temperature_S_over_kB": 1.791759469228055, "low_temperature_microstates": 6, "nu": 2},
+    {"delta_S_over_kB": 0.6931471805599452, "high_temperature_S_over_kB": 2.0794415416798357, "high_temperature_microstates": 8, "low_temperature_S_over_kB": 1.3862943611198906, "low_temperature_microstates": 4, "nu": 3}
+  ],
+  "model": "Zhang-2026 combinatorial entropy target replay",
+  "promotion_boundaries": {"agda_kernel_receipt": false, "measured_entropy_curve_replay": false, "microscopic_mechanism_proved": false, "same_sample_qtm_entropy": false},
+  "script": "scripts/matbg_entropy_combinatorial_replay.py",
+  "script_sha256": "88f8df07a88df1c7e548dbd6d8a982b3e3ed83f8465ea99ae46597bb201e156e",
+  "source_doi": "10.1038/s41467-026-76179-y"
+}
