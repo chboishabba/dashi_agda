@@ -9,6 +9,7 @@ import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedMaterialProducerEx
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoWannierSpectralProducerExact as Wannier
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoWannierBNSCovarianceExact as WannierBNS
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoWannier3DResponseExact as Response3D
+import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoNonAbelianTopologyExact as Topology
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoPublishedARPESConstraintsExact as PublishedARPES
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoKzCalibrationCrossPollinationExact as Kz
 import DASHI.Physics.CondensedMatter.CoQuarterTaSeTwoIndependentTheoryCrossValidationExact as Independent
@@ -32,6 +33,7 @@ record CoQuarterTaSeTwoMaxCutStatus : Set where
     wannierFormatConsumerImplemented : Bool
     materialBasisBNSCovarianceConsumerImplemented : Bool
     wannier3DResponseConsumerImplemented : Bool
+    nonAbelianTopologyConsumerImplemented : Bool
     publishedARPESSummaryConstraintsFixed : Bool
     kzCalibrationRouteFixed : Bool
     rawIgorObserverConsumerImplemented : Bool
@@ -53,7 +55,7 @@ canonicalCoQuarterTaSeTwoMaxCutStatus : CoQuarterTaSeTwoMaxCutStatus
 canonicalCoQuarterTaSeTwoMaxCutStatus =
   co-quarter-tase-two-max-cut-status
     true true true true true true
-    true true true true true true
+    true true true true true true true
     true true true
     true true true true
     false false false false false false false false
@@ -76,6 +78,15 @@ existingMaterialBasisCovarianceStatus = WannierBNS.canonicalMaterialBasisCovaria
 
 existingWannier3DResponseStatus : Response3D.Wannier3DResponseStatus
 existingWannier3DResponseStatus = Response3D.canonicalWannier3DResponseStatus
+
+existingNonAbelianTopologyStatus : Topology.NonAbelianTopologyStatus
+existingNonAbelianTopologyStatus = Topology.canonicalNonAbelianTopologyStatus
+
+existingTopologyAttributionBoundary : Topology.AttributionBoundary
+existingTopologyAttributionBoundary = Topology.canonicalAttributionBoundary
+
+existingTransportPromotionBoundary : Topology.TransportPromotionBoundary
+existingTransportPromotionBoundary = Topology.canonicalTransportPromotionBoundary
 
 existingPublishedARPESStatus : PublishedARPES.PublishedTargetStatus
 existingPublishedARPESStatus = PublishedARPES.canonicalPublishedTargetStatus
@@ -109,9 +120,14 @@ record IrreduciblePhysicalResidual : Set where
     rawARPESCalibrationManifestNeeded : Bool
     calibratedSpectralObserverNeeded : Bool
     co3DResponseExecutionNeeded : Bool
+    nonAbelianTopologyExecutionNeeded : Bool
     quantitativeForwardFitNeeded : Bool
+    degeneracySafeTransportNeeded : Bool
     furtherAbstractToyLayerNeeded : Bool
 
 canonicalIrreduciblePhysicalResidual : IrreduciblePhysicalResidual
 canonicalIrreduciblePhysicalResidual =
-  irreducible-physical-residual true true true true true true true true true false
+  irreducible-physical-residual
+    true true true true true true
+    true true true true true
+    false
