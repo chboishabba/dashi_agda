@@ -3,10 +3,16 @@
 
 This is numerical evidence only.  It does not inspect Agda source and does not
 promote rank/cardinality observations into formal same-object theorems.
+
+The 2D torus is also reported explicitly as a fabric of local 2-in/1-out
+synthesis cells.  Each target (i,j) receives named A/B wires from (i+1,j) and
+(i,j+1).  This makes the grid-wide recurrence geometry visible independently
+of whether the local synthesis algebra is XOR, triXor, or another matched gate.
 """
 
 from __future__ import annotations
 
+from collections import defaultdict
 from itertools import combinations, product
 from math import log2
 
@@ -96,6 +102,69 @@ def scaling_row(q: int, n: int, dim: int, axes: tuple[int, ...]):
     }
 
 
+def two_input_fabric_metrics(n: int) -> dict:
+    """Directed toroidal gluing graph for the east+south 2->1 synthesis rule."""
+    nodes = tuple(product(range(n), repeat=2))
+    edges = []
+    for target in nodes:
+        i, j = target
+        source_a = ((i + 1) % n, j)
+        source_b = (i, (j + 1) % n)
+        edges.append((source_a, target, "A"))
+        edges.append((source_b, target, "B"))
+
+    adjacency = defaultdict(list)
+    reverse = defaultdict(list)
+    for source, target, _port in edges:
+        adjacency[source].append(target)
+        reverse[target].append(source)
+
+    seen = set()
+    order = []
+
+    def visit(node):
+        seen.add(node)
+        for nxt in adjacency[node]:
+            if nxt not in seen:
+                visit(nxt)
+        order.append(node)
+
+    for node in nodes:
+        if node not in seen:
+            visit(node)
+
+    seen.clear()
+    components = []
+
+    def reverse_visit(node, component):
+        seen.add(node)
+        component.append(node)
+        for nxt in reverse[node]:
+            if nxt not in seen:
+                reverse_visit(nxt, component)
+
+    for node in reversed(order):
+        if node not in seen:
+            component = []
+            reverse_visit(node, component)
+            components.append(component)
+
+    indegrees = {node: len(reverse[node]) for node in nodes}
+    outdegrees = {node: len(adjacency[node]) for node in nodes}
+    return {
+        "n": n,
+        "local_synthesis_cells": len(nodes),
+        "directed_named_wires": len(edges),
+        "all_indegrees": sorted(set(indegrees.values())),
+        "all_outdegrees": sorted(set(outdegrees.values())),
+        "strongly_connected_components": len(components),
+        "largest_scc_sites": max(map(len, components)),
+        "explicit_axial_cycles": 2 * n,
+        "axial_cycle_length": n,
+        "interpretation": "global recurrence is gluing of local 2-input/1-output cells",
+    }
+
+
 def cube_two_face_projection_ranks():
     q = 3
     n = 3
@@ -129,6 +198,10 @@ def main() -> None:
     print("# lattice scaling")
     for row in rows:
         print(row)
+
+    print("# grid as repeated 2-input/1-output synthesis fabric")
+    for n in (2, 3, 10):
+        print(two_input_fabric_metrics(n))
 
     print("# 3x3x3 ternary two-face projection")
     for row in cube_two_face_projection_ranks():
