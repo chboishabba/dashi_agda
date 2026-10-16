@@ -5,6 +5,9 @@ import DASHI.Biology.LeadCalciumEndToEndReplayExact
 import DASHI.Biology.KitzerowBH4FluxCausalModelsExact
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorValidation
+import DASHI.Biology.KitzerowBH4NeuralContextSourceAtlasExact
+import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact
+import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorValidation
 import DASHI.Chemistry.LineageBidiDiscriminatorSynthesisExact
 import DASHI.Biology.CarbonSiliconReachableChemistryBenchmarkExact
 
@@ -17,10 +20,10 @@ import DASHI.Chemistry.LineageAttributionEvidencePaymentExact
 import DASHI.Chemistry.AttributedGoldReactionReplayExact
 import DASHI.Chemistry.LineageSourceManifestationGuardExact
 
--- Newly acquired primary/direct evidence is kept in its own attributed atlas
--- and bounded payment layer so local payments cannot silently upgrade the
--- broader generic unpaid cells. The hepatic PAH-iNOS study is the first direct
--- same-system causal-discriminator payment for the BH4 allocation target.
+-- Newly acquired primary/direct evidence is kept in attributed source owners
+-- and bounded payment layers so local payments cannot silently upgrade the
+-- broader generic unpaid cells. Hepatic PAH-iNOS and neural rescue/context
+-- results are direct causal-discriminator payments for the BH4 allocation lane.
 import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact
 import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact
 import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact
