@@ -101,7 +101,14 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     selectedQFTCompactSimpleEvidenceAttachmentPaid : Bool
     selectedQFTGroupDynkinA1ClassificationPaid : Bool
     selectedQFTGroupQuaternionSU2InterpretationPaid : Bool
-    canonicalU1SelectedQFTStressRestrictionPaid : Bool
+
+    cartanU1FieldRestrictionPaid : Bool
+    restrictedFieldNonAbelianCommutatorVanishingPaid : Bool
+    yangMillsActionToMaxwellRestrictionPaid : Bool
+    metricVariationU1StressRestrictionPaid : Bool
+    restrictedQuantumStressMaxwellIdentificationPaid : Bool
+    samePlateBoundaryRenormalizationPaid : Bool
+
     u1RestrictedQFTStressCoordinateSymmetryPaid : Bool
     brownMaclayTenIndependentComponentValuesPaid : Bool
     fullSelectedSU2StressIsBrownMaclayTarget : Bool
@@ -129,7 +136,9 @@ canonicalTerminalBoundary =
     true true true true true true true true true true true
     true true true true true true true true true false true true true
     false false false false
-    false false false false false false false false
+    false false false
+    false false false false false false
+    false false false false
     false false
     false false false false false false false false false false false
 
@@ -204,10 +213,16 @@ data RemainingCasimirStressEnergyBlocker : Set where
   missingSelectedQFTCompactSimpleEvidenceAttachment : RemainingCasimirStressEnergyBlocker
   missingSelectedQFTGroupDynkinA1Classification : RemainingCasimirStressEnergyBlocker
   missingSelectedQFTGroupQuaternionSU2Interpretation : RemainingCasimirStressEnergyBlocker
-  missingCanonicalU1SelectedQFTStressRestriction : RemainingCasimirStressEnergyBlocker
+
+  missingCanonicalCartanU1FieldRestriction : RemainingCasimirStressEnergyBlocker
+  missingRestrictedFieldNonAbelianCommutatorVanishing : RemainingCasimirStressEnergyBlocker
+  missingYangMillsActionToMaxwellRestriction : RemainingCasimirStressEnergyBlocker
+  missingMetricVariationStressRestriction : RemainingCasimirStressEnergyBlocker
+  missingRestrictedQuantumStressMaxwellIdentification : RemainingCasimirStressEnergyBlocker
+  missingSamePlateBoundaryRenormalization : RemainingCasimirStressEnergyBlocker
+
   missingU1RestrictedQFTStressCoordinateSymmetry : RemainingCasimirStressEnergyBlocker
   missingBrownMaclayTenIndependentComponentValues : RemainingCasimirStressEnergyBlocker
-
   missingRound131AllSectorAssembly : RemainingCasimirStressEnergyBlocker
   missingEinsteinCommonMetricVariation : RemainingCasimirStressEnergyBlocker
   missingCommonMetricProducerLanguage : RemainingCasimirStressEnergyBlocker
@@ -229,19 +244,29 @@ secondUnificationBlocker = missingSelectedQFTGroupDynkinA1Classification
 thirdUnificationBlocker : RemainingCasimirStressEnergyBlocker
 thirdUnificationBlocker = missingSelectedQFTGroupQuaternionSU2Interpretation
 fourthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fourthUnificationBlocker = missingCanonicalU1SelectedQFTStressRestriction
+fourthUnificationBlocker = missingCanonicalCartanU1FieldRestriction
 fifthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fifthUnificationBlocker = missingU1RestrictedQFTStressCoordinateSymmetry
+fifthUnificationBlocker = missingRestrictedFieldNonAbelianCommutatorVanishing
 sixthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-sixthUnificationBlocker = missingBrownMaclayTenIndependentComponentValues
+sixthUnificationBlocker = missingYangMillsActionToMaxwellRestriction
 seventhUnificationBlocker : RemainingCasimirStressEnergyBlocker
-seventhUnificationBlocker = missingRound131AllSectorAssembly
+seventhUnificationBlocker = missingMetricVariationStressRestriction
 eighthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-eighthUnificationBlocker = missingEinsteinCommonMetricVariation
+eighthUnificationBlocker = missingRestrictedQuantumStressMaxwellIdentification
 ninthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-ninthUnificationBlocker = missingCommonMetricProducerLanguage
+ninthUnificationBlocker = missingSamePlateBoundaryRenormalization
 tenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-tenthUnificationBlocker = missingCasimirCommonActionVariationIdentification
+tenthUnificationBlocker = missingU1RestrictedQFTStressCoordinateSymmetry
+eleventhUnificationBlocker : RemainingCasimirStressEnergyBlocker
+eleventhUnificationBlocker = missingBrownMaclayTenIndependentComponentValues
+twelfthUnificationBlocker : RemainingCasimirStressEnergyBlocker
+twelfthUnificationBlocker = missingRound131AllSectorAssembly
+thirteenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
+thirteenthUnificationBlocker = missingEinsteinCommonMetricVariation
+fourteenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
+fourteenthUnificationBlocker = missingCommonMetricProducerLanguage
+fifteenthUnificationBlocker : RemainingCasimirStressEnergyBlocker
+fifteenthUnificationBlocker = missingCasimirCommonActionVariationIdentification
 
 firstGravityBlocker : RemainingCasimirStressEnergyBlocker
 firstGravityBlocker = missingSemiclassicalGravitySameObjectWeld
@@ -250,4 +275,4 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The selected-QFT Casimir cut now respects the physical subsector. Compact simplicity is compiler-payable once pinned-YM or LiteralClayStructuralBase evidence is attached to the same qftTarget. The selected group then needs source-backed Dynkin A1 classification and literal quaternionic SU(2) interpretation. Crucially, Brown-Maclay is not the full non-abelian SU(2) stress: the next payment is a canonical Cartan-U(1) stress restriction carrying field restriction, vanishing non-abelian contribution, YM->Maxwell action restriction, commutation with metric variation/stress construction, Maxwell-stress identification, and the same conducting-plate boundary/renormalization prescription. Only that restricted stress is then required to be coordinate-symmetric and match the ten independent Brown-Maclay values; the other six components are compiler output. The full selected SU(2) sector retains its own shared-stress role. After the restricted electromagnetic stress weld, Round131 all-sector aggregation begins, followed by common metric/action and semiclassical-GR payments."
+  "The selected-QFT Casimir max-cut is now fully decomposed to the first physical field/action seams. Existing evidence compilers can pay compact simplicity once attached to the same qftTarget; then the selected token still needs Dynkin-A1 and quaternionic-SU(2) identification. Brown-Maclay is never equated with the full SU(2) stress. The electromagnetic restriction is paid in six ordered leaves: canonical Cartan-U(1) field restriction; vanishing non-abelian commutator on that same restricted field; YM action -> Maxwell action; restriction commuting with metric variation/stress construction; restricted quantum stress = Maxwell stress; same conducting-plate boundary and renormalization prescription. Only then do coordinate symmetry and ten Brown-Maclay values apply to the restricted stress. After that, Round131 all-sector aggregation and the common metric/action/GR lanes resume. This is the terminal repository-internal max-cut; the next payments require actual same-object field/action/stress semantics rather than another carrier or cardinality abstraction."
