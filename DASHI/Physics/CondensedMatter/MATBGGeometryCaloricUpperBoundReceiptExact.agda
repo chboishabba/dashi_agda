@@ -24,7 +24,7 @@ canonicalGeometryCaloricUpperBoundReceipt =
   geometry-caloric-upper-bound-receipt
     "scripts/matbg_geometry_caloric_upper_bound.py"
     "Docs/evidence/matbg_geometry_caloric_upper_bound_2026-10-16.json"
-    "67cbebb5467e818083d2a3df7979dbec625c2b9c6973f97588a24e2e52823ee6"
+    "263011eaecf0135634a087f4f8c0b1e47d247143fc347db5cb4138f3b71a60f7"
     "10.1038/s41467-026-76179-y"
     "4.248495242049359"
     "2.6390573296152584"
@@ -34,7 +34,7 @@ canonicalGeometryCaloricUpperBoundReceipt =
     true
 
 record GeometryCaloricUpperBoundBoundary : Set where
-  constructor geometry-caloric-upper-bound-boundary
+  constructor geometry-caloric-upper-boundary
   field
     sourceCombinatorialEntropyUsed : Bool
     entropySwingExecutionPaid : Bool
@@ -51,7 +51,7 @@ open GeometryCaloricUpperBoundBoundary public
 
 canonicalGeometryCaloricUpperBoundBoundary : GeometryCaloricUpperBoundBoundary
 canonicalGeometryCaloricUpperBoundBoundary =
-  geometry-caloric-upper-bound-boundary
+  geometry-caloric-upper-boundary
     true true true false false false false false false false
 
 record GeometryCaloricAttributionBoundary : Set where
