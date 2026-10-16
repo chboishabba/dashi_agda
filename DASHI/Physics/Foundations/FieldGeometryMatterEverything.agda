@@ -64,6 +64,8 @@ import DASHI.Physics.Foundations.PrecisionThrustClosureExact
 import DASHI.Physics.Foundations.PrecisionThrustClosureValidation
 import DASHI.Physics.Foundations.FieldGeometryMatterExperimentParetoExact
 import DASHI.Physics.Foundations.FieldGeometryMatterExperimentParetoValidation
+import DASHI.Physics.Foundations.ScientistFrontierSiblingHandoffExact
+import DASHI.Physics.Foundations.ScientistFrontierSiblingHandoffValidation
 
 import DASHI.Physics.Foundations.CausalTransportFTLObligationsExact
 import DASHI.Physics.Foundations.CausalTransportFTLValidation
