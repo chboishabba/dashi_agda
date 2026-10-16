@@ -14,12 +14,6 @@ import DASHI.Physics.Foundations.GRQFTSingleVacuumIsraelKottlerExact as SingleVa
 
 ------------------------------------------------------------------------
 -- SAME-STATE FOUR-CHANNEL DISCRIMINATOR
---
--- This is repository-owned experimental/compiler structure.  It does not
--- attribute the four-channel protocol to any external source and it does not
--- promote an observed anomaly into a metric claim.  The central requirement is
--- stronger: one selected metric state must feed weight/support, free-fall,
--- clock and optical consumers on the same candidate/apparatus.
 ------------------------------------------------------------------------
 
 record SameStateFourChannelPrediction : Set₁ where
@@ -27,40 +21,34 @@ record SameStateFourChannelPrediction : Set₁ where
   field
     MetricState : Set
     metricState : MetricState
-
     WeightObservation FreeFallObservation ClockObservation OpticalObservation : Set
-
     weightFromSameMetric : MetricState → WeightObservation
     freeFallFromSameMetric : MetricState → FreeFallObservation
     clockFromSameMetric : MetricState → ClockObservation
     opticalFromSameMetric : MetricState → OpticalObservation
-
     sameMetricFeedsAllFourChannels : Bool
-    sameMetricFeedsAllFourChannelsIsTrue :
-      sameMetricFeedsAllFourChannels ≡ true
+    sameMetricFeedsAllFourChannelsIsTrue : sameMetricFeedsAllFourChannels ≡ true
 
 open SameStateFourChannelPrediction public
 
 ------------------------------------------------------------------------
 -- SOURCE -> STRESS -> METRIC PROVENANCE CHAIN
 --
--- The four-channel prediction is not allowed to float free of the source-side
--- object.  One selected source is compiled into one selected stress and then
--- one selected metric, and the metric stored in the four-channel prediction
--- must be literally that stress-derived metric.
+-- The metric carrier is taken definitionally from the selected prediction, so
+-- no auxiliary equality between metric carrier types or hidden transport is
+-- required.  The stored metric state itself must be literally the result of
+-- applying stressToMetric to the stress compiled from the selected source.
 ------------------------------------------------------------------------
 
 record SameStateStressMetricFourChannelChain : Set₁ where
   constructor same-state-stress-metric-four-channel-chain
   field
-    SourceState StressState MetricState : Set
+    SourceState StressState : Set
     selectedSource : SourceState
     sourceToStress : SourceState → StressState
-    stressToMetric : StressState → MetricState
-
     selectedPrediction : SameStateFourChannelPrediction
-    predictionMetricTypeIsSame :
-      SameStateFourChannelPrediction.MetricState selectedPrediction ≡ MetricState
+    stressToMetric :
+      StressState → SameStateFourChannelPrediction.MetricState selectedPrediction
     predictionMetricIsSameStressDerivedMetric :
       SameStateFourChannelPrediction.metricState selectedPrediction
       ≡ stressToMetric (sourceToStress selectedSource)
@@ -70,9 +58,6 @@ open SameStateStressMetricFourChannelChain public
 sameSourceStressMetricChainRequired : Bool
 sameSourceStressMetricChainRequired = true
 
--- Cross-pollinated lesson from the repo's consumer-relative stress machinery:
--- agreement after one projection (trace, active stress, one component, etc.)
--- cannot identify the complete stress object.
 sharedProjectionDoesNotIdentifyFullStress : Bool
 sharedProjectionDoesNotIdentifyFullStress = true
 
@@ -84,10 +69,6 @@ anomalyAloneIsNotGeometry = true
 
 ------------------------------------------------------------------------
 -- OLDER EXACT NAMBU/KOTTLER FIXTURE, RETAINED AS A REGRESSION/DONOR EXAMPLE.
---
--- #1120's preferred source route is now the single-vacuum normalized fixture
--- below.  Keeping these exact values prevents accidental loss of the earlier
--- A->E geometry while avoiding promotion of the older two-vacuum source path.
 ------------------------------------------------------------------------
 
 fixtureOutwardFreeFall : ℚ
@@ -98,8 +79,7 @@ fixtureOutwardFreeFallIsFiveTwentyFourths :
 fixtureOutwardFreeFallIsFiveTwentyFourths = refl
 
 fixtureSupportWeightChange : ℚ → ℚ
-fixtureSupportWeightChange passiveMass =
-  - (passiveMass * fixtureOutwardFreeFall)
+fixtureSupportWeightChange passiveMass = - (passiveMass * fixtureOutwardFreeFall)
 
 fixtureExteriorLapseRoot : ℚ
 fixtureExteriorLapseRoot = Shell.y
@@ -107,12 +87,10 @@ fixtureExteriorLapseRoot = Shell.y
 fixtureInteriorLapseRoot : ℚ
 fixtureInteriorLapseRoot = Shell.x
 
-fixtureExteriorLapseRootIsHalf :
-  fixtureExteriorLapseRoot ≡ Int.+ 1 / 2
+fixtureExteriorLapseRootIsHalf : fixtureExteriorLapseRoot ≡ Int.+ 1 / 2
 fixtureExteriorLapseRootIsHalf = refl
 
-fixtureInteriorLapseRootIsThreeQuarters :
-  fixtureInteriorLapseRoot ≡ Int.+ 3 / 4
+fixtureInteriorLapseRootIsThreeQuarters : fixtureInteriorLapseRoot ≡ Int.+ 3 / 4
 fixtureInteriorLapseRootIsThreeQuarters = refl
 
 olderNambuFixtureIsRegressionNotPreferredSourceRoute : Bool
@@ -120,10 +98,6 @@ olderNambuFixtureIsRegressionNotPreferredSourceRoute = true
 
 ------------------------------------------------------------------------
 -- PREFERRED SINGLE-VACUUM NORMALIZED FIXTURE.
---
--- This consumes #1120's current static source route: one vacuum amplitude on
--- both sides, positive metric mass, positive shell energy, DEC compatibility,
--- SEC violation, and outward Kottler acceleration.
 ------------------------------------------------------------------------
 
 preferredSingleVacuumFixtureRadius : ℚ
@@ -141,9 +115,7 @@ preferredSingleVacuumExteriorLapseRoot = SingleVacuum.fixtureY
 preferredSingleVacuumOutwardScaled : ℚ
 preferredSingleVacuumOutwardScaled =
   SingleVacuum.sameVacuumOutwardScaled
-    SingleVacuum.fixtureRadius
-    SingleVacuum.fixtureX
-    SingleVacuum.fixtureY
+    SingleVacuum.fixtureRadius SingleVacuum.fixtureX SingleVacuum.fixtureY
 
 preferredSingleVacuumOutwardScaledIsSeventySevenSeventyFifths :
   preferredSingleVacuumOutwardScaled ≡ Int.+ 77 / 75
@@ -152,8 +124,8 @@ preferredSingleVacuumOutwardScaledIsSeventySevenSeventyFifths =
 
 preferredSingleVacuumOutwardFreeFall : ℚ
 preferredSingleVacuumOutwardFreeFall =
-  preferredSingleVacuumOutwardScaled
-    / (preferredSingleVacuumFixtureRadius * preferredSingleVacuumFixtureRadius)
+  preferredSingleVacuumOutwardScaled /
+  (preferredSingleVacuumFixtureRadius * preferredSingleVacuumFixtureRadius)
 
 preferredSingleVacuumOutwardFreeFallIsSeventySevenThreeHundredths :
   preferredSingleVacuumOutwardFreeFall ≡ Int.+ 77 / 300
@@ -178,32 +150,23 @@ kottlerLapseDeltaLinear :
   ≡ - (deltaLambda * radius * radius / (Int.+ 3 / 1))
 kottlerLapseDeltaLinear = solve-∀
 
--- Signature convention of the selected static ansatz: g_tt = -f.
 fixtureMetricDelta : ℚ → ℚ
 fixtureMetricDelta deltaLambda =
-  - (kottlerLapseDelta
-      Bubble.fixtureRadius
-      Bubble.fixtureMass
-      Bubble.fixtureExteriorLambda
-      deltaLambda)
+  - (kottlerLapseDelta Bubble.fixtureRadius Bubble.fixtureMass
+      Bubble.fixtureExteriorLambda deltaLambda)
 
 fixtureMetricDeltaIsFourThirdsDeltaLambda :
-  ∀ deltaLambda →
-  fixtureMetricDelta deltaLambda ≡ (Int.+ 4 / 3) * deltaLambda
+  ∀ deltaLambda → fixtureMetricDelta deltaLambda ≡ (Int.+ 4 / 3) * deltaLambda
 fixtureMetricDeltaIsFourThirdsDeltaLambda = solve-∀
 
 preferredSingleVacuumMetricDelta : ℚ → ℚ
 preferredSingleVacuumMetricDelta deltaLambda =
-  - (kottlerLapseDelta
-      SingleVacuum.fixtureRadius
-      SingleVacuum.fixtureMass
-      SingleVacuum.fixtureLambda
-      deltaLambda)
+  - (kottlerLapseDelta SingleVacuum.fixtureRadius SingleVacuum.fixtureMass
+      SingleVacuum.fixtureLambda deltaLambda)
 
 preferredSingleVacuumMetricDeltaIsFourThirdsDeltaLambda :
   ∀ deltaLambda →
-  preferredSingleVacuumMetricDelta deltaLambda
-    ≡ (Int.+ 4 / 3) * deltaLambda
+  preferredSingleVacuumMetricDelta deltaLambda ≡ (Int.+ 4 / 3) * deltaLambda
 preferredSingleVacuumMetricDeltaIsFourThirdsDeltaLambda = solve-∀
 
 scalarMetricPerturbationIsNotTTMode : Bool
@@ -211,9 +174,6 @@ scalarMetricPerturbationIsNotTTMode = true
 
 ------------------------------------------------------------------------
 -- MECHANISM-SIGNATURE TEMPLATES
---
--- These are DASHI-authored hypothesis templates for discriminator design, not
--- source-entitled statements that any real device has these signatures.
 ------------------------------------------------------------------------
 
 data MechanismClass : Set where
@@ -234,14 +194,10 @@ record MechanismSignature : Set where
 open MechanismSignature public
 
 signature : MechanismClass → MechanismSignature
-signature ordinaryForceConfounder =
-  mechanism-signature true false false false false
-signature inertiaOnlyCandidate =
-  mechanism-signature true false false false false
-signature scalarMetricCandidate =
-  mechanism-signature true true true true false
-signature propagatingTTCandidate =
-  mechanism-signature true true true true true
+signature ordinaryForceConfounder = mechanism-signature true false false false false
+signature inertiaOnlyCandidate = mechanism-signature true false false false false
+signature scalarMetricCandidate = mechanism-signature true true true true false
+signature propagatingTTCandidate = mechanism-signature true true true true true
 
 ordinaryForceHasNoIndependentMetricChannels : Bool
 ordinaryForceHasNoIndependentMetricChannels = true
@@ -254,11 +210,6 @@ ttRequiresAdditionalWaveSectorReceipt = true
 
 ------------------------------------------------------------------------
 -- CANDIDATE-BOUND EXPERIMENT CONTRACT
---
--- Cross-pollinates only the generic discipline of the newer field/geometry/
--- matter and precision-closure work: candidate identity, nuisance closure,
--- matched channels and replication are proof-relevant on the same experiment.
--- No sibling-PR theorem authority is imported here.
 ------------------------------------------------------------------------
 
 record CandidateBoundFourChannelExperiment : Set₁ where
@@ -266,32 +217,19 @@ record CandidateBoundFourChannelExperiment : Set₁ where
   field
     Candidate : Set
     candidate : Candidate
-
     prediction : SameStateFourChannelPrediction
-
     sameCandidateAcrossAllChannels : Bool
-    sameCandidateAcrossAllChannelsIsTrue :
-      sameCandidateAcrossAllChannels ≡ true
-
+    sameCandidateAcrossAllChannelsIsTrue : sameCandidateAcrossAllChannels ≡ true
     ordinaryMomentumClosed : Bool
     ordinaryMomentumClosedIsTrue : ordinaryMomentumClosed ≡ true
-
     electromagneticBackgroundClosed : Bool
-    electromagneticBackgroundClosedIsTrue :
-      electromagneticBackgroundClosed ≡ true
-
+    electromagneticBackgroundClosedIsTrue : electromagneticBackgroundClosed ≡ true
     thermalMechanicalBackgroundClosed : Bool
-    thermalMechanicalBackgroundClosedIsTrue :
-      thermalMechanicalBackgroundClosed ≡ true
-
+    thermalMechanicalBackgroundClosedIsTrue : thermalMechanicalBackgroundClosed ≡ true
     crossChannelMetricConsistency : Bool
-    crossChannelMetricConsistencyIsTrue :
-      crossChannelMetricConsistency ≡ true
-
+    crossChannelMetricConsistencyIsTrue : crossChannelMetricConsistency ≡ true
     nullAndCalibrationChannelsPresent : Bool
-    nullAndCalibrationChannelsPresentIsTrue :
-      nullAndCalibrationChannelsPresent ≡ true
-
+    nullAndCalibrationChannelsPresentIsTrue : nullAndCalibrationChannelsPresent ≡ true
     replicationRequired : Bool
     replicationRequiredIsTrue : replicationRequired ≡ true
 
@@ -310,5 +248,4 @@ record FourChannelPromotionBoundary : Set where
 
 canonicalFourChannelPromotionBoundary : FourChannelPromotionBoundary
 canonicalFourChannelPromotionBoundary =
-  four-channel-promotion-boundary
-    false false false true true true true
+  four-channel-promotion-boundary false false false true true true true
