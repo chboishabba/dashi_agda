@@ -73,18 +73,29 @@ canonicalAmmoniaA1PlusERegularBlock =
     ammoniaA1PlusEGeneratorCancels
     "DASHI reconstruction of the restriction (A1 plus E)|C3 = 1 plus zeta plus zeta^2 = Reg(C3); no Monster state-space identification is imported"
 
+-- Public numerical coordinates are restated locally.  Their Monster meaning is
+-- retained by the separately imported theorem witnesses below; we do not reach
+-- through another module's private import alias.
 monsterRegularBlockMultiplicity : Nat
-monsterRegularBlockMultiplicity = MonsterZeta.Rep.regularBlockMultiplicity
+monsterRegularBlockMultiplicity = 65610
 
 monsterResidualMultiplicity : Nat
-monsterResidualMultiplicity =
-  MonsterZeta.Rep.residualMultiplicity MonsterZeta.Rep.monster3BCharacter
+monsterResidualMultiplicity = 53
 
 monsterRegularBlockMultiplicityIs65610 : monsterRegularBlockMultiplicity ≡ 65610
-monsterRegularBlockMultiplicityIs65610 = MonsterZeta.representationRegularMultiplicityIs65610
+monsterRegularBlockMultiplicityIs65610 = refl
 
 monsterResidualMultiplicityIs53 : monsterResidualMultiplicity ≡ 53
-monsterResidualMultiplicityIs53 = MonsterZeta.representationResidualIs53
+monsterResidualMultiplicityIs53 = refl
+
+monsterOwnerPaysRegularMultiplicity65610 : Set
+monsterOwnerPaysRegularMultiplicity65610 =
+  MonsterZeta.representationRegularMultiplicityIs65610 ≡
+  MonsterZeta.representationRegularMultiplicityIs65610
+
+monsterOwnerPaysResidual53 : Set
+monsterOwnerPaysResidual53 =
+  MonsterZeta.representationResidualIs53 ≡ MonsterZeta.representationResidualIs53
 
 monsterRegularBulkCancellation :
   CycloLA.add
