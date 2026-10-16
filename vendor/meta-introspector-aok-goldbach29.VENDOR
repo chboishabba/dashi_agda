@@ -1,20 +1,23 @@
 upstream_repository: meta-introspector/aok
-upstream_commit: c168223e96f7acc6179044f2a365a92db2e350c3
-upstream_paths:
-  - 1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach29/Program.lean
-  - 1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach30/Program.lean
+construction_commit: c168223e96f7acc6179044f2a365a92db2e350c3
+construction_paths:
+  goldbach29_commit_native: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Program.lean
+  goldbach30_same_tree: 1fcb5ebe-bbab-4c12-bc38-4f1cd4739c1b/code/Cryptids/Goldbach30/Program.lean
+semantic_source_revision: 428e2366045cb0b728115777df8bef14318a3bcf
+semantic_source_path: d3e01240-2567-46da-9224-8a1bc6668f6b/code/Cryptids/Goldbach29/Main.lean
 upstream_author: Mike Dupont / meta-introspector
 upstream_license: AGPL-3.0
-upstream_title: Goldbach30 / Goldbach29 FRACTRAN reduction pair
+upstream_title: Goldbach30 / Goldbach29 FRACTRAN reduction pair and Goldbach29 halting semantics
 
 attribution_boundary:
   Mike Dupont / meta-introspector owns the upstream Goldbach30 and Goldbach29
   constructions, their 30-to-29 fraction reduction, abstract machines,
-  FRACTRAN programs, and Lean proofs fstep_enc at the pinned commit.
-  DASHI owns only this immutable provenance receipt plus its independent
-  observer/fibre translation, exact arithmetic reconstruction of the success
-  macro, and DASHI-native consumer/cost theorems built from that explicitly
-  attributed external fact surface.
+  FRACTRAN programs, Lean proofs fstep_enc, and the later source-visible Lean
+  theorem goldbachProg_halts_iff.
+  DASHI owns only this provenance receipt plus its independent observer/fibre
+  translation, exact arithmetic reconstruction of the success macro, and
+  DASHI-native consumer/cost theorems built from that explicitly attributed
+  external fact surface.
 
 external_facts_used:
   - Goldbach30 has 30 fractions and 11 control states
@@ -24,12 +27,21 @@ external_facts_used:
   - Goldbach30 success uses NT.B -> SA, the SA/SB transfer loop, then SA -> RA.A
   - Goldbach29 success reroutes the transfer through NT.B/SB, stages through
     NT2.B, and reuses the existing NT.B b c -> RA.A transition
-  - each upstream file proves one encoded FRACTRAN step matches one abstract
+  - each Program.lean proves one encoded FRACTRAN step matches one abstract
     astep step (fstep_enc)
+  - at semantic_source_revision, Goldbach29/Main.lean contains theorem
+    goldbachProg_halts_iff: the 29-fraction program halts from N0 iff there is
+    an even n >= 4 with no representation as a sum of two primes
+
+path_provenance_note:
+  The construction commit itself records Goldbach29 under the d3e01240 UUID
+  directory. A later/user-supplied link used another UUID path; DASHI does not
+  rewrite commit-native provenance to that later path.
 
 non_claims:
   - this receipt does not vendor-copy AGPL source into DASHI
   - this receipt does not claim DASHI authorship of Goldbach30 or Goldbach29
-  - independent DASHI reconstruction is not the upstream Lean theorem itself
-  - this receipt alone does not prove whole-machine reachable weak bisimulation
-  - this receipt does not prove Goldbach's conjecture
+  - imported Lean theorem authority is not an Agda proof
+  - goldbachProg_halts_iff is an equivalence to a counterexample; it is not a
+    proof that no counterexample exists and therefore does not prove Goldbach
+  - this receipt alone does not prove Goldbach30/29 whole-machine weak bisimulation
