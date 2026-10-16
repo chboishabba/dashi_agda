@@ -1,16 +1,18 @@
 module DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact where
 
 ------------------------------------------------------------------------
--- C3 TRANSPORT FROM THE SOURCE-EXACT CMP109 ACTION TOWARD THE LATER BALABAN
--- RECOVERY SPINE
+-- C3 TRANSPORT FROM SOURCE-EXACT CMP109 INTO LATER BALABAN CONSUMERS
 --
--- CMP109 now has an actual source-backed order-three spatial action and an
--- equivariant scalar consumer.  The later R132--R140 recovery compiler is
--- machine-checked, and native stress representation transport is separately
--- machine-checked, but the repository does not expose a same-object map from
--- the CMP109 generated-grid carrier into the R140 recovery carrier.  This file
--- closes the reachable CMP109 fibre and reduces the remaining promotion to one
--- explicit intertwiner socket rather than a vague "no C3" boundary.
+-- Historical note: an earlier cut treated a direct GridCell4 -> R140 carrier
+-- map as the terminal missing object.  Later repository work already supplies
+-- a stronger consumer-facing route: R144's actual finite-D1 stress readout is
+-- covariant under the SAME concrete B4 generator family used by the CMP109
+-- source symmetry theorem.  Restricting that action to the 1,2,3 spatial cycle
+-- therefore removes the direct R140 carrier socket from the terminal roadmap.
+--
+-- The generic socket below remains useful if some future consumer genuinely
+-- needs an ambient C3 action on an intermediate recovery carrier, but it is no
+-- longer charged as the shortest physical source->stress route.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -19,10 +21,11 @@ import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as CMP109C3
 import DASHI.Physics.Foundations.BalabanNativeSectorRecoveryTransportExact as NativeTransport
+import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R144C3
 import DASHI.Physics.YangMills.BalabanUnifiedPresentCutSchwingerRecoveryRound140Exact as R140
 
 ------------------------------------------------------------------------
--- 1. Generic same-object socket for the only missing transport step.
+-- 1. Optional generic ambient-recovery socket.
 ------------------------------------------------------------------------
 
 record R140C3IntertwinerSocket (RecoveryCarrier : Set) : Set₁ where
@@ -32,7 +35,7 @@ record R140C3IntertwinerSocket (RecoveryCarrier : Set) : Set₁ where
     sourceToRecovery : Grid.GridCell4 → RecoveryCarrier
     sourceToRecoveryEquivariant :
       C3.EquivariantMap
-        CMP109C3.cmp109SpatialC3Action
+        CMP109C3.cmp109SpatialXYZC3Action
         recoveryAction
         sourceToRecovery
 
@@ -59,7 +62,7 @@ socketClosesThreeChannelWeld :
     (consumerSocket : R140C3ConsumerSocket transport) →
   C3.ThreeChannelC3Weld Grid.GridCell4 RecoveryCarrier Output
 socketClosesThreeChannelWeld transport consumerSocket = record
-  { inputAction = CMP109C3.cmp109SpatialC3Action
+  { inputAction = CMP109C3.cmp109SpatialXYZC3Action
   ; midAction = recoveryAction transport
   ; outputAction = outputAction consumerSocket
   ; forward = sourceToRecovery transport
@@ -69,15 +72,23 @@ socketClosesThreeChannelWeld transport consumerSocket = record
   }
 
 ------------------------------------------------------------------------
--- 2. What is already closed on the actual source fibre.
+-- 2. What is already closed on the actual source/stress route.
 ------------------------------------------------------------------------
 
 cmp109ReachableFibreC3TransportClosed : Bool
 cmp109ReachableFibreC3TransportClosed =
-  CMP109C3.cmp109ThreeChannelWeldClosed
+  CMP109C3.cmp109SpatialXYZThreeChannelWeldClosed
 
 cmp109SourceActionAlreadyLiteral : Bool
-cmp109SourceActionAlreadyLiteral = CMP109C3.cmp109LiteralSpatialC3Recovered
+cmp109SourceActionAlreadyLiteral = CMP109C3.cmp109Spatial123C3Recovered
+
+r144SpatialStressTensorActionAlreadyLiteral : Bool
+r144SpatialStressTensorActionAlreadyLiteral =
+  R144C3.r144SpatialC3TensorActionRecovered
+
+r144UsesSameB4GeneratorFamilyAsCMP109 : Bool
+r144UsesSameB4GeneratorFamilyAsCMP109 =
+  R144C3.r144C3RestrictedFromExistingB4Action
 
 nativeStressRepresentationTransportCompilerAlreadyMachineChecked : Bool
 nativeStressRepresentationTransportCompilerAlreadyMachineChecked = true
@@ -92,25 +103,32 @@ unifiedR140RecoveryCompilerAlreadyMachineChecked = true
 fullAmbientUnifiedRecoveryC3ActionRecovered : Bool
 fullAmbientUnifiedRecoveryC3ActionRecovered = false
 
+ambientR140IntertwinerRequiredForCurrentStressConsumer : Bool
+ambientR140IntertwinerRequiredForCurrentStressConsumer = false
+
+terminalPhysicalPaymentIsExistingR144CovarianceWitness : Bool
+terminalPhysicalPaymentIsExistingR144CovarianceWitness = true
+
 minimalSameObjectR140IntertwinerObligationExposed : Bool
 minimalSameObjectR140IntertwinerObligationExposed = true
 
 missingObjectIsAnotherC3Analogy : Bool
 missingObjectIsAnotherC3Analogy = false
 
-missingObjectIsSourceToR140SameObjectIntertwiner : Bool
-missingObjectIsSourceToR140SameObjectIntertwiner = true
-
 record BalabanUnifiedRecoveryC3Boundary : Set where
   constructor balaban-unified-recovery-c3-boundary
   field
-    cmp109SourceFibreClosed : Bool
+    cmp109SpatialSourceFibreClosed : Bool
+    r144SpatialStressActionClosed : Bool
+    sameB4GeneratorFamilyReused : Bool
     nativeStressTransportInfrastructureReused : Bool
     r140CompilerInfrastructureReused : Bool
     fullAmbientR140ActionClaimed : Bool
-    remainingGapReducedToTypedIntertwiner : Bool
-    base369AnalogySubstitutesForMissingIntertwiner : Bool
+    ambientR140ActionRequiredByCurrentStressConsumer : Bool
+    terminalGapIsExistingR144CovarianceWitness : Bool
+    base369AnalogySubstitutesForMissingPhysicalWitness : Bool
 
 canonicalBalabanUnifiedRecoveryC3Boundary : BalabanUnifiedRecoveryC3Boundary
 canonicalBalabanUnifiedRecoveryC3Boundary =
-  balaban-unified-recovery-c3-boundary true true true false true false
+  balaban-unified-recovery-c3-boundary
+    true true true true true false false true false

@@ -8,14 +8,26 @@ import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Monst
 import DASHI.Physics.YangMills.BalabanActiveSourceDiscriminator2026Exact as Source
 import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as CMP109C3
 import DASHI.Physics.YangMills.BalabanUnifiedRecoveryC3TransportExact as UnifiedC3
+import DASHI.Physics.Foundations.BalabanR144SpatialC3StressRestrictionExact as R144C3
 
 ------------------------------------------------------------------------
 -- YM / BASE369-MONSTER C3 AUDIT
 --
 -- The old categorical statement "Balaban has no literal C3 action" is stale.
--- CMP109 now has a source-backed spatial C3 action and a closed three-channel
--- weld on the literal generated-grid/scalar fibre.  The remaining frontier is
--- the same-object intertwiner into the later R132--R140 recovery carrier.
+-- The newer source/stress lineage makes the status sharper still:
+--
+--   * CMP109 has source-backed Euclidean C3 actions from literal coordinate
+--     permutation covariance;
+--   * the Lorentzian-spatial subgroup is the 1,2,3 cycle fixing axis 0;
+--   * R144 already uses the SAME B4 generator family on the actual ten-slot
+--     finite-D1 stress readout;
+--   * restricting that action gives an exact order-three action on the stress
+--     tensor slots without inventing a GridCell4 -> R140 carrier map.
+--
+-- The remaining physical payment is the already-declared terminal R144 B4
+-- covariance witness/inhabitant on the selected source object.  A full ambient
+-- action on every intermediate R140 carrier remains unnecessary unless a later
+-- consumer actually requires it.
 ------------------------------------------------------------------------
 
 monster369ExactC3TemplateAvailable : Bool
@@ -24,32 +36,43 @@ monster369ExactC3TemplateAvailable = true
 balabanLiteralC3ActionRecovered : Bool
 balabanLiteralC3ActionRecovered = CMP109C3.cmp109LiteralSpatialC3Recovered
 
-balabanCMP109SpatialSourceC3Recovered : Bool
-balabanCMP109SpatialSourceC3Recovered = CMP109C3.cmp109LiteralSpatialC3Recovered
+balabanCMP109SpatialXYZSourceC3Recovered : Bool
+balabanCMP109SpatialXYZSourceC3Recovered = CMP109C3.cmp109Spatial123C3Recovered
 
 balabanCMP109ReachableC3TransportRecovered : Bool
 balabanCMP109ReachableC3TransportRecovered =
   UnifiedC3.cmp109ReachableFibreC3TransportClosed
 
-balabanC3ActionOnSourceSeamsRecovered : Bool
-balabanC3ActionOnSourceSeamsRecovered = false
+balabanR144SpatialStressTensorC3ActionRecovered : Bool
+balabanR144SpatialStressTensorC3ActionRecovered =
+  R144C3.r144SpatialC3TensorActionRecovered
 
-balabanC3ActionOnPhysicalFieldsRecovered : Bool
-balabanC3ActionOnPhysicalFieldsRecovered = false
+balabanR144UsesSameSourceHypercubicGeneratorFamily : Bool
+balabanR144UsesSameSourceHypercubicGeneratorFamily =
+  R144C3.r144C3RestrictedFromExistingB4Action
 
-balabanC3EquivarianceOfDexpOrStressRecovered : Bool
-balabanC3EquivarianceOfDexpOrStressRecovered = false
+balabanTerminalR144CovarianceInterfaceRecovered : Bool
+balabanTerminalR144CovarianceInterfaceRecovered = true
+
+balabanTerminalR144CovarianceInhabitantRecovered : Bool
+balabanTerminalR144CovarianceInhabitantRecovered = false
+
+balabanC3ActionOnEveryIntermediateRecoveryCarrierRecovered : Bool
+balabanC3ActionOnEveryIntermediateRecoveryCarrierRecovered = false
+
+balabanDexpEquivarianceRecovered : Bool
+balabanDexpEquivarianceRecovered = false
 
 balabanLiteralC3ActionRecoveredIsTrue : balabanLiteralC3ActionRecovered ≡ true
 balabanLiteralC3ActionRecoveredIsTrue = refl
 
-balabanCMP109ReachableC3TransportRecoveredIsTrue :
-  balabanCMP109ReachableC3TransportRecovered ≡ true
-balabanCMP109ReachableC3TransportRecoveredIsTrue = refl
+balabanCMP109SpatialXYZSourceC3RecoveredIsTrue :
+  balabanCMP109SpatialXYZSourceC3Recovered ≡ true
+balabanCMP109SpatialXYZSourceC3RecoveredIsTrue = refl
 
-balabanUnifiedRecoveryC3TransportStillOpen :
-  UnifiedC3.fullAmbientUnifiedRecoveryC3ActionRecovered ≡ false
-balabanUnifiedRecoveryC3TransportStillOpen = refl
+balabanR144SpatialStressTensorC3ActionRecoveredIsTrue :
+  balabanR144SpatialStressTensorC3ActionRecovered ≡ true
+balabanR144SpatialStressTensorC3ActionRecoveredIsTrue = refl
 
 record BalabanLiteralC3Realisation : Set₁ where
   field
@@ -84,6 +107,9 @@ c3AnalogyMayReplaceSourceDiscriminationIsFalse :
   c3AnalogyMayReplaceSourceDiscrimination ≡ false
 c3AnalogyMayReplaceSourceDiscriminationIsFalse = refl
 
+oldR140DirectCarrierSocketIsTerminalFrontier : Bool
+oldR140DirectCarrierSocketIsTerminalFrontier = false
+
 highestAlphaYM369Question : String
 highestAlphaYM369Question =
-  "Instantiate the typed R140C3IntertwinerSocket with a literal same-object map from the recovered CMP109 generated-grid C3 carrier into the later unified density/action/stress/Schwinger recovery carrier. The CMP109 source fibre and its C3 weld are already closed; do not substitute Base369 analogy for this remaining map."
+  "Instantiate the existing canonical R144 B4 finite-D1 readout covariance on the selected physical source object, then restrict that witness to the already-constructed spatial 1-2-3 C3 subgroup. Only pursue an ambient action on every R140 intermediate or dexp if a concrete downstream consumer requires it."
