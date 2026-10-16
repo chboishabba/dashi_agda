@@ -17,3 +17,12 @@ entropy-bytes-still-open = refl
 
 availability-is-not-replay : A.sourceDataAvailabilityCountsAsReplay A.currentTerminalExecutionAddendum ≡ false
 availability-is-not-replay = refl
+
+scientist-acquisition-is-sibling-owned : A.scientistFrontierDedicatedAcquisitionOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
+scientist-acquisition-is-sibling-owned = refl
+
+scientist-cross-object-promotion-remains-open : A.scientistFrontierCrossObjectPromotion A.currentTerminalExecutionAddendum ≡ T.openSameObjectPayment
+scientist-cross-object-promotion-remains-open = refl
+
+technical-adjacency-is-not-targeting : A.scientistTechnicalAdjacencyCountsAsTargeting A.currentTerminalExecutionAddendum ≡ false
+technical-adjacency-is-not-targeting = refl
