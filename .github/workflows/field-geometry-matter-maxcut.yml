@@ -40,6 +40,8 @@ jobs:
           persist-credentials: false
       - uses: cachix/install-nix-action@v27
       - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Install pinned numerical replay dependency
+        run: python3 -m pip install --disable-pip-version-check 'numpy==2.3.5'
       - name: Check field-geometry-matter evidence reproduction
         run: python3 scripts/check_field_geometry_matter_evidence.py
       - name: Check field-geometry-matter conservation, materials, thermodynamic, quantum-stress and causal boundaries
