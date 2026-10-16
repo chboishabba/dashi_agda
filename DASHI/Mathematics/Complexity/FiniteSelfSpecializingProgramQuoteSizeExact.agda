@@ -51,12 +51,6 @@ specializedQuoteLengthExact :
 specializedQuoteLengthExact program static
   rewrite appendLength (Quote.encodeProgram program) (Quote.encodeProgram static) = refl
 
-------------------------------------------------------------------------
--- q(p) = specialized (diagonalized (primitive p))
---                    (diagonalized (primitive p))
--- contributes five two-bit constructor tags and two machine-code payloads.
-------------------------------------------------------------------------
-
 fixedPointQuoteLengthExact :
   (machine : Coded.CodedFiniteStandardTM) →
   listLength (Quote.fixedPointQuote machine)
@@ -68,24 +62,10 @@ fixedPointQuoteLengthExact machine
         | diagonalQuoteLengthExact (Program.primitive machine)
         | primitiveQuoteLengthExact machine = refl
 
-fixedPointQuoteCarriesTwoMachinePayloads :
-  (machine : Coded.CodedFiniteStandardTM) →
-  2 * machineCodeLength machine
-  ≤ listLength (Quote.fixedPointQuote machine)
-fixedPointQuoteCarriesTwoMachinePayloads machine
-  rewrite fixedPointQuoteLengthExact machine =
-  Data.Nat.Properties.m≤n+m
-    (2 * machineCodeLength machine)
-    10
-  where
-    open import Data.Nat.Base using (_≤_)
-    import Data.Nat.Properties
-
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The dynamic behavioural-self-reference input is no longer an opaque quote:
--- exactly ten constructor-tag bits plus two copies of p's self-delimiting machine
--- code.  This is the static-description term that must be included in the final
--- universal-simulation/Cook resource equation.
+-- The dynamic behavioural-self-reference input is exact: ten constructor-tag
+-- bits plus two copies of p's self-delimiting machine code. This is the static
+-- quotation term to charge in the final universal-simulation resource equation.
 ------------------------------------------------------------------------
