@@ -3,15 +3,20 @@ module DASHI.Culture.PowersPlantationParadiseEmpiricalPhase3Validation where
 open import DASHI.Core.Prelude
 
 import DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact as Methodology
+import DASHI.Culture.PowersPlantationParadiseArchiveModalityExact as ArchiveModality
 import DASHI.Culture.PowersPlantationParadiseInvestigationParetoExact as Routing
 import DASHI.Culture.PowersPlantationParadiseHistoricalDiscriminatorExact as Discriminator
 import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
 import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as Graph
+import DASHI.Culture.PowersPlantationParadiseMobilityRegimeTransitionExact as Mobility
 import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
 import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 
 _methodology-boundary-paid : Methodology.PowersMethodologySourceBoundary
 _methodology-boundary-paid = Methodology.canonicalPowersMethodologySourceBoundary
+
+_archive-modality-boundary-paid : ArchiveModality.PowersArchiveModalityBoundary
+_archive-modality-boundary-paid = ArchiveModality.canonicalPowersArchiveModalityBoundary
 
 _five-axis-routing-paid : Routing.PowersInvestigationRoutingBoundary
 _five-axis-routing-paid = Routing.canonicalPowersInvestigationRoutingBoundary
@@ -27,6 +32,9 @@ _sensory-access-gap-paid = Sensory.entryDoesNotRecoverSensoryAccess
 
 _evidence-graph-boundary-paid : Graph.PowersEvidenceGraphBoundary
 _evidence-graph-boundary-paid = Graph.canonicalPowersEvidenceGraphBoundary
+
+_mobility-regime-boundary-paid : Mobility.PowersMobilityRegimeBoundary
+_mobility-regime-boundary-paid = Mobility.canonicalPowersMobilityRegimeBoundary
 
 _performance-probe-boundary-paid : PerformanceProbe.PowersResearchThroughPerformanceBoundary
 _performance-probe-boundary-paid = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
