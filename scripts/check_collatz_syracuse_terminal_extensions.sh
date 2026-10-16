@@ -12,6 +12,16 @@ files=(
   DASHI/Analysis/CollatzSyracuseResidualInverseLimitObstructionValidation.agda
   DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
   DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionValidation.agda
+  DASHI/Analysis/CollatzSyracuseSOTA2026Exact.agda
+  DASHI/Analysis/CollatzSyracuseSOTA2026Validation.agda
+  DASHI/Analysis/CollatzSyracuseParadoxicalPrefixExact.agda
+  DASHI/Analysis/CollatzSyracuseParadoxicalPrefixValidation.agda
+  DASHI/Analysis/CollatzSyracuseCoefficientResonanceExact.agda
+  DASHI/Analysis/CollatzSyracuseCoefficientResonanceValidation.agda
+  DASHI/Analysis/CollatzSyracuseContractingWordFamilyExact.agda
+  DASHI/Analysis/CollatzSyracuseContractingWordFamilyValidation.agda
+  DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
+  DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionValidation.agda
   DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
   DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutValidation.agda
 )
@@ -45,7 +55,26 @@ grep -q 'noInversePointGivesDoubleNegatedDescent' DASHI/Analysis/CollatzSyracuse
 grep -q 'strictDescentFromNoInversePointWithMarkov' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'record NatSearchMarkov' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
 grep -q 'natSearchMarkovOwnedUnconditionally : Nat' DASHI/Analysis/CollatzSyracuseConstructiveSurvivorExtractionExact.agda
+
+grep -q 'collatzSOTA2026Atlas' DASHI/Analysis/CollatzSyracuseSOTA2026Exact.agda
+grep -q 'peerReviewedAndPreprintRolesSeparated : Nat' DASHI/Analysis/CollatzSyracuseSOTA2026Exact.agda
+grep -q 'paradoxicalPrefixForcesCorrectionDominance' DASHI/Analysis/CollatzSyracuseParadoxicalPrefixExact.agda
+grep -q 'paradoxicalPrefixStartBoundedByCorrection' DASHI/Analysis/CollatzSyracuseParadoxicalPrefixExact.agda
+grep -q 'sameCountDifferentCorrection' DASHI/Analysis/CollatzSyracuseParadoxicalPrefixExact.agda
+grep -q 'sameOddCountSameThreePower' DASHI/Analysis/CollatzSyracuseCoefficientResonanceExact.agda
+grep -q 'record ExactNearResonanceCertificate' DASHI/Analysis/CollatzSyracuseCoefficientResonanceExact.agda
+grep -q 'canonicalContractingWordCertificate' DASHI/Analysis/CollatzSyracuseContractingWordFamilyExact.agda
+grep -q 'contractingWordFamilyDescends' DASHI/Analysis/CollatzSyracuseContractingWordFamilyExact.agda
+grep -q 'contractingSurvivorForcesCorrectionDominance' DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
+grep -q 'oneContractingCorrectionFitRefutesInfiniteSurvivor' DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
+grep -q 'universalContractingCorrectionEscapeProducerPaid : Nat' DASHI/Analysis/CollatzSyracuseInfiniteSurvivorAffineObstructionExact.agda
+
 grep -q 'trailingZeroCertificatePaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'sotaAttributionAtlasPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'paradoxicalAffineSeamPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'coefficientResonanceCoordinatePaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'contractingWordFamilyCompilerPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+grep -q 'infiniteSurvivorAffineObstructionPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'residualFrontierStrictnessGuardPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'residualInverseLimitObstructionPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'finiteSurvivorBarrierExtractionPaid' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
@@ -53,5 +82,7 @@ grep -q 'noInfiniteSurvivorDoubleNegationPaid' DASHI/Analysis/CollatzSyracuseTer
 grep -q 'strictnessGuardDoesNotCreateUnboundedness' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'inverseLimitAbsenceDoesNotConstructDescent' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
 grep -q 'markovNotSilentlyOwned' DASHI/Analysis/CollatzSyracuseTerminalParityMaxCutExact.agda
+
+python3 scripts/check_collatz_syracuse_residual_resonance.py >/dev/null
 
 echo 'collatz syracuse terminal extension static checks: PASS'
