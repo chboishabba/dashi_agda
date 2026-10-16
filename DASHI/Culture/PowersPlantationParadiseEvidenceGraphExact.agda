@@ -154,6 +154,49 @@ minetteWillManifestation =
     sourceManifestationNode
     "Saint-Martin testament, Notaire Michel, 9 June 1784"
 
+liseAnnouncementManifestation : EvidenceNode
+liseAnnouncementManifestation =
+  evidence-node
+    "source:affiches-1786-01-28-lise-saint-marc"
+    sourceManifestationNode
+    "Affiches américaines theatre announcement, 28 January 1786"
+
+record ManifestationContextReceipt : Set where
+  constructor manifestation-context-receipt
+  field
+    manifestation : EvidenceNode
+    productionContext : SourceProductionContext
+    contextReference : String
+    contextCreatesHistoricalTruth : Bool
+    contextCreatesHistoricalTruthIsFalse :
+      contextCreatesHistoricalTruth ≡ false
+
+open ManifestationContextReceipt public
+
+julienSaleNoticeContextReceipt : ManifestationContextReceipt
+julienSaleNoticeContextReceipt =
+  manifestation-context-receipt
+    julienSaleNoticeManifestation
+    Modality.runawaySaleAdvertisementContext
+    "sale notice is read as an enslaver/seller-produced coercive market document; its skill detail and subject silence are interpreted under that production context"
+    false refl
+
+minetteWillContextReceipt : ManifestationContextReceipt
+minetteWillContextReceipt =
+  manifestation-context-receipt
+    minetteWillManifestation
+    Modality.notarialWillContext
+    "notarial testament can pay obligation/nonpayment coordinates but does not by itself pay actual executor settlement"
+    false refl
+
+liseAnnouncementContextReceipt : ManifestationContextReceipt
+liseAnnouncementContextReceipt =
+  manifestation-context-receipt
+    liseAnnouncementManifestation
+    Modality.theatreAnnouncementContext
+    "theatre announcement pays event/repertoire publicity coordinates while labour, net benefit and wider social position remain separately sourced"
+    false refl
+
 minetteContractEdge : EvidenceEdge
 minetteContractEdge =
   evidence-edge
@@ -273,6 +316,9 @@ record PowersEvidenceGraphBoundary : Set where
     sourceGenerationContextPreserved : Bool
     sourceGenerationContextPreservedIsTrue :
       sourceGenerationContextPreserved ≡ true
+    manifestationContextReceiptsAttached : Bool
+    manifestationContextReceiptsAttachedIsTrue :
+      manifestationContextReceiptsAttached ≡ true
     graphReachabilityCreatesIdentity : Bool
     graphReachabilityCreatesIdentityIsFalse : graphReachabilityCreatesIdentity ≡ false
     graphReachabilityCreatesCausation : Bool
@@ -283,6 +329,7 @@ record PowersEvidenceGraphBoundary : Set where
 canonicalPowersEvidenceGraphBoundary : PowersEvidenceGraphBoundary
 canonicalPowersEvidenceGraphBoundary =
   powers-evidence-graph-boundary
+    true refl
     true refl
     true refl
     true refl
