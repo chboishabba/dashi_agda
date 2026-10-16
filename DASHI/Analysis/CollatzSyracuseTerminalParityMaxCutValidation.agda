@@ -10,6 +10,36 @@ terminalInfrastructurePaid :
   ≡ 1
 terminalInfrastructurePaid = refl
 
+sharpBarrierPaid :
+  Terminal.TerminalParityMaxCutBoundary.sharpBarrierThresholdPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+sharpBarrierPaid = refl
+
+sharpMinimalityPaid :
+  Terminal.TerminalParityMaxCutBoundary.sharpBarrierMinimalityPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+sharpMinimalityPaid = refl
+
+prefixTransitionPaid :
+  Terminal.TerminalParityMaxCutBoundary.affinePrefixTransitionPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+prefixTransitionPaid = refl
+
+safeOddGapPaid :
+  Terminal.TerminalParityMaxCutBoundary.safeOddGapProducerPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+safeOddGapPaid = refl
+
+trailingEvenSharpBarrierPaid :
+  Terminal.TerminalParityMaxCutBoundary.trailingEvenSharpBarrierMonotonicityPaid
+    Terminal.canonicalTerminalParityMaxCutBoundary
+  ≡ 1
+trailingEvenSharpBarrierPaid = refl
+
 finiteBarrierExtractionPaid :
   Terminal.TerminalParityMaxCutBoundary.finiteSurvivorBarrierExtractionPaid
     Terminal.canonicalTerminalParityMaxCutBoundary
