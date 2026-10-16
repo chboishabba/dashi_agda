@@ -29,6 +29,18 @@ mpmathDocumentationReleaseIs130 :
   ≡ true
 mpmathDocumentationReleaseIs130 = refl
 
+cacheArtifactPinned :
+  Attribution.exactCacheRepositoryArtifactPinned
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ true
+cacheArtifactPinned = refl
+
+cacheMetadataValidationPresent :
+  Attribution.executableCacheMetadataValidationPresent
+    Attribution.canonicalClimbingGymSourceAttributionBoundary
+  ≡ true
+cacheMetadataValidationPresent = refl
+
 runtimeVersionNotManufacturedByCitation :
   Attribution.exactRuntimePackageVersionIndependentlyReceipted
     Attribution.canonicalClimbingGymSourceAttributionBoundary
