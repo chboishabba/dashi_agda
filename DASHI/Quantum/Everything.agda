@@ -4,6 +4,8 @@ module DASHI.Quantum.Everything where
 
 import DASHI.Quantum.QuantumMereologySourceAtlasExact
 import DASHI.Quantum.QuantumMereologySOTA2026Exact
+import DASHI.Quantum.QuantumMereologyPointerObjectivity2026Exact
+import DASHI.Quantum.QuantumMereologySelectionConvergence2026Exact
 import DASHI.Quantum.QuantumMereologyExact
 import DASHI.Quantum.QuantumMereologySelectionExact
 import DASHI.Quantum.QuantumMereologySelectionRegression
@@ -35,5 +37,6 @@ import DASHI.Quantum.QuantumMereologyCandidatePointerObservableExact
 import DASHI.Quantum.QuantumMereologySchwingerProducerExact
 import DASHI.Quantum.QuantumMereologyFiniteQuantumProducerAuthorityExact
 import DASHI.Quantum.QuantumMereologyTripartiteInformationAtlasAuthorityExact
+import DASHI.Quantum.QuantumMereologyFiniteNChartedAtlasAuthorityExact
 import DASHI.Quantum.QuantumMereologyMaxCutExact
 import DASHI.Quantum.QuantumMereologyMaxCutRegression
