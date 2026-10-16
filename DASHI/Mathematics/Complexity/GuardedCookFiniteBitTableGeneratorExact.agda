@@ -2,14 +2,6 @@ module DASHI.Mathematics.Complexity.GuardedCookFiniteBitTableGeneratorExact wher
 
 ------------------------------------------------------------------------
 -- ONE FIXED GUARDED COOK FORMULA -> LITERAL FINITE BIT-TABLE GENERATOR
---
--- This is a deliberately concrete baseline compiler.  It takes the canonical
--- binary encoding of one already-fixed guarded Cook formula and bakes the bits
--- into the stop-link targets of `CodedFiniteBitStreamLookupExact`.
---
--- It is NOT yet the self-fixed generator: the description supplies a target
--- code, while the generated lookup code is a new machine.  The same-object
--- equality between those codes is therefore kept explicitly unpaid.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
@@ -19,7 +11,10 @@ open import Agda.Builtin.Maybe using (just)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Fin.Base as Fin
 
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact as Phase
+import DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact as Cursor
 import DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupExact as Lookup
 import DASHI.Mathematics.Complexity.CodedFiniteBitStreamLookupTransitionExact as LookupTransition
 import DASHI.Mathematics.Complexity.GuardedCookFormulaDescriptionExact as Description
@@ -81,16 +76,16 @@ fixedCookValidStopTransition :
       (Coded.decodeCodedStandardTM (fixedCookLookupCode description)))
     (Lookup.cursorInBase
       (cookBitCount description)
-      (DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact.raisePhase index))
-    DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact.stopSymbol
+      (Phase.raisePhase index))
+    Cursor.stopSymbol
   ≡
   just
     (Standard.standard-transition
       (Lookup.bitSink
         (cookBitCount description)
         (cookBitAt description index))
-      DASHI.Mathematics.Complexity.CodedFiniteUnaryCursorExact.stopSymbol
-      DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.stayPut)
+      Cursor.stopSymbol
+      Local.stayPut)
 fixedCookValidStopTransition description index =
   LookupTransition.validStopTransition (cookBitAt description) index
 
@@ -103,10 +98,6 @@ record FixedTableGeneratorBoundary
   field
     generatedCode : Coded.CodedFiniteStandardTM
     generatedCodeExact : generatedCode ≡ fixedCookLookupCode description
-
-    -- This field is intentionally an obligation, not constructed here.  A true
-    -- self-fixed target would have to identify the code described by the Cook
-    -- formula with the code that performs the lookup.
     sameObjectCode : generatedCode ≡ Description.code description
 
 open FixedTableGeneratorBoundary public
@@ -114,9 +105,8 @@ open FixedTableGeneratorBoundary public
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- For every already-fixed description, all in-range Cook bits are now compiled
--- into ordinary finite standard-TM rule syntax with exact stop/output semantics.
--- The remaining self-reference issue is no longer "can a TM look up a fixed
--- finite bitstream?"; it is the same-object code equation plus resource growth.
--- This baseline intentionally exposes that equation rather than manufacturing it.
+-- For every already-fixed description, all in-range Cook bits are compiled into
+-- ordinary finite standard-TM syntax.  Self-reference still requires literal
+-- same-object code identity; the companion no-go proves table baking cannot pay
+-- that identity under the repository's one-hot state codec.
 ------------------------------------------------------------------------
