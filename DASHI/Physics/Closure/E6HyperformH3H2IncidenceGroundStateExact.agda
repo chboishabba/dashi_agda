@@ -32,7 +32,22 @@ import DASHI.Physics.Closure.E6HyperformH3H2InvariantPotentialNoGoExact as NoGo
 --
 -- with stabilizers 320, 32, 32, 16 respectively.
 --
--- The 180 upper-bound argument is mathematical; the 6642 enumeration/orbit
+-- Defect gap. Let n1,n2,n3 count partially occupied faces of occupancies
+-- 1,2,3. Since total load is 0 mod 4,
+--
+--   n1 + 2 n2 + 3 n3 = 0 mod 4.
+--
+-- Relative to the 180 bound the agreement deficit is
+--
+--   (3 n1 + 4 n2 + 3 n3)/2.
+--
+-- The least positive compatible value is 3, attained by one occupancy-1 and
+-- one occupancy-3 face. A literal one-H3 flip from an enumerated exact cover
+-- realizes agreement 177, so the dimensionless interaction defect gap is 3.
+-- This equals the separately computed fibre-Laplacian gap numerically; no
+-- same-operator theorem is inferred from the equality.
+--
+-- The upper-bound/gap reasoning is mathematical; the 6642 enumeration/orbit
 -- decomposition remains LOCAL COMPUTATION RECEIPT rather than Agda kernel
 -- enumeration. This interaction is a canonical finite MODEL candidate, not a
 -- claim that nature uses this Hamiltonian.
@@ -55,6 +70,12 @@ exactCoverFaceCount = 30
 
 maximumAgreementEdges : Nat
 maximumAgreementEdges = 180
+
+firstExcitationAgreementEdges : Nat
+firstExcitationAgreementEdges = 177
+
+dimensionlessDefectGap : Nat
+dimensionlessDefectGap = 3
 
 groundStateExactCoverCount : Nat
 groundStateExactCoverCount = 6642
@@ -89,6 +110,11 @@ record H3H2IncidenceGroundStateLocalReceipt : Set where
     fourWeylGroundStateOrbitsPaidLocally : Bool
     orbitSizes162_1620_1620_3240PaidLocally : Bool
     stabilizers320_32_32_16PaidLocally : Bool
+    occupancyCongruenceForcesDefectAtLeastThree : Bool
+    onePatchFlipRealizesDefectThree : Bool
+    firstExcitation177PaidLocally : Bool
+    dimensionlessDefectGapThreePaidLocally : Bool
+    gapThreeIdentifiedWithFibreLaplacianBySameOperatorTheorem : Bool
     groundStateEnumerationAgdaKernelProved : Bool
     physicalInteractionLawDerived : Bool
     physicalInteractionCoefficientDerived : Bool
@@ -101,8 +127,9 @@ canonicalBoundary : H3H2IncidenceGroundStateLocalReceipt
 canonicalBoundary =
   h3-h2-incidence-ground-state-local-receipt
     true true true true true true true true true true true true true true
+    true true true true false
     false false false false false
-    "The onsite-invariant selection no-go motivates a relational interaction using only the already-owned H3-H2 incidence. The occupancy inequality bounds agreement by 180, and exhaustive local enumeration finds 6642 exact-cover ground states in four W(E6) orbits of sizes 162,1620,1620,3240. Enumeration/orbit counts are computation receipts, not Agda-kernel proofs. No physical Hamiltonian coefficient, continuum law or empirical vacuum selection is inferred."
+    "The onsite-invariant selection no-go motivates a relational interaction using only the already-owned H3-H2 incidence. Agreement is bounded by 180, exhaustive local enumeration finds 6642 exact-cover ground states in four W(E6) orbits, and occupancy congruence plus a literal one-H3 flip gives an exact dimensionless defect gap 3. The equal numerical fibre-Laplacian gap is kept separate absent a same-operator theorem. Enumeration/orbit counts are computation receipts, not Agda-kernel proofs; no physical Hamiltonian coefficient, continuum law or empirical vacuum selection is inferred."
 
 incidenceReceipt : Incidence.H3H2PhaseIncidenceLocalReceipt
 incidenceReceipt = Incidence.canonicalH3H2PhaseIncidenceLocalReceipt
