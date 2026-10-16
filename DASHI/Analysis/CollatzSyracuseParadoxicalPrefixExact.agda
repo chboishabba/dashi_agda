@@ -107,8 +107,7 @@ paradoxicalPrefixBlocksCorrectionFit {x} {m} paradoxical correctionFits =
       refl)
 
 -- Because Nat order is decidable/linear, failure of the strict correction-fit
--- inequality gives the exact reverse weak inequality.  This is the useful
--- algebraic signature of a literal paradoxical prefix:
+-- inequality gives the exact reverse weak inequality:
 --
 --     gap * x <= A(actual parity word).
 paradoxicalPrefixForcesCorrectionDominance :
@@ -118,6 +117,23 @@ paradoxicalPrefixForcesCorrectionDominance :
   ≤ Affine.affineAdditiveTerm (Itinerary.parityWord m x)
 paradoxicalPrefixForcesCorrectionDominance paradoxical =
   NatP.≮⇒≥ (paradoxicalPrefixBlocksCorrectionFit paradoxical)
+
+-- The gap is positive, hence at least one.  A paradoxical start is therefore
+-- bounded by the exact correction of its word.  This is a genuine finite
+-- exception bound for every fixed contracting cylinder:
+--
+--     x <= gap*x <= A(w), hence x <= A(w).
+paradoxicalPrefixStartBoundedByCorrection :
+  {x : Syracuse.PositiveNat} {m : Nat} →
+  (paradoxical : ParadoxicalPrefix x m) →
+  Syracuse.toNat x
+  ≤ Affine.affineAdditiveTerm (Itinerary.parityWord m x)
+paradoxicalPrefixStartBoundedByCorrection {x} paradoxical =
+  NatP.≤-trans
+    (NatP.*-monoˡ-≤
+      (Syracuse.toNat x)
+      (gapPositive (coefficientGap paradoxical)))
+    (paradoxicalPrefixForcesCorrectionDominance paradoxical)
 
 ------------------------------------------------------------------------
 -- Concrete non-factorability witness for odd-count-only reasoning.
@@ -183,6 +199,7 @@ record ParadoxicalPrefixBoundary : Set where
     contractingCorrectionFitImpliesLiteralDescent : Nat
     paradoxicalPrefixForcesCorrectionFailure : Nat
     paradoxicalPrefixForcesExactCorrectionDominance : Nat
+    paradoxicalPrefixStartBoundedByCorrectionPaid : Nat
     sameOddCountDoesNotDetermineAffineCorrection : Nat
     externalParadoxicalTheoremImported : Nat
     parityProportionAloneDeterminesStopping : Nat
@@ -190,4 +207,4 @@ record ParadoxicalPrefixBoundary : Set where
 
 canonicalParadoxicalPrefixBoundary : ParadoxicalPrefixBoundary
 canonicalParadoxicalPrefixBoundary =
-  paradoxicalPrefixBoundary 1 1 1 1 1 1 0 0 0
+  paradoxicalPrefixBoundary 1 1 1 1 1 1 1 0 0 0
