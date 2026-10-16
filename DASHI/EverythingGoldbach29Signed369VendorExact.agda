@@ -1,3 +1,6 @@
 module DASHI.EverythingGoldbach29Signed369VendorExact where
 
 import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact
+import DASHI.ComputerScience.Goldbach30To29SuccessMacroExact
+import DASHI.ComputerScience.Goldbach30To29ReductionReceiptExact
+import DASHI.ComputerScience.Goldbach30To29VisualizationConsumerExact
