@@ -24,5 +24,17 @@ scientist-acquisition-is-sibling-owned = refl
 scientist-cross-object-promotion-remains-open : A.scientistFrontierCrossObjectPromotion A.currentTerminalExecutionAddendum ≡ T.openSameObjectPayment
 scientist-cross-object-promotion-remains-open = refl
 
+magnetocaloric-is-sibling-owned : A.magnetocaloricDedicatedSiblingOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
+magnetocaloric-is-sibling-owned = refl
+
+fusion-is-sibling-owned : A.fusionPropulsionDedicatedSiblingOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
+fusion-is-sibling-owned = refl
+
+rocketdyne-is-sibling-owned : A.rocketdyneDedicatedSiblingOwner A.currentTerminalExecutionAddendum ≡ T.blockedByUnmergedSibling
+rocketdyne-is-sibling-owned = refl
+
 technical-adjacency-is-not-targeting : A.scientistTechnicalAdjacencyCountsAsTargeting A.currentTerminalExecutionAddendum ≡ false
 technical-adjacency-is-not-targeting = refl
+
+open-sibling-reference-is-not-authority-import : A.openSiblingReferenceCountsAsAuthorityImport A.currentTerminalExecutionAddendum ≡ false
+open-sibling-reference-is-not-authority-import = refl
