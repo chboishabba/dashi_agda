@@ -19,6 +19,7 @@ import DASHI.Culture.PowersPlantationParadiseEnslavedDistributionEvidenceExact a
 import DASHI.Culture.PowersPlantationParadisePerformerComparisonExact as PerformerComparison
 import DASHI.Culture.PowersPlantationParadiseComparativeVenueEvidenceExact as ComparativeVenue
 import DASHI.Culture.PowersPlantationParadiseEmpiricalPhase3Validation as Phase3
+import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as Rooted
 
 _paradise-material-gap-paid : INF.FactorsThrough Synthesis.paradiseObserver Synthesis.materialAffordance → ⊥
@@ -101,8 +102,11 @@ _martinique-comparative-seating-paid = ComparativeVenue.saintPierre1786PlannedSe
 _martinique-not-saint-domingue-rule-paid : ComparativeVenue.MartiniqueEvidenceTransportsSaintDomingueRule → ⊥
 _martinique-not-saint-domingue-rule-paid = ComparativeVenue.martiniqueEvidenceDoesNotTransportSaintDomingueRule
 
-_phase3-roadmap-paid : Phase3.Roadmap.PowersEmpiricalRoadmapBoundary
-_phase3-roadmap-paid = Phase3.Roadmap.canonicalPowersEmpiricalRoadmapBoundary
+_phase3-validation-reachable : Phase3.Roadmap.PowersEmpiricalRoadmapBoundary
+_phase3-validation-reachable = Phase3.Roadmap.canonicalPowersEmpiricalRoadmapBoundary
+
+_roadmap-boundary-paid : Roadmap.PowersEmpiricalRoadmapBoundary
+_roadmap-boundary-paid = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
 
 _rooted-trace-paid : Rooted.RootedTraceClaim Cross.powersChapter5Root Cross.powersChapter5Leaf
 _rooted-trace-paid = Cross.powersChapter5RootedTraceClaim
