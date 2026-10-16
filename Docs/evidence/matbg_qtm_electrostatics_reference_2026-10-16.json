@@ -1,0 +1,28 @@
+{
+  "assertions_passed": true,
+  "fixture": {
+    "C_bg_F_cm2": 6.23e-08,
+    "C_g_F_cm2": 2.3e-06,
+    "V_b_V": 0.01,
+    "V_bg_V": 10.0,
+    "mu_B_eV": 0.0,
+    "mu_T_eV": 0.0
+  },
+  "promotion_boundaries": {
+    "agda_kernel_receipt": false,
+    "chemical_potential_inversion": false,
+    "measured_skew_map_replayed": false,
+    "qtm_data_fit": false,
+    "same_sample_entropy": false
+  },
+  "results": {
+    "n_B_cm^-2": 3744905444676.4575,
+    "n_B_plus_n_T_cm^-2": 3888460153389.055,
+    "n_T_cm^-2": 143554708712.59756,
+    "tip_density_per_bias_volt_cm^-2_V^-1": 14355470871259.756,
+    "total_density_per_backgate_volt_cm^-2_V^-1": 388846015338.9055
+  },
+  "script": "scripts/matbg_qtm_electrostatics_reference.py",
+  "script_sha256": "8aad7c408e0ae91ff5d1a934eab1442ca9f7248e87841ea1066da09e73a62de3",
+  "source_doi": "10.1038/s41586-026-10378-x"
+}
