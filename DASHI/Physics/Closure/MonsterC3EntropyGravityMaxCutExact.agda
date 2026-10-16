@@ -2,17 +2,18 @@ module DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Moonshine.Monster3BRepresentationNativeCurrentMaxCutExact as MonsterNative
+import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal3B
 import DASHI.Physics.Chemistry.AmmoniaSTO3GFCIExact as NH3FCI
 import DASHI.Physics.Chemistry.AmmoniaSCIReleasedArtifactExact as SCIArtifact
 import DASHI.Physics.Chemistry.AmmoniaC3RegularRepresentationExact as NH3Regular
-import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as NH3MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaMonster3BC3QuotientLiftExact as NH3MonsterC3
 import DASHI.Physics.Chemistry.AmmoniaMonster3BPhaseQuotientNonFactorabilityExact as PhaseNF
 import DASHI.Physics.Chemistry.AmmoniaMonster3BRefinedStateLiftCompilerExact as RefinedLift
 import DASHI.Physics.Chemistry.AmmoniaMonster3BNative369FineCarrierExact as Native369
+import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact as NativeCorrection
+import DASHI.Physics.Chemistry.AmmoniaMonster3BActionProbeExact as NH3MonsterProbe
 import DASHI.Physics.Chemistry.AmmoniaH3PlusC3ResolvedReactionExact as H3C3
-import DASHI.Reasoning.Trialectic369Selected3BSemanticProjectedCompletionExact as Selected3B
-import DASHI.Moonshine.Monster3BLiteralThreePhaseRegularResidualBidiExact as Literal3B
 import DASHI.Physics.Closure.MonsterC3UniformCountingEnsembleExact as Uniform
 import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as NativeEnsemble
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
@@ -29,108 +30,84 @@ record Row : Set where
     next : String
     state : Payment
 
-monsterArithmetic : Row
-monsterArithmetic = row
-  "53/71 and Monster-3B C3 arithmetic"
-  "existing Monster/Ogg owners + MonsterC3ResidualTernaryArithmeticExact"
-  "53 and 71 identities are exact; their Monster/Ogg meanings are separately owned"
-  "none at arithmetic level"
-  paid
-
-monsterSelectedLinearFrontier : Row
-monsterSelectedLinearFrontier = row
-  "selected-3B canonical linear completion"
-  "Trialectic369Selected3BSemanticProjectedCompletionExact"
-  "current master compiles canonical selected-3B action/completion from exactly two source-facing leaves: a genuine linear retraction onto the 196883 constituent and one selected-action = projected-same-full-grade-two-action equation"
-  "acquire/inhabit the actual linear ConstituentRetraction and projected-action source equation on the same selected object; semantic coordinates, dimensions and characters cannot manufacture them"
+monsterGlobalLinear : Row
+monsterGlobalLinear = row
+  "global selected-3B 196883 linear action"
+  "Trialectic369Selected3BSemanticProjectedCompletionExact + Monster3BRepresentationNativeCurrentMaxCutExact"
+  "the canonical completion compiler is already owned; it consumes exactly a genuine linear constituent retraction and the equation identifying the selected action with the projection of the SAME full grade-two action"
+  "inhabit those two same-object linear/source-facing inputs; finite semantic coordinates cannot manufacture them"
   open
 
-monsterLiteralPhaseOneSplit : Row
-monsterLiteralPhaseOneSplit = row
-  "literal phase-one 65610 regular block + residual 53"
+monsterZetaLinear : Row
+monsterZetaLinear = row
+  "literal zeta-restricted Monster representation"
+  "Monster3BRepresentationNativeCurrentMaxCutExact"
+  "fixed-phase H_zeta equivariant-isomorphism compilation, generic semisimple/isotypic assembly and post-recognition copy-count compilation are already available; selected-phase 12+78 character-family data are already paid"
+  "inhabit the proof-relevant full weight-two linear bridge and SAME literal zeta restriction, prove the actual simple-type classifier, consume isotypic assembly to obtain W_zeta|E ~= H_zeta^n, then derive n=90 and construct S_zeta=Hom_E(H_zeta,W_zeta) evaluation/recovery plus the actual normalizer action"
+  open
+
+monsterLiteralOtherPhases : Row
+monsterLiteralOtherPhases = row
+  "literal phase-one 65610+53 split and conjugate phase recognition"
   "Monster3BLiteralThreePhaseRegularResidualBidiExact"
-  "one/zeta/zeta2 are already literal fibres of the same central action and zeta recognition is already a leaf; the phase-one regular/residual decomposition remains a distinct same-action subspace payment"
-  "construct the action-stable fixed regular block, residual-53 complement and zeta-squared recognition/transport on the literal carrier"
+  "the three phase fibres already come from one literal central action; the action-stable phase-one regular/residual split and conjugate-phase recognition remain distinct payments"
+  "inhabit those same-action subspace/transport witnesses; do not infer them from character arithmetic alone"
   open
 
 nh3Hamiltonian : Row
 nh3Hamiltonian = row
-  "NH3 Hamiltonian / configuration wavefunction"
-  "AmmoniaHamiltonianWavefunctionExact + AmmoniaGroundStateC3ActionExact"
-  "same-object symbolic molecular Hamiltonian skeleton, closed-shell ten-spin-orbital state and determinant C3 invariance are paid"
-  "numerical spatial orbitals/eigenvector coefficients where a stronger wavefunction consumer requires them"
-  sourcePaid
-
-nh3PublishedFCI : Row
-nh3PublishedFCI = row
-  "published NH3 STO-3G FCI benchmark"
-  "AmmoniaSTO3GFCIExact"
-  "published finite-model FCI diagonalization is paid for its declared STO-3G calculation"
-  "do not identify with the numerically different released computational artifacts"
+  "NH3 Hamiltonian / configuration state"
+  "AmmoniaHamiltonianWavefunctionExact + AmmoniaGroundStateC3ActionExact + AmmoniaSTO3GFCIExact"
+  "symbolic molecular-Hamiltonian expression, ten-electron closed-shell occupation carrier, determinant C3 invariance and a published STO-3G FCI diagonalization are claim-relatively paid"
+  "numerical real-space orbitals/eigenvector coefficients remain necessary only for consumers requiring that stronger literal wavefunction layer"
   sourcePaid
 
 nh3ReleasedMatrix : Row
 nh3ReleasedMatrix = row
   "author-released NH3 selected-CI matrix"
   "AmmoniaSCIReleasedArtifactExact"
-  "64x64 matrix blob identity, released geometry and run energies are paid as an author-released data carrier; paper benchmark and artifact remain distinct"
-  "independently diagonalize the exact released bytes and bind the eigenvector to configuration labels; execution handoff remains environmental rather than a theorem gap"
+  "the exact released 64x64 matrix identity/run metadata are recorded separately from the published benchmark"
+  "independently diagonalize the released bytes and bind eigenvector coefficients to configuration labels when an execution environment can materialize the artifact"
   sourcePaid
 
-nh3RegularC3 : Row
-nh3RegularC3 = row
-  "NH3 A1 plus E -> one regular C3 block"
-  "AmmoniaC3RegularRepresentationExact"
-  "(A1 plus E)|C3 = 1 plus zeta plus zeta2 = Reg(C3), using the same exact cyclotomic cancellation law as the Monster regular bulk; NH3 multiplicity is one while Monster has 65610 regular copies plus residual 53"
-  "same representation motif is not a same-object Monster module"
-  paid
-
-nh3MonsterQuotient : Row
-nh3MonsterQuotient = row
+nh3C3Quotient : Row
+nh3C3Quotient = row
   "NH3 <-> Monster-3B exact C3 quotient representation"
-  "AmmoniaMonster3BC3QuotientLiftExact + AmmoniaMonster3BPhaseQuotientNonFactorabilityExact"
-  "exact two-sided C3 representation isomorphism preserves multiplication, inversion/conjugation and Fourier rows; separating pairs prove phase alone cannot recover fine Monster state, weight or multiplicity"
-  "consume the native-369 fine carrier instead of overpromoting the quotient"
+  "AmmoniaC3RegularRepresentationExact + AmmoniaMonster3BC3QuotientLiftExact + AmmoniaMonster3BPhaseQuotientNonFactorabilityExact"
+  "(A1+E)|C3 is one regular C3 block and the NH3/Monster phase map is a two-sided C3 representation isomorphism preserving multiplication, conjugation and Fourier rows; phase nonfactorability proves it cannot recover fine Monster state data"
+  "retain this exact quotient result; do not inflate it into a state-space or physical Monster-action identity"
   paid
 
-native369FineCarrier : Row
-native369FineCarrier = row
-  "full Monster-zeta fine coordinate on native 369 carriers"
-  "Atomic369Kernel6HeisenbergBridgeExact + Base369Monster3BMultiplicityCompletedTenTritSquareCompilerExact + AmmoniaMonster3BNative369FineCarrierExact"
-  "exact two-sided chart: ZetaModelBasis = X6 x Fin90 <-> Kernel6 x (Completed10 x T^2); any ActualZetaSectorRecognition composes with this native-369 chart by exact round trips"
-  "physically identify NH3 electronic/vibronic states with native-369 fine coordinates and prove the action equivariance required by the physical consumer"
-  paid
-
-nh3MonsterRefinedCompiler : Row
-nh3MonsterRefinedCompiler = row
-  "NH3 native-369 fine coordinate -> recognized Monster zeta sector compiler"
-  "AmmoniaMonster3BRefinedStateLiftCompilerExact + AmmoniaMonster3BNative369FineCarrierExact + Base369Monster3BActualSectorRecognitionBidiExact"
-  "the finite carrier/compiler chain is paid; the remaining chemistry input is proof-relevant physical state assignment, not missing Monster coordinate mathematics"
-  "source/calibrate NH3-state -> native-369 coordinate on the same object, then test action equivariance; do not infer it from cardinality, C3 phase or representation motif"
+native369Basis : Row
+native369Basis = row
+  "native-369 chart of Monster-zeta finite basis labels"
+  "AmmoniaMonster3BNative369FineCarrierExact + AmmoniaMonster3BRepresentationNativeCorrectionExact + Monster3BWZetaBasisVectorRecognitionCorrectionExact"
+  "Kernel6 x (Completed10 x T^2) <-> X6 x Fin90 is an exact BASIS-LABEL chart; corrected actual basis recognition composes that chart into included literal W_zeta basis vectors"
+  "supply the proof-relevant actual basis recognition when needed; the chart is not a bijection with every vector of W_zeta"
   typed
+
+nh3MonsterLinearLift : Row
+nh3MonsterLinearLift = row
+  "physical NH3 state -> literal Monster zeta linear state"
+  "AmmoniaMonster3BRepresentationNativeCorrectionExact + Monster3BRepresentationNativeCurrentMaxCutExact"
+  "the phase quotient and finite basis-coordinate compilers are available, but no source-backed physical same-object NH3 assignment into the literal linear W_zeta representation is paid"
+  "supply a physical NH3-state -> representation-native state assignment and prove dynamics/action equivariance on the same objects; cardinality, phase and basis charts are insufficient"
+  open
 
 h3Reaction : Row
 h3Reaction = row
   "H3+ + NH3 -> NH4+ + H2 selected-C3 reaction"
   "AmmoniaH3PlusC3ResolvedReactionExact"
-  "proof-relevant selected-C3 transport pays literal 369 atom identity, charge/electron/bond bookkeeping, PA difference 431.3 kJ/mol, measured rate and 297 K environment"
-  "unique microscopic proton trajectory is not implied"
+  "proof-relevant selected-C3 reaction transport and the 431.3 kJ/mol proton-affinity driving difference are paid at the declared scope"
+  "a unique microscopic proton trajectory is not implied"
   paid
-
-abstractionReaction : Row
-abstractionReaction = row
-  "NH3 + H -> NH2 + H2 mechanism"
-  "AmmoniaHydrogenAbstractionMechanismExact + AmmoniaHydrogenAbstraction369HyperfibreExact"
-  "published full-dimensional PES/path/wavepacket dynamics plus literal 369 source/target fibres are paid"
-  "source numerical wavepacket coefficient arrays remain external"
-  sourcePaid
 
 entropyRow : Row
 entropyRow = row
-  "native-369 zeta microstates -> physical entropy"
-  "MonsterC3Native369ZetaCountingEnsembleExact + MonsterC3EntropyStateCountingExact + ThermodynamicStatisticalLaws"
-  "the 65610 zeta microstates and normalized 1/65610 mathematical counting measure now live on the exact native-369 fine carrier; physical equiprobability, density matrix, temperature, entropy functional and region measure remain unproved"
-  "same-object physical ensemble/density matrix + entropy functional + region/measure + regime/limit control"
+  "native-369 zeta basis-label counting -> physical entropy"
+  "MonsterC3Native369ZetaCountingEnsembleExact + ThermodynamicStatisticalLaws"
+  "the 65610 basis labels carry an exact normalized 1/65610 mathematical counting measure; this is not a measure on every linear W_zeta vector and is not yet a physical thermal ensemble"
+  "identify the physical microstate/ensemble or density matrix, Hamiltonian/regime, entropy functional and physical region/measure"
   open
 
 gravityRow : Row
@@ -138,104 +115,102 @@ gravityRow = row
   "physical entropy -> GR"
   "EntropyGravityIntertwinerBoundaryExact + KernelGeometryEmergenceObligations"
   "scalar entropy density alone does not determine stress-energy or Einstein dynamics"
-  "causal/area/tensor/Lorentzian/Bianchi/conservation/Einstein-limit/correction + empirical same-object validation"
+  "pay a named same-object causal/area/tensor/Lorentzian route including conservation/Bianchi/Einstein-limit assumptions and empirical validation"
   open
 
 monster4DRow : Row
 monster4DRow = row
-  "Monster symmetry of observed 3+1D universe"
+  "Monster symmetry of observed 3+1D physics"
   "Monster3Plus1PhysicalSymmetryTargetExact"
-  "AdS3/Monster, higher-dimensional Monstrous M-theory, exact C3 quotient equivalence, native-369 carrier charts and trivial singleton actions do not identify observed 3+1D physics"
-  "nontrivial physical Monster module/action -> controlled 4D EFT -> novel locked prediction -> independent validation"
+  "exact C3 quotient structure, Monster moonshine routes, native-369 basis charts and mathematical entropy counting do not establish a nontrivial Monster action in observed 3+1D physics"
+  "derive a same-object physical Monster module/action, controlled 4D EFT and locked novel prediction, then validate independently"
   open
 
 rows : List Row
 rows =
-  monsterArithmetic ∷ monsterSelectedLinearFrontier ∷ monsterLiteralPhaseOneSplit ∷
-  nh3Hamiltonian ∷ nh3PublishedFCI ∷ nh3ReleasedMatrix ∷ nh3RegularC3 ∷
-  nh3MonsterQuotient ∷ native369FineCarrier ∷ nh3MonsterRefinedCompiler ∷
-  h3Reaction ∷ abstractionReaction ∷ entropyRow ∷ gravityRow ∷ monster4DRow ∷ []
+  monsterGlobalLinear ∷ monsterZetaLinear ∷ monsterLiteralOtherPhases ∷
+  nh3Hamiltonian ∷ nh3ReleasedMatrix ∷ nh3C3Quotient ∷ native369Basis ∷
+  nh3MonsterLinearLift ∷ h3Reaction ∷ entropyRow ∷ gravityRow ∷ monster4DRow ∷ []
 
 record Receipt : Set where
   constructor receipt
   field
     ternaryAndMonsterC3Paid : Bool
-    ternaryAndMonsterC3PaidIsTrue : ternaryAndMonsterC3Paid ≡ true
-    selected3BOnlyTwoSourceLeavesRemain : Bool
-    selected3BOnlyTwoSourceLeavesRemainIsTrue : selected3BOnlyTwoSourceLeavesRemain ≡ true
+
+    selected3BGlobalCompletionCompilerAvailable : Bool
     selected3BLinearRetractionPaid : Bool
-    selected3BLinearRetractionPaidIsFalse : selected3BLinearRetractionPaid ≡ false
     selected3BProjectedActionPaid : Bool
-    selected3BProjectedActionPaidIsFalse : selected3BProjectedActionPaid ≡ false
+
+    genericIsotypicAssemblySourceWritten : Bool
+    postRecognitionCopyCountCompilerSourceWritten : Bool
+    proofRelevantWeightTwoWrapperAvailable : Bool
+    proofRelevantZetaRestrictionWrapperAvailable : Bool
+    hzetaCharacterIsoCompilerAvailable : Bool
+    actualPaidWeightTwoLinearBridge : Bool
+    actualPaidLinearZetaRestriction : Bool
+    actualSimpleTypeClassifier : Bool
+    actualWholeSectorIsotypicEquivalence : Bool
+    actualCopyCountNinetyAfterRecognition : Bool
+    actualMultiplicityHomEvaluation : Bool
+
     literalFixedRegularResidualSplitPaid : Bool
-    literalFixedRegularResidualSplitPaidIsFalse : literalFixedRegularResidualSplitPaid ≡ false
+
     ammoniaHamiltonianSkeletonPaid : Bool
-    ammoniaHamiltonianSkeletonPaidIsTrue : ammoniaHamiltonianSkeletonPaid ≡ true
     ammoniaOccupationWavefunctionCarrierPaid : Bool
-    ammoniaOccupationWavefunctionCarrierPaidIsTrue : ammoniaOccupationWavefunctionCarrierPaid ≡ true
     ammoniaPublishedFCIDiagonalizationPaid : Bool
-    ammoniaPublishedFCIDiagonalizationPaidIsTrue : ammoniaPublishedFCIDiagonalizationPaid ≡ true
     authorReleasedSelectedCIMatrixIdentityPaid : Bool
-    authorReleasedSelectedCIMatrixIdentityPaidIsTrue : authorReleasedSelectedCIMatrixIdentityPaid ≡ true
     authorReleasedMatrixRediagonalizedByDASHI : Bool
-    authorReleasedMatrixRediagonalizedByDASHIIsFalse : authorReleasedMatrixRediagonalizedByDASHI ≡ false
+
     ammoniaA1PlusERegularC3Paid : Bool
-    ammoniaA1PlusERegularC3PaidIsTrue : ammoniaA1PlusERegularC3Paid ≡ true
-    ammoniaGroundStateC3ActionPaid : Bool
-    ammoniaGroundStateC3ActionPaidIsTrue : ammoniaGroundStateC3ActionPaid ≡ true
     ammoniaMonsterC3QuotientRepresentationPaid : Bool
-    ammoniaMonsterC3QuotientRepresentationPaidIsTrue : ammoniaMonsterC3QuotientRepresentationPaid ≡ true
     phaseQuotientFineStateNonfactorabilityPaid : Bool
-    phaseQuotientFineStateNonfactorabilityPaidIsTrue : phaseQuotientFineStateNonfactorabilityPaid ≡ true
-    refinedMonsterModelLiftCompilerPaid : Bool
-    refinedMonsterModelLiftCompilerPaidIsTrue : refinedMonsterModelLiftCompilerPaid ≡ true
-    fullMonsterZetaNative369FineCarrierPaid : Bool
-    fullMonsterZetaNative369FineCarrierPaidIsTrue : fullMonsterZetaNative369FineCarrierPaid ≡ true
-    actualZetaRecognitionNative369CompilerPaid : Bool
-    actualZetaRecognitionNative369CompilerPaidIsTrue : actualZetaRecognitionNative369CompilerPaid ≡ true
-    physicalNH3Native369FineCoordinatePaid : Bool
-    physicalNH3Native369FineCoordinatePaidIsFalse : physicalNH3Native369FineCoordinatePaid ≡ false
+
+    native369ZetaBasisLabelChartPaid : Bool
+    actualZetaBasisRecognitionCompilerAvailable : Bool
+    native369WholeLinearWZetaStateBijectionPaid : Bool
+    physicalNH3Native369BasisCoordinatePaid : Bool
+    physicalNH3ToMonsterLinearStatePaid : Bool
     nontrivialPhysicalMonsterActionOnAmmoniaPaid : Bool
-    nontrivialPhysicalMonsterActionOnAmmoniaPaidIsFalse : nontrivialPhysicalMonsterActionOnAmmoniaPaid ≡ false
+
     h3ProofRelevantC3ReactionPaid : Bool
-    h3ProofRelevantC3ReactionPaidIsTrue : h3ProofRelevantC3ReactionPaid ≡ true
-    abstraction369MechanismPaid : Bool
-    abstraction369MechanismPaidIsTrue : abstraction369MechanismPaid ≡ true
     normalizedCountingProbabilityPaid : Bool
-    normalizedCountingProbabilityPaidIsTrue : normalizedCountingProbabilityPaid ≡ true
-    native369ZetaCountingEnsemblePaid : Bool
-    native369ZetaCountingEnsemblePaidIsTrue : native369ZetaCountingEnsemblePaid ≡ true
+    native369ZetaBasisCountingEnsemblePaid : Bool
+    wholeLinearWZetaUniformMeasurePaid : Bool
     physicalEntropyPaid : Bool
-    physicalEntropyPaidIsFalse : physicalEntropyPaid ≡ false
     physicalEntropyGravityPaid : Bool
-    physicalEntropyGravityPaidIsFalse : physicalEntropyGravityPaid ≡ false
     observed3Plus1MonsterPaid : Bool
-    observed3Plus1MonsterPaidIsFalse : observed3Plus1MonsterPaid ≡ false
+open Receipt public
 
 canonicalReceipt : Receipt
 canonicalReceipt = receipt
-  true refl
-  true refl false refl false refl false refl
-  true refl true refl true refl true refl false refl
-  true refl true refl true refl true refl true refl
-  true refl true refl false refl false refl
-  true refl true refl true refl true refl
-  false refl false refl false refl
+  true
+  true false false
+  true true true true true false false false false false false
+  false
+  true true true true false
+  true true true
+  true true false false false false
+  true true true false false false false
 
-selected3BFrontierIsExactlyTwoLeaves :
-  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.onlyLinearRetractionAndProjectedActionRemain
-    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ true
-selected3BFrontierIsExactlyTwoLeaves = refl
+selected3BGlobalCompilerAvailable :
+  MonsterNative.Boundary.selected3BGlobalCompletionCompilerAvailable
+    MonsterNative.canonicalBoundary ≡ true
+selected3BGlobalCompilerAvailable = refl
 
-selected3BRetractionStillOpen :
-  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.actualLinearRetractionInhabitedHere
-    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
-selected3BRetractionStillOpen = refl
+genericIsotypicAssemblyAlreadyAvailable :
+  MonsterNative.Boundary.genericIsotypicAssemblySourceWritten
+    MonsterNative.canonicalBoundary ≡ true
+genericIsotypicAssemblyAlreadyAvailable = refl
 
-selected3BProjectedActionStillOpen :
-  Selected3B.Trialectic369Selected3BSemanticProjectedCompletionBoundary.projectedActionInputInhabitedHere
-    Selected3B.canonicalTrialectic369Selected3BSemanticProjectedCompletionBoundary ≡ false
-selected3BProjectedActionStillOpen = refl
+actualLinearZetaRestrictionStillOpen :
+  MonsterNative.Boundary.actualPaidLinearZetaRestriction
+    MonsterNative.canonicalBoundary ≡ false
+actualLinearZetaRestrictionStillOpen = refl
+
+actualSimpleTypeClassifierStillOpen :
+  MonsterNative.Boundary.actualSimpleTypeClassifier
+    MonsterNative.canonicalBoundary ≡ false
+actualSimpleTypeClassifierStillOpen = refl
 
 literalFixedRegularResidualStillOpen :
   Literal3B.LiteralThreePhaseResidualBoundary.fixedResidual53ComplementIsLive
@@ -243,16 +218,14 @@ literalFixedRegularResidualStillOpen :
 literalFixedRegularResidualStillOpen = refl
 
 publishedFCIIsPaid :
-  NH3FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid NH3FCI.canonicalSTO3GFCIBoundary ≡ true
+  NH3FCI.STO3GFCIBoundary.sourceBackedFCIDiagonalizationPaid
+    NH3FCI.canonicalSTO3GFCIBoundary ≡ true
 publishedFCIIsPaid = refl
 
 releasedMatrixIdentityIsPaid :
-  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
+  SCIArtifact.ReleasedArtifactBoundary.authorReleasedMatrixIdentityPaid
+    SCIArtifact.canonicalReleasedArtifactBoundary ≡ true
 releasedMatrixIdentityIsPaid = refl
-
-releasedMatrixRediagonalizationStillOpen :
-  SCIArtifact.ReleasedArtifactBoundary.matrixIndependentlyRediagonalizedByDASHI SCIArtifact.canonicalReleasedArtifactBoundary ≡ false
-releasedMatrixRediagonalizationStillOpen = refl
 
 nh3RegularC3BlockIsPaid :
   NH3Regular.RegularC3CrossDomainBoundary.nh3A1PlusERestrictsToOneRegularC3
@@ -269,40 +242,35 @@ phaseFineStateNonfactorabilityIsPaid :
     PhaseNF.canonicalPhaseQuotientNonFactorabilityBoundary ≡ true
 phaseFineStateNonfactorabilityIsPaid = refl
 
-refinedMonsterLiftCompilerIsPaid :
-  RefinedLift.RefinedStateLiftBoundary.actualRecognitionLiftCompilerPaid
-    RefinedLift.canonicalRefinedStateLiftBoundary ≡ true
-refinedMonsterLiftCompilerIsPaid = refl
-
-native369FineCarrierIsPaid :
-  Native369.Native369FineCarrierBoundary.fullMonsterZetaModelHasNative369CarrierChart
+native369BasisChartIsPaid :
+  Native369.Native369FineCarrierBoundary.native369FiniteChartIsBasisLabelChart
     Native369.canonicalNative369FineCarrierBoundary ≡ true
-native369FineCarrierIsPaid = refl
+native369BasisChartIsPaid = refl
 
-native369ActualRecognitionCompilerIsPaid :
-  Native369.Native369FineCarrierBoundary.actualZetaRecognitionComposesWithNative369Chart
-    Native369.canonicalNative369FineCarrierBoundary ≡ true
-native369ActualRecognitionCompilerIsPaid = refl
-
-physicalNative369AssignmentStillOpen :
-  Native369.Native369FineCarrierBoundary.physicalNH3StateToNative369FineCoordinatePaid
+native369WholeStateBijectionIsBlocked :
+  Native369.Native369FineCarrierBoundary.native369FiniteChartIsWholeVOAStateBijection
     Native369.canonicalNative369FineCarrierBoundary ≡ false
-physicalNative369AssignmentStillOpen = refl
+native369WholeStateBijectionIsBlocked = refl
 
-h3C3ReactionIsPaid :
-  H3C3.C3ResolvedH3AmmoniaBoundary.fullProofRelevantC3ResolvedReactionTransitionPaid
-    H3C3.canonicalC3ResolvedH3AmmoniaBoundary ≡ true
-h3C3ReactionIsPaid = refl
+actualBasisRecognitionCompilerAvailable :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.actualBasisRecognitionComposesWithNative369
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ true
+actualBasisRecognitionCompilerAvailable = refl
+
+physicalNH3LinearMonsterStateStillOpen :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.physicalNH3ToMonsterLinearStatePaid
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+physicalNH3LinearMonsterStateStillOpen = refl
 
 nontrivialMonsterActionStillOpen :
   NH3MonsterProbe.AmmoniaMonsterProbeBoundary.monsterActionOnAmmoniaPaid
     NH3MonsterProbe.canonicalAmmoniaMonsterProbeBoundary ≡ false
 nontrivialMonsterActionStillOpen = refl
 
-native369CountingEnsembleIsPaid :
+native369BasisCountingEnsembleIsPaid :
   NativeEnsemble.NativeZetaEnsembleBoundary.native369MicrostateCarrierPaid
     NativeEnsemble.canonicalNativeZetaEnsembleBoundary ≡ true
-native369CountingEnsembleIsPaid = refl
+native369BasisCountingEnsembleIsPaid = refl
 
 physicalEntropyStillOpen :
   Uniform.CountingEnsembleBoundary.uniformCountingMeasureIsPhysicalThermalEnsemble
