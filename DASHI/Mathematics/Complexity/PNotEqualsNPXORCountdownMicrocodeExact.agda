@@ -19,13 +19,16 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPXORCountdownMicrocodeExact where
 --     borrowOut = (NOT bit) AND borrowIn.
 --
 -- Thus XOR supplies the information-preserving local data update, but XOR
--- output alone cannot recover the carry/borrow coordinate.  This is the exact
--- boundary needed for the clock compiler: parity is a useful microcode donor,
--- not a complete timer and not complexity-theoretic hardness evidence.
+-- output alone cannot recover the carry/borrow coordinate.  The same local
+-- cell is then iterated over a little-endian finite bit list to obtain an
+-- executable ripple-borrow countdown semantics.  This pays the arithmetic
+-- core of the timer without pretending that the list recursion is already a
+-- finite standard-TM rule-table implementation.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
@@ -82,7 +85,7 @@ xorRecoverRight true false = refl
 xorRecoverRight true true = refl
 
 ------------------------------------------------------------------------
--- 3. Exact borrow truth table.
+-- 3. Exact one-bit borrow truth table.
 ------------------------------------------------------------------------
 
 countdownNoBorrow : (bit : Bool) →
@@ -100,10 +103,6 @@ countdownBitTrueBorrow = refl
 
 ------------------------------------------------------------------------
 -- 4. Parity alone cannot determine the carry/borrow state.
---
--- The inputs (false,true) and (true,false) have the same XOR output true but
--- different outgoing borrow.  Any clock construction therefore needs a second
--- carry/borrow coordinate in addition to the parity-updated data bit.
 ------------------------------------------------------------------------
 
 sameXorOutput :
@@ -121,7 +120,54 @@ sameXorOutputDifferentBorrow :
 sameXorOutputDifferentBorrow = sameXorOutput , differentBorrowOutput
 
 ------------------------------------------------------------------------
--- 5. Max-cut boundary.
+-- 5. Finite little-endian ripple-borrow countdown semantics.
+--
+-- Incoming borrow=false is observational identity.  Incoming borrow=true
+-- subtracts one modulo the represented width and exposes the final underflow
+-- borrow separately.  This is the compact arithmetic core to be compiled onto
+-- the standard tape; it does not hide the borrow inside the XOR coordinate.
+------------------------------------------------------------------------
+
+countdownBits : List Bool → Bool → List Bool × Bool
+countdownBits [] borrow = [] , borrow
+countdownBits (bit ∷ rest) borrow
+  with countdownBitStep bit borrow
+... | bit' , nextBorrow
+  with countdownBits rest nextBorrow
+... | rest' , finalBorrow =
+  (bit' ∷ rest') , finalBorrow
+
+countdownBitsNoBorrow :
+  (bits : List Bool) →
+  countdownBits bits false ≡ bits , false
+countdownBitsNoBorrow [] = refl
+countdownBitsNoBorrow (bit ∷ rest)
+  rewrite countdownNoBorrow bit
+        | countdownBitsNoBorrow rest =
+  refl
+
+countdownOne : List Bool → List Bool × Bool
+countdownOne bits = countdownBits bits true
+
+-- 1 = [1] -> 0 = [0].
+decrementOne :
+  countdownOne (true ∷ []) ≡ (false ∷ []) , false
+decrementOne = refl
+
+-- 2 = [0,1] -> 1 = [1,0].
+decrementTwo :
+  countdownOne (false ∷ true ∷ [])
+  ≡ (true ∷ false ∷ []) , false
+decrementTwo = refl
+
+-- 4 = [0,0,1] -> 3 = [1,1,0].
+decrementFour :
+  countdownOne (false ∷ false ∷ true ∷ [])
+  ≡ (true ∷ true ∷ false ∷ []) , false
+decrementFour = refl
+
+------------------------------------------------------------------------
+-- 6. Max-cut boundary.
 ------------------------------------------------------------------------
 
 record XORCountdownMicrocodeBoundary : Set where
@@ -130,6 +176,7 @@ record XORCountdownMicrocodeBoundary : Set where
     xorProvidesBitUpdate : Bool
     xorUpdateIsCoordinateRecoverable : Bool
     separateBorrowCoordinateRequired : Bool
+    finiteRippleCountdownSemanticsPaid : Bool
     xorGridRecurrenceIsExactTClock : Bool
     iitPhiIsComplexityLowerBound : Bool
     timerStillNeedsFiniteTapeCounterCompilation : Bool
@@ -139,7 +186,7 @@ open XORCountdownMicrocodeBoundary public
 canonicalXORCountdownBoundary : XORCountdownMicrocodeBoundary
 canonicalXORCountdownBoundary =
   xor-countdown-microcode-boundary
-    true true true false false true
+    true true true true false false true
 
 xorDoesNotCloseTimer :
   xorGridRecurrenceIsExactTClock canonicalXORCountdownBoundary ≡ false
@@ -148,6 +195,10 @@ xorDoesNotCloseTimer = refl
 iitDoesNotCreateLowerBound :
   iitPhiIsComplexityLowerBound canonicalXORCountdownBoundary ≡ false
 iitDoesNotCreateLowerBound = refl
+
+rippleCountdownSemanticsPaid :
+  finiteRippleCountdownSemanticsPaid canonicalXORCountdownBoundary ≡ true
+rippleCountdownSemanticsPaid = refl
 
 counterCompilationRemains :
   timerStillNeedsFiniteTapeCounterCompilation canonicalXORCountdownBoundary ≡ true
