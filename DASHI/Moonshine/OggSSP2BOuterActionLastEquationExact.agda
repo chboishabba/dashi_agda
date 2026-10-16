@@ -1,31 +1,29 @@
 module DASHI.Moonshine.OggSSP2BOuterActionLastEquationExact where
 
 ------------------------------------------------------------------------
--- TERMINAL C' SAME-OBJECT EQUATION
+-- HISTORICAL TERMINAL C' SAME-OBJECT EQUATION
 --
 -- Once the source-native Tate norm cokernel is literally identified with the
 -- exterior-square / M24-duad 276 model, the exterior action is not a second
 -- acquisition.  The already-paid finite M22:2 outer operator can be transported
 -- backwards through that equivalence.
 --
--- The final same-object C' statement is therefore one operator equality:
+-- This owner records the immediately preceding frontier, where the final C'
+-- statement was exposed as one operator equality:
 --
 --   actual operator induced on the Tate cokernel
 --     =
 --   exterior/duad M22:2 outer operator transported back through the weld.
 --
--- Lean owner `Integration.OggSSP2BOuterActionLastEquation` proves that this one
--- equality, together with finrank 276, automatically builds the coordinate
--- receipt, vertical weld, actual stable Q10 and Completion10 action.
+-- The newer owner
+-- `OggSSP2BEquivariantWeldLastEquationCompressionExact` supersedes this as the
+-- canonical max-cut: weld equivariance implies the equality automatically, so
+-- it is no longer an independent source/same-object acquisition.
 --
 -- ATTRIBUTION
 --   * Carnahan owns the external Monster-stable integral action.
 --   * ATLAS/AtlasRep runtime work owns the finite M22:2 outer J2^5 operator.
---   * DASHI owns this compiler-level reduction to one equality.
---
--- FIREWALL
--- The equality itself is not asserted here.  It remains the final literal
--- action-identification statement after the formal source action is instantiated.
+--   * DASHI owns only the compiler reductions.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -59,7 +57,7 @@ canonicalOuterActionLastEquationStatus =
     true true true true true
     false false false
     1 2
-    "Instantiate the formal source-native C_M(2B)/Co1 action, induce the selected within-fibre outer involution on the Tate cokernel, and prove that operator equals the paid M22:2/duad outer operator transported back through the norm/exterior equivalence. Existing Lean compilers then produce the actual stable Q10 and Completion10 action automatically."
+    "Historical frontier only: the newer equivariant-weld compiler shows this operator equality is generated automatically from weld equivariance. The live residual is one formal source-action/equivariance instantiation plus the two Mode5/2T provenance bits."
 
 finiteOuterJ2x5PaidUpstream : M22d2.outerJ2x5MatchCount ≡ 2
 finiteOuterJ2x5PaidUpstream = M22d2.outerJ2x5MatchCountIsTwo
