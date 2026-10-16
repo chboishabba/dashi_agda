@@ -4,19 +4,32 @@ module DASHI.Cognition.Teleodynamics.MonsterAlbertF4ActionDiscriminationHandoffE
 -- MONSTER-TRANSPORTED ACTION vs CLASSICAL F4 ACTION
 -- SAME-CARRIER DISCRIMINATION HANDOFF
 --
--- Sibling Agda PR #1179 now pays an exact proof-relevant Base/Zeta/Albert
+-- Sibling Agda PR #1179 pays an exact proof-relevant Base/Zeta/Albert
 -- 54 -> 53 carrier/deletion weld and a compiler transporting an already-owned
--- actual Monster 54/53 action onto those Albert-shaped carriers.
+-- actual Monster 54/53 action onto those Albert-SHAPED carriers.
 --
 -- It explicitly does NOT yet pay the stronger theorem that this transported
 -- Monster action is the classical F4 action preserving the Albert/Jordan
--- structure.  That live theorem is represented there by
--- `MonsterAlbertF4SameActionRecognition`.
+-- structure.  That live theorem is represented there by the proof-relevant
+-- Monster/Albert/F4 recognition target.
 --
--- This owner turns that distinction into a model/teleodynamics experiment
--- handoff.  Same carrier is not same action; same finite action fit is not
--- Jordan/F4 recognition; and either action fit is still below physical or
--- phenomenal realization.
+-- A crucial carrier distinction is now explicit.  `CubeAlbertPair54` is built
+-- from two finite 27-point ternary/Albert-SHAPE carriers.  It is not the literal
+-- 27-dimensional rational Albert vector algebra H_3(O_Q) on which the native
+-- norm+unit rigidity theorem lives.  Consequently the Lean/Agda rational-
+-- Albert result
+--
+--   linear bijection + cubic norm preservation + fixed unit
+--      -> Jordan automorphism
+--
+-- cannot be applied directly to the finite 54-state carrier.  A same-object
+-- finite-shape -> linear-Albert realization/action lift is required first.
+-- After that lift, cubic+unit rigidity is a productive compiler and can replace
+-- a second coordinate proof of Jordan compatibility.
+--
+-- Same carrier is not same action; finite Albert shape is not a linear Albert
+-- algebra; same finite action fit is not Jordan/F4 recognition; and either fit
+-- remains below physical or phenomenal realization.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -73,6 +86,9 @@ record MonsterAlbertF4SameCarrierActionAssay : Set where
     transportedMonsterActionReceipt : String
     candidateClassicalF4ActionReceipt : String
     monsterActorToF4ActorMapReceipt : String
+    finiteToLinearAlbertRealizationReceipt : String
+    cubicNormCompatibilityReceipt : String
+    distinguishedUnitCompatibilityReceipt : String
     heldOut54ActionReceipt : String
     heldOut53ActionReceipt : String
     jordanProductCompatibilityReceipt : String
@@ -85,9 +101,12 @@ record MonsterAlbertF4SameCarrierActionAssay : Set where
     monsterActionPinned : Bool
     classicalF4ActionPinned : Bool
     actorMapPinned : Bool
+    finiteToLinearAlbertRealizationPinned : Bool
+    cubicNormCompatibilityMeasured : Bool
+    distinguishedUnitCompatibilityMeasured : Bool
     heldOut54Measured : Bool
     heldOut53Measured : Bool
-    jordanCompatibilityMeasured : Bool
+    jordanCompatibilityMeasuredOrCompiled : Bool
     removedInvariantMeasured : Bool
     residualRestrictionMeasured : Bool
     decoderMeasured : Bool
@@ -105,6 +124,14 @@ record MonsterAlbertF4ActionBoundary : Set where
     transportedMonsterActionPaidInSibling : Bool
     sameCarrierCreatesSameAction : Bool
     transportedMonsterActionCreatesClassicalF4Action : Bool
+
+    -- Carrier/type firewall for cross-pollinating native rational-Albert
+    -- rigidity into the finite 54->53 shape programme.
+    finite54CarrierIsLiteralRationalAlbertLinearCarrier : Bool
+    nativeRationalAlbertRigidityApplicableDirectly : Bool
+    finiteToLinearAlbertRealizationRequired : Bool
+    cubicUnitRigidityReusableAfterLinearRealization : Bool
+
     finiteActionAgreementCreatesJordanAutomorphism : Bool
     jordanProductCompatibilityRequired : Bool
     actorMapRequired : Bool
@@ -124,6 +151,10 @@ canonicalMonsterAlbertF4ActionBoundary =
     true
     false
     false
+    false
+    false
+    true
+    true
     false
     true
     true
@@ -150,6 +181,8 @@ record MonsterAlbertF4ExperimentCandidate : Set where
     useTransportedMonsterActionAsIndependentComparator : Bool
     requireClassicalF4ActionIndependently : Bool
     compareOnSame54And53Carriers : Bool
+    requireFiniteShapeToLinearAlbertRealizationBeforeRigidity : Bool
+    reuseCubicUnitRigidityAfterLinearRealization : Bool
     holdOutActorWordsOrCompositions : Bool
     testJordanProductCompatibility : Bool
     testRemovedInvariantAndResidualRestriction : Bool
@@ -160,10 +193,12 @@ canonicalMonsterAlbertF4ExperimentCandidate : MonsterAlbertF4ExperimentCandidate
 canonicalMonsterAlbertF4ExperimentCandidate =
   monster-albert-f4-experiment-candidate
     "transported Monster action versus classical F4 action on one Albert-shaped 54->53 carrier"
-    "proof-relevant Base/Zeta/Albert carrier and deletion weld"
+    "proof-relevant Base/Zeta/finite-Albert-shape carrier and deletion weld"
     "same-object actor/action intertwining on 54 and residual 53"
-    "Jordan-product preservation plus removed-invariant/residual compatibility"
+    "first realize the finite shape in the literal rational Albert algebra; then cubic+unit rigidity may compile Jordan compatibility"
     "decoder/future-consumer/physical realization remains separate"
+    true
+    true
     true
     true
     true
@@ -178,6 +213,8 @@ canonicalMonsterAlbertF4ExperimentCandidate =
 
 data SameAlbertCarrierCreatesSameAction : Set where
 
+data FiniteAlbertShapeCreatesLinearAlbertAlgebra : Set where
+
 data TransportedMonsterActionCreatesClassicalF4 : Set where
 
 data ActionAgreementCreatesMechanismIdentity : Set where
@@ -186,6 +223,10 @@ data ActionAgreementCreatesPhenomenology : Set where
 
 sameAlbertCarrierDoesNotCreateSameAction : SameAlbertCarrierCreatesSameAction → ⊥
 sameAlbertCarrierDoesNotCreateSameAction ()
+
+finiteAlbertShapeDoesNotCreateLinearAlbertAlgebra :
+  FiniteAlbertShapeCreatesLinearAlbertAlgebra → ⊥
+finiteAlbertShapeDoesNotCreateLinearAlbertAlgebra ()
 
 transportedMonsterActionDoesNotCreateClassicalF4 :
   TransportedMonsterActionCreatesClassicalF4 → ⊥
