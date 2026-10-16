@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 dashi-repo-history = "dashi_repo_history.cli:main"
+dashi-repo-narrative = "dashi_repo_history.narrative_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
