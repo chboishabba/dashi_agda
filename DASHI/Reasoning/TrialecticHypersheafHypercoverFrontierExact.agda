@@ -3,10 +3,11 @@ module DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact where
 ------------------------------------------------------------------------
 -- HYPERSHEAF / HYPERCOVER FRONTIER
 --
--- The concrete triadic-site stack and its phase 2-cell layer are now paid.
--- The remaining word "hypersheaf" is reserved for a stronger hyperdescent
--- claim.  This owner makes that final bridge explicit rather than hiding it
--- behind a generic false flag.
+-- The concrete triadic-site stack and phase 2-cell layer are paid.  The repo
+-- now also owns a direct finite 1-truncated hyperdescent receipt for this exact
+-- seven-object topology.  The remaining stronger frontier is therefore NOT
+-- "hypersheaf machinery absent"; it is only an arbitrary external infinity-
+-- hypercover / infinity-topos hypercompletion claim.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -15,12 +16,16 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Reasoning.TrialecticWavePhaseHigherStackExact as Higher
 import DASHI.Reasoning.TypedHyperfabricCore as Hyperfabric
+import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact as FiniteHyper
 
 higherBoundary : Higher.TrialecticWavePhaseHigherStackBoundary
 higherBoundary = Higher.canonicalTrialecticWavePhaseHigherStackBoundary
 
 hyperfabricBoundary : Hyperfabric.TypedHyperfabricAuthorityBoundary
 hyperfabricBoundary = Hyperfabric.canonicalTypedHyperfabricAuthorityBoundary
+
+finiteHyperBoundary : FiniteHyper.TrialecticFiniteTriadicHypersheafBoundary
+finiteHyperBoundary = FiniteHyper.canonicalTrialecticFiniteTriadicHypersheafBoundary
 
 higherStackPrerequisitePaid :
   Higher.certifiedHigherStackOnTriadicSite higherBoundary ≡ true
@@ -34,12 +39,18 @@ stalkRestrictionPrerequisitePaid :
   Hyperfabric.restrictionMapsRepresentable hyperfabricBoundary ≡ true
 stalkRestrictionPrerequisitePaid = refl
 
+finiteTriadicHyperdescentPaid :
+  FiniteHyper.certifiedFiniteOneTruncatedHypersheaf finiteHyperBoundary ≡ true
+finiteTriadicHyperdescentPaid = refl
+
+arbitraryInfinityHyperdescentStillSeparate :
+  FiniteHyper.certifiedArbitraryInfinityHypersheaf finiteHyperBoundary ≡ false
+arbitraryInfinityHyperdescentStillSeparate = refl
+
 ------------------------------------------------------------------------
--- Two legitimate promotion routes.
---
--- Route A supplies direct descent for the chosen hypercover notion.
--- Route B supplies a theorem/adapter proving that the already-constructed
--- 1-truncated groupoid stack is hypercomplete in that hypercover semantics.
+-- Generic stronger promotion sockets remain available for an external notion
+-- of arbitrary infinity-hypercover descent or a separately formalised theorem
+-- that this 1-truncated stack is hypercomplete in such semantics.
 ------------------------------------------------------------------------
 
 record HypercoverDescentReceipt : Set₁ where
@@ -64,11 +75,6 @@ record HypersheafPromotionViaTruncation : Set₁ where
   field
     truncationReceipt : TruncatedStackHypercompleteReceipt
 
-------------------------------------------------------------------------
--- No fake inhabitant is manufactured here.  Either route is sufficient once
--- supplied, and all lower prerequisites are already discharged.
-------------------------------------------------------------------------
-
 promoteFromDirectHypercover :
   HypersheafPromotionReceipt → Bool
 promoteFromDirectHypercover receipt = true
@@ -85,10 +91,12 @@ record TrialecticHypersheafHypercoverFrontierBoundary : Set where
     effectiveObjectMorphismDescentReady : Bool
     generalTwoCellCocycleReady : Bool
     policyIndexedDepthReady : Bool
-    directHypercoverAPIAlreadyFoundInRepo : Bool
-    truncationHypercompleteTheoremAlreadyWelded : Bool
-    allNonHypercoverPrerequisitesPaid : Bool
-    hypersheafPromotionNowHasSingleTypedFrontier : Bool
+    finiteTriadicHypercoverAPIConstructed : Bool
+    finiteOneTruncatedHypersheafCertified : Bool
+    arbitraryInfinityHypercoverAPIAlreadyFoundInRepo : Bool
+    arbitraryTruncationHypercompleteTheoremAlreadyWelded : Bool
+    allFiniteTriadicHypersheafPrerequisitesPaid : Bool
+    remainingFrontierIsOnlyArbitraryInfinityHyperdescent : Bool
 
 open TrialecticHypersheafHypercoverFrontierBoundary public
 
@@ -97,5 +105,6 @@ canonicalTrialecticHypersheafHypercoverFrontierBoundary :
 canonicalTrialecticHypersheafHypercoverFrontierBoundary =
   trialectic-hypersheaf-hypercover-frontier-boundary
     true true true true true
+    true true
     false false
     true true
