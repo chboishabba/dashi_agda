@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from . import discovery_catalog
+from .narrative_cache import NarrativeCache, apply_narrative_gate
 from .repo_index_bridge import RepoIndexReader
 from .unified_discovery import UnifiedDiscovery
 
@@ -46,12 +47,17 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
         finally:
             discovery.repo_index.close()
 
+    def narrative_archaeology(self, query: str, *, limit: int = 50) -> dict:
+        return NarrativeCache(self.root).search(query, limit=limit)
+
     def discovery_receipt(self, query: str, *, limit: int = 50) -> dict:
         discovery = _unified(self)
         try:
-            return discovery.discovery_receipt(query, limit=limit)
+            receipt = discovery.discovery_receipt(query, limit=limit)
         finally:
             discovery.repo_index.close()
+        narrative = narrative_archaeology(self, query, limit=limit)
+        return apply_narrative_gate(receipt, narrative)
 
     def object_detail(self, symbol_id: str) -> dict:
         discovery = _unified(self)
@@ -71,6 +77,7 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
     source_index_cls.refresh_semantic_catalog = refresh_semantic_catalog
     source_index_cls.search_symbols = search_symbols
     source_index_cls.related_symbols = related_symbols
+    source_index_cls.narrative_archaeology = narrative_archaeology
     source_index_cls.discovery_receipt = discovery_receipt
     source_index_cls.object_detail = object_detail
     source_index_cls.round_lineage = round_lineage
