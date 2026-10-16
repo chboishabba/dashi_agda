@@ -2,18 +2,14 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardStaticQuoteLookupExact wh
 
 ------------------------------------------------------------------------
 -- ACTUAL CODED MACHINE QUOTATION -> LITERAL UNARY-INDEX LOOKUP TM
---
--- Unlike the ruled-out full own-Cook table, the quoted machine's static program
--- text is finite compile-time data.  The existing finite bitstream lookup
--- compiler can therefore expose each static program bit operationally.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Maybe using (just)
-open import Agda.Builtin.Nat using (Nat)
 import Data.Fin.Base as Fin
 
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
 import DASHI.Mathematics.Complexity.CodedFiniteStandardStaticQuotationExact as Quote
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
@@ -56,7 +52,7 @@ staticQuoteStopTransitionExact :
         (Quote.codedStaticProgramWidth code)
         (staticQuoteBit code index))
       Cursor.stopSymbol
-      DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact.stayPut)
+      Local.stayPut)
 staticQuoteStopTransitionExact code index =
   Transition.validStopTransition
     (staticQuoteBit code)
