@@ -20,6 +20,9 @@ import DASHI.Biology.IITPointedTernary27TriadicNonDescentExact as Triadic
 import DASHI.Biology.IITCubeTwoFaceQ9SelfIndexingWeldExact as Q9
 import DASHI.Biology.IITCubeTwoFaceImageRecognitionExact as Cube
 import DASHI.Biology.IITCubeExceptionalGeometryHandoffExact as Exceptional
+import DASHI.Biology.IITCubeConcreteTorusImageExact as Concrete
+import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact as Broken
+import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact as FullFace
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 booleanParityWitness : BoolParity.ParityOrComplement BoolParity.xorGate
@@ -60,6 +63,19 @@ q9TwoFaceBoundary = Q9.canonicalCubeQ9WeldBoundary
 cubeGraphBoundary : Cube.CubeImageRecognitionBoundary
 cubeGraphBoundary = Cube.canonicalCubeImageRecognitionBoundary
 
+concreteCubeImageWitness : (source : Concrete.CubeFaces) → Concrete.GraphLaw (Concrete.cubeStep source)
+concreteCubeImageWitness = Concrete.stepGraphLaw
+
+exceptionalSymmetryBreakingWitness :
+  Broken.sectorZ Broken.transformedState ≡ Broken.requiredTransformedThird → ⊥
+exceptionalSymmetryBreakingWitness = Broken.selectedTrinificationShearBreaksCubeGraph
+
+fullStructureCannotRecoverHiddenFace :
+  {Output : Set} →
+  (observe : Triadic.ThreeSelectedCubies → Output) →
+  Descent.FactorsThrough (FullFace.pairwiseIITObservation observe) Triadic.triadicFaceConsumer → ⊥
+fullStructureCannotRecoverHiddenFace = FullFace.pairwiseIITOutputDoesNotDetermineTriadicFace
+
 exceptionalHandoffBoundary : Exceptional.ExceptionalCubeHandoffBoundary
 exceptionalHandoffBoundary = Exceptional.canonicalExceptionalCubeHandoffBoundary
 
@@ -87,6 +103,7 @@ record ParityGluingConjectureStatus : Set where
 
     fullIITDistinctionRelationPhiDiscriminatesHigherGluing : Bool
     exceptionalActionPreservesCubeImageKernelPaid : Bool
+    exceptionalActionBreaksSelectedCubeImageKernelPaid : Bool
     lilaHiddenStateCubeIntertwinerPaid : Bool
     heldOutLilaConsumerPaymentPaid : Bool
 
@@ -98,8 +115,8 @@ canonicalParityGluingConjectureStatus =
     true true false
     true true true true false
     true false true false
-    true true false
-    false false false false
+    true true true
+    false false true false false
 
 record ParityGluingMaxCutFrontier : Set where
   constructor parity-gluing-max-cut-frontier
@@ -114,4 +131,4 @@ record ParityGluingMaxCutFrontier : Set where
 canonicalParityGluingMaxCutFrontier : ParityGluingMaxCutFrontier
 canonicalParityGluingMaxCutFrontier =
   parity-gluing-max-cut-frontier
-    false false true true true true
+    false false false true false true
