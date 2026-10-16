@@ -13,6 +13,8 @@ import DASHI.Physics.QuantumVacuum.CasimirGRNullFocusingBridgeExact as GR
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationExact as GRQFTX
 import DASHI.Physics.QuantumVacuum.CasimirSelectedQFTSU2HostExact as SU2Host
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Restriction
+import DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionExact as Pairing
+import DASHI.Physics.QuantumVacuum.CasimirU1CurvatureRestrictionExact as Curvature
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as U1Action
 import DASHI.Physics.QuantumVacuum.CasimirBrownMaclaySymmetricStressReductionExact as Brown10
 import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentExact as U1Attachment
@@ -92,6 +94,10 @@ record Casimir369StressEnergyTerminalBoundary : Set where
     canonicalCartanU1FieldImageReceiptInterfacePaid : Bool
     u1FieldImageToBracketZeroCompilerPaid : Bool
     independentRestrictedCommutatorPaymentRequired : Bool
+    u1InvariantPairingRestrictionPaid : Bool
+    independentKillingDecompositionRequired : Bool
+    u1CurvatureRestrictionCompilerPaid : Bool
+    secondAbelianBracketProofRequired : Bool
     u1ActionVariationMaxCutInterfacePaid : Bool
     brownMaclayTenComponentReductionPaid : Bool
     sixteenIndependentBrownMaclayComponentsRequired : Bool
@@ -110,13 +116,14 @@ record Casimir369StressEnergyTerminalBoundary : Set where
 
     cartanU1FieldRestrictionPaid : Bool
     restrictedFieldNonAbelianCommutatorVanishingPaid : Bool
-    killingFormAndChargeNormalizationPaid : Bool
-    sameRestrictedFieldStrengthIdentificationPaid : Bool
+    physicalChargeCouplingNormalizationPaid : Bool
+    sameObjectNondegenerateCurvatureFormulaAttached : Bool
     restrictedYMMaxwellActionEqualityPaid : Bool
     metricVariationRestrictionCommutationPaid : Bool
 
-    -- Compatibility fields retained for downstream readers.  They are
-    -- aggregate status only, not independent max-cut leaves anymore.
+    -- Compatibility aggregate fields retained for downstream readers.
+    killingFormAndChargeNormalizationPaid : Bool
+    sameRestrictedFieldStrengthIdentificationPaid : Bool
     yangMillsActionToMaxwellRestrictionPaid : Bool
     metricVariationU1StressRestrictionPaid : Bool
 
@@ -169,6 +176,10 @@ canonicalTerminalBoundary = record
   ; canonicalCartanU1FieldImageReceiptInterfacePaid = true
   ; u1FieldImageToBracketZeroCompilerPaid = true
   ; independentRestrictedCommutatorPaymentRequired = false
+  ; u1InvariantPairingRestrictionPaid = true
+  ; independentKillingDecompositionRequired = false
+  ; u1CurvatureRestrictionCompilerPaid = true
+  ; secondAbelianBracketProofRequired = false
   ; u1ActionVariationMaxCutInterfacePaid = true
   ; brownMaclayTenComponentReductionPaid = true
   ; sixteenIndependentBrownMaclayComponentsRequired = false
@@ -184,10 +195,12 @@ canonicalTerminalBoundary = record
   ; selectedQFTGroupQuaternionSU2InterpretationPaid = false
   ; cartanU1FieldRestrictionPaid = false
   ; restrictedFieldNonAbelianCommutatorVanishingPaid = false
-  ; killingFormAndChargeNormalizationPaid = false
-  ; sameRestrictedFieldStrengthIdentificationPaid = false
+  ; physicalChargeCouplingNormalizationPaid = false
+  ; sameObjectNondegenerateCurvatureFormulaAttached = false
   ; restrictedYMMaxwellActionEqualityPaid = false
   ; metricVariationRestrictionCommutationPaid = false
+  ; killingFormAndChargeNormalizationPaid = false
+  ; sameRestrictedFieldStrengthIdentificationPaid = false
   ; yangMillsActionToMaxwellRestrictionPaid = false
   ; metricVariationU1StressRestrictionPaid = false
   ; restrictedQuantumStressMaxwellIdentificationPaid = false
@@ -229,6 +242,10 @@ selectedQFTSU2HostBoundaryWitness : SU2Host.CasimirSelectedQFTSU2HostBoundary
 selectedQFTSU2HostBoundaryWitness = SU2Host.canonicalCasimirSelectedQFTSU2HostBoundary
 u1RestrictionBoundaryWitness : U1Restriction.CasimirU1RestrictedSelectedQFTStressBoundary
 u1RestrictionBoundaryWitness = U1Restriction.canonicalCasimirU1RestrictedSelectedQFTStressBoundary
+u1InvariantPairingBoundaryWitness : Pairing.CasimirU1InvariantPairingBoundary
+u1InvariantPairingBoundaryWitness = Pairing.canonicalCasimirU1InvariantPairingBoundary
+u1CurvatureRestrictionBoundaryWitness : Curvature.CasimirU1CurvatureRestrictionBoundary
+u1CurvatureRestrictionBoundaryWitness = Curvature.canonicalCasimirU1CurvatureRestrictionBoundary
 u1ActionVariationBoundaryWitness : U1Action.CasimirU1ActionVariationBoundary
 u1ActionVariationBoundaryWitness = U1Action.canonicalCasimirU1ActionVariationBoundary
 brownMaclaySymmetricReductionBoundaryWitness : Brown10.CasimirBrownMaclaySymmetricReductionBoundary
@@ -288,12 +305,14 @@ data RemainingCasimirStressEnergyBlocker : Set where
   missingSelectedQFTGroupQuaternionSU2Interpretation : RemainingCasimirStressEnergyBlocker
 
   missingCanonicalCartanU1FieldRestriction : RemainingCasimirStressEnergyBlocker
-  missingKillingFormAndChargeNormalization : RemainingCasimirStressEnergyBlocker
-  missingSameRestrictedFieldStrengthIdentification : RemainingCasimirStressEnergyBlocker
+  missingPhysicalChargeCouplingNormalization : RemainingCasimirStressEnergyBlocker
+  missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingCasimirStressEnergyBlocker
   missingRestrictedYMMaxwellActionEquality : RemainingCasimirStressEnergyBlocker
   missingMetricVariationRestrictionCommutation : RemainingCasimirStressEnergyBlocker
 
   -- Compatibility constructors retained for older downstream references.
+  missingKillingFormAndChargeNormalization : RemainingCasimirStressEnergyBlocker
+  missingSameRestrictedFieldStrengthIdentification : RemainingCasimirStressEnergyBlocker
   missingYangMillsActionToMaxwellRestriction : RemainingCasimirStressEnergyBlocker
   missingMetricVariationStressRestriction : RemainingCasimirStressEnergyBlocker
 
@@ -323,9 +342,9 @@ secondUnificationBlocker = missingSelectedQFTGroupQuaternionSU2Interpretation
 thirdUnificationBlocker : RemainingCasimirStressEnergyBlocker
 thirdUnificationBlocker = missingCanonicalCartanU1FieldRestriction
 fourthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fourthUnificationBlocker = missingKillingFormAndChargeNormalization
+fourthUnificationBlocker = missingPhysicalChargeCouplingNormalization
 fifthUnificationBlocker : RemainingCasimirStressEnergyBlocker
-fifthUnificationBlocker = missingSameRestrictedFieldStrengthIdentification
+fifthUnificationBlocker = missingSameObjectNondegenerateCurvatureFormulaAttachment
 sixthUnificationBlocker : RemainingCasimirStressEnergyBlocker
 sixthUnificationBlocker = missingRestrictedYMMaxwellActionEquality
 seventhUnificationBlocker : RemainingCasimirStressEnergyBlocker
@@ -354,4 +373,4 @@ firstExperimentalBlocker = missingDirectStressOrGravityMeasurement
 
 terminalReading : String
 terminalReading =
-  "The selected-QFT Casimir max-cut is decomposed to the first physical same-object seams. Existing compiler routes can supply compact simplicity once a pinned YM construction or LiteralClayStructuralBase is attached to the same qftTarget. The load-bearing host then needs only literal interpretation as the repository quaternionic-SU2 GroupStructure; Dynkin-A1 and Sprint105 SU2 labels are optional consistency metadata. Brown-Maclay is never equated with the full SU2 stress. After a pointwise Cartan-U1 field-image attachment, the existing U1 theorem compiles the non-abelian bracket to zero automatically. The old monolithic YM->Maxwell action leaf is now split according to the live Maxwell sector-restriction grammar: Killing-form/charge normalization; same restricted field-strength identification; restricted YM=Maxwell action equality; and commutation with metric variation/stress construction. The old zero-probe action surface cannot pay those physical leaves. Then restricted quantum stress must equal Maxwell stress on the same plate boundary/renormalization object; coordinate symmetry plus ten Brown-Maclay components compile all sixteen components. After that, the existing Round131 all-sector aggregation and common metric/action/GR lanes resume. Further carrier/cardinality analogy is not payment."
+  "The selected-QFT Casimir max-cut is now reduced through the theorem-bearing Cartan algebra. Existing compiler routes can supply compact simplicity once a pinned YM construction or LiteralClayStructuralBase is attached to the same qftTarget; the selected token then needs literal interpretation as the repository quaternionic-SU2 GroupStructure. Brown-Maclay is never equated with the full SU2 stress. After a pointwise Cartan-U1 field-image attachment, bracket-zero is compiled automatically. The live SU2 invariant pairing restricts exactly as <embed a,embed b>=a*b, so no separate Killing decomposition remains. Likewise, any SAME nondegenerate curvature formula F=dA+[A,A] compiles to F=dA; what remains is attachment of that real curvature object. The first calibration leaf is therefore physical charge/gauge-coupling/action-prefactor normalization, followed by nondegenerate curvature attachment, restricted YM=Maxwell action equality, metric-variation commutation, Maxwell-stress identification, and the same plate/renormalization weld. Coordinate symmetry plus ten Brown-Maclay components then compile all sixteen stress components. Round131 all-sector aggregation and common metric/action/GR lanes follow. Further carrier/cardinality analogy is not payment."
