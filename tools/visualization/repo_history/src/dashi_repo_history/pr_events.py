@@ -6,6 +6,8 @@ import json
 import subprocess
 from typing import Any
 
+from .narrative import NarrativeEvent
+
 
 @dataclass(frozen=True)
 class PullRequestEvent:
@@ -18,9 +20,40 @@ class PullRequestEvent:
     closed_at: int | None
     merge_commit: str | None
     url: str | None
+    body: str = ""
+    commits: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "PullRequestEvent":
+        return cls(
+            number=int(value["number"]),
+            title=str(value.get("title", "")),
+            head_ref=str(value.get("head_ref", "")),
+            base_ref=str(value.get("base_ref", "")),
+            created_at=(int(value["created_at"]) if value.get("created_at") is not None else None),
+            merged_at=(int(value["merged_at"]) if value.get("merged_at") is not None else None),
+            closed_at=(int(value["closed_at"]) if value.get("closed_at") is not None else None),
+            merge_commit=(str(value["merge_commit"]) if value.get("merge_commit") else None),
+            url=(str(value["url"]) if value.get("url") else None),
+            body=str(value.get("body", "") or ""),
+            commits=tuple(str(item) for item in value.get("commits", ())),
+        )
+
+    def to_narrative_event(self) -> NarrativeEvent:
+        timestamp = self.merged_at or self.closed_at or self.created_at or 0
+        return NarrativeEvent(
+            event_id=f"pr:{self.number}",
+            timestamp=timestamp,
+            kind="pull_request",
+            title=self.title,
+            text=self.body,
+            commit=self.merge_commit,
+            pull_request=self.number,
+            url=self.url,
+        )
 
 
 def _timestamp(value: str | None) -> int | None:
@@ -31,6 +64,20 @@ def _timestamp(value: str | None) -> int | None:
             value.replace("Z", "+00:00")
         ).timestamp()
     )
+
+
+def _commit_oids(value: Any) -> tuple[str, ...]:
+    if not isinstance(value, list):
+        return ()
+    result: list[str] = []
+    for item in value:
+        if isinstance(item, dict):
+            oid = item.get("oid")
+            if oid:
+                result.append(str(oid))
+        elif isinstance(item, str):
+            result.append(item)
+    return tuple(result)
 
 
 def parse_pr_records(records: list[dict[str, Any]]) -> list[PullRequestEvent]:
@@ -54,6 +101,8 @@ def parse_pr_records(records: list[dict[str, Any]]) -> list[PullRequestEvent]:
                     if record.get("url")
                     else None
                 ),
+                body=str(record.get("body", "") or ""),
+                commits=_commit_oids(record.get("commits")),
             )
         )
     return sorted(events, key=lambda event: event.number)
@@ -62,20 +111,22 @@ def parse_pr_records(records: list[dict[str, Any]]) -> list[PullRequestEvent]:
 def collect_pr_events(repository: str) -> list[PullRequestEvent]:
     """Read GitHub PR metadata through the authenticated gh CLI.
 
-    This is optional timeline metadata. Failure to access GitHub must never
-    change semantic graph extraction.
+    This is optional development-narrative metadata. Failure to access GitHub
+    must never change semantic graph extraction or formal authority.
     """
 
     fields = ",".join(
         [
             "number",
             "title",
+            "body",
             "headRefName",
             "baseRefName",
             "createdAt",
             "mergedAt",
             "closedAt",
             "mergeCommit",
+            "commits",
             "url",
         ]
     )
