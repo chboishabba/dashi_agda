@@ -7,7 +7,8 @@ module DASHI.Philosophy.NonginAttachedDescendantProgrammesExact where
 -- the Nongin lineage while retaining independent theorem/source ownership.
 -- The wave-phase max-cut now advances the higher-descent lane through a
 -- concrete full-site non-discrete groupoid presheaf, effective stack descent,
--- general phase 2-cells/cocycle and a setoid-truncated higher-stack certificate.
+-- general phase 2-cells/cocycle, a setoid-truncated higher stack, and a finite
+-- one-truncated hypersheaf on the exact relational triadic topology.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -82,9 +83,13 @@ higherStackNowPaid :
   Higher.certifiedHigherStackPaid higherBoundary ≡ true
 higherStackNowPaid = refl
 
-hypersheafCertificationRemainingAtArbitraryHypercover :
-  Higher.certifiedHypersheafPaid higherBoundary ≡ false
-hypersheafCertificationRemainingAtArbitraryHypercover = refl
+finiteTriadicHypersheafNowPaid :
+  Higher.certifiedFiniteTriadicHypersheafPaid higherBoundary ≡ true
+finiteTriadicHypersheafNowPaid = refl
+
+arbitraryInfinityHypersheafStillSeparate :
+  Higher.certifiedArbitraryInfinityHypersheafPaid higherBoundary ≡ false
+arbitraryInfinityHypersheafStillSeparate = refl
 
 record NonginAttachedDescendantProgrammesBoundary : Set where
   constructor nongin-attached-descendant-programmes-boundary
@@ -98,7 +103,8 @@ record NonginAttachedDescendantProgrammesBoundary : Set where
     fullSiteGroupoidPresheafPaid : Bool
     effectiveStackPaid : Bool
     higherStackPaid : Bool
-    arbitraryHypercoverHypersheafStillOpen : Bool
+    finiteTriadicHypersheafPaid : Bool
+    arbitraryInfinityHypersheafStillOpen : Bool
     attachmentClaimsPhysicalLawAlreadyPromoted : Bool
     attachmentCollapsesIndependentTheoremOwnership : Bool
 
@@ -109,5 +115,5 @@ canonicalNonginAttachedDescendantProgrammesBoundary :
 canonicalNonginAttachedDescendantProgrammesBoundary =
   nongin-attached-descendant-programmes-boundary
     true true true true true true
-    true true true true
+    true true true true true
     false false
