@@ -19,9 +19,10 @@ module DASHI.Moonshine.Monster3BCommonRepresentationTransportExact where
 -- Agda-kernel trace theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set; Set₁; Set₂)
+open import Agda.Primitive using (Set₁; Set₂)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannUniquenessBidiExact as Uniqueness
@@ -30,58 +31,38 @@ import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Harden
 import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact as LiteralCharacter
 import DASHI.Moonshine.Monster3BSchrodingerAdditiveCharacterOrthogonalityExact as Orthogonality
 
-------------------------------------------------------------------------
--- 1. Literal Schrodinger model -> common representation theory.
-------------------------------------------------------------------------
-
 record LiteralSchrodingerCommonTheoryAttachment
     (theory : Uniqueness.IrreducibleCharacterDetermination) : Set₂ where
   field
     fixedPhaseData : Uniqueness.FixedPhaseRepresentationData theory
-
     literalVectorCarrierSameObject : Set
     literalHeisenbergActionSameObject : Set
     literalIrreducibilitySameObject : Set
     literalCharacterSameObject : Set
-
     literalVectorCarrierSameObjectWitness : literalVectorCarrierSameObject
     literalHeisenbergActionSameObjectWitness : literalHeisenbergActionSameObject
     literalIrreducibilitySameObjectWitness : literalIrreducibilitySameObject
     literalCharacterSameObjectWitness : literalCharacterSameObject
-
     selectedZetaPhase :
       Uniqueness.centralPhase fixedPhaseData ≡ Uniqueness.zetaPhase
-
 open LiteralSchrodingerCommonTheoryAttachment public
-
-------------------------------------------------------------------------
--- 2. Actual selected Monster constituent -> SAME representation theory.
-------------------------------------------------------------------------
 
 record ActualHZetaConstituentCommonTheoryAttachment
     (theory : Uniqueness.IrreducibleCharacterDetermination) : Set₂ where
   field
     fixedPhaseData : Uniqueness.FixedPhaseRepresentationData theory
-
     actualWZetaRestrictionSameObject : Set
     actualSelectedConstituentSameObject : Set
     actualConstituentIrreducibilitySameObject : Set
     actualConstituentCharacterSameObject : Set
-
     actualWZetaRestrictionSameObjectWitness : actualWZetaRestrictionSameObject
     actualSelectedConstituentSameObjectWitness : actualSelectedConstituentSameObject
     actualConstituentIrreducibilitySameObjectWitness :
       actualConstituentIrreducibilitySameObject
     actualConstituentCharacterSameObjectWitness : actualConstituentCharacterSameObject
-
     selectedZetaPhase :
       Uniqueness.centralPhase fixedPhaseData ≡ Uniqueness.zetaPhase
-
 open ActualHZetaConstituentCommonTheoryAttachment public
-
-------------------------------------------------------------------------
--- 3. Same-theory attachments compile to the existing H_zeta transport.
-------------------------------------------------------------------------
 
 compileCharacterTransport :
   (theory : Uniqueness.IrreducibleCharacterDetermination) →
@@ -122,10 +103,6 @@ compilePaidHZetaRecognition theory model actual =
   Compiler.compiledPaidHZetaRecognition theory
     (compileCharacterTransport theory model actual)
 
-------------------------------------------------------------------------
--- 4. Current boundary.
-------------------------------------------------------------------------
-
 record Boundary : Set where
   constructor boundary
   field
@@ -133,11 +110,9 @@ record Boundary : Set where
     actualConstituentAttachmentTyped : Bool
     sameTheoryCompilerTyped : Bool
     paidHZetaCompilerReused : Bool
-
     literalCharacterExecutablePaid : Bool
     additiveCharacterOrthogonalitySourceWritten : Bool
     formalLiteralTraceBridgeInhabited : Bool
-
     commonRepresentationTheoryInhabited : Bool
     literalModelAttachmentInhabited : Bool
     actualConstituentAttachmentInhabited : Bool
@@ -151,12 +126,7 @@ canonicalBoundary = boundary
     LiteralCharacter.canonicalBoundary)
   (Orthogonality.factorizedAdditiveCharacterOrthogonalityPaid
     Orthogonality.canonicalBoundary)
-  false
-  false false false false
-
-------------------------------------------------------------------------
--- 5. Non-promotion boundaries.
-------------------------------------------------------------------------
+  false false false false false
 
 data ExecutableCharacterCreatesCommonRepresentationTheory : Set where
 data Degree729CreatesActualConstituent : Set where
