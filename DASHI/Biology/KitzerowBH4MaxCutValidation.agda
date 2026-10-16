@@ -11,6 +11,7 @@ import DASHI.Biology.KitzerowBH4SynthesisRegenerationExact as Cycle
 import DASHI.Biology.KitzerowBH4ReactionCascadeBridgeExact as ReactionBridge
 import DASHI.Biology.KitzerowBH4LineageRegressionExact as Lineage
 import DASHI.Biology.KitzerowBH4HepaticCompetitionDiscriminatorExact as Hepatic
+import DASHI.Biology.KitzerowBH4NeuralContextDiscriminatorExact as Neural
 import DASHI.Biology.KitzerowBH4ConvergentEvidenceExact as Evidence
 import DASHI.Biology.KitzerowPriorityAttributionExact as Attribution
 import DASHI.Biology.KitzerowBH4PriorArtSubtractionExact as PriorArt
@@ -71,6 +72,12 @@ hepaticDirectDiscriminatorConstrainsButDoesNotUniversalize :
   × Hepatic.hepaticTwoBranchResultProvesWholeBH4AllocatorModel Hepatic.canonicalHepaticCompetitionBoundary ≡ false
 hepaticDirectDiscriminatorConstrainsButDoesNotUniversalize = refl , (refl , refl)
 
+neuralContextRejectsSimpleCurrentPoolSufficiency :
+  Neural.brainBH4RestoredWithoutMonoamineRescue Neural.canonicalNeuralContextBoundary ≡ true
+  × Neural.brainRegionContextMatters Neural.canonicalNeuralContextBoundary ≡ true
+  × Neural.simpleCurrentPoolSufficiencySupported Neural.canonicalNeuralContextBoundary ≡ false
+neuralContextRejectsSimpleCurrentPoolSufficiency = refl , (refl , refl)
+
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation :
   Evidence.allCanonicalEvidenceReceiptsRejectWholeModelConfirmation ≡ true
 allCurrentEvidenceReceiptsRejectWholeModelConfirmation = refl
@@ -90,8 +97,9 @@ priorArtPartitionSeparatesInheritedBiology = refl
 centralBH4AllocationRemainsExperimentallyOpen :
   Experiment.centralBH4AllocationClosed Experiment.canonicalCentralBH4Discriminator ≡ false
   × Experiment.historicalTwoBranchConstraintPaid ≡ true
-  × Experiment.historicalConstraintClosesCentralEdge ≡ false
-centralBH4AllocationRemainsExperimentallyOpen = refl , (refl , refl)
+  × Experiment.historicalNeuralContextConstraintPaid ≡ true
+  × Experiment.historicalConstraintsCloseCentralEdge ≡ false
+centralBH4AllocationRemainsExperimentallyOpen = refl , (refl , (refl , refl))
 
 paretoFrontierIsNotTruthRanking :
   Pareto.frontierRankIsTruthRank Pareto.canonicalKitzerowAcquisitionFrontier ≡ false
