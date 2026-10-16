@@ -66,10 +66,6 @@ jZeroCubicEdgeHasOrderThreeAction :
   (B : ECarrier.Eisenstein) → Cubic.EisensteinCubicC3Action B
 jZeroCubicEdgeHasOrderThreeAction = Gate.eisensteinCubicActionAvailable
 
-------------------------------------------------------------------------
--- Original arithmetic and same-carrier CM receipts.
-------------------------------------------------------------------------
-
 leanUniversalCoefficientDonorRecorded :
   LeanReceipt.leanUniversalCoefficientSourceObserved ≡ true
 leanUniversalCoefficientDonorRecorded = refl
@@ -122,10 +118,6 @@ leanCMReceiptDoesNotImportKernelAuthority :
   LeanCM.leanProofObjectImportedIntoAgda ≡ false
 leanCMReceiptDoesNotImportKernelAuthority = refl
 
-------------------------------------------------------------------------
--- Historical inert receipt plus the newer split/local closure receipt.
-------------------------------------------------------------------------
-
 leanInertSamePrimeWeldRecorded :
   LeanInert.samePrimeWeldObserved ≡ true
 leanInertSamePrimeWeldRecorded = refl
@@ -138,8 +130,6 @@ leanInertLocalEulerShapeRecorded :
   LeanInert.inertLocalEulerShapeObserved ≡ true
 leanInertLocalEulerShapeRecorded = refl
 
--- The older inert receipt correctly records what was not yet paid at its own
--- observed commit.  The newer receipt below records the subsequent closure.
 oldInertReceiptHadNoCubeFibreCertificate :
   LeanInert.canonicalCubeFibreCharacterCertificateObserved ≡ false
 oldInertReceiptHadNoCubeFibreCertificate = refl
@@ -196,10 +186,6 @@ leanSplitReceiptDoesNotManufactureExternalAuthority :
   LeanSplit.externalScientificSourceAcquiredByThisReceipt ≡ false
 leanSplitReceiptDoesNotManufactureExternalAuthority = refl
 
-------------------------------------------------------------------------
--- Remaining genuine boundaries.
-------------------------------------------------------------------------
-
 cmFaithfulnessStillSeparate :
   LeanCM.leanFaithfulGeometricCMEmbeddingObserved ≡ false
 cmFaithfulnessStillSeparate = refl
@@ -215,5 +201,3 @@ groessencharacterStillSeparate = refl
 globalEllipticLSeriesAuthorityStillSeparate :
   LeanSplit.globalEllipticLSeriesAgreementObserved ≡ false
 globalEllipticLSeriesAuthorityStillSeparate = refl
-
-end
