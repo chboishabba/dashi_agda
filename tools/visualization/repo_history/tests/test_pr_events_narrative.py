@@ -1,4 +1,4 @@
-from dashi_repo_history.pr_events import parse_pr_records
+from dashi_repo_history.pr_events import PullRequestEvent, parse_pr_records
 
 
 def test_pr_event_retains_body_and_commit_membership_for_narrative_linkage():
@@ -25,3 +25,21 @@ def test_pr_event_retains_body_and_commit_membership_for_narrative_linkage():
     assert narrative.pull_request == 42
     assert narrative.text == event.body
     assert narrative.authority == "development-narrative"
+
+
+def test_cached_pr_event_round_trips_from_history_json_shape():
+    original = PullRequestEvent(
+        number=7,
+        title="Historical frontier",
+        head_ref="feature/x",
+        base_ref="master",
+        created_at=10,
+        merged_at=20,
+        closed_at=20,
+        merge_commit="merge-sha",
+        url="https://example.invalid/pr/7",
+        body="Remaining leaf: physical source.",
+        commits=("a", "b"),
+    )
+    restored = PullRequestEvent.from_dict(original.to_dict())
+    assert restored == original
