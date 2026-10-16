@@ -38,8 +38,10 @@ import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionExact
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutPromotionValidation
 
 -- The exact relational topology has only maximal covers plus the distinguished
--- triadic global cover; non-global pullbacks are maximal.  This pays finite
--- one-truncated hyperdescent and keeps arbitrary infinity-hypercovers separate.
+-- triadic global cover; non-global pullbacks are maximal and strict site chains
+-- stop at vertex -> edge -> global.  This pays finite one-truncated
+-- hyperdescent and keeps arbitrary infinity-hypercovers separate.
+import DASHI.Reasoning.TrialecticRelationalSiteDepthTwoExact
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafValidation
 import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierExact
@@ -50,8 +52,11 @@ import DASHI.Reasoning.TrialecticHypersheafHypercoverFrontierValidation
 import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkExact
 import DASHI.Reasoning.TrialecticFiniteHypercover369CechCrosswalkValidation
 
--- Historical compatibility/status surfaces remain imported; the additive
--- post-ledger max-cut above records which old false flags are superseded.
+-- Historical compatibility/status surfaces remain imported.  The dedicated
+-- supersession owner keeps old local empty promotion tokens empty while proving
+-- that later independent higher-stack/hypersheaf certificates now exist.
+import DASHI.Reasoning.TrialecticHigherPromotionSupersessionExact
+import DASHI.Reasoning.TrialecticHigherPromotionSupersessionValidation
 import DASHI.Reasoning.TrialecticHigherDescentMaxCutValidation
 import DASHI.Reasoning.TrialecticHigherDescentPromotionLedgerExact
 
