@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.ComputerScience.Goldbach29Signed369VendorBridgeExact as Bridge
 import DASHI.ComputerScience.Goldbach30To29SuccessMacroExact as Macro
 import DASHI.ComputerScience.Goldbach29ExternalHaltingSemanticsExact as Semantics
+import DASHI.ComputerScience.Goldbach30HaltingSourceAuditExact as Audit30
 import DASHI.ComputerScience.Goldbach30To29HaltingConsumerCompilerExact as Halting
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 
@@ -60,6 +61,14 @@ externalGoldbach29HaltingSemanticsSourcePaid : Bool
 externalGoldbach29HaltingSemanticsSourcePaid =
   Semantics.externalGoldbach29HaltingSemanticsSourcePaid
 
+goldbach30NarrativeHaltingClaimFound : Bool
+goldbach30NarrativeHaltingClaimFound =
+  Audit30.goldbach30NarrativeHaltingClaimFound
+
+goldbach30FormalHaltingSourceFound : Bool
+goldbach30FormalHaltingSourceFound =
+  Audit30.goldbach30FormalHaltingSourceFound
+
 sameCounterexampleHaltingCompilerPaid : Bool
 sameCounterexampleHaltingCompilerPaid = true
 
@@ -74,10 +83,12 @@ sameCounterexampleHaltingCompilerPaid = true
 --
 -- The later attributed Lean source additionally pays the Goldbach29 halting
 -- consumer at imported-formal-source authority.  DASHI now owns the generic
--- same-counterexample-consumer -> halting-equivalence compiler.  Therefore the
--- semantic leaf has narrowed to a Goldbach30 attachment to that same consumer
--- (plus an accepted cross-prover transport if the comparison is to live inside
--- Agda).  Fine-state bisimulation is no longer logically required for halting.
+-- same-counterexample-consumer -> halting-equivalence compiler.
+--
+-- Goldbach30 is narrower: a signed upstream commit narrative claims the matching
+-- theorem and no-sorry build, but the exact audited tree lacks the claimed
+-- Main.lean/Loops.lean artifacts.  Hence the narrative is retained as an
+-- acquisition lead and NOT promoted to formal theorem authority.
 ------------------------------------------------------------------------
 
 record Goldbach30To29ReductionReceipt : Set where
@@ -92,6 +103,8 @@ record Goldbach30To29ReductionReceipt : Set where
     successExecutionPenaltyPaidFlag : Bool
     programLengthEqualsExecutionLength : Bool
     externalGoldbach29HaltingSemanticsSourcePaidFlag : Bool
+    goldbach30NarrativeHaltingClaimFoundFlag : Bool
+    goldbach30FormalHaltingSourceFoundFlag : Bool
     sameCounterexampleHaltingCompilerPaidFlag : Bool
     agdaGoldbach29HaltingSemanticsPaidFlag : Bool
     goldbach30HaltingAttachmentPaidFlag : Bool
@@ -106,7 +119,7 @@ canonicalGoldbach30To29ReductionReceipt =
   goldbach30To29ReductionReceipt
     true true true true true
     true true false
-    true true
+    true true false true
     false false
     false false false
 
@@ -132,6 +145,8 @@ record Goldbach30To29TerminalMaxCut : Set where
     exactSuccessMacroCostDeltaPaid : Bool
     signed369StaticDynamicSeparationReused : Bool
     goldbach29ExternalHaltingSemanticsSourcePaidTerminalFlag : Bool
+    goldbach30NarrativeHaltingClaimFoundTerminalFlag : Bool
+    goldbach30FormalHaltingSourceFoundTerminalFlag : Bool
     sameCounterexampleHaltingCompilerPaidTerminalFlag : Bool
     goldbach29AgdaHaltingSemanticsPaid : Bool
     sharedPrefixRequiresFurtherAbstractReproof : Bool
@@ -144,6 +159,6 @@ canonicalGoldbach30To29TerminalMaxCut : Goldbach30To29TerminalMaxCut
 canonicalGoldbach30To29TerminalMaxCut =
   goldbach30To29TerminalMaxCut
     true true true true true
-    true true false
+    true true false true false
     false false false
     true false
