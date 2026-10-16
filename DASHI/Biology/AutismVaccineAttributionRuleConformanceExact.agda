@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Biology.AutismVaccineExternalSourceAtlasExact as Atlas
 import DASHI.Biology.AttributionConsumerNonDescentExact as Consumer
+import DASHI.Biology.AutismVaccineClaimPromotionAuditExact as Audit
 import DASHI.Biology.AutismVaccineStrictBindingInstantiationExact as StrictBinding
 
 ------------------------------------------------------------------------
@@ -16,7 +17,7 @@ import DASHI.Biology.AutismVaccineStrictBindingInstantiationExact as StrictBindi
 -- This owner makes the repo-wide attribution firewalls explicit for the
 -- Hbomberguy / Wakefield / Deer / external-science / DASHI-synthesis lane.
 -- Existing owners already provide the claim-relative source objects and typed
--- evidence->claim->estimand bindings.  This module adds the later generic
+-- evidence->claim->estimand bindings. This module adds the later generic
 -- provenance/priority/unknown-coordinate firewalls so the older lane cannot be
 -- read more strongly than the rest of DASHI.
 ------------------------------------------------------------------------
@@ -121,6 +122,14 @@ canonicalSourceConsumerSynthesisReceipt :
   Consumer.dashiSynthesisBackAttributedToSource Consumer.canonicalAttributionConsumerBoundary ≡ false
 canonicalSourceConsumerSynthesisReceipt = refl
 
-canonicalStrictBindingWitness :
-  StrictBinding.hviidPaysHbombNoLinkClaim ≡ StrictBinding.hviidPaysHbombNoLinkClaim
-canonicalStrictBindingWitness = refl
+canonicalHviidEvidenceClaimWitness :
+  StrictBinding.EvidencePaysClaim Audit.hviid2019Receipt Audit.hbombMMRNoLinkClaim
+canonicalHviidEvidenceClaimWitness =
+  StrictBinding.hviidPaysNoLink
+
+canonicalHviidEstimandWitness :
+  StrictBinding.EvidenceMatchesEstimand
+    Audit.hviid2019Receipt
+    StrictBinding.mmrAutismPopulationEstimand
+canonicalHviidEstimandWitness =
+  StrictBinding.hviidMatchesPopulationEstimand
