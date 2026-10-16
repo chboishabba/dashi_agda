@@ -1,16 +1,7 @@
 module DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact where
 
 ------------------------------------------------------------------------
--- U(1) AS THE ONE-AXIS ABELIAN RESTRICTION OF THE EXISTING SU(2) LIE ALGEBRA
---
--- This is the precise sense in which ordinary U(1) gauge geometry can be
--- promoted into the Yang--Mills framework: choose one Cartan axis in su(2).
--- The inherited Lie bracket vanishes identically on that one-dimensional
--- subalgebra, so the non-abelian A∧A/[A,A] contribution disappears.
---
--- This does NOT say that a non-abelian SU(2) Clay mass-gap theorem proves
--- Maxwell phenomenology.  It says Maxwell/U(1) occupies an abelian restriction
--- of the same gauge-theoretic architecture.
+-- U(1) AS THE ABELIAN RESTRICTION OF THE EXISTING SU(2) / YANG--MILLS STACK
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -28,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.Laws.GaugeInteractionLaws as Gauge
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
+import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1Group
 
 zeroP : ∀ {n} → Polynomial n
 zeroP = con zeroCoefficient
@@ -85,6 +77,12 @@ u1EmbeddedBracketVanishes = true
 u1IsSU2LieSubalgebra : Bool
 u1IsSU2LieSubalgebra = true
 
+groupLevelU1InsideSU2Recovered : Bool
+groupLevelU1InsideSU2Recovered = U1Group.groupLevelU1SubgroupConstructed
+
+groupInclusionPreservesSU2Multiplication : Bool
+groupInclusionPreservesSU2Multiplication = U1Group.inclusionPreservesMultiplication
+
 maxwellFitsGeneralGaugeFieldLawArchitecture : Bool
 maxwellFitsGeneralGaugeFieldLawArchitecture = true
 
@@ -107,6 +105,8 @@ record U1SU2PromotionBoundary : Set where
   field
     literalCartanAxisEmbedding : Bool
     embeddedBracketZero : Bool
+    literalGroupLevelTorusConstructed : Bool
+    groupInclusionHomomorphismPaid : Bool
     abelianYangMillsRestrictionPaid : Bool
     u1EqualsWholeSU2Theory : Bool
     nonAbelianClayMassGapProvesMaxwell : Bool
@@ -114,4 +114,4 @@ record U1SU2PromotionBoundary : Set where
 
 canonicalU1SU2PromotionBoundary : U1SU2PromotionBoundary
 canonicalU1SU2PromotionBoundary =
-  u1-su2-promotion-boundary true true true false false true
+  u1-su2-promotion-boundary true true true true true false false true
