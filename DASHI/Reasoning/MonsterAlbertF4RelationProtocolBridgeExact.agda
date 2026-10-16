@@ -1,12 +1,14 @@
 module DASHI.Reasoning.MonsterAlbertF4RelationProtocolBridgeExact where
 
 ------------------------------------------------------------------------
--- Compile the Monster-transported-vs-classical-F4 action discriminator into
--- the repository's existing relation-representation experiment protocol.
+-- Compile the Monster-vs-classical-F4 discriminator into the repository's
+-- existing relation-representation experiment protocol.
 --
 -- Attribution / authority discipline:
 -- * sibling #1179 owns its proof-relevant finite 54->53 carrier/deletion weld
---   and conditional transported-Monster-action compiler;
+--   and a CONDITIONAL transported-Monster-action compiler;
+-- * current master does not inhabit the actual Monster 54/53 action-recognition
+--   input to that compiler;
 -- * classical Albert/F4 sources retain historical/scientific attribution;
 -- * DASHI owns the finite diagonal state realization, protocol composition and
 --   non-promotion boundaries;
@@ -30,11 +32,13 @@ monsterAlbertF4RelationProtocol : Protocol.RelationExperimentProtocol
 monsterAlbertF4RelationProtocol =
   Protocol.relationExperimentProtocol
     true
-    "Compare the independently supplied classical-F4 action against the transported Monster action on the same finite 54->53 carrier. State-level embedding into literal rational-Albert copies is already paid. The live bridge is sheet-aware rational-linear action lifting, cubic-norm preservation and fixation of the ACTUAL Albert unit; the removed finite-shape point maps to Albert zero and cannot substitute for the unit."
+    "First acquire/inhabit the actual Monster 54/53 action recognition consumed by the already-paid #1179 transport compiler. Then compare that transported action against an independently supplied classical-F4 action on the same finite carrier. State embedding into literal rational-Albert copies is paid; the remaining algebraic bridge is a sheet-aware rational-linear action lift preserving the cubic norm and ACTUAL Albert unit."
     Protocol.contextualCandidate
     Adequacy.applicationSuppliedGeometry
     strictMonsterAlbertF4Holdout
-    ("held-out 54 action mismatch" ∷
+    ("actual Monster 54/53 same-object action-recognition receipt" ∷
+     "application of the paid transport compiler" ∷
+     "held-out 54 action mismatch" ∷
      "held-out residual-53 action mismatch" ∷
      "removed distinguished-point compatibility" ∷
      "residual restriction compatibility" ∷
@@ -49,7 +53,7 @@ monsterAlbertF4RelationProtocol =
     true
     true
     false
-    "The finite state embedding is already paid and preserves the transported finite product/cubic on its diagonal image. However, its named shape ScalarLine maps to Albert zero, not the unit. Extensional finite-action agreement is therefore below classical F4 recognition. Native norm+unit rigidity is reusable only after a same-object rational-linear action lift preserving the cubic norm and actual unit. Successful held-out fit remains consumer- and realization-relative and creates neither Monster ontology nor physical/phenomenal mechanism."
+    "The carrier/deletion weld and transport compiler are paid, but an actual Monster action instance is not. The finite state embedding is paid and preserves the transported finite product/cubic on its diagonal image; its named shape ScalarLine maps to Albert zero, not the unit. Native norm+unit rigidity becomes reusable only after a same-object rational-linear action lift preserving the cubic norm and actual unit. Successful fit remains consumer- and realization-relative and creates neither Monster ontology nor physical/phenomenal mechanism."
 
 monsterAlbertF4ProtocolCandidateIsContextual :
   Protocol.candidate monsterAlbertF4RelationProtocol ≡ Protocol.contextualCandidate
@@ -76,7 +80,8 @@ record MonsterAlbertF4ProtocolBoundary : Set where
   field
     existingRelationProtocolReused : Bool
     sameCarrierReceiptReused : Bool
-    transportedMonsterActionReceiptReused : Bool
+    transportCompilerReceiptReused : Bool
+    actualMonsterActionStillRequired : Bool
     allFourHoldoutAxesRequired : Bool
     heldOut54And53ActionRequired : Bool
     removedInvariantAndResidualRestrictionRequired : Bool
@@ -98,7 +103,8 @@ canonicalMonsterAlbertF4ProtocolBoundary =
   monster-albert-f4-protocol-boundary
     true
     (Handoff.proofRelevantCarrierIdentityPaidInSibling Handoff.canonicalMonsterAlbertF4ActionBoundary)
-    (Handoff.transportedMonsterActionPaidInSibling Handoff.canonicalMonsterAlbertF4ActionBoundary)
+    (Handoff.transportCompilerPaidInSibling Handoff.canonicalMonsterAlbertF4ActionBoundary)
+    true
     true
     true
     true
