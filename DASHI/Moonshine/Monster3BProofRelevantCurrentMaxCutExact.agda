@@ -8,6 +8,7 @@ import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact 
 import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZetaCompiler
 import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as RecognitionHardening
 import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningExact as SuzukiHardening
+import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact as IsotypicAssembly
 import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact as Prior
 
 ------------------------------------------------------------------------
@@ -20,15 +21,29 @@ import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact as Prio
 --   * all 3^13 Heisenberg coordinates classified;
 --   * literal character matches the canonical nonlinear zeta signature at the
 --     exact executable-receipt level;
---   * a fixed-phase character compiler already turns two concretely packaged
---     irreducibles in one common theory into the required equivariant iso.
+--   * a fixed-phase character compiler turns two concretely packaged simple
+--     representations in one common theory into the required equivariant iso;
+--   * the generic semisimple/isotypic assembly from a proof-relevant classifier
+--     of every simple submodule to one fixed type is now source-written on the
+--     companion Lean donor branch, using pinned mathlib v4.28.0
+--     `IsIsotypicOfType.linearEquiv_fun`.
 --
--- Hence the live H_zeta payment is only the ACTUAL W_zeta|E side: a
--- proof-relevant irreducible constituent decomposition plus same-object
--- action/character bindings into the common representation theory.
+-- Consequently literal enumeration of ninety irreducible W_zeta|E constituents
+-- is no longer the CANONICAL H_zeta acquisition route.  It remains a valid
+-- fallback/audit route.  The shortest route is now:
+--
+--   actual whole W_zeta|E representation + whole character
+--     -> SAME-object simple-submodule classifier to H_zeta
+--     -> generic isotypic assembly
+--     -> finite copies of H_zeta
+--
+-- with explicit bindings of the actual sector and literal Schrodinger module to
+-- the representation theory consumed by the compiler.  The generic source does
+-- not manufacture those Monster-specific bindings or infer copy count 90 from
+-- 65610 = 729*90.
 --
 -- S_zeta uses the existing full-character GAP/CTblLib chain, but promotion is
--- now proof-relevant at every layer.  External GAP booleans/table coordinates
+-- proof-relevant at every layer.  External GAP booleans/table coordinates
 -- remain execution evidence rather than Agda inhabitants.
 ------------------------------------------------------------------------
 
@@ -44,6 +59,13 @@ record CurrentMonster3BMaxCut : Set where
     schrodingerCharacterIsAgdaKernelTheoremHere : Bool
     hZetaFixedPhaseIsoCompilerAvailable : Bool
     proofRelevantHZetaGateAvailable : Bool
+
+    wholeCharacterSimpleTypeAssemblySourceWritten : Bool
+    wholeCharacterAssemblyLeanKernelObserved : Bool
+    literalConstituentEnumerationMandatoryOnCanonicalRoute : Bool
+    actualWholeSectorRepresentationBindingPaid : Bool
+    actualWholeSectorSimpleTypeClassifierPaid : Bool
+    actualWholeSectorCopyCountNinetyPaid : Bool
 
     actualWZetaIrreducibleConstituentDecompositionPaid : Bool
     actualConstituentSameObjectActionBindingPaid : Bool
@@ -75,14 +97,20 @@ currentMonster3BMaxCut = current-monster-3b-max-cut
   (LiteralCharacter.agdaKernelTraceDerivationPaidHere LiteralCharacter.canonicalBoundary)
   (HZetaCompiler.fixedPhaseIsoCompilerAvailable HZetaCompiler.canonicalBoundary)
   (RecognitionHardening.paidHZetaRecognitionWrapperAvailable RecognitionHardening.canonicalBoundary)
+
+  (IsotypicAssembly.classifierToIsotypicAssemblySourceWritten IsotypicAssembly.canonicalBoundary)
+  (IsotypicAssembly.leanKernelReceiptObserved IsotypicAssembly.canonicalBoundary)
+  false
+  false false false
+
   false false false false
   true
   (SuzukiHardening.paidWholeSameObjectWrapperAvailable SuzukiHardening.canonicalBoundary)
   false false false
   (SuzukiHardening.externalGapResultCreatesAgdaProof SuzukiHardening.canonicalBoundary)
   false false
-  "Construct the proof-relevant SAME actual W_zeta|E irreducible decomposition; bind one selected constituent and the explicit Schrodinger module to one common finite-group representation/character theory. The model-side irreducibility and exhaustive literal character computation are already paid at their stated authority level, and the existing fixed-phase compiler then produces the equivariant H_zeta recognition/action isomorphism. Do not add another uniqueness theorem or recompute the Schrodinger character."
-  "Run the already-written CTblLib 6.Suz -> 6.Suz.2 -> quotient -> MN3B -> Monster full-character matcher in an environment with GAP/CTblLib, retain exact output/provenance, then inhabit the proof-relevant pair-family occurrence obligations and separately orient the selected zeta member. Only after that instantiate S_zeta = Hom_E(H_zeta,W_zeta) and its evaluation/recovery; Fin90 remains an optional later basis coordinate."
+  "Use the whole-character route first. Bind the SAME actual W_zeta|E restricted representation and the explicit Schrodinger H_zeta into one finite-group representation/module theory; prove the proof-relevant simple-submodule classifier on that actual sector. The companion Lean assembly then makes finite H_zeta copies a compiler consequence. Pay the copy count 90 from representation-theoretic multiplicity, not 65610=729*90. Literal ninety-constituent enumeration is retained only as a fallback/audit route."
+  "Run/source-bind the already-written CTblLib 6.Suz -> 6.Suz.2 -> quotient -> MN3B -> Monster full-character matcher, inhabit the proof-relevant pair-family occurrence obligations and separately orient zeta. Then instantiate the actual inverse-cocycle inertia representation on S_zeta = Hom_E(H_zeta,W_zeta), and consume the generic semisimple/isotypic machinery for the source-paid 12+78 character. Fin90 remains only an optional later basis coordinate."
 
 priorBoundary : Prior.CorrectedWZetaMaxCutBoundary
 priorBoundary = Prior.canonicalBoundary
