@@ -2,14 +2,10 @@ module DASHI.Mathematics.Complexity.CodedFiniteUnaryDelimiterScannerExact where
 
 ------------------------------------------------------------------------
 -- CONSTANT-CONTROL SCANNER FOR SELF-DELIMITING UNARY NAT FIELDS
---
--- Encoding is true^n ; false.  Unlike the phase-lift cursor, this fragment does
--- not allocate one state per n: it loops in one scan state for arbitrary n and
--- reaches a genuinely quiescent done state at the terminator.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (just)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
@@ -44,22 +40,15 @@ falseTerminator = Fin.suc (Fin.suc Fin.zero)
 scanTrueRule :
   Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount)
 scanTrueRule =
-  Local.tape-rule
-    scanState trueSymbol
-    scanState trueSymbol
-    Local.moveRight
+  Local.tape-rule scanState trueSymbol scanState trueSymbol Local.moveRight
 
 finishFalseRule :
   Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount)
 finishFalseRule =
-  Local.tape-rule
-    scanState falseTerminator
-    doneState falseTerminator
-    Local.stayPut
+  Local.tape-rule scanState falseTerminator doneState falseTerminator Local.stayPut
 
 scannerRules :
-  Agda.Builtin.List.List
-    (Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount))
+  List (Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount))
 scannerRules = scanTrueRule ∷ finishFalseRule ∷ []
 
 scannerDispatchUnique :
@@ -94,62 +83,46 @@ scannerCode = record
   ; Coded.dispatchUnique = scannerDispatchUnique
   }
 
+scannerMachine :
+  Standard.StandardSingleTapeMachine
+    (Fin.Fin stateCount) (Fin.Fin symbolCount)
 scannerMachine =
   Presented.finitePresentedStandardMachine
     (Coded.decodeCodedStandardTM scannerCode)
 
-scanTrueTransition :
-  Standard.transition scannerMachine scanState trueSymbol
+listedTransition :
+  (rule : Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount)) →
+  Local.RuleOccurs rule scannerRules →
+  (q : Fin.Fin stateCount) →
+  (a : Fin.Fin symbolCount) →
+  Local.sourceState rule ≡ q →
+  Local.readSymbol rule ≡ a →
+  Standard.transition scannerMachine q a
   ≡ just
     (Standard.standard-transition
-      scanState trueSymbol Local.moveRight)
+      (Local.targetState rule)
+      (Local.writeSymbol rule)
+      (Local.direction rule))
+listedTransition rule occurs q a sourceEq readEq
+  with Standard.listedRuleDeterminesStandardTransition
+    (Presented.finitePresentedStandardToConcrete_dispatchUnique
+      (Coded.decodeCodedStandardTM scannerCode))
+    occurs sourceEq readEq
+... | matched , fetchExact , transitionExact = transitionExact
+
+scanTrueTransition :
+  Standard.transition scannerMachine scanState trueSymbol
+  ≡ just (Standard.standard-transition scanState trueSymbol Local.moveRight)
 scanTrueTransition =
-  transitionFromListedRule scanTrueRule Local.ruleHere refl refl
-  where
-    transitionFromListedRule :
-      (rule : Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount)) →
-      Local.RuleOccurs rule scannerRules →
-      Local.sourceState rule ≡ scanState →
-      Local.readSymbol rule ≡ trueSymbol →
-      Standard.transition scannerMachine scanState trueSymbol
-      ≡ just
-        (Standard.standard-transition
-          (Local.targetState rule)
-          (Local.writeSymbol rule)
-          (Local.direction rule))
-    transitionFromListedRule rule occurs sourceEq readEq
-      with Standard.listedRuleDeterminesStandardTransition
-        (Presented.finitePresentedStandardToConcrete_dispatchUnique
-          (Coded.decodeCodedStandardTM scannerCode))
-        occurs sourceEq readEq
-    ... | matched , fetchExact , transitionExact = transitionExact
+  listedTransition scanTrueRule Local.ruleHere
+    scanState trueSymbol refl refl
 
 finishFalseTransition :
   Standard.transition scannerMachine scanState falseTerminator
-  ≡ just
-    (Standard.standard-transition
-      doneState falseTerminator Local.stayPut)
+  ≡ just (Standard.standard-transition doneState falseTerminator Local.stayPut)
 finishFalseTransition =
-  transitionFromListedRule finishFalseRule
-    (Local.ruleThere Local.ruleHere) refl refl
-  where
-    transitionFromListedRule :
-      (rule : Local.TapeRule (Fin.Fin stateCount) (Fin.Fin symbolCount)) →
-      Local.RuleOccurs rule scannerRules →
-      Local.sourceState rule ≡ scanState →
-      Local.readSymbol rule ≡ falseTerminator →
-      Standard.transition scannerMachine scanState falseTerminator
-      ≡ just
-        (Standard.standard-transition
-          (Local.targetState rule)
-          (Local.writeSymbol rule)
-          (Local.direction rule))
-    transitionFromListedRule rule occurs sourceEq readEq
-      with Standard.listedRuleDeterminesStandardTransition
-        (Presented.finitePresentedStandardToConcrete_dispatchUnique
-          (Coded.decodeCodedStandardTM scannerCode))
-        occurs sourceEq readEq
-    ... | matched , fetchExact , transitionExact = transitionExact
+  listedTransition finishFalseRule (Local.ruleThere Local.ruleHere)
+    scanState falseTerminator refl refl
 
 doneStateHasNoResidentRule :
   ∀ {rule} →
@@ -163,8 +136,6 @@ doneStateHasNoResidentRule (Local.ruleThere (Local.ruleThere ())) sourceEq
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- Arbitrarily large unary-framed integers can now be skipped with constant
--- finite control, one transition per true payload bit plus one terminating edge.
--- This is the first literal parser fragment needed by the self-delimiting
--- universal interpreter; value comparison/storage remain separate microcode.
+-- Arbitrarily large unary-framed integers can be skipped with constant finite
+-- control: one edge per payload `true`, then one quiescent terminator edge.
 ------------------------------------------------------------------------
