@@ -93,7 +93,7 @@ class NarrativeCache:
             )
         )
         source_status = payload.get("source_status", {})
-        complete = bool(source_status.get("git_commits"))
+        complete = bool(source_status.get("commit_history_complete") is True)
         return {
             "available": True,
             "complete": complete,
