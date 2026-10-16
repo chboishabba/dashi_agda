@@ -8,10 +8,10 @@ import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as Electronic
 ------------------------------------------------------------------------
 -- NH3 SAME-OBJECT HAMILTONIAN / WAVEFUNCTION CARRIER
 --
--- This promotes the earlier orbital-label fixture into a DASHI molecular
--- Hamiltonian *skeleton* on the same NH3 object and a literal closed-shell
--- occupation-basis state.  It deliberately stops short of inventing numerical
--- real-space orbitals, CI coefficients, or a solved eigenproblem.
+-- This module owns a source-backed SYMBOLIC molecular-Hamiltonian expression
+-- on the NH3 object and a literal closed-shell occupation-basis state.  It does
+-- not pretend that a symbolic expression is an evaluated energy operator,
+-- numerical matrix, eigenproblem solution, or real-space wavefunction.
 ------------------------------------------------------------------------
 
 meyer2002MolecularHamiltonian : Source.AttributedSource
@@ -70,9 +70,11 @@ record NH3MolecularHamiltonian : Set₁ where
   constructor nh3MolecularHamiltonian
   field
     MolecularState : Set
-    EnergyCarrier : Set
-    operator : MolecularState → EnergyCarrier
+    OperatorExpression : Set
+    symbolicExpression : MolecularState → OperatorExpression
     terms : List NH3HamiltonianTerm
+    expressionIsUnevaluated : Bool
+    expressionIsUnevaluatedIsTrue : expressionIsUnevaluated ≡ true
     molecularFormula : String
     nuclei : Nat
     electrons : Nat
@@ -81,21 +83,19 @@ record NH3MolecularHamiltonian : Set₁ where
     molecularHamiltonianAuthority : Source.AttributedSource
     ammoniaHamiltonianAuthority : Source.AttributedSource
     groundStatePESAuthority : Source.AttributedSource
-    c3SymmetryCommutation : Set
+    c3SymmetryCommutationObligation : Set
     hermiticityOrSelfAdjointnessObligation : Set
 
 open NH3MolecularHamiltonian public
 
--- A symbolic same-object operator carrier.  State and energy are deliberately
--- abstract because this module owns the operator decomposition/identity weld,
--- not numerical diagonalization.
 canonicalNH3MolecularHamiltonian : NH3MolecularHamiltonian
 canonicalNH3MolecularHamiltonian =
   nh3MolecularHamiltonian
     String
-    String
-    (λ state → state)
+    (List NH3HamiltonianTerm)
+    (λ _ → canonicalNH3HamiltonianTerms)
     canonicalNH3HamiltonianTerms
+    true refl
     "NH3"
     4
     10
@@ -155,15 +155,17 @@ canonicalNH3OccupationState =
 record HamiltonianWavefunctionBoundary : Set where
   constructor hamiltonianWavefunctionBoundary
   field
-    sameObjectMolecularHamiltonianSkeletonPaid : Bool
-    sameObjectMolecularHamiltonianSkeletonPaidIsTrue :
-      sameObjectMolecularHamiltonianSkeletonPaid ≡ true
+    sameObjectSymbolicHamiltonianExpressionPaid : Bool
+    sameObjectSymbolicHamiltonianExpressionPaidIsTrue :
+      sameObjectSymbolicHamiltonianExpressionPaid ≡ true
+    energyValuedHamiltonianOperatorPaid : Bool
+    energyValuedHamiltonianOperatorPaidIsFalse :
+      energyValuedHamiltonianOperatorPaid ≡ false
     sourceBackedGroundElectronicPESPaid : Bool
     sourceBackedGroundElectronicPESPaidIsTrue :
       sourceBackedGroundElectronicPESPaid ≡ true
     literalOccupationBasisStatePaid : Bool
-    literalOccupationBasisStatePaidIsTrue :
-      literalOccupationBasisStatePaid ≡ true
+    literalOccupationBasisStatePaidIsTrue : literalOccupationBasisStatePaid ≡ true
     c3SymmetryAdapterPaid : Bool
     c3SymmetryAdapterPaidIsTrue : c3SymmetryAdapterPaid ≡ true
     numericRealSpaceWavefunctionCoefficientsPaid : Bool
@@ -184,6 +186,7 @@ canonicalHamiltonianWavefunctionBoundary : HamiltonianWavefunctionBoundary
 canonicalHamiltonianWavefunctionBoundary =
   hamiltonianWavefunctionBoundary
     true refl
+    false refl
     true refl
     true refl
     true refl
