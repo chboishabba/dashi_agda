@@ -20,6 +20,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
@@ -36,7 +37,7 @@ listLength (_ ∷ rest) = suc (listLength rest)
 
 mapFinSucLength :
   ∀ {n : Nat}
-    (xs : List (Data.Fin.Base.Fin n)) →
+    (xs : List (Fin.Fin n)) →
   listLength (Coded.mapFinSuc xs) ≡ listLength xs
 mapFinSucLength [] = refl
 mapFinSucLength (x ∷ xs)
@@ -62,11 +63,11 @@ appendLength (x ∷ left) right
 
 mapPhaseRulesLength :
   ∀ {states symbols steps : Nat}
-    (phase : Data.Fin.Base.Fin steps)
+    (phase : Fin.Fin steps)
     (rules : List
       (Local.TapeRule
-        (Data.Fin.Base.Fin states)
-        (Data.Fin.Base.Fin symbols))) →
+        (Fin.Fin states)
+        (Fin.Fin symbols))) →
   listLength (Phase.mapPhaseRules phase rules)
   ≡ listLength rules
 mapPhaseRulesLength phase [] = refl
@@ -75,11 +76,11 @@ mapPhaseRulesLength phase (rule ∷ rest)
 
 compilePhasesLength :
   ∀ {states symbols steps : Nat}
-    (phases : List (Data.Fin.Base.Fin steps))
+    (phases : List (Fin.Fin steps))
     (rules : List
       (Local.TapeRule
-        (Data.Fin.Base.Fin states)
-        (Data.Fin.Base.Fin symbols))) →
+        (Fin.Fin states)
+        (Fin.Fin symbols))) →
   listLength (Phase.compilePhases phases rules)
   ≡ listLength phases * listLength rules
 compilePhasesLength [] rules = refl
