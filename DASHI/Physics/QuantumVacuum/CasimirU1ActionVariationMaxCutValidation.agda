@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact as M
 import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityValidation
+import DASHI.Physics.QuantumVacuum.CasimirU1MetricVariationTransportValidation
 
 fieldImageCompilerConsumedRegression :
   M.cartesianU1FieldImageAndBracketCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -29,6 +30,10 @@ quadraticDensityCompilerConsumedRegression :
   M.quadraticActionDensityCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
 quadraticDensityCompilerConsumedRegression = refl
 
+metricVariationTransportCompilerConsumedRegression :
+  M.metricVariationTransportCompilerConsumed M.canonicalCasimirU1ActionVariationBoundary ≡ true
+metricVariationTransportCompilerConsumedRegression = refl
+
 secondAbelianBracketProofNotRequiredRegression :
   M.secondAbelianBracketProofRequired M.canonicalCasimirU1ActionVariationBoundary ≡ false
 secondAbelianBracketProofNotRequiredRegression = refl
@@ -36,6 +41,10 @@ secondAbelianBracketProofNotRequiredRegression = refl
 independentActionEqualityNotRequiredAfterInputsRegression :
   M.independentRestrictedYMMaxwellActionEqualityRequiredAfterInputs M.canonicalCasimirU1ActionVariationBoundary ≡ false
 independentActionEqualityNotRequiredAfterInputsRegression = refl
+
+independentMetricVariationEqualityNotRequiredAfterInputsRegression :
+  M.independentMetricVariationEqualityRequiredAfterSamePathActionEquality M.canonicalCasimirU1ActionVariationBoundary ≡ false
+independentMetricVariationEqualityNotRequiredAfterInputsRegression = refl
 
 physicalCouplingNormalizationSeparatedRegression :
   M.physicalChargeCouplingNormalizationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
@@ -53,9 +62,13 @@ actionFunctionalSeparatedRegression :
   M.sameObjectActionFunctionalSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
 actionFunctionalSeparatedRegression = refl
 
-metricVariationSeparatedRegression :
-  M.metricVariationCommutationSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
-metricVariationSeparatedRegression = refl
+sameMetricPathActionFamilySeparatedRegression :
+  M.sameMetricPathActionFamilySeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+sameMetricPathActionFamilySeparatedRegression = refl
+
+stressReadoutSeparatedRegression :
+  M.metricVariationStressReadoutSeparated M.canonicalCasimirU1ActionVariationBoundary ≡ true
+stressReadoutSeparatedRegression = refl
 
 zeroProbeCannotPayPhysicalActionRegression :
   M.zeroProbeActionSurfacePaysPhysicalRestriction M.canonicalCasimirU1ActionVariationBoundary ≡ false
@@ -78,5 +91,9 @@ fourthActionBlockerRegression :
 fourthActionBlockerRegression = refl
 
 fifthActionBlockerRegression :
-  M.fifthActionRestrictionBlocker ≡ M.missingMetricVariationRestrictionCommutation
+  M.fifthActionRestrictionBlocker ≡ M.missingSameMetricPathActionFamily
 fifthActionBlockerRegression = refl
+
+sixthActionBlockerRegression :
+  M.sixthActionRestrictionBlocker ≡ M.missingMetricVariationStressReadout
+sixthActionBlockerRegression = refl
