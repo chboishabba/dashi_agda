@@ -30,6 +30,14 @@ striatalRouteAmbiguityBlocksNaiveCofactorInterpretation :
   × RedoxSpatial.intracellularBH4CanEngageTHAndNOS RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
 striatalRouteAmbiguityBlocksNaiveCofactorInterpretation = refl , refl
 
+topologyResolvedBalanceReplacesScalarAsSufficientStateWithoutInventingFlux :
+  RedoxSpatial.topologyResolvedStateRequired RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
+  × RedoxSpatial.scalarProjectionIsLossy RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ true
+  × RedoxSpatial.numericEdgeFluxesPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
+  × RedoxSpatial.directTransferFluxPaid RedoxSpatial.canonicalTopologyResolvedPoolBalance ≡ false
+topologyResolvedBalanceReplacesScalarAsSufficientStateWithoutInventingFlux =
+  refl , (refl , (refl , refl))
+
 redoxSpatialEvidenceDoesNotCloseWholeAllocator :
   RedoxSpatial.redoxSpatialEvidenceClosesWholeAllocator RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
 redoxSpatialEvidenceDoesNotCloseWholeAllocator = refl
