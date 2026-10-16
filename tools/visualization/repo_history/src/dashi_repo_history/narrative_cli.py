@@ -6,16 +6,29 @@ from pathlib import Path
 import subprocess
 from typing import Any, Iterable
 
-from .narrative import NarrativeEvent, archaeology, classify_narrative, frontier_genealogy
+from .narrative import NarrativeEvent, archaeology, frontier_genealogy
 from .narrative_git import read_commit_narrative_events
 from .narrative_index import attach_pr_semantic_context, link_events_to_history
-from .pr_events import collect_pr_events
+from .pr_events import PullRequestEvent, collect_pr_events
 
 
 def _load_history(path: str | None) -> dict[str, Any] | None:
     if not path:
         return None
     return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def _cached_pr_events(history: dict[str, Any] | None) -> list[PullRequestEvent]:
+    if history is None:
+        return []
+    result: list[PullRequestEvent] = []
+    for item in history.get("pull_requests", []):
+        if isinstance(item, dict):
+            try:
+                result.append(PullRequestEvent.from_dict(item))
+            except (KeyError, TypeError, ValueError):
+                continue
+    return result
 
 
 def collect_narrative_events(
@@ -35,23 +48,32 @@ def collect_narrative_events(
         commit_events = link_events_to_history(commit_events, history)
 
     events = list(commit_events)
+    cached_prs = _cached_pr_events(history)
     source_status: dict[str, Any] = {
         "git_commits": len(commit_events),
         "semantic_history_linked": history is not None,
+        "cached_prs": len(cached_prs),
         "github_prs_requested": bool(github_repository),
         "github_prs_available": False,
         "github_prs": 0,
     }
+
+    prs_by_number = {pr.number: pr for pr in cached_prs}
     if github_repository:
         try:
-            prs = collect_pr_events(github_repository)
+            live_prs = collect_pr_events(github_repository)
         except (OSError, subprocess.CalledProcessError, json.JSONDecodeError) as exc:
             source_status["github_prs_error"] = type(exc).__name__
         else:
-            pr_events = [attach_pr_semantic_context(pr, commit_events) for pr in prs]
-            events.extend(pr_events)
+            prs_by_number.update({pr.number: pr for pr in live_prs})
             source_status["github_prs_available"] = True
-            source_status["github_prs"] = len(pr_events)
+            source_status["github_prs"] = len(live_prs)
+
+    pr_events = [
+        attach_pr_semantic_context(pr, commit_events)
+        for _, pr in sorted(prs_by_number.items())
+    ]
+    events.extend(pr_events)
 
     events.sort(key=lambda event: (event.timestamp, event.event_id))
     return events, source_status
@@ -99,8 +121,8 @@ def build_explanation(events: Iterable[NarrativeEvent], query: str) -> dict[str,
 
 def _add_source_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("repo", help="local Git repository")
-    parser.add_argument("--history", help="repo-history JSON used to attach semantic deltas")
-    parser.add_argument("--github-prs", help="owner/repo for optional PR narrative enrichment via gh")
+    parser.add_argument("--history", help="repo-history JSON used to attach semantic deltas and cached PRs")
+    parser.add_argument("--github-prs", help="owner/repo for optional live PR narrative enrichment via gh")
     parser.add_argument("--max-commits", type=int, default=None)
     parser.add_argument("--json", action="store_true")
 
