@@ -1,38 +1,53 @@
-import json
+import sqlite3
 from pathlib import Path
 
 from agda_preflight.narrative_cache import NarrativeCache, apply_narrative_gate
+from agda_preflight.repository_store import (
+    DEFAULT_REPOSITORY_DB,
+    ensure_repository_schema,
+    replace_narrative_events,
+)
 
 
 def test_narrative_cache_finds_pr_and_commit_context_and_reports_coverage(tmp_path: Path):
-    cache_path = tmp_path / ".repo-index" / "narrative.json"
-    cache_path.parent.mkdir(parents=True)
-    cache_path.write_text(
-        json.dumps({
-            "schema": "dashi.repo-narrative.v1",
-            "authority": "development-narrative",
-            "source_status": {
-                "git_commits": 2,
-                "commit_history_complete": True,
-                "semantic_history_linked": True,
-            },
-            "events": [
-                {
-                    "event_id": "commit:a",
-                    "timestamp": 1,
-                    "kind": "commit",
-                    "title": "Recover Balaban spatial C3",
-                    "text": "Recovered literal spatial C3 action.",
-                    "touched_objects": ["DASHI.Physics.BalabanSpatialC3"],
-                    "introduced_objects": [],
-                    "removed_objects": [],
-                }
-            ],
-        }),
-        encoding="utf-8",
+    database = tmp_path / DEFAULT_REPOSITORY_DB
+    database.parent.mkdir(parents=True)
+    conn = sqlite3.connect(database)
+    conn.row_factory = sqlite3.Row
+    ensure_repository_schema(conn)
+    replace_narrative_events(
+        conn,
+        events=[
+            {
+                "event_id": "commit:a",
+                "timestamp": 1,
+                "kind": "commit",
+                "title": "Recover Balaban spatial C3",
+                "text": "Recovered literal spatial C3 action.",
+                "touched_objects": ["DASHI.Physics.BalabanSpatialC3"],
+                "introduced_objects": [],
+                "removed_objects": [],
+                "touched_paths": [],
+                "authority": "development-narrative",
+                "may_guide_discovery": True,
+                "may_explain_intent": True,
+                "may_establish_formal_fact": False,
+                "may_establish_empirical_fact": False,
+                "claimed_delta": ["Recovered literal spatial C3 action."],
+                "frontier": [],
+                "nonclaims": [],
+                "verification": [],
+            }
+        ],
+        source_status={
+            "git_commits": 2,
+            "commit_history_complete": True,
+            "semantic_history_linked": True,
+        },
     )
-    cache = NarrativeCache(tmp_path)
-    result = cache.search("Balaban C3")
+    conn.close()
+
+    result = NarrativeCache(tmp_path).search("Balaban C3")
     assert result["available"] is True
     assert result["complete"] is True
     assert result["matches"]
