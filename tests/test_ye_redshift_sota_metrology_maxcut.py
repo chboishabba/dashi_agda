@@ -7,6 +7,7 @@ CLOSURE = ROOT / "DASHI" / "Physics" / "Closure"
 
 ZHENG = CLOSURE / "ZhengKolkowitz2023PublicDataReceiptExact.agda"
 CGPM = CLOSURE / "CGPM2026OpticalSecondRelativisticBridgeExact.agda"
+SOTA = CLOSURE / "OpticalClockChronometricGeodesySOTA2026Exact.agda"
 DISCRIMINATOR = CLOSURE / "QuantumClockMetricResponseDiscriminatorCompilerExact.agda"
 CURRENT = CLOSURE / "QuantumClockEmpiricalRedshiftIngestionStatus20261016Exact.agda"
 ROLLUP = CLOSURE / "YeRedshiftEverything.agda"
@@ -55,6 +56,23 @@ def test_cgpm_2026_bridge_keeps_policy_authority_separate() -> None:
         assert marker in text
 
 
+def test_sota_atlas_keeps_deployment_geodesy_and_transfer_distinct() -> None:
+    text = read(SOTA)
+    for marker in (
+        "10.1103/PhysRevApplied.21.L061001",
+        "longBaselineKilometres = 457",
+        "heightEquivalentUncertaintyCentimetres = 27",
+        "10.1038/s41467-025-61140-2",
+        "unsupervisedSeaOperationDays = 21",
+        "arXiv:2608.01916",
+        "transportableRatioFractionalUncertaintyE18Tenths = 43",
+        "transportableResultIsPreprint = true",
+        "deploymentRobustnessIsNotChronometricAccuracy = true",
+        "frequencyTransferIsNotGeopotentialKnowledge = true",
+    ):
+        assert marker in text
+
+
 def test_metric_response_compiler_is_a_discriminator_not_exotic_evidence() -> None:
     text = read(DISCRIMINATOR)
     for marker in (
@@ -86,6 +104,7 @@ def test_current_status_layers_sent_event_sota_and_fail_closed_evidence() -> Non
         "import DASHI.Physics.Closure.BothwellYe2022AuthorCorrespondenceReceiptExact",
         "import DASHI.Physics.Closure.ZhengKolkowitz2023PublicDataReceiptExact",
         "import DASHI.Physics.Closure.CGPM2026OpticalSecondRelativisticBridgeExact",
+        "import DASHI.Physics.Closure.OpticalClockChronometricGeodesySOTA2026Exact",
         "import DASHI.Physics.Closure.QuantumClockMetricResponseDiscriminatorCompilerExact",
         "import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatus20261016Exact",
     ):
