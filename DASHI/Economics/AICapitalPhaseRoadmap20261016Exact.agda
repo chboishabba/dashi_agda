@@ -13,6 +13,7 @@ import DASHI.Economics.AICoreWeaveSameObjectFinancingMaxCut20261016Exact as Fina
 import DASHI.Economics.AICoreWeaveSameObjectFinancingClock20261016Exact as FinancingClock
 import DASHI.Economics.AICoreWeave2032BondRepricing20261016Exact as Bond
 import DASHI.Economics.AICoreWeaveMicrosoftHistoricalRevenue20261016Exact as MicrosoftRevenue
+import DASHI.Economics.AIAustraliaDataCentrePolicyShift20261016Exact as AUInfraPolicy
 
 data PhaseState : Set where
   structurallyPaid currentAcquisition longitudinalIdentification causalAttribution outcomeValidation : PhaseState
@@ -60,9 +61,9 @@ phase3CausalPolicy : PhaseDeliverable
 phase3CausalPolicy = phase-deliverable
   "Phase 3 — causal/policy attribution"
   causalAttribution
-  "typed estimands, identification-family gates, exact review binding, proposal chronology, proposal withdrawal/control observation, and current baseline of existing-law regulation plus AI Safety Institute/guidance rather than the abandoned general mandatory-guardrail proposal"
-  "measure enacted obligation -> actor-class realised cost -> entry/open-weight/concentration response with comparator/control and reviewed same-object identification receipt"
-  "causal bridge is inhabited without chronology, correlation, review or policy salience substituting for identification; motive/capture remains a separate evidential claim"
+  "typed estimands, identification-family gates, exact review binding, withdrawal of the earlier general mandatory model/deployment guardrail proposal, current Data Centre Expectations affecting Commonwealth prioritisation, and a separately announced future mandatory infrastructure-standards route for large data centres"
+  "for model/deployment policy and infrastructure policy separately: identify the actually enacted/operative obligation -> actor-class realised cost -> entry/open-weight/project-finance/concentration response with comparator/control -> reviewed same-object causal-identification receipt"
+  "proposal/announcement is not enactment; infrastructure externality rules do not become a model/open-weight moat by analogy; causal bridge is inhabited without chronology, correlation, review or policy salience substituting for identification; motive/capture remains a separate evidential claim"
   false
 
 phase4OutcomeValidation : PhaseDeliverable
@@ -103,6 +104,15 @@ generic36To48MonthClockNotSameObject = FinancingClock.generic36To48MonthHorizonI
 realisedRefinancingStillOpen : Bond.realisedRefinancingCostPaid Bond.coreWeave2032BondRepricing ≡ false
 realisedRefinancingStillOpen = refl
 
+australianPolicyLocusShiftPaid :
+  (AUInfraPolicy.generalMandatoryModelGuardrailsProceeding AUInfraPolicy.currentPolicyShift ≡ false) ×
+  (AUInfraPolicy.currentDataCentreExpectations AUInfraPolicy.currentPolicyShift ≡ true) ×
+  (AUInfraPolicy.announcedFutureMandatoryDataCentreStandards AUInfraPolicy.currentPolicyShift ≡ true)
+australianPolicyLocusShiftPaid = AUInfraPolicy.policyLocusShiftPaid
+
+australianDataCentreEnactmentStillOpen : AUInfraPolicy.newMandatoryDataCentreDutyEnacted AUInfraPolicy.currentPolicyShift ≡ false
+australianDataCentreEnactmentStillOpen = AUInfraPolicy.enactmentStillOpen
+
 sotaBubbleStillOpen : SOTA.bubbleEstablished SOTA.currentSOTAReconciliation ≡ false
 sotaBubbleStillOpen = SOTA.bubbleStillNotEstablished
 
@@ -114,4 +124,4 @@ compatibilityDoesNotSelectRegime = refl
 
 boundary : String
 boundary =
-  "The roadmap is measurement-first and now materially more same-object. Phase 1 has corrected the generic 36-48 month lender-horizon shortcut using CoreWeave's filed GPU-backed agreements, which disclose contractual depreciation around 66-78 months and commonly six years. Project financing rates and availability are contract/customer specific; customer credit directly enters financing terms; DDTL4 is source-joined through the same borrower SPV to Polaris Forge 1 lease space. DDTL3 further proves that named OpenAI/Phoenix 1 actual-customer-cash, contract-realisation and GPU-rack serial measurements exist inside the lender control surface. Its amendment permits equity-cure proceeds into the CRR numerator, and canonical non-descent proves covenant compliance cannot identify terminal customer cash without a customer-cash versus cure decomposition. Phase 2 now contains both same-issuer CDS deterioration and a same-instrument 2032-note repricing of at least 5.375 percentage points versus issue coupon, while realised refinancing/default outcomes remain open. Phase 4 still selects no terminal regime until realised longitudinal cash, asset and financing outcomes discriminate the predeclared rivals."
+  "The roadmap is measurement-first and now materially more same-object. Phase 1 has corrected generic financing-life shortcuts using CoreWeave filed GPU-backed agreements and identified a private lender measurement surface for OpenAI/Phoenix 1 customer cash, contract realization and GPU serials. Phase 2 contains both same-issuer CDS deterioration and same-instrument 2032-note repricing while realised refinancing/default outcomes remain open. Phase 3 is now split by regulatory locus: Australia has withdrawn the earlier general mandatory model/deployment guardrail proposal, while current Data Centre Expectations influence project prioritisation and government has separately announced future mandatory infrastructure obligations for large data centres. Those infrastructure announcements are not promoted to enacted duties, realised costs or a model/open-weight moat. Phase 4 still selects no terminal regime until realised longitudinal cash, asset, financing and market-structure outcomes discriminate the predeclared rivals."
