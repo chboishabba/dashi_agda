@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as ITIR
+import DASHI.Core.EvidenceAcquisitionSelectiveReopeningExact as Acquisition
 import DASHI.Culture.PowersPlantationParadiseEmpiricalProgrammeExact as Empirical
 
 ------------------------------------------------------------------------
@@ -91,6 +92,72 @@ causalLeaf = Empirical.causalMobilityLeaf
 canonicalITIRBoundary : ITIR.InvestigationAcquisitionBoundary
 canonicalITIRBoundary = ITIR.canonicalInvestigationAcquisitionBoundary
 
+------------------------------------------------------------------------
+-- Selective reopening: acquisition only reopens declared dependent consumers.
+------------------------------------------------------------------------
+
+data AcquisitionArtifact : Set where
+  primaryIssueImage : AcquisitionArtifact
+  july1790ChronologyConsumer : AcquisitionArtifact
+  performanceEventLedgerConsumer : AcquisitionArtifact
+  seatingRuleInstrument : AcquisitionArtifact
+  seatingRuleConsumer : AcquisitionArtifact
+  namedActorCompensationRecord : AcquisitionArtifact
+  actorDistributionConsumer : AcquisitionArtifact
+  estateSettlementRecord : AcquisitionArtifact
+  compensationSettlementConsumer : AcquisitionArtifact
+
+data PowersDepends : AcquisitionArtifact → AcquisitionArtifact → Set where
+  issueReopensChronology : PowersDepends primaryIssueImage july1790ChronologyConsumer
+  issueReopensEventLedger : PowersDepends primaryIssueImage performanceEventLedgerConsumer
+  ruleInstrumentReopensSeating : PowersDepends seatingRuleInstrument seatingRuleConsumer
+  actorCompensationReopensDistribution : PowersDepends namedActorCompensationRecord actorDistributionConsumer
+  estateRecordReopensSettlement : PowersDepends estateSettlementRecord compensationSettlementConsumer
+
+powersAcquisitionDependencyGraph :
+  Acquisition.AcquisitionDependencyGraph AcquisitionArtifact
+powersAcquisitionDependencyGraph =
+  Acquisition.acquisition-dependency-graph
+    PowersDepends
+    "Powers empirical dependency graph: evidence acquisition reopens only explicitly dependent chronology/event/rule/distribution/settlement consumers"
+
+PrimaryIssueChronologyReopening : Set
+PrimaryIssueChronologyReopening =
+  Acquisition.SelectiveAcquisitionReopening
+    powersAcquisitionDependencyGraph
+    primaryIssueImage
+    july1790ChronologyConsumer
+
+primaryIssueReopensChronology : PrimaryIssueChronologyReopening
+primaryIssueReopensChronology =
+  Acquisition.oneEdgeAcquisitionReopening issueReopensChronology
+
+PrimaryIssueEventLedgerReopening : Set
+PrimaryIssueEventLedgerReopening =
+  Acquisition.SelectiveAcquisitionReopening
+    powersAcquisitionDependencyGraph
+    primaryIssueImage
+    performanceEventLedgerConsumer
+
+primaryIssueReopensEventLedger : PrimaryIssueEventLedgerReopening
+primaryIssueReopensEventLedger =
+  Acquisition.oneEdgeAcquisitionReopening issueReopensEventLedger
+
+ActorCompensationDistributionReopening : Set
+ActorCompensationDistributionReopening =
+  Acquisition.SelectiveAcquisitionReopening
+    powersAcquisitionDependencyGraph
+    namedActorCompensationRecord
+    actorDistributionConsumer
+
+actorCompensationReopensDistribution : ActorCompensationDistributionReopening
+actorCompensationReopensDistribution =
+  Acquisition.oneEdgeAcquisitionReopening actorCompensationReopensDistribution
+
+------------------------------------------------------------------------
+-- Boundary.
+------------------------------------------------------------------------
+
 record PowersInvestigationRoutingBoundary : Set where
   constructor powers-investigation-routing-boundary
   field
@@ -112,6 +179,9 @@ record PowersInvestigationRoutingBoundary : Set where
     causalIdentificationRequiresPrerequisiteFibres : Bool
     causalIdentificationRequiresPrerequisiteFibresIsTrue :
       causalIdentificationRequiresPrerequisiteFibres ≡ true
+    acquisitionReopensOnlyDeclaredDependentConsumers : Bool
+    acquisitionReopensOnlyDeclaredDependentConsumersIsTrue :
+      acquisitionReopensOnlyDeclaredDependentConsumers ≡ true
 
 canonicalPowersInvestigationRoutingBoundary : PowersInvestigationRoutingBoundary
 canonicalPowersInvestigationRoutingBoundary =
@@ -120,6 +190,7 @@ canonicalPowersInvestigationRoutingBoundary =
     false refl
     false refl
     false refl
+    true refl
     true refl
     true refl
     true refl
