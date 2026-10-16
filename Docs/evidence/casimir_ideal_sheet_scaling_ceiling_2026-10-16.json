@@ -1,0 +1,27 @@
+{
+  "assertions_passed": true,
+  "inverse_gap_for_target_g_m": {
+    "1e-12_m_s2": 1.2645502728279351e-14,
+    "1e-6_m_s2": 1.2645502728279356e-16,
+    "1e-9_m_s2": 1.2645502728279352e-15,
+    "1g": 5.907846567783201e-19
+  },
+  "promotion_boundaries": {
+    "finite_material_realizability": false,
+    "macroscopic_negative_mass": false,
+    "measured_gravity": false,
+    "model_valid_at_femtometre_gaps": false,
+    "warp_capability": false
+  },
+  "reference": {
+    "equivalent_surface_mass_density_kg_m2_abs": 4.82195004530249e-24,
+    "gap_m": 1e-07,
+    "infinite_sheet_g_m_s2_abs": 2.0221263984732167e-33
+  },
+  "script": "scripts/casimir_ideal_sheet_scaling_ceiling.py",
+  "script_sha256": "21e708c79832b4faac87aff391409ea9c97b3ff5e23f6178752e92d466bfa567",
+  "source": {
+    "brown_maclay_doi": "10.1103/PhysRev.184.1272",
+    "model": "ideal parallel perfect-conductor Casimir energy + Newtonian infinite-sheet weak-field proxy"
+  }
+}
