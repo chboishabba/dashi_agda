@@ -9,6 +9,9 @@ import DASHI.Cognition.ProtectiveSpatialDualUseAntiPanopticonExact as DualUse
 import DASHI.Cognition.KirkVilyaCounterfactualPreventionBoundaryExact as Kirk
 import DASHI.Cognition.VilyaGodsEyeAntiPanopticonWeldExact as Weld
 import DASHI.Cognition.SpatialIntelligenceAgentCrossPollinationExact as Agent
+import DASHI.Cognition.OpenCivilianSpatialDefenseRFObservationExact as RFDefense
+import DASHI.Cognition.OpenCivilianSpatialDefenseRobotHumanRightsExact as HumanRights
+import DASHI.Cognition.OpenCivilianSpatialDefenseBostonDynamicsControlExact as Boston
 
 gevObservationDoesNotCreateProtectiveAuthority :
   Core.observationCreatesProtectiveAuthority ≡ false
@@ -69,3 +72,55 @@ reasoningAgentDoesNotCreateOperationalAuthority = refl
 reasoningAgentDoesNotCreateUseOfForceAuthority :
   Agent.reasoningAgentCreatesUseOfForceAuthority ≡ false
 reasoningAgentDoesNotCreateUseOfForceAuthority = refl
+
+------------------------------------------------------------------------
+-- Open Civilian Spatial Defence / RF / robot regression tranche.
+------------------------------------------------------------------------
+
+singleBearingDoesNotDetermineExactRobotWorld :
+  RFDefense.singleBearingDeterminesExactRobotWorld ≡ false
+singleBearingDoesNotDetermineExactRobotWorld = refl
+
+rfVisualFusionRequiresSameObjectReceipt :
+  RFDefense.rfVisualFusionRequiresSameObjectReceipt ≡ true
+rfVisualFusionRequiresSameObjectReceipt = refl
+
+passiveRFObservationDoesNotCreateHostileAttribution :
+  RFDefense.passiveRFObservationCreatesHostileAttribution ≡ false
+passiveRFObservationDoesNotCreateHostileAttribution = refl
+
+passiveRFObservationDoesNotCreateJammingAuthority :
+  RFDefense.passiveRFObservationCreatesJammingAuthority ≡ false
+passiveRFObservationDoesNotCreateJammingAuthority = refl
+
+passiveRFObservationDoesNotCreateUseOfForceAuthority :
+  RFDefense.passiveRFObservationCreatesUseOfForceAuthority ≡ false
+passiveRFObservationDoesNotCreateUseOfForceAuthority = refl
+
+civilianDefenceDefaultsToWarningAvoidanceShelter :
+  HumanRights.passiveCivilianSafetyResponsesDefault ≡ true
+civilianDefenceDefaultsToWarningAvoidanceShelter = refl
+
+threatScoreDoesNotDetermineCivilianCombatantStatus :
+  HumanRights.threatScoreDeterminesLegalCivilianCombatantStatus ≡ false
+threatScoreDoesNotDetermineCivilianCombatantStatus = refl
+
+purposeAdmissionDoesNotTransferAcrossConsumers :
+  HumanRights.observationAdmissibilityTransfersAcrossPurposes ≡ false
+purposeAdmissionDoesNotTransferAcrossConsumers = refl
+
+leastIntrusiveSufficientObservationRequired :
+  HumanRights.leastIntrusiveSufficientObservationPreferred ≡ true
+leastIntrusiveSufficientObservationRequired = refl
+
+robotMorphologyDoesNotDetermineHostileFunction :
+  Boston.robotMorphologyDeterminesHostileFunction ≡ false
+robotMorphologyDoesNotDetermineHostileFunction = refl
+
+BostonDynamicsVendorPolicyIsNotUniversalLaw :
+  Boston.vendorAntiWeaponizationPolicyCreatesUniversalLegalConstraint ≡ false
+BostonDynamicsVendorPolicyIsNotUniversalLaw = refl
+
+BostonDynamicsGeneralPurposeRobotIsBenignControlEligible :
+  Boston.generalPurposeNonWeaponizedControlEligible ≡ true
+BostonDynamicsGeneralPurposeRobotIsBenignControlEligible = refl
