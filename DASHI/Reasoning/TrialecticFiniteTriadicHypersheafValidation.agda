@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Reasoning.TrialecticFiniteTriadicHypersheafExact as Hyper
 import DASHI.Reasoning.TrialecticRelationalSiteDepthTwoExact as Depth
+import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 
 boundary : Hyper.TrialecticFiniteTriadicHypersheafBoundary
 boundary = Hyper.canonicalTrialecticFiniteTriadicHypersheafBoundary
@@ -19,6 +20,11 @@ coverTopologyExhausted = refl
 everyCoverHasCertificate :
   Hyper.everyCoverHasHyperdescentCertificate boundary ≡ true
 everyCoverHasCertificate = refl
+
+canonicalTriadicCoverHasCertificate :
+  Hyper.CoverHyperdescentCertificate Site.triadicRelationalSieveCovers
+canonicalTriadicCoverHasCertificate =
+  Hyper.hyperdescentForEveryCover Site.triadicRelationalSieveCovers
 
 siteHasNoStrictThreeChain :
   Depth.strictThreeArrowChainsExist depthBoundary ≡ false
