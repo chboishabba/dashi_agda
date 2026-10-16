@@ -63,8 +63,8 @@ ofCode-code eigenspaceAddr  = refl
 ofCode-code hauptmodul      = refl
 ofCode-code atlasEntry      = refl
 
-/-- A typed DA51 identity.  This is an address only: it carries no proof,
-    literature, ZK, or security authority by itself. -/
+-- A typed DA51 identity.  This is an address only: it carries no proof,
+-- literature, ZK, or security authority by itself.
 record DA51Address : Set where
   constructor addr
   field
