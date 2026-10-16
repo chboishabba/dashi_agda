@@ -1,29 +1,20 @@
 module DASHI.Biology.IITParityTorqueGluingBoundaryExact where
 
 ------------------------------------------------------------------------
--- PARITY INTEGRATION != TORQUE HANDEDNESS
+-- PARITY INTEGRATION != ORDERED-BRACKET HANDEDNESS
 --
--- The IIT branch now has a precise Boolean minimal-sufficiency statement:
--- among essential balanced two-input Boolean laws, parity/complement is the
--- entire class.  Separately, sibling PR #1164 source-writes the physical torque
--- specialization of the existing SO(3) 9/18/27 + pants/C3 machinery:
--- swapping lever and force negates Levi-Civita orientation and conjugates the
--- C3 phase, and nested torque cells build T^9/T^18 compatible boundaries.
---
--- This owner records the non-collapse between those two results.  XOR is
--- commutative, so parity output alone cannot remember input ordering.  Any
--- torque/handedness observer therefore needs ordered gluing/orientation data in
--- addition to parity synthesis.  The sibling PR is recorded as source evidence;
--- its unmerged theorem objects are not imported as authority here.
+-- The IIT branch owns a precise Boolean minimal-sufficiency result.  Sibling
+-- PR #1164 now owns a broader mechanism-neutral oriented three-axis bracket
+-- specialization used by torque, EM/right-hand-rule, SU(2)/YM and NS consumers.
+-- Its finite 369/C3 chart remains distinct from the separately recovered
+-- source-backed Balaban spatial C3 action until a same-object intertwiner is
+-- paid.  This owner records that source state without importing sibling theorem
+-- authority.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.IITBooleanParityMinimalSufficiencyExact as Parity
-
-------------------------------------------------------------------------
--- 1. XOR itself is swap-invariant.
-------------------------------------------------------------------------
 
 xor : Bool → Bool → Bool
 xor false false = false
@@ -37,10 +28,6 @@ xorSwapInvariant false true = refl
 xorSwapInvariant true false = refl
 xorSwapInvariant true true = refl
 
-------------------------------------------------------------------------
--- 2. Any observer that sees only XOR output receives the same value after swap.
-------------------------------------------------------------------------
-
 xorOnlyObserverSwapInvariant :
   {Observation : Set} →
   (observer : Bool → Observation) →
@@ -48,10 +35,6 @@ xorOnlyObserverSwapInvariant :
   observer (xor a b) ≡ observer (xor b a)
 xorOnlyObserverSwapInvariant observer a b
   rewrite xorSwapInvariant a b = refl
-
-------------------------------------------------------------------------
--- 3. Sibling torque source receipt.  No theorem import from the sibling branch.
-------------------------------------------------------------------------
 
 record TorqueSiblingSourceReceipt : Set where
   constructor torque-sibling-source-receipt
@@ -65,18 +48,22 @@ record TorqueSiblingSourceReceipt : Set where
     sourceWritesNestedT9Dialectic : Bool
     sourceWritesCompatibleT18Boundary : Bool
     sourceKeepsIrreducibleTriadicFaceSeparate : Bool
+    sourceExtractsMechanismNeutralOrientedBracket : Bool
+    sourceWiresEMRightHandRule : Bool
+    sourceWiresSU2YMBracketOrientation : Bool
+    sourceWiresNSCrossOrientation : Bool
+    sourceRecoversBalabanSpatialC3 : Bool
+    sourceKeepsFinite369C3DistinctFromBalabanC3WithoutIntertwiner : Bool
     siblingTheoremAuthorityImportedHere : Bool
 
 canonicalTorqueSiblingSourceReceipt : TorqueSiblingSourceReceipt
 canonicalTorqueSiblingSourceReceipt =
   torque-sibling-source-receipt
     1164
-    "90706035851c3164a105ff326186be6afe620aa1"
-    true true true true true true true false
-
-------------------------------------------------------------------------
--- 4. Combined conjecture boundary.
-------------------------------------------------------------------------
+    "0ea864b33162999f2ad4ba99eb264023f3a6c8e0"
+    true true true true true true true
+    true true true true true true
+    false
 
 record ParityTorqueGluingBoundary : Set where
   constructor parity-torque-gluing-boundary
@@ -84,14 +71,16 @@ record ParityTorqueGluingBoundary : Set where
     essentialBalancedBooleanClassIsParity : Bool
     parityOutputAloneDistinguishesInputOrder : Bool
     orderedGluingNeededForHandedness : Bool
+    orientedBracketIsSameAsEveryPhysicalMechanism : Bool
     torqueMagnitudeIdentifiedWithParityBit : Bool
     localParityManufacturesIrreducibleTriadicFace : Bool
+    finite369C3AutomaticallyEqualsBalabanSpatialC3 : Bool
     siblingTorqueAuthorityImported : Bool
 
 canonicalParityTorqueGluingBoundary : ParityTorqueGluingBoundary
 canonicalParityTorqueGluingBoundary =
   parity-torque-gluing-boundary
-    true false true false false false
+    true false true false false false false false
 
 parityStructuralWitness : Parity.ParityOrComplement Parity.xorGate
 parityStructuralWitness = Parity.xorParity
