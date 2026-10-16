@@ -29,7 +29,7 @@ canonicalPlaneWaveReplayReceipt =
   plane-wave-replay-receipt
     "scripts/matbg_bm_plane_wave_replay.py"
     "Docs/evidence/matbg_bm_plane_wave_replay_2026-10-16.json"
-    "71d2894a3135eea3e4ec114b00316c3e1d08c567e78325f1a6ef8ec3ebab57fe"
+    "8558c6e9c048acbe4142524dbd824648815cd3251692bc1756c071d4e8f5259a"
     "10.1073/pnas.1108174108"
     "10.1038/s41586-026-10378-x"
     "R-Carrasco/tbg-simulator (MIT), inspected as an external implementation cross-check; DASHI reconstruction written independently"
