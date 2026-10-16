@@ -28,6 +28,8 @@ for needle in [
     "unpaidCoordinateEqualsZero",
     "externalSourceOwnsDASHISynthesis",
     "strictSameObjectSameEstimandBindingPresent",
+    "canonicalHviidEvidenceClaimWitness",
+    "canonicalHviidEstimandWitness",
 ]:
     assert needle in conformance_text, f"conformance boundary missing {needle}"
 
@@ -36,6 +38,8 @@ for needle in [
     "contactExposureDoesNotBecomeDerivationRegression",
     "unknownAndUnpaidDoNotBecomeZeroRegression",
     "sourceAndDASHISynthesisRemainSeparateRegression",
+    "hviidTypedClaimPaymentIsActuallyConsumed",
+    "hviidTypedEstimandMatchIsActuallyConsumed",
 ]:
     assert needle in regression_text, f"conformance regression missing {needle}"
 
