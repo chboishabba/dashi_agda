@@ -21,11 +21,13 @@ record LeanJZeroCMFormalSourceReceipt : Set where
     commit : String
     pointOwner : String
     pointEndomorphismTheorem : String
-    orderThreeTheorem : String
     inertEulerOwner : String
     inertFamilyTheorem : String
-    splitBoundaryOwner : String
-    splitBoundaryTheorem : String
+    primaryOwner : String
+    primaryTheorem : String
+    characterSumOwner : String
+    characterSumTheorem : String
+    remainingFrontier : String
     verificationStatus : String
     origin : Attribution.ClaimOrigin
 
@@ -37,14 +39,16 @@ leanJZeroCMReceipt =
     "chboishabba/dashi_lean4"
     "PR #73"
     "agent/eisenstein-cm-point-endomorphism-maxcut-20261016"
-    "039bced5d4773b8b360aebfc9619cfc529277586"
+    "4dde2b77cbdb76bdb21db852966db2ffa0ca88d3"
     "Integration/EisensteinJZeroPointCMExact.lean"
-    "omegaPoint_add / omegaPointEndomorphism"
-    "omegaPointEndomorphism_order_three"
+    "omegaPoint_add / omegaPointEndomorphism / omegaPointEndomorphism_order_three"
     "Integration/EisensteinJZeroInertPrimeEulerExact.lean"
     "localEulerPolynomial_inert"
-    "Integration/EisensteinJZeroSplitSevenExact.lean"
-    "normSevenDoesNotDetermineTrace / normalizedSevenMatchesFrobeniusTrace"
+    "Integration/EisensteinJZeroPrimaryNormalizationExact.lean"
+    "splitPrime_primary_associate_existsUnique"
+    "Integration/EisensteinJZeroQuadraticCharacterTraceExact.lean"
+    "frobeniusTrace_eq_neg_characterSum"
+    "cubic/Jacobi-sum evaluation -> primary trace -> CM Hecke character -> global elliptic/Hecke L-series"
     "SOURCE-WRITTEN / PINNED-MATHLIB-API-AUDITED / KERNEL-PENDING"
     Attribution.leanFormalReconstruction
 
@@ -61,20 +65,17 @@ leanActualEllipticPointCarrierObserved = true
 leanSameCurveGroupEndomorphismSourceObserved : Bool
 leanSameCurveGroupEndomorphismSourceObserved = true
 
-leanOrderThreeEndomorphismSourceObserved : Bool
-leanOrderThreeEndomorphismSourceObserved = true
-
-leanAllInertPrimeTraceZeroSourceObserved : Bool
-leanAllInertPrimeTraceZeroSourceObserved = true
-
 leanAllInertPrimeLocalEulerSourceObserved : Bool
 leanAllInertPrimeLocalEulerSourceObserved = true
 
-leanSplitSevenNormalizationBoundaryObserved : Bool
-leanSplitSevenNormalizationBoundaryObserved = true
+leanSplitPrimePrimaryNormalizationObserved : Bool
+leanSplitPrimePrimaryNormalizationObserved = true
 
-leanNormAloneInsufficientForSplitTraceObserved : Bool
-leanNormAloneInsufficientForSplitTraceObserved = true
+leanFrobeniusQuadraticCharacterSumObserved : Bool
+leanFrobeniusQuadraticCharacterSumObserved = true
+
+leanCubicJacobiEvaluationObserved : Bool
+leanCubicJacobiEvaluationObserved = false
 
 leanProofObjectImportedIntoAgda : Bool
 leanProofObjectImportedIntoAgda = false
@@ -103,9 +104,10 @@ record EisensteinJZeroCMCrossProverBoundary : Set where
   field
     leanPointEndomorphismSourceRecorded : Bool
     leanAllInertEulerSourceRecorded : Bool
-    leanSplitNormalizationBoundaryRecorded : Bool
+    leanPrimaryNormalizationSourceRecorded : Bool
+    leanQuadraticCharacterTraceSourceRecorded : Bool
+    leanCubicJacobiEvaluationRecorded : Bool
     agdaKernelAuthorityImported : Bool
-    agdaPointEndomorphismManufactured : Bool
     fullCMRingManufactured : Bool
     heckeCharacterManufactured : Bool
     allSplitEulerFactorsManufactured : Bool
@@ -113,6 +115,7 @@ record EisensteinJZeroCMCrossProverBoundary : Set where
 canonicalBoundary : EisensteinJZeroCMCrossProverBoundary
 canonicalBoundary =
   eisenstein-jzero-cm-cross-prover-boundary
+    true
     true
     true
     true
