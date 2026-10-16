@@ -23,6 +23,35 @@ _ = refl
 _ : H.siblingGenericEqualCharacterSimpleIsoReported H.canonicalMonsterLila3BNormalizerHandoff ≡ true
 _ = refl
 
+-- Current master has eliminated an arbitrary H-zeta carrier choice: the
+-- explicit Schrodinger function/Hilbert carrier, its Heisenberg action, and
+-- the full action law are now paid as the canonical H-zeta candidate.
+_ : H.siblingExplicitSchrodingerHZetaCandidateCarrierPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingExplicitSchrodingerHeisenbergActionPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingExplicitSchrodingerActionLawPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingSelectedLinearWZetaCarrierFixed H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+_ : H.siblingHomCarrierBindingsCompilerOwned H.canonicalMonsterLila3BNormalizerHandoff ≡ true
+_ = refl
+
+-- Candidate construction is still distinct from source recognition of the
+-- actual Monster H-zeta constituent and action.
+_ : H.siblingActualHZetaSourceRecognitionPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.siblingActualHZetaActionIntertwinerPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
+_ : H.siblingCanonicalHomWeldInhabited H.canonicalMonsterLila3BNormalizerHandoff ≡ false
+_ = refl
+
 _ : H.siblingConcreteHZetaFDRepTransportPaid H.canonicalMonsterLila3BNormalizerHandoff ≡ false
 _ = refl
 
