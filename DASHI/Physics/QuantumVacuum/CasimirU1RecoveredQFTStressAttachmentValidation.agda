@@ -40,6 +40,14 @@ concreteSelectedGroupHostStillOpenRegression :
   A.concreteSelectedGroupHostsCanonicalU1Paid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
 concreteSelectedGroupHostStillOpenRegression = refl
 
+selectedQFTStressSymmetryStillOpenRegression :
+  A.selectedQFTStressCoordinateSymmetryPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
+selectedQFTStressSymmetryStillOpenRegression = refl
+
+brownMaclayTenComponentValuesStillOpenRegression :
+  A.brownMaclayTenIndependentComponentValuesPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
+brownMaclayTenComponentValuesStillOpenRegression = refl
+
 actualSectorStressEqualityStillOpenRegression :
   A.actualSelectedQFTSectorEqualsBrownMaclayPaid A.canonicalCasimirU1RecoveredQFTStressAttachmentBoundary ≡ false
 actualSectorStressEqualityStillOpenRegression = refl
