@@ -3,14 +3,7 @@ module DASHI.Mathematics.Complexity.CodedFiniteStandardUniversalQuotedInputExact
 ------------------------------------------------------------------------
 -- ONE SELF-DELIMITING INPUT FOR A FIXED UNIVERSAL INTERPRETER
 --
--- Layout:
---
 --   machineCode(p) || unary(zeroSymbol) || unary(oneSymbol) || quote(q(p))
---
--- machineCode and the two symbol fields are self-delimiting; the remaining
--- suffix is parsed by the bounded whole-Program parser.  Thus one fixed U can
--- recover everything needed to simulate p on the literal quote of its Kleene
--- fixed point.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -56,8 +49,7 @@ encodeUniversalQuotedInput body zeroSymbol oneSymbol =
         (MachineCode.encodeNat (Fin.toℕ oneSymbol))
         (ProgramCode.fixedPointQuote body)))
 
-decodeUniversalQuotedInput :
-  List Bool → Maybe RawQuotedBodyInput
+decodeUniversalQuotedInput : List Bool → Maybe RawQuotedBodyInput
 decodeUniversalQuotedInput bits with MachineCode.decodeMachine bits
 ... | nothing = nothing
 ... | just (machine , afterMachine) with MachineCode.decodeNat afterMachine
@@ -102,6 +94,10 @@ universalQuotedInputRoundTrip body zeroSymbol oneSymbol
         (ProgramCode.fixedPointQuote body)
     | ProgramCode.fixedPointQuoteParsesExact body = refl
 
+ifBool : Bool → Nat → Nat → Nat
+ifBool false zero one = zero
+ifBool true zero one = one
+
 rawStartOnQuote :
   MachineCode.RawMachine → Nat → Nat → List Bool → Raw.RawConfiguration
 rawStartOnQuote machine zeroSymbol oneSymbol [] =
@@ -116,30 +112,6 @@ rawStartOnQuote machine zeroSymbol oneSymbol (bit ∷ rest) =
     (MachineCode.initial machine)
     (ifBool bit zeroSymbol oneSymbol)
     (mapBoolNat zeroSymbol oneSymbol rest)
-  where
-    ifBool : Bool → Nat → Nat → Nat
-    ifBool false zero one = zero
-    ifBool true zero one = one
-
-runUniversalQuotedInput :
-  Nat → List Bool → Maybe Raw.RawConfiguration
-runUniversalQuotedInput steps bits with decodeUniversalQuotedInput bits
-... | nothing = nothing
-... | just instance =
-  Raw.iterateRaw
-    steps
-    (machine instance)
-    (rawStartOnQuote
-      (machine instance)
-      (zeroSymbol instance)
-      (oneSymbol instance)
-      (ProgramCode.fixedPointQuoteFromRawProgram (program instance)))
-
-------------------------------------------------------------------------
--- The generic raw-program re-encoder is intentionally not introduced merely to
--- make `runUniversalQuotedInput` convenient.  For the canonical fixed-point
--- instance below, use the original Boolean suffix directly instead.
-------------------------------------------------------------------------
 
 runCanonicalUniversalQuotedInput :
   (steps : Nat)
@@ -159,8 +131,7 @@ runCanonicalUniversalQuotedInput steps body zeroSymbol oneSymbol =
 ------------------------------------------------------------------------
 -- CONSEQUENCE
 --
--- The fixed universal-machine route now has one canonical finite input format,
--- not separate meta-level machine/input arguments.  The decoder round-trips to
--- the exact raw body p, its chosen Boolean-symbol ABI and the whole q(p) tree.
--- The remaining literal-U compiler can therefore target this single tape format.
+-- One canonical finite input round-trips to the exact raw body, Boolean-symbol
+-- ABI and whole q tree.  No raw-program re-encoder or hidden meta-level program
+-- argument is required by the fixed universal-machine route.
 ------------------------------------------------------------------------
