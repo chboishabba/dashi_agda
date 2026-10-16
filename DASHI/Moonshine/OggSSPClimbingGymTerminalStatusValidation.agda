@@ -33,11 +33,40 @@ canonicalConsumerDescentCutClosed :
   ≡ true
 canonicalConsumerDescentCutClosed = refl
 
-analyticQuantiserStillOpen :
+natRadialCodecClosed :
+  Status.exactNatToRadialTreeCodecClosed Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+natRadialCodecClosed = refl
+
+exactHoleAddressClosed :
+  Status.exactHoleAddressWithoutRealFloorClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+exactHoleAddressClosed = refl
+
+exactHoleAnalyticBridgeClosed :
+  Status.exactHoleAnalyticAgreementSurfaceClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+exactHoleAnalyticBridgeClosed = refl
+
+certifiedBishopCellCompilerClosed :
+  Status.certifiedBishopOpenCellToRadixClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+certifiedBishopCellCompilerClosed = refl
+
+sourceSeedNonIdentifiabilityClosed :
+  Status.sourceShiftSeedNonIdentifiabilityClosed
+    Status.canonicalClimbingGymTerminalStatus
+  ≡ true
+sourceSeedNonIdentifiabilityClosed = refl
+
+analyticTotalFloorStillOpen :
   Status.constructiveRealToFiniteRadixQuantiserClosed
     Status.canonicalClimbingGymTerminalStatus
   ≡ false
-analyticQuantiserStillOpen = refl
+analyticTotalFloorStillOpen = refl
 
 sourceSeedNotPretendedRecovered :
   Status.sourceRandomShiftSeedRecovered Status.canonicalClimbingGymTerminalStatus
