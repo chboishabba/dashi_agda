@@ -3,6 +3,7 @@ module DASHI.Physics.QuantumVacuum.CasimirU1ActionVariationMaxCutExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.Closure.MaxwellGaugeFieldEquationScope as Maxwell
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2Lie
@@ -10,19 +11,21 @@ import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as U1Stress
 import DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionExact as Pairing
 import DASHI.Physics.QuantumVacuum.CasimirU1CurvatureRestrictionExact as Curvature
+import DASHI.Physics.QuantumVacuum.CasimirU1QuadraticActionDensityExact as Density
 
 ------------------------------------------------------------------------
 -- CASIMIR U(1) ACTION / METRIC-VARIATION MAX-CUT
 --
--- Two algebraic reductions are already paid on the canonical Cartan axis:
+-- The theorem-bearing Cartan reductions are already compiler-owned:
 --
 --   [A,A] = 0
---   <embed a,embed b>_SU2 = a*b.
+--   <embed a,embed b>_SU2 = a*b
+--   F=dA+[A,A] => F=dA
+--   common-prefactor <F,F> => common-prefactor F_U1^2.
 --
--- Moreover, whenever the SAME selected nondegenerate curvature object carries
--- F=dA+[A,A], the curvature compiler reduces it to F=dA.  The remaining
--- payments are therefore attachment/calibration/action/variation payments,
--- not new abelian Lie-algebra calculations.
+-- A proof-relevant action-density functional then lifts the final pointwise
+-- equality to action equality.  Consequently restricted YM=Maxwell action is
+-- not an independent theorem after those same-object inputs are attached.
 ------------------------------------------------------------------------
 
 record CasimirRestrictedActionNormalizationPayment : Set₁ where
@@ -35,15 +38,16 @@ record CasimirRestrictedActionNormalizationPayment : Set₁ where
 
     PhysicalChargeCouplingNormalization : Set
     physicalChargeCouplingNormalization : PhysicalChargeCouplingNormalization
+    physicalActionPrefactor : ℝ
 
     curvatureFormula :
       Curvature.SameObjectCurvatureFormula SelectedField selectedLieValue
 
-    CommonAction : Set
-    restrictedYangMillsAction : SelectedField → CommonAction
-    maxwellAction : SelectedField → CommonAction
-    restrictedActionEqualsMaxwell :
-      ∀ field → restrictedYangMillsAction field ≡ maxwellAction field
+    exteriorCartanImage :
+      Density.ExteriorCartanImageReceipt curvatureFormula
+
+    densityFunctional :
+      Density.DensityActionFunctional SelectedField
 
     reading : String
 
@@ -69,11 +73,50 @@ restrictedCurvatureIsAbelianExterior payment =
     (fieldImage payment)
     (curvatureFormula payment)
 
+restrictedYMAction :
+  (payment : CasimirRestrictedActionNormalizationPayment) →
+  Density.ActionValue (densityFunctional payment)
+restrictedYMAction payment =
+  Density.restrictedYMActionFromDensity
+    (densityFunctional payment)
+    (physicalActionPrefactor payment)
+    (curvatureFormula payment)
+
+maxwellAction :
+  (payment : CasimirRestrictedActionNormalizationPayment) →
+  Density.ActionValue (densityFunctional payment)
+maxwellAction payment =
+  Density.maxwellActionFromDensity
+    (densityFunctional payment)
+    (physicalActionPrefactor payment)
+    (exteriorCartanImage payment)
+
+restrictedActionEqualsMaxwell :
+  (payment : CasimirRestrictedActionNormalizationPayment) →
+  restrictedYMAction payment ≡ maxwellAction payment
+restrictedActionEqualsMaxwell payment =
+  Density.restrictedYMActionEqualsMaxwellFromSameDensityFunctional
+    (fieldImage payment)
+    (curvatureFormula payment)
+    (exteriorCartanImage payment)
+    (densityFunctional payment)
+    (physicalActionPrefactor payment)
+
 invariantPairingRestrictionWitness : Pairing.CasimirU1InvariantPairingBoundary
 invariantPairingRestrictionWitness = Pairing.canonicalCasimirU1InvariantPairingBoundary
 
 curvatureRestrictionWitness : Curvature.CasimirU1CurvatureRestrictionBoundary
 curvatureRestrictionWitness = Curvature.canonicalCasimirU1CurvatureRestrictionBoundary
+
+quadraticDensityRestrictionWitness : Density.CasimirU1QuadraticDensityBoundary
+quadraticDensityRestrictionWitness = Density.canonicalU1QuadraticDensityBoundary
+
+------------------------------------------------------------------------
+-- Metric variation remains a separate same-path payment.  Action equality at
+-- one selected metric does not by itself identify derivatives under metric
+-- perturbation.  The next max-cut is to reuse the repository's common tangent/
+-- first-variation machinery rather than postulate a second stress equality.
+------------------------------------------------------------------------
 
 record CasimirRestrictedMetricVariationPayment
     (actionPayment : CasimirRestrictedActionNormalizationPayment) : Set₁ where
@@ -120,7 +163,8 @@ zeroProbeActionDoesNotPayPhysicalRestriction ()
 data RemainingCasimirU1ActionRestrictionBlocker : Set where
   missingPhysicalChargeCouplingNormalization : RemainingCasimirU1ActionRestrictionBlocker
   missingSameObjectNondegenerateCurvatureFormulaAttachment : RemainingCasimirU1ActionRestrictionBlocker
-  missingRestrictedYMMaxwellActionEquality : RemainingCasimirU1ActionRestrictionBlocker
+  missingExteriorFieldStrengthCartanImage : RemainingCasimirU1ActionRestrictionBlocker
+  missingSameObjectActionDensityFunctional : RemainingCasimirU1ActionRestrictionBlocker
   missingMetricVariationRestrictionCommutation : RemainingCasimirU1ActionRestrictionBlocker
 
 firstActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
@@ -130,10 +174,13 @@ secondActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
 secondActionRestrictionBlocker = missingSameObjectNondegenerateCurvatureFormulaAttachment
 
 thirdActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
-thirdActionRestrictionBlocker = missingRestrictedYMMaxwellActionEquality
+thirdActionRestrictionBlocker = missingExteriorFieldStrengthCartanImage
 
 fourthActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
-fourthActionRestrictionBlocker = missingMetricVariationRestrictionCommutation
+fourthActionRestrictionBlocker = missingSameObjectActionDensityFunctional
+
+fifthActionRestrictionBlocker : RemainingCasimirU1ActionRestrictionBlocker
+fifthActionRestrictionBlocker = missingMetricVariationRestrictionCommutation
 
 record CasimirU1ActionVariationBoundary : Set where
   constructor casimir-u1-action-variation-boundary
@@ -143,10 +190,13 @@ record CasimirU1ActionVariationBoundary : Set where
     invariantPairingRestrictionConsumed : Bool
     independentKillingDecompositionRequired : Bool
     cartesianCurvatureReductionCompilerConsumed : Bool
+    quadraticActionDensityCompilerConsumed : Bool
     secondAbelianBracketProofRequired : Bool
+    independentRestrictedYMMaxwellActionEqualityRequiredAfterInputs : Bool
     physicalChargeCouplingNormalizationSeparated : Bool
     nondegenerateCurvatureAttachmentSeparated : Bool
-    actionEqualitySeparated : Bool
+    exteriorFieldStrengthCartanImageSeparated : Bool
+    sameObjectActionFunctionalSeparated : Bool
     metricVariationCommutationSeparated : Bool
     zeroProbeActionSurfacePaysPhysicalRestriction : Bool
 
@@ -155,8 +205,9 @@ open CasimirU1ActionVariationBoundary public
 canonicalCasimirU1ActionVariationBoundary : CasimirU1ActionVariationBoundary
 canonicalCasimirU1ActionVariationBoundary =
   casimir-u1-action-variation-boundary
-    true true true false true false true true true true false
+    true true true false true true false false
+    true true true true true false
 
 casimirU1ActionVariationReading : String
 casimirU1ActionVariationReading =
-  "The Cartan-U(1) algebraic reduction is now exhausted: bracket-zero is compiled from the field-image theorem; the live SU(2) invariant pairing restricts exactly as <embed a,embed b>=a*b; and any same-object curvature formula F=dA+[A,A] compiles to F=dA. The first remaining normalization leaf is physical electromagnetic charge/gauge-coupling/action-prefactor calibration. The next field-strength leaf is attachment of the real selected nondegenerate curvature formula, not another bracket calculation. After that remain restricted YM=Maxwell action equality and commutation with metric variation/stress construction. MaxwellGaugeFieldEquationScope supplies the matching sector-restriction grammar; zero-probe action surfaces do not pay these physical leaves."
+  "The Cartan-U(1) action algebra is compiler-saturated. Bracket-zero follows from the field image; the live SU(2) invariant pairing restricts as <embed a,embed b>=a*b; same-object F=dA+[A,A] reduces to F=dA; and the quadratic YM density therefore equals the Maxwell square for any common prefactor. A proof-relevant same-object density functional lifts that pointwise result to full restricted-YM=Maxwell action equality, so no additional equality theorem remains after the inputs are attached. The genuine inputs are now: physical electromagnetic coupling/action-prefactor normalization; the selected nondegenerate curvature formula; Cartan image of its exterior field strength; the real action integration/measure functional; then common metric-path/variation transport. MaxwellGaugeFieldEquationScope remains an obligation grammar only, and zero-curvature probe actions do not count as physical payment."
