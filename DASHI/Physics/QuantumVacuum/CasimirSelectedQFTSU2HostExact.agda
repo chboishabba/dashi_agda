@@ -14,21 +14,22 @@ import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
 import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable as Table
 
+------------------------------------------------------------------------
+-- SELECTED-QFT SU(2) HOST
+--
+-- For the Casimir U(1) handoff, the load-bearing group statement is literal:
+-- the selected compact-simple group is interpreted as the existing concrete
+-- unit-quaternion SU(2) GroupStructure.  Dynkin-A1 / Sprint105 classification
+-- is useful consistency metadata, but is not required to transport the
+-- already-proved U(1) torus inclusion into the selected carrier.
+------------------------------------------------------------------------
+
 record CasimirSelectedQFTSU2Host
     (U : Weld.UnifiedCandidate)
     (group : QFT.CompactSimpleGroup (Weld.qftCarriers U)) : Set₁ where
   field
     selectedGroupIsCompactSimple :
       QFT.IsCompactSimple (Weld.qftSemantics U) group
-
-    compactSimpleDataForGroup :
-      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
-      Promotion.CompactSimpleYMData
-        (QFT.CompactSimpleGroup (Weld.qftCarriers U))
-
-    selectedGroupDynkinFamilyIsA1 :
-      Promotion.family (compactSimpleDataForGroup group)
-      ≡ Promotion.familyA 1
 
     groupStructureInterpretation :
       QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure
@@ -39,6 +40,24 @@ record CasimirSelectedQFTSU2Host
     reading : String
 
 open CasimirSelectedQFTSU2Host public
+
+-- Optional classification receipt.  This is deliberately downstream of the
+-- literal host because the group-structure equality already suffices for U(1).
+record CasimirSelectedQFTSU2DynkinConsistency
+    {U : Weld.UnifiedCandidate}
+    {group : QFT.CompactSimpleGroup (Weld.qftCarriers U)}
+    (host : CasimirSelectedQFTSU2Host U group) : Set₁ where
+  field
+    compactSimpleDataForGroup :
+      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
+      Promotion.CompactSimpleYMData
+        (QFT.CompactSimpleGroup (Weld.qftCarriers U))
+
+    selectedGroupDynkinFamilyIsA1 :
+      Promotion.family (compactSimpleDataForGroup group)
+      ≡ Promotion.familyA 1
+
+open CasimirSelectedQFTSU2DynkinConsistency public
 
 ------------------------------------------------------------------------
 -- Existing same-object routes that already own compact simplicity.
@@ -71,21 +90,14 @@ hostFromPinnedYMConstruction :
         {C = Weld.qftCarriers U}
         (Weld.qftSemantics U))
     (group : QFT.CompactSimpleGroup (Weld.qftCarriers U))
-    (compactData :
-      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
-      Promotion.CompactSimpleYMData
-        (QFT.CompactSimpleGroup (Weld.qftCarriers U))) →
-  Promotion.family (compactData group) ≡ Promotion.familyA 1 →
-  (interpretation :
-    QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
+    (interpretation :
+      QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
   interpretation group ≡ SU2.su2QuaternionGroup →
   String →
   CasimirSelectedQFTSU2Host U group
 hostFromPinnedYMConstruction
-    pinned group compactData familyA1 interpretation interpreted reading = record
+    pinned group interpretation interpreted reading = record
   { selectedGroupIsCompactSimple = compactSimpleFromPinnedYMConstruction pinned group
-  ; compactSimpleDataForGroup = compactData
-  ; selectedGroupDynkinFamilyIsA1 = familyA1
   ; groupStructureInterpretation = interpretation
   ; selectedGroupStructureIsQuaternionSU2 = interpreted
   ; reading = reading
@@ -96,22 +108,15 @@ hostFromLiteralClayStructuralBase :
     (candidate : Weld.Candidate U)
     (structural : Five.LiteralClayStructuralBase (Weld.qftTarget U candidate))
     (group : QFT.CompactSimpleGroup (Weld.qftCarriers U))
-    (compactData :
-      QFT.CompactSimpleGroup (Weld.qftCarriers U) →
-      Promotion.CompactSimpleYMData
-        (QFT.CompactSimpleGroup (Weld.qftCarriers U))) →
-  Promotion.family (compactData group) ≡ Promotion.familyA 1 →
-  (interpretation :
-    QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
+    (interpretation :
+      QFT.CompactSimpleGroup (Weld.qftCarriers U) → Gauge.GroupStructure) →
   interpretation group ≡ SU2.su2QuaternionGroup →
   String →
   CasimirSelectedQFTSU2Host U group
 hostFromLiteralClayStructuralBase
-    candidate structural group compactData familyA1 interpretation interpreted reading = record
+    candidate structural group interpretation interpreted reading = record
   { selectedGroupIsCompactSimple =
       compactSimpleFromLiteralClayStructuralBase candidate structural group
-  ; compactSimpleDataForGroup = compactData
-  ; selectedGroupDynkinFamilyIsA1 = familyA1
   ; groupStructureInterpretation = interpretation
   ; selectedGroupStructureIsQuaternionSU2 = interpreted
   ; reading = reading
@@ -177,6 +182,7 @@ record CasimirSelectedQFTSU2HostBoundary : Set where
     literalClayStructuralBaseSuppliesCompactSimpleCompiler : Bool
     sprint105ClassificationIsSecondaryConsistencyTag : Bool
     sprint105ClassificationRequiredForHost : Bool
+    dynkinA1ClassificationRequiredForHost : Bool
 
     selectedGroupCompactSimpleWitnessPaid : Bool
     selectedGroupDynkinA1ClassificationPaid : Bool
@@ -189,9 +195,9 @@ canonicalCasimirSelectedQFTSU2HostBoundary :
   CasimirSelectedQFTSU2HostBoundary
 canonicalCasimirSelectedQFTSU2HostBoundary =
   casimir-selected-qft-su2-host-boundary
-    true true true true true true true true false
+    true true true true true true true true false false
     false false false false
 
 casimirSelectedQFTSU2HostReading : String
 casimirSelectedQFTSU2HostReading =
-  "The required host is IsCompactSimple + source-backed Dynkin A1 data + literal quaternionic SU(2) GroupStructure interpretation. Compact simplicity itself needs no new mathematics once either an existing pinned physical YM construction on the same qftCarriers/qftSemantics or a same-object LiteralClayStructuralBase for the selected qftTarget is attached; both compile directly to IsCompactSimple. Sprint105 SU2 remains secondary and non-required. The genuinely Casimir-specific group work is therefore same-object attachment plus A1 classification and quaternionic SU(2) interpretation, after which the existing U1 torus inclusion transports into the selected carrier. None of this identifies Brown-Maclay stress."
+  "The load-bearing host is now only same-target compact simplicity plus literal interpretation as the existing quaternionic SU(2) GroupStructure. That equality is sufficient to transport the canonical U(1) torus inclusion into the selected carrier. Dynkin-A1 and Sprint105 SU2 labels remain optional consistency metadata, not independent Casimir host blockers. Compact simplicity itself needs no new mathematics once either an existing pinned physical YM construction on the same qftCarriers/qftSemantics or a same-object LiteralClayStructuralBase for the selected qftTarget is attached. None of this identifies Brown-Maclay stress."
