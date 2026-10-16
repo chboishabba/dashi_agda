@@ -25,6 +25,15 @@ import DASHI.Chemistry.LineageAttributionEvidencePaymentExact
 import DASHI.Chemistry.AttributedGoldReactionReplayExact
 import DASHI.Chemistry.LineageSourceManifestationGuardExact
 
+-- Hbomberguy/republication cross-pollination is implemented through existing
+-- generic provenance-root and public-claim machinery rather than by counting
+-- downstream publications as independent evidence. Surrounding ORI/COPE/
+-- Cochrane/W3C guidance is typed as vocabulary/evidence-handling context only.
+import DASHI.Biology.KitzerowAttributionProvenanceSOTAExact
+import DASHI.Biology.KitzerowAttributionEvidenceLineageExact
+import DASHI.Biology.KitzerowAttributionEvidenceLineageValidation
+import DASHI.Biology.KitzerowAttributionAcquisitionStatusExact
+
 -- A1 now carries bounded direct payments for hepatic competition, neural
 -- state-history, redox/spatial topology, context-specific carrier/transport
 -- mechanisms, quantitative non-neural transcellular transport, and in-vivo
