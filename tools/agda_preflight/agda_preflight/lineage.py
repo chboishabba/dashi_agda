@@ -50,6 +50,9 @@ def compute_round_lineage(modules: Iterable[dict]) -> dict:
             unchanged = common - changed
             denominator = max(1, len(right_symbols))
             novelty = (len(added_names) + len(changed)) / denominator
+            # Compute both ratios from integer counts.  Using 1.0 - novelty
+            # produces a different IEEE float for values such as 1/3.
+            noise = len(unchanged) / denominator
             transitions.append(
                 {
                     "from_round": left_no,
@@ -59,7 +62,7 @@ def compute_round_lineage(modules: Iterable[dict]) -> dict:
                     "signature_changed": len(changed),
                     "unchanged": len(unchanged),
                     "novelty_ratio": novelty,
-                    "snapshot_noise_ratio": 1.0 - novelty,
+                    "snapshot_noise_ratio": noise,
                 }
             )
         families.append(
