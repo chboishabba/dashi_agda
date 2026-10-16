@@ -5,8 +5,9 @@ from typing import Any, Optional
 from . import discovery_catalog
 from .narrative_cache import NarrativeCache, apply_narrative_gate
 from .repo_index_bridge import RepoIndexReader
-from .repository_store import ensure_repository_schema, sync_legacy_repo_index
-from .unified_discovery import UnifiedDiscovery
+from .repository_discovery import RepositoryDiscovery
+from .repository_inventory import ensure_inventory_schema
+from .repository_store import sync_legacy_repo_index
 
 
 def install_source_index_semantic_extension(source_index_cls: type) -> None:
@@ -17,19 +18,19 @@ def install_source_index_semantic_extension(source_index_cls: type) -> None:
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         original_init(self, *args, **kwargs)
-        ensure_repository_schema(self.connection)
+        ensure_inventory_schema(self.connection)
         sync_legacy_repo_index(self.root, self.connection)
-        discovery_catalog.ensure_catalog_schema(self.connection)
         self.connection.commit()
 
-    def _unified(self) -> UnifiedDiscovery:
-        return UnifiedDiscovery(
+    def _unified(self) -> RepositoryDiscovery:
+        return RepositoryDiscovery(
             self.root,
             self,
             RepoIndexReader(self.root, connection=self.connection),
         )
 
     def refresh_semantic_catalog(self) -> int:
+        """Legacy compatibility refresh; canonical `dashi-repo index` is DB-native."""
         return discovery_catalog.refresh_catalog(self.connection)
 
     def search_symbols(self, query: str, *, include_history: bool = False, limit: int = 50) -> list[dict]:
