@@ -4,6 +4,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 PIN = ROOT / "vendor" / "meta-introspector-aok-goldbach29.VENDOR"
 BRIDGE = ROOT / "DASHI" / "ComputerScience" / "Goldbach29Signed369VendorBridgeExact.agda"
+AGGREGATE = ROOT / "DASHI" / "EverythingGoldbach29Signed369VendorExact.agda"
+WORKFLOW = ROOT / ".github" / "workflows" / "goldbach29-signed369-vendor.yml"
 
 
 def test_vendor_pin_and_attribution():
@@ -32,3 +34,11 @@ def test_no_unpaid_full_bisimulation_claim():
     assert "fullReachableWeakBisimulationPaid = false" in text
     assert "mikeOwnsGoldbach29Construction" in text
     assert "dashiOwnsObserverTranslation" in text
+
+
+def test_aggregate_and_workflow_own_the_new_surface():
+    aggregate = AGGREGATE.read_text()
+    workflow = WORKFLOW.read_text()
+    assert "Goldbach29Signed369VendorBridgeExact" in aggregate
+    assert "test_goldbach29_signed369_vendor.py" in workflow
+    assert "EverythingGoldbach29Signed369VendorExact.agda" in workflow
