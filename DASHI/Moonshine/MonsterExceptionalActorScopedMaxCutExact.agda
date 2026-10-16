@@ -72,10 +72,6 @@ suzukiCoverBlocksNaive53Split = refl
 
 ------------------------------------------------------------------------
 -- 2. Central-C3 / conformal-fixed-line target.
---
--- There is exactly ONE actual 54/53 action in this record: the one already
--- embedded inside the strict Monster<->Albert/F4 recognition. No independent
--- action field is allowed to drift away from it.
 ------------------------------------------------------------------------
 
 record CentralResidualExceptionalRecognition : Set₁ where
@@ -104,10 +100,6 @@ centralActualResidualAction recognition =
 
 ------------------------------------------------------------------------
 -- 3. Full-normalizer exceptional target: 90 -> 12+78 -> E6 -> F4+26.
---
--- The E6 owner already requires an actual 78-block intertwiner. Here the
--- additional payment is a literal invariant F4 ⊕ 26 decomposition under that
--- SAME inertia action; 78 = 52 + 26 by itself cannot inhabit this record.
 ------------------------------------------------------------------------
 
 record NormalizerE6F4Recognition {source}
@@ -156,11 +148,6 @@ record NormalizerE6F4Recognition {source}
 
 open NormalizerE6F4Recognition public
 
--- The bespoke Monster/E6 target above now compiles into the generic
--- actor-scoped decomposition surface.  This proves that the generic interface
--- is not merely documentary: the same literal inertia actor controls Whole,
--- F4 and 26, and the existing two stability equations are exactly the two
--- cases of the generic intertwiner.
 normalizerActorScopedDecomposition :
   {source : Set} →
   {attachment : Ninety.ActualMultiplicityTwelveSeventyEightAttachment source} →
@@ -173,7 +160,7 @@ normalizerActorScopedDecomposition :
     (E6.e6Action (e6Recognition recognition))
     (f4Action recognition)
     (traceless26Action recognition)
-normalizerActorScopedDecomposition recognition =
+normalizerActorScopedDecomposition {attachment = attachment} recognition =
   ActorScoped.actor-scoped-sum-decomposition
     (ActorScoped.actor-scoped-same-object
       (splitE6 recognition)
@@ -183,7 +170,7 @@ normalizerActorScopedDecomposition recognition =
       intertwines)
   where
   intertwines :
-    (inertia : _) →
+    (inertia : Ninety.MultiplicityInertia attachment) →
     (state : E6.E6Carrier (e6Recognition recognition)) →
     splitE6 recognition
       (E6.e6Action (e6Recognition recognition) inertia state)
@@ -205,7 +192,6 @@ normalizerActorScopedDecomposition recognition =
 data Arithmetic143Equals90Plus53CreatesNormalizerSubmodules : Set where
 data CentralResidualCreatesSuzukiStableResidual : Set where
 data E6Dimension78CreatesE6ActionRecognition : Set where
-
 data NormalizerE6RecognitionCreatesCentralResidual53 : Set where
 
 arithmetic143DoesNotCreateNormalizerSplit :
