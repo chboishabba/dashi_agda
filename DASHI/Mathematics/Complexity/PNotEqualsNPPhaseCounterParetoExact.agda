@@ -33,12 +33,12 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPPhaseCounterParetoExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.Base using (_≤_)
 
 import DASHI.Mathematics.Complexity.CodedFiniteStandardMachineExact as Coded
+import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact as PhaseLift
 import DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseSizeExact as Phase
-import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownRuleFragmentExact as Fragment
 import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownCostExact as Cost
 import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownExactRunExact as CounterRun
 
@@ -48,12 +48,12 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPBinaryCountdownExactRunExact as 
 
 compactCounterStateCountExact :
   Coded.stateCount CounterRun.countdownCode
-    ≡ suc (suc (suc 0))
+    ≡ suc (suc (suc zero))
 compactCounterStateCountExact = refl
 
 compactCounterRuleCountExact :
   Phase.listLength (Coded.rules CounterRun.countdownCode)
-    ≡ suc (suc (suc 0))
+    ≡ suc (suc (suc zero))
 compactCounterRuleCountExact = refl
 
 ------------------------------------------------------------------------
@@ -72,9 +72,7 @@ compactCounterSingleDecrementBound = Cost.countdownWorkBound
 phaseExpandedStateCountExact :
   (source : Coded.CodedFiniteStandardTM) →
   (steps : Nat) →
-  Coded.stateCount
-      (DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact.phaseLiftCode
-        source steps)
+  Coded.stateCount (PhaseLift.phaseLiftCode source steps)
     ≡ Coded.stateCount source * suc steps
 phaseExpandedStateCountExact = Phase.phaseLiftStateCountExact
 
@@ -82,9 +80,7 @@ phaseExpandedRuleCountExact :
   (source : Coded.CodedFiniteStandardTM) →
   (steps : Nat) →
   Phase.listLength
-      (Coded.rules
-        (DASHI.Mathematics.Complexity.CodedFiniteStandardExactPhaseLiftExact.phaseLiftCode
-          source steps))
+      (Coded.rules (PhaseLift.phaseLiftCode source steps))
     ≡ steps * Phase.listLength (Coded.rules source)
 phaseExpandedRuleCountExact = Phase.phaseLiftRuleCountExact
 
