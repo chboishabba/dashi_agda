@@ -26,6 +26,9 @@ _ = refl
 _ : C.wholeCharacterSimpleTypeAssemblySourceWritten C.currentMonster3BMaxCut ≡ true
 _ = refl
 
+_ : C.postRecognitionCopyCountCompilerSourceWritten C.currentMonster3BMaxCut ≡ true
+_ = refl
+
 _ : C.wholeCharacterAssemblyLeanKernelObserved C.currentMonster3BMaxCut ≡ false
 _ = refl
 
