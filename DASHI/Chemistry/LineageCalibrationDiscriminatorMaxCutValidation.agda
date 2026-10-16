@@ -43,8 +43,16 @@ bh4DirectDiscriminatorsPaySubcoordinatesWithoutWholeClosure =
 bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer :
   RedoxSpatial.nadphRegenerationRelevant RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
   × RedoxSpatial.intracellularExtracellularRouteDistinctionPaid RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.cellularBH4UptakeDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
+  × RedoxSpatial.functionalCocultureCrossTalkSupported RedoxSpatial.canonicalRedoxSpatialBoundary ≡ true
   × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
-bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer = refl , (refl , refl)
+bh4RedoxSpatialCoordinateIsPaidWithoutInventingTransfer =
+  refl , (refl , (refl , (refl , refl)))
+
+bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux :
+  RedoxSpatial.specificMembraneCarrierRequiredByUptakeStudy RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+  × RedoxSpatial.intercellBH4TransferDirectlyMeasured RedoxSpatial.canonicalRedoxSpatialBoundary ≡ false
+bh4TransportEvidenceDoesNotRequireDedicatedCarrierOrQuantifyInVivoFlux = refl , refl
 
 bh4AcquisitionStateIsPartialNotClosed :
   Status.directDiscriminatorCanUpgradePreviouslyUnpaidTargetToPartial Status.canonicalEvidenceAcquisitionStatusBoundary ≡ true
