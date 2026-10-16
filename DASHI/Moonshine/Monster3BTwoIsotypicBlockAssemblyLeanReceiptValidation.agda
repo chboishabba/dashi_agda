@@ -11,6 +11,9 @@ _ = refl
 _ : Cut.finiteCopiesOfEachBlockAssemblySourceWritten Cut.canonicalBoundary ≡ true
 _ = refl
 
+_ : Cut.postRecognitionTwelveSeventyEightCountCompilerSourceWritten Cut.canonicalBoundary ≡ true
+_ = refl
+
 _ : Cut.leanKernelReceiptObserved Cut.canonicalBoundary ≡ false
 _ = refl
 
