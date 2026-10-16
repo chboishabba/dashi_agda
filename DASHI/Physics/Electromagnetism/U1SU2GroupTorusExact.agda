@@ -15,6 +15,8 @@ open import Data.List.Base using ([]; _∷_)
 import Tactic.RingSolver as Solver
 
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using (GroupStructure)
+open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
+  ( _+R_; _*R_; -R_; zeroR; oneR; *-identityˡ; -‿involutive )
 import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as SU2
 
 record U1TorusElement : Set where
@@ -22,8 +24,7 @@ record U1TorusElement : Set where
   field
     realPart imagPart : ℝ
     unitCircle :
-      (realPart SU2.*R realPart) SU2.+R (imagPart SU2.*R imagPart)
-      ≡ SU2.oneR
+      (realPart *R realPart) +R (imagPart *R imagPart) ≡ oneR
 
 open U1TorusElement public
 
@@ -34,11 +35,11 @@ u1Ext {u1-torus a b p} {u1-torus .a .b q} refl refl =
 
 axisQuaternion : U1TorusElement → SU2.Quaternion
 axisQuaternion u =
-  SU2.quat (realPart u) SU2.zeroR SU2.zeroR (imagPart u)
+  SU2.quat (realPart u) zeroR zeroR (imagPart u)
 
 axisNormSimplifies : ∀ a b →
-  SU2.normSquaredQ (SU2.quat a SU2.zeroR SU2.zeroR b)
-  ≡ (a SU2.*R a) SU2.+R (b SU2.*R b)
+  SU2.normSquaredQ (SU2.quat a zeroR zeroR b)
+  ≡ (a *R a) +R (b *R b)
 axisNormSimplifies a b =
   Solver.solve (a ∷ b ∷ []) SU2.realSolverRing
 
@@ -48,36 +49,32 @@ includeU1InSU2 u =
     (trans (axisNormSimplifies (realPart u) (imagPart u)) (unitCircle u))
 
 complexNormMultiplicative : ∀ a b c d →
-  (((a SU2.*R c) SU2.+R (SU2.-R (b SU2.*R d))) SU2.*R
-    ((a SU2.*R c) SU2.+R (SU2.-R (b SU2.*R d))))
-  SU2.+R
-  (((a SU2.*R d) SU2.+R (b SU2.*R c)) SU2.*R
-    ((a SU2.*R d) SU2.+R (b SU2.*R c)))
+  (((a *R c) +R (-R (b *R d))) *R ((a *R c) +R (-R (b *R d))))
+  +R (((a *R d) +R (b *R c)) *R ((a *R d) +R (b *R c)))
   ≡
-  ((a SU2.*R a) SU2.+R (b SU2.*R b)) SU2.*R
-  ((c SU2.*R c) SU2.+R (d SU2.*R d))
+  ((a *R a) +R (b *R b)) *R ((c *R c) +R (d *R d))
 complexNormMultiplicative a b c d =
   Solver.solve (a ∷ b ∷ c ∷ d ∷ []) SU2.realSolverRing
 
 u1Multiply : U1TorusElement → U1TorusElement → U1TorusElement
 u1Multiply (u1-torus a b abNorm) (u1-torus c d cdNorm) =
   u1-torus
-    ((a SU2.*R c) SU2.+R (SU2.-R (b SU2.*R d)))
-    ((a SU2.*R d) SU2.+R (b SU2.*R c))
+    ((a *R c) +R (-R (b *R d)))
+    ((a *R d) +R (b *R c))
     (trans
       (complexNormMultiplicative a b c d)
       (trans
-        (cong₂ SU2._*R_ abNorm cdNorm)
-        (SU2.*-identityˡ SU2.oneR)))
+        (cong₂ _*R_ abNorm cdNorm)
+        (*-identityˡ oneR)))
 
 u1Identity : U1TorusElement
 u1Identity =
-  u1-torus SU2.oneR SU2.zeroR
+  u1-torus oneR zeroR
     (Solver.solve [] SU2.realSolverRing)
 
 u1Inverse : U1TorusElement → U1TorusElement
 u1Inverse (u1-torus a b norm) =
-  u1-torus a (SU2.-R b)
+  u1-torus a (-R b)
     (trans (Solver.solve (a ∷ b ∷ []) SU2.realSolverRing) norm)
 
 u1MultiplyAssociative : ∀ a b c →
@@ -116,7 +113,7 @@ u1InverseRight (u1-torus a b norm) =
 
 u1InverseInvolutive : ∀ u → u1Inverse (u1Inverse u) ≡ u
 u1InverseInvolutive (u1-torus a b _) =
-  u1Ext refl (SU2.-‿involutive b)
+  u1Ext refl (-‿involutive b)
 
 u1TorusGroup : GroupStructure
 u1TorusGroup = record
