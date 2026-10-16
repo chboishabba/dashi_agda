@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.QuantumVacuum.Casimir369StressEnergyTerminalMaxCutExact as Terminal
 import DASHI.Physics.QuantumVacuum.CasimirGRQFTUnificationCrossPollinationValidation
 import DASHI.Physics.QuantumVacuum.CasimirU1RecoveredQFTStressAttachmentValidation
+import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact as Round131
 
 ------------------------------------------------------------------------
 -- RED-first terminal regression surface.
@@ -54,6 +55,14 @@ concreteScaleStillOpenRegression :
   Terminal.concreteCanonicalSetoidScaleWitnessPaid Terminal.canonicalTerminalBoundary ≡ false
 concreteScaleStillOpenRegression = refl
 
+selectedGroupHostStillOpenRegression :
+  Terminal.casimirSelectedQFTGroupHostsCanonicalU1Paid Terminal.canonicalTerminalBoundary ≡ false
+selectedGroupHostStillOpenRegression = refl
+
+selectedSectorBrownMaclayEqualityStillOpenRegression :
+  Terminal.casimirSelectedQFTSectorBrownMaclayEqualityPaid Terminal.canonicalTerminalBoundary ≡ false
+selectedSectorBrownMaclayEqualityStillOpenRegression = refl
+
 selectedSectorStressAttachmentStillOpenRegression :
   Terminal.casimirSelectedRecoveredQFTSectorStressAttachmentPaid Terminal.canonicalTerminalBoundary ≡ false
 selectedSectorStressAttachmentStillOpenRegression = refl
@@ -96,13 +105,18 @@ unifiedQGStillClosedRegression = refl
 
 firstUnificationBlockerRegression :
   Terminal.firstUnificationBlocker
-  ≡ Terminal.missingCasimirU1RestrictedSelectedQFTStressAttachment
+  ≡ Terminal.missingConcreteSelectedQFTGroupHostingCanonicalU1Restriction
 firstUnificationBlockerRegression = refl
 
 secondUnificationBlockerRegression :
   Terminal.secondUnificationBlocker
-  ≡ Terminal.missingAllSectorAggregationAndCommonVariation
+  ≡ Terminal.missingActualSelectedQFTSectorBrownMaclayComponentEquality
 secondUnificationBlockerRegression = refl
+
+firstAllSectorAssemblyLeafRegression :
+  Terminal.firstAllSectorAssemblyLeaf
+  ≡ Round131.commonSectorMetricAndScalarConvention
+firstAllSectorAssemblyLeafRegression = refl
 
 noMoreCardinalityPaymentRegression :
   Terminal.FurtherCardinalityFactorisationCountsAsPhysicalPayment → ⊥
