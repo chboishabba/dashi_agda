@@ -14,17 +14,23 @@ module DASHI.Analysis.CollatzSyracuseTerminalParityMaxCutExact where
 --   -> a residual-only finite-frontier compiler
 --   -> generic fixed-word affine threshold certificates
 --   -> arbitrary trailing-even certificate extension
+--   -> attribution-safe current SOTA atlas
+--   -> exact paradoxical-prefix correction seam
+--   -> exact coefficient-resonance coordinate
+--   -> every contracting word gets canonical threshold A(w)+1
 --   -> residual word-certificate coverage -> strict-descent frontier
 --   -> strictness guard rejecting globally bounded pseudo-frontiers
 --   -> coherent all-horizon survivor histories as inverse-limit obstructions
+--   -> contracting survivor forces gap*x <= A(w)
 --   -> constructive finite-barrier search / explicit Markov extraction seam.
 --
 -- The residual producer is still theorem-strength.  Finite computation,
--- density decay, spectral mixing, affine cocycles, word surgery, or merely
--- negating an inverse-limit history do not by themselves inhabit it.  A
--- supplied finite same-object survivor barrier DOES now compile constructively
--- to literal strict descent; global no-infinite-survivor yields only double
--- negation unless the explicit Nat-search Markov socket is separately paid.
+-- density decay, spectral mixing, affine cocycles, word surgery, near-resonance
+-- classification, or merely negating an inverse-limit history do not by
+-- themselves inhabit it.  A supplied finite same-object survivor barrier DOES
+-- compile constructively to literal strict descent; global no-infinite-survivor
+-- yields only double negation unless the explicit Nat-search Markov socket is
+-- separately paid.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -38,9 +44,14 @@ import DASHI.Analysis.CollatzSyracuseEarlyCylinderEliminationExact as Early
 import DASHI.Analysis.CollatzSyracuseResidualSurvivorFrontierExact as ResidualFrontier
 import DASHI.Analysis.CollatzSyracuseUniformWordDescentCertificateExact as WordCert
 import DASHI.Analysis.CollatzSyracuseTrailingZeroCertificateExact as ZeroCert
+import DASHI.Analysis.CollatzSyracuseSOTA2026Exact as SOTA
+import DASHI.Analysis.CollatzSyracuseParadoxicalPrefixExact as Paradox
+import DASHI.Analysis.CollatzSyracuseCoefficientResonanceExact as Resonance
+import DASHI.Analysis.CollatzSyracuseContractingWordFamilyExact as ContractingFamily
 import DASHI.Analysis.CollatzSyracuseResidualWordCertificateFrontierExact as WordFrontier
 import DASHI.Analysis.CollatzSyracuseResidualFrontierStrictnessGuardExact as Strictness
 import DASHI.Analysis.CollatzSyracuseResidualInverseLimitObstructionExact as Inverse
+import DASHI.Analysis.CollatzSyracuseInfiniteSurvivorAffineObstructionExact as SurvivorAffine
 import DASHI.Analysis.CollatzSyracuseConstructiveSurvivorExtractionExact as Extract
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionCocycleExact as Cocycle
 import DASHI.Analysis.CollatzSyracuseAffineCorrectionSwapExact as Swap
@@ -60,8 +71,14 @@ record TerminalParityMaxCutBoundary : Set where
     residualFrontierCompilerPaid : Nat
     uniformWordDescentCertificatePaid : Nat
     trailingZeroCertificateCompilerPaid : Nat
+    sotaAttributionAtlasPaid : Nat
+    paradoxicalAffineSeamPaid : Nat
+    coefficientResonanceCoordinatePaid : Nat
+    contractingWordFamilyCompilerPaid : Nat
     residualWordCertificateFrontierPaid : Nat
     residualFrontierStrictnessGuardPaid : Nat
+    residualInverseLimitObstructionPaid : Nat
+    infiniteSurvivorAffineObstructionPaid : Nat
     affineCorrectionCocyclePaid : Nat
     adjacentCorrectionSwapPaid : Nat
     universalStoppingCompilerPaid : Nat
@@ -75,21 +92,23 @@ record TerminalParityMaxCutBoundary : Set where
     densityPromotesUniversalStopping : Nat
     oldSpectralRelationPromotesUniversalStopping : Nat
     affineWordSurgeryPromotesUniversalStoppingAlone : Nat
+    nearResonanceClassificationPromotesUniversalStoppingAlone : Nat
     natSearchMarkovUnconditionallyPaid : Nat
 
     unboundedResidualProducerPaid : Nat
     unboundedOddFrontierProducerPaid : Nat
     unboundedResidualFrontierProducerPaid : Nat
+    universalContractingCorrectionEscapeProducerPaid : Nat
     allStartsFiniteBarrierProducerPaid : Nat
     onlyCriticalOpenLeafIsLiteralResidualElimination : Nat
 
 canonicalTerminalParityMaxCutBoundary : TerminalParityMaxCutBoundary
 canonicalTerminalParityMaxCutBoundary =
   terminalParityMaxCutBoundary
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     1 1 1
-    0 0 0 0 0
-    0 0 0 0 1
+    0 0 0 0 0 0
+    0 0 0 0 0 1
 
 finiteBasePaid :
   BaseTail.StrictDescentBaseTailBoundary.literalSmallBasePaid
@@ -139,6 +158,30 @@ trailingZeroCertificatePaid :
   ≡ 1
 trailingZeroCertificatePaid = refl
 
+sotaAttributionAtlasPaid :
+  SOTA.CollatzSOTA2026Boundary.attributedSourceAtlasPaid
+    SOTA.canonicalCollatzSOTA2026Boundary
+  ≡ 1
+sotaAttributionAtlasPaid = refl
+
+paradoxicalAffineSeamPaid :
+  Paradox.ParadoxicalPrefixBoundary.paradoxicalPrefixStartBoundedByCorrectionPaid
+    Paradox.canonicalParadoxicalPrefixBoundary
+  ≡ 1
+paradoxicalAffineSeamPaid = refl
+
+coefficientResonanceCoordinatePaid :
+  Resonance.CoefficientResonanceBoundary.exactCoefficientCoordinatePaid
+    Resonance.canonicalCoefficientResonanceBoundary
+  ≡ 1
+coefficientResonanceCoordinatePaid = refl
+
+contractingWordFamilyCompilerPaid :
+  ContractingFamily.ContractingWordFamilyBoundary.everyContractingWordGetsUniformCertificate
+    ContractingFamily.canonicalContractingWordFamilyBoundary
+  ≡ 1
+contractingWordFamilyCompilerPaid = refl
+
 residualWordCertificateFrontierPaid :
   WordFrontier.ResidualWordCertificateFrontierBoundary.finiteCertificateCoverageCompilerPaid
     WordFrontier.canonicalResidualWordCertificateFrontierBoundary
@@ -156,6 +199,12 @@ residualInverseLimitObstructionPaid :
     Inverse.canonicalResidualInverseLimitBoundary
   ≡ 1
 residualInverseLimitObstructionPaid = refl
+
+infiniteSurvivorAffineObstructionPaid :
+  SurvivorAffine.InfiniteSurvivorAffineBoundary.contractingSurvivorCorrectionDominancePaid
+    SurvivorAffine.canonicalInfiniteSurvivorAffineBoundary
+  ≡ 1
+infiniteSurvivorAffineObstructionPaid = refl
 
 finiteSurvivorBarrierExtractionPaid :
   Extract.ConstructiveSurvivorExtractionBoundary.finiteBarrierExtractionPaid
@@ -210,6 +259,12 @@ residualFrontierGrowthStillOpen :
     ResidualFrontier.canonicalResidualSurvivorFrontierBoundary
   ≡ 0
 residualFrontierGrowthStillOpen = refl
+
+contractingCorrectionEscapeStillOpen :
+  SurvivorAffine.InfiniteSurvivorAffineBoundary.universalContractingCorrectionEscapeProducerPaid
+    SurvivorAffine.canonicalInfiniteSurvivorAffineBoundary
+  ≡ 0
+contractingCorrectionEscapeStillOpen = refl
 
 certificateCoverageDoesNotCreateUnboundedness :
   WordFrontier.ResidualWordCertificateFrontierBoundary.finiteCoverageCreatesUnboundedFrontier
