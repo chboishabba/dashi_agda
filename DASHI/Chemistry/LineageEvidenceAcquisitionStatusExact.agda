@@ -110,9 +110,9 @@ bh4FluxStatus =
     "A1 BH4 same-system flux discriminator dataset"
     partiallyPaid
     "KitzerowBH4HepaticCompetitionDiscriminatorExact + KitzerowBH4NeuralContextDiscriminatorExact + KitzerowBH4RedoxSpatialDiscriminatorExact"
-    "rat hepatic PAH/iNOS competition, mouse neural state-history constraints, NOS-bound BH4 redox regeneration, cellular GTPCH/nNOS topology and intracellular-versus-extracellular striatal route effects are directly constrained; naive fixed/well-mixed/current-pool-sufficiency readings are therefore narrowed"
-    "target-relevant human/neural multi-branch BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements with NOS-bound redox/coupling, enzyme abundance/localization, intracellular/extracellular route, compartment, region/cell type, timing, transfer/supply topology and subgroup controls remain the decisive payment"
-    "Pastor 1996; Hyland et al. 1996; Hwang et al. 1998; Liang/Kaufman 1998; Witteveen/Giovanelli/Kaufman 1999; Sumi-Ichinose et al. 2001; Jiang et al. 2024 retain experimental ownership. DASHI owns only the cross-study discriminator composition; these studies do not establish autism causation or whole-model validity"
+    "rat hepatic PAH/iNOS competition, mouse neural state-history constraints, NOS-bound BH4 redox regeneration, GTPCH/nNOS spatial separation, direct cellular BH4 uptake, functional catecholaminergic-to-nNOS coculture crosstalk and intracellular-versus-extracellular striatal route effects are constrained; naive fixed/well-mixed/current-pool-sufficiency readings are therefore narrowed"
+    "target-relevant human/neural multi-branch BH4/BH2 + NAD(P)H + J_PAH/J_TH/J_TPH/J_NOS/J_AGMO measurements with NOS-bound redox/coupling, enzyme abundance/localization, intracellular/extracellular route, quantitative donor-to-recipient transfer flux, compartment, region/cell type, timing and subgroup controls remain the decisive payment"
+    "Pastor 1996; Anastasiadis/Kuhn/Levine 1994; Hyland et al. 1996; Hwang et al. 1998; Liang/Kaufman 1998; Witteveen/Giovanelli/Kaufman 1999; Sumi-Ichinose et al. 2001; Choi et al. 2003; Jiang et al. 2024 retain experimental ownership. DASHI owns only the cross-study discriminator composition; these studies do not establish autism causation or whole-model validity"
     false refl
 
 bh4NeuralContextStatus : AcquisitionStatusReceipt
@@ -132,9 +132,9 @@ bh4RedoxSpatialStatus =
     "A1-redox-spatial BH4 pool-topology discriminator"
     paidForDeclaredCoordinate
     "KitzerowBH4RedoxSpatialDiscriminatorExact.canonicalRedoxSpatialDiscriminator"
-    "NOS-bound BH4 requires explicit oxidation/regeneration state, monoaminergic synthesis and nNOS consumption need not be colocalized, and intracellular versus extracellular BH4 routes produce distinct striatal dopamine-release mechanisms; a single well-mixed scalar pool is therefore insufficient for the declared coordinate"
-    "directly measure intercellular/compartmental BH4 transfer and integrate route-resolved BH4/BH2/NAD(P)H redox state with simultaneous multi-branch flux in the target-relevant system"
-    "Hwang 1998, Liang/Kaufman 1998 and Witteveen/Giovanelli/Kaufman 1999 retain their individual observations; intercellular transfer remains proposed/unmeasured and no whole allocator theorem is inferred"
+    "NOS-bound BH4 requires explicit oxidation/regeneration state; monoaminergic synthesis and nNOS consumption need not be colocalized; exogenous BH4 uptake into neural/catecholaminergic preparations is directly measured; human nNOS-recipient cells support BH4 uptake/NO response plus functional catecholaminergic coculture crosstalk; and intracellular versus extracellular BH4 routes produce distinct striatal dopamine-release mechanisms. A single well-mixed scalar pool is therefore insufficient for the declared coordinate"
+    "directly quantify donor-to-recipient BH4 molecular transfer rate/direction in target-relevant intact neural systems and integrate it with route-resolved BH4/BH2/NAD(P)H redox state plus simultaneous multi-branch flux"
+    "Anastasiadis/Kuhn/Levine 1994, Hwang 1998, Liang/Kaufman 1998, Witteveen/Giovanelli/Kaufman 1999 and Choi et al. 2003 retain their individual observations; uptake/coculture function does not become a measured in-vivo donor-to-recipient flux and no whole allocator theorem is inferred"
     false refl
 
 chlorCalibrationStatus : AcquisitionStatusReceipt
