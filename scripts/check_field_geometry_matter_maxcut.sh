@@ -29,6 +29,8 @@ files=(
   DASHI/Physics/CondensedMatter/MATBGInteractingTHFLiteralMatricesValidation.agda
   DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayReceiptExact.agda
   DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayValidation.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFCoupledGreenReplayReceiptExact.agda
+  DASHI/Physics/CondensedMatter/MATBGTHFCoupledGreenReplayValidation.agda
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
   DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMValidation.agda
   DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
@@ -80,6 +82,8 @@ for artifact in \
   Docs/evidence/matbg_qtm_matrix_element_observer_2026-10-16.json \
   scripts/matbg_thf_hubbard_i_atomic_reference.py \
   Docs/evidence/matbg_thf_hubbard_i_atomic_reference_2026-10-16.json \
+  scripts/matbg_thf_coupled_green_reference.py \
+  Docs/evidence/matbg_thf_coupled_green_reference_2026-10-16.json \
   scripts/matbg_entropy_combinatorial_replay.py \
   Docs/evidence/matbg_entropy_combinatorial_replay_2026-10-16.json \
   scripts/matbg_geometry_caloric_upper_bound.py \
@@ -104,6 +108,7 @@ grep -q 'projectorGeometryExecutionPaid' DASHI/Physics/CondensedMatter/MATBGQuan
 grep -q 'xiao2026THFParameters' DASHI/Physics/CondensedMatter/MATBGInteractingTHF2026SourceExact.agda
 grep -q 'hcKPrime' DASHI/Physics/CondensedMatter/MATBGInteractingTHFLiteralMatricesExact.agda
 grep -q 'atomicReferenceExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFHubbardIAtomicReplayReceiptExact.agda
+grep -q 'coupledGreenBlockExecutionPaid' DASHI/Physics/CondensedMatter/MATBGTHFCoupledGreenReplayReceiptExact.agda
 grep -q 'selfConsistencyEquationsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
 grep -q 'qtmElectrostaticsSourcePaid' DASHI/Physics/CondensedMatter/MATBGTHFSelfConsistencyQTMExact.agda
 grep -q 'wavefunctionObserverExecutionPaid' DASHI/Physics/CondensedMatter/MATBGQTMMatrixElementObserverReceiptExact.agda
@@ -122,5 +127,4 @@ grep -q 'externalSourceDoesNotOwnDASHISynthesis' DASHI/Physics/Foundations/Field
 grep -q 'numericallyExecuted' DASHI/Physics/Foundations/FieldGeometryMatterTerminalMaxCutExact.agda
 grep -q 'numericalBMDoesNotBecomeExperiment' DASHI/Physics/Foundations/FieldGeometryMatterTerminalValidation.agda
 
-scripts/run_agda29_parallel_check.sh \
-  DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Foundations/FieldGeometryMatterEverything.agda
