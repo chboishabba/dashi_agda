@@ -1,6 +1,7 @@
 module DASHI.Governance.AnarchistAntiLeadershipSourceAtlasExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.GenericReceipt as GenericReceipt
