@@ -10,7 +10,7 @@ commoditisationRequiresFallingScarcityRent = refl
 
 durableRentRequiresPositiveCapitalReturn :
   Outcome.capitalReturnDirection Outcome.durableRentExpansion ≡ Outcome.positive
- durableRentRequiresPositiveCapitalReturn = refl
+durableRentRequiresPositiveCapitalReturn = refl
 
 refinancingStressRequiresFundingPressure :
   Outcome.fundingPressureDirection Outcome.refinancingStress ≡ Outcome.rising
