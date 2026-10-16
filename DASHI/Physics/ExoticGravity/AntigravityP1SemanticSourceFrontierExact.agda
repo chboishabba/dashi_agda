@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
+import DASHI.Physics.ExoticGravity.AntigravityP1A2CertifiedStressCylinderExact as CertifiedA2
 import DASHI.Physics.Foundations.CMP119CosmologyPreferredSourcePhysicsMaxCut20261004QExact as Q1
 import DASHI.Physics.Foundations.CMP119CosmologyA2LocalCWilsonPresentationCompilerExact as A2
 import DASHI.Physics.Foundations.CMP119CosmologyR109PairObservableUnderdeterminationExact as Under
@@ -22,6 +23,12 @@ import DASHI.Physics.Foundations.CMP119CosmologyR109PairObservableUnderdetermina
 -- Round109 source-native ordinary/characteristic pair to that configuration
 -- observable.  `R109PairObservableUnderdeterminationExact` proves that the bare
 -- pair cannot determine a unique evaluator.
+--
+-- This branch now makes that trust boundary executable: one A2 source receipt
+-- supplies an evaluator together with the equality saying that the selected
+-- Round109 pair-image IS the canonical Local-C stress cylinder.  The compiler
+-- then transports published Wilson positive-time/gauge admissibility to that
+-- pair-image automatically.
 --
 -- Therefore the antigravity-specific P1 frontier has exactly TWO source leaves:
 --
@@ -45,6 +52,12 @@ gaugeInvariantAdmissibilityStillRequired = false
 pairToCanonicalLocalCObservableSemanticsStillRequired : Bool
 pairToCanonicalLocalCObservableSemanticsStillRequired =
   A2.remainingA2SourceDebtIsPairToObservableSameObjectSemantics
+
+-- The physical A2 equality is still open, but once supplied it now compiles to
+-- the functional/Wilson presentation without any additional E2/E4 proof leaf.
+a2SameObjectReceiptCompilesCertifiedWilsonPresentation : Bool
+a2SameObjectReceiptCompilesCertifiedWilsonPresentation =
+  CertifiedA2.observableChoiceCompilerOwned
 
 q1PathDerivativeSourcePackageStillRequired : Bool
 q1PathDerivativeSourcePackageStillRequired =
