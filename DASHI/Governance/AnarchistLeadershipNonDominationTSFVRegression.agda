@@ -31,6 +31,10 @@ accountabilityTargetsConsequentialPower :
   NonDom.accountabilityTargetsConsequentialPower NonDom.canonicalReappropriationBoundary ≡ true
 accountabilityTargetsConsequentialPower = refl
 
+bareObligationTypesDoNotCountAsPaid :
+  NonDom.obligationTypesWithoutWitnessesCountAsPaid NonDom.canonicalReappropriationBoundary ≡ false
+bareObligationTypesDoNotCountAsPaid = refl
+
 futureViabilityIsNotPredictionOrRetrocausality :
   Plural.futureViabilityIsPrediction Plural.canonicalPluralViabilityBoundary ≡ false
   × Plural.futureViabilityIsRetrocausalSignal Plural.canonicalPluralViabilityBoundary ≡ false
