@@ -6,9 +6,10 @@ module DASHI.Reasoning.MonsterAlbertF4RelationProtocolBridgeExact where
 --
 -- Attribution / authority discipline:
 -- * sibling #1179 owns its proof-relevant finite 54->53 carrier/deletion weld
---   and transported Monster action compiler;
+--   and conditional transported-Monster-action compiler;
 -- * classical Albert/F4 sources retain historical/scientific attribution;
--- * DASHI owns this protocol composition and non-promotion boundary;
+-- * DASHI owns the finite diagonal state realization, protocol composition and
+--   non-promotion boundaries;
 -- * no sibling theorem authority is imported here.
 ------------------------------------------------------------------------
 
@@ -29,7 +30,7 @@ monsterAlbertF4RelationProtocol : Protocol.RelationExperimentProtocol
 monsterAlbertF4RelationProtocol =
   Protocol.relationExperimentProtocol
     true
-    "On the same proof-relevant 54->53 finite carrier, compare the independently supplied classical-F4 action against the transported Monster action. Before applying native rational-Albert cubic+unit rigidity, require a same-object realization/action lift from the finite Albert-shape carrier into the literal linear Albert algebra."
+    "Compare the independently supplied classical-F4 action against the transported Monster action on the same finite 54->53 carrier. State-level embedding into literal rational-Albert copies is already paid. The live bridge is sheet-aware rational-linear action lifting, cubic-norm preservation and fixation of the ACTUAL Albert unit; the removed finite-shape point maps to Albert zero and cannot substitute for the unit."
     Protocol.contextualCandidate
     Adequacy.applicationSuppliedGeometry
     strictMonsterAlbertF4Holdout
@@ -37,9 +38,10 @@ monsterAlbertF4RelationProtocol =
      "held-out residual-53 action mismatch" ∷
      "removed distinguished-point compatibility" ∷
      "residual restriction compatibility" ∷
-     "finite-shape to literal-linear-Albert realization" ∷
-     "cubic-norm compatibility on the linear realization" ∷
-     "distinguished-unit compatibility on the linear realization" ∷
+     "sheet action / sheet-preservation or explicit sheet-permutation receipt" ∷
+     "rational-linear Albert action lift" ∷
+     "cubic-norm compatibility of the lifted action" ∷
+     "actual Albert-unit fixation of the lifted action" ∷
      "Jordan compatibility, measured directly or compiled by norm+unit rigidity" ∷
      "decoder compatibility" ∷
      "future consumer behaviour" ∷
@@ -47,7 +49,7 @@ monsterAlbertF4RelationProtocol =
     true
     true
     false
-    "Same finite carrier or even extensional action-table agreement is below classical F4 recognition. The finite 54-state Albert-shape carrier is not the literal rational Albert vector algebra. Native norm+unit rigidity becomes reusable only after a same-object linear realization/action lift; successful held-out fit remains consumer- and realization-relative and creates neither Monster ontology nor physical/phenomenal mechanism."
+    "The finite state embedding is already paid and preserves the transported finite product/cubic on its diagonal image. However, its named shape ScalarLine maps to Albert zero, not the unit. Extensional finite-action agreement is therefore below classical F4 recognition. Native norm+unit rigidity is reusable only after a same-object rational-linear action lift preserving the cubic norm and actual unit. Successful held-out fit remains consumer- and realization-relative and creates neither Monster ontology nor physical/phenomenal mechanism."
 
 monsterAlbertF4ProtocolCandidateIsContextual :
   Protocol.candidate monsterAlbertF4RelationProtocol ≡ Protocol.contextualCandidate
@@ -78,8 +80,13 @@ record MonsterAlbertF4ProtocolBoundary : Set where
     allFourHoldoutAxesRequired : Bool
     heldOut54And53ActionRequired : Bool
     removedInvariantAndResidualRestrictionRequired : Bool
-    finiteToLinearAlbertRealizationRequired : Bool
-    cubicUnitRigidityOnlyAfterLinearRealization : Bool
+    finiteStateEmbeddingAlreadyPaid : Bool
+    finiteActionLiftStillRequired : Bool
+    sheetActionReceiptRequired : Bool
+    cubicCompatibilityStillRequired : Bool
+    actualUnitCompatibilityStillRequired : Bool
+    removedPointCannotSubstituteForUnit : Bool
+    cubicUnitRigidityOnlyAfterLinearActionLift : Bool
     decoderAndFutureConsumerRequired : Bool
     targetRealizationRequired : Bool
     actionFitCreatesClassicalF4Recognition : Bool
@@ -95,8 +102,13 @@ canonicalMonsterAlbertF4ProtocolBoundary =
     true
     true
     true
-    (Handoff.finiteToLinearAlbertRealizationRequired Handoff.canonicalMonsterAlbertF4ActionBoundary)
-    (Handoff.cubicUnitRigidityReusableAfterLinearRealization Handoff.canonicalMonsterAlbertF4ActionBoundary)
+    (Handoff.finiteStateEmbeddingToLinearAlbertPaid Handoff.canonicalMonsterAlbertF4ActionBoundary)
+    (Handoff.finiteActionLiftToLinearAlbertRequired Handoff.canonicalMonsterAlbertF4ActionBoundary)
+    true
+    true
+    true
+    true
+    (Handoff.cubicUnitRigidityReusableAfterLinearActionLift Handoff.canonicalMonsterAlbertF4ActionBoundary)
     true
     true
     false
