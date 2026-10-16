@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Consumer
 import DASHI.Governance.ArchiveGenocideGeolocationAntiTargetingExact as G
 import DASHI.Governance.ArchiveGenocideGeolocationPrecisionDisclosureExact as P
+import DASHI.Governance.ArchiveGenocideGeolocationReviewConflictExact as R
 
 rivalFineAgreementValidated : G.coarsen G.siteA ≡ G.coarsen G.siteB
 rivalFineAgreementValidated = G.rivalFineClaimsAgreeCoarsely
@@ -83,3 +84,18 @@ minimumDisclosurePreservesProvenanceValidated :
     ≡ G.provenanceReference evidence
 minimumDisclosurePreservesProvenanceValidated =
   P.provenanceSurvivesMinimumDisclosure
+
+conflictingSourcesRemainPublishableValidated :
+  R.ReviewPublishable G.conflictingSources
+conflictingSourcesRemainPublishableValidated = R.conflictStateIsPublishable
+
+awaitingReviewStillBlockedValidated :
+  R.ReviewPublishable G.awaitingReview → ⊥
+awaitingReviewStillBlockedValidated = R.awaitingReviewIsNotPublishable
+
+publishableTargetingStillBlockedValidated :
+  ∀ {evidence precision} →
+  R.PublishableDisclosureReceipt
+    evidence G.operationalTargetingConsumer precision → ⊥
+publishableTargetingStillBlockedValidated =
+  R.operationalTargetingPublishableReleaseImpossible
