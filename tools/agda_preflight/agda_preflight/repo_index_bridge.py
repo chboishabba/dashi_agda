@@ -5,7 +5,12 @@ import sqlite3
 from typing import Optional
 
 from .discovery import classify_surface_role
-from .repository_store import DEFAULT_REPOSITORY_DB, ensure_repository_schema
+from .repository_store import (
+    DEFAULT_REPOSITORY_DB,
+    LEGACY_REPO_INDEX,
+    ensure_repository_schema,
+    sync_legacy_repo_index,
+)
 
 
 EXPECTED_SCHEMA = "2.0.0"
@@ -30,8 +35,28 @@ def _allowed(path: Path) -> bool:
     return path.suffix in {".agda", ".md"}
 
 
+def _has_table(path: Path, table: str) -> bool:
+    if not path.exists():
+        return False
+    try:
+        conn = sqlite3.connect(path)
+        row = conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
+            (table,),
+        ).fetchone()
+        conn.close()
+    except sqlite3.DatabaseError:
+        return False
+    return row is not None
+
+
 class RepoIndexReader:
-    """Read the normalized repo-wide inventory from the unified SQLite DB."""
+    """Read the normalized repo-wide inventory from the unified SQLite DB.
+
+    Passing an old `.repo-index/index.sqlite3` path remains supported as a
+    migration ingress. The reader imports it into `.dashi/repository.sqlite3`
+    and then reads only the normalized relational tables.
+    """
 
     def __init__(
         self,
@@ -46,14 +71,46 @@ class RepoIndexReader:
             self.connection = connection
             self.path = Path("<shared-connection>")
             ensure_repository_schema(self.connection)
-        else:
-            chosen = path or DEFAULT_PATH
-            self.path = chosen if chosen.is_absolute() else self.root / chosen
-            self.connection = None
-            if self.path.exists():
-                uri = "file:{}?mode=ro".format(self.path.resolve().as_posix())
-                self.connection = sqlite3.connect(uri, uri=True)
-                self.connection.row_factory = sqlite3.Row
+            return
+
+        explicit = path is not None
+        chosen = path or DEFAULT_PATH
+        candidate = chosen if chosen.is_absolute() else self.root / chosen
+        legacy_default = self.root / LEGACY_REPO_INDEX
+
+        legacy_source: Optional[Path] = None
+        if candidate.exists() and not _has_table(candidate, "repo_symbols"):
+            if _has_table(candidate, "symbols") and _has_table(candidate, "files"):
+                legacy_source = candidate
+        elif not candidate.exists() and not explicit and legacy_default.exists():
+            legacy_source = legacy_default
+
+        if legacy_source is not None:
+            unified = self.root / DEFAULT_REPOSITORY_DB
+            unified.parent.mkdir(parents=True, exist_ok=True)
+            conn = sqlite3.connect(unified)
+            conn.row_factory = sqlite3.Row
+            conn.execute("PRAGMA journal_mode=WAL")
+            conn.execute("PRAGMA synchronous=NORMAL")
+            conn.execute("PRAGMA foreign_keys=ON")
+            conn.execute("PRAGMA busy_timeout=5000")
+            ensure_repository_schema(conn)
+            sync_legacy_repo_index(
+                self.root,
+                conn,
+                legacy_path=legacy_source,
+                force=True,
+            )
+            self.connection = conn
+            self.path = unified
+            return
+
+        self.path = candidate
+        self.connection = None
+        if self.path.exists():
+            uri = "file:{}?mode=ro".format(self.path.resolve().as_posix())
+            self.connection = sqlite3.connect(uri, uri=True)
+            self.connection.row_factory = sqlite3.Row
 
     @property
     def available(self) -> bool:
@@ -240,11 +297,11 @@ class RepoIndexReader:
             }
         indexed = {str(row["path"]): row for row in indexed_rows}
         repo_paths = set()
-        for path in self.root.rglob("*"):
-            if not path.is_file():
+        for source_path in self.root.rglob("*"):
+            if not source_path.is_file():
                 continue
             try:
-                relative = path.resolve().relative_to(self.root).as_posix()
+                relative = source_path.resolve().relative_to(self.root).as_posix()
             except ValueError:
                 continue
             rel_path = Path(relative)
@@ -254,9 +311,9 @@ class RepoIndexReader:
         extra = sorted(set(indexed) - repo_paths)
         stale = []
         for relative in sorted(repo_paths & set(indexed)):
-            path = self.root / relative
+            source_path = self.root / relative
             try:
-                stat = path.stat()
+                stat = source_path.stat()
             except OSError:
                 stale.append(relative)
                 continue
