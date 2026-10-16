@@ -15,6 +15,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact as JD
 import DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact as JCF
+import DASHI.Moonshine.JackDanielsCoarseJFrickeSensitivityNoGoExact as JCFNoGo
 import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact as Albert
 import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact as F4
 import DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact as ActorScoped
@@ -59,11 +60,17 @@ JCF0 = research-deliverable
   "DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact"
   "jCoarse/jFine is integrated as a Fricke-equivariant lossy observer with explicit fibres; finite observation is not promoted to a literal modular point"
 
+JCFN : ResearchDeliverable
+JCFN = research-deliverable
+  "JCF-N" true
+  "DASHI.Moonshine.JackDanielsCoarseJFrickeSensitivityNoGoExact"
+  "symmetric/coarse j is Fricke-invariant, so any Fricke-sensitive Monster consumer provably cannot factor through coarse j alone; retain fine/level residual by default"
+
 JCF1 : ResearchDeliverable
 JCF1 = research-deliverable
   "JCF1" false
   "DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact.JCoarseFineMonsterFactorization"
-  "after J3 is inhabited, identify its ModularDatum two-sidedly with the literal FinePoint and prove whether the Monster consumer factors through the finite jCoarse/jFine observation; coarse-only selection remains forbidden"
+  "after J3 is inhabited, identify its ModularDatum two-sidedly with the literal FinePoint and prove whether the Monster consumer factors through the full finite jCoarse/jFine observation; coarse-only selection is already ruled out for Fricke-sensitive consumers"
 
 E0 : ResearchDeliverable
 E0 = research-deliverable
@@ -121,7 +128,7 @@ X1 = research-deliverable
 
 allDeliverables : List ResearchDeliverable
 allDeliverables =
-  J0 ∷ J1 ∷ J2 ∷ J3 ∷ JCF0 ∷ JCF1 ∷ E0 ∷ EA ∷ E1C3 ∷ E1N ∷
+  J0 ∷ J1 ∷ J2 ∷ J3 ∷ JCF0 ∷ JCFN ∷ JCF1 ∷ E0 ∷ EA ∷ E1C3 ∷ E1N ∷
   S1 ∷ G1 ∷ G2 ∷ C1 ∷ X1 ∷ []
 
 record TerminalMaxCutBoundary : Set where
@@ -129,6 +136,7 @@ record TerminalMaxCutBoundary : Set where
   field
     finiteJackDanielsSupportPaid : Bool
     jCoarseFineObserverIntegrationPaid : Bool
+    coarseJFrickeSensitivityNoGoPaid : Bool
     jCoarseFineMonsterFactorizationStillLive : Bool
     proofRelevantAlbertCarrierPaid : Bool
     exceptionalActorScopingPaid : Bool
@@ -144,4 +152,4 @@ record TerminalMaxCutBoundary : Set where
 
 canonicalTerminalMaxCutBoundary : TerminalMaxCutBoundary
 canonicalTerminalMaxCutBoundary = terminal-max-cut-boundary
-  true true true true true false true true true true true true true true
+  true true true true true true false true true true true true true true true
