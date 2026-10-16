@@ -4,20 +4,30 @@ open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AmmoniaGroundStateC3ActionExact as A
 import DASHI.Physics.Chemistry.AmmoniaC3ElectronicSymmetryExact as E
 
-occupiedEPhaseProductIsInvariant :
-  A.occupiedEManifoldPhase ≡ E.invariant
-occupiedEPhaseProductIsInvariant = refl
+groundDeterminantPhaseIsInvariant : A.groundDeterminantPhase ≡ E.invariant
+groundDeterminantPhaseIsInvariant = A.groundDeterminantPhaseInvariant
 
-closedShellDeterminantIsC3Invariant :
-  A.groundDeterminantPhase ≡ E.invariant
-closedShellDeterminantIsC3Invariant = refl
-
-groundStateActionPaid :
-  A.GroundStateC3Boundary.literalGroundConfigurationC3ActionPaid
+phaseComputedFromOccupiedCarrier :
+  A.GroundStateC3Boundary.determinantPhaseComputedFromOccupiedCarrier
     A.canonicalGroundStateC3Boundary ≡ true
-groundStateActionPaid = refl
+phaseComputedFromOccupiedCarrier = refl
 
-fullSpatialWavefunctionStillOpen :
-  A.GroundStateC3Boundary.realSpaceWavefunctionActionPaid
+trivialGroundRepresentationPaid :
+  A.GroundStateC3Boundary.trivialGroundConfigurationC3RepresentationPaid
+    A.canonicalGroundStateC3Boundary ≡ true
+trivialGroundRepresentationPaid = refl
+
+closedShellInvariantPaid :
+  A.GroundStateC3Boundary.closedShellDeterminantInvariantPaid
+    A.canonicalGroundStateC3Boundary ≡ true
+closedShellInvariantPaid = refl
+
+realSpaceWavefunctionActionStillUnpaid :
+  A.GroundStateC3Boundary.nontrivialRealSpaceWavefunctionC3ActionPaid
     A.canonicalGroundStateC3Boundary ≡ false
-fullSpatialWavefunctionStillOpen = refl
+realSpaceWavefunctionActionStillUnpaid = refl
+
+monsterActionStillUnpaid :
+  A.GroundStateC3Boundary.c3GroundStateActionCreatesMonsterAction
+    A.canonicalGroundStateC3Boundary ≡ false
+monsterActionStillUnpaid = refl
