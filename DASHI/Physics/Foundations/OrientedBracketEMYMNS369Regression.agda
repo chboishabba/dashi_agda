@@ -9,13 +9,6 @@ import DASHI.Physics.YangMills.SU2Bracket369OrientationBridgeExact as YM
 import DASHI.Physics.Closure.NSCross369OrientationBridgeExact as NS
 import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YMC3
 
-------------------------------------------------------------------------
--- RED-first cross-domain contract.
---
--- This regression intentionally names the generic bracket owner and three
--- downstream physical bridges before their production files are added.
-------------------------------------------------------------------------
-
 rightHandXYZIsPositive :
   Bracket369.bracketOrientation Bracket369.xyzBracket ≡ BT.pos
 rightHandXYZIsPositive = EM.xyzRightHandPositive
@@ -38,9 +31,13 @@ ymUsesSameOrientationSkeleton :
   YM.su2BracketUses369OrientationSkeleton ≡ true
 ymUsesSameOrientationSkeleton = refl
 
-ymPhysicalBalabanC3StillGated :
-  YMC3.balabanLiteralC3ActionRecovered ≡ false
-ymPhysicalBalabanC3StillGated = YM.balabanLiteralC3ActionStillGated
+ymBalabanCMP109C3Recovered :
+  YMC3.balabanLiteralC3ActionRecovered ≡ true
+ymBalabanCMP109C3Recovered = YM.balabanLiteralC3ActionRecovered
+
+ymUnifiedRecoveryC3StillGated :
+  YMC3.balabanC3ActionOnSourceSeamsRecovered ≡ false
+ymUnifiedRecoveryC3StillGated = refl
 
 nsUsesSameOrientationSkeleton :
   NS.nsComplexCrossUses369OrientationSkeleton ≡ true
