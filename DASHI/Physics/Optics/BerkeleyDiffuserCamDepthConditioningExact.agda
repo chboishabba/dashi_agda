@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Optics.BerkeleyDiffuserCamPublicCalibrationExact as Calibration
 import DASHI.Physics.Optics.BerkeleyDiffuserCamSourceOperatorExact as SourceOperator
 import DASHI.Physics.Optics.DiffuserRestrictedStabilityProducerExact as Stability
+import DASHI.Physics.Optics.BerkeleyDiffuserCamRealConditioningExecutionExact as RealExecution
 
 ------------------------------------------------------------------------
 -- EXECUTABLE NUMERICAL ACQUISITION BOUNDARY
@@ -23,18 +24,14 @@ import DASHI.Physics.Optics.DiffuserRestrictedStabilityProducerExact as Stabilit
 -- Gershgorin sparse lower-bound compiler. A successful numerical run therefore
 -- can inhabit the existing same-H restricted-stability lane for exactly that
 -- declared finite sparse scene family. It is not promoted to an all-resolution
--- camera RIP theorem, and no numeric certificate is claimed until the pinned
--- binary artifact is actually executed.
+-- camera RIP theorem.
 --
--- A separate synthetic-only self-test exercises odd/even array shapes, checks
--- the circular-kernel shift identity against literal FFT multiplication, and
--- stress-checks the Gershgorin compiler on finite random supports. This pays an
--- implementation-verification surface only; it is not a public-PSF receipt.
---
--- A separate claim-scale planner computes the dense selected-H / normalized-H /
--- Gram working-set estimate from the PSF dimensions and declared lateral grid
--- before the expensive audit is allocated. It is a resource-safety producer,
--- not a stability theorem and not a measurement receipt.
+-- REAL EXECUTION STATUS (2026-10-16):
+-- A user-supplied example_psfs.mat was independently verified against the
+-- pinned byte count and Git blob SHA-1, then executed locally. The real-data
+-- receipt pays both depth diagnostics and the radius-1 translated-column audit.
+-- Its coherence bound is positive only for differences of order 2, so the
+-- paid scene sparsity is k=1. k>=2 and all-resolution RIP remain fail-closed.
 ------------------------------------------------------------------------
 
 conditioningAuditScript : String
@@ -67,16 +64,19 @@ translatedColumnRestrictedAuditExecutable = true
 coherenceToSparseLowerBoundCompilerPaid : Bool
 coherenceToSparseLowerBoundCompilerPaid = true
 
--- The public binary is pinned, but no numerical run receipt was observed in
--- the current connector/runtime. Keep numerical promotions fail-closed.
 depthOnlyNumericalReceiptCaptured : Bool
-depthOnlyNumericalReceiptCaptured = false
+depthOnlyNumericalReceiptCaptured = RealExecution.depthOnlyNumericalReceiptCaptured
 
 translatedColumnNumericalReceiptCaptured : Bool
-translatedColumnNumericalReceiptCaptured = false
+translatedColumnNumericalReceiptCaptured = RealExecution.translatedColumnNumericalReceiptCaptured
 
+-- This flag means a same-H finite selected-family restricted-kappa receipt
+-- exists. It does NOT mean an all-resolution camera RIP/global inverse theorem.
 globalSparseRestrictedKappaPaid : Bool
-globalSparseRestrictedKappaPaid = false
+globalSparseRestrictedKappaPaid = RealExecution.finiteSelectedFamilyRestrictedKappaPaid
+
+allResolutionCameraRIPPaid : Bool
+allResolutionCameraRIPPaid = RealExecution.allResolutionCameraRIPPaid
 
 record BerkeleyDiffuserCamDepthConditioningReceipt : Set where
   field
@@ -90,7 +90,8 @@ record BerkeleyDiffuserCamDepthConditioningReceipt : Set where
     sparseLowerBoundCompiler : Bool
     numericalDepthReceipt : Bool
     numericalTranslatedColumnReceipt : Bool
-    globalRestrictedKappa : Bool
+    finiteSelectedFamilyRestrictedKappa : Bool
+    allResolutionCameraRIP : Bool
 
 open BerkeleyDiffuserCamDepthConditioningReceipt public
 
@@ -107,10 +108,11 @@ currentBerkeleyDiffuserCamDepthConditioningReceipt = record
   ; sparseLowerBoundCompiler = coherenceToSparseLowerBoundCompilerPaid
   ; numericalDepthReceipt = depthOnlyNumericalReceiptCaptured
   ; numericalTranslatedColumnReceipt = translatedColumnNumericalReceiptCaptured
-  ; globalRestrictedKappa = globalSparseRestrictedKappaPaid
+  ; finiteSelectedFamilyRestrictedKappa = globalSparseRestrictedKappaPaid
+  ; allResolutionCameraRIP = allResolutionCameraRIPPaid
   }
 
--- Importing Stability binds a successful finite numerical certificate to the
--- existing same-H restricted-stability producer. This module does not create a
--- second inverse theorem or extrapolate a selected finite-grid certificate
--- beyond its declared admissible scene family.
+-- Importing Stability binds the finite numerical certificate to the existing
+-- same-H restricted-stability producer. This module does not create a second
+-- inverse theorem or extrapolate the selected finite-grid certificate beyond
+-- its declared admissible scene family.
