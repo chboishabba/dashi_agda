@@ -1,0 +1,21 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1ModeRenormalizedStressAttachmentExact as M
+
+modeWeldReusedRegression :
+  M.existingCasimirModeHyperfabricWeldReused M.canonicalModeRenormalizedStressBoundary ≡ true
+modeWeldReusedRegression = refl
+
+schemeNotDuplicatedRegression :
+  M.secondRenormalizationSchemeRequired M.canonicalModeRenormalizedStressBoundary ≡ false
+schemeNotDuplicatedRegression = refl
+
+boundaryNotDuplicatedRegression :
+  M.secondConductingPlateBoundaryObjectRequired M.canonicalModeRenormalizedStressBoundary ≡ false
+boundaryNotDuplicatedRegression = refl
+
+sameObservableStressAttachmentRequiredRegression :
+  M.maxwellReadoutToModeObservableStressAttachmentRequired M.canonicalModeRenormalizedStressBoundary ≡ true
+sameObservableStressAttachmentRequiredRegression = refl
